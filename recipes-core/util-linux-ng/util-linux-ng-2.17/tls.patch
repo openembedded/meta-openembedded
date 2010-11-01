@@ -1,0 +1,70 @@
+Index: util-linux-ng-2.16/m4/tls.m4
+===================================================================
+--- util-linux-ng-2.16.orig/m4/tls.m4	2009-07-04 01:20:03.000000000 +0200
++++ util-linux-ng-2.16/m4/tls.m4	2009-07-30 01:57:30.151697033 +0200
+@@ -18,31 +18,26 @@
+ # version as well.
+ #
+ AC_DEFUN([AX_TLS], [
+-  AC_MSG_CHECKING(for thread local storage (TLS) class)
+-  AC_CACHE_VAL(ac_cv_tls, [
+-    ax_tls_keywords="__thread __declspec(thread) none"
+-    for ax_tls_keyword in $ax_tls_keywords; do
+-       case $ax_tls_keyword in
+-          none) ac_cv_tls=none ; break ;;
+-          *)
+-             AC_TRY_COMPILE(
+-                [#include <stdlib.h>
+-                 static void
+-                 foo(void) {
+-                 static ] $ax_tls_keyword [ int bar;
+-                 exit(1);
+-                 }],
+-                 [],
+-                 [ac_cv_tls=$ax_tls_keyword ; break],
+-                 ac_cv_tls=none
+-             )
+-          esac
+-    done
+-])
++  AC_CACHE_CHECK([for thread local storage (TLS) class],
++    ac_cv_tls,
++    [AC_LINK_IFELSE([__thread int a; int b; int main() { return a = b; }],
++	 [chktls_save_LDFLAGS="$LDFLAGS"
++	  LDFLAGS="-shared -Wl,--no-undefined $LDFLAGS"
++	  chktls_save_CFLAGS="$CFLAGS"
++	  CFLAGS="-fPIC $CFLAGS"
++	  dnl If -shared works, test if TLS works in a shared library.
++	  AC_LINK_IFELSE([int f() { return 0; }],
++	    AC_LINK_IFELSE([__thread int a; int b; int f() { return a = b; }],
++	      [ac_cv_tls=yes],
++	      [ac_cv_tls=no]),
++	    [ac_cv_tls=yes])
++	  CFLAGS="$chktls_save_CFLAGS"
++	  LDFLAGS="$chktls_save_LDFLAGS"], [ac_cv_tls=no])
++    ])
+ 
+-  if test "$ac_cv_tls" != "none"; then
+-    dnl AC_DEFINE([TLS], [], [If the compiler supports a TLS storage class define it to that here])
+-    AC_DEFINE_UNQUOTED([TLS], $ac_cv_tls, [If the compiler supports a TLS storage class define it to that here])
+-  fi
+-  AC_MSG_RESULT($ac_cv_tls)
++  AS_IF([test "x$ac_cv_tls" = "xyes"],
++    [AC_DEFINE([TLS], 1,
++     [Define this if the compiler supports __thread for Thread-Local Storage])
++     $1],
++    [$2])
+ ])
+Index: util-linux-ng-2.16/shlibs/uuid/src/gen_uuid.c
+===================================================================
+--- util-linux-ng-2.16.orig/shlibs/uuid/src/gen_uuid.c	2009-07-30 02:31:48.518159459 +0200
++++ util-linux-ng-2.16/shlibs/uuid/src/gen_uuid.c	2009-07-30 02:32:04.867871183 +0200
+@@ -99,7 +99,7 @@
+ #endif
+ 
+ #ifdef TLS
+-#define THREAD_LOCAL static TLS
++#define THREAD_LOCAL static __thread
+ #else
+ #define THREAD_LOCAL static
+ #endif

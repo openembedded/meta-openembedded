@@ -1,0 +1,13 @@
+Index: util-linux-ng-2.16/configure.ac
+===================================================================
+--- util-linux-ng-2.16.orig/configure.ac	2009-07-22 20:14:46.896898772 +0200
++++ util-linux-ng-2.16/configure.ac	2009-07-22 20:15:08.223644774 +0200
+@@ -70,7 +70,7 @@
+ AC_C_BIGENDIAN
+ 
+ dnl libtool-2
+-LT_INIT
++AM_PROG_LIBTOOL
+ 
+ PKG_PROG_PKG_CONFIG
+ 

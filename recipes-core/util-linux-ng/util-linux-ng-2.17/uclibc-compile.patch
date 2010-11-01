@@ -1,0 +1,13 @@
+Index: util-linux-ng-2.16/misc-utils/cal.c
+===================================================================
+--- util-linux-ng-2.16.orig/misc-utils/cal.c	2009-07-03 16:20:01.000000000 -0700
++++ util-linux-ng-2.16/misc-utils/cal.c	2009-07-18 23:21:37.000000000 -0700
+@@ -407,7 +407,7 @@
+   strcpy(day_headings,"");
+   strcpy(j_day_headings,"");
+ 
+-#ifdef HAVE_LANGINFO_H
++#ifdef HAVE_LANGINFO_H && !defined(__UCLIBC__)
+ # define weekday(wd)	nl_langinfo(ABDAY_1+wd)
+ #else
+ # define weekday(wd)	_time_info->abbrev_wkday[wd]

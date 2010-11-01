@@ -1,0 +1,23 @@
+Index: util-linux-ng-2.14/login-utils/login.c
+===================================================================
+--- util-linux-ng-2.14.orig/login-utils/login.c	2008-05-28 16:01:02.000000000 -0700
++++ util-linux-ng-2.14/login-utils/login.c	2009-03-04 18:31:42.000000000 -0800
+@@ -358,6 +358,7 @@
+     char *childArgv[10];
+     char *buff;
+     int childArgc = 0;
++    struct sigaction act;
+ #ifdef HAVE_SECURITY_PAM_MISC_H
+     int retcode;
+     pam_handle_t *pamh = NULL;
+@@ -373,7 +374,9 @@
+     pid = getpid();
+ 
+     signal(SIGALRM, timedout);
+-    siginterrupt(SIGALRM,1);           /* we have to interrupt syscalls like ioclt() */
++    (void) sigaction(SIGALRM, NULL, &act);
++    act.sa_flags &= ~SA_RESTART;
++    sigaction(SIGALRM, &act, NULL);
+     alarm((unsigned int)timeout);
+     signal(SIGQUIT, SIG_IGN);
+     signal(SIGINT, SIG_IGN);
