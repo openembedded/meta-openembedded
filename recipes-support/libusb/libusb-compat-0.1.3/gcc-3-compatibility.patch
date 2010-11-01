@@ -1,0 +1,26 @@
+Index: libusb-compat-0.1.2/configure.ac
+===================================================================
+--- libusb-compat-0.1.2.orig/configure.ac	2009-06-11 22:49:08.000000000 +0000
++++ libusb-compat-0.1.2/configure.ac	2009-06-26 21:44:08.000000000 +0000
+@@ -56,7 +56,7 @@
+ CFLAGS="$saved_cflags"
+ 
+ AC_DEFINE([API_EXPORTED], [__attribute__((visibility("default")))], [Default visibility])
+-AM_CFLAGS="-std=gnu99 $inline_cflags -Wall -Wundef -Wunused -Wstrict-prototypes -Werror-implicit-function-declaration -Wno-pointer-sign -Wshadow"
++AM_CFLAGS="-std=gnu99 $inline_cflags -Wall -Wundef -Wunused -Wstrict-prototypes -Werror-implicit-function-declaration -Wshadow"
+ AC_SUBST(AM_CFLAGS)
+ 
+ AC_CONFIG_FILES([libusb.pc] [libusb-config] [Makefile] [libusb/Makefile] [examples/Makefile])
+Index: libusb-compat-0.1.2/libusb/Makefile.am
+===================================================================
+--- libusb-compat-0.1.2.orig/libusb/Makefile.am	2008-06-17 23:13:02.000000000 +0000
++++ libusb-compat-0.1.2/libusb/Makefile.am	2009-06-26 21:44:08.000000000 +0000
+@@ -2,7 +2,7 @@
+ lib_LTLIBRARIES = libusb.la
+ 
+ libusb_la_SOURCES = core.c usbi.h
+-libusb_la_CFLAGS = -fvisibility=hidden $(AM_CFLAGS) $(LIBUSB_1_0_CFLAGS)
++libusb_la_CFLAGS = $(AM_CFLAGS) $(LIBUSB_1_0_CFLAGS)
+ libusb_la_LIBADD = $(LIBUSB_1_0_LIBS)
+ libusb_la_LDFLAGS = -version-info $(LT_MAJOR):$(LT_REVISION):$(LT_AGE) \
+ 	-release 0.1
