@@ -1,0 +1,4 @@
+#!/bin/sh
+#Author: Rolf Leggewie
+
+run-parts /etc/update-fonts-common.d/
