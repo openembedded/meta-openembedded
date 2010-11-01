@@ -1,0 +1,19 @@
+--- gtk+-2.10.12_/gtk/gtkfilesel.c	2007-06-12 14:00:38.000000000 +0200
++++ gtk+-2.10.12/gtk/gtkfilesel.c	2007-06-12 14:40:32.000000000 +0200
+@@ -2444,9 +2444,13 @@
+ 
+               if (!is_file)
+                 {
+-                  gtk_file_selection_dir_activate (tree_view, path, 
+-                          gtk_tree_view_get_column (tree_view, DIR_COLUMN),
+-                          user_data);
++		   fs->last_selected = g_strdup (g_ptr_array_index (new_names, index));
++		   gtk_file_selection_dir_activate (tree_view, path, 
++						    gtk_tree_view_get_column (tree_view, DIR_COLUMN),
++						    user_data);
++		   gtk_tree_path_free (path);
++		   return;
++		  
+                 }
+                 
+               gtk_tree_path_free (path);

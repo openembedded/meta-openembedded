@@ -1,0 +1,24 @@
+commit 96c731cc2dde8a3e4ba542eca4c87ed6154084d2
+Author: Stanislav Brabec <sbrabec@suse.cz>
+Date:   Fri Jul 9 15:11:15 2010 +0200
+
+    Fix pointer grab dead lock if gtk_drag_begin uses GDK_CURRENT_TIME and
+    release happens before getting grab.
+    
+    For more see https://bugzilla.gnome.org/show_bug.cgi?id=623865
+
+diff --git a/gtk/gtkdnd.c b/gtk/gtkdnd.c
+index a0d878d..48063a5 100644
+--- a/gtk/gtkdnd.c
++++ b/gtk/gtkdnd.c
+@@ -4065,6 +4065,10 @@ gtk_drag_end (GtkDragSourceInfo *info, guint32 time)
+   pointer = gdk_drag_context_get_device (info->context);
+   keyboard = gdk_device_get_associated_device (pointer);
+ 
++  /* Prevent grab after release (see bug 623865) */
++  if (info->grab_time == GDK_CURRENT_TIME)
++    time = GDK_CURRENT_TIME;
++
+   if (info->update_idle)
+     {
+       g_source_remove (info->update_idle);

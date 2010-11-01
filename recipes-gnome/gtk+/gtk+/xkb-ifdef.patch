@@ -1,0 +1,24 @@
+commit eff1fe2500f07fa2b4683ff52fe92e39e6487b05
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri May 21 12:13:05 2010 -0400
+
+    Make the !xkb build survive a little longer
+    
+    This fixes bug 619114.
+
+diff --git a/gdk/x11/gdkdisplay-x11.c b/gdk/x11/gdkdisplay-x11.c
+index c0cbc99..6cded79 100644
+--- a/gdk/x11/gdkdisplay-x11.c
++++ b/gdk/x11/gdkdisplay-x11.c
+@@ -690,7 +690,11 @@ gdk_display_beep (GdkDisplay *display)
+ {
+   g_return_if_fail (GDK_IS_DISPLAY (display));
+ 
++#ifdef HAVE_XKB
+   XkbBell (GDK_DISPLAY_XDISPLAY (display), None, 0, None);
++#else
++  XBell (GDK_DISPLAY_XDISPLAY (display), 0);
++#endif
+ }
+ 
+ /**

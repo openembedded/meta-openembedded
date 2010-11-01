@@ -1,0 +1,13 @@
+Index: gtk+-2.20.1/configure.in
+===================================================================
+--- gtk+-2.20.1.orig/configure.in	2010-07-10 16:25:40.000000000 -0700
++++ gtk+-2.20.1/configure.in	2010-07-12 22:08:49.878377002 -0700
+@@ -202,7 +202,7 @@ m4_ifdef([LT_OUTPUT], [LT_OUTPUT])
+ AC_SYS_LARGEFILE
+ 
+ AM_PROG_AS
+-AC_PATH_PROG(NM, nm, nm)
++AC_CHECK_PROG(NM, nm, nm)
+ 
+ dnl Initialize maintainer mode
+ AM_MAINTAINER_MODE
