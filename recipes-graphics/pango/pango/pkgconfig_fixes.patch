@@ -1,0 +1,79 @@
+Index: pango-1.18.1/configure.in
+===================================================================
+--- pango-1.18.1.orig/configure.in	2007-08-28 00:29:54.000000000 +0000
++++ pango-1.18.1/configure.in	2007-11-12 19:21:22.000000000 +0000
+@@ -226,13 +226,9 @@
+   #
+   # Checks for FreeType
+   #
+-  FREETYPE_LIBS=
+-  FREETYPE_CFLAGS=
+-  AC_PATH_PROG(FREETYPE_CONFIG, freetype-config, no)
+-  if test "x$FREETYPE_CONFIG" != "xno" ; then
+-    FREETYPE_CFLAGS=`$FREETYPE_CONFIG --cflags`
+-    FREETYPE_LIBS=`$FREETYPE_CONFIG --libs`
++  PKG_CHECK_MODULES(FREETYPE, freetype2 >= 1.0.1, have_freetype=true, AC_MSG_RESULT([no]))
+ 
++  if $have_freetype ; then
+     pango_save_ldflags=$LDFLAGS
+     LDFLAGS="$LDFLAGS $FREETYPE_LIBS"
+     AC_CHECK_LIB(freetype, FT_Get_Next_Char, have_freetype=true, :)
+Index: pango-1.18.1/pangoft2-uninstalled.pc.in
+===================================================================
+--- pango-1.18.1.orig/pangoft2-uninstalled.pc.in	2007-07-05 21:30:28.000000000 +0000
++++ pango-1.18.1/pangoft2-uninstalled.pc.in	2007-11-12 19:23:44.000000000 +0000
+@@ -1,7 +1,7 @@
+ Name: Pango FT2 Uninstalled
+ Description: Freetype 2.0 font support for Pango, Not Installed
+ Version: @VERSION@
+-Requires: pango
+-Libs: ${pc_top_builddir}/${pcfiledir}/pango/libpangoft2-@PANGO_API_VERSION@.la @FREETYPE_LIBS@
+-Cflags: -I${pc_top_builddir}/${pcfiledir}/@srcdir@ @FREETYPE_CFLAGS@
++Requires: pango freetype2
++Libs: ${pc_top_builddir}/${pcfiledir}/pango/libpangoft2-@PANGO_API_VERSION@.la
++Cflags: -I${pc_top_builddir}/${pcfiledir}/@srcdir@
+ 
+Index: pango-1.18.1/pangoft2.pc.in
+===================================================================
+--- pango-1.18.1.orig/pangoft2.pc.in	2007-07-05 21:30:28.000000000 +0000
++++ pango-1.18.1/pangoft2.pc.in	2007-11-12 19:27:05.000000000 +0000
+@@ -6,7 +6,7 @@
+ Name: Pango FT2
+ Description: Freetype 2.0 font support for Pango
+ Version: @VERSION@
+-Requires: pango
+-Libs: -L${libdir} -lpangoft2-@PANGO_API_VERSION@ @PKGCONFIG_FREETYPE_LIBS@
+-Cflags: -I${includedir}/pango-1.0 @FONTCONFIG_CFLAGS@ @FREETYPE_CFLAGS@
++Requires: pango freetype2 fontconfig
++Libs: -L${libdir} -lpangoft2-@PANGO_API_VERSION@
++Cflags: -I${includedir}/pango-1.0
+ 
+Index: pango-1.18.1/pangoxft-uninstalled.pc.in
+===================================================================
+--- pango-1.18.1.orig/pangoxft-uninstalled.pc.in	2007-07-05 21:30:28.000000000 +0000
++++ pango-1.18.1/pangoxft-uninstalled.pc.in	2007-11-12 19:22:24.000000000 +0000
+@@ -1,7 +1,7 @@
+ Name: Pango Xft Uninstalled
+ Description: Xft font support for Pango, Not Installed
+ Version: @VERSION@
+-Requires: pango
+-Libs: ${pc_top_builddir}/${pcfiledir}/pango/libpangoxft-@PANGO_API_VERSION@.la @XFT_LIBS@
+-Cflags: -I${pc_top_builddir}/${pcfiledir}/@srcdir@ @X_CFLAGS@ @FREETYPE_CFLAGS@
++Requires: pango xft
++Libs: ${pc_top_builddir}/${pcfiledir}/pango/libpangoxft-@PANGO_API_VERSION@.la
++Cflags: -I${pc_top_builddir}/${pcfiledir}/@srcdir@ @X_CFLAGS@
+ 
+Index: pango-1.18.1/pangoxft.pc.in
+===================================================================
+--- pango-1.18.1.orig/pangoxft.pc.in	2007-07-05 21:30:28.000000000 +0000
++++ pango-1.18.1/pangoxft.pc.in	2007-11-12 19:21:57.000000000 +0000
+@@ -6,6 +6,6 @@
+ Name: Pango Xft
+ Description: Xft font support for Pango
+ Version: @VERSION@
+-Requires: pango pangoft2
+-Libs: -L${libdir} -lpangoxft-@PANGO_API_VERSION@ @PKGCONFIG_XFT_LIBS@
+-Cflags: -I${includedir}/pango-1.0 @XFT_CFLAGS@
++Requires: pango pangoft2 xft
++Libs: -L${libdir} -lpangoxft-@PANGO_API_VERSION@
++Cflags: -I${includedir}/pango-1.0
