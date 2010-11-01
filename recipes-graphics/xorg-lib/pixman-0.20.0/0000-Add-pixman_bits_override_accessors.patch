@@ -1,0 +1,77 @@
+From 38aabb3be87ea68e37f34256c778d07f62680ec6 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Thu, 10 Dec 2009 00:51:50 +0200
+Subject: [PATCH 1/9] add _pixman_bits_override_accessors
+
+* from patch ARM: HACK: added NEON optimizations for fetch/store r5g6b5 scanline
+* used in 
+  0005-ARM-added-NEON-optimizations-for-fetch-store-r5g6b5-.patch
+  0006-ARM-added-NEON-optimizations-for-fetch-store-a8-scan.patch
+  0007-ARM-added-NEON-optimizations-for-fetching-x8r8g8b8-s.patch
+
+
+---
+ pixman/pixman-access.c       |   23 ++++++++++++++++++++++-
+ pixman/pixman-private.h      |    5 +++++
+ 4 files changed, 87 insertions(+), 1 deletions(-)
+
+diff --git a/pixman/pixman-access.c b/pixman/pixman-access.c
+index f1ce0ba..b33da29 100644
+--- a/pixman/pixman-access.c
++++ b/pixman/pixman-access.c
+@@ -2836,7 +2836,7 @@ typedef struct
+ 	    store_scanline_ ## format, store_scanline_generic_64	\
+     }
+ 
+-static const format_info_t accessors[] =
++static format_info_t accessors[] =
+ {
+ /* 32 bpp formats */
+     FORMAT_INFO (a8r8g8b8),
+@@ -2978,6 +2978,27 @@ _pixman_bits_image_setup_accessors (bits_image_t *image)
+ 	setup_accessors (image);
+ }
+ 
++void
++_pixman_bits_override_accessors (pixman_format_code_t format,
++                                 fetch_scanline_t     fetch_func,
++                                 store_scanline_t     store_func)
++{
++    format_info_t *info = accessors;
++
++    while (info->format != PIXMAN_null)
++    {
++	if (info->format == format)
++	{
++	    if (fetch_func)
++		info->fetch_scanline_32 = fetch_func;
++	    if (store_func)
++		info->store_scanline_32 = store_func;
++	    return;
++	}
++	info++;
++    }
++}
++
+ #else
+ 
+ void
+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
+index d85868f..564f8f0 100644
+--- a/pixman/pixman-private.h
++++ b/pixman/pixman-private.h
+@@ -206,6 +206,11 @@ void
+ _pixman_bits_image_setup_accessors (bits_image_t *image);
+ 
+ void
++_pixman_bits_override_accessors (pixman_format_code_t format,
++                                 fetch_scanline_t     fetch_func,
++                                 store_scanline_t     store_func);
++
++void
+ _pixman_image_get_scanline_generic_64  (pixman_image_t *image,
+                                         int             x,
+                                         int             y,
+-- 
+1.6.6.1
+

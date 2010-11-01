@@ -1,0 +1,172 @@
+From e1191ad6563a1fb02a45982b1c4d7fed3c655e97 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Mon, 4 Oct 2010 01:56:59 +0300
+Subject: [PATCH 8/8] ARM optimization for scaled src_0565_0565 operation with nearest filter
+
+The code actually uses only armv4t instructions.
+
+Benchmark from ARM11:
+
+    == before ==
+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=34.86 MPix/s
+
+    == after ==
+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=36.62 MPix/s
+
+Benchmark from ARM Cortex-A8:
+
+    == before ==
+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=89.55 MPix/s
+
+    == after ==
+    op=1, src_fmt=10020565, dst_fmt=10020565, speed=94.91 MPix/s
+---
+ pixman/pixman-arm-simd-asm.S |   66 ++++++++++++++++++++++++++++++++++++++++++
+ pixman/pixman-arm-simd.c     |   37 +++++++++++++++++++++++
+ 2 files changed, 103 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-simd-asm.S b/pixman/pixman-arm-simd-asm.S
+index a3d2d40..b6f69db 100644
+--- a/pixman/pixman-arm-simd-asm.S
++++ b/pixman/pixman-arm-simd-asm.S
+@@ -1,5 +1,6 @@
+ /*
+  * Copyright © 2008 Mozilla Corporation
++ * Copyright © 2010 Nokia Corporation
+  *
+  * Permission to use, copy, modify, distribute, and sell this software and its
+  * documentation for any purpose is hereby granted without fee, provided that
+@@ -328,3 +329,68 @@ pixman_asm_function pixman_composite_over_n_8_8888_asm_armv6
+ 	pop	{r4, r5, r6, r7, r8, r9, r10, r11}
+ 	bx	lr
+ .endfunc
++
++/*
++ * Note: This function is actually primarily optimized for ARM Cortex-A8
++ * pipeline. In order to get good performance on ARM9/ARM11 cores (which
++ * don't have efficient write combining), it needs to be changed to use
++ * 16-byte aligned writes using STM instruction.
++ */
++pixman_asm_function pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6
++	DST	.req	r0
++	SRC	.req	r1
++	W	.req	r2
++	VX	.req	r3
++	UNIT_X	.req	r12
++	TMP1	.req	r4
++	TMP2	.req	r5
++	MASK	.req	r6
++	ldr	UNIT_X, [sp]
++	push	{r4, r5, r6, r7}
++	mvn	MASK, #1
++
++	/* define helper macro */
++	.macro	scale_2_pixels
++		ldrh	TMP1, [SRC, TMP1]
++		and	TMP2, MASK, VX, lsr #15
++		add	VX, VX, UNIT_X
++		strh	TMP1, [DST], #2
++
++		ldrh	TMP2, [SRC, TMP2]
++		and	TMP1, MASK, VX, lsr #15
++		add	VX, VX, UNIT_X
++		strh	TMP2, [DST], #2
++	.endm
++
++	/* now do the scaling */
++	and	TMP1, MASK, VX, lsr #15
++	add	VX, VX, UNIT_X
++	subs	W, #4
++	blt	2f
++1: /* main loop, process 4 pixels per iteration */
++	scale_2_pixels
++	scale_2_pixels
++	subs	W, W, #4
++	bge	1b
++2:
++	tst	W, #2
++	beq	2f
++	scale_2_pixels
++2:
++	tst	W, #1
++	ldrneh	TMP1, [SRC, TMP1]
++	strneh	TMP1, [DST], #2
++	/* cleanup helper macro */
++	.purgem	scale_2_pixels
++	.unreq	DST
++	.unreq	SRC
++	.unreq	W
++	.unreq	VX
++	.unreq	UNIT_X
++	.unreq	TMP1
++	.unreq	TMP2
++	.unreq	MASK
++	/* return */
++	pop	{r4, r5, r6, r7}
++	bx	lr
++.endfunc
+diff --git a/pixman/pixman-arm-simd.c b/pixman/pixman-arm-simd.c
+index d466a31..f6f464c 100644
+--- a/pixman/pixman-arm-simd.c
++++ b/pixman/pixman-arm-simd.c
+@@ -29,6 +29,7 @@
+ 
+ #include "pixman-private.h"
+ #include "pixman-arm-common.h"
++#include "pixman-fast-path.h"
+ 
+ #if 0 /* This code was moved to 'pixman-arm-simd-asm.S' */
+ 
+@@ -375,6 +376,35 @@ pixman_composite_over_n_8_8888_asm_armv6 (int32_t   width,
+ 
+ #endif
+ 
++void
++pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6 (uint16_t *      dst,
++						      uint16_t *      src,
++						      int32_t         w,
++						      pixman_fixed_t  vx,
++						      pixman_fixed_t  unit_x);
++
++static force_inline void
++scaled_nearest_scanline_armv6_565_565_SRC (uint16_t *      dst,
++					   uint16_t *      src,
++					   int32_t         w,
++					   pixman_fixed_t  vx,
++					   pixman_fixed_t  unit_x,
++					   pixman_fixed_t  max_vx)
++{
++    pixman_scaled_nearest_scanline_565_565_SRC_asm_armv6 (dst, src, w,
++							  vx, unit_x);
++}
++
++FAST_NEAREST_MAINLOOP (armv6_565_565_cover_SRC,
++		       scaled_nearest_scanline_armv6_565_565_SRC,
++		       uint16_t, uint16_t, COVER);
++FAST_NEAREST_MAINLOOP (armv6_565_565_none_SRC,
++		       scaled_nearest_scanline_armv6_565_565_SRC,
++		       uint16_t, uint16_t, NONE);
++FAST_NEAREST_MAINLOOP (armv6_565_565_pad_SRC,
++		       scaled_nearest_scanline_armv6_565_565_SRC,
++		       uint16_t, uint16_t, PAD);
++
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, add_8_8,
+                                    uint8_t, 1, uint8_t, 1)
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, over_8888_8888,
+@@ -404,6 +434,13 @@ static const pixman_fast_path_t arm_simd_fast_paths[] =
+     PIXMAN_STD_FAST_PATH (OVER, solid, a8, a8b8g8r8, armv6_composite_over_n_8_8888),
+     PIXMAN_STD_FAST_PATH (OVER, solid, a8, x8b8g8r8, armv6_composite_over_n_8_8888),
+ 
++    SIMPLE_NEAREST_FAST_PATH_COVER (SRC, r5g6b5, r5g6b5, armv6_565_565),
++    SIMPLE_NEAREST_FAST_PATH_COVER (SRC, b5g6r5, b5g6r5, armv6_565_565),
++    SIMPLE_NEAREST_FAST_PATH_NONE (SRC, r5g6b5, r5g6b5, armv6_565_565),
++    SIMPLE_NEAREST_FAST_PATH_NONE (SRC, b5g6r5, b5g6r5, armv6_565_565),
++    SIMPLE_NEAREST_FAST_PATH_PAD (SRC, r5g6b5, r5g6b5, armv6_565_565),
++    SIMPLE_NEAREST_FAST_PATH_PAD (SRC, b5g6r5, b5g6r5, armv6_565_565),
++
+     { PIXMAN_OP_NONE },
+ };
+ 
+-- 
+1.6.6.1
+

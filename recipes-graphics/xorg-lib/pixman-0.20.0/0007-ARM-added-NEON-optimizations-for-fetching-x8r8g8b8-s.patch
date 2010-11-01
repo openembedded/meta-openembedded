@@ -1,0 +1,77 @@
+From d6ae7da60cc797900b5eff0786536c4a11ab0f50 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Fri, 24 Sep 2010 18:22:44 +0300
+Subject: [PATCH 7/8] ARM: added NEON optimizations for fetching x8r8g8b8 scanline
+
+---
+ pixman/pixman-arm-neon-asm.S |   14 ++++++++++++++
+ pixman/pixman-arm-neon.c     |   21 +++++++++++++++++++++
+ 2 files changed, 35 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
+index ca0825c..ffd0b83 100644
+--- a/pixman/pixman-arm-neon-asm.S
++++ b/pixman/pixman-arm-neon-asm.S
+@@ -1206,6 +1206,20 @@ generate_composite_function \
+     0, /* src_basereg   */ \
+     0  /* mask_basereg  */
+ 
++generate_composite_function_single_scanline \
++    pixman_fetch_scanline_x888_asm_neon, 32, 0, 32, \
++    FLAG_DST_WRITEONLY, \
++    8, /* number of pixels, processed in a single block */ \
++    pixman_composite_src_x888_8888_init, \
++    default_cleanup, \
++    pixman_composite_src_x888_8888_process_pixblock_head, \
++    pixman_composite_src_x888_8888_process_pixblock_tail, \
++    pixman_composite_src_x888_8888_process_pixblock_tail_head, \
++    0,  /* dst_w_basereg */ \
++    0,  /* dst_r_basereg */ \
++    0,  /* src_basereg   */ \
++    0   /* mask_basereg  */
++
+ /******************************************************************************/
+ 
+ .macro pixman_composite_over_n_8_8888_process_pixblock_head
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index 43091d2..f84b5e6 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -466,6 +466,24 @@ neon_store_scanline_a8 (bits_image_t *  image,
+     pixman_store_scanline_a8_asm_neon (width, pixel, values);
+ }
+ 
++void
++pixman_fetch_scanline_x888_asm_neon (int             width,
++                                     uint32_t       *buffer,
++                                     const uint32_t *pixel);
++
++static void
++neon_fetch_scanline_x888 (pixman_image_t *image,
++                          int             x,
++                          int             y,
++                          int             width,
++                          uint32_t *      buffer,
++                          const uint32_t *mask)
++{
++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
++    const uint32_t *pixel = (const uint32_t *) bits + x;
++
++    pixman_fetch_scanline_x888_asm_neon (width, buffer, pixel);
++}
+ 
+ pixman_implementation_t *
+ _pixman_implementation_create_arm_neon (void)
+@@ -488,6 +506,9 @@ _pixman_implementation_create_arm_neon (void)
+     _pixman_bits_override_accessors (PIXMAN_a8,
+                                      neon_fetch_scanline_a8,
+                                      neon_store_scanline_a8);
++    _pixman_bits_override_accessors (PIXMAN_x8r8g8b8,
++                                     neon_fetch_scanline_x888,
++                                     NULL);
+ 
+     imp->blt = arm_neon_blt;
+     imp->fill = arm_neon_fill;
+-- 
+1.6.6.1
+

@@ -1,0 +1,148 @@
+From a1cd695c5e22f0f4a2b7272fab675a3cc510bacb Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Thu, 23 Sep 2010 21:10:56 +0300
+Subject: [PATCH 6/8] ARM: added NEON optimizations for fetch/store a8 scanline
+
+---
+ pixman/pixman-arm-neon-asm.S |   64 ++++++++++++++++++++++++++++++++++++++++++
+ pixman/pixman-arm-neon.c     |   42 +++++++++++++++++++++++++++
+ 2 files changed, 106 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
+index c79ba81..ca0825c 100644
+--- a/pixman/pixman-arm-neon-asm.S
++++ b/pixman/pixman-arm-neon-asm.S
+@@ -418,6 +418,70 @@ generate_composite_function \
+ 
+ /******************************************************************************/
+ 
++.macro pixman_composite_src_8_8888_process_pixblock_head
++    /* This is tricky part: we can't set these values just once in 'init' macro
++     * because leading/trailing pixels handling part uses VZIP.8 instructions,
++     * and they operate on values in-place and destroy original registers
++     * content. Think about it like VST4.8 instruction corrupting NEON
++     * registers after write in 'tail_head' macro. Except that 'tail_head'
++     * macro itself actually does not need these extra VMOVs because it uses
++     * real VST4.8 instruction.
++     */
++    vmov.u8     q0, #0
++    vmov.u8     d2, #0
++.endm
++
++.macro pixman_composite_src_8_8888_process_pixblock_tail
++.endm
++
++.macro pixman_composite_src_8_8888_process_pixblock_tail_head
++    vst4.8      {d0, d1, d2, d3}, [DST_W, :128]!
++    vld1.8      {d3}, [SRC]!
++.endm
++
++generate_composite_function_single_scanline \
++    pixman_fetch_scanline_a8_asm_neon, 8, 0, 32, \
++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
++    8, /* number of pixels, processed in a single block */ \
++    default_init, \
++    default_cleanup, \
++    pixman_composite_src_8_8888_process_pixblock_head, \
++    pixman_composite_src_8_8888_process_pixblock_tail, \
++    pixman_composite_src_8_8888_process_pixblock_tail_head, \
++    0,  /* dst_w_basereg */ \
++    0,  /* dst_r_basereg */ \
++    3,  /* src_basereg   */ \
++    0   /* mask_basereg  */
++
++/******************************************************************************/
++
++.macro pixman_composite_src_8888_8_process_pixblock_head
++.endm
++
++.macro pixman_composite_src_8888_8_process_pixblock_tail
++.endm
++
++.macro pixman_composite_src_8888_8_process_pixblock_tail_head
++    vst1.8      {d3}, [DST_W, :64]!
++    vld4.8      {d0, d1, d2, d3}, [SRC]!
++.endm
++
++generate_composite_function_single_scanline \
++    pixman_store_scanline_a8_asm_neon, 32, 0, 8, \
++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
++    8, /* number of pixels, processed in a single block */ \
++    default_init, \
++    default_cleanup, \
++    pixman_composite_src_8888_8_process_pixblock_head, \
++    pixman_composite_src_8888_8_process_pixblock_tail, \
++    pixman_composite_src_8888_8_process_pixblock_tail_head, \
++    3,  /* dst_w_basereg */ \
++    0,  /* dst_r_basereg */ \
++    0,  /* src_basereg   */ \
++    0   /* mask_basereg  */
++
++/******************************************************************************/
++
+ .macro pixman_composite_src_8888_0565_process_pixblock_head
+     vshll.u8    q8, d1, #8
+     vshll.u8    q14, d2, #8
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index f88c8f8..43091d2 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -428,6 +428,45 @@ neon_store_scanline_r5g6b5 (bits_image_t *  image,
+     pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
+ }
+ 
++void
++pixman_fetch_scanline_a8_asm_neon (int             width,
++                                   uint32_t       *buffer,
++                                   const uint8_t  *pixel);
++
++
++void
++pixman_store_scanline_a8_asm_neon (int             width,
++                                   uint8_t        *pixel,
++                                   const uint32_t *values);
++
++static void
++neon_fetch_scanline_a8 (pixman_image_t *image,
++                        int             x,
++                        int             y,
++                        int             width,
++                        uint32_t *      buffer,
++                        const uint32_t *mask)
++{
++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
++    const uint8_t *pixel = (const uint8_t *) bits + x;
++
++    pixman_fetch_scanline_a8_asm_neon (width, buffer, pixel);
++}
++
++static void
++neon_store_scanline_a8 (bits_image_t *  image,
++                        int             x,
++                        int             y,
++                        int             width,
++                        const uint32_t *values)
++{
++    uint32_t *bits = image->bits + image->rowstride * y;
++    uint8_t *pixel = (uint8_t *) bits + x;
++
++    pixman_store_scanline_a8_asm_neon (width, pixel, values);
++}
++
++
+ pixman_implementation_t *
+ _pixman_implementation_create_arm_neon (void)
+ {
+@@ -446,6 +485,9 @@ _pixman_implementation_create_arm_neon (void)
+     _pixman_bits_override_accessors (PIXMAN_r5g6b5,
+                                      neon_fetch_scanline_r5g6b5,
+                                      neon_store_scanline_r5g6b5);
++    _pixman_bits_override_accessors (PIXMAN_a8,
++                                     neon_fetch_scanline_a8,
++                                     neon_store_scanline_a8);
+ 
+     imp->blt = arm_neon_blt;
+     imp->fill = arm_neon_fill;
+-- 
+1.6.6.1
+

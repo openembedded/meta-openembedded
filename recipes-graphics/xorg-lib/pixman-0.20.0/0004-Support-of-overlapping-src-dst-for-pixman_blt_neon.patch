@@ -1,0 +1,94 @@
+From a913cc05a1a1c5a813cf06d248334edede9caab7 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Wed, 18 Nov 2009 06:08:48 +0200
+Subject: [PATCH 4/8] Support of overlapping src/dst for pixman_blt_neon
+
+---
+ pixman/pixman-arm-neon.c |   62 +++++++++++++++++++++++++++++++++++++--------
+ 1 files changed, 51 insertions(+), 11 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index be5d403..cbfd7cf 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -176,26 +176,66 @@ pixman_blt_neon (uint32_t *src_bits,
+                  int       width,
+                  int       height)
+ {
+-    if (src_bpp != dst_bpp)
++    uint8_t *   src_bytes;
++    uint8_t *   dst_bytes;
++    int         bpp;
++
++    if (src_bpp != dst_bpp || src_bpp & 7)
+ 	return FALSE;
+ 
++    bpp = src_bpp >> 3;
++    width *= bpp;
++    src_stride *= 4;
++    dst_stride *= 4;
++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
++
++    if (src_bpp != 16 && src_bpp != 32)
++    {
++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
++	                   width, height);
++	return TRUE;
++    }
++
++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
++    {
++	src_bytes += src_stride * height - src_stride;
++	dst_bytes += dst_stride * height - dst_stride;
++	dst_stride = -dst_stride;
++	src_stride = -src_stride;
++
++	if (src_bytes + width > dst_bytes)
++	{
++	    /* TODO: reverse scanline copy using NEON */
++	    while (--height >= 0)
++	    {
++		memmove (dst_bytes, src_bytes, width);
++		dst_bytes += dst_stride;
++		src_bytes += src_stride;
++	    }
++	    return TRUE;
++	}
++    }
++
+     switch (src_bpp)
+     {
+     case 16:
+ 	pixman_composite_src_0565_0565_asm_neon (
+-		width, height,
+-		(uint16_t *)(((char *) dst_bits) +
+-		dst_y * dst_stride * 4 + dst_x * 2), dst_stride * 2,
+-		(uint16_t *)(((char *) src_bits) +
+-		src_y * src_stride * 4 + src_x * 2), src_stride * 2);
++		width >> 1,
++		height,
++		(uint16_t *) dst_bytes,
++		dst_stride >> 1,
++		(uint16_t *) src_bytes,
++		src_stride >> 1);
+ 	return TRUE;
+     case 32:
+ 	pixman_composite_src_8888_8888_asm_neon (
+-		width, height,
+-		(uint32_t *)(((char *) dst_bits) +
+-		dst_y * dst_stride * 4 + dst_x * 4), dst_stride,
+-		(uint32_t *)(((char *) src_bits) +
+-		src_y * src_stride * 4 + src_x * 4), src_stride);
++		width >> 2,
++		height,
++		(uint32_t *) dst_bytes,
++		dst_stride >> 2,
++		(uint32_t *) src_bytes,
++		src_stride >> 2);
+ 	return TRUE;
+     default:
+ 	return FALSE;
+-- 
+1.6.6.1
+
