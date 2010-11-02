@@ -1,0 +1,26 @@
+2010-08-13  Jie Zhang  <jie@codesourcery.com>
+
+	Backport from mainline:
+
+	gcc/
+	2010-08-13  Jie Zhang  <jie@codesourcery.com>
+	* config/arm/arm.md (cstoredf4): Only valid when
+	!TARGET_VFP_SINGLE.
+
+ 2010-08-12  Jie Zhang  <jie@codesourcery.com>
+ 
+ 	Backport from mainline:
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2010-08-16 09:41:58 +0000
++++ new/gcc/config/arm/arm.md	2010-08-20 16:41:37 +0000
+@@ -8344,7 +8344,7 @@
+ 	(match_operator:SI 1 "arm_comparison_operator"
+ 	 [(match_operand:DF 2 "s_register_operand" "")
+ 	  (match_operand:DF 3 "arm_float_compare_operand" "")]))]
+-  "TARGET_32BIT && TARGET_HARD_FLOAT"
++  "TARGET_32BIT && TARGET_HARD_FLOAT && !TARGET_VFP_SINGLE"
+   "emit_insn (gen_cstore_cc (operands[0], operands[1],
+ 			     operands[2], operands[3])); DONE;"
+ )
+

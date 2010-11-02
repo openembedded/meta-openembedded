@@ -1,0 +1,178 @@
+Index: gcc-4.5/Makefile.def
+===================================================================
+--- gcc-4.5.orig/Makefile.def
++++ gcc-4.5/Makefile.def
+@@ -240,6 +240,7 @@ flags_to_pass = { flag= AWK ; };
+ flags_to_pass = { flag= BISON ; };
+ flags_to_pass = { flag= CC_FOR_BUILD ; };
+ flags_to_pass = { flag= CFLAGS_FOR_BUILD ; };
++flags_to_pass = { flag= CPPFLAGS_FOR_BUILD ; };
+ flags_to_pass = { flag= CXX_FOR_BUILD ; };
+ flags_to_pass = { flag= EXPECT ; };
+ flags_to_pass = { flag= FLEX ; };
+Index: gcc-4.5/gcc/Makefile.in
+===================================================================
+--- gcc-4.5.orig/gcc/Makefile.in
++++ gcc-4.5/gcc/Makefile.in
+@@ -766,7 +766,7 @@ BUILD_LINKERFLAGS = $(BUILD_CFLAGS)
+ 
+ # Native linker and preprocessor flags.  For x-fragment overrides.
+ BUILD_LDFLAGS=@BUILD_LDFLAGS@
+-BUILD_CPPFLAGS=$(ALL_CPPFLAGS)
++BUILD_CPPFLAGS=$(INCLUDES) @BUILD_CPPFLAGS@ $(X_CPPFLAGS)
+ 
+ # Actual name to use when installing a native compiler.
+ GCC_INSTALL_NAME := $(shell echo gcc|sed '$(program_transform_name)')
+Index: gcc-4.5/gcc/configure.ac
+===================================================================
+--- gcc-4.5.orig/gcc/configure.ac
++++ gcc-4.5/gcc/configure.ac
+@@ -1798,16 +1798,18 @@ AC_SUBST(inhibit_libc)
+ # Also, we cannot run fixincludes.
+ 
+ # These are the normal (build=host) settings:
+-CC_FOR_BUILD='$(CC)'		AC_SUBST(CC_FOR_BUILD)
+-BUILD_CFLAGS='$(ALL_CFLAGS)'	AC_SUBST(BUILD_CFLAGS)
+-BUILD_LDFLAGS='$(LDFLAGS)'	AC_SUBST(BUILD_LDFLAGS)
+-STMP_FIXINC=stmp-fixinc		AC_SUBST(STMP_FIXINC)
++CC_FOR_BUILD='$(CC)'			AC_SUBST(CC_FOR_BUILD)
++BUILD_CFLAGS='$(ALL_CFLAGS)'		AC_SUBST(BUILD_CFLAGS)
++BUILD_LDFLAGS='$(LDFLAGS)'		AC_SUBST(BUILD_LDFLAGS)
++BUILD_CPPFLAGS='$(ALL_CPPFLAGS)'	AC_SUBST(BUILD_CPPFLAGS)
++STMP_FIXINC=stmp-fixinc			AC_SUBST(STMP_FIXINC)
+ 
+ # And these apply if build != host, or we are generating coverage data
+ if test x$build != x$host || test "x$coverage_flags" != x
+ then
+     BUILD_CFLAGS='$(INTERNAL_CFLAGS) $(T_CFLAGS) $(CFLAGS_FOR_BUILD)'
+     BUILD_LDFLAGS='$(LDFLAGS_FOR_BUILD)'
++    BUILD_CPPFLAGS='$(CPPFLAGS_FOR_BUILD)'
+ fi
+ 
+ # Expand extra_headers to include complete path.
+Index: gcc-4.5/Makefile.in
+===================================================================
+--- gcc-4.5.orig/Makefile.in
++++ gcc-4.5/Makefile.in
+@@ -333,6 +333,7 @@ AR_FOR_BUILD = @AR_FOR_BUILD@
+ AS_FOR_BUILD = @AS_FOR_BUILD@
+ CC_FOR_BUILD = @CC_FOR_BUILD@
+ CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@
++CPPFLAGS_FOR_BUILD = @CPPFLAGS_FOR_BUILD@
+ CXXFLAGS_FOR_BUILD = @CXXFLAGS_FOR_BUILD@
+ CXX_FOR_BUILD = @CXX_FOR_BUILD@
+ DLLTOOL_FOR_BUILD = @DLLTOOL_FOR_BUILD@
+@@ -662,6 +663,7 @@ BASE_FLAGS_TO_PASS = \
+ 	"BISON=$(BISON)" \
+ 	"CC_FOR_BUILD=$(CC_FOR_BUILD)" \
+ 	"CFLAGS_FOR_BUILD=$(CFLAGS_FOR_BUILD)" \
++	"CPPFLAGS_FOR_BUILD=$(CPPFLAGS_FOR_BUILD)" \
+ 	"CXX_FOR_BUILD=$(CXX_FOR_BUILD)" \
+ 	"EXPECT=$(EXPECT)" \
+ 	"FLEX=$(FLEX)" \
+Index: gcc-4.5/gcc/configure
+===================================================================
+--- gcc-4.5.orig/gcc/configure
++++ gcc-4.5/gcc/configure
+@@ -707,6 +707,7 @@ SED
+ LIBTOOL
+ collect2
+ STMP_FIXINC
++BUILD_CPPFLAGS
+ BUILD_LDFLAGS
+ BUILD_CFLAGS
+ CC_FOR_BUILD
+@@ -10982,6 +10983,7 @@ fi
+ CC_FOR_BUILD='$(CC)'
+ BUILD_CFLAGS='$(ALL_CFLAGS)'
+ BUILD_LDFLAGS='$(LDFLAGS)'
++BUILD_CPPFLAGS='$(ALL_CPPFLAGS)'
+ STMP_FIXINC=stmp-fixinc
+ 
+ # And these apply if build != host, or we are generating coverage data
+@@ -10989,6 +10991,7 @@ if test x$build != x$host || test "x$cov
+ then
+     BUILD_CFLAGS='$(INTERNAL_CFLAGS) $(T_CFLAGS) $(CFLAGS_FOR_BUILD)'
+     BUILD_LDFLAGS='$(LDFLAGS_FOR_BUILD)'
++    BUILD_CPPFLAGS='$(CPPFLAGS_FOR_BUILD)'
+ fi
+ 
+ # Expand extra_headers to include complete path.
+@@ -17108,7 +17111,7 @@ else
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17111 "configure"
++#line 17114 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -17214,7 +17217,7 @@ else
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17217 "configure"
++#line 17220 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+Index: gcc-4.5/Makefile.tpl
+===================================================================
+--- gcc-4.5.orig/Makefile.tpl
++++ gcc-4.5/Makefile.tpl
+@@ -336,6 +336,7 @@ AR_FOR_BUILD = @AR_FOR_BUILD@
+ AS_FOR_BUILD = @AS_FOR_BUILD@
+ CC_FOR_BUILD = @CC_FOR_BUILD@
+ CFLAGS_FOR_BUILD = @CFLAGS_FOR_BUILD@
++CPPFLAGS_FOR_BUILD = @CPPFLAGS_FOR_BUILD@
+ CXXFLAGS_FOR_BUILD = @CXXFLAGS_FOR_BUILD@
+ CXX_FOR_BUILD = @CXX_FOR_BUILD@
+ DLLTOOL_FOR_BUILD = @DLLTOOL_FOR_BUILD@
+Index: gcc-4.5/configure
+===================================================================
+--- gcc-4.5.orig/configure
++++ gcc-4.5/configure
+@@ -651,6 +651,7 @@ GCJ_FOR_BUILD
+ DLLTOOL_FOR_BUILD
+ CXX_FOR_BUILD
+ CXXFLAGS_FOR_BUILD
++CPPFLAGS_FOR_BUILD
+ CFLAGS_FOR_BUILD
+ CC_FOR_BUILD
+ AS_FOR_BUILD
+@@ -8036,6 +8037,7 @@ esac
+ # our build compiler if desired.
+ if test x"${build}" = x"${host}" ; then
+   CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD-${CFLAGS}}
++  CPPFLAGS_FOR_BUILD=${CPPFLAGS_FOR_BUILD-${CPPFLAGS}}
+   CXXFLAGS_FOR_BUILD=${CXXFLAGS_FOR_BUILD-${CXXFLAGS}}
+   LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD-${LDFLAGS}}
+ fi
+@@ -8101,6 +8103,7 @@ done
+ 
+ 
+ 
++
+ 
+ 
+ 
+Index: gcc-4.5/configure.ac
+===================================================================
+--- gcc-4.5.orig/configure.ac
++++ gcc-4.5/configure.ac
+@@ -3089,6 +3089,7 @@ esac
+ # our build compiler if desired.
+ if test x"${build}" = x"${host}" ; then
+   CFLAGS_FOR_BUILD=${CFLAGS_FOR_BUILD-${CFLAGS}}
++  CPPFLAGS_FOR_BUILD=${CPPFLAGS_FOR_BUILD-${CPPFLAGS}}
+   CXXFLAGS_FOR_BUILD=${CXXFLAGS_FOR_BUILD-${CXXFLAGS}}
+   LDFLAGS_FOR_BUILD=${LDFLAGS_FOR_BUILD-${LDFLAGS}}
+ fi
+@@ -3155,6 +3156,7 @@ AC_SUBST(AR_FOR_BUILD)
+ AC_SUBST(AS_FOR_BUILD)
+ AC_SUBST(CC_FOR_BUILD)
+ AC_SUBST(CFLAGS_FOR_BUILD)
++AC_SUBST(CPPFLAGS_FOR_BUILD)
+ AC_SUBST(CXXFLAGS_FOR_BUILD)
+ AC_SUBST(CXX_FOR_BUILD)
+ AC_SUBST(DLLTOOL_FOR_BUILD)

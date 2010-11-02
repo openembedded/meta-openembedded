@@ -1,0 +1,43 @@
+	Merge from Sourcery G++ 4.4:
+	
+	2009-08-26  Kazu Hirata  <kazu@codesourcery.com>
+
+	Issue #6089
+	gcc/
+	* config/arm/arm.c (arm_rtx_costs_1): Don't special case for
+	Thumb-2 in the MINUS case.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+ 	Backport from FSF mainline:
+ 
+ 	gcc/
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-08-12 13:35:39 +0000
++++ new/gcc/config/arm/arm.c	2010-08-12 14:08:29 +0000
+@@ -6494,23 +6494,6 @@
+       return true;
+ 
+     case MINUS:
+-      if (TARGET_THUMB2)
+-	{
+-	  if (GET_MODE_CLASS (mode) == MODE_FLOAT)
+-	    {
+-	      if (TARGET_HARD_FLOAT && (mode == SFmode || mode == DFmode))
+-		*total = COSTS_N_INSNS (1);
+-	      else
+-		*total = COSTS_N_INSNS (20);
+-	    }
+-	  else
+-	    *total = COSTS_N_INSNS (ARM_NUM_REGS (mode));
+-	  /* Thumb2 does not have RSB, so all arguments must be
+-	     registers (subtracting a constant is canonicalized as
+-	     addition of the negated constant).  */
+-	  return false;
+-	}
+-
+       if (mode == DImode)
+ 	{
+ 	  *total = COSTS_N_INSNS (ARM_NUM_REGS (mode));
+

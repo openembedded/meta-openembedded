@@ -1,0 +1,53 @@
+2010-08-20  Jie Zhang  <jie@codesourcery.com>
+
+	Merged from Sourcery G++ 4.4:
+
+	gcc/
+	2009-05-29  Julian Brown  <julian@codesourcery.com>
+	Merged from Sourcery G++ 4.3:
+	* config/arm/arm.md (movsi): Don't split symbol refs here.
+	(define_split): New.
+
+ 2010-08-18  Julian Brown  <julian@codesourcery.com>
+ 
+ 	Issue #9222
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2010-08-20 16:41:37 +0000
++++ new/gcc/config/arm/arm.md	2010-08-23 14:39:12 +0000
+@@ -5150,14 +5150,6 @@
+ 			       optimize && can_create_pseudo_p ());
+           DONE;
+         }
+-
+-      if (TARGET_USE_MOVT && !target_word_relocations
+-	  && GET_CODE (operands[1]) == SYMBOL_REF
+-	  && !flag_pic && !arm_tls_referenced_p (operands[1]))
+-	{
+-	  arm_emit_movpair (operands[0], operands[1]);
+-	  DONE;
+-	}
+     }
+   else /* TARGET_THUMB1...  */
+     {
+@@ -5265,6 +5257,19 @@
+   "
+ )
+ 
++(define_split
++  [(set (match_operand:SI 0 "arm_general_register_operand" "")
++	(match_operand:SI 1 "general_operand" ""))]
++  "TARGET_32BIT
++   && TARGET_USE_MOVT && GET_CODE (operands[1]) == SYMBOL_REF
++   && !flag_pic && !target_word_relocations
++   && !arm_tls_referenced_p (operands[1])"
++  [(clobber (const_int 0))]
++{
++  arm_emit_movpair (operands[0], operands[1]);
++  DONE;
++})
++
+ (define_insn "*thumb1_movsi_insn"
+   [(set (match_operand:SI 0 "nonimmediate_operand" "=l,l,l,l,l,>,l, m,*lhk")
+ 	(match_operand:SI 1 "general_operand"      "l, I,J,K,>,l,mi,l,*lhk"))]
+

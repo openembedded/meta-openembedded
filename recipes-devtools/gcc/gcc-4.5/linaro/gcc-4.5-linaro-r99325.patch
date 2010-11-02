@@ -1,0 +1,174 @@
+	http://gcc.gnu.org/ml/gcc-patches/2006-04/msg00811.html
+
+	Kazu Hirata  <kazu@codesourcery.com>
+
+	gcc/testsuite/
+	* gcc.target/arm/vfp-ldmdbd.c, gcc.target/arm/vfp-ldmdbs.c,
+	gcc.target/arm/vfp-ldmiad.c, gcc.target/arm/vfp-ldmias.c,
+	gcc.target/arm/vfp-stmdbd.c, gcc.target/arm/vfp-stmdbs.c,
+	gcc.target/arm/vfp-stmiad.c, gcc.target/arm/vfp-stmias.c: New.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Merge from Sourcery G++ 4.4:
+
+ 	Julian Brown  <julian@codesourcery.com>
+ 	Mark Shinwell  <mark@codesourcery.com>
+ 
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-ldmdbd.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-ldmdbd.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-ldmdbd.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++extern void bar (double);
++
++void
++foo (double *p, double a, int n)
++{
++  do
++    bar (*--p + a);
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fldmdbd" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-ldmdbs.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-ldmdbs.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-ldmdbs.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++extern void baz (float);
++
++void
++foo (float *p, float a, int n)
++{
++  do
++    bar (*--p + a);
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fldmdbs" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-ldmiad.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-ldmiad.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-ldmiad.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++extern void bar (double);
++
++void
++foo (double *p, double a, int n)
++{
++  do
++    bar (*p++ + a);
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fldmiad" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-ldmias.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-ldmias.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-ldmias.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++extern void baz (float);
++
++void
++foo (float *p, float a, int n)
++{
++  do
++    bar (*p++ + a);
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fldmias" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-stmdbd.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-stmdbd.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-stmdbd.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++void
++foo (double *p, double a, double b, int n)
++{
++  double c = a + b;
++  do
++    *--p = c;
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fstmdbd" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-stmdbs.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-stmdbs.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-stmdbs.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++void
++foo (float *p, float a, float b, int n)
++{
++  float c = a + b;
++  do
++    *--p = c;
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fstmdbs" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-stmiad.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-stmiad.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-stmiad.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++void
++foo (double *p, double a, double b, int n)
++{
++  double c = a + b;
++  do
++    *p++ = c;
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fstmiad" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/vfp-stmias.c'
+--- old/gcc/testsuite/gcc.target/arm/vfp-stmias.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/vfp-stmias.c	2010-08-05 15:37:24 +0000
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_vfp_ok } */
++/* { dg-options "-O2 -mfpu=vfp -mfloat-abi=softfp" } */
++
++void
++foo (float *p, float a, float b, int n)
++{
++  float c = a + b;
++  do
++    *p++ = c;
++  while (n--);
++}
++
++/* { dg-final { scan-assembler "fstmias" } } */
+

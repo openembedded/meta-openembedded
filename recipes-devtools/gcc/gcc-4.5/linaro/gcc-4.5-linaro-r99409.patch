@@ -1,0 +1,18 @@
+2010-09-30  Jie Zhang  <jie@codesourcery.com>
+
+	gcc/testsuite/
+	* gcc.target/arm/neon-thumb2-move.c: Add
+	dg-require-effective-target arm_thumb2_ok.
+
+=== modified file 'gcc/testsuite/gcc.target/arm/neon-thumb2-move.c'
+Index: gcc-4.5/gcc/testsuite/gcc.target/arm/neon-thumb2-move.c
+===================================================================
+--- gcc-4.5.orig/gcc/testsuite/gcc.target/arm/neon-thumb2-move.c
++++ gcc-4.5/gcc/testsuite/gcc.target/arm/neon-thumb2-move.c
+@@ -1,5 +1,6 @@
+ /* { dg-do compile } */
+ /* { dg-require-effective-target arm_neon_ok } */
++/* { dg-require-effective-target arm_thumb2_ok } */
+ /* { dg-options "-O2 -mthumb -march=armv7-a" } */
+ /* { dg-add-options arm_neon } */
+ 

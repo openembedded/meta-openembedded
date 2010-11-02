@@ -1,0 +1,30 @@
+	Merge from Sourcery G++ 4.4:
+
+	2010-02-04  Daniel Jacobowitz  <dan@codesourcery.com>
+
+	Issue #7197 - backtrace() through throw()
+
+	libstdc++-v3/
+	* libsupc++/eh_personality.cc (PERSONALITY_FUNCTION): For
+	ARM EABI, skip handlers for _US_VIRTUAL_UNWIND_FRAME
+	| _US_FORCE_UNWIND.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+ 	Backport from FSF mainline:
+ 
+ 	2010-02-03  Daniel Gutson  <dgutson@codesourcery.com>
+
+=== modified file 'libstdc++-v3/libsupc++/eh_personality.cc'
+--- old/libstdc++-v3/libsupc++/eh_personality.cc	2010-02-17 05:43:24 +0000
++++ new/libstdc++-v3/libsupc++/eh_personality.cc	2010-08-12 16:53:10 +0000
+@@ -383,6 +383,8 @@
+   switch (state & _US_ACTION_MASK)
+     {
+     case _US_VIRTUAL_UNWIND_FRAME:
++      if (state & _US_FORCE_UNWIND)
++	CONTINUE_UNWINDING;
+       actions = _UA_SEARCH_PHASE;
+       break;
+ 
+

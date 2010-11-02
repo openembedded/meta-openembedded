@@ -1,0 +1,23 @@
+gcc-runtime builds libstdc++ separately from gcc-cross-*. Its configure tests using g++ 
+will not run correctly since my default the linker will try and link against libstdc++
+which shouldn't exist yet. We need an option to disable the automatically added -lstdc++
+option whilst leaving -lc, -lgcc and other automatic library dependencies. This patch 
+adds such an option which only disables the -lstdc++ linkage.
+
+A "standard" gcc build uses xgcc and hence avoids this. We should ask upstream how to 
+do this officially, the likely answer is don't build libstdc++ separately.
+
+RP 29/6/10
+
+Index: gcc-4.3.3/gcc/cp/g++spec.c
+===================================================================
+--- gcc-4.3.3.orig/gcc/cp/g++spec.c	2010-06-29 00:06:03.901695025 +0100
++++ gcc-4.3.3/gcc/cp/g++spec.c	2010-06-29 00:06:58.800325439 +0100
+@@ -131,6 +131,7 @@
+       if (argv[i][0] == '-')
+ 	{
+ 	  if (strcmp (argv[i], "-nostdlib") == 0
++	      || strcmp (argv[i], "-nostdlib++") == 0
+ 	      || strcmp (argv[i], "-nodefaultlibs") == 0)
+ 	    {
+ 	      library = -1;

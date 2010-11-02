@@ -1,0 +1,22 @@
+diff -urN gcc-4.2.2-orig/gcc/configure gcc-4.2.2/gcc/configure
+--- gcc-4.2.2-orig/gcc/configure	2008-08-31 23:10:56.000000000 +0200
++++ gcc-4.2.2/gcc/configure	2008-08-31 23:03:02.000000000 +0200
+@@ -12716,6 +12716,7 @@
+ 	esac
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
++	CPP="${CPP_FOR_BUILD}" CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
+ 	CONFIG_SITE= ${realsrcdir}/configure --cache-file=./other.cache \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
+diff -urN gcc-4.2.2-orig/gcc/configure.ac gcc-4.2.2/gcc/configure.ac
+--- gcc-4.2.2-orig/gcc/configure.ac	2008-08-31 23:10:53.000000000 +0200
++++ gcc-4.2.2/gcc/configure.ac	2008-08-31 23:03:29.000000000 +0200
+@@ -1490,6 +1490,7 @@
+ 	esac
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
++	CPP="${CPP_FOR_BUILD}" CPPFLAGS="${CPPFLAGS_FOR_BUILD}" \
+ 	${realsrcdir}/configure \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias

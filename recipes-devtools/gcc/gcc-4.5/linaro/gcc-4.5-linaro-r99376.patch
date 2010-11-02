@@ -1,0 +1,35 @@
+2010-08-26  Paul Brook  <paul@codesourcery.com>
+
+	Merge from Sourcery G++ 4.3/4.4:
+	2007-03-30  Paul Brook  <paul@codesourcery.com>
+	gcc/
+	* calls.c (store_one_arg): Check alignment of mode used for save.
+
+ 2010-08-26  Maciej Rozycki  <macro@codesourcery.com>
+ 
+ 	Merge from Sourcery G++ 4.4:
+
+=== modified file 'gcc/calls.c'
+--- old/gcc/calls.c	2010-08-13 10:50:45 +0000
++++ new/gcc/calls.c	2010-08-26 15:44:20 +0000
+@@ -4048,8 +4048,17 @@
+ 	      /* We need to make a save area.  */
+ 	      unsigned int size = arg->locate.size.constant * BITS_PER_UNIT;
+ 	      enum machine_mode save_mode = mode_for_size (size, MODE_INT, 1);
+-	      rtx adr = memory_address (save_mode, XEXP (arg->stack_slot, 0));
+-	      rtx stack_area = gen_rtx_MEM (save_mode, adr);
++	      rtx adr;
++	      rtx stack_area;
++
++	      /* We can only use save_mode if the arg is sufficiently
++	         aligned.  */
++	      if (STRICT_ALIGNMENT
++		  && GET_MODE_ALIGNMENT (save_mode) > arg->locate.boundary)
++		save_mode = BLKmode;
++
++	      adr = memory_address (save_mode, XEXP (arg->stack_slot, 0));
++	      stack_area = gen_rtx_MEM (save_mode, adr);
+ 
+ 	      if (save_mode == BLKmode)
+ 		{
+

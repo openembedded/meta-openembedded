@@ -1,0 +1,40 @@
+The patch below fixes a crash building libgfortran on arm-linux-gnueabi.
+
+This target doesn't really have a 128-bit integer type, however it does use 
+TImode to represent the return value of certain special ABI defined library 
+functions. This results in type_for_size(TImode) being called.
+
+Because TImode deosn't correspond to any gfortran integer kind 
+gfc_type_for_size returns NULL and we segfault shortly after.
+
+The patch below fixes this by making gfc_type_for_size handle TImode in the 
+same way as the C frontend.
+
+Tested on x86_64-linux and arm-linux-gnueabi.
+Applied to trunk.
+
+Paul
+
+2007-05-15  Paul Brook  <paul@codesourcery.com>
+
+	gcc/fortran/
+	* trans-types.c (gfc_type_for_size): Handle signed TImode.
+
+Index: gcc-4.2.1/gcc/fortran/trans-types.c
+===================================================================
+--- gcc-4.2.1/gcc/fortran/trans-types.c	(revision 170435)
++++ gcc-4.2.1/gcc/fortran/trans-types.c	(working copy)
+@@ -1800,6 +1800,13 @@ gfc_type_for_size (unsigned bits, int un
+ 	  if (type && bits == TYPE_PRECISION (type))
+ 	    return type;
+ 	}
++
++      /* Handle TImode as a special case because it is used by some backends
++         (eg. ARM) even though it is not available for normal use.  */
++#if HOST_BITS_PER_WIDE_INT >= 65
++      if (bits == TYPE_PRECISION (intTI_type_node))
++	return intTI_type_node;
++#endif
+     }
+   else
+     {

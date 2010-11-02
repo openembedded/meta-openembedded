@@ -1,0 +1,36 @@
+2010-09-22  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	Backport from mainline:
+
+	2010-09-22  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	gcc/
+	* postreload.c (move2add_note_store): Add reg_symbol_ref[] checks
+	to update conditions. Fix reg_mode[] check.
+
+=== modified file 'gcc/postreload.c'
+Index: gcc-4.5/gcc/postreload.c
+===================================================================
+--- gcc-4.5.orig/gcc/postreload.c
++++ gcc-4.5/gcc/postreload.c
+@@ -2103,15 +2103,17 @@ move2add_note_store (rtx dst, const_rtx 
+ 		       && (MODES_OK_FOR_MOVE2ADD
+ 			   (dst_mode, reg_mode[REGNO (XEXP (src, 1))])))
+ 		{
+-		  if (reg_base_reg[REGNO (XEXP (src, 1))] < 0)
++		  if (reg_base_reg[REGNO (XEXP (src, 1))] < 0
++		      && reg_symbol_ref[REGNO (XEXP (src, 1))] == NULL_RTX)
+ 		    offset = reg_offset[REGNO (XEXP (src, 1))];
+ 		  /* Maybe the first register is known to be a
+ 		     constant.  */
+ 		  else if (reg_set_luid[REGNO (base_reg)]
+ 			   > move2add_last_label_luid
+ 			   && (MODES_OK_FOR_MOVE2ADD
+-			       (dst_mode, reg_mode[REGNO (XEXP (src, 1))]))
+-			   && reg_base_reg[REGNO (base_reg)] < 0)
++			       (dst_mode, reg_mode[REGNO (base_reg)]))
++			   && reg_base_reg[REGNO (base_reg)] < 0
++			   && reg_symbol_ref[REGNO (base_reg)] == NULL_RTX)
+ 		    {
+ 		      offset = reg_offset[REGNO (base_reg)];
+ 		      base_reg = XEXP (src, 1);

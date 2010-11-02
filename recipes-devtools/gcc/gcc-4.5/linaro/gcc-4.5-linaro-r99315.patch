@@ -1,0 +1,57 @@
+2010-08-03  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	Backport from mainline:
+
+	gcc/
+	2010-07-28  Chung-Lin Tang  <cltang@codesourcery.com>
+	* config/arm/arm.c (arm_pcs_default): Remove static.	
+	* config/arm/arm.h (TARGET_CPU_CPP_BUILTINS): Define __ARM_PCS or
+	__ARM_PCS_VFP to indicate soft/hard-float calling convention.
+	(arm_pcs_default): Declare.
+
+ 2010-07-16  Jie Zhang  <jie@codesourcery.com>
+ 
+ 	Issue #7688
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-08-02 13:42:24 +0000
++++ new/gcc/config/arm/arm.c	2010-08-03 13:55:46 +0000
+@@ -704,7 +704,7 @@
+ /* The maximum number of insns to be used when loading a constant.  */
+ static int arm_constant_limit = 3;
+ 
+-static enum arm_pcs arm_pcs_default;
++enum arm_pcs arm_pcs_default;
+ 
+ /* For an explanation of these variables, see final_prescan_insn below.  */
+ int arm_ccfsm_state;
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2010-07-29 16:58:56 +0000
++++ new/gcc/config/arm/arm.h	2010-08-03 10:40:56 +0000
+@@ -94,7 +94,13 @@
+ 	if (arm_arch_iwmmxt)				\
+ 	  builtin_define ("__IWMMXT__");		\
+ 	if (TARGET_AAPCS_BASED)				\
+-	  builtin_define ("__ARM_EABI__");		\
++	  {						\
++	    if (arm_pcs_default == ARM_PCS_AAPCS_VFP)	\
++	      builtin_define ("__ARM_PCS_VFP");		\
++	    else if (arm_pcs_default == ARM_PCS_AAPCS)	\
++	      builtin_define ("__ARM_PCS");		\
++	    builtin_define ("__ARM_EABI__");		\
++	  }						\
+     } while (0)
+ 
+ /* The various ARM cores.  */
+@@ -1648,6 +1654,9 @@
+   ARM_PCS_UNKNOWN
+ };
+ 
++/* Default procedure calling standard of current compilation unit. */
++extern enum arm_pcs arm_pcs_default;
++
+ /* A C type for declaring a variable that is used as the first argument of
+    `FUNCTION_ARG' and other related values.  */
+ typedef struct
+

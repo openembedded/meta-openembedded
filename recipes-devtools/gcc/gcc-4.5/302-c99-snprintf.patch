@@ -1,0 +1,13 @@
+Index: gcc-4.5.0/libstdc++-v3/include/c_std/cstdio
+===================================================================
+--- gcc-4.5.0.orig/libstdc++-v3/include/c_std/cstdio	2010-02-04 10:20:34.000000000 -0800
++++ gcc-4.5.0/libstdc++-v3/include/c_std/cstdio	2010-06-25 10:51:12.712631679 -0700
+@@ -139,7 +139,7 @@
+ 
+ _GLIBCXX_END_NAMESPACE
+ 
+-#if _GLIBCXX_USE_C99
++#if _GLIBCXX_USE_C99 || defined(__UCLIBC__)
+ 
+ #undef snprintf
+ #undef vfscanf

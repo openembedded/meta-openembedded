@@ -1,0 +1,32 @@
+2010-10-06  Julian Brown  <julian@codesourcery.com>
+
+	gcc/testsuite/
+	* gcc.dg/Warray-bounds-3.c: Add -fno-unroll-loops for ARM.
+	* gcc.dg/vect/vect.exp: Likewise, for all vect tests.
+
+
+=== modified file 'gcc/testsuite/gcc.dg/Warray-bounds-3.c'
+Index: gcc-4.5/gcc/testsuite/gcc.dg/Warray-bounds-3.c
+===================================================================
+--- gcc-4.5.orig/gcc/testsuite/gcc.dg/Warray-bounds-3.c
++++ gcc-4.5/gcc/testsuite/gcc.dg/Warray-bounds-3.c
+@@ -1,5 +1,7 @@
+ /* { dg-do compile } */
+ /* { dg-options "-O2 -Warray-bounds" } */
++/* { dg-options "-O2 -Warray-bounds -fno-unroll-loops" { target arm*-*-* } } */
++
+ /* based on PR 31227 */
+ 
+ typedef __SIZE_TYPE__ size_t;
+Index: gcc-4.5/gcc/testsuite/gcc.dg/vect/vect.exp
+===================================================================
+--- gcc-4.5.orig/gcc/testsuite/gcc.dg/vect/vect.exp
++++ gcc-4.5/gcc/testsuite/gcc.dg/vect/vect.exp
+@@ -109,6 +109,7 @@ if  [istarget "powerpc-*paired*"]  {
+     # default to avoid loss of precision.  We must pass -ffast-math to test
+     # vectorization of float operations.
+     lappend DEFAULT_VECTCFLAGS "-ffast-math"
++    lappend DEFAULT_VECTCFLAGS "-fno-unroll-loops"
+     if [is-effective-target arm_neon_hw] {
+       set dg-do-what-default run
+     } else {

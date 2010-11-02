@@ -1,0 +1,114 @@
+2007-10-02  Jakub Jelinek  <jakub@redhat.com>
+
+	* decl.c (duplicate_decls): When redeclaring a builtin function,
+	keep the merged decl builtin whenever types match, even if new
+	decl defines a function.
+
+	* gcc.dg/builtins-65.c: New test.
+	* g++.dg/ext/builtin10.C: New test.
+
+Index: gcc/cp/decl.c
+===================================================================
+--- gcc/cp/decl.c.orig	2010-04-01 11:48:46.000000000 -0700
++++ gcc/cp/decl.c	2010-06-25 10:10:54.749131719 -0700
+@@ -2021,23 +2021,21 @@
+ 	  DECL_ARGUMENTS (olddecl) = DECL_ARGUMENTS (newdecl);
+ 	  DECL_RESULT (olddecl) = DECL_RESULT (newdecl);
+ 	}
++      /* If redeclaring a builtin function, it stays built in.  */
++      if (types_match && DECL_BUILT_IN (olddecl))
++	{
++	  DECL_BUILT_IN_CLASS (newdecl) = DECL_BUILT_IN_CLASS (olddecl);
++	  DECL_FUNCTION_CODE (newdecl) = DECL_FUNCTION_CODE (olddecl);
++	  /* If we're keeping the built-in definition, keep the rtl,
++	     regardless of declaration matches.  */
++	  COPY_DECL_RTL (olddecl, newdecl);
++	}
+       if (new_defines_function)
+ 	/* If defining a function declared with other language
+ 	   linkage, use the previously declared language linkage.  */
+ 	SET_DECL_LANGUAGE (newdecl, DECL_LANGUAGE (olddecl));
+       else if (types_match)
+ 	{
+-	  /* If redeclaring a builtin function, and not a definition,
+-	     it stays built in.  */
+-	  if (DECL_BUILT_IN (olddecl))
+-	    {
+-	      DECL_BUILT_IN_CLASS (newdecl) = DECL_BUILT_IN_CLASS (olddecl);
+-	      DECL_FUNCTION_CODE (newdecl) = DECL_FUNCTION_CODE (olddecl);
+-	      /* If we're keeping the built-in definition, keep the rtl,
+-		 regardless of declaration matches.  */
+-	      COPY_DECL_RTL (olddecl, newdecl);
+-	    }
+-
+ 	  DECL_RESULT (newdecl) = DECL_RESULT (olddecl);
+ 	  /* Don't clear out the arguments if we're just redeclaring a
+ 	     function.  */
+Index: gcc/testsuite/gcc.dg/builtins-65.c
+===================================================================
+--- gcc/testsuite/gcc.dg/builtins-65.c.orig	2009-06-26 02:02:04.000000000 -0700
++++ gcc/testsuite/gcc.dg/builtins-65.c	2010-06-25 10:10:54.784464429 -0700
+@@ -1,3 +1,28 @@
++/* { dg-do compile } */
++/* { dg-options "-O2" } */
++
++typedef __SIZE_TYPE__ size_t;
++extern void __chk_fail (void);
++extern int snprintf (char *, size_t, const char *, ...);
++extern inline __attribute__((gnu_inline, always_inline)) int snprintf (char *a, size_t b, const char *fmt, ...)
++{
++  if (__builtin_object_size (a, 0) != -1UL && __builtin_object_size (a, 0) < b)
++    __chk_fail ();
++  return __builtin_snprintf (a, b, fmt, __builtin_va_arg_pack ());
++}
++extern int snprintf (char *, size_t, const char *, ...) __asm ("mysnprintf");
++
++char buf[10];
++
++int
++main (void)
++{
++  snprintf (buf, 10, "%d%d\n", 10, 10);
++  return 0;
++}
++
++/* { dg-final { scan-assembler "mysnprintf" } } */
++/* { dg-final { scan-assembler-not "__chk_fail" } } */
+ /* { dg-do link } */
+ /* { dg-options "-O2 -ffast-math" } */
+ /* { dg-require-effective-target c99_runtime } */
+Index: gcc/testsuite/g++.dg/ext/builtin10.C
+===================================================================
+--- gcc/testsuite/g++.dg/ext/builtin10.C.orig	2009-02-02 03:27:50.000000000 -0800
++++ gcc/testsuite/g++.dg/ext/builtin10.C	2010-06-25 10:10:54.816467202 -0700
+@@ -1,3 +1,30 @@
++// { dg-do compile }
++// { dg-options "-O2" }
++
++typedef __SIZE_TYPE__ size_t;
++extern "C" {
++extern void __chk_fail (void);
++extern int snprintf (char *, size_t, const char *, ...);
++extern inline __attribute__((gnu_inline, always_inline)) int snprintf (char *a, size_t b, const char *fmt, ...)
++{
++  if (__builtin_object_size (a, 0) != -1UL && __builtin_object_size (a, 0) < b)
++    __chk_fail ();
++  return __builtin_snprintf (a, b, fmt, __builtin_va_arg_pack ());
++}
++extern int snprintf (char *, size_t, const char *, ...) __asm ("mysnprintf");
++}
++
++char buf[10];
++
++int
++main (void)
++{
++  snprintf (buf, 10, "%d%d\n", 10, 10);
++  return 0;
++}
++
++// { dg-final { scan-assembler "mysnprintf" } }
++// { dg-final { scan-assembler-not "__chk_fail" } }
+ // { dg-do compile { target correct_iso_cpp_string_wchar_protos } }
+ // { dg-options "-O2 -fdump-tree-optimized" }
+ 

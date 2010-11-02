@@ -1,0 +1,83 @@
+	Merge from Sourcery G++ 4.4:
+
+	2010-02-15  Julian Brown  <julian@codesourcery.com>
+
+	Issue #7486
+
+	gcc/
+	* config/arm/arm.c (arm_libcall_uses_aapcs_base)
+	(arm_init_cumulative_args): Use correct ABI for double-precision
+	helper functions in hard-float mode if only single-precision
+	arithmetic is supported in hardware.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+ 	Backport from FSF mainline:
+ 
+ 	Julian Brown  <julian@codesourcery.com>
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-08-13 10:30:35 +0000
++++ new/gcc/config/arm/arm.c	2010-08-13 10:43:42 +0000
+@@ -3453,6 +3453,28 @@
+ 		   convert_optab_libfunc (sfix_optab, DImode, SFmode));
+       add_libcall (libcall_htab,
+ 		   convert_optab_libfunc (ufix_optab, DImode, SFmode));
++
++      /* Values from double-precision helper functions are returned in core
++	 registers if the selected core only supports single-precision
++	 arithmetic, even if we are using the hard-float ABI.  */
++      if (TARGET_VFP)
++        {
++	  add_libcall (libcall_htab, optab_libfunc (add_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (sdiv_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (smul_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (neg_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (sub_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (eq_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (lt_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (le_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (ge_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (gt_optab, DFmode));
++	  add_libcall (libcall_htab, optab_libfunc (unord_optab, DFmode));
++	  add_libcall (libcall_htab,
++		       convert_optab_libfunc (sext_optab, DFmode, SFmode));
++	  add_libcall (libcall_htab,
++		       convert_optab_libfunc (trunc_optab, SFmode, DFmode));
++	}
+     }
+ 
+   return libcall && htab_find (libcall_htab, libcall) != NULL;
+@@ -4406,6 +4428,31 @@
+       if (arm_libcall_uses_aapcs_base (libname))
+ 	pcum->pcs_variant = ARM_PCS_AAPCS;
+  
++      /* We must pass arguments to double-precision helper functions in core
++         registers if we only have hardware support for single-precision
++	 arithmetic, even if we are using the hard-float ABI.  */
++      if (TARGET_VFP
++          && (rtx_equal_p (libname, optab_libfunc (add_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (sdiv_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (smul_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (neg_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (sub_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (eq_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (lt_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (le_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (ge_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (gt_optab, DFmode))
++	      || rtx_equal_p (libname, optab_libfunc (unord_optab, DFmode))
++	      || rtx_equal_p (libname, convert_optab_libfunc (sext_optab,
++							      DFmode, SFmode))
++	      || rtx_equal_p (libname, convert_optab_libfunc (trunc_optab,
++							      SFmode, DFmode))
++	      || rtx_equal_p (libname, convert_optab_libfunc (sfix_optab,
++							      SImode, DFmode))
++	      || rtx_equal_p (libname, convert_optab_libfunc (ufix_optab,
++							      SImode, DFmode))))
++        pcum->pcs_variant = ARM_PCS_AAPCS;
++ 
+       pcum->aapcs_ncrn = pcum->aapcs_next_ncrn = 0;
+       pcum->aapcs_reg = NULL_RTX;
+       pcum->aapcs_partial = 0;
+

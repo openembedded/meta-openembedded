@@ -1,0 +1,184 @@
+	Jie Zhang  <jie@codesourcery.com>
+
+	Issue #7122
+
+	gcc/
+	* config/arm/vfp.md (movdf_vfp): Add load double 0.0 case.
+	(thumb2_movdf_vfp): Likewise. Require that one of the operands be a
+	register.
+	* config/arm/constraints.md (D0): New constraint.
+	
+	gcc/testsuite/
+	* gcc.target/arm/neon-load-df0.c: New test.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Merge from Sourcery G++ 4.4:
+
+ 	2010-02-23  Julian Brown  <julian@codesourcery.com>
+ 
+ 	gcc/
+
+=== modified file 'gcc/config/arm/constraints.md'
+--- old/gcc/config/arm/constraints.md	2010-08-12 16:47:21 +0000
++++ new/gcc/config/arm/constraints.md	2010-08-13 10:59:06 +0000
+@@ -29,7 +29,7 @@
+ ;; in Thumb-1 state: I, J, K, L, M, N, O
+ 
+ ;; The following multi-letter normal constraints have been used:
+-;; in ARM/Thumb-2 state: Da, Db, Dc, Dn, Dl, DL, Dv, Dy, Di
++;; in ARM/Thumb-2 state: D0, Da, Db, Dc, Di, Dn, Dl, DL, Dv, Dy
+ ;; in Thumb-1 state: Pa, Pb
+ ;; in Thumb-2 state: Ps, Pt, Pv
+ 
+@@ -173,6 +173,13 @@
+  (and (match_code "const_double")
+       (match_test "TARGET_32BIT && neg_const_double_rtx_ok_for_fpa (op)")))
+ 
++(define_constraint "D0"
++ "@internal
++  In ARM/Thumb-2 state a 0.0 floating point constant which can
++  be loaded with a Neon vmov immediate instruction."
++ (and (match_code "const_double")
++      (match_test "TARGET_NEON && op == CONST0_RTX (mode)")))
++
+ (define_constraint "Da"
+  "@internal
+   In ARM/Thumb-2 state a const_int, const_double or const_vector that can
+
+=== modified file 'gcc/config/arm/vfp.md'
+--- old/gcc/config/arm/vfp.md	2010-08-12 11:29:02 +0000
++++ new/gcc/config/arm/vfp.md	2010-08-13 10:59:06 +0000
+@@ -402,8 +402,8 @@
+ ;; DFmode moves
+ 
+ (define_insn "*movdf_vfp"
+-  [(set (match_operand:DF 0 "nonimmediate_soft_df_operand" "=w,?r,w ,r, m,w  ,Uv,w,r")
+-	(match_operand:DF 1 "soft_df_operand"		   " ?r,w,Dy,mF,r,UvF,w, w,r"))]
++  [(set (match_operand:DF 0 "nonimmediate_soft_df_operand" "=w,?r,w ,w, r, m,w  ,Uv,w,r")
++	(match_operand:DF 1 "soft_df_operand"		   " ?r,w,Dy,D0,mF,r,UvF,w, w,r"))]
+   "TARGET_ARM && TARGET_HARD_FLOAT && TARGET_VFP
+    && (   register_operand (operands[0], DFmode)
+        || register_operand (operands[1], DFmode))"
+@@ -418,16 +418,18 @@
+       case 2:
+ 	gcc_assert (TARGET_VFP_DOUBLE);
+         return \"fconstd%?\\t%P0, #%G1\";
+-      case 3: case 4:
++      case 3:
++	return \"vmov.i32\\t%P0, #0\";
++      case 4: case 5:
+ 	return output_move_double (operands);
+-      case 5: case 6:
++      case 6: case 7:
+ 	return output_move_vfp (operands);
+-      case 7:
++      case 8:
+ 	if (TARGET_VFP_SINGLE)
+ 	  return \"fcpys%?\\t%0, %1\;fcpys%?\\t%p0, %p1\";
+ 	else
+ 	  return \"fcpyd%?\\t%P0, %P1\";
+-      case 8:
++      case 9:
+         return \"#\";
+       default:
+ 	gcc_unreachable ();
+@@ -435,10 +437,10 @@
+     }
+   "
+   [(set_attr "type"
+-     "r_2_f,f_2_r,fconstd,f_loadd,f_stored,load2,store2,ffarithd,*")
+-   (set_attr "neon_type" "neon_mcr_2_mcrr,neon_mrrc,*,*,*,*,*,neon_vmov,*")
+-   (set (attr "length") (cond [(eq_attr "alternative" "3,4,8") (const_int 8)
+-			       (eq_attr "alternative" "7")
++     "r_2_f,f_2_r,fconstd,*,f_loadd,f_stored,load2,store2,ffarithd,*")
++   (set_attr "neon_type" "neon_mcr_2_mcrr,neon_mrrc,*,neon_vmov,*,*,*,*,neon_vmov,*")
++   (set (attr "length") (cond [(eq_attr "alternative" "4,5,9") (const_int 8)
++			       (eq_attr "alternative" "8")
+ 				(if_then_else
+ 				 (eq (symbol_ref "TARGET_VFP_SINGLE")
+ 				     (const_int 1))
+@@ -446,14 +448,16 @@
+ 				 (const_int 4))]
+ 			      (const_int 4)))
+    (set_attr "predicable" "yes")
+-   (set_attr "pool_range" "*,*,*,1020,*,1020,*,*,*")
+-   (set_attr "neg_pool_range" "*,*,*,1008,*,1008,*,*,*")]
++   (set_attr "pool_range" "*,*,*,*,1020,*,1020,*,*,*")
++   (set_attr "neg_pool_range" "*,*,*,*,1008,*,1008,*,*,*")]
+ )
+ 
+ (define_insn "*thumb2_movdf_vfp"
+-  [(set (match_operand:DF 0 "nonimmediate_soft_df_operand" "=w,?r,w ,r, m,w  ,Uv,w,r")
+-	(match_operand:DF 1 "soft_df_operand"		   " ?r,w,Dy,mF,r,UvF,w, w,r"))]
+-  "TARGET_THUMB2 && TARGET_HARD_FLOAT && TARGET_VFP"
++  [(set (match_operand:DF 0 "nonimmediate_soft_df_operand" "=w,?r,w ,w,r, m,w  ,Uv,w,r")
++	(match_operand:DF 1 "soft_df_operand"		   " ?r,w,Dy,D0,mF,r,UvF,w, w,r"))]
++  "TARGET_THUMB2 && TARGET_HARD_FLOAT && TARGET_VFP
++   && (   register_operand (operands[0], DFmode)
++       || register_operand (operands[1], DFmode))"
+   "*
+   {
+     switch (which_alternative)
+@@ -465,11 +469,13 @@
+       case 2:
+ 	gcc_assert (TARGET_VFP_DOUBLE);
+ 	return \"fconstd%?\\t%P0, #%G1\";
+-      case 3: case 4: case 8:
++      case 3:
++	return \"vmov.i32\\t%P0, #0\";
++      case 4: case 5: case 9:
+ 	return output_move_double (operands);
+-      case 5: case 6:
++      case 6: case 7:
+ 	return output_move_vfp (operands);
+-      case 7:
++      case 8:
+ 	if (TARGET_VFP_SINGLE)
+ 	  return \"fcpys%?\\t%0, %1\;fcpys%?\\t%p0, %p1\";
+ 	else
+@@ -480,18 +486,18 @@
+     }
+   "
+   [(set_attr "type"
+-     "r_2_f,f_2_r,fconstd,load2,store2,f_load,f_store,ffarithd,*")
+-   (set_attr "neon_type" "neon_mcr_2_mcrr,neon_mrrc,*,*,*,*,*,neon_vmov,*")
+-   (set (attr "length") (cond [(eq_attr "alternative" "3,4,8") (const_int 8)
+-			       (eq_attr "alternative" "7")
++     "r_2_f,f_2_r,fconstd,*,load2,store2,f_load,f_store,ffarithd,*")
++   (set_attr "neon_type" "neon_mcr_2_mcrr,neon_mrrc,*,neon_vmov,*,*,*,*,neon_vmov,*")
++   (set (attr "length") (cond [(eq_attr "alternative" "4,5,9") (const_int 8)
++			       (eq_attr "alternative" "8")
+ 				(if_then_else
+ 				 (eq (symbol_ref "TARGET_VFP_SINGLE")
+ 				     (const_int 1))
+ 				 (const_int 8)
+ 				 (const_int 4))]
+ 			      (const_int 4)))
+-   (set_attr "pool_range" "*,*,*,4096,*,1020,*,*,*")
+-   (set_attr "neg_pool_range" "*,*,*,0,*,1008,*,*,*")]
++   (set_attr "pool_range" "*,*,*,*,4096,*,1020,*,*,*")
++   (set_attr "neg_pool_range" "*,*,*,*,0,*,1008,*,*,*")]
+ )
+ 
+ 
+
+=== added file 'gcc/testsuite/gcc.target/arm/neon-load-df0.c'
+--- old/gcc/testsuite/gcc.target/arm/neon-load-df0.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/neon-load-df0.c	2010-08-13 10:59:06 +0000
+@@ -0,0 +1,14 @@
++/* Test the optimization of loading 0.0 for ARM Neon.  */
++
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O2" } */
++/* { dg-add-options arm_neon } */
++
++double x;
++void bar ()
++{
++  x = 0.0;
++}
++/* { dg-final { scan-assembler "vmov\.i32\[ 	\]+\[dD\]\[0-9\]+, #0\n" } } */
++/* { dg-final { cleanup-saved-temps } } */
+

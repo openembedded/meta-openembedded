@@ -1,0 +1,43 @@
+2010-09-08  Tom de Vries  <tom@codesourcery.com>
+
+	gcc/
+	* gcc/emit-rtl.c (set_mem_attributes_minus_bitpos): Set MEM_READONLY_P
+	for static const strings.
+	* gcc/testsuite/gcc.dg/memcpy-3.c: New test.
+
+ 2010-09-13  Andrew Stubbs  <ams@codesourcery.com>
+ 
+ 	gcc/
+
+=== modified file 'gcc/emit-rtl.c'
+--- old/gcc/emit-rtl.c	2009-11-27 12:00:28 +0000
++++ new/gcc/emit-rtl.c	2010-09-15 16:40:06 +0000
+@@ -1648,6 +1648,11 @@
+ 	  MEM_READONLY_P (ref) = 1;
+ 	}
+ 
++      /* Mark static const strings readonly as well.  */
++      if (base && TREE_CODE (base) == STRING_CST && TREE_READONLY (base)
++	  && TREE_STATIC (base))
++	MEM_READONLY_P (ref) = 1;
++
+       /* If this expression uses it's parent's alias set, mark it such
+ 	 that we won't change it.  */
+       if (component_uses_parent_alias_set (t))
+
+=== added file 'gcc/testsuite/gcc.dg/memcpy-3.c'
+--- old/gcc/testsuite/gcc.dg/memcpy-3.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/memcpy-3.c	2010-09-15 16:40:06 +0000
+@@ -0,0 +1,11 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -fdump-rtl-expand" } */
++
++void
++f1 (char *p)
++{
++  __builtin_memcpy (p, "123", 3);
++}
++
++/* { dg-final { scan-rtl-dump-times "mem/s/u:" 3 "expand" { target mips*-*-* } } } */
++/* { dg-final { cleanup-rtl-dump "expand" } } */
+

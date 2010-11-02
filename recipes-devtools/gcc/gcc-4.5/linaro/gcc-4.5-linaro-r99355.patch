@@ -1,0 +1,181 @@
+	2010-04-12  Andrew Stubbs  <ams@codesourcery.com>
+
+	Issue #7178
+
+	gcc/
+	* config/arm/arm.c (arm_init_libfuncs): Change __gnu_f2h_ieee to
+	__aeabi_f2h, __gnu_f2h_alternative to __aeabi_f2h_alt, __gnu_h2f_ieee
+	to __aeabi_h2f, and __gnu_h2f_alternative to __aeabi_h2f_alt.
+	* config/arm/fp16.c (__gnu_f2h_internal): Change return type to
+	unsigned int. Change 'sign' variable likewise.
+	(__gnu_h2f_internal): Set to static inline.
+	Change return type to unsigned int. Change 'sign' variable likewise.
+	(ALIAS): New define.
+	(__gnu_f2h_ieee): Change unsigned short to unsigned int.
+	(__gnu_h2f_ieee): Likewise.
+	(__gnu_f2h_alternative): Likewise.
+	(__gnu_h2f_alternative): Likewise.
+	(__aeabi_f2h, __aeabi_h2f): New aliases.
+	(__aeabi_f2h_alt, __aeabi_h2f_alt): Likewise.
+	* config/arm/sfp-machine.h (__extendhfsf2): Set to __aeabi_h2f.
+	(__truncsfhf2): Set to __aeabi_f2h.
+
+	gcc/testsuite/
+	* g++.dg/ext/arm-fp16/arm-fp16-ops-5.C: Check for __aeabi_h2f
+	and __aeabi_f2h.
+	* g++.dg/ext/arm-fp16/arm-fp16-ops-6.C: Likewise.
+	* gcc.dg/torture/arm-fp16-ops-5.c: Likewise.
+	* gcc.dg/torture/arm-fp16-ops-6.c: Likewise.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Merge from Sourcery G++ 4.4:
+
+ 	Richard Earnshaw  <rearnsha@arm.com>
+ 
+ 	gcc/
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-08-13 11:02:47 +0000
++++ new/gcc/config/arm/arm.c	2010-08-13 14:08:20 +0000
+@@ -1054,12 +1054,12 @@
+       /* Conversions.  */
+       set_conv_libfunc (trunc_optab, HFmode, SFmode,
+ 			(arm_fp16_format == ARM_FP16_FORMAT_IEEE
+-			 ? "__gnu_f2h_ieee"
+-			 : "__gnu_f2h_alternative"));
++			 ? "__aeabi_f2h"
++			 : "__aeabi_f2h_alt"));
+       set_conv_libfunc (sext_optab, SFmode, HFmode, 
+ 			(arm_fp16_format == ARM_FP16_FORMAT_IEEE
+-			 ? "__gnu_h2f_ieee"
+-			 : "__gnu_h2f_alternative"));
++			 ? "__aeabi_h2f"
++			 : "__aeabi_h2f_alt"));
+       
+       /* Arithmetic.  */
+       set_optab_libfunc (add_optab, HFmode, NULL);
+
+=== modified file 'gcc/config/arm/fp16.c'
+--- old/gcc/config/arm/fp16.c	2009-06-18 11:26:37 +0000
++++ new/gcc/config/arm/fp16.c	2010-08-13 14:08:20 +0000
+@@ -22,10 +22,10 @@
+    see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+    <http://www.gnu.org/licenses/>.  */
+ 
+-static inline unsigned short
++static inline unsigned int
+ __gnu_f2h_internal(unsigned int a, int ieee)
+ {
+-  unsigned short sign = (a >> 16) & 0x8000;
++  unsigned int sign = (a >> 16) & 0x8000;
+   int aexp = (a >> 23) & 0xff;
+   unsigned int mantissa = a & 0x007fffff;
+   unsigned int mask;
+@@ -95,10 +95,10 @@
+   return sign | (((aexp + 14) << 10) + (mantissa >> 13));
+ }
+ 
+-unsigned int
+-__gnu_h2f_internal(unsigned short a, int ieee)
++static inline unsigned int
++__gnu_h2f_internal(unsigned int a, int ieee)
+ {
+-  unsigned int sign = (unsigned int)(a & 0x8000) << 16;
++  unsigned int sign = (a & 0x00008000) << 16;
+   int aexp = (a >> 10) & 0x1f;
+   unsigned int mantissa = a & 0x3ff;
+ 
+@@ -120,26 +120,33 @@
+   return sign | (((aexp + 0x70) << 23) + (mantissa << 13));
+ }
+ 
+-unsigned short
++#define ALIAS(src, dst) \
++  typeof (src) dst __attribute__ ((alias (#src)));
++
++unsigned int
+ __gnu_f2h_ieee(unsigned int a)
+ {
+   return __gnu_f2h_internal(a, 1);
+ }
++ALIAS (__gnu_f2h_ieee, __aeabi_f2h)
+ 
+ unsigned int
+-__gnu_h2f_ieee(unsigned short a)
++__gnu_h2f_ieee(unsigned int a)
+ {
+   return __gnu_h2f_internal(a, 1);
+ }
++ALIAS (__gnu_h2f_ieee, __aeabi_h2f)
+ 
+-unsigned short
++unsigned int
+ __gnu_f2h_alternative(unsigned int x)
+ {
+   return __gnu_f2h_internal(x, 0);
+ }
++ALIAS (__gnu_f2h_alternative, __aeabi_f2h_alt)
+ 
+ unsigned int
+-__gnu_h2f_alternative(unsigned short a)
++__gnu_h2f_alternative(unsigned int a)
+ {
+   return __gnu_h2f_internal(a, 0);
+ }
++ALIAS (__gnu_h2f_alternative, __aeabi_h2f_alt)
+
+=== modified file 'gcc/config/arm/sfp-machine.h'
+--- old/gcc/config/arm/sfp-machine.h	2009-06-18 11:26:37 +0000
++++ new/gcc/config/arm/sfp-machine.h	2010-08-13 14:08:20 +0000
+@@ -99,7 +99,7 @@
+ #define __fixdfdi	__aeabi_d2lz
+ #define __fixunsdfdi	__aeabi_d2ulz
+ #define __floatdidf	__aeabi_l2d
+-#define __extendhfsf2	__gnu_h2f_ieee
+-#define __truncsfhf2	__gnu_f2h_ieee
++#define __extendhfsf2	__aeabi_h2f
++#define __truncsfhf2	__aeabi_f2h
+ 
+ #endif /* __ARM_EABI__ */
+
+=== modified file 'gcc/testsuite/g++.dg/ext/arm-fp16/arm-fp16-ops-5.C'
+--- old/gcc/testsuite/g++.dg/ext/arm-fp16/arm-fp16-ops-5.C	2010-07-29 15:38:15 +0000
++++ new/gcc/testsuite/g++.dg/ext/arm-fp16/arm-fp16-ops-5.C	2010-08-13 14:08:20 +0000
+@@ -13,3 +13,5 @@
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h\[a-z\]*_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h2f_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_f2h_ieee" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_h2f" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_f2h" } } */
+
+=== modified file 'gcc/testsuite/g++.dg/ext/arm-fp16/arm-fp16-ops-6.C'
+--- old/gcc/testsuite/g++.dg/ext/arm-fp16/arm-fp16-ops-6.C	2010-07-29 15:38:15 +0000
++++ new/gcc/testsuite/g++.dg/ext/arm-fp16/arm-fp16-ops-6.C	2010-08-13 14:08:20 +0000
+@@ -13,3 +13,5 @@
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h\[a-z\]*_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h2f_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_f2h_ieee" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_h2f" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_f2h" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/torture/arm-fp16-ops-5.c'
+--- old/gcc/testsuite/gcc.dg/torture/arm-fp16-ops-5.c	2010-07-29 15:38:15 +0000
++++ new/gcc/testsuite/gcc.dg/torture/arm-fp16-ops-5.c	2010-08-13 14:08:20 +0000
+@@ -13,3 +13,5 @@
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h\[a-z\]*_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h2f_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_f2h_ieee" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_h2f" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_f2h" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/torture/arm-fp16-ops-6.c'
+--- old/gcc/testsuite/gcc.dg/torture/arm-fp16-ops-6.c	2010-07-29 15:38:15 +0000
++++ new/gcc/testsuite/gcc.dg/torture/arm-fp16-ops-6.c	2010-08-13 14:08:20 +0000
+@@ -13,3 +13,5 @@
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h\[a-z\]*_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_h2f_ieee" } } */
+ /* { dg-final { scan-assembler-not "\tbl\t__gnu_f2h_ieee" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_h2f" } } */
++/* { dg-final { scan-assembler-not "\tbl\t__aeabi_f2h" } } */
+

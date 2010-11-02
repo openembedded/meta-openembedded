@@ -1,0 +1,512 @@
+2010-09-06  Mark Mitchell  <mark@codesourcery.com>
+
+	Issue #9022
+
+	Backport from mainline:
+	2010-09-05  Mark Mitchell  <mark@codesourcery.com>
+	* doc/invoke.texi: Document -Wdouble-promotion.
+	* c-typeck.c (convert_arguments): Check for implicit conversions
+	from float to double.
+	(do_warn_double_promotion): New function.
+	(build_conditional_expr): Use it.
+	(build_binary_op): Likewise.
+	* c.opt (Wdouble-promotion): New.
+	2010-09-05  Mark Mitchell  <mark@codesourcery.com>
+	* gcc.dg/Wdouble-promotion.c: New.
+	2010-09-06  Mark Mitchell  <mark@codesourcery.com>
+	gcc/
+	* c-common.h (do_warn_double_promotion): Declare.
+	* c-common.c (do_warn_double_promotion): Define.
+	* c-typeck.c (do_warn_double_promotion): Remove.
+	* doc/invoke.texi (-Wdouble-promotion): Note available for C++ and
+	Objective-C++ too.
+	gcc/cp/
+	* typeck.c (cp_build_binary_op): Call do_warn_double_promotion.
+	* call.c (build_conditional_expr): Likewise.
+	(convert_arg_to_ellipsis): Likewise.
+	gcc/testsuite/
+	* g++.dg/warn/Wdouble-promotion.C: New.
+
+ 2010-08-31  Chung-Lin Tang  <cltang@codesourcery.com>
+ 
+ 	Backport from mainline:
+
+=== modified file 'gcc/c-common.c'
+--- old/gcc/c-common.c	2010-06-25 09:35:40 +0000
++++ new/gcc/c-common.c	2010-09-07 15:47:57 +0000
+@@ -9172,6 +9172,40 @@
+     }
+ }
+ 
++/* RESULT_TYPE is the result of converting TYPE1 and TYPE2 to a common
++   type via c_common_type.  If -Wdouble-promotion is in use, and the
++   conditions for warning have been met, issue a warning.  GMSGID is
++   the warning message.  It must have two %T specifiers for the type
++   that was converted (generally "float") and the type to which it was
++   converted (generally "double), respectively.  LOC is the location
++   to which the awrning should refer.  */
++
++void
++do_warn_double_promotion (tree result_type, tree type1, tree type2,
++			 const char *gmsgid, location_t loc)
++{
++  tree source_type;
++
++  if (!warn_double_promotion)
++    return;
++  /* If the conversion will not occur at run-time, there is no need to
++     warn about it.  */
++  if (c_inhibit_evaluation_warnings)
++    return;
++  if (TYPE_MAIN_VARIANT (result_type) != double_type_node
++      && TYPE_MAIN_VARIANT (result_type) != complex_double_type_node)
++    return;
++  if (TYPE_MAIN_VARIANT (type1) == float_type_node
++      || TYPE_MAIN_VARIANT (type1) == complex_float_type_node)
++    source_type = type1;
++  else if (TYPE_MAIN_VARIANT (type2) == float_type_node
++	   || TYPE_MAIN_VARIANT (type2) == complex_float_type_node)
++    source_type = type2;
++  else
++    return;
++  warning_at (loc, OPT_Wdouble_promotion, gmsgid, source_type, result_type);
++}
++
+ /* Setup a TYPE_DECL node as a typedef representation.
+ 
+    X is a TYPE_DECL for a typedef statement.  Create a brand new
+
+=== modified file 'gcc/c-common.h'
+--- old/gcc/c-common.h	2009-12-17 03:22:22 +0000
++++ new/gcc/c-common.h	2010-09-07 15:47:57 +0000
+@@ -1056,6 +1056,8 @@
+ 				   tree op0, tree op1,
+ 				   tree result_type,
+ 				   enum tree_code resultcode);
++extern void do_warn_double_promotion (tree, tree, tree, const char *, 
++				      location_t);
+ extern void set_underlying_type (tree x);
+ extern bool is_typedef_decl (tree x);
+ extern VEC(tree,gc) *make_tree_vector (void);
+
+=== modified file 'gcc/c-typeck.c'
+--- old/gcc/c-typeck.c	2010-04-02 18:54:46 +0000
++++ new/gcc/c-typeck.c	2010-09-07 15:47:57 +0000
+@@ -3012,8 +3012,15 @@
+ 	  if (type_generic)
+ 	    parmval = val;
+ 	  else
+-	    /* Convert `float' to `double'.  */
+-	    parmval = convert (double_type_node, val);
++	    {
++	      /* Convert `float' to `double'.  */
++	      if (warn_double_promotion && !c_inhibit_evaluation_warnings)
++		warning (OPT_Wdouble_promotion,
++			 "implicit conversion from %qT to %qT when passing "
++			 "argument to function",
++			 valtype, double_type_node);
++	      parmval = convert (double_type_node, val);
++	    }
+ 	}
+       else if (excess_precision && !type_generic)
+ 	/* A "double" argument with excess precision being passed
+@@ -4036,6 +4043,10 @@
+ 	       || code2 == COMPLEX_TYPE))
+     {
+       result_type = c_common_type (type1, type2);
++      do_warn_double_promotion (result_type, type1, type2,
++				"implicit conversion from %qT to %qT to "
++				"match other result of conditional",
++				colon_loc);
+ 
+       /* If -Wsign-compare, warn here if type1 and type2 have
+ 	 different signedness.  We'll promote the signed to unsigned
+@@ -9607,6 +9618,11 @@
+       if (shorten || common || short_compare)
+ 	{
+ 	  result_type = c_common_type (type0, type1);
++	  do_warn_double_promotion (result_type, type0, type1,
++				    "implicit conversion from %qT to %qT "
++				    "to match other operand of binary "
++				    "expression",
++				    location);
+ 	  if (result_type == error_mark_node)
+ 	    return error_mark_node;
+ 	}
+
+=== modified file 'gcc/c.opt'
+--- old/gcc/c.opt	2010-04-02 18:54:46 +0000
++++ new/gcc/c.opt	2010-09-07 15:47:57 +0000
+@@ -265,6 +265,10 @@
+ Wimplicit
+ C ObjC C++ ObjC++ Warning
+ 
++Wdouble-promotion
++C ObjC C++ ObjC++ Var(warn_double_promotion) Warning
++Warn about implicit conversions from \"float\" to \"double\"
++
+ Wimplicit-function-declaration
+ C ObjC Var(warn_implicit_function_declaration) Init(-1) Warning
+ Warn about implicit function declarations
+
+=== modified file 'gcc/cp/call.c'
+--- old/gcc/cp/call.c	2010-07-08 13:08:36 +0000
++++ new/gcc/cp/call.c	2010-09-07 15:47:57 +0000
+@@ -3946,6 +3946,10 @@
+       /* In this case, there is always a common type.  */
+       result_type = type_after_usual_arithmetic_conversions (arg2_type,
+ 							     arg3_type);
++      do_warn_double_promotion (result_type, arg2_type, arg3_type,
++				"implicit conversion from %qT to %qT to "
++				"match other result of conditional",
++				input_location);
+ 
+       if (TREE_CODE (arg2_type) == ENUMERAL_TYPE
+ 	  && TREE_CODE (arg3_type) == ENUMERAL_TYPE)
+@@ -5179,11 +5183,14 @@
+ tree
+ convert_arg_to_ellipsis (tree arg)
+ {
++  tree arg_type;
++
+   /* [expr.call]
+ 
+      The lvalue-to-rvalue, array-to-pointer, and function-to-pointer
+      standard conversions are performed.  */
+   arg = decay_conversion (arg);
++  arg_type = TREE_TYPE (arg);
+   /* [expr.call]
+ 
+      If the argument has integral or enumeration type that is subject
+@@ -5191,19 +5198,27 @@
+      type that is subject to the floating point promotion
+      (_conv.fpprom_), the value of the argument is converted to the
+      promoted type before the call.  */
+-  if (TREE_CODE (TREE_TYPE (arg)) == REAL_TYPE
+-      && (TYPE_PRECISION (TREE_TYPE (arg))
++  if (TREE_CODE (arg_type) == REAL_TYPE
++      && (TYPE_PRECISION (arg_type)
+ 	  < TYPE_PRECISION (double_type_node))
+-      && !DECIMAL_FLOAT_MODE_P (TYPE_MODE (TREE_TYPE (arg))))
+-    arg = convert_to_real (double_type_node, arg);
+-  else if (INTEGRAL_OR_ENUMERATION_TYPE_P (TREE_TYPE (arg)))
++      && !DECIMAL_FLOAT_MODE_P (TYPE_MODE (arg_type)))
++    {
++      if (warn_double_promotion && !c_inhibit_evaluation_warnings)
++	warning (OPT_Wdouble_promotion,
++		 "implicit conversion from %qT to %qT when passing "
++		 "argument to function",
++		 arg_type, double_type_node);
++      arg = convert_to_real (double_type_node, arg);
++    }
++  else if (INTEGRAL_OR_ENUMERATION_TYPE_P (arg_type))
+     arg = perform_integral_promotions (arg);
+ 
+   arg = require_complete_type (arg);
++  arg_type = TREE_TYPE (arg);
+ 
+   if (arg != error_mark_node
+-      && (type_has_nontrivial_copy_init (TREE_TYPE (arg))
+-	  || TYPE_HAS_NONTRIVIAL_DESTRUCTOR (TREE_TYPE (arg))))
++      && (type_has_nontrivial_copy_init (arg_type)
++	  || TYPE_HAS_NONTRIVIAL_DESTRUCTOR (arg_type)))
+     {
+       /* [expr.call] 5.2.2/7:
+ 	 Passing a potentially-evaluated argument of class type (Clause 9)
+@@ -5218,7 +5233,7 @@
+ 	 it is not potentially-evaluated.  */
+       if (cp_unevaluated_operand == 0)
+ 	error ("cannot pass objects of non-trivially-copyable "
+-	       "type %q#T through %<...%>", TREE_TYPE (arg));
++	       "type %q#T through %<...%>", arg_type);
+     }
+ 
+   return arg;
+
+=== modified file 'gcc/cp/typeck.c'
+--- old/gcc/cp/typeck.c	2010-06-30 21:06:28 +0000
++++ new/gcc/cp/typeck.c	2010-09-07 15:47:57 +0000
+@@ -260,6 +260,7 @@
+   enum tree_code code2 = TREE_CODE (t2);
+   tree attributes;
+ 
++
+   /* In what follows, we slightly generalize the rules given in [expr] so
+      as to deal with `long long' and `complex'.  First, merge the
+      attributes.  */
+@@ -4226,7 +4227,14 @@
+   if (!result_type
+       && arithmetic_types_p
+       && (shorten || common || short_compare))
+-    result_type = cp_common_type (type0, type1);
++    {
++      result_type = cp_common_type (type0, type1);
++      do_warn_double_promotion (result_type, type0, type1,
++				"implicit conversion from %qT to %qT "
++				"to match other operand of binary "
++				"expression",
++				location);
++    }
+ 
+   if (!result_type)
+     {
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2010-08-16 09:41:58 +0000
++++ new/gcc/doc/invoke.texi	2010-09-07 15:47:57 +0000
+@@ -234,8 +234,8 @@
+ -Wchar-subscripts -Wclobbered  -Wcomment @gol
+ -Wconversion  -Wcoverage-mismatch  -Wno-deprecated  @gol
+ -Wno-deprecated-declarations -Wdisabled-optimization  @gol
+--Wno-div-by-zero -Wempty-body  -Wenum-compare -Wno-endif-labels @gol
+--Werror  -Werror=* @gol
++-Wno-div-by-zero -Wdouble-promotion -Wempty-body  -Wenum-compare @gol
++-Wno-endif-labels -Werror  -Werror=* @gol
+ -Wfatal-errors  -Wfloat-equal  -Wformat  -Wformat=2 @gol
+ -Wno-format-contains-nul -Wno-format-extra-args -Wformat-nonliteral @gol
+ -Wformat-security  -Wformat-y2k @gol
+@@ -2976,6 +2976,30 @@
+ comment, or whenever a Backslash-Newline appears in a @samp{//} comment.
+ This warning is enabled by @option{-Wall}.
+ 
++@item -Wdouble-promotion @r{(C, C++, Objective-C and Objective-C++ only)}
++@opindex Wdouble-promotion
++@opindex Wno-double-promotion
++Give a warning when a value of type @code{float} is implicitly
++promoted to @code{double}.  CPUs with a 32-bit ``single-precision''
++floating-point unit implement @code{float} in hardware, but emulate
++@code{double} in software.  On such a machine, doing computations
++using @code{double} values is much more expensive because of the
++overhead required for software emulation.  
++
++It is easy to accidentally do computations with @code{double} because
++floating-point literals are implicitly of type @code{double}.  For
++example, in:
++@smallexample
++@group
++float area(float radius)
++@{
++   return 3.14159 * radius * radius;        
++@}
++@end group
++@end smallexample
++the compiler will perform the entire computation with @code{double}
++because the floating-point literal is a @code{double}.
++
+ @item -Wformat
+ @opindex Wformat
+ @opindex Wno-format
+
+=== added file 'gcc/testsuite/g++.dg/warn/Wdouble-promotion.C'
+--- old/gcc/testsuite/g++.dg/warn/Wdouble-promotion.C	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/g++.dg/warn/Wdouble-promotion.C	2010-09-07 15:47:57 +0000
+@@ -0,0 +1,99 @@
++/* { dg-do compile } */
++/* { dg-options "-Wdouble-promotion" } */
++
++#include <stddef.h>
++
++/* Some targets do not provide <complex.h> so we define I ourselves.  */
++#define I 1.0iF
++#define ID ((_Complex double)I)
++
++float f;
++double d;
++int i;
++long double ld;
++_Complex float cf;
++_Complex double cd;
++_Complex long double cld;
++size_t s;
++
++extern void varargs_fn (int, ...);
++extern void double_fn (double);
++extern float float_fn (void);
++
++void 
++usual_arithmetic_conversions(void) 
++{
++  float local_f;
++  _Complex float local_cf;
++
++  /* Values of type "float" are implicitly converted to "double" or
++     "long double" due to use in arithmetic with "double" or "long
++     double" operands.  */
++  local_f = f + 1.0;         /* { dg-warning "implicit" } */
++  local_f = f - d;           /* { dg-warning "implicit" } */
++  local_f = 1.0f * 1.0;      /* { dg-warning "implicit" } */
++  local_f = 1.0f / d;        /* { dg-warning "implicit" } */
++
++  local_cf = cf + 1.0;       /* { dg-warning "implicit" } */
++  local_cf = cf - d;         /* { dg-warning "implicit" } */
++  local_cf = cf + 1.0 * ID;  /* { dg-warning "implicit" } */
++  local_cf = cf - cd;        /* { dg-warning "implicit" } */
++  
++  local_f = i ? f : d;       /* { dg-warning "implicit" } */
++  i = f == d;                /* { dg-warning "implicit" } */
++  i = d != f;                /* { dg-warning "implicit" } */
++}
++
++void 
++default_argument_promotion (void) 
++{
++  /* Because "f" is part of the variable argument list, it is promoted
++     to "double".  */
++  varargs_fn (1, f);   /* { dg-warning "implicit" } */
++}
++
++/* There is no warning when an explicit cast is used to perform the
++   conversion.  */
++
++void
++casts (void) 
++{
++  float local_f;
++  _Complex float local_cf;
++
++  local_f = (double)f + 1.0;                 /* { dg-bogus "implicit" } */
++  local_f = (double)f - d;                   /* { dg-bogus "implicit" } */
++  local_f = (double)1.0f + 1.0;              /* { dg-bogus "implicit" } */
++  local_f = (double)1.0f - d;                /* { dg-bogus "implicit" } */
++
++  local_cf = (_Complex double)cf + 1.0;      /* { dg-bogus "implicit" } */
++  local_cf = (_Complex double)cf - d;        /* { dg-bogus "implicit" } */
++  local_cf = (_Complex double)cf + 1.0 * ID; /* { dg-bogus "implicit" } */
++  local_cf = (_Complex double)cf - cd;       /* { dg-bogus "implicit" } */
++
++  local_f = i ? (double)f : d;               /* { dg-bogus "implicit" } */
++  i = (double)f == d;                        /* { dg-bogus "implicit" } */
++  i = d != (double)f;                        /* { dg-bogus "implicit" } */
++}
++
++/* There is no warning on conversions that occur in assignment (and
++   assignment-like) contexts.  */
++
++void 
++assignments (void)
++{
++  d = f;           /* { dg-bogus "implicit" } */
++  double_fn (f);   /* { dg-bogus "implicit" } */
++  d = float_fn (); /* { dg-bogus "implicit" } */
++}
++
++/* There is no warning in non-evaluated contexts.  */
++
++void
++non_evaluated (void)
++{
++  s = sizeof (f + 1.0);             /* { dg-bogus "implicit" } */
++  s = __alignof__ (f + 1.0);        /* { dg-bogus "implicit" } */
++  d = (__typeof__(f + 1.0))f;       /* { dg-bogus "implicit" } */
++  s = sizeof (i ? f : d);           /* { dg-bogus "implicit" } */
++}
+
+=== added file 'gcc/testsuite/gcc.dg/Wdouble-promotion.c'
+--- old/gcc/testsuite/gcc.dg/Wdouble-promotion.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/Wdouble-promotion.c	2010-09-07 15:47:57 +0000
+@@ -0,0 +1,104 @@
++/* { dg-do compile } */
++/* { dg-options "-Wdouble-promotion" } */
++
++#include <stddef.h>
++
++/* Some targets do not provide <complex.h> so we define I ourselves.  */
++#define I 1.0iF
++#define ID ((_Complex double)I)
++
++float f;
++double d;
++int i;
++long double ld;
++_Complex float cf;
++_Complex double cd;
++_Complex long double cld;
++size_t s;
++
++extern void unprototyped_fn ();
++extern void varargs_fn (int, ...);
++extern void double_fn (double);
++extern float float_fn (void);
++
++void 
++usual_arithmetic_conversions(void) 
++{
++  float local_f;
++  _Complex float local_cf;
++
++  /* Values of type "float" are implicitly converted to "double" or
++     "long double" due to use in arithmetic with "double" or "long
++     double" operands.  */
++  local_f = f + 1.0;         /* { dg-warning "implicit" } */
++  local_f = f - d;           /* { dg-warning "implicit" } */
++  local_f = 1.0f * 1.0;      /* { dg-warning "implicit" } */
++  local_f = 1.0f / d;        /* { dg-warning "implicit" } */
++
++  local_cf = cf + 1.0;       /* { dg-warning "implicit" } */
++  local_cf = cf - d;         /* { dg-warning "implicit" } */
++  local_cf = cf + 1.0 * ID;  /* { dg-warning "implicit" } */
++  local_cf = cf - cd;        /* { dg-warning "implicit" } */
++  
++  local_f = i ? f : d;       /* { dg-warning "implicit" } */
++  i = f == d;                /* { dg-warning "implicit" } */
++  i = d != f;                /* { dg-warning "implicit" } */
++}
++
++void 
++default_argument_promotion (void) 
++{
++  /* Because there is no prototype, "f" is promoted to "double".  */
++  unprototyped_fn (f); /* { dg-warning "implicit" } */
++  undeclared_fn (f);   /* { dg-warning "implicit" } */
++  /* Because "f" is part of the variable argument list, it is promoted
++     to "double".  */
++  varargs_fn (1, f);   /* { dg-warning "implicit" } */
++}
++
++/* There is no warning when an explicit cast is used to perform the
++   conversion.  */
++
++void
++casts (void) 
++{
++  float local_f;
++  _Complex float local_cf;
++
++  local_f = (double)f + 1.0;                 /* { dg-bogus "implicit" } */
++  local_f = (double)f - d;                   /* { dg-bogus "implicit" } */
++  local_f = (double)1.0f + 1.0;              /* { dg-bogus "implicit" } */
++  local_f = (double)1.0f - d;                /* { dg-bogus "implicit" } */
++
++  local_cf = (_Complex double)cf + 1.0;      /* { dg-bogus "implicit" } */
++  local_cf = (_Complex double)cf - d;        /* { dg-bogus "implicit" } */
++  local_cf = (_Complex double)cf + 1.0 * ID; /* { dg-bogus "implicit" } */
++  local_cf = (_Complex double)cf - cd;       /* { dg-bogus "implicit" } */
++
++  local_f = i ? (double)f : d;               /* { dg-bogus "implicit" } */
++  i = (double)f == d;                        /* { dg-bogus "implicit" } */
++  i = d != (double)f;                        /* { dg-bogus "implicit" } */
++}
++
++/* There is no warning on conversions that occur in assignment (and
++   assignment-like) contexts.  */
++
++void 
++assignments (void)
++{
++  d = f;           /* { dg-bogus "implicit" } */
++  double_fn (f);   /* { dg-bogus "implicit" } */
++  d = float_fn (); /* { dg-bogus "implicit" } */
++}
++
++/* There is no warning in non-evaluated contexts.  */
++
++void
++non_evaluated (void)
++{
++  s = sizeof (f + 1.0);             /* { dg-bogus "implicit" } */
++  s = __alignof__ (f + 1.0);        /* { dg-bogus "implicit" } */
++  d = (__typeof__(f + 1.0))f;       /* { dg-bogus "implicit" } */
++  s = sizeof (i ? f : d);           /* { dg-bogus "implicit" } */
++  s = sizeof (unprototyped_fn (f)); /* { dg-bogus "implicit" } */
++}
+

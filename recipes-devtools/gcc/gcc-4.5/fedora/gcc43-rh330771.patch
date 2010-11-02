@@ -1,0 +1,31 @@
+2007-10-16  Jakub Jelinek  <jakub@redhat.com>
+
+	* Makefile.am (libgcj_tools_la_LIBADD): Add.
+	* Makefile.in: Regenerated.
+
+Index: libjava/Makefile.am
+===================================================================
+--- libjava/Makefile.am.orig	2010-03-21 12:41:37.000000000 -0700
++++ libjava/Makefile.am	2010-06-25 10:22:11.394130458 -0700
+@@ -507,6 +507,8 @@
+ libgcj_tools_la_GCJFLAGS = $(AM_GCJFLAGS) -findirect-dispatch \
+  -fno-bootstrap-classes -fno-indirect-classes \
+  -fsource-filename=$(here)/classpath/tools/all-classes.lst
++## See jv_convert_LDADD.
++libgcj_tools_la_LIBADD = -L$(here)/.libs libgcj.la
+ libgcj_tools_la_LDFLAGS = -rpath $(toolexeclibdir) \
+  -version-info `grep -v '^\#' $(srcdir)/libtool-version` \
+  $(LIBGCJ_LD_SYMBOLIC_FUNCTIONS) $(LIBJAVA_LDFLAGS_NOUNDEF)
+Index: libjava/Makefile.in
+===================================================================
+--- libjava/Makefile.in.orig	2010-04-02 11:18:06.000000000 -0700
++++ libjava/Makefile.in	2010-06-25 10:27:41.841708512 -0700
+@@ -1190,7 +1190,7 @@
+  -version-info `grep -v '^\#' $(srcdir)/libtool-version` \
+  $(LIBGCJ_LD_SYMBOLIC_FUNCTIONS) $(LIBJAVA_LDFLAGS_NOUNDEF)
+ 
+-libgcj_tools_la_LIBADD = libgcj.la -lm
++libgcj_tools_la_LIBADD = -L$(here)/.libs libgcj.la -lm
+ libgcj_tools_la_DEPENDENCIES = libgcj.la libgcj.spec $(am__append_22)
+ libgcj_tools_la_LINK = $(LIBLINK) $(libgcj_tools_la_LDFLAGS)
+ libjvm_la_SOURCES = jni-libjvm.cc

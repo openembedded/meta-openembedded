@@ -1,0 +1,26 @@
+2010-09-15  Jie Zhang  <jie@codesourcery.com>
+
+	Backport from mainline:
+
+	gcc/
+	2010-09-15  Jie Zhang  <jie@codesourcery.com>
+	* config/arm/vfp.md (cmpsf_trap_vfp): Change type from
+	fcmpd to fcmps.
+
+ 2010-09-13  Chung-Lin Tang  <cltang@codesourcery.com>
+ 
+ 	Backport from mainline:
+
+=== modified file 'gcc/config/arm/vfp.md'
+--- old/gcc/config/arm/vfp.md	2010-08-13 15:28:31 +0000
++++ new/gcc/config/arm/vfp.md	2010-09-16 08:57:30 +0000
+@@ -1159,7 +1159,7 @@
+    fcmpes%?\\t%0, %1
+    fcmpezs%?\\t%0"
+   [(set_attr "predicable" "yes")
+-   (set_attr "type" "fcmpd")]
++   (set_attr "type" "fcmps")]
+ )
+ 
+ (define_insn "*cmpdf_vfp"
+

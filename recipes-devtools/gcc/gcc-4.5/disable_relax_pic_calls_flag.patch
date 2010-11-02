@@ -1,0 +1,44 @@
+GCC: disable MASK_RELAX_PIC_CALLS bit
+
+The new feature added after 4.3.3
+"http://www.pubbs.net/200909/gcc/94048-patch-add-support-for-rmipsjalr.html"
+will cause cc1plus eat up all the system memory when build webkit-gtk.
+The function mips_get_pic_call_symbol keeps on recursively calling itself.
+Disable this feature to walk aside the bug.
+
+Signed-off-by: Dongxiao Xu <dongxiao.xu@intel.com>
+
+diff -ruN gcc-4.5.0-orig/gcc/configure gcc-4.5.0/gcc/configure
+--- gcc-4.5.0-orig/gcc/configure	2010-09-17 23:30:21.000000000 +0800
++++ gcc-4.5.0/gcc/configure	2010-09-19 18:21:28.000000000 +0800
+@@ -23945,13 +23945,6 @@
+         rm -f conftest.*
+       fi
+     fi
+-    if test $gcc_cv_as_ld_jalr_reloc = yes; then
+-      if test x$target_cpu_default = x; then
+-        target_cpu_default=MASK_RELAX_PIC_CALLS
+-      else
+-        target_cpu_default="($target_cpu_default)|MASK_RELAX_PIC_CALLS"
+-      fi
+-    fi
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: $gcc_cv_as_ld_jalr_reloc" >&5
+ $as_echo "$gcc_cv_as_ld_jalr_reloc" >&6; }
+ 
+diff -ruN gcc-4.5.0-orig/gcc/configure.ac gcc-4.5.0/gcc/configure.ac
+--- gcc-4.5.0-orig/gcc/configure.ac	2010-09-17 23:30:21.000000000 +0800
++++ gcc-4.5.0/gcc/configure.ac	2010-09-19 18:21:11.000000000 +0800
+@@ -3467,13 +3467,6 @@
+         rm -f conftest.*
+       fi
+     fi
+-    if test $gcc_cv_as_ld_jalr_reloc = yes; then
+-      if test x$target_cpu_default = x; then
+-        target_cpu_default=MASK_RELAX_PIC_CALLS
+-      else
+-        target_cpu_default="($target_cpu_default)|MASK_RELAX_PIC_CALLS"
+-      fi
+-    fi
+     AC_MSG_RESULT($gcc_cv_as_ld_jalr_reloc)
+ 
+     AC_CACHE_CHECK([linker for .eh_frame personality relaxation],

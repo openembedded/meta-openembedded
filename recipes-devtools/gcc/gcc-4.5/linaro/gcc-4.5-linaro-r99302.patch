@@ -1,0 +1,244 @@
+2010-07-09  Sandra Loosemore  <sandra@codesourcery.com>
+
+	Backport from mainline (originally on Sourcery G++ 4.4):
+
+	2010-07-02  Julian Brown  <julian@codesourcery.com>
+		    Sandra Loosemore <sandra@codesourcery.com>
+
+	PR target/43703
+
+	gcc/
+	* config/arm/vec-common.md (add<mode>3, sub<mode>3, smin<mode>3)
+	(smax<mode>3): Disable for NEON float modes when
+	flag_unsafe_math_optimizations is false.
+	* config/arm/neon.md (*add<mode>3_neon, *sub<mode>3_neon)
+	(*mul<mode>3_neon)
+	(mul<mode>3add<mode>_neon, mul<mode>3neg<mode>add<mode>_neon)
+	(reduc_splus_<mode>, reduc_smin_<mode>, reduc_smax_<mode>): Disable
+	for NEON float modes when flag_unsafe_math_optimizations is false.
+	(quad_halves_<code>v4sf): Only enable if flag_unsafe_math_optimizations
+	is true.
+	* doc/invoke.texi (ARM Options): Add note about floating point
+	vectorization requiring -funsafe-math-optimizations.
+
+	gcc/testsuite/
+	* gcc.dg/vect/vect.exp: Add -ffast-math for NEON.
+	* gcc.dg/vect/vect-reduc-6.c: Add XFAIL for NEON.
+
+ 2010-07-08  Sandra Loosemore  <sandra@codesourcery.com>
+ 
+ 	Backport from upstream (originally from Sourcery G++ 4.4):
+
+=== modified file 'gcc/config/arm/neon.md'
+--- old/gcc/config/arm/neon.md	2010-07-29 15:59:12 +0000
++++ new/gcc/config/arm/neon.md	2010-07-29 17:03:20 +0000
+@@ -819,7 +819,7 @@
+   [(set (match_operand:VDQ 0 "s_register_operand" "=w")
+         (plus:VDQ (match_operand:VDQ 1 "s_register_operand" "w")
+ 		  (match_operand:VDQ 2 "s_register_operand" "w")))]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+   "vadd.<V_if_elem>\t%<V_reg>0, %<V_reg>1, %<V_reg>2"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
+@@ -853,7 +853,7 @@
+   [(set (match_operand:VDQ 0 "s_register_operand" "=w")
+         (minus:VDQ (match_operand:VDQ 1 "s_register_operand" "w")
+                    (match_operand:VDQ 2 "s_register_operand" "w")))]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+   "vsub.<V_if_elem>\t%<V_reg>0, %<V_reg>1, %<V_reg>2"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
+@@ -888,7 +888,7 @@
+   [(set (match_operand:VDQ 0 "s_register_operand" "=w")
+         (mult:VDQ (match_operand:VDQ 1 "s_register_operand" "w")
+                   (match_operand:VDQ 2 "s_register_operand" "w")))]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+   "vmul.<V_if_elem>\t%<V_reg>0, %<V_reg>1, %<V_reg>2"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
+@@ -910,7 +910,7 @@
+         (plus:VDQ (mult:VDQ (match_operand:VDQ 2 "s_register_operand" "w")
+                             (match_operand:VDQ 3 "s_register_operand" "w"))
+ 		  (match_operand:VDQ 1 "s_register_operand" "0")))]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+   "vmla.<V_if_elem>\t%<V_reg>0, %<V_reg>2, %<V_reg>3"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
+@@ -932,7 +932,7 @@
+         (minus:VDQ (match_operand:VDQ 1 "s_register_operand" "0")
+                    (mult:VDQ (match_operand:VDQ 2 "s_register_operand" "w")
+                              (match_operand:VDQ 3 "s_register_operand" "w"))))]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+   "vmls.<V_if_elem>\t%<V_reg>0, %<V_reg>2, %<V_reg>3"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
+@@ -1361,7 +1361,7 @@
+                            (parallel [(const_int 0) (const_int 1)]))
+           (vec_select:V2SF (match_dup 1)
+                            (parallel [(const_int 2) (const_int 3)]))))]
+-  "TARGET_NEON"
++  "TARGET_NEON && flag_unsafe_math_optimizations"
+   "<VQH_mnem>.f32\t%P0, %e1, %f1"
+   [(set_attr "vqh_mnem" "<VQH_mnem>")
+    (set (attr "neon_type")
+@@ -1496,7 +1496,7 @@
+ (define_expand "reduc_splus_<mode>"
+   [(match_operand:VD 0 "s_register_operand" "")
+    (match_operand:VD 1 "s_register_operand" "")]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+ {
+   neon_pairwise_reduce (operands[0], operands[1], <MODE>mode,
+ 			&gen_neon_vpadd_internal<mode>);
+@@ -1506,7 +1506,7 @@
+ (define_expand "reduc_splus_<mode>"
+   [(match_operand:VQ 0 "s_register_operand" "")
+    (match_operand:VQ 1 "s_register_operand" "")]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+ {
+   rtx step1 = gen_reg_rtx (<V_HALF>mode);
+   rtx res_d = gen_reg_rtx (<V_HALF>mode);
+@@ -1541,7 +1541,7 @@
+ (define_expand "reduc_smin_<mode>"
+   [(match_operand:VD 0 "s_register_operand" "")
+    (match_operand:VD 1 "s_register_operand" "")]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+ {
+   neon_pairwise_reduce (operands[0], operands[1], <MODE>mode,
+ 			&gen_neon_vpsmin<mode>);
+@@ -1551,7 +1551,7 @@
+ (define_expand "reduc_smin_<mode>"
+   [(match_operand:VQ 0 "s_register_operand" "")
+    (match_operand:VQ 1 "s_register_operand" "")]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+ {
+   rtx step1 = gen_reg_rtx (<V_HALF>mode);
+   rtx res_d = gen_reg_rtx (<V_HALF>mode);
+@@ -1566,7 +1566,7 @@
+ (define_expand "reduc_smax_<mode>"
+   [(match_operand:VD 0 "s_register_operand" "")
+    (match_operand:VD 1 "s_register_operand" "")]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+ {
+   neon_pairwise_reduce (operands[0], operands[1], <MODE>mode,
+ 			&gen_neon_vpsmax<mode>);
+@@ -1576,7 +1576,7 @@
+ (define_expand "reduc_smax_<mode>"
+   [(match_operand:VQ 0 "s_register_operand" "")
+    (match_operand:VQ 1 "s_register_operand" "")]
+-  "TARGET_NEON"
++  "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
+ {
+   rtx step1 = gen_reg_rtx (<V_HALF>mode);
+   rtx res_d = gen_reg_rtx (<V_HALF>mode);
+
+=== modified file 'gcc/config/arm/vec-common.md'
+--- old/gcc/config/arm/vec-common.md	2009-11-11 14:23:03 +0000
++++ new/gcc/config/arm/vec-common.md	2010-07-29 17:03:20 +0000
+@@ -57,7 +57,8 @@
+   [(set (match_operand:VALL 0 "s_register_operand" "")
+         (plus:VALL (match_operand:VALL 1 "s_register_operand" "")
+                    (match_operand:VALL 2 "s_register_operand" "")))]
+-  "TARGET_NEON
++  "(TARGET_NEON && ((<MODE>mode != V2SFmode && <MODE>mode != V4SFmode)
++		    || flag_unsafe_math_optimizations))
+    || (TARGET_REALLY_IWMMXT && VALID_IWMMXT_REG_MODE (<MODE>mode))"
+ {
+ })
+@@ -66,7 +67,8 @@
+   [(set (match_operand:VALL 0 "s_register_operand" "")
+         (minus:VALL (match_operand:VALL 1 "s_register_operand" "")
+                     (match_operand:VALL 2 "s_register_operand" "")))]
+-  "TARGET_NEON
++  "(TARGET_NEON && ((<MODE>mode != V2SFmode && <MODE>mode != V4SFmode)
++		    || flag_unsafe_math_optimizations))
+    || (TARGET_REALLY_IWMMXT && VALID_IWMMXT_REG_MODE (<MODE>mode))"
+ {
+ })
+@@ -75,7 +77,9 @@
+   [(set (match_operand:VALLW 0 "s_register_operand" "")
+         (mult:VALLW (match_operand:VALLW 1 "s_register_operand" "")
+ 		    (match_operand:VALLW 2 "s_register_operand" "")))]
+-  "TARGET_NEON || (<MODE>mode == V4HImode && TARGET_REALLY_IWMMXT)"
++  "(TARGET_NEON && ((<MODE>mode != V2SFmode && <MODE>mode != V4SFmode)
++		    || flag_unsafe_math_optimizations))
++   || (<MODE>mode == V4HImode && TARGET_REALLY_IWMMXT)"
+ {
+ })
+ 
+@@ -83,7 +87,8 @@
+   [(set (match_operand:VALLW 0 "s_register_operand" "")
+ 	(smin:VALLW (match_operand:VALLW 1 "s_register_operand" "")
+ 		    (match_operand:VALLW 2 "s_register_operand" "")))]
+-  "TARGET_NEON
++  "(TARGET_NEON && ((<MODE>mode != V2SFmode && <MODE>mode != V4SFmode)
++		    || flag_unsafe_math_optimizations))
+    || (TARGET_REALLY_IWMMXT && VALID_IWMMXT_REG_MODE (<MODE>mode))"
+ {
+ })
+@@ -101,7 +106,8 @@
+   [(set (match_operand:VALLW 0 "s_register_operand" "")
+ 	(smax:VALLW (match_operand:VALLW 1 "s_register_operand" "")
+ 		    (match_operand:VALLW 2 "s_register_operand" "")))]
+-  "TARGET_NEON
++  "(TARGET_NEON && ((<MODE>mode != V2SFmode && <MODE>mode != V4SFmode)
++		    || flag_unsafe_math_optimizations))
+    || (TARGET_REALLY_IWMMXT && VALID_IWMMXT_REG_MODE (<MODE>mode))"
+ {
+ })
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2010-07-29 15:53:39 +0000
++++ new/gcc/doc/invoke.texi	2010-07-29 17:03:20 +0000
+@@ -9874,6 +9874,14 @@
+ If @option{-msoft-float} is specified this specifies the format of
+ floating point values.
+ 
++If the selected floating-point hardware includes the NEON extension
++(e.g. @option{-mfpu}=@samp{neon}), note that floating-point
++operations will not be used by GCC's auto-vectorization pass unless
++@option{-funsafe-math-optimizations} is also specified.  This is
++because NEON hardware does not fully implement the IEEE 754 standard for
++floating-point arithmetic (in particular denormal values are treated as
++zero), so the use of NEON instructions may lead to a loss of precision.
++
+ @item -mfp16-format=@var{name}
+ @opindex mfp16-format
+ Specify the format of the @code{__fp16} half-precision floating-point type.
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-reduc-6.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-reduc-6.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-reduc-6.c	2010-07-29 17:03:20 +0000
+@@ -49,5 +49,6 @@
+ }
+ 
+ /* need -ffast-math to vectorizer these loops.  */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" } } */
++/* ARM NEON passes -ffast-math to these tests, so expect this to fail.  */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail arm_neon_ok } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect.exp'
+--- old/gcc/testsuite/gcc.dg/vect/vect.exp	2010-07-29 15:38:15 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect.exp	2010-07-29 17:03:20 +0000
+@@ -102,6 +102,10 @@
+     set dg-do-what-default run
+ } elseif [is-effective-target arm_neon_ok] {
+     eval lappend DEFAULT_VECTCFLAGS [add_options_for_arm_neon ""]
++    # NEON does not support denormals, so is not used for vectorization by
++    # default to avoid loss of precision.  We must pass -ffast-math to test
++    # vectorization of float operations.
++    lappend DEFAULT_VECTCFLAGS "-ffast-math"
+     if [is-effective-target arm_neon_hw] {
+       set dg-do-what-default run
+     } else {
+

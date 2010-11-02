@@ -1,0 +1,67 @@
+Index: gcc-4.5/libstdc++-v3/config/locale/generic/c_locale.h
+===================================================================
+--- gcc-4.5.orig/libstdc++-v3/config/locale/generic/c_locale.h	2010-06-30 22:30:53.993316002 -0700
++++ gcc-4.5/libstdc++-v3/config/locale/generic/c_locale.h	2010-06-30 22:31:26.043316001 -0700
+@@ -41,12 +41,17 @@
+ 
+ #include <clocale>
+ #include <cstddef>
++#include <features.h>
++#include <ctype.h>
+ 
+ #define _GLIBCXX_NUM_CATEGORIES 0
+ 
+ _GLIBCXX_BEGIN_NAMESPACE(std)
+-
+-  typedef int*			__c_locale;
++#ifdef __UCLIBC__
++   typedef __ctype_touplow_t*   __c_locale;
++#else
++   typedef int*         __c_locale;
++#endif
+ 
+   // Convert numeric value of type double and long double to string and
+   // return length of string.  If vsnprintf is available use it, otherwise
+Index: gcc-4.5/libstdc++-v3/config/os/gnu-linux/ctype_base.h
+===================================================================
+--- gcc-4.5.orig/libstdc++-v3/config/os/gnu-linux/ctype_base.h	2010-06-30 22:30:54.013316002 -0700
++++ gcc-4.5/libstdc++-v3/config/os/gnu-linux/ctype_base.h	2010-06-30 22:31:26.053316001 -0700
+@@ -33,14 +33,21 @@
+  */
+ 
+ // Information as gleaned from /usr/include/ctype.h
+-  
++
++#include <features.h>
++#include <ctype.h>
++
+ _GLIBCXX_BEGIN_NAMESPACE(std)
+ 
+   /// @brief  Base class for ctype.
+   struct ctype_base
+   {
+     // Non-standard typedefs.
+-    typedef const int* 		__to_type;
++#ifdef __UCLIBC__
++    typedef const __ctype_touplow_t*   __to_type;
++#else
++    typedef const int*         __to_type;
++#endif
+ 
+     // NB: Offsets into ctype<char>::_M_table force a particular size
+     // on the mask type. Because of this, we don't use an enum.
+Index: gcc-4.5/libstdc++-v3/config/locale/generic/c_locale.cc
+===================================================================
+--- gcc-4.5.orig/libstdc++-v3/config/locale/generic/c_locale.cc	2010-06-28 12:12:42.000000000 -0700
++++ gcc-4.5/libstdc++-v3/config/locale/generic/c_locale.cc	2010-06-30 22:31:26.063316001 -0700
+@@ -256,5 +256,10 @@ _GLIBCXX_END_NAMESPACE
+ #ifdef _GLIBCXX_LONG_DOUBLE_COMPAT
+ #define _GLIBCXX_LDBL_COMPAT(dbl, ldbl) \
+   extern "C" void ldbl (void) __attribute__ ((alias (#dbl)))
++#ifdef __UCLIBC__
++// This is because __c_locale is of type __ctype_touplow_t* which is short on uclibc. for glibc its int*
++_GLIBCXX_LDBL_COMPAT(_ZSt14__convert_to_vIdEvPKcRT_RSt12_Ios_IostateRKPs, _ZSt14__convert_to_vIeEvPKcRT_RSt12_Ios_IostateRKPs);
++#else
+ _GLIBCXX_LDBL_COMPAT(_ZSt14__convert_to_vIdEvPKcRT_RSt12_Ios_IostateRKPi, _ZSt14__convert_to_vIeEvPKcRT_RSt12_Ios_IostateRKPi);
++#endif
+ #endif // _GLIBCXX_LONG_DOUBLE_COMPAT

@@ -1,0 +1,63 @@
+Hi,
+
+The attached patch fixes Bugzilla 45847
+(http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45847). When compiling
+without -mvectorize-with-neon-quad and vectorizing scalar widening
+operations that widen words to double words, there are no corresponding
+vector types for DI scalar types. For this scenario, a call to
+get_vect_type_for_scalar_type() returns NULL and an absent NULL-check
+caused this segfault. The attached patch adds this NULL-check. Also,
+this is consistent with all the other places where a NULL-check follows
+a call to get_vect_type_for_scalar_type() in tree-vect-patterns.c. 
+
+Regression tested with arm-linux-gnueabi. OK?
+
+--
+Tejas Belagod
+ARM.
+
+gcc/
+
+2010-10-05  Tejas Belagod  <tejas.belagod@arm.com>
+
+	* tree-vect-patterns.c (vect_recog_widen_mult_pattern): Add NULL
+	check for vectype_out returned by get_vectype_for_scalar_type().
+
+testsuite/
+
+2010-10-05  Tejas Belagod  <tejas.belagod@arm.com>
+
+	* gcc.dg/vect/pr45847.c: New test.
+
+Index: gcc-4.5/gcc/testsuite/gcc.dg/vect/pr45847.c
+===================================================================
+--- /dev/null
++++ gcc-4.5/gcc/testsuite/gcc.dg/vect/pr45847.c
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++
++
++long long foo (long long *__restrict a,  int *__restrict b, int *__restrict c )
++{
++  int i;
++  long long sum=0;
++  for (i=0;i<256;i++)
++   sum += (long long)b[i] * c[i];
++
++  return sum;
++}
++
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+Index: gcc-4.5/gcc/tree-vect-patterns.c
+===================================================================
+--- gcc-4.5.orig/gcc/tree-vect-patterns.c
++++ gcc-4.5/gcc/tree-vect-patterns.c
+@@ -411,6 +411,7 @@ vect_recog_widen_mult_pattern (gimple la
+   /* Check target support  */
+   vectype = get_vectype_for_scalar_type (half_type0);
+   if (!vectype
++      || !get_vectype_for_scalar_type (type)
+       || !supportable_widening_operation (WIDEN_MULT_EXPR, last_stmt, vectype,
+ 					  &dummy, &dummy, &dummy_code,
+ 					  &dummy_code, &dummy_int, &dummy_vec))

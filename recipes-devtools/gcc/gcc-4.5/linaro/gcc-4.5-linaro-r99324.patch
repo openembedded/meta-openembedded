@@ -1,0 +1,109 @@
+	Julian Brown  <julian@codesourcery.com>
+	Mark Shinwell  <mark@codesourcery.com>
+
+	gcc/
+	* regrename.c (addresses.h): Move include of addresses.h after
+	include of flags.h.
+	* recog.c: Likewise.
+	* regcprop.c: Likewise.
+	* config/arm/arm.h (CLASS_LIKELY_SPILLED_P): Check against
+	LO_REGS only for Thumb-1.
+	(MODE_BASE_REG_CLASS): Restrict base registers to those which can
+	be used in short instructions when optimising for size on Thumb-2.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Merge from Sourcery G++ 4.4:
+
+ 	Vladimir Prus  <vladimir@codesourcery.com>
+ 	Julian Brown  <julian@codesourcery.com>
+ 
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2010-08-05 15:20:54 +0000
++++ new/gcc/config/arm/arm.h	2010-08-05 15:28:47 +0000
+@@ -1254,11 +1254,14 @@
+      || reg_classes_intersect_p (VFP_REGS, (CLASS))	\
+    : 0)
+ 
+-/* We need to define this for LO_REGS on thumb.  Otherwise we can end up
+-   using r0-r4 for function arguments, r7 for the stack frame and don't
+-   have enough left over to do doubleword arithmetic.  */
++/* We need to define this for LO_REGS on Thumb-1.  Otherwise we can end up
++   using r0-r4 for function arguments, r7 for the stack frame and don't have
++   enough left over to do doubleword arithmetic.  For Thumb-2 all the
++   potentially problematic instructions accept high registers so this is not
++   necessary.  Care needs to be taken to avoid adding new Thumb-2 patterns
++   that require many low registers.  */
+ #define CLASS_LIKELY_SPILLED_P(CLASS)	\
+-    ((TARGET_THUMB && (CLASS) == LO_REGS)	\
++    ((TARGET_THUMB1 && (CLASS) == LO_REGS)	\
+      || (CLASS) == CC_REG)
+ 
+ /* The class value for index registers, and the one for base regs.  */
+@@ -1269,7 +1272,7 @@
+    when addressing quantities in QI or HI mode; if we don't know the
+    mode, then we must be conservative.  */
+ #define MODE_BASE_REG_CLASS(MODE)					\
+-    (TARGET_32BIT ? CORE_REGS :					\
++    (TARGET_ARM || (TARGET_THUMB2 && !optimize_size) ? CORE_REGS :	\
+      (((MODE) == SImode) ? BASE_REGS : LO_REGS))
+ 
+ /* For Thumb we can not support SP+reg addressing, so we return LO_REGS
+
+=== modified file 'gcc/recog.c'
+--- old/gcc/recog.c	2010-04-02 18:54:46 +0000
++++ new/gcc/recog.c	2010-08-05 15:28:47 +0000
+@@ -31,10 +31,10 @@
+ #include "hard-reg-set.h"
+ #include "recog.h"
+ #include "regs.h"
+-#include "addresses.h"
+ #include "expr.h"
+ #include "function.h"
+ #include "flags.h"
++#include "addresses.h"
+ #include "real.h"
+ #include "toplev.h"
+ #include "basic-block.h"
+
+=== modified file 'gcc/regcprop.c'
+--- old/gcc/regcprop.c	2010-02-26 11:01:28 +0000
++++ new/gcc/regcprop.c	2010-08-05 15:28:47 +0000
+@@ -26,7 +26,6 @@
+ #include "tm_p.h"
+ #include "insn-config.h"
+ #include "regs.h"
+-#include "addresses.h"
+ #include "hard-reg-set.h"
+ #include "basic-block.h"
+ #include "reload.h"
+@@ -34,6 +33,7 @@
+ #include "function.h"
+ #include "recog.h"
+ #include "flags.h"
++#include "addresses.h"
+ #include "toplev.h"
+ #include "obstack.h"
+ #include "timevar.h"
+
+=== modified file 'gcc/regrename.c'
+--- old/gcc/regrename.c	2010-04-02 18:54:46 +0000
++++ new/gcc/regrename.c	2010-08-05 15:28:47 +0000
+@@ -26,7 +26,6 @@
+ #include "tm_p.h"
+ #include "insn-config.h"
+ #include "regs.h"
+-#include "addresses.h"
+ #include "hard-reg-set.h"
+ #include "basic-block.h"
+ #include "reload.h"
+@@ -34,6 +33,7 @@
+ #include "function.h"
+ #include "recog.h"
+ #include "flags.h"
++#include "addresses.h"
+ #include "toplev.h"
+ #include "obstack.h"
+ #include "timevar.h"
+

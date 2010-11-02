@@ -1,0 +1,31 @@
+---
+ gcc/configure    |    2 +-
+ gcc/configure.ac |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+Index: gcc-4.5+svnr155514/gcc/configure
+===================================================================
+--- gcc-4.5+svnr155514.orig/gcc/configure	2009-12-29 22:00:40.000000000 -0800
++++ gcc-4.5+svnr155514/gcc/configure	2009-12-29 23:52:43.381592113 -0800
+@@ -10467,7 +10467,7 @@ else
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+ 	LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+-	${realsrcdir}/configure \
++	CONFIG_SITE= ${realsrcdir}/configure --cache-file=./other.cache \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
+ 	CFLAGS="${saved_CFLAGS}"
+Index: gcc-4.5+svnr155514/gcc/configure.ac
+===================================================================
+--- gcc-4.5+svnr155514.orig/gcc/configure.ac	2009-12-29 22:00:40.000000000 -0800
++++ gcc-4.5+svnr155514/gcc/configure.ac	2009-12-29 23:51:54.589091778 -0800
+@@ -1458,7 +1458,7 @@ else
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+ 	LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+-	${realsrcdir}/configure \
++	CONFIG_SITE= ${realsrcdir}/configure --cache-file=./other.cache \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
+ 	CFLAGS="${saved_CFLAGS}"

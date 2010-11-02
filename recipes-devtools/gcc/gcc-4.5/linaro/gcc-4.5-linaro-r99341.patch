@@ -1,0 +1,28 @@
+	2009-08-26  Julian Brown  <julian@codesourcery.com>
+
+	gcc/config/arm/
+	* uclinux-eabi.h (LINK_GCC_C_SEQUENCE_SPEC): Override definition
+	for uclinux.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Merge from Sourcery G++ 4.4:
+ 	
+ 	2009-08-26  Kazu Hirata  <kazu@codesourcery.com>
+ 
+
+=== modified file 'gcc/config/arm/uclinux-eabi.h'
+--- old/gcc/config/arm/uclinux-eabi.h	2009-02-20 15:20:38 +0000
++++ new/gcc/config/arm/uclinux-eabi.h	2010-08-12 15:23:21 +0000
+@@ -50,6 +50,10 @@
+ #undef ARM_DEFAULT_ABI
+ #define ARM_DEFAULT_ABI ARM_ABI_AAPCS_LINUX
+ 
++#undef LINK_GCC_C_SEQUENCE_SPEC
++#define LINK_GCC_C_SEQUENCE_SPEC \
++  "--start-group %G %L --end-group"
++
+ /* Clear the instruction cache from `beg' to `end'.  This makes an
+    inline system call to SYS_cacheflush.  */
+ #undef CLEAR_INSN_CACHE
+

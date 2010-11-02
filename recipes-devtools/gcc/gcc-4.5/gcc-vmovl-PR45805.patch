@@ -1,0 +1,27 @@
+Source: http://gcc.gnu.org/bugzilla/show_bug.cgi?id=45805
+
+Index: gcc-4.5/gcc/config/arm/neon.md
+===================================================================
+--- gcc-4.5.orig/gcc/config/arm/neon.md	2010-09-28 12:04:38.000000000 -0700
++++ gcc-4.5/gcc/config/arm/neon.md	2010-09-28 12:07:28.026227000 -0700
+@@ -5682,9 +5682,9 @@
+ ;; Vectorize for non-neon-quad case
+ (define_insn "neon_unpack<US>_<mode>"
+  [(set (match_operand:<V_widen> 0 "register_operand" "=w")
+-       (SE:<V_widen> (match_operand:VDI 1 "register_operand" "")))]
++       (SE:<V_widen> (match_operand:VDI 1 "register_operand" "w")))]
+  "TARGET_NEON"
+- "vmovl.<US><V_sz_elem> %q0, %1"
++ "vmovl.<US><V_sz_elem> %q0, %P1"
+   [(set_attr "neon_type" "neon_shift_1")]
+ )
+ 
+@@ -5721,7 +5721,7 @@
+  		       (SE:<V_widen> 
+ 			   (match_operand:VDI 2 "register_operand" "w"))))]
+   "TARGET_NEON"
+-  "vmull.<US><V_sz_elem> %q0, %1, %2"
++  "vmull.<US><V_sz_elem> %q0, %P1, %P2"
+   [(set_attr "neon_type" "neon_shift_1")]
+ )
+ 

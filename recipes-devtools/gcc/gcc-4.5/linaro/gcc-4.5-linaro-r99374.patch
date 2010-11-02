@@ -1,0 +1,72 @@
+2010-08-26  Andrew Stubbs  <ams@codesourcery.com>
+
+	Merge from Ubuntu GCC:
+
+	GCC bugzilla PR objc/41848.
+
+	gcc/
+	* objc/lang-specs.h: Work around ObjC and -fsection-anchors.
+
+	gcc/testsuite/
+	* objc/execute/forward-1.x: Update for ARM.
+
+ 2010-08-25  Andrew Stubbs  <ams@codesourcery.com>
+ 
+ 	Backport from FSF:
+
+=== modified file 'gcc/objc/lang-specs.h'
+--- old/gcc/objc/lang-specs.h	2007-08-02 09:37:36 +0000
++++ new/gcc/objc/lang-specs.h	2010-08-26 14:02:04 +0000
+@@ -26,29 +26,33 @@
+   {"@objective-c",
+      "%{E|M|MM:cc1obj -E %{traditional|ftraditional|traditional-cpp:-traditional-cpp}\
+           %(cpp_options) %(cpp_debug_options)}\
++        %{fsection-anchors: %eGNU Objective C can't use -fsection-anchors} \
+       %{!E:%{!M:%{!MM:\
+ 	%{traditional|ftraditional|traditional-cpp:\
+ %eGNU Objective C no longer supports traditional compilation}\
+ 	%{save-temps|no-integrated-cpp:cc1obj -E %(cpp_options) -o %{save-temps:%b.mi} %{!save-temps:%g.mi} \n\
+-	    cc1obj -fpreprocessed %{save-temps:%b.mi} %{!save-temps:%g.mi} %(cc1_options) %{print-objc-runtime-info} %{gen-decls}}\
++           cc1obj -fpreprocessed -fno-section-anchors %{save-temps:%b.mi} %{!save-temps:%g.mi} %(cc1_options) %{print-objc-runtime-info} %{gen-decls}}\
+ 	%{!save-temps:%{!no-integrated-cpp:\
+-	    cc1obj %(cpp_unique_options) %(cc1_options) %{print-objc-runtime-info} %{gen-decls}}}\
++	    cc1obj %(cpp_unique_options) -fno-section-anchors %(cc1_options) %{print-objc-runtime-info} %{gen-decls}}}\
+         %{!fsyntax-only:%(invoke_as)}}}}", 0, 0, 0},
+   {".mi", "@objc-cpp-output", 0, 0, 0},
+   {"@objc-cpp-output",
+-     "%{!M:%{!MM:%{!E:cc1obj -fpreprocessed %i %(cc1_options) %{print-objc-runtime-info} %{gen-decls}\
+-			     %{!fsyntax-only:%(invoke_as)}}}}", 0, 0, 0},
++     "%{!M:%{!MM:%{!E:cc1obj -fno-section-anchors -fpreprocessed %i %(cc1_options) %{print-objc-runtime-info} %{gen-decls}\
++			     %{!fsyntax-only:%(invoke_as)}}}}   \
++    %{fsection-anchors: %eGNU Objective C can't use -fsection-anchors} ", 0, 0, 0},
+   {"@objective-c-header",
+      "%{E|M|MM:cc1obj -E %{traditional|ftraditional|traditional-cpp:-traditional-cpp}\
+           %(cpp_options) %(cpp_debug_options)}\
++        %{fsection-anchors: %eGNU Objective C can't use -fsection-anchors} \
+       %{!E:%{!M:%{!MM:\
+ 	%{traditional|ftraditional|traditional-cpp:\
+ %eGNU Objective C no longer supports traditional compilation}\
+ 	%{save-temps|no-integrated-cpp:cc1obj -E %(cpp_options) -o %{save-temps:%b.mi} %{!save-temps:%g.mi} \n\
+-	    cc1obj -fpreprocessed %b.mi %(cc1_options) %{print-objc-runtime-info} %{gen-decls}\
++	    cc1obj -fpreprocessed %b.mi %(cc1_options) -fno-section-anchors %{print-objc-runtime-info} %{gen-decls}\
+                         -o %g.s %{!o*:--output-pch=%i.gch}\
+                         %W{o*:--output-pch=%*}%V}\
++        %{fsection-anchors: %eGNU Objective C can't use -fsection-anchors} \
+ 	%{!save-temps:%{!no-integrated-cpp:\
+-	    cc1obj %(cpp_unique_options) %(cc1_options) %{print-objc-runtime-info} %{gen-decls}\
++	    cc1obj %(cpp_unique_options) -fno-section-anchors %(cc1_options) %{print-objc-runtime-info} %{gen-decls}\
+                         -o %g.s %{!o*:--output-pch=%i.gch}\
+                         %W{o*:--output-pch=%*}%V}}}}}", 0, 0, 0},
+
+=== modified file 'gcc/testsuite/objc/execute/forward-1.x'
+--- old/gcc/testsuite/objc/execute/forward-1.x	2010-03-25 22:25:05 +0000
++++ new/gcc/testsuite/objc/execute/forward-1.x	2010-08-26 14:02:04 +0000
+@@ -4,6 +4,7 @@
+ 
+ if { ([istarget x86_64-*-linux*] && [check_effective_target_lp64] )
+      || [istarget powerpc*-*-linux*]
++     || [istarget arm*]
+      || [istarget powerpc*-*-aix*]
+      || [istarget s390*-*-*-linux*]
+      || [istarget sh4-*-linux*]
+

@@ -1,0 +1,38 @@
+---
+ config/mh-mingw |    3 +++
+ configure       |    1 +
+ configure.in    |    1 +
+ 3 files changed, 5 insertions(+)
+
+Index: gcc-4.2.3/config/mh-mingw
+===================================================================
+--- /dev/null
++++ gcc-4.2.3/config/mh-mingw
+@@ -0,0 +1,3 @@
++# Add -D__USE_MINGW_ACCESS to enable the built compiler to work on Windows
++# Vista (see PR33281 for details).
++BOOT_CFLAGS += -D__USE_MINGW_ACCESS
+Index: gcc-4.2.3/configure.in
+===================================================================
+--- gcc-4.2.3.orig/configure.in
++++ gcc-4.2.3/configure.in
+@@ -929,6 +929,7 @@ case "${host}" in
+     host_makefile_frag="config/mh-cygwin"
+     ;;
+   *-mingw32*)
++    host_makefile_frag="config/mh-mingw"
+     ;;
+   *-interix*)
+     host_makefile_frag="config/mh-interix"
+Index: gcc-4.2.3/configure
+===================================================================
+--- gcc-4.2.3.orig/configure
++++ gcc-4.2.3/configure
+@@ -1769,6 +1769,7 @@ case "${host}" in
+     host_makefile_frag="config/mh-cygwin"
+     ;;
+   *-mingw32*)
++    host_makefile_frag="config/mh-mingw"
+     ;;
+   *-interix*)
+     host_makefile_frag="config/mh-interix"

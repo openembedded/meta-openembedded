@@ -1,0 +1,236 @@
+	Backport from FSF mainline:
+
+	gcc/
+	* gengtype-lex.l: Add HARD_REG_SET.
+	* expr.c (expand_expr_real_1): Record writes to hard registers.
+	* function.h (rtl_data): Add asm_clobbers.
+	* ira.c (compute_regs_asm_clobbered): Use crtl->asm_clobbers.
+	(ira_setup_eliminable_regset): Remove regs_asm_clobbered.
+	Use crtl->asm_clobbers.
+
+	gcc/testsuite/
+	* gcc.target/arm/frame-pointer-1.c: New test.
+	* gcc.target/i386/pr9771-1.c: Move code out of main to allow frame
+	pointer elimination.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+ 	Merge from Sourcery G++ 4.4:
+ 
+ 	2009-06-23  Kazu Hirata  <kazu@codesourcery.com>
+
+=== modified file 'gcc/expr.c'
+--- old/gcc/expr.c	2010-05-31 14:45:06 +0000
++++ new/gcc/expr.c	2010-08-12 13:51:16 +0000
+@@ -8458,6 +8458,19 @@
+     expand_decl_rtl:
+       gcc_assert (decl_rtl);
+       decl_rtl = copy_rtx (decl_rtl);
++      /* Record writes to register variables.  */
++      if (modifier == EXPAND_WRITE && REG_P (decl_rtl)
++	  && REGNO (decl_rtl) < FIRST_PSEUDO_REGISTER)
++	{
++	    int i = REGNO (decl_rtl);
++	    int nregs = hard_regno_nregs[i][GET_MODE (decl_rtl)];
++	    while (nregs)
++	      {
++		SET_HARD_REG_BIT (crtl->asm_clobbers, i);
++		i++;
++		nregs--;
++	      }
++	}
+ 
+       /* Ensure variable marked as used even if it doesn't go through
+ 	 a parser.  If it hasn't be used yet, write out an external
+
+=== modified file 'gcc/function.h'
+--- old/gcc/function.h	2009-11-25 10:55:54 +0000
++++ new/gcc/function.h	2010-08-12 13:51:16 +0000
+@@ -25,6 +25,7 @@
+ #include "tree.h"
+ #include "hashtab.h"
+ #include "vecprim.h"
++#include "hard-reg-set.h"
+ 
+ /* Stack of pending (incomplete) sequences saved by `start_sequence'.
+    Each element describes one pending sequence.
+@@ -433,6 +434,12 @@
+      TREE_NOTHROW (current_function_decl) it is set even for overwritable
+      function where currently compiled version of it is nothrow.  */
+   bool nothrow;
++
++  /* Like regs_ever_live, but 1 if a reg is set or clobbered from an
++     asm.  Unlike regs_ever_live, elements of this array corresponding
++     to eliminable regs (like the frame pointer) are set if an asm
++     sets them.  */
++  HARD_REG_SET asm_clobbers;
+ };
+ 
+ #define return_label (crtl->x_return_label)
+
+=== modified file 'gcc/gengtype-lex.l'
+--- old/gcc/gengtype-lex.l	2009-11-21 10:24:25 +0000
++++ new/gcc/gengtype-lex.l	2010-08-12 13:51:16 +0000
+@@ -49,7 +49,7 @@
+ ID	[[:alpha:]_][[:alnum:]_]*
+ WS	[[:space:]]+
+ HWS	[ \t\r\v\f]*
+-IWORD	short|long|(un)?signed|char|int|HOST_WIDE_INT|HOST_WIDEST_INT|bool|size_t|BOOL_BITFIELD|CPPCHAR_SIGNED_T|ino_t|dev_t
++IWORD	short|long|(un)?signed|char|int|HOST_WIDE_INT|HOST_WIDEST_INT|bool|size_t|BOOL_BITFIELD|CPPCHAR_SIGNED_T|ino_t|dev_t|HARD_REG_SET
+ ITYPE	{IWORD}({WS}{IWORD})*
+ EOID	[^[:alnum:]_]
+ 
+
+=== modified file 'gcc/ira.c'
+--- old/gcc/ira.c	2010-03-31 01:44:10 +0000
++++ new/gcc/ira.c	2010-08-12 13:51:16 +0000
+@@ -1385,14 +1385,12 @@
+   return for_each_rtx (&insn, insn_contains_asm_1, NULL);
+ }
+ 
+-/* Set up regs_asm_clobbered.  */
++/* Add register clobbers from asm statements.  */
+ static void
+-compute_regs_asm_clobbered (char *regs_asm_clobbered)
++compute_regs_asm_clobbered (void)
+ {
+   basic_block bb;
+ 
+-  memset (regs_asm_clobbered, 0, sizeof (char) * FIRST_PSEUDO_REGISTER);
+-
+   FOR_EACH_BB (bb)
+     {
+       rtx insn;
+@@ -1413,7 +1411,7 @@
+ 		      + hard_regno_nregs[dregno][mode] - 1;
+ 
+ 		    for (i = dregno; i <= end; ++i)
+-		      regs_asm_clobbered[i] = 1;
++		      SET_HARD_REG_BIT(crtl->asm_clobbers, i);
+ 		  }
+ 	      }
+ 	}
+@@ -1425,12 +1423,6 @@
+ void
+ ira_setup_eliminable_regset (void)
+ {
+-  /* Like regs_ever_live, but 1 if a reg is set or clobbered from an
+-     asm.  Unlike regs_ever_live, elements of this array corresponding
+-     to eliminable regs (like the frame pointer) are set if an asm
+-     sets them.  */
+-  char *regs_asm_clobbered
+-    = (char *) alloca (FIRST_PSEUDO_REGISTER * sizeof (char));
+ #ifdef ELIMINABLE_REGS
+   int i;
+   static const struct {const int from, to; } eliminables[] = ELIMINABLE_REGS;
+@@ -1454,7 +1446,8 @@
+   COPY_HARD_REG_SET (ira_no_alloc_regs, no_unit_alloc_regs);
+   CLEAR_HARD_REG_SET (eliminable_regset);
+ 
+-  compute_regs_asm_clobbered (regs_asm_clobbered);
++  compute_regs_asm_clobbered ();
++
+   /* Build the regset of all eliminable registers and show we can't
+      use those that we already know won't be eliminated.  */
+ #ifdef ELIMINABLE_REGS
+@@ -1464,7 +1457,7 @@
+ 	= (! targetm.can_eliminate (eliminables[i].from, eliminables[i].to)
+ 	   || (eliminables[i].to == STACK_POINTER_REGNUM && need_fp));
+ 
+-      if (! regs_asm_clobbered[eliminables[i].from])
++      if (!TEST_HARD_REG_BIT (crtl->asm_clobbers, eliminables[i].from))
+ 	{
+ 	    SET_HARD_REG_BIT (eliminable_regset, eliminables[i].from);
+ 
+@@ -1478,7 +1471,7 @@
+ 	df_set_regs_ever_live (eliminables[i].from, true);
+     }
+ #if FRAME_POINTER_REGNUM != HARD_FRAME_POINTER_REGNUM
+-  if (! regs_asm_clobbered[HARD_FRAME_POINTER_REGNUM])
++  if (!TEST_HARD_REG_BIT (crtl->asm_clobbers, HARD_FRAME_POINTER_REGNUM))
+     {
+       SET_HARD_REG_BIT (eliminable_regset, HARD_FRAME_POINTER_REGNUM);
+       if (need_fp)
+@@ -1492,7 +1485,7 @@
+ #endif
+ 
+ #else
+-  if (! regs_asm_clobbered[FRAME_POINTER_REGNUM])
++  if (!TEST_HARD_REG_BIT (crtl->asm_clobbers, HARD_FRAME_POINTER_REGNUM))
+     {
+       SET_HARD_REG_BIT (eliminable_regset, FRAME_POINTER_REGNUM);
+       if (need_fp)
+
+=== added file 'gcc/testsuite/gcc.target/arm/frame-pointer-1.c'
+--- old/gcc/testsuite/gcc.target/arm/frame-pointer-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/frame-pointer-1.c	2010-08-12 13:51:16 +0000
+@@ -0,0 +1,42 @@
++/* Check local register variables using a register conventionally 
++   used as the frame pointer aren't clobbered under high register pressure.  */
++/* { dg-do run } */
++/* { dg-options "-Os -mthumb -fomit-frame-pointer" } */
++
++#include <stdlib.h>
++
++int global=5;
++
++void __attribute__((noinline)) foo(int p1, int p2, int p3, int p4)
++{
++  if (global != 5 || p1 != 1 || p2 != 2 || p3 != 3 || p4 != 4)
++    abort();
++}
++
++int __attribute__((noinline)) test(int a, int b, int c, int d)
++{
++  register unsigned long r __asm__("r7") = 0xdeadbeef;
++  int e;
++
++  /* ABCD are live after the call which should be enough
++     to cause r7 to be used if it weren't for the register variable.  */
++  foo(a,b,c,d);
++
++  e = 0;
++  __asm__ __volatile__ ("mov %0, %2"
++			: "=r" (e)
++			: "0" (e), "r" (r));
++
++  global = a+b+c+d;
++
++  return e;
++}
++
++int main()
++{
++  if (test(1, 2, 3, 4) != 0xdeadbeef)
++    abort();
++  if (global != 10)
++    abort();
++  return 0;
++}
+
+=== modified file 'gcc/testsuite/gcc.target/i386/pr9771-1.c'
+--- old/gcc/testsuite/gcc.target/i386/pr9771-1.c	2007-08-22 08:59:14 +0000
++++ new/gcc/testsuite/gcc.target/i386/pr9771-1.c	2010-08-12 13:51:16 +0000
+@@ -28,7 +28,10 @@
+   *adr = save;
+ }
+ 
+-int main()
++/* This must not be inlined becuase main() requires the frame pointer
++   for stack alignment.  */
++void test(void) __attribute__((noinline));
++void test(void)
+ {
+   B = &x;
+ 
+@@ -42,3 +45,9 @@
+   exit(0);
+ }
+ 
++int main()
++{
++  test();
++  return 0;
++
++}
+

@@ -1,0 +1,13 @@
+---
+ config/mh-mingw |    1 +
+ 1 file changed, 1 insertion(+)
+
+Index: gcc-4.2.3/config/mh-mingw
+===================================================================
+--- gcc-4.2.3.orig/config/mh-mingw
++++ gcc-4.2.3/config/mh-mingw
+@@ -1,3 +1,4 @@
+ # Add -D__USE_MINGW_ACCESS to enable the built compiler to work on Windows
+ # Vista (see PR33281 for details).
+ BOOT_CFLAGS += -D__USE_MINGW_ACCESS
++CFLAGS += -D__USE_MINGW_ACCESS

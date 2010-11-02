@@ -1,0 +1,52 @@
+Index: gcc-4.5/gcc/config/mips/linux64.h
+===================================================================
+--- gcc-4.5.orig/gcc/config/mips/linux64.h	2010-09-25 02:05:05.484423095 -0700
++++ gcc-4.5/gcc/config/mips/linux64.h	2010-09-25 02:31:18.524931014 -0700
+@@ -26,7 +26,7 @@
+   BASE_DRIVER_SELF_SPECS, \
+   LINUX_DRIVER_SELF_SPECS \
+   " %{!EB:%{!EL:%(endian_spec)}}" \
+-  " %{!mabi=*: -mabi=n32}"
++  " %{!mabi=*: -mabi=64}"
+ 
+ #undef LIB_SPEC
+ #define LIB_SPEC "\
+@@ -35,9 +35,9 @@
+ %{!shared: \
+   %{profile:-lc_p} %{!profile:-lc}}"
+ 
+-#define GLIBC_DYNAMIC_LINKER32 "/lib/ld.so.1"
+-#define GLIBC_DYNAMIC_LINKER64 "/lib64/ld.so.1"
+-#define GLIBC_DYNAMIC_LINKERN32 "/lib32/ld.so.1"
++#define GLIBC_DYNAMIC_LINKER32 "/lib32/ld.so.1"
++#define GLIBC_DYNAMIC_LINKER64 "/lib/ld.so.1"
++#define GLIBC_DYNAMIC_LINKERN32 "/lib64/ld.so.1"
+ #define UCLIBC_DYNAMIC_LINKERN32 "/lib32/ld-uClibc.so.0"
+ #define LINUX_DYNAMIC_LINKERN32 \
+   CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKERN32, UCLIBC_DYNAMIC_LINKERN32)
+Index: gcc-4.5/gcc/config.gcc
+===================================================================
+--- gcc-4.5.orig/gcc/config.gcc	2010-07-22 16:37:17.000000000 -0700
++++ gcc-4.5/gcc/config.gcc	2010-09-25 02:25:41.412414136 -0700
+@@ -1707,7 +1707,7 @@
+ 	*-*-irix6*)
+ 		tm_file="${tm_file} mips/iris6.h"
+ 		tmake_file="${tmake_file} mips/t-iris6"
+-		tm_defines="${tm_defines} MIPS_ISA_DEFAULT=3 MIPS_ABI_DEFAULT=ABI_N32"
++		tm_defines="${tm_defines} MIPS_ISA_DEFAULT=3 MIPS_ABI_DEFAULT=ABI_64"
+ 		case ${target} in
+ 		*-*-irix6.[0-4]*)
+ 			use_gcc_stdint=provide
+Index: gcc-4.5/gcc/config/mips/t-linux64
+===================================================================
+--- gcc-4.5.orig/gcc/config/mips/t-linux64	2010-07-11 16:14:42.000000000 -0700
++++ gcc-4.5/gcc/config/mips/t-linux64	2010-09-25 02:29:52.758708250 -0700
+@@ -18,7 +18,7 @@
+ 
+ MULTILIB_OPTIONS = mabi=n32/mabi=32/mabi=64
+ MULTILIB_DIRNAMES = n32 32 64
+-MULTILIB_OSDIRNAMES = ../lib32 ../lib ../lib64
++MULTILIB_OSDIRNAMES = ../lib64 ../lib32 ../lib
+ 
+ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+ 

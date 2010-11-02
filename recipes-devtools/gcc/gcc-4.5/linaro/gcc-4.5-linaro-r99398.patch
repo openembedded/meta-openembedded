@@ -1,0 +1,76 @@
+2010-09-21  Yao Qi  <yao@codesourcery.com>
+
+	Backport from FSF to fix ICE found in LP:635409:
+	
+	2010-07-07  Bernd Schmidt  <bernds@codesourcery.com>
+	
+	gcc/
+	PR rtl-optimization/44787
+	* config/arm/arm.md (arith_shiftsi): Allow stack pointer in operand 2.
+	* config/arm/thumb2.md (thumb2_arith_shiftsi): Likewise.
+	
+	gcc/testsuite/
+	PR rtl-optimization/44787
+	* gcc.c-torture/compile/pr44788.c: New test.
+	* gcc.target/arm/pr44788.c: New test.
+	
+ 2010-09-16  Andrew Stubbs  <ams@codesourcery.com>
+ 
+ 	Backport from FSF:
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2010-09-16 09:15:46 +0000
++++ new/gcc/config/arm/arm.md	2010-09-22 05:54:42 +0000
+@@ -9268,7 +9268,7 @@
+           [(match_operator:SI 3 "shift_operator"
+              [(match_operand:SI 4 "s_register_operand" "r")
+               (match_operand:SI 5 "reg_or_int_operand" "rI")])
+-           (match_operand:SI 2 "s_register_operand" "r")]))]
++           (match_operand:SI 2 "s_register_operand" "rk")]))]
+   "TARGET_ARM"
+   "%i1%?\\t%0, %2, %4%S3"
+   [(set_attr "predicable" "yes")
+
+=== modified file 'gcc/config/arm/thumb2.md'
+--- old/gcc/config/arm/thumb2.md	2010-09-01 13:29:58 +0000
++++ new/gcc/config/arm/thumb2.md	2010-09-22 05:54:42 +0000
+@@ -467,7 +467,7 @@
+           [(match_operator:SI 3 "shift_operator"
+              [(match_operand:SI 4 "s_register_operand" "r")
+               (match_operand:SI 5 "const_shift_count" "M")])
+-           (match_operand:SI 2 "s_register_operand" "r")]))]
++           (match_operand:SI 2 "s_register_operand" "rk")]))]
+   "TARGET_THUMB2"
+   "%i1%?\\t%0, %2, %4%S3"
+   [(set_attr "predicable" "yes")
+
+=== added file 'gcc/testsuite/gcc.c-torture/compile/pr44788.c'
+--- old/gcc/testsuite/gcc.c-torture/compile/pr44788.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.c-torture/compile/pr44788.c	2010-09-22 05:54:42 +0000
+@@ -0,0 +1,8 @@
++void joint_decode(float* mlt_buffer1, int t) {
++    int i;
++    float decode_buffer[1060];
++    foo(decode_buffer);
++    for (i=0; i<10 ; i++) {
++        mlt_buffer1[i] = i * decode_buffer[t];
++    }
++}
+
+=== added file 'gcc/testsuite/gcc.target/arm/pr44788.c'
+--- old/gcc/testsuite/gcc.target/arm/pr44788.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/pr44788.c	2010-09-22 05:54:42 +0000
+@@ -0,0 +1,12 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_thumb2_ok } */
++/* { dg-options "-Os -fno-strict-aliasing -fPIC -mthumb -march=armv7-a -mfpu=vfp3 -mfloat-abi=softfp" } */
++
++void joint_decode(float* mlt_buffer1, int t) {
++    int i;
++    float decode_buffer[1060];
++    foo(decode_buffer);
++    for (i=0; i<10 ; i++) {
++        mlt_buffer1[i] = i * decode_buffer[t];
++    }
++}
+

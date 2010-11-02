@@ -1,0 +1,550 @@
+2004-11-27  Jakub Jelinek  <jakub@redhat.com>
+
+	* config.gcc (ia64*-*-linux*): If native and libelf is installed,
+	use ia64/t-glibc-no-libunwind instead of the other t-*unwind*
+	fragments.
+	* config/ia64/t-glibc-no-libunwind: New file.
+	* config/ia64/change-symver.c: New file.
+	* config/ia64/unwind-ia64.c: If USE_SYMVER_GLOBAL and SHARED,
+	define _Unwind_* to __symverglobal_Unwind_*.
+	(alias): Undefine.
+	(symverglobal): Define.  Use it on _Unwind_*.
+	* config/ia64/mkmap-symver-multi.awk: New file.
+	* config/ia64/libgcc-ia64-no-libunwind.ver: New file.
+
+Index: gcc/config.gcc
+===================================================================
+--- gcc/config.gcc.orig	2010-04-07 03:34:00.000000000 -0700
++++ gcc/config.gcc	2010-06-25 10:15:25.133131055 -0700
+@@ -1457,9 +1457,16 @@
+ 	;;
+ ia64*-*-linux*)
+ 	tm_file="${tm_file} dbxelf.h elfos.h svr4.h linux.h glibc-stdint.h ia64/sysv4.h ia64/linux.h"
+-	tmake_file="${tmake_file} ia64/t-ia64 t-libunwind ia64/t-glibc"
+-	if test x$with_system_libunwind != xyes ; then
+-		tmake_file="${tmake_file} t-libunwind-elf ia64/t-glibc-libunwind"
++	tmake_file="${tmake_file} ia64/t-ia64"
++	if test x${target} = x${host} && test x${target} = x${build} \
++	   && grep gelf_getverdef /usr/include/gelf.h > /dev/null 2>&1 \
++	   && test -f /usr/lib/libelf.so; then
++		tmake_file="${tmake_file} ia64/t-glibc-no-libunwind"
++	else
++		tmake_file="${tmake_file} t-libunwind ia64/t-glibc"
++		if test x$with_system_libunwind != xyes ; then
++			tmake_file="${tmake_file} t-libunwind-elf ia64/t-glibc-libunwind"
++		fi
+ 	fi
+ 	target_cpu_default="MASK_GNU_AS|MASK_GNU_LD"
+ 	extra_parts="crtbegin.o crtend.o crtbeginS.o crtendS.o crtfastmath.o"
+Index: gcc/config/ia64/t-glibc-no-libunwind
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc/config/ia64/t-glibc-no-libunwind	2010-06-25 10:14:32.521880765 -0700
+@@ -0,0 +1,30 @@
++# Don't use system libunwind library on IA-64 GLIBC based system,
++# but make _Unwind_* symbols unversioned, so that created programs
++# are usable even when libgcc_s uses libunwind.
++LIB2ADDEH += $(srcdir)/config/ia64/fde-glibc.c
++SHLIB_MAPFILES += $(srcdir)/config/ia64/libgcc-ia64-no-libunwind.ver
++SHLIB_MKMAP = $(srcdir)/config/ia64/mkmap-symver-multi.awk
++
++SHLIB_LINK = $(GCC_FOR_TARGET) $(LIBGCC2_CFLAGS) -shared -nodefaultlibs \
++	-Wl,--soname=$(SHLIB_SONAME) \
++	-Wl,--version-script=$(SHLIB_MAP) \
++	-o $(SHLIB_DIR)/$(SHLIB_SONAME).tmp @multilib_flags@ $(SHLIB_OBJS) -lc && \
++	rm -f $(SHLIB_DIR)/$(SHLIB_SOLINK) && \
++	if [ -f $(SHLIB_DIR)/$(SHLIB_SONAME) ]; then \
++	  mv -f $(SHLIB_DIR)/$(SHLIB_SONAME) \
++		$(SHLIB_DIR)/$(SHLIB_SONAME).backup; \
++	else true; fi && \
++	gcc -O2 -o $(SHLIB_DIR)/$(SHLIB_SONAME).tweak \
++	  $$(gcc_srcdir)/config/ia64/change-symver.c -lelf && \
++	$(SHLIB_DIR)/$(SHLIB_SONAME).tweak $(SHLIB_DIR)/$(SHLIB_SONAME).tmp \
++	GCC_3.4.2 _GLOBAL_ \
++	_Unwind_GetGR _Unwind_RaiseException _Unwind_GetRegionStart _Unwind_SetIP \
++	_Unwind_GetIP _Unwind_GetLanguageSpecificData _Unwind_Resume \
++	_Unwind_DeleteException _Unwind_SetGR _Unwind_ForcedUnwind \
++	_Unwind_Backtrace _Unwind_FindEnclosingFunction _Unwind_GetCFA \
++	_Unwind_Resume_or_Rethrow _Unwind_GetBSP && \
++	rm -f $(SHLIB_DIR)/$(SHLIB_SONAME).tweak && \
++	mv $(SHLIB_DIR)/$(SHLIB_SONAME).tmp $(SHLIB_DIR)/$(SHLIB_SONAME) && \
++	$(LN_S) $(SHLIB_SONAME) $(SHLIB_DIR)/$(SHLIB_SOLINK)
++
++TARGET_LIBGCC2_CFLAGS += -DUSE_SYMVER_GLOBAL
+Index: gcc/config/ia64/change-symver.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc/config/ia64/change-symver.c	2010-06-25 10:14:32.521880765 -0700
+@@ -0,0 +1,211 @@
++#define _GNU_SOURCE 1
++#define _FILE_OFFSET_BITS 64
++#include <endian.h>
++#include <errno.h>
++#include <error.h>
++#include <fcntl.h>
++#include <fnmatch.h>
++#include <gelf.h>
++#include <stdlib.h>
++#include <string.h>
++#include <unistd.h>
++
++int
++compute_veridx (const char *name, Elf *elf, Elf_Data *verd, GElf_Shdr *verd_shdr)
++{
++  if (strcmp (name, "_GLOBAL_") == 0)
++    return 1;
++
++  int cnt;
++  size_t offset = 0;
++  for (cnt = verd_shdr->sh_info; --cnt >= 0; )
++    {
++      GElf_Verdef defmem;
++      GElf_Verdef *def;
++      GElf_Verdaux auxmem;
++      GElf_Verdaux *aux;
++      unsigned int auxoffset;
++
++      /* Get the data at the next offset.  */
++      def = gelf_getverdef (verd, offset, &defmem);
++      if (def == NULL)
++	break;
++
++      auxoffset = offset + def->vd_aux;
++      aux = gelf_getverdaux (verd, auxoffset, &auxmem);
++      if (aux == NULL)
++	break;
++
++      if (strcmp (name, elf_strptr (elf, verd_shdr->sh_link,
++		  aux->vda_name)) == 0)
++	return def->vd_ndx;
++
++      /* Find the next offset.  */
++      offset += def->vd_next;
++    }
++
++  return -1;
++}
++
++int
++main (int argc, char **argv)
++{
++  if (argc < 4)
++    error (1, 0, "Usage: change_symver library from_symver to_symver symbol...\nExample: change_symver libfoo.so FOO_1.0 *global* bar baz");
++
++  const char *fname = argv[1];
++
++  /* Open the file.  */
++  int fd;
++  fd = open (fname, O_RDWR);
++  if (fd == -1)
++    error (1, errno, fname);
++
++  elf_version (EV_CURRENT);
++
++  /* Now get the ELF descriptor.  */
++  Elf *elf = elf_begin (fd, ELF_C_READ_MMAP, NULL);
++  if (elf == NULL || elf_kind (elf) != ELF_K_ELF)
++    error (1, 0, "Couldn't open %s: %s", fname, elf_errmsg (-1));
++
++  size_t shstrndx;
++  /* Get the section header string table index.  */
++  if (elf_getshstrndx (elf, &shstrndx) < 0)
++    error (1, 0, "cannot get shstrndx from %s", fname);
++
++  GElf_Ehdr ehdr_mem;
++  GElf_Ehdr *ehdr;
++
++  /* We need the ELF header in a few places.  */
++  ehdr = gelf_getehdr (elf, &ehdr_mem);
++  if (ehdr == NULL)
++    error (1, 0, "couldn't get ELF headers %s: %s", fname, elf_errmsg (-1));
++
++  Elf_Scn *scn = NULL;
++  GElf_Shdr shdr_mem, verd_shdr, ver_shdr, dynsym_shdr;
++  Elf_Data *ver = NULL, *verd = NULL, *dynsym = NULL;
++
++  while ((scn = elf_nextscn (elf, scn)) != NULL)
++    {
++      GElf_Shdr *shdr = gelf_getshdr (scn, &shdr_mem);
++
++      if (shdr == NULL)
++	error (1, 0, "couldn't get shdr from %s", fname);
++
++      if ((shdr->sh_flags & SHF_ALLOC) != 0)
++	{
++	  const char *name = elf_strptr (elf, shstrndx, shdr->sh_name);
++	  Elf_Data **p;
++
++	  if (strcmp (name, ".gnu.version") == 0)
++	    {
++	      p = &ver;
++	      ver_shdr = *shdr;
++	    }
++	  else if (strcmp (name, ".gnu.version_d") == 0)
++	    {
++	      p = &verd;
++	      verd_shdr = *shdr;
++	    }
++	  else if (strcmp (name, ".dynsym") == 0)
++	    {
++	      p = &dynsym;
++	      dynsym_shdr = *shdr;
++	    }
++	  else
++	    continue;
++
++	  if (*p != NULL)
++	    error (1, 0, "Two %s sections in %s", name, fname);
++	  *p = elf_getdata (scn, NULL);
++	  if (*p == NULL || elf_getdata (scn, *p) != NULL)
++	    error (1, 0, "No data or non-contiguous data in %s section in %s",
++		   name, fname);
++	}
++    }
++
++  if (ver == NULL || verd == NULL || dynsym == NULL)
++    error (1, 0, "Couldn't find one of the needed sections in %s", fname);
++
++  int from_idx = compute_veridx (argv[2], elf, verd, &verd_shdr);
++  if (from_idx == -1)
++    error (1, 0, "Could not find symbol version %s in %s", argv[2], fname);
++
++  int to_idx = compute_veridx (argv[3], elf, verd, &verd_shdr);
++  if (to_idx == -1)
++    error (1, 0, "Could not find symbol version %s in %s", argv[3], fname);
++
++  if (dynsym_shdr.sh_entsize != gelf_fsize (elf, ELF_T_SYM, 1, ehdr->e_version)
++      || dynsym_shdr.sh_size % dynsym_shdr.sh_entsize
++      || ver_shdr.sh_entsize != 2
++      || (ver_shdr.sh_size & 1)
++      || dynsym_shdr.sh_size / dynsym_shdr.sh_entsize != ver_shdr.sh_size / 2)
++    error (1, 0, "Unexpected sh_size or sh_entsize in %s", fname);
++
++  size_t nentries = ver_shdr.sh_size / 2;
++  size_t cnt;
++  GElf_Versym array[nentries];
++  for (cnt = 0; cnt < nentries; ++cnt)
++    {
++      GElf_Versym vsymmem;
++      GElf_Versym *vsym;
++
++      vsym = gelf_getversym (ver, cnt, &vsymmem);
++      if (vsym == NULL)
++	error (1, 0, "gelt_getversym failed in %s: %s", fname, elf_errmsg (-1));
++
++      array[cnt] = *vsym;
++      if (*vsym != from_idx)
++	continue;
++
++      GElf_Sym sym_mem;
++      GElf_Sym *sym;
++      sym = gelf_getsym (dynsym, cnt, &sym_mem);
++      if (sym == NULL)
++	error (1, 0, "gelt_getsym failed in %s: %s", fname, elf_errmsg (-1));
++
++      const char *name = elf_strptr (elf, dynsym_shdr.sh_link, sym->st_name);
++
++      int argn;
++      for (argn = 4; argn < argc; ++argn)
++	if (fnmatch (argv[argn], name, 0) == 0)
++	  {
++	    array[cnt] = to_idx;
++	    break;
++	  }
++    }
++
++  if (sizeof (array[0]) != 2)
++    abort ();
++
++#if __BYTE_ORDER == __LITTLE_ENDIAN
++  if (ehdr->e_ident[EI_DATA] == ELFDATA2LSB)
++    ;
++  else if (ehdr->e_ident[EI_DATA] == ELFDATA2MSB)
++#elif __BYTE_ORDER == __BIG_ENDIAN
++  if (ehdr->e_ident[EI_DATA] == ELFDATA2MSB)
++    ;
++  else if (ehdr->e_ident[EI_DATA] == ELFDATA2LSB)
++#else
++# error Unsupported endianity
++#endif
++    {
++      for (cnt = 0; cnt < nentries; ++cnt)
++	array[cnt] = ((array[cnt] & 0xff) << 8) | ((array[cnt] & 0xff00) >> 8);
++    }
++  else
++    error (1, 0, "Unknown EI_DATA %d in %s", ehdr->e_ident[EI_DATA], fname);
++
++  if (elf_end (elf) != 0)
++    error (1, 0, "couldn't close %s: %s", fname, elf_errmsg (-1));
++
++  if (lseek (fd, ver_shdr.sh_offset, SEEK_SET) != (off_t) ver_shdr.sh_offset)
++    error (1, 0, "failed to seek to %zd in %s", (size_t) ver_shdr.sh_offset,
++	   fname);
++
++  if (write (fd, array, 2 * nentries) != (ssize_t) (2 * nentries))
++    error (1, 0, "failed to write .gnu.version section into %s", fname);
++
++  close (fd);
++  return 0;
++}
+Index: gcc/config/ia64/unwind-ia64.c
+===================================================================
+--- gcc/config/ia64/unwind-ia64.c.orig	2009-09-07 08:41:52.000000000 -0700
++++ gcc/config/ia64/unwind-ia64.c	2010-06-25 10:14:32.521880765 -0700
+@@ -48,6 +48,51 @@
+ #define MD_UNW_COMPATIBLE_PERSONALITY_P(HEADER) 1
+ #endif
+ 
++#if defined (USE_SYMVER_GLOBAL) && defined (SHARED)
++extern _Unwind_Reason_Code __symverglobal_Unwind_Backtrace
++  (_Unwind_Trace_Fn, void *);
++extern void __symverglobal_Unwind_DeleteException
++  (struct _Unwind_Exception *);
++extern void * __symverglobal_Unwind_FindEnclosingFunction (void *);
++extern _Unwind_Reason_Code __symverglobal_Unwind_ForcedUnwind
++  (struct _Unwind_Exception *, _Unwind_Stop_Fn, void *);
++extern _Unwind_Word __symverglobal_Unwind_GetCFA
++  (struct _Unwind_Context *);
++extern _Unwind_Word __symverglobal_Unwind_GetBSP
++  (struct _Unwind_Context *);
++extern _Unwind_Word __symverglobal_Unwind_GetGR
++  (struct _Unwind_Context *, int );
++extern _Unwind_Ptr __symverglobal_Unwind_GetIP (struct _Unwind_Context *);
++extern void *__symverglobal_Unwind_GetLanguageSpecificData
++  (struct _Unwind_Context *);
++extern _Unwind_Ptr __symverglobal_Unwind_GetRegionStart
++  (struct _Unwind_Context *);
++extern _Unwind_Reason_Code __symverglobal_Unwind_RaiseException
++  (struct _Unwind_Exception *);
++extern void __symverglobal_Unwind_Resume (struct _Unwind_Exception *);
++extern _Unwind_Reason_Code __symverglobal_Unwind_Resume_or_Rethrow
++   (struct _Unwind_Exception *);
++extern void __symverglobal_Unwind_SetGR
++  (struct _Unwind_Context *, int, _Unwind_Word);
++extern void __symverglobal_Unwind_SetIP
++  (struct _Unwind_Context *, _Unwind_Ptr);
++#define _Unwind_Backtrace __symverglobal_Unwind_Backtrace
++#define _Unwind_DeleteException __symverglobal_Unwind_DeleteException
++#define _Unwind_FindEnclosingFunction __symverglobal_Unwind_FindEnclosingFunction
++#define _Unwind_ForcedUnwind __symverglobal_Unwind_ForcedUnwind
++#define _Unwind_GetBSP __symverglobal_Unwind_GetBSP
++#define _Unwind_GetCFA __symverglobal_Unwind_GetCFA
++#define _Unwind_GetGR __symverglobal_Unwind_GetGR
++#define _Unwind_GetIP __symverglobal_Unwind_GetIP
++#define _Unwind_GetLanguageSpecificData __symverglobal_Unwind_GetLanguageSpecificData
++#define _Unwind_GetRegionStart __symverglobal_Unwind_GetRegionStart
++#define _Unwind_RaiseException __symverglobal_Unwind_RaiseException
++#define _Unwind_Resume __symverglobal_Unwind_Resume
++#define _Unwind_Resume_or_Rethrow __symverglobal_Unwind_Resume_or_Rethrow
++#define _Unwind_SetGR __symverglobal_Unwind_SetGR
++#define _Unwind_SetIP __symverglobal_Unwind_SetIP
++#endif
++
+ enum unw_application_register
+ {
+   UNW_AR_BSP,
+@@ -2457,4 +2502,44 @@
+ alias (_Unwind_SetIP);
+ #endif
+ 
++#if defined (USE_SYMVER_GLOBAL) && defined (SHARED)
++#undef alias
++#define symverglobal(name, version) \
++__typeof (__symverglobal##name) __symverlocal##name		\
++  __attribute__ ((alias ("__symverglobal" #name)));		\
++__asm__ (".symver __symverglobal" #name"," #name "@@GCC_3.4.2");\
++__asm__ (".symver __symverlocal" #name"," #name "@" #version)
++
++#undef _Unwind_Backtrace
++#undef _Unwind_DeleteException
++#undef _Unwind_FindEnclosingFunction
++#undef _Unwind_ForcedUnwind
++#undef _Unwind_GetBSP
++#undef _Unwind_GetCFA
++#undef _Unwind_GetGR
++#undef _Unwind_GetIP
++#undef _Unwind_GetLanguageSpecificData
++#undef _Unwind_GetRegionStart
++#undef _Unwind_RaiseException
++#undef _Unwind_Resume
++#undef _Unwind_Resume_or_Rethrow
++#undef _Unwind_SetGR
++#undef _Unwind_SetIP
++symverglobal (_Unwind_Backtrace, GCC_3.3);
++symverglobal (_Unwind_DeleteException, GCC_3.0);
++symverglobal (_Unwind_FindEnclosingFunction, GCC_3.3);
++symverglobal (_Unwind_ForcedUnwind, GCC_3.0);
++symverglobal (_Unwind_GetBSP, GCC_3.3.2);
++symverglobal (_Unwind_GetCFA, GCC_3.3);
++symverglobal (_Unwind_GetGR, GCC_3.0);
++symverglobal (_Unwind_GetIP, GCC_3.0);
++symverglobal (_Unwind_GetLanguageSpecificData, GCC_3.0);
++symverglobal (_Unwind_GetRegionStart, GCC_3.0);
++symverglobal (_Unwind_RaiseException, GCC_3.0);
++symverglobal (_Unwind_Resume, GCC_3.0);
++symverglobal (_Unwind_Resume_or_Rethrow, GCC_3.3);
++symverglobal (_Unwind_SetGR, GCC_3.0);
++symverglobal (_Unwind_SetIP, GCC_3.0);
++#endif
++
+ #endif
+Index: gcc/config/ia64/mkmap-symver-multi.awk
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc/config/ia64/mkmap-symver-multi.awk	2010-06-25 10:14:32.521880765 -0700
+@@ -0,0 +1,133 @@
++# Generate an ELF symbol version map a-la Solaris and GNU ld.
++#	Contributed by Richard Henderson <rth@cygnus.com>
++#
++# This file is part of GCC.
++#
++# GCC is free software; you can redistribute it and/or modify it under
++# the terms of the GNU General Public License as published by the Free
++# Software Foundation; either version 2, or (at your option) any later
++# version.
++#
++# GCC is distributed in the hope that it will be useful, but WITHOUT
++# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
++# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
++# License for more details.
++#
++# You should have received a copy of the GNU General Public License
++# along with GCC; see the file COPYING.  If not, write to the Free
++# Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
++# 02110-1301, USA.
++
++BEGIN {
++  state = "nm";
++  sawsymbol = 0;
++}
++
++# Remove comment and blank lines.
++/^ *#/ || /^ *$/ {
++  next;
++}
++
++# We begin with nm input.  Collect the set of symbols that are present
++# so that we can not emit them into the final version script -- Solaris
++# complains at us if we do.
++
++state == "nm" && /^%%/ {
++  state = "ver";
++  next;
++}
++
++state == "nm" && ($1 == "U" || $2 == "U") {
++  next;
++}
++
++state == "nm" && NF == 3 {
++  if ($3 ~ /^[^@]*@GCC_[0-9.]*$/) {
++    def[$3] = 1
++    tl=$3
++    sub(/^.*@/,"",tl)
++    ver[$3] = tl
++  } else {
++    sub(/@@?GCC_[0-9.]*$/,"",$3)
++    def[$3] = 1;
++  }
++  sawsymbol = 1;
++  next;
++}
++
++state == "nm" {
++  next;
++}
++
++# Now we process a simplified variant of the Solaris symbol version
++# script.  We have one symbol per line, no semicolons, simple markers
++# for beginning and ending each section, and %inherit markers for
++# describing version inheritence.  A symbol may appear in more than
++# one symbol version, and the last seen takes effect.
++
++NF == 3 && $1 == "%inherit" {
++  inherit[$2] = $3;
++  next;
++}
++
++NF == 2 && $2 == "{" {
++  libs[$1] = 1;
++  thislib = $1;
++  next;
++}
++
++$1 == "}" {
++  thislib = "";
++  next;
++}
++
++{
++  ver[$1] = thislib;
++  next;
++}
++
++END {
++  if (!sawsymbol)
++    {
++      print "No symbols seen -- broken or mis-installed nm?" | "cat 1>&2";
++      exit 1;
++    }
++  for (l in libs)
++    output(l);
++}
++
++function output(lib) {
++  if (done[lib])
++    return;
++  done[lib] = 1;
++  if (inherit[lib])
++    output(inherit[lib]);
++
++  empty=1
++  for (sym in ver)
++    if ((ver[sym] == lib) && (sym in def))
++      {
++	if (empty)
++	  {
++	    printf("%s {\n", lib);
++	    printf("  global:\n");
++	    empty = 0;
++	  }
++	symp = sym;
++	sub(/@GCC_[0-9.]*$/,"",symp);
++	printf("\t%s;\n", symp);
++	if (dotsyms)
++	  printf("\t.%s;\n", symp);
++      }
++
++  if (empty)
++    {
++      for (l in libs)
++	if (inherit[l] == lib)
++	  inherit[l] = inherit[lib];
++    }
++  else if (inherit[lib])
++    printf("} %s;\n", inherit[lib]);
++  else
++    printf ("\n  local:\n\t*;\n};\n");
++}
+Index: gcc/config/ia64/libgcc-ia64-no-libunwind.ver
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc/config/ia64/libgcc-ia64-no-libunwind.ver	2010-06-25 10:14:32.525880902 -0700
+@@ -0,0 +1,17 @@
++GCC_3.4.2 {
++  _Unwind_GetGR
++  _Unwind_RaiseException
++  _Unwind_GetRegionStart
++  _Unwind_SetIP
++  _Unwind_GetIP
++  _Unwind_GetLanguageSpecificData
++  _Unwind_Resume
++  _Unwind_DeleteException
++  _Unwind_SetGR
++  _Unwind_ForcedUnwind
++  _Unwind_Backtrace
++  _Unwind_FindEnclosingFunction
++  _Unwind_GetCFA
++  _Unwind_Resume_or_Rethrow
++  _Unwind_GetBSP
++}

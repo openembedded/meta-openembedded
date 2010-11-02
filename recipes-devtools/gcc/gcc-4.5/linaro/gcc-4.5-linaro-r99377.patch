@@ -1,0 +1,28 @@
+	Issue #1510
+	2007-04-27  Paul Brook  <paul@codesourcery.com>
+	gcc/
+	* cse.c (cse_process_notes): Make sure PLUS are canonical.
+
+2010-08-26  Paul Brook  <paul@codesourcery.com>
+
+	Merge from Sourcery G++ 4.3/4.4:
+ 	2007-03-30  Paul Brook  <paul@codesourcery.com>
+ 	gcc/
+ 	* calls.c (store_one_arg): Check alignment of mode used for save.
+
+=== modified file 'gcc/cse.c'
+--- old/gcc/cse.c	2010-01-12 20:25:10 +0000
++++ new/gcc/cse.c	2010-08-26 15:53:20 +0000
+@@ -6061,6 +6061,11 @@
+       validate_change (object, &XEXP (x, i),
+ 		       cse_process_notes (XEXP (x, i), object, changed), 0);
+ 
++  /* Rebuild a PLUS expression in canonical form if the first operand
++     ends up as a constant.  */
++  if (code == PLUS && GET_CODE (XEXP (x, 0)) == CONST_INT)
++    return plus_constant (XEXP(x, 1), INTVAL (XEXP (x, 0)));
++
+   return x;
+ }
+ 
+

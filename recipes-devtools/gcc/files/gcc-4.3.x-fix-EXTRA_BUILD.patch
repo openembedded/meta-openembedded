@@ -1,0 +1,13 @@
+Index: gcc-4.3.1/Makefile.in
+===================================================================
+--- gcc-4.3.1.orig/Makefile.in	2010-07-07 13:08:44.000000000 +0200
++++ gcc-4.3.1/Makefile.in	2010-07-07 13:11:59.246625709 +0200
+@@ -149,7 +149,7 @@
+ EXTRA_BUILD_FLAGS = \
+ 	CFLAGS="$(CFLAGS_FOR_BUILD)" \
+ 	LDFLAGS="$(LDFLAGS_FOR_BUILD)" \
+-	LIBCFLAGS=""
++        LIBCFLAGS="$(CFLAGS_FOR_BUILD)"
+ 
+ # This is the list of directories to built for the host system.
+ SUBDIRS = @configdirs@

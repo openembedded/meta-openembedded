@@ -1,0 +1,24 @@
+Add /sw/include and /opt/include based on the original
+zecke-no-host-includes.patch patch.  The original patch checked for
+/usr/include, /sw/include and /opt/include and then triggered a failure and
+aborted.
+
+Instead, we add the two missing items to the current scan.  If the user
+wants this to be a failure, they can add "-Werror=poison-system-directories".
+
+Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+
+diff -ur gcc-4.5.0.orig/gcc/incpath.c gcc-4.5.0/gcc/incpath.c
+--- gcc-4.5.0.orig/gcc/incpath.c	2010-09-29 14:58:31.358975524 -0500
++++ gcc-4.5.0/gcc/incpath.c	2010-09-29 15:08:02.065975516 -0500
+@@ -363,7 +363,9 @@
+          {
+           if ((!strncmp (p->name, "/usr/include", 12))
+               || (!strncmp (p->name, "/usr/local/include", 18))
+-              || (!strncmp (p->name, "/usr/X11R6/include", 18)))
++              || (!strncmp (p->name, "/usr/X11R6/include", 18))
++              || (!strncmp (p->name, "/sw/include", 11))
++              || (!strncmp (p->name, "/opt/include", 12)))
+             warning (OPT_Wpoison_system_directories,
+                      "include location \"%s\" is unsafe for "
+                      "cross-compilation",

@@ -1,0 +1,30 @@
+	2010-02-03  Daniel Gutson  <dgutson@codesourcery.com>
+
+	Issue #6472
+
+	gcc/
+	* config/arm/lib1funcs.asm (__ARM_ARCH__): __ARM_ARCH_7EM__
+	added to the preprocessor condition.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Backport from FSF mainline:
+
+ 	gcc/
+ 	* config/arm/thumb2.md (*thumb2_addsi3_compare0): New.
+ 	(*thumb2_addsi3_compare0_scratch): New.
+
+=== modified file 'gcc/config/arm/lib1funcs.asm'
+--- old/gcc/config/arm/lib1funcs.asm	2010-08-05 15:20:54 +0000
++++ new/gcc/config/arm/lib1funcs.asm	2010-08-12 16:49:44 +0000
+@@ -104,7 +104,8 @@
+ #endif
+ 
+ #if defined(__ARM_ARCH_7__) || defined(__ARM_ARCH_7A__) \
+-	|| defined(__ARM_ARCH_7R__) || defined(__ARM_ARCH_7M__)
++	|| defined(__ARM_ARCH_7R__) || defined(__ARM_ARCH_7M__) \
++	|| defined(__ARM_ARCH_7EM__)
+ # define __ARM_ARCH__ 7
+ #endif
+ 
+

@@ -1,0 +1,19 @@
+2008-01-25  Jakub Jelinek  <jakub@redhat.com>
+
+	* lang.c (java_classify_record): Revert 2007-12-20 change.
+
+Index: gcc/java/lang.c
+===================================================================
+--- gcc/java/lang.c.orig	2010-01-20 00:17:00.000000000 -0800
++++ gcc/java/lang.c	2010-06-25 10:28:46.569383189 -0700
+@@ -881,9 +881,7 @@
+   if (! CLASS_P (type))
+     return RECORD_IS_STRUCT;
+ 
+-  /* ??? GDB does not support DW_TAG_interface_type as of December,
+-     2007.  Re-enable this at a later time.  */
+-  if (0 && CLASS_INTERFACE (TYPE_NAME (type)))
++  if (CLASS_INTERFACE (TYPE_NAME (type)))
+     return RECORD_IS_INTERFACE;
+ 
+   return RECORD_IS_CLASS;

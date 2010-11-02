@@ -1,0 +1,131 @@
+	Merge from Sourcery G++ 4.4:
+
+	2009-05-21  Sandra Loosemore  <sandra@codesourcery.com>
+
+	Merge from Sourcery G++ 4.3:
+
+	2009-04-04  Sandra Loosemore  <sandra@codesourcery.com>
+
+	Issue #5104
+	PR tree-optimization/39604
+
+	gcc/testsuite
+	* g++.dg/tree-ssa/sink-1.C: New.
+
+	gcc/
+	* tree_ssa-sink.c (sink_code_in_bb): Do not sink statements out
+	of a lexical block containing variable definitions.
+
+2010-07-09  Sandra Loosemore  <sandra@codesourcery.com>
+
+ 	Backport from mainline (originally on Sourcery G++ 4.4):
+ 
+ 	2010-07-02  Julian Brown  <julian@codesourcery.com>
+
+=== added file 'gcc/testsuite/g++.dg/tree-ssa/sink-1.C'
+--- old/gcc/testsuite/g++.dg/tree-ssa/sink-1.C	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/g++.dg/tree-ssa/sink-1.C	2010-07-30 12:14:18 +0000
+@@ -0,0 +1,50 @@
++/* { dg-do run } */
++/* { dg-options "-O1" } */
++
++class A {
++ public:
++  A() {}
++  virtual ~A() {}  
++  void * dostuff();
++  
++  virtual int dovirtual() = 0;
++};
++
++
++class B : public A {
++ public:
++  B() {}
++  int dovirtual() { return 0;}
++  virtual ~B() {};
++}; 
++
++class C : public B {
++ public:
++  C() {}
++  virtual ~C() {};
++};
++
++void* A::dostuff()
++{
++  return (void*)dovirtual();
++}
++
++/* tree-ssa-sink was sinking the inlined destructor for STUFF out of
++   the first inner block and into the second one, where it was ending up
++   after the inlined constructor for STUFF2.  This is bad because
++   cfgexpand aliases STUFF and STUFF2 to the same storage at -O1
++   (i.e., without -fstrict-aliasing), with the result that STUFF2's
++   vtable was getting trashed. */
++
++int main() {
++  {
++    B stuff;
++    stuff.dostuff();
++  }
++  {
++    C stuff2;
++    stuff2.dostuff();
++  }
++  return 0;
++}
++
+
+=== modified file 'gcc/tree-ssa-sink.c'
+--- old/gcc/tree-ssa-sink.c	2009-11-28 16:21:00 +0000
++++ new/gcc/tree-ssa-sink.c	2010-07-30 12:14:18 +0000
+@@ -470,6 +470,47 @@
+ 	  last = false;
+ 	  continue;
+ 	}
++
++      /* We cannot move statements that contain references to block-scope
++	 variables out of that block, as this may lead to incorrect aliasing
++	 when we lay out the stack frame in cfgexpand.c.
++	 In lieu of more sophisticated analysis, be very conservative here
++	 and prohibit moving any statement that references memory out of a
++	 block with variables.  */
++      if (gimple_references_memory_p (stmt))
++	{
++	  tree fromblock = gimple_block (stmt);
++	  while (fromblock
++		 && fromblock != current_function_decl
++		 && !BLOCK_VARS (fromblock))
++	    fromblock = BLOCK_SUPERCONTEXT (fromblock);
++	  if (fromblock && fromblock != current_function_decl)
++	    {
++	      gimple tostmt;
++	      tree toblock;
++
++	      if (gsi_end_p (togsi))
++		tostmt = gimple_seq_last_stmt (gsi_seq (togsi));
++	      else
++		tostmt = gsi_stmt (togsi);
++	      if (tostmt)
++		toblock = gimple_block (tostmt);
++	      else
++		toblock = NULL;
++	      while (toblock
++		     && toblock != current_function_decl
++		     && toblock != fromblock)
++		toblock = BLOCK_SUPERCONTEXT (toblock);
++	      if (!toblock || toblock != fromblock)
++		{
++		  if (!gsi_end_p (gsi))
++		    gsi_prev (&gsi);
++		  last = false;
++		  continue;
++		}
++	    }
++	}
++
+       if (dump_file)
+ 	{
+ 	  fprintf (dump_file, "Sinking ");
+

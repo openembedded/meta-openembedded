@@ -1,0 +1,13 @@
+Index: gcc-4.5/gcc/config/arm/arm.md
+===================================================================
+--- gcc-4.5.orig/gcc/config/arm/arm.md	2010-06-17 09:13:07.000000000 -0700
++++ gcc-4.5/gcc/config/arm/arm.md	2010-06-22 08:08:45.397212002 -0700
+@@ -11267,7 +11267,7 @@
+ (define_expand "bswapsi2"
+   [(set (match_operand:SI 0 "s_register_operand" "=r")
+   	(bswap:SI (match_operand:SI 1 "s_register_operand" "r")))]
+-"TARGET_EITHER"
++"TARGET_EITHER && (arm_arch6 && !optimize_size)"
+ "
+   if (!arm_arch6)
+     {

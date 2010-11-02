@@ -1,0 +1,21 @@
+2010-10-08  Jie Zhang  <jie@codesourcery.com>
+
+	* config/arm/arm.c (arm_override_options): Disable
+	-fsched-interblock for Cortex-M4.
+
+=== modified file 'gcc/config/arm/arm.c'
+Index: gcc-4.5/gcc/config/arm/arm.c
+===================================================================
+--- gcc-4.5.orig/gcc/config/arm/arm.c
++++ gcc-4.5/gcc/config/arm/arm.c
+@@ -1913,6 +1913,10 @@ arm_override_options (void)
+ 	fix_cm3_ldrd = 0;
+     }
+ 
++  /* Disable -fsched-interblock for Cortex-M4.  */
++  if (arm_selected_tune->core == cortexm4)
++    flag_schedule_interblock = 0;
++
+   if (TARGET_THUMB1 && flag_schedule_insns)
+     {
+       /* Don't warn since it's on by default in -O2.  */

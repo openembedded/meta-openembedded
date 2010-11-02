@@ -1,0 +1,16 @@
+2006-08-18  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c/27898
+	* gcc.dg/pr27898.c: New test.
+
+--- gcc/testsuite/gcc.dg/pr27898.c.jj	2006-08-18 09:19:33.000000000 +0200
++++ gcc/testsuite/gcc.dg/pr27898.c	2006-08-18 09:19:27.000000000 +0200
+@@ -0,0 +1,8 @@
++/* PR c/27898 */
++/* { dg-do compile } */
++/* { dg-options "--combine" } */
++/* { dg-additional-sources "pr27898.c" } */
++
++union u { struct { int i; }; };
++
++extern int foo (union u *);

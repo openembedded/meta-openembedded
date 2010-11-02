@@ -1,0 +1,27 @@
+	2010-06-12  Jie Zhang  <jie@codesourcery.com>
+
+	gcc/
+	* config/arm/vfp.md (arm_movsi_vfp): Set neon_type correctly
+	for neon_ldr and neon_str instructions.
+
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+	Merge from Sourcery G++ 4.4:
+	
+ 	2010-04-11  Julian Brown  <julian@codesourcery.com>
+ 
+ 	Issue #7326
+
+=== modified file 'gcc/config/arm/vfp.md'
+--- old/gcc/config/arm/vfp.md	2010-08-13 11:40:17 +0000
++++ new/gcc/config/arm/vfp.md	2010-08-13 15:28:31 +0000
+@@ -82,7 +82,7 @@
+   "
+   [(set_attr "predicable" "yes")
+    (set_attr "type" "*,*,*,*,load1,store1,r_2_f,f_2_r,fcpys,f_loads,f_stores")
+-   (set_attr "neon_type" "*,*,*,*,*,*,neon_mcr,neon_mrc,neon_vmov,*,*")
++   (set_attr "neon_type" "*,*,*,*,*,*,neon_mcr,neon_mrc,neon_vmov,neon_ldr,neon_str")
+    (set_attr "pool_range"     "*,*,*,*,4096,*,*,*,*,1020,*")
+    (set_attr "neg_pool_range" "*,*,*,*,4084,*,*,*,*,1008,*")]
+ )
+

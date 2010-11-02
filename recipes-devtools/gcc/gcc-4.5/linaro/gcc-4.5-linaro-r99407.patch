@@ -1,0 +1,33 @@
+2010-09-30  Jie Zhang  <jie@codesourcery.com>
+
+	gcc/testsuite/
+
+	* c-c++-common/uninit-17.c: Adjust warning message.
+
+	Backport from mainline:
+
+	2010-07-30  Xinliang David Li  <davidxl@google.com>
+	PR tree-optimization/45121
+	* c-c++-common/uninit-17.c: Add -fno-ivops option.
+
+=== modified file 'gcc/testsuite/c-c++-common/uninit-17.c'
+Index: gcc-4.5/gcc/testsuite/c-c++-common/uninit-17.c
+===================================================================
+--- gcc-4.5.orig/gcc/testsuite/c-c++-common/uninit-17.c
++++ gcc-4.5/gcc/testsuite/c-c++-common/uninit-17.c
+@@ -1,5 +1,5 @@
+ /* { dg-do compile } */
+-/* { dg-options "-O2 -Wuninitialized" } */
++/* { dg-options "-O2 -Wuninitialized -fno-ivopts" } */
+ 
+ inline int foo(int x)
+ {
+@@ -9,7 +9,7 @@ static void bar(int a, int *ptr)
+ {
+   do
+   {
+-    int b; /* { dg-warning "is used uninitialized" } */
++    int b; /* { dg-warning "may be used uninitialized" } */
+     if (b < 40) {
+       ptr[0] = b;
+     }
