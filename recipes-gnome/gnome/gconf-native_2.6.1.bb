@@ -1,6 +1,8 @@
 NOTE = "This is just a dummy package to get packages stop complaining about gconftool-2 \
         which they are not using anyway... :D"
 
+LICENSE = "MIT"
+
 PR = "r1"
 
 inherit native
