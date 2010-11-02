@@ -1,0 +1,35 @@
+--- orbit/configure.in~	2004-05-07 09:31:32.000000000 +0100
++++ orbit/configure.in	2004-05-08 19:27:35.000000000 +0100
+@@ -193,19 +193,19 @@
+ dnl   So many people with broken linking setups asked about this
+ dnl it turned out to be necessary to check for this.
+ dnl
+-dofus_save_libs="$LIBS"
+-LIBS="$ORBIT_LIBS $LIBS"
+-AC_TRY_RUN([ #include <stdio.h>
+-             main ()
+-             {
+-               return 0;
+-             } ],,
+-           AC_MSG_ERROR([
+-Linking is badly borked on your system. Please ensure your library path is correct
+-Check config.log for details - check near the end of the log above 'failed program was'
+-Alternatively ensure that your /etc/ld.so.conf (and/or LD_LIBRARY_PATH) includes the
+-prefix you're compiling on: '${prefix}' ]))
+-LIBS="$dofus_save_libs"
++dnl dofus_save_libs="$LIBS"
++dnl LIBS="$ORBIT_LIBS $LIBS"
++dnl AC_TRY_RUN([ #include <stdio.h>
++dnl              main ()
++dnl              {
++dnl                return 0;
++dnl              } ],,
++dnl            AC_MSG_ERROR([
++dnl Linking is badly borked on your system. Please ensure your library path is correct
++dnl Check config.log for details - check near the end of the log above 'failed program was'
++dnl Alternatively ensure that your /etc/ld.so.conf (and/or LD_LIBRARY_PATH) includes the
++dnl prefix you're compiling on: '${prefix}' ]))
++dnl LIBS="$dofus_save_libs"
+ 
+ orig_CPPFLAGS=$CPPFLAGS
+ CPPFLAGS="$CPPFLAGS $ORBIT_CFLAGS"
