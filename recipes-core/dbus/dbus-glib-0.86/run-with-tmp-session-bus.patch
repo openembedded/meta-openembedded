@@ -1,0 +1,24 @@
+Index: dbus-glib-0.76/tools/run-with-tmp-session-bus.sh
+===================================================================
+--- dbus-glib-0.76.orig/tools/run-with-tmp-session-bus.sh	2008-06-13 16:31:54.000000000 +0100
++++ dbus-glib-0.76/tools/run-with-tmp-session-bus.sh	2008-06-13 16:32:54.000000000 +0100
+@@ -30,17 +30,15 @@
+ echo "escaped service dir is: $ESCAPED_SERVICE_DIR" >&2
+ 
+ ## create a configuration file based on the standard session.conf
+-cat $DBUS_TOP_SRCDIR/tools/session.conf |  \
++cat $datadir/tools/session.conf |  \
+     sed -e 's/<servicedir>.*$/<servicedir>'$ESCAPED_SERVICE_DIR'<\/servicedir>/g' |  \
+     sed -e 's/<include.*$//g'                \
+   > $CONFIG_FILE
+ 
+ echo "Created configuration file $CONFIG_FILE" >&2
+ 
+-PATH=$DBUS_TOP_BUILDDIR/bus:$PATH
+-export PATH
+ ## the libtool script found by the path search should already do this, but
+-LD_LIBRARY_PATH=$DBUS_TOP_BUILDDIR/dbus/.libs:$LD_LIBRARY_PATH
++LD_LIBRARY_PATH=$libdir:$LD_LIBRARY_PATH
+ export PATH
+ unset DBUS_SESSION_BUS_ADDRESS
+ unset DBUS_SESSION_BUS_PID

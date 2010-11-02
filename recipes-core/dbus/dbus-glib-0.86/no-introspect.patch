@@ -1,0 +1,12 @@
+--- /tmp/Makefile.am	2010-03-28 12:24:13.000000000 +0200
++++ dbus-glib-0.86/tools/Makefile.am	2010-03-28 12:24:30.000000000 +0200
+@@ -3,9 +3,6 @@
+ nodist_libdbus_glib_HEADERS = dbus-glib-bindings.h
+ libdbus_glibdir = $(includedir)/dbus-1.0/dbus
+ 
+-dbus-glib-bindings.h: $(top_srcdir)/dbus-bus-introspect.xml $(top_builddir)/dbus/dbus-binding-tool$(EXEEXT)
+-	$(DBUS_BINDING_TOOL) --mode=glib-client --prefix=dbus_bus --output=dbus-glib-bindings.h $(top_srcdir)/dbus-bus-introspect.xml
+-
+ BUILT_SOURCES = dbus-glib-bindings.h
+ 
+ EXTRA_DIST = run-with-tmp-session-bus.sh session.conf

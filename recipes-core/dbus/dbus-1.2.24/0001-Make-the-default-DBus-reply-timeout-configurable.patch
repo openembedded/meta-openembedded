@@ -1,0 +1,78 @@
+From fb546488e93a1638d377b228bbb0d2ab58462168 Mon Sep 17 00:00:00 2001
+From: Daniel Willmann <daniel@totalueberwachung.de>
+Date: Thu, 2 Oct 2008 15:50:17 +0800
+Subject: [PATCH] Make the default DBus reply timeout configurable
+
+This patch adds an option --with-dbus-default-reply-timeout to configure
+that will set the default reply timeout used by libdbus in milliseconds.
+autoconf and autoheader need to be rerun in order to regenerate the
+correct configure and config.h.in files.
+---
+ configure.in                    |    9 +++++++++
+ dbus/dbus-connection-internal.h |    3 ---
+ dbus/dbus-pending-call.c        |    1 +
+ 3 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index 62ac387..5c912d7 100644
+--- a/configure.in
++++ b/configure.in
+@@ -88,6 +88,7 @@ AC_ARG_WITH(console-auth-dir, AS_HELP_STRING([--with-console-auth-dir=[dirname]]
+ AC_ARG_WITH(console-owner-file, AS_HELP_STRING([--with-console-owner-file=[filename]],[file whose owner determines current console owner]))
+ AC_ARG_WITH(dbus_user, AS_HELP_STRING([--with-dbus-user=<user>],[User for running the DBUS daemon (messagebus)]))
+ AC_ARG_WITH(dbus_daemondir, AS_HELP_STRING([--with-dbus-daemondir=[dirname]],[Directory for installing the DBUS daemon]))
++AC_ARG_WITH(dbus_default_reply_timeout, AS_HELP_STRING([--with-dbus-default-reply-timeout=[milliseconds]],[Default reply timeout for DBus method calls]))
+ 
+ AC_DEFINE(DBUS_UNIX,1,[dbus on unix])
+ 
+@@ -986,6 +987,13 @@ if test x$have_libaudit = xyes ; then
+     AC_DEFINE(HAVE_LIBAUDIT,1,[audit daemon SELinux support])
+ fi
+ 
++if test -z "$with_dbus_default_reply_timeout" ; then
++    DBUS_DEFAULT_REPLY_TIMEOUT=25000
++else
++    DBUS_DEFAULT_REPLY_TIMEOUT=$with_dbus_default_reply_timeout
++fi
++AC_DEFINE_UNQUOTED(_DBUS_DEFAULT_TIMEOUT_VALUE,$DBUS_DEFAULT_REPLY_TIMEOUT,[default timeout value for dbus calls])
++
+ #### Set up final flags
+ DBUS_CLIENT_CFLAGS=
+ DBUS_CLIENT_LIBS="$THREAD_LIBS"
+@@ -1348,6 +1356,7 @@ echo "
+         Gettext libs (empty OK):  ${INTLLIBS}
+         Using XML parser:         ${with_xml}
+         Init scripts style:       ${with_init_scripts}
++        Default reply timeout:    ${DBUS_DEFAULT_REPLY_TIMEOUT}
+         Abstract socket names:    ${ac_cv_have_abstract_sockets}
+         System bus socket:        ${DBUS_SYSTEM_SOCKET}
+         System bus address:       ${DBUS_SYSTEM_BUS_DEFAULT_ADDRESS}
+diff --git a/dbus/dbus-connection-internal.h b/dbus/dbus-connection-internal.h
+index df54412..5fe536b 100644
+--- a/dbus/dbus-connection-internal.h
++++ b/dbus/dbus-connection-internal.h
+@@ -41,9 +41,6 @@ typedef enum
+   DBUS_ITERATION_BLOCK      = 1 << 2  /**< Block if nothing to do. */
+ } DBusIterationFlags;
+ 
+-/** default timeout value when waiting for a message reply, 25 seconds */
+-#define _DBUS_DEFAULT_TIMEOUT_VALUE (25 * 1000)
+-
+ void              _dbus_connection_lock                        (DBusConnection     *connection);
+ void              _dbus_connection_unlock                      (DBusConnection     *connection);
+ DBusConnection *  _dbus_connection_ref_unlocked                (DBusConnection     *connection);
+diff --git a/dbus/dbus-pending-call.c b/dbus/dbus-pending-call.c
+index 51b9378..5a7a5f4 100644
+--- a/dbus/dbus-pending-call.c
++++ b/dbus/dbus-pending-call.c
+@@ -21,6 +21,7 @@
+  *
+  */
+ 
++#include <config.h>
+ #include "dbus-internals.h"
+ #include "dbus-connection-internal.h"
+ #include "dbus-pending-call-internal.h"
+-- 
+1.5.6.4
+

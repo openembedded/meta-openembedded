@@ -1,0 +1,13 @@
+Index: dbus-0.94/bus/Makefile.am
+===================================================================
+--- dbus-0.94.orig/bus/Makefile.am	2006-10-01 17:36:18.000000000 +0200
++++ dbus-0.94/bus/Makefile.am	2006-10-14 21:40:05.000000000 +0200
+@@ -110,7 +110,7 @@
+ 		$(mkinstalldirs) $(DESTDIR)$(DBUS_DAEMONDIR); \
+ 		chmod 755 $(DESTDIR)$(DBUS_DAEMONDIR); \
+ 	fi
+-	$(INSTALL_PROGRAM) dbus-daemon $(DESTDIR)$(DBUS_DAEMONDIR)
++	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) dbus-daemon $(DESTDIR)$(DBUS_DAEMONDIR)
+ 	$(mkinstalldirs) $(DESTDIR)$(localstatedir)/run/dbus
+ 	$(mkinstalldirs) $(DESTDIR)$(configdir)/system.d
+ 	$(mkinstalldirs) $(DESTDIR)$(datadir)/dbus-1/services

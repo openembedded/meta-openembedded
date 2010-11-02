@@ -1,0 +1,38 @@
+From d365dd8141e709222f3a619d7b04ec4ded6429fd Mon Sep 17 00:00:00 2001
+From: Havoc Pennington <hp@pobox.com>
+Date: Tue, 31 Aug 2010 15:59:09 +0000
+Subject: Change failure of setsockopt SO_REUSEADDR to be a warning, not set an error
+
+It was previously setting an error but then continuing, which is
+not allowed since errors can't be "piled up"
+---
+diff --git a/dbus/dbus-sysdeps-unix.c b/dbus/dbus-sysdeps-unix.c
+index e4ff6ee..3205bed 100644
+--- a/dbus/dbus-sysdeps-unix.c
++++ b/dbus/dbus-sysdeps-unix.c
+@@ -980,9 +980,8 @@ _dbus_listen_unix_socket (const char     *path,
+   reuseaddr = 1;
+   if (setsockopt  (listen_fd, SOL_SOCKET, SO_REUSEADDR, &reuseaddr, sizeof(reuseaddr))==-1)
+     {
+-      dbus_set_error (error, _dbus_error_from_errno (errno),
+-                      "Failed to set socket option\"%s\": %s",
+-                      path, _dbus_strerror (errno));
++      _dbus_warn ("Failed to set socket option\"%s\": %s",
++                  path, _dbus_strerror (errno));
+     }
+ 
+   if (bind (listen_fd, (struct sockaddr*) &addr, _DBUS_STRUCT_OFFSET (struct sockaddr_un, sun_path) + path_len) < 0)
+@@ -1335,9 +1334,8 @@ _dbus_listen_tcp_socket (const char     *host,
+       reuseaddr = 1;
+       if (setsockopt (fd, SOL_SOCKET, SO_REUSEADDR, &reuseaddr, sizeof(reuseaddr))==-1)
+         {
+-          dbus_set_error (error, _dbus_error_from_errno (errno),
+-                          "Failed to set socket option \"%s:%s\": %s",
+-                          host ? host : "*", port, _dbus_strerror (errno));
++          _dbus_warn ("Failed to set socket option \"%s:%s\": %s",
++                      host ? host : "*", port, _dbus_strerror (errno));
+         }
+ 
+       if (bind (fd, (struct sockaddr*) tmp->ai_addr, tmp->ai_addrlen) < 0)
+--
+cgit v0.8.3-6-g21f6

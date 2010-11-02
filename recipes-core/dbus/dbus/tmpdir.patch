@@ -1,0 +1,30 @@
+--- dbus-0.22/configure.in.orig	2004-08-13 00:57:16.000000000 +0200
++++ dbus-0.22/configure.in	2004-12-30 21:15:57.000000000 +0100
+@@ -1047,15 +1048,18 @@
+ AC_SUBST(ABSOLUTE_TOP_BUILDDIR)
+ 
+ #### Find socket directories
+-if ! test -z "$TMPDIR" ; then
+-   DEFAULT_SOCKET_DIR=$TMPDIR
+-elif ! test -z "$TEMP" ; then
+-   DEFAULT_SOCKET_DIR=$TEMP
+-elif ! test -z "$TMP" ; then
+-   DEFAULT_SOCKET_DIR=$TMP
+-else
+-   DEFAULT_SOCKET_DIR=/tmp
+-fi
++#if ! test -z "$TMPDIR" ; then
++#   DEFAULT_SOCKET_DIR=$TMPDIR
++#elif ! test -z "$TEMP" ; then
++#   DEFAULT_SOCKET_DIR=$TEMP
++#elif ! test -z "$TMP" ; then
++#   DEFAULT_SOCKET_DIR=$TMP
++#else
++#   DEFAULT_SOCKET_DIR=/tmp
++#fi
++
++# checks disabled to avoid expanding this at build time
++DEFAULT_SOCKET_DIR=/tmp
+ 
+ if ! test -z "$with_test_socket_dir" ; then
+    TEST_SOCKET_DIR="$with_test_socket_dir"

@@ -1,0 +1,64 @@
+From 8f5f340b77b51fed1f036a9ee9f70a31b201f2c9 Mon Sep 17 00:00:00 2001
+From: Sledz <sledz@MOBIL-400-586.intern.dresearch.de>
+Date: Tue, 29 Jun 2010 21:04:15 +0000
+Subject: sysdeps-unix: enable address reuse on TCP sockets
+
+This helps to avoid 'Address already in use' problems if server has been shut
+down, and then restarted while sockets are still active on its port.
+
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+diff --git a/dbus/dbus-sysdeps-unix.c b/dbus/dbus-sysdeps-unix.c
+index ce3475a..b58d09a 100644
+--- a/dbus/dbus-sysdeps-unix.c
++++ b/dbus/dbus-sysdeps-unix.c
+@@ -623,6 +623,7 @@ _dbus_listen_unix_socket (const char     *path,
+   int listen_fd;
+   struct sockaddr_un addr;
+   size_t path_len;
++  unsigned int reuseaddr;
+ 
+   _DBUS_ASSERT_ERROR_IS_CLEAR (error);
+ 
+@@ -696,7 +697,15 @@ _dbus_listen_unix_socket (const char     *path,
+ 	
+       strncpy (addr.sun_path, path, path_len);
+     }
+-  
++
++  reuseaddr = 1;
++  if (setsockopt  (listen_fd, SOL_SOCKET, SO_REUSEADDR, &reuseaddr, sizeof(reuseaddr))==-1)
++    {
++      dbus_set_error (error, _dbus_error_from_errno (errno),
++                      "Failed to set socket option\"%s\": %s",
++                      path, _dbus_strerror (errno));
++    }
++
+   if (bind (listen_fd, (struct sockaddr*) &addr, _DBUS_STRUCT_OFFSET (struct sockaddr_un, sun_path) + path_len) < 0)
+     {
+       dbus_set_error (error, _dbus_error_from_errno (errno),
+@@ -870,6 +879,7 @@ _dbus_listen_tcp_socket (const char     *host,
+   int nlisten_fd = 0, *listen_fd = NULL, res, i;
+   struct addrinfo hints;
+   struct addrinfo *ai, *tmp;
++  unsigned int reuseaddr;
+ 
+   *fds_p = NULL;
+   _DBUS_ASSERT_ERROR_IS_CLEAR (error);
+@@ -915,6 +925,14 @@ _dbus_listen_tcp_socket (const char     *host,
+         }
+       _DBUS_ASSERT_ERROR_IS_CLEAR(error);
+ 
++      reuseaddr = 1;
++      if (setsockopt (fd, SOL_SOCKET, SO_REUSEADDR, &reuseaddr, sizeof(reuseaddr))==-1)
++        {
++          dbus_set_error (error, _dbus_error_from_errno (errno),
++                          "Failed to set socket option \"%s:%s\": %s",
++                          host ? host : "*", port, _dbus_strerror (errno));
++        }
++
+       if (bind (fd, (struct sockaddr*) tmp->ai_addr, tmp->ai_addrlen) < 0)
+         {
+           _dbus_close(fd, NULL);
+--
+cgit v0.8.3-6-g21f6
