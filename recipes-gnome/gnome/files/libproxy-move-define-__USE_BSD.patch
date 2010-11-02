@@ -1,0 +1,17 @@
+Index: libproxy-0.2.3/src/lib/dns.c
+===================================================================
+--- libproxy-0.2.3.orig/src/lib/dns.c	2009-08-14 14:13:21.123557812 -0700
++++ libproxy-0.2.3/src/lib/dns.c	2009-08-14 14:13:31.954575500 -0700
+@@ -17,11 +17,11 @@
+  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
+  ******************************************************************************/
+ 
++#define __USE_BSD
+ #include <string.h>
+ #include <errno.h>
+ #include <stdio.h>
+ #include <netdb.h>
+-#define __USE_BSD
+ #include <unistd.h>
+ 
+ #include "misc.h"
