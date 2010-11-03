@@ -1,0 +1,48 @@
+Index: openssl-0.9.8m/crypto/Makefile
+===================================================================
+--- openssl-0.9.8m.orig/crypto/Makefile	2008-09-18 01:10:55.000000000 +0800
++++ openssl-0.9.8m/crypto/Makefile	2010-03-09 16:13:16.055652727 +0800
+@@ -103,7 +103,7 @@
+ 
+ shared: buildinf.h lib subdirs
+ 	if [ -n "$(SHARED_LIBS)" ]; then \
+-		(cd ..; $(MAKE) $(SHARED_LIB)); \
++		(cd ..; $(MAKE) -e $(SHARED_LIB)); \
+ 	fi
+ 
+ libs:
+Index: openssl-0.9.8m/Makefile.org
+===================================================================
+--- openssl-0.9.8m.orig/Makefile.org	2010-01-28 00:06:36.000000000 +0800
++++ openssl-0.9.8m/Makefile.org	2010-03-09 16:14:22.065664019 +0800
+@@ -355,7 +355,7 @@
+ 	@if [ "$(SHLIB_TARGET)" != "" ]; then \
+ 		if [ "$(FIPSCANLIB)" = "libfips" ]; then \
+ 			$(ARD) libcrypto.a fipscanister.o ; \
+-			$(MAKE) SHLIBDIRS='crypto' SHLIBDEPS='-lfips' build-shared; \
++			$(MAKE) -e SHLIBDIRS='crypto' SHLIBDEPS='-lfips' build-shared; \
+ 			$(AR) libcrypto.a fips/fipscanister.o ; \
+ 		else \
+ 			if [ "$(FIPSCANLIB)" = "libcrypto" ]; then \
+@@ -373,7 +373,7 @@
+ 	@if [ "$(SHLIB_TARGET)" != "" ]; then \
+ 		shlibdeps=-lcrypto; \
+ 		[ "$(FIPSCANLIB)" = "libfips" ] && shlibdeps="$$shlibdeps -lfips"; \
+-		$(MAKE) SHLIBDIRS=ssl SHLIBDEPS="$$shlibdeps" build-shared; \
++		$(MAKE) -e SHLIBDIRS=ssl SHLIBDEPS="$$shlibdeps" build-shared; \
+ 	else \
+ 		echo "There's no support for shared libraries on this platform" >&2 ; \
+ 		exit 1; \
+Index: openssl-0.9.8m/ssl/Makefile
+===================================================================
+--- openssl-0.9.8m.orig/ssl/Makefile	2010-01-21 00:35:30.000000000 +0800
++++ openssl-0.9.8m/ssl/Makefile	2010-03-09 16:13:16.065664772 +0800
+@@ -62,7 +62,7 @@
+ 
+ shared: lib
+ 	if [ -n "$(SHARED_LIBS)" ]; then \
+-		(cd ..; $(MAKE) $(SHARED_LIB)); \
++		(cd ..; $(MAKE) -e $(SHARED_LIB)); \
+ 	fi
+ 
+ files:
