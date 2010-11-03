@@ -127,6 +127,9 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
 	   file://gcc-vmovl-PR45805.patch \
 	   file://gcc-scalar-widening-pr45847.patch \
 	   file://gcc-linaro-fix-lp-653316.patch \
+	   \
+	   file://optional_libstdc.patch \
+	   file://64bithack.patch \
 	  "
 
 SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch;patch=1 "
