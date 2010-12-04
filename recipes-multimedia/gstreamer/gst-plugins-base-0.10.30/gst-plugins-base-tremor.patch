@@ -1,0 +1,17 @@
+Remove -DTREMOR option since Tremor has dropped its internal
+libogg2, and gst-plugins-base has dependency on that.
+
+Signed-off-by: Dongxiao Xu <dongxiao.xu@intel.com>
+
+diff -ruN gst-plugins-base-0.10.30-orig/ext/vorbis/Makefile.am gst-plugins-base-0.10.30/ext/vorbis/Makefile.am
+--- gst-plugins-base-0.10.30-orig/ext/vorbis/Makefile.am	2010-11-17 16:11:03.000000000 +0800
++++ gst-plugins-base-0.10.30/ext/vorbis/Makefile.am	2010-11-17 16:12:41.000000000 +0800
+@@ -28,7 +28,7 @@
+ libgstivorbisdec_la_SOURCES = gstivorbisdec.c \
+ 	gstvorbisdec.c gstvorbisdeclib.c gstvorbiscommon.c
+ libgstivorbisdec_la_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_CFLAGS) \
+-	-DTREMOR $(IVORBIS_CFLAGS)
++	$(IVORBIS_CFLAGS)
+ libgstivorbisdec_la_LIBADD = \
+ 	$(top_builddir)/gst-libs/gst/tag/libgsttag-@GST_MAJORMINOR@.la \
+ 	$(top_builddir)/gst-libs/gst/audio/libgstaudio-@GST_MAJORMINOR@.la \
