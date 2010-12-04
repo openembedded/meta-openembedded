@@ -1,0 +1,75 @@
+From b066b520dfaf0a9f4d1bc9a73c789091e9ce7cc8 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Mon, 29 Nov 2010 02:38:52 +0200
+Subject: [PATCH 13/24] ARM: added 'neon_composite_add_n_8_8888' fast path
+
+---
+ pixman/pixman-arm-neon-asm.S |   29 +++++++++++++++++++++++++++++
+ pixman/pixman-arm-neon.c     |    4 ++++
+ 2 files changed, 33 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
+index 829ef84..dd6f2c5 100644
+--- a/pixman/pixman-arm-neon-asm.S
++++ b/pixman/pixman-arm-neon-asm.S
+@@ -1628,6 +1628,35 @@ generate_composite_function \
+ 
+ /******************************************************************************/
+ 
++.macro pixman_composite_add_n_8_8888_init
++    add         DUMMY, sp, #ARGS_STACK_OFFSET
++    vld1.32     {d3[0]}, [DUMMY]
++    vdup.8      d0, d3[0]
++    vdup.8      d1, d3[1]
++    vdup.8      d2, d3[2]
++    vdup.8      d3, d3[3]
++.endm
++
++.macro pixman_composite_add_n_8_8888_cleanup
++.endm
++
++generate_composite_function \
++    pixman_composite_add_n_8_8888_asm_neon, 0, 8, 32, \
++    FLAG_DST_READWRITE | FLAG_DEINTERLEAVE_32BPP, \
++    8, /* number of pixels, processed in a single block */ \
++    5, /* prefetch distance */ \
++    pixman_composite_add_n_8_8888_init, \
++    pixman_composite_add_n_8_8888_cleanup, \
++    pixman_composite_add_8888_8888_8888_process_pixblock_head, \
++    pixman_composite_add_8888_8888_8888_process_pixblock_tail, \
++    pixman_composite_add_8888_8888_8888_process_pixblock_tail_head, \
++    28, /* dst_w_basereg */ \
++    4,  /* dst_r_basereg */ \
++    0,  /* src_basereg   */ \
++    27  /* mask_basereg  */
++
++/******************************************************************************/
++
+ .macro pixman_composite_out_reverse_8888_n_8888_process_pixblock_head
+     /* expecting source data in {d0, d1, d2, d3} */
+     /* destination data in {d4, d5, d6, d7} */
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index eaf9787..5ad58bd 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -80,6 +80,8 @@ PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, over_n_8_8,
+                                       uint8_t, 1, uint8_t, 1)
+ PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, add_n_8_8,
+                                       uint8_t, 1, uint8_t, 1)
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, add_n_8_8888,
++                                      uint8_t, 1, uint32_t, 1)
+ 
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (neon, over_8888_n_8888,
+                                      uint32_t, 1, uint32_t, 1)
+@@ -281,6 +283,8 @@ static const pixman_fast_path_t arm_neon_fast_paths[] =
+     PIXMAN_STD_FAST_PATH (OVER, x8r8g8b8, null,     a8r8g8b8, neon_composite_src_x888_8888),
+     PIXMAN_STD_FAST_PATH (OVER, x8b8g8r8, null,     a8b8g8r8, neon_composite_src_x888_8888),
+     PIXMAN_STD_FAST_PATH (ADD,  solid,    a8,       a8,       neon_composite_add_n_8_8),
++    PIXMAN_STD_FAST_PATH (ADD,  solid,    a8,       a8r8g8b8, neon_composite_add_n_8_8888),
++    PIXMAN_STD_FAST_PATH (ADD,  solid,    a8,       a8b8g8r8, neon_composite_add_n_8_8888),
+     PIXMAN_STD_FAST_PATH (ADD,  a8,       a8,       a8,       neon_composite_add_8_8_8),
+     PIXMAN_STD_FAST_PATH (ADD,  r5g6b5,   a8,       r5g6b5,   neon_composite_add_0565_8_0565),
+     PIXMAN_STD_FAST_PATH (ADD,  b5g6r5,   a8,       b5g6r5,   neon_composite_add_0565_8_0565),
+-- 
+1.6.6.1
+

@@ -1,0 +1,109 @@
+From 60d972afbae8613d700d3a6b3cb107429d7e11c6 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Thu, 10 Dec 2009 00:51:50 +0200
+Subject: [PATCH 22/24] ARM: added NEON optimizations for fetch/store r5g6b5 scanline
+
+---
+ pixman/pixman-arm-neon-asm.S |   20 ++++++++++++++++++++
+ pixman/pixman-arm-neon.c     |   40 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 60 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
+index cf014fa..25f7bf0 100644
+--- a/pixman/pixman-arm-neon-asm.S
++++ b/pixman/pixman-arm-neon-asm.S
+@@ -459,6 +459,16 @@ generate_composite_function \
+     pixman_composite_src_8888_0565_process_pixblock_tail, \
+     pixman_composite_src_8888_0565_process_pixblock_tail_head
+ 
++generate_composite_function_single_scanline \
++    pixman_store_scanline_r5g6b5_asm_neon, 32, 0, 16, \
++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
++    8, /* number of pixels, processed in a single block */ \
++    default_init, \
++    default_cleanup, \
++    pixman_composite_src_8888_0565_process_pixblock_head, \
++    pixman_composite_src_8888_0565_process_pixblock_tail, \
++    pixman_composite_src_8888_0565_process_pixblock_tail_head
++
+ /******************************************************************************/
+ 
+ .macro pixman_composite_src_0565_8888_process_pixblock_head
+@@ -494,6 +504,16 @@ generate_composite_function \
+     pixman_composite_src_0565_8888_process_pixblock_tail, \
+     pixman_composite_src_0565_8888_process_pixblock_tail_head
+ 
++generate_composite_function_single_scanline \
++    pixman_fetch_scanline_r5g6b5_asm_neon, 16, 0, 32, \
++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
++    8, /* number of pixels, processed in a single block */ \
++    default_init, \
++    default_cleanup, \
++    pixman_composite_src_0565_8888_process_pixblock_head, \
++    pixman_composite_src_0565_8888_process_pixblock_tail, \
++    pixman_composite_src_0565_8888_process_pixblock_tail_head
++
+ /******************************************************************************/
+ 
+ .macro pixman_composite_add_8_8_process_pixblock_head
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index 74316a8..f773e92 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -448,6 +448,42 @@ BIND_COMBINE_U (over)
+ BIND_COMBINE_U (add)
+ BIND_COMBINE_U (out_reverse)
+ 
++void
++pixman_fetch_scanline_r5g6b5_asm_neon (int             width,
++                                       uint32_t       *buffer,
++                                       const uint16_t *pixel);
++void
++pixman_store_scanline_r5g6b5_asm_neon (int             width,
++                                       uint16_t       *pixel,
++                                       const uint32_t *values);
++
++static void
++neon_fetch_scanline_r5g6b5 (pixman_image_t *image,
++                            int             x,
++                            int             y,
++                            int             width,
++                            uint32_t *      buffer,
++                            const uint32_t *mask)
++{
++    const uint32_t *bits = image->bits.bits + y * image->bits.rowstride;
++    const uint16_t *pixel = (const uint16_t *)bits + x;
++
++    pixman_fetch_scanline_r5g6b5_asm_neon (width, buffer, pixel);
++}
++
++static void
++neon_store_scanline_r5g6b5 (bits_image_t *  image,
++                            int             x,
++                            int             y,
++                            int             width,
++                            const uint32_t *values)
++{
++    uint32_t *bits = image->bits + image->rowstride * y;
++    uint16_t *pixel = ((uint16_t *) bits) + x;
++
++    pixman_store_scanline_r5g6b5_asm_neon (width, pixel, values);
++}
++
+ pixman_implementation_t *
+ _pixman_implementation_create_arm_neon (void)
+ {
+@@ -463,6 +499,10 @@ _pixman_implementation_create_arm_neon (void)
+     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
+     imp->combine_32[PIXMAN_OP_OUT_REVERSE] = neon_combine_out_reverse_u;
+ 
++    _pixman_bits_override_accessors (PIXMAN_r5g6b5,
++                                     neon_fetch_scanline_r5g6b5,
++                                     neon_store_scanline_r5g6b5);
++
+     imp->blt = arm_neon_blt;
+     imp->fill = arm_neon_fill;
+ 
+-- 
+1.6.6.1
+

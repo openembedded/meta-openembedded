@@ -1,0 +1,153 @@
+From af7a69d90ea2b43a4e850870727723d719f09a1c Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Mon, 29 Nov 2010 09:00:46 +0200
+Subject: [PATCH 15/24] ARM: added flags parameter to some asm fast path wrapper macros
+
+Not all types of operations can be skipped when having transparent
+solid source or transparent solid mask. Add an extra flags parameter
+for providing this information to the wrappers.
+---
+ pixman/pixman-arm-common.h |   15 +++++++++------
+ pixman/pixman-arm-neon.c   |   26 +++++++++++++-------------
+ pixman/pixman-arm-simd.c   |    4 ++--
+ 3 files changed, 24 insertions(+), 21 deletions(-)
+
+diff --git a/pixman/pixman-arm-common.h b/pixman/pixman-arm-common.h
+index 2cff6c8..66f448d 100644
+--- a/pixman/pixman-arm-common.h
++++ b/pixman/pixman-arm-common.h
+@@ -47,6 +47,9 @@
+  * or mask), the corresponding stride argument is unused.
+  */
+ 
++#define SKIP_ZERO_SRC  1
++#define SKIP_ZERO_MASK 2
++
+ #define PIXMAN_ARM_BIND_FAST_PATH_SRC_DST(cputype, name,                \
+                                           src_type, src_cnt,            \
+                                           dst_type, dst_cnt)            \
+@@ -87,7 +90,7 @@ cputype##_composite_##name (pixman_implementation_t *imp,               \
+                                              src_line, src_stride);     \
+ }
+ 
+-#define PIXMAN_ARM_BIND_FAST_PATH_N_DST(cputype, name,                  \
++#define PIXMAN_ARM_BIND_FAST_PATH_N_DST(flags, cputype, name,           \
+                                         dst_type, dst_cnt)              \
+ void                                                                    \
+ pixman_composite_##name##_asm_##cputype (int32_t    w,                  \
+@@ -117,7 +120,7 @@ cputype##_composite_##name (pixman_implementation_t *imp,               \
+                                                                         \
+     src = _pixman_image_get_solid (src_image, dst_image->bits.format);  \
+                                                                         \
+-    if (src == 0)                                                       \
++    if ((flags & SKIP_ZERO_SRC) && src == 0)                            \
+ 	return;                                                         \
+                                                                         \
+     PIXMAN_IMAGE_GET_LINE (dst_image, dest_x, dest_y, dst_type,         \
+@@ -128,7 +131,7 @@ cputype##_composite_##name (pixman_implementation_t *imp,               \
+                                              src);                      \
+ }
+ 
+-#define PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST(cputype, name,             \
++#define PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST(flags, cputype, name,      \
+                                              mask_type, mask_cnt,       \
+                                              dst_type, dst_cnt)         \
+ void                                                                    \
+@@ -163,7 +166,7 @@ cputype##_composite_##name (pixman_implementation_t *imp,               \
+                                                                         \
+     src = _pixman_image_get_solid (src_image, dst_image->bits.format);  \
+                                                                         \
+-    if (src == 0)                                                       \
++    if ((flags & SKIP_ZERO_SRC) && src == 0)                            \
+ 	return;                                                         \
+                                                                         \
+     PIXMAN_IMAGE_GET_LINE (dst_image, dest_x, dest_y, dst_type,         \
+@@ -177,7 +180,7 @@ cputype##_composite_##name (pixman_implementation_t *imp,               \
+                                              mask_line, mask_stride);   \
+ }
+ 
+-#define PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST(cputype, name,              \
++#define PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST(flags, cputype, name,       \
+                                             src_type, src_cnt,          \
+                                             dst_type, dst_cnt)          \
+ void                                                                    \
+@@ -211,7 +214,7 @@ cputype##_composite_##name (pixman_implementation_t *imp,               \
+                                                                         \
+     mask = _pixman_image_get_solid (mask_image, dst_image->bits.format);\
+                                                                         \
+-    if (mask == 0)                                                      \
++    if ((flags & SKIP_ZERO_MASK) && mask == 0)                          \
+ 	return;                                                         \
+                                                                         \
+     PIXMAN_IMAGE_GET_LINE (dst_image, dest_x, dest_y, dst_type,         \
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index f0dc111..1a3741c 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -63,33 +63,33 @@ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (neon, over_8888_8888,
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (neon, out_reverse_8_0565,
+                                    uint8_t, 1, uint16_t, 1)
+ 
+-PIXMAN_ARM_BIND_FAST_PATH_N_DST (neon, over_n_0565,
++PIXMAN_ARM_BIND_FAST_PATH_N_DST (SKIP_ZERO_SRC, neon, over_n_0565,
+                                  uint16_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_DST (neon, over_n_8888,
++PIXMAN_ARM_BIND_FAST_PATH_N_DST (SKIP_ZERO_SRC, neon, over_n_8888,
+                                  uint32_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_DST (neon, over_reverse_n_8888,
++PIXMAN_ARM_BIND_FAST_PATH_N_DST (SKIP_ZERO_SRC, neon, over_reverse_n_8888,
+                                  uint32_t, 1)
+ 
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, over_n_8_0565,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, over_n_8_0565,
+                                       uint8_t, 1, uint16_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, over_n_8_8888,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, over_n_8_8888,
+                                       uint8_t, 1, uint32_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, over_n_8888_8888_ca,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, over_n_8888_8888_ca,
+                                       uint32_t, 1, uint32_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, over_n_8_8,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, over_n_8_8,
+                                       uint8_t, 1, uint8_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, add_n_8_8,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, add_n_8_8,
+                                       uint8_t, 1, uint8_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (neon, add_n_8_8888,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, add_n_8_8888,
+                                       uint8_t, 1, uint32_t, 1)
+ 
+-PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (neon, over_8888_n_8888,
++PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (SKIP_ZERO_MASK, neon, over_8888_n_8888,
+                                      uint32_t, 1, uint32_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (neon, over_8888_n_0565,
++PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (SKIP_ZERO_MASK, neon, over_8888_n_0565,
+                                      uint32_t, 1, uint16_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (neon, over_0565_n_0565,
++PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (SKIP_ZERO_MASK, neon, over_0565_n_0565,
+                                      uint16_t, 1, uint16_t, 1)
+-PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (neon, add_8888_n_8888,
++PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (SKIP_ZERO_MASK, neon, add_8888_n_8888,
+                                      uint32_t, 1, uint32_t, 1)
+ 
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_MASK_DST (neon, add_8_8_8,
+diff --git a/pixman/pixman-arm-simd.c b/pixman/pixman-arm-simd.c
+index 3b05007..dc2f471 100644
+--- a/pixman/pixman-arm-simd.c
++++ b/pixman/pixman-arm-simd.c
+@@ -381,10 +381,10 @@ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, add_8_8,
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_DST (armv6, over_8888_8888,
+                                    uint32_t, 1, uint32_t, 1)
+ 
+-PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (armv6, over_8888_n_8888,
++PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (SKIP_ZERO_MASK, armv6, over_8888_n_8888,
+                                      uint32_t, 1, uint32_t, 1)
+ 
+-PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (armv6, over_n_8_8888,
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, armv6, over_n_8_8888,
+                                       uint8_t, 1, uint32_t, 1)
+ 
+ PIXMAN_ARM_BIND_SCALED_NEAREST_SRC_DST (armv6, 0565_0565, SRC,
+-- 
+1.6.6.1
+

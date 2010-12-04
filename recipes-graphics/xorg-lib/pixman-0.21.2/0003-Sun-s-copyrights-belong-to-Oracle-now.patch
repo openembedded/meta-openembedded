@@ -1,0 +1,39 @@
+From 654961efe405ad1a7e54a77548ca8af322ecc1f8 Mon Sep 17 00:00:00 2001
+From: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date: Sun, 21 Nov 2010 11:42:22 -0800
+Subject: [PATCH 03/24] Sun's copyrights belong to Oracle now
+
+Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+---
+ COPYING                      |    2 +-
+ pixman/solaris-hwcap.mapfile |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/COPYING b/COPYING
+index 3092a34..15f9517 100644
+--- a/COPYING
++++ b/COPYING
+@@ -18,7 +18,7 @@ possible. They may also add themselves to the list below.
+  * Copyright 2008 André Tupinambá
+  * Copyright 2008 Mozilla Corporation
+  * Copyright 2008 Frederic Plourde
+- * Copyright 2009 Sun Microsystems, Inc.
++ * Copyright 2009, Oracle and/or its affiliates. All rights reserved.
+  *
+  * Permission is hereby granted, free of charge, to any person obtaining a
+  * copy of this software and associated documentation files (the "Software"),
+diff --git a/pixman/solaris-hwcap.mapfile b/pixman/solaris-hwcap.mapfile
+index 3605ca7..87efce1 100644
+--- a/pixman/solaris-hwcap.mapfile
++++ b/pixman/solaris-hwcap.mapfile
+@@ -1,6 +1,6 @@
+ ###############################################################################
+ #
+-# Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
++# Copyright 2009, Oracle and/or its affiliates. All rights reserved.
+ #
+ # Permission is hereby granted, free of charge, to any person obtaining a
+ # copy of this software and associated documentation files (the "Software"),
+-- 
+1.6.6.1
+

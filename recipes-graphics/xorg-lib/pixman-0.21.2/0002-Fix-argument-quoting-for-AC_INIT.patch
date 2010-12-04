@@ -1,0 +1,35 @@
+From e7ee43c39d2370716a4d011afa8f5067eced9899 Mon Sep 17 00:00:00 2001
+From: Cyril Brulebois <kibi@debian.org>
+Date: Wed, 17 Nov 2010 16:16:56 +0100
+Subject: [PATCH 02/24] Fix argument quoting for AC_INIT.
+
+One gets rid of this accordingly:
+| autoreconf -vfi
+| autoreconf: Entering directory `.'
+| autoreconf: configure.ac: not using Gettext
+| autoreconf: running: aclocal --force
+| configure.ac:61: warning: AC_INIT: not a literal: "pixman@lists.freedesktop.org"
+| autoreconf: configure.ac: tracing
+| configure.ac:61: warning: AC_INIT: not a literal: "pixman@lists.freedesktop.org"
+
+Signed-off-by: Cyril Brulebois <kibi@debian.org>
+---
+ configure.ac |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index db1da21..147e1bf 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -58,7 +58,7 @@ m4_define([pixman_micro], 3)
+ 
+ m4_define([pixman_version],[pixman_major.pixman_minor.pixman_micro])
+ 
+-AC_INIT(pixman, pixman_version, "pixman@lists.freedesktop.org", pixman)
++AC_INIT(pixman, pixman_version, [pixman@lists.freedesktop.org], pixman)
+ AM_INIT_AUTOMAKE([foreign dist-bzip2])
+ 
+ # Suppress verbose compile lines
+-- 
+1.6.6.1
+

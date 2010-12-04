@@ -1,0 +1,91 @@
+From c8755294fa9ea396f7113370230b17c424a93be1 Mon Sep 17 00:00:00 2001
+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
+Date: Thu, 22 Oct 2009 05:45:54 +0300
+Subject: [PATCH 20/24] Support of overlapping src/dst for pixman_blt_sse2
+
+---
+ pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
+ 1 files changed, 32 insertions(+), 23 deletions(-)
+
+diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
+index 5907de0..25015ae 100644
+--- a/pixman/pixman-sse2.c
++++ b/pixman/pixman-sse2.c
+@@ -5027,34 +5027,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
+ {
+     uint8_t *   src_bytes;
+     uint8_t *   dst_bytes;
+-    int byte_width;
++    int         bpp;
+ 
+-    if (src_bpp != dst_bpp)
++    if (src_bpp != dst_bpp || src_bpp & 7)
+ 	return FALSE;
+ 
+-    if (src_bpp == 16)
+-    {
+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
+-	src_bytes =(uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
+-	byte_width = 2 * width;
+-	src_stride *= 2;
+-	dst_stride *= 2;
+-    }
+-    else if (src_bpp == 32)
++    bpp = src_bpp >> 3;
++    width *= bpp;
++    src_stride *= 4;
++    dst_stride *= 4;
++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
++
++    if (src_bpp != 16 && src_bpp != 32)
+     {
+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
+-	byte_width = 4 * width;
+-	src_stride *= 4;
+-	dst_stride *= 4;
++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
++	                   width, height);
++	return TRUE;
+     }
+-    else
++
++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
+     {
+-	return FALSE;
++	src_bytes += src_stride * height - src_stride;
++	dst_bytes += dst_stride * height - dst_stride;
++	dst_stride = -dst_stride;
++	src_stride = -src_stride;
++
++	if (src_bytes + width > dst_bytes)
++	{
++	    /* TODO: reverse scanline copy using SSE2 */
++	    while (--height >= 0)
++	    {
++		memmove (dst_bytes, src_bytes, width);
++		dst_bytes += dst_stride;
++		src_bytes += src_stride;
++	    }
++	    return TRUE;
++	}
+     }
+ 
+     while (height--)
+@@ -5064,7 +5073,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
+ 	uint8_t *d = dst_bytes;
+ 	src_bytes += src_stride;
+ 	dst_bytes += dst_stride;
+-	w = byte_width;
++	w = width;
+ 
+ 	while (w >= 2 && ((unsigned long)d & 3))
+ 	{
+-- 
+1.6.6.1
+
