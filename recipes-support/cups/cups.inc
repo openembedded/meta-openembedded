@@ -1,7 +1,7 @@
 DESCRIPTION = "An Internet printing system for Unix."
 SECTION = "console/utils"
 LICENSE = "GPL LGPL"
-DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib fakeroot-native"
+DEPENDS = "gnutls jpeg dbus dbus-glib libpng zlib"
 
 INC_PR = "r7"
 
