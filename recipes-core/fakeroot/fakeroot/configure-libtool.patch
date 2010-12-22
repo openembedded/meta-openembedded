@@ -1,0 +1,20 @@
+Index: fakeroot-1.12.1/configure.ac
+===================================================================
+--- fakeroot-1.12.1.orig/configure.ac
++++ fakeroot-1.12.1/configure.ac
+@@ -2,14 +2,12 @@
+ AC_INIT([fakeroot],[FAKEROOT_VERSION],[schizo@debian.org],[fakeroot])
+ AC_PREREQ(2.61)
+ AC_CONFIG_MACRO_DIR([build-aux])
+-LT_PREREQ(2.1a)
+ AC_CANONICAL_TARGET
+ AM_INIT_AUTOMAKE
+ AM_MAINTAINER_MODE
+ AC_CONFIG_HEADERS([config.h])
+ AC_PROG_MAKE_SET
+-LT_INIT
+-LT_LANG(C)
++AC_PROG_LIBTOOL
+ 
+ AH_BOTTOM([#if ! HAVE_BUILTIN_EXPECT
+ #define __builtin_expect(x, expected_value) (x)

@@ -1,0 +1,15 @@
+Index: fakeroot-1.12.1/scripts/fakeroot.in
+===================================================================
+--- fakeroot-1.12.1.orig/scripts/fakeroot.in
++++ fakeroot-1.12.1/scripts/fakeroot.in
+@@ -30,8 +30,8 @@
+ }
+ 
+ # strip /bin/fakeroot to find install prefix
+-PREFIX=@prefix@
+-BINDIR=@bindir@
++BINDIR=`dirname $0`
++PREFIX=`dirname ${BINDIR}`
+ 
+ USEABSLIBPATH=@LDPRELOADABS@
+ LIB=lib@fakeroot_transformed@@DLSUFFIX@
