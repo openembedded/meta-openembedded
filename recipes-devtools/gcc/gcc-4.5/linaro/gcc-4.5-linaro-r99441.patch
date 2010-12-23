@@ -1,0 +1,33 @@
+2010-11-25  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from mainline:
+
+	2010-10-28  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config/arm/arm.c (const_ok_for_arm): Support 0xXY00XY00 pattern
+	constants in thumb2.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-11-11 11:50:33 +0000
++++ new/gcc/config/arm/arm.c	2010-12-10 15:30:47 +0000
+@@ -2340,11 +2340,17 @@
+     {
+       HOST_WIDE_INT v;
+ 
+-      /* Allow repeated pattern.  */
++      /* Allow repeated patterns 0x00XY00XY or 0xXYXYXYXY.  */
+       v = i & 0xff;
+       v |= v << 16;
+       if (i == v || i == (v | (v << 8)))
+ 	return TRUE;
++
++      /* Allow repeated pattern 0xXY00XY00.  */
++      v = i & 0xff00;
++      v |= v << 16;
++      if (i == v)
++	return TRUE;
+     }
+ 
+   return FALSE;
+

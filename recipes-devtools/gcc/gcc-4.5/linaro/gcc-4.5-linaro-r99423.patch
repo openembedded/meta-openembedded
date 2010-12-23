@@ -1,0 +1,114 @@
+2010-10-25  Jie Zhang  <jie@codesourcery.com>
+
+	Issue #9812
+
+	Backport from mainline:
+
+	gcc/
+	2010-10-25  Jie Zhang  <jie@codesourcery.com>
+	* combine.c (try_combine): If insns need to be kept around,
+	check that they can be copied in the merged instruction.
+
+	gcc/testsuite/
+	2010-10-25  Jie Zhang  <jie@codesourcery.com>
+	* g++.dg/opt/combine.c: New test.
+
+=== modified file 'gcc/combine.c'
+--- old/gcc/combine.c	2010-09-20 22:37:32 +0000
++++ new/gcc/combine.c	2010-11-04 12:39:28 +0000
+@@ -2809,6 +2809,17 @@
+     = i1 && ! (i1_feeds_i3 ? dead_or_set_p (i3, i1dest)
+ 	       : (dead_or_set_p (i3, i1dest) || dead_or_set_p (i2, i1dest)));
+ 
++  /* We are about to copy insns for the case where they need to be kept
++     around.  Check that they can be copied in the merged instruction.  */
++
++  if (targetm.cannot_copy_insn_p
++      && ((added_sets_2 && targetm.cannot_copy_insn_p (i2))
++	  || (i1 && added_sets_1 && targetm.cannot_copy_insn_p (i1))))
++    {
++      undo_all ();
++      return 0;
++    }
++
+   /* If the set in I2 needs to be kept around, we must make a copy of
+      PATTERN (I2), so that when we substitute I1SRC for I1DEST in
+      PATTERN (I2), we are only substituting for the original I1DEST, not into
+
+=== added file 'gcc/testsuite/g++.dg/opt/combine.C'
+--- old/gcc/testsuite/g++.dg/opt/combine.C	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/g++.dg/opt/combine.C	2010-11-04 12:39:28 +0000
+@@ -0,0 +1,72 @@
++// { dg-do assemble { target fpic } }
++// { dg-options "-O2 -fweb -fPIC -fvisibility=hidden" }
++
++class QBasicAtomicInt
++{
++public:
++  volatile int _q_value;
++  inline operator int () const {return _q_value;}
++};
++class QVariant;
++class QScriptContext;
++class QScriptEngine;
++class QScriptValue
++{
++public:
++  QVariant toVariant () const;
++};
++class QScriptDebuggerBackendPrivate
++{
++  static QScriptValue trace (QScriptContext *context);
++};
++template <typename T> struct QMetaTypeId { };
++template <typename T> struct QMetaTypeId2
++{
++  static inline int qt_metatype_id ()
++  {
++    return QMetaTypeId<T>::qt_metatype_id () ;
++  }
++};
++template <typename T> inline int qMetaTypeId (T * = 0)
++{
++  return QMetaTypeId2<T>::qt_metatype_id () ;
++}
++class QVariant { };
++template<typename T> inline T qvariant_cast (const QVariant &v)
++{
++  const int vid = qMetaTypeId<T> ((0)) ;
++};
++class QScriptContext
++{
++public: 
++  QScriptValue callee () const;
++};
++class QScriptEngine  
++{
++public:
++  static bool convertV2 (const QScriptValue &value , int type , void *ptr) ;
++};
++inline bool qscriptvalue_cast_helper (const QScriptValue &value , int type , void *ptr)
++{
++  return QScriptEngine::convertV2 (value, type, ptr) ;
++}
++template<typename T> T qscriptvalue_cast (const QScriptValue &value)
++{
++  T t;
++  const int id = qMetaTypeId<T> () ;
++  if ( qscriptvalue_cast_helper (value, id, &t))
++    return qvariant_cast<T> (value.toVariant ()) ;
++}
++template <> struct QMetaTypeId< QScriptDebuggerBackendPrivate* >
++{
++  static int qt_metatype_id ()
++  {
++    static QBasicAtomicInt metatype_id = { (0) };
++    return metatype_id;
++  }
++};
++QScriptValue QScriptDebuggerBackendPrivate::trace (QScriptContext *context)
++{
++  QScriptValue data = context->callee () ;
++  QScriptDebuggerBackendPrivate *self = qscriptvalue_cast<QScriptDebuggerBackendPrivate*> (data) ;
++}
+

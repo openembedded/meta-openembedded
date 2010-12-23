@@ -1,0 +1,130 @@
+2010-10-15  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	Backport from mainline:
+
+	2010-10-15  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	gcc/
+	* ifcvt.c (find_active_insn_before): New function.
+	(find_active_insn_after): New function.
+	(cond_exec_process_if_block): Use new functions to replace
+	prev_active_insn() and next_active_insn().
+
+	gcc/testsuite/
+	* gcc.dg/20101010-1.c: New testcase.
+
+=== modified file 'gcc/ifcvt.c'
+Index: gcc-4.5/gcc/ifcvt.c
+===================================================================
+--- gcc-4.5.orig/gcc/ifcvt.c
++++ gcc-4.5/gcc/ifcvt.c
+@@ -88,6 +88,8 @@ static int count_bb_insns (const_basic_b
+ static bool cheap_bb_rtx_cost_p (const_basic_block, int);
+ static rtx first_active_insn (basic_block);
+ static rtx last_active_insn (basic_block, int);
++static rtx find_active_insn_before (basic_block, rtx);
++static rtx find_active_insn_after (basic_block, rtx);
+ static basic_block block_fallthru (basic_block);
+ static int cond_exec_process_insns (ce_if_block_t *, rtx, rtx, rtx, rtx, int);
+ static rtx cond_exec_get_condition (rtx);
+@@ -230,6 +232,48 @@ last_active_insn (basic_block bb, int sk
+   return insn;
+ }
+ 
++/* Return the active insn before INSN inside basic block CURR_BB. */
++
++static rtx
++find_active_insn_before (basic_block curr_bb, rtx insn)
++{
++  if (!insn || insn == BB_HEAD (curr_bb))
++    return NULL_RTX;
++
++  while ((insn = PREV_INSN (insn)) != NULL_RTX)
++    {
++      if (NONJUMP_INSN_P (insn) || JUMP_P (insn) || CALL_P (insn))
++        break;
++
++      /* No other active insn all the way to the start of the basic block. */
++      if (insn == BB_HEAD (curr_bb))
++        return NULL_RTX;
++    }
++
++  return insn;
++}
++
++/* Return the active insn after INSN inside basic block CURR_BB. */
++
++static rtx
++find_active_insn_after (basic_block curr_bb, rtx insn)
++{
++  if (!insn || insn == BB_END (curr_bb))
++    return NULL_RTX;
++
++  while ((insn = NEXT_INSN (insn)) != NULL_RTX)
++    {
++      if (NONJUMP_INSN_P (insn) || JUMP_P (insn) || CALL_P (insn))
++        break;
++
++      /* No other active insn all the way to the end of the basic block. */
++      if (insn == BB_END (curr_bb))
++        return NULL_RTX;
++    }
++
++  return insn;
++}
++
+ /* Return the basic block reached by falling though the basic block BB.  */
+ 
+ static basic_block
+@@ -448,9 +492,9 @@ cond_exec_process_if_block (ce_if_block_
+       if (n_matching > 0)
+ 	{
+ 	  if (then_end)
+-	    then_end = prev_active_insn (then_first_tail);
++	    then_end = find_active_insn_before (then_bb, then_first_tail);
+ 	  if (else_end)
+-	    else_end = prev_active_insn (else_first_tail);
++	    else_end = find_active_insn_before (else_bb, else_first_tail);
+ 	  n_insns -= 2 * n_matching;
+ 	}
+ 
+@@ -488,9 +532,9 @@ cond_exec_process_if_block (ce_if_block_
+ 	  if (n_matching > 0)
+ 	    {
+ 	      if (then_start)
+-		then_start = next_active_insn (then_last_head);
++		then_start = find_active_insn_after (then_bb, then_last_head);
+ 	      if (else_start)
+-		else_start = next_active_insn (else_last_head);
++		else_start = find_active_insn_after (else_bb, else_last_head);
+ 	      n_insns -= 2 * n_matching;
+ 	    }
+ 	}
+@@ -646,7 +690,7 @@ cond_exec_process_if_block (ce_if_block_
+     {
+       rtx from = then_first_tail;
+       if (!INSN_P (from))
+-	from = next_active_insn (from);
++	from = find_active_insn_after (then_bb, from);
+       delete_insn_chain (from, BB_END (then_bb), false);
+     }
+   if (else_last_head)
+Index: gcc-4.5/gcc/testsuite/gcc.dg/20101010-1.c
+===================================================================
+--- /dev/null
++++ gcc-4.5/gcc/testsuite/gcc.dg/20101010-1.c
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-crossjumping" } */
++
++int foo (void)
++{
++  int len;
++  if (bar1 (&len))
++    {
++      char devpath [len];
++      if (bar2 (devpath) == len)
++        return len;
++    }
++  return -1;
++}

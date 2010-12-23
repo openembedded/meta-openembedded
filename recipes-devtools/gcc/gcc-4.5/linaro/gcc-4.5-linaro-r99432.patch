@@ -1,0 +1,70 @@
+2010-11-03  Nathan Froyd  <froydnj@codesourcery.com>
+
+	Issue #10002
+
+	gcc/
+	* config/arm/arm.c (arm_legitimate_index_p): Split
+	VALID_NEON_QREG_MODE and VALID_NEON_DREG_MODE cases.  Permit
+	slightly larger constants in the latter case.
+	(thumb2_legitimate_index_p): Likewise.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-11-04 12:49:37 +0000
++++ new/gcc/config/arm/arm.c	2010-11-11 11:00:53 +0000
+@@ -5611,13 +5611,25 @@
+ 	    && INTVAL (index) > -1024
+ 	    && (INTVAL (index) & 3) == 0);
+ 
+-  if (TARGET_NEON
+-      && (VALID_NEON_DREG_MODE (mode) || VALID_NEON_QREG_MODE (mode)))
++  /* For quad modes, we restrict the constant offset to be slightly less
++     than what the instruction format permits.  We do this because for
++     quad mode moves, we will actually decompose them into two separate
++     double-mode reads or writes.  INDEX must therefore be a valid
++     (double-mode) offset and so should INDEX+8.  */
++  if (TARGET_NEON && VALID_NEON_QREG_MODE (mode))
+     return (code == CONST_INT
+ 	    && INTVAL (index) < 1016
+ 	    && INTVAL (index) > -1024
+ 	    && (INTVAL (index) & 3) == 0);
+ 
++  /* We have no such constraint on double mode offsets, so we permit the
++     full range of the instruction format.  */
++  if (TARGET_NEON && VALID_NEON_DREG_MODE (mode))
++    return (code == CONST_INT
++	    && INTVAL (index) < 1024
++	    && INTVAL (index) > -1024
++	    && (INTVAL (index) & 3) == 0);
++
+   if (TARGET_REALLY_IWMMXT && VALID_IWMMXT_REG_MODE (mode))
+     return (code == CONST_INT
+ 	    && INTVAL (index) < 1024
+@@ -5731,13 +5743,25 @@
+ 		&& (INTVAL (index) & 3) == 0);
+     }
+ 
+-  if (TARGET_NEON
+-      && (VALID_NEON_DREG_MODE (mode) || VALID_NEON_QREG_MODE (mode)))
++  /* For quad modes, we restrict the constant offset to be slightly less
++     than what the instruction format permits.  We do this because for
++     quad mode moves, we will actually decompose them into two separate
++     double-mode reads or writes.  INDEX must therefore be a valid
++     (double-mode) offset and so should INDEX+8.  */
++  if (TARGET_NEON && VALID_NEON_QREG_MODE (mode))
+     return (code == CONST_INT
+ 	    && INTVAL (index) < 1016
+ 	    && INTVAL (index) > -1024
+ 	    && (INTVAL (index) & 3) == 0);
+ 
++  /* We have no such constraint on double mode offsets, so we permit the
++     full range of the instruction format.  */
++  if (TARGET_NEON && VALID_NEON_DREG_MODE (mode))
++    return (code == CONST_INT
++	    && INTVAL (index) < 1024
++	    && INTVAL (index) > -1024
++	    && (INTVAL (index) & 3) == 0);
++
+   if (arm_address_register_rtx_p (index, strict_p)
+       && (GET_MODE_SIZE (mode) <= 4))
+     return 1;
+

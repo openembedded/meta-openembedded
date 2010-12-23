@@ -1,0 +1,38 @@
+2010-10-18  Kazu Hirata  <kazu@codesourcery.com>
+
+	Issue #9720
+	Backport from mainline:
+	gcc/
+	2010-10-07  Tejas Belagod  <tejas.belagod@arm.com>
+	* config/arm/neon.md (neon_unpack<US>_<mode>): Add 'w' to
+	constraint, add register specifier in instruction template.
+	(neon_vec_pack_trunc_<mode>): Likewise.
+	(neon_vec_<US>mult_<mode>): Add register specifier to
+	instruction template.
+
+=== modified file 'gcc/config/arm/neon.md'
+Index: gcc-4.5/gcc/config/arm/neon.md
+===================================================================
+--- gcc-4.5.orig/gcc/config/arm/neon.md
++++ gcc-4.5/gcc/config/arm/neon.md
+@@ -5682,9 +5682,9 @@
+ ;; Vectorize for non-neon-quad case
+ (define_insn "neon_unpack<US>_<mode>"
+  [(set (match_operand:<V_widen> 0 "register_operand" "=w")
+-       (SE:<V_widen> (match_operand:VDI 1 "register_operand" "")))]
++       (SE:<V_widen> (match_operand:VDI 1 "register_operand" "w")))]
+  "TARGET_NEON"
+- "vmovl.<US><V_sz_elem> %q0, %1"
++ "vmovl.<US><V_sz_elem> %q0, %P1"
+   [(set_attr "neon_type" "neon_shift_1")]
+ )
+ 
+@@ -5721,7 +5721,7 @@
+  		       (SE:<V_widen> 
+ 			   (match_operand:VDI 2 "register_operand" "w"))))]
+   "TARGET_NEON"
+-  "vmull.<US><V_sz_elem> %q0, %1, %2"
++  "vmull.<US><V_sz_elem> %q0, %P1, %P2"
+   [(set_attr "neon_type" "neon_shift_1")]
+ )
+ 

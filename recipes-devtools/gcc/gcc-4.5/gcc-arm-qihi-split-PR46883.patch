@@ -1,0 +1,52 @@
+Backport of http://gcc.gnu.org/ml/gcc-patches/2010-12/msg01096.html
+This should fix the ICE found in samba
+
+-Khem
+
+Index: a/gcc/config/arm/arm.md
+===================================================================
+--- a/gcc/config/arm/arm.md	(revision 167797)
++++ b/gcc/config/arm/arm.md	(working copy)
+@@ -4137,8 +4137,8 @@
+ })
+ 
+ (define_split
+-  [(set (match_operand:SI 0 "register_operand" "")
+-	(zero_extend:SI (match_operand:HI 1 "register_operand" "")))]
++  [(set (match_operand:SI 0 "s_register_operand" "")
++	(zero_extend:SI (match_operand:HI 1 "s_register_operand" "")))]
+   "!TARGET_THUMB2 && !arm_arch6"
+   [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 16)))
+    (set (match_dup 0) (lshiftrt:SI (match_dup 0) (const_int 16)))]
+@@ -4244,8 +4244,8 @@
+ })
+ 
+ (define_split
+-  [(set (match_operand:SI 0 "register_operand" "")
+-	(zero_extend:SI (match_operand:QI 1 "register_operand" "")))]
++  [(set (match_operand:SI 0 "s_register_operand" "")
++	(zero_extend:SI (match_operand:QI 1 "s_register_operand" "")))]
+   "!arm_arch6"
+   [(set (match_dup 0) (ashift:SI (match_dup 2) (const_int 24)))
+    (set (match_dup 0) (lshiftrt:SI (match_dup 0) (const_int 24)))]
+Index: a/gcc/testsuite/gcc.target/arm/pr46883.c
+===================================================================
+--- a/gcc/testsuite/gcc.target/arm/pr46883.c	(revision 0)
++++ b/gcc/testsuite/gcc.target/arm/pr46883.c	(revision 0)
+@@ -0,0 +1,16 @@
++/* { dg-do compile } */
++/* { dg-options "-O1 -march=armv5te" } */
++
++void bar (unsigned char *q, unsigned short *data16s, int len)
++{
++  int i;
++
++  for (i = 0; i < len; i++)
++    {
++      q[2 * i] =
++        (((data16s[i] & 0xFF) << 8) | ((data16s[i] >> 8) & 0xFF)) & 0xFF;
++      q[2 * i + 1] =
++        ((unsigned short)
++         (((data16s[i] & 0xFF) << 8) | ((data16s[i] >> 8) & 0xFF))) >> 8;
++    }
++}
