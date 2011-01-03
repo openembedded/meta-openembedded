@@ -1,0 +1,13 @@
+diff -ruN ++DFB-1.0.0-orig/include/++dfb.h ++DFB-1.0.0/include/++dfb.h
+--- ++DFB-1.0.0-orig/include/++dfb.h	2007-02-02 23:48:36.000000000 +0100
++++ ++DFB-1.0.0/include/++dfb.h	2010-06-09 11:53:07.000000000 +0200
+@@ -46,6 +46,9 @@
+ 
+ #include <directfb.h>
+ 
++// Work around old lib expectations.
++typedef u8 __u8;
++
+ #undef IDirectFB
+ #undef IDirectFBScreen
+ #undef IDirectFBDisplayLayer

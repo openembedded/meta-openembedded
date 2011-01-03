@@ -1,0 +1,24 @@
+diff -uNr DirectFB-1.4.6.orig/tools/mkdfiff.c DirectFB-1.4.6/tools/mkdfiff.c
+--- DirectFB-1.4.6.orig/tools/mkdfiff.c 2010-10-15 10:54:57.000000000 +0200
++++ DirectFB-1.4.6/tools/mkdfiff.c      2010-10-15 10:54:15.000000000 +0200
+@@ -50,6 +50,8 @@
+
+ #include <dfiff.h>
+
++#include <unistd.h>
++
+ static DirectFBPixelFormatNames( format_names );
+
+ static const char            *filename;
+diff -uNr DirectFB-1.4.6.orig/tools/mkdgifft.cpp DirectFB-1.4.6/tools/mkdgifft.cpp
+--- DirectFB-1.4.6.orig/tools/mkdgifft.cpp      2010-10-08 14:02:57.000000000 +0200
++++ DirectFB-1.4.6/tools/mkdgifft.cpp   2010-10-15 10:56:06.000000000 +0200
+@@ -40,6 +40,8 @@
+ #include <errno.h>
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <sys/stat.h>
++#include <sys/types.h>
+ #include <unistd.h>
+ #include <fcntl.h>
+ #include <sys/mman.h>
