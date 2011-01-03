@@ -1,7 +1,7 @@
 DESCRIPTION = "PostgreSQL is a powerful, open source relational database system."
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
-DEPENDS = "zlib readline"
+DEPENDS = "zlib readline tzcode-native"
 
 ARM_INSTRUCTION_SET = "arm"
 
