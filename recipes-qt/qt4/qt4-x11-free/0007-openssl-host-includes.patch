@@ -1,0 +1,20 @@
+From d45943adb443ad4b85ca4504952dee743c675e1e Mon Sep 17 00:00:00 2001
+From: Michael Krelin <hacker@klever.net>
+Date: Mon, 4 Jun 2007 14:58:34 +0200
+Subject: [PATCH] openssl host includes
+
+---
+ config.tests/unix/openssl/openssl.pri |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+Index: qt-embedded-linux-opensource-src-4.5.0/config.tests/unix/openssl/openssl.pri
+===================================================================
+--- qt-embedded-linux-opensource-src-4.5.0.orig/config.tests/unix/openssl/openssl.pri	2009-02-25 22:32:32.000000000 +0100
++++ qt-embedded-linux-opensource-src-4.5.0/config.tests/unix/openssl/openssl.pri	2009-03-26 17:16:28.000000000 +0100
+@@ -1,5 +1,5 @@
+ !cross_compile {
+-    TRY_INCLUDEPATHS = /include /usr/include /usr/local/include $$QMAKE_INCDIR $$INCLUDEPATH
++    TRY_INCLUDEPATHS = $$QMAKE_INCDIR $$INCLUDEPATH
+     # LSB doesn't allow using headers from /include or /usr/include
+     linux-lsb-g++:TRY_INCLUDEPATHS = $$QMAKE_INCDIR $$INCLUDEPATH
+     for(p, TRY_INCLUDEPATHS) {

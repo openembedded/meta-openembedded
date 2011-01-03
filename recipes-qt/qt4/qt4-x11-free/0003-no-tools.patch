@@ -1,0 +1,18 @@
+Index: qt-embedded-linux-opensource-src-4.5.0/src/src.pro
+===================================================================
+--- qt-embedded-linux-opensource-src-4.5.0.orig/src/src.pro	2009-02-25 22:32:41.000000000 +0100
++++ qt-embedded-linux-opensource-src-4.5.0/src/src.pro	2009-03-26 17:11:07.000000000 +0100
+@@ -6,12 +6,9 @@
+ wince*:{
+   SRC_SUBDIRS += src_corelib src_xml src_gui src_sql src_network src_script src_testlib
+ } else {
+-    SRC_SUBDIRS += src_tools_bootstrap src_tools_moc src_tools_rcc src_tools_uic src_corelib src_xml src_network src_gui src_sql src_script src_testlib
++    SRC_SUBDIRS += src_corelib src_xml src_network src_gui src_sql src_script src_testlib
+     contains(QT_CONFIG, qt3support): SRC_SUBDIRS += src_qt3support
+     contains(QT_CONFIG, dbus):SRC_SUBDIRS += src_dbus
+-    !cross_compile {
+-        contains(QT_CONFIG, qt3support): SRC_SUBDIRS += src_tools_uic3
+-    }
+ }
+ win32:!contains(QT_EDITION, OpenSource|Console): {
+     SRC_SUBDIRS += src_activeqt

@@ -1,0 +1,34 @@
+Index: qt-embedded-linux-opensource-src-4.5.0/mkspecs/features/uitools.prf
+===================================================================
+--- qt-embedded-linux-opensource-src-4.5.0.orig/mkspecs/features/uitools.prf	2009-02-25 22:32:34.000000000 +0100
++++ qt-embedded-linux-opensource-src-4.5.0/mkspecs/features/uitools.prf	2009-03-26 17:17:27.000000000 +0100
+@@ -2,10 +2,10 @@
+ qt:load(qt)
+ 
+ # Include the correct version of the UiLoader library
+-QTUITOOLS_LINKAGE = -lQtUiTools
++QTUITOOLS_LINKAGE = -lQtUiTools$${QT_LIBINFIX}
+ CONFIG(debug, debug|release) {
+-    mac: QTUITOOLS_LINKAGE = -lQtUiTools_debug
+-    win32: QTUITOOLS_LINKAGE = -lQtUiToolsd
++    mac: QTUITOOLS_LINKAGE = -lQtUiTools$${QT_LIBINFIX}_debug
++    win32: QTUITOOLS_LINKAGE = -lQtUiTools$${QT_LIBINFIX}d
+ }
+ LIBS += $$QTUITOOLS_LINKAGE
+ 
+Index: qt-embedded-linux-opensource-src-4.5.0/tools/designer/src/uitools/uitools.pro
+===================================================================
+--- qt-embedded-linux-opensource-src-4.5.0.orig/tools/designer/src/uitools/uitools.pro	2009-02-25 22:32:42.000000000 +0100
++++ qt-embedded-linux-opensource-src-4.5.0/tools/designer/src/uitools/uitools.pro	2009-03-26 17:17:27.000000000 +0100
+@@ -1,5 +1,5 @@
+ TEMPLATE = lib
+-TARGET = $$qtLibraryTarget(QtUiTools)
++TARGET = QtUiTools
+ QT += xml
+ CONFIG += qt staticlib
+ DESTDIR = ../../../../lib
+@@ -39,3 +39,4 @@
+    QMAKE_PKGCONFIG_REQUIRES += QtXml
+ }
+ 
++TARGET = $$qtLibraryTarget($$TARGET$$QT_LIBINFIX) #do this towards the end
