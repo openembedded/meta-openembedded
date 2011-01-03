@@ -1,0 +1,103 @@
+Date: Mon, 22 Nov 2010 13:28:54 +0000
+From: Julian Brown <julian at codesourcery dot com>
+To: gcc-patches at gcc dot gnu dot org
+Cc: DJ Delorie <dj at redhat dot com>
+Subject: [PATCH] Volatile bitfields vs. inline asm memory constraints
+Message-ID: <20101122132854.0aca431a@rex.config>
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="MP_/ONpW806RnQ1ziaYj7_Y5E27"
+X-IsSubscribed: yes
+Mailing-List: contact gcc-patches-help at gcc dot gnu dot org; run by ezmlm
+Precedence: bulk
+List-Id: <gcc-patches.gcc.gnu.org>
+List-Archive: <http://gcc.gnu.org/ml/gcc-patches/>
+List-Post: <mailto:gcc-patches at gcc dot gnu dot org>
+List-Help: <mailto:gcc-patches-help at gcc dot gnu dot org>
+Sender: gcc-patches-owner at gcc dot gnu dot org
+Delivered-To: mailing list gcc-patches at gcc dot gnu dot org
+
+
+
+Hi,
+
+This patch fixes the issue in the (Launchpad, not GCC) bug tracker:
+
+https://bugs.launchpad.net/gcc-linaro/+bug/675347
+
+The problem was introduced by the patch from DJ to honour volatile
+bitfield types:
+
+http://gcc.gnu.org/ml/gcc-patches/2010-06/msg01167.html
+
+but not exposed (on ARM) until the option was made the default (on the
+Linaro branch) -- it's not yet the default on mainline.
+
+The issue is as follows: after DJ's patch and with
+-fstrict-volatile-bitfields, in expr.c:expand_expr_real_1, the if
+condition with the comment "In cases where an aligned union has an
+unaligned object as a field, we might be extracting a BLKmode value
+from an integer-mode (e.g., SImode) object [...]" triggers for a normal
+(non-bitfield) volatile field of a struct/class.
+
+But, this appears to be over-eager: in the particular case mentioned
+above, when expanding a "volatile int" struct field used as a memory
+constraint for an inline asm, we end up with something which is no
+longer addressable (I think because of the actions of
+extract_bit_field). So, compilation aborts.
+
+My proposed fix is to restrict the conditional by only making it execute
+for -fstrict-volatile-bitfields only for non-naturally-aligned accesses:
+this appears to work (fixes test in question, and no regressions for
+cross to ARM Linux, gcc/g++/libstdc++, with -fstrict-volatile-bitfields
+turned on), but I don't know if there will be unintended consequences.
+DJ, does it look sane to you?
+
+Incidentally the constraints in the inline asm in the Launchpad
+testcase might be slightly dubious (attempting to force (mem (reg)) by
+using both "+m" (var) and "r" (&var) constraints), but replacing
+them with e.g.:
+
+    asm volatile("0:\n"
+                 "ldrex %[newValue], %[_q_value]\n"
+                 "sub %[newValue], %[newValue], #1\n"
+                 "strex %[result], %[newValue], %[_q_value]\n"
+                 "teq %[result], #0\n"
+                 "bne 0b\n"
+                 : [newValue] "=&r" (newValue),
+                   [result] "=&r" (result)
+                 : [_q_value] "Q" (_q_value)
+                 : "cc", "memory");
+
+still leads to a warning (not an error) with trunk and
+-fstrict-volatile-bitfields:
+
+atomic-changed.cc:24:35: warning: use of memory input without lvalue in
+asm operand 2 is deprecated [enabled by default]
+
+The warning goes away with the attached patch. So, I don't think the
+problem is purely that the original inline asm is invalid.
+
+OK to apply, or any comments?
+
+Julian
+
+ChangeLog
+
+    gcc/
+    * expr.c (expand_expr_real_1): Only use BLKmode for volatile
+    accesses which are not naturally aligned.
+
+Index: gcc-4_5-branch/gcc/expr.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expr.c	2010-12-23 00:42:11.690101002 -0800
++++ gcc-4_5-branch/gcc/expr.c	2010-12-24 15:07:39.400101000 -0800
+@@ -9029,7 +9029,8 @@
+ 		&& modifier != EXPAND_INITIALIZER)
+ 	    /* If the field is volatile, we always want an aligned
+ 	       access.  */
+-	    || (volatilep && flag_strict_volatile_bitfields > 0)
++	    || (volatilep && flag_strict_volatile_bitfields > 0
++		&& (bitpos % GET_MODE_ALIGNMENT (mode) != 0))
+ 	    /* If the field isn't aligned enough to fetch as a memref,
+ 	       fetch it as a bit field.  */
+ 	    || (mode1 != BLKmode

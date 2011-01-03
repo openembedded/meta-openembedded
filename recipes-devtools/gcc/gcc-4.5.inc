@@ -158,7 +158,8 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99444.patch \
        file://gcc-scalar-widening-pr45847.patch \
        file://gcc-arm-qihi-split-PR46883.patch \
-	   \
+	   file://gcc-arm-volatile-bitfield-fix.patch \
+       \
 	   file://optional_libstdc.patch \
 	   file://64bithack.patch \
 	  "
