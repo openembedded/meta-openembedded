@@ -1,0 +1,13 @@
+Index: qt-everywhere-opensource-src-4.6.3/config.tests/unix/compile.test
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/config.tests/unix/compile.test	2010-06-02 06:03:18.000000000 +0400
++++ qt-everywhere-opensource-src-4.6.3/config.tests/unix/compile.test	2010-10-04 17:35:07.587783460 +0400
+@@ -11,7 +11,7 @@
+ EXE=`basename "$6"`
+ DESCRIPTION=$7
+ shift 7
+-LFLAGS=""
++LFLAGS="$LDFLAGS"
+ INCLUDEPATH=""
+ CXXFLAGS=""
+ MAC_ARCH_CXXFLAGS=""

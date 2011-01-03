@@ -1,0 +1,22 @@
+From f5a73ce944240de9013cc23288c115e8213add5e Mon Sep 17 00:00:00 2001
+From: Michael Krelin <hacker@klever.net>
+Date: Sat, 2 Jun 2007 16:06:59 +0200
+Subject: [PATCH] no qmake
+
+---
+ configure |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+Index: qt-embedded-linux-opensource-src-4.4.3/configure
+===================================================================
+--- qt-embedded-linux-opensource-src-4.4.3.orig/configure	2009-03-26 17:03:43.000000000 +0100
++++ qt-embedded-linux-opensource-src-4.4.3/configure	2009-03-26 17:04:17.000000000 +0100
+@@ -3786,7 +3786,7 @@
+ }
+ 
+ # build qmake
+-if true; then ###[ '!' -f "$outpath/bin/qmake" ];
++if false; then ###[ '!' -f "$outpath/bin/qmake" ];
+     echo "Creating qmake. Please wait..."
+ 
+     OLD_QCONFIG_H=

@@ -1,0 +1,34 @@
+Fix invocation in case of "ccache some-compiler-gcc". As the command "ccache some-compiler-gcc" will not exist but "ccache" will.
+
+both visibility and relocs were affected.
+
+Index: qt-x11-opensource-src-4.5.2/config.tests/unix/bsymbolic_functions.test
+===================================================================
+--- qt-x11-opensource-src-4.5.2.orig/config.tests/unix/bsymbolic_functions.test 2009-08-01 08:01:11.000000000 +0200
++++ qt-x11-opensource-src-4.5.2/config.tests/unix/bsymbolic_functions.test      2009-08-01 08:01:16.000000000 +0200
+@@ -8,7 +8,7 @@
+ int main() { return 0; }
+ EOF
+ 
+-"$COMPILER" -o libtest.so -shared -Wl,-Bsymbolic-functions -fPIC bsymbolic_functions.c >/dev/null 2>&1 && BSYMBOLIC_FUNCTIONS_SUPPORT=yes
++$COMPILER -o libtest.so -shared -Wl,-Bsymbolic-functions -fPIC bsymbolic_functions.c >/dev/null 2>&1 && BSYMBOLIC_FUNCTIONS_SUPPORT=yes
+ rm -f bsymbolic_functions.c libtest.so
+ 
+ # done
+Index: qt-x11-opensource-src-4.5.2/config.tests/unix/fvisibility.test
+===================================================================
+--- qt-x11-opensource-src-4.5.2.orig/config.tests/unix/fvisibility.test 2009-06-20 06:57:50.000000000 +0200
++++ qt-x11-opensource-src-4.5.2/config.tests/unix/fvisibility.test      2009-08-01 07:59:05.000000000 +0200
+@@ -15,9 +15,9 @@
+ EOF
+ 
+     if [ "$VERBOSE" = "yes" ] ; then
+-        "$COMPILER" -c -fvisibility=hidden fvisibility.c && FVISIBILITY_SUPPORT=yes
++        $COMPILER -c -fvisibility=hidden fvisibility.c && FVISIBILITY_SUPPORT=yes
+     else
+-        "$COMPILER" -c -fvisibility=hidden fvisibility.c >/dev/null 2>&1 && FVISIBILITY_SUPPORT=yes
++        $COMPILER -c -fvisibility=hidden fvisibility.c >/dev/null 2>&1 && FVISIBILITY_SUPPORT=yes
+     fi
+     rm -f fvisibility.c fvisibility.o
+ }
+

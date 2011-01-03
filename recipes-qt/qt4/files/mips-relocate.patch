@@ -1,0 +1,28 @@
+Disable the LDFLAGS "-Bsymbolic-functions" for mips
+
+"-Bsymbolic-functions" flag makes ld to bind the global function symbol of shared library at compiling time, thus reduce the runtime relocation cost.
+
+However, this flag in binutil 2.20 cause QT4 mips building failure, which is "final link failed: Bad value" error in libQtWebKit.so linking stage. If downgrad to binutil 2.19, this error disappears. further investigation showes commit http://sourceware.org/cgi-bin/cvsweb.cgi/src/ld/scripttempl/mips.sc.diff?r1=1.2&r2=1.3&cvsroot=src cause this error.
+
+So this patch disable this flag for QT4 mips. If future binutils version fix this issue, this patch can be safely removed.
+
+Signed-off-by: Yu Ke <ke.yu@intel.com>
+
+diff --git a/configure b/configure
+index ca14279..5db9926 100755
+--- a/configure
++++ b/configure
+@@ -3035,6 +3035,13 @@ if [ "$CFG_REDUCE_RELOCATIONS" != "no" ]; then
+     fi
+ fi
+ 
++# Temporily disable -Bsymbolic-functions for mips, because libQtWebKit can not pass the build
++# if has -Bsymbolic-functions and binutil 2.20
++# -Bsymbolic-functions is OK in binutil 2.19
++if [ "$CFG_ARCH" = "mips" ]; then
++    CFG_REDUCE_RELOCATIONS=no
++fi
++
+ # auto-detect GNU make support
+ if [ "$CFG_USE_GNUMAKE" = "auto" ] && "$MAKE" -v | grep "GNU Make" >/dev/null 2>&1; then
+    CFG_USE_GNUMAKE=yes

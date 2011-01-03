@@ -1,0 +1,13 @@
+Index: qtopia-core-opensource-src-4.3.3/configure
+===================================================================
+--- qtopia-core-opensource-src-4.3.3.orig/configure	2008-01-14 08:53:51.000000000 +0000
++++ qtopia-core-opensource-src-4.3.3/configure	2008-01-14 08:54:07.000000000 +0000
+@@ -447,7 +447,7 @@
+ # initalize variables
+ #-------------------------------------------------------------------------------
+ 
+-SYSTEM_VARIABLES="CC CXX CFLAGS CXXFLAGS LDFLAGS"
++SYSTEM_VARIABLES="CC CXX CFLAGS CXXFLAGS LDFLAGS LFLAGS"
+ for varname in $SYSTEM_VARIABLES; do
+     cmd=`echo \
+ 'if [ -n "\$'${varname}'" ]; then

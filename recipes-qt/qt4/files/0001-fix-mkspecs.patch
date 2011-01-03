@@ -1,0 +1,102 @@
+--- /tmp/g++.conf	2008-07-08 10:32:18.000000000 +0200
++++ qt-embedded-linux-opensource-src-4.4.0/mkspecs/common/g++.conf	2008-07-08 10:34:15.000000000 +0200
+@@ -2,12 +2,12 @@
+ # qmake configuration for common gcc
+ #
+ 
+-QMAKE_CC		= gcc
+-QMAKE_CFLAGS		+= -pipe
++QMAKE_CC       = $(OE_QMAKE_CC)
++QMAKE_CFLAGS       += -pipe $(OE_QMAKE_CFLAGS)
+ QMAKE_CFLAGS_DEPS	+= -M
+ QMAKE_CFLAGS_WARN_ON	+= -Wall -W
+ QMAKE_CFLAGS_WARN_OFF	+= -w
+-QMAKE_CFLAGS_RELEASE	+= -O2
++QMAKE_CFLAGS_RELEASE	+= 
+ QMAKE_CFLAGS_DEBUG	+= -g
+ QMAKE_CFLAGS_SHLIB	+= -fPIC
+ QMAKE_CFLAGS_STATIC_LIB	+= -fPIC
+@@ -16,8 +16,8 @@
+ QMAKE_CFLAGS_PRECOMPILE += -x c-header -c ${QMAKE_PCH_INPUT} -o ${QMAKE_PCH_OUTPUT}
+ QMAKE_CFLAGS_USE_PRECOMPILE += -include ${QMAKE_PCH_OUTPUT_BASE}
+ 
+-QMAKE_CXX		= g++
+-QMAKE_CXXFLAGS		+= $$QMAKE_CFLAGS
++QMAKE_CXX      = $(OE_QMAKE_CXX)
++QMAKE_CXXFLAGS     += $$QMAKE_CFLAGS $(OE_QMAKE_CXXFLAGS)
+ QMAKE_CXXFLAGS_DEPS	+= $$QMAKE_CFLAGS_DEPS
+ QMAKE_CXXFLAGS_WARN_ON	+= $$QMAKE_CFLAGS_WARN_ON
+ QMAKE_CXXFLAGS_WARN_OFF	+= $$QMAKE_CFLAGS_WARN_OFF
+@@ -30,9 +30,9 @@
+ QMAKE_CXXFLAGS_PRECOMPILE += -x c++-header -c ${QMAKE_PCH_INPUT} -o ${QMAKE_PCH_OUTPUT}
+ QMAKE_CXXFLAGS_USE_PRECOMPILE = $$QMAKE_CFLAGS_USE_PRECOMPILE
+ 
+-QMAKE_LINK		= g++
+-QMAKE_LINK_SHLIB	= g++
+-QMAKE_LFLAGS		+=
++QMAKE_LINK     = $(OE_QMAKE_LINK)
++QMAKE_LINK_SHLIB   = $(OE_QMAKE_LINK)
++QMAKE_LFLAGS       += $(OE_QMAKE_LDFLAGS)
+ QMAKE_LFLAGS_RELEASE	+=
+ QMAKE_LFLAGS_DEBUG	+=
+ QMAKE_LFLAGS_APP	+=
+@@ -41,7 +41,7 @@
+ QMAKE_LFLAGS_SONAME	+= -Wl,-soname,
+ QMAKE_LFLAGS_THREAD	+=
+ QMAKE_LFLAGS_NOUNDEF	+= -Wl,--no-undefined
+-QMAKE_RPATH		= -Wl,-rpath,
++QMAKE_RPATH        = -Wl,-rpath-link,
+ 
+ QMAKE_PCH_OUTPUT_EXT    = .gch
+ 
+--- /tmp/linux.conf	2008-07-08 10:32:18.000000000 +0200
++++ qt-embedded-linux-opensource-src-4.4.0/mkspecs/common/linux.conf	2008-07-08 10:38:37.000000000 +0200
+@@ -7,26 +7,28 @@
+ 
+ QMAKE_INCDIR          =
+ QMAKE_LIBDIR          =
+-QMAKE_INCDIR_X11      = /usr/X11R6/include
+-QMAKE_LIBDIR_X11      = /usr/X11R6/lib
+-QMAKE_INCDIR_QT       = $$[QT_INSTALL_HEADERS]
+-QMAKE_LIBDIR_QT       = $$[QT_INSTALL_LIBS]
+-QMAKE_INCDIR_OPENGL   = /usr/X11R6/include
+-QMAKE_LIBDIR_OPENGL   = /usr/X11R6/lib
++QMAKE_INCDIR_X11      =
++QMAKE_LIBDIR_X11      =
++QMAKE_INCDIR_QT       = $(OE_QMAKE_INCDIR_QT)
++QMAKE_LIBDIR_QT       = $(OE_QMAKE_LIBDIR_QT)
++QMAKE_INCDIR_OPENGL   =
++QMAKE_LIBDIR_OPENGL   =
++
+ 
+ QMAKE_LIBS            =
+ QMAKE_LIBS_DYNLOAD    = -ldl
+-QMAKE_LIBS_X11        = -lXext -lX11 -lm
+-QMAKE_LIBS_X11SM      = -lSM -lICE
++QMAKE_LIBS_X11        = $(OE_QMAKE_LIBS_X11)
++QMAKE_LIBS_X11SM      = $(OE_QMAKE_LIBS_X11SM)
+ QMAKE_LIBS_NIS        = -lnsl
+ QMAKE_LIBS_OPENGL     = -lGLU -lGL
+ QMAKE_LIBS_OPENGL_QT  = -lGL
+ QMAKE_LIBS_THREAD     = -lpthread
+ 
+-QMAKE_MOC             = $$[QT_INSTALL_BINS]/moc
+-QMAKE_UIC             = $$[QT_INSTALL_BINS]/uic
++QMAKE_MOC             = $(OE_QMAKE_MOC)
++QMAKE_UIC             = $(OE_QMAKE_UIC)
++QMAKE_RCC             = $(OE_QMAKE_RCC)
+ 
+-QMAKE_AR              = ar cqs
++QMAKE_AR              = $(OE_QMAKE_AR) cqs
+ QMAKE_OBJCOPY         = objcopy
+ QMAKE_RANLIB          =
+ 
+@@ -39,7 +40,7 @@
+ QMAKE_MOVE            = mv -f
+ QMAKE_DEL_FILE        = rm -f
+ QMAKE_DEL_DIR         = rmdir
+-QMAKE_STRIP           = strip
++QMAKE_STRIP           = $(OE_QMAKE_STRIP)
+ QMAKE_STRIPFLAGS_LIB += --strip-unneeded
+ QMAKE_CHK_DIR_EXISTS  = test -d
+ QMAKE_MKDIR           = mkdir -p

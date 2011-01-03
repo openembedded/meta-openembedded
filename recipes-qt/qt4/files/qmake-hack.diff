@@ -1,0 +1,15 @@
+--- /tmp/configure	2010-02-10 15:41:58.000000000 +0100
++++ qt-embedded-linux-opensource-src-4.4.3/configure	2010-02-10 15:42:01.000000000 +0100
+@@ -3946,6 +3946,12 @@
+     [ '!' -z "$QCONFIG_H" ] && mv -f "$QCONFIG_H" "$QMAKE_QCONFIG_H" #move qmake's qconfig.h to qconfig.h.qmake
+     [ '!' -z "$OLD_QCONFIG_H" ] && mv -f "${OLD_QCONFIG_H}.old" "$OLD_QCONFIG_H" #put back qconfig.h
+     [ "$QMAKE_BUILD_ERROR" = "yes" ] && exit 2
++
++# OE
++if [ x$CROSSHACK = xtrue ] ; then
++	echo "Exiting now, since we have what we want: a qmake binary"
++	exit 0
++fi
+ fi # Build qmake
+ 
+ #-------------------------------------------------------------------------------

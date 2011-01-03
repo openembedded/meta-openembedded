@@ -1,0 +1,14 @@
+
+Ported from OE by: Yu Ke <ke.yu@intel.com>
+
+--- /tmp/qws.pro	2009-12-10 19:30:08.000000000 +0100
++++ qt-everywhere-opensource-src-4.6.0/examples/qws/qws.pro	2009-12-10 19:30:21.000000000 +0100
+@@ -1,7 +1,7 @@
+ TEMPLATE      = subdirs
+ # no /dev/fbX
+ !qnx:!vxworks:SUBDIRS = framebuffer
+-SUBDIRS      += mousecalibration simpledecoration
++SUBDIRS      += mousecalibration
+ 
+ # install
+ sources.files = $$SOURCES $$HEADERS $$RESOURCES $$FORMS README *.pro

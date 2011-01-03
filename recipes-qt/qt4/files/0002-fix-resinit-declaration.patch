@@ -1,0 +1,22 @@
+From acfeb18aa94bad6b2066e91cd15570889baaa252 Mon Sep 17 00:00:00 2001
+From: Michael Krelin <hacker@klever.net>
+Date: Sat, 2 Jun 2007 16:04:01 +0200
+Subject: [PATCH] fix resinit declaration
+
+---
+ src/qt3support/network/q3dns.cpp |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+Index: qt-embedded-linux-opensource-src-4.4.3/src/qt3support/network/q3dns.cpp
+===================================================================
+--- qt-embedded-linux-opensource-src-4.4.3.orig/src/qt3support/network/q3dns.cpp	2008-09-27 11:01:28.000000000 +0200
++++ qt-embedded-linux-opensource-src-4.4.3/src/qt3support/network/q3dns.cpp	2009-03-26 17:04:05.000000000 +0100
+@@ -44,7 +44,7 @@
+ # include <netinet/in.h>
+ # include <arpa/nameser.h>
+ # include <resolv.h>
+-extern "C" int res_init();
++extern "C" int res_init() throw();
+ #endif
+ 
+ // POSIX Large File Support redefines open -> open64
