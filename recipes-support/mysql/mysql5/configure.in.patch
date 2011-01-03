@@ -1,0 +1,54 @@
+Index: mysql-5.1.40/configure.in
+===================================================================
+--- mysql-5.1.40.orig/configure.in
++++ mysql-5.1.40/configure.in
+@@ -226,8 +226,6 @@ else
+   AC_PATH_PROG(AS, as, as)
+ fi
+ 
+-# Still need ranlib for readline; local static use only so no libtool.
+-AC_PROG_RANLIB
+ # We use libtool
+ #AC_LIBTOOL_WIN32_DLL
+ AC_PROG_LIBTOOL
+@@ -255,39 +253,7 @@ AC_CHECK_PROGS(YACC, ['bison -y -p MYSQL
+ AC_CHECK_PROG(PDFMANUAL, pdftex, manual.pdf)
+ AC_CHECK_PROG(DVIS,      tex,    manual.dvi)
+ 
+-#check the return type of sprintf
+-AC_MSG_CHECKING("return type of sprintf")
+-AC_TRY_RUN([
+-  int main()
+-    {
+-      char* s = "hello";
+-      char buf[6];
+-      if((int)sprintf(buf, s) == strlen(s))
+-	return 0;
+-      
+-      return -1;
+-     }
+-   ],
+-   [AC_DEFINE(SPRINTF_RETURNS_INT, [1], [POSIX sprintf])
+-   AC_MSG_RESULT("int")],
+-   [AC_TRY_RUN([
+- int main()
+-   {
+-     char* s = "hello";
+-     char buf[6];
+-     if((char*)sprintf(buf,s) == buf + strlen(s))
+-       return 0;
+-     return -1;
+-   }           ],
+-               [AC_DEFINE(SPRINTF_RETURNS_PTR, [1], [Broken sprintf])
+-                AC_MSG_RESULT("ptr")],
+-               [AC_DEFINE(SPRINTF_RETURNS_GARBAGE, [1], [Broken sprintf])
+-                AC_MSG_RESULT("garbage")]
+-   )],
+-   # Cross compile, assume POSIX
+-   [AC_DEFINE(SPRINTF_RETURNS_INT, [1], [POSIX sprintf])
+-    AC_MSG_RESULT("int (we assume)")]
+-)
++MYSQL_SPRINTF_RET
+ 
+ AC_PATH_PROG(uname_prog, uname, no)
+ 

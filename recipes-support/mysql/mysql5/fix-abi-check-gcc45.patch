@@ -1,0 +1,77 @@
+From: Date: July 20 2010 7:44pm
+Subject: bzr commit into mysql-5.1-bugteam branch (davi:3493) Bug#52514
+List-Archive: http://lists.mysql.com/commits/113968
+X-Bug: 52514
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============9147207462624717749=="
+
+--===============9147207462624717749==
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+# At a local mysql-5.1-bugteam repository of davi
+
+ 3493 Davi Arnaut	2010-07-20
+      Bug#52514: mysql 5.1 do_abi_check does not compile w/ gcc4.5
+                 due to GCC preprocessor change
+            
+      The problem is that newer GCC versions treats missing headers
+      as fatal errors. The solution is to use a guard macro to prevent
+      the inclusion of system headers when checking the ABI with the
+      C Preprocessor.
+      
+      Reference: http://gcc.gnu.org/bugzilla/show_bug.cgi?id=15638
+                 http://gcc.gnu.org/bugzilla/show_bug.cgi?id=44836
+     @ Makefile.am
+        Define guard macro.
+     @ configure.in
+        Remove workaround.
+     @ include/mysql.h
+        Guard the header inclusion.
+     @ include/mysql.h.pp
+        Header is not included anymore.
+
+    modified:
+      Makefile.am
+      configure.in
+      include/mysql.h
+      include/mysql.h.pp
+=== modified file 'Makefile.am'
+Index: mysql-5.1.40/Makefile.am
+===================================================================
+--- mysql-5.1.40.orig/Makefile.am	2009-10-07 01:46:13.000000000 +0800
++++ mysql-5.1.40/Makefile.am	2010-08-17 20:07:24.843148001 +0800
+@@ -312,7 +312,7 @@
+ do_abi_check:
+ 	set -ex; \
+ 	for file in $(abi_headers); do \
+-	         @CC@ -E -nostdinc -dI \
++	         @CC@ -E -nostdinc -dI -DMYSQL_ABI_CHECK \
+ 	                  -I$(top_srcdir)/include \
+ 	                  -I$(top_srcdir)/include/mysql \
+ 	                  -I$(top_srcdir)/sql \
+Index: mysql-5.1.40/include/mysql.h
+===================================================================
+--- mysql-5.1.40.orig/include/mysql.h	2009-10-07 01:46:50.000000000 +0800
++++ mysql-5.1.40/include/mysql.h	2010-08-17 20:07:24.843148001 +0800
+@@ -44,7 +44,9 @@
+ #endif
+ 
+ #ifndef _global_h				/* If not standard header */
++#ifndef MYSQL_ABI_CHECK
+ #include <sys/types.h>
++#endif
+ #ifdef __LCC__
+ #include <winsock2.h>				/* For windows */
+ #endif
+Index: mysql-5.1.40/include/mysql.h.pp
+===================================================================
+--- mysql-5.1.40.orig/include/mysql.h.pp	2009-10-07 01:46:50.000000000 +0800
++++ mysql-5.1.40/include/mysql.h.pp	2010-08-17 20:07:24.843148001 +0800
+@@ -1,4 +1,3 @@
+-#include <sys/types.h>
+ typedef char my_bool;
+ typedef int my_socket;
+ #include "mysql_version.h"

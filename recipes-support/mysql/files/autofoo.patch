@@ -1,0 +1,319 @@
+diff -aurp mysql-4.1.22.old/acinclude.m4 mysql-4.1.22/acinclude.m4
+--- mysql-4.1.22.old/acinclude.m4	2008-09-18 13:00:13.000000000 -0500
++++ mysql-4.1.22/acinclude.m4	2008-09-18 12:58:41.000000000 -0500
+@@ -1,5 +1,88 @@
+ # Local macros for automake & autoconf
+ 
++AH_TEMPLATE([SPRINTF_RETURNS_INT], [sprintf returns an int])
++AH_TEMPLATE([SPRINTF_RETURNS_PTR], [sprintf returns a char *])
++AH_TEMPLATE([SPRINTF_RETURNS_GARBAGE], [sprintf returns something unknown to us])
++
++AC_DEFUN([MYSQL_SPRINTF_RET], [
++  AC_CACHE_CHECK([return type of sprintf],
++	         [mysql_cv_func_sprintf_ret], [
++    old_CFLAGS="$CFLAGS"
++    CFLAGS="$CFLAGS -Werror"
++    AC_COMPILE_IFELSE([
++#include <stdio.h>
++int sprintf(char *str, const char *format, ...);
++      ], [mysql_cv_func_sprintf_ret=int],
++      AC_COMPILE_IFELSE([
++#include <stdio.h>
++char * sprintf(char *str, const char *format, ...);
++        ], [mysql_cv_func_sprintf_ret=ptr],
++	[mysql_cv_func_sprintf_ret=unknown])
++    )
++    CFLAGS="$old_CFLAGS"
++  ])
++  if test x"$mysql_cv_func_sprintf_ret" = "xint"; then
++    AC_DEFINE([SPRINTF_RETURNS_INT], [1])
++  elif test x"$mysql_cv_func_sprintf_ret" = "xptr"; then
++    AC_DEFINE([SPRINTF_RETURNS_PTR], [1])
++  else
++    AC_DEFINE([SPRINTF_RETURNS_GARBAGE], [1])
++  fi
++])
++
++# _MYSQL_FUNC_ATOMIC_ADD
++# ----------------------
++# Check for Linux specific atomic_add function
++AC_DEFUN([_MYSQL_FUNC_ATOMIC_ADD],
++[AC_CACHE_CHECK([for atomic_add], [mysql_cv_func_atomic_add],
++[AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <asm/atomic.h>]],
++                                [
++int main()
++{
++  atomic_t v;
++
++  atomic_set(&v, 23);
++  atomic_add(5, &v);
++  return atomic_read(&v) == 28 ? 0 : -1;
++}
++				])],
++                   [mysql_cv_func_atomic_add=yes],
++                   [mysql_cv_func_atomic_add=no])])
++  if test x"$mysql_func_atomic_add" = "xyes"; then
++    AC_DEFINE([HAVE_ATOMIC_ADD], [1])
++  fi[]dnl
++])# _MYSQL_FUNC_ATOMIC_ADD
++
++# _MYSQL_FUNC_ATOMIC_SUB
++# ----------------------
++# Check for Linux specific atomic_sub function
++AC_DEFUN([_MYSQL_FUNC_ATOMIC_SUB],
++[AC_CACHE_CHECK([for atomic_sub], [mysql_cv_func_atomic_sub],
++[AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <asm/atomic.h>]],
++                                [
++int main()
++{
++  atomic_t v;
++
++  atomic_set(&v, 23);
++  atomic_sub(5, &v);
++  return atomic_read(&v) == 18 ? 0 : -1;
++}
++				])],
++                   [mysql_cv_func_atomic_sub=yes],
++                   [mysql_cv_func_atomic_sub=no])])
++  if test x"$mysql_func_atomic_sub" = "xyes"; then
++    AC_DEFINE([HAVE_ATOMIC_SUB], [1])
++  fi[]dnl
++])# _MYSQL_FUNC_ATOMIC_SUB
++
++# MYSQL_FUNCS_ATOMIC
++# ------------------
++# Check for Linux specific atomic add and sub functions
++AC_DEFUN([MYSQL_FUNCS_ATOMIC], [
++  AC_REQUIRE([_MYSQL_FUNC_ATOMIC_ADD])dnl
++  AC_REQUIRE([_MYSQL_FUNC_ATOMIC_SUB])dnl
++])# MYSQL_FUNCS_ATOMIC
+ 
+ AC_DEFUN([MYSQL_CHECK_READLINE_DECLARES_HIST_ENTRY], [
+     AC_CACHE_CHECK([HIST_ENTRY is declared in readline/readline.h], mysql_cv_hist_entry_declared,
+@@ -344,7 +427,7 @@ dnl ------------------------------------
+ AC_DEFUN([MYSQL_CHECK_ULONG],
+ [AC_MSG_CHECKING(for type ulong)
+ AC_CACHE_VAL(ac_cv_ulong,
+-[AC_TRY_RUN([#include <stdio.h>
++[AC_TRY_LINK([#include <stdio.h>
+ #include <sys/types.h>
+ main()
+ {
+@@ -362,7 +445,7 @@ fi
+ AC_DEFUN([MYSQL_CHECK_UCHAR],
+ [AC_MSG_CHECKING(for type uchar)
+ AC_CACHE_VAL(ac_cv_uchar,
+-[AC_TRY_RUN([#include <stdio.h>
++[AC_TRY_LINK([#include <stdio.h>
+ #include <sys/types.h>
+ main()
+ {
+@@ -380,7 +463,7 @@ fi
+ AC_DEFUN([MYSQL_CHECK_UINT],
+ [AC_MSG_CHECKING(for type uint)
+ AC_CACHE_VAL(ac_cv_uint,
+-[AC_TRY_RUN([#include <stdio.h>
++[AC_TRY_LINK([#include <stdio.h>
+ #include <sys/types.h>
+ main()
+ {
+@@ -399,7 +482,7 @@ fi
+ AC_DEFUN([MYSQL_CHECK_IN_ADDR_T],
+ [AC_MSG_CHECKING(for type in_addr_t)
+ AC_CACHE_VAL(ac_cv_in_addr_t,
+-[AC_TRY_RUN([#include <stdio.h>
++[AC_TRY_LINK([#include <stdio.h>
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+@@ -460,7 +543,7 @@ fi
+ AC_DEFUN([MYSQL_CHECK_FP_EXCEPT],
+ [AC_MSG_CHECKING(for type fp_except)
+ AC_CACHE_VAL(ac_cv_fp_except,
+-[AC_TRY_RUN([#include <stdio.h>
++[AC_TRY_LINK([#include <stdio.h>
+ #include <sys/types.h>
+ #include <ieeefp.h>
+ main()
+diff -aurp mysql-4.1.22.old/configure.in mysql-4.1.22/configure.in
+--- mysql-4.1.22.old/configure.in	2008-09-18 13:00:14.000000000 -0500
++++ mysql-4.1.22/configure.in	2008-09-18 12:54:00.000000000 -0500
+@@ -236,8 +236,6 @@ then
+ else
+   AC_PATH_PROG(AS, as, as)
+ fi
+-# Still need ranlib for readline; local static use only so no libtool.
+-AC_PROG_RANLIB
+ # We use libtool
+ #AC_LIBTOOL_WIN32_DLL
+ AC_PROG_LIBTOOL
+@@ -258,44 +256,7 @@ AC_PROG_YACC
+ AC_CHECK_PROG(PDFMANUAL, pdftex, manual.pdf)
+ AC_CHECK_PROG(DVIS,      tex,    manual.dvi)
+ 
+-AC_MSG_CHECKING("return type of sprintf")
+-
+-#check the return type of sprintf
+-case $SYSTEM_TYPE in
+-  *netware*)
+-    AC_DEFINE(SPRINTF_RETURNS_INT, [1]) AC_MSG_RESULT("int")
+-    ;;
+-  *)
+-AC_TRY_RUN([
+-  int main()
+-    {
+-      char* s = "hello";
+-      char buf[6];
+-      if((int)sprintf(buf, s) == strlen(s))
+-	return 0;
+-      
+-      return -1;
+-     }
+-   ],
+-   [AC_DEFINE(SPRINTF_RETURNS_INT, [1], [POSIX sprintf])
+-   AC_MSG_RESULT("int")],
+-   [AC_TRY_RUN([
+- int main()
+-   {
+-     char* s = "hello";
+-     char buf[6];
+-     if((char*)sprintf(buf,s) == buf + strlen(s))
+-       return 0;
+-     return -1;
+-   }           ],
+-               [AC_DEFINE(SPRINTF_RETURNS_PTR, [1], [Broken sprintf])
+-                AC_MSG_RESULT("ptr")],
+-               [AC_DEFINE(SPRINTF_RETURNS_GARBAGE, [1], [Broken sprintf])
+-                AC_MSG_RESULT("garbage")])
+-   ])
+-    ;;
+-esac
+-
++MYSQL_SPRINTF_RET
+ 
+ # option, cache_name, variable,
+ # code to execute if yes, code to exectute if fail
+@@ -878,47 +839,7 @@ struct request_info *req;
+ AC_SUBST(WRAPLIBS)
+ 
+ if test "$TARGET_LINUX" = "true"; then
+-  AC_MSG_CHECKING([for atomic operations])
+-
+-  AC_LANG_SAVE
+-  AC_LANG_CPLUSPLUS
+-
+-  atom_ops=
+-  AC_TRY_RUN([
+-#include <asm/atomic.h>
+-int main()
+-{
+-  atomic_t v;
+-
+-  atomic_set(&v, 23);
+-  atomic_add(5, &v);
+-  return atomic_read(&v) == 28 ? 0 : -1;
+-}
+-  ],
+-  [AC_DEFINE([HAVE_ATOMIC_ADD], [1],
+-             [atomic_add() from <asm/atomic.h> (Linux only)])
+-   atom_ops="${atom_ops}atomic_add "],
+-  )
+-  AC_TRY_RUN([
+-#include <asm/atomic.h>
+-int main()
+-{
+-  atomic_t v;
+-
+-  atomic_set(&v, 23);
+-  atomic_sub(5, &v);
+-  return atomic_read(&v) == 18 ? 0 : -1;
+-}
+-  ],
+-  [AC_DEFINE([HAVE_ATOMIC_SUB], [1],
+-             [atomic_sub() from <asm/atomic.h> (Linux only)])
+-   atom_ops="${atom_ops}atomic_sub "],
+-  )
+-
+-  if test -z "$atom_ops"; then atom_ops="no"; fi
+-  AC_MSG_RESULT($atom_ops)
+-
+-  AC_LANG_RESTORE
++  MYSQL_FUNC_ATOMIC
+ 
+   AC_ARG_WITH(pstack,
+     [  --with-pstack           Use the pstack backtrace library],
+@@ -971,13 +892,13 @@ fi
+ # Later in this script LIBS will be augmented with a threads library.
+ NON_THREADED_LIBS="$LIBS"
+ 
+-AC_MSG_CHECKING([for int8])
++AC_CACHE_CHECK([for int8], [mysql_cv_type_int8], [
+ case $SYSTEM_TYPE in
+   *netware)
+     AC_MSG_RESULT([no])
+     ;;
+   *)
+-AC_TRY_RUN([
++AC_LINK_IFELSE([AC_LANG_PROGRAM([[
+ #ifdef HAVE_STDLIB_H
+ #include <stdlib.h>
+ #endif
+@@ -988,22 +909,21 @@ AC_TRY_RUN([
+ 
+ #ifdef HAVE_SYS_TYPES_H
+ #include <sys/types.h>
+-#endif
+-
++#endif]], [
+ int main()
+ {
+   int8 i;
+   return 0;
+-}
+-],
+-[AC_DEFINE([HAVE_INT_8_16_32], [1],
+-           [whether int8, int16 and int32 types exist])
+-AC_MSG_RESULT([yes])],
+-[AC_MSG_RESULT([no])]
+-)
++}])], [mysql_cv_type_int8=yes], [mysql_cv_type_int8=no])
+     ;;
+ esac
+ 
++if test x"$mysql_cv_type_int8" = "xyes"; then
++  AC_DEFINE([HAVE_INT_8_16_32], [1],
++           [whether int8, int16 and int32 types exist])
++fi
++])
++
+ #
+ # Some system specific hacks
+ #
+@@ -1814,7 +1734,7 @@ then
+   AC_MSG_ERROR("MySQL needs a long long type.")
+ fi
+ # off_t is not a builtin type
+-MYSQL_CHECK_SIZEOF(off_t, 4)
++AC_CHECK_SIZEOF(off_t, 4)
+ if test "$ac_cv_sizeof_off_t" -eq 0
+ then
+   AC_MSG_ERROR("MySQL needs a off_t type.")
+diff -aurp mysql-4.1.22.old/innobase/configure.in mysql-4.1.22/innobase/configure.in
+--- mysql-4.1.22.old/innobase/configure.in	2008-09-18 13:00:14.000000000 -0500
++++ mysql-4.1.22/innobase/configure.in	2008-09-18 12:55:39.000000000 -0500
+@@ -3,6 +3,7 @@ AC_INIT
+ AC_CANONICAL_SYSTEM
+ AM_MAINTAINER_MODE
+ AM_CONFIG_HEADER(ib_config.h)
++AC_CONFIG_AUX_DIR([..])
+ AM_INIT_AUTOMAKE(ib, 0.90)
+ 
+ # This is need before AC_PROG_CC
+@@ -32,7 +33,6 @@ CFLAGS="$CFLAGS "
+ CXXFLAGS="$CXXFLAGS "
+ 
+ AC_PROG_CC
+-AC_PROG_RANLIB
+ AC_PROG_INSTALL
+ AC_PROG_LIBTOOL
+ AC_CHECK_HEADERS(aio.h sched.h)

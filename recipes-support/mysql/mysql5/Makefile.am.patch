@@ -1,0 +1,19 @@
+Index: mysql-5.1.40/sql/Makefile.am
+===================================================================
+--- mysql-5.1.40.orig/sql/Makefile.am
++++ mysql-5.1.40/sql/Makefile.am
+@@ -174,10 +174,10 @@ link_sources:
+ # This generates lex_hash.h
+ # NOTE Built sources should depend on their sources not the tool
+ # this avoid the rebuild of the built files in a source dist
+-lex_hash.h:	gen_lex_hash.cc lex.h
+-		$(MAKE) $(AM_MAKEFLAGS) gen_lex_hash$(EXEEXT)
+-		./gen_lex_hash$(EXEEXT) > $@-t
+-		$(MV) $@-t $@
++GEN_LEX_HASH = ./gen_lex_hash$(EXEEXT)
++
++lex_hash.h:	gen_lex_hash$(EXEEXT)
++		$(GEN_LEX_HASH) > $@
+ 
+ # For testing of udf_example.so
+ udf_example_la_SOURCES= udf_example.c
