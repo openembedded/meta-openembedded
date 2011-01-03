@@ -1,4 +1,5 @@
 SUMMARY = "Qt is a versatile cross-platform application framework -- this is the embedded version."
+DESCRIPTION = "${SUMMARY}"
 SECTION = "libs"
 LICENSE = "GPL QPL"
 PRIORITY = "optional"
