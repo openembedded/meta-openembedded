@@ -1,4 +1,4 @@
-PR = "r10"
+PR = "${INC_PR}.0"
 
 require gcc-${PV}.inc
 require gcc-configure-runtime.inc

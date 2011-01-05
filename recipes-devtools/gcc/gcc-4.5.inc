@@ -14,6 +14,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 SRCREV = "167948"
 PV = "4.5"
+INC_PR = "r11"
+
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
 # the value will be minor-release+1 e.g. if minor release was
@@ -162,6 +164,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        \
 	   file://optional_libstdc.patch \
 	   file://64bithack.patch \
+       file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
 	  "
 
 SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch;patch=1 "
