@@ -3,7 +3,13 @@ require pixman.inc
 SRC_URI[archive.md5sum] = "9e09fd6e58cbf9717140891e0b7d4a7a"
 SRC_URI[archive.sha256sum] = "295f51416caf307ff7caf1153ee9b1d86b9f7f02a7876d12db6538d80451c5de"
 
-PR = "${INC_PR}.1"
+LICENSE = "MIT & MIT-style & Public Domain"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e9d61bf6d32b58021e0eb0d41f223b6f \
+                    file://pixman/pixman-matrix.c;endline=25;md5=ba6e8769bfaaee2c41698755af04c4be \
+                    file://pixman/pixman-arm-neon-asm.h;endline=24;md5=9a9cc1e51abbf1da58f4d9528ec9d49b \
+                    file://pixman/pixman-x64-mmx-emulation.h;beginline=4;endline=9;md5=4e32716f2efaa6c4659222667c339bb8"
+
+PR = "${INC_PR}.2"
 
 SRC_URI += "\
            file://0002-Fix-argument-quoting-for-AC_INIT.patch \
