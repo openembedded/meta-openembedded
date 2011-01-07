@@ -9,6 +9,8 @@ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/ORBit2/2.14/ORBit2-${PV}.tar.b
 DEPENDS = "libidl popt orbit2-native gtk-doc"
 PARALLEL_MAKE = ""
 
+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+
 FILES_${PN} += "${libdir}/orbit-2.0/*.so"
 FILES_${PN}-dev += "${libdir}/orbit-2.0/*.a ${libdir}/orbit-2.0/*.la"
 FILES_${PN}-dbg += "${libdir}/orbit-2.0/.debug"

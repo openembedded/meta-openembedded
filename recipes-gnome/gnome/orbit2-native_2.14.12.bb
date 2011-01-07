@@ -1,6 +1,7 @@
 DESCRIPTION = "CORBA ORB"
 PR = "r0"
 LICENSE = "LGPL GPL"
+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 SECTION = "x11/gnome/libs"
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/ORBit2/2.14/ORBit2-${PV}.tar.bz2 \
            file://configure-lossage.patch \
