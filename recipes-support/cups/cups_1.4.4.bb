@@ -1,5 +1,7 @@
 require cups14.inc
 
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=956e7600195e6139f12de8c2a5bbefa9"
+
 SRC_URI += " \
 	file://use_echo_only_in_init.patch \
 	file://skip_tools.patch \
