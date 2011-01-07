@@ -1,5 +1,6 @@
 DESCRIPTION = "Jpeg 2000 implementation"
 LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=baa697d7510288a9cdcce9bd7edaf9bc"
 
 PR = "r1"
 

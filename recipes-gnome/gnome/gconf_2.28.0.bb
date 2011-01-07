@@ -1,8 +1,10 @@
 DESCRIPTION = "GNOME configuration database system"
 SECTION = "x11/gnome"
-LICENSE = "LGPL"
 DEPENDS = "gtk+ orbit2 glib-2.0 libxml2 policykit"
 ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
+
+LICENSE = "LGPLv2+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
 
 S = "${WORKDIR}/GConf-${PV}"
 
