@@ -1,6 +1,7 @@
 HOMEPAGE = "http://www.packagekit.org/"
 DEPENDS = "eggdbus libpam expat dbus-glib intltool-native"
 LICENSE = "LGPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb"
 
 PR = "r2"
 
