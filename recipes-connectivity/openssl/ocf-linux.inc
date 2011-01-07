@@ -1,5 +1,6 @@
 DESCRIPTION = "Install required headers to enable OCF Linux support"
 LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://README;md5=b02a793c9b7893b4ce1f39f0b231ccd7"
 
 INC_PR = "r0"
 
