@@ -1,0 +1,73 @@
+#!/bin/sh -e
+
+### BEGIN INIT INFO
+# Provides:          udev
+# Required-Start:    mountvirtfs
+# Required-Stop:     
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Start udevd, populate /dev and load drivers.
+### END INIT INFO
+
+export TZ=/etc/localtime
+
+[ -d /sys/class ] || exit 1
+[ -r /proc/mounts ] || exit 1
+[ -x /sbin/udevd ] || exit 1
+[ -f /etc/default/udev ] && . /etc/default/udev
+[ -f /etc/udev/udev.conf ] && . /etc/udev/udev.conf
+
+kill_udevd() {
+        if [ -x /sbin/pidof ]; then
+                pid=`/sbin/pidof -x udevd`
+                [ -n "$pid" ] && kill $pid
+        fi
+}
+
+export ACTION=add
+# propagate /dev from /sys
+echo "Starting udev"
+
+# mount the tmpfs on /dev, if not already done
+LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
+        mount -n -o mode=0755 -t tmpfs none "/dev"
+        mkdir -m 0755 /dev/pts
+        mkdir -m 1777 /dev/shm
+}
+
+if [ "$DEVCACHE" != "" ]; then
+	# Invalidate udev cache if the kernel or its bootargs/cmdline have changed
+	[ -x /bin/uname ] && /bin/uname -mrspv > /tmp/uname || touch /tmp/uname
+	[ -r /proc/cmdline ] && cat /proc/cmdline > /tmp/cmdline || touch /tmp/cmdline
+	[ -r /proc/atags ] && cat /proc/atags > /tmp/atags || touch /tmp/atags
+	if [ -e $DEVCACHE ] && \
+	   cmp -s /tmp/uname /etc/udev/saved.uname && \
+	   cmp -s /tmp/cmdline /etc/udev/saved.cmdline && \
+	   cmp -s /tmp/atags /etc/udev/saved.atags; then
+		(cd /; tar xf $DEVCACHE > /dev/null 2>&1)
+		not_first_boot=1
+	fi
+fi
+
+if [ ! -e "/lib/modules/$(uname -r)"/modules.dep ] ; then
+	mkdir -p /lib/modules/$(uname -r)
+	depmod -ae
+fi
+
+# make_extra_nodes
+kill_udevd > "/dev/null" 2>&1
+
+        # trigger the sorted events
+        echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
+        /sbin/udevd -d
+
+        /sbin/udevadm control --env STARTUP=1
+		if [ "$not_first_boot" != "" ];then
+			/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics  --subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
+			(/sbin/udevadm settle --timeout=8; /sbin/udevadm control --env STARTUP=)&
+		else
+			/sbin/udevadm trigger
+			/sbin/udevadm settle
+		fi
+
+exit 0

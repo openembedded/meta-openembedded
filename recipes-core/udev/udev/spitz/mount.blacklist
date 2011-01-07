@@ -1,0 +1,7 @@
+# This is a grep pattern matched against the device name
+# Any matched pattern will _not_ be mounted / removed by udevd
+
+/dev/mtdblock
+/dev/hda
+/dev/loop
+/dev/ram

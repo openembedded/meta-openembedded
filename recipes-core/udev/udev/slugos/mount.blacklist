@@ -1,0 +1,5 @@
+ram[0-9]$
+mtdblock[0-9]$
+hd[a-z]$
+sd[a-z]$
+loop[0-9]$

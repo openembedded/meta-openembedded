@@ -1,0 +1,10 @@
+# ALSA devices
+KERNEL=="controlC[0-9]*",   NAME="snd/%k"
+KERNEL=="hwC[D0-9]*",       NAME="snd/%k"
+KERNEL=="pcmC[D0-9cp]*",    NAME="snd/%k"
+KERNEL=="midiC[D0-9]*",     NAME="snd/%k"
+KERNEL=="timer",        NAME="snd/%k"
+KERNEL=="seq",          NAME="snd/%k"
+
+KERNEL=="snd", SUBSYSTEM=="module", ACTION=="add", \
+    RUN+="/bin/ln -sf /proc/asound/oss/sndstat $root/sndstat"

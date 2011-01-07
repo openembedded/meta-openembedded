@@ -1,0 +1,26 @@
+##
+## BUG/BMI specific
+##
+KERNEL=="event*", ATTRS{name}=="bugnav", SYMLINK+="input/bugnav"
+KERNEL=="event*", ATTRS{name}=="bmi_motion", SYMLINK+="input/bmi_motion"
+KERNEL=="event*", ATTRS{name}=="bug_cam", SYMLINK+="input/bmi_cam"
+KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m1", SYMLINK+="input/bmi_audio_m1"
+KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m2", SYMLINK+="input/bmi_audio_m2"
+KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m3", SYMLINK+="input/bmi_audio_m3"
+KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m4", SYMLINK+="input/bmi_audio_m4"
+DEVPATH=="/devices/platform/bugfb.0", SYMLINK+="bugfb"
+KERNEL=="rtc0", SYMLINK+="rtc"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts0", SYMLINK+="input/bmi_lcd_ts0"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts1", SYMLINK+="input/bmi_lcd_ts1"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts2", SYMLINK+="input/bmi_lcd_ts2"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts3", SYMLINK+="input/bmi_lcd_ts3"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts4", SYMLINK+="input/bmi_lcd_ts4"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts5", SYMLINK+="input/bmi_lcd_ts5"
+KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts6", SYMLINK+="input/bmi_lcd_ts6"
+ACTION=="add", DEVPATH=="/devices/conn*", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
+ACTION=="remove", DEVPATH=="/devices/conn*", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
+#
+# For USB PBPSD, which we've arbitrarily decided will be module F001
+#
+ACTION=="remove", SUBSYSTEM=="usb", DRIVERS=="psd_driver", ENV{BMIBUS_PRODUCT}="F001", ENV{BMIBUS_SLOT}="%n", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
+ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="psd_driver", ENV{BMIBUS_PRODUCT}="F001", ENV{BMIBUS_SLOT}="%n", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"

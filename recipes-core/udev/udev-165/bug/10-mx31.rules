@@ -1,0 +1,49 @@
+KERNEL=="ttyS[0-9]",	NAME="tts/%n",		SYMLINK+="tts%n"
+KERNEL=="ttymxc[0-9]",	NAME="ttymxc/%n",	SYMLINK+="ttymxc%n"
+
+KERNEL=="mxc_mu[0-9]",	NAME="mxc_mu/%n",	SYMLINK+="mxc_mu%n"
+KERNEL=="fb*",		NAME="fb/%n",		SYMLINK+="fb%n"
+KERNEL=="i2c*",		NAME="i2c/%n"
+KERNEL=="mxc_ipc*",	NAME="mxc_ipc/%n"
+KERNEL=="video*",	NAME="v4l/video%n"
+
+KERNEL=="rtc",		NAME="misc/rtc"
+KERNEL=="watchdog",	NAME="misc/watchdog"
+
+KERNEL=="mc13783_adc",	NAME="mc13783_adc",	SYMLINK+="ts"
+KERNEL=="pmic_adc",	NAME="pmic_adc",	SYMLINK+="ts"
+
+# The long class name gets cut off to be mc13783_connectiv in 
+# /sys/class/mc13783_connectivity/mc13783_connectivit
+KERNEL=="mc13783_connectiv*",	NAME="mc13783_connectivity"
+
+KERNEL=="mxc_ssi[0-9]*",	NAME="mxc_ssi/%n",	SYMLINK+="mxc_ssi%n"
+KERNEL=="spi[0-9]*",	NAME="spi/%n",		SYMLINK+="spi%n"
+
+KERNEL=="mtdblock*",	NAME="mtdblock/%n"	SYMLINK+="mtdblock%n"
+KERNEL=="mtd[0-9]",	NAME="mtd/%n"
+
+# A more elegant way of doing this must exist...
+KERNEL=="mtd0ro",	NAME="mtd/0ro"
+KERNEL=="mtd1ro",	NAME="mtd/1ro"
+KERNEL=="mtd2ro",	NAME="mtd/2ro"
+KERNEL=="mtd3ro",	NAME="mtd/3ro"
+KERNEL=="mtd4ro",	NAME="mtd/4ro"
+KERNEL=="mtd5ro",	NAME="mtd/5ro"
+KERNEL=="mtd6ro",	NAME="mtd/6ro"
+KERNEL=="mtd7ro",	NAME="mtd/7ro"
+KERNEL=="mtd8ro",	NAME="mtd/8ro"
+KERNEL=="mtd9ro",	NAME="mtd/9ro"
+
+# Note that we want /dev/dsp linked to /dev/sound/dsp1...
+KERNEL=="dsp",		NAME="sound/dsp"
+KERNEL=="dspW",		NAME="sound/dspW"
+KERNEL=="dsp1",		NAME="sound/dsp1",	SYMLINK+="dsp"
+KERNEL=="mixer",		NAME="sound/mixer",	SYMLINK+="mixer"
+KERNEL=="sequencer",	NAME="sound/sequencer"
+KERNEL=="sequencer2",	NAME="sound/sequencer2"
+
+KERNEL=="ram[0-9]*",	NAME="ram/%n",		SYMLINK+="ram%n"
+
+KERNEL=="dvfs_dptc",	NAME="dvfs_dptc",	SYMLINK+="dptc dvfs"
+

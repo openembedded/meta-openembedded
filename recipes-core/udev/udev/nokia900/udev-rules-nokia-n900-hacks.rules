@@ -1,0 +1,8 @@
+# MAC address hack
+# forces n900 to always use the same MAC address that is generated in the first boot
+SUBSYSTEM=="net",KERNEL=="wlan0", RUN+="/etc/udev/scripts/nokia-n900-mac-hack.sh %k $attr{address}"
+
+# Create inputdev symlinks for kbslider contextkit plugin
+SUBSYSTEM=="input" ATTRS{name}=="TWL4030 Keypad" SYMLINK+="input/keypad"
+SUBSYSTEM=="input" ATTRS{name}=="gpio-keys" SYMLINK+="input/gpio-keys"
+

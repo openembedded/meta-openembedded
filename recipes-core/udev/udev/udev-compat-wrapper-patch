@@ -1,0 +1,37 @@
+This patch should be applied on platforms which support kernels < 2.6.27 and need udev-compat package.
+
+It should be applied after:
+sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
+
+It has not .patch suffix, because such files would not be copied to
+WORKDIR and cannot be selectively applied on another source file.
+
+--- init
++++ init
+@@ -11,6 +11,17 @@
+ 
+ export TZ=/etc/localtime
+ 
++UDEVD="/sbin/udevd"
++UDEVADM="/sbin/udevadm"
++# If we are running an old kernel and have a static udev present use that instead
++if [ -e /sbin/udevd-compat ] ; then
++	KERNELMICROVER="$(uname -r | sed 's/^[0-9]*\.[0-9]*\.\([0-9]*\).*$/\1/')"
++	if [ $KERNELMICROVER -lt 27 ] ; then
++		UDEVD="/sbin/udevd-compat"
++		UDEVADM="/sbin/udevadm-compat"
++	fi
++fi
++
+ [ -d /sys/class ] || exit 1
+ [ -r /proc/mounts ] || exit 1
+ [ -x $UDEVD ] || exit 1
+@@ -21,6 +32,8 @@
+         if [ -x /sbin/pidof ]; then
+                 pid=`/sbin/pidof -x udevd`
+                 [ -n "$pid" ] && kill $pid
++                pid=`/sbin/pidof -x udevd-compat`
++                [ -n "$pid" ] && kill $pid
+         fi
+ }
+ 

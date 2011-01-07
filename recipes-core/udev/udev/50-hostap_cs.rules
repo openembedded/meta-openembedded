@@ -1,0 +1,4 @@
+# hostap_cs needs ignore_cis_vcc=1 set - this should handle all cards
+#
+ACTION=="add", DEVICE=="hostap_cs", \
+ SYSFS{func_id}=="0x06", RUN+="/sbin/modprobe hostap_cs ignore_cis_vcc=1"

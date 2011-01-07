@@ -1,0 +1,776 @@
+--- udev-081/udevsynthesize.c.orig	2006-01-29 12:22:45.000000000 +0100
++++ udev-081/udevsynthesize.c	2006-01-29 12:22:40.000000000 +0100
+@@ -0,0 +1,763 @@
++/*
++ * udevcoldplug.c
++ *
++ * Copyright (C) 2005 SUSE Linux Products GmbH
++ *
++ * Author:
++ *   Kay Sievers <kay.sievers@vrfy.org>
++ *
++ * Synthesize kernel events from sysfs information and pass them
++ * to the udevd daemon.
++ *
++ *	This program is free software; you can redistribute it and/or modify it
++ *	under the terms of the GNU General Public License as published by the
++ *	Free Software Foundation version 2 of the License.
++ * 
++ *	This program is distributed in the hope that it will be useful, but
++ *	WITHOUT ANY WARRANTY; without even the implied warranty of
++ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ *	General Public License for more details.
++ * 
++ *	You should have received a copy of the GNU General Public License along
++ *	with this program; if not, write to the Free Software Foundation, Inc.,
++ *	675 Mass Ave, Cambridge, MA 02139, USA.
++ *
++ */
++
++#include <stdlib.h>
++#include <stddef.h>
++#include <string.h>
++#include <stdio.h>
++#include <unistd.h>
++#include <errno.h>
++#include <ctype.h>
++#include <fcntl.h>
++#include <dirent.h>
++#include <signal.h>
++#include <syslog.h>
++#include <sys/socket.h>
++#include <sys/un.h>
++#include <sys/wait.h>
++#include <sys/stat.h>
++#include <sys/types.h>
++
++#include "udev_libc_wrapper.h"
++#include "udev.h"
++#include "udevd.h"
++#include "udev_version.h"
++#include "logging.h"
++
++#include "list.h"
++
++#ifndef DT_DIR
++#define DT_DIR			4
++#endif
++
++static const char *udev_log_str;
++static int udevd_sock = -1;
++
++#ifdef USE_LOG
++void log_message(int priority, const char *format, ...)
++{
++	va_list args;
++
++	if (priority > udev_log_priority)
++		return;
++
++	va_start(args, format);
++	vsyslog(priority, format, args);
++	va_end(args);
++}
++#endif
++
++struct device {
++	struct list_head node;
++	struct udevd_msg msg;
++	size_t bufpos;
++	char *path;
++};
++
++static dev_t read_devt(const char *path)
++{
++	char filename[PATH_SIZE];
++	char majorminor[64];
++	unsigned int major, minor;
++	ssize_t count;
++	int fd;
++
++	snprintf(filename, sizeof(filename), "%s/%s", path, "dev");
++	filename[sizeof(filename)-1] = '\0';
++
++	fd = open(filename, O_RDONLY);
++	if (fd < 0)
++		return 0;
++
++	count = read(fd, majorminor, sizeof(majorminor));
++	close(fd);
++	majorminor[count] = '\0';
++	if (sscanf(majorminor, "%u:%u", &major, &minor) != 2)
++		return 0;
++	dbg("found major=%d, minor=%d", major, minor);
++
++	return makedev(major, minor);
++}
++
++static ssize_t read_file(const char *directory, const char *file, char *str, size_t len)
++{
++	char filename[PATH_SIZE];
++	ssize_t count;
++	int fd;
++
++	memset(filename, 0, sizeof(filename));
++	snprintf(filename, sizeof(filename), "%s/%s", directory, file);
++	filename[sizeof(filename)-1] = '\0';
++
++	fd = open(filename, O_RDONLY);
++	if (fd < 0)
++		return -1;
++
++	count = read(fd, str, len-1);
++	close(fd);
++
++	if (count > (ssize_t)len)
++		count = len;
++	str[count-1] = '\0';
++
++	return count;
++}
++
++static ssize_t read_link(const char *directory, const char *file, char *str, size_t size)
++{
++	char filename[PATH_SIZE];
++	char target[PATH_SIZE];
++	int len;
++	char *back;
++	char *strip;
++	int level = 1;
++
++	snprintf(filename, sizeof(filename), "%s/%s", directory, file);
++	filename[sizeof(filename)-1] = '\0';
++
++	len = readlink(filename, target, sizeof(target)-1);
++	if (len < 0)
++		return -1;
++	target[len] = '\0';
++
++	back = target;
++	while (strncmp(back, "../", 3) == 0) {
++		back += 3;
++		level++;
++	}
++	while(level--) {
++		strip = strrchr(filename, '/');
++		if (!strip)
++			return -1;
++		strip[0] = '\0';
++	}
++
++	snprintf(str, size, "%s/%s", filename, back);
++	str[size-1] = '\0';
++
++	return len;
++}
++
++static char *add_env_key(struct device *device, const char *key, const char *value)
++{
++	size_t pos = device->bufpos;
++	device->bufpos += sprintf(&device->msg.envbuf[device->bufpos], "%s=%s", key, value)+1;
++	return &device->msg.envbuf[pos];
++}
++
++static struct device *device_create(const char *path, const char *subsystem, dev_t devt)
++{
++	struct device *device;
++	const char *devpath = &path[strlen(sysfs_path)];
++	char target[PATH_SIZE];
++
++	device = malloc(sizeof(struct device));
++	if (device == NULL) {
++		dbg("error malloc");
++		return NULL;
++	}
++	memset(device, 0x00, sizeof(struct device));
++
++	device->path = add_env_key(device, "DEVPATH", devpath);
++	device->path += strlen("DEVPATH=");
++	add_env_key(device, "SUBSYSTEM", subsystem);
++	add_env_key(device, "ACTION", "add");
++	add_env_key(device, "UDEV_COLDPLUG", "1");
++
++	if (major(devt)) {
++		char number[32];
++		sprintf(number, "%u", major(devt));
++		add_env_key(device, "MAJOR", number);
++		sprintf(number, "%u", minor(devt));
++		add_env_key(device, "MINOR", number);
++	}
++
++	if (strncmp(devpath, "/block/", strlen("/block/")) == 0 ||
++	    strncmp(devpath, "/class/", strlen("/class/")) == 0) {
++		char physpath[PATH_SIZE];
++
++		if (read_link(path, "device", physpath, sizeof(physpath)) > (ssize_t)strlen(sysfs_path)) {
++			add_env_key(device, "PHYSDEVPATH", &physpath[strlen(sysfs_path)]);
++			if (read_link(physpath, "driver", target, sizeof(target)) > (ssize_t)strlen(sysfs_path)) {
++				char *pos = strrchr(target, '/');
++				if (pos)
++					add_env_key(device, "PHYSDEVDRIVER", &pos[1]);
++			}
++			if (read_link(physpath, "bus", target, sizeof(target)) > (ssize_t)strlen(sysfs_path)) {
++				char *pos = strrchr(target, '/');
++				if (pos)
++					add_env_key(device, "PHYSDEVBUS", &pos[1]);
++			}
++		}
++	} else if (strncmp(devpath, "/devices/", strlen("/devices/")) == 0) {
++		if (read_link(path, "driver", target, sizeof(target)) > (ssize_t)strlen(sysfs_path)) {
++			char *pos = strrchr(target, '/');
++			if (pos)
++				add_env_key(device, "PHYSDEVDRIVER", &pos[1]);
++		}
++		if (read_link(path, "bus", target, sizeof(target)) > (ssize_t)strlen(sysfs_path)) {
++			char *pos = strrchr(target, '/');
++			if (pos)
++				add_env_key(device, "PHYSDEVBUS", &pos[1]);
++		}
++	}
++
++	return device;
++}
++
++static int device_list_insert(struct list_head *device_list, struct device *device)
++{
++	struct device *loop_device;
++
++	dbg("insert: '%s'", device->path);
++
++	/* sort files in lexical order */
++	list_for_each_entry(loop_device, device_list, node)
++		if (strcmp(loop_device->path, device->path) > 0)
++			break;
++
++	list_add_tail(&device->node, &loop_device->node);
++
++	return 0;
++}
++
++static int add_device_udevd(struct device *device)
++{
++	size_t msg_len;
++	struct sockaddr_un saddr;
++	socklen_t addrlen;
++	int retval;
++
++	memset(&saddr, 0x00, sizeof(struct sockaddr_un));
++	saddr.sun_family = AF_LOCAL;
++	/* use abstract namespace for socket path */
++	strcpy(&saddr.sun_path[1], UDEVD_SOCK_PATH);
++	addrlen = offsetof(struct sockaddr_un, sun_path) + strlen(saddr.sun_path+1) + 1;
++
++	strcpy(device->msg.magic, UDEV_MAGIC);
++	device->msg.type = UDEVD_UEVENT_UDEVSEND;
++
++	msg_len = offsetof(struct udevd_msg, envbuf) + device->bufpos;
++	dbg("msg_len=%i", msg_len);
++
++	retval = sendto(udevd_sock, &device->msg, msg_len, 0, (struct sockaddr *)&saddr, addrlen);
++	if (retval < 0)
++		return -1;
++
++	return 0;
++}
++
++static void exec_list(struct list_head *device_list, const char *first[], const char *last[])
++{
++	struct device *loop_device;
++	struct device *tmp_device;
++	int i;
++
++	/* handle the "first" type devices first */
++	if (first)
++		list_for_each_entry_safe(loop_device, tmp_device, device_list, node) {
++			for (i = 0; first[i] != NULL; i++) {
++				if (strncmp(loop_device->path, first[i], strlen(first[i])) == 0) {
++					add_device_udevd(loop_device);
++					list_del(&loop_device->node);
++					free(loop_device);
++					break;
++				}
++			}
++		}
++
++	/* handle the devices we are allowed to, excluding the "last" type devices */
++	if (last)
++		list_for_each_entry_safe(loop_device, tmp_device, device_list, node) {
++			int found = 0;
++			for (i = 0; last[i] != NULL; i++) {
++				if (strncmp(loop_device->path, last[i], strlen(last[i])) == 0) {
++					found = 1;
++					break;
++				}
++			}
++			if (found)
++				continue;
++
++		add_device_udevd(loop_device);
++		list_del(&loop_device->node);
++		free(loop_device);
++	}
++
++	/* handle the rest of the devices */
++	list_for_each_entry_safe(loop_device, tmp_device, device_list, node) {
++		add_device_udevd(loop_device);
++		list_del(&loop_device->node);
++		free(loop_device);
++	}
++}
++
++static int udev_scan_class(void)
++{
++	char base[PATH_SIZE];
++	DIR *dir;
++	struct dirent *dent;
++	LIST_HEAD(device_list);
++
++	/* we want /dev/null and /dev/console first */
++	const char *first[] = {
++		"/class/mem",
++		"/class/tty",
++		NULL,
++	};
++
++	snprintf(base, sizeof(base), "%s/class", sysfs_path);
++	base[sizeof(base)-1] = '\0';
++
++	dir = opendir(base);
++	if (!dir)
++		return -1;
++
++	for (dent = readdir(dir); dent != NULL; dent = readdir(dir)) {
++		char dirname[PATH_SIZE];
++		DIR *dir2;
++		struct dirent *dent2;
++
++		if (dent->d_name[0] == '.')
++			continue;
++
++		snprintf(dirname, sizeof(dirname), "%s/%s", base, dent->d_name);
++		dirname[sizeof(dirname)-1] = '\0';
++
++		dir2 = opendir(dirname);
++		if (!dir2)
++			continue;
++		for (dent2 = readdir(dir2); dent2 != NULL; dent2 = readdir(dir2)) {
++			char dirname2[PATH_SIZE];
++			struct device *device;
++			dev_t devt;
++
++			if (dent2->d_name[0] == '.')
++				continue;
++			if (dent2->d_type != DT_DIR)
++				continue;
++
++			snprintf(dirname2, sizeof(dirname2), "%s/%s", dirname, dent2->d_name);
++			dirname2[sizeof(dirname2)-1] = '\0';
++			devt = read_devt(dirname2);
++			device = device_create(dirname2, dent->d_name, devt);
++
++			if (strcmp(dent->d_name, "net") == 0 ||
++			    strcmp(dent->d_name, "bluetooth") == 0) {
++				add_env_key(device, "INTERFACE", dent2->d_name);
++			} else if (strcmp(dent->d_name, "pcmcia_socket") == 0 &&
++				   strlen(dent->d_name) > 14) {
++				add_env_key(device, "SOCKET_NO",
++					dent2->d_name + 14);
++			}
++
++			device_list_insert(&device_list, device);
++		}
++		closedir(dir2);
++	}
++	closedir(dir);
++	exec_list(&device_list, first, NULL);
++
++	return 0;
++}
++
++static int udev_scan_block(void)
++{
++	char base[PATH_SIZE];
++	DIR *dir;
++	struct dirent *dent;
++	LIST_HEAD(device_list);
++
++	/* dm wants to have the block devices around before it */
++	const char *last[] = {
++		"/block/dm",
++		NULL,
++	};
++
++	snprintf(base, sizeof(base), "%s/block", sysfs_path);
++	base[sizeof(base)-1] = '\0';
++
++	dir = opendir(base);
++	if (!dir)
++		return -1;
++
++	for (dent = readdir(dir); dent != NULL; dent = readdir(dir)) {
++		char dirname[PATH_SIZE];
++		struct device *device;
++		struct dirent *dent2;
++		DIR *dir2;
++		dev_t devt;
++
++		if (dent->d_name[0] == '.')
++			continue;
++		if (dent->d_type != DT_DIR)
++			continue;
++
++		snprintf(dirname, sizeof(dirname), "%s/%s", base, dent->d_name);
++		dirname[sizeof(dirname)-1] = '\0';
++		devt = read_devt(dirname);
++		if (major(devt)) {
++			device = device_create(dirname, "block", devt);
++			device_list_insert(&device_list, device);
++		}
++
++		/* look for partitions */
++		dir2 = opendir(dirname);
++		if (!dir2)
++			continue;
++		for (dent2 = readdir(dir2); dent2 != NULL; dent2 = readdir(dir2)) {
++			char dirname2[PATH_SIZE];
++
++			if (dent2->d_name[0] == '.')
++				continue;
++			if (dent2->d_type != DT_DIR)
++				continue;
++
++			snprintf(dirname2, sizeof(dirname2), "%s/%s", dirname, dent2->d_name);
++			dirname2[sizeof(dirname2)-1] = '\0';
++			devt = read_devt(dirname2);
++			if (major(devt)) {
++				device = device_create(dirname2, "block", devt);
++				device_list_insert(&device_list, device);
++				continue;
++			}
++		}
++		closedir(dir2);
++	}
++	closedir(dir);
++	exec_list(&device_list, NULL, last);
++
++	return 0;
++}
++
++static int pci_handler(struct device *device)
++{
++	char path[PATH_SIZE];
++	char value[PATH_SIZE];
++	char vendor[PATH_SIZE];
++	char product[PATH_SIZE];
++	const char *name;
++
++	snprintf(path, sizeof(path), "%s%s", sysfs_path, device->path);
++	path[sizeof(path)-1] = '\0';
++
++	if (read_file(path, "modalias", value, sizeof(value)) > 0)
++		add_env_key(device, "MODALIAS", value);
++
++	name = strrchr(device->path, '/');
++	if (name)
++		add_env_key(device, "PCI_SLOT_NAME", &name[1]);
++
++	if (read_file(path, "class", value, sizeof(value)) > 0)
++		add_env_key(device, "PCI_CLASS", &value[2]);
++
++	if (read_file(path, "vendor", vendor, sizeof(vendor)) > 0 &&
++	    read_file(path, "device", product, sizeof(product)) > 0) {
++		snprintf(value, sizeof(value), "%s:%s", &vendor[2], &product[2]);
++		path[sizeof(value)-1] = '\0';
++		add_env_key(device, "PCI_ID", value);
++	}
++
++	if (read_file(path, "subsystem_vendor", vendor, sizeof(vendor)) > 0 &&
++	    read_file(path, "subsystem_device", product, sizeof(product)) > 0) {
++		snprintf(value, sizeof(value), "%s:%s", &vendor[2], &product[2]);
++		path[sizeof(value)-1] = '\0';
++		add_env_key(device, "PCI_SUBSYS_ID", value);
++	}
++
++	return 0;
++}
++
++static int usb_handler(struct device *device)
++{
++	char path[PATH_SIZE];
++	char value[PATH_SIZE];
++	char str1[PATH_SIZE];
++	char str2[PATH_SIZE];
++	char str3[PATH_SIZE];
++	unsigned int int1;
++	unsigned int int2;
++	unsigned int int3;
++	char *pos;
++
++	snprintf(path, sizeof(path), "%s%s", sysfs_path, device->path);
++	path[sizeof(path)-1] = '\0';
++
++	/* device events have : in their directory name */
++	pos = strrchr(path, '/');
++	if (!strchr(pos, ':'))
++		return 0;	/* and do not have other variables */
++
++	if (read_file(path, "modalias", value, sizeof(value)) > 0)
++		add_env_key(device, "MODALIAS", value);
++
++	if (read_file(path, "bInterfaceClass", str1, sizeof(str1)) > 0 &&
++	    read_file(path, "bInterfaceSubClass", str2, sizeof(str2)) > 0 &&
++	    read_file(path, "bInterfaceProtocol", str3, sizeof(str3)) > 0) {
++		int1 = (int) strtol(str1, NULL, 16);
++		int2 = (int) strtol(str2, NULL, 16);
++		int3 = (int) strtol(str3, NULL, 16);
++		snprintf(value, sizeof(value), "%u/%u/%u", int1, int2, int3);
++		path[sizeof(value)-1] = '\0';
++		add_env_key(device, "INTERFACE", value);
++	}
++
++	/* move to the parent directory */
++	pos[0] = '\0';
++
++	if (read_file(path, "idVendor", str1, sizeof(str1)) > 0 &&
++	    read_file(path, "idProduct", str2, sizeof(str2)) > 0 &&
++	    read_file(path, "bcdDevice", str3, sizeof(str3)) > 0) {
++		int1 = (int) strtol(str1, NULL, 16);
++		int2 = (int) strtol(str2, NULL, 16);
++		int3 = (int) strtol(str3, NULL, 16);
++		snprintf(value, sizeof(value), "%x/%x/%x", int1, int2, int3);
++		path[sizeof(value)-1] = '\0';
++		add_env_key(device, "PRODUCT", value);
++	}
++
++	if (read_file(path, "bDeviceClass", str1, sizeof(str1)) > 0 &&
++	    read_file(path, "bDeviceSubClass", str2, sizeof(str2)) > 0 &&
++	    read_file(path, "bDeviceProtocol", str3, sizeof(str3)) > 0) {
++		int1 = (int) strtol(str1, NULL, 16);
++		int2 = (int) strtol(str2, NULL, 16);
++		int3 = (int) strtol(str3, NULL, 16);
++		snprintf(value, sizeof(value), "%u/%u/%u", int1, int2, int3);
++		path[sizeof(value)-1] = '\0';
++		add_env_key(device, "TYPE", value);
++	}
++
++	if (read_file(path, "devnum", str2, sizeof(str2)) > 0) {
++		pos = strrchr(path, 'b');
++		int1 = (int) strtol(pos + 1, NULL, 16);
++		int2 = (int) strtol(str2, NULL, 16);
++		snprintf(value, sizeof(value),
++			"/proc/bus/usb/%03d/%03d", int1, int2);
++		path[sizeof(value)-1] = '\0';
++		add_env_key(device, "DEVICE", value);
++	}
++
++	return 0;
++}
++
++static int serio_handler(struct device *device)
++{
++	char path[PATH_SIZE];
++	char value[PATH_SIZE];
++
++	snprintf(path, sizeof(path), "%s%s", sysfs_path, device->path);
++	path[sizeof(path)-1] = '\0';
++
++	if (read_file(path, "modalias", value, sizeof(value)) > 0)
++		add_env_key(device, "MODALIAS", value);
++
++	if (read_file(path, "id/type", value, sizeof(value)) > 0)
++		add_env_key(device, "SERIO_TYPE", value);
++
++	if (read_file(path, "id/proto", value, sizeof(value)) > 0)
++		add_env_key(device, "SERIO_PROTO", value);
++
++	if (read_file(path, "id/id", value, sizeof(value)) > 0)
++		add_env_key(device, "SERIO_ID", value);
++
++	if (read_file(path, "id/extra", value, sizeof(value)) > 0)
++		add_env_key(device, "SERIO_EXTRA", value);
++
++	return 0;
++}
++
++static int ccw_handler(struct device *device)
++{
++	char path[PATH_SIZE];
++	char value[PATH_SIZE], *tmp;
++
++	snprintf(path, sizeof(path), "%s%s", sysfs_path, device->path);
++	path[sizeof(path)-1] = '\0';
++
++	if (read_file(path, "modalias", value, sizeof(value)) > 0)
++		add_env_key(device, "MODALIAS", value);
++
++	if (read_file(path, "cutype", value, sizeof(value)) > 0) {
++		value[4] = 0;
++		tmp = &value[5];
++		add_env_key(device, "CU_TYPE", value);
++		add_env_key(device, "CU_MODEL", tmp);
++	}
++
++	if (read_file(path, "devtype", value, sizeof(value)) > 0) {
++		if (value[0] == 'n') {
++			add_env_key(device, "DEV_TYPE", "0000");
++			add_env_key(device, "DEV_MODEL", "00");
++		}
++		else {
++			value[4] = 0;
++			tmp = &value[5];
++			add_env_key(device, "DEV_TYPE", value);
++			add_env_key(device, "DEV_MODEL", tmp);
++		}
++	}
++
++	return 0;
++}
++
++static int modalias_handler(struct device *device)
++{
++	char path[PATH_SIZE];
++	char value[PATH_SIZE];
++
++	snprintf(path, sizeof(path), "%s%s", sysfs_path, device->path);
++	path[sizeof(path)-1] = '\0';
++
++	if (read_file(path, "modalias", value, sizeof(value)) > 0)
++		add_env_key(device, "MODALIAS", value);
++
++	return 0;
++}
++
++static int udev_scan_bus(const char *bus, int bus_handler(struct device *device))
++{
++	char base[PATH_SIZE];
++	DIR *dir;
++	struct dirent *dent;
++	LIST_HEAD(device_list);
++
++	snprintf(base, sizeof(base), "%s/bus/%s/devices", sysfs_path, bus);
++	base[sizeof(base)-1] = '\0';
++
++	dir = opendir(base);
++	if (!dir)
++		return -1;
++	for (dent = readdir(dir); dent != NULL; dent = readdir(dir)) {
++		char devpath[PATH_SIZE];
++		struct device *device;
++
++		if (dent->d_name[0] == '.')
++			continue;
++
++		if (read_link(base, dent->d_name, devpath, sizeof(devpath)) < 0)
++			continue;
++
++		device = device_create(devpath, bus, makedev(0, 0));
++		if (bus_handler) {
++			if (bus_handler(device) < 0) {
++				dbg("'%s' bus handler skipped event", devpath);
++				free(device);
++				continue;
++			}
++		}
++
++		device_list_insert(&device_list, device);
++	}
++	closedir(dir);
++	exec_list(&device_list, NULL, NULL);
++
++	return 0;
++}
++
++static int udev_scan_devices(void)
++{
++	char base[PATH_SIZE];
++	DIR *dir;
++	struct dirent *dent;
++
++	snprintf(base, sizeof(base), "%s/bus", sysfs_path);
++	base[sizeof(base)-1] = '\0';
++
++	dir = opendir(base);
++	if (!dir)
++		return -1;
++
++	for (dent = readdir(dir); dent != NULL; dent = readdir(dir)) {
++		if (dent->d_name[0] == '.')
++			continue;
++		if (dent->d_type != DT_DIR)
++			continue;
++
++		/* add bus specific env values */
++		if (strcmp(dent->d_name, "pci") == 0)
++			udev_scan_bus("pci", pci_handler);
++		else if (strcmp(dent->d_name, "usb") == 0)
++			udev_scan_bus("usb", usb_handler);
++		else if (strcmp(dent->d_name, "serio") == 0)
++			udev_scan_bus("serio", serio_handler);
++		else if (strcmp(dent->d_name, "ccw") == 0)
++			udev_scan_bus("ccw", ccw_handler);
++		else
++			udev_scan_bus(dent->d_name, modalias_handler);
++	}
++	closedir(dir);
++
++	return 0;
++}
++
++int main(int argc, char *argv[], char *envp[])
++{
++	LIST_HEAD(device_list);
++	int i;
++
++	logging_init("udevcoldplug");
++	udev_config_init(); sysfs_init();
++	dbg("version %s", UDEV_VERSION);
++
++	udev_log_str = getenv("UDEV_LOG");
++
++	/* disable all logging if not explicitely requested */
++	if (udev_log_str == NULL)
++		udev_log_priority = 0;
++
++	for (i = 1 ; i < argc; i++) {
++		char *arg = argv[i];
++
++		if (strcmp(arg, "help") == 0  || strcmp(arg, "--help") == 0  || strcmp(arg, "-h") == 0) {
++			printf("Usage: udevcoldplug \n"
++				"  --help                   print this help text\n\n");
++			exit(0);
++		} else {
++			fprintf(stderr, "unknown option\n\n");
++			exit(1);
++		}
++	}
++
++	udevd_sock = socket(AF_LOCAL, SOCK_DGRAM, 0);
++	if (udevd_sock < 0) {
++		err("error getting socket");
++		return 1;
++	}
++
++	/* create nodes for already available devices */
++	udev_scan_class();
++	udev_scan_block();
++
++	/* synthesize events for bus devices
++	 * may load modules or configure the device */
++	udev_scan_devices();
++
++	if (udevd_sock >= 0)
++		close(udevd_sock);
++	logging_close();
++
++	return 0;
++}
+--- udev-081/Makefile
++++ udev-081/Makefile
+@@ -58,6 +58,7 @@ PROGRAMS = \
+ 	udevmonitor			\
+ 	udevinfo			\
+ 	udevtest			\
++	udevsynthesize			\
+ 	udevstart
+ 
+ HEADERS = \
