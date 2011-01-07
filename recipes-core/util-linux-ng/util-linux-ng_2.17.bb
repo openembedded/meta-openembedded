@@ -1,5 +1,7 @@
 require util-linux-ng.inc
 
+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+
 PR = "${INC_PR}.2"
 
 SRC_URI += "file://uclibc-compile.patch \
