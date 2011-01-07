@@ -1,7 +1,8 @@
 DESCRIPTION = "library to provide userspace access to USB devices"
 HOMEPAGE = "http://libusb.sf.net"
 SECTION = "libs"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPLv2.1+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
 PR = "r0"
 
