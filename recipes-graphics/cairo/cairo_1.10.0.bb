@@ -1,5 +1,7 @@
 require cairo.inc
 
+LIC_FILES_CHKSUM = "file://COPYING;md5=e73e999e0c72b5ac9012424fa157ad77"
+
 PR = "r1"
 
 SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz;name=cairo \
