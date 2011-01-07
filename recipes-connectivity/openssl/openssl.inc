@@ -1,7 +1,10 @@
 DESCRIPTION = "Secure Socket Layer (SSL) binary and related cryptographic tools."
 HOMEPAGE = "http://www.openssl.org/"
-LICENSE = "openssl"
 SECTION = "libs/network"
+
+# "openssl | SSLeay" dual license
+LICENSE = "openssl"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=83d26c69f6f0172ee7f795790424b453"
 
 SRC_URI = "http://www.openssl.org/source/openssl-${PV}.tar.gz;name=src"
 S = "${WORKDIR}/openssl-${PV}"

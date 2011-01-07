@@ -1,10 +1,16 @@
 inherit pkgconfig
 
 require openssl.inc
-SRC_URI[src.md5sum] = "e3873edfffc783624cfbdb65e2249cbd"
-SRC_URI[src.sha256sum] = "18a9bd1fc02b8ef90dded34fafaa9089baaafef278a19fc4e89c2ab0dcf70f63"
 
-PR = "${INC_PR}.1"
+# For target side versions of openssl enable support for OCF Linux driver
+# if they are available.
+DEPENDS += "ocf-linux"
+CFLAG += "-DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS"
+
+SRC_URI[src.md5sum] = "ff8fb85610aef328315a9decbb2712e4"
+SRC_URI[src.sha256sum] = "f731b36de3edaa361179ae6f449668b248a360e34e31e92902d976e9b9d604eb"
+
+PR = "${INC_PR}.2"
 
 DEFAULT_PREFERENCE = "-1"
 
@@ -17,7 +23,6 @@ SRC_URI += "file://configure-targets.patch \
             file://oe-ldflags.patch \
 	    file://libdeps-first.patch \
 	    file://engines-install-in-libdir-ssl.patch \
-	    file://openssl-fix-ssl3_get_key_exchange-double-free.patch \
 	   "
 
 PARALLEL_MAKE = ""
