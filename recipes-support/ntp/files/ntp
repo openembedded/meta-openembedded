@@ -1,0 +1,31 @@
+#! /bin/sh
+
+FLAGS="defaults 23"
+
+test -f /usr/bin/ntpd || exit 0
+
+case "$1" in
+	start)
+		echo -n "Starting NTP server: ntpd"
+  		start-stop-daemon --start --quiet --exec /usr/bin/ntpd
+		echo "."
+  		;;
+	stop)
+		echo -n "Stopping NTP server: ntpd"
+  		start-stop-daemon --stop --quiet --exec /usr/bin/ntpd
+		echo "."
+  		;;
+	restart|force-reload)
+		echo -n "Restarting NTP server: ntpd... "
+  		start-stop-daemon --stop --quiet --exec /usr/bin/ntpd
+  		sleep 2
+  		start-stop-daemon --start --quiet --exec /usr/bin/ntpd
+		echo "done."
+  		;;
+	*)
+  		echo "Usage: /etc/init.d/ntp {start|stop|restart|force-reload}"
+  		exit 1
+		;;
+esac
+
+exit 0

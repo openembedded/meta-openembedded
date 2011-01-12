@@ -1,0 +1,62 @@
+#! /bin/sh
+#
+# ntpd	init.d script for ntpdc from ntp.isc.org
+test -x /usr/bin/ntpd -a -r /etc/ntp.conf || exit 0
+# rcS contains TICKADJ
+test -r /etc/default/rcS && . /etc/default/rcS
+
+# Functions to do individual actions
+settick(){
+  	# If TICKADJ is set we *must* adjust it before we start, because the
+	# driftfile relies on the correct setting
+	test -n "$TICKADJ" -a -x /usr/bin/tickadj && {
+		echo -n "Setting tick to $TICKADJ: "
+		/usr/bin/tickadj "$TICKADJ"
+		echo "done"
+	}
+}
+startdaemon(){
+	# The -g option allows ntpd to step the time to correct it just
+	# once.  The daemon will exit if the clock drifts too much after
+	# this.  If ntpd seems to disappear after a while assume TICKADJ
+	# above is set to a totally incorrect value.
+	echo -n "Starting ntpd: "
+	start-stop-daemon --start -x /usr/bin/ntpd -- -p /var/run/ntp.pid "$@"
+	echo "done"
+}
+stopdaemon(){
+	echo -n "Stopping ntpd: "
+	start-stop-daemon --stop -p /var/run/ntp.pid
+	echo "done"
+}
+
+case "$1" in
+  start)
+  	settick
+	startdaemon -g
+	;;
+  stop)
+  	stopdaemon
+	;;
+  force-reload)
+  	stopdaemon
+  	settick
+	startdaemon -g
+	;;
+  restart)
+  	# Don't reset the tick here
+	stopdaemon
+	startdaemon -g
+	;;
+  reload)
+  	# Must do this by hand, but don't do -g
+	stopdaemon
+	startdaemon
+	;;
+  *)
+	echo "Usage: ntpd { start | stop | restart | reload }" >&2
+	exit 1
+	;;
+esac
+
+exit 0

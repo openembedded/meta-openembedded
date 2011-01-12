@@ -1,0 +1,49 @@
+#!/bin/sh
+
+PATH=/sbin:/bin:/usr/bin
+
+test -x /usr/bin/ntpdate || exit 0
+
+if test -f /etc/default/ntpdate ; then
+. /etc/default/ntpdate
+else
+NTPSERVERS="pool.ntp.org"
+fi
+
+test -n "$NTPSERVERS" || exit 0
+
+# This is a heuristic:  The idea is that if a static interface is brought
+# up, that is a major event, and we can put in some extra effort to fix
+# the system time.  Feel free to change this, especially if you regularly
+# bring up new network interfaces.
+if [ "$METHOD" = static ]; then
+	OPTS="-b"
+fi
+
+if [ "$METHOD" = loopback ]; then
+	exit 0
+fi
+
+(
+
+LOCKFILE=/var/lock/ntpdate
+
+# Avoid running more than one at a time
+if [ -x /usr/bin/lockfile-create ]; then
+	lockfile-create $LOCKFILE
+	lockfile-touch $LOCKFILE &
+	LOCKTOUCHPID="$!"
+fi
+
+if /usr/bin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
+	if [ "$UPDATE_HWCLOCK" = "yes" ]; then
+		hwclock --systohc || :
+	fi
+fi
+
+if [ -x /usr/bin/lockfile-create ] ; then
+	kill $LOCKTOUCHPID
+	lockfile-remove $LOCKFILE
+fi
+
+) &
