@@ -1,5 +1,7 @@
 require postgresql.inc
 
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=29b81b066680be9ffd98cb9d2afb9de6"
+
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2 \
