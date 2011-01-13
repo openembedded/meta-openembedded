@@ -1,0 +1,33 @@
+--- /tmp/setup.py	2008-09-01 10:37:44.000000000 +0200
++++ numpy-1.1.1/numpy/core/setup.py	2008-09-01 10:38:20.373198000 +0200
+@@ -80,8 +80,7 @@
+                 raise SystemError,\
+                       "Non-existing %s. Perhaps you need to install"\
+                       " python-dev|python-devel." % (python_h)
+-            result = config_cmd.try_run(tc,include_dirs=[python_include],
+-                                        library_dirs = default_lib_dirs)
++            result = config_cmd.try_compile(tc)
+             if not result:
+                 raise SystemError,"Failed to test configuration. "\
+                       "See previous error messages for more information."
+@@ -95,7 +94,7 @@
+             if mathlib:
+                 mathlibs_choices.insert(0,mathlib.split(','))
+             for libs in mathlibs_choices:
+-                if config_cmd.try_run(tc,libraries=libs):
++                if config_cmd.try_compile(tc):
+                     mathlibs = libs
+                     break
+             else:
+@@ -180,10 +179,7 @@
+                       " python-dev|python-devel." % (python_h)
+ 
+             config.numpy_include_dirs
+-            result = config_cmd.try_run(testcode,
+-                                include_dirs = [python_include] + \
+-                                                       config.numpy_include_dirs,
+-                                        library_dirs = default_lib_dirs)
++            result = config_cmd.try_compile(testcode)
+ 
+             if not result:
+                 raise SystemError,"Failed to generate numpy configuration. "\
