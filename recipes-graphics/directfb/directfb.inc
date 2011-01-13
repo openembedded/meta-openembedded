@@ -4,7 +4,9 @@ abstraction, an integrated windowing system with support for \
 translucent windows and multiple display layers on top of the \
 Linux framebuffer device."
 SECTION = "libs"
-LICENSE = "LGPL"
+LICENSE = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=dcf3c825659e82539645da41a7908589"
+
 HOMEPAGE = "http://directfb.org"
 DEPENDS = "jpeg libpng freetype zlib tslib"
 
