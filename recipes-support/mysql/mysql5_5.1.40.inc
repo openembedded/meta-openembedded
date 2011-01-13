@@ -1,7 +1,9 @@
 DESCRIPTION = "The MySQL Open Source Database System"
 HOMEPAGE = "http://www.mysql.com/"
 SECTION = "libs"
-LICENSE = "GPL"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
+
 DEPENDS = "ncurses"
 PR = "r5"
 
