@@ -1,0 +1,191 @@
+From f13cb20ed19c41b9ff85ef1c9ec0883a21d1d5bf Mon Sep 17 00:00:00 2001
+From: Kevin Tian <kevin.tian@intel.com>
+Date: Thu, 30 Dec 2010 04:36:50 +0000
+Subject: gcc-4.5.1: make c++ include path relative to "--sysroot"
+
+So far c++ include path is not relative to "--sysroot", which brings
+trouble if we want to use the toolchain in a new environment where
+the original build directory generating that toolchain is not
+available. It's firstly exposed in multiple SDK sysroots support, and
+then in the case when sstate packages are used, where c++ standard
+headers are missing because gcc tries to search original build dir.
+
+This patch makes c++ include path now relative to "--sysroot", and
+then once "--sysroot" is assigned correctly in new environment, c++
+include paths can be searched as expected.
+
+Signed-off-by: Kevin Tian <kevin.tian@intel.com>
+---
+diff --git a/meta/recipes-devtools/gcc/gcc-4.5.1.inc b/meta/recipes-devtools/gcc/gcc-4.5.1.inc
+index 3edc4d4..1786d8a 100644
+--- a/meta/recipes-devtools/gcc/gcc-4.5.1.inc
++++ b/meta/recipes-devtools/gcc/gcc-4.5.1.inc
+@@ -54,6 +54,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
+ 	   file://optional_libstdc.patch \
+ 	   file://disable_relax_pic_calls_flag.patch \
+ 	   file://gcc-poison-parameters.patch \
++	   file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
+ 	  "
+ 	
+ SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch;patch=1 "
+diff --git a/meta/recipes-devtools/gcc/gcc-4.5.1/GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch b/meta/recipes-devtools/gcc/gcc-4.5.1/GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch
+new file mode 100644
+index 0000000..9ae01c3
+--- a/dev/null
++++ b/meta/recipes-devtools/gcc/gcc-4.5.1/GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch
+@@ -0,0 +1,33 @@
++# by default c++ include directories are not relative to "--sysroot"
++# which brings one trouble when using the toolchain in an environment
++# where the build directory generating that toolchain doesn't exist,
++# e.g. in sstate, machine specific sysroot and relocatable SDK
++# toolchain. This patch now enables c++ include paths under sysroot.
++# This way it's enough as long as "--sysroot" is correctly enabled
++# in the new environment.
++#
++# Signed-off-by Kevin Tian <kevin.tian@intel.com>, 2010-12-30
++
++diff --git a/gcc/cppdefault.c b/gcc/cppdefault.c
++index 5024f48..9b47d1c 100644
++--- a/gcc/cppdefault.c
+++++ b/gcc/cppdefault.c
++@@ -48,15 +48,15 @@ const struct default_include cpp_include_defaults[]
++ = {
++ #ifdef GPLUSPLUS_INCLUDE_DIR
++     /* Pick up GNU C++ generic include files.  */
++-    { GPLUSPLUS_INCLUDE_DIR, "G++", 1, 1, 0, 0 },
+++    { GPLUSPLUS_INCLUDE_DIR, "G++", 1, 1, 1, 0 },
++ #endif
++ #ifdef GPLUSPLUS_TOOL_INCLUDE_DIR
++     /* Pick up GNU C++ target-dependent include files.  */
++-    { GPLUSPLUS_TOOL_INCLUDE_DIR, "G++", 1, 1, 0, 1 },
+++    { GPLUSPLUS_TOOL_INCLUDE_DIR, "G++", 1, 1, 1, 1 },
++ #endif
++ #ifdef GPLUSPLUS_BACKWARD_INCLUDE_DIR
++     /* Pick up GNU C++ backward and deprecated include files.  */
++-    { GPLUSPLUS_BACKWARD_INCLUDE_DIR, "G++", 1, 1, 0, 0 },
+++    { GPLUSPLUS_BACKWARD_INCLUDE_DIR, "G++", 1, 1, 1, 0 },
++ #endif
++ #ifdef LOCAL_INCLUDE_DIR
++     /* /usr/local/include comes before the fixincluded header files.  */
+diff --git a/meta/recipes-devtools/gcc/gcc-configure-cross.inc b/meta/recipes-devtools/gcc/gcc-configure-cross.inc
+index 3da92e2..04a8685 100644
+--- a/meta/recipes-devtools/gcc/gcc-configure-cross.inc
++++ b/meta/recipes-devtools/gcc/gcc-configure-cross.inc
+@@ -5,7 +5,7 @@ USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibc", "no", "", d )}'
+ EXTRA_OECONF += " --enable-poison-system-directories "
+ 
+ EXTRA_OECONF_PATHS = "--with-local-prefix=${STAGING_DIR_TARGET}${target_exec_prefix} \
+-		      --with-gxx-include-dir=${STAGING_DIR_TARGET}/${target_includedir}/c++ \
++		      --with-gxx-include-dir=${target_includedir}/c++ \
+                       --with-sysroot=${STAGING_DIR_TARGET} \
+                       --with-build-sysroot=${STAGING_DIR_TARGET}"
+ 
+diff --git a/meta/recipes-devtools/gcc/gcc-configure-sdk.inc b/meta/recipes-devtools/gcc/gcc-configure-sdk.inc
+index 0eb33ad..756e74e 100644
+--- a/meta/recipes-devtools/gcc/gcc-configure-sdk.inc
++++ b/meta/recipes-devtools/gcc/gcc-configure-sdk.inc
+@@ -5,7 +5,7 @@ USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibc", "no", "", d )}'
+ USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibcgnueabi", "no", "", d )}'
+ 
+ EXTRA_OECONF_PATHS = "--with-local-prefix=${SDKPATH}/sysroots/${TARGET_SYS}${target_exec_prefix} \
+-                      --with-gxx-include-dir=${SDKPATH}/sysroots/${TARGET_SYS}${target_includedir}/c++ \
++                      --with-gxx-include-dir=${target_includedir}/c++ \
+                       --with-build-time-tools=${STAGING_DIR_NATIVE}${prefix_native}/${TARGET_SYS}/bin \
+                       --with-sysroot=${SDKPATH}/sysroots/${TARGET_SYS} \
+                       --with-build-sysroot=${STAGING_DIR_TARGET}"
+diff --git a/meta/recipes-devtools/gcc/gcc-cross-canadian_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-cross-canadian_4.5.1.bb
+index 98e239d..37c64fb 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross-canadian_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-cross-canadian_4.5.1.bb
+@@ -5,7 +5,7 @@ require gcc-cross-canadian.inc
+ require gcc-configure-sdk.inc
+ require gcc-package-sdk.inc
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ DEPENDS += "gmp-nativesdk mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
+ RDEPENDS_${PN} += "mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
+diff --git a/meta/recipes-devtools/gcc/gcc-cross-initial_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-cross-initial_4.5.1.bb
+index e3aea8b..a121782 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross-initial_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-cross-initial_4.5.1.bb
+@@ -1,5 +1,5 @@
+ require gcc-cross_${PV}.bb
+ require gcc-cross-initial.inc
+ 
+-PR = "r0"
++PR = "r1"
+ 
+diff --git a/meta/recipes-devtools/gcc/gcc-cross-intermediate_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-cross-intermediate_4.5.1.bb
+index 4cabe0e..7aaa5b0 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross-intermediate_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-cross-intermediate_4.5.1.bb
+@@ -1,4 +1,4 @@
+ require gcc-cross_${PV}.bb
+ require gcc-cross-intermediate.inc
+-PR = "r0"
++PR = "r1"
+ 
+diff --git a/meta/recipes-devtools/gcc/gcc-cross_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-cross_4.5.1.bb
+index 445869d..b7e4328 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-cross_4.5.1.bb
+@@ -1,4 +1,4 @@
+-PR = "r0"
++PR = "r1"
+ 
+ require gcc-${PV}.inc
+ require gcc-cross4.inc
+diff --git a/meta/recipes-devtools/gcc/gcc-crosssdk-initial_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-crosssdk-initial_4.5.1.bb
+index 22cb490..0fc5faa 100644
+--- a/meta/recipes-devtools/gcc/gcc-crosssdk-initial_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-crosssdk-initial_4.5.1.bb
+@@ -1,4 +1,4 @@
+ require gcc-cross-initial_${PV}.bb
+ require gcc-crosssdk-initial.inc
+ 
+-PR = "r0"
++PR = "r1"
+diff --git a/meta/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.1.bb
+index ba42ca0..4260c35 100644
+--- a/meta/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-crosssdk-intermediate_4.5.1.bb
+@@ -1,4 +1,4 @@
+ require gcc-cross-intermediate_${PV}.bb
+ require gcc-crosssdk-intermediate.inc
+ 
+-PR = "r0"
++PR = "r1"
+diff --git a/meta/recipes-devtools/gcc/gcc-crosssdk_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-crosssdk_4.5.1.bb
+index 6f0a540..a23a662 100644
+--- a/meta/recipes-devtools/gcc/gcc-crosssdk_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-crosssdk_4.5.1.bb
+@@ -1,4 +1,4 @@
+ require gcc-cross_${PV}.bb
+ require gcc-crosssdk.inc
+ 
+-PR = "r0"
++PR = "r1"
+diff --git a/meta/recipes-devtools/gcc/gcc-runtime_4.5.1.bb b/meta/recipes-devtools/gcc/gcc-runtime_4.5.1.bb
+index 4d2302d..ca22e8b 100644
+--- a/meta/recipes-devtools/gcc/gcc-runtime_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc-runtime_4.5.1.bb
+@@ -1,4 +1,4 @@
+-PR = "r0"
++PR = "r1"
+ 
+ require gcc-${PV}.inc
+ require gcc-configure-runtime.inc
+diff --git a/meta/recipes-devtools/gcc/gcc_4.5.1.bb b/meta/recipes-devtools/gcc/gcc_4.5.1.bb
+index 81c1fa9..a21772f 100644
+--- a/meta/recipes-devtools/gcc/gcc_4.5.1.bb
++++ b/meta/recipes-devtools/gcc/gcc_4.5.1.bb
+@@ -1,4 +1,4 @@
+-PR = "r0"
++PR = "r1"
+ require gcc-${PV}.inc
+ require gcc-configure-target.inc
+ require gcc-package-target.inc
+--
+cgit v0.8.3.3-89-gbf82

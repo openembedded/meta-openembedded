@@ -1,0 +1,45 @@
+2010-12-22  Ulrich Weigand  <uweigand@de.ibm.com>
+
+	LP: #693425
+	Backport from mainline:
+
+	gcc/
+	* config/spu/spu.md ("mov<mode>"): Use nonimmediate_operand
+	predicate for destination operand.
+	* config/spu/spu.c (spu_expand_mov): If move destination is an
+	invalid subreg, perform move in the subreg's inner mode instead.
+
+=== modified file 'gcc/config/spu/spu.c'
+--- old/gcc/config/spu/spu.c	2010-08-04 09:53:04 +0000
++++ new/gcc/config/spu/spu.c	2010-12-22 15:20:44 +0000
+@@ -4572,7 +4572,13 @@
+ spu_expand_mov (rtx * ops, enum machine_mode mode)
+ {
+   if (GET_CODE (ops[0]) == SUBREG && !valid_subreg (ops[0]))
+-    abort ();
++    {
++      /* Perform the move in the destination SUBREG's inner mode.  */
++      ops[0] = SUBREG_REG (ops[0]);
++      mode = GET_MODE (ops[0]);
++      ops[1] = gen_lowpart_common (mode, ops[1]);
++      gcc_assert (ops[1]);
++    }
+ 
+   if (GET_CODE (ops[1]) == SUBREG && !valid_subreg (ops[1]))
+     {
+
+=== modified file 'gcc/config/spu/spu.md'
+--- old/gcc/config/spu/spu.md	2009-05-23 01:28:14 +0000
++++ new/gcc/config/spu/spu.md	2010-12-22 15:20:44 +0000
+@@ -269,8 +269,8 @@
+ ;; mov
+ 
+ (define_expand "mov<mode>"
+-  [(set (match_operand:ALL 0 "spu_nonimm_operand" "=r,r,r,m")
+-	(match_operand:ALL 1 "general_operand" "r,i,m,r"))]
++  [(set (match_operand:ALL 0 "nonimmediate_operand" "")
++	(match_operand:ALL 1 "general_operand" ""))]
+   ""
+   {
+     if (spu_expand_mov(operands, <MODE>mode))
+

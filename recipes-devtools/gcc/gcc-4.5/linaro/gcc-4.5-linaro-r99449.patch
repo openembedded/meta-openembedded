@@ -1,0 +1,34 @@
+2010-12-21  Ulrich Weigand  <uweigand@de.ibm.com>
+
+	LP: #617384
+	Backport from mainline:
+
+	gcc/
+	* config/arm/arm.c (require_pic_register): Set INSN_LOCATOR for all
+	instructions injected into the prologue to prologue_locator.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2010-12-10 15:34:19 +0000
++++ new/gcc/config/arm/arm.c	2010-12-21 14:13:38 +0000
+@@ -5080,7 +5080,7 @@
+ 	}
+       else
+ 	{
+-	  rtx seq;
++	  rtx seq, insn;
+ 
+ 	  if (!cfun->machine->pic_reg)
+ 	    cfun->machine->pic_reg = gen_reg_rtx (Pmode);
+@@ -5097,6 +5097,11 @@
+ 
+ 	      seq = get_insns ();
+ 	      end_sequence ();
++
++	      for (insn = seq; insn; insn = NEXT_INSN (insn))
++		if (INSN_P (insn))
++		  INSN_LOCATOR (insn) = prologue_locator;
++
+ 	      /* We can be called during expansion of PHI nodes, where
+ 	         we can't yet emit instructions directly in the final
+ 		 insn stream.  Queue the insns on the entry edge, they will
+
