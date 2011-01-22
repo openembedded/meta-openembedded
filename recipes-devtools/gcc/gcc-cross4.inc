@@ -1,1 +1,0 @@
-require gcc-cross.inc

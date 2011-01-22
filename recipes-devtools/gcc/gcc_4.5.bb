@@ -1,8 +1,8 @@
 PR = "${INC_PR}.1"
 
-require gcc-${PV}.inc
-require gcc-configure-target.inc
-require gcc-package-target.inc
+require recipes-devtools/gcc/gcc-${PV}.inc
+require recipes-devtools/gcc/gcc-configure-target.inc
+require recipes-devtools/gcc/gcc-package-target.inc
 
 SRC_URI_append = "file://fortran-cross-compile-hack.patch"
 

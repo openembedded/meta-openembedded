@@ -1,9 +1,9 @@
 inherit cross-canadian
 
-require gcc-${PV}.inc
-require gcc-cross-canadian.inc
-require gcc-configure-sdk.inc
-require gcc-package-sdk.inc
+require recipes-devtools/gcc/gcc-${PV}.inc
+require recipes-devtools/gcc/gcc-cross-canadian.inc
+require recipes-devtools/gcc/gcc-configure-sdk.inc
+require recipes-devtools/gcc/gcc-package-sdk.inc
 
 PR = "${INC_PR}.0"
 

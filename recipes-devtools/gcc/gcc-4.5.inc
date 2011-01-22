@@ -1,4 +1,4 @@
-require gcc-common.inc
+require recipes-devtools/gcc/gcc-common.inc
 
 DEPENDS =+ "mpfr gmp libmpc elfutils"
 NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native elfutils-native"
