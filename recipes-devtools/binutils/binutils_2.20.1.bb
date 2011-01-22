@@ -1,6 +1,6 @@
 require binutils.inc
 
-PR = "r4"
+PR = "r5"
 
 LIC_FILES_CHKSUM="\
     file://src-release;endline=17;md5=4830a9ef968f3b18dd5e9f2c00db2d35\
@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM="\
     "
 
 SRC_URI = "\
-     ${GNU_MIRROR}/binutils/binutils-${PV}.tar.bz2;name=tarball \
+     ${GNU_MIRROR}/binutils/binutils-${PV}.tar.bz2 \
      file://binutils-uclibc-100-uclibc-conf.patch \
      file://110-arm-eabi-conf.patch \
      file://binutils-uclibc-300-001_ld_makefile_patch.patch \
@@ -25,17 +25,14 @@ SRC_URI = "\
      file://binutils-uclibc-gas-needs-libm.patch \
      file://binutils-x86_64_i386_biarch.patch \
      file://binutils-mips-pie.patch \
-     file://binutils-libtool.patch \
+     file://libtool-2.4-update.patch \
+     file://binutils-2.19.1-ld-sysroot.patch \
      file://libiberty_path_fix.patch \
      file://binutils-poison.patch \
+     file://libtool-rpath-fix.patch \
      "
 
-SRC_URI[tarball.md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
-SRC_URI[tarball.sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
-
-# powerpc patches
-SRC_URI += "\
-     file://binutils-2.16.1-e300c2c3.patch \
-     "
+SRC_URI[md5sum] = "c84c5acc9d266f1a7044b51c85a823f5"
+SRC_URI[sha256sum] = "60abec5bf448eb930a5a15acb8712612377dc8bcfb13dfd5131228f70561d0c7"
 
 BBCLASSEXTEND = "native"
