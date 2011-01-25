@@ -1,0 +1,13 @@
+--- htop-0.6.6/configure.ac	2007-05-21 13:06:15.000000000 -0500
++++ htop-0.6.6-cross/configure.ac	2007-11-16 14:12:16.000000000 -0600
+@@ -58,8 +58,8 @@
+    fi,
+    AC_DEFINE(PROCDIR, "/proc", [Path of proc filesystem]))
+ 
+-AC_CHECK_FILE($PROCDIR/stat,,AC_MSG_ERROR(Cannot find /proc/stat. Make sure you have a Linux-compatible /proc filesystem mounted. See the file README for help.))
+-AC_CHECK_FILE($PROCDIR/meminfo,,AC_MSG_ERROR(Cannot find /proc/meminfo. Make sure you have a Linux-compatible /proc filesystem mounted. See the file README for help.))
++#AC_CHECK_FILE($PROCDIR/stat,,AC_MSG_ERROR(Cannot find /proc/stat. Make sure you have a Linux-compatible /proc filesystem mounted. See the file README for help.))
++#AC_CHECK_FILE($PROCDIR/meminfo,,AC_MSG_ERROR(Cannot find /proc/meminfo. Make sure you have a Linux-compatible /proc filesystem mounted. See the file README for help.))
+ 
+ AC_CONFIG_FILES([Makefile])
+ AC_OUTPUT
