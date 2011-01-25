@@ -55,21 +55,21 @@ index f1ce0ba..b33da29 100644
  
  void
 diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-index 383748a..969dfab 100644
+index 1662d2c..c0f9af4 100644
 --- a/pixman/pixman-private.h
 +++ b/pixman/pixman-private.h
-@@ -197,6 +197,11 @@ void
- _pixman_bits_image_setup_accessors (bits_image_t *image);
+@@ -256,6 +256,11 @@ _pixman_conical_gradient_iter_init (pixman_image_t *image,
+ 				    int x, int y, int width, int height,
+ 				    uint8_t *buffer, iter_flags_t flags);
  
- void
-+_pixman_bits_override_accessors (pixman_format_code_t format,
-+                                 fetch_scanline_t     fetch_func,
-+                                 store_scanline_t     store_func);
-+
 +void
- _pixman_image_get_scanline_generic_64  (pixman_image_t *image,
-                                         int             x,
-                                         int             y,
++_pixman_bits_override_accessors (pixman_format_code_t format,
++				 fetch_scanline_t     fetch_func,
++				 store_scanline_t     store_func);
++
+ pixman_image_t *
+ _pixman_image_allocate (void);
+ 
 -- 
-1.6.6.1
+1.7.4.rc2
 
