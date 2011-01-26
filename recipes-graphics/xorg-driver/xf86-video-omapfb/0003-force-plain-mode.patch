@@ -1,0 +1,26 @@
+From b7acfade1ac15332ebfd24d4bf02b466858c8cf8 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 26 Jan 2011 13:20:20 +0100
+Subject: [PATCH 3/3] force 'plain' mode
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ src/omapfb-driver.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/omapfb-driver.c b/src/omapfb-driver.c
+index 018e040..48aa09c 100644
+--- a/src/omapfb-driver.c
++++ b/src/omapfb-driver.c
+@@ -326,7 +326,7 @@ OMAPFBPreInit(ScrnInfoPtr pScrn, int flags)
+ 	OMAPFBProbeController(ofb->ctrl_name);
+ 
+ 	/* Do we have the DSS kernel API? */
+-	if (stat(SYSFS_DSS_DIR, &st) == 0) {
++	if (0) { //stat(SYSFS_DSS_DIR, &st) == 0) {
+ 		ofb->dss = TRUE;
+ 	} else {
+ 		ofb->dss = FALSE;
+-- 
+1.6.6.1
+

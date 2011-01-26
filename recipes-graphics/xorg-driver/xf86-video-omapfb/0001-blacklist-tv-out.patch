@@ -1,0 +1,28 @@
+From 05efb061f1945425d214ff6b6050883e6d8633bf Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 26 Jan 2011 13:21:12 +0100
+Subject: [PATCH 1/3] blacklist tv out
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ src/omapfb-output-dss.c |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/src/omapfb-output-dss.c b/src/omapfb-output-dss.c
+index 6cc52de..83cb711 100644
+--- a/src/omapfb-output-dss.c
++++ b/src/omapfb-output-dss.c
+@@ -205,6 +205,10 @@ OMAPFBDSSOutputDetect (xf86OutputPtr output)
+ 	if(ofb->timings[idx][0] == '\0')
+ 		return XF86OutputStatusDisconnected;
+ 
++	// Hack to disable the tv out
++	if (strncmp(output->name, "tv", 2) == 0)
++		return XF86OutputStatusDisconnected;
++
+ 	return XF86OutputStatusConnected;
+ }
+ 
+-- 
+1.6.6.1
+
