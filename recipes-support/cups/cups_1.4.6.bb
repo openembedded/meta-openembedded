@@ -6,8 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=956e7600195e6139f12de8c2a5bbefa9"
 
 SRC_URI += " \
 	file://use_echo_only_in_init.patch \
-	file://skip_tools.patch \
-	file://configure.patch \
+    file://0001-don-t-try-to-run-generated-binaries.patch \
 	"
 
 SRC_URI[md5sum] = "de8fb5a29c36554925c0c6a6e2c0dae1"
