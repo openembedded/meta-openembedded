@@ -25,7 +25,7 @@ EXTRA_OECONF = " \
 
 
 do_configure() {
-    	export DSOFLAGS="${LDFLAGS}"
+	export DSOFLAGS="${LDFLAGS}"
 	gnu-configize
 	libtoolize --force
 	oe_runconf
@@ -45,11 +45,11 @@ do_compile () {
 		   "-I."
 }
 
-fakeroot do_install () {
+do_install () {
 	oe_runmake "DSTROOT=${D}" install
 
-   # This directory gets installed with perms 511, which makes packaging fail
-   chmod 0711 "${D}/${localstatedir}/run/cups/certs"
+	# This directory gets installed with perms 511, which makes packaging fail
+	chmod 0711 "${D}/${localstatedir}/run/cups/certs"
 }
 
 python do_package_append() {
