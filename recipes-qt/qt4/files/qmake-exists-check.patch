@@ -1,0 +1,18 @@
+qt4-tools-nativesdk: avoid rebuilding qmake
+
+qt4-tools-nativesdk patch to avoids building qmake in configure if it already exists 
+(as it will, since we symlink it in from the native sysroot in do_configure)
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+--- qt-everywhere-opensource-src-4.6.3.orig/configure	2011-01-10 12:01:56.260607001 +0000
++++ qt-everywhere-opensource-src-4.6.3/configure	2011-01-10 12:02:20.584607015 +0000
+@@ -4286,7 +4286,7 @@
+ }
+ 
+ # build qmake
+-if true; then ###[ '!' -f "$outpath/bin/qmake" ];
++if [ '!' -f "$outpath/bin/qmake" ]; then
+     echo "Creating qmake. Please wait..."
+ 
+     OLD_QCONFIG_H=

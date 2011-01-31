@@ -1,16 +1,20 @@
 inherit qmake_base
 
-DEPENDS += "qt4-tools-native freetype jpeg libpng zlib dbus openssl glib-2.0 gstreamer gst-plugins-base mysql5 postgresql sqlite sqlite3"
+DEPENDS += "qt4-tools-native freetype jpeg libpng zlib dbus openssl glib-2.0 gstreamer gst-plugins-base sqlite3"
 
 require qt4_arch.inc
 QT_ARCH := "${@qt_arch(d)}"
 QT_ENDIAN = "${@qt_endian(d)}"
 
-QT_CONFIG_FLAGS += "-release -no-cups -no-accessibility -reduce-relocations \
-                    -shared -no-nas-sound -no-sm -no-nis \
+QT_DISTRO_FLAGS ?= "-no-accessibility -no-sm"
+QT_DISTRO_FLAGS_poky-lsb = "-sm"
+
+QT_CONFIG_FLAGS += "-release -no-cups -reduce-relocations \
+                    -shared -no-nas-sound -no-nis \
                     -qt-gif -system-libjpeg -system-libpng -system-zlib \
-                    -no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite -plugin-sql-sqlite2 \
-                    -no-pch -qdbus -stl -glib -phonon -webkit"
+                    -no-sql-ibase -no-sql-mysql -no-sql-psql -no-sql-odbc -plugin-sql-sqlite \
+                    -no-pch -qdbus -stl -glib -phonon -webkit \
+                    ${QT_DISTRO_FLAGS} "
 
 EXTRA_OEMAKE = "-e"
 
@@ -109,6 +113,16 @@ RRECOMMENDS_${QT_BASE_NAME}-fonts = " \
              ${QT_BASE_NAME}-fonts-pfa \
              ${QT_BASE_NAME}-fonts-pfb \
              ${QT_BASE_NAME}-fonts-qpf"
+RRECOMMENDS_${QT_BASE_NAME}-demos += " \
+            ${QT_BASE_NAME}-fonts \
+            ${QT_BASE_NAME}-examples \
+            ${QT_BASE_NAME}-plugin-sqldriver-sqlite \
+            ${QT_BASE_NAME}-plugin-imageformat-jpeg \
+            ${QT_BASE_NAME}-assistant \
+            ${PN}-doc"
+RRECOMMENDS_${QT_BASE_NAME}-examples += " \
+            ${QT_BASE_NAME}-plugin-sqldriver-sqlite \
+            ${QT_BASE_NAME}-plugin-imageformat-jpeg"
 
 FILES_${QT_BASE_NAME}-tools                = "${bindir}/uic* ${bindir}/moc ${bindir}/rcc ${bindir}/qttracereplay ${bindir}/qdoc*"
 FILES_${QT_BASE_NAME}-tools-dbg            = "${bindir}/.debug/uic* ${bindir}/.debug/moc ${bindir}/.debug/rcc ${bindir}/.debug/qttracereplay ${bindir}/.debug/qdoc*"
@@ -187,22 +201,11 @@ do_configure() {
             -demosdir ${bindir}/${QT_DIR_NAME}/demos \
             -platform ${TARGET_OS}-oe-g++ \
             -xplatform ${TARGET_OS}-oe-g++ \
-            -embedded ${QT_ARCH} ${QT_ENDIAN} \
+            ${QT_ENDIAN} \
             -crossarch ${QT_ARCH} \
             ${QT_CONFIG_FLAGS} -no-fast \
             -L${STAGING_LIBDIR} -I${STAGING_INCDIR} \
-            -I${STAGING_INCDIR}/freetype2 \
-            -I${STAGING_INCDIR}/mysql \
-            -I${STAGING_INCDIR}/postgresql
-}
-
-do_compile() {
-    unset CFLAGS CXXFLAGS
-    install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rcc
-    install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/moc
-    install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/uic
-
-    oe_runmake ${EXTRA_ENV}
+            -I${STAGING_INCDIR}/freetype2
 }
 
 python populate_packages_prepend() {
@@ -260,7 +263,7 @@ python populate_packages_prepend() {
 
 do_install() {
     oe_runmake install INSTALL_ROOT=${D}
-	
+
     # These are host binaries, we should only use them in staging
     rm -rf ${D}/${bindir}/qmake
 
@@ -284,18 +287,26 @@ do_install() {
            -e s#"uic_location=.*$"#"uic_location=${bindir}/uic4"# \
            ${D}${libdir}/pkgconfig/*.pc
     for name in ${QT_LIB_NAMES}; do
-           sed -i -e /Requires/s#"${name}"#"${name}${QT_LIBINFIX}"#g ${D}${libdir}/pkgconfig/*.pc
+        sed -i -e /Requires/s#"${name}"#"${name}${QT_LIBINFIX}"#g ${D}${libdir}/pkgconfig/*.pc
     done
 
-	# QT abuses $includedir to point to its headers, which breaks pkgconfig sysroot, so manually fix it up here:
-	for pc in ${D}${libdir}/pkgconfig/*.pc ; do
-		sed -i -e "s:prefix}include/${QT_BASE_NAME}/$(basename $pc .pc):prefix}/include:" \
-		       -e "s,Cflags: ,Cflags: -IP{includedir}/${QT_BASE_NAME}/$(basename $pc .pc) ," \
-		       -e 's:IP{:I${:g' $pc
-	done
+    # QT abuses $includedir to point to its headers, which breaks pkgconfig sysroot, so manually fix it up here:
+    for pc in ${D}${libdir}/pkgconfig/*.pc ; do
+        sed -i -e "s:prefix}include/${QT_BASE_NAME}/$(basename $pc .pc):prefix}/include:" \
+               -e "s,Cflags: ,Cflags: -IP{includedir}/${QT_BASE_NAME}/$(basename $pc .pc) ," \
+               -e 's:IP{:I${:g' $pc
+    done
 
     install -d ${D}/${libdir}/fonts
     touch ${D}/${libdir}/fonts/fontdir
+
+    install -d ${D}${bindir}
+    for i in rcc uic moc ; do
+        install -m 0755 ${S}/bin/$i ${D}${bindir}/
+    done
+
+    #Append an E to the qtdemo file
+    if [ -n "${QT_LIBINFIX}" ] ; then
+        mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
+    fi
 }
-
-

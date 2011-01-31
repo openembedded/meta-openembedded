@@ -3,6 +3,10 @@ From: Michael Krelin <hacker@klever.net>
 Date: Sat, 2 Jun 2007 16:06:59 +0200
 Subject: [PATCH] no qmake
 
+qmake is already built in qt4-tools-native, so disable it
+
+Ported from OE by: Yu Ke <ke.yu@intel.com>
+
 ---
  configure |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)

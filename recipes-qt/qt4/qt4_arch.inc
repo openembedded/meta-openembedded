@@ -17,9 +17,9 @@ def qt_arch(d):
 
 def qt_endian(d):
     import bb
-    if bb.data.getVar('SITEINFO_ENDIANNESS', d, True) == "le":
+    if bb.data.getVar('SITEINFO_ENDIANESS', d, True) == "le":
         return "-little-endian"
-    elif bb.data.getVar('SITEINFO_ENDIANNESS', d, True) == "be":
+    elif bb.data.getVar('SITEINFO_ENDIANESS', d, True) == "be":
         return "-big-endian"
     else:
         assert False

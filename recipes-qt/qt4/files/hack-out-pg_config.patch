@@ -7,7 +7,7 @@ really cross compiling. Just comment out the test, we are passing
 the location to the postgres headers and if they are okay we
 will padd.
 
-
+Ported from OE by: Yu Ke <ke.yu@intel.com>
 
 Index: qt-embedded-linux-opensource-src-4.5.2/configure
 ===================================================================

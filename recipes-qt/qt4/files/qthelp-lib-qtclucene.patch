@@ -1,0 +1,86 @@
+qt-embedded: fix linker error in do_compile
+
+This patch ensures that we link to libQtCLucene where required (i.e. when 
+linking to libQtHelp) avoiding a linker error.
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+Index: qt-everywhere-opensource-src-4.6.3/demos/qtdemo/qtdemo.pro
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/demos/qtdemo/qtdemo.pro	2011-01-11 16:06:47.382828004 +0000
++++ qt-everywhere-opensource-src-4.6.3/demos/qtdemo/qtdemo.pro	2011-01-11 16:10:06.906828001 +0000
+@@ -76,3 +76,10 @@
+ sources.files = $$SOURCES $$HEADERS $$FORMS $$RESOURCES qtdemo.pro images xml *.ico *.icns *.rc *.plist
+ sources.path = $$[QT_INSTALL_DEMOS]/qtdemo
+ 
++qclucene = QtCLucene$${QT_LIBINFIX}
++if(!debug_and_release|build_pass):CONFIG(debug, debug|release) {
++    mac:qclucene = $${qclucene}_debug
++    win32:qclucene = $${qclucene}d
++}
++linux-lsb-g++:LIBS_PRIVATE += --lsb-shared-libs=$$qclucene
++LIBS_PRIVATE += -l$$qclucene
+Index: qt-everywhere-opensource-src-4.6.3/examples/help/contextsensitivehelp/contextsensitivehelp.pro
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/examples/help/contextsensitivehelp/contextsensitivehelp.pro	2011-01-11 16:05:56.598828002 +0000
++++ qt-everywhere-opensource-src-4.6.3/examples/help/contextsensitivehelp/contextsensitivehelp.pro	2011-01-11 16:09:57.762828002 +0000
+@@ -18,3 +18,11 @@
+ INSTALLS += target sources
+ 
+ symbian: include($$QT_SOURCE_TREE/examples/symbianpkgrules.pri)
++
++qclucene = QtCLucene$${QT_LIBINFIX}
++if(!debug_and_release|build_pass):CONFIG(debug, debug|release) {
++    mac:qclucene = $${qclucene}_debug
++    win32:qclucene = $${qclucene}d
++}
++linux-lsb-g++:LIBS_PRIVATE += --lsb-shared-libs=$$qclucene
++LIBS_PRIVATE += -l$$qclucene
+Index: qt-everywhere-opensource-src-4.6.3/tools/assistant/tools/assistant/assistant.pro
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/tools/assistant/tools/assistant/assistant.pro	2011-01-11 14:56:50.902828001 +0000
++++ qt-everywhere-opensource-src-4.6.3/tools/assistant/tools/assistant/assistant.pro	2011-01-11 16:09:39.914828003 +0000
+@@ -85,3 +85,11 @@
+         DEFINES += USE_STATIC_SQLITE_PLUGIN
+     }
+ }
++
++qclucene = QtCLucene$${QT_LIBINFIX}
++if(!debug_and_release|build_pass):CONFIG(debug, debug|release) {
++    mac:qclucene = $${qclucene}_debug
++    win32:qclucene = $${qclucene}d
++}
++linux-lsb-g++:LIBS_PRIVATE += --lsb-shared-libs=$$qclucene
++LIBS_PRIVATE += -l$$qclucene
+Index: qt-everywhere-opensource-src-4.6.3/tools/assistant/tools/qcollectiongenerator/qcollectiongenerator.pro
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/tools/assistant/tools/qcollectiongenerator/qcollectiongenerator.pro	2011-01-11 14:56:50.918828002 +0000
++++ qt-everywhere-opensource-src-4.6.3/tools/assistant/tools/qcollectiongenerator/qcollectiongenerator.pro	2011-01-11 16:09:44.538828001 +0000
+@@ -12,3 +12,11 @@
+            main.cpp
+ 
+ HEADERS += ../shared/helpgenerator.h
++
++qclucene = QtCLucene$${QT_LIBINFIX}
++if(!debug_and_release|build_pass):CONFIG(debug, debug|release) {
++    mac:qclucene = $${qclucene}_debug
++    win32:qclucene = $${qclucene}d
++}
++linux-lsb-g++:LIBS_PRIVATE += --lsb-shared-libs=$$qclucene
++LIBS_PRIVATE += -l$$qclucene
+Index: qt-everywhere-opensource-src-4.6.3/tools/assistant/tools/qhelpgenerator/qhelpgenerator.pro
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/tools/assistant/tools/qhelpgenerator/qhelpgenerator.pro	2011-01-11 14:56:50.930828002 +0000
++++ qt-everywhere-opensource-src-4.6.3/tools/assistant/tools/qhelpgenerator/qhelpgenerator.pro	2011-01-11 16:09:50.274828003 +0000
+@@ -12,3 +12,11 @@
+            main.cpp
+ 
+ HEADERS += ../shared/helpgenerator.h
++
++qclucene = QtCLucene$${QT_LIBINFIX}
++if(!debug_and_release|build_pass):CONFIG(debug, debug|release) {
++    mac:qclucene = $${qclucene}_debug
++    win32:qclucene = $${qclucene}d
++}
++linux-lsb-g++:LIBS_PRIVATE += --lsb-shared-libs=$$qclucene
++LIBS_PRIVATE += -l$$qclucene

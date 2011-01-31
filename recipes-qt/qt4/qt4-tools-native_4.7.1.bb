@@ -1,16 +1,9 @@
-DEFAULT_PREFERENCE = "-1"
-
 require qt4-tools-native.inc
 
 PR = "${INC_PR}.0"
 
 # Find the g++.conf/linux.conf in the right directory.
 FILESPATHPKG =. "qt-${PV}:"
-SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
-           file://qt-config.patch \
-           file://g++.conf \
-           file://linux.conf"
-S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
 
 EXTRA_OECONF += " -no-fast -silent -no-rpath"
 

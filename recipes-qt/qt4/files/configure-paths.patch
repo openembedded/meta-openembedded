@@ -1,0 +1,21 @@
+Index: qt-everywhere-opensource-src-4.6.3/configure
+===================================================================
+--- qt-everywhere-opensource-src-4.6.3.orig/configure	2011-01-10 15:47:37.100607001 +0000
++++ qt-everywhere-opensource-src-4.6.3/configure	2011-01-10 15:49:14.576606999 +0000
+@@ -7198,11 +7198,11 @@
+ QMAKE_MOC_SRC    = \$\$QT_BUILD_TREE/src/moc
+ 
+ #local paths that cannot be queried from the QT_INSTALL_* properties while building QTDIR
+-QMAKE_MOC        = \$\$QT_BUILD_TREE/bin/moc
+-QMAKE_UIC        = \$\$QT_BUILD_TREE/bin/uic
+-QMAKE_UIC3       = \$\$QT_BUILD_TREE/bin/uic3
+-QMAKE_RCC        = \$\$QT_BUILD_TREE/bin/rcc
+-QMAKE_QDBUSXML2CPP = \$\$QT_BUILD_TREE/bin/qdbusxml2cpp
++QMAKE_MOC        = \${OE_QMAKE_MOC}
++QMAKE_UIC        = \${OE_QMAKE_UIC}
++QMAKE_UIC3       = \${OE_QMAKE_UIC3}
++QMAKE_RCC        = \${OE_QMAKE_RCC}
++QMAKE_QDBUSXML2CPP = \${OE_QMAKE_QDBUSXML2CPP}
+ QMAKE_INCDIR_QT  = \$\$QT_BUILD_TREE/include
+ QMAKE_LIBDIR_QT  = \$\$QT_BUILD_TREE/lib
+ 
