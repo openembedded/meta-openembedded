@@ -1,6 +1,6 @@
 inherit qmake_base
 
-DEPENDS += "qt4-tools-native freetype jpeg libpng zlib dbus openssl glib-2.0 gstreamer gst-plugins-base sqlite3"
+DEPENDS += "qt4-tools-native freetype jpeg libpng zlib dbus openssl glib-2.0 gstreamer gst-plugins-base mysql5 postgresql sqlite sqlite3"
 
 require qt4_arch.inc
 QT_ARCH := "${@qt_arch(d)}"
@@ -12,7 +12,7 @@ QT_DISTRO_FLAGS_poky-lsb = "-sm"
 QT_CONFIG_FLAGS += "-release -no-cups -reduce-relocations \
                     -shared -no-nas-sound -no-nis \
                     -qt-gif -system-libjpeg -system-libpng -system-zlib \
-                    -no-sql-ibase -no-sql-mysql -no-sql-psql -no-sql-odbc -plugin-sql-sqlite \
+                    -no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-psql -plugin-sql-sqlite -plugin-sql-sqlite3 \
                     -no-pch -qdbus -stl -glib -phonon -webkit \
                     ${QT_DISTRO_FLAGS} "
 
@@ -205,7 +205,9 @@ do_configure() {
             -crossarch ${QT_ARCH} \
             ${QT_CONFIG_FLAGS} -no-fast \
             -L${STAGING_LIBDIR} -I${STAGING_INCDIR} \
-            -I${STAGING_INCDIR}/freetype2
+            -I${STAGING_INCDIR}/freetype2 \
+            -I${STAGING_INCDIR}/mysql \
+            -I${STAGING_INCDIR}/postgresql
 }
 
 python populate_packages_prepend() {
