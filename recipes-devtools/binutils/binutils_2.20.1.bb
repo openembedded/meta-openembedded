@@ -32,7 +32,7 @@ SRC_URI = "\
      file://libtool-rpath-fix.patch \
      "
 
-SRC_URI[md5sum] = "c84c5acc9d266f1a7044b51c85a823f5"
-SRC_URI[sha256sum] = "60abec5bf448eb930a5a15acb8712612377dc8bcfb13dfd5131228f70561d0c7"
+SRC_URI[md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
+SRC_URI[sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
 
 BBCLASSEXTEND = "native"
