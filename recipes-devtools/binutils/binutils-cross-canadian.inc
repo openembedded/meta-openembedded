@@ -6,7 +6,8 @@ BPN = "binutils"
 
 DEPENDS = "flex-native bison-native virtual/${HOST_PREFIX}gcc-crosssdk virtual/libc-nativesdk zlib-nativesdk gettext-nativesdk"
 EXTRA_OECONF = "--with-sysroot=${SDKPATH}/sysroots/${TARGET_SYS} \
-                --program-prefix=${TARGET_PREFIX}"
+                --program-prefix=${TARGET_PREFIX} \
+                --disable-werror"
 
 do_install () {
 	autotools_do_install
