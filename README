@@ -1,0 +1,7 @@
+This layer depends on:
+
+URI: git://git.pokylinux.org/poky
+branch: master
+revision: HEAD
+
+
