@@ -1,0 +1,74 @@
+2011-01-11  Ramana Radhakrishnan  <ramana.radhakrishnan@arm.com>
+
+	* config/arm/t-arm: Fix up last commit.
+
+2011-01-11  Ramana Radhakrishnan  <ramana.radhakrishnan@arm.com>
+
+	* config/arm/t-arm: Update MD_INCLUDES to include
+	all the files correctly.
+	* config/arm/arm.md: Update comments.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-02-22 11:38:56 +0000
++++ new/gcc/config/arm/arm.md	2011-03-01 14:32:39 +0000
+@@ -11246,6 +11246,7 @@
+   "
+ )
+ 
++;; Make sure that the includes are reflected in MD_INCLUDES.
+ ;; Load the load/store multiple patterns
+ (include "ldmstm.md")
+ ;; Load the FPA co-processor patterns
+
+=== modified file 'gcc/config/arm/t-arm'
+--- old/gcc/config/arm/t-arm	2010-08-16 09:41:58 +0000
++++ new/gcc/config/arm/t-arm	2011-01-11 21:01:30 +0000
+@@ -18,20 +18,33 @@
+ # along with GCC; see the file COPYING3.  If not see
+ # <http://www.gnu.org/licenses/>.
+ 
+-MD_INCLUDES= 	$(srcdir)/config/arm/arm-tune.md \
+-		$(srcdir)/config/arm/predicates.md \
+-		$(srcdir)/config/arm/arm-generic.md \
+-		$(srcdir)/config/arm/arm1020e.md \
+-		$(srcdir)/config/arm/arm1026ejs.md \
+-		$(srcdir)/config/arm/arm1136jfs.md \
+-		$(srcdir)/config/arm/arm926ejs.md \
+-		$(srcdir)/config/arm/cirrus.md \
+-		$(srcdir)/config/arm/fpa.md \
+-		$(srcdir)/config/arm/vec-common.md \
+-		$(srcdir)/config/arm/iwmmxt.md \
+-		$(srcdir)/config/arm/vfp.md \
+-		$(srcdir)/config/arm/neon.md \
+-		$(srcdir)/config/arm/thumb2.md
++MD_INCLUDES=	$(srcdir)/config/arm/arm-tune.md          	\
++		$(srcdir)/config/arm/predicates.md		\
++		$(srcdir)/config/arm/arm-generic.md       	\
++	 	$(srcdir)/config/arm/arm1020e.md          	\
++	 	$(srcdir)/config/arm/arm1026ejs.md        	\
++		$(srcdir)/config/arm/arm1136jfs.md        	\
++	 	$(srcdir)/config/arm/arm926ejs.md         	\
++		$(srcdir)/config/arm/cirrus.md            	\
++		$(srcdir)/config/arm/fpa.md               	\
++		$(srcdir)/config/arm/vec-common.md        	\
++		$(srcdir)/config/arm/iwmmxt.md            	\
++		$(srcdir)/config/arm/vfp.md               	\
++	 	$(srcdir)/config/arm/cortex-a5.md         	\
++		$(srcdir)/config/arm/cortex-a8.md         	\
++		$(srcdir)/config/arm/cortex-a9.md         	\
++		$(srcdir)/config/arm/cortex-a9-neon.md		\
++		$(srcdir)/config/arm/cortex-r4.md         	\
++		$(srcdir)/config/arm/cortex-r4f.md        	\
++		$(srcdir)/config/arm/cortex-m4.md         	\
++		$(srcdir)/config/arm/cortex-m4-fpu.md     	\
++		$(srcdir)/config/arm/vfp11.md             	\
++		$(srcdir)/config/arm/ldmstm.md            	\
++		$(srcdir)/config/arm/thumb2.md            	\
++		$(srcdir)/config/arm/neon.md              	\
++		$(srcdir)/config/arm/sync.md              	\
++		$(srcdir)/config/arm/cortex-a8-neon.md    	\
++		$(srcdir)/config/arm/constraints.md       	
+ 
+ LIB1ASMSRC = arm/lib1funcs.asm
+ LIB1ASMFUNCS = _thumb1_case_sqi _thumb1_case_uqi _thumb1_case_shi \
+

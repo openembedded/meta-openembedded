@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING.RUNTIME;md5=fe60d87048567d4fe8c8a0ed2448bcc8"
 
 
-SRCREV = "168622"
+SRCREV = "170880"
 PV = "4.5"
-INC_PR = "r31"
+INC_PR = "r32"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -29,13 +29,14 @@ PR_append = "+svnr${SRCPV}"
 SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
        file://100-uclibc-conf.patch \
-           file://gcc-uclibc-locale-ctype_touplow_t.patch \
+       file://gcc-uclibc-locale-ctype_touplow_t.patch \
        file://cache-amnesia.patch \
        file://gcc-flags-for-build.patch \
        file://libstdc++-emit-__cxa_end_cleanup-in-text.patch \
-       file://arm-bswapsi2.patch \
        file://Makefile.in.patch \
        file://gcc-armv4-pass-fix-v4bx-to-ld.patch \
+       file://sh4-multilib.patch \
+       file://arm-lib1funcs.as-fix-mismatch-between-conditions-of-an-IT-block.patch \
        file://linaro/gcc-4.5-linaro-r99297.patch \
        file://linaro/gcc-4.5-linaro-r99298.patch \
        file://linaro/gcc-4.5-linaro-r99299.patch \
@@ -156,55 +157,63 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99442.patch \
        file://linaro/gcc-4.5-linaro-r99443.patch \
        file://linaro/gcc-4.5-linaro-r99444.patch \
-	   file://linaro/gcc-4.5-linaro-r99448.patch \
-	   file://linaro/gcc-4.5-linaro-r99449.patch \
-	   file://linaro/gcc-4.5-linaro-r99450.patch \
-	   file://linaro/gcc-4.5-linaro-r99451.patch \
-	   file://linaro/gcc-4.5-linaro-r99452.patch \
-	   file://linaro/gcc-4.5-linaro-r99453.patch \
-	   file://linaro/gcc-4.5-linaro-r99454.patch \
-	   file://linaro/gcc-4.5-linaro-r99455.patch \
+       file://linaro/gcc-4.5-linaro-r99449.patch \
+       file://linaro/gcc-4.5-linaro-r99450.patch \
+       file://linaro/gcc-4.5-linaro-r99451.patch \
+       file://linaro/gcc-4.5-linaro-r99452.patch \
+       file://linaro/gcc-4.5-linaro-r99453.patch \
+       file://linaro/gcc-4.5-linaro-r99454.patch \
+       file://linaro/gcc-4.5-linaro-r99455.patch \
+       file://linaro/gcc-4.5-linaro-r99464.patch \
+       file://linaro/gcc-4.5-linaro-r99465.patch \
+       file://linaro/gcc-4.5-linaro-r99466.patch \
+       file://linaro/gcc-4.5-linaro-r99468.patch \
+       file://linaro/gcc-4.5-linaro-r99473.patch \
+       file://linaro/gcc-4.5-linaro-r99474.patch \
+       file://linaro/gcc-4.5-linaro-r99475.patch \
+       file://linaro/gcc-4.5-linaro-r99478.patch \
+       file://linaro/gcc-4.5-linaro-r99479.patch \
+       file://linaro/gcc-4.5-linaro-r99480.patch \
+       file://linaro/gcc-4.5-linaro-r99481.patch \
+       file://linaro/gcc-4.5-linaro-r99482.patch \
+       file://linaro/gcc-4.5-linaro-r99483.patch \
+       file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \
-	   file://gcc-arm-volatile-bitfield-fix.patch \
+       file://gcc-arm-volatile-bitfield-fix.patch \
        \
-	   file://optional_libstdc.patch \
-	   file://64bithack.patch \
+       file://optional_libstdc.patch \
+       file://64bithack.patch \
        file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
-	  "
-
-SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch;patch=1 "
+       "
 
 # Language Overrides
 FORTRAN = ""
 JAVA = ""
 
-rename_srcdir (){
-        mv ${WORKDIR}/${BRANCH} ${WORKDIR}/gcc-${PV}
-}
-
-do_unpack_append() {
-        bb.build.exec_func('rename_srcdir', d)
-}
+S = "${WORKDIR}/${BRANCH}"
 
 #EXTRA_OECONF_BASE = "  --enable-cheaders=c_std \
 #			--enable-libssp \
 #			--disable-bootstrap \
 #			--disable-libgomp \
 #			--disable-libmudflap"
-EXTRA_OECONF_BASE = " --enable-lto \
-			--enable-libssp \
-			--disable-bootstrap \
-			--disable-libgomp \
-			--disable-libmudflap \
-			--enable-cheaders=c_global "
+EXTRA_OECONF_BASE = "--enable-lto \
+                     --enable-libssp \
+                     --disable-bootstrap \
+                     --disable-libgomp \
+                     --disable-libmudflap \
+                     --enable-cheaders=c_global "
 
 EXTRA_OECONF_INITIAL = "--disable-libmudflap \
-			--disable-libgomp \
-			--disable-libssp \
-			--enable-decimal-float=no"
+                        --disable-libgomp \
+                        --disable-libssp \
+                        --enable-decimal-float=no"
 
 EXTRA_OECONF_INTERMEDIATE = "--disable-libmudflap \
-				--disable-libgomp \
-				--disable-libssp"
+                             --disable-libgomp \
+                             --disable-libssp"
 
 EXTRA_OECONF_append_libc-uclibc = " --disable-decimal-float "
+EXTRA_OECONF_append_mips64 = " --with-arch-64=mips64 --with-tune-64=mips64"
+EXTRA_OECONF_append_mips64el = " --with-arch-64=mips64 --with-tune-64=mips64"
+

@@ -1,3 +1,7 @@
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+        Merge from Sourcery G++ 4.4:
+
 	2010-04-07  Thomas Schwinge  <thomas@codesourcery.com>
 		    Daniel Jacobowitz  <dan@codesourcery.com>
 
@@ -13,13 +17,6 @@
 	* config/arm/arm.h (DWARF2_UNWIND_INFO): Remove definition.
 	* config/arm/bpabi.h (DWARF2_UNWIND_INFO): Define to zero.
 
-2010-07-26  Julian Brown  <julian@codesourcery.com>
-
-	Merge from Sourcery G++ 4.4:
-
- 	Jie Zhang  <jie@codesourcery.com>
- 
- 	Issue #7122
 
 === modified file 'gcc/config/arm/arm.h'
 --- old/gcc/config/arm/arm.h	2010-08-13 10:30:35 +0000

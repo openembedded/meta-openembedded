@@ -1,3 +1,11 @@
+2010-07-26  Julian Brown  <julian@codesourcery.com>
+
+        Merge from Sourcery G++ 4.4:
+
+        Jie Zhang  <jie@codesourcery.com>
+        Issue #7122
+
+        gcc/
 	* config/arm/arm.c (arm_rtx_costs_1): Adjust cost for
 	CONST_VECTOR.
 	(arm_size_rtx_costs): Likewise.
@@ -25,18 +33,6 @@
 	* gcc.target/arm/neon-vdup-18.c: New test case.
 	* gcc.target/arm/neon-vdup-19.c: New test case.
 
-2010-07-26  Julian Brown  <julian@codesourcery.com>
-
-	Merge from Sourcery G++ 4.4:
-
-	Jie Zhang  <jie@codesourcery.com>
-
-	Issue #7122
-
-	gcc/
- 	* config/arm/vfp.md (movdf_vfp): Add load double 0.0 case.
- 	(thumb2_movdf_vfp): Likewise. Require that one of the operands be a
- 	register.
 
 === modified file 'gcc/config/arm/arm.c'
 --- old/gcc/config/arm/arm.c	2010-08-13 10:55:28 +0000

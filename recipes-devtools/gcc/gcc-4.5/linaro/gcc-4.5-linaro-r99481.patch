@@ -1,0 +1,40 @@
+ 2011-02-02  Richard Sandiford  <richard.sandiford@linaro.org>
+ 
+	gcc/testsuite/
+	PR target/47553
+	* gcc.target/arm/neon-vld-1.c: New test.
+	gcc/
+	PR target/47553
+	* config/arm/predicates.md (neon_lane_number): Accept 0..15.
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-02-08 12:07:29 +0000
++++ new/gcc/config/arm/predicates.md	2011-03-02 12:28:41 +0000
+@@ -607,7 +607,7 @@
+ ;; TODO: We could check lane numbers more precisely based on the mode.
+ (define_predicate "neon_lane_number"
+   (and (match_code "const_int")
+-       (match_test "INTVAL (op) >= 0 && INTVAL (op) <= 7")))
++       (match_test "INTVAL (op) >= 0 && INTVAL (op) <= 15")))
+ ;; Predicates for named expanders that overlap multiple ISAs.
+ 
+ (define_predicate "cmpdi_operand"
+
+=== added file 'gcc/testsuite/gcc.target/arm/neon-vld-1.c'
+--- old/gcc/testsuite/gcc.target/arm/neon-vld-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/neon-vld-1.c	2011-02-02 13:57:54 +0000
+@@ -0,0 +1,13 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O1" } */
++/* { dg-add-options arm_neon } */
++
++#include <arm_neon.h>
++
++uint8x16_t
++foo (uint8_t *a, uint8x16_t b)
++{
++  vst1q_lane_u8 (a, b, 14);
++  return vld1q_lane_u8 (a + 0x100, b, 15);
++}
+

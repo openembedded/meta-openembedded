@@ -1,0 +1,94 @@
+2011-01-18  Ulrich Weigand  <uweigand@de.ibm.com>
+
+	LP: #685352
+	Backport from mainline:
+
+	2011-01-18  Jakub Jelinek  <jakub@redhat.com>
+
+	gcc/
+	PR rtl-optimization/47299
+	* expr.c (expand_expr_real_2) <case WIDEN_MULT_EXPR>: Don't use
+	subtarget.  Use normal multiplication if both operands are
+	constants.
+	* expmed.c (expand_widening_mult): Don't try to optimize constant
+	multiplication if op0 has VOIDmode.  Convert op1 constant to mode
+	before using it.
+
+	gcc/testsuite/
+	PR rtl-optimization/47299
+	* gcc.c-torture/execute/pr47299.c: New test.
+
+=== modified file 'gcc/expmed.c'
+Index: gcc-4_5-branch/gcc/expmed.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expmed.c
++++ gcc-4_5-branch/gcc/expmed.c
+@@ -3355,12 +3355,17 @@ expand_widening_mult (enum machine_mode 
+ 		      int unsignedp, optab this_optab)
+ {
+   bool speed = optimize_insn_for_speed_p ();
++  rtx cop1;
+ 
+   if (CONST_INT_P (op1)
+-      && (INTVAL (op1) >= 0
++      && GET_MODE (op0) != VOIDmode
++      && (cop1 = convert_modes (mode, GET_MODE (op0), op1,
++				this_optab == umul_widen_optab))
++      && CONST_INT_P (cop1)
++      && (INTVAL (cop1) >= 0
+ 	  || GET_MODE_BITSIZE (mode) <= HOST_BITS_PER_WIDE_INT))
+     {
+-      HOST_WIDE_INT coeff = INTVAL (op1);
++      HOST_WIDE_INT coeff = INTVAL (cop1);
+       int max_cost;
+       enum mult_variant variant;
+       struct algorithm algorithm;
+Index: gcc-4_5-branch/gcc/expr.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expr.c
++++ gcc-4_5-branch/gcc/expr.c
+@@ -7624,10 +7624,10 @@ expand_expr_real_2 (sepops ops, rtx targ
+ 	      if (optab_handler (this_optab, mode)->insn_code != CODE_FOR_nothing)
+ 		{
+ 		  if (TYPE_UNSIGNED (TREE_TYPE (treeop0)))
+-		    expand_operands (treeop0, treeop1, subtarget, &op0, &op1,
++		    expand_operands (treeop0, treeop1, NULL_RTX, &op0, &op1,
+ 				     EXPAND_NORMAL);
+ 		  else
+-		    expand_operands (treeop0, treeop1, subtarget, &op1, &op0,
++		    expand_operands (treeop0, treeop1, NULL_RTX, &op1, &op0,
+ 				     EXPAND_NORMAL);
+ 		  goto binop3;
+ 		}
+@@ -7645,7 +7645,8 @@ expand_expr_real_2 (sepops ops, rtx targ
+ 	  optab other_optab = zextend_p ? smul_widen_optab : umul_widen_optab;
+ 	  this_optab = zextend_p ? umul_widen_optab : smul_widen_optab;
+ 
+-	  if (mode == GET_MODE_2XWIDER_MODE (innermode))
++	  if (mode == GET_MODE_2XWIDER_MODE (innermode)
++	      && TREE_CODE (treeop0) != INTEGER_CST)
+ 	    {
+ 	      if (optab_handler (this_optab, mode)->insn_code != CODE_FOR_nothing)
+ 		{
+Index: gcc-4_5-branch/gcc/testsuite/gcc.c-torture/execute/pr47299.c
+===================================================================
+--- /dev/null
++++ gcc-4_5-branch/gcc/testsuite/gcc.c-torture/execute/pr47299.c
+@@ -0,0 +1,17 @@
++/* PR rtl-optimization/47299 */
++
++extern void abort (void);
++
++__attribute__ ((noinline, noclone)) unsigned short
++foo (unsigned char x)
++{
++  return x * 255;
++}
++
++int
++main ()
++{
++  if (foo (0x40) != 0x3fc0)
++    abort ();
++  return 0;
++}
