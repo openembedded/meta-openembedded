@@ -207,7 +207,14 @@ sysroot_stage_all_append() {
 
 
 kernel_do_configure() {
-        yes '' | oe_runmake oldconfig
+	# Copy defconfig to .config if .config does not exist. This allows
+	# recipes to manage the .config themselves in do_configure_prepend().
+	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${S}/.config" ]; then
+		cp "${WORKDIR}/defconfig" "${S}/.config"
+	fi
+
+	yes '' | oe_runmake oldconfig
+
 	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
 		for img in cpio.gz cpio.lzo cpio.lzma; do
 		if [ -e "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" ]; then
@@ -220,6 +227,9 @@ kernel_do_configure() {
 kernel_do_configure[depends] += "${INITRAMFS_TASK}"
 
 do_menuconfig() {
+        export DISPLAY='${DISPLAY}'
+        export DBUS_SESSION_BUS_ADDRESS='${DBUS_SESSION_BUS_ADDRESS}'
+        export XAUTHORITY='${XAUTHORITY}'
 	export TERMWINDOWTITLE="${PN} Kernel Configuration"
 	export SHELLCMDS="make menuconfig"
 	${TERMCMDRUN}
@@ -318,13 +328,16 @@ module_conf_rfcomm = "alias bt-proto-3 rfcomm"
 
 python populate_packages_prepend () {
 	def extract_modinfo(file):
-		import re
-		tmpfile = os.tmpnam()
+		import tempfile, re
+		tempfile.tempdir = bb.data.getVar("WORKDIR", d, 1)
+		tf = tempfile.mkstemp()
+		tmpfile = tf[1]
 		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (bb.data.getVar("PATH", d, 1), bb.data.getVar("HOST_PREFIX", d, 1) or "", file, tmpfile)
 		os.system(cmd)
 		f = open(tmpfile)
 		l = f.read().split("\000")
 		f.close()
+		os.close(tf[0])
 		os.unlink(tmpfile)
 		exp = re.compile("([^=]+)=(.*)")
 		vals = {}
