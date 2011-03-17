@@ -1,7 +1,10 @@
 This layer depends on:
 
-URI: git://git.pokylinux.org/poky
+URI: git://git.openembedded.org/openembedded-core
 branch: master
 revision: HEAD
 
+Send pull requests to openembedded-core@lists.openembedded.org
+
+Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
 
