@@ -1,0 +1,61 @@
+2011-03-10  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	LP:730440
+	PR target/47668
+	gcc/
+	* config/arm/arm.md (arm_movtas_ze): Use 'L' instead of 'c'.
+	gcc/testsuite/
+	* gcc.target/arm/pr47688.c: New.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-03-01 14:32:39 +0000
++++ new/gcc/config/arm/arm.md	2011-03-11 14:26:34 +0000
+@@ -11133,13 +11133,15 @@
+   [(set_attr "conds" "clob")]
+ )
+ 
++;; We only care about the lower 16 bits of the constant 
++;; being inserted into the upper 16 bits of the register.
+ (define_insn "*arm_movtas_ze" 
+   [(set (zero_extract:SI (match_operand:SI 0 "s_register_operand" "+r")
+                    (const_int 16)
+                    (const_int 16))
+         (match_operand:SI 1 "const_int_operand" ""))]
+   "arm_arch_thumb2"
+-  "movt%?\t%0, %c1"
++  "movt%?\t%0, %L1"
+  [(set_attr "predicable" "yes")
+    (set_attr "length" "4")]
+ )
+
+=== added file 'gcc/testsuite/gcc.target/arm/pr47688.c'
+--- old/gcc/testsuite/gcc.target/arm/pr47688.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/pr47688.c	2011-03-11 14:26:34 +0000
+@@ -0,0 +1,26 @@
++/* { dg-options "-mthumb -O2" }  */
++/* { dg-require-effective-target arm_thumb2_ok } */
++/* { dg-final { scan-assembler-not "-32768" } } */
++
++typedef union
++{
++  unsigned long int u_32_value;
++  struct 
++  {
++    unsigned short int u_16_value_0;
++    unsigned short int u_16_value_1;
++  } u_16_values;
++} my_union;
++
++
++unsigned long int Test(const unsigned short int wXe)
++{
++  my_union dwCalcVal;
++  
++  dwCalcVal.u_16_values.u_16_value_0=wXe;
++  dwCalcVal.u_16_values.u_16_value_1=0x8000u;
++
++  dwCalcVal.u_32_value /=3;
++  
++  return (dwCalcVal.u_32_value);
++}
+

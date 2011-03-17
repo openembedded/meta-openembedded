@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 SRCREV = "170880"
 PV = "4.5"
-INC_PR = "r32"
+INC_PR = "r33"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -169,7 +169,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99466.patch \
        file://linaro/gcc-4.5-linaro-r99468.patch \
        file://linaro/gcc-4.5-linaro-r99473.patch \
-       file://linaro/gcc-4.5-linaro-r99474.patch \
+#       file://linaro/gcc-4.5-linaro-r99474.patch \
        file://linaro/gcc-4.5-linaro-r99475.patch \
        file://linaro/gcc-4.5-linaro-r99478.patch \
        file://linaro/gcc-4.5-linaro-r99479.patch \
@@ -177,6 +177,10 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99481.patch \
        file://linaro/gcc-4.5-linaro-r99482.patch \
        file://linaro/gcc-4.5-linaro-r99483.patch \
+#       file://linaro/gcc-4.5-linaro-r99486.patch \
+#       file://linaro/gcc-4.5-linaro-r99487.patch \
+       file://linaro/gcc-4.5-linaro-r99488.patch \
+       file://linaro/gcc-4.5-linaro-r99489.patch \
        file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \
        file://gcc-arm-volatile-bitfield-fix.patch \

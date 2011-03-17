@@ -1,0 +1,22 @@
+2011-03-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	* ee.c (reg_use_p): Handle subregs of promoted vars.
+
+=== modified file 'gcc/ee.c'
+--- old/gcc/ee.c	2010-12-10 15:33:37 +0000
++++ new/gcc/ee.c	2011-03-03 17:08:58 +0000
+@@ -209,7 +209,11 @@
+ 
+       *regno = REGNO (reg);
+ 
+-      if (paradoxical_subreg_p (use))
++      /* Non-paradoxical SUBREGs of promoted vars guarantee that the
++	 upper (elided) bits of the inner register have a particular value.
++	 For our purposes, such SUBREGs act as a full reference to the
++	 inner register.  */
++      if (paradoxical_subreg_p (use) || SUBREG_PROMOTED_VAR_P (use))
+         *size = GET_MODE_BITSIZE (GET_MODE (reg));
+       else
+         *size = subreg_lsb (use) + GET_MODE_BITSIZE (GET_MODE (use));
+
