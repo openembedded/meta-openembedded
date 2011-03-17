@@ -1,0 +1,33 @@
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index d94930b..2a0f3da 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -220,6 +196,9 @@ kernel_do_configure() {
+ kernel_do_configure[depends] += "${INITRAMFS_TASK}"
+ 
+ do_menuconfig() {
++        export DISPLAY='${DISPLAY}'
++        export DBUS_SESSION_BUS_ADDRESS='${DBUS_SESSION_BUS_ADDRESS}'
++        export XAUTHORITY='${XAUTHORITY}'
+ 	export TERMWINDOWTITLE="${PN} Kernel Configuration"
+ 	export SHELLCMDS="make menuconfig"
+ 	${TERMCMDRUN}
+@@ -318,13 +297,16 @@ module_conf_rfcomm = "alias bt-proto-3 rfcomm"
+ 
+ python populate_packages_prepend () {
+ 	def extract_modinfo(file):
+-		import re
+-		tmpfile = os.tmpnam()
++		import tempfile, re
++		tempfile.tempdir = bb.data.getVar("WORKDIR", d, 1)
++		tf = tempfile.mkstemp()
++		tmpfile = tf[1]
+ 		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (bb.data.getVar("PATH", d, 1), bb.data.getVar("HOST_PREFIX", d, 1) or "", file, tmpfile)
+ 		os.system(cmd)
+ 		f = open(tmpfile)
+ 		l = f.read().split("\000")
+ 		f.close()
++		os.close(tf[0])
+ 		os.unlink(tmpfile)
+ 		exp = re.compile("([^=]+)=(.*)")
+ 		vals = {}
