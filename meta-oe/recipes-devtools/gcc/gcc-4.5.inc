@@ -169,7 +169,6 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99466.patch \
        file://linaro/gcc-4.5-linaro-r99468.patch \
        file://linaro/gcc-4.5-linaro-r99473.patch \
-#       file://linaro/gcc-4.5-linaro-r99474.patch \
        file://linaro/gcc-4.5-linaro-r99475.patch \
        file://linaro/gcc-4.5-linaro-r99478.patch \
        file://linaro/gcc-4.5-linaro-r99479.patch \
@@ -177,8 +176,6 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99481.patch \
        file://linaro/gcc-4.5-linaro-r99482.patch \
        file://linaro/gcc-4.5-linaro-r99483.patch \
-#       file://linaro/gcc-4.5-linaro-r99486.patch \
-#       file://linaro/gcc-4.5-linaro-r99487.patch \
        file://linaro/gcc-4.5-linaro-r99488.patch \
        file://linaro/gcc-4.5-linaro-r99489.patch \
        file://more-epilogues.patch \
