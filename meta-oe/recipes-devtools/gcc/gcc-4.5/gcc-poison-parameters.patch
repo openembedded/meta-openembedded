@@ -6,11 +6,11 @@ This could avoid potential binary crash.
 
 Signed-off-by: Dongxiao Xu <dongxiao.xu@intel.com>
 
-diff --git a/gcc/config.in b/gcc/config.in
-index a9e208f..3004321 100644
---- a/gcc/config.in
-+++ b/gcc/config.in
-@@ -132,6 +132,12 @@
+Index: gcc-4_5-branch/gcc/config.in
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config.in
++++ gcc-4_5-branch/gcc/config.in
+@@ -138,6 +138,12 @@
  #endif
  
  
@@ -23,19 +23,19 @@ index a9e208f..3004321 100644
  /* Define if you want all operations on RTL (the basic data structure of the
     optimizer and back end) to be checked for dynamic type safety at runtime.
     This is quite expensive. */
-diff --git a/gcc/configure b/gcc/configure
-index 2e022ed..004ec0b 100755
---- a/gcc/configure
-+++ b/gcc/configure
-@@ -909,6 +909,7 @@ enable_maintainer_mode
- enable_version_specific_runtime_libs
+Index: gcc-4_5-branch/gcc/configure
+===================================================================
+--- gcc-4_5-branch.orig/gcc/configure
++++ gcc-4_5-branch/gcc/configure
+@@ -915,6 +915,7 @@ enable_version_specific_runtime_libs
  with_slibdir
+ enable_poison_system_directories
  enable_plugin
 +enable_target_optspace
  '
        ac_precious_vars='build_alias
  host_alias
-@@ -25289,6 +25290,13 @@ $as_echo "#define ENABLE_PLUGIN 1" >>confdefs.h
+@@ -25658,6 +25659,13 @@ $as_echo "#define ENABLE_PLUGIN 1" >>con
  
  fi
  
@@ -49,11 +49,11 @@ index 2e022ed..004ec0b 100755
  # Configure the subdirectories
  # AC_CONFIG_SUBDIRS($subdirs)
  
-diff --git a/gcc/configure.ac b/gcc/configure.ac
-index ac4ca70..18ec0aa 100644
---- a/gcc/configure.ac
-+++ b/gcc/configure.ac
-@@ -4434,6 +4434,11 @@ if test x"$enable_plugin" = x"yes"; then
+Index: gcc-4_5-branch/gcc/configure.ac
+===================================================================
+--- gcc-4_5-branch.orig/gcc/configure.ac
++++ gcc-4_5-branch/gcc/configure.ac
+@@ -4659,6 +4659,11 @@ if test x"$enable_plugin" = x"yes"; then
    AC_DEFINE(ENABLE_PLUGIN, 1, [Define to enable plugin support.])
  fi
  
@@ -65,11 +65,11 @@ index ac4ca70..18ec0aa 100644
  # Configure the subdirectories
  # AC_CONFIG_SUBDIRS($subdirs)
  
-diff --git a/gcc/opts.c b/gcc/opts.c
-index 139cd26..2fdd96a 100644
---- a/gcc/opts.c
-+++ b/gcc/opts.c
-@@ -945,6 +945,11 @@ decode_options (unsigned int argc, const char **argv)
+Index: gcc-4_5-branch/gcc/opts.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/opts.c
++++ gcc-4_5-branch/gcc/opts.c
+@@ -953,6 +953,11 @@ decode_options (unsigned int argc, const
    else
      set_param_value ("min-crossjump-insns", initial_min_crossjump_insns);
  

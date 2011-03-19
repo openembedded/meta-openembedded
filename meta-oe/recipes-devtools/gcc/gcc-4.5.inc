@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 SRCREV = "170880"
 PV = "4.5"
-INC_PR = "r33"
+INC_PR = "r34"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -37,6 +37,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://gcc-armv4-pass-fix-v4bx-to-ld.patch \
        file://sh4-multilib.patch \
        file://arm-lib1funcs.as-fix-mismatch-between-conditions-of-an-IT-block.patch \
+       \
        file://linaro/gcc-4.5-linaro-r99297.patch \
        file://linaro/gcc-4.5-linaro-r99298.patch \
        file://linaro/gcc-4.5-linaro-r99299.patch \
@@ -182,9 +183,23 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://gcc-scalar-widening-pr45847.patch \
        file://gcc-arm-volatile-bitfield-fix.patch \
        \
+       file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+       file://fedora/gcc43-ia64-libunwind.patch;striplevel=0 \
+       file://fedora/gcc43-java-nomulti.patch;striplevel=0 \
+       file://fedora/gcc43-ppc32-retaddr.patch;striplevel=0 \
+       file://fedora/gcc43-pr32139.patch;striplevel=0 \
+       file://fedora/gcc43-pr33763.patch;striplevel=0 \
+       file://fedora/gcc43-rh330771.patch;striplevel=0 \
+       file://fedora/gcc43-rh341221.patch;striplevel=0 \
+       file://fedora/gcc43-java-debug-iface-type.patch;striplevel=0 \
+       file://fedora/gcc43-i386-libgomp.patch;striplevel=0 \
+       file://fedora/gcc45-no-add-needed.patch;striplevel=0 \
        file://optional_libstdc.patch \
        file://64bithack.patch \
        file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
+       file://COLLECT_GCC_OPTIONS.patch \
+       file://gcc-poison-dir-extend.patch \
+       file://gcc-poison-parameters.patch \
        "
 
 # Language Overrides
