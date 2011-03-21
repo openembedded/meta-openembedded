@@ -127,84 +127,56 @@ kernel_do_install() {
 		install -d ${D}/etc/modprobe.d
 	fi
 
-
+	#
+	# Support for external module building - create a minimal copy of the
+	# kernel source tree.
+	#
+	kerneldir=${STAGING_KERNEL_DIR}
+	install -d $kerneldir
 
 	#
-	# Support for external module building - create a minimal copy of the kernel source tree
+	# Copy the entire source tree. In case an external build directory is
+	# used, copy the build directory over first, then copy over the source
+	# dir. This ensures the original Makefiles are used and not the
+	# redirecting Makefiles in the build directory.
 	#
-	kerneldir=${D}/kernel/
-
-	# Take care of arch specific headers	
-	# Kernel 2.6.27 moved headers from includes/asm-${ARCH} to arch/${ARCH}/include/asm
-	if [ -e arch/${ARCH}/include/asm/ ] ; then 
-		install -d $kerneldir/arch/${ARCH}/
-		cp -fR arch/${ARCH}/* $kerneldir/arch/${ARCH}/
-
-	# Check for arch/x86 on i386
-	elif [ -d arch/x86/include/asm/ ]; then
-		if [ -e include/asm ] ; then
-			install -d $kerneldir/include/asm/
-			cp -fR arch/x86/include/asm/* $kerneldir/include/asm/
-		fi
-		install -d $kerneldir/arch/x86/include
-		cp -fR arch/x86/* $kerneldir/arch/x86/
+	# work and sysroots can be on different partitions, so we can't rely on
+	# hardlinking, unfortunately.
+	#
+	cp -fR * $kerneldir
+	cp .config $kerneldir
+	if [ ! "${S}" == "${B}" ]; then
+		cp -fR ${S}/* $kerneldir
 	fi
+	echo "LINUX BUILD TREE COPIED TO SYSROOTS"
+	du -hs $kerneldir
 
-	# Take care of the rest of the main directories we need
-	for entry in drivers/crypto drivers/media include scripts; do
-		if [ -d $entry ]; then
-			mkdir -p $kerneldir/$entry
-			cp -fR $entry/* $kerneldir/$entry/
-		fi
-	done
-
-	install -m 0644 .config $kerneldir/config-${KERNEL_VERSION}
-	ln -sf config-${KERNEL_VERSION} $kerneldir/.config
-	ln -sf config-${KERNEL_VERSION} $kerneldir/kernel-config
-	echo "${KERNEL_VERSION}" >$kerneldir/kernel-abiversion
-	echo "${S}" >$kerneldir/kernel-source
-	echo "${KERNEL_CCSUFFIX}" >$kerneldir/kernel-ccsuffix
-	echo "${KERNEL_LDSUFFIX}" >$kerneldir/kernel-ldsuffix
-	[ -e vmlinux ] && install -m 0644 vmlinux $kerneldir/	
-	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
-	install -m 0644 System.map $kerneldir/System.map-${KERNEL_VERSION}
-	[ -e Module.symvers ] && install -m 0644 Module.symvers $kerneldir/
-
-	# Copy over the main Makefiles
-	[ -e Rules.make ] && install -m 0644 Rules.make $kerneldir/
-	[ -e Makefile ] && install -m 0644 Makefile $kerneldir/
-	# Check if arch/${ARCH}/Makefile exists and install it
-	if [ -e arch/${ARCH}/Makefile ]; then
-		install -d $kerneldir/arch/${ARCH}
-		install -m 0644 arch/${ARCH}/Makefile* $kerneldir/arch/${ARCH}
-	# Otherwise check arch/x86/Makefile for i386 and x86_64 on kernels >= 2.6.24
-	elif [ -e arch/x86/Makefile ]; then
-		install -d $kerneldir/arch/x86
-		install -m 0644 arch/x86/Makefile* $kerneldir/arch/x86
-	fi
+	#
+	# Clean and remove files not needed for building modules.
+	# Some distributions go through a lot more trouble to strip out
+	# unecessary headers, for now, we just prune the obvious bits.
+	#
+	# We don't want to leave host-arch binaries in /sysroots, so
+	# we clean the scripts dir while leaving the generated config
+	# and include files.
+	#
+	oe_runmake -C $kerneldir CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean
+	make -C $kerneldir _mrproper_scripts
+	find $kerneldir -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
+	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
 
 	# Remove the following binaries which cause strip errors
 	# during do_package for cross-compiled platforms
 	bin_files="arch/powerpc/boot/addnote arch/powerpc/boot/hack-coff \
-		arch/powerpc/boot/mktree scripts/bin2c scripts/conmakehash \
-		scripts/ihex2fw scripts/kallsyms scripts/pnmtologo scripts/basic/docproc \
-		scripts/basic/fixdep scripts/basic/hash scripts/dtc/dtc \
-		scripts/genksyms/genksyms scripts/kconfig/conf scripts/mod/mk_elfconfig \
-		scripts/mod/modpost scripts/recordmcount"
-	rm -rf $kerneldir/scripts/*.o
-	rm -rf $kerneldir/scripts/basic/*.o
-	rm -rf $kerneldir/scripts/kconfig/*.o
-	rm -rf $kerneldir/scripts/mod/*.o
-	rm -rf $kerneldir/scripts/dtc/*.o
+	           arch/powerpc/boot/mktree"
 	for entry in $bin_files; do
-		rm -f $kerneldir/$entry
-	done	
+	        rm -f $kerneldir/$entry
+	done
 }
 
 sysroot_stage_all_append() {
 	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}/kernel
 }
-
 
 kernel_do_configure() {
 	# Copy defconfig to .config if .config does not exist. This allows
