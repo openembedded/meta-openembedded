@@ -1,0 +1,28 @@
+#
+# The whole ecore-fb init logic is somewhat flawed; with this patch we
+# get at least a working touchscreen w/ tslib again.
+#
+# Signed-off-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+#
+
+diff -uNr ecore.orig//src/lib/ecore_fb/ecore_fb.c ecore/src/lib/ecore_fb/ecore_fb.c
+--- ecore.orig//src/lib/ecore_fb/ecore_fb.c	2010-09-21 12:40:06.000000000 +0200
++++ ecore/src/lib/ecore_fb/ecore_fb.c	2010-09-24 18:42:02.000000000 +0200
+@@ -39,6 +39,9 @@
+    
+    if (!ecore_fb_vt_init())
+       return --_ecore_fb_init_count;
++
++   if (!ecore_fb_ts_init())
++     return --_ecore_fb_init_count;
+    
+    ECORE_FB_EVENT_KEY_DOWN          = ecore_event_type_new();
+    ECORE_FB_EVENT_KEY_UP            = ecore_event_type_new();
+@@ -63,6 +66,7 @@
+    if (--_ecore_fb_init_count != 0)
+       return _ecore_fb_init_count;
+ 
++   ecore_fb_ts_shutdown();
+    ecore_fb_vt_shutdown();
+ 
+    return _ecore_fb_init_count;

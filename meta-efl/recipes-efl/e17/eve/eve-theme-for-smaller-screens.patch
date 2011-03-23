@@ -1,0 +1,102 @@
+From 2ce4e2e7cfe756bb78e883ff1a602a74e95288b5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20(Trevi=C3=B1o)?= <mail@3v1n0.net>
+Date: Wed, 17 Nov 2010 16:38:47 +0100
+Subject: [PATCH] eve: theme updated for Openmoko Freerunner screen
+
+---
+ data/themes/default.edc |   22 +++++++++++-----------
+ 1 files changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/data/themes/default.edc b/data/themes/default.edc
+index d4d29a6..7efaf23 100644
+--- a/data/themes/default.edc
++++ b/data/themes/default.edc
+@@ -1,8 +1,8 @@
+-#define TOP_PANEL_HEIGHT 64
++#define TOP_PANEL_HEIGHT 80
+ #define BOTTOM_PANEL_HEIGHT 85
+ #define TOOLBAR_ITEMS 5
+ #define TOOLBAR_MIDDLE_ITEM 3
+-#define TOOLBAR_ITEM_SIZE 90
++#define TOOLBAR_ITEM_SIZE 87
+ #define URLBAR_ITEM_SIZE 40
+ 
+ #define TOOLBAR_POSITION(_item_number) ((_item_number)*(TOOLBAR_ITEM_SIZE)-((TOOLBAR_ITEM_SIZE)*(TOOLBAR_MIDDLE_ITEM)))
+@@ -202,7 +202,6 @@
+                 type: RECT;
+                 description { state: "default" 0.0;
+                     color: 0 0 0 255;
+-                    min: 240 320;
+                 }
+             }
+         }
+@@ -335,7 +334,6 @@
+                 type: RECT;
+                 description { state: "default" 0.0;
+                     color: 0 0 0 255;
+-                    min: 240 320;
+                 }
+             }
+             part { name: "view";
+@@ -893,17 +893,17 @@ collections {
+                 type: IMAGE;
+                 description { state: "default" 0.0;
+                     visible: 0;
+-                    min: 30 27;
+-                    max: 30 27;
++                    min: 80 78;
++                    max: 80 78;
+                     fixed: 1 1;
+                     image.normal: "panel-top-triangle.png";
+                     rel1 {
+                         relative: 1.0 0.0;
+-                        offset: 60 60;
++                        offset: 0 0;
+                     }
+                     rel2 {
+                         relative: 1.0 0.0;
+-                        offset: 60 60;
++                        offset: 0 0;
+                     }
+                 }
+                 description { state: "visible" 0.0;
+@@ -912,11 +912,11 @@ collections {
+                     image.normal: "panel-top-triangle.png";
+                     rel1 {
+                         relative: 1.0 0.0;
+-                        offset: -15 13;
++                        offset: -40 38;
+                     }
+                     rel2 {
+                         relative: 1.0 0.0;
+-                        offset: -15 13;
++                        offset: -40 38;
+                     }
+                 }
+                 description { state: "pressed" 0.0;
+@@ -1006,11 +1006,11 @@ collections {
+                     rel2 {
+                         to_y: "panel-top";
+                         relative: 1.0 0.0;
+-                        offset: -1 24;
++                        offset: -1 26;
+                     }
+                     text {
+                         font: "Sans,Edje-Vera";
+-                        size: 8;
++                        size: 11;
+                         text: "Untitled";
+                         min: 0 1;
+                         align: 0.5 0.5;
+@@ -1026,7 +1026,7 @@ collections {
+                     rel1 {
+                         to_y: "panel-top";
+                         relative: 0.0 0.0;
+-                        offset: (URLBAR_ITEM_SIZE+20)   68;
++                        offset: (URLBAR_ITEM_SIZE+20)   70;
+                     }
+                     rel2 {
+                         to_y: "panel-top";
+-- 
+1.7.1
+

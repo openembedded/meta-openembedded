@@ -1,0 +1,11 @@
+Index: efreet/src/lib/efreet_desktop.c
+===================================================================
+--- efreet/src/lib/efreet_desktop.c	(revision 57257)
++++ efreet/src/lib/efreet_desktop.c	(revision 57435)
+@@ -1206,5 +1206,5 @@
+         case ECORE_FILE_EVENT_MODIFIED:
+             ext = strrchr(path, '.');
+-            if (!strcmp(ext, ".desktop") || !strcmp(ext, ".directory"))
++            if (ext && (!strcmp(ext, ".desktop") || !strcmp(ext, ".directory")))
+                 efreet_cache_desktop_update();
+             break;

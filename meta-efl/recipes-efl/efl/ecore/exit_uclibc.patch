@@ -1,0 +1,12 @@
+diff -uNr ecore.orig//src/lib/ecore_con/ecore_con_info.c ecore/src/lib/ecore_con/ecore_con_info.c
+--- ecore.orig//src/lib/ecore_con/ecore_con_info.c	2010-08-13 14:31:18.000000000 +0200
++++ ecore/src/lib/ecore_con/ecore_con_info.c	2010-08-13 14:49:37.000000000 +0200
+@@ -283,7 +283,7 @@
+         
+         err = write(fd[1], "", 1);
+         close(fd[1]);
+-#ifdef __USE_ISOC99
++#if defined(__USE_ISOC99) && !defined(__UCLIBC__)
+         _Exit(0);
+ #else
+         _exit(0);

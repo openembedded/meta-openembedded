@@ -1,0 +1,63 @@
+Index: e/src/modules/wizard/Makefile.am
+===================================================================
+--- e/src/modules/wizard/Makefile.am	(revision 43860)
++++ e/src/modules/wizard/Makefile.am	(working copy)
+@@ -6,7 +6,7 @@
+ files_DATA = \
+ e-module-$(MODULE).edj module.desktop
+ 
+-EXTRA_DIST = $(files_DATA) page_040.c page_050.c page_060.c
++EXTRA_DIST = $(files_DATA) page_030.c page_040.c page_050.c page_060.c page_070.c page_080.c
+ 
+ # the module .so file
+ INCLUDES               = -I. \
+@@ -21,9 +21,6 @@
+                          page_000.la \
+                          page_010.la \
+                          page_020.la \
+-                         page_030.la \
+-                         page_070.la \
+-                         page_080.la \
+                          page_200.la
+ 
+ ### disabled because profile selector really does the job. code here just for
+@@ -60,10 +57,10 @@
+ page_020_la_DEPENDENCIES = $(top_builddir)/config.h
+ 
+ #Choose Menus
+-page_030_la_SOURCES      = page_030.c
+-page_030_la_LIBADD       = @e_libs@ @dlopen_libs@
+-page_030_la_LDFLAGS      = -module -avoid-version
+-page_030_la_DEPENDENCIES = $(top_builddir)/config.h
++#page_030_la_SOURCES      = page_030.c
++#page_030_la_LIBADD       = @e_libs@ @dlopen_libs@
++#page_030_la_LDFLAGS      = -module -avoid-version
++#page_030_la_DEPENDENCIES = $(top_builddir)/config.h
+ 
+ #page_040_la_SOURCES      = page_040.c
+ #page_040_la_LIBADD       = @e_libs@ @dlopen_libs@
+@@ -81,16 +78,16 @@
+ #page_060_la_DEPENDENCIES = $(top_builddir)/config.h
+ 
+ #Choose appliactions
+-page_070_la_SOURCES      = page_070.c
+-page_070_la_LIBADD       = @e_libs@ @dlopen_libs@
+-page_070_la_LDFLAGS      = -module -avoid-version
+-page_070_la_DEPENDENCIES = $(top_builddir)/config.h
++#page_070_la_SOURCES      = page_070.c
++#page_070_la_LIBADD       = @e_libs@ @dlopen_libs@
++#page_070_la_LDFLAGS      = -module -avoid-version
++#page_070_la_DEPENDENCIES = $(top_builddir)/config.h
+ 
+ #Choose quick launch
+-page_080_la_SOURCES      = page_080.c
+-page_080_la_LIBADD       = @e_libs@ @dlopen_libs@
+-page_080_la_LDFLAGS      = -module -avoid-version
+-page_080_la_DEPENDENCIES = $(top_builddir)/config.h
++#page_080_la_SOURCES      = page_080.c
++#page_080_la_LIBADD       = @e_libs@ @dlopen_libs@
++#page_080_la_LDFLAGS      = -module -avoid-version
++#page_080_la_DEPENDENCIES = $(top_builddir)/config.h
+ 
+ page_200_la_SOURCES      = page_200.c
+ page_200_la_LIBADD       = @e_libs@ @dlopen_libs@

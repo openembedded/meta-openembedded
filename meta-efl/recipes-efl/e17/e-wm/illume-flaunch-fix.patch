@@ -1,0 +1,15 @@
+--- e/src/modules/illume/e_flaunch.c	2010-02-09 22:33:25.000000000 +0100
++++ e/src/modules/illume/e_flaunch.c	2010-02-09 22:33:25.000000000 +0100
+@@ -97,10 +97,10 @@
+    int num = 0, max, count;
+    
+    // FIXME: 3 should become config here
+-   max = 10;
++   max = 3;
+    // for now just look for any apps in "category" 'Bar' and add the first 3
+    // FIXME: category should be configurable... 
+-   bar_desktops = efreet_util_desktop_category_list("System");
++   bar_desktops = efreet_util_desktop_category_list("Bar");
+    if (bar_desktops)
+      {
+ 	Efreet_Desktop *desktop;
