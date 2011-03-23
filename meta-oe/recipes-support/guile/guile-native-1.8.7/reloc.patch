@@ -1,0 +1,22 @@
+--- guile-1.8.7.orig/guile-tools.in
++++ guile-1.8.7/guile-tools.in
+@@ -42,14 +42,15 @@ Default scripts dir: $default_scriptsdir
+ EOF
+ }
+
+-prefix="@prefix@"
+-datarootdir="@datarootdir@"
+-pkgdatadir="@datadir@/@PACKAGE@"
++bindir=`dirname $0`
++bindir=`cd $bindir && pwd`
++prefix=`dirname $bindir`
++datarootdir=${prefix}/share
++pkgdatadir=${prefix}/share/guile
+ guileversion="@GUILE_EFFECTIVE_VERSION@"
+ default_scriptsdir=$pkgdatadir/$guileversion/scripts
+
+ # pre-install invocation frob
+-mydir=`dirname $0`
+ if [ -d "$mydir/scripts" -a -f "$mydir/scripts/Makefile.am" ] ; then
+     default_scriptsdir=`(cd $mydir/scripts ; pwd)`
+ fi

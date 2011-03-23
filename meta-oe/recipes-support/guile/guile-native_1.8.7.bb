@@ -1,7 +1,10 @@
 require guile-native.inc
+
+PR = "r1"
 SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
            file://configure-fix.patch \
            file://cpp-linemarkers.patch \
+           file://reloc.patch \
           "
 
 SRC_URI[md5sum] = "991b5b3efcbbc3f7507d05bc42f80a5e"
