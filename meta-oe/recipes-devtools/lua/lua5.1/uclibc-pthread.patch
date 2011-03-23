@@ -1,0 +1,13 @@
+Index: lua-5.1.4/src/Makefile
+===================================================================
+--- lua-5.1.4.orig/src/Makefile	2010-10-16 09:51:52.000000000 +0200
++++ lua-5.1.4/src/Makefile	2010-10-16 09:52:15.000000000 +0200
+@@ -12,7 +12,7 @@
+ AR= ar rcu
+ RANLIB= ranlib
+ RM= rm -f
+-LIBS= -lm $(MYLIBS)
++LIBS= -lm -lpthread $(MYLIBS)
+ 
+ MYCFLAGS=
+ MYLDFLAGS=
