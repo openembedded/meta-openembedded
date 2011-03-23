@@ -1,0 +1,41 @@
+---
+ src/tests.c |   12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+Index: gnutls-2.8.6/src/tests.c
+===================================================================
+--- gnutls-2.8.6.orig/src/tests.c	2009-06-02 11:59:32.000000000 -0700
++++ gnutls-2.8.6/src/tests.c	2010-05-19 22:20:51.703780601 -0700
+@@ -493,6 +493,7 @@ test_bye (gnutls_session_t session)
+   int old, secs = 6;
+ 
+ #ifndef _WIN32
++  struct sigaction act;
+   signal (SIGALRM, got_alarm);
+ #endif
+ 
+@@ -513,7 +514,9 @@ test_bye (gnutls_session_t session)
+     return TEST_FAILED;
+ 
+ #ifndef _WIN32
+-  old = siginterrupt (SIGALRM, 1);
++  (void) sigaction(SIGALRM, NULL, &act);
++  act.sa_flags &= ~SA_RESTART;
++  old = sigaction(SIGALRM, &act, NULL);
+   alarm (secs);
+ #else
+   setsockopt ((int) gnutls_transport_get_ptr (session), SOL_SOCKET,
+@@ -527,7 +530,12 @@ test_bye (gnutls_session_t session)
+   while (ret > 0);
+ 
+ #ifndef _WIN32
+-  siginterrupt (SIGALRM, old);
++  (void) sigaction(SIGALRM, NULL, &act);
++  if (old)
++    act.sa_flags &= ~SA_RESTART;
++  else
++    act.sa_flags |= SA_RESTART;
++  sigaction(SIGALRM, &act, NULL);
+ #else
+   if (WSAGetLastError () == WSAETIMEDOUT ||
+       WSAGetLastError () == WSAECONNABORTED)
