@@ -1,5 +1,6 @@
 DESCRIPTION = "Eina is the Enlightenment data library"
-LICENSE = "LGPL"
+LICENSE = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=723bb07e0e90220fe8f03924969e5f4e"
 
 BBCLASSEXTEND = "native"
 INC_PR = "r0"
