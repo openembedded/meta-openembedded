@@ -4,7 +4,7 @@ URI: git://git.openembedded.org/openembedded-core
 branch: master
 revision: HEAD
 
-Send pull requests to openembedded-core@lists.openembedded.org
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
 
 Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
 
