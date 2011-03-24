@@ -1,0 +1,69 @@
+#
+# Automatically generated make config: don't edit
+# Mon May 14 10:23:14 2007
+#
+# TARGET_alpha is not set
+TARGET_arm=y
+# TARGET_bfin is not set
+# TARGET_cris is not set
+# TARGET_e1 is not set
+# TARGET_frv is not set
+# TARGET_h8300 is not set
+# TARGET_hppa is not set
+# TARGET_i386 is not set
+# TARGET_i960 is not set
+# TARGET_ia64 is not set
+# TARGET_m68k is not set
+# TARGET_microblaze is not set
+# TARGET_mips is not set
+# TARGET_nios is not set
+# TARGET_nios2 is not set
+# TARGET_powerpc is not set
+# TARGET_sh is not set
+# TARGET_sh64 is not set
+# TARGET_sparc is not set
+# TARGET_v850 is not set
+# TARGET_vax is not set
+# TARGET_x86_64 is not set
+
+#
+# Target Architecture Features and Options
+#
+TARGET_ARCH="arm"
+FORCE_OPTIONS_FOR_ARCH=y
+# CONFIG_ARM_OABI is not set
+CONFIG_ARM_EABI=y
+USE_BX=y
+CONFIG_GENERIC_ARM=y
+# CONFIG_ARM610 is not set
+# CONFIG_ARM710 is not set
+# CONFIG_ARM7TDMI is not set
+# CONFIG_ARM720T is not set
+# CONFIG_ARM920T is not set
+# CONFIG_ARM922T is not set
+# CONFIG_ARM926T is not set
+# CONFIG_ARM10T is not set
+# CONFIG_ARM1136JF_S is not set
+# CONFIG_ARM1176JZ_S is not set
+# CONFIG_ARM1176JZF_S is not set
+# CONFIG_ARM_SA110 is not set
+# CONFIG_ARM_SA1100 is not set
+# CONFIG_ARM_XSCALE is not set
+# CONFIG_ARM_IWMMXT is not set
+TARGET_SUBARCH=""
+
+#
+# Using ELF file format
+#
+ARCH_ANY_ENDIAN=y
+ARCH_LITTLE_ENDIAN=y
+# ARCH_WANTS_BIG_ENDIAN is not set
+ARCH_WANTS_LITTLE_ENDIAN=y
+ARCH_HAS_MMU=y
+ARCH_USE_MMU=y
+UCLIBC_HAS_FLOATS=y
+# UCLIBC_HAS_FPU is not set
+UCLIBC_HAS_SOFT_FLOAT=y
+KERNEL_HEADERS="/usr/include"
+HAVE_DOT_CONFIG=y
+

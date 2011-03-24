@@ -1,0 +1,48 @@
+#
+# Automatically generated make config: don't edit
+#
+# TARGET_alpha is not set
+# TARGET_arm is not set
+# TARGET_bfin is not set
+# TARGET_cris is not set
+# TARGET_e1 is not set
+# TARGET_frv is not set
+# TARGET_h8300 is not set
+# TARGET_hppa is not set
+# TARGET_i386 is not set
+# TARGET_i960 is not set
+# TARGET_m68k is not set
+# TARGET_microblaze is not set
+# TARGET_mips is not set
+# TARGET_nios is not set
+# TARGET_nios2 is not set
+# TARGET_powerpc is not set
+TARGET_sh=y
+# TARGET_sh64 is not set
+# TARGET_sparc is not set
+# TARGET_v850 is not set
+# TARGET_x86_64 is not set
+
+#
+# Target Architecture Features and Options
+#
+TARGET_ARCH="sh"
+ARCH_SUPPORTS_BIG_ENDIAN=y
+ARCH_SUPPORTS_LITTLE_ENDIAN=y
+FORCE_OPTIONS_FOR_ARCH=y
+# CONFIG_SH2A is not set
+# CONFIG_SH2 is not set
+# CONFIG_SH3 is not set
+CONFIG_SH4=y
+ARCH_LITTLE_ENDIAN=y
+# ARCH_BIG_ENDIAN is not set
+ARCH_WANTS_LITTLE_ENDIAN=y
+# ARCH_WANTS_BIG_ENDIAN is not set
+# ARCH_HAS_NO_MMU is not set
+ARCH_HAS_MMU=y
+UCLIBC_HAS_FLOATS=y
+UCLIBC_HAS_FPU=y
+DO_C99_MATH=y
+# UCLIBC_HAS_FENV is not set
+KERNEL_HEADERS="<path/to/kernel/headers>"
+HAVE_DOT_CONFIG=y
