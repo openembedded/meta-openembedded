@@ -1,6 +1,7 @@
 DESCRIPTION = "DBus and HAL convenience wrappers for EFL"
 DEPENDS = "dbus ecore"
 LICENSE = "MIT BSD"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c36b278587b5b7ac1f73c20b60212778"
 
 inherit efl
 
