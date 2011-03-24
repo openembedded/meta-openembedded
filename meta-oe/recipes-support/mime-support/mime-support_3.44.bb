@@ -1,6 +1,7 @@
 SECTION = "base"
 DESCRIPTION = "MIME files 'mime.types' & 'mailcap', and support programs"
 LICENSE = "PD"
+LIC_FILES_CHKSUM = "file://debian/README;md5=36bbe2ace0a05c3fb684b73208fbf30b"
 
 DEPENDS = "file"
 RRECOMMENDS_${PN} = "file"
