@@ -3,6 +3,7 @@ DEPENDS = "lua5.1 eet evas ecore embryo edje-native"
 DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native"
 DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native"
 LICENSE = "MIT BSD"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1f2d83425ec8dfae5cd77f8ce52e872c"
 
 inherit efl
 
