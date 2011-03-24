@@ -1,5 +1,6 @@
 DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
-LICENSE = "MIT BSD"
+LICENSE = "MIT BSD & CompuPhase"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6aa45e26c1ed178da910fd76b306a875"
 
 inherit efl
 
