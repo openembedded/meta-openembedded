@@ -5,7 +5,7 @@
      libgloss_dir=arm
      ;;
 -  arm*-*-linux-gnueabi)
-+  arm*-*-linux-gnueabi | arm*-*-linux-uclibcgnueabi)
++  arm*-*-linux-gnueabi | arm*-*-linux-uclibceabi)
      noconfigdirs="$noconfigdirs target-qthreads"
      noconfigdirs="$noconfigdirs target-libobjc"
      case ${with_newlib} in
@@ -16,7 +16,7 @@
      libgloss_dir=arm
      ;;
 -  arm*-*-linux-gnueabi)
-+  arm*-*-linux-gnueabi | arm*-*-linux-uclibcgnueabi)
++  arm*-*-linux-gnueabi | arm*-*-linux-uclibceabi)
      noconfigdirs="$noconfigdirs target-qthreads"
      noconfigdirs="$noconfigdirs target-libobjc"
      case ${with_newlib} in
