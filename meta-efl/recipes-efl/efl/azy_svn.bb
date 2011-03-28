@@ -8,6 +8,8 @@ SRCREV = "${EFL_SRCREV}"
 # to provide native lemon binary
 BBCLASSEXTEND = "native"
 
+EXTRA_OECONF += " --disable-mysql-tests"
+
 do_configure_prepend() {
   sed -i "s#\./lemon#${STAGING_BINDIR_NATIVE}/lemon#g" ${S}/src/bin/Makefile.am
   sed -i "s#\$(top_builddir)/src/bin/azy_parser -H -p -o#${STAGING_BINDIR_NATIVE}/azy_parser -H -p -o#g" ${S}/src/tests/Makefile.am
