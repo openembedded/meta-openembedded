@@ -1,15 +1,16 @@
 SECTION = "x11/data"
 
 SRC_URI = "git://git.shr-project.org/repo/illume-keyboards.git;protocol=http;branch=master \
-           file://0001-Makefile-update-KEYBOARDS_DIR-for-new-illume2.patch"
+           file://0001-Makefile-update-KEYBOARDS_DIR-for-new-illume2.patch \
+	   file://LICENSE"
 S = "${WORKDIR}/git"
 
 SRCREV = "4064489f359a1addf572089b582f317dff5f50e1"
 PV = "0.0+gitr${SRCPV}"
 PE = "1"
 PR = "r4"
-LICENSE = "unknown"
-
+LICENSE = "MIT BSD"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
 
 PACKAGES = "\
 illume-keyboard-alpha \
