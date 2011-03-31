@@ -1,6 +1,7 @@
 DESCRIPTION = "Vala meets the Enlightenment Foundation Libraries"
 AUTHOR = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
-LICENSE = "LGPL"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 SECTION = "devel"
 DEPENDS = "vala-native glib-2.0 dbus dbus-glib eina eet evas ecore edje elementary"
 PV = "2011.01.13.1+svnr${SRCPV}"
