@@ -1,0 +1,38 @@
+From fa12a33b5a3c0e86231ca84967d9eff456e5f314 Mon Sep 17 00:00:00 2001
+From: Jan Luebbe <jluebbe@debian.org>
+Date: Sat, 9 Aug 2008 18:30:04 +0200
+Subject: [PATCH] fix unicode conversion
+
+---
+ edje/edje.c_edje_object.pxi |   11 +++++++----
+ 1 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/edje/edje.c_edje_object.pxi b/edje/edje.c_edje_object.pxi
+index 0f4da68..21c237e 100644
+--- a/edje/edje.c_edje_object.pxi
++++ b/edje/edje.c_edje_object.pxi
+@@ -415,17 +415,20 @@
+         else:
+             raise TypeError("func must be callable or None")
+ 
+-    def part_text_set(self, char *part, char *text):
+-        edje_object_part_text_set(self.obj, part, text)
++    def part_text_set(self, char *part, text):
++        cdef char *s
++        u = text.encode("utf8")
++        s = u
++        edje_object_part_text_set(self.obj, part, s)
+ 
+     def part_text_get(self, char *part):
+-        "@rtype: str"
++        "@rtype: unicode"
+         cdef const_char_ptr s
+         s = edje_object_part_text_get(self.obj, part)
+         if s == NULL:
+             return None
+         else:
+-            return s
++            return s.decode("utf8")
+ 
+     def part_text_select_all(self, char *part):
+         edje_object_part_text_select_all(self.obj, part)
