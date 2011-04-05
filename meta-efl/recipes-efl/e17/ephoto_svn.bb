@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING.icons;md5=d4e4f10748f3146a089aaa23c9ade59b"
 
 require e-module.inc
 
+inherit gettext
+
 DEPENDS += "elementary ethumb ecore eio"
 
 SRCNAME = "${PN}"
