@@ -29,7 +29,6 @@ do_install_append() {
 FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
 FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/"
 
-PACKAGES_DYNAMIC_virtclass-native = ""
 PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-*"
 
 RRECOMMENDS_${PN} = " \
