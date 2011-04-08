@@ -1,4 +1,5 @@
 require recipes-devtools/gcc/gcc-common.inc
+ARM_INSTRUCTION_SET = "arm"
 
 DEPENDS =+ "mpfr gmp libmpc elfutils"
 NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native elfutils-native"
@@ -14,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 SRCREV = "170880"
 PV = "4.5"
-INC_PR = "r34"
+INC_PR = "r35"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
