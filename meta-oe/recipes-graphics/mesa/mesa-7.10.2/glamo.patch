@@ -1,0 +1,2425 @@
+git diff upstream/7.10 and gitorious/7.10
+
+http://gitorious.org/mesa/mesa/commits/7.10
+
+diff --git a/configs/autoconf.in b/configs/autoconf.in
+index e2d70c6..5874955 100644
+--- a/configs/autoconf.in
++++ b/configs/autoconf.in
+@@ -120,7 +120,7 @@ OSMESA_LIB_DEPS = -L$(TOP)/$(LIB_DIR) @OSMESA_MESA_DEPS@ \
+ 	$(EXTRA_LIB_PATH) @OSMESA_LIB_DEPS@
+ EGL_LIB_DEPS = $(EXTRA_LIB_PATH) @EGL_LIB_DEPS@
+ GLU_LIB_DEPS = -L$(TOP)/$(LIB_DIR) @GLU_MESA_DEPS@ \
+-	$(EXTRA_LIB_PATH) @GLU_LIB_DEPS@
++	$(EXTRA_LIB_PATH) @GLU_LIB_DEPS@ -lstdc++
+ GLUT_LIB_DEPS = -L$(TOP)/$(LIB_DIR) @GLUT_MESA_DEPS@ \
+ 	$(EXTRA_LIB_PATH) @GLUT_LIB_DEPS@
+ GLW_LIB_DEPS = -L$(TOP)/$(LIB_DIR) @GLW_MESA_DEPS@ \
+diff --git a/src/mesa/drivers/dri/glamo/Makefile b/src/mesa/drivers/dri/glamo/Makefile
+new file mode 100644
+index 0000000..e77193d
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/Makefile
+@@ -0,0 +1,22 @@
++# src/mesa/drivers/dri/glamo/Makefile
++
++TOP = ../../../../..
++include $(TOP)/configs/current
++
++LIBNAME = glamo_dri.so
++
++DRIVER_SOURCES = \
++	glamo_screen.c glamo_context.c glamo_state.c glamo_fbo.c glamo_tris.c \
++	glamo_cmdq.c glamo_render.c
++
++C_SOURCES = \
++	$(COMMON_SOURCES) \
++	$(DRIVER_SOURCES)
++
++ASM_SOURCES =
++
++DRI_LIB_DEPS += -ldrm_glamo
++
++include ../Makefile.template
++
++symlinks:
+diff --git a/src/mesa/drivers/dri/glamo/glamo_cmdq.c b/src/mesa/drivers/dri/glamo/glamo_cmdq.c
+new file mode 100644
+index 0000000..1334f8e
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_cmdq.c
+@@ -0,0 +1,110 @@
++/*
++ * Command queue submission via DRM
++ *
++ * Copyright 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++
++#include <stdint.h>
++#include <stdlib.h>
++#include <drm.h>
++#include <glamo_drm.h>
++#include <glamo_bo.h>
++
++#include "glamo_context.h"
++#include "glamo_cmdq.h"
++
++
++/* Submit the prepared command sequence to the kernel */
++void glamoDRMDispatch(glamoContext *gCtx)
++{
++	drm_glamo_cmd_burst_t burst;
++	int r;
++
++	burst.base = gCtx->cmd_burst_base;
++	burst.data = gCtx->cmdq_drm;
++	burst.bufsz = gCtx->cmdq_drm_used * 2;	/* -> bytes */
++	burst.nobjs = gCtx->cmdq_obj_used;
++	burst.objs = gCtx->cmdq_objs;
++	burst.obj_pos = gCtx->cmdq_obj_pos;
++
++	r = drmCommandWrite(gCtx->drm_fd, DRM_GLAMO_CMDBURST,
++	                    &burst, sizeof(burst));
++	if ( r != 0 ) {
++		fprintf(stderr, "DRM_GLAMO_CMDBURST failed\n");
++	}
++
++	/* Reset counts to zero for the next sequence */
++	gCtx->cmdq_obj_used = 0;
++	gCtx->cmdq_drm_used = 0;
++}
++
++
++void glamoDRMAddData(glamoContext *gCtx, uint32_t val, int len)
++{
++	if ( gCtx->cmdq_drm_used+4 > gCtx->cmdq_drm_size ) {
++		fprintf(stderr, "Burst command too large\n");
++		return;
++	}
++
++	/* Record command */
++	if ( len == 2 ) {
++		gCtx->cmdq_drm[gCtx->cmdq_drm_used++] = val & 0xffff;
++	} else if ( len == 4 ) {
++		gCtx->cmdq_drm[gCtx->cmdq_drm_used++] = val & 0x0000ffff;
++		gCtx->cmdq_drm[gCtx->cmdq_drm_used++] = val & 0xffff0000;
++	} else {
++		fprintf(stderr, "Wrong command length!\n");
++	}
++}
++
++
++void glamoDRMAddBO(glamoContext *gCtx, struct glamo_bo *bo)
++{
++	if ( gCtx->cmdq_drm_used+4 > gCtx->cmdq_drm_size ) {
++		fprintf(stderr, "Burst command too large\n");
++		return;
++	}
++
++	/* Record object position */
++	gCtx->cmdq_objs[gCtx->cmdq_obj_used] = bo->handle;
++	/* -> bytes */
++	gCtx->cmdq_obj_pos[gCtx->cmdq_obj_used] = gCtx->cmdq_drm_used * 2;
++	gCtx->cmdq_obj_used++;
++
++	/* Record command */
++	gCtx->cmdq_drm[gCtx->cmdq_drm_used++] = 0x0000;
++	gCtx->cmdq_drm[gCtx->cmdq_drm_used++] = 0x0000;
++}
++
++
++void glamoDRMStartBurst(glamoContext *gCtx, uint16_t base)
++{
++	gCtx->cmd_burst_base = base;
++}
++
++
++void glamoInitCmdqCache(glamoContext *gCtx)
++{
++	gCtx->cmdq_objs = malloc(1024);
++	gCtx->cmdq_obj_pos = malloc(1024);
++	gCtx->cmdq_obj_used = 0;
++	gCtx->cmdq_drm_used = 0;
++	gCtx->cmdq_drm_size = 4 * 1024;
++	gCtx->cmdq_drm = malloc(gCtx->cmdq_drm_size);
++}
+diff --git a/src/mesa/drivers/dri/glamo/glamo_cmdq.h b/src/mesa/drivers/dri/glamo/glamo_cmdq.h
+new file mode 100644
+index 0000000..7420d7b
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_cmdq.h
+@@ -0,0 +1,33 @@
++/*
++ * Command queue submission via DRM
++ *
++ * Copyright 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++
++#include <stdint.h>
++#include <glamo_bo.h>
++
++#include "glamo_context.h"
++
++
++extern void glamoDRMDispatch(glamoContext *gCtx);
++extern void glamoDRMAddBO(glamoContext *gCtx, struct glamo_bo *bo);
++extern void glamoDRMAddData(glamoContext *gCtx, uint32_t val, int len);
++extern void glamoDRMStartBurst(glamoContext *gCtx, uint16_t base);
++extern void glamoInitCmdqCache(glamoContext *gCtx);
+diff --git a/src/mesa/drivers/dri/glamo/glamo_context.c b/src/mesa/drivers/dri/glamo/glamo_context.c
+new file mode 100644
+index 0000000..39eb4e7
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_context.c
+@@ -0,0 +1,360 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on sis_context.c (c) 2003 Eric Anholt
++ *              and radeon_common_context.c
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++
++#include "dri_util.h"
++#include "drirenderbuffer.h"
++#include "utils.h"
++
++#include "swrast/swrast.h"
++#include "swrast_setup/swrast_setup.h"
++#include "drivers/common/driverfuncs.h"
++#include "vbo/vbo.h"
++#include "tnl/tnl.h"
++#include "tnl/t_pipeline.h"
++#include "main/state.h"
++
++#include "glamo_context.h"
++#include "glamo_screen.h"
++#include "glamo_state.h"
++#include "glamo_fbo.h"
++#include "glamo_tris.h"
++#include "glamo_render.h"
++#include "glamo_cmdq.h"
++
++#include <glamo_bo.h>
++#include <glamo_bo_gem.h>
++#include <glamo_drm.h>
++
++
++#define DRIVER_DATE  "20090913"
++
++
++static inline struct glamo_renderbuffer *glamo_get_renderbuffer(
++                                                      struct gl_framebuffer *fb,
++                                                      int att_index)
++{
++	if ( att_index >= 0 ) {
++		struct glamo_renderbuffer *gr;
++		gr = glamo_renderbuffer(fb->Attachment[att_index].Renderbuffer);
++		return gr;
++	} else {
++		return NULL;
++	}
++}
++
++
++static const GLubyte *glamoGetString(struct gl_context *ctx, GLenum name)
++{
++	static char buffer[128];
++
++	switch (name) {
++	case GL_VENDOR:
++		return (GLubyte *)"Thomas White";
++	case GL_RENDERER: {
++		driGetRendererString(buffer, "Glamo", DRIVER_DATE, 0);
++		return (GLubyte *) buffer;
++	}
++	default:
++		return 0;
++	}
++}
++
++
++/* Called when Mesa needs to know the size of the framebuffer */
++static void glamoBufferSize(struct gl_framebuffer *buffer,
++                            GLuint *width, GLuint *height)
++{
++	GET_CURRENT_CONTEXT(ctx);
++	glamoContextPtr glamo = GLAMO_CONTEXT(ctx);
++
++	*width = glamo->driDrawable->w;
++	*height = glamo->driDrawable->h;
++}
++
++
++GLboolean glamoCreateContext(const struct gl_config *glVisual,
++                             __DRIcontext *driContextPriv,
++                             void *sharedContextPrivate)
++{
++	struct gl_context *ctx, *shareCtx;
++	__DRIscreen *sPriv = driContextPriv->driScreenPriv;
++	glamoContextPtr context;
++	glamoScreenPtr glamoScreen;
++	struct dd_function_table functions;
++
++	context = (glamoContextPtr)CALLOC(sizeof(*context));
++	if ( context == NULL ) return GL_FALSE;
++
++	_mesa_init_driver_functions(&functions);
++
++	/* Allocate the Mesa context */
++	if ( sharedContextPrivate )
++		shareCtx = ((glamoContextPtr)sharedContextPrivate)->glCtx;
++	else
++		shareCtx = NULL;
++	context->glCtx = _mesa_create_context(glVisual, shareCtx,
++		                        &functions, (void *)context);
++	if ( context->glCtx == NULL ) {
++		FREE(context);
++		return GL_FALSE;
++	}
++	driContextPriv->driverPrivate = context;
++	ctx = context->glCtx;
++
++	glamoScreen = context->glamoScreen = (glamoScreenPtr)sPriv->private;
++
++	ctx->Driver.GetString = glamoGetString;
++	ctx->Driver.GetBufferSize = glamoBufferSize;
++
++	context->driContext = driContextPriv;
++	context->driScreen = sPriv;
++	context->driDrawable = NULL;
++	context->drm_fd = sPriv->fd;
++
++	/* Initialize the software rasterizer and helper modules. */
++	_swrast_CreateContext(ctx);
++	_vbo_CreateContext(ctx);
++	_tnl_CreateContext(ctx);
++	_swsetup_CreateContext(ctx);
++
++	/* Install our pipeline (see glamo_render.c) */
++	_tnl_install_pipeline(ctx, glamo_pipeline);
++
++	_swrast_allow_pixel_fog(ctx, GL_TRUE);
++	_swrast_allow_vertex_fog(ctx, GL_FALSE);
++	_tnl_allow_pixel_fog(ctx, GL_TRUE);
++	_tnl_allow_vertex_fog(ctx, GL_FALSE);
++
++	glamoInitCmdqCache(context);
++	glamoInitStateFuncs(ctx);
++	glamoInitTriFuncs(ctx);
++
++	return GL_TRUE;
++}
++
++
++void glamoDestroyContext(__DRIcontext *driContextPriv)
++{
++	glamoContextPtr context;
++
++	context = (glamoContextPtr)driContextPriv->driverPrivate;
++	assert(context != NULL);
++
++	if ( context != NULL ) {
++
++		_swsetup_DestroyContext(context->glCtx);
++		_tnl_DestroyContext(context->glCtx);
++		_vbo_DestroyContext(context->glCtx);
++		_swrast_DestroyContext(context->glCtx);
++
++		_mesa_destroy_context(context->glCtx);
++
++	}
++
++	FREE(context);
++}
++
++
++void glamo_update_renderbuffers(__DRIcontext *context,
++                                __DRIdrawable *drawable)
++{
++	unsigned int attachments[10];
++	__DRIbuffer *buffers;
++	__DRIscreen *screen;
++	int i, count;
++	struct glamo_framebuffer *draw;
++	glamoContextPtr glamo;
++	struct glamo_bo *bo;
++
++	draw = drawable->driverPrivate;
++	screen = context->driScreenPriv;
++	glamo = (glamoContextPtr)context->driverPrivate;
++	i = 0;
++	if ( draw->color_rb[0] ) {
++		attachments[i++] = __DRI_BUFFER_FRONT_LEFT;
++	}
++	if ( draw->color_rb[1] ) {
++		attachments[i++] = __DRI_BUFFER_BACK_LEFT;
++	}
++
++	buffers = screen->dri2.loader->getBuffers(drawable,
++	                                          &drawable->w,
++	                                          &drawable->h,
++	                                          attachments, i,
++	                                          &count,
++	                                          drawable->loaderPrivate);
++	if ( buffers == NULL ) return;
++
++	/* Set one cliprect to cover the whole drawable */
++	drawable->x = 0;
++	drawable->y = 0;
++	drawable->backX = 0;
++	drawable->backY = 0;
++	drawable->numClipRects = 1;
++	drawable->pClipRects[0].x1 = 0;
++	drawable->pClipRects[0].y1 = 0;
++	drawable->pClipRects[0].x2 = drawable->w;
++	drawable->pClipRects[0].y2 = drawable->h;
++	drawable->numBackClipRects = 1;
++	drawable->pBackClipRects[0].x1 = 0;
++	drawable->pBackClipRects[0].y1 = 0;
++	drawable->pBackClipRects[0].x2 = drawable->w;
++	drawable->pBackClipRects[0].y2 = drawable->h;
++
++	/* For each attachment */
++	for ( i=0; i<count; i++ ) {
++
++		struct glamo_renderbuffer *grb;
++
++		switch ( buffers[i].attachment ) {
++		case __DRI_BUFFER_FRONT_LEFT:
++			grb = draw->color_rb[0];
++			break;
++		case __DRI_BUFFER_BACK_LEFT:
++			grb = draw->color_rb[1];
++			break;
++		case __DRI_BUFFER_DEPTH:
++			grb = glamo_get_renderbuffer(&draw->base, BUFFER_DEPTH);
++			break;
++		case __DRI_BUFFER_STENCIL:
++			grb = glamo_get_renderbuffer(&draw->base,
++			                                        BUFFER_STENCIL);
++			break;
++		case __DRI_BUFFER_FAKE_FRONT_LEFT:
++			grb = draw->color_rb[0];
++			break;
++		case __DRI_BUFFER_ACCUM:
++		default:
++			fprintf(stderr,
++				"Unhandled buffer attach event,"
++				" attachment type %d\n", buffers[i].attachment);
++			return;
++		}
++
++		if ( grb == NULL ) {
++			/* Don't know how to handle this type of buffer */
++			continue;
++		}
++
++		if ( grb->bo ) {
++			uint32_t name = glamo_gem_get_name(grb->bo);
++			if ( name == buffers[i].name ) {
++				/* Buffer already attached.  No action needed */
++				continue;
++			}
++		}
++
++		grb->cpp = buffers[i].cpp;
++		grb->pitch = buffers[i].pitch;
++		grb->width = drawable->w;
++		grb->height = drawable->h;
++
++		bo = glamo_bo_open(glamo->glamoScreen->bom, buffers[i].name,
++		                   0, 0, GLAMO_GEM_DOMAIN_VRAM,
++		                   buffers[i].flags);
++		if ( bo == NULL ) {
++			fprintf(stderr, "Failed to attach buffer %d\n",
++				buffers[i].name);
++		}
++
++		glamo_renderbuffer_set_bo(grb, bo);
++		glamo_bo_unref(bo);
++
++	}
++
++	driUpdateFramebufferSize(glamo->glCtx, drawable);
++}
++
++
++GLboolean glamoMakeCurrent(__DRIcontext *driContextPriv,
++                           __DRIdrawable *driDrawPriv,
++                           __DRIdrawable *driReadPriv)
++{
++	struct glamo_framebuffer *draw_fb;
++	struct gl_framebuffer *read_fb;
++	glamoContextPtr glamo;
++
++	if ( driContextPriv == NULL ) {
++		_mesa_make_current(NULL, NULL, NULL);
++		return GL_TRUE;
++	}
++
++	/* The Glamo context we're switching to */
++	glamo = (glamoContextPtr)driContextPriv->driverPrivate;
++
++	glamo->driDrawable = driDrawPriv;
++
++	/* These two will probably be the same */
++	draw_fb = (struct glamo_framebuffer *)driDrawPriv->driverPrivate;
++	read_fb = (struct gl_framebuffer *)driReadPriv->driverPrivate;
++
++	glamo_update_renderbuffers(driContextPriv, driDrawPriv);
++	if (driDrawPriv != driReadPriv)
++		glamo_update_renderbuffers(driContextPriv, driReadPriv);
++
++	_mesa_make_current(glamo->glCtx, &draw_fb->base, read_fb);
++	_mesa_update_state(glamo->glCtx);
++
++	return GL_TRUE;
++}
++
++
++GLboolean glamoUnbindContext(__DRIcontext *driContextPriv)
++{
++	return GL_TRUE;
++}
++
++
++/* Convert IEEE754 32-bit float to Glamo's signed 24-bit float */
++uint32_t float7s16(GLfloat in)
++{
++	uint32_t a, b;
++	uint32_t sign, expo, mant;  /* Sign, exponent, significand */
++
++	a = *(uint32_t *)&in;
++
++	/* This is bad */
++	if ( a & 0x40000000 ) {
++		printf(stderr, "Warning: Exponent won't fit into 7 bits\n");
++	}
++
++	/* This hopefully isn't a big problem */
++	if ( a & 0x0000007f ) {
++		printf(stderr, "Warning: Precision lost in FP conversion\n");
++	}
++
++	/* Separate out the right bits */
++	mant = a & 0x007fff80;  /* Bits 7-22 (bits 0-6 are lost) */
++	expo = a & 0x3f800000;  /* Bits 23-29 (bit 30 is lost) */
++	sign = a & 0x80000000;  /* Bit 31 */
++
++	/* Shift and recombine */
++	b  = sign >> 8;  /* Fills bit 23 */
++	b |= expo >> 7;  /* Fills bits 16-22 */
++	b |= mant >> 7;  /* Fills bits 0-15 */
++
++	return b;
++}
+diff --git a/src/mesa/drivers/dri/glamo/glamo_context.h b/src/mesa/drivers/dri/glamo/glamo_context.h
+new file mode 100644
+index 0000000..8de3946
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_context.h
+@@ -0,0 +1,106 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on sis_context.h (c) 2003 Eric Anholt
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __GLAMO_CONTEXT_H
++#define __GLAMO_CONTEXT_H
++
++
++#include "dri_util.h"
++#include "utils.h"
++#include "tnl/t_vertex.h"
++
++#include "glamo_screen.h"
++
++
++typedef struct glamo_context glamoContext;
++typedef struct glamo_context *glamoContextPtr;
++
++struct glamo_context {
++
++	struct gl_context *glCtx;                  /* Must be first in this structure */
++
++	int drm_fd;                        /* DRM fd */
++
++	__DRIcontext  *driContext;  /* DRI context */
++	__DRIscreen   *driScreen;   /* DRI screen */
++	__DRIdrawable *driDrawable; /* DRI drawable bound to this ctx */
++
++	glamoScreenPtr glamoScreen;        /* Screen private DRI data */
++
++	driOptionCache optionCache;
++
++	uint16_t *cmdq_drm;                /* Command queue cache */
++	uint16_t cmd_burst_base;
++	int cmdq_drm_used;
++	int cmdq_drm_size;
++	int cmdq_obj_used;
++	uint32_t *cmdq_objs;
++	unsigned int *cmdq_obj_pos;
++
++	/* Information about the current primitive */
++	struct {
++		GLuint id;
++		uint32_t primitive;	/* Current hardware primitive type */
++		struct glamo_bo *vb_bo;
++		uint8_t *vb;
++		unsigned int start_offset; /* Byte offset of start */
++		unsigned int current_offset; /* Byte offset of next vertex */
++		unsigned int count;	/* Number of vertices */
++	} prim;
++
++	/* Current vertex format and attributes */
++	int vertex_size;
++	struct tnl_attr_map vertex_attrs[VERT_ATTRIB_MAX];
++
++	/* State */
++	GLuint new_state;      /* State which must be updated */
++	uint16_t col_clear;
++
++};
++
++#define GLAMO_CONTEXT(ctx) ((glamoContextPtr)(ctx->DriverCtx))
++
++#define TAG(x) glamo##x
++#include "tnl_dd/t_dd_vertex.h"
++#undef TAG
++
++extern GLboolean glamoCreateContext(const struct gl_config *glVis,
++                                    __DRIcontext *driContextPriv,
++                                    void *sharedContextPrivate);
++extern void glamoDestroyContext(__DRIcontext *dcp);
++extern GLboolean glamoMakeCurrent(__DRIcontext *driContextPriv,
++                                  __DRIdrawable *driDrawPriv,
++                                  __DRIdrawable *driReadPriv);
++extern GLboolean glamoUnbindContext(__DRIcontext *driContextPriv);
++extern void glamo_update_renderbuffers(__DRIcontext *context,
++                                       __DRIdrawable *drawable);
++
++#define GLAMO_PACKCOLOR565(r, g, b) \
++	((((r) & 0xf8) << 8)        \
++	| (((g) & 0xfc) << 3)       \
++	| (((b) & 0xf8) >> 3))
++
++extern uint32_t float7s16(GLfloat in);
++
++#endif   /* __GLAMO_CONTEXT_H */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_fbo.c b/src/mesa/drivers/dri/glamo/glamo_fbo.c
+new file mode 100644
+index 0000000..e25ca31
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_fbo.c
+@@ -0,0 +1,130 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on radeon_fbo.c (c) 2008 Red Hat Inc
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++
++#include "main/imports.h"
++#include "main/macros.h"
++#include "main/mtypes.h"
++#include "main/formats.h"
++#include "main/fbobject.h"
++#include "main/framebuffer.h"
++#include "main/renderbuffer.h"
++#include "main/context.h"
++#include "dri_util.h"
++
++/* This comes from libdrm_glamo */
++#include <glamo_bo.h>
++
++#include "glamo_fbo.h"
++
++
++static void glamo_delete_renderbuffer(struct gl_renderbuffer *rb)
++{
++   struct glamo_renderbuffer *grb = glamo_renderbuffer(rb);
++
++   ASSERT(grb);
++
++   if ( grb && grb->bo ) {
++      glamo_bo_unref(grb->bo);
++   }
++   free(grb);
++}
++
++
++static void *glamo_get_pointer(struct gl_context *ctx, struct gl_renderbuffer *rb,
++                               GLint x, GLint y)
++{
++   return NULL;   /* Can't be directly addressed */
++}
++
++
++/* Called for each hardware renderbuffer when a _window_ is resized.
++ * Just update fields.
++ * Not used for user-created renderbuffers!
++ */
++static GLboolean glamo_alloc_window_storage(struct gl_context *ctx,
++                                            struct gl_renderbuffer *rb,
++                                            GLenum internalFormat,
++                                            GLuint width, GLuint height)
++{
++   ASSERT(rb->Name == 0);
++   rb->Width = width;
++   rb->Height = height;
++   rb->Format = internalFormat;
++   return GL_TRUE;
++}
++
++
++/* Create a buffer, such as a colour or depth buffer */
++struct glamo_renderbuffer *glamo_create_renderbuffer(GLenum format,
++                                              __DRIdrawable *driDrawPriv)
++{
++   struct glamo_renderbuffer *grb;
++
++   grb = CALLOC_STRUCT(glamo_renderbuffer);
++   if ( !grb ) return NULL;
++
++   _mesa_init_renderbuffer(&grb->base, 0);
++   grb->base.ClassID = GLAMO_RB_CLASS;
++
++   switch (format) {
++      case GL_RGB5:
++         grb->base.Format = MESA_FORMAT_RGB565;
++         grb->base._BaseFormat = GL_RGB;
++
++         grb->base.DataType = GL_UNSIGNED_BYTE;
++         break;
++      case GL_DEPTH_COMPONENT16:
++         grb->base.DataType = GL_UNSIGNED_SHORT;
++	 grb->base._BaseFormat = GL_DEPTH_COMPONENT;
++         break;
++      default:
++         fprintf(stderr, "%s: Unknown format 0x%04x\n", __FUNCTION__, format);
++         _mesa_delete_renderbuffer(&grb->base);
++         return NULL;
++   }
++
++   grb->dPriv = driDrawPriv;
++   grb->base.InternalFormat = format;
++
++   grb->base.Delete = glamo_delete_renderbuffer;
++   grb->base.AllocStorage = glamo_alloc_window_storage;
++   grb->base.GetPointer = glamo_get_pointer;
++
++   return grb;
++}
++
++
++void glamo_renderbuffer_set_bo(struct glamo_renderbuffer *grb,
++                               struct glamo_bo *bo)
++{
++  struct glamo_bo *old;
++  old = grb->bo;
++  grb->bo = bo;
++  glamo_bo_ref(bo);
++  if ( old ) glamo_bo_unref(old);
++}
++
++
++/* kate: space-indent on; indent-width 3; mixedindent off; indent-mode cstyle; */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_fbo.h b/src/mesa/drivers/dri/glamo/glamo_fbo.h
+new file mode 100644
+index 0000000..48210dd
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_fbo.h
+@@ -0,0 +1,77 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __GLAMO_FBO_H
++#define __GLAMO_FBO_H
++
++
++#include "main/mtypes.h"
++#include "dri_util.h"
++
++
++/* This is just a marker so we can tell a Glamo renderbuffer from a Mesa one */
++#define GLAMO_RB_CLASS (0xdeadbeef)
++
++
++struct glamo_renderbuffer
++{
++	struct gl_renderbuffer base;   /* Must be first */
++	struct glamo_bo *bo;
++	unsigned int cpp;
++	unsigned int pitch;
++	unsigned int width;
++	unsigned int height;
++
++	__DRIdrawable *dPriv;
++};
++
++
++struct glamo_framebuffer
++{
++	struct gl_framebuffer base;
++	struct glamo_renderbuffer *color_rb[2];
++};
++
++
++/* This is just a small wrapper function to return NULL if the gl_renderbuffer
++ * is not a glamo_renderbuffer */
++static inline struct glamo_renderbuffer
++                                 *glamo_renderbuffer(struct gl_renderbuffer *rb)
++{
++	struct glamo_renderbuffer *grb = (struct glamo_renderbuffer *)rb;
++	if ( grb && grb->base.ClassID == GLAMO_RB_CLASS )
++		return grb;
++	else
++		return NULL;
++}
++
++
++extern struct glamo_renderbuffer *glamo_create_renderbuffer(GLenum format,
++                                             __DRIdrawable *driDrawPriv);
++
++extern void glamo_renderbuffer_set_bo(struct glamo_renderbuffer *grb,
++                               struct glamo_bo *bo);
++
++#endif   /* __GLAMO_FBO_H */
++
++/* kate: space-indent on; indent-width 3; mixedindent off; indent-mode cstyle; */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_regs.h b/src/mesa/drivers/dri/glamo/glamo_regs.h
+new file mode 100644
+index 0000000..02b2294
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_regs.h
+@@ -0,0 +1,174 @@
++#ifndef _GLAMO_REGS_H
++#define _GLAMO_REGS_H
++
++/* Smedia Glamo 336x/337x driver
++ *
++ * (C) 2007 by OpenMoko, Inc.
++ * Author: Harald Welte <laforge@openmoko.org>
++ * All rights reserved.
++ *
++ * Modified for Glamo Mesa driver by Thomas White <taw@bitwiz.org.uk>
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License as
++ * published by the Free Software Foundation; either version 2 of
++ * the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
++ * MA 02111-1307 USA
++ */
++
++enum glamo_regster_offsets {
++	GLAMO_REGOFS_GENERIC	= 0x0000,
++	GLAMO_REGOFS_HOSTBUS	= 0x0200,
++	GLAMO_REGOFS_MEMORY	= 0x0300,
++	GLAMO_REGOFS_VIDCAP	= 0x0400,
++	GLAMO_REGOFS_ISP	= 0x0500,
++	GLAMO_REGOFS_JPEG	= 0x0800,
++	GLAMO_REGOFS_MPEG	= 0x0c00,
++	GLAMO_REGOFS_LCD	= 0x1100,
++	GLAMO_REGOFS_MMC	= 0x1400,
++	GLAMO_REGOFS_MPROC0	= 0x1500,
++	GLAMO_REGOFS_MPROC1	= 0x1580,
++	GLAMO_REGOFS_CMDQUEUE	= 0x1600,
++	GLAMO_REGOFS_RISC	= 0x1680,
++	GLAMO_REGOFS_2D		= 0x1700,
++	GLAMO_REGOFS_3D		= 0x1b00,
++};
++
++
++#define REG_MPEG(x)           (GLAMO_REGOFS_MPEG+(x))
++
++enum glamo_register_mpeg {
++      //
++      GLAMO_REG_MPEG_DC_ADDRL         = REG_MPEG(0x3c),
++      GLAMO_REG_MPEG_DC_ADDRH         = REG_MPEG(0x3e),
++      GLAMO_REG_MPEG_AC_ADDRL         = REG_MPEG(0x40),
++      GLAMO_REG_MPEG_AC_ADDRH         = REG_MPEG(0x42),
++      //
++      GLAMO_REG_MPEG_SAFE_1           = REG_MPEG(0x60),
++      GLAMO_REG_MPEG_SAFE_2           = REG_MPEG(0x62),
++      GLAMO_REG_MPEG_SAFE_3           = REG_MPEG(0x64),
++      //
++      GLAMO_REG_MPEG_DEC_OUT0_Y_ADDRL = REG_MPEG(0x6e),
++      GLAMO_REG_MPEG_DEC_OUT0_Y_ADDRH = REG_MPEG(0x70),
++      GLAMO_REG_MPEG_DEC_OUT0_U_ADDRL = REG_MPEG(0x72),
++      GLAMO_REG_MPEG_DEC_OUT0_U_ADDRH = REG_MPEG(0x74),
++      GLAMO_REG_MPEG_DEC_OUT0_V_ADDRL = REG_MPEG(0x76),
++      GLAMO_REG_MPEG_DEC_OUT0_V_ADDRH = REG_MPEG(0x78),
++      GLAMO_REG_MPEG_DEC_OUT1_Y_ADDRL = REG_MPEG(0x7a),
++      GLAMO_REG_MPEG_DEC_OUT1_Y_ADDRH = REG_MPEG(0x7c),
++      GLAMO_REG_MPEG_DEC_OUT1_U_ADDRL = REG_MPEG(0x7e),
++      GLAMO_REG_MPEG_DEC_OUT1_U_ADDRH = REG_MPEG(0x80),
++      GLAMO_REG_MPEG_DEC_OUT1_V_ADDRL = REG_MPEG(0x82),
++      GLAMO_REG_MPEG_DEC_OUT1_V_ADDRH = REG_MPEG(0x84),
++      GLAMO_REG_MPEG_DEC_OUT2_Y_ADDRL = REG_MPEG(0x86),
++      GLAMO_REG_MPEG_DEC_OUT2_Y_ADDRH = REG_MPEG(0x88),
++      GLAMO_REG_MPEG_DEC_OUT2_U_ADDRL = REG_MPEG(0x8a),
++      GLAMO_REG_MPEG_DEC_OUT2_U_ADDRH = REG_MPEG(0x8c),
++      GLAMO_REG_MPEG_DEC_OUT2_V_ADDRL = REG_MPEG(0x8e),
++      GLAMO_REG_MPEG_DEC_OUT2_V_ADDRH = REG_MPEG(0x90),
++      GLAMO_REG_MPEG_DEC_WIDTH        = REG_MPEG(0x92),
++      GLAMO_REG_MPEG_DEC_HEIGHT       = REG_MPEG(0x94),
++      GLAMO_REG_MPEG_SPECIAL          = REG_MPEG(0x96),
++      GLAMO_REG_MPEG_DEC_IN_ADDRL     = REG_MPEG(0x98),
++      GLAMO_REG_MPEG_DEC_IN_ADDRH     = REG_MPEG(0x9a),
++      //
++      GLAMO_REG_MPEG_DEBLK_THRESHOLD  = REG_MPEG(0xc0),
++      //
++      GLAMO_REG_MPEG_DEC_STATUS       = REG_MPEG(0xc8),
++      GLAMO_REG_MPEG_DEC_RB0          = REG_MPEG(0xca),
++      GLAMO_REG_MPEG_DEC_RB1          = REG_MPEG(0xcc),
++};
++
++
++#define REG_2D(x)		(GLAMO_REGOFS_2D+(x))
++
++enum glamo_register_2d {
++	GLAMO_REG_2D_SRC_ADDRL		= REG_2D(0x00),
++	GLAMO_REG_2D_SRC_ADDRH		= REG_2D(0x02),
++	GLAMO_REG_2D_SRC_PITCH		= REG_2D(0x04),
++	GLAMO_REG_2D_SRC_X		= REG_2D(0x06),
++	GLAMO_REG_2D_SRC_Y		= REG_2D(0x08),
++	GLAMO_REG_2D_DST_X		= REG_2D(0x0a),
++	GLAMO_REG_2D_DST_Y		= REG_2D(0x0c),
++	GLAMO_REG_2D_DST_ADDRL		= REG_2D(0x0e),
++	GLAMO_REG_2D_DST_ADDRH		= REG_2D(0x10),
++	GLAMO_REG_2D_DST_PITCH		= REG_2D(0x12),
++	GLAMO_REG_2D_DST_HEIGHT		= REG_2D(0x14),
++	GLAMO_REG_2D_RECT_WIDTH		= REG_2D(0x16),
++	GLAMO_REG_2D_RECT_HEIGHT	= REG_2D(0x18),
++	GLAMO_REG_2D_PAT_ADDRL		= REG_2D(0x1a),
++	GLAMO_REG_2D_PAT_ADDRH		= REG_2D(0x1c),
++	GLAMO_REG_2D_PAT_FG		= REG_2D(0x1e),
++	GLAMO_REG_2D_PAT_BG		= REG_2D(0x20),
++	GLAMO_REG_2D_SRC_FG		= REG_2D(0x22),
++	GLAMO_REG_2D_SRC_BG		= REG_2D(0x24),
++	GLAMO_REG_2D_MASK1		= REG_2D(0x26),
++	GLAMO_REG_2D_MASK2		= REG_2D(0x28),
++	GLAMO_REG_2D_MASK3		= REG_2D(0x2a),
++	GLAMO_REG_2D_MASK4		= REG_2D(0x2c),
++	GLAMO_REG_2D_ROT_X		= REG_2D(0x2e),
++	GLAMO_REG_2D_ROT_Y		= REG_2D(0x30),
++	GLAMO_REG_2D_LEFT_CLIP		= REG_2D(0x32),
++	GLAMO_REG_2D_TOP_CLIP		= REG_2D(0x34),
++	GLAMO_REG_2D_RIGHT_CLIP		= REG_2D(0x36),
++	GLAMO_REG_2D_BOTTOM_CLIP	= REG_2D(0x38),
++	GLAMO_REG_2D_COMMAND1		= REG_2D(0x3A),
++	GLAMO_REG_2D_COMMAND2		= REG_2D(0x3C),
++	GLAMO_REG_2D_COMMAND3		= REG_2D(0x3E),
++	GLAMO_REG_2D_SAFE		= REG_2D(0x40),
++	GLAMO_REG_2D_STATUS		= REG_2D(0x42),
++	GLAMO_REG_2D_ID1		= REG_2D(0x44),
++	GLAMO_REG_2D_ID2		= REG_2D(0x46),
++	GLAMO_REG_2D_ID3		= REG_2D(0x48),
++};
++
++
++/* No offset this time */
++#define REG_3D(x)		(x)
++
++enum glamo_register_3d
++{
++	/* Fire the engine */
++	G3D_FIRE			= REG_3D(0x2058),
++
++	/* Streams of vertex/colour/normal/texcoord data */
++	G3D_ACTIVE_STREAMS		= REG_3D(0x1f00),
++	G3D_LAST_STREAM__VCOLFMT	= REG_3D(0x2030),
++	G3D_STREAM_MODE_0		= REG_3D(0x1f10),
++	G3D_STREAM_BASE_0		= REG_3D(0x1f14),
++	G3D_STREAM_MODE_1		= REG_3D(0x1f18),
++	G3D_STREAM_BASE_1		= REG_3D(0x1f1c),
++	G3D_STREAM_MODE_2		= REG_3D(0x1f20),
++	G3D_STREAM_BASE_2		= REG_3D(0x1f24),
++	G3D_STREAM_MODE_3		= REG_3D(0x1f28),
++	G3D_STREAM_BASE_3		= REG_3D(0x1f2c),
++	G3D_STREAM_MODE_4		= REG_3D(0x1f30),
++	G3D_STREAM_BASE_4		= REG_3D(0x1f34),
++	G3D_STREAM_MODE_5		= REG_3D(0x1f38),
++	G3D_STREAM_BASE_5		= REG_3D(0x1f3c),
++	G3D_STREAM_MODE_6		= REG_3D(0x1f40),
++	G3D_STREAM_BASE_6		= REG_3D(0x1f44),
++	G3D_STREAM_MODE_7		= REG_3D(0x1f48),
++	G3D_STREAM_BASE_7		= REG_3D(0x1f4c),
++
++	/* Modelview*projection matrix */
++	G3D_MATRIX_MVP			= REG_3D(0x26a0), /* .. 0x27df */
++
++	/* Modelview matrix */
++	G3D_MATRIX_MV			= REG_3D(0x26e0), /* .. 0x270f */
++
++	/* Inverse MVP, 3x3 only */
++	G3D_MATRIX_IMVP			= REG_3D(0x2710), /* .. 0x2733 */
++
++};
++
++#endif /* _GLAMO_REGS_H */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_render.c b/src/mesa/drivers/dri/glamo/glamo_render.c
+new file mode 100644
+index 0000000..d8b21d5
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_render.c
+@@ -0,0 +1,230 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ *
++ *
++ * Based on intel_render.c, to which the following notice applies:
++ *
++ * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
++ * All Rights Reserved.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the
++ * "Software"), to deal in the Software without restriction, including
++ * without limitation the rights to use, copy, modify, merge, publish,
++ * distribute, sub license, and/or sell copies of the Software, and to
++ * permit persons to whom the Software is furnished to do so, subject to
++ * the following conditions:
++ *
++ * The above copyright notice and this permission notice (including the
++ * next paragraph) shall be included in all copies or substantial portions
++ * of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
++ * IN NO EVENT SHALL TUNGSTEN GRAPHICS AND/OR ITS SUPPLIERS BE LIABLE FOR
++ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ *
++ */
++
++
++/*
++ * Render unclipped vertex buffers by emitting vertices directly to
++ * dma buffers.  Use strip/fan hardware acceleration where possible.
++ *
++ */
++#include "main/glheader.h"
++#include "main/context.h"
++#include "main/macros.h"
++#include "main/imports.h"
++#include "main/mtypes.h"
++#include "main/enums.h"
++
++#include "tnl/t_context.h"
++#include "tnl/t_vertex.h"
++#include "tnl/t_pipeline.h"
++#include "math/m_xform.h"
++
++#include "glamo_context.h"
++#include "glamo_tris.h"
++#include "glamo_regs.h"
++
++/*
++ * Render unclipped vertex buffers by emitting vertices directly to
++ * VRAM buffers.  Use strip/fan hardware primitives where possible.
++ * Try to simulate missing primitives with indexed vertices.
++ */
++#define HAVE_POINTS      1
++#define HAVE_LINES       1
++#define HAVE_LINE_STRIPS 0
++#define HAVE_TRIANGLES   1
++#define HAVE_TRI_STRIPS  0
++#define HAVE_TRI_STRIP_1 0
++#define HAVE_TRI_FANS    0
++#define HAVE_POLYGONS    0
++#define HAVE_QUADS       0
++#define HAVE_QUAD_STRIPS 0
++#define HAVE_ELTS        0
++
++
++static void glamoFlushPrim(struct glamo_context *gCtx)
++{
++	printf("glamoFlushPrim: %i vertices, %i %i\n", gCtx->prim.count,
++	gCtx->prim.start_offset, gCtx->prim.current_offset);
++
++	if ( gCtx->prim.vb_bo == NULL ) return;
++
++	/* Upload to hardware */
++	glamo_bo_subdata(gCtx->prim.vb_bo, 0, gCtx->prim.current_offset,
++	                 gCtx->prim.vb);
++
++	/* Dispatch to the hardware */
++	glamoDRMStartBurst(gCtx, G3D_STREAM_MODE_0);
++	glamoDRMAddData(gCtx, 0x000f0300, 4);
++	glamoDRMAddBO(gCtx, gCtx->prim.vb_bo);
++	glamoDRMDispatch(gCtx);
++
++	/* Please use a new BO for the next buffer */
++	gCtx->prim.vb_bo = NULL;
++
++	/* Continue from new start */
++	gCtx->prim.start_offset = gCtx->prim.current_offset;
++}
++
++
++static inline GLuint glamoGetVBMax(struct glamo_context *gCtx)
++{
++	return GLAMO_VB_SIZE / gCtx->vertex_size;
++}
++
++
++static inline GLuint glamoGetCurrentMax(struct glamo_context *gCtx)
++{
++	/* How many more vertices can be accommodated?
++	 * Each vertex takes up 4x 32-bit fixed point values */
++	return (GLAMO_VB_SIZE - gCtx->prim.current_offset) / gCtx->vertex_size;
++}
++
++
++#define LOCAL_VARS \
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++
++#define INIT(prim)
++
++#define FLUSH() glamoFlushPrim(gCtx)
++
++#define GET_SUBSEQUENT_VB_MAX_VERTS() glamoGetVBMax(gCtx)
++#define GET_CURRENT_VB_MAX_VERTS() glamoGetCurrentMax(gCtx)
++
++#define ALLOC_VERTS(nr) glamoGetPrimSpace(gCtx, nr)
++
++#define EMIT_VERTS(ctx, j, nr, buf) \
++	_tnl_emit_vertices_to_buffer(ctx, j, (j)+(nr), buf)
++
++#define TAG(x) glamo_##x
++#include "tnl_dd/t_dd_dmatmp.h"
++
++
++/**********************************************************************/
++/*                          Render pipeline stage                     */
++/**********************************************************************/
++
++static void glamoFireEngine(struct glamo_context *gCtx)
++{
++	glamoDRMStartBurst(gCtx, G3D_FIRE);
++	glamoDRMAddData(gCtx, 0, 2);  /* Fire! */
++	glamoDRMDispatch(gCtx);
++}
++
++
++static GLboolean glamoRunRender(struct gl_context *ctx,
++                                struct tnl_pipeline_stage *stage)
++{
++	TNLcontext *tnl = TNL_CONTEXT(ctx);
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++	struct vertex_buffer *VB = &tnl->vb;
++	GLuint i;
++
++	printf("glamoRunRender\n");
++
++	/* Don't handle clipping */
++	if ( !glamo_validate_render(ctx, VB) ) {
++		return GL_TRUE; /* Failed */
++	}
++
++	/* Validate GPU state */
++	if ( gCtx->new_state ) {
++		if ( !glamoValidateState(ctx, gCtx->new_state) ) {
++			printf("Couldn't validate state...\n");
++		}
++	} /* else nothing to update */
++
++	tnl->clipspace.new_inputs |= VERT_BIT_POS;
++
++	tnl->Driver.Render.Start(ctx);
++
++	for ( i=0; i<VB->PrimitiveCount; i++ ) {
++
++		GLuint prim = _tnl_translate_prim(&VB->Primitive[i]);
++		GLuint start = VB->Primitive[i].start;
++		GLuint length = VB->Primitive[i].count;
++
++		if (!length) continue;
++
++		glamo_render_tab_verts[prim & PRIM_MODE_MASK](ctx, start,
++                                                     start + length, prim);
++
++	}
++
++	tnl->Driver.Render.Finish(ctx);
++
++	glamoFireEngine(gCtx);
++
++	return GL_FALSE;  /* Ok */
++}
++
++
++static const struct tnl_pipeline_stage _glamo_render_stage = {
++	"glamo render",
++	NULL,
++	NULL,
++	NULL,
++	NULL,
++	glamoRunRender
++};
++
++
++const struct tnl_pipeline_stage *glamo_pipeline[] = {
++	&_tnl_vertex_transform_stage,
++	&_tnl_normal_transform_stage,
++	&_tnl_lighting_stage,
++	&_tnl_fog_coordinate_stage,
++	&_tnl_texgen_stage,
++	&_tnl_texture_transform_stage,
++	&_tnl_point_attenuation_stage,
++	&_tnl_vertex_program_stage,
++	&_glamo_render_stage,        /* ADD: unclipped rastersetup-to-dma */
++	&_tnl_render_stage,
++	0,
++};
+diff --git a/src/mesa/drivers/dri/glamo/glamo_render.h b/src/mesa/drivers/dri/glamo/glamo_render.h
+new file mode 100644
+index 0000000..99c36a8
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_render.h
+@@ -0,0 +1,31 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __GLAMO_RENDER_H
++#define __GLAMO_RENDER_H
++
++#include "main/mtypes.h"
++
++extern const struct tnl_pipeline_stage *glamo_pipeline[];
++
++#endif   /* __GLAMO_RENDER_H */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_screen.c b/src/mesa/drivers/dri/glamo/glamo_screen.c
+new file mode 100644
+index 0000000..cc8a730
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_screen.c
+@@ -0,0 +1,250 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on sis_screen.c (c) 2003 Eric Anholt
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++
++#include "dri_util.h"
++#include "utils.h"
++#include "xmlconfig.h"
++#include "GL/internal/dri_interface.h"
++#include "main/framebuffer.h"
++#include "main/renderbuffer.h"
++
++#include "glamo_screen.h"
++#include "glamo_context.h"
++#include "glamo_fbo.h"
++
++/* This comes from libdrm_glamo */
++#include <glamo_bo_gem.h>
++
++
++static int glamoInitDriver(__DRIscreen *psp)
++{
++   return 0;
++}
++
++
++static glamoScreenPtr glamoCreateScreen(__DRIscreen *sPriv)
++{
++   glamoScreenPtr glamoScreen;
++
++   /* Allocate the private area */
++   glamoScreen = (glamoScreenPtr)CALLOC(sizeof(*glamoScreen));
++   if ( glamoScreen == NULL )
++      return NULL;
++
++   glamoScreen->driScreen = sPriv;
++
++   /* This is our link to the kernel's memory manager, via libdrm */
++   glamoScreen->bom = glamo_bo_manager_gem_ctor(sPriv->fd);
++
++   return glamoScreen;
++}
++
++
++static void glamoDestroyScreen(__DRIscreen *sPriv)
++{
++   glamoScreenPtr glamoScreen = (glamoScreenPtr)sPriv->private;
++
++   if ( glamoScreen == NULL )
++      return;
++
++   FREE(glamoScreen);
++   sPriv->private = NULL;
++}
++
++
++static const __DRIconfig **glamoInitScreen(__DRIscreen *sPriv)
++{
++   __DRIconfig **configs;
++   uint8_t depth_bits_array[2];
++   uint8_t stencil_bits_array[2];
++   uint8_t msaa_samples_array[1];
++   static const GLenum db_modes[] = { GLX_SWAP_COPY_OML, GLX_NONE };
++
++   /* Driver initialisation */
++   if ( glamoInitDriver(sPriv) ) {
++      return NULL;
++   }
++
++   /* Screen-specific initialisation */
++   sPriv->private = glamoCreateScreen(sPriv);
++   if ( !sPriv->private ) {
++      glamoDestroyScreen(sPriv);
++      return NULL;
++   }
++
++   depth_bits_array[0] = 0;
++   stencil_bits_array[0] = 0;
++   depth_bits_array[1] = 16;
++   stencil_bits_array[1] = 0;
++   msaa_samples_array[0] = 0;
++
++   configs = driCreateConfigs(GL_RGB, GL_UNSIGNED_SHORT_5_6_5,
++                           depth_bits_array, stencil_bits_array, 2,
++                           db_modes, 2, msaa_samples_array, 1, GL_TRUE);
++
++   if ( configs == NULL ) {
++      fprintf(stderr, "[%s:%u] Error creating FBConfig!\n", __func__, __LINE__);
++      return NULL;
++   }
++
++   return (const __DRIconfig **)configs;
++}
++
++
++static const __DRIconfig **glamoInitScreen2(__DRIscreen *sPriv)
++{
++   __DRIconfig **configs;
++   uint8_t depth_bits_array[2];
++   uint8_t stencil_bits_array[2];
++   uint8_t msaa_samples_array[1];
++   static const GLenum db_modes[] = { GLX_SWAP_COPY_OML, GLX_NONE };
++
++   /* Driver initialisation */
++   if ( glamoInitDriver(sPriv) ) {
++      return NULL;
++   }
++
++   /* Screen-specific initialisation */
++   sPriv->private = glamoCreateScreen(sPriv);
++   if ( !sPriv->private ) {
++      glamoDestroyScreen(sPriv);
++      return NULL;
++   }
++
++   depth_bits_array[0] = 0;
++   stencil_bits_array[0] = 0;
++   depth_bits_array[1] = 16;
++   stencil_bits_array[1] = 0;
++   msaa_samples_array[0] = 0;
++
++   configs = driCreateConfigs(GL_RGB, GL_UNSIGNED_SHORT_5_6_5,
++                           depth_bits_array, stencil_bits_array, 2,
++                           db_modes, 2, msaa_samples_array, 1, GL_TRUE);
++
++   if ( configs == NULL ) {
++      fprintf(stderr, "[%s:%u] Error creating FBConfig!\n", __func__, __LINE__);
++      return NULL;
++   }
++
++   return (const __DRIconfig **)configs;
++}
++
++
++/* Allocate buffers for a context.  This is where the fun starts... */
++static GLboolean glamoCreateBuffer(__DRIscreen *driScrnPriv,
++                                   __DRIdrawable *driDrawPriv,
++                                   const struct gl_config *mesaVis,
++                                   GLboolean isPixmap)
++{
++   struct glamo_framebuffer *gfb;
++   GLenum rgbFormat;
++
++   if ( isPixmap ) return GL_FALSE; /* not implemented */
++
++   gfb = CALLOC_STRUCT(glamo_framebuffer);
++   if ( !gfb ) return GL_FALSE;
++
++   _mesa_initialize_window_framebuffer(&gfb->base, mesaVis);
++
++   /* we only support this one format at the moment */
++   rgbFormat = GL_RGB5;
++
++   /* Front color renderbuffer */
++   gfb->color_rb[0] = glamo_create_renderbuffer(rgbFormat, driDrawPriv);
++   _mesa_add_renderbuffer(&gfb->base, BUFFER_FRONT_LEFT,
++                          &gfb->color_rb[0]->base);
++
++   /* Back color renderbuffer, if requested */
++   if ( mesaVis->doubleBufferMode ) {
++      gfb->color_rb[1] = glamo_create_renderbuffer(rgbFormat, driDrawPriv);
++      _mesa_add_renderbuffer(&gfb->base, BUFFER_BACK_LEFT,
++                             &gfb->color_rb[1]->base);
++   }
++
++   if ( mesaVis->depthBits == 16 ) {
++      struct glamo_renderbuffer *depth;
++      depth = glamo_create_renderbuffer(GL_DEPTH_COMPONENT16, driDrawPriv);
++      _mesa_add_renderbuffer(&gfb->base, BUFFER_DEPTH, &depth->base);
++   }
++
++   /* Add software renderbuffers for the things we can't support in hardware */
++   _mesa_add_soft_renderbuffers(&gfb->base,
++      GL_FALSE,  /* color */
++      GL_FALSE,  /* depth */
++      mesaVis->stencilBits > 0,   /* stencil, if required */
++      mesaVis->accumRedBits > 0,  /* accum, if required */
++      GL_FALSE,  /* alpha */
++      GL_FALSE   /* aux */
++   );
++   driDrawPriv->driverPrivate = (void *)gfb;
++
++   return (driDrawPriv->driverPrivate != NULL);
++}
++
++
++static void glamoDestroyBuffer(__DRIdrawable *driDrawPriv)
++{
++}
++
++
++static void glamoSwapBuffers(__DRIdrawable *driDrawPriv)
++{
++   printf("glamoSwapBuffers\n"); fflush(stdout);
++}
++
++
++/*
++ *  Mesa entry points
++ *
++ *  See src/mesa/drivers/dri/common/dri_util.h for information about these
++ */
++const struct __DriverAPIRec driDriverAPI = {
++   .InitScreen      = glamoInitScreen,
++   .DestroyScreen   = glamoDestroyScreen,
++   .CreateContext   = glamoCreateContext,
++   .DestroyContext  = glamoDestroyContext,
++   .CreateBuffer    = glamoCreateBuffer,
++   .DestroyBuffer   = glamoDestroyBuffer,
++   .SwapBuffers     = glamoSwapBuffers,
++   .MakeCurrent     = glamoMakeCurrent,
++   .UnbindContext   = glamoUnbindContext,
++   .GetSwapInfo     = NULL,   /* Not used */
++   .WaitForMSC      = NULL,
++   .WaitForSBC      = NULL,
++   .SwapBuffersMSC  = NULL,
++   .CopySubBuffer   = NULL,
++   .GetDrawableMSC  = NULL,   /* Not used */
++   .InitScreen2     = glamoInitScreen2,    /* For DRI2 */
++};
++
++/* This is the table of extensions that the loader will dlsym() for. */
++PUBLIC const __DRIextension *__driDriverExtensions[] = {
++    &driCoreExtension.base,
++    &driLegacyExtension.base,
++    &driDRI2Extension.base,
++    NULL
++};
++
++/* kate: space-indent on; indent-width 3; mixedindent off; indent-mode cstyle; */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_screen.h b/src/mesa/drivers/dri/glamo/glamo_screen.h
+new file mode 100644
+index 0000000..3f2eb5f
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_screen.h
+@@ -0,0 +1,44 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on sis_screen.h (c) 2003 Eric Anholt
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __GLAMO_SCREEN_H
++#define __GLAMO_SCREEN_H
++
++#include "xmlconfig.h"
++#include "dri_util.h"
++
++#include <glamo_bo_gem.h>
++
++typedef struct {
++
++   __DRIscreen *driScreen;
++   driOptionCache optionCache;
++
++   struct glamo_bo_manager *bom;
++
++} glamoScreenRec, *glamoScreenPtr;
++
++#endif   /* __GLAMO_SCREEN_H */
++
++/* kate: space-indent on; indent-width 3; mixedindent off; indent-mode cstyle; */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_state.c b/src/mesa/drivers/dri/glamo/glamo_state.c
+new file mode 100644
+index 0000000..3aa2f8b
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_state.c
+@@ -0,0 +1,305 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009-2010 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on sis_state.c (c) 2003 Eric Anholt
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ *
++ *
++ * Also partially based on intel_fbo.c, to which the following notice applies:
++ *
++ * Copyright 2006 Tungsten Graphics, Inc., Cedar Park, Texas.
++ * All Rights Reserved.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the
++ * "Software"), to deal in the Software without restriction, including
++ * without limitation the rights to use, copy, modify, merge, publish,
++ * distribute, sub license, and/or sell copies of the Software, and to
++ * permit persons to whom the Software is furnished to do so, subject to
++ * the following conditions:
++ *
++ * The above copyright notice and this permission notice (including the
++ * next paragraph) shall be included in all copies or substantial portions
++ * of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
++ * IN NO EVENT SHALL TUNGSTEN GRAPHICS AND/OR ITS SUPPLIERS BE LIABLE FOR
++ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++
++#include "main/context.h"
++#include "main/framebuffer.h"
++#include "main/api_arrayelt.h"
++#include "main/macros.h"
++#include "swrast/swrast.h"
++#include "swrast_setup/swrast_setup.h"
++#include "tnl/tnl.h"
++
++#include "glamo_fbo.h"
++#include "glamo_state.h"
++#include "glamo_context.h"
++#include "glamo_cmdq.h"
++#include "glamo_regs.h"
++
++
++static void glamoResizeBuffers(struct gl_context *ctx, struct gl_framebuffer *fb,
++                               GLuint width, GLuint height)
++{
++	struct glamo_framebuffer *glamo_fb = (struct glamo_framebuffer *)fb;
++	int i;
++
++	_mesa_resize_framebuffer(ctx, fb, width, height);
++
++	fb->Initialized = GL_TRUE; /* XXX remove someday */
++
++	if (fb->Name != 0) {
++		return;
++	}
++
++	/* Make sure all window system renderbuffers are up to date */
++	for (i = 0; i < 2; i++) {
++		struct gl_renderbuffer *rb = &glamo_fb->color_rb[i]->base;
++
++		/* only resize if size is changing */
++		if (rb && (rb->Width != width || rb->Height != height)) {
++			rb->AllocStorage(ctx, rb, rb->InternalFormat,
++		                         width, height);
++		}
++	}
++}
++
++
++static void glamoClear(struct gl_context *ctx, GLbitfield mask)
++{
++	glamoContext *gCtx;
++	struct gl_framebuffer *fb;
++	int i;
++
++	gCtx = GLAMO_CONTEXT(ctx);
++	fb = ctx->DrawBuffer;
++
++	printf("glamoClear (%f %f %f %f)\n", ctx->Color.ClearColor[0],
++	       ctx->Color.ClearColor[1], ctx->Color.ClearColor[2],
++	       ctx->Color.ClearColor[3]); fflush(stdout);
++
++	for (i = 0; i < fb->_NumColorDrawBuffers; i++) {
++
++		struct glamo_renderbuffer *grb;
++
++		grb = glamo_renderbuffer(fb->_ColorDrawBuffers[i]);
++
++		glamoDRMStartBurst(gCtx, GLAMO_REG_2D_DST_X);
++		glamoDRMAddData(gCtx, fb->_Xmin, 2);           /* dest X */
++		glamoDRMAddData(gCtx, fb->_Ymin, 2);           /* dest Y */
++		glamoDRMAddBO(gCtx, grb->bo);                  /* dest L/H */
++		glamoDRMAddData(gCtx, grb->pitch & 0x7ff, 2);  /* dest pitch */
++		glamoDRMAddData(gCtx, grb->height, 2);         /* dest height */
++		glamoDRMAddData(gCtx, fb->_Xmax-fb->_Xmin, 2); /* width */
++		glamoDRMAddData(gCtx, fb->_Ymax-fb->_Ymin, 2); /* height */
++		glamoDRMAddData(gCtx, 0x0000, 2);              /* patt L */
++		glamoDRMAddData(gCtx, 0x0000, 2);              /* patt H */
++		glamoDRMAddData(gCtx, gCtx->col_clear, 2);     /* FG colour */
++		glamoDRMDispatch(gCtx);
++
++		glamoDRMStartBurst(gCtx, GLAMO_REG_2D_COMMAND1);
++		glamoDRMAddData(gCtx, 0x0000, 2);    /* Cmd param 1 */
++		glamoDRMAddData(gCtx, 0xf0 << 8, 2); /* Cmd param 2 */
++		glamoDRMAddData(gCtx, 0x0000, 2);    /* Cmd param 3 */
++		glamoDRMDispatch(gCtx);
++
++	}
++}
++
++
++static void glamoClearColor(struct gl_context *ctx, const GLfloat color[4])
++{
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++	GLubyte col_byte[4];
++
++	printf("glamoClearColor (%f %f %f %f)\n", color[0], color[1], color[2],
++	       color[3]); fflush(stdout);
++
++	CLAMPED_FLOAT_TO_UBYTE(col_byte[0], color[0]);
++	CLAMPED_FLOAT_TO_UBYTE(col_byte[1], color[1]);
++	CLAMPED_FLOAT_TO_UBYTE(col_byte[2], color[2]);
++	CLAMPED_FLOAT_TO_UBYTE(col_byte[3], color[3]);
++
++	gCtx->col_clear = GLAMO_PACKCOLOR565(col_byte[0], col_byte[1],
++	                                     col_byte[2]);
++}
++
++
++static void glamoShadeModel(struct gl_context *ctx, GLenum mode)
++{
++	printf("glamoShadeModel\n"); fflush(stdout);
++}
++
++
++static void glamoViewport(struct gl_context *ctx, GLint x, GLint y,
++                          GLsizei width, GLsizei height )
++{
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++	__DRIcontext *driContext = gCtx->driContext;
++	void (*old_viewport)(struct gl_context *ctx, GLint x, GLint y,
++			 GLsizei w, GLsizei h);
++
++	if ( !driContext->driScreenPriv->dri2.enabled ) return;
++
++	/* TODO: Flush before fiddling with fake front buffer */
++
++	if ( ctx->DrawBuffer->Name == 0 ) {
++
++		glamo_update_renderbuffers(driContext,
++		                           driContext->driDrawablePriv);
++		if ( driContext->driDrawablePriv
++		                              != driContext->driReadablePriv ) {
++			glamo_update_renderbuffers(driContext,
++				                   driContext->driReadablePriv);
++		}
++
++	}
++
++	old_viewport = ctx->Driver.Viewport;
++	ctx->Driver.Viewport = NULL;
++	gCtx->driDrawable = driContext->driDrawablePriv;
++	ctx->Driver.Viewport = old_viewport;
++}
++
++
++static void glamoUploadMatrix(struct glamo_context *gCtx, uint16_t mreg,
++                              GLfloat *matrix)
++{
++	int i;
++	char *type;
++
++	switch ( mreg ) {
++	case G3D_MATRIX_MVP :
++		type = "MVP"; break;
++	case G3D_MATRIX_MV :
++		type = "MV"; break;
++	case G3D_MATRIX_IMVP :
++		type = "inverse MVP"; break;
++	default :
++		type = "unknown"; break;
++	}
++	printf("Uploading %s matrix...\n", type);
++
++	glamoDRMStartBurst(gCtx, mreg);
++	if ( mreg != G3D_MATRIX_IMVP ) {
++		for ( i=0; i<16; i++ ) {
++			glamoDRMAddData(gCtx, float7s16(matrix[i]), 4);
++		}
++	} else {
++		/* Normal matrix needs special treatment */
++		for ( i=0; i<3; i++ ) {
++			glamoDRMAddData(gCtx, float7s16(matrix[4*i]), 4);
++			glamoDRMAddData(gCtx, float7s16(matrix[4*i+1]), 4);
++			glamoDRMAddData(gCtx, float7s16(matrix[4*i+2]), 4);
++		}
++	}
++	glamoDRMDispatch(gCtx);
++}
++
++
++GLboolean glamoValidateState(struct gl_context *ctx, GLuint new_state)
++{
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++
++	if ( new_state & (_NEW_MODELVIEW|_NEW_PROJECTION) ) {
++
++		glamoUploadMatrix(gCtx, G3D_MATRIX_MVP,
++		                  ctx->_ModelProjectMatrix.m);
++
++		/* FIXME: The following two aren't needed unless lighting
++		 * is in use... */
++		glamoUploadMatrix(gCtx, G3D_MATRIX_MV,
++		                  ctx->ModelviewMatrixStack.Top->m);
++		_math_matrix_alloc_inv(&(ctx->_ModelProjectMatrix));
++		_math_matrix_analyse(&(ctx->_ModelProjectMatrix));
++		glamoUploadMatrix(gCtx, G3D_MATRIX_IMVP,
++		                  ctx->_ModelProjectMatrix.inv);
++	}
++
++	gCtx->new_state = 0;
++	return GL_TRUE;
++}
++
++
++static void glamoUpdateState(struct gl_context *ctx, GLbitfield new_state)
++{
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++
++	printf("glamoUpdateState\n");
++
++	_swrast_InvalidateState(ctx, new_state);
++	_swsetup_InvalidateState(ctx, new_state);
++	_vbo_InvalidateState(ctx, new_state);
++	_tnl_InvalidateState(ctx, new_state);
++	_ae_invalidate_state(ctx, new_state);
++
++	/* Make a note that some state has changed,
++	 * so that it can be sent to the GPU later. */
++	gCtx->new_state |= new_state;
++}
++
++
++static void glamoFlush(struct gl_context *ctx)
++{
++	printf("glamoFlush\n");
++}
++
++
++void glamoInitStateFuncs(struct gl_context *ctx)
++{
++	ctx->Driver.UpdateState       = glamoUpdateState;
++	ctx->Driver.Clear             = glamoClear;
++	ctx->Driver.ClearColor        = glamoClearColor;
++	ctx->Driver.ClearDepth        = NULL;
++	ctx->Driver.ClearStencil      = NULL;
++	ctx->Driver.AlphaFunc         = NULL;
++	ctx->Driver.BlendFuncSeparate = NULL;
++	ctx->Driver.ColorMask         = NULL;
++	ctx->Driver.CullFace          = NULL;
++	ctx->Driver.DepthMask         = NULL;
++	ctx->Driver.DepthFunc         = NULL;
++	ctx->Driver.DepthRange        = NULL;
++	ctx->Driver.DrawBuffer        = NULL;
++	ctx->Driver.Enable            = NULL;
++	ctx->Driver.FrontFace         = NULL;
++	ctx->Driver.Fogfv             = NULL;
++	ctx->Driver.Hint              = NULL;
++	ctx->Driver.Lightfv           = NULL;
++	ctx->Driver.LogicOpcode       = NULL;
++	ctx->Driver.PolygonMode       = NULL;
++	ctx->Driver.PolygonStipple    = NULL;
++	ctx->Driver.ReadBuffer        = NULL;
++	ctx->Driver.RenderMode        = NULL;
++	ctx->Driver.Scissor           = NULL;
++	ctx->Driver.ShadeModel        = glamoShadeModel;
++	ctx->Driver.LightModelfv      = NULL;
++	ctx->Driver.Viewport          = glamoViewport;
++	ctx->Driver.ResizeBuffers     = glamoResizeBuffers;
++	ctx->Driver.Flush             = glamoFlush;
++}
+diff --git a/src/mesa/drivers/dri/glamo/glamo_state.h b/src/mesa/drivers/dri/glamo/glamo_state.h
+new file mode 100644
+index 0000000..c3872c0
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_state.h
+@@ -0,0 +1,34 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ * Roughly based on sis_state.h (c) 2003 Eric Anholt
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __GLAMO_STATE_H
++#define __GLAMO_STATE_H
++
++#include "main/context.h"
++
++extern void glamoInitStateFuncs(struct gl_context *ctx);
++
++#endif   /* __GLAMO_STATE_H */
++
++/* kate: space-indent on; indent-width 3; mixedindent off; indent-mode cstyle; */
+diff --git a/src/mesa/drivers/dri/glamo/glamo_tris.c b/src/mesa/drivers/dri/glamo/glamo_tris.c
+new file mode 100644
+index 0000000..c45fe53
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_tris.c
+@@ -0,0 +1,310 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ *
++ *
++ * Based on intel_tris.c, to which the following notice applies:
++ *
++ * Copyright 2003 Tungsten Graphics, Inc., Cedar Park, Texas.
++ * All Rights Reserved.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the
++ * "Software"), to deal in the Software without restriction, including
++ * without limitation the rights to use, copy, modify, merge, publish,
++ * distribute, sub license, and/or sell copies of the Software, and to
++ * permit persons to whom the Software is furnished to do so, subject to
++ * the following conditions:
++ *
++ * The above copyright notice and this permission notice (including the
++ * next paragraph) shall be included in all copies or substantial portions
++ * of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
++ * IN NO EVENT SHALL TUNGSTEN GRAPHICS AND/OR ITS SUPPLIERS BE LIABLE FOR
++ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ *
++ */
++
++
++#include <glamo_bo.h>
++#include <glamo_bo_gem.h>
++#include <glamo_drm.h>
++
++#include "main/mtypes.h"
++#include "swrast/swrast.h"
++#include "tnl/t_context.h"
++#include "tnl/t_vertex.h"
++#include "tnl/t_pipeline.h"
++
++#include "glamo_tris.h"
++#include "glamo_context.h"
++
++
++static void glamoRunPipeline(struct gl_context *ctx)
++{
++	printf("glamoRunPipeline\n");
++
++	/* TODO: Emit state */
++
++	_tnl_run_pipeline(ctx);
++}
++
++
++static void glamoRenderStart(struct gl_context *ctx)
++{
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++
++	/* Decide which attributes will be used */
++	gCtx->vertex_attrs[0].attrib = _TNL_ATTRIB_POS;
++	gCtx->vertex_attrs[0].format = EMIT_4F;
++
++	gCtx->vertex_size = _tnl_install_attrs(ctx, gCtx->vertex_attrs, 1,
++	                                       NULL, 0);
++}
++
++
++static void glamoRenderFinish(struct gl_context *ctx)
++{
++	printf("glamoRenderFinish\n");
++}
++
++
++static void glamoPrimitiveNotify(struct gl_context *ctx, GLenum prim)
++{
++	printf("glamoPrimitiveNotify\n");
++}
++
++
++uint32_t *glamoGetPrimSpace(struct glamo_context *gCtx, unsigned int count)
++{
++	uint32_t *addr;
++
++	printf("glamoGetPrimSpace\n");
++
++	/* Check for space in the existing VB */
++	if (gCtx->prim.vb_bo == NULL || (gCtx->prim.current_offset +
++	                           count * gCtx->vertex_size) > GLAMO_VB_SIZE) {
++
++		/* Not enough space, or no VB existing. Start a new one... */
++		if (gCtx->prim.vb == NULL) {
++			printf("Allocated %i bytes\n", GLAMO_VB_SIZE);
++			gCtx->prim.vb = malloc(GLAMO_VB_SIZE);
++		}
++		gCtx->prim.vb_bo = glamo_bo_open(gCtx->glamoScreen->bom, 0,
++		                                 GLAMO_VB_SIZE, 4,
++		                                 GLAMO_GEM_DOMAIN_VRAM, 0);
++		gCtx->prim.start_offset = 0;
++		gCtx->prim.current_offset = 0;
++	}
++
++	addr = (uint32_t *)(gCtx->prim.vb + gCtx->prim.current_offset);
++	gCtx->prim.current_offset += gCtx->vertex_size * count;
++	gCtx->prim.count += count;
++
++	return addr;
++}
++
++
++#define COPY_DWORDS( j, vb, vertsize, v )	\
++do {						\
++   for ( j = 0 ; j < vertsize ; j++ ) {		\
++      vb[j] = ((GLuint *)v)[j];			\
++   }						\
++   vb += vertsize;				\
++} while (0)
++
++
++static void glamo_draw_triangle(struct glamo_context *gCtx,
++                                glamoVertexPtr v0, glamoVertexPtr v1,
++                                glamoVertexPtr v2)
++{
++	GLuint *vb = glamoGetPrimSpace(gCtx, 3);
++	int j;
++
++	COPY_DWORDS(j, vb, gCtx->vertex_size, v0);
++	COPY_DWORDS(j, vb, gCtx->vertex_size, v1);
++	COPY_DWORDS(j, vb, gCtx->vertex_size, v2);
++}
++
++
++static void glamo_draw_line(struct glamo_context *gCtx,
++                            glamoVertexPtr v0, glamoVertexPtr v1)
++{
++	GLuint *vb = glamoGetPrimSpace(gCtx, 2);
++	int j;
++
++	COPY_DWORDS(j, vb, gCtx->vertex_size, v0);
++	COPY_DWORDS(j, vb, gCtx->vertex_size, v1);
++}
++
++
++static void glamo_draw_point(struct glamo_context *gCtx, glamoVertexPtr v0)
++{
++	GLuint *vb = glamoGetPrimSpace(gCtx, 2);
++	int j;
++
++	COPY_DWORDS(j, vb, gCtx->vertex_size, v0);
++}
++
++
++#define TRI( a, b, c )                          \
++do {                                            \
++        glamo_draw_triangle(gCtx, a, b, c  );   \
++} while (0)
++
++
++#define QUAD( a, b, c, d )                      \
++printf("Drawing a quad\n");                     \
++do {                                            \
++        glamo_draw_triangle(gCtx, a, b, d);     \
++        glamo_draw_triangle(gCtx, b, c, d);     \
++} while (0)
++
++
++#define LINE(v0, v1)                            \
++do {                                            \
++        glamo_draw_line(gCtx, v0, v1);          \
++} while (0)
++
++
++#define POINT(v0)                               \
++do {                                            \
++        glamo_draw_point(gCtx, v0);             \
++} while (0)
++
++
++#define IND (0)
++#define TAG(x) x
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_offset
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_offset
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_unfilled
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_offset_unfilled
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_unfilled
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_offset_unfilled
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_offset_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_offset_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_unfilled_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_offset_unfilled_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_unfilled_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++#define IND (0)
++#define TAG(x) x##_twoside_offset_unfilled_fallback
++#include "tnl_dd/t_dd_tritmp.h"
++
++
++static void init_rast_tab()
++{
++	init();
++	init_offset();
++	init_twoside();
++	init_twoside_offset();
++	init_unfilled();
++	init_offset_unfilled();
++	init_twoside_unfilled();
++	init_twoside_offset_unfilled();
++	init_fallback();
++	init_offset_fallback();
++	init_twoside_fallback();
++	init_twoside_offset_fallback();
++	init_unfilled_fallback();
++	init_offset_unfilled_fallback();
++	init_twoside_unfilled_fallback();
++	init_twoside_offset_unfilled_fallback();
++}
++
++
++void glamoInitTriFuncs(struct gl_context *ctx)
++{
++	TNLcontext *tnl = TNL_CONTEXT(ctx);
++	struct glamo_context *gCtx = GLAMO_CONTEXT(ctx);
++	static int firsttime = 1;
++
++	if (firsttime) {
++		init_rast_tab();
++		firsttime = 0;
++	}
++
++	gCtx->prim.start_offset = 0;
++	gCtx->prim.current_offset = 0;
++	gCtx->prim.vb_bo = NULL;
++	gCtx->prim.vb = NULL;
++	gCtx->prim.count = 0;
++
++	tnl->Driver.RunPipeline = glamoRunPipeline;
++	tnl->Driver.Render.Start = glamoRenderStart;
++	tnl->Driver.Render.Finish = glamoRenderFinish;
++	tnl->Driver.Render.PrimitiveNotify = glamoPrimitiveNotify;
++	tnl->Driver.Render.ResetLineStipple = _swrast_ResetLineStipple;
++	tnl->Driver.Render.BuildVertices = _tnl_build_vertices;
++	tnl->Driver.Render.CopyPV = _tnl_copy_pv;
++	tnl->Driver.Render.Interp = _tnl_interp;
++}
+diff --git a/src/mesa/drivers/dri/glamo/glamo_tris.h b/src/mesa/drivers/dri/glamo/glamo_tris.h
+new file mode 100644
+index 0000000..ea396c1
+--- /dev/null
++++ b/src/mesa/drivers/dri/glamo/glamo_tris.h
+@@ -0,0 +1,38 @@
++/*
++ * Direct Rendering Support for SMedia Glamo 336x/337x
++ *
++ * (c) 2009 Thomas White <taw@bitwiz.org.uk>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included
++ * in all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
++ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++ * THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
++ * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __GLAMO_TRIS_H
++#define __GLAMO_TRIS_H
++
++#include "main/mtypes.h"
++
++#include "glamo_context.h"
++
++/* Amount of space reserved for vertex submission */
++#define GLAMO_VB_SIZE (32*1024)
++
++extern void glamoInitTriFuncs(struct gl_context *ctx);
++extern uint32_t *glamoGetPrimSpace(struct glamo_context *gCtx,
++                                   unsigned int count);
++
++#endif   /* __GLAMO_TRIS_H */
+diff --git a/src/mesa/tnl_dd/t_dd_dmatmp.h b/src/mesa/tnl_dd/t_dd_dmatmp.h
+index 997fc0b..e3c9119 100644
+--- a/src/mesa/tnl_dd/t_dd_dmatmp.h
++++ b/src/mesa/tnl_dd/t_dd_dmatmp.h
+@@ -127,6 +127,8 @@ static void TAG(render_points_verts)( struct gl_context *ctx,
+ 	 currentsz = dmasz;
+       }
+ 
++      FLUSH();
++
+    } else {
+       fprintf(stderr, "%s - cannot draw primitive\n", __FUNCTION__);
+       return;
+@@ -162,6 +164,8 @@ static void TAG(render_lines_verts)( struct gl_context *ctx,
+ 	 currentsz = dmasz;
+       }
+ 
++      FLUSH();
++
+    } else {
+       fprintf(stderr, "%s - cannot draw primitive\n", __FUNCTION__);
+       return;
+@@ -191,7 +195,7 @@ static void TAG(render_line_strip_verts)( struct gl_context *ctx,
+ 	 TAG(emit_verts)( ctx, j, nr, ALLOC_VERTS(nr) );
+ 	 currentsz = dmasz;
+       }
+- 
++
+       FLUSH();
+ 
+    } else {
+@@ -294,6 +298,8 @@ static void TAG(render_triangles_verts)( struct gl_context *ctx,
+       TAG(emit_verts)( ctx, j, nr, ALLOC_VERTS(nr) );
+       currentsz = dmasz;
+    }
++
++   FLUSH();
+ }
+ 
+ 
+@@ -567,6 +573,8 @@ static void TAG(render_quads_verts)( struct gl_context *ctx,
+          TAG(emit_verts)( ctx, j, nr, ALLOC_VERTS(nr) );
+          currentsz = dmasz;
+       }
++
++      FLUSH();
+    }
+    else if (HAVE_ELTS) {
+       /* Hardware doesn't have a quad primitive type -- try to
+@@ -640,6 +648,8 @@ static void TAG(render_quads_verts)( struct gl_context *ctx,
+ 	 tmp = EMIT_VERTS(ctx, j + 1, 3, tmp);
+ 	 (void) tmp;
+       }
++
++      FLUSH();
+    }
+    else {
+       /* Vertices won't fit in a single buffer, should never happen.

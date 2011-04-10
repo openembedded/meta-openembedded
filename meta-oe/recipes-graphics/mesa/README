@@ -1,0 +1,12 @@
+mesa-common.inc
+* Settings shared by ALL recipes
+
+mesa-${PV}.inc
+* Settings for particular version, mostly checksums and additional patches
+* Patches are stored mesa-${PV} dir and -dri and xlib has adjusted FILESPATHPKG
+
+mesa-dri.inc
+* Setting shared by ALL dri recipes - defines what is mesa-dri
+
+mesa-xlib.inc
+* Setting shared by ALL xlib recipes - defines what is mesa-xlib

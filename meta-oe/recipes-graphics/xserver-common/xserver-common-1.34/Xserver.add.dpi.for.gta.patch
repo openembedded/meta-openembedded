@@ -1,0 +1,29 @@
+xdpyinfo returns 96, but 285 is right value (but 280 is used as it renders 4 columns of illume icons instead of 3 and empty space)
+
+diff -uNr xserver-common-1.33.orig//X11/xserver-common xserver-common-1.33/X11/xserver-common
+--- xserver-common-1.33.orig//X11/xserver-common	2010-04-28 23:27:10.000000000 +0200
++++ xserver-common-1.33/X11/xserver-common	2010-04-28 23:29:07.000000000 +0200
+@@ -133,19 +133,19 @@
+             ARGS="$ARGS -screen ${SCREEN_SIZE}"
+             DPI="225" ;;
+         "gta01" )
+-            DPI="285"
++            DPI="280"
+             if [ "$XSERVER" != "Xorg" ] ; then
+                 ARGS="$ARGS -screen 480x640"
+             else
+-                ARGS="$ARGS -nocursor"
++                ARGS="$ARGS -dpi ${DPI} -nocursor"
+             fi
+             ;;
+         "gta02")
+-            DPI="285"
++            DPI="280"
+             if [ "$XSERVER" != "Xorg" ] ; then
+                 ARGS="$ARGS -screen ${SCREEN_SIZE}"
+             else
+-                ARGS="$ARGS -nocursor"
++                ARGS="$ARGS -dpi ${DPI} -nocursor"
+             fi
+             ;;
+         "motorola_ezx_platform")

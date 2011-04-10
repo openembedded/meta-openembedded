@@ -1,0 +1,13 @@
+Index: SDL_ttf-2.0.10/configure.in
+===================================================================
+--- SDL_ttf-2.0.10.orig/configure.in	2010-10-15 10:54:51.392730531 +0200
++++ SDL_ttf-2.0.10/configure.in	2010-10-15 10:55:06.382727473 +0200
+@@ -25,6 +25,8 @@
+ AC_SUBST(BINARY_AGE)
+ AC_SUBST(VERSION)
+ 
++AC_CONFIG_MACRO_DIR([acinclude])
++
+ # libtool versioning
+ LT_INIT([win32-dll])
+ 

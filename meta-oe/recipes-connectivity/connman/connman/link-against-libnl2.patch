@@ -1,0 +1,13 @@
+Index: connman-0.46/configure.ac
+===================================================================
+--- connman-0.46.orig/configure.ac
++++ connman-0.46/configure.ac
+@@ -326,7 +326,7 @@
+ AC_ARG_ENABLE(tools, AC_HELP_STRING([--enable-tools],
+ 		[enable testing tools]), [enable_tools=${enableval}])
+ if (test "${enable_tools}" = "yes"); then
+-	PKG_CHECK_MODULES(NETLINK, libnl-1, dummy=yes,
++	PKG_CHECK_MODULES(NETLINK, libnl-2.0, dummy=yes,
+ 				AC_MSG_ERROR(Netlink library is required))
+ 	AC_SUBST(NETLINK_CFLAGS)
+ 	AC_SUBST(NETLINK_LIBS)

@@ -1,0 +1,12 @@
+diff -uNr xserver-common-1.33.orig//X11/xserver-common xserver-common-1.33/X11/xserver-common
+--- xserver-common-1.33.orig//X11/xserver-common        2010-04-28 23:27:10.000000000 +0200
++++ xserver-common-1.33/X11/xserver-common      2010-04-28 23:29:07.000000000 +0200
+@@ -192,3 +196,8 @@
+ if [ "$XSERVER" != "Xorg" ] ; then
+     ARGS="$ARGS $MOUSE"
+ fi
++
++# let a local script modify the variables                    
++if [ -e /etc/X11/xserver-system ] ; then                    
++       . /etc/X11/xserver-system                    
++fi                    

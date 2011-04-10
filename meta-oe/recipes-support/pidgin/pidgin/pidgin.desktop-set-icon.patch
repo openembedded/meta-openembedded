@@ -1,0 +1,11 @@
+--- pidgin-2.0.1/pidgin.desktop.in.orig	2007-06-20 23:50:44.000000000 +0000
++++ pidgin-2.0.1/pidgin.desktop.in	2007-06-20 23:51:05.000000000 +0000
+@@ -4,7 +4,7 @@
+ _GenericName=Internet Messenger
+ _Comment=Send instant messages over multiple protocols
+ Exec=pidgin
+-Icon=pidgin
++Icon=/usr/share/icons/hicolor/48x48/apps/pidgin.png
+ StartupNotify=true
+ Terminal=false
+ Type=Application

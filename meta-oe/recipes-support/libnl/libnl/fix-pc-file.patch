@@ -1,0 +1,11 @@
+Index: libnl-2.0/libnl-2.0.pc.in
+===================================================================
+--- libnl-2.0.orig/libnl-2.0.pc.in
++++ libnl-2.0/libnl-2.0.pc.in
+@@ -6,5 +6,5 @@
+ Name: libnl
+ Description: Convenience library for netlink sockets
+ Version: @PACKAGE_VERSION@
+-Libs: -L${libdir} -lnl
++Libs: -L${libdir} -lnl -lnl-genl -lnl-nf -lnl-route
+ Cflags: -I${includedir}

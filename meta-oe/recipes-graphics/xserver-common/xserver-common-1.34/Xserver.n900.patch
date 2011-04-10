@@ -1,0 +1,17 @@
+diff -uri xserver-common-1.33.orig/X11/xserver-common xserver-common-1.33/X11/xserver-common
+--- xserver-common-1.33.orig/X11/xserver-common	2010-09-14 17:10:35.955430177 +0200
++++ xserver-common-1.33/X11/xserver-common	2010-09-14 17:17:12.484423440 +0200
+@@ -132,6 +132,13 @@
+         "nokia_n800" | "nokia_rx-44" | "nokia_n770")
+             ARGS="$ARGS -screen ${SCREEN_SIZE}"
+             DPI="225" ;;
++        "nokia_rx-51_board" )                                     
++            DPI="267"                                    
++            if [ "$XSERVER" != "Xorg" ] ; then                    
++                ARGS="$ARGS -screen ${SCREEN_SIZE}"               
++            else                                                  
++                ARGS="$ARGS -dpi ${DPI} -nocursor"       
++            fi ;;                                                    
+         "gta01" )
+             DPI="280"
+             if [ "$XSERVER" != "Xorg" ] ; then

@@ -1,0 +1,29 @@
+--- ca-certificates-20090814/sbin/update-ca-certificates.orig	2010-02-25 19:25:08.272807308 +0100
++++ ca-certificates-20090814/sbin/update-ca-certificates	2010-02-25 19:25:33.962806273 +0100
+@@ -133,16 +133,16 @@
+ ADDED_CNT=$(wc -l < "$ADDED")
+ REMOVED_CNT=$(wc -l < "$REMOVED")
+ 
+-if [ "$ADDED_CNT" -gt 0 ] || [ "$REMOVED_CNT" -gt 0 ]
+-then
+-  # only run if set of files has changed
+-  if [ "$verbose" = 0 ]
+-  then
+-    c_rehash . > /dev/null
+-  else
+-    c_rehash .
+-  fi
+-fi
++#if [ "$ADDED_CNT" -gt 0 ] || [ "$REMOVED_CNT" -gt 0 ]
++#then
++#  # only run if set of files has changed
++#  if [ "$verbose" = 0 ]
++#  then
++#    c_rehash . > /dev/null
++#  else
++#    c_rehash .
++#  fi
++#fi
+ 
+ echo "$ADDED_CNT added, $REMOVED_CNT removed; done."
+ 

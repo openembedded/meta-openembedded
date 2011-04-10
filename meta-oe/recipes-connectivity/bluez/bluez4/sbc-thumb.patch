@@ -1,0 +1,11 @@
+--- bluez/sbc/sbc_math.h~	2008-03-05 20:18:03.000000000 +0000
++++ bluez/sbc/sbc_math.h	2008-10-27 13:39:27.000000000 +0000
+@@ -59,7 +59,7 @@
+ 
+ #define SBC_FIXED_0(val) { val = 0; }
+ #define MUL(a, b)        ((a) * (b))
+-#ifdef __arm__
++#if defined(__arm__) && !defined(__thumb__)
+ #define MULA(a, b, res) ({				\
+ 		int tmp = res;			\
+ 		__asm__(				\

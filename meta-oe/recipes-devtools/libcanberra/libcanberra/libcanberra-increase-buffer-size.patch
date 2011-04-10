@@ -1,0 +1,13 @@
+Index: libcanberra-0.14/src/alsa.c
+===================================================================
+--- libcanberra-0.14.orig/src/alsa.c
++++ libcanberra-0.14/src/alsa.c
+@@ -272,7 +272,7 @@
+     return translate_error(ret);
+ }
+ 
+-#define BUFSIZE (16*1024)
++#define BUFSIZE (128*1024)
+ 
+ static void* thread_func(void *userdata) {
+     struct outstanding *out = userdata;

@@ -1,7 +1,7 @@
 require pixman.inc
 
-SRC_URI[archive.md5sum] = "e50975ace979cd416a505827c15191b4"
-SRC_URI[archive.sha256sum] = "57783330ee2f96121dc267b7f25b98356fd09fe9de185cd39e72e906b6444013"
+SRC_URI[md5sum] = "e50975ace979cd416a505827c15191b4"
+SRC_URI[sha256sum] = "57783330ee2f96121dc267b7f25b98356fd09fe9de185cd39e72e906b6444013"
 
 LICENSE = "MIT & MIT-style & Public Domain"
 LIC_FILES_CHKSUM = "file://COPYING;md5=14096c769ae0cbb5fcb94ec468be11b3\

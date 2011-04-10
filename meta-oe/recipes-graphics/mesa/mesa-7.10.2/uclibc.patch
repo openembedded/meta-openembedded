@@ -1,0 +1,26 @@
+Index: Mesa-7.9.1/src/mesa/main/imports.c
+===================================================================
+--- Mesa-7.9.1.orig/src/mesa/main/imports.c	2010-12-15 13:50:00.000000000 -0800
++++ Mesa-7.9.1/src/mesa/main/imports.c	2011-01-10 12:23:48.848656001 -0800
+@@ -757,7 +757,7 @@
+ float
+ _mesa_strtof( const char *s, char **end )
+ {
+-#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__)
++#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__) && !defined(__UCLIBC__)
+    static locale_t loc = NULL;
+    if (!loc) {
+       loc = newlocale(LC_CTYPE_MASK, "C", NULL);
+Index: Mesa-7.9.1/src/glsl/strtod.c
+===================================================================
+--- Mesa-7.9.1.orig/src/glsl/strtod.c	2011-01-10 20:08:01.568656001 -0800
++++ Mesa-7.9.1/src/glsl/strtod.c	2011-01-10 20:08:39.898656001 -0800
+@@ -44,7 +44,7 @@
+ double
+ glsl_strtod(const char *s, char **end)
+ {
+-#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__)
++#if defined(_GNU_SOURCE) && !defined(__CYGWIN__) && !defined(__FreeBSD__) && !defined(__UCLIBC__)
+    static locale_t loc = NULL;
+    if (!loc) {
+       loc = newlocale(LC_CTYPE_MASK, "C", NULL);

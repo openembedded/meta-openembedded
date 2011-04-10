@@ -1,0 +1,12 @@
+Index: xserver-common/X11/Xsession.d/89xTs_Calibrate_xinput_calibrator
+===================================================================
+--- xserver-common/X11/Xsession.d/89xTs_Calibrate_xinput_calibrator	(revision 0)
++++ xserver-common/X11/Xsession.d/89xTs_Calibrate_xinput_calibrator	(revision 0)
+@@ -0,0 +1,7 @@
++#!/bin/sh
++
++if [ -e /usr/bin/xinput_calibrator_once.sh ] ; then
++  if [ -e /etc/pointercal.xinput ] ; then
++    /usr/bin/xinput_calibrator_once.sh
++  fi
++fi

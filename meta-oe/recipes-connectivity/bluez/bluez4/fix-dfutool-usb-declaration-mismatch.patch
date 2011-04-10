@@ -1,0 +1,13 @@
+Index: bluez-4.27/tools/dfutool.c
+===================================================================
+--- bluez-4.27.orig/tools/dfutool.c
++++ bluez-4.27/tools/dfutool.c
+@@ -59,7 +59,7 @@
+ #endif
+ 
+ #ifdef NEED_USB_GET_BUSSES
+-static inline struct usb_bus *usb_get_busses(void)
++inline struct usb_bus *usb_get_busses(void)
+ {
+ 	return usb_busses;
+ }

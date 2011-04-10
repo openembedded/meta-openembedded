@@ -1,0 +1,20 @@
+Index: gobject-introspection-0.9.10/tools/g-ir-annotation-tool.in
+===================================================================
+--- gobject-introspection-0.9.10.orig/tools/g-ir-annotation-tool.in
++++ gobject-introspection-0.9.10/tools/g-ir-annotation-tool.in
+@@ -1,4 +1,4 @@
+-#!@PYTHON@
++#!/usr/bin/env python
+ # -*- Mode: Python -*-
+ # GObject-Introspection - a framework for introspecting GObject libraries
+ # Copyright (C) 2008  Johan Dahlin
+Index: gobject-introspection-0.9.10/tools/g-ir-scanner.in
+===================================================================
+--- gobject-introspection-0.9.10.orig/tools/g-ir-scanner.in
++++ gobject-introspection-0.9.10/tools/g-ir-scanner.in
+@@ -1,4 +1,4 @@
+-#!@PYTHON@
++#!/usr/bin/env python
+ # -*- Mode: Python -*-
+ # GObject-Introspection - a framework for introspecting GObject libraries
+ # Copyright (C) 2008  Johan Dahlin

@@ -1,0 +1,11 @@
+--- mpfr-2.3.1/mpfr-longlong.h~	2008-01-01 03:29:09.000000000 +0000
++++ mpfr-2.3.1/mpfr-longlong.h	2008-10-27 21:46:44.000000000 +0000
+@@ -406,7 +406,7 @@
+ 	     "rIJ" ((USItype) (bl)))
+ #endif
+ 
+-#if defined (__arm__) && W_TYPE_SIZE == 32
++#if defined (__arm__) && W_TYPE_SIZE == 32 && !defined(__thumb__)
+ #define add_ssaaaa(sh, sl, ah, al, bh, bl) \
+   __asm__ ("adds\t%1, %4, %5\n\tadc\t%0, %2, %3"			\
+ 	   : "=r" (sh), "=&r" (sl)					\

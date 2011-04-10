@@ -1,0 +1,20 @@
+diff -uNr xserver-common-1.33.orig//X11/xserver-common xserver-common-1.33/X11/xserver-common
+--- xserver-common-1.33.orig//X11/xserver-common	2010-04-28 10:44:23.000000000 +0200
++++ xserver-common-1.33/X11/xserver-common	2010-04-28 10:46:41.000000000 +0200
+@@ -136,12 +136,16 @@
+             DPI="285"
+             if [ "$XSERVER" != "Xorg" ] ; then
+                 ARGS="$ARGS -screen 480x640"
++            else
++                ARGS="$ARGS -nocursor"
+             fi
+             ;;
+         "gta02")
+             DPI="285"
+             if [ "$XSERVER" != "Xorg" ] ; then
+                 ARGS="$ARGS -screen ${SCREEN_SIZE}"
++            else
++                ARGS="$ARGS -nocursor"
+             fi
+             ;;
+         "motorola_ezx_platform")

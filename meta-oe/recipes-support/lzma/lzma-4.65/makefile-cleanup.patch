@@ -1,0 +1,18 @@
+Index: lzma-4.65/C/LzmaUtil/makefile.gcc
+===================================================================
+--- lzma-4.65.orig/C/LzmaUtil/makefile.gcc
++++ lzma-4.65/C/LzmaUtil/makefile.gcc
+@@ -1,10 +1,10 @@
+ PROG = lzma
+-CC = gcc
++CC ?= gcc
+ LIB = liblzma.a
+ RM = rm -f
+ CFLAGS = -c -O2 -Wall
+-AR = ar
+-RANLIB = ranlib
++AR ?= ar
++RANLIB ?= ranlib
+ 
+ OBJS = \
+   Alloc.o \

@@ -1,0 +1,33 @@
+# Signed-off-by: Khem Raj <raj.khem@gmail.com>
+#
+# Use the new usb1 API for usb_init() and check for fails from 
+# usb_init (). Currently we see a crash on a system which does
+# not have USB because usb_init() fails and it cleans up all initialized
+# data (e.g. ctx) which is used in subsequent calls to libusb
+# We return immediately if usb_init() fails for some reason.
+
+Index: bluez-4.24/tools/hid2hci.c
+===================================================================
+--- bluez-4.24.orig/tools/hid2hci.c	2008-10-25 23:40:34.000000000 -0700
++++ bluez-4.24/tools/hid2hci.c	2008-12-29 22:06:04.000000000 -0800
+@@ -337,7 +337,7 @@
+ int main(int argc, char *argv[])
+ {
+ 	struct device_info dev[16];
+-	int i, opt, num, quiet = 0, mode = HCI;
++	int i, ret, opt, num, quiet = 0, mode = HCI;
+ 
+ 	while ((opt = getopt_long(argc, argv, "+01qh", main_options, NULL)) != -1) {
+ 		switch (opt) {
+@@ -361,8 +361,9 @@
+ 	argc -= optind;
+ 	argv += optind;
+ 	optind = 0;
+-
+-	usb_init();
++	ret = libusb_init();
++	if (ret < 0)
++		return ret;
+ 
+ 	num = find_devices(mode, dev, sizeof(dev) / sizeof(dev[0]));
+ 	if (num <= 0) {

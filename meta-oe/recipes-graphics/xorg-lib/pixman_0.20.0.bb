@@ -1,7 +1,7 @@
 require pixman.inc
 
-SRC_URI[archive.md5sum] = "c1a31d5cedfa97c5af7148a2d1fd4356"
-SRC_URI[archive.sha256sum] = "9c02c22c6cc3f28f3633d02ef6f0cac130518f621edb011ebbbf08cd1a81251a"
+SRC_URI[md5sum] = "c1a31d5cedfa97c5af7148a2d1fd4356"
+SRC_URI[sha256sum] = "9c02c22c6cc3f28f3633d02ef6f0cac130518f621edb011ebbbf08cd1a81251a"
 
 PR = "${INC_PR}.0"
 

@@ -1,0 +1,16 @@
+Index: pidgin-2.6.5/configure.ac
+===================================================================
+--- pidgin-2.6.5.orig/configure.ac
++++ pidgin-2.6.5/configure.ac
+@@ -1470,8 +1470,9 @@ if test "_$pythonpath" != _ ; then
+ 		AC_CHECK_LIB(pthread, pthread_create, )
+ 		AC_CHECK_LIB(util, openpty, )
+ 		AC_CHECK_LIB(db, dbopen, )
+-		PY_LIBS="-L$PY_EXEC_PREFIX/lib/python$PY_VERSION/config -lpython$PY_VERSION"
+-		PY_CFLAGS="-I$PY_PREFIX/include/python$PY_VERSION"
++		m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
++		PY_LIBS="-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config -lpython$PY_VERSION"
++		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"
+ 		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
+ 		AC_MSG_RESULT(ok)
+ 	else

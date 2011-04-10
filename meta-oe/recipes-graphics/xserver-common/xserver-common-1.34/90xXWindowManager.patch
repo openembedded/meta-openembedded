@@ -1,0 +1,11 @@
+Index: xserver-common/X11/Xsession.d/90xXWindowManager
+===================================================================
+--- xserver-common/X11/Xsession.d/90xXWindowManager	(revision 0)
++++ xserver-common/X11/Xsession.d/90xXWindowManager	(revision 0)
+@@ -0,0 +1,6 @@
++#!/bin/sh
++if [ -x $HOME/.Xsession ]; then
++    exec $HOME/.Xsession
++else
++    exec /usr/bin/x-window-manager
++fi
