@@ -2,6 +2,7 @@
 DISTRO_XORG_CONFIG_MANAGER_angstrom = "udev"
 
 require xorg-xserver-common.inc
+LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
 
 DESCRIPTION = "the X.Org X server"
 DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
@@ -12,8 +13,8 @@ SRC_URI += " \
             file://hack-fbdev-ignore-return-mode.patch \
             file://hack-assume-pixman-supports-overlapped-blt.patch \
            "
-SRC_URI[md5sum] = "d750cf5f6342b548b7ac2be56e9d1841"
-SRC_URI[sha256sum] = "de18f52c35fc3d3f18c7e905296f9de5ac42dc71e4e01da9ae8e154a78c7771c"
+SRC_URI[md5sum] = "65e5db9e614cd75e97840247c3754521"
+SRC_URI[sha256sum] = "994ab87bb0cc9b56203e01e3294fddd502a96d074139496ea4ffc03c95b41b42"
 
 do_install_prepend() {
         mkdir -p ${D}/${libdir}/X11/fonts
