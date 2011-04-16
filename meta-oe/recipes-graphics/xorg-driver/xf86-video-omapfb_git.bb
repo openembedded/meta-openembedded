@@ -10,7 +10,7 @@ PR = "${INC_PR}.2"
 LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://src/omapfb-driver.c;beginline=1;endline=30;md5=a44c2a37e04d1c2c5f0313afb493f833"
 
-SRC_URI = "git://git.pingu.fi/xf86-video-omapfb.git;protocol=http \
+SRC_URI = "git://git.pingu.fi/xf86-video-omapfb;protocol=http \
            file://0001-blacklist-tv-out.patch \
            file://0002-Revert-Set-virtual-size-when-configuring-framebuffer.patch \
            file://0003-force-plain-mode.patch \
