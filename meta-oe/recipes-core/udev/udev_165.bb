@@ -93,32 +93,6 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
 FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
 FILES_${PN}-dbg += "/lib/udev/.debug"
 
-RPROVIDES_udev_append = " udev-compat-wrapper"
-RDEPENDS_udev_append_spitz = " udev-compat"
-do_unpack_append_spitz() {
-	bb.build.exec_func('do_apply_compat_wrapper', d)
-}
-RDEPENDS_udev_append_akita = " udev-compat"
-do_unpack_append_akita() {
-	bb.build.exec_func('do_apply_compat_wrapper', d)
-}
-RDEPENDS_udev_append_c7x0 = " udev-compat"
-do_unpack_append_c7x0() {
-	bb.build.exec_func('do_apply_compat_wrapper', d)
-}
-RDEPENDS_udev_append_poodle = " udev-compat"
-do_unpack_append_poodle() {
-	bb.build.exec_func('do_apply_compat_wrapper', d)
-}
-
-# Modify init script on platforms that need to boot old kernels:
-do_apply_compat_wrapper() {
-	cd ${WORKDIR}
-	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
-	patch <udev-compat-wrapper-patch
-	cd -
-}
-
 do_install () {
 	install -d ${D}${usrsbindir} \
 		   ${D}${sbindir}
