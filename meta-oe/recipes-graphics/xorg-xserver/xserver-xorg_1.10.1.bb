@@ -13,8 +13,8 @@ SRC_URI += " \
             file://hack-fbdev-ignore-return-mode.patch \
             file://hack-assume-pixman-supports-overlapped-blt.patch \
            "
-SRC_URI[md5sum] = "65e5db9e614cd75e97840247c3754521"
-SRC_URI[sha256sum] = "994ab87bb0cc9b56203e01e3294fddd502a96d074139496ea4ffc03c95b41b42"
+SRC_URI[md5sum] = "75f117c74f2ecaf9dd167f6a66ac98de"
+SRC_URI[sha256sum] = "143c7c3d7d4428352e1153dffa34fd64af391f72d30b2a03e911e54e36f00b5d"
 
 do_install_prepend() {
         mkdir -p ${D}/${libdir}/X11/fonts

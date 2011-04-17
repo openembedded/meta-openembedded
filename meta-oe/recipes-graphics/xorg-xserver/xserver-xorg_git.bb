@@ -8,14 +8,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
 
 DESCRIPTION = "the X.Org X server"
 DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
-PV = "1.10.0.902"
+PV = "1.10.1"
 PR = "${INC_PR}.0"
 PR_append = "+gitr${SRCPV}"
 PE = "2"
 
 DEFAULT_PREFERENCE = "-1"
 
-SRCREV = "ec6e1e45627de2bb851f135df0507a360d0d99e6"
+SRCREV = "a73311f8304193f9245fb077f173bf1e1d52e040" 
 SRC_URI = " \
   git://anongit.freedesktop.org/xorg/xserver;protocol=git;branch=server-1.10-branch \
   file://hack-fbdev-ignore-return-mode.patch \
