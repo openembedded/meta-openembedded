@@ -1,0 +1,14 @@
+This layer depends on:
+
+URI: git://git.openembedded.org/openembedded-core
+branch: master
+revision: HEAD
+
+URI: git://git.openembedded.net/meta-openembedded
+branch: master
+revision: HEAD
+
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gpe]' in the subject'
+
+Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+
