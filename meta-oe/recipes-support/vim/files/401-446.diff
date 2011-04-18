@@ -1,0 +1,5426 @@
+To: vim-dev@vim.org
+Subject: Patch 7.2.401
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.401
+Problem:    ":e dir<Tab>" with 'wildmode' set to "list" doesn't highlight
+	    directory names with a space. (Alexandre Provencio)
+Solution:   Remove the backslash before checking if the name is a directory.
+	    (Dominique Pelle)
+Files:	    src/ex_getln.c
+
+
+*** ../vim-7.2.400/src/ex_getln.c	2010-03-02 17:23:10.000000000 +0100
+--- src/ex_getln.c	2010-03-17 19:00:54.000000000 +0100
+***************
+*** 3948,3955 ****
+  					  || xp->xp_context == EXPAND_SHELLCMD
+  					  || xp->xp_context == EXPAND_BUFFERS)
+  		{
+! 			    /* highlight directories */
+! 		    j = (mch_isdir(files_found[k]));
+  		    if (showtail)
+  			p = L_SHOWFILE(k);
+  		    else
+--- 3948,3959 ----
+  					  || xp->xp_context == EXPAND_SHELLCMD
+  					  || xp->xp_context == EXPAND_BUFFERS)
+  		{
+! 		    char_u	*halved_slash;
+! 
+! 		    /* highlight directories */
+! 		    halved_slash = backslash_halve_save(files_found[k]);
+! 		    j = mch_isdir(halved_slash);
+! 		    vim_free(halved_slash);
+  		    if (showtail)
+  			p = L_SHOWFILE(k);
+  		    else
+*** ../vim-7.2.400/src/version.c	2010-03-17 18:15:17.000000000 +0100
+--- src/version.c	2010-03-17 19:12:22.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     401,
+  /**/
+
+-- 
+Two cows are standing together in a field.  One asks the other:
+"So what do you think about this Mad Cow Disease?"
+The other replies: "That doesn't concern me. I'm a helicopter."
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.402
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.402
+Problem:    This gives a #705 error: let X = function('haslocaldir')
+	    let X = function('getcwd')
+Solution:   Don't give E705 when the name is found in the hashtab. (Sergey
+	    Khorev)
+Files:	    src/eval.c
+
+
+*** ../vim-7.2.401/src/eval.c	2010-03-10 13:43:22.000000000 +0100
+--- src/eval.c	2010-03-17 19:35:01.000000000 +0100
+***************
+*** 19103,19108 ****
+--- 19103,19116 ----
+      hashtab_T	*ht;
+      char_u	*p;
+  
++     ht = find_var_ht(name, &varname);
++     if (ht == NULL || *varname == NUL)
++     {
++ 	EMSG2(_(e_illvar), name);
++ 	return;
++     }
++     v = find_var_in_ht(ht, varname, TRUE);
++ 
+      if (tv->v_type == VAR_FUNC)
+      {
+  	if (!(vim_strchr((char_u *)"wbs", name[0]) != NULL && name[1] == ':')
+***************
+*** 19112,19118 ****
+  	    EMSG2(_("E704: Funcref variable name must start with a capital: %s"), name);
+  	    return;
+  	}
+! 	if (function_exists(name))
+  	{
+  	    EMSG2(_("E705: Variable name conflicts with existing function: %s"),
+  									name);
+--- 19120,19129 ----
+  	    EMSG2(_("E704: Funcref variable name must start with a capital: %s"), name);
+  	    return;
+  	}
+! 	/* Don't allow hiding a function.  When "v" is not NULL we migth be
+! 	 * assigning another function to the same var, the type is checked
+! 	 * below. */
+! 	if (v == NULL && function_exists(name))
+  	{
+  	    EMSG2(_("E705: Variable name conflicts with existing function: %s"),
+  									name);
+***************
+*** 19120,19133 ****
+  	}
+      }
+  
+-     ht = find_var_ht(name, &varname);
+-     if (ht == NULL || *varname == NUL)
+-     {
+- 	EMSG2(_(e_illvar), name);
+- 	return;
+-     }
+- 
+-     v = find_var_in_ht(ht, varname, TRUE);
+      if (v != NULL)
+      {
+  	/* existing variable, need to clear the value */
+--- 19131,19136 ----
+*** ../vim-7.2.401/src/version.c	2010-03-17 19:13:19.000000000 +0100
+--- src/version.c	2010-03-17 19:36:09.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     402,
+  /**/
+
+-- 
+Michael: There is no such thing as a dump question.
+Bernard: Sure there is.  For example "what is a core dump?"
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.403
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.403 (after 7.2.400)
+Problem:    Compiler warning for pointer type. (Tony Mechelynck)
+Solution:   Move type cast to the right place.
+Files:	    src/if_ruby.c
+
+
+*** ../vim-7.2.402/src/if_ruby.c	2010-03-17 18:15:17.000000000 +0100
+--- src/if_ruby.c	2010-03-19 23:08:06.000000000 +0100
+***************
+*** 722,729 ****
+  
+      if (tv->v_type == VAR_STRING)
+      {
+! 	result = rb_str_new2((char *)(tv->vval.v_string == NULL
+! 						   ? "" : tv->vval.v_string));
+      }
+      else if (tv->v_type == VAR_NUMBER)
+      {
+--- 722,729 ----
+  
+      if (tv->v_type == VAR_STRING)
+      {
+! 	result = rb_str_new2(tv->vval.v_string == NULL
+! 					  ? "" : (char *)(tv->vval.v_string));
+      }
+      else if (tv->v_type == VAR_NUMBER)
+      {
+*** ../vim-7.2.402/src/version.c	2010-03-17 19:53:44.000000000 +0100
+--- src/version.c	2010-03-19 23:07:13.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     403,
+  /**/
+
+-- 
+If "R" is Reverse, how come "D" is FORWARD?
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.404
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.404
+Problem:    Pointers for composing characters are not properly initialized.
+Solution:   Compute the size of the pointer, not what it points to. (Yukihiro
+	    Nakadaira)
+Files:	    src/screen.c
+
+
+*** ../vim-7.2.403/src/screen.c	2010-02-03 15:47:59.000000000 +0100
+--- src/screen.c	2010-03-23 13:48:05.000000000 +0100
+***************
+*** 7536,7542 ****
+      new_ScreenLines = (schar_T *)lalloc((long_u)(
+  			      (Rows + 1) * Columns * sizeof(schar_T)), FALSE);
+  #ifdef FEAT_MBYTE
+!     vim_memset(new_ScreenLinesC, 0, sizeof(u8char_T) * MAX_MCO);
+      if (enc_utf8)
+      {
+  	new_ScreenLinesUC = (u8char_T *)lalloc((long_u)(
+--- 7536,7542 ----
+      new_ScreenLines = (schar_T *)lalloc((long_u)(
+  			      (Rows + 1) * Columns * sizeof(schar_T)), FALSE);
+  #ifdef FEAT_MBYTE
+!     vim_memset(new_ScreenLinesC, 0, sizeof(u8char_T *) * MAX_MCO);
+      if (enc_utf8)
+      {
+  	new_ScreenLinesUC = (u8char_T *)lalloc((long_u)(
+*** ../vim-7.2.403/src/version.c	2010-03-19 23:08:22.000000000 +0100
+--- src/version.c	2010-03-23 13:54:47.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     404,
+  /**/
+
+-- 
+LAUNCELOT: Isn't there a St. Aaaaarrrrrrggghhh's in Cornwall?
+ARTHUR:    No, that's Saint Ives.
+                 "Monty Python and the Holy Grail" PYTHON (MONTY) PICTURES LTD
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.405
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.405
+Problem:    When built with small features the matching text is not
+	    highlighted for ":s/pat/repl/c".
+Solution:   Remove the #ifdef for IncSearch. (James Vega)
+Files:	    src/syntax.c
+
+
+*** ../vim-7.2.404/src/syntax.c	2010-03-10 13:43:22.000000000 +0100
+--- src/syntax.c	2010-03-23 14:36:10.000000000 +0100
+***************
+*** 6205,6214 ****
+      {
+  	CENT("ErrorMsg term=standout ctermbg=DarkRed ctermfg=White",
+  	     "ErrorMsg term=standout ctermbg=DarkRed ctermfg=White guibg=Red guifg=White"),
+- #ifdef FEAT_SEARCH_EXTRA
+  	CENT("IncSearch term=reverse cterm=reverse",
+  	     "IncSearch term=reverse cterm=reverse gui=reverse"),
+- #endif
+  	CENT("ModeMsg term=bold cterm=bold",
+  	     "ModeMsg term=bold cterm=bold gui=bold"),
+  	CENT("NonText term=bold ctermfg=Blue",
+--- 6205,6212 ----
+*** ../vim-7.2.404/src/version.c	2010-03-23 13:56:53.000000000 +0100
+--- src/version.c	2010-03-23 14:37:08.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     405,
+  /**/
+
+-- 
+Dreams are free, but there's a small charge for alterations.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.406
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.406
+Problem:    Patch 7.2.119 introduces uninit mem read. (Dominique Pelle)
+Solution:   Only used ScreeenLinesC when ScreeenLinesUC is not zero. (Yukihiro
+	    Nakadaira)  Also clear ScreeenLinesC when allocating.
+Files:	    src/screen.c
+
+
+*** ../vim-7.2.405/src/screen.c	2010-03-23 13:56:53.000000000 +0100
+--- src/screen.c	2010-03-23 15:26:44.000000000 +0100
+***************
+*** 25,34 ****
+   * one character which occupies two display cells.
+   * For UTF-8 a multi-byte character is converted to Unicode and stored in
+   * ScreenLinesUC[].  ScreenLines[] contains the first byte only.  For an ASCII
+!  * character without composing chars ScreenLinesUC[] will be 0.  When the
+!  * character occupies two display cells the next byte in ScreenLines[] is 0.
+   * ScreenLinesC[][] contain up to 'maxcombine' composing characters
+!  * (drawn on top of the first character).  They are 0 when not used.
+   * ScreenLines2[] is only used for euc-jp to store the second byte if the
+   * first byte is 0x8e (single-width character).
+   *
+--- 25,35 ----
+   * one character which occupies two display cells.
+   * For UTF-8 a multi-byte character is converted to Unicode and stored in
+   * ScreenLinesUC[].  ScreenLines[] contains the first byte only.  For an ASCII
+!  * character without composing chars ScreenLinesUC[] will be 0 and
+!  * ScreenLinesC[][] is not used.  When the character occupies two display
+!  * cells the next byte in ScreenLines[] is 0.
+   * ScreenLinesC[][] contain up to 'maxcombine' composing characters
+!  * (drawn on top of the first character).  There is 0 after the last one used.
+   * ScreenLines2[] is only used for euc-jp to store the second byte if the
+   * first byte is 0x8e (single-width character).
+   *
+***************
+*** 4893,4898 ****
+--- 4894,4900 ----
+  
+  /*
+   * Return if the composing characters at "off_from" and "off_to" differ.
++  * Only to be used when ScreenLinesUC[off_from] != 0.
+   */
+      static int
+  comp_char_differs(off_from, off_to)
+***************
+*** 6281,6286 ****
+--- 6283,6289 ----
+  /*
+   * Return TRUE if composing characters for screen posn "off" differs from
+   * composing characters in "u8cc".
++  * Only to be used when ScreenLinesUC[off] != 0.
+   */
+      static int
+  screen_comp_differs(off, u8cc)
+***************
+*** 6461,6468 ****
+  		    && c == 0x8e
+  		    && ScreenLines2[off] != ptr[1])
+  		|| (enc_utf8
+! 		    && (ScreenLinesUC[off] != (u8char_T)(c >= 0x80 ? u8c : 0)
+! 			|| screen_comp_differs(off, u8cc)))
+  #endif
+  		|| ScreenAttrs[off] != attr
+  		|| exmode_active;
+--- 6464,6473 ----
+  		    && c == 0x8e
+  		    && ScreenLines2[off] != ptr[1])
+  		|| (enc_utf8
+! 		    && (ScreenLinesUC[off] !=
+! 				(u8char_T)(c < 0x80 && u8cc[0] == 0 ? 0 : u8c)
+! 			|| (ScreenLinesUC[off] != 0
+! 					  && screen_comp_differs(off, u8cc))))
+  #endif
+  		|| ScreenAttrs[off] != attr
+  		|| exmode_active;
+***************
+*** 7542,7548 ****
+  	new_ScreenLinesUC = (u8char_T *)lalloc((long_u)(
+  			     (Rows + 1) * Columns * sizeof(u8char_T)), FALSE);
+  	for (i = 0; i < p_mco; ++i)
+! 	    new_ScreenLinesC[i] = (u8char_T *)lalloc((long_u)(
+  			     (Rows + 1) * Columns * sizeof(u8char_T)), FALSE);
+      }
+      if (enc_dbcs == DBCS_JPNU)
+--- 7547,7553 ----
+  	new_ScreenLinesUC = (u8char_T *)lalloc((long_u)(
+  			     (Rows + 1) * Columns * sizeof(u8char_T)), FALSE);
+  	for (i = 0; i < p_mco; ++i)
+! 	    new_ScreenLinesC[i] = (u8char_T *)lalloc_clear((long_u)(
+  			     (Rows + 1) * Columns * sizeof(u8char_T)), FALSE);
+      }
+      if (enc_dbcs == DBCS_JPNU)
+*** ../vim-7.2.405/src/version.c	2010-03-23 14:39:07.000000000 +0100
+--- src/version.c	2010-03-23 15:34:11.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     406,
+  /**/
+
+-- 
+VOICE OVER: As the horrendous Black Beast lunged forward, escape for Arthur
+            and his knights seemed hopeless,  when, suddenly ... the animator
+            suffered a fatal heart attack.
+ANIMATOR:   Aaaaagh!
+VOICE OVER: The cartoon peril was no more ... The Quest for Holy Grail could
+            continue.
+                 "Monty Python and the Holy Grail" PYTHON (MONTY) PICTURES LTD
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.407
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.407
+Problem:    When using an expression in ":s" backslashes in the result are
+	    dropped. (Sergey Goldgaber, Christian Brabandt)
+Solution:   Double backslashes.
+Files:	    src/regexp.c
+
+
+*** ../vim-7.2.406/src/regexp.c	2009-11-26 20:41:19.000000000 +0100
+--- src/regexp.c	2010-03-23 16:22:35.000000000 +0100
+***************
+*** 6963,6968 ****
+--- 6963,6970 ----
+  	    eval_result = eval_to_string(source + 2, NULL, TRUE);
+  	    if (eval_result != NULL)
+  	    {
++ 		int had_backslash = FALSE;
++ 
+  		for (s = eval_result; *s != NUL; mb_ptr_adv(s))
+  		{
+  		    /* Change NL to CR, so that it becomes a line break.
+***************
+*** 6970,6976 ****
+--- 6972,6991 ----
+  		    if (*s == NL)
+  			*s = CAR;
+  		    else if (*s == '\\' && s[1] != NUL)
++ 		    {
+  			++s;
++ 			had_backslash = TRUE;
++ 		    }
++ 		}
++ 		if (had_backslash && backslash)
++ 		{
++ 		    /* Backslashes will be consumed, need to double them. */
++ 		    s = vim_strsave_escaped(eval_result, (char_u *)"\\");
++ 		    if (s != NULL)
++ 		    {
++ 			vim_free(eval_result);
++ 			eval_result = s;
++ 		    }
+  		}
+  
+  		dst += STRLEN(eval_result);
+*** ../vim-7.2.406/src/version.c	2010-03-23 15:36:29.000000000 +0100
+--- src/version.c	2010-03-23 16:26:22.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     407,
+  /**/
+
+-- 
+Sorry, no fortune today.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.408
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.408
+Problem:    With ":g/the/s/foo/bar/" the '[ and '] marks can be set to a line
+	    that was not changed.
+Solution:   Only set '[ and '] marks when a substitution was done.
+Files:	    src/ex_cmds.c
+
+
+*** ../vim-7.2.407/src/ex_cmds.c	2009-07-09 20:06:30.000000000 +0200
+--- src/ex_cmds.c	2010-03-23 17:31:17.000000000 +0100
+***************
+*** 4238,4243 ****
+--- 4238,4244 ----
+      char_u	*sub_firstline;		/* allocated copy of first sub line */
+      int		endcolumn = FALSE;	/* cursor in last column when done */
+      pos_T	old_cursor = curwin->w_cursor;
++     int		start_nsubs;
+  
+      cmd = eap->arg;
+      if (!global_busy)
+***************
+*** 4245,4250 ****
+--- 4246,4252 ----
+  	sub_nsubs = 0;
+  	sub_nlines = 0;
+      }
++     start_nsubs = sub_nsubs;
+  
+      if (eap->cmdidx == CMD_tilde)
+  	which_pat = RE_LAST;	/* use last used regexp */
+***************
+*** 5106,5112 ****
+      if (do_count)
+  	curwin->w_cursor = old_cursor;
+  
+!     if (sub_nsubs)
+      {
+  	/* Set the '[ and '] marks. */
+  	curbuf->b_op_start.lnum = eap->line1;
+--- 5108,5114 ----
+      if (do_count)
+  	curwin->w_cursor = old_cursor;
+  
+!     if (sub_nsubs > start_nsubs)
+      {
+  	/* Set the '[ and '] marks. */
+  	curbuf->b_op_start.lnum = eap->line1;
+*** ../vim-7.2.407/src/version.c	2010-03-23 16:27:15.000000000 +0100
+--- src/version.c	2010-03-23 17:35:40.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     408,
+  /**/
+
+-- 
+Permission is granted to read this message out aloud on Kings Cross Road,
+London, under the condition that the orator is properly dressed.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.409
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.409
+Problem:    Summary of number of substitutes is incorrect for ":folddo". (Jean
+	    Johner)
+Solution:   Reset sub_nsubs and sub_nlines in global_exe().
+Files:	    src/ex_cmds.c
+
+
+*** ../vim-7.2.408/src/ex_cmds.c	2010-03-23 17:36:24.000000000 +0100
+--- src/ex_cmds.c	2010-03-23 17:42:49.000000000 +0100
+***************
+*** 5238,5245 ****
+  	type = *eap->cmd;
+      cmd = eap->arg;
+      which_pat = RE_LAST;	    /* default: use last used regexp */
+-     sub_nsubs = 0;
+-     sub_nlines = 0;
+  
+      /*
+       * undocumented vi feature:
+--- 5238,5243 ----
+***************
+*** 5343,5348 ****
+--- 5341,5348 ----
+      /* When the command writes a message, don't overwrite the command. */
+      msg_didout = TRUE;
+  
++     sub_nsubs = 0;
++     sub_nlines = 0;
+      global_need_beginline = FALSE;
+      global_busy = 1;
+      old_lcount = curbuf->b_ml.ml_line_count;
+*** ../vim-7.2.408/src/version.c	2010-03-23 17:36:24.000000000 +0100
+--- src/version.c	2010-03-23 17:47:53.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     409,
+  /**/
+
+-- 
+BRIDGEKEEPER: What is your favorite colour?
+LAUNCELOT:    Blue.
+BRIDGEKEEPER: Right.  Off you go.
+                 "Monty Python and the Holy Grail" PYTHON (MONTY) PICTURES LTD
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.410
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.410
+Problem:    Highlighting directories for completion doesn't work properly.
+Solution:   Don't halve backslashes when not needed, expaned "~/".
+	    (Dominique Pelle)
+Files:	    src/ex_getln.c
+
+
+*** ../vim-7.2.409/src/ex_getln.c	2010-03-17 19:13:19.000000000 +0100
+--- src/ex_getln.c	2010-03-23 18:00:56.000000000 +0100
+***************
+*** 3948,3959 ****
+  					  || xp->xp_context == EXPAND_SHELLCMD
+  					  || xp->xp_context == EXPAND_BUFFERS)
+  		{
+- 		    char_u	*halved_slash;
+- 
+  		    /* highlight directories */
+! 		    halved_slash = backslash_halve_save(files_found[k]);
+! 		    j = mch_isdir(halved_slash);
+! 		    vim_free(halved_slash);
+  		    if (showtail)
+  			p = L_SHOWFILE(k);
+  		    else
+--- 3948,3973 ----
+  					  || xp->xp_context == EXPAND_SHELLCMD
+  					  || xp->xp_context == EXPAND_BUFFERS)
+  		{
+  		    /* highlight directories */
+! 		    if (xp->xp_numfiles != -1)
+! 		    {
+! 			char_u	*halved_slash;
+! 			char_u	*exp_path;
+! 
+! 			/* Expansion was done before and special characters
+! 			 * were escaped, need to halve backslashes.  Also
+! 			 * $HOME has been replaced with ~/. */
+! 			exp_path = expand_env_save_opt(files_found[k], TRUE);
+! 			halved_slash = backslash_halve_save(
+! 				exp_path != NULL ? exp_path : files_found[k]);
+! 			j = mch_isdir(halved_slash != NULL ? halved_slash
+! 							    : files_found[k]);
+! 			vim_free(exp_path);
+! 			vim_free(halved_slash);
+! 		    }
+! 		    else
+! 			/* Expansion was done here, file names are literal. */
+! 			j = mch_isdir(files_found[k]);
+  		    if (showtail)
+  			p = L_SHOWFILE(k);
+  		    else
+*** ../vim-7.2.409/src/version.c	2010-03-23 17:49:19.000000000 +0100
+--- src/version.c	2010-03-23 18:04:25.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     410,
+  /**/
+
+-- 
+BRIDGEKEEPER: What is your favorite colour?
+GAWAIN:       Blue ...  No yelloooooww!
+                 "Monty Python and the Holy Grail" PYTHON (MONTY) PICTURES LTD
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.411
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.411
+Problem:    When parsing 'cino' a comma isn't skipped properly.
+Solution:   Skip the comma. (Lech Lorens)
+Files:	    src/misc1.c
+
+
+*** ../vim-7.2.410/src/misc1.c	2010-03-02 12:37:01.000000000 +0100
+--- src/misc1.c	2010-03-23 18:18:15.000000000 +0100
+***************
+*** 6270,6275 ****
+--- 6270,6277 ----
+  	    case 'l': ind_keep_case_label = n; break;
+  	    case '#': ind_hash_comment = n; break;
+  	}
++ 	if (*options == ',')
++ 	    ++options;
+      }
+  
+      /* remember where the cursor was when we started */
+*** ../vim-7.2.410/src/version.c	2010-03-23 18:06:47.000000000 +0100
+--- src/version.c	2010-03-23 18:22:13.000000000 +0100
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     411,
+  /**/
+
+-- 
+BRIDGEKEEPER: What is your favorite editor?
+GAWAIN:       Emacs ...  No, Viiiiiiiiiiimmmmmmm!
+           "Monty Python and the Holy editor wars" PYTHON (MONTY) SOFTWARE LTD
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.412
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.412
+Problem:    [ or ] followed by mouse click doesn't work.
+Solution:   Reverse check for key being a mouse event. (Dominique Pelle)
+Files:	    src/normal.c
+
+
+*** ../vim-7.2.411/src/normal.c	2010-03-17 13:07:01.000000000 +0100
+--- src/normal.c	2010-05-07 15:46:54.000000000 +0200
+***************
+*** 3196,3202 ****
+       * There are a few special cases where we want certain combinations of
+       * characters to be considered as a single word.  These are things like
+       * "->", "/ *", "*=", "+=", "&=", "<=", ">=", "!=" etc.  Otherwise, each
+!      * character is in it's own class.
+       */
+      if (c != NUL && vim_strchr((char_u *)"-+*/%<>&|^!=", c) != NULL)
+  	return 1;
+--- 3196,3202 ----
+       * There are a few special cases where we want certain combinations of
+       * characters to be considered as a single word.  These are things like
+       * "->", "/ *", "*=", "+=", "&=", "<=", ">=", "!=" etc.  Otherwise, each
+!      * character is in its own class.
+       */
+      if (c != NUL && vim_strchr((char_u *)"-+*/%<>&|^!=", c) != NULL)
+  	return 1;
+***************
+*** 4085,4091 ****
+  /*
+   * Command character that's ignored.
+   * Used for CTRL-Q and CTRL-S to avoid problems with terminals that use
+!  * xon/xoff
+   */
+      static void
+  nv_ignore(cap)
+--- 4085,4091 ----
+  /*
+   * Command character that's ignored.
+   * Used for CTRL-Q and CTRL-S to avoid problems with terminals that use
+!  * xon/xoff.
+   */
+      static void
+  nv_ignore(cap)
+***************
+*** 6523,6529 ****
+       * [ or ] followed by a middle mouse click: put selected text with
+       * indent adjustment.  Any other button just does as usual.
+       */
+!     else if (cap->nchar >= K_LEFTMOUSE && cap->nchar <= K_RIGHTRELEASE)
+      {
+  	(void)do_mouse(cap->oap, cap->nchar,
+  		       (cap->cmdchar == ']') ? FORWARD : BACKWARD,
+--- 6523,6529 ----
+       * [ or ] followed by a middle mouse click: put selected text with
+       * indent adjustment.  Any other button just does as usual.
+       */
+!     else if (cap->nchar >= K_RIGHTRELEASE && cap->nchar <= K_LEFTMOUSE)
+      {
+  	(void)do_mouse(cap->oap, cap->nchar,
+  		       (cap->cmdchar == ']') ? FORWARD : BACKWARD,
+*** ../vim-7.2.411/src/version.c	2010-03-23 18:22:40.000000000 +0100
+--- src/version.c	2010-05-07 15:51:35.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     412,
+  /**/
+
+-- 
+I have a drinking problem -- I don't have a drink!
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.413
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.413
+Problem:    Large file support is incorrect.
+Solution:   Add AC_SYS_LARGEFILE to configure. (James Vega)
+Files:      src/configure.in, src/config.h.in, src/auto/configure
+    
+
+*** ../vim-7.2.412/src/configure.in	2010-03-10 16:27:27.000000000 +0100
+--- src/configure.in	2010-04-01 15:06:04.000000000 +0200
+***************
+*** 2669,2674 ****
+--- 2669,2678 ----
+  	usleep utime utimes)
+  AC_FUNC_FSEEKO
+  
++ dnl define _LARGE_FILES, _FILE_OFFSET_BITS and _LARGEFILE_SOURCE when
++ dnl appropriate, so that off_t is 64 bits when needed.
++ AC_SYS_LARGEFILE
++ 
+  dnl fstatfs() can take 2 to 4 arguments, try to use st_blksize if possible
+  AC_MSG_CHECKING(for st_blksize)
+  AC_TRY_COMPILE(
+*** ../vim-7.2.412/src/config.h.in	2010-02-24 14:46:58.000000000 +0100
+--- src/config.h.in	2010-04-01 15:10:49.000000000 +0200
+***************
+*** 196,201 ****
+--- 196,206 ----
+  #undef HAVE_UTIME
+  #undef HAVE_BIND_TEXTDOMAIN_CODESET
+  
++ /* Define, if needed, for accessing large files. */
++ #undef _LARGE_FILES
++ #undef _FILE_OFFSET_BITS
++ #undef _LARGEFILE_SOURCE
++ 
+  /* Define if you do not have utime(), but do have the utimes() function. */
+  #undef HAVE_UTIMES
+  
+*** ../vim-7.2.412/src/auto/configure	2010-03-10 16:27:27.000000000 +0100
+--- src/auto/configure	2010-05-07 16:01:08.000000000 +0200
+***************
+*** 821,826 ****
+--- 821,827 ----
+  with_gnome
+  with_motif_lib
+  with_tlib
++ enable_largefile
+  enable_acl
+  enable_gpm
+  enable_sysmouse
+***************
+*** 1485,1490 ****
+--- 1486,1492 ----
+    --enable-nextaw-check   If auto-select GUI, check for neXtaw default=yes
+    --enable-carbon-check   If auto-select GUI, check for Carbon default=yes
+    --disable-gtktest       Do not try to compile and run a test GTK program
++   --disable-largefile     omit support for large files
+    --disable-acl           Don't check for ACL support.
+    --disable-gpm           Don't use gpm (Linux mouse daemon).
+    --disable-sysmouse    Don't use sysmouse (mouse in *BSD console).
+***************
+*** 14345,14350 ****
+--- 14347,14709 ----
+  fi
+  
+  
++ # Check whether --enable-largefile was given.
++ if test "${enable_largefile+set}" = set; then
++   enableval=$enable_largefile;
++ fi
++ 
++ if test "$enable_largefile" != no; then
++ 
++   { $as_echo "$as_me:$LINENO: checking for special C compiler options needed for large files" >&5
++ $as_echo_n "checking for special C compiler options needed for large files... " >&6; }
++ if test "${ac_cv_sys_largefile_CC+set}" = set; then
++   $as_echo_n "(cached) " >&6
++ else
++   ac_cv_sys_largefile_CC=no
++      if test "$GCC" != yes; then
++        ac_save_CC=$CC
++        while :; do
++ 	 # IRIX 6.2 and later do not support large files by default,
++ 	 # so use the C compiler's -n32 option if that helps.
++ 	 cat >conftest.$ac_ext <<_ACEOF
++ /* confdefs.h.  */
++ _ACEOF
++ cat confdefs.h >>conftest.$ac_ext
++ cat >>conftest.$ac_ext <<_ACEOF
++ /* end confdefs.h.  */
++ #include <sys/types.h>
++  /* Check that off_t can represent 2**63 - 1 correctly.
++     We can't simply define LARGE_OFF_T to be 9223372036854775807,
++     since some C++ compilers masquerading as C compilers
++     incorrectly reject 9223372036854775807.  */
++ #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
++   int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
++ 		       && LARGE_OFF_T % 2147483647 == 1)
++ 		      ? 1 : -1];
++ int
++ main ()
++ {
++ 
++   ;
++   return 0;
++ }
++ _ACEOF
++ 	 rm -f conftest.$ac_objext
++ if { (ac_try="$ac_compile"
++ case "(($ac_try" in
++   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++   *) ac_try_echo=$ac_try;;
++ esac
++ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++ $as_echo "$ac_try_echo") >&5
++   (eval "$ac_compile") 2>conftest.er1
++   ac_status=$?
++   grep -v '^ *+' conftest.er1 >conftest.err
++   rm -f conftest.er1
++   cat conftest.err >&5
++   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++   (exit $ac_status); } && {
++ 	 test -z "$ac_c_werror_flag" ||
++ 	 test ! -s conftest.err
++        } && test -s conftest.$ac_objext; then
++   break
++ else
++   $as_echo "$as_me: failed program was:" >&5
++ sed 's/^/| /' conftest.$ac_ext >&5
++ 
++ 
++ fi
++ 
++ rm -f core conftest.err conftest.$ac_objext
++ 	 CC="$CC -n32"
++ 	 rm -f conftest.$ac_objext
++ if { (ac_try="$ac_compile"
++ case "(($ac_try" in
++   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++   *) ac_try_echo=$ac_try;;
++ esac
++ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++ $as_echo "$ac_try_echo") >&5
++   (eval "$ac_compile") 2>conftest.er1
++   ac_status=$?
++   grep -v '^ *+' conftest.er1 >conftest.err
++   rm -f conftest.er1
++   cat conftest.err >&5
++   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++   (exit $ac_status); } && {
++ 	 test -z "$ac_c_werror_flag" ||
++ 	 test ! -s conftest.err
++        } && test -s conftest.$ac_objext; then
++   ac_cv_sys_largefile_CC=' -n32'; break
++ else
++   $as_echo "$as_me: failed program was:" >&5
++ sed 's/^/| /' conftest.$ac_ext >&5
++ 
++ 
++ fi
++ 
++ rm -f core conftest.err conftest.$ac_objext
++ 	 break
++        done
++        CC=$ac_save_CC
++        rm -f conftest.$ac_ext
++     fi
++ fi
++ { $as_echo "$as_me:$LINENO: result: $ac_cv_sys_largefile_CC" >&5
++ $as_echo "$ac_cv_sys_largefile_CC" >&6; }
++   if test "$ac_cv_sys_largefile_CC" != no; then
++     CC=$CC$ac_cv_sys_largefile_CC
++   fi
++ 
++   { $as_echo "$as_me:$LINENO: checking for _FILE_OFFSET_BITS value needed for large files" >&5
++ $as_echo_n "checking for _FILE_OFFSET_BITS value needed for large files... " >&6; }
++ if test "${ac_cv_sys_file_offset_bits+set}" = set; then
++   $as_echo_n "(cached) " >&6
++ else
++   while :; do
++   cat >conftest.$ac_ext <<_ACEOF
++ /* confdefs.h.  */
++ _ACEOF
++ cat confdefs.h >>conftest.$ac_ext
++ cat >>conftest.$ac_ext <<_ACEOF
++ /* end confdefs.h.  */
++ #include <sys/types.h>
++  /* Check that off_t can represent 2**63 - 1 correctly.
++     We can't simply define LARGE_OFF_T to be 9223372036854775807,
++     since some C++ compilers masquerading as C compilers
++     incorrectly reject 9223372036854775807.  */
++ #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
++   int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
++ 		       && LARGE_OFF_T % 2147483647 == 1)
++ 		      ? 1 : -1];
++ int
++ main ()
++ {
++ 
++   ;
++   return 0;
++ }
++ _ACEOF
++ rm -f conftest.$ac_objext
++ if { (ac_try="$ac_compile"
++ case "(($ac_try" in
++   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++   *) ac_try_echo=$ac_try;;
++ esac
++ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++ $as_echo "$ac_try_echo") >&5
++   (eval "$ac_compile") 2>conftest.er1
++   ac_status=$?
++   grep -v '^ *+' conftest.er1 >conftest.err
++   rm -f conftest.er1
++   cat conftest.err >&5
++   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++   (exit $ac_status); } && {
++ 	 test -z "$ac_c_werror_flag" ||
++ 	 test ! -s conftest.err
++        } && test -s conftest.$ac_objext; then
++   ac_cv_sys_file_offset_bits=no; break
++ else
++   $as_echo "$as_me: failed program was:" >&5
++ sed 's/^/| /' conftest.$ac_ext >&5
++ 
++ 
++ fi
++ 
++ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++   cat >conftest.$ac_ext <<_ACEOF
++ /* confdefs.h.  */
++ _ACEOF
++ cat confdefs.h >>conftest.$ac_ext
++ cat >>conftest.$ac_ext <<_ACEOF
++ /* end confdefs.h.  */
++ #define _FILE_OFFSET_BITS 64
++ #include <sys/types.h>
++  /* Check that off_t can represent 2**63 - 1 correctly.
++     We can't simply define LARGE_OFF_T to be 9223372036854775807,
++     since some C++ compilers masquerading as C compilers
++     incorrectly reject 9223372036854775807.  */
++ #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
++   int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
++ 		       && LARGE_OFF_T % 2147483647 == 1)
++ 		      ? 1 : -1];
++ int
++ main ()
++ {
++ 
++   ;
++   return 0;
++ }
++ _ACEOF
++ rm -f conftest.$ac_objext
++ if { (ac_try="$ac_compile"
++ case "(($ac_try" in
++   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++   *) ac_try_echo=$ac_try;;
++ esac
++ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++ $as_echo "$ac_try_echo") >&5
++   (eval "$ac_compile") 2>conftest.er1
++   ac_status=$?
++   grep -v '^ *+' conftest.er1 >conftest.err
++   rm -f conftest.er1
++   cat conftest.err >&5
++   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++   (exit $ac_status); } && {
++ 	 test -z "$ac_c_werror_flag" ||
++ 	 test ! -s conftest.err
++        } && test -s conftest.$ac_objext; then
++   ac_cv_sys_file_offset_bits=64; break
++ else
++   $as_echo "$as_me: failed program was:" >&5
++ sed 's/^/| /' conftest.$ac_ext >&5
++ 
++ 
++ fi
++ 
++ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++   ac_cv_sys_file_offset_bits=unknown
++   break
++ done
++ fi
++ { $as_echo "$as_me:$LINENO: result: $ac_cv_sys_file_offset_bits" >&5
++ $as_echo "$ac_cv_sys_file_offset_bits" >&6; }
++ case $ac_cv_sys_file_offset_bits in #(
++   no | unknown) ;;
++   *)
++ cat >>confdefs.h <<_ACEOF
++ #define _FILE_OFFSET_BITS $ac_cv_sys_file_offset_bits
++ _ACEOF
++ ;;
++ esac
++ rm -rf conftest*
++   if test $ac_cv_sys_file_offset_bits = unknown; then
++     { $as_echo "$as_me:$LINENO: checking for _LARGE_FILES value needed for large files" >&5
++ $as_echo_n "checking for _LARGE_FILES value needed for large files... " >&6; }
++ if test "${ac_cv_sys_large_files+set}" = set; then
++   $as_echo_n "(cached) " >&6
++ else
++   while :; do
++   cat >conftest.$ac_ext <<_ACEOF
++ /* confdefs.h.  */
++ _ACEOF
++ cat confdefs.h >>conftest.$ac_ext
++ cat >>conftest.$ac_ext <<_ACEOF
++ /* end confdefs.h.  */
++ #include <sys/types.h>
++  /* Check that off_t can represent 2**63 - 1 correctly.
++     We can't simply define LARGE_OFF_T to be 9223372036854775807,
++     since some C++ compilers masquerading as C compilers
++     incorrectly reject 9223372036854775807.  */
++ #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
++   int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
++ 		       && LARGE_OFF_T % 2147483647 == 1)
++ 		      ? 1 : -1];
++ int
++ main ()
++ {
++ 
++   ;
++   return 0;
++ }
++ _ACEOF
++ rm -f conftest.$ac_objext
++ if { (ac_try="$ac_compile"
++ case "(($ac_try" in
++   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++   *) ac_try_echo=$ac_try;;
++ esac
++ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++ $as_echo "$ac_try_echo") >&5
++   (eval "$ac_compile") 2>conftest.er1
++   ac_status=$?
++   grep -v '^ *+' conftest.er1 >conftest.err
++   rm -f conftest.er1
++   cat conftest.err >&5
++   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++   (exit $ac_status); } && {
++ 	 test -z "$ac_c_werror_flag" ||
++ 	 test ! -s conftest.err
++        } && test -s conftest.$ac_objext; then
++   ac_cv_sys_large_files=no; break
++ else
++   $as_echo "$as_me: failed program was:" >&5
++ sed 's/^/| /' conftest.$ac_ext >&5
++ 
++ 
++ fi
++ 
++ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++   cat >conftest.$ac_ext <<_ACEOF
++ /* confdefs.h.  */
++ _ACEOF
++ cat confdefs.h >>conftest.$ac_ext
++ cat >>conftest.$ac_ext <<_ACEOF
++ /* end confdefs.h.  */
++ #define _LARGE_FILES 1
++ #include <sys/types.h>
++  /* Check that off_t can represent 2**63 - 1 correctly.
++     We can't simply define LARGE_OFF_T to be 9223372036854775807,
++     since some C++ compilers masquerading as C compilers
++     incorrectly reject 9223372036854775807.  */
++ #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
++   int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
++ 		       && LARGE_OFF_T % 2147483647 == 1)
++ 		      ? 1 : -1];
++ int
++ main ()
++ {
++ 
++   ;
++   return 0;
++ }
++ _ACEOF
++ rm -f conftest.$ac_objext
++ if { (ac_try="$ac_compile"
++ case "(($ac_try" in
++   *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++   *) ac_try_echo=$ac_try;;
++ esac
++ eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++ $as_echo "$ac_try_echo") >&5
++   (eval "$ac_compile") 2>conftest.er1
++   ac_status=$?
++   grep -v '^ *+' conftest.er1 >conftest.err
++   rm -f conftest.er1
++   cat conftest.err >&5
++   $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++   (exit $ac_status); } && {
++ 	 test -z "$ac_c_werror_flag" ||
++ 	 test ! -s conftest.err
++        } && test -s conftest.$ac_objext; then
++   ac_cv_sys_large_files=1; break
++ else
++   $as_echo "$as_me: failed program was:" >&5
++ sed 's/^/| /' conftest.$ac_ext >&5
++ 
++ 
++ fi
++ 
++ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++   ac_cv_sys_large_files=unknown
++   break
++ done
++ fi
++ { $as_echo "$as_me:$LINENO: result: $ac_cv_sys_large_files" >&5
++ $as_echo "$ac_cv_sys_large_files" >&6; }
++ case $ac_cv_sys_large_files in #(
++   no | unknown) ;;
++   *)
++ cat >>confdefs.h <<_ACEOF
++ #define _LARGE_FILES $ac_cv_sys_large_files
++ _ACEOF
++ ;;
++ esac
++ rm -rf conftest*
++   fi
++ fi
++ 
++ 
+  { $as_echo "$as_me:$LINENO: checking for st_blksize" >&5
+  $as_echo_n "checking for st_blksize... " >&6; }
+  cat >conftest.$ac_ext <<_ACEOF
+*** ../vim-7.2.412/src/version.c	2010-05-07 15:51:59.000000000 +0200
+--- src/version.c	2010-05-07 16:04:29.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     413,
+  /**/
+
+-- 
+How To Keep A Healthy Level Of Insanity:
+2. Page yourself over the intercom. Don't disguise your voice.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.414
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.414
+Problem:    CTRK-K <space> <space> does not produce 0xa0 as expected. (Tony
+	    Mechelynck)
+Solution:   Remove the Unicode range 0xe000 - 0xefff from digraphs, these are
+	    not valid characters.
+Files:	    src/digraph.c
+
+
+*** ../vim-7.2.413/src/digraph.c	2009-05-13 14:12:14.000000000 +0200
+--- src/digraph.c	2010-04-11 17:28:22.000000000 +0200
+***************
+*** 1933,1977 ****
+  	{'7', 'c', 0x3226},
+  	{'8', 'c', 0x3227},
+  	{'9', 'c', 0x3228},
+! 	{' ', ' ', 0xe000},
+! 	{'/', 'c', 0xe001},
+! 	{'U', 'A', 0xe002},
+! 	{'U', 'B', 0xe003},
+! 	{'"', '3', 0xe004},
+! 	{'"', '1', 0xe005},
+! 	{'"', '!', 0xe006},
+! 	{'"', '\'', 0xe007},
+! 	{'"', '>', 0xe008},
+! 	{'"', '?', 0xe009},
+! 	{'"', '-', 0xe00a},
+! 	{'"', '(', 0xe00b},
+! 	{'"', '.', 0xe00c},
+! 	{'"', ':', 0xe00d},
+! 	{'"', '0', 0xe00e},
+! 	{'"', '"', 0xe00f},
+! 	{'"', '<', 0xe010},
+! 	{'"', ',', 0xe011},
+! 	{'"', ';', 0xe012},
+! 	{'"', '_', 0xe013},
+! 	{'"', '=', 0xe014},
+! 	{'"', '/', 0xe015},
+! 	{'"', 'i', 0xe016},
+! 	{'"', 'd', 0xe017},
+! 	{'"', 'p', 0xe018},
+! 	{';', ';', 0xe019},
+! 	{',', ',', 0xe01a},
+! 	{'b', '3', 0xe01b},
+! 	{'C', 'i', 0xe01c},
+! 	{'f', '(', 0xe01d},
+! 	{'e', 'd', 0xe01e},
+! 	{'a', 'm', 0xe01f},
+! 	{'p', 'm', 0xe020},
+! 	{'F', 'l', 0xe023},
+! 	{'G', 'F', 0xe024},
+! 	{'>', 'V', 0xe025},
+! 	{'!', '*', 0xe026},
+! 	{'?', '*', 0xe027},
+! 	{'J', '<', 0xe028},
+  	{'f', 'f', 0xfb00},
+  	{'f', 'i', 0xfb01},
+  	{'f', 'l', 0xfb02},
+--- 1933,1940 ----
+  	{'7', 'c', 0x3226},
+  	{'8', 'c', 0x3227},
+  	{'9', 'c', 0x3228},
+! 	/* code points 0xe000 - 0xefff excluded, they have no assigned
+! 	 * characters, only used in proposals. */
+  	{'f', 'f', 0xfb00},
+  	{'f', 'i', 0xfb01},
+  	{'f', 'l', 0xfb02},
+*** ../vim-7.2.413/src/version.c	2010-05-07 16:05:48.000000000 +0200
+--- src/version.c	2010-05-07 16:17:26.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     414,
+  /**/
+
+-- 
+How To Keep A Healthy Level Of Insanity:
+4. Put your garbage can on your desk and label it "in".
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.415
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.415
+Problem:    Win32: Can't open a remote file when starting Vim.
+Solution:   Don't invoke cygwin_conv_path() for URLs. (Tomoya Adachi)
+Files:	    src/main.c
+
+
+*** ../vim-7.2.414/src/main.c	2009-12-16 18:27:29.000000000 +0100
+--- src/main.c	2010-04-12 20:57:44.000000000 +0200
+***************
+*** 1477,1483 ****
+  	++initstr;
+      }
+  
+!     /* Avoid using evim mode for "editor". */
+      if (TOLOWER_ASC(initstr[0]) == 'e'
+  	    && (TOLOWER_ASC(initstr[1]) == 'v'
+  		|| TOLOWER_ASC(initstr[1]) == 'g'))
+--- 1477,1483 ----
+  	++initstr;
+      }
+  
+!     /* Use evim mode for "evim" and "egvim", not for "editor". */
+      if (TOLOWER_ASC(initstr[0]) == 'e'
+  	    && (TOLOWER_ASC(initstr[1]) == 'v'
+  		|| TOLOWER_ASC(initstr[1]) == 'g'))
+***************
+*** 2262,2268 ****
+  	     * Look for evidence of non-Cygwin paths before we bother.
+  	     * This is only for when using the Unix files.
+  	     */
+! 	    if (strpbrk(p, "\\:") != NULL)
+  	    {
+  		char posix_path[PATH_MAX];
+  
+--- 2262,2268 ----
+  	     * Look for evidence of non-Cygwin paths before we bother.
+  	     * This is only for when using the Unix files.
+  	     */
+! 	    if (strpbrk(p, "\\:") != NULL && !path_with_url(p))
+  	    {
+  		char posix_path[PATH_MAX];
+  
+*** ../vim-7.2.414/src/version.c	2010-05-07 16:18:08.000000000 +0200
+--- src/version.c	2010-05-07 16:34:22.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     415,
+  /**/
+
+-- 
+How To Keep A Healthy Level Of Insanity:
+6. In the memo field of all your checks, write "for sexual favors".
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.416
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.416
+Problem:    Logtalk.dict is not installed.
+Solution:   Add it to the install target. (Markus Heidelberg)
+Files:      src/Makefile
+
+
+*** ../vim-7.2.415/src/Makefile	2010-05-07 16:35:12.000000000 +0200
+--- src/Makefile	2010-04-06 20:19:48.000000000 +0200
+***************
+*** 30,36 ****
+  #	  want to disable using X11 libraries.	This speeds up starting Vim,
+  #	  but the window title will not be set and the X11 selection can not
+  #	  used.
+! #	- Uncomment the line "CONF_OPT_XSMP = --without-xsmp" if you have the
+  #	  X11 Session Management Protocol (XSMP) library (libSM) but do not
+  #	  want to use it.
+  #	  This can speedup Vim startup but Vim loses the ability to catch the
+--- 30,36 ----
+  #	  want to disable using X11 libraries.	This speeds up starting Vim,
+  #	  but the window title will not be set and the X11 selection can not
+  #	  used.
+! #	- Uncomment the line "CONF_OPT_XSMP = --disable-xsmp" if you have the
+  #	  X11 Session Management Protocol (XSMP) library (libSM) but do not
+  #	  want to use it.
+  #	  This can speedup Vim startup but Vim loses the ability to catch the
+***************
+*** 1882,1888 ****
+  	cd $(PLUGSOURCE); $(INSTALL_DATA) *.vim README.txt $(DEST_PLUG)
+  	cd $(DEST_PLUG); chmod $(HELPMOD) *.vim README.txt
+  # install the ftplugin files
+! 	cd $(FTPLUGSOURCE); $(INSTALL_DATA) *.vim README.txt $(DEST_FTP)
+  	cd $(DEST_FTP); chmod $(HELPMOD) *.vim README.txt
+  # install the compiler files
+  	cd $(COMPSOURCE); $(INSTALL_DATA) *.vim README.txt $(DEST_COMP)
+--- 1882,1888 ----
+  	cd $(PLUGSOURCE); $(INSTALL_DATA) *.vim README.txt $(DEST_PLUG)
+  	cd $(DEST_PLUG); chmod $(HELPMOD) *.vim README.txt
+  # install the ftplugin files
+! 	cd $(FTPLUGSOURCE); $(INSTALL_DATA) *.vim README.txt logtalk.dict $(DEST_FTP)
+  	cd $(DEST_FTP); chmod $(HELPMOD) *.vim README.txt
+  # install the compiler files
+  	cd $(COMPSOURCE); $(INSTALL_DATA) *.vim README.txt $(DEST_COMP)
+*** ../vim-7.2.415/src/version.c	2010-05-07 16:34:59.000000000 +0200
+--- src/version.c	2010-05-07 16:53:17.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     416,
+  /**/
+
+-- 
+How To Keep A Healthy Level Of Insanity:
+8. Don't use any punctuation marks.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.417
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.417
+Problem:    When 'shell' has an argument with a slash then 'shellpipe' is not
+	    set properly. (Britton Kerin)
+Solution:   Assume there are no spaces in the path, arguments follow.
+Files:	    src/option.c
+
+
+*** ../vim-7.2.416/src/option.c	2010-02-24 14:34:10.000000000 +0100
+--- src/option.c	2010-05-13 13:05:28.000000000 +0200
+***************
+*** 3696,3704 ****
+--- 3696,3727 ----
+       * Isolate the name of the shell:
+       * - Skip beyond any path.  E.g., "/usr/bin/csh -f" -> "csh -f".
+       * - Remove any argument.  E.g., "csh -f" -> "csh".
++      * But don't allow a space in the path, so that this works:
++      *   "/usr/bin/csh --rcfile ~/.cshrc"
++      * But don't do that for Windows, it's common to have a space in the path.
+       */
++ #ifdef WIN3264
+      p = gettail(p_sh);
+      p = vim_strnsave(p, (int)(skiptowhite(p) - p));
++ #else
++     p = skiptowhite(p_sh);
++     if (*p == NUL)
++     {
++ 	/* No white space, use the tail. */
++ 	p = vim_strsave(gettail(p_sh));
++     }
++     else
++     {
++ 	char_u  *p1, *p2;
++ 
++ 	/* Find the last path separator before the space. */
++ 	p1 = p_sh;
++ 	for (p2 = p_sh; p2 < p; mb_ptr_adv(p2))
++ 	    if (vim_ispathsep(*p2))
++ 		p1 = p2 + 1;
++ 	p = vim_strnsave(p1, (int)(p - p1));
++     }
++ #endif
+      if (p != NULL)
+      {
+  	/*
+*** ../vim-7.2.416/src/version.c	2010-05-07 16:54:32.000000000 +0200
+--- src/version.c	2010-05-13 13:11:17.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     417,
+  /**/
+
+-- 
+If you put 7 of the most talented OSS developers in a room for a week
+and asked them to fix a bug in a spreadsheet program, in 1 week
+you'd have 2 new mail readers and a text-based web browser.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.418
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.418
+Problem:    Vim tries to set the background or foreground color in a terminal
+	    to -1.  (Graywh)  Happens with ":hi Normal ctermbg=NONE".
+Solution:   When resetting the foreground or background color don't set the
+	    color, let the clear screen code do that.
+Files:	    src/syntax.c
+
+
+*** ../vim-7.2.417/src/syntax.c	2010-03-23 14:39:07.000000000 +0100
+--- src/syntax.c	2010-05-13 15:34:27.000000000 +0200
+***************
+*** 7136,7142 ****
+  		    }
+  		}
+  	    }
+! 	    /* Add one to the argument, to avoid zero */
+  	    if (key[5] == 'F')
+  	    {
+  		HL_TABLE()[idx].sg_cterm_fg = color + 1;
+--- 7136,7143 ----
+  		    }
+  		}
+  	    }
+! 	    /* Add one to the argument, to avoid zero.  Zero is used for
+! 	     * "NONE", then "color" is -1. */
+  	    if (key[5] == 'F')
+  	    {
+  		HL_TABLE()[idx].sg_cterm_fg = color + 1;
+***************
+*** 7150,7156 ****
+  #endif
+  		    {
+  			must_redraw = CLEAR;
+! 			if (termcap_active)
+  			    term_fg_color(color);
+  		    }
+  		}
+--- 7151,7157 ----
+  #endif
+  		    {
+  			must_redraw = CLEAR;
+! 			if (termcap_active && color >= 0)
+  			    term_fg_color(color);
+  		    }
+  		}
+***************
+*** 7167,7182 ****
+  #endif
+  		    {
+  			must_redraw = CLEAR;
+! 			if (termcap_active)
+! 			    term_bg_color(color);
+! 			if (t_colors < 16)
+! 			    i = (color == 0 || color == 4);
+! 			else
+! 			    i = (color < 7 || color == 8);
+! 			/* Set the 'background' option if the value is wrong. */
+! 			if (i != (*p_bg == 'd'))
+! 			    set_option_value((char_u *)"bg", 0L,
+! 				 i ? (char_u *)"dark" : (char_u *)"light", 0);
+  		    }
+  		}
+  	    }
+--- 7168,7188 ----
+  #endif
+  		    {
+  			must_redraw = CLEAR;
+! 			if (color >= 0)
+! 			{
+! 			    if (termcap_active)
+! 				term_bg_color(color);
+! 			    if (t_colors < 16)
+! 				i = (color == 0 || color == 4);
+! 			    else
+! 				i = (color < 7 || color == 8);
+! 			    /* Set the 'background' option if the value is
+! 			     * wrong. */
+! 			    if (i != (*p_bg == 'd'))
+! 				set_option_value((char_u *)"bg", 0L,
+! 					i ?  (char_u *)"dark"
+! 					  : (char_u *)"light", 0);
+! 			}
+  		    }
+  		}
+  	    }
+*** ../vim-7.2.417/src/version.c	2010-05-13 13:12:01.000000000 +0200
+--- src/version.c	2010-05-13 14:29:59.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     418,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+30. Even though you died last week, you've managed to retain OPS on your
+    favorite IRC channel.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.419
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.419
+Problem:    Memory leak in Motif when clicking on "Search Vim Help".
+Solution:   Free string returned by XmTextGetString(). (Dominique Pelle)
+Files:	    src/gui_motif.c
+
+
+*** ../vim-7.2.418/src/gui_motif.c	2009-05-21 23:25:38.000000000 +0200
+--- src/gui_motif.c	2010-05-13 16:08:14.000000000 +0200
+***************
+*** 2917,2922 ****
+--- 2917,2923 ----
+  	    *textfield = NUL;
+  	else
+  	    vim_strncpy(textfield, p, IOSIZE - 1);
++ 	XtFree((char *)p);
+      }
+  
+      suppress_dialog_mnemonics(dialogform);
+*** ../vim-7.2.418/src/version.c	2010-05-13 15:40:23.000000000 +0200
+--- src/version.c	2010-05-13 16:09:28.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     419,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+32. You don't know what sex three of your closest friends are, because they
+    have neutral nicknames and you never bothered to ask.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.420
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.420
+Problem:    ":argedit" does not accept "++enc=utf8" as documented. (Dominique
+	    Pelle)
+Solution:   Add the ARGOPT flag to ":argedit".
+Files:	    src/ex_cmds.h
+
+
+*** ../vim-7.2.419/src/ex_cmds.h	2009-07-09 15:55:34.000000000 +0200
+--- src/ex_cmds.h	2010-05-13 16:18:38.000000000 +0200
+***************
+*** 52,58 ****
+  #define ARGOPT	      0x40000L	/* allow "++opt=val" argument */
+  #define SBOXOK	      0x80000L	/* allowed in the sandbox */
+  #define CMDWIN	     0x100000L	/* allowed in cmdline window */
+! #define MODIFY       0x200000L  /* forbidden in non-'modifiable' buffer */
+  #define EXFLAGS      0x400000L	/* allow flags after count in argument */
+  #define FILES	(XFILE | EXTRA)	/* multiple extra files allowed */
+  #define WORD1	(EXTRA | NOSPC)	/* one extra word allowed */
+--- 52,58 ----
+  #define ARGOPT	      0x40000L	/* allow "++opt=val" argument */
+  #define SBOXOK	      0x80000L	/* allowed in the sandbox */
+  #define CMDWIN	     0x100000L	/* allowed in cmdline window */
+! #define MODIFY       0x200000L	/* forbidden in non-'modifiable' buffer */
+  #define EXFLAGS      0x400000L	/* allow flags after count in argument */
+  #define FILES	(XFILE | EXTRA)	/* multiple extra files allowed */
+  #define WORD1	(EXTRA | NOSPC)	/* one extra word allowed */
+***************
+*** 116,122 ****
+  EX(CMD_argdo,		"argdo",	ex_listdo,
+  			BANG|NEEDARG|EXTRA|NOTRLCOM),
+  EX(CMD_argedit,		"argedit",	ex_argedit,
+! 			BANG|NEEDARG|RANGE|NOTADR|FILE1|EDITCMD|TRLBAR),
+  EX(CMD_argglobal,	"argglobal",	ex_args,
+  			BANG|FILES|EDITCMD|ARGOPT|TRLBAR),
+  EX(CMD_arglocal,	"arglocal",	ex_args,
+--- 116,122 ----
+  EX(CMD_argdo,		"argdo",	ex_listdo,
+  			BANG|NEEDARG|EXTRA|NOTRLCOM),
+  EX(CMD_argedit,		"argedit",	ex_argedit,
+! 			BANG|NEEDARG|RANGE|NOTADR|FILE1|EDITCMD|ARGOPT|TRLBAR),
+  EX(CMD_argglobal,	"argglobal",	ex_args,
+  			BANG|FILES|EDITCMD|ARGOPT|TRLBAR),
+  EX(CMD_arglocal,	"arglocal",	ex_args,
+*** ../vim-7.2.419/src/version.c	2010-05-13 16:31:15.000000000 +0200
+--- src/version.c	2010-05-13 16:43:30.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     420,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+33. You name your children Eudora, Mozilla and Dotcom.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.421
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.421
+Problem:    Folds are sometimes not updated properly and there is no way to
+	    force an update.
+Solution:   Make "zx" and "zX" recompute folds (suggested by Christian
+	    Brabandt)
+Files:	    src/normal.c
+
+
+*** ../vim-7.2.420/src/normal.c	2010-05-07 15:51:59.000000000 +0200
+--- src/normal.c	2010-05-13 16:43:05.000000000 +0200
+***************
+*** 4936,4948 ****
+  
+  		/* "zx": re-apply 'foldlevel' and open folds at the cursor */
+      case 'x':	curwin->w_p_fen = TRUE;
+! 		newFoldLevel();		/* update right now */
+  		foldOpenCursor();
+  		break;
+  
+  		/* "zX": undo manual opens/closes, re-apply 'foldlevel' */
+      case 'X':	curwin->w_p_fen = TRUE;
+! 		old_fdl = -1;		/* force an update */
+  		break;
+  
+  		/* "zm": fold more */
+--- 4936,4950 ----
+  
+  		/* "zx": re-apply 'foldlevel' and open folds at the cursor */
+      case 'x':	curwin->w_p_fen = TRUE;
+! 		curwin->w_foldinvalid = TRUE;	/* recompute folds */
+! 		newFoldLevel();			/* update right now */
+  		foldOpenCursor();
+  		break;
+  
+  		/* "zX": undo manual opens/closes, re-apply 'foldlevel' */
+      case 'X':	curwin->w_p_fen = TRUE;
+! 		curwin->w_foldinvalid = TRUE;	/* recompute folds */
+! 		old_fdl = -1;			/* force an update */
+  		break;
+  
+  		/* "zm": fold more */
+*** ../vim-7.2.420/src/version.c	2010-05-13 16:46:16.000000000 +0200
+--- src/version.c	2010-05-13 17:33:34.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     421,
+  /**/
+
+-- 
+My sister Cecilia opened a computer store in Hawaii.
+She sells C shells by the seashore.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.422
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.422
+Problem:    May get E763 when using spell dictionaries.
+Solution:   Avoid utf-8 case folded character to be truncated to 8 bits and
+	    differ from latin1. (Dominique Pelle)
+Files:	    src/spell.c
+
+
+*** ../vim-7.2.421/src/spell.c	2010-01-19 13:06:42.000000000 +0100
+--- src/spell.c	2010-05-13 17:29:28.000000000 +0200
+***************
+*** 9780,9789 ****
+      {
+  	for (i = 128; i < 256; ++i)
+  	{
+  	    spelltab.st_isu[i] = utf_isupper(i);
+  	    spelltab.st_isw[i] = spelltab.st_isu[i] || utf_islower(i);
+! 	    spelltab.st_fold[i] = utf_fold(i);
+! 	    spelltab.st_upper[i] = utf_toupper(i);
+  	}
+      }
+      else
+--- 9780,9795 ----
+      {
+  	for (i = 128; i < 256; ++i)
+  	{
++ 	    int f = utf_fold(i);
++ 	    int u = utf_toupper(i);
++ 
+  	    spelltab.st_isu[i] = utf_isupper(i);
+  	    spelltab.st_isw[i] = spelltab.st_isu[i] || utf_islower(i);
+! 	    /* The folded/upper-cased value is different between latin1 and
+! 	     * utf8 for 0xb5, causing E763 for no good reason.  Use the latin1
+! 	     * value for utf-8 to avoid this. */
+! 	    spelltab.st_fold[i] = (f < 256) ? f : i;
+! 	    spelltab.st_upper[i] = (u < 256) ? u : i;
+  	}
+      }
+      else
+*** ../vim-7.2.421/src/version.c	2010-05-13 17:35:52.000000000 +0200
+--- src/version.c	2010-05-13 17:46:03.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     422,
+  /**/
+
+-- 
+Q. What happens to programmers when they die?
+A: MS-Windows programmers are reinstalled.  C++ programmers become undefined,
+   anyone who refers to them will die as well.  Java programmers reincarnate
+   after being garbage collected.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.423
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.423
+Problem:    Crash when assigning s: to variable. (Yukihiro Nakadaira)
+Solution:   Make ga_scripts contain pointer to scriptvar_T instead of
+	    scriptvar_T itself. (Dominique Pelle)
+Files:	    src/eval.c
+
+
+*** ../vim-7.2.422/src/eval.c	2010-03-17 19:53:44.000000000 +0100
+--- src/eval.c	2010-05-14 12:02:16.000000000 +0200
+***************
+*** 145,153 ****
+      dict_T	sv_dict;
+  } scriptvar_T;
+  
+! static garray_T	    ga_scripts = {0, 0, sizeof(scriptvar_T), 4, NULL};
+! #define SCRIPT_SV(id) (((scriptvar_T *)ga_scripts.ga_data)[(id) - 1])
+! #define SCRIPT_VARS(id) (SCRIPT_SV(id).sv_dict.dv_hashtab)
+  
+  static int echo_attr = 0;   /* attributes used for ":echo" */
+  
+--- 145,153 ----
+      dict_T	sv_dict;
+  } scriptvar_T;
+  
+! static garray_T	    ga_scripts = {0, 0, sizeof(scriptvar_T *), 4, NULL};
+! #define SCRIPT_SV(id) (((scriptvar_T **)ga_scripts.ga_data)[(id) - 1])
+! #define SCRIPT_VARS(id) (SCRIPT_SV(id)->sv_dict.dv_hashtab)
+  
+  static int echo_attr = 0;   /* attributes used for ":echo" */
+  
+***************
+*** 866,875 ****
+      hash_init(&vimvarht);  /* garbage_collect() will access it */
+      hash_clear(&compat_hashtab);
+  
+-     /* script-local variables */
+-     for (i = 1; i <= ga_scripts.ga_len; ++i)
+- 	vars_clear(&SCRIPT_VARS(i));
+-     ga_clear(&ga_scripts);
+      free_scriptnames();
+  
+      /* global variables */
+--- 866,871 ----
+***************
+*** 878,883 ****
+--- 874,887 ----
+      /* autoloaded script names */
+      ga_clear_strings(&ga_loaded);
+  
++     /* script-local variables */
++     for (i = 1; i <= ga_scripts.ga_len; ++i)
++     {
++ 	vars_clear(&SCRIPT_VARS(i));
++ 	vim_free(SCRIPT_SV(i));
++     }
++     ga_clear(&ga_scripts);
++ 
+      /* unreferenced lists and dicts */
+      (void)garbage_collect();
+  
+***************
+*** 18803,18809 ****
+  	/* Must be something like "s:", otherwise "ht" would be NULL. */
+  	switch (varname[-2])
+  	{
+! 	    case 's': return &SCRIPT_SV(current_SID).sv_var;
+  	    case 'g': return &globvars_var;
+  	    case 'v': return &vimvars_var;
+  	    case 'b': return &curbuf->b_bufvar;
+--- 18807,18813 ----
+  	/* Must be something like "s:", otherwise "ht" would be NULL. */
+  	switch (varname[-2])
+  	{
+! 	    case 's': return &SCRIPT_SV(current_SID)->sv_var;
+  	    case 'g': return &globvars_var;
+  	    case 'v': return &vimvars_var;
+  	    case 'b': return &curbuf->b_bufvar;
+***************
+*** 18928,18940 ****
+  	    ht = &SCRIPT_VARS(i);
+  	    if (ht->ht_mask == HT_INIT_SIZE - 1)
+  		ht->ht_array = ht->ht_smallarray;
+! 	    sv = &SCRIPT_SV(i);
+  	    sv->sv_var.di_tv.vval.v_dict = &sv->sv_dict;
+  	}
+  
+  	while (ga_scripts.ga_len < id)
+  	{
+! 	    sv = &SCRIPT_SV(ga_scripts.ga_len + 1);
+  	    init_var_dict(&sv->sv_dict, &sv->sv_var);
+  	    ++ga_scripts.ga_len;
+  	}
+--- 18932,18945 ----
+  	    ht = &SCRIPT_VARS(i);
+  	    if (ht->ht_mask == HT_INIT_SIZE - 1)
+  		ht->ht_array = ht->ht_smallarray;
+! 	    sv = SCRIPT_SV(i);
+  	    sv->sv_var.di_tv.vval.v_dict = &sv->sv_dict;
+  	}
+  
+  	while (ga_scripts.ga_len < id)
+  	{
+! 	    sv = SCRIPT_SV(ga_scripts.ga_len + 1) = 
+! 		(scriptvar_T *)alloc_clear(sizeof(scriptvar_T));
+  	    init_var_dict(&sv->sv_dict, &sv->sv_var);
+  	    ++ga_scripts.ga_len;
+  	}
+***************
+*** 21931,21937 ****
+      if (find_viminfo_parameter('!') == NULL)
+  	return;
+  
+!     fprintf(fp, _("\n# global variables:\n"));
+  
+      todo = (int)globvarht.ht_used;
+      for (hi = globvarht.ht_array; todo > 0; ++hi)
+--- 21936,21942 ----
+      if (find_viminfo_parameter('!') == NULL)
+  	return;
+  
+!     fputs(_("\n# global variables:\n"), fp);
+  
+      todo = (int)globvarht.ht_used;
+      for (hi = globvarht.ht_array; todo > 0; ++hi)
+*** ../vim-7.2.422/src/version.c	2010-05-13 17:46:53.000000000 +0200
+--- src/version.c	2010-05-14 12:13:19.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     423,
+  /**/
+
+-- 
+He who laughs last, thinks slowest.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.424
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.424
+Problem:    ":colorscheme" without an argument doesn't do anything.
+Solution:   Make it echo the current color scheme name.  (partly by Christian
+	    Brabandt)
+Files:	    runtime/doc/syntax.txt, src/ex_cmds.h, src/ex_docmd.c
+
+
+*** ../vim-7.2.423/runtime/doc/syntax.txt	2008-08-09 19:36:52.000000000 +0200
+--- runtime/doc/syntax.txt	2010-05-14 15:27:47.000000000 +0200
+***************
+*** 113,118 ****
+--- 113,121 ----
+      :syntax off		$VIMRUNTIME/syntax/nosyntax.vim
+  Also see |syntax-loading|.
+  
++ NOTE: If displaying long lines is slow and switching off syntax highlighting
++ makes it fast, consider setting the 'synmaxcol' option to a lower value.
++ 
+  ==============================================================================
+  2. Syntax files						*:syn-files*
+  
+***************
+*** 3829,3841 ****
+  in their own color.
+  
+  						*:colo* *:colorscheme* *E185*
+  :colo[rscheme] {name}	Load color scheme {name}.  This searches 'runtimepath'
+  			for the file "colors/{name}.vim.  The first one that
+  			is found is loaded.
+! 			To see the name of the currently active color scheme
+! 			(if there is one): >
+! 				:echo g:colors_name
+! <			Doesn't work recursively, thus you can't use
+  			":colorscheme" in a color scheme script.
+  			After the color scheme has been loaded the
+  			|ColorScheme| autocommand event is triggered.
+--- 3871,3890 ----
+  in their own color.
+  
+  						*:colo* *:colorscheme* *E185*
++ :colo[rscheme]		Output the name of the currently active color scheme.
++ 			This is basically the same as >
++ 				:echo g:colors_name
++ <			In case g:colors_name has not been defined :colo will
++ 			output "default".  When compiled without the |+eval|
++ 			feature it will output "unknown".
++ 
+  :colo[rscheme] {name}	Load color scheme {name}.  This searches 'runtimepath'
+  			for the file "colors/{name}.vim.  The first one that
+  			is found is loaded.
+! 			To see the name of the currently active color scheme: >
+! 				:colo
+! <			The name is also stored in the g:colors_name variable.
+! 			Doesn't work recursively, thus you can't use
+  			":colorscheme" in a color scheme script.
+  			After the color scheme has been loaded the
+  			|ColorScheme| autocommand event is triggered.
+***************
+*** 4032,4038 ****
+  	colors.
+  	When a colorscheme is being used, changing 'background' causes it to
+  	be reloaded, which may reset all colors (including Normal).  First
+! 	delete the "colors_name" variable when you don't want this.
+  
+  	When you have set "ctermfg" or "ctermbg" for the Normal group, Vim
+  	needs to reset the color when exiting.	This is done with the "op"
+--- 4081,4087 ----
+  	colors.
+  	When a colorscheme is being used, changing 'background' causes it to
+  	be reloaded, which may reset all colors (including Normal).  First
+! 	delete the "g:colors_name" variable when you don't want this.
+  
+  	When you have set "ctermfg" or "ctermbg" for the Normal group, Vim
+  	needs to reset the color when exiting.	This is done with the "op"
+*** ../vim-7.2.423/src/ex_cmds.h	2010-05-13 16:46:16.000000000 +0200
+--- src/ex_cmds.h	2010-05-14 13:08:45.000000000 +0200
+***************
+*** 256,262 ****
+  EX(CMD_colder,		"colder",	qf_age,
+  			RANGE|NOTADR|COUNT|TRLBAR),
+  EX(CMD_colorscheme,	"colorscheme",	ex_colorscheme,
+! 			NEEDARG|WORD1|TRLBAR|CMDWIN),
+  EX(CMD_command,		"command",	ex_command,
+  			EXTRA|BANG|NOTRLCOM|USECTRLV|CMDWIN),
+  EX(CMD_comclear,	"comclear",	ex_comclear,
+--- 256,262 ----
+  EX(CMD_colder,		"colder",	qf_age,
+  			RANGE|NOTADR|COUNT|TRLBAR),
+  EX(CMD_colorscheme,	"colorscheme",	ex_colorscheme,
+! 			WORD1|TRLBAR|CMDWIN),
+  EX(CMD_command,		"command",	ex_command,
+  			EXTRA|BANG|NOTRLCOM|USECTRLV|CMDWIN),
+  EX(CMD_comclear,	"comclear",	ex_comclear,
+*** ../vim-7.2.423/src/ex_docmd.c	2010-03-02 15:55:51.000000000 +0100
+--- src/ex_docmd.c	2010-05-14 15:26:14.000000000 +0200
+***************
+*** 6226,6232 ****
+  ex_colorscheme(eap)
+      exarg_T	*eap;
+  {
+!     if (load_colors(eap->arg) == FAIL)
+  	EMSG2(_("E185: Cannot find color scheme %s"), eap->arg);
+  }
+  
+--- 6226,6256 ----
+  ex_colorscheme(eap)
+      exarg_T	*eap;
+  {
+!     if (*eap->arg == NUL)
+!     {
+! #ifdef FEAT_EVAL
+! 	char_u *expr = vim_strsave((char_u *)"g:colors_name");
+! 	char_u *p = NULL;
+! 
+! 	if (expr != NULL)
+! 	{
+! 	    ++emsg_off;
+! 	    p = eval_to_string(expr, NULL, FALSE);
+! 	    --emsg_off;
+! 	    vim_free(expr);
+! 	}
+! 	if (p != NULL)
+! 	{
+! 	    MSG(p);
+! 	    vim_free(p);
+! 	}
+! 	else
+! 	    MSG("default");
+! #else
+! 	MSG(_("unknown"));
+! #endif
+!     }
+!     else if (load_colors(eap->arg) == FAIL)
+  	EMSG2(_("E185: Cannot find color scheme %s"), eap->arg);
+  }
+  
+*** ../vim-7.2.423/src/version.c	2010-05-14 12:16:19.000000000 +0200
+--- src/version.c	2010-05-14 15:23:20.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     424,
+  /**/
+
+-- 
+Everyone has a photographic memory. Some don't have film.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.425
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.425
+Problem:    Some compilers complain about fourth EX() argument.
+Solution:   Add cast to long_u.
+Files:	    src/ex_cmds.h
+
+
+*** ../vim-7.2.424/src/ex_cmds.h	2010-05-14 15:28:37.000000000 +0200
+--- src/ex_cmds.h	2010-05-14 13:08:45.000000000 +0200
+***************
+*** 74,80 ****
+  # undef EX	    /* just in case */
+  #endif
+  #ifdef DO_DECLARE_EXCMD
+! # define EX(a, b, c, d)  {(char_u *)b, c, d}
+  
+  typedef void (*ex_func_T) __ARGS((exarg_T *eap));
+  
+--- 74,80 ----
+  # undef EX	    /* just in case */
+  #endif
+  #ifdef DO_DECLARE_EXCMD
+! # define EX(a, b, c, d)  {(char_u *)b, c, (long_u)(d)}
+  
+  typedef void (*ex_func_T) __ARGS((exarg_T *eap));
+  
+*** ../vim-7.2.424/src/version.c	2010-05-14 15:28:37.000000000 +0200
+--- src/version.c	2010-05-14 15:42:23.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     425,
+  /**/
+
+-- 
+The users that I support would double-click on a landmine to find out
+what happens.				-- A system administrator
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.426
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.426
+Problem:    Commas in 'langmap' are not always handled correctly.
+Solution:   Require commas to be backslash escaped. (James Vega)
+Files:	    src/option.c
+
+
+*** ../vim-7.2.425/src/option.c	2010-05-13 13:12:01.000000000 +0200
+--- src/option.c	2010-05-14 16:04:21.000000000 +0200
+***************
+*** 10432,10437 ****
+--- 10432,10442 ----
+  	    p2 = NULL;	    /* aAbBcCdD form, p2 is NULL */
+  	while (p[0])
+  	{
++ 	    if (p[0] == ',')
++ 	    {
++ 		++p;
++ 		break;
++ 	    }
+  	    if (p[0] == '\\' && p[1] != NUL)
+  		++p;
+  #ifdef FEAT_MBYTE
+***************
+*** 10439,10464 ****
+  #else
+  	    from = p[0];
+  #endif
+  	    if (p2 == NULL)
+  	    {
+  		mb_ptr_adv(p);
+! 		if (p[0] == '\\')
+! 		    ++p;
+  #ifdef FEAT_MBYTE
+! 		to = (*mb_ptr2char)(p);
+  #else
+! 		to = p[0];
+  #endif
+  	    }
+  	    else
+  	    {
+! 		if (p2[0] == '\\')
+! 		    ++p2;
+  #ifdef FEAT_MBYTE
+! 		to = (*mb_ptr2char)(p2);
+  #else
+! 		to = p2[0];
+  #endif
+  	    }
+  	    if (to == NUL)
+  	    {
+--- 10444,10476 ----
+  #else
+  	    from = p[0];
+  #endif
++ 	    to = NUL;
+  	    if (p2 == NULL)
+  	    {
+  		mb_ptr_adv(p);
+! 		if (p[0] != ',')
+! 		{
+! 		    if (p[0] == '\\')
+! 			++p;
+  #ifdef FEAT_MBYTE
+! 		    to = (*mb_ptr2char)(p);
+  #else
+! 		    to = p[0];
+  #endif
++ 		}
+  	    }
+  	    else
+  	    {
+! 		if (p2[0] != ',')
+! 		{
+! 		    if (p2[0] == '\\')
+! 			++p2;
+  #ifdef FEAT_MBYTE
+! 		    to = (*mb_ptr2char)(p2);
+  #else
+! 		    to = p2[0];
+  #endif
++ 		}
+  	    }
+  	    if (to == NUL)
+  	    {
+***************
+*** 10476,10490 ****
+  
+  	    /* Advance to next pair */
+  	    mb_ptr_adv(p);
+! 	    if (p2 == NULL)
+! 	    {
+! 		if (p[0] == ',')
+! 		{
+! 		    ++p;
+! 		    break;
+! 		}
+! 	    }
+! 	    else
+  	    {
+  		mb_ptr_adv(p2);
+  		if (*p == ';')
+--- 10488,10494 ----
+  
+  	    /* Advance to next pair */
+  	    mb_ptr_adv(p);
+! 	    if (p2 != NULL)
+  	    {
+  		mb_ptr_adv(p2);
+  		if (*p == ';')
+*** ../vim-7.2.425/src/version.c	2010-05-14 15:42:49.000000000 +0200
+--- src/version.c	2010-05-14 17:32:11.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     426,
+  /**/
+
+-- 
+On the other hand, you have different fingers.
+                                      -- Steven Wright
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.427
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.427
+Problem:    The swapfile is created using the destination of a symlink, but
+	    recovery doesn't follow symlinks.
+Solution:   When recovering, resolve symlinks. (James Vega)
+Files:	    src/memline.c
+
+
+*** ../vim-7.2.426/src/memline.c	2010-03-10 14:46:21.000000000 +0100
+--- src/memline.c	2010-05-14 17:28:29.000000000 +0200
+***************
+*** 245,250 ****
+--- 245,253 ----
+  #ifdef FEAT_BYTEOFF
+  static void ml_updatechunk __ARGS((buf_T *buf, long line, long len, int updtype));
+  #endif
++ #ifdef HAVE_READLINK
++ static int resolve_symlink __ARGS((char_u *fname, char_u *buf));
++ #endif
+  
+  /*
+   * Open a new memline for "buf".
+***************
+*** 1401,1410 ****
+      int		i;
+      char_u	*dirp;
+      char_u	*dir_name;
+  
+      if (list)
+      {
+! 	    /* use msg() to start the scrolling properly */
+  	msg((char_u *)_("Swap files found:"));
+  	msg_putchar('\n');
+      }
+--- 1404,1422 ----
+      int		i;
+      char_u	*dirp;
+      char_u	*dir_name;
++     char_u	*fname_res = *fname;
++ #ifdef HAVE_READLINK
++     char_u	fname_buf[MAXPATHL];
++ 
++     /* Expand symlink in the file name, because the swap file is created with
++      * the actual file instead of with the symlink. */
++     if (resolve_symlink(*fname, fname_buf) == OK)
++ 	fname_res = fname_buf;
++ #endif
+  
+      if (list)
+      {
+! 	/* use msg() to start the scrolling properly */
+  	msg((char_u *)_("Swap files found:"));
+  	msg_putchar('\n');
+      }
+***************
+*** 1453,1459 ****
+  #endif
+  	    }
+  	    else
+! 		num_names = recov_file_names(names, *fname, TRUE);
+  	}
+  	else			    /* check directory dir_name */
+  	{
+--- 1465,1471 ----
+  #endif
+  	    }
+  	    else
+! 		num_names = recov_file_names(names, fname_res, TRUE);
+  	}
+  	else			    /* check directory dir_name */
+  	{
+***************
+*** 1490,1501 ****
+  		if (after_pathsep(dir_name, p) && p[-1] == p[-2])
+  		{
+  		    /* Ends with '//', Use Full path for swap name */
+! 		    tail = make_percent_swname(dir_name, *fname);
+  		}
+  		else
+  #endif
+  		{
+! 		    tail = gettail(*fname);
+  		    tail = concat_fnames(dir_name, tail, TRUE);
+  		}
+  		if (tail == NULL)
+--- 1502,1513 ----
+  		if (after_pathsep(dir_name, p) && p[-1] == p[-2])
+  		{
+  		    /* Ends with '//', Use Full path for swap name */
+! 		    tail = make_percent_swname(dir_name, fname_res);
+  		}
+  		else
+  #endif
+  		{
+! 		    tail = gettail(fname_res);
+  		    tail = concat_fnames(dir_name, tail, TRUE);
+  		}
+  		if (tail == NULL)
+***************
+*** 1535,1545 ****
+  	    struct stat	    st;
+  	    char_u	    *swapname;
+  
+  #if defined(VMS) || defined(RISCOS)
+! 	    swapname = modname(*fname, (char_u *)"_swp", FALSE);
+  #else
+! 	    swapname = modname(*fname, (char_u *)".swp", TRUE);
+  #endif
+  	    if (swapname != NULL)
+  	    {
+  		if (mch_stat((char *)swapname, &st) != -1)	    /* It exists! */
+--- 1547,1559 ----
+  	    struct stat	    st;
+  	    char_u	    *swapname;
+  
++ 	    swapname = modname(fname_res,
+  #if defined(VMS) || defined(RISCOS)
+! 			       (char_u *)"_swp", FALSE
+  #else
+! 			       (char_u *)".swp", TRUE
+  #endif
++ 			      );
+  	    if (swapname != NULL)
+  	    {
+  		if (mch_stat((char *)swapname, &st) != -1)	    /* It exists! */
+***************
+*** 3508,3515 ****
+  }
+  
+  #ifdef HAVE_READLINK
+- static int resolve_symlink __ARGS((char_u *fname, char_u *buf));
+- 
+  /*
+   * Resolve a symlink in the last component of a file name.
+   * Note that f_resolve() does it for every part of the path, we don't do that
+--- 3522,3527 ----
+***************
+*** 3601,3609 ****
+      char_u	*dir_name;
+  {
+      char_u	*r, *s;
+  #ifdef HAVE_READLINK
+      char_u	fname_buf[MAXPATHL];
+-     char_u	*fname_res;
+  #endif
+  
+  #if defined(UNIX) || defined(WIN3264)  /* Need _very_ long file names */
+--- 3613,3621 ----
+      char_u	*dir_name;
+  {
+      char_u	*r, *s;
++     char_u	*fname_res = fname;
+  #ifdef HAVE_READLINK
+      char_u	fname_buf[MAXPATHL];
+  #endif
+  
+  #if defined(UNIX) || defined(WIN3264)  /* Need _very_ long file names */
+***************
+*** 3625,3632 ****
+       * actual file instead of with the symlink. */
+      if (resolve_symlink(fname, fname_buf) == OK)
+  	fname_res = fname_buf;
+-     else
+- 	fname_res = fname;
+  #endif
+  
+      r = buf_modname(
+--- 3637,3642 ----
+***************
+*** 3639,3649 ****
+  	    /* Avoid problems if fname has special chars, eg <Wimp$Scrap> */
+  	    ffname,
+  #else
+- # ifdef HAVE_READLINK
+  	    fname_res,
+- # else
+- 	    fname,
+- # endif
+  #endif
+  	    (char_u *)
+  #if defined(VMS) || defined(RISCOS)
+--- 3649,3655 ----
+*** ../vim-7.2.426/src/version.c	2010-05-14 17:32:53.000000000 +0200
+--- src/version.c	2010-05-14 17:50:43.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     427,
+  /**/
+
+-- 
+Change is inevitable, except from a vending machine.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.428
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.428
+Problem:    Using setqflist([]) to clear the error list doesn't work properly.
+Solution:   Set qf_nonevalid to TRUE when appropriate. (Christian Brabandt)
+Files:	    src/quickfix.c
+
+
+*** ../vim-7.2.427/src/quickfix.c	2010-01-19 14:59:14.000000000 +0100
+--- src/quickfix.c	2010-05-14 18:06:27.000000000 +0200
+***************
+*** 3654,3660 ****
+  	}
+      }
+  
+!     qi->qf_lists[qi->qf_curlist].qf_nonevalid = FALSE;
+      qi->qf_lists[qi->qf_curlist].qf_ptr = qi->qf_lists[qi->qf_curlist].qf_start;
+      qi->qf_lists[qi->qf_curlist].qf_index = 1;
+  
+--- 3654,3664 ----
+  	}
+      }
+  
+!     if (qi->qf_lists[qi->qf_curlist].qf_index == 0)
+! 	/* empty list or no valid entry */
+! 	qi->qf_lists[qi->qf_curlist].qf_nonevalid = TRUE;
+!     else
+! 	qi->qf_lists[qi->qf_curlist].qf_nonevalid = FALSE;
+      qi->qf_lists[qi->qf_curlist].qf_ptr = qi->qf_lists[qi->qf_curlist].qf_start;
+      qi->qf_lists[qi->qf_curlist].qf_index = 1;
+  
+*** ../vim-7.2.427/src/version.c	2010-05-14 17:52:35.000000000 +0200
+--- src/version.c	2010-05-14 18:09:32.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     428,
+  /**/
+
+-- 
+Seen it all, done it all, can't remember most of it.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.429
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.429
+Problem:    A file that exists but access is denied may result in a "new file"
+	    message.  E.g. when its directory is unreadable.
+Solution:   Specifically check for ENOENT to decide a file doesn't exist.
+	    (partly by James Vega)
+Files:	    src/fileio.c
+
+
+*** ../vim-7.2.428/src/fileio.c	2010-03-02 12:47:58.000000000 +0100
+--- src/fileio.c	2010-05-14 18:30:09.000000000 +0200
+***************
+*** 595,601 ****
+  #endif
+  	    if (newfile)
+  	    {
+! 		if (perm < 0)
+  		{
+  		    /*
+  		     * Set the 'new-file' flag, so that when the file has
+--- 595,605 ----
+  #endif
+  	    if (newfile)
+  	    {
+! 		if (perm < 0
+! #ifdef ENOENT
+! 			&& errno == ENOENT
+! #endif
+! 		   )
+  		{
+  		    /*
+  		     * Set the 'new-file' flag, so that when the file has
+***************
+*** 664,669 ****
+--- 668,676 ----
+  # ifdef EFBIG
+  			    (errno == EFBIG) ? _("[File too big]") :
+  # endif
++ # ifdef EOVERFLOW
++ 			    (errno == EOVERFLOW) ? _("[File too big]") :
++ # endif
+  						_("[Permission Denied]")), 0);
+  		    curbuf->b_p_ro = TRUE;	/* must use "w!" now */
+  		}
+*** ../vim-7.2.428/src/version.c	2010-05-14 18:10:23.000000000 +0200
+--- src/version.c	2010-05-14 18:55:11.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     429,
+  /**/
+
+-- 
+Those who live by the sword get shot by those who don't.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.430
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.430
+Problem:    The ++bad argument is handled wrong, resulting in an invalid
+	    memory access.
+Solution:   Use the bad_char field only for the replacement character, add
+	    bad_char_idx to store the position. (Dominique Pelle)
+Files:	    src/eval.c, src/ex_cmds.h, src/ex_docmd.c
+
+
+*** ../vim-7.2.429/src/eval.c	2010-05-14 12:16:19.000000000 +0200
+--- src/eval.c	2010-05-14 19:04:53.000000000 +0200
+***************
+*** 18309,18316 ****
+  # ifdef FEAT_MBYTE
+      if (eap->force_enc != 0)
+  	len += (unsigned)STRLEN(eap->cmd + eap->force_enc) + 7;
+!     if (eap->bad_char != 0)
+! 	len += (unsigned)STRLEN(eap->cmd + eap->bad_char) + 7;
+  # endif
+  
+      newval = alloc(len + 1);
+--- 18309,18316 ----
+  # ifdef FEAT_MBYTE
+      if (eap->force_enc != 0)
+  	len += (unsigned)STRLEN(eap->cmd + eap->force_enc) + 7;
+!     if (eap->bad_char_idx != 0)
+! 	len += (unsigned)STRLEN(eap->cmd + eap->bad_char_idx) + 7;
+  # endif
+  
+      newval = alloc(len + 1);
+***************
+*** 18334,18342 ****
+      if (eap->force_enc != 0)
+  	sprintf((char *)newval + STRLEN(newval), " ++enc=%s",
+  					       eap->cmd + eap->force_enc);
+!     if (eap->bad_char != 0)
+  	sprintf((char *)newval + STRLEN(newval), " ++bad=%s",
+! 					       eap->cmd + eap->bad_char);
+  # endif
+      vimvars[VV_CMDARG].vv_str = newval;
+      return oldval;
+--- 18334,18342 ----
+      if (eap->force_enc != 0)
+  	sprintf((char *)newval + STRLEN(newval), " ++enc=%s",
+  					       eap->cmd + eap->force_enc);
+!     if (eap->bad_char_idx != 0)
+  	sprintf((char *)newval + STRLEN(newval), " ++bad=%s",
+! 					       eap->cmd + eap->bad_char_idx);
+  # endif
+      vimvars[VV_CMDARG].vv_str = newval;
+      return oldval;
+*** ../vim-7.2.429/src/ex_cmds.h	2010-05-14 15:42:49.000000000 +0200
+--- src/ex_cmds.h	2010-05-14 20:23:20.000000000 +0200
+***************
+*** 1152,1158 ****
+      int		force_ff;	/* ++ff= argument (index in cmd[]) */
+  #ifdef FEAT_MBYTE
+      int		force_enc;	/* ++enc= argument (index in cmd[]) */
+!     int		bad_char;	/* ++bad= argument (index in cmd[]) */
+  #endif
+  #ifdef FEAT_USR_CMDS
+      int		useridx;	/* user command index */
+--- 1152,1159 ----
+      int		force_ff;	/* ++ff= argument (index in cmd[]) */
+  #ifdef FEAT_MBYTE
+      int		force_enc;	/* ++enc= argument (index in cmd[]) */
+!     int		bad_char_idx;	/* ++bad= argument (index in cmd[]) */
+!     int		bad_char;	/* BAD_KEEP, BAD_DROP or replacement char */
+  #endif
+  #ifdef FEAT_USR_CMDS
+      int		useridx;	/* user command index */
+*** ../vim-7.2.429/src/ex_docmd.c	2010-05-14 15:28:37.000000000 +0200
+--- src/ex_docmd.c	2010-05-14 19:04:53.000000000 +0200
+***************
+*** 4739,4745 ****
+      else if (STRNCMP(arg, "bad", 3) == 0)
+      {
+  	arg += 3;
+! 	pp = &eap->bad_char;
+      }
+  #endif
+  
+--- 4739,4745 ----
+      else if (STRNCMP(arg, "bad", 3) == 0)
+      {
+  	arg += 3;
+! 	pp = &eap->bad_char_idx;
+      }
+  #endif
+  
+***************
+*** 4770,4776 ****
+      {
+  	/* Check ++bad= argument.  Must be a single-byte character, "keep" or
+  	 * "drop". */
+! 	p = eap->cmd + eap->bad_char;
+  	if (STRICMP(p, "keep") == 0)
+  	    eap->bad_char = BAD_KEEP;
+  	else if (STRICMP(p, "drop") == 0)
+--- 4770,4776 ----
+      {
+  	/* Check ++bad= argument.  Must be a single-byte character, "keep" or
+  	 * "drop". */
+! 	p = eap->cmd + eap->bad_char_idx;
+  	if (STRICMP(p, "keep") == 0)
+  	    eap->bad_char = BAD_KEEP;
+  	else if (STRICMP(p, "drop") == 0)
+*** ../vim-7.2.429/src/version.c	2010-05-14 18:56:33.000000000 +0200
+--- src/version.c	2010-05-14 20:39:38.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     430,
+  /**/
+
+-- 
+You have the right to remain silent. Anything you say will be
+misquoted, then used against you.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.431
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.431
+Problem:    ":amenu" moves the cursor when in Insert mode.
+Solution:   Use CTRL-\ CTRL-O instead of CTRL-O. (Christian Brabandt)
+Files:	    src/menu.c
+
+
+*** ../vim-7.2.430/src/menu.c	2009-05-17 13:30:58.000000000 +0200
+--- src/menu.c	2010-05-14 21:18:00.000000000 +0200
+***************
+*** 490,495 ****
+--- 490,496 ----
+      char_u	*next_name;
+      int		i;
+      int		c;
++     int		d;
+  #ifdef FEAT_GUI
+      int		idx;
+      int		new_idx;
+***************
+*** 746,751 ****
+--- 747,753 ----
+  		 * Don't do this if adding a tearbar (addtearoff == FALSE).
+  		 * Don't do this for "<Nop>". */
+  		c = 0;
++ 		d = 0;
+  		if (amenu && call_data != NULL && *call_data != NUL
+  #ifdef FEAT_GUI_W32
+  		       && addtearoff
+***************
+*** 761,778 ****
+  			    c = Ctrl_C;
+  			    break;
+  			case MENU_INSERT_MODE:
+! 			    c = Ctrl_O;
+  			    break;
+  		    }
+  		}
+  
+! 		if (c)
+  		{
+! 		    menu->strings[i] = alloc((unsigned)(STRLEN(call_data) + 4));
+  		    if (menu->strings[i] != NULL)
+  		    {
+  			menu->strings[i][0] = c;
+! 			STRCPY(menu->strings[i] + 1, call_data);
+  			if (c == Ctrl_C)
+  			{
+  			    int	    len = (int)STRLEN(menu->strings[i]);
+--- 763,787 ----
+  			    c = Ctrl_C;
+  			    break;
+  			case MENU_INSERT_MODE:
+! 			    c = Ctrl_BSL;
+! 			    d = Ctrl_O;
+  			    break;
+  		    }
+  		}
+  
+! 		if (c != 0)
+  		{
+! 		    menu->strings[i] = alloc((unsigned)(STRLEN(call_data) + 5 ));
+  		    if (menu->strings[i] != NULL)
+  		    {
+  			menu->strings[i][0] = c;
+! 			if (d == 0)
+! 			    STRCPY(menu->strings[i] + 1, call_data);
+! 			else
+! 			{
+! 			    menu->strings[i][1] = d;
+! 			    STRCPY(menu->strings[i] + 2, call_data);
+! 			}
+  			if (c == Ctrl_C)
+  			{
+  			    int	    len = (int)STRLEN(menu->strings[i]);
+*** ../vim-7.2.430/src/version.c	2010-05-14 20:41:00.000000000 +0200
+--- src/version.c	2010-05-14 21:11:40.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     431,
+  /**/
+
+-- 
+Despite the cost of living, have you noticed how it remains so popular?
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.432
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.432
+Problem:    When menus are translated they can only be found by the translated
+	    name.  That makes ":emenu" difficult to use.
+Solution:   Store the untranslated name and use it for completion and :emenu.
+	    (Edward L. Fox / Liang Peng / Bezetek James)
+Files:	    src/menu.c, src/structs.h
+
+
+*** ../vim-7.2.431/src/menu.c	2010-05-14 21:19:16.000000000 +0200
+--- src/menu.c	2010-05-14 21:52:58.000000000 +0200
+***************
+*** 58,63 ****
+--- 58,66 ----
+  static char_u *menutrans_lookup __ARGS((char_u *name, int len));
+  #endif
+  
++ static char_u *menu_translate_tab_and_shift __ARGS((char_u *arg_start));
++ static void menu_unescape_name  __ARGS((char_u	*p));
++ 
+  /* The character for each menu mode */
+  static char_u	menu_mode_chars[] = {'n', 'v', 's', 'o', 'i', 'c', 't'};
+  
+***************
+*** 106,115 ****
+      int		pri_tab[MENUDEPTH + 1];
+      int		enable = MAYBE;	    /* TRUE for "menu enable", FALSE for "menu
+  				     * disable */
+- #ifdef FEAT_MULTI_LANG
+-     char_u	*tofree = NULL;
+-     char_u	*new_cmd;
+- #endif
+  #ifdef FEAT_TOOLBAR
+      char_u	*icon = NULL;
+  #endif
+--- 109,114 ----
+***************
+*** 251,291 ****
+      }
+  #endif
+  
+- #ifdef FEAT_MULTI_LANG
+-     /*
+-      * Translate menu names as specified with ":menutrans" commands.
+-      */
+-     menu_path = arg;
+-     while (*menu_path)
+-     {
+- 	/* find the end of one part and check if it should be translated */
+- 	p = menu_skip_part(menu_path);
+- 	map_to = menutrans_lookup(menu_path, (int)(p - menu_path));
+- 	if (map_to != NULL)
+- 	{
+- 	    /* found a match: replace with the translated part */
+- 	    i = (int)STRLEN(map_to);
+- 	    new_cmd = alloc((unsigned)STRLEN(arg) + i + 1);
+- 	    if (new_cmd == NULL)
+- 		break;
+- 	    mch_memmove(new_cmd, arg, menu_path - arg);
+- 	    mch_memmove(new_cmd + (menu_path - arg), map_to, (size_t)i);
+- 	    STRCPY(new_cmd + (menu_path - arg) + i, p);
+- 	    p = new_cmd + (menu_path - arg) + i;
+- 	    vim_free(tofree);
+- 	    tofree = new_cmd;
+- 	    arg = new_cmd;
+- 	}
+- 	if (*p != '.')
+- 	    break;
+- 	menu_path = p + 1;
+-     }
+- #endif
+- 
+-     /*
+-      * Isolate the menu name.
+-      * Skip the menu name, and translate <Tab> into a real TAB.
+-      */
+      menu_path = arg;
+      if (*menu_path == '.')
+      {
+--- 250,255 ----
+***************
+*** 293,313 ****
+  	goto theend;
+      }
+  
+!     while (*arg && !vim_iswhite(*arg))
+!     {
+! 	if ((*arg == '\\' || *arg == Ctrl_V) && arg[1] != NUL)
+! 	    arg++;
+! 	else if (STRNICMP(arg, "<TAB>", 5) == 0)
+! 	{
+! 	    *arg = TAB;
+! 	    STRMOVE(arg + 1, arg + 5);
+! 	}
+! 	arg++;
+!     }
+!     if (*arg != NUL)
+! 	*arg++ = NUL;
+!     arg = skipwhite(arg);
+!     map_to = arg;
+  
+      /*
+       * If there is only a menu name, display menus with that name.
+--- 257,263 ----
+  	goto theend;
+      }
+  
+!     map_to = menu_translate_tab_and_shift(arg);
+  
+      /*
+       * If there is only a menu name, display menus with that name.
+***************
+*** 453,463 ****
+  #endif
+  
+  theend:
+- #ifdef FEAT_MULTI_LANG
+-     vim_free(tofree);
+- #else
+      ;
+- #endif
+  }
+  
+  /*
+--- 403,409 ----
+***************
+*** 498,503 ****
+--- 444,453 ----
+      int		pri_idx = 0;
+      int		old_modes = 0;
+      int		amenu;
++ #ifdef FEAT_MULTI_LANG
++     char_u	*en_name;
++     char_u	*map_to = NULL;
++ #endif
+  
+      /* Make a copy so we can stuff around with it, since it could be const */
+      path_name = vim_strsave(menu_path);
+***************
+*** 511,516 ****
+--- 461,476 ----
+  	/* Get name of this element in the menu hierarchy, and the simplified
+  	 * name (without mnemonic and accelerator text). */
+  	next_name = menu_name_skip(name);
++ #ifdef	FEAT_MULTI_LANG
++ 	map_to = menutrans_lookup(name,STRLEN(name));
++ 	if (map_to != NULL)
++ 	{
++ 	    en_name = name;
++ 	    name = map_to;
++ 	}
++ 	else
++ 	    en_name = NULL;
++ #endif
+  	dname = menu_text(name, NULL, NULL);
+  	if (dname == NULL)
+  	    goto erret;
+***************
+*** 594,599 ****
+--- 554,571 ----
+  	    menu->name = vim_strsave(name);
+  	    /* separate mnemonic and accelerator text from actual menu name */
+  	    menu->dname = menu_text(name, &menu->mnemonic, &menu->actext);
++ #ifdef	FEAT_MULTI_LANG
++ 	    if (en_name != NULL)
++ 	    {
++ 		menu->en_name = vim_strsave(en_name);
++ 		menu->en_dname = menu_text(en_name, NULL, NULL);
++ 	    }
++ 	    else
++ 	    {
++ 		menu->en_name = NULL;
++ 		menu->en_dname = NULL;
++ 	    }
++ #endif
+  	    menu->priority = pri_tab[pri_idx];
+  	    menu->parent = parent;
+  #ifdef FEAT_GUI_MOTIF
+***************
+*** 1040,1045 ****
+--- 1012,1021 ----
+      *menup = menu->next;
+      vim_free(menu->name);
+      vim_free(menu->dname);
++ #ifdef FEAT_MULTI_LANG
++     vim_free(menu->en_name);
++     vim_free(menu->en_dname);
++ #endif
+      vim_free(menu->actext);
+  #ifdef FEAT_TOOLBAR
+      vim_free(menu->iconfile);
+***************
+*** 1357,1365 ****
+--- 1333,1347 ----
+  {
+      static vimmenu_T	*menu = NULL;
+      char_u		*str;
++ #ifdef FEAT_MULTI_LANG
++     static  int		should_advance = FALSE;
++ #endif
+  
+      if (idx == 0)	    /* first call: start at first item */
++     {
+  	menu = expand_menu;
++ 	should_advance = FALSE;
++     }
+  
+      /* Skip PopUp[nvoci]. */
+      while (menu != NULL && (menu_is_hidden(menu->dname)
+***************
+*** 1372,1383 ****
+  	return NULL;
+  
+      if (menu->modes & expand_modes)
+! 	str = menu->dname;
+      else
+  	str = (char_u *)"";
+  
+!     /* Advance to next menu entry. */
+!     menu = menu->next;
+  
+      return str;
+  }
+--- 1354,1383 ----
+  	return NULL;
+  
+      if (menu->modes & expand_modes)
+! #ifdef FEAT_MULTI_LANG
+! 	if (should_advance)
+! 	    str = menu->en_dname;
+! 	else
+! 	{
+! #endif
+! 	    str = menu->dname;
+! #ifdef FEAT_MULTI_LANG
+! 	    if (menu->en_dname == NULL)
+!                 should_advance = TRUE;
+! 	}
+! #endif
+      else
+  	str = (char_u *)"";
+  
+! #ifdef FEAT_MULTI_LANG
+!     if (should_advance)
+! #endif
+!         /* Advance to next menu entry. */
+!         menu = menu->next;
+! 
+! #ifdef FEAT_MULTI_LANG
+!     should_advance = !should_advance;
+! #endif
+  
+      return str;
+  }
+***************
+*** 1394,1402 ****
+--- 1394,1408 ----
+      static vimmenu_T	*menu = NULL;
+      static char_u	tbuffer[256]; /*hack*/
+      char_u		*str;
++ #ifdef FEAT_MULTI_LANG
++     static  int		should_advance = FALSE;
++ #endif
+  
+      if (idx == 0)	    /* first call: start at first item */
++     {
+  	menu = expand_menu;
++ 	should_advance = FALSE;
++     }
+  
+      /* Skip Browse-style entries, popup menus and separators. */
+      while (menu != NULL
+***************
+*** 1416,1435 ****
+      {
+  	if (menu->children != NULL)
+  	{
+! 	    STRCPY(tbuffer, menu->dname);
+  	    /* hack on menu separators:  use a 'magic' char for the separator
+  	     * so that '.' in names gets escaped properly */
+  	    STRCAT(tbuffer, "\001");
+  	    str = tbuffer;
+  	}
+  	else
+! 	    str = menu->dname;
+      }
+      else
+  	str = (char_u *)"";
+  
+!     /* Advance to next menu entry. */
+!     menu = menu->next;
+  
+      return str;
+  }
+--- 1422,1472 ----
+      {
+  	if (menu->children != NULL)
+  	{
+! #ifdef FEAT_MULTI_LANG
+! 	    if (should_advance)
+! 		STRCPY(tbuffer, menu->en_dname);
+! 	    else
+! 	    {
+! #endif
+! 		STRCPY(tbuffer, menu->dname);
+! #ifdef FEAT_MULTI_LANG
+! 		if (menu->en_dname == NULL)
+! 		    should_advance = TRUE;
+! 	    }
+! #endif
+  	    /* hack on menu separators:  use a 'magic' char for the separator
+  	     * so that '.' in names gets escaped properly */
+  	    STRCAT(tbuffer, "\001");
+  	    str = tbuffer;
+  	}
+  	else
+! #ifdef FEAT_MULTI_LANG
+!         {
+!             if (should_advance)
+!                 str = menu->en_dname;
+!             else
+!             {
+! #endif
+!                 str = menu->dname;
+! #ifdef FEAT_MULTI_LANG
+!                 if (menu->en_dname == NULL)
+!                     should_advance = TRUE;
+!             }
+!         }
+! #endif
+      }
+      else
+  	str = (char_u *)"";
+  
+! #ifdef FEAT_MULTI_LANG
+!     if (should_advance)
+! #endif
+!         /* Advance to next menu entry. */
+!         menu = menu->next;
+! 
+! #ifdef FEAT_MULTI_LANG
+!     should_advance = !should_advance;
+! #endif
+  
+      return str;
+  }
+***************
+*** 1469,1475 ****
+      char_u	*name;
+      vimmenu_T	*menu;
+  {
+!     return (menu_namecmp(name, menu->name) || menu_namecmp(name, menu->dname));
+  }
+  
+      static int
+--- 1506,1516 ----
+      char_u	*name;
+      vimmenu_T	*menu;
+  {
+!     if (menu->en_name != NULL
+! 	    && (menu_namecmp(name,menu->en_name)
+! 		|| menu_namecmp(name,menu->en_dname)))
+!         return TRUE;
+!     return menu_namecmp(name, menu->name) || menu_namecmp(name, menu->dname);
+  }
+  
+      static int
+***************
+*** 2402,2407 ****
+--- 2443,2452 ----
+  		    to = vim_strnsave(to, (int)(arg - to));
+  		    if (from_noamp != NULL && to != NULL)
+  		    {
++ 			menu_translate_tab_and_shift(from);
++ 			menu_translate_tab_and_shift(to);
++ 			menu_unescape_name(from);
++ 			menu_unescape_name(to);
+  			tp[menutrans_ga.ga_len].from = from;
+  			tp[menutrans_ga.ga_len].from_noamp = from_noamp;
+  			tp[menutrans_ga.ga_len].to = to;
+***************
+*** 2476,2479 ****
+--- 2521,2566 ----
+  }
+  #endif /* FEAT_MULTI_LANG */
+  
++ /*
++  * Unescape the name in the translate dictionary table.
++  */
++     static void
++ menu_unescape_name(name)
++     char_u	*name;
++ {
++     char_u  *p;
++ 
++     for (p = name; *p && *p != '.'; mb_ptr_adv(p))
++ 	if (*p == '\\')
++ 	    STRMOVE(p, p + 1);
++ }
++ 
++ /*
++  * Isolate the menu name.
++  * Skip the menu name, and translate <Tab> into a real TAB.
++  */
++     static char_u *
++ menu_translate_tab_and_shift(arg_start)
++     char_u	*arg_start;
++ {
++     char_u	*arg = arg_start;
++ 
++     while (*arg && !vim_iswhite(*arg))
++     {
++ 	if ((*arg == '\\' || *arg == Ctrl_V) && arg[1] != NUL)
++ 	    arg++;
++ 	else if (STRNICMP(arg, "<TAB>", 5) == 0)
++ 	{
++ 	    *arg = TAB;
++ 	    STRMOVE(arg + 1, arg + 5);
++ 	}
++ 	arg++;
++     }
++     if (*arg != NUL)
++ 	*arg++ = NUL;
++     arg = skipwhite(arg);
++ 
++     return arg;
++ }
++ 
+  #endif /* FEAT_MENU */
+*** ../vim-7.2.431/src/structs.h	2009-09-18 17:24:54.000000000 +0200
+--- src/structs.h	2010-05-14 22:21:50.000000000 +0200
+***************
+*** 232,238 ****
+  {
+      wininfo_T	*wi_next;	/* next entry or NULL for last entry */
+      wininfo_T	*wi_prev;	/* previous entry or NULL for first entry */
+!     win_T	*wi_win;	/* pointer to window that did set wi_lnum */
+      pos_T	wi_fpos;	/* last cursor position in the file */
+      int		wi_optset;	/* TRUE when wi_opt has useful values */
+      winopt_T	wi_opt;		/* local window options */
+--- 232,238 ----
+  {
+      wininfo_T	*wi_next;	/* next entry or NULL for last entry */
+      wininfo_T	*wi_prev;	/* previous entry or NULL for first entry */
+!     win_T	*wi_win;	/* pointer to window that did set wi_fpos */
+      pos_T	wi_fpos;	/* last cursor position in the file */
+      int		wi_optset;	/* TRUE when wi_opt has useful values */
+      winopt_T	wi_opt;		/* local window options */
+***************
+*** 2207,2214 ****
+  {
+      int		modes;		    /* Which modes is this menu visible for? */
+      int		enabled;	    /* for which modes the menu is enabled */
+!     char_u	*name;		    /* Name of menu */
+!     char_u	*dname;		    /* Displayed Name (without '&') */
+      int		mnemonic;	    /* mnemonic key (after '&') */
+      char_u	*actext;	    /* accelerator text (after TAB) */
+      int		priority;	    /* Menu order priority */
+--- 2207,2220 ----
+  {
+      int		modes;		    /* Which modes is this menu visible for? */
+      int		enabled;	    /* for which modes the menu is enabled */
+!     char_u	*name;		    /* Name of menu, possibly translated */
+!     char_u	*dname;		    /* Displayed Name ("name" without '&') */
+! #ifdef FEAT_MULTI_LANG
+!     char_u	*en_name;	    /* "name" untranslated, NULL when "name"
+! 				     * was not translated */
+!     char_u	*en_dname;	    /* "dname" untranslated, NULL when "dname"
+! 				     * was not translated */
+! #endif
+      int		mnemonic;	    /* mnemonic key (after '&') */
+      char_u	*actext;	    /* accelerator text (after TAB) */
+      int		priority;	    /* Menu order priority */
+*** ../vim-7.2.431/src/version.c	2010-05-14 21:19:16.000000000 +0200
+--- src/version.c	2010-05-14 22:19:39.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     432,
+  /**/
+
+-- 
+It is hard to understand how a cemetery raised its burial
+cost and blamed it on the cost of living.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.433
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.433
+Problem:    Can't use cscope with QuickFixCmdPre and QuickFixCmdPost.
+Solution:   Add cscope support for these autocmd events. (Bryan Venteicher)
+Files:	    runtime/doc/autocmd.txt, src/if_cscope.c
+
+
+*** ../vim-7.2.432/runtime/doc/autocmd.txt	2009-06-24 17:51:01.000000000 +0200
+--- runtime/doc/autocmd.txt	2010-05-14 22:48:43.000000000 +0200
+***************
+*** 678,687 ****
+  QuickFixCmdPre			Before a quickfix command is run (|:make|,
+  				|:lmake|, |:grep|, |:lgrep|, |:grepadd|,
+  				|:lgrepadd|, |:vimgrep|, |:lvimgrep|,
+! 				|:vimgrepadd|, |:lvimgrepadd|). The pattern is
+! 				matched against the command being run.  When
+! 				|:grep| is used but 'grepprg' is set to
+! 				"internal" it still matches "grep".
+  				This command cannot be used to set the
+  				'makeprg' and 'grepprg' variables.
+  				If this command causes an error, the quickfix
+--- 678,687 ----
+  QuickFixCmdPre			Before a quickfix command is run (|:make|,
+  				|:lmake|, |:grep|, |:lgrep|, |:grepadd|,
+  				|:lgrepadd|, |:vimgrep|, |:lvimgrep|,
+! 				|:vimgrepadd|, |:lvimgrepadd|, |:cscope|).
+! 				The pattern is matched against the command
+! 				being run.  When |:grep| is used but 'grepprg'
+! 				is set to "internal" it still matches "grep".
+  				This command cannot be used to set the
+  				'makeprg' and 'grepprg' variables.
+  				If this command causes an error, the quickfix
+*** ../vim-7.2.432/src/if_cscope.c	2010-02-24 14:46:58.000000000 +0100
+--- src/if_cscope.c	2010-05-14 23:10:39.000000000 +0200
+***************
+*** 1113,1118 ****
+--- 1113,1182 ----
+  #ifdef FEAT_QUICKFIX
+      char cmdletter;
+      char *qfpos;
++ 
++     /* get cmd letter */
++     switch (opt[0])
++     {
++     case '0' :
++ 	cmdletter = 's';
++ 	break;
++     case '1' :
++ 	cmdletter = 'g';
++ 	break;
++     case '2' :
++ 	cmdletter = 'd';
++ 	break;
++     case '3' :
++ 	cmdletter = 'c';
++ 	break;
++     case '4' :
++ 	cmdletter = 't';
++ 	break;
++     case '6' :
++ 	cmdletter = 'e';
++ 	break;
++     case '7' :
++ 	cmdletter = 'f';
++ 	break;
++     case '8' :
++ 	cmdletter = 'i';
++ 	break;
++     default :
++ 	cmdletter = opt[0];
++     }
++ 
++     qfpos = (char *)vim_strchr(p_csqf, cmdletter);
++     if (qfpos != NULL)
++     {
++ 	qfpos++;
++ 	/* next symbol must be + or - */
++ 	if (strchr(CSQF_FLAGS, *qfpos) == NULL)
++ 	{
++ 	    char *nf = _("E469: invalid cscopequickfix flag %c for %c");
++ 	    char *buf = (char *)alloc((unsigned)strlen(nf));
++ 
++ 	    /* strlen will be enough because we use chars */
++ 	    if (buf != NULL)
++ 	    {
++ 		sprintf(buf, nf, *qfpos, *(qfpos-1));
++ 		(void)EMSG(buf);
++ 		vim_free(buf);
++ 	    }
++ 	    return FALSE;
++ 	}
++ 
++ # ifdef FEAT_AUTOCMD
++ 	if (*qfpos != '0')
++ 	{
++ 	    apply_autocmds(EVENT_QUICKFIXCMDPRE, (char_u *)"cscope",
++ 					       curbuf->b_fname, TRUE, curbuf);
++ #  ifdef FEAT_EVAL
++ 	    if (did_throw || force_abort)
++ 		return FALSE;
++ #  endif
++ 	}
++ # endif
++     }
+  #endif
+  
+      /* create the actual command to send to cscope */
+***************
+*** 1174,1231 ****
+      }
+  
+  #ifdef FEAT_QUICKFIX
+-     /* get cmd letter */
+-     switch (opt[0])
+-     {
+-     case '0' :
+- 	cmdletter = 's';
+- 	break;
+-     case '1' :
+- 	cmdletter = 'g';
+- 	break;
+-     case '2' :
+- 	cmdletter = 'd';
+- 	break;
+-     case '3' :
+- 	cmdletter = 'c';
+- 	break;
+-     case '4' :
+- 	cmdletter = 't';
+- 	break;
+-     case '6' :
+- 	cmdletter = 'e';
+- 	break;
+-     case '7' :
+- 	cmdletter = 'f';
+- 	break;
+-     case '8' :
+- 	cmdletter = 'i';
+- 	break;
+-     default :
+- 	cmdletter = opt[0];
+-     }
+- 
+-     qfpos = (char *)vim_strchr(p_csqf, cmdletter);
+-     if (qfpos != NULL)
+-     {
+- 	qfpos++;
+- 	/* next symbol must be + or - */
+- 	if (strchr(CSQF_FLAGS, *qfpos) == NULL)
+- 	{
+- 	    char *nf = _("E469: invalid cscopequickfix flag %c for %c");
+- 	    char *buf = (char *)alloc((unsigned)strlen(nf));
+- 
+- 	    /* strlen will be enough because we use chars */
+- 	    if (buf != NULL)
+- 	    {
+- 		sprintf(buf, nf, *qfpos, *(qfpos-1));
+- 		(void)EMSG(buf);
+- 		vim_free(buf);
+- 	    }
+- 	    vim_free(nummatches);
+- 	    return FALSE;
+- 	}
+-     }
+      if (qfpos != NULL && *qfpos != '0' && totmatches > 0)
+      {
+  	/* fill error list */
+--- 1238,1243 ----
+***************
+*** 1258,1263 ****
+--- 1270,1280 ----
+  		    postponed_split = 0;
+  		}
+  # endif
++ 
++ # ifdef FEAT_AUTOCMD
++ 		apply_autocmds(EVENT_QUICKFIXCMDPOST, (char_u *)"cscope",
++ 					       curbuf->b_fname, TRUE, curbuf);
++ # endif
+  		if (use_ll)
+  		    /*
+  		     * In the location list window, use the displayed location
+*** ../vim-7.2.432/src/version.c	2010-05-14 22:24:31.000000000 +0200
+--- src/version.c	2010-05-14 23:13:27.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     433,
+  /**/
+
+-- 
+The 50-50-90 rule: Anytime you have a 50-50 chance of getting
+something right, there's a 90% probability you'll get it wrong.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.434
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.434 (after 7.2.432)
+Problem:    Compilation fails without the multi-lang feature.
+Solution:   Add #ifdefs. (Johm Marriott)
+Files:	    src/menu.c
+
+
+*** ../vim-7.2.433/src/menu.c	2010-05-14 22:24:31.000000000 +0200
+--- src/menu.c	2010-05-16 12:28:21.000000000 +0200
+***************
+*** 1340,1346 ****
+--- 1340,1348 ----
+      if (idx == 0)	    /* first call: start at first item */
+      {
+  	menu = expand_menu;
++ #ifdef FEAT_MULTI_LANG
+  	should_advance = FALSE;
++ #endif
+      }
+  
+      /* Skip PopUp[nvoci]. */
+***************
+*** 1401,1407 ****
+--- 1403,1411 ----
+      if (idx == 0)	    /* first call: start at first item */
+      {
+  	menu = expand_menu;
++ #ifdef FEAT_MULTI_LANG
+  	should_advance = FALSE;
++ #endif
+      }
+  
+      /* Skip Browse-style entries, popup menus and separators. */
+***************
+*** 1506,1515 ****
+--- 1510,1521 ----
+      char_u	*name;
+      vimmenu_T	*menu;
+  {
++ #ifdef FEAT_MULTI_LANG
+      if (menu->en_name != NULL
+  	    && (menu_namecmp(name,menu->en_name)
+  		|| menu_namecmp(name,menu->en_dname)))
+          return TRUE;
++ #endif
+      return menu_namecmp(name, menu->name) || menu_namecmp(name, menu->dname);
+  }
+  
+*** ../vim-7.2.433/src/version.c	2010-05-14 23:14:37.000000000 +0200
+--- src/version.c	2010-05-16 12:29:40.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     434,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+43. You tell the kids they can't use the computer because "Daddy's got work to
+    do" and you don't even have a job.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.435
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.435 (after 7.2.430)
+Problem:    Crash when using bad_char_idx uninitialized. (Patrick Texier)
+Solution:   Don't use bad_char_idx, reproduce the ++bad argument from bad_char.
+Files:	    src/eval.c, src/ex_cmds.h, src/ex_docmd.c
+
+
+*** ../vim-7.2.434/src/eval.c	2010-05-14 20:41:00.000000000 +0200
+--- src/eval.c	2010-05-16 13:19:04.000000000 +0200
+***************
+*** 18309,18316 ****
+  # ifdef FEAT_MBYTE
+      if (eap->force_enc != 0)
+  	len += (unsigned)STRLEN(eap->cmd + eap->force_enc) + 7;
+!     if (eap->bad_char_idx != 0)
+! 	len += (unsigned)STRLEN(eap->cmd + eap->bad_char_idx) + 7;
+  # endif
+  
+      newval = alloc(len + 1);
+--- 18309,18316 ----
+  # ifdef FEAT_MBYTE
+      if (eap->force_enc != 0)
+  	len += (unsigned)STRLEN(eap->cmd + eap->force_enc) + 7;
+!     if (eap->bad_char != 0)
+! 	len += 7 + 4;  /* " ++bad=" + "keep" or "drop" */
+  # endif
+  
+      newval = alloc(len + 1);
+***************
+*** 18334,18342 ****
+      if (eap->force_enc != 0)
+  	sprintf((char *)newval + STRLEN(newval), " ++enc=%s",
+  					       eap->cmd + eap->force_enc);
+!     if (eap->bad_char_idx != 0)
+! 	sprintf((char *)newval + STRLEN(newval), " ++bad=%s",
+! 					       eap->cmd + eap->bad_char_idx);
+  # endif
+      vimvars[VV_CMDARG].vv_str = newval;
+      return oldval;
+--- 18334,18345 ----
+      if (eap->force_enc != 0)
+  	sprintf((char *)newval + STRLEN(newval), " ++enc=%s",
+  					       eap->cmd + eap->force_enc);
+!     if (eap->bad_char == BAD_KEEP)
+! 	STRCPY(newval + STRLEN(newval), " ++bad=keep");
+!     else if (eap->bad_char == BAD_DROP)
+! 	STRCPY(newval + STRLEN(newval), " ++bad=drop");
+!     else if (eap->bad_char != 0)
+! 	sprintf((char *)newval + STRLEN(newval), " ++bad=%c", eap->bad_char);
+  # endif
+      vimvars[VV_CMDARG].vv_str = newval;
+      return oldval;
+*** ../vim-7.2.434/src/ex_cmds.h	2010-05-14 20:41:00.000000000 +0200
+--- src/ex_cmds.h	2010-05-16 13:03:53.000000000 +0200
+***************
+*** 1152,1159 ****
+      int		force_ff;	/* ++ff= argument (index in cmd[]) */
+  #ifdef FEAT_MBYTE
+      int		force_enc;	/* ++enc= argument (index in cmd[]) */
+!     int		bad_char_idx;	/* ++bad= argument (index in cmd[]) */
+!     int		bad_char;	/* BAD_KEEP, BAD_DROP or replacement char */
+  #endif
+  #ifdef FEAT_USR_CMDS
+      int		useridx;	/* user command index */
+--- 1152,1158 ----
+      int		force_ff;	/* ++ff= argument (index in cmd[]) */
+  #ifdef FEAT_MBYTE
+      int		force_enc;	/* ++enc= argument (index in cmd[]) */
+!     int		bad_char;	/* BAD_KEEP, BAD_DROP or replacement byte */
+  #endif
+  #ifdef FEAT_USR_CMDS
+      int		useridx;	/* user command index */
+*** ../vim-7.2.434/src/ex_docmd.c	2010-05-14 20:41:00.000000000 +0200
+--- src/ex_docmd.c	2010-05-16 13:13:30.000000000 +0200
+***************
+*** 4688,4693 ****
+--- 4688,4694 ----
+      char_u	*arg = eap->arg + 2;
+      int		*pp = NULL;
+  #ifdef FEAT_MBYTE
++     int		bad_char_idx;
+      char_u	*p;
+  #endif
+  
+***************
+*** 4739,4745 ****
+      else if (STRNCMP(arg, "bad", 3) == 0)
+      {
+  	arg += 3;
+! 	pp = &eap->bad_char_idx;
+      }
+  #endif
+  
+--- 4740,4746 ----
+      else if (STRNCMP(arg, "bad", 3) == 0)
+      {
+  	arg += 3;
+! 	pp = &bad_char_idx;
+      }
+  #endif
+  
+***************
+*** 4770,4776 ****
+      {
+  	/* Check ++bad= argument.  Must be a single-byte character, "keep" or
+  	 * "drop". */
+! 	p = eap->cmd + eap->bad_char_idx;
+  	if (STRICMP(p, "keep") == 0)
+  	    eap->bad_char = BAD_KEEP;
+  	else if (STRICMP(p, "drop") == 0)
+--- 4771,4777 ----
+      {
+  	/* Check ++bad= argument.  Must be a single-byte character, "keep" or
+  	 * "drop". */
+! 	p = eap->cmd + bad_char_idx;
+  	if (STRICMP(p, "keep") == 0)
+  	    eap->bad_char = BAD_KEEP;
+  	else if (STRICMP(p, "drop") == 0)
+*** ../vim-7.2.434/src/version.c	2010-05-16 12:32:37.000000000 +0200
+--- src/version.c	2010-05-16 13:24:39.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     435,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+45. You buy a Captain Kirk chair with a built-in keyboard and mouse.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.436
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.436
+Problem:    Reproducible crash in syntax HL. (George Reilly, Dominique Pelle)
+Solution:   Make sst_stacksize an int instead of short. (Dominique Pelle)
+Files:	    src/structs.h
+
+
+*** ../vim-7.2.435/src/structs.h	2010-05-14 22:24:31.000000000 +0200
+--- src/structs.h	2010-05-16 13:48:26.000000000 +0200
+***************
+*** 327,333 ****
+  typedef struct m_info minfo_T;
+  
+  /*
+!  * stucture used to link chunks in one of the free chunk lists.
+   */
+  struct m_info
+  {
+--- 327,333 ----
+  typedef struct m_info minfo_T;
+  
+  /*
+!  * structure used to link chunks in one of the free chunk lists.
+   */
+  struct m_info
+  {
+***************
+*** 795,803 ****
+  	garray_T	sst_ga;	/* growarray for long state stack */
+      } sst_union;
+      int		sst_next_flags;	/* flags for sst_next_list */
+      short	*sst_next_list;	/* "nextgroup" list in this state
+  				 * (this is a copy, don't free it! */
+-     short	sst_stacksize;	/* number of states on the stack */
+      disptick_T	sst_tick;	/* tick when last displayed */
+      linenr_T	sst_change_lnum;/* when non-zero, change in this line
+  				 * may have made the state invalid */
+--- 795,803 ----
+  	garray_T	sst_ga;	/* growarray for long state stack */
+      } sst_union;
+      int		sst_next_flags;	/* flags for sst_next_list */
++     int		sst_stacksize;	/* number of states on the stack */
+      short	*sst_next_list;	/* "nextgroup" list in this state
+  				 * (this is a copy, don't free it! */
+      disptick_T	sst_tick;	/* tick when last displayed */
+      linenr_T	sst_change_lnum;/* when non-zero, change in this line
+  				 * may have made the state invalid */
+***************
+*** 2138,2144 ****
+  #define SHAPE_IDX_CI	5	/* Command line Insert mode */
+  #define SHAPE_IDX_CR	6	/* Command line Replace mode */
+  #define SHAPE_IDX_O	7	/* Operator-pending mode */
+! #define SHAPE_IDX_VE	8	/* Visual mode with 'seleciton' exclusive */
+  #define SHAPE_IDX_CLINE	9	/* On command line */
+  #define SHAPE_IDX_STATUS 10	/* A status line */
+  #define SHAPE_IDX_SDRAG 11	/* dragging a status line */
+--- 2138,2144 ----
+  #define SHAPE_IDX_CI	5	/* Command line Insert mode */
+  #define SHAPE_IDX_CR	6	/* Command line Replace mode */
+  #define SHAPE_IDX_O	7	/* Operator-pending mode */
+! #define SHAPE_IDX_VE	8	/* Visual mode with 'selection' exclusive */
+  #define SHAPE_IDX_CLINE	9	/* On command line */
+  #define SHAPE_IDX_STATUS 10	/* A status line */
+  #define SHAPE_IDX_SDRAG 11	/* dragging a status line */
+***************
+*** 2267,2273 ****
+  /*  short	index;	*/	    /* the item index within the father menu */
+      short	menu_id;	    /* the menu id to which this item belong */
+      short	submenu_id;	    /* the menu id of the children (could be
+! 				       get throught some tricks) */
+      MenuHandle	menu_handle;
+      MenuHandle	submenu_handle;
+  #endif
+--- 2267,2273 ----
+  /*  short	index;	*/	    /* the item index within the father menu */
+      short	menu_id;	    /* the menu id to which this item belong */
+      short	submenu_id;	    /* the menu id of the children (could be
+! 				       get through some tricks) */
+      MenuHandle	menu_handle;
+      MenuHandle	submenu_handle;
+  #endif
+*** ../vim-7.2.435/src/version.c	2010-05-16 13:26:19.000000000 +0200
+--- src/version.c	2010-05-16 13:54:30.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     436,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+47. You are so familiar with the WWW that you find the search engines useless.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.437
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.437 (after 7.2.407)
+Problem:    When "\\\n" appears in the expression result the \n doesn't result
+	    in a line break. (Andy Wokula)
+Solution:   Also replace a \n after a backslash into \r.
+Files:	    src/regexp.c
+
+
+*** ../vim-7.2.436/src/regexp.c	2010-03-23 16:27:15.000000000 +0100
+--- src/regexp.c	2010-05-21 13:06:00.000000000 +0200
+***************
+*** 6974,6979 ****
+--- 6974,6986 ----
+  		    else if (*s == '\\' && s[1] != NUL)
+  		    {
+  			++s;
++ 			/* Change NL to CR here too, so that this works:
++ 			 * :s/abc\\\ndef/\="aaa\\\nbbb"/  on text:
++ 			 *   abc\
++ 			 *   def
++ 			 */
++ 			if (*s == NL)
++ 			    *s = CAR;
+  			had_backslash = TRUE;
+  		    }
+  		}
+*** ../vim-7.2.436/src/version.c	2010-05-16 13:56:01.000000000 +0200
+--- src/version.c	2010-05-21 13:07:50.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     437,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+89. In addition to your e-mail address being on your business
+    cards you even have your own domain.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.438
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.438 (after 7.2.427)
+Problem:    "vim -r" crashes.
+Solution:   Don't use NULL pointer argument.
+Files:	    src/memline.c
+
+
+*** ../vim-7.2.437/src/memline.c	2010-05-14 17:52:35.000000000 +0200
+--- src/memline.c	2010-05-25 21:36:01.000000000 +0200
+***************
+*** 1404,1418 ****
+      int		i;
+      char_u	*dirp;
+      char_u	*dir_name;
+!     char_u	*fname_res = *fname;
+  #ifdef HAVE_READLINK
+      char_u	fname_buf[MAXPATHL];
+  
+      /* Expand symlink in the file name, because the swap file is created with
+       * the actual file instead of with the symlink. */
+      if (resolve_symlink(*fname, fname_buf) == OK)
+  	fname_res = fname_buf;
+  #endif
+  
+      if (list)
+      {
+--- 1404,1425 ----
+      int		i;
+      char_u	*dirp;
+      char_u	*dir_name;
+!     char_u	*fname_res = NULL;
+  #ifdef HAVE_READLINK
+      char_u	fname_buf[MAXPATHL];
++ #endif
+  
++     if (fname != NULL)
++     {
++ #ifdef HAVE_READLINK
+      /* Expand symlink in the file name, because the swap file is created with
+       * the actual file instead of with the symlink. */
+      if (resolve_symlink(*fname, fname_buf) == OK)
+  	fname_res = fname_buf;
++     else
+  #endif
++ 	fname_res = *fname;
++     }
+  
+      if (list)
+      {
+*** ../vim-7.2.437/src/version.c	2010-05-21 13:08:51.000000000 +0200
+--- src/version.c	2010-05-25 21:30:12.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     438,
+  /**/
+
+-- 
+A fool learns from his mistakes, a wise man from someone else's.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.439
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.439
+Problem:    Invalid memory access when doing thesaurus completion and
+	    'infercase' is set.
+Solution:   Use the minimal length of completed word and replacement.
+	    (Dominique Pelle)
+Files:	    src/edit.c
+
+
+*** ../vim-7.2.438/src/edit.c	2010-03-10 14:15:28.000000000 +0100
+--- src/edit.c	2010-05-28 21:20:29.000000000 +0200
+***************
+*** 2164,2169 ****
+--- 2164,2170 ----
+      int		i, c;
+      int		actual_len;		/* Take multi-byte characters */
+      int		actual_compl_length;	/* into account. */
++     int		min_len;
+      int		*wca;			/* Wide character array. */
+      int		has_lower = FALSE;
+      int		was_letter = FALSE;
+***************
+*** 2204,2209 ****
+--- 2205,2215 ----
+  #endif
+  	    actual_compl_length = compl_length;
+  
++ 	/* "actual_len" may be smaller than "actual_compl_length" when using
++ 	 * thesaurus, only use the minimum when comparing. */
++ 	min_len = actual_len < actual_compl_length
++ 					   ? actual_len : actual_compl_length;
++ 
+  	/* Allocate wide character array for the completion and fill it. */
+  	wca = (int *)alloc((unsigned)(actual_len * sizeof(int)));
+  	if (wca != NULL)
+***************
+*** 2219,2225 ****
+  
+  	    /* Rule 1: Were any chars converted to lower? */
+  	    p = compl_orig_text;
+! 	    for (i = 0; i < actual_compl_length; ++i)
+  	    {
+  #ifdef FEAT_MBYTE
+  		if (has_mbyte)
+--- 2225,2231 ----
+  
+  	    /* Rule 1: Were any chars converted to lower? */
+  	    p = compl_orig_text;
+! 	    for (i = 0; i < min_len; ++i)
+  	    {
+  #ifdef FEAT_MBYTE
+  		if (has_mbyte)
+***************
+*** 2247,2253 ****
+  	    if (!has_lower)
+  	    {
+  		p = compl_orig_text;
+! 		for (i = 0; i < actual_compl_length; ++i)
+  		{
+  #ifdef FEAT_MBYTE
+  		    if (has_mbyte)
+--- 2253,2259 ----
+  	    if (!has_lower)
+  	    {
+  		p = compl_orig_text;
+! 		for (i = 0; i < min_len; ++i)
+  		{
+  #ifdef FEAT_MBYTE
+  		    if (has_mbyte)
+***************
+*** 2268,2274 ****
+  
+  	    /* Copy the original case of the part we typed. */
+  	    p = compl_orig_text;
+! 	    for (i = 0; i < actual_compl_length; ++i)
+  	    {
+  #ifdef FEAT_MBYTE
+  		if (has_mbyte)
+--- 2274,2280 ----
+  
+  	    /* Copy the original case of the part we typed. */
+  	    p = compl_orig_text;
+! 	    for (i = 0; i < min_len; ++i)
+  	    {
+  #ifdef FEAT_MBYTE
+  		if (has_mbyte)
+*** ../vim-7.2.438/src/version.c	2010-05-25 21:37:12.000000000 +0200
+--- src/version.c	2010-05-28 21:30:53.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     439,
+  /**/
+
+-- 
+Corduroy pillows: They're making headlines!
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.440
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.440
+Problem:    Calling a function through a funcref, where the function deletes
+	    the funcref, leads to an invalid memory access.
+Solution:   Make a copy of the function name. (Lech Lorens)
+Files:	    src/eval.c, src/testdir/test34.in, src/testdir/test34.ok
+
+
+*** ../vim-7.2.439/src/eval.c	2010-05-16 13:26:19.000000000 +0200
+--- src/eval.c	2010-05-28 22:01:07.000000000 +0200
+***************
+*** 464,470 ****
+  static int find_internal_func __ARGS((char_u *name));
+  static char_u *deref_func_name __ARGS((char_u *name, int *lenp));
+  static int get_func_tv __ARGS((char_u *name, int len, typval_T *rettv, char_u **arg, linenr_T firstline, linenr_T lastline, int *doesrange, int evaluate, dict_T *selfdict));
+! static int call_func __ARGS((char_u *name, int len, typval_T *rettv, int argcount, typval_T *argvars, linenr_T firstline, linenr_T lastline, int *doesrange, int evaluate, dict_T *selfdict));
+  static void emsg_funcname __ARGS((char *ermsg, char_u *name));
+  static int non_zero_arg __ARGS((typval_T *argvars));
+  
+--- 464,470 ----
+  static int find_internal_func __ARGS((char_u *name));
+  static char_u *deref_func_name __ARGS((char_u *name, int *lenp));
+  static int get_func_tv __ARGS((char_u *name, int len, typval_T *rettv, char_u **arg, linenr_T firstline, linenr_T lastline, int *doesrange, int evaluate, dict_T *selfdict));
+! static int call_func __ARGS((char_u *func_name, int len, typval_T *rettv, int argcount, typval_T *argvars, linenr_T firstline, linenr_T lastline, int *doesrange, int evaluate, dict_T *selfdict));
+  static void emsg_funcname __ARGS((char *ermsg, char_u *name));
+  static int non_zero_arg __ARGS((typval_T *argvars));
+  
+***************
+*** 7997,8005 ****
+   * Also returns OK when an error was encountered while executing the function.
+   */
+      static int
+! call_func(name, len, rettv, argcount, argvars, firstline, lastline,
+  						doesrange, evaluate, selfdict)
+!     char_u	*name;		/* name of the function */
+      int		len;		/* length of "name" */
+      typval_T	*rettv;		/* return value goes here */
+      int		argcount;	/* number of "argvars" */
+--- 7997,8005 ----
+   * Also returns OK when an error was encountered while executing the function.
+   */
+      static int
+! call_func(func_name, len, rettv, argcount, argvars, firstline, lastline,
+  						doesrange, evaluate, selfdict)
+!     char_u	*func_name;	/* name of the function */
+      int		len;		/* length of "name" */
+      typval_T	*rettv;		/* return value goes here */
+      int		argcount;	/* number of "argvars" */
+***************
+*** 8023,8040 ****
+      int		i;
+      int		llen;
+      ufunc_T	*fp;
+-     int		cc;
+  #define FLEN_FIXED 40
+      char_u	fname_buf[FLEN_FIXED + 1];
+      char_u	*fname;
+  
+      /*
+       * In a script change <SID>name() and s:name() to K_SNR 123_name().
+       * Change <SNR>123_name() to K_SNR 123_name().
+       * Use fname_buf[] when it fits, otherwise allocate memory (slow).
+       */
+-     cc = name[len];
+-     name[len] = NUL;
+      llen = eval_fname_script(name);
+      if (llen > 0)
+      {
+--- 8023,8044 ----
+      int		i;
+      int		llen;
+      ufunc_T	*fp;
+  #define FLEN_FIXED 40
+      char_u	fname_buf[FLEN_FIXED + 1];
+      char_u	*fname;
++     char_u	*name;
++ 
++     /* Make a copy of the name, if it comes from a funcref variable it could
++      * be changed or deleted in the called function. */
++     name = vim_strnsave(func_name, len);
++     if (name == NULL)
++ 	return ret;
+  
+      /*
+       * In a script change <SID>name() and s:name() to K_SNR 123_name().
+       * Change <SNR>123_name() to K_SNR 123_name().
+       * Use fname_buf[] when it fits, otherwise allocate memory (slow).
+       */
+      llen = eval_fname_script(name);
+      if (llen > 0)
+      {
+***************
+*** 8205,8213 ****
+  	}
+      }
+  
+-     name[len] = cc;
+      if (fname != name && fname != fname_buf)
+  	vim_free(fname);
+  
+      return ret;
+  }
+--- 8209,8217 ----
+  	}
+      }
+  
+      if (fname != name && fname != fname_buf)
+  	vim_free(fname);
++     vim_free(name);
+  
+      return ret;
+  }
+*** ../vim-7.2.439/src/testdir/test34.in	2007-09-25 17:59:15.000000000 +0200
+--- src/testdir/test34.in	2010-05-28 21:54:36.000000000 +0200
+***************
+*** 35,40 ****
+--- 35,45 ----
+  :  let g:counter = 0
+  :  return ''
+  :endfunc
++ :func FuncWithRef(a)
++ :  unlet g:FuncRef
++ :  return a:a
++ :endfunc
++ :let g:FuncRef=function("FuncWithRef")
+  :let counter = 0
+  :inoremap <expr> ( ListItem()
+  :inoremap <expr> [ ListReset()
+***************
+*** 47,52 ****
+--- 52,58 ----
+   =retval
+   =Compute(45, 5, "retval")
+   =retval
++  =g:FuncRef(333)
+  
+  XX+-XX
+  ---*---
+*** ../vim-7.2.439/src/testdir/test34.ok	2006-04-30 20:49:40.000000000 +0200
+--- src/testdir/test34.ok	2010-05-28 21:56:03.000000000 +0200
+***************
+*** 1,4 ****
+! xxx4asdf fail nop ok 9
+  XX111XX
+  ---222---
+  1. one
+--- 1,4 ----
+! xxx4asdf fail nop ok 9 333
+  XX111XX
+  ---222---
+  1. one
+*** ../vim-7.2.439/src/version.c	2010-05-28 21:31:51.000000000 +0200
+--- src/version.c	2010-05-28 22:03:30.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     440,
+  /**/
+
+-- 
+Nobody will ever need more than 640 kB RAM.
+		-- Bill Gates, 1983
+Windows 98 requires 16 MB RAM.
+		-- Bill Gates, 1999
+Logical conclusion: Nobody will ever need Windows 98.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.441
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.441
+Problem:    When using ":earlier" undo information may be wrong.
+Solution:   When changing alternate branches also adjust b_u_oldhead.
+Files:	    src/undo.c
+
+
+*** ../vim-7.2.440/src/undo.c	2008-02-13 15:21:29.000000000 +0100
+--- src/undo.c	2010-05-30 16:52:47.000000000 +0200
+***************
+*** 242,248 ****
+  }
+  
+  /*
+!  * save the line "lnum" (used by ":s" and "~" command)
+   * The line is replaced, so the new bottom line is lnum + 1.
+   */
+      int
+--- 242,248 ----
+  }
+  
+  /*
+!  * Save the line "lnum" (used by ":s" and "~" command).
+   * The line is replaced, so the new bottom line is lnum + 1.
+   */
+      int
+***************
+*** 256,262 ****
+  }
+  
+  /*
+!  * a new line is inserted before line "lnum" (used by :s command)
+   * The line is inserted, so the new bottom line is lnum + 1.
+   */
+      int
+--- 256,262 ----
+  }
+  
+  /*
+!  * A new line is inserted before line "lnum" (used by :s command).
+   * The line is inserted, so the new bottom line is lnum + 1.
+   */
+      int
+***************
+*** 270,276 ****
+  }
+  
+  /*
+!  * save the lines "lnum" - "lnum" + nlines (used by delete command)
+   * The lines are deleted, so the new bottom line is lnum, unless the buffer
+   * becomes empty.
+   */
+--- 270,276 ----
+  }
+  
+  /*
+!  * Save the lines "lnum" - "lnum" + nlines (used by delete command).
+   * The lines are deleted, so the new bottom line is lnum, unless the buffer
+   * becomes empty.
+   */
+***************
+*** 996,1001 ****
+--- 996,1003 ----
+  		last->uh_alt_next = uhp;
+  		uhp->uh_alt_prev = last;
+  
++ 		if (curbuf->b_u_oldhead == uhp)
++ 		    curbuf->b_u_oldhead = last;
+  		uhp = last;
+  		if (uhp->uh_next != NULL)
+  		    uhp->uh_next->uh_prev = uhp;
+***************
+*** 1406,1415 ****
+  /*
+   * ":undolist": List the leafs of the undo tree
+   */
+- /*ARGSUSED*/
+      void
+  ex_undolist(eap)
+!     exarg_T *eap;
+  {
+      garray_T	ga;
+      u_header_T	*uhp;
+--- 1408,1416 ----
+  /*
+   * ":undolist": List the leafs of the undo tree
+   */
+      void
+  ex_undolist(eap)
+!     exarg_T *eap UNUSED;
+  {
+      garray_T	ga;
+      u_header_T	*uhp;
+***************
+*** 1529,1538 ****
+  /*
+   * ":undojoin": continue adding to the last entry list
+   */
+- /*ARGSUSED*/
+      void
+  ex_undojoin(eap)
+!     exarg_T *eap;
+  {
+      if (curbuf->b_u_newhead == NULL)
+  	return;		    /* nothing changed before */
+--- 1530,1538 ----
+  /*
+   * ":undojoin": continue adding to the last entry list
+   */
+      void
+  ex_undojoin(eap)
+!     exarg_T *eap UNUSED;
+  {
+      if (curbuf->b_u_newhead == NULL)
+  	return;		    /* nothing changed before */
+*** ../vim-7.2.440/src/version.c	2010-05-28 22:06:41.000000000 +0200
+--- src/version.c	2010-05-30 16:53:56.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     441,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+127. You bring your laptop and cellular phone to church.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.442
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.442 (after 7.2.201)
+Problem:    Copy/paste with OpenOffice doesn't work.
+Solution:   Do not offer the HTML target when it is not supported. (James
+	    Vega)
+Files:	    src/gui_gtk_x11.c, src/option.c, src/proto/gui_gtk_x11.pro
+
+
+*** ../vim-7.2.441/src/gui_gtk_x11.c	2010-02-11 18:19:32.000000000 +0100
+--- src/gui_gtk_x11.c	2010-06-05 12:42:23.000000000 +0200
+***************
+*** 1433,1438 ****
+--- 1433,1442 ----
+      }
+  #endif /* !HAVE_GTK2 */
+  
++     /* Chop off any traiing NUL bytes.  OpenOffice sends these. */
++     while (len > 0 && text[len - 1] == NUL)
++ 	--len;
++ 
+      clip_yank_selection(motion_type, text, (long)len, cbd);
+      received_selection = RS_OK;
+      vim_free(tmpbuf);
+***************
+*** 3463,3468 ****
+--- 3467,3532 ----
+  #endif /* FEAT_GUI_TABLINE */
+  
+  /*
++  * Add selection targets for PRIMARY and CLIPBOARD selections.
++  */
++     void
++ gui_gtk_set_selection_targets(void)
++ {
++     int		    i, j = 0;
++     int		    n_targets = N_SELECTION_TARGETS;
++     GtkTargetEntry  targets[N_SELECTION_TARGETS];
++ 
++     for (i = 0; i < (int)N_SELECTION_TARGETS; ++i)
++     {
++ #ifdef FEAT_MBYTE
++ 	/* OpenOffice tries to use TARGET_HTML and fails when it doesn't
++ 	 * return something, instead of trying another target. Therefore only
++ 	 * offer TARGET_HTML when it works. */
++ 	if (!clip_html && selection_targets[i].info == TARGET_HTML)
++ 	    n_targets--;
++ 	else
++ #endif
++ 	    targets[j++] = selection_targets[i];
++     }
++ 
++     gtk_selection_clear_targets(gui.drawarea, (GdkAtom)GDK_SELECTION_PRIMARY);
++     gtk_selection_clear_targets(gui.drawarea, (GdkAtom)clip_plus.gtk_sel_atom);
++     gtk_selection_add_targets(gui.drawarea,
++ 			      (GdkAtom)GDK_SELECTION_PRIMARY,
++ 			      targets, n_targets);
++     gtk_selection_add_targets(gui.drawarea,
++ 			      (GdkAtom)clip_plus.gtk_sel_atom,
++ 			      targets, n_targets);
++ }
++ 
++ /*
++  * Set up for receiving DND items.
++  */
++     void
++ gui_gtk_set_dnd_targets(void)
++ {
++     int		    i, j = 0;
++     int		    n_targets = N_DND_TARGETS;
++     GtkTargetEntry  targets[N_DND_TARGETS];
++ 
++     for (i = 0; i < (int)N_DND_TARGETS; ++i)
++     {
++ #ifdef FEAT_MBYTE
++ 	if (!clip_html && selection_targets[i].info == TARGET_HTML)
++ 	    n_targets--;
++ 	else
++ #endif
++ 	    targets[j++] = dnd_targets[i];
++     }
++ 
++     gtk_drag_dest_unset(gui.drawarea);
++     gtk_drag_dest_set(gui.drawarea,
++ 		      GTK_DEST_DEFAULT_ALL,
++ 		      targets, n_targets,
++ 		      GDK_ACTION_COPY);
++ }
++ 
++ /*
+   * Initialize the GUI.	Create all the windows, set up all the callbacks etc.
+   * Returns OK for success, FAIL when the GUI can't be started.
+   */
+***************
+*** 3925,3939 ****
+      gtk_signal_connect(GTK_OBJECT(gui.drawarea), "selection_received",
+  		       GTK_SIGNAL_FUNC(selection_received_cb), NULL);
+  
+!     /*
+!      * Add selection targets for PRIMARY and CLIPBOARD selections.
+!      */
+!     gtk_selection_add_targets(gui.drawarea,
+! 			      (GdkAtom)GDK_SELECTION_PRIMARY,
+! 			      selection_targets, N_SELECTION_TARGETS);
+!     gtk_selection_add_targets(gui.drawarea,
+! 			      (GdkAtom)clip_plus.gtk_sel_atom,
+! 			      selection_targets, N_SELECTION_TARGETS);
+  
+      gtk_signal_connect(GTK_OBJECT(gui.drawarea), "selection_get",
+  		       GTK_SIGNAL_FUNC(selection_get_cb), NULL);
+--- 3989,3995 ----
+      gtk_signal_connect(GTK_OBJECT(gui.drawarea), "selection_received",
+  		       GTK_SIGNAL_FUNC(selection_received_cb), NULL);
+  
+!     gui_gtk_set_selection_targets();
+  
+      gtk_signal_connect(GTK_OBJECT(gui.drawarea), "selection_get",
+  		       GTK_SIGNAL_FUNC(selection_get_cb), NULL);
+***************
+*** 4057,4063 ****
+      return TRUE;
+  }
+  
+- 
+  /*
+   * Open the GUI window which was created by a call to gui_mch_init().
+   */
+--- 4113,4118 ----
+***************
+*** 4225,4237 ****
+  		       GTK_SIGNAL_FUNC(form_configure_event), NULL);
+  
+  #ifdef FEAT_DND
+!     /*
+!      * Set up for receiving DND items.
+!      */
+!     gtk_drag_dest_set(gui.drawarea,
+! 		      GTK_DEST_DEFAULT_ALL,
+! 		      dnd_targets, N_DND_TARGETS,
+! 		      GDK_ACTION_COPY);
+  
+      gtk_signal_connect(GTK_OBJECT(gui.drawarea), "drag_data_received",
+  		       GTK_SIGNAL_FUNC(drag_data_received_cb), NULL);
+--- 4280,4287 ----
+  		       GTK_SIGNAL_FUNC(form_configure_event), NULL);
+  
+  #ifdef FEAT_DND
+!     /* Set up for receiving DND items. */
+!     gui_gtk_set_dnd_targets();
+  
+      gtk_signal_connect(GTK_OBJECT(gui.drawarea), "drag_data_received",
+  		       GTK_SIGNAL_FUNC(drag_data_received_cb), NULL);
+***************
+*** 4428,4434 ****
+      /* this will cause the proper resizement to happen too */
+      update_window_manager_hints(0, 0);
+  
+! #else  /* HAVE_GTK2 */
+      /* this will cause the proper resizement to happen too */
+      if (gtk_socket_id == 0)
+  	update_window_manager_hints(0, 0);
+--- 4478,4484 ----
+      /* this will cause the proper resizement to happen too */
+      update_window_manager_hints(0, 0);
+  
+! #else
+      /* this will cause the proper resizement to happen too */
+      if (gtk_socket_id == 0)
+  	update_window_manager_hints(0, 0);
+***************
+*** 4444,4457 ****
+      else
+  	update_window_manager_hints(width, height);
+  
+! #if 0
+      if (!resize_idle_installed)
+      {
+  	g_idle_add_full(GDK_PRIORITY_EVENTS + 10,
+  			&force_shell_resize_idle, NULL, NULL);
+  	resize_idle_installed = TRUE;
+      }
+! #endif
+      /*
+       * Wait until all events are processed to prevent a crash because the
+       * real size of the drawing area doesn't reflect Vim's internal ideas.
+--- 4494,4507 ----
+      else
+  	update_window_manager_hints(width, height);
+  
+! # if 0
+      if (!resize_idle_installed)
+      {
+  	g_idle_add_full(GDK_PRIORITY_EVENTS + 10,
+  			&force_shell_resize_idle, NULL, NULL);
+  	resize_idle_installed = TRUE;
+      }
+! # endif
+      /*
+       * Wait until all events are processed to prevent a crash because the
+       * real size of the drawing area doesn't reflect Vim's internal ideas.
+*** ../vim-7.2.441/src/option.c	2010-05-14 17:32:53.000000000 +0200
+--- src/option.c	2010-06-05 12:19:38.000000000 +0200
+***************
+*** 7112,7117 ****
+--- 7112,7124 ----
+  	clip_html = new_html;
+  	vim_free(clip_exclude_prog);
+  	clip_exclude_prog = new_exclude_prog;
++ #ifdef FEAT_GUI_GTK
++ 	if (gui.in_use)
++ 	{
++ 	    gui_gtk_set_selection_targets();
++ 	    gui_gtk_set_dnd_targets();
++ 	}
++ #endif
+      }
+      else
+  	vim_free(new_exclude_prog);
+*** ../vim-7.2.441/src/proto/gui_gtk_x11.pro	2009-09-23 18:14:13.000000000 +0200
+--- src/proto/gui_gtk_x11.pro	2010-06-05 12:31:22.000000000 +0200
+***************
+*** 9,14 ****
+--- 9,16 ----
+  int gui_mch_showing_tabline __ARGS((void));
+  void gui_mch_update_tabline __ARGS((void));
+  void gui_mch_set_curtab __ARGS((int nr));
++ void gui_gtk_set_selection_targets __ARGS((void));
++ void gui_gtk_set_dnd_targets __ARGS((void));
+  int gui_mch_init __ARGS((void));
+  void gui_mch_forked __ARGS((void));
+  void gui_mch_new_colors __ARGS((void));
+*** ../vim-7.2.441/src/version.c	2010-05-30 16:55:17.000000000 +0200
+--- src/version.c	2010-06-05 12:48:01.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     442,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+158. You get a tuner card so you can watch TV while surfing.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.443
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.443 
+Problem:    Using taglist() on a tag file with duplicate fields generates an 
+            internal error. (Peter Odding) 
+Solution:   Check for duplicate field names. 
+Files:      src/eval.c, src/proto/eval.pro, src/tag.c 
+
+
+*** ../vim-7.2.442/src/eval.c	2010-05-28 22:06:41.000000000 +0200
+--- src/eval.c	2010-06-12 19:59:09.000000000 +0200
+***************
+*** 451,457 ****
+  static void dictitem_remove __ARGS((dict_T *dict, dictitem_T *item));
+  static dict_T *dict_copy __ARGS((dict_T *orig, int deep, int copyID));
+  static long dict_len __ARGS((dict_T *d));
+- static dictitem_T *dict_find __ARGS((dict_T *d, char_u *key, int len));
+  static char_u *dict2string __ARGS((typval_T *tv, int copyID));
+  static int get_dict_tv __ARGS((char_u **arg, typval_T *rettv, int evaluate));
+  static char_u *echo_string __ARGS((typval_T *tv, char_u **tofree, char_u *numbuf, int copyID));
+--- 451,456 ----
+***************
+*** 7012,7018 ****
+   * If "len" is negative use strlen(key).
+   * Returns NULL when not found.
+   */
+!     static dictitem_T *
+  dict_find(d, key, len)
+      dict_T	*d;
+      char_u	*key;
+--- 7011,7017 ----
+   * If "len" is negative use strlen(key).
+   * Returns NULL when not found.
+   */
+!     dictitem_T *
+  dict_find(d, key, len)
+      dict_T	*d;
+      char_u	*key;
+*** ../vim-7.2.442/src/proto/eval.pro	2010-01-19 15:51:29.000000000 +0100
+--- src/proto/eval.pro	2010-06-12 19:59:13.000000000 +0200
+***************
+*** 56,61 ****
+--- 56,62 ----
+  void dictitem_free __ARGS((dictitem_T *item));
+  int dict_add __ARGS((dict_T *d, dictitem_T *item));
+  int dict_add_nr_str __ARGS((dict_T *d, char *key, long nr, char_u *str));
++ dictitem_T *dict_find __ARGS((dict_T *d, char_u *key, int len));
+  char_u *get_dict_string __ARGS((dict_T *d, char_u *key, int save));
+  long get_dict_number __ARGS((dict_T *d, char_u *key));
+  char_u *get_function_name __ARGS((expand_T *xp, int idx));
+*** ../vim-7.2.442/src/tag.c	2010-02-24 14:46:58.000000000 +0100
+--- src/tag.c	2010-06-12 20:01:45.000000000 +0200
+***************
+*** 3771,3777 ****
+  static int add_tag_field __ARGS((dict_T *dict, char *field_name, char_u *start, char_u *end));
+  
+  /*
+!  * Add a tag field to the dictionary "dict"
+   */
+      static int
+  add_tag_field(dict, field_name, start, end)
+--- 3771,3778 ----
+  static int add_tag_field __ARGS((dict_T *dict, char *field_name, char_u *start, char_u *end));
+  
+  /*
+!  * Add a tag field to the dictionary "dict".
+!  * Return OK or FAIL.
+   */
+      static int
+  add_tag_field(dict, field_name, start, end)
+***************
+*** 3783,3788 ****
+--- 3784,3800 ----
+      char_u	buf[MAXPATHL];
+      int		len = 0;
+  
++     /* check that the field name doesn't exist yet */
++     if (dict_find(dict, (char_u *)field_name, -1) != NULL)
++     {
++ 	if (p_verbose > 0)
++ 	{
++ 	    verbose_enter();
++ 	    smsg((char_u *)_("Duplicate field name: %s"), field_name);
++ 	    verbose_leave();
++ 	}
++ 	return FAIL;
++     }
+      if (start != NULL)
+      {
+  	if (end == NULL)
+*** ../vim-7.2.442/src/version.c	2010-06-05 12:49:40.000000000 +0200
+--- src/version.c	2010-06-12 20:05:27.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     443,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+191. You rate eating establishments not by the quality of the food,
+     but by the availability of electrical outlets for your PowerBook.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.444
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.444 (after 7.2.442)
+Problem:    Can't build with GTK 1, gtk_selection_clear_targets() is not
+            available. (Patrick Texier)
+Solution:   Don't change the targets for GTK 1, set them once.
+Files:      src/gui_gtk_x11.c, src/option.c
+
+
+*** ../vim-7.2.443/src/gui_gtk_x11.c	2010-06-05 12:49:40.000000000 +0200
+--- src/gui_gtk_x11.c	2010-06-13 02:26:24.000000000 +0200
+***************
+*** 3478,3484 ****
+  
+      for (i = 0; i < (int)N_SELECTION_TARGETS; ++i)
+      {
+! #ifdef FEAT_MBYTE
+  	/* OpenOffice tries to use TARGET_HTML and fails when it doesn't
+  	 * return something, instead of trying another target. Therefore only
+  	 * offer TARGET_HTML when it works. */
+--- 3478,3484 ----
+  
+      for (i = 0; i < (int)N_SELECTION_TARGETS; ++i)
+      {
+! #if defined(FEAT_MBYTE) && defined(HAVE_GTK2)
+  	/* OpenOffice tries to use TARGET_HTML and fails when it doesn't
+  	 * return something, instead of trying another target. Therefore only
+  	 * offer TARGET_HTML when it works. */
+***************
+*** 3489,3496 ****
+--- 3489,3498 ----
+  	    targets[j++] = selection_targets[i];
+      }
+  
++ #ifdef HAVE_GTK2  /* GTK 1 doesn't have this function */
+      gtk_selection_clear_targets(gui.drawarea, (GdkAtom)GDK_SELECTION_PRIMARY);
+      gtk_selection_clear_targets(gui.drawarea, (GdkAtom)clip_plus.gtk_sel_atom);
++ #endif
+      gtk_selection_add_targets(gui.drawarea,
+  			      (GdkAtom)GDK_SELECTION_PRIMARY,
+  			      targets, n_targets);
+*** ../vim-7.2.443/src/option.c	2010-06-05 12:49:40.000000000 +0200
+--- src/option.c	2010-06-13 02:27:36.000000000 +0200
+***************
+*** 7112,7118 ****
+  	clip_html = new_html;
+  	vim_free(clip_exclude_prog);
+  	clip_exclude_prog = new_exclude_prog;
+! #ifdef FEAT_GUI_GTK
+  	if (gui.in_use)
+  	{
+  	    gui_gtk_set_selection_targets();
+--- 7112,7118 ----
+  	clip_html = new_html;
+  	vim_free(clip_exclude_prog);
+  	clip_exclude_prog = new_exclude_prog;
+! #ifdef HAVE_GTK2  /* for GTK 1 we can't change the list of targets */
+  	if (gui.in_use)
+  	{
+  	    gui_gtk_set_selection_targets();
+*** ../vim-7.2.443/src/version.c	2010-06-12 20:11:53.000000000 +0200
+--- src/version.c	2010-06-13 02:29:18.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     444,
+  /**/
+
+-- 
+hundred-and-one symptoms of being an internet addict:
+195. Your cat has its own home page.
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.445
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.445
+Problem:    Crash when using undo/redo and a FileChangedRO autocmd event that
+	    reloads the buffer. (Dominique Pelle)
+Solution:   Do not allow autocommands while performing and undo or redo.
+Files:	    src/misc1.c, src/undo.c
+
+
+*** ../vim-7.2.444/src/misc1.c	2010-03-23 18:22:40.000000000 +0100
+--- src/misc1.c	2010-07-07 18:18:52.000000000 +0200
+***************
+*** 2467,2476 ****
+  }
+  
+  /*
+!  * changed() is called when something in the current buffer is changed.
+   *
+   * Most often called through changed_bytes() and changed_lines(), which also
+   * mark the area of the display to be redrawn.
+   */
+      void
+  changed()
+--- 2467,2478 ----
+  }
+  
+  /*
+!  * Call this function when something in the current buffer is changed.
+   *
+   * Most often called through changed_bytes() and changed_lines(), which also
+   * mark the area of the display to be redrawn.
++  *
++  * Careful: may trigger autocommands that reload the buffer.
+   */
+      void
+  changed()
+***************
+*** 2536,2541 ****
+--- 2538,2544 ----
+   * - marks the windows on this buffer to be redisplayed
+   * - marks the buffer changed by calling changed()
+   * - invalidates cached values
++  * Careful: may trigger autocommands that reload the buffer.
+   */
+      void
+  changed_bytes(lnum, col)
+***************
+*** 2649,2654 ****
+--- 2652,2658 ----
+   * below the changed lines (BEFORE the change).
+   * When only inserting lines, "lnum" and "lnume" are equal.
+   * Takes care of calling changed() and updating b_mod_*.
++  * Careful: may trigger autocommands that reload the buffer.
+   */
+      void
+  changed_lines(lnum, col, lnume, xtra)
+***************
+*** 2716,2721 ****
+--- 2720,2730 ----
+      }
+  }
+  
++ /*
++  * Common code for when a change is was made.
++  * See changed_lines() for the arguments.
++  * Careful: may trigger autocommands that reload the buffer.
++  */
+      static void
+  changed_common(lnum, col, lnume, xtra)
+      linenr_T	lnum;
+***************
+*** 2966,2971 ****
+--- 2975,2981 ----
+   * Don't use emsg(), because it flushes the macro buffer.
+   * If we have undone all changes b_changed will be FALSE, but "b_did_warn"
+   * will be TRUE.
++  * Careful: may trigger autocommands that reload the buffer.
+   */
+      void
+  change_warning(col)
+*** ../vim-7.2.444/src/undo.c	2010-05-30 16:55:17.000000000 +0200
+--- src/undo.c	2010-07-07 18:14:44.000000000 +0200
+***************
+*** 185,191 ****
+      }
+  }
+  
+!     void
+  u_check(int newhead_may_be_NULL)
+  {
+      seen_b_u_newhead = 0;
+--- 185,191 ----
+      }
+  }
+  
+!     static void
+  u_check(int newhead_may_be_NULL)
+  {
+      seen_b_u_newhead = 0;
+***************
+*** 320,325 ****
+--- 320,328 ----
+      return TRUE;
+  }
+  
++ /*
++  * Common code for various ways to save text before a change.
++  */
+      static int
+  u_savecommon(top, bot, newbot)
+      linenr_T	top, bot;
+***************
+*** 374,380 ****
+      size = bot - top - 1;
+  
+      /*
+!      * if curbuf->b_u_synced == TRUE make a new header
+       */
+      if (curbuf->b_u_synced)
+      {
+--- 377,383 ----
+      size = bot - top - 1;
+  
+      /*
+!      * If curbuf->b_u_synced == TRUE make a new header.
+       */
+      if (curbuf->b_u_synced)
+      {
+***************
+*** 709,714 ****
+--- 712,723 ----
+  	u_oldcount = -1;
+      while (count--)
+      {
++ 	/* Do the change warning now, so that it triggers FileChangedRO when
++ 	 * needed.  This may cause the file to be reloaded, that must happen
++ 	 * before we do anything, because it may change curbuf->b_u_curhead
++ 	 * and more. */
++ 	change_warning(0);
++ 
+  	if (undo_undoes)
+  	{
+  	    if (curbuf->b_u_curhead == NULL)		/* first undo */
+***************
+*** 952,959 ****
+  	/*
+  	 * First go up the tree as much as needed.
+  	 */
+! 	for (;;)
+  	{
+  	    uhp = curbuf->b_u_curhead;
+  	    if (uhp == NULL)
+  		uhp = curbuf->b_u_newhead;
+--- 961,971 ----
+  	/*
+  	 * First go up the tree as much as needed.
+  	 */
+! 	while (!got_int)
+  	{
++ 	    /* Do the change warning now, for the same reason as above. */
++ 	    change_warning(0);
++ 
+  	    uhp = curbuf->b_u_curhead;
+  	    if (uhp == NULL)
+  		uhp = curbuf->b_u_newhead;
+***************
+*** 970,978 ****
+  	/*
+  	 * And now go down the tree (redo), branching off where needed.
+  	 */
+! 	uhp = curbuf->b_u_curhead;
+! 	while (uhp != NULL)
+  	{
+  	    /* Go back to the first branch with a mark. */
+  	    while (uhp->uh_alt_prev != NULL
+  					&& uhp->uh_alt_prev->uh_walk == mark)
+--- 982,996 ----
+  	/*
+  	 * And now go down the tree (redo), branching off where needed.
+  	 */
+! 	while (!got_int)
+  	{
++ 	    /* Do the change warning now, for the same reason as above. */
++ 	    change_warning(0);
++ 
++ 	    uhp = curbuf->b_u_curhead;
++ 	    if (uhp == NULL)
++ 		break;
++ 
+  	    /* Go back to the first branch with a mark. */
+  	    while (uhp->uh_alt_prev != NULL
+  					&& uhp->uh_alt_prev->uh_walk == mark)
+***************
+*** 1070,1075 ****
+--- 1088,1099 ----
+      int		empty_buffer;		    /* buffer became empty */
+      u_header_T	*curhead = curbuf->b_u_curhead;
+  
++ #ifdef FEAT_AUTOCMD
++     /* Don't want autocommands using the undo structures here, they are
++      * invalid till the end. */
++     block_autocmds();
++ #endif
++ 
+  #ifdef U_DEBUG
+      u_check(FALSE);
+  #endif
+***************
+*** 1099,1104 ****
+--- 1123,1131 ----
+  	if (top > curbuf->b_ml.ml_line_count || top >= bot
+  				      || bot > curbuf->b_ml.ml_line_count + 1)
+  	{
++ #ifdef FEAT_AUTOCMD
++ 	    unblock_autocmds();
++ #endif
+  	    EMSG(_("E438: u_undo: line numbers wrong"));
+  	    changed();		/* don't want UNCHANGED now */
+  	    return;
+***************
+*** 1304,1309 ****
+--- 1331,1340 ----
+      /* The timestamp can be the same for multiple changes, just use the one of
+       * the undone/redone change. */
+      curbuf->b_u_seq_time = curhead->uh_time;
++ 
++ #ifdef FEAT_AUTOCMD
++     unblock_autocmds();
++ #endif
+  #ifdef U_DEBUG
+      u_check(FALSE);
+  #endif
+*** ../vim-7.2.444/src/version.c	2010-06-13 02:35:41.000000000 +0200
+--- src/version.c	2010-07-07 18:18:27.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     445,
+  /**/
+
+-- 
+    A KNIGHT rides into shot and hacks him to the ground.  He rides off.
+    We stay for a moment on the glade.  A MIDDLE-AGED LADY in a C. & A.
+    twin-set emerges from the trees and looks in horror at the body of her
+    HUSBAND.
+MRS HISTORIAN: FRANK!
+                 "Monty Python and the Holy Grail" PYTHON (MONTY) PICTURES LTD
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///
+To: vim-dev@vim.org
+Subject: Patch 7.2.446
+Fcc: outbox
+From: Bram Moolenaar <Bram@moolenaar.net>
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+------------
+
+Patch 7.2.446
+Problem:    Crash in GUI when closing the last window in a tabpage. (ryo7000)
+Solution:   Remove the tabpage from the list before freeing the window.
+Files:	    src/window.c
+
+
+*** ../vim-7.2.445/src/window.c	2010-03-17 16:54:51.000000000 +0100
+--- src/window.c	2010-07-11 13:18:31.000000000 +0200
+***************
+*** 2304,2309 ****
+--- 2304,2310 ----
+      win_T	*wp;
+      int		dir;
+      tabpage_T   *ptp = NULL;
++     int		free_tp = FALSE;
+  
+      /* Close the link to the buffer. */
+      close_buffer(win, win->w_buffer, free_buf ? DOBUF_UNLOAD : 0);
+***************
+*** 2321,2331 ****
+      if (wp == NULL)
+  	return;
+  
+-     /* Free the memory used for the window. */
+-     wp = win_free_mem(win, &dir, tp);
+- 
+      /* When closing the last window in a tab page remove the tab page. */
+!     if (wp == NULL)
+      {
+  	if (tp == first_tabpage)
+  	    first_tabpage = tp->tp_next;
+--- 2322,2329 ----
+      if (wp == NULL)
+  	return;
+  
+      /* When closing the last window in a tab page remove the tab page. */
+!     if (tp == NULL ? firstwin == lastwin : tp->tp_firstwin == tp->tp_lastwin)
+      {
+  	if (tp == first_tabpage)
+  	    first_tabpage = tp->tp_next;
+***************
+*** 2341,2348 ****
+  	    }
+  	    ptp->tp_next = tp->tp_next;
+  	}
+! 	free_tabpage(tp);
+      }
+  }
+  
+  /*
+--- 2339,2352 ----
+  	    }
+  	    ptp->tp_next = tp->tp_next;
+  	}
+! 	free_tp = TRUE;
+      }
++ 
++     /* Free the memory used for the window. */
++     win_free_mem(win, &dir, tp);
++ 
++     if (free_tp)
++ 	free_tabpage(tp);
+  }
+  
+  /*
+*** ../vim-7.2.445/src/version.c	2010-07-07 18:20:21.000000000 +0200
+--- src/version.c	2010-07-12 21:36:05.000000000 +0200
+***************
+*** 683,684 ****
+--- 683,686 ----
+  {   /* Add new patch number below this line */
++ /**/
++     446,
+  /**/
+
+-- 
+Not too long ago, compress was something you did to garbage...
+
+ /// Bram Moolenaar -- Bram@Moolenaar.net -- http://www.Moolenaar.net   \\\
+///        sponsor Vim, vote for features -- http://www.Vim.org/sponsor/ \\\
+\\\        download, build and distribute -- http://www.A-A-P.org        ///
+ \\\            help me help AIDS victims -- http://ICCF-Holland.org    ///

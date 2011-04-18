@@ -1,0 +1,17 @@
+upstream: http://groups.google.com/group/vim_dev/browse_thread/thread/5685c3b859e3c793# 
+status: reported upstream
+--- vim72-orig/src/configure.in	2010-09-29 19:13:33.000000000 +0200
++++ vim72/src/configure.in	2010-09-29 19:17:07.000000000 +0200
+@@ -35,10 +35,10 @@
+ fi
+ if test "$GCC" = yes; then
+   dnl method that should work for nearly all versions
+-  gccversion=`"$CC" -dumpversion`
++  gccversion=`$CC -dumpversion`
+   if test "x$gccversion" = "x"; then
+     dnl old method; fall-back for when -dumpversion doesn't work
+-    gccversion=`"$CC" --version | sed -e '2,$d' -e 's/darwin.//' -e 's/^[[^0-9]]*\([[0-9]]\.[[0-9.]]*\).*$/\1/g'`
++    gccversion=`$CC --version | sed -e '2,$d' -e 's/darwin.//' -e 's/^[[^0-9]]*\([[0-9]]\.[[0-9.]]*\).*$/\1/g'`
+   fi
+   dnl version 4.0.1 was reported to cause trouble on Macintosh by Marcin Dalecki
+   if test "$gccversion" = "3.0.1" -o "$gccversion" = "3.0.2" -o "$gccversion" = "4.0.1"; then
