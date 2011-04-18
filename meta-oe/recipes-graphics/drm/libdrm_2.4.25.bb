@@ -24,13 +24,11 @@ LEAD_SONAME = "libdrm.so"
 EXTRA_OECONF_append = " ${@base_contains('MACHINE_FEATURES', 'x86', '', '--disable-intel --disable-radeon',d)}"
 EXTRA_OECONF_append_shr = " --enable-glamo-experimental-api"
 
-PR = "r8"
-
 SRC_URI += "file://installtests.patch"
 SRC_URI += "file://glamo.patch"
 
-SRC_URI[md5sum] = "8d802bf3b368f9fac0d7d17516a9436f"
-SRC_URI[sha256sum] = "c7012381f64458af9f291d913309448aac7dd23a28dc86c6970e4bf38effb6a5"
+SRC_URI[md5sum] = "f53dc4c72109b17908e4113c3b8addfe"
+SRC_URI[sha256sum] = "51f99a815a18876977991bbc6f190607791d25a6e47a3269880ce7679dbd0e9f"
 
 do_compile_prepend_libc-uclibc() {
 	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "/_FILE_OFFSET_BITS/d" ${S}/libkms/intel.c', d)}"
