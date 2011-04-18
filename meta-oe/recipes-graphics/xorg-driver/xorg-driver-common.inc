@@ -4,7 +4,7 @@ SECTION = "x11/drivers"
 LICENSE = "MIT-X"
 INC_PR = "r15"
 
-DEPENDS = "randrproto xorg-server xproto"
+DEPENDS = "randrproto virtual/xserver-xf86 xproto"
 
 SRC_URI = "${XORG_MIRROR}/individual/driver/${BPN}-${PV}.tar.bz2"
 
