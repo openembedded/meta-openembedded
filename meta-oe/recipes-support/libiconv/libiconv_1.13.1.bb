@@ -1,5 +1,10 @@
 require libiconv.inc
+# GPLv3 for iconv program and documentation, LGPLv2 for libiconv and libcharset _libraries_ and their header files
+# would be nice to split to separate PACKAGES
 LICENSE = "GPLv3 LGPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+                    file://COPYING.LIB;md5=9f604d8a4f8e74f4f5140845a21b6674"
+
 BBCLASSEXTEND = "native nativesdk"
 
 PROVIDES = "virtual/libiconv"
