@@ -2,6 +2,7 @@ DESCRIPTION = "Gives a fake root environment"
 HOMEPAGE = "http://fakeroot.alioth.debian.org"
 SECTION = "base"
 LICENSE = "GPL"
+LIC_FILES_CHKSUM = "file://COPYING;md5=7686b00e9859a1a04043d33452bae823"
 PR = "r2"
 
 SRC_URI = "\
