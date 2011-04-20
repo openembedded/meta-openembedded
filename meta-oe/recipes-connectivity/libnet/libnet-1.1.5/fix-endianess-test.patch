@@ -1,0 +1,38 @@
+Use autoconf's endian check instead of the locally defined check
+so that we can determine the endianess without having to compile
+a program.
+
+Idea from http://www.security-lists.org/lists/libnet/2003/03/00001.html
+
+Also remove the old test from aclocal.m4.
+
+Rebased for libnet-1.1.5 on 2011/04/19.
+
+--- a/configure.in	2010-11-03 00:59:21.000000000 +0100
++++ b/configure.in	2011-04-19 17:08:47.087712604 +0200
+@@ -6,6 +6,7 @@
+ dnl
+ dnl Process this file with autoconf to produce a configure script.
+ 
++AC_PREREQ(2.52)
+ AC_INIT(libnet, 1.1.5)
+ AC_MSG_RESULT(beginning autoconfiguration process for libnet-${PACKAGE_VERSION} ...)
+ AC_CANONICAL_SYSTEM
+@@ -39,7 +40,16 @@
+ dnl And some custom things
+ dnl
+ 
+-AC_LIBNET_ENDIAN_CHECK
++AC_C_BIGENDIAN([
++ AC_DEFINE(LIBNET_BIG_ENDIAN)
++ ENDIANESS="LIBNET_BIG_ENDIAN"
++ LIBNET_CONFIG_DEFINES="$LIBNET_CONFIG_DEFINES -DLIBNET_BIG_ENDIAN"
++],[
++ AC_DEFINE(LIBNET_LIL_ENDIAN)
++ ENDIANESS="LIBNET_LIL_ENDIAN"
++ LIBNET_CONFIG_DEFINES="$LIBNET_CONFIG_DEFINES -DLIBNET_LIL_ENDIAN"
++], AC_MSG_WARN(cannot detect endianess. try setting ac_cv_c_bigendian to yes or no)) 
++
+ dnl AC_LBL_LIBRARY_NET
+ 
+ AC_SUBST(ENDIANESS)
