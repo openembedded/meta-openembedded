@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7ec1bcc46f28b11f4722e20d9b7dd4d5"
 # update-rc.d and update-alternatives is important
 RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
 
-INC_PR = "r5"
+INC_PR = "r6"
 
 inherit autotools
 
@@ -41,6 +41,7 @@ do_install_append() {
 CONFFILES_${PN} = "${sysconfdir}/${PN}.conf"
 
 pkg_postinst_${PN} () {
+        /etc/init.d/syslog stop
         update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 200
 
         if test "x$D" != "x"; then
