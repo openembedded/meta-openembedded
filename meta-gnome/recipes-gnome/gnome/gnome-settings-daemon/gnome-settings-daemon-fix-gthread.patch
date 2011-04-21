@@ -1,0 +1,13 @@
+Index: gnome-settings-daemon-2.25.90/configure.ac
+===================================================================
+--- gnome-settings-daemon-2.25.90.orig/configure.ac
++++ gnome-settings-daemon-2.25.90/configure.ac
+@@ -85,6 +85,8 @@ AC_PATH_PROG(GCONFTOOL, gconftool-2)
+ 
+ AM_GCONF_SOURCE_2
+ 
++AC_CHECK_LIB(gthread-2.0, g_thread_init)
++
+ dnl ---------------------------------------------------------------------------
+ dnl - Check for libnotify
+ dnl ---------------------------------------------------------------------------

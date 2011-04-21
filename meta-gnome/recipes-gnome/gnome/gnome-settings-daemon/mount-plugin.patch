@@ -1,0 +1,618 @@
+diff --git a/configure.ac b/configure.ac
+index 135f2ce..ba737a5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -356,6 +356,7 @@ plugins/keybindings/Makefile
+ plugins/keyboard/Makefile
+ plugins/media-keys/Makefile
+ plugins/media-keys/cut-n-paste/Makefile
++plugins/mount/Makefile
+ plugins/mouse/Makefile
+ plugins/screensaver/Makefile
+ plugins/sound/Makefile
+diff --git a/data/gnome-settings-daemon.schemas.in b/data/gnome-settings-daemon.schemas.in
+index 4920ae3..502e9e6 100644
+--- a/data/gnome-settings-daemon.schemas.in
++++ b/data/gnome-settings-daemon.schemas.in
+@@ -557,5 +557,29 @@
+       </locale>
+     </schema>
+ 
++    <schema>
++      <key>/schemas/apps/gnome_settings_daemon/plugins/mount/active</key>
++      <applyto>/apps/gnome_settings_daemon/plugins/mount/active</applyto>
++      <owner>gnome-settings-daemon</owner>
++      <type>bool</type>
++      <default>TRUE</default>
++      <locale name="C">
++        <short>Enable mount plugin</short>
++        <long>Set to True to enable the plugin to automount media.</long>
++      </locale>
++    </schema>
++    <schema>
++      <key>/schemas/apps/gnome_settings_daemon/plugins/mount/priority</key>
++      <applyto>/apps/gnome_settings_daemon/plugins/mount/priority</applyto>
++      <owner>gnome-settings-daemon</owner>
++      <type>int</type>
++      <default>99</default>
++      <locale name="C">
++        <short></short>
++        <long></long>
++      </locale>
++    </schema>
++
++
+   </schemalist>
+ </gconfschemafile>
+diff --git a/plugins/Makefile.am b/plugins/Makefile.am
+index 2d33061..46615c1 100644
+--- a/plugins/Makefile.am
++++ b/plugins/Makefile.am
+@@ -11,6 +11,7 @@ SUBDIRS =		\
+ 	keybindings	\
+ 	keyboard	\
+ 	media-keys	\
++	mount		\
+ 	mouse		\
+ 	screensaver	\
+ 	sound		\
+diff --git a/plugins/mount/Makefile.am b/plugins/mount/Makefile.am
+new file mode 100644
+index 0000000..188c83d
+--- /dev/null
++++ b/plugins/mount/Makefile.am
+@@ -0,0 +1,39 @@
++plugin_LTLIBRARIES = \
++	libmount.la
++
++libmount_la_SOURCES = 		\
++	gsd-mount-manager.c	\
++	gsd-mount-manager.h	\
++	gsd-mount-plugin.c	\
++	gsd-mount-plugin.h
++
++libmount_la_CPPFLAGS = \
++	-I$(top_srcdir)/gnome-settings-daemon		\
++	-DGNOME_SETTINGS_LOCALEDIR=\""$(datadir)/locale"\" \
++	$(AM_CPPFLAGS)
++
++libmount_la_CFLAGS = \
++	$(SETTINGS_PLUGIN_CFLAGS)	\
++	$(AM_CFLAGS)
++
++libmount_la_LDFLAGS = 		\
++	$(GSD_PLUGIN_LDFLAGS)
++
++libmount_la_LIBADD  = 		\
++	$(SETTINGS_PLUGIN_LIBS)
++
++plugin_in_files = 		\
++	mount.gnome-settings-plugin.in
++
++plugin_DATA = $(plugin_in_files:.gnome-settings-plugin.in=.gnome-settings-plugin)
++
++EXTRA_DIST = 			\
++	$(plugin_in_files)
++
++CLEANFILES = 			\
++	$(plugin_DATA)
++
++DISTCLEANFILES =		\
++	$(plugin_DATA)
++
++@GSD_INTLTOOL_PLUGIN_RULE@
+diff --git a/plugins/mount/gsd-mount-manager.c b/plugins/mount/gsd-mount-manager.c
+new file mode 100644
+index 0000000..a768f03
+--- /dev/null
++++ b/plugins/mount/gsd-mount-manager.c
+@@ -0,0 +1,261 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
++ *
++ * Copyright (C) 2009 Intel Corporation
++ *
++ * This program is free software; you can redistribute it and/or modify it under
++ * the terms of the GNU General Public License as published by the Free Software
++ * Foundation; either version 2 of the License, or (at your option) any later
++ * version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
++ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
++ * details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
++ * Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ */
++
++#include <config.h>
++
++#include <glib.h>
++#include <glib/gi18n.h>
++#include <gio/gio.h>
++#include <gtk/gtk.h>
++
++#include "gsd-mount-manager.h"
++
++#define GSD_MOUNT_MANAGER_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_MOUNT_MANAGER, GsdMountManagerPrivate))
++
++struct GsdMountManagerPrivate
++{
++        GVolumeMonitor *monitor;
++};
++
++G_DEFINE_TYPE (GsdMountManager, gsd_mount_manager, G_TYPE_OBJECT)
++
++static gpointer manager_object = NULL;
++
++#if 0
++static void
++drive_connected_cb (GVolumeMonitor *monitor,
++                    GDrive *drive,
++                    GsdMountManager *manager)
++{
++        /* TODO: listen for the eject button */
++}
++#endif
++
++static void
++volume_mounted_cb (GObject *source_object, GAsyncResult *result, gpointer user_data)
++{
++        GError *error = NULL;
++        char *name;
++
++        name = g_volume_get_name (G_VOLUME (source_object));
++
++	if (!g_volume_mount_finish (G_VOLUME (source_object), result, &error)) {
++                g_debug ("Failed to mount '%s': %s", name, error->message);
++
++		if (error->code != G_IO_ERROR_FAILED_HANDLED) {
++                        char *primary;
++                        GtkWidget *dialog;
++
++			primary = g_strdup_printf (_("Unable to mount %s"), name);
++
++                        dialog = gtk_message_dialog_new (NULL, 0,
++                                                         GTK_MESSAGE_ERROR,
++                                                         GTK_BUTTONS_CLOSE,
++                                                         primary);
++
++			g_free (primary);
++                        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), error->message);
++
++                        gtk_dialog_run (GTK_DIALOG (dialog));
++                        gtk_widget_destroy (dialog);
++		}
++		g_error_free (error);
++	} else {
++                g_debug ("Mounted '%s'", name);
++        }
++
++        g_free (name);
++}
++
++static void
++volume_added_cb (GVolumeMonitor *monitor,
++                 GVolume *volume,
++                 GsdMountManager *manager)
++{
++        char *name;
++
++        name = g_volume_get_name (volume);
++        g_debug ("Volme '%s' added", name);
++
++        if (g_volume_can_mount (volume)) {
++                GMountOperation *mount_op;
++
++                g_debug ("Mounting '%s'", name);
++
++                mount_op = gtk_mount_operation_new (NULL);
++                g_volume_mount (volume, G_MOUNT_MOUNT_NONE,
++                                mount_op, NULL,
++                                volume_mounted_cb, manager);
++        }
++
++        g_free (name);
++}
++
++static void
++mount_added_cb (GVolumeMonitor *monitor,
++                GMount *mount,
++                GsdMountManager *manager)
++{
++        GFile *file;
++        char *uri;
++
++        file = g_mount_get_root (mount);
++        uri = g_file_get_uri (file);
++
++        g_debug ("%s mounted, starting file manager", uri);
++
++        /* TODO: error */
++        gtk_show_uri (NULL, uri, GDK_CURRENT_TIME, NULL);
++
++        g_free (uri);
++        g_object_unref (file);
++}
++
++static void
++mount_existing_volumes (GsdMountManager *manager)
++{
++        /* TODO: iterate over drives to hook up eject */
++        GList *l;
++
++        g_debug ("Mounting existing volumes");
++
++        l = g_volume_monitor_get_volumes (manager->priv->monitor);
++        while (l) {
++                GVolume *volume = l->data;
++                GMount *mount;
++
++                mount = g_volume_get_mount (volume);
++                if (mount == NULL &&
++                    g_volume_can_mount (volume) &&
++                    g_volume_should_automount (volume)) {
++                        GMountOperation *mount_op;
++                        char *name;
++
++                        name = g_volume_get_name (volume);
++                        g_debug ("Mounting '%s'", name);
++                        g_free (name);
++
++                        mount_op = gtk_mount_operation_new (NULL);
++                        g_volume_mount (volume, G_MOUNT_MOUNT_NONE,
++                                        mount_op, NULL,
++                                        volume_mounted_cb, manager);
++                }
++
++                if (mount)
++                        g_object_unref (mount);
++                g_object_unref (volume);
++                l = g_list_delete_link (l, l);
++        }
++}
++
++gboolean
++gsd_mount_manager_start (GsdMountManager *manager,
++                               GError               **error)
++{
++        g_debug ("Starting mount manager");
++
++        manager->priv->monitor = g_volume_monitor_get ();
++
++#if 0
++	g_signal_connect_object (manager->priv->monitor, "drive-connected",
++				 G_CALLBACK (drive_connected_cb), manager, 0);
++#endif
++	g_signal_connect_object (manager->priv->monitor, "volume-added",
++				 G_CALLBACK (volume_added_cb), manager, 0);
++	g_signal_connect_object (manager->priv->monitor, "mount-added",
++				 G_CALLBACK (mount_added_cb), manager, 0);
++
++        /* TODO: handle eject buttons */
++
++#if 0
++        mount_existing_volumes (manager);
++#endif
++
++        return TRUE;
++}
++
++void
++gsd_mount_manager_stop (GsdMountManager *manager)
++{
++        g_debug ("Stopping mount manager");
++}
++
++static void
++gsd_mount_manager_dispose (GObject *object)
++{
++        GsdMountManager *manager = GSD_MOUNT_MANAGER (object);
++
++        if (manager->priv->monitor) {
++                g_signal_handlers_disconnect_by_func
++                        (manager->priv->monitor, volume_added_cb, manager);
++                g_signal_handlers_disconnect_by_func
++                        (manager->priv->monitor, mount_added_cb, manager);
++                g_object_unref (manager->priv->monitor);
++                manager->priv->monitor = NULL;
++        }
++
++        G_OBJECT_CLASS (gsd_mount_manager_parent_class)->dispose (object);
++}
++
++static void
++gsd_mount_manager_init (GsdMountManager *manager)
++{
++        manager->priv = GSD_MOUNT_MANAGER_GET_PRIVATE (manager);
++}
++
++static void
++gsd_mount_manager_finalize (GObject *object)
++{
++        GsdMountManager *mount_manager;
++
++        g_return_if_fail (object != NULL);
++        g_return_if_fail (GSD_IS_MOUNT_MANAGER (object));
++
++        mount_manager = GSD_MOUNT_MANAGER (object);
++
++        g_return_if_fail (mount_manager->priv != NULL);
++
++        G_OBJECT_CLASS (gsd_mount_manager_parent_class)->finalize (object);
++}
++
++static void
++gsd_mount_manager_class_init (GsdMountManagerClass *klass)
++{
++        GObjectClass   *object_class = G_OBJECT_CLASS (klass);
++
++        object_class->dispose = gsd_mount_manager_dispose;
++        object_class->finalize = gsd_mount_manager_finalize;
++
++        g_type_class_add_private (klass, sizeof (GsdMountManagerPrivate));
++}
++
++GsdMountManager *
++gsd_mount_manager_new (void)
++{
++        if (manager_object != NULL) {
++                g_object_ref (manager_object);
++        } else {
++                manager_object = g_object_new (GSD_TYPE_MOUNT_MANAGER, NULL);
++                g_object_add_weak_pointer (manager_object,
++                                           (gpointer *) &manager_object);
++        }
++
++        return GSD_MOUNT_MANAGER (manager_object);
++}
+diff --git a/plugins/mount/gsd-mount-manager.h b/plugins/mount/gsd-mount-manager.h
+new file mode 100644
+index 0000000..9093fff
+--- /dev/null
++++ b/plugins/mount/gsd-mount-manager.h
+@@ -0,0 +1,58 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
++ *
++ * Copyright (C) 2009 Intel Corporation
++ *
++ * This program is free software; you can redistribute it and/or modify it under
++ * the terms of the GNU General Public License as published by the Free Software
++ * Foundation; either version 2 of the License, or (at your option) any later
++ * version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
++ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
++ * details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
++ * Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ */
++
++#ifndef __GSD_MOUNT_MANAGER_H
++#define __GSD_MOUNT_MANAGER_H
++
++#include <glib-object.h>
++
++G_BEGIN_DECLS
++
++#define GSD_TYPE_MOUNT_MANAGER         (gsd_mount_manager_get_type ())
++#define GSD_MOUNT_MANAGER(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_MOUNT_MANAGER, GsdMountManager))
++#define GSD_MOUNT_MANAGER_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_MOUNT_MANAGER, GsdMountManagerClass))
++#define GSD_IS_MOUNT_MANAGER(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GSD_TYPE_MOUNT_MANAGER))
++#define GSD_IS_MOUNT_MANAGER_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GSD_TYPE_MOUNT_MANAGER))
++#define GSD_MOUNT_MANAGER_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GSD_TYPE_MOUNT_MANAGER, GsdMountManagerClass))
++
++typedef struct GsdMountManagerPrivate GsdMountManagerPrivate;
++
++typedef struct
++{
++        GObject parent;
++        GsdMountManagerPrivate *priv;
++} GsdMountManager;
++
++typedef struct
++{
++        GObjectClass parent_class;
++} GsdMountManagerClass;
++
++GType                   gsd_mount_manager_get_type            (void);
++
++GsdMountManager *       gsd_mount_manager_new                 (void);
++
++gboolean                gsd_mount_manager_start               (GsdMountManager *manager,
++                                                               GError         **error);
++void                    gsd_mount_manager_stop                (GsdMountManager *manager);
++
++G_END_DECLS
++
++#endif /* __GSD_MOUNT_MANAGER_H */
+diff --git a/plugins/mount/gsd-mount-plugin.c b/plugins/mount/gsd-mount-plugin.c
+new file mode 100644
+index 0000000..af295a5
+--- /dev/null
++++ b/plugins/mount/gsd-mount-plugin.c
+@@ -0,0 +1,103 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
++ *
++ * Copyright (C) 2009 Intel Corporation
++ *
++ * This program is free software; you can redistribute it and/or modify it under
++ * the terms of the GNU General Public License as published by the Free Software
++ * Foundation; either version 2, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
++ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
++ * details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
++ * Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ */
++
++#include <config.h>
++
++#include <glib/gi18n.h>
++#include <gmodule.h>
++#include <gnome-settings-daemon/gnome-settings-plugin.h>
++
++#include "gsd-mount-plugin.h"
++#include "gsd-mount-manager.h"
++
++struct GsdMountPluginPrivate {
++        GsdMountManager *manager;
++};
++
++#define GSD_MOUNT_PLUGIN_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), GSD_TYPE_MOUNT_PLUGIN, GsdMountPluginPrivate))
++
++GNOME_SETTINGS_PLUGIN_REGISTER (GsdMountPlugin, gsd_mount_plugin)
++
++static void
++gsd_mount_plugin_init (GsdMountPlugin *plugin)
++{
++        plugin->priv = GSD_MOUNT_PLUGIN_GET_PRIVATE (plugin);
++
++        g_debug ("GsdMountPlugin initializing");
++
++        plugin->priv->manager = gsd_mount_manager_new ();
++}
++
++static void
++gsd_mount_plugin_finalize (GObject *object)
++{
++        GsdMountPlugin *plugin;
++
++        g_return_if_fail (object != NULL);
++        g_return_if_fail (GSD_IS_MOUNT_PLUGIN (object));
++
++        g_debug ("GsdMountPlugin finalizing");
++
++        plugin = GSD_MOUNT_PLUGIN (object);
++
++        g_return_if_fail (plugin->priv != NULL);
++
++        if (plugin->priv->manager != NULL) {
++                g_object_unref (plugin->priv->manager);
++        }
++
++        G_OBJECT_CLASS (gsd_mount_plugin_parent_class)->finalize (object);
++}
++
++static void
++impl_activate (GnomeSettingsPlugin *plugin)
++{
++        gboolean res;
++        GError  *error;
++
++        g_debug ("Activating mount plugin");
++
++        error = NULL;
++        res = gsd_mount_manager_start (GSD_MOUNT_PLUGIN (plugin)->priv->manager, &error);
++        if (! res) {
++                g_warning ("Unable to start mount manager: %s", error->message);
++                g_error_free (error);
++        }
++}
++
++static void
++impl_deactivate (GnomeSettingsPlugin *plugin)
++{
++        g_debug ("Deactivating mount plugin");
++        gsd_mount_manager_stop (GSD_MOUNT_PLUGIN (plugin)->priv->manager);
++}
++
++static void
++gsd_mount_plugin_class_init (GsdMountPluginClass *klass)
++{
++        GObjectClass           *object_class = G_OBJECT_CLASS (klass);
++        GnomeSettingsPluginClass *plugin_class = GNOME_SETTINGS_PLUGIN_CLASS (klass);
++
++        object_class->finalize = gsd_mount_plugin_finalize;
++
++        plugin_class->activate = impl_activate;
++        plugin_class->deactivate = impl_deactivate;
++
++        g_type_class_add_private (klass, sizeof (GsdMountPluginPrivate));
++}
+diff --git a/plugins/mount/gsd-mount-plugin.h b/plugins/mount/gsd-mount-plugin.h
+new file mode 100644
+index 0000000..526a41f
+--- /dev/null
++++ b/plugins/mount/gsd-mount-plugin.h
+@@ -0,0 +1,55 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
++ *
++ * Copyright (C) 2009 Intel Corporation
++ *
++ * This program is free software; you can redistribute it and/or modify it under
++ * the terms of the GNU General Public License as published by the Free Software
++ * Foundation; either version 2, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
++ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
++ * details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
++ * Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ */
++
++#ifndef __GSD_MOUNT_PLUGIN_H__
++#define __GSD_MOUNT_PLUGIN_H__
++
++#include <glib-object.h>
++#include <gmodule.h>
++#include <gnome-settings-daemon/gnome-settings-plugin.h>
++
++G_BEGIN_DECLS
++
++#define GSD_TYPE_MOUNT_PLUGIN                (gsd_mount_plugin_get_type ())
++#define GSD_MOUNT_PLUGIN(o)                  (G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_MOUNT_PLUGIN, GsdMountPlugin))
++#define GSD_MOUNT_PLUGIN_CLASS(k)            (G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_MOUNT_PLUGIN, GsdMountPluginClass))
++#define GSD_IS_MOUNT_PLUGIN(o)               (G_TYPE_CHECK_INSTANCE_TYPE ((o), GSD_TYPE_MOUNT_PLUGIN))
++#define GSD_IS_MOUNT_PLUGIN_CLASS(k)         (G_TYPE_CHECK_CLASS_TYPE ((k), GSD_TYPE_MOUNT_PLUGIN))
++#define GSD_MOUNT_PLUGIN_GET_CLASS(o)        (G_TYPE_INSTANCE_GET_CLASS ((o), GSD_TYPE_MOUNT_PLUGIN, GsdMountPluginClass))
++
++typedef struct GsdMountPluginPrivate GsdMountPluginPrivate;
++
++typedef struct
++{
++        GnomeSettingsPlugin    parent;
++        GsdMountPluginPrivate *priv;
++} GsdMountPlugin;
++
++typedef struct
++{
++        GnomeSettingsPluginClass parent_class;
++} GsdMountPluginClass;
++
++GType   gsd_mount_plugin_get_type            (void) G_GNUC_CONST;
++
++G_MODULE_EXPORT GType register_gnome_settings_plugin (GTypeModule *module);
++
++G_END_DECLS
++
++#endif /* __GSD_MOUNT_PLUGIN_H__ */
+diff --git a/plugins/mount/mount.gnome-settings-plugin.in b/plugins/mount/mount.gnome-settings-plugin.in
+new file mode 100644
+index 0000000..ca29ad1
+--- /dev/null
++++ b/plugins/mount/mount.gnome-settings-plugin.in
+@@ -0,0 +1,8 @@
++[GNOME Settings Plugin]
++Module=mount
++IAge=0
++_Name=Mount
++_Description=Mount removable media
++Authors=Ross Burton
++Copyright=Copyright © 2009 Intel Corporation
++Website=

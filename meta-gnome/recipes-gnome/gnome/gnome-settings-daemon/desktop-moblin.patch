@@ -1,0 +1,11 @@
+--- gnome-settings-daemon-2.26.1/data/gnome-settings-daemon.desktop.in.in~	2009-04-24 20:59:51.000000000 -0700
++++ gnome-settings-daemon-2.26.1/data/gnome-settings-daemon.desktop.in.in	2009-04-24 20:59:51.000000000 -0700
+@@ -2,7 +2,7 @@
+ Type=Application
+ _Name=GNOME Settings Daemon
+ Exec=@LIBEXECDIR@/gnome-settings-daemon
+-OnlyShowIn=GNOME;
++OnlyShowIn=GNOME;MOBLIN;
+ X-GNOME-Autostart-Phase=Initialization
+ X-GNOME-Autostart-Notify=true
+ X-GNOME-AutoRestart=true
