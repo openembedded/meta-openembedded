@@ -1,0 +1,59 @@
+From 6657831200419d7509edcc04434d03b994c86adb Mon Sep 17 00:00:00 2001
+From: Anton Arapov <anton@redhat.com>
+Date: Wed, 11 Nov 2009 21:33:09 +0100
+Subject: [PATCH] cpufreq/aperf : fix the /proc/stat read routine, always fails otherwise.
+
+  the statement:
+    if (!fgets(value, LINE_LEN, fp)) {
+  always fails(==0) at the end of proc file, so we will have err_out:
+  firing all the time.
+
+  I've aligned the code to the one that other utils of cpufreq has.
+
+Signed-off-by: Anton Arapov <aarapov@redhat.com>
+Signed-off-by: Dominik Brodowski <linux@dominikbrodowski.net>
+---
+ utils/aperf.c |   18 +++++++-----------
+ 1 files changed, 7 insertions(+), 11 deletions(-)
+
+diff --git a/utils/aperf.c b/utils/aperf.c
+index a37f8b1..8ecff2c 100644
+--- a/utils/aperf.c
++++ b/utils/aperf.c
+@@ -76,14 +76,15 @@ static unsigned int count_cpus(void)
+ 	unsigned int cpunr = 0;
+ 
+ 	fp = fopen("/proc/stat", "r");
+-	if(!fp)
+-		goto err_out;
++	if(!fp) {
++		printf("Couldn't count the number of CPUs (%s: %s), "
++			"assuming 1\n", "/proc/stat", strerror(errno));
++		return 1;
++	}
+ 
+ 	while (!feof(fp)) {
+-		if (!fgets(value, LINE_LEN, fp)) {
+-			fclose(fp);
+-			goto err_out;
+-		}
++		if (!fgets(value, LINE_LEN, fp))
++			continue;
+ 		value[LINE_LEN - 1] = '\0';
+ 		if (strlen(value) < (LINE_LEN - 2))
+ 			continue;
+@@ -98,11 +99,6 @@ static unsigned int count_cpus(void)
+ 
+ 	/* cpu count starts from 0, on error return 1 (UP) */
+ 	return (ret+1);
+-
+-err_out:
+-	printf("Couldn't count the number of CPUs (%s: %s), "
+-		"assuming 1\n", "/proc/stat", strerror(errno));
+-	return 1;
+ }
+ 
+ static int has_mperf_aperf_support(int cpu)
+-- 
+1.7.0
+
