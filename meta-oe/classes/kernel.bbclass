@@ -148,8 +148,7 @@ kernel_do_install() {
 	if [ ! "${S}" == "${B}" ]; then
 		cp -fR ${S}/* $kerneldir
 	fi
-	echo "LINUX BUILD TREE COPIED TO SYSROOTS"
-	du -hs $kerneldir
+	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
 
 	#
 	# Clean and remove files not needed for building modules.
