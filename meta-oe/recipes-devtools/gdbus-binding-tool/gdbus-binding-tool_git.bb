@@ -1,6 +1,6 @@
 DESCRIPTION = "gdbus-binding-tool is used to generate C code for interacting with remote objects using D-Bus."
-DEPENDS = "glib-2.0 gdbus-binding-tool-native"
-DEPENDS_virtclass-native = "glib-2.0-native"
+DEPENDS = "glib-2.0 libffi python-argparse gdbus-binding-tool-native"
+DEPENDS_virtclass-native = "glib-2.0-native libffi-native python-argparse-native"
 RDEPENDS_${PN} = "glib-2.0-utils"
 # taken from glib where this is supposed to be moved later
 LICENSE = "LGPLv2+ & BSD & public domain"
@@ -12,7 +12,7 @@ inherit autotools pkgconfig
 
 SRC_URI = "git://anongit.freedesktop.org/~david/${BPN};protocol=git;branch=master \
            file://COPYING"
-SRCREV = "229fd9adbb6bd9d824b38a3bd092229016540f41"
+SRCREV = "286f4eaf48ea79821be5a4e6bf493566b156faa4"
 PV = "0.1+gitr${SRCPV}"
 S = "${WORKDIR}/git"
 
