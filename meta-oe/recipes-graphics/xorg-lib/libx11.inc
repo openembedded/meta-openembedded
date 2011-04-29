@@ -1,13 +1,10 @@
 require xorg-lib-common.inc
 
 DESCRIPTION = "Base X libs."
-COMMON_DEPENDS = "util-macros xtrans libxdmcp libxau \
-                  bigreqsproto xproto xextproto xcmiscproto \
-                  xf86bigfontproto kbproto inputproto xproto-native"
-
-DEPENDS = "libxcb ${COMMON_DEPENDS}"		  
-DEPENDS_virtclass-native = "${COMMON_DEPENDS}"
-DEPENDS_virtclass-nativesdk = "${COMMON_DEPENDS}"
+DEPENDS += "util-macros xtrans libxdmcp libxau \
+            bigreqsproto xproto xextproto xcmiscproto \
+            xf86bigfontproto kbproto inputproto libxcb \
+	    xproto-native"
 
 FILESPATHPKG .= ":libx11-${PV}:libx11"
 BBCLASSEXTEND = "native nativesdk"
@@ -22,9 +19,7 @@ FILES_${PN}-locale += "${datadir}/X11/locale ${libdir}/X11/locale"
 
 XORG_PN = "libX11"
 
-EXTRA_OECONF += " --with-xcb --with-keysymdefdir=${STAGING_INCDIR}/X11 --with-groff=no --with-ps2pdf=no --with-fop=no"
-EXTRA_OECONF_virtclass-native = " --without-xcb --with-groff=no --with-ps2pdf=no --with-fop=no"
-EXTRA_OECONF_virtclass-nativesdk = " --without-xcb --with-groff=no --with-ps2pdf=no --with-fop=no"
+EXTRA_OECONF += "--with-keysymdefdir=${STAGING_INCDIR}/X11 --with-groff=no --with-ps2pdf=no --with-fop=no --disable-specs"
 
 # Below option is added to overcome the GCC bug on ARM
 # see http://gcc.gnu.org/PR42981 for further details.
