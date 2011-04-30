@@ -4,7 +4,7 @@ SECTION = "libs"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://src/proxy-libintl/COPYING.LIB.txt;md5=bc400bc21422f9a92e76ec2c5167ca2e"
 
-PR = "r0"
+PR = "r1"
 PROVIDES = "virtual/libintl virtual/gettext"
 
 SRC_URI = " \
@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "291ac350cc5eb4a01b0d651ca99fae64cee8a1c06b2005277fab5a4356
 S = "${WORKDIR}"
 FILES_${PN}-dev = "${includedir}/libintl.h ${libdir}/libintl.a"
 
-CFLAGS_append = " -Wall -I ../../include ${@['-DSTUB_ONLY', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']}"
+CFLAGS_append = " -fPIC -Wall -I ../../include ${@['-DSTUB_ONLY', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']}"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_compile() {
