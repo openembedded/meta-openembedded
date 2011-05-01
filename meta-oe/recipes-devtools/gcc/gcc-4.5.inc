@@ -13,21 +13,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
                     file://COPYING.RUNTIME;md5=fe60d87048567d4fe8c8a0ed2448bcc8"
 
 
-SRCREV = "170880"
 PV = "4.5"
-INC_PR = "r35"
-
-# BINV should be incremented after updating to a revision
-# after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
-# the value will be minor-release+1 e.g. if minor release was
-# 4.5.1 then the value below will be 2 which will mean 4.5.2
-# which will be next minor release and so on.
-
+INC_PR = "r36"
+# BINV should  point to minor release 
 BINV = "${PV}.3"
-BRANCH = "gcc-4_5-branch"
-PR_append = "+svnr${SRCPV}"
 
-SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
+SRC_URI = "${GNU_MIRROR}/gcc/gcc-${BINV}/gcc-${BINV}.tar.bz2 \
        file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
        file://100-uclibc-conf.patch \
        file://gcc-uclibc-locale-ctype_touplow_t.patch \
@@ -175,11 +166,15 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
        file://linaro/gcc-4.5-linaro-r99478.patch \
        file://linaro/gcc-4.5-linaro-r99479.patch \
        file://linaro/gcc-4.5-linaro-r99480.patch \
-       file://linaro/gcc-4.5-linaro-r99481.patch \
-       file://linaro/gcc-4.5-linaro-r99482.patch \
        file://linaro/gcc-4.5-linaro-r99483.patch \
        file://linaro/gcc-4.5-linaro-r99488.patch \
        file://linaro/gcc-4.5-linaro-r99489.patch \
+       file://linaro/gcc-4.5-linaro-r99491.patch \
+       file://linaro/gcc-4.5-linaro-r99494.patch \
+       file://linaro/gcc-4.5-linaro-r99495.patch \
+       file://linaro/gcc-4.5-linaro-r99498.patch \
+#      file://linaro/gcc-4.5-linaro-r99499.patch \
+       file://linaro/gcc-4.5-linaro-r99502.patch \
        file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \
        file://gcc-arm-volatile-bitfield-fix.patch \
@@ -207,7 +202,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH} \
 FORTRAN = ""
 JAVA = ""
 
-S = "${WORKDIR}/${BRANCH}"
+S = "${WORKDIR}/gcc-${BINV}"
 
 #EXTRA_OECONF_BASE = "  --enable-cheaders=c_std \
 #			--enable-libssp \
