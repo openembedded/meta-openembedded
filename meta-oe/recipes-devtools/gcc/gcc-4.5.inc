@@ -173,7 +173,6 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${BINV}/gcc-${BINV}.tar.bz2 \
        file://linaro/gcc-4.5-linaro-r99494.patch \
        file://linaro/gcc-4.5-linaro-r99495.patch \
        file://linaro/gcc-4.5-linaro-r99498.patch \
-#      file://linaro/gcc-4.5-linaro-r99499.patch \
        file://linaro/gcc-4.5-linaro-r99502.patch \
        file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \
