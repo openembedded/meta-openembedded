@@ -18,6 +18,9 @@ INC_PR = "r36"
 # BINV should  point to minor release 
 BINV = "${PV}.3"
 
+SRC_URI[md5sum] = "8e0b5c12212e185f3e4383106bfa9cc6"
+SRC_URI[sha256sum] = "0a8847af44a9b33813b199997a73139517c96adfd519eaf24c79d4d9d09f65de"
+
 SRC_URI = "${GNU_MIRROR}/gcc/gcc-${BINV}/gcc-${BINV}.tar.bz2 \
        file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
        file://100-uclibc-conf.patch \
