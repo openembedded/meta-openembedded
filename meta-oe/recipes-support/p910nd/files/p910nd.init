@@ -1,0 +1,31 @@
+#! /bin/sh
+
+test -f /usr/sbin/p910nd || exit 0
+
+test -d /var/spool/p910nd || mkdir -p /var/spool/p910nd
+
+case "$1" in
+  start)
+    echo -n "Starting p910nd printer daemon: p910nd"
+    /usr/sbin/p910nd -b -f /dev/usb/lp0 0
+    echo "."
+    ;;
+  stop)
+    echo -n "Stopping p910nd printer daemon: p910nd"
+    start-stop-daemon --stop --quiet --exec /usr/sbin/p9100d
+   echo "."
+    ;;
+  restart)
+    echo -n "Stopping p910nd printer daemon: p910nd"
+    start-stop-daemon --stop --quiet --exec /usr/sbin/p9100d
+    sleep 2
+    echo -n " ... Starting p910nd printer daemon: p910nd " 
+    /usr/sbin/p910nd -b -f /dev/usb/lp0 0
+    echo "."
+    ;;
+  *)
+    echo "Usage: /etc/init.d/p910nd {start|stop|restart}"
+    exit 1
+esac
+
+exit 0
