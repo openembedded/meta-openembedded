@@ -7,7 +7,7 @@ DEPENDS = "perl-native"
 
 BBCLASSEXTEND = "native"
 
-SRC_URI = "http://cairographics.org/releases/${BPN}-${PV}.tar.gz;name=archive "
+SRC_URI = "${XORG_MIRROR}/individual/lib/${BPN}-${PV}.tar.gz;name=archive "
 
 INC_PR = "r5"
 
