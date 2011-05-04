@@ -1,0 +1,104 @@
+We provide dummy implementation of iconv functionality if it does not find
+iconv which will be case with uclibc. We remove the check for iconv in configure
+
+This is needed when libintl and libiconv is not available. It wont have any
+impact on case when they are available.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+
+Index: glib-2.26.1/glib/gconvert.c
+===================================================================
+--- glib-2.26.1.orig/glib/gconvert.c
++++ glib-2.26.1/glib/gconvert.c
+@@ -23,7 +23,7 @@
+ #include "config.h"
+ #include "glibconfig.h"
+ 
+-#ifndef G_OS_WIN32
++#if !defined G_OS_WIN32 && defined HAVE_ICONV_H
+ #include <iconv.h>
+ #endif
+ #include <errno.h>
+@@ -65,6 +65,28 @@
+ #error GNU libiconv not in use but included iconv.h is from libiconv
+ #endif
+ 
++#ifndef HAVE_ICONV_H
++typedef void *iconv_t;
++
++iconv_t iconv_open(const char *tocode, const char *fromcode)
++{
++	return (iconv_t)(-1);
++}
++
++int iconv_close(iconv_t cd)
++{
++	free(cd);
++
++	return 0;
++}
++size_t iconv (iconv_t __cd, char **__inbuf,
++                     size_t *__inbytesleft,
++                     char **__outbuf,
++                     size_t *__outbytesleft)
++{
++	return 0;
++}
++#endif
+ 
+ /**
+  * SECTION:conversions
+Index: glib-2.26.1/configure.ac
+===================================================================
+--- glib-2.26.1.orig/configure.ac
++++ glib-2.26.1/configure.ac
+@@ -373,46 +373,8 @@ dnl *** Tests for iconv ***
+ dnl ***********************
+ dnl
+ dnl We do this before the gettext checks, to avoid distortion
+-
+-dnl On Windows we use a native implementation
+-
+-if test x"$glib_native_win32" = xyes; then
+-  with_libiconv=native
+-else
+-  AC_ARG_WITH(libiconv,
+-	      [AC_HELP_STRING([--with-libiconv=@<:@no/gnu/native@:>@],
+-			      [use the libiconv library])],,
+-	      [with_libiconv=maybe])
+-
+-  found_iconv=no
+-  case $with_libiconv in
+-    maybe)
+-      # Check in the C library first
+-      AC_CHECK_FUNC(iconv_open, [with_libiconv=no; found_iconv=yes])
+-      # Check if we have GNU libiconv
+-      if test $found_iconv = "no"; then
+-	AC_CHECK_LIB(iconv, libiconv_open, [with_libiconv=gnu; found_iconv=yes])
+-      fi
+-      # Check if we have a iconv in -liconv, possibly from vendor
+-      if test $found_iconv = "no"; then
+-	AC_CHECK_LIB(iconv, iconv_open, [with_libiconv=native; found_iconv=yes])
+-      fi
+-      ;;
+-    no)
+-      AC_CHECK_FUNC(iconv_open, [with_libiconv=no; found_iconv=yes])
+-      ;;
+-    gnu|yes)
+-      AC_CHECK_LIB(iconv, libiconv_open, [with_libiconv=gnu; found_iconv=yes])
+-      ;;
+-    native)
+-      AC_CHECK_LIB(iconv, iconv_open, [with_libiconv=native; found_iconv=yes])
+-      ;;
+-  esac
+-
+-  if test "x$found_iconv" = "xno" ; then
+-     AC_MSG_ERROR([*** No iconv() implementation found in C library or libiconv])
+-  fi
+-fi
++found_iconv=yes
++with_libiconv=no
+ 
+ gl_GLIBC21
+ AC_ARG_ENABLE(iconv-cache, 

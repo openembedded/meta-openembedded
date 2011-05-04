@@ -1,0 +1,33 @@
+copy from OE, said to borrow from Ubuntu. Not in glib-2.0 upstream yet. Add for sanity.
+Added to poky by Kevin Tian <kevin.tian@intel.com>, 06/25/2010
+Rebased for glib-2.27.3 by Dongxiao Xu <dongxiao.xu@intel.com>, 11/16/2010
+
+Upstream-Status: Inappropriate [patches for test code]
+
+diff -ruN glib-2.27.3-orig/tests/threadpool-test.c glib-2.27.3/tests/threadpool-test.c
+--- glib-2.27.3-orig/tests/threadpool-test.c	2009-04-01 07:04:21.000000000 +0800
++++ glib-2.27.3/tests/threadpool-test.c	2010-11-16 12:28:09.002172678 +0800
+@@ -5,8 +5,8 @@
+ 
+ #include <glib.h>
+ 
+-#define DEBUG_MSG(x)
+-/* #define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");  */
++/* #define DEBUG_MSG(x) */
++#define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");
+ 
+ #define WAIT                5    /* seconds */
+ #define MAX_THREADS         10
+@@ -124,10 +124,10 @@
+    DEBUG_MSG (("[unused] stopping unused threads"));
+    g_thread_pool_stop_unused_threads ();
+ 
+-   DEBUG_MSG (("[unused] waiting ONE second for threads to die"));
++   DEBUG_MSG (("[unused] waiting FIVE second for threads to die"));
+ 
+    /* Some time for threads to die. */
+-   g_usleep (G_USEC_PER_SEC);
++   g_usleep (5 * G_USEC_PER_SEC);
+ 
+    DEBUG_MSG (("[unused] stopped idle threads, %d remain, %d threads still exist",
+ 	       g_thread_pool_get_num_unused_threads (),
