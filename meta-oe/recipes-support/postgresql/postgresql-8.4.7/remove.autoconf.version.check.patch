@@ -1,10 +1,10 @@
-Index: postgresql-8.4.4/configure.in
+Index: postgresql-8.4.7/configure.in
 ===================================================================
---- postgresql-8.4.4.orig/configure.in
-+++ postgresql-8.4.4/configure.in
+--- postgresql-8.4.7.orig/configure.in
++++ postgresql-8.4.7/configure.in
 @@ -19,10 +19,6 @@ m4_pattern_forbid(^PGAC_)dnl to catch un
  
- AC_INIT([PostgreSQL], [8.4.4], [pgsql-bugs@postgresql.org])
+ AC_INIT([PostgreSQL], [8.4.7], [pgsql-bugs@postgresql.org])
  
 -m4_if(m4_defn([m4_PACKAGE_VERSION]), [2.61], [], [m4_fatal([Autoconf version 2.61 is required.
 -Untested combinations of 'autoconf' and PostgreSQL versions are not

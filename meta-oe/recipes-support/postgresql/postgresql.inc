@@ -1,14 +1,14 @@
 DESCRIPTION = "PostgreSQL is a powerful, open source relational database system."
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
-
 DEPENDS = "zlib readline tzcode-native"
+INC_PR = "r5"
 
 ARM_INSTRUCTION_SET = "arm"
 
 #WARNING: this recipe assumes you have the timezone compiler present in /usr/sbin/zic
 
-SRC_URI = "ftp://ftp-archives.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
+SRC_URI = "ftp://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2"
 
 LEAD_SONAME = "libpq.so"
 
@@ -16,6 +16,8 @@ LEAD_SONAME = "libpq.so"
 export LDFLAGS_SL = "${LDFLAGS}"
 
 inherit autotools pkgconfig
+
+EXTRA_OECONF_sh4 = "--disable-spinlocks"
 
 do_compile_append() {
          cp /usr/sbin/zic ${S}/src/timezone/
