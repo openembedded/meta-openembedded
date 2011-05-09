@@ -1,0 +1,30 @@
+From e26756e1112552489e123c8ed7ed038beae89c5b Mon Sep 17 00:00:00 2001
+From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 4 Apr 2011 15:55:33 +0000
+Subject: [PATCH 063/200] 	* gfortran.dg/bessel_6.f90: Use dg-add-options ieee.
+ 	* gfortran.dg/bessel_7.f90: Likewise.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171940 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e760d4c..3c1a6f4 100644
+--- a/gcc/testsuite/gfortran.dg/bessel_6.f90
++++ b/gcc/testsuite/gfortran.dg/bessel_6.f90
+@@ -1,4 +1,5 @@
+ ! { dg-do run { xfail spu-*-* } }
++! { dg-add-options ieee }
+ !
+ ! PR fortran/36158
+ ! PR fortran/33197
+diff --git a/gcc/testsuite/gfortran.dg/bessel_7.f90 b/gcc/testsuite/gfortran.dg/bessel_7.f90
+index 10a6e96..78f1ff2 100644
+--- a/gcc/testsuite/gfortran.dg/bessel_7.f90
++++ b/gcc/testsuite/gfortran.dg/bessel_7.f90
+@@ -1,4 +1,5 @@
+ ! { dg-do run { xfail *-*-mingw* spu-*-* } }
++! { dg-add-options ieee }
+ !
+ ! PR fortran/36158
+ ! PR fortran/33197
+-- 
+1.7.0.4
+

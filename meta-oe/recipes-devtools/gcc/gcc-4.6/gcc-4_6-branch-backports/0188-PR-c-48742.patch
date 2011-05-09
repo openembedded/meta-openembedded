@@ -1,0 +1,47 @@
+From 1a6d9e7052b3632a85ca6f79b48384fd684c4411 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 27 Apr 2011 07:05:54 +0000
+Subject: [PATCH 188/200] 	PR c/48742
+ 	* c-typeck.c (build_binary_op): Don't wrap arguments if
+ 	int_operands is true.
+
+	* gcc.c-torture/compile/pr48742.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173012 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index fca369c..6ae9b4c 100644
+--- a/gcc/c-typeck.c
++++ b/gcc/c-typeck.c
+@@ -10178,7 +10178,7 @@ build_binary_op (location_t location, enum tree_code code,
+ 		warn_for_sign_compare (location, orig_op0_folded,
+ 				       orig_op1_folded, op0, op1,
+ 				       result_type, resultcode);
+-	      if (!in_late_binary_op)
++	      if (!in_late_binary_op && !int_operands)
+ 		{
+ 		  if (!op0_maybe_const || TREE_CODE (op0) != INTEGER_CST)
+ 		    op0 = c_wrap_maybe_const (op0, !op0_maybe_const);
+new file mode 100644
+index 0000000..0a670f3
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/compile/pr48742.c
+@@ -0,0 +1,15 @@
++/* PR c/48742 */
++
++void baz (int);
++
++int
++foo (void)
++{
++  return 1 / 0 > 0;
++}
++
++void
++bar (void)
++{
++  baz (1 <= 2 % (3 >> 1 > 5 / 6 == 3));
++}
+-- 
+1.7.0.4
+

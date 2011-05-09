@@ -1,0 +1,38 @@
+From 61759009408d9f43af89eaeaff769a656416e1af Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 30 Mar 2011 19:50:17 +0000
+Subject: [PATCH 045/200] 	PR c++/48369
+ 	* semantics.c (potential_constant_expression_1): Handle
+ 	UNORDERED_EXPR and ORDERED_EXPR.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171746 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index b88e190..48dd4ee 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -7741,6 +7741,8 @@ potential_constant_expression_1 (tree t, bool want_rval, tsubst_flags_t flags)
+     case BIT_XOR_EXPR:
+     case BIT_AND_EXPR:
+     case TRUTH_XOR_EXPR:
++    case UNORDERED_EXPR:
++    case ORDERED_EXPR:
+     case UNLT_EXPR:
+     case UNLE_EXPR:
+     case UNGT_EXPR:
+new file mode 100644
+index 0000000..40d07e5
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/regress/isnan.C
+@@ -0,0 +1,9 @@
++// PR c++/48369
++// { dg-options -std=gnu++0x }
++
++extern "C" int isnan (double);
++
++void f(double d)
++{
++    bool b = isnan(d);
++}
+-- 
+1.7.0.4
+

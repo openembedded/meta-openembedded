@@ -1,0 +1,111 @@
+From 0d43ff3bbc445b0264f804cd6449069182045678 Mon Sep 17 00:00:00 2001
+From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 2 Apr 2011 15:34:01 +0000
+Subject: [PATCH 058/200] 2011-04-02  Jonathan Wakely  <redi@gcc.gnu.org>
+
+	PR libstdc++/48398
+	* include/bits/unique_ptr.h (__tuple_type): Store pointer type.
+	* testsuite/20_util/unique_ptr/modifiers/48398.cc: New.
+	* testsuite/20_util/unique_ptr/requirements/pointer_type.cc: Remove
+	unused parameter name.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171889 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 5e8ab90..5df4325 100644
+--- a/libstdc++-v3/include/bits/unique_ptr.h
++++ b/libstdc++-v3/include/bits/unique_ptr.h
+@@ -100,11 +100,11 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 	typedef decltype( __test<_Del>(0)) type;
+       };
+ 
+-      typedef std::tuple<_Tp*, _Dp>  	__tuple_type;
+-      __tuple_type 			_M_t;
++      typedef std::tuple<typename _Pointer::type, _Dp>  __tuple_type;
++      __tuple_type                                      _M_t;
+ 
+     public:
+-      typedef typename _Pointer::type	pointer;
++      typedef typename _Pointer::type   pointer;
+       typedef _Tp                       element_type;
+       typedef _Dp                       deleter_type;
+ 
+diff --git a/libstdc++-v3/testsuite/20_util/unique_ptr/modifiers/48398.cc b/libstdc++-v3/testsuite/20_util/unique_ptr/modifiers/48398.cc
+new file mode 100644
+index 0000000..54948df
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/unique_ptr/modifiers/48398.cc
+@@ -0,0 +1,41 @@
++// { dg-do compile }
++// { dg-options "-std=gnu++0x" }
++
++// Copyright (C) 2011 Free Software Foundation
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++// 20.7.1 Class template unique_ptr [unique.ptr]
++
++#include <memory>
++
++// PR libstdc++/48398
++
++struct my_deleter
++{
++  typedef int* pointer;
++
++  void operator()( pointer p ) { delete p; }
++};
++
++void test01()
++{
++  std::unique_ptr<void, my_deleter> p( new int() );
++
++  p.get();
++  p.reset();
++
++}
+diff --git a/libstdc++-v3/testsuite/20_util/unique_ptr/requirements/pointer_type.cc b/libstdc++-v3/testsuite/20_util/unique_ptr/requirements/pointer_type.cc
+index 5074844..55f28ca 100644
+--- a/libstdc++-v3/testsuite/20_util/unique_ptr/requirements/pointer_type.cc
++++ b/libstdc++-v3/testsuite/20_util/unique_ptr/requirements/pointer_type.cc
+@@ -1,7 +1,7 @@
+ // { dg-do compile }
+ // { dg-options "-std=gnu++0x" }
+ 
+-// Copyright (C) 2010 Free Software Foundation
++// Copyright (C) 2010, 2011 Free Software Foundation
+ //
+ // This file is part of the GNU ISO C++ Library.  This library is free
+ // software; you can redistribute it and/or modify it under the
+@@ -25,13 +25,13 @@
+ 
+ struct A
+ {
+-  void operator()(void* p) const { }
++  void operator()(void*) const { }
+ };
+ 
+ struct B
+ {
+   typedef char* pointer;
+-  void operator()(pointer p) const { }
++  void operator()(pointer) const { }
+ };
+ 
+ int main()
+-- 
+1.7.0.4
+

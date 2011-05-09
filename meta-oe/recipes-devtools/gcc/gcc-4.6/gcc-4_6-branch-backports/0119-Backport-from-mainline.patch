@@ -1,0 +1,138 @@
+From ede3baf6fc1fe4972344051051daff1043f90ce3 Mon Sep 17 00:00:00 2001
+From: danglin <danglin@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 13 Apr 2011 22:36:59 +0000
+Subject: [PATCH 119/200] 	Backport from mainline:
+ 	2011-04-08  John David Anglin  <dave.anglin@nrc-cnrc.gc.ca>
+
+	PR target/48366
+	* config/pa/pa.c (hppa_register_move_cost): Increase to 18 cost of
+	move from floating point to shift amount register .
+	(emit_move_sequence): Remove secondary reload support for floating
+	point to shift amount amount register copies.
+	(pa_secondary_reload): Return GENERAL_REGS for floating point/shift
+	amount register copies.
+	* config/pa/pa32-regs.h (HARD_REGNO_MODE_OK): For shift amount
+	register, return false if mode isn't a scalar integer mode.
+	* config/pa/pa64-regs.h (HARD_REGNO_MODE_OK): Likewise.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172400 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 98267b0..8a691c7 100644
+--- a/gcc/config/pa/pa.c
++++ b/gcc/config/pa/pa.c
+@@ -1467,6 +1467,8 @@ hppa_register_move_cost (enum machine_mode mode ATTRIBUTE_UNUSED,
+ {
+   if (from == SHIFT_REGS)
+     return 0x100;
++  else if (to == SHIFT_REGS && FP_REG_CLASS_P (from))
++    return 18;
+   else if ((FP_REG_CLASS_P (from) && ! FP_REG_CLASS_P (to))
+            || (FP_REG_CLASS_P (to) && ! FP_REG_CLASS_P (from)))
+     return 16;
+@@ -1810,15 +1812,12 @@ emit_move_sequence (rtx *operands, enum machine_mode mode, rtx scratch_reg)
+       return 1;
+     }
+   /* Handle secondary reloads for SAR.  These occur when trying to load
+-     the SAR from memory, FP register, or with a constant.  */
++     the SAR from memory or a constant.  */
+   else if (scratch_reg
+ 	   && GET_CODE (operand0) == REG
+ 	   && REGNO (operand0) < FIRST_PSEUDO_REGISTER
+ 	   && REGNO_REG_CLASS (REGNO (operand0)) == SHIFT_REGS
+-	   && (GET_CODE (operand1) == MEM
+-	       || GET_CODE (operand1) == CONST_INT
+-	       || (GET_CODE (operand1) == REG
+-		   && FP_REG_CLASS_P (REGNO_REG_CLASS (REGNO (operand1))))))
++	   && (GET_CODE (operand1) == MEM || GET_CODE (operand1) == CONST_INT))
+     {
+       /* D might not fit in 14 bits either; for such cases load D into
+ 	 scratch reg.  */
+@@ -5883,6 +5882,10 @@ output_arg_descriptor (rtx call_insn)
+   fputc ('\n', asm_out_file);
+ }
+ 
++/* Inform reload about cases where moving X with a mode MODE to a register in
++   RCLASS requires an extra scratch or immediate register.  Return the class
++   needed for the immediate register.  */
++
+ static reg_class_t
+ pa_secondary_reload (bool in_p, rtx x, reg_class_t rclass_i,
+ 		     enum machine_mode mode, secondary_reload_info *sri)
+@@ -5985,24 +5988,29 @@ pa_secondary_reload (bool in_p, rtx x, reg_class_t rclass_i,
+       return NO_REGS;
+     }
+ 
+-  /* We need a secondary register (GPR) for copies between the SAR
+-     and anything other than a general register.  */
+-  if (rclass == SHIFT_REGS && (regno <= 0 || regno >= 32))
++  /* A SAR<->FP register copy requires an intermediate general register
++     and secondary memory.  We need a secondary reload with a general
++     scratch register for spills.  */
++  if (rclass == SHIFT_REGS)
+     {
+-      sri->icode = (in_p
+-		    ? direct_optab_handler (reload_in_optab, mode)
+-		    : direct_optab_handler (reload_out_optab, mode));
+-      return NO_REGS;
++      /* Handle spill.  */
++      if (regno >= FIRST_PSEUDO_REGISTER || regno < 0)
++	{
++	  sri->icode = (in_p
++			? direct_optab_handler (reload_in_optab, mode)
++			: direct_optab_handler (reload_out_optab, mode));
++	  return NO_REGS;
++	}
++
++      /* Handle FP copy.  */
++      if (FP_REG_CLASS_P (REGNO_REG_CLASS (regno)))
++	return GENERAL_REGS;
+     }
+ 
+-  /* A SAR<->FP register copy requires a secondary register (GPR) as
+-     well as secondary memory.  */
+   if (regno >= 0 && regno < FIRST_PSEUDO_REGISTER
+-      && (REGNO_REG_CLASS (regno) == SHIFT_REGS
+-      && FP_REG_CLASS_P (rclass)))
+-    sri->icode = (in_p
+-		  ? direct_optab_handler (reload_in_optab, mode)
+-		  : direct_optab_handler (reload_out_optab, mode));
++      && REGNO_REG_CLASS (regno) == SHIFT_REGS
++      && FP_REG_CLASS_P (rclass))
++    return GENERAL_REGS;
+ 
+   return NO_REGS;
+ }
+diff --git a/gcc/config/pa/pa32-regs.h b/gcc/config/pa/pa32-regs.h
+index 7e8e05d..9a1c067 100644
+--- a/gcc/config/pa/pa32-regs.h
++++ b/gcc/config/pa/pa32-regs.h
+@@ -209,6 +209,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+    registers.  */
+ #define HARD_REGNO_MODE_OK(REGNO, MODE) \
+   ((REGNO) == 0 ? (MODE) == CCmode || (MODE) == CCFPmode		\
++   : (REGNO) == 88 ? SCALAR_INT_MODE_P (MODE)				\
+    : !TARGET_PA_11 && FP_REGNO_P (REGNO)				\
+      ? (VALID_FP_MODE_P (MODE)						\
+ 	&& (GET_MODE_SIZE (MODE) <= 8					\
+diff --git a/gcc/config/pa/pa64-regs.h b/gcc/config/pa/pa64-regs.h
+index 23dc778..313577b 100644
+--- a/gcc/config/pa/pa64-regs.h
++++ b/gcc/config/pa/pa64-regs.h
+@@ -149,10 +149,11 @@ along with GCC; see the file COPYING3.  If not see
+ 
+ /* Value is 1 if hard register REGNO can hold a value of machine-mode MODE.
+    On the HP-PA, the cpu registers can hold any mode.  We
+-   force this to be an even register is it cannot hold the full mode.  */
++   force this to be an even register if it cannot hold the full mode.  */
+ #define HARD_REGNO_MODE_OK(REGNO, MODE) \
+   ((REGNO) == 0								\
+    ? (MODE) == CCmode || (MODE) == CCFPmode				\
++   : (REGNO) == 60 ? SCALAR_INT_MODE_P (MODE)				\
+    /* Make wide modes be in aligned registers.  */			\
+    : FP_REGNO_P (REGNO)							\
+      ? (VALID_FP_MODE_P (MODE)						\
+-- 
+1.7.0.4
+

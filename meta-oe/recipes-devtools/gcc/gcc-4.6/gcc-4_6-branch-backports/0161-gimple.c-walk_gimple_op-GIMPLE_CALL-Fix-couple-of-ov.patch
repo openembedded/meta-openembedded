@@ -1,0 +1,72 @@
+From 20a8b6ba99d25394d9d4b958a8ecc171fe3d263b Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 21 Apr 2011 14:18:54 +0000
+Subject: [PATCH 161/200] 	* gimple.c (walk_gimple_op) <GIMPLE_CALL>: Fix couple of oversights.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172829 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e60dc92..9a94f06 100644
+--- a/gcc/gimple.c
++++ b/gcc/gimple.c
+@@ -1405,7 +1405,8 @@ walk_gimple_op (gimple stmt, walk_tree_fn callback_op,
+       for (i = 0; i < gimple_call_num_args (stmt); i++)
+ 	{
+ 	  if (wi)
+-	    wi->val_only = is_gimple_reg_type (gimple_call_arg (stmt, i));
++	    wi->val_only
++	      = is_gimple_reg_type (TREE_TYPE (gimple_call_arg (stmt, i)));
+ 	  ret = walk_tree (gimple_call_arg_ptr (stmt, i), callback_op, wi,
+ 			   pset);
+ 	  if (ret)
+@@ -1417,7 +1418,8 @@ walk_gimple_op (gimple stmt, walk_tree_fn callback_op,
+ 	  if (wi)
+ 	    {
+ 	      wi->is_lhs = true;
+-	      wi->val_only = is_gimple_reg_type (gimple_call_lhs (stmt));
++	      wi->val_only
++		= is_gimple_reg_type (TREE_TYPE (gimple_call_lhs (stmt)));
+ 	    }
+ 
+ 	  ret = walk_tree (gimple_call_lhs_ptr (stmt), callback_op, wi, pset);
+new file mode 100644
+index 0000000..24527a5
+--- /dev/null
++++ b/gcc/testsuite/gnat.dg/volatile5.adb
+@@ -0,0 +1,16 @@
++-- { dg-do compile }
++
++with Volatile5_Pkg; use Volatile5_Pkg;
++
++procedure Volatile5 is
++
++   A : Rec;
++
++   procedure Proc is
++   begin
++      A := F;
++   end;
++
++begin
++   Proc;
++end;
+diff --git a/gcc/testsuite/gnat.dg/volatile5_pkg.ads b/gcc/testsuite/gnat.dg/volatile5_pkg.ads
+new file mode 100644
+index 0000000..71a0c80
+--- /dev/null
++++ b/gcc/testsuite/gnat.dg/volatile5_pkg.ads
+@@ -0,0 +1,11 @@
++package Volatile5_Pkg is
++
++   type Rec is record
++      I : Integer;
++   end record;
++   pragma Volatile(Rec);
++
++  function F return Rec;
++
++end Volatile5_Pkg;
++-- 
+\ No newline at end of file
+-- 
+1.7.0.4
+

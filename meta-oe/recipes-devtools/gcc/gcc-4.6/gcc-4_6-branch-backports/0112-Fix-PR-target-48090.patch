@@ -1,0 +1,22 @@
+From 811af0cad0121e89e3a3908dd71ca32187281e19 Mon Sep 17 00:00:00 2001
+From: ramana <ramana@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 13 Apr 2011 07:41:08 +0000
+Subject: [PATCH 112/200] Fix PR target/48090
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172363 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index b0f31f5..d9f8bb8 100644
+--- a/gcc/config/arm/arm.md
++++ b/gcc/config/arm/arm.md
+@@ -3690,7 +3690,7 @@
+ ;; The constraints here are to prevent a *partial* overlap (where %Q0 == %R1).
+ ;; The first alternative allows the common case of a *full* overlap.
+ (define_insn "*arm_negdi2"
+-  [(set (match_operand:DI         0 "s_register_operand" "=&r,r")
++  [(set (match_operand:DI         0 "s_register_operand" "=r,&r")
+ 	(neg:DI (match_operand:DI 1 "s_register_operand"  "0,r")))
+    (clobber (reg:CC CC_REGNUM))]
+   "TARGET_ARM"
+-- 
+1.7.0.4
+

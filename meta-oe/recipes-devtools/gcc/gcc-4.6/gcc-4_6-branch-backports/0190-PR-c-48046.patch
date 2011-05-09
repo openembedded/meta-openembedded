@@ -1,0 +1,48 @@
+From c270475fa490deeb18cf6275a86ce15a57e706ff Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 27 Apr 2011 15:57:06 +0000
+Subject: [PATCH 190/200] 	PR c++/48046
+ 	* parser.c (cp_parser_diagnose_invalid_type_name): Commit
+ 	to tentative parse sooner.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173038 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 9d8457f..68c2f88 100644
+--- a/gcc/cp/parser.c
++++ b/gcc/cp/parser.c
+@@ -2699,6 +2699,7 @@ cp_parser_diagnose_invalid_type_name (cp_parser *parser,
+ 				      location_t location)
+ {
+   tree decl, old_scope;
++  cp_parser_commit_to_tentative_parse (parser);
+   /* Try to lookup the identifier.  */
+   old_scope = parser->scope;
+   parser->scope = scope;
+@@ -2792,7 +2793,6 @@ cp_parser_diagnose_invalid_type_name (cp_parser *parser,
+       else
+ 	gcc_unreachable ();
+     }
+-  cp_parser_commit_to_tentative_parse (parser);
+ }
+ 
+ /* Check for a common situation where a type-name should be present,
+new file mode 100644
+index 0000000..8f37fea
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/parse/ambig6.C
+@@ -0,0 +1,12 @@
++// PR c++/48046
++
++namespace N1 { typedef int   T; } // { dg-error "" }
++namespace N2 { typedef float T; } // { dg-error "" }
++
++int main()
++{
++  using namespace N1;
++  using namespace N2;
++
++  static T t;			// { dg-error "" }
++}
+-- 
+1.7.0.4
+

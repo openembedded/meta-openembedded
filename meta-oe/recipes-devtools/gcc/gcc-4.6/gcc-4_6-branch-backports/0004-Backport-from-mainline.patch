@@ -1,0 +1,93 @@
+From 125ee3cf946de59472c02ffd792aca4f1045669f Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 26 Mar 2011 09:21:34 +0000
+Subject: [PATCH 004/200] 	Backport from mainline
+ 	2011-03-20  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/48156
+	* df-core.c (df_get_bb_dirty): Use df_lr if df_live is NULL,
+	assume df and df_lr are not NULL.
+
+	* gcc.dg/pr48156.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171547 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 36270bf..98c2088 100644
+--- a/gcc/df-core.c
++++ b/gcc/df-core.c
+@@ -1,6 +1,6 @@
+ /* Allocation for dataflow support routines.
+    Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
+-   2008, 2009, 2010 Free Software Foundation, Inc.
++   2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+    Originally contributed by Michael P. Hayes
+              (m.hayes@elec.canterbury.ac.nz, mhayes@redhat.com)
+    Major rewrite contributed by Danny Berlin (dberlin@dberlin.org)
+@@ -1400,10 +1400,9 @@ df_mark_solutions_dirty (void)
+ bool
+ df_get_bb_dirty (basic_block bb)
+ {
+-  if (df && df_live)
+-    return bitmap_bit_p (df_live->out_of_date_transfer_functions, bb->index);
+-  else
+-    return false;
++  return bitmap_bit_p ((df_live
++			? df_live : df_lr)->out_of_date_transfer_functions,
++		       bb->index);
+ }
+ 
+ 
+new file mode 100644
+index 0000000..7b4d529
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48156.c
+@@ -0,0 +1,45 @@
++/* PR rtl-optimization/48156 */
++/* { dg-do run } */
++/* { dg-options "-O -fcrossjumping --param min-crossjump-insns=1" } */
++
++extern void abort (void);
++
++static int __attribute__ ((noinline, noclone))
++equals (int s1, int s2)
++{
++  return s1 == s2;
++}
++
++static int __attribute__ ((noinline, noclone))
++bar (void)
++{
++  return 1;
++}
++
++static void __attribute__ ((noinline, noclone))
++baz (int f, int j)
++{
++  if (f != 4 || j != 2)
++    abort ();
++}
++
++void
++foo (int x)
++{
++  int i = 0, j = bar ();
++
++  if (x == 1)
++    i = 2;
++
++  if (j && equals (i, j))
++    baz (8, i);
++  else
++    baz (4, i);
++}
++
++int
++main ()
++{
++  foo (1);
++  return 0;
++}
+-- 
+1.7.0.4
+

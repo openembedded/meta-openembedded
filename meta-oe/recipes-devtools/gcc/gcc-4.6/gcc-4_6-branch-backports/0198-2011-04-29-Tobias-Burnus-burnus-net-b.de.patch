@@ -1,0 +1,162 @@
+From 1c9148fe797f564821355a8976802689519324dd Mon Sep 17 00:00:00 2001
+From: burnus <burnus@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 29 Apr 2011 21:26:07 +0000
+Subject: [PATCH 198/200] 2011-04-29  Tobias Burnus  <burnus@net-b.de>
+
+        PR fortran/48810
+        * resolve.c (resolve_typebound_generic_call): Don't check access
+        flags of the specific function.
+
+        PR fortran/48800
+        * resolve.c (resolve_formal_arglist): Don't change AS_DEFERRED
+        to AS_ASSUMED_SHAPE for function results.
+        (resolve_fl_var_and_proc): Print also for function results with
+        AS_DEFERRED an error, if they are not a pointer or allocatable.
+        (resolve_types): Make sure arguments of procedures in interface
+        blocks are resolved.
+
+2011-04-29  Tobias Burnus  <burnus@net-b.de>
+
+        PR fortran/48810
+        * gfortran.dg/typebound_proc_22.f90: New.
+
+        PR fortran/48800
+        * gfortran.dg/interface_36.f90: New.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173191 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index f661140..7618db9 100644
+--- a/gcc/fortran/resolve.c
++++ b/gcc/fortran/resolve.c
+@@ -315,7 +315,8 @@ resolve_formal_arglist (gfc_symbol *proc)
+ 	 shape until we know if it has the pointer or allocatable attributes.
+       */
+       if (sym->as && sym->as->rank > 0 && sym->as->type == AS_DEFERRED
+-	  && !(sym->attr.pointer || sym->attr.allocatable))
++	  && !(sym->attr.pointer || sym->attr.allocatable)
++	  && sym->attr.flavor != FL_PROCEDURE)
+ 	{
+ 	  sym->as->type = AS_ASSUMED_SHAPE;
+ 	  for (i = 0; i < sym->as->rank; i++)
+@@ -5674,7 +5675,7 @@ success:
+   /* Make sure that we have the right specific instance for the name.  */
+   derived = get_declared_from_expr (NULL, NULL, e);
+ 
+-  st = gfc_find_typebound_proc (derived, NULL, genname, false, &e->where);
++  st = gfc_find_typebound_proc (derived, NULL, genname, true, &e->where);
+   if (st)
+     e->value.compcall.tbp = st->n.tb;
+ 
+@@ -9890,7 +9891,7 @@ resolve_fl_var_and_proc (gfc_symbol *sym, int mp_flag)
+   else
+     {
+       if (!mp_flag && !sym->attr.allocatable && !sym->attr.pointer
+-	  && !sym->attr.dummy && sym->ts.type != BT_CLASS && !sym->assoc)
++	  && sym->ts.type != BT_CLASS && !sym->assoc)
+ 	{
+ 	  gfc_error ("Array '%s' at %L cannot have a deferred shape",
+ 		     sym->name, &sym->declared_at);
+@@ -13505,6 +13506,10 @@ resolve_types (gfc_namespace *ns)
+ 
+   resolve_contained_functions (ns);
+ 
++  if (ns->proc_name && ns->proc_name->attr.flavor == FL_PROCEDURE
++      && ns->proc_name->attr.if_source == IFSRC_IFBODY)
++    resolve_formal_arglist (ns->proc_name);
++
+   gfc_traverse_ns (ns, resolve_bind_c_derived_types);
+ 
+   for (cl = ns->cl_list; cl; cl = cl->next)
+new file mode 100644
+index 0000000..5032291
+--- /dev/null
++++ b/gcc/testsuite/gfortran.dg/interface_36.f90
+@@ -0,0 +1,28 @@
++! { dg-do compile }
++!
++! PR fortran/48800
++!
++! Contributed by Daniel Carrera
++!
++     pure function runge_kutta_step(t, r_, dr, h) result(res)
++         real, intent(in) :: t, r_(:), h
++         real, dimension(:), allocatable :: k1, k2, k3, k4, res
++         integer :: N
++
++         interface
++             pure function dr(t, r_)  ! { dg-error "cannot have a deferred shape" }
++                 real, intent(in) :: t, r_(:)
++                 real :: dr(:)
++             end function
++         end interface
++
++         N = size(r_)
++         allocate(k1(N),k2(N),k3(N),k4(N),res(N))
++
++         k1 = dr(t, r_)
++         k2 = dr(t + h/2, r_ + k1*h/2)
++         k3 = dr(t + h/2, r_ + k2*h/2)
++         k4 = dr(t + h  , r_ + k3*h)
++
++         res = r_ + (k1 + 2*k2 + 2*k3 + k4) * h/6
++     end function
+diff --git a/gcc/testsuite/gfortran.dg/typebound_proc_22.f90 b/gcc/testsuite/gfortran.dg/typebound_proc_22.f90
+new file mode 100644
+index 0000000..f7691c5
+--- /dev/null
++++ b/gcc/testsuite/gfortran.dg/typebound_proc_22.f90
+@@ -0,0 +1,49 @@
++! { dg-do compile }
++!
++! PR fortran/48810
++!
++! Contributed by Andrew Baldwin
++!
++      module qtest
++      type foobar
++        integer :: x
++        contains
++        private
++        procedure :: gimmex
++        generic, public :: getx => gimmex
++      end type foobar
++      contains
++        function gimmex(foo)
++          class (foobar) :: foo
++          integer :: gimmex
++          gimmex = foo%x
++        end function gimmex
++      end module qtest
++
++      module qtestPriv
++      type foobarPriv
++        integer :: x
++        contains
++        private
++        procedure :: gimmexPriv
++        generic, private :: getxPriv => gimmexPriv
++      end type foobarPriv
++      contains
++        function gimmexPriv(foo)
++          class (foobarPriv) :: foo
++          integer :: gimmex
++          gimmex = foo%x
++        end function gimmexPriv
++      end module qtestPriv
++
++      program quicktest
++      use qtest
++      use qtestPriv
++      type (foobar) :: foo
++      type (foobarPriv) :: fooPriv
++      integer :: bar
++      bar = foo%getx()  ! OK
++      bar = fooPriv%getxPriv() ! { dg-error " is PRIVATE " }
++      end program quicktest
++
++! { dg-final { cleanup-modules "qtest qtestpriv" } }
+-- 
+1.7.0.4
+

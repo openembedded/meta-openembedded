@@ -1,0 +1,277 @@
+From 95c034f0075055720f37e340fd008d8d7cb45b4e Mon Sep 17 00:00:00 2001
+From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 15 Apr 2011 14:52:57 +0000
+Subject: [PATCH 125/200] 2011-04-15  Takaya Saito  <gintensubaru@gmail.com>
+
+	PR libstdc++/48476
+	* include/std/tuple (_Tuple_impl<>::_Tuple_impl(_Tuple_impl<>&&),
+	_Tuple_impl<>::operator=(_Tuple_impl&&), _Tuple_impl<>::operator=
+	(_Tuple_impl<>&&), tuple_cat): Use std::forward where appropriate.
+	* testsuite/20_util/tuple/cons/48476.cc: New.
+	* testsuite/20_util/tuple/48476.cc: Likewise.
+	* testsuite/20_util/tuple/creation_functions/48476.cc: Likewise.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172498 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 6951328..fb452ae 100644
+--- a/libstdc++-v3/include/std/tuple
++++ b/libstdc++-v3/include/std/tuple
+@@ -1,6 +1,6 @@
+ // <tuple> -*- C++ -*-
+ 
+-// Copyright (C) 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
++// Copyright (C) 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+ //
+ // This file is part of the GNU ISO C++ Library.  This library is free
+ // software; you can redistribute it and/or modify it under the
+@@ -177,10 +177,10 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+         _Tuple_impl(const _Tuple_impl<_Idx, _UElements...>& __in)
+ 	: _Inherited(__in._M_tail()), _Base(__in._M_head()) { }
+ 
+-      template<typename... _UElements>
+-        _Tuple_impl(_Tuple_impl<_Idx, _UElements...>&& __in)
++      template<typename _UHead, typename... _UTails>
++        _Tuple_impl(_Tuple_impl<_Idx, _UHead, _UTails...>&& __in)
+ 	: _Inherited(std::move(__in._M_tail())),
+-	  _Base(std::move(__in._M_head())) { }
++	  _Base(std::forward<_UHead>(__in._M_head())) { }
+ 
+       _Tuple_impl&
+       operator=(const _Tuple_impl& __in)
+@@ -193,7 +193,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+       _Tuple_impl&
+       operator=(_Tuple_impl&& __in)
+       {
+-	_M_head() = std::move(__in._M_head());
++	_M_head() = std::forward<_Head>(__in._M_head());
+ 	_M_tail() = std::move(__in._M_tail());
+ 	return *this;
+       }
+@@ -207,11 +207,11 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 	  return *this;
+ 	}
+ 
+-      template<typename... _UElements>
++      template<typename _UHead, typename... _UTails>
+         _Tuple_impl&
+-        operator=(_Tuple_impl<_Idx, _UElements...>&& __in)
++        operator=(_Tuple_impl<_Idx, _UHead, _UTails...>&& __in)
+         {
+-	  _M_head() = std::move(__in._M_head());
++	  _M_head() = std::forward<_UHead>(__in._M_head());
+ 	  _M_tail() = std::move(__in._M_tail());
+ 	  return *this;
+ 	}
+@@ -672,7 +672,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 		       const tuple<_UElements...>& __u,
+ 		       const __index_holder<_UIdx...>&)
+     { return tuple<_TElements..., _UElements...>
+-	(std::move(get<_TIdx>(__t))..., get<_UIdx>(__u)...); }
++	(std::forward<_TElements>(get<_TIdx>(__t))..., get<_UIdx>(__u)...); }
+ 
+   template<typename... _TElements, std::size_t... _TIdx,
+ 	   typename... _UElements, std::size_t... _UIdx>
+@@ -682,7 +682,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 		       tuple<_UElements...>&& __u,
+ 		       const __index_holder<_UIdx...>&)
+     { return tuple<_TElements..., _UElements...>
+-	(get<_TIdx>(__t)..., std::move(get<_UIdx>(__u))...); }
++	(get<_TIdx>(__t)..., std::forward<_UElements>(get<_UIdx>(__u))...); }
+ 
+   template<typename... _TElements, std::size_t... _TIdx,
+ 	   typename... _UElements, std::size_t... _UIdx> 
+@@ -692,7 +692,8 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 		       tuple<_UElements...>&& __u,
+ 		       const __index_holder<_UIdx...>&)
+     { return tuple<_TElements..., _UElements...>
+-	(std::move(get<_TIdx>(__t))..., std::move(get<_UIdx>(__u))...); }
++	(std::forward<_TElements>(get<_TIdx>(__t))...,
++	 std::forward<_UElements>(get<_UIdx>(__u))...); }
+ 
+   template<typename... _TElements, typename... _UElements>
+     inline tuple<_TElements..., _UElements...> 
+diff --git a/libstdc++-v3/testsuite/20_util/tuple/48476.cc b/libstdc++-v3/testsuite/20_util/tuple/48476.cc
+new file mode 100644
+index 0000000..efe0007
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/tuple/48476.cc
+@@ -0,0 +1,51 @@
++// { dg-options "-std=gnu++0x" }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <tuple>
++#include <type_traits>
++#include <memory>
++#include <testsuite_hooks.h>
++
++template<typename T>
++  typename std::decay<T>::type copy(T&& x)
++  { return std::forward<T>(x); }
++
++// libstdc++/48476
++void test01()
++{
++  bool test __attribute__((unused)) = true;
++
++  std::shared_ptr<int> p(new int()), q, r;
++  
++  std::tuple<std::shared_ptr<int>&, int>  t0(p, 23), t1(q, 0);
++  t1 = copy(t0);  // shall be equivalent to
++                  // q = p; std::get<1>(t1) = std::get<1>(t0);
++  VERIFY( q == p ); 
++
++  std::tuple<std::shared_ptr<int>&, char> t2(r, 0);
++  t2 = copy(t1);  // shall be equivalent to
++                  // r = q; std::get<1>(t2) = std::get<1>(t1);
++  VERIFY( r == q );
++}
++
++int main()
++{
++  test01();
++  return 0;
++}
+diff --git a/libstdc++-v3/testsuite/20_util/tuple/cons/48476.cc b/libstdc++-v3/testsuite/20_util/tuple/cons/48476.cc
+new file mode 100644
+index 0000000..b5e3604
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/tuple/cons/48476.cc
+@@ -0,0 +1,27 @@
++// { dg-options "-std=gnu++0x" }
++// { dg-do compile }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <tuple>
++
++void f()
++{
++  int i = 0;
++  std::tuple<int&, int> t __attribute__((unused)) = std::forward_as_tuple(i, 0);
++}
+diff --git a/libstdc++-v3/testsuite/20_util/tuple/creation_functions/48476.cc b/libstdc++-v3/testsuite/20_util/tuple/creation_functions/48476.cc
+new file mode 100644
+index 0000000..1607e45
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/tuple/creation_functions/48476.cc
+@@ -0,0 +1,85 @@
++// { dg-options "-std=gnu++0x" }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <tuple>
++#include <type_traits>
++#include <testsuite_hooks.h>
++
++template<typename T>
++  typename std::decay<T>::type copy(T&& x)
++  { return std::forward<T>(x); }
++
++template<typename... Args1, typename... Args2>
++  void
++  check_tuple_cat(std::tuple<Args1...> t1, std::tuple<Args2...> t2)
++  {
++    bool test __attribute__((unused)) = true;
++
++    typedef std::tuple<Args1..., Args2...> concatenated;
++  
++    auto cat1 = std::tuple_cat(     t1,       t2 );
++    auto cat2 = std::tuple_cat(copy(t1),      t2 );
++    auto cat3 = std::tuple_cat(     t1,  copy(t2));
++    auto cat4 = std::tuple_cat(copy(t1), copy(t2));
++  
++    static_assert( std::is_same<decltype(cat1), concatenated>::value, "" );
++    static_assert( std::is_same<decltype(cat2), concatenated>::value, "" );
++    static_assert( std::is_same<decltype(cat3), concatenated>::value, "" );
++    static_assert( std::is_same<decltype(cat4), concatenated>::value, "" );
++  
++    VERIFY( cat1 == cat2 );
++    VERIFY( cat1 == cat3 );
++    VERIFY( cat1 == cat4 );
++  }
++
++// libstdc++/48476
++void test01()
++{
++  int i = 0;
++  std::tuple<> t0;
++  std::tuple<int&> t1(i);
++  std::tuple<int&, int> t2(i, 0);
++  std::tuple<int const&, int, double> t3(i, 0, 0);
++  
++  check_tuple_cat(t0, t0);
++  check_tuple_cat(t0, t1);
++  check_tuple_cat(t0, t2);
++  check_tuple_cat(t0, t3);
++  
++  check_tuple_cat(t1, t0);
++  check_tuple_cat(t1, t1);
++  check_tuple_cat(t1, t2);
++  check_tuple_cat(t1, t3);
++  
++  check_tuple_cat(t2, t0);
++  check_tuple_cat(t2, t1);
++  check_tuple_cat(t2, t2);
++  check_tuple_cat(t2, t3);
++  
++  check_tuple_cat(t3, t0);
++  check_tuple_cat(t3, t1);
++  check_tuple_cat(t3, t2);
++  check_tuple_cat(t3, t3);
++}
++
++int main()
++{
++  test01();
++  return 0;
++}
+-- 
+1.7.0.4
+

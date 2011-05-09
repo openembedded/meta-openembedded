@@ -1,0 +1,54 @@
+From a8765482b00b7e1774f72c7def19ca711636e1d1 Mon Sep 17 00:00:00 2001
+From: gerald <gerald@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 17 Apr 2011 21:34:29 +0000
+Subject: [PATCH 133/200] 	* config/sparc/freebsd.h (CPP_CPU64_DEFAULT_SPEC): Replace with...
+ 	(FBSD_TARGET_CPU_CPP_BUILTINS): ...this.
+ 	(TARGET_GNU_TLS, TARGET_SUN_TLS): Define.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172618 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index f2fb65e..f7e53f2 100644
+--- a/gcc/config/sparc/freebsd.h
++++ b/gcc/config/sparc/freebsd.h
+@@ -24,11 +24,19 @@ along with GCC; see the file COPYING3.  If not see
+   { "fbsd_dynamic_linker", FBSD_DYNAMIC_LINKER }
+ 
+ /* FreeBSD needs the platform name (sparc64) defined.
+-   Emacs needs to know if the arch is 64 or 32-bits.  */
+-
+-#undef  CPP_CPU64_DEFAULT_SPEC
+-#define CPP_CPU64_DEFAULT_SPEC \
+-  "-D__sparc64__ -D__sparc_v9__ -D__sparcv9 -D__arch64__"
++   Emacs etc needs to know if the arch is 64 or 32-bits.
++   This also selects which targets are available via -mcpu.  */
++
++#undef  FBSD_TARGET_CPU_CPP_BUILTINS
++#define FBSD_TARGET_CPU_CPP_BUILTINS()		\
++  do						\
++    {						\
++      builtin_define ("__sparc64__");		\
++      builtin_define ("__sparc__");		\
++      builtin_define ("__sparc_v9__");		\
++      builtin_define ("__sparcv9");		\
++    }						\
++  while (0)
+ 
+ #undef ASM_SPEC
+ #define ASM_SPEC "%{fpic|fPIC|fpie|fPIE:-K PIC} %(asm_cpu)"
+@@ -152,6 +160,13 @@ along with GCC; see the file COPYING3.  If not see
+ 
+ /* #define DWARF_OFFSET_SIZE PTR_SIZE */
+ 
++#ifdef HAVE_AS_TLS
++#undef TARGET_SUN_TLS
++#undef TARGET_GNU_TLS
++#define TARGET_SUN_TLS 0
++#define TARGET_GNU_TLS 1
++#endif
++
+ #undef ENDFILE_SPEC
+ #define ENDFILE_SPEC						\
+   "%{ffast-math|funsafe-math-optimizations:crtfastmath.o%s} "	\
+-- 
+1.7.0.4
+

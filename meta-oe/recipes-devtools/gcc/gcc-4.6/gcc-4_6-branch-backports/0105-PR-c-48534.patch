@@ -1,0 +1,38 @@
+From 373ffb66c10a25abb4c48a027fea4e6cf8c4cc5d Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 12 Apr 2011 00:20:32 +0000
+Subject: [PATCH 105/200] 	PR c++/48534
+ 	* cvt.c (ocp_convert): Use build_nop to convert to underlying type
+ 	of scoped enum.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172294 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 290b926..ce4f985 100644
+--- a/gcc/cp/cvt.c
++++ b/gcc/cp/cvt.c
+@@ -731,7 +731,7 @@ ocp_convert (tree type, tree expr, int convtype, int flags)
+ 	  /* We can't implicitly convert a scoped enum to bool, so convert
+ 	     to the underlying type first.  */
+ 	  if (SCOPED_ENUM_P (intype) && (convtype & CONV_STATIC))
+-	    e = convert (ENUM_UNDERLYING_TYPE (intype), e);
++	    e = build_nop (ENUM_UNDERLYING_TYPE (intype), e);
+ 	  return cp_truthvalue_conversion (e);
+ 	}
+ 
+new file mode 100644
+index 0000000..55a1ab4
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/enum10.C
+@@ -0,0 +1,9 @@
++// PR c++/48534
++// { dg-options -std=c++0x }
++
++enum class OpSE : bool;
++
++int main()
++{
++  return static_cast<bool>(OpSE());
++}
+-- 
+1.7.0.4
+

@@ -1,0 +1,49 @@
+From ac255441a3e973a974d1ab70d00a9b7269103214 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 19 Apr 2011 16:49:19 +0000
+Subject: [PATCH 149/200] 	PR target/48678
+ 	* config/i386/i386.md (movstrict<mode>): FAIL if operands[0]
+ 	is a SUBREG with non-MODE_INT mode inside of it.
+
+	* gcc.target/i386/pr48678.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172723 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index b50a52a..c50002e 100644
+--- a/gcc/config/i386/i386.md
++++ b/gcc/config/i386/i386.md
+@@ -2408,6 +2408,9 @@
+ {
+   if (TARGET_PARTIAL_REG_STALL && optimize_function_for_speed_p (cfun))
+     FAIL;
++  if (GET_CODE (operands[0]) == SUBREG
++      && GET_MODE_CLASS (GET_MODE (SUBREG_REG (operands[0]))) != MODE_INT)
++    FAIL;
+   /* Don't generate memory->memory moves, go through a register */
+   if (MEM_P (operands[0]) && MEM_P (operands[1]))
+     operands[1] = force_reg (<MODE>mode, operands[1]);
+new file mode 100644
+index 0000000..6f6727f
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/pr48678.c
+@@ -0,0 +1,16 @@
++/* PR target/48678 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -msse2" } */
++
++#include <emmintrin.h>
++
++typedef short T __attribute__((may_alias));
++struct S { __m128i d; };
++
++__m128i
++foo (short *x, struct S *y, __m128i *z)
++{
++  struct S s = *y;
++  ((T *) &s.d)[0] = *x;
++  return _mm_cmpeq_epi16 (s.d, *z);
++}
+-- 
+1.7.0.4
+

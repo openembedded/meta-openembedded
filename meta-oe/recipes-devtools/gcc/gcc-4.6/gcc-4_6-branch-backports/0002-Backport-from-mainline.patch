@@ -1,0 +1,70 @@
+From af3385141f9bfe32ab89165bfc98a7ea2ff19278 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 26 Mar 2011 09:19:36 +0000
+Subject: [PATCH 002/200] 	Backport from mainline
+ 	2011-03-17  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/48141
+	* dse.c (record_store): If no positions are needed in an insn
+	that cannot be deleted, at least unchain it from active_local_stores.
+
+	* gcc.dg/pr48141.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171545 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 8e9b645..e43ab72 100644
+--- a/gcc/dse.c
++++ b/gcc/dse.c
+@@ -1,5 +1,5 @@
+ /* RTL dead store elimination.
+-   Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010
++   Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011
+    Free Software Foundation, Inc.
+ 
+    Contributed by Richard Sandiford <rsandifor@codesourcery.com>
+@@ -1530,8 +1530,7 @@ record_store (rtx body, bb_info_t bb_info)
+ 
+       /* An insn can be deleted if every position of every one of
+ 	 its s_infos is zero.  */
+-      if (any_positions_needed_p (s_info)
+-	  || ptr->cannot_delete)
++      if (any_positions_needed_p (s_info))
+ 	del = false;
+ 
+       if (del)
+@@ -1543,7 +1542,8 @@ record_store (rtx body, bb_info_t bb_info)
+ 	  else
+ 	    active_local_stores = ptr->next_local_store;
+ 
+-	  delete_dead_store_insn (insn_to_delete);
++	  if (!insn_to_delete->cannot_delete)
++	    delete_dead_store_insn (insn_to_delete);
+ 	}
+       else
+ 	last = ptr;
+new file mode 100644
+index 0000000..006f5cb
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48141.c
+@@ -0,0 +1,17 @@
++/* PR rtl-optimization/48141 */
++/* { dg-do compile } */
++/* { dg-options "-O" } */
++
++#define A i = 0;
++#define B A A A A A A A A A A
++#define C B B B B B B B B B B
++#define D C C C C C C C C C C
++#define E D D D D D D D D D D
++
++int
++foo (void)
++{
++  volatile int i = 0;
++  E E E E E E E E E E E
++  return 0;
++}
+-- 
+1.7.0.4
+

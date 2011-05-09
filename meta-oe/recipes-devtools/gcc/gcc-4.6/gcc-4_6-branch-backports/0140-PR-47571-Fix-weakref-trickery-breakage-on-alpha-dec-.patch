@@ -1,0 +1,172 @@
+From 137ed44dcdd5890433b8d0348dcd2b7624b7c3d6 Mon Sep 17 00:00:00 2001
+From: jb <jb@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 18 Apr 2011 15:49:16 +0000
+Subject: [PATCH 140/200] PR 47571 Fix weakref trickery breakage on alpha-dec-osf
+
+This is a backport from mainline r172469.
+
+It also removes the temporary fix from r171095.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172656 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 395a1ea..62c3b45 100644
+--- a/libgfortran/acinclude.m4
++++ b/libgfortran/acinclude.m4
+@@ -108,7 +108,7 @@ AC_DEFUN([LIBGFOR_GTHREAD_WEAK], [
+ 	      [Define to 1 if the target supports #pragma weak])
+   fi
+   case "$host" in
+-    *-*-darwin* | *-*-hpux* | *-*-cygwin* | *-*-mingw* )
++    *-*-darwin* | *-*-hpux* | *-*-cygwin* | *-*-mingw* | alpha*-dec-osf* )
+       AC_DEFINE(GTHREAD_USE_WEAK, 0,
+ 		[Define to 0 if the target shouldn't use #pragma weak])
+       ;;
+diff --git a/libgfortran/config.h.in b/libgfortran/config.h.in
+index a255bdc..a99ba69 100644
+--- a/libgfortran/config.h.in
++++ b/libgfortran/config.h.in
+@@ -210,6 +210,9 @@
+ /* Define to 1 if you have the `clock_gettime' function. */
+ #undef HAVE_CLOCK_GETTIME
+ 
++/* Define to 1 if you have the `clock_gettime' function in librt. */
++#undef HAVE_CLOCK_GETTIME_LIBRT
++
+ /* libm includes clog */
+ #undef HAVE_CLOG
+ 
+diff --git a/libgfortran/configure b/libgfortran/configure
+index 5a81735..ef4712a 100755
+--- a/libgfortran/configure
++++ b/libgfortran/configure
+@@ -25314,10 +25314,11 @@ $as_echo "#define HAVE_FEENABLEEXCEPT 1" >>confdefs.h
+ fi
+ 
+ 
+-# At least for glibc, clock_gettime is in librt.  But don't pull that
+-# in if it still doesn't give us the function we want.
+-# This test is copied from libgomp, and modified to not link in -lrt
+-# as libgfortran calls clock_gettime via a weak reference.
++# At least for glibc and Tru64, clock_gettime is in librt.  But don't
++# pull that in if it still doesn't give us the function we want.  This
++# test is copied from libgomp, and modified to not link in -lrt as
++# libgfortran calls clock_gettime via a weak reference if it's found
++# in librt.
+ if test $ac_cv_func_clock_gettime = no; then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for clock_gettime in -lrt" >&5
+ $as_echo_n "checking for clock_gettime in -lrt... " >&6; }
+@@ -25360,7 +25361,7 @@ fi
+ $as_echo "$ac_cv_lib_rt_clock_gettime" >&6; }
+ if test "x$ac_cv_lib_rt_clock_gettime" = x""yes; then :
+ 
+-$as_echo "#define HAVE_CLOCK_GETTIME 1" >>confdefs.h
++$as_echo "#define HAVE_CLOCK_GETTIME_LIBRT 1" >>confdefs.h
+ 
+ fi
+ 
+@@ -25698,7 +25699,7 @@ $as_echo "#define SUPPORTS_WEAK 1" >>confdefs.h
+ 
+   fi
+   case "$host" in
+-    *-*-darwin* | *-*-hpux* | *-*-cygwin* | *-*-mingw* )
++    *-*-darwin* | *-*-hpux* | *-*-cygwin* | *-*-mingw* | alpha*-dec-osf* )
+ 
+ $as_echo "#define GTHREAD_USE_WEAK 0" >>confdefs.h
+ 
+diff --git a/libgfortran/configure.ac b/libgfortran/configure.ac
+index e265ccd..86d7161 100644
+--- a/libgfortran/configure.ac
++++ b/libgfortran/configure.ac
+@@ -491,14 +491,15 @@ LIBGFOR_CHECK_FLOAT128
+ # Check for GNU libc feenableexcept
+ AC_CHECK_LIB([m],[feenableexcept],[have_feenableexcept=yes AC_DEFINE([HAVE_FEENABLEEXCEPT],[1],[libm includes feenableexcept])])
+ 
+-# At least for glibc, clock_gettime is in librt.  But don't pull that
+-# in if it still doesn't give us the function we want.
+-# This test is copied from libgomp, and modified to not link in -lrt
+-# as libgfortran calls clock_gettime via a weak reference.
++# At least for glibc and Tru64, clock_gettime is in librt.  But don't
++# pull that in if it still doesn't give us the function we want.  This
++# test is copied from libgomp, and modified to not link in -lrt as
++# libgfortran calls clock_gettime via a weak reference if it's found
++# in librt.
+ if test $ac_cv_func_clock_gettime = no; then
+   AC_CHECK_LIB(rt, clock_gettime,
+-    [AC_DEFINE(HAVE_CLOCK_GETTIME, 1,
+-               [Define to 1 if you have the `clock_gettime' function.])])
++    [AC_DEFINE(HAVE_CLOCK_GETTIME_LIBRT, 1,
++               [Define to 1 if you have the `clock_gettime' function in librt.])])
+ fi
+ 
+ # Check for SysV fpsetmask
+diff --git a/libgfortran/intrinsics/system_clock.c b/libgfortran/intrinsics/system_clock.c
+index adf535d..f4bac07 100644
+--- a/libgfortran/intrinsics/system_clock.c
++++ b/libgfortran/intrinsics/system_clock.c
+@@ -29,21 +29,16 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+ 
+ #include "time_1.h"
+ 
+-/* Tru64 UNIX doesn't support weakrefs, so the trickery below completely
+-   breaks libgfortran (PR fortran/47571).  Don't use clock_gettime until a
+-   proper solution has been tested.  */
+-#if defined(__alpha__) && defined(__osf__)
+-#undef HAVE_CLOCK_GETTIME
+-#endif
+ 
+-#ifdef HAVE_CLOCK_GETTIME
+ /* POSIX states that CLOCK_REALTIME must be present if clock_gettime
+    is available, others are optional.  */
++#if defined(HAVE_CLOCK_GETTIME) || defined(HAVE_CLOCK_GETTIME_LIBRT)
+ #ifdef CLOCK_MONOTONIC
+ #define GF_CLOCK_MONOTONIC CLOCK_MONOTONIC
+ #else
+ #define GF_CLOCK_MONOTONIC CLOCK_REALTIME
+ #endif
++#endif
+ 
+ /* Weakref trickery for clock_gettime().  On Glibc, clock_gettime()
+    requires us to link in librt, which also pulls in libpthread.  In
+@@ -57,15 +52,9 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+ #define GTHREAD_USE_WEAK 1
+ #endif
+ 
+-#if SUPPORTS_WEAK && GTHREAD_USE_WEAK
++#if SUPPORTS_WEAK && GTHREAD_USE_WEAK && defined(HAVE_CLOCK_GETTIME_LIBRT)
+ static int weak_gettime (clockid_t, struct timespec *) 
+   __attribute__((__weakref__("clock_gettime")));
+-#else
+-static inline int weak_gettime (clockid_t clk_id, struct timespec *res)
+-{
+-  return clock_gettime (clk_id, res);
+-}
+-#endif
+ #endif
+ 
+ 
+@@ -91,6 +80,13 @@ gf_gettime_mono (time_t * secs, long * nanosecs)
+ {
+   int err;
+ #ifdef HAVE_CLOCK_GETTIME
++  struct timespec ts;
++  err = clock_gettime (GF_CLOCK_MONOTONIC, &ts);
++  *secs = ts.tv_sec;
++  *nanosecs = ts.tv_nsec;
++  return err;
++#else
++#if defined(HAVE_CLOCK_GETTIME_LIBRT) && SUPPORTS_WEAK && GTHREAD_USE_WEAK
+   if (weak_gettime)
+     {
+       struct timespec ts;
+@@ -103,6 +99,7 @@ gf_gettime_mono (time_t * secs, long * nanosecs)
+   err = gf_gettime (secs, nanosecs);
+   *nanosecs *= 1000;
+   return err;
++#endif
+ }
+ 
+ extern void system_clock_4 (GFC_INTEGER_4 *, GFC_INTEGER_4 *, GFC_INTEGER_4 *);
+-- 
+1.7.0.4
+

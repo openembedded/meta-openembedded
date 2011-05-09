@@ -1,0 +1,116 @@
+From 235c1ad4230b29a189d4300841c4d8c3dd144388 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 13 Apr 2011 15:47:40 +0000
+Subject: [PATCH 114/200] 	PR c++/48570
+ 	* semantics.c (cxx_eval_array_reference): Handle reading from
+ 	wchar_t, char16_t and char32_t STRING_CST.
+
+	* g++.dg/cpp0x/constexpr-wstring1.C: New test.
+	* g++.dg/cpp0x/constexpr-wstring2.C: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172378 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e6bb1dc..cf8d329 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -6279,7 +6279,7 @@ cxx_eval_array_reference (const constexpr_call *call, tree t,
+ 					   non_constant_p);
+   tree index, oldidx;
+   HOST_WIDE_INT i;
+-  unsigned len;
++  unsigned len, elem_nchars = 1;
+   if (*non_constant_p)
+     return t;
+   oldidx = TREE_OPERAND (t, 1);
+@@ -6291,9 +6291,14 @@ cxx_eval_array_reference (const constexpr_call *call, tree t,
+     return t;
+   else if (addr)
+     return build4 (ARRAY_REF, TREE_TYPE (t), ary, index, NULL, NULL);
+-  len = (TREE_CODE (ary) == CONSTRUCTOR
+-	 ? CONSTRUCTOR_NELTS (ary)
+-	 : (unsigned)TREE_STRING_LENGTH (ary));
++  if (TREE_CODE (ary) == CONSTRUCTOR)
++    len = CONSTRUCTOR_NELTS (ary);
++  else
++    {
++      elem_nchars = (TYPE_PRECISION (TREE_TYPE (TREE_TYPE (ary)))
++		     / TYPE_PRECISION (char_type_node));
++      len = (unsigned) TREE_STRING_LENGTH (ary) / elem_nchars;
++    }
+   if (compare_tree_int (index, len) >= 0)
+     {
+       if (!allow_non_constant)
+@@ -6304,9 +6309,16 @@ cxx_eval_array_reference (const constexpr_call *call, tree t,
+   i = tree_low_cst (index, 0);
+   if (TREE_CODE (ary) == CONSTRUCTOR)
+     return VEC_index (constructor_elt, CONSTRUCTOR_ELTS (ary), i)->value;
+-  else
++  else if (elem_nchars == 1)
+     return build_int_cst (cv_unqualified (TREE_TYPE (TREE_TYPE (ary))),
+ 			  TREE_STRING_POINTER (ary)[i]);
++  else
++    {
++      tree type = cv_unqualified (TREE_TYPE (TREE_TYPE (ary)));
++      return native_interpret_expr (type, (const unsigned char *)
++					  TREE_STRING_POINTER (ary)
++					  + i * elem_nchars, elem_nchars);
++    }
+   /* Don't VERIFY_CONSTANT here.  */
+ }
+ 
+new file mode 100644
+index 0000000..059977b
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-wstring1.C
+@@ -0,0 +1,34 @@
++// PR c++/48570
++// { dg-do run }
++// { dg-options "-std=c++0x" }
++
++extern "C" void abort ();
++constexpr wchar_t foo (int i) { return L"0123"[i]; }
++constexpr char16_t bar (int i) { return u"0123"[i]; }
++constexpr char32_t baz (int i) { return U"0123"[i]; }
++const wchar_t foo0 = foo (0);
++const wchar_t foo1 = foo (1);
++const wchar_t foo2 = foo (2);
++const wchar_t foo3 = foo (3);
++const wchar_t foo4 = foo (4);
++const char16_t bar0 = bar (0);
++const char16_t bar1 = bar (1);
++const char16_t bar2 = bar (2);
++const char16_t bar3 = bar (3);
++const char16_t bar4 = bar (4);
++const char32_t baz0 = baz (0);
++const char32_t baz1 = baz (1);
++const char32_t baz2 = baz (2);
++const char32_t baz3 = baz (3);
++const char32_t baz4 = baz (4);
++
++int
++main ()
++{
++  if (foo0 != L'0' || foo1 != L'1' || foo2 != L'2' || foo3 != L'3' || foo4 != L'\0')
++    abort ();
++  if (bar0 != u'0' || bar1 != u'1' || bar2 != u'2' || bar3 != u'3' || bar4 != u'\0')
++    abort ();
++  if (baz0 != U'0' || baz1 != U'1' || baz2 != U'2' || baz3 != U'3' || baz4 != U'\0')
++    abort ();
++}
+diff --git a/gcc/testsuite/g++.dg/cpp0x/constexpr-wstring2.C b/gcc/testsuite/g++.dg/cpp0x/constexpr-wstring2.C
+new file mode 100644
+index 0000000..4fc8980
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-wstring2.C
+@@ -0,0 +1,7 @@
++// PR c++/48570
++// { dg-do compile }
++// { dg-options -std=c++0x }
++
++constexpr wchar_t c1 = L"hi"[3];	// { dg-error "out of bound" }
++constexpr char16_t c2 = u"hi"[3];	// { dg-error "out of bound" }
++constexpr char32_t c3 = U"hi"[3];	// { dg-error "out of bound" }
+-- 
+1.7.0.4
+

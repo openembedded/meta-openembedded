@@ -1,0 +1,80 @@
+From fffee2aba06d51178d5c653db0acd6c775a0326b Mon Sep 17 00:00:00 2001
+From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 16 Apr 2011 02:04:56 +0000
+Subject: [PATCH 130/200] 2011-04-15  Daniel Krugler  <daniel.kruegler@googlemail.com>
+ 	    Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR libstdc++/48631
+	* include/bits/unique_ptr.h (default_delete<_Tp[]>): Add deleted
+	function call operator.
+	* testsuite/20_util/default_delete/48631_neg.cc: New.
+	* testsuite/20_util/weak_ptr/comparison/cmp_neg.cc: Adjust dg-error
+	line numbers.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172535 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 1be2e7a..9ab1938 100644
+--- a/libstdc++-v3/include/bits/unique_ptr.h
++++ b/libstdc++-v3/include/bits/unique_ptr.h
+@@ -79,6 +79,8 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 		      "can't delete pointer to incomplete type");
+ 	delete [] __ptr;
+       }
++
++      template<typename _Up> void operator()(_Up*) const = delete;
+     };
+ 
+   /// 20.7.12.2 unique_ptr for single objects.
+diff --git a/libstdc++-v3/testsuite/20_util/default_delete/48631_neg.cc b/libstdc++-v3/testsuite/20_util/default_delete/48631_neg.cc
+new file mode 100644
+index 0000000..9d779ac
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/default_delete/48631_neg.cc
+@@ -0,0 +1,30 @@
++// { dg-options "-std=gnu++0x " }
++// { dg-do compile }
++
++// Copyright (C) 2011 Free Software Foundation
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <memory>
++
++struct B { };
++struct D : B { };
++
++// libstdc++/48631
++D d;
++std::default_delete<B[]> db;
++typedef decltype(db(&d)) type; // { dg-error "use of deleted function" }
++// { dg-error "declared here" "" { target *-*-* } 83 }
+diff --git a/libstdc++-v3/testsuite/20_util/weak_ptr/comparison/cmp_neg.cc b/libstdc++-v3/testsuite/20_util/weak_ptr/comparison/cmp_neg.cc
+index 28c8797..63f44d1 100644
+--- a/libstdc++-v3/testsuite/20_util/weak_ptr/comparison/cmp_neg.cc
++++ b/libstdc++-v3/testsuite/20_util/weak_ptr/comparison/cmp_neg.cc
+@@ -44,7 +44,7 @@ main()
+ 
+ // { dg-warning "note" "" { target *-*-* } 354 }
+ // { dg-warning "note" "" { target *-*-* } 1086 }
+-// { dg-warning "note" "" { target *-*-* } 467 }
++// { dg-warning "note" "" { target *-*-* } 469 }
+ // { dg-warning "note" "" { target *-*-* } 587 }
+ // { dg-warning "note" "" { target *-*-* } 1050 }
+ // { dg-warning "note" "" { target *-*-* } 1056 }
+-- 
+1.7.0.4
+

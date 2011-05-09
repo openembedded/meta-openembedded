@@ -1,0 +1,147 @@
+From d0c1a282504a0fa941a9ae22536c73f64d8c5762 Mon Sep 17 00:00:00 2001
+From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 21 Apr 2011 14:40:53 +0000
+Subject: [PATCH 162/200] 2011-04-21  Richard Guenther  <rguenther@suse.de>
+
+	PR middle-end/48695
+	* tree-ssa-alias.c (aliasing_component_refs_p): Compute base
+	objects and types here.  Adjust for their offset before
+	comparing.
+
+	* g++.dg/torture/pr48695.C: New testcase.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172831 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e26c75d..3b0e585 100644
+new file mode 100644
+index 0000000..44e6c77
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/torture/pr48695.C
+@@ -0,0 +1,38 @@
++// { dg-do run }
++
++typedef __SIZE_TYPE__ size_t;
++
++inline void *operator new (size_t, void *__p) throw() { return __p; }
++
++struct _Vector_impl
++{
++  int *_M_start;
++  int *_M_finish;
++  _Vector_impl () :_M_start (0), _M_finish (0) {}
++};
++
++struct vector
++{
++  _Vector_impl _M_impl;
++  int *_M_allocate (size_t __n)
++  {
++    return __n != 0 ? new int[__n] : 0;
++  }
++  void push_back ()
++  {
++    new (this->_M_impl._M_finish) int ();
++    this->_M_impl._M_finish =
++      this->_M_allocate (this->_M_impl._M_finish - this->_M_impl._M_start) + 1;
++  }
++};
++
++int
++main ()
++{
++  for (int i = 0; i <= 1; i++)
++    for (int j = 0; j <= 1; j++)
++      {
++	vector a[2];
++	a[i].push_back ();
++      }
++}
+diff --git a/gcc/tree-ssa-alias.c b/gcc/tree-ssa-alias.c
+index bd8953b..8434179 100644
+--- a/gcc/tree-ssa-alias.c
++++ b/gcc/tree-ssa-alias.c
+@@ -594,11 +594,11 @@ same_type_for_tbaa (tree type1, tree type2)
+    are the respective alias sets.  */
+ 
+ static bool
+-aliasing_component_refs_p (tree ref1, tree type1,
++aliasing_component_refs_p (tree ref1,
+ 			   alias_set_type ref1_alias_set,
+ 			   alias_set_type base1_alias_set,
+ 			   HOST_WIDE_INT offset1, HOST_WIDE_INT max_size1,
+-			   tree ref2, tree type2,
++			   tree ref2,
+ 			   alias_set_type ref2_alias_set,
+ 			   alias_set_type base2_alias_set,
+ 			   HOST_WIDE_INT offset2, HOST_WIDE_INT max_size2,
+@@ -610,9 +610,21 @@ aliasing_component_refs_p (tree ref1, tree type1,
+        struct A { int i; int j; } *q;
+        struct B { struct A a; int k; } *p;
+      disambiguating q->i and p->a.j.  */
++  tree base1, base2;
++  tree type1, type2;
+   tree *refp;
+   int same_p;
+ 
++  /* Choose bases and base types to search for.  */
++  base1 = ref1;
++  while (handled_component_p (base1))
++    base1 = TREE_OPERAND (base1, 0);
++  type1 = TREE_TYPE (base1);
++  base2 = ref2;
++  while (handled_component_p (base2))
++    base2 = TREE_OPERAND (base2, 0);
++  type2 = TREE_TYPE (base2);
++
+   /* Now search for the type1 in the access path of ref2.  This
+      would be a common base for doing offset based disambiguation on.  */
+   refp = &ref2;
+@@ -628,6 +640,8 @@ aliasing_component_refs_p (tree ref1, tree type1,
+       HOST_WIDE_INT offadj, sztmp, msztmp;
+       get_ref_base_and_extent (*refp, &offadj, &sztmp, &msztmp);
+       offset2 -= offadj;
++      get_ref_base_and_extent (base1, &offadj, &sztmp, &msztmp);
++      offset1 -= offadj;
+       return ranges_overlap_p (offset1, max_size1, offset2, max_size2);
+     }
+   /* If we didn't find a common base, try the other way around.  */
+@@ -644,6 +658,8 @@ aliasing_component_refs_p (tree ref1, tree type1,
+       HOST_WIDE_INT offadj, sztmp, msztmp;
+       get_ref_base_and_extent (*refp, &offadj, &sztmp, &msztmp);
+       offset1 -= offadj;
++      get_ref_base_and_extent (base2, &offadj, &sztmp, &msztmp);
++      offset2 -= offadj;
+       return ranges_overlap_p (offset1, max_size1, offset2, max_size2);
+     }
+ 
+@@ -805,11 +821,10 @@ indirect_ref_may_alias_decl_p (tree ref1 ATTRIBUTE_UNUSED, tree base1,
+       && TREE_CODE (base1) != TARGET_MEM_REF
+       && (TREE_CODE (base1) != MEM_REF
+ 	  || same_type_for_tbaa (TREE_TYPE (base1), TREE_TYPE (ptrtype1)) == 1))
+-    return aliasing_component_refs_p (ref1, TREE_TYPE (ptrtype1),
++    return aliasing_component_refs_p (ref1,
+ 				      ref1_alias_set, base1_alias_set,
+ 				      offset1, max_size1,
+-				      ref2, TREE_TYPE
+-				              (reference_alias_ptr_type (ref2)),
++				      ref2,
+ 				      ref2_alias_set, base2_alias_set,
+ 				      offset2, max_size2, true);
+ 
+@@ -952,10 +967,10 @@ indirect_refs_may_alias_p (tree ref1 ATTRIBUTE_UNUSED, tree base1,
+ 	  || same_type_for_tbaa (TREE_TYPE (base1), TREE_TYPE (ptrtype1)) == 1)
+       && (TREE_CODE (base2) != MEM_REF
+ 	  || same_type_for_tbaa (TREE_TYPE (base2), TREE_TYPE (ptrtype2)) == 1))
+-    return aliasing_component_refs_p (ref1, TREE_TYPE (ptrtype1),
++    return aliasing_component_refs_p (ref1,
+ 				      ref1_alias_set, base1_alias_set,
+ 				      offset1, max_size1,
+-				      ref2, TREE_TYPE (ptrtype2),
++				      ref2,
+ 				      ref2_alias_set, base2_alias_set,
+ 				      offset2, max_size2, false);
+ 
+-- 
+1.7.0.4
+

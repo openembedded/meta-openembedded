@@ -1,0 +1,22 @@
+From 64152d5463c74f3ec58a7d27e7f4e03dfd9557ff Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 20 Apr 2011 09:25:33 +0000
+Subject: [PATCH 152/200] 	* bootstrap-lto.mk: Remove obsolete requirement.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172762 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 9b2c2d2..bbd3515 100644
+--- a/config/bootstrap-lto.mk
++++ b/config/bootstrap-lto.mk
+@@ -1,6 +1,5 @@
+-# This option enables LTO for stage2 and stage3.  It requires lto to
+-# be enabled for stage1 with --enable-stage1-languages.
++# This option enables LTO for stage2 and stage3.
+ 
+ STAGE2_CFLAGS += -flto=jobserver -frandom-seed=1
+ STAGE3_CFLAGS += -flto=jobserver -frandom-seed=1
+-STAGEprofile_CFLAGS +=  -fno-lto
++STAGEprofile_CFLAGS += -fno-lto
+-- 
+1.7.0.4
+

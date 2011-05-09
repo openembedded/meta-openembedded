@@ -1,0 +1,140 @@
+From 3329b7447ab817bb0374a689f3b381a5781ed8aa Mon Sep 17 00:00:00 2001
+From: jyasskin <jyasskin@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 7 Apr 2011 04:50:23 +0000
+Subject: [PATCH 076/200] Merge r172073 from trunk to the 4.6 release branch, to fix two
+ ambiguities between extensions and new C++0x functions.
+
+Tested: bootstrap + make check-c++ on x86_64
+
+libstdc++-v3/ChangeLog:
+
+2011-04-06  Jeffrey Yasskin  <jyasskin@google.com>
+
+	* include/ext/algorithm (is_sorted): In C++0x mode import from
+	namespace std.
+	* include/ext/numeric (iota): In C++0x mode import from
+	namespace std.
+	* testsuite/ext/is_sorted/cxx0x.cc: New.
+	* testsuite/ext/iota/cxx0x.cc: New.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172074 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 368b591..417a03a 100644
+--- a/libstdc++-v3/include/ext/algorithm
++++ b/libstdc++-v3/include/ext/algorithm
+@@ -471,6 +471,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+     }
+ #endif
+ 
++#ifdef __GXX_EXPERIMENTAL_CXX0X__
++  using std::is_sorted;
++#else
+   // is_sorted, a predicated testing whether a range is sorted in
+   // nondescending order.  This is an extension, not part of the C++
+   // standard.
+@@ -526,6 +529,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 	  return false;
+       return true;
+     }
++#endif  // __GXX_EXPERIMENTAL_CXX0X__
+ 
+   /**
+    *  @brief Find the median of three values.
+diff --git a/libstdc++-v3/include/ext/numeric b/libstdc++-v3/include/ext/numeric
+index d4a367f..b389177 100644
+--- a/libstdc++-v3/include/ext/numeric
++++ b/libstdc++-v3/include/ext/numeric
+@@ -123,6 +123,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+     power(_Tp __x, _Integer __n)
+     { return __power(__x, __n); }
+ 
++#ifdef __GXX_EXPERIMENTAL_CXX0X__
++  using std::iota;
++#else
+   /**
+    *  This is an SGI extension.
+    *  @ingroup SGIextensions
+@@ -141,9 +144,9 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+       while (__first != __last)
+ 	*__first++ = __value++;
+     }
++#endif  // __GXX_EXPERIMENTAL_CXX0X__
+ 
+ _GLIBCXX_END_NAMESPACE_VERSION
+ } // namespace
+ 
+ #endif
+-
+diff --git a/libstdc++-v3/testsuite/ext/iota/cxx0x.cc b/libstdc++-v3/testsuite/ext/iota/cxx0x.cc
+new file mode 100644
+index 0000000..84917ad
+--- /dev/null
++++ b/libstdc++-v3/testsuite/ext/iota/cxx0x.cc
+@@ -0,0 +1,28 @@
++// { dg-do compile }
++// { dg-options "-std=gnu++0x" }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <ext/numeric>
++#include <vector>
++
++void foo()
++{
++  std::vector<int> v;
++  iota(v.begin(), v.end(), 0);
++}
+diff --git a/libstdc++-v3/testsuite/ext/is_sorted/cxx0x.cc b/libstdc++-v3/testsuite/ext/is_sorted/cxx0x.cc
+new file mode 100644
+index 0000000..518716c
+--- /dev/null
++++ b/libstdc++-v3/testsuite/ext/is_sorted/cxx0x.cc
+@@ -0,0 +1,28 @@
++// { dg-do compile }
++// { dg-options "-std=gnu++0x" }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <ext/algorithm>
++#include <vector>
++
++void foo()
++{
++  std::vector<int> v;
++  is_sorted(v.begin(), v.end());
++}
+-- 
+1.7.0.4
+

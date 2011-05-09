@@ -1,0 +1,58 @@
+From b6ed53c51ca6090f3f422e6223e8dc3b150f0393 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 26 Mar 2011 09:24:06 +0000
+Subject: [PATCH 006/200] 	Backport from mainline
+ 	2011-03-24  Jakub Jelinek  <jakub@redhat.com>
+
+	PR debug/48204
+	* simplify-rtx.c (simplify_const_unary_operation): Call
+	real_convert when changing mode class with FLOAT_EXTEND.
+
+	* gcc.dg/dfp/pr48204.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171549 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index ce4eab4..ed6ae2b 100644
+--- a/gcc/simplify-rtx.c
++++ b/gcc/simplify-rtx.c
+@@ -1526,7 +1526,8 @@ simplify_const_unary_operation (enum rtx_code code, enum machine_mode mode,
+     }
+ 
+   else if (GET_CODE (op) == CONST_DOUBLE
+-	   && SCALAR_FLOAT_MODE_P (mode))
++	   && SCALAR_FLOAT_MODE_P (mode)
++	   && SCALAR_FLOAT_MODE_P (GET_MODE (op)))
+     {
+       REAL_VALUE_TYPE d, t;
+       REAL_VALUE_FROM_CONST_DOUBLE (d, op);
+@@ -1549,7 +1550,10 @@ simplify_const_unary_operation (enum rtx_code code, enum machine_mode mode,
+ 	  d = real_value_truncate (mode, d);
+ 	  break;
+ 	case FLOAT_EXTEND:
+-	  /* All this does is change the mode.  */
++	  /* All this does is change the mode, unless changing
++	     mode class.  */
++	  if (GET_MODE_CLASS (mode) != GET_MODE_CLASS (GET_MODE (op)))
++	    real_convert (&d, mode, &d);
+ 	  break;
+ 	case FIX:
+ 	  real_arithmetic (&d, FIX_TRUNC_EXPR, &d, NULL);
+new file mode 100644
+index 0000000..7b42158
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/dfp/pr48204.c
+@@ -0,0 +1,10 @@
++/* PR debug/48204 */
++/* { dg-do compile } */
++/* { dg-options "-O -fno-tree-ccp -fno-tree-dominator-opts -fno-tree-fre -g" } */
++
++void
++foo (void)
++{
++  float cf = 3.0f;
++  _Decimal64 d64 = cf;
++}
+-- 
+1.7.0.4
+

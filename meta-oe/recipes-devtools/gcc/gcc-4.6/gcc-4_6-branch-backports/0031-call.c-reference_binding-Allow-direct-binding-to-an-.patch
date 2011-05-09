@@ -1,0 +1,35 @@
+From af19d0c50df96adb55baaf54026ad82a9d256868 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 14:26:00 +0000
+Subject: [PATCH 031/200] 	* call.c (reference_binding): Allow direct binding to an array
+ 	rvalue.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171672 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index ac625a0..2ff3745 100644
+--- a/gcc/cp/call.c
++++ b/gcc/cp/call.c
+@@ -1429,7 +1429,9 @@ reference_binding (tree rto, tree rfrom, tree expr, bool c_cast_p, int flags)
+ 	  || (((CP_TYPE_CONST_NON_VOLATILE_P (to)
+ 		&& !(flags & LOOKUP_NO_TEMP_BIND))
+ 	       || TYPE_REF_IS_RVALUE (rto))
+-	      && (CLASS_TYPE_P (from) || (expr && lvalue_p (expr))))))
++	      && (CLASS_TYPE_P (from)
++		  || TREE_CODE (from) == ARRAY_TYPE
++		  || (expr && lvalue_p (expr))))))
+     {
+       /* [dcl.init.ref]
+ 
+new file mode 100644
+index 0000000..25113d7
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/initlist-arrray1.C
+@@ -0,0 +1,5 @@
++// { dg-options -std=c++0x }
++
++typedef int IRT[2];
++
++const IRT& ir = IRT{1,2};
+-- 
+1.7.0.4
+

@@ -1,0 +1,67 @@
+From 6ec20c02d4514be339f0112d793794abf60451a7 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 14:25:51 +0000
+Subject: [PATCH 030/200] 	* pt.c (build_non_dependent_expr): Keep dereferences outside the
+ 	NON_DEPENDENT_EXPR.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171671 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 2e18588..d649628 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -18851,24 +18851,17 @@ build_non_dependent_expr (tree expr)
+ 		   TREE_OPERAND (expr, 0),
+ 		   build_non_dependent_expr (TREE_OPERAND (expr, 1)));
+ 
++  /* Keep dereferences outside the NON_DEPENDENT_EXPR so lvalue_kind
++     doesn't need to look inside.  */
++  if (TREE_CODE (expr) == INDIRECT_REF && REFERENCE_REF_P (expr))
++    return convert_from_reference (build_non_dependent_expr
++				   (TREE_OPERAND (expr, 0)));
++
+   /* If the type is unknown, it can't really be non-dependent */
+   gcc_assert (TREE_TYPE (expr) != unknown_type_node);
+ 
+-  /* Otherwise, build a NON_DEPENDENT_EXPR.
+-
+-     REFERENCE_TYPEs are not stripped for expressions in templates
+-     because doing so would play havoc with mangling.  Consider, for
+-     example:
+-
+-       template <typename T> void f<T& g>() { g(); }
+-
+-     In the body of "f", the expression for "g" will have
+-     REFERENCE_TYPE, even though the standard says that it should
+-     not.  The reason is that we must preserve the syntactic form of
+-     the expression so that mangling (say) "f<g>" inside the body of
+-     "f" works out correctly.  Therefore, the REFERENCE_TYPE is
+-     stripped here.  */
+-  return build1 (NON_DEPENDENT_EXPR, non_reference (TREE_TYPE (expr)), expr);
++  /* Otherwise, build a NON_DEPENDENT_EXPR.  */
++  return build1 (NON_DEPENDENT_EXPR, TREE_TYPE (expr), expr);
+ }
+ 
+ /* ARGS is a vector of expressions as arguments to a function call.
+new file mode 100644
+index 0000000..12e363a
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/move1.C
+@@ -0,0 +1,15 @@
++// { dg-options "-std=c++0x -pedantic-errors" }
++
++#include <utility>
++
++class A { };
++
++static void g ( A && ) { }
++
++template < class T > class B {
++public:
++ void f ( ) {
++  A a;
++  g ( std :: move ( a ) );
++ }
++};
+-- 
+1.7.0.4
+

@@ -1,0 +1,658 @@
+From e86c60e8bb9da37bfbef63315f38d5154035392d Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 6 Apr 2011 20:39:20 +0000
+Subject: [PATCH 073/200] 	Backported from mainline
+ 	2011-04-01  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/48335
+	* expr.c (expand_assignment): Handle all possibilities
+	if TO_RTX is CONCAT.
+	* expmed.c (store_bit_field_1): Avoid trying to create
+	invalid SUBREGs.
+	(store_split_bit_field): If SUBREG_REG (op0) or
+	op0 itself has smaller mode than word, return it
+	for offset 0 and const0_rtx for out-of-bounds stores.
+	If word is const0_rtx, skip it.
+
+	* gcc.c-torture/compile/pr48335-1.c: New test.
+	* gcc.dg/pr48335-1.c: New test.
+	* gcc.dg/pr48335-2.c: New test.
+	* gcc.dg/pr48335-3.c: New test.
+	* gcc.dg/pr48335-4.c: New test.
+	* gcc.dg/pr48335-5.c: New test.
+	* gcc.dg/pr48335-6.c: New test.
+	* gcc.dg/pr48335-7.c: New test.
+	* gcc.dg/pr48335-8.c: New test.
+	* gcc.target/i386/pr48335-1.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172063 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index b0c1e23..6c35f8e 100644
+--- a/gcc/expmed.c
++++ b/gcc/expmed.c
+@@ -457,8 +457,10 @@ store_bit_field_1 (rtx str_rtx, unsigned HOST_WIDE_INT bitsize,
+       && bitsize == GET_MODE_BITSIZE (fieldmode)
+       && (!MEM_P (op0)
+ 	  ? ((GET_MODE_SIZE (fieldmode) >= UNITS_PER_WORD
+-	     || GET_MODE_SIZE (GET_MODE (op0)) == GET_MODE_SIZE (fieldmode))
+-	     && byte_offset % GET_MODE_SIZE (fieldmode) == 0)
++	      || GET_MODE_SIZE (GET_MODE (op0)) == GET_MODE_SIZE (fieldmode))
++	     && ((GET_MODE (op0) == fieldmode && byte_offset == 0)
++		 || validate_subreg (fieldmode, GET_MODE (op0), op0,
++				     byte_offset)))
+ 	  : (! SLOW_UNALIGNED_ACCESS (fieldmode, MEM_ALIGN (op0))
+ 	     || (offset * BITS_PER_UNIT % bitsize == 0
+ 		 && MEM_ALIGN (op0) % GET_MODE_BITSIZE (fieldmode) == 0))))
+@@ -519,6 +521,7 @@ store_bit_field_1 (rtx str_rtx, unsigned HOST_WIDE_INT bitsize,
+       rtx insn;
+       rtx start = get_last_insn ();
+       rtx arg0 = op0;
++      unsigned HOST_WIDE_INT subreg_off;
+ 
+       /* Get appropriate low part of the value being stored.  */
+       if (CONST_INT_P (value) || REG_P (value))
+@@ -542,15 +545,17 @@ store_bit_field_1 (rtx str_rtx, unsigned HOST_WIDE_INT bitsize,
+ 	  arg0 = SUBREG_REG (op0);
+ 	}
+ 
+-      insn = (GEN_FCN (icode)
+-		 (gen_rtx_SUBREG (fieldmode, arg0,
+-				  (bitnum % BITS_PER_WORD) / BITS_PER_UNIT
+-				  + (offset * UNITS_PER_WORD)),
+-				  value));
+-      if (insn)
++      subreg_off = (bitnum % BITS_PER_WORD) / BITS_PER_UNIT
++		   + (offset * UNITS_PER_WORD);
++      if (validate_subreg (fieldmode, GET_MODE (arg0), arg0, subreg_off))
+ 	{
+-	  emit_insn (insn);
+-	  return true;
++	  insn = (GEN_FCN (icode) (gen_rtx_SUBREG (fieldmode, arg0,
++						   subreg_off), value));
++	  if (insn)
++	    {
++	      emit_insn (insn);
++	      return true;
++	    }
+ 	}
+       delete_insns_since (start);
+     }
+@@ -1106,22 +1111,32 @@ store_split_bit_field (rtx op0, unsigned HOST_WIDE_INT bitsize,
+       if (GET_CODE (op0) == SUBREG)
+ 	{
+ 	  int word_offset = (SUBREG_BYTE (op0) / UNITS_PER_WORD) + offset;
+-	  word = operand_subword_force (SUBREG_REG (op0), word_offset,
+-					GET_MODE (SUBREG_REG (op0)));
++	  enum machine_mode sub_mode = GET_MODE (SUBREG_REG (op0));
++	  if (sub_mode != BLKmode && GET_MODE_SIZE (sub_mode) < UNITS_PER_WORD)
++	    word = word_offset ? const0_rtx : op0;
++	  else
++	    word = operand_subword_force (SUBREG_REG (op0), word_offset,
++					  GET_MODE (SUBREG_REG (op0)));
+ 	  offset = 0;
+ 	}
+       else if (REG_P (op0))
+ 	{
+-	  word = operand_subword_force (op0, offset, GET_MODE (op0));
++	  enum machine_mode op0_mode = GET_MODE (op0);
++	  if (op0_mode != BLKmode && GET_MODE_SIZE (op0_mode) < UNITS_PER_WORD)
++	    word = offset ? const0_rtx : op0;
++	  else
++	    word = operand_subword_force (op0, offset, GET_MODE (op0));
+ 	  offset = 0;
+ 	}
+       else
+ 	word = op0;
+ 
+       /* OFFSET is in UNITs, and UNIT is in bits.
+-         store_fixed_bit_field wants offset in bytes.  */
+-      store_fixed_bit_field (word, offset * unit / BITS_PER_UNIT, thissize,
+-			     thispos, part);
++	 store_fixed_bit_field wants offset in bytes.  If WORD is const0_rtx,
++	 it is just an out-of-bounds access.  Ignore it.  */
++      if (word != const0_rtx)
++	store_fixed_bit_field (word, offset * unit / BITS_PER_UNIT, thissize,
++			       thispos, part);
+       bitsdone += thissize;
+     }
+ }
+diff --git a/gcc/expr.c b/gcc/expr.c
+index 3295156..1de0ce4 100644
+--- a/gcc/expr.c
++++ b/gcc/expr.c
+@@ -4292,16 +4292,47 @@ expand_assignment (tree to, tree from, bool nontemporal)
+       /* Handle expand_expr of a complex value returning a CONCAT.  */
+       else if (GET_CODE (to_rtx) == CONCAT)
+ 	{
+-	  if (COMPLEX_MODE_P (TYPE_MODE (TREE_TYPE (from))))
++	  unsigned short mode_bitsize = GET_MODE_BITSIZE (GET_MODE (to_rtx));
++	  if (COMPLEX_MODE_P (TYPE_MODE (TREE_TYPE (from)))
++	      && bitpos == 0
++	      && bitsize == mode_bitsize)
++	    result = store_expr (from, to_rtx, false, nontemporal);
++	  else if (bitsize == mode_bitsize / 2
++		   && (bitpos == 0 || bitpos == mode_bitsize / 2))
++	    result = store_expr (from, XEXP (to_rtx, bitpos != 0), false,
++				 nontemporal);
++	  else if (bitpos + bitsize <= mode_bitsize / 2)
++	    result = store_field (XEXP (to_rtx, 0), bitsize, bitpos,
++				  mode1, from, TREE_TYPE (tem),
++				  get_alias_set (to), nontemporal);
++	  else if (bitpos >= mode_bitsize / 2)
++	    result = store_field (XEXP (to_rtx, 1), bitsize,
++				  bitpos - mode_bitsize / 2, mode1, from,
++				  TREE_TYPE (tem), get_alias_set (to),
++				  nontemporal);
++	  else if (bitpos == 0 && bitsize == mode_bitsize)
+ 	    {
+-	      gcc_assert (bitpos == 0);
+-	      result = store_expr (from, to_rtx, false, nontemporal);
++	      rtx from_rtx;
++	      result = expand_normal (from);
++	      from_rtx = simplify_gen_subreg (GET_MODE (to_rtx), result,
++					      TYPE_MODE (TREE_TYPE (from)), 0);
++	      emit_move_insn (XEXP (to_rtx, 0),
++			      read_complex_part (from_rtx, false));
++	      emit_move_insn (XEXP (to_rtx, 1),
++			      read_complex_part (from_rtx, true));
+ 	    }
+ 	  else
+ 	    {
+-	      gcc_assert (bitpos == 0 || bitpos == GET_MODE_BITSIZE (mode1));
+-	      result = store_expr (from, XEXP (to_rtx, bitpos != 0), false,
+-				   nontemporal);
++	      rtx temp = assign_stack_temp (GET_MODE (to_rtx),
++					    GET_MODE_SIZE (GET_MODE (to_rtx)),
++					    0);
++	      write_complex_part (temp, XEXP (to_rtx, 0), false);
++	      write_complex_part (temp, XEXP (to_rtx, 1), true);
++	      result = store_field (temp, bitsize, bitpos, mode1, from,
++				    TREE_TYPE (tem), get_alias_set (to),
++				    nontemporal);
++	      emit_move_insn (XEXP (to_rtx, 0), read_complex_part (temp, false));
++	      emit_move_insn (XEXP (to_rtx, 1), read_complex_part (temp, true));
+ 	    }
+ 	}
+       else
+new file mode 100644
+index 0000000..6f81338
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/compile/pr48335-1.c
+@@ -0,0 +1,41 @@
++/* PR middle-end/48335 */
++
++struct S { float d; };
++
++void bar (struct S);
++
++void
++f0 (int x)
++{
++  struct S s = {.d = 0.0f };
++  ((char *) &s.d)[0] = x;
++  s.d *= 7.0;
++  bar (s);
++}
++
++void
++f1 (int x)
++{
++  struct S s = {.d = 0.0f };
++  ((char *) &s.d)[1] = x;
++  s.d *= 7.0;
++  bar (s);
++}
++
++void
++f2 (int x)
++{
++  struct S s = {.d = 0.0f };
++  ((char *) &s.d)[2] = x;
++  s.d *= 7.0;
++  bar (s);
++}
++
++void
++f3 (int x)
++{
++  struct S s = {.d = 0.0f };
++  ((char *) &s.d)[3] = x;
++  s.d *= 7.0;
++  bar (s);
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-1.c b/gcc/testsuite/gcc.dg/pr48335-1.c
+new file mode 100644
+index 0000000..7a022ea
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-1.c
+@@ -0,0 +1,48 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef long long T __attribute__((may_alias));
++
++struct S
++{
++  _Complex float d __attribute__((aligned (8)));
++};
++
++void bar (struct S);
++
++void
++f1 (T x)
++{
++  struct S s;
++  *(T *) &s.d = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f2 (int x)
++{
++  struct S s = { .d = 0.0f };
++  *(char *) &s.d = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f3 (int x)
++{
++  struct S s = { .d = 0.0f };
++  ((char *) &s.d)[2] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f4 (int x, int y)
++{
++  struct S s = { .d = 0.0f };
++  ((char *) &s.d)[y] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-2.c b/gcc/testsuite/gcc.dg/pr48335-2.c
+new file mode 100644
+index 0000000..a37c079
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-2.c
+@@ -0,0 +1,58 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef long long T __attribute__((may_alias, aligned (1)));
++typedef short U __attribute__((may_alias, aligned (1)));
++
++struct S
++{
++  _Complex float d __attribute__((aligned (8)));
++};
++
++void bar (struct S);
++
++void
++f1 (T x)
++{
++  struct S s;
++  *(T *) ((char *) &s.d + 1) = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f2 (int x)
++{
++  struct S s = { .d = 0.0f };
++  ((U *)((char *) &s.d + 1))[0] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f3 (int x)
++{
++  struct S s = { .d = 0.0f };
++  ((U *)((char *) &s.d + 1))[1] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f4 (int x)
++{
++  struct S s = { .d = 0.0f };
++  ((U *)((char *) &s.d + 1))[2] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f5 (int x)
++{
++  struct S s = { .d = 0.0f };
++  ((U *)((char *) &s.d + 1))[3] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-3.c b/gcc/testsuite/gcc.dg/pr48335-3.c
+new file mode 100644
+index 0000000..9041f59
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-3.c
+@@ -0,0 +1,48 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef short U __attribute__((may_alias, aligned (1)));
++
++struct S
++{
++  double d;
++};
++
++void bar (struct S);
++
++void
++f1 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[0] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f2 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[1] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f3 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[2] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f4 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[3] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-4.c b/gcc/testsuite/gcc.dg/pr48335-4.c
+new file mode 100644
+index 0000000..98e9e1e
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-4.c
+@@ -0,0 +1,39 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef short U __attribute__((may_alias, aligned (1)));
++
++struct S
++{
++  double d;
++};
++
++void bar (struct S);
++
++void
++f1 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[-1] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f2 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[-2] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f3 (int x)
++{
++  struct S s = { .d = 0.0 };
++  ((U *)((char *) &s.d + 1))[5] = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-5.c b/gcc/testsuite/gcc.dg/pr48335-5.c
+new file mode 100644
+index 0000000..b189548
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-5.c
+@@ -0,0 +1,38 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef long long T __attribute__((may_alias));
++
++struct S
++{
++  _Complex float d __attribute__((aligned (8)));
++};
++
++int
++f1 (struct S x)
++{
++  struct S s = x;
++  return *(T *) &s.d;
++}
++
++int
++f2 (struct S x)
++{
++  struct S s = x;
++  return *(char *) &s.d;
++}
++
++int
++f3 (struct S x)
++{
++  struct S s = x;
++  return ((char *) &s.d)[2];
++}
++
++int
++f4 (struct S x, int y)
++{
++  struct S s = x;
++  return ((char *) &s.d)[y];
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-6.c b/gcc/testsuite/gcc.dg/pr48335-6.c
+new file mode 100644
+index 0000000..769130c
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-6.c
+@@ -0,0 +1,46 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef long long T __attribute__((may_alias, aligned (1)));
++typedef short U __attribute__((may_alias, aligned (1)));
++
++struct S
++{
++  _Complex float d __attribute__((aligned (8)));
++};
++
++T
++f1 (struct S x)
++{
++  struct S s = x;
++  return *(T *) ((char *) &s.d + 1);
++}
++
++int
++f2 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[0];
++}
++
++int
++f3 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[1];
++}
++
++int
++f4 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[2];
++}
++
++int
++f5 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[3];
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-7.c b/gcc/testsuite/gcc.dg/pr48335-7.c
+new file mode 100644
+index 0000000..ddb15ee
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-7.c
+@@ -0,0 +1,38 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef short U __attribute__((may_alias, aligned (1)));
++
++struct S
++{
++  double d;
++};
++
++int
++f1 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[0];
++}
++
++int
++f2 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[1];
++}
++
++int
++f3 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[2];
++}
++
++int
++f4 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[3];
++}
+diff --git a/gcc/testsuite/gcc.dg/pr48335-8.c b/gcc/testsuite/gcc.dg/pr48335-8.c
+new file mode 100644
+index 0000000..bb06c15
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48335-8.c
+@@ -0,0 +1,31 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra" } */
++
++typedef short U __attribute__((may_alias, aligned (1)));
++
++struct S
++{
++  double d;
++};
++
++int
++f1 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[-1];
++}
++
++int
++f2 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[-2];
++}
++
++int
++f3 (struct S x)
++{
++  struct S s = x;
++  return ((U *)((char *) &s.d + 1))[5];
++}
+diff --git a/gcc/testsuite/gcc.target/i386/pr48335-1.c b/gcc/testsuite/gcc.target/i386/pr48335-1.c
+new file mode 100644
+index 0000000..08c5284
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/pr48335-1.c
+@@ -0,0 +1,32 @@
++/* PR middle-end/48335 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fno-tree-sra -msse2" } */
++
++#include <emmintrin.h>
++
++typedef __float128 T __attribute__((may_alias));
++
++struct S
++{
++  _Complex double d __attribute__((aligned (16)));
++};
++
++void bar (struct S);
++
++void
++f1 (T x)
++{
++  struct S s;
++  *(T *) &s.d = x;
++  __real__ s.d *= 7.0;
++  bar (s);
++}
++
++void
++f2 (__m128d x)
++{
++  struct S s;
++  _mm_store_pd ((double *) &s.d, x);
++  __real__ s.d *= 7.0;
++  bar (s);
++}
+-- 
+1.7.0.4
+

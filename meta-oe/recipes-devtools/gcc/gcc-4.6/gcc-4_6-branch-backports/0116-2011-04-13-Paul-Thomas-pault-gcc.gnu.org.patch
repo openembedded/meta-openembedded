@@ -1,0 +1,182 @@
+From 348c7b9400ed5fe0d8c3c077f8223ca359bed036 Mon Sep 17 00:00:00 2001
+From: pault <pault@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 13 Apr 2011 18:38:17 +0000
+Subject: [PATCH 116/200] 2011-04-13  Paul Thomas  <pault@gcc.gnu.org>
+
+	PR fortran/48360
+	PR fortran/48456
+	* trans-array.c (get_std_lbound): For derived type variables
+	return array valued component lbound.
+
+2011-04-13  Paul Thomas  <pault@gcc.gnu.org>
+
+	PR fortran/48360
+	PR fortran/48456
+	* gfortran.dg/realloc_on_assign_6.f03: New test.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172390 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index ac08c42..3d4a52a 100644
+--- a/gcc/fortran/trans-array.c
++++ b/gcc/fortran/trans-array.c
+@@ -6707,6 +6707,8 @@ get_std_lbound (gfc_expr *expr, tree desc, int dim, bool assumed_size)
+   tree stride;
+   tree cond, cond1, cond3, cond4;
+   tree tmp;
++  gfc_ref *ref;
++
+   if (GFC_DESCRIPTOR_TYPE_P (TREE_TYPE (desc)))
+     {
+       tmp = gfc_rank_cst[dim];
+@@ -6740,6 +6742,14 @@ get_std_lbound (gfc_expr *expr, tree desc, int dim, bool assumed_size)
+   else if (expr->expr_type == EXPR_VARIABLE)
+     {
+       tmp = TREE_TYPE (expr->symtree->n.sym->backend_decl);
++      for (ref = expr->ref; ref; ref = ref->next)
++	{
++	  if (ref->type == REF_COMPONENT
++		&& ref->u.c.component->as
++		&& ref->next
++		&& ref->next->u.ar.type == AR_FULL)
++	    tmp = TREE_TYPE (ref->u.c.component->backend_decl);
++	}
+       return GFC_TYPE_ARRAY_LBOUND(tmp, dim);
+     }
+   else if (expr->expr_type == EXPR_FUNCTION)
+new file mode 100644
+index 0000000..7c170eb
+--- /dev/null
++++ b/gcc/testsuite/gfortran.dg/realloc_on_assign_6.f03
+@@ -0,0 +1,129 @@
++! { dg-do compile }
++! Test the fix for PR48456 and PR48360 in which the backend
++! declarations for components were not located in the automatic
++! reallocation on assignments, thereby causing ICEs.
++!
++! Contributed by Keith Refson  <krefson@googlemail.com>
++! and Douglas Foulds  <mixnmaster@gmail.com>
++!
++! This is PR48360
++
++module m
++  type mm
++     real, dimension(3,3) :: h0
++  end type mm
++end module m
++
++module gf33
++
++  real, allocatable, save, dimension(:,:) :: hmat
++  
++contains
++  subroutine assignit
++    
++    use m
++    implicit none
++    
++    type(mm) :: mmv
++    
++    hmat = mmv%h0
++  end subroutine assignit
++end module gf33
++
++! This is PR48456
++
++module custom_type
++
++integer, parameter :: dp = kind(0.d0)
++
++type :: my_type_sub
++    real(dp), dimension(5) :: some_vector
++end type my_type_sub
++
++type :: my_type
++  type(my_type_sub) :: some_element
++end type my_type
++
++end module custom_type
++
++module custom_interfaces
++
++interface
++  subroutine store_data_subroutine(vec_size)
++  implicit none
++  integer, intent(in) :: vec_size
++  integer :: k
++  end subroutine store_data_subroutine
++end interface
++
++end module custom_interfaces
++
++module store_data_test
++
++use custom_type
++
++save
++type(my_type), dimension(:), allocatable :: some_type_to_save
++
++end module store_data_test
++
++program test
++
++use store_data_test
++
++integer :: vec_size
++
++vec_size = 2
++
++call store_data_subroutine(vec_size)
++call print_after_transfer()
++
++end program test
++
++subroutine store_data_subroutine(vec_size)
++
++use custom_type
++use store_data_test
++
++implicit none
++
++integer, intent(in) :: vec_size
++integer :: k
++
++allocate(some_type_to_save(vec_size))
++
++do k = 1,vec_size
++
++  some_type_to_save(k)%some_element%some_vector(1) = 1.0_dp
++  some_type_to_save(k)%some_element%some_vector(2) = 2.0_dp
++  some_type_to_save(k)%some_element%some_vector(3) = 3.0_dp
++  some_type_to_save(k)%some_element%some_vector(4) = 4.0_dp
++  some_type_to_save(k)%some_element%some_vector(5) = 5.0_dp
++
++end do
++
++end subroutine store_data_subroutine
++
++subroutine print_after_transfer()
++
++use custom_type
++use store_data_test
++
++implicit none
++
++real(dp), dimension(:), allocatable :: C_vec
++integer :: k
++
++allocate(C_vec(5))
++
++do k = 1,size(some_type_to_save)
++
++  C_vec = some_type_to_save(k)%some_element%some_vector
++  print *, "C_vec", C_vec
++
++end do
++
++end subroutine print_after_transfer
++! { dg-final { cleanup-modules "m gf33" } }
++! { dg-final { cleanup-modules "custom_type custom_interfaces" } }
++! { dg-final { cleanup-modules "store_data_test" } }
+-- 
+1.7.0.4
+

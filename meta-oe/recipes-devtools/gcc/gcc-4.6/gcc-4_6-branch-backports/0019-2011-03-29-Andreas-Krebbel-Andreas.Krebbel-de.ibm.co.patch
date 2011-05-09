@@ -1,0 +1,62 @@
+From 6f57329da3c7308ccf6b1740ead898d668ec24f9 Mon Sep 17 00:00:00 2001
+From: krebbel <krebbel@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 11:57:40 +0000
+Subject: [PATCH 019/200] 2011-03-29  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	* config/s390/s390.c (s390_preferred_reload_class): Return NO_REGS
+	for invalid symbolic addresses.
+	(s390_secondary_reload): Don't use s390_check_symref_alignment for
+	larl operands.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171658 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 5165e87..c1bb234 100644
+--- a/gcc/config/s390/s390.c
++++ b/gcc/config/s390/s390.c
+@@ -3011,14 +3011,20 @@ s390_preferred_reload_class (rtx op, reg_class_t rclass)
+ 	 it is most likely being used as an address, so
+ 	 prefer ADDR_REGS.  If 'class' is not a superset
+ 	 of ADDR_REGS, e.g. FP_REGS, reject this reload.  */
+-      case PLUS:
+       case LABEL_REF:
+       case SYMBOL_REF:
+       case CONST:
+-	if (reg_class_subset_p (ADDR_REGS, rclass))
++	if (reg_class_subset_p (ADDR_REGS, rclass)
++	    && legitimate_reload_constant_p (op))
+           return ADDR_REGS;
+ 	else
+ 	  return NO_REGS;
++      case PLUS:
++	/* load address will be used for this reload.  */
++	if (reg_class_subset_p (ADDR_REGS, rclass))
++	  return ADDR_REGS;
++	else
++	  return NO_REGS;
+ 
+       default:
+ 	break;
+@@ -3134,12 +3140,16 @@ s390_secondary_reload (bool in_p, rtx x, reg_class_t rclass_i,
+ 
+   if (TARGET_Z10)
+     {
++      HOST_WIDE_INT offset;
++      rtx symref;
++
+       /* On z10 several optimizer steps may generate larl operands with
+ 	 an odd addend.  */
+       if (in_p
+-	  && s390_symref_operand_p (x, NULL, NULL)
++	  && s390_symref_operand_p (x, &symref, &offset)
+ 	  && mode == Pmode
+-	  && !s390_check_symref_alignment (x, 2))
++	  && !SYMBOL_REF_ALIGN1_P (symref)
++	  && (offset & 1) == 1)
+ 	sri->icode = ((mode == DImode) ? CODE_FOR_reloaddi_larl_odd_addend_z10
+ 		      : CODE_FOR_reloadsi_larl_odd_addend_z10);
+ 
+-- 
+1.7.0.4
+

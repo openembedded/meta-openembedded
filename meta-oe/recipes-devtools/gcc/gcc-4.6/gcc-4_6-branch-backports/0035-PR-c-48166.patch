@@ -1,0 +1,43 @@
+From 709a81571cc3f418f51f95ed9291b4f2fabc577c Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 16:07:15 +0000
+Subject: [PATCH 035/200] 	PR c++/48166
+ 	* decl.c (revert_static_member_fn): Strip function-cv-quals.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171679 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index fbd6c97..41beef3 100644
+--- a/gcc/cp/decl.c
++++ b/gcc/cp/decl.c
+@@ -13342,10 +13342,14 @@ static_fn_type (tree memfntype)
+ void
+ revert_static_member_fn (tree decl)
+ {
+-  TREE_TYPE (decl) = static_fn_type (decl);
++  tree stype = static_fn_type (decl);
+ 
+-  if (cp_type_quals (TREE_TYPE (decl)) != TYPE_UNQUALIFIED)
+-    error ("static member function %q#D declared with type qualifiers", decl);
++  if (type_memfn_quals (stype) != TYPE_UNQUALIFIED)
++    {
++      error ("static member function %q#D declared with type qualifiers", decl);
++      stype = apply_memfn_quals (stype, TYPE_UNQUALIFIED);
++    }
++  TREE_TYPE (decl) = stype;
+ 
+   if (DECL_ARGUMENTS (decl))
+     DECL_ARGUMENTS (decl) = DECL_CHAIN (DECL_ARGUMENTS (decl));
+new file mode 100644
+index 0000000..ce8af7b
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/parse/memfnquals1.C
+@@ -0,0 +1,6 @@
++// PR c++/48166
++
++struct foo {
++  static void func ();
++};
++void foo::func () const {}	// { dg-error "type qualifiers" }
+-- 
+1.7.0.4
+

@@ -1,0 +1,132 @@
+From 2f7a2d284d42cfbff01ee024af4cbaeaff766ee5 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 8 Apr 2011 15:02:00 +0000
+Subject: [PATCH 087/200] 	* semantics.c (finish_decltype_type): Add complain parm.
+ 	* cp-tree.h: Adjust.
+ 	* parser.c (cp_parser_decltype): Adjust.
+ 	* pt.c (tsubst): Adjust.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172192 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 4b49046..176a4b8 100644
+--- a/gcc/cp/cp-tree.h
++++ b/gcc/cp/cp-tree.h
+@@ -5344,7 +5344,7 @@ extern tree baselink_for_fns                    (tree);
+ extern void finish_static_assert                (tree, tree, location_t,
+                                                  bool);
+ extern tree describable_type			(tree);
+-extern tree finish_decltype_type                (tree, bool);
++extern tree finish_decltype_type                (tree, bool, tsubst_flags_t);
+ extern tree finish_trait_expr			(enum cp_trait_kind, tree, tree);
+ extern tree build_lambda_expr                   (void);
+ extern tree build_lambda_object			(tree);
+diff --git a/gcc/cp/parser.c b/gcc/cp/parser.c
+index 4260f6d..daba2fc 100644
+--- a/gcc/cp/parser.c
++++ b/gcc/cp/parser.c
+@@ -10457,7 +10457,8 @@ cp_parser_decltype (cp_parser *parser)
+       return error_mark_node;
+     }
+ 
+-  return finish_decltype_type (expr, id_expression_or_member_access_p);
++  return finish_decltype_type (expr, id_expression_or_member_access_p,
++			       tf_warning_or_error);
+ }
+ 
+ /* Special member functions [gram.special] */
+diff --git a/gcc/cp/pt.c b/gcc/cp/pt.c
+index e716ca6..ed48203 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -11025,7 +11025,7 @@ tsubst (tree t, tree args, tsubst_flags_t complain, tree in_decl)
+ 	  type = lambda_return_type (type);
+ 	else
+ 	  type = finish_decltype_type
+-	    (type, DECLTYPE_TYPE_ID_EXPR_OR_MEMBER_ACCESS_P (t));
++	    (type, DECLTYPE_TYPE_ID_EXPR_OR_MEMBER_ACCESS_P (t), complain);
+ 	return cp_build_qualified_type_real (type,
+ 					     cp_type_quals (t)
+ 					     | cp_type_quals (type),
+diff --git a/gcc/cp/semantics.c b/gcc/cp/semantics.c
+index c88b4bb..3a85ddb 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -4785,7 +4785,8 @@ describable_type (tree expr)
+    a full expression.  */
+ 
+ tree
+-finish_decltype_type (tree expr, bool id_expression_or_member_access_p)
++finish_decltype_type (tree expr, bool id_expression_or_member_access_p,
++		      tsubst_flags_t complain)
+ {
+   tree orig_expr = expr;
+   tree type = NULL_TREE;
+@@ -4798,7 +4799,8 @@ finish_decltype_type (tree expr, bool id_expression_or_member_access_p)
+       || (TREE_CODE (expr) == BIT_NOT_EXPR
+ 	  && TYPE_P (TREE_OPERAND (expr, 0))))
+     {
+-      error ("argument to decltype must be an expression");
++      if (complain & tf_error)
++	error ("argument to decltype must be an expression");
+       return error_mark_node;
+     }
+ 
+@@ -4865,7 +4867,9 @@ finish_decltype_type (tree expr, bool id_expression_or_member_access_p)
+           if (OVL_CHAIN (expr)
+ 	      || TREE_CODE (OVL_FUNCTION (expr)) == TEMPLATE_DECL)
+             {
+-              error ("%qE refers to a set of overloaded functions", orig_expr);
++	      if (complain & tf_error)
++		error ("%qE refers to a set of overloaded functions",
++		       orig_expr);
+               return error_mark_node;
+             }
+           else
+@@ -4917,7 +4921,8 @@ finish_decltype_type (tree expr, bool id_expression_or_member_access_p)
+         default:
+ 	  gcc_assert (TYPE_P (expr) || DECL_P (expr)
+ 		      || TREE_CODE (expr) == SCOPE_REF);
+-          error ("argument to decltype must be an expression");
++	  if (complain & tf_error)
++	    error ("argument to decltype must be an expression");
+           return error_mark_node;
+         }
+     }
+@@ -5012,7 +5017,8 @@ finish_decltype_type (tree expr, bool id_expression_or_member_access_p)
+ 
+   if (!type || type == unknown_type_node)
+     {
+-      error ("type of %qE is unknown", expr);
++      if (complain & tf_error)
++	error ("type of %qE is unknown", expr);
+       return error_mark_node;
+     }
+ 
+new file mode 100644
+index 0000000..0a95a96
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/sfinae7.C
+@@ -0,0 +1,20 @@
++// { dg-options -std=c++0x }
++
++struct A
++{
++  void f();
++  void f(int);
++  typedef int g;
++};
++
++template <class T> decltype (T::f) f();
++template <class T> void f();
++
++template <class T> decltype (T::g) g();
++template <class T> void g();
++
++int main()
++{
++  f<A>();
++  g<A>();
++}
+-- 
+1.7.0.4
+

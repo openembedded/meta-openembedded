@@ -1,0 +1,63 @@
+From ad24dcb7c07f1f9d41cb6782ea14c6c1727c4cb0 Mon Sep 17 00:00:00 2001
+From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 21 Apr 2011 20:23:55 +0000
+Subject: [PATCH 164/200] 	PR target/48708
+ 	* config/i386/i386.c (ix86_expand_vector_set) <V2DImode>: Generate
+ 	vec_extract and vec_concat for non-SSE4_1 targets.
+
+testsuite/ChangeLog:
+
+	PR target/48708
+	* gcc.target/i386/pr48708.c: New test.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172843 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index a524d77..6e4bb3b 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -31213,10 +31213,19 @@ ix86_expand_vector_set (bool mmx_ok, rtx target, rtx val, int elt)
+       break;
+ 
+     case V2DImode:
+-      use_vec_merge = TARGET_SSE4_1;
++      use_vec_merge = TARGET_SSE4_1 && TARGET_64BIT;
+       if (use_vec_merge)
+ 	break;
+ 
++      tmp = gen_reg_rtx (GET_MODE_INNER (mode));
++      ix86_expand_vector_extract (false, tmp, target, 1 - elt);
++      if (elt == 0)
++	tmp = gen_rtx_VEC_CONCAT (mode, tmp, val);
++      else
++	tmp = gen_rtx_VEC_CONCAT (mode, val, tmp);
++      emit_insn (gen_rtx_SET (VOIDmode, target, tmp));
++      return;
++
+     case V2DFmode:
+       {
+ 	rtx op0, op1;
+new file mode 100644
+index 0000000..355c2b2
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/pr48708.c
+@@ -0,0 +1,15 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -msse2" } */
++
++#include <emmintrin.h>
++
++typedef long long T __attribute__((may_alias));
++struct S { __m128i d; };
++
++__m128i
++foo (long long *x, struct S *y, __m128i *z)
++{
++  struct S s = *y;
++  ((T *) &s.d)[0] = *x;
++  return _mm_cmpeq_epi16 (s.d, *z);
++}
+-- 
+1.7.0.4
+

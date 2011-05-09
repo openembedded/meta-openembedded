@@ -1,0 +1,226 @@
+From 8c9cc2d03061ea065b70695ef4903a0390c01fb8 Mon Sep 17 00:00:00 2001
+From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 26 Mar 2011 18:41:02 +0000
+Subject: [PATCH 009/200] 	Backport from mainline:
+ 	2011-03-24  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/48237
+	* config/i386/i386.md (*movdf_internal_rex64): Do not split
+	alternatives that can be handled with movq or movabsq insn.
+	(*movdf_internal): Disable for !TARGET_64BIT.
+	(*movdf_internal_nointeger): Ditto.
+	* config/i386/i386.c (ix86_print_operand): Handle DFmode immediates.
+
+testsuite/ChangeLog:
+
+	Backport from mainline:
+	2011-03-24  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/48237
+	* gcc.target/i386/pr48237.c: New test.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171560 138bc75d-0d04-0410-961f-82ee72b054a4
+
+diff --git a/gcc/config/i386/i386.c b/gcc/config/i386/i386.c
+index 82d999b..4fb654f 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -14389,17 +14389,21 @@ ix86_print_operand (FILE *file, rtx x, int code)
+ 	fprintf (file, "0x%08x", (unsigned int) l);
+     }
+ 
+-  /* These float cases don't actually occur as immediate operands.  */
+   else if (GET_CODE (x) == CONST_DOUBLE && GET_MODE (x) == DFmode)
+     {
+-      char dstr[30];
++      REAL_VALUE_TYPE r;
++      long l[2];
+ 
+-      real_to_decimal (dstr, CONST_DOUBLE_REAL_VALUE (x), sizeof (dstr), 0, 1);
+-      fputs (dstr, file);
++      REAL_VALUE_FROM_CONST_DOUBLE (r, x);
++      REAL_VALUE_TO_TARGET_DOUBLE (r, l);
++
++      if (ASSEMBLER_DIALECT == ASM_ATT)
++	putc ('$', file);
++      fprintf (file, "0x%lx%08lx", l[1] & 0xffffffff, l[0] & 0xffffffff);
+     }
+ 
+-  else if (GET_CODE (x) == CONST_DOUBLE
+-	   && GET_MODE (x) == XFmode)
++  /* These float cases don't actually occur as immediate operands.  */
++  else if (GET_CODE (x) == CONST_DOUBLE && GET_MODE (x) == XFmode)
+     {
+       char dstr[30];
+ 
+diff --git a/gcc/config/i386/i386.md b/gcc/config/i386/i386.md
+index a17ab7a..b50a52a 100644
+--- a/gcc/config/i386/i386.md
++++ b/gcc/config/i386/i386.md
+@@ -2906,9 +2906,9 @@
+ 
+ (define_insn "*movdf_internal_rex64"
+   [(set (match_operand:DF 0 "nonimmediate_operand"
+-		"=f,m,f,r  ,m ,Y2*x,Y2*x,Y2*x,m   ,Yi,r ")
++		"=f,m,f,r ,m,!r,!m,Y2*x,Y2*x,Y2*x,m   ,Yi,r ")
+ 	(match_operand:DF 1 "general_operand"
+-		"fm,f,G,rmF,Fr,C   ,Y2*x,m   ,Y2*x,r ,Yi"))]
++		"fm,f,G,rm,r,F ,F ,C   ,Y2*x,m   ,Y2*x,r ,Yi"))]
+   "TARGET_64BIT && !(MEM_P (operands[0]) && MEM_P (operands[1]))
+    && (reload_in_progress || reload_completed
+        || (ix86_cmodel == CM_MEDIUM || ix86_cmodel == CM_LARGE)
+@@ -2929,9 +2929,15 @@
+ 
+     case 3:
+     case 4:
+-      return "#";
++      return "mov{q}\t{%1, %0|%0, %1}";
+ 
+     case 5:
++      return "movabs{q}\t{%1, %0|%0, %1}";
++
++    case 6:
++      return "#";
++
++    case 7:
+       switch (get_attr_mode (insn))
+ 	{
+ 	case MODE_V4SF:
+@@ -2949,9 +2955,9 @@
+ 	default:
+ 	  gcc_unreachable ();
+ 	}
+-    case 6:
+-    case 7:
+     case 8:
++    case 9:
++    case 10:
+       switch (get_attr_mode (insn))
+ 	{
+ 	case MODE_V4SF:
+@@ -2986,17 +2992,27 @@
+ 	  gcc_unreachable ();
+ 	}
+ 
+-    case 9:
+-    case 10:
++    case 11:
++    case 12:
+     return "%vmovd\t{%1, %0|%0, %1}";
+ 
+     default:
+       gcc_unreachable();
+     }
+ }
+-  [(set_attr "type" "fmov,fmov,fmov,multi,multi,sselog1,ssemov,ssemov,ssemov,ssemov,ssemov")
++  [(set_attr "type" "fmov,fmov,fmov,imov,imov,imov,multi,sselog1,ssemov,ssemov,ssemov,ssemov,ssemov")
++   (set (attr "modrm")
++     (if_then_else
++       (and (eq_attr "alternative" "5") (eq_attr "type" "imov"))
++	 (const_string "0")
++	 (const_string "*")))
++   (set (attr "length_immediate")
++     (if_then_else
++       (and (eq_attr "alternative" "5") (eq_attr "type" "imov"))
++	 (const_string "8")
++	 (const_string "*")))
+    (set (attr "prefix")
+-     (if_then_else (eq_attr "alternative" "0,1,2,3,4")
++     (if_then_else (eq_attr "alternative" "0,1,2,3,4,5,6")
+        (const_string "orig")
+        (const_string "maybe_vex")))
+    (set (attr "prefix_data16")
+@@ -3006,18 +3022,18 @@
+    (set (attr "mode")
+         (cond [(eq_attr "alternative" "0,1,2")
+ 		 (const_string "DF")
+-	       (eq_attr "alternative" "3,4,9,10")
++	       (eq_attr "alternative" "3,4,5,6,11,12")
+ 		 (const_string "DI")
+ 
+ 	       /* For SSE1, we have many fewer alternatives.  */
+ 	       (eq (symbol_ref "TARGET_SSE2") (const_int 0))
+-		 (cond [(eq_attr "alternative" "5,6")
++		 (cond [(eq_attr "alternative" "7,8")
+ 			  (const_string "V4SF")
+ 		       ]
+ 		   (const_string "V2SF"))
+ 
+ 	       /* xorps is one byte shorter.  */
+-	       (eq_attr "alternative" "5")
++	       (eq_attr "alternative" "7")
+ 		 (cond [(ne (symbol_ref "optimize_function_for_size_p (cfun)")
+ 			    (const_int 0))
+ 			  (const_string "V4SF")
+@@ -3032,7 +3048,7 @@
+ 		  chains, otherwise use short move to avoid extra work.
+ 
+ 		  movaps encodes one byte shorter.  */
+-	       (eq_attr "alternative" "6")
++	       (eq_attr "alternative" "8")
+ 		 (cond
+ 		   [(ne (symbol_ref "optimize_function_for_size_p (cfun)")
+ 		        (const_int 0))
+@@ -3045,7 +3061,7 @@
+ 	       /* For architectures resolving dependencies on register
+ 		  parts we may avoid extra work to zero out upper part
+ 		  of register.  */
+-	       (eq_attr "alternative" "7")
++	       (eq_attr "alternative" "9")
+ 		 (if_then_else
+ 		   (ne (symbol_ref "TARGET_SSE_SPLIT_REGS")
+ 		       (const_int 0))
+@@ -3059,7 +3075,7 @@
+ 		"=f,m,f,r  ,o ,Y2*x,Y2*x,Y2*x,m   ")
+ 	(match_operand:DF 1 "general_operand"
+ 		"fm,f,G,roF,Fr,C   ,Y2*x,m   ,Y2*x"))]
+-  "!(MEM_P (operands[0]) && MEM_P (operands[1]))
++  "!TARGET_64BIT && !(MEM_P (operands[0]) && MEM_P (operands[1]))
+    && optimize_function_for_speed_p (cfun)
+    && TARGET_INTEGER_DFMODE_MOVES
+    && (reload_in_progress || reload_completed
+@@ -3199,9 +3215,9 @@
+ 			"=f,m,f,*r  ,o  ,Y2*x,Y2*x,Y2*x ,m  ")
+ 	(match_operand:DF 1 "general_operand"
+ 			"fm,f,G,*roF,*Fr,C   ,Y2*x,mY2*x,Y2*x"))]
+-  "!(MEM_P (operands[0]) && MEM_P (operands[1]))
+-   && ((optimize_function_for_size_p (cfun)
+-       || !TARGET_INTEGER_DFMODE_MOVES) && !TARGET_64BIT)
++  "!TARGET_64BIT && !(MEM_P (operands[0]) && MEM_P (operands[1]))
++   && (optimize_function_for_size_p (cfun)
++       || !TARGET_INTEGER_DFMODE_MOVES)
+    && (reload_in_progress || reload_completed
+        || (ix86_cmodel == CM_MEDIUM || ix86_cmodel == CM_LARGE)
+        || (!(TARGET_SSE2 && TARGET_SSE_MATH)
+new file mode 100644
+index 0000000..e20446e
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/pr48237.c
+@@ -0,0 +1,22 @@
++/* { dg-do compile } */
++/* { dg-options "-O -fcaller-saves -fschedule-insns2 -fselective-scheduling2 -mtune=core2" } */
++
++union double_union
++{
++  double d;
++  int i[2];
++};
++
++void bar (int, ...);
++
++void
++foo (double d)
++{
++  union double_union du = { d };
++  while (1)
++    {
++      du.i[1] -= 0x100000L;
++      bar (0, du.d);
++      du.d += d;
++    }
++}
+-- 
+1.7.0.4
+

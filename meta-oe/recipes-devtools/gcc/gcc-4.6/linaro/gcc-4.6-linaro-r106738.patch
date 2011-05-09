@@ -1,0 +1,177 @@
+2011-04-27  Ira Rosen  <ira.rosen@linaro.org>
+
+	Backport from FSF:
+
+	2011-04-03  Richard Guenther  <rguenther@suse.de>
+		    Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-if-conv.c (memrefs_read_or_written_unconditionally): Strip all
+	non-variable offsets and compare the remaining bases of the two
+	accesses instead of looking for exact same data-ref.
+
+	gcc/testsuite/
+	* gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c: New test.
+	* gcc.dg/vect/vect.exp: Run if-cvt-stores-vect* tests with
+	-ftree-loop-if-convert-stores.
+
+=== added file 'gcc/testsuite/gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c'
+--- old/gcc/testsuite/gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c	2011-04-24 07:45:49 +0000
+@@ -0,0 +1,69 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 50
++
++typedef struct {
++  short a;
++  short b;
++} data;
++
++data in1[N], in2[N], out[N];
++short result[N*2] = {10,-7,11,-6,12,-5,13,-4,14,-3,15,-2,16,-1,17,0,18,1,19,2,20,3,21,4,22,5,23,6,24,7,25,8,26,9,27,10,28,11,29,12,30,13,31,14,32,15,33,16,34,17,35,18,36,19,37,20,38,21,39,22,40,23,41,24,42,25,43,26,44,27,45,28,46,29,47,30,48,31,49,32,50,33,51,34,52,35,53,36,54,37,55,38,56,39,57,40,58,41,59,42};
++short out1[N], out2[N];
++
++__attribute__ ((noinline)) void
++foo ()
++{
++  int i;
++  short c, d;
++
++  for (i = 0; i < N; i++)
++    {
++      c = in1[i].b;
++      d = in2[i].b;
++
++      if (c >= d)
++        {
++          out[i].b = in1[i].a;
++          out[i].a = d + 5;
++        }
++      else
++        {
++          out[i].b = d - 12;
++          out[i].a = in2[i].a + d;
++        }
++    }
++}
++
++int
++main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in1[i].a = i;
++      in1[i].b = i + 2;
++      in2[i].a = 5;
++      in2[i].b = i + 5;
++      __asm__ volatile ("");
++    }
++
++  foo ();
++
++  for (i = 0; i < N; i++)
++    {
++      if (out[i].a != result[2*i] || out[i].b != result[2*i+1])
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail { vect_no_align || {! vect_strided } } } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect.exp'
+--- old/gcc/testsuite/gcc.dg/vect/vect.exp	2010-11-22 21:49:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect.exp	2011-04-24 07:45:49 +0000
+@@ -210,6 +210,12 @@
+ dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/ggc-*.\[cS\]]]  \
+         "" $DEFAULT_VECTCFLAGS
+ 
++# -ftree-loop-if-convert-stores
++set DEFAULT_VECTCFLAGS $SAVED_DEFAULT_VECTCFLAGS
++lappend DEFAULT_VECTCFLAGS "-ftree-loop-if-convert-stores"
++dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/if-cvt-stores-vect-*.\[cS\]]]  \
++        "" $DEFAULT_VECTCFLAGS
++
+ # With -O3.
+ # Don't allow IPA cloning, because it throws our counts out of whack.
+ set DEFAULT_VECTCFLAGS $SAVED_DEFAULT_VECTCFLAGS
+
+=== modified file 'gcc/tree-if-conv.c'
+--- old/gcc/tree-if-conv.c	2011-02-23 16:49:52 +0000
++++ new/gcc/tree-if-conv.c	2011-04-24 07:45:49 +0000
+@@ -464,8 +464,8 @@
+ /* Returns true when the memory references of STMT are read or written
+    unconditionally.  In other words, this function returns true when
+    for every data reference A in STMT there exist other accesses to
+-   the same data reference with predicates that add up (OR-up) to the
+-   true predicate: this ensures that the data reference A is touched
++   a data reference with the same base with predicates that add up (OR-up) to
++   the true predicate: this ensures that the data reference A is touched
+    (read or written) on every iteration of the if-converted loop.  */
+ 
+ static bool
+@@ -489,21 +489,38 @@
+ 	  continue;
+ 
+ 	for (j = 0; VEC_iterate (data_reference_p, drs, j, b); j++)
+-	  if (DR_STMT (b) != stmt
+-	      && same_data_refs (a, b))
+-	    {
+-	      tree cb = bb_predicate (gimple_bb (DR_STMT (b)));
+-
+-	      if (DR_RW_UNCONDITIONALLY (b) == 1
+-		  || is_true_predicate (cb)
+-		  || is_true_predicate (ca = fold_or_predicates (EXPR_LOCATION (cb),
+-								 ca, cb)))
+-		{
+-		  DR_RW_UNCONDITIONALLY (a) = 1;
+-		  DR_RW_UNCONDITIONALLY (b) = 1;
+-		  found = true;
+-		  break;
+-		}
++          {
++            tree ref_base_a = DR_REF (a);
++            tree ref_base_b = DR_REF (b);
++
++            if (DR_STMT (b) == stmt)
++              continue;
++
++            while (TREE_CODE (ref_base_a) == COMPONENT_REF
++                   || TREE_CODE (ref_base_a) == IMAGPART_EXPR
++                   || TREE_CODE (ref_base_a) == REALPART_EXPR)
++              ref_base_a = TREE_OPERAND (ref_base_a, 0);
++
++            while (TREE_CODE (ref_base_b) == COMPONENT_REF
++                   || TREE_CODE (ref_base_b) == IMAGPART_EXPR
++                   || TREE_CODE (ref_base_b) == REALPART_EXPR)
++              ref_base_b = TREE_OPERAND (ref_base_b, 0);
++
++  	    if (!operand_equal_p (ref_base_a, ref_base_b, 0))
++	      {
++	        tree cb = bb_predicate (gimple_bb (DR_STMT (b)));
++
++	        if (DR_RW_UNCONDITIONALLY (b) == 1
++		    || is_true_predicate (cb)
++		    || is_true_predicate (ca
++                        = fold_or_predicates (EXPR_LOCATION (cb), ca, cb)))
++		  {
++		    DR_RW_UNCONDITIONALLY (a) = 1;
++  		    DR_RW_UNCONDITIONALLY (b) = 1;
++		    found = true;
++		    break;
++		  }
++               }
+ 	    }
+ 
+ 	if (!found)
+

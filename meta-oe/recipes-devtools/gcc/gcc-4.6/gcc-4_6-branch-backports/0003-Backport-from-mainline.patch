@@ -1,0 +1,164 @@
+From 540b311d6b6aa2e50a9feb45255361e498bb5198 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 26 Mar 2011 09:20:34 +0000
+Subject: [PATCH 003/200] 	Backport from mainline
+ 	2011-03-17  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/48141
+	* params.def (PARAM_MAX_DSE_ACTIVE_LOCAL_STORES): New.
+	* dse.c: Include params.h.
+	(active_local_stores_len): New variable.
+	(add_wild_read, dse_step1): Clear it when setting active_local_stores
+	to NULL.
+	(record_store, check_mem_read_rtx): Decrease it when removing
+	from the chain.
+	(scan_insn): Likewise.  Increase it when adding to chain, if it
+	reaches PARAM_MAX_DSE_ACTIVE_LOCAL_STORES limit, set to 1 and
+	set active_local_stores to NULL before the addition.
+	* Makefile.in (dse.o): Depend on $(PARAMS_H).
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171546 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 9a8262a..792ca6c 100644
+--- a/gcc/Makefile.in
++++ b/gcc/Makefile.in
+@@ -3070,7 +3070,7 @@ dse.o : dse.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(RTL_H) \
+    $(TREE_H) $(TM_P_H) $(REGS_H) hard-reg-set.h $(FLAGS_H) insn-config.h \
+    $(RECOG_H) $(EXPR_H) $(DF_H) cselib.h $(DBGCNT_H) $(TIMEVAR_H) \
+    $(TREE_PASS_H) alloc-pool.h $(ALIAS_H) dse.h $(OPTABS_H) $(TARGET_H) \
+-   $(BITMAP_H)
++   $(BITMAP_H) $(PARAMS_H)
+ fwprop.o : fwprop.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(RTL_H) \
+    $(DIAGNOSTIC_CORE_H) insn-config.h $(RECOG_H) $(FLAGS_H) $(OBSTACK_H) $(BASIC_BLOCK_H) \
+    output.h $(DF_H) alloc-pool.h $(TIMEVAR_H) $(TREE_PASS_H) $(TARGET_H) \
+diff --git a/gcc/dse.c b/gcc/dse.c
+index e43ab72..a15b735 100644
+--- a/gcc/dse.c
++++ b/gcc/dse.c
+@@ -47,6 +47,7 @@ along with GCC; see the file COPYING3.  If not see
+ #include "optabs.h"
+ #include "dbgcnt.h"
+ #include "target.h"
++#include "params.h"
+ 
+ /* This file contains three techniques for performing Dead Store
+    Elimination (dse).
+@@ -387,6 +388,7 @@ static alloc_pool insn_info_pool;
+ /* The linked list of stores that are under consideration in this
+    basic block.  */
+ static insn_info_t active_local_stores;
++static int active_local_stores_len;
+ 
+ struct bb_info
+ {
+@@ -947,6 +949,7 @@ add_wild_read (bb_info_t bb_info)
+     }
+   insn_info->wild_read = true;
+   active_local_stores = NULL;
++  active_local_stores_len = 0;
+ }
+ 
+ 
+@@ -1537,6 +1540,7 @@ record_store (rtx body, bb_info_t bb_info)
+ 	{
+ 	  insn_info_t insn_to_delete = ptr;
+ 
++	  active_local_stores_len--;
+ 	  if (last)
+ 	    last->next_local_store = ptr->next_local_store;
+ 	  else
+@@ -2074,6 +2078,7 @@ check_mem_read_rtx (rtx *loc, void *data)
+ 	      if (dump_file)
+ 		dump_insn_info ("removing from active", i_ptr);
+ 
++	      active_local_stores_len--;
+ 	      if (last)
+ 		last->next_local_store = i_ptr->next_local_store;
+ 	      else
+@@ -2163,6 +2168,7 @@ check_mem_read_rtx (rtx *loc, void *data)
+ 	      if (dump_file)
+ 		dump_insn_info ("removing from active", i_ptr);
+ 
++	      active_local_stores_len--;
+ 	      if (last)
+ 		last->next_local_store = i_ptr->next_local_store;
+ 	      else
+@@ -2222,6 +2228,7 @@ check_mem_read_rtx (rtx *loc, void *data)
+ 	      if (dump_file)
+ 		dump_insn_info ("removing from active", i_ptr);
+ 
++	      active_local_stores_len--;
+ 	      if (last)
+ 		last->next_local_store = i_ptr->next_local_store;
+ 	      else
+@@ -2426,6 +2433,7 @@ scan_insn (bb_info_t bb_info, rtx insn)
+ 		  if (dump_file)
+ 		    dump_insn_info ("removing from active", i_ptr);
+ 
++		  active_local_stores_len--;
+ 		  if (last)
+ 		    last->next_local_store = i_ptr->next_local_store;
+ 		  else
+@@ -2453,6 +2461,12 @@ scan_insn (bb_info_t bb_info, rtx insn)
+ 		    fprintf (dump_file, "handling memset as BLKmode store\n");
+ 		  if (mems_found == 1)
+ 		    {
++		      if (active_local_stores_len++
++			  >= PARAM_VALUE (PARAM_MAX_DSE_ACTIVE_LOCAL_STORES))
++			{
++			  active_local_stores_len = 1;
++			  active_local_stores = NULL;
++			}
+ 		      insn_info->next_local_store = active_local_stores;
+ 		      active_local_stores = insn_info;
+ 		    }
+@@ -2496,6 +2510,12 @@ scan_insn (bb_info_t bb_info, rtx insn)
+      it as cannot delete.  This simplifies the processing later.  */
+   if (mems_found == 1)
+     {
++      if (active_local_stores_len++
++	  >= PARAM_VALUE (PARAM_MAX_DSE_ACTIVE_LOCAL_STORES))
++	{
++	  active_local_stores_len = 1;
++	  active_local_stores = NULL;
++	}
+       insn_info->next_local_store = active_local_stores;
+       active_local_stores = insn_info;
+     }
+@@ -2534,6 +2554,7 @@ remove_useless_values (cselib_val *base)
+ 
+       if (del)
+ 	{
++	  active_local_stores_len--;
+ 	  if (last)
+ 	    last->next_local_store = insn_info->next_local_store;
+ 	  else
+@@ -2584,6 +2605,7 @@ dse_step1 (void)
+ 	    = create_alloc_pool ("cse_store_info_pool",
+ 				 sizeof (struct store_info), 100);
+ 	  active_local_stores = NULL;
++	  active_local_stores_len = 0;
+ 	  cselib_clear_table ();
+ 
+ 	  /* Scan the insns.  */
+diff --git a/gcc/params.def b/gcc/params.def
+index 5749eb2..e5a82e9 100644
+--- a/gcc/params.def
++++ b/gcc/params.def
+@@ -698,6 +698,12 @@ DEFPARAM(PARAM_MAX_SCHED_READY_INSNS,
+ 	 "The maximum number of instructions ready to be issued to be considered by the scheduler during the first scheduling pass",
+ 	 100, 0, 0)
+ 
++/* This is the maximum number of active local stores RTL DSE will consider.  */
++DEFPARAM (PARAM_MAX_DSE_ACTIVE_LOCAL_STORES,
++	  "max-dse-active-local-stores",
++	  "Maximum number of active local stores in RTL dead store elimination",
++	  5000, 0, 0)
++
+ /* Prefetching and cache-optimizations related parameters.  Default values are
+    usually set by machine description.  */
+ 
+-- 
+1.7.0.4
+

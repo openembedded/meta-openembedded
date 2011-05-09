@@ -1,0 +1,75 @@
+From b711bf8d9e6f7b717bb87fa7a3514692efdecfaf Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 13 Apr 2011 20:51:23 +0000
+Subject: [PATCH 117/200] 	PR c++/48594
+ 	* decl2.c (build_offset_ref_call_from_tree): Fix calling a functor
+ 	or pointer to (non-member) function.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172395 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index f62f913..1217e42 100644
+--- a/gcc/cp/decl2.c
++++ b/gcc/cp/decl2.c
+@@ -4079,10 +4079,13 @@ build_offset_ref_call_from_tree (tree fn, VEC(tree,gc) **args)
+ 	 parameter.  That must be done before the FN is transformed
+ 	 because we depend on the form of FN.  */
+       make_args_non_dependent (*args);
+-      object = build_non_dependent_expr (object);
+-      if (TREE_CODE (fn) == DOTSTAR_EXPR)
+-	object = cp_build_addr_expr (object, tf_warning_or_error);
+-      VEC_safe_insert (tree, gc, *args, 0, object);
++      if (TREE_CODE (TREE_TYPE (fn)) == METHOD_TYPE)
++	{
++	  object = build_non_dependent_expr (object);
++	  if (TREE_CODE (fn) == DOTSTAR_EXPR)
++	    object = cp_build_addr_expr (object, tf_warning_or_error);
++	  VEC_safe_insert (tree, gc, *args, 0, object);
++	}
+       /* Now that the arguments are done, transform FN.  */
+       fn = build_non_dependent_expr (fn);
+     }
+@@ -4101,7 +4104,10 @@ build_offset_ref_call_from_tree (tree fn, VEC(tree,gc) **args)
+       VEC_safe_insert (tree, gc, *args, 0, object_addr);
+     }
+ 
+-  expr = cp_build_function_call_vec (fn, args, tf_warning_or_error);
++  if (CLASS_TYPE_P (TREE_TYPE (fn)))
++    expr = build_op_call (fn, args, tf_warning_or_error);
++  else
++    expr = cp_build_function_call_vec (fn, args, tf_warning_or_error);
+   if (processing_template_decl && expr != error_mark_node)
+     expr = build_min_non_dep_call_vec (expr, orig_fn, orig_args);
+ 
+new file mode 100644
+index 0000000..8d6b77a
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/template/operator11.C
+@@ -0,0 +1,25 @@
++// PR c++/48594
++// Test for uses of (X->*Y)() that don't actually involve a
++// pointer to member function.
++
++struct A { } a;
++struct B { } b;
++struct C * cp;
++
++struct Func { void operator()(); };
++Func operator->* (A, int);
++
++typedef void (*pfn)();
++pfn operator->* (B, int);
++
++pfn C::*cpfn;
++Func C::*cfunc;
++
++template <class T>
++void f()
++{
++  (a->*1)();
++  (b->*1)();
++  (cp->*cpfn)();
++  (cp->*cfunc)();
++}
+-- 
+1.7.0.4
+

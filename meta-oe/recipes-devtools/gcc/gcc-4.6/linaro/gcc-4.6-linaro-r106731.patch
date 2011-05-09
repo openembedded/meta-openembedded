@@ -1,0 +1,28 @@
+2011-03-23  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from FSF:
+
+	2011-03-23  Julian Brown  <julian@codesourcery.com>
+
+	gcc/
+	* expr.c (expand_expr_real_1): Only use BLKmode for volatile
+	accesses which are not naturally aligned.
+
+=== modified file 'gcc/expr.c'
+--- old/gcc/expr.c	2011-03-18 09:04:31 +0000
++++ new/gcc/expr.c	2011-04-05 16:18:11 +0000
+@@ -9147,8 +9147,11 @@
+ 		&& modifier != EXPAND_CONST_ADDRESS
+ 		&& modifier != EXPAND_INITIALIZER)
+ 	    /* If the field is volatile, we always want an aligned
+-	       access.  */
+-	    || (volatilep && flag_strict_volatile_bitfields > 0)
++	       access.  Only do this if the access is not already naturally
++	       aligned, otherwise "normal" (non-bitfield) volatile fields
++	       become non-addressable.  */
++	    || (volatilep && flag_strict_volatile_bitfields > 0
++		&& (bitpos % GET_MODE_ALIGNMENT (mode) != 0))
+ 	    /* If the field isn't aligned enough to fetch as a memref,
+ 	       fetch it as a bit field.  */
+ 	    || (mode1 != BLKmode
+

@@ -1,0 +1,24 @@
+From fcc3e3a4ba3138d25c93ba5f996cac1660788bb9 Mon Sep 17 00:00:00 2001
+From: mrs <mrs@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 8 Apr 2011 23:56:45 +0000
+Subject: [PATCH 092/200] 	PR testsuite/48506
+ 	* gcc.dg/tree-ssa/ssa-ccp-17.c: Robustify against ports that
+ 	default to fno-common.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172219 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 7d769ae..aece3c7 100644
+--- a/gcc/testsuite/gcc.dg/tree-ssa/ssa-ccp-17.c
++++ b/gcc/testsuite/gcc.dg/tree-ssa/ssa-ccp-17.c
+@@ -18,7 +18,7 @@ int bar(void)
+   return ((struct Foo *)p)->i;
+ }
+ 
+-const struct Foo g;
++extern const struct Foo g;
+ 
+ int foobar(void)
+ {
+-- 
+1.7.0.4
+

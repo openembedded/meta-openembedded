@@ -1,0 +1,106 @@
+From 2173abe5d6f3f3157317caa470226e13827c3df9 Mon Sep 17 00:00:00 2001
+From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 10 Apr 2011 16:34:34 +0000
+Subject: [PATCH 099/200] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
+
+	* testsuite/20_util/function/48451.cc: Rename to...
+	* testsuite/20_util/function/48541.cc: This.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172243 138bc75d-0d04-0410-961f-82ee72b054a4
+
+deleted file mode 100644
+index f812367..0000000
+--- a/libstdc++-v3/testsuite/20_util/function/48451.cc
++++ /dev/null
+@@ -1,40 +0,0 @@
+-// { dg-options "-std=gnu++0x" }
+-// { dg-do compile }
+-// Copyright (C) 2011 Free Software Foundation, Inc.
+-//
+-// This file is part of the GNU ISO C++ Library.  This library is free
+-// software; you can redistribute it and/or modify it under the
+-// terms of the GNU General Public License as published by the
+-// Free Software Foundation; either version 3, or (at your option)
+-// any later version.
+-//
+-// This library is distributed in the hope that it will be useful,
+-// but WITHOUT ANY WARRANTY; without even the implied warranty of
+-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-// GNU General Public License for more details.
+-//
+-// You should have received a copy of the GNU General Public License along
+-// with this library; see the file COPYING3.  If not see
+-// <http://www.gnu.org/licenses/>.
+-
+-// libstdc++/48451
+-
+-#include <functional>
+-
+-struct X {
+-  void operator () () const { }
+-  float operator & () const { return 1.2345; }
+-};
+-
+-void test01()
+-{
+-  X x;
+-  std::function<void()> f(x);
+-  f();
+-}
+-
+-int main()
+-{
+-  test01();
+-  return 0;
+-}
+diff --git a/libstdc++-v3/testsuite/20_util/function/48541.cc b/libstdc++-v3/testsuite/20_util/function/48541.cc
+new file mode 100644
+index 0000000..f812367
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/function/48541.cc
+@@ -0,0 +1,40 @@
++// { dg-options "-std=gnu++0x" }
++// { dg-do compile }
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++//
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++// libstdc++/48451
++
++#include <functional>
++
++struct X {
++  void operator () () const { }
++  float operator & () const { return 1.2345; }
++};
++
++void test01()
++{
++  X x;
++  std::function<void()> f(x);
++  f();
++}
++
++int main()
++{
++  test01();
++  return 0;
++}
+-- 
+1.7.0.4
+

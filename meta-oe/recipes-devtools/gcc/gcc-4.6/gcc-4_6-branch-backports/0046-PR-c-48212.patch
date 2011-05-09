@@ -1,0 +1,39 @@
+From f23bf88450af23287387d878036f78042093d61b Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 30 Mar 2011 20:29:43 +0000
+Subject: [PATCH 046/200] 	PR c++/48212
+ 	* semantics.c (non_const_var_error): Just return if DECL_INITIAL
+ 	is error_mark_node.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171749 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 48dd4ee..c88b4bb 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -6759,6 +6759,9 @@ non_const_var_error (tree r)
+   tree type = TREE_TYPE (r);
+   error ("the value of %qD is not usable in a constant "
+ 	 "expression", r);
++  /* Avoid error cascade.  */
++  if (DECL_INITIAL (r) == error_mark_node)
++    return;
+   if (DECL_DECLARED_CONSTEXPR_P (r))
+     inform (DECL_SOURCE_LOCATION (r),
+ 	    "%qD used in its own initializer", r);
+new file mode 100644
+index 0000000..2094d3e
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/regress/error-recovery1.C
+@@ -0,0 +1,9 @@
++// PR c++/48212
++// { dg-options -std=c++0x }
++
++template < bool > void
++foo ()
++{
++  const bool b =;		// { dg-error "" }
++  foo < b > ();			// { dg-error "constant expression" }
++};
+-- 
+1.7.0.4
+

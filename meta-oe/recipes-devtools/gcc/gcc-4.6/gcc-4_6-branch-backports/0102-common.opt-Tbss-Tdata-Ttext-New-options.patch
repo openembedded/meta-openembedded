@@ -1,0 +1,35 @@
+From ec818a73c8e43d77fefc29593ef84e69b0cac39e Mon Sep 17 00:00:00 2001
+From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 11 Apr 2011 15:26:47 +0000
+Subject: [PATCH 102/200] 	* common.opt (Tbss=, Tdata=, Ttext=): New options.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172260 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c2f2d6c..6056551 100644
+--- a/gcc/common.opt
++++ b/gcc/common.opt
+@@ -456,12 +456,21 @@ Driver Joined Separate
+ Tbss
+ Driver Separate
+ 
++Tbss=
++Driver Joined
++
+ Tdata
+ Driver Separate
+ 
++Tdata=
++Driver Joined
++
+ Ttext
+ Driver Separate
+ 
++Ttext=
++Driver Joined
++
+ W
+ Common RejectNegative Warning Alias(Wextra)
+ This switch is deprecated; use -Wextra instead
+-- 
+1.7.0.4
+

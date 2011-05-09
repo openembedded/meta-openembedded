@@ -1,0 +1,5800 @@
+From 2f00fb35a87bcbae197b96a7259b1d94f3b4dc1f Mon Sep 17 00:00:00 2001
+From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 3 Apr 2011 11:34:03 +0000
+Subject: [PATCH 061/200] 	* be.po, ca.po, da.po, de.po, el.po, es.po, fi.po, fr.po, id.po,
+ 	ja.po, nl.po, ru.po, sv.po, tr.po, uk,po, vi.po, zh_CN.po,
+ 	zh_TW.po: Update.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171910 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 8e8b759..9d0fd9f 100644
+--- a/libcpp/po/be.po
++++ b/libcpp/po/be.po
+@@ -6,10 +6,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: gcc 3.1\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2002-05-17 15:54+0200\n"
+ "Last-Translator: Ales Nyakhaychyk <nyakhaychyk@i18n.linux.by>\n"
+ "Language-Team: Belarusian <i18n@tut.by>\n"
++"Language: be\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=utf-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -154,246 +155,246 @@ msgstr ""
+ msgid "extra tokens at end of #%s directive"
+ msgstr ""
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr ""
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr ""
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr ""
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr ""
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr ""
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr ""
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr ""
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr ""
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr ""
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr ""
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr ""
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr ""
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr ""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr ""
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr ""
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr ""
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr ""
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr ""
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr ""
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr ""
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr ""
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr ""
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr ""
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr ""
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr ""
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, fuzzy, c-format
+ msgid "invalid #%s directive"
+ msgstr "нерэчаісны ініцыялізатар"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr ""
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr ""
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr ""
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, fuzzy, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "Клас \"%s\" ужо існуе"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr ""
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr ""
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr ""
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "нерэчаісны ініцыялізатар"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "нерэчаісны ініцыялізатар"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr ""
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr ""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr ""
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, fuzzy, c-format
+ msgid "cannot find source file %s"
+ msgstr "не магу знайсці крыніцу %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr ""
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr ""
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr ""
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr ""
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr ""
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr ""
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr ""
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr ""
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr ""
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr ""
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr ""
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr ""
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr ""
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr ""
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr ""
+@@ -403,9 +404,8 @@ msgid "unterminated comment"
+ msgstr "незавершаныя каментарыі"
+ 
+ #: errors.c:235
+-#, fuzzy
+ msgid "stdout"
+-msgstr "структура"
++msgstr ""
+ 
+ #: errors.c:237
+ #, c-format
+@@ -1118,6 +1118,9 @@ msgstr ""
+ #~ msgid "structure"
+ #~ msgstr "структура"
+ 
++#~ msgid "struct"
++#~ msgstr "структура"
++
+ #~ msgid "members"
+ #~ msgstr "члены"
+ 
+diff --git a/libcpp/po/ca.po b/libcpp/po/ca.po
+index 1fcc5d4..afaf2f4 100644
+--- a/libcpp/po/ca.po
++++ b/libcpp/po/ca.po
+@@ -11,10 +11,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib-4.0.1\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2005-11-25 22:56+0100\n"
+ "Last-Translator: Mateu Gilles <gilles@mateu.org>\n"
+ "Language-Team: Catalan <ca@dodds.net>\n"
++"Language: ca\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=ISO-8859-1\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -158,246 +159,246 @@ msgstr "fallada convertint %s a %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "elements superflus al final de la directiva #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s �s una extenci� del GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s �s una extenci� del GCC"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "es suggereix no usar #elif en C tradicional"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "C tradicional ignora #%s amb el # indentat"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "es suggereix ocultar #%s del C tradicional amb el # indentat"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "l'incrustaci� d'una directiva entre arguments de macro no �s portable"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "la directiva d'estil de l�nia �s una extenci� del GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "directiva de preprocessament #%s inv�lida"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" no es pot usar com un nom de macro"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "no es pot usar \"%s\" com un nom de macro perqu� �s un operador en C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "no es va donar un nom de macro en la directiva #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "els noms de macro han de ser identificadors"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "esborrant la definici� de \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "falta el car�cter de terminaci� >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s espera \"NOM_DE_FITXER\" o <NOM_DE_FITXER>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "nom de fitxer buit en #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include niat amb massa profunditat"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next en el fitxer font primari"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "indicador \"%s\" inv�lid en la directiva de l�nia"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr ""
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" despr�s de #line no �s un enter positiu"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "nombre de l�nia fora de rang"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" no �s un nom de fitxer v�lid"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" despr�s de # no �s un enter positiu"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr ""
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, fuzzy, c-format
+ msgid "invalid #%s directive"
+ msgstr "directiva #ident inv�lida"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr ""
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, fuzzy, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "desant \"%s\" com a pragma i espai de noms de pragma"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "desant \"%s\" com a pragma i espai de noms de pragma"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "ja s'ha desat #pragma %s %s"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "ja s'ha desat #pragma %s"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr ""
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma una vegada en el fitxer principal"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "directiva #pragma de GCC enverinada inv�lida"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "directiva #pragma de GCC enverinada inv�lida"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "directiva #pragma de GCC enverinada inv�lida"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "enverinant la macro existent \"%s\""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header ignorat fora del fitxer d'inclusi�"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "no es pot trobar la font %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "el fitxer actual �s m�s vell que %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma pren una cadena literal entre par�ntesis"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else sense #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else despr�s de #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "el condicional va comen�ar aqu�"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif sense #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif despr�s de #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif sense #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "falta \"(\" abans del predicat"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "falta \")\" per a completar la resposta"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "el predicat de la resposta est� buit"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "afirmaci� sense predicat"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "el predicat ha de ser un identificador"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" reafirmat"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "#%s sense acabar"
+diff --git a/libcpp/po/da.po b/libcpp/po/da.po
+index d8d868d..fb4087e 100644
+--- a/libcpp/po/da.po
++++ b/libcpp/po/da.po
+@@ -128,10 +128,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: gcc 3.3\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2003-05-25 18:00+0200\n"
+ "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
+ "Language-Team: Danish <dansk@klid.dk>\n"
++"Language: da\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=ISO-8859-1\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -280,247 +281,247 @@ msgstr "kunne ikke konvertere '%E' til '%T'"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "ekstra symboler i slutningen af #%s-direktiv"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s er en GCC-udvidelse"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s er en GCC-udvidelse"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "foresl�r undladelse af brug af #elif i traditionel C"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "traditionel C ignorerer #%s n�r '#' er indrykket"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "foresl�r at skjule #%s fra traditionel C vha. indrykket '#'"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "indlejring af et direktiv inden i makroparametre er ikke portabelt"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "linjestilsdirektiv er en GCC-udvidelse"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "ugyldigt pr�processordirektiv #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" kan ikke bruges som makronavn"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" kan ikke bruges som et makronavn da det er en operator i C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "intet makronavn angivet i direktivet #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "makronavne skal v�re kaldenavne"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "glemmer definitionen af \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "manglende afsluttende '>'-tegn"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s forventer \"FILNAVN\" eller <FILNAVN>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, fuzzy, c-format
+ msgid "empty filename in #%s"
+ msgstr "tomt filnavn i #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include indlejret for dybt"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next i den prim�re kildekodefil"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "ugyldigt flag \"%s\" i linjedirektiv"
+ 
+-#: directives.c:907
++#: directives.c:908
+ #, fuzzy
+ msgid "unexpected end of file after #line"
+ msgstr "Just�r den forventede hukommelsesventetid"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" efter #line er ikke et positivt heltal"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "linjenummer er uden for det gyldige interval"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" er ikke et ugyldigt filnavn"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" efter # er ikke et positivt heltal"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, fuzzy, c-format
+ msgid "invalid #%s directive"
+ msgstr "ugyldigt #ident-direktiv"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr ""
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, fuzzy, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "registrerer \"%s\" som b�de et pragma og som et pragmanavnerum"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "registrerer \"%s\" som b�de et pragma og som et pragmanavnerum"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s er allerede registreret"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s er allerede registreret"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr ""
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "'#pragma once' i hovedfil"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "ugyldigt #pragma GCC poison-direktiv"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "ugyldigt #pragma GCC poison-direktiv"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "ugyldigt #pragma GCC poison-direktiv"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "forgifter eksisterende makro \"%s\""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "'#pragma system_header' ignoreret uden for inkluderingsfil"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, fuzzy, c-format
+ msgid "cannot find source file %s"
+ msgstr "kan ikke finde kilden %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "aktuel fil er �ldre end %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma tager en strengkonstant med paranteser omkring"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else uden #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else efter #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "betingelsen begyndte her"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif uden #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif efter #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif uden #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "manglende '(' efter udsagn"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "manglende ')' til at fuldf�re svar"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "udsagnets svar et tomt"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "postulat uden udsagn"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "udsagn skal v�re et kaldenavn"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" genpostuleret"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "uafsluttet #%s"
+diff --git a/libcpp/po/de.po b/libcpp/po/de.po
+index 435f4b7..33be646 100644
+--- a/libcpp/po/de.po
++++ b/libcpp/po/de.po
+@@ -8,10 +8,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.6-b20101113\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-12-12 11:11+0100\n"
+ "Last-Translator: Roland Stigge <stigge@antcom.de>\n"
+ "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
++"Language: de\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -155,244 +156,244 @@ msgstr "Fehler beim Konvertieren von %s nach %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "mehrere Token am Ende der Direktive #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s ist eine Erweiterung des GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s ist eine veraltete Erweiterung des GCC"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "es wird empfohlen, in traditionellem C nicht #elif zu verwenden"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "traditionelles C ignoriert #%s mit eingerücktem #"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "es wird empfohlen, #%s vor traditionellem C mit # zu verbergen"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "das Einbetten einer Direktive innerhalb von Makroargumenten ist nicht portierbar"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "der Stil der line-Direktive ist eine Erweiterung des GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "ungültige Präprozessordirektive #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "»defined« kann nicht als Makroname verwendet werden"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "»%s« kann nicht als Makroname verwendet werden, da es ein Operator in C++ ist"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "kein Makroname in Direktive #%s angegeben"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "Makronamen müssen Bezeichner sein"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "»%s« wird un-definiert"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "fehlendes abschließendes »>«-Zeichen"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s erwartet \"DATEINAME\" oder <DATEINAME>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "leerer Dateiname in #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include ist zu tief geschachtelt"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next in erster Quelldatei"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "ungültiges Kennzeichen »%s« in line-Direktive"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "unerwartetes Dateiende nach #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "»%s« hinter #line ist keine positive Ganzzahl"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "Zeilennummer ist außerhalb des Wertebereiches"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "»%s« ist kein gültiger Dateiname"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "»%s« hinter # ist keine positive Ganzzahl"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "ungültige #%s-Direktive"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "Pragmas im Namespace »%s« werden ohne passende Namensauflösung registriert"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "Pragma »%s« wird mit Namensauflösung und ohne Namespace registriert"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "»%s« wird sowohl als Pragma als auch als Pragma-Namespace registriert"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s ist bereits registriert"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s ist bereits registriert"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "Pragma mit NULL-Handler wird registriert"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once in Hauptdatei"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "ungültige #pragma push_macro Direktive"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "ungültige #pragma pop_macro Direktive"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "ungültige #pragma GCC Poison Direktive"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "schlechtes existierendes Makro »%s«"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header außerhalb include-Datei ignoriert"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "Quelldatei %s kann nicht gefunden werden"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "aktuelle Datei ist älter als %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma nimmt ein geklammertes Zeichenkettenliteral"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else ohne #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else hinter #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "die Bedingung begann hier"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif ohne #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif hinter #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif ohne #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "fehlendes '(' hinter Prädikat"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "fehlendes ')', um Antwort abzuschließen"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "Prädikatantwort ist leer"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "Behauptung ohne Prädikat"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "Prädikat muss ein Bezeichner sein"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "»%s« wieder behauptet"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "unbeendetes #%s"
+diff --git a/libcpp/po/el.po b/libcpp/po/el.po
+index 7c63ebe..51260e5 100644
+--- a/libcpp/po/el.po
++++ b/libcpp/po/el.po
+@@ -6,10 +6,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: gcc 3.2\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2002-08-18 15:46+0100\n"
+ "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
+ "Language-Team: Greek <nls@tux.hellug.gr>\n"
++"Language: el\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=iso-8859-7\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -162,251 +163,251 @@ msgstr "
+ msgid "extra tokens at end of #%s directive"
+ msgstr ""
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr ""
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "�� `%s' ��� ����� �������� ������"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr ""
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr ""
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr ""
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr ""
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr ""
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr ""
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr ""
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr ""
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr ""
+ 
+-#: directives.c:561
++#: directives.c:562
+ #, fuzzy
+ msgid "macro names must be identifiers"
+ msgstr "������ ������������� ���������"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, fuzzy, c-format
+ msgid "undefining \"%s\""
+ msgstr "�� �������� ����� %s"
+ 
+-#: directives.c:665
++#: directives.c:666
+ #, fuzzy
+ msgid "missing terminating > character"
+ msgstr "���� ���������� �� ������ ����������"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr ""
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, fuzzy, c-format
+ msgid "empty filename in #%s"
+ msgstr "�� �������� ����� %s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr ""
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr ""
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr ""
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr ""
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, fuzzy, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "%s' ��� ����� ������ ������� ��������."
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ #, fuzzy
+ msgid "line number out of range"
+ msgstr "%s: ������� ������� ��� ��� �� ����"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, fuzzy, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "%s' ��� ����� ������ ������� ��������."
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, fuzzy, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "%s' ��� ����� ������ ������� ��������."
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, fuzzy, c-format
+ msgid "invalid #%s directive"
+ msgstr "%%%c: �������������� ������ �� ������."
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr ""
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr ""
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr ""
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr ""
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, fuzzy, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "� ������ ���������� `%s' �������� ���"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr ""
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr ""
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "%%%c: �������������� ������ �� ������."
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "%%%c: �������������� ������ �� ������."
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr ""
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr ""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr ""
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, fuzzy, c-format
+ msgid "cannot find source file %s"
+ msgstr "�������� ���������� ��������: %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr ""
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr ""
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr ""
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else ���� ��� #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr ""
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr ""
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif ���� ��� #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr ""
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr ""
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr ""
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr ""
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ #, fuzzy
+ msgid "assertion without predicate"
+ msgstr "� ���������� ��� �����������"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ #, fuzzy
+ msgid "predicate must be an identifier"
+ msgstr "������ ������������� ���������"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr ""
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, fuzzy, c-format
+ msgid "unterminated #%s"
+ msgstr "�� ������������o �������������"
+@@ -417,9 +418,8 @@ msgid "unterminated comment"
+ msgstr "�� ������������ ������ `s'"
+ 
+ #: errors.c:235
+-#, fuzzy
+ msgid "stdout"
+-msgstr "����"
++msgstr ""
+ 
+ # src/request.c:37
+ #: errors.c:237
+@@ -1201,6 +1201,9 @@ msgstr "
+ #~ msgid "%s has no %s"
+ #~ msgstr "%s �� %s"
+ 
++#~ msgid "struct"
++#~ msgstr "����"
++
+ #~ msgid "named members"
+ #~ msgstr "������� ����"
+ 
+diff --git a/libcpp/po/es.po b/libcpp/po/es.po
+index 7333d1c..38eb01c 100644
+--- a/libcpp/po/es.po
++++ b/libcpp/po/es.po
+@@ -7,10 +7,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.6-b20101113\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-11-18 17:40-0600\n"
+ "Last-Translator: Cristian Oth�n Mart�nez Vera <cfuga@itam.mx>\n"
+ "Language-Team: Spanish <es@li.org>\n"
++"Language: es\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=ISO-8859-1\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -154,244 +155,244 @@ msgstr "no se puede convertir %s a %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "elementos extra al final de la directiva #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s es una extensi�n de GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s es una extensi�n de GCC obsoleta"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "se sugiere no usar #elif en C tradicional"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "C tradicional ignora #%s con el # indentado"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "se sugiere ocultar #%s de C tradicional con un # indentado"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "imbuir una directiva dentro de los argumentos de una macro no es transportable"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "la directiva de estilo de l�nea es una extensi�n de GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "directiva de preprocesamiento #%s inv�lida"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" no se puede usar como un nombre de macro"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "no se puede usar \"%s\" como un nombre de macro porque es un operador en C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "no se dio un nombre de macro en la directiva #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "los nombres de macro deben ser identificadores"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "borrando la definici�n de \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "falta el car�cter de terminaci�n >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s espera \"NOMBRE_ARCHIVO\" � <NOMBRE_ARCHIVO>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "nombre de fichero vac�o en #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include anidado con demasiada profundidad"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next en fichero primario de c�digo fuente"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "indicador \"%s\" inv�lido en la l�nea de la directiva"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "fin de fichero inesperado despu�s de #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" despu�s de #line no es un entero positivo"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "n�mero de l�nea fuera de rango"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" no es un nombre de fichero v�lido"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" despu�s de # no es un entero positivo"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "directiva #%s inv�lida"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "se registran pragmas en el espacio de nombres \"%s\" con una expansi�n de nombre que no coincide"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "se registra el pragma \"%s\" con expansi�n de nombre y sin un espacio de nombres"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "se registra \"%s\" como un pragma y como un espacio de nombres de pragma"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s ya est� registrado"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s ya est� registrado"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "se registra un pragma con manejador NULL"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma una vez en el fichero principal"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "directiva #pragma push_macro inv�lida"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "directiva #pragma pop_macro inv�lida"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "directiva #pragma de GCC envenenada inv�lida"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "se envenena la macro existente \"%s\""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header ignorado fuera del fichero a incluir"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "no se puede encontrar el fichero fuente %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "el fichero actual es m�s antiguo que %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma lleva una cadena literal entre par�ntesis"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else sin #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else despu�s de #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "el condicional empez� aqu�"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif sin #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif despu�s de #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif sin #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "falta '(' antes del predicado"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "falta ')' para completar la respuesta"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "la respuesta del predicado est� vac�a"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "afirmaci�n sin predicado"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "el predicado debe ser un identificador"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" reafirmado"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "#%s sin terminar"
+diff --git a/libcpp/po/fi.po b/libcpp/po/fi.po
+index e60267b..56fde9b 100644
+--- a/libcpp/po/fi.po
++++ b/libcpp/po/fi.po
+@@ -7,10 +7,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.6-b20101218\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-12-19 21:07+0200\n"
+ "Last-Translator: Jorma Karvonen <karvonen.jorma@gmail.com>\n"
+ "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
++"Language: fi\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -157,246 +158,246 @@ msgstr "virhe muuntaa kohde %s kohteeksi %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "direktiivin #%s lopussa ylimääräisiä merkkejä"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s on GCC-laajennus"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s on vanhentunut GCC-laajennus"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "ei suositella #elif-käyttöä perinteisessä C:ssä"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "perinteinen C ohittaa #%s merkillä # sisennettynä"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "suosittelee piilottamaan #%s perinteisestä C:stä sisennetyllä #-merkillä"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "direktiivin upottaminen makroargumenttien sisälle ei ole siirrettävä"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "rividirektiivin tyyli on GCC-laajennus"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "virheellinen esikäsittelijädirektiivi #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "”defined” ei voida käyttää makronimenä"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "”%s” ei voida käyttää makronimenä, koska se on operaattori C++:ssa"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "makronimeä ei ole annettu #%s-direktiivissä"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "makronimien on oltava tunnisteita"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "määrittelemätön ”%s”"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "puuttuva päättymismerkki >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s odottaa ”TIEDOSTONIMI” tai <TIEDOSTONIMI>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "tyhjä tiedostonimi kohteessa #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include sisäkkäinen liian syvälle"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next ensisijaisessa lähdetiedostossa"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "virheellinen lippu ”%s” rividirektiivissä"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "tiedoston odottamaton loppu #line-direktiivin jälkeen"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "”%s” direktiivin #line jälkeen ei ole positiivinen kokonaisluku"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "rivinumero lukualueen ulkopuolella"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "”%s” ei ole kelvollinen tiedostonimi"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "”%s” merkin # jälkeen ei ole positiivinen kokonaisluku"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "virheellinen #%s-direktiivi"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "rekisteröidään pragmat nimiavaruudessa ”%s” täsmäämättömällä nimilaajennuksella"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "rekisteröidään pragma ”%s” nimilaajennuksella ja ilman nimiavaruutta"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "rekisteröidään ”%s” sekä pragmana ja pragma-nimiavaruutena"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s on jo rekisteröity"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s on jo rekisteröity"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "rekisteröidään pragma NULL-käsittelijällä"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once main-tiedostossa"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "virheellinen #pragma push_macro-direktiivi"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "virheellinen #pragma pop_macro-direktiivi"
+ 
+ #  poison tarkoittaa, että makroa tai direktiiviä ei koskaan määritellä tai käytetä
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "virheelinen #pragma GCC poison-direktiivi"
+ 
+ #  poison tarkoittaa, että makroa tai direktiiviä ei koskaan määritellä tai käytetä
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "kielletään olemassaoleva makro ”%s”"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header ohitetaan include-tiedoston ulkopuolella"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "ei voi löytää lähdetiedostoa %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "nykyinen tiedosto on vanhempi kuin %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma ottaa sulkumerkkeillä ympäröidyn merkkijonoliteraalin"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else ilman #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else jälkeen #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "ehdollinen alkoi tässä"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif ilman #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif jälkeen #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif ilman #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "merkki ’(’ puuttuu predikaatin jälkeen"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "merkki ’)’ puuttuu täydelliseen vastaukseen"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "predikaatin vastaus on tyhjä"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "assertion-toiminto ilman predikaattia"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "predikaatin on oltava tunniste"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "”%s” uudelleen assert-toimintoon"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "päättämätön #%s"
+diff --git a/libcpp/po/fr.po b/libcpp/po/fr.po
+index 1fc8980..fa86df4 100644
+--- a/libcpp/po/fr.po
++++ b/libcpp/po/fr.po
+@@ -119,10 +119,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: GNU cpplib 4.3.0\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2008-03-27 22:46+0000\n"
+ "Last-Translator: Fran�ois-Xavier Coudert <fxcoudert@gmail.com>\n"
+ "Language-Team: French <traduc@traduc.org>\n"
++"Language: fr\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=ISO-8859-1\n"
+ "Content-Transfer-Encoding: 8-bit\n"
+@@ -268,254 +269,254 @@ msgstr "
+ msgid "extra tokens at end of #%s directive"
+ msgstr "�l�ments lexicaux superflus � la fin de la directive #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s est une extension GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s est une extension GCC"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "il est sugg�r� de ne pas utiliser #elif en C traditionnel"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "le C traditionel ignore la directive #%s si le caract�re # est indent�"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "il est sugg�r� de cacher #%s au C traditionel en indentant le � # �"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "placer une directive dans les arguments d'une macro n'est pas portable"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "la directive de style de ligne est extension GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "directive de pr�-traitement #%s invalide"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "� defined � ne peut �tre utilis� comme nom de macro"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "� %s � ne peut �tre utilis� comme nom de macro car c'est un op�rateur en C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "aucun nom de macro donn� dans la directive #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "les noms de macro doivent �tre des identificateurs"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "ind�finition de � %s �"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "caract�re > de terminaison manquant"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s attend \"NOM_DE_FICHIER\" ou <NOM_DE_FICHIER>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "nom de fichier vide dans #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include imbriqu� trop profond�ment"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next dans un fichier source primaire"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "fanion � %s � invalide dans la ligne de directive"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "fin de fichier inattendue apr�s #ligne"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "� %s � apr�s #ligne n'est pas un nombre entier positif"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "num�ro de ligne hors limite"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "� %s � n'est pas un nom de fichier valide"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "� %s � apr�s # n'est pas un nombre entier positif"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "directive #%s invalide"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "enregistrement des pragmas dans l'espace de nom � %s � avec une expansion de nom ne correspondant pas"
+ 
+ # FIXME
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "enregistrement du pragma � %s � avec une expansion de nom mais pas d'espace de nom"
+ 
+ # FIXME
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "enregistrement de \"%s\" � la fois comme une pragma et un espace de nom de pragma"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "la #pragma %s %s est d�j� enregistr�e"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "la #pragma %s est d�j� enregistr�e"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "enregistrement d'un pragma avec un handler �gal � NULL"
+ 
+ # FIXME
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once utilis�e une seule fois dans le fichier principal"
+ 
+ # FIXME
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "la directive GCC #pragma poison est invalide"
+ 
+ # FIXME
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "la directive GCC #pragma poison est invalide"
+ 
+ # FIXME
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "la directive GCC #pragma poison est invalide"
+ 
+ # FIXME
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "�limination de la macro existente � %s �"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header ignor�e en dehors du fichier d'inclusion"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "impossible de trouver le fichier source %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "le fichier courant est plus vieux que %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma prend une cha�ne entour�e de parenth�rese"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else sans #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else apr�s #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "la condition d�bute ici"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif sans #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif apr�s #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif sans #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "� ( � manquante apr�s le pr�dicat"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "� ) � manquante pour completer la r�ponse"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "la r�ponse du pr�dicat est vide"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "assertion sans pr�dicat"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "le pr�dicat doit �tre un identificateur"
+ 
+ # FIXME
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "� %s � re-asserti"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "#%s non termin�"
+diff --git a/libcpp/po/id.po b/libcpp/po/id.po
+index fc5e645..be9b1c1 100644
+--- a/libcpp/po/id.po
++++ b/libcpp/po/id.po
+@@ -7,10 +7,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.5-b20100204\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-02-05 19:00+0700\n"
+ "Last-Translator: Arif E. Nugroho <arif_endro@yahoo.com>\n"
+ "Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
++"Language: id\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=ISO-8859-1\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -154,244 +155,244 @@ msgstr "gagal untuk mengubah %s ke %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "ekstra token di akhir dari #%s direktif"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s adalah sebuah ekstensi GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s adalah sebuah ekstensi GCC yang sudah ditinggalkan"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "disarankan tidak menggunakan #elif dalam tradisional C"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "tradisional C mengabaikan #%s dengan # terindentasi"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "disarankan menyembunyikan #%s dari tradisional C dengan sebuah indentasi #"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "embedding sebuah direktif didalam argumen makro yang bukan portabel"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "gaya dari baris direktif bukan sebuah ekstensi GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "preprosesing direktif #%s tidak valid"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" tidak dapat digunakan sebagai sebuah nama makro"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" tidak dapat digunakan sebagai sebuah nama makro karena ini adalah sebuah operator dalam C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "tidak ada nama makro yang diberikan dalam direktif #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "nama makro harus berupa pengidentifikasi"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "tidak terdefinisi \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "hilang karakter pengakhir >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s diduga \"NAMA BERKAS\" atau <NAMA BERKAS>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "nama berkas kosong dalam #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include nested terlalu dalam"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next dalam berkas kode program utama"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "tanda \"%s\" tidak valid dalam baris direktif"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "tidak terduga akhir dari berkas setelah #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" setelah #line bukan sebuah integer positif"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "nomor baris diluar dari jangkauan"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" bukan sebuah nama berkas yang valid"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" setelah # bukan sebuah integer positif"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "direktif #%s tidak valid"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "mendaftarkan pragma dalam ruang-nama \"%s\" dengan ekspansi nama yang tidak cocok"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "mendaftarkan pragma \"%s\" dengan ekspansi nama dan tidak ada ruang-nama"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "mendaftarkan \"%s\" sebagai baik sebuah pragma dan sebuah ruang-nama"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s telah terdaftar"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s telah terdaftar"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "mendaftarkan pragma dengan penanganan KOSONG"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma sekali dalam berkas utama"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "#pragma push_macro direktif tidak valid"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "#pragma pop_macro direktif tidak valid"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "#pragma GCC tidak valid merusak direktif"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "merusak makro \"%s\" yang sudah ada"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header diabaikan diluar berkas include"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "tidak dapat menemukan berkas sumber %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "berkas ini lebih lama daripada %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma mengambil sebuah string literal tanda kurung"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else tanpa #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else setelah #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "kondisional berawal disini"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif tanpa #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif setelah #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif tanpa #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "hilang '(' setelah predikat"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "hilang ')' untuk melengkapi jawaban"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "jawaban predikat kosong"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "assertion tanpa predikat"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "predikat harus berupa sebuah pengidentifikasi"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" re-asserted"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "tidak terakhiri #%s"
+diff --git a/libcpp/po/ja.po b/libcpp/po/ja.po
+index 60ced4c..80a7aff 100644
+--- a/libcpp/po/ja.po
++++ b/libcpp/po/ja.po
+@@ -1,18 +1,19 @@
+ # Japanese messages for GNU gcc cpplib
+-# Copyright (C) 2001, 2010 Free Software Foundation, Inc.
++# Copyright (C) 2001, 2010, 2011 Free Software Foundation, Inc.
+ # This file is distributed under the same license as the gcc package.
+ # Daisuke Yamashita <yamad@mb.infoweb.ne.jp>, 1999-2001
+ #    Masahito Yamaga <yamaga@ipc.chiba-u.ac.jp>, 1999.
+ #    IIDA Yosiaki <iida@secom.ne.jp>, 1999.
+-# Yasuaki Taniguchi <yasuakit@gmail.com>, 2010
++# Yasuaki Taniguchi <yasuakit@gmail.com>, 2010, 2011.
+ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.6-b20101113\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
+-"PO-Revision-Date: 2010-12-19 15:28+0900\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
++"PO-Revision-Date: 2011-01-23 20:13+0900\n"
+ "Last-Translator: Yasuaki Taniguchi <yasuakit@gmail.com>\n"
+ "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
++"Language: ja\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -157,244 +158,244 @@ msgstr "%s から %s への変換に失敗しました"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "余分なトークンが #%s 指示の後にあります"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s は GCC 拡張です"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s は廃止された GCC 拡張です"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "古い (traditional) C では #elif を使用しないことを推奨します"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "古い (traditional) C では # がインデントされていると #%s を無視します"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "インデントさた # がある古い (traditional) C では #%s を隠すことを推奨します"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "マクロの引数への指示の埋め込みは移植性がありません"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "行スタイル指示は GCC 拡張です"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "無効な前処理指示 #%s です"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" はマクロ名として使用できません"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" は C++ の演算子のためマクロ名として使用できません"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "#%s 指示の中でマクロ名が与えられていません"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "マクロ名は識別子でなくてはいけません"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "\"%s\" を未定義状態にしています"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "終端する > 文字がありません"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s は \"FILENAME\" または <FILENAME> が必要です"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "#%s 内のファイル名が空です"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include の入れ子が深すぎます"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next が主のソースファイルにあります"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "\"%s\" は line 指示では無効なフラグです"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "#line 後に予期しないファイル終端 (EOF) です"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "#line の後にある \"%s\" が正の整数ではありません"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "行番号が範囲外です"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" は有効なファイル名ではありません"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "# の後にある \"%s\" が正の整数ではありません"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "無効な #%s 指示です"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "名前空間 \"%s\" 内に pragma を一致しない名前展開で登録しています"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "pragma \"%s\" を名前展開有りおよび名前空間無しで登録しています"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "\"%s\" を pragma および pragma 名前空間の両方として登録しています"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s は既に登録されています"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s は既に登録されています"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "NULL ハンドラで pragma を登録しています"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once がメインファイルにあります"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "無効な #pragma push_macro 指示です"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "無効な #pragma pop_macro 指示です"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "#pragma GCC 汚染ディレクティヴが無効です"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "既存のマクロ \"%s' を汚染します"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "include ファイル外の #pragma system_header は無視されました"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "ソースファイル %s が見つかりません"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "現在のファイルは %s より古いです"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pramga が括弧で囲まれた文字列リテラルを受け取りました"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else に #if がありません"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else が #else の後ろにあります"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "その条件はここから始まります"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif に #if がありません"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif が #else の後ろにあります"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif に #if がありません"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "述語の後ろの '(' を欠いています"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "解を補完する ')' を欠いています"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "述語の解が空です"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "述語のないアサーションです"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "述語は識別子でなければなりません"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" が再アサートされました"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "終端のない #%s"
+diff --git a/libcpp/po/nl.po b/libcpp/po/nl.po
+index 857fe2f..619ad08 100644
+--- a/libcpp/po/nl.po
++++ b/libcpp/po/nl.po
+@@ -7,10 +7,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.5-b20100204\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-02-06 14:43+0100\n"
+ "Last-Translator: Tim Van Holder <tim.van.holder@telenet.be>\n"
+ "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
++"Language: nl\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -157,256 +158,256 @@ msgstr "fout bij omzetten van %s naar %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "overbodige tokens aan einde van #%s commando"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s is een uitbreiding van GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s is een afgekeurde uitbreiding van GCC"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "gebruik liefst geen #elif in traditionele C"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "traditionele C negeert #%s wanneer de # geïndenteerd is"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "verberg #%s liefst van traditionele C via een geïndenteerde #"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "het plaatsen van een commando binnen macro-argumenten is niet portabel"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "dit soort line commando is een uitbreiding van GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "ongeldig preprocessing-commando #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" kan niet als macronaam gebruikt worden"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" kan niet als macronaam gebruikt worden omdat het een operator is in C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "geen macronaam opgegeven in #%s commando"
+ 
+ # lap! hier heb ik het zitten... wat is verdorie een betere vertaling voor identifier?
+ # Dit is wel langer maar zegt denk ik wel waar het om gaat.
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "macronamen moeten voldoen aan de regels voor namen in C/C++"
+ 
+ # niet perfect, maar beter dan "wordt ongedefinieerd", "wordt geondefinieerd" of iets dergelijks...
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "definitie van \"%s\" wordt ongedaan gemaakt"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "sluitend > teken ontbreekt"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s verwacht \"BESTAND\" of <BESTAND>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "lege bestandsnaam in #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include te diep genest"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next in primair bronbestand"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "ongeldige vlag \"%s\" in #line commando"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "onverwacht einde van bestand na #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" (na #line) is geen positieve integer"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "regelnummer buiten bereik"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" is geen geldige bestandsnaam"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" (na #) is geen positieve integer"
+ 
+ # Shouldn't have been marked as translatable I think
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "ongeldig #%s commando"
+ 
+ # goede vertaling voor 'mismatched'?
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "registratie van pragmas in namespace \"%s\" met niet-overeenkomstige naamexpansie"
+ 
+ # moet namespace hier ook vertaald worden?
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "registratie van pragma \"%s\" met naamexpansie maar geen namespace"
+ 
+ # moet namespace hier ook vertaald worden?
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "registratie van \"%s\" zowel als pragma en als pragma-namespace"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s is reeds geregistreerd"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s is reeds geregistreerd"
+ 
+ # betere vertaling voor 'handler'?
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "registratie van pragma met NULL als afhandelingsroutine"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once in hoofdbestand"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "ongeldig #pragma push_macro commando"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "ongeldig #pragma pop_macro commando"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "ongeldig #pragma GCC poison commando"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "bestaande macro \"%s\" wordt 'vergiftigd'"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header wordt genegeerd buiten een invoegbestand"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "kan bronbestand %s niet vinden"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "huidig bestand is ouder dan %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma verwacht een stringconstante tussen haakjes als argument"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else zonder #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else na #else"
+ 
+ # of gewoon "de conditie"?
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "het conditionele blok begon hier"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif zonder #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif na #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif zonder #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "'(' ontbreekt na predicaat"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "')' ontbreekt als afronding van het antwoord"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "antwoord van het predicaat is leeg"
+ 
+ # dit moet beter kunnen...
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "assertie zonder predicaat"
+ 
+ # ... dit klinkt echt niet - maar wat is hier een beter vertaling voor identifier?
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "predicaat moet een naam zijn"
+ 
+ # is "asserteren" wel een echt woord?
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" opnieuw geasserteerd"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "niet-beëindigde #%s"
+diff --git a/libcpp/po/ru.po b/libcpp/po/ru.po
+index 43927c9..da23ae2 100644
+--- a/libcpp/po/ru.po
++++ b/libcpp/po/ru.po
+@@ -7,14 +7,14 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.6-b20101218\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2011-01-07 16:23+0300\n"
+ "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
+ "Language-Team: Russian <gnu@mx.ru>\n"
++"Language: \n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+-"Language: \n"
+ "X-Generator: Lokalize 1.0\n"
+ "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+ 
+@@ -157,244 +157,244 @@ msgstr "ошибка при преобразовании %s в %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "лишние токены в конце директивы #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s является расширением GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s является устаревшим расширением GCC"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "предполагается не использование #elif в традиционном C"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "в традиционном C игнорируется #%s с отступом у #"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "предполагается скрытие #%s из традиционного C с отступом у #"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "встраивание директивы внутрь аргументов макроса не переносимо"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "стиль строковых директив является расширением GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "неправильная препроцессорная директива #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "«defined» не может использоваться как имя макроса"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "«%s» не может использоваться как имя макроса в качестве оператора в C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "не указано имя макроса в директиве #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "имена макросов должны быть идентификаторами"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "неопределённая «%s»"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "отсутствует завершающий символ >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "для #%s ожидается \"ИМЯ_ФАЙЛА\" или <ИМЯ_ФАЙЛА>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "пустое имя файла в #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "слишком много вложенных #include"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next в первичном исходном файле"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "неверный флаг «%s» в строковой директиве"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "неожиданный конец файла после #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "«%s» после #line не является положительным целым числом"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "номер строки вне допустимых пределов"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "«%s» не является допустимым именем файла"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "«%s» после # не является положительным целым числом"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "неправильная директива #%s"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "регистрируется прагма в пространстве имён «%s» с несовпадающим именным расширением"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "регистрируется прагма «%s» с именным расширением, но без пространства имён"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "регистрируется «%s» как прагма и как пространство имён для прагм"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s уже зарегистрирована"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s уже зарегистрирована"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "регистрируется прагма со значением обработчика равным NULL"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once в главном файле"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "неверная директива #pragma push_macro"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "неверная директива #pragma pop_macro"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "неверная директива #pragma GCC poison"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "отравление существующего макроса «%s»"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header игнорируется вне включаемого файла"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "не удалось найти исходный файл %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "текущий файл старее чем %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "для _Pragma требуется указать строковый литерал в скобках"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else без #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else после #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "условие начинается здесь"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif без #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif после #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif без #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "отсутствует «(» после предиката"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "отсутствует «)» для завершения ответа"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "ответ предиката пуст"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "утверждение без предиката"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "предикат должен быть идентификатором"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "повторное утверждение «%s»"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "незавершённая #%s"
+diff --git a/libcpp/po/sv.po b/libcpp/po/sv.po
+index 4cea31d..909dfa8 100644
+--- a/libcpp/po/sv.po
++++ b/libcpp/po/sv.po
+@@ -10,10 +10,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.6-b20101113\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-11-14 22:54+0100\n"
+ "Last-Translator: G�ran Uddeborg <goeran@uddeborg.se>\n"
+ "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
++"Language: sv\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=iso-8859-1\n"
+ "Content-Transfer-Encoding: 8-bit\n"
+@@ -157,244 +158,244 @@ msgstr "misslyckades att konvertera %s till %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "extra symboler vid slutet av direktivet #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s �r en GCC-utvidgning"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s �r en GCC-utvidgning som avr�des ifr�n"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "f�resl�r att inte anv�nda #elif i traditionell C"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "traditionell C ignorerar #%s d�r tecknet # �r indenterat"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "f�resl�r att d�lja #%s fr�n traditionell C med en indenterad #"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "att b�dda in ett direktiv i makroargument �r inte portabelt"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "stil p� raddirektiv �r en GCC-utvidgning"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "ogiltigt preprocessordirektiv #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" kan inte anv�ndas som ett makronamn"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" kan inte anv�ndas som ett makronamn eftersom det �r en operator i C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "inget makronamn angivet i direktivet #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "makronamn m�ste vara identifierare"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "avdefinierar \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "saknar avslutande tecken >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s f�rv�ntar \"FILNAMN\" eller <FILNAMN>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "tomt filnamn i #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include n�stlad f�r djupt"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next i prim�r k�llkodsfil"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "ogiltigt flagga \"%s\" i line-direktiv"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "ov�ntat filslut efter #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" efter #line �r inte ett positivt heltal"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "radnummer utanf�r m�jligt intervall"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" �r inte ett giltigt filnamn"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" efter # �r inte ett positivt heltal"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "ogiltigt #%s-direktiv"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "registrerar pragman i namnrymden \"%s\" med namnexpansion som inte passar ihop"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "registrerar pragma \"%s\" med namnexpansion och utan namnrymd"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "registrerar \"%s\" b�de som ett pragma och ett pragma namespace"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s �r redan registrerat"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s �r redan registrerat"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "registrerar pragma med NULL-hanterare"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once i huvudfil"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "ogiltigt direktiv #pragma push_macro"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "ogiltigt direktiv #pragma pop_macro"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "ogiltigt direktiv #pragma GCC poison"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "f�rgiftar existerande makro \"%s\""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header ignorerat utanf�r huvudfil"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "kan inte hitta k�llfil %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "aktuell fil �r �ldre �n %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma tar en str�ngkonstant inom parenteser"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else utan #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else efter #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "villkorssatsen b�rjade h�r"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif utan #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif efter #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif utan #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "saknas '(' efter predikat"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "saknas ')' f�r att avsluta svaret"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "predikatets svar �r tomt"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "f�rs�kran utan predikat"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "predikat m�ste vara en identifierare"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" omf�rs�krat"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "oavslutad #%s"
+diff --git a/libcpp/po/tr.po b/libcpp/po/tr.po
+index 451853c..960b913 100644
+--- a/libcpp/po/tr.po
++++ b/libcpp/po/tr.po
+@@ -6,10 +6,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.2.0\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2007-05-23 01:17+0300\n"
+ "Last-Translator: Nilgün Belma Bugüner <nilgun@buguner.name.tr>\n"
+ "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
++"Language: tr\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -155,246 +156,246 @@ msgstr "`%s' ile `%s' arasında dönüşüm başarısız"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "#%s yönergesinin sonunda fazladan dizgecikler"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s bir GCC uzantısıdır"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s bir GCC uzantısıdır"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "geleneksel C'de #elif kullanılmıyor varsayılır"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "geleneksel C'de girintili # ile #%s yoksayılır"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "geleneksel C'den #%s in saklanması için bir girintili # kullanılmış farzedilir"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "bir yönergenin makro argümanlarla gömülmesi uyarlanabilir değil"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "satır yönergesinin tarzı bir GCC özelliğidir"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "önişlem yönergesi #%s geçersiz"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" makro ismi olarak kullanılamaz"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" C++'da bir işleç olduğundan makro ismi olarak kullanılamaz"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "#%s yönergesinde makro ismi verilmemiş"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "makro isimleri tanımlayıcılar olmalı"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "tanımsız yapılan \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "sonlandıran > karakteri eksik"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s \"DOSYA\" ya da <DOSYA> gerektirir"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "#%s ile belirtilen dosya boş"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include iç içeliği çok derin"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "birncil kaynak dosyasında #include_next"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "satır yönergesinde geçersiz \"%s\" seçeneği"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr ""
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "#line'dan sonraki \"%s\" bir pozitif tamsayı değil"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "satır numarası kapsam dışı"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" geçerli bir dosya ismi değil"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "#'dan sonraki \"%s\" bir pozitif tamsayı değil"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr ""
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "#%s yönergesi geçersiz"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "\"%s\" isim-alanındaki pragmalar uyumsuz isim yorumlaması ile kaydediliyor"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "pragma \"%s\" isim alansız olarak isim yorumlamasıyla kaydediliyor"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "\"%s\" hem pragma hem de pragma isim alanı olarak kaydediliyor"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s  zaten kayıtlı"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s  zaten kayıtlı"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "pragma NULL eylemci ile kaydediliyor"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "main dosyasında '#pragma once'"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "geçersiz #pragma GCC poison yönergesi"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "geçersiz #pragma GCC poison yönergesi"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "geçersiz #pragma GCC poison yönergesi"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "zehirlenen mevcut makro \"%s\""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "başlık dosyasının dışındaki  '#pragma system_header'  yoksayıldı"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "%s kaynak dosyası bulunamıyor"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "mevcut dosya %s den daha eski"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma bir parantezli dizge sabiti alır"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#if siz #else"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else den sonra #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "koşul başlangıcı burası"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#if siz #elif "
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#else den sonra #elif"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#if siz #endif"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "dayanaktan sonra '(' eksik"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "yanıtı tamamlayacak ')' eksik"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "dayanakların cevabı boş"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "dayanaksız olumlama"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "dayanak bir tanımlayıcı olmalı"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" tekrar olumlanmış"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "sonlandırılmamış #%s"
+diff --git a/libcpp/po/uk.po b/libcpp/po/uk.po
+index ff4553d..1088895 100644
+--- a/libcpp/po/uk.po
++++ b/libcpp/po/uk.po
+@@ -6,10 +6,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.2.1\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2007-08-17 11:23+0300\n"
+ "Last-Translator: Maxim V. Dziumanenko <dziumanenko@gmail.com>\n"
+ "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
++"Language: uk\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -154,246 +155,246 @@ msgstr "помилка при перетворені %s на %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "зайві лексеми наприкінці директиви #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s є розширенням GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s є розширенням GCC"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "рекомендується не використовувати #elif у традиційній мові C"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "у традиційній мові C ігноруються #%s, якщо # з відступом"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "рекомендується приховувати #%s у традиційній мові C використовуючи відступ перед #"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "вбудована директива з макро-аргументами не є переносимою"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "стиль директиви line є розширенням GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "неправильна директива препроцесора #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "\"defined\" не може використовуватись як назва макросу"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "\"%s\" не може використовуватись як назва макросу, оскільки це - оператор у C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "не вказаний макрос у директиві #%s"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "назви макросів повинні бути ідентифікаторами"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "скасовується визначення \"%s\""
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "відсутній завершальний символ >"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s очікує \"FILENAME\" або <FILENAME>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "порожня назва файлу у #%s"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "надто глибоке вкладання #include"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next у первинному файлі тексту програми"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "некоректна ознака \"%s\" у директиві line"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr ""
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "\"%s\" після #line не є додатнім цілим числом"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "номер рядка за межами діапазону"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "\"%s\" не є коректною назвою файлу"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "\"%s\" після # не є додатнім цілим числом"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr ""
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "некоректна директива #%s"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "прагми реєструються у просторі назв \"%s\" за відсутності розширення назв"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "прагма \"%s\" реєструється з розширенням назви але без простору назви"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "\"%s\" реєструється як прагма та як прострі назв прагм"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s вже зареєстровано"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s вже зареєстровано"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "реєструється pragma з NULL-обробником"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma один раз у головному файлі"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "некоректна #pragma GCC poison директива"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "некоректна #pragma GCC poison директива"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "некоректна #pragma GCC poison директива"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "poisoning існуючих макросів \"%s\""
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header проігноровано за межами включеного файлу"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "не вдається знайти первинний файл %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "поточний файл старіший ніж %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma охоплює дужками символьний літерал"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else без #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else після #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "умова починається тут"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif без #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif після #else"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif беp #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "відсутня '(' після предикату"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "відсутня ')' для завершення відповіді"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "відповідь предиката порожня"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "твердження без предикату"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "предикат має бути ідентифікатором"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "\"%s\" повторне ствердження"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "незавершене #%s"
+diff --git a/libcpp/po/vi.po b/libcpp/po/vi.po
+index 5d46bc7..82d8a59 100644
+--- a/libcpp/po/vi.po
++++ b/libcpp/po/vi.po
+@@ -6,10 +6,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.5.0\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-04-16 21:28+0930\n"
+ "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+ "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
++"Language: vi\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=utf-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -155,244 +156,244 @@ msgstr "lỗi chuyển đổi %s sang %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "gặp hiệu bài thêm tại kết thúc của chỉ thị #%s"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s là phần mở rộng kiểu GCC"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s là một phần mở rộng GCC bị phản đối"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "khuyên bạn không dùng #elif trong ngôn ngữ C truyền thống"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "ngôn ngữ C truyền thống bỏ qua #%s với # được thụt lề"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "khuyên bạn ẩn #%s ra ngôn ngữ C truyền thống bằng # được thụt lề"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "khả năng nhúng chỉ thị vào đối số vĩ lệnh không thể mạng theo"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "kiểu chỉ thị dòng là phần mở rộng GCC"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "chỉ thị tiền xử lý không hợp lệ #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "không thể dùng « defined » (đã xác định) như là tên vĩ lệnh"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "không thể dùng « %s » như là tên vĩ lệnh vì nó là toán tử trong ngôn ngữ C++"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "chỉ thị #%s không chứa tên vĩ lệnh"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "mọi tên vĩ lệnh phải là bộ nhận diện"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "đang hủy xác định « %s »"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "thiếu ký tự « > » chấm dứt"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s ngờ \"TÊN_TẬP_TIN\" hoặc <TÊN_TẬP_TIN>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "#%s chứa tên tập tin trống"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "« #include » (bao gồm) lồng nhau quá sâu"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "gặp « #include_next » (bao gồm kế tiếp) nằm trong tập tin nguồn chính"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "gặp cờ không hợp lệ « %s »  nằm trong chỉ thị dòng"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "gặp kết thúc tập tin bất thường đằng sau #line"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "« %s » nằm sau « #line » (dòng) không phải là số nguyên dương"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "số hiệu dòng ở ngoài phạm vi"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "« %s » không phải là tên tập tin hợp lệ"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "« %s » nằm sau « # » không phải là số nguyên dương"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "chỉ thị #%s không hợp lệ"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "việc đăng ký các lệnh mã nguồn điều khiển trình biên dịch (pragma) trong miền tên « %s » sai mở rộng tên "
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "việc đăng ký lệnh mã nguồn điều khiển trình biên dịch (pragma) « %s » có mở rộng tên nhưng không có miền tên"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "đang đăng ký « %s » là cả lệnh nguồn điều khiển trình biện dịch (pragma), lẫn miền tên của lệnh nguồn điều khiển trình biên dịch."
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "« #pragma %s %s » đã được đăng ký"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "« #pragma %s » đã được đăng ký"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "việc đăng ký lệnh mã nguồn điều khiển trình biên dịch (pragma) có bộ quản lý vô giá trị (NULL)"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "Có « #pragma » một lần trong tập tin chính"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "gặp chỉ thị #pragma push_macro sai"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "gặp chỉ thị #pragma pop_macro sai"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "gặp chỉ thị vộ hiệu hóa (poison) GCC « #pragma » không hợp lệ"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "đang vô hiệu hóa vĩ lệnh tồn tại « %s »"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "« #pragma system_header » (đầu trang hệ thống) bị bỏ qua ở ngoài tập tin bao gồm"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "không tìm thấy tập tin nguồn %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "tập tin hiện thời là cũ hơn %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "« _Pragma » nhận một hằng chuỗi được đặt trong ngoặc đơn"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else (nếu không) không có #if (nếu)"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else (nếu không) nằm sau #else"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "bộ điều kiện đã bắt đầu ở đây"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif (nếu không thì nếu) không có #if (nếu)"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif (nếu không thì nếu) nằm sau #else (nếu không)"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif (thôi nếu) không có #if (nếu)"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "thiếu « ( » nằm sau vị ngữ"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "thiếu « ) » để xong trả lời"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "vị ngữ chứa trả lời trống"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "sự khẳng định không có vị ngữ"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "vị ngữ phải là bộ nhận diện"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "« %s » được khẳng định lại"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "#%s chưa chấm dứt"
+diff --git a/libcpp/po/zh_CN.po b/libcpp/po/zh_CN.po
+index 69829b3..4eb610c 100644
+--- a/libcpp/po/zh_CN.po
++++ b/libcpp/po/zh_CN.po
+@@ -7,10 +7,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.5.0\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2010-04-19 14:55+0800\n"
+ "Last-Translator: Meng Jie <zuxy.meng@gmail.com>\n"
+ "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
++"Language: zh_CN\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=utf-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -156,244 +157,244 @@ msgstr "无法从 %s 转换到 %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "#%s 指示的末尾有多余的标识符"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s 是一个 GCC 扩展"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s 是一个已过时的 GCC 扩展"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "建议在传统 C 中不使用 #elif"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "当 # 有缩进时传统 C 忽略 #%s"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "建议使用缩进的 # 以让 #%s 对传统 C 不可见"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "将一个指示嵌入宏参数中是不可移植的"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "line 指示的风格是一个 GCC 扩展"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "无效的预处理指示 #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "“defined”不能被用作宏名"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "“%s”不能被用作宏名，因为它是 C++ 中的一个操作符"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "#%s 指示中未给出宏名"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "宏名必须是标识符"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "取消对“%s”的定义"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "缺少结尾的 > 字符"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s 需要 \"FILENAME\" 或 <FILENAME>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "#%s 中文件名为空"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include 嵌套过深"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next 出现在主源文件中"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "line 指示中有无效的标记“%s”"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr "#line 后未预期的文件结束"
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "#line 后的“%s”不是一个正整数"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "行号超出范围"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "“%s”不是一个有效的文件名"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "# 后的“%s”不是一个正整数"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr "%s"
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "无效的 #%s 指示"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr "在命名空间“%s”中注册 pragma 时名称扩展不匹配"
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "pragma “%s”被注册为一个命名扩展，而没有命名空间"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "“%s”既被注册为一个pragma 又被注册为一个 pragma 命名空间"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s 已经被注册"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s 已经被注册"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr "pragma 注册为被 NULL 处理"
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once 出现在主文件中"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ msgid "invalid #pragma push_macro directive"
+ msgstr "无效的 #pragma push_macro 指示"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "无效的 #pragma pop_macro 指示"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "无效的 #pragma GCC poison 指示"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "对已存在的宏“%s”投毒"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_heade 在包含文件外被忽略"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "找不到源文件 %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "当前文件早于 %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma 需要一个括起的字符串字面常量"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else 没有匹配的 #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else 出现在 #else 后"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "条件自此开始"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif 没有匹配的 #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif 出现在 #else 后"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif 没有匹配的 #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "谓词后缺少‘(’"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "完整的答案缺少‘)’"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "谓词的答案为空"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "断言后没有谓词"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "谓词必须是一个标识符"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "重断言“%s”"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "未终止的 #%s"
+diff --git a/libcpp/po/zh_TW.po b/libcpp/po/zh_TW.po
+index 7b9192a..4510d12 100644
+--- a/libcpp/po/zh_TW.po
++++ b/libcpp/po/zh_TW.po
+@@ -8,10 +8,11 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: cpplib 4.1.0\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+-"POT-Creation-Date: 2010-12-18 16:00+0000\n"
++"POT-Creation-Date: 2011-03-24 16:45+0000\n"
+ "PO-Revision-Date: 2006-03-09 12:37+0800\n"
+ "Last-Translator: Wei-Lun Chao <chaoweilun@pcmail.com.tw>\n"
+ "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
++"Language: zh_TW\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+@@ -156,246 +157,246 @@ msgstr "無法從 %s 轉換到 %s"
+ msgid "extra tokens at end of #%s directive"
+ msgstr "#%s 指令的末尾有多餘的符記"
+ 
+-#: directives.c:355
++#: directives.c:356
+ #, c-format
+ msgid "#%s is a GCC extension"
+ msgstr "#%s 是 GCC 擴充功能"
+ 
+-#: directives.c:360
++#: directives.c:361
+ #, fuzzy, c-format
+ msgid "#%s is a deprecated GCC extension"
+ msgstr "#%s 是 GCC 擴充功能"
+ 
+-#: directives.c:373
++#: directives.c:374
+ msgid "suggest not using #elif in traditional C"
+ msgstr "建議在傳統 C 中不要使用 #elif"
+ 
+-#: directives.c:376
++#: directives.c:377
+ #, c-format
+ msgid "traditional C ignores #%s with the # indented"
+ msgstr "當 # 有縮排時傳統 C 忽略 #%s"
+ 
+-#: directives.c:380
++#: directives.c:381
+ #, c-format
+ msgid "suggest hiding #%s from traditional C with an indented #"
+ msgstr "建議使用縮排的 # 以讓 #%s 對傳統 C 不可見"
+ 
+-#: directives.c:406
++#: directives.c:407
+ msgid "embedding a directive within macro arguments is not portable"
+ msgstr "將一個指令內嵌於巨集參數中是不可移植的"
+ 
+-#: directives.c:426
++#: directives.c:427
+ msgid "style of line directive is a GCC extension"
+ msgstr "line 指令的風格是 GCC 擴充功能"
+ 
+-#: directives.c:481
++#: directives.c:482
+ #, c-format
+ msgid "invalid preprocessing directive #%s"
+ msgstr "無效的預先處理指令 #%s"
+ 
+-#: directives.c:549
++#: directives.c:550
+ msgid "\"defined\" cannot be used as a macro name"
+ msgstr "「defined」不能做為巨集名"
+ 
+-#: directives.c:555
++#: directives.c:556
+ #, c-format
+ msgid "\"%s\" cannot be used as a macro name as it is an operator in C++"
+ msgstr "「%s」不能做為巨集名，因為它是 C++ 中的一個運算子"
+ 
+-#: directives.c:558
++#: directives.c:559
+ #, c-format
+ msgid "no macro name given in #%s directive"
+ msgstr "#%s 指令中未給出巨集名"
+ 
+-#: directives.c:561
++#: directives.c:562
+ msgid "macro names must be identifiers"
+ msgstr "巨集名必須是識別字"
+ 
+-#: directives.c:610
++#: directives.c:611
+ #, c-format
+ msgid "undefining \"%s\""
+ msgstr "取消對「%s」的定義"
+ 
+-#: directives.c:665
++#: directives.c:666
+ msgid "missing terminating > character"
+ msgstr "缺少結尾的 > 字元"
+ 
+-#: directives.c:724
++#: directives.c:725
+ #, c-format
+ msgid "#%s expects \"FILENAME\" or <FILENAME>"
+ msgstr "#%s 需要 \"FILENAME\" 或 <FILENAME>"
+ 
+-#: directives.c:770
++#: directives.c:771
+ #, c-format
+ msgid "empty filename in #%s"
+ msgstr "#%s 中檔案名稱為空"
+ 
+-#: directives.c:780
++#: directives.c:781
+ msgid "#include nested too deeply"
+ msgstr "#include 巢狀過深"
+ 
+-#: directives.c:821
++#: directives.c:822
+ msgid "#include_next in primary source file"
+ msgstr "#include_next 出現在主來源檔案中"
+ 
+-#: directives.c:847
++#: directives.c:848
+ #, c-format
+ msgid "invalid flag \"%s\" in line directive"
+ msgstr "line 指令中有無效的標記「%s」"
+ 
+-#: directives.c:907
++#: directives.c:908
+ msgid "unexpected end of file after #line"
+ msgstr ""
+ 
+-#: directives.c:910
++#: directives.c:911
+ #, c-format
+ msgid "\"%s\" after #line is not a positive integer"
+ msgstr "#line 後的「%s」不是一個正整數"
+ 
+-#: directives.c:916 directives.c:918
++#: directives.c:917 directives.c:919
+ msgid "line number out of range"
+ msgstr "列號超出範圍"
+ 
+-#: directives.c:931 directives.c:1011
++#: directives.c:932 directives.c:1012
+ #, c-format
+ msgid "\"%s\" is not a valid filename"
+ msgstr "「%s」不是一個有效的檔案名稱"
+ 
+-#: directives.c:971
++#: directives.c:972
+ #, c-format
+ msgid "\"%s\" after # is not a positive integer"
+ msgstr "# 後的「%s」不是一個正整數"
+ 
+-#: directives.c:1064 directives.c:1066 directives.c:1068
++#: directives.c:1065 directives.c:1067 directives.c:1069
+ #, c-format
+ msgid "%s"
+ msgstr ""
+ 
+-#: directives.c:1092
++#: directives.c:1093
+ #, c-format
+ msgid "invalid #%s directive"
+ msgstr "無效的 #%s 指令"
+ 
+-#: directives.c:1155
++#: directives.c:1156
+ #, c-format
+ msgid "registering pragmas in namespace \"%s\" with mismatched name expansion"
+ msgstr ""
+ 
+-#: directives.c:1164
++#: directives.c:1165
+ #, fuzzy, c-format
+ msgid "registering pragma \"%s\" with name expansion and no namespace"
+ msgstr "「%s」既被註冊為一個 pragma 又被註冊為一個 pragma 命名空間"
+ 
+-#: directives.c:1182
++#: directives.c:1183
+ #, c-format
+ msgid "registering \"%s\" as both a pragma and a pragma namespace"
+ msgstr "「%s」既被註冊為一個 pragma 又被註冊為一個 pragma 命名空間"
+ 
+-#: directives.c:1185
++#: directives.c:1186
+ #, c-format
+ msgid "#pragma %s %s is already registered"
+ msgstr "#pragma %s %s 已經被註冊"
+ 
+-#: directives.c:1188
++#: directives.c:1189
+ #, c-format
+ msgid "#pragma %s is already registered"
+ msgstr "#pragma %s 已經被註冊"
+ 
+-#: directives.c:1218
++#: directives.c:1219
+ msgid "registering pragma with NULL handler"
+ msgstr ""
+ 
+-#: directives.c:1430
++#: directives.c:1431
+ msgid "#pragma once in main file"
+ msgstr "#pragma once 出現在主檔案中"
+ 
+-#: directives.c:1453
++#: directives.c:1454
+ #, fuzzy
+ msgid "invalid #pragma push_macro directive"
+ msgstr "無效的 #pragma GCC poison 指令"
+ 
+-#: directives.c:1508
++#: directives.c:1509
+ #, fuzzy
+ msgid "invalid #pragma pop_macro directive"
+ msgstr "無效的 #pragma GCC poison 指令"
+ 
+-#: directives.c:1563
++#: directives.c:1564
+ msgid "invalid #pragma GCC poison directive"
+ msgstr "無效的 #pragma GCC poison 指令"
+ 
+-#: directives.c:1572
++#: directives.c:1573
+ #, c-format
+ msgid "poisoning existing macro \"%s\""
+ msgstr "對已存在的巨集「%s」加料"
+ 
+-#: directives.c:1591
++#: directives.c:1592
+ msgid "#pragma system_header ignored outside include file"
+ msgstr "#pragma system_header 在包含檔案外被忽略"
+ 
+-#: directives.c:1616
++#: directives.c:1617
+ #, c-format
+ msgid "cannot find source file %s"
+ msgstr "找不到來源檔案 %s"
+ 
+-#: directives.c:1620
++#: directives.c:1621
+ #, c-format
+ msgid "current file is older than %s"
+ msgstr "目前檔案早於 %s"
+ 
+-#: directives.c:1805
++#: directives.c:1806
+ msgid "_Pragma takes a parenthesized string literal"
+ msgstr "_Pragma 需要一個括起的字串原文"
+ 
+-#: directives.c:1916
++#: directives.c:1917
+ msgid "#else without #if"
+ msgstr "#else 沒有匹配的 #if"
+ 
+-#: directives.c:1921
++#: directives.c:1922
+ msgid "#else after #else"
+ msgstr "#else 出現在 #else 後"
+ 
+-#: directives.c:1923 directives.c:1956
++#: directives.c:1924 directives.c:1957
+ msgid "the conditional began here"
+ msgstr "條件自此開始"
+ 
+-#: directives.c:1949
++#: directives.c:1950
+ msgid "#elif without #if"
+ msgstr "#elif 沒有匹配的 #if"
+ 
+-#: directives.c:1954
++#: directives.c:1955
+ msgid "#elif after #else"
+ msgstr "#elif 出現在 #else 後"
+ 
+-#: directives.c:1992
++#: directives.c:1993
+ msgid "#endif without #if"
+ msgstr "#endif 沒有匹配的 #if"
+ 
+-#: directives.c:2072
++#: directives.c:2073
+ msgid "missing '(' after predicate"
+ msgstr "述語後缺少「(」"
+ 
+-#: directives.c:2087
++#: directives.c:2088
+ msgid "missing ')' to complete answer"
+ msgstr "完整的答案缺少「)」"
+ 
+-#: directives.c:2107
++#: directives.c:2108
+ msgid "predicate's answer is empty"
+ msgstr "述語的答案為空"
+ 
+-#: directives.c:2134
++#: directives.c:2135
+ msgid "assertion without predicate"
+ msgstr "判定語後沒有述語"
+ 
+-#: directives.c:2137
++#: directives.c:2138
+ msgid "predicate must be an identifier"
+ msgstr "述語必須是一個識別字"
+ 
+-#: directives.c:2223
++#: directives.c:2224
+ #, c-format
+ msgid "\"%s\" re-asserted"
+ msgstr "已再判定「%s」"
+ 
+-#: directives.c:2514
++#: directives.c:2515
+ #, c-format
+ msgid "unterminated #%s"
+ msgstr "未終止的 #%s"
+-- 
+1.7.0.4
+

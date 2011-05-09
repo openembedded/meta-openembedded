@@ -1,0 +1,231 @@
+From 99347f932bdf7d9b0bf8a4f36737ed128813c1a9 Mon Sep 17 00:00:00 2001
+From: meissner <meissner@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 28 Apr 2011 22:39:59 +0000
+Subject: [PATCH 196/200] Backport 4.7 patchtes to 4.6
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173137 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index d7357ee..d38ec9a 100644
+--- a/gcc/config/rs6000/altivec.md
++++ b/gcc/config/rs6000/altivec.md
+@@ -2430,7 +2430,7 @@
+ 
+ (define_expand "vec_extract_evenv4si"
+  [(set (match_operand:V4SI 0 "register_operand" "")
+-        (unspec:V8HI [(match_operand:V4SI 1 "register_operand" "")
++        (unspec:V4SI [(match_operand:V4SI 1 "register_operand" "")
+                       (match_operand:V4SI 2 "register_operand" "")]
+ 		      UNSPEC_EXTEVEN_V4SI))]
+   "TARGET_ALTIVEC"
+@@ -2463,7 +2463,7 @@
+ 
+ (define_expand "vec_extract_evenv4sf"
+  [(set (match_operand:V4SF 0 "register_operand" "")
+-        (unspec:V8HI [(match_operand:V4SF 1 "register_operand" "")
++        (unspec:V4SF [(match_operand:V4SF 1 "register_operand" "")
+                       (match_operand:V4SF 2 "register_operand" "")]
+                       UNSPEC_EXTEVEN_V4SF))]
+   "TARGET_ALTIVEC"
+@@ -2495,7 +2495,7 @@
+ }")
+ 
+ (define_expand "vec_extract_evenv8hi"
+- [(set (match_operand:V4SI 0 "register_operand" "")
++ [(set (match_operand:V8HI 0 "register_operand" "")
+         (unspec:V8HI [(match_operand:V8HI 1 "register_operand" "")
+                       (match_operand:V8HI 2 "register_operand" "")]
+                       UNSPEC_EXTEVEN_V8HI))]
+@@ -2528,9 +2528,9 @@
+ }")
+ 
+ (define_expand "vec_extract_evenv16qi"
+- [(set (match_operand:V4SI 0 "register_operand" "")
+-        (unspec:V8HI [(match_operand:V16QI 1 "register_operand" "")
+-                      (match_operand:V16QI 2 "register_operand" "")]
++ [(set (match_operand:V16QI 0 "register_operand" "")
++        (unspec:V16QI [(match_operand:V16QI 1 "register_operand" "")
++                       (match_operand:V16QI 2 "register_operand" "")]
+                       UNSPEC_EXTEVEN_V16QI))]
+   "TARGET_ALTIVEC"
+   "
+@@ -2562,7 +2562,7 @@
+ 
+ (define_expand "vec_extract_oddv4si"
+  [(set (match_operand:V4SI 0 "register_operand" "")
+-        (unspec:V8HI [(match_operand:V4SI 1 "register_operand" "")
++        (unspec:V4SI [(match_operand:V4SI 1 "register_operand" "")
+                       (match_operand:V4SI 2 "register_operand" "")]
+                       UNSPEC_EXTODD_V4SI))]
+   "TARGET_ALTIVEC"
+@@ -2595,7 +2595,7 @@
+ 
+ (define_expand "vec_extract_oddv4sf"
+  [(set (match_operand:V4SF 0 "register_operand" "")
+-        (unspec:V8HI [(match_operand:V4SF 1 "register_operand" "")
++        (unspec:V4SF [(match_operand:V4SF 1 "register_operand" "")
+                       (match_operand:V4SF 2 "register_operand" "")]
+                       UNSPEC_EXTODD_V4SF))]
+   "TARGET_ALTIVEC"
+diff --git a/gcc/config/rs6000/vector.md b/gcc/config/rs6000/vector.md
+index 5335d9d..cbdfd58 100644
+--- a/gcc/config/rs6000/vector.md
++++ b/gcc/config/rs6000/vector.md
+@@ -872,8 +872,8 @@
+ ;; Under VSX, vectors of 4/8 byte alignments do not need to be aligned
+ ;; since the load already handles it.
+ (define_expand "movmisalign<mode>"
+- [(set (match_operand:VEC_N 0 "vfloat_operand" "")
+-       (match_operand:VEC_N 1 "vfloat_operand" ""))]
++ [(set (match_operand:VEC_N 0 "nonimmediate_operand" "")
++       (match_operand:VEC_N 1 "any_operand" ""))]
+  "VECTOR_MEM_VSX_P (<MODE>mode) && TARGET_ALLOW_MOVMISALIGN"
+  "")
+ 
+index 8496460..8c0da54 100644
+--- a/gcc/testsuite/gcc.dg/torture/va-arg-25.c
++++ b/gcc/testsuite/gcc.dg/torture/va-arg-25.c
+@@ -3,6 +3,8 @@
+ /* { dg-do run } */
+ /* { dg-options "-msse" { target { i?86-*-* x86_64-*-* } } } */
+ /* { dg-require-effective-target sse_runtime { target { i?86-*-* x86_64-*-* } } } */
++/* { dg-options "-mabi=altivec -maltivec" { target { powerpc-*-* powerpc64-*-* } } } */
++/* { dg-require-effective-target vmx_hw { target { powerpc-*-* powerpc64--*-* } } } */
+ 
+ #include <stdarg.h>
+ #include <stdlib.h>
+diff --git a/gcc/testsuite/gcc.dg/torture/vector-1.c b/gcc/testsuite/gcc.dg/torture/vector-1.c
+index 9ab78aa..205fee6 100644
+--- a/gcc/testsuite/gcc.dg/torture/vector-1.c
++++ b/gcc/testsuite/gcc.dg/torture/vector-1.c
+@@ -3,6 +3,8 @@
+ /* { dg-do run } */
+ /* { dg-options "-msse" { target { i?86-*-* x86_64-*-* } } } */
+ /* { dg-require-effective-target sse_runtime { target { i?86-*-* x86_64-*-* } } } */
++/* { dg-options "-mabi=altivec" { target { powerpc-*-* powerpc64-*-* } } } */
++/* { dg-require-effective-target vmx_hw { target { powerpc-*-* powerpc64--*-* } } } */
+ 
+ #define vector __attribute__((vector_size(16) ))
+ 
+diff --git a/gcc/testsuite/gcc.dg/torture/vector-2.c b/gcc/testsuite/gcc.dg/torture/vector-2.c
+index bff9f82..6cc56cf 100644
+--- a/gcc/testsuite/gcc.dg/torture/vector-2.c
++++ b/gcc/testsuite/gcc.dg/torture/vector-2.c
+@@ -3,6 +3,8 @@
+ /* { dg-do run } */
+ /* { dg-options "-msse" { target { i?86-*-* x86_64-*-* } } } */
+ /* { dg-require-effective-target sse_runtime { target { i?86-*-* x86_64-*-* } } } */
++/* { dg-options "-mabi=altivec" { target { powerpc-*-* powerpc64-*-* } } } */
++/* { dg-require-effective-target vmx_hw { target { powerpc-*-* powerpc64--*-* } } } */
+ 
+ #define vector __attribute__((vector_size(16) ))
+ 
+diff --git a/gcc/testsuite/gcc.target/powerpc/pr48192.c b/gcc/testsuite/gcc.target/powerpc/pr48192.c
+new file mode 100644
+index 0000000..5159260
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/powerpc/pr48192.c
+@@ -0,0 +1,49 @@
++/* { dg-do compile } */
++/* { dg-skip-if "" { powerpc*-*-darwin* } { "*" } { "" } } */
++/* { dg-require-effective-target powerpc_vsx_ok } */
++/* { dg-options "-O3 -mcpu=power7 -std=gnu89" } */
++
++/* Make sure that the conditional macros vector, bool, and pixel are not
++   considered as being defined.  */
++
++#ifdef bool
++#error "bool is considered defined"
++#endif
++
++#ifdef vector
++#error "vector is considered defined"
++#endif
++
++#ifdef pixel
++#error "pixel is condsidered defined"
++#endif
++
++#if defined(bool)
++#error "bool is considered defined"
++#endif
++
++#if defined(vector)
++#error "vector is considered defined"
++#endif
++
++#if defined(pixel)
++#error "pixel is condsidered defined"
++#endif
++
++#ifndef bool
++#else
++#error "bool is considered defined"
++#endif
++
++#ifndef vector
++#else
++#error "vector is considered defined"
++#endif
++
++#ifndef pixel
++#else
++#error "pixel is condsidered defined"
++#endif
++
++#define bool long double
++bool pixel = 0;
+index 85a17b1..f244ae5 100644
+--- a/libcpp/directives.c
++++ b/libcpp/directives.c
+@@ -1819,7 +1819,12 @@ do_ifdef (cpp_reader *pfile)
+ 
+       if (node)
+ 	{
+-	  skip = node->type != NT_MACRO;
++	  /* Do not treat conditional macros as being defined.  This is due to
++	     the powerpc and spu ports using conditional macros for 'vector',
++	     'bool', and 'pixel' to act as conditional keywords.  This messes
++	     up tests like #ifndef bool.  */
++	  skip = (node->type != NT_MACRO
++		  || ((node->flags & NODE_CONDITIONAL) != 0));
+ 	  _cpp_mark_macro_used (node);
+ 	  if (!(node->flags & NODE_USED))
+ 	    {
+@@ -1860,7 +1865,12 @@ do_ifndef (cpp_reader *pfile)
+ 
+       if (node)
+ 	{
+-	  skip = node->type == NT_MACRO;
++	  /* Do not treat conditional macros as being defined.  This is due to
++	     the powerpc and spu ports using conditional macros for 'vector',
++	     'bool', and 'pixel' to act as conditional keywords.  This messes
++	     up tests like #ifndef bool.  */
++	  skip = (node->type == NT_MACRO
++		  && ((node->flags & NODE_CONDITIONAL) == 0));
+ 	  _cpp_mark_macro_used (node);
+ 	  if (!(node->flags & NODE_USED))
+ 	    {
+diff --git a/libcpp/expr.c b/libcpp/expr.c
+index d2fec2a..3c36127 100644
+--- a/libcpp/expr.c
++++ b/libcpp/expr.c
+@@ -720,10 +720,15 @@ parse_defined (cpp_reader *pfile)
+ 
+   pfile->state.prevent_expansion--;
+ 
++  /* Do not treat conditional macros as being defined.  This is due to the
++     powerpc and spu ports using conditional macros for 'vector', 'bool', and
++     'pixel' to act as conditional keywords.  This messes up tests like #ifndef
++     bool.  */
+   result.unsignedp = false;
+   result.high = 0;
+   result.overflow = false;
+-  result.low = node && node->type == NT_MACRO;
++  result.low = (node && node->type == NT_MACRO
++		&& (node->flags & NODE_CONDITIONAL) == 0);
+   return result;
+ }
+ 
+-- 
+1.7.0.4
+

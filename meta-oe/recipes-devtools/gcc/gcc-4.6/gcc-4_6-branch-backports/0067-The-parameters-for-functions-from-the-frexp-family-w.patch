@@ -1,0 +1,27 @@
+From 7a43b3a2e2c0d9cf557ac45577cc42c6d72e0065 Mon Sep 17 00:00:00 2001
+From: baldrick <baldrick@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 5 Apr 2011 08:13:16 +0000
+Subject: [PATCH 067/200] The parameters for functions from the frexp family were the wrong way
+ round.  Swap them.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171972 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 3340dc4..728b631 100644
+--- a/gcc/fortran/f95-lang.c
++++ b/gcc/fortran/f95-lang.c
+@@ -695,10 +695,9 @@ build_builtin_fntypes (tree *fntype, tree type)
+                                         type, integer_type_node, NULL_TREE);
+   /* type (*) (void) */
+   fntype[3] = build_function_type_list (type, NULL_TREE);
+-  /* type (*) (&int, type) */
+-  fntype[4] = build_function_type_list (type,
++  /* type (*) (type, &int) */
++  fntype[4] = build_function_type_list (type, type,
+                                         build_pointer_type (integer_type_node),
+-                                        type,
+                                         NULL_TREE);
+   /* type (*) (int, type) */
+   fntype[5] = build_function_type_list (type,
+-- 
+1.7.0.4
+

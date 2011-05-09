@@ -1,0 +1,75 @@
+From f6e12aec843ba3a839f49b60a5ca092f2fadd876 Mon Sep 17 00:00:00 2001
+From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 10 Apr 2011 16:29:05 +0000
+Subject: [PATCH 098/200] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
+
+	PR libstdc++/48541
+	* include/std/functional (_Base_manager::_M_get_pointer): Use
+	addressof.
+	* testsuite/20_util/function/48541.cc: New.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172242 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 6643b76..660e371 100644
+--- a/libstdc++-v3/include/std/functional
++++ b/libstdc++-v3/include/std/functional
+@@ -1586,7 +1586,7 @@ _GLIBCXX_HAS_NESTED_TYPE(result_type)
+ 	_M_get_pointer(const _Any_data& __source)
+ 	{
+ 	  const _Functor* __ptr =
+-	    __stored_locally? &__source._M_access<_Functor>()
++	    __stored_locally? std::__addressof(__source._M_access<_Functor>())
+ 	    /* have stored a pointer */ : __source._M_access<_Functor*>();
+ 	  return const_cast<_Functor*>(__ptr);
+ 	}
+diff --git a/libstdc++-v3/testsuite/20_util/function/48451.cc b/libstdc++-v3/testsuite/20_util/function/48451.cc
+new file mode 100644
+index 0000000..f812367
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/function/48451.cc
+@@ -0,0 +1,40 @@
++// { dg-options "-std=gnu++0x" }
++// { dg-do compile }
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++//
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++// libstdc++/48451
++
++#include <functional>
++
++struct X {
++  void operator () () const { }
++  float operator & () const { return 1.2345; }
++};
++
++void test01()
++{
++  X x;
++  std::function<void()> f(x);
++  f();
++}
++
++int main()
++{
++  test01();
++  return 0;
++}
+-- 
+1.7.0.4
+

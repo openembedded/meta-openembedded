@@ -1,0 +1,50 @@
+From 8d72f0bd42615d92c0db226238694eedb52914d3 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 14:25:22 +0000
+Subject: [PATCH 028/200] 	PR c++/48313
+ 	* pt.c (maybe_adjust_types_for_deduction): Handle T&& deduction
+ 	from overloaded function.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171669 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 95b82ee..2e18588 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -13936,7 +13936,10 @@ maybe_adjust_types_for_deduction (unification_kind_t strict,
+       && TYPE_REF_IS_RVALUE (*parm)
+       && TREE_CODE (TREE_TYPE (*parm)) == TEMPLATE_TYPE_PARM
+       && cp_type_quals (TREE_TYPE (*parm)) == TYPE_UNQUALIFIED
+-      && arg_expr && real_lvalue_p (arg_expr))
++      && (arg_expr ? real_lvalue_p (arg_expr)
++	  /* try_one_overload doesn't provide an arg_expr, but
++	     functions are always lvalues.  */
++	  : TREE_CODE (*arg) == FUNCTION_TYPE))
+     *arg = build_reference_type (*arg);
+ 
+   /* [temp.deduct.call]
+new file mode 100644
+index 0000000..160296f
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/rv-deduce2.C
+@@ -0,0 +1,18 @@
++// PR c++/48313
++// { dg-options -std=c++0x }
++
++template<typename F>
++void f(F&&) { }
++
++void g() { }
++
++template<typename T> void h() { }
++
++int main()
++{
++  f( g );       // OK
++  void (&p)() = h<int>;
++  f( p );       // OK
++  f( h<int> );  // ???
++}
++
+-- 
+1.7.0.4
+

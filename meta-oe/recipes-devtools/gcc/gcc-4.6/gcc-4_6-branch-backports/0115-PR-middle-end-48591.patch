@@ -1,0 +1,93 @@
+From f16c1783b4b2c93a42eb36b4f136ec46bd3ce834 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 13 Apr 2011 15:52:17 +0000
+Subject: [PATCH 115/200] 	PR middle-end/48591
+ 	* omp-low.c (expand_omp_atomic_fetch_op): Return false if decl is
+ 	NULL.
+ 	(expand_omp_atomic_pipeline): Return false if cmpxchg is NULL.
+
+	* gcc.dg/gomp/pr48591.c: New test.
+
+	* testsuite/libgomp.c/pr48591.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172381 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c3f2178..5b0fdff 100644
+--- a/gcc/omp-low.c
++++ b/gcc/omp-low.c
+@@ -5005,6 +5005,8 @@ expand_omp_atomic_fetch_op (basic_block load_bb,
+     return false;
+ 
+   decl = built_in_decls[base + index + 1];
++  if (decl == NULL_TREE)
++    return false;
+   itype = TREE_TYPE (TREE_TYPE (decl));
+ 
+   if (direct_optab_handler (optab, TYPE_MODE (itype)) == CODE_FOR_nothing)
+@@ -5056,6 +5058,8 @@ expand_omp_atomic_pipeline (basic_block load_bb, basic_block store_bb,
+   edge e;
+ 
+   cmpxchg = built_in_decls[BUILT_IN_VAL_COMPARE_AND_SWAP_N + index + 1];
++  if (cmpxchg == NULL_TREE)
++    return false;
+   type = TYPE_MAIN_VARIANT (TREE_TYPE (TREE_TYPE (addr)));
+   itype = TREE_TYPE (TREE_TYPE (cmpxchg));
+ 
+new file mode 100644
+index 0000000..e6cb106
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/gomp/pr48591.c
+@@ -0,0 +1,22 @@
++/* PR middle-end/48591 */
++/* { dg-do compile { target i?86-*-* x86_64-*-* ia64-*-* } } */
++/* { dg-options "-fopenmp" } */
++
++extern void abort (void);
++
++int
++main ()
++{
++  __float128 f = 0.0;
++  int i;
++  #pragma omp parallel for reduction(+:f)
++    for (i = 0; i < 128; i++)
++      f += 0.5Q;
++  if (f != 64.0Q)
++    abort ();
++  #pragma omp atomic
++    f += 8.5Q;
++  if (f != 72.5Q)
++    abort ();
++  return 0;
++}
+new file mode 100644
+index 0000000..18dfd7f
+--- /dev/null
++++ b/libgomp/testsuite/libgomp.c/pr48591.c
+@@ -0,0 +1,22 @@
++/* PR middle-end/48591 */
++/* { dg-do run { target i?86-*-linux* x86_64-*-linux* ia64-*-linux* } } */
++/* { dg-options "-fopenmp" } */
++
++extern void abort (void);
++
++int
++main ()
++{
++  __float128 f = 0.0;
++  int i;
++  #pragma omp parallel for reduction(+:f)
++    for (i = 0; i < 128; i++)
++      f += 0.5Q;
++  if (f != 64.0Q)
++    abort ();
++  #pragma omp atomic
++    f += 8.5Q;
++  if (f != 72.5Q)
++    abort ();
++  return 0;
++}
+-- 
+1.7.0.4
+

@@ -1,0 +1,27 @@
+From b4d9ee2abbc5ac5fcf475e1d495bd3d55500d39b Mon Sep 17 00:00:00 2001
+From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 23 Apr 2011 07:41:43 +0000
+Subject: [PATCH 170/200] 	Revert:
+ 	2011-04-22  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/48723
+	* config/i386/i386.c (ix86_expand_prologue): Update m->fs.sp_offset
+	after the call to ix86_adjust_stack_and_probe.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172893 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c50cbaf..6e4bb3b 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -10575,7 +10575,6 @@ ix86_expand_prologue (void)
+       if (STACK_CHECK_MOVING_SP)
+ 	{
+ 	  ix86_adjust_stack_and_probe (allocate);
+-	  m->fs.sp_offset += allocate;
+ 	  allocate = 0;
+ 	}
+       else
+-- 
+1.7.0.4
+

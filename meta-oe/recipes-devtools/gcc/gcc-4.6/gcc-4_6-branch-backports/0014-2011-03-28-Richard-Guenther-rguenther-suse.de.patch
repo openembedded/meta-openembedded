@@ -1,0 +1,246 @@
+From 2631216d2fedc5339a5edcac64db1ab5d9269498 Mon Sep 17 00:00:00 2001
+From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 28 Mar 2011 10:14:34 +0000
+Subject: [PATCH 014/200] 2011-03-28  Richard Guenther  <rguenther@suse.de>
+
+	Backport from mainline
+	2011-03-24  Richard Guenther  <rguenther@suse.de>
+
+	PR middle-end/48269
+	* tree-object-size.c (addr_object_size): Do not double-account
+	for MEM_REF offsets.
+
+	* gcc.dg/builtin-object-size-10.c: New testcase.
+
+	2011-03-22  Richard Guenther  <rguenther@suse.de>
+
+	PR tree-optimization/48228
+	* tree-vrp.c (vrp_visit_phi_node): Do not stop propagating
+	for single-arg PHIs.
+
+	* gcc.dg/Wstrict-overflow-23.c: New testcase.
+
+	2011-03-17  Richard Guenther  <rguenther@suse.de>
+
+	PR middle-end/48134
+	* tree-ssa.c (insert_debug_temp_for_var_def): If we propagated
+	a value make sure to fold the statement.
+
+	* gcc.dg/pr48134.c: New testcase.
+
+	2011-03-15  Richard Guenther  <rguenther@suse.de>
+
+	PR middle-end/48031
+	* fold-const.c (fold_indirect_ref_1): Do not create new variable-sized
+	or variable-indexed array accesses when in gimple form.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171595 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 957049c..9a2f31f 100644
+--- a/gcc/fold-const.c
++++ b/gcc/fold-const.c
+@@ -15554,12 +15554,17 @@ fold_indirect_ref_1 (location_t loc, tree type, tree op0)
+ 	}
+       /* *(foo *)&fooarray => fooarray[0] */
+       else if (TREE_CODE (optype) == ARRAY_TYPE
+-	       && type == TREE_TYPE (optype))
++	       && type == TREE_TYPE (optype)
++	       && (!in_gimple_form
++		   || TREE_CODE (TYPE_SIZE (type)) == INTEGER_CST))
+ 	{
+ 	  tree type_domain = TYPE_DOMAIN (optype);
+ 	  tree min_val = size_zero_node;
+ 	  if (type_domain && TYPE_MIN_VALUE (type_domain))
+ 	    min_val = TYPE_MIN_VALUE (type_domain);
++	  if (in_gimple_form
++	      && TREE_CODE (min_val) != INTEGER_CST)
++	    return NULL_TREE;
+ 	  return build4_loc (loc, ARRAY_REF, type, op, min_val,
+ 			     NULL_TREE, NULL_TREE);
+ 	}
+@@ -15633,7 +15638,9 @@ fold_indirect_ref_1 (location_t loc, tree type, tree op0)
+ 
+   /* *(foo *)fooarrptr => (*fooarrptr)[0] */
+   if (TREE_CODE (TREE_TYPE (subtype)) == ARRAY_TYPE
+-      && type == TREE_TYPE (TREE_TYPE (subtype)))
++      && type == TREE_TYPE (TREE_TYPE (subtype))
++      && (!in_gimple_form
++	  || TREE_CODE (TYPE_SIZE (type)) == INTEGER_CST))
+     {
+       tree type_domain;
+       tree min_val = size_zero_node;
+@@ -15641,6 +15648,9 @@ fold_indirect_ref_1 (location_t loc, tree type, tree op0)
+       type_domain = TYPE_DOMAIN (TREE_TYPE (sub));
+       if (type_domain && TYPE_MIN_VALUE (type_domain))
+ 	min_val = TYPE_MIN_VALUE (type_domain);
++      if (in_gimple_form
++	  && TREE_CODE (min_val) != INTEGER_CST)
++	return NULL_TREE;
+       return build4_loc (loc, ARRAY_REF, type, sub, min_val, NULL_TREE,
+ 			 NULL_TREE);
+     }
+new file mode 100644
+index 0000000..16014bb
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/Wstrict-overflow-23.c
+@@ -0,0 +1,31 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -Wstrict-overflow" } */
++
++unsigned int
++do_scrolling (unsigned int window_size, unsigned int writecost)
++{
++  unsigned int i = window_size;
++
++  int terminal_window_p = 0;
++  unsigned int queue = 0;
++
++  for (i = window_size; i; i--)
++    {
++      if (writecost < i)
++    ++queue;
++      else if (writecost & 1)
++    terminal_window_p = 1;
++    }
++
++  if (queue > 0)
++    {
++      if (!terminal_window_p)
++    {
++      terminal_window_p = 1;
++    }
++    }
++
++  if (terminal_window_p)
++    return 100;
++  return 0;
++}
+diff --git a/gcc/testsuite/gcc.dg/builtin-object-size-10.c b/gcc/testsuite/gcc.dg/builtin-object-size-10.c
+new file mode 100644
+index 0000000..6c7ed45
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/builtin-object-size-10.c
+@@ -0,0 +1,26 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -fdump-tree-objsz-details" } */
++
++typedef struct {
++    char sentinel[4];
++    char data[0];
++} drone_packet;
++typedef struct {
++    char type_str[16];
++    char channel_hop;
++} drone_source_packet;
++drone_packet *
++foo(char *x)
++{
++  drone_packet *dpkt = __builtin_malloc(sizeof(drone_packet)
++					+ sizeof(drone_source_packet));
++  drone_source_packet *spkt = (drone_source_packet *) dpkt->data;
++  __builtin___snprintf_chk (spkt->type_str, 16,
++			    1, __builtin_object_size (spkt->type_str, 1),
++			    "%s", x);
++  return dpkt;
++}
++
++/* { dg-final { scan-tree-dump "maximum object size 21" "objsz" } } */
++/* { dg-final { scan-tree-dump "maximum subobject size 16" "objsz" } } */
++/* { dg-final { cleanup-tree-dump "objsz" } } */
+diff --git a/gcc/testsuite/gcc.dg/pr48134.c b/gcc/testsuite/gcc.dg/pr48134.c
+new file mode 100644
+index 0000000..8dc5a6d
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48134.c
+@@ -0,0 +1,31 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -fstack-check=specific -fno-tree-dse -fno-tree-fre -fno-tree-loop-optimize -g" } */
++
++struct S
++{
++  int w, z;
++};
++struct T
++{
++  struct S s;
++};
++
++int i;
++
++static inline struct S
++bar (struct S x)
++{
++  i++;
++  return x;
++}
++
++int
++foo (struct T t, struct S s)
++{
++  struct S *c = &s;
++  if (i)
++    c = &t.s;
++  t.s.w = 3;
++  s = bar (*c);
++  return t.s.w;
++}
+diff --git a/gcc/tree-object-size.c b/gcc/tree-object-size.c
+index 6a74d19..043b445 100644
+--- a/gcc/tree-object-size.c
++++ b/gcc/tree-object-size.c
+@@ -348,8 +348,6 @@ addr_object_size (struct object_size_info *osi, const_tree ptr,
+ 	  tree bytes2 = compute_object_offset (TREE_OPERAND (ptr, 0), pt_var);
+ 	  if (bytes2 != error_mark_node)
+ 	    {
+-	      bytes2 = size_binop (PLUS_EXPR, bytes2,
+-				   TREE_OPERAND (pt_var, 1));
+ 	      if (TREE_CODE (bytes2) == INTEGER_CST
+ 		  && tree_int_cst_lt (pt_var_size, bytes2))
+ 		bytes2 = size_zero_node;
+diff --git a/gcc/tree-ssa.c b/gcc/tree-ssa.c
+index 5c9e0d8..eaf3ef9 100644
+--- a/gcc/tree-ssa.c
++++ b/gcc/tree-ssa.c
+@@ -455,13 +455,19 @@ insert_debug_temp_for_var_def (gimple_stmt_iterator *gsi, tree var)
+ 	continue;
+ 
+       if (value)
+-	FOR_EACH_IMM_USE_ON_STMT (use_p, imm_iter)
+-	  /* unshare_expr is not needed here.  vexpr is either a
+-	     SINGLE_RHS, that can be safely shared, some other RHS
+-	     that was unshared when we found it had a single debug
+-	     use, or a DEBUG_EXPR_DECL, that can be safely
+-	     shared.  */
+-	  SET_USE (use_p, value);
++	{
++	  FOR_EACH_IMM_USE_ON_STMT (use_p, imm_iter)
++	    /* unshare_expr is not needed here.  vexpr is either a
++	       SINGLE_RHS, that can be safely shared, some other RHS
++	       that was unshared when we found it had a single debug
++	       use, or a DEBUG_EXPR_DECL, that can be safely
++	       shared.  */
++	    SET_USE (use_p, value);
++	  /* If we didn't replace uses with a debug decl fold the
++	     resulting expression.  Otherwise we end up with invalid IL.  */
++	  if (TREE_CODE (value) != DEBUG_EXPR_DECL)
++	    fold_stmt_inplace (stmt);
++	}
+       else
+ 	gimple_debug_bind_reset_value (stmt);
+ 
+diff --git a/gcc/tree-vrp.c b/gcc/tree-vrp.c
+index 65d249f..280e6da 100644
+--- a/gcc/tree-vrp.c
++++ b/gcc/tree-vrp.c
+@@ -6619,6 +6619,7 @@ vrp_visit_phi_node (gimple phi)
+      edge; this helps us avoid an overflow infinity for conditionals
+      which are not in a loop.  */
+   if (edges > 0
++      && gimple_phi_num_args (phi) > 1
+       && edges == old_edges)
+     {
+       int cmp_min = compare_values (lhs_vr->min, vr_result.min);
+-- 
+1.7.0.4
+

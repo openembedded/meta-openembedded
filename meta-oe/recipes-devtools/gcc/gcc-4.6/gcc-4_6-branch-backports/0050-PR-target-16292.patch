@@ -1,0 +1,22 @@
+From e9265f24f30b22d79d2ea4013dd32a491a12d00c Mon Sep 17 00:00:00 2001
+From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 31 Mar 2011 15:05:47 +0000
+Subject: [PATCH 050/200] 	PR target/16292
+ 	* gfortran.dg/g77/cabs.f: Only xfail execution on mips-sgi-irix6*
+ 	with -O0.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171785 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index d409012..998327b 100644
+--- a/gcc/testsuite/gfortran.dg/g77/cabs.f
++++ b/gcc/testsuite/gfortran.dg/g77/cabs.f
+@@ -1,4 +1,5 @@
+-c { dg-do run { xfail mips-sgi-irix6* } } PR 16292
++c { dg-do run }
++c { dg-xfail-run-if "PR target/16292" { mips-sgi-irix6* } { -O0 } }
+       program cabs_1
+       complex      z0
+       real         r0
+-- 
+1.7.0.4
+

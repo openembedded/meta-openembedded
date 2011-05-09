@@ -1,0 +1,26 @@
+From eda6b7fee4d20c15dc919a726b60ee5777c402c8 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 21 Apr 2011 03:03:08 +0000
+Subject: [PATCH 159/200] 	PR c++/48594
+ 	* decl2.c (build_offset_ref_call_from_tree): Move
+ 	non-dependency of object outside condition.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172805 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 1217e42..89e03c0 100644
+--- a/gcc/cp/decl2.c
++++ b/gcc/cp/decl2.c
+@@ -4079,9 +4079,9 @@ build_offset_ref_call_from_tree (tree fn, VEC(tree,gc) **args)
+ 	 parameter.  That must be done before the FN is transformed
+ 	 because we depend on the form of FN.  */
+       make_args_non_dependent (*args);
++      object = build_non_dependent_expr (object);
+       if (TREE_CODE (TREE_TYPE (fn)) == METHOD_TYPE)
+ 	{
+-	  object = build_non_dependent_expr (object);
+ 	  if (TREE_CODE (fn) == DOTSTAR_EXPR)
+ 	    object = cp_build_addr_expr (object, tf_warning_or_error);
+ 	  VEC_safe_insert (tree, gc, *args, 0, object);
+-- 
+1.7.0.4
+

@@ -1,0 +1,24 @@
+From 0e3879bf21f04b54b0849f3a86c20359f965e12a Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 20 Apr 2011 18:19:47 +0000
+Subject: [PATCH 155/200] 	PR tree-optimization/48611
+ 	* tree-eh.c (note_eh_region_may_contain_throw): Don't propagate
+ 	beyond ERT_MUST_NOT_THROW region.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172786 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index f189b9b..0d6158b 100644
+--- a/gcc/tree-eh.c
++++ b/gcc/tree-eh.c
+@@ -849,6 +849,8 @@ note_eh_region_may_contain_throw (eh_region region)
+ {
+   while (bitmap_set_bit (eh_region_may_contain_throw_map, region->index))
+     {
++      if (region->type == ERT_MUST_NOT_THROW)
++	break;
+       region = region->outer;
+       if (region == NULL)
+ 	break;
+-- 
+1.7.0.4
+

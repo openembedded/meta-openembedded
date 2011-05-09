@@ -1,0 +1,71 @@
+From 7ca62e4f7e0e27a4282dc14e5b89c389d5c194bb Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 14:26:21 +0000
+Subject: [PATCH 033/200] 	* semantics.c (is_valid_constexpr_fn): Specify input location.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171674 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 23bb021..a41a1d5 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -5390,8 +5390,8 @@ is_valid_constexpr_fn (tree fun, bool complain)
+       {
+ 	ret = false;
+ 	if (complain)
+-	  error ("invalid type for parameter %q#D of constexpr function",
+-		 parm);
++	  error ("invalid type for parameter %d of constexpr "
++		 "function %q+#D", DECL_PARM_INDEX (parm), fun);
+       }
+ 
+   if (!DECL_CONSTRUCTOR_P (fun))
+@@ -5401,7 +5401,7 @@ is_valid_constexpr_fn (tree fun, bool complain)
+ 	{
+ 	  ret = false;
+ 	  if (complain)
+-	    error ("invalid return type %qT of constexpr function %qD",
++	    error ("invalid return type %qT of constexpr function %q+D",
+ 		   rettype, fun);
+ 	}
+ 
+@@ -5411,7 +5411,7 @@ is_valid_constexpr_fn (tree fun, bool complain)
+ 	{
+ 	  ret = false;
+ 	  if (complain)
+-	    error ("enclosing class of %q#D is not a literal type", fun);
++	    error ("enclosing class of %q+#D is not a literal type", fun);
+ 	}
+     }
+ 
+index a3706d6..183d3f7 100644
+--- a/gcc/testsuite/g++.dg/cpp0x/constexpr-diag1.C
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-diag1.C
+@@ -1,12 +1,11 @@
+ // Test that we explain why a template instantiation isn't constexpr
+ // { dg-options -std=c++0x }
+-// { dg-prune-output "not a constexpr function" }
+ 
+ template <class T>
+ struct A
+ {
+   T t;
+-  constexpr int f() { return 42; }
++  constexpr int f() { return 42; } // { dg-error "enclosing class" }
+ };
+ 
+ struct B { B(); operator int(); };
+@@ -14,8 +13,8 @@ struct B { B(); operator int(); };
+ constexpr A<int> ai = { 42 };
+ constexpr int i = ai.f();
+ 
+-constexpr int b = A<B>().f();	// { dg-error "enclosing class" }
++constexpr int b = A<B>().f();	// { dg-error "not a constexpr function" }
+ 
+ template <class T>
+-constexpr int f (T t) { return 42; }
+-constexpr int x = f(B());	// { dg-error "parameter" }
++constexpr int f (T t) { return 42; } // { dg-error "parameter" }
++constexpr int x = f(B());	     // { dg-error "constexpr function" }
+-- 
+1.7.0.4
+

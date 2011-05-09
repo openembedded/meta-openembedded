@@ -1,0 +1,51 @@
+2011-02-21  Andrew Stubbs  <ams@codesourcery.com>
+	    Julian Brown  <julian@codesourcery.com>
+	    Mark Shinwell  <shinwell@codesourcery.com>
+
+	Forward-ported from Linaro GCC 4.5 (bzr99324).
+
+	gcc/
+	* config/arm/arm.h (arm_class_likely_spilled_p): Check against
+	LO_REGS only for Thumb-1.
+	(MODE_BASE_REG_CLASS): Restrict base registers to those which can
+	be used in short instructions when optimising for size on Thumb-2.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-01-29 03:20:57 +0000
++++ new/gcc/config/arm/arm.c	2011-02-21 14:04:51 +0000
+@@ -22304,14 +22304,16 @@
+ 
+ /* Implement TARGET_CLASS_LIKELY_SPILLED_P.
+  
+-   We need to define this for LO_REGS on thumb.  Otherwise we can end up
+-   using r0-r4 for function arguments, r7 for the stack frame and don't
+-   have enough left over to do doubleword arithmetic.  */
+-
++   We need to define this for LO_REGS on Thumb-1.  Otherwise we can end up
++   using r0-r4 for function arguments, r7 for the stack frame and don't have
++   enough left over to do doubleword arithmetic.  For Thumb-2 all the
++   potentially problematic instructions accept high registers so this is not
++   necessary.  Care needs to be taken to avoid adding new Thumb-2 patterns
++   that require many low registers.  */
+ static bool
+ arm_class_likely_spilled_p (reg_class_t rclass)
+ {
+-  if ((TARGET_THUMB && rclass == LO_REGS)
++  if ((TARGET_THUMB1 && rclass == LO_REGS)
+       || rclass  == CC_REG)
+     return true;
+ 
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-01-29 03:20:57 +0000
++++ new/gcc/config/arm/arm.h	2011-02-21 14:04:51 +0000
+@@ -1185,7 +1185,7 @@
+    when addressing quantities in QI or HI mode; if we don't know the
+    mode, then we must be conservative.  */
+ #define MODE_BASE_REG_CLASS(MODE)					\
+-    (TARGET_32BIT ? CORE_REGS :					\
++    (TARGET_ARM || (TARGET_THUMB2 && !optimize_size) ? CORE_REGS :      \
+      (((MODE) == SImode) ? BASE_REGS : LO_REGS))
+ 
+ /* For Thumb we can not support SP+reg addressing, so we return LO_REGS
+

@@ -1,0 +1,24 @@
+From 8216e1c4c23928723f8e1583bf7e014813bb2c07 Mon Sep 17 00:00:00 2001
+From: baldrick <baldrick@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 9 Apr 2011 16:14:07 +0000
+Subject: [PATCH 094/200] Bail out rather than crashing in array_type_nelts if TYPE_MAX_VALUE is null.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172226 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 405b549..4d6ca36 100644
+--- a/gcc/tree.c
++++ b/gcc/tree.c
+@@ -2453,6 +2453,10 @@ array_type_nelts (const_tree type)
+   min = TYPE_MIN_VALUE (index_type);
+   max = TYPE_MAX_VALUE (index_type);
+ 
++  /* TYPE_MAX_VALUE may not be set if the array has unknown length.  */
++  if (!max)
++    return error_mark_node;
++
+   return (integer_zerop (min)
+ 	  ? max
+ 	  : fold_build2 (MINUS_EXPR, TREE_TYPE (max), max, min));
+-- 
+1.7.0.4
+

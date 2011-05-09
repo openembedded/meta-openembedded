@@ -1,0 +1,115 @@
+From 1934cdd502a4bad6e1c54c4206b9361909f01083 Mon Sep 17 00:00:00 2001
+From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 17 Apr 2011 21:46:20 +0000
+Subject: [PATCH 134/200] 2011-04-17  Daniel Krugler  <daniel.kruegler@googlemail.com>
+ 	    Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR libstdc++/48635 (again)
+	* include/bits/unique_ptr.h (unique_ptr<>::unique_ptr(unique_ptr<>&&),
+	unique_ptr<_Tp[]>::unique_ptr(unique_ptr<>&&),
+	unique_ptr<>::operator=(unique_ptr<>&&),
+	unique_ptr<_Tp[]>::operator=(unique_ptr<>&&)): Use forward<_Ep>, not
+	forward<_Dp>, to forward the deleter.
+	* testsuite/20_util/unique_ptr/assign/48635_neg.cc: New.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172620 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 9ab1938..9d5d206 100644
+--- a/libstdc++-v3/include/bits/unique_ptr.h
++++ b/libstdc++-v3/include/bits/unique_ptr.h
+@@ -153,7 +153,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 		   && std::is_convertible<_Ep, _Dp>::value))>
+ 	     ::type>
+ 	unique_ptr(unique_ptr<_Up, _Ep>&& __u)
+-	: _M_t(__u.release(), std::forward<deleter_type>(__u.get_deleter()))
++	: _M_t(__u.release(), std::forward<_Ep>(__u.get_deleter()))
+ 	{ }
+ 
+ #if _GLIBCXX_USE_DEPRECATED
+@@ -186,7 +186,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 	operator=(unique_ptr<_Up, _Ep>&& __u)
+ 	{
+ 	  reset(__u.release());
+-	  get_deleter() = std::forward<deleter_type>(__u.get_deleter());
++	  get_deleter() = std::forward<_Ep>(__u.get_deleter());
+ 	  return *this;
+ 	}
+ 
+@@ -306,7 +306,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 
+       template<typename _Up, typename _Ep>
+ 	unique_ptr(unique_ptr<_Up, _Ep>&& __u)
+-	: _M_t(__u.release(), std::forward<deleter_type>(__u.get_deleter()))
++	: _M_t(__u.release(), std::forward<_Ep>(__u.get_deleter()))
+ 	{ }
+ 
+       // Destructor.
+@@ -326,7 +326,7 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+ 	operator=(unique_ptr<_Up, _Ep>&& __u)
+ 	{
+ 	  reset(__u.release());
+-	  get_deleter() = std::forward<deleter_type>(__u.get_deleter());
++	  get_deleter() = std::forward<_Ep>(__u.get_deleter());
+ 	  return *this;
+ 	}
+ 
+diff --git a/libstdc++-v3/testsuite/20_util/unique_ptr/assign/48635_neg.cc b/libstdc++-v3/testsuite/20_util/unique_ptr/assign/48635_neg.cc
+new file mode 100644
+index 0000000..1ed53ee
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/unique_ptr/assign/48635_neg.cc
+@@ -0,0 +1,50 @@
++// { dg-options "-std=gnu++0x" }
++// { dg-do compile }
++
++// Copyright (C) 2011 Free Software Foundation
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License
++// along with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <memory>
++
++struct D;
++
++struct B
++{
++ B& operator=(D&) = delete; // { dg-error "declared here" }
++
++ template<class T>
++   void operator()(T*) const {}
++};
++
++struct D : B { };
++
++// libstdc++/48635
++void f()
++{
++  B b;
++  D d;
++
++  std::unique_ptr<int, B&> ub(nullptr, b);
++  std::unique_ptr<int, D&> ud(nullptr, d);
++  ub = std::move(ud);
++// { dg-error "use of deleted function" "" { target *-*-* } 189 }
++
++  std::unique_ptr<int[], B&> uba(nullptr, b);
++  std::unique_ptr<int[], D&> uda(nullptr, d);
++  uba = std::move(uda);
++// { dg-error "use of deleted function" "" { target *-*-* } 329 }
++}
+-- 
+1.7.0.4
+

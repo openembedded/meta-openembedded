@@ -1,0 +1,23 @@
+From 03b47392e5f3af2fe5ef4ad1f5fc9cca47604945 Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 17 Apr 2011 22:29:13 +0000
+Subject: [PATCH 136/200] 	* gcc-interface/Make-lang.in (gnatbind): Replace $(ALL_CFLAGS) with
+ 	$(CFLAGS) on the link line.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172623 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 637a686..718c244 100644
+--- a/gcc/ada/gcc-interface/Make-lang.in
++++ b/gcc/ada/gcc-interface/Make-lang.in
+@@ -485,7 +485,7 @@ gnat1$(exeext): $(TARGET_ADA_SRCS) $(GNAT1_OBJS) $(ADA_BACKEND) $(LIBDEPS)
+ 	$(RM) stamp-gnatlib2-rts stamp-tools
+ 
+ gnatbind$(exeext): ada/b_gnatb.o $(CONFIG_H) $(GNATBIND_OBJS)
+-	$(GCC_LINK) -o $@ ada/b_gnatb.o $(GNATBIND_OBJS) $(ALL_CFLAGS) $(LIBS) $(SYSLIBS)
++	$(GCC_LINK) -o $@ ada/b_gnatb.o $(GNATBIND_OBJS) $(LIBS) $(SYSLIBS) $(CFLAGS)
+ 
+ # use cross-gcc
+ gnat-cross: force
+-- 
+1.7.0.4
+

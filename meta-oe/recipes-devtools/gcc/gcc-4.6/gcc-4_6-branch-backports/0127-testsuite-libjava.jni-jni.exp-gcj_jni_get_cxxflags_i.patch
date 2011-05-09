@@ -1,0 +1,26 @@
+From 37bc32c009317c62516117bfb2c9b49772b159af Mon Sep 17 00:00:00 2001
+From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 15 Apr 2011 17:17:18 +0000
+Subject: [PATCH 127/200] 	* testsuite/libjava.jni/jni.exp (gcj_jni_get_cxxflags_invocation):
+ 	Add $libiconv to cxxflags for alpha*-dec-osf*.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172508 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index ebdee1b..c84d86f 100644
+--- a/libjava/testsuite/libjava.jni/jni.exp
++++ b/libjava/testsuite/libjava.jni/jni.exp
+@@ -280,6 +280,11 @@ proc gcj_jni_get_cxxflags_invocation {} {
+     lappend cxxflags "-shared-libgcc"
+   }
+ 
++  # Tru64 UNIX needs -liconv linked explicitly since gcc does the linking.
++  if { [istarget "alpha*-dec-osf*"] } {
++    lappend cxxflags $libiconv
++  }
++
+   return $cxxflags
+ }
+ 
+-- 
+1.7.0.4
+

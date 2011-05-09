@@ -1,0 +1,74 @@
+From 7d736b8d0fb4f7892a5646ca3581b9ab01cb2971 Mon Sep 17 00:00:00 2001
+From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 10 Apr 2011 16:19:41 +0000
+Subject: [PATCH 097/200] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
+
+	PR libstdc++/48465
+	* configure.ac (libtool_VERSION): Bump library version to 6:16:0.
+	* configure: Regenerate.
+	* config/abi/pre/gnu.ver (GLIBCXX_3.4.16): Export missing symbols.
+	* testsuite/util/testsuite_abi.cc: Add GLIBCXX_3.4.16.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172240 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index fa52672..839f846 100644
+--- a/libstdc++-v3/config/abi/pre/gnu.ver
++++ b/libstdc++-v3/config/abi/pre/gnu.ver
+@@ -1264,6 +1264,14 @@ GLIBCXX_3.4.15 {
+ 
+ } GLIBCXX_3.4.14;
+ 
++GLIBCXX_3.4.16 {
++
++    # libstdc++/48465
++    _ZNSs10_S_compareE[jmy][jmy];
++    _ZNSbIwSt11char_traitsIwESaIwEE10_S_compareE[jmy][jmy];
++
++} GLIBCXX_3.4.15;
++
+ # Symbols in the support library (libsupc++) have their own tag.
+ CXXABI_1.3 {
+ 
+diff --git a/libstdc++-v3/configure b/libstdc++-v3/configure
+index 4e1661a..c321e76 100755
+--- a/libstdc++-v3/configure
++++ b/libstdc++-v3/configure
+@@ -2825,7 +2825,7 @@ ac_config_headers="$ac_config_headers config.h"
+ ### am handles this now?  ORIGINAL_LD_FOR_MULTILIBS=$LD
+ 
+ # For libtool versioning info, format is CURRENT:REVISION:AGE
+-libtool_VERSION=6:15:0
++libtool_VERSION=6:16:0
+ 
+ 
+ # Find the rest of the source tree framework.
+diff --git a/libstdc++-v3/configure.ac b/libstdc++-v3/configure.ac
+index 128b9c5..ccf1230 100644
+--- a/libstdc++-v3/configure.ac
++++ b/libstdc++-v3/configure.ac
+@@ -12,7 +12,7 @@ AC_CONFIG_HEADER(config.h)
+ ### am handles this now?  ORIGINAL_LD_FOR_MULTILIBS=$LD
+ 
+ # For libtool versioning info, format is CURRENT:REVISION:AGE
+-libtool_VERSION=6:15:0
++libtool_VERSION=6:16:0
+ AC_SUBST(libtool_VERSION)
+ 
+ # Find the rest of the source tree framework.
+diff --git a/libstdc++-v3/testsuite/util/testsuite_abi.cc b/libstdc++-v3/testsuite/util/testsuite_abi.cc
+index a533311..ea100b6 100644
+--- a/libstdc++-v3/testsuite/util/testsuite_abi.cc
++++ b/libstdc++-v3/testsuite/util/testsuite_abi.cc
+@@ -193,6 +193,7 @@ check_version(symbol& test, bool added)
+       known_versions.push_back("GLIBCXX_3.4.13");
+       known_versions.push_back("GLIBCXX_3.4.14");
+       known_versions.push_back("GLIBCXX_3.4.15");
++      known_versions.push_back("GLIBCXX_3.4.16");
+       known_versions.push_back("GLIBCXX_LDBL_3.4");
+       known_versions.push_back("GLIBCXX_LDBL_3.4.7");
+       known_versions.push_back("GLIBCXX_LDBL_3.4.10");
+-- 
+1.7.0.4
+

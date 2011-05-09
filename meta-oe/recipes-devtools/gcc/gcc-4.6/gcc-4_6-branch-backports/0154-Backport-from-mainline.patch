@@ -1,0 +1,47 @@
+From b769f6c6e91c977fb6b4fcc5b7838eb79dddaeb7 Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 20 Apr 2011 11:18:50 +0000
+Subject: [PATCH 154/200] 	Backport from mainline
+ 	2011-04-19  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR lto/48148
+	* gimple.c (gimple_types_compatible_p_1) <ENUMERAL_TYPE>: Do not merge
+	the types if they have different enumeration identifiers.
+
+	2011-04-18  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR lto/48492
+	* cfgexpand.c (expand_debug_expr) <VAR_DECL>: Return NULL for a
+	DECL_IN_CONSTANT_POOL without RTL.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172767 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 059c5b2..655bd61 100644
+--- a/gcc/cfgexpand.c
++++ b/gcc/cfgexpand.c
+@@ -2492,6 +2492,7 @@ expand_debug_expr (tree exp)
+ 	      || !TREE_STATIC (exp)
+ 	      || !DECL_NAME (exp)
+ 	      || DECL_HARD_REGISTER (exp)
++	      || DECL_IN_CONSTANT_POOL (exp)
+ 	      || mode == VOIDmode)
+ 	    return NULL;
+ 
+diff --git a/gcc/gimple.c b/gcc/gimple.c
+index e686e63..e60dc92 100644
+--- a/gcc/gimple.c
++++ b/gcc/gimple.c
+@@ -3742,6 +3742,9 @@ gimple_types_compatible_p_1 (tree t1, tree t2, enum gtc_mode mode,
+ 
+ 	    if (tree_int_cst_equal (c1, c2) != 1)
+ 	      goto different_types;
++
++	    if (mode == GTC_MERGE && TREE_PURPOSE (v1) != TREE_PURPOSE (v2))
++	      goto different_types;
+ 	  }
+ 
+ 	/* If one enumeration has more values than the other, they
+-- 
+1.7.0.4
+

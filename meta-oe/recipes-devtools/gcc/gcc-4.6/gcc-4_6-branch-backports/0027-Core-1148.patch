@@ -1,0 +1,59 @@
+From c68e41052387396cba4a066d8e9658dc2011baf0 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 29 Mar 2011 14:25:10 +0000
+Subject: [PATCH 027/200] 	Core 1148
+ 	* typeck.c (check_return_expr): Fix conditions for setting
+ 	LOOKUP_PREFER_RVALUE.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171668 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 0e8a6d7..03aa49e 100644
+--- a/gcc/cp/typeck.c
++++ b/gcc/cp/typeck.c
+@@ -7760,12 +7760,19 @@ check_return_expr (tree retval, bool *no_warning)
+ 
+       /* Under C++0x [12.8/16 class.copy], a returned lvalue is sometimes
+ 	 treated as an rvalue for the purposes of overload resolution to
+-	 favor move constructors over copy constructors.  */
+-      if ((cxx_dialect != cxx98) 
+-          && named_return_value_okay_p
+-          /* The variable must not have the `volatile' qualifier.  */
+-	  && !CP_TYPE_VOLATILE_P (TREE_TYPE (retval))
+-	  /* The return type must be a class type.  */
++	 favor move constructors over copy constructors.
++
++         Note that these conditions are similar to, but not as strict as,
++	 the conditions for the named return value optimization.  */
++      if ((cxx_dialect != cxx98)
++          && (TREE_CODE (retval) == VAR_DECL
++	      || TREE_CODE (retval) == PARM_DECL)
++	  && DECL_CONTEXT (retval) == current_function_decl
++	  && !TREE_STATIC (retval)
++	  && same_type_p ((TYPE_MAIN_VARIANT (TREE_TYPE (retval))),
++			  (TYPE_MAIN_VARIANT
++			   (TREE_TYPE (TREE_TYPE (current_function_decl)))))
++	  /* This is only interesting for class type.  */
+ 	  && CLASS_TYPE_P (TREE_TYPE (TREE_TYPE (current_function_decl))))
+ 	flags = flags | LOOKUP_PREFER_RVALUE;
+ 
+new file mode 100644
+index 0000000..216b1b5
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/elision2.C
+@@ -0,0 +1,13 @@
++// Core 1148: should be able to move from value parameter on return
++// { dg-options -std=c++0x }
++
++struct A
++{
++  A(const A&) = delete;
++  A(A&&);
++};
++
++A f (A a)
++{
++  return a;
++}
+-- 
+1.7.0.4
+

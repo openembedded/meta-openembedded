@@ -1,0 +1,27 @@
+From d4d74232bca4968da87cd8157cc2d6139115946e Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 26 Mar 2011 09:24:53 +0000
+Subject: [PATCH 007/200] 	Backport from mainline
+ 	2011-03-25  Jakub Jelinek  <jakub@redhat.com>
+
+	* printf/printf_fp.c (__quadmath_printf_fp): Use memcpy instead of
+	mempcpy.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171550 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 4a63be9..eb66372 100644
+--- a/libquadmath/printf/printf_fp.c
++++ b/libquadmath/printf/printf_fp.c
+@@ -1197,7 +1197,7 @@ __quadmath_printf_fp (struct __quadmath_printf_file *fp,
+ 	    if (*copywc == decimalwc)
+ 	      memcpy (cp, decimal, decimal_len), cp += decimal_len;
+ 	    else if (*copywc == thousands_sepwc)
+-	      mempcpy (cp, thousands_sep, thousands_sep_len), cp += thousands_sep_len;
++	      memcpy (cp, thousands_sep, thousands_sep_len), cp += thousands_sep_len;
+ 	    else
+ 	      *cp++ = (char) *copywc;
+ 	}
+-- 
+1.7.0.4
+

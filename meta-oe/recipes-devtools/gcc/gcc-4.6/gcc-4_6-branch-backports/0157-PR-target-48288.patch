@@ -1,0 +1,105 @@
+From 05f12c826eff0c87deeac7347d73cb276ec493cc Mon Sep 17 00:00:00 2001
+From: danglin <danglin@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 20 Apr 2011 23:36:20 +0000
+Subject: [PATCH 157/200] 	PR target/48288
+ 	* config/pa/predicates.md (ior_operand): Delete predicate.
+ 	(cint_ior_operand, reg_or_cint_ior_operand): New predicates.
+ 	* config/pa/pa.md (iordi3): Use reg_or_cint_ior_operand predicate in
+ 	expander.  Use cint_ior_operand in unnamed insn.
+ 	(iorsi3): Likewise.
+ 	* config/pa/pa-protos.h (ior_operand): Delete declarations.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172797 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 085b648..dc42e55 100644
+--- a/gcc/config/pa/pa-protos.h
++++ b/gcc/config/pa/pa-protos.h
+@@ -80,7 +80,6 @@ extern int move_src_operand (rtx, enum machine_mode);
+ extern int prefetch_cc_operand (rtx, enum machine_mode);
+ extern int prefetch_nocc_operand (rtx, enum machine_mode);
+ extern int and_operand (rtx, enum machine_mode);
+-extern int ior_operand (rtx, enum machine_mode);
+ extern int arith32_operand (rtx, enum machine_mode);
+ extern int uint32_operand (rtx, enum machine_mode);
+ extern int reg_before_reload_operand (rtx, enum machine_mode);
+@@ -95,7 +94,6 @@ extern int ireg_or_int5_operand (rtx, enum machine_mode);
+ extern int fmpyaddoperands (rtx *);
+ extern int fmpysuboperands (rtx *);
+ extern int call_operand_address (rtx, enum machine_mode);
+-extern int ior_operand (rtx, enum machine_mode);
+ extern void emit_bcond_fp (rtx[]);
+ extern int emit_move_sequence (rtx *, enum machine_mode, rtx);
+ extern int emit_hpdiv_const (rtx *, int);
+diff --git a/gcc/config/pa/pa.md b/gcc/config/pa/pa.md
+index 24317a5..a1c92ac 100644
+--- a/gcc/config/pa/pa.md
++++ b/gcc/config/pa/pa.md
+@@ -5686,7 +5686,7 @@
+ (define_expand "iordi3"
+   [(set (match_operand:DI 0 "register_operand" "")
+ 	(ior:DI (match_operand:DI 1 "register_operand" "")
+-		(match_operand:DI 2 "ior_operand" "")))]
++		(match_operand:DI 2 "reg_or_cint_ior_operand" "")))]
+   ""
+   "
+ {
+@@ -5707,7 +5707,7 @@
+ (define_insn ""
+   [(set (match_operand:DI 0 "register_operand" "=r,r")
+ 	(ior:DI (match_operand:DI 1 "register_operand" "0,0")
+-		(match_operand:DI 2 "ior_operand" "M,i")))]
++		(match_operand:DI 2 "cint_ior_operand" "M,i")))]
+   "TARGET_64BIT"
+   "* return output_64bit_ior (operands); "
+   [(set_attr "type" "binary,shift")
+@@ -5726,19 +5726,14 @@
+ (define_expand "iorsi3"
+   [(set (match_operand:SI 0 "register_operand" "")
+ 	(ior:SI (match_operand:SI 1 "register_operand" "")
+-		(match_operand:SI 2 "arith32_operand" "")))]
++		(match_operand:SI 2 "reg_or_cint_ior_operand" "")))]
+   ""
+-  "
+-{
+-  if (! (ior_operand (operands[2], SImode)
+-         || register_operand (operands[2], SImode)))
+-    operands[2] = force_reg (SImode, operands[2]);
+-}")
++  "")
+ 
+ (define_insn ""
+   [(set (match_operand:SI 0 "register_operand" "=r,r")
+ 	(ior:SI (match_operand:SI 1 "register_operand" "0,0")
+-		(match_operand:SI 2 "ior_operand" "M,i")))]
++		(match_operand:SI 2 "cint_ior_operand" "M,i")))]
+   ""
+   "* return output_ior (operands); "
+   [(set_attr "type" "binary,shift")
+diff --git a/gcc/config/pa/predicates.md b/gcc/config/pa/predicates.md
+index 350e42b..ea41169 100644
+--- a/gcc/config/pa/predicates.md
++++ b/gcc/config/pa/predicates.md
+@@ -411,11 +411,15 @@
+ 
+ ;; True iff depi can be used to compute (reg | OP).
+ 
+-(define_predicate "ior_operand"
+-  (match_code "const_int")
+-{
+-  return (GET_CODE (op) == CONST_INT && ior_mask_p (INTVAL (op)));
+-})
++(define_predicate "cint_ior_operand"
++  (and (match_code "const_int")
++       (match_test "ior_mask_p (INTVAL (op))")))
++
++;; True iff OP can be used to compute (reg | OP).
++
++(define_predicate "reg_or_cint_ior_operand"
++  (ior (match_operand 0 "register_operand")
++       (match_operand 0 "cint_ior_operand")))
+ 
+ ;; True iff OP is a CONST_INT of the forms 0...0xxxx or
+ ;; 0...01...1xxxx. Such values can be the left hand side x in (x <<
+-- 
+1.7.0.4
+

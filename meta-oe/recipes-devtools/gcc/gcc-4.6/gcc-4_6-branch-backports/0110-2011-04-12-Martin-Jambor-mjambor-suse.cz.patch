@@ -1,0 +1,110 @@
+From abf56c82ebcb8ba287fc69b8961af55b4541a130 Mon Sep 17 00:00:00 2001
+From: jamborm <jamborm@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 12 Apr 2011 18:31:55 +0000
+Subject: [PATCH 110/200] 2011-04-12  Martin Jambor  <mjambor@suse.cz>
+
+	PR tree-optimization/48195
+	* ipa-cp.c (ipcp_driver): Call ipa_check_create_node_params and
+	ipa_check_create_edge_args.
+	(ipcp_generate_summary): Do not call ipa_check_create_node_params and
+	ipa_check_create_edge_args.
+	* ipa-inline.c (inline_generate_summary): Do not call
+	ipa_check_create_node_params and ipa_check_create_edge_args.
+	* ipa-prop.c (ipa_analyze_node): Call ipa_check_create_node_params and
+	ipa_check_create_edge_args.
+
+	* testsuite/gcc.dg/ipa/pr48195.c: New test.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172332 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index db0941c..aad5d78 100644
+--- a/gcc/ipa-cp.c
++++ b/gcc/ipa-cp.c
+@@ -1516,6 +1516,8 @@ ipcp_driver (void)
+         ipa_print_all_params (dump_file);
+       ipa_print_all_jump_functions (dump_file);
+     }
++  ipa_check_create_node_params ();
++  ipa_check_create_edge_args ();
+   /* 2. Do the interprocedural propagation.  */
+   ipcp_iterate_stage ();
+   /* 3. Insert the constants found to the functions.  */
+@@ -1543,8 +1545,6 @@ ipcp_generate_summary (void)
+ 
+   if (dump_file)
+     fprintf (dump_file, "\nIPA constant propagation start:\n");
+-  ipa_check_create_node_params ();
+-  ipa_check_create_edge_args ();
+   ipa_register_cgraph_hooks ();
+ 
+   for (node = cgraph_nodes; node; node = node->next)
+diff --git a/gcc/ipa-inline.c b/gcc/ipa-inline.c
+index 7ae5f96..b3c9215 100644
+--- a/gcc/ipa-inline.c
++++ b/gcc/ipa-inline.c
+@@ -2091,11 +2091,7 @@ inline_generate_summary (void)
+       cgraph_add_function_insertion_hook (&add_new_function, NULL);
+ 
+   if (flag_indirect_inlining)
+-    {
+-      ipa_register_cgraph_hooks ();
+-      ipa_check_create_node_params ();
+-      ipa_check_create_edge_args ();
+-    }
++    ipa_register_cgraph_hooks ();
+ 
+   for (node = cgraph_nodes; node; node = node->next)
+     if (node->analyzed)
+diff --git a/gcc/ipa-prop.c b/gcc/ipa-prop.c
+index 82599f1..589bc16 100644
+--- a/gcc/ipa-prop.c
++++ b/gcc/ipa-prop.c
+@@ -1522,10 +1522,13 @@ ipa_analyze_params_uses (struct cgraph_node *node,
+ void
+ ipa_analyze_node (struct cgraph_node *node)
+ {
+-  struct ipa_node_params *info = IPA_NODE_REF (node);
++  struct ipa_node_params *info;
+   struct param_analysis_info *parms_info;
+   int i, param_count;
+ 
++  ipa_check_create_node_params ();
++  ipa_check_create_edge_args ();
++  info = IPA_NODE_REF (node);
+   push_cfun (DECL_STRUCT_FUNCTION (node->decl));
+   current_function_decl = node->decl;
+   ipa_initialize_node_params (node);
+new file mode 100644
+index 0000000..1cf7a7f
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/ipa/pr48195.c
+@@ -0,0 +1,24 @@
++/* { dg-do link } */
++/* { dg-options "-O2 -flto --param partial-inlining-entry-probability=101" } */
++
++extern void abort(void);
++
++int i;
++
++void __attribute__ ((constructor))
++c2 ()
++{
++  if (i)
++    abort ();
++}
++
++void __attribute__ ((destructor))
++d1 ()
++{
++  if (i)
++    abort ();
++}
++
++void main ()
++{
++}
+-- 
+1.7.0.4
+
