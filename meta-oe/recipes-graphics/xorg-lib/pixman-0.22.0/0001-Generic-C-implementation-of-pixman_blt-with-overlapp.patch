@@ -1,7 +1,7 @@
-From 8e8b2809b505486001dc213becab0d50bfd96c1b Mon Sep 17 00:00:00 2001
+From e17f676f1f42239fb4304d75191f373bb06e8fc0 Mon Sep 17 00:00:00 2001
 From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
 Date: Tue, 16 Mar 2010 16:55:28 +0100
-Subject: [PATCH 18/24] Generic C implementation of pixman_blt with overlapping support
+Subject: [PATCH 1/4] Generic C implementation of pixman_blt with overlapping support
 
 Uses memcpy/memmove functions to copy pixels, can handle the
 case when both source and destination areas are in the same
@@ -19,10 +19,10 @@ unrealistic case anyway).
  2 files changed, 61 insertions(+), 3 deletions(-)
 
 diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-index 4d234a0..c4d2c14 100644
+index 727affc..fa448f7 100644
 --- a/pixman/pixman-general.c
 +++ b/pixman/pixman-general.c
-@@ -280,9 +280,24 @@ general_blt (pixman_implementation_t *imp,
+@@ -238,9 +238,24 @@ general_blt (pixman_implementation_t *imp,
               int                      width,
               int                      height)
  {
@@ -51,7 +51,7 @@ index 4d234a0..c4d2c14 100644
  
  static pixman_bool_t
 diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-index 969dfab..352bceb 100644
+index 60060a9..5369ad9 100644
 --- a/pixman/pixman-private.h
 +++ b/pixman/pixman-private.h
 @@ -10,6 +10,7 @@
@@ -62,7 +62,7 @@ index 969dfab..352bceb 100644
  #include <assert.h>
  #include <stdio.h>
  #include <string.h>
-@@ -869,4 +870,46 @@ void pixman_timer_register (pixman_timer_t *timer);
+@@ -899,4 +900,46 @@ void pixman_timer_register (pixman_timer_t *timer);
  
  #endif /* PIXMAN_TIMERS */
  

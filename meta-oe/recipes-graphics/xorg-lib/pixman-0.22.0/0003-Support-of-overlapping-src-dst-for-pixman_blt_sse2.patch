@@ -1,17 +1,17 @@
-From c8755294fa9ea396f7113370230b17c424a93be1 Mon Sep 17 00:00:00 2001
+From c9ca9dc0f345fa3e2e0f16b2627150e0b696fd7a Mon Sep 17 00:00:00 2001
 From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
 Date: Thu, 22 Oct 2009 05:45:54 +0300
-Subject: [PATCH 20/24] Support of overlapping src/dst for pixman_blt_sse2
+Subject: [PATCH 3/4] Support of overlapping src/dst for pixman_blt_sse2
 
 ---
  pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
  1 files changed, 32 insertions(+), 23 deletions(-)
 
 diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
-index 5907de0..25015ae 100644
+index 533b858..9fa7191 100644
 --- a/pixman/pixman-sse2.c
 +++ b/pixman/pixman-sse2.c
-@@ -5027,34 +5027,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
+@@ -4691,34 +4691,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
  {
      uint8_t *   src_bytes;
      uint8_t *   dst_bytes;
@@ -77,7 +77,7 @@ index 5907de0..25015ae 100644
      }
  
      while (height--)
-@@ -5064,7 +5073,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
+@@ -4728,7 +4737,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
  	uint8_t *d = dst_bytes;
  	src_bytes += src_stride;
  	dst_bytes += dst_stride;
