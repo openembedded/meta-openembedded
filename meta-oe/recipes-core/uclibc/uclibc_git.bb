@@ -7,7 +7,7 @@
 # on whether the base patches apply to the selected (SRCDATE) svn release.
 #
 UCLIBC_BASE ?= "0.9.32"
-SRCREV="251f2266bf24b1b396f59eef60d0acf41fdd02e4"
+SRCREV="074930dd7f2a18a7013cdb72cc38136f3be39c40"
 PR_append = "+gitr${SRCPV}"
 
 require uclibc.inc
@@ -36,7 +36,6 @@ SRC_URI = "git://uclibc.org/uClibc.git;branch=master;protocol=git \
 	file://detect-bx-availibility.patch \
 	file://remove-eabi-oabi-selection.patch \
 	file://powerpc_copysignl.patch \
-	file://fts-support.patch \
 	file://argp-support.patch \
 	file://argp-headers.patch \
 	file://remove_attribute_optimize_Os.patch \
