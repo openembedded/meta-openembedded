@@ -38,11 +38,11 @@ do_generate_qt_config_file() {
 	export QT_CONF_PATH=${WORKDIR}/qt.conf
 	cat > ${WORKDIR}/qt.conf <<EOF
 [Paths]
-Prefix = ${STAGING_DIR}
-Binaries = ${BUILD_SYS}${bindir_native}
-Headers = ${MACHINE}${prefix}/include/qt4
-Plugins = ${MACHINE}${prefix}/lib/qt4/plugins/
-Mkspecs = ${MACHINE}${prefix}/share/qt4/mkspecs/
+Prefix =
+Binaries = ${STAGING_BINDIR_NATIVE}
+Headers = ${STAGING_INCDIR}/qt4
+Plugins = ${STAGING_LIBDIR}/qt4/plugins/
+Mkspecs = ${STAGING_DATADIR}/qt4/mkspecs/
 EOF
 }
 
