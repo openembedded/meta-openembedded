@@ -1,10 +1,11 @@
 require glib.inc
 
 PE = "1"
+PR = "r1"
 
 DEFAULT_PREFERENCE = "-1"
 
-DEPENDS += "libffi" 
+DEPENDS += "libffi python-argparse-native"
 
 SRC_URI = "git://git.gnome.org/glib;protocol=git;branch=master \
            file://configure-libtool.patch \
