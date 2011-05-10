@@ -1,11 +1,12 @@
 DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
-LICENSE = "MIT BSD & CompuPhase"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6aa45e26c1ed178da910fd76b306a875"
 
 inherit efl
 
+LICENSE = "MIT BSD CompuPhase"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6aa45e26c1ed178da910fd76b306a875"
+
 BBCLASSEXTEND = "native"
-INC_PR = "r0"
+INC_PR = "r1"
 
 # Some upgrade path tweaking
 AUTO_LIBNAME_PKGS = ""
