@@ -1,0 +1,52 @@
+#!/bin/sh
+DAEMON=/usr/bin/dnsmasq
+NAME=dnsmasq
+DESC="DNS forwarder and DHCP server"
+ARGS="-7 /etc/dnsmasq.d"
+
+test -f $DAEMON || exit 0
+
+set -e
+
+case "$1" in
+    start)
+        echo -n "starting $DESC: $NAME... "
+	test -d /var/lib/misc/ || mkdir /var/lib/misc/
+	start-stop-daemon -S -x $DAEMON -- $ARGS
+	echo "done."
+	;;
+    stop)
+        echo -n "stopping $DESC: $NAME... "
+	start-stop-daemon -K -x $DAEMON
+	echo "done."
+	;;
+    status)
+	echo -n "dnsmasq "
+	start-stop-daemon -q -K -t -x $DAEMON
+	RET=$?
+	if [ "$RET" = "0" ]; then
+		PID=`cat /var/run/dnsmasq.pid`
+		echo "($PID) is running"
+	else
+		echo "is not running"
+		exit $RET
+	fi
+	;;
+    restart)
+        echo "restarting $DESC: $NAME... "
+ 	$0 stop
+	$0 start
+	echo "done."
+	;;
+    reload)
+    	echo -n "reloading $DESC: $NAME... "
+    	killall -HUP $(basename ${DAEMON})
+	echo "done."
+	;;
+    *)
+	echo "Usage: $0 {start|stop|status|restart|reload}"
+	exit 1
+	;;
+esac
+
+exit 0
