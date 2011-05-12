@@ -18,10 +18,10 @@ require glib-2.0.inc
 DEPENDS = "glib-2.0-native gtk-doc-native zip dbus"
 DEPENDS_virtclass-native = "gtk-doc-native pkgconfig-native gettext-native dbus-native"
 DEPENDS_virtclass-nativesdk = "libtool-nativesdk"
-PACKAGES =+ "glib-2.0-utils "
+PACKAGES =+ "${PN}-utils "
 
 LEAD_SONAME = "libglib-2.0.*"
-FILES_glib-2.0-utils = "${bindir}/*"
+FILES_${PN}-utils = "${bindir}/*"
 
 inherit autotools pkgconfig gettext
 
