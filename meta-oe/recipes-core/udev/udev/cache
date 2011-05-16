@@ -11,11 +11,13 @@ if [ "$DEVCACHE" != "" ]; then
 	(cd /; tar cf $DEVCACHE dev)
 	mv /tmp/uname /etc/udev/saved.uname
 	mv /tmp/cmdline /etc/udev/saved.cmdline
+	mv /tmp/devices /etc/udev/saved.devices
 	mv /tmp/atags /etc/udev/saved.atags
 	echo
 else
 	rm -f /tmp/uname
 	rm -f /tmp/cmdline
+	rm -f /tmp/devices
 	rm -f /tmp/atags
 fi
 
