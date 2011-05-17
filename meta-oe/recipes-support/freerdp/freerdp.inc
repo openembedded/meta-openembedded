@@ -2,7 +2,7 @@
 # Released under the MIT license
 
 DESCRIPTION = "FreeRDP RDP client"
-HOMEPAGE = "http://freerdp.sourceforge.net"
+HOMEPAGE = "http://www.freerdp.com"
 DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite"
 SECTION = "x11/network"
 LICENSE = "Apache-2.0"
