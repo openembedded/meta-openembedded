@@ -3,22 +3,48 @@
 
 DESCRIPTION = "FreeRDP RDP client"
 HOMEPAGE = "http://freerdp.sourceforge.net"
-DEPENDS = "virtual/libx11 openssl libxcursor cups alsa-lib"
+DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite"
 SECTION = "x11/network"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 inherit pkgconfig autotools
 
-do_configure_prepend() {
-	# workaround gcc linking bug
-	find ${S} -name 'Makefile.am' | xargs -n 1 sed 's,-pthread,-lpthread -D_REENTRANT,g' -i
-}
+EXTRA_OECONF += "--with-smartcard --with-xvideo"
 
 do_install_append() {
 	rm ${D}${libdir}/freerdp/*.a ${D}${libdir}/freerdp/*.la
 }
 
-RDEPENDS_${PN} += "xprop"
+PACKAGES =+ "libfreerdp"
+
+LEAD_SONAME = "libfreerdp.so"
+FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
+
+PACKAGES_DYNAMIC = "libfreerdp-plugin-*"
+
+python populate_packages_prepend () {
+        freerdp_root = bb.data.expand('${libdir}/freerdp', d)
+
+        do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
+                output_pattern='libfreerdp-plugin-%s',
+                description='FreeRDP plugin %s',
+                prepend=True, extra_depends='libfreerdp-plugin-audin')
+
+        do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
+                output_pattern='libfreerdp-plugin-%s',
+                description='FreeRDP plugin %s',
+                prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
+
+        do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
+                output_pattern='libfreerdp-plugin-%s',
+                description='FreeRDP plugin %s',
+                prepend=True, extra_depends='libfreerdp-plugin-tsmf')
+
+        do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
+                output_pattern='libfreerdp-plugin-%s',
+                description='FreeRDP plugin %s',
+                prepend=True, extra_depends='')
+}
