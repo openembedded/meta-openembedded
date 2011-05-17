@@ -11,7 +11,7 @@ SRCREV="074930dd7f2a18a7013cdb72cc38136f3be39c40"
 PR_append = "+gitr${SRCPV}"
 
 require uclibc.inc
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 PROVIDES += "virtual/${TARGET_PREFIX}libc-for-gcc"
 
 #recent versions uclibc require real kernel headers
@@ -39,5 +39,6 @@ SRC_URI = "git://uclibc.org/uClibc.git;branch=master;protocol=git \
 	file://argp-support.patch \
 	file://argp-headers.patch \
 	file://remove_attribute_optimize_Os.patch \
+	file://uclibc-epoll.patch \
 	"
 S = "${WORKDIR}/git"
