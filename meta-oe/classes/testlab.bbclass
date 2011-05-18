@@ -67,7 +67,7 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
 
 	# Log results to a git controlled directory structure than can be pushed to a remote location
 	if [ "${TESTLABLOG}" = "remote" ] && [ -n "${TESTLABREMOTEDIR}" ] ; then
-		TESTLABLOGDIR="${MACHINE_ARCH}/${IMAGE_BASENAME}"
+		TESTLABLOGDIR="${MACHINE_ARCH}/${TCLIBC}/${IMAGE_BASENAME}"
 		mkdir -p ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}
 		cp ${TESTLAB_DIR}/*package* ${TESTLAB_DIR}/depends.dot ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}
 		# force change to record builds where the testlab contents didn't change, but other things (e.g. git rev) did
