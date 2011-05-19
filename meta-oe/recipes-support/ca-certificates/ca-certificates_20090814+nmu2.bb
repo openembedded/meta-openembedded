@@ -30,7 +30,7 @@ do_install_append() {
         done
 }
 
-PACKAGE_ARCH = "all"
+inherit allarch
 PACKAGES = "${PN}"
 
 pkg_postinst_${PN} () {

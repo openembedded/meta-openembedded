@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PR = "r2"
+PR = "r3"
 
 # we are using a gpe-style Makefile
 inherit gpe
@@ -29,7 +29,7 @@ do_install_append() {
         sed -i 's:^BINDIR=.*$:BINDIR=${bindir}:' ${D}/etc/X11/xserver-common
 }
 
-PACKAGE_ARCH = "all"
+inherit allarch
 
 RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo fbset xinput-calibrator"
 

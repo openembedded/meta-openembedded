@@ -3,7 +3,7 @@ require ttf.inc
 DESCRIPTION = "Droid fonts - TTF Edition"
 HOMEPAGE = "http://www.droidfonts.com/"
 LICENSE = "Apache-2.0"
-PR = "r0"
+PR = "r1"
 # git magic below - SRCREV is an ID of /data/fonts subtree
 # (so we don't need to fetch full platform/frameworks/base.git)
 SRCREV = "31f255e44e618ff3b923f332e8fcb83403fd39f5"

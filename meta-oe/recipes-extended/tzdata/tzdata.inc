@@ -3,7 +3,7 @@ SECTION = "base"
 PRIORITY = "optional"
 DEPENDS = "tzcode-native"
 
-INC_PR = "r9"
+INC_PR = "r10"
 
 DEFAULT_TIMEZONE ?= "Europe/London"
 
@@ -48,7 +48,7 @@ do_install () {
         cp -pPR ${S}/build${datadir}/zoneinfo/${DEFAULT_TIMEZONE} ${D}${sysconfdir}/localtime
 }
 
-PACKAGE_ARCH = "all"
+inherit allarch
 # Packages primarily organized by directory with a major city
 # in most time zones in the base package
 

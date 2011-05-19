@@ -20,4 +20,4 @@ pkg_postrm_append() {
     update-fonts
 }
 
-PACKAGE_ARCH = "all"
+inherit allarch

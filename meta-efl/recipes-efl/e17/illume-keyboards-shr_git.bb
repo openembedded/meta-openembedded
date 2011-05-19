@@ -8,7 +8,7 @@ S = "${WORKDIR}/git"
 SRCREV = "4064489f359a1addf572089b582f317dff5f50e1"
 PV = "0.0+gitr${SRCPV}"
 PE = "1"
-PR = "r4"
+PR = "r5"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
 
@@ -30,7 +30,7 @@ illume-keyboard-russian-terminal \
 illume-keyboard-persian \
 "
 
-PACKAGE_ARCH = "all"
+inherit allarch
 KEYBOARDS_DIR="${libdir}/enlightenment/modules/illume-keyboard/keyboards"
 
 AUTHOR_illume-keyboard-alpha = "Jesus McCloud"
