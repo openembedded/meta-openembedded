@@ -5,7 +5,7 @@ INC_PR ?= "r15"
 DESCRIPTION = "X.Org X server -- OMAP display driver"
 PE = "1"
 PV = "0.1.1+${PR}+gitr${SRCREV}"
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
 LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://src/omapfb-driver.c;beginline=1;endline=30;md5=a44c2a37e04d1c2c5f0313afb493f833"
@@ -16,7 +16,7 @@ SRC_URI = "git://git.pingu.fi/xf86-video-omapfb;protocol=http \
            file://0003-force-plain-mode.patch \
           "
 
-SRCREV_pn-${PN} = "044617665d6737f4909aab96f91b06261dff05d2"
+SRCREV_pn-${PN} = "28c006c94e57ea71df11ec4fff79d7ffcfc4860f"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF_armv7a = " --enable-neon "
