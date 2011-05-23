@@ -35,7 +35,7 @@ SRC_URI += " \
        file://udev-compat-wrapper-patch \
 "
 
-PR = "r1"
+PR = "r2"
 
 inherit update-rc.d autotools
 
@@ -54,7 +54,7 @@ EXTRA_OECONF += " --with-udev-prefix= \
 INITSCRIPT_NAME = "udev"
 INITSCRIPT_PARAMS = "start 04 S ."
 
-PACKAGES =+ "libudev libgudev udev-utils"
+PACKAGES =+ "libudev libgudev udev-utils udev-consolekit"
 
 FILES_libudev = "${base_libdir}/libudev.so.*"
 FILES_libgudev = "${base_libdir}/libgudev*.so.*"
@@ -68,8 +68,11 @@ RDEPENDS_${PN} += "module-init-tools-depmod udev-utils"
 
 # udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
 # is ${prefix}/lib64
-FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+FILES_${PN} += "/lib/udev*"
 FILES_${PN}-dbg += "/lib/udev/.debug"
+
+FILES_${PN}-consolekit += "${libdir}/ConsoleKit"
+RDEPENDS_${PN}-consolekit += "consolekit"
 
 # Package up systemd files
 FILES_${PN} += "${base_libdir}/systemd"
