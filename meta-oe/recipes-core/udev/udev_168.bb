@@ -35,6 +35,8 @@ SRC_URI += " \
        file://udev-compat-wrapper-patch \
 "
 
+PR = "r1"
+
 inherit update-rc.d autotools
 
 EXTRA_OECONF += " --with-udev-prefix= \

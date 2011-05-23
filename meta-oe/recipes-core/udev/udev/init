@@ -65,10 +65,10 @@ echo -e '\000\000\000\000' > /proc/sys/kernel/hotplug
 
 /sbin/udevadm control --env STARTUP=1
 if [ "$not_first_boot" != "" ];then
-	/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics	--subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform
+	/sbin/udevadm trigger --subsystem-nomatch=tty --subsystem-nomatch=mem --subsystem-nomatch=vc --subsystem-nomatch=vtconsole --subsystem-nomatch=misc --subsystem-nomatch=dcon --subsystem-nomatch=pci_bus  --subsystem-nomatch=graphics	--subsystem-nomatch=backlight --subsystem-nomatch=video4linux  --subsystem-nomatch=platform --action=add
 	(/sbin/udevadm settle --timeout=8; /sbin/udevadm control --env STARTUP=)&
 else
-	/sbin/udevadm trigger
+	/sbin/udevadm trigger --action=add
 	/sbin/udevadm settle
 fi
 
