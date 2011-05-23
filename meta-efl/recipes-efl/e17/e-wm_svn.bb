@@ -17,9 +17,7 @@ SRC_URI = "\
 "
 
 SRC_URI_append_shr = " \
-  file://illume-disable-screensaver.patch \
   file://wizard-module-skipping.patch \
-  file://illume-flaunch-fix.patch \
 "
 
 EXTRA_OECONF = "\
@@ -69,14 +67,12 @@ RREPLACES_${PN} = "systray"
 
 PACKAGES =+ "\
   ${PN}-config-default \
-  ${PN}-config-illume \
   ${PN}-config-illume2 \
   ${PN}-config-minimalist \
   ${PN}-config-netbook \
   ${PN}-config-scaleable \
   ${PN}-config-standard \
   ${PN}-theme-default \
-  ${PN}-theme-illume \
   ${PN}-background-dark-gradient \
   ${PN}-background-light-gradient \
   ${PN}-images \
@@ -104,14 +100,12 @@ RRECOMMENDS_${PN} = "\
 "
 
 PACKAGE_ARCH_${PN}-config-default = "all"
-PACKAGE_ARCH_${PN}-config-illume = "all"
 PACKAGE_ARCH_${PN}-config-illume2 = "all"
 PACKAGE_ARCH_${PN}-config-minimalist = "all"
 PACKAGE_ARCH_${PN}-config-netbook = "all"
 PACKAGE_ARCH_${PN}-config-scaleable = "all"
 PACKAGE_ARCH_${PN}-config-standard = "all"
 PACKAGE_ARCH_${PN}-theme-default = "all"
-PACKAGE_ARCH_${PN}-theme-illume = "all"
 PACKAGE_ARCH_${PN}-background-dark-gradient = "all"
 PACKAGE_ARCH_${PN}-background-light-gradient = "all"
 PACKAGE_ARCH_${PN}-images = "all"
@@ -142,14 +136,12 @@ FILES_${PN} = "\
 "
 
 FILES_${PN}-config-default = "${datadir}/enlightenment/data/config/default"
-FILES_${PN}-config-illume = "${datadir}/enlightenment/data/config/illume"
-FILES_${PN}-config-illume2 = "${datadir}/enlightenment/data/config/illume-home"
+FILES_${PN}-config-illume2 = "${datadir}/enlightenment/data/config/illume"
 FILES_${PN}-config-minimalist = "${datadir}/enlightenment/data/config/minimalist"
 FILES_${PN}-config-netbook = "${datadir}/enlightenment/data/config/netbook"
 FILES_${PN}-config-scaleable = "${datadir}/enlightenment/data/config/scaleable"
 FILES_${PN}-config-standard = "${datadir}/enlightenment/data/config/standard"
 FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
-FILES_${PN}-theme-illume = "${datadir}/enlightenment/data/themes/illume.edj"
 FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-background-dark-gradient = "${datadir}/enlightenment/data/backgrounds/Dark_Gradient.edj"
 FILES_${PN}-background-light-gradient = "${datadir}/enlightenment/data/backgrounds/Light_Gradient.edj"
@@ -181,14 +173,7 @@ FILES_illume-keyboard-default-terminal = "\
 "
 
 RRECOMMENDS_${PN}-config-default = "${PN}-theme-default"
-RRECOMMENDS_${PN}-config-illume = "\
-  ${PN}-theme-illume \
-  illume-keyboard-default-alpha \
-  illume-keyboard-default-numeric \
-  illume-keyboard-default-terminal \
-"
 RRECOMMENDS_${PN}-config-illume2 = "\
-  ${PN}-theme-illume \
   illume-keyboard-default-alpha \
   illume-keyboard-default-numeric \
   illume-keyboard-default-terminal \
