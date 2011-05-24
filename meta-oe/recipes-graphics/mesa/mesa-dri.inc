@@ -1,4 +1,4 @@
-DEPENDS += "dri2proto expat libdrm makedepend-native"
+DEPENDS += "dri2proto expat libdrm"
 
 #not supported in oe-core base.bbclass
 #FILESPATHPKG =. "mesa-${PV}:mesa:"
