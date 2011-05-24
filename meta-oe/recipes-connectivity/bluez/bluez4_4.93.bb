@@ -13,7 +13,7 @@ RDEPENDS_${PN}-dev = "bluez-hcidump"
 
 ASNEEDED = ""
 
-PR = "r9"
+PR = "r0"
 
 # to find bluez patches from oe-core
 FILESPATH =. "${COREBASE}/meta/recipes-connectivity/bluez/bluez4-4.82/:"
@@ -22,9 +22,10 @@ SRC_URI = "\
   file://fix-dfutool-usb-declaration-mismatch.patch \
   file://bluetooth.conf \
 "
+SRC_URI[md5sum] = "c0f6450a39809996306005f5b85c6d3d"
+SRC_URI[sha256sum] = "ad370dbc8c4d37a0cc3d5078d62542f0e53a33f5b2df849cf7601ef25c5e6087"
 
-SRC_URI[md5sum] = "3059b7ef5168c84cd0c6a67034ce79f9"
-SRC_URI[sha256sum] = "11e9279e2669db996afd464b96d2c68f41f157f6eb9b8842a0bbcad8a4eac18d"
+
 S = "${WORKDIR}/bluez-${PV}"
 
 inherit autotools
@@ -56,8 +57,8 @@ do_install_append() {
 PACKAGES =+ "gst-plugin-bluez libasound-module-bluez"
 
 FILES_gst-plugin-bluez = "${libdir}/gstreamer-0.10/lib*.so"
-FILES_libasound-module-bluez = "${libdir}/alsa-lib/lib*.so"
-FILES_${PN} += "${libdir}/bluetooth/plugins/*.so"
+FILES_libasound-module-bluez = "${libdir}/alsa-lib/lib*.so ${datadir}/alsa"
+FILES_${PN} += "${libdir}/bluetooth/plugins/*.so ${base_libdir}/udev/"
 FILES_${PN}-dev += "\
   ${libdir}/bluetooth/plugins/*.la \
   ${libdir}/alsa-lib/*.la \
@@ -67,4 +68,5 @@ FILES_${PN}-dev += "\
 FILES_${PN}-dbg += "\
   ${libdir}/bluetooth/plugins/.debug \
   ${libdir}/*/.debug \
+  ${base_libdir}/udev/.debug \
 "
