@@ -11,7 +11,7 @@ PE = "2"
 PROTO_DEPS = "xf86driproto glproto"
 LIB_DEPS = "virtual/libx11 libxext libxxf86vm libxdamage libxfixes"
 
-DEPENDS = "make-depend-native ${PROTO_DEPS}  ${LIB_DEPS}"
+DEPENDS = "makedepend-native ${PROTO_DEPS}  ${LIB_DEPS}"
 
 SRC_URI = "ftp://ftp.freedesktop.org/pub/mesa/${PV}/MesaLib-${PV}.tar.bz2;name=archive \
           "
