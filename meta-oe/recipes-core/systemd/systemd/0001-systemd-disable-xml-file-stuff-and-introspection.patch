@@ -1,0 +1,93 @@
+From 4f2c783daa2556666821ad4b3a8825a7b58857b4 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 2 May 2011 09:12:21 +0200
+Subject: [PATCH] systemd: disable xml file stuff and introspection
+
+---
+ Makefile.am |   40 ++--------------------------------------
+ 1 files changed, 2 insertions(+), 38 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 873090e..49d2ee8 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -199,21 +199,6 @@ dist_dbussystemservice_DATA = \
+ dist_udevrules_DATA = \
+ 	src/99-systemd.rules
+ 
+-dbusinterface_DATA = \
+-	org.freedesktop.systemd1.Manager.xml \
+-	org.freedesktop.systemd1.Job.xml \
+-	org.freedesktop.systemd1.Unit.xml \
+-	org.freedesktop.systemd1.Service.xml \
+-	org.freedesktop.systemd1.Socket.xml \
+-	org.freedesktop.systemd1.Timer.xml \
+-	org.freedesktop.systemd1.Target.xml \
+-	org.freedesktop.systemd1.Device.xml \
+-	org.freedesktop.systemd1.Mount.xml \
+-	org.freedesktop.systemd1.Automount.xml \
+-	org.freedesktop.systemd1.Snapshot.xml \
+-	org.freedesktop.systemd1.Swap.xml \
+-	org.freedesktop.systemd1.Path.xml
+-
+ dist_bashcompletion_DATA = \
+ 	src/systemctl-bash-completion.sh
+ 
+@@ -642,17 +627,10 @@ XML_FILES = \
+ XML_IN_FILES = \
+ 	${patsubst %.1,%.xml.in,${patsubst %.3,%.xml.in,${patsubst %.5,%.xml.in,${patsubst %.7,%.xml.in,${patsubst %.8,%.xml.in,$(nodist_man_MANS)}}}}}
+ 
+-dist_noinst_DATA = \
+-	${XML_FILES:.xml=.html}
+-
+-nodist_noinst_DATA = \
+-	${XML_IN_FILES:.xml.in=.html}
+-
+ EXTRA_DIST += \
+ 	$(XML_FILES) \
+ 	$(XML_IN_FILES) \
+-	${nodist_man_MANS:=.in} \
+-	${XML_IN_FILES:.xml.in=.html.in}
++	${nodist_man_MANS:=.in}
+ 
+ systemd_SOURCES = \
+ 	src/main.c
+@@ -1218,7 +1196,6 @@ CLEANFILES = \
+ 	$(nodist_systemunit_DATA) \
+ 	$(nodist_userunit_DATA) \
+ 	$(nodist_man_MANS) \
+-	${XML_IN_FILES:.xml.in=.html} \
+ 	$(pkgconfigdata_DATA) \
+ 	src/org.freedesktop.systemd1.policy
+ 
+@@ -1280,26 +1257,13 @@ man/%.8: man/%.xml
+ man/%.8.in: man/%.xml.in
+ 	$(XSLTPROC_PROCESS_MAN_IN)
+ 
+-man/%.html: man/%.xml
+-	$(XSLTPROC_PROCESS_HTML)
+-
+-man/%.html.in: man/%.xml.in
+-	$(XSLTPROC_PROCESS_HTML_IN)
+-
+ CLEANFILES += \
+ 	$(dist_man_MANS) \
+-	${nodist_man_MANS:=.in} \
+-	${XML_FILES:.xml=.html} \
+-	${XML_IN_FILES:.xml.in=.html.in}
++	${nodist_man_MANS:=.in}
+ endif
+ 
+ DBUS_PREPROCESS = $(CPP) -P $(DBUS_CFLAGS) -imacros dbus/dbus-protocol.h
+ 
+-org.freedesktop.systemd1.%.xml: systemd
+-	$(AM_V_GEN)$(OBJCOPY) -O binary -j introspect.$* $< $@.tmp && \
+-		$(STRINGS) $@.tmp | $(AWK) -f $(srcdir)/introspect.awk | \
+-		$(DBUS_PREPROCESS) -o $@ - && rm $@.tmp
+-
+ CLEANFILES += \
+ 	$(dbusinterface_DATA)
+ 
+-- 
+1.6.6.1
+

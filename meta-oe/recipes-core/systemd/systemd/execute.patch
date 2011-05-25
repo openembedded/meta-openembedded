@@ -1,0 +1,17 @@
+Index: git/src/execute.c
+===================================================================
+--- git.orig/src/execute.c	2010-06-15 11:41:02.792856752 +0200
++++ git/src/execute.c	2010-06-15 11:52:02.899046198 +0200
+@@ -47,6 +47,12 @@
+ #include "cgroup.h"
+ #include "namespace.h"
+ 
++#ifndef SCHED_RESET_ON_FORK
++#  define SCHED_RESET_ON_FORK 0x40000000
++#endif
++
++
++
+ /* This assumes there is a 'tty' group */
+ #define TTY_MODE 0620
+ 
