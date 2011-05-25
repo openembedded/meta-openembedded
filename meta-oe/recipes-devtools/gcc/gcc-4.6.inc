@@ -16,6 +16,8 @@ BINV = "${PV}.0"
 
 PR = "r0"
 
+ARM_INSTRUCTION_SET = "arm"
+
 DEPENDS =+ "mpfr gmp libmpc"
 NATIVEDEPS = "mpfr-native gmp-native gettext-native libmpc-native"
 
