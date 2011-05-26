@@ -15,12 +15,12 @@ PKGV = "v${GITPKGVTAG}"
 # This gets reset to the proper version with PKGV above
 # Except that PKGV doesn't work in OE-core :(
 # PV = "git"
-PV = "v26"
-PR = "r1"
+PV = "v28"
+PR = "r0"
 
 inherit autotools vala update-alternatives
 
-SRCREV = "da2617378523e007ec0c6efe99d0cebb2be994e1"
+SRCREV = "0e8eb2d2e2446a3f6ba1eee1940fc96167ae332a"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://execute.patch \
