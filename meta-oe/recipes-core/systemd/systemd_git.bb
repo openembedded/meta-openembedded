@@ -16,7 +16,7 @@ PKGV = "v${GITPKGVTAG}"
 # Except that PKGV doesn't work in OE-core :(
 # PV = "git"
 PV = "v26"
-PR = "r0"
+PR = "r1"
 
 inherit autotools vala update-alternatives
 
@@ -85,6 +85,8 @@ FILES_${PN} = " ${base_bindir}/* \
                "
 
 FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug"
+
+RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 
 # kbd -> loadkeys,setfont
 RRECOMMENDS_${PN} += "kbd kbd-consolefonts ${PN}-serialgetty"
