@@ -35,7 +35,7 @@ SRC_URI += " \
        file://udev-compat-wrapper-patch \
 "
 
-PR = "r2"
+PR = "r3"
 
 inherit update-rc.d autotools
 
@@ -49,12 +49,15 @@ EXTRA_OECONF += " --with-udev-prefix= \
                   --sbindir=${base_sbindir} \
                   --libexecdir=${base_libdir}/udev \
                   --with-rootlibdir=${base_libdir} \
+                  --with-systemdsystemunitdir=${base_libdir}/systemd/system/ \
 "
 
 INITSCRIPT_NAME = "udev"
 INITSCRIPT_PARAMS = "start 04 S ."
 
-PACKAGES =+ "libudev libgudev udev-utils udev-consolekit"
+PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
+
+FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
 
 FILES_libudev = "${base_libdir}/libudev.so.*"
 FILES_libgudev = "${base_libdir}/libgudev*.so.*"
