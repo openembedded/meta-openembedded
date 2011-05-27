@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "readline udev dbus libcap2 libcgroup"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
+SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
+
 PRIORITY = "optional"
 SECTION = "base/shell"
 
