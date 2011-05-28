@@ -1,6 +1,4 @@
 require connman.inc
-# connman requires libXtables now
-DEPENDS += "iptables"
 PR = "r1"
 
 EXTRA_OECONF += "\
