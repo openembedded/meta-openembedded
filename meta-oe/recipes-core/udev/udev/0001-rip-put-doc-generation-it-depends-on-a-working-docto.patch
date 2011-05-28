@@ -1,0 +1,45 @@
+From 85dcc3a22951d3586b05e3305d735f33b84ee3e5 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 16 May 2011 14:11:01 +0200
+Subject: [PATCH] rip put doc generation, it depends on a working doctools setup
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ Makefile.am |   21 +--------------------
+ 1 files changed, 1 insertions(+), 20 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 651a154..69eb9d9 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -174,26 +174,7 @@ udev_udevadm_LDADD = libudev/libudev-private.la
+ # ------------------------------------------------------------------------------
+ # udev man pages
+ # ------------------------------------------------------------------------------
+-dist_man_MANS = \
+-	udev/udev.7 \
+-	udev/udevadm.8 \
+-	udev/udevd.8
+-
+-dist_noinst_DATA = \
+-	udev/udev.html \
+-	udev/udevadm.html \
+-	udev/udevd.html
+-
+-EXTRA_DIST += \
+-	udev/udev.xml \
+-	udev/udevadm.xml \
+-	udev/udevd.xml
+-
+-udev/%.7 udev/%.8 : udev/%.xml
+-	$(AM_V_GEN)$(XSLTPROC) -o $@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+-
+-udev/%.html : udev/%.xml
+-	$(AM_V_GEN)$(XSLTPROC) -o $@ -nonet http://docbook.sourceforge.net/release/xsl/current/xhtml-1_1/docbook.xsl $<
++dist_man_MANS = 
+ 
+ # ------------------------------------------------------------------------------
+ # udev tests
+-- 
+1.6.6.1
+
