@@ -14,15 +14,12 @@ SECTION = "base/shell"
 inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
-# This gets reset to the proper version with PKGV above
-# Except that PKGV doesn't work in OE-core :(
-# PV = "git"
-PV = "v28"
+PV = "git"
 PR = "r1"
 
 inherit autotools vala update-alternatives
 
-SRCREV = "0e8eb2d2e2446a3f6ba1eee1940fc96167ae332a"
+SRCREV = "9a66640832d103f906c2ef609a1d19d43fc542f6"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://execute.patch \
@@ -92,4 +89,12 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 
 # kbd -> loadkeys,setfont
 RRECOMMENDS_${PN} += "kbd kbd-consolefonts ${PN}-serialgetty"
+
+pkg_postinst_${PN} () {
+    # can't do this offline
+    if [ "x$D" != "x" ]; then
+        exit 1
+    fi
+    grep "^lock:" /etc/group > /dev/null || addgroup lock
+}
 
