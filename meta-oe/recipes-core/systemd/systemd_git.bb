@@ -15,7 +15,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r1"
+PR = "r2"
 
 inherit autotools vala update-alternatives
 
@@ -88,13 +88,24 @@ FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debu
 RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 
 # kbd -> loadkeys,setfont
-RRECOMMENDS_${PN} += "kbd kbd-consolefonts ${PN}-serialgetty"
+# systemd calls 'modprobe -sab --', which busybox doesn't support due to lack 
+# of blacklist support, so use proper modprobe from module-init-tools
+RRECOMMENDS_${PN} += "kbd kbd-consolefonts ${PN}-serialgetty module-init-tools"
+
+# TODO:
+# u-a for runlevel and telinit
 
 pkg_postinst_${PN} () {
-    # can't do this offline
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-    grep "^lock:" /etc/group > /dev/null || addgroup lock
+# can't do this offline
+if [ "x$D" != "x" ]; then
+    exit 1
+fi
+grep "^lock:" /etc/group > /dev/null || addgroup lock
+
+update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
+update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
+update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
+update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
+
 }
 
