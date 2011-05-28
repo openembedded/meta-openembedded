@@ -1,0 +1,59 @@
+From f6c71a6aa6e71a5dde50a13377d8ebd1a41aa9ab Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 15:26:25 +0000
+Subject: [PATCH] 	PR c++/45080
+ 	* pt.c (instantiate_class_template_1): Call maybe_add_lambda_conv_op.
+ 	* semantics.c (lambda_function): Check COMPLETE_OR_OPEN_TYPE_P.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174208 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index d379a8c..c5f2422 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -8557,6 +8557,9 @@ instantiate_class_template (tree type)
+ 	}
+     }
+ 
++  if (CLASSTYPE_LAMBDA_EXPR (type))
++    maybe_add_lambda_conv_op (type);
++
+   /* Set the file and line number information to whatever is given for
+      the class itself.  This puts error messages involving generated
+      implicit functions at a predictable point, and the same point
+diff --git a/gcc/cp/semantics.c b/gcc/cp/semantics.c
+index 6207b12..b113626 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -8086,7 +8086,8 @@ lambda_function (tree lambda)
+     type = lambda;
+   gcc_assert (LAMBDA_TYPE_P (type));
+   /* Don't let debug_tree cause instantiation.  */
+-  if (CLASSTYPE_TEMPLATE_INSTANTIATION (type) && !COMPLETE_TYPE_P (type))
++  if (CLASSTYPE_TEMPLATE_INSTANTIATION (type)
++      && !COMPLETE_OR_OPEN_TYPE_P (type))
+     return NULL_TREE;
+   lambda = lookup_member (type, ansi_opname (CALL_EXPR),
+ 			  /*protect=*/0, /*want_type=*/false);
+new file mode 100644
+index 0000000..53d8e99
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/lambda/lambda-conv5.C
+@@ -0,0 +1,15 @@
++// PR c++/45080
++// { dg-options -std=c++0x }
++
++typedef void(*pfn)();
++
++template<typename=int>
++void f()
++{
++  pfn fn = []{};
++}
++
++void test()
++{
++  f();
++}
+-- 
+1.7.0.4
+

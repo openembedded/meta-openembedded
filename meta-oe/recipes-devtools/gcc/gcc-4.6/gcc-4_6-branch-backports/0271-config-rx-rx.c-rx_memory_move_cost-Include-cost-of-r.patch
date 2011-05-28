@@ -1,0 +1,28 @@
+From af42375ce311b2bab14f7b4eb83a2060a71d73f4 Mon Sep 17 00:00:00 2001
+From: nickc <nickc@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 17 May 2011 08:59:10 +0000
+Subject: [PATCH] 	* config/rx/rx.c (rx_memory_move_cost): Include cost of register
+ 	moves.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173825 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e0bd176..a2d48ab 100644
+--- a/gcc/config/rx/rx.c
++++ b/gcc/config/rx/rx.c
+@@ -2592,9 +2592,11 @@ rx_trampoline_init (rtx tramp, tree fndecl, rtx chain)
+ }
+ 
+ static int
+-rx_memory_move_cost (enum machine_mode mode, reg_class_t regclass, bool in)
++rx_memory_move_cost (enum machine_mode mode ATTRIBUTE_UNUSED,
++		     reg_class_t regclass ATTRIBUTE_UNUSED,
++		     bool in)
+ {
+-  return (in ? 2:0) + memory_move_secondary_cost (mode, regclass, in);
++  return (in ? 2 : 0) + REGISTER_MOVE_COST (mode, regclass, regclass);
+ }
+ 
+ /* Convert a CC_MODE to the set of flags that it represents.  */
+-- 
+1.7.0.4
+

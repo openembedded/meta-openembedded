@@ -1,0 +1,90 @@
+From 62593aed2e6b228ae5b85fb9721b45cc92cce894 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 23 May 2011 18:12:34 +0000
+Subject: [PATCH] 	PR debug/49032
+ 	* dbxout.c: Include cgraph.h.
+ 	(dbxout_expand_expr): If a VAR_DECL is TREE_STATIC, not written
+ 	and without value expr, return NULL if no varpool node exists for
+ 	it or if it is not needed.
+ 	* Makefile.in (dbxout.o): Depend on $(CGRAPH_H).
+
+	* gcc.dg/debug/pr49032.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174084 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 792ca6c..60dcee5 100644
+--- a/gcc/Makefile.in
++++ b/gcc/Makefile.in
+@@ -2921,7 +2921,8 @@ optabs.o : optabs.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(RTL_H) \
+ dbxout.o : dbxout.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H) \
+    $(RTL_H) $(FLAGS_H) $(REGS_H) debug.h $(TM_P_H) $(TARGET_H) $(FUNCTION_H) \
+    langhooks.h insn-config.h reload.h $(GSTAB_H) xcoffout.h output.h dbxout.h \
+-   toplev.h $(DIAGNOSTIC_CORE_H) $(GGC_H) $(OBSTACK_H) $(EXPR_H) gt-dbxout.h
++   toplev.h $(DIAGNOSTIC_CORE_H) $(GGC_H) $(OBSTACK_H) $(EXPR_H) $(CGRAPH_H) \
++   gt-dbxout.h
+ debug.o : debug.c debug.h $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) $(TREE_H)
+ sdbout.o : sdbout.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) debug.h \
+    $(TREE_H) $(GGC_H) $(RTL_H) $(REGS_H) $(FLAGS_H) insn-config.h \
+diff --git a/gcc/dbxout.c b/gcc/dbxout.c
+index 3b0cf34..836030d 100644
+--- a/gcc/dbxout.c
++++ b/gcc/dbxout.c
+@@ -1,7 +1,7 @@
+ /* Output dbx-format symbol table information from GNU compiler.
+    Copyright (C) 1987, 1988, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
+-   1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010
+-   Free Software Foundation, Inc.
++   1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,
++   2011 Free Software Foundation, Inc.
+ 
+ This file is part of GCC.
+ 
+@@ -91,6 +91,7 @@ along with GCC; see the file COPYING3.  If not see
+ #include "langhooks.h"
+ #include "obstack.h"
+ #include "expr.h"
++#include "cgraph.h"
+ 
+ #ifdef XCOFF_DEBUGGING_INFO
+ #include "xcoffout.h"
+@@ -2393,6 +2394,20 @@ dbxout_expand_expr (tree expr)
+ 	 disable debug info for these variables.  */
+       if (!targetm.have_tls && DECL_THREAD_LOCAL_P (expr))
+ 	return NULL;
++      if (TREE_STATIC (expr)
++	  && !TREE_ASM_WRITTEN (expr)
++	  && !DECL_HAS_VALUE_EXPR_P (expr)
++	  && !TREE_PUBLIC (expr)
++	  && DECL_RTL_SET_P (expr)
++	  && MEM_P (DECL_RTL (expr)))
++	{
++	  /* If this is a var that might not be actually output,
++	     return NULL, otherwise stabs might reference an undefined
++	     symbol.  */
++	  struct varpool_node *node = varpool_get_node (expr);
++	  if (!node || !node->needed)
++	    return NULL;
++	}
+       /* FALLTHRU */
+ 
+     case PARM_DECL:
+new file mode 100644
+index 0000000..3985040
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/debug/pr49032.c
+@@ -0,0 +1,11 @@
++/* PR debug/49032 */
++/* { dg-do link } */
++
++static int s = 42;
++
++int
++main ()
++{
++  int *l[18] = { &s, &s, &s, &s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
++  return 0;
++}
+-- 
+1.7.0.4
+

@@ -1,0 +1,77 @@
+From 3db4aa63d6850f44758d06d5f075c76de6d4c1e9 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 6 May 2011 21:58:22 +0000
+Subject: [PATCH] 	PR c++/48089
+ 	* semantics.c (potential_constant_expression_1): Don't allow *this
+ 	in a constructor.
+ 	(register_constexpr_fundef): Use potential_rvalue_constant_expression.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173513 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index f43649e..8f621b9 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -5704,11 +5704,11 @@ register_constexpr_fundef (tree fun, tree body)
+       body = unshare_expr (TREE_OPERAND (body, 0));
+     }
+ 
+-  if (!potential_constant_expression (body))
++  if (!potential_rvalue_constant_expression (body))
+     {
+       DECL_DECLARED_CONSTEXPR_P (fun) = false;
+       if (!DECL_TEMPLATE_INSTANTIATION (fun))
+-	require_potential_constant_expression (body);
++	require_potential_rvalue_constant_expression (body);
+       return NULL;
+     }
+   fundef->body = body;
+@@ -7560,7 +7560,16 @@ potential_constant_expression_1 (tree t, bool want_rval, tsubst_flags_t flags)
+         tree x = TREE_OPERAND (t, 0);
+         STRIP_NOPS (x);
+         if (is_this_parameter (x))
+-	  return true;
++	  {
++	    if (DECL_CONSTRUCTOR_P (DECL_CONTEXT (x)) && want_rval)
++	      {
++		if (flags & tf_error)
++		  sorry ("use of the value of the object being constructed "
++			 "in a constant expression");
++		return false;
++	      }
++	    return true;
++	  }
+ 	return potential_constant_expression_1 (x, rval, flags);
+       }
+ 
+new file mode 100644
+index 0000000..fc69cfe
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-48089.C
+@@ -0,0 +1,24 @@
++// PR c++/48089
++// { dg-options -std=c++0x }
++
++// bang is ill-formed (diagnostic required) because its initializer is
++// non-constant, because it uses the value of an uninitialized object.
++
++// s() is ill-formed (no diagnostic required) because there is no set of
++// arguments that would produce a constant expression.
++
++// R() is well-formed because i is initialized before j.
++
++struct s {
++  constexpr s() : v(v) { }	// { dg-message "" }
++  int v;
++};
++
++constexpr s bang;		// { dg-error "" }
++
++struct R {
++  int i,j;
++  constexpr R() : i(42),j(i) { } // { dg-bogus "" "" { xfail *-*-* } }
++};
++
++constexpr R r;			// { dg-bogus "" "" { xfail *-*-* } }
+-- 
+1.7.0.4
+

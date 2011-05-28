@@ -1,0 +1,76 @@
+From 388aa866785638f2769c4e628fb9e6139d1bdaee Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 15:26:42 +0000
+Subject: [PATCH] 	PR c++/48935
+ 	* parser.c (cp_parser_constructor_declarator_p): Don't check
+ 	constructor_name_p for enums.
+ 	(cp_parser_diagnose_invalid_type_name): Correct error message.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174210 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 68c2f88..4c7d9cb 100644
+--- a/gcc/cp/parser.c
++++ b/gcc/cp/parser.c
+@@ -2788,7 +2788,7 @@ cp_parser_diagnose_invalid_type_name (cp_parser *parser,
+ 		  "%qT is a dependent scope",
+ 		  parser->scope, id, parser->scope);
+       else if (TYPE_P (parser->scope))
+-	error_at (location, "%qE in class %qT does not name a type",
++	error_at (location, "%qE in %q#T does not name a type",
+ 		  id, parser->scope);
+       else
+ 	gcc_unreachable ();
+@@ -19642,7 +19642,7 @@ cp_parser_constructor_declarator_p (cp_parser *parser, bool friend_p)
+   /* If we have a class scope, this is easy; DR 147 says that S::S always
+      names the constructor, and no other qualified name could.  */
+   if (constructor_p && nested_name_specifier
+-      && TYPE_P (nested_name_specifier))
++      && CLASS_TYPE_P (nested_name_specifier))
+     {
+       tree id = cp_parser_unqualified_id (parser,
+ 					  /*template_keyword_p=*/false,
+new file mode 100644
+index 0000000..ebb4868
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/enum16.C
+@@ -0,0 +1,6 @@
++// PR c++/48935
++// { dg-options -std=c++0x }
++
++enum class ENUM { a };
++
++ENUM::Type func() { return ENUM::a; } // { dg-error "does not name a type" }
+diff --git a/gcc/testsuite/g++.dg/parse/error15.C b/gcc/testsuite/g++.dg/parse/error15.C
+index 2352193..607a1db 100644
+--- a/gcc/testsuite/g++.dg/parse/error15.C
++++ b/gcc/testsuite/g++.dg/parse/error15.C
+@@ -12,7 +12,7 @@ namespace N
+ 
+ N::A f2;              // { dg-error "1:invalid use of template-name 'N::A' without an argument list" }
+ N::INVALID f3;        // { dg-error "1:'INVALID' in namespace 'N' does not name a type" }
+-N::C::INVALID f4;     // { dg-error "1:'INVALID' in class 'N::C' does not name a type" }
++N::C::INVALID f4;     // { dg-error "1:'INVALID' in 'struct N::C' does not name a type" }
+ N::K f6;              // { dg-error "1:'K' in namespace 'N' does not name a type" }
+ typename N::A f7;
+ // { dg-error "13:invalid use of template-name 'N::A' without an argument list" "13" { target *-*-* } 17 }
+@@ -22,7 +22,7 @@ struct B
+ {
+   N::A f2;            // { dg-error "3:invalid use of template-name 'N::A' without an argument list" }
+   N::INVALID f3;      // { dg-error "3:'INVALID' in namespace 'N' does not name a type" }
+-  N::C::INVALID f4;   // { dg-error "3:'INVALID' in class 'N::C' does not name a type" }
++  N::C::INVALID f4;   // { dg-error "3:'INVALID' in 'struct N::C' does not name a type" }
+   N::K f6;            // { dg-error "3:'K' in namespace 'N' does not name a type" }
+   typename N::A f7;
+ // { dg-error "15:invalid use of template-name 'N::A' without an argument list" "15" { target *-*-* } 27 }
+@@ -33,7 +33,7 @@ struct C
+ {
+   N::A f2;            // { dg-error "3:invalid use of template-name 'N::A' without an argument list" }
+   N::INVALID f3;      // { dg-error "3:'INVALID' in namespace 'N' does not name a type" }
+-  N::C::INVALID f4;   // { dg-error "3:'INVALID' in class 'N::C' does not name a type" }
++  N::C::INVALID f4;   // { dg-error "3:'INVALID' in 'struct N::C' does not name a type" }
+   N::K f6;            // { dg-error "3:'K' in namespace 'N' does not name a type" }
+   typename N::A f7;   // { dg-error "15:invalid use of template-name 'N::A' without an argument list" }
+ };
+-- 
+1.7.0.4
+

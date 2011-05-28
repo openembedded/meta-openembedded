@@ -1,7 +1,7 @@
 From b4d9ee2abbc5ac5fcf475e1d495bd3d55500d39b Mon Sep 17 00:00:00 2001
 From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 23 Apr 2011 07:41:43 +0000
-Subject: [PATCH 170/200] 	Revert:
+Subject: [PATCH] 	Revert:
  	2011-04-22  Uros Bizjak  <ubizjak@gmail.com>
 
 	PR target/48723

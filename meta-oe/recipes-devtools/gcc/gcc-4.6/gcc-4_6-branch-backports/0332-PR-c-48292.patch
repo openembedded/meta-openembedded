@@ -1,0 +1,71 @@
+From 8b1d0e0f8d8667c8f71aa00080108115d6891354 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 15:26:14 +0000
+Subject: [PATCH] 	PR c++/48292
+ 	* pt.c (tsubst_decl) [PARM_DECL]: Handle partial instantiation of
+ 	function parameter pack.
+ 	(tsubst_pack_expansion): Likewise.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174207 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index b16d229..d379a8c 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -8690,7 +8690,12 @@ tsubst_pack_expansion (tree t, tree args, tsubst_flags_t complain,
+ 		 have the wrong value for a recursive call.  Just make a
+ 		 dummy decl, since it's only used for its type.  */
+ 	      arg_pack = tsubst_decl (parm_pack, args, complain);
+-	      arg_pack = make_fnparm_pack (arg_pack);
++	      if (arg_pack && FUNCTION_PARAMETER_PACK_P (arg_pack))
++		/* Partial instantiation of the parm_pack, we can't build
++		   up an argument pack yet.  */
++		arg_pack = NULL_TREE;
++	      else
++		arg_pack = make_fnparm_pack (arg_pack);
+ 	    }
+ 	}
+       else
+@@ -9780,14 +9785,14 @@ tsubst_decl (tree t, tree args, tsubst_flags_t complain)
+             if (DECL_TEMPLATE_PARM_P (t))
+               SET_DECL_TEMPLATE_PARM_P (r);
+ 
+-	    /* An argument of a function parameter pack is not a parameter
+-	       pack.  */
+-	    FUNCTION_PARAMETER_PACK_P (r) = false;
+-
+             if (expanded_types)
+               /* We're on the Ith parameter of the function parameter
+                  pack.  */
+               {
++		/* An argument of a function parameter pack is not a parameter
++		   pack.  */
++		FUNCTION_PARAMETER_PACK_P (r) = false;
++
+                 /* Get the Ith type.  */
+                 type = TREE_VEC_ELT (expanded_types, i);
+ 
+new file mode 100644
+index 0000000..0ec69af
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/variadic109.C
+@@ -0,0 +1,17 @@
++// PR c++/48292
++// { dg-options -std=c++0x }
++
++template <typename... Args> int g(Args...);
++
++template <int N = 0>
++struct A
++{
++    template <typename... Args>
++    static auto f(Args... args) -> decltype(g(args...));
++};
++
++int main()
++{
++    A<>::f();
++    return 0;
++}
+-- 
+1.7.0.4
+

@@ -1,0 +1,95 @@
+From 97183693743a66a02a18a6e9170b2e4bdf9461ac Mon Sep 17 00:00:00 2001
+From: hjl <hjl@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 18 May 2011 22:56:35 +0000
+Subject: [PATCH] Properly handle 256bit load cast.
+
+gcc/
+
+2011-05-18  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2011-05-18  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/49002
+	* config/i386/sse.md (avx_<avxmodesuffixp><avxmodesuffix>_<avxmodesuffixp>):
+	Properly handle load cast.
+
+gcc/testsuite/
+
+2011-05-18  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2011-05-18  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/49002
+	* gcc.target/i386/pr49002-1.c: New test.
+	* gcc.target/i386/pr49002-2.c: Likewise.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173881 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index db252c8..c9866f0 100644
+--- a/gcc/config/i386/sse.md
++++ b/gcc/config/i386/sse.md
+@@ -12017,12 +12017,13 @@
+   "&& reload_completed"
+   [(const_int 0)]
+ {
++  rtx op0 = operands[0];
+   rtx op1 = operands[1];
+-  if (REG_P (op1))
++  if (REG_P (op0))
++    op0 = gen_rtx_REG (<avxhalfvecmode>mode, REGNO (op0));
++  else 
+     op1 = gen_rtx_REG (<MODE>mode, REGNO (op1));
+-  else
+-    op1 = gen_lowpart (<MODE>mode, op1);
+-  emit_move_insn (operands[0], op1);
++  emit_move_insn (op0, op1);
+   DONE;
+ })
+ 
+new file mode 100644
+index 0000000..7553e82
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/pr49002-1.c
+@@ -0,0 +1,16 @@
++/* PR target/49002 */
++/* { dg-do compile } */
++/* { dg-options "-O -mavx" } */
++
++#include <immintrin.h>
++
++void foo(const __m128d *from, __m256d *to, int s)
++{
++  __m256d var = _mm256_castpd128_pd256(from[0]);
++  var = _mm256_insertf128_pd(var, from[s], 1);
++  to[0] = var;
++}
++
++/* Ensure we load into xmm, not ymm.  */
++/* { dg-final { scan-assembler-not "vmovapd\[\t \]*\[^,\]*,\[\t \]*%ymm" } } */
++/* { dg-final { scan-assembler "vmovapd\[\t \]*\[^,\]*,\[\t \]*%xmm" } } */
+diff --git a/gcc/testsuite/gcc.target/i386/pr49002-2.c b/gcc/testsuite/gcc.target/i386/pr49002-2.c
+new file mode 100644
+index 0000000..b0e1009
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/i386/pr49002-2.c
+@@ -0,0 +1,14 @@
++/* PR target/49002 */
++/* { dg-do compile } */
++/* { dg-options "-O -mavx" } */
++
++#include <immintrin.h>
++
++void foo(const __m128d from, __m256d *to)
++{
++  *to = _mm256_castpd128_pd256(from);
++}
++
++/* Ensure we store ymm, not xmm.  */
++/* { dg-final { scan-assembler-not "vmovapd\[\t \]*%xmm\[0-9\]\+,\[^,\]*" } } */
++/* { dg-final { scan-assembler "vmovapd\[\t \]*%ymm\[0-9\]\+,\[^,\]*" } } */
+-- 
+1.7.0.4
+

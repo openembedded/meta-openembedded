@@ -1,0 +1,37 @@
+From 24f82dcfdf83fe52c056a419f295c36546c10b48 Mon Sep 17 00:00:00 2001
+From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 12 May 2011 11:02:35 +0000
+Subject: [PATCH] 	* zh_CN.po: Update.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173698 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 4eb610c..9073c49 100644
+--- a/libcpp/po/zh_CN.po
++++ b/libcpp/po/zh_CN.po
+@@ -5,10 +5,10 @@
+ #
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: cpplib 4.5.0\n"
++"Project-Id-Version: cpplib 4.6.0\n"
+ "Report-Msgid-Bugs-To: http://gcc.gnu.org/bugs.html\n"
+ "POT-Creation-Date: 2011-03-24 16:45+0000\n"
+-"PO-Revision-Date: 2010-04-19 14:55+0800\n"
++"PO-Revision-Date: 2011-05-12 17:23+0800\n"
+ "Last-Translator: Meng Jie <zuxy.meng@gmail.com>\n"
+ "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+ "Language: zh_CN\n"
+@@ -483,9 +483,8 @@ msgid "use of C++0x long long integer constant"
+ msgstr "使用 C++0x long long 整数常量"
+ 
+ #: expr.c:434
+-#, fuzzy
+ msgid "use of C99 long long integer constant"
+-msgstr "使用 C++0x long long 整数常量"
++msgstr "使用 C99 long long 整数常量"
+ 
+ #: expr.c:448
+ msgid "imaginary constants are a GCC extension"
+-- 
+1.7.0.4
+

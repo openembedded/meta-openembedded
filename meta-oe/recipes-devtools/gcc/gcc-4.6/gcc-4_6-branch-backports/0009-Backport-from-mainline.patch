@@ -1,7 +1,7 @@
 From 8c9cc2d03061ea065b70695ef4903a0390c01fb8 Mon Sep 17 00:00:00 2001
 From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 26 Mar 2011 18:41:02 +0000
-Subject: [PATCH 009/200] 	Backport from mainline:
+Subject: [PATCH] 	Backport from mainline:
  	2011-03-24  Uros Bizjak  <ubizjak@gmail.com>
 
 	PR target/48237

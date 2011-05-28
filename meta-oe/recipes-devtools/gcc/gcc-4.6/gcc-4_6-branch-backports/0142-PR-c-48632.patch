@@ -1,7 +1,7 @@
 From 71ec07630d08b813b39a65a932c71c78b8ffd845 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 18 Apr 2011 21:56:12 +0000
-Subject: [PATCH 142/200] 	PR c++/48632
+Subject: [PATCH] 	PR c++/48632
  	* parser.c (cp_parser_omp_for_loop): Don't use cp_parser_omp_for_incr
  	for type dependent pointers.
 

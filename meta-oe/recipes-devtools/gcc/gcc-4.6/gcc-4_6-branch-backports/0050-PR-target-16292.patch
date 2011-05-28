@@ -1,7 +1,7 @@
 From e9265f24f30b22d79d2ea4013dd32a491a12d00c Mon Sep 17 00:00:00 2001
 From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 31 Mar 2011 15:05:47 +0000
-Subject: [PATCH 050/200] 	PR target/16292
+Subject: [PATCH] 	PR target/16292
  	* gfortran.dg/g77/cabs.f: Only xfail execution on mips-sgi-irix6*
  	with -O0.
 

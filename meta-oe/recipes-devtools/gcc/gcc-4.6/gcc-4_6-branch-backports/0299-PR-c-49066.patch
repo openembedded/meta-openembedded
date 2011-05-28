@@ -1,0 +1,34 @@
+From 6c1b484bec9f87aaa5c648304ca556dd622b4206 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sat, 21 May 2011 21:35:50 +0000
+Subject: [PATCH] 	PR c++/49066
+ 	* decl.c (duplicate_decls): Preserve DECL_DELETED_FN.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174003 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 2905b49..aeb893f 100644
+--- a/gcc/cp/decl.c
++++ b/gcc/cp/decl.c
+@@ -1686,6 +1686,7 @@ duplicate_decls (tree newdecl, tree olddecl, bool newdecl_is_friend)
+ 	  error ("deleted definition of %qD", newdecl);
+ 	  error ("after previous declaration %q+D", olddecl);
+ 	}
++      DECL_DELETED_FN (newdecl) |= DECL_DELETED_FN (olddecl);
+     }
+ 
+   /* Deal with C++: must preserve virtual function table size.  */
+new file mode 100644
+index 0000000..69bd0ac
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/defaulted26.C
+@@ -0,0 +1,7 @@
++// PR c++/49066
++// { dg-options -std=c++0x }
++
++void foo() = delete;		// { dg-error "declared here" }
++void foo();
++
++int main() { foo(); }		// { dg-error "deleted" }
+-- 
+1.7.0.4
+

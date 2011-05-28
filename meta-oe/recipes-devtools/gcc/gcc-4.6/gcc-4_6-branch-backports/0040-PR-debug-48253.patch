@@ -1,7 +1,7 @@
 From e4e229cd56063482aced7df857e82512b846435d Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 22:47:59 +0000
-Subject: [PATCH 040/200] 	PR debug/48253
+Subject: [PATCH] 	PR debug/48253
  	* dwarf2out.c (struct dw_fde_struct): Remove dw_fde_hot_section_label,
  	dw_fde_hot_section_end_label, dw_fde_unlikely_section_label,
  	dw_fde_unlikely_section_end_label, cold_in_std_section,

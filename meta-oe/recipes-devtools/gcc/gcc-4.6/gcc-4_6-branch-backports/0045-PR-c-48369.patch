@@ -1,7 +1,7 @@
 From 61759009408d9f43af89eaeaff769a656416e1af Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 30 Mar 2011 19:50:17 +0000
-Subject: [PATCH 045/200] 	PR c++/48369
+Subject: [PATCH] 	PR c++/48369
  	* semantics.c (potential_constant_expression_1): Handle
  	UNORDERED_EXPR and ORDERED_EXPR.
 

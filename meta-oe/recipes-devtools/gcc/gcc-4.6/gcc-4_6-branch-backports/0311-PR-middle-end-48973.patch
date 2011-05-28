@@ -1,0 +1,101 @@
+From ec0109fe82032e869880728da5b026a89c64473f Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 23 May 2011 10:24:47 +0000
+Subject: [PATCH] 	PR middle-end/48973
+ 	* expr.c (expand_expr_real_2) <case LT_EXPR>: If do_store_flag
+ 	failed and the comparison has a single bit signed type, use
+ 	constm1_rtx instead of const1_rtx for true value.
+ 	(do_store_flag): If ops->type is single bit signed type, disable
+ 	signel bit test optimization and pass -1 instead of 1 as last
+ 	parameter to emit_store_flag_force.
+
+	* gcc.c-torture/execute/pr48973-1.c: New test.
+	* gcc.c-torture/execute/pr48973-2.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174063 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 1de0ce4..9a81754 100644
+--- a/gcc/expr.c
++++ b/gcc/expr.c
+@@ -8134,7 +8134,10 @@ expand_expr_real_2 (sepops ops, rtx target, enum machine_mode tmode,
+       op1 = gen_label_rtx ();
+       jumpifnot_1 (code, treeop0, treeop1, op1, -1);
+ 
+-      emit_move_insn (target, const1_rtx);
++      if (TYPE_PRECISION (type) == 1 && !TYPE_UNSIGNED (type))
++	emit_move_insn (target, constm1_rtx);
++      else
++	emit_move_insn (target, const1_rtx);
+ 
+       emit_label (op1);
+       return target;
+@@ -10088,7 +10091,8 @@ do_store_flag (sepops ops, rtx target, enum machine_mode mode)
+ 
+   if ((code == NE || code == EQ)
+       && TREE_CODE (arg0) == BIT_AND_EXPR && integer_zerop (arg1)
+-      && integer_pow2p (TREE_OPERAND (arg0, 1)))
++      && integer_pow2p (TREE_OPERAND (arg0, 1))
++      && (TYPE_PRECISION (ops->type) != 1 || TYPE_UNSIGNED (ops->type)))
+     {
+       tree type = lang_hooks.types.type_for_mode (mode, unsignedp);
+       return expand_expr (fold_single_bit_test (loc,
+@@ -10108,7 +10112,9 @@ do_store_flag (sepops ops, rtx target, enum machine_mode mode)
+ 
+   /* Try a cstore if possible.  */
+   return emit_store_flag_force (target, code, op0, op1,
+-			        operand_mode, unsignedp, 1);
++				operand_mode, unsignedp,
++				(TYPE_PRECISION (ops->type) == 1
++				 && !TYPE_UNSIGNED (ops->type)) ? -1 : 1);
+ }
+ 
+ 
+new file mode 100644
+index 0000000..02688a0
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/execute/pr48973-1.c
+@@ -0,0 +1,20 @@
++/* PR middle-end/48973 */
++
++extern void abort (void);
++struct S { int f : 1; } s;
++int v = -1;
++
++void
++foo (unsigned int x)
++{
++  if (x != -1U)
++    abort ();
++}
++
++int
++main ()
++{
++  s.f = (v & 1) > 0;
++  foo (s.f);
++  return 0;
++}
+diff --git a/gcc/testsuite/gcc.c-torture/execute/pr48973-2.c b/gcc/testsuite/gcc.c-torture/execute/pr48973-2.c
+new file mode 100644
+index 0000000..a64d491
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/execute/pr48973-2.c
+@@ -0,0 +1,14 @@
++/* PR middle-end/48973 */
++
++extern void abort (void);
++struct S { int f : 1; } s;
++int v = -1;
++
++int
++main ()
++{
++  s.f = v < 0;
++  if ((unsigned int) s.f != -1U)
++    abort ();
++  return 0;
++}
+-- 
+1.7.0.4
+

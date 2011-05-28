@@ -1,7 +1,7 @@
 From 7d736b8d0fb4f7892a5646ca3581b9ab01cb2971 Mon Sep 17 00:00:00 2001
 From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 10 Apr 2011 16:19:41 +0000
-Subject: [PATCH 097/200] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
+Subject: [PATCH] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
 
 	PR libstdc++/48465
 	* configure.ac (libtool_VERSION): Bump library version to 6:16:0.

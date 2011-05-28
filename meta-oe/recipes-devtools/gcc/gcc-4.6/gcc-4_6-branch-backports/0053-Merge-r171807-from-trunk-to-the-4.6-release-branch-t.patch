@@ -1,7 +1,7 @@
 From 5e28e486dbc793184ca462b8b528f5eff3d4f2ef Mon Sep 17 00:00:00 2001
 From: jyasskin <jyasskin@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 1 Apr 2011 01:07:46 +0000
-Subject: [PATCH 053/200] Merge r171807 from trunk to the 4.6 release branch, to fix two C++
+Subject: [PATCH] Merge r171807 from trunk to the 4.6 release branch, to fix two C++
  conformance problems in libsupc++.
 
 Tested: bootstrap + make check-c++ on x86_64

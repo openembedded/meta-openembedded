@@ -1,7 +1,7 @@
 From 137ed44dcdd5890433b8d0348dcd2b7624b7c3d6 Mon Sep 17 00:00:00 2001
 From: jb <jb@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 18 Apr 2011 15:49:16 +0000
-Subject: [PATCH 140/200] PR 47571 Fix weakref trickery breakage on alpha-dec-osf
+Subject: [PATCH] PR 47571 Fix weakref trickery breakage on alpha-dec-osf
 
 This is a backport from mainline r172469.
 

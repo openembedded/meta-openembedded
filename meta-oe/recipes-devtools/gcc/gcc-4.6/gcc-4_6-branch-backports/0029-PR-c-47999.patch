@@ -1,7 +1,7 @@
 From d1f71a5193dd2b3debd551f3dc0e0d237acf7e81 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:25:37 +0000
-Subject: [PATCH 029/200] 	PR c++/47999
+Subject: [PATCH] 	PR c++/47999
  	* semantics.c (finish_call_expr): Preserve reference semantics
  	in templates.
 

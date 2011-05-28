@@ -1,7 +1,7 @@
 From ac255441a3e973a974d1ab70d00a9b7269103214 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 19 Apr 2011 16:49:19 +0000
-Subject: [PATCH 149/200] 	PR target/48678
+Subject: [PATCH] 	PR target/48678
  	* config/i386/i386.md (movstrict<mode>): FAIL if operands[0]
  	is a SUBREG with non-MODE_INT mode inside of it.
 

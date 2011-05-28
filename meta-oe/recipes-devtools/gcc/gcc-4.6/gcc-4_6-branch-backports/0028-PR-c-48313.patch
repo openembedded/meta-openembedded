@@ -1,7 +1,7 @@
 From 8d72f0bd42615d92c0db226238694eedb52914d3 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:25:22 +0000
-Subject: [PATCH 028/200] 	PR c++/48313
+Subject: [PATCH] 	PR c++/48313
  	* pt.c (maybe_adjust_types_for_deduction): Handle T&& deduction
  	from overloaded function.
 

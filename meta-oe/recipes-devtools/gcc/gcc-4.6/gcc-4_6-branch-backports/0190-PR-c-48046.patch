@@ -1,7 +1,7 @@
 From c270475fa490deeb18cf6275a86ce15a57e706ff Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 27 Apr 2011 15:57:06 +0000
-Subject: [PATCH 190/200] 	PR c++/48046
+Subject: [PATCH] 	PR c++/48046
  	* parser.c (cp_parser_diagnose_invalid_type_name): Commit
  	to tentative parse sooner.
 

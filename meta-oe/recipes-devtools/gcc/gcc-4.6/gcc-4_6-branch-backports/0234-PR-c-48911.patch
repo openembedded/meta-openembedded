@@ -1,0 +1,96 @@
+From 68a4f9142fb55bcae7e9d73a9f68450d00ff0307 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 6 May 2011 21:58:37 +0000
+Subject: [PATCH] 	PR c++/48911
+ 	* semantics.c (cxx_eval_array_reference): Handle implicit
+ 	initializers.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173515 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 8f621b9..8fd1820 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -6280,6 +6280,7 @@ cxx_eval_array_reference (const constexpr_call *call, tree t,
+ 					   non_constant_p);
+   tree index, oldidx;
+   HOST_WIDE_INT i;
++  tree elem_type;
+   unsigned len, elem_nchars = 1;
+   if (*non_constant_p)
+     return t;
+@@ -6292,16 +6293,27 @@ cxx_eval_array_reference (const constexpr_call *call, tree t,
+     return t;
+   else if (addr)
+     return build4 (ARRAY_REF, TREE_TYPE (t), ary, index, NULL, NULL);
++  elem_type = TREE_TYPE (TREE_TYPE (ary));
+   if (TREE_CODE (ary) == CONSTRUCTOR)
+     len = CONSTRUCTOR_NELTS (ary);
+   else
+     {
+-      elem_nchars = (TYPE_PRECISION (TREE_TYPE (TREE_TYPE (ary)))
++      elem_nchars = (TYPE_PRECISION (elem_type)
+ 		     / TYPE_PRECISION (char_type_node));
+       len = (unsigned) TREE_STRING_LENGTH (ary) / elem_nchars;
+     }
+   if (compare_tree_int (index, len) >= 0)
+     {
++      if (tree_int_cst_lt (index, array_type_nelts_top (TREE_TYPE (ary))))
++	{
++	  /* If it's within the array bounds but doesn't have an explicit
++	     initializer, it's value-initialized.  */
++	  tree val = build_value_init (elem_type, tf_warning_or_error);
++	  return cxx_eval_constant_expression (call, val,
++					       allow_non_constant, addr,
++					       non_constant_p);
++	}
++
+       if (!allow_non_constant)
+ 	error ("array subscript out of bound");
+       *non_constant_p = true;
+new file mode 100644
+index 0000000..547f552
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-missing.C
+@@ -0,0 +1,39 @@
++// PR c++/48911
++// { dg-do compile }
++// { dg-options "-std=c++0x" }
++
++#define SA(X) static_assert((X),#X)
++
++struct A
++{
++  constexpr A () : a (6) {}
++  int a;
++};
++
++int
++main ()
++{
++  constexpr int a[2] = { 42 };
++  constexpr int i = a[1];
++  SA(i==0);
++  constexpr int b[1] = { };
++  constexpr int j = b[0];
++  SA(j==0);
++  constexpr char c[2] = "a";
++  constexpr char k = c[1];
++  SA(k==0);
++  constexpr char d[2] = "";
++  constexpr char l = d[1];
++  SA(l==0);
++  constexpr wchar_t e[2] = L"a";
++  constexpr wchar_t m = e[1];
++  SA(m==0);
++  constexpr wchar_t f[2] = L"";
++  constexpr wchar_t n = f[1];
++  SA(n==0);
++  constexpr A g[2] = { A () };
++  constexpr A o = g[0];
++  SA(o.a == 6);
++  constexpr A p = g[1];
++  SA(p.a == 6);
++}
+-- 
+1.7.0.4
+

@@ -1,7 +1,7 @@
 From 56a8ff0c197b4b0f917e3b50ac0dd3ed26f300c3 Mon Sep 17 00:00:00 2001
 From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 5 Apr 2011 12:13:27 +0000
-Subject: [PATCH 068/200] 2011-04-05  Richard Guenther  <rguenther@suse.de>
+Subject: [PATCH] 2011-04-05  Richard Guenther  <rguenther@suse.de>
 
 	PR bootstrap/48431
 	* lto-plugin.c (claim_file_handler): Do not declare vars in code.

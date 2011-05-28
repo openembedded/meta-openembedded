@@ -1,7 +1,7 @@
 From 5b05a527f1368e4ca9f71a8ec8124a2c64661007 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 12 Apr 2011 13:44:33 +0000
-Subject: [PATCH 109/200] 	PR rtl-optimization/48549
+Subject: [PATCH] 	PR rtl-optimization/48549
  	* combine.c (propagate_for_debug): Also stop after BB_END of
  	this_basic_block.  Process LAST and just stop processing after it.
  	(combine_instructions): If last_combined_insn has been deleted,

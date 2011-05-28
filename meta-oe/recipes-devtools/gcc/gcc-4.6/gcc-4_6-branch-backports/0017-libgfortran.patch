@@ -1,7 +1,7 @@
 From d70e14fe2c9c3fc20d9bc1dca7cfcc3d6bb1301e Mon Sep 17 00:00:00 2001
 From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 28 Mar 2011 17:09:27 +0000
-Subject: [PATCH 017/200] 	libgfortran:
+Subject: [PATCH] 	libgfortran:
  	backport from mainline:
  	2011-03-21  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
  	PR bootstrap/48135

@@ -1,7 +1,7 @@
 From ede3baf6fc1fe4972344051051daff1043f90ce3 Mon Sep 17 00:00:00 2001
 From: danglin <danglin@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 13 Apr 2011 22:36:59 +0000
-Subject: [PATCH 119/200] 	Backport from mainline:
+Subject: [PATCH] 	Backport from mainline:
  	2011-04-08  John David Anglin  <dave.anglin@nrc-cnrc.gc.ca>
 
 	PR target/48366

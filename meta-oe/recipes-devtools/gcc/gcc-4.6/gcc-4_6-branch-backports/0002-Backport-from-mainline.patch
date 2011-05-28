@@ -1,7 +1,7 @@
 From af3385141f9bfe32ab89165bfc98a7ea2ff19278 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 26 Mar 2011 09:19:36 +0000
-Subject: [PATCH 002/200] 	Backport from mainline
+Subject: [PATCH] 	Backport from mainline
  	2011-03-17  Jakub Jelinek  <jakub@redhat.com>
 
 	PR rtl-optimization/48141

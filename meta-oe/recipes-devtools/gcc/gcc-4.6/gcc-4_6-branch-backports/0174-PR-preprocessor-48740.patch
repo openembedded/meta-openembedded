@@ -1,7 +1,7 @@
 From c6deb5c58fde1c5115d9e92afb2ead8e7ac4fea0 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 23 Apr 2011 23:33:39 +0000
-Subject: [PATCH 174/200] 	PR preprocessor/48740
+Subject: [PATCH] 	PR preprocessor/48740
  	* lex.c (lex_raw_string): When raw string ends with
  	??) followed by raw prefix and ", ensure it is preprocessed
  	with ??) rather than ??].

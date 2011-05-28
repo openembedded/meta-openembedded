@@ -1,7 +1,7 @@
 From 0d6afd28da26c4b09e1eb2b16d7a3c021fae7372 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 20:30:06 +0000
-Subject: [PATCH 039/200] 	PR preprocessor/48248
+Subject: [PATCH] 	PR preprocessor/48248
  	* c-ppoutput.c (print): Add src_file field.
  	(init_pp_output): Initialize it.
  	(maybe_print_line): Don't optimize by adding up to 8 newlines

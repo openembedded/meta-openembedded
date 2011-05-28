@@ -1,0 +1,182 @@
+From 8035672553bc675f341a90983e4ac3eb7fc28832 Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 5 May 2011 16:27:03 +0000
+Subject: [PATCH] 	PR ada/48844
+ 	* gcc-interface/gigi.h (get_variant_part): Declare.
+ 	* gcc-interface/decl.c (get_variant_part): Make global.
+ 	* gcc-interface/utils2.c (find_common_type): Do not return T1 if the
+ 	types have the same constant size, are record types and T1 has a
+ 	variant part while T2 doesn't.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173443 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index a10fc2d..e576895 100644
+--- a/gcc/ada/gcc-interface/decl.c
++++ b/gcc/ada/gcc-interface/decl.c
+@@ -177,7 +177,6 @@ static void check_ok_for_atomic (tree, Entity_Id, bool);
+ static tree create_field_decl_from (tree, tree, tree, tree, tree,
+ 				    VEC(subst_pair,heap) *);
+ static tree get_rep_part (tree);
+-static tree get_variant_part (tree);
+ static tree create_variant_part_from (tree, VEC(variant_desc,heap) *, tree,
+ 				      tree, VEC(subst_pair,heap) *);
+ static void copy_and_substitute_in_size (tree, tree, VEC(subst_pair,heap) *);
+@@ -8400,7 +8399,7 @@ get_rep_part (tree record_type)
+ 
+ /* Return the variant part of RECORD_TYPE, if any.  Otherwise return NULL.  */
+ 
+-static tree
++tree
+ get_variant_part (tree record_type)
+ {
+   tree field;
+diff --git a/gcc/ada/gcc-interface/gigi.h b/gcc/ada/gcc-interface/gigi.h
+index e45cf13..eca4d9e 100644
+--- a/gcc/ada/gcc-interface/gigi.h
++++ b/gcc/ada/gcc-interface/gigi.h
+@@ -151,6 +151,9 @@ extern tree choices_to_gnu (tree operand, Node_Id choices);
+ extern void annotate_object (Entity_Id gnat_entity, tree gnu_type, tree size,
+ 			     bool by_ref, bool by_double_ref);
+ 
++/* Return the variant part of RECORD_TYPE, if any.  Otherwise return NULL.  */
++extern tree get_variant_part (tree record_type);
++
+ /* Given a type T, a FIELD_DECL F, and a replacement value R, return a new
+    type with all size expressions that contain F updated by replacing F
+    with R.  If F is NULL_TREE, always make a new RECORD_TYPE, even if
+diff --git a/gcc/ada/gcc-interface/utils2.c b/gcc/ada/gcc-interface/utils2.c
+index 07d6b5b..7028cdc 100644
+--- a/gcc/ada/gcc-interface/utils2.c
++++ b/gcc/ada/gcc-interface/utils2.c
+@@ -193,15 +193,21 @@ find_common_type (tree t1, tree t2)
+      calling into build_binary_op), some others are really expected and we
+      have to be careful.  */
+ 
+-  /* We must prevent writing more than what the target may hold if this is for
++  /* We must avoid writing more than what the target can hold if this is for
+      an assignment and the case of tagged types is handled in build_binary_op
+-     so use the lhs type if it is known to be smaller, or of constant size and
+-     the rhs type is not, whatever the modes.  We also force t1 in case of
++     so we use the lhs type if it is known to be smaller or of constant size
++     and the rhs type is not, whatever the modes.  We also force t1 in case of
+      constant size equality to minimize occurrences of view conversions on the
+-     lhs of assignments.  */
++     lhs of an assignment, except for the case of record types with a variant
++     part on the lhs but not on the rhs to make the conversion simpler.  */
+   if (TREE_CONSTANT (TYPE_SIZE (t1))
+       && (!TREE_CONSTANT (TYPE_SIZE (t2))
+-          || !tree_int_cst_lt (TYPE_SIZE (t2), TYPE_SIZE (t1))))
++	  || tree_int_cst_lt (TYPE_SIZE (t1), TYPE_SIZE (t2))
++	  || (TYPE_SIZE (t1) == TYPE_SIZE (t2)
++	      && !(TREE_CODE (t1) == RECORD_TYPE
++		   && TREE_CODE (t2) == RECORD_TYPE
++		   && get_variant_part (t1) != NULL_TREE
++		   && get_variant_part (t2) == NULL_TREE))))
+     return t1;
+ 
+   /* Otherwise, if the lhs type is non-BLKmode, use it.  Note that we know
+new file mode 100644
+index 0000000..56047c9
+--- /dev/null
++++ b/gcc/testsuite/gnat.dg/discr29.adb
+@@ -0,0 +1,8 @@
++package body Discr29 is
++
++   procedure Proc (R : out Rec3) is
++   begin
++      R := (False, Tmp);
++   end;
++
++end Discr29;
+diff --git a/gcc/testsuite/gnat.dg/discr29.ads b/gcc/testsuite/gnat.dg/discr29.ads
+new file mode 100644
+index 0000000..a205bc1
+--- /dev/null
++++ b/gcc/testsuite/gnat.dg/discr29.ads
+@@ -0,0 +1,27 @@
++-- { dg-do compile }
++
++package Discr29 is
++
++   type Rec1 is record
++      I1 : Integer;
++      I2 : Integer;
++      I3 : Integer;
++   end record;
++
++   type Rec2 is tagged record
++      I1 : Integer;
++      I2 : Integer;
++   end record;
++
++   type Rec3 (D : Boolean) is record
++      case D is
++         when True =>  A : Rec1;
++         when False => B : Rec2;
++      end case;
++   end record;
++
++   procedure Proc (R : out Rec3);
++
++   Tmp : Rec2;
++
++end Discr29;
+diff --git a/gcc/testsuite/gnat.dg/discr30.adb b/gcc/testsuite/gnat.dg/discr30.adb
+new file mode 100644
+index 0000000..b3bf100
+--- /dev/null
++++ b/gcc/testsuite/gnat.dg/discr30.adb
+@@ -0,0 +1,50 @@
++-- PR ada/48844
++-- Reported by Georg Bauhaus <bauhaus@futureapps.de> */
++
++-- { dg-do compile }
++
++procedure Discr30 is
++
++   generic
++     type Source is private;
++     type Target is private;
++   function Conversion (S : Source) return Target;
++
++   function Conversion (S : Source) return Target is
++      type Source_Wrapper is tagged record
++         S : Source;
++      end record;
++      type Target_Wrapper is tagged record
++         T : Target;
++      end record;
++
++      type Selector is (Source_Field, Target_Field);
++      type Magic (Sel : Selector := Target_Field) is record
++         case Sel is
++            when Source_Field => S : Source_Wrapper;
++            when Target_Field => T : Target_Wrapper;
++         end case;
++      end record;
++
++      M : Magic;
++
++      function Convert (T : Target_Wrapper) return Target is
++      begin
++         M := (Sel => Source_Field, S => (S => S));
++         return T.T;
++      end Convert;
++
++   begin
++      return Convert (M.T);
++   end Conversion;
++
++   type Integer_Access is access all Integer;
++
++   I : aliased Integer;
++   I_Access : Integer_Access := I'Access;
++
++   function Convert is new Conversion (Integer_Access, Integer);
++
++begin
++   I := Convert (I_Access);
++end;
+-- 
+1.7.0.4
+

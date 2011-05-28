@@ -1,7 +1,7 @@
 From 4af193055b0dcc204387ba06e11a053c5b55ad15 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 18:47:47 +0000
-Subject: [PATCH 038/200] 	PR c++/48319
+Subject: [PATCH] 	PR c++/48319
  	* pt.c (value_dependent_expression_p): Handle TEMPLATE_ID_EXPR.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171688 138bc75d-0d04-0410-961f-82ee72b054a4

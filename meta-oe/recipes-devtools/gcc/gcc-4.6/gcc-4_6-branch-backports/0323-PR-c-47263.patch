@@ -1,0 +1,45 @@
+From 83cedb74fbe2740877ae824da6ee339342eaddee Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 01:08:31 +0000
+Subject: [PATCH] 	PR c++/47263
+ 	* decl.c (use_eh_spec_block): Do use an EH spec block for a
+ 	lambda op().
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174161 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 108bb47..9e029d2 100644
+--- a/gcc/cp/decl.c
++++ b/gcc/cp/decl.c
+@@ -12570,7 +12570,7 @@ use_eh_spec_block (tree fn)
+ 	     not creating the EH_SPEC_BLOCK we save a little memory,
+ 	     and we avoid spurious warnings about unreachable
+ 	     code.  */
+-	  && !DECL_ARTIFICIAL (fn));
++	  && !DECL_DEFAULTED_FN (fn));
+ }
+ 
+ /* Store the parameter declarations into the current function declaration.
+new file mode 100644
+index 0000000..1490a25
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/lambda/lambda-eh2.C
+@@ -0,0 +1,16 @@
++// PR c++/47263
++// { dg-options -std=c++0x }
++// { dg-do run }
++
++#include <exception>
++
++int main( void )
++{
++  std::set_unexpected( []{ throw 0; } );
++  try
++    {
++      []() throw( int ) { throw nullptr; }();
++    }
++  catch( int )
++    { }
++}
+-- 
+1.7.0.4
+

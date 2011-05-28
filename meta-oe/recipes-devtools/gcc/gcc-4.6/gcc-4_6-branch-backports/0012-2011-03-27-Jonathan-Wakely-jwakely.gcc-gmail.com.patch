@@ -1,7 +1,7 @@
 From e2965db317ee7efd916963c87b9c34023eefda54 Mon Sep 17 00:00:00 2001
 From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 27 Mar 2011 20:08:35 +0000
-Subject: [PATCH 012/200] 2011-03-27  Jonathan Wakely  <jwakely.gcc@gmail.com>
+Subject: [PATCH] 2011-03-27  Jonathan Wakely  <jwakely.gcc@gmail.com>
 
 	PR other/48179
 	PR other/48221

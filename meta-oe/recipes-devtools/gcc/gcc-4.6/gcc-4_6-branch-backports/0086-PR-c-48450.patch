@@ -1,7 +1,7 @@
 From a5e7415bfbe41941768106dc5819bf3fff1b8435 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 15:01:50 +0000
-Subject: [PATCH 086/200] 	PR c++/48450
+Subject: [PATCH] 	PR c++/48450
  	* c-family/c-common.c (c_common_truthvalue_conversion): Don't ignore
  	conversion from C++0x scoped enum.
  	* cp/cvt.c (ocp_convert): Handle converting scoped enum to bool.

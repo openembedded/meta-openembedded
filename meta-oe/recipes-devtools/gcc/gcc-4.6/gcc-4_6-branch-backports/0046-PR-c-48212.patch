@@ -1,7 +1,7 @@
 From f23bf88450af23287387d878036f78042093d61b Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 30 Mar 2011 20:29:43 +0000
-Subject: [PATCH 046/200] 	PR c++/48212
+Subject: [PATCH] 	PR c++/48212
  	* semantics.c (non_const_var_error): Just return if DECL_INITIAL
  	is error_mark_node.
 

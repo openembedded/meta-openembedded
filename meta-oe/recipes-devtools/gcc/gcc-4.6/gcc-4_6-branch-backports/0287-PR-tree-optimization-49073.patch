@@ -1,0 +1,121 @@
+From 354414452478a90309fc78d4cec353cce51ac36d Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 20 May 2011 14:35:20 +0000
+Subject: [PATCH] 	PR tree-optimization/49073
+ 	* gimple-fold.c (and_comparisons_1, or_comparisons_1): Return
+ 	NULL if PHI argument is SSA_NAME, whose def_stmt is dominated
+ 	by the PHI.
+ 	* tree-ssa-ifcombine.c (tree_ssa_ifcombine): Calculate dominators.
+
+	* gcc.c-torture/execute/pr49073.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173951 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 1b82e12..6ff6f81 100644
+--- a/gcc/gimple-fold.c
++++ b/gcc/gimple-fold.c
+@@ -1,5 +1,5 @@
+ /* Statement simplification on GIMPLE.
+-   Copyright (C) 2010 Free Software Foundation, Inc.
++   Copyright (C) 2010, 2011 Free Software Foundation, Inc.
+    Split out from tree-ssa-ccp.c.
+ 
+ This file is part of GCC.
+@@ -2185,8 +2185,19 @@ and_comparisons_1 (enum tree_code code1, tree op1a, tree op1b,
+ 		    }
+ 		  else if (TREE_CODE (arg) == SSA_NAME)
+ 		    {
+-		      tree temp = and_var_with_comparison (arg, invert,
+-							   code2, op2a, op2b);
++		      tree temp;
++		      gimple def_stmt = SSA_NAME_DEF_STMT (arg);
++		      /* In simple cases we can look through PHI nodes,
++			 but we have to be careful with loops.
++			 See PR49073.  */
++		      if (! dom_info_available_p (CDI_DOMINATORS)
++			  || gimple_bb (def_stmt) == gimple_bb (stmt)
++			  || dominated_by_p (CDI_DOMINATORS,
++					     gimple_bb (def_stmt),
++					     gimple_bb (stmt)))
++			return NULL_TREE;
++		      temp = and_var_with_comparison (arg, invert, code2,
++						      op2a, op2b);
+ 		      if (!temp)
+ 			return NULL_TREE;
+ 		      else if (!result)
+@@ -2635,8 +2646,19 @@ or_comparisons_1 (enum tree_code code1, tree op1a, tree op1b,
+ 		    }
+ 		  else if (TREE_CODE (arg) == SSA_NAME)
+ 		    {
+-		      tree temp = or_var_with_comparison (arg, invert,
+-							  code2, op2a, op2b);
++		      tree temp;
++		      gimple def_stmt = SSA_NAME_DEF_STMT (arg);
++		      /* In simple cases we can look through PHI nodes,
++			 but we have to be careful with loops.
++			 See PR49073.  */
++		      if (! dom_info_available_p (CDI_DOMINATORS)
++			  || gimple_bb (def_stmt) == gimple_bb (stmt)
++			  || dominated_by_p (CDI_DOMINATORS,
++					     gimple_bb (def_stmt),
++					     gimple_bb (stmt)))
++			return NULL_TREE;
++		      temp = or_var_with_comparison (arg, invert, code2,
++						     op2a, op2b);
+ 		      if (!temp)
+ 			return NULL_TREE;
+ 		      else if (!result)
+new file mode 100644
+index 0000000..92b923b
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/execute/pr49073.c
+@@ -0,0 +1,26 @@
++/* PR tree-optimization/49073 */
++
++extern void abort (void);
++int a[] = { 1, 2, 3, 4, 5, 6, 7 }, c;
++
++int
++main ()
++{
++  int d = 1, i = 1;
++  _Bool f = 0;
++  do
++    {
++      d = a[i];
++      if (f && d == 4)
++	{
++	  ++c;
++	  break;
++	}
++      i++;
++      f = (d == 3);
++    }
++  while (d < 7);
++  if (c != 1)
++    abort ();
++  return 0;
++}
+diff --git a/gcc/tree-ssa-ifcombine.c b/gcc/tree-ssa-ifcombine.c
+index e23bb76..9063bfd 100644
+--- a/gcc/tree-ssa-ifcombine.c
++++ b/gcc/tree-ssa-ifcombine.c
+@@ -1,5 +1,5 @@
+ /* Combining of if-expressions on trees.
+-   Copyright (C) 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
++   Copyright (C) 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
+    Contributed by Richard Guenther <rguenther@suse.de>
+ 
+ This file is part of GCC.
+@@ -625,6 +625,7 @@ tree_ssa_ifcombine (void)
+   int i;
+ 
+   bbs = blocks_in_phiopt_order ();
++  calculate_dominance_info (CDI_DOMINATORS);
+ 
+   for (i = 0; i < n_basic_blocks - NUM_FIXED_BLOCKS; ++i)
+     {
+-- 
+1.7.0.4
+

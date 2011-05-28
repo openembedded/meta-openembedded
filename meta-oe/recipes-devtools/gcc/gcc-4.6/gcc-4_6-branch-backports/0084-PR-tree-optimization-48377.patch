@@ -1,7 +1,7 @@
 From eba70fb9976ef047a8fb8dc6499c42e8fd3551f7 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 11:45:29 +0000
-Subject: [PATCH 084/200] 	PR tree-optimization/48377
+Subject: [PATCH] 	PR tree-optimization/48377
  	* tree-vect-data-refs.c (vector_alignment_reachable_p): Set
  	is_packed to true even for types with smaller TYPE_ALIGN than
  	TYPE_SIZE.

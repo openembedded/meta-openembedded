@@ -1,0 +1,24 @@
+From da9199fc7cef9aa069eb18fe6e6437dfd11cee35 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 12 May 2011 01:44:03 +0000
+Subject: [PATCH] 	* pt.c (build_non_dependent_expr): Don't check null_ptr_cst_p.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173693 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index fc5177d..e1ddf84 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -18810,10 +18810,6 @@ build_non_dependent_expr (tree expr)
+ {
+   tree inner_expr;
+ 
+-  /* Preserve null pointer constants so that the type of things like
+-     "p == 0" where "p" is a pointer can be determined.  */
+-  if (null_ptr_cst_p (expr))
+-    return expr;
+   /* Preserve OVERLOADs; the functions must be available to resolve
+      types.  */
+   inner_expr = expr;
+-- 
+1.7.0.4
+

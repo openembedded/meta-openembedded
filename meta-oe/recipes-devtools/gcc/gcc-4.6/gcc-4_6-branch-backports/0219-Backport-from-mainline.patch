@@ -1,0 +1,145 @@
+From c36ec52943b79e5245d18041217a1b9a76fde887 Mon Sep 17 00:00:00 2001
+From: irar <irar@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 5 May 2011 08:39:40 +0000
+Subject: [PATCH] 	Backport from mainline:
+ 	2011-04-18  Ulrich Weigand  <ulrich.weigand@linaro.org>
+ 		    Ira Rosen  <ira.rosen@linaro.org>
+
+	PR target/48252
+	* config/arm/arm.c (neon_emit_pair_result_insn): Swap arguments
+	to match neon_vzip/vuzp/vtrn_internal.
+	* config/arm/neon.md (neon_vtrn<mode>_internal): Make both
+	outputs explicitly dependent on both inputs.
+	(neon_vzip<mode>_internal, neon_vuzp<mode>_internal): Likewise.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173418 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 8515002..9e6582a 100644
+--- a/gcc/config/arm/arm.c
++++ b/gcc/config/arm/arm.c
+@@ -19564,7 +19564,7 @@ neon_emit_pair_result_insn (enum machine_mode mode,
+   rtx tmp1 = gen_reg_rtx (mode);
+   rtx tmp2 = gen_reg_rtx (mode);
+ 
+-  emit_insn (intfn (tmp1, op1, tmp2, op2));
++  emit_insn (intfn (tmp1, op1, op2, tmp2));
+ 
+   emit_move_insn (mem, tmp1);
+   mem = adjust_address (mem, mode, GET_MODE_SIZE (mode));
+diff --git a/gcc/config/arm/neon.md b/gcc/config/arm/neon.md
+index 440b982..bc13722 100644
+--- a/gcc/config/arm/neon.md
++++ b/gcc/config/arm/neon.md
+@@ -4079,20 +4079,21 @@
+ 
+ (define_insn "neon_vtrn<mode>_internal"
+   [(set (match_operand:VDQW 0 "s_register_operand" "=w")
+-	(unspec:VDQW [(match_operand:VDQW 1 "s_register_operand" "0")]
+-		     UNSPEC_VTRN1))
+-   (set (match_operand:VDQW 2 "s_register_operand" "=w")
+-        (unspec:VDQW [(match_operand:VDQW 3 "s_register_operand" "2")]
+-		     UNSPEC_VTRN2))]
+-  "TARGET_NEON"
+-  "vtrn.<V_sz_elem>\t%<V_reg>0, %<V_reg>2"
++        (unspec:VDQW [(match_operand:VDQW 1 "s_register_operand" "0")
++                      (match_operand:VDQW 2 "s_register_operand" "w")]
++                     UNSPEC_VTRN1))
++   (set (match_operand:VDQW 3 "s_register_operand" "=2")
++         (unspec:VDQW [(match_dup 1) (match_dup 2)]
++                     UNSPEC_VTRN2))]
++  "TARGET_NEON"
++  "vtrn.<V_sz_elem>\t%<V_reg>0, %<V_reg>3"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
+                     (const_string "neon_bp_simple")
+                     (const_string "neon_bp_3cycle")))]
+ )
+ 
+-(define_expand "neon_vtrn<mode>"
++ "neon_vtrn<mode>"
+   [(match_operand:SI 0 "s_register_operand" "r")
+    (match_operand:VDQW 1 "s_register_operand" "w")
+    (match_operand:VDQW 2 "s_register_operand" "w")]
+@@ -4105,13 +4106,14 @@
+ 
+ (define_insn "neon_vzip<mode>_internal"
+   [(set (match_operand:VDQW 0 "s_register_operand" "=w")
+-	(unspec:VDQW [(match_operand:VDQW 1 "s_register_operand" "0")]
+-		     UNSPEC_VZIP1))
+-   (set (match_operand:VDQW 2 "s_register_operand" "=w")
+-        (unspec:VDQW [(match_operand:VDQW 3 "s_register_operand" "2")]
+-		     UNSPEC_VZIP2))]
+-  "TARGET_NEON"
+-  "vzip.<V_sz_elem>\t%<V_reg>0, %<V_reg>2"
++        (unspec:VDQW [(match_operand:VDQW 1 "s_register_operand" "0")
++                      (match_operand:VDQW 2 "s_register_operand" "w")]
++                     UNSPEC_VZIP1))
++   (set (match_operand:VDQW 3 "s_register_operand" "=2")
++        (unspec:VDQW [(match_dup 1) (match_dup 2)]
++                     UNSPEC_VZIP2))]
++  "TARGET_NEON"
++  "vzip.<V_sz_elem>\t%<V_reg>0, %<V_reg>3"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
+                     (const_string "neon_bp_simple")
+@@ -4131,13 +4133,14 @@
+ 
+ (define_insn "neon_vuzp<mode>_internal"
+   [(set (match_operand:VDQW 0 "s_register_operand" "=w")
+-	(unspec:VDQW [(match_operand:VDQW 1 "s_register_operand" "0")]
++        (unspec:VDQW [(match_operand:VDQW 1 "s_register_operand" "0")
++                      (match_operand:VDQW 2 "s_register_operand" "w")]
+                      UNSPEC_VUZP1))
+-   (set (match_operand:VDQW 2 "s_register_operand" "=w")
+-        (unspec:VDQW [(match_operand:VDQW 3 "s_register_operand" "2")]
+-		     UNSPEC_VUZP2))]
++   (set (match_operand:VDQW 3 "s_register_operand" "=2")
++        (unspec:VDQW [(match_dup 1) (match_dup 2)]
++                     UNSPEC_VUZP2))]
+   "TARGET_NEON"
+-  "vuzp.<V_sz_elem>\t%<V_reg>0, %<V_reg>2"
++  "vuzp.<V_sz_elem>\t%<V_reg>0, %<V_reg>3"
+   [(set (attr "neon_type")
+       (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
+                     (const_string "neon_bp_simple")
+new file mode 100644
+index 0000000..1a06c71
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/arm/pr48252.c
+@@ -0,0 +1,31 @@
++/* { dg-do run } */
++/* { dg-require-effective-target arm_neon_hw } */
++/* { dg-options "-O2" } */
++/* { dg-add-options arm_neon } */
++
++#include "arm_neon.h"
++#include <stdlib.h>
++
++int main(void)
++{
++    uint8x8_t v1 = {1, 1, 1, 1, 1, 1, 1, 1};
++    uint8x8_t v2 = {2, 2, 2, 2, 2, 2, 2, 2};
++    uint8x8x2_t vd1, vd2;
++    union {uint8x8_t v; uint8_t buf[8];} d1, d2, d3, d4;
++    int i;
++
++    vd1 = vzip_u8(v1, vdup_n_u8(0));
++    vd2 = vzip_u8(v2, vdup_n_u8(0));
++
++    vst1_u8(d1.buf, vd1.val[0]);
++    vst1_u8(d2.buf, vd1.val[1]);
++    vst1_u8(d3.buf, vd2.val[0]);
++    vst1_u8(d4.buf, vd2.val[1]);
++
++    for (i = 0; i < 8; i++)
++      if ((i % 2 == 0 && d4.buf[i] != 2)
++          || (i % 2 == 1 && d4.buf[i] != 0))
++         abort ();
++
++    return 0;
++}
+-- 
+1.7.0.4
+

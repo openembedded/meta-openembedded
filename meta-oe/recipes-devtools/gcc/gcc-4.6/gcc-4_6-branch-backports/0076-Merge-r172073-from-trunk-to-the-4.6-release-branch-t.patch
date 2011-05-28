@@ -1,7 +1,7 @@
 From 3329b7447ab817bb0374a689f3b381a5781ed8aa Mon Sep 17 00:00:00 2001
 From: jyasskin <jyasskin@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 7 Apr 2011 04:50:23 +0000
-Subject: [PATCH 076/200] Merge r172073 from trunk to the 4.6 release branch, to fix two
+Subject: [PATCH] Merge r172073 from trunk to the 4.6 release branch, to fix two
  ambiguities between extensions and new C++0x functions.
 
 Tested: bootstrap + make check-c++ on x86_64

@@ -1,0 +1,49 @@
+From 433d639c131ead9f557814afb1f15a0b81e86143 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 23 May 2011 20:37:18 +0000
+Subject: [PATCH] 	PR lto/49123
+ 	* fold-const.c (constant_boolean_node): If type is non-NULL,
+ 	use build_int_cst_type instead of build_int_cst.
+
+	* gcc.c-torture/execute/pr49123.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174087 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 053ae30..51be79d 100644
+--- a/gcc/fold-const.c
++++ b/gcc/fold-const.c
+@@ -5953,8 +5953,10 @@ constant_boolean_node (int value, tree type)
+     return value ? integer_one_node : integer_zero_node;
+   else if (type == boolean_type_node)
+     return value ? boolean_true_node : boolean_false_node;
++  else if (type)
++    return build_int_cst_type (type, value);
+   else
+-    return build_int_cst (type, value);
++    return build_int_cst (NULL_TREE, value);
+ }
+ 
+ 
+new file mode 100644
+index 0000000..2f1f793
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/execute/pr49123.c
+@@ -0,0 +1,14 @@
++/* PR lto/49123 */
++
++extern void abort (void);
++static struct S { int f : 1; } s;
++static int v = -1;
++
++int
++main ()
++{
++  s.f = v < 0;
++  if ((unsigned int) s.f != -1U)
++    abort ();
++  return 0;
++}
+-- 
+1.7.0.4
+

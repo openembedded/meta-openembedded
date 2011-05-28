@@ -1,7 +1,7 @@
 From f8ae59386457b39085b086d04a8cd96e4450f167 Mon Sep 17 00:00:00 2001
 From: abel <abel@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 1 Apr 2011 11:07:44 +0000
-Subject: [PATCH 054/200]         Backport from mainline
+Subject: [PATCH]         Backport from mainline
          2011-03-22  Andrey Belevantsev  <abel@ispras.ru>
 
         PR rtl-optimization/48143

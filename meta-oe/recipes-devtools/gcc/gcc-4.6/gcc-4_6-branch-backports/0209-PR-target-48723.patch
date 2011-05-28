@@ -1,0 +1,26 @@
+From 55ec7e3af4823fc378f78e35b795af1bafcd3542 Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 3 May 2011 07:20:30 +0000
+Subject: [PATCH] 	PR target/48723
+ 	* config/i386/i386.c (ix86_expand_prologue): Do not probe the stack
+ 	for -fstack-check if the size to allocate is negative.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173289 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 6e4bb3b..f3a8a0c 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -10566,8 +10566,8 @@ ix86_expand_prologue (void)
+     }
+ 
+   /* The stack has already been decremented by the instruction calling us
+-     so we need to probe unconditionally to preserve the protection area.  */
+-  if (flag_stack_check == STATIC_BUILTIN_STACK_CHECK)
++     so probe if the size is non-negative to preserve the protection area.  */
++  if (allocate >= 0 && flag_stack_check == STATIC_BUILTIN_STACK_CHECK)
+     {
+       /* We expect the registers to be saved when probes are used.  */
+       gcc_assert (int_registers_saved);
+-- 
+1.7.0.4
+

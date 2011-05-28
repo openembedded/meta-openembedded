@@ -1,7 +1,7 @@
 From cb79606d4958a3f3df1adfcc00b641e3b8089819 Mon Sep 17 00:00:00 2001
 From: burnus <burnus@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 28 Apr 2011 18:43:16 +0000
-Subject: [PATCH 193/200] 2011-04-28  Tobias Burnus  <burnus@net-b.de>
+Subject: [PATCH] 2011-04-28  Tobias Burnus  <burnus@net-b.de>
 
         PR fortran/48788
         * resolve.c (resolve_global_procedure): Error recovery -

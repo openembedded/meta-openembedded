@@ -1,7 +1,7 @@
 From c965b9c986732377eb96e00f7266e281f345a00b Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 31 Mar 2011 20:33:07 +0000
-Subject: [PATCH 051/200] 	PR c++/48280
+Subject: [PATCH] 	PR c++/48280
  	* method.c (defaultable_fn_check): Templates are not defaultable.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171798 138bc75d-0d04-0410-961f-82ee72b054a4

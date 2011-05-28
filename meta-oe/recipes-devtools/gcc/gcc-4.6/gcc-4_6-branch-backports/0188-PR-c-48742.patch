@@ -1,7 +1,7 @@
 From 1a6d9e7052b3632a85ca6f79b48384fd684c4411 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 27 Apr 2011 07:05:54 +0000
-Subject: [PATCH 188/200] 	PR c/48742
+Subject: [PATCH] 	PR c/48742
  	* c-typeck.c (build_binary_op): Don't wrap arguments if
  	int_operands is true.
 

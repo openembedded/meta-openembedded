@@ -1,7 +1,7 @@
 From 2fe380ffa4f1ca0fba1e4915df127992eb977569 Mon Sep 17 00:00:00 2001
 From: rsandifo <rsandifo@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 28 Mar 2011 10:22:57 +0000
-Subject: [PATCH 015/200] gcc/
+Subject: [PATCH] gcc/
  	PR target/47553
  	* config/arm/predicates.md (neon_lane_number): Accept 0..15.
 

@@ -1,7 +1,7 @@
 From 2ce87b6b9c9143a22381eec77bbf1fd7016e132d Mon Sep 17 00:00:00 2001
 From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 16 Apr 2011 00:55:53 +0000
-Subject: [PATCH 129/200] 2011-04-15  Daniel Krugler  <daniel.kruegler@googlemail.com>
+Subject: [PATCH] 2011-04-15  Daniel Krugler  <daniel.kruegler@googlemail.com>
  	    Paolo Carlini  <paolo.carlini@oracle.com>
 
 	PR libstdc++/48635

@@ -1,7 +1,7 @@
 From 0d43ff3bbc445b0264f804cd6449069182045678 Mon Sep 17 00:00:00 2001
 From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 2 Apr 2011 15:34:01 +0000
-Subject: [PATCH 058/200] 2011-04-02  Jonathan Wakely  <redi@gcc.gnu.org>
+Subject: [PATCH] 2011-04-02  Jonathan Wakely  <redi@gcc.gnu.org>
 
 	PR libstdc++/48398
 	* include/bits/unique_ptr.h (__tuple_type): Store pointer type.

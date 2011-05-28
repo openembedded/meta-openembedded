@@ -1,7 +1,7 @@
 From ad24dcb7c07f1f9d41cb6782ea14c6c1727c4cb0 Mon Sep 17 00:00:00 2001
 From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 21 Apr 2011 20:23:55 +0000
-Subject: [PATCH 164/200] 	PR target/48708
+Subject: [PATCH] 	PR target/48708
  	* config/i386/i386.c (ix86_expand_vector_set) <V2DImode>: Generate
  	vec_extract and vec_concat for non-SSE4_1 targets.
 

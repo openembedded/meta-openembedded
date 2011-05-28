@@ -1,7 +1,7 @@
 From 8825c738568548e5d67dc2f4e7ce9326dcc2cd7c Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 22 Apr 2011 18:53:30 +0000
-Subject: [PATCH 168/200] 	PR tree-optimization/48717
+Subject: [PATCH] 	PR tree-optimization/48717
  	* tree-ssa-forwprop.c (associate_plusminus): For A + ~A and
  	~A + A optimizations use build_int_cst_type instead of build_int_cst.
 

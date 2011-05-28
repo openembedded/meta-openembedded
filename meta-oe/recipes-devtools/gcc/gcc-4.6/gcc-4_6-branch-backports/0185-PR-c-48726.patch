@@ -1,7 +1,7 @@
 From c0df85fc6ea1962c53f98bbca38d182eba8e23f7 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 26 Apr 2011 23:42:50 +0000
-Subject: [PATCH 185/200] 	PR c++/48726
+Subject: [PATCH] 	PR c++/48726
  	* call.c (convert_like_real): Correct TREE_CONSTANT on CONSTRUCTOR.
  	* decl.c (reshape_init_array_1): Likewise.
 

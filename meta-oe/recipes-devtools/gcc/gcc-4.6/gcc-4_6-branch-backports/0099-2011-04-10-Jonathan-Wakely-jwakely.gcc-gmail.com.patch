@@ -1,7 +1,7 @@
 From 2173abe5d6f3f3157317caa470226e13827c3df9 Mon Sep 17 00:00:00 2001
 From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 10 Apr 2011 16:34:34 +0000
-Subject: [PATCH 099/200] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
+Subject: [PATCH] 2011-04-10  Jonathan Wakely  <jwakely.gcc@gmail.com>
 
 	* testsuite/20_util/function/48451.cc: Rename to...
 	* testsuite/20_util/function/48541.cc: This.

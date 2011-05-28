@@ -1,7 +1,7 @@
 From dd8cc468e2787972742061b1547dbab48729ccf8 Mon Sep 17 00:00:00 2001
 From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 19 Apr 2011 09:14:05 +0000
-Subject: [PATCH 147/200] 2011-04-18  Richard Guenther  <rguenther@suse.de>
+Subject: [PATCH] 2011-04-18  Richard Guenther  <rguenther@suse.de>
 
 	PR preprocessor/48248
 	* c-ppoutput.c (maybe_print_line): Avoid changing -P behavior.

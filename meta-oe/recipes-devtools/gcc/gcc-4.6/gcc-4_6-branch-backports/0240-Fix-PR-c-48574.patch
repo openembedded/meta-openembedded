@@ -1,0 +1,63 @@
+From 870a98366a1b44e999c9ecee9e777b10d4c10ec9 Mon Sep 17 00:00:00 2001
+From: dodji <dodji@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 9 May 2011 12:34:19 +0000
+Subject: [PATCH] Fix PR c++/48574
+
+gcc/cp/
+
+	PR c++/48574
+	* class.c (fixed_type_or_null): Use type_dependent_p_push to test
+	if the instance has a dependent initializer.
+
+gcc/testsuite/
+
+	PR c++/48574
+	* g++.dg/template/dependent-expr8.C: New test case.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173571 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c833329..e1b8645 100644
+--- a/gcc/cp/class.c
++++ b/gcc/cp/class.c
+@@ -5937,7 +5937,7 @@ fixed_type_or_null (tree instance, int *nonnull, int *cdtorp)
+ 	     itself.  */
+ 	  if (TREE_CODE (instance) == VAR_DECL
+ 	      && DECL_INITIAL (instance)
+-	      && !type_dependent_expression_p (DECL_INITIAL (instance))
++	      && !type_dependent_expression_p_push (DECL_INITIAL (instance))
+ 	      && !htab_find (ht, instance))
+ 	    {
+ 	      tree type;
+new file mode 100644
+index 0000000..20014d6
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/template/dependent-expr8.C
+@@ -0,0 +1,25 @@
++// Origin PR c++/48574
++// { dg-options "-std=c++0x" }
++// { dg-do compile }
++
++struct A
++{
++  virtual int foo();
++};
++
++void baz (int);
++
++template <typename T>
++void
++bar(T x)
++{
++  A &b = *x;
++  baz (b.foo ());
++}
++
++void
++foo()
++{
++  A a;
++  bar(&a);
++}
+-- 
+1.7.0.4
+

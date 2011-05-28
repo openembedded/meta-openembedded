@@ -1,7 +1,7 @@
 From 838560450136f202dc9170f2ad3eec80b41e0381 Mon Sep 17 00:00:00 2001
 From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 29 Apr 2011 23:19:59 +0000
-Subject: [PATCH 199/200] 2011-04-29  Paolo Carlini  <paolo.carlini@oracle.com>
+Subject: [PATCH] 2011-04-29  Paolo Carlini  <paolo.carlini@oracle.com>
 
 	PR libstdc++/48760
 	* include/std/complex (complex<float>::complex(float, float),

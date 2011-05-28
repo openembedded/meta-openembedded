@@ -1,7 +1,7 @@
 From abb5bc5b7190b68909f9dd14386aa2c430bacd9a Mon Sep 17 00:00:00 2001
 From: nickc <nickc@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 27 Apr 2011 14:55:28 +0000
-Subject: [PATCH 189/200] 	* gcc.dg/20020312-2.c: Add definition for RX.
+Subject: [PATCH] 	* gcc.dg/20020312-2.c: Add definition for RX.
 
 	* lib/target-supports.exp (add_options_for_ieee): Use -mnofpu
 	option with RX targets.

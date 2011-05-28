@@ -1,7 +1,7 @@
 From 021acee3b7a6b26783c92870c1e202730c3f024e Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 20 Apr 2011 06:31:51 +0000
-Subject: [PATCH 151/200] 	PR c++/46304
+Subject: [PATCH] 	PR c++/46304
  	* typeck.c (cp_build_binary_op): Fold COMPLEX_EXPR.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172756 138bc75d-0d04-0410-961f-82ee72b054a4

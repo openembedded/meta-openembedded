@@ -1,7 +1,7 @@
 From 5d622f64eff4e9fa78356c24290aed131b5c519c Mon Sep 17 00:00:00 2001
 From: dodji <dodji@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 28 Apr 2011 19:46:34 +0000
-Subject: [PATCH 195/200] Fix PR c++/48656
+Subject: [PATCH] Fix PR c++/48656
 
 gcc/cp/
 

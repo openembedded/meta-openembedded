@@ -1,7 +1,7 @@
 From 6f57329da3c7308ccf6b1740ead898d668ec24f9 Mon Sep 17 00:00:00 2001
 From: krebbel <krebbel@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 11:57:40 +0000
-Subject: [PATCH 019/200] 2011-03-29  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+Subject: [PATCH] 2011-03-29  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
 
 	* config/s390/s390.c (s390_preferred_reload_class): Return NO_REGS
 	for invalid symbolic addresses.

@@ -1,0 +1,30 @@
+From 74848914e56814b2e9c5983cb8c0dfb25b7db233 Mon Sep 17 00:00:00 2001
+From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 19 May 2011 08:03:10 +0000
+Subject: [PATCH] 	* gcc.c-torture/execute/960321-1.x: Remove.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173891 138bc75d-0d04-0410-961f-82ee72b054a4
+
+deleted file mode 100644
+index 44cc702..0000000
+--- a/gcc/testsuite/gcc.c-torture/execute/960321-1.x
++++ /dev/null
+@@ -1,15 +0,0 @@
+-# This test fails to link on 64-bit Solaris 2/x86 due to a Sun as bug.
+-if { [istarget "i?86-*-solaris2*"]
+-     && ! [check_effective_target_ilp32]
+-     && ! [check_effective_target_gas] } { 
+-    set torture_eval_before_compile {
+-        global compiler_conditional_xfail_data
+-        set compiler_conditional_xfail_data {
+-            "64-bit Sun as bug" \
+-                { "i?86-*-solaris2*" } \
+-                { "-O[1-3s]" } \
+-                { "" }
+-       }
+-    }
+-}
+-return 0
+-- 
+1.7.0.4
+

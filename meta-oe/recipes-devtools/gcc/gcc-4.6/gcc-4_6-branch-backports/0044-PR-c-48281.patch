@@ -1,7 +1,7 @@
 From 541566b2d3b46207159abb1f59970bb11078e57e Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 30 Mar 2011 18:05:43 +0000
-Subject: [PATCH 044/200] 	PR c++/48281
+Subject: [PATCH] 	PR c++/48281
  	* semantics.c (finish_compound_literal): Do put static/constant
  	arrays in static variables.
 

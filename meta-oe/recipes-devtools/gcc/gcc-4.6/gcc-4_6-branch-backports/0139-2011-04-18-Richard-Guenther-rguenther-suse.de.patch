@@ -1,7 +1,7 @@
 From 68e7b8b6643a4c50a8527610dbf5a7ab36cc8f24 Mon Sep 17 00:00:00 2001
 From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 18 Apr 2011 14:25:57 +0000
-Subject: [PATCH 139/200] 2011-04-18  Richard Guenther  <rguenther@suse.de>
+Subject: [PATCH] 2011-04-18  Richard Guenther  <rguenther@suse.de>
 
 	PR middle-end/46364
 	* g++.dg/torture/pr46364.C: New testcase.

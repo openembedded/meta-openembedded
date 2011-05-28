@@ -1,7 +1,7 @@
 From 1370bfdaf3735fc1038436cfc86b7cfe43d3eaf0 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:26:10 +0000
-Subject: [PATCH 032/200] 	Core 1232
+Subject: [PATCH] 	Core 1232
  	* call.c (build_array_conv): New.
  	(implicit_conversion): Use it.
 

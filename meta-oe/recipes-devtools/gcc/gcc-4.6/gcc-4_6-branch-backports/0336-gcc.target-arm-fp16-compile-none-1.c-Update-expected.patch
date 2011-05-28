@@ -1,0 +1,74 @@
+From e5da38986a5476bb0b2d0d5c41f402721ee8b784 Mon Sep 17 00:00:00 2001
+From: janis <janis@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 16:38:55 +0000
+Subject: [PATCH] 	* gcc.target/arm/fp16-compile-none-1.c: Update expected error.
+ 	* g++.dg/abi/packed1.C: Suppress warning.
+ 	* g++.dg/warn/Wunused-parm-3.C: Likewise.
+ 	* g++.dg/template/stdarg1.C: Likewise.
+ 	* g++.dg/other/packed1.C: Remove arm from xfail list.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174214 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c903709..8345375 100644
+--- a/gcc/testsuite/g++.dg/abi/packed1.C
++++ b/gcc/testsuite/g++.dg/abi/packed1.C
+@@ -1,10 +1,10 @@
+ // PR c++/41788
+-// { dg-options "-Wpacked" }
+ // { dg-do run }
++// { dg-options "-Wpacked -Wno-attributes" }
+ 
+ extern "C" void abort ();
+ 
+-struct INNER { // { dg-warning "inefficient.*vptr" "" { target alpha*-*-* ia64-*-* hppa*-*-* mips-sgi-irix* sparc*-*-* spu-*-* sh*-*-* } }
++struct INNER {
+   virtual int foo() const { return 1; }
+ } __attribute__ ((packed));
+ 
+diff --git a/gcc/testsuite/g++.dg/other/packed1.C b/gcc/testsuite/g++.dg/other/packed1.C
+index 7a842d3..ac586c6 100644
+--- a/gcc/testsuite/g++.dg/other/packed1.C
++++ b/gcc/testsuite/g++.dg/other/packed1.C
+@@ -1,4 +1,4 @@
+-// { dg-do run { xfail arm*-*-* sh-*-* lm32-*-* } }
++// { dg-do run { xfail sh-*-* lm32-*-* } }
+ 
+ // NMS:2003-04-21 this fails on strict aligned architectures again,
+ // the patch was reverted because it broke something more important.
+diff --git a/gcc/testsuite/g++.dg/template/stdarg1.C b/gcc/testsuite/g++.dg/template/stdarg1.C
+index ddc8c78..94804ee 100644
+--- a/gcc/testsuite/g++.dg/template/stdarg1.C
++++ b/gcc/testsuite/g++.dg/template/stdarg1.C
+@@ -1,5 +1,7 @@
+ // PR c++/47022
+ // { dg-do compile }
++// Suppress a warning that is irrelevant to the purpose of this test.
++// { dg-options "-Wno-abi" { target arm_eabi } }
+ 
+ #include <cstdarg>
+ 
+diff --git a/gcc/testsuite/g++.dg/warn/Wunused-parm-3.C b/gcc/testsuite/g++.dg/warn/Wunused-parm-3.C
+index 4d293f3..3f0a0e7 100644
+--- a/gcc/testsuite/g++.dg/warn/Wunused-parm-3.C
++++ b/gcc/testsuite/g++.dg/warn/Wunused-parm-3.C
+@@ -1,5 +1,7 @@
+ // { dg-do compile }
+ // { dg-options "-Wunused -W" }
++// Suppress a warning that is irrelevant to the purpose of this test.
++// { dg-options "-Wunused -W -Wno-abi" { target arm_eabi } }
+ 
+ #include <stdarg.h>
+ 
+diff --git a/gcc/testsuite/gcc.target/arm/fp16-compile-none-1.c b/gcc/testsuite/gcc.target/arm/fp16-compile-none-1.c
+index ca29123..e912505 100644
+--- a/gcc/testsuite/gcc.target/arm/fp16-compile-none-1.c
++++ b/gcc/testsuite/gcc.target/arm/fp16-compile-none-1.c
+@@ -3,4 +3,4 @@
+ 
+ /* __fp16 type name is not recognized unless you explicitly enable it
+    by selecting -mfp16-format=ieee or -mfp16-format=alternative.  */
+-__fp16 xx = 0.0;  /* { dg-error "expected" } */
++__fp16 xx = 0.0;  /* { dg-error "unknown type name" } */
+-- 
+1.7.0.4
+

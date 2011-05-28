@@ -1,0 +1,78 @@
+From ab9047340859545251be5c074524d69327901407 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 3 May 2011 13:06:06 +0000
+Subject: [PATCH] 	PR target/48774
+ 	* config/i386/i386.c (ix86_match_ccmode): For CC{A,C,O,S}mode
+ 	only succeed if req_mode is the same as set_mode.
+
+	* gcc.dg/pr48774.c: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173302 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index f3a8a0c..e8210c5 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -17194,11 +17194,15 @@ ix86_match_ccmode (rtx insn, enum machine_mode req_mode)
+       if (req_mode == CCZmode)
+ 	return false;
+       /* FALLTHRU */
++    case CCZmode:
++      break;
++
+     case CCAmode:
+     case CCCmode:
+     case CCOmode:
+     case CCSmode:
+-    case CCZmode:
++      if (set_mode != req_mode)
++	return false;
+       break;
+ 
+     default:
+new file mode 100644
+index 0000000..91ce361
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/pr48774.c
+@@ -0,0 +1,38 @@
++/* PR target/48774 */
++/* { dg-do run } */
++/* { dg-options "-O2 -funroll-loops" } */
++
++extern void abort (void);
++unsigned long int s[24]
++  = { 12, ~1, 12, ~2, 12, ~4, 12, ~8, 12, ~16, 12, ~32,
++      12, ~64, 12, ~128, 12, ~256, 12, ~512, 12, ~1024, 12, ~2048 };
++struct { int n; unsigned long *e[12]; } g
++  = { 12, { &s[0], &s[2], &s[4], &s[6], &s[8], &s[10], &s[12], &s[14],
++	    &s[16], &s[18], &s[20], &s[22] } };
++int c[12];
++
++__attribute__((noinline, noclone)) void
++foo (void)
++{
++  int i, j;
++  for (i = 0; i < g.n; i++)
++    for (j = 0; j < g.n; j++)
++      {
++	if (i == j && j < g.e[0][0] && (g.e[i][1] & (1UL << j)))
++	  abort ();
++	if (j < g.e[0][0] && (g.e[i][1] & (1UL << j)))
++	  c[i]++;
++      }
++}
++
++int
++main ()
++{
++  int i;
++  asm volatile ("" : "+m" (s), "+m" (g), "+m" (c));
++  foo ();
++  for (i = 0; i < 12; i++)
++    if (c[i] != 11)
++      abort ();
++  return 0;
++}
+-- 
+1.7.0.4
+

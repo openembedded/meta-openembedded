@@ -1,0 +1,76 @@
+From 37b0c0c107be5a66e933f54befeb9eb22e4d072b Mon Sep 17 00:00:00 2001
+From: nickc <nickc@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 10 May 2011 10:34:44 +0000
+Subject: [PATCH] 	* config/rx/rx.h (JUMP_ALIGN, LABEL_ALIGN, LOOP_ALIGN): Define.
+ 	(LABEL_ALIGN_AFTER_BARRIER): Pass label to rx_align_for_label
+ 	* config/rx/rx.c (rx_align_for_label): Add label and
+ 	uses_threshold parameters.  Do not align when the label is not
+ 	used enough.
+ 	* config/rx/rx-protos.h (rx_align_for_label): Update prototype.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173613 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e1ab9c2..8c8862e 100644
+--- a/gcc/config/rx/rx-protos.h
++++ b/gcc/config/rx/rx-protos.h
+@@ -30,7 +30,7 @@ extern void		rx_expand_prologue (void);
+ extern int		rx_initial_elimination_offset (int, int);
+ 
+ #ifdef RTX_CODE
+-extern int 		rx_align_for_label (void);
++extern int 		rx_align_for_label (rtx, int);
+ extern void             rx_emit_stack_popm (rtx *, bool);
+ extern void             rx_emit_stack_pushm (rtx *);
+ extern void		rx_expand_epilogue (bool);
+@@ -38,7 +38,7 @@ extern char *		rx_gen_move_template (rtx *, bool);
+ extern bool		rx_is_legitimate_constant (rtx);
+ extern bool		rx_is_restricted_memory_address (rtx, Mmode);
+ extern bool		rx_match_ccmode (rtx, Mmode);
+-extern void		rx_notice_update_cc (rtx body, rtx insn);
++extern void		rx_notice_update_cc (rtx, rtx);
+ extern void		rx_split_cbranch (Mmode, Rcode, rtx, rtx, rtx);
+ extern Mmode		rx_select_cc_mode (Rcode, rtx, rtx);
+ #endif
+diff --git a/gcc/config/rx/rx.c b/gcc/config/rx/rx.c
+index ad8d0bb..f56e779 100644
+--- a/gcc/config/rx/rx.c
++++ b/gcc/config/rx/rx.c
+@@ -2752,8 +2752,15 @@ rx_match_ccmode (rtx insn, enum machine_mode cc_mode)
+ 
+ 
+ int
+-rx_align_for_label (void)
++rx_align_for_label (rtx lab, int uses_threshold)
+ {
++  /* This is a simple heuristic to guess when an alignment would not be useful
++     because the delay due to the inserted NOPs would be greater than the delay
++     due to the misaligned branch.  If uses_threshold is zero then the alignment
++     is always useful.  */
++  if (LABEL_NUSES (lab) < uses_threshold)
++    return 0;
++
+   return optimize_size ? 1 : 3;
+ }
+ 
+diff --git a/gcc/config/rx/rx.h b/gcc/config/rx/rx.h
+index 01fc23b..4a88a5b 100644
+--- a/gcc/config/rx/rx.h
++++ b/gcc/config/rx/rx.h
+@@ -617,7 +617,13 @@ typedef unsigned int CUMULATIVE_ARGS;
+ 
+ #define SELECT_CC_MODE(OP,X,Y)  rx_select_cc_mode((OP), (X), (Y))
+ 
+-#define LABEL_ALIGN_AFTER_BARRIER(x)		rx_align_for_label ()
++/* Compute the alignment needed for label X in various situations.
++   If the user has specified an alignment then honour that, otherwise
++   use rx_align_for_label.  */
++#define JUMP_ALIGN(x)				(align_jumps ? align_jumps : rx_align_for_label (x, 0))
++#define LABEL_ALIGN(x)				(align_labels ? align_labels : rx_align_for_label (x, 3))
++#define LOOP_ALIGN(x)				(align_loops ? align_loops : rx_align_for_label (x, 2))
++#define LABEL_ALIGN_AFTER_BARRIER(x)		rx_align_for_label (x, 0)
+ 
+ #define ASM_OUTPUT_MAX_SKIP_ALIGN(STREAM, LOG, MAX_SKIP)	\
+   do						\
+-- 
+1.7.0.4
+

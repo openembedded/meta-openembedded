@@ -1,0 +1,136 @@
+From ae55117ab726f901303318a546b5c8c66273579c Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 6 May 2011 10:11:59 +0000
+Subject: [PATCH] 	PR fortran/48894
+ 	* fortran.c: Include limits.h.
+ 	(TO_INT): Define.
+ 	(omp_set_dynamic_8_, omp_set_num_threads_8_): Use !!*set instead of
+ 	*set.
+ 	(omp_set_num_threads_8_, omp_set_schedule_8_,
+ 	omp_set_max_active_levels_8_, omp_get_ancestor_thread_num_8_,
+ 	omp_get_team_size_8_): Use TO_INT macro.
+ 	* testsuite/libgomp.fortran/pr48894.f90: New test.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173477 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 53469f5..39bd748 100644
+--- a/libgomp/fortran.c
++++ b/libgomp/fortran.c
+@@ -1,4 +1,4 @@
+-/* Copyright (C) 2005, 2007, 2008, 2009 Free Software Foundation, Inc.
++/* Copyright (C) 2005, 2007, 2008, 2009, 2011 Free Software Foundation, Inc.
+    Contributed by Jakub Jelinek <jakub@redhat.com>.
+ 
+    This file is part of the GNU OpenMP Library (libgomp).
+@@ -27,6 +27,7 @@
+ #include "libgomp.h"
+ #include "libgomp_f.h"
+ #include <stdlib.h>
++#include <limits.h>
+ 
+ #ifdef HAVE_ATTRIBUTE_ALIAS
+ /* Use internal aliases if possible.  */
+@@ -244,6 +245,8 @@ omp_lock_symver (omp_unset_nest_lock_)
+ omp_lock_symver (omp_test_nest_lock_)
+ #endif
+ 
++#define TO_INT(x) ((x) > INT_MIN ? (x) < INT_MAX ? (x) : INT_MAX : INT_MIN)
++
+ void
+ omp_set_dynamic_ (const int32_t *set)
+ {
+@@ -253,7 +256,7 @@ omp_set_dynamic_ (const int32_t *set)
+ void
+ omp_set_dynamic_8_ (const int64_t *set)
+ {
+-  omp_set_dynamic (*set);
++  omp_set_dynamic (!!*set);
+ }
+ 
+ void
+@@ -265,7 +268,7 @@ omp_set_nested_ (const int32_t *set)
+ void
+ omp_set_nested_8_ (const int64_t *set)
+ {
+-  omp_set_nested (*set);
++  omp_set_nested (!!*set);
+ }
+ 
+ void
+@@ -277,7 +280,7 @@ omp_set_num_threads_ (const int32_t *set)
+ void
+ omp_set_num_threads_8_ (const int64_t *set)
+ {
+-  omp_set_num_threads (*set);
++  omp_set_num_threads (TO_INT (*set));
+ }
+ 
+ int32_t
+@@ -343,7 +346,7 @@ omp_set_schedule_ (const int32_t *kind, const int32_t *modifier)
+ void
+ omp_set_schedule_8_ (const int32_t *kind, const int64_t *modifier)
+ {
+-  omp_set_schedule (*kind, *modifier);
++  omp_set_schedule (*kind, TO_INT (*modifier));
+ }
+ 
+ void
+@@ -381,7 +384,7 @@ omp_set_max_active_levels_ (const int32_t *levels)
+ void
+ omp_set_max_active_levels_8_ (const int64_t *levels)
+ {
+-  omp_set_max_active_levels (*levels);
++  omp_set_max_active_levels (TO_INT (*levels));
+ }
+ 
+ int32_t
+@@ -405,7 +408,7 @@ omp_get_ancestor_thread_num_ (const int32_t *level)
+ int32_t
+ omp_get_ancestor_thread_num_8_ (const int64_t *level)
+ {
+-  return omp_get_ancestor_thread_num (*level);
++  return omp_get_ancestor_thread_num (TO_INT (*level));
+ }
+ 
+ int32_t
+@@ -417,7 +420,7 @@ omp_get_team_size_ (const int32_t *level)
+ int32_t
+ omp_get_team_size_8_ (const int64_t *level)
+ {
+-  return omp_get_team_size (*level);
++  return omp_get_team_size (TO_INT (*level));
+ }
+ 
+ int32_t
+diff --git a/libgomp/testsuite/libgomp.fortran/pr48894.f90 b/libgomp/testsuite/libgomp.fortran/pr48894.f90
+new file mode 100644
+index 0000000..af35112
+--- /dev/null
++++ b/libgomp/testsuite/libgomp.fortran/pr48894.f90
+@@ -0,0 +1,23 @@
++! PR fortran/48894
++! { dg-do run }
++! { dg-options "-fdefault-integer-8" }
++
++  use omp_lib
++  integer, parameter :: zero = 0
++  integer :: err
++  logical :: l
++  err = 0
++  !$omp parallel
++    !$omp parallel private (l)
++      l = omp_get_ancestor_thread_num (-HUGE (zero)) .ne. -1
++      l = l .or. (omp_get_ancestor_thread_num (HUGE (zero)) .ne. -1)
++      l = l .or. (omp_get_team_size (-HUGE (zero)) .ne. -1)
++      l = l .or. (omp_get_team_size (HUGE (zero)) .ne. -1)
++      if (l) then
++        !$omp atomic
++          err = err + 1
++      endif
++    !$omp end parallel
++  !$omp end parallel
++  if (err .ne. 0) call abort
++end
+-- 
+1.7.0.4
+

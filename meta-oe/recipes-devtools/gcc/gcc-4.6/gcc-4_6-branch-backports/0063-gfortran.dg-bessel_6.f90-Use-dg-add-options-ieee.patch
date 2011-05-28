@@ -1,7 +1,7 @@
 From e26756e1112552489e123c8ed7ed038beae89c5b Mon Sep 17 00:00:00 2001
 From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 4 Apr 2011 15:55:33 +0000
-Subject: [PATCH 063/200] 	* gfortran.dg/bessel_6.f90: Use dg-add-options ieee.
+Subject: [PATCH] 	* gfortran.dg/bessel_6.f90: Use dg-add-options ieee.
  	* gfortran.dg/bessel_7.f90: Likewise.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171940 138bc75d-0d04-0410-961f-82ee72b054a4

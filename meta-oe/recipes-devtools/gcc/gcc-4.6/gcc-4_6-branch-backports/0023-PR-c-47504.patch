@@ -1,7 +1,7 @@
 From 4ebec68ee3aee90ba13a4c4bc70afbb4a613468b Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:24:19 +0000
-Subject: [PATCH 023/200] 	PR c++/47504
+Subject: [PATCH] 	PR c++/47504
  	* semantics.c (cxx_eval_constant_expression) [NOP_EXPR]: Don't let
  	the conversion set TREE_OVERFLOW.
 

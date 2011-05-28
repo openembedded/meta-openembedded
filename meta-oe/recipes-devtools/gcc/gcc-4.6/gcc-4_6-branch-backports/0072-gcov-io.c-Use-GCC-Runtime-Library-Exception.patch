@@ -1,7 +1,7 @@
 From 578ce9461ebac7a6ec001c0025e0b854385ec39c Mon Sep 17 00:00:00 2001
 From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 6 Apr 2011 16:05:18 +0000
-Subject: [PATCH 072/200] 	* gcov-io.c: Use GCC Runtime Library Exception.
+Subject: [PATCH] 	* gcov-io.c: Use GCC Runtime Library Exception.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172054 138bc75d-0d04-0410-961f-82ee72b054a4
 

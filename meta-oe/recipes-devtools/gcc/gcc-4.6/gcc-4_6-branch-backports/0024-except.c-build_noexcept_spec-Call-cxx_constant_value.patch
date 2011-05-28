@@ -1,7 +1,7 @@
 From 3a987d8e4a8c885fe7fc54595ebdd82d5291e1e7 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:24:30 +0000
-Subject: [PATCH 024/200] 	* except.c (build_noexcept_spec): Call cxx_constant_value after
+Subject: [PATCH] 	* except.c (build_noexcept_spec): Call cxx_constant_value after
  	converting to bool.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171665 138bc75d-0d04-0410-961f-82ee72b054a4

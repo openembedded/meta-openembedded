@@ -1,7 +1,7 @@
 From a8765482b00b7e1774f72c7def19ca711636e1d1 Mon Sep 17 00:00:00 2001
 From: gerald <gerald@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 17 Apr 2011 21:34:29 +0000
-Subject: [PATCH 133/200] 	* config/sparc/freebsd.h (CPP_CPU64_DEFAULT_SPEC): Replace with...
+Subject: [PATCH] 	* config/sparc/freebsd.h (CPP_CPU64_DEFAULT_SPEC): Replace with...
  	(FBSD_TARGET_CPU_CPP_BUILTINS): ...this.
  	(TARGET_GNU_TLS, TARGET_SUN_TLS): Define.
 

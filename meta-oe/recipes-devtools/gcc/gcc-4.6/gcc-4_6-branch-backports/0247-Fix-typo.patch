@@ -1,0 +1,7 @@
+From d670e84fd2b252a2bd70caf6d2520e322a29d811 Mon Sep 17 00:00:00 2001
+From: nickc <nickc@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 10 May 2011 10:35:38 +0000
+Subject: [PATCH 247/361] Fix typo.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173614 138bc75d-0d04-0410-961f-82ee72b054a4
+

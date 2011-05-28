@@ -1,7 +1,7 @@
 From aeb8275b52616d86410149e8500839115f9c0b8b Mon Sep 17 00:00:00 2001
 From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 17 Apr 2011 14:58:03 +0000
-Subject: [PATCH 132/200] 	PR lto/48538
+Subject: [PATCH] 	PR lto/48538
  	* lto-cgraph.c (merge_profile_summaries): Check that lto_file_data
  	is non-null before accessing it.
  	(input_cgraph): Remove trailing spaces.

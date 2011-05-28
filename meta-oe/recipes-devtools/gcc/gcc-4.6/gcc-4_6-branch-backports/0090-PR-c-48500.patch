@@ -1,7 +1,7 @@
 From c9ec81bbd73666b97ab9049b759b5ab8d0e06681 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 15:02:28 +0000
-Subject: [PATCH 090/200] 	PR c++/48500
+Subject: [PATCH] 	PR c++/48500
  	* semantics.c (potential_constant_expression_1) [CALL_EXPR]: Check
  	arguments even if we don't know the function.
 

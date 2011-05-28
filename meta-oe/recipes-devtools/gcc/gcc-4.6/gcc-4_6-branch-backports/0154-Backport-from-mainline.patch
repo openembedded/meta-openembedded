@@ -1,7 +1,7 @@
 From b769f6c6e91c977fb6b4fcc5b7838eb79dddaeb7 Mon Sep 17 00:00:00 2001
 From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 20 Apr 2011 11:18:50 +0000
-Subject: [PATCH 154/200] 	Backport from mainline
+Subject: [PATCH] 	Backport from mainline
  	2011-04-19  Eric Botcazou  <ebotcazou@adacore.com>
 
 	PR lto/48148

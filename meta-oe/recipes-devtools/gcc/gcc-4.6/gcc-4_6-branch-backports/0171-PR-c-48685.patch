@@ -1,7 +1,7 @@
 From 260252e3308b19f495f084658236114ead218ec5 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 23 Apr 2011 10:18:54 +0000
-Subject: [PATCH 171/200] 	PR c/48685
+Subject: [PATCH] 	PR c/48685
  	* fold-const.c (fold_convert_loc): Add NOP_EXPR when casting
  	to VOID_TYPE even around MODIFY_EXPR.
 

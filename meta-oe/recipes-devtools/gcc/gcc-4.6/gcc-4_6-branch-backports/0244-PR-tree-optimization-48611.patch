@@ -1,0 +1,77 @@
+From c0d3391a217001c01bae1fa84d8a2e5895398235 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 10 May 2011 06:31:59 +0000
+Subject: [PATCH] 	PR tree-optimization/48611
+ 	PR tree-optimization/48794
+ 	* tree-eh.c (remove_unreachable_handlers): Don't remove regions
+ 	referenced from RESX or EH_DISPATCH arguments.
+
+	* gfortran.dg/gomp/pr48611.f90: New test.
+	* gfortran.dg/gomp/pr48794.f90: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173608 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e61d621..99b02c2 100644
+new file mode 100644
+index 0000000..643cc5c
+--- /dev/null
++++ b/gcc/testsuite/gfortran.dg/gomp/pr48611.f90
+@@ -0,0 +1,12 @@
++! PR tree-optimization/48611
++! { dg-do compile }
++! { dg-options "-Os -fopenmp -fexceptions -fno-tree-ccp -fno-tree-copy-prop" }
++
++  integer, allocatable :: a(:)
++  logical :: l
++!$omp parallel private (a) reduction (.or.:l)
++  do i = 1, 7
++    a(:) = i
++  end do
++!$omp end parallel
++end
+diff --git a/gcc/testsuite/gfortran.dg/gomp/pr48794.f90 b/gcc/testsuite/gfortran.dg/gomp/pr48794.f90
+new file mode 100644
+index 0000000..11edb0b
+--- /dev/null
++++ b/gcc/testsuite/gfortran.dg/gomp/pr48794.f90
+@@ -0,0 +1,12 @@
++! PR tree-optimization/48794
++! { dg-do compile }
++! { dg-options "-Os -fopenmp -fexceptions -fno-tree-ccp -fno-tree-copy-prop" }
++
++  integer, allocatable :: a(:)
++  logical :: l
++  if (allocated (a)) call abort
++!$omp parallel private (a) reduction (.or.:l)
++  do i = 1, 7
++  end do
++!$omp end parallel
++end
+diff --git a/gcc/tree-eh.c b/gcc/tree-eh.c
+index 0d6158b..19c779c 100644
+--- a/gcc/tree-eh.c
++++ b/gcc/tree-eh.c
+@@ -3321,6 +3321,19 @@ remove_unreachable_handlers (void)
+ 	      SET_BIT (r_reachable, region->index);
+ 	      SET_BIT (lp_reachable, lp_nr);
+ 	    }
++
++	  /* Avoid removing regions referenced from RESX/EH_DISPATCH.  */
++	  switch (gimple_code (stmt))
++	    {
++	    case GIMPLE_RESX:
++	      SET_BIT (r_reachable, gimple_resx_region (stmt));
++	      break;
++	    case GIMPLE_EH_DISPATCH:
++	      SET_BIT (r_reachable, gimple_eh_dispatch_region (stmt));
++	      break;
++	    default:
++	      break;
++	    }
+ 	}
+     }
+ 
+-- 
+1.7.0.4
+

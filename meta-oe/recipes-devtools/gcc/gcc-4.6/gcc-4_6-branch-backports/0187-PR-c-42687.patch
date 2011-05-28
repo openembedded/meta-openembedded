@@ -1,7 +1,7 @@
 From ccb3ae3a3167213d1c84397653a7cfec0df3a5b7 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 27 Apr 2011 05:20:06 +0000
-Subject: [PATCH 187/200] 	PR c++/42687
+Subject: [PATCH] 	PR c++/42687
  	* parser.c (cp_parser_primary_expression): Set *idk to
  	CP_ID_KIND_NONE for a parenthesized identifier.
 

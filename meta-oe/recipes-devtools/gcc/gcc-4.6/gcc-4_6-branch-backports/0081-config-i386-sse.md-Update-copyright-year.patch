@@ -1,7 +1,7 @@
 From ac4ab0911ae869e3cd4c00629e3c4d4d0b7e7aa6 Mon Sep 17 00:00:00 2001
 From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 7 Apr 2011 20:46:50 +0000
-Subject: [PATCH 081/200] 	* config/i386/sse.md: Update copyright year.
+Subject: [PATCH] 	* config/i386/sse.md: Update copyright year.
  	(avx_cmp<ssescalarmodesuffix><mode>3): Add missing output
  	register constraint.
  	(*vec_concatv2sf_avx): Fix wrong register constraint in

@@ -1,7 +1,7 @@
 From da3ed31e2090c6b8236bbc3be69433aca0d445f1 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 6 Apr 2011 20:40:24 +0000
-Subject: [PATCH 074/200] 	PR debug/48466
+Subject: [PATCH] 	PR debug/48466
  	* dwarf2out.c (based_loc_descr): If drap_reg is INVALID_REGNUM, use
  	as base_reg whatever register reg has been eliminated to, instead
  	of hardcoding STACK_POINTER_REGNUM.

@@ -1,7 +1,7 @@
 From bdc36219ffa6e8c7e2b48e4aedc32082205a2195 Mon Sep 17 00:00:00 2001
 From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 21 Apr 2011 17:02:45 +0000
-Subject: [PATCH 163/200] 	* de.po: Update.
+Subject: [PATCH] 	* de.po: Update.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172836 138bc75d-0d04-0410-961f-82ee72b054a4
 

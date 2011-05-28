@@ -1,0 +1,217 @@
+From 2961db51d944dc693c16502ef40dc47ee4f92143 Mon Sep 17 00:00:00 2001
+From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 18 May 2011 20:43:44 +0000
+Subject: [PATCH] 	PR tree-optimization/49039
+ 	* tree-vrp.c (extract_range_from_binary_expr): For
+ 	MIN_EXPR <~[a, b], ~[c, d]> and MAX_EXPR <~[a, b], ~[c, d]>
+ 	return ~[MAX_EXPR <a, c>, MIN_EXPR <b, d>].
+
+	* gcc.c-torture/execute/pr49039.c: New test.
+	* gcc.dg/tree-ssa/pr49039.c: New test.
+	* g++.dg/torture/pr49039.C: New test.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173877 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 25f9804..cb6627c 100644
+new file mode 100644
+index 0000000..f576cba
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/torture/pr49039.C
+@@ -0,0 +1,76 @@
++// PR tree-optimization/49039
++// { dg-do run }
++
++template <class T1, class T2>
++struct pair
++{
++  T1 first;
++  T2 second;
++  pair (const T1 & a, const T2 & b):first (a), second (b) {}
++};
++
++template <class T1, class T2>
++inline pair <T1, T2>
++make_pair (T1 x, T2 y)
++{
++  return pair <T1, T2> (x, y);
++}
++
++typedef __SIZE_TYPE__ size_t;
++struct S
++{
++  const char *Data;
++  size_t Length;
++  static size_t min (size_t a, size_t b) { return a < b ? a : b; }
++  static size_t max (size_t a, size_t b) { return a > b ? a : b; }
++  S () :Data (0), Length (0) { }
++  S (const char *Str) : Data (Str), Length (__builtin_strlen (Str)) {}
++  S (const char *data, size_t length) : Data (data), Length (length) {}
++  bool empty () const { return Length == 0; }
++  size_t size () const { return Length; }
++  S slice (size_t Start, size_t End) const
++  {
++    Start = min (Start, Length);
++    End = min (max (Start, End), Length);
++    return S (Data + Start, End - Start);
++  }
++  pair <S, S> split (char Separator) const
++  {
++    size_t Idx = find (Separator);
++    if (Idx == ~size_t (0))
++      return make_pair (*this, S ());
++    return make_pair (slice (0, Idx), slice (Idx + 1, ~size_t (0)));
++  }
++  size_t find (char C, size_t From = 0) const
++  {
++    for (size_t i = min (From, Length), e = Length; i != e; ++i)
++      if (Data[i] == C)
++	return i;
++    return ~size_t (0);
++  }
++};
++
++void
++Test (const char *arg)
++{
++  S Desc (arg);
++  while (!Desc.empty ())
++    {
++      pair <S, S> Split = Desc.split ('-');
++      S Token = Split.first;
++      Desc = Split.second;
++      if (Token.empty ())
++	continue;
++      Split = Token.split (':');
++      S Specifier = Split.first;
++      if (Specifier.empty ())
++	__builtin_abort ();
++    }
++}
++
++int
++main ()
++{
++  Test ("-");
++  return 0;
++}
+diff --git a/gcc/testsuite/gcc.c-torture/execute/pr49039.c b/gcc/testsuite/gcc.c-torture/execute/pr49039.c
+new file mode 100644
+index 0000000..546d114
+--- /dev/null
++++ b/gcc/testsuite/gcc.c-torture/execute/pr49039.c
+@@ -0,0 +1,26 @@
++/* PR tree-optimization/49039 */
++extern void abort (void);
++int cnt;
++
++__attribute__((noinline, noclone)) void
++foo (unsigned int x, unsigned int y)
++{
++  unsigned int minv, maxv;
++  if (x == 1 || y == -2U)
++    return;
++  minv = x < y ? x : y;
++  maxv = x > y ? x : y;
++  if (minv == 1)
++    ++cnt;
++  if (maxv == -2U)
++    ++cnt;
++}
++
++int
++main ()
++{
++  foo (-2U, 1);
++  if (cnt != 2)
++    abort ();
++  return 0;
++}
+diff --git a/gcc/testsuite/gcc.dg/tree-ssa/pr49039.c b/gcc/testsuite/gcc.dg/tree-ssa/pr49039.c
+new file mode 100644
+index 0000000..3500dbf
+--- /dev/null
++++ b/gcc/testsuite/gcc.dg/tree-ssa/pr49039.c
+@@ -0,0 +1,31 @@
++/* PR tree-optimization/49039 */
++/* { dg-do compile } */
++/* { dg-options "-O2 -fdump-tree-vrp1" } */
++
++extern void bar (void);
++
++void
++foo (unsigned int x, unsigned int y)
++{
++  unsigned int minv, maxv;
++  if (x >= 3 && x <= 6)
++    return;
++  if (y >= 5 && y <= 8)
++    return;
++  minv = x < y ? x : y;
++  maxv = x > y ? x : y;
++  if (minv == 5)
++    bar ();
++  if (minv == 6)
++    bar ();
++  if (maxv == 5)
++    bar ();
++  if (maxv == 6)
++    bar ();
++}
++
++/* { dg-final { scan-tree-dump "Folding predicate minv_\[0-9\]* == 5 to 0" "vrp1" } } */
++/* { dg-final { scan-tree-dump "Folding predicate minv_\[0-9\]* == 6 to 0" "vrp1" } } */
++/* { dg-final { scan-tree-dump "Folding predicate maxv_\[0-9\]* == 5 to 0" "vrp1" } } */
++/* { dg-final { scan-tree-dump "Folding predicate maxv_\[0-9\]* == 6 to 0" "vrp1" } } */
++/* { dg-final { cleanup-tree-dump "vrp1" } } */
+diff --git a/gcc/tree-vrp.c b/gcc/tree-vrp.c
+index 280e6da..7bff5fa 100644
+--- a/gcc/tree-vrp.c
++++ b/gcc/tree-vrp.c
+@@ -1,5 +1,5 @@
+ /* Support routines for Value Range Propagation (VRP).
+-   Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010
++   Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011
+    Free Software Foundation, Inc.
+    Contributed by Diego Novillo <dnovillo@redhat.com>.
+ 
+@@ -2357,17 +2357,27 @@ extract_range_from_binary_expr (value_range_t *vr,
+ 	 op0 + op1 == 0, so we cannot claim that the sum is in ~[0,0].
+ 	 Note that we are guaranteed to have vr0.type == vr1.type at
+ 	 this point.  */
+-      if (code == PLUS_EXPR && vr0.type == VR_ANTI_RANGE)
++      if (vr0.type == VR_ANTI_RANGE)
+ 	{
+-	  set_value_range_to_varying (vr);
+-	  return;
++	  if (code == PLUS_EXPR)
++	    {
++	      set_value_range_to_varying (vr);
++	      return;
++	    }
++	  /* For MIN_EXPR and MAX_EXPR with two VR_ANTI_RANGEs,
++	     the resulting VR_ANTI_RANGE is the same - intersection
++	     of the two ranges.  */
++	  min = vrp_int_const_binop (MAX_EXPR, vr0.min, vr1.min);
++	  max = vrp_int_const_binop (MIN_EXPR, vr0.max, vr1.max);
++	}
++      else
++	{
++	  /* For operations that make the resulting range directly
++	     proportional to the original ranges, apply the operation to
++	     the same end of each range.  */
++	  min = vrp_int_const_binop (code, vr0.min, vr1.min);
++	  max = vrp_int_const_binop (code, vr0.max, vr1.max);
+ 	}
+-
+-      /* For operations that make the resulting range directly
+-	 proportional to the original ranges, apply the operation to
+-	 the same end of each range.  */
+-      min = vrp_int_const_binop (code, vr0.min, vr1.min);
+-      max = vrp_int_const_binop (code, vr0.max, vr1.max);
+ 
+       /* If both additions overflowed the range kind is still correct.
+ 	 This happens regularly with subtracting something in unsigned
+-- 
+1.7.0.4
+

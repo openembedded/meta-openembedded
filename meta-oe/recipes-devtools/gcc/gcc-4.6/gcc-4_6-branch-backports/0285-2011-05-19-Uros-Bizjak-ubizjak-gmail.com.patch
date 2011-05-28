@@ -1,0 +1,67 @@
+From dd2ac3e2496d44b75e7ed9e4b9311200dcc1be56 Mon Sep 17 00:00:00 2001
+From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 19 May 2011 21:10:45 +0000
+Subject: [PATCH] 2011-05-19  Uros Bizjak  <ubizjak@gmail.com>
+
+	* config/i386/i386.c (option_override_internal): Enable TARGET_CMOVE
+	when TARGET_RDRND is active.
+	(ix86_expand_builtin) <case IX86_BUILTIN_RDRAND{16,32,64}_STEP>:
+	Generate dummy SImode target register when target is NULL.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173922 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e8b9af5..66800c4 100644
+--- a/gcc/config/i386/i386.c
++++ b/gcc/config/i386/i386.c
+@@ -4164,8 +4164,9 @@ ix86_option_override_internal (bool main_args_p)
+     }
+ 
+   /* For sane SSE instruction set generation we need fcomi instruction.
+-     It is safe to enable all CMOVE instructions.  */
+-  if (TARGET_SSE)
++     It is safe to enable all CMOVE instructions.  Also, RDRAND intrinsic
++     expands to a sequence that includes conditional move. */
++  if (TARGET_SSE || TARGET_RDRND)
+     TARGET_CMOVE = 1;
+ 
+   /* Figure out what ASM_GENERATE_INTERNAL_LABEL builds as a prefix.  */
+@@ -27450,6 +27451,12 @@ rdrand_step:
+       op0 = gen_reg_rtx (mode0);
+       emit_insn (GEN_FCN (icode) (op0));
+ 
++      arg0 = CALL_EXPR_ARG (exp, 0);
++      op1 = expand_normal (arg0);
++      if (!address_operand (op1, VOIDmode))
++	op1 = copy_addr_to_reg (op1);
++      emit_move_insn (gen_rtx_MEM (mode0, op1), op0);
++
+       op1 = gen_reg_rtx (SImode);
+       emit_move_insn (op1, CONST1_RTX (SImode));
+ 
+@@ -27464,17 +27471,13 @@ rdrand_step:
+       else
+ 	op2 = gen_rtx_SUBREG (SImode, op0, 0);
+ 
++      if (target == 0)
++	target = gen_reg_rtx (SImode);
++
+       pat = gen_rtx_GEU (VOIDmode, gen_rtx_REG (CCCmode, FLAGS_REG),
+ 			 const0_rtx);
+-      emit_insn (gen_rtx_SET (VOIDmode, op1,
++      emit_insn (gen_rtx_SET (VOIDmode, target,
+ 			      gen_rtx_IF_THEN_ELSE (SImode, pat, op2, op1)));
+-      emit_move_insn (target, op1);
+-
+-      arg0 = CALL_EXPR_ARG (exp, 0);
+-      op1 = expand_normal (arg0);
+-      if (!address_operand (op1, VOIDmode))
+-	op1 = copy_addr_to_reg (op1);
+-      emit_move_insn (gen_rtx_MEM (mode0, op1), op0);
+       return target;
+ 
+     default:
+-- 
+1.7.0.4
+

@@ -1,7 +1,7 @@
 From d3cce0bbf7e327905965f0fae70b04af08bfb64b Mon Sep 17 00:00:00 2001
 From: krebbel <krebbel@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 15 Apr 2011 12:43:40 +0000
-Subject: [PATCH 124/200] 2011-04-15  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+Subject: [PATCH] 2011-04-15  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
 
 	* config/s390/s390.md (popcountdi2, popcountsi2, popcounthi2):
 	Replace match_operand with match_dup for the third operand in

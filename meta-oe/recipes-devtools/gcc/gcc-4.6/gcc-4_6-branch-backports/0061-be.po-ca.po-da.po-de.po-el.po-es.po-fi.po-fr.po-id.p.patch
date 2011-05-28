@@ -1,7 +1,7 @@
 From 2f00fb35a87bcbae197b96a7259b1d94f3b4dc1f Mon Sep 17 00:00:00 2001
 From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 3 Apr 2011 11:34:03 +0000
-Subject: [PATCH 061/200] 	* be.po, ca.po, da.po, de.po, el.po, es.po, fi.po, fr.po, id.po,
+Subject: [PATCH] 	* be.po, ca.po, da.po, de.po, el.po, es.po, fi.po, fr.po, id.po,
  	ja.po, nl.po, ru.po, sv.po, tr.po, uk,po, vi.po, zh_CN.po,
  	zh_TW.po: Update.
 

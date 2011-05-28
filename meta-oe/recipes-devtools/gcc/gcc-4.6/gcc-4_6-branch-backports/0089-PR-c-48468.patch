@@ -1,7 +1,7 @@
 From 4215154488607abf1ee95f1d1f03cb66be4bd4d8 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 15:02:16 +0000
-Subject: [PATCH 089/200] 	PR c++/48468
+Subject: [PATCH] 	PR c++/48468
  	* except.c (build_noexcept_spec): Propagate error_mark_node.
  	(finish_noexcept_expr): Likewise.
 

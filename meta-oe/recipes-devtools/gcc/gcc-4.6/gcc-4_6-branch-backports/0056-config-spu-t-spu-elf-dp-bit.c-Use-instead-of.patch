@@ -1,7 +1,7 @@
 From 5b6ffdded3fd04395f72852e2a201d011d10a060 Mon Sep 17 00:00:00 2001
 From: uweigand <uweigand@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 1 Apr 2011 17:17:59 +0000
-Subject: [PATCH 056/200] 	* config/spu/t-spu-elf (dp-bit.c): Use > instead of >>.
+Subject: [PATCH] 	* config/spu/t-spu-elf (dp-bit.c): Use > instead of >>.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171838 138bc75d-0d04-0410-961f-82ee72b054a4
 

@@ -1,7 +1,7 @@
 From dc6361adc966b10875fbfafff9652dcc4043df58 Mon Sep 17 00:00:00 2001
 From: jsm28 <jsm28@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 14:29:58 +0000
-Subject: [PATCH 085/200] 	* de.po: Update.
+Subject: [PATCH] 	* de.po: Update.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172188 138bc75d-0d04-0410-961f-82ee72b054a4
 

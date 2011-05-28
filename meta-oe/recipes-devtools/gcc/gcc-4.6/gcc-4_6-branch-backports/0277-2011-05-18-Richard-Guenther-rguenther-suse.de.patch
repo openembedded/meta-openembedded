@@ -1,0 +1,81 @@
+From 0394622853ff7c35417625979782f19fa3682122 Mon Sep 17 00:00:00 2001
+From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 18 May 2011 13:33:53 +0000
+Subject: [PATCH] 2011-05-18  Richard Guenther  <rguenther@suse.de>
+
+	PR tree-optimization/49018
+	* gimple.c (gimple_has_side_effects): Volatile asms have side-effects.
+	* tree-ssa-ifcombine.c (bb_no_side_effects_p): Use
+	gimple_has_side_effects.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173862 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 9a94f06..233a4f5 100644
+--- a/gcc/gimple.c
++++ b/gcc/gimple.c
+@@ -2286,6 +2286,10 @@ gimple_has_side_effects (const_gimple s)
+   if (gimple_has_volatile_ops (s))
+     return true;
+ 
++  if (gimple_code (s) == GIMPLE_ASM
++      && gimple_asm_volatile_p (s))
++    return true;
++
+   if (is_gimple_call (s))
+     {
+       unsigned nargs = gimple_call_num_args (s);
+@@ -2299,7 +2303,7 @@ gimple_has_side_effects (const_gimple s)
+       if (gimple_call_lhs (s)
+           && TREE_SIDE_EFFECTS (gimple_call_lhs (s)))
+ 	{
+-	  gcc_assert (gimple_has_volatile_ops (s));
++	  gcc_checking_assert (gimple_has_volatile_ops (s));
+ 	  return true;
+ 	}
+ 
+@@ -2309,7 +2313,7 @@ gimple_has_side_effects (const_gimple s)
+       for (i = 0; i < nargs; i++)
+         if (TREE_SIDE_EFFECTS (gimple_call_arg (s, i)))
+ 	  {
+-	    gcc_assert (gimple_has_volatile_ops (s));
++	    gcc_checking_assert (gimple_has_volatile_ops (s));
+ 	    return true;
+ 	  }
+ 
+@@ -2318,11 +2322,14 @@ gimple_has_side_effects (const_gimple s)
+   else
+     {
+       for (i = 0; i < gimple_num_ops (s); i++)
+-	if (TREE_SIDE_EFFECTS (gimple_op (s, i)))
+-	  {
+-	    gcc_assert (gimple_has_volatile_ops (s));
+-	    return true;
+-	  }
++	{
++	  tree op = gimple_op (s, i);
++	  if (op && TREE_SIDE_EFFECTS (op))
++	    {
++	      gcc_checking_assert (gimple_has_volatile_ops (s));
++	      return true;
++	    }
++	}
+     }
+ 
+   return false;
+diff --git a/gcc/tree-ssa-ifcombine.c b/gcc/tree-ssa-ifcombine.c
+index bc551b2..e23bb76 100644
+--- a/gcc/tree-ssa-ifcombine.c
++++ b/gcc/tree-ssa-ifcombine.c
+@@ -107,7 +107,7 @@ bb_no_side_effects_p (basic_block bb)
+     {
+       gimple stmt = gsi_stmt (gsi);
+ 
+-      if (gimple_has_volatile_ops (stmt)
++      if (gimple_has_side_effects (stmt)
+ 	  || gimple_vuse (stmt))
+ 	return false;
+     }
+-- 
+1.7.0.4
+

@@ -1,0 +1,21 @@
+From d28f39e8557b84975e6d60f35ac46ee10df5ea5f Mon Sep 17 00:00:00 2001
+From: meissner <meissner@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 5 May 2011 21:32:40 +0000
+Subject: [PATCH] Add missing break for OPT_mfpu_ case
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173457 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 0ff1745..c6c1847 100644
+--- a/gcc/config/rs6000/rs6000.c
++++ b/gcc/config/rs6000/rs6000.c
+@@ -4630,6 +4630,7 @@ rs6000_handle_option (size_t code, const char *arg, int value)
+         target_flags_explicit |= MASK_SOFT_FLOAT;
+         rs6000_single_float = rs6000_double_float = 0;
+       }
++      break;
+ 
+     case OPT_mrecip:
+       rs6000_recip_name = (value) ? "default" : "none";
+-- 
+1.7.0.4
+

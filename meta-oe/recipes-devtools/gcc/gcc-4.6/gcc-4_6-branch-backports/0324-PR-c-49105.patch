@@ -1,0 +1,75 @@
+From 64c58ffe439f284f8ff22900f2bbd4923e92d835 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 01:08:38 +0000
+Subject: [PATCH] 	PR c++/49105
+ 	* typeck.c (build_const_cast_1): Handle rvalue references.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174162 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 9a81ea5..578eb83 100644
+--- a/gcc/cp/typeck.c
++++ b/gcc/cp/typeck.c
+@@ -6220,14 +6220,29 @@ build_const_cast_1 (tree dst_type, tree expr, bool complain,
+ 
+   /* [expr.const.cast]
+ 
+-     An lvalue of type T1 can be explicitly converted to an lvalue of
+-     type T2 using the cast const_cast<T2&> (where T1 and T2 are object
+-     types) if a pointer to T1 can be explicitly converted to the type
+-     pointer to T2 using a const_cast.  */
++     For two object types T1 and T2, if a pointer to T1 can be explicitly
++     converted to the type "pointer to T2" using a const_cast, then the
++     following conversions can also be made:
++
++     -- an lvalue of type T1 can be explicitly converted to an lvalue of
++     type T2 using the cast const_cast<T2&>;
++
++     -- a glvalue of type T1 can be explicitly converted to an xvalue of
++     type T2 using the cast const_cast<T2&&>; and
++
++     -- if T1 is a class type, a prvalue of type T1 can be explicitly
++     converted to an xvalue of type T2 using the cast const_cast<T2&&>.  */
++
+   if (TREE_CODE (dst_type) == REFERENCE_TYPE)
+     {
+       reference_type = dst_type;
+-      if (! real_lvalue_p (expr))
++      if (!TYPE_REF_IS_RVALUE (dst_type)
++	  ? real_lvalue_p (expr)
++	  : (CLASS_TYPE_P (TREE_TYPE (dst_type))
++	     ? lvalue_p (expr)
++	     : lvalue_or_rvalue_with_address_p (expr)))
++	/* OK.  */;
++      else
+ 	{
+ 	  if (complain)
+ 	    error ("invalid const_cast of an rvalue of type %qT to type %qT",
+new file mode 100644
+index 0000000..94ee4ca
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/rv-cast2.C
+@@ -0,0 +1,21 @@
++// Test for const_cast to reference (5.2.11/4).
++// { dg-options -std=c++0x }
++
++template <class T> T&& xval();
++template <class T> T& lval();
++template <class T> T prval();
++
++struct A { };
++
++int main()
++{
++  const_cast<int&>(lval<int>());
++  const_cast<int&>(xval<int>());   // { dg-error "" }
++  const_cast<int&>(prval<int>());  // { dg-error "" }
++  const_cast<int&&>(lval<int>());
++  const_cast<int&&>(xval<int>());
++  const_cast<int&&>(prval<int>()); // { dg-error "" }
++  const_cast<A&&>(lval<A>());
++  const_cast<A&&>(xval<A>());
++  const_cast<A&&>(prval<A>());
++}
+-- 
+1.7.0.4
+

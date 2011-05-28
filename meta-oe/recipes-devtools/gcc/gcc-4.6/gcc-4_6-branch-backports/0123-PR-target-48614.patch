@@ -1,7 +1,7 @@
 From 13a531dde8ee181ad9e8aeb6b755ca52f261bef8 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 15 Apr 2011 10:29:58 +0000
-Subject: [PATCH 123/200] 	PR target/48614
+Subject: [PATCH] 	PR target/48614
  	* gcc.target/i386/pr46084.c: Require avx_runtime instead of
  	just avx.
 

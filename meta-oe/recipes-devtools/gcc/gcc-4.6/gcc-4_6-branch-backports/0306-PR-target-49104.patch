@@ -1,0 +1,63 @@
+From 19444be5c75a1e7bcc7f2490a3503947d4904b64 Mon Sep 17 00:00:00 2001
+From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 22 May 2011 19:14:50 +0000
+Subject: [PATCH] 	PR target/49104
+ 	* config/i386/cpuid.h (bit_MMXEXT): New define.
+
+libcpp/ChangeLog:
+
+2011-05-22  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/49104
+	* lex.c (init_vectorized_lexer): Do not set "minimum" when __3dNOW_A__
+	is defined.  Check bit_MMXEXT and bit_CMOV to use search_line_mmx.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174038 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e9d0fab..3c3f47b 100644
+--- a/gcc/config/i386/cpuid.h
++++ b/gcc/config/i386/cpuid.h
+@@ -57,6 +57,7 @@
+ #define bit_TBM         (1 << 21)
+ 
+ /* %edx */
++#define bit_MMXEXT	(1 << 22)
+ #define bit_LM		(1 << 29)
+ #define bit_3DNOWP	(1 << 30)
+ #define bit_3DNOW	(1 << 31)
+index 3bf4886..6c3be71 100644
+--- a/libcpp/lex.c
++++ b/libcpp/lex.c
+@@ -294,7 +294,7 @@ static const char repl_chars[4][16] __attribute__((aligned(16))) = {
+ /* A version of the fast scanner using MMX vectorized byte compare insns.
+ 
+    This uses the PMOVMSKB instruction which was introduced with "MMX2",
+-   which was packaged into SSE1; it is also present in the AMD 3dNOW-A
++   which was packaged into SSE1; it is also present in the AMD MMX
+    extension.  Mark the function as using "sse" so that we emit a real
+    "emms" instruction, rather than the 3dNOW "femms" instruction.  */
+ 
+@@ -488,7 +488,7 @@ init_vectorized_lexer (void)
+   minimum = 3;
+ #elif defined(__SSE2__)
+   minimum = 2;
+-#elif defined(__SSE__) || defined(__3dNOW_A__)
++#elif defined(__SSE__)
+   minimum = 1;
+ #endif
+ 
+@@ -505,7 +505,8 @@ init_vectorized_lexer (void)
+     }
+   else if (__get_cpuid (0x80000001, &dummy, &dummy, &dummy, &edx))
+     {
+-      if (minimum == 1 || edx & bit_3DNOWP)
++      if (minimum == 1
++	  || (edx & (bit_MMXEXT | bit_CMOV)) == (bit_MMXEXT | bit_CMOV))
+ 	impl = search_line_mmx;
+     }
+ 
+-- 
+1.7.0.4
+

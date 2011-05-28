@@ -1,0 +1,40 @@
+From a726d4116cb23c1f9873f3309c1c078d2113726d Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 27 May 2011 20:48:17 +0000
+Subject: [PATCH] 	PR c++/48284
+ 	* error.c (dump_expr) [COMPONENT_REF]: Use pp_cxx_dot
+ 	with INDIRECT_REF of REFERENCE_TYPE.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174362 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index dffc764..931e24d 100644
+--- a/gcc/cp/error.c
++++ b/gcc/cp/error.c
+@@ -1879,7 +1879,10 @@ dump_expr (tree t, int flags)
+ 		    && strcmp (IDENTIFIER_POINTER (DECL_NAME (ob)), "this")))
+ 	      {
+ 		dump_expr (ob, flags | TFF_EXPR_IN_PARENS);
+-		pp_cxx_arrow (cxx_pp);
++		if (TREE_CODE (TREE_TYPE (ob)) == REFERENCE_TYPE)
++		  pp_cxx_dot (cxx_pp);
++		else
++		  pp_cxx_arrow (cxx_pp);
+ 	      }
+ 	  }
+ 	else
+new file mode 100644
+index 0000000..3515652
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/error6.C
+@@ -0,0 +1,8 @@
++// PR c++/48284
++// { dg-options -std=c++0x }
++
++template<typename C>
++auto g(C& c) -> decltype (c.f()) { return c.f(); } // { dg-error "decltype .c\\.f" }
++
++template<typename C>
++auto g(C& c) -> decltype (c.f()) { return c.f(); } // { dg-error "decltype .c\\.f" }
+-- 
+1.7.0.4
+

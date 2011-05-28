@@ -1,0 +1,45 @@
+From 6716a654c885fa57fcece50fb32be4f2edb29166 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 22 May 2011 00:29:03 +0000
+Subject: [PATCH] 	PR c++/48945
+ 	* decl.c (revert_static_member_fn): Ignore const on constexpr fn.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174023 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index aeb893f..108bb47 100644
+--- a/gcc/cp/decl.c
++++ b/gcc/cp/decl.c
+@@ -13394,10 +13394,15 @@ void
+ revert_static_member_fn (tree decl)
+ {
+   tree stype = static_fn_type (decl);
++  cp_cv_quals quals = type_memfn_quals (stype);
+ 
+-  if (type_memfn_quals (stype) != TYPE_UNQUALIFIED)
++  if (quals != TYPE_UNQUALIFIED)
+     {
+-      error ("static member function %q#D declared with type qualifiers", decl);
++      if (quals == TYPE_QUAL_CONST && DECL_DECLARED_CONSTEXPR_P (decl))
++	/* The const was implicit, don't complain.  */;
++      else
++	error ("static member function %q#D declared with type qualifiers",
++	       decl);
+       stype = apply_memfn_quals (stype, TYPE_UNQUALIFIED);
+     }
+   TREE_TYPE (decl) = stype;
+new file mode 100644
+index 0000000..ba4a251
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-static7.C
+@@ -0,0 +1,8 @@
++// PR c++/48945
++// { dg-options -std=c++0x }
++
++struct A {
++  static constexpr bool is();
++};
++
++constexpr bool A::is() { return true; }
+-- 
+1.7.0.4
+

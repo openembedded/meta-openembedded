@@ -1,7 +1,7 @@
 From 05f12c826eff0c87deeac7347d73cb276ec493cc Mon Sep 17 00:00:00 2001
 From: danglin <danglin@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 20 Apr 2011 23:36:20 +0000
-Subject: [PATCH 157/200] 	PR target/48288
+Subject: [PATCH] 	PR target/48288
  	* config/pa/predicates.md (ior_operand): Delete predicate.
  	(cint_ior_operand, reg_or_cint_ior_operand): New predicates.
  	* config/pa/pa.md (iordi3): Use reg_or_cint_ior_operand predicate in

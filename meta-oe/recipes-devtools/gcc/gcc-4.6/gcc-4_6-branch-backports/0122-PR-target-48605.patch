@@ -1,7 +1,7 @@
 From cad5b42c7c890058535eb7bc8c3766f03d428f59 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 15 Apr 2011 10:21:00 +0000
-Subject: [PATCH 122/200] 	PR target/48605
+Subject: [PATCH] 	PR target/48605
  	* config/i386/sse.md (avx_insertps, sse4_1_insertps): If operands[2]
  	is a MEM, offset it as needed based on top 2 bits in operands[3],
  	change MEM mode to SFmode and mask those 2 bits away from operands[3].

@@ -1,7 +1,7 @@
 From 19692feb0bd83e8e6b3a1e1e0b43119d7e12ce96 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 21 Apr 2011 04:27:30 +0000
-Subject: [PATCH 160/200] 	* semantics.c (finish_compound_literal): Don't put an array
+Subject: [PATCH] 	* semantics.c (finish_compound_literal): Don't put an array
  	with a dtor in a static variable.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172806 138bc75d-0d04-0410-961f-82ee72b054a4

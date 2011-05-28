@@ -1,7 +1,7 @@
 From 20a8b6ba99d25394d9d4b958a8ecc171fe3d263b Mon Sep 17 00:00:00 2001
 From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 21 Apr 2011 14:18:54 +0000
-Subject: [PATCH 161/200] 	* gimple.c (walk_gimple_op) <GIMPLE_CALL>: Fix couple of oversights.
+Subject: [PATCH] 	* gimple.c (walk_gimple_op) <GIMPLE_CALL>: Fix couple of oversights.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172829 138bc75d-0d04-0410-961f-82ee72b054a4
 

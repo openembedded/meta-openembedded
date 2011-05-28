@@ -1,7 +1,7 @@
 From c471cbe03c049ed4a97708936342e4dd28606d22 Mon Sep 17 00:00:00 2001
 From: ro <ro@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 28 Mar 2011 16:46:27 +0000
-Subject: [PATCH 016/200] 	Backport from mainline:
+Subject: [PATCH] 	Backport from mainline:
  	2011-03-23  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
 
 	PR testsuite/48251

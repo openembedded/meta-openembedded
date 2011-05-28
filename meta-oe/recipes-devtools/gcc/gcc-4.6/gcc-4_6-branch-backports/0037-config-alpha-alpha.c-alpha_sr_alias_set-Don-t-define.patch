@@ -1,7 +1,7 @@
 From 14fb9260e8c94249305dba567e7e242ac3d30fa7 Mon Sep 17 00:00:00 2001
 From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 18:24:02 +0000
-Subject: [PATCH 037/200] 	* config/alpha/alpha.c (alpha_sr_alias_set): Don't define.
+Subject: [PATCH] 	* config/alpha/alpha.c (alpha_sr_alias_set): Don't define.
  	(alpha_option_override): Don't set alpha_sr_alias_set.
  	(emit_frame_store_1): Use gen_frame_mem rather than calling
  	set_mem_alias_set.

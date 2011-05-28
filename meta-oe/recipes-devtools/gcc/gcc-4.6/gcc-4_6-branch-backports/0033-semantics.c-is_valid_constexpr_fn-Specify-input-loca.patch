@@ -1,7 +1,7 @@
 From 7ca62e4f7e0e27a4282dc14e5b89c389d5c194bb Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:26:21 +0000
-Subject: [PATCH 033/200] 	* semantics.c (is_valid_constexpr_fn): Specify input location.
+Subject: [PATCH] 	* semantics.c (is_valid_constexpr_fn): Specify input location.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171674 138bc75d-0d04-0410-961f-82ee72b054a4
 

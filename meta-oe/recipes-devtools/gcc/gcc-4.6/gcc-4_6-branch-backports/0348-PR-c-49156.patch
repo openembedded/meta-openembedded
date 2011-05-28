@@ -1,0 +1,62 @@
+From 08582a924888d536bb82007d7768ef67fc1804ac Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Thu, 26 May 2011 03:06:17 +0000
+Subject: [PATCH] 	PR c++/49156
+ 	* error.c (dump_template_bindings): Set processing_template_decl
+ 	for a partial instantiation.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174261 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 2477123..dffc764 100644
+--- a/gcc/cp/error.c
++++ b/gcc/cp/error.c
+@@ -306,6 +306,7 @@ dump_template_bindings (tree parms, tree args, VEC(tree,gc)* typenames)
+ 
+   FOR_EACH_VEC_ELT (tree, typenames, i, t)
+     {
++      bool dependent = uses_template_parms (args);
+       if (need_comma)
+ 	pp_separate_with_comma (cxx_pp);
+       dump_type (t, TFF_PLAIN_IDENTIFIER);
+@@ -313,7 +314,11 @@ dump_template_bindings (tree parms, tree args, VEC(tree,gc)* typenames)
+       pp_equal (cxx_pp);
+       pp_cxx_whitespace (cxx_pp);
+       push_deferring_access_checks (dk_no_check);
++      if (dependent)
++	++processing_template_decl;
+       t = tsubst (t, args, tf_none, NULL_TREE);
++      if (dependent)
++	--processing_template_decl;
+       pop_deferring_access_checks ();
+       /* Strip typedefs.  We can't just use TFF_CHASE_TYPEDEF because
+ 	 pp_simple_type_specifier doesn't know about it.  */
+new file mode 100644
+index 0000000..29a1cdd
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/error4.C
+@@ -0,0 +1,22 @@
++// PR c++/49156
++// { dg-options -std=c++0x }
++
++template<typename T> T declval();
++
++template<typename T>
++struct S {
++
++  template<typename U>
++    static U get(const volatile T&);
++
++  template<typename U>
++    static decltype(*declval<U>()) get(...);
++
++  typedef decltype(get<T>(declval<T>())) type; // { dg-error "no match" }
++};
++
++struct X { };
++
++S<X>::type x;
++
++// { dg-prune-output "note" }
+-- 
+1.7.0.4
+

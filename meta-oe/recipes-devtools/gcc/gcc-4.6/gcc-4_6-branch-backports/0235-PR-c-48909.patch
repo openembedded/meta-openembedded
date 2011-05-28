@@ -1,0 +1,73 @@
+From 011e03ba93f21bead8eae267c82423d5893bf2f3 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 6 May 2011 21:58:44 +0000
+Subject: [PATCH] 	PR c++/48909
+ 	* semantics.c (cxx_eval_conditional_expression): Check
+ 	integer_zerop/onep instead.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173516 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 8fd1820..6b7ec39 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -6255,13 +6255,12 @@ cxx_eval_conditional_expression (const constexpr_call *call, tree t,
+ 					   allow_non_constant, addr,
+ 					   non_constant_p);
+   VERIFY_CONSTANT (val);
+-  if (val == boolean_true_node)
+-    return cxx_eval_constant_expression (call, TREE_OPERAND (t, 1),
++  /* Don't VERIFY_CONSTANT the other operands.  */
++  if (integer_zerop (val))
++    return cxx_eval_constant_expression (call, TREE_OPERAND (t, 2),
+ 					 allow_non_constant, addr,
+ 					 non_constant_p);
+-  gcc_assert (val == boolean_false_node);
+-  /* Don't VERIFY_CONSTANT here.  */
+-  return cxx_eval_constant_expression (call, TREE_OPERAND (t, 2),
++  return cxx_eval_constant_expression (call, TREE_OPERAND (t, 1),
+ 				       allow_non_constant, addr,
+ 				       non_constant_p);
+ }
+@@ -7828,12 +7827,12 @@ potential_constant_expression_1 (tree t, bool want_rval, tsubst_flags_t flags)
+       tmp = TREE_OPERAND (t, 0);
+       if (!potential_constant_expression_1 (tmp, rval, flags))
+ 	return false;
+-      else if (tmp == boolean_true_node)
+-	return potential_constant_expression_1 (TREE_OPERAND (t, 1),
+-						want_rval, flags);
+-      else if (tmp == boolean_false_node)
++      else if (integer_zerop (tmp))
+ 	return potential_constant_expression_1 (TREE_OPERAND (t, 2),
+ 						want_rval, flags);
++      else if (TREE_CODE (tmp) == INTEGER_CST)
++	return potential_constant_expression_1 (TREE_OPERAND (t, 1),
++						want_rval, flags);
+       for (i = 1; i < 3; ++i)
+ 	if (potential_constant_expression_1 (TREE_OPERAND (t, i),
+ 					     want_rval, tf_none))
+new file mode 100644
+index 0000000..2434096
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-condition2.C
+@@ -0,0 +1,18 @@
++// PR c++/48909
++// { dg-options -std=c++0x }
++
++#define SA(X) static_assert((X),#X)
++
++constexpr int const * is_sorted_until(int const * first, int const * last)
++{
++ return first == last || first + 1 == last ? last
++  : (*(first + 1) < *first) != false ? first + 1
++  : is_sorted_until(first + 1, last);
++}
++
++int main()
++{
++ static constexpr int array[2] = {0, 1};
++ constexpr int const * last = is_sorted_until(array, array + 2);
++ SA(last==array+2);
++}
+-- 
+1.7.0.4
+

@@ -1,7 +1,7 @@
 From ca7759868733b4570e496b889e711523640fc582 Mon Sep 17 00:00:00 2001
 From: janus <janus@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 4 Apr 2011 18:53:34 +0000
-Subject: [PATCH 064/200] 2011-04-04  Janus Weil  <janus@gcc.gnu.org>
+Subject: [PATCH] 2011-04-04  Janus Weil  <janus@gcc.gnu.org>
 
 	PR fortran/48291
 	* class.c (get_unique_hashed_string): Adjust maximum allowable length

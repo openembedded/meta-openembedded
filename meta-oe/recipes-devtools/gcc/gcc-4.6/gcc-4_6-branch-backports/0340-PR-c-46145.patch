@@ -1,0 +1,37 @@
+From 1f170608081cc8e7a2b1ef2954a5762a04c67af5 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 20:30:01 +0000
+Subject: [PATCH] 	PR c++/46145
+ 	* decl.c (grokdeclarator): Complain about auto typedef.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174235 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index dbf03f9..cc7a155 100644
+--- a/gcc/cp/decl.c
++++ b/gcc/cp/decl.c
+@@ -9304,6 +9304,12 @@ grokdeclarator (const cp_declarator *declarator,
+           memfn_quals = TYPE_UNQUALIFIED;
+         }
+ 
++      if (type_uses_auto (type))
++	{
++	  error ("typedef declared %<auto%>");
++	  type = error_mark_node;
++	}
++
+       if (decl_context == FIELD)
+ 	decl = build_lang_decl (TYPE_DECL, unqualified_id, type);
+       else
+index 142ef90..190bfa6 100644
+--- a/gcc/testsuite/g++.dg/cpp0x/auto9.C
++++ b/gcc/testsuite/g++.dg/cpp0x/auto9.C
+@@ -119,3 +119,6 @@ H<auto> h;					// { dg-error "invalid" }
+ 
+ void qq (auto);			// { dg-error "auto" }
+ void qr (auto*);		// { dg-error "auto" }
++
++// PR c++/46145
++typedef auto autot;		// { dg-error "auto" }
+-- 
+1.7.0.4
+

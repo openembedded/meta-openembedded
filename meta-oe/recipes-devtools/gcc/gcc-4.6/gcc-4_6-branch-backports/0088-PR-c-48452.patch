@@ -1,7 +1,7 @@
 From 92860ca75ea3cbb7223913d121c60cc56c966794 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 15:02:08 +0000
-Subject: [PATCH 088/200] 	PR c++/48452
+Subject: [PATCH] 	PR c++/48452
  	* typeck.c (build_x_compound_expr_from_list): Return error_mark_node
  	in SFINAE context.
 

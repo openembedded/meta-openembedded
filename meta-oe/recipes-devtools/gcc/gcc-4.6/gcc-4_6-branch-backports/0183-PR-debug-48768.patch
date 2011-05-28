@@ -1,7 +1,7 @@
 From 8a0e77485c3d9d34c6f65cec908829dcc4cd5fee Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 26 Apr 2011 13:47:13 +0000
-Subject: [PATCH 183/200] 	PR debug/48768
+Subject: [PATCH] 	PR debug/48768
  	* tree-ssa.c (insert_debug_temp_for_var_def): If degenerate_phi_result
  	is error_mark_node, set value to NULL.
 

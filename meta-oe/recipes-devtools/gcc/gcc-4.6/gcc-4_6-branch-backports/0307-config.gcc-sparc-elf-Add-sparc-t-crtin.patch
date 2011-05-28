@@ -1,0 +1,150 @@
+From a6bb991323a90fe945a0989119412916048b9254 Mon Sep 17 00:00:00 2001
+From: ebotcazou <ebotcazou@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 22 May 2011 20:03:43 +0000
+Subject: [PATCH] 	* config.gcc (sparc-*-elf*): Add sparc/t-crtin.
+ 	(sparc-*-rtems*): Likewise.
+ 	(sparc64-*-elf*): Likewise.
+ 	(sparc64-*-rtems*): Likewise.
+ 	(sparc*-*-solaris2*): Likewise.  Remove crti.o crtn.o extra parts.
+ 	* config/sparc/t-crtin: New file.
+ 	* config/sparc/t-sol2 (crti.o): Delete rule.
+ 	(crtn.o): Likewise.
+ 	* config/sparc/t-linux64 (EXTRA_MULTILIB_PARTS): Delete.
+ 	* config/sparc/t-sol2-64 (EXTRA_MULTILIB_PARTS): Likewise.
+ 	* config/sparc/sp64-elf.h (STARTFILE_SPEC): Tidy and add crti.o.
+ 	(ENDFILE_SPEC): Add crtn.o.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174042 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 1f13564..ada68dd 100644
+--- a/gcc/config.gcc
++++ b/gcc/config.gcc
+@@ -2522,12 +2522,12 @@ sparc-*-elf*)
+ 		tmake_file="sparc/t-elf"
+ 		;;
+ 	esac
+-	tmake_file="${tmake_file} sparc/t-crtfm"
++	tmake_file="${tmake_file} sparc/t-crtin sparc/t-crtfm"
+ 	extra_parts="crtbegin.o crtend.o"
+ 	;;
+ sparc-*-rtems*)
+ 	tm_file="${tm_file} dbxelf.h elfos.h sparc/sysv4.h sparc/sp-elf.h sparc/rtemself.h rtems.h newlib-stdint.h"
+-	tmake_file="sparc/t-elf sparc/t-crtfm t-rtems"
++	tmake_file="sparc/t-elf sparc/t-crtin sparc/t-crtfm t-rtems"
+ 	extra_parts="crtbegin.o crtend.o"
+ 	;;
+ sparc-*-linux*)
+@@ -2585,7 +2585,7 @@ sparc*-*-solaris2*)
+ 		tm_file="${tm_file} sol2-gld.h sparc/sol2-gld-bi.h"
+ 	fi
+ 	tm_file="${tm_file} tm-dwarf2.h"
+-	tmake_file="t-sol2 sparc/t-sol2 sparc/t-sol2-64 sparc/t-crtfm"
++	tmake_file="t-sol2 sparc/t-sol2 sparc/t-sol2-64 sparc/t-crtin sparc/t-crtfm"
+ 	if test x$gnu_ld = xyes; then
+ 		tmake_file="$tmake_file t-slibgcc-elf-ver"
+ 	else
+@@ -2598,7 +2598,7 @@ sparc*-*-solaris2*)
+ 	cxx_target_objs="sol2-c.o"
+ 	extra_objs="sol2.o"
+ 	tm_p_file="${tm_p_file} sol2-protos.h"
+-	extra_parts="crt1.o crti.o crtn.o gcrt1.o gmon.o crtbegin.o crtend.o"
++	extra_parts="crt1.o gcrt1.o gmon.o crtbegin.o crtend.o"
+ 	case ${enable_threads}:${have_pthread_h}:${have_thread_h} in
+ 	  "":yes:* | yes:yes:* )
+ 		thread_file=posix
+@@ -2615,13 +2615,13 @@ sparc-wrs-vxworks)
+ sparc64-*-elf*)
+ 	tm_file="${tm_file} dbxelf.h elfos.h newlib-stdint.h sparc/sysv4.h sparc/sp64-elf.h"
+ 	extra_options="${extra_options} sparc/little-endian.opt"
+-	tmake_file="${tmake_file} sparc/t-crtfm"
++	tmake_file="${tmake_file} sparc/t-crtin sparc/t-crtfm"
+ 	extra_parts="crtbegin.o crtend.o"
+ 	;;
+ sparc64-*-rtems*)
+ 	tm_file="${tm_file} dbxelf.h elfos.h newlib-stdint.h sparc/sysv4.h sparc/sp64-elf.h sparc/rtemself.h rtems.h"
+ 	extra_options="${extra_options} sparc/little-endian.opt"
+-	tmake_file="${tmake_file} sparc/t-crtfm t-rtems"
++	tmake_file="${tmake_file} sparc/t-crtin sparc/t-crtfm t-rtems"
+ 	extra_parts="crtbegin.o crtend.o"
+ 	;;
+ sparc64-*-linux*)
+diff --git a/gcc/config/sparc/sp64-elf.h b/gcc/config/sparc/sp64-elf.h
+index fe49a79..c15e9ad 100644
+--- a/gcc/config/sparc/sp64-elf.h
++++ b/gcc/config/sparc/sp64-elf.h
+@@ -53,18 +53,13 @@ along with GCC; see the file COPYING3.  If not see
+ %{mlittle-endian:-EL} \
+ "
+ 
+-/* We need something a little simpler for the embedded environment.
+-   Profiling doesn't really work yet so we just copy the default.  */
+ #undef STARTFILE_SPEC
+-#define STARTFILE_SPEC "\
+-%{!shared:%{pg:gcrt0.o%s}%{!pg:%{p:mcrt0.o%s}%{!p:crt0.o%s}}} \
+-crtbegin.o%s \
+-"
++#define STARTFILE_SPEC "crt0.o%s crti.o%s crtbegin.o%s"
+ 
+ #undef ENDFILE_SPEC
+ #define ENDFILE_SPEC \
+   "%{ffast-math|funsafe-math-optimizations:crtfastmath.o%s} \
+-   crtend.o%s"
++   crtend.o%s crtn.o%s"
+ 
+ /* Use the default (for now).  */
+ #undef LIB_SPEC
+diff --git a/gcc/config/sparc/t-crtin b/gcc/config/sparc/t-crtin
+new file mode 100644
+index 0000000..2612bac
+--- /dev/null
++++ b/gcc/config/sparc/t-crtin
+@@ -0,0 +1,6 @@
++EXTRA_PARTS += crti.o crtn.o
++
++$(T)crti.o: $(srcdir)/config/sparc/sol2-ci.asm $(GCC_PASSES)
++	$(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) -c -o $(T)crti.o -x assembler-with-cpp $(srcdir)/config/sparc/sol2-ci.asm
++$(T)crtn.o: $(srcdir)/config/sparc/sol2-cn.asm $(GCC_PASSES)
++	$(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) -c -o $(T)crtn.o -x assembler-with-cpp $(srcdir)/config/sparc/sol2-cn.asm
+diff --git a/gcc/config/sparc/t-linux64 b/gcc/config/sparc/t-linux64
+index 4a7de45..74d0489 100644
+--- a/gcc/config/sparc/t-linux64
++++ b/gcc/config/sparc/t-linux64
+@@ -31,9 +31,6 @@ MULTILIB_OSDIRNAMES = ../lib64 $(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR)
+ LIBGCC = stmp-multilib
+ INSTALL_LIBGCC = install-multilib
+ 
+-EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o \
+-	crtfastmath.o
+-
+ CRTSTUFF_T_CFLAGS = `if test x$$($(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) \
+ 				 -print-multi-os-directory) \
+ 			= x../lib64; then echo -mcmodel=medany; fi`
+diff --git a/gcc/config/sparc/t-sol2 b/gcc/config/sparc/t-sol2
+index 9db0c13..b7f665b 100644
+--- a/gcc/config/sparc/t-sol2
++++ b/gcc/config/sparc/t-sol2
+@@ -26,10 +26,6 @@ $(T)gmon.o:	$(srcdir)/config/sparc/gmon-sol2.c $(GCC_PASSES) \
+ # Assemble startup files.
+ $(T)crt1.o: $(srcdir)/config/sparc/sol2-c1.asm $(GCC_PASSES)
+ 	$(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) -c -o $(T)crt1.o -x assembler-with-cpp $(srcdir)/config/sparc/sol2-c1.asm
+-$(T)crti.o: $(srcdir)/config/sparc/sol2-ci.asm $(GCC_PASSES)
+-	$(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) -c -o $(T)crti.o -x assembler-with-cpp $(srcdir)/config/sparc/sol2-ci.asm
+-$(T)crtn.o: $(srcdir)/config/sparc/sol2-cn.asm $(GCC_PASSES)
+-	$(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) -c -o $(T)crtn.o -x assembler-with-cpp $(srcdir)/config/sparc/sol2-cn.asm
+ $(T)gcrt1.o: $(srcdir)/config/sparc/sol2-c1.asm $(GCC_PASSES)
+ 	$(GCC_FOR_TARGET) $(MULTILIB_CFLAGS) -c -DGCRT1 -o $(T)gcrt1.o -x assembler-with-cpp $(srcdir)/config/sparc/sol2-c1.asm
+ 
+diff --git a/gcc/config/sparc/t-sol2-64 b/gcc/config/sparc/t-sol2-64
+index a9f4ec1..1802239 100644
+--- a/gcc/config/sparc/t-sol2-64
++++ b/gcc/config/sparc/t-sol2-64
+@@ -5,6 +5,3 @@ MULTILIB_OSDIRNAMES = . sparcv9
+ 
+ LIBGCC = stmp-multilib
+ INSTALL_LIBGCC = install-multilib
+-
+-EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o gmon.o crt1.o crti.o crtn.o gcrt1.o \
+-	crtfastmath.o
+-- 
+1.7.0.4
+

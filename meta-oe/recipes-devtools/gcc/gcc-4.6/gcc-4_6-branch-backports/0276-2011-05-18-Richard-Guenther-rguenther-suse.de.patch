@@ -1,0 +1,111 @@
+From 750d46458c0af423bb1976c7b4bb0a89de10e58f Mon Sep 17 00:00:00 2001
+From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 18 May 2011 13:29:24 +0000
+Subject: [PATCH] 2011-05-18  Richard Guenther  <rguenther@suse.de>
+
+        Backport from mainline
+        2011-04-19  Richard Guenther  <rguenther@suse.de>
+
+	PR lto/48207
+	* tree.c (free_lang_data): Do not reset the decl-assembler-name
+	langhook.
+
+	* g++.dg/lto/pr48207_0.C: New testcase.
+
+        2011-04-21  Richard Guenther  <rguenther@suse.de>
+
+	PR lto/48703
+	* tree.c (free_lang_data_in_decl): Do not zero TREE_TYPE of
+	DECL_NAME.
+
+	* g++.dg/lto/pr48207-2_0.C: New testcase.
+	* g++.dg/lto/pr48207-3_0.C: Likewise.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173860 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 28581a0..25f9804 100644
+new file mode 100644
+index 0000000..6801b85
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/lto/pr48207-2_0.C
+@@ -0,0 +1,10 @@
++// { dg-lto-do link }
++// { dg-lto-options { { -flto -g } } }
++
++namespace {
++    typedef struct {
++	int x;
++    } Foo;
++}
++
++int main () {}
+diff --git a/gcc/testsuite/g++.dg/lto/pr48207-3_0.C b/gcc/testsuite/g++.dg/lto/pr48207-3_0.C
+new file mode 100644
+index 0000000..ef02dda
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/lto/pr48207-3_0.C
+@@ -0,0 +1,12 @@
++// { dg-lto-do link }
++// { dg-lto-options { { -flto -g } } }
++
++void bar(void) {}
++
++void foo(void)
++{
++  typedef enum { ABC } DEF;
++  bar();
++}
++
++int main () {}
+diff --git a/gcc/testsuite/g++.dg/lto/pr48207_0.C b/gcc/testsuite/g++.dg/lto/pr48207_0.C
+new file mode 100644
+index 0000000..e66cb49
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/lto/pr48207_0.C
+@@ -0,0 +1,13 @@
++// { dg-lto-do link }
++// { dg-lto-options { { -flto -g } } }
++
++void bar(int) {}
++
++void foo(void)
++{
++  typedef enum { ABC } DEF;
++  DEF a;
++  bar((int)a);
++}
++
++int main() {}
+diff --git a/gcc/tree.c b/gcc/tree.c
+index 4d6ca36..1c78b61 100644
+--- a/gcc/tree.c
++++ b/gcc/tree.c
+@@ -4532,10 +4532,6 @@ free_lang_data_in_decl (tree decl)
+   TREE_LANG_FLAG_5 (decl) = 0;
+   TREE_LANG_FLAG_6 (decl) = 0;
+ 
+-  /* Identifiers need not have a type.  */
+-  if (DECL_NAME (decl))
+-    TREE_TYPE (DECL_NAME (decl)) = NULL_TREE;
+-
+   free_lang_data_in_one_sizepos (&DECL_SIZE (decl));
+   free_lang_data_in_one_sizepos (&DECL_SIZE_UNIT (decl));
+   if (TREE_CODE (decl) == FIELD_DECL)
+@@ -5140,7 +5136,12 @@ free_lang_data (void)
+   lang_hooks.callgraph.analyze_expr = NULL;
+   lang_hooks.dwarf_name = lhd_dwarf_name;
+   lang_hooks.decl_printable_name = gimple_decl_printable_name;
+-  lang_hooks.set_decl_assembler_name = lhd_set_decl_assembler_name;
++  /* We do not want the default decl_assembler_name implementation,
++     rather if we have fixed everything we want a wrapper around it
++     asserting that all non-local symbols already got their assembler
++     name and only produce assembler names for local symbols.  Or rather
++     make sure we never call decl_assembler_name on local symbols and
++     devise a separate, middle-end private scheme for it.  */
+ 
+   /* Reset diagnostic machinery.  */
+   diagnostic_starter (global_dc) = default_tree_diagnostic_starter;
+-- 
+1.7.0.4
+

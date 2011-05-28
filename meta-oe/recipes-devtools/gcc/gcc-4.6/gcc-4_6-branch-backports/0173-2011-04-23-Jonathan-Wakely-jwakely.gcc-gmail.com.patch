@@ -1,7 +1,7 @@
 From 0755fde6008ab7a7ae98f3b4c5967191408431f3 Mon Sep 17 00:00:00 2001
 From: redi <redi@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 23 Apr 2011 17:51:31 +0000
-Subject: [PATCH 173/200] 2011-04-23  Jonathan Wakely  <jwakely.gcc@gmail.com>
+Subject: [PATCH] 2011-04-23  Jonathan Wakely  <jwakely.gcc@gmail.com>
 
 	PR libstdc++/48521
 	* include/std/type_traits (result_of): Handle pointer to member.

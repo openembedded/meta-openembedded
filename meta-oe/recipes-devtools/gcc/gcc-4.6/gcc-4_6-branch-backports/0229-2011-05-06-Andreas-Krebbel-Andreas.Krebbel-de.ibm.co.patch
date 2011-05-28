@@ -1,0 +1,58 @@
+From d78b2283de3896b886562a5e34dfca256b7130d4 Mon Sep 17 00:00:00 2001
+From: krebbel <krebbel@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 6 May 2011 11:10:13 +0000
+Subject: [PATCH] 2011-05-06  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	* config/s390/s390.c (s390_asm_trampoline_template): Comment
+	instruction sizes.
+	(s390_trampoline_init): Replace UNITS_PER_WORD with
+	UNITS_PER_LONG.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173482 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c1bb234..626007e 100644
+--- a/gcc/config/s390/s390.c
++++ b/gcc/config/s390/s390.c
+@@ -9281,16 +9281,16 @@ s390_asm_trampoline_template (FILE *file)
+ 
+   if (TARGET_64BIT)
+     {
+-      output_asm_insn ("basr\t%1,0", op);
+-      output_asm_insn ("lmg\t%0,%1,14(%1)", op);
+-      output_asm_insn ("br\t%1", op);
++      output_asm_insn ("basr\t%1,0", op);         /* 2 byte */
++      output_asm_insn ("lmg\t%0,%1,14(%1)", op);  /* 6 byte */
++      output_asm_insn ("br\t%1", op);             /* 2 byte */
+       ASM_OUTPUT_SKIP (file, (HOST_WIDE_INT)(TRAMPOLINE_SIZE - 10));
+     }
+   else
+     {
+-      output_asm_insn ("basr\t%1,0", op);
+-      output_asm_insn ("lm\t%0,%1,6(%1)", op);
+-      output_asm_insn ("br\t%1", op);
++      output_asm_insn ("basr\t%1,0", op);         /* 2 byte */
++      output_asm_insn ("lm\t%0,%1,6(%1)", op);    /* 4 byte */
++      output_asm_insn ("br\t%1", op);             /* 2 byte */
+       ASM_OUTPUT_SKIP (file, (HOST_WIDE_INT)(TRAMPOLINE_SIZE - 8));
+     }
+ }
+@@ -9306,11 +9306,11 @@ s390_trampoline_init (rtx m_tramp, tree fndecl, rtx cxt)
+   rtx mem;
+ 
+   emit_block_move (m_tramp, assemble_trampoline_template (),
+-		   GEN_INT (2*UNITS_PER_WORD), BLOCK_OP_NORMAL);
++		   GEN_INT (2 * UNITS_PER_LONG), BLOCK_OP_NORMAL);
+ 
+-  mem = adjust_address (m_tramp, Pmode, 2*UNITS_PER_WORD);
++  mem = adjust_address (m_tramp, Pmode, 2 * UNITS_PER_LONG);
+   emit_move_insn (mem, cxt);
+-  mem = adjust_address (m_tramp, Pmode, 3*UNITS_PER_WORD);
++  mem = adjust_address (m_tramp, Pmode, 3 * UNITS_PER_LONG);
+   emit_move_insn (mem, fnaddr);
+ }
+ 
+-- 
+1.7.0.4
+

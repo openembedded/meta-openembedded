@@ -1,7 +1,7 @@
 From a236530cd5ac2466b1ca3b510b6bdb493c7b5342 Mon Sep 17 00:00:00 2001
 From: dodji <dodji@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 13 Apr 2011 15:19:40 +0000
-Subject: [PATCH 113/200] Fix PR c++/48574
+Subject: [PATCH] Fix PR c++/48574
 
 gcc/cp/
 

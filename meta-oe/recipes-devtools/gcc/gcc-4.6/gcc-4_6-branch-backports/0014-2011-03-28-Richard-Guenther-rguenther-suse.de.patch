@@ -1,7 +1,7 @@
 From 2631216d2fedc5339a5edcac64db1ab5d9269498 Mon Sep 17 00:00:00 2001
 From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Mon, 28 Mar 2011 10:14:34 +0000
-Subject: [PATCH 014/200] 2011-03-28  Richard Guenther  <rguenther@suse.de>
+Subject: [PATCH] 2011-03-28  Richard Guenther  <rguenther@suse.de>
 
 	Backport from mainline
 	2011-03-24  Richard Guenther  <rguenther@suse.de>

@@ -1,7 +1,7 @@
 From a03834fec84b808ccef5c0abb5c35d069d7ad868 Mon Sep 17 00:00:00 2001
 From: nickc <nickc@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 12 Apr 2011 11:33:07 +0000
-Subject: [PATCH 108/200] 	* config/v850/v850.c (expand_prologue): Do not use the CALLT
+Subject: [PATCH] 	* config/v850/v850.c (expand_prologue): Do not use the CALLT
  	instruction for interrupt handlers if the target is the basic V850
  	architecture.
  	(expand_epilogue): Likewise.

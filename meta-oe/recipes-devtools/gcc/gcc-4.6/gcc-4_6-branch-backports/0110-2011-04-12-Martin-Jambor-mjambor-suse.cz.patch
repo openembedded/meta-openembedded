@@ -1,7 +1,7 @@
 From abf56c82ebcb8ba287fc69b8961af55b4541a130 Mon Sep 17 00:00:00 2001
 From: jamborm <jamborm@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 12 Apr 2011 18:31:55 +0000
-Subject: [PATCH 110/200] 2011-04-12  Martin Jambor  <mjambor@suse.cz>
+Subject: [PATCH] 2011-04-12  Martin Jambor  <mjambor@suse.cz>
 
 	PR tree-optimization/48195
 	* ipa-cp.c (ipcp_driver): Call ipa_check_create_node_params and

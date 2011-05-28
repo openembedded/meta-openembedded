@@ -1,7 +1,7 @@
 From 872b1920a12548af70c3866daadc4a67d05416b1 Mon Sep 17 00:00:00 2001
 From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 12 Apr 2011 09:05:41 +0000
-Subject: [PATCH 107/200] 2011-04-12  Allan McRae  <allan@archlinux.org>
+Subject: [PATCH] 2011-04-12  Allan McRae  <allan@archlinux.org>
 
 	PR libstdc++/48566
 	* testsuite/tr1/6_containers/unordered_map/requirements/

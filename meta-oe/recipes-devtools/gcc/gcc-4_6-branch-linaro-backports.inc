@@ -12,4 +12,7 @@ file://linaro/gcc-4.6-linaro-r106741.patch \
 file://linaro/gcc-4.6-linaro-r106742.patch \
 file://linaro/gcc-4.6-linaro-r106743.patch \
 file://linaro/gcc-4.6-linaro-r106744.patch \
+file://linaro/gcc-4.6-linaro-r106746.patch \
+file://linaro/gcc-4.6-linaro-r106747.patch \
+file://linaro/gcc-4.6-linaro-r106750.patch \
 "

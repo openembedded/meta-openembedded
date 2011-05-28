@@ -1,7 +1,7 @@
 From 8216e1c4c23928723f8e1583bf7e014813bb2c07 Mon Sep 17 00:00:00 2001
 From: baldrick <baldrick@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 9 Apr 2011 16:14:07 +0000
-Subject: [PATCH 094/200] Bail out rather than crashing in array_type_nelts if TYPE_MAX_VALUE is null.
+Subject: [PATCH] Bail out rather than crashing in array_type_nelts if TYPE_MAX_VALUE is null.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172226 138bc75d-0d04-0410-961f-82ee72b054a4
 

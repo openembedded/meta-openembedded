@@ -1,7 +1,7 @@
 From 0e3879bf21f04b54b0849f3a86c20359f965e12a Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 20 Apr 2011 18:19:47 +0000
-Subject: [PATCH 155/200] 	PR tree-optimization/48611
+Subject: [PATCH] 	PR tree-optimization/48611
  	* tree-eh.c (note_eh_region_may_contain_throw): Don't propagate
  	beyond ERT_MUST_NOT_THROW region.
 

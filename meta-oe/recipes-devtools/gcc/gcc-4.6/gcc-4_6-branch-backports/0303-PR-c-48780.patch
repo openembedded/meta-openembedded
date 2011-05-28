@@ -1,0 +1,49 @@
+From 3f78a3111fdfffc067bff19d0d42ffb1040e0fe5 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Sun, 22 May 2011 00:28:44 +0000
+Subject: [PATCH] 	PR c++/48780
+ 	* cvt.c (type_promotes_to): Warn about promoting scoped enums.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174022 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index ce4f985..d26d870 100644
+--- a/gcc/cp/cvt.c
++++ b/gcc/cp/cvt.c
+@@ -1621,6 +1621,9 @@ type_promotes_to (tree type)
+       int precision = MAX (TYPE_PRECISION (type),
+ 			   TYPE_PRECISION (integer_type_node));
+       tree totype = c_common_type_for_size (precision, 0);
++      if (SCOPED_ENUM_P (type))
++	warning (OPT_Wabi, "scoped enum %qT will not promote to an integral "
++		 "type in a future version of GCC", type);
+       if (TREE_CODE (type) == ENUMERAL_TYPE)
+ 	type = ENUM_UNDERLYING_TYPE (type);
+       if (TYPE_UNSIGNED (type)
+new file mode 100644
+index 0000000..ec02d3b
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/enum13.C
+@@ -0,0 +1,20 @@
++// PR c++/48780
++// { dg-options "-std=c++0x -fabi-version=5 -Wabi" }
++
++typedef __builtin_va_list __gnuc_va_list;
++typedef __gnuc_va_list va_list;
++
++enum struct A : short { X };
++
++void foo(int x, ...) {
++   va_list vl;
++   __builtin_va_start(vl, x);
++   enum A t = __builtin_va_arg(vl, enum A); // { dg-warning "promote" }
++   __builtin_va_end(vl);
++}
++
++int main() {
++   foo(0, A::X);		// { dg-warning "will not promote" }
++}
++
++// { dg-prune-output "note" }
+-- 
+1.7.0.4
+

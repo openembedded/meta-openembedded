@@ -1,0 +1,93 @@
+From 9aeec4c33a6e405da2d97c3c45efe2165b44cf97 Mon Sep 17 00:00:00 2001
+From: uros <uros@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 24 May 2011 18:41:31 +0000
+Subject: [PATCH] 	PR target/49133
+ 	* config/i386/sse.md (sse2_loadhpd): Remove shufpd alternative.
+
+testsuite/ChangeLog:
+
+	PR target/49133
+	* g++.dg/other/pr49133.C: New test.
+
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174131 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index c9866f0..7e18678 100644
+--- a/gcc/config/i386/sse.md
++++ b/gcc/config/i386/sse.md
+@@ -4950,24 +4950,22 @@
+ ;; Avoid combining registers from different units in a single alternative,
+ ;; see comment above inline_secondary_memory_needed function in i386.c
+ (define_insn "sse2_loadhpd"
+-  [(set (match_operand:V2DF 0 "nonimmediate_operand"     "=x,x,x,o,o,o")
++  [(set (match_operand:V2DF 0 "nonimmediate_operand"     "=x,x,o,o,o")
+ 	(vec_concat:V2DF
+ 	  (vec_select:DF
+-	    (match_operand:V2DF 1 "nonimmediate_operand" " 0,0,x,0,0,0")
++	    (match_operand:V2DF 1 "nonimmediate_operand" " 0,0,0,0,0")
+ 	    (parallel [(const_int 0)]))
+-	  (match_operand:DF 2 "nonimmediate_operand"     " m,x,0,x,*f,r")))]
++	  (match_operand:DF 2 "nonimmediate_operand"     " m,x,x,*f,r")))]
+   "TARGET_SSE2 && !(MEM_P (operands[1]) && MEM_P (operands[2]))"
+   "@
+    movhpd\t{%2, %0|%0, %2}
+    unpcklpd\t{%2, %0|%0, %2}
+-   shufpd\t{$1, %1, %0|%0, %1, 1}
+    #
+    #
+    #"
+-  [(set_attr "type" "ssemov,sselog,sselog,ssemov,fmov,imov")
+-   (set_attr "prefix_data16" "1,*,*,*,*,*")
+-   (set_attr "length_immediate" "*,*,1,*,*,*")
+-   (set_attr "mode" "V1DF,V2DF,V2DF,DF,DF,DF")])
++  [(set_attr "type" "ssemov,sselog,ssemov,fmov,imov")
++   (set_attr "prefix_data16" "1,*,*,*,*")
++   (set_attr "mode" "V1DF,V2DF,DF,DF,DF")])
+ 
+ (define_split
+   [(set (match_operand:V2DF 0 "memory_operand" "")
+new file mode 100644
+index 0000000..a59687f
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/other/pr49133.C
+@@ -0,0 +1,36 @@
++/* { dg-do run { target i?86-*-* x86_64-*-* } } */
++/* { dg-options "-O2 -msse2" } */
++/* { dg-require-effective-target sse2_runtime } */
++
++#include <xmmintrin.h>
++
++extern "C" void abort ();
++
++typedef double double_a __attribute__((__may_alias__));
++
++struct V
++{
++  __m128d data;
++};
++
++int
++main()
++{
++  V a;
++  __m128d b;
++
++  b = _mm_set_pd (1., 0.);
++  a.data = _mm_set_pd (1., 0.);
++  a.data = _mm_add_pd (a.data,
++		       _mm_and_pd (_mm_cmpeq_pd (a.data, _mm_set1_pd (0.)),
++				   _mm_set1_pd (2.)));
++  reinterpret_cast<double_a *>(&a.data)[1] += 1.;
++  b = _mm_add_pd (b, _mm_and_pd (_mm_cmpeq_pd (b, _mm_set1_pd (0.)),
++				 _mm_set1_pd (1.)));
++  b = _mm_add_pd (b, _mm_and_pd (_mm_cmpeq_pd (b, _mm_set1_pd (1.)),
++				 _mm_set1_pd (1.)));
++  if (_mm_movemask_pd (_mm_cmpeq_pd (a.data, b)) != 0x3)
++    abort();
++
++  return 0;
++}
+-- 
+1.7.0.4
+

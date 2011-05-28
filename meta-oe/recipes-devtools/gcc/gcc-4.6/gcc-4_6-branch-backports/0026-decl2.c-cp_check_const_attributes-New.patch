@@ -1,7 +1,7 @@
 From 87e73453e8135e72f592c1d7c84da942e7a1e308 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:24:59 +0000
-Subject: [PATCH 026/200] 	* decl2.c (cp_check_const_attributes): New.
+Subject: [PATCH] 	* decl2.c (cp_check_const_attributes): New.
  	(cplus_decl_attributes): Call cp_check_const_attributes.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171667 138bc75d-0d04-0410-961f-82ee72b054a4

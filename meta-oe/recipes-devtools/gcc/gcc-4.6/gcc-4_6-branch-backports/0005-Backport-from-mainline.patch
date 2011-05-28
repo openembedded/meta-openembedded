@@ -1,7 +1,7 @@
 From 5bc59e25607b755798008d5e0d79ca4cea6711ed Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sat, 26 Mar 2011 09:23:01 +0000
-Subject: [PATCH 005/200] 	Backport from mainline
+Subject: [PATCH] 	Backport from mainline
  	2011-03-20  Jakub Jelinek  <jakub@redhat.com>
 
 	PR c/42544

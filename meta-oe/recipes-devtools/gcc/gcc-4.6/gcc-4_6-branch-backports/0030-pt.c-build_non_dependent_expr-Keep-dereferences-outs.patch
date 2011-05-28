@@ -1,7 +1,7 @@
 From 6ec20c02d4514be339f0112d793794abf60451a7 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:25:51 +0000
-Subject: [PATCH 030/200] 	* pt.c (build_non_dependent_expr): Keep dereferences outside the
+Subject: [PATCH] 	* pt.c (build_non_dependent_expr): Keep dereferences outside the
  	NON_DEPENDENT_EXPR.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171671 138bc75d-0d04-0410-961f-82ee72b054a4

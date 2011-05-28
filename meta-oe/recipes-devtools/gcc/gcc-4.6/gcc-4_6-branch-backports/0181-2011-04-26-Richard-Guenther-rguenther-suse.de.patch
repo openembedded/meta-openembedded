@@ -1,7 +1,7 @@
 From 2e8f32d39576b002280e29079ad6cfc55c852276 Mon Sep 17 00:00:00 2001
 From: rguenth <rguenth@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 26 Apr 2011 12:59:22 +0000
-Subject: [PATCH 181/200] 2011-04-26  Richard Guenther  <rguenther@suse.de>
+Subject: [PATCH] 2011-04-26  Richard Guenther  <rguenther@suse.de>
 
 	PR tree-optimization/48731
 	* ipa-inline.c (cgraph_flatten): Test if function is inlinable.

@@ -1,7 +1,7 @@
 From 54907dbd122d6e4661b9583247e5574b9349c130 Mon Sep 17 00:00:00 2001
 From: gerald <gerald@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Sun, 17 Apr 2011 21:59:00 +0000
-Subject: [PATCH 135/200] 	* doc/passes.texi: Fill crossref nodes.
+Subject: [PATCH] 	* doc/passes.texi: Fill crossref nodes.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@172621 138bc75d-0d04-0410-961f-82ee72b054a4
 

@@ -1,7 +1,7 @@
 From 87c5c4ec5bee02725cb4bd4f81bb3c86a0277a81 Mon Sep 17 00:00:00 2001
 From: hjl <hjl@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Wed, 30 Mar 2011 10:43:55 +0000
-Subject: [PATCH 043/200] Fix a typo in FLOAT_SSE_REGS.
+Subject: [PATCH] Fix a typo in FLOAT_SSE_REGS.
 
 2011-03-30  H.J. Lu  <hongjiu.lu@intel.com>
 

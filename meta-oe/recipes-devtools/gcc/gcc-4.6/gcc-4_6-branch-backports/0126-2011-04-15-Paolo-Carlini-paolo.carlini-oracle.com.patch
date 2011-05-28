@@ -1,7 +1,7 @@
 From 6cd1f8146545d6f82269c9a96a05438a06fcdc1a Mon Sep 17 00:00:00 2001
 From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 15 Apr 2011 16:19:39 +0000
-Subject: [PATCH 126/200] 2011-04-15  Paolo Carlini  <paolo.carlini@oracle.com>
+Subject: [PATCH] 2011-04-15  Paolo Carlini  <paolo.carlini@oracle.com>
 
 	* include/std/istream: Fix comments in the light of DR60 + N3168.
 

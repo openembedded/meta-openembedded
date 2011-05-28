@@ -1,7 +1,7 @@
 From 2f7a2d284d42cfbff01ee024af4cbaeaff766ee5 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 15:02:00 +0000
-Subject: [PATCH 087/200] 	* semantics.c (finish_decltype_type): Add complain parm.
+Subject: [PATCH] 	* semantics.c (finish_decltype_type): Add complain parm.
  	* cp-tree.h: Adjust.
  	* parser.c (cp_parser_decltype): Adjust.
  	* pt.c (tsubst): Adjust.

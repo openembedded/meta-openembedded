@@ -1,0 +1,185 @@
+From b2acc60a75029f02cf14633a15f3a8a242257154 Mon Sep 17 00:00:00 2001
+From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Mon, 23 May 2011 00:08:52 +0000
+Subject: [PATCH] 2011-05-22  Jonathan Wakely  <jwakely.gcc@gmail.com>
+
+	* testsuite/20_util/bind/cv_quals_2.cc: New.
+
+2011-05-22  Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR libstdc++/49058
+	* include/std/functional (_Bind<_Functor(_Bound_args...)>::
+	operator()(_Args&&...)): Don't cv qualify _Functor directly
+	in the default template argument, SFINAE doesn't apply when
+	the functor has no arguments.
+	* testsuite/20_util/bind/49058_1.cc: New.
+	* testsuite/20_util/bind/49058_2.cc: Likewise.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174049 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 57ec506..45bee81 100644
+--- a/libstdc++-v3/include/std/functional
++++ b/libstdc++-v3/include/std/functional
+@@ -1207,7 +1207,8 @@ _GLIBCXX_HAS_NESTED_TYPE(result_type)
+ 
+       // Call as const
+       template<typename... _Args, typename _Result
+-	= decltype( std::declval<const _Functor>()(
++	= decltype( std::declval<typename enable_if<(sizeof...(_Args) >= 0),
++		       typename add_const<_Functor>::type>::type>()(
+ 	      _Mu<_Bound_args>()( std::declval<const _Bound_args&>(),
+ 				  std::declval<tuple<_Args...>&>() )... ) )>
+ 	_Result
+@@ -1220,7 +1221,8 @@ _GLIBCXX_HAS_NESTED_TYPE(result_type)
+ 
+       // Call as volatile
+       template<typename... _Args, typename _Result
+-	= decltype( std::declval<volatile _Functor>()(
++	= decltype( std::declval<typename enable_if<(sizeof...(_Args) >= 0),
++                       typename add_volatile<_Functor>::type>::type>()(
+ 	      _Mu<_Bound_args>()( std::declval<volatile _Bound_args&>(),
+ 				  std::declval<tuple<_Args...>&>() )... ) )>
+ 	_Result
+@@ -1233,7 +1235,8 @@ _GLIBCXX_HAS_NESTED_TYPE(result_type)
+ 
+       // Call as const volatile
+       template<typename... _Args, typename _Result
+-	= decltype( std::declval<const volatile _Functor>()(
++	= decltype( std::declval<typename enable_if<(sizeof...(_Args) >= 0),
++                       typename add_cv<_Functor>::type>::type>()(
+ 	      _Mu<_Bound_args>()( std::declval<const volatile _Bound_args&>(),
+ 				  std::declval<tuple<_Args...>&>() )... ) )>
+ 	_Result
+diff --git a/libstdc++-v3/testsuite/20_util/bind/49058_1.cc b/libstdc++-v3/testsuite/20_util/bind/49058_1.cc
+new file mode 100644
+index 0000000..fb34e08
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/bind/49058_1.cc
+@@ -0,0 +1,34 @@
++// { dg-options "-pedantic -std=gnu++0x" }
++// { dg-do compile }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <functional>
++
++// PR libstdc++/49058
++
++struct F
++{
++  void
++  operator()();
++};
++
++void f()
++{
++  std::bind( F() );
++}
+diff --git a/libstdc++-v3/testsuite/20_util/bind/49058_2.cc b/libstdc++-v3/testsuite/20_util/bind/49058_2.cc
+new file mode 100644
+index 0000000..fc9d9a2
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/bind/49058_2.cc
+@@ -0,0 +1,28 @@
++// { dg-options "-pedantic -std=gnu++0x" }
++// { dg-do compile }
++
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++#include <functional>
++
++// PR libstdc++/49058
++
++void f()
++{
++  std::bind( []{} );
++}
+diff --git a/libstdc++-v3/testsuite/20_util/bind/cv_quals_2.cc b/libstdc++-v3/testsuite/20_util/bind/cv_quals_2.cc
+new file mode 100644
+index 0000000..067d862
+--- /dev/null
++++ b/libstdc++-v3/testsuite/20_util/bind/cv_quals_2.cc
+@@ -0,0 +1,49 @@
++// Copyright (C) 2011 Free Software Foundation, Inc.
++//
++// This file is part of the GNU ISO C++ Library.  This library is free
++// software; you can redistribute it and/or modify it under the
++// terms of the GNU General Public License as published by the
++// Free Software Foundation; either version 3, or (at your option)
++// any later version.
++
++// This library is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++// GNU General Public License for more details.
++
++// You should have received a copy of the GNU General Public License along
++// with this library; see the file COPYING3.  If not see
++// <http://www.gnu.org/licenses/>.
++
++// { dg-options "-std=gnu++0x" }
++
++#include <functional>
++#include <testsuite_hooks.h>
++
++struct X
++{
++  int operator()() const { return 0; }
++  int operator()() volatile { return 1; }
++  int operator()() const volatile { return 2; }
++  void operator()() { };
++};
++
++void test01()
++{
++  bool test __attribute__((unused)) = true;
++
++  const auto b0 = std::bind(X());
++  VERIFY( b0() == 0 );
++
++  volatile auto b1 = std::bind(X());
++  VERIFY( b1() == 1 );
++
++  const volatile auto b2 = std::bind(X());
++  VERIFY( b2() == 2 );
++}
++
++int main()
++{
++  test01();
++  return 0;
++}
+-- 
+1.7.0.4
+

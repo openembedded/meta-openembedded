@@ -1,0 +1,76 @@
+From 44863daed83ef6e6cb2bfec5670363338df0d887 Mon Sep 17 00:00:00 2001
+From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 23:46:31 +0000
+Subject: [PATCH] 2011-05-25  Paolo Carlini  <paolo.carlini@oracle.com>
+
+	* config/abi/pre/gnu.ver: Export recently added  basic_streambuf
+	and basic_stringbuf symbols @3.4.17.
+	* configure.ac: Update.
+	* testsuite/util/testsuite_abi.cc: Likewise.
+	* configure: Regenerate.
+
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174243 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 839f846..778b826 100644
+--- a/libstdc++-v3/config/abi/pre/gnu.ver
++++ b/libstdc++-v3/config/abi/pre/gnu.ver
+@@ -1272,6 +1272,17 @@ GLIBCXX_3.4.16 {
+ 
+ } GLIBCXX_3.4.15;
+ 
++GLIBCXX_3.4.17 {
++
++    # basic_streambuf<>::__safe_gbump, __safe_pbump
++    _ZNSt15basic_streambufI[cw]St11char_traitsI[cw]EE12__safe_gbumpE*;
++    _ZNSt15basic_streambufI[cw]St11char_traitsI[cw]EE12__safe_pbumpE*;
++
++    # basic_stringbuf<>::_M_pbump
++    _ZNSt15basic_stringbufI[cw]St11char_traitsI[cw]ESaI[cw]EE8_M_pbumpE*;
++
++} GLIBCXX_3.4.16;
++
+ # Symbols in the support library (libsupc++) have their own tag.
+ CXXABI_1.3 {
+ 
+diff --git a/libstdc++-v3/configure b/libstdc++-v3/configure
+index c321e76..9032695 100755
+--- a/libstdc++-v3/configure
++++ b/libstdc++-v3/configure
+@@ -2825,7 +2825,7 @@ ac_config_headers="$ac_config_headers config.h"
+ ### am handles this now?  ORIGINAL_LD_FOR_MULTILIBS=$LD
+ 
+ # For libtool versioning info, format is CURRENT:REVISION:AGE
+-libtool_VERSION=6:16:0
++libtool_VERSION=6:17:0
+ 
+ 
+ # Find the rest of the source tree framework.
+diff --git a/libstdc++-v3/configure.ac b/libstdc++-v3/configure.ac
+index ccf1230..61158c2 100644
+--- a/libstdc++-v3/configure.ac
++++ b/libstdc++-v3/configure.ac
+@@ -12,7 +12,7 @@ AC_CONFIG_HEADER(config.h)
+ ### am handles this now?  ORIGINAL_LD_FOR_MULTILIBS=$LD
+ 
+ # For libtool versioning info, format is CURRENT:REVISION:AGE
+-libtool_VERSION=6:16:0
++libtool_VERSION=6:17:0
+ AC_SUBST(libtool_VERSION)
+ 
+ # Find the rest of the source tree framework.
+diff --git a/libstdc++-v3/testsuite/util/testsuite_abi.cc b/libstdc++-v3/testsuite/util/testsuite_abi.cc
+index ea100b6..f1f5ad6 100644
+--- a/libstdc++-v3/testsuite/util/testsuite_abi.cc
++++ b/libstdc++-v3/testsuite/util/testsuite_abi.cc
+@@ -194,6 +194,7 @@ check_version(symbol& test, bool added)
+       known_versions.push_back("GLIBCXX_3.4.14");
+       known_versions.push_back("GLIBCXX_3.4.15");
+       known_versions.push_back("GLIBCXX_3.4.16");
++      known_versions.push_back("GLIBCXX_3.4.17");
+       known_versions.push_back("GLIBCXX_LDBL_3.4");
+       known_versions.push_back("GLIBCXX_LDBL_3.4.7");
+       known_versions.push_back("GLIBCXX_LDBL_3.4.10");
+-- 
+1.7.0.4
+

@@ -1,7 +1,7 @@
 From ead753a2ac74bd306d240de4760b7f809c581052 Mon Sep 17 00:00:00 2001
 From: burnus <burnus@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 26 Apr 2011 08:41:31 +0000
-Subject: [PATCH 180/200] 2011-04-26  Tobias Burnus  <burnus@net-b.de>
+Subject: [PATCH] 2011-04-26  Tobias Burnus  <burnus@net-b.de>
 
         PR fortran/48588
         * parse.c (resolve_all_program_units): Skip modules.

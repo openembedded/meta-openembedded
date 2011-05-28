@@ -1,0 +1,188 @@
+From 4114bb38c8cffb97435ae4bdb6b7bef89d5228d6 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 20 May 2011 19:02:42 +0000
+Subject: [PATCH] 	PR c++/48948
+ 	* class.c (finalize_literal_type_property): Only check
+ 	for constexpr member functions of non-literal class.
+ 	* decl.c (cp_finish_decl): Don't call validate_constexpr_fundecl.
+ 	* semantics.c (literal_type_p): Call complete_type.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173975 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e1b8645..d412232 100644
+--- a/gcc/cp/class.c
++++ b/gcc/cp/class.c
+@@ -4559,10 +4559,17 @@ finalize_literal_type_property (tree t)
+ 	   && !TYPE_HAS_CONSTEXPR_CTOR (t))
+     CLASSTYPE_LITERAL_P (t) = false;
+ 
+-  for (fn = TYPE_METHODS (t); fn; fn = DECL_CHAIN (fn))
+-    if (DECL_DECLARED_CONSTEXPR_P (fn)
+-	&& TREE_CODE (fn) != TEMPLATE_DECL)
+-      validate_constexpr_fundecl (fn);
++  if (!CLASSTYPE_LITERAL_P (t))
++    for (fn = TYPE_METHODS (t); fn; fn = DECL_CHAIN (fn))
++      if (DECL_DECLARED_CONSTEXPR_P (fn)
++	  && TREE_CODE (fn) != TEMPLATE_DECL
++	  && DECL_NONSTATIC_MEMBER_FUNCTION_P (fn)
++	  && !DECL_CONSTRUCTOR_P (fn))
++	{
++	  DECL_DECLARED_CONSTEXPR_P (fn) = false;
++	  if (!DECL_TEMPLATE_INFO (fn))
++	    error ("enclosing class of %q+#D is not a literal type", fn);
++	}
+ }
+ 
+ /* Check the validity of the bases and members declared in T.  Add any
+diff --git a/gcc/cp/decl.c b/gcc/cp/decl.c
+index 81d5db3..2905b49 100644
+--- a/gcc/cp/decl.c
++++ b/gcc/cp/decl.c
+@@ -5797,13 +5797,7 @@ cp_finish_decl (tree decl, tree init, bool init_const_expr_p,
+ 	}
+     }
+ 
+-  if (TREE_CODE (decl) == FUNCTION_DECL
+-      /* For members, defer until finalize_literal_type_property.  */
+-      && (!DECL_CLASS_SCOPE_P (decl)
+-	  || !TYPE_BEING_DEFINED (DECL_CONTEXT (decl))))
+-    validate_constexpr_fundecl (decl);
+-
+-  else if (!ensure_literal_type_for_constexpr_object (decl))
++  if (!ensure_literal_type_for_constexpr_object (decl))
+     DECL_DECLARED_CONSTEXPR_P (decl) = 0;
+ 
+   if (init && TREE_CODE (decl) == FUNCTION_DECL)
+diff --git a/gcc/cp/semantics.c b/gcc/cp/semantics.c
+index 6083376..bd33bac 100644
+--- a/gcc/cp/semantics.c
++++ b/gcc/cp/semantics.c
+@@ -5327,7 +5327,7 @@ literal_type_p (tree t)
+   if (SCALAR_TYPE_P (t))
+     return true;
+   if (CLASS_TYPE_P (t))
+-    return CLASSTYPE_LITERAL_P (t);
++    return CLASSTYPE_LITERAL_P (complete_type (t));
+   if (TREE_CODE (t) == ARRAY_TYPE)
+     return literal_type_p (strip_array_types (t));
+   return false;
+@@ -5439,6 +5439,7 @@ is_valid_constexpr_fn (tree fun, bool complain)
+ 		   rettype, fun);
+ 	}
+ 
++      /* Check this again here for cxx_eval_call_expression.  */
+       if (DECL_NONSTATIC_MEMBER_FUNCTION_P (fun)
+ 	  && !CLASSTYPE_LITERAL_P (DECL_CONTEXT (fun)))
+ 	{
+new file mode 100644
+index 0000000..f1d9cce
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-friend.C
+@@ -0,0 +1,23 @@
++// PR c++/48948
++// { dg-options -std=c++0x }
++
++struct A { A(); };
++
++struct B {
++  friend constexpr int f(B) { return 0; } // OK
++  friend constexpr int f(A) { return 0; } // { dg-error "constexpr" }
++};
++
++template <class T>
++struct C
++{
++  friend constexpr int f(C) { return 0; }
++  friend constexpr int g(C, A) { return 0; } // { dg-error "double" }
++  constexpr int m(C) { return 0; }
++  constexpr int m(A) { return 0; } // { dg-error "double" }
++};
++
++constexpr int i = f(C<int>());
++constexpr int j = C<int>().m(C<int>());
++constexpr int k = C<double>().m(A()); // { dg-error "not a constexpr function" }
++constexpr int l = g(C<double>(),A()); // { dg-error "not a constexpr function" }
+diff --git a/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete1.C b/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete1.C
+new file mode 100644
+index 0000000..71372d2
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete1.C
+@@ -0,0 +1,7 @@
++// { dg-options -std=c++0x }
++
++struct A
++{
++  static constexpr A a = 1;	// { dg-error "incomplete|literal" }
++  constexpr A(int i) { }
++};
+diff --git a/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete2.C b/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete2.C
+new file mode 100644
+index 0000000..dc0b742
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete2.C
+@@ -0,0 +1,31 @@
++// A constructor that might or might not be constexpr still makes
++// its class literal.
++// { dg-options -std=c++0x }
++
++template <class T>
++struct B
++{
++  constexpr B(T) { }
++  constexpr B() {}
++};
++
++struct A
++{
++  B<A> b;
++};
++
++constexpr A a {};
++
++template <class T>
++struct C
++{
++  constexpr C(T) { }
++  C() {}
++};
++
++struct D
++{
++  C<D> c;
++};
++
++constexpr D d {};		// { dg-error "not a constexpr function" }
+diff --git a/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete3.C b/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete3.C
+new file mode 100644
+index 0000000..81822b0
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-incomplete3.C
+@@ -0,0 +1,12 @@
++// PR c++/49015
++// { dg-options -std=c++0x }
++
++class A;
++
++class B {
++  friend constexpr B f(A); // Line 5
++};
++
++class A {};
++
++constexpr B f(A) { return B(); } // Line 10
+diff --git a/gcc/testsuite/g++.dg/cpp0x/constexpr-memfn1.C b/gcc/testsuite/g++.dg/cpp0x/constexpr-memfn1.C
+index 4646f82..ef7ac6b 100644
+--- a/gcc/testsuite/g++.dg/cpp0x/constexpr-memfn1.C
++++ b/gcc/testsuite/g++.dg/cpp0x/constexpr-memfn1.C
+@@ -13,6 +13,6 @@ constexpr X X::g(X x) { return x; }
+ struct Y
+ {
+   Y() { }
+-  constexpr Y f(Y y);		// { dg-error "constexpr" }
+-  static constexpr Y g(Y y);	// { dg-error "constexpr" }
++  constexpr Y f(Y y);		// { dg-error "not a literal type" }
++  static constexpr Y g(Y y) {}	// { dg-error "constexpr" }
+ };
+-- 
+1.7.0.4
+

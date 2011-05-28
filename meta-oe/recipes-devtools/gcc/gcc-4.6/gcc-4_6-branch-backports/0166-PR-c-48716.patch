@@ -1,7 +1,7 @@
 From 3a3d51cb4f1ec33265471b03d21b96d30e899858 Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 22 Apr 2011 14:11:44 +0000
-Subject: [PATCH 166/200] 	PR c/48716
+Subject: [PATCH] 	PR c/48716
  	* gimplify.c (gimplify_bind_expr): Mark as GOVD_LOCAL also
  	TREE_STATIC variables declared inside of some OpenMP construct.
 

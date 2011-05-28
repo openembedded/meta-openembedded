@@ -1,0 +1,216 @@
+From b23f5c480c106bc2d61b85263db9cb51d321dbc8 Mon Sep 17 00:00:00 2001
+From: meissner <meissner@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Tue, 10 May 2011 19:59:20 +0000
+Subject: [PATCH] Fix PRs 48857, 48495
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173634 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 5019347..898a87b 100644
+--- a/gcc/config/rs6000/rs6000.c
++++ b/gcc/config/rs6000/rs6000.c
+@@ -7891,7 +7891,7 @@ rs6000_emit_move (rtx dest, rtx source, enum machine_mode mode)
+ 
+ /* Nonzero if we can use an AltiVec register to pass this arg.  */
+ #define USE_ALTIVEC_FOR_ARG_P(CUM,MODE,TYPE,NAMED)		\
+-  ((ALTIVEC_VECTOR_MODE (MODE) || VSX_VECTOR_MODE (MODE))	\
++  (ALTIVEC_OR_VSX_VECTOR_MODE (MODE)				\
+    && (CUM)->vregno <= ALTIVEC_ARG_MAX_REG			\
+    && TARGET_ALTIVEC_ABI					\
+    && (NAMED))
+@@ -8091,8 +8091,7 @@ init_cumulative_args (CUMULATIVE_ARGS *cum, tree fntype,
+ 	    }
+ 	  if (SCALAR_FLOAT_MODE_P (return_mode))
+ 	    rs6000_passes_float = true;
+-	  else if (ALTIVEC_VECTOR_MODE (return_mode)
+-		   || VSX_VECTOR_MODE (return_mode)
++	  else if (ALTIVEC_OR_VSX_VECTOR_MODE (return_mode)
+ 		   || SPE_VECTOR_MODE (return_mode))
+ 	    rs6000_passes_vector = true;
+ 	}
+@@ -8190,7 +8189,7 @@ function_arg_padding (enum machine_mode mode, const_tree type)
+    existing library interfaces.
+ 
+    Doubleword align SPE vectors.
+-   Quadword align Altivec vectors.
++   Quadword align Altivec/VSX vectors.
+    Quadword align large synthetic vector types.   */
+ 
+ static unsigned int
+@@ -8207,7 +8206,7 @@ rs6000_function_arg_boundary (enum machine_mode mode, const_tree type)
+ 	       && int_size_in_bytes (type) >= 8
+ 	       && int_size_in_bytes (type) < 16))
+     return 64;
+-  else if ((ALTIVEC_VECTOR_MODE (mode) || VSX_VECTOR_MODE (mode))
++  else if (ALTIVEC_OR_VSX_VECTOR_MODE (mode)
+ 	   || (type && TREE_CODE (type) == VECTOR_TYPE
+ 	       && int_size_in_bytes (type) >= 16))
+     return 128;
+@@ -8427,7 +8426,7 @@ rs6000_function_arg_advance_1 (CUMULATIVE_ARGS *cum, enum machine_mode mode,
+     {
+       if (SCALAR_FLOAT_MODE_P (mode))
+ 	rs6000_passes_float = true;
+-      else if (named && (ALTIVEC_VECTOR_MODE (mode) || VSX_VECTOR_MODE (mode)))
++      else if (named && ALTIVEC_OR_VSX_VECTOR_MODE (mode))
+ 	rs6000_passes_vector = true;
+       else if (SPE_VECTOR_MODE (mode)
+ 	       && !cum->stdarg
+@@ -8437,8 +8436,7 @@ rs6000_function_arg_advance_1 (CUMULATIVE_ARGS *cum, enum machine_mode mode,
+ #endif
+ 
+   if (TARGET_ALTIVEC_ABI
+-      && (ALTIVEC_VECTOR_MODE (mode)
+-	  || VSX_VECTOR_MODE (mode)
++      && (ALTIVEC_OR_VSX_VECTOR_MODE (mode)
+ 	  || (type && TREE_CODE (type) == VECTOR_TYPE
+ 	      && int_size_in_bytes (type) == 16)))
+     {
+@@ -9056,8 +9054,7 @@ rs6000_function_arg (CUMULATIVE_ARGS *cum, enum machine_mode mode,
+     else
+       return gen_rtx_REG (mode, cum->vregno);
+   else if (TARGET_ALTIVEC_ABI
+-	   && (ALTIVEC_VECTOR_MODE (mode)
+-	       || VSX_VECTOR_MODE (mode)
++	   && (ALTIVEC_OR_VSX_VECTOR_MODE (mode)
+ 	       || (type && TREE_CODE (type) == VECTOR_TYPE
+ 		   && int_size_in_bytes (type) == 16)))
+     {
+@@ -19983,7 +19980,7 @@ emit_frame_save (rtx frame_reg, rtx frame_ptr, enum machine_mode mode,
+ 
+   /* Some cases that need register indexed addressing.  */
+   if ((TARGET_ALTIVEC_ABI && ALTIVEC_VECTOR_MODE (mode))
+-      || (TARGET_VSX && VSX_VECTOR_MODE (mode))
++      || (TARGET_VSX && ALTIVEC_OR_VSX_VECTOR_MODE (mode))
+       || (TARGET_E500_DOUBLE && mode == DFmode)
+       || (TARGET_SPE_ABI
+ 	  && SPE_VECTOR_MODE (mode)
+@@ -27266,13 +27263,12 @@ rs6000_function_value (const_tree valtype,
+   else if (TREE_CODE (valtype) == COMPLEX_TYPE
+ 	   && targetm.calls.split_complex_arg)
+     return rs6000_complex_function_value (mode);
++  /* VSX is a superset of Altivec and adds V2DImode/V2DFmode.  Since the same
++     return register is used in both cases, and we won't see V2DImode/V2DFmode
++     for pure altivec, combine the two cases.  */
+   else if (TREE_CODE (valtype) == VECTOR_TYPE
+ 	   && TARGET_ALTIVEC && TARGET_ALTIVEC_ABI
+-	   && ALTIVEC_VECTOR_MODE (mode))
+-    regno = ALTIVEC_ARG_RETURN;
+-  else if (TREE_CODE (valtype) == VECTOR_TYPE
+-	   && TARGET_VSX && TARGET_ALTIVEC_ABI
+-	   && VSX_VECTOR_MODE (mode))
++	   && ALTIVEC_OR_VSX_VECTOR_MODE (mode))
+     regno = ALTIVEC_ARG_RETURN;
+   else if (TARGET_E500_DOUBLE && TARGET_HARD_FLOAT
+ 	   && (mode == DFmode || mode == DCmode
+@@ -27312,12 +27308,12 @@ rs6000_libcall_value (enum machine_mode mode)
+ 	   && TARGET_HARD_FLOAT && TARGET_FPRS
+            && ((TARGET_SINGLE_FLOAT && mode == SFmode) || TARGET_DOUBLE_FLOAT))
+     regno = FP_ARG_RETURN;
+-  else if (ALTIVEC_VECTOR_MODE (mode)
++  /* VSX is a superset of Altivec and adds V2DImode/V2DFmode.  Since the same
++     return register is used in both cases, and we won't see V2DImode/V2DFmode
++     for pure altivec, combine the two cases.  */
++  else if (ALTIVEC_OR_VSX_VECTOR_MODE (mode)
+ 	   && TARGET_ALTIVEC && TARGET_ALTIVEC_ABI)
+     regno = ALTIVEC_ARG_RETURN;
+-  else if (VSX_VECTOR_MODE (mode)
+-	   && TARGET_VSX && TARGET_ALTIVEC_ABI)
+-    regno = ALTIVEC_ARG_RETURN;
+   else if (COMPLEX_MODE_P (mode) && targetm.calls.split_complex_arg)
+     return rs6000_complex_function_value (mode);
+   else if (TARGET_E500_DOUBLE && TARGET_HARD_FLOAT
+diff --git a/gcc/config/rs6000/rs6000.h b/gcc/config/rs6000/rs6000.h
+index 4913456..72b47ec 100644
+--- a/gcc/config/rs6000/rs6000.h
++++ b/gcc/config/rs6000/rs6000.h
+@@ -1007,10 +1007,9 @@ extern unsigned rs6000_pointer_size;
+ 
+ /* When setting up caller-save slots (MODE == VOIDmode) ensure we allocate
+    enough space to account for vectors in FP regs. */
+-#define HARD_REGNO_CALLER_SAVE_MODE(REGNO, NREGS, MODE)	\
+-  (TARGET_VSX						\
+-   && ((MODE) == VOIDmode || VSX_VECTOR_MODE (MODE)	\
+-       || ALTIVEC_VECTOR_MODE (MODE))			\
++#define HARD_REGNO_CALLER_SAVE_MODE(REGNO, NREGS, MODE)			\
++  (TARGET_VSX								\
++   && ((MODE) == VOIDmode || ALTIVEC_OR_VSX_VECTOR_MODE (MODE))		\
+    && FP_REGNO_P (REGNO)				\
+    ? V2DFmode						\
+    : choose_hard_reg_mode ((REGNO), (NREGS), false))
+@@ -1026,25 +1025,16 @@ extern unsigned rs6000_pointer_size;
+ 	 ((MODE) == V4SFmode		\
+ 	  || (MODE) == V2DFmode)	\
+ 
+-#define VSX_SCALAR_MODE(MODE)		\
+-	((MODE) == DFmode)
+-
+-#define VSX_MODE(MODE)			\
+-	(VSX_VECTOR_MODE (MODE)		\
+-	 || VSX_SCALAR_MODE (MODE))
+-
+-#define VSX_MOVE_MODE(MODE)		\
+-	(VSX_VECTOR_MODE (MODE)		\
+-	 || VSX_SCALAR_MODE (MODE)	\
+-	 || ALTIVEC_VECTOR_MODE (MODE)	\
+-	 || (MODE) == TImode)
+-
+ #define ALTIVEC_VECTOR_MODE(MODE)	\
+ 	 ((MODE) == V16QImode		\
+ 	  || (MODE) == V8HImode		\
+ 	  || (MODE) == V4SFmode		\
+ 	  || (MODE) == V4SImode)
+ 
++#define ALTIVEC_OR_VSX_VECTOR_MODE(MODE)				\
++  (ALTIVEC_VECTOR_MODE (MODE) || VSX_VECTOR_MODE (MODE)			\
++   || (MODE) == V2DImode)
++
+ #define SPE_VECTOR_MODE(MODE)		\
+ 	((MODE) == V4HImode          	\
+          || (MODE) == V2SFmode          \
+@@ -1080,10 +1070,10 @@ extern unsigned rs6000_pointer_size;
+    ? ALTIVEC_VECTOR_MODE (MODE2)		\
+    : ALTIVEC_VECTOR_MODE (MODE2)		\
+    ? ALTIVEC_VECTOR_MODE (MODE1)		\
+-   : VSX_VECTOR_MODE (MODE1)			\
+-   ? VSX_VECTOR_MODE (MODE2)			\
+-   : VSX_VECTOR_MODE (MODE2)			\
+-   ? VSX_VECTOR_MODE (MODE1)			\
++   : ALTIVEC_OR_VSX_VECTOR_MODE (MODE1)		\
++   ? ALTIVEC_OR_VSX_VECTOR_MODE (MODE2)		\
++   : ALTIVEC_OR_VSX_VECTOR_MODE (MODE2)		\
++   ? ALTIVEC_OR_VSX_VECTOR_MODE (MODE1)		\
+    : 1)
+ 
+ /* Post-reload, we can't use any new AltiVec registers, as we already
+new file mode 100644
+index 0000000..e8201c0
+--- /dev/null
++++ b/gcc/testsuite/gcc.target/powerpc/pr48857.c
+@@ -0,0 +1,25 @@
++/* { dg-do compile { target { powerpc*-*-* } } } */
++/* { dg-skip-if "" { powerpc*-*-darwin* } { "*" } { "" } } */
++/* { dg-require-effective-target powerpc_vsx_ok } */
++/* { dg-options "-O2 -mcpu=power7 -mabi=altivec" } */
++/* { dg-final { scan-assembler-times "lxvd2x" 1 } } */
++/* { dg-final { scan-assembler-times "stxvd2x" 1 } } */
++/* { dg-final { scan-assembler-not "ld" } } */
++/* { dg-final { scan-assembler-not "lwz" } } */
++/* { dg-final { scan-assembler-not "stw" } } */
++/* { dg-final { scan-assembler-not "addi" } } */
++
++typedef vector long long v2di_type;
++
++v2di_type
++return_v2di (v2di_type *ptr)
++{
++  return *ptr;		/* should generate lxvd2x 34,0,3.  */
++}
++
++void
++pass_v2di (v2di_type arg, v2di_type *ptr)
++{
++  *ptr = arg;		/* should generate stxvd2x 34,0,{3,5}.  */
++}
++
+-- 
+1.7.0.4
+

@@ -1,7 +1,7 @@
 From 1e8081c83aa5101ccca523ce8448282bece491ff Mon Sep 17 00:00:00 2001
 From: jakub <jakub@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Thu, 7 Apr 2011 18:05:08 +0000
-Subject: [PATCH 079/200] 	PR debug/48343
+Subject: [PATCH] 	PR debug/48343
  	* combine.c (combine_instructions): Add last_combined_insn,
  	update it if insn is after it, pass it to all try_combine
  	calls.

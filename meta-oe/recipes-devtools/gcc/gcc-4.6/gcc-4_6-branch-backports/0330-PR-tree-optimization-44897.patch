@@ -1,0 +1,24 @@
+From 897d9c798309e5aabcd9adc8f9c25b018232fdf6 Mon Sep 17 00:00:00 2001
+From: hubicka <hubicka@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 11:36:49 +0000
+Subject: [PATCH] 	PR tree-optimization/44897
+ 	* ipa-inline.c (cgraph_decide_recursive_inlining): Do not divide
+ 	by zero for insane profiles.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174183 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index cbda4be..62e1610 100644
+--- a/gcc/ipa-inline.c
++++ b/gcc/ipa-inline.c
+@@ -895,7 +895,7 @@ cgraph_decide_recursive_inlining (struct cgraph_node *node,
+ 	  continue;
+ 	}
+ 
+-      if (max_count)
++      if (max_count && node->count)
+ 	{
+           if (!cgraph_maybe_hot_edge_p (curr))
+ 	    {
+-- 
+1.7.0.4
+

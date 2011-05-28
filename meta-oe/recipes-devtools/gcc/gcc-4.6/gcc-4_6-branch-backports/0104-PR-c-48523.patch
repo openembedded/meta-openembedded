@@ -1,7 +1,7 @@
 From 514b92d849b08f3fb7a8194a822b0b8609776564 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 12 Apr 2011 00:20:18 +0000
-Subject: [PATCH 104/200] 	PR c++/48523
+Subject: [PATCH] 	PR c++/48523
  	* tree.c (maybe_dummy_object): Use build_x_indirect_ref rather
  	than cp_build_indirect_ref.
 

@@ -1,0 +1,640 @@
+2011-05-13  Revital Eres  <revital.eres@linaro.org>
+
+	gcc/
+	* loop-doloop.c (doloop_condition_get): Support new form of
+	doloop pattern and use prev_nondebug_insn instead of PREV_INSN.
+	* config/arm/thumb2.md (*thumb2_addsi3_compare0): Remove "*".
+	(doloop_end): New.
+	* config/arm/arm.md (*addsi3_compare0): Remove "*".
+	* params.def (sms-min-sc): New param flag.
+	* doc/invoke.texi (sms-min-sc): Document it.
+	* ddg.c (create_ddg_dep_from_intra_loop_link): If a true dep edge
+	enters the branch create an anti edge in the opposite direction
+	to prevent the creation of reg-moves.
+	* modulo-sched.c: Adjust comment to reflect the fact we are
+	scheduling closing branch.
+	(PS_STAGE_COUNT): Rename to CALC_STAGE_COUNT and redefine.
+	(stage_count): New field in struct partial_schedule.
+	(calculate_stage_count): New function.
+	(normalize_sched_times): Rename to reset_sched_times and handle
+	incrementing the sched time of the nodes by a constant value
+	passed as parameter.
+	(duplicate_insns_of_cycles): Skip closing branch.
+	(sms_schedule_by_order): Schedule closing branch.
+	(ps_insn_find_column): Handle closing branch.
+	(sms_schedule): Call reset_sched_times and adjust the code to
+	support scheduling of the closing branch. Use sms-min-sc.
+	Support new form of doloop pattern.
+	(ps_insert_empty_row): Update calls to normalize_sched_times
+	and rotate_partial_schedule functions.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-05-06 11:28:27 +0000
++++ new/gcc/config/arm/arm.md	2011-05-13 13:42:39 +0000
+@@ -791,7 +791,7 @@
+   ""
+ )
+ 
+-(define_insn "*addsi3_compare0"
++(define_insn "addsi3_compare0"
+   [(set (reg:CC_NOOV CC_REGNUM)
+ 	(compare:CC_NOOV
+ 	 (plus:SI (match_operand:SI 1 "s_register_operand" "r, r")
+
+=== modified file 'gcc/config/arm/thumb2.md'
+--- old/gcc/config/arm/thumb2.md	2011-01-03 20:52:22 +0000
++++ new/gcc/config/arm/thumb2.md	2011-05-11 07:15:47 +0000
+@@ -836,7 +836,7 @@
+   "operands[4] = GEN_INT (- INTVAL (operands[2]));"
+ )
+ 
+-(define_insn "*thumb2_addsi3_compare0"
++(define_insn "thumb2_addsi3_compare0"
+   [(set (reg:CC_NOOV CC_REGNUM)
+ 	(compare:CC_NOOV
+ 	  (plus:SI (match_operand:SI 1 "s_register_operand" "l,  0, r")
+@@ -1118,3 +1118,54 @@
+   "
+   operands[2] = GEN_INT (32 - INTVAL (operands[2]));
+   ")
++
++;; Define the subtract-one-and-jump insns so loop.c
++;; knows what to generate.
++(define_expand "doloop_end"
++  [(use (match_operand 0 "" ""))      ; loop pseudo
++   (use (match_operand 1 "" ""))      ; iterations; zero if unknown
++   (use (match_operand 2 "" ""))      ; max iterations
++   (use (match_operand 3 "" ""))      ; loop level
++   (use (match_operand 4 "" ""))]     ; label
++  "TARGET_32BIT"
++  "
++ {
++   /* Currently SMS relies on the do-loop pattern to recognize loops
++      where (1) the control part consists of all insns defining and/or
++      using a certain 'count' register and (2) the loop count can be
++      adjusted by modifying this register prior to the loop.
++      ??? The possible introduction of a new block to initialize the
++      new IV can potentially affect branch optimizations.  */
++   if (optimize > 0 && flag_modulo_sched)
++   {
++     rtx s0;
++     rtx bcomp;
++     rtx loc_ref;
++     rtx cc_reg;
++     rtx insn;
++     rtx cmp;
++
++    /* Only use this on innermost loops.  */
++     if (INTVAL (operands[3]) > 1)
++       FAIL;
++     if (GET_MODE (operands[0]) != SImode)
++       FAIL;
++
++     s0 = operands [0];
++     if (TARGET_THUMB2)
++       insn = emit_insn (gen_thumb2_addsi3_compare0 (s0, s0, GEN_INT (-1)));
++     else
++       insn = emit_insn (gen_addsi3_compare0 (s0, s0, GEN_INT (-1)));
++
++     cmp = XVECEXP (PATTERN (insn), 0, 0);
++     cc_reg = SET_DEST (cmp);
++     bcomp = gen_rtx_NE (VOIDmode, cc_reg, const0_rtx);
++     loc_ref = gen_rtx_LABEL_REF (VOIDmode, operands [4]);
++     emit_jump_insn (gen_rtx_SET (VOIDmode, pc_rtx,
++                                  gen_rtx_IF_THEN_ELSE (VOIDmode, bcomp,
++                                                        loc_ref, pc_rtx)));
++     DONE;
++   }else
++      FAIL;
++}")
++
+
+=== modified file 'gcc/ddg.c'
+--- old/gcc/ddg.c	2010-11-30 11:41:24 +0000
++++ new/gcc/ddg.c	2011-05-11 07:15:47 +0000
+@@ -197,6 +197,11 @@
+         }
+     }
+ 
++  /* If a true dep edge enters the branch create an anti edge in the
++     opposite direction to prevent the creation of reg-moves.  */
++  if ((DEP_TYPE (link) == REG_DEP_TRUE) && JUMP_P (dest_node->insn))
++    create_ddg_dep_no_link (g, dest_node, src_node, ANTI_DEP, REG_DEP, 1);
++
+    latency = dep_cost (link);
+    e = create_ddg_edge (src_node, dest_node, t, dt, latency, distance);
+    add_edge_to_ddg (g, e);
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2011-04-18 11:31:29 +0000
++++ new/gcc/doc/invoke.texi	2011-05-11 07:15:47 +0000
+@@ -8730,6 +8730,10 @@
+ The maximum number of best instructions in the ready list that are considered
+ for renaming in the selective scheduler.  The default value is 2.
+ 
++@item sms-min-sc
++The minimum value of stage count that swing modulo scheduler will
++generate.  The default value is 2.
++
+ @item max-last-value-rtl
+ The maximum size measured as number of RTLs that can be recorded in an expression
+ in combiner for a pseudo register as last known value of that register.  The default
+
+=== modified file 'gcc/loop-doloop.c'
+--- old/gcc/loop-doloop.c	2010-11-30 11:41:24 +0000
++++ new/gcc/loop-doloop.c	2011-05-11 07:15:47 +0000
+@@ -78,6 +78,8 @@
+   rtx inc_src;
+   rtx condition;
+   rtx pattern;
++  rtx cc_reg = NULL_RTX;
++  rtx reg_orig = NULL_RTX;
+ 
+   /* The canonical doloop pattern we expect has one of the following
+      forms:
+@@ -96,7 +98,16 @@
+      2)  (set (reg) (plus (reg) (const_int -1))
+          (set (pc) (if_then_else (reg != 0)
+ 	                         (label_ref (label))
+-			         (pc))).  */
++			         (pc))).  
++
++     Some targets (ARM) do the comparison before the branch, as in the
++     following form:
++
++     3) (parallel [(set (cc) (compare ((plus (reg) (const_int -1), 0)))
++                   (set (reg) (plus (reg) (const_int -1)))])
++        (set (pc) (if_then_else (cc == NE)
++                                (label_ref (label))
++                                (pc))) */
+ 
+   pattern = PATTERN (doloop_pat);
+ 
+@@ -104,19 +115,47 @@
+     {
+       rtx cond;
+       rtx prev_insn = prev_nondebug_insn (doloop_pat);
++      rtx cmp_arg1, cmp_arg2;
++      rtx cmp_orig;
+ 
+-      /* We expect the decrement to immediately precede the branch.  */
++      /* In case the pattern is not PARALLEL we expect two forms
++	 of doloop which are cases 2) and 3) above: in case 2) the
++	 decrement immediately precedes the branch, while in case 3)
++	 the compare and decrement instructions immediately precede
++	 the branch.  */
+ 
+       if (prev_insn == NULL_RTX || !INSN_P (prev_insn))
+         return 0;
+ 
+       cmp = pattern;
+-      inc = PATTERN (PREV_INSN (doloop_pat));
++      if (GET_CODE (PATTERN (prev_insn)) == PARALLEL)
++        {
++	  /* The third case: the compare and decrement instructions
++	     immediately precede the branch.  */
++	  cmp_orig = XVECEXP (PATTERN (prev_insn), 0, 0);
++	  if (GET_CODE (cmp_orig) != SET)
++	    return 0;
++	  if (GET_CODE (SET_SRC (cmp_orig)) != COMPARE)
++	    return 0;
++	  cmp_arg1 = XEXP (SET_SRC (cmp_orig), 0);
++          cmp_arg2 = XEXP (SET_SRC (cmp_orig), 1);
++	  if (cmp_arg2 != const0_rtx 
++	      || GET_CODE (cmp_arg1) != PLUS)
++	    return 0;
++	  reg_orig = XEXP (cmp_arg1, 0);
++	  if (XEXP (cmp_arg1, 1) != GEN_INT (-1) 
++	      || !REG_P (reg_orig))
++	    return 0;
++	  cc_reg = SET_DEST (cmp_orig);
++	  
++	  inc = XVECEXP (PATTERN (prev_insn), 0, 1);
++	}
++      else
++        inc = PATTERN (prev_insn);
+       /* We expect the condition to be of the form (reg != 0)  */
+       cond = XEXP (SET_SRC (cmp), 0);
+       if (GET_CODE (cond) != NE || XEXP (cond, 1) != const0_rtx)
+         return 0;
+-
+     }
+   else
+     {
+@@ -162,11 +201,15 @@
+     return 0;
+ 
+   if ((XEXP (condition, 0) == reg)
++      /* For the third case:  */  
++      || ((cc_reg != NULL_RTX)
++	  && (XEXP (condition, 0) == cc_reg)
++	  && (reg_orig == reg))
+       || (GET_CODE (XEXP (condition, 0)) == PLUS
+-		   && XEXP (XEXP (condition, 0), 0) == reg))
++	  && XEXP (XEXP (condition, 0), 0) == reg))
+    {
+      if (GET_CODE (pattern) != PARALLEL)
+-     /*  The second form we expect:
++     /*  For the second form we expect:
+ 
+          (set (reg) (plus (reg) (const_int -1))
+          (set (pc) (if_then_else (reg != 0)
+@@ -181,7 +224,24 @@
+                      (set (reg) (plus (reg) (const_int -1)))
+                      (additional clobbers and uses)])
+ 
+-         So we return that form instead.
++        For the third form we expect:
++
++        (parallel [(set (cc) (compare ((plus (reg) (const_int -1)), 0))
++                   (set (reg) (plus (reg) (const_int -1)))])
++        (set (pc) (if_then_else (cc == NE)
++                                (label_ref (label))
++                                (pc))) 
++
++        which is equivalent to the following:
++
++        (parallel [(set (cc) (compare (reg,  1))
++                   (set (reg) (plus (reg) (const_int -1)))
++                   (set (pc) (if_then_else (NE == cc)
++                                           (label_ref (label))
++                                           (pc))))])
++
++        So we return the second form instead for the two cases.
++
+      */
+         condition = gen_rtx_fmt_ee (NE, VOIDmode, inc_src, const1_rtx);
+ 
+
+=== modified file 'gcc/modulo-sched.c'
+--- old/gcc/modulo-sched.c	2011-02-14 17:59:10 +0000
++++ new/gcc/modulo-sched.c	2011-05-11 07:15:47 +0000
+@@ -84,14 +84,13 @@
+       II cycles (i.e. use register copies to prevent a def from overwriting
+       itself before reaching the use).
+ 
+-    SMS works with countable loops (1) whose control part can be easily
+-    decoupled from the rest of the loop and (2) whose loop count can
+-    be easily adjusted.  This is because we peel a constant number of
+-    iterations into a prologue and epilogue for which we want to avoid
+-    emitting the control part, and a kernel which is to iterate that
+-    constant number of iterations less than the original loop.  So the
+-    control part should be a set of insns clearly identified and having
+-    its own iv, not otherwise used in the loop (at-least for now), which
++    SMS works with countable loops whose loop count can be easily
++    adjusted.  This is because we peel a constant number of iterations
++    into a prologue and epilogue for which we want to avoid emitting
++    the control part, and a kernel which is to iterate that constant
++    number of iterations less than the original loop.  So the control
++    part should be a set of insns clearly identified and having its
++    own iv, not otherwise used in the loop (at-least for now), which
+     initializes a register before the loop to the number of iterations.
+     Currently SMS relies on the do-loop pattern to recognize such loops,
+     where (1) the control part comprises of all insns defining and/or
+@@ -116,8 +115,10 @@
+ 
+ /* The number of different iterations the nodes in ps span, assuming
+    the stage boundaries are placed efficiently.  */
+-#define PS_STAGE_COUNT(ps) ((PS_MAX_CYCLE (ps) - PS_MIN_CYCLE (ps) \
+-			     + 1 + (ps)->ii - 1) / (ps)->ii)
++#define CALC_STAGE_COUNT(max_cycle,min_cycle,ii) ((max_cycle - min_cycle \
++                         + 1 + ii - 1) / ii)
++/* The stage count of ps.  */
++#define PS_STAGE_COUNT(ps) (((partial_schedule_ptr)(ps))->stage_count)
+ 
+ /* A single instruction in the partial schedule.  */
+ struct ps_insn
+@@ -155,6 +156,8 @@
+   int max_cycle;
+ 
+   ddg_ptr g;	/* The DDG of the insns in the partial schedule.  */
++
++  int stage_count;  /* The stage count of the partial schedule.  */
+ };
+ 
+ /* We use this to record all the register replacements we do in
+@@ -195,7 +198,7 @@
+                                     rtx, rtx);
+ static void duplicate_insns_of_cycles (partial_schedule_ptr,
+ 				       int, int, int, rtx);
+-
++static int calculate_stage_count (partial_schedule_ptr ps);
+ #define SCHED_ASAP(x) (((node_sched_params_ptr)(x)->aux.info)->asap)
+ #define SCHED_TIME(x) (((node_sched_params_ptr)(x)->aux.info)->time)
+ #define SCHED_FIRST_REG_MOVE(x) \
+@@ -310,10 +313,10 @@
+      either a single (parallel) branch-on-count or a (non-parallel)
+      branch immediately preceded by a single (decrement) insn.  */
+   first_insn_not_to_check = (GET_CODE (PATTERN (tail)) == PARALLEL ? tail
+-                             : PREV_INSN (tail));
++                             : prev_nondebug_insn (tail));
+ 
+   for (insn = head; insn != first_insn_not_to_check; insn = NEXT_INSN (insn))
+-    if (reg_mentioned_p (reg, insn))
++    if (reg_mentioned_p (reg, insn) && !DEBUG_INSN_P (insn))
+       {
+         if (dump_file)
+         {
+@@ -569,13 +572,12 @@
+     }
+ }
+ 
+-/* Bump the SCHED_TIMEs of all nodes to start from zero.  Set the values
+-   of SCHED_ROW and SCHED_STAGE.  */
++/* Bump the SCHED_TIMEs of all nodes by AMOUNT.  Set the values of
++   SCHED_ROW and SCHED_STAGE.  */
+ static void
+-normalize_sched_times (partial_schedule_ptr ps)
++reset_sched_times (partial_schedule_ptr ps, int amount)
+ {
+   int row;
+-  int amount = PS_MIN_CYCLE (ps);
+   int ii = ps->ii;
+   ps_insn_ptr crr_insn;
+ 
+@@ -584,19 +586,43 @@
+       {
+ 	ddg_node_ptr u = crr_insn->node;
+ 	int normalized_time = SCHED_TIME (u) - amount;
++	int new_min_cycle = PS_MIN_CYCLE (ps) - amount;
++        int sc_until_cycle_zero, stage;
+ 
+-	if (dump_file)
+-	  fprintf (dump_file, "crr_insn->node=%d, crr_insn->cycle=%d,\
+-		   min_cycle=%d\n", crr_insn->node->cuid, SCHED_TIME
+-		   (u), ps->min_cycle);
++        if (dump_file)
++          {
++            /* Print the scheduling times after the rotation.  */
++            fprintf (dump_file, "crr_insn->node=%d (insn id %d), "
++                     "crr_insn->cycle=%d, min_cycle=%d", crr_insn->node->cuid,
++                     INSN_UID (crr_insn->node->insn), SCHED_TIME (u),
++                     normalized_time);
++            if (JUMP_P (crr_insn->node->insn))
++              fprintf (dump_file, " (branch)");
++            fprintf (dump_file, "\n");
++          }
++	
+ 	gcc_assert (SCHED_TIME (u) >= ps->min_cycle);
+ 	gcc_assert (SCHED_TIME (u) <= ps->max_cycle);
+ 	SCHED_TIME (u) = normalized_time;
+-	SCHED_ROW (u) = normalized_time % ii;
+-	SCHED_STAGE (u) = normalized_time / ii;
++	SCHED_ROW (u) = SMODULO (normalized_time, ii);
++      
++        /* The calculation of stage count is done adding the number
++           of stages before cycle zero and after cycle zero.  */
++	sc_until_cycle_zero = CALC_STAGE_COUNT (-1, new_min_cycle, ii);
++	
++	if (SCHED_TIME (u) < 0)
++	  {
++	    stage = CALC_STAGE_COUNT (-1, SCHED_TIME (u), ii);
++	    SCHED_STAGE (u) = sc_until_cycle_zero - stage;
++	  }
++	else
++	  {
++	    stage = CALC_STAGE_COUNT (SCHED_TIME (u), 0, ii);
++	    SCHED_STAGE (u) = sc_until_cycle_zero + stage - 1;
++	  }
+       }
+ }
+-
++ 
+ /* Set SCHED_COLUMN of each node according to its position in PS.  */
+ static void
+ set_columns_for_ps (partial_schedule_ptr ps)
+@@ -646,9 +672,12 @@
+ 
+         /* Do not duplicate any insn which refers to count_reg as it
+            belongs to the control part.
++           The closing branch is scheduled as well and thus should
++           be ignored.
+            TODO: This should be done by analyzing the control part of
+            the loop.  */
+-        if (reg_mentioned_p (count_reg, u_node->insn))
++        if (reg_mentioned_p (count_reg, u_node->insn)
++            || JUMP_P (ps_ij->node->insn))
+           continue;
+ 
+ 	if (for_prolog)
+@@ -1009,9 +1038,11 @@
+ 	continue;
+       }
+ 
+-      /* Don't handle BBs with calls or barriers, or !single_set insns,
+-         or auto-increment insns (to avoid creating invalid reg-moves
+-         for the auto-increment insns).
++      /* Don't handle BBs with calls or barriers or auto-increment insns 
++	 (to avoid creating invalid reg-moves for the auto-increment insns),
++	 or !single_set with the exception of instructions that include
++	 count_reg---these instructions are part of the control part
++	 that do-loop recognizes.
+          ??? Should handle auto-increment insns.
+          ??? Should handle insns defining subregs.  */
+      for (insn = head; insn != NEXT_INSN (tail); insn = NEXT_INSN (insn))
+@@ -1021,7 +1052,8 @@
+         if (CALL_P (insn)
+             || BARRIER_P (insn)
+             || (NONDEBUG_INSN_P (insn) && !JUMP_P (insn)
+-                && !single_set (insn) && GET_CODE (PATTERN (insn)) != USE)
++                && !single_set (insn) && GET_CODE (PATTERN (insn)) != USE
++                && !reg_mentioned_p (count_reg, insn))
+             || (FIND_REG_INC_NOTE (insn, NULL_RTX) != 0)
+             || (INSN_P (insn) && (set = single_set (insn))
+                 && GET_CODE (SET_DEST (set)) == SUBREG))
+@@ -1049,7 +1081,11 @@
+ 	  continue;
+ 	}
+ 
+-      if (! (g = create_ddg (bb, 0)))
++      /* Always schedule the closing branch with the rest of the
++         instructions. The branch is rotated to be in row ii-1 at the
++         end of the scheduling procedure to make sure it's the last
++         instruction in the iteration.  */
++      if (! (g = create_ddg (bb, 1)))
+         {
+           if (dump_file)
+ 	    fprintf (dump_file, "SMS create_ddg failed\n");
+@@ -1157,14 +1193,17 @@
+ 
+       ps = sms_schedule_by_order (g, mii, maxii, node_order);
+ 
+-      if (ps){
+-	stage_count = PS_STAGE_COUNT (ps);
+-        gcc_assert(stage_count >= 1);
+-      }
++       if (ps)
++       {
++         stage_count = calculate_stage_count (ps);
++         gcc_assert(stage_count >= 1);
++         PS_STAGE_COUNT(ps) = stage_count;
++       }
+ 
+-      /* Stage count of 1 means that there is no interleaving between
+-         iterations, let the scheduling passes do the job.  */
+-      if (stage_count <= 1
++      /* The default value of PARAM_SMS_MIN_SC is 2 as stage count of
++         1 means that there is no interleaving between iterations thus
++         we let the scheduling passes do the job in this case.  */
++      if (stage_count < (unsigned) PARAM_VALUE (PARAM_SMS_MIN_SC)
+ 	  || (count_init && (loop_count <= stage_count))
+ 	  || (flag_branch_probabilities && (trip_count <= stage_count)))
+ 	{
+@@ -1182,32 +1221,24 @@
+       else
+ 	{
+ 	  struct undo_replace_buff_elem *reg_move_replaces;
+-
+-	  if (dump_file)
+-	    {
++          int amount = SCHED_TIME (g->closing_branch) + 1;
++	  
++	  /* Set the stage boundaries.	The closing_branch was scheduled
++	     and should appear in the last (ii-1) row.  */
++	  reset_sched_times (ps, amount);
++	  rotate_partial_schedule (ps, amount);
++	  set_columns_for_ps (ps);
++
++	  canon_loop (loop);
++
++          if (dump_file)
++            {
+ 	      fprintf (dump_file,
+ 		       "SMS succeeded %d %d (with ii, sc)\n", ps->ii,
+ 		       stage_count);
+ 	      print_partial_schedule (ps, dump_file);
+-	      fprintf (dump_file,
+-		       "SMS Branch (%d) will later be scheduled at cycle %d.\n",
+-		       g->closing_branch->cuid, PS_MIN_CYCLE (ps) - 1);
+ 	    }
+-
+-	  /* Set the stage boundaries.  If the DDG is built with closing_branch_deps,
+-	     the closing_branch was scheduled and should appear in the last (ii-1)
+-	     row.  Otherwise, we are free to schedule the branch, and we let nodes
+-	     that were scheduled at the first PS_MIN_CYCLE cycle appear in the first
+-	     row; this should reduce stage_count to minimum.
+-             TODO: Revisit the issue of scheduling the insns of the
+-             control part relative to the branch when the control part
+-             has more than one insn.  */
+-	  normalize_sched_times (ps);
+-	  rotate_partial_schedule (ps, PS_MIN_CYCLE (ps));
+-	  set_columns_for_ps (ps);
+-
+-	  canon_loop (loop);
+-
++ 
+           /* case the BCT count is not known , Do loop-versioning */
+ 	  if (count_reg && ! count_init)
+             {
+@@ -1760,12 +1791,6 @@
+ 	      continue;
+ 	    }
+ 
+-	  if (JUMP_P (insn)) /* Closing branch handled later.  */
+-	    {
+-	      RESET_BIT (tobe_scheduled, u);
+-	      continue;
+-	    }
+-
+ 	  if (TEST_BIT (sched_nodes, u))
+ 	    continue;
+ 
+@@ -1893,8 +1918,8 @@
+   if (dump_file)
+     fprintf (dump_file, "split_row=%d\n", split_row);
+ 
+-  normalize_sched_times (ps);
+-  rotate_partial_schedule (ps, ps->min_cycle);
++  reset_sched_times (ps, PS_MIN_CYCLE (ps));
++  rotate_partial_schedule (ps, PS_MIN_CYCLE (ps));
+ 
+   rows_new = (ps_insn_ptr *) xcalloc (new_ii, sizeof (ps_insn_ptr));
+   for (row = 0; row < split_row; row++)
+@@ -2571,6 +2596,7 @@
+   ps_insn_ptr next_ps_i;
+   ps_insn_ptr first_must_follow = NULL;
+   ps_insn_ptr last_must_precede = NULL;
++  ps_insn_ptr last_in_row = NULL;
+   int row;
+ 
+   if (! ps_i)
+@@ -2597,8 +2623,37 @@
+ 	  else
+             last_must_precede = next_ps_i;
+         }
++      /* The closing branch must be the last in the row.  */
++      if (must_precede 
++	  && TEST_BIT (must_precede, next_ps_i->node->cuid) 
++	  && JUMP_P (next_ps_i->node->insn))     
++	return false;
++             
++       last_in_row = next_ps_i;
+     }
+ 
++  /* The closing branch is scheduled as well.  Make sure there is no
++     dependent instruction after it as the branch should be the last
++     instruction in the row.  */
++  if (JUMP_P (ps_i->node->insn)) 
++    {
++      if (first_must_follow)
++	return false;
++      if (last_in_row)
++	{
++	  /* Make the branch the last in the row.  New instructions
++	     will be inserted at the beginning of the row or after the
++	     last must_precede instruction thus the branch is guaranteed
++	     to remain the last instruction in the row.  */
++	  last_in_row->next_in_row = ps_i;
++	  ps_i->prev_in_row = last_in_row;
++	  ps_i->next_in_row = NULL;
++	}
++      else
++	ps->rows[row] = ps_i;
++      return true;
++    }
++  
+   /* Now insert the node after INSERT_AFTER_PSI.  */
+ 
+   if (! last_must_precede)
+@@ -2820,6 +2875,24 @@
+   return ps_i;
+ }
+ 
++/* Calculate the stage count of the partial schedule PS.  The calculation
++   takes into account the rotation to bring the closing branch to row
++   ii-1.  */
++int
++calculate_stage_count (partial_schedule_ptr ps)
++{
++  int rotation_amount = (SCHED_TIME (ps->g->closing_branch)) + 1;
++  int new_min_cycle = PS_MIN_CYCLE (ps) - rotation_amount;
++  int new_max_cycle = PS_MAX_CYCLE (ps) - rotation_amount;
++  int stage_count = CALC_STAGE_COUNT (-1, new_min_cycle, ps->ii);
++
++  /* The calculation of stage count is done adding the number of stages
++     before cycle zero and after cycle zero.  */ 
++  stage_count += CALC_STAGE_COUNT (new_max_cycle, 0, ps->ii);
++
++  return stage_count;
++}
++
+ /* Rotate the rows of PS such that insns scheduled at time
+    START_CYCLE will appear in row 0.  Updates max/min_cycles.  */
+ void
+
+=== modified file 'gcc/params.def'
+--- old/gcc/params.def	2011-04-18 11:31:29 +0000
++++ new/gcc/params.def	2011-05-11 07:15:47 +0000
+@@ -344,6 +344,11 @@
+ 	 "sms-max-ii-factor",
+ 	 "A factor for tuning the upper bound that swing modulo scheduler uses for scheduling a loop",
+ 	 100, 0, 0)
++/* The minimum value of stage count that swing modulo scheduler will generate.  */
++DEFPARAM(PARAM_SMS_MIN_SC,
++        "sms-min-sc",
++        "The minimum value of stage count that swing modulo scheduler will generate.",
++        2, 1, 1)
+ DEFPARAM(PARAM_SMS_DFA_HISTORY,
+ 	 "sms-dfa-history",
+ 	 "The number of cycles the swing modulo scheduler considers when checking conflicts using DFA",
+

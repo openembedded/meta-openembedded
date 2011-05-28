@@ -1,0 +1,48 @@
+From c2acb441c539c4d3c307166def3c3c779cdccf43 Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Wed, 25 May 2011 20:29:47 +0000
+Subject: [PATCH] 	PR c++/46696
+ 	* typeck.c (cp_build_modify_expr): Check DECL_DEFAULTED_FN.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@174233 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index 578eb83..2022f0f 100644
+--- a/gcc/cp/typeck.c
++++ b/gcc/cp/typeck.c
+@@ -6727,7 +6727,7 @@ cp_build_modify_expr (tree lhs, enum tree_code modifycode, tree rhs,
+ 
+       /* Allow array assignment in compiler-generated code.  */
+       else if (!current_function_decl
+-	       || !DECL_ARTIFICIAL (current_function_decl))
++	       || !DECL_DEFAULTED_FN (current_function_decl))
+ 	{
+           /* This routine is used for both initialization and assignment.
+              Make sure the diagnostic message differentiates the context.  */
+new file mode 100644
+index 0000000..5fcf5b0
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/defaulted29.C
+@@ -0,0 +1,20 @@
++// PR c++/46696
++// { dg-options -std=c++0x }
++
++struct A
++{
++  A& operator= (A const&);
++};
++
++struct B
++{
++  A ar[1];
++  B& operator= (B const&) = default;
++};
++
++int main()
++{
++  B x;
++  B y;
++  y = x;
++}
+-- 
+1.7.0.4
+

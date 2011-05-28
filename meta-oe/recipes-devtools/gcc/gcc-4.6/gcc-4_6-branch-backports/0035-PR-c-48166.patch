@@ -1,7 +1,7 @@
 From 709a81571cc3f418f51f95ed9291b4f2fabc577c Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 16:07:15 +0000
-Subject: [PATCH 035/200] 	PR c++/48166
+Subject: [PATCH] 	PR c++/48166
  	* decl.c (revert_static_member_fn): Strip function-cv-quals.
 
 git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@171679 138bc75d-0d04-0410-961f-82ee72b054a4

@@ -1,7 +1,7 @@
 From 95c034f0075055720f37e340fd008d8d7cb45b4e Mon Sep 17 00:00:00 2001
 From: paolo <paolo@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 15 Apr 2011 14:52:57 +0000
-Subject: [PATCH 125/200] 2011-04-15  Takaya Saito  <gintensubaru@gmail.com>
+Subject: [PATCH] 2011-04-15  Takaya Saito  <gintensubaru@gmail.com>
 
 	PR libstdc++/48476
 	* include/std/tuple (_Tuple_impl<>::_Tuple_impl(_Tuple_impl<>&&),

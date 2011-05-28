@@ -14,7 +14,7 @@ PV = "4.6"
 # BINV should  point to minor release
 BINV = "${PV}.0"
 
-PR = "r0"
+PR = "r1"
 
 ARM_INSTRUCTION_SET = "arm"
 

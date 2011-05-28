@@ -1,7 +1,7 @@
 From 1c9148fe797f564821355a8976802689519324dd Mon Sep 17 00:00:00 2001
 From: burnus <burnus@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 29 Apr 2011 21:26:07 +0000
-Subject: [PATCH 198/200] 2011-04-29  Tobias Burnus  <burnus@net-b.de>
+Subject: [PATCH] 2011-04-29  Tobias Burnus  <burnus@net-b.de>
 
         PR fortran/48810
         * resolve.c (resolve_typebound_generic_call): Don't check access

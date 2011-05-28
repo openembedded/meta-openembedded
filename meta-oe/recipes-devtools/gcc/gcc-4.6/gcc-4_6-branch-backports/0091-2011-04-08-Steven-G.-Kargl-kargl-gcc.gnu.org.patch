@@ -1,7 +1,7 @@
 From 6b290e64ee2bbe7974ee43ce49297ee9496f18d6 Mon Sep 17 00:00:00 2001
 From: kargl <kargl@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Fri, 8 Apr 2011 21:41:35 +0000
-Subject: [PATCH 091/200] 2011-04-08  Steven G. Kargl  <kargl@gcc.gnu.org>
+Subject: [PATCH] 2011-04-08  Steven G. Kargl  <kargl@gcc.gnu.org>
 
         PR target/47829
         gcc/config.gcc: disable unwind table generation for crtbegin/crtend

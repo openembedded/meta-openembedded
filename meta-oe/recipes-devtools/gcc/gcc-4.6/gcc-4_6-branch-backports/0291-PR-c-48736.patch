@@ -1,0 +1,40 @@
+From 477084b940a43a7f5bdb411e422a736c1f356c6f Mon Sep 17 00:00:00 2001
+From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date: Fri, 20 May 2011 19:02:08 +0000
+Subject: [PATCH] 	PR c++/48736
+ 	* pt.c (tsubst_copy_and_build): Handle substitution of a pack
+ 	expansion producing another expansion.
+
+git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/branches/gcc-4_6-branch@173971 138bc75d-0d04-0410-961f-82ee72b054a4
+
+index e1ddf84..d49fe6b 100644
+--- a/gcc/cp/pt.c
++++ b/gcc/cp/pt.c
+@@ -13221,7 +13221,8 @@ tsubst_copy_and_build (tree t,
+                 ce->value = tsubst_pack_expansion (ce->value, args, complain,
+                                                   in_decl);
+ 
+-		if (ce->value == error_mark_node)
++		if (ce->value == error_mark_node
++		    || PACK_EXPANSION_P (ce->value))
+ 		  ;
+ 		else if (TREE_VEC_LENGTH (ce->value) == 1)
+                   /* Just move the argument into place.  */
+new file mode 100644
+index 0000000..3ad5af4
+--- /dev/null
++++ b/gcc/testsuite/g++.dg/cpp0x/variadic108.C
+@@ -0,0 +1,10 @@
++// PR c++/48736
++// { dg-options -std=c++0x }
++
++template<class T>
++T&& create();
++
++template<class T, class... Args,
++ class = decltype(T{create<Args>()...}) // Line X
++>
++char f(int);
+-- 
+1.7.0.4
+

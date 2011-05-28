@@ -1,7 +1,7 @@
 From c68e41052387396cba4a066d8e9658dc2011baf0 Mon Sep 17 00:00:00 2001
 From: jason <jason@138bc75d-0d04-0410-961f-82ee72b054a4>
 Date: Tue, 29 Mar 2011 14:25:10 +0000
-Subject: [PATCH 027/200] 	Core 1148
+Subject: [PATCH] 	Core 1148
  	* typeck.c (check_return_expr): Fix conditions for setting
  	LOOKUP_PREFER_RVALUE.
 
