@@ -18,7 +18,7 @@ PKGV = "v${GITPKGVTAG}"
 # Except that PKGV doesn't work in OE-core :(
 # PV = "git"
 PV = "v28"
-PR = "r0"
+PR = "r1"
 
 inherit autotools vala update-alternatives
 
@@ -53,7 +53,7 @@ do_install_append() {
           sed -i -e s/\@BAUDRATE\@/${@get_baudrate(bb, d)}/g ${WORKDIR}/serial-getty@.service
           install ${WORKDIR}/serial-getty@.service ${D}${base_libdir}/systemd/system/
           ln -sf ${base_libdir}/systemd/system/serial-getty@.service \
-              ${D}${sysconfdir}/systemd/system/getty.target.wants/getty@${@get_console(bb, d)}.service
+              ${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(bb, d)}.service
         fi
 }
 
