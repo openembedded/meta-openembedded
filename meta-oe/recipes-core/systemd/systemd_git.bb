@@ -15,7 +15,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r2"
+PR = "r3"
 
 inherit autotools vala update-alternatives
 
@@ -90,7 +90,12 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 # kbd -> loadkeys,setfont
 # systemd calls 'modprobe -sab --', which busybox doesn't support due to lack 
 # of blacklist support, so use proper modprobe from module-init-tools
-RRECOMMENDS_${PN} += "kbd kbd-consolefonts ${PN}-serialgetty module-init-tools"
+# And pull in the kernel modules mentioned in INSTALL
+RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
+                      ${PN}-serialgetty \
+                      module-init-tools \
+                      kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
+"
 
 # TODO:
 # u-a for runlevel and telinit
