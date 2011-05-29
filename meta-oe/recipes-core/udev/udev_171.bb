@@ -13,9 +13,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://libudev/COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343 \
                     file://extras/gudev/COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
 
-# Needs more testing
-DEFAULT_PREFERENCE = "-1"
-
 # Needed for udev-extras
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
