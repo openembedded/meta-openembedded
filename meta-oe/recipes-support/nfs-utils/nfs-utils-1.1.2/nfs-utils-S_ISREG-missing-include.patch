@@ -1,0 +1,33 @@
+diff -uNr nfs-utils-1.1.2.orig//utils/exportfs/exportfs.c nfs-utils-1.1.2/utils/exportfs/exportfs.c
+--- nfs-utils-1.1.2.orig//utils/exportfs/exportfs.c	2008-03-14 16:46:29.000000000 +0100
++++ nfs-utils-1.1.2/utils/exportfs/exportfs.c	2010-05-26 10:31:23.000000000 +0200
+@@ -19,6 +19,7 @@
+ #include <getopt.h>
+ #include <netdb.h>
+ #include <errno.h>
++#include <sys/stat.h>
+ #include "xmalloc.h"
+ #include "misc.h"
+ #include "nfslib.h"
+diff -uNr nfs-utils-1.1.2.orig//utils/mount/mount.c nfs-utils-1.1.2/utils/mount/mount.c
+--- nfs-utils-1.1.2.orig//utils/mount/mount.c	2008-03-14 16:46:29.000000000 +0100
++++ nfs-utils-1.1.2/utils/mount/mount.c	2010-05-26 10:31:32.000000000 +0200
+@@ -24,6 +24,7 @@
+ 
+ #include <unistd.h>
+ #include <sys/types.h>
++#include <sys/stat.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <errno.h>
+diff -uNr nfs-utils-1.1.2.orig//utils/mount/network.c nfs-utils-1.1.2/utils/mount/network.c
+--- nfs-utils-1.1.2.orig//utils/mount/network.c	2008-03-14 16:46:29.000000000 +0100
++++ nfs-utils-1.1.2/utils/mount/network.c	2010-05-26 10:31:35.000000000 +0200
+@@ -37,6 +37,7 @@
+ #include <rpc/pmap_prot.h>
+ #include <rpc/pmap_clnt.h>
+ #include <sys/socket.h>
++#include <sys/stat.h>
+ 
+ #include "xcommon.h"
+ #include "mount.h"

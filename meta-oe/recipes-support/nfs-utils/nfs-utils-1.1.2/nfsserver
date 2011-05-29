@@ -1,0 +1,149 @@
+#!/bin/sh
+#
+# Startup script for nfs-utils
+#
+#
+# The environment variable NFS_SERVERS may be set in /etc/default/nfsd
+# Other control variables may be overridden here too
+test -r /etc/default/nfsd && . /etc/default/nfsd
+#
+# Location of executables:
+test -x "$NFS_MOUNTD" || NFS_MOUNTD=/usr/sbin/rpc.mountd
+test -x "$NFS_NFSD" || NFS_NFSD=/usr/sbin/rpc.nfsd
+test -x "$NFS_STATD" || NFS_STATD=/usr/sbin/rpc.statd
+#
+# The user mode program must also exist (it just starts the kernel
+# threads using the kernel module code).
+test -x "$NFS_MOUNTD" || exit 0
+test -x "$NFS_NFSD" || exit 0
+#
+# Default is 8 threads, value is settable between 1 and the truely
+# ridiculous 99
+test "$NFS_SERVERS" -gt 0 && test "$NFS_SERVERS" -lt 100 || NFS_SERVERS=8
+#
+# The default state directory is /var/lib/nfs
+test -n "$NFS_STATEDIR" || NFS_STATEDIR=/var/lib/nfs
+#
+#----------------------------------------------------------------------
+# Startup and shutdown functions.
+#  Actual startup/shutdown is at the end of this file.
+#directories
+create_directories(){
+	echo -n 'creating NFS state directory: '
+	mkdir -p "$NFS_STATEDIR"
+	(	cd "$NFS_STATEDIR"
+		umask 077
+		mkdir -p sm sm.bak
+		test -w sm/state || {
+			rm -f sm/state
+			:>sm/state
+		}
+		umask 022
+		for file in xtab etab smtab rmtab
+		do
+			test -w "$file" || {
+				rm -f "$file"
+				:>"$file"
+			}
+		done
+	)
+	echo done
+}
+#mountd
+start_mountd(){
+	echo -n 'starting mountd: '
+	start-stop-daemon --start --exec "$NFS_MOUNTD" -- "-f /etc/exports $@"
+	echo done
+}
+stop_mountd(){
+	echo -n 'stopping mountd: '
+	start-stop-daemon --stop --quiet --exec "$NFS_MOUNTD"
+	echo done
+}
+#
+#nfsd
+start_nfsd(){
+	echo -n "starting $1 nfsd kernel threads: "
+	start-stop-daemon --start --exec "$NFS_NFSD" -- "$@"
+	echo done
+}
+delay_nfsd(){
+	for delay in 0 1 2 3 4 5 6 7 8 9 
+	do
+		if pidof nfsd >/dev/null
+		then
+			echo -n .
+			sleep 1
+		else
+			return 0
+		fi
+	done
+	return 1
+}
+stop_nfsd(){
+	# WARNING: this kills any process with the executable
+	# name 'nfsd'.
+	echo -n 'stopping nfsd: '
+	start-stop-daemon --stop --quiet --signal 1 --name nfsd
+	if delay_nfsd || {
+		echo failed
+		echo ' using signal 9: '
+		start-stop-daemon --stop --quiet --signal 9 --name nfsd
+		delay_nfsd
+	}
+	then
+		echo done
+		# This will remove, recursively, dependencies
+		echo -n 'removing nfsd kernel module: '
+		if modprobe -r nfsd
+		then
+			echo done
+		else
+			echo failed
+		fi
+	else
+		echo failed
+	fi
+}
+
+#statd
+start_statd(){
+	echo -n "starting statd: "
+	start-stop-daemon --start --exec "$NFS_STATD"
+	echo done
+}
+stop_statd(){
+	# WARNING: this kills any process with the executable
+	# name 'statd'.
+	echo -n 'stopping statd: '
+	start-stop-daemon --stop --quiet --signal 1 --name statd
+	echo done
+}
+#----------------------------------------------------------------------
+#
+# supported options:
+#  start
+#  stop
+#  reload: reloads the exports file
+#  restart: stops and starts mountd
+#FIXME: need to create the /var/lib/nfs/... directories
+case "$1" in
+start)	create_directories
+	start_nfsd "$NFS_SERVERS"
+	start_mountd
+	start_statd
+	test -r /etc/exports && exportfs -a;;
+stop)	exportfs -ua
+	stop_statd
+	stop_mountd
+	stop_nfsd;;
+reload)	test -r /etc/exports && exportfs -r;;
+restart)exportfs -ua
+	stop_mountd
+	stop_statd
+	# restart does not restart the kernel threads,
+	# only the user mode processes
+	start_mountd
+	start_statd
+	test -r /etc/exports && exportfs -a;;
+esac

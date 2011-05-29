@@ -1,0 +1,49 @@
+--- a/support/nfs/svc_socket.c.org	2007-05-11 03:40:57 +0000
++++ b/support/nfs/svc_socket.c	2007-10-24 15:20:05 +0000
+@@ -67,8 +67,13 @@
+   memset (&addr, 0, sizeof (addr));
+   addr.sin_family = AF_INET;
+ 
++#ifdef __UCLIBC__
++  rpcp = getrpcbynumber (number);
++  ret = 0;
++#else
+   ret = getrpcbynumber_r (number, &rpcbuf, rpcdata, sizeof rpcdata,
+ 			  &rpcp);
++#endif
+   if (ret == 0 && rpcp != NULL)
+     {
+       /* First try name.  */
+--- a/utils/mountd/cache.c.org	2007-05-11 03:40:57 +0000
++++ b/utils/mountd/cache.c	2007-10-24 15:21:53 +0000
+@@ -131,6 +131,7 @@
+ 	pw = getpwuid(uid);
+ 	if (!pw)
+ 		rv = -1;
++#ifndef __UCLIBC__
+ 	else {
+ 		rv = getgrouplist(pw->pw_name, pw->pw_gid, groups, &ngroups);
+ 		if (rv == -1 && ngroups >= 100) {
+@@ -142,6 +143,7 @@
+ 						  groups, &ngroups);
+ 		}
+ 	}
++#endif
+ 	qword_printint(f, uid);
+ 	qword_printint(f, time(0)+30*60);
+ 	if (rv >= 0) {
+--- a/tools/rpcgen/rpc_cout.c.org	2007-05-11 03:40:57 +0000
++++ b/tools/rpcgen/rpc_cout.c	2007-10-24 15:23:17 +0000
+@@ -647,7 +647,11 @@
+ 	int freed=0;
+ 
+ 	if(flag == PUT)
++#ifdef __UCLIBC__
++		f_print(fout,"\t\t IXDR_PUT_");
++#else
+ 		f_print(fout,"\t\t (void) IXDR_PUT_");
++#endif
+ 	else    
+ 		if(rel== REL_ALIAS)
+ 			f_print(fout,"\t\t objp->%s = IXDR_GET_",decl->name);
+
