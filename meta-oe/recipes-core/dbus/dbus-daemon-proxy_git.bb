@@ -1,9 +1,12 @@
 DESCRIPTION = "dbus forwarding daemon"
 LICENSE = "LGPLv2.1+"
+LIC_FILES_CHKSUM = "file://dbus-daemon-proxy.c;endline=19;md5=41df6d21fe1c97d6a1cc22a5bf374cba"
 DEPENDS = "dbus dbus-glib"
 SRCREV = "1226a0a1374628ff191f6d8a56000be5e53e7608"
 PV = "0.0.0+gitr${SRCPV}"
 PR = "r1"
+
+ASNEEDED_pn-dbus-daemon-proxy = ""
 
 SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy;protocol=git"
 S = "${WORKDIR}/git"
