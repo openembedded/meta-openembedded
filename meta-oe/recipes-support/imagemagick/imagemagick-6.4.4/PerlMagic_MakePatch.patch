@@ -1,0 +1,11 @@
+--- /tmp/Makefile.PL.in	2008-10-01 10:39:38.000000000 +0200
++++ ImageMagick-6.4.4/PerlMagick/Makefile.PL.in	2008-10-01 10:40:25.000000000 +0200
+@@ -87,6 +87,8 @@
+ 
+    # Use same compiler as ImageMagick
+    'PERLMAINCC'	=> '@PERLMAINCC@ @OPENMP_CFLAGS@',
++   'AR' => '@AR@',
++   'LD' => '@PERLMAINCC@',
+ 
+    # Set Perl installation prefix to ImageMagick installation prefix
+ #   'PREFIX'	=> '@prefix@',
