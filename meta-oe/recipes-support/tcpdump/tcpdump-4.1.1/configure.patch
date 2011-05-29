@@ -1,0 +1,29 @@
+---
+ aclocal.m4   |    1 -
+ configure.in |    1 +
+ 2 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/aclocal.m4 b/aclocal.m4
+index 40b5866..0c662b0 100644
+--- a/aclocal.m4
++++ b/aclocal.m4
+@@ -40,7 +40,6 @@ dnl
+ AC_DEFUN(AC_LBL_C_INIT_BEFORE_CC,
+     [AC_PREREQ(2.50)
+     AC_BEFORE([$0], [AC_LBL_C_INIT])
+-    AC_BEFORE([$0], [AC_PROG_CC])
+     AC_BEFORE([$0], [AC_LBL_FIXINCLUDES])
+     AC_BEFORE([$0], [AC_LBL_DEVEL])
+     AC_ARG_WITH(gcc, [  --without-gcc           don't use gcc])
+diff --git a/configure.in b/configure.in
+index 11257c9..7f9591c 100644
+--- a/configure.in
++++ b/configure.in
+@@ -19,6 +19,7 @@ AC_REVISION($Revision: 1.204 $)
+ AC_PREREQ(2.50)
+ AC_INIT(tcpdump.c)
+ 
++AC_PROG_CC
+ AC_CANONICAL_HOST
+ 
+ AC_LBL_C_INIT_BEFORE_CC(V_CCOPT, V_INCLS)
