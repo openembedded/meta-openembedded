@@ -1,0 +1,13 @@
+Index: ltrace-0.5.3/Makefile.in
+===================================================================
+--- ltrace-0.5.3.orig/Makefile.in	2009-10-23 22:06:08.130304691 -0700
++++ ltrace-0.5.3/Makefile.in	2009-10-23 22:06:53.160369614 -0700
+@@ -39,6 +39,8 @@ ltrace:		main.o libltrace.a
+ libltrace.a: 	sysdeps/sysdep.o $(OBJ)
+ 		$(AR) rcv $@ $^
+ 
++$(OBJ):		sysdeps/sysdep.o
++
+ sysdeps/sysdep.o: dummy
+ 		$(MAKE) -C sysdeps/$(OS)
+ 

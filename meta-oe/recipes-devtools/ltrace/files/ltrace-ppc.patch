@@ -1,0 +1,11 @@
+Index: ltrace-0.5.3/sysdeps/linux-gnu/ppc/plt.c
+===================================================================
+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/ppc/plt.c	2009-11-15 03:46:14.459233772 +0300
++++ ltrace-0.5.3/sysdeps/linux-gnu/ppc/plt.c	2009-11-15 03:46:25.299232646 +0300
+@@ -1,5 +1,6 @@
+ #include <gelf.h>
+ #include "common.h"
++#include "ptrace.h"
+ 
+ GElf_Addr
+ arch_plt_sym_val(struct ltelf *lte, size_t ndx, GElf_Rela * rela) {

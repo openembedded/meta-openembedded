@@ -1,0 +1,12 @@
+Index: ltrace-0.5.3/sysdeps/linux-gnu/mipsel/trace.c
+===================================================================
+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/mipsel/trace.c	2009-10-23 23:15:59.822783128 -0700
++++ ltrace-0.5.3/sysdeps/linux-gnu/mipsel/trace.c	2009-10-23 23:16:10.441268788 -0700
+@@ -127,7 +127,6 @@ gimme_arg(enum tof type, Process *proc, 
+ 			return ret;
+ 		} else {
+ 			// If we need this, I think we can look at [sp+16] for arg_num==4.
+-			CP;
+ 			return 0;
+ 		}
+ 	}

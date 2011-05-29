@@ -1,0 +1,33 @@
+Index: ltrace-0.5.3/sysdeps/linux-gnu/Makefile
+===================================================================
+--- ltrace-0.5.3.orig/sysdeps/linux-gnu/Makefile
++++ ltrace-0.5.3/sysdeps/linux-gnu/Makefile
+@@ -12,7 +12,10 @@ CPPFLAGS	+=	-I$(TOPDIR)/sysdeps/linux-gn
+ 
+ OBJ		=	events.o trace.o proc.o breakpoint.o
+ 
+-all:		sysdep.h signalent.h syscallent.h arch_syscallent.h signalent1.h syscallent1.h ../sysdep.o
++HDRS		=	sysdep.h signalent.h syscallent.h arch_syscallent.h \
++			signalent1.h syscallent1.h
++
++all:		../sysdep.o
+ 
+ sysdep.h:	$(ARCH)/arch.h
+ 		cat $(ARCH)/arch.h > sysdep.h
+@@ -49,12 +52,14 @@ arch_syscallent.h:
+ os.o:		$(OBJ)
+ 		$(CC) -nostdlib -r -o os.o $(OBJ)
+ 
++$(OBJ):		$(HDRS)
++
+ $(ARCH)/arch.o:	dummy
+ 		$(MAKE) -C $(ARCH)
+ 
+ clean:
+ 		$(MAKE) -C $(ARCH) clean
+-		rm -f $(OBJ) sysdep.h signalent.h signalent1.h syscallent.h arch_syscallent.h
+-		rm -f syscallent1.h os.o sysdep.o ../sysdep.o
++		rm -f $(HDRS)
++		rm -f $(OBJ) os.o sysdep.o ../sysdep.o
+ 
+ dummy:
