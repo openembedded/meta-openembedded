@@ -1,0 +1,55 @@
+Index: tcp_wrappers_7.6/Makefile
+===================================================================
+--- tcp_wrappers_7.6.orig/Makefile
++++ tcp_wrappers_7.6/Makefile
+@@ -724,9 +724,9 @@ SHLIBSOMAJ	= shared/libwrap.so.$(SOMAJOR
+ SHLIBSO		= shared/libwrap.so
+ SHLIBFLAGS	= -Lshared -lwrap
+ 
+-SHLINKFLAGS = -shared -Xlinker -soname -Xlinker libwrap.so.$(SOMAJOR) -lc $(LIBS)
++SHLINKFLAGS = -shared -Xlinker -soname -Xlinker libwrap.so.$(SOMAJOR)
+ SHCFLAGS = -fPIC -shared -D_REENTRANT
+-SHLIB_OBJ= $(addprefix shared/, $(LIB_OBJ));
++SHLIB_OBJ= $(addprefix shared/, $(LIB_OBJ))
+ 
+ all other: config-check tcpd tcpdmatch try-from safe_finger tcpdchk $(LIB)
+ 
+@@ -748,31 +748,31 @@ $(LIB):	$(LIB_OBJ)
+ 
+ $(SHLIB): $(SHLIB_OBJ)
+ 	rm -f $(SHLIB)
+-	$(CC) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ)
++	$(CC) $(LDFLAGS) -o $(SHLIB) $(SHLINKFLAGS) $(SHLIB_OBJ) $(LIBS)
+ 	ln -sf $(notdir $(SHLIB)) $(SHLIBSOMAJ)
+ 	ln -sf $(notdir $(SHLIBSOMAJ)) $(SHLIBSO)
+ 
+ tcpd:	tcpd.o $(SHLIB)
+-	$(CC) $(CFLAGS) -o $@ tcpd.o $(SHLIBFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ tcpd.o $(SHLIBFLAGS)
+ 
+ miscd:	miscd.o $(LIB)
+-	$(CC) $(CFLAGS) -o $@ miscd.o $(LIB) $(LIBS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ miscd.o $(LIB) $(LIBS)
+ 
+ safe_finger: safe_finger.o $(SHLIB)
+-	$(CC) $(CFLAGS) -o $@ safe_finger.o $(SHLIBFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ safe_finger.o $(SHLIBFLAGS)
+ 
+ TCPDMATCH_OBJ = tcpdmatch.o fakelog.o inetcf.o scaffold.o
+ 
+ tcpdmatch: $(TCPDMATCH_OBJ) $(SHLIB)
+-	$(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(SHLIBFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(TCPDMATCH_OBJ) $(SHLIBFLAGS)
+ 
+ try-from: try-from.o fakelog.o $(SHLIB)
+-	$(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(SHLIBFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ try-from.o fakelog.o $(SHLIBFLAGS)
+ 
+ TCPDCHK_OBJ = tcpdchk.o fakelog.o inetcf.o scaffold.o
+ 
+ tcpdchk: $(TCPDCHK_OBJ) $(SHLIB)
+-	$(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(SHLIBFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(TCPDCHK_OBJ) $(SHLIBFLAGS)
+ 
+ shar:	$(KIT)
+ 	@shar $(KIT)

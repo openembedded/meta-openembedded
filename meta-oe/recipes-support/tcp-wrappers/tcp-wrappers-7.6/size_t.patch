@@ -1,0 +1,42 @@
+diff -ruN tcp_wrappers_7.6.orig/fix_options.c tcp_wrappers_7.6/fix_options.c
+--- tcp_wrappers_7.6.orig/fix_options.c	2003-08-21 03:41:33.000000000 +0200
++++ tcp_wrappers_7.6/fix_options.c	2003-08-21 03:41:27.000000000 +0200
+@@ -38,7 +38,11 @@
+ #ifdef IP_OPTIONS
+     unsigned char optbuf[BUFFER_SIZE / 3], *cp;
+     char    lbuf[BUFFER_SIZE], *lp;
++#ifdef __GLIBC__
++    size_t  optsize = sizeof(optbuf), ipproto;
++#else
+     int     optsize = sizeof(optbuf), ipproto;
++#endif
+     struct protoent *ip;
+     int     fd = request->fd;
+     unsigned int opt;
+diff -ruN tcp_wrappers_7.6.orig/socket.c tcp_wrappers_7.6/socket.c
+--- tcp_wrappers_7.6.orig/socket.c	2003-08-21 03:41:33.000000000 +0200
++++ tcp_wrappers_7.6/socket.c	2003-08-21 03:40:51.000000000 +0200
+@@ -90,7 +90,11 @@
+     static struct sockaddr_in client;
+     static struct sockaddr_in server;
+ #endif
++#ifdef __GLIBC__
++    size_t  len;
++#else
+     int     len;
++#endif
+     char    buf[BUFSIZ];
+     int     fd = request->fd;
+ 
+@@ -421,7 +425,11 @@
+ #else
+     struct sockaddr_in sin;
+ #endif
++#ifdef __GLIBC__
++    size_t  size = sizeof(sin);
++#else
+     int     size = sizeof(sin);
++#endif
+ 
+     /*
+      * Eat up the not-yet received datagram. Some systems insist on a
