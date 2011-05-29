@@ -20,7 +20,7 @@ DEFAULT_PREFERENCE = "-1"
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
 SRCREV = "${PV}"
-PR = "r0"
+PR = "r1"
 
 # version specific SRC_URI
 SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
@@ -31,10 +31,7 @@ SRC_URI[sha256sum] = "1d5c548d7c85d30b3508b82ad88d853e28dddb6c526d0e67aa92ac18af
 
 # generic SRC_URI
 SRC_URI += " \
-       file://mount.sh \
-       file://mount.blacklist \
-       file://network.sh \
-       file://local.rules \
+       file://touchscreen.rules \
        file://default \
        file://init \
        file://cache \
@@ -103,20 +100,13 @@ do_install () {
 	install -d ${D}${sysconfdir}/default
 	install -m 0755 ${WORKDIR}/default ${D}${sysconfdir}/default/udev
 
- 	cp ${S}/rules/rules.d/* ${D}${sysconfdir}/udev/rules.d/
-
-	install -m 0644 ${WORKDIR}/mount.blacklist     ${D}${sysconfdir}/udev/
-	install -m 0644 ${WORKDIR}/local.rules         ${D}${sysconfdir}/udev/rules.d/local.rules
+	install -m 0644 ${WORKDIR}/touchscreen.rules         ${D}${sysconfdir}/udev/rules.d/touchscreen.rules
 
 	touch ${D}${sysconfdir}/udev/saved.uname
 	touch ${D}${sysconfdir}/udev/saved.cmdline
 	touch ${D}${sysconfdir}/udev/saved.devices
 	touch ${D}${sysconfdir}/udev/saved.atags
 
-	install -d ${D}${sysconfdir}/udev/scripts/
-
-	install -m 0755 ${WORKDIR}/mount.sh ${D}${sysconfdir}/udev/scripts/mount.sh
-	install -m 0755 ${WORKDIR}/network.sh ${D}${sysconfdir}/udev/scripts
 }
 
 # Create the cache after checkroot has run
