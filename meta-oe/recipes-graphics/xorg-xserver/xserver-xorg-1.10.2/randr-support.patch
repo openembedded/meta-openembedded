@@ -39,22 +39,22 @@ diff -ur xorg-server-1.10.1.901//hw/xfree86/common/xf86Xinput.c git/xorg-server-
 +    case RR_Rotate_0:
 +        swap_axes = 1;
 +        invert[0] = 0;
-+ 	 invert[1] = 0;
++        invert[1] = 0;
 +        break;
 +    case RR_Rotate_90:
 +        swap_axes = 0;
 +        invert[0] = 0;
-+ 	 invert[1] = 1;
++        invert[1] = 1;
 +        break;
 +    case RR_Rotate_180:
 +        swap_axes = 1;
-+        invert[0] = 0;
-+        invert[1] = 0;
++        invert[0] = 1;
++        invert[1] = 1;
 +        break;
 +    case RR_Rotate_270:
 +        swap_axes = 0;
-+        invert[0] = 0;
-+ 	 invert[1] = 1;
++        invert[0] = 1;
++        invert[1] = 0;
 +        break;
 +    }
 +
@@ -100,32 +100,3 @@ diff -ur xorg-server-1.10.1.901//hw/xfree86/modes/xf86Crtc.c git/xorg-server-1.1
      return ret;
  }
  
-diff -ur xorg-server-1.10.1.901//randr/rrscreen.c git/xorg-server-1.10.1.901//randr/rrscreen.c
---- xorg-server-1.10.1.901//randr/rrscreen.c	2011-02-25 04:27:32.000000000 +0100
-+++ git/xorg-server-1.10.1.901//randr/rrscreen.c	2011-05-18 23:19:39.007760004 +0200
-@@ -910,11 +910,6 @@
-      */
-     width = mode->mode.width;
-     height = mode->mode.height;
--    if (rotation & (RR_Rotate_90|RR_Rotate_270))
--    {
--	width = mode->mode.height;
--	height = mode->mode.width;
--    }
- 
-     if (width < pScrPriv->minWidth || pScrPriv->maxWidth < width) {
- 	client->errorValue = width;
-@@ -926,7 +921,12 @@
- 	free(pData);
- 	return BadValue;
-     }
--
-+    if (rotation & (RR_Rotate_90|RR_Rotate_270))
-+    {
-+        width = mode->mode.height;
-+        height = mode->mode.width;
-+    }
-+			    
-     if (width != pScreen->width || height != pScreen->height)
-     {
- 	int	c;
