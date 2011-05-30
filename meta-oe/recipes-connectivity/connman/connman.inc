@@ -22,7 +22,7 @@ EXTRA_OECONF += "\
     ac_cv_path_UDHCPC=/sbin/udhcpc \
     ac_cv_path_RESOLVCONF=/sbin/resolvconf \
     ac_cv_path_PPPD=/usr/sbin/pppd \
-    --with-systemdsystemunitdir=${base_libdir}/systemd/system/ \
+    --with-systemdunitdir=${base_libdir}/systemd/system/ \
 "
 
 INITSCRIPT_NAME = "connman"
