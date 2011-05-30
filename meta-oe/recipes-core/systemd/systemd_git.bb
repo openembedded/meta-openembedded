@@ -15,7 +15,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r3"
+PR = "r4"
 
 inherit autotools vala update-alternatives
 
@@ -101,11 +101,12 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
 # u-a for runlevel and telinit
 
 pkg_postinst_${PN} () {
-# can't do this offline
+# can't do this offline, but we need the u-a bits
 if [ "x$D" != "x" ]; then
-    exit 1
+    echo "can't do addgroup offline"
+else
+	grep "^lock:" /etc/group > /dev/null || addgroup lock
 fi
-grep "^lock:" /etc/group > /dev/null || addgroup lock
 
 update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
