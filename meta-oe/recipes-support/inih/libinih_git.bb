@@ -6,10 +6,10 @@ PKGV = "${GITPKGVTAG}"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dae28cbf28207425e0d0b3eb835f4bde"
 
-PR = "r0"
+PR = "r1"
 
 # The github repository provides a cmake and pkg-config integration
-SRCREV = "715cb4dc3d56714d7d53dcd94ae4b41c950119a7"
+SRCREV = "af230b4c7ef2529413ffc37cee513ef8f35c9598"
 SRC_URI = "git://github.com/OSSystems/inih.git;protocol=git"
 
 S = "${WORKDIR}/git"
