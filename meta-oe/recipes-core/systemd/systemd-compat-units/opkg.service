@@ -1,0 +1,10 @@
+[Unit]
+Description=Opkg first boot configure
+ConditionPathExists=|/etc/rcS.d/S98configure
+
+[Service]
+ExecStart=/etc/rcS.d/S98configure
+RemainAfterExit=no
+
+[Install]
+WantedBy=basic.target
