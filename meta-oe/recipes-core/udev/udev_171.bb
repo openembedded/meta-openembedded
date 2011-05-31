@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
 SRCREV = "${PV}"
-PR = "r1"
+PR = "r2"
 
 # version specific SRC_URI
 SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
@@ -104,6 +104,8 @@ do_install () {
 	touch ${D}${sysconfdir}/udev/saved.devices
 	touch ${D}${sysconfdir}/udev/saved.atags
 
+	# disable udev-cache sysv script on systemd installs
+	ln -sf /dev/null ${D}/${base_libdir}/systemd/system/udev-cache.service
 }
 
 # Create the cache after checkroot has run
