@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
 SRCREV = "${PV}"
-PR = "r2"
+PR = "r3"
 
 # version specific SRC_URI
 SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
@@ -29,6 +29,7 @@ SRC_URI[sha256sum] = "1d5c548d7c85d30b3508b82ad88d853e28dddb6c526d0e67aa92ac18af
 # generic SRC_URI
 SRC_URI += " \
        file://touchscreen.rules \
+       file://modprobe.rules \
        file://default \
        file://init \
        file://cache \
@@ -97,7 +98,7 @@ do_install () {
 	install -d ${D}${sysconfdir}/default
 	install -m 0755 ${WORKDIR}/default ${D}${sysconfdir}/default/udev
 
-	install -m 0644 ${WORKDIR}/touchscreen.rules         ${D}${sysconfdir}/udev/rules.d/touchscreen.rules
+	install -m 0644 ${WORKDIR}/*.rules         ${D}${sysconfdir}/udev/rules.d/
 
 	touch ${D}${sysconfdir}/udev/saved.uname
 	touch ${D}${sysconfdir}/udev/saved.cmdline
