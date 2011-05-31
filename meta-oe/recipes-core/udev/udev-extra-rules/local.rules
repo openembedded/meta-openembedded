@@ -19,6 +19,3 @@ KERNEL=="rtc0", SYMLINK+="rtc"
 #The first framebuffer is symlinked to /dev/fb
 KERNEL=="fb0",  SYMLINK+="fb"
 
-# Try and modprobe for drivers for new hardware
-ACTION=="add", DEVPATH=="/devices/*", ENV{MODALIAS}=="?*", RUN+="/sbin/modprobe $env{MODALIAS}"
-
