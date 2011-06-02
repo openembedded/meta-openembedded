@@ -17,6 +17,7 @@
 #
 def siteinfo_data(d):
     archinfo = {
+        "allarch": "endian-little bit-32", # bogus, but better than special-casing the checks below for allarch
         "arm": "endian-little bit-32 arm-common",
         "armeb": "endian-big bit-32 arm-common",
         "avr32": "endian-big bit-32 avr32-common",
@@ -100,7 +101,7 @@ python () {
         bb.fatal("Please add your architecture to siteinfo.bbclass")
 }
 
-# Old class from yocto pasted in below for compat
+# Old class from oe-core pasted in below for compat
 
 def get_siteinfo_list(d):
        target = bb.data.getVar('HOST_ARCH', d, 1) + "-" + bb.data.getVar('HOST_OS', d, 1)
