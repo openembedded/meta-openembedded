@@ -128,6 +128,7 @@ def get_siteinfo_list(d):
                "i486-linux-uclibc":       "endian-little bit-32 common-uclibc ix86-common",\
                "i586-linux-uclibc":       "endian-little bit-32 common-uclibc ix86-common",\
                "i686-linux-uclibc":       "endian-little bit-32 common-uclibc ix86-common",\
+               "microblaze-linux-gnu":    "endian-big bit-32 common-glibc microblaze-common",\
                "mipsel-linux":            "endian-little bit-32 common-glibc mips-common",\
                "mipsel-linux-uclibc":     "endian-little bit-32 common-uclibc mips-common",\
                "mips-linux":              "endian-big bit-32 common-glibc mips-common",\
@@ -135,6 +136,7 @@ def get_siteinfo_list(d):
                "powerpc-darwin":          "endian-big bit-32 common-darwin",\
                "ppc-linux":               "endian-big bit-32 common-glibc powerpc-common",\ 
 	       "powerpc-linux":           "endian-big bit-32 common-glibc powerpc-common",\
+               "powerpc-linux-gnuspe":    "endian-big bit-32 common-glibc powerpc-common",\
                "powerpc-linux-uclibc":    "endian-big bit-32 common-uclibc powerpc-common",\
                "sh3-linux":               "endian-little bit-32 common-glibc sh-common",\
                "sh4-linux":               "endian-little bit-32 common-glibc sh-common",\
