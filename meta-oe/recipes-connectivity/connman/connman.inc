@@ -72,8 +72,28 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
             ${libdir}/bonobo/servers \
             ${datadir}/dbus-1/system-services/*"
 
+PACKAGES =+ "${PN}-systemd"
 # Package up systemd files
-FILES_${PN} += "${base_libdir}/systemd"
+FILES_${PN}-systemd += "${base_libdir}/systemd"
+
+pkg_postinst_connman-systemd() {
+	# can't do this offline
+	if [ "x$D" != "x" ]; then
+		exit 1
+	fi
+	
+	systemctl enable connman.service
+}
+
+pkg_postrm_connman-systemd() {
+	# can't do this offline
+	if [ "x$D" != "x" ]; then
+		exit 1
+	fi
+
+	systemctl disable connman.service
+}
+
 # Needed when using DNS proxy feature
 RRECOMMENDS_${PN} += "dnsmasq-dbus"
 
