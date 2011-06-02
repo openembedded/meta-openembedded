@@ -1,5 +1,4 @@
 require connman.inc
-PR = "r3"
 
 EXTRA_OECONF += "\
   --disable-gtk-doc \
@@ -25,5 +24,5 @@ SRC_URI  = "\
   file://connman \
 "
 
-SRC_URI[md5sum] = "01085b2ed8f7b11a41724f1528720cc7"
-SRC_URI[sha256sum] = "b71ff2c3925ea82a7ebf818685f809e595d5c47d767005dfb149c6264b098417"
+SRC_URI[md5sum] = "3feb49e7c6dea22de83647cb1790a1b3"
+SRC_URI[sha256sum] = "a283b590bd2ed5c1cd08630cbc7880d9906a3ca763cad121a66c9a5ddfc2882d"
