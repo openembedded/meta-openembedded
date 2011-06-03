@@ -1,0 +1,67 @@
+--- test/instparamtest.c
++++ test/instparamtest.c
+@@ -74,4 +74,5 @@
+ 	printf("release loop id: %ld\n", result);
+ 
+ 	afCloseFile(file);
++	return 0;
+ }
+--- test/instparamwrite.c
++++ test/instparamwrite.c
+@@ -52,4 +52,5 @@
+ 	afSetInstParamLong(file, AF_DEFAULT_INST, AF_INST_NUMCENTS_DETUNE, -30);
+ 
+ 	afCloseFile(file);
++	return 0;
+ }
+--- test/loop.c
++++ test/loop.c
+@@ -34,4 +34,5 @@
+ 	afSetLoopEnd(file, AF_DEFAULT_INST, 2, 4);
+ 
+ 	afCloseFile(file);
++	return 0;
+ }
+--- test/twentyfour.c.xx	2005-09-16 22:38:59.000000000 +0200
++++ test/twentyfour.c	2005-09-16 22:39:53.000000000 +0200
+@@ -36,7 +36,9 @@
+ #endif
+ 
+ #include <stdio.h>
++#include <string.h>
+ #include <stdlib.h>
++#include <unistd.h>
+ #include <audiofile.h>
+ #include <assert.h>
+ 
+--- test/pipe.c.xx	2005-09-16 22:39:36.000000000 +0200
++++ test/pipe.c	2005-09-16 22:39:42.000000000 +0200
+@@ -36,6 +36,7 @@
+ 
+ #include <audiofile.h>
+ #include <stdio.h>
++#include <string.h>
+ #include <stdlib.h>
+ 
+ #define SAMPLE_COUNT 12
+--- test/error.c.xx	2005-09-16 22:40:02.000000000 +0200
++++ test/error.c	2005-09-16 22:40:11.000000000 +0200
+@@ -25,6 +25,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
+ #include <audiofile.h>
+ 
+ int expectedError;
+--- test/testmarkers.c.xx	2005-09-16 22:40:21.000000000 +0200
++++ test/testmarkers.c	2005-09-16 22:40:41.000000000 +0200
+@@ -25,6 +25,8 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
++#include <unistd.h>
+ #include <assert.h>
+ #include <audiofile.h>
+ 
