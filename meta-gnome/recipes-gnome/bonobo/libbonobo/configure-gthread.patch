@@ -1,0 +1,11 @@
+--- libbonobo-2.14.0/configure.in.orig	2006-09-04 09:21:54.000000000 +0100
++++ libbonobo-2.14.0/configure.in	2006-09-04 09:22:58.000000000 +0100
+@@ -166,7 +166,7 @@
+ 		AC_MSG_RESULT(no)
+ 		AC_MSG_ERROR(
+ 			[No working gthread-2.0 support found, using --disable-threads IS DISCOURAGED])
+-	]
++	],[AC_MSG_RESULT(yes)]
+   )
+   CFLAGS=$libbonobo_save_CFLAGS
+   LIBS=$libbonobo_save_LIBS
