@@ -17,9 +17,9 @@ PKGV = "v${GITPKGVTAG}"
 PV = "git"
 PR = "r4"
 
-inherit autotools vala update-alternatives
+inherit autotools vala
 
-SRCREV = "9a66640832d103f906c2ef609a1d19d43fc542f6"
+SRCREV = "78e39b43b89c6bf9ce401d6030939a004a23c850"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://execute.patch \
@@ -53,11 +53,6 @@ do_install_append() {
               ${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(bb, d)}.service
         fi
 }
-
-ALTERNATIVE_NAME = "init"
-ALTERNATIVE_LINK = "${base_sbindir}/init"
-ALTERNATIVE_PATH = "${base_bindir}/systemd"
-ALTERNATIVE_PRIORITY = "80"
 
 PACKAGES =+ "${PN}-gui ${PN}-serialgetty"
 
@@ -101,17 +96,17 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
 # u-a for runlevel and telinit
 
 pkg_postinst_${PN} () {
-# can't do this offline, but we need the u-a bits
-if [ "x$D" != "x" ]; then
-    echo "can't do addgroup offline"
-else
-	grep "^lock:" /etc/group > /dev/null || addgroup lock
-fi
-
+update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
 update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
 
+# can't do this offline, but we need the u-a bits above
+if [ "x$D" != "x" ]; then
+	echo "can't do addgroup offline" ; exit 1
+else
+	grep "^lock:" /etc/group > /dev/null || addgroup lock
+fi
 }
 
