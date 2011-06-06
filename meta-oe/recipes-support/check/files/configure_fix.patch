@@ -1,0 +1,12 @@
+Index: check-0.9.5/configure.ac
+===================================================================
+--- check-0.9.5.orig/configure.ac	2008-10-29 04:09:50.000000000 +0000
++++ check-0.9.5/configure.ac	2008-10-29 04:10:06.000000000 +0000
+@@ -71,6 +71,7 @@
+ AC_PROG_INSTALL
+ AC_PROG_LN_S
+ AC_PROG_LIBTOOL
++AM_PROG_CC_C_O
+ if test -n "$GCC"; then
+   CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings"
+ fi
