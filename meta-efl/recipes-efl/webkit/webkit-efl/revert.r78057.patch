@@ -1,0 +1,19 @@
+see https://bugs.webkit.org/show_bug.cgi?id=50762
+fixed by:
+http://trac.webkit.org/changeset/78047/trunk/Source/WebCore/CMakeLists.txt
+fix reverted by:
+http://trac.webkit.org/changeset/78057/trunk/Source/WebCore/CMakeLists.txt
+
+so revert revert as we care about webkit-efl and don't care about WinCE
+
+Index: Source/WebCore/CMakeLists.txt
+===================================================================
+--- Source/WebCore/CMakeLists.txt	(revision 78042)
++++ Source/WebCore/CMakeLists.txt	(revision 78047)
+@@ -1157,6 +1157,4 @@
+ 
+     platform/Arena.cpp
+-    platform/ContextMenu.cpp
+-    platform/ContextMenuItem.cpp
+     platform/ContentType.cpp
+     platform/CrossThreadCopier.cpp
