@@ -14,7 +14,7 @@ PR = "r0"
 
 inherit pkgconfig cmake
 
-SRCREV = "d27f90a0128c687ce74cc922dba8b7eeb33f0654"
+SRCREV = "e952627ff4c116b4ce8541c91cb96bd5422c4a0d"
 SRC_URI = "git://github.com/OSSystems/FreeRDP-Extension-XPUnlimited.git;protocol=git"
 
 S = "${WORKDIR}/git"
