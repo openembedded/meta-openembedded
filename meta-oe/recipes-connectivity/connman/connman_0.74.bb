@@ -1,5 +1,7 @@
 require connman.inc
 
+PR = "r1"
+
 EXTRA_OECONF += "\
   --disable-gtk-doc \
   --enable-debug \
@@ -7,15 +9,14 @@ EXTRA_OECONF += "\
   --enable-loopback \
   --enable-ethernet \
   --enable-wifi \
-  --disable-wimax \
   --enable-bluetooth \
   --enable-ofono \
-  --enable-resolvconf \
-  --enable-dnsproxy \
   --enable-tools \
   --disable-polkit \
   --enable-client \
   --enable-fake \
+  --enable-ntpd \
+  --with-ntpd=${bindir}/ntpd \
 "
 
 SRC_URI  = "\
