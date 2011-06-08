@@ -1,6 +1,6 @@
 DESCRIPTION = "GNOME User Interface Library"
 LICENSE = "LGPLv2"
-LIC_FILES_CHKSUM = "COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
 
 SECTION = "x11/gnome/libs"
 DEPENDS = "libgnome libgnomecanvas libbonoboui gnome-keyring"
