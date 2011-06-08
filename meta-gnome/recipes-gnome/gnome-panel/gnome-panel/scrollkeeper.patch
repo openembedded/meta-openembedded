@@ -1,0 +1,16 @@
+diff -u gnome-panel-2.24.0.orig/configure.in gnome-panel-2.24.0/configure.in
+--- gnome-panel-2.24.0.orig/configure.in	2008-09-22 17:21:55.000000000 -0400
++++ gnome-panel-2.24.0/configure.in	2008-11-04 15:32:39.000000000 -0500
+@@ -296,9 +296,9 @@
+ dnl scrollkeeper checks
+ 
+ AC_PATH_PROG(SCROLLKEEPER_CONFIG, scrollkeeper-config,no)
+-if test x$SCROLLKEEPER_CONFIG = xno; then
+-  AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package)
+-fi
++dnl if test x$SCROLLKEEPER_CONFIG = xno; then
++dnl   AC_MSG_ERROR(Couldn't find scrollkeeper-config. Please install the scrollkeeper package)
++dnl fi
+ 
+ AM_GCONF_SOURCE_2
+ 
