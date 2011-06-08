@@ -1,0 +1,12 @@
+--- /tmp/Makefile.am	2006-07-26 11:37:52.000000000 +0200
++++ gdm-2.14.9/Makefile.am	2006-07-26 11:38:01.734411000 +0200
+@@ -5,8 +5,7 @@
+ 	vicious-extensions \
+ 	daemon \
+ 	gui \
+-	utils \
+-	docs
++	utils 
+ 
+ # add these when help gets added back
+ # docs omf-install
