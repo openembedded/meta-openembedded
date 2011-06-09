@@ -2,7 +2,7 @@ DESCRIPTION = "Graphical login manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r2"
+PR = "r3"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ libglade libgnomecanvas librsvg libxml2 libart-lgpl xrdb"
 
@@ -51,7 +51,7 @@ FILES_${PN} += "${datadir}/icon* \
 RDEPENDS_${PN} += "grep dbus-x11 shadow"
 # "libpam-base-files"
 CONFFILES_${PN} += "${sysconfdir}/gdm/gdm.conf ${sysconfdir}/init.d/gdm"
-RRECOMMENDS_${PN} += "gnome-session polkit-gnome consolekit"
+RRECOMMENDS_${PN} += "metacity gnome-session polkit-gnome consolekit"
 
 INITSCRIPT_NAME = "gdm"
 INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
