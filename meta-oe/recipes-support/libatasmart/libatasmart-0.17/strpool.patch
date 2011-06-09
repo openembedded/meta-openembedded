@@ -1,0 +1,11 @@
+--- git/Makefile.am.orig	2010-09-24 11:03:40.917602895 +0200
++++ git/Makefile.am	2010-09-24 11:07:04.145852660 +0200
+@@ -81,5 +81,8 @@
+ BUILT_SOURCES = \
+ 	atasmart.strpool.c
+ 
++strpool: $(strpool_SOURCES)
++	$(BUILD_CC) -o $@ $?
++
+ atasmart.strpool.c: atasmart.c strpool
+ 	$(top_builddir)/strpool $< $@
