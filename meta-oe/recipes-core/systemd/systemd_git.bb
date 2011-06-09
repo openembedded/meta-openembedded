@@ -15,7 +15,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r4"
+PR = "r5"
 
 inherit autotools vala
 
@@ -88,6 +88,7 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 # And pull in the kernel modules mentioned in INSTALL
 RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
                       ${PN}-serialgetty \
+                      util-linux-agetty \
                       module-init-tools \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
 "
