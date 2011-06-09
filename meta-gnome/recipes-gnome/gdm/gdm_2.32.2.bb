@@ -2,8 +2,6 @@ DESCRIPTION = "Graphical login manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r3"
-
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ libglade libgnomecanvas librsvg libxml2 libart-lgpl xrdb"
 
 inherit gnome update-rc.d
@@ -17,8 +15,6 @@ SRC_URI += " \
             file://Default \
            "
 
-SRC_URI[archive.md5sum] = "0da84637abbcbf1666529d6192a81e6b"
-SRC_URI[archive.sha256sum] = "ac2c367766b8fa20ebeb41033931fc4d91482ad3d377823f1c7ad84eee12dc15"
 
 EXTRA_OECONF = " --enable-authentication-scheme=shadow \
                  --enable-debug=yes \
