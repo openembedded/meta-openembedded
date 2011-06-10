@@ -1,6 +1,6 @@
 DESCRIPTION = "GNOME configuration database system"
 SECTION = "x11/gnome"
-DEPENDS = "gtk+ orbit2 glib-2.0 libxml2 polkit"
+DEPENDS = "gobject-introspection-native gtk+ orbit2 glib-2.0 libxml2 polkit"
 ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
 
 LICENSE = "LGPLv2+"
