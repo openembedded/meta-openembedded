@@ -1,10 +1,16 @@
 [Unit]
 Description=Opkg first boot configure
+DefaultDependencies=no
 ConditionPathExists=|/etc/rcS.d/S98configure
+Before=sysinit.target systemd-tmpfiles.service
 
 [Service]
 ExecStart=/etc/rcS.d/S98configure
-RemainAfterExit=no
+RemainAfterExit=No
+Type=oneshot
+StandardOutput=syslog
+TimeoutSec=0
 
 [Install]
 WantedBy=basic.target
+WantedBy=sysinit.target
