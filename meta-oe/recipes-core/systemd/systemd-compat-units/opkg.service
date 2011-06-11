@@ -2,7 +2,7 @@
 Description=Opkg first boot configure
 DefaultDependencies=no
 ConditionPathExists=|/etc/rcS.d/S98configure
-Before=sysinit.target systemd-tmpfiles.service
+Before=sysinit.target systemd-tmpfiles-setup.service
 
 [Service]
 ExecStart=/etc/rcS.d/S98configure
