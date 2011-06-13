@@ -1,6 +1,3 @@
-
-Ported from OE by: Yu Ke <ke.yu@intel.com>
-
 --- /tmp/qlibraryinfo.cpp	2008-08-02 17:16:41.000000000 +0200
 +++ qt-embedded-linux-opensource-src-4.4.1/src/corelib/global/qlibraryinfo.cpp	2008-08-02 17:17:42.000000000 +0200
 @@ -47,6 +47,7 @@
@@ -17,7 +14,7 @@ Ported from OE by: Yu Ke <ke.yu@intel.com>
          qtconfig = qmake_libraryInfoFile();
 +    if (!QFile::exists(qtconfig)) {
 +        QByteArray config = getenv("QT_CONF_PATH");
-+        qtconfig = QFile::decodeName(config);
++        qtconfig = config;
 +    }
  #else
      if (!QFile::exists(qtconfig) && QCoreApplication::instance()) {
