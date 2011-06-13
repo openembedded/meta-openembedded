@@ -12,11 +12,11 @@ DEPENDS = "libtool jpeg virtual/libusb0 libexif"
 SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2 \
            file://10-camera-libgphoto2-device.fdi \
            file://10-camera-libgphoto2.fdi \
-           file://90-libgphoto2.rules \
+           file://40-libgphoto2.rules \
 "
 
-SRC_URI[libgphoto2.md5sum] = "7753f17dff15702466337aab05209a71"
-SRC_URI[libgphoto2.sha256sum] = "69d7e0723b40e8a0c4fa897b96f6aecb5ae5548c3cce98c48e37b70623d9ffc3"
+SRC_URI[libgphoto2.md5sum] = "16a22b9739e45a95980ed62705fe7333"
+SRC_URI[libgphoto2.sha256sum] = "5116bbacea57dfe22585e8e939ea30b5fb99fe08de526002788c84e37105c423"
 
 inherit autotools pkgconfig gettext lib_package
 
