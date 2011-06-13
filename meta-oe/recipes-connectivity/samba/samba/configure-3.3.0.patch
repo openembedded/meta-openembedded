@@ -1,0 +1,85 @@
+diff -urN source.old//configure source//configure
+--- source.old//configure	2009-01-27 07:53:11.000000000 +0000
++++ source//configure	2009-01-31 21:07:25.811887936 +0000
+@@ -43860,13 +43860,7 @@
+     *linux*)
+        # glibc <= 2.3.2 has a broken getgrouplist
+        if test "$cross_compiling" = yes; then
+-  { { $as_echo "$as_me:$LINENO: error: in \`$ac_pwd':" >&5
+-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+-{ { $as_echo "$as_me:$LINENO: error: cannot run test program while cross compiling
+-See \`config.log' for more details." >&5
+-$as_echo "$as_me: error: cannot run test program while cross compiling
+-See \`config.log' for more details." >&2;}
+-   { (exit 1); exit 1; }; }; }
++linux_getgrouplist_ok=no
+ else
+   cat >conftest.$ac_ext <<_ACEOF
+ /* confdefs.h.  */
+diff -urN source.old//configure.in source//configure.in
+--- source.old//configure.in	2009-01-26 13:56:34.000000000 +0000
++++ source//configure.in	2009-01-31 21:04:39.051889949 +0000
+@@ -280,6 +280,8 @@
+ fi
+ AC_SUBST(BROKEN_CC)
+ 
++AC_TRY_COMPILE([],[(void)sizeof(char[-1])],AC_MSG_ERROR([configure's compilation assert doesn't work with $CC]))
++
+ dnl Check if the C compiler understands -Werror
+ AC_CACHE_CHECK([that the C compiler understands -Werror],samba_cv_HAVE_Werror, [
+  AC_TRY_RUN_STRICT([
+@@ -330,25 +332,11 @@
+ # a runtime test is needed here
+ AC_SUBST(PIDL_ARGS)
+ AC_CACHE_CHECK([that the C compiler understands negative enum values],samba_cv_CC_NEGATIVE_ENUM_VALUES, [
+-    AC_TRY_RUN(
++    AC_TRY_COMPILE([],
+ [
+-	#include <stdio.h>
+ 	enum negative_values { NEGATIVE_VALUE = 0xFFFFFFFF };
+-	int main(void) {
+-		enum negative_values v1 = NEGATIVE_VALUE;
+-		unsigned v2 = NEGATIVE_VALUE;
+-
+-		if (v1 != 0xFFFFFFFF) {
+-			printf("%u != 0xFFFFFFFF\n", v1);
+-			return 1;
+-		}
+-		if (v2 != 0xFFFFFFFF) {
+-			printf("%u != 0xFFFFFFFF\n", v2);
+-			return 1;
+-		}
+-
+-		return 0;
+-	}
++	(void)sizeof(char[1-2*(            (unsigned)NEGATIVE_VALUE != 0xFFFFFFFF)]);
++	(void)sizeof(char[1-2*((enum negative_values)NEGATIVE_VALUE != 0xFFFFFFFF)]);
+ ],
+ 	samba_cv_CC_NEGATIVE_ENUM_VALUES=yes,samba_cv__CC_NEGATIVE_ENUM_VALUES=no)])
+ if test x"$samba_cv_CC_NEGATIVE_ENUM_VALUES" != x"yes"; then
+@@ -1224,22 +1212,12 @@
+ case "$host_os" in
+     *linux*)
+        # glibc <= 2.3.2 has a broken getgrouplist
+-       AC_TRY_RUN([
+-#include <unistd.h>
++	AC_TRY_COMPILE([ 
+ #include <sys/utsname.h>
+-main() {
+-       /* glibc up to 2.3 has a broken getgrouplist */
++],[
+ #if defined(__GLIBC__) && defined(__GLIBC_MINOR__)
+-       int libc_major = __GLIBC__;
+-       int libc_minor = __GLIBC_MINOR__;
+-
+-       if (libc_major < 2)
+-              exit(1);
+-       if ((libc_major == 2) && (libc_minor <= 3))
+-              exit(1);
++	(void)sizeof(char[1-2*(__GLIBC__ < 2 || __GLIBC__ == 2 && __GLIBC_MINOR__ <= 3)]);
+ #endif
+-       exit(0);
+-}
+ ], [linux_getgrouplist_ok=yes], [linux_getgrouplist_ok=no])
+        if test x"$linux_getgrouplist_ok" = x"yes"; then
+           AC_DEFINE(HAVE_GETGROUPLIST, 1, [Have good getgrouplist])

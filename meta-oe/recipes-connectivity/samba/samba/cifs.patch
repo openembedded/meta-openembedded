@@ -1,0 +1,10 @@
+--- source/client/mount.cifs.c.old	2004-11-28 02:33:52.000000000 +1030
++++ source/client/mount.cifs.c	2004-11-28 02:33:59.000000000 +1030
+@@ -36,6 +36,7 @@
+ #include <string.h>
+ #include <mntent.h>
+ #include <fcntl.h>
++#include <linux/limits.h>
+ 
+ #define MOUNT_CIFS_VERSION_MAJOR "1"
+ #define MOUNT_CIFS_VERSION_MINOR "2"

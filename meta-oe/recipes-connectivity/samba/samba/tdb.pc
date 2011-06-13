@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib
+includedir=/usr/include
+
+Name: tdb
+Description: A trivial database
+Version: 1.1.2
+Libs: -L${libdir} -ltdb
+Cflags: -I${includedir} 
+URL: http://tdb.samba.org/

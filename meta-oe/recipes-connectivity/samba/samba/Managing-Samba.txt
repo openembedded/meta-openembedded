@@ -1,0 +1,40 @@
+This device is running a bare-bone Samba server which allows easy
+transfer of files and directories between any networked desktop PC and
+your networked PDA.
+
+Since it is generally a bad idea to allow everyone read and write access
+to your PDA, you will have to configure at least one user to get access to
+any shared folder.
+
+How to create a Samba user with password:
+
+- If you haven't already created a non-root user, do so now:
+	root@poodle:/usr/bin# adduser testuser
+	Changing password for testuser
+	Enter the new password (minimum of 5, maximum of 8 characters)
+	Please use a combination of upper and lower case letters and numbers.
+	Enter new password: 
+	Bad password: too short.
+
+	Warning: weak password (continuing).
+	Re-enter new password: 
+	Password changed.
+	root@poodle:/usr/bin# 
+	
+- Note that the password you entered will _not_ be your samba password.
+  Samba uses its own password database.
+  
+- Add a Samba password for your user:
+	root@poodle:/usr/bin# smbpasswd -a testuser
+	New SMB password:
+	Retype new SMB password:
+	Added user testuser.
+	root@poodle:/usr/bin# 
+
+- After you have added your new samba user, you'll have to restart the samba
+  server by running "/etc/init.d/samba restart" or by rebooting the device
+  
+- Use the newly created username / password combination to access your network
+  shares. Please note the the Samba username must also exist as a unix username!
+  
+  

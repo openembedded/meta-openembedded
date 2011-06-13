@@ -1,0 +1,12 @@
+diff -urN source.old//include/config.h.in source//include/config.h.in
+--- source.old//include/config.h.in	2008-11-20 14:45:04.000000000 +0000
++++ source//include/config.h.in	2008-11-30 21:04:17.990008933 +0000
+@@ -2672,7 +2672,7 @@
+ #undef USE_SETEUID
+ 
+ /* Whether setresuid() is available */
+-#undef USE_SETRESUID
++#define USE_SETRESUID 1
+ 
+ /* Whether setreuid() is available */
+ #undef USE_SETREUID

@@ -1,0 +1,47 @@
+Cache the check for Linux LFS support, so it can be prepopulated from 
+the site cache for configure variables for cross-compiling.  Without this,
+samba gets the idea that it can use dirent64 and friends without defining
+the flags it needs to get it, such as _GNU_SOURCE and _LARGEFILE64_SOURCE.
+
+Symptoms of getting the configuration wrong on cross-compile inculde
+warnings such as
+
+  smbd/trans2.c: In function `get_lanman2_dir_entry':
+  smbd/trans2.c:1065: warning: right shift count >= width of type
+
+and errors like
+
+  smbd/vfs.c:630: error: dereferencing pointer to incomplete type
+
+(when trying to dereference dirent64.)
+
+--- source/configure.in.orig	2005-05-29 14:46:18.000000000 -0700
++++ source/configure.in	2005-05-29 14:51:57.000000000 -0700
+@@ -588,7 +588,7 @@
+ # Tests for linux LFS support. Need kernel 2.4 and glibc2.2 or greater support.
+ #
+     *linux*)
+-        AC_MSG_CHECKING([for LFS support])
++       AC_CACHE_CHECK([for LFS support], samba_cv_LINUX_LFS_SUPPORT,[
+         old_CPPFLAGS="$CPPFLAGS"
+         CPPFLAGS="-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE $CPPFLAGS"
+        AC_TRY_RUN([
+@@ -627,15 +627,14 @@
+        exit(1);
+ #endif
+ }
+-], [LINUX_LFS_SUPPORT=yes], [LINUX_LFS_SUPPORT=no], [LINUX_LFS_SUPPORT=cross])
+-	CPPFLAGS="$old_CPPFLAGS"
+-	if test x$LINUX_LFS_SUPPORT = xyes ; then
++], [samba_cv_LINUX_LFS_SUPPORT=yes], [samba_cv_LINUX_LFS_SUPPORT=no], [samba_cv_LINUX_LFS_SUPPORT=cross])
++	CPPFLAGS="$old_CPPFLAGS"])
++	if test x"$samba_cv_LINUX_LFS_SUPPORT" = x"yes" ; then
+ 		CPPFLAGS="-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE $CPPFLAGS"
+ 		AC_DEFINE(_LARGEFILE64_SOURCE, 1, [Whether to enable large file support])
+ 		AC_DEFINE(_FILE_OFFSET_BITS, 64, [File offset bits])
+ 		AC_DEFINE(_GNU_SOURCE, 1, [Whether to use GNU libc extensions])
+ 	fi
+-	AC_MSG_RESULT([$LINUX_LFS_SUPPORT])
+ 	;;
+ 
+ #

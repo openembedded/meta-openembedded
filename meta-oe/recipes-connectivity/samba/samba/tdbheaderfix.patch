@@ -1,0 +1,14 @@
+Index: source/lib/tdb/include/tdb.h
+===================================================================
+--- source.orig/lib/tdb/include/tdb.h	2009-05-17 17:42:41.000000000 +0100
++++ source/lib/tdb/include/tdb.h	2009-05-17 17:42:46.000000000 +0100
+@@ -1,6 +1,9 @@
+ #ifndef __TDB_H__
+ #define __TDB_H__
+ 
++#include <signal.h>
++
++
+ /* 
+    Unix SMB/CIFS implementation.
+ 
