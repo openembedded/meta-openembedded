@@ -1,0 +1,329 @@
+2011-06-07  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from FSF:
+
+	2011-06-07  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config/arm/arm.md (*maddhidi4tb, *maddhidi4tt): New define_insns.
+	(*maddhisi4tb, *maddhisi4tt): New define_insns.
+
+	gcc/testsuite/
+	* gcc.target/arm/smlatb-1.c: New file.
+	* gcc.target/arm/smlatt-1.c: New file.
+	* gcc.target/arm/smlaltb-1.c: New file.
+	* gcc.target/arm/smlaltt-1.c: New file.
+
+2011-06-07  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from FSF:
+
+	2011-06-07  Bernd Schmidt  <bernds@codesourcery.com>
+		    Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* simplify-rtx.c (simplify_unary_operation_1): Canonicalize widening
+	multiplies.
+	* doc/md.texi (Canonicalization of Instructions): Document widening
+	multiply canonicalization.
+
+	gcc/testsuite/
+	* gcc.target/arm/mla-2.c: New test.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-05-13 13:42:39 +0000
++++ new/gcc/config/arm/arm.md	2011-06-02 15:58:33 +0000
+@@ -1809,6 +1809,36 @@
+    (set_attr "predicable" "yes")]
+ )
+ 
++;; Note: there is no maddhisi4ibt because this one is canonical form
++(define_insn "*maddhisi4tb"
++  [(set (match_operand:SI 0 "s_register_operand" "=r")
++	(plus:SI (mult:SI (ashiftrt:SI
++			   (match_operand:SI 1 "s_register_operand" "r")
++			   (const_int 16))
++			  (sign_extend:SI
++			   (match_operand:HI 2 "s_register_operand" "r")))
++		 (match_operand:SI 3 "s_register_operand" "r")))]
++  "TARGET_DSP_MULTIPLY"
++  "smlatb%?\\t%0, %1, %2, %3"
++  [(set_attr "insn" "smlaxy")
++   (set_attr "predicable" "yes")]
++)
++
++(define_insn "*maddhisi4tt"
++  [(set (match_operand:SI 0 "s_register_operand" "=r")
++	(plus:SI (mult:SI (ashiftrt:SI
++			   (match_operand:SI 1 "s_register_operand" "r")
++			   (const_int 16))
++			  (ashiftrt:SI
++			   (match_operand:SI 2 "s_register_operand" "r")
++			   (const_int 16)))
++		 (match_operand:SI 3 "s_register_operand" "r")))]
++  "TARGET_DSP_MULTIPLY"
++  "smlatt%?\\t%0, %1, %2, %3"
++  [(set_attr "insn" "smlaxy")
++   (set_attr "predicable" "yes")]
++)
++
+ (define_insn "*maddhidi4"
+   [(set (match_operand:DI 0 "s_register_operand" "=r")
+ 	(plus:DI
+@@ -1822,6 +1852,39 @@
+   [(set_attr "insn" "smlalxy")
+    (set_attr "predicable" "yes")])
+ 
++;; Note: there is no maddhidi4ibt because this one is canonical form
++(define_insn "*maddhidi4tb"
++  [(set (match_operand:DI 0 "s_register_operand" "=r")
++	(plus:DI
++	  (mult:DI (sign_extend:DI
++		    (ashiftrt:SI
++		     (match_operand:SI 1 "s_register_operand" "r")
++		     (const_int 16)))
++		   (sign_extend:DI
++		    (match_operand:HI 2 "s_register_operand" "r")))
++	  (match_operand:DI 3 "s_register_operand" "0")))]
++  "TARGET_DSP_MULTIPLY"
++  "smlaltb%?\\t%Q0, %R0, %1, %2"
++  [(set_attr "insn" "smlalxy")
++   (set_attr "predicable" "yes")])
++
++(define_insn "*maddhidi4tt"
++  [(set (match_operand:DI 0 "s_register_operand" "=r")
++	(plus:DI
++	  (mult:DI (sign_extend:DI
++		    (ashiftrt:SI
++		     (match_operand:SI 1 "s_register_operand" "r")
++		     (const_int 16)))
++		   (sign_extend:DI
++		    (ashiftrt:SI
++		     (match_operand:SI 2 "s_register_operand" "r")
++		     (const_int 16))))
++	  (match_operand:DI 3 "s_register_operand" "0")))]
++  "TARGET_DSP_MULTIPLY"
++  "smlaltt%?\\t%Q0, %R0, %1, %2"
++  [(set_attr "insn" "smlalxy")
++   (set_attr "predicable" "yes")])
++
+ (define_expand "mulsf3"
+   [(set (match_operand:SF          0 "s_register_operand" "")
+ 	(mult:SF (match_operand:SF 1 "s_register_operand" "")
+
+=== modified file 'gcc/doc/md.texi'
+--- old/gcc/doc/md.texi	2011-05-05 15:43:06 +0000
++++ new/gcc/doc/md.texi	2011-06-07 11:18:20 +0000
+@@ -5929,6 +5929,23 @@
+ will be written using @code{zero_extract} rather than the equivalent
+ @code{and} or @code{sign_extract} operations.
+ 
++@cindex @code{mult}, canonicalization of
++@item
++@code{(sign_extend:@var{m1} (mult:@var{m2} (sign_extend:@var{m2} @var{x})
++(sign_extend:@var{m2} @var{y})))} is converted to @code{(mult:@var{m1}
++(sign_extend:@var{m1} @var{x}) (sign_extend:@var{m1} @var{y}))}, and likewise
++for @code{zero_extend}.
++
++@item
++@code{(sign_extend:@var{m1} (mult:@var{m2} (ashiftrt:@var{m2}
++@var{x} @var{s}) (sign_extend:@var{m2} @var{y})))} is converted
++to @code{(mult:@var{m1} (sign_extend:@var{m1} (ashiftrt:@var{m2}
++@var{x} @var{s})) (sign_extend:@var{m1} @var{y}))}, and likewise for
++patterns using @code{zero_extend} and @code{lshiftrt}.  If the second
++operand of @code{mult} is also a shift, then that is extended also.
++This transformation is only applied when it can be proven that the
++original operation had sufficient precision to prevent overflow.
++
+ @end itemize
+ 
+ Further canonicalization rules are defined in the function
+
+=== modified file 'gcc/simplify-rtx.c'
+--- old/gcc/simplify-rtx.c	2011-05-27 14:31:18 +0000
++++ new/gcc/simplify-rtx.c	2011-06-02 12:32:16 +0000
+@@ -1000,6 +1000,48 @@
+ 	  && GET_CODE (XEXP (XEXP (op, 0), 1)) == LABEL_REF)
+ 	return XEXP (op, 0);
+ 
++      /* Extending a widening multiplication should be canonicalized to
++	 a wider widening multiplication.  */
++      if (GET_CODE (op) == MULT)
++	{
++	  rtx lhs = XEXP (op, 0);
++	  rtx rhs = XEXP (op, 1);
++	  enum rtx_code lcode = GET_CODE (lhs);
++	  enum rtx_code rcode = GET_CODE (rhs);
++
++	  /* Widening multiplies usually extend both operands, but sometimes
++	     they use a shift to extract a portion of a register.  */
++	  if ((lcode == SIGN_EXTEND
++	       || (lcode == ASHIFTRT && CONST_INT_P (XEXP (lhs, 1))))
++	      && (rcode == SIGN_EXTEND
++		  || (rcode == ASHIFTRT && CONST_INT_P (XEXP (rhs, 1)))))
++	    {
++	      enum machine_mode lmode = GET_MODE (lhs);
++	      enum machine_mode rmode = GET_MODE (rhs);
++	      int bits;
++
++	      if (lcode == ASHIFTRT)
++		/* Number of bits not shifted off the end.  */
++		bits = GET_MODE_PRECISION (lmode) - INTVAL (XEXP (lhs, 1));
++	      else /* lcode == SIGN_EXTEND */
++		/* Size of inner mode.  */
++		bits = GET_MODE_PRECISION (GET_MODE (XEXP (lhs, 0)));
++
++	      if (rcode == ASHIFTRT)
++		bits += GET_MODE_PRECISION (rmode) - INTVAL (XEXP (rhs, 1));
++	      else /* rcode == SIGN_EXTEND */
++		bits += GET_MODE_PRECISION (GET_MODE (XEXP (rhs, 0)));
++
++	      /* We can only widen multiplies if the result is mathematiclly
++		 equivalent.  I.e. if overflow was impossible.  */
++	      if (bits <= GET_MODE_PRECISION (GET_MODE (op)))
++		return simplify_gen_binary
++			 (MULT, mode,
++			  simplify_gen_unary (SIGN_EXTEND, mode, lhs, lmode),
++			  simplify_gen_unary (SIGN_EXTEND, mode, rhs, rmode));
++	    }
++	}
++
+       /* Check for a sign extension of a subreg of a promoted
+ 	 variable, where the promotion is sign-extended, and the
+ 	 target mode is the same as the variable's promotion.  */
+@@ -1071,6 +1113,48 @@
+ 	  && GET_MODE_SIZE (mode) <= GET_MODE_SIZE (GET_MODE (XEXP (op, 0))))
+ 	return rtl_hooks.gen_lowpart_no_emit (mode, op);
+ 
++      /* Extending a widening multiplication should be canonicalized to
++	 a wider widening multiplication.  */
++      if (GET_CODE (op) == MULT)
++	{
++	  rtx lhs = XEXP (op, 0);
++	  rtx rhs = XEXP (op, 1);
++	  enum rtx_code lcode = GET_CODE (lhs);
++	  enum rtx_code rcode = GET_CODE (rhs);
++
++	  /* Widening multiplies usually extend both operands, but sometimes
++	     they use a shift to extract a portion of a register.  */
++	  if ((lcode == ZERO_EXTEND
++	       || (lcode == LSHIFTRT && CONST_INT_P (XEXP (lhs, 1))))
++	      && (rcode == ZERO_EXTEND
++		  || (rcode == LSHIFTRT && CONST_INT_P (XEXP (rhs, 1)))))
++	    {
++	      enum machine_mode lmode = GET_MODE (lhs);
++	      enum machine_mode rmode = GET_MODE (rhs);
++	      int bits;
++
++	      if (lcode == LSHIFTRT)
++		/* Number of bits not shifted off the end.  */
++		bits = GET_MODE_PRECISION (lmode) - INTVAL (XEXP (lhs, 1));
++	      else /* lcode == ZERO_EXTEND */
++		/* Size of inner mode.  */
++		bits = GET_MODE_PRECISION (GET_MODE (XEXP (lhs, 0)));
++
++	      if (rcode == LSHIFTRT)
++		bits += GET_MODE_PRECISION (rmode) - INTVAL (XEXP (rhs, 1));
++	      else /* rcode == ZERO_EXTEND */
++		bits += GET_MODE_PRECISION (GET_MODE (XEXP (rhs, 0)));
++
++	      /* We can only widen multiplies if the result is mathematiclly
++		 equivalent.  I.e. if overflow was impossible.  */
++	      if (bits <= GET_MODE_PRECISION (GET_MODE (op)))
++		return simplify_gen_binary
++			 (MULT, mode,
++			  simplify_gen_unary (ZERO_EXTEND, mode, lhs, lmode),
++			  simplify_gen_unary (ZERO_EXTEND, mode, rhs, rmode));
++	    }
++	}
++
+       /* (zero_extend:M (zero_extend:N <X>)) is (zero_extend:M <X>).  */
+       if (GET_CODE (op) == ZERO_EXTEND)
+ 	return simplify_gen_unary (ZERO_EXTEND, mode, XEXP (op, 0),
+
+=== added file 'gcc/testsuite/gcc.target/arm/mla-2.c'
+--- old/gcc/testsuite/gcc.target/arm/mla-2.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/mla-2.c	2011-06-02 12:32:16 +0000
+@@ -0,0 +1,9 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long foolong (long long x, short *a, short *b)
++{
++    return x + *a * *b;
++}
++
++/* { dg-final { scan-assembler "smlalbb" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/smlaltb-1.c'
+--- old/gcc/testsuite/gcc.target/arm/smlaltb-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/smlaltb-1.c	2011-06-02 15:58:33 +0000
+@@ -0,0 +1,13 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long int
++foo (long long x, int in)
++{
++  short a = in & 0xffff;
++  short b = (in & 0xffff0000) >> 16;
++
++  return x + b * a;
++}
++
++/* { dg-final { scan-assembler "smlaltb" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/smlaltt-1.c'
+--- old/gcc/testsuite/gcc.target/arm/smlaltt-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/smlaltt-1.c	2011-06-02 15:58:33 +0000
+@@ -0,0 +1,13 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long int
++foo (long long x, int in1, int in2)
++{
++  short a = (in1 & 0xffff0000) >> 16;
++  short b = (in2 & 0xffff0000) >> 16;
++
++  return x + b * a;
++}
++
++/* { dg-final { scan-assembler "smlaltt" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/smlatb-1.c'
+--- old/gcc/testsuite/gcc.target/arm/smlatb-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/smlatb-1.c	2011-06-02 15:58:33 +0000
+@@ -0,0 +1,13 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++int
++foo (int x, int in)
++{
++  short a = in & 0xffff;
++  short b = (in & 0xffff0000) >> 16;
++
++  return x + b * a;
++}
++
++/* { dg-final { scan-assembler "smlatb" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/smlatt-1.c'
+--- old/gcc/testsuite/gcc.target/arm/smlatt-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/smlatt-1.c	2011-06-02 15:58:33 +0000
+@@ -0,0 +1,13 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++int
++foo (int x, int in1, int in2)
++{
++  short a = (in1 & 0xffff0000) >> 16;
++  short b = (in2 & 0xffff0000) >> 16;
++
++  return x + b * a;
++}
++
++/* { dg-final { scan-assembler "smlatt" } } */
+

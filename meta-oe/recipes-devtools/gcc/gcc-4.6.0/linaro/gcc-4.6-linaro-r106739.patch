@@ -1,0 +1,140 @@
+2011-05-02  Ira Rosen  <ira.rosen@linaro.org>
+
+	Backport from FSF:
+
+	2011-03-27  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* config/arm/arm.c (arm_autovectorize_vector_sizes): New function.
+	(TARGET_VECTORIZE_AUTOVECTORIZE_VECTOR_SIZES): Define.
+
+	gcc/testsuite/
+	* gcc.dg/vect/vect-outer-5.c: Reduce the distance between data
+	accesses to preserve the meaning of the test for doubleword vectors.
+	* gcc.dg/vect/no-vfa-pr29145.c: Likewise.
+	* gcc.dg/vect/slp-3.c: Reduce the loop bound for the same reason.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-03-02 11:38:43 +0000
++++ new/gcc/config/arm/arm.c	2011-04-28 11:46:58 +0000
+@@ -250,6 +250,7 @@
+ 						     bool is_packed);
+ static void arm_conditional_register_usage (void);
+ static reg_class_t arm_preferred_rename_class (reg_class_t rclass);
++static unsigned int arm_autovectorize_vector_sizes (void);
+ 
+ 
+ /* Table of machine attributes.  */
+@@ -395,6 +396,9 @@
+ #define TARGET_VECTOR_MODE_SUPPORTED_P arm_vector_mode_supported_p
+ #undef TARGET_VECTORIZE_PREFERRED_SIMD_MODE
+ #define TARGET_VECTORIZE_PREFERRED_SIMD_MODE arm_preferred_simd_mode
++#undef TARGET_VECTORIZE_AUTOVECTORIZE_VECTOR_SIZES
++#define TARGET_VECTORIZE_AUTOVECTORIZE_VECTOR_SIZES \
++  arm_autovectorize_vector_sizes
+ 
+ #undef  TARGET_MACHINE_DEPENDENT_REORG
+ #define TARGET_MACHINE_DEPENDENT_REORG arm_reorg
+@@ -23511,6 +23515,12 @@
+     }
+ }
+ 
++static unsigned int
++arm_autovectorize_vector_sizes (void)
++{
++  return TARGET_NEON_VECTORIZE_QUAD ? 16 | 8 : 0;
++}
++
+ static bool
+ arm_vector_alignment_reachable (const_tree type, bool is_packed)
+ {
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-pr29145.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-pr29145.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-pr29145.c	2011-04-28 11:46:58 +0000
+@@ -8,7 +8,7 @@
+ void with_restrict(int * __restrict p)
+ {
+   int i;
+-  int *q = p - 2;
++  int *q = p - 1;
+ 
+   for (i = 0; i < 1000; ++i) {
+     p[i] = q[i];
+@@ -19,7 +19,7 @@
+ void without_restrict(int * p)
+ {
+   int i;
+-  int *q = p - 2;
++  int *q = p - 1;
+ 
+   for (i = 0; i < 1000; ++i) {
+     p[i] = q[i];
+@@ -38,8 +38,8 @@
+     a[i] = b[i] = i;
+   }
+ 
+-  with_restrict(a + 2);
+-  without_restrict(b + 2);
++  with_restrict(a + 1);
++  without_restrict(b + 1);
+ 
+   for (i = 0; i < 1002; ++i) {
+     if (a[i] != b[i])
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-3.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-3.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-3.c	2011-04-28 11:46:58 +0000
+@@ -4,9 +4,9 @@
+ #include <stdarg.h>
+ #include "tree-vect.h"
+ 
+-#define N 8 
++#define N 12 
+ 
+-unsigned short in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++unsigned short in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+ 
+ int
+ main1 ()
+@@ -101,7 +101,7 @@
+     }
+ 
+   /* SLP with unrolling by 8.  */
+-  for (i = 0; i < N/2; i++)
++  for (i = 0; i < N/4; i++)
+     {
+       out[i*9] = in[i*9];
+       out[i*9 + 1] = in[i*9 + 1];
+@@ -115,7 +115,7 @@
+     }
+ 
+   /* check results:  */
+-  for (i = 0; i < N/2; i++)
++  for (i = 0; i < N/4; i++)
+     {
+       if (out[i*9] !=  in[i*9]
+          || out[i*9 + 1] != in[i*9 + 1]
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-5.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-5.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-5.c	2011-04-28 11:46:58 +0000
+@@ -17,7 +17,7 @@
+   float B[N] __attribute__ ((__aligned__(__BIGGEST_ALIGNMENT__)));
+   float C[N] __attribute__ ((__aligned__(__BIGGEST_ALIGNMENT__)));
+   float D[N] __attribute__ ((__aligned__(__BIGGEST_ALIGNMENT__)));
+-  float E[4] = {0,1,2,480};
++  float E[4] = {0,480,960,1440};
+   float s;
+ 
+   int i, j;
+@@ -55,7 +55,7 @@
+       s = 0;
+       for (j=0; j<N; j+=4)
+ 	s += C[j];
+-      B[i+3] = B[i] + s;
++      B[i+1] = B[i] + s;
+     }
+ 
+   /* check results:  */
+

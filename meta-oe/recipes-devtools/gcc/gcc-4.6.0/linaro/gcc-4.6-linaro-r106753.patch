@@ -1,0 +1,5027 @@
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	* gimple.c (gimple_build_call_internal_1): Add missing call to
+	gimple_call_reset_alias_info.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-05-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* gcc.dg/vect/vect-strided-u16-i3.c: New test.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-05-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* lib/target-supports.exp (check_effective_target_vect_strided):
+	Replace with...
+	(check_effective_target_vect_strided2)
+	(check_effective_target_vect_strided3)
+	(check_effective_target_vect_strided4)
+	(check_effective_target_vect_strided8): ...these new functions.
+
+	* gcc.dg/vect/O3-pr39675-2.c: Update accordingly.
+	* gcc.dg/vect/costmodel/ppc/costmodel-slp-12.c: Likewise.
+	* gcc.dg/vect/fast-math-slp-27.c: Likewise.
+	* gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c: Likewise.
+	* gcc.dg/vect/pr37539.c: Likewise.
+	* gcc.dg/vect/slp-11a.c: Likewise.
+	* gcc.dg/vect/slp-11b.c: Likewise.
+	* gcc.dg/vect/slp-11c.c: Likewise.
+	* gcc.dg/vect/slp-12a.c: Likewise.
+	* gcc.dg/vect/slp-12b.c: Likewise.
+	* gcc.dg/vect/slp-18.c: Likewise.
+	* gcc.dg/vect/slp-19a.c: Likewise.
+	* gcc.dg/vect/slp-19b.c: Likewise.
+	* gcc.dg/vect/slp-21.c: Likewise.
+	* gcc.dg/vect/slp-23.c: Likewise.
+	* gcc.dg/vect/vect-cselim-1.c: Likewise.
+
+	* gcc.dg/vect/fast-math-vect-complex-3.c: Use vect_stridedN
+	instead of vect_interleave && vect_extract_even_odd.
+	* gcc.dg/vect/no-scevccp-outer-10a.c: Likewise.
+	* gcc.dg/vect/no-scevccp-outer-10b.c: Likewise.
+	* gcc.dg/vect/no-scevccp-outer-20.c: Likewise.
+	* gcc.dg/vect/vect-1.c: Likewise.
+	* gcc.dg/vect/vect-10.c: Likewise.
+	* gcc.dg/vect/vect-98.c: Likewise.
+	* gcc.dg/vect/vect-107.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-mult.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u16-i2.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u16-i4.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u16-mult.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u32-mult.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u8-i2-gap.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u8-i8-gap2.c: Likewise.
+	* gcc.dg/vect/vect-strided-a-u8-i8-gap7.c: Likewise.
+	* gcc.dg/vect/vect-strided-float.c: Likewise.
+	* gcc.dg/vect/vect-strided-mult-char-ls.c: Likewise.
+	* gcc.dg/vect/vect-strided-mult.c: Likewise.
+	* gcc.dg/vect/vect-strided-same-dr.c: Likewise.
+	* gcc.dg/vect/vect-strided-u16-i2.c: Likewise.
+	* gcc.dg/vect/vect-strided-u16-i4.c: Likewise.
+	* gcc.dg/vect/vect-strided-u32-i4.c: Likewise.
+	* gcc.dg/vect/vect-strided-u32-i8.c: Likewise.
+	* gcc.dg/vect/vect-strided-u32-mult.c: Likewise.
+	* gcc.dg/vect/vect-strided-u8-i2-gap.c: Likewise.
+	* gcc.dg/vect/vect-strided-u8-i2.c: Likewise.
+	* gcc.dg/vect/vect-strided-u8-i8-gap2.c: Likewise.
+	* gcc.dg/vect/vect-strided-u8-i8-gap4.c: Likewise.
+	* gcc.dg/vect/vect-strided-u8-i8-gap7.c: Likewise.
+	* gcc.dg/vect/vect-strided-u8-i8.c: Likewise.
+	* gcc.dg/vect/vect-vfa-03.c: Likewise.
+
+	* gcc.dg/vect/no-scevccp-outer-18.c: Add vect_stridedN to the
+	target condition.
+	* gcc.dg/vect/pr30843.c: Likewise.
+	* gcc.dg/vect/pr33866.c: Likewise.
+	* gcc.dg/vect/slp-reduc-6.c: Likewise.
+	* gcc.dg/vect/vect-strided-store-a-u8-i2.c: Likewise.
+	* gcc.dg/vect/vect-strided-store-u16-i4.c: Likewise.
+	* gcc.dg/vect/vect-strided-store-u32-i2.c: Likewise.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-05-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* gcc.dg/vect/slp-11.c: Split into...
+	* gcc.dg/vect/slp-11a.c, gcc.dg/vect/slp-11b.c,
+	gcc.dg/vect/slp-11c.c: ...these tests.
+	* gcc.dg/vect/slp-12a.c: Split 4-stride loop into...
+	* gcc.dg/vect/slp-12c.c: ...this new test.
+	* gcc.dg/vect/slp-19.c: Split into...
+	* gcc.dg/vect/slp-19a.c, gcc.dg/vect/slp-19b.c,
+	gcc.dg/vect/slp-19c.c: ...these new tests.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-05-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* lib/target-supports.exp
+	(check_effective_target_vect_extract_even_odd_wide): Delete.
+	(check_effective_target_vect_strided_wide): Likewise.
+	* gcc.dg/vect/O3-pr39675-2.c: Use the non-wide versions instead.
+	* gcc.dg/vect/fast-math-pr35982.c: Likewise.
+	* gcc.dg/vect/fast-math-vect-complex-3.c: Likewise.
+	* gcc.dg/vect/pr37539.c: Likewise.
+	* gcc.dg/vect/slp-11.c: Likewise.
+	* gcc.dg/vect/slp-12a.c: Likewise.
+	* gcc.dg/vect/slp-12b.c: Likewise.
+	* gcc.dg/vect/slp-19.c: Likewise.
+	* gcc.dg/vect/slp-23.c: Likewise.
+	* gcc.dg/vect/vect-1.c: Likewise.
+	* gcc.dg/vect/vect-98.c: Likewise.
+	* gcc.dg/vect/vect-107.c: Likewise.
+	* gcc.dg/vect/vect-strided-float.c: Likewise.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-04-21  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* gcc.dg/vect/vect.exp: Run the main tests twice, one with -flto
+	and once without.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainlie:
+
+	2011-05-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* config/arm/neon.md (vec_load_lanes<mode><mode>): New expanders,
+	(vec_store_lanes<mode><mode>): Likewise.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-05-03  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* doc/md.texi (vec_load_lanes, vec_store_lanes): Document.
+	* optabs.h (COI_vec_load_lanes, COI_vec_store_lanes): New
+	convert_optab_index values.
+	(vec_load_lanes_optab, vec_store_lanes_optab): New convert optabs.
+	* genopinit.c (optabs): Initialize the new optabs.
+	* internal-fn.def (LOAD_LANES, STORE_LANES): New internal functions.
+	* internal-fn.c (get_multi_vector_move, expand_LOAD_LANES)
+	(expand_STORE_LANES): New functions.
+	* tree.h (build_array_type_nelts): Declare.
+	* tree.c (build_array_type_nelts): New function.
+	* tree-vectorizer.h (vect_model_store_cost): Add a bool argument.
+	(vect_model_load_cost): Likewise.
+	(vect_store_lanes_supported, vect_load_lanes_supported)
+	(vect_record_strided_load_vectors): Declare.
+	* tree-vect-data-refs.c (vect_lanes_optab_supported_p)
+	(vect_store_lanes_supported, vect_load_lanes_supported): New functions.
+	(vect_transform_strided_load): Split out statement recording into...
+	(vect_record_strided_load_vectors): ...this new function.
+	* tree-vect-stmts.c (create_vector_array, read_vector_array)
+	(write_vector_array, create_array_ref): New functions.
+	(vect_model_store_cost): Add store_lanes_p argument.
+	(vect_model_load_cost): Add load_lanes_p argument.
+	(vectorizable_store): Try to use store-lanes functions for
+	interleaved stores.
+	(vectorizable_load): Likewise load-lanes and loads.
+	* tree-vect-slp.c (vect_get_and_check_slp_defs): Update call
+	to vect_model_store_cost.
+	(vect_build_slp_tree): Likewise vect_model_load_cost.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-04-20  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* tree-vect-stmts.c (vectorizable_store): Only chain one related
+	statement per copy.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	* tree-inline.c (estimate_num_insns): Likewise.
+
+	Backport from mainline:
+
+	2011-04-20  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* Makefile.in (INTERNAL_FN_DEF, INTERNAL_FN_H): Define.
+	(GIMPLE_H): Include $(INTERNAL_FN_H).
+	(OBJS-common): Add internal-fn.o.
+	(internal-fn.o): New rule.
+	* internal-fn.def: New file.
+	* internal-fn.h: Likewise.
+	* internal-fn.c: Likewise.
+	* gimple.h: Include internal-fn.h.
+	(GF_CALL_INTERNAL): New gf_mask.
+	(gimple_statement_call): Put fntype into a union with a new
+	internal_fn field.
+	(gimple_build_call_internal): Declare.
+	(gimple_build_call_internal_vec): Likewise.
+	(gimple_call_same_target_p): Likewise.
+	(gimple_call_internal_p): New function.
+	(gimple_call_internal_fn): Likewise.
+	(gimple_call_set_fn): Assert that the function is not internal.
+	(gimple_call_set_fndecl): Likewise.
+	(gimple_call_set_internal_fn): New function.
+	(gimple_call_addr_fndecl): Handle null functions.
+	(gimple_call_return_type): Likewise.
+	[---- Plus backport adjustments:
+	(GF_CALL_INTERNAL_FN_SHIFT): New macro.
+	(GF_CALL_INTERNAL_FN): New gf_mask.
+	----]
+	* gimple.c (gimple_build_call_internal_1): New function.
+	(gimple_build_call_internal): Likewise.
+	(gimple_build_call_internal_vec): Likewise.
+	(gimple_call_same_target_p): Likewise.
+	(gimple_call_flags): Handle calls to internal functions.
+	(gimple_call_fnspec): New function.
+	(gimple_call_arg_flags, gimple_call_return_flags): Use it.
+	(gimple_has_side_effects): Handle null functions.
+	(gimple_rhs_has_side_effects): Likewise.
+	(gimple_call_copy_skip_args): Handle calls to internal functions.
+	* cfgexpand.c (expand_call_stmt): Likewise.
+	* expr.c (expand_expr_real_1): Assert that the call isn't internal.
+	* gimple-low.c (gimple_check_call_args): Handle calls to internal
+	functions.
+	* gimple-pretty-print.c (dump_gimple_call): Likewise.
+	* ipa-prop.c (ipa_analyze_call_uses): Handle null functions.
+	* tree-cfg.c (verify_gimple_call): Handle calls to internal functions.
+	(do_warn_unused_result): Likewise.
+	[---- Plus backport adjustments:
+	(verify_stmt): Likewise.
+	----]
+	* tree-eh.c (same_handler_p): Use gimple_call_same_target_p.
+	* tree-ssa-ccp.c (ccp_fold_stmt): Handle calls to internal functions.
+	[---- Plus backport adjustments:
+	(fold_gimple_call): Likewise.
+	----]
+	* tree-ssa-dom.c (hashable_expr): Use the gimple statement to record
+	the target of a call.
+	(initialize_hash_element): Update accordingly.
+	(hashable_expr_equal_p): Use gimple_call_same_target_p.
+	(iterative_hash_hashable_expr): Handle calls to internal functions.
+	(print_expr_hash_elt): Likewise.
+	* tree-ssa-pre.c (can_value_number_call): Likewise.
+	(eliminate): Handle null functions.
+	* tree-ssa-sccvn.c (visit_use): Handle calls to internal functions.
+	* tree-ssa-structalias.c (find_func_aliases): Likewise.
+	* value-prof.c (gimple_ic_transform): Likewise.
+	(gimple_indirect_call_to_profile): Likewise.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-04-14  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* tree-vectorizer.h (vect_strided_store_supported): Add a
+	HOST_WIDE_INT argument.
+	(vect_strided_load_supported): Likewise.
+	(vect_permute_store_chain): Return void.
+	(vect_transform_strided_load): Likewise.
+	(vect_permute_load_chain): Delete.
+	* tree-vect-data-refs.c (vect_strided_store_supported): Take a
+	count argument.  Check that the count is a power of two.
+	(vect_strided_load_supported): Likewise.
+	(vect_permute_store_chain): Return void.  Update after above changes.
+	Assert that the access is supported.
+	(vect_permute_load_chain): Likewise.
+	(vect_transform_strided_load): Return void.
+	* tree-vect-stmts.c (vectorizable_store): Update calls after
+	above interface changes.
+	(vectorizable_load): Likewise.
+	(vect_analyze_stmt): Don't check for strided powers of two here.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-04-14  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* tree-vectorizer.h (vect_create_data_ref_ptr): Add an extra
+	type parameter.
+	* tree-vect-data-refs.c (vect_create_data_ref_ptr): Add an aggr_type
+	parameter.  Generalise code to handle arrays as well as vectors.
+	(vect_setup_realignment): Update accordingly.
+	* tree-vect-stmts.c (vectorizable_store): Likewise.
+	(vectorizable_load): Likewise.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-04-14  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* tree-vect-stmts.c (vectorizable_load): Allocate and free dr_chain
+	within the per-copy loop.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-04-14  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* tree-vect-stmts.c (vectorizable_load): Print the number of copies
+	in the dump file.
+
+2001-06-02  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-03-25  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* config/arm/arm.h (CANNOT_CHANGE_MODE_CLASS): Restrict FPA_REGS
+	case to VFPv1.
+
+=== modified file 'gcc/Makefile.in'
+--- old/gcc/Makefile.in	2011-05-26 14:27:33 +0000
++++ new/gcc/Makefile.in	2011-06-02 12:12:00 +0000
+@@ -888,6 +888,8 @@
+ READ_MD_H = $(OBSTACK_H) $(HASHTAB_H) read-md.h
+ PARAMS_H = params.h params.def
+ BUILTINS_DEF = builtins.def sync-builtins.def omp-builtins.def
++INTERNAL_FN_DEF = internal-fn.def
++INTERNAL_FN_H = internal-fn.h $(INTERNAL_FN_DEF)
+ TREE_H = tree.h all-tree.def tree.def c-family/c-common.def \
+ 	$(lang_tree_files) $(MACHMODE_H) tree-check.h $(BUILTINS_DEF) \
+ 	$(INPUT_H) statistics.h $(VEC_H) treestruct.def $(HASHTAB_H) \
+@@ -897,7 +899,7 @@
+ BASIC_BLOCK_H = basic-block.h $(PREDICT_H) $(VEC_H) $(FUNCTION_H) cfghooks.h
+ GIMPLE_H = gimple.h gimple.def gsstruct.def pointer-set.h $(VEC_H) \
+ 	$(GGC_H) $(BASIC_BLOCK_H) $(TARGET_H) tree-ssa-operands.h \
+-	tree-ssa-alias.h vecir.h
++	tree-ssa-alias.h vecir.h $(INTERNAL_FN_H)
+ GCOV_IO_H = gcov-io.h gcov-iov.h auto-host.h
+ COVERAGE_H = coverage.h $(GCOV_IO_H)
+ DEMANGLE_H = $(srcdir)/../include/demangle.h
+@@ -1269,6 +1271,7 @@
+ 	init-regs.o \
+ 	input.o \
+ 	integrate.o \
++	internal-fn.o \
+ 	intl.o \
+ 	ira.o \
+ 	ira-build.o \
+@@ -2751,6 +2754,8 @@
+    $(TM_H) $(TREE_H) $(DIAGNOSTIC_CORE_H) $(DIAGNOSTIC_H) $(TREE_FLOW_H) \
+    $(TREE_PASS_H) tree-ssa-propagate.h tree-pretty-print.h \
+    gimple-pretty-print.h
++internal-fn.o : internal-fn.c $(CONFIG_H) $(SYSTEM_H) coretypes.h \
++   $(GIMPLE_H) $(TREE_H) $(EXPR_H) $(OPTABS_H) $(RECOG_H)
+ gimple.o : gimple.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TREE_H) \
+    $(GGC_H) $(GIMPLE_H) $(DIAGNOSTIC_CORE_H) $(DIAGNOSTIC_H) gt-gimple.h \
+    $(TREE_FLOW_H) value-prof.h $(FLAGS_H) $(DEMANGLE_H) \
+
+=== modified file 'gcc/cfgexpand.c'
+--- old/gcc/cfgexpand.c	2011-04-20 11:18:50 +0000
++++ new/gcc/cfgexpand.c	2011-06-02 12:12:00 +0000
+@@ -1839,12 +1839,17 @@
+ static void
+ expand_call_stmt (gimple stmt)
+ {
+-  tree exp;
+-  tree lhs = gimple_call_lhs (stmt);
++  tree exp, lhs;
+   size_t i;
+   bool builtin_p;
+   tree decl;
+ 
++  if (gimple_call_internal_p (stmt))
++    {
++      expand_internal_call (stmt);
++      return;
++    }
++
+   exp = build_vl_exp (CALL_EXPR, gimple_call_num_args (stmt) + 3);
+ 
+   CALL_EXPR_FN (exp) = gimple_call_fn (stmt);
+@@ -1882,6 +1887,7 @@
+   SET_EXPR_LOCATION (exp, gimple_location (stmt));
+   TREE_BLOCK (exp) = gimple_block (stmt);
+ 
++  lhs = gimple_call_lhs (stmt);
+   if (lhs)
+     expand_assignment (lhs, exp, false);
+   else
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-04-26 14:42:21 +0000
++++ new/gcc/config/arm/arm.h	2011-06-02 12:12:00 +0000
+@@ -1169,12 +1169,12 @@
+ }
+ 
+ /* FPA registers can't do subreg as all values are reformatted to internal
+-   precision.  VFP registers may only be accessed in the mode they
+-   were set.  */
+-#define CANNOT_CHANGE_MODE_CLASS(FROM, TO, CLASS)	\
+-  (GET_MODE_SIZE (FROM) != GET_MODE_SIZE (TO)		\
+-   ? reg_classes_intersect_p (FPA_REGS, (CLASS))	\
+-     || reg_classes_intersect_p (VFP_REGS, (CLASS))	\
++   precision.  In VFPv1, VFP registers could only be accessed in the mode
++   they were set, so subregs would be invalid there too.  However, we don't
++   support VFPv1 at the moment, and the restriction was lifted in VFPv2.  */
++#define CANNOT_CHANGE_MODE_CLASS(FROM, TO, CLASS)		\
++  (GET_MODE_SIZE (FROM) != GET_MODE_SIZE (TO)			\
++   ? reg_classes_intersect_p (FPA_REGS, (CLASS))		\
+    : 0)
+ 
+ /* The class value for index registers, and the one for base regs.  */
+
+=== modified file 'gcc/config/arm/neon.md'
+--- old/gcc/config/arm/neon.md	2011-05-06 11:28:27 +0000
++++ new/gcc/config/arm/neon.md	2011-06-02 12:12:00 +0000
+@@ -4248,6 +4248,12 @@
+   DONE;
+ })
+ 
++(define_expand "vec_load_lanes<mode><mode>"
++  [(set (match_operand:VDQX 0 "s_register_operand")
++        (unspec:VDQX [(match_operand:VDQX 1 "neon_struct_operand")]
++                     UNSPEC_VLD1))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vld1<mode>"
+   [(set (match_operand:VDQX 0 "s_register_operand" "=w")
+         (unspec:VDQX [(match_operand:VDQX 1 "neon_struct_operand" "Um")]
+@@ -4345,6 +4351,12 @@
+                     (const_string "neon_vld1_1_2_regs")))]
+ )
+ 
++(define_expand "vec_store_lanes<mode><mode>"
++  [(set (match_operand:VDQX 0 "neon_struct_operand")
++	(unspec:VDQX [(match_operand:VDQX 1 "s_register_operand")]
++		     UNSPEC_VST1))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vst1<mode>"
+   [(set (match_operand:VDQX 0 "neon_struct_operand" "=Um")
+ 	(unspec:VDQX [(match_operand:VDQX 1 "s_register_operand" "w")]
+@@ -4401,6 +4413,13 @@
+   [(set_attr "neon_type" "neon_vst1_vst2_lane")]
+ )
+ 
++(define_expand "vec_load_lanesti<mode>"
++  [(set (match_operand:TI 0 "s_register_operand")
++        (unspec:TI [(match_operand:TI 1 "neon_struct_operand")
++                    (unspec:VDX [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++		   UNSPEC_VLD2))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vld2<mode>"
+   [(set (match_operand:TI 0 "s_register_operand" "=w")
+         (unspec:TI [(match_operand:TI 1 "neon_struct_operand" "Um")
+@@ -4419,6 +4438,13 @@
+                     (const_string "neon_vld2_2_regs_vld1_vld2_all_lanes")))]
+ )
+ 
++(define_expand "vec_load_lanesoi<mode>"
++  [(set (match_operand:OI 0 "s_register_operand")
++        (unspec:OI [(match_operand:OI 1 "neon_struct_operand")
++                    (unspec:VQ [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++		   UNSPEC_VLD2))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vld2<mode>"
+   [(set (match_operand:OI 0 "s_register_operand" "=w")
+         (unspec:OI [(match_operand:OI 1 "neon_struct_operand" "Um")
+@@ -4501,6 +4527,13 @@
+                     (const_string "neon_vld1_1_2_regs")))]
+ )
+ 
++(define_expand "vec_store_lanesti<mode>"
++  [(set (match_operand:TI 0 "neon_struct_operand")
++	(unspec:TI [(match_operand:TI 1 "s_register_operand")
++                    (unspec:VDX [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++                   UNSPEC_VST2))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vst2<mode>"
+   [(set (match_operand:TI 0 "neon_struct_operand" "=Um")
+         (unspec:TI [(match_operand:TI 1 "s_register_operand" "w")
+@@ -4519,6 +4552,13 @@
+                     (const_string "neon_vst1_1_2_regs_vst2_2_regs")))]
+ )
+ 
++(define_expand "vec_store_lanesoi<mode>"
++  [(set (match_operand:OI 0 "neon_struct_operand")
++	(unspec:OI [(match_operand:OI 1 "s_register_operand")
++                    (unspec:VQ [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++                   UNSPEC_VST2))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vst2<mode>"
+   [(set (match_operand:OI 0 "neon_struct_operand" "=Um")
+ 	(unspec:OI [(match_operand:OI 1 "s_register_operand" "w")
+@@ -4584,6 +4624,13 @@
+   [(set_attr "neon_type" "neon_vst1_vst2_lane")]
+ )
+ 
++(define_expand "vec_load_lanesei<mode>"
++  [(set (match_operand:EI 0 "s_register_operand")
++        (unspec:EI [(match_operand:EI 1 "neon_struct_operand")
++                    (unspec:VDX [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++		   UNSPEC_VLD3))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vld3<mode>"
+   [(set (match_operand:EI 0 "s_register_operand" "=w")
+         (unspec:EI [(match_operand:EI 1 "neon_struct_operand" "Um")
+@@ -4602,6 +4649,16 @@
+                     (const_string "neon_vld3_vld4")))]
+ )
+ 
++(define_expand "vec_load_lanesci<mode>"
++  [(match_operand:CI 0 "s_register_operand")
++   (match_operand:CI 1 "neon_struct_operand")
++   (unspec:VQ [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++  "TARGET_NEON"
++{
++  emit_insn (gen_neon_vld3<mode> (operands[0], operands[1]));
++  DONE;
++})
++
+ (define_expand "neon_vld3<mode>"
+   [(match_operand:CI 0 "s_register_operand")
+    (match_operand:CI 1 "neon_struct_operand")
+@@ -4741,6 +4798,13 @@
+                     (const_string "neon_vld3_vld4_all_lanes")
+                     (const_string "neon_vld1_1_2_regs")))])
+ 
++(define_expand "vec_store_lanesei<mode>"
++  [(set (match_operand:EI 0 "neon_struct_operand")
++	(unspec:EI [(match_operand:EI 1 "s_register_operand")
++                    (unspec:VDX [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++                   UNSPEC_VST3))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vst3<mode>"
+   [(set (match_operand:EI 0 "neon_struct_operand" "=Um")
+         (unspec:EI [(match_operand:EI 1 "s_register_operand" "w")
+@@ -4758,6 +4822,16 @@
+                     (const_string "neon_vst1_1_2_regs_vst2_2_regs")
+                     (const_string "neon_vst2_4_regs_vst3_vst4")))])
+ 
++(define_expand "vec_store_lanesci<mode>"
++  [(match_operand:CI 0 "neon_struct_operand")
++   (match_operand:CI 1 "s_register_operand")
++   (unspec:VQ [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++  "TARGET_NEON"
++{
++  emit_insn (gen_neon_vst3<mode> (operands[0], operands[1]));
++  DONE;
++})
++
+ (define_expand "neon_vst3<mode>"
+   [(match_operand:CI 0 "neon_struct_operand")
+    (match_operand:CI 1 "s_register_operand")
+@@ -4869,6 +4943,13 @@
+ }
+ [(set_attr "neon_type" "neon_vst3_vst4_lane")])
+ 
++(define_expand "vec_load_lanesoi<mode>"
++  [(set (match_operand:OI 0 "s_register_operand")
++        (unspec:OI [(match_operand:OI 1 "neon_struct_operand")
++                    (unspec:VDX [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++		   UNSPEC_VLD4))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vld4<mode>"
+   [(set (match_operand:OI 0 "s_register_operand" "=w")
+         (unspec:OI [(match_operand:OI 1 "neon_struct_operand" "Um")
+@@ -4887,6 +4968,16 @@
+                     (const_string "neon_vld3_vld4")))]
+ )
+ 
++(define_expand "vec_load_lanesxi<mode>"
++  [(match_operand:XI 0 "s_register_operand")
++   (match_operand:XI 1 "neon_struct_operand")
++   (unspec:VQ [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++  "TARGET_NEON"
++{
++  emit_insn (gen_neon_vld4<mode> (operands[0], operands[1]));
++  DONE;
++})
++
+ (define_expand "neon_vld4<mode>"
+   [(match_operand:XI 0 "s_register_operand")
+    (match_operand:XI 1 "neon_struct_operand")
+@@ -5033,6 +5124,13 @@
+                     (const_string "neon_vld1_1_2_regs")))]
+ )
+ 
++(define_expand "vec_store_lanesoi<mode>"
++  [(set (match_operand:OI 0 "neon_struct_operand")
++	(unspec:OI [(match_operand:OI 1 "s_register_operand")
++                    (unspec:VDX [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++                   UNSPEC_VST4))]
++  "TARGET_NEON")
++
+ (define_insn "neon_vst4<mode>"
+   [(set (match_operand:OI 0 "neon_struct_operand" "=Um")
+         (unspec:OI [(match_operand:OI 1 "s_register_operand" "w")
+@@ -5051,6 +5149,16 @@
+                     (const_string "neon_vst2_4_regs_vst3_vst4")))]
+ )
+ 
++(define_expand "vec_store_lanesxi<mode>"
++  [(match_operand:XI 0 "neon_struct_operand")
++   (match_operand:XI 1 "s_register_operand")
++   (unspec:VQ [(const_int 0)] UNSPEC_VSTRUCTDUMMY)]
++  "TARGET_NEON"
++{
++  emit_insn (gen_neon_vst4<mode> (operands[0], operands[1]));
++  DONE;
++})
++
+ (define_expand "neon_vst4<mode>"
+   [(match_operand:XI 0 "neon_struct_operand")
+    (match_operand:XI 1 "s_register_operand")
+
+=== modified file 'gcc/doc/md.texi'
+--- old/gcc/doc/md.texi	2011-01-03 20:52:22 +0000
++++ new/gcc/doc/md.texi	2011-05-05 15:43:06 +0000
+@@ -3935,6 +3935,48 @@
+ consecutive memory locations, operand 1 is the first register, and
+ operand 2 is a constant: the number of consecutive registers.
+ 
++@cindex @code{vec_load_lanes@var{m}@var{n}} instruction pattern
++@item @samp{vec_load_lanes@var{m}@var{n}}
++Perform an interleaved load of several vectors from memory operand 1
++into register operand 0.  Both operands have mode @var{m}.  The register
++operand is viewed as holding consecutive vectors of mode @var{n},
++while the memory operand is a flat array that contains the same number
++of elements.  The operation is equivalent to:
++
++@smallexample
++int c = GET_MODE_SIZE (@var{m}) / GET_MODE_SIZE (@var{n});
++for (j = 0; j < GET_MODE_NUNITS (@var{n}); j++)
++  for (i = 0; i < c; i++)
++    operand0[i][j] = operand1[j * c + i];
++@end smallexample
++
++For example, @samp{vec_load_lanestiv4hi} loads 8 16-bit values
++from memory into a register of mode @samp{TI}@.  The register
++contains two consecutive vectors of mode @samp{V4HI}@.
++
++This pattern can only be used if:
++@smallexample
++TARGET_ARRAY_MODE_SUPPORTED_P (@var{n}, @var{c})
++@end smallexample
++is true.  GCC assumes that, if a target supports this kind of
++instruction for some mode @var{n}, it also supports unaligned
++loads for vectors of mode @var{n}.
++
++@cindex @code{vec_store_lanes@var{m}@var{n}} instruction pattern
++@item @samp{vec_store_lanes@var{m}@var{n}}
++Equivalent to @samp{vec_load_lanes@var{m}@var{n}}, with the memory
++and register operands reversed.  That is, the instruction is
++equivalent to:
++
++@smallexample
++int c = GET_MODE_SIZE (@var{m}) / GET_MODE_SIZE (@var{n});
++for (j = 0; j < GET_MODE_NUNITS (@var{n}); j++)
++  for (i = 0; i < c; i++)
++    operand0[j * c + i] = operand1[i][j];
++@end smallexample
++
++for a memory operand 0 and register operand 1.
++
+ @cindex @code{vec_set@var{m}} instruction pattern
+ @item @samp{vec_set@var{m}}
+ Set given field in the vector value.  Operand 0 is the vector to modify,
+
+=== modified file 'gcc/expr.c'
+--- old/gcc/expr.c	2011-05-26 14:27:33 +0000
++++ new/gcc/expr.c	2011-06-02 12:12:00 +0000
+@@ -8537,10 +8537,13 @@
+ 	  if (code == SSA_NAME
+ 	      && (g = SSA_NAME_DEF_STMT (ssa_name))
+ 	      && gimple_code (g) == GIMPLE_CALL)
+-	    pmode = promote_function_mode (type, mode, &unsignedp,
+-					   TREE_TYPE
+-					   (TREE_TYPE (gimple_call_fn (g))),
+-					   2);
++	    {
++	      gcc_assert (!gimple_call_internal_p (g));
++	      pmode = promote_function_mode (type, mode, &unsignedp,
++					     TREE_TYPE
++					     (TREE_TYPE (gimple_call_fn (g))),
++					     2);
++	    }
+ 	  else
+ 	    pmode = promote_decl_mode (exp, &unsignedp);
+ 	  gcc_assert (GET_MODE (decl_rtl) == pmode);
+
+=== modified file 'gcc/genopinit.c'
+--- old/gcc/genopinit.c	2011-01-03 20:52:22 +0000
++++ new/gcc/genopinit.c	2011-05-05 15:43:06 +0000
+@@ -74,6 +74,8 @@
+   "set_convert_optab_handler (fractuns_optab, $B, $A, CODE_FOR_$(fractuns$Q$a$I$b2$))",
+   "set_convert_optab_handler (satfract_optab, $B, $A, CODE_FOR_$(satfract$a$Q$b2$))",
+   "set_convert_optab_handler (satfractuns_optab, $B, $A, CODE_FOR_$(satfractuns$I$a$Q$b2$))",
++  "set_convert_optab_handler (vec_load_lanes_optab, $A, $B, CODE_FOR_$(vec_load_lanes$a$b$))",
++  "set_convert_optab_handler (vec_store_lanes_optab, $A, $B, CODE_FOR_$(vec_store_lanes$a$b$))",
+   "set_optab_handler (add_optab, $A, CODE_FOR_$(add$P$a3$))",
+   "set_optab_handler (addv_optab, $A, CODE_FOR_$(add$F$a3$)),\n\
+     set_optab_handler (add_optab, $A, CODE_FOR_$(add$F$a3$))",
+
+=== modified file 'gcc/gimple-low.c'
+--- old/gcc/gimple-low.c	2011-02-08 11:15:53 +0000
++++ new/gcc/gimple-low.c	2011-05-05 15:42:22 +0000
+@@ -218,6 +218,10 @@
+   tree fndecl, parms, p;
+   unsigned int i, nargs;
+ 
++  /* Calls to internal functions always match their signature.  */
++  if (gimple_call_internal_p (stmt))
++    return true;
++
+   nargs = gimple_call_num_args (stmt);
+ 
+   /* Get argument types for verification.  */
+
+=== modified file 'gcc/gimple-pretty-print.c'
+--- old/gcc/gimple-pretty-print.c	2011-02-15 18:36:16 +0000
++++ new/gcc/gimple-pretty-print.c	2011-05-05 15:42:22 +0000
+@@ -596,8 +596,12 @@
+ 
+   if (flags & TDF_RAW)
+     {
+-      dump_gimple_fmt (buffer, spc, flags, "%G <%T, %T",
+-                     gs, gimple_call_fn (gs), lhs);
++      if (gimple_call_internal_p (gs))
++	dump_gimple_fmt (buffer, spc, flags, "%G <%s, %T", gs,
++			 internal_fn_name (gimple_call_internal_fn (gs)), lhs);
++      else
++	dump_gimple_fmt (buffer, spc, flags, "%G <%T, %T",
++			 gs, gimple_call_fn (gs), lhs);
+       if (gimple_call_num_args (gs) > 0)
+         {
+           pp_string (buffer, ", ");
+@@ -617,7 +621,10 @@
+ 
+ 	  pp_space (buffer);
+         }
+-      print_call_name (buffer, gimple_call_fn (gs), flags);
++      if (gimple_call_internal_p (gs))
++	pp_string (buffer, internal_fn_name (gimple_call_internal_fn (gs)));
++      else
++	print_call_name (buffer, gimple_call_fn (gs), flags);
+       pp_string (buffer, " (");
+       dump_gimple_call_args (buffer, gs, flags);
+       pp_character (buffer, ')');
+
+=== modified file 'gcc/gimple.c'
+--- old/gcc/gimple.c	2011-05-18 13:33:53 +0000
++++ new/gcc/gimple.c	2011-06-02 12:12:00 +0000
+@@ -276,6 +276,59 @@
+ }
+ 
+ 
++/* Helper for gimple_build_call_internal and gimple_build_call_internal_vec.
++   Build the basic components of a GIMPLE_CALL statement to internal
++   function FN with NARGS arguments.  */
++
++static inline gimple
++gimple_build_call_internal_1 (enum internal_fn fn, unsigned nargs)
++{
++  gimple s = gimple_build_with_ops (GIMPLE_CALL, ERROR_MARK, nargs + 3);
++  s->gsbase.subcode |= GF_CALL_INTERNAL;
++  gimple_call_set_internal_fn (s, fn);
++  gimple_call_reset_alias_info (s);
++  return s;
++}
++
++
++/* Build a GIMPLE_CALL statement to internal function FN.  NARGS is
++   the number of arguments.  The ... are the arguments.  */
++
++gimple
++gimple_build_call_internal (enum internal_fn fn, unsigned nargs, ...)
++{
++  va_list ap;
++  gimple call;
++  unsigned i;
++
++  call = gimple_build_call_internal_1 (fn, nargs);
++  va_start (ap, nargs);
++  for (i = 0; i < nargs; i++)
++    gimple_call_set_arg (call, i, va_arg (ap, tree));
++  va_end (ap);
++
++  return call;
++}
++
++
++/* Build a GIMPLE_CALL statement to internal function FN with the arguments
++   specified in vector ARGS.  */
++
++gimple
++gimple_build_call_internal_vec (enum internal_fn fn, VEC(tree, heap) *args)
++{
++  unsigned i, nargs;
++  gimple call;
++
++  nargs = VEC_length (tree, args);
++  call = gimple_build_call_internal_1 (fn, nargs);
++  for (i = 0; i < nargs; i++)
++    gimple_call_set_arg (call, i, VEC_index (tree, args, i));
++
++  return call;
++}
++
++
+ /* Build a GIMPLE_CALL statement from CALL_EXPR T.  Note that T is
+    assumed to be in GIMPLE form already.  Minimal checking is done of
+    this fact.  */
+@@ -1774,6 +1827,20 @@
+   return (gimple_body (fndecl) || (fn && fn->cfg));
+ }
+ 
++/* Return true if calls C1 and C2 are known to go to the same function.  */
++
++bool
++gimple_call_same_target_p (const_gimple c1, const_gimple c2)
++{
++  if (gimple_call_internal_p (c1))
++    return (gimple_call_internal_p (c2)
++	    && gimple_call_internal_fn (c1) == gimple_call_internal_fn (c2));
++  else
++    return (gimple_call_fn (c1) == gimple_call_fn (c2)
++	    || (gimple_call_fndecl (c1)
++		&& gimple_call_fndecl (c1) == gimple_call_fndecl (c2)));
++}
++
+ /* Detect flags from a GIMPLE_CALL.  This is just like
+    call_expr_flags, but for gimple tuples.  */
+ 
+@@ -1786,6 +1853,8 @@
+ 
+   if (decl)
+     flags = flags_from_decl_or_type (decl);
++  else if (gimple_call_internal_p (stmt))
++    flags = internal_fn_flags (gimple_call_internal_fn (stmt));
+   else
+     {
+       t = TREE_TYPE (gimple_call_fn (stmt));
+@@ -1801,18 +1870,35 @@
+   return flags;
+ }
+ 
++/* Return the "fn spec" string for call STMT.  */
++
++static tree
++gimple_call_fnspec (const_gimple stmt)
++{
++  tree fn, type, attr;
++
++  fn = gimple_call_fn (stmt);
++  if (!fn)
++    return NULL_TREE;
++
++  type = TREE_TYPE (TREE_TYPE (fn));
++  if (!type)
++    return NULL_TREE;
++
++  attr = lookup_attribute ("fn spec", TYPE_ATTRIBUTES (type));
++  if (!attr)
++    return NULL_TREE;
++
++  return TREE_VALUE (TREE_VALUE (attr));
++}
++
+ /* Detects argument flags for argument number ARG on call STMT.  */
+ 
+ int
+ gimple_call_arg_flags (const_gimple stmt, unsigned arg)
+ {
+-  tree type = TREE_TYPE (TREE_TYPE (gimple_call_fn (stmt)));
+-  tree attr = lookup_attribute ("fn spec", TYPE_ATTRIBUTES (type));
+-  if (!attr)
+-    return 0;
+-
+-  attr = TREE_VALUE (TREE_VALUE (attr));
+-  if (1 + arg >= (unsigned) TREE_STRING_LENGTH (attr))
++  tree attr = gimple_call_fnspec (stmt);
++  if (!attr || 1 + arg >= (unsigned) TREE_STRING_LENGTH (attr))
+     return 0;
+ 
+   switch (TREE_STRING_POINTER (attr)[1 + arg])
+@@ -1850,13 +1936,8 @@
+   if (gimple_call_flags (stmt) & ECF_MALLOC)
+     return ERF_NOALIAS;
+ 
+-  type = TREE_TYPE (TREE_TYPE (gimple_call_fn (stmt)));
+-  attr = lookup_attribute ("fn spec", TYPE_ATTRIBUTES (type));
+-  if (!attr)
+-    return 0;
+-
+-  attr = TREE_VALUE (TREE_VALUE (attr));
+-  if (TREE_STRING_LENGTH (attr) < 1)
++  attr = gimple_call_fnspec (stmt);
++  if (!attr || TREE_STRING_LENGTH (attr) < 1)
+     return 0;
+ 
+   switch (TREE_STRING_POINTER (attr)[0])
+@@ -2293,6 +2374,7 @@
+   if (is_gimple_call (s))
+     {
+       unsigned nargs = gimple_call_num_args (s);
++      tree fn;
+ 
+       if (!(gimple_call_flags (s) & (ECF_CONST | ECF_PURE)))
+         return true;
+@@ -2307,7 +2389,8 @@
+ 	  return true;
+ 	}
+ 
+-      if (TREE_SIDE_EFFECTS (gimple_call_fn (s)))
++      fn = gimple_call_fn (s);
++      if (fn && TREE_SIDE_EFFECTS (fn))
+         return true;
+ 
+       for (i = 0; i < nargs; i++)
+@@ -2349,14 +2432,15 @@
+   if (is_gimple_call (s))
+     {
+       unsigned nargs = gimple_call_num_args (s);
++      tree fn;
+ 
+       if (!(gimple_call_flags (s) & (ECF_CONST | ECF_PURE)))
+         return true;
+ 
+       /* We cannot use gimple_has_volatile_ops here,
+          because we must ignore a volatile LHS.  */
+-      if (TREE_SIDE_EFFECTS (gimple_call_fn (s))
+-          || TREE_THIS_VOLATILE (gimple_call_fn (s)))
++      fn = gimple_call_fn (s);
++      if (fn && (TREE_SIDE_EFFECTS (fn) || TREE_THIS_VOLATILE (fn)))
+ 	{
+ 	  gcc_assert (gimple_has_volatile_ops (s));
+ 	  return true;
+@@ -3113,7 +3197,6 @@
+ gimple_call_copy_skip_args (gimple stmt, bitmap args_to_skip)
+ {
+   int i;
+-  tree fn = gimple_call_fn (stmt);
+   int nargs = gimple_call_num_args (stmt);
+   VEC(tree, heap) *vargs = VEC_alloc (tree, heap, nargs);
+   gimple new_stmt;
+@@ -3122,7 +3205,11 @@
+     if (!bitmap_bit_p (args_to_skip, i))
+       VEC_quick_push (tree, vargs, gimple_call_arg (stmt, i));
+ 
+-  new_stmt = gimple_build_call_vec (fn, vargs);
++  if (gimple_call_internal_p (stmt))
++    new_stmt = gimple_build_call_internal_vec (gimple_call_internal_fn (stmt),
++					       vargs);
++  else
++    new_stmt = gimple_build_call_vec (gimple_call_fn (stmt), vargs);
+   VEC_free (tree, heap, vargs);
+   if (gimple_call_lhs (stmt))
+     gimple_call_set_lhs (new_stmt, gimple_call_lhs (stmt));
+
+=== modified file 'gcc/gimple.h'
+--- old/gcc/gimple.h	2011-04-18 21:58:03 +0000
++++ new/gcc/gimple.h	2011-06-02 12:12:00 +0000
+@@ -30,6 +30,7 @@
+ #include "basic-block.h"
+ #include "tree-ssa-operands.h"
+ #include "tree-ssa-alias.h"
++#include "internal-fn.h"
+ 
+ struct gimple_seq_node_d;
+ typedef struct gimple_seq_node_d *gimple_seq_node;
+@@ -82,6 +83,8 @@
+ 			   name, a _DECL, a _REF, etc.  */
+ };
+ 
++#define GF_CALL_INTERNAL_FN_SHIFT 8
++
+ /* Specific flags for individual GIMPLE statements.  These flags are
+    always stored in gimple_statement_base.subcode and they may only be
+    defined for statement codes that do not use sub-codes.
+@@ -102,6 +105,8 @@
+     GF_CALL_TAILCALL		= 1 << 3,
+     GF_CALL_VA_ARG_PACK		= 1 << 4,
+     GF_CALL_NOTHROW		= 1 << 5,
++    GF_CALL_INTERNAL		= 1 << 6,
++    GF_CALL_INTERNAL_FN		= 0xff << GF_CALL_INTERNAL_FN_SHIFT,
+     GF_OMP_PARALLEL_COMBINED	= 1 << 0,
+ 
+     /* True on an GIMPLE_OMP_RETURN statement if the return does not require
+@@ -817,6 +822,8 @@
+ 
+ gimple gimple_build_call_vec (tree, VEC(tree, heap) *);
+ gimple gimple_build_call (tree, unsigned, ...);
++gimple gimple_build_call_internal (enum internal_fn, unsigned, ...);
++gimple gimple_build_call_internal_vec (enum internal_fn, VEC(tree, heap) *);
+ gimple gimple_build_call_from_tree (tree);
+ gimple gimplify_assign (tree, tree, gimple_seq *);
+ gimple gimple_build_cond (enum tree_code, tree, tree, tree, tree);
+@@ -861,6 +868,7 @@
+ void gimple_seq_free (gimple_seq);
+ void gimple_seq_add_seq (gimple_seq *, gimple_seq);
+ gimple_seq gimple_seq_copy (gimple_seq);
++bool gimple_call_same_target_p (const_gimple, const_gimple);
+ int gimple_call_flags (const_gimple);
+ int gimple_call_return_flags (const_gimple);
+ int gimple_call_arg_flags (const_gimple, unsigned);
+@@ -2012,6 +2020,27 @@
+ }
+ 
+ 
++/* Return true if call GS calls an internal-only function, as enumerated
++   by internal_fn.  */
++
++static inline bool
++gimple_call_internal_p (const_gimple gs)
++{
++  GIMPLE_CHECK (gs, GIMPLE_CALL);
++  return (gs->gsbase.subcode & GF_CALL_INTERNAL) != 0;
++}
++
++
++/* Return the target of internal call GS.  */
++
++static inline enum internal_fn
++gimple_call_internal_fn (const_gimple gs)
++{
++  gcc_assert (gimple_call_internal_p (gs));
++  return (enum internal_fn) (gs->gsbase.subcode >> GF_CALL_INTERNAL_FN_SHIFT);
++}
++
++
+ /* Return a pointer to the tree node representing the function called by call
+    statement GS.  */
+ 
+@@ -2029,6 +2058,7 @@
+ gimple_call_set_fn (gimple gs, tree fn)
+ {
+   GIMPLE_CHECK (gs, GIMPLE_CALL);
++  gcc_assert (!gimple_call_internal_p (gs));
+   gimple_set_op (gs, 1, fn);
+ }
+ 
+@@ -2039,10 +2069,23 @@
+ gimple_call_set_fndecl (gimple gs, tree decl)
+ {
+   GIMPLE_CHECK (gs, GIMPLE_CALL);
++  gcc_assert (!gimple_call_internal_p (gs));
+   gimple_set_op (gs, 1, build_fold_addr_expr_loc (gimple_location (gs), decl));
+ }
+ 
+ 
++/* Set internal function FN to be the function called by call statement GS.  */
++
++static inline void
++gimple_call_set_internal_fn (gimple gs, enum internal_fn fn)
++{
++  GIMPLE_CHECK (gs, GIMPLE_CALL);
++  gcc_assert (gimple_call_internal_p (gs));
++  gs->gsbase.subcode &= ~GF_CALL_INTERNAL_FN;
++  gs->gsbase.subcode |= (int) fn << GF_CALL_INTERNAL_FN_SHIFT;
++}
++
++
+ /* If a given GIMPLE_CALL's callee is a FUNCTION_DECL, return it.
+    Otherwise return NULL.  This function is analogous to
+    get_callee_fndecl in tree land.  */
+@@ -2051,7 +2094,7 @@
+ gimple_call_fndecl (const_gimple gs)
+ {
+   tree addr = gimple_call_fn (gs);
+-  if (TREE_CODE (addr) == ADDR_EXPR)
++  if (addr && TREE_CODE (addr) == ADDR_EXPR)
+     {
+       tree fndecl = TREE_OPERAND (addr, 0);
+       if (TREE_CODE (fndecl) == MEM_REF)
+@@ -2073,8 +2116,13 @@
+ static inline tree
+ gimple_call_return_type (const_gimple gs)
+ {
+-  tree fn = gimple_call_fn (gs);
+-  tree type = TREE_TYPE (fn);
++  tree fn, type;
++
++  fn = gimple_call_fn (gs);
++  if (fn == NULL_TREE)
++    return TREE_TYPE (gimple_call_lhs (gs));
++
++  type = TREE_TYPE (fn);
+ 
+   /* See through the pointer.  */
+   type = TREE_TYPE (type);
+
+=== added file 'gcc/internal-fn.c'
+--- old/gcc/internal-fn.c	1970-01-01 00:00:00 +0000
++++ new/gcc/internal-fn.c	2011-05-05 15:43:06 +0000
+@@ -0,0 +1,147 @@
++/* Internal functions.
++   Copyright (C) 2011 Free Software Foundation, Inc.
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify it under
++the terms of the GNU General Public License as published by the Free
++Software Foundation; either version 3, or (at your option) any later
++version.
++
++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
++WARRANTY; without even the implied warranty of MERCHANTABILITY or
++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++for more details.
++
++You should have received a copy of the GNU General Public License
++along with GCC; see the file COPYING3.  If not see
++<http://www.gnu.org/licenses/>.  */
++
++#include "config.h"
++#include "system.h"
++#include "coretypes.h"
++#include "gimple.h"
++#include "tree.h"
++#include "expr.h"
++#include "optabs.h"
++#include "recog.h"
++
++/* The names of each internal function, indexed by function number.  */
++const char *const internal_fn_name_array[] = {
++#define DEF_INTERNAL_FN(CODE, FLAGS) #CODE,
++#include "internal-fn.def"
++#undef DEF_INTERNAL_FN
++  "<invalid-fn>"
++};
++
++/* The ECF_* flags of each internal function, indexed by function number.  */
++const int internal_fn_flags_array[] = {
++#define DEF_INTERNAL_FN(CODE, FLAGS) FLAGS,
++#include "internal-fn.def"
++#undef DEF_INTERNAL_FN
++  0
++};
++
++/* ARRAY_TYPE is an array of vector modes.  Return the associated insn
++   for load-lanes-style optab OPTAB.  The insn must exist.  */
++
++static enum insn_code
++get_multi_vector_move (tree array_type, convert_optab optab)
++{
++  enum insn_code icode;
++  enum machine_mode imode;
++  enum machine_mode vmode;
++
++  gcc_assert (TREE_CODE (array_type) == ARRAY_TYPE);
++  imode = TYPE_MODE (array_type);
++  vmode = TYPE_MODE (TREE_TYPE (array_type));
++
++  icode = convert_optab_handler (optab, imode, vmode);
++  gcc_assert (icode != CODE_FOR_nothing);
++  return icode;
++}
++
++/* Expand LOAD_LANES call STMT.  */
++
++static void
++expand_LOAD_LANES (gimple stmt)
++{
++  tree type, lhs, rhs;
++  rtx target, mem;
++  enum insn_code icode;
++  const struct insn_operand_data *operand;
++
++  lhs = gimple_call_lhs (stmt);
++  rhs = gimple_call_arg (stmt, 0);
++  type = TREE_TYPE (lhs);
++
++  target = expand_expr (lhs, NULL_RTX, VOIDmode, EXPAND_WRITE);
++  mem = expand_normal (rhs);
++
++  gcc_assert (REG_P (target));
++  gcc_assert (MEM_P (mem));
++  PUT_MODE (mem, TYPE_MODE (type));
++
++  icode = get_multi_vector_move (type, vec_load_lanes_optab);
++
++  operand = &insn_data[(int) icode].operand[1];
++  if (operand->predicate && !operand->predicate (mem, operand->mode))
++    mem = replace_equiv_address (mem, force_reg (Pmode, XEXP (mem, 0)));
++
++  emit_insn (GEN_FCN (icode) (target, mem));
++}
++
++/* Expand STORE_LANES call STMT.  */
++
++static void
++expand_STORE_LANES (gimple stmt)
++{
++  tree type, lhs, rhs;
++  rtx target, reg;
++  enum insn_code icode;
++  const struct insn_operand_data *operand;
++
++  lhs = gimple_call_lhs (stmt);
++  rhs = gimple_call_arg (stmt, 0);
++  type = TREE_TYPE (rhs);
++
++  target = expand_expr (lhs, NULL_RTX, VOIDmode, EXPAND_WRITE);
++  reg = expand_normal (rhs);
++
++  gcc_assert (MEM_P (target));
++  PUT_MODE (target, TYPE_MODE (type));
++
++  icode = get_multi_vector_move (type, vec_store_lanes_optab);
++
++  operand = &insn_data[(int) icode].operand[0];
++  if (operand->predicate && !operand->predicate (target, operand->mode))
++    target = replace_equiv_address (target,
++				    force_reg (Pmode, XEXP (target, 0)));
++
++  operand = &insn_data[(int) icode].operand[1];
++  if (operand->predicate && !operand->predicate (reg, operand->mode))
++    reg = force_reg (TYPE_MODE (type), reg);
++
++  emit_insn (GEN_FCN (icode) (target, reg));
++}
++
++/* Routines to expand each internal function, indexed by function number.
++   Each routine has the prototype:
++
++       expand_<NAME> (gimple stmt)
++
++   where STMT is the statement that performs the call. */
++static void (*const internal_fn_expanders[]) (gimple) = {
++#define DEF_INTERNAL_FN(CODE, FLAGS) expand_##CODE,
++#include "internal-fn.def"
++#undef DEF_INTERNAL_FN
++  0
++};
++
++/* Expand STMT, which is a call to internal function FN.  */
++
++void
++expand_internal_call (gimple stmt)
++{
++  internal_fn_expanders[(int) gimple_call_internal_fn (stmt)] (stmt);
++}
+
+=== added file 'gcc/internal-fn.def'
+--- old/gcc/internal-fn.def	1970-01-01 00:00:00 +0000
++++ new/gcc/internal-fn.def	2011-05-05 15:43:06 +0000
+@@ -0,0 +1,42 @@
++/* Internal functions.
++   Copyright (C) 2011 Free Software Foundation, Inc.
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify it under
++the terms of the GNU General Public License as published by the Free
++Software Foundation; either version 3, or (at your option) any later
++version.
++
++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
++WARRANTY; without even the implied warranty of MERCHANTABILITY or
++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++for more details.
++
++You should have received a copy of the GNU General Public License
++along with GCC; see the file COPYING3.  If not see
++<http://www.gnu.org/licenses/>.  */
++
++/* This file specifies a list of internal "functions".  These functions
++   differ from built-in functions in that they have no linkage and cannot
++   be called directly by the user.  They represent operations that are only
++   synthesised by GCC itself.
++
++   Internal functions are used instead of tree codes if the operation
++   and its operands are more naturally represented as a GIMPLE_CALL
++   than a GIMPLE_ASSIGN.
++
++   Each entry in this file has the form:
++
++     DEF_INTERNAL_FN (NAME, FLAGS)
++
++   where NAME is the name of the function and FLAGS is a set of
++   ECF_* flags.  Each entry must have a corresponding expander
++   of the form:
++
++     void expand_NAME (gimple stmt)
++
++   where STMT is the statement that performs the call.  */
++
++DEF_INTERNAL_FN (LOAD_LANES, ECF_CONST | ECF_LEAF)
++DEF_INTERNAL_FN (STORE_LANES, ECF_CONST | ECF_LEAF)
+
+=== added file 'gcc/internal-fn.h'
+--- old/gcc/internal-fn.h	1970-01-01 00:00:00 +0000
++++ new/gcc/internal-fn.h	2011-05-05 15:42:22 +0000
+@@ -0,0 +1,52 @@
++/* Internal functions.
++   Copyright (C) 2011 Free Software Foundation, Inc.
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify it under
++the terms of the GNU General Public License as published by the Free
++Software Foundation; either version 3, or (at your option) any later
++version.
++
++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
++WARRANTY; without even the implied warranty of MERCHANTABILITY or
++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++for more details.
++
++You should have received a copy of the GNU General Public License
++along with GCC; see the file COPYING3.  If not see
++<http://www.gnu.org/licenses/>.  */
++
++#ifndef GCC_INTERNAL_FN_H
++#define GCC_INTERNAL_FN_H
++
++enum internal_fn {
++#define DEF_INTERNAL_FN(CODE, FLAGS) IFN_##CODE,
++#include "internal-fn.def"
++#undef DEF_INTERNAL_FN
++  IFN_LAST
++};
++
++extern const char *const internal_fn_name_array[];
++extern const int internal_fn_flags_array[];
++
++/* Return the name of internal function FN.  The name is only meaningful
++   for dumps; it has no linkage.  */
++
++static inline const char *
++internal_fn_name (enum internal_fn fn)
++{
++  return internal_fn_name_array[(int) fn];
++}
++
++/* Return the ECF_* flags for function FN.  */
++
++static inline int
++internal_fn_flags (enum internal_fn fn)
++{
++  return internal_fn_flags_array[(int) fn];
++}
++
++extern void expand_internal_call (gimple);
++
++#endif
+
+=== modified file 'gcc/ipa-prop.c'
+--- old/gcc/ipa-prop.c	2011-04-18 21:58:03 +0000
++++ new/gcc/ipa-prop.c	2011-06-02 12:12:00 +0000
+@@ -1418,6 +1418,8 @@
+ {
+   tree target = gimple_call_fn (call);
+ 
++  if (!target)
++    return;
+   if (TREE_CODE (target) == SSA_NAME)
+     ipa_analyze_indirect_call_uses (node, info, parms_info, call, target);
+   else if (TREE_CODE (target) == OBJ_TYPE_REF)
+
+=== modified file 'gcc/optabs.h'
+--- old/gcc/optabs.h	2011-01-03 20:52:22 +0000
++++ new/gcc/optabs.h	2011-05-05 15:43:06 +0000
+@@ -578,6 +578,9 @@
+   COI_satfract,
+   COI_satfractuns,
+ 
++  COI_vec_load_lanes,
++  COI_vec_store_lanes,
++
+   COI_MAX
+ };
+ 
+@@ -598,6 +601,8 @@
+ #define fractuns_optab (&convert_optab_table[COI_fractuns])
+ #define satfract_optab (&convert_optab_table[COI_satfract])
+ #define satfractuns_optab (&convert_optab_table[COI_satfractuns])
++#define vec_load_lanes_optab (&convert_optab_table[COI_vec_load_lanes])
++#define vec_store_lanes_optab (&convert_optab_table[COI_vec_store_lanes])
+ 
+ /* Contains the optab used for each rtx code.  */
+ extern optab code_to_optab[NUM_RTX_CODE + 1];
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/O3-pr39675-2.c'
+--- old/gcc/testsuite/gcc.dg/vect/O3-pr39675-2.c	2009-04-20 10:26:18 +0000
++++ new/gcc/testsuite/gcc.dg/vect/O3-pr39675-2.c	2011-05-05 15:46:10 +0000
+@@ -26,7 +26,7 @@
+     }
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided_wide } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" { target vect_strided_wide } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided4 } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" { target vect_strided4 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/costmodel/ppc/costmodel-slp-12.c'
+--- old/gcc/testsuite/gcc.dg/vect/costmodel/ppc/costmodel-slp-12.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/costmodel/ppc/costmodel-slp-12.c	2011-05-05 15:46:10 +0000
+@@ -113,7 +113,7 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 3 loops" 1 "vect"  {target { vect_strided && vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 3 "vect" {target { vect_strided && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 3 loops" 1 "vect"  {target { vect_strided8 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 3 "vect" {target { vect_strided8 && vect_int_mult } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/fast-math-pr35982.c'
+--- old/gcc/testsuite/gcc.dg/vect/fast-math-pr35982.c	2008-08-26 08:14:37 +0000
++++ new/gcc/testsuite/gcc.dg/vect/fast-math-pr35982.c	2011-05-05 15:44:00 +0000
+@@ -20,7 +20,7 @@
+   return avg;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_extract_even_odd_wide  } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail vect_extract_even_odd_wide  } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_extract_even_odd  } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail vect_extract_even_odd  } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/fast-math-slp-27.c'
+--- old/gcc/testsuite/gcc.dg/vect/fast-math-slp-27.c	2010-08-26 11:13:58 +0000
++++ new/gcc/testsuite/gcc.dg/vect/fast-math-slp-27.c	2011-05-05 15:46:10 +0000
+@@ -13,5 +13,5 @@
+    }
+ }
+ 
+-/* { dg-final { scan-tree-dump "vectorized 1 loops" "vect" { target vect_strided } } } */
++/* { dg-final { scan-tree-dump "vectorized 1 loops" "vect" { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/fast-math-vect-complex-3.c'
+--- old/gcc/testsuite/gcc.dg/vect/fast-math-vect-complex-3.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/fast-math-vect-complex-3.c	2011-05-05 15:46:10 +0000
+@@ -56,5 +56,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave  && vect_extract_even_odd_wide } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c'
+--- old/gcc/testsuite/gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c	2011-04-24 07:45:49 +0000
++++ new/gcc/testsuite/gcc.dg/vect/if-cvt-stores-vect-ifcvt-18.c	2011-05-05 15:46:10 +0000
+@@ -65,5 +65,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail { vect_no_align || {! vect_strided } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail { vect_no_align || { ! vect_strided2 } } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-scevccp-outer-10a.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-10a.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-10a.c	2011-05-05 15:46:10 +0000
+@@ -54,5 +54,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-scevccp-outer-10b.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-10b.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-10b.c	2011-05-05 15:46:10 +0000
+@@ -53,5 +53,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-scevccp-outer-18.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-18.c	2007-10-21 09:01:16 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-18.c	2011-05-05 15:46:10 +0000
+@@ -47,5 +47,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target vect_interleave } } } */
++/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target { vect_interleave || vect_strided2 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-scevccp-outer-20.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-20.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-scevccp-outer-20.c	2011-05-05 15:46:10 +0000
+@@ -50,5 +50,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED." 1 "vect" { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/pr30843.c'
+--- old/gcc/testsuite/gcc.dg/vect/pr30843.c	2007-02-22 12:30:12 +0000
++++ new/gcc/testsuite/gcc.dg/vect/pr30843.c	2011-05-05 15:46:10 +0000
+@@ -20,6 +20,6 @@
+     }
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave || vect_strided4 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/pr33866.c'
+--- old/gcc/testsuite/gcc.dg/vect/pr33866.c	2007-10-30 08:26:14 +0000
++++ new/gcc/testsuite/gcc.dg/vect/pr33866.c	2011-05-05 15:46:10 +0000
+@@ -27,6 +27,6 @@
+ }
+ 
+ /* Needs interleaving support.  */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave || vect_strided2 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/pr37539.c'
+--- old/gcc/testsuite/gcc.dg/vect/pr37539.c	2009-11-26 02:03:50 +0000
++++ new/gcc/testsuite/gcc.dg/vect/pr37539.c	2011-05-05 15:46:10 +0000
+@@ -40,7 +40,7 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect" { target vect_strided_wide } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect" { target { vect_strided4 && vect_strided2 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+ 
+
+=== removed file 'gcc/testsuite/gcc.dg/vect/slp-11.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-11.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-11.c	1970-01-01 00:00:00 +0000
+@@ -1,113 +0,0 @@
+-/* { dg-require-effective-target vect_int } */
+-
+-#include <stdarg.h>
+-#include "tree-vect.h"
+-
+-#define N 8 
+-
+-int
+-main1 ()
+-{
+-  int i;
+-  unsigned int out[N*8], a0, a1, a2, a3, a4, a5, a6, a7, b1, b0, b2, b3, b4, b5, b6, b7;
+-  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
+-  float out2[N*8];
+-
+-  /* Different operations - not SLPable.  */
+-  for (i = 0; i < N; i++)
+-    {
+-      a0 = in[i*8] + 5;
+-      a1 = in[i*8 + 1] * 6;
+-      a2 = in[i*8 + 2] + 7;
+-      a3 = in[i*8 + 3] + 8;
+-      a4 = in[i*8 + 4] + 9;
+-      a5 = in[i*8 + 5] + 10;
+-      a6 = in[i*8 + 6] + 11;
+-      a7 = in[i*8 + 7] + 12;
+-
+-      b0 = a0 * 3;
+-      b1 = a1 * 2;
+-      b2 = a2 * 12;
+-      b3 = a3 * 5;
+-      b4 = a4 * 8;
+-      b5 = a5 * 4;
+-      b6 = a6 * 3;
+-      b7 = a7 * 2;
+-
+-      out[i*8] = b0 - 2;
+-      out[i*8 + 1] = b1 - 3; 
+-      out[i*8 + 2] = b2 - 2;
+-      out[i*8 + 3] = b3 - 1;
+-      out[i*8 + 4] = b4 - 8;
+-      out[i*8 + 5] = b5 - 7;
+-      out[i*8 + 6] = b6 - 3;
+-      out[i*8 + 7] = b7 - 7;
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N; i++)
+-    {
+-      if (out[i*8] !=  (in[i*8] + 5) * 3 - 2
+-         || out[i*8 + 1] != (in[i*8 + 1] * 6) * 2 - 3
+-         || out[i*8 + 2] != (in[i*8 + 2] + 7) * 12 - 2
+-         || out[i*8 + 3] != (in[i*8 + 3] + 8) * 5 - 1
+-         || out[i*8 + 4] != (in[i*8 + 4] + 9) * 8 - 8
+-         || out[i*8 + 5] != (in[i*8 + 5] + 10) * 4 - 7
+-         || out[i*8 + 6] != (in[i*8 + 6] + 11) * 3 - 3
+-         || out[i*8 + 7] != (in[i*8 + 7] + 12) * 2 - 7)
+-	abort ();
+-    }
+-
+-  /* Requires permutation - not SLPable.  */
+-  for (i = 0; i < N*2; i++)
+-    {
+-      out[i*4] = (in[i*4] + 2) * 3;
+-      out[i*4 + 1] = (in[i*4 + 2] + 2) * 7;
+-      out[i*4 + 2] = (in[i*4 + 1] + 7) * 3;
+-      out[i*4 + 3] = (in[i*4 + 3] + 3) * 4;
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N*2; i++)
+-    {
+-      if (out[i*4] !=  (in[i*4] + 2) * 3
+-         || out[i*4 + 1] != (in[i*4 + 2] + 2) * 7
+-         || out[i*4 + 2] != (in[i*4 + 1] + 7) * 3
+-         || out[i*4 + 3] != (in[i*4 + 3] + 3) * 4)
+-        abort ();
+-    }
+-
+-  /* Different operations - not SLPable.  */
+-  for (i = 0; i < N*4; i++)
+-    {
+-      out2[i*2] = ((float) in[i*2] * 2 + 6) ;
+-      out2[i*2 + 1] = (float) (in[i*2 + 1] * 3 + 7);
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N*4; i++)
+-    {
+-      if (out2[i*2] !=  ((float) in[i*2] * 2 + 6)
+-         || out2[i*2 + 1] != (float) (in[i*2 + 1] * 3 + 7))
+-        abort ();
+-    }
+-
+-
+-  return 0;
+-}
+-
+-int main (void)
+-{
+-  check_vect ();
+-
+-  main1 ();
+-
+-  return 0;
+-}
+-
+-/* { dg-final { scan-tree-dump-times "vectorized 3 loops" 1 "vect"  { target { { vect_uintfloat_cvt && vect_strided_wide } &&  vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 2 loops" 1 "vect"  { target { { { ! vect_uintfloat_cvt } && vect_strided_wide } &&  vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect"  {target  { ! { vect_int_mult && vect_strided_wide } } } } }  */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0  "vect"  } } */
+-/* { dg-final { cleanup-tree-dump "vect" } } */
+-  
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-11a.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-11a.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-11a.c	2011-05-05 15:46:10 +0000
+@@ -0,0 +1,75 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 8
++
++int
++main1 ()
++{
++  int i;
++  unsigned int out[N*8], a0, a1, a2, a3, a4, a5, a6, a7, b1, b0, b2, b3, b4, b5, b6, b7;
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++
++  /* Different operations - not SLPable.  */
++  for (i = 0; i < N; i++)
++    {
++      a0 = in[i*8] + 5;
++      a1 = in[i*8 + 1] * 6;
++      a2 = in[i*8 + 2] + 7;
++      a3 = in[i*8 + 3] + 8;
++      a4 = in[i*8 + 4] + 9;
++      a5 = in[i*8 + 5] + 10;
++      a6 = in[i*8 + 6] + 11;
++      a7 = in[i*8 + 7] + 12;
++
++      b0 = a0 * 3;
++      b1 = a1 * 2;
++      b2 = a2 * 12;
++      b3 = a3 * 5;
++      b4 = a4 * 8;
++      b5 = a5 * 4;
++      b6 = a6 * 3;
++      b7 = a7 * 2;
++
++      out[i*8] = b0 - 2;
++      out[i*8 + 1] = b1 - 3;
++      out[i*8 + 2] = b2 - 2;
++      out[i*8 + 3] = b3 - 1;
++      out[i*8 + 4] = b4 - 8;
++      out[i*8 + 5] = b5 - 7;
++      out[i*8 + 6] = b6 - 3;
++      out[i*8 + 7] = b7 - 7;
++    }
++
++  /* check results:  */
++  for (i = 0; i < N; i++)
++    {
++      if (out[i*8] !=  (in[i*8] + 5) * 3 - 2
++         || out[i*8 + 1] != (in[i*8 + 1] * 6) * 2 - 3
++         || out[i*8 + 2] != (in[i*8 + 2] + 7) * 12 - 2
++         || out[i*8 + 3] != (in[i*8 + 3] + 8) * 5 - 1
++         || out[i*8 + 4] != (in[i*8 + 4] + 9) * 8 - 8
++         || out[i*8 + 5] != (in[i*8 + 5] + 10) * 4 - 7
++         || out[i*8 + 6] != (in[i*8 + 6] + 11) * 3 - 3
++         || out[i*8 + 7] != (in[i*8 + 7] + 12) * 2 - 7)
++	abort ();
++    }
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_strided8 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { target { ! { vect_strided8 && vect_int_mult } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-11b.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-11b.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-11b.c	2011-05-05 15:46:10 +0000
+@@ -0,0 +1,49 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 8
++
++int
++main1 ()
++{
++  int i;
++  unsigned int out[N*8], a0, a1, a2, a3, a4, a5, a6, a7, b1, b0, b2, b3, b4, b5, b6, b7;
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++
++  /* Requires permutation - not SLPable.  */
++  for (i = 0; i < N*2; i++)
++    {
++      out[i*4] = (in[i*4] + 2) * 3;
++      out[i*4 + 1] = (in[i*4 + 2] + 2) * 7;
++      out[i*4 + 2] = (in[i*4 + 1] + 7) * 3;
++      out[i*4 + 3] = (in[i*4 + 3] + 3) * 4;
++    }
++
++  /* check results:  */
++  for (i = 0; i < N*2; i++)
++    {
++      if (out[i*4] !=  (in[i*4] + 2) * 3
++         || out[i*4 + 1] != (in[i*4 + 2] + 2) * 7
++         || out[i*4 + 2] != (in[i*4 + 1] + 7) * 3
++         || out[i*4 + 3] != (in[i*4 + 3] + 3) * 4)
++        abort ();
++    }
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_strided4 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { target { ! { vect_strided4 && vect_int_mult } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-11c.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-11c.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-11c.c	2011-05-05 15:46:10 +0000
+@@ -0,0 +1,46 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 8
++
++int
++main1 ()
++{
++  int i;
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++  float out[N*8];
++
++  /* Different operations - not SLPable.  */
++  for (i = 0; i < N*4; i++)
++    {
++      out[i*2] = ((float) in[i*2] * 2 + 6) ;
++      out[i*2 + 1] = (float) (in[i*2 + 1] * 3 + 7);
++    }
++
++  /* check results:  */
++  for (i = 0; i < N*4; i++)
++    {
++      if (out[i*2] !=  ((float) in[i*2] * 2 + 6)
++         || out[i*2 + 1] != (float) (in[i*2 + 1] * 3 + 7))
++        abort ();
++    }
++
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { { vect_uintfloat_cvt && vect_strided2 } && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { target { ! { { vect_uintfloat_cvt && vect_strided2 } && vect_int_mult } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0  "vect"  } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-12a.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-12a.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-12a.c	2011-05-05 15:46:10 +0000
+@@ -11,7 +11,7 @@
+   int i;
+   unsigned int out[N*8], a0, a1, a2, a3, a4, a5, a6, a7, b1, b0, b2, b3, b4, b5, b6, b7;
+   unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
+-  unsigned int ia[N], ib[N*2];
++  unsigned int ia[N];
+ 
+   for (i = 0; i < N; i++)
+     {
+@@ -61,27 +61,6 @@
+ 	abort ();
+     }
+ 
+-  for (i = 0; i < N*2; i++)
+-    {
+-      out[i*4] = (in[i*4] + 2) * 3;
+-      out[i*4 + 1] = (in[i*4 + 1] + 2) * 7;
+-      out[i*4 + 2] = (in[i*4 + 2] + 7) * 3;
+-      out[i*4 + 3] = (in[i*4 + 3] + 7) * 7;
+-
+-      ib[i] = 7;
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N*2; i++)
+-    {
+-      if (out[i*4] !=  (in[i*4] + 2) * 3
+-         || out[i*4 + 1] != (in[i*4 + 1] + 2) * 7
+-         || out[i*4 + 2] != (in[i*4 + 2] + 7) * 3
+-         || out[i*4 + 3] != (in[i*4 + 3] + 7) * 7 
+-         || ib[i] != 7)
+-        abort ();
+-    }
+-
+   return 0;
+ }
+ 
+@@ -94,11 +73,8 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 2 loops" 1 "vect"  {target { vect_strided_wide && vect_int_mult} } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  {target { {! {vect_strided_wide}} && vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect"  {target  { ! vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 2 "vect" {target { vect_strided_wide && vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" {target { {! {vect_strided_wide}} && vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" {target  { ! vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_strided8 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { target { ! { vect_strided8 && vect_int_mult } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" { target { vect_strided8 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" { target { ! { vect_strided8 && vect_int_mult } } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+-  
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-12b.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-12b.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-12b.c	2011-05-05 15:46:10 +0000
+@@ -43,9 +43,9 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  {target { vect_strided_wide && vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect"  {target { { ! { vect_int_mult }} || { ! {vect_strided_wide}}} } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect"  {target { vect_strided_wide && vect_int_mult } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect"  {target { { ! { vect_int_mult }} || { ! {vect_strided_wide}}} } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_strided2 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect"  { target { ! { vect_strided2 && vect_int_mult } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect"  { target { vect_strided2 && vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect"  { target { ! { vect_strided2 && vect_int_mult } } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-12c.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-12c.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-12c.c	2011-05-05 15:44:41 +0000
+@@ -0,0 +1,53 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 8
++
++int
++main1 ()
++{
++  int i;
++  unsigned int out[N*8], a0, a1, a2, a3, a4, a5, a6, a7, b1, b0, b2, b3, b4, b5, b6, b7;
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++  unsigned int ia[N*2];
++
++  for (i = 0; i < N*2; i++)
++    {
++      out[i*4] = (in[i*4] + 2) * 3;
++      out[i*4 + 1] = (in[i*4 + 1] + 2) * 7;
++      out[i*4 + 2] = (in[i*4 + 2] + 7) * 3;
++      out[i*4 + 3] = (in[i*4 + 3] + 7) * 7;
++
++      ia[i] = 7;
++    }
++
++  /* check results:  */
++  for (i = 0; i < N*2; i++)
++    {
++      if (out[i*4] !=  (in[i*4] + 2) * 3
++         || out[i*4 + 1] != (in[i*4 + 1] + 2) * 7
++         || out[i*4 + 2] != (in[i*4 + 2] + 7) * 3
++         || out[i*4 + 3] != (in[i*4 + 3] + 7) * 7
++         || ia[i] != 7)
++        abort ();
++    }
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect"  { target { ! vect_int_mult } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" { target vect_int_mult } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" { target { ! vect_int_mult } } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-18.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-18.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-18.c	2011-05-05 15:46:10 +0000
+@@ -91,7 +91,7 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_strided } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 2 "vect" { target { vect_strided } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 2 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== removed file 'gcc/testsuite/gcc.dg/vect/slp-19.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-19.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-19.c	1970-01-01 00:00:00 +0000
+@@ -1,154 +0,0 @@
+-/* { dg-require-effective-target vect_int } */
+-
+-#include <stdarg.h>
+-#include "tree-vect.h"
+-
+-#define N 16 
+-
+-int
+-main1 ()
+-{
+-  unsigned int i;
+-  unsigned int out[N*8];
+-  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
+-  unsigned int ia[N*2], a0, a1, a2, a3;
+-
+-  for (i = 0; i < N; i++)
+-    {
+-      out[i*8] = in[i*8];
+-      out[i*8 + 1] = in[i*8 + 1];
+-      out[i*8 + 2] = in[i*8 + 2];
+-      out[i*8 + 3] = in[i*8 + 3];
+-      out[i*8 + 4] = in[i*8 + 4];
+-      out[i*8 + 5] = in[i*8 + 5];
+-      out[i*8 + 6] = in[i*8 + 6];
+-      out[i*8 + 7] = in[i*8 + 7];
+-    
+-      ia[i] = in[i*8 + 2];
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N; i++)
+-    {
+-      if (out[i*8] !=  in[i*8]
+-         || out[i*8 + 1] != in[i*8 + 1]
+-         || out[i*8 + 2] != in[i*8 + 2]
+-         || out[i*8 + 3] != in[i*8 + 3]
+-         || out[i*8 + 4] != in[i*8 + 4]
+-         || out[i*8 + 5] != in[i*8 + 5]
+-         || out[i*8 + 6] != in[i*8 + 6]
+-         || out[i*8 + 7] != in[i*8 + 7]
+-         || ia[i] != in[i*8 + 2])
+-	abort ();
+-    }
+-
+-  for (i = 0; i < N*2; i++)
+-    {
+-      a0 = in[i*4] + 1;
+-      a1 = in[i*4 + 1] + 2;
+-      a2 = in[i*4 + 2] + 3;
+-      a3 = in[i*4 + 3] + 4;
+-
+-      out[i*4] = a0;
+-      out[i*4 + 1] = a1;
+-      out[i*4 + 2] = a2;
+-      out[i*4 + 3] = a3;
+-
+-      ia[i] = a2;
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N*2; i++)
+-    {
+-      if (out[i*4] !=  in[i*4] + 1
+-         || out[i*4 + 1] != in[i*4 + 1] + 2
+-         || out[i*4 + 2] != in[i*4 + 2] + 3
+-         || out[i*4 + 3] != in[i*4 + 3] + 4
+-         || ia[i] != in[i*4 + 2] + 3)
+-        abort ();
+-    }
+-
+-  /* The last stmt requires interleaving of not power of 2 size - not 
+-     vectorizable.  */
+-  for (i = 0; i < N/2; i++)
+-    {
+-      out[i*12] = in[i*12];
+-      out[i*12 + 1] = in[i*12 + 1];
+-      out[i*12 + 2] = in[i*12 + 2];
+-      out[i*12 + 3] = in[i*12 + 3];
+-      out[i*12 + 4] = in[i*12 + 4];
+-      out[i*12 + 5] = in[i*12 + 5];
+-      out[i*12 + 6] = in[i*12 + 6];
+-      out[i*12 + 7] = in[i*12 + 7];
+-      out[i*12 + 8] = in[i*12 + 8];
+-      out[i*12 + 9] = in[i*12 + 9];
+-      out[i*12 + 10] = in[i*12 + 10];
+-      out[i*12 + 11] = in[i*12 + 11];
+-
+-      ia[i] = in[i*12 + 7];
+-    }
+-
+-  /* check results:  */
+-  for (i = 0; i < N/2; i++)
+-    {
+-      if (out[i*12] !=  in[i*12]
+-         || out[i*12 + 1] != in[i*12 + 1]
+-         || out[i*12 + 2] != in[i*12 + 2]
+-         || out[i*12 + 3] != in[i*12 + 3]
+-         || out[i*12 + 4] != in[i*12 + 4]
+-         || out[i*12 + 5] != in[i*12 + 5]
+-         || out[i*12 + 6] != in[i*12 + 6]
+-         || out[i*12 + 7] != in[i*12 + 7]
+-         || out[i*12 + 8] != in[i*12 + 8]
+-         || out[i*12 + 9] != in[i*12 + 9]
+-         || out[i*12 + 10] != in[i*12 + 10]
+-         || out[i*12 + 11] != in[i*12 + 11]
+-         || ia[i] != in[i*12 + 7])
+-        abort ();
+-    }
+-
+-  /* Hybrid SLP with unrolling by 2.  */
+-  for (i = 0; i < N; i++)
+-    {
+-      out[i*6] = in[i*6];
+-      out[i*6 + 1] = in[i*6 + 1];
+-      out[i*6 + 2] = in[i*6 + 2];
+-      out[i*6 + 3] = in[i*6 + 3];
+-      out[i*6 + 4] = in[i*6 + 4];
+-      out[i*6 + 5] = in[i*6 + 5];
+-    
+-      ia[i] = i;
+-    } 
+-    
+-  /* check results:  */
+-  for (i = 0; i < N/2; i++)
+-    {
+-      if (out[i*6] !=  in[i*6]
+-         || out[i*6 + 1] != in[i*6 + 1]
+-         || out[i*6 + 2] != in[i*6 + 2]
+-         || out[i*6 + 3] != in[i*6 + 3]
+-         || out[i*6 + 4] != in[i*6 + 4]
+-         || out[i*6 + 5] != in[i*6 + 5]
+-         || ia[i] != i)
+-        abort ();
+-    }
+-
+-
+-  return 0;
+-}
+-
+-int main (void)
+-{
+-  check_vect ();
+-
+-  main1 ();
+-
+-  return 0;
+-}
+-
+-/* { dg-final { scan-tree-dump-times "vectorized 3 loops" 1 "vect" { target  vect_strided_wide  } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target  { ! { vect_strided_wide } } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 3 "vect"  { target  vect_strided_wide  } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect"  { target { ! { vect_strided_wide } } } } } */
+-/* { dg-final { cleanup-tree-dump "vect" } } */
+-  
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-19a.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-19a.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-19a.c	2011-05-05 15:46:10 +0000
+@@ -0,0 +1,61 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 16
++
++int
++main1 ()
++{
++  unsigned int i;
++  unsigned int out[N*8];
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++  unsigned int ia[N*2];
++
++  for (i = 0; i < N; i++)
++    {
++      out[i*8] = in[i*8];
++      out[i*8 + 1] = in[i*8 + 1];
++      out[i*8 + 2] = in[i*8 + 2];
++      out[i*8 + 3] = in[i*8 + 3];
++      out[i*8 + 4] = in[i*8 + 4];
++      out[i*8 + 5] = in[i*8 + 5];
++      out[i*8 + 6] = in[i*8 + 6];
++      out[i*8 + 7] = in[i*8 + 7];
++
++      ia[i] = in[i*8 + 2];
++    }
++
++  /* check results:  */
++  for (i = 0; i < N; i++)
++    {
++      if (out[i*8] !=  in[i*8]
++         || out[i*8 + 1] != in[i*8 + 1]
++         || out[i*8 + 2] != in[i*8 + 2]
++         || out[i*8 + 3] != in[i*8 + 3]
++         || out[i*8 + 4] != in[i*8 + 4]
++         || out[i*8 + 5] != in[i*8 + 5]
++         || out[i*8 + 6] != in[i*8 + 6]
++         || out[i*8 + 7] != in[i*8 + 7]
++         || ia[i] != in[i*8 + 2])
++	abort ();
++    }
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { target { ! vect_strided8 } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" { target vect_strided8 } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" { target { ! vect_strided8} } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-19b.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-19b.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-19b.c	2011-05-05 15:46:10 +0000
+@@ -0,0 +1,58 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 16
++
++int
++main1 ()
++{
++  unsigned int i;
++  unsigned int out[N*8];
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++  unsigned int ia[N*2], a0, a1, a2, a3;
++
++  for (i = 0; i < N*2; i++)
++    {
++      a0 = in[i*4] + 1;
++      a1 = in[i*4 + 1] + 2;
++      a2 = in[i*4 + 2] + 3;
++      a3 = in[i*4 + 3] + 4;
++
++      out[i*4] = a0;
++      out[i*4 + 1] = a1;
++      out[i*4 + 2] = a2;
++      out[i*4 + 3] = a3;
++
++      ia[i] = a2;
++    }
++
++  /* check results:  */
++  for (i = 0; i < N*2; i++)
++    {
++      if (out[i*4] !=  in[i*4] + 1
++         || out[i*4 + 1] != in[i*4 + 1] + 2
++         || out[i*4 + 2] != in[i*4 + 2] + 3
++         || out[i*4 + 3] != in[i*4 + 3] + 4
++         || ia[i] != in[i*4 + 2] + 3)
++        abort ();
++    }
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided4 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { target { ! vect_strided4 } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" { target vect_strided4 } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" { target { ! vect_strided4 } } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-19c.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-19c.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-19c.c	2011-05-05 15:44:41 +0000
+@@ -0,0 +1,95 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 16
++
++int
++main1 ()
++{
++  unsigned int i;
++  unsigned int out[N*8];
++  unsigned int in[N*8] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63};
++  unsigned int ia[N*2], a0, a1, a2, a3;
++
++  /* The last stmt requires interleaving of not power of 2 size - not
++     vectorizable.  */
++  for (i = 0; i < N/2; i++)
++    {
++      out[i*12] = in[i*12];
++      out[i*12 + 1] = in[i*12 + 1];
++      out[i*12 + 2] = in[i*12 + 2];
++      out[i*12 + 3] = in[i*12 + 3];
++      out[i*12 + 4] = in[i*12 + 4];
++      out[i*12 + 5] = in[i*12 + 5];
++      out[i*12 + 6] = in[i*12 + 6];
++      out[i*12 + 7] = in[i*12 + 7];
++      out[i*12 + 8] = in[i*12 + 8];
++      out[i*12 + 9] = in[i*12 + 9];
++      out[i*12 + 10] = in[i*12 + 10];
++      out[i*12 + 11] = in[i*12 + 11];
++
++      ia[i] = in[i*12 + 7];
++    }
++
++  /* check results:  */
++  for (i = 0; i < N/2; i++)
++    {
++      if (out[i*12] !=  in[i*12]
++         || out[i*12 + 1] != in[i*12 + 1]
++         || out[i*12 + 2] != in[i*12 + 2]
++         || out[i*12 + 3] != in[i*12 + 3]
++         || out[i*12 + 4] != in[i*12 + 4]
++         || out[i*12 + 5] != in[i*12 + 5]
++         || out[i*12 + 6] != in[i*12 + 6]
++         || out[i*12 + 7] != in[i*12 + 7]
++         || out[i*12 + 8] != in[i*12 + 8]
++         || out[i*12 + 9] != in[i*12 + 9]
++         || out[i*12 + 10] != in[i*12 + 10]
++         || out[i*12 + 11] != in[i*12 + 11]
++         || ia[i] != in[i*12 + 7])
++        abort ();
++    }
++
++  /* Hybrid SLP with unrolling by 2.  */
++  for (i = 0; i < N; i++)
++    {
++      out[i*6] = in[i*6];
++      out[i*6 + 1] = in[i*6 + 1];
++      out[i*6 + 2] = in[i*6 + 2];
++      out[i*6 + 3] = in[i*6 + 3];
++      out[i*6 + 4] = in[i*6 + 4];
++      out[i*6 + 5] = in[i*6 + 5];
++
++      ia[i] = i;
++    }
++
++  /* check results:  */
++  for (i = 0; i < N/2; i++)
++    {
++      if (out[i*6] !=  in[i*6]
++         || out[i*6 + 1] != in[i*6 + 1]
++         || out[i*6 + 2] != in[i*6 + 2]
++         || out[i*6 + 3] != in[i*6 + 3]
++         || out[i*6 + 4] != in[i*6 + 4]
++         || out[i*6 + 5] != in[i*6 + 5]
++         || ia[i] != i)
++        abort ();
++    }
++
++  return 0;
++}
++
++int main (void)
++{
++  check_vect ();
++
++  main1 ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-21.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-21.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-21.c	2011-05-05 15:46:10 +0000
+@@ -199,9 +199,9 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 4 loops" 1 "vect"  { target { vect_strided || vect_extract_even_odd } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target  { ! { vect_strided || vect_extract_even_odd } } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 2 "vect" { target vect_strided }  } } */
+-/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect"  { target { ! { vect_strided } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 4 loops" 1 "vect"  { target { vect_strided4 || vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target  { ! { vect_strided4 || vect_extract_even_odd } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 2 "vect" { target vect_strided4 }  } } */
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect"  { target { ! { vect_strided4 } } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-23.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-23.c	2011-01-10 12:51:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-23.c	2011-05-05 15:46:10 +0000
+@@ -106,8 +106,8 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 2 loops" 1 "vect" { target { vect_strided_wide } && {! { vect_no_align} } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { ! { vect_strided_wide || vect_no_align} } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 2 loops" 1 "vect" { target { vect_strided8 && { ! { vect_no_align} } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { ! { vect_strided8 || vect_no_align } } } } } */
+ /* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 1 "vect" } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-reduc-6.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-reduc-6.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-reduc-6.c	2011-05-05 15:46:10 +0000
+@@ -42,7 +42,7 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect" { xfail { vect_no_int_add || { ! vect_unpack } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect" { xfail { vect_no_int_add || { ! { vect_unpack || vect_strided2 } } } } } } */
+ /* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 0 "vect" } } */
+ /* { dg-final { scan-tree-dump-times "different interleaving chains in one node" 1 "vect" { target { ! vect_no_int_add } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-1.c	2010-08-19 10:23:50 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-1.c	2011-05-05 15:46:10 +0000
+@@ -85,6 +85,6 @@
+   fbar (a);
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 6 loops" 1 "vect" { target vect_extract_even_odd_wide } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 5 loops" 1 "vect" { xfail vect_extract_even_odd_wide } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 6 loops" 1 "vect" { target vect_strided2 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 5 loops" 1 "vect" { xfail vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-10.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-10.c	2010-05-27 12:23:45 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-10.c	2011-05-05 15:46:10 +0000
+@@ -22,5 +22,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { xfail { ! vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { xfail { ! vect_strided2 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-107.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-107.c	2008-08-19 08:06:54 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-107.c	2011-05-05 15:46:10 +0000
+@@ -40,6 +40,6 @@
+   return main1 ();
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_extract_even_odd_wide } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail vect_extract_even_odd_wide } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided2 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-98.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-98.c	2008-08-02 11:05:47 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-98.c	2011-05-05 15:46:10 +0000
+@@ -38,6 +38,6 @@
+ }
+ 
+ /* Needs interleaving support.  */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd_wide } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" { xfail  { vect_interleave && vect_extract_even_odd_wide } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided4 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" { xfail  vect_strided4 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-cselim-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-cselim-1.c	2011-03-27 09:38:18 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-cselim-1.c	2011-05-05 15:46:10 +0000
+@@ -82,5 +82,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail { vect_no_align || {! vect_strided } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail { vect_no_align || { ! vect_strided2 } } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-mult.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-mult.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-mult.c	2011-05-05 15:46:10 +0000
+@@ -71,6 +71,6 @@
+   return 0;
+ }   
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-i2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-i2.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-i2.c	2011-05-05 15:46:10 +0000
+@@ -55,6 +55,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-i4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-i4.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-i4.c	2011-05-05 15:46:10 +0000
+@@ -68,6 +68,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided4 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-mult.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-mult.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u16-mult.c	2011-05-05 15:46:10 +0000
+@@ -62,6 +62,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u32-mult.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u32-mult.c	2010-05-27 12:23:45 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u32-mult.c	2011-05-05 15:46:10 +0000
+@@ -61,6 +61,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i2-gap.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i2-gap.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i2-gap.c	2011-05-05 15:46:10 +0000
+@@ -69,6 +69,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i8-gap2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i8-gap2.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i8-gap2.c	2011-05-05 15:46:10 +0000
+@@ -76,6 +76,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i8-gap7.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i8-gap7.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-a-u8-i8-gap7.c	2011-05-05 15:46:10 +0000
+@@ -81,6 +81,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-float.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-float.c	2008-08-19 08:06:54 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-float.c	2011-05-05 15:46:10 +0000
+@@ -39,7 +39,7 @@
+ }
+ 
+ /* Needs interleaving support.  */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd_wide } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail { vect_interleave && vect_extract_even_odd_wide } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided2 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-mult-char-ls.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-mult-char-ls.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-mult-char-ls.c	2011-05-05 15:46:10 +0000
+@@ -71,6 +71,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-mult.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-mult.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-mult.c	2011-05-05 15:46:10 +0000
+@@ -71,6 +71,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-same-dr.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-same-dr.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-same-dr.c	2011-05-05 15:46:10 +0000
+@@ -72,5 +72,5 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-store-a-u8-i2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-store-a-u8-i2.c	2008-08-12 05:31:57 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-store-a-u8-i2.c	2011-05-05 15:46:10 +0000
+@@ -55,6 +55,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave || vect_strided2 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-store-u16-i4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-store-u16-i4.c	2007-10-21 09:01:16 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-store-u16-i4.c	2011-05-05 15:46:10 +0000
+@@ -65,8 +65,8 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect"  { target { vect_interleave && vect_pack_trunc  } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { { ! { vect_interleave } } && { vect_pack_trunc } } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect"  { target { { vect_interleave || vect_strided4 } && vect_pack_trunc } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { { ! { vect_interleave || vect_strided4 } } && { vect_pack_trunc } } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-store-u32-i2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-store-u32-i2.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-store-u32-i2.c	2011-05-05 15:46:10 +0000
+@@ -39,7 +39,7 @@
+ }
+ 
+ /* Needs interleaving support.  */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail { vect_interleave } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave || vect_strided2 } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 0 loops" 1 "vect" { xfail { vect_interleave || vect_strided2 } } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u16-i2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u16-i2.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u16-i2.c	2011-05-05 15:46:10 +0000
+@@ -55,6 +55,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-strided-u16-i3.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u16-i3.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u16-i3.c	2011-05-05 15:46:25 +0000
+@@ -0,0 +1,112 @@
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 128
++
++typedef struct {
++   unsigned short a;
++   unsigned short b;
++   unsigned short c;
++} s;
++
++#define A(I) (I)
++#define B(I) ((I) * 2)
++#define C(I) ((unsigned short) ~((I) ^ 0x18))
++
++void __attribute__ ((noinline))
++check1 (s *res)
++{
++  int i;
++
++  for (i = 0; i < N; i++)
++    if (res[i].a != C (i)
++	|| res[i].b != A (i)
++	|| res[i].c != B (i))
++      abort ();
++}
++
++void __attribute__ ((noinline))
++check2 (unsigned short *res)
++{
++  int i;
++
++  for (i = 0; i < N; i++)
++    if (res[i] != (unsigned short) (A (i) + B (i) + C (i)))
++      abort ();
++}
++
++void __attribute__ ((noinline))
++check3 (s *res)
++{
++  int i;
++
++  for (i = 0; i < N; i++)
++    if (res[i].a != i
++	|| res[i].b != i
++	|| res[i].c != i)
++      abort ();
++}
++
++void __attribute__ ((noinline))
++check4 (unsigned short *res)
++{
++  int i;
++
++  for (i = 0; i < N; i++)
++    if (res[i] != (unsigned short) (A (i) + B (i)))
++      abort ();
++}
++
++void __attribute__ ((noinline))
++main1 (s *arr)
++{
++  int i;
++  s *ptr = arr;
++  s res1[N];
++  unsigned short res2[N];
++
++  for (i = 0; i < N; i++)
++    {
++      res1[i].a = arr[i].c;
++      res1[i].b = arr[i].a;
++      res1[i].c = arr[i].b;
++    }
++  check1 (res1);
++
++  for (i = 0; i < N; i++)
++    res2[i] = arr[i].a + arr[i].b + arr[i].c;
++  check2 (res2);
++
++  for (i = 0; i < N; i++)
++    {
++      res1[i].a = i;
++      res1[i].b = i;
++      res1[i].c = i;
++    }
++  check3 (res1);
++
++  for (i = 0; i < N; i++)
++    res2[i] = arr[i].a + arr[i].b;
++  check4 (res2);
++}
++
++int main (void)
++{
++  int i;
++  s arr[N];
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      arr[i].a = A (i);
++      arr[i].b = B (i);
++      arr[i].c = C (i);
++    }
++  main1 (arr);
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 4 loops" 1 "vect"  { target vect_strided3 } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u16-i4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u16-i4.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u16-i4.c	2011-05-05 15:46:10 +0000
+@@ -68,6 +68,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided4 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u32-i4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u32-i4.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u32-i4.c	2011-05-05 15:46:10 +0000
+@@ -63,6 +63,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided4 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u32-i8.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u32-i8.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u32-i8.c	2011-05-05 15:46:10 +0000
+@@ -77,6 +77,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u32-mult.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u32-mult.c	2010-05-27 12:23:45 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u32-mult.c	2011-05-05 15:46:10 +0000
+@@ -60,6 +60,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u8-i2-gap.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i2-gap.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i2-gap.c	2011-05-05 15:46:10 +0000
+@@ -71,6 +71,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u8-i2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i2.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i2.c	2011-05-05 15:46:10 +0000
+@@ -54,6 +54,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { target vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+    
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap2.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap2.c	2011-05-05 15:46:10 +0000
+@@ -78,6 +78,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap4.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap4.c	2011-05-05 15:46:10 +0000
+@@ -98,6 +98,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap7.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap7.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8-gap7.c	2011-05-05 15:46:10 +0000
+@@ -83,6 +83,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8.c	2010-11-22 12:16:52 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-strided-u8-i8.c	2011-05-05 15:46:10 +0000
+@@ -85,6 +85,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided8 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+   
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-vfa-03.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-vfa-03.c	2007-09-09 07:46:12 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-vfa-03.c	2011-05-05 15:46:10 +0000
+@@ -53,6 +53,6 @@
+ } 
+ 
+ /* Needs interleaving support.  */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_interleave && vect_extract_even_odd } } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" { xfail  { vect_interleave && vect_extract_even_odd } } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_strided2 } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" { xfail  vect_strided2 } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect.exp'
+--- old/gcc/testsuite/gcc.dg/vect/vect.exp	2011-04-24 07:45:49 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect.exp	2011-05-05 15:43:31 +0000
+@@ -75,15 +75,20 @@
+ lappend VECT_SLP_CFLAGS "-fdump-tree-slp-details"
+ 
+ # Main loop.
+-dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/pr*.\[cS\]]]  \
+-	"" $DEFAULT_VECTCFLAGS
+-dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/vect-*.\[cS\]]]  \
+-	"" $DEFAULT_VECTCFLAGS
+-dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/slp-*.\[cS\]]]  \
+-        "" $DEFAULT_VECTCFLAGS
+-dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/bb-slp*.\[cS\]]]  \
+-        "" $VECT_SLP_CFLAGS
+-
++set VECT_ADDITIONAL_FLAGS [list ""]
++if { [check_effective_target_lto] } {
++    lappend VECT_ADDITIONAL_FLAGS "-flto"
++}
++foreach flags $VECT_ADDITIONAL_FLAGS {
++    dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/pr*.\[cS\]]]  \
++	$flags $DEFAULT_VECTCFLAGS
++    dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/vect-*.\[cS\]]]  \
++	$flags $DEFAULT_VECTCFLAGS
++    dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/slp-*.\[cS\]]]  \
++        $flags $DEFAULT_VECTCFLAGS
++    dg-runtest [lsort [glob -nocomplain $srcdir/$subdir/bb-slp*.\[cS\]]]  \
++        $flags $VECT_SLP_CFLAGS
++}
+ 
+ #### Tests with special options
+ global SAVED_DEFAULT_VECTCFLAGS
+
+=== modified file 'gcc/testsuite/lib/target-supports.exp'
+--- old/gcc/testsuite/lib/target-supports.exp	2011-05-06 11:28:27 +0000
++++ new/gcc/testsuite/lib/target-supports.exp	2011-06-02 12:12:00 +0000
+@@ -3139,29 +3139,6 @@
+     return $et_vect_extract_even_odd_saved
+ }
+ 
+-# Return 1 if the target supports vector even/odd elements extraction of
+-# vectors with SImode elements or larger, 0 otherwise.
+-
+-proc check_effective_target_vect_extract_even_odd_wide { } {
+-    global et_vect_extract_even_odd_wide_saved
+-    
+-    if [info exists et_vect_extract_even_odd_wide_saved] {
+-        verbose "check_effective_target_vect_extract_even_odd_wide: using cached result" 2
+-    } else {
+-        set et_vect_extract_even_odd_wide_saved 0 
+-        if { [istarget powerpc*-*-*] 
+-             || [istarget i?86-*-*]
+-             || [istarget x86_64-*-*]
+-             || [istarget ia64-*-*]
+-             || [istarget spu-*-*] } {
+-           set et_vect_extract_even_odd_wide_saved 1
+-        }
+-    }
+-
+-    verbose "check_effective_target_vect_extract_even_wide_odd: returning $et_vect_extract_even_odd_wide_saved" 2
+-    return $et_vect_extract_even_odd_wide_saved
+-}
+-
+ # Return 1 if the target supports vector interleaving, 0 otherwise.
+ 
+ proc check_effective_target_vect_interleave { } {
+@@ -3184,41 +3161,30 @@
+     return $et_vect_interleave_saved
+ }
+ 
+-# Return 1 if the target supports vector interleaving and extract even/odd, 0 otherwise.
+-proc check_effective_target_vect_strided { } {
+-    global et_vect_strided_saved
+-
+-    if [info exists et_vect_strided_saved] {
+-        verbose "check_effective_target_vect_strided: using cached result" 2
+-    } else {
+-        set et_vect_strided_saved 0
+-        if { [check_effective_target_vect_interleave]
+-             && [check_effective_target_vect_extract_even_odd] } {
+-           set et_vect_strided_saved 1
+-        }
+-    }
+-
+-    verbose "check_effective_target_vect_strided: returning $et_vect_strided_saved" 2
+-    return $et_vect_strided_saved
+-}
+-
+-# Return 1 if the target supports vector interleaving and extract even/odd
+-# for wide element types, 0 otherwise.
+-proc check_effective_target_vect_strided_wide { } {
+-    global et_vect_strided_wide_saved
+-
+-    if [info exists et_vect_strided_wide_saved] {
+-        verbose "check_effective_target_vect_strided_wide: using cached result" 2
+-    } else {
+-        set et_vect_strided_wide_saved 0
+-        if { [check_effective_target_vect_interleave]
+-             && [check_effective_target_vect_extract_even_odd_wide] } {
+-           set et_vect_strided_wide_saved 1
+-        }
+-    }
+-
+-    verbose "check_effective_target_vect_strided_wide: returning $et_vect_strided_wide_saved" 2
+-    return $et_vect_strided_wide_saved
++foreach N {2 3 4 8} {
++    eval [string map [list N $N] {
++	# Return 1 if the target supports 2-vector interleaving
++	proc check_effective_target_vect_stridedN { } {
++	    global et_vect_stridedN_saved
++
++	    if [info exists et_vect_stridedN_saved] {
++		verbose "check_effective_target_vect_stridedN: using cached result" 2
++	    } else {
++		set et_vect_stridedN_saved 0
++		if { (N & -N) == N
++		     && [check_effective_target_vect_interleave]
++		     && [check_effective_target_vect_extract_even_odd] } {
++		    set et_vect_stridedN_saved 1
++		}
++		if { [istarget arm*-*-*] && N >= 2 && N <= 4 } {
++		    set et_vect_stridedN_saved 1
++		}
++	    }
++
++	    verbose "check_effective_target_vect_stridedN: returning $et_vect_stridedN_saved" 2
++	    return $et_vect_stridedN_saved
++	}
++    }]
+ }
+ 
+ # Return 1 if the target supports section-anchors
+
+=== modified file 'gcc/tree-cfg.c'
+--- old/gcc/tree-cfg.c	2011-02-12 21:11:33 +0000
++++ new/gcc/tree-cfg.c	2011-05-05 15:42:22 +0000
+@@ -3046,7 +3046,26 @@
+   tree fntype;
+   unsigned i;
+ 
+-  if (TREE_CODE (fn) != OBJ_TYPE_REF
++  if (gimple_call_internal_p (stmt))
++    {
++      if (fn)
++	{
++	  error ("gimple call has two targets");
++	  debug_generic_stmt (fn);
++	  return true;
++	}
++    }
++  else
++    {
++      if (!fn)
++	{
++	  error ("gimple call has no target");
++	  return true;
++	}
++    }
++
++  if (fn
++      && TREE_CODE (fn) != OBJ_TYPE_REF
+       && !is_gimple_val (fn))
+     {
+       error ("invalid function in gimple call");
+@@ -3054,9 +3073,10 @@
+       return true;
+     }
+ 
+-  if (!POINTER_TYPE_P (TREE_TYPE  (fn))
+-      || (TREE_CODE (TREE_TYPE (TREE_TYPE (fn))) != FUNCTION_TYPE
+-	  && TREE_CODE (TREE_TYPE (TREE_TYPE (fn))) != METHOD_TYPE))
++  if (fn
++      && (!POINTER_TYPE_P (TREE_TYPE  (fn))
++	  || (TREE_CODE (TREE_TYPE (TREE_TYPE (fn))) != FUNCTION_TYPE
++	      && TREE_CODE (TREE_TYPE (TREE_TYPE (fn))) != METHOD_TYPE)))
+     {
+       error ("non-function in gimple call");
+       return true;
+@@ -3076,8 +3096,12 @@
+       return true;
+     }
+ 
+-  fntype = TREE_TYPE (TREE_TYPE (fn));
+-  if (gimple_call_lhs (stmt)
++  if (fn)
++    fntype = TREE_TYPE (TREE_TYPE (fn));
++  else
++    fntype = NULL_TREE;
++  if (fntype
++      && gimple_call_lhs (stmt)
+       && !useless_type_conversion_p (TREE_TYPE (gimple_call_lhs (stmt)),
+ 				     TREE_TYPE (fntype))
+       /* ???  At least C++ misses conversions at assignments from
+@@ -4130,9 +4154,10 @@
+      didn't see a function declaration before the call.  */
+   if (is_gimple_call (stmt))
+     {
+-      tree decl;
++      tree fn, decl;
+ 
+-      if (!is_gimple_call_addr (gimple_call_fn (stmt)))
++      fn = gimple_call_fn (stmt);
++      if (fn && !is_gimple_call_addr (fn))
+ 	{
+ 	  error ("invalid function in call statement");
+ 	  return true;
+@@ -7484,6 +7509,8 @@
+ 	case GIMPLE_CALL:
+ 	  if (gimple_call_lhs (g))
+ 	    break;
++	  if (gimple_call_internal_p (g))
++	    break;
+ 
+ 	  /* This is a naked call, as opposed to a GIMPLE_CALL with an
+ 	     LHS.  All calls whose value is ignored should be
+
+=== modified file 'gcc/tree-eh.c'
+--- old/gcc/tree-eh.c	2011-05-10 06:31:59 +0000
++++ new/gcc/tree-eh.c	2011-06-02 12:12:00 +0000
+@@ -2745,7 +2745,7 @@
+       || gimple_call_lhs (twos)
+       || gimple_call_chain (ones)
+       || gimple_call_chain (twos)
+-      || !operand_equal_p (gimple_call_fn (ones), gimple_call_fn (twos), 0)
++      || !gimple_call_same_target_p (ones, twos)
+       || gimple_call_num_args (ones) != gimple_call_num_args (twos))
+     return false;
+ 
+
+=== modified file 'gcc/tree-inline.c'
+--- old/gcc/tree-inline.c	2011-05-05 21:02:06 +0000
++++ new/gcc/tree-inline.c	2011-06-02 12:12:00 +0000
+@@ -3471,10 +3471,13 @@
+       {
+ 	tree decl = gimple_call_fndecl (stmt);
+ 	tree addr = gimple_call_fn (stmt);
+-	tree funtype = TREE_TYPE (addr);
++	tree funtype = NULL_TREE;
+ 	bool stdarg = false;
+ 
+-	if (POINTER_TYPE_P (funtype))
++	if (addr)
++	  funtype = TREE_TYPE (addr);
++
++	if (funtype && POINTER_TYPE_P (funtype))
+ 	  funtype = TREE_TYPE (funtype);
+ 
+ 	/* Do not special case builtins where we see the body.
+@@ -3514,7 +3517,7 @@
+ 	if (decl)
+ 	  funtype = TREE_TYPE (decl);
+ 
+-	if (!VOID_TYPE_P (TREE_TYPE (funtype)))
++	if (funtype && !VOID_TYPE_P (TREE_TYPE (funtype)))
+ 	  cost += estimate_move_cost (TREE_TYPE (funtype));
+ 
+ 	if (funtype)
+
+=== modified file 'gcc/tree-ssa-ccp.c'
+--- old/gcc/tree-ssa-ccp.c	2011-01-31 16:52:22 +0000
++++ new/gcc/tree-ssa-ccp.c	2011-05-05 15:42:22 +0000
+@@ -1279,7 +1279,10 @@
+ 
+     case GIMPLE_CALL:
+       {
+-	tree fn = valueize_op (gimple_call_fn (stmt));
++	tree fn = gimple_call_fn (stmt);
++	if (!fn)
++	  return NULL_TREE;
++	fn = valueize_op (fn);
+ 	if (TREE_CODE (fn) == ADDR_EXPR
+ 	    && TREE_CODE (TREE_OPERAND (fn, 0)) == FUNCTION_DECL
+ 	    && DECL_BUILT_IN (TREE_OPERAND (fn, 0)))
+@@ -2310,6 +2313,11 @@
+ 	    return true;
+ 	  }
+ 
++	/* Internal calls provide no argument types, so the extra laxity
++	   for normal calls does not apply.  */
++	if (gimple_call_internal_p (stmt))
++	  return false;
++
+ 	/* Propagate into the call arguments.  Compared to replace_uses_in
+ 	   this can use the argument slot types for type verification
+ 	   instead of the current argument type.  We also can safely
+
+=== modified file 'gcc/tree-ssa-dom.c'
+--- old/gcc/tree-ssa-dom.c	2011-02-14 17:59:10 +0000
++++ new/gcc/tree-ssa-dom.c	2011-05-05 15:42:22 +0000
+@@ -64,7 +64,7 @@
+     struct { enum tree_code op;  tree opnd; } unary;
+     struct { enum tree_code op;  tree opnd0, opnd1; } binary;
+     struct { enum tree_code op;  tree opnd0, opnd1, opnd2; } ternary;
+-    struct { tree fn; bool pure; size_t nargs; tree *args; } call;
++    struct { gimple fn_from; bool pure; size_t nargs; tree *args; } call;
+   } ops;
+ };
+ 
+@@ -258,7 +258,7 @@
+ 
+       expr->type = TREE_TYPE (gimple_call_lhs (stmt));
+       expr->kind = EXPR_CALL;
+-      expr->ops.call.fn = gimple_call_fn (stmt);
++      expr->ops.call.fn_from = stmt;
+ 
+       if (gimple_call_flags (stmt) & (ECF_CONST | ECF_PURE))
+         expr->ops.call.pure = true;
+@@ -422,8 +422,8 @@
+ 
+         /* If the calls are to different functions, then they
+            clearly cannot be equal.  */
+-        if (! operand_equal_p (expr0->ops.call.fn,
+-                               expr1->ops.call.fn, 0))
++        if (!gimple_call_same_target_p (expr0->ops.call.fn_from,
++                                        expr1->ops.call.fn_from))
+           return false;
+ 
+         if (! expr0->ops.call.pure)
+@@ -503,9 +503,15 @@
+       {
+         size_t i;
+         enum tree_code code = CALL_EXPR;
++        gimple fn_from;
+ 
+         val = iterative_hash_object (code, val);
+-        val = iterative_hash_expr (expr->ops.call.fn, val);
++        fn_from = expr->ops.call.fn_from;
++        if (gimple_call_internal_p (fn_from))
++          val = iterative_hash_hashval_t
++            ((hashval_t) gimple_call_internal_fn (fn_from), val);
++        else
++          val = iterative_hash_expr (gimple_call_fn (fn_from), val);
+         for (i = 0; i < expr->ops.call.nargs; i++)
+           val = iterative_hash_expr (expr->ops.call.args[i], val);
+       }
+@@ -565,8 +571,14 @@
+         {
+           size_t i;
+           size_t nargs = element->expr.ops.call.nargs;
++          gimple fn_from;
+ 
+-          print_generic_expr (stream, element->expr.ops.call.fn, 0);
++          fn_from = element->expr.ops.call.fn_from;
++          if (gimple_call_internal_p (fn_from))
++            fputs (internal_fn_name (gimple_call_internal_fn (fn_from)),
++                   stream);
++          else
++            print_generic_expr (stream, gimple_call_fn (fn_from), 0);
+           fprintf (stream, " (");
+           for (i = 0; i < nargs; i++)
+             {
+
+=== modified file 'gcc/tree-ssa-pre.c'
+--- old/gcc/tree-ssa-pre.c	2011-02-15 13:04:47 +0000
++++ new/gcc/tree-ssa-pre.c	2011-05-05 15:42:22 +0000
+@@ -2657,11 +2657,13 @@
+ }
+ 
+ /* Return true if we can value number the call in STMT.  This is true
+-   if we have a pure or constant call.  */
++   if we have a pure or constant call to a real function.  */
+ 
+ static bool
+ can_value_number_call (gimple stmt)
+ {
++  if (gimple_call_internal_p (stmt))
++    return false;
+   if (gimple_call_flags (stmt) & (ECF_PURE | ECF_CONST))
+     return true;
+   return false;
+@@ -4187,6 +4189,7 @@
+   gimple_stmt_iterator gsi;
+   gimple stmt;
+   unsigned i;
++  tree fn;
+ 
+   FOR_EACH_BB (b)
+     {
+@@ -4378,9 +4381,10 @@
+ 	  /* Visit indirect calls and turn them into direct calls if
+ 	     possible.  */
+ 	  if (is_gimple_call (stmt)
+-	      && TREE_CODE (gimple_call_fn (stmt)) == SSA_NAME)
++	      && (fn = gimple_call_fn (stmt))
++	      && TREE_CODE (fn) == SSA_NAME)
+ 	    {
+-	      tree fn = VN_INFO (gimple_call_fn (stmt))->valnum;
++	      fn = VN_INFO (fn)->valnum;
+ 	      if (TREE_CODE (fn) == ADDR_EXPR
+ 		  && TREE_CODE (TREE_OPERAND (fn, 0)) == FUNCTION_DECL)
+ 		{
+
+=== modified file 'gcc/tree-ssa-sccvn.c'
+--- old/gcc/tree-ssa-sccvn.c	2011-05-12 14:08:00 +0000
++++ new/gcc/tree-ssa-sccvn.c	2011-06-02 12:12:00 +0000
+@@ -2982,7 +2982,8 @@
+ 	  /* ???  We should handle stores from calls.  */
+ 	  else if (TREE_CODE (lhs) == SSA_NAME)
+ 	    {
+-	      if (gimple_call_flags (stmt) & (ECF_PURE | ECF_CONST))
++	      if (!gimple_call_internal_p (stmt)
++		  && gimple_call_flags (stmt) & (ECF_PURE | ECF_CONST))
+ 		changed = visit_reference_op_call (lhs, stmt);
+ 	      else
+ 		changed = defs_to_varying (stmt);
+
+=== modified file 'gcc/tree-ssa-structalias.c'
+--- old/gcc/tree-ssa-structalias.c	2011-02-10 15:29:52 +0000
++++ new/gcc/tree-ssa-structalias.c	2011-05-05 15:42:22 +0000
+@@ -4319,6 +4319,7 @@
+ 	    /* Fallthru to general call handling.  */;
+ 	  }
+       if (!in_ipa_mode
++	  || gimple_call_internal_p (t)
+ 	  || (fndecl
+ 	      && (!(fi = lookup_vi_for_tree (fndecl))
+ 		  || !fi->is_fn_info)))
+
+=== modified file 'gcc/tree-vect-data-refs.c'
+--- old/gcc/tree-vect-data-refs.c	2011-05-06 11:28:27 +0000
++++ new/gcc/tree-vect-data-refs.c	2011-06-02 12:12:00 +0000
+@@ -43,6 +43,45 @@
+ #include "expr.h"
+ #include "optabs.h"
+ 
++/* Return true if load- or store-lanes optab OPTAB is implemented for
++   COUNT vectors of type VECTYPE.  NAME is the name of OPTAB.  */
++
++static bool
++vect_lanes_optab_supported_p (const char *name, convert_optab optab,
++			      tree vectype, unsigned HOST_WIDE_INT count)
++{
++  enum machine_mode mode, array_mode;
++  bool limit_p;
++
++  mode = TYPE_MODE (vectype);
++  limit_p = !targetm.array_mode_supported_p (mode, count);
++  array_mode = mode_for_size (count * GET_MODE_BITSIZE (mode),
++			      MODE_INT, limit_p);
++
++  if (array_mode == BLKmode)
++    {
++      if (vect_print_dump_info (REPORT_DETAILS))
++	fprintf (vect_dump, "no array mode for %s[" HOST_WIDE_INT_PRINT_DEC "]",
++		 GET_MODE_NAME (mode), count);
++      return false;
++    }
++
++  if (convert_optab_handler (optab, array_mode, mode) == CODE_FOR_nothing)
++    {
++      if (vect_print_dump_info (REPORT_DETAILS))
++	fprintf (vect_dump, "cannot use %s<%s><%s>",
++		 name, GET_MODE_NAME (array_mode), GET_MODE_NAME (mode));
++      return false;
++    }
++
++  if (vect_print_dump_info (REPORT_DETAILS))
++    fprintf (vect_dump, "can use %s<%s><%s>",
++	     name, GET_MODE_NAME (array_mode), GET_MODE_NAME (mode));
++
++  return true;
++}
++
++
+ /* Return the smallest scalar part of STMT.
+    This is used to determine the vectype of the stmt.  We generally set the
+    vectype according to the type of the result (lhs).  For stmts whose
+@@ -2196,19 +2235,6 @@
+           return false;
+         }
+ 
+-      /* FORNOW: we handle only interleaving that is a power of 2.
+-         We don't fail here if it may be still possible to vectorize the
+-         group using SLP.  If not, the size of the group will be checked in
+-         vect_analyze_operations, and the vectorization will fail.  */
+-      if (exact_log2 (stride) == -1)
+-	{
+-	  if (vect_print_dump_info (REPORT_DETAILS))
+-	    fprintf (vect_dump, "interleaving is not a power of 2");
+-
+-	  if (slp_impossible)
+-	    return false;
+-	}
+-
+       if (stride == 0)
+         stride = count;
+ 
+@@ -2911,31 +2937,33 @@
+ 
+ /* Function vect_create_data_ref_ptr.
+ 
+-   Create a new pointer to vector type (vp), that points to the first location
+-   accessed in the loop by STMT, along with the def-use update chain to
+-   appropriately advance the pointer through the loop iterations. Also set
+-   aliasing information for the pointer.  This vector pointer is used by the
+-   callers to this function to create a memory reference expression for vector
+-   load/store access.
++   Create a new pointer-to-AGGR_TYPE variable (ap), that points to the first
++   location accessed in the loop by STMT, along with the def-use update
++   chain to appropriately advance the pointer through the loop iterations.
++   Also set aliasing information for the pointer.  This pointer is used by
++   the callers to this function to create a memory reference expression for
++   vector load/store access.
+ 
+    Input:
+    1. STMT: a stmt that references memory. Expected to be of the form
+          GIMPLE_ASSIGN <name, data-ref> or
+ 	 GIMPLE_ASSIGN <data-ref, name>.
+-   2. AT_LOOP: the loop where the vector memref is to be created.
+-   3. OFFSET (optional): an offset to be added to the initial address accessed
++   2. AGGR_TYPE: the type of the reference, which should be either a vector
++        or an array.
++   3. AT_LOOP: the loop where the vector memref is to be created.
++   4. OFFSET (optional): an offset to be added to the initial address accessed
+         by the data-ref in STMT.
+-   4. ONLY_INIT: indicate if vp is to be updated in the loop, or remain
++   5. ONLY_INIT: indicate if vp is to be updated in the loop, or remain
+         pointing to the initial address.
+-   5. TYPE: if not NULL indicates the required type of the data-ref.
++   6. TYPE: if not NULL indicates the required type of the data-ref.
+ 
+    Output:
+    1. Declare a new ptr to vector_type, and have it point to the base of the
+       data reference (initial addressed accessed by the data reference).
+       For example, for vector of type V8HI, the following code is generated:
+ 
+-      v8hi *vp;
+-      vp = (v8hi *)initial_address;
++      v8hi *ap;
++      ap = (v8hi *)initial_address;
+ 
+       if OFFSET is not supplied:
+          initial_address = &a[init];
+@@ -2955,7 +2983,7 @@
+    4. Return the pointer.  */
+ 
+ tree
+-vect_create_data_ref_ptr (gimple stmt, struct loop *at_loop,
++vect_create_data_ref_ptr (gimple stmt, tree aggr_type, struct loop *at_loop,
+ 			  tree offset, tree *initial_address, gimple *ptr_incr,
+ 			  bool only_init, bool *inv_p)
+ {
+@@ -2965,17 +2993,16 @@
+   struct loop *loop = NULL;
+   bool nested_in_vect_loop = false;
+   struct loop *containing_loop = NULL;
+-  tree vectype = STMT_VINFO_VECTYPE (stmt_info);
+-  tree vect_ptr_type;
+-  tree vect_ptr;
++  tree aggr_ptr_type;
++  tree aggr_ptr;
+   tree new_temp;
+   gimple vec_stmt;
+   gimple_seq new_stmt_list = NULL;
+   edge pe = NULL;
+   basic_block new_bb;
+-  tree vect_ptr_init;
++  tree aggr_ptr_init;
+   struct data_reference *dr = STMT_VINFO_DATA_REF (stmt_info);
+-  tree vptr;
++  tree aptr;
+   gimple_stmt_iterator incr_gsi;
+   bool insert_after;
+   bool negative;
+@@ -2986,6 +3013,9 @@
+   gimple_stmt_iterator gsi = gsi_for_stmt (stmt);
+   tree base;
+ 
++  gcc_assert (TREE_CODE (aggr_type) == ARRAY_TYPE
++	      || TREE_CODE (aggr_type) == VECTOR_TYPE);
++
+   if (loop_vinfo)
+     {
+       loop = LOOP_VINFO_LOOP (loop_vinfo);
+@@ -3020,8 +3050,9 @@
+   if (vect_print_dump_info (REPORT_DETAILS))
+     {
+       tree data_ref_base = base_name;
+-      fprintf (vect_dump, "create vector-pointer variable to type: ");
+-      print_generic_expr (vect_dump, vectype, TDF_SLIM);
++      fprintf (vect_dump, "create %s-pointer variable to type: ",
++	       tree_code_name[(int) TREE_CODE (aggr_type)]);
++      print_generic_expr (vect_dump, aggr_type, TDF_SLIM);
+       if (TREE_CODE (data_ref_base) == VAR_DECL
+           || TREE_CODE (data_ref_base) == ARRAY_REF)
+         fprintf (vect_dump, "  vectorizing an array ref: ");
+@@ -3032,27 +3063,28 @@
+       print_generic_expr (vect_dump, base_name, TDF_SLIM);
+     }
+ 
+-  /* (1) Create the new vector-pointer variable.  */
+-  vect_ptr_type = build_pointer_type (vectype);
++  /* (1) Create the new aggregate-pointer variable.  */
++  aggr_ptr_type = build_pointer_type (aggr_type);
+   base = get_base_address (DR_REF (dr));
+   if (base
+       && TREE_CODE (base) == MEM_REF)
+-    vect_ptr_type
+-      = build_qualified_type (vect_ptr_type,
++    aggr_ptr_type
++      = build_qualified_type (aggr_ptr_type,
+ 			      TYPE_QUALS (TREE_TYPE (TREE_OPERAND (base, 0))));
+-  vect_ptr = vect_get_new_vect_var (vect_ptr_type, vect_pointer_var,
++  aggr_ptr = vect_get_new_vect_var (aggr_ptr_type, vect_pointer_var,
+                                     get_name (base_name));
+ 
+-  /* Vector types inherit the alias set of their component type by default so
+-     we need to use a ref-all pointer if the data reference does not conflict
+-     with the created vector data reference because it is not addressable.  */
+-  if (!alias_sets_conflict_p (get_deref_alias_set (vect_ptr),
++  /* Vector and array types inherit the alias set of their component
++     type by default so we need to use a ref-all pointer if the data
++     reference does not conflict with the created aggregated data
++     reference because it is not addressable.  */
++  if (!alias_sets_conflict_p (get_deref_alias_set (aggr_ptr),
+ 			      get_alias_set (DR_REF (dr))))
+     {
+-      vect_ptr_type
+-	= build_pointer_type_for_mode (vectype,
+-				       TYPE_MODE (vect_ptr_type), true);
+-      vect_ptr = vect_get_new_vect_var (vect_ptr_type, vect_pointer_var,
++      aggr_ptr_type
++	= build_pointer_type_for_mode (aggr_type,
++				       TYPE_MODE (aggr_ptr_type), true);
++      aggr_ptr = vect_get_new_vect_var (aggr_ptr_type, vect_pointer_var,
+ 					get_name (base_name));
+     }
+ 
+@@ -3063,14 +3095,14 @@
+       do
+ 	{
+ 	  tree lhs = gimple_assign_lhs (orig_stmt);
+-	  if (!alias_sets_conflict_p (get_deref_alias_set (vect_ptr),
++	  if (!alias_sets_conflict_p (get_deref_alias_set (aggr_ptr),
+ 				      get_alias_set (lhs)))
+ 	    {
+-	      vect_ptr_type
+-		= build_pointer_type_for_mode (vectype,
+-					       TYPE_MODE (vect_ptr_type), true);
+-	      vect_ptr
+-		= vect_get_new_vect_var (vect_ptr_type, vect_pointer_var,
++	      aggr_ptr_type
++		= build_pointer_type_for_mode (aggr_type,
++					       TYPE_MODE (aggr_ptr_type), true);
++	      aggr_ptr
++		= vect_get_new_vect_var (aggr_ptr_type, vect_pointer_var,
+ 					 get_name (base_name));
+ 	      break;
+ 	    }
+@@ -3080,7 +3112,7 @@
+       while (orig_stmt);
+     }
+ 
+-  add_referenced_var (vect_ptr);
++  add_referenced_var (aggr_ptr);
+ 
+   /* Note: If the dataref is in an inner-loop nested in LOOP, and we are
+      vectorizing LOOP (i.e., outer-loop vectorization), we need to create two
+@@ -3113,8 +3145,8 @@
+ 		vp2 = vp1 + step
+ 		if () goto LOOP   */
+ 
+-  /* (2) Calculate the initial address the vector-pointer, and set
+-         the vector-pointer to point to it before the loop.  */
++  /* (2) Calculate the initial address of the aggregate-pointer, and set
++     the aggregate-pointer to point to it before the loop.  */
+ 
+   /* Create: (&(base[init_val+offset]) in the loop preheader.  */
+ 
+@@ -3133,17 +3165,17 @@
+ 
+   *initial_address = new_temp;
+ 
+-  /* Create: p = (vectype *) initial_base  */
++  /* Create: p = (aggr_type *) initial_base  */
+   if (TREE_CODE (new_temp) != SSA_NAME
+-      || !useless_type_conversion_p (vect_ptr_type, TREE_TYPE (new_temp)))
++      || !useless_type_conversion_p (aggr_ptr_type, TREE_TYPE (new_temp)))
+     {
+-      vec_stmt = gimple_build_assign (vect_ptr,
+-				      fold_convert (vect_ptr_type, new_temp));
+-      vect_ptr_init = make_ssa_name (vect_ptr, vec_stmt);
++      vec_stmt = gimple_build_assign (aggr_ptr,
++				      fold_convert (aggr_ptr_type, new_temp));
++      aggr_ptr_init = make_ssa_name (aggr_ptr, vec_stmt);
+       /* Copy the points-to information if it exists. */
+       if (DR_PTR_INFO (dr))
+-	duplicate_ssa_name_ptr_info (vect_ptr_init, DR_PTR_INFO (dr));
+-      gimple_assign_set_lhs (vec_stmt, vect_ptr_init);
++	duplicate_ssa_name_ptr_info (aggr_ptr_init, DR_PTR_INFO (dr));
++      gimple_assign_set_lhs (vec_stmt, aggr_ptr_init);
+       if (pe)
+ 	{
+ 	  new_bb = gsi_insert_on_edge_immediate (pe, vec_stmt);
+@@ -3153,19 +3185,19 @@
+ 	gsi_insert_before (&gsi, vec_stmt, GSI_SAME_STMT);
+     }
+   else
+-    vect_ptr_init = new_temp;
++    aggr_ptr_init = new_temp;
+ 
+-  /* (3) Handle the updating of the vector-pointer inside the loop.
++  /* (3) Handle the updating of the aggregate-pointer inside the loop.
+      This is needed when ONLY_INIT is false, and also when AT_LOOP is the
+      inner-loop nested in LOOP (during outer-loop vectorization).  */
+ 
+   /* No update in loop is required.  */
+   if (only_init && (!loop_vinfo || at_loop == loop))
+-    vptr = vect_ptr_init;
++    aptr = aggr_ptr_init;
+   else
+     {
+-      /* The step of the vector pointer is the Vector Size.  */
+-      tree step = TYPE_SIZE_UNIT (vectype);
++      /* The step of the aggregate pointer is the type size.  */
++      tree step = TYPE_SIZE_UNIT (aggr_type);
+       /* One exception to the above is when the scalar step of the load in
+ 	 LOOP is zero. In this case the step here is also zero.  */
+       if (*inv_p)
+@@ -3175,9 +3207,9 @@
+ 
+       standard_iv_increment_position (loop, &incr_gsi, &insert_after);
+ 
+-      create_iv (vect_ptr_init,
+-		 fold_convert (vect_ptr_type, step),
+-		 vect_ptr, loop, &incr_gsi, insert_after,
++      create_iv (aggr_ptr_init,
++		 fold_convert (aggr_ptr_type, step),
++		 aggr_ptr, loop, &incr_gsi, insert_after,
+ 		 &indx_before_incr, &indx_after_incr);
+       incr = gsi_stmt (incr_gsi);
+       set_vinfo_for_stmt (incr, new_stmt_vec_info (incr, loop_vinfo, NULL));
+@@ -3191,14 +3223,14 @@
+       if (ptr_incr)
+ 	*ptr_incr = incr;
+ 
+-      vptr = indx_before_incr;
++      aptr = indx_before_incr;
+     }
+ 
+   if (!nested_in_vect_loop || only_init)
+-    return vptr;
+-
+-
+-  /* (4) Handle the updating of the vector-pointer inside the inner-loop
++    return aptr;
++
++
++  /* (4) Handle the updating of the aggregate-pointer inside the inner-loop
+      nested in LOOP, if exists.  */
+ 
+   gcc_assert (nested_in_vect_loop);
+@@ -3206,7 +3238,7 @@
+     {
+       standard_iv_increment_position (containing_loop, &incr_gsi,
+ 				      &insert_after);
+-      create_iv (vptr, fold_convert (vect_ptr_type, DR_STEP (dr)), vect_ptr,
++      create_iv (aptr, fold_convert (aggr_ptr_type, DR_STEP (dr)), aggr_ptr,
+ 		 containing_loop, &incr_gsi, insert_after, &indx_before_incr,
+ 		 &indx_after_incr);
+       incr = gsi_stmt (incr_gsi);
+@@ -3343,13 +3375,22 @@
+    and FALSE otherwise.  */
+ 
+ bool
+-vect_strided_store_supported (tree vectype)
++vect_strided_store_supported (tree vectype, unsigned HOST_WIDE_INT count)
+ {
+   optab interleave_high_optab, interleave_low_optab;
+   enum machine_mode mode;
+ 
+   mode = TYPE_MODE (vectype);
+ 
++  /* vect_permute_store_chain requires the group size to be a power of two.  */
++  if (exact_log2 (count) == -1)
++    {
++      if (vect_print_dump_info (REPORT_DETAILS))
++	fprintf (vect_dump, "the size of the group of strided accesses"
++		 " is not a power of 2");
++      return false;
++    }
++
+   /* Check that the operation is supported.  */
+   interleave_high_optab = optab_for_tree_code (VEC_INTERLEAVE_HIGH_EXPR,
+ 					       vectype, optab_default);
+@@ -3374,6 +3415,18 @@
+ }
+ 
+ 
++/* Return TRUE if vec_store_lanes is available for COUNT vectors of
++   type VECTYPE.  */
++
++bool
++vect_store_lanes_supported (tree vectype, unsigned HOST_WIDE_INT count)
++{
++  return vect_lanes_optab_supported_p ("vec_store_lanes",
++				       vec_store_lanes_optab,
++				       vectype, count);
++}
++
++
+ /* Function vect_permute_store_chain.
+ 
+    Given a chain of interleaved stores in DR_CHAIN of LENGTH that must be
+@@ -3435,7 +3488,7 @@
+    I3:  4 12 20 28  5 13 21 30
+    I4:  6 14 22 30  7 15 23 31.  */
+ 
+-bool
++void
+ vect_permute_store_chain (VEC(tree,heap) *dr_chain,
+ 			  unsigned int length,
+ 			  gimple stmt,
+@@ -3449,9 +3502,7 @@
+   unsigned int j;
+   enum tree_code high_code, low_code;
+ 
+-  /* Check that the operation is supported.  */
+-  if (!vect_strided_store_supported (vectype))
+-    return false;
++  gcc_assert (vect_strided_store_supported (vectype, length));
+ 
+   *result_chain = VEC_copy (tree, heap, dr_chain);
+ 
+@@ -3504,7 +3555,6 @@
+ 	}
+       dr_chain = VEC_copy (tree, heap, *result_chain);
+     }
+-  return true;
+ }
+ 
+ /* Function vect_setup_realignment
+@@ -3674,8 +3724,9 @@
+ 
+       gcc_assert (!compute_in_loop);
+       vec_dest = vect_create_destination_var (scalar_dest, vectype);
+-      ptr = vect_create_data_ref_ptr (stmt, loop_for_initial_load, NULL_TREE,
+-				      &init_addr, &inc, true, &inv_p);
++      ptr = vect_create_data_ref_ptr (stmt, vectype, loop_for_initial_load,
++				      NULL_TREE, &init_addr, &inc,
++				      true, &inv_p);
+       new_stmt = gimple_build_assign_with_ops
+ 		   (BIT_AND_EXPR, NULL_TREE, ptr,
+ 		    build_int_cst (TREE_TYPE (ptr),
+@@ -3780,13 +3831,22 @@
+    and FALSE otherwise.  */
+ 
+ bool
+-vect_strided_load_supported (tree vectype)
++vect_strided_load_supported (tree vectype, unsigned HOST_WIDE_INT count)
+ {
+   optab perm_even_optab, perm_odd_optab;
+   enum machine_mode mode;
+ 
+   mode = TYPE_MODE (vectype);
+ 
++  /* vect_permute_load_chain requires the group size to be a power of two.  */
++  if (exact_log2 (count) == -1)
++    {
++      if (vect_print_dump_info (REPORT_DETAILS))
++	fprintf (vect_dump, "the size of the group of strided accesses"
++		 " is not a power of 2");
++      return false;
++    }
++
+   perm_even_optab = optab_for_tree_code (VEC_EXTRACT_EVEN_EXPR, vectype,
+ 					 optab_default);
+   if (!perm_even_optab)
+@@ -3821,6 +3881,16 @@
+   return true;
+ }
+ 
++/* Return TRUE if vec_load_lanes is available for COUNT vectors of
++   type VECTYPE.  */
++
++bool
++vect_load_lanes_supported (tree vectype, unsigned HOST_WIDE_INT count)
++{
++  return vect_lanes_optab_supported_p ("vec_load_lanes",
++				       vec_load_lanes_optab,
++				       vectype, count);
++}
+ 
+ /* Function vect_permute_load_chain.
+ 
+@@ -3898,7 +3968,7 @@
+    3rd vec (E2):  2 6 10 14 18 22 26 30
+    4th vec (E4):  3 7 11 15 19 23 27 31.  */
+ 
+-bool
++static void
+ vect_permute_load_chain (VEC(tree,heap) *dr_chain,
+ 			 unsigned int length,
+ 			 gimple stmt,
+@@ -3911,9 +3981,7 @@
+   int i;
+   unsigned int j;
+ 
+-  /* Check that the operation is supported.  */
+-  if (!vect_strided_load_supported (vectype))
+-    return false;
++  gcc_assert (vect_strided_load_supported (vectype, length));
+ 
+   *result_chain = VEC_copy (tree, heap, dr_chain);
+   for (i = 0; i < exact_log2 (length); i++)
+@@ -3956,7 +4024,6 @@
+ 	}
+       dr_chain = VEC_copy (tree, heap, *result_chain);
+     }
+-  return true;
+ }
+ 
+ 
+@@ -3967,24 +4034,32 @@
+    the scalar statements.
+ */
+ 
+-bool
++void
+ vect_transform_strided_load (gimple stmt, VEC(tree,heap) *dr_chain, int size,
+ 			     gimple_stmt_iterator *gsi)
+ {
+-  stmt_vec_info stmt_info = vinfo_for_stmt (stmt);
+-  gimple first_stmt = DR_GROUP_FIRST_DR (stmt_info);
+-  gimple next_stmt, new_stmt;
+   VEC(tree,heap) *result_chain = NULL;
+-  unsigned int i, gap_count;
+-  tree tmp_data_ref;
+ 
+   /* DR_CHAIN contains input data-refs that are a part of the interleaving.
+      RESULT_CHAIN is the output of vect_permute_load_chain, it contains permuted
+      vectors, that are ready for vector computation.  */
+   result_chain = VEC_alloc (tree, heap, size);
+-  /* Permute.  */
+-  if (!vect_permute_load_chain (dr_chain, size, stmt, gsi, &result_chain))
+-    return false;
++  vect_permute_load_chain (dr_chain, size, stmt, gsi, &result_chain);
++  vect_record_strided_load_vectors (stmt, result_chain);
++  VEC_free (tree, heap, result_chain);
++}
++
++/* RESULT_CHAIN contains the output of a group of strided loads that were
++   generated as part of the vectorization of STMT.  Assign the statement
++   for each vector to the associated scalar statement.  */
++
++void
++vect_record_strided_load_vectors (gimple stmt, VEC(tree,heap) *result_chain)
++{
++  gimple first_stmt = DR_GROUP_FIRST_DR (vinfo_for_stmt (stmt));
++  gimple next_stmt, new_stmt;
++  unsigned int i, gap_count;
++  tree tmp_data_ref;
+ 
+   /* Put a permuted data-ref in the VECTORIZED_STMT field.
+      Since we scan the chain starting from it's first node, their order
+@@ -4046,9 +4121,6 @@
+ 	    break;
+         }
+     }
+-
+-  VEC_free (tree, heap, result_chain);
+-  return true;
+ }
+ 
+ /* Function vect_force_dr_alignment_p.
+
+=== modified file 'gcc/tree-vect-slp.c'
+--- old/gcc/tree-vect-slp.c	2010-12-23 16:25:52 +0000
++++ new/gcc/tree-vect-slp.c	2011-05-05 15:43:06 +0000
+@@ -215,7 +215,8 @@
+ 	    vect_model_simple_cost (stmt_info, ncopies_for_cost, dt, slp_node);
+ 	  else
+ 	    /* Store.  */
+-	    vect_model_store_cost (stmt_info, ncopies_for_cost, dt[0], slp_node);
++	    vect_model_store_cost (stmt_info, ncopies_for_cost, false,
++				   dt[0], slp_node);
+ 	}
+ 
+       else
+@@ -579,7 +580,7 @@
+ 
+                   /* Analyze costs (for the first stmt in the group).  */
+                   vect_model_load_cost (vinfo_for_stmt (stmt),
+-                                        ncopies_for_cost, *node);
++                                        ncopies_for_cost, false, *node);
+                 }
+ 
+               /* Store the place of this load in the interleaving chain.  In
+
+=== modified file 'gcc/tree-vect-stmts.c'
+--- old/gcc/tree-vect-stmts.c	2011-04-18 07:38:11 +0000
++++ new/gcc/tree-vect-stmts.c	2011-06-02 12:12:00 +0000
+@@ -42,6 +42,82 @@
+ #include "langhooks.h"
+ 
+ 
++/* Return a variable of type ELEM_TYPE[NELEMS].  */
++
++static tree
++create_vector_array (tree elem_type, unsigned HOST_WIDE_INT nelems)
++{
++  return create_tmp_var (build_array_type_nelts (elem_type, nelems),
++			 "vect_array");
++}
++
++/* ARRAY is an array of vectors created by create_vector_array.
++   Return an SSA_NAME for the vector in index N.  The reference
++   is part of the vectorization of STMT and the vector is associated
++   with scalar destination SCALAR_DEST.  */
++
++static tree
++read_vector_array (gimple stmt, gimple_stmt_iterator *gsi, tree scalar_dest,
++		   tree array, unsigned HOST_WIDE_INT n)
++{
++  tree vect_type, vect, vect_name, array_ref;
++  gimple new_stmt;
++
++  gcc_assert (TREE_CODE (TREE_TYPE (array)) == ARRAY_TYPE);
++  vect_type = TREE_TYPE (TREE_TYPE (array));
++  vect = vect_create_destination_var (scalar_dest, vect_type);
++  array_ref = build4 (ARRAY_REF, vect_type, array,
++		      build_int_cst (size_type_node, n),
++		      NULL_TREE, NULL_TREE);
++
++  new_stmt = gimple_build_assign (vect, array_ref);
++  vect_name = make_ssa_name (vect, new_stmt);
++  gimple_assign_set_lhs (new_stmt, vect_name);
++  vect_finish_stmt_generation (stmt, new_stmt, gsi);
++  mark_symbols_for_renaming (new_stmt);
++
++  return vect_name;
++}
++
++/* ARRAY is an array of vectors created by create_vector_array.
++   Emit code to store SSA_NAME VECT in index N of the array.
++   The store is part of the vectorization of STMT.  */
++
++static void
++write_vector_array (gimple stmt, gimple_stmt_iterator *gsi, tree vect,
++		    tree array, unsigned HOST_WIDE_INT n)
++{
++  tree array_ref;
++  gimple new_stmt;
++
++  array_ref = build4 (ARRAY_REF, TREE_TYPE (vect), array,
++		      build_int_cst (size_type_node, n),
++		      NULL_TREE, NULL_TREE);
++
++  new_stmt = gimple_build_assign (array_ref, vect);
++  vect_finish_stmt_generation (stmt, new_stmt, gsi);
++  mark_symbols_for_renaming (new_stmt);
++}
++
++/* PTR is a pointer to an array of type TYPE.  Return a representation
++   of *PTR.  The memory reference replaces those in FIRST_DR
++   (and its group).  */
++
++static tree
++create_array_ref (tree type, tree ptr, struct data_reference *first_dr)
++{
++  struct ptr_info_def *pi;
++  tree mem_ref, alias_ptr_type;
++
++  alias_ptr_type = reference_alias_ptr_type (DR_REF (first_dr));
++  mem_ref = build2 (MEM_REF, type, ptr, build_int_cst (alias_ptr_type, 0));
++  /* Arrays have the same alignment as their type.  */
++  pi = get_ptr_info (ptr);
++  pi->align = TYPE_ALIGN_UNIT (type);
++  pi->misalign = 0;
++  return mem_ref;
++}
++
+ /* Utility functions used by vect_mark_stmts_to_be_vectorized.  */
+ 
+ /* Function vect_mark_relevant.
+@@ -648,7 +724,8 @@
+ 
+ void
+ vect_model_store_cost (stmt_vec_info stmt_info, int ncopies,
+-		       enum vect_def_type dt, slp_tree slp_node)
++		       bool store_lanes_p, enum vect_def_type dt,
++		       slp_tree slp_node)
+ {
+   int group_size;
+   unsigned int inside_cost = 0, outside_cost = 0;
+@@ -685,9 +762,11 @@
+       first_dr = STMT_VINFO_DATA_REF (stmt_info);
+     }
+ 
+-  /* Is this an access in a group of stores, which provide strided access?
+-     If so, add in the cost of the permutes.  */
+-  if (group_size > 1)
++  /* We assume that the cost of a single store-lanes instruction is
++     equivalent to the cost of GROUP_SIZE separate stores.  If a strided
++     access is instead being provided by a permute-and-store operation,
++     include the cost of the permutes.  */
++  if (!store_lanes_p && group_size > 1)
+     {
+       /* Uses a high and low interleave operation for each needed permute.  */
+       inside_cost = ncopies * exact_log2(group_size) * group_size
+@@ -763,8 +842,8 @@
+    access scheme chosen.  */
+ 
+ void
+-vect_model_load_cost (stmt_vec_info stmt_info, int ncopies, slp_tree slp_node)
+-
++vect_model_load_cost (stmt_vec_info stmt_info, int ncopies, bool load_lanes_p,
++		      slp_tree slp_node)
+ {
+   int group_size;
+   gimple first_stmt;
+@@ -789,9 +868,11 @@
+       first_dr = dr;
+     }
+ 
+-  /* Is this an access in a group of loads providing strided access?
+-     If so, add in the cost of the permutes.  */
+-  if (group_size > 1)
++  /* We assume that the cost of a single load-lanes instruction is
++     equivalent to the cost of GROUP_SIZE separate loads.  If a strided
++     access is instead being provided by a load-and-permute operation,
++     include the cost of the permutes.  */
++  if (!load_lanes_p && group_size > 1)
+     {
+       /* Uses an even and odd extract operations for each needed permute.  */
+       inside_cost = ncopies * exact_log2(group_size) * group_size
+@@ -3329,6 +3410,7 @@
+   stmt_vec_info stmt_info = vinfo_for_stmt (stmt);
+   struct data_reference *dr = STMT_VINFO_DATA_REF (stmt_info), *first_dr = NULL;
+   tree vectype = STMT_VINFO_VECTYPE (stmt_info);
++  tree elem_type;
+   loop_vec_info loop_vinfo = STMT_VINFO_LOOP_VINFO (stmt_info);
+   struct loop *loop = NULL;
+   enum machine_mode vec_mode;
+@@ -3344,6 +3426,7 @@
+   int j;
+   gimple next_stmt, first_stmt = NULL;
+   bool strided_store = false;
++  bool store_lanes_p = false;
+   unsigned int group_size, i;
+   VEC(tree,heap) *dr_chain = NULL, *oprnds = NULL, *result_chain = NULL;
+   bool inv_p;
+@@ -3351,6 +3434,7 @@
+   bool slp = (slp_node != NULL);
+   unsigned int vec_num;
+   bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_info);
++  tree aggr_type;
+ 
+   if (loop_vinfo)
+     loop = LOOP_VINFO_LOOP (loop_vinfo);
+@@ -3404,7 +3488,8 @@
+ 
+   /* The scalar rhs type needs to be trivially convertible to the vector
+      component type.  This should always be the case.  */
+-  if (!useless_type_conversion_p (TREE_TYPE (vectype), TREE_TYPE (op)))
++  elem_type = TREE_TYPE (vectype);
++  if (!useless_type_conversion_p (elem_type, TREE_TYPE (op)))
+     {
+       if (vect_print_dump_info (REPORT_DETAILS))
+         fprintf (vect_dump, "???  operands of different types");
+@@ -3431,9 +3516,14 @@
+     {
+       strided_store = true;
+       first_stmt = DR_GROUP_FIRST_DR (stmt_info);
+-      if (!vect_strided_store_supported (vectype)
+-	  && !PURE_SLP_STMT (stmt_info) && !slp)
+-	return false;
++      if (!slp && !PURE_SLP_STMT (stmt_info))
++	{
++	  group_size = DR_GROUP_SIZE (vinfo_for_stmt (first_stmt));
++	  if (vect_store_lanes_supported (vectype, group_size))
++	    store_lanes_p = true;
++	  else if (!vect_strided_store_supported (vectype, group_size))
++	    return false;
++	}
+ 
+       if (first_stmt == stmt)
+ 	{
+@@ -3459,7 +3549,7 @@
+   if (!vec_stmt) /* transformation not required.  */
+     {
+       STMT_VINFO_TYPE (stmt_info) = store_vec_info_type;
+-      vect_model_store_cost (stmt_info, ncopies, dt, NULL);
++      vect_model_store_cost (stmt_info, ncopies, store_lanes_p, dt, NULL);
+       return true;
+     }
+ 
+@@ -3514,6 +3604,16 @@
+ 
+   alignment_support_scheme = vect_supportable_dr_alignment (first_dr, false);
+   gcc_assert (alignment_support_scheme);
++  /* Targets with store-lane instructions must not require explicit
++     realignment.  */
++  gcc_assert (!store_lanes_p
++	      || alignment_support_scheme == dr_aligned
++	      || alignment_support_scheme == dr_unaligned_supported);
++
++  if (store_lanes_p)
++    aggr_type = build_array_type_nelts (elem_type, vec_num * nunits);
++  else
++    aggr_type = vectype;
+ 
+   /* In case the vectorization factor (VF) is bigger than the number
+      of elements that we can fit in a vectype (nunits), we have to generate
+@@ -3602,9 +3702,9 @@
+ 	  /* We should have catched mismatched types earlier.  */
+ 	  gcc_assert (useless_type_conversion_p (vectype,
+ 						 TREE_TYPE (vec_oprnd)));
+-	  dataref_ptr = vect_create_data_ref_ptr (first_stmt, NULL, NULL_TREE,
+-						  &dummy, &ptr_incr, false,
+-						  &inv_p);
++	  dataref_ptr = vect_create_data_ref_ptr (first_stmt, aggr_type, NULL,
++						  NULL_TREE, &dummy,
++						  &ptr_incr, false, &inv_p);
+ 	  gcc_assert (bb_vinfo || !inv_p);
+ 	}
+       else
+@@ -3625,76 +3725,101 @@
+ 	      VEC_replace(tree, dr_chain, i, vec_oprnd);
+ 	      VEC_replace(tree, oprnds, i, vec_oprnd);
+ 	    }
+-	  dataref_ptr =
+-		bump_vector_ptr (dataref_ptr, ptr_incr, gsi, stmt, NULL_TREE);
+-	}
+-
+-      if (strided_store)
+-	{
+-	  result_chain = VEC_alloc (tree, heap, group_size);
+-	  /* Permute.  */
+-	  if (!vect_permute_store_chain (dr_chain, group_size, stmt, gsi,
+-					 &result_chain))
+-	    return false;
+-	}
+-
+-      next_stmt = first_stmt;
+-      for (i = 0; i < vec_num; i++)
+-	{
+-	  struct ptr_info_def *pi;
+-
+-	  if (i > 0)
+-	    /* Bump the vector pointer.  */
+-	    dataref_ptr = bump_vector_ptr (dataref_ptr, ptr_incr, gsi, stmt,
+-					   NULL_TREE);
+-
+-	  if (slp)
+-	    vec_oprnd = VEC_index (tree, vec_oprnds, i);
+-	  else if (strided_store)
+-	    /* For strided stores vectorized defs are interleaved in
+-	       vect_permute_store_chain().  */
+-	    vec_oprnd = VEC_index (tree, result_chain, i);
+-
+-	  data_ref = build2 (MEM_REF, TREE_TYPE (vec_oprnd), dataref_ptr,
+-			     build_int_cst (reference_alias_ptr_type
+-					    (DR_REF (first_dr)), 0));
+-	  pi = get_ptr_info (dataref_ptr);
+-	  pi->align = TYPE_ALIGN_UNIT (vectype);
+-          if (aligned_access_p (first_dr))
+-	    pi->misalign = 0;
+-          else if (DR_MISALIGNMENT (first_dr) == -1)
+-	    {
+-	      TREE_TYPE (data_ref)
+-		= build_aligned_type (TREE_TYPE (data_ref),
+-				      TYPE_ALIGN (TREE_TYPE (vectype)));
+-	      pi->align = TYPE_ALIGN_UNIT (TREE_TYPE (vectype));
+-	      pi->misalign = 0;
+-	    }
+-	  else
+-	    {
+-	      TREE_TYPE (data_ref)
+-		= build_aligned_type (TREE_TYPE (data_ref),
+-				      TYPE_ALIGN (TREE_TYPE (vectype)));
+-	      pi->misalign = DR_MISALIGNMENT (first_dr);
+-	    }
+-
+-	  /* Arguments are ready.  Create the new vector stmt.  */
+-	  new_stmt = gimple_build_assign (data_ref, vec_oprnd);
++	  dataref_ptr = bump_vector_ptr (dataref_ptr, ptr_incr, gsi, stmt,
++					 TYPE_SIZE_UNIT (aggr_type));
++	}
++
++      if (store_lanes_p)
++	{
++	  tree vec_array;
++
++	  /* Combine all the vectors into an array.  */
++	  vec_array = create_vector_array (vectype, vec_num);
++	  for (i = 0; i < vec_num; i++)
++	    {
++	      vec_oprnd = VEC_index (tree, dr_chain, i);
++	      write_vector_array (stmt, gsi, vec_oprnd, vec_array, i);
++	    }
++
++	  /* Emit:
++	       MEM_REF[...all elements...] = STORE_LANES (VEC_ARRAY).  */
++	  data_ref = create_array_ref (aggr_type, dataref_ptr, first_dr);
++	  new_stmt = gimple_build_call_internal (IFN_STORE_LANES, 1, vec_array);
++	  gimple_call_set_lhs (new_stmt, data_ref);
+ 	  vect_finish_stmt_generation (stmt, new_stmt, gsi);
+ 	  mark_symbols_for_renaming (new_stmt);
+-
+-          if (slp)
+-            continue;
+-
+-          if (j == 0)
+-            STMT_VINFO_VEC_STMT (stmt_info) = *vec_stmt =  new_stmt;
++	}
++      else
++	{
++	  new_stmt = NULL;
++	  if (strided_store)
++	    {
++	      result_chain = VEC_alloc (tree, heap, group_size);
++	      /* Permute.  */
++	      vect_permute_store_chain (dr_chain, group_size, stmt, gsi,
++					&result_chain);
++	    }
++
++	  next_stmt = first_stmt;
++	  for (i = 0; i < vec_num; i++)
++	    {
++	      struct ptr_info_def *pi;
++
++	      if (i > 0)
++		/* Bump the vector pointer.  */
++		dataref_ptr = bump_vector_ptr (dataref_ptr, ptr_incr, gsi,
++					       stmt, NULL_TREE);
++
++	      if (slp)
++		vec_oprnd = VEC_index (tree, vec_oprnds, i);
++	      else if (strided_store)
++		/* For strided stores vectorized defs are interleaved in
++		   vect_permute_store_chain().  */
++		vec_oprnd = VEC_index (tree, result_chain, i);
++
++	      data_ref = build2 (MEM_REF, TREE_TYPE (vec_oprnd), dataref_ptr,
++				 build_int_cst (reference_alias_ptr_type
++						(DR_REF (first_dr)), 0));
++	      pi = get_ptr_info (dataref_ptr);
++	      pi->align = TYPE_ALIGN_UNIT (vectype);
++	      if (aligned_access_p (first_dr))
++		pi->misalign = 0;
++	      else if (DR_MISALIGNMENT (first_dr) == -1)
++		{
++		  TREE_TYPE (data_ref)
++		    = build_aligned_type (TREE_TYPE (data_ref),
++					  TYPE_ALIGN (elem_type));
++		  pi->align = TYPE_ALIGN_UNIT (elem_type);
++		  pi->misalign = 0;
++		}
++	      else
++		{
++		  TREE_TYPE (data_ref)
++		    = build_aligned_type (TREE_TYPE (data_ref),
++					  TYPE_ALIGN (elem_type));
++		  pi->misalign = DR_MISALIGNMENT (first_dr);
++		}
++
++	      /* Arguments are ready.  Create the new vector stmt.  */
++	      new_stmt = gimple_build_assign (data_ref, vec_oprnd);
++	      vect_finish_stmt_generation (stmt, new_stmt, gsi);
++	      mark_symbols_for_renaming (new_stmt);
++
++	      if (slp)
++		continue;
++
++	      next_stmt = DR_GROUP_NEXT_DR (vinfo_for_stmt (next_stmt));
++	      if (!next_stmt)
++		break;
++	    }
++	}
++      if (!slp)
++	{
++	  if (j == 0)
++	    STMT_VINFO_VEC_STMT (stmt_info) = *vec_stmt = new_stmt;
+ 	  else
+ 	    STMT_VINFO_RELATED_STMT (prev_stmt_info) = new_stmt;
+-
+ 	  prev_stmt_info = vinfo_for_stmt (new_stmt);
+-	  next_stmt = DR_GROUP_NEXT_DR (vinfo_for_stmt (next_stmt));
+-	  if (!next_stmt)
+-	    break;
+ 	}
+     }
+ 
+@@ -3805,6 +3930,7 @@
+   bool nested_in_vect_loop = false;
+   struct data_reference *dr = STMT_VINFO_DATA_REF (stmt_info), *first_dr;
+   tree vectype = STMT_VINFO_VECTYPE (stmt_info);
++  tree elem_type;
+   tree new_temp;
+   enum machine_mode mode;
+   gimple new_stmt = NULL;
+@@ -3821,6 +3947,7 @@
+   gimple phi = NULL;
+   VEC(tree,heap) *dr_chain = NULL;
+   bool strided_load = false;
++  bool load_lanes_p = false;
+   gimple first_stmt;
+   tree scalar_type;
+   bool inv_p;
+@@ -3833,6 +3960,7 @@
+   enum tree_code code;
+   bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_info);
+   int vf;
++  tree aggr_type;
+ 
+   if (loop_vinfo)
+     {
+@@ -3909,7 +4037,8 @@
+ 
+   /* The vector component type needs to be trivially convertible to the
+      scalar lhs.  This should always be the case.  */
+-  if (!useless_type_conversion_p (TREE_TYPE (scalar_dest), TREE_TYPE (vectype)))
++  elem_type = TREE_TYPE (vectype);
++  if (!useless_type_conversion_p (TREE_TYPE (scalar_dest), elem_type))
+     {
+       if (vect_print_dump_info (REPORT_DETAILS))
+         fprintf (vect_dump, "???  operands of different types");
+@@ -3923,10 +4052,15 @@
+       /* FORNOW */
+       gcc_assert (! nested_in_vect_loop);
+ 
+-      /* Check if interleaving is supported.  */
+-      if (!vect_strided_load_supported (vectype)
+-	  && !PURE_SLP_STMT (stmt_info) && !slp)
+-	return false;
++      first_stmt = DR_GROUP_FIRST_DR (stmt_info);
++      if (!slp && !PURE_SLP_STMT (stmt_info))
++	{
++	  group_size = DR_GROUP_SIZE (vinfo_for_stmt (first_stmt));
++	  if (vect_load_lanes_supported (vectype, group_size))
++	    load_lanes_p = true;
++	  else if (!vect_strided_load_supported (vectype, group_size))
++	    return false;
++	}
+     }
+ 
+   if (negative)
+@@ -3951,12 +4085,12 @@
+   if (!vec_stmt) /* transformation not required.  */
+     {
+       STMT_VINFO_TYPE (stmt_info) = load_vec_info_type;
+-      vect_model_load_cost (stmt_info, ncopies, NULL);
++      vect_model_load_cost (stmt_info, ncopies, load_lanes_p, NULL);
+       return true;
+     }
+ 
+   if (vect_print_dump_info (REPORT_DETAILS))
+-    fprintf (vect_dump, "transform load.");
++    fprintf (vect_dump, "transform load. ncopies = %d", ncopies);
+ 
+   /** Transform.  **/
+ 
+@@ -3982,8 +4116,6 @@
+     	}
+       else
+ 	vec_num = group_size;
+-
+-      dr_chain = VEC_alloc (tree, heap, vec_num);
+     }
+   else
+     {
+@@ -3994,6 +4126,11 @@
+ 
+   alignment_support_scheme = vect_supportable_dr_alignment (first_dr, false);
+   gcc_assert (alignment_support_scheme);
++  /* Targets with load-lane instructions must not require explicit
++     realignment.  */
++  gcc_assert (!load_lanes_p
++	      || alignment_support_scheme == dr_aligned
++	      || alignment_support_scheme == dr_unaligned_supported);
+ 
+   /* In case the vectorization factor (VF) is bigger than the number
+      of elements that we can fit in a vectype (nunits), we have to generate
+@@ -4125,208 +4262,252 @@
+   if (negative)
+     offset = size_int (-TYPE_VECTOR_SUBPARTS (vectype) + 1);
+ 
++  if (load_lanes_p)
++    aggr_type = build_array_type_nelts (elem_type, vec_num * nunits);
++  else
++    aggr_type = vectype;
++
+   prev_stmt_info = NULL;
+   for (j = 0; j < ncopies; j++)
+     {
+       /* 1. Create the vector pointer update chain.  */
+       if (j == 0)
+-        dataref_ptr = vect_create_data_ref_ptr (first_stmt,
++        dataref_ptr = vect_create_data_ref_ptr (first_stmt, aggr_type,
+ 					        at_loop, offset,
+ 						&dummy, &ptr_incr, false,
+ 						&inv_p);
+       else
+-        dataref_ptr =
+-		bump_vector_ptr (dataref_ptr, ptr_incr, gsi, stmt, NULL_TREE);
+-
+-      for (i = 0; i < vec_num; i++)
++        dataref_ptr = bump_vector_ptr (dataref_ptr, ptr_incr, gsi, stmt,
++				       TYPE_SIZE_UNIT (aggr_type));
++
++      if (strided_load || slp_perm)
++	dr_chain = VEC_alloc (tree, heap, vec_num);
++
++      if (load_lanes_p)
+ 	{
+-	  if (i > 0)
+-	    dataref_ptr = bump_vector_ptr (dataref_ptr, ptr_incr, gsi, stmt,
+-					   NULL_TREE);
+-
+-	  /* 2. Create the vector-load in the loop.  */
+-	  switch (alignment_support_scheme)
+-	    {
+-	    case dr_aligned:
+-	    case dr_unaligned_supported:
+-	      {
+-		struct ptr_info_def *pi;
+-		data_ref
+-		  = build2 (MEM_REF, vectype, dataref_ptr,
+-			    build_int_cst (reference_alias_ptr_type
+-					   (DR_REF (first_dr)), 0));
+-		pi = get_ptr_info (dataref_ptr);
+-		pi->align = TYPE_ALIGN_UNIT (vectype);
+-		if (alignment_support_scheme == dr_aligned)
+-		  {
+-		    gcc_assert (aligned_access_p (first_dr));
+-		    pi->misalign = 0;
+-		  }
+-		else if (DR_MISALIGNMENT (first_dr) == -1)
+-		  {
+-		    TREE_TYPE (data_ref)
+-		      = build_aligned_type (TREE_TYPE (data_ref),
+-					    TYPE_ALIGN (TREE_TYPE (vectype)));
+-		    pi->align = TYPE_ALIGN_UNIT (TREE_TYPE (vectype));
+-		    pi->misalign = 0;
+-		  }
+-		else
+-		  {
+-		    TREE_TYPE (data_ref)
+-		      = build_aligned_type (TREE_TYPE (data_ref),
+-					    TYPE_ALIGN (TREE_TYPE (vectype)));
+-		    pi->misalign = DR_MISALIGNMENT (first_dr);
+-		  }
+-		break;
+-	      }
+-	    case dr_explicit_realign:
+-	      {
+-		tree ptr, bump;
+-		tree vs_minus_1 = size_int (TYPE_VECTOR_SUBPARTS (vectype) - 1);
+-
+-		if (compute_in_loop)
+-		  msq = vect_setup_realignment (first_stmt, gsi,
+-						&realignment_token,
+-						dr_explicit_realign,
+-						dataref_ptr, NULL);
+-
+-		new_stmt = gimple_build_assign_with_ops
+-			     (BIT_AND_EXPR, NULL_TREE, dataref_ptr,
+-			      build_int_cst
+-			        (TREE_TYPE (dataref_ptr),
+-				 -(HOST_WIDE_INT)TYPE_ALIGN_UNIT (vectype)));
+-		ptr = make_ssa_name (SSA_NAME_VAR (dataref_ptr), new_stmt);
+-		gimple_assign_set_lhs (new_stmt, ptr);
+-		vect_finish_stmt_generation (stmt, new_stmt, gsi);
+-		data_ref
+-		  = build2 (MEM_REF, vectype, ptr,
+-			    build_int_cst (reference_alias_ptr_type
+-					     (DR_REF (first_dr)), 0));
+-		vec_dest = vect_create_destination_var (scalar_dest, vectype);
+-		new_stmt = gimple_build_assign (vec_dest, data_ref);
+-		new_temp = make_ssa_name (vec_dest, new_stmt);
+-		gimple_assign_set_lhs (new_stmt, new_temp);
+-		gimple_set_vdef (new_stmt, gimple_vdef (stmt));
+-		gimple_set_vuse (new_stmt, gimple_vuse (stmt));
+-		vect_finish_stmt_generation (stmt, new_stmt, gsi);
+-		msq = new_temp;
+-
+-		bump = size_binop (MULT_EXPR, vs_minus_1,
+-				   TYPE_SIZE_UNIT (scalar_type));
+-		ptr = bump_vector_ptr (dataref_ptr, NULL, gsi, stmt, bump);
+-		new_stmt = gimple_build_assign_with_ops
+-			     (BIT_AND_EXPR, NULL_TREE, ptr,
+-			      build_int_cst
+-			        (TREE_TYPE (ptr),
+-				 -(HOST_WIDE_INT)TYPE_ALIGN_UNIT (vectype)));
+-		ptr = make_ssa_name (SSA_NAME_VAR (dataref_ptr), new_stmt);
+-		gimple_assign_set_lhs (new_stmt, ptr);
+-		vect_finish_stmt_generation (stmt, new_stmt, gsi);
+-		data_ref
+-		  = build2 (MEM_REF, vectype, ptr,
+-			    build_int_cst (reference_alias_ptr_type
+-					     (DR_REF (first_dr)), 0));
+-	        break;
+-	      }
+-	    case dr_explicit_realign_optimized:
+-	      new_stmt = gimple_build_assign_with_ops
+-			   (BIT_AND_EXPR, NULL_TREE, dataref_ptr,
+-			    build_int_cst
+-			      (TREE_TYPE (dataref_ptr),
+-			       -(HOST_WIDE_INT)TYPE_ALIGN_UNIT (vectype)));
+-	      new_temp = make_ssa_name (SSA_NAME_VAR (dataref_ptr), new_stmt);
+-	      gimple_assign_set_lhs (new_stmt, new_temp);
+-	      vect_finish_stmt_generation (stmt, new_stmt, gsi);
+-	      data_ref
+-		= build2 (MEM_REF, vectype, new_temp,
+-			  build_int_cst (reference_alias_ptr_type
+-					   (DR_REF (first_dr)), 0));
+-	      break;
+-	    default:
+-	      gcc_unreachable ();
+-	    }
+-	  vec_dest = vect_create_destination_var (scalar_dest, vectype);
+-	  new_stmt = gimple_build_assign (vec_dest, data_ref);
+-	  new_temp = make_ssa_name (vec_dest, new_stmt);
+-	  gimple_assign_set_lhs (new_stmt, new_temp);
++	  tree vec_array;
++
++	  vec_array = create_vector_array (vectype, vec_num);
++
++	  /* Emit:
++	       VEC_ARRAY = LOAD_LANES (MEM_REF[...all elements...]).  */
++	  data_ref = create_array_ref (aggr_type, dataref_ptr, first_dr);
++	  new_stmt = gimple_build_call_internal (IFN_LOAD_LANES, 1, data_ref);
++	  gimple_call_set_lhs (new_stmt, vec_array);
+ 	  vect_finish_stmt_generation (stmt, new_stmt, gsi);
+ 	  mark_symbols_for_renaming (new_stmt);
+ 
+-	  /* 3. Handle explicit realignment if necessary/supported.  Create in
+-		loop: vec_dest = realign_load (msq, lsq, realignment_token)  */
+-	  if (alignment_support_scheme == dr_explicit_realign_optimized
+-	      || alignment_support_scheme == dr_explicit_realign)
+-	    {
+-	      tree tmp;
+-
+-	      lsq = gimple_assign_lhs (new_stmt);
+-	      if (!realignment_token)
+-		realignment_token = dataref_ptr;
++	  /* Extract each vector into an SSA_NAME.  */
++	  for (i = 0; i < vec_num; i++)
++	    {
++	      new_temp = read_vector_array (stmt, gsi, scalar_dest,
++					    vec_array, i);
++	      VEC_quick_push (tree, dr_chain, new_temp);
++	    }
++
++	  /* Record the mapping between SSA_NAMEs and statements.  */
++	  vect_record_strided_load_vectors (stmt, dr_chain);
++	}
++      else
++	{
++	  for (i = 0; i < vec_num; i++)
++	    {
++	      if (i > 0)
++		dataref_ptr = bump_vector_ptr (dataref_ptr, ptr_incr, gsi,
++					       stmt, NULL_TREE);
++
++	      /* 2. Create the vector-load in the loop.  */
++	      switch (alignment_support_scheme)
++		{
++		case dr_aligned:
++		case dr_unaligned_supported:
++		  {
++		    struct ptr_info_def *pi;
++		    data_ref
++		      = build2 (MEM_REF, vectype, dataref_ptr,
++				build_int_cst (reference_alias_ptr_type
++					       (DR_REF (first_dr)), 0));
++		    pi = get_ptr_info (dataref_ptr);
++		    pi->align = TYPE_ALIGN_UNIT (vectype);
++		    if (alignment_support_scheme == dr_aligned)
++		      {
++			gcc_assert (aligned_access_p (first_dr));
++			pi->misalign = 0;
++		      }
++		    else if (DR_MISALIGNMENT (first_dr) == -1)
++		      {
++			TREE_TYPE (data_ref)
++			  = build_aligned_type (TREE_TYPE (data_ref),
++						TYPE_ALIGN (elem_type));
++			pi->align = TYPE_ALIGN_UNIT (elem_type);
++			pi->misalign = 0;
++		      }
++		    else
++		      {
++			TREE_TYPE (data_ref)
++			  = build_aligned_type (TREE_TYPE (data_ref),
++						TYPE_ALIGN (elem_type));
++			pi->misalign = DR_MISALIGNMENT (first_dr);
++		      }
++		    break;
++		  }
++		case dr_explicit_realign:
++		  {
++		    tree ptr, bump;
++		    tree vs_minus_1
++		      = size_int (TYPE_VECTOR_SUBPARTS (vectype) - 1);
++
++		    if (compute_in_loop)
++		      msq = vect_setup_realignment (first_stmt, gsi,
++						    &realignment_token,
++						    dr_explicit_realign,
++						    dataref_ptr, NULL);
++
++		    new_stmt = gimple_build_assign_with_ops
++				 (BIT_AND_EXPR, NULL_TREE, dataref_ptr,
++				  build_int_cst
++				    (TREE_TYPE (dataref_ptr),
++				     -(HOST_WIDE_INT)
++				     TYPE_ALIGN_UNIT (vectype)));
++		    ptr = make_ssa_name (SSA_NAME_VAR (dataref_ptr), new_stmt);
++		    gimple_assign_set_lhs (new_stmt, ptr);
++		    vect_finish_stmt_generation (stmt, new_stmt, gsi);
++		    data_ref
++		      = build2 (MEM_REF, vectype, ptr,
++				build_int_cst (reference_alias_ptr_type
++						 (DR_REF (first_dr)), 0));
++		    vec_dest = vect_create_destination_var (scalar_dest,
++							    vectype);
++		    new_stmt = gimple_build_assign (vec_dest, data_ref);
++		    new_temp = make_ssa_name (vec_dest, new_stmt);
++		    gimple_assign_set_lhs (new_stmt, new_temp);
++		    gimple_set_vdef (new_stmt, gimple_vdef (stmt));
++		    gimple_set_vuse (new_stmt, gimple_vuse (stmt));
++		    vect_finish_stmt_generation (stmt, new_stmt, gsi);
++		    msq = new_temp;
++
++		    bump = size_binop (MULT_EXPR, vs_minus_1,
++				       TYPE_SIZE_UNIT (scalar_type));
++		    ptr = bump_vector_ptr (dataref_ptr, NULL, gsi, stmt, bump);
++		    new_stmt = gimple_build_assign_with_ops
++				 (BIT_AND_EXPR, NULL_TREE, ptr,
++				  build_int_cst
++				    (TREE_TYPE (ptr),
++				     -(HOST_WIDE_INT)
++				     TYPE_ALIGN_UNIT (vectype)));
++		    ptr = make_ssa_name (SSA_NAME_VAR (dataref_ptr), new_stmt);
++		    gimple_assign_set_lhs (new_stmt, ptr);
++		    vect_finish_stmt_generation (stmt, new_stmt, gsi);
++		    data_ref
++		      = build2 (MEM_REF, vectype, ptr,
++				build_int_cst (reference_alias_ptr_type
++						 (DR_REF (first_dr)), 0));
++		    break;
++		  }
++		case dr_explicit_realign_optimized:
++		  new_stmt = gimple_build_assign_with_ops
++			       (BIT_AND_EXPR, NULL_TREE, dataref_ptr,
++				build_int_cst
++				  (TREE_TYPE (dataref_ptr),
++				   -(HOST_WIDE_INT)TYPE_ALIGN_UNIT (vectype)));
++		  new_temp = make_ssa_name (SSA_NAME_VAR (dataref_ptr),
++					    new_stmt);
++		  gimple_assign_set_lhs (new_stmt, new_temp);
++		  vect_finish_stmt_generation (stmt, new_stmt, gsi);
++		  data_ref
++		    = build2 (MEM_REF, vectype, new_temp,
++			      build_int_cst (reference_alias_ptr_type
++					       (DR_REF (first_dr)), 0));
++		  break;
++		default:
++		  gcc_unreachable ();
++		}
+ 	      vec_dest = vect_create_destination_var (scalar_dest, vectype);
+-	      tmp = build3 (REALIGN_LOAD_EXPR, vectype, msq, lsq,
+-			    realignment_token);
+-	      new_stmt = gimple_build_assign (vec_dest, tmp);
++	      new_stmt = gimple_build_assign (vec_dest, data_ref);
+ 	      new_temp = make_ssa_name (vec_dest, new_stmt);
+ 	      gimple_assign_set_lhs (new_stmt, new_temp);
+ 	      vect_finish_stmt_generation (stmt, new_stmt, gsi);
+-
+-	      if (alignment_support_scheme == dr_explicit_realign_optimized)
+-		{
+-		  gcc_assert (phi);
+-		  if (i == vec_num - 1 && j == ncopies - 1)
+-		    add_phi_arg (phi, lsq, loop_latch_edge (containing_loop),
+-				 UNKNOWN_LOCATION);
+-		  msq = lsq;
+-		}
+-	    }
+-
+-	  /* 4. Handle invariant-load.  */
+-	  if (inv_p && !bb_vinfo)
+-	    {
+-	      gcc_assert (!strided_load);
+-	      gcc_assert (nested_in_vect_loop_p (loop, stmt));
+-	      if (j == 0)
+-		{
+-		  int k;
+-		  tree t = NULL_TREE;
+-		  tree vec_inv, bitpos, bitsize = TYPE_SIZE (scalar_type);
+-
+-		  /* CHECKME: bitpos depends on endianess?  */
+-		  bitpos = bitsize_zero_node;
+-		  vec_inv = build3 (BIT_FIELD_REF, scalar_type, new_temp,
+-				    bitsize, bitpos);
+-		  vec_dest =
+-			vect_create_destination_var (scalar_dest, NULL_TREE);
+-		  new_stmt = gimple_build_assign (vec_dest, vec_inv);
+-                  new_temp = make_ssa_name (vec_dest, new_stmt);
++	      mark_symbols_for_renaming (new_stmt);
++
++	      /* 3. Handle explicit realignment if necessary/supported.
++		    Create in loop:
++		       vec_dest = realign_load (msq, lsq, realignment_token)  */
++	      if (alignment_support_scheme == dr_explicit_realign_optimized
++		  || alignment_support_scheme == dr_explicit_realign)
++		{
++		  tree tmp;
++
++		  lsq = gimple_assign_lhs (new_stmt);
++		  if (!realignment_token)
++		    realignment_token = dataref_ptr;
++		  vec_dest = vect_create_destination_var (scalar_dest, vectype);
++		  tmp = build3 (REALIGN_LOAD_EXPR, vectype, msq, lsq,
++				realignment_token);
++		  new_stmt = gimple_build_assign (vec_dest, tmp);
++		  new_temp = make_ssa_name (vec_dest, new_stmt);
+ 		  gimple_assign_set_lhs (new_stmt, new_temp);
+ 		  vect_finish_stmt_generation (stmt, new_stmt, gsi);
+ 
+-		  for (k = nunits - 1; k >= 0; --k)
+-		    t = tree_cons (NULL_TREE, new_temp, t);
+-		  /* FIXME: use build_constructor directly.  */
+-		  vec_inv = build_constructor_from_list (vectype, t);
+-		  new_temp = vect_init_vector (stmt, vec_inv, vectype, gsi);
++		  if (alignment_support_scheme == dr_explicit_realign_optimized)
++		    {
++		      gcc_assert (phi);
++		      if (i == vec_num - 1 && j == ncopies - 1)
++			add_phi_arg (phi, lsq,
++				     loop_latch_edge (containing_loop),
++				     UNKNOWN_LOCATION);
++		      msq = lsq;
++		    }
++		}
++
++	      /* 4. Handle invariant-load.  */
++	      if (inv_p && !bb_vinfo)
++		{
++		  gcc_assert (!strided_load);
++		  gcc_assert (nested_in_vect_loop_p (loop, stmt));
++		  if (j == 0)
++		    {
++		      int k;
++		      tree t = NULL_TREE;
++		      tree vec_inv, bitpos, bitsize = TYPE_SIZE (scalar_type);
++
++		      /* CHECKME: bitpos depends on endianess?  */
++		      bitpos = bitsize_zero_node;
++		      vec_inv = build3 (BIT_FIELD_REF, scalar_type, new_temp,
++					bitsize, bitpos);
++		      vec_dest = vect_create_destination_var (scalar_dest,
++							      NULL_TREE);
++		      new_stmt = gimple_build_assign (vec_dest, vec_inv);
++		      new_temp = make_ssa_name (vec_dest, new_stmt);
++		      gimple_assign_set_lhs (new_stmt, new_temp);
++		      vect_finish_stmt_generation (stmt, new_stmt, gsi);
++
++		      for (k = nunits - 1; k >= 0; --k)
++			t = tree_cons (NULL_TREE, new_temp, t);
++		      /* FIXME: use build_constructor directly.  */
++		      vec_inv = build_constructor_from_list (vectype, t);
++		      new_temp = vect_init_vector (stmt, vec_inv, vectype, gsi);
++		      new_stmt = SSA_NAME_DEF_STMT (new_temp);
++		    }
++		  else
++		    gcc_unreachable (); /* FORNOW. */
++		}
++
++	      if (negative)
++		{
++		  new_temp = reverse_vec_elements (new_temp, stmt, gsi);
+ 		  new_stmt = SSA_NAME_DEF_STMT (new_temp);
+ 		}
+-	      else
+-		gcc_unreachable (); /* FORNOW. */
+-	    }
+-
+-	  if (negative)
+-	    {
+-	      new_temp = reverse_vec_elements (new_temp, stmt, gsi);
+-	      new_stmt = SSA_NAME_DEF_STMT (new_temp);
+-	    }
+-
+-	  /* Collect vector loads and later create their permutation in
+-	     vect_transform_strided_load ().  */
+-          if (strided_load || slp_perm)
+-            VEC_quick_push (tree, dr_chain, new_temp);
+-
+-         /* Store vector loads in the corresponding SLP_NODE.  */
+-	  if (slp && !slp_perm)
+-	    VEC_quick_push (gimple, SLP_TREE_VEC_STMTS (slp_node), new_stmt);
++
++	      /* Collect vector loads and later create their permutation in
++		 vect_transform_strided_load ().  */
++	      if (strided_load || slp_perm)
++		VEC_quick_push (tree, dr_chain, new_temp);
++
++	      /* Store vector loads in the corresponding SLP_NODE.  */
++	      if (slp && !slp_perm)
++		VEC_quick_push (gimple, SLP_TREE_VEC_STMTS (slp_node),
++				new_stmt);
++	    }
+ 	}
+ 
+       if (slp && !slp_perm)
+@@ -4345,12 +4526,9 @@
+         {
+           if (strided_load)
+   	    {
+-	      if (!vect_transform_strided_load (stmt, dr_chain, group_size, gsi))
+-	        return false;
+-
++	      if (!load_lanes_p)
++		vect_transform_strided_load (stmt, dr_chain, group_size, gsi);
+ 	      *vec_stmt = STMT_VINFO_VEC_STMT (stmt_info);
+-              VEC_free (tree, heap, dr_chain);
+-	      dr_chain = VEC_alloc (tree, heap, group_size);
+ 	    }
+           else
+ 	    {
+@@ -4361,11 +4539,10 @@
+ 	      prev_stmt_info = vinfo_for_stmt (new_stmt);
+ 	    }
+         }
++      if (dr_chain)
++	VEC_free (tree, heap, dr_chain);
+     }
+ 
+-  if (dr_chain)
+-    VEC_free (tree, heap, dr_chain);
+-
+   return true;
+ }
+ 
+@@ -4769,27 +4946,6 @@
+        return false;
+     }
+ 
+-  if (!PURE_SLP_STMT (stmt_info))
+-    {
+-      /* Groups of strided accesses whose size is not a power of 2 are not
+-         vectorizable yet using loop-vectorization.  Therefore, if this stmt
+-	 feeds non-SLP-able stmts (i.e., this stmt has to be both SLPed and
+-	 loop-based vectorized), the loop cannot be vectorized.  */
+-      if (STMT_VINFO_STRIDED_ACCESS (stmt_info)
+-          && exact_log2 (DR_GROUP_SIZE (vinfo_for_stmt (
+-                                        DR_GROUP_FIRST_DR (stmt_info)))) == -1)
+-        {
+-          if (vect_print_dump_info (REPORT_DETAILS))
+-            {
+-              fprintf (vect_dump, "not vectorized: the size of group "
+-                                  "of strided accesses is not a power of 2");
+-              print_gimple_stmt (vect_dump, stmt, 0, TDF_SLIM);
+-            }
+-
+-          return false;
+-        }
+-    }
+-
+   return true;
+ }
+ 
+
+=== modified file 'gcc/tree-vectorizer.h'
+--- old/gcc/tree-vectorizer.h	2010-12-23 16:25:52 +0000
++++ new/gcc/tree-vectorizer.h	2011-05-05 15:43:06 +0000
+@@ -788,9 +788,9 @@
+ extern tree vectorizable_function (gimple, tree, tree);
+ extern void vect_model_simple_cost (stmt_vec_info, int, enum vect_def_type *,
+                                     slp_tree);
+-extern void vect_model_store_cost (stmt_vec_info, int, enum vect_def_type,
+-                                   slp_tree);
+-extern void vect_model_load_cost (stmt_vec_info, int, slp_tree);
++extern void vect_model_store_cost (stmt_vec_info, int, bool,
++				   enum vect_def_type, slp_tree);
++extern void vect_model_load_cost (stmt_vec_info, int, bool, slp_tree);
+ extern void vect_finish_stmt_generation (gimple, gimple,
+                                          gimple_stmt_iterator *);
+ extern bool vect_mark_stmts_to_be_vectorized (loop_vec_info);
+@@ -823,21 +823,22 @@
+ extern bool vect_analyze_data_ref_accesses (loop_vec_info, bb_vec_info);
+ extern bool vect_prune_runtime_alias_test_list (loop_vec_info);
+ extern bool vect_analyze_data_refs (loop_vec_info, bb_vec_info, int *);
+-extern tree vect_create_data_ref_ptr (gimple, struct loop *, tree, tree *,
+-                                      gimple *, bool, bool *);
++extern tree vect_create_data_ref_ptr (gimple, tree, struct loop *, tree,
++				      tree *, gimple *, bool, bool *);
+ extern tree bump_vector_ptr (tree, gimple, gimple_stmt_iterator *, gimple, tree);
+ extern tree vect_create_destination_var (tree, tree);
+-extern bool vect_strided_store_supported (tree);
+-extern bool vect_strided_load_supported (tree);
+-extern bool vect_permute_store_chain (VEC(tree,heap) *,unsigned int, gimple,
++extern bool vect_strided_store_supported (tree, unsigned HOST_WIDE_INT);
++extern bool vect_store_lanes_supported (tree, unsigned HOST_WIDE_INT);
++extern bool vect_strided_load_supported (tree, unsigned HOST_WIDE_INT);
++extern bool vect_load_lanes_supported (tree, unsigned HOST_WIDE_INT);
++extern void vect_permute_store_chain (VEC(tree,heap) *,unsigned int, gimple,
+                                     gimple_stmt_iterator *, VEC(tree,heap) **);
+ extern tree vect_setup_realignment (gimple, gimple_stmt_iterator *, tree *,
+                                     enum dr_alignment_support, tree,
+                                     struct loop **);
+-extern bool vect_permute_load_chain (VEC(tree,heap) *,unsigned int, gimple,
+-                                    gimple_stmt_iterator *, VEC(tree,heap) **);
+-extern bool vect_transform_strided_load (gimple, VEC(tree,heap) *, int,
++extern void vect_transform_strided_load (gimple, VEC(tree,heap) *, int,
+                                          gimple_stmt_iterator *);
++extern void vect_record_strided_load_vectors (gimple, VEC(tree,heap) *);
+ extern int vect_get_place_in_interleaving_chain (gimple, gimple);
+ extern tree vect_get_new_vect_var (tree, enum vect_var_kind, const char *);
+ extern tree vect_create_addr_base_for_vector_ref (gimple, gimple_seq *,
+
+=== modified file 'gcc/tree.c'
+--- old/gcc/tree.c	2011-05-18 13:29:24 +0000
++++ new/gcc/tree.c	2011-06-02 12:12:00 +0000
+@@ -7321,6 +7321,15 @@
+   return build_array_type_1 (elt_type, index_type, false);
+ }
+ 
++/* Return a representation of ELT_TYPE[NELTS], using indices of type
++   sizetype.  */
++
++tree
++build_array_type_nelts (tree elt_type, unsigned HOST_WIDE_INT nelts)
++{
++  return build_array_type (elt_type, build_index_type (size_int (nelts - 1)));
++}
++
+ /* Recursively examines the array elements of TYPE, until a non-array
+    element type is found.  */
+ 
+
+=== modified file 'gcc/tree.h'
+--- old/gcc/tree.h	2011-03-11 22:38:58 +0000
++++ new/gcc/tree.h	2011-05-05 15:43:06 +0000
+@@ -4192,6 +4192,7 @@
+ extern tree build_index_type (tree);
+ extern tree build_array_type (tree, tree);
+ extern tree build_nonshared_array_type (tree, tree);
++extern tree build_array_type_nelts (tree, unsigned HOST_WIDE_INT);
+ extern tree build_function_type (tree, tree);
+ extern tree build_function_type_list (tree, ...);
+ extern tree build_function_type_skip_args (tree, bitmap);
+
+=== modified file 'gcc/value-prof.c'
+--- old/gcc/value-prof.c	2011-01-29 03:54:56 +0000
++++ new/gcc/value-prof.c	2011-05-05 15:42:22 +0000
+@@ -1242,6 +1242,9 @@
+   if (TREE_CODE (callee) == FUNCTION_DECL)
+     return false;
+ 
++  if (gimple_call_internal_p (stmt))
++    return false;
++
+   histogram = gimple_histogram_value_of_type (cfun, stmt, HIST_TYPE_INDIR_CALL);
+   if (!histogram)
+     return false;
+@@ -1630,6 +1633,7 @@
+   tree callee;
+ 
+   if (gimple_code (stmt) != GIMPLE_CALL
++      || gimple_call_internal_p (stmt)
+       || gimple_call_fndecl (stmt) != NULL_TREE)
+     return;
+ 
+

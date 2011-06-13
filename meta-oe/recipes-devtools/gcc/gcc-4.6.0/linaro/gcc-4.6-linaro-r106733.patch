@@ -1,0 +1,653 @@
+2011-03-27  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* doc/invoke.texi (max-stores-to-sink): Document.
+	* params.h (MAX_STORES_TO_SINK): Define.
+	* opts.c (finish_options): Set MAX_STORES_TO_SINK to 0
+	if either vectorization or if-conversion is disabled.
+	* tree-data-ref.c (dr_equal_offsets_p1): Moved and renamed from
+	tree-vect-data-refs.c vect_equal_offsets.
+	(dr_equal_offsets_p): New function.
+	(find_data_references_in_bb): Remove static.
+	* tree-data-ref.h (find_data_references_in_bb): Declare.
+	(dr_equal_offsets_p): Likewise.
+	* tree-vect-data-refs.c (vect_equal_offsets): Move to tree-data-ref.c.
+	(vect_drs_dependent_in_basic_block): Update calls to
+	vect_equal_offsets.
+	(vect_check_interleaving): Likewise.
+	* tree-ssa-phiopt.c: Include cfgloop.h and tree-data-ref.h.
+	(cond_if_else_store_replacement): Rename to...
+	(cond_if_else_store_replacement_1): ... this.  Change arguments and
+	documentation.
+	(cond_if_else_store_replacement): New function.
+	* Makefile.in (tree-ssa-phiopt.o): Adjust dependencies.
+	* params.def (PARAM_MAX_STORES_TO_SINK): Define.
+
+	gcc/testsuite/
+	* gcc.dg/vect/vect-cselim-1.c: New test.
+	* gcc.dg/vect/vect-cselim-2.c: New test.
+
+=== modified file 'gcc/Makefile.in'
+--- old/gcc/Makefile.in	2011-03-26 09:20:34 +0000
++++ new/gcc/Makefile.in	2011-04-18 11:31:29 +0000
+@@ -2422,7 +2422,8 @@
+ tree-ssa-phiopt.o : tree-ssa-phiopt.c $(CONFIG_H) $(SYSTEM_H) coretypes.h \
+    $(TM_H) $(GGC_H) $(TREE_H) $(TM_P_H) $(BASIC_BLOCK_H) \
+    $(TREE_FLOW_H) $(TREE_PASS_H) $(TREE_DUMP_H) langhooks.h $(FLAGS_H) \
+-   $(DIAGNOSTIC_H) $(TIMEVAR_H) pointer-set.h domwalk.h
++   $(DIAGNOSTIC_H) $(TIMEVAR_H) pointer-set.h domwalk.h $(CFGLOOP_H) \
++   $(TREE_DATA_REF_H)
+ tree-nrv.o : tree-nrv.c $(CONFIG_H) $(SYSTEM_H) coretypes.h \
+    $(TM_H) $(TREE_H) $(FUNCTION_H) $(BASIC_BLOCK_H) $(FLAGS_H) \
+    $(DIAGNOSTIC_H) $(TREE_FLOW_H) $(TIMEVAR_H) $(TREE_DUMP_H) $(TREE_PASS_H) \
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2011-03-29 14:24:42 +0000
++++ new/gcc/doc/invoke.texi	2011-04-18 11:31:29 +0000
+@@ -8909,6 +8909,11 @@
+ The maximum number of namespaces to consult for suggestions when C++
+ name lookup fails for an identifier.  The default is 1000.
+ 
++@item max-stores-to-sink
++The maximum number of conditional stores paires that can be sunk.  Set to 0
++if either vectorization (@option{-ftree-vectorize}) or if-conversion
++(@option{-ftree-loop-if-convert}) is disabled.  The default is 2.
++
+ @end table
+ @end table
+ 
+
+=== modified file 'gcc/opts.c'
+--- old/gcc/opts.c	2011-02-17 22:51:57 +0000
++++ new/gcc/opts.c	2011-03-27 09:38:18 +0000
+@@ -823,6 +823,12 @@
+ 	  opts->x_flag_split_stack = 0;
+ 	}
+     }
++
++  /* Set PARAM_MAX_STORES_TO_SINK to 0 if either vectorization or if-conversion
++     is disabled.  */
++  if (!opts->x_flag_tree_vectorize || !opts->x_flag_tree_loop_if_convert)
++    maybe_set_param_value (PARAM_MAX_STORES_TO_SINK, 0,
++                           opts->x_param_values, opts_set->x_param_values);
+ }
+ 
+ #define LEFT_COLUMN	27
+
+=== modified file 'gcc/params.def'
+--- old/gcc/params.def	2011-03-26 09:20:34 +0000
++++ new/gcc/params.def	2011-04-18 11:31:29 +0000
+@@ -883,6 +883,13 @@
+ 	  "name lookup fails",
+ 	  1000, 0, 0)
+ 
++/* Maximum number of conditional store pairs that can be sunk.  */
++DEFPARAM (PARAM_MAX_STORES_TO_SINK,
++          "max-stores-to-sink",
++          "Maximum number of conditional store pairs that can be sunk",
++          2, 0, 0)
++
++
+ /*
+ Local variables:
+ mode:c
+
+=== modified file 'gcc/params.h'
+--- old/gcc/params.h	2011-01-13 13:41:03 +0000
++++ new/gcc/params.h	2011-03-27 09:38:18 +0000
+@@ -206,4 +206,6 @@
+   PARAM_VALUE (PARAM_PREFETCH_MIN_INSN_TO_MEM_RATIO)
+ #define MIN_NONDEBUG_INSN_UID \
+   PARAM_VALUE (PARAM_MIN_NONDEBUG_INSN_UID)
++#define MAX_STORES_TO_SINK \
++  PARAM_VALUE (PARAM_MAX_STORES_TO_SINK)
+ #endif /* ! GCC_PARAMS_H */
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-cselim-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-cselim-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-cselim-1.c	2011-03-27 09:38:18 +0000
+@@ -0,0 +1,86 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 50
++
++typedef struct {
++  short a;
++  short b;
++} data;
++
++data in1[N], in2[N], out[N];
++short result[N*2] = {7,-7,9,-6,11,-5,13,-4,15,-3,17,-2,19,-1,21,0,23,1,25,2,27,3,29,4,31,5,33,6,35,7,37,8,39,9,41,10,43,11,45,12,47,13,49,14,51,15,53,16,55,17,57,18,59,19,61,20,63,21,65,22,67,23,69,24,71,25,73,26,75,27,77,28,79,29,81,30,83,31,85,32,87,33,89,34,91,35,93,36,95,37,97,38,99,39,101,40,103,41,105,42};
++short out1[N], out2[N];
++
++__attribute__ ((noinline)) void
++foo ()
++{
++  int i;
++  short c, d;
++
++  /* Vectorizable with conditional store sinking.  */
++  for (i = 0; i < N; i++)
++    {
++      c = in1[i].b;
++      d = in2[i].b;
++
++      if (c >= d)
++        {
++          out[i].b = c;
++          out[i].a = d + 5;
++        }
++      else
++        {
++          out[i].b = d - 12;
++          out[i].a = c + d;
++        }
++    }
++
++  /* Not vectorizable.  */
++  for (i = 0; i < N; i++)
++    {
++      c = in1[i].b;
++      d = in2[i].b;
++
++      if (c >= d)
++        {
++          out1[i] = c;
++        }
++      else
++        {
++          out2[i] = c + d;
++        }
++    }
++}
++
++int
++main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in1[i].a = i;
++      in1[i].b = i + 2;
++      in2[i].a = 5;
++      in2[i].b = i + 5;
++      __asm__ volatile ("");
++    }
++
++  foo ();
++
++  for (i = 0; i < N; i++)
++    {
++      if (out[i].a != result[2*i] || out[i].b != result[2*i+1])
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail { vect_no_align || {! vect_strided } } } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-cselim-2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-cselim-2.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-cselim-2.c	2011-03-27 09:38:18 +0000
+@@ -0,0 +1,65 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 50
++
++int a[N], b[N], in1[N], in2[N];
++int result[2*N] = {5,-7,7,-6,9,-5,11,-4,13,-3,15,-2,17,-1,19,0,21,1,23,2,25,3,27,4,29,5,31,6,33,7,35,8,37,9,39,10,41,11,43,12,45,13,47,14,49,15,51,16,53,17,55,18,57,19,59,20,61,21,63,22,65,23,67,24,69,25,71,26,73,27,75,28,77,29,79,30,81,31,83,32,85,33,87,34,89,35,91,36,93,37,95,38,97,39,99,40,101,41,103,42};
++
++__attribute__ ((noinline)) void
++foo (int *pa, int *pb)
++{
++  int i;
++  int c, d;
++
++  /* Store sinking should not work here since the pointers may alias.  */
++  for (i = 0; i < N; i++)
++    {
++      c = in1[i];
++      d = in2[i];
++
++      if (c >= d)
++        {
++          *pa = c;
++          *pb = d + 5;
++        }
++      else
++        {
++          *pb = d - 12;
++          *pa = c + d;
++        }
++
++      pa++;
++      pb++;
++    }
++}
++
++int
++main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in1[i] = i;
++      in2[i] = i + 5;
++      __asm__ volatile ("");
++    }
++
++  foo (a, b);
++
++  for (i = 0; i < N; i++)
++    {
++      if (a[i] != result[2*i] || b[i] != result[2*i+1])
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect"  } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/tree-data-ref.c'
+--- old/gcc/tree-data-ref.c	2011-02-05 01:39:20 +0000
++++ new/gcc/tree-data-ref.c	2011-03-27 09:38:18 +0000
+@@ -991,6 +991,48 @@
+   return dr;
+ }
+ 
++/* Check if OFFSET1 and OFFSET2 (DR_OFFSETs of some data-refs) are identical
++   expressions.  */
++static bool
++dr_equal_offsets_p1 (tree offset1, tree offset2)
++{
++  bool res;
++
++  STRIP_NOPS (offset1);
++  STRIP_NOPS (offset2);
++
++  if (offset1 == offset2)
++    return true;
++
++  if (TREE_CODE (offset1) != TREE_CODE (offset2)
++      || (!BINARY_CLASS_P (offset1) && !UNARY_CLASS_P (offset1)))
++    return false;
++
++  res = dr_equal_offsets_p1 (TREE_OPERAND (offset1, 0),
++                             TREE_OPERAND (offset2, 0));
++
++  if (!res || !BINARY_CLASS_P (offset1))
++    return res;
++
++  res = dr_equal_offsets_p1 (TREE_OPERAND (offset1, 1),
++                             TREE_OPERAND (offset2, 1));
++
++  return res;
++}
++
++/* Check if DRA and DRB have equal offsets.  */
++bool
++dr_equal_offsets_p (struct data_reference *dra,
++                    struct data_reference *drb)
++{
++  tree offset1, offset2;
++
++  offset1 = DR_OFFSET (dra);
++  offset2 = DR_OFFSET (drb);
++
++  return dr_equal_offsets_p1 (offset1, offset2);
++}
++
+ /* Returns true if FNA == FNB.  */
+ 
+ static bool
+@@ -4294,7 +4336,7 @@
+    DATAREFS.  Returns chrec_dont_know when failing to analyze a
+    difficult case, returns NULL_TREE otherwise.  */
+ 
+-static tree
++tree
+ find_data_references_in_bb (struct loop *loop, basic_block bb,
+                             VEC (data_reference_p, heap) **datarefs)
+ {
+
+=== modified file 'gcc/tree-data-ref.h'
+--- old/gcc/tree-data-ref.h	2011-01-25 21:24:23 +0000
++++ new/gcc/tree-data-ref.h	2011-03-27 09:38:18 +0000
+@@ -426,10 +426,14 @@
+ extern void compute_all_dependences (VEC (data_reference_p, heap) *,
+ 				     VEC (ddr_p, heap) **, VEC (loop_p, heap) *,
+ 				     bool);
++extern tree find_data_references_in_bb (struct loop *, basic_block,
++                                        VEC (data_reference_p, heap) **);
+ 
+ extern void create_rdg_vertices (struct graph *, VEC (gimple, heap) *);
+ extern bool dr_may_alias_p (const struct data_reference *,
+ 			    const struct data_reference *);
++extern bool dr_equal_offsets_p (struct data_reference *,
++                                struct data_reference *);
+ 
+ 
+ /* Return true when the base objects of data references A and B are
+
+=== modified file 'gcc/tree-ssa-phiopt.c'
+--- old/gcc/tree-ssa-phiopt.c	2010-11-03 15:18:50 +0000
++++ new/gcc/tree-ssa-phiopt.c	2011-03-27 09:38:18 +0000
+@@ -34,6 +34,8 @@
+ #include "langhooks.h"
+ #include "pointer-set.h"
+ #include "domwalk.h"
++#include "cfgloop.h"
++#include "tree-data-ref.h"
+ 
+ static unsigned int tree_ssa_phiopt (void);
+ static unsigned int tree_ssa_phiopt_worker (bool);
+@@ -1292,35 +1294,18 @@
+   return true;
+ }
+ 
+-/* Do the main work of conditional store replacement.  We already know
+-   that the recognized pattern looks like so:
+-
+-   split:
+-     if (cond) goto THEN_BB; else goto ELSE_BB (edge E1)
+-   THEN_BB:
+-     X = Y;
+-     goto JOIN_BB;
+-   ELSE_BB:
+-     X = Z;
+-     fallthrough (edge E0)
+-   JOIN_BB:
+-     some more
+-
+-   We check that THEN_BB and ELSE_BB contain only one store
+-   that the stores have a "simple" RHS.  */
++/* Do the main work of conditional store replacement.  */
+ 
+ static bool
+-cond_if_else_store_replacement (basic_block then_bb, basic_block else_bb,
+-				basic_block join_bb)
++cond_if_else_store_replacement_1 (basic_block then_bb, basic_block else_bb,
++				  basic_block join_bb, gimple then_assign,
++				  gimple else_assign)
+ {
+-  gimple then_assign = last_and_only_stmt (then_bb);
+-  gimple else_assign = last_and_only_stmt (else_bb);
+   tree lhs_base, lhs, then_rhs, else_rhs;
+   source_location then_locus, else_locus;
+   gimple_stmt_iterator gsi;
+   gimple newphi, new_stmt;
+ 
+-  /* Check if then_bb and else_bb contain only one store each.  */
+   if (then_assign == NULL
+       || !gimple_assign_single_p (then_assign)
+       || else_assign == NULL
+@@ -1385,6 +1370,190 @@
+   return true;
+ }
+ 
++/* Conditional store replacement.  We already know
++   that the recognized pattern looks like so:
++
++   split:
++     if (cond) goto THEN_BB; else goto ELSE_BB (edge E1)
++   THEN_BB:
++     ...
++     X = Y;
++     ...
++     goto JOIN_BB;
++   ELSE_BB:
++     ...
++     X = Z;
++     ...
++     fallthrough (edge E0)
++   JOIN_BB:
++     some more
++
++   We check that it is safe to sink the store to JOIN_BB by verifying that
++   there are no read-after-write or write-after-write dependencies in
++   THEN_BB and ELSE_BB.  */
++
++static bool
++cond_if_else_store_replacement (basic_block then_bb, basic_block else_bb,
++                                basic_block join_bb)
++{
++  gimple then_assign = last_and_only_stmt (then_bb);
++  gimple else_assign = last_and_only_stmt (else_bb);
++  VEC (data_reference_p, heap) *then_datarefs, *else_datarefs;
++  VEC (ddr_p, heap) *then_ddrs, *else_ddrs;
++  gimple then_store, else_store;
++  bool found, ok = false, res;
++  struct data_dependence_relation *ddr;
++  data_reference_p then_dr, else_dr;
++  int i, j;
++  tree then_lhs, else_lhs;
++  VEC (gimple, heap) *then_stores, *else_stores;
++  basic_block blocks[3];
++
++  if (MAX_STORES_TO_SINK == 0)
++    return false;
++
++  /* Handle the case with single statement in THEN_BB and ELSE_BB.  */
++  if (then_assign && else_assign)
++    return cond_if_else_store_replacement_1 (then_bb, else_bb, join_bb,
++                                             then_assign, else_assign);
++
++  /* Find data references.  */
++  then_datarefs = VEC_alloc (data_reference_p, heap, 1);
++  else_datarefs = VEC_alloc (data_reference_p, heap, 1);
++  if ((find_data_references_in_bb (NULL, then_bb, &then_datarefs)
++        == chrec_dont_know)
++      || !VEC_length (data_reference_p, then_datarefs)
++      || (find_data_references_in_bb (NULL, else_bb, &else_datarefs)
++        == chrec_dont_know)
++      || !VEC_length (data_reference_p, else_datarefs))
++    {
++      free_data_refs (then_datarefs);
++      free_data_refs (else_datarefs);
++      return false;
++    }
++
++  /* Find pairs of stores with equal LHS.  */
++  then_stores = VEC_alloc (gimple, heap, 1);
++  else_stores = VEC_alloc (gimple, heap, 1);
++  FOR_EACH_VEC_ELT (data_reference_p, then_datarefs, i, then_dr)
++    {
++      if (DR_IS_READ (then_dr))
++        continue;
++
++      then_store = DR_STMT (then_dr);
++      then_lhs = gimple_assign_lhs (then_store);
++      found = false;
++
++      FOR_EACH_VEC_ELT (data_reference_p, else_datarefs, j, else_dr)
++        {
++          if (DR_IS_READ (else_dr))
++            continue;
++
++          else_store = DR_STMT (else_dr);
++          else_lhs = gimple_assign_lhs (else_store);
++
++          if (operand_equal_p (then_lhs, else_lhs, 0))
++            {
++              found = true;
++              break;
++            }
++        }
++
++      if (!found)
++        continue;
++
++      VEC_safe_push (gimple, heap, then_stores, then_store);
++      VEC_safe_push (gimple, heap, else_stores, else_store);
++    }
++
++  /* No pairs of stores found.  */
++  if (!VEC_length (gimple, then_stores)
++      || VEC_length (gimple, then_stores) > (unsigned) MAX_STORES_TO_SINK)
++    {
++      free_data_refs (then_datarefs);
++      free_data_refs (else_datarefs);
++      VEC_free (gimple, heap, then_stores);
++      VEC_free (gimple, heap, else_stores);
++      return false;
++    }
++
++  /* Compute and check data dependencies in both basic blocks.  */
++  then_ddrs = VEC_alloc (ddr_p, heap, 1);
++  else_ddrs = VEC_alloc (ddr_p, heap, 1);
++  compute_all_dependences (then_datarefs, &then_ddrs, NULL, false);
++  compute_all_dependences (else_datarefs, &else_ddrs, NULL, false);
++  blocks[0] = then_bb;
++  blocks[1] = else_bb;
++  blocks[2] = join_bb;
++  renumber_gimple_stmt_uids_in_blocks (blocks, 3);
++
++  /* Check that there are no read-after-write or write-after-write dependencies
++     in THEN_BB.  */
++  FOR_EACH_VEC_ELT (ddr_p, then_ddrs, i, ddr)
++    {
++      struct data_reference *dra = DDR_A (ddr);
++      struct data_reference *drb = DDR_B (ddr);
++
++      if (DDR_ARE_DEPENDENT (ddr) != chrec_known
++          && ((DR_IS_READ (dra) && DR_IS_WRITE (drb)
++               && gimple_uid (DR_STMT (dra)) > gimple_uid (DR_STMT (drb)))
++              || (DR_IS_READ (drb) && DR_IS_WRITE (dra)
++                  && gimple_uid (DR_STMT (drb)) > gimple_uid (DR_STMT (dra)))
++              || (DR_IS_WRITE (dra) && DR_IS_WRITE (drb))))
++        {
++          free_dependence_relations (then_ddrs);
++          free_dependence_relations (else_ddrs);
++          free_data_refs (then_datarefs);
++          free_data_refs (else_datarefs);
++          VEC_free (gimple, heap, then_stores);
++          VEC_free (gimple, heap, else_stores);
++          return false;
++        }
++    }
++
++  /* Check that there are no read-after-write or write-after-write dependencies
++     in ELSE_BB.  */
++  FOR_EACH_VEC_ELT (ddr_p, else_ddrs, i, ddr)
++    {
++      struct data_reference *dra = DDR_A (ddr);
++      struct data_reference *drb = DDR_B (ddr);
++
++      if (DDR_ARE_DEPENDENT (ddr) != chrec_known
++          && ((DR_IS_READ (dra) && DR_IS_WRITE (drb)
++               && gimple_uid (DR_STMT (dra)) > gimple_uid (DR_STMT (drb)))
++              || (DR_IS_READ (drb) && DR_IS_WRITE (dra)
++                  && gimple_uid (DR_STMT (drb)) > gimple_uid (DR_STMT (dra)))
++              || (DR_IS_WRITE (dra) && DR_IS_WRITE (drb))))
++        {
++          free_dependence_relations (then_ddrs);
++          free_dependence_relations (else_ddrs);
++          free_data_refs (then_datarefs);
++          free_data_refs (else_datarefs);
++          VEC_free (gimple, heap, then_stores);
++          VEC_free (gimple, heap, else_stores);
++          return false;
++        }
++    }
++
++  /* Sink stores with same LHS.  */
++  FOR_EACH_VEC_ELT (gimple, then_stores, i, then_store)
++    {
++      else_store = VEC_index (gimple, else_stores, i);
++      res = cond_if_else_store_replacement_1 (then_bb, else_bb, join_bb,
++                                              then_store, else_store);
++      ok = ok || res;
++    }
++
++  free_dependence_relations (then_ddrs);
++  free_dependence_relations (else_ddrs);
++  free_data_refs (then_datarefs);
++  free_data_refs (else_datarefs);
++  VEC_free (gimple, heap, then_stores);
++  VEC_free (gimple, heap, else_stores);
++
++  return ok;
++}
++
+ /* Always do these optimizations if we have SSA
+    trees to work on.  */
+ static bool
+
+=== modified file 'gcc/tree-vect-data-refs.c'
+--- old/gcc/tree-vect-data-refs.c	2011-02-25 11:18:14 +0000
++++ new/gcc/tree-vect-data-refs.c	2011-03-27 09:38:18 +0000
+@@ -289,39 +289,6 @@
+     }
+ }
+ 
+-
+-/* Function vect_equal_offsets.
+-
+-   Check if OFFSET1 and OFFSET2 are identical expressions.  */
+-
+-static bool
+-vect_equal_offsets (tree offset1, tree offset2)
+-{
+-  bool res;
+-
+-  STRIP_NOPS (offset1);
+-  STRIP_NOPS (offset2);
+-
+-  if (offset1 == offset2)
+-    return true;
+-
+-  if (TREE_CODE (offset1) != TREE_CODE (offset2)
+-      || (!BINARY_CLASS_P (offset1) && !UNARY_CLASS_P (offset1)))
+-    return false;
+-
+-  res = vect_equal_offsets (TREE_OPERAND (offset1, 0),
+-			    TREE_OPERAND (offset2, 0));
+-
+-  if (!res || !BINARY_CLASS_P (offset1))
+-    return res;
+-
+-  res = vect_equal_offsets (TREE_OPERAND (offset1, 1),
+-			    TREE_OPERAND (offset2, 1));
+-
+-  return res;
+-}
+-
+-
+ /* Check dependence between DRA and DRB for basic block vectorization.
+    If the accesses share same bases and offsets, we can compare their initial
+    constant offsets to decide whether they differ or not.  In case of a read-
+@@ -352,7 +319,7 @@
+            || TREE_CODE (DR_BASE_ADDRESS (drb)) != ADDR_EXPR
+            || TREE_OPERAND (DR_BASE_ADDRESS (dra), 0)
+            != TREE_OPERAND (DR_BASE_ADDRESS (drb),0)))
+-      || !vect_equal_offsets (DR_OFFSET (dra), DR_OFFSET (drb)))
++      || !dr_equal_offsets_p (dra, drb))
+     return true;
+ 
+   /* Check the types.  */
+@@ -402,7 +369,7 @@
+ 	   || TREE_CODE (DR_BASE_ADDRESS (drb)) != ADDR_EXPR
+ 	   || TREE_OPERAND (DR_BASE_ADDRESS (dra), 0)
+ 	   != TREE_OPERAND (DR_BASE_ADDRESS (drb),0)))
+-      || !vect_equal_offsets (DR_OFFSET (dra), DR_OFFSET (drb))
++      || !dr_equal_offsets_p (dra, drb)
+       || !tree_int_cst_compare (DR_INIT (dra), DR_INIT (drb))
+       || DR_IS_READ (dra) != DR_IS_READ (drb))
+     return false;
+
