@@ -2,8 +2,11 @@ DESCRIPTION = "gvfs is a userspace virtual filesystem"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
 
-DEPENDS = "gnome-keyring glib-2.0 fuse avahi fuse gconf"
-# optional: gphoto2 obexftp libcdio libimobiledevice samba
+DEPENDS = "gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
+# optional: obexftp libcdio libimobiledevice samba
+# building against gnome-disk-utility is also possible, but brings dependency loops :(
+
+PR = "r1"
 
 inherit gnome
 SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
@@ -21,3 +24,4 @@ FILES_gvfsd-ftp = "${libexecdir}/gvfsd-ftp ${sysconfdir}/gvfs/mounts/ftp.mount"
 FILES_gvfsd-sftp = "${libexecdir}/gvfsd-sftp ${sysconfdir}/gvfs/mounts/sftp.mount"
 FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${sysconfdir}/gvfs/mounts/trash.mount"
 
+RRECOMMENDS_gvfs-sftp += "openssh-sftp"
