@@ -7,7 +7,7 @@ LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
 
 DESCRIPTION = "the X.Org X server"
-DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
+DEPENDS += "pixman libpciaccess openssl dri2proto glproto font-util-native"
 PV = "1.10.1"
 PR = "${INC_PR}.0"
 PR_append = "+gitr${SRCPV}"

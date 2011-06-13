@@ -4,7 +4,7 @@ DISTRO_XORG_CONFIG_MANAGER_angstrom = "udev"
 require xorg-xserver-common.inc
 
 DESCRIPTION = "the X.Org X server"
-DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
+DEPENDS += "pixman libpciaccess openssl dri2proto glproto font-util-native"
 PE = "2"
 PR = "${INC_PR}.0"
 
