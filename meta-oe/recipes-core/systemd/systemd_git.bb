@@ -15,14 +15,13 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r5"
+PR = "r0"
 
 inherit autotools vala
 
-SRCREV = "78e39b43b89c6bf9ce401d6030939a004a23c850"
+SRCREV = "f9a61ef2c9e3b330d9e2e37977b3dd5758a4b853"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
-           file://execute.patch \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
            file://serial-getty@.service \
           "
