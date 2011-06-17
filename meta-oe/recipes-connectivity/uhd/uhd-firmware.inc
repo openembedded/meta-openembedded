@@ -6,9 +6,9 @@ INC_PR = "r0"
 
 PACKAGE_ARCH = "all"
 
-SRC_URI = "http://www.ettus.com/downloads/uhd_images/UHD-images-${PV}/UHD-images-${PV}-Linux.tar.gz"
+SRC_URI = "http://www.ettus.com/downloads/uhd_releases/${PV}/images-only/UHD-images-${PVdots}.tar.gz"
 
-S = ${WORKDIR}/UHD-images-${PV}-Linux
+S = "${WORKDIR}/UHD-images-${PVdots}"
 
 do_install() {
 	install -d ${D}${datadir}/uhd/images
