@@ -2,7 +2,10 @@ DESCRIPTION = "Python template engine and code generation tool"
 SECTION = "devel/python"
 PRIORITY = "optional"
 LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=aff1107514aa6aae948f9fe71fdc393b"
+
 SRCNAME = "Cheetah"
+
 PR = "r1"
 
 SRC_URI = "http://pypi.python.org/packages/source/C/Cheetah/Cheetah-${PV}.tar.gz"
