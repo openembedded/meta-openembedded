@@ -1,6 +1,6 @@
 require ntp.inc
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/${P}.tar.gz \
         file://tickadj.c.patch \
