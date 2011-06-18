@@ -1,0 +1,25 @@
+From a8e5c4a808e7f8572bd5023645a6cb4386b9aff8 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 18 Jun 2011 23:52:17 +0200
+Subject: [PATCH 5/7] don't leak buildpaths into perl hashbang
+
+Upstream-Status: Unknown
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ gobject/glib-mkenums.in |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/gobject/glib-mkenums.in b/gobject/glib-mkenums.in
+index 6372245..b486fe9 100755
+--- a/gobject/glib-mkenums.in
++++ b/gobject/glib-mkenums.in
+@@ -1,4 +1,4 @@
+-#! @PERL_PATH@
++#! /usr/bin/env perl
+ 
+ use warnings;
+ use File::Basename;
+-- 
+1.6.6.1
+
