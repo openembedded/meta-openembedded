@@ -1,0 +1,439 @@
+From 979bfb2448c3895a303041c1d422daf7930f3a51 Mon Sep 17 00:00:00 2001
+From: Christian Persch <chpe@gnome.org>
+Date: Sat, 8 May 2010 02:13:43 +0200
+Subject: [PATCH] Port gconfd-2 to GDBus
+
+Bug #618039.
+---
+ gconf/gconfd.c |  328 +++++++++++++++++++++++++++++---------------------------
+ 1 files changed, 170 insertions(+), 158 deletions(-)
+
+diff --git a/gconf/gconfd.c b/gconf/gconfd.c
+index b89e7a1..ee9d6ad 100644
+--- a/gconf/gconfd.c
++++ b/gconf/gconfd.c
+@@ -55,7 +55,7 @@
+ #endif
+ #include <locale.h>
+ 
+-#include <dbus/dbus-glib-lowlevel.h>
++#include <gio/gio.h>
+ 
+ #ifdef G_OS_WIN32
+ #include <io.h>
+@@ -518,152 +518,144 @@ gconf_get_poa (void)
+   return the_poa;
+ }
+ 
+-static const char *
+-get_introspection_xml (void)
+-{
+-  return "<!DOCTYPE node PUBLIC \"-//freedesktop//DTD D-BUS Object Introspection 1.0//EN\"\n"
+-         "\"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd\">\n"
+-         "<node>\n"
+-         "  <interface name=\"org.freedesktop.DBus.Introspectable\">\n"
+-         "    <method name=\"Introspect\">\n"
+-         "      <arg name=\"introspection_xml\" direction=\"out\" type=\"s\"/>\n"
+-         "    </method>\n"
+-         "  </interface>\n"
+-         "  <interface name=\"org.gnome.GConf\">\n"
+-         "    <method name=\"GetIOR\">\n"
+-         "      <arg name=\"ior\" direction=\"out\" type=\"s\"/>\n"
+-         "    </method>\n"
+-         "  </interface>\n"
+-         "</node>\n";
+-}
+-
+-static DBusHandlerResult
+-bus_message_handler (DBusConnection *connection,
+-                     DBusMessage    *message,
+-                     void           *user_data)
++static void
++handle_method_call (GDBusConnection       *connection,
++                    const gchar           *sender,
++                    const gchar           *object_path,
++                    const gchar           *interface_name,
++                    const gchar           *method_name,
++                    GVariant              *parameters,
++                    GDBusMethodInvocation *invocation,
++                    gpointer               user_data)
+ {
+-  DBusMessage *reply;
+-
+-  reply = NULL;
+-
+-  if (dbus_message_is_signal (message,
+-                              DBUS_INTERFACE_LOCAL,
+-                              "Disconnected"))
++  if (g_strcmp0 (method_name, "GetIOR") == 0)
+     {
+-      gconf_main_quit ();
+-      return DBUS_HANDLER_RESULT_HANDLED;
++      g_dbus_method_invocation_return_value (invocation,
++                                             g_variant_new ("(s)", gconf_get_daemon_ior ()));
+     }
+-  else if (dbus_message_is_method_call (message,
+-                                        "org.freedesktop.DBus.Introspectable",
+-                                        "Introspect"))
+-    {
+-      const char *introspection_xml;
+-
+-      introspection_xml = get_introspection_xml ();
+-
+-      reply = dbus_message_new_method_return (message);
+-      dbus_message_append_args (reply, DBUS_TYPE_STRING, &introspection_xml,
+-                                DBUS_TYPE_INVALID);
+-
+-    }
+-  else if (dbus_message_is_method_call (message,
+-                                        "org.gnome.GConf",
+-                                        "GetIOR"))
+-    {
+-      const char *ior;
++}
+ 
+-      ior = gconf_get_daemon_ior ();
++static void
++on_name_acquired (GDBusConnection *connection,
++                  const gchar     *name,
++                  gpointer         user_data)
++{
++  * (gboolean *) user_data = TRUE;
++  gconf_main_quit ();
++}
+ 
+-      reply = dbus_message_new_method_return (message);
+-      dbus_message_append_args (reply, DBUS_TYPE_STRING, &ior, DBUS_TYPE_INVALID);
+-    }
++static void
++on_name_lost (GDBusConnection *connection,
++              const gchar     *name,
++              gpointer         user_data)
++{
++  * (gboolean *) user_data = FALSE;
+ 
+-  if (reply != NULL)
+-    {
+-      dbus_connection_send (connection, reply, NULL);
+-      dbus_message_unref (reply);
+-      return DBUS_HANDLER_RESULT_HANDLED;
+-    }
++  gconf_log (GCL_WARNING,
++             _("Failed to get bus name for daemon, exiting."));
+ 
+-  return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
++  gconf_main_quit ();
+ }
+ 
+-static DBusConnection *
+-get_on_d_bus (void)
++static GDBusConnection *
++own_org_gnome_GConf (void)
+ {
+-  DBusConnection *connection;
+-  DBusError bus_error;
+-  int result;
+-
+-  dbus_error_init (&bus_error);
+-  connection = dbus_bus_get (DBUS_BUS_SESSION, &bus_error);
+-
+-  if (dbus_error_is_set (&bus_error))
++  static const char introspection_xml[] =
++    "<node>"
++      "<interface name='org.gnome.GConf'>"
++        "<method name='GetIOR'>"
++          "<arg name='ior' direction='out' type='s'/>"
++        "</method>"
++      "</interface>"
++    "</node>";
++  static const GDBusInterfaceVTable interface_vtable =
++  {
++    handle_method_call,
++    NULL,
++    NULL
++  };
++
++  GDBusConnection *connection;
++  GDBusNodeInfo *introspection_data;
++  guint registration_id;
++  guint owner_id;
++  gboolean *do_own_ptr;
++  GError *error = NULL;
++
++  connection = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
++  if (connection == NULL)
+     {
+-      gconf_log (GCL_ERR, _("Could not connect to session bus: %s"), bus_error.message);
+-      dbus_error_free (&bus_error);
++      gconf_log (GCL_ERR, _("Could not connect to session bus: %s"), error->message);
++      g_error_free (error);
+       return NULL;
+     }
+ 
+-  dbus_connection_setup_with_g_main (connection, NULL);
++  introspection_data = g_dbus_node_info_new_for_xml (introspection_xml, NULL);
++  g_assert (introspection_data != NULL);
+ 
+-  if (!dbus_connection_add_filter (connection, (DBusHandleMessageFunction)
+-                                  bus_message_handler, NULL, NULL))
++  registration_id = g_dbus_connection_register_object (connection,
++                                                       "/org/gnome/GConf",
++                                                       introspection_data->interfaces[0],
++                                                       &interface_vtable,
++                                                       introspection_data,
++                                                       (GDestroyNotify) g_dbus_node_info_unref,
++                                                       &error);
++  if (registration_id == 0)
+     {
+-      dbus_connection_unref (connection);
++      gconf_log (GCL_ERR, "Failed to register object: %s", error->message);
++      g_error_free (error);
++      g_object_unref (connection);
+       return NULL;
+     }
+ 
+-  dbus_connection_set_exit_on_disconnect (connection, FALSE);
++  g_dbus_connection_set_exit_on_close (connection, FALSE);
++  g_signal_connect (connection, "closed", G_CALLBACK (gconf_main_quit), NULL);
+ 
+-  result = dbus_bus_request_name (connection, "org.gnome.GConf",
+-                                  0, &bus_error);
++  do_own_ptr = g_new (gboolean, 1);
++  *do_own_ptr = FALSE;
+ 
+-  if (dbus_error_is_set (&bus_error))
+-    {
+-      gconf_log (GCL_WARNING,
+-                 _("Failed to get bus name for daemon, exiting: %s"),
+-                 bus_error.message);
+-      dbus_error_free (&bus_error);
+-    }
++  owner_id = g_bus_own_name_on_connection (connection,
++                                           "org.gnome.GConf",
++                                           G_BUS_NAME_OWNER_FLAGS_NONE,
++                                           on_name_acquired,
++                                           on_name_lost,
++                                           do_own_ptr, (GDestroyNotify) g_free);
+ 
+-  if (result != DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER)
+-    {
+-      dbus_connection_unref (connection);
+-      return NULL;
+-    }
++  gconf_main ();
+ 
+-  return connection;
++  if (*do_own_ptr)
++    return connection;
++
++  g_object_unref (connection);
++  return NULL;
+ }
+ 
+ #ifdef ENABLE_DEFAULTS_SERVICE
+ /* listen on system bus for defaults changes */
+ 
+-static DBusHandlerResult
+-system_bus_message_handler (DBusConnection *connection,
+-			    DBusMessage    *message,
+-			    void           *user_data)
+-{
+-  DBusMessage *reply;
+-
+-  reply = NULL;
+-
+-  if (dbus_message_is_signal (message,
+-			      "org.gnome.GConf.Defaults",
+-                              "SystemSet"))
+-    {
+-      DBusError bus_error;
+-      char **keys;
+-      int n_keys;
++typedef struct {
++  guint watch_id;
++  guint subscription_id;
++} DefaultsData;
+ 
+-      dbus_error_init (&bus_error);
+-      if (dbus_message_get_args (message, &bus_error,
+-				 DBUS_TYPE_ARRAY, DBUS_TYPE_STRING, &keys, &n_keys,
+-				 DBUS_TYPE_INVALID))
++static void
++system_set_cb (GDBusConnection *connection,
++               const gchar *sender_name,
++               const gchar *object_path,
++               const gchar *interface_name,
++               const gchar *signal_name,
++               GVariant *parameters,
++               gpointer user_data)
++{
++  if (g_strcmp0 (interface_name, "org.gnome.GConf.Defaults") == 0 &&
++      g_strcmp0 (signal_name, "SystemSet") == 0)
++    {
++      if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(as)")))
+ 	{
+-	  char **key;
+ 	  GConfSources *system_sources;
+ 	  GSList addresses;
++          GVariantIter *iter;
++          const char *key;
+ 
+ 	  gconf_log (GCL_DEBUG, "System defaults changed.  Notifying.");
+ 
+@@ -673,61 +665,72 @@ system_bus_message_handler (DBusConnection *connection,
+ 
+ 	  gconfd_clear_cache_for_sources (system_sources);
+ 
+-	  for (key = keys; *key; key++)
+-	    gconfd_notify_other_listeners (NULL, system_sources, *key);
++          g_variant_get (parameters, "(as)", &iter);
++          while (g_variant_iter_loop (iter, "&s", &key))
++            gconfd_notify_other_listeners (NULL, system_sources, key);
++          g_variant_iter_free (iter);
+ 
+ 	  gconf_sources_free (system_sources);
+-
+-	  dbus_free_string_array (keys);
+ 	}
+       else
+         {
+-	  gconf_log (GCL_DEBUG, "SystemSet signal received, but error getting message: %s", bus_error.message);
++	  gconf_log (GCL_DEBUG, "SystemSet signal received, but wrong paramters type '%s'",
++                     g_variant_get_type_string (parameters));
+ 	}
+-      dbus_error_free (&bus_error);
+-
+-      return DBUS_HANDLER_RESULT_HANDLED;
+     }
+-
+-  return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+ }
+ 
+-static DBusConnection *
+-get_on_system_bus (void)
++static void
++defaults_appeared_cb (GDBusConnection *connection,
++                      const gchar     *name,
++                      const gchar     *name_owner,
++                      gpointer         user_data)
+ {
+-  DBusConnection *connection;
+-  DBusError bus_error;
++  DefaultsData *data = (DefaultsData *) user_data;
+ 
+-  dbus_error_init (&bus_error);
+-  connection = dbus_bus_get (DBUS_BUS_SYSTEM, &bus_error);
++  gconf_log (GCL_DEBUG, "Defaults service appeared with name '%s'", name_owner);
+ 
+-  if (dbus_error_is_set (&bus_error))
+-    {
+-      gconf_log (GCL_ERR, _("Could not connect to system bus: %s"), bus_error.message);
+-      dbus_error_free (&bus_error);
+-      return NULL;
+-    }
++  g_assert (data->subscription_id == 0);
++  data->subscription_id = g_dbus_connection_signal_subscribe (connection,
++                                                              name_owner,
++                                                              "org.gnome.GConf.Defaults",
++                                                              "SystemSet",
++                                                              "/" /* really? */,
++                                                              NULL,
++                                                              G_DBUS_SIGNAL_FLAGS_NONE,
++                                                              system_set_cb,
++                                                              user_data, NULL);
++}
+ 
+-  dbus_connection_setup_with_g_main (connection, NULL);
++static void
++defaults_vanished_cb (GDBusConnection *connection,
++                      const gchar     *name,
++                      gpointer         user_data)
++{
++  DefaultsData *data = (DefaultsData *) user_data;
+ 
+-  dbus_bus_add_match (connection, "type='signal',interface='org.gnome.GConf.Defaults'", &bus_error);
+-  dbus_connection_flush(connection);
+-  if (dbus_error_is_set (&bus_error))
+-    {
+-      gconf_log (GCL_DEBUG, "Failed to add signal match to system bus: %s", bus_error.message);
+-      dbus_connection_unref (connection);
+-      return NULL;
+-    }
++  gconf_log (GCL_DEBUG, "Defaults service disappeared");
+ 
+-  if (!dbus_connection_add_filter (connection, (DBusHandleMessageFunction)
+-                                   system_bus_message_handler, NULL, NULL))
+-    {
+-      gconf_log (GCL_DEBUG, "Failed to add message filter to system bus.");
+-      dbus_connection_unref (connection);
+-      return NULL;
+-    }
++  if (data->subscription_id != 0) {
++    g_dbus_connection_signal_unsubscribe (connection , data->subscription_id);
++    data->subscription_id = 0;
++  }
++}
+ 
+-  return connection;
++static DefaultsData *
++get_on_system_bus (void)
++{
++  DefaultsData *data = g_new (DefaultsData, 1);
++
++  data->subscription_id = 0;
++  data->watch_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
++                                     "org.gnome.GConf.Defaults",
++                                     G_BUS_NAME_WATCHER_FLAGS_NONE,
++                                     defaults_appeared_cb,
++                                     defaults_vanished_cb,
++                                     data, NULL);
++
++  return data;
+ }
+ #endif  /* ENABLE_DEFAULTS_SERVICE */
+ 
+@@ -759,7 +762,8 @@ main(int argc, char** argv)
+   GError *err;
+   int dev_null_fd;
+   int write_byte_fd;
+-  DBusConnection *connection;
++  GDBusConnection *connection;
++  DefaultsData *defaults_data;
+ 
+   _gconf_init_i18n ();
+   setlocale (LC_ALL, "");
+@@ -896,8 +900,7 @@ main(int argc, char** argv)
+   gconf_set_daemon_ior (ior);
+   CORBA_free (ior);
+ 
+-  connection = get_on_d_bus ();
+-
++  connection = own_org_gnome_GConf ();
+   if (connection != NULL)
+     {
+       /* This loads backends and so on. It needs to be done before
+@@ -934,11 +937,20 @@ main(int argc, char** argv)
+   logfile_read ();
+  
+ #ifdef ENABLE_DEFAULTS_SERVICE 
+-  get_on_system_bus ();
++  defaults_data = get_on_system_bus ();
+ #endif
+ 
+   gconf_main ();
+ 
++  g_object_unref (connection);
++  connection = NULL;
++
++  if (defaults_data->subscription_id != 0) {
++    g_dbus_connection_signal_unsubscribe (connection , defaults_data->subscription_id);
++  }
++  g_bus_unwatch_name (defaults_data->watch_id);
++  g_free (defaults_data);
++
+   if (in_shutdown)
+     exit_code = 1; /* means someone already called enter_shutdown() */
+   
+-- 
+1.6.6.1
+
