@@ -98,8 +98,8 @@
 === added file 'gcc/config/arm/arm-ldmstm.ml'
 Index: gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml
 ===================================================================
---- /dev/null
-+++ gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml	2011-06-16 18:46:26.355282255 -0700
 @@ -0,0 +1,333 @@
 +(* Auto-generate ARM ldm/stm patterns
 +   Copyright (C) 2010 Free Software Foundation, Inc.
@@ -436,9 +436,9 @@ Index: gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml
 +  patterns ();
 Index: gcc-4_5-branch/gcc/config/arm/arm-protos.h
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm-protos.h
-+++ gcc-4_5-branch/gcc/config/arm/arm-protos.h
-@@ -100,14 +100,11 @@ extern int symbol_mentioned_p (rtx);
+--- gcc-4_5-branch.orig/gcc/config/arm/arm-protos.h	2011-06-16 18:46:18.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm-protos.h	2011-06-16 18:46:26.355282255 -0700
+@@ -99,14 +99,11 @@
  extern int label_mentioned_p (rtx);
  extern RTX_CODE minmax_code (rtx);
  extern int adjacent_mem_locations (rtx, rtx);
@@ -460,9 +460,9 @@ Index: gcc-4_5-branch/gcc/config/arm/arm-protos.h
  extern enum machine_mode arm_select_dominance_cc_mode (rtx, rtx,
 Index: gcc-4_5-branch/gcc/config/arm/arm.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm.c
-+++ gcc-4_5-branch/gcc/config/arm/arm.c
-@@ -753,6 +753,12 @@ static const char * const arm_condition_
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.c	2011-06-16 18:46:23.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm.c	2011-06-16 18:46:26.365282255 -0700
+@@ -753,6 +753,12 @@
    "hi", "ls", "ge", "lt", "gt", "le", "al", "nv"
  };
  
@@ -475,7 +475,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  #define ARM_LSL_NAME (TARGET_UNIFIED_ASM ? "lsl" : "asl")
  #define streq(string1, string2) (strcmp (string1, string2) == 0)
  
-@@ -9680,24 +9686,125 @@ adjacent_mem_locations (rtx a, rtx b)
+@@ -9668,24 +9674,125 @@
    return 0;
  }
  
@@ -612,7 +612,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
    /* Loop over the operands and check that the memory references are
       suitable (i.e. immediate offsets from the same base register).  At
-@@ -9735,32 +9842,30 @@ load_multiple_sequence (rtx *operands, i
+@@ -9723,32 +9830,30 @@
  	  if (i == 0)
  	    {
  	      base_reg = REGNO (reg);
@@ -659,7 +659,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  	}
        else
  	/* Not a suitable memory address.  */
-@@ -9769,167 +9874,90 @@ load_multiple_sequence (rtx *operands, i
+@@ -9757,167 +9862,90 @@
  
    /* All the useful information has now been extracted from the
       operands into unsorted_regs and unsorted_offsets; additionally,
@@ -888,7 +888,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
    /* Loop over the operands and check that the memory references are
       suitable (i.e. immediate offsets from the same base register).  At
-@@ -9964,32 +9992,32 @@ store_multiple_sequence (rtx *operands, 
+@@ -9952,32 +9980,32 @@
  	      && (GET_CODE (offset = XEXP (XEXP (operands[nops + i], 0), 1))
  		  == CONST_INT)))
  	{
@@ -937,7 +937,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  	}
        else
  	/* Not a suitable memory address.  */
-@@ -9998,111 +10026,65 @@ store_multiple_sequence (rtx *operands, 
+@@ -9986,111 +10014,65 @@
  
    /* All the useful information has now been extracted from the
       operands into unsorted_regs and unsorted_offsets; additionally,
@@ -1087,7 +1087,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
    /* XScale has load-store double instructions, but they have stricter
       alignment requirements than load-store multiple, so we cannot
-@@ -10139,18 +10121,10 @@ arm_gen_load_multiple (int base_regno, i
+@@ -10127,18 +10109,10 @@
        start_sequence ();
  
        for (i = 0; i < count; i++)
@@ -1109,7 +1109,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
        seq = get_insns ();
        end_sequence ();
-@@ -10159,41 +10133,40 @@ arm_gen_load_multiple (int base_regno, i
+@@ -10147,41 +10121,40 @@
      }
  
    result = gen_rtx_PARALLEL (VOIDmode,
@@ -1170,7 +1170,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
       the pros/cons of ldm/stm usage for XScale.  */
    if (low_irq_latency || (arm_tune_xscale && count <= 2 && ! optimize_size))
      {
-@@ -10202,18 +10175,10 @@ arm_gen_store_multiple (int base_regno, 
+@@ -10190,18 +10163,10 @@
        start_sequence ();
  
        for (i = 0; i < count; i++)
@@ -1192,7 +1192,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
        seq = get_insns ();
        end_sequence ();
-@@ -10222,29 +10187,319 @@ arm_gen_store_multiple (int base_regno, 
+@@ -10210,29 +10175,319 @@
      }
  
    result = gen_rtx_PARALLEL (VOIDmode,
@@ -1522,7 +1522,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  }
  
  int
-@@ -10280,20 +10535,21 @@ arm_gen_movmemqi (rtx *operands)
+@@ -10268,20 +10523,21 @@
    for (i = 0; in_words_to_go >= 2; i+=4)
      {
        if (in_words_to_go > 4)
@@ -1554,9 +1554,9 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  					       dstbase, &dstoffset));
 Index: gcc-4_5-branch/gcc/config/arm/arm.h
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm.h
-+++ gcc-4_5-branch/gcc/config/arm/arm.h
-@@ -1143,6 +1143,9 @@ extern int arm_structure_size_boundary;
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.h	2011-06-16 18:46:20.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm.h	2011-06-16 18:46:26.375282255 -0700
+@@ -1143,6 +1143,9 @@
    ((MODE) == TImode || (MODE) == EImode || (MODE) == OImode \
     || (MODE) == CImode || (MODE) == XImode)
  
@@ -1566,7 +1566,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.h
  /* The order in which register should be allocated.  It is good to use ip
     since no saving is required (though calls clobber it) and it never contains
     function parameters.  It is quite good to use lr since other calls may
-@@ -2823,4 +2826,8 @@ enum arm_builtins
+@@ -2821,4 +2824,8 @@
  #define NEED_INDICATE_EXEC_STACK	0
  #endif
  
@@ -1577,8 +1577,8 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.h
  #endif /* ! GCC_ARM_H */
 Index: gcc-4_5-branch/gcc/config/arm/arm.md
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm.md
-+++ gcc-4_5-branch/gcc/config/arm/arm.md
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.md	2011-06-16 18:46:23.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm.md	2011-06-16 18:46:26.375282255 -0700
 @@ -6282,7 +6282,7 @@
  
  ;; load- and store-multiple insns
@@ -1847,7 +1847,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.md
  
  ;; Move a block of memory if it is word aligned and MORE than 2 words long.
  ;; We could let this apply for blocks of less than this, but it clobbers so
-@@ -9031,8 +8804,8 @@
+@@ -9025,8 +8798,8 @@
  	if (REGNO (reg) == R0_REGNUM)
  	  {
  	    /* On thumb we have to use a write-back instruction.  */
@@ -1858,7 +1858,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.md
  	    size = TARGET_ARM ? 16 : 0;
  	  }
  	else
-@@ -9078,8 +8851,8 @@
+@@ -9072,8 +8845,8 @@
  	if (REGNO (reg) == R0_REGNUM)
  	  {
  	    /* On thumb we have to use a write-back instruction.  */
@@ -1869,7 +1869,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.md
  	    size = TARGET_ARM ? 16 : 0;
  	  }
  	else
-@@ -10672,87 +10445,6 @@
+@@ -10666,87 +10439,6 @@
    ""
  )
  
@@ -1957,7 +1957,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.md
  (define_split
    [(set (match_operand:SI 0 "s_register_operand" "")
  	(and:SI (ge:SI (match_operand:SI 1 "s_register_operand" "")
-@@ -11554,6 +11246,8 @@
+@@ -11549,6 +11241,8 @@
    "
  )
  
@@ -1968,8 +1968,8 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.md
  ;; Load the Maverick co-processor patterns
 Index: gcc-4_5-branch/gcc/config/arm/ldmstm.md
 ===================================================================
---- /dev/null
-+++ gcc-4_5-branch/gcc/config/arm/ldmstm.md
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_5-branch/gcc/config/arm/ldmstm.md	2011-06-16 18:46:26.375282255 -0700
 @@ -0,0 +1,1191 @@
 +/* ARM ldm/stm instruction patterns.  This file was automatically generated
 +   using arm-ldmstm.ml.  Please do not edit manually.
@@ -3164,8 +3164,8 @@ Index: gcc-4_5-branch/gcc/config/arm/ldmstm.md
 +
 Index: gcc-4_5-branch/gcc/config/arm/predicates.md
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/predicates.md
-+++ gcc-4_5-branch/gcc/config/arm/predicates.md
+--- gcc-4_5-branch.orig/gcc/config/arm/predicates.md	2011-06-16 18:46:18.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/predicates.md	2011-06-16 18:46:26.375282255 -0700
 @@ -211,6 +211,11 @@
    (and (match_code "ior,xor,and")
         (match_test "mode == GET_MODE (op)")))
@@ -3314,9 +3314,9 @@ Index: gcc-4_5-branch/gcc/config/arm/predicates.md
    return true;
 Index: gcc-4_5-branch/gcc/config/i386/i386.md
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/i386/i386.md
-+++ gcc-4_5-branch/gcc/config/i386/i386.md
-@@ -4934,6 +4934,7 @@
+--- gcc-4_5-branch.orig/gcc/config/i386/i386.md	2011-06-16 18:46:21.000000000 -0700
++++ gcc-4_5-branch/gcc/config/i386/i386.md	2011-06-16 18:46:26.385282255 -0700
+@@ -4960,6 +4960,7 @@
     (set (match_operand:SSEMODEI24 2 "register_operand" "")
  	(fix:SSEMODEI24 (match_dup 0)))]
    "TARGET_SHORTEN_X87_SSE
@@ -3324,7 +3324,7 @@ Index: gcc-4_5-branch/gcc/config/i386/i386.md
     && peep2_reg_dead_p (2, operands[0])"
    [(set (match_dup 2) (fix:SSEMODEI24 (match_dup 1)))]
    "")
-@@ -20036,15 +20037,14 @@
+@@ -20057,15 +20058,14 @@
  ;;  leal    (%edx,%eax,4), %eax
  
  (define_peephole2
@@ -3345,7 +3345,7 @@ Index: gcc-4_5-branch/gcc/config/i386/i386.md
  		   (clobber (reg:CC FLAGS_REG))])]
    "INTVAL (operands[2]) >= 0 && INTVAL (operands[2]) <= 3
     /* Validate MODE for lea.  */
-@@ -20053,31 +20053,27 @@
+@@ -20074,31 +20074,27 @@
  	    || GET_MODE (operands[0]) == HImode))
         || GET_MODE (operands[0]) == SImode
         || (TARGET_64BIT && GET_MODE (operands[0]) == DImode))
@@ -3389,87 +3389,11 @@ Index: gcc-4_5-branch/gcc/config/i386/i386.md
    operands[0] = dest;
  })
  
-Index: gcc-4_5-branch/gcc/df-problems.c
-===================================================================
---- gcc-4_5-branch.orig/gcc/df-problems.c
-+++ gcc-4_5-branch/gcc/df-problems.c
-@@ -3748,9 +3748,22 @@ df_simulate_find_defs (rtx insn, bitmap 
-   for (def_rec = DF_INSN_UID_DEFS (uid); *def_rec; def_rec++)
-     {
-       df_ref def = *def_rec;
--      /* If the def is to only part of the reg, it does
--	 not kill the other defs that reach here.  */
--      if (!(DF_REF_FLAGS (def) & (DF_REF_PARTIAL | DF_REF_CONDITIONAL)))
-+      bitmap_set_bit (defs, DF_REF_REGNO (def));
-+    }
-+}
-+
-+/* Find the set of real DEFs, which are not clobbers, for INSN.  */
-+
-+void
-+df_simulate_find_noclobber_defs (rtx insn, bitmap defs)
-+{
-+  df_ref *def_rec;
-+  unsigned int uid = INSN_UID (insn);
-+
-+  for (def_rec = DF_INSN_UID_DEFS (uid); *def_rec; def_rec++)
-+    {
-+      df_ref def = *def_rec;
-+      if (!(DF_REF_FLAGS (def) & (DF_REF_MUST_CLOBBER | DF_REF_MAY_CLOBBER)))
- 	bitmap_set_bit (defs, DF_REF_REGNO (def));
-     }
- }
-@@ -3921,7 +3934,7 @@ df_simulate_initialize_forwards (basic_b
-     {
-       df_ref def = *def_rec;
-       if (DF_REF_FLAGS (def) & DF_REF_AT_TOP)
--	bitmap_clear_bit (live, DF_REF_REGNO (def));
-+	bitmap_set_bit (live, DF_REF_REGNO (def));
-     }
- }
- 
-@@ -3942,7 +3955,7 @@ df_simulate_one_insn_forwards (basic_blo
-      while here the scan is performed forwards!  So, first assume that the
-      def is live, and if this is not true REG_UNUSED notes will rectify the
-      situation.  */
--  df_simulate_find_defs (insn, live);
-+  df_simulate_find_noclobber_defs (insn, live);
- 
-   /* Clear all of the registers that go dead.  */
-   for (link = REG_NOTES (insn); link; link = XEXP (link, 1))
-Index: gcc-4_5-branch/gcc/df.h
-===================================================================
---- gcc-4_5-branch.orig/gcc/df.h
-+++ gcc-4_5-branch/gcc/df.h
-@@ -978,6 +978,7 @@ extern void df_note_add_problem (void);
- extern void df_md_add_problem (void);
- extern void df_md_simulate_artificial_defs_at_top (basic_block, bitmap);
- extern void df_md_simulate_one_insn (basic_block, rtx, bitmap);
-+extern void df_simulate_find_noclobber_defs (rtx, bitmap);
- extern void df_simulate_find_defs (rtx, bitmap);
- extern void df_simulate_defs (rtx, bitmap);
- extern void df_simulate_uses (rtx, bitmap);
-Index: gcc-4_5-branch/gcc/fwprop.c
-===================================================================
---- gcc-4_5-branch.orig/gcc/fwprop.c
-+++ gcc-4_5-branch/gcc/fwprop.c
-@@ -228,7 +228,10 @@ single_def_use_enter_block (struct dom_w
- 
-   process_uses (df_get_artificial_uses (bb_index), DF_REF_AT_TOP);
-   process_defs (df_get_artificial_defs (bb_index), DF_REF_AT_TOP);
--  df_simulate_initialize_forwards (bb, local_lr);
-+
-+  /* We don't call df_simulate_initialize_forwards, as it may overestimate
-+     the live registers if there are unused artificial defs.  We prefer
-+     liveness to be underestimated.  */
- 
-   FOR_BB_INSNS (bb, insn)
-     if (INSN_P (insn))
 Index: gcc-4_5-branch/gcc/genoutput.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/genoutput.c
-+++ gcc-4_5-branch/gcc/genoutput.c
-@@ -266,6 +266,8 @@ output_operand_data (void)
+--- gcc-4_5-branch.orig/gcc/genoutput.c	2011-06-16 17:59:04.000000000 -0700
++++ gcc-4_5-branch/gcc/genoutput.c	2011-06-16 18:46:26.385282255 -0700
+@@ -266,6 +266,8 @@
  
        printf ("    %d,\n", d->strict_low);
  
@@ -3480,9 +3404,9 @@ Index: gcc-4_5-branch/gcc/genoutput.c
        printf("  },\n");
 Index: gcc-4_5-branch/gcc/genrecog.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/genrecog.c
-+++ gcc-4_5-branch/gcc/genrecog.c
-@@ -1782,20 +1782,11 @@ change_state (const char *oldpos, const 
+--- gcc-4_5-branch.orig/gcc/genrecog.c	2011-06-16 17:59:04.000000000 -0700
++++ gcc-4_5-branch/gcc/genrecog.c	2011-06-16 18:46:26.395282255 -0700
+@@ -1782,20 +1782,11 @@
    int odepth = strlen (oldpos);
    int ndepth = strlen (newpos);
    int depth;
@@ -3503,77 +3427,11 @@ Index: gcc-4_5-branch/gcc/genrecog.c
    /* Go down to desired level.  */
    while (depth < ndepth)
      {
-Index: gcc-4_5-branch/gcc/ifcvt.c
-===================================================================
---- gcc-4_5-branch.orig/gcc/ifcvt.c
-+++ gcc-4_5-branch/gcc/ifcvt.c
-@@ -4011,6 +4011,7 @@ dead_or_predicable (basic_block test_bb,
-   basic_block new_dest = dest_edge->dest;
-   rtx head, end, jump, earliest = NULL_RTX, old_dest;
-   bitmap merge_set = NULL;
-+  bitmap merge_set_noclobber  = NULL;
-   /* Number of pending changes.  */
-   int n_validated_changes = 0;
-   rtx new_dest_label;
-@@ -4169,6 +4170,7 @@ dead_or_predicable (basic_block test_bb,
- 		       end of the block.  */
- 
-       merge_set = BITMAP_ALLOC (&reg_obstack);
-+      merge_set_noclobber = BITMAP_ALLOC (&reg_obstack);
- 
-       /* If we allocated new pseudos (e.g. in the conditional move
- 	 expander called from noce_emit_cmove), we must resize the
-@@ -4187,6 +4189,7 @@ dead_or_predicable (basic_block test_bb,
- 		  df_ref def = *def_rec;
- 		  bitmap_set_bit (merge_set, DF_REF_REGNO (def));
- 		}
-+              df_simulate_find_noclobber_defs (insn, merge_set_noclobber);
- 	    }
- 	}
- 
-@@ -4197,7 +4200,7 @@ dead_or_predicable (basic_block test_bb,
- 	  unsigned i;
- 	  bitmap_iterator bi;
- 
--          EXECUTE_IF_SET_IN_BITMAP (merge_set, 0, i, bi)
-+          EXECUTE_IF_SET_IN_BITMAP (merge_set_noclobber, 0, i, bi)
- 	    {
- 	      if (i < FIRST_PSEUDO_REGISTER
- 		  && ! fixed_regs[i]
-@@ -4233,7 +4236,7 @@ dead_or_predicable (basic_block test_bb,
- 	   TEST_SET & DF_LIVE_IN (merge_bb)
- 	 are empty.  */
- 
--      if (bitmap_intersect_p (merge_set, test_set)
-+      if (bitmap_intersect_p (merge_set_noclobber, test_set)
- 	  || bitmap_intersect_p (merge_set, test_live)
- 	  || bitmap_intersect_p (test_set, df_get_live_in (merge_bb)))
- 	intersect = true;
-@@ -4320,6 +4323,7 @@ dead_or_predicable (basic_block test_bb,
- 	    remove_reg_equal_equiv_notes_for_regno (i);
- 
- 	  BITMAP_FREE (merge_set);
-+          BITMAP_FREE (merge_set_noclobber);
- 	}
- 
-       reorder_insns (head, end, PREV_INSN (earliest));
-@@ -4340,7 +4344,10 @@ dead_or_predicable (basic_block test_bb,
-   cancel_changes (0);
-  fail:
-   if (merge_set)
--    BITMAP_FREE (merge_set);
-+    {
-+      BITMAP_FREE (merge_set);
-+      BITMAP_FREE (merge_set_noclobber);
-+    }
-   return FALSE;
- }
- 
 Index: gcc-4_5-branch/gcc/recog.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/recog.c
-+++ gcc-4_5-branch/gcc/recog.c
-@@ -2082,6 +2082,7 @@ extract_insn (rtx insn)
+--- gcc-4_5-branch.orig/gcc/recog.c	2011-06-16 18:46:02.000000000 -0700
++++ gcc-4_5-branch/gcc/recog.c	2011-06-16 18:46:26.395282255 -0700
+@@ -2082,6 +2082,7 @@
  			       recog_data.operand_loc,
  			       recog_data.constraints,
  			       recog_data.operand_mode, NULL);
@@ -3581,7 +3439,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  	  if (noperands > 0)
  	    {
  	      const char *p =  recog_data.constraints[0];
-@@ -2111,6 +2112,7 @@ extract_insn (rtx insn)
+@@ -2111,6 +2112,7 @@
        for (i = 0; i < noperands; i++)
  	{
  	  recog_data.constraints[i] = insn_data[icode].operand[i].constraint;
@@ -3589,7 +3447,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  	  recog_data.operand_mode[i] = insn_data[icode].operand[i].mode;
  	  /* VOIDmode match_operands gets mode from their real operand.  */
  	  if (recog_data.operand_mode[i] == VOIDmode)
-@@ -2909,6 +2911,10 @@ struct peep2_insn_data
+@@ -2909,6 +2911,10 @@
  
  static struct peep2_insn_data peep2_insn_data[MAX_INSNS_PER_PEEP2 + 1];
  static int peep2_current;
@@ -3600,7 +3458,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  /* The number of instructions available to match a peep2.  */
  int peep2_current_count;
  
-@@ -2917,6 +2923,16 @@ int peep2_current_count;
+@@ -2917,6 +2923,16 @@
     DF_LIVE_OUT for the block.  */
  #define PEEP2_EOB	pc_rtx
  
@@ -3617,7 +3475,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  /* Return the Nth non-note insn after `current', or return NULL_RTX if it
     does not exist.  Used by the recognizer to find the next insn to match
     in a multi-insn pattern.  */
-@@ -2926,9 +2942,7 @@ peep2_next_insn (int n)
+@@ -2926,9 +2942,7 @@
  {
    gcc_assert (n <= peep2_current_count);
  
@@ -3628,7 +3486,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  
    return peep2_insn_data[n].insn;
  }
-@@ -2941,9 +2955,7 @@ peep2_regno_dead_p (int ofs, int regno)
+@@ -2941,9 +2955,7 @@
  {
    gcc_assert (ofs < MAX_INSNS_PER_PEEP2 + 1);
  
@@ -3639,7 +3497,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  
    gcc_assert (peep2_insn_data[ofs].insn != NULL_RTX);
  
-@@ -2959,9 +2971,7 @@ peep2_reg_dead_p (int ofs, rtx reg)
+@@ -2959,9 +2971,7 @@
  
    gcc_assert (ofs < MAX_INSNS_PER_PEEP2 + 1);
  
@@ -3650,7 +3508,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  
    gcc_assert (peep2_insn_data[ofs].insn != NULL_RTX);
  
-@@ -2996,12 +3006,8 @@ peep2_find_free_register (int from, int 
+@@ -2996,12 +3006,8 @@
    gcc_assert (from < MAX_INSNS_PER_PEEP2 + 1);
    gcc_assert (to < MAX_INSNS_PER_PEEP2 + 1);
  
@@ -3665,7 +3523,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  
    gcc_assert (peep2_insn_data[from].insn != NULL_RTX);
    REG_SET_TO_HARD_REG_SET (live, peep2_insn_data[from].live_before);
-@@ -3010,8 +3016,7 @@ peep2_find_free_register (int from, int 
+@@ -3010,8 +3016,7 @@
      {
        HARD_REG_SET this_live;
  
@@ -3675,7 +3533,7 @@ Index: gcc-4_5-branch/gcc/recog.c
        gcc_assert (peep2_insn_data[from].insn != NULL_RTX);
        REG_SET_TO_HARD_REG_SET (this_live, peep2_insn_data[from].live_before);
        IOR_HARD_REG_SET (live, this_live);
-@@ -3104,19 +3109,234 @@ peep2_reinit_state (regset live)
+@@ -3104,19 +3109,234 @@
    COPY_REG_SET (peep2_insn_data[MAX_INSNS_PER_PEEP2].live_before, live);
  }
  
@@ -3913,7 +3771,7 @@ Index: gcc-4_5-branch/gcc/recog.c
    df_analyze ();
  
    /* Initialize the regsets we're going to use.  */
-@@ -3126,214 +3346,59 @@ peephole2_optimize (void)
+@@ -3126,214 +3346,59 @@
  
    FOR_EACH_BB_REVERSE (bb)
      {
@@ -3950,7 +3808,9 @@ Index: gcc-4_5-branch/gcc/recog.c
 -	      peep2_insn_data[peep2_current].insn = insn;
 -	      df_simulate_one_insn_backwards (bb, insn, live);
 -	      COPY_REG_SET (peep2_insn_data[peep2_current].live_before, live);
--
++	  rtx attempt, head;
++	  int match_len;
+ 
 -	      if (RTX_FRAME_RELATED_P (insn))
 -		{
 -		  /* If an insn has RTX_FRAME_RELATED_P set, peephole
@@ -3972,9 +3832,7 @@ Index: gcc-4_5-branch/gcc/recog.c
 -		    {
 -		      int j;
 -		      rtx old_insn, new_insn, note;
-+	  rtx attempt, head;
-+	  int match_len;
- 
+-
 -		      j = i + peep2_current;
 -		      if (j >= MAX_INSNS_PER_PEEP2 + 1)
 -			j -= MAX_INSNS_PER_PEEP2 + 1;
@@ -4170,7 +4028,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  	}
      }
  
-@@ -3341,7 +3406,7 @@ peephole2_optimize (void)
+@@ -3341,7 +3406,7 @@
    for (i = 0; i < MAX_INSNS_PER_PEEP2 + 1; ++i)
      BITMAP_FREE (peep2_insn_data[i].live_before);
    BITMAP_FREE (live);
@@ -4181,9 +4039,9 @@ Index: gcc-4_5-branch/gcc/recog.c
  #endif /* HAVE_peephole2 */
 Index: gcc-4_5-branch/gcc/recog.h
 ===================================================================
---- gcc-4_5-branch.orig/gcc/recog.h
-+++ gcc-4_5-branch/gcc/recog.h
-@@ -194,6 +194,9 @@ struct recog_data
+--- gcc-4_5-branch.orig/gcc/recog.h	2011-06-16 17:59:04.000000000 -0700
++++ gcc-4_5-branch/gcc/recog.h	2011-06-16 18:46:26.405282255 -0700
+@@ -194,6 +194,9 @@
    /* Gives the constraint string for operand N.  */
    const char *constraints[MAX_RECOG_OPERANDS];
  
@@ -4193,7 +4051,7 @@ Index: gcc-4_5-branch/gcc/recog.h
    /* Gives the mode of operand N.  */
    enum machine_mode operand_mode[MAX_RECOG_OPERANDS];
  
-@@ -260,6 +263,8 @@ struct insn_operand_data
+@@ -260,6 +263,8 @@
  
    const char strict_low;
  
@@ -4204,9 +4062,9 @@ Index: gcc-4_5-branch/gcc/recog.h
  
 Index: gcc-4_5-branch/gcc/reload.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/reload.c
-+++ gcc-4_5-branch/gcc/reload.c
-@@ -3631,7 +3631,7 @@ find_reloads (rtx insn, int replace, int
+--- gcc-4_5-branch.orig/gcc/reload.c	2011-06-16 17:59:04.000000000 -0700
++++ gcc-4_5-branch/gcc/reload.c	2011-06-16 18:46:26.405282255 -0700
+@@ -3631,7 +3631,7 @@
  		   || modified[j] != RELOAD_WRITE)
  		  && j != i
  		  /* Ignore things like match_operator operands.  */

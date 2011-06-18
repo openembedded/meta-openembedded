@@ -14,14 +14,21 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 
 PV = "4.5"
-INC_PR = "r36"
-# BINV should  point to minor release 
-BINV = "${PV}.3"
+INC_PR = "r37"
 
-SRC_URI[md5sum] = "8e0b5c12212e185f3e4383106bfa9cc6"
-SRC_URI[sha256sum] = "0a8847af44a9b33813b199997a73139517c96adfd519eaf24c79d4d9d09f65de"
+# BINV should be incremented after updating to a revision
+# after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
+# the value will be minor-release+1 e.g. if minor release was
+# 4.5.1 then the value below will be 2 which will mean 4.5.2
+# which will be next minor release and so on.
 
-SRC_URI = "${GNU_MIRROR}/gcc/gcc-${BINV}/gcc-${BINV}.tar.bz2 \
+BINV = "${PV}.4"
+
+SRCREV = 175127
+BRANCH = "gcc-4_5-branch"
+PR_append = "+svnr${SRCPV}"
+
+SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://gcc-4.3.1-ARCH_FLAGS_FOR_TARGET.patch \
        file://100-uclibc-conf.patch \
        file://gcc-uclibc-locale-ctype_touplow_t.patch \
@@ -177,6 +184,15 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${BINV}/gcc-${BINV}.tar.bz2 \
        file://linaro/gcc-4.5-linaro-r99495.patch \
        file://linaro/gcc-4.5-linaro-r99498.patch \
        file://linaro/gcc-4.5-linaro-r99502.patch \
+       file://linaro/gcc-4.5-linaro-r99503.patch \
+       file://linaro/gcc-4.5-linaro-r99504.patch \
+       file://linaro/gcc-4.5-linaro-r99506.patch \
+       file://linaro/gcc-4.5-linaro-r99507.patch \
+       file://linaro/gcc-4.5-linaro-r99510.patch \
+       file://linaro/gcc-4.5-linaro-r99511.patch \
+       file://linaro/gcc-4.5-linaro-r99514.patch \
+       file://linaro/gcc-4.5-linaro-r99516.patch \
+	\
        file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \
        file://gcc-arm-volatile-bitfield-fix.patch \
@@ -198,13 +214,15 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${BINV}/gcc-${BINV}.tar.bz2 \
        file://COLLECT_GCC_OPTIONS.patch \
        file://gcc-poison-dir-extend.patch \
        file://gcc-poison-parameters.patch \
+       file://gcc-ppc-config-fix.patch \
+       file://gcc-ppc-include-config-linux.h.patch \
        "
 
 # Language Overrides
 FORTRAN = ""
 JAVA = ""
 
-S = "${WORKDIR}/gcc-${BINV}"
+S = "${WORKDIR}/${BRANCH}"
 
 #EXTRA_OECONF_BASE = "  --enable-cheaders=c_std \
 #			--enable-libssp \

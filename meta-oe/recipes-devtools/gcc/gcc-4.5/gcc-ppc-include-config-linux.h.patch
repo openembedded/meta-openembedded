@@ -1,0 +1,73 @@
+The patch is a solution for https://bugs.launchpad.net/ubuntu/+source/gcc-4.5/+bug/768921
+
+-Khem
+
+Index: gcc-4_5-branch/gcc/config.gcc
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config.gcc	2011-06-16 21:23:22.000000000 -0700
++++ gcc-4_5-branch/gcc/config.gcc	2011-06-16 21:51:20.845279713 -0700
+@@ -2035,7 +2035,7 @@
+ 	tmake_file="rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-rtems t-rtems rs6000/t-ppccomm"
+ 	;;
+ powerpc-*-linux* | powerpc64-*-linux*)
+-	tm_file="${tm_file} dbxelf.h elfos.h freebsd-spec.h rs6000/sysv4.h"
++	tm_file="${tm_file} dbxelf.h elfos.h linux.h freebsd-spec.h rs6000/sysv4.h"
+ 	extra_options="${extra_options} rs6000/sysv4.opt"
+ 	tmake_file="t-dfprules rs6000/t-fprules rs6000/t-ppcos ${tmake_file} rs6000/t-ppccomm"
+ 	maybe_biarch=yes
+Index: gcc-4_5-branch/gcc/config/rs6000/sysv4.h
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/rs6000/sysv4.h	2011-06-16 21:23:22.000000000 -0700
++++ gcc-4_5-branch/gcc/config/rs6000/sysv4.h	2011-06-16 22:08:49.425279473 -0700
+@@ -620,6 +620,7 @@
+ #define CC1_SECURE_PLT_DEFAULT_SPEC ""
+ #endif
+ 
++#undef CC1_SPEC
+ /* Pass -G xxx to the compiler and set correct endian mode.  */
+ #define	CC1_SPEC "%{G*} %(cc1_cpu) \
+ %{mlittle|mlittle-endian: %(cc1_endian_little);           \
+@@ -903,22 +904,13 @@
+ #define LINK_START_LINUX_SPEC ""
+ 
+ #define GLIBC_DYNAMIC_LINKER "/lib/ld.so.1"
+-#define UCLIBC_DYNAMIC_LINKER "/lib/ld-uClibc.so.0"
+-#if DEFAULT_LIBC == LIBC_UCLIBC
+-#define CHOOSE_DYNAMIC_LINKER(G, U) "%{mglibc:" G ";:" U "}"
+-#elif DEFAULT_LIBC == LIBC_GLIBC
+-#define CHOOSE_DYNAMIC_LINKER(G, U) "%{muclibc:" U ";:" G "}"
+-#else
+-#error "Unsupported DEFAULT_LIBC"
+-#endif
+-#define LINUX_DYNAMIC_LINKER \
+-  CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKER, UCLIBC_DYNAMIC_LINKER)
+ 
+ #define LINK_OS_LINUX_SPEC "-m elf32ppclinux %{!shared: %{!static: \
+   %{rdynamic:-export-dynamic} \
+   %{!dynamic-linker:-dynamic-linker " LINUX_DYNAMIC_LINKER "}}}"
+ 
+ #if defined(HAVE_LD_EH_FRAME_HDR)
++# undef LINK_EH_SPEC
+ # define LINK_EH_SPEC "--no-add-needed %{!static:--eh-frame-hdr} "
+ #endif
+ 
+@@ -1113,6 +1105,7 @@
+    be stacked, so that invocations of #pragma pack(pop)' will return
+    to the previous value.  */
+ 
++#undef HANDLE_PRAGMA_PACK_PUSH_POP
+ #define HANDLE_PRAGMA_PACK_PUSH_POP 1
+ 
+ /* Select a format to encode pointers in exception handling data.  CODE
+Index: gcc-4_5-branch/gcc/config/freebsd-spec.h
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/freebsd-spec.h	2011-06-16 17:59:03.000000000 -0700
++++ gcc-4_5-branch/gcc/config/freebsd-spec.h	2011-06-16 22:11:34.145279435 -0700
+@@ -154,6 +154,7 @@
+ #endif
+ 
+ #if defined(HAVE_LD_EH_FRAME_HDR)
++#undef LINK_EH_SPEC
+ #define LINK_EH_SPEC "%{!static:--eh-frame-hdr} "
+ #endif
+ 
