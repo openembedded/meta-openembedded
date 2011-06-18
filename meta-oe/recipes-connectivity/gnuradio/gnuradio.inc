@@ -1,10 +1,11 @@
 DESCRIPTION = "GNU Radio"
-URL = "http://gnuradio.org"
-SECTION =  "apps"
-PRIORITY = "optional"
+HOMEPAGE = "http://gnuradio.org"
 LICENSE = "GPLv3"
-DEPENDS = "uhd gsl guile-native fftwf python alsa-lib boost cppunit swig-native python-numpy"
-INC_PR = "r8"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+
+DEPENDS = "uhd virtual/libsdl gsl guile-native fftwf python alsa-lib boost cppunit swig-native python-numpy"
+
+INC_PR = "r0"
 
 inherit distutils-base autotools pkgconfig
 
