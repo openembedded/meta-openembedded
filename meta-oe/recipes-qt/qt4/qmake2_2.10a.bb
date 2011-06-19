@@ -1,4 +1,4 @@
-QTVERSION="4.4.3"
+QTVERSION="4.7.3"
 FILESDIR += "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/qmake2"
 
 BBCLASSEXTEND = "native nativesdk"
