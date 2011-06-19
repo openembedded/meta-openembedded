@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ libglade libgnomecanvas librsvg libxml2 libart-lgpl xrdb"
 
-PR = "r1"
+PR = "r2"
 
 inherit gnome update-rc.d
 
@@ -75,7 +75,7 @@ FILES_${PN} += "${datadir}/icon* \
 RDEPENDS_${PN} += "grep dbus-x11 shadow"
 # "libpam-base-files"
 CONFFILES_${PN} += "${sysconfdir}/gdm/gdm.conf ${sysconfdir}/init.d/gdm"
-RRECOMMENDS_${PN} += "metacity gnome-session polkit-gnome consolekit"
+RRECOMMENDS_${PN} += "desktop-file-utils glib-2.0-utils metacity gnome-session polkit-gnome consolekit"
 
 INITSCRIPT_NAME = "gdm"
 INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
