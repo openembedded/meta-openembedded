@@ -3,7 +3,7 @@ SECTION = "x11/base"
 LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3dd2bbe3563837f80ed8926b06c1c353"
 
-INC_PR = "r19"
+INC_PR = "r20"
 
 # xf86-*-* packages depend on an X server built with the xfree86 DDX
 # so we have a virtual to represent that:
@@ -13,8 +13,7 @@ PROVIDES = "virtual/xserver-xf86"
 PROVIDES += "virtual/xserver"
 
 # Config manager for xserver, options are: hal, udev, empty (for configuration in xorg.conf)
-DISTRO_XORG_CONFIG_MANAGER ?= "hal"
-DISTRO_XORG_CONFIG_MANAGER_shr ?= "udev"
+DISTRO_XORG_CONFIG_MANAGER ?= "udev"
 
 # default none, enabled by DISTRO_XORG_CONFIG_MANAGER setting
 CONFIG_MANAGER_OPTION += "${@['--disable-config-hal','--enable-config-hal',''][bb.data.getVar('DISTRO_XORG_CONFIG_MANAGER',d) in ['hal']]}"
@@ -71,8 +70,8 @@ FILES_${PN}-xephyr = "${bindir}/Xephyr"
 
 FILES_${PN}-dbg += "${libdir}/xorg/modules/.debug \
                     ${libdir}/xorg/modules/*/.debug \
-		    ${libdir}/xorg/modules/*/*/.debug \
-		    "
+                    ${libdir}/xorg/modules/*/*/.debug \
+                   "
 
 # Split out some modules and extensions from the main package
 # These aren't needed for basic operations and only take up space:
@@ -83,10 +82,16 @@ FILES_${PN}-dbg += "${libdir}/xorg/modules/.debug \
 #  320.0k  libxaa.so
 #  124.0k  libxf1bpp.so
 #  84.0k   libxf4bpp.so
+#          librecord.so
+#          libextmod.so
+#          libdbe.so
 
 PACKAGES =+ "${PN}-extension-dri \
              ${PN}-extension-dri2 \
              ${PN}-extension-glx \
+             ${PN}-extension-record \
+             ${PN}-extension-extmod \
+             ${PN}-extension-dbe \
              ${PN}-module-libint10 \
              ${PN}-module-libafb \
              ${PN}-module-libwfb  \
@@ -96,9 +101,13 @@ PACKAGES =+ "${PN}-extension-dri \
              ${PN}-module-libxf1bpp \
              ${PN}-module-libxf4bpp"
 
+
 FILES_${PN}-extension-dri = "${libdir}/xorg/modules/extensions/libdri.so"
 FILES_${PN}-extension-dri2 = "${libdir}/xorg/modules/extensions/libdri2.so"
 FILES_${PN}-extension-glx = "${libdir}/xorg/modules/extensions/libglx.so"
+FILES_${PN}-extension-record = "${libdir}/xorg/modules/extensions/librecord.so"
+FILES_${PN}-extension-extmod = "${libdir}/xorg/modules/extensions/libextmod.so"
+FILES_${PN}-extension-dbe = "${libdir}/xorg/modules/extensions/libdbe.so"
 FILES_${PN}-module-libint10 = "${libdir}/xorg/modules/libint10.so"
 FILES_${PN}-module-libafb = "${libdir}/xorg/modules/libafb.so"
 FILES_${PN}-module-libwfb = "${libdir}/xorg/modules/libwfb.so"
