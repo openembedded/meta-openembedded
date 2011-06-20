@@ -530,6 +530,7 @@ addtask deploy before do_package after do_install
 EXPORT_FUNCTIONS do_deploy
 
 # perf must be enabled in individual kernel recipes
-PACKAGES =+ "perf"
+PACKAGES =+ "perf-dbg perf"
 FILES_perf = "${bindir}/* \
               ${libexecdir}"
+FILES_perf-dbg = "${FILES_${PN}-dbg}"
