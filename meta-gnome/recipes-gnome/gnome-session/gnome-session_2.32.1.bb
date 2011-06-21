@@ -1,17 +1,16 @@
 DESCRIPTION = "Gnome session manager"
-LICENSE = "GPLv2 && LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SECTION = "x11/gnome"
-DEPENDS = "devicekit-power libwnck gnome-keyring libgnomeui startup-notification gtk+ gconf gdk-pixbuf-native"
+DEPENDS = "gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
 
 inherit gnome 
 
-SRC_URI[archive.md5sum] = "d93a2da931ac0b9c0d98f6b68a17a730"
-SRC_URI[archive.sha256sum] = "ea7b5d8b254eba0f4ee5f737ed3686fca4fa734ad54a20f206534241f6aef4ec"
+SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
+SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
 
-EXTRA_OECONF = " ac_cv_path_GCONF_SANITY_CHECK=set "
+EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set "
 
 do_configure_append() {
 	for i in $(find ${S} -name "Makefile") ; do
