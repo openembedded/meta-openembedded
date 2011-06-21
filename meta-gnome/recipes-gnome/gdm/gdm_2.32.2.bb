@@ -4,12 +4,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
 
-PR = "r2"
+PR = "r3"
 
 inherit gnome update-rc.d
 
 SRC_URI += " \
             file://cross-xdetection.diff \
+            file://0001-Remove-user-switch-applet.patch \
             file://%gconf-tree.xml \
             file://gdm \
             file://gdm.conf \
