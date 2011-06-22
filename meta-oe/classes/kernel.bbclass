@@ -135,6 +135,12 @@ kernel_do_install() {
 	install -d $kerneldir
 
 	#
+	# Store the kernel version in sysroots for module-base.bbclass
+	#
+
+	echo "${KERNEL_VERSION}" > $kerneldir/kernel-abiversion
+
+	#
 	# Copy the entire source tree. In case an external build directory is
 	# used, copy the build directory over first, then copy over the source
 	# dir. This ensures the original Makefiles are used and not the
