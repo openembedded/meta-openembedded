@@ -155,6 +155,7 @@ kernel_do_install() {
 		cp -fR ${S}/* $kerneldir
 	fi
 	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
+	install -m 0644 System.map $kerneldir/System.map-${KERNEL_VERSION}
 
 	#
 	# Clean and remove files not needed for building modules.
