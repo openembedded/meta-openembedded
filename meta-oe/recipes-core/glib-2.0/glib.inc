@@ -2,7 +2,7 @@ SUMMARY = "A general-purpose utility library"
 DESCRIPTION = "GLib is a general-purpose utility library, which provides many useful data types, macros, type conversions, string utilities, file utilities, a main loop abstraction, and so on."
 # pcre is under BSD;
 # docs/reference/COPYING is with a 'public domai'-like license!
-LICENSE = "LGPLv2+ & BSD & public domain"
+LICENSE = "LGPLv2+ & BSD & PD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
                     file://glib/glib.h;startline=4;endline=17;md5=a4332fe58b076f29d07c9c066d2967b6 \
                     file://gmodule/COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
@@ -31,7 +31,8 @@ EXTRA_OECONF = "--disable-debug --enable-included-printf=no"
 EXTRA_OECONF_virtclass-native = ""
 EXTRA_OECONF_linuxstdbase = "--enable-included-printf=no"
 
-FILES_${PN} = "${libdir}/lib*${SOLIBS}"
-FILES_${PN}-dev += "${libdir}/glib-2.0/include ${libdir}/gdbus-codegen/*.py"
+FILES_${PN} = "${libdir}/lib*${SOLIBS} ${sysconfdir}/bash_completion.d ${datadir}/glib-2.0/schemas"
+FILES_${PN}-dev += "${libdir}/glib-2.0/include"
+FILES_${PN}-dbg += "${datadir}/glib-2.0/gdb ${datadir}/gdb"
 
 ARM_INSTRUCTION_SET = "arm"
