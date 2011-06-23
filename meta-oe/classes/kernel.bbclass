@@ -131,7 +131,7 @@ kernel_do_install() {
 	# Support for external module building - create a minimal copy of the
 	# kernel source tree.
 	#
-	kerneldir=${STAGING_KERNEL_DIR}
+	kerneldir=${D}/kernel
 	install -d $kerneldir
 
 	#
