@@ -2,16 +2,22 @@ DESCRIPTION = "GNOME settings daemon"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
-PR = "r1"
+PR = "r2"
 
-DEPENDS = "glib-2.0 gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
+DEPENDS = "glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
 
-inherit gnome
-SRC_URI[archive.md5sum] = "6420706542e8fb959acba7e2a69ee35f"
-SRC_URI[archive.sha256sum] = "0074b3fec3ad6e3ab91a05dc20906b06101ea8bca0cd2caf394a5cc141b05e86"
+inherit gtk-doc gnome
 
-EXTRA_OECONF = "--disable-esd --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR}"
-ASNEEDED = ""
+SRC_URI = "git://git.gnome.org/gnome-settings-daemon;protocol=git;branch=gnome-2-32"
+SRCREV = "0160f6725cfb872e017f3958f108792c3b882872"
+
+S = "${WORKDIR}/git"
+
+EXTRA_OECONF = "--disable-esd \
+                --x-includes=${STAGING_INCDIR} \
+                --x-libraries=${STAGING_LIBDIR} \
+                --enable-polkit \
+               "
 
 do_configure_prepend() {
 	sed -i -e 's:-L$libdir::g' -e 's:-I$includedir::g' configure.ac
