@@ -6,6 +6,8 @@ LICENSE="GPLv2 && LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7c0048536e43642a1f3a724c2909872b \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
+PR = "r3"
+
 DEPENDS = "libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
 # optional: tracker
 
@@ -29,11 +31,10 @@ do_configure() {
 	find -name Makefile -exec sed -i '/\/usr\/bin\/orbit-idl-2/{s:/usr/bin:${STAGING_BINDIR_NATIVE}:;s:/usr/share:${STAGING_DATADIR}:g}' {} \;
 }
 
-PACKAGES += " libnautilus"
-
 RDEPENDS_${PN} = "gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash"
 FILES_${PN} += "${datadir}/icons  /usr/libexec/ "
-FILES_libnautilus = "/usr/lib/*.so*"
 FILES_${PN}-dbg += "/usr/libexec/.debug"
 
+# Don't make nautils3 drag us in
+PRIVATE_LIBS = "libnautilus-extension.so.1"
 
