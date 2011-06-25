@@ -2,6 +2,8 @@ DESCRIPTION = "Gnome session manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
+PR = "r1"
+
 SECTION = "x11/gnome"
 DEPENDS = "gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
 
@@ -19,5 +21,6 @@ do_configure_append() {
 	done	
 }
 
+RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-ck-connector', '', d)}"
 FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${datadir}/gnome ${libdir}/gnome-session/helpers"
 FILES_${PN}-dbg += "${libexecdir}/gnome-session/helpers/.debug"
