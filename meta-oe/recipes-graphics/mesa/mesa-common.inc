@@ -5,7 +5,7 @@ HOMEPAGE = "http://mesa3d.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://docs/license.html;md5=7a3373c039b6b925c427755a4f779c1d"
 
-INC_PR = "r11"
+INC_PR = "r12"
 PE = "2"
 
 PROTO_DEPS = "xf86driproto glproto"
@@ -29,7 +29,6 @@ EXTRA_OECONF = "--enable-glu \
 inherit glx-use-tls
 
 PACKAGES =+ "libegl libegl-dev libegl-dbg libglu libglu-dev libosmesa libosmesa-dev libgl libgl-dev"
-FILES_${PN} += "${libdir}/dri/*.so"
 FILES_libegl = "${libdir}/libEGL.so.* ${libdir}/egl/*.so"
 FILES_libgl = "${libdir}/libGL.so.*"
 FILES_libglu = "${libdir}/libGLU.so.*"
