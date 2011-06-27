@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "readline udev dbus libcap2 libcgroup"
+DEPENDS = "acl readline udev dbus libcap2 libcgroup"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -19,7 +19,7 @@ PR = "r0"
 
 inherit autotools vala
 
-SRCREV = "f9a61ef2c9e3b330d9e2e37977b3dd5758a4b853"
+SRCREV = "cd58752a158ccab3db77d355410b31b457df4cfc"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
