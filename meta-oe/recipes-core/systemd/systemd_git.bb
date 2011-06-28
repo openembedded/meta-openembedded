@@ -23,7 +23,6 @@ SRCREV = "ae556c210942cb6986c6d77b58505b5daa66bbe2"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
-           file://serial-getty@.service \
           "
 
 S = "${WORKDIR}/git"
@@ -38,36 +37,15 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-gtk \
                "
 
-def get_baudrate(bb, d):
-    return bb.data.getVar('SERIAL_CONSOLE', d, 1).split()[0]
-
-def get_console(bb, d):
-    return bb.data.getVar('SERIAL_CONSOLE', d, 1).split()[1]
-
-do_install() {
-	autotools_do_install
-
-	if [ ! ${@get_baudrate(bb, d)} = "" ]; then
-		sed -i -e s/\@BAUDRATE\@/${@get_baudrate(bb, d)}/g ${WORKDIR}/serial-getty@.service
-		install ${WORKDIR}/serial-getty@.service ${D}${base_libdir}/systemd/system/
-		ln -sf ${base_libdir}/systemd/system/serial-getty@.service \
-			${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(bb, d)}.service
-		fi
-}
-
 # ARM doesn't support hugepages, so don't try to mount them
 do_install_append_arm() {
 	rm -f ${D}${base_libdir}/systemd/system/*hugepages.mount
 	rm -f ${D}${base_libdir}/systemd/system/*/*hugepages.mount
 }
 
-PACKAGES =+ "${PN}-gui ${PN}-serialgetty"
+PACKAGES =+ "${PN}-gui"
 
 FILES_${PN}-gui = "${bindir}/systemadm"
-
-# This is a machine specific file
-FILES_${PN}-serialgetty = "${base_libdir}/systemd/system/serial-getty@.service ${sysconfdir}/systemd/system/getty.target.wants/getty@${@get_console(bb, d)}.service"
-PACKAGE_ARCH_${PN}-serialgetty = "${MACHINE_ARCH}"
 
 FILES_${PN} = " ${base_bindir}/* \
                 ${datadir}/dbus-1/services \
@@ -94,7 +72,7 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 # of blacklist support, so use proper modprobe from module-init-tools
 # And pull in the kernel modules mentioned in INSTALL
 RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
-                      ${PN}-serialgetty \
+                      systemd-serialgetty \
                       util-linux-agetty \
                       module-init-tools \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
