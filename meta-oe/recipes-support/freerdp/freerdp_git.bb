@@ -9,7 +9,7 @@ PV = "gitr${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 PR = "${INC_PR}.2"
 
-SRCREV = "d1eef40acc994d85cb78c0a98914edc097c9b44d"
+SRCREV = "b05747b55ccea8d2f2b830f89d3c0eb622d66784"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;protocol=git"
 
 S = "${WORKDIR}/git"
