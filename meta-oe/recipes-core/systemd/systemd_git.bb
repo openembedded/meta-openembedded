@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "acl readline udev dbus libcap2 libcgroup"
+DEPENDS = "acl readline udev dbus libcap libcgroup"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -15,11 +15,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r0"
+PR = "r2"
 
 inherit autotools vala
 
-SRCREV = "cd58752a158ccab3db77d355410b31b457df4cfc"
+SRCREV = "ae556c210942cb6986c6d77b58505b5daa66bbe2"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
@@ -44,13 +44,21 @@ def get_baudrate(bb, d):
 def get_console(bb, d):
     return bb.data.getVar('SERIAL_CONSOLE', d, 1).split()[1]
 
-do_install_append() {
-        if [ ! ${@get_baudrate(bb, d)} = "" ]; then
-          sed -i -e s/\@BAUDRATE\@/${@get_baudrate(bb, d)}/g ${WORKDIR}/serial-getty@.service
-          install ${WORKDIR}/serial-getty@.service ${D}${base_libdir}/systemd/system/
-          ln -sf ${base_libdir}/systemd/system/serial-getty@.service \
-              ${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(bb, d)}.service
-        fi
+do_install() {
+	autotools_do_install
+
+	if [ ! ${@get_baudrate(bb, d)} = "" ]; then
+		sed -i -e s/\@BAUDRATE\@/${@get_baudrate(bb, d)}/g ${WORKDIR}/serial-getty@.service
+		install ${WORKDIR}/serial-getty@.service ${D}${base_libdir}/systemd/system/
+		ln -sf ${base_libdir}/systemd/system/serial-getty@.service \
+			${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(bb, d)}.service
+		fi
+}
+
+# ARM doesn't support hugepages, so don't try to mount them
+do_install_append_arm() {
+	rm -f ${D}${base_libdir}/systemd/system/*hugepages.mount
+	rm -f ${D}${base_libdir}/systemd/system/*/*hugepages.mount
 }
 
 PACKAGES =+ "${PN}-gui ${PN}-serialgetty"
