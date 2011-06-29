@@ -15,11 +15,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r2"
+PR = "r3"
 
 inherit autotools vala
 
-SRCREV = "ae556c210942cb6986c6d77b58505b5daa66bbe2"
+SRCREV = "8585357a0e5e9f4d56e999d7cd1a73e77ae0eb80"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
@@ -36,6 +36,12 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
                  --disable-gtk \
                "
+
+do_install() {
+	autotools_do_install
+	# provided by a seperate recipe
+	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
+}
 
 # ARM doesn't support hugepages, so don't try to mount them
 do_install_append_arm() {

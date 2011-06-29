@@ -32,12 +32,12 @@ do_install() {
 		fi
 }
 
-PACKAGES = "{$PN} ${PN}-dbg ${PN}-dev ${PN}-doc"
+PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-doc"
 
 RRECOMMENDS_${PN} = ""
 RDEPENDS_${PN} = "systemd"
 
 # This is a machine specific file
-FILES_${PN} = "${base_libdir}/systemd/system/serial-getty@.service ${sysconfdir}/systemd/system/getty.target.wants/getty@${@get_console(bb, d)}.service"
+FILES_${PN} = "${base_libdir}/systemd/system/serial-getty@.service ${sysconfdir}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
