@@ -217,7 +217,7 @@ do_menuconfig() {
 	fi
 }
 do_menuconfig[nostamp] = "1"
-addtask menuconfig after do_patch
+addtask menuconfig after do_configure
 
 pkg_postinst_kernel () {
 	cd /${KERNEL_IMAGEDEST}; update-alternatives --install /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
