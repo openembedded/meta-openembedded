@@ -1,0 +1,30 @@
+We get errors like
+
+| /bin/mkdir -p man/ && /home/kraj/work/angstrom/build/tmp-angstrom_2010_x-uclibc/sysroots/x86_64-linux/usr/bin/xsltproc -o man/systemd.1 --nonet --param funcsynopsis.style
+ "'ansi'" http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl man/systemd.xml
+| I/O error : Attempt to load network entity http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+| warning: failed to load external entity "http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"
+| cannot parse http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
+| make[1]: *** [man/systemd.1] Error 4
+| make[1]: Leaving directory `/home/kraj/work/angstrom/build/tmp-angstrom_2010_x-uclibc/work/armv5teb-angstrom-linux-uclibceabi/systemd-git-r4/git'
+| make: *** [all] Error 2
+| + die 'oe_runmake failed'
+| + bbfatal 'oe_runmake failed'
+| + echo 'ERROR: oe_runmake failed'
+| ERROR: oe_runmake failed
+| + exit 1
+
+This patch disables --nonet option to xsltproc
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+--- git/Makefile.am.org	2011-06-30 16:07:21.715269183 -0700
++++ git/Makefile.am	2011-06-30 16:07:26.805269182 -0700
+@@ -1315,7 +1315,6 @@ endif
+ 
+ if HAVE_XSLTPROC
+ XSLTPROC_FLAGS = \
+-	--nonet \
+ 	--param funcsynopsis.style "'ansi'"
+ 
+ XSLTPROC_PROCESS_MAN = \
