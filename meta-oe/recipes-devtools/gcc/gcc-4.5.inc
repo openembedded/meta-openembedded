@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 
 PV = "4.5"
-INC_PR = "r37"
+INC_PR = "r38"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -222,7 +222,8 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
 FORTRAN = ""
 JAVA = ""
 
-S = "${WORKDIR}/${BRANCH}"
+S = "${TMPDIR}/work-shared/gcc-${PV}/${BRANCH}"
+B = "${WORKDIR}/${BRANCH}/build.${HOST_SYS}.${TARGET_SYS}"
 
 #EXTRA_OECONF_BASE = "  --enable-cheaders=c_std \
 #			--enable-libssp \
