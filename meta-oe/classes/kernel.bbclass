@@ -181,6 +181,12 @@ kernel_do_install() {
 	done
 }
 
+PACKAGE_PREPROCESS_FUNCS += "kernel_package_preprocess"
+
+kernel_package_preprocess () {
+	rm -rf ${PKGD}/kernel
+}
+
 sysroot_stage_all_append() {
 	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}/kernel
 }
