@@ -1,0 +1,19 @@
+uclibc does not have mkostemp() so we redefine it to use mkstemp()
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Index: git/src/macro.h
+===================================================================
+--- git.orig/src/macro.h	2011-06-30 10:33:53.000000000 -0700
++++ git/src/macro.h	2011-06-30 15:07:28.285270006 -0700
+@@ -27,6 +27,10 @@
+ #include <sys/uio.h>
+ #include <inttypes.h>
+ 
++#ifdef __UCLIBC__
++/* uclibc does not implement mkostemp GNU extention */
++#define mkostemp(x,y) mkstemp(x)
++#endif
+ #define _printf_attr_(a,b) __attribute__ ((format (printf, a, b)))
+ #define _sentinel_ __attribute__ ((sentinel))
+ #define _noreturn_ __attribute__((noreturn))
