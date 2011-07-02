@@ -6,7 +6,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRCREV = "adb7e044755aa06b12212d05c4acbcccb023d2cd"
-SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git"
+SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git \
+           file://cpufrequtils-nls.patch \
+          "
+
+PR = "r1"
 
 S = "${WORKDIR}/git"
 
