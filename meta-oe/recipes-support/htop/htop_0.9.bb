@@ -9,8 +9,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
 DEPENDS = "ncurses"
 RDEPENDS_${PN} = "ncurses-terminfo"
 
+PR = "r1"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/htop/htop-${PV}.tar.gz \
            file://remove-proc-test.patch"
+
+LDFLAGS_append_libc-uclibc = " -lubacktrace"
 
 inherit autotools
 
