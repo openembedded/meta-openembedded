@@ -92,7 +92,7 @@ do_compile_kernelmodules() {
 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
 		oe_runmake modules  CC="${KERNEL_CC}" LD="${KERNEL_LD}"
 	else
-		oenote "no modules to compile"
+		bbnote "no modules to compile"
 	fi
 }
 addtask compile_kernelmodules after do_compile before do_install
@@ -105,7 +105,7 @@ kernel_do_install() {
 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
 		oe_runmake DEPMOD=echo INSTALL_MOD_PATH="${D}" modules_install
 	else
-		oenote "no modules to install"
+		bbnote "no modules to install"
 	fi
 
 	#
@@ -160,8 +160,7 @@ kernel_do_install() {
 	# we clean the scripts dir while leaving the generated config
 	# and include files.
 	#
-	find $kerneldir -name "*.o" -delete
-	#oe_runmake -C $kerneldir CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean
+	oe_runmake -C $kerneldir CC="${KERNEL_CC}" LD="${KERNEL_LD}" clean
 	make -C $kerneldir _mrproper_scripts
 	find $kerneldir -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
 	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
