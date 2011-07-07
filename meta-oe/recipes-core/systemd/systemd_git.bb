@@ -15,11 +15,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r5"
+PR = "r7"
 
 inherit autotools vala
 
-SRCREV = "8585357a0e5e9f4d56e999d7cd1a73e77ae0eb80"
+SRCREV = "ef3a24de028efe885db1303b4843aba5ffd0f531"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
@@ -43,12 +43,6 @@ do_install() {
 	autotools_do_install
 	# provided by a seperate recipe
 	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
-}
-
-# ARM doesn't support hugepages, so don't try to mount them
-do_install_append_arm() {
-	rm -f ${D}${base_libdir}/systemd/system/*hugepages.mount
-	rm -f ${D}${base_libdir}/systemd/system/*/*hugepages.mount
 }
 
 PACKAGES =+ "${PN}-gui"
@@ -79,9 +73,11 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 # systemd calls 'modprobe -sab --', which busybox doesn't support due to lack 
 # of blacklist support, so use proper modprobe from module-init-tools
 # And pull in the kernel modules mentioned in INSTALL
+# swapon -p is also not supported by busybox
 RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
                       systemd-serialgetty \
                       util-linux-agetty \
+                      util-linux-swaponoff \
                       module-init-tools \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
 "
