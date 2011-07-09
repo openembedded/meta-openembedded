@@ -14,8 +14,9 @@ SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/${BPN}-${PV}.tar.g
            file://0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch \
            file://0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch \
 "
-SRC_URI[md5sum] = "cb8f3cb5ce2c8d7294f73ecb7021fda6"
-SRC_URI[sha256sum] = "6b7622256e43912fb77fd456b0753f407268d450f5990c8f86e7c6f006e30da0"
+
+SRC_URI[md5sum] = "3dd0d9ed05dbf0e5e75d526ebae42e11"
+SRC_URI[sha256sum] = "51f4f26be030e476a1b481a8f76e6695b45d1dce084beae5251236c3bb2a1f89"
 
 NEON = " --disable-arm-neon "
 NEON_armv7a = " "
