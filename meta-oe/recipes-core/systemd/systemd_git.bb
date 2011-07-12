@@ -15,7 +15,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r7"
+PR = "r8"
 
 inherit autotools vala
 
@@ -23,9 +23,13 @@ SRCREV = "ef3a24de028efe885db1303b4843aba5ffd0f531"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
-           file://paper-over-mkostemp.patch \
            file://use-nonet-for-docbook.patch \
+           ${UCLIBCPATCHES} \
           "
+UCLIBCPATCHES = ""
+UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
+                             file://format-replace-m-uclibc.patch \
+                            "
 
 S = "${WORKDIR}/git"
 
