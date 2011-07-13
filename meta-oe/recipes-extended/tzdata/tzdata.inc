@@ -1,6 +1,5 @@
 DESCRIPTION = "Timezone data"
 SECTION = "base"
-PRIORITY = "optional"
 DEPENDS = "tzcode-native"
 
 INC_PR = "r10"

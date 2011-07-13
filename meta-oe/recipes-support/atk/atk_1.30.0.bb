@@ -1,6 +1,5 @@
 DESCRIPTION = "An accessibility toolkit for GNOME."
 SECTION = "x11/libs"
-PRIORITY = "optional"
 LICENSE = "LGPLv2 & LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
                     file://atk/atkutil.c;endline=20;md5=db21b0bdbef9da4dc6eb122debc9f9bc \

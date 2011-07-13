@@ -4,7 +4,6 @@ HOMEPAGE = "ftp://ftp.porcupine.org/pub/security/index.html"
 LICENSE = "tcp-wrappers"
 LIC_FILES_CHKSUM = "file://DISCLAIMER;md5=071bd69cb78b18888ea5e3da5c3127fa"
 SECTION = "console/network"
-PRIORITY = "optional"
 PR ="r6"
 
 SRC_URI = "ftp://ftp.porcupine.org/pub/security/tcp_wrappers_${PV}.tar.gz \

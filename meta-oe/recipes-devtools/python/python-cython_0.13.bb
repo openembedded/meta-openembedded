@@ -2,7 +2,6 @@ DESCRIPTION = "Cython is a language specially designed for writing Python extens
 It's designed to bridge the gap between the nice, high-level, easy-to-use world of Python \
 and the messy, low-level world of C."
 SECTION = "devel/python"
-PRIORITY = "optional"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
 SRCNAME = "Cython"

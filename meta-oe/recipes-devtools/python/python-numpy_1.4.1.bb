@@ -1,6 +1,5 @@
 DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
 SECTION = "devel/python"
-PRIORITY = "optional"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
 

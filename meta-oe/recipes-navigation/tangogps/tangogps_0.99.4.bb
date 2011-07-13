@@ -4,7 +4,6 @@ HOMEPAGE = "http://tangogps.org/"
 SECTION = "x11/applications"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-PRIORITY = "optional"
 DEPENDS = "curl gtk+ gconf sqlite3 libexif libsoup-2.4"
 
 SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz"

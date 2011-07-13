@@ -2,7 +2,6 @@ DESCRIPTION = "Simple tool for input event debugging."
 HOMEPAGE = "http://people.freedesktop.org/~whot/evtest/"
 AUTHOR = "Vojtech Pavlik <vojtech@suse.cz>"
 SECTION = "console/utils"
-PRIORITY = "optional"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 

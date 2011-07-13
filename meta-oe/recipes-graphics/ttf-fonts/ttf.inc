@@ -1,6 +1,5 @@
 DESCRIPTION ?= "TrueType font package ${PN}"
 SECTION = "fonts"
-PRIORITY = "optional"
 # don't use RRECOMMENDS_${PN} here because sometimes each font is packaged to separate package and each one needs this dep to call update-fonts
 RRECOMMENDS += "font-update-common"
 

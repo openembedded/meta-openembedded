@@ -1,7 +1,6 @@
 DESCRIPTION = "nl80211 based CLI configuration utility for wireless devices"
 HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/iw"
 SECTION = "base"
-PRIORITY = "optional"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=878618a5c4af25e9b93ef0be1a93f774"
 

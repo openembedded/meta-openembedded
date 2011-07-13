@@ -3,7 +3,6 @@ HOMEPAGE = "http://www.tcpdump.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1d4b0366557951c84a94fabe3529f867"
 SECTION = "console/network"
-PRIORITY = "optional"
 DEPENDS = "libpcap"
 PR = "r1"
 

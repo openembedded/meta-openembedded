@@ -1,7 +1,6 @@
 DESCRIPTION = "An Embeddable SQL Database Engine"
 HOMEPAGE = "http://www.sqlite.org/"
 SECTION = "libs"
-PRIORITY = "optional"
 DEPENDS = "readline ncurses"
 LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=10;md5=e98469a8efa024a38ad5b2e4b92f4a96"

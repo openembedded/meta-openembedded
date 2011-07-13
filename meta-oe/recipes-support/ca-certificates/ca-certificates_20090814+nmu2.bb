@@ -1,7 +1,6 @@
 DESCRIPTION = "Common CA certificates"
 HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
 SECTION = "misc"
-PRIORITY = "optional"
 LICENSE = "GPL"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
 

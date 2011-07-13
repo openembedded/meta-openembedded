@@ -8,7 +8,6 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
 
-PRIORITY = "optional"
 SECTION = "base/shell"
 
 inherit gitpkgv

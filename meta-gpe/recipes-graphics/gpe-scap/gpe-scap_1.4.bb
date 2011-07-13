@@ -1,6 +1,5 @@
 DESCRIPTION = "A GPE application that allows you to take screenshots."
 SECTION = "gpe"
-PRIORITY = "optional"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"

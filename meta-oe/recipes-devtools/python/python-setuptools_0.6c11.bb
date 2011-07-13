@@ -1,7 +1,6 @@
 DESCRIPTION = "Download, build, install, upgrade, and uninstall Python packages"
 HOMEPAGE = "http://cheeseshop.python.org/pypi/setuptools"
 SECTION = "devel/python"
-PRIORITY = "optional"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://setup.py;beginline=23;endline=23;md5=8a314270dd7a8dbca741775415f1716e"
 

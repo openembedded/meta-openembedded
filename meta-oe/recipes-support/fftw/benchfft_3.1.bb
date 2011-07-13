@@ -1,6 +1,5 @@
 DESCRIPTION = "FFTW benchmarks"
 SECTION = "libs"
-PRIORITY = "optional"
 LICENSE = "GPLv2"
 
 # single precision fftw is called fftwf 

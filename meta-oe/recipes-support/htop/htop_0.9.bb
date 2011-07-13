@@ -1,7 +1,6 @@
 DESCRIPTION = "htop process monitor"
 HOMEPAGE = "http://htop.sf.net"
 SECTION = "console/utils"
-PRIORITY = "optional"
 LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"

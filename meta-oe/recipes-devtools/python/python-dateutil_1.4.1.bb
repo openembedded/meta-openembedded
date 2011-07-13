@@ -1,7 +1,6 @@
 DESCRIPTION = "Extensions to the standard Python date/time support"
 HOMEPAGE = "http://labix.org/python-dateutil"
 SECTION = "devel/python"
-PRIORITY = "optional"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d82268718c68bda0b091006ec6e583c6"
 SRCNAME = "${PN}"

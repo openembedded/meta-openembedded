@@ -1,6 +1,5 @@
 DESCRIPTION = "Python package for parsing and generating vCard and vCalendar files" 
 SECTION = "devel/python" 
-PRIORITY = "optional" 
 LICENSE = "Apache License V2.0" 
 LIC_FILES_CHKSUM = "file://LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 HOMEPAGE = "http://vobject.skyhouseconsulting.com/" 

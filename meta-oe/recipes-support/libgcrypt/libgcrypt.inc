@@ -2,7 +2,6 @@ DESCRIPTION = "A general purpose cryptographic library based on the code from Gn
 HOMEPAGE = "http://directory.fsf.org/project/libgcrypt/"
 BUGTRACKER = "https://bugs.g10code.com/gnupg/index"
 SECTION = "libs"
-PRIORITY = "optional"
 
 BBCLASSEXTEND = "native"
 

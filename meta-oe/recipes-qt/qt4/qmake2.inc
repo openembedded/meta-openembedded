@@ -1,5 +1,4 @@
 DESCRIPTION = "TrollTech Makefile Generator"
-PRIORITY = "optional"
 HOMEPAGE = "http://www.trolltech.com"
 SECTION = "devel"
 LICENSE = "LGPLv2.1 | GPLv3"

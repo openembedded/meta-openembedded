@@ -1,6 +1,5 @@
 DESCRIPTION = "C and C++ INI Library"
 HOMEPAGE = "http://code.google.com/p/inih/"
-PRIORITY = "optional"
 PV = "0.0+gitr${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 LICENSE = "BSD"

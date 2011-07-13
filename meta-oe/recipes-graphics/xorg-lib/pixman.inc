@@ -1,5 +1,4 @@
 SECTION = "libs"
-PRIORITY = "optional"
 DESCRIPTION = "Low-level pixel manipulation library."
 LICENSE = "X11"
 

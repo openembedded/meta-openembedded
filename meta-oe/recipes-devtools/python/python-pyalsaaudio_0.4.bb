@@ -1,7 +1,6 @@
 DESCRIPTION = "Support for the Linux 2.6.x ALSA Sound System"
 SECTION = "devel/python"
 DEPENDS = "alsa-lib"
-PRIORITY = "optional"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
 SRCNAME = "pyalsaaudio"

@@ -1,6 +1,5 @@
 DESCRIPTION = "Simple DirectMedia Layer (DirectFB and Framebuffer support)"
 SECTION = "libs"
-PRIORITY = "optional"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
 

@@ -1,5 +1,4 @@
 DESCRIPTION = "flite - the festival light speech synthesizer"
-PRIORITY = "optional"
 HOMEPAGE = "http://www.speech.cs.cmu.edu/flite/"
 SECTION = "console/utils"
 LICENSE = "flite"
