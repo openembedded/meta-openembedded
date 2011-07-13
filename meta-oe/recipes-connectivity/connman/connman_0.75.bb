@@ -1,7 +1,5 @@
 require connman.inc
 
-PR = "r1"
-
 EXTRA_OECONF += "\
   --disable-gtk-doc \
   --enable-debug \
@@ -25,5 +23,10 @@ SRC_URI  = "\
   file://connman \
 "
 
-SRC_URI[md5sum] = "3feb49e7c6dea22de83647cb1790a1b3"
-SRC_URI[sha256sum] = "a283b590bd2ed5c1cd08630cbc7880d9906a3ca763cad121a66c9a5ddfc2882d"
+SRC_URI[md5sum] = "9973cb89a11fff6b51fc85b51c13b711"
+SRC_URI[sha256sum] = "b15361237f7ec8092fb0e55d4585550ab35491485edaf10ddd032d6e36299db7"
+
+# alg-test doesn't build, so disable that
+do_configure_prepend() {
+	sed -i 's:tools/alg-test ::g' Makefile.am
+}

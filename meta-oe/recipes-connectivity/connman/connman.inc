@@ -43,10 +43,15 @@ do_compile_append() {
 do_install_append() {
 	install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/connman ${D}${sysconfdir}/init.d/connman
+
+	install -d ${D}${bindir}
+	install -m 0755 ${S}/tools/*-test ${D}${bindir}
+	install -m 0755 ${S}/tools/wispr ${D}${bindir}
+	install -m 0755 ${S}/tools/wifi-scan ${D}${bindir}
 }
 
 python populate_packages_prepend() {
-	depmap = dict( pppd="ppp", udhcp="busybox connman-scripts", dhclient="dhcp-client", wifi="wpa-supplicant", resolvconf="resolvconf", bluetooth="bluez4", ntpd="ntp" )
+	depmap = dict( pppd="ppp", udhcp="busybox connman-scripts", dhclient="dhcp-client", wifi="wpa-supplicant", resolvconf="resolvconf", bluetooth="bluez4", ntpd="ntp", ofono="ofono" )
 	packages = []
 	hook = lambda file,pkg,b,c,d:packages.append((file,pkg))
 	plugin_dir = bb.data.expand('${libdir}/connman/plugins/', d)
@@ -62,8 +67,10 @@ python populate_packages_prepend() {
 
 PACKAGES_DYNAMIC = "${PN}-plugin-*"
 
-PACKAGES += "${PN}-scripts ${PN}-test-utils"
+PACKAGES =+ "${PN}-scripts ${PN}-tools ${PN}-tests"
 
+FILES_${PN}-tools = "${bindir}/wispr ${bindir}/wifi-scan"
+FILES_${PN{-tests = "${bindir}/*-test"
 FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
             ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*.so* ${datadir}/${PN} \
@@ -96,8 +103,6 @@ pkg_postrm_connman-systemd() {
 
 # Needed when using DNS proxy feature
 RRECOMMENDS_${PN} += "dnsmasq-dbus"
-
-FILES_${PN}-test-utils += "${libdir}/connman/test/*"
 
 FILES_${PN}-scripts += "${libdir}/connman/scripts"
 FILES_${PN}-dbg += "${libdir}/connman/*/.debug"
