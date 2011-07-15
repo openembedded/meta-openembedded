@@ -7,6 +7,8 @@ DEPENDS += "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}depmod virtual/$
 INHIBIT_DEFAULT_DEPS = "1"
 
 KERNEL_IMAGETYPE ?= "zImage"
+INITRAMFS_IMAGE ?= ""
+INITRAMFS_TASK ?= ""
 
 python __anonymous () {
     kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
@@ -16,7 +18,7 @@ python __anonymous () {
     	bb.data.setVar("DEPENDS", depends, d)
 
     image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
-    if image != '' and image is not None:
+    if image:
         bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
 
     machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
@@ -24,9 +26,6 @@ python __anonymous () {
     if machine_kernel_pr:
        bb.data.setVar('PR', machine_kernel_pr, d)
 }
-
-INITRAMFS_IMAGE ?= ""
-INITRAMFS_TASK ?= ""
 
 inherit kernel-arch deploy
 
@@ -194,7 +193,7 @@ kernel_do_configure() {
 	yes '' | oe_runmake oldconfig
 
 	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
-		for img in cpio.gz cpio.lzo cpio.lzma; do
+		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz ; do
 		if [ -e "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" ]; then
 			cp "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" initramfs.$img
 		fi
@@ -202,7 +201,7 @@ kernel_do_configure() {
 	fi
 }
 
-kernel_do_configure[depends] += "${INITRAMFS_TASK}"
+do_configure[depends] += "${INITRAMFS_TASK}"
 
 do_menuconfig() {
         export DISPLAY='${DISPLAY}'
