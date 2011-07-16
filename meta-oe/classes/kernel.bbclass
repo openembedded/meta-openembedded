@@ -19,12 +19,12 @@ python __anonymous () {
 
     image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
     if image:
-        bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
+    	bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
 
     machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
 
     if machine_kernel_pr:
-       bb.data.setVar('PR', machine_kernel_pr, d)
+    	bb.data.setVar('PR', machine_kernel_pr, d)
 }
 
 inherit kernel-arch deploy
@@ -189,11 +189,10 @@ kernel_do_configure() {
 	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
 		cp "${WORKDIR}/defconfig" "${B}/.config"
 	fi
-
-	yes '' | oe_runmake oldconfig
+        yes '' | oe_runmake oldconfig
 
 	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
-		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz ; do
+		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz; do
 		if [ -e "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" ]; then
 			cp "${DEPLOY_DIR_IMAGE}/${INITRAMFS_IMAGE}-${MACHINE}.$img" initramfs.$img
 		fi
