@@ -8,7 +8,7 @@ PV = "1.1.1+gitr${SRCPV}"
 PE = "1"
 PR = "r1"
 
-inherit autotools
+inherit autotools perlnative
 
 SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;protocol=git;branch=master"
 S = "${WORKDIR}/git"
