@@ -21,9 +21,8 @@ SRC_URI = "\
   file://fix-dfutool-usb-declaration-mismatch.patch \
   file://bluetooth.conf \
 "
-SRC_URI[md5sum] = "c0f6450a39809996306005f5b85c6d3d"
-SRC_URI[sha256sum] = "ad370dbc8c4d37a0cc3d5078d62542f0e53a33f5b2df849cf7601ef25c5e6087"
-
+SRC_URI[md5sum] = "341294b2849a04a4afff5c96bfbf30b2"
+SRC_URI[sha256sum] = "d6ea9de410fc2bcd2620d709c2202893b218e2e6a55c3c0ce6bebd27fa4120f6"
 
 S = "${WORKDIR}/bluez-${PV}"
 
@@ -57,7 +56,7 @@ PACKAGES =+ "gst-plugin-bluez libasound-module-bluez"
 
 FILES_gst-plugin-bluez = "${libdir}/gstreamer-0.10/lib*.so"
 FILES_libasound-module-bluez = "${libdir}/alsa-lib/lib*.so ${datadir}/alsa"
-FILES_${PN} += "${libdir}/bluetooth/plugins/*.so ${base_libdir}/udev/"
+FILES_${PN} += "${libdir}/bluetooth/plugins/*.so ${base_libdir}/udev/ ${base_libdir}/systemd/"
 FILES_${PN}-dev += "\
   ${libdir}/bluetooth/plugins/*.la \
   ${libdir}/alsa-lib/*.la \
