@@ -19,12 +19,11 @@ EXTRA_OECONF += "\
 
 SRC_URI  = "\
   http://www.kernel.org/pub/linux/network/connman/connman-${PV}.tar.gz \
-  file://link-against-libnl2.patch \
   file://connman \
 "
 
-SRC_URI[md5sum] = "9973cb89a11fff6b51fc85b51c13b711"
-SRC_URI[sha256sum] = "b15361237f7ec8092fb0e55d4585550ab35491485edaf10ddd032d6e36299db7"
+SRC_URI[md5sum] = "59b4cfd9fa4f736f7a2d88ee0c758fe9"
+SRC_URI[sha256sum] = "bf58fa72454bb63033da8f847a4709dbdfe64c000056a93a7504240cb31c1321"
 
 # alg-test doesn't build, so disable that
 do_configure_prepend() {

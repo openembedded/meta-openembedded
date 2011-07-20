@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
                     file://src/main.c;beginline=1;endline=20;md5=4b55b550fa6b33cc2055ef30dd262b3e"
 
 # we need to define the depends here, the dynamic stuff is too late
-DEPENDS  = "libnl wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4 iptables gnutls ntp"
+DEPENDS  = "wpa-supplicant dbus glib-2.0 ppp busybox dhcp resolvconf bluez4 iptables gnutls ntp"
 
 EXTRA_OECONF += "\
     ac_cv_path_WPASUPPLICANT=/usr/sbin/wpa_supplicant \
@@ -47,7 +47,6 @@ do_install_append() {
 	install -d ${D}${bindir}
 	install -m 0755 ${S}/tools/*-test ${D}${bindir}
 	install -m 0755 ${S}/tools/wispr ${D}${bindir}
-	install -m 0755 ${S}/tools/wifi-scan ${D}${bindir}
 }
 
 python populate_packages_prepend() {
@@ -69,7 +68,7 @@ PACKAGES_DYNAMIC = "${PN}-plugin-*"
 
 PACKAGES =+ "${PN}-scripts ${PN}-tools ${PN}-tests"
 
-FILES_${PN}-tools = "${bindir}/wispr ${bindir}/wifi-scan"
+FILES_${PN}-tools = "${bindir}/wispr"
 FILES_${PN{-tests = "${bindir}/*-test"
 FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
