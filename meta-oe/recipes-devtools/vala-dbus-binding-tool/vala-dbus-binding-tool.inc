@@ -11,6 +11,6 @@ export XDG_DATA_DIRS = "${STAGING_DATADIR}"
 
 SRC_URI = "http://downloads.freesmartphone.org/sources/vala-dbus-binding-tool-${PV}.tar.bz2;name=archive"
 
-inherit autotools
+inherit autotools perlnative
 
 BBCLASSEXTEND = "native"
