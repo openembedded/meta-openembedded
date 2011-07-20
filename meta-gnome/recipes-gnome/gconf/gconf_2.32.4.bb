@@ -20,7 +20,7 @@ SRC_URI[archive.sha256sum] = "46030c09422603dbb72f13b5dd592dcc01fbc13562b9e94daf
 EXTRA_OECONF = " --without-openldap --disable-gtk-doc --enable-gtk --with-gtk=2.0 --enable-gsettings-backend=yes POLKIT_POLICY_FILE_VALIDATE=true"
 ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
 
-inherit autotools gettext
+inherit autotools gettext perlnative
 
 EXTRA_OEMAKE = 'ORBIT_IDL="${ORBIT_IDL_SRC}"'
 
