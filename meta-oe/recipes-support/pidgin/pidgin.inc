@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus"
 INC_PR = "r0"
 
-inherit autotools gettext pkgconfig gconf
+inherit autotools gettext pkgconfig gconf perlnative
 
 EXTRA_OECONF = " \
 		--enable-vv \
