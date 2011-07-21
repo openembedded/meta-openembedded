@@ -1,0 +1,37 @@
+curl/types.h was removed in 
+https://github.com/bagder/curl/commit/2ef7a28a71f819343afefa721e5497119fb2cee0#include/curl
+and is not available in curl-7.21.8 and newer
+
+diff -uNr tangogps-0.99.4.orig//src/util.h tangogps-0.99.4/src/util.h
+--- tangogps-0.99.4.orig//src/util.h	2009-11-06 13:16:05.000000000 +0100
++++ tangogps-0.99.4/src/util.h	2011-07-21 14:36:59.208792227 +0200
+@@ -2,7 +2,6 @@
+ #include <gtk/gtk.h>
+ 
+ #include <curl/curl.h>
+-#include <curl/types.h>
+ #include <curl/easy.h>
+ int
+ sql_execute(char *db_name, char *sql, int (*cb_func)(void*,int,char**,char**));
+diff -uNr tangogps-0.99.4.orig//src/friends.c tangogps-0.99.4/src/friends.c
+--- tangogps-0.99.4.orig//src/friends.c	2010-06-25 11:40:04.000000000 +0200
++++ tangogps-0.99.4/src/friends.c	2011-07-21 14:39:14.711789408 +0200
+@@ -17,7 +17,6 @@
+ #include <gtk/gtk.h>
+ 
+ #include <curl/curl.h>
+-#include <curl/types.h>
+ #include <curl/easy.h>
+ 
+ 
+diff -uNr tangogps-0.99.4.orig//src/tile_management.c tangogps-0.99.4/src/tile_management.c
+--- tangogps-0.99.4.orig//src/tile_management.c	2010-06-25 11:40:05.000000000 +0200
++++ tangogps-0.99.4/src/tile_management.c	2011-07-21 14:38:45.030790011 +0200
+@@ -5,7 +5,6 @@
+ #include <glib/gprintf.h>
+ #include <string.h>
+ #include <curl/curl.h>
+-#include <curl/types.h> 
+ #include <curl/easy.h> 
+ #include <math.h>
+ #include "globals.h"
