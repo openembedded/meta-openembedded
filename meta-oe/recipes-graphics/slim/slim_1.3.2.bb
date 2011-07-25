@@ -3,6 +3,8 @@ HOMEPAGE="http://slim.berlios.de"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
+PR = "r1"
+
 DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SRC_URI = " \
@@ -47,12 +49,16 @@ do_install() {
   install -d ${D}${sysconfdir}/pam.d/
   install -m 0644 ${WORKDIR}/slim.pamd ${D}${sysconfdir}/pam.d/slim
 
+  install -d ${D}${base_libdir}/systemd/system/
+  install -m 0644 ${WORKDIR}/*.service ${D}${base_libdir}/systemd/system/
+
   echo 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
   echo 'sessionstop_cmd     /usr/bin/sessreg -d -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
 }
 
 
-RDEPENDS_${PN} = "perl xauth freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam-meta', '', d)}"
+RDEPENDS_${PN} = "perl xauth freetype sessreg "
+FILES_${PN} += "${base_libdir}/systemd/system/"
 
 pkg_postinst_${PN} () {
 if test "x$D" != "x"; then
