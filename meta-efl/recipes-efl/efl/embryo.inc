@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6aa45e26c1ed178da910fd76b306a875"
 BBCLASSEXTEND = "native"
 INC_PR = "r1"
 
+DEPENDS += "eina"
+
 # Some upgrade path tweaking
 AUTO_LIBNAME_PKGS = ""
 
