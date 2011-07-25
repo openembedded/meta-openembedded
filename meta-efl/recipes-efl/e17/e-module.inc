@@ -7,7 +7,7 @@ INC_PR = "r5"
 
 SRCNAME = "E-MODULES-EXTRA/${PN}"
 
-inherit e
+inherit e gettext
 SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
