@@ -8,7 +8,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r1"
+INC_PR = "r2"
 FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
 
 python populate_packages_prepend () {
@@ -158,6 +158,7 @@ EXTRA_OECONF = "${EVAS_OECONF} \
                 --disable-convert-32-rgb-rot-180 \
                 --enable-convert-32-rgb-rot-270 \
                 --enable-gl-x11 \
+                --enable-gl-xlib \
                 --enable-gl-flavor-gles \
                 --enable-gles-variety-${GLES} \
 "
@@ -165,6 +166,7 @@ EXTRA_OECONF_virtclass-native = "${EVAS_OECONF} \
                 --disable-software-x11 \
                 --disable-software-16-x11 \
                 --disable-gl-x11 \
+                --disable-gl-xlib \
                 --disable-xrender-x11 \
                 --disable-image-loader-gif \
                 --disable-image-loader-svg \
