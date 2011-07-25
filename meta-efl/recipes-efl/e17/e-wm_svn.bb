@@ -1,5 +1,5 @@
 DESCRIPTION = "The Enlightenment Window Manager Version 17"
-DEPENDS = "eet evas ecore edje efreet edbus eeze"
+DEPENDS = "eet evas eina ecore edje efreet edbus eeze"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f523ab5986cc79b52a90d2ac3d5454a2"
 SRCNAME = "e"
