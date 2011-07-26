@@ -18,9 +18,9 @@ do_configure_append() {
 export CURL_CONFIG = "${STAGING_BINDIR_CROSS}/curl-config"
 export FREETYPE_CONFIG = "${STAGING_BINDIR_CROSS}/freetype-config"
 
-# This construction is stupid, someone with more E knowledge should change it to =+ or something
-# And it's in efl.bbclass as well....
-PACKAGES = "${PN}-dbg ${PN}-themes ${PN} ${PN}-dev ${PN}-doc ${PN}-lib ${PN}-static"
+PACKAGES =+ "${PN}-themes"
+PACKAGES += "${PN}-lib"
+
 FILES_${PN}-lib = "${libdir}/lib*.so.*"
 FILES_${PN}-themes = "${datadir}/${PN}/themes ${datadir}/${PN}/data ${datadir}/${PN}/fonts ${datadir}/${PN}/pointers ${datadir}/${PN}/images ${datadir}/${PN}/users ${datadir}/${PN}/images ${datadir}/${PN}/styles"
 FILES_${PN}-dev += "${includedir} ${libdir}/lib*.so"

@@ -19,8 +19,8 @@ do_install_prepend () {
 	done
 }
 
-# This construction is stupid, someone with more E knowledge should change it to =+ or something
-PACKAGES = "${PN}-dbg ${PN} ${PN}-themes ${PN}-dev ${PN}-doc ${PN}-tests ${PN}-static"
+PACKAGES =+ "${PN}-themes"
+PACKAGES += "${PN}-tests"
 
 FILES_${PN} = "${libdir}/*.so.* \
                ${libdir}/edje/modules/${PN}/*/module.so \
