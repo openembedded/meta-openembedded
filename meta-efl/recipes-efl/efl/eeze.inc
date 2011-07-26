@@ -6,7 +6,9 @@ DEPENDS = "ecore eet udev"
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r0"
+INC_PR = "r1"
 
 # Some upgrade path tweaking
 AUTO_LIBNAME_PKGS = ""
+
+FILES_${PN} += "${libdir}/enlightenment/utils/eeze_scanner"
