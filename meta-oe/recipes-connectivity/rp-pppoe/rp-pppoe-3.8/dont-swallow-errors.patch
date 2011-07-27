@@ -1,0 +1,11 @@
+--- a/src/configure.in.org	2008-01-14 21:08:38.000000000 +0200
++++ a/src/configure.in	2008-01-14 21:20:09.000000000 +0200
+@@ -208,7 +208,7 @@
+ 	return 2;
+     }
+ }], rpppoe_cv_pack_bitfields=normal, rpppoe_cv_pack_bitfields=rev,
+-$ECHO "no defaults for cross-compiling"; exit 0)
++$ECHO "no defaults for cross-compiling"; exit 1)
+ ])
+ 
+ if test "$rpppoe_cv_pack_bitfields" = "rev" ; then
