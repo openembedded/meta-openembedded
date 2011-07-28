@@ -18,11 +18,10 @@ PR = "r0"
 
 inherit autotools vala
 
-SRCREV = "501c92c432c7bef452a2714c29519bdd45281a72"
+SRCREV = "85f19d825e7504676f3a80c78c1d9a7ec35a3b3f"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
-           file://use-nonet-for-docbook.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
@@ -42,6 +41,11 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-gtk \
                "
 
+do_configure_prepend() {
+	# avoid network access
+	sed -i -e /nonet/d Makefile.am 
+}
+
 do_install() {
 	autotools_do_install
 	# provided by a seperate recipe
@@ -52,7 +56,7 @@ PACKAGES =+ "${PN}-gui"
 
 FILES_${PN}-gui = "${bindir}/systemadm"
 
-FILES_${PN} = " ${base_bindir}/* \
+FILES_${PN} += " ${base_bindir}/* \
                 ${datadir}/dbus-1/services \
                 ${datadir}/dbus-1/system-services \
                 ${datadir}/polkit-1 \
@@ -68,7 +72,8 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${libdir}/systemd \
                "
 
-FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug"
+FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug ${base_libdir}/security/.debug/"
+FILES_${PN}-dev += "${base_libdir}/security/*.la"
 
 RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 

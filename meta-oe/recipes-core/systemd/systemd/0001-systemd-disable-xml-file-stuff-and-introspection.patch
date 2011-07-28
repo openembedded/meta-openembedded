@@ -1,20 +1,20 @@
-From ef5128ced42e89514c36a6fba837d84f0d8c294d Mon Sep 17 00:00:00 2001
+From afc9b136758f0d9b77367dac73a7415ca33ed091 Mon Sep 17 00:00:00 2001
 From: Koen Kooi <koen@dominion.thruhere.net>
 Date: Mon, 27 Jun 2011 15:44:41 +0200
 Subject: [PATCH] systemd: disable xml file stuff and introspection
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- Makefile.am |   58 ++--------------------------------------------------------
- 1 files changed, 2 insertions(+), 56 deletions(-)
+ Makefile.am |   38 ++------------------------------------
+ 1 files changed, 2 insertions(+), 36 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index bfc1079..f23e060 100644
+index 15349a1..37a51aa 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -216,24 +216,6 @@ dist_dbussystemservice_DATA = \
- dist_udevrules_DATA = \
- 	src/99-systemd.rules
+@@ -246,24 +246,6 @@ nodist_udevrules_DATA = \
+         src/73-seat-late.rules \
+         src/99-systemd.rules
  
 -dbusinterface_DATA = \
 -	org.freedesktop.systemd1.Manager.xml \
@@ -37,7 +37,7 @@ index bfc1079..f23e060 100644
  dist_bashcompletion_DATA = \
  	src/systemctl-bash-completion.sh
  
-@@ -667,17 +649,10 @@ XML_FILES = \
+@@ -739,17 +721,10 @@ XML_FILES = \
  XML_IN_FILES = \
  	${patsubst %.1,%.xml.in,${patsubst %.3,%.xml.in,${patsubst %.5,%.xml.in,${patsubst %.7,%.xml.in,${patsubst %.8,%.xml.in,$(nodist_man_MANS)}}}}}
  
@@ -56,15 +56,15 @@ index bfc1079..f23e060 100644
  
  systemd_SOURCES = \
  	src/main.c
-@@ -1317,7 +1292,6 @@ CLEANFILES = \
+@@ -1504,7 +1479,6 @@ CLEANFILES = \
  	$(nodist_systemunit_DATA) \
  	$(nodist_userunit_DATA) \
  	$(nodist_man_MANS) \
 -	${XML_IN_FILES:.xml.in=.html} \
  	$(pkgconfigdata_DATA) \
- 	src/org.freedesktop.systemd1.policy
- 
-@@ -1379,41 +1353,13 @@ man/%.8: man/%.xml
+ 	$(pkgconfiglib_DATA) \
+ 	$(nodist_polkitpolicy_DATA) \
+@@ -1569,17 +1543,9 @@ man/%.8: man/%.xml
  man/%.8.in: man/%.xml.in
  	$(XSLTPROC_PROCESS_MAN_IN)
  
@@ -83,30 +83,6 @@ index bfc1079..f23e060 100644
  endif
  
  DBUS_PREPROCESS = $(CPP) -P $(DBUS_CFLAGS) -imacros dbus/dbus-protocol.h
- 
--org.freedesktop.systemd1.%.xml: systemd
--	$(AM_V_GEN)$(OBJCOPY) -O binary -j introspect.$* $< $@.tmp && \
--		$(STRINGS) $@.tmp | $(AWK) -f $(srcdir)/introspect.awk | \
--		$(DBUS_PREPROCESS) -o $@ - && rm $@.tmp
--
--org.freedesktop.hostname1.xml: systemd-hostnamed
--	$(AM_V_GEN)$(OBJCOPY) -O binary -j introspect.hostname1 $< $@.tmp && \
--		$(STRINGS) $@.tmp | $(AWK) -f $(srcdir)/introspect.awk | \
--		$(DBUS_PREPROCESS) -o $@ - && rm $@.tmp
--
--org.freedesktop.locale1.xml: systemd-localed
--	$(AM_V_GEN)$(OBJCOPY) -O binary -j introspect.locale1 $< $@.tmp && \
--		$(STRINGS) $@.tmp | $(AWK) -f $(srcdir)/introspect.awk | \
--		$(DBUS_PREPROCESS) -o $@ - && rm $@.tmp
--
--org.freedesktop.timedate1.xml: systemd-timedated
--	$(AM_V_GEN)$(OBJCOPY) -O binary -j introspect.timedate1 $< $@.tmp && \
--		$(STRINGS) $@.tmp | $(AWK) -f $(srcdir)/introspect.awk | \
--		$(DBUS_PREPROCESS) -o $@ - && rm $@.tmp
--
- CLEANFILES += \
- 	$(dbusinterface_DATA)
- 
 -- 
 1.6.6.1
 
