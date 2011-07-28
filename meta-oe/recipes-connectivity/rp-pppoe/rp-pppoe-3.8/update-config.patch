@@ -6,6 +6,8 @@ The path for the plugin is wrong, it's now part of ppp and is in a
 ppp's plugin lib directory. If no path is specified then that's where
 ppp looks, so that's what we do here.
 
+Upstream-Status: Inappropriate [configuration]
+
 Index: rp-pppoe-3.8/configs/pppoe.conf
 ===================================================================
 --- rp-pppoe-3.8.orig/configs/pppoe.conf	2006-04-03 00:29:41.000000000 +1000

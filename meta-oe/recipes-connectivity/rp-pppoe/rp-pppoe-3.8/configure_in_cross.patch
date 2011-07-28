@@ -1,3 +1,9 @@
+Update the configure script to cross-compiling with OE.  This hard-codes
+a few target paths, reworks a few tests to be more friendly for cross
+and drops other tests.
+
+Upstream-Status: Inappropriate [build system specific changes]
+
 Index: src/configure.in
 ===================================================================
 --- rp-pppoe-3.8.orig/src/configure.in	2006-04-03 00:29:42.000000000 +1000

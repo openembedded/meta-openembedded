@@ -1,12 +1,12 @@
 DESCRIPTION = "A user-mode PPPoE client and server suite for Linux"
-HOMEPAGE = "http://www.roaringpenguin.com/en/penguin/openSourceProducts/rpPppoe"
+HOMEPAGE = "http://www.roaringpenguin.com/products/pppoe"
 SECTION = "console/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
 RDEPENDS_${PN} = "ppp"
 RDEPENDS_${PN}-server = "${PN}"
 RRECOMMENDS_${PN} = "ppp-oe"
-PR = "r7"
+PR = "r8"
 
 SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
            file://top-autoconf.patch \
@@ -14,7 +14,7 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
            file://pppoe-src-restrictions.patch \
            file://update-config.patch \
            file://dont-swallow-errors.patch \
-	   file://use-ldflags.patch \
+           file://use-ldflags.patch \
            file://pppoe-server.default \
            file://pppoe-server.init"
 

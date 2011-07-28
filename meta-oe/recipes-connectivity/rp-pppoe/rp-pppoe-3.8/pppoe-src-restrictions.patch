@@ -3,6 +3,8 @@ Relax restrictions on the PPPoE src address, as per debian bug
 
   http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=293811
 
+Upstream-Status: Inappropriate [Backport from Debian]
+
 --- rp-pppoe-3.8.orig/src/discovery.c
 +++ rp-pppoe-3.8/src/discovery.c
 @@ -376,8 +376,8 @@
