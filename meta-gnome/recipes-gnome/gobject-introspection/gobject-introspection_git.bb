@@ -1,6 +1,6 @@
 # NOTE: WIP! This recipe does not cross-compile atm., only -native
 DEPENDS = "glib-2.0 libffi python-native gobject-introspection-native"
-DEPENDS_virtclass-native = "libffi-native python-native bison-native flex-native"
+DEPENDS_virtclass-native = "glib-2.0-native libffi-native python-native bison-native flex-native"
 BBCLASSEXTEND = "native"
 
 SRC_URI = "git://git.gnome.org/gobject-introspection;protocol=git \
