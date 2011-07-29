@@ -18,7 +18,7 @@ PR = "r0"
 
 inherit autotools vala
 
-SRCREV = "85f19d825e7504676f3a80c78c1d9a7ec35a3b3f"
+SRCREV = "2030694fecef41b9c0bfa917df79b92afd5cb380"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
