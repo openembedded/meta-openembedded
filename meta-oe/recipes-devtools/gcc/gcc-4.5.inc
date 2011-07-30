@@ -24,7 +24,7 @@ INC_PR = "r39"
 
 BINV = "${PV}.4"
 
-SRCREV = 175127
+SRCREV = 176640
 BRANCH = "gcc-4_5-branch"
 PR_append = "+svnr${SRCPV}"
 
@@ -192,6 +192,15 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://linaro/gcc-4.5-linaro-r99511.patch \
        file://linaro/gcc-4.5-linaro-r99514.patch \
        file://linaro/gcc-4.5-linaro-r99516.patch \
+       file://linaro/gcc-4.5-linaro-r99519.patch \
+       file://linaro/gcc-4.5-linaro-r99521.patch \
+       file://linaro/gcc-4.5-linaro-r99522.patch \
+       file://linaro/gcc-4.5-linaro-r99523.patch \
+       file://linaro/gcc-4.5-linaro-r99524.patch \
+       file://linaro/gcc-4.5-linaro-r99525.patch \
+       file://linaro/gcc-4.5-linaro-r99528.patch \
+       file://linaro/gcc-4.5-linaro-r99529.patch \
+       file://linaro/linaro-lp815435.patch \
 	\
        file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \

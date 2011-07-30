@@ -1,0 +1,741 @@
+2011-07-21  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	PR middle-end/49736
+	* expr.c (all_zeros_p): Undo bogus part of last change.
+
+2011-07-21  Richard Sandiford  <rdsandiford@googlemail.com>
+
+	Backport from mainline:
+	gcc/cp/
+	2011-07-13  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* typeck2.c (split_nonconstant_init_1): Pass the initializer directly,
+	rather than a pointer to it.  Return true if the whole of the value
+	was initialized by the generated statements.  Use
+	complete_ctor_at_level_p instead of count_type_elements.
+
+	gcc/
+	2011-07-13  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* tree.h (categorize_ctor_elements): Remove comment.  Fix long line.
+	(count_type_elements): Delete.
+	(complete_ctor_at_level_p): Declare.
+	* expr.c (flexible_array_member_p): New function, split out from...
+	(count_type_elements): ...here.  Make static.  Replace allow_flexarr
+	parameter with for_ctor_p.  When for_ctor_p is true, return the
+	number of elements that should appear in the top-level constructor,
+	otherwise return an estimate of the number of scalars.
+	(categorize_ctor_elements): Replace p_must_clear with p_complete.
+	(categorize_ctor_elements_1): Likewise.  Use complete_ctor_at_level_p.
+	(complete_ctor_at_level_p): New function, borrowing union logic
+	from old categorize_ctor_elements_1.
+	(mostly_zeros_p): Return true if the constructor is not complete.
+	(all_zeros_p): Update call to categorize_ctor_elements.
+	* gimplify.c (gimplify_init_constructor): Update call to
+	categorize_ctor_elements.  Don't call count_type_elements.
+	Unconditionally prevent clearing for variable-sized types,
+	otherwise rely on categorize_ctor_elements to detect
+	incomplete initializers.
+
+	gcc/testsuite/
+	2011-07-13  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	* gcc.target/arm/pr48183.c: New test.
+
+=== modified file 'gcc/cp/typeck2.c'
+--- old/gcc/cp/typeck2.c	2010-07-30 14:05:57 +0000
++++ new/gcc/cp/typeck2.c	2011-07-13 13:36:36 +0000
+@@ -546,18 +546,20 @@
+ 
+ 
+ /* The recursive part of split_nonconstant_init.  DEST is an lvalue
+-   expression to which INIT should be assigned.  INIT is a CONSTRUCTOR.  */
++   expression to which INIT should be assigned.  INIT is a CONSTRUCTOR.
++   Return true if the whole of the value was initialized by the
++   generated statements.  */
+ 
+-static void
+-split_nonconstant_init_1 (tree dest, tree *initp)
++static bool
++split_nonconstant_init_1 (tree dest, tree init)
+ {
+   unsigned HOST_WIDE_INT idx;
+-  tree init = *initp;
+   tree field_index, value;
+   tree type = TREE_TYPE (dest);
+   tree inner_type = NULL;
+   bool array_type_p = false;
+-  HOST_WIDE_INT num_type_elements, num_initialized_elements;
++  bool complete_p = true;
++  HOST_WIDE_INT num_split_elts = 0;
+ 
+   switch (TREE_CODE (type))
+     {
+@@ -569,7 +571,6 @@
+     case RECORD_TYPE:
+     case UNION_TYPE:
+     case QUAL_UNION_TYPE:
+-      num_initialized_elements = 0;
+       FOR_EACH_CONSTRUCTOR_ELT (CONSTRUCTOR_ELTS (init), idx,
+ 				field_index, value)
+ 	{
+@@ -592,13 +593,14 @@
+ 		sub = build3 (COMPONENT_REF, inner_type, dest, field_index,
+ 			      NULL_TREE);
+ 
+-	      split_nonconstant_init_1 (sub, &value);
++	      if (!split_nonconstant_init_1 (sub, value))
++		complete_p = false;
++	      num_split_elts++;
+ 	    }
+ 	  else if (!initializer_constant_valid_p (value, inner_type))
+ 	    {
+ 	      tree code;
+ 	      tree sub;
+-	      HOST_WIDE_INT inner_elements;
+ 
+ 	      /* FIXME: Ordered removal is O(1) so the whole function is
+ 		 worst-case quadratic. This could be fixed using an aside
+@@ -622,21 +624,9 @@
+ 	      code = build_stmt (input_location, EXPR_STMT, code);
+ 	      add_stmt (code);
+ 
+-	      inner_elements = count_type_elements (inner_type, true);
+-	      if (inner_elements < 0)
+-		num_initialized_elements = -1;
+-	      else if (num_initialized_elements >= 0)
+-		num_initialized_elements += inner_elements;
+-	      continue;
++	      num_split_elts++;
+ 	    }
+ 	}
+-
+-      num_type_elements = count_type_elements (type, true);
+-      /* If all elements of the initializer are non-constant and
+-	 have been split out, we don't need the empty CONSTRUCTOR.  */
+-      if (num_type_elements > 0
+-	  && num_type_elements == num_initialized_elements)
+-	*initp = NULL;
+       break;
+ 
+     case VECTOR_TYPE:
+@@ -648,6 +638,7 @@
+ 	  code = build2 (MODIFY_EXPR, type, dest, cons);
+ 	  code = build_stmt (input_location, EXPR_STMT, code);
+ 	  add_stmt (code);
++	  num_split_elts += CONSTRUCTOR_NELTS (init);
+ 	}
+       break;
+ 
+@@ -657,6 +648,8 @@
+ 
+   /* The rest of the initializer is now a constant. */
+   TREE_CONSTANT (init) = 1;
++  return complete_p && complete_ctor_at_level_p (TREE_TYPE (init),
++						 num_split_elts, inner_type);
+ }
+ 
+ /* A subroutine of store_init_value.  Splits non-constant static
+@@ -672,7 +665,8 @@
+   if (TREE_CODE (init) == CONSTRUCTOR)
+     {
+       code = push_stmt_list ();
+-      split_nonconstant_init_1 (dest, &init);
++      if (split_nonconstant_init_1 (dest, init))
++	init = NULL_TREE;
+       code = pop_stmt_list (code);
+       DECL_INITIAL (dest) = init;
+       TREE_READONLY (dest) = 0;
+
+=== modified file 'gcc/expr.c'
+--- old/gcc/expr.c	2011-04-20 10:07:36 +0000
++++ new/gcc/expr.c	2011-07-14 11:52:06 +0000
+@@ -4860,16 +4860,136 @@
+   return NULL_RTX;
+ }
+ 
++/* Return true if field F of structure TYPE is a flexible array.  */
++
++static bool
++flexible_array_member_p (const_tree f, const_tree type)
++{
++  const_tree tf;
++
++  tf = TREE_TYPE (f);
++  return (TREE_CHAIN (f) == NULL
++	  && TREE_CODE (tf) == ARRAY_TYPE
++	  && TYPE_DOMAIN (tf)
++	  && TYPE_MIN_VALUE (TYPE_DOMAIN (tf))
++	  && integer_zerop (TYPE_MIN_VALUE (TYPE_DOMAIN (tf)))
++	  && !TYPE_MAX_VALUE (TYPE_DOMAIN (tf))
++	  && int_size_in_bytes (type) >= 0);
++}
++
++/* If FOR_CTOR_P, return the number of top-level elements that a constructor
++   must have in order for it to completely initialize a value of type TYPE.
++   Return -1 if the number isn't known.
++
++   If !FOR_CTOR_P, return an estimate of the number of scalars in TYPE.  */
++
++static HOST_WIDE_INT
++count_type_elements (const_tree type, bool for_ctor_p)
++{
++  switch (TREE_CODE (type))
++    {
++    case ARRAY_TYPE:
++      {
++	tree nelts;
++
++	nelts = array_type_nelts (type);
++	if (nelts && host_integerp (nelts, 1))
++	  {
++	    unsigned HOST_WIDE_INT n;
++
++	    n = tree_low_cst (nelts, 1) + 1;
++	    if (n == 0 || for_ctor_p)
++	      return n;
++	    else
++	      return n * count_type_elements (TREE_TYPE (type), false);
++	  }
++	return for_ctor_p ? -1 : 1;
++      }
++
++    case RECORD_TYPE:
++      {
++	unsigned HOST_WIDE_INT n;
++	tree f;
++
++	n = 0;
++	for (f = TYPE_FIELDS (type); f ; f = TREE_CHAIN (f))
++	  if (TREE_CODE (f) == FIELD_DECL)
++	    {
++	      if (!for_ctor_p)
++		n += count_type_elements (TREE_TYPE (f), false);
++	      else if (!flexible_array_member_p (f, type))
++		/* Don't count flexible arrays, which are not supposed
++		   to be initialized.  */
++		n += 1;
++	    }
++
++	return n;
++      }
++
++    case UNION_TYPE:
++    case QUAL_UNION_TYPE:
++      {
++	tree f;
++	HOST_WIDE_INT n, m;
++
++	gcc_assert (!for_ctor_p);
++	/* Estimate the number of scalars in each field and pick the
++	   maximum.  Other estimates would do instead; the idea is simply
++	   to make sure that the estimate is not sensitive to the ordering
++	   of the fields.  */
++	n = 1;
++	for (f = TYPE_FIELDS (type); f ; f = TREE_CHAIN (f))
++	  if (TREE_CODE (f) == FIELD_DECL)
++	    {
++	      m = count_type_elements (TREE_TYPE (f), false);
++	      /* If the field doesn't span the whole union, add an extra
++		 scalar for the rest.  */
++	      if (simple_cst_equal (TYPE_SIZE (TREE_TYPE (f)),
++				    TYPE_SIZE (type)) != 1)
++		m++;
++	      if (n < m)
++		n = m;
++	    }
++	return n;
++      }
++
++    case COMPLEX_TYPE:
++      return 2;
++
++    case VECTOR_TYPE:
++      return TYPE_VECTOR_SUBPARTS (type);
++
++    case INTEGER_TYPE:
++    case REAL_TYPE:
++    case FIXED_POINT_TYPE:
++    case ENUMERAL_TYPE:
++    case BOOLEAN_TYPE:
++    case POINTER_TYPE:
++    case OFFSET_TYPE:
++    case REFERENCE_TYPE:
++      return 1;
++
++    case ERROR_MARK:
++      return 0;
++
++    case VOID_TYPE:
++    case METHOD_TYPE:
++    case FUNCTION_TYPE:
++    case LANG_TYPE:
++    default:
++      gcc_unreachable ();
++    }
++}
++
+ /* Helper for categorize_ctor_elements.  Identical interface.  */
+ 
+ static bool
+ categorize_ctor_elements_1 (const_tree ctor, HOST_WIDE_INT *p_nz_elts,
+-			    HOST_WIDE_INT *p_elt_count,
+-			    bool *p_must_clear)
++			    HOST_WIDE_INT *p_init_elts, bool *p_complete)
+ {
+   unsigned HOST_WIDE_INT idx;
+-  HOST_WIDE_INT nz_elts, elt_count;
+-  tree value, purpose;
++  HOST_WIDE_INT nz_elts, init_elts, num_fields;
++  tree value, purpose, elt_type;
+ 
+   /* Whether CTOR is a valid constant initializer, in accordance with what
+      initializer_constant_valid_p does.  If inferred from the constructor
+@@ -4878,7 +4998,9 @@
+   bool const_p = const_from_elts_p ? true : TREE_STATIC (ctor);
+ 
+   nz_elts = 0;
+-  elt_count = 0;
++  init_elts = 0;
++  num_fields = 0;
++  elt_type = NULL_TREE;
+ 
+   FOR_EACH_CONSTRUCTOR_ELT (CONSTRUCTOR_ELTS (ctor), idx, purpose, value)
+     {
+@@ -4894,6 +5016,8 @@
+ 	    mult = (tree_low_cst (hi_index, 1)
+ 		    - tree_low_cst (lo_index, 1) + 1);
+ 	}
++      num_fields += mult;
++      elt_type = TREE_TYPE (value);
+ 
+       switch (TREE_CODE (value))
+ 	{
+@@ -4901,11 +5025,11 @@
+ 	  {
+ 	    HOST_WIDE_INT nz = 0, ic = 0;
+ 
+-	    bool const_elt_p
+-	      = categorize_ctor_elements_1 (value, &nz, &ic, p_must_clear);
++	    bool const_elt_p = categorize_ctor_elements_1 (value, &nz, &ic,
++							   p_complete);
+ 
+ 	    nz_elts += mult * nz;
+- 	    elt_count += mult * ic;
++ 	    init_elts += mult * ic;
+ 
+ 	    if (const_from_elts_p && const_p)
+ 	      const_p = const_elt_p;
+@@ -4917,12 +5041,12 @@
+ 	case FIXED_CST:
+ 	  if (!initializer_zerop (value))
+ 	    nz_elts += mult;
+-	  elt_count += mult;
++	  init_elts += mult;
+ 	  break;
+ 
+ 	case STRING_CST:
+ 	  nz_elts += mult * TREE_STRING_LENGTH (value);
+-	  elt_count += mult * TREE_STRING_LENGTH (value);
++	  init_elts += mult * TREE_STRING_LENGTH (value);
+ 	  break;
+ 
+ 	case COMPLEX_CST:
+@@ -4930,7 +5054,7 @@
+ 	    nz_elts += mult;
+ 	  if (!initializer_zerop (TREE_IMAGPART (value)))
+ 	    nz_elts += mult;
+-	  elt_count += mult;
++	  init_elts += mult;
+ 	  break;
+ 
+ 	case VECTOR_CST:
+@@ -4940,60 +5064,31 @@
+ 	      {
+ 		if (!initializer_zerop (TREE_VALUE (v)))
+ 		  nz_elts += mult;
+-		elt_count += mult;
++		init_elts += mult;
+ 	      }
+ 	  }
+ 	  break;
+ 
+ 	default:
+-	  nz_elts += mult;
+-	  elt_count += mult;
++	  {
++	    HOST_WIDE_INT tc = count_type_elements (elt_type, false);
++	    nz_elts += mult * tc;
++	    init_elts += mult * tc;
+ 
+-	  if (const_from_elts_p && const_p)
+-	    const_p = initializer_constant_valid_p (value, TREE_TYPE (value))
+-		      != NULL_TREE;
++	    if (const_from_elts_p && const_p)
++	      const_p = initializer_constant_valid_p (value, elt_type)
++			!= NULL_TREE;
++	  }
+ 	  break;
+ 	}
+     }
+ 
+-  if (!*p_must_clear
+-      && (TREE_CODE (TREE_TYPE (ctor)) == UNION_TYPE
+-	  || TREE_CODE (TREE_TYPE (ctor)) == QUAL_UNION_TYPE))
+-    {
+-      tree init_sub_type;
+-      bool clear_this = true;
+-
+-      if (!VEC_empty (constructor_elt, CONSTRUCTOR_ELTS (ctor)))
+-	{
+-	  /* We don't expect more than one element of the union to be
+-	     initialized.  Not sure what we should do otherwise... */
+-          gcc_assert (VEC_length (constructor_elt, CONSTRUCTOR_ELTS (ctor))
+-		      == 1);
+-
+-          init_sub_type = TREE_TYPE (VEC_index (constructor_elt,
+-						CONSTRUCTOR_ELTS (ctor),
+-						0)->value);
+-
+-	  /* ??? We could look at each element of the union, and find the
+-	     largest element.  Which would avoid comparing the size of the
+-	     initialized element against any tail padding in the union.
+-	     Doesn't seem worth the effort...  */
+-	  if (simple_cst_equal (TYPE_SIZE (TREE_TYPE (ctor)),
+-				TYPE_SIZE (init_sub_type)) == 1)
+-	    {
+-	      /* And now we have to find out if the element itself is fully
+-		 constructed.  E.g. for union { struct { int a, b; } s; } u
+-		 = { .s = { .a = 1 } }.  */
+-	      if (elt_count == count_type_elements (init_sub_type, false))
+-		clear_this = false;
+-	    }
+-	}
+-
+-      *p_must_clear = clear_this;
+-    }
++  if (*p_complete && !complete_ctor_at_level_p (TREE_TYPE (ctor),
++						num_fields, elt_type))
++    *p_complete = false;
+ 
+   *p_nz_elts += nz_elts;
+-  *p_elt_count += elt_count;
++  *p_init_elts += init_elts;
+ 
+   return const_p;
+ }
+@@ -5003,111 +5098,50 @@
+      and place it in *P_NZ_ELTS;
+    * how many scalar fields in total are in CTOR,
+      and place it in *P_ELT_COUNT.
+-   * if a type is a union, and the initializer from the constructor
+-     is not the largest element in the union, then set *p_must_clear.
++   * whether the constructor is complete -- in the sense that every
++     meaningful byte is explicitly given a value --
++     and place it in *P_COMPLETE.
+ 
+    Return whether or not CTOR is a valid static constant initializer, the same
+    as "initializer_constant_valid_p (CTOR, TREE_TYPE (CTOR)) != 0".  */
+ 
+ bool
+ categorize_ctor_elements (const_tree ctor, HOST_WIDE_INT *p_nz_elts,
+-			  HOST_WIDE_INT *p_elt_count,
+-			  bool *p_must_clear)
++			  HOST_WIDE_INT *p_init_elts, bool *p_complete)
+ {
+   *p_nz_elts = 0;
+-  *p_elt_count = 0;
+-  *p_must_clear = false;
++  *p_init_elts = 0;
++  *p_complete = true;
+ 
+-  return
+-    categorize_ctor_elements_1 (ctor, p_nz_elts, p_elt_count, p_must_clear);
++  return categorize_ctor_elements_1 (ctor, p_nz_elts, p_init_elts, p_complete);
+ }
+ 
+-/* Count the number of scalars in TYPE.  Return -1 on overflow or
+-   variable-sized.  If ALLOW_FLEXARR is true, don't count flexible
+-   array member at the end of the structure.  */
++/* TYPE is initialized by a constructor with NUM_ELTS elements, the last
++   of which had type LAST_TYPE.  Each element was itself a complete
++   initializer, in the sense that every meaningful byte was explicitly
++   given a value.  Return true if the same is true for the constructor
++   as a whole.  */
+ 
+-HOST_WIDE_INT
+-count_type_elements (const_tree type, bool allow_flexarr)
++bool
++complete_ctor_at_level_p (const_tree type, HOST_WIDE_INT num_elts,
++			  const_tree last_type)
+ {
+-  const HOST_WIDE_INT max = ~((HOST_WIDE_INT)1 << (HOST_BITS_PER_WIDE_INT-1));
+-  switch (TREE_CODE (type))
++  if (TREE_CODE (type) == UNION_TYPE
++      || TREE_CODE (type) == QUAL_UNION_TYPE)
+     {
+-    case ARRAY_TYPE:
+-      {
+-	tree telts = array_type_nelts (type);
+-	if (telts && host_integerp (telts, 1))
+-	  {
+-	    HOST_WIDE_INT n = tree_low_cst (telts, 1) + 1;
+-	    HOST_WIDE_INT m = count_type_elements (TREE_TYPE (type), false);
+-	    if (n == 0)
+-	      return 0;
+-	    else if (max / n > m)
+-	      return n * m;
+-	  }
+-	return -1;
+-      }
+-
+-    case RECORD_TYPE:
+-      {
+-	HOST_WIDE_INT n = 0, t;
+-	tree f;
+-
+-	for (f = TYPE_FIELDS (type); f ; f = TREE_CHAIN (f))
+-	  if (TREE_CODE (f) == FIELD_DECL)
+-	    {
+-	      t = count_type_elements (TREE_TYPE (f), false);
+-	      if (t < 0)
+-		{
+-		  /* Check for structures with flexible array member.  */
+-		  tree tf = TREE_TYPE (f);
+-		  if (allow_flexarr
+-		      && TREE_CHAIN (f) == NULL
+-		      && TREE_CODE (tf) == ARRAY_TYPE
+-		      && TYPE_DOMAIN (tf)
+-		      && TYPE_MIN_VALUE (TYPE_DOMAIN (tf))
+-		      && integer_zerop (TYPE_MIN_VALUE (TYPE_DOMAIN (tf)))
+-		      && !TYPE_MAX_VALUE (TYPE_DOMAIN (tf))
+-		      && int_size_in_bytes (type) >= 0)
+-		    break;
+-
+-		  return -1;
+-		}
+-	      n += t;
+-	    }
+-
+-	return n;
+-      }
+-
+-    case UNION_TYPE:
+-    case QUAL_UNION_TYPE:
+-      return -1;
+-
+-    case COMPLEX_TYPE:
+-      return 2;
+-
+-    case VECTOR_TYPE:
+-      return TYPE_VECTOR_SUBPARTS (type);
+-
+-    case INTEGER_TYPE:
+-    case REAL_TYPE:
+-    case FIXED_POINT_TYPE:
+-    case ENUMERAL_TYPE:
+-    case BOOLEAN_TYPE:
+-    case POINTER_TYPE:
+-    case OFFSET_TYPE:
+-    case REFERENCE_TYPE:
+-      return 1;
+-
+-    case ERROR_MARK:
+-      return 0;
+-
+-    case VOID_TYPE:
+-    case METHOD_TYPE:
+-    case FUNCTION_TYPE:
+-    case LANG_TYPE:
+-    default:
+-      gcc_unreachable ();
++      if (num_elts == 0)
++	return false;
++
++      gcc_assert (num_elts == 1 && last_type);
++
++      /* ??? We could look at each element of the union, and find the
++	 largest element.  Which would avoid comparing the size of the
++	 initialized element against any tail padding in the union.
++	 Doesn't seem worth the effort...  */
++      return simple_cst_equal (TYPE_SIZE (type), TYPE_SIZE (last_type)) == 1;
+     }
++
++  return count_type_elements (type, true) == num_elts;
+ }
+ 
+ /* Return 1 if EXP contains mostly (3/4)  zeros.  */
+@@ -5116,18 +5150,12 @@
+ mostly_zeros_p (const_tree exp)
+ {
+   if (TREE_CODE (exp) == CONSTRUCTOR)
+-
+     {
+-      HOST_WIDE_INT nz_elts, count, elts;
+-      bool must_clear;
+-
+-      categorize_ctor_elements (exp, &nz_elts, &count, &must_clear);
+-      if (must_clear)
+-	return 1;
+-
+-      elts = count_type_elements (TREE_TYPE (exp), false);
+-
+-      return nz_elts < elts / 4;
++      HOST_WIDE_INT nz_elts, init_elts;
++      bool complete_p;
++
++      categorize_ctor_elements (exp, &nz_elts, &init_elts, &complete_p);
++      return !complete_p || nz_elts < init_elts / 4;
+     }
+ 
+   return initializer_zerop (exp);
+@@ -5139,12 +5167,11 @@
+ all_zeros_p (const_tree exp)
+ {
+   if (TREE_CODE (exp) == CONSTRUCTOR)
+-
+     {
+-      HOST_WIDE_INT nz_elts, count;
+-      bool must_clear;
++      HOST_WIDE_INT nz_elts, init_elts;
++      bool complete_p;
+ 
+-      categorize_ctor_elements (exp, &nz_elts, &count, &must_clear);
++      categorize_ctor_elements (exp, &nz_elts, &init_elts, &complete_p);
+       return nz_elts == 0;
+     }
+ 
+
+=== modified file 'gcc/gimplify.c'
+--- old/gcc/gimplify.c	2011-04-07 18:27:20 +0000
++++ new/gcc/gimplify.c	2011-07-13 13:36:36 +0000
+@@ -3634,9 +3634,8 @@
+     case ARRAY_TYPE:
+       {
+ 	struct gimplify_init_ctor_preeval_data preeval_data;
+-	HOST_WIDE_INT num_type_elements, num_ctor_elements;
+-	HOST_WIDE_INT num_nonzero_elements;
+-	bool cleared, valid_const_initializer;
++	HOST_WIDE_INT num_ctor_elements, num_nonzero_elements;
++	bool cleared, complete_p, valid_const_initializer;
+ 
+ 	/* Aggregate types must lower constructors to initialization of
+ 	   individual elements.  The exception is that a CONSTRUCTOR node
+@@ -3653,7 +3652,7 @@
+ 	   can only do so if it known to be a valid constant initializer.  */
+ 	valid_const_initializer
+ 	  = categorize_ctor_elements (ctor, &num_nonzero_elements,
+-				      &num_ctor_elements, &cleared);
++				      &num_ctor_elements, &complete_p);
+ 
+ 	/* If a const aggregate variable is being initialized, then it
+ 	   should never be a lose to promote the variable to be static.  */
+@@ -3691,26 +3690,29 @@
+ 	   parts in, then generate code for the non-constant parts.  */
+ 	/* TODO.  There's code in cp/typeck.c to do this.  */
+ 
+-	num_type_elements = count_type_elements (type, true);
++	if (int_size_in_bytes (TREE_TYPE (ctor)) < 0)
++	  /* store_constructor will ignore the clearing of variable-sized
++	     objects.  Initializers for such objects must explicitly set
++	     every field that needs to be set.  */
++	  cleared = false;
++	else if (!complete_p)
++	  /* If the constructor isn't complete, clear the whole object
++	     beforehand.
+ 
+-	/* If count_type_elements could not determine number of type elements
+-	   for a constant-sized object, assume clearing is needed.
+-	   Don't do this for variable-sized objects, as store_constructor
+-	   will ignore the clearing of variable-sized objects.  */
+-	if (num_type_elements < 0 && int_size_in_bytes (type) >= 0)
++	     ??? This ought not to be needed.  For any element not present
++	     in the initializer, we should simply set them to zero.  Except
++	     we'd need to *find* the elements that are not present, and that
++	     requires trickery to avoid quadratic compile-time behavior in
++	     large cases or excessive memory use in small cases.  */
+ 	  cleared = true;
+-	/* If there are "lots" of zeros, then block clear the object first.  */
+-	else if (num_type_elements - num_nonzero_elements
++	else if (num_ctor_elements - num_nonzero_elements
+ 		 > CLEAR_RATIO (optimize_function_for_speed_p (cfun))
+-		 && num_nonzero_elements < num_type_elements/4)
+-	  cleared = true;
+-	/* ??? This bit ought not be needed.  For any element not present
+-	   in the initializer, we should simply set them to zero.  Except
+-	   we'd need to *find* the elements that are not present, and that
+-	   requires trickery to avoid quadratic compile-time behavior in
+-	   large cases or excessive memory use in small cases.  */
+-	else if (num_ctor_elements < num_type_elements)
+-	  cleared = true;
++		 && num_nonzero_elements < num_ctor_elements / 4)
++	  /* If there are "lots" of zeros, it's more efficient to clear
++	     the memory and then set the nonzero elements.  */
++	  cleared = true;
++	else
++	  cleared = false;
+ 
+ 	/* If there are "lots" of initialized elements, and all of them
+ 	   are valid address constants, then the entire initializer can
+
+=== added file 'gcc/testsuite/gcc.target/arm/pr48183.c'
+--- old/gcc/testsuite/gcc.target/arm/pr48183.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/pr48183.c	2011-07-13 13:36:36 +0000
+@@ -0,0 +1,25 @@
++/* testsuite/gcc.target/arm/pr48183.c */
++
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O -g" } */
++/* { dg-add-options arm_neon } */
++
++#include <arm_neon.h>
++
++void move_16bit_to_32bit (int32_t *dst, const short *src, unsigned n)
++{
++    unsigned i;
++    int16x4x2_t input;
++    int32x4x2_t mid;
++    int32x4x2_t output;
++
++    for (i = 0; i < n/2; i += 8) {
++        input = vld2_s16(src + i);
++        mid.val[0] = vmovl_s16(input.val[0]);
++        mid.val[1] = vmovl_s16(input.val[1]);
++        output.val[0] = vshlq_n_s32(mid.val[0], 8);
++        output.val[1] = vshlq_n_s32(mid.val[1], 8);
++        vst2q_s32((int32_t *)dst + i, output);
++    }
++}
+
+=== modified file 'gcc/tree.h'
+--- old/gcc/tree.h	2011-04-06 12:29:08 +0000
++++ new/gcc/tree.h	2011-07-13 13:36:36 +0000
+@@ -4361,21 +4361,10 @@
+ 
+ extern VEC(tree,gc) *ctor_to_vec (tree);
+ 
+-/* Examine CTOR to discover:
+-   * how many scalar fields are set to nonzero values,
+-     and place it in *P_NZ_ELTS;
+-   * how many scalar fields in total are in CTOR,
+-     and place it in *P_ELT_COUNT.
+-   * if a type is a union, and the initializer from the constructor
+-     is not the largest element in the union, then set *p_must_clear.
+-
+-   Return whether or not CTOR is a valid static constant initializer, the same
+-   as "initializer_constant_valid_p (CTOR, TREE_TYPE (CTOR)) != 0".  */
+-
+-extern bool categorize_ctor_elements (const_tree, HOST_WIDE_INT *, HOST_WIDE_INT *,
+-				      bool *);
+-
+-extern HOST_WIDE_INT count_type_elements (const_tree, bool);
++extern bool categorize_ctor_elements (const_tree, HOST_WIDE_INT *,
++				      HOST_WIDE_INT *, bool *);
++
++extern bool complete_ctor_at_level_p (const_tree, HOST_WIDE_INT, const_tree);
+ 
+ /* integer_zerop (tree x) is nonzero if X is an integer constant of value 0.  */
+ 
+

@@ -1,0 +1,25 @@
+2011-07-29  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	gcc/
+	Backport only bits marked as [*] from mainline:
+	 2010-12-19  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	* config/arm/arm.c ([*]arm_legitimate_index_p): Add VFP load/store
+	index range case. Change to SF/DFmode tests to avoid capturing HFmode.
+	(thumb2_legitimate_index_p): Same.
+
+Index: gcc-4_5-branch/gcc/config/arm/arm.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.c	2011-07-22 17:56:51.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm.c	2011-07-29 14:43:42.171610966 -0700
+@@ -5631,8 +5631,8 @@ arm_legitimate_index_p (enum machine_mod
+ 
+   /* Standard coprocessor addressing modes.  */
+   if (TARGET_HARD_FLOAT
+-      && (TARGET_FPA || TARGET_MAVERICK)
+-      && (GET_MODE_CLASS (mode) == MODE_FLOAT
++      && (TARGET_FPA || TARGET_MAVERICK || TARGET_VFP)
++      && ((mode == SFmode || mode == DFmode)
+ 	  || (TARGET_MAVERICK && mode == DImode)))
+     return (code == CONST_INT && INTVAL (index) < 1024
+ 	    && INTVAL (index) > -1024

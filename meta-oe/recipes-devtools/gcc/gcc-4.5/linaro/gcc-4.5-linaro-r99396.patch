@@ -110,8 +110,10 @@
  	Backport from mainline:
 
 === modified file 'gcc/cfgexpand.c'
---- old/gcc/cfgexpand.c	2010-09-01 13:29:58 +0000
-+++ new/gcc/cfgexpand.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/cfgexpand.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/cfgexpand.c	2011-07-22 16:59:23.000000000 -0700
++++ gcc-4_5-branch/gcc/cfgexpand.c	2011-07-22 16:59:28.581747691 -0700
 @@ -64,7 +64,13 @@
  
    grhs_class = get_gimple_rhs_class (gimple_expr_code (stmt));
@@ -127,7 +129,7 @@
      t = build2 (gimple_assign_rhs_code (stmt),
  		TREE_TYPE (gimple_assign_lhs (stmt)),
  		gimple_assign_rhs1 (stmt),
-@@ -1887,6 +1893,9 @@
+@@ -1893,6 +1899,9 @@
  	    ops.type = TREE_TYPE (lhs);
  	    switch (get_gimple_rhs_class (gimple_expr_code (stmt)))
  	      {
@@ -137,7 +139,7 @@
  		case GIMPLE_BINARY_RHS:
  		  ops.op1 = gimple_assign_rhs2 (stmt);
  		  /* Fallthru */
-@@ -2237,6 +2246,8 @@
+@@ -2243,6 +2252,8 @@
  	{
  	case COND_EXPR:
  	case DOT_PROD_EXPR:
@@ -146,7 +148,7 @@
  	  goto ternary;
  
  	case TRUTH_ANDIF_EXPR:
-@@ -3023,6 +3034,8 @@
+@@ -3030,6 +3041,8 @@
        return NULL;
  
      case WIDEN_MULT_EXPR:
@@ -155,7 +157,7 @@
        if (SCALAR_INT_MODE_P (GET_MODE (op0))
  	  && SCALAR_INT_MODE_P (mode))
  	{
-@@ -3035,7 +3048,13 @@
+@@ -3042,7 +3055,13 @@
  	    op1 = simplify_gen_unary (ZERO_EXTEND, mode, op1, inner_mode);
  	  else
  	    op1 = simplify_gen_unary (SIGN_EXTEND, mode, op1, inner_mode);
@@ -170,10 +172,10 @@
  	}
        return NULL;
  
-
-=== modified file 'gcc/config/arm/arm.md'
---- old/gcc/config/arm/arm.md	2010-09-15 16:55:55 +0000
-+++ new/gcc/config/arm/arm.md	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/config/arm/arm.md
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.md	2011-07-22 16:59:25.000000000 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm.md	2011-07-22 16:59:28.581747691 -0700
 @@ -1507,7 +1507,15 @@
     (set_attr "predicable" "yes")]
  )
@@ -248,10 +250,10 @@
    [(set_attr "insn" "smlalxy")
     (set_attr "predicable" "yes")])
  
-
-=== modified file 'gcc/doc/gimple.texi'
---- old/gcc/doc/gimple.texi	2010-07-06 19:23:53 +0000
-+++ new/gcc/doc/gimple.texi	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/doc/gimple.texi
+===================================================================
+--- gcc-4_5-branch.orig/gcc/doc/gimple.texi	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/doc/gimple.texi	2011-07-22 16:59:28.581747691 -0700
 @@ -554,6 +554,9 @@
  @item @code{GIMPLE_INVALID_RHS}
  The tree cannot be used as a GIMPLE operand.
@@ -295,7 +297,7 @@
  @deftypefn {GIMPLE function} void gimple_assign_set_lhs (gimple g, tree lhs)
  Set @code{LHS} to be the @code{LHS} operand of assignment statement @code{G}.
  @end deftypefn
-@@ -1092,20 +1105,16 @@
+@@ -1092,17 +1105,13 @@
  statement @code{G}.
  @end deftypefn
   
@@ -305,27 +307,23 @@
 - 
 -@deftypefn {GIMPLE function} tree *gimple_assign_rhs2_ptr (gimple g)
 -Return a pointer to the second operand on the @code{RHS} of assignment
--statement @code{G}.
--@end deftypefn
-- 
- @deftypefn {GIMPLE function} void gimple_assign_set_rhs2 (gimple g, tree rhs)
- Set @code{RHS} to be the second operand on the @code{RHS} of assignment
++@deftypefn {GIMPLE function} void gimple_assign_set_rhs2 (gimple g, tree rhs)
++Set @code{RHS} to be the second operand on the @code{RHS} of assignment
  statement @code{G}.
  @end deftypefn
   
+-@deftypefn {GIMPLE function} void gimple_assign_set_rhs2 (gimple g, tree rhs)
+-Set @code{RHS} to be the second operand on the @code{RHS} of assignment
 +@deftypefn {GIMPLE function} void gimple_assign_set_rhs3 (gimple g, tree rhs)
 +Set @code{RHS} to be the third operand on the @code{RHS} of assignment
-+statement @code{G}.
-+@end deftypefn
-+ 
- @deftypefn {GIMPLE function} bool gimple_assign_cast_p (gimple s)
- Return true if @code{S} is a type-cast assignment.
+ statement @code{G}.
  @end deftypefn
-
-=== modified file 'gcc/expr.c'
---- old/gcc/expr.c	2010-09-01 13:29:58 +0000
-+++ new/gcc/expr.c	2010-09-16 09:15:46 +0000
-@@ -7225,8 +7225,6 @@
+  
+Index: gcc-4_5-branch/gcc/expr.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expr.c	2011-07-22 16:59:23.000000000 -0700
++++ gcc-4_5-branch/gcc/expr.c	2011-07-22 16:59:28.591747691 -0700
+@@ -7228,8 +7228,6 @@
    rtx subtarget, original_target;
    int ignore;
    bool reduce_bit_field;
@@ -334,7 +332,7 @@
    location_t loc = ops->location;
    tree treeop0, treeop1;
  #define REDUCE_BIT_FIELD(expr)	(reduce_bit_field			  \
-@@ -7246,7 +7244,8 @@
+@@ -7249,7 +7247,8 @@
       exactly those that are valid in gimple expressions that aren't
       GIMPLE_SINGLE_RHS (or invalid).  */
    gcc_assert (get_gimple_rhs_class (code) == GIMPLE_UNARY_RHS
@@ -344,7 +342,7 @@
  
    ignore = (target == const0_rtx
  	    || ((CONVERT_EXPR_CODE_P (code)
-@@ -7421,58 +7420,6 @@
+@@ -7424,58 +7423,6 @@
  				    fold_convert_loc (loc, ssizetype,
  						      treeop1));
      case PLUS_EXPR:
@@ -403,7 +401,7 @@
        /* If we are adding a constant, a VAR_DECL that is sp, fp, or ap, and
  	 something else, make sure we add the register to the constant and
  	 then to the other thing.  This case can occur during strength
-@@ -7587,57 +7534,6 @@
+@@ -7590,57 +7537,6 @@
        return REDUCE_BIT_FIELD (simplify_gen_binary (PLUS, mode, op0, op1));
  
      case MINUS_EXPR:
@@ -461,7 +459,7 @@
        /* For initializers, we are allowed to return a MINUS of two
  	 symbolic constants.  Here we handle all cases when both operands
  	 are constant.  */
-@@ -7678,6 +7574,14 @@
+@@ -7681,6 +7577,14 @@
  
        goto binop2;
  
@@ -476,10 +474,10 @@
      case WIDEN_MULT_EXPR:
        /* If first operand is constant, swap them.
  	 Thus the following special case checks need only
-
-=== modified file 'gcc/gimple-pretty-print.c'
---- old/gcc/gimple-pretty-print.c	2009-11-25 10:55:54 +0000
-+++ new/gcc/gimple-pretty-print.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/gimple-pretty-print.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/gimple-pretty-print.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/gimple-pretty-print.c	2011-07-22 16:59:28.591747691 -0700
 @@ -376,6 +376,34 @@
      }
  }
@@ -524,10 +522,10 @@
        else
          gcc_unreachable ();
        if (!(flags & TDF_RHS_ONLY))
-
-=== modified file 'gcc/gimple.c'
---- old/gcc/gimple.c	2010-09-15 16:47:52 +0000
-+++ new/gcc/gimple.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/gimple.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/gimple.c	2011-07-22 16:59:25.000000000 -0700
++++ gcc-4_5-branch/gcc/gimple.c	2011-07-22 16:59:28.591747691 -0700
 @@ -289,31 +289,40 @@
  
  
@@ -547,13 +545,10 @@
    grhs_class = get_gimple_rhs_class (*subcode_p);
  
 -  if (grhs_class == GIMPLE_BINARY_RHS)
--    {
--      *op1_p = TREE_OPERAND (expr, 0);
--      *op2_p = TREE_OPERAND (expr, 1);
 +  if (grhs_class == GIMPLE_TERNARY_RHS)
-+    {
-+      *op1_p = TREE_OPERAND (expr, 0);
-+      *op2_p = TREE_OPERAND (expr, 1);
+     {
+       *op1_p = TREE_OPERAND (expr, 0);
+       *op2_p = TREE_OPERAND (expr, 1);
 +      *op3_p = TREE_OPERAND (expr, 2);
 +    }
 +  else if (grhs_class == GIMPLE_BINARY_RHS)
@@ -668,10 +663,10 @@
     : ((SYM) == COND_EXPR						    \
        || (SYM) == CONSTRUCTOR						    \
        || (SYM) == OBJ_TYPE_REF						    \
-
-=== modified file 'gcc/gimple.h'
---- old/gcc/gimple.h	2010-08-10 13:31:21 +0000
-+++ new/gcc/gimple.h	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/gimple.h
+===================================================================
+--- gcc-4_5-branch.orig/gcc/gimple.h	2011-07-22 16:59:12.000000000 -0700
++++ gcc-4_5-branch/gcc/gimple.h	2011-07-22 16:59:28.591747691 -0700
 @@ -80,6 +80,7 @@
  enum gimple_rhs_class
  {
@@ -774,10 +769,10 @@
  /* Returns true if GS is a nontemporal move.  */
  
  static inline bool
-
-=== modified file 'gcc/optabs.c'
---- old/gcc/optabs.c	2010-03-19 19:45:01 +0000
-+++ new/gcc/optabs.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/optabs.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/optabs.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/optabs.c	2011-07-22 16:59:28.601747691 -0700
 @@ -408,6 +408,20 @@
      case DOT_PROD_EXPR:
        return TYPE_UNSIGNED (type) ? udot_prod_optab : sdot_prod_optab;
@@ -813,21 +808,21 @@
    gcc_assert (icode != CODE_FOR_nothing);
    xmode0 = insn_data[icode].operand[1].mode;
  
-
-=== modified file 'gcc/testsuite/gcc.target/arm/wmul-1.c'
---- old/gcc/testsuite/gcc.target/arm/wmul-1.c	2010-09-01 13:29:58 +0000
-+++ new/gcc/testsuite/gcc.target/arm/wmul-1.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/testsuite/gcc.target/arm/wmul-1.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/testsuite/gcc.target/arm/wmul-1.c	2011-07-22 16:59:24.000000000 -0700
++++ gcc-4_5-branch/gcc/testsuite/gcc.target/arm/wmul-1.c	2011-07-22 16:59:28.601747691 -0700
 @@ -15,4 +15,4 @@
    return sqr;
  }
  
 -/* { dg-final { scan-assembler-times "smulbb" 2 } } */
 +/* { dg-final { scan-assembler-times "smlabb" 2 } } */
-
-=== modified file 'gcc/tree-cfg.c'
---- old/gcc/tree-cfg.c	2010-09-01 13:29:58 +0000
-+++ new/gcc/tree-cfg.c	2010-09-16 09:15:46 +0000
-@@ -3483,6 +3483,65 @@
+Index: gcc-4_5-branch/gcc/tree-cfg.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-cfg.c	2011-07-22 16:59:24.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-cfg.c	2011-07-22 16:59:28.601747691 -0700
+@@ -3484,6 +3484,65 @@
    return false;
  }
  
@@ -893,7 +888,7 @@
  /* Verify a gimple assignment statement STMT with a single rhs.
     Returns true if anything is wrong.  */
  
-@@ -3615,6 +3674,9 @@
+@@ -3616,6 +3675,9 @@
      case GIMPLE_BINARY_RHS:
        return verify_gimple_assign_binary (stmt);
  
@@ -903,11 +898,11 @@
      default:
        gcc_unreachable ();
      }
-
-=== modified file 'gcc/tree-inline.c'
---- old/gcc/tree-inline.c	2010-09-01 13:29:58 +0000
-+++ new/gcc/tree-inline.c	2010-09-16 09:15:46 +0000
-@@ -3199,6 +3199,8 @@
+Index: gcc-4_5-branch/gcc/tree-inline.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-inline.c	2011-07-22 16:59:24.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-inline.c	2011-07-22 16:59:28.601747691 -0700
+@@ -3207,6 +3207,8 @@
      case WIDEN_SUM_EXPR:
      case WIDEN_MULT_EXPR:
      case DOT_PROD_EXPR:
@@ -916,10 +911,10 @@
  
      case VEC_WIDEN_MULT_HI_EXPR:
      case VEC_WIDEN_MULT_LO_EXPR:
-
-=== modified file 'gcc/tree-pretty-print.c'
---- old/gcc/tree-pretty-print.c	2009-11-30 10:36:54 +0000
-+++ new/gcc/tree-pretty-print.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree-pretty-print.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-pretty-print.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-pretty-print.c	2011-07-22 16:59:28.611747691 -0700
 @@ -1939,6 +1939,26 @@
        pp_string (buffer, " > ");
        break;
@@ -956,10 +951,10 @@
      case MULT_EXPR:
      case TRUNC_DIV_EXPR:
      case CEIL_DIV_EXPR:
-
-=== modified file 'gcc/tree-ssa-ccp.c'
---- old/gcc/tree-ssa-ccp.c	2010-08-10 13:31:21 +0000
-+++ new/gcc/tree-ssa-ccp.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree-ssa-ccp.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-ssa-ccp.c	2011-07-22 16:59:12.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-ssa-ccp.c	2011-07-22 16:59:28.611747691 -0700
 @@ -915,6 +915,23 @@
  					TREE_TYPE (TREE_OPERAND (addr, 0))));
  }
@@ -1079,10 +1074,10 @@
      case GIMPLE_INVALID_RHS:
        gcc_unreachable ();
      }
-
-=== modified file 'gcc/tree-ssa-dom.c'
---- old/gcc/tree-ssa-dom.c	2010-07-20 11:44:16 +0000
-+++ new/gcc/tree-ssa-dom.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree-ssa-dom.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-ssa-dom.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-ssa-dom.c	2011-07-22 17:23:51.501747355 -0700
 @@ -54,6 +54,7 @@
    EXPR_SINGLE,
    EXPR_UNARY,
@@ -1101,58 +1096,31 @@
      struct { tree fn; bool pure; size_t nargs; tree *args; } call;
    } ops;
  };
-@@ -214,22 +216,30 @@
-       switch (get_gimple_rhs_class (subcode))
-         {
-         case GIMPLE_SINGLE_RHS:
--          expr->kind = EXPR_SINGLE;
--          expr->ops.single.rhs = gimple_assign_rhs1 (stmt);
--          break;
-+	  expr->kind = EXPR_SINGLE;
-+	  expr->ops.single.rhs = gimple_assign_rhs1 (stmt);
-+	  break;
-         case GIMPLE_UNARY_RHS:
--          expr->kind = EXPR_UNARY;
-+	  expr->kind = EXPR_UNARY;
- 	  expr->type = TREE_TYPE (gimple_assign_lhs (stmt));
--          expr->ops.unary.op = subcode;
--          expr->ops.unary.opnd = gimple_assign_rhs1 (stmt);
--          break;
-+	  expr->ops.unary.op = subcode;
-+	  expr->ops.unary.opnd = gimple_assign_rhs1 (stmt);
-+	  break;
-         case GIMPLE_BINARY_RHS:
--          expr->kind = EXPR_BINARY;
--	  expr->type = TREE_TYPE (gimple_assign_lhs (stmt));
--          expr->ops.binary.op = subcode;
--          expr->ops.binary.opnd0 = gimple_assign_rhs1 (stmt);
--          expr->ops.binary.opnd1 = gimple_assign_rhs2 (stmt);
--          break;
-+	  expr->kind = EXPR_BINARY;
-+	  expr->type = TREE_TYPE (gimple_assign_lhs (stmt));
-+	  expr->ops.binary.op = subcode;
-+	  expr->ops.binary.opnd0 = gimple_assign_rhs1 (stmt);
-+	  expr->ops.binary.opnd1 = gimple_assign_rhs2 (stmt);
-+	  break;
+@@ -229,6 +231,14 @@
+           expr->ops.binary.opnd0 = gimple_assign_rhs1 (stmt);
+           expr->ops.binary.opnd1 = gimple_assign_rhs2 (stmt);
+           break;
 +        case GIMPLE_TERNARY_RHS:
-+	  expr->kind = EXPR_TERNARY;
-+	  expr->type = TREE_TYPE (gimple_assign_lhs (stmt));
-+	  expr->ops.ternary.op = subcode;
-+	  expr->ops.ternary.opnd0 = gimple_assign_rhs1 (stmt);
-+	  expr->ops.ternary.opnd1 = gimple_assign_rhs2 (stmt);
-+	  expr->ops.ternary.opnd2 = gimple_assign_rhs3 (stmt);
-+	  break;
++          expr->kind = EXPR_TERNARY;
++          expr->type = TREE_TYPE (gimple_assign_lhs (stmt));
++          expr->ops.ternary.op = subcode;
++          expr->ops.ternary.opnd0 = gimple_assign_rhs1 (stmt);
++          expr->ops.ternary.opnd1 = gimple_assign_rhs2 (stmt);
++          expr->ops.ternary.opnd2 = gimple_assign_rhs3 (stmt);
++          break;
          default:
            gcc_unreachable ();
          }
-@@ -374,23 +384,40 @@
+@@ -373,23 +383,40 @@
                                expr1->ops.unary.opnd, 0);
  
      case EXPR_BINARY:
 -      {
 -        if (expr0->ops.binary.op != expr1->ops.binary.op)
 -          return false;
--
++      if (expr0->ops.binary.op != expr1->ops.binary.op)
++	return false;
+ 
 -        if (operand_equal_p (expr0->ops.binary.opnd0,
 -                             expr1->ops.binary.opnd0, 0)
 -            && operand_equal_p (expr0->ops.binary.opnd1,
@@ -1166,9 +1134,6 @@
 -                && operand_equal_p (expr0->ops.binary.opnd1,
 -                                    expr1->ops.binary.opnd0, 0));
 -      }
-+      if (expr0->ops.binary.op != expr1->ops.binary.op)
-+	return false;
-+
 +      if (operand_equal_p (expr0->ops.binary.opnd0,
 +			   expr1->ops.binary.opnd0, 0)
 +	  && operand_equal_p (expr0->ops.binary.opnd1,
@@ -1203,7 +1168,7 @@
  
      case EXPR_CALL:
        {
-@@ -453,8 +480,8 @@
+@@ -452,8 +479,8 @@
      case EXPR_BINARY:
        val = iterative_hash_object (expr->ops.binary.op, val);
        if (commutative_tree_code (expr->ops.binary.op))
@@ -1214,7 +1179,7 @@
        else
          {
            val = iterative_hash_expr (expr->ops.binary.opnd0, val);
-@@ -462,6 +489,19 @@
+@@ -461,6 +488,19 @@
          }
        break;
  
@@ -1234,7 +1199,7 @@
      case EXPR_CALL:
        {
          size_t i;
-@@ -514,6 +554,16 @@
+@@ -513,6 +553,16 @@
          print_generic_expr (stream, element->expr.ops.binary.opnd1, 0);
          break;
  
@@ -1251,11 +1216,11 @@
        case EXPR_CALL:
          {
            size_t i;
-
-=== modified file 'gcc/tree-ssa-math-opts.c'
---- old/gcc/tree-ssa-math-opts.c	2010-09-01 13:29:58 +0000
-+++ new/gcc/tree-ssa-math-opts.c	2010-09-16 09:15:46 +0000
-@@ -1261,6 +1261,235 @@
+Index: gcc-4_5-branch/gcc/tree-ssa-math-opts.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-ssa-math-opts.c	2011-07-22 16:59:24.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-ssa-math-opts.c	2011-07-22 16:59:28.611747691 -0700
+@@ -1270,6 +1270,235 @@
   }
  };
  
@@ -1491,7 +1456,7 @@
  /* Find integer multiplications where the operands are extended from
     smaller types, and replace the MULT_EXPR with a WIDEN_MULT_EXPR
     where appropriate.  */
-@@ -1278,94 +1507,19 @@
+@@ -1287,94 +1516,19 @@
        for (gsi = gsi_after_labels (bb); !gsi_end_p (gsi); gsi_next (&gsi))
          {
  	  gimple stmt = gsi_stmt (gsi);
@@ -1499,11 +1464,13 @@
 -	  tree type, type1 = NULL, type2 = NULL;
 -	  tree rhs1, rhs2, rhs1_convop = NULL, rhs2_convop = NULL;
 -	  enum tree_code rhs1_code, rhs2_code;
--
++	  enum tree_code code;
+ 
 -	  if (!is_gimple_assign (stmt)
 -	      || gimple_assign_rhs_code (stmt) != MULT_EXPR)
--	    continue;
--
++	  if (!is_gimple_assign (stmt))
+ 	    continue;
+ 
 -	  type = TREE_TYPE (gimple_assign_lhs (stmt));
 -
 -	  if (TREE_CODE (type) != INTEGER_TYPE)
@@ -1581,11 +1548,6 @@
 -	  gimple_assign_set_rhs_code (stmt, WIDEN_MULT_EXPR);
 -	  update_stmt (stmt);
 -	  changed = true;
-+	  enum tree_code code;
-+
-+	  if (!is_gimple_assign (stmt))
-+	    continue;
-+
 +	  code = gimple_assign_rhs_code (stmt);
 +	  if (code == MULT_EXPR)
 +	    changed |= convert_mult_to_widen (stmt);
@@ -1597,10 +1559,10 @@
    return (changed ? TODO_dump_func | TODO_update_ssa | TODO_verify_ssa
  	  | TODO_verify_stmts : 0);
  }
-
-=== modified file 'gcc/tree-ssa-operands.c'
---- old/gcc/tree-ssa-operands.c	2010-04-02 18:54:46 +0000
-+++ new/gcc/tree-ssa-operands.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree-ssa-operands.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-ssa-operands.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-ssa-operands.c	2011-07-22 16:59:28.611747691 -0700
 @@ -994,11 +994,13 @@
  
      case DOT_PROD_EXPR:
@@ -1618,11 +1580,11 @@
        }
  
      case FUNCTION_DECL:
-
-=== modified file 'gcc/tree-ssa-sccvn.c'
---- old/gcc/tree-ssa-sccvn.c	2010-05-14 11:40:18 +0000
-+++ new/gcc/tree-ssa-sccvn.c	2010-09-16 09:15:46 +0000
-@@ -2277,6 +2277,10 @@
+Index: gcc-4_5-branch/gcc/tree-ssa-sccvn.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-ssa-sccvn.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-ssa-sccvn.c	2011-07-22 16:59:28.611747691 -0700
+@@ -2298,6 +2298,10 @@
      case GIMPLE_BINARY_RHS:
        return (is_gimple_min_invariant (gimple_assign_rhs1 (stmt))
  	      || is_gimple_min_invariant (gimple_assign_rhs2 (stmt)));
@@ -1633,10 +1595,10 @@
      case GIMPLE_SINGLE_RHS:
        /* Constants inside reference ops are rarely interesting, but
  	 it can take a lot of looking to find them.  */
-
-=== modified file 'gcc/tree-ssa-threadedge.c'
---- old/gcc/tree-ssa-threadedge.c	2009-11-25 10:55:54 +0000
-+++ new/gcc/tree-ssa-threadedge.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree-ssa-threadedge.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-ssa-threadedge.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-ssa-threadedge.c	2011-07-22 16:59:28.611747691 -0700
 @@ -247,14 +247,14 @@
  
          return fold (rhs);
@@ -1672,10 +1634,10 @@
      default:
        gcc_unreachable ();
      }
-
-=== modified file 'gcc/tree-vrp.c'
---- old/gcc/tree-vrp.c	2010-06-14 14:23:31 +0000
-+++ new/gcc/tree-vrp.c	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree-vrp.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree-vrp.c	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree-vrp.c	2011-07-22 16:59:28.621747691 -0700
 @@ -864,6 +864,8 @@
  					      gimple_assign_rhs1 (stmt),
  					      gimple_assign_rhs2 (stmt),
@@ -1694,11 +1656,11 @@
      case GIMPLE_SINGLE_RHS:
        return tree_single_nonzero_warnv_p (gimple_assign_rhs1 (stmt),
  					  strict_overflow_p);
-
-=== modified file 'gcc/tree.c'
---- old/gcc/tree.c	2010-08-10 13:31:21 +0000
-+++ new/gcc/tree.c	2010-09-16 09:15:46 +0000
-@@ -6538,6 +6538,23 @@
+Index: gcc-4_5-branch/gcc/tree.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree.c	2011-07-22 16:59:13.000000000 -0700
++++ gcc-4_5-branch/gcc/tree.c	2011-07-22 16:59:28.621747691 -0700
+@@ -6548,6 +6548,23 @@
    return false;
  }
  
@@ -1722,10 +1684,10 @@
  /* Generate a hash value for an expression.  This can be used iteratively
     by passing a previous result as the VAL argument.
  
-
-=== modified file 'gcc/tree.def'
---- old/gcc/tree.def	2010-04-02 18:54:46 +0000
-+++ new/gcc/tree.def	2010-09-16 09:15:46 +0000
+Index: gcc-4_5-branch/gcc/tree.def
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree.def	2011-07-22 16:58:48.000000000 -0700
++++ gcc-4_5-branch/gcc/tree.def	2011-07-22 16:59:28.631747691 -0700
 @@ -1083,6 +1083,18 @@
     the arguments from type t1 to type t2, and then multiplying them.  */
  DEFTREECODE (WIDEN_MULT_EXPR, "widen_mult_expr", tcc_binary, 2)
@@ -1745,11 +1707,11 @@
  /* Whole vector left/right shift in bits.
     Operand 0 is a vector to be shifted.
     Operand 1 is an integer shift amount in bits.  */
-
-=== modified file 'gcc/tree.h'
---- old/gcc/tree.h	2010-08-10 13:31:21 +0000
-+++ new/gcc/tree.h	2010-09-16 09:15:46 +0000
-@@ -4705,6 +4705,7 @@
+Index: gcc-4_5-branch/gcc/tree.h
+===================================================================
+--- gcc-4_5-branch.orig/gcc/tree.h	2011-07-22 16:59:13.000000000 -0700
++++ gcc-4_5-branch/gcc/tree.h	2011-07-22 16:59:28.631747691 -0700
+@@ -4687,6 +4687,7 @@
  extern int type_num_arguments (const_tree);
  extern bool associative_tree_code (enum tree_code);
  extern bool commutative_tree_code (enum tree_code);
@@ -1757,4 +1719,3 @@
  extern tree upper_bound_in_type (tree, tree);
  extern tree lower_bound_in_type (tree, tree);
  extern int operand_equal_for_phi_arg_p (const_tree, const_tree);
-
