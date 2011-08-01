@@ -1,0 +1,350 @@
+2011-07-11  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	gcc/
+	2011-06-22  Dmitry Plotnikov  <dplotnikov@ispras.ru>
+	Dmitry Melnik  <dm@ispras.ru>
+
+	* config/arm/arm.c (neon_immediate_valid_for_shift): New function.
+	(neon_output_shift_immediate): Ditto.
+	* config/arm/arm-protos.h (neon_immediate_valid_for_shift): New
+	prototype.
+	(neon_output_shift_immediate): Ditto.
+	* config/arm/neon.md (vashl<mode>3): Modified constraint.
+	(vashr<mode>3_imm): New insn pattern.
+	(vlshr<mode>3_imm): Ditto.
+	(vashr<mode>3): Modified constraint.
+	(vlshr<mode>3): Ditto.
+	* config/arm/predicates.md (imm_for_neon_lshift_operand): New
+	predicate.
+	(imm_for_neon_rshift_operand): Ditto.
+	(imm_lshift_or_reg_neon): Ditto.
+	(imm_rshift_or_reg_neon): Ditto.
+
+	* optabs.c (init_optabs): Init optab codes for vashl, vashr, vlshr.
+
+=== modified file 'gcc/config/arm/arm-protos.h'
+--- old/gcc/config/arm/arm-protos.h	2011-06-14 16:00:30 +0000
++++ new/gcc/config/arm/arm-protos.h	2011-07-04 14:03:49 +0000
+@@ -64,8 +64,12 @@
+ extern int neon_immediate_valid_for_move (rtx, enum machine_mode, rtx *, int *);
+ extern int neon_immediate_valid_for_logic (rtx, enum machine_mode, int, rtx *,
+ 					   int *);
++extern int neon_immediate_valid_for_shift (rtx, enum machine_mode, rtx *,
++					   int *, bool);
+ extern char *neon_output_logic_immediate (const char *, rtx *,
+ 					  enum machine_mode, int, int);
++extern char *neon_output_shift_immediate (const char *, char, rtx *,
++					  enum machine_mode, int, bool);
+ extern void neon_pairwise_reduce (rtx, rtx, enum machine_mode,
+ 				  rtx (*) (rtx, rtx, rtx));
+ extern rtx neon_make_constant (rtx);
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-06-29 09:13:17 +0000
++++ new/gcc/config/arm/arm.c	2011-07-04 14:03:49 +0000
+@@ -8863,6 +8863,66 @@
+   return 1;
+ }
+ 
++/* Return TRUE if rtx OP is legal for use in a VSHR or VSHL instruction.  If
++   the immediate is valid, write a constant suitable for using as an operand
++   to VSHR/VSHL to *MODCONST and the corresponding element width to
++   *ELEMENTWIDTH. ISLEFTSHIFT is for determine left or right shift,
++   because they have different limitations.  */
++
++int
++neon_immediate_valid_for_shift (rtx op, enum machine_mode mode,
++				rtx *modconst, int *elementwidth,
++				bool isleftshift)
++{
++  unsigned int innersize = GET_MODE_SIZE (GET_MODE_INNER (mode));
++  unsigned int n_elts = CONST_VECTOR_NUNITS (op), i;
++  unsigned HOST_WIDE_INT last_elt = 0;
++  unsigned HOST_WIDE_INT maxshift;
++
++  /* Split vector constant out into a byte vector.  */
++  for (i = 0; i < n_elts; i++)
++    {
++      rtx el = CONST_VECTOR_ELT (op, i);
++      unsigned HOST_WIDE_INT elpart;
++
++      if (GET_CODE (el) == CONST_INT)
++        elpart = INTVAL (el);
++      else if (GET_CODE (el) == CONST_DOUBLE)
++        return 0;
++      else
++        gcc_unreachable ();
++
++      if (i != 0 && elpart != last_elt)
++        return 0;
++
++      last_elt = elpart;
++    }
++
++  /* Shift less than element size.  */
++  maxshift = innersize * 8;
++
++  if (isleftshift)
++    {
++      /* Left shift immediate value can be from 0 to <size>-1.  */
++      if (last_elt >= maxshift)
++        return 0;
++    }
++  else
++    {
++      /* Right shift immediate value can be from 1 to <size>.  */
++      if (last_elt == 0 || last_elt > maxshift)
++	return 0;
++    }
++
++  if (elementwidth)
++    *elementwidth = innersize * 8;
++
++  if (modconst)
++    *modconst = CONST_VECTOR_ELT (op, 0);
++
++  return 1;
++}
++
+ /* Return a string suitable for output of Neon immediate logic operation
+    MNEM.  */
+ 
+@@ -8885,6 +8945,28 @@
+   return templ;
+ }
+ 
++/* Return a string suitable for output of Neon immediate shift operation
++   (VSHR or VSHL) MNEM.  */
++
++char *
++neon_output_shift_immediate (const char *mnem, char sign, rtx *op2,
++			     enum machine_mode mode, int quad,
++			     bool isleftshift)
++{
++  int width, is_valid;
++  static char templ[40];
++
++  is_valid = neon_immediate_valid_for_shift (*op2, mode, op2, &width, isleftshift);
++  gcc_assert (is_valid != 0);
++
++  if (quad)
++    sprintf (templ, "%s.%c%d\t%%q0, %%q1, %%2", mnem, sign, width);
++  else
++    sprintf (templ, "%s.%c%d\t%%P0, %%P1, %%2", mnem, sign, width);
++
++  return templ;
++}
++
+ /* Output a sequence of pairwise operations to implement a reduction.
+    NOTE: We do "too much work" here, because pairwise operations work on two
+    registers-worth of operands in one go. Unfortunately we can't exploit those
+
+=== modified file 'gcc/config/arm/neon.md'
+--- old/gcc/config/arm/neon.md	2011-07-01 09:19:21 +0000
++++ new/gcc/config/arm/neon.md	2011-07-04 14:03:49 +0000
+@@ -956,15 +956,57 @@
+ ; SImode elements.
+ 
+ (define_insn "vashl<mode>3"
+-  [(set (match_operand:VDQIW 0 "s_register_operand" "=w")
+-	(ashift:VDQIW (match_operand:VDQIW 1 "s_register_operand" "w")
+-		      (match_operand:VDQIW 2 "s_register_operand" "w")))]
+-  "TARGET_NEON"
+-  "vshl.<V_s_elem>\t%<V_reg>0, %<V_reg>1, %<V_reg>2"
+-  [(set (attr "neon_type")
+-      (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
+-                    (const_string "neon_vshl_ddd")
+-                    (const_string "neon_shift_3")))]
++  [(set (match_operand:VDQIW 0 "s_register_operand" "=w,w")
++	(ashift:VDQIW (match_operand:VDQIW 1 "s_register_operand" "w,w")
++		      (match_operand:VDQIW 2 "imm_lshift_or_reg_neon" "w,Dn")))]
++  "TARGET_NEON"
++  {
++    switch (which_alternative)
++      {
++        case 0: return "vshl.<V_s_elem>\t%<V_reg>0, %<V_reg>1, %<V_reg>2";
++        case 1: return neon_output_shift_immediate ("vshl", 'i', &operands[2],
++                         			    <MODE>mode,
++						    VALID_NEON_QREG_MODE (<MODE>mode),
++						    true);
++        default: gcc_unreachable ();
++      }
++  }
++  [(set (attr "neon_type")
++      (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
++                    (const_string "neon_vshl_ddd")
++                    (const_string "neon_shift_3")))]
++)
++
++(define_insn "vashr<mode>3_imm"
++  [(set (match_operand:VDQIW 0 "s_register_operand" "=w")
++	(ashiftrt:VDQIW (match_operand:VDQIW 1 "s_register_operand" "w")
++			(match_operand:VDQIW 2 "imm_for_neon_rshift_operand" "Dn")))]
++  "TARGET_NEON"
++  {
++    return neon_output_shift_immediate ("vshr", 's', &operands[2],
++					<MODE>mode, VALID_NEON_QREG_MODE (<MODE>mode),
++					false);
++  }
++  [(set (attr "neon_type")
++      (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
++                    (const_string "neon_vshl_ddd")
++                    (const_string "neon_shift_3")))]
++)
++
++(define_insn "vlshr<mode>3_imm"
++  [(set (match_operand:VDQIW 0 "s_register_operand" "=w")
++	(lshiftrt:VDQIW (match_operand:VDQIW 1 "s_register_operand" "w")
++			(match_operand:VDQIW 2 "imm_for_neon_rshift_operand" "Dn")))]
++  "TARGET_NEON"
++  {
++    return neon_output_shift_immediate ("vshr", 'u', &operands[2],
++					<MODE>mode, VALID_NEON_QREG_MODE (<MODE>mode),
++					false);
++  }              
++  [(set (attr "neon_type")
++	(if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
++		      (const_string "neon_vshl_ddd")
++		      (const_string "neon_shift_3")))]
+ )
+ 
+ ; Used for implementing logical shift-right, which is a left-shift by a negative
+@@ -1004,28 +1046,34 @@
+ (define_expand "vashr<mode>3"
+   [(set (match_operand:VDQIW 0 "s_register_operand" "")
+ 	(ashiftrt:VDQIW (match_operand:VDQIW 1 "s_register_operand" "")
+-			(match_operand:VDQIW 2 "s_register_operand" "")))]
++			(match_operand:VDQIW 2 "imm_rshift_or_reg_neon" "")))]
+   "TARGET_NEON"
+ {
+   rtx neg = gen_reg_rtx (<MODE>mode);
+-
+-  emit_insn (gen_neg<mode>2 (neg, operands[2]));
+-  emit_insn (gen_ashl<mode>3_signed (operands[0], operands[1], neg));
+-
++  if (REG_P (operands[2]))
++    {
++      emit_insn (gen_neg<mode>2 (neg, operands[2]));
++      emit_insn (gen_ashl<mode>3_signed (operands[0], operands[1], neg));
++    }
++  else
++    emit_insn (gen_vashr<mode>3_imm (operands[0], operands[1], operands[2]));
+   DONE;
+ })
+ 
+ (define_expand "vlshr<mode>3"
+   [(set (match_operand:VDQIW 0 "s_register_operand" "")
+ 	(lshiftrt:VDQIW (match_operand:VDQIW 1 "s_register_operand" "")
+-			(match_operand:VDQIW 2 "s_register_operand" "")))]
++			(match_operand:VDQIW 2 "imm_rshift_or_reg_neon" "")))]
+   "TARGET_NEON"
+ {
+   rtx neg = gen_reg_rtx (<MODE>mode);
+-
+-  emit_insn (gen_neg<mode>2 (neg, operands[2]));
+-  emit_insn (gen_ashl<mode>3_unsigned (operands[0], operands[1], neg));
+-
++  if (REG_P (operands[2]))
++    {
++      emit_insn (gen_neg<mode>2 (neg, operands[2]));
++      emit_insn (gen_ashl<mode>3_unsigned (operands[0], operands[1], neg));
++    }
++  else
++    emit_insn (gen_vlshr<mode>3_imm (operands[0], operands[1], operands[2]));
+   DONE;
+ })
+ 
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-06-22 15:50:23 +0000
++++ new/gcc/config/arm/predicates.md	2011-07-04 14:03:49 +0000
+@@ -585,6 +585,26 @@
+   return neon_immediate_valid_for_move (op, mode, NULL, NULL);
+ })
+ 
++(define_predicate "imm_for_neon_lshift_operand"
++  (match_code "const_vector")
++{
++  return neon_immediate_valid_for_shift (op, mode, NULL, NULL, true);
++})
++
++(define_predicate "imm_for_neon_rshift_operand"
++  (match_code "const_vector")
++{
++  return neon_immediate_valid_for_shift (op, mode, NULL, NULL, false);
++})
++
++(define_predicate "imm_lshift_or_reg_neon"
++  (ior (match_operand 0 "s_register_operand")
++       (match_operand 0 "imm_for_neon_lshift_operand")))
++
++(define_predicate "imm_rshift_or_reg_neon"
++  (ior (match_operand 0 "s_register_operand")
++       (match_operand 0 "imm_for_neon_rshift_operand")))
++
+ (define_predicate "imm_for_neon_logic_operand"
+   (match_code "const_vector")
+ {
+
+=== modified file 'gcc/optabs.c'
+--- old/gcc/optabs.c	2011-03-04 10:27:10 +0000
++++ new/gcc/optabs.c	2011-07-04 14:03:49 +0000
+@@ -6171,6 +6171,9 @@
+   init_optab (usashl_optab, US_ASHIFT);
+   init_optab (ashr_optab, ASHIFTRT);
+   init_optab (lshr_optab, LSHIFTRT);
++  init_optabv (vashl_optab, ASHIFT);
++  init_optabv (vashr_optab, ASHIFTRT);
++  init_optabv (vlshr_optab, LSHIFTRT);
+   init_optab (rotl_optab, ROTATE);
+   init_optab (rotr_optab, ROTATERT);
+   init_optab (smin_optab, SMIN);
+
+=== added file 'gcc/testsuite/gcc.target/arm/neon-vlshr-imm-1.c'
+--- old/gcc/testsuite/gcc.target/arm/neon-vlshr-imm-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/neon-vlshr-imm-1.c	2011-07-04 14:03:49 +0000
+@@ -0,0 +1,11 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O2 -mfpu=neon -mfloat-abi=softfp -ftree-vectorize" } */
++/* { dg-final { scan-assembler "vshr\.u32.*#3" } } */
++
++/* Verify that VSHR immediate is used.  */
++void f1(int n, unsigned int x[], unsigned int y[]) {
++  int i;
++  for (i = 0; i < n; ++i)
++    y[i] = x[i] >> 3;
++}
+
+=== added file 'gcc/testsuite/gcc.target/arm/neon-vshl-imm-1.c'
+--- old/gcc/testsuite/gcc.target/arm/neon-vshl-imm-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/neon-vshl-imm-1.c	2011-07-04 14:03:49 +0000
+@@ -0,0 +1,11 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O2 -mfpu=neon -mfloat-abi=softfp -ftree-vectorize" } */
++/* { dg-final { scan-assembler "vshl\.i32.*#3" } } */
++
++/* Verify that VSHR immediate is used.  */
++void f1(int n, int x[], int y[]) {
++  int i;
++  for (i = 0; i < n; ++i)
++    y[i] = x[i] << 3;
++}
+
+=== added file 'gcc/testsuite/gcc.target/arm/neon-vshr-imm-1.c'
+--- old/gcc/testsuite/gcc.target/arm/neon-vshr-imm-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/neon-vshr-imm-1.c	2011-07-04 14:03:49 +0000
+@@ -0,0 +1,11 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O2 -mfpu=neon -mfloat-abi=softfp -ftree-vectorize" } */
++/* { dg-final { scan-assembler "vshr\.s32.*#3" } } */
++
++/* Verify that VSHR immediate is used.  */
++void f1(int n, int x[], int y[]) {
++  int i;
++  for (i = 0; i < n; ++i)
++    y[i] = x[i] >> 3;
++}
+

@@ -1,0 +1,1355 @@
+2011-06-28  Ira Rosen  <ira.rosen@linaro.org>
+
+	Backport from FSF:
+
+	2011-06-07  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-vectorizer.h (vect_recog_func_ptr): Make last argument to be
+	a pointer.
+	* tree-vect-patterns.c (vect_recog_widen_sum_pattern,
+	vect_recog_widen_mult_pattern, vect_recog_dot_prod_pattern,
+	vect_recog_pow_pattern): Likewise.
+	(vect_pattern_recog_1): Remove declaration.
+	(widened_name_p): Remove declaration.  Add new argument to specify
+	whether to check that both types are either signed or unsigned.
+	(vect_recog_widen_mult_pattern): Update documentation.  Handle
+	unsigned patterns and multiplication by constants.
+	(vect_pattern_recog_1): Update vect_recog_func references.  Use
+	statement information from the statement returned from pattern
+	detection functions.
+	(vect_pattern_recog): Update vect_recog_func reference.
+	* tree-vect-stmts.c (vectorizable_type_promotion): For widening
+	multiplication by a constant use the type of the other operand.
+
+	gcc/testsuite
+	* lib/target-supports.exp
+	(check_effective_target_vect_widen_mult_qi_to_hi):
+	Add NEON as supporting target.
+	(check_effective_target_vect_widen_mult_hi_to_si): Likewise.
+	(check_effective_target_vect_widen_mult_qi_to_hi_pattern): New.
+	(check_effective_target_vect_widen_mult_hi_to_si_pattern): New.
+	* gcc.dg/vect/vect-widen-mult-u8.c: Expect to be vectorized
+	using widening multiplication on targets that support it.
+	* gcc.dg/vect/vect-widen-mult-u16.c: Likewise.
+	* gcc.dg/vect/vect-widen-mult-const-s16.c: New test.
+	* gcc.dg/vect/vect-widen-mult-const-u16.c: New test.
+
+	and
+
+	2011-06-15  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-vect-loop-manip.c (remove_dead_stmts_from_loop): Remove.
+	(slpeel_tree_peel_loop_to_edge): Don't call
+	remove_dead_stmts_from_loop.
+	* tree-vect-loop.c (vect_determine_vectorization_factor): Don't
+	remove irrelevant pattern statements.  For irrelevant statements
+	check if it is the last statement of a detected pattern, use
+	corresponding pattern statement instead.
+	(destroy_loop_vec_info): No need to remove pattern statements,
+	only free stmt_vec_info.
+	(vect_transform_loop): For irrelevant statements check if it is
+	the last statement of a detected pattern, use corresponding
+	pattern statement instead.
+	* tree-vect-patterns.c (vect_pattern_recog_1): Don't insert
+	pattern statements.  Set basic block for the new statement.
+	(vect_pattern_recog): Update documentation.
+	* tree-vect-stmts.c (vect_mark_stmts_to_be_vectorized): Scan
+	operands of pattern statements.
+	(vectorizable_call): Fix printing.  In case of a pattern statement
+	use the lhs of the original statement when creating a dummy
+	statement to replace the original call.
+	(vect_analyze_stmt): For irrelevant statements check if it is
+	the last statement of a detected pattern, use corresponding
+	pattern statement instead.
+	* tree-vect-slp.c (vect_schedule_slp_instance): For pattern
+	statements use gsi of the original statement.
+
+	and
+	2011-06-21  Ira Rosen  <ira.rosen@linaro.org>
+
+	PR tree-optimization/49478
+	gcc/
+
+	* tree-vect-loop.c (vectorizable_reduction): Handle DOT_PROD_EXPR
+	with constant operand.
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-mult-const-s16.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-mult-const-s16.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-mult-const-s16.c	2011-06-19 10:59:13 +0000
+@@ -0,0 +1,60 @@
++/* { dg-require-effective-target vect_int } */
++
++#include "tree-vect.h"
++#include <stdlib.h>
++
++#define N 32
++
++__attribute__ ((noinline)) void 
++foo (int *__restrict a,
++     short *__restrict b,
++     int n)
++{
++  int i;
++
++  for (i = 0; i < n; i++)
++    a[i] = b[i] * 2333;
++
++  for (i = 0; i < n; i++)
++    if (a[i] != b[i] * 2333)
++      abort ();
++}
++
++__attribute__ ((noinline)) void
++bar (int *__restrict a,
++     short *__restrict b,
++     int n)
++{
++  int i;
++
++  for (i = 0; i < n; i++)
++    a[i] = b[i] * (short) 2333;
++
++  for (i = 0; i < n; i++)
++    if (a[i] != b[i] * (short) 2333)
++      abort ();
++}
++
++int main (void)
++{
++  int i;
++  int a[N];
++  short b[N];
++
++  for (i = 0; i < N; i++)
++    {
++      a[i] = 0;
++      b[i] = i;
++      __asm__ volatile ("");
++    }
++
++  foo (a, b, N);
++  bar (a, b, N);
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect" { target vect_widen_mult_hi_to_si } } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 2 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
++/* { dg-final { scan-tree-dump-times "pattern recognized" 2 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-mult-const-u16.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-mult-const-u16.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-mult-const-u16.c	2011-06-19 10:59:13 +0000
+@@ -0,0 +1,77 @@
++/* { dg-require-effective-target vect_int } */
++
++#include "tree-vect.h"
++#include <stdlib.h>
++
++#define N 32
++
++__attribute__ ((noinline)) void 
++foo (unsigned int *__restrict a,
++     unsigned short *__restrict b,
++     int n)
++{
++  int i;
++
++  for (i = 0; i < n; i++)
++    a[i] = b[i] * 2333;
++
++  for (i = 0; i < n; i++)
++    if (a[i] != b[i] * 2333)
++      abort ();
++}
++
++__attribute__ ((noinline)) void
++bar (unsigned int *__restrict a,
++     unsigned short *__restrict b,
++     int n)
++{
++  int i;
++
++  for (i = 0; i < n; i++)
++    a[i] = (unsigned short) 2333 * b[i];
++
++  for (i = 0; i < n; i++)
++    if (a[i] != b[i] * (unsigned short) 2333)
++      abort ();
++}
++
++__attribute__ ((noinline)) void
++baz (unsigned int *__restrict a,
++     unsigned short *__restrict b,
++     int n)
++{
++  int i;
++
++  for (i = 0; i < n; i++)
++    a[i] = b[i] * 233333333;
++
++  for (i = 0; i < n; i++)
++    if (a[i] != b[i] * 233333333)
++      abort ();
++}
++
++
++int main (void)
++{
++  int i;
++  unsigned int a[N];
++  unsigned short b[N];
++
++  for (i = 0; i < N; i++)
++    {
++      a[i] = 0;
++      b[i] = i;
++      __asm__ volatile ("");
++    }
++
++  foo (a, b, N);
++  bar (a, b, N);
++  baz (a, b, N);
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 3 "vect" { target vect_widen_mult_hi_to_si } } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 2 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
++/* { dg-final { scan-tree-dump-times "pattern recognized" 2 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-widen-mult-u16.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-mult-u16.c	2010-05-27 12:23:45 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-mult-u16.c	2011-06-19 10:59:13 +0000
+@@ -9,13 +9,11 @@
+ unsigned short Y[N] __attribute__ ((__aligned__(__BIGGEST_ALIGNMENT__)));
+ unsigned int result[N];
+ 
+-/* short->int widening-mult */
++/* unsigned short->unsigned int widening-mult.  */
+ __attribute__ ((noinline)) int
+ foo1(int len) {
+   int i;
+ 
+-  /* Not vectorized because X[i] and Y[i] are casted to 'int'
+-     so the widening multiplication pattern is not recognized.  */
+   for (i=0; i<len; i++) {
+     result[i] = (unsigned int)(X[i] * Y[i]);
+   }
+@@ -43,8 +41,8 @@
+   return 0;
+ }
+ 
+-/*The induction loop is vectorized  */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 2 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target vect_pack_trunc } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_widen_mult_hi_to_si || vect_unpack } } } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 1 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
++/* { dg-final { scan-tree-dump-times "pattern recognized" 1 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-widen-mult-u8.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-mult-u8.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-mult-u8.c	2011-06-19 10:59:13 +0000
+@@ -9,7 +9,7 @@
+ unsigned char Y[N] __attribute__ ((__aligned__(__BIGGEST_ALIGNMENT__)));
+ unsigned short result[N];
+ 
+-/* char->short widening-mult */
++/* unsigned char-> unsigned short widening-mult.  */
+ __attribute__ ((noinline)) int
+ foo1(int len) {
+   int i;
+@@ -28,8 +28,7 @@
+   for (i=0; i<N; i++) {
+     X[i] = i;
+     Y[i] = 64-i;
+-    if (i%4 == 0)
+-      X[i] = 5;
++    __asm__ volatile ("");
+   }
+ 
+   foo1 (N);
+@@ -43,5 +42,7 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { target { vect_widen_mult_qi_to_hi || vect_unpack } } } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 1 "vect" { target vect_widen_mult_qi_to_hi_pattern } } } */
++/* { dg-final { scan-tree-dump-times "pattern recognized" 1 "vect" { target vect_widen_mult_qi_to_hi_pattern } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/lib/target-supports.exp'
+--- old/gcc/testsuite/lib/target-supports.exp	2011-06-02 12:12:00 +0000
++++ new/gcc/testsuite/lib/target-supports.exp	2011-06-19 10:59:13 +0000
+@@ -2663,7 +2663,8 @@
+ 	} else {
+ 	    set et_vect_widen_mult_qi_to_hi_saved 0
+ 	}
+-        if { [istarget powerpc*-*-*] } {
++        if { [istarget powerpc*-*-*]
++              || ([istarget arm*-*-*] && [check_effective_target_arm_neon]) } {
+             set et_vect_widen_mult_qi_to_hi_saved 1
+         }
+     }
+@@ -2696,7 +2697,8 @@
+ 	      || [istarget spu-*-*]
+ 	      || [istarget ia64-*-*]
+ 	      || [istarget i?86-*-*]
+-	      || [istarget x86_64-*-*] } {
++	      || [istarget x86_64-*-*]
++              || ([istarget arm*-*-*] && [check_effective_target_arm_neon]) } {
+             set et_vect_widen_mult_hi_to_si_saved 1
+         }
+     }
+@@ -2705,6 +2707,52 @@
+ }
+ 
+ # Return 1 if the target plus current options supports a vector
++# widening multiplication of *char* args into *short* result, 0 otherwise.
++#
++# This won't change for different subtargets so cache the result.
++
++proc check_effective_target_vect_widen_mult_qi_to_hi_pattern { } {
++    global et_vect_widen_mult_qi_to_hi_pattern
++
++    if [info exists et_vect_widen_mult_qi_to_hi_pattern_saved] {
++        verbose "check_effective_target_vect_widen_mult_qi_to_hi_pattern: using cached result" 2
++    } else {
++        set et_vect_widen_mult_qi_to_hi_pattern_saved 0
++        if { [istarget powerpc*-*-*]
++              || ([istarget arm*-*-*] && [check_effective_target_arm_neon]) } {
++            set et_vect_widen_mult_qi_to_hi_pattern_saved 1
++        }
++    }
++    verbose "check_effective_target_vect_widen_mult_qi_to_hi_pattern: returning $et_vect_widen_mult_qi_to_hi_pattern_saved" 2
++    return $et_vect_widen_mult_qi_to_hi_pattern_saved
++}
++
++# Return 1 if the target plus current options supports a vector
++# widening multiplication of *short* args into *int* result, 0 otherwise.
++#
++# This won't change for different subtargets so cache the result.
++
++proc check_effective_target_vect_widen_mult_hi_to_si_pattern { } {
++    global et_vect_widen_mult_hi_to_si_pattern
++
++    if [info exists et_vect_widen_mult_hi_to_si_pattern_saved] {
++        verbose "check_effective_target_vect_widen_mult_hi_to_si_pattern: using cached result" 2
++    } else {
++        set et_vect_widen_mult_hi_to_si_pattern_saved 0
++        if { [istarget powerpc*-*-*]
++              || [istarget spu-*-*]
++              || [istarget ia64-*-*]
++              || [istarget i?86-*-*]
++              || [istarget x86_64-*-*]
++              || ([istarget arm*-*-*] && [check_effective_target_arm_neon]) } {
++            set et_vect_widen_mult_hi_to_si_pattern_saved 1
++        }
++    }
++    verbose "check_effective_target_vect_widen_mult_hi_to_si_pattern: returning $et_vect_widen_mult_hi_to_si_pattern_saved" 2
++    return $et_vect_widen_mult_hi_to_si_pattern_saved
++}
++
++# Return 1 if the target plus current options supports a vector
+ # dot-product of signed chars, 0 otherwise.
+ #
+ # This won't change for different subtargets so cache the result.
+
+=== modified file 'gcc/tree-vect-loop-manip.c'
+--- old/gcc/tree-vect-loop-manip.c	2011-05-18 13:24:05 +0000
++++ new/gcc/tree-vect-loop-manip.c	2011-06-19 10:59:13 +0000
+@@ -1105,35 +1105,6 @@
+   first_niters = PHI_RESULT (newphi);
+ }
+ 
+-
+-/* Remove dead assignments from loop NEW_LOOP.  */
+-
+-static void
+-remove_dead_stmts_from_loop (struct loop *new_loop)
+-{
+-  basic_block *bbs = get_loop_body (new_loop);
+-  unsigned i;
+-  for (i = 0; i < new_loop->num_nodes; ++i)
+-    {
+-      gimple_stmt_iterator gsi;
+-      for (gsi = gsi_start_bb (bbs[i]); !gsi_end_p (gsi);)
+-	{
+-	  gimple stmt = gsi_stmt (gsi);
+-	  if (is_gimple_assign (stmt)
+-	      && TREE_CODE (gimple_assign_lhs (stmt)) == SSA_NAME
+-	      && has_zero_uses (gimple_assign_lhs (stmt)))
+-	    {
+-	      gsi_remove (&gsi, true);
+-	      release_defs (stmt);
+-	    }
+-	  else
+-	    gsi_next (&gsi);
+-	}
+-    }
+-  free (bbs);
+-}
+-
+-
+ /* Function slpeel_tree_peel_loop_to_edge.
+ 
+    Peel the first (last) iterations of LOOP into a new prolog (epilog) loop
+@@ -1445,13 +1416,6 @@
+   BITMAP_FREE (definitions);
+   delete_update_ssa ();
+ 
+-  /* Remove all pattern statements from the loop copy.  They will confuse
+-     the expander if DCE is disabled.
+-     ???  The pattern recognizer should be split into an analysis and
+-     a transformation phase that is then run only on the loop that is
+-     going to be transformed.  */
+-  remove_dead_stmts_from_loop (new_loop);
+-
+   adjust_vec_debug_stmts ();
+ 
+   return new_loop;
+
+=== modified file 'gcc/tree-vect-loop.c'
+--- old/gcc/tree-vect-loop.c	2011-03-01 13:18:25 +0000
++++ new/gcc/tree-vect-loop.c	2011-06-22 06:21:13 +0000
+@@ -244,7 +244,7 @@
+       for (si = gsi_start_bb (bb); !gsi_end_p (si); gsi_next (&si))
+         {
+ 	  tree vf_vectype;
+-	  gimple stmt = gsi_stmt (si);
++	  gimple stmt = gsi_stmt (si), pattern_stmt;
+ 	  stmt_info = vinfo_for_stmt (stmt);
+ 
+ 	  if (vect_print_dump_info (REPORT_DETAILS))
+@@ -259,9 +259,25 @@
+ 	  if (!STMT_VINFO_RELEVANT_P (stmt_info)
+ 	      && !STMT_VINFO_LIVE_P (stmt_info))
+ 	    {
+-	      if (vect_print_dump_info (REPORT_DETAILS))
+-	        fprintf (vect_dump, "skip.");
+-	      continue;
++              if (STMT_VINFO_IN_PATTERN_P (stmt_info)
++                  && (pattern_stmt = STMT_VINFO_RELATED_STMT (stmt_info))
++                  && (STMT_VINFO_RELEVANT_P (vinfo_for_stmt (pattern_stmt))
++                      || STMT_VINFO_LIVE_P (vinfo_for_stmt (pattern_stmt))))
++                {
++                  stmt = pattern_stmt;
++                  stmt_info = vinfo_for_stmt (pattern_stmt);
++                  if (vect_print_dump_info (REPORT_DETAILS))
++                    {
++                      fprintf (vect_dump, "==> examining pattern statement: ");
++                      print_gimple_stmt (vect_dump, stmt, 0, TDF_SLIM);
++                    }
++                }
++             else
++               {
++                 if (vect_print_dump_info (REPORT_DETAILS))
++                   fprintf (vect_dump, "skip.");
++                 continue;
++               }
+ 	    }
+ 
+ 	  if (gimple_get_lhs (stmt) == NULL_TREE)
+@@ -816,25 +832,17 @@
+ 
+           if (stmt_info)
+             {
+-              /* Check if this is a "pattern stmt" (introduced by the
+-                 vectorizer during the pattern recognition pass).  */
+-              bool remove_stmt_p = false;
+-              gimple orig_stmt = STMT_VINFO_RELATED_STMT (stmt_info);
+-              if (orig_stmt)
+-                {
+-                  stmt_vec_info orig_stmt_info = vinfo_for_stmt (orig_stmt);
+-                  if (orig_stmt_info
+-                      && STMT_VINFO_IN_PATTERN_P (orig_stmt_info))
+-                    remove_stmt_p = true;
+-                }
++              /* Check if this statement has a related "pattern stmt"
++                 (introduced by the vectorizer during the pattern recognition
++                 pass).  Free pattern's stmt_vec_info.  */
++              if (STMT_VINFO_IN_PATTERN_P (stmt_info)
++                  && vinfo_for_stmt (STMT_VINFO_RELATED_STMT (stmt_info)))
++                free_stmt_vec_info (STMT_VINFO_RELATED_STMT (stmt_info));
+ 
+               /* Free stmt_vec_info.  */
+               free_stmt_vec_info (stmt);
++            }
+ 
+-              /* Remove dead "pattern stmts".  */
+-              if (remove_stmt_p)
+-                gsi_remove (&si, true);
+-            }
+           gsi_next (&si);
+         }
+     }
+@@ -4262,6 +4270,25 @@
+       return false;
+     }
+ 
++  /* In case of widenning multiplication by a constant, we update the type
++     of the constant to be the type of the other operand.  We check that the
++     constant fits the type in the pattern recognition pass.  */
++  if (code == DOT_PROD_EXPR
++      && !types_compatible_p (TREE_TYPE (ops[0]), TREE_TYPE (ops[1])))
++    {
++      if (TREE_CODE (ops[0]) == INTEGER_CST)
++        ops[0] = fold_convert (TREE_TYPE (ops[1]), ops[0]);
++      else if (TREE_CODE (ops[1]) == INTEGER_CST)
++        ops[1] = fold_convert (TREE_TYPE (ops[0]), ops[1]);
++      else
++        {
++          if (vect_print_dump_info (REPORT_DETAILS))
++            fprintf (vect_dump, "invalid types in dot-prod");
++
++          return false;
++        }
++    }
++
+   if (!vec_stmt) /* transformation not required.  */
+     {
+       STMT_VINFO_TYPE (stmt_info) = reduc_vec_info_type;
+@@ -4796,7 +4823,7 @@
+ 
+       for (si = gsi_start_bb (bb); !gsi_end_p (si);)
+ 	{
+-	  gimple stmt = gsi_stmt (si);
++	  gimple stmt = gsi_stmt (si), pattern_stmt;
+ 	  bool is_store;
+ 
+ 	  if (vect_print_dump_info (REPORT_DETAILS))
+@@ -4821,14 +4848,25 @@
+ 
+ 	  if (!STMT_VINFO_RELEVANT_P (stmt_info)
+ 	      && !STMT_VINFO_LIVE_P (stmt_info))
+-	    {
+-	      gsi_next (&si);
+-	      continue;
++            {
++              if (STMT_VINFO_IN_PATTERN_P (stmt_info)
++                  && (pattern_stmt = STMT_VINFO_RELATED_STMT (stmt_info))
++                  && (STMT_VINFO_RELEVANT_P (vinfo_for_stmt (pattern_stmt))
++                      || STMT_VINFO_LIVE_P (vinfo_for_stmt (pattern_stmt))))
++                {
++                  stmt = pattern_stmt;
++                  stmt_info = vinfo_for_stmt (stmt);
++                }
++              else
++	        {
++   	          gsi_next (&si);
++	          continue;
++                }
+ 	    }
+ 
+ 	  gcc_assert (STMT_VINFO_VECTYPE (stmt_info));
+-	  nunits =
+-	    (unsigned int) TYPE_VECTOR_SUBPARTS (STMT_VINFO_VECTYPE (stmt_info));
++	  nunits = (unsigned int) TYPE_VECTOR_SUBPARTS (
++                                               STMT_VINFO_VECTYPE (stmt_info));
+ 	  if (!STMT_SLP_TYPE (stmt_info)
+ 	      && nunits != (unsigned int) vectorization_factor
+               && vect_print_dump_info (REPORT_DETAILS))
+
+=== modified file 'gcc/tree-vect-patterns.c'
+--- old/gcc/tree-vect-patterns.c	2010-12-02 11:47:12 +0000
++++ new/gcc/tree-vect-patterns.c	2011-06-22 12:10:44 +0000
+@@ -38,16 +38,11 @@
+ #include "recog.h"
+ #include "diagnostic-core.h"
+ 
+-/* Function prototypes */
+-static void vect_pattern_recog_1
+-  (gimple (* ) (gimple, tree *, tree *), gimple_stmt_iterator);
+-static bool widened_name_p (tree, gimple, tree *, gimple *);
+-
+ /* Pattern recognition functions  */
+-static gimple vect_recog_widen_sum_pattern (gimple, tree *, tree *);
+-static gimple vect_recog_widen_mult_pattern (gimple, tree *, tree *);
+-static gimple vect_recog_dot_prod_pattern (gimple, tree *, tree *);
+-static gimple vect_recog_pow_pattern (gimple, tree *, tree *);
++static gimple vect_recog_widen_sum_pattern (gimple *, tree *, tree *);
++static gimple vect_recog_widen_mult_pattern (gimple *, tree *, tree *);
++static gimple vect_recog_dot_prod_pattern (gimple *, tree *, tree *);
++static gimple vect_recog_pow_pattern (gimple *, tree *, tree *);
+ static vect_recog_func_ptr vect_vect_recog_func_ptrs[NUM_PATTERNS] = {
+ 	vect_recog_widen_mult_pattern,
+ 	vect_recog_widen_sum_pattern,
+@@ -61,10 +56,12 @@
+    is a result of a type-promotion, such that:
+      DEF_STMT: NAME = NOP (name0)
+    where the type of name0 (HALF_TYPE) is smaller than the type of NAME.
+-*/
++   If CHECK_SIGN is TRUE, check that either both types are signed or both are
++   unsigned.  */
+ 
+ static bool
+-widened_name_p (tree name, gimple use_stmt, tree *half_type, gimple *def_stmt)
++widened_name_p (tree name, gimple use_stmt, tree *half_type, gimple *def_stmt,
++		bool check_sign)
+ {
+   tree dummy;
+   gimple dummy_gimple;
+@@ -98,7 +95,7 @@
+ 
+   *half_type = TREE_TYPE (oprnd0);
+   if (!INTEGRAL_TYPE_P (type) || !INTEGRAL_TYPE_P (*half_type)
+-      || (TYPE_UNSIGNED (type) != TYPE_UNSIGNED (*half_type))
++      || ((TYPE_UNSIGNED (type) != TYPE_UNSIGNED (*half_type)) && check_sign)
+       || (TYPE_PRECISION (type) < (TYPE_PRECISION (*half_type) * 2)))
+     return false;
+ 
+@@ -168,12 +165,12 @@
+          inner-loop nested in an outer-loop that us being vectorized).  */
+ 
+ static gimple
+-vect_recog_dot_prod_pattern (gimple last_stmt, tree *type_in, tree *type_out)
++vect_recog_dot_prod_pattern (gimple *last_stmt, tree *type_in, tree *type_out)
+ {
+   gimple stmt;
+   tree oprnd0, oprnd1;
+   tree oprnd00, oprnd01;
+-  stmt_vec_info stmt_vinfo = vinfo_for_stmt (last_stmt);
++  stmt_vec_info stmt_vinfo = vinfo_for_stmt (*last_stmt);
+   tree type, half_type;
+   gimple pattern_stmt;
+   tree prod_type;
+@@ -181,10 +178,10 @@
+   struct loop *loop = LOOP_VINFO_LOOP (loop_info);
+   tree var, rhs;
+ 
+-  if (!is_gimple_assign (last_stmt))
++  if (!is_gimple_assign (*last_stmt))
+     return NULL;
+ 
+-  type = gimple_expr_type (last_stmt);
++  type = gimple_expr_type (*last_stmt);
+ 
+   /* Look for the following pattern
+           DX = (TYPE1) X;
+@@ -210,7 +207,7 @@
+   /* Starting from LAST_STMT, follow the defs of its uses in search
+      of the above pattern.  */
+ 
+-  if (gimple_assign_rhs_code (last_stmt) != PLUS_EXPR)
++  if (gimple_assign_rhs_code (*last_stmt) != PLUS_EXPR)
+     return NULL;
+ 
+   if (STMT_VINFO_IN_PATTERN_P (stmt_vinfo))
+@@ -231,14 +228,14 @@
+ 
+       if (STMT_VINFO_DEF_TYPE (stmt_vinfo) != vect_reduction_def)
+         return NULL;
+-      oprnd0 = gimple_assign_rhs1 (last_stmt);
+-      oprnd1 = gimple_assign_rhs2 (last_stmt);
++      oprnd0 = gimple_assign_rhs1 (*last_stmt);
++      oprnd1 = gimple_assign_rhs2 (*last_stmt);
+       if (!types_compatible_p (TREE_TYPE (oprnd0), type)
+ 	  || !types_compatible_p (TREE_TYPE (oprnd1), type))
+         return NULL;
+-      stmt = last_stmt;
++      stmt = *last_stmt;
+ 
+-      if (widened_name_p (oprnd0, stmt, &half_type, &def_stmt))
++      if (widened_name_p (oprnd0, stmt, &half_type, &def_stmt, true))
+         {
+           stmt = def_stmt;
+           oprnd0 = gimple_assign_rhs1 (stmt);
+@@ -293,10 +290,10 @@
+       if (!types_compatible_p (TREE_TYPE (oprnd0), prod_type)
+           || !types_compatible_p (TREE_TYPE (oprnd1), prod_type))
+         return NULL;
+-      if (!widened_name_p (oprnd0, stmt, &half_type0, &def_stmt))
++      if (!widened_name_p (oprnd0, stmt, &half_type0, &def_stmt, true))
+         return NULL;
+       oprnd00 = gimple_assign_rhs1 (def_stmt);
+-      if (!widened_name_p (oprnd1, stmt, &half_type1, &def_stmt))
++      if (!widened_name_p (oprnd1, stmt, &half_type1, &def_stmt, true))
+         return NULL;
+       oprnd01 = gimple_assign_rhs1 (def_stmt);
+       if (!types_compatible_p (half_type0, half_type1))
+@@ -322,7 +319,7 @@
+ 
+   /* We don't allow changing the order of the computation in the inner-loop
+      when doing outer-loop vectorization.  */
+-  gcc_assert (!nested_in_vect_loop_p (loop, last_stmt));
++  gcc_assert (!nested_in_vect_loop_p (loop, *last_stmt));
+ 
+   return pattern_stmt;
+ }
+@@ -342,24 +339,47 @@
+ 
+    where type 'TYPE' is at least double the size of type 'type'.
+ 
+-   Input:
+-
+-   * LAST_STMT: A stmt from which the pattern search begins. In the example,
+-   when this function is called with S5, the pattern {S3,S4,S5} is be detected.
+-
+-   Output:
+-
+-   * TYPE_IN: The type of the input arguments to the pattern.
+-
+-   * TYPE_OUT: The type of the output  of this pattern.
+-
+-   * Return value: A new stmt that will be used to replace the sequence of
+-   stmts that constitute the pattern. In this case it will be:
+-        WIDEN_MULT <a_t, b_t>
+-*/
++   Also detect unsgigned cases:
++
++     unsigned type a_t, b_t;
++     unsigned TYPE u_prod_T;
++     TYPE a_T, b_T, prod_T;
++
++     S1  a_t = ;
++     S2  b_t = ;
++     S3  a_T = (TYPE) a_t;
++     S4  b_T = (TYPE) b_t;
++     S5  prod_T = a_T * b_T;
++     S6  u_prod_T = (unsigned TYPE) prod_T;
++
++   and multiplication by constants:
++
++     type a_t;
++     TYPE a_T, prod_T;
++
++     S1  a_t = ;
++     S3  a_T = (TYPE) a_t;
++     S5  prod_T = a_T * CONST;
++
++    Input:
++
++    * LAST_STMT: A stmt from which the pattern search begins.  In the example,
++    when this function is called with S5, the pattern {S3,S4,S5,(S6)} is
++    detected.
++
++    Output:
++
++    * TYPE_IN: The type of the input arguments to the pattern.
++
++    * TYPE_OUT: The type of the output of this pattern.
++
++    * Return value: A new stmt that will be used to replace the sequence of
++    stmts that constitute the pattern.  In this case it will be:
++         WIDEN_MULT <a_t, b_t>
++ */
+ 
+ static gimple
+-vect_recog_widen_mult_pattern (gimple last_stmt,
++vect_recog_widen_mult_pattern (gimple *last_stmt,
+ 			       tree *type_in,
+ 			       tree *type_out)
+ {
+@@ -367,39 +387,112 @@
+   tree oprnd0, oprnd1;
+   tree type, half_type0, half_type1;
+   gimple pattern_stmt;
+-  tree vectype, vectype_out;
++  tree vectype, vectype_out = NULL_TREE;
+   tree dummy;
+   tree var;
+   enum tree_code dummy_code;
+   int dummy_int;
+   VEC (tree, heap) *dummy_vec;
++  bool op0_ok, op1_ok;
+ 
+-  if (!is_gimple_assign (last_stmt))
++  if (!is_gimple_assign (*last_stmt))
+     return NULL;
+ 
+-  type = gimple_expr_type (last_stmt);
++  type = gimple_expr_type (*last_stmt);
+ 
+   /* Starting from LAST_STMT, follow the defs of its uses in search
+      of the above pattern.  */
+ 
+-  if (gimple_assign_rhs_code (last_stmt) != MULT_EXPR)
++  if (gimple_assign_rhs_code (*last_stmt) != MULT_EXPR)
+     return NULL;
+ 
+-  oprnd0 = gimple_assign_rhs1 (last_stmt);
+-  oprnd1 = gimple_assign_rhs2 (last_stmt);
++  oprnd0 = gimple_assign_rhs1 (*last_stmt);
++  oprnd1 = gimple_assign_rhs2 (*last_stmt);
+   if (!types_compatible_p (TREE_TYPE (oprnd0), type)
+       || !types_compatible_p (TREE_TYPE (oprnd1), type))
+     return NULL;
+ 
+-  /* Check argument 0 */
+-  if (!widened_name_p (oprnd0, last_stmt, &half_type0, &def_stmt0))
+-    return NULL;
+-  oprnd0 = gimple_assign_rhs1 (def_stmt0);
+-
+-  /* Check argument 1 */
+-  if (!widened_name_p (oprnd1, last_stmt, &half_type1, &def_stmt1))
+-    return NULL;
+-  oprnd1 = gimple_assign_rhs1 (def_stmt1);
++  /* Check argument 0.  */
++  op0_ok = widened_name_p (oprnd0, *last_stmt, &half_type0, &def_stmt0, false);
++  /* Check argument 1.  */
++  op1_ok = widened_name_p (oprnd1, *last_stmt, &half_type1, &def_stmt1, false);
++
++  /* In case of multiplication by a constant one of the operands may not match
++     the pattern, but not both.  */
++  if (!op0_ok && !op1_ok)
++     return NULL;
++
++  if (op0_ok && op1_ok)
++    {
++      oprnd0 = gimple_assign_rhs1 (def_stmt0);
++      oprnd1 = gimple_assign_rhs1 (def_stmt1);
++    }
++  else if (!op0_ok)
++    {
++      if (CONSTANT_CLASS_P (oprnd0)
++         && TREE_CODE (half_type1) == INTEGER_TYPE
++         && tree_int_cst_lt (oprnd0, TYPE_MAXVAL (half_type1))
++         && tree_int_cst_lt (TYPE_MINVAL (half_type1), oprnd0))
++        {
++          /* OPRND0 is a constant of HALF_TYPE1.  */
++          half_type0 = half_type1;
++          oprnd1 = gimple_assign_rhs1 (def_stmt1);
++        }
++      else
++        return NULL;
++    }
++  else if (!op1_ok)
++    {
++      if (CONSTANT_CLASS_P (oprnd1)
++          && TREE_CODE (half_type0) == INTEGER_TYPE
++          && tree_int_cst_lt (oprnd1, TYPE_MAXVAL (half_type0))
++          && tree_int_cst_lt (TYPE_MINVAL (half_type0), oprnd1))
++        {
++          /* OPRND1 is a constant of HALF_TYPE0.  */
++          half_type1 = half_type0;
++          oprnd0 = gimple_assign_rhs1 (def_stmt0);
++        }
++      else
++        return NULL;
++    }
++
++  /* Handle unsigned case.  Look for
++     S6  u_prod_T = (unsigned TYPE) prod_T;
++     Use unsigned TYPE as the type for WIDEN_MULT_EXPR.  */
++  if (TYPE_UNSIGNED (type) != TYPE_UNSIGNED (half_type0))
++    {
++      tree lhs = gimple_assign_lhs (*last_stmt), use_lhs;
++      imm_use_iterator imm_iter;
++      use_operand_p use_p;
++      int nuses = 0;
++      gimple use_stmt = NULL;
++      tree use_type;
++
++      if (TYPE_UNSIGNED (type) == TYPE_UNSIGNED (half_type1))
++        return NULL;
++
++      FOR_EACH_IMM_USE_FAST (use_p, imm_iter, lhs)
++        {
++	  if (is_gimple_debug (USE_STMT (use_p)))
++	    continue;
++          use_stmt = USE_STMT (use_p);
++          nuses++;
++        }
++
++      if (nuses != 1 || !is_gimple_assign (use_stmt)
++          || gimple_assign_rhs_code (use_stmt) != NOP_EXPR)
++        return NULL;
++
++      use_lhs = gimple_assign_lhs (use_stmt);
++      use_type = TREE_TYPE (use_lhs);
++      if (!INTEGRAL_TYPE_P (use_type)
++          || (TYPE_UNSIGNED (type) == TYPE_UNSIGNED (use_type))
++          || (TYPE_PRECISION (type) != TYPE_PRECISION (use_type)))
++        return NULL;
++
++      type = use_type;
++      *last_stmt = use_stmt;
++    }
+ 
+   if (!types_compatible_p (half_type0, half_type1))
+     return NULL;
+@@ -413,7 +506,7 @@
+   vectype_out = get_vectype_for_scalar_type (type);
+   if (!vectype
+       || !vectype_out
+-      || !supportable_widening_operation (WIDEN_MULT_EXPR, last_stmt,
++      || !supportable_widening_operation (WIDEN_MULT_EXPR, *last_stmt,
+ 					  vectype_out, vectype,
+ 					  &dummy, &dummy, &dummy_code,
+ 					  &dummy_code, &dummy_int, &dummy_vec))
+@@ -462,16 +555,16 @@
+ */
+ 
+ static gimple
+-vect_recog_pow_pattern (gimple last_stmt, tree *type_in, tree *type_out)
++vect_recog_pow_pattern (gimple *last_stmt, tree *type_in, tree *type_out)
+ {
+   tree fn, base, exp = NULL;
+   gimple stmt;
+   tree var;
+ 
+-  if (!is_gimple_call (last_stmt) || gimple_call_lhs (last_stmt) == NULL)
++  if (!is_gimple_call (*last_stmt) || gimple_call_lhs (*last_stmt) == NULL)
+     return NULL;
+ 
+-  fn = gimple_call_fndecl (last_stmt);
++  fn = gimple_call_fndecl (*last_stmt);
+   if (fn == NULL_TREE || DECL_BUILT_IN_CLASS (fn) != BUILT_IN_NORMAL)
+    return NULL;
+ 
+@@ -481,8 +574,8 @@
+     case BUILT_IN_POWI:
+     case BUILT_IN_POWF:
+     case BUILT_IN_POW:
+-      base = gimple_call_arg (last_stmt, 0);
+-      exp = gimple_call_arg (last_stmt, 1);
++      base = gimple_call_arg (*last_stmt, 0);
++      exp = gimple_call_arg (*last_stmt, 1);
+       if (TREE_CODE (exp) != REAL_CST
+ 	  && TREE_CODE (exp) != INTEGER_CST)
+         return NULL;
+@@ -574,21 +667,21 @@
+ 	 inner-loop nested in an outer-loop that us being vectorized).  */
+ 
+ static gimple
+-vect_recog_widen_sum_pattern (gimple last_stmt, tree *type_in, tree *type_out)
++vect_recog_widen_sum_pattern (gimple *last_stmt, tree *type_in, tree *type_out)
+ {
+   gimple stmt;
+   tree oprnd0, oprnd1;
+-  stmt_vec_info stmt_vinfo = vinfo_for_stmt (last_stmt);
++  stmt_vec_info stmt_vinfo = vinfo_for_stmt (*last_stmt);
+   tree type, half_type;
+   gimple pattern_stmt;
+   loop_vec_info loop_info = STMT_VINFO_LOOP_VINFO (stmt_vinfo);
+   struct loop *loop = LOOP_VINFO_LOOP (loop_info);
+   tree var;
+ 
+-  if (!is_gimple_assign (last_stmt))
++  if (!is_gimple_assign (*last_stmt))
+     return NULL;
+ 
+-  type = gimple_expr_type (last_stmt);
++  type = gimple_expr_type (*last_stmt);
+ 
+   /* Look for the following pattern
+           DX = (TYPE) X;
+@@ -600,25 +693,25 @@
+   /* Starting from LAST_STMT, follow the defs of its uses in search
+      of the above pattern.  */
+ 
+-  if (gimple_assign_rhs_code (last_stmt) != PLUS_EXPR)
++  if (gimple_assign_rhs_code (*last_stmt) != PLUS_EXPR)
+     return NULL;
+ 
+   if (STMT_VINFO_DEF_TYPE (stmt_vinfo) != vect_reduction_def)
+     return NULL;
+ 
+-  oprnd0 = gimple_assign_rhs1 (last_stmt);
+-  oprnd1 = gimple_assign_rhs2 (last_stmt);
++  oprnd0 = gimple_assign_rhs1 (*last_stmt);
++  oprnd1 = gimple_assign_rhs2 (*last_stmt);
+   if (!types_compatible_p (TREE_TYPE (oprnd0), type)
+       || !types_compatible_p (TREE_TYPE (oprnd1), type))
+     return NULL;
+ 
+-  /* So far so good. Since last_stmt was detected as a (summation) reduction,
++  /* So far so good.  Since *last_stmt was detected as a (summation) reduction,
+      we know that oprnd1 is the reduction variable (defined by a loop-header
+      phi), and oprnd0 is an ssa-name defined by a stmt in the loop body.
+      Left to check that oprnd0 is defined by a cast from type 'type' to type
+      'TYPE'.  */
+ 
+-  if (!widened_name_p (oprnd0, last_stmt, &half_type, &stmt))
++  if (!widened_name_p (oprnd0, *last_stmt, &half_type, &stmt, true))
+     return NULL;
+ 
+   oprnd0 = gimple_assign_rhs1 (stmt);
+@@ -639,7 +732,7 @@
+ 
+   /* We don't allow changing the order of the computation in the inner-loop
+      when doing outer-loop vectorization.  */
+-  gcc_assert (!nested_in_vect_loop_p (loop, last_stmt));
++  gcc_assert (!nested_in_vect_loop_p (loop, *last_stmt));
+ 
+   return pattern_stmt;
+ }
+@@ -669,23 +762,27 @@
+ 
+ static void
+ vect_pattern_recog_1 (
+-	gimple (* vect_recog_func) (gimple, tree *, tree *),
++	gimple (* vect_recog_func) (gimple *, tree *, tree *),
+ 	gimple_stmt_iterator si)
+ {
+   gimple stmt = gsi_stmt (si), pattern_stmt;
+-  stmt_vec_info stmt_info = vinfo_for_stmt (stmt);
++  stmt_vec_info stmt_info;
+   stmt_vec_info pattern_stmt_info;
+-  loop_vec_info loop_vinfo = STMT_VINFO_LOOP_VINFO (stmt_info);
++  loop_vec_info loop_vinfo;
+   tree pattern_vectype;
+   tree type_in, type_out;
+   enum tree_code code;
+   int i;
+   gimple next;
+ 
+-  pattern_stmt = (* vect_recog_func) (stmt, &type_in, &type_out);
++  pattern_stmt = (* vect_recog_func) (&stmt, &type_in, &type_out);
+   if (!pattern_stmt)
+     return;
+ 
++  si = gsi_for_stmt (stmt);
++  stmt_info = vinfo_for_stmt (stmt);
++  loop_vinfo = STMT_VINFO_LOOP_VINFO (stmt_info);
++ 
+   if (VECTOR_MODE_P (TYPE_MODE (type_in)))
+     {
+       /* No need to check target support (already checked by the pattern
+@@ -736,9 +833,9 @@
+     }
+ 
+   /* Mark the stmts that are involved in the pattern. */
+-  gsi_insert_before (&si, pattern_stmt, GSI_SAME_STMT);
+   set_vinfo_for_stmt (pattern_stmt,
+ 		      new_stmt_vec_info (pattern_stmt, loop_vinfo, NULL));
++  gimple_set_bb (pattern_stmt, gimple_bb (stmt));
+   pattern_stmt_info = vinfo_for_stmt (pattern_stmt);
+ 
+   STMT_VINFO_RELATED_STMT (pattern_stmt_info) = stmt;
+@@ -761,8 +858,8 @@
+    LOOP_VINFO - a struct_loop_info of a loop in which we want to look for
+         computation idioms.
+ 
+-   Output - for each computation idiom that is detected we insert a new stmt
+-        that provides the same functionality and that can be vectorized. We
++   Output - for each computation idiom that is detected we create a new stmt
++        that provides the same functionality and that can be vectorized.  We
+         also record some information in the struct_stmt_info of the relevant
+         stmts, as explained below:
+ 
+@@ -777,52 +874,48 @@
+          S5: ... = ..use(a_0)..         -       -               -
+ 
+    Say the sequence {S1,S2,S3,S4} was detected as a pattern that can be
+-   represented by a single stmt. We then:
+-   - create a new stmt S6 that will replace the pattern.
+-   - insert the new stmt S6 before the last stmt in the pattern
++   represented by a single stmt.  We then:
++   - create a new stmt S6 equivalent to the pattern (the stmt is not
++     inserted into the code)
+    - fill in the STMT_VINFO fields as follows:
+ 
+                                   in_pattern_p  related_stmt    vec_stmt
+          S1: a_i = ....                 -       -               -
+          S2: a_2 = ..use(a_i)..         -       -               -
+          S3: a_1 = ..use(a_2)..         -       -               -
+-       > S6: a_new = ....               -       S4              -
+          S4: a_0 = ..use(a_1)..         true    S6              -
++          '---> S6: a_new = ....        -       S4              -
+          S5: ... = ..use(a_0)..         -       -               -
+ 
+    (the last stmt in the pattern (S4) and the new pattern stmt (S6) point
+-    to each other through the RELATED_STMT field).
++   to each other through the RELATED_STMT field).
+ 
+    S6 will be marked as relevant in vect_mark_stmts_to_be_vectorized instead
+    of S4 because it will replace all its uses.  Stmts {S1,S2,S3} will
+    remain irrelevant unless used by stmts other than S4.
+ 
+    If vectorization succeeds, vect_transform_stmt will skip over {S1,S2,S3}
+-   (because they are marked as irrelevant). It will vectorize S6, and record
++   (because they are marked as irrelevant).  It will vectorize S6, and record
+    a pointer to the new vector stmt VS6 both from S6 (as usual), and also
+-   from S4. We do that so that when we get to vectorizing stmts that use the
++   from S4.  We do that so that when we get to vectorizing stmts that use the
+    def of S4 (like S5 that uses a_0), we'll know where to take the relevant
+-   vector-def from. S4 will be skipped, and S5 will be vectorized as usual:
++   vector-def from.  S4 will be skipped, and S5 will be vectorized as usual:
+ 
+                                   in_pattern_p  related_stmt    vec_stmt
+          S1: a_i = ....                 -       -               -
+          S2: a_2 = ..use(a_i)..         -       -               -
+          S3: a_1 = ..use(a_2)..         -       -               -
+        > VS6: va_new = ....             -       -               -
+-         S6: a_new = ....               -       S4              VS6
+          S4: a_0 = ..use(a_1)..         true    S6              VS6
++          '---> S6: a_new = ....        -       S4              VS6
+        > VS5: ... = ..vuse(va_new)..    -       -               -
+          S5: ... = ..use(a_0)..         -       -               -
+ 
+-   DCE could then get rid of {S1,S2,S3,S4,S5,S6} (if their defs are not used
++   DCE could then get rid of {S1,S2,S3,S4,S5} (if their defs are not used
+    elsewhere), and we'll end up with:
+ 
+         VS6: va_new = ....
+-        VS5: ... = ..vuse(va_new)..
+-
+-   If vectorization does not succeed, DCE will clean S6 away (its def is
+-   not used), and we'll end up with the original sequence.
+-*/
++        VS5: ... = ..vuse(va_new)..  */
+ 
+ void
+ vect_pattern_recog (loop_vec_info loop_vinfo)
+@@ -832,7 +925,7 @@
+   unsigned int nbbs = loop->num_nodes;
+   gimple_stmt_iterator si;
+   unsigned int i, j;
+-  gimple (* vect_recog_func_ptr) (gimple, tree *, tree *);
++  gimple (* vect_recog_func_ptr) (gimple *, tree *, tree *);
+ 
+   if (vect_print_dump_info (REPORT_DETAILS))
+     fprintf (vect_dump, "=== vect_pattern_recog ===");
+
+=== modified file 'gcc/tree-vect-slp.c'
+--- old/gcc/tree-vect-slp.c	2011-05-05 15:43:06 +0000
++++ new/gcc/tree-vect-slp.c	2011-06-19 10:59:13 +0000
+@@ -2510,6 +2510,8 @@
+       && STMT_VINFO_STRIDED_ACCESS (stmt_info)
+       && !REFERENCE_CLASS_P (gimple_get_lhs (stmt)))
+     si = gsi_for_stmt (SLP_INSTANCE_FIRST_LOAD_STMT (instance));
++  else if (is_pattern_stmt_p (stmt_info))
++     si = gsi_for_stmt (STMT_VINFO_RELATED_STMT (stmt_info));
+   else
+     si = gsi_for_stmt (stmt);
+ 
+
+=== modified file 'gcc/tree-vect-stmts.c'
+--- old/gcc/tree-vect-stmts.c	2011-06-02 12:12:00 +0000
++++ new/gcc/tree-vect-stmts.c	2011-06-22 06:21:13 +0000
+@@ -605,15 +605,76 @@
+             break;
+         }
+ 
+-      FOR_EACH_PHI_OR_STMT_USE (use_p, stmt, iter, SSA_OP_USE)
+-	{
+-	  tree op = USE_FROM_PTR (use_p);
+-	  if (!process_use (stmt, op, loop_vinfo, live_p, relevant, &worklist))
+-	    {
+-	      VEC_free (gimple, heap, worklist);
+-	      return false;
+-	    }
+-	}
++      if (is_pattern_stmt_p (vinfo_for_stmt (stmt)))
++        {
++          /* Pattern statements are not inserted into the code, so
++             FOR_EACH_PHI_OR_STMT_USE optimizes their operands out, and we
++             have to scan the RHS or function arguments instead.  */
++          if (is_gimple_assign (stmt))
++            {
++              tree rhs = gimple_assign_rhs1 (stmt);
++              if (get_gimple_rhs_class (gimple_assign_rhs_code (stmt))
++                  == GIMPLE_SINGLE_RHS)
++                {
++                  unsigned int op_num = TREE_OPERAND_LENGTH (gimple_assign_rhs1
++                                                              (stmt));
++                  for (i = 0; i < op_num; i++)
++                    {
++                      tree op = TREE_OPERAND (rhs, i);
++                      if (!process_use (stmt, op, loop_vinfo, live_p, relevant,
++                                    &worklist))
++                       {
++                         VEC_free (gimple, heap, worklist);
++                         return false;
++                       }
++                    }
++                }
++              else if (get_gimple_rhs_class (gimple_assign_rhs_code (stmt))
++                       == GIMPLE_BINARY_RHS)
++                {
++                  tree op = gimple_assign_rhs1 (stmt);
++                  if (!process_use (stmt, op, loop_vinfo, live_p, relevant,
++                                    &worklist))
++                    {
++                      VEC_free (gimple, heap, worklist);
++                      return false;
++                    }
++                  op = gimple_assign_rhs2 (stmt);
++                  if (!process_use (stmt, op, loop_vinfo, live_p, relevant,
++                                    &worklist))
++                    {
++                      VEC_free (gimple, heap, worklist);
++                      return false;
++                    }
++                }
++              else
++                return false;
++            }
++          else if (is_gimple_call (stmt))
++            {
++              for (i = 0; i < gimple_call_num_args (stmt); i++)
++                {
++                  tree arg = gimple_call_arg (stmt, i);
++                  if (!process_use (stmt, arg, loop_vinfo, live_p, relevant,
++                                    &worklist))
++                    {
++                      VEC_free (gimple, heap, worklist);
++                      return false;
++                    }
++                }
++            }
++        }
++      else
++        FOR_EACH_PHI_OR_STMT_USE (use_p, stmt, iter, SSA_OP_USE)
++          {
++            tree op = USE_FROM_PTR (use_p);
++            if (!process_use (stmt, op, loop_vinfo, live_p, relevant,
++                              &worklist))
++              {
++                VEC_free (gimple, heap, worklist);
++                return false;
++              }
++          }
+     } /* while worklist */
+ 
+   VEC_free (gimple, heap, worklist);
+@@ -1405,6 +1466,7 @@
+   VEC(tree, heap) *vargs = NULL;
+   enum { NARROW, NONE, WIDEN } modifier;
+   size_t i, nargs;
++  tree lhs;
+ 
+   /* FORNOW: unsupported in basic block SLP.  */
+   gcc_assert (loop_vinfo);
+@@ -1542,7 +1604,7 @@
+   /** Transform.  **/
+ 
+   if (vect_print_dump_info (REPORT_DETAILS))
+-    fprintf (vect_dump, "transform operation.");
++    fprintf (vect_dump, "transform call.");
+ 
+   /* Handle def.  */
+   scalar_dest = gimple_call_lhs (stmt);
+@@ -1661,8 +1723,11 @@
+      rhs of the statement with something harmless.  */
+ 
+   type = TREE_TYPE (scalar_dest);
+-  new_stmt = gimple_build_assign (gimple_call_lhs (stmt),
+-				  build_zero_cst (type));
++  if (is_pattern_stmt_p (stmt_info))
++    lhs = gimple_call_lhs (STMT_VINFO_RELATED_STMT (stmt_info));
++  else
++    lhs = gimple_call_lhs (stmt);
++  new_stmt = gimple_build_assign (lhs, build_zero_cst (type));
+   set_vinfo_for_stmt (new_stmt, stmt_info);
+   set_vinfo_for_stmt (stmt, NULL);
+   STMT_VINFO_STMT (stmt_info) = new_stmt;
+@@ -3231,6 +3296,33 @@
+ 	fprintf (vect_dump, "use not simple.");
+       return false;
+     }
++
++  op_type = TREE_CODE_LENGTH (code);
++  if (op_type == binary_op)
++    {
++      bool ok;
++
++      op1 = gimple_assign_rhs2 (stmt);
++      if (code == WIDEN_MULT_EXPR)
++        {
++	  /* For WIDEN_MULT_EXPR, if OP0 is a constant, use the type of
++	     OP1.  */
++          if (CONSTANT_CLASS_P (op0))
++            ok = vect_is_simple_use_1 (op1, loop_vinfo, NULL,
++                             &def_stmt, &def, &dt[1], &vectype_in);
++          else
++            ok = vect_is_simple_use (op1, loop_vinfo, NULL, &def_stmt, &def,
++                                     &dt[1]);
++
++          if (!ok)
++            {
++	      if (vect_print_dump_info (REPORT_DETAILS))
++	        fprintf (vect_dump, "use not simple.");
++              return false;
++            }
++        }        
++    }
++
+   /* If op0 is an external or constant def use a vector type with
+      the same size as the output vector type.  */
+   if (!vectype_in)
+@@ -3263,18 +3355,6 @@
+ 
+   gcc_assert (ncopies >= 1);
+ 
+-  op_type = TREE_CODE_LENGTH (code);
+-  if (op_type == binary_op)
+-    {
+-      op1 = gimple_assign_rhs2 (stmt);
+-      if (!vect_is_simple_use (op1, loop_vinfo, NULL, &def_stmt, &def, &dt[1]))
+-        {
+-	  if (vect_print_dump_info (REPORT_DETAILS))
+-	    fprintf (vect_dump, "use not simple.");
+-          return false;
+-        }
+-    }
+-
+   /* Supportable by target?  */
+   if (!supportable_widening_operation (code, stmt, vectype_out, vectype_in,
+ 				       &decl1, &decl2, &code1, &code2,
+@@ -3300,6 +3380,14 @@
+     fprintf (vect_dump, "transform type promotion operation. ncopies = %d.",
+                         ncopies);
+ 
++  if (code == WIDEN_MULT_EXPR)
++    {
++      if (CONSTANT_CLASS_P (op0))
++	op0 = fold_convert (TREE_TYPE (op1), op0);
++      else if (CONSTANT_CLASS_P (op1))
++	op1 = fold_convert (TREE_TYPE (op0), op1);
++    }
++
+   /* Handle def.  */
+   /* In case of multi-step promotion, we first generate promotion operations
+      to the intermediate types, and then from that types to the final one.
+@@ -4824,10 +4912,26 @@
+   if (!STMT_VINFO_RELEVANT_P (stmt_info)
+       && !STMT_VINFO_LIVE_P (stmt_info))
+     {
+-      if (vect_print_dump_info (REPORT_DETAILS))
+-        fprintf (vect_dump, "irrelevant.");
++      gimple pattern_stmt = STMT_VINFO_RELATED_STMT (stmt_info);
++      if (STMT_VINFO_IN_PATTERN_P (stmt_info)
++          && (STMT_VINFO_RELEVANT_P (vinfo_for_stmt (pattern_stmt))
++              || STMT_VINFO_LIVE_P (vinfo_for_stmt (pattern_stmt))))
++        {
++          stmt = pattern_stmt;
++          stmt_info = vinfo_for_stmt (pattern_stmt);
++          if (vect_print_dump_info (REPORT_DETAILS))
++            {
++              fprintf (vect_dump, "==> examining pattern statement: ");
++              print_gimple_stmt (vect_dump, stmt, 0, TDF_SLIM);
++            }
++        }
++      else
++        {
++          if (vect_print_dump_info (REPORT_DETAILS))
++            fprintf (vect_dump, "irrelevant.");
+ 
+-      return true;
++          return true;
++        }
+     }
+ 
+   switch (STMT_VINFO_DEF_TYPE (stmt_info))
+
+=== modified file 'gcc/tree-vectorizer.h'
+--- old/gcc/tree-vectorizer.h	2011-05-05 15:43:06 +0000
++++ new/gcc/tree-vectorizer.h	2011-06-19 10:59:13 +0000
+@@ -884,7 +884,7 @@
+ /* Pattern recognition functions.
+    Additional pattern recognition functions can (and will) be added
+    in the future.  */
+-typedef gimple (* vect_recog_func_ptr) (gimple, tree *, tree *);
++typedef gimple (* vect_recog_func_ptr) (gimple *, tree *, tree *);
+ #define NUM_PATTERNS 4
+ void vect_pattern_recog (loop_vec_info);
+ 
+

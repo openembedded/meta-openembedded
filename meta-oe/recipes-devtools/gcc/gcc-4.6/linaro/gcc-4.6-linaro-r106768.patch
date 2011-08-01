@@ -1,0 +1,182 @@
+2011-07-07  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	* builtins.c (get_object_alignment): Fix comment.
+	* fold-const.c (get_pointer_modulus_and_residue): Remove
+	allow_func_align.  Use get_object_alignment.
+	(fold_binary_loc): Update caller.
+
+2011-07-07  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-06-29  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	PR tree-optimization/49545
+	* builtins.c (get_object_alignment_1): Update function comment.
+	Do not use DECL_ALIGN for functions, but test
+	TARGET_PTRMEMFUNC_VBIT_LOCATION instead.
+	* fold-const.c (get_pointer_modulus_and_residue): Don't check
+	for functions here.
+	* tree-ssa-ccp.c (get_value_from_alignment): Likewise.
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-06-29  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* gcc.dg/torture/pr49169.c: Restrict to ARM and MIPS targets.
+
+2011-07-07  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-07-27  Richard Guenther  <rguenther@suse.de>
+
+	PR tree-optimization/49169
+	* fold-const.c (get_pointer_modulus_and_residue): Don't rely on
+	the alignment of function decls.
+
+	gcc/testsuite/
+	Backport from mainline:
+
+	2011-07-27  Michael Hope  <michael.hope@linaro.org>
+		    Richard Sandiford  <richard.sandiford@linaro.org>
+
+	PR tree-optimization/49169
+	* gcc.dg/torture/pr49169.c: New test.
+
+=== modified file 'gcc/builtins.c'
+--- old/gcc/builtins.c	2011-03-03 21:56:58 +0000
++++ new/gcc/builtins.c	2011-07-04 09:52:27 +0000
+@@ -264,7 +264,14 @@
+ }
+ 
+ /* Return the alignment in bits of EXP, an object.
+-   Don't return more than MAX_ALIGN no matter what.  */
++   Don't return more than MAX_ALIGN no matter what.
++
++   Note that the address (and thus the alignment) computed here is based
++   on the address to which a symbol resolves, whereas DECL_ALIGN is based
++   on the address at which an object is actually located.  These two
++   addresses are not always the same.  For example, on ARM targets,
++   the address &foo of a Thumb function foo() has the lowest bit set,
++   whereas foo() itself starts on an even address.  */
+ 
+ unsigned int
+ get_object_alignment (tree exp, unsigned int max_align)
+@@ -286,7 +293,21 @@
+     exp = DECL_INITIAL (exp);
+   if (DECL_P (exp)
+       && TREE_CODE (exp) != LABEL_DECL)
+-    align = DECL_ALIGN (exp);
++    {
++      if (TREE_CODE (exp) == FUNCTION_DECL)
++	{
++	  /* Function addresses can encode extra information besides their
++	     alignment.  However, if TARGET_PTRMEMFUNC_VBIT_LOCATION
++	     allows the low bit to be used as a virtual bit, we know
++	     that the address itself must be 2-byte aligned.  */
++	  if (TARGET_PTRMEMFUNC_VBIT_LOCATION == ptrmemfunc_vbit_in_pfn)
++	    align = 2 * BITS_PER_UNIT;
++	  else
++	    align = BITS_PER_UNIT;
++	}
++      else
++	align = DECL_ALIGN (exp);
++    }
+   else if (CONSTANT_CLASS_P (exp))
+     {
+       align = TYPE_ALIGN (TREE_TYPE (exp));
+
+=== modified file 'gcc/fold-const.c'
+--- old/gcc/fold-const.c	2011-05-23 20:37:18 +0000
++++ new/gcc/fold-const.c	2011-07-04 09:52:27 +0000
+@@ -9232,15 +9232,10 @@
+    0 <= N < M as is common.  In general, the precise value of P is unknown.
+    M is chosen as large as possible such that constant N can be determined.
+ 
+-   Returns M and sets *RESIDUE to N.
+-
+-   If ALLOW_FUNC_ALIGN is true, do take functions' DECL_ALIGN_UNIT into
+-   account.  This is not always possible due to PR 35705.
+- */
++   Returns M and sets *RESIDUE to N.  */
+ 
+ static unsigned HOST_WIDE_INT
+-get_pointer_modulus_and_residue (tree expr, unsigned HOST_WIDE_INT *residue,
+-				 bool allow_func_align)
++get_pointer_modulus_and_residue (tree expr, unsigned HOST_WIDE_INT *residue)
+ {
+   enum tree_code code;
+ 
+@@ -9270,9 +9265,8 @@
+ 	    }
+ 	}
+ 
+-      if (DECL_P (expr)
+-	  && (allow_func_align || TREE_CODE (expr) != FUNCTION_DECL))
+-	return DECL_ALIGN_UNIT (expr);
++      if (DECL_P (expr))
++	return get_object_alignment (expr, ~0U) / BITS_PER_UNIT;
+     }
+   else if (code == POINTER_PLUS_EXPR)
+     {
+@@ -9282,8 +9276,7 @@
+ 
+       op0 = TREE_OPERAND (expr, 0);
+       STRIP_NOPS (op0);
+-      modulus = get_pointer_modulus_and_residue (op0, residue,
+-						 allow_func_align);
++      modulus = get_pointer_modulus_and_residue (op0, residue);
+ 
+       op1 = TREE_OPERAND (expr, 1);
+       STRIP_NOPS (op1);
+@@ -11163,8 +11156,7 @@
+ 	  unsigned HOST_WIDE_INT modulus, residue;
+ 	  unsigned HOST_WIDE_INT low = TREE_INT_CST_LOW (arg1);
+ 
+-	  modulus = get_pointer_modulus_and_residue (arg0, &residue,
+-						     integer_onep (arg1));
++	  modulus = get_pointer_modulus_and_residue (arg0, &residue);
+ 
+ 	  /* This works because modulus is a power of 2.  If this weren't the
+ 	     case, we'd have to replace it by its greatest power-of-2
+
+=== added file 'gcc/testsuite/gcc.dg/torture/pr49169.c'
+--- old/gcc/testsuite/gcc.dg/torture/pr49169.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/torture/pr49169.c	2011-06-29 09:46:06 +0000
+@@ -0,0 +1,15 @@
++/* { dg-do compile { target { arm*-*-* || mips*-*-* } } } */
++
++#include <stdlib.h>
++#include <stdint.h>
++
++int
++main (void)
++{
++  void *p = main;
++  if ((intptr_t) p & 1)
++    abort ();
++  return 0;
++}
++
++/* { dg-final { scan-assembler "abort" } } */
+
+=== modified file 'gcc/tree-ssa-ccp.c'
+--- old/gcc/tree-ssa-ccp.c	2011-05-05 15:42:22 +0000
++++ new/gcc/tree-ssa-ccp.c	2011-06-29 09:46:06 +0000
+@@ -522,10 +522,6 @@
+     val = bit_value_binop (PLUS_EXPR, TREE_TYPE (expr),
+ 			   TREE_OPERAND (base, 0), TREE_OPERAND (base, 1));
+   else if (base
+-	   /* ???  While function decls have DECL_ALIGN their addresses
+-	      may encode extra information in the lower bits on some
+-	      targets (PR47239).  Simply punt for function decls for now.  */
+-	   && TREE_CODE (base) != FUNCTION_DECL
+ 	   && ((align = get_object_alignment (base, BIGGEST_ALIGNMENT))
+ 		> BITS_PER_UNIT))
+     {
+

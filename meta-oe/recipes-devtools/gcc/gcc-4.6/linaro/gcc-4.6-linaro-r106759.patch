@@ -1,0 +1,545 @@
+2011-06-20  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	Backport from mainline.
+	2011-06-03  Julian Brown  <julian@codesourcery.com>
+
+	* config/arm/arm-cores.def (strongarm, strongarm110, strongarm1100)
+	(strongarm1110): Use strongarm tuning.
+	* config/arm/arm-protos.h (tune_params): Add max_insns_skipped
+	field.
+	* config/arm/arm.c (arm_strongarm_tune): New.
+	(arm_slowmul_tune, arm_fastmul_tune, arm_xscale_tune, arm_9e_tune)
+	(arm_v6t2_tune, arm_cortex_tune, arm_cortex_a5_tune)
+	(arm_cortex_a9_tune, arm_fa726te_tune): Add max_insns_skipped field
+	setting, using previous defaults or 1 for Cortex-A5.
+	(arm_option_override): Set max_insns_skipped from current tuning.
+ 
+2011-06-14  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	Backport from mainline.
+	2011-06-02  Julian Brown  <julian@codesourcery.com>
+
+	* config/arm/arm-cores.def (cortex-a5): Use cortex_a5 tuning.
+	* config/arm/arm.c (arm_cortex_a5_branch_cost): New.
+	(arm_cortex_a5_tune): New.
+
+	2011-06-02  Julian Brown  <julian@codesourcery.com>
+
+	* config/arm/arm-protos.h (tune_params): Add branch_cost hook.
+	* config/arm/arm.c (arm_default_branch_cost): New.
+	(arm_slowmul_tune, arm_fastmul_tune, arm_xscale_tune, arm_9e_tune)
+	(arm_v6t2_tune, arm_cortex_tune, arm_cortex_a9_tune)
+	(arm_fa726_tune): Set branch_cost field using
+	arm_default_branch_cost.
+	* config/arm/arm.h (BRANCH_COST): Use branch_cost hook from
+	current_tune structure.
+	* dojump.c (tm_p.h): Include file.
+
+        2011-06-02  Julian Brown  <julian@codesourcery.com>
+
+	* config/arm/arm-cores.def (arm1156t2-s, arm1156t2f-s): Use v6t2
+	tuning.
+	(cortex-a5, cortex-a8, cortex-a15, cortex-r4, cortex-r4f, cortex-m4)
+	(cortex-m3, cortex-m1, cortex-m0): Use cortex tuning.
+	* config/arm/arm-protos.h (tune_params): Add prefer_constant_pool
+	field.
+	* config/arm/arm.c (arm_slowmul_tune, arm_fastmul_tune)
+	(arm_xscale_tune, arm_9e_tune, arm_cortex_a9_tune)
+	(arm_fa726te_tune): Add prefer_constant_pool setting.
+	(arm_v6t2_tune, arm_cortex_tune): New.
+	* config/arm/arm.h (TARGET_USE_MOVT): Make dependent on
+	prefer_constant_pool setting.
+
+2011-06-14  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	Backport from mainline
+	2011-06-01  Paul Brook  <paul@cpodesourcery.com>
+
+	* config/arm/arm-cores.def: Add cortex-r5.  Add DIV flags to
+	Cortex-A15.
+	* config/arm/arm-tune.md: Regenerate.
+	* config/arm/arm.c (FL_DIV): Rename...
+	(FL_THUMB_DIV): ... to this.
+	(FL_ARM_DIV): Define.
+	(FL_FOR_ARCH7R, FL_FOR_ARCH7M): Use FL_THUMB_DIV.
+	(arm_arch_hwdiv): Remove.
+	(arm_arch_thumb_hwdiv, arm_arch_arm_hwdiv): New variables.
+	(arm_issue_rate): Add cortexr5.
+	* config/arm/arm.h (TARGET_CPU_CPP_BUILTINS): Set
+	__ARM_ARCH_EXT_IDIV__.
+	(TARGET_IDIV): Define.
+	(arm_arch_hwdiv): Remove.
+	(arm_arch_arm_hwdiv, arm_arch_thumb_hwdiv): New prototypes.
+	* config/arm/arm.md (tune_cortexr4): Add cortexr5.
+	(divsi3, udivsi3): New patterns.
+	* config/arm/thumb2.md (divsi3, udivsi3): Remove.
+	* doc/invoke.texi: Document ARM -mcpu=cortex-r5
+
+=== modified file 'gcc/config/arm/arm-cores.def'
+--- old/gcc/config/arm/arm-cores.def	2011-01-03 20:52:22 +0000
++++ new/gcc/config/arm/arm-cores.def	2011-06-14 16:00:30 +0000
+@@ -70,10 +70,10 @@
+ /* V4 Architecture Processors */
+ ARM_CORE("arm8",          arm8,		4,	             FL_MODE26 | FL_LDSCHED, fastmul)
+ ARM_CORE("arm810",        arm810,	4,	             FL_MODE26 | FL_LDSCHED, fastmul)
+-ARM_CORE("strongarm",     strongarm,	4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, fastmul)
+-ARM_CORE("strongarm110",  strongarm110,	4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, fastmul)
+-ARM_CORE("strongarm1100", strongarm1100, 4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, fastmul)
+-ARM_CORE("strongarm1110", strongarm1110, 4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, fastmul)
++ARM_CORE("strongarm",     strongarm,	4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, strongarm)
++ARM_CORE("strongarm110",  strongarm110,	4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, strongarm)
++ARM_CORE("strongarm1100", strongarm1100, 4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, strongarm)
++ARM_CORE("strongarm1110", strongarm1110, 4,	             FL_MODE26 | FL_LDSCHED | FL_STRONG, strongarm)
+ ARM_CORE("fa526",         fa526,        4,                               FL_LDSCHED, fastmul)
+ ARM_CORE("fa626",         fa626,        4,                               FL_LDSCHED, fastmul)
+ 
+@@ -122,15 +122,16 @@
+ ARM_CORE("arm1176jzf-s",  arm1176jzfs,	6ZK,				 FL_LDSCHED | FL_VFPV2, 9e)
+ ARM_CORE("mpcorenovfp",	  mpcorenovfp,	6K,				 FL_LDSCHED, 9e)
+ ARM_CORE("mpcore",	  mpcore,	6K,				 FL_LDSCHED | FL_VFPV2, 9e)
+-ARM_CORE("arm1156t2-s",	  arm1156t2s,	6T2,				 FL_LDSCHED, 9e)
+-ARM_CORE("arm1156t2f-s",  arm1156t2fs,  6T2,				 FL_LDSCHED | FL_VFPV2, 9e)
+-ARM_CORE("cortex-a5",	  cortexa5,	7A,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-a8",	  cortexa8,	7A,				 FL_LDSCHED, 9e)
++ARM_CORE("arm1156t2-s",	  arm1156t2s,	6T2,				 FL_LDSCHED, v6t2)
++ARM_CORE("arm1156t2f-s",  arm1156t2fs,  6T2,				 FL_LDSCHED | FL_VFPV2, v6t2)
++ARM_CORE("cortex-a5",	  cortexa5,	7A,				 FL_LDSCHED, cortex_a5)
++ARM_CORE("cortex-a8",	  cortexa8,	7A,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-a9",	  cortexa9,	7A,				 FL_LDSCHED, cortex_a9)
+-ARM_CORE("cortex-a15",	  cortexa15,	7A,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-r4",	  cortexr4,	7R,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-r4f",	  cortexr4f,	7R,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-m4",	  cortexm4,	7EM,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-m3",	  cortexm3,	7M,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-m1",	  cortexm1,	6M,				 FL_LDSCHED, 9e)
+-ARM_CORE("cortex-m0",	  cortexm0,	6M,				 FL_LDSCHED, 9e)
++ARM_CORE("cortex-a15",	  cortexa15,	7A,				 FL_LDSCHED | FL_THUMB_DIV | FL_ARM_DIV, cortex)
++ARM_CORE("cortex-r4",	  cortexr4,	7R,				 FL_LDSCHED, cortex)
++ARM_CORE("cortex-r4f",	  cortexr4f,	7R,				 FL_LDSCHED, cortex)
++ARM_CORE("cortex-r5",	  cortexr5,	7R,				 FL_LDSCHED | FL_ARM_DIV, cortex)
++ARM_CORE("cortex-m4",	  cortexm4,	7EM,				 FL_LDSCHED, cortex)
++ARM_CORE("cortex-m3",	  cortexm3,	7M,				 FL_LDSCHED, cortex)
++ARM_CORE("cortex-m1",	  cortexm1,	6M,				 FL_LDSCHED, cortex)
++ARM_CORE("cortex-m0",	  cortexm0,	6M,				 FL_LDSCHED, cortex)
+
+=== modified file 'gcc/config/arm/arm-protos.h'
+--- old/gcc/config/arm/arm-protos.h	2011-05-03 15:17:25 +0000
++++ new/gcc/config/arm/arm-protos.h	2011-06-14 16:00:30 +0000
+@@ -219,9 +219,14 @@
+   bool (*rtx_costs) (rtx, RTX_CODE, RTX_CODE, int *, bool);
+   bool (*sched_adjust_cost) (rtx, rtx, rtx, int *);
+   int constant_limit;
++  /* Maximum number of instructions to conditionalise in
++     arm_final_prescan_insn.  */
++  int max_insns_skipped;
+   int num_prefetch_slots;
+   int l1_cache_size;
+   int l1_cache_line_size;
++  bool prefer_constant_pool;
++  int (*branch_cost) (bool, bool);
+ };
+ 
+ extern const struct tune_params *current_tune;
+
+=== modified file 'gcc/config/arm/arm-tune.md'
+--- old/gcc/config/arm/arm-tune.md	2010-12-20 17:48:51 +0000
++++ new/gcc/config/arm/arm-tune.md	2011-06-14 14:37:30 +0000
+@@ -1,5 +1,5 @@
+ ;; -*- buffer-read-only: t -*-
+ ;; Generated automatically by gentune.sh from arm-cores.def
+ (define_attr "tune"
+-	"arm2,arm250,arm3,arm6,arm60,arm600,arm610,arm620,arm7,arm7d,arm7di,arm70,arm700,arm700i,arm710,arm720,arm710c,arm7100,arm7500,arm7500fe,arm7m,arm7dm,arm7dmi,arm8,arm810,strongarm,strongarm110,strongarm1100,strongarm1110,fa526,fa626,arm7tdmi,arm7tdmis,arm710t,arm720t,arm740t,arm9,arm9tdmi,arm920,arm920t,arm922t,arm940t,ep9312,arm10tdmi,arm1020t,arm9e,arm946es,arm966es,arm968es,arm10e,arm1020e,arm1022e,xscale,iwmmxt,iwmmxt2,fa606te,fa626te,fmp626,fa726te,arm926ejs,arm1026ejs,arm1136js,arm1136jfs,arm1176jzs,arm1176jzfs,mpcorenovfp,mpcore,arm1156t2s,arm1156t2fs,cortexa5,cortexa8,cortexa9,cortexa15,cortexr4,cortexr4f,cortexm4,cortexm3,cortexm1,cortexm0"
++	"arm2,arm250,arm3,arm6,arm60,arm600,arm610,arm620,arm7,arm7d,arm7di,arm70,arm700,arm700i,arm710,arm720,arm710c,arm7100,arm7500,arm7500fe,arm7m,arm7dm,arm7dmi,arm8,arm810,strongarm,strongarm110,strongarm1100,strongarm1110,fa526,fa626,arm7tdmi,arm7tdmis,arm710t,arm720t,arm740t,arm9,arm9tdmi,arm920,arm920t,arm922t,arm940t,ep9312,arm10tdmi,arm1020t,arm9e,arm946es,arm966es,arm968es,arm10e,arm1020e,arm1022e,xscale,iwmmxt,iwmmxt2,fa606te,fa626te,fmp626,fa726te,arm926ejs,arm1026ejs,arm1136js,arm1136jfs,arm1176jzs,arm1176jzfs,mpcorenovfp,mpcore,arm1156t2s,arm1156t2fs,cortexa5,cortexa8,cortexa9,cortexa15,cortexr4,cortexr4f,cortexr5,cortexm4,cortexm3,cortexm1,cortexm0"
+ 	(const (symbol_ref "((enum attr_tune) arm_tune)")))
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-05-11 14:49:48 +0000
++++ new/gcc/config/arm/arm.c	2011-06-14 16:00:30 +0000
+@@ -255,6 +255,8 @@
+ static void arm_conditional_register_usage (void);
+ static reg_class_t arm_preferred_rename_class (reg_class_t rclass);
+ static unsigned int arm_autovectorize_vector_sizes (void);
++static int arm_default_branch_cost (bool, bool);
++static int arm_cortex_a5_branch_cost (bool, bool);
+ 
+ 
+ /* Table of machine attributes.  */
+@@ -672,12 +674,13 @@
+ #define FL_THUMB2     (1 << 16)	      /* Thumb-2.  */
+ #define FL_NOTM	      (1 << 17)	      /* Instructions not present in the 'M'
+ 					 profile.  */
+-#define FL_DIV	      (1 << 18)	      /* Hardware divide.  */
++#define FL_THUMB_DIV  (1 << 18)	      /* Hardware divide (Thumb mode).  */
+ #define FL_VFPV3      (1 << 19)       /* Vector Floating Point V3.  */
+ #define FL_NEON       (1 << 20)       /* Neon instructions.  */
+ #define FL_ARCH7EM    (1 << 21)	      /* Instructions present in the ARMv7E-M
+ 					 architecture.  */
+ #define FL_ARCH7      (1 << 22)       /* Architecture 7.  */
++#define FL_ARM_DIV    (1 << 23)	      /* Hardware divide (ARM mode).  */
+ 
+ #define FL_IWMMXT     (1 << 29)	      /* XScale v2 or "Intel Wireless MMX technology".  */
+ 
+@@ -704,8 +707,8 @@
+ #define FL_FOR_ARCH6M	(FL_FOR_ARCH6 & ~FL_NOTM)
+ #define FL_FOR_ARCH7	((FL_FOR_ARCH6T2 & ~FL_NOTM) | FL_ARCH7)
+ #define FL_FOR_ARCH7A	(FL_FOR_ARCH7 | FL_NOTM | FL_ARCH6K)
+-#define FL_FOR_ARCH7R	(FL_FOR_ARCH7A | FL_DIV)
+-#define FL_FOR_ARCH7M	(FL_FOR_ARCH7 | FL_DIV)
++#define FL_FOR_ARCH7R	(FL_FOR_ARCH7A | FL_THUMB_DIV)
++#define FL_FOR_ARCH7M	(FL_FOR_ARCH7 | FL_THUMB_DIV)
+ #define FL_FOR_ARCH7EM  (FL_FOR_ARCH7M | FL_ARCH7EM)
+ 
+ /* The bits in this mask specify which
+@@ -791,7 +794,8 @@
+ int arm_arch_thumb2;
+ 
+ /* Nonzero if chip supports integer division instruction.  */
+-int arm_arch_hwdiv;
++int arm_arch_arm_hwdiv;
++int arm_arch_thumb_hwdiv;
+ 
+ /* In case of a PRE_INC, POST_INC, PRE_DEC, POST_DEC memory reference,
+    we must report the mode of the memory reference from
+@@ -864,48 +868,117 @@
+ {
+   arm_slowmul_rtx_costs,
+   NULL,
+-  3,
+-  ARM_PREFETCH_NOT_BENEFICIAL
++  3,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  true,						/* Prefer constant pool.  */
++  arm_default_branch_cost
+ };
+ 
+ const struct tune_params arm_fastmul_tune =
+ {
+   arm_fastmul_rtx_costs,
+   NULL,
+-  1,
+-  ARM_PREFETCH_NOT_BENEFICIAL
++  1,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  true,						/* Prefer constant pool.  */
++  arm_default_branch_cost
++};
++
++/* StrongARM has early execution of branches, so a sequence that is worth
++   skipping is shorter.  Set max_insns_skipped to a lower value.  */
++
++const struct tune_params arm_strongarm_tune =
++{
++  arm_fastmul_rtx_costs,
++  NULL,
++  1,						/* Constant limit.  */
++  3,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  true,						/* Prefer constant pool.  */
++  arm_default_branch_cost
+ };
+ 
+ const struct tune_params arm_xscale_tune =
+ {
+   arm_xscale_rtx_costs,
+   xscale_sched_adjust_cost,
+-  2,
+-  ARM_PREFETCH_NOT_BENEFICIAL
++  2,						/* Constant limit.  */
++  3,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  true,						/* Prefer constant pool.  */
++  arm_default_branch_cost
+ };
+ 
+ const struct tune_params arm_9e_tune =
+ {
+   arm_9e_rtx_costs,
+   NULL,
+-  1,
+-  ARM_PREFETCH_NOT_BENEFICIAL
++  1,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  true,						/* Prefer constant pool.  */
++  arm_default_branch_cost
++};
++
++const struct tune_params arm_v6t2_tune =
++{
++  arm_9e_rtx_costs,
++  NULL,
++  1,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  false,					/* Prefer constant pool.  */
++  arm_default_branch_cost
++};
++
++/* Generic Cortex tuning.  Use more specific tunings if appropriate.  */
++const struct tune_params arm_cortex_tune =
++{
++  arm_9e_rtx_costs,
++  NULL,
++  1,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  false,					/* Prefer constant pool.  */
++  arm_default_branch_cost
++};
++
++/* Branches can be dual-issued on Cortex-A5, so conditional execution is
++   less appealing.  Set max_insns_skipped to a low value.  */
++
++const struct tune_params arm_cortex_a5_tune =
++{
++  arm_9e_rtx_costs,
++  NULL,
++  1,						/* Constant limit.  */
++  1,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  false,					/* Prefer constant pool.  */
++  arm_cortex_a5_branch_cost
+ };
+ 
+ const struct tune_params arm_cortex_a9_tune =
+ {
+   arm_9e_rtx_costs,
+   cortex_a9_sched_adjust_cost,
+-  1,
+-  ARM_PREFETCH_BENEFICIAL(4,32,32)
++  1,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_BENEFICIAL(4,32,32),
++  false,					/* Prefer constant pool.  */
++  arm_default_branch_cost
+ };
+ 
+ const struct tune_params arm_fa726te_tune =
+ {
+   arm_9e_rtx_costs,
+   fa726te_sched_adjust_cost,
+-  1,
+-  ARM_PREFETCH_NOT_BENEFICIAL
++  1,						/* Constant limit.  */
++  5,						/* Max cond insns.  */
++  ARM_PREFETCH_NOT_BENEFICIAL,
++  true,						/* Prefer constant pool.  */
++  arm_default_branch_cost
+ };
+ 
+ 
+@@ -1711,7 +1784,8 @@
+   arm_tune_wbuf = (tune_flags & FL_WBUF) != 0;
+   arm_tune_xscale = (tune_flags & FL_XSCALE) != 0;
+   arm_arch_iwmmxt = (insn_flags & FL_IWMMXT) != 0;
+-  arm_arch_hwdiv = (insn_flags & FL_DIV) != 0;
++  arm_arch_thumb_hwdiv = (insn_flags & FL_THUMB_DIV) != 0;
++  arm_arch_arm_hwdiv = (insn_flags & FL_ARM_DIV) != 0;
+   arm_tune_cortex_a9 = (arm_tune == cortexa9) != 0;
+ 
+   /* If we are not using the default (ARM mode) section anchor offset
+@@ -1991,12 +2065,7 @@
+       max_insns_skipped = 6;
+     }
+   else
+-    {
+-      /* StrongARM has early execution of branches, so a sequence
+-         that is worth skipping is shorter.  */
+-      if (arm_tune_strongarm)
+-        max_insns_skipped = 3;
+-    }
++    max_insns_skipped = current_tune->max_insns_skipped;
+ 
+   /* Hot/Cold partitioning is not currently supported, since we can't
+      handle literal pool placement in that case.  */
+@@ -8211,6 +8280,21 @@
+   return cost;
+ }
+ 
++static int
++arm_default_branch_cost (bool speed_p, bool predictable_p ATTRIBUTE_UNUSED)
++{
++  if (TARGET_32BIT)
++    return (TARGET_THUMB2 && !speed_p) ? 1 : 4;
++  else
++    return (optimize > 0) ? 2 : 0;
++}
++
++static int
++arm_cortex_a5_branch_cost (bool speed_p, bool predictable_p)
++{
++  return speed_p ? 0 : arm_default_branch_cost (speed_p, predictable_p);
++}
++
+ static int fp_consts_inited = 0;
+ 
+ /* Only zero is valid for VFP.  Other values are also valid for FPA.  */
+@@ -23123,6 +23207,7 @@
+     {
+     case cortexr4:
+     case cortexr4f:
++    case cortexr5:
+     case cortexa5:
+     case cortexa8:
+     case cortexa9:
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-06-02 12:12:00 +0000
++++ new/gcc/config/arm/arm.h	2011-06-14 14:53:07 +0000
+@@ -101,6 +101,8 @@
+ 	      builtin_define ("__ARM_PCS");		\
+ 	    builtin_define ("__ARM_EABI__");		\
+ 	  }						\
++	if (TARGET_IDIV)				\
++	  builtin_define ("__ARM_ARCH_EXT_IDIV__");	\
+     } while (0)
+ 
+ /* The various ARM cores.  */
+@@ -282,7 +284,8 @@
+   (TARGET_32BIT && arm_arch6 && (arm_arch_notm || arm_arch7em))
+ 
+ /* Should MOVW/MOVT be used in preference to a constant pool.  */
+-#define TARGET_USE_MOVT (arm_arch_thumb2 && !optimize_size)
++#define TARGET_USE_MOVT \
++  (arm_arch_thumb2 && !optimize_size && !current_tune->prefer_constant_pool)
+ 
+ /* We could use unified syntax for arm mode, but for now we just use it
+    for Thumb-2.  */
+@@ -303,6 +306,10 @@
+ /* Nonzero if this chip supports ldrex{bhd} and strex{bhd}.  */
+ #define TARGET_HAVE_LDREXBHD	((arm_arch6k && TARGET_ARM) || arm_arch7)
+ 
++/* Nonzero if integer division instructions supported.  */
++#define TARGET_IDIV		((TARGET_ARM && arm_arch_arm_hwdiv) \
++				 || (TARGET_THUMB2 && arm_arch_thumb_hwdiv))
++
+ /* True iff the full BPABI is being used.  If TARGET_BPABI is true,
+    then TARGET_AAPCS_BASED must be true -- but the converse does not
+    hold.  TARGET_BPABI implies the use of the BPABI runtime library,
+@@ -487,8 +494,11 @@
+ /* Nonzero if chip supports Thumb 2.  */
+ extern int arm_arch_thumb2;
+ 
+-/* Nonzero if chip supports integer division instruction.  */
+-extern int arm_arch_hwdiv;
++/* Nonzero if chip supports integer division instruction in ARM mode.  */
++extern int arm_arch_arm_hwdiv;
++
++/* Nonzero if chip supports integer division instruction in Thumb mode.  */
++extern int arm_arch_thumb_hwdiv;
+ 
+ #ifndef TARGET_DEFAULT
+ #define TARGET_DEFAULT  (MASK_APCS_FRAME)
+@@ -2018,8 +2028,8 @@
+ /* Try to generate sequences that don't involve branches, we can then use
+    conditional instructions */
+ #define BRANCH_COST(speed_p, predictable_p) \
+-  (TARGET_32BIT ? (TARGET_THUMB2 && !speed_p ? 1 : 4) \
+-		: (optimize > 0 ? 2 : 0))
++  (current_tune->branch_cost (speed_p, predictable_p))
++
+ 
+ /* Position Independent Code.  */
+ /* We decide which register to use based on the compilation options and
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-06-02 15:58:33 +0000
++++ new/gcc/config/arm/arm.md	2011-06-14 14:37:30 +0000
+@@ -490,7 +490,7 @@
+ 
+ (define_attr "tune_cortexr4" "yes,no"
+   (const (if_then_else
+-	  (eq_attr "tune" "cortexr4,cortexr4f")
++	  (eq_attr "tune" "cortexr4,cortexr4f,cortexr5")
+ 	  (const_string "yes")
+ 	  (const_string "no"))))
+ 
+@@ -3738,6 +3738,28 @@
+    (set_attr "predicable" "yes")]
+ )
+ 
++
++;; Division instructions
++(define_insn "divsi3"
++  [(set (match_operand:SI	  0 "s_register_operand" "=r")
++	(div:SI (match_operand:SI 1 "s_register_operand"  "r")
++		(match_operand:SI 2 "s_register_operand"  "r")))]
++  "TARGET_IDIV"
++  "sdiv%?\t%0, %1, %2"
++  [(set_attr "predicable" "yes")
++   (set_attr "insn" "sdiv")]
++)
++
++(define_insn "udivsi3"
++  [(set (match_operand:SI	   0 "s_register_operand" "=r")
++	(udiv:SI (match_operand:SI 1 "s_register_operand"  "r")
++		 (match_operand:SI 2 "s_register_operand"  "r")))]
++  "TARGET_IDIV"
++  "udiv%?\t%0, %1, %2"
++  [(set_attr "predicable" "yes")
++   (set_attr "insn" "udiv")]
++)
++
+ 
+ ;; Unary arithmetic insns
+ 
+
+=== modified file 'gcc/config/arm/thumb2.md'
+--- old/gcc/config/arm/thumb2.md	2011-05-11 07:15:47 +0000
++++ new/gcc/config/arm/thumb2.md	2011-06-14 14:37:30 +0000
+@@ -779,26 +779,6 @@
+    (set_attr "length" "2")]
+ )
+ 
+-(define_insn "divsi3"
+-  [(set (match_operand:SI	  0 "s_register_operand" "=r")
+-	(div:SI (match_operand:SI 1 "s_register_operand"  "r")
+-		(match_operand:SI 2 "s_register_operand"  "r")))]
+-  "TARGET_THUMB2 && arm_arch_hwdiv"
+-  "sdiv%?\t%0, %1, %2"
+-  [(set_attr "predicable" "yes")
+-   (set_attr "insn" "sdiv")]
+-)
+-
+-(define_insn "udivsi3"
+-  [(set (match_operand:SI	   0 "s_register_operand" "=r")
+-	(udiv:SI (match_operand:SI 1 "s_register_operand"  "r")
+-		 (match_operand:SI 2 "s_register_operand"  "r")))]
+-  "TARGET_THUMB2 && arm_arch_hwdiv"
+-  "udiv%?\t%0, %1, %2"
+-  [(set_attr "predicable" "yes")
+-   (set_attr "insn" "udiv")]
+-)
+-
+ (define_insn "*thumb2_subsi_short"
+   [(set (match_operand:SI 0 "low_register_operand" "=l")
+ 	(minus:SI (match_operand:SI 1 "low_register_operand" "l")
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2011-05-11 07:15:47 +0000
++++ new/gcc/doc/invoke.texi	2011-06-14 14:37:30 +0000
+@@ -10208,7 +10208,8 @@
+ @samp{arm1136j-s}, @samp{arm1136jf-s}, @samp{mpcore}, @samp{mpcorenovfp},
+ @samp{arm1156t2-s}, @samp{arm1156t2f-s}, @samp{arm1176jz-s}, @samp{arm1176jzf-s},
+ @samp{cortex-a5}, @samp{cortex-a8}, @samp{cortex-a9}, @samp{cortex-a15},
+-@samp{cortex-r4}, @samp{cortex-r4f}, @samp{cortex-m4}, @samp{cortex-m3},
++@samp{cortex-r4}, @samp{cortex-r4f}, @samp{cortex-r5},
++@samp{cortex-m4}, @samp{cortex-m3},
+ @samp{cortex-m1},
+ @samp{cortex-m0},
+ @samp{xscale}, @samp{iwmmxt}, @samp{iwmmxt2}, @samp{ep9312}.
+
+=== modified file 'gcc/dojump.c'
+--- old/gcc/dojump.c	2010-05-19 19:09:57 +0000
++++ new/gcc/dojump.c	2011-06-14 14:53:07 +0000
+@@ -36,6 +36,7 @@
+ #include "ggc.h"
+ #include "basic-block.h"
+ #include "output.h"
++#include "tm_p.h"
+ 
+ static bool prefer_and_bit_test (enum machine_mode, int);
+ static void do_jump_by_parts_greater (tree, tree, int, rtx, rtx, int);
+

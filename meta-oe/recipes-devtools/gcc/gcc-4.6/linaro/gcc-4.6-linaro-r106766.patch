@@ -1,0 +1,25 @@
+2011-07-03  Ira Rosen  <ira.rosen@linaro.org>
+
+	Backport from FSF:
+	2011-06-12  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-vect-data-refs.c (vect_peeling_hash_get_most_frequent):
+	Take number of iterations to peel into account for equally frequent
+	misalignment values.
+
+=== modified file 'gcc/tree-vect-data-refs.c'
+--- old/gcc/tree-vect-data-refs.c	2011-06-02 12:12:00 +0000
++++ new/gcc/tree-vect-data-refs.c	2011-06-29 11:20:24 +0000
+@@ -1256,7 +1256,9 @@
+   vect_peel_info elem = (vect_peel_info) *slot;
+   vect_peel_extended_info max = (vect_peel_extended_info) data;
+ 
+-  if (elem->count > max->peel_info.count)
++  if (elem->count > max->peel_info.count
++      || (elem->count == max->peel_info.count
++          && max->peel_info.npeel > elem->npeel))
+     {
+       max->peel_info.npeel = elem->npeel;
+       max->peel_info.count = elem->count;
+
