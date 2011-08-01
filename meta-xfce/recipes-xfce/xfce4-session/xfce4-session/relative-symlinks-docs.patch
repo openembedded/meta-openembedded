@@ -1,0 +1,11 @@
+--- a/doc/manual/Makefile.am	2010-09-08 18:37:19.000000000 +0200
++++ b/doc/manual/Makefile.am	2011-07-17 23:17:28.602626999 +0200
+@@ -20,7 +20,7 @@
+ 			done; \
+ 			if test x"$$lang" != x"C" -a ! -d $(srcdir)/images/$$lang; then \
+ 				echo "--- Creating symlink to C images for $$lang"; \
+-				ln -sf $(docdir)/html/C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
++				ln -sf ../C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
+ 			fi \
+ 		fi \
+ 	done;
