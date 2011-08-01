@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# gnome-mount - wrapper script for use with exo-mount
+#
+# Copyright 2009 Enrico Tröger <enrico(at)xfce(dot)org>
+# Licence: GPLv2
+#
+#
+# This script aims to be a wrapper script to provide the
+# gnome-mount utility on envrionments which only have
+# exo-mount (e.g. Xfce). It accepts all command line arguments
+# which are passed but ignores all which are not supported by
+# exo-mount.
+#
+# (This script was tested with Bash and Dash.)
+#
+# Possible use case is as a drop-in replacement to get mounting
+# local resources with GVfs working, e.g. mounting disks in CD drives.
+#
+# Usage:
+# Save this script as 'gnome-mount' in a directory in your path,
+# e.g. /usr/local/bin or ~/bin and make it executable.
+#
+
+
+
+OPTS=""
+
+# first catch all passed arguments and keep those exo-mount supports,
+# ignore all other arguments
+while [ -n "$*" ]
+do
+	case $1 in
+		-\?|--help)
+		OPTS="$OPTS --help"
+		;;
+		-e|--eject)
+		OPTS="$OPTS --eject"
+		;;
+		-u|--unmount)
+		OPTS="$OPTS --unmount"
+		;;
+		-h|--hal-udi)
+		OPTS="$OPTS --hal-udi"
+		shift
+		OPTS="$OPTS $1"
+		;;
+		-d|--device)
+		OPTS="$OPTS --device"
+		shift
+		OPTS="$OPTS $1"
+		;;
+		-n|--no-ui)
+		OPTS="$OPTS --no-ui"
+		;;
+		-V|--version)
+		OPTS="$OPTS --version"
+		;;
+	esac
+	shift
+done
+
+# now run exo-mount and hope things go well
+exo-mount $OPTS

@@ -1,0 +1,531 @@
+--- a/exo-helper/exo-helper.c.old	2011-01-16 16:38:21.000000000 +0100
++++ b/exo-helper/exo-helper.c	2011-03-07 12:31:49.000000000 +0100
+@@ -172,7 +172,7 @@
+   helper->startup_notify = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
+ 
+   /* verify the type of the desktop file */
+-  str = xfce_rc_read_entry_untranslated (rc, "Type", NULL);
++  str = xfce_rc_read_entry_untranslated (rc, "X-XFCE-Type", NULL);
+   if (G_UNLIKELY (!exo_str_is_equal (str, "X-XFCE-Helper")))
+     goto failed;
+ 
+@@ -897,7 +897,8 @@
+       xfce_rc_write_bool_entry (rc, "NoDisplay", TRUE);
+       xfce_rc_write_entry (rc, "Version", "1.0");
+       xfce_rc_write_entry (rc, "Encoding", "UTF-8");
+-      xfce_rc_write_entry (rc, "Type", "X-XFCE-Helper");
++      xfce_rc_write_entry (rc, "Type", "Application");
++      xfce_rc_write_entry (rc, "X-XFCE-Type", "X-XFCE-Helper");
+       xfce_rc_write_entry (rc, "X-XFCE-Category", category_string);
+ 
+       /* check if the command includes a parameter */
+--- a/exo-helper/helpers/aterm.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/aterm.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=aterm
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=aterm
+ StartupNotify=false
+ X-XFCE-Binaries=aterm;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -e %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/balsa.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/balsa.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=gnome-balsa2
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Balsa
+ StartupNotify=false
+ X-XFCE-Binaries=balsa;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 balsa %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/debian-sensible-browser.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/debian-sensible-browser.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=debian
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Debian Sensible Browser
+ StartupNotify=false
+ X-XFCE-Binaries=sensible-browser;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/debian-x-terminal-emulator.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/debian-x-terminal-emulator.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=debian
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Debian X Terminal Emulator
+ StartupNotify=false
+ X-XFCE-Binaries=x-terminal-emulator;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -e %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/encompass.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/encompass.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=encompass
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Encompass
+ StartupNotify=true
+ X-XFCE-Binaries=encompass;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/epiphany.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/epiphany.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=web-browser
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Epiphany Web Browser
+ StartupNotify=true
+ X-XFCE-Binaries=epiphany;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/eterm.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/eterm.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=Eterm
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Enlightened Terminal Emulator
+ StartupNotify=false
+ X-XFCE-Binaries=Eterm;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B --exec "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/evolution.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/evolution.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=evolution
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Novell Evolution
+ StartupNotify=false
+ X-XFCE-Binaries=evolution-2.4;evolution-2.3;evolution-2.2;evolution-2.0;evolution-1.6;evolution-1.5;evolution-1.4;evolution;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 evolution %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/firefox.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/firefox.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=firefox
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Mozilla Firefox
+ StartupNotify=false
+ X-XFCE-Binaries=firefox;firefox-gtk2;firefox-gtk;mozilla-firefox;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B -remote "openURL(about:blank,new-window)";%B;
+ X-XFCE-CommandsWithParameter=%B -remote "openURL(%s)";%B %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/galeon.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/galeon.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=galeon
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Galeon Web Browser
+ StartupNotify=true
+ X-XFCE-Binaries=galeon;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/gnome-terminal.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/gnome-terminal.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=gnome-terminal
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=GNOME Terminal
+ StartupNotify=true
+ X-XFCE-Binaries=gnome-terminal;gnometerminal;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -x %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/icedove.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/icedove.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=icedove
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Icedove
+ StartupNotify=false
+ X-XFCE-Binaries=icedove;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 mozilla-remote %B "mailto:%s";@HELPERDIR@/exo-compose-mail-1 mozilla %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/kmail.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/kmail.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=kmail
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=KMail
+ StartupNotify=true
+ X-XFCE-Binaries=kmail;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParamter=@HELPERDIR@/exo-compose-mail-1 kmail %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/konqueror.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/konqueror.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=konqueror
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Konqueror Web Browser
+ StartupNotify=true
+ X-XFCE-Binaries=konqueror;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/links.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/links.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=links
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Links Text Browser
+ StartupNotify=false
+ X-XFCE-Binaries=links;links-current;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=exo-open --launch TerminalEmulator %B;
+ X-XFCE-CommandsWithParameter=exo-open --launch TerminalEmulator %B %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/lynx.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/lynx.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=aterm
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Lynx Text Browser
+ StartupNotify=false
+ X-XFCE-Binaries=lynx;lynx-current;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=exo-open --launch TerminalEmulator %B;
+ X-XFCE-CommandsWithParameter=exo-open --launch TerminalEmulator %B %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/midori.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/midori.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -2,10 +2,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=midori
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Midori
+ StartupNotify=true
+ X-XFCE-Binaries=midori;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/mozilla-browser.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/mozilla-browser.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=mozilla
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Mozilla Browser
+ StartupNotify=false
+ X-XFCE-Binaries=mozilla;mozilla-gtk2;mozilla-gtk;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B -remote "openURL(about:blank,new-window)";%B;
+ X-XFCE-CommandsWithParameter=%B -remote "openURL(%s,new-window)";%B %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/mozilla-mailer.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/mozilla-mailer.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=mozilla
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Mozilla Mail
+ StartupNotify=false
+ X-XFCE-Binaries=mozilla;mozilla-gtk2;mozilla-gtk;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B -mail;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 mozilla-remote %B "mailto:%s";@HELPERDIR@/exo-compose-mail-1 mozilla %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/mutt.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/mutt.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=mutt
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Mutt
+ StartupNotify=false
+ X-XFCE-Binaries=mutt;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=exo-open --launch TerminalEmulator %B;
+ X-XFCE-CommandsWithParameter=exo-open --launch TerminalEmulator @HELPERDIR@/exo-compose-mail-1 mutt %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/nautilus.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/nautilus.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -2,10 +2,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=nautilus
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Nautilus
+ StartupNotify=true
+ X-XFCE-Binaries=nautilus;
+ X-XFCE-Category=FileManager
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/netscape-navigator.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/netscape-navigator.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=mozilla
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Netscape Navigator
+ StartupNotify=false
+ X-XFCE-Binaries=netscape;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B -remote "openURL(about:blank,new-window)";%B;
+ X-XFCE-CommandsWithParameter=%B -remote "openURL(%s,new-window)";%B %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/nxterm.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/nxterm.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=nxterm
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=NXterm
+ StartupNotify=false
+ X-XFCE-Binaries=nxterm;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -e %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/opera-browser.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/opera-browser.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=opera
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Opera Browser
+ StartupNotify=false
+ X-XFCE-Binaries=opera;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/opera-mailer.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/opera-mailer.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=opera
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Opera Mail
+ StartupNotify=false
+ X-XFCE-Binaries=opera;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -remote "openURL(mailto:%s)";%B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/pcmanfm.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/pcmanfm.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -2,10 +2,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=pcmanfm
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=PCMan File Manager
+ StartupNotify=true
+ X-XFCE-Binaries=pcmanfm;
+ X-XFCE-Category=FileManager
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/sylpheed-claws.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/sylpheed-claws.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=claws-mail
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Claws Mail
+ StartupNotify=true
+ X-XFCE-Binaries=claws-mail;sylpheed-claws-gtk2;sylpheed-claws
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 sylpheed %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/sylpheed.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/sylpheed.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=sylpheed
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Sylpheed
+ StartupNotify=true
+ X-XFCE-Binaries=sylpheed;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 sylpheed %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/Terminal.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/Terminal.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=Terminal
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Xfce Terminal
+ StartupNotify=true
+ X-XFCE-Binaries=Terminal;xterminal;xfce4-terminal;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -x %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/Thunar.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/Thunar.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -2,10 +2,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=Thunar
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Thunar
+ StartupNotify=true
+ X-XFCE-Binaries=Thunar;
+ X-XFCE-Category=FileManager
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B "%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/thunderbird.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/thunderbird.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=thunderbird
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=Mozilla Thunderbird
+ StartupNotify=false
+ X-XFCE-Binaries=thunderbird;thunderbird-gtk2;thunderbird-gtk;mozilla-thunderbird;
+ X-XFCE-Category=MailReader
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=@HELPERDIR@/exo-compose-mail-1 mozilla-remote %B "mailto:%s";@HELPERDIR@/exo-compose-mail-1 mozilla %B "mailto:%s";
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/urxvt.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/urxvt.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=rxvt
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=RXVT Unicode
+ StartupNotify=false
+ X-XFCE-Binaries=urxvt;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -e %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/w3m.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/w3m.desktop.in.in	2011-03-07 12:08:30.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=w3m
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=W3M Text Browser
+ StartupNotify=false
+ X-XFCE-Binaries=w3m;
+ X-XFCE-Category=WebBrowser
+ X-XFCE-Commands=exo-open --launch TerminalEmulator %B;
+ X-XFCE-CommandsWithParameter=exo-open --launch TerminalEmulator %B %s;
++X-XFCE-Type=X-XFCE-Helper
+--- a/exo-helper/helpers/xterm.desktop.in.in.old	2011-03-07 12:08:30.000000000 +0100
++++ b/exo-helper/helpers/xterm.desktop.in.in	2011-03-07 12:08:31.000000000 +0100
+@@ -1,10 +1,11 @@
+ [Desktop Entry]
+ Version=1.0
+ Icon=xterm
+-Type=X-XFCE-Helper
++Type=Application
+ _Name=X Terminal
+ StartupNotify=false
+ X-XFCE-Binaries=xterm;
+ X-XFCE-Category=TerminalEmulator
+ X-XFCE-Commands=%B;
+ X-XFCE-CommandsWithParameter=%B -e %s;
++X-XFCE-Type=X-XFCE-Helper

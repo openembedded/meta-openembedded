@@ -1,0 +1,12 @@
+--- a/Makefile.am.old	2011-01-16 16:38:21.000000000 +0100
++++ b/Makefile.am	2011-03-24 22:14:26.000000000 +0100
+@@ -15,8 +15,7 @@
+ 	icons								\
+ 	pixmaps								\
+ 	po								\
+-	$(PYTHON_SUBDIR)						\
+-	tests
++	$(PYTHON_SUBDIR)
+ 
+ AUTOMAKE_OPTIONS =							\
+ 	1.8								\
