@@ -1,0 +1,28 @@
+From 09d0d36450e25554785bf7f730e4ba0e31982be6 Mon Sep 17 00:00:00 2001
+From: Andreas Mueller <schnitzeltony@gmx.de>
+Date: Thu, 21 Jul 2011 19:52:28 +0200
+Subject: [PATCH] docs: On installation create relative paths in symlinks to
+ images
+
+
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ doc/manual/Makefile.am |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/doc/manual/Makefile.am b/doc/manual/Makefile.am
+index b21962f..88e234b 100644
+--- a/doc/manual/Makefile.am
++++ b/doc/manual/Makefile.am
+@@ -20,7 +20,7 @@ install-data-local:
+ 			done; \
+ 			if test x"$$lang" != x"C" -a ! -d $(srcdir)/images/$$lang; then \
+ 				echo "--- Creating symlink to C images for $$lang"; \
+-				ln -sf $(docdir)/html/C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
++				ln -sf ../C/images $(DESTDIR)$(docdir)/html/$$lang/images; \
+ 			fi \
+ 		fi \
+ 	done;
+-- 
+1.7.4.4
+
