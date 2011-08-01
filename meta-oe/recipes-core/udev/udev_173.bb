@@ -23,8 +23,6 @@ PR = "r0"
 SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
            file://0001-rip-put-doc-generation-it-depends-on-a-working-docto.patch \
            file://gtk-doc.make"
-SRC_URI[md5sum] = "08eb7c2564bc89defcefdaa6ec4a9fc1"
-SRC_URI[sha256sum] = "1d5c548d7c85d30b3508b82ad88d853e28dddb6c526d0e67aa92ac18af93d218"
 
 # generic SRC_URI
 SRC_URI += " \
