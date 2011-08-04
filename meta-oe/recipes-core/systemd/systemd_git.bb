@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "acl readline udev dbus libcap libcgroup"
+DEPENDS = "docbook-sgml-dtd-4.1-native gperf-native acl readline udev dbus libcap libcgroup"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -14,14 +14,13 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r0"
+PR = "r1"
 
 inherit autotools vala
 
-SRCREV = "2030694fecef41b9c0bfa917df79b92afd5cb380"
+SRCREV = "612e58b45b84eda7e1f2a82fdfc006f1ae421cb5"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
-           file://0001-systemd-disable-xml-file-stuff-and-introspection.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
@@ -92,8 +91,9 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
 
 # TODO:
 # u-a for runlevel and telinit
+# u-a prerm
 
-pkg_postinst_${PN} () {
+pkg_postinst_systemd () {
 update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
 update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
