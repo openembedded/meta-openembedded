@@ -186,8 +186,8 @@ sysroot_stage_all_append() {
 kernel_do_configure() {
 	# Copy defconfig to .config if .config does not exist. This allows
 	# recipes to manage the .config themselves in do_configure_prepend().
-	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${S}/.config" ]; then
-		cp "${WORKDIR}/defconfig" "${S}/.config"
+	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
+		cp "${WORKDIR}/defconfig" "${B}/.config"
 	fi
 
 	yes '' | oe_runmake oldconfig
