@@ -1,0 +1,24 @@
+Patch was imported from the OpenEmbedded git server
+(git://git.openembedded.org/openembedded)
+as of commit id a29bf15b9c9c0d15f96c254b2ed830e104ae3436
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+Index: klibc-1.5.19/klcc/Kbuild
+===================================================================
+--- --- klibc-1.5.19.orig/klcc/Kbuild	2010-07-07 14:07:48.000000000 +0200
++++ --- klibc-1.5.19./klcc/Kbuild	2010-08-18 23:39:23.000000000 +0200
+@@ -22,10 +22,10 @@
+ 	$(Q)echo 'EMAIN=$(KLIBCEMAIN)' >> $@
+ 	$(Q)echo 'BITSIZE=$(KLIBCBITSIZE)' >> $@
+ 	$(Q)echo 'VERSION=$(shell cat $(srctree)/usr/klibc/version)' >> $@
+-	$(Q)echo 'prefix=$(INSTALLDIR)' >> $@
+-	$(Q)echo 'bindir=$(INSTALLDIR)/$(KCROSS)bin' >> $@
+-	$(Q)echo 'libdir=$(INSTALLDIR)/$(KCROSS)lib' >> $@
+-	$(Q)echo 'includedir=$(INSTALLDIR)/$(KCROSS)include' >> $@
++	$(Q)echo 'prefix=$(KLCC_INST)' >> $@
++	$(Q)echo 'bindir=$(KLCC_INST)/$(KCROSS)bin' >> $@
++	$(Q)echo 'libdir=$(KLCC_INST)/$(KCROSS)lib' >> $@
++	$(Q)echo 'includedir=$(KLCC_INST)/$(KCROSS)include' >> $@
+ 
+ 
+ # Generate klcc

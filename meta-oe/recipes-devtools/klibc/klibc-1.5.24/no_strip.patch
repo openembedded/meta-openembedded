@@ -1,0 +1,36 @@
+Do not strip binaries too early. Strip is done before packaging.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+--- a/scripts/Kbuild.klibc	2011-06-14 17:11:17.000000000 +0200
++++ b/scripts/Kbuild.klibc	2011-07-15 01:18:58.000000000 +0200
+@@ -332,8 +332,7 @@
+                        $(KLIBCLIBC)				\
+ 		       $(KLIBCLIBGCC)				\
+ 		       --end-group ;				\
+-                      cp -f $@ $@.g ;				\
+-                      $(KLIBCSTRIP) $(KLIBCSTRIPFLAGS) $@
++                       cp -f $@ $@.g
+ 
+ 
+ $(static-y): $(kprog-objs) $(lib-target) $(KLIBCCRT0) $(KLIBCLIBC) FORCE
+@@ -348,8 +347,7 @@
+                        -R $(KLIBCLIBCSHARED)			\
+ 	               $(KLIBCLIBGCC)				\
+ 		       --end-group ;				\
+-                      cp -f $@ $@.g ;				\
+-                      $(KLIBCSTRIP) $(KLIBCSTRIPFLAGS) $@
++                       cp -f $@ $@.g
+ 
+ 
+ $(shared-y): $(kprog-objs) $(lib-target) $(KLIBCCRTSHARED) \
+
+--- a/usr/klibc/Kbuild	2011-07-15 01:46:32.000000000 +0200
++++ b/usr/klibc/Kbuild	2011-07-15 01:47:17.000000000 +0200
+@@ -147,7 +147,6 @@
+ 
+ quiet_cmd_sohash = GEN     $@
+       cmd_sohash = cat $< > $@;                                           \
+-                     $(KLIBCSTRIP) $(KLIBCSTRIPFLAGS) $@;                 \
+ 		     chmod a+x $@;					  \
+                      rm -f $(obj)/klibc-???????????????????????????.so;   \
+                      ln -f $@ $(obj)/klibc-$(SOLIBHASH).so

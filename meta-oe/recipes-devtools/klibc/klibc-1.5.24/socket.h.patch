@@ -1,0 +1,31 @@
+Subject: Add relevant socket.h definitions
+
+* Discussed upstream:
+* http://www.zytor.com/pipermail/klibc/2010-February/002487.html
+* http://www.zytor.com/pipermail/klibc/2010-February/002488.html
+*
+* Was: Add guards for pre 2.6.33 compatibility.
+*
+* Changes for 1.5.24
+* Only include linux/sockios.h for SIOCGIFCONF and SIOCSIFFLAGS
+* requested by kexec-tools when building statically against klibc.
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+Index: klibc-1.5.24/usr/include/sys/socket.h
+===================================================================
+--- a/usr/include/sys/socket.h	2011-07-27 15:50:53.000000000 +0200
++++ b/usr/include/sys/socket.h	2010-05-31 00:44:16.000000000 +0200
+@@ -10,6 +10,12 @@
+ #include <klibc/compiler.h>
+ #include <klibc/sysconfig.h>
+ #include <linux/socket.h>
++
++#include <linux/version.h>
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,33)
++#include <linux/sockios.h>		/* the SIOCxxx I/O controls     */
++#endif
++
+ #include <linux/uio.h>
+ #include <asm/socket.h>
+ #if _KLIBC_HAS_ARCHSOCKET_H

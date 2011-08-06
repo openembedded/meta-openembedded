@@ -1,0 +1,111 @@
+Patch was imported from the OpenEmbedded git server
+(git://git.openembedded.org/openembedded)
+as of commit id ad67a97e8fbfb03a68088a6ca6ad87b086c88094
+Signed-off-by: Thomas Kunze <thommycheck@gmx.de>
+Minor adjustments tracking upstream changes
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+diff -uNr klibc-1.5.22.orig//usr/dash/miscbltin.c klibc-1.5.22/usr/dash/miscbltin.c
+--- klibc-1.5.22.orig//usr/dash/miscbltin.c	2011-06-11 02:08:49.000000000 +0200
++++ klibc-1.5.22/usr/dash/miscbltin.c	2011-06-11 13:55:32.000000000 +0200
+@@ -46,6 +46,7 @@
+ #include <ctype.h>
+ #include <inttypes.h>
+ #include <time.h>		/* strtotimeval() */
++#include <termios.h>
+ 
+ #include "shell.h"
+ #include "options.h"
+@@ -149,6 +150,11 @@
+ 	int timeout;
+ 	int i;
+ 	fd_set set;
++	int n_flag = 0;
++	unsigned int nchars = 0;
++	int silent = 0;
++	struct termios tty, old_tty;
++
+ 	struct timeval ts, t0, t1, to;
+ 
+ 	ts.tv_sec = ts.tv_usec = 0;
+@@ -156,11 +162,18 @@
+ 	rflag = 0;
+ 	timeout = 0;
+ 	prompt = NULL;
+-	while ((i = nextopt("p:rt:")) != '\0') {
++	while ((i = nextopt("p:rt:n:s")) != '\0') {
+ 		switch(i) {
+ 		case 'p':
+ 			prompt = optionarg;
+ 			break;
++		case 'n':
++			nchars = strtoul(optionarg, NULL, 10);
++			n_flag = nchars; /* just a flag "nchars is nonzero" */
++			break;
++		case 's':
++			silent = 1;
++			break;
+ 		case 't':
+ 			p = strtotimeval(optionarg, &ts);
+ 			if (*p || (!ts.tv_sec && !ts.tv_usec))
+@@ -182,6 +197,24 @@
+ 	}
+ 	if (*(ap = argptr) == NULL)
+ 		sh_error("arg count");
++	if (n_flag || silent) {
++		if (tcgetattr(0, &tty) != 0) {
++			/* Not a tty */
++			n_flag = 0;
++			silent = 0;
++		} else {
++			old_tty = tty;
++			if (n_flag) {
++				tty.c_lflag &= ~ICANON;
++				tty.c_cc[VMIN] = nchars < 256 ? nchars : 255;
++			}
++			if (silent) {
++				tty.c_lflag &= ~(ECHO | ECHOK | ECHONL);
++			}
++			tcsetattr(0, TCSANOW, &tty);
++		}
++	}
++
+ 
+ 	status = 0;
+ 	if (timeout) {
+@@ -200,12 +231,14 @@
+	goto start;
+ 
+-	for (;;) {
++	do {
+ 		if (timeout) {
+ 			gettimeofday(&t1, NULL);
+ 			if (t1.tv_sec > ts.tv_sec ||
+ 			    (t1.tv_sec == ts.tv_sec &&
+ 			     t1.tv_usec >= ts.tv_usec)) {
+ 				status = 1;
++				if (n_flag)
++					tcsetattr(0, TCSANOW, &old_tty);
+ 				break;	/* Timeout! */
+ 			}
+ 
+@@ -222,6 +255,8 @@
+ 			FD_SET(0, &set);
+ 			if (select(1, &set, NULL, NULL, &to) != 1) {
+ 				status = 1;
++				if (n_flag)
++					tcsetattr(0, TCSANOW, &old_tty);
+ 				break; /* Timeout! */
+ 			}
+ 		}
+@@ -263,6 +298,9 @@
+ 			newloc = startloc - 1;
+ 		}
+-	}
++	} while (!n_flag || --nchars);
++	if (n_flag || silent)
++		tcsetattr(0, TCSANOW, &old_tty);
++
+ out:
+ 	recordregion(startloc, p - (char *)stackblock(), 0);
+ 	STACKSTRNUL(p);
