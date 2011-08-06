@@ -28,6 +28,8 @@ UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
                              file://format-replace-m-uclibc.patch \
                             "
 
+LDFLAGS_libc-uclibc_append = " -lrt"
+
 S = "${WORKDIR}/git"
 
 SYSTEMDDISTRO ?= "debian"
