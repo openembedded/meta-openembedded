@@ -22,7 +22,7 @@ SRC_URI = "\
 
 S = "${WORKDIR}/src/Source"
 
-inherit cmake lib_package pkgconfig
+inherit cmake lib_package pkgconfig perlnative
 
 # Wants to jump too far for THUMB on armv4t
 # in WebCore::DocTypeStringsHash::doctype_hash_function(char const*, unsigned int)':
@@ -30,7 +30,7 @@ inherit cmake lib_package pkgconfig
 # the same in WebCore::CSSValueKeywordsHash::value_hash_function(char const*, unsigned int)':
 #             WebCore::CSSPropertyNamesHash::propery_hash_function(char const*, unsigned int)':
 #             WebCore::ColorDataHash::colordata_hash_function(char const*, unsigned int)':
-ARM_INSTRUCTION_SET = "ARM"
+ARM_INSTRUCTION_SET = "arm"
 
 EXTRA_OECMAKE = "-DPORT=Efl -DSHARED_CORE=ON"
 
