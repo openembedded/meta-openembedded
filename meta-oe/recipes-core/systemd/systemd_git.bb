@@ -14,9 +14,9 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r1"
+PR = "r2"
 
-inherit autotools vala
+inherit autotools vala perlnative
 
 SRCREV = "612e58b45b84eda7e1f2a82fdfc006f1ae421cb5"
 
