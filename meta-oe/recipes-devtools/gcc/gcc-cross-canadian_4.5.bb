@@ -5,7 +5,6 @@ require recipes-devtools/gcc/gcc-cross-canadian.inc
 require recipes-devtools/gcc/gcc-configure-sdk.inc
 require recipes-devtools/gcc/gcc-package-sdk.inc
 
-PR = "${INC_PR}.0"
 
 DEPENDS += "gmp-nativesdk mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
 RDEPENDS_${PN} += "mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"

@@ -1,4 +1,3 @@
-PR = "${INC_PR}.1"
 
 require recipes-devtools/gcc/gcc-${PV}.inc
 require recipes-devtools/gcc/gcc-configure-target.inc

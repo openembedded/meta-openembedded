@@ -1,6 +1,5 @@
 require recipes-devtools/gcc/gcc-${PV}.inc
 
-PR = "${INC_PR}.1"
 
 INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"

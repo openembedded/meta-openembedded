@@ -1,4 +1,3 @@
-PR = "${INC_PR}.2"
 
 require recipes-devtools/gcc/gcc-${PV}.inc
 require recipes-devtools/gcc/gcc-cross4.inc
