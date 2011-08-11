@@ -3,7 +3,7 @@ require gnuradio.inc
 PR = "${INC_PR}.0"
 PV = "3.4.0-${PR}+gitr${SRCREV}"
 
-SRCREV = "f53fef3d2bc39b2020b8bce3d88b43569dd16605"
+SRCREV = "62768eedf8f68680ef3a672a27025227e22ccbb0"
 
 # Make it easy to test against developer repos and branches
 GIT_REPO = "gnuradio.git"
