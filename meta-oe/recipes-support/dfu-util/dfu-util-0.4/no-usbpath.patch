@@ -1,0 +1,20 @@
+Index: dfu-util-0.4/configure.ac
+===================================================================
+--- dfu-util-0.4.orig/configure.ac	2011-08-10 22:22:30.000000000 +0200
++++ dfu-util-0.4/configure.ac	2011-08-10 22:22:57.000000000 +0200
+@@ -18,14 +18,12 @@
+ # Checks for libraries.
+ PKG_CHECK_MODULES(USB, libusb-1.0 >= 1.0.0,,
+                  AC_MSG_ERROR([*** Required libusb-1.0 >= 1.0.0 not installed ***]))
+-AC_CHECK_LIB([usbpath],[usb_path2devnum],,,-lusb)
+-
+ LIBS="$LIBS $USB_LIBS"
+ CFLAGS="$CFLAGS $USB_CFLAGS"
+ 
+ # Checks for header files.
+ AC_HEADER_STDC
+-AC_CHECK_HEADERS([stdlib.h string.h stdio.h usbpath.h])
++AC_CHECK_HEADERS([stdlib.h string.h stdio.h])
+ 
+ # Checks for typedefs, structures, and compiler characteristics.
+ AC_C_CONST

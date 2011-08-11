@@ -1,0 +1,49 @@
+From b379db29534ce6fa2e185f559e817398b3feb9ea Mon Sep 17 00:00:00 2001
+From: Martin JaMa Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 11 Aug 2011 11:19:52 +0200
+Subject: [PATCH] Revert "Makefile.am: Drop static dfu-util"
+
+This reverts commit fe0426ddc04f503d148c5e5f931f16b8f674f071.
+
+Conflicts:
+
+	src/Makefile.am
+
+Signed-off-by: Martin JaMa Jansa <Martin.Jansa@gmail.com>
+---
+ src/Makefile.am |   15 ++++++++++++++-
+ 1 files changed, 14 insertions(+), 1 deletions(-)
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 0674413..ed87891 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,6 +1,6 @@
+ AM_CFLAGS = -Wall
+ 
+-bin_PROGRAMS = dfu-util
++bin_PROGRAMS = dfu-util dfu-util_static
+ dfu_util_SOURCES = main.c \
+ 		dfu_load.c \
+ 		dfu_load.h \
+@@ -11,3 +11,17 @@ dfu_util_SOURCES = main.c \
+ 		dfu_file.h \
+ 		quirks.c \
+ 		quirks.h
++
++dfu_util_static_SOURCES = main.c \
++		dfu_load.c \
++		dfu_load.h \
++		dfu.c \
++		dfu.h \
++		usb_dfu.h \
++		dfu_file.c \
++		dfu_file.h \
++		quirks.c \
++		quirks.h
++
++dfu_util_static_LDFLAGS = -static
++dfu_util_static_LDADD = -lusb-1.0 -lrt -lpthread
+-- 
+1.7.6
+
