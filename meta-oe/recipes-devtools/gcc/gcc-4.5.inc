@@ -232,7 +232,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
 FORTRAN = ""
 JAVA = ""
 
-S = "${TMPDIR}/work-shared/gcc-${PV}/${BRANCH}"
+S = "${TMPDIR}/work-shared/gcc-${PV}-${PR}/${BRANCH}"
 B = "${WORKDIR}/${BRANCH}/build.${HOST_SYS}.${TARGET_SYS}"
 
 #EXTRA_OECONF_BASE = "  --enable-cheaders=c_std \
