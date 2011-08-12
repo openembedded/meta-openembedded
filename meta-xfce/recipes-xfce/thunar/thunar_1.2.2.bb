@@ -4,20 +4,17 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "exo gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify"
 
-PR = "r0"
+PR = "r1"
 
 inherit xfce
 
 # SRC_URI must follow inherited one
 SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2 \
            file://relative-symlinks-docs.patch \
+           file://fix-segfault-no-icons.patch \
 "
 
 S = "${WORKDIR}/Thunar-${PV}/"
-
-
-# no/minimum(default)/yes/full(fails <- Werror)
-#EXTRA_OECONF += "--enable-debug=yes"
 
 FILES_${PN} += "${libdir}/thunarx-2/* \
                 ${libdir}/xfce4/panel/plugins/* \

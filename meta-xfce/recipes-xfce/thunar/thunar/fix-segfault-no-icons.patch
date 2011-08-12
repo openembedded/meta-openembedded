@@ -1,0 +1,61 @@
+From 5066ca4983d82352fca078525e2be454b263fdfd Mon Sep 17 00:00:00 2001
+From: Andreas Mueller <schnitzeltony@gmx.de>
+Date: Thu, 11 Aug 2011 10:00:33 +0200
+Subject: [PATCH] Fix segfaults in case icons are missing or not found
+
+
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ thunar/thunar-location-button.c |    7 +++++--
+ thunar/thunar-window.c          |   13 +++++++++----
+ 2 files changed, 14 insertions(+), 6 deletions(-)
+
+diff --git a/thunar/thunar-location-button.c b/thunar/thunar-location-button.c
+index 49be1f4..20d7110 100644
+--- a/thunar/thunar-location-button.c
++++ b/thunar/thunar-location-button.c
+@@ -462,9 +462,12 @@ thunar_location_button_file_changed (ThunarLocationButton *location_button,
+       /* update the icon for the image */
+       icon_factory = thunar_icon_factory_get_for_icon_theme (icon_theme);
+       icon = thunar_icon_factory_load_file_icon (icon_factory, file, location_button->file_icon_state, size);
+-      gtk_image_set_from_pixbuf (GTK_IMAGE (location_button->image), icon);
++      if (G_LIKELY (icon != NULL))
++      {
++        gtk_image_set_from_pixbuf (GTK_IMAGE (location_button->image), icon);
++        g_object_unref (G_OBJECT (icon));
++      }
+       g_object_unref (G_OBJECT (icon_factory));
+-      g_object_unref (G_OBJECT (icon));
+ 
+       /* show the image widget */
+       gtk_widget_show (location_button->image);
+diff --git a/thunar/thunar-window.c b/thunar/thunar-window.c
+index d258d8f..2ed1af7 100644
+--- a/thunar/thunar-window.c
++++ b/thunar/thunar-window.c
+@@ -2410,13 +2410,18 @@ thunar_window_current_directory_changed (ThunarFile   *current_directory,
+   gtk_action_set_sensitive (action, (thunar_file_get_item_count (current_directory) > 0));
+   gtk_action_set_visible (action, (thunar_file_is_root (current_directory) && thunar_file_is_trashed (current_directory)));
+ 
+-  /* set window title and icon */
++  /* set window title */
+   title = g_strdup_printf ("%s - %s", thunar_file_get_display_name (current_directory), _("File Manager"));
+-  icon = thunar_icon_factory_load_file_icon (window->icon_factory, current_directory, THUNAR_FILE_ICON_STATE_DEFAULT, 48);
+   gtk_window_set_title (GTK_WINDOW (window), title);
+-  gtk_window_set_icon (GTK_WINDOW (window), icon);
+-  g_object_unref (G_OBJECT (icon));
+   g_free (title);
++
++  /* set window icon */
++  icon = thunar_icon_factory_load_file_icon (window->icon_factory, current_directory, THUNAR_FILE_ICON_STATE_DEFAULT, 48);
++  if (G_LIKELY (icon != NULL))
++  {
++    gtk_window_set_icon (GTK_WINDOW (window), icon);
++    g_object_unref (G_OBJECT (icon));
++  }
+ }
+ 
+ 
+-- 
+1.7.4.4
+
