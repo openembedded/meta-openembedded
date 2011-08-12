@@ -18,16 +18,3 @@ Index: gcc-4.5.0/gcc/config/i386/t-linux64
  
  LIBGCC = stmp-multilib
  INSTALL_LIBGCC = install-multilib
-Index: gcc-4.5.0/gcc/config/i386/linux64.h
-===================================================================
---- gcc-4.5.0.orig/gcc/config/i386/linux64.h	2010-08-10 15:49:06.000000000 +0100
-+++ gcc-4.5.0/gcc/config/i386/linux64.h	2010-08-10 15:49:16.000000000 +0100
-@@ -59,7 +59,7 @@
-    done.  */
- 
- #define GLIBC_DYNAMIC_LINKER32 "/lib/ld-linux.so.2"
--#define GLIBC_DYNAMIC_LINKER64 "/lib64/ld-linux-x86-64.so.2"
-+#define GLIBC_DYNAMIC_LINKER64 "/lib/ld-linux-x86-64.so.2"
- 
- #if TARGET_64BIT_DEFAULT
- #define SPEC_32 "m32"
