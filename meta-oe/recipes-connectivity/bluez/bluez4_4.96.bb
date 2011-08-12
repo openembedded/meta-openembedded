@@ -14,8 +14,6 @@ ASNEEDED = ""
 
 PR = "r0"
 
-# to find bluez patches from oe-core
-FILESPATH =. "${COREBASE}/meta/recipes-connectivity/bluez/bluez4-4.82/:"
 SRC_URI = "\
   ${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.gz \
   file://fix-dfutool-usb-declaration-mismatch.patch \
