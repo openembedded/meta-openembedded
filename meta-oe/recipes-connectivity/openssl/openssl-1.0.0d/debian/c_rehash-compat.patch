@@ -1,0 +1,43 @@
+From 83f318d68bbdab1ca898c94576a838cc97df4700 Mon Sep 17 00:00:00 2001
+From: Ludwig Nussel <ludwig.nussel@suse.de>
+Date: Wed, 21 Apr 2010 15:52:10 +0200
+Subject: [PATCH] also create old hash for compatibility
+
+---
+ tools/c_rehash.in |    8 +++++++-
+ 1 files changed, 7 insertions(+), 1 deletions(-)
+
+Index: openssl-1.0.0c/tools/c_rehash.in
+===================================================================
+--- openssl-1.0.0c.orig/tools/c_rehash.in	2010-04-14 16:07:28.000000000 -0700
++++ openssl-1.0.0c/tools/c_rehash.in	2011-08-12 23:06:41.976664773 -0700
+@@ -83,6 +83,7 @@
+ 			next;
+ 		}
+ 		link_hash_cert($fname) if($cert);
++		link_hash_cert_old($fname) if($cert);
+ 		link_hash_crl($fname) if($crl);
+ 	}
+ }
+@@ -116,8 +117,9 @@
+ 
+ sub link_hash_cert {
+ 		my $fname = $_[0];
++		my $hashopt = $_[1] || '-subject_hash';
+ 		$fname =~ s/'/'\\''/g;
+-		my ($hash, $fprint) = `"$openssl" x509 -hash -fingerprint -noout -in "$fname"`;
++		my ($hash, $fprint) = `"$openssl" x509 $hashopt -fingerprint -noout -in "$fname"`;
+ 		chomp $hash;
+ 		chomp $fprint;
+ 		$fprint =~ s/^.*=//;
+@@ -147,6 +149,10 @@
+ 		$hashlist{$hash} = $fprint;
+ }
+ 
++sub link_hash_cert_old {
++		link_hash_cert($_[0], '-subject_hash_old');
++}
++
+ # Same as above except for a CRL. CRL links are of the form <hash>.r<n>
+ 
+ sub link_hash_crl {

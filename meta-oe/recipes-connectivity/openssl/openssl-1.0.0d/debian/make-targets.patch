@@ -1,0 +1,13 @@
+Index: openssl-1.0.0c/Makefile.org
+===================================================================
+--- openssl-1.0.0c.orig/Makefile.org	2010-12-12 16:10:12.000000000 +0100
++++ openssl-1.0.0c/Makefile.org	2010-12-12 16:11:27.000000000 +0100
+@@ -109,7 +109,7 @@
+ ZLIB_INCLUDE=
+ LIBZLIB=
+ 
+-DIRS=   crypto ssl engines apps test tools
++DIRS=   crypto ssl engines apps tools
+ ENGDIRS= ccgost
+ SHLIBDIRS= crypto ssl
+ 
