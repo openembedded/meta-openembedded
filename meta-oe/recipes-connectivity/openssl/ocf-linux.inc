@@ -22,3 +22,4 @@ do_install() {
 }
 
 ALLOW_EMPTY = "1"
+BBCLASSEXTEND = "native nativesdk"
