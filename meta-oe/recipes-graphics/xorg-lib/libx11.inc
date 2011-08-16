@@ -45,3 +45,8 @@ do_compile_prepend() {
 		cd ../../
 	) || exit 1
 }
+
+python () {
+       if not oe.utils.contains ('DISTRO_FEATURES', 'x11', True, False, d):
+       	  raise bb.parse.SkipPackage("X11 not enabled for this DISTRO")
+}
