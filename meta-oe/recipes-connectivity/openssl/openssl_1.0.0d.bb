@@ -1,4 +1,4 @@
-require recipes-connectivity/openssl/openssl.inc
+require openssl.inc
 
 # For target side versions of openssl enable support for OCF Linux driver
 # if they are available.
