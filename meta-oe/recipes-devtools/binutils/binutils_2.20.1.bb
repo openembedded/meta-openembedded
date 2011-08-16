@@ -1,6 +1,6 @@
 require binutils.inc
 
-PR = "r5"
+PR = "r6"
 
 LIC_FILES_CHKSUM="\
     file://src-release;endline=17;md5=4830a9ef968f3b18dd5e9f2c00db2d35\
@@ -30,6 +30,10 @@ SRC_URI = "\
      file://libiberty_path_fix.patch \
      file://binutils-poison.patch \
      file://libtool-rpath-fix.patch \
+     file://152_arm_branches_to_weak_symbols.patch \
+     file://200_elflink_%B_fixes.patch \
+     file://201_elflink_improve_noaddneeded_errors.patch \
+     file://202_elflink_noaddneeded_vs_weak.patch \
      "
 
 SRC_URI[md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"

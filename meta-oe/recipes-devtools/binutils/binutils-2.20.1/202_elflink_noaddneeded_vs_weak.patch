@@ -1,0 +1,87 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 202_elflink_noaddneeded_vs_weak.dpatch by  <kirr@landau.phys.spbu.ru>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Fixes '-no-add-needed breaks linking with weak symbols'
+## DP: Upstream status: submitted upstream for binutils-2_20-branch
+
+
+2010-08-07  Kirill Smelkov  <kirr@landau.phys.spbu.ru>
+
+	Backport from mainline:
+	2010-01-21  Nick Clifton  <nickc@redhat.com>
+
+	* elflink.c (elf_link_add_object_symbols): Look up name of
+	undefined symbol both before and after versioning has been
+	applied.  Do not bother with symbols that are weakly undefined.
+
+
+@DPATCH@
+diff --git a/bfd/elflink.c b/bfd/elflink.c
+index 10eee8c..e058064 100644
+--- a/bfd/elflink.c
++++ b/bfd/elflink.c
+@@ -3991,6 +3991,20 @@ error_free_dyn:
+ 	  unsigned int vernum = 0;
+ 	  bfd_boolean skip;
+ 
++	  /* If this is a definition of a symbol which was previously
++	     referenced in a non-weak manner then make a note of the bfd
++	     that contained the reference.  This is used if we need to
++	     refer to the source of the reference later on.  */
++	  if (! bfd_is_und_section (sec))
++	    {
++	      h = elf_link_hash_lookup (elf_hash_table (info), name, FALSE, FALSE, FALSE);
++
++	      if (h != NULL
++		  && h->root.type == bfd_link_hash_undefined
++		  && h->root.u.undef.abfd)
++		undef_bfd = h->root.u.undef.abfd;
++	    }
++	  
+ 	  if (ever == NULL)
+ 	    {
+ 	      if (info->default_imported_symver)
+@@ -4098,16 +4112,15 @@ error_free_dyn:
+ 	      name = newname;
+ 	    }
+ 
+-	  /* If this is a definition of a previously undefined symbol
+-	     make a note of the bfd that contained the reference in
+-	     case we need to refer to it later on in error messages.  */
+-	  if (! bfd_is_und_section (sec))
++	  /* If necessary, make a second attempt to locate the bfd
++	     containing an unresolved, non-weak reference to the
++	     current symbol.  */
++	  if (! bfd_is_und_section (sec) && undef_bfd == NULL)
+ 	    {
+ 	      h = elf_link_hash_lookup (elf_hash_table (info), name, FALSE, FALSE, FALSE);
+ 
+ 	      if (h != NULL
+-		  && (h->root.type == bfd_link_hash_undefined
+-		      || h->root.type == bfd_link_hash_undefweak)
++		  && h->root.type == bfd_link_hash_undefined
+ 		  && h->root.u.undef.abfd)
+ 		undef_bfd = h->root.u.undef.abfd;
+ 	    }
+@@ -4448,12 +4461,14 @@ error_free_dyn:
+ 	      /* A symbol from a library loaded via DT_NEEDED of some
+ 		 other library is referenced by a regular object.
+ 		 Add a DT_NEEDED entry for it.  Issue an error if
+-		 --no-add-needed is used.  */
+-	      if ((elf_dyn_lib_class (abfd) & DYN_NO_NEEDED) != 0)
++		 --no-add-needed is used and the reference was not
++		 a weak one.  */
++	      if (undef_bfd != NULL
++		  && (elf_dyn_lib_class (abfd) & DYN_NO_NEEDED) != 0)
+ 		{
+ 		  (*_bfd_error_handler)
+ 		    (_("%B: undefined reference to symbol '%s'"),
+-		     undef_bfd == NULL ? info->output_bfd : undef_bfd, name);
++		     undef_bfd, name);
+ 		  (*_bfd_error_handler)
+ 		    (_("note: '%s' is defined in DSO %B so try adding it to the linker command line"),
+ 		     abfd, name);
+-- 
+1.7.2.1.44.g721e7
+
