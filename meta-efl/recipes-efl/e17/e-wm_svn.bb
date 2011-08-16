@@ -16,10 +16,6 @@ SRC_URI = "\
   file://applications.menu \
 "
 
-SRC_URI_append_shr = " \
-  file://wizard-module-skipping.patch \
-"
-
 EXTRA_OECONF = "\
   --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
   --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
