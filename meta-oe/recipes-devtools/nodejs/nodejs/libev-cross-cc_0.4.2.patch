@@ -1,0 +1,13 @@
+diff --git a/deps/libev/wscript b/deps/libev/wscript
+index 4f6c9a8..1796749 100644
+--- a/deps/libev/wscript
++++ b/deps/libev/wscript
+@@ -58,7 +58,7 @@ def configure(conf):
+           return 0;
+       }
+   """
+-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=False,
+                 msg="Checking for SYS_clock_gettime")
+ 
+   have_librt = conf.check(lib='rt', uselib_store='RT')
