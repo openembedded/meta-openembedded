@@ -1,0 +1,24 @@
+--- /tmp/configure.ac	2008-07-11 10:19:17.000000000 +0200
++++ libmad-0.15.1b/configure.ac	2008-07-11 10:20:00.313198000 +0200
+@@ -140,21 +140,14 @@
+     case "$optimize" in
+ 	-O|"-O "*)
+ 	    optimize="-O"
+-	    optimize="$optimize -fforce-mem"
+-	    optimize="$optimize -fforce-addr"
+ 	    : #x optimize="$optimize -finline-functions"
+ 	    : #- optimize="$optimize -fstrength-reduce"
+-	    optimize="$optimize -fthread-jumps"
+-	    optimize="$optimize -fcse-follow-jumps"
+-	    optimize="$optimize -fcse-skip-blocks"
+ 	    : #x optimize="$optimize -frerun-cse-after-loop"
+ 	    : #x optimize="$optimize -frerun-loop-opt"
+ 	    : #x optimize="$optimize -fgcse"
+ 	    optimize="$optimize -fexpensive-optimizations"
+-	    optimize="$optimize -fregmove"
+ 	    : #* optimize="$optimize -fdelayed-branch"
+ 	    : #x optimize="$optimize -fschedule-insns"
+-	    optimize="$optimize -fschedule-insns2"
+ 	    : #? optimize="$optimize -ffunction-sections"
+ 	    : #? optimize="$optimize -fcaller-saves"
+ 	    : #> optimize="$optimize -funroll-loops"
