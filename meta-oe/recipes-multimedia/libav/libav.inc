@@ -9,10 +9,10 @@ PROVIDES = "ffmpeg"
 
 ARM_INSTRUCTION_SET = "arm"
 
-# faac faad2 lame schroedinger libgsm libvpx
-DEPENDS = "virtual/libsdl zlib libogg libvorbis libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
+# faac faad2 lame schroedinger libgsm
+DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 inherit autotools pkgconfig
 
