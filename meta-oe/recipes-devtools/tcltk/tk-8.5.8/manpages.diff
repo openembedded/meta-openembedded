@@ -1,0 +1,23 @@
+Patch by Chris Waters fixes installing of several manual pages which
+aren't installed by upstream script but are referenced inside other
+manual pages.
+
+--- tk8.5-8.5.8.orig/unix/installManPage
++++ tk8.5-8.5.8/unix/installManPage
+@@ -51,7 +51,16 @@
+     }' $MANPAGE`
+ 
+ SECTION=`echo $MANPAGE | sed 's/.*\(.\)$/\1/'`
++NAME=`basename $MANPAGE .$SECTION`
+ SRCDIR=`dirname $MANPAGE`
++
++SPECIALS="FindPhoto"
++for n in $SPECIALS; do
++    if [ "$NAME" = "$n" ] ; then
++	NAMES="$n $NAMES"
++    fi
++done
++
+ FIRST=""
+ for f in $NAMES; do
+     f=$f.$SECTION$SUFFIX

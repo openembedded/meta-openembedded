@@ -1,0 +1,45 @@
+Patch by Sergei Golovan (originally by Mike Markley and Chris Waters) fixes
+building on non-linux Debian architectures.
+
+--- tk8.5-8.5.8.orig/unix/configure
++++ tk8.5-8.5.8/unix/configure
+@@ -4742,6 +4742,9 @@
+ 		if test "`uname -s`" = "AIX" ; then
+ 		    tcl_cv_sys_version=AIX-`uname -v`.`uname -r`
+ 		fi
++		if test "`uname -s`" = "NetBSD" -a -f /etc/debian_version ; then
++		    tcl_cv_sys_version=NetBSD-Debian
++		fi
+ 	    fi
+ 	fi
+ 
+@@ -5546,7 +5549,7 @@
+ fi
+ 
+ 	    ;;
+-	Linux*)
++	Linux*|GNU*|NetBSD-Debian)
+ 	    SHLIB_CFLAGS="-fPIC"
+ 	    SHLIB_LD_LIBS='${LIBS}'
+ 	    SHLIB_SUFFIX=".so"
+--- tk8.5-8.5.8.orig/unix/tcl.m4
++++ tk8.5-8.5.8/unix/tcl.m4
+@@ -962,6 +962,9 @@
+ 		if test "`uname -s`" = "AIX" ; then
+ 		    tcl_cv_sys_version=AIX-`uname -v`.`uname -r`
+ 		fi
++		if test "`uname -s`" = "NetBSD" -a -f /etc/debian_version ; then
++		    tcl_cv_sys_version=NetBSD-Debian
++		fi
+ 	    fi
+ 	fi
+     ])
+@@ -1422,7 +1425,7 @@
+ 	        ])
+ 	    ])
+ 	    ;;
+-	Linux*)
++	Linux*|GNU*|NetBSD-Debian)
+ 	    SHLIB_CFLAGS="-fPIC"
+ 	    SHLIB_LD_LIBS='${LIBS}'
+ 	    SHLIB_SUFFIX=".so"
