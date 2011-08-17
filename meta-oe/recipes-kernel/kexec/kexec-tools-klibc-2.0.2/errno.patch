@@ -1,0 +1,13 @@
+Index: kexec-tools-2.0.2/kexec/ifdown.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/ifdown.c	2009-09-24 14:15:34.025828340 +0100
++++ kexec-tools-2.0.2/kexec/ifdown.c	2009-09-24 14:15:47.014827381 +0100
+@@ -14,7 +14,7 @@
+ #include <sys/ioctl.h>
+ #include <sys/socket.h>
+ #include <sys/time.h>
+-#include <sys/errno.h>
++#include <errno.h>
+
+ #include <net/if.h>
+ #include <netinet/in.h>

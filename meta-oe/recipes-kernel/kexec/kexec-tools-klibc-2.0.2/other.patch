@@ -1,0 +1,97 @@
+Index: kexec-tools-2.0.2/kexec/crashdump-elf.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/crashdump-elf.c	2008-10-31 03:00:38.000000000 +0100
++++ kexec-tools-2.0.2/kexec/crashdump-elf.c	2009-09-26 11:17:57.000000000 +0200
+@@ -47,7 +47,8 @@
+	if (xen_present())
+		nr_cpus = xen_get_nr_phys_cpus();
+	else
+-		nr_cpus = sysconf(_SC_NPROCESSORS_CONF);
++		/*nr_cpus = sysconf(_SC_NPROCESSORS_CONF);*/
++		nr_cpus = 1;
+
+	if (nr_cpus < 0) {
+		return -1;
+
+Index: kexec-tools-2.0.2/kexec/arch/arm/kexec-zImage-arm.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/arch/arm/kexec-zImage-arm.c	2009-04-24 14:15:46.982825391 +0100
++++ kexec-tools-2.0.2/kexec/arch/arm/kexec-zImage-arm.c	2009-09-26 01:58:20.838624318 +0200
+@@ -2,6 +2,10 @@
+  * - 08/21/2007 ATAG support added by Uli Luckas <u.luckas@road.de>
+  *
+  */
++
++/* work around for linux header files */
++#define __deprecated
++
+ #define _GNU_SOURCE
+ #define _XOPEN_SOURCE
+ #include <stdio.h>
+
+Index: kexec-tools-2.0.2/kexec/kexec.h
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/kexec.h	2008-05-16 13:28:19.000000000 +0200
++++ kexec-tools-2.0.2/kexec/kexec.h	2009-09-16 17:32:15.000000000 +0200
+@@ -204,7 +204,7 @@
+ extern char *slurp_file(const char *filename, off_t *r_size);
+ extern char *slurp_file_len(const char *filename, off_t size);
+ extern char *slurp_decompress_file(const char *filename, off_t *r_size);
+-extern unsigned long virt_to_phys(unsigned long addr);
++/* extern unsigned long virt_to_phys(unsigned long addr); */
+ extern void add_segment(struct kexec_info *info,
+	const void *buf, size_t bufsz, unsigned long base, size_t memsz);
+ extern void add_segment_phys_virt(struct kexec_info *info,
+
+Index: kexec-tools-2.0.2/Makefile.in
+===================================================================
+--- kexec-tools-2.0.2.orig/Makefile.in	2009-09-29 23:49:47.000000000 +0200
++++ kexec-tools-2.0.2/Makefile.in	2009-09-29 23:49:09.000000000 +0200
+@@ -46,7 +46,7 @@
+ # where necessary.
+ CPPFLAGS	= @CPPFLAGS@ -I$(srcdir)/include -I$(srcdir)/util_lib/include \
+			-Iinclude/
+-CFLAGS		= @CFLAGS@ -fno-strict-aliasing -Wall -Wstrict-prototypes
++CFLAGS		= @CFLAGS@ -static -fno-strict-aliasing -Wall -Wstrict-prototypes
+ PURGATORY_EXTRA_CFLAGS = @PURGATORY_EXTRA_CFLAGS@
+ ASFLAGS		= @ASFLAGS@
+ LDFLAGS		= @LDFLAGS@
+
+Index: kexec-tools-2.0.2/util_lib/include/sha256.h
+===================================================================
+--- kexec-tools-2.0.2.orig/util_lib/include/sha256.h	2008-07-15 02:46:43.000000000 +0200
++++ kexec-tools-2.0.2/util_lib/include/sha256.h		2009-10-02 18:28:45.000000000 +0200
+@@ -1,7 +1,8 @@
+ #ifndef SHA256_H
+ #define SHA256_H
+
+-#include <sys/types.h>
++//#include <sys/types.h>
++#include <stddef.h>
+ #include <stdint.h>
+
+ typedef struct
+
+Index: kexec-tools-2.0.2/purgatory/Makefile
+===================================================================
+--- kexec-tools-2.0.2.orig/purgatory/Makefile	2008-10-09 00:32:14.000000000 +0200
++++ kexec-tools-2.0.2.orig/purgatory/Makefile	2009-10-03 00:28:45.000000000 +0200
+@@ -47,7 +47,7 @@
+ $(PURGATORY): CC=$(TARGET_CC)
+ $(PURGATORY): CFLAGS+=$(PURGATORY_EXTRA_CFLAGS) \
+		      $($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
+-		      -Os -fno-builtin -ffreestanding
++		      -Os -fno-builtin -ffreestanding -nostdinc
+
+ $(PURGATORY): CPPFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS) \
+			-I$(srcdir)/purgatory/include \
+@@ -61,7 +61,8 @@
+
+ $(PURGATORY): $(PURGATORY_OBJS)
+	$(MKDIR) -p $(@D)
+-	$(CC) $(LDFLAGS) -o $@ $^
++#	$(CC) $(LDFLAGS) -o $@ $^
++	$(LD) $(LDFLAGS) -o $@ $^
+
+ #	$(LD) $(LDFLAGS) $(EXTRA_LDFLAGS) --no-undefined -e purgatory_start -r -o $@ $(PURGATORY_OBJS) $(UTIL_LIB)
+
