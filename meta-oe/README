@@ -6,7 +6,7 @@ revision: HEAD
 
 Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
 
-When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix meta-oe'
+When sending single patches, please use something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix meta-oe'
 
 Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
 
