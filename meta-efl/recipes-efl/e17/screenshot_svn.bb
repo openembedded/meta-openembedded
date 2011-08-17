@@ -1,6 +1,7 @@
 LICENSE = "MIT"
 PV = "0.3.0+svnr${SRCREV}"
 PR = "${INC_PR}.0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
 
 require e-module.inc
 
