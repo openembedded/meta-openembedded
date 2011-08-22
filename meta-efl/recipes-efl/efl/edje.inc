@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1f2d83425ec8dfae5cd77f8ce52e872c"
 inherit efl
 
 BBCLASSEXTEND = "native nativesdk"
-INC_PR = "r0"
+INC_PR = "r1"
 
 do_configure_prepend_virtclass-native() {
 	sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
@@ -52,5 +52,6 @@ RREPLACES_${PN} = "libedje-ver-pre-svn-00-0 libedje-ver-pre-svn-01-0"
 FILES_${PN}-utils = "\
   ${bindir}/edje_* \
   ${bindir}/inkscape2edc \
+  ${libdir}/edje/utils/epp \
   ${datadir}/edje/include/edje.inc \
 "
