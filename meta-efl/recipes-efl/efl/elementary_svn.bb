@@ -21,13 +21,13 @@ do_compile_append() {
                   elementary.pc
 }
 
-PACKAGES =+ "${PN}-configs"
+PACKAGES =+ "${PN}-configs ${PN}-accessibility"
 
 RDEPENDS_${PN} = "\
-  elementary-themes \
-  elementary-configs \
+  ${PN}-themes \
+  ${PN}-configs \
 "
-RSUGGESTS_${PN} = "elementary-tests"
+RSUGGESTS_${PN} = "${PN}-tests ${PN}-accessibility"
 
 FILES_${PN} += "\
   ${libdir}/edje/modules/elm \
@@ -43,6 +43,8 @@ FILES_${PN}-configs = "\
 
 FILES_${PN}-dbg += "\
   ${libdir}/elementary/modules/test_entry/*/.debug \
+  ${libdir}/elementary/modules/test_map/*/.debug \
+  ${libdir}/elementary/modules/access_output/*/.debug \
   ${libdir}/edje/modules/elm/*/.debug \
 "
 
@@ -53,6 +55,11 @@ FILES_${PN}-tests = "\
   ${datadir}/applications/* \
   ${datadir}/icons/* \
   ${libdir}/elementary/modules/test_entry/* \
+  ${libdir}/elementary/modules/test_map/* \
+"
+
+FILES_${PN}-accessibility = "\
+  ${libdir}/elementary/modules/access_output/* \
 "
 
 # Some upgrade path tweaking, as in evas
