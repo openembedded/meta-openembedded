@@ -1,0 +1,94 @@
+Index: kexec-tools-2.0.2/kexec/kexec-elf-rel.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/kexec-elf-rel.c	2009-09-24 14:15:34.025828340 +0100
++++ kexec-tools-2.0.2/kexec/kexec-elf-rel.c	2009-09-24 14:15:47.030825302 +0100
+@@ -4,7 +4,7 @@
+ #include <stdio.h>
+ #include <errno.h>
+ #include <stdlib.h>
+-#include "elf.h"
++#include "../include/elf.h"
+ #include <boot/elf_boot.h>
+ #include "kexec.h"
+ #include "kexec-elf.h"
+Index: kexec-tools-2.0.2/kexec/crashdump.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/crashdump.c	2008-10-31 03:00:38.000000000 +0100
++++ kexec-tools-2.0.2/kexec/crashdump.c	2009-09-26 11:16:27.000000000 +0200
+@@ -26,7 +26,7 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+-#include <elf.h>
++#include "../../../include/elf.h"
+ #include "kexec.h"
+ #include "crashdump.h"
+ #include "kexec-syscall.h"
+
+Index: kexec-tools-2.0.2/kexec/crashdump-xen.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/crashdump-xen.c	2008-07-15 02:46:43.000000000 +0200
++++ kexec-tools-2.0.2/kexec/crashdump-xen.c	2009-09-26 11:16:41.000000000 +0200
+@@ -3,7 +3,7 @@
+ #include <stdarg.h>
+ #include <string.h>
+ #include <stdlib.h>
+-#include <elf.h>
++#include "../../../include/elf.h"
+ #include <errno.h>
+ #include <limits.h>
+ #include <sys/types.h>
+
+Index: kexec-tools-2.0.2/kexec/arch/arm/kexec-elf-rel-arm.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/arch/arm/kexec-elf-rel-arm.c	2009-04-24 14:15:46.934825202 +0100
++++ kexec-tools-2.0.2/kexec/arch/arm/kexec-elf-rel-arm.c	2009-09-24 14:15:47.014827381 +0100
+@@ -1,5 +1,5 @@
+ #include <stdio.h>
+-#include <elf.h>
++#include "../../../include/elf.h"
+ #include "../../kexec.h"
+ #include "../../kexec-elf.h"
+
+Index: kexec-tools-2.0.2/kexec/kexec-elf-boot.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kexec/kexec-elf-boot.c	2009-05-16 13:28:19.000000000 +0200
++++ kexec-tools-2.0.2/kexec/kexec-elf-boot.c	2009-09-16 11:13:28.000000000 +0200
+@@ -22,7 +22,7 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include <errno.h>
+-#include <elf.h>
++#include "../include/elf.h"
+ #include <boot/elf_boot.h>
+ #include <ip_checksum.h>
+ #include <x86/x86-linux.h>
+
+Index: kexec-tools-2.0.2/kdump/kdump.c
+===================================================================
+--- kexec-tools-2.0.2.orig/kdump/kdump.c	2009-05-16 13:28:19.000000000 +0200
++++ kexec-tools-2.0.2/kdump/kdump.c	2009-09-16 11:13:08.000000000 +0200
+@@ -8,7 +8,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <endian.h>
+-#include <elf.h>
++#include "../include/elf.h"
+
+ #if !defined(__BYTE_ORDER) || !defined(__LITTLE_ENDIAN) || !defined(__BIG_ENDIAN)
+ #error Endian defines missing
+
+Index: kexec-tools-2.0.2/kexec/arch/arm/crashdump-arm.c
+===================================================================
+--- kexec-tools-2.0.2.old/kexec/arch/arm/crashdump-arm.c	2010-08-01 15:07:47.000000000 +0200
++++ kexec-tools-2.0.2/kexec/arch/arm/crashdump-arm.c	2010-07-29 06:19:59.000000000 +0200
+@@ -20,7 +20,7 @@
+  * along with this program; if not, write to the Free Software
+  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+  */
+-#include <elf.h>
++#include "../../../include/elf.h"
+ #include <errno.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+
