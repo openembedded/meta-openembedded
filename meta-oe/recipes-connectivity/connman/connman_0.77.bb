@@ -22,8 +22,8 @@ SRC_URI  = "\
   file://connman \
 "
 
-SRC_URI[md5sum] = "59b4cfd9fa4f736f7a2d88ee0c758fe9"
-SRC_URI[sha256sum] = "bf58fa72454bb63033da8f847a4709dbdfe64c000056a93a7504240cb31c1321"
+SRC_URI[md5sum] = "2e95edb0ead4fff3e84458f7fa192a64"
+SRC_URI[sha256sum] = "df6e926c4b0ccbab26d6e21b9935ab72fa5adf275eb7ac2b48540117ae84cbcc"
 
 # alg-test doesn't build, so disable that and test for if_alg.h as this header is only in 2.6.39
 do_configure_prepend() {
