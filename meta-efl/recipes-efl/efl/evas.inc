@@ -44,6 +44,7 @@ RRECOMMENDS_${PN} = " \
   evas-loader-jpeg \
   evas-loader-eet \
   evas-loader-gif \
+  evas-loader-svg \
 "
 
 # Some upgrade path tweaking
@@ -73,11 +74,6 @@ RREPLACES_evas-engine-software-16 = "liblibevas-ver-pre-svn-00-engine-software-1
 RREPLACES_evas-engine-buffer = "liblibevas-ver-pre-svn-00-engine-buffer libevas-ver-pre-svn-00-engine-buffer "
 RREPLACES_evas-engine-xrender-x11 = "liblibevas-ver-pre-svn-00-engine-xrender-x11 libevas-ver-pre-svn-00-engine-xrender-x11 "
 RREPLACES_evas-engine-software-x11 = "liblibevas-ver-pre-svn-00-engine-software-x11 libevas-ver-pre-svn-00-engine-software-x11 "
-
-# disabling this, since (due to OE bugs) it drags in whole Gtk+
-#RRECOMMENDS_${PN} += " \
-#  libevas-loader-svg \
-#"
 
 EVAS_CPU_TWEAKS = ""
 # Disabled for now, see http://thread.gmane.org/gmane.comp.window-managers.enlightenment.devel/25194
