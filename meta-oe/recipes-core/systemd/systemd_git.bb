@@ -14,11 +14,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r2"
+PR = "r0"
 
 inherit autotools vala perlnative
 
-SRCREV = "612e58b45b84eda7e1f2a82fdfc006f1ae421cb5"
+SRCREV = "66be5eda80a334eacb83b13590fdfbabc7efe5e9"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            ${UCLIBCPATCHES} \
