@@ -1,0 +1,178 @@
+Import Debian patches and fix a lot of real bugs. 
+
+Upstream-Status: Inappropriate [not author. Above message was get from oe.dev c10c33f86903c93611023197a7f812459c2dfe2d]
+
+--- iperf-2.0.4.orig/man/iperf.1	2008-08-21 00:21:49.290527643 +0200
++++ iperf-2.0.4/man/iperf.1	2008-08-21 00:35:17.850640445 +0200
+@@ -2,21 +2,21 @@
+ .SH NAME
+ iperf \- perform network throughput tests
+ .SH SYNOPSIS
+-.B iperf -s [
++.B iperf \-s [
+ .I options
+ .B ]
+ 
+-.B iperf -c 
++.B iperf \-c 
+ .I server
+ .B [
+ .I options
+ .B ]
+ 
+-.B iperf -u -s [
++.B iperf \-u \-s [
+ .I options
+ .B ]
+ 
+-.B iperf -u -c 
++.B iperf \-u \-c 
+ .I server
+ .B [
+ .I options
+@@ -28,103 +28,103 @@
+ traffic).  
+ .SH "GENERAL OPTIONS"
+ .TP
+-.BR -f ", " --format " "
++.BR \-f ", " \-\-format " "
+ [kmKM]   format to report: Kbits, Mbits, KBytes, MBytes
+ .TP
+-.BR -h ", " --help " "
++.BR \-h ", " \-\-help " "
+ print a help synopsis
+ .TP
+-.BR -i ", " --interval " \fIn\fR"
++.BR \-i ", " \-\-interval " \fIn\fR"
+ pause \fIn\fR seconds between periodic bandwidth reports
+ .TP
+-.BR -l ", " --len " \fIn\fR[KM]"
++.BR \-l ", " \-\-len " \fIn\fR[KM]"
+ set length read/write buffer to \fIn\fR (default 8 KB)
+ .TP
+-.BR -m ", " --print_mss " "
++.BR \-m ", " \-\-print_mss " "
+ print TCP maximum segment size (MTU - TCP/IP header)
+ .TP
+-.BR -o ", " --output " <filename>"
++.BR \-o ", " \-\-output " <filename>"
+ output the report or error message to this specified file
+ .TP
+-.BR -p ", " --port " \fIn\fR"
++.BR \-p ", " \-\-port " \fIn\fR"
+ set server port to listen on/connect to to \fIn\fR (default 5001)
+ .TP
+-.BR -u ", " --udp " "
++.BR \-u ", " \-\-udp " "
+ use UDP rather than TCP
+ .TP
+-.BR -w ", " --window " \fIn\fR[KM]"
++.BR \-w ", " \-\-window " \fIn\fR[KM]"
+ TCP window size (socket buffer size)
+ .TP
+-.BR -B ", " --bind " <host>"
++.BR \-B ", " \-\-bind " <host>"
+ bind to <host>, an interface or multicast address
+ .TP
+-.BR -C ", " --compatibility " "
++.BR \-C ", " \-\-compatibility " "
+ for use with older versions does not sent extra msgs
+ .TP
+-.BR -M ", " --mss " \fIn\fR"
++.BR \-M ", " \-\-mss " \fIn\fR"
+ set TCP maximum segment size (MTU - 40 bytes)
+ .TP
+-.BR -N ", " --nodelay " "
++.BR \-N ", " \-\-nodelay " "
+ set TCP no delay, disabling Nagle's Algorithm
+ .TP
+-.BR -v ", " --version " "
++.BR \-v ", " \-\-version " "
+ print version information and quit
+ .TP
+-.BR -V ", " --IPv6Version " "
++.BR \-V ", " \-\-IPv6Version " "
+ Set the domain to IPv6
+ .TP
+-.BR -x ", " --reportexclude " "
++.BR \-x ", " \-\-reportexclude " "
+ [CDMSV]   exclude C(connection) D(data) M(multicast) S(settings) V(server) reports
+ .TP
+-.BR -y ", " --reportstyle " C|c"
++.BR \-y ", " \-\-reportstyle " C|c"
+ if set to C or c report results as CSV (comma separated values)
+ .SH "SERVER SPECIFIC OPTIONS"
+ .TP
+-.BR -s ", " --server " "
++.BR \-s ", " \-\-server " "
+ run in server mode
+ .TP
+-.BR -U ", " --single_udp " "
++.BR \-U ", " \-\-single_udp " "
+ run in single threaded UDP mode
+ .TP
+-.BR -D ", " --daemon " "
++.BR \-D ", " \-\-daemon " "
+ run the server as a daemon
+ .SH "CLIENT SPECIFIC OPTIONS"
+ .TP
+-.BR -b ", " --bandwidth " \fIn\fR[KM]"
++.BR \-b ", " \-\-bandwidth " \fIn\fR[KM]"
+ set target bandwidth to \fIn\fR bits/sec (default 1 Mbit/sec).
+-This setting requires UDP (-u).
++This setting requires UDP (\-u).
+ .TP
+-.BR -c ", " --client " <host>"
++.BR \-c ", " \-\-client " <host>"
+ run in client mode, connecting to <host>
+ .TP
+-.BR -d ", " --dualtest " "
++.BR \-d ", " \-\-dualtest " "
+ Do a bidirectional test simultaneously
+ .TP
+-.BR -n ", " --num " \fIn\fR[KM]"
+-number of bytes to transmit (instead of -t)
++.BR \-n ", " \-\-num " \fIn\fR[KM]"
++number of bytes to transmit (instead of \-t)
+ .TP
+-.BR -r ", " --tradeoff " "
++.BR \-r ", " \-\-tradeoff " "
+ Do a bidirectional test individually
+ .TP
+-.BR -t ", " --time " \fIn\fR"
++.BR \-t ", " \-\-time " \fIn\fR"
+ time in seconds to transmit for (default 10 secs)
+ .TP
+-.BR -F ", " --fileinput " <name>"
++.BR \-F ", " \-\-fileinput " <name>"
+ input the data to be transmitted from a file
+ .TP
+-.BR -I ", " --stdin " "
++.BR \-I ", " \-\-stdin " "
+ input the data to be transmitted from stdin
+ .TP
+-.BR -L ", " --listenport " \fIn\fR"
++.BR \-L ", " \-\-listenport " \fIn\fR"
+ port to recieve bidirectional tests back on
+ .TP
+-.BR -P ", " --parallel " \fIn\fR"
++.BR \-P ", " \-\-parallel " \fIn\fR"
+ number of parallel client threads to run
+ .TP
+-.BR -T ", " --ttl " \fIn\fR"
++.BR \-T ", " \-\-ttl " \fIn\fR"
+ time-to-live, for multicast (default 1)
+ .TP
+-.BR -Z ", " --linux-congestion " <algo>"
++.BR \-Z ", " \-\-linux\-congestion " <algo>"
+ set TCP congestion control algorithm (Linux only)
+ .SH ENVIRONMENT
+ .TP
+@@ -143,6 +143,6 @@
+ Kevin Gibbs,
+ John Estabrook <jestabro at ncsa.uiuc.edu>,
+ Andrew Gallatin <gallatin at gmail.com>,
+-Stephen Hemminger <shemminger at linux-foundation.org>
++Stephen Hemminger <shemminger at linux\-foundation.org>
+ .SH "SEE ALSO"
+ http://iperf.sourceforge.net/

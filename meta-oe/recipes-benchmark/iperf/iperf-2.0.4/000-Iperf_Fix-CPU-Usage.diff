@@ -1,0 +1,164 @@
+[Thread]: Replace thread_rest() with condition variables
+
+This applies the patch by Ingo Molnar from
+
+   http://marc.info/?l=linux-kernel&m=119088670113210&w=2
+
+by reverting previous changes that coincided with changes made by this
+patch. Other than that, the patch is the original from the above URL.
+
+Gerrit
+---
+ compat/Thread.c |    6 ------
+ src/Reporter.c  |   37 +++++++++----------------------------
+ src/main.cpp    |    2 ++
+ 3 files changed, 11 insertions(+), 34 deletions(-)
+
+rover: changed two remaining thread_rest.
+
+--- a/compat/Thread.c
++++ b/compat/Thread.c
+@@ -405,12 +405,6 @@ int thread_numuserthreads( void ) {
+ void thread_rest ( void ) {
+ #if defined( HAVE_THREAD )
+ #if defined( HAVE_POSIX_THREAD )
+-#if defined( _POSIX_PRIORITY_SCHEDULING )
+-    sched_yield();
+-#else
+-    usleep( 0 );
+-#endif
+-
+ #else // Win32
+     SwitchToThread( );
+ #endif
+--- a/src/Reporter.c
++++ b/src/Reporter.c
+@@ -110,9 +110,8 @@
+ 
+ char buffer[64]; // Buffer for printing
+ ReportHeader *ReportRoot = NULL;
+-int threadWait = 0;
+-int threadSleeping = 0;
+ extern Condition ReportCond;
++extern Condition ReportDoneCond;
+ int reporter_process_report ( ReportHeader *report );
+ void process_report ( ReportHeader *report );
+ int reporter_handle_packet( ReportHeader *report );
+@@ -340,7 +339,7 @@
+             // item
+             while ( index == 0 ) {
+                 Condition_Signal( &ReportCond );
+-                thread_rest();
++                Condition_Wait( &ReportDoneCond );
+                 index = agent->reporterindex;
+             }
+             agent->agentindex = 0;
+@@ -348,11 +347,9 @@
+         // Need to make sure that reporter is not about to be "lapped"
+         while ( index - 1 == agent->agentindex ) {
+             Condition_Signal( &ReportCond );
+-            thread_rest();
++            Condition_Wait( &ReportDoneCond );
+             index = agent->reporterindex;
+         }
+-	if (threadSleeping)
+-           Condition_Signal( &ReportCond );
+ 
+         // Put the information there
+         memcpy( agent->data + agent->agentindex, packet, sizeof(ReportStruct) );
+@@ -382,9 +379,6 @@
+         packet->packetLen = 0;
+         ReportPacket( agent, packet );
+         packet->packetID = agent->report.cntDatagrams;
+-	if (threadSleeping)
+-           Condition_Signal( &ReportCond );
+-
+     }
+ }
+ 
+@@ -396,11 +390,8 @@
+ void EndReport( ReportHeader *agent ) {
+     if ( agent != NULL ) {
+         int index = agent->reporterindex;
+-	if (threadSleeping)
+-           Condition_Signal( &ReportCond );
+-
+         while ( index != -1 ) {
+-            thread_rest();
++            Condition_Wait( &ReportDoneCond );
+             index = agent->reporterindex;
+         }
+         agent->agentindex = -1;
+@@ -421,7 +412,7 @@
+ Transfer_Info *GetReport( ReportHeader *agent ) {
+     int index = agent->reporterindex;
+     while ( index != -1 ) {
+-        thread_rest();
++        Condition_Wait( &ReportDoneCond );
+         index = agent->reporterindex;
+     }
+     return &agent->report.info;
+@@ -467,10 +458,6 @@
+              * Update the ReportRoot to include this report.
+              */
+             Condition_Lock( ReportCond );
+-	    if ( isUDP(agent) )
+-	      threadWait = 0;
+-	    else
+-	      threadWait = 1;
+             reporthdr->next = ReportRoot;
+             ReportRoot = reporthdr;
+             Condition_Signal( &ReportCond );
+@@ -567,6 +554,7 @@
+         }
+         Condition_Unlock ( ReportCond );
+ 
++again:
+         if ( ReportRoot != NULL ) {
+             ReportHeader *temp = ReportRoot;
+             //Condition_Unlock ( ReportCond );
+@@ -589,19 +577,12 @@
+                 // finished with report so free it
+                 free( temp );
+                 Condition_Unlock ( ReportCond );
++                Condition_Signal( &ReportDoneCond );
++                if (ReportRoot)
++                    goto again;
+             }
+-            // yield control of CPU is another thread is waiting
+-	    // sleep on a condition variable, as it is much cheaper
+-	    // on most platforms than issuing schedyield or usleep
+-	    // syscalls
+-	    Condition_Lock ( ReportCond );
+-	    if ( threadWait && ReportRoot != NULL) {
+-	      threadSleeping = 1;
+-	      Condition_TimedWait (& ReportCond, 1 );
+-	      threadSleeping = 0;
+-	    }
+-	    Condition_Unlock ( ReportCond );
+-	    
++            Condition_Signal( &ReportDoneCond );
++            usleep(10000);
+         } else {
+             //Condition_Unlock ( ReportCond );
+         }
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -96,6 +96,7 @@ extern "C" {
+     // records being accessed in a report and also to
+     // serialize modification of the report list
+     Condition ReportCond;
++    Condition ReportDoneCond;
+ }
+ 
+ // global variables only accessed within this file
+@@ -142,6 +143,7 @@ int main( int argc, char **argv ) {
+ 
+     // Initialize global mutexes and conditions
+     Condition_Initialize ( &ReportCond );
++    Condition_Initialize ( &ReportDoneCond );
+     Mutex_Initialize( &groupCond );
+     Mutex_Initialize( &clients_mutex );
+ 
+
+ 	  	 

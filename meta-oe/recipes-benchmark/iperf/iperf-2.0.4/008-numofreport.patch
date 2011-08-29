@@ -1,0 +1,15 @@
+by Kirby Zhou < kirbyzhou \x40 sohu-rd.com >
+increase the queue length to avoid thread racing
+
+Upstream-Status: Inappropriate [not author]
+--- iperf-2.0.4.orig/include/Reporter.h	2008-04-08 04:37:54.000000000 +0200
++++ iperf-2.0.4/include/Reporter.h	2009-07-06 11:53:58.700541554 +0200
+@@ -61,7 +61,7 @@ struct server_hdr;
+ 
+ #include "Settings.hpp"
+ 
+-#define NUM_REPORT_STRUCTS 700
++#define NUM_REPORT_STRUCTS 5700
+ #define NUM_MULTI_SLOTS    5
+ 
+ #ifdef __cplusplus

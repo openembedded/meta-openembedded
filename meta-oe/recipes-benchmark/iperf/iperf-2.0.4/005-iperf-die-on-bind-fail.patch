@@ -1,0 +1,15 @@
+Import Debian patches and fix a lot of real bugs. 
+
+Upstream-Status: Inappropriate [not author. Above message was get from oe.dev c10c33f86903c93611023197a7f812459c2dfe2d]
+
+--- iperf-2.0.4/src/Listener.cpp	2009-02-23 16:20:31.000000000 -0500
++++ iperf-2.0.4-fixed/src/Listener.cpp	2009-02-23 16:20:40.000000000 -0500
+@@ -333,7 +333,7 @@
+ #endif
+     {
+         rc = bind( mSettings->mSock, (sockaddr*) &mSettings->local, mSettings->size_local );
+-        WARN_errno( rc == SOCKET_ERROR, "bind" );
++        FAIL_errno( rc == SOCKET_ERROR, "bind", mSettings );
+     }
+     // listen for connections (TCP only).
+     // default backlog traditionally 5

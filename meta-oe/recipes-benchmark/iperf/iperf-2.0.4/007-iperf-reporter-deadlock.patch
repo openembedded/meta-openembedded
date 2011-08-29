@@ -1,0 +1,68 @@
+by Kirby Zhou < kirbyzhou \x40 sohu-rd.com >
+add a Condition_Wait_Event for ReporterDoneCond
+
+Upstream-Status: Inappropriate [not author]
+
+--- iperf-2.0.4.orig/include/Condition.h	2007-08-30 00:06:19.000000000 +0200
++++ iperf-2.0.4/include/Condition.h	2009-07-06 11:45:02.407700310 +0200
+@@ -115,6 +115,11 @@ typedef struct Condition {
+     // sleep this thread, waiting for condition signal
+ #if   defined( HAVE_POSIX_THREAD )
+     #define Condition_Wait( Cond ) pthread_cond_wait( &(Cond)->mCondition, &(Cond)->mMutex )
++    #define Condition_Wait_Event( Cond ) do { \
++        Mutex_Lock( &(Cond)->mMutex ); \
++        pthread_cond_wait( &(Cond)->mCondition, &(Cond)->mMutex ); \
++        Mutex_Unlock( &(Cond)->mMutex ); \
++    } while ( 0 )
+ #elif defined( HAVE_WIN32_THREAD )
+     // atomically release mutex and wait on condition,                      
+     // then re-acquire the mutex
+@@ -122,6 +127,10 @@ typedef struct Condition {
+         SignalObjectAndWait( (Cond)->mMutex, (Cond)->mCondition, INFINITE, false ); \
+         Mutex_Lock( &(Cond)->mMutex );                          \
+     } while ( 0 )
++    #define Condition_Wait_Event( Cond ) do { \
++        Mutex_Lock( &(Cond)->mMutex ); \
++        SignalObjectAndWait( (Cond)->mMutex, (Cond)->mCondition, INFINITE, false ); \
++    } while ( 0 )
+ #else
+     #define Condition_Wait( Cond )
+ #endif
+--- iperf-2.0.4.orig/src/Reporter.c	2009-07-06 11:49:05.996443011 +0200
++++ iperf-2.0.4/src/Reporter.c	2009-07-06 11:46:52.919699530 +0200
+@@ -339,7 +339,7 @@ void ReportPacket( ReportHeader* agent, 
+             // item
+             while ( index == 0 ) {
+                 Condition_Signal( &ReportCond );
+-                Condition_Wait( &ReportDoneCond );
++                Condition_Wait_Event( &ReportDoneCond );
+                 index = agent->reporterindex;
+             }
+             agent->agentindex = 0;
+@@ -347,7 +347,7 @@ void ReportPacket( ReportHeader* agent, 
+         // Need to make sure that reporter is not about to be "lapped"
+         while ( index - 1 == agent->agentindex ) {
+             Condition_Signal( &ReportCond );
+-            Condition_Wait( &ReportDoneCond );
++            Condition_Wait_Event( &ReportDoneCond );
+             index = agent->reporterindex;
+         }
+ 
+@@ -391,7 +391,7 @@ void EndReport( ReportHeader *agent ) {
+     if ( agent != NULL ) {
+         int index = agent->reporterindex;
+         while ( index != -1 ) {
+-            Condition_Wait( &ReportDoneCond );
++            Condition_Wait_Event( &ReportDoneCond );
+             index = agent->reporterindex;
+         }
+         agent->agentindex = -1;
+@@ -412,7 +412,7 @@ void EndReport( ReportHeader *agent ) {
+ Transfer_Info *GetReport( ReportHeader *agent ) {
+     int index = agent->reporterindex;
+     while ( index != -1 ) {
+-        Condition_Wait( &ReportDoneCond );
++        Condition_Wait_Event( &ReportDoneCond );
+         index = agent->reporterindex;
+     }
+     return &agent->report.info;

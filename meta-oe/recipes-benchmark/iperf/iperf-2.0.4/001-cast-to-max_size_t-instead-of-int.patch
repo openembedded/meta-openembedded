@@ -1,0 +1,14 @@
+Import Debian patches and fix a lot of real bugs. 
+
+Upstream-Status: Inappropriate [not author. Above message was get from oe.dev c10c33f86903c93611023197a7f812459c2dfe2d]
+--- iperf-2.0.4.orig/src/Settings.cpp.orig	2008-04-08 04:37:54.000000000 +0200
++++ iperf-2.0.4/src/Settings.cpp	2008-05-07 17:41:03.923942801 +0200
+@@ -458,7 +458,7 @@
+         case 't': // seconds to write for
+             // time mode (instead of amount mode)
+             setModeTime( mExtSettings );
+-            mExtSettings->mAmount = (int) (atof( optarg ) * 100.0);
++            mExtSettings->mAmount = (max_size_t) (atof( optarg ) * 100.0);
+             break;
+ 
+         case 'u': // UDP instead of TCP

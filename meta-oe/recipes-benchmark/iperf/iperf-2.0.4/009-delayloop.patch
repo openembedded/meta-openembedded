@@ -1,0 +1,22 @@
+by Kirby Zhou < kirbyzhou \x40 sohu-rd.com >
+using sched_yield to schedule other threads, so multiple iperf can run simultaneously
+using usleep with delay-loop between 2 package is long than 1.25ms.
+
+Upstream-Status: Inappropriate [not author]
+
+--- iperf-2.0.4-4/compat/delay.cpp	2009-07-06 12:02:24.166276642 +0200
++++ iperf-2.0.4/compat/delay.cpp	2009-07-06 12:01:33.858384005 +0200
+@@ -69,6 +69,13 @@ void delay_loop( unsigned long usec ) {
+ 
+     Timestamp now;
+     while ( now.before( end ) ) {
++       long diff = end.subUsec(now);
++       if (diff >= 1250) {
++               usleep(0);
++       }
++       if (diff >= 2) {
++               sched_yield();
++       }
+         now.setnow();
+     }
+ }
