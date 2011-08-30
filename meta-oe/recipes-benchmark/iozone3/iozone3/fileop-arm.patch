@@ -1,0 +1,32 @@
+Modify makefile to compile fileop.c file for ARM architecture.
+
+Upstream-Status: Inappropriate [not author]
+Index: current/makefile
+===================================================================
+--- current.orig/makefile	2006-10-14 21:42:36.000000000 +0200
++++ current/makefile	2006-10-14 21:40:02.000000000 +0200
+@@ -190,9 +190,10 @@
+ #
+ # GNU 'C' compiler Linux build with threads, largefiles, async I/O
+ #
+-linux-arm:	iozone_linux-arm.o  libbif.o libasync.o
++linux-arm:	iozone_linux-arm.o  libbif.o libasync.o fileop_linux-arm.o
+ 	$(CC) -O3 $(LDFLAGS) iozone_linux-arm.o libbif.o libasync.o \
+ 		-lrt -lpthread -o iozone
++	$(CC)  -O3 -Dlinux fileop_linux-arm.o -o fileop
+ 
+ #
+ # GNU 'C' compiler Linux build with threads, largefiles, async I/O 
+@@ -725,6 +726,12 @@
+ 	@echo ""
+ 	$(CC) -Wall -c -O3 $(CFLAGS) fileop.c -o fileop_linux-AMD64.o
+ 
++fileop_linux-arm.o:	fileop.c
++	@echo ""
++	@echo "Building fileop for Linux-arm"
++	@echo ""
++	$(CC) -Wall -c -O3 $(CFLAGS) fileop.c -o fileop_linux-arm.o
++
+ fileop_windows.o: fileop.c
+ 	@echo ""
+ 	@echo "Building fileop for Windows"
