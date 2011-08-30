@@ -109,8 +109,8 @@ do_install () {
 	cd ${D}${bindir}
 
 	# Symlinks for ease of running these on the native target
-	for p in ${TARGET_SYS}-* ; do
-		ln -sf $p `echo $p | sed -e s,${TARGET_SYS}-,,`
+	for p in ${TARGET_PREFIX}* ; do
+		ln -sf $p `echo $p | sed -e s,${TARGET_PREFIX},,`
 	done
 
 	rm ${D}${bindir}/ar ${D}${bindir}/strings
