@@ -72,7 +72,7 @@ PACKAGES_DYNAMIC = "${PN}-plugin-*"
 PACKAGES =+ "${PN}-scripts ${PN}-tools ${PN}-tests"
 
 FILES_${PN}-tools = "${bindir}/wispr"
-FILES_${PN{-tests = "${bindir}/*-test"
+FILES_${PN}-tests = "${bindir}/*-test"
 FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
             ${base_bindir}/* ${base_sbindir}/* ${base_libdir}/*.so* ${datadir}/${PN} \
