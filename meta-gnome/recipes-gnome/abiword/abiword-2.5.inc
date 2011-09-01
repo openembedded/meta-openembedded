@@ -17,8 +17,6 @@ FILES_${PN} += " \
 		${datadir}/abiword-${SHRT_VER}/scripts \
 		${datadir}/abiword-${SHRT_VER}/system.profile-en \
 		${datadir}/abiword-${SHRT_VER}/system.profile-en_GB \
-#		${datadir}/abiword-${SHRT_VER}/templates/A4.awt \
-#		${datadir}/abiword-${SHRT_VER}/templates/US-Letter.awt \
 		${datadir}/abiword-${SHRT_VER}/templates/normal.awt \
 		${datadir}/abiword-${SHRT_VER}/templates/normal.awt-en_GB \
 		${datadir}/abiword-${SHRT_VER}/templates/Employee-Directory.awt \
