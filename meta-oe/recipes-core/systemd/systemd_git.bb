@@ -18,7 +18,7 @@ PR = "r0"
 
 inherit autotools vala perlnative
 
-SRCREV = "66be5eda80a334eacb83b13590fdfbabc7efe5e9"
+SRCREV = "fe7ac310219d84ca8621fd89b99fcf60a2fdfd46"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            ${UCLIBCPATCHES} \
