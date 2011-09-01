@@ -31,10 +31,10 @@ FILES_libklibc = "${base_libdir}/klibc-*.so"
 FILES_libklibc-dev = "${base_libdir}/klibc.so \
                       ${base_libdir}/klibc/lib/* \
                       ${base_libdir}/klibc/include/* \
+                      "
 # see above
 # do not package it in -dev
 #                      ${base_bindir}/klcc \
-                      "
 require klibc-utils.inc
 require klibc.inc
 require klibc-checksums_${PV}.inc
