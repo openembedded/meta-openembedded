@@ -29,6 +29,7 @@ SRC_URI = "ftp://ftp.porcupine.org/pub/security/tcp_wrappers_${PV}.tar.gz \
            file://size_t.patch \
            file://tcpdchk_libwrapped.patch \
            file://ldflags.patch \
+           file://fix-cflags-dep.patch \
            \
            file://try-from.8 \
            file://safe_finger.8"

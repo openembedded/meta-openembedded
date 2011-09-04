@@ -1,0 +1,18 @@
+Upstream-Status: Pending
+
+Fix builds failing as there is no direct rule to rebuild cflags
+
+Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+
+Index: tcp_wrappers_7.6/Makefile
+===================================================================
+--- tcp_wrappers_7.6.orig/Makefile	2011-09-02 03:34:07.000000000 +0400
++++ tcp_wrappers_7.6/Makefile	2011-09-02 03:34:19.000000000 +0400
+@@ -732,6 +732,7 @@
+
+ # Invalidate all object files when the compiler options (CFLAGS) have changed.
+
++cflags: config-check
+ config-check:
+	@set +e; test -n "$(REAL_DAEMON_DIR)" || { make; exit 1; }
+	@set +e; echo $(CFLAGS) >cflags.new ; \
