@@ -48,37 +48,48 @@ def gitpkgv_drop_tag_prefix(version):
         return version
 
 def get_git_pkgv(d, use_tags):
-	import os
-	import bb
+    import os
+    import bb
 
-	urls = bb.data.getVar('SRC_URI', d, 1).split()
+    src_uri = bb.data.getVar('SRC_URI', d, 1).split()
+    fetcher = bb.fetch2.Fetch(src_uri, d)
+    ud = fetcher.ud
 
-	for url in urls:
-		(type, host, path, user, pswd, parm) = bb.decodeurl(bb.data.expand(url, d))
-		if type in ['git']:
+    #
+    # If SRCREV_FORMAT is set respect it for tags
+    #
+    format = bb.data.getVar('SRCREV_FORMAT', d, True)
+    if not format:
+        format = 'default'
 
-			gitsrcname = '%s%s' % (host, path.replace('/', '.'))
-			repodir = os.path.join(bb.data.expand('${GITDIR}', d), gitsrcname)
-			if not os.path.exists(repodir):
-				return None
+    found = False
+    for url in ud.values():
+        if url.type == 'git':
+            for name, rev in url.revisions.items():
+                if not os.path.exists(url.localpath):
+                    return None
 
-			rev = bb.fetch.get_srcrev(d).split('+')[1]
+                found = True
 
-			cwd = os.getcwd()
-			os.chdir(repodir)
+                cwd = os.getcwd()
+                os.chdir(url.localpath)
 
-			commits = bb.fetch.runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % rev, d, quiet=True).strip()
+                commits = bb.fetch2.runfetchcmd("git rev-list %s -- 2> /dev/null | wc -l" % rev, d, quiet=True).strip()
 
-			if use_tags:
-				try:
-					ver = gitpkgv_drop_tag_prefix(bb.fetch.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip())
-				except Exception:
-					ver = "0.0-%s-g%s" % (commits, rev[:7])
-			else:
-				ver = "%s+%s" % (commits, rev[:7])
+                if use_tags:
+                    try:
+                        output = bb.fetch2.runfetchcmd("git describe %s 2>/dev/null" % rev, d, quiet=True).strip()
+                        ver = gitpkgv_drop_tag_prefix(output)
+                    except Exception:
+                        ver = "0.0-%s-g%s" % (commits, rev[:7])
+                else:
+                    ver = "%s+%s" % (commits, rev[:7])
 
-			os.chdir(cwd)
+                os.chdir(cwd)
 
-			return ver
+                format = format.replace(name, ver)
 
-	return "0+0"
+    if found:
+        return format
+
+    return '0+0'
