@@ -11,6 +11,7 @@ SRC_URI[archive.sha256sum] = "03e461b6bda7f773f8018d25fa3213d3073d4dc83a76e6b39d
 
 SRC_URI += "\
      file://disable-scrollkeeper.patch \
+     file://fix-dbus-interfaces.patch \
      "
 
 EXTRA_OECONF += "--disable-scrollkeeper"
