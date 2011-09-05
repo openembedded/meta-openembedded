@@ -1,6 +1,6 @@
 DESCRIPTION = "Ecore is the Enlightenment application framework library"
 LICENSE = "MIT BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=cb293be68319f9fcb179d7f3daae5fbe"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d6ff2c3c85de2faf5fd7dcd9ccfc8886"
 DEPENDS = "virtual/libiconv tslib curl eet evas glib-2.0 \
            libxtst libxcomposite libxinerama libxscrnsaver libxdamage libxrandr libxcursor libxprintutil"
 DEPENDS_virtclass-native = "eet-native evas-native gettext-native"

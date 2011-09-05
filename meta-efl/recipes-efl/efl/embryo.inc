@@ -3,7 +3,7 @@ DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
 inherit efl
 
 LICENSE = "MIT BSD CompuPhase"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6aa45e26c1ed178da910fd76b306a875"
+LIC_FILES_CHKSUM = "file://COPYING;md5=220a7f1107df42c62428d8ebe559ed14"
 
 BBCLASSEXTEND = "native"
 INC_PR = "r1"

@@ -1,7 +1,7 @@
 DESCRIPTION = "The Enlightenment freedesktop.org library"
 DEPENDS = "ecore"
 LICENSE = "MIT BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=49e56d2cc74d0b06fce18906e6ebc9ae"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9594ec75c5a57e71fccedcbe10dd3ef4"
 
 inherit efl
 
