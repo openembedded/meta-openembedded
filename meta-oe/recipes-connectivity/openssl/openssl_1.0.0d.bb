@@ -41,6 +41,5 @@ PACKAGES += " \
 	${PN}-engines-dbg \
 	"
 
-PARALLEL_MAKE = ""
 FILES_${PN}-engines = "${libdir}/ssl/engines/*.so"
 FILES_${PN}-engines-dbg = "${libdir}/ssl/engines/.debug"

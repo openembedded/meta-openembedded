@@ -11,6 +11,5 @@ export OE_LDFLAGS="${LDFLAGS}"
 SRC_URI += "file://configure-targets.patch \
             file://shared-libs.patch \
             file://debian.patch \
+            file://parallel-make-fix.patch \
             file://oe-ldflags.patch"
-
-PARALLEL_MAKE = ""

@@ -1,0 +1,20 @@
+Upstream-Status: Submitted
+
+fix the parallel build regarding shared libraries.
+
+Signed-off-by: Qing He <qing.he@intel.com>
+
+diff --git a/Makefile.org b/Makefile.org
+index 2fb0309..8bec3d0 100644
+--- a/Makefile.org
++++ b/Makefile.org
+@@ -352,6 +352,9 @@ all_testapps: build_libs build_testapps
+ build_testapps:
+ 	@dir=crypto; target=testapps; $(BUILD_ONE_CMD)
+ 
++libcrypto.a: build_crypto
++libssl.a: build_ssl
++
+ build_shared:	$(SHARED_LIBS)
+ libcrypto$(SHLIB_EXT): libcrypto.a $(SHARED_FIPS)
+ 	@if [ "$(SHLIB_TARGET)" != "" ]; then \
