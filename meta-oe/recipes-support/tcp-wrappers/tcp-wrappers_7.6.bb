@@ -39,7 +39,6 @@ SRC_URI[sha256sum] = "9543d7adedf78a6de0b221ccbbd1952e08b5138717f4ade814039bb489
 
 S = "${WORKDIR}/tcp_wrappers_${PV}"
 
-PARALLEL_MAKE = ""
 EXTRA_OEMAKE = "'CC=${CC}' \
 		'AR=${AR}' \
 		'RANLIB=${RANLIB}' \
