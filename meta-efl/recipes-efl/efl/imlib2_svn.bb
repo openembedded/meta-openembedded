@@ -27,7 +27,7 @@ do_install_append() {
 
 PACKAGES =+ "imlib2-loaders-dbg imlib2-filters-dbg imlib2-loaders imlib2-filters"
 FILES_${PN} = "${libdir}/lib*.so.* ${libdir}/imlib2/*/*.so"
-FILES_${PN}-dbg = "${libdir}/.debug/ ${bindir}/.debug/"
+FILES_${PN}-dbg = "${libdir}/.debug/ ${bindir}/.debug/ ${prefix}/src/debug/"
 FILES_${PN}-dev += "${bindir}/imlib2-config ${libdir}/*.so ${includedir}"
 FILES_${PN}-bin = "${bindir}"
 FILES_imlib2-loaders = "${libdir}/imlib2/loaders/*.so"
