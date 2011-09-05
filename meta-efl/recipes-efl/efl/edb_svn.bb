@@ -3,7 +3,7 @@ LICENSE = "MIT BSD"
 DEPENDS = "zlib"
 PV = "1.0.5.050+svnr${SRCPV}"
 PR = "r1"
-SRCREV = "${EFL_SRCREV_1.0.0}"
+SRCREV = "${EFL_SRCREV}"
 
 inherit efl
 

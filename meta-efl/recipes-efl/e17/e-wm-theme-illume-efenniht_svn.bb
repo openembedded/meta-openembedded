@@ -7,7 +7,7 @@ RSUGGESTS_${PN} = "elementary-theme-efenniht"
 PACKAGE_ARCH = "all"
 LICENSE = "MIT/BSD"
 
-SRCREV = "${EFL_SRCREV_1.0.0}"
+SRCREV = "${EFL_SRCREV}"
 PV = "0.0+svnr${SRCPV}"
 
 inherit e-base

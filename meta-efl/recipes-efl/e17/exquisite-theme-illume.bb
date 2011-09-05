@@ -4,7 +4,7 @@ SECTION = "x11"
 DEPENDS = "edje-native"
 PV = "1.0+svnr${SRCPV}"
 PR = "r6"
-SRCREV = "${EFL_SRCREV_1.0.0}"
+SRCREV = "${EFL_SRCREV}"
 
 inherit e-base update-alternatives
 

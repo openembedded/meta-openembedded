@@ -6,8 +6,8 @@ RSUGGESTS_${PN} = "e-wm-theme-illume-efenniht"
 PACKAGE_ARCH = "all"
 LICENSE = "MIT/BSD"
 
-SRCREV_THM_REV ?= "${EFL_SRCREV_1.0.0}"
-SRCREV_ELM_REV ?= "${EFL_SRCREV_1.0.0}"
+SRCREV_THM_REV ?= "${EFL_SRCREV}"
+SRCREV_ELM_REV ?= "${EFL_SRCREV}"
 
 SRCREV_FORMAT = "THM_REV"
 PV = "0.0+svnr${SRCPV}"
