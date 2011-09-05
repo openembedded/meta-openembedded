@@ -73,6 +73,7 @@ FILES_${PN}-job = "${libdir}/libecore_job*.so.*"
 FILES_${PN}-txt = "${libdir}/libecore_txt*.so.*"
 FILES_${PN}-x = "${libdir}/libecore_x*.so.*"
 FILES_${PN}-input = "${libdir}/libecore_input*.so.*"
+FILES_${PN}-dev += "${libdir}/ecore/immodules/*.so"
 
 ECORE_OECONF = "\
   --x-includes=${STAGING_INCDIR}/X11 \
