@@ -25,9 +25,10 @@ FILES_${PN} += " \
 		${datadir}/abiword-${SHRT_VER}/glade \
 		${datadir}/abiword-${SHRT_VER}/system.profile-en \
 		${datadir}/abiword-${SHRT_VER}/system.profile-en-GB \
+  "
+
 #		${datadir}/abiword-${SHRT_VER}/templates/normal.awt \
 #		${datadir}/abiword-${SHRT_VER}/templates/normal.awt-en_GB \
-  "
 
 inherit autotools pkgconfig
 
