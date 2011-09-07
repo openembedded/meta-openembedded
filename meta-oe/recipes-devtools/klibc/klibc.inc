@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 # debugsources.list: No such file or directory:
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 KLIBC_ARCH = '${TARGET_ARCH}'
 KLIBC_ARCH_armeb = 'arm'
@@ -33,7 +33,6 @@ SRC_URI += "file://fstype-sane-vfat-and-jffs2-for-1.5.patch \
             file://modprobe.patch \
             file://dash_readopt.patch \
             file://wc.patch \
-            file://no_strip.patch \
             file://staging.patch \
             file://socket.h.patch \
             "

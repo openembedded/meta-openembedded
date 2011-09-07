@@ -9,9 +9,15 @@ do_install_append() {
         install -d ${D}${base_bindir}
         install -d ${D}${base_sbindir}
 
-        # those 2 are always static
-        install -m 755 usr/dash/sh ${D}${base_bindir}/sh
-        install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
+        # debian packages kinit + kinit.shared but only sh.shared
+        if [ "${KLIBC_UTILS_VARIANT}" = "shared" ]; then
+            install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
+            install -m 755 usr/kinit/kinit.shared ${D}${base_bindir}/kinit.shared
+            install -m 755 usr/dash/sh.shared ${D}${base_bindir}/sh.shared
+        else
+            install -m 755 usr/dash/sh ${D}${base_bindir}/sh
+            install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
+        fi
 
         install -m 755 usr/gzip/gzip ${D}${base_bindir}
         install -m 755 usr/kinit/fstype/${KLIBC_UTILS_VARIANT}/fstype ${D}${base_bindir}
