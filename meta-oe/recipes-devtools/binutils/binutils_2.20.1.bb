@@ -1,6 +1,6 @@
 require binutils.inc
 
-PR = "r6"
+PR = "r7"
 
 LIC_FILES_CHKSUM="\
     file://src-release;endline=17;md5=4830a9ef968f3b18dd5e9f2c00db2d35\
@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM="\
     "
 
 SRC_URI = "\
-     ${GNU_MIRROR}/binutils/binutils-${PV}.tar.bz2 \
+     ${GNU_MIRROR}/binutils/binutils-${PV}a.tar.bz2 \
      file://binutils-uclibc-100-uclibc-conf.patch \
      file://110-arm-eabi-conf.patch \
      file://binutils-uclibc-300-001_ld_makefile_patch.patch \
@@ -36,7 +36,7 @@ SRC_URI = "\
      file://202_elflink_noaddneeded_vs_weak.patch \
      "
 
-SRC_URI[md5sum] = "9cdfb9d6ec0578c166d3beae5e15c4e5"
-SRC_URI[sha256sum] = "228b84722d87e88e7fdd36869e590e649ab523a0800a7d53df906498afe6f6f8"
+SRC_URI[md5sum] = "2b9dc8f2b7dbd5ec5992c6e29de0b764"
+SRC_URI[sha256sum] = "71d37c96451333c5c0b84b170169fdcb138bbb27397dc06281905d9717c8ed64"
 
 BBCLASSEXTEND = "native"
