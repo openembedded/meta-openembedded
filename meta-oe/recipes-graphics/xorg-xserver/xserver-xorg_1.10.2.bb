@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74df27b6254cc88d2799b5f4f5949c00"
 DESCRIPTION = "the X.Org X server"
 DEPENDS += "mesa-dri pixman libpciaccess openssl dri2proto glproto font-util-native"
 PE = "2"
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 SRC_URI += " \
             file://50b9d3142ff90af2f7fa35b7b1bf9e5a07723dbd.patch \

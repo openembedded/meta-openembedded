@@ -53,7 +53,7 @@ EXTRA_OECONF_append_arm = " ac_cv_header_linux_apm_bios_h=no "
 
 PACKAGES =+ "xserver-security-policy"
 FILES_xserver-security-policy += "${libdir}/xserver/SecurityPolicy"
-RRECOMMENDS_${PN} += "xserver-security-policy xkeyboard-config rgb xserver-xorg-conf"
+RRECOMMENDS_${PN} += "xserver-security-policy xkeyboard-config rgb xserver-xf86-config"
 
 PACKAGES =+ "${PN}-sdl ${PN}-fbdev ${PN}-xprint ${PN}-xvfb ${PN}-utils ${PN}-xephyr"
 
