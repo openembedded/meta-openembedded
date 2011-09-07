@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://README;md5=3ae8198f82258417ce29066d3b034035"
 # Also, tzdata (and it is needed to build tzcode) version can differ from
 # tzcode version, thus this variable
 
-TZDATA_PV = "2011h"
+TZDATA_PV = "2011i"
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 
-SRC_URI[tzcode-2011g.md5sum] = "ecb564279b28c5b184421c525d997d6c"
-SRC_URI[tzcode-2011g.sha256sum] = "636c735d8df1276cc8ab88bc31bb36a21f91ed34e26d181303ecd8fe48021bc2"
-SRC_URI[tzdata-2011h.md5sum] = "546d27b6c1e5e1097bd512651815017f"
-SRC_URI[tzdata-2011h.sha256sum] = "c098786d053736dd18d4f1fbebdf41554c6fd702a36f75c18f1c66712d2abc24"
+SRC_URI[tzcode-2011i.md5sum] = "cf7f4335b7c8682899fa2814e711c1b2"
+SRC_URI[tzcode-2011i.sha256sum] = "f0dd991de3f8d6c599c104e294377c9befa1ef40aa5a1d09e2e295a453f3c1ec"
+SRC_URI[tzdata-2011i.md5sum] = "c7a86ec34f30f8d6aa77ef94902a3047"
+SRC_URI[tzdata-2011i.sha256sum] = "f8dde7ca5e61f21ac34c8cdbef5568d00c829981211098f059d8104964c81ffa"
 
