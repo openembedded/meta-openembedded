@@ -1,2 +1,0 @@
-xinput set-int-prop "Touchscreen" "Evdev Axis Calibration" 32 204 3897 3763 178;
-
