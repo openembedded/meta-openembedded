@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.videolan.org"
 LICENSE = "GPLv2"
 SECTION = "multimedia"
 
-DEPENDS = "libfribidi libtool hal gettext libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \
+DEPENDS = "libfribidi libtool gettext libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac \
            ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad libid3tag liba52 mpeg2dec', d)}"
 
 SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
@@ -60,7 +60,7 @@ EXTRA_OECONF = "\
 	--enable-live555 --enable-tremor \
 	--enable-v4l2 --enable-v4l --disable-aa --enable-wma --disable-faad \
 	--enable-dbus \
-	--enable-hal \	
+	--disable-hal \	
 	--without-contrib \
 	--disable-opengl --disable-glx \
 	--enable-realrtsp \
