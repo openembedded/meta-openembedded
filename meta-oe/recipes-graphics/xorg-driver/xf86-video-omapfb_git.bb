@@ -1,4 +1,4 @@
-require recipes-graphics/xorg-driver/xf86-driver-common.inc
+require recipes-graphics/xorg-driver/xorg-driver-common.inc
 
 DESCRIPTION = "X.Org X server -- OMAP display driver"
 PV = "0.1.1+${PR}+gitr${SRCREV}"

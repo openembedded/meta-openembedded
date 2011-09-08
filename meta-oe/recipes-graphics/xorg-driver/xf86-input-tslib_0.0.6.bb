@@ -1,4 +1,4 @@
-require recipes-graphics/xorg-driver/xf86-input-common.inc
+require recipes-graphics/xorg-driver/xorg-driver-input.inc
 DESCRIPTION = "X.Org X server -- tslib input driver"
 DEPENDS += "tslib"
 RRECOMMENDS_${PN} += "tslib-calibrate"
@@ -8,7 +8,7 @@ RSUGGESTS_${PN} += "hal"
 LIC_FILES_CHKSUM = "file://src/tslib.c;endline=28;md5=bd62eaef222dcf5cd59e490a12bd795e \
                     file://COPYING;md5=4641deddaa80fe7ca88e944e1fd94a94"
 
-PR = "r16"
+PR = "${INC_PR}.0"
 
 SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-input-tslib-${PV}.tar.bz2;name=archive \
            file://double-free-crash.patch \
