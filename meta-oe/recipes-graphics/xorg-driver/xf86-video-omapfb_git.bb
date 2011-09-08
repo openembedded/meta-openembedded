@@ -1,11 +1,8 @@
 require recipes-graphics/xorg-driver/xf86-driver-common.inc
 
-INC_PR ?= "r15"
-
 DESCRIPTION = "X.Org X server -- OMAP display driver"
-PE = "1"
 PV = "0.1.1+${PR}+gitr${SRCREV}"
-PR = "${INC_PR}.4"
+PR = "r16"
 
 LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://src/omapfb-driver.c;beginline=1;endline=30;md5=a44c2a37e04d1c2c5f0313afb493f833"
