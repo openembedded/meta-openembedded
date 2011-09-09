@@ -16,11 +16,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 # Needed for udev-extras
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
-SRCREV = "${PV}"
 PR = "r0"
 
 # version specific SRC_URI
-SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
            file://0001-rip-put-doc-generation-it-depends-on-a-working-docto.patch \
            file://gtk-doc.make"
 
@@ -33,10 +32,10 @@ SRC_URI += " \
        file://cache \
 "
 
+SRC_URI[md5sum] = "2afd20ee1c790eac6d7abe0498ebb414"
+SRC_URI[sha256sum] = "0f753ad9c3022a074d1c052bcee9139581db825283771ac78c0be0d1de109d0c"
+
 # Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
-
-
-S = "${WORKDIR}/git"
 
 inherit update-rc.d autotools
 
