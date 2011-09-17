@@ -8,19 +8,15 @@ Index: openssl-1.0.0d/Makefile.org
 ===================================================================
 --- openssl-1.0.0d.orig/Makefile.org	2011-09-01 17:03:59.000000000 +0400
 +++ openssl-1.0.0d/Makefile.org	2011-09-01 17:12:24.000000000 +0400
-@@ -244,13 +244,13 @@
+@@ -246,9 +246,9 @@
 	@dir=crypto; target=all; $(BUILD_ONE_CMD)
--build_ssl:
-+build_ssl: build_crypto
+ build_ssl:
 	@dir=ssl; target=all; $(BUILD_ONE_CMD)
 -build_engines:
 +build_engines: build_crypto
 	@dir=engines; target=all; $(BUILD_ONE_CMD)
 -build_apps:
-+build_apps: build_crypto build_ssl
++build_apps: build_crypto
 	@dir=apps; target=all; $(BUILD_ONE_CMD)
--build_tests:
-+build_tests: build_crypto build_ssl
- 	@dir=test; target=all; $(BUILD_ONE_CMD)
- build_tools:
- 	@dir=tools; target=all; $(BUILD_ONE_CMD)
+ build_tests:
+	@dir=test; target=all; $(BUILD_ONE_CMD)
