@@ -1,0 +1,79 @@
+diff -uNr libnl-1.1.orig//lib/Makefile libnl-1.1/lib/Makefile
+--- libnl-1.1.orig//lib/Makefile	2011-03-23 15:50:32.310534329 +0100
++++ libnl-1.1/lib/Makefile	2011-03-23 15:50:43.926534326 +0100
+@@ -33,18 +33,24 @@
+ DEPS     := $(CIN:%.c=%.d)
+ OBJ      := $(CIN:%.c=%.o)
+ CFLAGS   += -fPIC
++OUT_LIB  := $(PACKAGE_NAME)1.a
+ OUT_SLIB := $(PACKAGE_NAME).so.$(PACKAGE_VERSION)
+ LN_SLIB  := $(PACKAGE_NAME).so
+ LN1_SLIB := $(LN_SLIB).1
+ 
+ export
+ 
+-.PHONY: all clean install librtn.a $(OUT_SLIB)
++.PHONY: all clean install librtn.a $(OUT_SLIB) $(OUT_LIB)
+ 
+ 
+ all:
+-	@echo "  MAKE $(OUT_SLIB)"; \
+-	$(MAKE) $(OUT_SLIB)
++	@echo "  MAKE $(OUT_LIB)"; \
++	$(MAKE) $(OUT_LIB)
++
++$(OUT_LIB): ../Makefile.opts $(OBJ)
++	@echo "  LD $(OUT_LIB)"; \
++	echo $(AR) rs $(OUT_LIB) $(OBJ)
++	$(AR) rs $(OUT_LIB) $(OBJ)
+ 
+ $(OUT_SLIB): ../Makefile.opts $(OBJ)
+ 	@echo "  LD $(OUT_SLIB)"; \
+@@ -56,8 +62,8 @@
+ 
+ clean:
+ 	@echo "  CLEAN lib"; \
+-	$(RM) -f $(OBJ) $(OUT_SLIB) $(LN_SLIB) $(LN1_SLIB); \
+-	$(RM) -f $(DEPS) $(OUT_SLIB) $(LN_SLIB) $(LN1_SLIB)
++	$(RM) -f $(OBJ) $(OUT_SLIB) $(OUT_LIB) $(LN_SLIB) $(LN1_SLIB); \
++	$(RM) -f $(DEPS) $(OUT_SLIB) $(OUT_LIB) $(LN_SLIB) $(LN1_SLIB)
+ 
+ distclean:
+ 	@echo "  DISTCLEAN lib"; \
+@@ -65,11 +71,7 @@
+ 
+ install:
+-	mkdir -p $(DESTDIR)$(libdir)/
+-	install -m 0644 $(OUT_SLIB) $(DESTDIR)$(libdir)
+-	rm -f $(DESTDIR)$(libdir)/$(LN1_SLIB)
+-	$(LN) -s $(OUT_SLIB) $(DESTDIR)$(libdir)/$(LN1_SLIB)
+-	rm -f $(DESTDIR)$(libdir)/$(LN_SLIB)
+-	$(LN) -s $(LN1_SLIB) $(DESTDIR)$(libdir)/$(LN_SLIB)
++	mkdir -p $(DESTDIR)$(libdir)/libnl1
++	install -m 0644 $(OUT_LIB) $(DESTDIR)$(libdir)/libnl1
+ 
+ $(DEPS): ../Makefile.opts
+ 
+diff -uNr libnl-1.1.orig//Makefile libnl-1.1/Makefile
+--- libnl-1.1.orig//Makefile	2008-01-14 16:48:45.000000000 +0100
++++ libnl-1.1/Makefile	2011-03-23 16:53:12.438533242 +0100
+@@ -13,7 +13,7 @@
+     include Makefile.opts
+ endif
+ 
+-SUBDIRS := lib include doc src tests
++SUBDIRS := lib include doc 
+ .PHONY: all clean distclean install gendoc $(SUBDIRS)
+ 
+ all: Makefile.opts
+diff -uNr libnl-1.1.orig//libnl-1.pc.in libnl-1.1/libnl-1.pc.in
+--- libnl-1.1.orig//libnl-1.pc.in	2008-01-14 16:48:45.000000000 +0100
++++ libnl-1.1/libnl-1.pc.in	2011-03-23 16:57:18.084533174 +0100
+@@ -6,5 +6,5 @@
+ Name: libnl
+ Description: Convenience library for netlink sockets
+ Version: @PACKAGE_VERSION@
+-Libs: -L${libdir} -lnl
+-Cflags:
++Libs: -L${libdir}/libnl1 -lnl1 -lm
++Cflags: -I${includedir}/libnl1

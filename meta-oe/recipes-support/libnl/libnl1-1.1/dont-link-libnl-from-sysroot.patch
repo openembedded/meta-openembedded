@@ -1,0 +1,26 @@
+Index: libnl-1.1/src/Makefile
+===================================================================
+--- libnl-1.1.orig/src/Makefile	2008-01-14 07:48:45.000000000 -0800
++++ libnl-1.1/src/Makefile	2010-09-22 14:58:46.820826001 -0700
+@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
+     include ../Makefile.opts
+ endif
+ 
+-LDFLAGS	+= -L../lib -lnl utils.o
++LDFLAGS	+= ../lib/libnl.so utils.o
+ CIN 	:= $(wildcard nl-*.c) $(wildcard genl-*.c) $(wildcard nf-*.c)
+ TOOLS	:= $(CIN:%.c=%)
+ 
+Index: libnl-1.1/tests/Makefile
+===================================================================
+--- libnl-1.1.orig/tests/Makefile	2008-01-14 07:48:45.000000000 -0800
++++ libnl-1.1/tests/Makefile	2010-09-22 14:58:46.820826001 -0700
+@@ -13,7 +13,7 @@ ifeq ($(shell [ ! -r ../Makefile.opts ]
+     include ../Makefile.opts
+ endif
+ 
+-LDFLAGS	+= -L../lib -lnl ../src/utils.o
++LDFLAGS	+= ../lib/libnl.so ../src/utils.o
+ CIN 	:= $(wildcard test-*.c)
+ TOOLS	:= $(CIN:%.c=%)
+ 

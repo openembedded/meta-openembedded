@@ -1,0 +1,12 @@
+diff -urN libnl-1.1.orig/Makefile.opts.in libnl-1.1/Makefile.opts.in
+--- libnl-1.1.orig/Makefile.opts.in	2008-01-14 15:48:45.000000000 +0000
++++ libnl-1.1/Makefile.opts.in	2009-04-06 10:20:40.000000000 +0000
+@@ -10,7 +10,7 @@
+ #
+ 
+ CC               := @CC@
+-CFLAGS           := @CFLAGS@
++CFLAGS           := -I./include -I. -I../include @CFLAGS@
+ LDFLAGS          := @LDFLAGS@
+ CPPFLAGS         := @CPPFLAGS@
+ PACKAGE_NAME     := @PACKAGE_NAME@
