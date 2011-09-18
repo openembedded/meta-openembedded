@@ -29,6 +29,8 @@ RDEPENDS_${PN} = " \
     xfce4-panel-plugin-tasklist \
     xfce4-panel-plugin-windowmenu \   
     xfce4-settings \
+    \
+    xfce4-notifyd \
     xfce-terminal \
     thunar \
     thunar-volman \
