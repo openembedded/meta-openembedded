@@ -15,5 +15,5 @@ SRC_URI += " \
 
 FILES_${PN} += "${datadir}/xfce4/backdrops"
 
-SRC_URI[md5sum] = "ed25d59f478afda552d121e96657d16f"
-SRC_URI[sha256sum] = "9d0a48c4e9ed6723a3f9a1c5303e2bbe9b04a3b483c52472da46881df4595e71"
+SRC_URI[md5sum] = "617c667c469698e8c974e38412cb484c"
+SRC_URI[sha256sum] = "e58460f52ae96c389402f6db62c46db61cd51cdb550a42bd97c0ab2a5b62f424"
