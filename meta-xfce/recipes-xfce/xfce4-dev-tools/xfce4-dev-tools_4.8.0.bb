@@ -3,7 +3,9 @@ SECTION = "x11/libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 
-PR = "r0"
+PR = "r1"
+
+BBCLASSEXTEND = "native"
 
 inherit xfce
 
