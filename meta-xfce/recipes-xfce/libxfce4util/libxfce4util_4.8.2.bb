@@ -10,5 +10,5 @@ inherit xfce
 
 EXTRA_OECONF += "--with-broken-putenv=yes"
 
-SRC_URI[md5sum] = "2be3af4c7db5ad293a7525e1021e6f0f"
-SRC_URI[sha256sum] = "732aeb4f845fb92efb5487e49662f5b8544ea5feb9f1e4bd7629e726aaa70c81"
+SRC_URI[md5sum] = "3376a77637a4292a863027d595548ee2"
+SRC_URI[sha256sum] = "05a149841575cb961588742c8c9795c6f0d09f27d59546dd8a933b010d2ac816"
