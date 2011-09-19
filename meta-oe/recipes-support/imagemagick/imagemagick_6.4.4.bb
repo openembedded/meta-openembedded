@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e1ebcc1358b9f81eba64255fc5da6892"
 # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib"
 
-PR = "r7"
+PR = "r8"
 
 PATCHSET = "1"
 SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
@@ -32,3 +32,7 @@ FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
 BBCLASSEXTEND = "native"
 
 LEAD_SONAME = "libMagickCore.so.*"
+
+do_configure_prepend() {
+    export ac_cv_sys_file_offset_bits=yes
+}
