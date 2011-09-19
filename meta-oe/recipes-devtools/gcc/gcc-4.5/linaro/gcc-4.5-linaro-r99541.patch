@@ -1,0 +1,22 @@
+2011-09-12  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2010-12-06  Jakub Jelinek  <jakub@redhat.com>
+
+	PR debug/46771
+	* reginfo.c (init_subregs_of_mode): Don't call find_subregs_of_mode
+	on DEBUG_INSNs.
+
+=== modified file 'gcc/reginfo.c'
+--- old/gcc/reginfo.c	2010-10-04 00:50:43 +0000
++++ new/gcc/reginfo.c	2011-09-12 10:54:51 +0000
+@@ -1350,7 +1350,7 @@
+ 
+   FOR_EACH_BB (bb)
+     FOR_BB_INSNS (bb, insn)
+-    if (INSN_P (insn))
++    if (NONDEBUG_INSN_P (insn))
+       find_subregs_of_mode (PATTERN (insn));
+ }

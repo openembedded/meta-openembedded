@@ -6,9 +6,11 @@
 	* config/alpha/elf.h (LINK_EH_SPEC): Likewise.
 	* config/ia64/linux.h (LINK_EH_SPEC): Likewise.
 
---- gcc/config/alpha/elf.h.~1~
-+++ gcc/config/alpha/elf.h
-@@ -421,7 +421,7 @@ extern int alpha_this_gpdisp_sequence_nu
+Index: gcc/config/alpha/elf.h
+===================================================================
+--- gcc/config/alpha/elf.h.orig	2011-06-16 17:58:47.000000000 -0700
++++ gcc/config/alpha/elf.h	2011-09-17 11:04:57.033298875 -0700
+@@ -441,7 +441,7 @@ extern int alpha_this_gpdisp_sequence_nu
     I imagine that other systems will catch up.  In the meantime, it
     doesn't harm to make sure that the data exists to be used later.  */
  #if defined(HAVE_LD_EH_FRAME_HDR)
@@ -17,9 +19,11 @@
  #endif
  
  /* A C statement (sans semicolon) to output to the stdio stream STREAM
---- gcc/config/ia64/linux.h.~1~
-+++ gcc/config/ia64/linux.h
-@@ -58,7 +58,7 @@ do {						\
+Index: gcc/config/ia64/linux.h
+===================================================================
+--- gcc/config/ia64/linux.h.orig	2011-09-17 11:03:19.000000000 -0700
++++ gcc/config/ia64/linux.h	2011-09-17 11:04:57.033298875 -0700
+@@ -80,7 +80,7 @@ do {						\
     Signalize that because we have fde-glibc, we don't need all C shared libs
     linked against -lgcc_s.  */
  #undef LINK_EH_SPEC
@@ -28,9 +32,11 @@
  
  #define MD_UNWIND_SUPPORT "config/ia64/linux-unwind.h"
  
---- gcc/config/linux.h.~1~
-+++ gcc/config/linux.h
-@@ -89,7 +89,7 @@ see the files COPYING3 and COPYING.RUNTI
+Index: gcc/config/linux.h
+===================================================================
+--- gcc/config/linux.h.orig	2011-09-17 11:03:38.000000000 -0700
++++ gcc/config/linux.h	2011-09-17 11:04:57.033298875 -0700
+@@ -101,7 +101,7 @@ see the files COPYING3 and COPYING.RUNTI
      } while (0)
  
  #if defined(HAVE_LD_EH_FRAME_HDR)
@@ -39,12 +45,14 @@
  #endif
  
  /* Define this so we can compile MS code for use with WINE.  */
---- gcc/config/rs6000/sysv4.h.~1~
-+++ gcc/config/rs6000/sysv4.h
-@@ -917,7 +917,7 @@ SVR4_ASM_SPEC \
-   %{!dynamic-linker:-dynamic-linker " LINUX_DYNAMIC_LINKER "}}}"
+Index: gcc/config/rs6000/sysv4.h
+===================================================================
+--- gcc/config/rs6000/sysv4.h.orig	2011-09-17 11:03:41.000000000 -0700
++++ gcc/config/rs6000/sysv4.h	2011-09-17 11:05:58.653298861 -0700
+@@ -908,7 +908,7 @@ SVR4_ASM_SPEC \
  
  #if defined(HAVE_LD_EH_FRAME_HDR)
+ # undef LINK_EH_SPEC
 -# define LINK_EH_SPEC "%{!static:--eh-frame-hdr} "
 +# define LINK_EH_SPEC "--no-add-needed %{!static:--eh-frame-hdr} "
  #endif

@@ -1,0 +1,33 @@
+2011-08-15  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	* config/rs6000/rs6000.c (paired_expand_vector_init): Don't create
+	CONST_VECTORs with symbolic elements.
+	(rs6000_expand_vector_init): Likewise.
+
+=== modified file 'gcc/config/rs6000/rs6000.c'
+--- old/gcc/config/rs6000/rs6000.c	2011-08-11 11:09:07 +0000
++++ new/gcc/config/rs6000/rs6000.c	2011-08-16 12:42:39 +0000
+@@ -4129,7 +4129,9 @@
+   for (i = 0; i < n_elts; ++i)
+     {
+       x = XVECEXP (vals, 0, i);
+-      if (!CONSTANT_P (x))
++      if (!(CONST_INT_P (x)
++	    || GET_CODE (x) == CONST_DOUBLE
++	    || GET_CODE (x) == CONST_FIXED))
+ 	++n_var;
+     }
+   if (n_var == 0)
+@@ -4281,7 +4283,9 @@
+   for (i = 0; i < n_elts; ++i)
+     {
+       x = XVECEXP (vals, 0, i);
+-      if (!CONSTANT_P (x))
++      if (!(CONST_INT_P (x)
++	    || GET_CODE (x) == CONST_DOUBLE
++	    || GET_CODE (x) == CONST_FIXED))
+ 	++n_var, one_var = i;
+       else if (x != CONST0_RTX (inner_mode))
+ 	all_const_zero = false;
+

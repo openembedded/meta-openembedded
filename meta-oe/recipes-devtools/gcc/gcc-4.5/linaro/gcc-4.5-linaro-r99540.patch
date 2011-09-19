@@ -1,0 +1,23 @@
+2011-08-26  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	Backport from mainline:
+
+	2011-08-26  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* df-problems.c (df_note_bb_compute): Pass uses rather than defs
+	to df_set_dead_notes_for_mw.
+
+=== modified file 'gcc/df-problems.c'
+--- old/gcc/df-problems.c	2011-05-05 14:28:53 +0000
++++ new/gcc/df-problems.c	2011-08-26 14:39:38 +0000
+@@ -3562,7 +3562,7 @@
+       while (*mws_rec)
+ 	{
+ 	  struct df_mw_hardreg *mws = *mws_rec;
+-	  if ((DF_MWS_REG_DEF_P (mws))
++	  if (DF_MWS_REG_USE_P (mws)
+ 	      && !df_ignore_stack_reg (mws->start_regno))
+ 	    {
+ 	      bool really_add_notes = debug_insn != 0;
+

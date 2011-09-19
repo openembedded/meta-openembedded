@@ -20,11 +20,11 @@ Date:   Mon Dec 20 15:29:31 2010 +0000
     
     git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@168085 138bc75d-0d04-0410-961f-82ee72b054a4
 
-Index: gcc-4.5.3/gcc/config.gcc
+Index: gcc-4_5-branch/gcc/config.gcc
 ===================================================================
---- gcc-4.5.3.orig/gcc/config.gcc	2011-06-15 21:18:55.000000000 -0700
-+++ gcc-4.5.3/gcc/config.gcc	2011-06-16 15:01:07.945285352 -0700
-@@ -1989,53 +1989,53 @@
+--- gcc-4_5-branch.orig/gcc/config.gcc	2011-09-17 11:11:28.000000000 -0700
++++ gcc-4_5-branch/gcc/config.gcc	2011-09-17 11:16:32.543298716 -0700
+@@ -1989,48 +1989,48 @@ powerpc-*-netbsd*)
  	extra_options="${extra_options} rs6000/sysv4.opt"
  	;;
  powerpc-*-eabispe*)
@@ -81,13 +81,7 @@ Index: gcc-4.5.3/gcc/config.gcc
  	extra_options="${extra_options} rs6000/sysv4.opt"
  	tmake_file="rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-rtems t-rtems rs6000/t-ppccomm"
  	;;
- powerpc-*-linux* | powerpc64-*-linux*)
--	tm_file="${tm_file} dbxelf.h elfos.h svr4.h freebsd-spec.h rs6000/sysv4.h"
-+	tm_file="${tm_file} dbxelf.h elfos.h freebsd-spec.h rs6000/sysv4.h"
- 	extra_options="${extra_options} rs6000/sysv4.opt"
- 	tmake_file="t-dfprules rs6000/t-fprules rs6000/t-ppcos ${tmake_file} rs6000/t-ppccomm"
- 	maybe_biarch=yes
-@@ -2079,12 +2079,12 @@
+@@ -2079,12 +2079,12 @@ powerpc-*-linux* | powerpc64-*-linux*)
  	fi
  	;;
  powerpc64-*-gnu*)
@@ -102,7 +96,7 @@ Index: gcc-4.5.3/gcc/config.gcc
  	extra_options="${extra_options} rs6000/sysv4.opt"
  	tmake_file="rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-ppcos t-slibgcc-elf-ver t-slibgcc-libgcc t-gnu rs6000/t-ppccomm"
  	if test x$enable_threads = xyes; then
-@@ -2092,7 +2092,7 @@
+@@ -2092,7 +2092,7 @@ powerpc-*-gnu-gnualtivec*)
  	fi
  	;;
  powerpc-*-gnu*)
@@ -111,7 +105,7 @@ Index: gcc-4.5.3/gcc/config.gcc
  	tmake_file="rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-ppcos t-slibgcc-elf-ver t-slibgcc-libgcc t-gnu rs6000/t-ppccomm"
  	extra_options="${extra_options} rs6000/sysv4.opt"
  	if test x$enable_threads = xyes; then
-@@ -2100,7 +2100,7 @@
+@@ -2100,7 +2100,7 @@ powerpc-*-gnu*)
  	fi
  	;;
  powerpc-wrs-vxworks|powerpc-wrs-vxworksae)
@@ -120,7 +114,7 @@ Index: gcc-4.5.3/gcc/config.gcc
  	tmake_file="${tmake_file} rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-ppccomm rs6000/t-vxworks"
  	extra_options="${extra_options} rs6000/sysv4.opt"
  	extra_headers=ppc-asm.h
-@@ -2126,18 +2126,18 @@
+@@ -2126,18 +2126,18 @@ powerpc-*-lynxos*)
  	gas=yes
  	;;
  powerpcle-*-elf*)
@@ -142,10 +136,10 @@ Index: gcc-4.5.3/gcc/config.gcc
  	tmake_file="rs6000/t-fprules rs6000/t-fprules-fpbit rs6000/t-ppcgas rs6000/t-ppccomm"
  	extra_options="${extra_options} rs6000/sysv4.opt"
  	use_gcc_stdint=wrap
-Index: gcc-4.5.3/gcc/config/rs6000/freebsd.h
+Index: gcc-4_5-branch/gcc/config/rs6000/freebsd.h
 ===================================================================
---- gcc-4.5.3.orig/gcc/config/rs6000/freebsd.h	2009-08-10 11:23:57.000000000 -0700
-+++ gcc-4.5.3/gcc/config/rs6000/freebsd.h	2011-06-16 15:02:02.775285339 -0700
+--- gcc-4_5-branch.orig/gcc/config/rs6000/freebsd.h	2011-06-16 17:58:58.000000000 -0700
++++ gcc-4_5-branch/gcc/config/rs6000/freebsd.h	2011-09-17 11:13:13.623298761 -0700
 @@ -69,6 +69,4 @@
  /* Override rs6000.h definition.  */
  #undef  ASM_APP_OFF
@@ -154,10 +148,10 @@ Index: gcc-4.5.3/gcc/config/rs6000/freebsd.h
 -#define SVR4_ASM_SPEC \
 -  "%{v:-V} %{Wa,*:%*}"
 +#define DBX_REGISTER_NUMBER(REGNO) rs6000_dbx_register_number (REGNO)
-Index: gcc-4.5.3/gcc/config/rs6000/lynx.h
+Index: gcc-4_5-branch/gcc/config/rs6000/lynx.h
 ===================================================================
---- gcc-4.5.3.orig/gcc/config/rs6000/lynx.h	2007-08-02 03:49:31.000000000 -0700
-+++ gcc-4.5.3/gcc/config/rs6000/lynx.h	2011-06-16 15:01:07.945285352 -0700
+--- gcc-4_5-branch.orig/gcc/config/rs6000/lynx.h	2011-06-16 17:58:58.000000000 -0700
++++ gcc-4_5-branch/gcc/config/rs6000/lynx.h	2011-09-17 11:13:13.623298761 -0700
 @@ -1,5 +1,5 @@
  /* Definitions for Rs6000 running LynxOS.
 -   Copyright (C) 1995, 1996, 2000, 2002, 2003, 2004, 2005, 2007
@@ -174,10 +168,10 @@ Index: gcc-4.5.3/gcc/config/rs6000/lynx.h
  #ifdef CRT_BEGIN
  /* This function is part of crtbegin*.o which is at the beginning of
     the link and is called from .fini which is usually toward the end
-Index: gcc-4.5.3/gcc/config/rs6000/netbsd.h
+Index: gcc-4_5-branch/gcc/config/rs6000/netbsd.h
 ===================================================================
---- gcc-4.5.3.orig/gcc/config/rs6000/netbsd.h	2009-02-20 07:20:38.000000000 -0800
-+++ gcc-4.5.3/gcc/config/rs6000/netbsd.h	2011-06-16 15:01:07.945285352 -0700
+--- gcc-4_5-branch.orig/gcc/config/rs6000/netbsd.h	2011-06-16 17:58:58.000000000 -0700
++++ gcc-4_5-branch/gcc/config/rs6000/netbsd.h	2011-09-17 11:13:13.623298761 -0700
 @@ -1,6 +1,6 @@
  /* Definitions of target machine for GNU compiler,
     for PowerPC NetBSD systems.
@@ -192,11 +186,11 @@ Index: gcc-4.5.3/gcc/config/rs6000/netbsd.h
  #define TARGET_VERSION fprintf (stderr, " (NetBSD/powerpc ELF)");
 +
 +#define DBX_REGISTER_NUMBER(REGNO) rs6000_dbx_register_number (REGNO)
-Index: gcc-4.5.3/gcc/config/rs6000/sysv4.h
+Index: gcc-4_5-branch/gcc/config/rs6000/sysv4.h
 ===================================================================
---- gcc-4.5.3.orig/gcc/config/rs6000/sysv4.h	2011-06-15 21:18:57.000000000 -0700
-+++ gcc-4.5.3/gcc/config/rs6000/sysv4.h	2011-06-16 15:01:07.945285352 -0700
-@@ -293,6 +293,10 @@
+--- gcc-4_5-branch.orig/gcc/config/rs6000/sysv4.h	2011-09-17 11:11:29.000000000 -0700
++++ gcc-4_5-branch/gcc/config/rs6000/sysv4.h	2011-09-17 11:13:13.623298761 -0700
+@@ -293,6 +293,10 @@ do {									\
  #define	RESTORE_FP_PREFIX "_restfpr_"
  #define RESTORE_FP_SUFFIX ""
  
@@ -207,7 +201,7 @@ Index: gcc-4.5.3/gcc/config/rs6000/sysv4.h
  /* Type used for ptrdiff_t, as a string used in a declaration.  */
  #define PTRDIFF_TYPE "int"
  
-@@ -588,9 +592,8 @@
+@@ -588,9 +592,8 @@ extern int fixuplabelno;
  /* Override svr4.h definition.  */
  #undef	ASM_SPEC
  #define	ASM_SPEC "%(asm_cpu) \
@@ -219,7 +213,7 @@ Index: gcc-4.5.3/gcc/config/rs6000/sysv4.h
  %{memb|msdata=eabi: -memb} \
  %{mlittle|mlittle-endian:-mlittle; \
    mbig|mbig-endian      :-mbig;    \
-@@ -1127,3 +1130,5 @@
+@@ -1120,3 +1123,5 @@ ncrtn.o%s"
  
  /* This target uses the sysv4.opt file.  */
  #define TARGET_USES_SYSV4_OPT 1
