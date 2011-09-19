@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME configuration database system"
 SECTION = "x11/gnome"
 DEPENDS = "gobject-introspection-native gtk+ orbit2 glib-2.0 libxml2 polkit"
 
-PR = "r4"
+PR = "r5"
 
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
@@ -30,6 +30,7 @@ do_install_append() {
 
 	# this stuff is unusable
 	rm ${D}${libdir}/GConf/*/*.*a
+	rm ${D}${libdir}/gio/*/*.*a
 }
 
 RDEPENDS_${PN} += "dbus-x11"
@@ -41,4 +42,5 @@ FILES_${PN} += "${libdir}/GConf/* \
 "
 
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
-FILES_${PN}-dev += "${datadir}/sgml/gconf/gconf-1.0.dtd"
+FILES_${PN}-dev += "${datadir}/sgml/gconf/gconf-1.0.dtd \
+		    ${libdir}/*/gio/*/*.la"
