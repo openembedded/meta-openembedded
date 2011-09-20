@@ -6,7 +6,7 @@ DEPENDS = "samba gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
 # optional: obexftp libcdio libimobiledevice 
 # building against gnome-disk-utility is also possible, but brings dependency loops :(
 
-PR = "r3"
+PR = "r4"
 
 inherit gnome
 
@@ -25,8 +25,8 @@ FILES_${PN} += "${datadir}/dbus-1/services/* ${datadir}/GConf ${datadir}/glib-2.
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/*"
 FILES_${PN}-dev += "${libdir}/gio/modules/*.la"
 
-FILES_gvfsd-ftp = "${libexecdir}/gvfsd-ftp ${sysconfdir}/gvfs/mounts/ftp.mount"
-FILES_gvfsd-sftp = "${libexecdir}/gvfsd-sftp ${sysconfdir}/gvfs/mounts/sftp.mount"
-FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${sysconfdir}/gvfs/mounts/trash.mount"
+FILES_gvfsd-ftp = "${libexecdir}/gvfsd-ftp ${datadir}/gvfs/mounts/ftp.mount"
+FILES_gvfsd-sftp = "${libexecdir}/gvfsd-sftp ${datadir}/gvfs/mounts/sftp.mount"
+FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.mount"
 
 RRECOMMENDS_gvfs-sftp += "openssh-sftp openssh-ssh"
