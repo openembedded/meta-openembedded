@@ -30,5 +30,5 @@ FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
 FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.*a \
                    "
 
-SRC_URI[md5sum] = "3c00e92821709baa2a71b166a32d46a2"
-SRC_URI[sha256sum] = "df8379a18d337481b847cf232eec907a927287917788e7b730deef4a535deada"
+SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
+SRC_URI[sha256sum] = "66f1266a1242ee5ecada995a4a584dd9802aa24456759b40b0c29227c39bed03"
