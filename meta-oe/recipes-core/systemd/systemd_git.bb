@@ -14,11 +14,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r0"
+PR = "r1"
 
 inherit autotools vala perlnative
 
-SRCREV = "fe7ac310219d84ca8621fd89b99fcf60a2fdfd46"
+SRCREV = "a2f5666d06fe8233025738047115bb9e3959df3e"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            ${UCLIBCPATCHES} \
@@ -74,7 +74,7 @@ FILES_${PN} += " ${base_bindir}/* \
                "
 
 FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug ${base_libdir}/security/.debug/"
-FILES_${PN}-dev += "${base_libdir}/security/*.la"
+FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/"
 
 RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 
