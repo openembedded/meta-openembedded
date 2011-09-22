@@ -1,14 +1,20 @@
+From aabfb6f78af8e337d3239142117ba303fce55e7e Mon Sep 17 00:00:00 2001
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Date: Thu, 22 Sep 2011 08:55:26 +0200
+Subject: [PATCH] fix the parallel build regarding shared libraries.
+
 Upstream-Status: Pending
+---
+ .../openssl-1.0.0e/Makefile.org                    |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
 
-fix the parallel build regarding shared libraries.
-
-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-
-Index: openssl-1.0.0d/Makefile.org
-===================================================================
---- openssl-1.0.0d.orig/Makefile.org	2011-09-01 17:03:59.000000000 +0400
-+++ openssl-1.0.0d/Makefile.org	2011-09-01 17:12:24.000000000 +0400
-@@ -244,13 +244,13 @@
+diff --git a/Makefile.org
+index 3c7aea1..6326cd6 100644
+--- a/Makefile.org
++++ b/Makefile.org
+@@ -243,13 +243,13 @@ build_libs: build_crypto build_ssl build_engines
+ 
+ build_crypto:
  	@dir=crypto; target=all; $(BUILD_ONE_CMD)
 -build_ssl:
 +build_ssl: build_crypto
@@ -24,3 +30,6 @@ Index: openssl-1.0.0d/Makefile.org
  	@dir=test; target=all; $(BUILD_ONE_CMD)
  build_tools:
  	@dir=tools; target=all; $(BUILD_ONE_CMD)
+-- 
+1.6.6.1
+
