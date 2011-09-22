@@ -100,6 +100,7 @@ FILES_${PN} = "\
   ${libdir}/enlightenment/utils/* \
   ${libdir}/enlightenment/modules/*/*.* \
   ${libdir}/enlightenment/modules/*/*/* \
+  ${libdir}/enlightenment/modules/*/*/.order \
   ${libdir}/enlightenment/*plugins/*/*/* \
   ${libdir}/enlightenment/preload/e_precache.so \
   ${datadir}/enlightenment/data/icons \
