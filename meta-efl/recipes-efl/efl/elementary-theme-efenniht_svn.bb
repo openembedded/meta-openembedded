@@ -3,7 +3,6 @@ SECTION = "e/utils"
 HOMEPAGE = "http://trac.enlightenment.org/e/wiki/Themes#Efenniht"
 DEPENDS = "edje-native"
 RSUGGESTS_${PN} = "e-wm-theme-illume-efenniht"
-PACKAGE_ARCH = "all"
 LICENSE = "MIT/BSD"
 
 SRCREV_THM_REV ?= "${EFL_SRCREV}"
@@ -11,9 +10,9 @@ SRCREV_ELM_REV ?= "${EFL_SRCREV}"
 
 SRCREV_FORMAT = "THM_REV"
 PV = "0.0+svnr${SRCPV}"
-PACKAGE_ARCH = "all"
+PR = "r1"
 
-inherit e-base
+inherit e-base allarch
 
 SRCNAME = "efenniht"
 SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};proto=http;name=THM_REV"

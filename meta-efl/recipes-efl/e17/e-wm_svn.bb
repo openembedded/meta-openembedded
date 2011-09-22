@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r19"
+PR = "r20"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -94,26 +94,6 @@ RRECOMMENDS_${PN} = "\
   ${PN}-input-methods \
   ${ESYSACTIONS} \
 "
-
-PACKAGE_ARCH_${PN}-config-default = "all"
-PACKAGE_ARCH_${PN}-config-illume2 = "all"
-PACKAGE_ARCH_${PN}-config-minimalist = "all"
-PACKAGE_ARCH_${PN}-config-netbook = "all"
-PACKAGE_ARCH_${PN}-config-scaleable = "all"
-PACKAGE_ARCH_${PN}-config-standard = "all"
-PACKAGE_ARCH_${PN}-theme-default = "all"
-PACKAGE_ARCH_${PN}-background-dark-gradient = "all"
-PACKAGE_ARCH_${PN}-background-light-gradient = "all"
-PACKAGE_ARCH_${PN}-images = "all"
-PACKAGE_ARCH_${PN}-icons = "all"
-PACKAGE_ARCH_${PN}-other = "all"
-PACKAGE_ARCH_${PN}-input-methods = "all"
-PACKAGE_ARCH_${PN}-sysactions = "all"
-PACKAGE_ARCH_${PN}-menu = "all"
-PACKAGE_ARCH_efm-desktop-icon = "all"
-PACKAGE_ARCH_illume-keyboard-default-alpha = "all"
-PACKAGE_ARCH_illume-keyboard-default-numeric = "all"
-PACKAGE_ARCH_illume-keyboard-default-terminal = "all"
 
 FILES_${PN} = "\
   ${bindir}/* \

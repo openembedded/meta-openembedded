@@ -6,14 +6,12 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f08a446809913fc9b3c718f0eaea0426"
 
 SECTION = "unknown"
-inherit gnome
+inherit gnome allarch
 
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "http://icon-theme.freedesktop.org/releases/${BPN}-${PV}.tar.gz \
         file://index.theme"
-
-PACKAGE_ARCH = "all"
 
 FILES_${PN} += "${datadir}/icons"
 

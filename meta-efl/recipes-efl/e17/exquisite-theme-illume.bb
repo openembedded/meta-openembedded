@@ -3,10 +3,10 @@ LICENSE = "MIT/BSD"
 SECTION = "x11"
 DEPENDS = "edje-native"
 PV = "1.0+svnr${SRCPV}"
-PR = "r6"
+PR = "r7"
 SRCREV = "${EFL_SRCREV}"
 
-inherit e-base update-alternatives
+inherit e-base update-alternatives allarch
 
 ALTERNATIVE_NAME = "exquisite-config"
 ALTERNATIVE_LINK = "${sysconfdir}/exquisite/config"
@@ -29,6 +29,5 @@ do_install() {
     echo 'THEME="-t illume"' > ${D}${sysconfdir}/exquisite/config-illume
 }
 
-PACKAGE_ARCH = "all"
 CONFFILES_${PN} = "${sysconfdir}/exquisite/config-illume"
 FILES_${PN} = "${sysconfdir}/exquisite ${datadir}/exquisite/data/themes"

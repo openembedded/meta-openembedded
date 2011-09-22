@@ -5,17 +5,14 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/GPL-2;md5=751419260aa954499f7abaabaa882bbe
 SECTION = "x11/applications"
 DEPENDS = "glib-2.0 gtk+ imagemagick-native librsvg-native"
 
-#only icons present in the package
-PACKAGE_ARCH = "all"
-
 PV = "0.1.0+svnr${SRCPV}"
-PR = "r2"
+PR = "r3"
 
 EXTRA_OECONF = "--disable-binding-python --disable-gui-sdl --disable-samplemap --enable-avoid-float --enable-avoid-unaligned  --enable-svg2png-scaling-flag=32 --disable-speech-speech-dispatcher"
 
 S = "${WORKDIR}/xpm"
 
-inherit autotools
+inherit autotools allarch
 
 FILES_${PN} = " /usr/share/navit/xpm/"
 

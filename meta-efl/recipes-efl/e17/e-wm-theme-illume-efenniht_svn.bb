@@ -4,13 +4,13 @@ HOMEPAGE = "http://trac.enlightenment.org/e/wiki/Themes#Efenniht"
 DEPENDS = "edje-native"
 RDEPENDS_${PN} = "e-wm"
 RSUGGESTS_${PN} = "elementary-theme-efenniht"
-PACKAGE_ARCH = "all"
 LICENSE = "MIT/BSD"
 
 SRCREV = "${EFL_SRCREV}"
 PV = "0.0+svnr${SRCPV}"
+PR = "r1"
 
-inherit e-base
+inherit e-base allarch
 
 SRCNAME = "efenniht"
 SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};proto=http"
