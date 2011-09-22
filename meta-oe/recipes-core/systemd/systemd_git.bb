@@ -14,13 +14,16 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r1"
+PR = "r3"
 
 inherit autotools vala perlnative
 
 SRCREV = "a2f5666d06fe8233025738047115bb9e3959df3e"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
+           file://0001-analyze-always-draw-1s-marker-for-scale.patch \
+           file://0002-analyze-report-startup-time-in-plot-mode-as-well.patch \
+           file://0003-analyze-draw-kernel-boot-time-as-well.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
