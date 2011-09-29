@@ -1,0 +1,23 @@
+2011-09-05  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	gcc/
+
+	2011-08-12  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+        PR target/48328
+	* config/arm/arm.h (CASE_VECTOR_SHORTEN_MODE): Fix distance
+	for tbh instructions.
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-08-24 17:35:16 +0000
++++ new/gcc/config/arm/arm.h	2011-09-05 14:32:11 +0000
+@@ -1961,7 +1961,7 @@
+       : min >= -4096 && max < 4096					\
+       ? (ADDR_DIFF_VEC_FLAGS (body).offset_unsigned = 0, HImode)	\
+       : SImode)								\
+-   : ((min < 0 || max >= 0x2000 || !TARGET_THUMB2) ? SImode		\
++   : ((min < 0 || max >= 0x20000 || !TARGET_THUMB2) ? SImode		\
+       : (max >= 0x200) ? HImode						\
+       : QImode))
+ 
+

@@ -1,0 +1,201 @@
+2011-09-12  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	PR target/49030
+	* config/arm/arm-protos.h (maybe_get_arm_condition_code): Declare.
+	* config/arm/arm.c (maybe_get_arm_condition_code): New function,
+	reusing the old code from get_arm_condition_code.  Return ARM_NV
+	for invalid comparison codes.
+	(get_arm_condition_code): Redefine in terms of
+	maybe_get_arm_condition_code.
+	* config/arm/predicates.md (arm_comparison_operator): Use
+	maybe_get_arm_condition_code.
+
+	gcc/testsuite/
+	PR target/49030
+	* gcc.dg/torture/pr49030.c: New test.
+
+=== modified file 'gcc/config/arm/arm-protos.h'
+--- old/gcc/config/arm/arm-protos.h	2011-08-25 13:26:58 +0000
++++ new/gcc/config/arm/arm-protos.h	2011-09-12 11:03:11 +0000
+@@ -179,6 +179,7 @@
+ #endif
+ extern int thumb_shiftable_const (unsigned HOST_WIDE_INT);
+ #ifdef RTX_CODE
++extern enum arm_cond_code maybe_get_arm_condition_code (rtx);
+ extern void thumb1_final_prescan_insn (rtx);
+ extern void thumb2_final_prescan_insn (rtx);
+ extern const char *thumb_load_double_from_address (rtx *);
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-09-06 12:57:56 +0000
++++ new/gcc/config/arm/arm.c	2011-09-12 11:03:11 +0000
+@@ -17494,10 +17494,10 @@
+    decremented/zeroed by arm_asm_output_opcode as the insns are output.  */
+ 
+ /* Returns the index of the ARM condition code string in
+-   `arm_condition_codes'.  COMPARISON should be an rtx like
+-   `(eq (...) (...))'.  */
+-static enum arm_cond_code
+-get_arm_condition_code (rtx comparison)
++   `arm_condition_codes', or ARM_NV if the comparison is invalid.
++   COMPARISON should be an rtx like `(eq (...) (...))'.  */
++enum arm_cond_code
++maybe_get_arm_condition_code (rtx comparison)
+ {
+   enum machine_mode mode = GET_MODE (XEXP (comparison, 0));
+   enum arm_cond_code code;
+@@ -17521,11 +17521,11 @@
+     case CC_DLTUmode: code = ARM_CC;
+ 
+     dominance:
+-      gcc_assert (comp_code == EQ || comp_code == NE);
+-
+       if (comp_code == EQ)
+ 	return ARM_INVERSE_CONDITION_CODE (code);
+-      return code;
++      if (comp_code == NE)
++	return code;
++      return ARM_NV;
+ 
+     case CC_NOOVmode:
+       switch (comp_code)
+@@ -17534,7 +17534,7 @@
+ 	case EQ: return ARM_EQ;
+ 	case GE: return ARM_PL;
+ 	case LT: return ARM_MI;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CC_Zmode:
+@@ -17542,7 +17542,7 @@
+ 	{
+ 	case NE: return ARM_NE;
+ 	case EQ: return ARM_EQ;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CC_Nmode:
+@@ -17550,7 +17550,7 @@
+ 	{
+ 	case NE: return ARM_MI;
+ 	case EQ: return ARM_PL;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CCFPEmode:
+@@ -17575,7 +17575,7 @@
+ 	  /* UNEQ and LTGT do not have a representation.  */
+ 	case UNEQ: /* Fall through.  */
+ 	case LTGT: /* Fall through.  */
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CC_SWPmode:
+@@ -17591,7 +17591,7 @@
+ 	case GTU: return ARM_CC;
+ 	case LEU: return ARM_CS;
+ 	case LTU: return ARM_HI;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CC_Cmode:
+@@ -17599,7 +17599,7 @@
+ 	{
+ 	case LTU: return ARM_CS;
+ 	case GEU: return ARM_CC;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CC_CZmode:
+@@ -17611,7 +17611,7 @@
+ 	case GTU: return ARM_HI;
+ 	case LEU: return ARM_LS;
+ 	case LTU: return ARM_CC;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CC_NCVmode:
+@@ -17621,7 +17621,7 @@
+ 	case LT: return ARM_LT;
+ 	case GEU: return ARM_CS;
+ 	case LTU: return ARM_CC;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     case CCmode:
+@@ -17637,13 +17637,22 @@
+ 	case GTU: return ARM_HI;
+ 	case LEU: return ARM_LS;
+ 	case LTU: return ARM_CC;
+-	default: gcc_unreachable ();
++	default: return ARM_NV;
+ 	}
+ 
+     default: gcc_unreachable ();
+     }
+ }
+ 
++/* Like maybe_get_arm_condition_code, but never return ARM_NV.  */
++static enum arm_cond_code
++get_arm_condition_code (rtx comparison)
++{
++  enum arm_cond_code code = maybe_get_arm_condition_code (comparison);
++  gcc_assert (code != ARM_NV);
++  return code;
++}
++
+ /* Tell arm_asm_output_opcode to output IT blocks for conditionally executed
+    instructions.  */
+ void
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-08-13 08:40:36 +0000
++++ new/gcc/config/arm/predicates.md	2011-09-05 09:40:19 +0000
+@@ -242,10 +242,9 @@
+ ;; True for integer comparisons and, if FP is active, for comparisons
+ ;; other than LTGT or UNEQ.
+ (define_special_predicate "arm_comparison_operator"
+-  (ior (match_code "eq,ne,le,lt,ge,gt,geu,gtu,leu,ltu")
+-       (and (match_test "TARGET_32BIT && TARGET_HARD_FLOAT
+-			 && (TARGET_FPA || TARGET_VFP)")
+-            (match_code "unordered,ordered,unlt,unle,unge,ungt"))))
++  (and (match_code "eq,ne,le,lt,ge,gt,geu,gtu,leu,ltu,
++		    unordered,ordered,unlt,unle,unge,ungt")
++       (match_test "maybe_get_arm_condition_code (op) != ARM_NV")))
+ 
+ (define_special_predicate "lt_ge_comparison_operator"
+   (match_code "lt,ge"))
+
+=== added file 'gcc/testsuite/gcc.dg/torture/pr49030.c'
+--- old/gcc/testsuite/gcc.dg/torture/pr49030.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/torture/pr49030.c	2011-09-05 09:40:19 +0000
+@@ -0,0 +1,19 @@
++void
++sample_move_d32u24_sS (char *dst, float *src, unsigned long nsamples,
++		       unsigned long dst_skip)
++{
++  long long y;
++  while (nsamples--)
++    {
++      y = (long long) (*src * 8388608.0f) << 8;
++      if (y > 2147483647) {
++	*(int *) dst = 2147483647;
++      } else if (y < -2147483647 - 1) {
++	*(int *) dst = -2147483647 - 1;
++      } else {
++	*(int *) dst = (int) y;
++      }
++      dst += dst_skip;
++      src++;
++    }
++}
+

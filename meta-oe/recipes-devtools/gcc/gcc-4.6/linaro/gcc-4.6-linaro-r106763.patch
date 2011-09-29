@@ -1,87 +1,16 @@
 2011-06-28  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
 
 	Backport from mainline.
-	LP 791327
-	gcc/
-        2011-06-09  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
-
-	PR target/49335
-	* config/arm/predicates.md (add_operator): New.
-	* config/arm/arm.md ("*arith_shiftsi"): Fix for SP reg usage
-	in Thumb2.
-
-2011-06-28  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
-
-	Backport from mainline.
 	gcc/
 	2011-06-24  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
 
 	PR target/49385
 	* config/arm/thumb2.md (*thumb2_movhi_insn): Make sure atleast
 	one of the operands is a register.
-
-=== modified file 'gcc/config/arm/arm.md'
---- old/gcc/config/arm/arm.md	2011-06-27 22:14:07 +0000
-+++ new/gcc/config/arm/arm.md	2011-06-28 12:02:27 +0000
-@@ -8584,18 +8584,22 @@
- ;; Patterns to allow combination of arithmetic, cond code and shifts
- 
- (define_insn "*arith_shiftsi"
--  [(set (match_operand:SI 0 "s_register_operand" "=r,r")
-+  [(set (match_operand:SI 0 "s_register_operand" "=r,r,r,r")
-         (match_operator:SI 1 "shiftable_operator"
-           [(match_operator:SI 3 "shift_operator"
--             [(match_operand:SI 4 "s_register_operand" "r,r")
--              (match_operand:SI 5 "shift_amount_operand" "M,r")])
--           (match_operand:SI 2 "s_register_operand" "rk,rk")]))]
-+             [(match_operand:SI 4 "s_register_operand" "r,r,r,r")
-+              (match_operand:SI 5 "shift_amount_operand" "M,M,M,r")])
-+           (match_operand:SI 2 "s_register_operand" "rk,rk,r,rk")]))]
-   "TARGET_32BIT"
-   "%i1%?\\t%0, %2, %4%S3"
-   [(set_attr "predicable" "yes")
-    (set_attr "shift" "4")
--   (set_attr "arch" "32,a")
--   ;; We have to make sure to disable the second alternative if
-+   (set_attr "arch" "a,t2,t2,a")
-+   ;; Thumb2 doesn't allow the stack pointer to be used for 
-+   ;; operand1 for all operations other than add and sub. In this case 
-+   ;; the minus operation is a candidate for an rsub and hence needs
-+   ;; to be disabled.
-+   ;; We have to make sure to disable the fourth alternative if
-    ;; the shift_operator is MULT, since otherwise the insn will
-    ;; also match a multiply_accumulate pattern and validate_change
-    ;; will allow a replacement of the constant with a register
-@@ -8603,9 +8607,13 @@
-    (set_attr_alternative "insn_enabled"
- 			 [(const_string "yes")
- 			  (if_then_else
-+			   (match_operand:SI 1 "add_operator" "")
-+			   (const_string "yes") (const_string "no"))
-+			  (const_string "yes")
-+			  (if_then_else
- 			   (match_operand:SI 3 "mult_operator" "")
- 			   (const_string "no") (const_string "yes"))])
--   (set_attr "type" "alu_shift,alu_shift_reg")])
-+   (set_attr "type" "alu_shift,alu_shift,alu_shift,alu_shift_reg")])
- 
- (define_split
-   [(set (match_operand:SI 0 "s_register_operand" "")
-
-=== modified file 'gcc/config/arm/predicates.md'
---- old/gcc/config/arm/predicates.md	2011-05-03 15:14:56 +0000
-+++ new/gcc/config/arm/predicates.md	2011-06-22 15:50:23 +0000
-@@ -687,3 +687,6 @@
- (define_special_predicate "neon_struct_operand"
-   (and (match_code "mem")
-        (match_test "TARGET_32BIT && neon_vector_mem_operand (op, 2)")))
-+
-+(define_special_predicate "add_operator"
-+  (match_code "plus"))
-
-=== modified file 'gcc/config/arm/thumb2.md'
---- old/gcc/config/arm/thumb2.md	2011-06-14 14:37:30 +0000
-+++ new/gcc/config/arm/thumb2.md	2011-06-20 12:18:27 +0000
+Index: gcc-4_6-branch/gcc/config/arm/thumb2.md
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/arm/thumb2.md	2011-09-16 20:22:40.000000000 -0700
++++ gcc-4_6-branch/gcc/config/arm/thumb2.md	2011-09-16 20:28:47.648690433 -0700
 @@ -207,7 +207,9 @@
  (define_insn "*thumb2_movhi_insn"
    [(set (match_operand:HI 0 "nonimmediate_operand" "=r,r,m,r")
@@ -93,4 +22,3 @@
    "@
     mov%?\\t%0, %1\\t%@ movhi
     movw%?\\t%0, %L1\\t%@ movhi
-

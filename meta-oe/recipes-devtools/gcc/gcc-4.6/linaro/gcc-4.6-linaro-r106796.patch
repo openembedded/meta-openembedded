@@ -1,0 +1,1255 @@
+2011-08-25  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from FSF mainline:
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (is_widening_mult_rhs_p): Handle constants
+	beyond conversions.
+	(convert_mult_to_widen): Convert constant inputs to the right type.
+	(convert_plusminus_to_widen): Don't automatically reject inputs that
+	are not an SSA_NAME.
+	Convert constant inputs to the right type.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-11.c: New file.
+	* gcc.target/arm/wmul-12.c: New file.
+	* gcc.target/arm/wmul-13.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (convert_plusminus_to_widen): Convert add_rhs
+	to the correct type.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-10.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (convert_mult_to_widen): Better handle
+	unsigned inputs of different modes.
+	(convert_plusminus_to_widen): Likewise.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-9.c: New file.
+	* gcc.target/arm/wmul-bitfield-2.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (is_widening_mult_rhs_p): Add new argument
+	'type'.
+	Use 'type' from caller, not inferred from 'rhs'.
+	Don't reject non-conversion statements. Do return lhs in this case.
+	(is_widening_mult_p): Add new argument 'type'.
+	Use 'type' from caller, not inferred from 'stmt'.
+	Pass type to is_widening_mult_rhs_p.
+	(convert_mult_to_widen): Pass type to is_widening_mult_p.
+	(convert_plusminus_to_widen): Likewise.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-8.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (is_widening_mult_p): Remove FIXME.
+	Ensure the the larger type is the first operand.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-7.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (convert_mult_to_widen): Convert
+	unsupported unsigned multiplies to signed.
+	(convert_plusminus_to_widen): Likewise.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-6.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* tree-ssa-math-opts.c (convert_plusminus_to_widen): Permit a single
+	conversion statement separating multiply-and-accumulate.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-5.c: New file.
+	* gcc.target/arm/no-wmla-1.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config/arm/arm.md (maddhidi4): Remove '*' from name.
+	* expr.c (expand_expr_real_2): Use find_widening_optab_handler.
+	* optabs.c (find_widening_optab_handler_and_mode): New function.
+	(expand_widen_pattern_expr): Use find_widening_optab_handler.
+	(expand_binop_directly): Likewise.
+	(expand_binop): Likewise.
+	* optabs.h (find_widening_optab_handler): New macro define.
+	(find_widening_optab_handler_and_mode): New prototype.
+	* tree-cfg.c (verify_gimple_assign_binary): Adjust WIDEN_MULT_EXPR
+	type precision rules.
+	(verify_gimple_assign_ternary): Likewise for WIDEN_MULT_PLUS_EXPR.
+	* tree-ssa-math-opts.c (build_and_insert_cast): New function.
+	(is_widening_mult_rhs_p): Allow widening by more than one mode.
+	Explicitly disallow mis-matched input types.
+	(convert_mult_to_widen): Use find_widening_optab_handler, and cast
+	input types to fit the new handler.
+	(convert_plusminus_to_widen): Likewise.
+
+	gcc/testsuite/
+	* gcc.target/arm/wmul-bitfield-1.c: New file.
+
+	2011-08-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* expr.c (expand_expr_real_2): Use widening_optab_handler.
+	* genopinit.c (optabs): Use set_widening_optab_handler for $N.
+	(gen_insn): $N now means $a must be wider than $b, not consecutive.
+	* optabs.c (widened_mode): New function.
+	(expand_widen_pattern_expr): Use widening_optab_handler.
+	(expand_binop_directly): Likewise.
+	(expand_binop): Likewise.
+	* optabs.h (widening_optab_handlers): New struct.
+	(optab_d): New member, 'widening'.
+	(widening_optab_handler): New function.
+	(set_widening_optab_handler): New function.
+	* tree-ssa-math-opts.c (convert_mult_to_widen): Use
+	widening_optab_handler.
+	(convert_plusminus_to_widen): Likewise.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-08-13 08:32:32 +0000
++++ new/gcc/config/arm/arm.md	2011-08-25 11:42:09 +0000
+@@ -1839,7 +1839,7 @@
+    (set_attr "predicable" "yes")]
+ )
+ 
+-(define_insn "*maddhidi4"
++(define_insn "maddhidi4"
+   [(set (match_operand:DI 0 "s_register_operand" "=r")
+ 	(plus:DI
+ 	  (mult:DI (sign_extend:DI
+
+=== modified file 'gcc/expr.c'
+--- old/gcc/expr.c	2011-08-13 08:32:32 +0000
++++ new/gcc/expr.c	2011-08-25 11:42:09 +0000
+@@ -7688,18 +7688,16 @@
+ 	{
+ 	  enum machine_mode innermode = TYPE_MODE (TREE_TYPE (treeop0));
+ 	  this_optab = usmul_widen_optab;
+-	  if (mode == GET_MODE_2XWIDER_MODE (innermode))
++	  if (find_widening_optab_handler (this_optab, mode, innermode, 0)
++		!= CODE_FOR_nothing)
+ 	    {
+-	      if (optab_handler (this_optab, mode) != CODE_FOR_nothing)
+-		{
+-		  if (TYPE_UNSIGNED (TREE_TYPE (treeop0)))
+-		    expand_operands (treeop0, treeop1, NULL_RTX, &op0, &op1,
+-				     EXPAND_NORMAL);
+-		  else
+-		    expand_operands (treeop0, treeop1, NULL_RTX, &op1, &op0,
+-				     EXPAND_NORMAL);
+-		  goto binop3;
+-		}
++	      if (TYPE_UNSIGNED (TREE_TYPE (treeop0)))
++		expand_operands (treeop0, treeop1, NULL_RTX, &op0, &op1,
++				 EXPAND_NORMAL);
++	      else
++		expand_operands (treeop0, treeop1, NULL_RTX, &op1, &op0,
++				 EXPAND_NORMAL);
++	      goto binop3;
+ 	    }
+ 	}
+       /* Check for a multiplication with matching signedness.  */
+@@ -7714,10 +7712,10 @@
+ 	  optab other_optab = zextend_p ? smul_widen_optab : umul_widen_optab;
+ 	  this_optab = zextend_p ? umul_widen_optab : smul_widen_optab;
+ 
+-	  if (mode == GET_MODE_2XWIDER_MODE (innermode)
+-	      && TREE_CODE (treeop0) != INTEGER_CST)
++	  if (TREE_CODE (treeop0) != INTEGER_CST)
+ 	    {
+-	      if (optab_handler (this_optab, mode) != CODE_FOR_nothing)
++	      if (find_widening_optab_handler (this_optab, mode, innermode, 0)
++		    != CODE_FOR_nothing)
+ 		{
+ 		  expand_operands (treeop0, treeop1, NULL_RTX, &op0, &op1,
+ 				   EXPAND_NORMAL);
+@@ -7725,7 +7723,8 @@
+ 					       unsignedp, this_optab);
+ 		  return REDUCE_BIT_FIELD (temp);
+ 		}
+-	      if (optab_handler (other_optab, mode) != CODE_FOR_nothing
++	      if (find_widening_optab_handler (other_optab, mode, innermode, 0)
++		    != CODE_FOR_nothing
+ 		  && innermode == word_mode)
+ 		{
+ 		  rtx htem, hipart;
+
+=== modified file 'gcc/genopinit.c'
+--- old/gcc/genopinit.c	2011-05-05 15:43:06 +0000
++++ new/gcc/genopinit.c	2011-07-15 13:06:31 +0000
+@@ -46,10 +46,12 @@
+    used.  $A and $B are replaced with the full name of the mode; $a and $b
+    are replaced with the short form of the name, as above.
+ 
+-   If $N is present in the pattern, it means the two modes must be consecutive
+-   widths in the same mode class (e.g, QImode and HImode).  $I means that
+-   only full integer modes should be considered for the next mode, and $F
+-   means that only float modes should be considered.
++   If $N is present in the pattern, it means the two modes must be in
++   the same mode class, and $b must be greater than $a (e.g, QImode
++   and HImode).
++
++   $I means that only full integer modes should be considered for the
++   next mode, and $F means that only float modes should be considered.
+    $P means that both full and partial integer modes should be considered.
+    $Q means that only fixed-point modes should be considered.
+ 
+@@ -99,17 +101,17 @@
+   "set_optab_handler (smulv_optab, $A, CODE_FOR_$(mulv$I$a3$))",
+   "set_optab_handler (umul_highpart_optab, $A, CODE_FOR_$(umul$a3_highpart$))",
+   "set_optab_handler (smul_highpart_optab, $A, CODE_FOR_$(smul$a3_highpart$))",
+-  "set_optab_handler (smul_widen_optab, $B, CODE_FOR_$(mul$a$b3$)$N)",
+-  "set_optab_handler (umul_widen_optab, $B, CODE_FOR_$(umul$a$b3$)$N)",
+-  "set_optab_handler (usmul_widen_optab, $B, CODE_FOR_$(usmul$a$b3$)$N)",
+-  "set_optab_handler (smadd_widen_optab, $B, CODE_FOR_$(madd$a$b4$)$N)",
+-  "set_optab_handler (umadd_widen_optab, $B, CODE_FOR_$(umadd$a$b4$)$N)",
+-  "set_optab_handler (ssmadd_widen_optab, $B, CODE_FOR_$(ssmadd$a$b4$)$N)",
+-  "set_optab_handler (usmadd_widen_optab, $B, CODE_FOR_$(usmadd$a$b4$)$N)",
+-  "set_optab_handler (smsub_widen_optab, $B, CODE_FOR_$(msub$a$b4$)$N)",
+-  "set_optab_handler (umsub_widen_optab, $B, CODE_FOR_$(umsub$a$b4$)$N)",
+-  "set_optab_handler (ssmsub_widen_optab, $B, CODE_FOR_$(ssmsub$a$b4$)$N)",
+-  "set_optab_handler (usmsub_widen_optab, $B, CODE_FOR_$(usmsub$a$b4$)$N)",
++  "set_widening_optab_handler (smul_widen_optab, $B, $A, CODE_FOR_$(mul$a$b3$)$N)",
++  "set_widening_optab_handler (umul_widen_optab, $B, $A, CODE_FOR_$(umul$a$b3$)$N)",
++  "set_widening_optab_handler (usmul_widen_optab, $B, $A, CODE_FOR_$(usmul$a$b3$)$N)",
++  "set_widening_optab_handler (smadd_widen_optab, $B, $A, CODE_FOR_$(madd$a$b4$)$N)",
++  "set_widening_optab_handler (umadd_widen_optab, $B, $A, CODE_FOR_$(umadd$a$b4$)$N)",
++  "set_widening_optab_handler (ssmadd_widen_optab, $B, $A, CODE_FOR_$(ssmadd$a$b4$)$N)",
++  "set_widening_optab_handler (usmadd_widen_optab, $B, $A, CODE_FOR_$(usmadd$a$b4$)$N)",
++  "set_widening_optab_handler (smsub_widen_optab, $B, $A, CODE_FOR_$(msub$a$b4$)$N)",
++  "set_widening_optab_handler (umsub_widen_optab, $B, $A, CODE_FOR_$(umsub$a$b4$)$N)",
++  "set_widening_optab_handler (ssmsub_widen_optab, $B, $A, CODE_FOR_$(ssmsub$a$b4$)$N)",
++  "set_widening_optab_handler (usmsub_widen_optab, $B, $A, CODE_FOR_$(usmsub$a$b4$)$N)",
+   "set_optab_handler (sdiv_optab, $A, CODE_FOR_$(div$a3$))",
+   "set_optab_handler (ssdiv_optab, $A, CODE_FOR_$(ssdiv$Q$a3$))",
+   "set_optab_handler (sdivv_optab, $A, CODE_FOR_$(div$V$I$a3$))",
+@@ -304,7 +306,7 @@
+     {
+       int force_float = 0, force_int = 0, force_partial_int = 0;
+       int force_fixed = 0;
+-      int force_consec = 0;
++      int force_wider = 0;
+       int matches = 1;
+ 
+       for (pp = optabs[pindex]; pp[0] != '$' || pp[1] != '('; pp++)
+@@ -322,7 +324,7 @@
+ 	    switch (*++pp)
+ 	      {
+ 	      case 'N':
+-		force_consec = 1;
++		force_wider = 1;
+ 		break;
+ 	      case 'I':
+ 		force_int = 1;
+@@ -391,7 +393,10 @@
+ 			    || mode_class[i] == MODE_VECTOR_FRACT
+ 			    || mode_class[i] == MODE_VECTOR_UFRACT
+ 			    || mode_class[i] == MODE_VECTOR_ACCUM
+-			    || mode_class[i] == MODE_VECTOR_UACCUM))
++			    || mode_class[i] == MODE_VECTOR_UACCUM)
++			&& (! force_wider
++			    || *pp == 'a'
++			    || m1 < i))
+ 		      break;
+ 		  }
+ 
+@@ -411,8 +416,7 @@
+ 	}
+ 
+       if (matches && pp[0] == '$' && pp[1] == ')'
+-	  && *np == 0
+-	  && (! force_consec || (int) GET_MODE_WIDER_MODE(m1) == m2))
++	  && *np == 0)
+ 	break;
+     }
+ 
+
+=== modified file 'gcc/optabs.c'
+--- old/gcc/optabs.c	2011-07-04 14:03:49 +0000
++++ new/gcc/optabs.c	2011-08-11 15:46:01 +0000
+@@ -225,6 +225,61 @@
+   return 1;
+ }
+ 
++/* Given two input operands, OP0 and OP1, determine what the correct from_mode
++   for a widening operation would be.  In most cases this would be OP0, but if
++   that's a constant it'll be VOIDmode, which isn't useful.  */
++
++static enum machine_mode
++widened_mode (enum machine_mode to_mode, rtx op0, rtx op1)
++{
++  enum machine_mode m0 = GET_MODE (op0);
++  enum machine_mode m1 = GET_MODE (op1);
++  enum machine_mode result;
++
++  if (m0 == VOIDmode && m1 == VOIDmode)
++    return to_mode;
++  else if (m0 == VOIDmode || GET_MODE_SIZE (m0) < GET_MODE_SIZE (m1))
++    result = m1;
++  else
++    result = m0;
++
++  if (GET_MODE_SIZE (result) > GET_MODE_SIZE (to_mode))
++    return to_mode;
++
++  return result;
++}
++
++/* Find a widening optab even if it doesn't widen as much as we want.
++   E.g. if from_mode is HImode, and to_mode is DImode, and there is no
++   direct HI->SI insn, then return SI->DI, if that exists.
++   If PERMIT_NON_WIDENING is non-zero then this can be used with
++   non-widening optabs also.  */
++
++enum insn_code
++find_widening_optab_handler_and_mode (optab op, enum machine_mode to_mode,
++				      enum machine_mode from_mode,
++				      int permit_non_widening,
++				      enum machine_mode *found_mode)
++{
++  for (; (permit_non_widening || from_mode != to_mode)
++	 && GET_MODE_SIZE (from_mode) <= GET_MODE_SIZE (to_mode)
++	 && from_mode != VOIDmode;
++       from_mode = GET_MODE_WIDER_MODE (from_mode))
++    {
++      enum insn_code handler = widening_optab_handler (op, to_mode,
++						       from_mode);
++
++      if (handler != CODE_FOR_nothing)
++	{
++	  if (found_mode)
++	    *found_mode = from_mode;
++	  return handler;
++	}
++    }
++
++  return CODE_FOR_nothing;
++}
++
+ /* Widen OP to MODE and return the rtx for the widened operand.  UNSIGNEDP
+    says whether OP is signed or unsigned.  NO_EXTEND is nonzero if we need
+    not actually do a sign-extend or zero-extend, but can leave the
+@@ -517,8 +572,9 @@
+     optab_for_tree_code (ops->code, TREE_TYPE (oprnd0), optab_default);
+   if (ops->code == WIDEN_MULT_PLUS_EXPR
+       || ops->code == WIDEN_MULT_MINUS_EXPR)
+-    icode = (int) optab_handler (widen_pattern_optab,
+-				 TYPE_MODE (TREE_TYPE (ops->op2)));
++    icode = (int) find_widening_optab_handler (widen_pattern_optab,
++					       TYPE_MODE (TREE_TYPE (ops->op2)),
++					       tmode0, 0);
+   else
+     icode = (int) optab_handler (widen_pattern_optab, tmode0);
+   gcc_assert (icode != CODE_FOR_nothing);
+@@ -1389,7 +1445,9 @@
+ 		       rtx target, int unsignedp, enum optab_methods methods,
+ 		       rtx last)
+ {
+-  int icode = (int) optab_handler (binoptab, mode);
++  enum machine_mode from_mode = widened_mode (mode, op0, op1);
++  int icode = (int) find_widening_optab_handler (binoptab, mode,
++						 from_mode, 1);
+   enum machine_mode mode0 = insn_data[icode].operand[1].mode;
+   enum machine_mode mode1 = insn_data[icode].operand[2].mode;
+   enum machine_mode tmp_mode;
+@@ -1546,7 +1604,9 @@
+   /* If we can do it with a three-operand insn, do so.  */
+ 
+   if (methods != OPTAB_MUST_WIDEN
+-      && optab_handler (binoptab, mode) != CODE_FOR_nothing)
++      && find_widening_optab_handler (binoptab, mode,
++				      widened_mode (mode, op0, op1), 1)
++	    != CODE_FOR_nothing)
+     {
+       temp = expand_binop_directly (mode, binoptab, op0, op1, target,
+ 				    unsignedp, methods, last);
+@@ -1586,8 +1646,9 @@
+ 
+   if (binoptab == smul_optab
+       && GET_MODE_WIDER_MODE (mode) != VOIDmode
+-      && (optab_handler ((unsignedp ? umul_widen_optab : smul_widen_optab),
+-			 GET_MODE_WIDER_MODE (mode))
++      && (widening_optab_handler ((unsignedp ? umul_widen_optab
++					     : smul_widen_optab),
++				  GET_MODE_WIDER_MODE (mode), mode)
+ 	  != CODE_FOR_nothing))
+     {
+       temp = expand_binop (GET_MODE_WIDER_MODE (mode),
+@@ -1618,9 +1679,11 @@
+ 	if (optab_handler (binoptab, wider_mode) != CODE_FOR_nothing
+ 	    || (binoptab == smul_optab
+ 		&& GET_MODE_WIDER_MODE (wider_mode) != VOIDmode
+-		&& (optab_handler ((unsignedp ? umul_widen_optab
+-				    : smul_widen_optab),
+-				   GET_MODE_WIDER_MODE (wider_mode))
++		&& (find_widening_optab_handler ((unsignedp
++						  ? umul_widen_optab
++						  : smul_widen_optab),
++						 GET_MODE_WIDER_MODE (wider_mode),
++						 mode, 0)
+ 		    != CODE_FOR_nothing)))
+ 	  {
+ 	    rtx xop0 = op0, xop1 = op1;
+@@ -2043,8 +2106,8 @@
+       && optab_handler (add_optab, word_mode) != CODE_FOR_nothing)
+     {
+       rtx product = NULL_RTX;
+-
+-      if (optab_handler (umul_widen_optab, mode) != CODE_FOR_nothing)
++      if (widening_optab_handler (umul_widen_optab, mode, word_mode)
++	    != CODE_FOR_nothing)
+ 	{
+ 	  product = expand_doubleword_mult (mode, op0, op1, target,
+ 					    true, methods);
+@@ -2053,7 +2116,8 @@
+ 	}
+ 
+       if (product == NULL_RTX
+-	  && optab_handler (smul_widen_optab, mode) != CODE_FOR_nothing)
++	  && widening_optab_handler (smul_widen_optab, mode, word_mode)
++		!= CODE_FOR_nothing)
+ 	{
+ 	  product = expand_doubleword_mult (mode, op0, op1, target,
+ 					    false, methods);
+@@ -2144,7 +2208,8 @@
+ 	   wider_mode != VOIDmode;
+ 	   wider_mode = GET_MODE_WIDER_MODE (wider_mode))
+ 	{
+-	  if (optab_handler (binoptab, wider_mode) != CODE_FOR_nothing
++	  if (find_widening_optab_handler (binoptab, wider_mode, mode, 1)
++		  != CODE_FOR_nothing
+ 	      || (methods == OPTAB_LIB
+ 		  && optab_libfunc (binoptab, wider_mode)))
+ 	    {
+
+=== modified file 'gcc/optabs.h'
+--- old/gcc/optabs.h	2011-05-05 15:43:06 +0000
++++ new/gcc/optabs.h	2011-07-27 14:12:45 +0000
+@@ -42,6 +42,11 @@
+   int insn_code;
+ };
+ 
++struct widening_optab_handlers
++{
++  struct optab_handlers handlers[NUM_MACHINE_MODES][NUM_MACHINE_MODES];
++};
++
+ struct optab_d
+ {
+   enum rtx_code code;
+@@ -50,6 +55,7 @@
+   void (*libcall_gen)(struct optab_d *, const char *name, char suffix,
+ 		      enum machine_mode);
+   struct optab_handlers handlers[NUM_MACHINE_MODES];
++  struct widening_optab_handlers *widening;
+ };
+ typedef struct optab_d * optab;
+ 
+@@ -799,6 +805,15 @@
+ extern void emit_unop_insn (int, rtx, rtx, enum rtx_code);
+ extern bool maybe_emit_unop_insn (int, rtx, rtx, enum rtx_code);
+ 
++/* Find a widening optab even if it doesn't widen as much as we want.  */
++#define find_widening_optab_handler(A,B,C,D) \
++  find_widening_optab_handler_and_mode (A, B, C, D, NULL)
++extern enum insn_code find_widening_optab_handler_and_mode (optab,
++							    enum machine_mode,
++							    enum machine_mode,
++							    int,
++							    enum machine_mode *);
++
+ /* An extra flag to control optab_for_tree_code's behavior.  This is needed to
+    distinguish between machines with a vector shift that takes a scalar for the
+    shift amount vs. machines that take a vector for the shift amount.  */
+@@ -874,6 +889,23 @@
+ 			   + (int) CODE_FOR_nothing);
+ }
+ 
++/* Like optab_handler, but for widening_operations that have a TO_MODE and
++  a FROM_MODE.  */
++
++static inline enum insn_code
++widening_optab_handler (optab op, enum machine_mode to_mode,
++			enum machine_mode from_mode)
++{
++  if (to_mode == from_mode || from_mode == VOIDmode)
++    return optab_handler (op, to_mode);
++
++  if (op->widening)
++    return (enum insn_code) (op->widening->handlers[(int) to_mode][(int) from_mode].insn_code
++			     + (int) CODE_FOR_nothing);
++
++  return CODE_FOR_nothing;
++}
++
+ /* Record that insn CODE should be used to implement mode MODE of OP.  */
+ 
+ static inline void
+@@ -882,6 +914,26 @@
+   op->handlers[(int) mode].insn_code = (int) code - (int) CODE_FOR_nothing;
+ }
+ 
++/* Like set_optab_handler, but for widening operations that have a TO_MODE
++   and a FROM_MODE.  */
++
++static inline void
++set_widening_optab_handler (optab op, enum machine_mode to_mode,
++			    enum machine_mode from_mode, enum insn_code code)
++{
++  if (to_mode == from_mode)
++    set_optab_handler (op, to_mode, code);
++  else
++    {
++      if (op->widening == NULL)
++	op->widening = (struct widening_optab_handlers *)
++	      xcalloc (1, sizeof (struct widening_optab_handlers));
++
++      op->widening->handlers[(int) to_mode][(int) from_mode].insn_code
++	  = (int) code - (int) CODE_FOR_nothing;
++    }
++}
++
+ /* Return the insn used to perform conversion OP from mode FROM_MODE
+    to mode TO_MODE; return CODE_FOR_nothing if the target does not have
+    such an insn.  */
+
+=== added file 'gcc/testsuite/gcc.target/arm/no-wmla-1.c'
+--- old/gcc/testsuite/gcc.target/arm/no-wmla-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/no-wmla-1.c	2011-07-15 13:52:38 +0000
+@@ -0,0 +1,11 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++int
++foo (int a, short b, short c)
++{
++     int bc = b * c;
++        return a + (short)bc;
++}
++
++/* { dg-final { scan-assembler "mul" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-10.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-10.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-10.c	2011-07-18 12:56:20 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++unsigned long long
++foo (unsigned short a, unsigned short *b, unsigned short *c)
++{
++  return (unsigned)a + (unsigned long long)*b * (unsigned long long)*c;
++}
++
++/* { dg-final { scan-assembler "umlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-11.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-11.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-11.c	2011-07-22 15:46:42 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (int *b)
++{
++  return 10 * (long long)*b;
++}
++
++/* { dg-final { scan-assembler "smull" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-12.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-12.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-12.c	2011-07-22 15:46:42 +0000
+@@ -0,0 +1,11 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (int *b, int *c)
++{
++  int tmp = *b * *c;
++  return 10 + (long long)tmp;
++}
++
++/* { dg-final { scan-assembler "smlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-13.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-13.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-13.c	2011-07-22 15:46:42 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (int *a, int *b)
++{
++  return *a + (long long)*b * 10;
++}
++
++/* { dg-final { scan-assembler "smlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-5.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-5.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-5.c	2011-07-15 13:52:38 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (long long a, char *b, char *c)
++{
++  return a + *b * *c;
++}
++
++/* { dg-final { scan-assembler "umlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-6.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-6.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-6.c	2011-07-15 13:59:11 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (long long a, unsigned char *b, signed char *c)
++{
++  return a + (long long)*b * (long long)*c;
++}
++
++/* { dg-final { scan-assembler "smlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-7.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-7.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-7.c	2011-07-15 14:11:23 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++unsigned long long
++foo (unsigned long long a, unsigned char *b, unsigned short *c)
++{
++  return a + *b * *c;
++}
++
++/* { dg-final { scan-assembler "umlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-8.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-8.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-8.c	2011-07-15 14:16:54 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (long long a, int *b, int *c)
++{
++  return a + *b * *c;
++}
++
++/* { dg-final { scan-assembler "smlal" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-9.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-9.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-9.c	2011-07-15 14:22:39 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++long long
++foo (long long a, short *b, char *c)
++{
++  return a + *b * *c;
++}
++
++/* { dg-final { scan-assembler "smlalbb" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-bitfield-1.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-bitfield-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-bitfield-1.c	2011-07-15 13:44:50 +0000
+@@ -0,0 +1,17 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++struct bf
++{
++  int a : 3;
++  int b : 15;
++  int c : 3;
++};
++
++long long
++foo (long long a, struct bf b, struct bf c)
++{
++  return a + b.b * c.b;
++}
++
++/* { dg-final { scan-assembler "smlalbb" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/wmul-bitfield-2.c'
+--- old/gcc/testsuite/gcc.target/arm/wmul-bitfield-2.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/wmul-bitfield-2.c	2011-07-15 14:22:39 +0000
+@@ -0,0 +1,17 @@
++/* { dg-do compile } */
++/* { dg-options "-O2 -march=armv7-a" } */
++
++struct bf
++{
++  int a : 3;
++  unsigned int b : 15;
++  int c : 3;
++};
++
++long long
++foo (long long a, struct bf b, struct bf c)
++{
++  return a + b.b * c.c;
++}
++
++/* { dg-final { scan-assembler "smlalbb" } } */
+
+=== modified file 'gcc/tree-cfg.c'
+--- old/gcc/tree-cfg.c	2011-07-01 09:19:21 +0000
++++ new/gcc/tree-cfg.c	2011-07-15 13:44:50 +0000
+@@ -3574,7 +3574,7 @@
+     case WIDEN_MULT_EXPR:
+       if (TREE_CODE (lhs_type) != INTEGER_TYPE)
+ 	return true;
+-      return ((2 * TYPE_PRECISION (rhs1_type) != TYPE_PRECISION (lhs_type))
++      return ((2 * TYPE_PRECISION (rhs1_type) > TYPE_PRECISION (lhs_type))
+ 	      || (TYPE_PRECISION (rhs1_type) != TYPE_PRECISION (rhs2_type)));
+ 
+     case WIDEN_SUM_EXPR:
+@@ -3667,7 +3667,7 @@
+ 	   && !FIXED_POINT_TYPE_P (rhs1_type))
+ 	  || !useless_type_conversion_p (rhs1_type, rhs2_type)
+ 	  || !useless_type_conversion_p (lhs_type, rhs3_type)
+-	  || 2 * TYPE_PRECISION (rhs1_type) != TYPE_PRECISION (lhs_type)
++	  || 2 * TYPE_PRECISION (rhs1_type) > TYPE_PRECISION (lhs_type)
+ 	  || TYPE_PRECISION (rhs1_type) != TYPE_PRECISION (rhs2_type))
+ 	{
+ 	  error ("type mismatch in widening multiply-accumulate expression");
+
+=== modified file 'gcc/tree-ssa-math-opts.c'
+--- old/gcc/tree-ssa-math-opts.c	2011-03-11 16:36:16 +0000
++++ new/gcc/tree-ssa-math-opts.c	2011-08-09 10:26:48 +0000
+@@ -1266,39 +1266,67 @@
+  }
+ };
+ 
+-/* Return true if RHS is a suitable operand for a widening multiplication.
++/* Build a gimple assignment to cast VAL to TARGET.  Insert the statement
++   prior to GSI's current position, and return the fresh SSA name.  */
++
++static tree
++build_and_insert_cast (gimple_stmt_iterator *gsi, location_t loc,
++		       tree target, tree val)
++{
++  tree result = make_ssa_name (target, NULL);
++  gimple stmt = gimple_build_assign_with_ops (CONVERT_EXPR, result, val, NULL);
++  gimple_set_location (stmt, loc);
++  gsi_insert_before (gsi, stmt, GSI_SAME_STMT);
++  return result;
++}
++
++/* Return true if RHS is a suitable operand for a widening multiplication,
++   assuming a target type of TYPE.
+    There are two cases:
+ 
+-     - RHS makes some value twice as wide.  Store that value in *NEW_RHS_OUT
+-       if so, and store its type in *TYPE_OUT.
++     - RHS makes some value at least twice as wide.  Store that value
++       in *NEW_RHS_OUT if so, and store its type in *TYPE_OUT.
+ 
+      - RHS is an integer constant.  Store that value in *NEW_RHS_OUT if so,
+        but leave *TYPE_OUT untouched.  */
+ 
+ static bool
+-is_widening_mult_rhs_p (tree rhs, tree *type_out, tree *new_rhs_out)
++is_widening_mult_rhs_p (tree type, tree rhs, tree *type_out,
++			tree *new_rhs_out)
+ {
+   gimple stmt;
+-  tree type, type1, rhs1;
++  tree type1, rhs1;
+   enum tree_code rhs_code;
+ 
+   if (TREE_CODE (rhs) == SSA_NAME)
+     {
+-      type = TREE_TYPE (rhs);
+       stmt = SSA_NAME_DEF_STMT (rhs);
+-      if (!is_gimple_assign (stmt))
+-	return false;
+-
+-      rhs_code = gimple_assign_rhs_code (stmt);
+-      if (TREE_CODE (type) == INTEGER_TYPE
+-	  ? !CONVERT_EXPR_CODE_P (rhs_code)
+-	  : rhs_code != FIXED_CONVERT_EXPR)
+-	return false;
+-
+-      rhs1 = gimple_assign_rhs1 (stmt);
++      if (is_gimple_assign (stmt))
++	{
++	  rhs_code = gimple_assign_rhs_code (stmt);
++	  if (TREE_CODE (type) == INTEGER_TYPE
++	      ? !CONVERT_EXPR_CODE_P (rhs_code)
++	      : rhs_code != FIXED_CONVERT_EXPR)
++	    rhs1 = rhs;
++	  else
++	    {
++	      rhs1 = gimple_assign_rhs1 (stmt);
++
++	      if (TREE_CODE (rhs1) == INTEGER_CST)
++		{
++		  *new_rhs_out = rhs1;
++		  *type_out = NULL;
++		  return true;
++		}
++	    }
++	}
++      else
++	rhs1 = rhs;
++
+       type1 = TREE_TYPE (rhs1);
++
+       if (TREE_CODE (type1) != TREE_CODE (type)
+-	  || TYPE_PRECISION (type1) * 2 != TYPE_PRECISION (type))
++	  || TYPE_PRECISION (type1) * 2 > TYPE_PRECISION (type))
+ 	return false;
+ 
+       *new_rhs_out = rhs1;
+@@ -1316,28 +1344,27 @@
+   return false;
+ }
+ 
+-/* Return true if STMT performs a widening multiplication.  If so,
+-   store the unwidened types of the operands in *TYPE1_OUT and *TYPE2_OUT
+-   respectively.  Also fill *RHS1_OUT and *RHS2_OUT such that converting
+-   those operands to types *TYPE1_OUT and *TYPE2_OUT would give the
+-   operands of the multiplication.  */
++/* Return true if STMT performs a widening multiplication, assuming the
++   output type is TYPE.  If so, store the unwidened types of the operands
++   in *TYPE1_OUT and *TYPE2_OUT respectively.  Also fill *RHS1_OUT and
++   *RHS2_OUT such that converting those operands to types *TYPE1_OUT
++   and *TYPE2_OUT would give the operands of the multiplication.  */
+ 
+ static bool
+-is_widening_mult_p (gimple stmt,
++is_widening_mult_p (tree type, gimple stmt,
+ 		    tree *type1_out, tree *rhs1_out,
+ 		    tree *type2_out, tree *rhs2_out)
+ {
+-  tree type;
+-
+-  type = TREE_TYPE (gimple_assign_lhs (stmt));
+   if (TREE_CODE (type) != INTEGER_TYPE
+       && TREE_CODE (type) != FIXED_POINT_TYPE)
+     return false;
+ 
+-  if (!is_widening_mult_rhs_p (gimple_assign_rhs1 (stmt), type1_out, rhs1_out))
++  if (!is_widening_mult_rhs_p (type, gimple_assign_rhs1 (stmt), type1_out,
++			       rhs1_out))
+     return false;
+ 
+-  if (!is_widening_mult_rhs_p (gimple_assign_rhs2 (stmt), type2_out, rhs2_out))
++  if (!is_widening_mult_rhs_p (type, gimple_assign_rhs2 (stmt), type2_out,
++			       rhs2_out))
+     return false;
+ 
+   if (*type1_out == NULL)
+@@ -1354,6 +1381,18 @@
+       *type2_out = *type1_out;
+     }
+ 
++  /* Ensure that the larger of the two operands comes first. */
++  if (TYPE_PRECISION (*type1_out) < TYPE_PRECISION (*type2_out))
++    {
++      tree tmp;
++      tmp = *type1_out;
++      *type1_out = *type2_out;
++      *type2_out = tmp;
++      tmp = *rhs1_out;
++      *rhs1_out = *rhs2_out;
++      *rhs2_out = tmp;
++    }
++
+   return true;
+ }
+ 
+@@ -1362,31 +1401,100 @@
+    value is true iff we converted the statement.  */
+ 
+ static bool
+-convert_mult_to_widen (gimple stmt)
++convert_mult_to_widen (gimple stmt, gimple_stmt_iterator *gsi)
+ {
+-  tree lhs, rhs1, rhs2, type, type1, type2;
++  tree lhs, rhs1, rhs2, type, type1, type2, tmp = NULL;
+   enum insn_code handler;
++  enum machine_mode to_mode, from_mode, actual_mode;
++  optab op;
++  int actual_precision;
++  location_t loc = gimple_location (stmt);
++  bool from_unsigned1, from_unsigned2;
+ 
+   lhs = gimple_assign_lhs (stmt);
+   type = TREE_TYPE (lhs);
+   if (TREE_CODE (type) != INTEGER_TYPE)
+     return false;
+ 
+-  if (!is_widening_mult_p (stmt, &type1, &rhs1, &type2, &rhs2))
++  if (!is_widening_mult_p (type, stmt, &type1, &rhs1, &type2, &rhs2))
+     return false;
+ 
+-  if (TYPE_UNSIGNED (type1) && TYPE_UNSIGNED (type2))
+-    handler = optab_handler (umul_widen_optab, TYPE_MODE (type));
+-  else if (!TYPE_UNSIGNED (type1) && !TYPE_UNSIGNED (type2))
+-    handler = optab_handler (smul_widen_optab, TYPE_MODE (type));
++  to_mode = TYPE_MODE (type);
++  from_mode = TYPE_MODE (type1);
++  from_unsigned1 = TYPE_UNSIGNED (type1);
++  from_unsigned2 = TYPE_UNSIGNED (type2);
++
++  if (from_unsigned1 && from_unsigned2)
++    op = umul_widen_optab;
++  else if (!from_unsigned1 && !from_unsigned2)
++    op = smul_widen_optab;
+   else
+-    handler = optab_handler (usmul_widen_optab, TYPE_MODE (type));
++    op = usmul_widen_optab;
++
++  handler = find_widening_optab_handler_and_mode (op, to_mode, from_mode,
++						  0, &actual_mode);
+ 
+   if (handler == CODE_FOR_nothing)
+-    return false;
+-
+-  gimple_assign_set_rhs1 (stmt, fold_convert (type1, rhs1));
+-  gimple_assign_set_rhs2 (stmt, fold_convert (type2, rhs2));
++    {
++      if (op != smul_widen_optab)
++	{
++	  /* We can use a signed multiply with unsigned types as long as
++	     there is a wider mode to use, or it is the smaller of the two
++	     types that is unsigned.  Note that type1 >= type2, always.  */
++	  if ((TYPE_UNSIGNED (type1)
++	       && TYPE_PRECISION (type1) == GET_MODE_PRECISION (from_mode))
++	      || (TYPE_UNSIGNED (type2)
++		  && TYPE_PRECISION (type2) == GET_MODE_PRECISION (from_mode)))
++	    {
++	      from_mode = GET_MODE_WIDER_MODE (from_mode);
++	      if (GET_MODE_SIZE (to_mode) <= GET_MODE_SIZE (from_mode))
++		return false;
++	    }
++
++	  op = smul_widen_optab;
++	  handler = find_widening_optab_handler_and_mode (op, to_mode,
++							  from_mode, 0,
++							  &actual_mode);
++
++	  if (handler == CODE_FOR_nothing)
++	    return false;
++
++	  from_unsigned1 = from_unsigned2 = false;
++	}
++      else
++	return false;
++    }
++
++  /* Ensure that the inputs to the handler are in the correct precison
++     for the opcode.  This will be the full mode size.  */
++  actual_precision = GET_MODE_PRECISION (actual_mode);
++  if (actual_precision != TYPE_PRECISION (type1)
++      || from_unsigned1 != TYPE_UNSIGNED (type1))
++    {
++      tmp = create_tmp_var (build_nonstandard_integer_type
++				(actual_precision, from_unsigned1),
++			    NULL);
++      rhs1 = build_and_insert_cast (gsi, loc, tmp, rhs1);
++    }
++  if (actual_precision != TYPE_PRECISION (type2)
++      || from_unsigned2 != TYPE_UNSIGNED (type2))
++    {
++      /* Reuse the same type info, if possible.  */
++      if (!tmp || from_unsigned1 != from_unsigned2)
++	tmp = create_tmp_var (build_nonstandard_integer_type
++				(actual_precision, from_unsigned2),
++			      NULL);
++      rhs2 = build_and_insert_cast (gsi, loc, tmp, rhs2);
++    }
++
++  /* Handle constants.  */
++  if (TREE_CODE (rhs1) == INTEGER_CST)
++    rhs1 = fold_convert (type1, rhs1);
++  if (TREE_CODE (rhs2) == INTEGER_CST)
++    rhs2 = fold_convert (type2, rhs2);
++
++  gimple_assign_set_rhs1 (stmt, rhs1);
++  gimple_assign_set_rhs2 (stmt, rhs2);
+   gimple_assign_set_rhs_code (stmt, WIDEN_MULT_EXPR);
+   update_stmt (stmt);
+   return true;
+@@ -1403,11 +1511,17 @@
+ 			    enum tree_code code)
+ {
+   gimple rhs1_stmt = NULL, rhs2_stmt = NULL;
+-  tree type, type1, type2;
++  gimple conv1_stmt = NULL, conv2_stmt = NULL, conv_stmt;
++  tree type, type1, type2, optype, tmp = NULL;
+   tree lhs, rhs1, rhs2, mult_rhs1, mult_rhs2, add_rhs;
+   enum tree_code rhs1_code = ERROR_MARK, rhs2_code = ERROR_MARK;
+   optab this_optab;
+   enum tree_code wmult_code;
++  enum insn_code handler;
++  enum machine_mode to_mode, from_mode, actual_mode;
++  location_t loc = gimple_location (stmt);
++  int actual_precision;
++  bool from_unsigned1, from_unsigned2;
+ 
+   lhs = gimple_assign_lhs (stmt);
+   type = TREE_TYPE (lhs);
+@@ -1429,8 +1543,6 @@
+       if (is_gimple_assign (rhs1_stmt))
+ 	rhs1_code = gimple_assign_rhs_code (rhs1_stmt);
+     }
+-  else
+-    return false;
+ 
+   if (TREE_CODE (rhs2) == SSA_NAME)
+     {
+@@ -1438,57 +1550,160 @@
+       if (is_gimple_assign (rhs2_stmt))
+ 	rhs2_code = gimple_assign_rhs_code (rhs2_stmt);
+     }
+-  else
+-    return false;
+-
+-  if (code == PLUS_EXPR && rhs1_code == MULT_EXPR)
+-    {
+-      if (!is_widening_mult_p (rhs1_stmt, &type1, &mult_rhs1,
+-			       &type2, &mult_rhs2))
+-	return false;
+-      add_rhs = rhs2;
+-    }
+-  else if (rhs2_code == MULT_EXPR)
+-    {
+-      if (!is_widening_mult_p (rhs2_stmt, &type1, &mult_rhs1,
+-			       &type2, &mult_rhs2))
+-	return false;
+-      add_rhs = rhs1;
+-    }
+-  else if (code == PLUS_EXPR && rhs1_code == WIDEN_MULT_EXPR)
+-    {
+-      mult_rhs1 = gimple_assign_rhs1 (rhs1_stmt);
+-      mult_rhs2 = gimple_assign_rhs2 (rhs1_stmt);
+-      type1 = TREE_TYPE (mult_rhs1);
+-      type2 = TREE_TYPE (mult_rhs2);
+-      add_rhs = rhs2;
+-    }
+-  else if (rhs2_code == WIDEN_MULT_EXPR)
+-    {
+-      mult_rhs1 = gimple_assign_rhs1 (rhs2_stmt);
+-      mult_rhs2 = gimple_assign_rhs2 (rhs2_stmt);
+-      type1 = TREE_TYPE (mult_rhs1);
+-      type2 = TREE_TYPE (mult_rhs2);
+-      add_rhs = rhs1;
+-    }
+-  else
+-    return false;
+-
+-  if (TYPE_UNSIGNED (type1) != TYPE_UNSIGNED (type2))
+-    return false;
++
++  /* Allow for one conversion statement between the multiply
++     and addition/subtraction statement.  If there are more than
++     one conversions then we assume they would invalidate this
++     transformation.  If that's not the case then they should have
++     been folded before now.  */
++  if (CONVERT_EXPR_CODE_P (rhs1_code))
++    {
++      conv1_stmt = rhs1_stmt;
++      rhs1 = gimple_assign_rhs1 (rhs1_stmt);
++      if (TREE_CODE (rhs1) == SSA_NAME)
++	{
++	  rhs1_stmt = SSA_NAME_DEF_STMT (rhs1);
++	  if (is_gimple_assign (rhs1_stmt))
++	    rhs1_code = gimple_assign_rhs_code (rhs1_stmt);
++	}
++      else
++	return false;
++    }
++  if (CONVERT_EXPR_CODE_P (rhs2_code))
++    {
++      conv2_stmt = rhs2_stmt;
++      rhs2 = gimple_assign_rhs1 (rhs2_stmt);
++      if (TREE_CODE (rhs2) == SSA_NAME)
++	{
++	  rhs2_stmt = SSA_NAME_DEF_STMT (rhs2);
++	  if (is_gimple_assign (rhs2_stmt))
++	    rhs2_code = gimple_assign_rhs_code (rhs2_stmt);
++	}
++      else
++	return false;
++    }
++
++  /* If code is WIDEN_MULT_EXPR then it would seem unnecessary to call
++     is_widening_mult_p, but we still need the rhs returns.
++
++     It might also appear that it would be sufficient to use the existing
++     operands of the widening multiply, but that would limit the choice of
++     multiply-and-accumulate instructions.  */
++  if (code == PLUS_EXPR
++      && (rhs1_code == MULT_EXPR || rhs1_code == WIDEN_MULT_EXPR))
++    {
++      if (!is_widening_mult_p (type, rhs1_stmt, &type1, &mult_rhs1,
++			       &type2, &mult_rhs2))
++	return false;
++      add_rhs = rhs2;
++      conv_stmt = conv1_stmt;
++    }
++  else if (rhs2_code == MULT_EXPR || rhs2_code == WIDEN_MULT_EXPR)
++    {
++      if (!is_widening_mult_p (type, rhs2_stmt, &type1, &mult_rhs1,
++			       &type2, &mult_rhs2))
++	return false;
++      add_rhs = rhs1;
++      conv_stmt = conv2_stmt;
++    }
++  else
++    return false;
++
++  to_mode = TYPE_MODE (type);
++  from_mode = TYPE_MODE (type1);
++  from_unsigned1 = TYPE_UNSIGNED (type1);
++  from_unsigned2 = TYPE_UNSIGNED (type2);
++
++  /* There's no such thing as a mixed sign madd yet, so use a wider mode.  */
++  if (from_unsigned1 != from_unsigned2)
++    {
++      /* We can use a signed multiply with unsigned types as long as
++	 there is a wider mode to use, or it is the smaller of the two
++	 types that is unsigned.  Note that type1 >= type2, always.  */
++      if ((from_unsigned1
++	   && TYPE_PRECISION (type1) == GET_MODE_PRECISION (from_mode))
++	  || (from_unsigned2
++	      && TYPE_PRECISION (type2) == GET_MODE_PRECISION (from_mode)))
++	{
++	  from_mode = GET_MODE_WIDER_MODE (from_mode);
++	  if (GET_MODE_SIZE (from_mode) >= GET_MODE_SIZE (to_mode))
++	    return false;
++	}
++
++      from_unsigned1 = from_unsigned2 = false;
++    }
++
++  /* If there was a conversion between the multiply and addition
++     then we need to make sure it fits a multiply-and-accumulate.
++     The should be a single mode change which does not change the
++     value.  */
++  if (conv_stmt)
++    {
++      /* We use the original, unmodified data types for this.  */
++      tree from_type = TREE_TYPE (gimple_assign_rhs1 (conv_stmt));
++      tree to_type = TREE_TYPE (gimple_assign_lhs (conv_stmt));
++      int data_size = TYPE_PRECISION (type1) + TYPE_PRECISION (type2);
++      bool is_unsigned = TYPE_UNSIGNED (type1) && TYPE_UNSIGNED (type2);
++
++      if (TYPE_PRECISION (from_type) > TYPE_PRECISION (to_type))
++	{
++	  /* Conversion is a truncate.  */
++	  if (TYPE_PRECISION (to_type) < data_size)
++	    return false;
++	}
++      else if (TYPE_PRECISION (from_type) < TYPE_PRECISION (to_type))
++	{
++	  /* Conversion is an extend.  Check it's the right sort.  */
++	  if (TYPE_UNSIGNED (from_type) != is_unsigned
++	      && !(is_unsigned && TYPE_PRECISION (from_type) > data_size))
++	    return false;
++	}
++      /* else convert is a no-op for our purposes.  */
++    }
+ 
+   /* Verify that the machine can perform a widening multiply
+      accumulate in this mode/signedness combination, otherwise
+      this transformation is likely to pessimize code.  */
+-  this_optab = optab_for_tree_code (wmult_code, type1, optab_default);
+-  if (optab_handler (this_optab, TYPE_MODE (type)) == CODE_FOR_nothing)
++  optype = build_nonstandard_integer_type (from_mode, from_unsigned1);
++  this_optab = optab_for_tree_code (wmult_code, optype, optab_default);
++  handler = find_widening_optab_handler_and_mode (this_optab, to_mode,
++						  from_mode, 0, &actual_mode);
++
++  if (handler == CODE_FOR_nothing)
+     return false;
+ 
+-  /* ??? May need some type verification here?  */
+-
+-  gimple_assign_set_rhs_with_ops_1 (gsi, wmult_code,
+-				    fold_convert (type1, mult_rhs1),
+-				    fold_convert (type2, mult_rhs2),
++  /* Ensure that the inputs to the handler are in the correct precison
++     for the opcode.  This will be the full mode size.  */
++  actual_precision = GET_MODE_PRECISION (actual_mode);
++  if (actual_precision != TYPE_PRECISION (type1)
++      || from_unsigned1 != TYPE_UNSIGNED (type1))
++    {
++      tmp = create_tmp_var (build_nonstandard_integer_type
++				(actual_precision, from_unsigned1),
++			    NULL);
++      mult_rhs1 = build_and_insert_cast (gsi, loc, tmp, mult_rhs1);
++    }
++  if (actual_precision != TYPE_PRECISION (type2)
++      || from_unsigned2 != TYPE_UNSIGNED (type2))
++    {
++      if (!tmp || from_unsigned1 != from_unsigned2)
++	tmp = create_tmp_var (build_nonstandard_integer_type
++				(actual_precision, from_unsigned2),
++			      NULL);
++      mult_rhs2 = build_and_insert_cast (gsi, loc, tmp, mult_rhs2);
++    }
++
++  if (!useless_type_conversion_p (type, TREE_TYPE (add_rhs)))
++    add_rhs = build_and_insert_cast (gsi, loc, create_tmp_var (type, NULL),
++				     add_rhs);
++
++  /* Handle constants.  */
++  if (TREE_CODE (mult_rhs1) == INTEGER_CST)
++    rhs1 = fold_convert (type1, mult_rhs1);
++  if (TREE_CODE (mult_rhs2) == INTEGER_CST)
++    rhs2 = fold_convert (type2, mult_rhs2);
++
++  gimple_assign_set_rhs_with_ops_1 (gsi, wmult_code, mult_rhs1, mult_rhs2,
+ 				    add_rhs);
+   update_stmt (gsi_stmt (*gsi));
+   return true;
+@@ -1696,7 +1911,7 @@
+ 	      switch (code)
+ 		{
+ 		case MULT_EXPR:
+-		  if (!convert_mult_to_widen (stmt)
++		  if (!convert_mult_to_widen (stmt, &gsi)
+ 		      && convert_mult_to_fma (stmt,
+ 					      gimple_assign_rhs1 (stmt),
+ 					      gimple_assign_rhs2 (stmt)))
+

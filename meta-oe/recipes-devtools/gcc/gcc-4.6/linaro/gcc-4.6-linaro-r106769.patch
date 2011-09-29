@@ -50,8 +50,10 @@
 	* gcc.dg/vect/vect-widen-mult-half.c: New test.
 
 === added file 'gcc/testsuite/gcc.dg/vect/slp-widen-mult-half.c'
---- old/gcc/testsuite/gcc.dg/vect/slp-widen-mult-half.c	1970-01-01 00:00:00 +0000
-+++ new/gcc/testsuite/gcc.dg/vect/slp-widen-mult-half.c	2011-07-06 12:04:10 +0000
+Index: gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/slp-widen-mult-half.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/slp-widen-mult-half.c	2011-09-16 20:32:57.279056697 -0700
 @@ -0,0 +1,52 @@
 +/* { dg-require-effective-target vect_int } */
 +
@@ -105,10 +107,10 @@
 +/* { dg-final { scan-tree-dump-times "pattern recognized" 2 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
 +/* { dg-final { cleanup-tree-dump "vect" } } */
 +
-
-=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-mult-half-u8.c'
---- old/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half-u8.c	1970-01-01 00:00:00 +0000
-+++ new/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half-u8.c	2011-07-06 12:04:10 +0000
+Index: gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half-u8.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half-u8.c	2011-09-16 20:32:57.279056697 -0700
 @@ -0,0 +1,59 @@
 +/* { dg-require-effective-target vect_int } */
 +
@@ -169,10 +171,10 @@
 +/* { dg-final { scan-tree-dump-times "pattern recognized" 2 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
 +/* { dg-final { cleanup-tree-dump "vect" } } */
 +
-
-=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-mult-half.c'
---- old/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half.c	1970-01-01 00:00:00 +0000
-+++ new/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half.c	2011-07-06 12:04:10 +0000
+Index: gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/vect-widen-mult-half.c	2011-09-16 20:32:57.279056697 -0700
 @@ -0,0 +1,49 @@
 +/* { dg-require-effective-target vect_int } */
 +
@@ -223,10 +225,10 @@
 +/* { dg-final { scan-tree-dump-times "pattern recognized" 1 "vect" { target vect_widen_mult_hi_to_si_pattern } } } */
 +/* { dg-final { cleanup-tree-dump "vect" } } */
 +
-
-=== modified file 'gcc/tree-vect-loop.c'
---- old/gcc/tree-vect-loop.c	2011-07-04 11:13:51 +0000
-+++ new/gcc/tree-vect-loop.c	2011-07-11 11:02:55 +0000
+Index: gcc-4_6-branch/gcc/tree-vect-loop.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vect-loop.c	2011-09-16 20:31:52.000000000 -0700
++++ gcc-4_6-branch/gcc/tree-vect-loop.c	2011-09-16 20:32:57.289056641 -0700
 @@ -181,6 +181,8 @@
    stmt_vec_info stmt_info;
    int i;
@@ -246,7 +248,6 @@
 -	  tree vf_vectype;
 -	  gimple stmt = gsi_stmt (si), pattern_stmt;
 -	  stmt_info = vinfo_for_stmt (stmt);
--
 +          tree vf_vectype;
 +
 +          if (analyze_pattern_stmt)
@@ -256,7 +257,7 @@
 +            }
 +          else
 +            stmt = gsi_stmt (si);
-+
+ 
 +         stmt_info = vinfo_for_stmt (stmt);
 +              
  	  if (vect_print_dump_info (REPORT_DETAILS))
@@ -376,10 +377,10 @@
  	}		        /* stmts in BB */
      }				/* BBs in loop */
  
-
-=== modified file 'gcc/tree-vect-patterns.c'
---- old/gcc/tree-vect-patterns.c	2011-06-22 12:10:44 +0000
-+++ new/gcc/tree-vect-patterns.c	2011-07-06 12:04:10 +0000
+Index: gcc-4_6-branch/gcc/tree-vect-patterns.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vect-patterns.c	2011-09-16 20:31:52.000000000 -0700
++++ gcc-4_6-branch/gcc/tree-vect-patterns.c	2011-09-16 20:32:57.289056641 -0700
 @@ -39,10 +39,13 @@
  #include "diagnostic-core.h"
  
@@ -552,21 +553,6 @@
       S5  prod_T = a_T * CONST;
  
 -    Input:
--
--    * LAST_STMT: A stmt from which the pattern search begins.  In the example,
--    when this function is called with S5, the pattern {S3,S4,S5,(S6)} is
--    detected.
--
--    Output:
--
--    * TYPE_IN: The type of the input arguments to the pattern.
--
--    * TYPE_OUT: The type of the output of this pattern.
--
--    * Return value: A new stmt that will be used to replace the sequence of
--    stmts that constitute the pattern.  In this case it will be:
--         WIDEN_MULT <a_t, b_t>
-- */
 +   A special case of multiplication by constants is when 'TYPE' is 4 times
 +   bigger than 'type', but CONST fits an intermediate type 2 times smaller
 +   than 'TYPE'.  In that case we create an additional pattern stmt for S3
@@ -584,20 +570,30 @@
 +           '--> prod_T' = a_it w* CONST;
 +
 +   Input/Output:
-+
+ 
+-    * LAST_STMT: A stmt from which the pattern search begins.  In the example,
+-    when this function is called with S5, the pattern {S3,S4,S5,(S6)} is
+-    detected.
 +   * STMTS: Contains a stmt from which the pattern search begins.  In the
 +   example, when this function is called with S5, the pattern {S3,S4,S5,(S6)}
 +   is detected.  In case of unsigned widen-mult, the original stmt (S5) is
 +   replaced with S6 in STMTS.  In case of multiplication by a constant
 +   of an intermediate type (the last case above), STMTS also contains S3
 +   (inserted before S5).
-+
+ 
+-    Output:
 +   Output:
-+
+ 
+-    * TYPE_IN: The type of the input arguments to the pattern.
 +   * TYPE_IN: The type of the input arguments to the pattern.
-+
+ 
+-    * TYPE_OUT: The type of the output of this pattern.
 +   * TYPE_OUT: The type of the output of this pattern.
-+
+ 
+-    * Return value: A new stmt that will be used to replace the sequence of
+-    stmts that constitute the pattern.  In this case it will be:
+-         WIDEN_MULT <a_t, b_t>
+- */
 +   * Return value: A new stmt that will be used to replace the sequence of
 +   stmts that constitute the pattern.  In this case it will be:
 +        WIDEN_MULT <a_t, b_t>
@@ -932,10 +928,10 @@
  
    if (vect_print_dump_info (REPORT_DETAILS))
      fprintf (vect_dump, "=== vect_pattern_recog ===");
-
-=== modified file 'gcc/tree-vect-slp.c'
---- old/gcc/tree-vect-slp.c	2011-06-19 10:59:13 +0000
-+++ new/gcc/tree-vect-slp.c	2011-07-06 12:04:10 +0000
+Index: gcc-4_6-branch/gcc/tree-vect-slp.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vect-slp.c	2011-09-16 20:31:52.000000000 -0700
++++ gcc-4_6-branch/gcc/tree-vect-slp.c	2011-09-16 20:32:57.289056641 -0700
 @@ -152,7 +152,9 @@
        if (loop && def_stmt && gimple_bb (def_stmt)
            && flow_bb_inside_loop_p (loop, gimple_bb (def_stmt))
@@ -947,10 +943,10 @@
          {
            if (!*first_stmt_dt0)
              *pattern0 = true;
-
-=== modified file 'gcc/tree-vect-stmts.c'
---- old/gcc/tree-vect-stmts.c	2011-06-22 06:21:13 +0000
-+++ new/gcc/tree-vect-stmts.c	2011-07-06 12:04:10 +0000
+Index: gcc-4_6-branch/gcc/tree-vect-stmts.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vect-stmts.c	2011-09-16 20:31:52.000000000 -0700
++++ gcc-4_6-branch/gcc/tree-vect-stmts.c	2011-09-16 20:32:57.289056641 -0700
 @@ -126,33 +126,72 @@
  
  static void
@@ -974,21 +970,6 @@
    if (STMT_VINFO_IN_PATTERN_P (stmt_info))
      {
 -      gimple pattern_stmt;
--
--      /* This is the last stmt in a sequence that was detected as a
--         pattern that can potentially be vectorized.  Don't mark the stmt
--         as relevant/live because it's not going to be vectorized.
--         Instead mark the pattern-stmt that replaces it.  */
--
--      pattern_stmt = STMT_VINFO_RELATED_STMT (stmt_info);
--
--      if (vect_print_dump_info (REPORT_DETAILS))
--        fprintf (vect_dump, "last stmt in pattern. don't mark relevant/live.");
--      stmt_info = vinfo_for_stmt (pattern_stmt);
--      gcc_assert (STMT_VINFO_RELATED_STMT (stmt_info) == stmt);
--      save_relevant = STMT_VINFO_RELEVANT (stmt_info);
--      save_live_p = STMT_VINFO_LIVE_P (stmt_info);
--      stmt = pattern_stmt;
 +      bool found = false;
 +      if (!used_in_pattern)
 +        {
@@ -1026,7 +1007,21 @@
 +             pattern that can potentially be vectorized.  Don't mark the stmt
 +             as relevant/live because it's not going to be vectorized.
 +             Instead mark the pattern-stmt that replaces it.  */
-+
+ 
+-      /* This is the last stmt in a sequence that was detected as a
+-         pattern that can potentially be vectorized.  Don't mark the stmt
+-         as relevant/live because it's not going to be vectorized.
+-         Instead mark the pattern-stmt that replaces it.  */
+-
+-      pattern_stmt = STMT_VINFO_RELATED_STMT (stmt_info);
+-
+-      if (vect_print_dump_info (REPORT_DETAILS))
+-        fprintf (vect_dump, "last stmt in pattern. don't mark relevant/live.");
+-      stmt_info = vinfo_for_stmt (pattern_stmt);
+-      gcc_assert (STMT_VINFO_RELATED_STMT (stmt_info) == stmt);
+-      save_relevant = STMT_VINFO_RELEVANT (stmt_info);
+-      save_live_p = STMT_VINFO_LIVE_P (stmt_info);
+-      stmt = pattern_stmt;
 +          pattern_stmt = STMT_VINFO_RELATED_STMT (stmt_info);
 +
 +          if (vect_print_dump_info (REPORT_DETAILS))
@@ -1119,9 +1114,6 @@
 -                      VEC_free (gimple, heap, worklist);
 -                      return false;
 -                    }
--                }
--              else
--                return false;
 +                    break;
 +                   
 +                  case GIMPLE_BINARY_RHS:
@@ -1154,7 +1146,9 @@
 +                  
 +                  default: 
 +                    return false;
-+                }
+                 }
+-              else
+-                return false;
              }
            else if (is_gimple_call (stmt))
              {
@@ -1173,7 +1167,7 @@
          gcc_assert (vec_stmt);
  	if (gimple_code (vec_stmt) == GIMPLE_PHI)
  	  vec_oprnd = PHI_RESULT (vec_stmt);
-@@ -4886,6 +4946,7 @@
+@@ -4894,6 +4954,7 @@
    enum vect_relevant relevance = STMT_VINFO_RELEVANT (stmt_info);
    bool ok;
    tree scalar_type, vectype;
@@ -1181,14 +1175,13 @@
  
    if (vect_print_dump_info (REPORT_DETAILS))
      {
-@@ -4907,16 +4968,22 @@
+@@ -4915,16 +4976,22 @@
       - any LABEL_EXPRs in the loop
       - computations that are used only for array indexing or loop control.
       In basic blocks we only analyze statements that are a part of some SLP
 -     instance, therefore, all the statements are relevant.  */
--
 +     instance, therefore, all the statements are relevant.  
-+
+ 
 +     Pattern statement need to be analyzed instead of the original statement
 +     if the original statement is not relevant. Otherwise, we analyze both
 +     statements.  */
@@ -1207,7 +1200,7 @@
            stmt = pattern_stmt;
            stmt_info = vinfo_for_stmt (pattern_stmt);
            if (vect_print_dump_info (REPORT_DETAILS))
-@@ -4933,6 +5000,21 @@
+@@ -4941,6 +5008,21 @@
            return true;
          }
      }
@@ -1229,42 +1222,7 @@
  
    switch (STMT_VINFO_DEF_TYPE (stmt_info))
      {
-@@ -5066,7 +5148,6 @@
-   bool is_store = false;
-   gimple vec_stmt = NULL;
-   stmt_vec_info stmt_info = vinfo_for_stmt (stmt);
--  gimple orig_stmt_in_pattern, orig_scalar_stmt = stmt;
-   bool done;
- 
-   switch (STMT_VINFO_TYPE (stmt_info))
-@@ -5205,25 +5286,7 @@
-     }
- 
-   if (vec_stmt)
--    {
--      STMT_VINFO_VEC_STMT (stmt_info) = vec_stmt;
--      orig_stmt_in_pattern = STMT_VINFO_RELATED_STMT (stmt_info);
--      if (orig_stmt_in_pattern)
--	{
--	  stmt_vec_info stmt_vinfo = vinfo_for_stmt (orig_stmt_in_pattern);
--	  /* STMT was inserted by the vectorizer to replace a computation idiom.
--	     ORIG_STMT_IN_PATTERN is a stmt in the original sequence that
--	     computed this idiom.  We need to record a pointer to VEC_STMT in
--	     the stmt_info of ORIG_STMT_IN_PATTERN.  See more details in the
--	     documentation of vect_pattern_recog.  */
--	  if (STMT_VINFO_IN_PATTERN_P (stmt_vinfo))
--	    {
--	      gcc_assert (STMT_VINFO_RELATED_STMT (stmt_vinfo)
--                           == orig_scalar_stmt);
--	      STMT_VINFO_VEC_STMT (stmt_vinfo) = vec_stmt;
--	    }
--	}
--    }
-+    STMT_VINFO_VEC_STMT (stmt_info) = vec_stmt;
- 
-   return is_store;
- }
-@@ -5601,8 +5664,12 @@
+@@ -5605,8 +5687,12 @@
        || *dt == vect_nested_cycle)
      {
        stmt_vec_info stmt_info = vinfo_for_stmt (*def_stmt);
@@ -1278,10 +1236,10 @@
        *vectype = STMT_VINFO_VECTYPE (stmt_info);
        gcc_assert (*vectype != NULL_TREE);
      }
-
-=== modified file 'gcc/tree-vectorizer.h'
---- old/gcc/tree-vectorizer.h	2011-07-04 11:13:51 +0000
-+++ new/gcc/tree-vectorizer.h	2011-07-11 11:02:55 +0000
+Index: gcc-4_6-branch/gcc/tree-vectorizer.h
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vectorizer.h	2011-09-16 20:31:52.000000000 -0700
++++ gcc-4_6-branch/gcc/tree-vectorizer.h	2011-09-16 20:32:57.299056515 -0700
 @@ -890,7 +890,7 @@
  /* Pattern recognition functions.
     Additional pattern recognition functions can (and will) be added
@@ -1291,4 +1249,3 @@
  #define NUM_PATTERNS 4
  void vect_pattern_recog (loop_vec_info);
  
-

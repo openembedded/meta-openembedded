@@ -1,0 +1,92 @@
+2011-09-12  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	gcc/testsuite/
+	* gcc.target/arm/pr50099.c: Fix testcase from previous commit.
+
+2011-09-12  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	LP:838994
+	gcc/
+	Backport from mainline.
+
+        2011-09-06  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+        PR target/50099
+	* config/arm/iterators.md (qhs_zextenddi_cstr): New.
+	(qhs_zextenddi_op): New.
+	* config/arm/arm.md ("zero_extend<mode>di2"): Use them.
+	* config/arm/predicates.md ("arm_extendqisi_mem_op"):
+	Distinguish between ARM and Thumb2 states.
+
+	gcc/testsuite/
+	* gcc.target/arm/pr50099.c: New test.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-08-25 13:26:58 +0000
++++ new/gcc/config/arm/arm.md	2011-09-12 12:32:29 +0000
+@@ -4136,8 +4136,8 @@
+ 
+ (define_insn "zero_extend<mode>di2"
+   [(set (match_operand:DI 0 "s_register_operand" "=r")
+-        (zero_extend:DI (match_operand:QHSI 1 "<qhs_extenddi_op>"
+-					    "<qhs_extenddi_cstr>")))]
++        (zero_extend:DI (match_operand:QHSI 1 "<qhs_zextenddi_op>"
++					    "<qhs_zextenddi_cstr>")))]
+   "TARGET_32BIT <qhs_zextenddi_cond>"
+   "#"
+   [(set_attr "length" "8")
+
+=== modified file 'gcc/config/arm/iterators.md'
+--- old/gcc/config/arm/iterators.md	2011-05-03 15:14:56 +0000
++++ new/gcc/config/arm/iterators.md	2011-09-06 14:29:24 +0000
+@@ -379,10 +379,14 @@
+ (define_mode_attr qhs_zextenddi_cond [(SI "") (HI "&& arm_arch6") (QI "")])
+ (define_mode_attr qhs_sextenddi_cond [(SI "") (HI "&& arm_arch6")
+ 				      (QI "&& arm_arch6")])
++(define_mode_attr qhs_zextenddi_op [(SI "s_register_operand")
++				   (HI "nonimmediate_operand")
++				   (QI "nonimmediate_operand")])
+ (define_mode_attr qhs_extenddi_op [(SI "s_register_operand")
+ 				   (HI "nonimmediate_operand")
+-				   (QI "nonimmediate_operand")])
+-(define_mode_attr qhs_extenddi_cstr [(SI "r") (HI "rm") (QI "rm")])
++				   (QI "arm_reg_or_extendqisi_mem_op")])
++(define_mode_attr qhs_extenddi_cstr [(SI "r") (HI "rm") (QI "rUq")])
++(define_mode_attr qhs_zextenddi_cstr [(SI "r") (HI "rm") (QI "rm")])
+ 
+ ;;----------------------------------------------------------------------------
+ ;; Code attributes
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-09-12 11:24:34 +0000
++++ new/gcc/config/arm/predicates.md	2011-09-12 12:32:29 +0000
+@@ -289,8 +289,11 @@
+ 
+ (define_special_predicate "arm_extendqisi_mem_op"
+   (and (match_operand 0 "memory_operand")
+-       (match_test "arm_legitimate_address_outer_p (mode, XEXP (op, 0),
+-						    SIGN_EXTEND, 0)")))
++       (match_test "TARGET_ARM ? arm_legitimate_address_outer_p (mode,
++                                                                 XEXP (op, 0),
++						                 SIGN_EXTEND,
++								 0)
++                               : memory_address_p (QImode, XEXP (op, 0))")))
+ 
+ (define_special_predicate "arm_reg_or_extendqisi_mem_op"
+   (ior (match_operand 0 "arm_extendqisi_mem_op")
+
+=== added file 'gcc/testsuite/gcc.target/arm/pr50099.c'
+--- old/gcc/testsuite/gcc.target/arm/pr50099.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/pr50099.c	2011-09-09 16:42:45 +0000
+@@ -0,0 +1,10 @@
++/* { dg-do compile } */
++/* { dg-options "-O2" } */
++
++long long foo (signed char * arg)
++{
++  long long temp_1;
++
++  temp_1 = arg[256]; 
++  return temp_1;
++}
+
