@@ -1,0 +1,11 @@
+diff -uNr pango-1.29.4.orig/Makefile.am pango-1.29.4/Makefile.am
+--- pango-1.29.4.orig/Makefile.am	2011-08-16 03:11:08.000000000 +0200
++++ pango-1.29.4/Makefile.am	2011-09-30 16:11:53.792567952 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to create Makefile.in.
+ 
+-SUBDIRS= pango modules pango-view examples docs tools tests build
++SUBDIRS= pango modules pango-view examples docs tools build
+ 
+ EXTRA_DIST = 			\
+ 	autogen.sh		\
