@@ -21,7 +21,7 @@ do_compile_append() {
                   elementary.pc
 }
 
-PACKAGES =+ "${PN}-configs ${PN}-accessibility"
+PACKAGES += "${PN}-configs ${PN}-accessibility"
 
 RDEPENDS_${PN} = "\
   ${PN}-themes \
