@@ -6,13 +6,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
 SRCNAME = "Cython"
 BBCLASSEXTEND = "native"
-NATIVE_INSTALL_WORKS = "1"
-DEPENDS = "python"
 
 SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-SRC_URI[md5sum] = "ed2ec5e0df60a6b8e500bedf93bb1feb"
-SRC_URI[sha256sum] = "a30d5e26c82ec65d65703c7cf312161a21b30339addc1a42d3b2965dea254ca6"
+SRC_URI[md5sum] = "171021b3845c9ca8bd6d8185b3cde664"
+SRC_URI[sha256sum] = "248123f2f02f2701a28d9452132ac835533b396a273cda9d361cb65c26067edc"
 
 inherit distutils
