@@ -1,0 +1,11 @@
+diff -uNr epdf.orig/src/lib/poppler/epdf_poppler_postscript.cpp epdf/src/lib/poppler/epdf_poppler_postscript.cpp
+--- epdf.orig/src/lib/poppler/epdf_poppler_postscript.cpp	2011-09-30 20:50:03.580218578 +0200
++++ epdf/src/lib/poppler/epdf_poppler_postscript.cpp	2011-09-30 20:49:11.573219667 +0200
+@@ -84,6 +84,7 @@
+ 
+   // FIXME: fix postscript title
+   ps_dev = new PSOutputDev (postscript->filename,
++                            postscript->pdfdoc,
+                             postscript->pdfdoc->getXRef(),
+                             postscript->pdfdoc->getCatalog(),
+ 			    "PS title",
