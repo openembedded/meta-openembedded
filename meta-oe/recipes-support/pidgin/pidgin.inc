@@ -3,7 +3,7 @@ SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus"
-INC_PR = "r0"
+INC_PR = "r1"
 
 inherit autotools gettext pkgconfig gconf perlnative
 
@@ -37,6 +37,7 @@ FILES_libpurple-dev = "${libdir}/libpurple*.la \
                        ${libdir}/purple-2/*.la \
                        ${libdir}/purple-2/libjabber.so \
                        ${libdir}/purple-2/liboscar.so \
+                       ${libdir}/purple-2/libymsg.so \
                        ${datadir}/aclocal"
 FILES_libpurple-dbg += "${libdir}/.debug/libpurple* \
                         ${libdir}/purple-2/.debug"
