@@ -6,9 +6,6 @@ DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native pyth
 
 inherit gtk-icon-cache pkgconfig
 
-SRC_URI = "http://archive.xfce.org/src/apps/midori/0.2/midori-${PV}.tar.bz2;name=midori \
-"
-
 do_configure() {
     sed -i -e 's:, shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript
     ./configure \
@@ -26,6 +23,8 @@ do_configure() {
             --mandir=${mandir} \
             --disable-hildon \
 }
+
+LDFLAGS_append = " -ljavascriptcoregtk-1.0 "
 
 do_install() {
 	oe_runmake DESTDIR=${D} install
