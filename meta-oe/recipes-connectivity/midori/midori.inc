@@ -30,4 +30,6 @@ do_install() {
 	oe_runmake DESTDIR=${D} install
 }
 
+RRECOMMENDS_${PN} += "glib-networking"
+
 TARGET_CC_ARCH += "${LDFLAGS}"
