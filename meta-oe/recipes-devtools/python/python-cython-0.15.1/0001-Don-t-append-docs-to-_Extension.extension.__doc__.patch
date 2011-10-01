@@ -1,0 +1,27 @@
+From bfed128dfe9551a3a40b1ac4269f18ecfeac80a9 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 1 Oct 2011 11:46:30 +0200
+Subject: [PATCH] Don't append docs to _Extension.extension.__doc__
+
+* here it fails with TypeError: unsupported operand type(s) for +: 'NoneType' and 'str' in setup.py
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Cython/Distutils/extension.py |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+
+diff --git a/Cython/Distutils/extension.py b/Cython/Distutils/extension.py
+index a5a6638..e76c1e7 100644
+--- a/Cython/Distutils/extension.py
++++ b/Cython/Distutils/extension.py
+@@ -16,7 +16,6 @@ except ImportError:
+     warnings = None
+ 
+ class Extension(_Extension.Extension):
+-    _Extension.Extension.__doc__ + \
+     """pyrex_include_dirs : [string]
+         list of directories to search for Pyrex header files (.pxd) (in
+         Unix form for portability)
+-- 
+1.7.6.1
+
