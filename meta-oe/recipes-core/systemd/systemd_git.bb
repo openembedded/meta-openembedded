@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "docbook-sgml-dtd-4.1-native gperf-native acl readline udev dbus libcap libcgroup"
+DEPENDS = "docbook-sgml-dtd-4.1-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -14,14 +14,14 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r1"
+PR = "r4"
 
 inherit autotools vala perlnative
 
-SRCREV = "7c83341a593160e2b4739bdb8a1ad76b21bbdf9e"
+SRCREV = "798e258d301ac237cb1d72b5fc4b19ee900d6f7d"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
-           file://0003-analyze-draw-kernel-boot-time-as-well.patch \
+           file://0001-disable-xsltproc-completely.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
@@ -43,9 +43,9 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-gtk \
                "
 
+# There's no docbook-xsl-native, so for the xsltproc check to false
 do_configure_prepend() {
-	# avoid network access
-	sed -i -e /nonet/d Makefile.am 
+	sed -i /xsltproc/d configure.ac
 }
 
 do_install() {
