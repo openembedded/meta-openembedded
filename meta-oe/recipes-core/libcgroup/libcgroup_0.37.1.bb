@@ -16,3 +16,5 @@ EXTRA_OECONF = "${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam-module-
 PACKAGES =+ "cgroups-pam-plugin"
 FILES_cgroups-pam-plugin = "${base_libdir}/security/pam_cgroup.so*"
 
+# We really need the symlink so :(
+ERROR_QA = "debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
