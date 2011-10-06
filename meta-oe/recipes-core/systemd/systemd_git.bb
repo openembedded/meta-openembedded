@@ -14,11 +14,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r4"
+PR = "r5"
 
 inherit autotools vala perlnative
 
-SRCREV = "798e258d301ac237cb1d72b5fc4b19ee900d6f7d"
+SRCREV = "3887b5abcb3870db9ed53de3875a465c230ddd3f"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-disable-xsltproc-completely.patch \
@@ -88,6 +88,7 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
                       systemd-serialgetty \
                       util-linux-agetty \
                       util-linux-swaponoff \
+                      util-linux-fsck \
                       module-init-tools \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
 "
