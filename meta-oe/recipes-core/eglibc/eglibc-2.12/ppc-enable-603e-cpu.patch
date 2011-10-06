@@ -1,0 +1,26 @@
+We now pass --with-cpu option to eglibc this ends up with configure errors if we do
+not pass a cpu which eglibc has support for in sysdeps
+
+| checking sysdep dirs... configure: error: The 603e subspecies of powerpc is not supported.
+| + bbfatal 'oe_runconf failed'
+| + echo 'ERROR: oe_runconf failed'
+
+We fix this by adding the 603e sub directories with Implies to generic
+powerpc to overcome this error
+
+Upstream-Status: Inappropriate [OE config related]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Index: libc/ports/sysdeps/powerpc/powerpc32/603e/Implies
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ libc/ports/sysdeps/powerpc/powerpc32/603e/Implies	2011-09-17 19:18:57.593292084 -0700
+@@ -0,0 +1 @@
++powerpc/powerpc32
+Index: libc/ports/sysdeps/unix/sysv/linux/powerpc/powerpc32/603e/Implies
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ libc/ports/sysdeps/unix/sysv/linux/powerpc/powerpc32/603e/Implies	2011-09-17 19:17:48.613292100 -0700
+@@ -0,0 +1 @@
++powerpc/powerpc32
