@@ -1,7 +1,7 @@
-Index: openssl-1.0.0c/Configure
+Index: openssl-1.0.0e/Configure
 ===================================================================
---- openssl-1.0.0c.orig/Configure	2011-08-12 23:02:54.436331036 -0700
-+++ openssl-1.0.0c/Configure	2011-08-12 23:03:39.626397324 -0700
+--- openssl-1.0.0e.orig/Configure	2011-10-04 22:49:47.599379260 -0700
++++ openssl-1.0.0e/Configure	2011-10-04 22:49:53.263407376 -0700
 @@ -1486,6 +1486,8 @@
  		}
  	}
@@ -11,10 +11,10 @@ Index: openssl-1.0.0c/Configure
  open(IN,'<Makefile.org') || die "unable to read Makefile.org:$!\n";
  unlink("$Makefile.new") || die "unable to remove old $Makefile.new:$!\n" if -e "$Makefile.new";
  open(OUT,">$Makefile.new") || die "unable to create $Makefile.new:$!\n";
-Index: openssl-1.0.0c/openssl.ld
+Index: openssl-1.0.0e/openssl.ld
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ openssl-1.0.0c/openssl.ld	2011-08-12 23:03:39.626397324 -0700
++++ openssl-1.0.0e/openssl.ld	2011-10-04 22:49:53.295407572 -0700
 @@ -0,0 +1,4461 @@
 +OPENSSL_1.0.0 {
 +	global:
@@ -4477,14 +4477,32 @@ Index: openssl-1.0.0c/openssl.ld
 +		*;
 +};
 +
-Index: openssl-1.0.0c/engines/openssl.ld
+Index: openssl-1.0.0e/engines/openssl.ld
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ openssl-1.0.0c/engines/openssl.ld	2011-08-12 23:03:39.626397324 -0700
-@@ -0,0 +1,7 @@
++++ openssl-1.0.0e/engines/openssl.ld	2011-10-04 22:49:53.295407572 -0700
+@@ -0,0 +1,10 @@
 +OPENSSL_1.0.0 {
 +	global:
 +		bind_engine;
++		v_check;
++		OPENSSL_init;
++		OPENSSL_finish;
++	local:
++		*;
++};
++
+Index: openssl-1.0.0e/engines/ccgost/openssl.ld
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ openssl-1.0.0e/engines/ccgost/openssl.ld	2011-10-04 22:49:53.339407745 -0700
+@@ -0,0 +1,10 @@
++OPENSSL_1.0.0 {
++	global:
++		bind_engine;
++		v_check;
++		OPENSSL_init;
++		OPENSSL_finish;
 +	local:
 +		*;
 +};
