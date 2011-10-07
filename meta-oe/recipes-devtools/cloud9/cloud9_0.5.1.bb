@@ -3,8 +3,9 @@ HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
-SRC_URI = "git://github.com/jadonk/cloud9.git;protocol=git \
-"
+PR = "r1"
+
+SRC_URI = "git://github.com/jadonk/cloud9.git;protocol=git"
 
 SRCREV = "08bae1d1cc2ba9f7f883a25afd07f0339a82fa8b"
 S = "${WORKDIR}/git"
@@ -29,11 +30,19 @@ do_compile () {
 do_install () {
  install -m 0755 -d ${D}/usr/share/cloud9 ${D}${bindir} ${D}/var/lib/cloud9
  rsync -r --exclude=".*" ${S}/* ${D}/usr/share/cloud9
+
+ for i in cygwin darwin linux32 linux64 sunos ; do
+   rm -f ${D}/usr/share/cloud9/support/node-builds-v4/*$i*
+   rm -f ${D}/usr/share/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/*$i*
+   rm -f ${D}//usr/share/cloud9/support/gnu-builds/*$i*
+ done
+
  touch ${D}${bindir}/cloud9
  echo "#!/bin/sh" > ${D}${bindir}/cloud9
  echo "node /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000" >> ${D}${bindir}/cloud9
  chmod 0755 ${D}${bindir}/cloud9
 }
 
+FILES_${PN}-dbg += "/usr/share/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/.debug"
 RDEPENDS_${PN} = "nodejs"
 
