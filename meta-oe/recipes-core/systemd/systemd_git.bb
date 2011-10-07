@@ -16,7 +16,7 @@ PKGV = "v${GITPKGVTAG}"
 PV = "git"
 PR = "r5"
 
-inherit autotools vala perlnative
+inherit pkgconfig autotools vala perlnative
 
 SRCREV = "3887b5abcb3870db9ed53de3875a465c230ddd3f"
 
