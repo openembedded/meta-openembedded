@@ -1,6 +1,6 @@
 DESCRIPTION = "A standalone native ldconfig build"
 
-LICENSE = "GPLv2.1"
+LICENSE = "GPLv2+"
 
 LIC_FILES_CHKSUM = "file://${S}/ldconfig.c;endline=17;md5=1d15f20937c055cb5de2329a4c054399"
 
@@ -12,7 +12,7 @@ SRC_URI = "file://ldconfig-native-2.12.1.tar.bz2 \
            file://flag_fix.patch \
            file://endianess-header.patch"
 
-PR = "r1"
+PR = "r2"
 
 inherit native
 
