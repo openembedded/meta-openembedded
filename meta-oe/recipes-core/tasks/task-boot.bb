@@ -2,7 +2,7 @@ DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r54"
+PR = "r56"
 
 inherit task
 
@@ -28,18 +28,17 @@ DEPENDS = "virtual/kernel"
 #
 # minimal set of packages - needed to boot
 #
-RDEPENDS_task-boot = "\
+RDEPENDS_${PN} = "\
     base-files \
     base-passwd \
     busybox \
-    ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
-    modutils-initscripts \
     netbase \
+    ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
     ${DISTRO_UPDATE_ALTERNATIVES} \
     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
     "
 
-RRECOMMENDS_task-boot = "\
+RRECOMMENDS_${PN} = "\
     kernel \
     ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
     "
