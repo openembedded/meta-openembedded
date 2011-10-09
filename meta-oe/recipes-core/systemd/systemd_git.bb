@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r6"
+PR = "r7"
 
 inherit pkgconfig autotools vala perlnative
 
@@ -54,9 +54,13 @@ do_install() {
 	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
 }
 
-PACKAGES =+ "${PN}-gui"
+PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup"
 
 FILES_${PN}-gui = "${bindir}/systemadm"
+
+FILES_${PN}-vconsole-setup = "${base_libdir}/systemd/systemd-vconsole-setup \
+                              ${base_libdir}/systemd/system/systemd-vconsole-setup.service \
+                              ${base_libdir}/systemd/system/sysinit.target.wants/systemd-vconsole-setup.service"
 
 FILES_${PN} += " ${base_bindir}/* \
                 ${datadir}/dbus-1/services \
