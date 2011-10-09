@@ -3,7 +3,7 @@ HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "git://github.com/jadonk/cloud9.git;protocol=git"
 
@@ -44,5 +44,5 @@ do_install () {
 }
 
 FILES_${PN}-dbg += "/usr/share/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/.debug"
-RDEPENDS_${PN} = "nodejs"
+RDEPENDS_${PN} = "nodejs gzip"
 
