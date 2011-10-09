@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r5"
+PR = "r6"
 
 inherit pkgconfig autotools vala perlnative
 
@@ -88,7 +88,7 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
                       systemd-serialgetty \
                       util-linux-agetty \
                       util-linux-swaponoff \
-                      util-linux-fsck \
+                      util-linux-fsck e2fsprogs-e2fsck \
                       module-init-tools \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
 "
