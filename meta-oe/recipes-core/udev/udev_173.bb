@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 # Needed for udev-extras
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
-PR = "r0"
+PR = "r1"
 
 # version specific SRC_URI
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
@@ -72,6 +72,7 @@ RPROVIDES_${PN} = "hotplug"
 FILES_${PN} += "${usrbindir}/* ${usrsbindir}/udevd"
 FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
 RDEPENDS_${PN} += "module-init-tools-depmod udev-utils"
+RRECOMMENDS_${PN} += "util-linux-blkid"
 
 # udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
 # is ${prefix}/lib64
