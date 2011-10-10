@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SECTION = "x11"
 
-PR = "r9"
+PR = "r10"
 
 SRC_URI = "file://xserver-nodm \
            file://xserver-nodm.service \
@@ -31,12 +31,10 @@ INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ."
 INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
 
 pkg_postinst_${PN}_append () {
-    # can't do this offline
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
+    if [ -e ${base_bindir}/systemctl ] ; then
+        # can't do this offline
+        [ "x$D" != "x" ] && exit 1
 
-    if [ -e /bin/systemctl ] ; then
         systemctl enable xserver-nodm.service
     fi
 }
