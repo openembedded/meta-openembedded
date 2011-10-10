@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PR = "r4"
+PR = "r5"
 
 # we are using a gpe-style Makefile
 inherit gpe
@@ -21,6 +21,7 @@ SRC_URI_append = " \
                    file://Xserver.add.dpi.for.gta.patch \
                    file://Xserver.n900.patch \
                    file://Xserver.nexuss.patch \
+                   file://Xserver.nexusone.patch \
 "
 
 
