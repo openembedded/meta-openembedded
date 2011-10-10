@@ -32,4 +32,6 @@ do_install() {
 
 RRECOMMENDS_${PN} += "glib-networking"
 
+FILES_${PN}-dev += "${datadir}/vala/vapi"
+
 TARGET_CC_ARCH += "${LDFLAGS}"
