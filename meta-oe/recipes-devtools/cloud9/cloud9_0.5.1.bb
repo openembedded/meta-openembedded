@@ -45,7 +45,7 @@ do_install () {
  chmod 0755 ${D}${bindir}/cloud9
 
  install -d ${D}${base_libdir}/systemd/system
- install -m 0644 ${WORKDIR}/*.service ${base_libdir}/systemd/system/
+ install -m 0644 ${WORKDIR}/*.service ${D}${base_libdir}/systemd/system/
 }
 
 
