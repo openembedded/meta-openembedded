@@ -1,5 +1,7 @@
 require guile.inc
 
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5711ae313ffd140741e741b88d9d4007"
+
 PR = "r1"
 
 SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \

@@ -7,10 +7,9 @@ PACKAGES =+ "${PN}-el"
 FILES_${PN}-el = "${datadir}/emacs"
 DESCRIPTION_${PN}-el = "Emacs lisp files for Guile"
 
-LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c9ba0d76ca3ef2a1d15a2ac839ef01fa"
+LICENSE = "LGPLv2.1+"
 
-inherit autotools
+inherit autotools gettext
 
 acpaths = "-I ${S}/guile-config"
 

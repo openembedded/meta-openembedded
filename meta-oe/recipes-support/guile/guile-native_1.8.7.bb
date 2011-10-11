@@ -1,5 +1,7 @@
 require guile-native.inc
 
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c9ba0d76ca3ef2a1d15a2ac839ef01fa"
+
 PR = "r1"
 SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
            file://configure-fix.patch \
