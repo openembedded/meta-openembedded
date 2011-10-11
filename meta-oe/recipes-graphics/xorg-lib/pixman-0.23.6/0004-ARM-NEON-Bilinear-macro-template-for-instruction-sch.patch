@@ -1,0 +1,235 @@
+From 524d1cc7acb753167fffdd08d8c10bf71e0634ba Mon Sep 17 00:00:00 2001
+From: Taekyun Kim <tkq.kim@samsung.com>
+Date: Tue, 20 Sep 2011 21:32:35 +0900
+Subject: [PATCH 4/8] ARM: NEON: Bilinear macro template for instruction scheduling
+
+This macro template takes 6 code blocks.
+
+1. process_last_pixel
+2. process_two_pixels
+3. process_four_pixels
+4. process_pixblock_head
+5. process_pixblock_tail
+6. process_pixblock_tail_head
+
+process_last_pixel does not need to update horizontal weight. This
+is done by the template. two and four code block should update
+horizontal weight inside of them. head/tail/tail_head blocks
+consist unrolled core loop. You can apply instruction scheduling
+to the tail_head blocks.
+
+You can also specify size of the pixel block. Supported size is 4
+and 8. If you want to use mask, give BILINEAR_FLAG_USE_MASK flags
+to the template, then you can use register MASK. When using d8~d15
+registers, give BILINEAR_FLAG_USE_ALL_NEON_REGS to make sure
+registers are properly saved on the stack and later restored.
+---
+ pixman/pixman-arm-neon-asm-bilinear.S |  195 +++++++++++++++++++++++++++++++++
+ 1 files changed, 195 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon-asm-bilinear.S b/pixman/pixman-arm-neon-asm-bilinear.S
+index c5ba929..784e5df 100644
+--- a/pixman/pixman-arm-neon-asm-bilinear.S
++++ b/pixman/pixman-arm-neon-asm-bilinear.S
+@@ -773,3 +773,198 @@ generate_bilinear_scanline_func_src_a8_dst \
+ generate_bilinear_scanline_func_src_a8_dst \
+     pixman_scaled_bilinear_scanline_8888_8_8888_ADD_asm_neon, \
+     8888, 8888, add, 2, 28
++
++.set BILINEAR_FLAG_USE_MASK,		1
++.set BILINEAR_FLAG_USE_ALL_NEON_REGS,	2
++
++/*
++ * Main template macro for generating NEON optimized bilinear scanline functions.
++ *
++ * Bilinear scanline generator macro take folling arguments:
++ *  fname			- name of the function to generate
++ *  src_fmt			- source color format (8888 or 0565)
++ *  dst_fmt			- destination color format (8888 or 0565)
++ *  src/dst_bpp_shift		- (1 << bpp_shift) is the size of src/dst pixel in bytes
++ *  process_last_pixel		- code block that interpolate one pixel and does not
++ *				  update horizontal weight
++ *  process_two_pixels		- code block that interpolate two pixels and update
++ *				  horizontal weight
++ *  process_four_pixels		- code block that interpolate four pixels and update
++ *				  horizontal weight
++ *  process_pixblock_head	- head part of middle loop
++ *  process_pixblock_tail	- tail part of middle loop
++ *  process_pixblock_tail_head	- tail_head of middle loop
++ *  pixblock_size		- number of pixels processed in a single middle loop
++ *  prefetch_distance		- prefetch in the source image by that many pixels ahead
++ */
++
++.macro generate_bilinear_scanline_func \
++	fname, \
++	src_fmt, dst_fmt, src_bpp_shift, dst_bpp_shift, \
++	bilinear_process_last_pixel, \
++	bilinear_process_two_pixels, \
++	bilinear_process_four_pixels, \
++	bilinear_process_pixblock_head, \
++	bilinear_process_pixblock_tail, \
++	bilinear_process_pixblock_tail_head, \
++	pixblock_size, \
++	prefetch_distance, \
++	flags
++
++pixman_asm_function fname
++.if pixblock_size == 8
++.elseif pixblock_size == 4
++.else
++    .error unsupported pixblock size
++.endif
++
++.if ((flags) & BILINEAR_FLAG_USE_MASK) == 0
++    OUT       .req    r0
++    TOP       .req    r1
++    BOTTOM    .req    r2
++    WT        .req    r3
++    WB        .req    r4
++    X         .req    r5
++    UX        .req    r6
++    WIDTH     .req    ip
++    TMP1      .req    r3
++    TMP2      .req    r4
++    PF_OFFS   .req    r7
++    TMP3      .req    r8
++    TMP4      .req    r9
++    STRIDE    .req    r2
++
++    mov		ip, sp
++    push	{r4, r5, r6, r7, r8, r9}
++    mov		PF_OFFS, #prefetch_distance
++    ldmia	ip, {WB, X, UX, WIDTH}
++.else
++    OUT       .req      r0
++    MASK      .req      r1
++    TOP       .req      r2
++    BOTTOM    .req      r3
++    WT        .req      r4
++    WB        .req      r5
++    X         .req      r6
++    UX        .req      r7
++    WIDTH     .req      ip
++    TMP1      .req      r4
++    TMP2      .req      r5
++    PF_OFFS   .req      r8
++    TMP3      .req      r9
++    TMP4      .req      r10
++    STRIDE    .req      r3
++
++    mov       ip, sp
++    push      {r4, r5, r6, r7, r8, r9, r10, ip}
++    mov       PF_OFFS, #prefetch_distance
++    ldmia     ip, {WT, WB, X, UX, WIDTH}
++.endif
++
++    mul       PF_OFFS, PF_OFFS, UX
++
++.if ((flags) & BILINEAR_FLAG_USE_ALL_NEON_REGS) != 0
++    vpush     {d8-d15}
++.endif
++
++    sub	      STRIDE, BOTTOM, TOP
++    .unreq    BOTTOM
++
++    cmp       WIDTH, #0
++    ble       3f
++
++    vdup.u16  q12, X
++    vdup.u16  q13, UX
++    vdup.u8   d28, WT
++    vdup.u8   d29, WB
++    vadd.u16  d25, d25, d26
++
++    /* ensure good destination alignment  */
++    cmp       WIDTH, #1
++    blt       0f
++    tst       OUT, #(1 << dst_bpp_shift)
++    beq       0f
++    vshr.u16  q15, q12, #8
++    vadd.u16  q12, q12, q13
++    bilinear_process_last_pixel
++    sub       WIDTH, WIDTH, #1
++0:
++    vadd.u16  q13, q13, q13
++    vshr.u16  q15, q12, #8
++    vadd.u16  q12, q12, q13
++
++    cmp       WIDTH, #2
++    blt       0f
++    tst       OUT, #(1 << (dst_bpp_shift + 1))
++    beq       0f
++    bilinear_process_two_pixels
++    sub       WIDTH, WIDTH, #2
++0:
++.if pixblock_size == 8
++    cmp       WIDTH, #4
++    blt       0f
++    tst       OUT, #(1 << (dst_bpp_shift + 2))
++    beq       0f
++    bilinear_process_four_pixels
++    sub       WIDTH, WIDTH, #4
++0:
++.endif
++    subs      WIDTH, WIDTH, #pixblock_size
++    blt       1f
++    mov       PF_OFFS, PF_OFFS, asr #(16 - src_bpp_shift)
++    bilinear_process_pixblock_head
++    subs      WIDTH, WIDTH, #pixblock_size
++    blt       5f
++0:
++    bilinear_process_pixblock_tail_head
++    subs      WIDTH, WIDTH, #pixblock_size
++    bge       0b
++5:
++    bilinear_process_pixblock_tail
++1:
++.if pixblock_size == 8
++    tst       WIDTH, #4
++    beq       2f
++    bilinear_process_four_pixels
++2:
++.endif
++    /* handle the remaining trailing pixels */
++    tst       WIDTH, #2
++    beq       2f
++    bilinear_process_two_pixels
++2:
++    tst       WIDTH, #1
++    beq       3f
++    bilinear_process_last_pixel
++3:
++.if ((flags) & BILINEAR_FLAG_USE_ALL_NEON_REGS) != 0
++    vpop      {d8-d15}
++.endif
++
++.if ((flags) & BILINEAR_FLAG_USE_MASK) == 0
++    pop       {r4, r5, r6, r7, r8, r9}
++.else
++    pop       {r4, r5, r6, r7, r8, r9, r10, ip}
++.endif
++    bx        lr
++
++    .unreq    OUT
++    .unreq    TOP
++    .unreq    WT
++    .unreq    WB
++    .unreq    X
++    .unreq    UX
++    .unreq    WIDTH
++    .unreq    TMP1
++    .unreq    TMP2
++    .unreq    PF_OFFS
++    .unreq    TMP3
++    .unreq    TMP4
++    .unreq    STRIDE
++.if ((flags) & BILINEAR_FLAG_USE_MASK) != 0
++    .unreq    MASK
++.endif
++
++.endfunc
++
++.endm
+-- 
+1.6.6.1
+

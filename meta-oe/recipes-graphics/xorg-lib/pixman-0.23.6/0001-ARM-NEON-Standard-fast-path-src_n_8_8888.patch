@@ -1,0 +1,129 @@
+From f7d1d45e30b59b513d48294de50dc86af60ea68c Mon Sep 17 00:00:00 2001
+From: Taekyun Kim <tkq.kim@samsung.com>
+Date: Mon, 26 Sep 2011 17:03:54 +0900
+Subject: [PATCH 1/8] ARM: NEON: Standard fast path src_n_8_8888
+
+Performance numbers of before/after on cortex-a8 @ 1GHz
+
+- before
+L1:  32.39  L2:  31.79  M: 30.84 ( 13.77%)  HT: 21.58  VT: 19.75  R: 18.83  RT: 10.46 ( 106Kops/s)
+
+- after
+L1: 516.25  L2: 372.00  M:193.49 ( 85.59%)  HT:136.93  VT:109.10  R:104.48  RT: 34.77 ( 253Kops/s)
+---
+ pixman/pixman-arm-neon-asm.S |   73 ++++++++++++++++++++++++++++++++++++++++++
+ pixman/pixman-arm-neon.c     |    7 ++++
+ 2 files changed, 80 insertions(+), 0 deletions(-)
+
+diff --git a/pixman/pixman-arm-neon-asm.S b/pixman/pixman-arm-neon-asm.S
+index 3fcd07d..1db02db 100644
+--- a/pixman/pixman-arm-neon-asm.S
++++ b/pixman/pixman-arm-neon-asm.S
+@@ -1219,6 +1219,79 @@ generate_composite_function \
+ 
+ /******************************************************************************/
+ 
++.macro pixman_composite_src_n_8_8888_process_pixblock_head
++    /* expecting solid source in {d0, d1, d2, d3} */
++    /* mask is in d24 (d25, d26, d27 are unused) */
++
++    /* in */
++    vmull.u8    q8, d24, d0
++    vmull.u8    q9, d24, d1
++    vmull.u8    q10, d24, d2
++    vmull.u8    q11, d24, d3
++    vrsra.u16   q8, q8, #8
++    vrsra.u16   q9, q9, #8
++    vrsra.u16   q10, q10, #8
++    vrsra.u16   q11, q11, #8
++.endm
++
++.macro pixman_composite_src_n_8_8888_process_pixblock_tail
++    vrshrn.u16  d28, q8, #8
++    vrshrn.u16  d29, q9, #8
++    vrshrn.u16  d30, q10, #8
++    vrshrn.u16  d31, q11, #8
++.endm
++
++.macro pixman_composite_src_n_8_8888_process_pixblock_tail_head
++    fetch_mask_pixblock
++                                    PF add PF_X, PF_X, #8
++        vrshrn.u16  d28, q8, #8
++                                    PF tst PF_CTL, #0x0F
++        vrshrn.u16  d29, q9, #8
++                                    PF addne PF_X, PF_X, #8
++        vrshrn.u16  d30, q10, #8
++                                    PF subne PF_CTL, PF_CTL, #1
++        vrshrn.u16  d31, q11, #8
++                                    PF cmp PF_X, ORIG_W
++    vmull.u8    q8, d24, d0
++                                    PF pld, [PF_MASK, PF_X, lsl #mask_bpp_shift]
++    vmull.u8    q9, d24, d1
++                                    PF subge PF_X, PF_X, ORIG_W
++    vmull.u8    q10, d24, d2
++                                    PF subges PF_CTL, PF_CTL, #0x10
++    vmull.u8    q11, d24, d3
++                                    PF ldrgeb DUMMY, [PF_MASK, MASK_STRIDE, lsl #mask_bpp_shift]!
++        vst4.8      {d28, d29, d30, d31}, [DST_W :128]!
++    vrsra.u16   q8, q8, #8
++    vrsra.u16   q9, q9, #8
++    vrsra.u16   q10, q10, #8
++    vrsra.u16   q11, q11, #8
++.endm
++
++.macro pixman_composite_src_n_8_8888_init
++    add         DUMMY, sp, #ARGS_STACK_OFFSET
++    vld1.32     {d3[0]}, [DUMMY]
++    vdup.8      d0, d3[0]
++    vdup.8      d1, d3[1]
++    vdup.8      d2, d3[2]
++    vdup.8      d3, d3[3]
++.endm
++
++.macro pixman_composite_src_n_8_8888_cleanup
++.endm
++
++generate_composite_function \
++    pixman_composite_src_n_8_8888_asm_neon, 0, 8, 32, \
++    FLAG_DST_WRITEONLY | FLAG_DEINTERLEAVE_32BPP, \
++    8, /* number of pixels, processed in a single block */ \
++    5, /* prefetch distance */ \
++    pixman_composite_src_n_8_8888_init, \
++    pixman_composite_src_n_8_8888_cleanup, \
++    pixman_composite_src_n_8_8888_process_pixblock_head, \
++    pixman_composite_src_n_8_8888_process_pixblock_tail, \
++    pixman_composite_src_n_8_8888_process_pixblock_tail_head, \
++
++/******************************************************************************/
++
+ .macro pixman_composite_over_n_8_8888_process_pixblock_head
+     /* expecting deinterleaved source data in {d8, d9, d10, d11} */
+     /* d8 - blue, d9 - green, d10 - red, d11 - alpha */
+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
+index effb50b..3db9adf 100644
+--- a/pixman/pixman-arm-neon.c
++++ b/pixman/pixman-arm-neon.c
+@@ -90,6 +90,8 @@ PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, add_n_8_8,
+                                       uint8_t, 1, uint8_t, 1)
+ PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (SKIP_ZERO_SRC, neon, add_n_8_8888,
+                                       uint8_t, 1, uint32_t, 1)
++PIXMAN_ARM_BIND_FAST_PATH_N_MASK_DST (0, neon, src_n_8_8888,
++                                      uint8_t, 1, uint32_t, 1)
+ 
+ PIXMAN_ARM_BIND_FAST_PATH_SRC_N_DST (SKIP_ZERO_MASK, neon, over_8888_n_8888,
+                                      uint32_t, 1, uint32_t, 1)
+@@ -289,6 +291,11 @@ static const pixman_fast_path_t arm_neon_fast_paths[] =
+     PIXMAN_STD_FAST_PATH (SRC,  pixbuf,   pixbuf,   a8b8g8r8, neon_composite_src_rpixbuf_8888),
+     PIXMAN_STD_FAST_PATH (SRC,  rpixbuf,  rpixbuf,  a8r8g8b8, neon_composite_src_rpixbuf_8888),
+     PIXMAN_STD_FAST_PATH (SRC,  rpixbuf,  rpixbuf,  a8b8g8r8, neon_composite_src_pixbuf_8888),
++    PIXMAN_STD_FAST_PATH (SRC,  solid,    a8,       a8r8g8b8, neon_composite_src_n_8_8888),
++    PIXMAN_STD_FAST_PATH (SRC,  solid,    a8,       x8r8g8b8, neon_composite_src_n_8_8888),
++    PIXMAN_STD_FAST_PATH (SRC,  solid,    a8,       a8b8g8r8, neon_composite_src_n_8_8888),
++    PIXMAN_STD_FAST_PATH (SRC,  solid,    a8,       x8b8g8r8, neon_composite_src_n_8_8888),
++
+     PIXMAN_STD_FAST_PATH (OVER, solid,    a8,       a8,       neon_composite_over_n_8_8),
+     PIXMAN_STD_FAST_PATH (OVER, solid,    a8,       r5g6b5,   neon_composite_over_n_8_0565),
+     PIXMAN_STD_FAST_PATH (OVER, solid,    a8,       b5g6r5,   neon_composite_over_n_8_0565),
+-- 
+1.6.6.1
+
