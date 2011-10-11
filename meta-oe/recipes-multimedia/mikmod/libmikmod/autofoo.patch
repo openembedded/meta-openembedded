@@ -1,0 +1,16 @@
+
+#
+# Patch managed by http://www.holgerschurig.de/patcher.html
+#
+
+--- libmikmod-3.2.0-beta2/configure.in~autofoo
++++ libmikmod-3.2.0-beta2/configure.in
+@@ -415,8 +415,6 @@
+ 
+ AC_CHECK_FUNCS(setenv snprintf srandom)
+ AC_REPLACE_FUNCS(strcasecmp strdup strstr)
+-# Change extension, as we use libtool
+-LIBOBJS="`echo $LIBOBJS|sed -e 's/\.o/\.lo/g'`"
+ 
+ AC_HEADER_EGREP(srandom,math.h,AC_DEFINE(SRANDOM_IN_MATH_H))
+ 

@@ -1,0 +1,12 @@
+diff -urN libmikmod-3.1.12.orig/libmikmod/Makefile.in libmikmod-3.1.12/libmikmod/Makefile.in
+--- libmikmod-3.1.12.orig/libmikmod/Makefile.in	2004-01-21 17:43:52.000000000 +0000
++++ libmikmod-3.1.12/libmikmod/Makefile.in	2009-04-02 11:28:01.000000000 +0000
+@@ -72,7 +72,7 @@
+ 	rm -f Makefile
+ 
+ $(LIB): $(OBJ)
+-	$(LIBTOOL) --mode=link $(CC) -version-info 2:4:0 -o $@ $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
++	$(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -version-info 2:4:0 -o $@ $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
+ 
+ dl_hpux.lo:	$(top_srcdir)/dlapi/dl_hpux.c \
+ 			$(top_srcdir)/dlapi/dlfcn.h
