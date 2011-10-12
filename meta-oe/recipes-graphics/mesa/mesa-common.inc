@@ -26,7 +26,7 @@ EXTRA_OECONF = "--enable-glu \
                 --disable-glut \
 	       "
 
-inherit glx-use-tls
+include recipes-graphics/mesa/glx-use-tls.inc
 
 PACKAGES =+ "libegl libegl-dev libegl-dbg libglu libglu-dev libosmesa libosmesa-dev libgl libgl-dev"
 FILES_libegl = "${libdir}/libEGL.so.* ${libdir}/egl/*.so"
