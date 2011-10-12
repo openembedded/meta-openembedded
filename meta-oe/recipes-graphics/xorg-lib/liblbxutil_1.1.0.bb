@@ -1,11 +1,11 @@
-require xorg-lib-common.inc
+require recipes-graphics/xorg-lib/xorg-lib-common.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b0d5bdc98f7ebab3b6c3791d9bf40907"
 
 DESCRIPTION = "XFIXES Extension"
 DEPENDS += " xextproto xproto zlib"
 PE = "1"
-PR = "${INC_PR}.0"
+PR = "r10"
 
 SRC_URI += "file://mkg3states-1.1.patch"
 SRC_URI[md5sum] = "273329a78c2e9ea189ac416c7fde94a1"
