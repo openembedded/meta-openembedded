@@ -7,6 +7,11 @@ Subject: [PATCH] docs: On installation create relative paths in symlinks to
 
 Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 ---
+
+Upstream-Status: accepted
+
+http://git.xfce.org/xfce/xfwm4/commit/?h=xfce-4.8&id=08b6d60056d7ca9884a46d6b92e77c9fc68ce8c5
+
  doc/manual/Makefile.am |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
