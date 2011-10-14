@@ -5,6 +5,8 @@ DESCRIPTION = "Basic task to get a device online"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
+PR = "r1"
+
 inherit task
 
 # packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
@@ -23,11 +25,14 @@ TASK_BASIC_SSHDAEMON ?= "dropbear-systemd openssh-sftp"
 # It also avoids the choice between connman/networkmanager/ifupdown since that is an image feature, not a
 # distro feature.
 #
+# Util-linux (u)mount is included because the busybox one can't handle /etc/mtab being symlinked to /proc/mounts
+#
 RDEPENDS_${PN} = "\
-    ${TASK_BASIC_SSHDAEMON} \
-    avahi-daemon avahi-utils avahi-systemd \
-    systemd-compat-units \
-    "
+	${TASK_BASIC_SSHDAEMON} \
+	avahi-daemon avahi-utils avahi-systemd \
+	systemd-compat-units \
+	util-linux-mount util-linux-umount \
+	"
 
 #
 # The following section is split in 3:
