@@ -1,0 +1,29 @@
+From 576e7881bdc84390cc51210ee37e5bdd87a170fc Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 15 Oct 2011 16:43:09 +0200
+Subject: [PATCH] xfsettingsd: use 'gnome' as default icon theme
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+
+Upstream-status: unacceptable (config)
+
+ xfsettingsd/xsettings.xml |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/xfsettingsd/xsettings.xml b/xfsettingsd/xsettings.xml
+index 049b4ed..d8c6a85 100644
+--- a/xfsettingsd/xsettings.xml
++++ b/xfsettingsd/xsettings.xml
+@@ -3,7 +3,7 @@
+ <channel name="xsettings" version="1.0">
+   <property name="Net" type="empty">
+     <property name="ThemeName" type="string" value="Xfce"/>
+-    <property name="IconThemeName" type="string" value="Rodent"/>
++    <property name="IconThemeName" type="string" value="gnome"/>
+   </property>
+   <property name="Xft" type="empty">
+     <property name="DPI" type="int" value="-1"/>
+-- 
+1.6.6.1
+
