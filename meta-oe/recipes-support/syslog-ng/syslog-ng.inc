@@ -38,6 +38,17 @@ do_install_append() {
         install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
 }
 
+PACKAGES =+ "${PN}-config"
+FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+            ${base_bindir}/* ${base_sbindir}/* \
+            ${base_libdir}/*${SOLIBS} \
+            ${datadir}/${BPN} ${libdir}/${BPN}/*${SOLIBS} \
+            ${datadir}/include/scl/ ${datadir}/xsd"
+FILES_${PN}-dev += "${libdir}/${BPN}/lib*.la ${libdir}/${BPN}/*${SOLIBSDEV}"
+# moved intentionaly to ${PN}-config without RDEPENDing on it, because it breaks update-modules 
+# see http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-October/035537.html
+FILES_${PN}-config += "${syconfdir}/modules.conf"
 CONFFILES_${PN} = "${sysconfdir}/${PN}.conf"
 
 pkg_postinst_${PN} () {
