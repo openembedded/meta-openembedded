@@ -8,13 +8,14 @@ RSUGGESTS_${PN} += "hal"
 LIC_FILES_CHKSUM = "file://src/tslib.c;endline=28;md5=bd62eaef222dcf5cd59e490a12bd795e \
                     file://COPYING;md5=4641deddaa80fe7ca88e944e1fd94a94"
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-input-tslib-${PV}.tar.bz2;name=archive \
            file://double-free-crash.patch \
            file://10-x11-input-tslib.fdi \
            file://xserver-174-XGetPointerControl.patch \
            file://99-xf86-input-tslib.rules \
+           file://xf86-input-tslib-port-ABI-12-r48.patch \
 "
 SRC_URI[md5sum] = "b7a4d2f11637ee3fcf432e044b1d017f"
 SRC_URI[sha256sum] = "5f46fdef095a6e44a69e0f0b57c7d665224b26d990d006611236d8332e85b105"
