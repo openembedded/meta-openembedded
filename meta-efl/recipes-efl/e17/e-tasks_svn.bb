@@ -1,7 +1,8 @@
 DESCRIPTION = "e-tasks is a todo program for Openmoko phones"
 HOMEPAGE = "http://code.google.com/p/e-tasks/"
 AUTHOR = "cchandel"
-LICENSE = "GPLv2"
+LICENSE = "GPLv3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
 SECTION = "e/apps"
 DEPENDS = "elementary eina edbus sqlite3"
 
