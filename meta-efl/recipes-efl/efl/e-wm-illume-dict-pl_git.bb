@@ -1,10 +1,11 @@
 DESCRIPTION = "Polish dictionary for Illume keyboard"
 SECTION = "x11/data"
-SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
+SRCREV = "38fdd9bb0d8296e984bb6443466801eea6f62f00"
 PV = "1.0+gitr${SRCPV}"
 PE = "1"
 PR = "r0"
-LICENSE = "unknown"
+LICENSE = "MIT BSD"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
 
 SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
 
