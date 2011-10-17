@@ -33,8 +33,7 @@ do_configure() {
 }
 
 RDEPENDS_${PN} = "gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash glib-networking"
-FILES_${PN} += "${datadir}/icons  /usr/libexec/ "
-FILES_${PN}-dbg += "/usr/libexec/.debug"
+FILES_${PN} += "${datadir}/icons"
 
 # Don't make nautils3 drag us in
 PRIVATE_LIBS = "libnautilus-extension.so.1"
