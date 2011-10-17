@@ -6,7 +6,7 @@ LICENSE="GPLv2 && LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7c0048536e43642a1f3a724c2909872b \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-PR = "r4"
+PR = "r5"
 
 DEPENDS = "libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
 # optional: tracker
@@ -18,6 +18,7 @@ SRC_URI[archive.sha256sum] = "2d4ff28c7a7aa5d40eb2468149954a564c257a305183773057
 
 SRC_URI += "file://idl-sysroot.patch \
             file://no-try-run-strftime.diff \
+            file://no-G_DISABLE_DEPRECATED.patch \
 "
 
 
