@@ -3,18 +3,16 @@ require ttf.inc
 DESCRIPTION = "Droid fonts - TTF Edition"
 HOMEPAGE = "http://www.droidfonts.com/"
 LICENSE = "Apache-2.0"
-PR = "r1"
-# git magic below - SRCREV is an ID of /data/fonts subtree
-# (so we don't need to fetch full platform/frameworks/base.git)
-SRCREV = "31f255e44e618ff3b923f332e8fcb83403fd39f5"
-PV = "0.0+${PR}+gitr${SRCREV}"
+LIC_FILES_CHKSUM = "file://README.txt;md5=83544262a86f1f1ec761e75897df92bc"
+SRCREV = "21e6e2de1f0062f949fcc52d0b4559dfa3246e0e"
+PV = "0.1+gitr${SRCPV}"
 
-SRC_URI = "git://android.git.kernel.org/platform/frameworks/base.git;protocol=git;branch=master"
+SRC_URI = "git://github.com/android/platform_frameworks_base.git;protocol=git;branch=master"
 
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/git/data/fonts"
 
 do_install_prepend() {
-	rm ${S}/Ahem.ttf # we're not packaging it
+	rm ${S}/Ahem.ttf MTLc3m.ttf DroidSansArabic.ttf DroidSansThai.ttf Clockopia.ttf MTLmr3m.ttf DroidSansHebrew.ttf DroidSansFallbackLegacy.ttf # we're not packaging it
 }
 
 PACKAGES = "${PN}-dbg ttf-droid-sans ttf-droid-sans-mono \
