@@ -1,6 +1,6 @@
 require abiword-2.5.inc
-
-PR = "r1"
+FILESEXTRAPATHS_prepend := "${THISDIR}/abiword-${SHRT_VER}:"
+PR = "r2"
 
 EXTRA_OECONF += "--enable-embedded"
 

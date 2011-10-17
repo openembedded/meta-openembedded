@@ -7,7 +7,9 @@ DEPENDS     = "perl-native wv libgsf libglade libfribidi jpeg libpng libxml2"
 RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 
-SRC_URI = "http://www.abiword.org/downloads/abiword/${PV}/source/abiword-${PV}.tar.gz"
+SRC_URI = "http://www.abiword.org/downloads/abiword/${PV}/source/abiword-${PV}.tar.gz \
+           file://fix.double.install.patch \
+"
 SRC_URI[md5sum] = "bbc9c124f8072875129bd67092f0fa0b"
 SRC_URI[sha256sum] = "db34eeb5457fb7572fc76ec2a73cdb4f7a67307e7468b6c4bde820b58c598b3f"
 
