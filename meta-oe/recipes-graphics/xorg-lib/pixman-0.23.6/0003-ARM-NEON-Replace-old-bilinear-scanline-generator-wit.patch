@@ -1,7 +1,7 @@
-From 10b257b46f379d9c79483acd55c9a13fff130843 Mon Sep 17 00:00:00 2001
+From 8d0460c4f1b23f3a13e9ff7282b30dd06f10aee1 Mon Sep 17 00:00:00 2001
 From: Taekyun Kim <tkq.kim@samsung.com>
 Date: Fri, 23 Sep 2011 00:03:22 +0900
-Subject: [PATCH 5/8] ARM: NEON: Replace old bilinear scanline generator with new template
+Subject: [PATCH 3/8] ARM: NEON: Replace old bilinear scanline generator with new template
 
 Bilinear scanline functions in pixman-arm-neon-asm-bilinear.S can
 be replaced with new template just by wrapping existing macros.

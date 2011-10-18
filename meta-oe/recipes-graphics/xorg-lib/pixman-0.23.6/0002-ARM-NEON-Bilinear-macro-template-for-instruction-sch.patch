@@ -1,7 +1,7 @@
-From 524d1cc7acb753167fffdd08d8c10bf71e0634ba Mon Sep 17 00:00:00 2001
+From ce2fd2ac6aab2c14916d332ade47d72b06d504c1 Mon Sep 17 00:00:00 2001
 From: Taekyun Kim <tkq.kim@samsung.com>
 Date: Tue, 20 Sep 2011 21:32:35 +0900
-Subject: [PATCH 4/8] ARM: NEON: Bilinear macro template for instruction scheduling
+Subject: [PATCH 2/8] ARM: NEON: Bilinear macro template for instruction scheduling
 
 This macro template takes 6 code blocks.
 

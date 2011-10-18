@@ -1,7 +1,7 @@
-From fc92ad56c5218157a097f6ed0c06196be9f74906 Mon Sep 17 00:00:00 2001
+From 34ce640914e06f2e23a0a93a3a49ec0bfff7497b Mon Sep 17 00:00:00 2001
 From: Taekyun Kim <tkq.kim@samsung.com>
 Date: Mon, 26 Sep 2011 18:33:27 +0900
-Subject: [PATCH 2/8] ARM: NEON: Standard fast path src_n_8_8
+Subject: [PATCH 7/8] ARM: NEON: Standard fast path src_n_8_8
 
 Performance numbers of before/after on cortex-a8 @ 1GHz
 

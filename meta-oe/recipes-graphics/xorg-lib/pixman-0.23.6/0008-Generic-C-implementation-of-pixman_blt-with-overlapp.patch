@@ -1,4 +1,4 @@
-From d65a08904857d87dcd74b87681c9b94390b76eff Mon Sep 17 00:00:00 2001
+From 0c7aa6a3ebc29d7986d2417371df210f3e9a65b4 Mon Sep 17 00:00:00 2001
 From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
 Date: Tue, 16 Mar 2010 16:55:28 +0100
 Subject: [PATCH 8/8] Generic C implementation of pixman_blt with overlapping support
@@ -19,7 +19,7 @@ unrealistic case anyway).
  2 files changed, 61 insertions(+), 3 deletions(-)
 
 diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-index 2ccdfcd..6f7bb34 100644
+index 2ccdfcd..90461b6 100644
 --- a/pixman/pixman-general.c
 +++ b/pixman/pixman-general.c
 @@ -227,9 +227,24 @@ general_blt (pixman_implementation_t *imp,

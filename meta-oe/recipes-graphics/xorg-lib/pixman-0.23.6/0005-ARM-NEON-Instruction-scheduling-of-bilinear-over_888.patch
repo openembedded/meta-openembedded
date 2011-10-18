@@ -1,7 +1,7 @@
-From 94585f9a618821a5c06c3a497902579b4a08b05f Mon Sep 17 00:00:00 2001
+From c98ce663e2a5dd1e65013053f461c3aac9a3922e Mon Sep 17 00:00:00 2001
 From: Taekyun Kim <tkq.kim@samsung.com>
 Date: Mon, 26 Sep 2011 19:04:53 +0900
-Subject: [PATCH 7/8] ARM: NEON: Instruction scheduling of bilinear over_8888_8_8888
+Subject: [PATCH 5/8] ARM: NEON: Instruction scheduling of bilinear over_8888_8_8888
 
 Instructions are reordered to eliminate pipeline stalls and get
 better memory access.
@@ -16,7 +16,7 @@ after  : 50.76 Mpix/s
  1 files changed, 158 insertions(+), 4 deletions(-)
 
 diff --git a/pixman/pixman-arm-neon-asm-bilinear.S b/pixman/pixman-arm-neon-asm-bilinear.S
-index 76937e0..4ab46e1 100644
+index 82d248e..f7913ad 100644
 --- a/pixman/pixman-arm-neon-asm-bilinear.S
 +++ b/pixman/pixman-arm-neon-asm-bilinear.S
 @@ -949,7 +949,7 @@ pixman_asm_function fname
@@ -120,84 +120,84 @@ index 76937e0..4ab46e1 100644
  .macro bilinear_over_8888_8_8888_process_pixblock_tail_head
 -    bilinear_over_8888_8_8888_process_pixblock_tail
 -    bilinear_over_8888_8_8888_process_pixblock_head
-+                                        vshll.u16   q9, d6, #8
++                                            vshll.u16   q9, d6, #8
 +    mov         TMP1, X, asr #16
 +    add         X, X, UX
 +    add         TMP1, TOP, TMP1, asl #2
-+                                        vshll.u16   q10, d2, #8
++                                            vshll.u16   q10, d2, #8
 +    vld1.32     {d0}, [TMP1], STRIDE
 +    mov         TMP2, X, asr #16
 +    add         X, X, UX
 +    add         TMP2, TOP, TMP2, asl #2
-+                                        vmlsl.u16   q9, d6, d30
-+                                        vmlsl.u16   q10, d2, d31
++                                            vmlsl.u16   q9, d6, d30
++                                            vmlsl.u16   q10, d2, d31
 +    vld1.32     {d1}, [TMP1]
 +    mov         TMP3, X, asr #16
 +    add         X, X, UX
 +    add         TMP3, TOP, TMP3, asl #2
-+                                        vmlal.u16   q9, d7, d30
-+                                        vmlal.u16   q10, d3, d31
++                                            vmlal.u16   q9, d7, d30
++                                            vmlal.u16   q10, d3, d31
 +    vld1.32     {d2}, [TMP2], STRIDE
 +    mov         TMP4, X, asr #16
 +    add         X, X, UX
 +    add         TMP4, TOP, TMP4, asl #2
-+                                        vshr.u16    q15, q12, #8
-+                                        vadd.u16    q12, q12, q13
++                                            vshr.u16    q15, q12, #8
++                                            vadd.u16    q12, q12, q13
 +    vld1.32     {d3}, [TMP2]
-+                                        vdup.32     d22, d22[0]
-+                                        vshrn.u32   d18, q9, #16
-+                                        vshrn.u32   d19, q10, #16
++                                            vdup.32     d22, d22[0]
++                                            vshrn.u32   d18, q9, #16
++                                            vshrn.u32   d19, q10, #16
 +    vmull.u8    q2, d0, d28
 +    vmull.u8    q3, d2, d28
-+                                        vmovn.u16   d17, q9
-+                                        vld1.32     {d18, d19}, [OUT, :128]
-+                                        pld         [OUT, #(prefetch_offset * 4)]
++                                            vmovn.u16   d17, q9
++                                            vld1.32     {d18, d19}, [OUT, :128]
++                                            pld         [OUT, #(prefetch_offset * 4)]
 +    vmlal.u8    q2, d1, d29
 +    vmlal.u8    q3, d3, d29
-+                                        vuzp.8      d16, d17
-+                                        vuzp.8      d18, d19
++                                            vuzp.8      d16, d17
++                                            vuzp.8      d18, d19
 +    vshll.u16   q0, d4, #8
 +    vshll.u16   q1, d6, #8
-+                                        vuzp.8      d16, d17
-+                                        vuzp.8      d18, d19
++                                            vuzp.8      d16, d17
++                                            vuzp.8      d18, d19
 +    vmlsl.u16   q0, d4, d30
 +    vmlsl.u16   q1, d6, d31
-+                                        vmull.u8    q10, d16, d22
-+                                        vmull.u8    q11, d17, d22
++                                            vmull.u8    q10, d16, d22
++                                            vmull.u8    q11, d17, d22
 +    vmlal.u16   q0, d5, d30
 +    vmlal.u16   q1, d7, d31
-+                                        vrsra.u16   q10, q10, #8
-+                                        vrsra.u16   q11, q11, #8
++                                            vrsra.u16   q10, q10, #8
++                                            vrsra.u16   q11, q11, #8
 +    vshrn.u32   d0, q0, #16
 +    vshrn.u32   d1, q1, #16
-+                                        vrshrn.u16  d16, q10, #8
-+                                        vrshrn.u16  d17, q11, #8
++                                            vrshrn.u16  d16, q10, #8
++                                            vrshrn.u16  d17, q11, #8
 +    vld1.32     {d2}, [TMP3], STRIDE
-+                                        vdup.32     d22, d17[1]
++                                            vdup.32     d22, d17[1]
 +    vld1.32     {d3}, [TMP3]
-+                                        vmvn.8      d22, d22
++                                            vmvn.8      d22, d22
 +    pld         [TMP4, PF_OFFS]
 +    vld1.32     {d4}, [TMP4], STRIDE
-+                                        vmull.u8    q10, d18, d22
-+                                        vmull.u8    q11, d19, d22
++                                            vmull.u8    q10, d18, d22
++                                            vmull.u8    q11, d19, d22
 +    vld1.32     {d5}, [TMP4]
 +    pld         [TMP4, PF_OFFS]
 +    vmull.u8    q3, d2, d28
-+                                        vrshr.u16   q9, q10, #8
-+                                        vrshr.u16   q15, q11, #8
++                                            vrshr.u16   q9, q10, #8
++                                            vrshr.u16   q15, q11, #8
 +    vmlal.u8    q3, d3, d29
 +    vmull.u8    q1, d4, d28
-+                                        vraddhn.u16 d18, q9, q10
-+                                        vraddhn.u16 d19, q15, q11
++                                            vraddhn.u16 d18, q9, q10
++                                            vraddhn.u16 d19, q15, q11
 +    vmlal.u8    q1, d5, d29
 +    vshr.u16    q15, q12, #8
-+                                        vqadd.u8    q9, q8, q9
++                                            vqadd.u8    q9, q8, q9
 +    vld1.32     {d22[0]}, [MASK]!
-+                                        vuzp.8      d18, d19
++                                            vuzp.8      d18, d19
 +    vadd.u16    q12, q12, q13
-+                                        vuzp.8      d18, d19
++                                            vuzp.8      d18, d19
 +    vmovn.u16   d16, q0
-+                                        vst1.32     {d18, d19}, [OUT, :128]!
++                                            vst1.32     {d18, d19}, [OUT, :128]!
  .endm
  
  /* add_8888_8888 */

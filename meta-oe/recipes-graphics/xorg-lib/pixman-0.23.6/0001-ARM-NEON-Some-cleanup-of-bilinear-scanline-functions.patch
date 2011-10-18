@@ -1,7 +1,7 @@
-From ed7580525054e6a543694088c561dee525b4ae28 Mon Sep 17 00:00:00 2001
+From 809b8d4e3707c8617cafafb8a16b1b48e2477311 Mon Sep 17 00:00:00 2001
 From: Taekyun Kim <tkq.kim@samsung.com>
 Date: Tue, 20 Sep 2011 19:46:25 +0900
-Subject: [PATCH 3/8] ARM: NEON: Some cleanup of bilinear scanline functions
+Subject: [PATCH 1/8] ARM: NEON: Some cleanup of bilinear scanline functions
 
 Use STRIDE and initial horizontal weight update is done before
 entering interpolation loop. Cache preload for mask and dst.
