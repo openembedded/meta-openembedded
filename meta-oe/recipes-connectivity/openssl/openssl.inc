@@ -11,7 +11,7 @@ S = "${WORKDIR}/openssl-${PV}"
 
 inherit siteinfo
 
-INC_PR = "r13"
+INC_PR = "r14"
 
 AR_append = " r"
 CFLAG = "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '-DL_ENDIAN', '-DB_ENDIAN', d)} \
@@ -20,6 +20,9 @@ CFLAG = "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '-DL_ENDIAN', '-DB_END
 # -02 does not work on mipsel: ssh hangs when it tries to read /dev/urandom
 CFLAG_mtx-1 := "${@'${CFLAG}'.replace('-O2', '')}"
 CFLAG_mtx-2 := "${@'${CFLAG}'.replace('-O2', '')}"
+
+# parallel install fail sometimes
+PARALLEL_MAKEINST = ""
 
 export DIRS = "crypto ssl apps"
 BBCLASSEXTEND = "native nativesdk"
