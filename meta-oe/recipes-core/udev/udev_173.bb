@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 # Needed for udev-extras
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
-PR = "r1"
+PR = "r2"
 
 # version specific SRC_URI
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
@@ -61,7 +61,8 @@ INITSCRIPT_PARAMS = "start 04 S ."
 
 PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
 
-FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
+FILES_${PN}-systemd = "${base_libdir}/systemd"
+RDEPENDS_${PN}-systemd += "udev"
 
 FILES_libudev = "${base_libdir}/libudev.so.*"
 FILES_libgudev = "${base_libdir}/libgudev*.so.*"
@@ -81,9 +82,6 @@ FILES_${PN}-dbg += "/lib/udev/.debug"
  
 FILES_${PN}-consolekit += "${libdir}/ConsoleKit"
 RDEPENDS_${PN}-consolekit += "consolekit"
-
-# Package up systemd files
-FILES_${PN} += "${base_libdir}/systemd"
 
 do_install () {
 	install -d ${D}${usrsbindir} \
