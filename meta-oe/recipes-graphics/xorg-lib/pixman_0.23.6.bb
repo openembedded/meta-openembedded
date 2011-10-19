@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=14096c769ae0cbb5fcb94ec468be11b3\
                     file://pixman/pixman-arm-neon-asm.h;endline=24;md5=9a9cc1e51abbf1da58f4d9528ec9d49b \
                    "
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.3"
 
 SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/${BPN}-${PV}.tar.gz \
            file://0001-ARM-NEON-Some-cleanup-of-bilinear-scanline-functions.patch \
@@ -17,6 +17,8 @@ SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/${BPN}-${PV}.tar.g
            file://0003-ARM-NEON-Replace-old-bilinear-scanline-generator-wit.patch \
            file://0004-ARM-NEON-Instruction-scheduling-of-bilinear-over_888.patch \
            file://0005-ARM-NEON-Instruction-scheduling-of-bilinear-over_888.patch \
+           file://0006-ARM-NEON-Standard-fast-path-src_n_8_8888.patch \
+           file://0007-ARM-NEON-Standard-fast-path-src_n_8_8.patch \
            file://0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch \
           "
 
