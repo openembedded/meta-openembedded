@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
 
 DEPENDS = "libusb1 udev glib-2.0 dbus-glib polkit"
 
-SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "8e7bcb33570d1a4edc5c3b0daf3fe5ae"
-SRC_URI[sha256sum] = "5c2cd224527d8d32a23d802864b9ad80c407028a07e74329c05da36dea4104ea"
+SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
+SRC_URI[md5sum] = "18803f82102d56aac90949d1e4251645"
+SRC_URI[sha256sum] = "81eb44c0453b264a737d32f763a31d5b1776f050a47d5be85fc5e9caf874a4c5"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig gettext
 
 EXTRA_OECONF = " --with-backend=linux"
 
