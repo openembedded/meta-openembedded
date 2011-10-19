@@ -3,6 +3,8 @@ HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6394136134ac02d730a7302418c94fb6"
 
+PR = "r1"
+
 DEPENDS = "openssl"
 
 def nodejs_get_gcc_version(d):
@@ -37,4 +39,5 @@ do_install () {
   DESTDIR=${D} oe_runmake install
 }
 
+FILES_${PN} += "${libdir}/node/wafadmin"
 BBCLASSEXTEND = "native"
