@@ -6,6 +6,8 @@ DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libgl
 
 inherit gnome
 
+PR = "r1"
+
 SRC_URI[archive.md5sum] = "805d56f756e6844f16b57d9132f5ed81"
 SRC_URI[archive.sha256sum] = "bb34653b7524bf36c79f86545a255d05c076367a2461389a7512b9e0ef0df38f"
 
@@ -23,7 +25,7 @@ do_configure_append() {
 }
 
 RDEPENDS_${PN} =+ "networkmanager"
-RRECOMMENDS_${PN} =+ "gnome-bluetooth"
+RRECOMMENDS_${PN} =+ "gnome-bluetooth gnome-keyring"
 
 FILES_${PN} += "${datadir}/nm-applet/ \
         ${datadir}/gnome-vpn-properties/ \
