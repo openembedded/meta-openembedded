@@ -3,13 +3,38 @@ HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
-PR = "r3"
+PR = "r4"
 
-SRC_URI = "git://github.com/jadonk/cloud9.git;protocol=git \
+SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
+           git://github.com/ajaxorg/connect.git;destsuffix=git/support/connect;name=connect \
+           git://github.com/ajaxorg/async.js.git;destsuffix=git/support/asyncjs;name=asyncjs \
+           git://github.com/ajaxorg/jsDAV.git;destsuffix=git/support/jsdav;name=jsdav \
+           git://github.com/ajaxorg/lib-v8debug.git;destsuffix=git/support/lib-v8debug;name=lib-v8debug \
+           git://github.com/ajaxorg/ace.git;destsuffix=git/support/ace;name=ace \
+           git://github.com/ajaxorg/apf.git;destsuffix=git/support/apf;name=apf \
+           git://github.com/ajaxorg/node-builds-v4.git;destsuffix=git/support/node-builds-v4;name=node-builds-v4 \
+           git://github.com/ajaxorg/gnu-builds.git;destsuffix=git/support/gnu-builds;name=gnu-builds \
+           git://github.com/ajaxorg/socket.io.git;destsuffix=git/support/socket.io;name=socketio \
+           git://github.com/ajaxorg/socket.io-client.git;destsuffix=git/support/socket.io-client;name=socketio-client \
+           git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglifyjs \
            file://cloud9.service \
           "
 
-SRCREV = "08bae1d1cc2ba9f7f883a25afd07f0339a82fa8b"
+SRCREV_cloud9ide = "593948c9aaded845cb8f3ced49ef41428e351264"
+SRCREV_connect = "3d1d77a113fa2f18020f562832dca3d4c2d717a2"
+SRCREV_asyncjs = "d36ead408e2959b1e99572114ef3a1b6a48c1072"
+SRCREV_jsdav = "f1d1f691fdb521701c1c06d158d213575e4e4e5e"
+SRCREV_lib-v8debug = "29b20d01e6854da2173e1665ea141dab6b5a8104"
+SRCREV_ace = "d85acd115e88e4461a04fafc6a93a801aeb057ec"
+SRCREV_apf = "a7e0daa29573f319f22be5a6cfa275243502604b"
+SRCREV_node-builds-v4 = "2e3ac47b7b8d506147feb08372cc36b988b6195a"
+SRCREV_gnu-builds = "9ff133d95f9a41d749fe16220d81517dad9a2db3"
+SRCREV_socketio = "8f82b1e4e1076a3092fed77e0dc9379425f59b9d"
+SRCREV_socketio-client = "7b5335d1ed88564928a5d00d8a750ff9f9c627a5"
+SRCREV_uglifyjs = "941c845c4a01e4e47a158458fe846eb36d0828ad"
+
+SRCREV_FORMAT = "cloud9ide"
+
 S = "${WORKDIR}/git"
 
 # Most of cloud9 is in git submodules that still need to be fetched.
