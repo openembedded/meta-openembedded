@@ -5,10 +5,11 @@ LICENSE = "GPLv2&LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
            file://define_GNU_SOURCE.patch \
+           file://gold-unversioned-symbol.patch \
           "
 
 SRC_URI[md5sum] = "eaa32c8cef56a981656a786f258a002a"
