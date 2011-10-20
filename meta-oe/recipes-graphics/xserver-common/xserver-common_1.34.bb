@@ -22,6 +22,7 @@ SRC_URI_append = " \
                    file://Xserver.n900.patch \
                    file://Xserver.nexuss.patch \
                    file://Xserver.nexusone.patch \
+                   file://Xserver.gta04.patch \
 "
 
 

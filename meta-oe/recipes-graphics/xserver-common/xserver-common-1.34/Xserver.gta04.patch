@@ -1,0 +1,32 @@
+From 95d741d6849a2faddf8c1e930c7250ead90e7bed Mon Sep 17 00:00:00 2001
+From: Klaus Kurzmann <mok@fluxnetz.de>
+Date: Thu, 20 Oct 2011 09:05:43 +0200
+Subject: [PATCH] gta04
+
+Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+---
+ X11/xserver-common |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/X11/xserver-common b/X11/xserver-common
+index 448b262..208bbfd 100644
+--- a/X11/xserver-common
++++ b/X11/xserver-common
+@@ -161,6 +161,14 @@ else
+                 ARGS="$ARGS -dpi ${DPI} -nocursor"
+             fi
+             ;;
++        "gta04")
++            DPI="280"
++            if [ "$XSERVER" != "Xorg" ] ; then
++                ARGS="$ARGS -screen ${SCREEN_SIZE}"
++            else
++                ARGS="$ARGS -dpi ${DPI} -nocursor"
++            fi
++            ;;
+         "motorola_ezx_platform")
+             ARGS="$ARGS -screen 240x320"
+             DPI="170" ;;
+-- 
+1.7.7
+
