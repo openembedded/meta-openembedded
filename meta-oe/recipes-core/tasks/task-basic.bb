@@ -5,13 +5,17 @@ DESCRIPTION = "Basic task to get a device online"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r1"
+PR = "r2"
 
 inherit task
 
 # packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
 #
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+# Poke extra recomendations into the list using your machine.conf
+#
+MACHINE_EXTRA_RRECOMMENDS ?= ""
 
 #
 # Select between dropbear and openssh
@@ -41,6 +45,7 @@ RDEPENDS_${PN} = "\
 #   3) Nice to have: packages that are nice to have, but aren't strictly needed  
 #
 RRECOMMENDS_${PN} = "\
+	${MACHINE_EXTRA_RRECOMMENDS} \
 	${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
