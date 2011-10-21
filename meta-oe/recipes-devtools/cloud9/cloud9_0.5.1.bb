@@ -3,9 +3,9 @@ HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
-DEPENDS = "nodejs-native"
+DEPENDS = "libxml2 nodejs-native"
 
-PR = "r5"
+PR = "r6"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -68,32 +68,41 @@ S = "${WORKDIR}/git"
 
 do_configure () {
  cd ${WORKDIR}/o3
- node-waf configure
+ node-waf -vv configure
 }
+
+EXTRA_CXXFLAGS = "-Idefault/include -I../include -Idefault/hosts -I../hosts -Idefault/modules -I../modules -Idefault/deps -I../deps -I${STAGING_DIR_NATIVE}/usr/include/node -fPIC -DPIC"
 
 do_compile () {
  cd ${WORKDIR}/o3
  node tools/gluegen.js
- node-waf
+ cd hosts
+ ${CXX} ${TARGET_CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o sh_node.o node-o3/sh_node.cc
+ ${CXX} ${TARGET_CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o sh_node_libs.o node-o3/sh_node_libs.cc
+ cd ..
+ ${CXX} ${TARGET_LDFLAGS} hosts/sh_node.o hosts/sh_node_libs.o -o o3.node -shared -Wl,-Bdynamic -lxml2
 }
 
 do_install () {
- install -m 0755 -d ${D}/usr/share/cloud9 ${D}${bindir} ${D}/var/lib/cloud9
- rsync -r --exclude=".*" ${S}/* ${D}/usr/share/cloud9
+ install -m 0755 -d ${D}${datadir}/cloud9 ${D}${bindir} ${D}/var/lib/cloud9
+ rsync -r --exclude=".*" ${S}/* ${D}${datadir}/cloud9
 
  touch ${D}${bindir}/cloud9
  echo "#!/bin/sh" > ${D}${bindir}/cloud9
- echo "node /usr/share/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000" >> ${D}${bindir}/cloud9
+ echo "node ${datadir}/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000" >> ${D}${bindir}/cloud9
  chmod 0755 ${D}${bindir}/cloud9
 
- install -m 0755 -d ${D}/usr/share/cloud9/support/jsdav/support/node-o3-xml/lib
- install -m 0644 ${WORKDIR}/o3/modules/o3.js ${D}/usr/share/cloud9/support/jsdav/support/node-o3-xml/lib/o3-xml.js
- install -m 0755 ${WORKDIR}/o3/build/default/o3.node ${D}/usr/share/cloud9/support/jsdav/support/node-o3-xml/lib/o3.node
+ install -m 0755 -d ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib
+ install -m 0644 ${WORKDIR}/o3/modules/o3.js ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/o3-xml.js
+ install -m 0755 ${WORKDIR}/o3/o3.node ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/o3.node
 
  install -m 0755 -d ${D}${base_libdir}/systemd/system
  install -m 0644 ${WORKDIR}/*.service ${D}${base_libdir}/systemd/system/
 }
 
+FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/node-o3-xml/.debug \
+                    ${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/.debug \
+                   "
 
 FILES_${PN} += "${base_libdir}/systemd/system"
 RDEPENDS_${PN} = "nodejs gzip"
