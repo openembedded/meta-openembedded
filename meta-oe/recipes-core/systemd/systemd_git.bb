@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r1"
+PR = "r2"
 
 inherit pkgconfig autotools vala perlnative
 
@@ -54,7 +54,7 @@ do_install() {
 	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
 
 	# provide support for initramfs
-	ln -s ${base_sbindir}/init ${D}/systemd
+	ln -s ${base_bindir}/systemd ${D}/init
 }
 
 PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
