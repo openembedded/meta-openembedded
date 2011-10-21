@@ -17,6 +17,13 @@ case "$1" in
     if [ "$2" != "background" ]; then
       $0 $1 background &
     else
+       # work around from /etc/X11/Xinit
+       export USER=root
+       export HOME=/home/root
+       if [ ! -d $HOME ] && [ -d /root ]; then
+         HOME=/root
+       fi
+
        . /etc/profile
 
        echo "Starting Xserver"
