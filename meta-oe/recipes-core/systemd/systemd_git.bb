@@ -14,9 +14,9 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r2"
+PR = "r3"
 
-inherit pkgconfig autotools vala perlnative
+inherit useradd pkgconfig autotools vala perlnative
 
 SRCREV = "64685e0cea62b4937f0804e47ce2cb7929f58223"
 
@@ -58,6 +58,9 @@ do_install() {
 }
 
 PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
+
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "-r lock"
 
 FILES_${PN}-initramfs = "/init"
 RDEPENDS_${PN}-initramfs = "${PN}"
@@ -113,12 +116,4 @@ update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
-
-# can't do this offline, but we need the u-a bits above
-if [ "x$D" != "x" ]; then
-	echo "can't do addgroup offline" ; exit 1
-else
-	grep "^lock:" /etc/group > /dev/null || addgroup lock
-fi
 }
-
