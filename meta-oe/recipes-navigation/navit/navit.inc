@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a4c51733b63d82df87995454bdc4b654 \
 
 SECTION = "x11/applications"
 DEPENDS = "glib-2.0 gtk+ qt4-x11-free gd gypsy librsvg-native"
-RDEPENDS_${PN} = " navit-icons ${PN}-config "
+RDEPENDS_${PN} = " ${PN}-icons ${PN}-config "
 RDEPENDS_${PN}-gui-qml = "qt4-plugin-imageformat-svg"
 RRECOMMENDS_${PN} = "gpsd ${PN}-dbus ${PN}-speech-cmdline ${PN}-gui-internal ${PN}-graphics-gtk"
 RSUGGESTS_${PN} = "flite-alsa espeak ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-qt ${PN}-maptool"
@@ -33,7 +33,7 @@ EXTRA_OECONF += " \
 require navit-fpu.inc
 EXTRA_OECONF += "${@get_navit_fpu_setting(bb, d)}"
 
-PACKAGES =+ "${PN}-maptool ${PN}-config ${PN}-dbus ${PN}-speech-cmdline ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-internal ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-gtk ${PN}-graphics-qt"
+PACKAGES =+ "${PN}-maptool ${PN}-config ${PN}-dbus ${PN}-speech-cmdline ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-internal ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-gtk ${PN}-graphics-qt ${PN}-icons"
 
 EXTRA_AUTORECONF = " -I m4"
 
@@ -65,10 +65,9 @@ FILES_${PN}-gui-internal = " ${libdir}/${PN}/gui/libgui_internal.so "
 FILES_${PN}-graphics-sdl = " ${libdir}/${PN}/graphics/libgraphics_sdl.so "
 FILES_${PN}-graphics-qt = " ${libdir}/${PN}/graphics/libgraphics_qt_qpainter.so "
 FILES_${PN}-graphics-gtk = " ${libdir}/${PN}/graphics/libgraphics_gtk_drawing_area.so "
+FILES_${PN}-icons = "/usr/share/navit/xpm/"
 
 do_configure_prepend() {
-  #Remove xpm building, replaced by icons in own package
-  sed -i 's/\(.*SUBDIRS.*\) xpm\( \|$\)\(.*\)/\1\2\3/g' ${S}/navit/Makefile.am
   # MOC=`$PKG_CONFIG QtGui --variable=moc_location` returns only /usr/bin/moc4 which is not available on hosts without Qt
   sed -i "s#MOC=#MOC=${STAGING_DIR_NATIVE}#g" ${S}/configure.in
 }
