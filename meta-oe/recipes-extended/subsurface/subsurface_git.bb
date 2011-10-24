@@ -6,8 +6,11 @@ DEPENDS = "libdivecomputer gtk+ libxml2 glib-2.0"
 
 inherit gtk-icon-cache
 
-PV = "1.0"
-SRCREV = "f2c61aefa762ce2ef7dea61886afeb23b0fe5eff"
+inherit gitpkgv
+PKGV = "${GITPKGVTAG}"
+PV = "1.1"
+
+SRCREV = "bd275d73ac06823619230915a3aa29deddc996fb"
 SRC_URI = "git://subsurface.hohndel.org/subsurface.git"
 S = "${WORKDIR}/git"
 
@@ -18,8 +21,7 @@ EXTRA_OEMAKE = "CC='${CC}' \
                "
 
 do_install() {
-	install -d ${D}${datadir}/man/man1
-	oe_runmake install prefix=${D}${prefix}
+	oe_runmake install DESTDIR=${D}
 	rm ${D}${datadir}/icons/hicolor/icon-theme.cache
 }
 
