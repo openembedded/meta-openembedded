@@ -1,0 +1,15 @@
+Index: memtester-4.0.5/Makefile
+===================================================================
+--- memtester-4.0.5.orig/Makefile	2005-03-14 06:02:30.000000000 -0800
++++ memtester-4.0.5/Makefile	2006-07-08 23:53:42.000000000 -0700
+@@ -24,8 +24,8 @@
+ auto-ccld.sh: \
+ conf-cc conf-ld warn-auto.sh
+ 	( cat warn-auto.sh; \
+-	echo CC=\'`head -1 conf-cc`\'; \
+-	echo LD=\'`head -1 conf-ld`\' \
++	echo CC=\'`head -n 1 conf-cc`\'; \
++	echo LD=\'`head -n 1 conf-ld`\' \
+ 	) > auto-ccld.sh
+ 
+ compile: \
