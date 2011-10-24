@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
 DEPENDS = "libxml2 nodejs-native"
 
-PR = "r6"
+PR = "r7"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -92,16 +92,16 @@ do_install () {
  echo "node ${datadir}/cloud9/bin/cloud9.js -l 0.0.0.0 -w /var/lib/cloud9 -p 3000" >> ${D}${bindir}/cloud9
  chmod 0755 ${D}${bindir}/cloud9
 
- install -m 0755 -d ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib
- install -m 0644 ${WORKDIR}/o3/modules/o3.js ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/o3-xml.js
- install -m 0755 ${WORKDIR}/o3/o3.node ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/o3.node
+ install -m 0755 -d ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib
+ install -m 0644 ${WORKDIR}/o3/modules/o3.js ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml.js
+ install -m 0755 ${WORKDIR}/o3/o3.node ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3.node
 
  install -m 0755 -d ${D}${base_libdir}/systemd/system
  install -m 0644 ${WORKDIR}/*.service ${D}${base_libdir}/systemd/system/
 }
 
-FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/node-o3-xml/.debug \
-                    ${datadir}/cloud9/support/jsdav/support/node-o3-xml/lib/.debug \
+FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/node-o3-xml/.debug \
+                    ${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/.debug \
                    "
 
 FILES_${PN} += "${base_libdir}/systemd/system"
