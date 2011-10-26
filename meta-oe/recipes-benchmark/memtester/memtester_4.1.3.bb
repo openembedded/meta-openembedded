@@ -1,5 +1,6 @@
-SECTION = "console/utils"
 DESCRIPTION = "Utility to test for faulty memory subsystem"
+HOMEPAGE = "http://pyropus.ca/software/memtester/"
+SECTION = "console/utils"
 LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
@@ -9,8 +10,6 @@ SRC_URI += "file://Makefile.patch"
 
 SRC_URI[md5sum] = "e562451620cf5343016950462bc0dc38"
 SRC_URI[sha256sum] = "ac56f0b6d6d6e58bcf2a3fa7f2c9b29894f5177871f21115a1906c535106acf6"
-
-S = "${WORKDIR}/memtester-${PV}"
 
 do_compile () {
 	echo '${CC} ${CFLAGS} -DPOSIX -c' > conf-cc
@@ -24,4 +23,3 @@ do_install () {
 	install -m 0755 memtester ${D}${bindir}/
 	install -m 0755 memtester.8 ${D}${mandir}/man8/
 }
-
