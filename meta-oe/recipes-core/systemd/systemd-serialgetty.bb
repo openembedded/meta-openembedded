@@ -2,7 +2,9 @@ DESCRIPTION = "Systemd serial config"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
+PR = "r1"
+
+SERIAL_CONSOLE ?= "115200 ttyS0"
 
 SRC_URI = "file://LICENSE \
            file://serial-getty@.service"
