@@ -1,0 +1,104 @@
+From 24da1964f72429b0b4d20e0805cbd8346179527f Mon Sep 17 00:00:00 2001
+From: Matias De lellis <mati86dl@gmail.com>
+Date: Mon, 5 Sep 2011 14:17:29 -0300
+Subject: [PATCH] Port xfce4-weather-plugin to libxfce4ui
+
+---
+ configure.ac                   |    2 +-
+ panel-plugin/Makefile.am       |    4 ++--
+ panel-plugin/weather-config.c  |    2 +-
+ panel-plugin/weather-search.c  |    2 +-
+ panel-plugin/weather-summary.c |    2 +-
+ panel-plugin/weather.c         |    2 +-
+ 6 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 04f466a..d1bb58e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -59,7 +59,7 @@ dnl ***********************************
+ XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
+ XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.6.0])
+ XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.2])
+-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.2])
++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.7.0])
+ XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.99.1])
+ XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
+ 
+diff --git a/panel-plugin/Makefile.am b/panel-plugin/Makefile.am
+index 50fc962..ed06da1 100644
+--- a/panel-plugin/Makefile.am
++++ b/panel-plugin/Makefile.am
+@@ -33,7 +33,7 @@ xfce4_weather_plugin_SOURCES =						\
+ 
+ xfce4_weather_plugin_CFLAGS =						\
+ 	$(LIBXFCE4PANEL_CFLAGS)						\
+-	$(LIBXFCEGUI4_CFLAGS)						\
++	$(LIBXFCE4UI_CFLAGS)						\
+ 	$(LIBXFCE4UTIL_CFLAGS)						\
+ 	$(GTK_CFLAGS)							\
+ 	$(LIBXML_CFLAGS)
+@@ -41,7 +41,7 @@ xfce4_weather_plugin_CFLAGS =						\
+ xfce4_weather_plugin_LDADD =						\
+ 	$(LIBXFCE4PANEL_LIBS)						\
+ 	$(LIBXFCE4UTIL_LIBS)						\
+-	$(LIBXFCEGUI4_LIBS)						\
++	$(LIBXFCE4UI_LIBS)						\
+ 	$(GTK_LIBS)							\
+ 	$(LIBXML_LIBS)							\
+ 	$(LIBRESOLV)
+diff --git a/panel-plugin/weather-config.c b/panel-plugin/weather-config.c
+index 3023e11..d183e75 100644
+--- a/panel-plugin/weather-config.c
++++ b/panel-plugin/weather-config.c
+@@ -20,7 +20,7 @@
+ #endif
+ 
+ #include <string.h>
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ 
+ #include "weather-parsers.h"
+ #include "weather-data.h"
+diff --git a/panel-plugin/weather-search.c b/panel-plugin/weather-search.c
+index c43ad15..dba395f 100644
+--- a/panel-plugin/weather-search.c
++++ b/panel-plugin/weather-search.c
+@@ -21,7 +21,7 @@
+ 
+ #include <string.h>
+ 
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ 
+ #include "weather-parsers.h"
+ #include "weather-data.h"
+diff --git a/panel-plugin/weather-summary.c b/panel-plugin/weather-summary.c
+index 36eeb14..b584c7d 100644
+--- a/panel-plugin/weather-summary.c
++++ b/panel-plugin/weather-summary.c
+@@ -19,7 +19,7 @@
+ #include <config.h>
+ #endif
+ 
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ 
+ #include "weather-parsers.h"
+ #include "weather-data.h"
+diff --git a/panel-plugin/weather.c b/panel-plugin/weather.c
+index cd341aa..c6c918d 100644
+--- a/panel-plugin/weather.c
++++ b/panel-plugin/weather.c
+@@ -23,7 +23,7 @@
+ #include <sys/stat.h>
+ 
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ 
+ #include "weather-parsers.h"
+ #include "weather-data.h"
+-- 
+1.7.6
+
