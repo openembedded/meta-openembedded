@@ -5,11 +5,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
 
-inherit xfce
+inherit xfce-app
 
-# SRC_URI must follow inherited one
-SRC_URI = "http://archive.xfce.org/src/apps/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2 \
-"
-
-SRC_URI[md5sum] = "4b0f58c00ef99f13ebf134979ee76980"
-SRC_URI[sha256sum] = "8f4986a646460b24282cc95cc30f03484a5c8e0f1c568a9f4ef5749a66ec62da"
+SRC_URI[md5sum] = "ee812d1200674960c246a7e05a1cbc6d"
+SRC_URI[sha256sum] = "c43832d7e6e37b670c3dd04dcf406266ff5980dc80abed7b8a82aa7c7defaa69"
