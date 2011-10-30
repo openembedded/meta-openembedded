@@ -7,12 +7,7 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.0 libsoup-
 
 PR = "r0"
 
-inherit xfce
-
-# SRC_URI must follow inherited one
-# decoded to e.g. http://archive.xfce.org/src/apps/xfce4-screenshooter/1.8/xfce4-screenshooter-1.8.0.tar.bz2
-SRC_URI = "http://archive.xfce.org/src/apps/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2 \
-"
+inherit xfce-app
 
 FILES_${PN} += "${datadir}/xfce4/panel-plugins/*"
 FILES_${PN}-dbg += "${libexecdir}/xfce4/panel-plugins/.debug"

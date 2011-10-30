@@ -6,10 +6,7 @@ DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib"
 
 PR = "r0"
 
-inherit xfce
-
-# SRC_URI must follow inherited one
-SRC_URI = "http://archive.xfce.org/src/apps/${PN}/${@'${PV}'[0:3]}/${PN}-${PV}.tar.bz2"
+inherit xfce-app
 
 FILES_${PN} += " \
     ${libdir}/xfce4/notifyd \
