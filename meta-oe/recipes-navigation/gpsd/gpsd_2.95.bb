@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
-PR = "r1"
+PR = "r2"
 
 EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
                 --x-libraries=${STAGING_LIBDIR} \
@@ -15,6 +15,7 @@ EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
 
 SRC_URI = "http://download.berlios.de/${PN}/${P}.tar.gz;name=gpsd \
            file://libtool.patch \
+           file://fix-build-with-python2.7.patch \
            file://gpsd-default \
            file://gpsd \
            file://60-gpsd.rules"
