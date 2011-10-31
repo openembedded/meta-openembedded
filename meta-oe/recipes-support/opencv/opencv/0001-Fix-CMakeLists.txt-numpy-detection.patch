@@ -1,0 +1,37 @@
+From a7301911a3cdf9196abd93ff894a9e86e0bcdc5e Mon Sep 17 00:00:00 2001
+From: Connor Abbott <cwabbott0@gmail.com>
+Date: Sun, 30 Oct 2011 20:00:03 -0400
+Subject: [PATCH] Fix CMakeLists.txt numpy detection
+
+Right now, the code opencv uses to detect where the numpy include files are doesn't work with cross-compiling because it uses the native python to determine the environment. To make this a little better, allow the user to explictly specify the path using -DPYTHON_NUMPY_INCLUDE_DIRS=path/to/numpy/include/dir .
+Signed-off-by: Connor Abbott <cwabbott0@gmail.com>
+---
+ CMakeLists.txt |   12 ++++++++----
+ 1 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ff8f20c..8edbd78 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -715,10 +715,14 @@ IF ("${PYTHON_VERSION_MAJOR_MINOR}" VERSION_GREATER 2.4)
+ ENDIF()
+ 
+ # Attempt to discover the NumPy include directory. If this succeeds, then build python API with NumPy
+-execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
+-            RESULT_VARIABLE PYTHON_NUMPY_PROCESS
+-            OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
+-            OUTPUT_STRIP_TRAILING_WHITESPACE)
++if(NOT DEFINED PYTHON_NUMPY_INCLUDE_DIRS)
++    execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import os; os.environ['DISTUTILS_USE_SDK']='1'; import numpy.distutils; print numpy.distutils.misc_util.get_numpy_include_dirs()[0]"
++                RESULT_VARIABLE PYTHON_NUMPY_PROCESS
++                OUTPUT_VARIABLE PYTHON_NUMPY_INCLUDE_DIRS
++                OUTPUT_STRIP_TRAILING_WHITESPACE)
++else()
++    set(PYTHON_NUMPY_PROCESS 0)
++endif()
+ 
+ if(PYTHON_NUMPY_PROCESS EQUAL 0)
+     set(PYTHON_USE_NUMPY 1)
+-- 
+1.7.4.1
+
