@@ -18,7 +18,7 @@ PACKAGES_DYNAMIC_virtclass-native = ""
 
 RRECOMMENDS_${PN} = "pango-module-basic-x pango-module-basic-fc" 
 
-INC_PR = "r1"
+INC_PR = "r2"
 
 # seems to go wrong with default cflags
 FULL_OPTIMIZATION_arm = "-O2"
