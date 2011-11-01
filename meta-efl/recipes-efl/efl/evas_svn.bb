@@ -1,6 +1,7 @@
 require evas.inc
 
-SRCREV = "${EFL_SRCREV}"
+#SRCREV = "${EFL_SRCREV}"
+SRCREV = "64516"
 PV = "1.0.999+svnr${SRCPV}"
 PR = "${INC_PR}.0"
 DEFAULT_PREFERENCE = "-1"
