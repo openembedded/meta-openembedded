@@ -3,11 +3,11 @@ DESCRIPTION = "Units to make systemd work better with existing sysvinit scripts"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r12"
+PR = "r14"
 
 inherit allarch
 
-SRC_URI = "file://opkg.service"
+SRC_URI = "file://*.service"
 
 do_install() {
 	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
@@ -15,6 +15,10 @@ do_install() {
 	install -m 0644 ${WORKDIR}/opkg.service ${D}${base_libdir}/systemd/system
 	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/basic.target.wants/
 	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+
+	install -m 0644 ${WORKDIR}/machineid.service ${D}${base_libdir}/systemd/system
+	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/basic.target.wants/
 
 	# hack to make old style sysvinit postinsts succeed
 	install -d ${D}${bindir}

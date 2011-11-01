@@ -1,0 +1,16 @@
+[Unit]
+Description=Machine ID first boot configure
+DefaultDependencies=no
+ConditionPathExists=|!/etc/machine-id
+After=remount-rootfs.service
+Before=sysinit.target
+
+[Service]
+ExecStart=/bin/systemd-machine-id-setup
+RemainAfterExit=No
+Type=oneshot
+StandardOutput=syslog
+
+[Install]
+WantedBy=basic.target
+WantedBy=sysinit.target
