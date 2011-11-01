@@ -1,5 +1,7 @@
 DEPENDS += "shared-mime-info-native shared-mime-info"
 
+EXTRA_OECONF += "--disable-update-mimedb"
+
 mime_postinst() {
 if [ "$1" = configure ]; then
 	if [ -x ${bindir}/update-mime-database ] ; then
