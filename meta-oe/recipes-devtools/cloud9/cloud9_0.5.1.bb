@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
 DEPENDS = "libxml2 nodejs-native"
 
-PR = "r7"
+PR = "r8"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -34,6 +34,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglify-js \
            file://0001-remove-x86-specific-compiler-flags.patch \
            file://cloud9.service \
+           file://cloud9-avahi.service \
           "
 
 SRCREV_cloud9ide = "f2bb59777c0c1fa9c82e8307094e3595e2c9db0b"
@@ -97,7 +98,10 @@ do_install () {
  install -m 0755 ${WORKDIR}/o3/o3.node ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3.node
 
  install -m 0755 -d ${D}${base_libdir}/systemd/system
- install -m 0644 ${WORKDIR}/*.service ${D}${base_libdir}/systemd/system/
+ install -m 0644 ${WORKDIR}/cloud9.service ${D}${base_libdir}/systemd/system/
+
+  install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+  install -m 0644 ${WORKDIR}/cloud9-avahi.service ${D}${sysconfdir}/avahi/services/
 }
 
 FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/node-o3-xml/.debug \
