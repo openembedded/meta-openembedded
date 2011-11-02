@@ -3,9 +3,11 @@ LICENSE = "Apache"
 LIC_FILES_CHKSUM = "file://README;md5=e7fb9954003d7cd93322ccf282210d1c"
 
 PV = "2.1.1"
-PR = "r2"
+PR = "r3"
 SRCREV = "066a0c38fb819419b8422980b61a0fd2f6ee4739"
-SRC_URI = "git://github.com/facebook/tornado.git"
+SRC_URI = "git://github.com/facebook/tornado.git \
+           file://0001-disable-AI_ADDRCONFIG-flag.patch \
+          "
 
 S = "${WORKDIR}/git"
 
