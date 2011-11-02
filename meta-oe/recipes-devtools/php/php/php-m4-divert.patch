@@ -1,0 +1,83 @@
+Patch taken from
+
+http://cvs.pld-linux.org/cgi-bin/cvsweb/packages/php/php-m4-divert.patch?rev=1.1
+
+diff -ur php-5.2.10.org/configure.in php-5.2.10/configure.in
+--- php-5.2.10.org/configure.in	2009-06-17 14:22:41.000000000 +0200
++++ php-5.2.10/configure.in	2009-08-18 12:16:25.317640253 +0200
+@@ -1,7 +1,7 @@
+ ## $Id: configure.in,v 1.579.2.52.2.139 2009/06/17 12:22:41 iliaa Exp $ -*- autoconf -*-
+ dnl ## Process this file with autoconf to produce a configure script.
+ 
+-divert(1)
++divert(1001)
+ 
+ dnl ## Diversion 1 is the autoconf + automake setup phase. We also
+ dnl ## set the PHP version, deal with platform-specific compile
+@@ -263,7 +263,7 @@
+ sinclude(TSRM/tsrm.m4)
+ 
+ 
+-divert(2)
++divert(1002)
+ 
+ dnl ## Diversion 2 is where we set PHP-specific options and come up
+ dnl ## with reasonable default values for them. We check for pthreads here
+@@ -302,7 +302,7 @@
+   PTHREADS_FLAGS
+ fi
+ 
+-divert(3)
++divert(1003)
+ 
+ dnl ## In diversion 3 we check for compile-time options to the PHP
+ dnl ## core and how to deal with different system dependencies.
+@@ -661,7 +661,7 @@
+   PHP_CRYPT_R_STYLE
+ fi
+ 
+-divert(4)
++divert(1004)
+ 
+ dnl ## In diversion 4 we check user-configurable general settings.
+ 
+@@ -902,7 +902,7 @@
+   AC_MSG_RESULT([using system default])
+ fi
+ 
+-divert(5)
++divert(1005)
+ 
+ dnl ## In diversion 5 we check which extensions should be compiled.
+ dnl ## All of these are normally in the extension directories.
+diff -ur php-5.2.10.org/ext/standard/config.m4 php-5.2.10/ext/standard/config.m4
+--- php-5.2.10.org/ext/standard/config.m4	2007-07-11 13:56:03.000000000 +0200
++++ php-5.2.10/ext/standard/config.m4	2009-08-18 12:16:25.317640253 +0200
+@@ -1,6 +1,6 @@
+ dnl $Id: config.m4,v 1.80.2.3.2.3 2007/07/11 11:56:03 jani Exp $ -*- autoconf -*-
+ 
+-divert(3)dnl
++divert(1003)dnl
+ 
+ dnl
+ dnl Check if flush should be called explicitly after buffered io
+@@ -205,7 +205,7 @@
+ AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpclass isinf isnan)
+ AC_FUNC_FNMATCH	
+ 
+-divert(5)dnl
++divert(1005)dnl
+ 
+ dnl
+ dnl Check for regex library type
+diff -ur php-5.2.10.org/scripts/phpize.m4 php-5.2.10/scripts/phpize.m4
+--- php-5.2.10.org/scripts/phpize.m4	2009-06-02 21:54:22.000000000 +0200
++++ php-5.2.10/scripts/phpize.m4	2009-08-18 12:16:25.317640253 +0200
+@@ -1,6 +1,6 @@
+ dnl This file becomes configure.in for self-contained extensions.
+ 
+-divert(1)
++divert(1001)
+ 
+ AC_PREREQ(2.13)
+ AC_INIT(config.m4)

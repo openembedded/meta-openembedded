@@ -1,0 +1,27 @@
+Index: php-5.2.13/acinclude.m4
+===================================================================
+--- php-5.2.13.orig/acinclude.m4
++++ php-5.2.13/acinclude.m4
+@@ -2430,7 +2430,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+   dnl
+   dnl Check libc first if no path is provided in --with-iconv
+   dnl
+-  if test "$PHP_ICONV" = "yes"; then
++  dnl must check against no, not against yes as PHP_ICONV can also include a path, which implies yes
++  if test "$PHP_ICONV" != "no"; then
+     AC_CHECK_FUNC(iconv, [
+       found_iconv=yes
+     ],[
+Index: php-5.2.13/ext/iconv/config.m4
+===================================================================
+--- php-5.2.13.orig/ext/iconv/config.m4
++++ php-5.2.13/ext/iconv/config.m4
+@@ -15,7 +15,7 @@ if test "$PHP_ICONV" != "no"; then
+ 
+   if test "$iconv_avail" != "no"; then
+     if test -z "$ICONV_DIR"; then
+-      for i in /usr/local /usr; do
++      for i in $PHP_ICONV /usr/local /usr; do
+         if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h"; then
+           PHP_ICONV_PREFIX="$i"
+           break

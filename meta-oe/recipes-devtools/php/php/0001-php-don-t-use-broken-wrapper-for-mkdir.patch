@@ -1,0 +1,26 @@
+From 411ec4b31fdcc524f13fe5be80fd6769b7d16a5d Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 3 Nov 2011 14:27:15 +0100
+Subject: [PATCH] php: don't use broken wrapper for mkdir
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+
+Upstream-status: Inappropriate
+
+ Makefile.global |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile.global b/Makefile.global
+index 8dad0e4..abdb5d2 100644
+--- a/Makefile.global
++++ b/Makefile.global
+@@ -1,4 +1,4 @@
+-mkinstalldirs = $(top_srcdir)/build/shtool mkdir -p
++mkinstalldirs = mkdir -p
+ INSTALL = $(top_srcdir)/build/shtool install -c
+ INSTALL_DATA = $(INSTALL) -m 644
+ 
+-- 
+1.7.2.5
+

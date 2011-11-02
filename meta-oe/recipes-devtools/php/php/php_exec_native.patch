@@ -1,0 +1,11 @@
+--- php/configure.in.orig	2011-03-12 02:13:19.000000000 +0100
++++ php/configure.in	2011-03-12 02:14:05.000000000 +0100
+@@ -1216,7 +1216,7 @@
+   PHP_INSTALL_CLI_TARGET="install-cli"
+   PHP_ADD_SOURCES(sapi/cli, php_cli.c php_cli_readline.c,, cli)
+   PHP_INSTALLED_SAPIS="cli $PHP_SAPI"
+-  PHP_EXECUTABLE="\$(top_builddir)/\$(SAPI_CLI_PATH)"
++  PHP_EXECUTABLE="${PHP_NATIVE_DIR}/php"
+ else
+   PHP_INSTALLED_SAPIS="$PHP_SAPI"
+ fi

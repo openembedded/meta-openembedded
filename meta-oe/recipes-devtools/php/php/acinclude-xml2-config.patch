@@ -1,0 +1,18 @@
+--- /orig-acinclude.m4 2007-02-20 15:03:25.000000000 +0200
++++ /acinclude.m4      2007-02-20 15:03:24.000000000 +0200
+@@ -2359,12 +2359,9 @@
+ AC_DEFUN([PHP_SETUP_LIBXML], [
+ AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
+ [
+-  for i in $PHP_LIBXML_DIR /usr/local /usr; do
+-    if test -x "$i/bin/xml2-config"; then
+-      ac_cv_php_xml2_config_path="$i/bin/xml2-config"
+-      break
+-    fi
+-  done
++
++      ac_cv_php_xml2_config_path="$PHP_LIBXML_DIR/xml2-config"
++
+ ])
+
+   if test -x "$ac_cv_php_xml2_config_path"; then
