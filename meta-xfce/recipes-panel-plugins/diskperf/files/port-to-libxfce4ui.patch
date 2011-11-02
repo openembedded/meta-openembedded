@@ -1,0 +1,142 @@
+From c154d023bca9b3022cc3b99094c0a3aedb2f3bfb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmx.de>
+Date: Wed, 2 Nov 2011 18:11:39 +0100
+Subject: [PATCH] port to libxfce4ui
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmx.de>
+---
+ configure.ac              |    4 ++--
+ panel-plugin/Makefile.am  |    4 ++--
+ panel-plugin/config_gui.c |    2 +-
+ panel-plugin/config_gui.h |    2 +-
+ panel-plugin/main.c       |   17 +++++++++++------
+ 5 files changed, 17 insertions(+), 12 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index e083872..e0eb74b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -48,8 +48,8 @@ XDT_I18N([@LINGUAS@])
+ dnl ***********************************
+ dnl *** Check for required packages ***
+ dnl ***********************************
+-XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.90])
+-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90])
++XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.8.0])
++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.8.0])
+ 
+ dnl ***********************************
+ dnl *** Check for debugging support ***
+diff --git a/panel-plugin/Makefile.am b/panel-plugin/Makefile.am
+index 8f86c9a..6a30116 100644
+--- a/panel-plugin/Makefile.am
++++ b/panel-plugin/Makefile.am
+@@ -21,11 +21,11 @@ xfce4_diskperf_plugin_SOURCES =					\
+ 
+ xfce4_diskperf_plugin_CFLAGS =					\
+ 	$(LIBXFCE4PANEL_CFLAGS)					\
+-	$(LIBXFCEGUI4_CFLAGS)
++	$(LIBXFCE4UI_CFLAGS)
+ 
+ xfce4_diskperf_plugin_LDADD=					\
+ 	$(LIBXFCE4PANEL_LIBS)					\
+-	$(LIBXFCEGUI4_LIBS)
++	$(LIBXFCE4UI_LIBS)
+ 
+ #
+ # Desktop file
+diff --git a/panel-plugin/config_gui.c b/panel-plugin/config_gui.c
+index 89f630a..34982bf 100644
+--- a/panel-plugin/config_gui.c
++++ b/panel-plugin/config_gui.c
+@@ -32,7 +32,7 @@
+ #include <gtk/gtk.h>
+ 
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfcegui4/dialogs.h>
++#include <libxfce4ui/libxfce4ui.h>
+ 
+ 
+ #define COPYVAL(var, field)	((var)->field = field)
+diff --git a/panel-plugin/config_gui.h b/panel-plugin/config_gui.h
+index aa49838..6b49a94 100644
+--- a/panel-plugin/config_gui.h
++++ b/panel-plugin/config_gui.h
+@@ -24,7 +24,7 @@
+ #include <gtk/gtk.h>
+ 
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfcegui4/dialogs.h>
++#include <libxfce4ui/libxfce4ui.h>
+ 
+ 
+ typedef struct gui_t {
+diff --git a/panel-plugin/main.c b/panel-plugin/main.c
+index 43b0390..45020c1 100644
+--- a/panel-plugin/main.c
++++ b/panel-plugin/main.c
+@@ -25,7 +25,7 @@
+ #include <gtk/gtk.h>
+ 
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfcegui4/libxfcegui4.h>
++#include <libxfce4ui/libxfce4ui.h>
+ #include <libxfce4panel/xfce-panel-plugin.h>
+ 
+ #include <stdlib.h>
+@@ -631,7 +631,8 @@ static void SetDevice (Widget_t p_wTF, void *p_pvPlugin)
+ 
+     status = stat (pcDevice, &oStat);
+     if (status == -1) {
+-	xfce_err ("%s\n"
++	xfce_dialog_show_error (NULL, NULL,
++                  "%s\n"
+ 		  "%s: %s (%d)",
+ 		  PLUGIN_NAME, pcDevice, strerror (errno), errno);
+ 	return;
+@@ -853,7 +854,8 @@ static int CheckStatsAvailability ()
+ 	return (0);
+     if (status < 0) {
+ 	status *= -1;
+-	xfce_err (_("%s\n"
++	xfce_dialog_show_error (NULL, NULL, 
++                  _("%s\n"
+ 		  "%s: %s (%d)\n\n"
+ 		  "This monitor will not work!\n"
+ 		  "Please remove it."),
+@@ -863,14 +865,16 @@ static int CheckStatsAvailability ()
+     }
+     switch (status) {
+ 	case NO_EXTENDED_STATS:
+-	    xfce_err (_("%s: No disk extended statistics found!\n"
++	    xfce_dialog_show_error (NULL, NULL, 
++                      _("%s: No disk extended statistics found!\n"
+ 		      "Either old kernel (< 2.4.20) or not\n"
+ 		      "compiled with CONFIG_BLK_STATS turned on.\n\n"
+ 		      "This monitor will not work!\n"
+ 		      "Please remove it."), PLUGIN_NAME);
+ 	    break;
+ 	default:
+-	    xfce_err (_("%s: Unknown error\n\n"
++	    xfce_dialog_show_error (NULL, NULL, 
++                      _("%s: Unknown error\n\n"
+ 		      "This monitor will not work!\n"
+ 		      "Please remove it."), PLUGIN_NAME);
+     }
+@@ -882,7 +886,8 @@ static int CheckStatsAvailability ()
+ static void About (Widget_t w, void *unused)
+ 	/* Called back when the About button in clicked */
+ {
+-    xfce_info (_("%s %s - Disk Performance Monitor\n"
++    xfce_dialog_show_info (NULL, NULL, 
++               _("%s %s - Disk Performance Monitor\n"
+ 	       "Display instantaneous disk I/O transfer rates and busy times "
+ 	       "on Linux and NetBSD systems\n\n"
+ 	       "(c) 2003, 2004 Roger Seguin <roger_seguin@msn.com>\n"
+-- 
+1.7.4.4
+
