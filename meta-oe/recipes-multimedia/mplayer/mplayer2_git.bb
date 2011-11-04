@@ -17,7 +17,7 @@ SRC_URI = "git://repo.or.cz/mplayer.git;protocol=git;branch=master \
            file://cross.compile.codec-cfg.patch \
 "
 
-SRC_URI_append_armv7a = " \
+SRC_URI_append_aarmv7a = " \
 	   file://0001-video-out-for-omapfb-support.patch \
 	  "
 
@@ -143,9 +143,10 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 
 do_configure_prepend_armv7a() {
 	cp ${STAGING_KERNEL_DIR}/arch/arm/plat-omap/include/mach/omapfb.h ${S}/libvo/omapfb.h || true
- 	cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S}/libvo/omapfb.h || true
+	cp ${STAGING_KERNEL_DIR}/include/asm-arm/arch-omap/omapfb.h ${S}/libvo/omapfb.h || true
 	cp ${STAGING_KERNEL_DIR}/include/linux/omapfb.h ${S}/libvo/omapfb.h || true
- 	sed -e 's/__user//g' -i ${S}/libvo/omapfb.h || true
+	cp ${STAGING_DIR_TARGET}/kernel/include/linux/omapfb.h ${S}/libvo/omapfb.h || true
+	sed -e 's/__user//g' -i ${S}/libvo/omapfb.h || true
 }
 
 CFLAGS_append = " -I${S}/libdvdread4 "
