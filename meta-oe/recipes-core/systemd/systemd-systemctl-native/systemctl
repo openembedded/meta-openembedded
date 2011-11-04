@@ -1,0 +1,51 @@
+#!/bin/sh
+
+ROOT=
+
+# parse command line params
+while [ $# != 0 ]; do
+	opt="$1"
+
+	case "$opt" in
+		enable)
+			shift
+
+			service="$1"
+			shift
+			;;
+		--root=*)
+			ROOT=${opt##--root=}
+			shift
+			;;
+		*)
+			echo "'$opt' is an unkown option; exiting with error"
+			exit 1
+			;;
+	esac
+done
+
+# find service file
+for p in $ROOT/etc/systemd/system \
+         $ROOT/lib/systemd/system \
+         $ROOT/usr/lib/systemd/system; do
+	if [ -e $p/$service ]; then
+		service_file=$p/$service
+		service_file=${service_file##$ROOT}
+	fi
+done
+if [ -z "$service_file" ]; then
+	echo "'$service' couldn't be found; exiting with error"
+	exit 1
+fi
+
+# create the required symbolic links
+wanted_by=$(grep WantedBy $ROOT/$service_file \
+                | sed 's,WantedBy=,,g' \
+                | tr ',' '\n' \
+                | grep '\.target$')
+
+for r in $wanted_by; do
+	mkdir -p $ROOT/etc/systemd/system/$r.wants
+	ln -s $service_file $ROOT/etc/systemd/system/$r.wants
+	echo "Enabled $service for $wanted_by."
+done
