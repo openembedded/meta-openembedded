@@ -1,0 +1,16 @@
+Upstream-Status: Pending
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+diff --git a/Makefile b/Makefile
+index 6013ca3..28c6383 100644
+--- a/Makefile
++++ b/Makefile
+@@ -600,7 +602,7 @@ mplayer$(EXESUF):
+ 	$(CC) -o $@ $^ $(EXTRALIBS)
+ 
+ codec-cfg$(EXESUF): codec-cfg.c codec-cfg.h
+-	$(HOST_CC) -O -DCODECS2HTML -I. -o $@ $<
++	$(BUILD_CC) -O -DCODECS2HTML -I. -Iffmpeg -o $@ $<
+ 
+ codecs.conf.h: codec-cfg$(EXESUF) etc/codecs.conf
+ 	./$^ > $@
