@@ -31,9 +31,12 @@ EXTRA_OECONF += "\
 INITSCRIPT_NAME = "connman"
 INITSCRIPT_PARAMS = "start 05 5 2 . stop 22 0 1 6 ."
 
+SYSTEMD_PACKAGES = "${PN}-systemd"
+SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
+
 PARALLEL_MAKE = ""
 
-inherit autotools pkgconfig update-rc.d
+inherit autotools pkgconfig update-rc.d systemd
 
 do_configure_append() {
 	ln -sf . include/connman
@@ -84,24 +87,7 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*.so.* \
 PACKAGES =+ "${PN}-systemd"
 # Package up systemd files
 FILES_${PN}-systemd += "${base_libdir}/systemd"
-
-pkg_postinst_connman-systemd() {
-	# can't do this offline
-	if [ "x$D" != "x" ]; then
-		exit 1
-	fi
-	
-	systemctl enable connman.service
-}
-
-pkg_postrm_connman-systemd() {
-	# can't do this offline
-	if [ "x$D" != "x" ]; then
-		exit 1
-	fi
-
-	systemctl disable connman.service
-}
+RDEPENDS_${PN}-systemd += "${PN}"
 
 # Needed when using DNS proxy feature
 RRECOMMENDS_${PN} += "dnsmasq-dbus"
