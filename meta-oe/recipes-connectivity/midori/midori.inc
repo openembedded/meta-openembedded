@@ -30,7 +30,7 @@ do_install() {
 	oe_runmake DESTDIR=${D} install
 }
 
-RRECOMMENDS_${PN} += "glib-networking"
+RRECOMMENDS_${PN} += "glib-networking ca-certificates"
 
 FILES_${PN}-dev += "${datadir}/vala/vapi"
 

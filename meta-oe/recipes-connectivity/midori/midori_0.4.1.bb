@@ -1,6 +1,6 @@
 require midori.inc
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
            file://waf \
