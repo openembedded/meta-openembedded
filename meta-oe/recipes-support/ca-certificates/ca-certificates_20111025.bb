@@ -1,14 +1,16 @@
 DESCRIPTION = "Common CA certificates"
 HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
 SECTION = "misc"
-LICENSE = "GPL"
+LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
            file://remove-c-rehash.patch"
-SRC_URI[md5sum] = "76a2b0381b0aa7a6892e2340cd2c159a"
-SRC_URI[sha256sum] = "b1b144a3732df638e25b84ec6414ca9d1da4898cfd06d86b09f671585ce9c747"
-inherit autotools
+
+SRC_URI[md5sum] = "dfd593c9f89e64351aae78b9be588696"
+SRC_URI[sha256sum] = "318bbf0f7c0a32adc10105f843148fd0e9e3b013de75645c02ea858652240924"
+
+inherit autotools allarch
 
 do_install_prepend() {
         mkdir -p ${D}/usr/share/ca-certificates
@@ -29,11 +31,12 @@ do_install_append() {
         done
 }
 
-inherit allarch
-PACKAGES = "${PN}"
-
 pkg_postinst_${PN} () {
-        /usr/sbin/update-ca-certificates
+if [ -n "$D" ] ; then
+	exit 1
+fi
+
+${sbindir}/update-ca-certificates
 }
 
 CONFFILES_${PN} = "/etc/ca-certificates.conf"
