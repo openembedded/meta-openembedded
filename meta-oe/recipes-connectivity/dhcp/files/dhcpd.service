@@ -1,0 +1,12 @@
+[Unit]
+Description=Dynamic Host Configuration Protocol (DHCP)
+After=syslog.target network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/dhcpd.pid
+EnvironmentFile=-/etc/default/dhcp-server
+ExecStart=/usr/sbin/dhcpd -cf /etc/dhcp/dhcpd.conf -q $INTERFACES
+
+[Install]
+WantedBy=multi-user.target
