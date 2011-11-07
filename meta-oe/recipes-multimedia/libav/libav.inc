@@ -54,6 +54,10 @@ EXTRA_OECONF = " \
         ${EXTRA_FFCONF} \
 "
 
+#| yasm not found, use --disable-yasm for a crippled build
+EXTRA_OECONF_append_x86-64 = " --disable-yasm"
+EXTRA_OECONF_append_x86 = " --disable-yasm"
+
 do_configure() {
 	# We don't have TARGET_PREFIX-pkgconfig
 	sed -i '/pkg_config_default="${cross_prefix}${pkg_config_default}"/d' ${S}/configure
