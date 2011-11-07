@@ -1,10 +1,13 @@
-require libnl.inc
+DESCRIPTION = "libnl is a library for applications dealing with netlink sockets"
+HOMEPAGE = "http://www.infradead.org/~tgr/libnl/"
+SECTION = "libs/network"
+
+inherit autotools pkgconfig
 
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2b41e13261a330ee784153ecbb6a82bc"
 
-
-PR = "${INC_PR}.0"
+PR = "r6"
 
 # move it to extra subdirectory
 includedir = "${prefix}/include/libnl1"
