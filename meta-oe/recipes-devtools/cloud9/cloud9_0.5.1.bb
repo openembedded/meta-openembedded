@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
 DEPENDS = "libxml2 nodejs-native"
 
-PR = "r9"
+PR = "r10"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -36,14 +36,14 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            file://cloud9-avahi.service \
           "
 
-SRCREV_cloud9ide = "f2bb59777c0c1fa9c82e8307094e3595e2c9db0b"
+SRCREV_cloud9ide = "2683fefcec52957e44d202de8f78f0dcf058c883"
 SRCREV_o3 = "806422e9fd12251d4a3bb408fd86773867d7e09a"
 SRCREV_ace = "9ec72ff319c06c4a1f93dae3157021eefbac338d"
 SRCREV_acewiki = "cc5ccde4565f7b21c81345f47e941e011e94b810"
 SRCREV_cockpit = "33f02ab3af5d755c98b3c58309ac2c62fc6de736"
 SRCREV_dryice = "375d9a339646d70846ad40eddaad406198dd9d40"
 SRCREV_pilot = "48ddaa841476ddf9210ccbb2b310952db8212084"
-SRCREV_apf = "6bdac74916fe85a6f63eb8561667628b5ede659c"
+SRCREV_apf = "b9dac5ac949e2890a8a8907346ebeb7103f4edf8"
 SRCREV_asyncjs = "d36ead408e2959b1e99572114ef3a1b6a48c1072"
 SRCREV_connect = "6bec95b51f2286b942bc7f340d62d816bcdc13d4"
 SRCREV_coffee-script = "a53c104db16d3ac9d13cf9f16834edec250b9749"
@@ -51,10 +51,10 @@ SRCREV_expresso = "7f10ab7fa655299b4e2f519065b0495e6ac34ef2"
 SRCREV_jscoverage = "0d4608a6b4275b020ba665389aa75897d5d4a584"
 SRCREV_less = "a2807288008587b95c6c2f8ba5cac16f1bcab98f"
 SRCREV_sass = "4dfd4c699e7a8baf226215ab044854c4507f4420"
-SRCREV_jsdav = "f1d1f691fdb521701c1c06d158d213575e4e4e5e"
+SRCREV_jsdav = "b06a73920ebdb1a671e86e2e47ee67400ba14785"
 SRCREV_async-js = "92fb710a70efd3cdc2376ebfba71a7fb3a4f1651"
 SRCREV_formidable = "0cba820cabc23250d47754e57d9f61cc73d12f2a"
-SRCREV_jsftp = "2343ab78e61dfe35312d4adabbc6ee36e0afd122"
+SRCREV_jsftp = "f93b4eeb6d96ffebbc378c8c040684cf82a63885"
 SRCREV_streamer = "1a7f75d4065819171ac91a09974199b932dbe17d"
 SRCREV_sftp = "a0539345134970d7535a19cb2608e3d1bc119d71"
 SRCREV_lib-v8debug = "29b20d01e6854da2173e1665ea141dab6b5a8104"
