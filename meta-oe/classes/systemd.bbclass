@@ -1,7 +1,4 @@
-SYSTEMDPN ?= "${PN}"
-
 DEPENDS_append = " systemd-systemctl-native"
-RDEPENDS_${SYSTEMDPN}_append = " systemd"
 
 systemd_postinst() {
 OPTS=""
@@ -67,9 +64,14 @@ python populate_packages_prepend () {
                 postrm += bb.data.getVar('systemd_postrm', localdata, 1)
 		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
 
+		rdepends = explode_deps(bb.data.getVar('RDEPENDS_' + pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "")
+		rdepends.append("systemd")
+		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
+
+
 	pkgs = bb.data.getVar('SYSTEMD_PACKAGES', d, 1)
 	if pkgs == None:
-		pkgs = bb.data.getVar('SYSTEMDPN', d, 1)
+		pkgs = bb.data.getVar('PN', d, 1)
 		packages = (bb.data.getVar('PACKAGES', d, 1) or "").split()
 		if not pkgs in packages and packages != []:
 			pkgs = packages[0]
