@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 # Needed for udev-extras
 DEPENDS = "gperf-native usbutils acl glib-2.0"
 
-# b3eccdce81d18ec36c6ea95ac161002fc33d1810 -> 174 tag
-SRCREV = "b3eccdce81d18ec36c6ea95ac161002fc33d1810"
+# 6f410b81aa6d588b03ae795c9b76468591ef7efa -> 175 tag
+SRCREV = "6f410b81aa6d588b03ae795c9b76468591ef7efa"
 
 # version specific SRC_URI
 SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
