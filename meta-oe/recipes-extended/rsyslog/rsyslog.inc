@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.rsyslog.com/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${PN}-${PV}.tar.gz \
            file://rsyslog.conf"
@@ -25,7 +25,7 @@ pkg_postinst_${PN} () {
 	systemctl enable rsyslog.service
 }
 
-pkg_postrm_${PN} () {
+pkg_prerm_${PN} () {
 	systemctl disable rsyslog.service
 }
 
