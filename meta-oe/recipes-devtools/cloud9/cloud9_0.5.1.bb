@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
 DEPENDS = "libxml2 nodejs-native"
 
-PR = "r10"
+PR = "r11"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -30,20 +30,20 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/node-sftp.git;destsuffix=git/support/jsdav/support/node-sftp;name=sftp \
            git://github.com/ajaxorg/lib-v8debug.git;destsuffix=git/support/lib-v8debug;name=lib-v8debug \
            git://github.com/ajaxorg/socket.io.git;destsuffix=git/support/socket.io;name=socketio \
-           git://github.com/ajaxorg/socket.io-client.git;destsuffix=git/support/socket.io-client;name=socketio-client \
+           git://github.com/LearnBoost/socket.io-client.git;destsuffix=git/support/socket.io-client;name=socketio-client \
            git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglify-js \
            file://cloud9.service \
            file://cloud9-avahi.service \
           "
 
-SRCREV_cloud9ide = "2683fefcec52957e44d202de8f78f0dcf058c883"
-SRCREV_o3 = "806422e9fd12251d4a3bb408fd86773867d7e09a"
+SRCREV_cloud9ide = "e61d37c19b981e8750084a1c3df60365f3436c19"
+SRCREV_o3 = "49ccc189a12728475875e9e7a9040553ab0b2316"
 SRCREV_ace = "9ec72ff319c06c4a1f93dae3157021eefbac338d"
 SRCREV_acewiki = "cc5ccde4565f7b21c81345f47e941e011e94b810"
 SRCREV_cockpit = "33f02ab3af5d755c98b3c58309ac2c62fc6de736"
 SRCREV_dryice = "375d9a339646d70846ad40eddaad406198dd9d40"
 SRCREV_pilot = "48ddaa841476ddf9210ccbb2b310952db8212084"
-SRCREV_apf = "b9dac5ac949e2890a8a8907346ebeb7103f4edf8"
+SRCREV_apf = "d8d24b52829803d7e55fec90607a2595975402b8"
 SRCREV_asyncjs = "d36ead408e2959b1e99572114ef3a1b6a48c1072"
 SRCREV_connect = "6bec95b51f2286b942bc7f340d62d816bcdc13d4"
 SRCREV_coffee-script = "a53c104db16d3ac9d13cf9f16834edec250b9749"
@@ -58,8 +58,8 @@ SRCREV_jsftp = "f93b4eeb6d96ffebbc378c8c040684cf82a63885"
 SRCREV_streamer = "1a7f75d4065819171ac91a09974199b932dbe17d"
 SRCREV_sftp = "a0539345134970d7535a19cb2608e3d1bc119d71"
 SRCREV_lib-v8debug = "29b20d01e6854da2173e1665ea141dab6b5a8104"
-SRCREV_socketio = "8f82b1e4e1076a3092fed77e0dc9379425f59b9d"
-SRCREV_socketio-client = "7b5335d1ed88564928a5d00d8a750ff9f9c627a5"
+SRCREV_socketio = "735d5239b325df2ba67d2b9bb4ec32442283bc06"
+SRCREV_socketio-client = "d12e0714e96490dfff770dc1d184e672549c6477"
 SRCREV_uglify-js = "941c845c4a01e4e47a158458fe846eb36d0828ad"
 
 SRCREV_FORMAT = "cloud9ide"
