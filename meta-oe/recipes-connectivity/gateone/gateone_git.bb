@@ -2,15 +2,18 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
 LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
 
-PR = "r5"
+PR = "r6"
 
 PV = "0.9"
-SRCREV = "031a85e8e24ae499e41e15b5077c33a4bd647bd3"
-SRC_URI = "git://github.com/liftoff/GateOne.git"
+SRCREV = "13836e34b70998cf59e3e5d8e2b9c90a60c26cc9"
+SRC_URI = "git://github.com/liftoff/GateOne.git \
+           file://gateone-avahi.service \
+           file://gateone.service \
+          "
 
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit distutils systemd
 
 do_configure_prepend() {
 	sed -i -e s:/opt:${D}${localstatedir}/lib: setup.py
@@ -18,9 +21,18 @@ do_configure_prepend() {
 
 do_install_append() {
 	install -d ${D}${localstatedir}/log/${BPN}
+
+	install -m 0755 -d ${D}${base_libdir}/systemd/system
+	install -m 0644 ${WORKDIR}/gateone.service ${D}${base_libdir}/systemd/system/
+
+	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
 }
 
-FILES_${PN} = "${localstatedir}"
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE = "gateone.service"
+
+FILES_${PN} = "${localstatedir} ${base_libdir} ${sysconfdir}"
 RDEPENDS_${PN} = "python-tornado \
                   python-datetime \
                   python-shell \
