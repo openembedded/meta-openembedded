@@ -4,15 +4,15 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
 
-DEPENDS = "systemd libnl1 dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
+DEPENDS = "systemd libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
 inherit gnome gettext
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
     file://gtk-doc.make \
 "
+SRC_URI[md5sum] = "bc0b00b8a187762d93c50a9706b4c5c3"
+SRC_URI[sha256sum] = "a178ed2f0b5a1045ec47b217ea531d0feba9208f6bcfe64b701174a5c1479816"
 
-SRC_URI[md5sum] = "f807102109e63ec708d4fd7a7f3f7deb"
-SRC_URI[sha256sum] = "98d928684ab1707a8200aaeb07a648e214096b8f0fe56294a49f08c18e39714f"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
