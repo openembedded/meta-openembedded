@@ -1,0 +1,10 @@
+[Unit]
+Description=GateOne daemon
+ConditionPathExists=|/var/lib/gateone
+
+[Service]
+WorkingDirectory=/var/lib/gateone
+ExecStart=/usr/bin/python gateone.py
+
+[Install]
+WantedBy=multi-user.target
