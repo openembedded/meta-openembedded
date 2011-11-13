@@ -6,10 +6,8 @@ DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libgl
 
 inherit gnome
 
-PR = "r1"
-
-SRC_URI[archive.md5sum] = "805d56f756e6844f16b57d9132f5ed81"
-SRC_URI[archive.sha256sum] = "bb34653b7524bf36c79f86545a255d05c076367a2461389a7512b9e0ef0df38f"
+SRC_URI[archive.md5sum] = "feaf2c8427d23924dde7de52ff4c5078"
+SRC_URI[archive.sha256sum] = "287301692224cc1bb20abe8bc52140461f565e58898a99daef11a188bb29b362"
 
 # GTK2.x mode
 EXTRA_OECONF += "--with-gtkver=2 \
@@ -28,6 +26,7 @@ RDEPENDS_${PN} =+ "networkmanager"
 RRECOMMENDS_${PN} =+ "gnome-bluetooth gnome-keyring"
 
 FILES_${PN} += "${datadir}/nm-applet/ \
+        ${datadir}/libnm-gtk/wifi.ui \
         ${datadir}/gnome-vpn-properties/ \
         ${datadir}/gnome/autostart/ \
         "
