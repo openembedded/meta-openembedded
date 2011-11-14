@@ -7,5 +7,7 @@ DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
 
 inherit xfce-app
 
+RRECOMMENDS_${PN} += "tumbler"
+
 SRC_URI[md5sum] = "124c4e98f837e35c728b0ff1d9078b1a"
 SRC_URI[sha256sum] = "a8bf0aa8a18af4ad8d53cbfc918bc92db51b5446cf7ff09e7b988fe5c7b986e4"
