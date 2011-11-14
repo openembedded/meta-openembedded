@@ -10,7 +10,7 @@ do_configure_prepend() {
   cp -f ${WORKDIR}/waf ${S}/
 }
 
-SRC_URI[midori.md5sum] = "33dde203cd71ae2b1d2adcc7f5739f65"
-SRC_URI[midori.sha256sum] = "b3c77ddb6f562a0ea3d2e6fbb756ca0dc158ad8410f4b60f8e5998c2f7305f07"
+SRC_URI[midori.md5sum] = "4ec9c3daa332ebe865cba6aa8256ef63"
+SRC_URI[midori.sha256sum] = "2e3f104254fb9a28c77e8acf1cc8ae6dd529499711d558b29146ab0fa915f0a7"
 
 
