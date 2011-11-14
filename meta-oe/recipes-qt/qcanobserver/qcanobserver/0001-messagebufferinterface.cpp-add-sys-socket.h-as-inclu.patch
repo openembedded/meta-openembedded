@@ -1,0 +1,41 @@
+From ebb464e3dfa2d59d65c3aa8ee652cb7607481f61 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 10 Nov 2011 19:38:27 +0100
+Subject: [PATCH] messagebufferinterface.cpp: move sys/socket.h include
+
+This prevents the following error during cross-compiling:
+
+| In file included from messagebufferinterface.cpp:30:
+| /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/linux/can.h:81: error: 'sa_family_t' does not name a type
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ messagebufferinterface.cpp |    7 ++++---
+ 1 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/messagebufferinterface.cpp b/messagebufferinterface.cpp
+index 116564c..3e9a535 100644
+--- a/messagebufferinterface.cpp
++++ b/messagebufferinterface.cpp
+@@ -25,14 +25,15 @@
+ #include <sys/time.h>
+ #include <QFile>
+ 
++#include <sys/types.h>
++#include <sys/socket.h>
++#include <sys/stat.h>
++
+ //#include <linux/can.h>
+ //#include <linux/can/raw.h>
+ #include <syscall.h>
+ 
+ #include "configdialog.h"
+-#include <sys/types.h>
+-#include <sys/socket.h>
+-#include <sys/stat.h>
+ #include <linux/can.h>
+ #include <linux/can/raw.h>
+ 
+-- 
+1.7.2.5
+

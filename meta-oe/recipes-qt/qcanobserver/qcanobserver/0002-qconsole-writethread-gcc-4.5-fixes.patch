@@ -1,0 +1,40 @@
+From 3b3cb5212b5dbf182beed171045e5d179b2e9000 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 11 Nov 2011 09:32:14 +0100
+Subject: [PATCH 2/2] qconsole, writethread: gcc 4.5 fixes
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ qconsole.cpp    |    2 +-
+ writethread.cpp |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/qconsole.cpp b/qconsole.cpp
+index ea86957..b5a4687 100644
+--- a/qconsole.cpp
++++ b/qconsole.cpp
+@@ -22,7 +22,7 @@ QConsole::QConsole()
+ 
+ {
+     this->setReadOnly(true);
+-    QTextEdit::QTextEdit(NULL);
++    QTextEdit(NULL);
+ }
+ 
+ 
+diff --git a/writethread.cpp b/writethread.cpp
+index ef7bc13..ff19560 100755
+--- a/writethread.cpp
++++ b/writethread.cpp
+@@ -69,7 +69,7 @@ void WriteThread::setDev(void *ConfData, QString InterfaceLib, bool shareDevLib)
+     if(!handle)
+     {
+         QString *ErrStr = new QString(" ");
+-        ErrStr->sprintf("%s %s","Could not load Device Mapper: ", InterfaceLib);
++        ErrStr->sprintf("%s %s","Could not load Device Mapper: ", (char*)InterfaceLib.constData());
+         ErrorDialog *ed = new ErrorDialog;
+         ed->SetErrorMessage(*ErrStr);
+         delete ErrStr;
+-- 
+1.7.2.5
+

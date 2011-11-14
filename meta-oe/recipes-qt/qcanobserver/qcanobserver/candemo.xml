@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<Database Name="EW-demo">
+    <ID Id="180">
+	<Item0>
+	    <interpret Multiplier="0.010986328125" Name="MotorPos" Offset="-180" Datamask="00120000">
+	    </interpret>
+	</Item0>
+	</ID>
+	    <ID Id="280">
+	<Item0>
+	    <interpret Multiplier="1.0" Name="Fanstatus" Offset="0" Datamask="10000000">
+	    </interpret>
+	</Item0>
+	</ID>
+	    <ID Id="380">
+	<Item0>
+	    <interpret Multiplier="0.00390625" Name="temp1" Offset="0" Datamask="00120000">
+	    </interpret>
+	</Item0>
+	</ID>
+	    <ID Id="480">
+	<Item0>
+	    <interpret Multiplier="1.0" Name="fanstatus" Offset="0" Datamask="10000000">
+	    </interpret>
+	</Item0>
+	</ID>
+	<ID Id="580">
+	<Item0>
+	    <interpret Multiplier="1.0" Name="lampstatus" Offset="0" Datamask="10000000">
+	    </interpret>
+	</Item0>
+	</ID>
+	<ID Id="680">
+	<Item0>
+	<interpret Multiplier="0.00390625" Name="Lightsensor" Offset="0" Datamask="00120000">
+	</interpret>
+	</Item0>
+	</ID>
+</Database>
