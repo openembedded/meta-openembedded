@@ -3,6 +3,8 @@ require samba-basic.inc
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
+PR = "r1"
+
 SRC_URI += "file://config-h.patch \
             file://tdbheaderfix.patch;patchdir=.."
 
@@ -12,6 +14,7 @@ SRC_URI[sha256sum] = "466410868375d19a286ac3fc5d9f3c267ce359189f8e0d76e72ec10bd5
 S = "${WORKDIR}/samba-${PV}/source3"
 
 EXTRA_OECONF += "\
+	ac_cv_path_PYTHON=/not/exist \
 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
 	samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
 	linux_getgrouplist_ok=no \
