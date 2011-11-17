@@ -1,0 +1,32 @@
+From 6e7ff802b689df18d7bd1d1a83639925371650cc Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 17 Nov 2011 11:17:42 +0100
+Subject: [PATCH] don't try to run /sbin/dhclient to get the version number, this break cross-compiling
+
+Upstream-status: Unknown
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ configure.ac |    6 ------
+ 1 files changed, 0 insertions(+), 6 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 5ee0cb0..b727db7 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -497,12 +497,6 @@ case "${with_dhclient}" in
+ 	/*)
+ 		DHCLIENT_PATH="${with_dhclient}"
+ 		DHCLIENT_VERSION=4
+-		if test -x "${with_dhclient}"; then
+-			case `"${with_dhclient}" --version 2>&1` in
+-				"isc-dhclient-4"*) DHCLIENT_VERSION=4; break;;
+-				"isc-dhclient-V3"*) DHCLIENT_VERSION=3; break;;
+-			esac
+-		fi
+ 		AC_MSG_NOTICE(using dhclient at ${DHCLIENT_PATH})
+ 		;;
+ 	no)	AC_MSG_NOTICE(dhclient support disabled)
+-- 
+1.7.2.5
+
