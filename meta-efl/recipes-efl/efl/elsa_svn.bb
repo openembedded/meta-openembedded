@@ -7,6 +7,7 @@ SECTION = "e/apps"
 inherit e gettext
 SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};proto=http;scmdata=keep \
   file://0001-pam-use-common-auth-instead-of-system-auth.patch \
+  file://0001-elsa-fix-to-build-really-without-PAM-support-if-PAM-.patch \
   file://xserver-nodm.service \
 "
 S = "${WORKDIR}/${SRCNAME}"
