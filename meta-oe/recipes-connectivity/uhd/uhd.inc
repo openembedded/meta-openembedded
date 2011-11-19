@@ -7,20 +7,22 @@ DEPENDS = "git-native python-cheetah-native boost libusb1 uhd-firmware orc-nativ
 RDEPENDS_${PN} += "uhd-firmware"
 
 PE = "1"
-INC_PR = "r0"
+INC_PR = "r1"
 
 inherit cmake
 
-PACKAGES =+ "${PN}-tests ${PN}-examples"
+PACKAGES =+ "${PN}-tests ${PN}-examples ${PN}-e1xx"
 
-FILES_${PN} += "${libdir}/libuhd.so"
-FILES_${PN} += "${datadir}/uhd/utils/*"
+INSANE_SKIP_${PN} = "dev-so"
+
+FILES_${PN} += "${libdir}/libuhd.so \
+                ${datadir}/uhd/utils/*"
 FILES_${PN}-tests += "${datadir}/uhd/tests/*"
-FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug \
-                    ${datadir}/uhd/utils/.debug \
-                    ${datadir}/uhd/tests/.debug \
-                    ${datadir}/uhd/usrp_e_utils/.debug \
-                   "
+FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
+FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
+"                   ${datadir}/uhd/utils/.debug/* \
+                    ${datadir}/uhd/tests/.debug/* \
+                    ${datadir}/uhd/usrp_e_utils/.debug/*"
 FILES_${PN}-examples = "${datadir}/uhd/examples/*"
 
 OECMAKE_BUILDPATH = "${S}/build"
