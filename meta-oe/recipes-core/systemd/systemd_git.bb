@@ -14,11 +14,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r5"
+PR = "r6"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "75c982a79f68a9209f0bcaf422d50414167bc5d1"
+SRCREV = "f6cebb3bd5a00d79c8131637c0f6796a75e6af99"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
            file://0001-disable-xsltproc-completely.patch \
