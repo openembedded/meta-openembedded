@@ -1,0 +1,63 @@
+--- /tmp/mathVariantAux.cc	2008-07-13 15:56:56.000000000 +0200
++++ gtkmathview-0.8.0/src/engine/mathml/mathVariantAux.cc	2008-07-13 15:57:46.893198000 +0200
+@@ -20,6 +20,8 @@
+ 
+ #include <cassert>
+ 
++#include <string.h>
++
+ #include "mathVariantAux.hh"
+ 
+ static MathVariantAttributes vattr[] = {
+--- /tmp/T1_FontDataBase.cc	2008-07-13 16:25:24.000000000 +0200
++++ gtkmathview-0.8.0/src/backend/ps/T1_FontDataBase.cc	2008-07-13 16:25:47.123198000 +0200
+@@ -20,6 +20,7 @@
+ #include <config.h>
+ #include <map>
+ #include <string>
++#include <string.h>
+ #include <stdlib.h>
+ #include <iostream>
+ #include <list>
+--- /tmp/SMS.cc	2008-07-13 16:27:23.000000000 +0200
++++ gtkmathview-0.8.0/mathmlsvg/SMS.cc	2008-07-13 16:27:41.543198000 +0200
+@@ -19,6 +19,7 @@
+ #include <config.h>
+ 
+ #include <sstream>
++#include <string.h>
+ #include "defs.h"
+ #include "AbstractLogger.hh"
+ #include "ValueConversion.hh"
+--- /tmp/main.cc	2008-07-13 16:29:11.000000000 +0200
++++ gtkmathview-0.8.0/mathmlsvg/main.cc	2008-07-13 16:29:28.813198000 +0200
+@@ -20,7 +20,7 @@
+ 
+ #include <cassert>
+ #include <fstream>
+-
++#include <string.h>
+ #include <popt.h>
+ 
+ // needed for old versions of GCC, must come before String.hh!
+--- /tmp/main.cc	2008-07-13 16:30:11.000000000 +0200
++++ gtkmathview-0.8.0/mathmlps/main.cc	2008-07-13 16:30:33.183198000 +0200
+@@ -20,7 +20,7 @@
+ 
+ #include <cassert>
+ #include <fstream>
+-
++#include <string.h>
+ #include <popt.h>
+ 
+ // needed for old versions of GCC, must come before String.hh!
+--- gtkmathview-0.8.0.orig/src/common/AbstractLogger.cc	2007-08-17 12:02:45.000000000 +0200
++++ gtkmathview-0.8.0/src/common/AbstractLogger.cc	2010-02-01 10:19:46.000000000 +0100
+@@ -19,6 +19,7 @@
+ #include <config.h>
+ 
+ #include <stdarg.h>
++#include <stdio.h>
+ 
+ #include "AbstractLogger.hh"
+ 
