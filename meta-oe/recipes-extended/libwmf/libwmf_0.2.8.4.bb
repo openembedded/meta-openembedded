@@ -12,7 +12,7 @@ BBCLASSEXTEND = "native"
 
 inherit autotools
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/${PN}/${PV}/${P}.tar.gz;name=tarball \
+SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/${BPN}/${PV}/${BPN}-${PV}.tar.gz;name=tarball \
            file://libwmf-0.2.8.4-intoverflow.patch                   \
            file://libwmf-0.2.8.4-useafterfree.patch"
 SRC_URI[tarball.md5sum] = "d1177739bf1ceb07f57421f0cee191e0"
