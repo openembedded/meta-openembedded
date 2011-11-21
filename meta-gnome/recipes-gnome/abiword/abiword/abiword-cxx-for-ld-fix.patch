@@ -1,0 +1,12 @@
+libstc++ isn't in staging anymore, so we must use g++ for linking
+
+--- /tmp/configure.ac	2008-03-31 11:39:13.130631737 +0200
++++ abiword-plugins-2.6.0/configure.ac	2008-03-31 11:39:22.754586487 +0200
+@@ -14,6 +14,7 @@
+ AC_PROG_INSTALL
+ AC_PROG_LN_S
+ AC_PROG_MAKE_SET
++AC_LANG_CPLUSPLUS
+ 
+ AM_INIT_AUTOMAKE
+ 

@@ -1,0 +1,12 @@
+Index: abiword-2.8.1/configure.in
+===================================================================
+--- abiword-2.8.1.orig/configure.in
++++ abiword-2.8.1/configure.in
+@@ -132,7 +132,6 @@ AC_PROG_INSTALL
+ #AC_DISABLE_STATIC
+ AC_LIBTOOL_WIN32_DLL
+ AC_PROG_LIBTOOL
+-DOLT
+ AC_PROG_LN_S
+ 
+ AC_MSG_CHECKING([for platform and toolkit])
