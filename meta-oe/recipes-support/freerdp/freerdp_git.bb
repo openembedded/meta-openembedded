@@ -7,9 +7,9 @@ inherit gitpkgv
 
 PV = "gitr${SRCPV}"
 PKGV = "${GITPKGVTAG}"
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
-SRCREV = "b05747b55ccea8d2f2b830f89d3c0eb622d66784"
-SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;protocol=git"
+SRCREV = "b3eb650c919c4b3b1e5bc12cea6afb05282a7232"
+SRC_URI = "git://github.com/FreeRDP/FreeRDP-old.git;protocol=git"
 
 S = "${WORKDIR}/git"
