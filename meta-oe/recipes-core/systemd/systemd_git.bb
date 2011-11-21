@@ -108,7 +108,6 @@ RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
 
 # TODO:
 # u-a for runlevel and telinit
-# u-a prerm
 
 pkg_postinst_systemd () {
 update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
@@ -116,4 +115,12 @@ update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/systemctl 300
+}
+
+pkg_prerm_systemd () {
+update-alternatives --remove init ${base_bindir}/systemd
+update-alternatives --remove halt ${base_bindir}/systemctl
+update-alternatives --remove reboot ${base_bindir}/systemctl
+update-alternatives --remove shutdown ${base_bindir}/systemctl
+update-alternatives --remove poweroff ${base_bindir}/systemctl
 }
