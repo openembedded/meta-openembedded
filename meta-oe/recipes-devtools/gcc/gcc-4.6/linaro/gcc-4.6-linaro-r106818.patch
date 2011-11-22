@@ -1,0 +1,105 @@
+2011-10-03  Michael Hope  <michael.hope@linaro.org>
+
+	Backport from mainline:
+
+	2011-09-13  Sevak Sargsyan <sevak.sargsyan@ispras.ru>
+
+	gcc/
+	* config/arm/neon.md (neon_vabd<mode>_2, neon_vabd<mode>_3): New
+	define_insn patterns for combine.
+
+	gcc/testsuite/
+	* gcc.target/arm/neon-combine-sub-abs-into-vabd.c: New test.
+
+=== modified file 'gcc/config/arm/neon.md'
+--- old/gcc/config/arm/neon.md	2011-09-28 15:14:59 +0000
++++ new/gcc/config/arm/neon.md	2011-10-03 01:32:17 +0000
+@@ -5428,3 +5428,32 @@
+   emit_insn (gen_neon_vec_pack_trunc_<V_double> (operands[0], tempreg));
+   DONE;
+ })
++
++(define_insn "neon_vabd<mode>_2"
++ [(set (match_operand:VDQ 0 "s_register_operand" "=w")
++       (abs:VDQ (minus:VDQ (match_operand:VDQ 1 "s_register_operand" "w")
++                           (match_operand:VDQ 2 "s_register_operand" "w"))))]
++ "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
++ "vabd.<V_s_elem> %<V_reg>0, %<V_reg>1, %<V_reg>2"
++ [(set (attr "neon_type")
++       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
++                     (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
++                                   (const_string "neon_fp_vadd_ddd_vabs_dd")
++                                   (const_string "neon_fp_vadd_qqq_vabs_qq"))
++                     (const_string "neon_int_5")))]
++)
++
++(define_insn "neon_vabd<mode>_3"
++ [(set (match_operand:VDQ 0 "s_register_operand" "=w")
++       (abs:VDQ (unspec:VDQ [(match_operand:VDQ 1 "s_register_operand" "w")
++                             (match_operand:VDQ 2 "s_register_operand" "w")]
++                 UNSPEC_VSUB)))]
++ "TARGET_NEON && (!<Is_float_mode> || flag_unsafe_math_optimizations)"
++ "vabd.<V_if_elem> %<V_reg>0, %<V_reg>1, %<V_reg>2"
++ [(set (attr "neon_type")
++       (if_then_else (ne (symbol_ref "<Is_float_mode>") (const_int 0))
++                     (if_then_else (ne (symbol_ref "<Is_d_reg>") (const_int 0))
++                                   (const_string "neon_fp_vadd_ddd_vabs_dd")
++                                   (const_string "neon_fp_vadd_qqq_vabs_qq"))
++                     (const_string "neon_int_5")))]
++)
+
+=== added file 'gcc/testsuite/gcc.target/arm/neon-combine-sub-abs-into-vabd.c'
+--- old/gcc/testsuite/gcc.target/arm/neon-combine-sub-abs-into-vabd.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/neon-combine-sub-abs-into-vabd.c	2011-10-03 01:32:17 +0000
+@@ -0,0 +1,50 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-O2 -funsafe-math-optimizations" } */
++/* { dg-add-options arm_neon } */
++
++#include <arm_neon.h>
++float32x2_t f_sub_abs_to_vabd_32()
++{
++  float32x2_t val1 = vdup_n_f32 (10);
++  float32x2_t val2 = vdup_n_f32 (30);
++  float32x2_t sres = vsub_f32(val1, val2);
++  float32x2_t res = vabs_f32 (sres);
++
++  return res;
++}
++/* { dg-final { scan-assembler "vabd\.f32" } }*/
++
++#include <arm_neon.h>
++int8x8_t sub_abs_to_vabd_8()
++{
++  int8x8_t val1 = vdup_n_s8 (10);
++  int8x8_t val2 = vdup_n_s8 (30);
++  int8x8_t sres = vsub_s8(val1, val2);
++  int8x8_t res = vabs_s8 (sres);
++
++  return res;
++}
++/* { dg-final { scan-assembler "vabd\.s8" } }*/
++
++int16x4_t sub_abs_to_vabd_16()
++{
++  int16x4_t val1 = vdup_n_s16 (10);
++  int16x4_t val2 = vdup_n_s16 (30);
++  int16x4_t sres = vsub_s16(val1, val2);
++  int16x4_t res = vabs_s16 (sres);
++
++  return res;
++}
++/* { dg-final { scan-assembler "vabd\.s16" } }*/
++
++int32x2_t sub_abs_to_vabd_32()
++{
++  int32x2_t val1 = vdup_n_s32 (10);
++  int32x2_t val2 = vdup_n_s32 (30);
++  int32x2_t sres = vsub_s32(val1, val2);
++  int32x2_t res = vabs_s32 (sres);
++
++   return res;
++}
++/* { dg-final { scan-assembler "vabd\.s32" } }*/
+

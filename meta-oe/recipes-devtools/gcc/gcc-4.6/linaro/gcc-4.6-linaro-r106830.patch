@@ -1,0 +1,304 @@
+2011-10-19  Andrew Stubbs  <ams@codesourcery.com>
+ 
+ 	Backport from FSF:
+	
+	2011-10-18  Andrew Stubbs  <ams@codesourcery.com>
+
+	* config/arm/driver-arm.c (host_detect_local_cpu): Close the file
+	before exiting.
+
+	2011-10-18  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config.host (arm*-*-linux*): Add driver-arm.o and x-arm.
+	* config/arm/arm.opt: Add 'native' processor_type and
+	arm_arch enum values.
+	* config/arm/arm.h (host_detect_local_cpu): New prototype.
+	(EXTRA_SPEC_FUNCTIONS): New define.
+	(MCPU_MTUNE_NATIVE_SPECS): New define.
+	(DRIVER_SELF_SPECS): New define.
+	* config/arm/driver-arm.c: New file.
+	* config/arm/x-arm: New file.
+	* doc/invoke.texi (ARM Options): Document -mcpu=native,
+	-mtune=native and -march=native.
+
+=== modified file 'gcc/config.host'
+--- old/gcc/config.host	2011-02-15 09:49:14 +0000
++++ new/gcc/config.host	2011-10-19 17:01:50 +0000
+@@ -100,6 +100,14 @@
+ esac
+ 
+ case ${host} in
++  arm*-*-linux*)
++    case ${target} in
++      arm*-*-*)
++	host_extra_gcc_objs="driver-arm.o"
++	host_xmake_file="${host_xmake_file} arm/x-arm"
++	;;
++    esac
++    ;;
+   alpha*-*-linux*)
+     case ${target} in
+       alpha*-*-linux*)
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-10-19 16:46:51 +0000
++++ new/gcc/config/arm/arm.h	2011-10-19 17:01:50 +0000
+@@ -2283,4 +2283,21 @@
+    " %{mcpu=generic-*:-march=%*;"				\
+    "   :%{mcpu=*:-mcpu=%*} %{march=*:-march=%*}}"
+ 
++/* -mcpu=native handling only makes sense with compiler running on
++   an ARM chip.  */
++#if defined(__arm__)
++extern const char *host_detect_local_cpu (int argc, const char **argv);
++# define EXTRA_SPEC_FUNCTIONS						\
++  { "local_cpu_detect", host_detect_local_cpu },
++
++# define MCPU_MTUNE_NATIVE_SPECS					\
++   " %{march=native:%<march=native %:local_cpu_detect(arch)}"		\
++   " %{mcpu=native:%<mcpu=native %:local_cpu_detect(cpu)}"		\
++   " %{mtune=native:%<mtune=native %:local_cpu_detect(tune)}"
++#else
++# define MCPU_MTUNE_NATIVE_SPECS ""
++#endif
++
++#define DRIVER_SELF_SPECS MCPU_MTUNE_NATIVE_SPECS
++
+ #endif /* ! GCC_ARM_H */
+
+=== modified file 'gcc/config/arm/arm.opt'
+--- old/gcc/config/arm/arm.opt	2011-10-11 02:31:01 +0000
++++ new/gcc/config/arm/arm.opt	2011-10-19 17:01:50 +0000
+@@ -48,6 +48,11 @@
+ Target RejectNegative Joined
+ Specify the name of the target architecture
+ 
++; Other arm_arch values are loaded from arm-tables.opt
++; but that is a generated file and this is an odd-one-out.
++EnumValue
++Enum(arm_arch) String(native) Value(-1) DriverOnly
++
+ marm
+ Target RejectNegative InverseMask(THUMB) Undocumented
+ 
+@@ -153,6 +158,11 @@
+ Target RejectNegative Joined
+ Tune code for the given processor
+ 
++; Other processor_type values are loaded from arm-tables.opt
++; but that is a generated file and this is an odd-one-out.
++EnumValue
++Enum(processor_type) String(native) Value(-1) DriverOnly
++
+ mwords-little-endian
+ Target Report RejectNegative Mask(LITTLE_WORDS)
+ Assume big endian bytes, little endian words
+
+=== added file 'gcc/config/arm/driver-arm.c'
+--- old/gcc/config/arm/driver-arm.c	1970-01-01 00:00:00 +0000
++++ new/gcc/config/arm/driver-arm.c	2011-10-19 17:07:55 +0000
+@@ -0,0 +1,149 @@
++/* Subroutines for the gcc driver.
++   Copyright (C) 2011 Free Software Foundation, Inc.
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify
++it under the terms of the GNU General Public License as published by
++the Free Software Foundation; either version 3, or (at your option)
++any later version.
++
++GCC is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with GCC; see the file COPYING3.  If not see
++<http://www.gnu.org/licenses/>.  */
++
++#include "config.h"
++#include "system.h"
++#include "coretypes.h"
++#include "tm.h"
++#include "configargs.h"
++
++struct vendor_cpu {
++  const char *part_no;
++  const char *arch_name;
++  const char *cpu_name;
++};
++
++static struct vendor_cpu arm_cpu_table[] = {
++    {"0x926", "armv5te", "arm926ej-s"},
++    {"0xa26", "armv5te", "arm1026ej-s"},
++    {"0xb02", "armv6k", "mpcore"},
++    {"0xb36", "armv6j", "arm1136j-s"},
++    {"0xb56", "armv6t2", "arm1156t2-s"},
++    {"0xb76", "armv6zk", "arm1176jz-s"},
++    {"0xc05", "armv7-a", "cortex-a5"},
++    {"0xc08", "armv7-a", "cortex-a8"},
++    {"0xc09", "armv7-a", "cortex-a9"},
++    {"0xc0f", "armv7-a", "cortex-a15"},
++    {"0xc14", "armv7-r", "cortex-r4"},
++    {"0xc15", "armv7-r", "cortex-r5"},
++    {"0xc20", "armv6-m", "cortex-m0"},
++    {"0xc21", "armv6-m", "cortex-m1"},
++    {"0xc23", "armv7-m", "cortex-m3"},
++    {"0xc24", "armv7e-m", "cortex-m4"},
++    {NULL, NULL, NULL}
++};
++
++struct {
++  const char *vendor_no;
++  const struct vendor_cpu *vendor_parts;
++} vendors[] = {
++    {"0x41", arm_cpu_table},
++    {NULL, NULL}
++};
++
++/* This will be called by the spec parser in gcc.c when it sees
++   a %:local_cpu_detect(args) construct.  Currently it will be called
++   with either "arch", "cpu" or "tune" as argument depending on if
++   -march=native, -mcpu=native or -mtune=native is to be substituted.
++
++   It returns a string containing new command line parameters to be
++   put at the place of the above two options, depending on what CPU
++   this is executed.  E.g. "-march=armv7-a" on a Cortex-A8 for
++   -march=native.  If the routine can't detect a known processor,
++   the -march or -mtune option is discarded.
++
++   ARGC and ARGV are set depending on the actual arguments given
++   in the spec.  */
++const char *
++host_detect_local_cpu (int argc, const char **argv)
++{
++  const char *val = NULL;
++  char buf[128];
++  FILE *f = NULL;
++  bool arch;
++  const struct vendor_cpu *cpu_table = NULL;
++
++  if (argc < 1)
++    goto not_found;
++
++  arch = strcmp (argv[0], "arch") == 0;
++  if (!arch && strcmp (argv[0], "cpu") != 0 && strcmp (argv[0], "tune"))
++    goto not_found;
++
++  f = fopen ("/proc/cpuinfo", "r");
++  if (f == NULL)
++    goto not_found;
++
++  while (fgets (buf, sizeof (buf), f) != NULL)
++    {
++      /* Ensure that CPU implementer is ARM (0x41).  */
++      if (strncmp (buf, "CPU implementer", sizeof ("CPU implementer") - 1) == 0)
++	{
++	  int i;
++	  for (i = 0; vendors[i].vendor_no != NULL; i++)
++	    if (strstr (buf, vendors[i].vendor_no) != NULL)
++	      {
++		cpu_table = vendors[i].vendor_parts;
++		break;
++	      }
++	}
++
++      /* Detect arch/cpu.  */
++      if (strncmp (buf, "CPU part", sizeof ("CPU part") - 1) == 0)
++	{
++	  int i;
++
++	  if (cpu_table == NULL)
++	    goto not_found;
++
++	  for (i = 0; cpu_table[i].part_no != NULL; i++)
++	    if (strstr (buf, cpu_table[i].part_no) != NULL)
++	      {
++		val = arch ? cpu_table[i].arch_name : cpu_table[i].cpu_name;
++		break;
++	      }
++	  break;
++	}
++    }
++
++  fclose (f);
++
++  if (val == NULL)
++    goto not_found;
++
++  return concat ("-m", argv[0], "=", val, NULL);
++
++not_found:
++  {
++    unsigned int i;
++    unsigned int opt;
++    const char *search[] = {NULL, "arch"};
++
++    if (f)
++      fclose (f);
++
++    search[0] = argv[0];
++    for (opt = 0; opt < ARRAY_SIZE (search); opt++)
++      for (i = 0; i < ARRAY_SIZE (configure_default_options); i++)
++	if (strcmp (configure_default_options[i].name, search[opt]) == 0)
++	  return concat ("-m", search[opt], "=",
++			 configure_default_options[i].value, NULL);
++    return NULL;
++  }
++}
+
+=== added file 'gcc/config/arm/x-arm'
+--- old/gcc/config/arm/x-arm	1970-01-01 00:00:00 +0000
++++ new/gcc/config/arm/x-arm	2011-10-19 17:01:50 +0000
+@@ -0,0 +1,3 @@
++driver-arm.o: $(srcdir)/config/arm/driver-arm.c \
++  $(CONFIG_H) $(SYSTEM_H)
++	$(COMPILER) -c $(ALL_COMPILERFLAGS) $(ALL_CPPFLAGS) $(INCLUDES) $<
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2011-10-19 16:46:51 +0000
++++ new/gcc/doc/invoke.texi	2011-10-19 17:01:50 +0000
+@@ -10215,10 +10215,16 @@
+ @samp{cortex-m0},
+ @samp{xscale}, @samp{iwmmxt}, @samp{iwmmxt2}, @samp{ep9312}.
+ 
++
+ @option{-mcpu=generic-@var{arch}} is also permissible, and is
+ equivalent to @option{-march=@var{arch} -mtune=generic-@var{arch}}.
+ See @option{-mtune} for more information.
+ 
++@option{-mcpu=native} causes the compiler to auto-detect the CPU
++of the build computer.  At present, this feature is only supported on
++Linux, and not all architectures are recognised.  If the auto-detect is
++unsuccessful the option has no effect.
++
+ @item -mtune=@var{name}
+ @opindex mtune
+ This option is very similar to the @option{-mcpu=} option, except that
+@@ -10237,6 +10243,11 @@
+ range, and avoiding performance pitfalls of other CPUs.  The effects of
+ this option may change in future GCC versions as CPU models come and go.
+ 
++@option{-mtune=native} causes the compiler to auto-detect the CPU
++of the build computer.  At present, this feature is only supported on
++Linux, and not all architectures are recognised.  If the auto-detect is
++unsuccessful the option has no effect.
++
+ @item -march=@var{name}
+ @opindex march
+ This specifies the name of the target ARM architecture.  GCC uses this
+@@ -10250,6 +10261,11 @@
+ @samp{armv7}, @samp{armv7-a}, @samp{armv7-r}, @samp{armv7-m},
+ @samp{iwmmxt}, @samp{iwmmxt2}, @samp{ep9312}.
+ 
++@option{-march=native} causes the compiler to auto-detect the architecture
++of the build computer.  At present, this feature is only supported on
++Linux, and not all architectures are recognised.  If the auto-detect is
++unsuccessful the option has no effect.
++
+ @item -mfpu=@var{name}
+ @itemx -mfpe=@var{number}
+ @itemx -mfp=@var{number}
+

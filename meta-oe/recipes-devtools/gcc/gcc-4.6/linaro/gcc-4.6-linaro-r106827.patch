@@ -1,0 +1,628 @@
+2011-10-17  Michael Hope  <michael.hope@linaro.org>
+
+	Backport from mainline r178852:
+
+	2011-09-14  Julian Brown  <julian@codesourcery.com>
+
+	gcc/
+	* config/arm/arm.c (arm_override_options): Add unaligned_access
+	support.
+	(arm_file_start): Emit attribute for unaligned access as appropriate.
+	* config/arm/arm.md (UNSPEC_UNALIGNED_LOAD)
+	(UNSPEC_UNALIGNED_STORE): Add constants for unspecs.
+	(insv, extzv): Add unaligned-access support.
+	(extv): Change to expander. Likewise.
+	(extzv_t1, extv_regsi): Add helpers.
+	(unaligned_loadsi, unaligned_loadhis, unaligned_loadhiu)
+	(unaligned_storesi, unaligned_storehi): New.
+	(*extv_reg): New (previous extv implementation).
+	* config/arm/arm.opt (munaligned_access): Add option.
+	* config/arm/constraints.md (Uw): New constraint.
+	* expmed.c (store_bit_field_1): Adjust bitfield numbering according
+	to size of access, not size of unit, when BITS_BIG_ENDIAN !=
+	BYTES_BIG_ENDIAN. Don't use bitfield accesses for
+	volatile accesses when -fstrict-volatile-bitfields is in effect.
+	(extract_bit_field_1): Likewise.
+
+	Backport from mainline r172697:
+
+	2011-04-19  Wei Guozhi  <carrot@google.com>
+
+	PR target/47855
+	gcc/
+	* config/arm/arm-protos.h (thumb1_legitimate_address_p): New prototype.
+	* config/arm/arm.c (thumb1_legitimate_address_p): Remove the static
+	linkage.
+	* config/arm/constraints.md (Uu): New constraint.
+	* config/arm/arm.md (*arm_movqi_insn): Compute attr "length".
+
+=== modified file 'gcc/config/arm/arm-protos.h'
+--- old/gcc/config/arm/arm-protos.h	2011-10-03 09:46:40 +0000
++++ new/gcc/config/arm/arm-protos.h	2011-10-11 01:56:19 +0000
+@@ -59,6 +59,7 @@
+ 					   int);
+ extern rtx thumb_legitimize_reload_address (rtx *, enum machine_mode, int, int,
+ 					    int);
++extern int thumb1_legitimate_address_p (enum machine_mode, rtx, int);
+ extern int arm_const_double_rtx (rtx);
+ extern int neg_const_double_rtx_ok_for_fpa (rtx);
+ extern int vfp3_const_double_rtx (rtx);
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-10-03 09:46:40 +0000
++++ new/gcc/config/arm/arm.c	2011-10-11 02:31:01 +0000
+@@ -2065,6 +2065,28 @@
+ 	fix_cm3_ldrd = 0;
+     }
+ 
++  /* Enable -munaligned-access by default for
++     - all ARMv6 architecture-based processors
++     - ARMv7-A, ARMv7-R, and ARMv7-M architecture-based processors.
++
++     Disable -munaligned-access by default for
++     - all pre-ARMv6 architecture-based processors
++     - ARMv6-M architecture-based processors.  */
++
++  if (unaligned_access == 2)
++    {
++      if (arm_arch6 && (arm_arch_notm || arm_arch7))
++	unaligned_access = 1;
++      else
++	unaligned_access = 0;
++    }
++  else if (unaligned_access == 1
++	   && !(arm_arch6 && (arm_arch_notm || arm_arch7)))
++    {
++      warning (0, "target CPU does not support unaligned accesses");
++      unaligned_access = 0;
++    }
++
+   if (TARGET_THUMB1 && flag_schedule_insns)
+     {
+       /* Don't warn since it's on by default in -O2.  */
+@@ -6106,7 +6128,7 @@
+    addresses based on the frame pointer or arg pointer until the
+    reload pass starts.  This is so that eliminating such addresses
+    into stack based ones won't produce impossible code.  */
+-static int
++int
+ thumb1_legitimate_address_p (enum machine_mode mode, rtx x, int strict_p)
+ {
+   /* ??? Not clear if this is right.  Experiment.  */
+@@ -22226,6 +22248,10 @@
+ 	val = 6;
+       asm_fprintf (asm_out_file, "\t.eabi_attribute 30, %d\n", val);
+ 
++      /* Tag_CPU_unaligned_access.  */
++      asm_fprintf (asm_out_file, "\t.eabi_attribute 34, %d\n",
++		   unaligned_access);
++
+       /* Tag_ABI_FP_16bit_format.  */
+       if (arm_fp16_format)
+ 	asm_fprintf (asm_out_file, "\t.eabi_attribute 38, %d\n",
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2011-10-03 09:47:33 +0000
++++ new/gcc/config/arm/arm.md	2011-10-11 02:31:01 +0000
+@@ -113,6 +113,10 @@
+    (UNSPEC_SYMBOL_OFFSET 27) ; The offset of the start of the symbol from
+                              ; another symbolic address.
+    (UNSPEC_MEMORY_BARRIER 28) ; Represent a memory barrier.
++   (UNSPEC_UNALIGNED_LOAD 29)  ; Used to represent ldr/ldrh instructions that access
++                               ; unaligned locations, on architectures which support
++                               ; that.
++   (UNSPEC_UNALIGNED_STORE 30) ; Same for str/strh.
+   ]
+ )
+ 
+@@ -2463,10 +2467,10 @@
+ ;;; this insv pattern, so this pattern needs to be reevalutated.
+ 
+ (define_expand "insv"
+-  [(set (zero_extract:SI (match_operand:SI 0 "s_register_operand" "")
+-                         (match_operand:SI 1 "general_operand" "")
+-                         (match_operand:SI 2 "general_operand" ""))
+-        (match_operand:SI 3 "reg_or_int_operand" ""))]
++  [(set (zero_extract (match_operand 0 "nonimmediate_operand" "")
++                      (match_operand 1 "general_operand" "")
++                      (match_operand 2 "general_operand" ""))
++        (match_operand 3 "reg_or_int_operand" ""))]
+   "TARGET_ARM || arm_arch_thumb2"
+   "
+   {
+@@ -2477,35 +2481,70 @@
+ 
+     if (arm_arch_thumb2)
+       {
+-	bool use_bfi = TRUE;
+-
+-	if (GET_CODE (operands[3]) == CONST_INT)
+-	  {
+-	    HOST_WIDE_INT val = INTVAL (operands[3]) & mask;
+-
+-	    if (val == 0)
+-	      {
+-		emit_insn (gen_insv_zero (operands[0], operands[1],
+-					  operands[2]));
++        if (unaligned_access && MEM_P (operands[0])
++	    && s_register_operand (operands[3], GET_MODE (operands[3]))
++	    && (width == 16 || width == 32) && (start_bit % BITS_PER_UNIT) == 0)
++	  {
++	    rtx base_addr;
++
++	    if (BYTES_BIG_ENDIAN)
++	      start_bit = GET_MODE_BITSIZE (GET_MODE (operands[3])) - width
++			  - start_bit;
++
++	    if (width == 32)
++	      {
++	        base_addr = adjust_address (operands[0], SImode,
++					    start_bit / BITS_PER_UNIT);
++		emit_insn (gen_unaligned_storesi (base_addr, operands[3]));
++	      }
++	    else
++	      {
++	        rtx tmp = gen_reg_rtx (HImode);
++
++	        base_addr = adjust_address (operands[0], HImode,
++					    start_bit / BITS_PER_UNIT);
++		emit_move_insn (tmp, gen_lowpart (HImode, operands[3]));
++		emit_insn (gen_unaligned_storehi (base_addr, tmp));
++	      }
++	    DONE;
++	  }
++	else if (s_register_operand (operands[0], GET_MODE (operands[0])))
++	  {
++	    bool use_bfi = TRUE;
++
++	    if (GET_CODE (operands[3]) == CONST_INT)
++	      {
++		HOST_WIDE_INT val = INTVAL (operands[3]) & mask;
++
++		if (val == 0)
++		  {
++		    emit_insn (gen_insv_zero (operands[0], operands[1],
++					      operands[2]));
++		    DONE;
++		  }
++
++		/* See if the set can be done with a single orr instruction.  */
++		if (val == mask && const_ok_for_arm (val << start_bit))
++		  use_bfi = FALSE;
++	      }
++
++	    if (use_bfi)
++	      {
++		if (GET_CODE (operands[3]) != REG)
++		  operands[3] = force_reg (SImode, operands[3]);
++
++		emit_insn (gen_insv_t2 (operands[0], operands[1], operands[2],
++					operands[3]));
+ 		DONE;
+ 	      }
+-
+-	    /* See if the set can be done with a single orr instruction.  */
+-	    if (val == mask && const_ok_for_arm (val << start_bit))
+-	      use_bfi = FALSE;
+-	  }
+-	  
+-	if (use_bfi)
+-	  {
+-	    if (GET_CODE (operands[3]) != REG)
+-	      operands[3] = force_reg (SImode, operands[3]);
+-
+-	    emit_insn (gen_insv_t2 (operands[0], operands[1], operands[2],
+-				    operands[3]));
+-	    DONE;
+-	  }
++	  }
++	else
++	  FAIL;
+       }
+ 
++    if (!s_register_operand (operands[0], GET_MODE (operands[0])))
++      FAIL;
++
+     target = copy_rtx (operands[0]);
+     /* Avoid using a subreg as a subtarget, and avoid writing a paradoxical 
+        subreg as the final target.  */
+@@ -3697,12 +3736,10 @@
+ ;; to reduce register pressure later on.
+ 
+ (define_expand "extzv"
+-  [(set (match_dup 4)
+-	(ashift:SI (match_operand:SI   1 "register_operand" "")
+-		   (match_operand:SI   2 "const_int_operand" "")))
+-   (set (match_operand:SI              0 "register_operand" "")
+-	(lshiftrt:SI (match_dup 4)
+-		     (match_operand:SI 3 "const_int_operand" "")))]
++  [(set (match_operand 0 "s_register_operand" "")
++	(zero_extract (match_operand 1 "nonimmediate_operand" "")
++		      (match_operand 2 "const_int_operand" "")
++		      (match_operand 3 "const_int_operand" "")))]
+   "TARGET_THUMB1 || arm_arch_thumb2"
+   "
+   {
+@@ -3711,10 +3748,57 @@
+     
+     if (arm_arch_thumb2)
+       {
+-	emit_insn (gen_extzv_t2 (operands[0], operands[1], operands[2],
+-				 operands[3]));
+-	DONE;
++	HOST_WIDE_INT width = INTVAL (operands[2]);
++	HOST_WIDE_INT bitpos = INTVAL (operands[3]);
++
++	if (unaligned_access && MEM_P (operands[1])
++	    && (width == 16 || width == 32) && (bitpos % BITS_PER_UNIT) == 0)
++	  {
++	    rtx base_addr;
++
++	    if (BYTES_BIG_ENDIAN)
++	      bitpos = GET_MODE_BITSIZE (GET_MODE (operands[0])) - width
++		       - bitpos;
++
++	    if (width == 32)
++              {
++		base_addr = adjust_address (operands[1], SImode,
++					    bitpos / BITS_PER_UNIT);
++		emit_insn (gen_unaligned_loadsi (operands[0], base_addr));
++              }
++	    else
++              {
++		rtx dest = operands[0];
++		rtx tmp = gen_reg_rtx (SImode);
++
++		/* We may get a paradoxical subreg here.  Strip it off.  */
++		if (GET_CODE (dest) == SUBREG
++		    && GET_MODE (dest) == SImode
++		    && GET_MODE (SUBREG_REG (dest)) == HImode)
++		  dest = SUBREG_REG (dest);
++
++		if (GET_MODE_BITSIZE (GET_MODE (dest)) != width)
++		  FAIL;
++
++		base_addr = adjust_address (operands[1], HImode,
++					    bitpos / BITS_PER_UNIT);
++		emit_insn (gen_unaligned_loadhiu (tmp, base_addr));
++		emit_move_insn (gen_lowpart (SImode, dest), tmp);
++	      }
++	    DONE;
++	  }
++	else if (s_register_operand (operands[1], GET_MODE (operands[1])))
++	  {
++	    emit_insn (gen_extzv_t2 (operands[0], operands[1], operands[2],
++				     operands[3]));
++	    DONE;
++	  }
++	else
++	  FAIL;
+       }
++    
++    if (!s_register_operand (operands[1], GET_MODE (operands[1])))
++      FAIL;
+ 
+     operands[3] = GEN_INT (rshift);
+     
+@@ -3724,12 +3808,154 @@
+         DONE;
+       }
+       
+-    operands[2] = GEN_INT (lshift);
+-    operands[4] = gen_reg_rtx (SImode);
++    emit_insn (gen_extzv_t1 (operands[0], operands[1], GEN_INT (lshift),
++			     operands[3], gen_reg_rtx (SImode)));
++    DONE;
+   }"
+ )
+ 
+-(define_insn "extv"
++;; Helper for extzv, for the Thumb-1 register-shifts case.
++
++(define_expand "extzv_t1"
++  [(set (match_operand:SI 4 "s_register_operand" "")
++	(ashift:SI (match_operand:SI 1 "nonimmediate_operand" "")
++		   (match_operand:SI 2 "const_int_operand" "")))
++   (set (match_operand:SI 0 "s_register_operand" "")
++	(lshiftrt:SI (match_dup 4)
++		     (match_operand:SI 3 "const_int_operand" "")))]
++  "TARGET_THUMB1"
++  "")
++
++(define_expand "extv"
++  [(set (match_operand 0 "s_register_operand" "")
++	(sign_extract (match_operand 1 "nonimmediate_operand" "")
++		      (match_operand 2 "const_int_operand" "")
++		      (match_operand 3 "const_int_operand" "")))]
++  "arm_arch_thumb2"
++{
++  HOST_WIDE_INT width = INTVAL (operands[2]);
++  HOST_WIDE_INT bitpos = INTVAL (operands[3]);
++
++  if (unaligned_access && MEM_P (operands[1]) && (width == 16 || width == 32)
++      && (bitpos % BITS_PER_UNIT)  == 0)
++    {
++      rtx base_addr;
++      
++      if (BYTES_BIG_ENDIAN)
++	bitpos = GET_MODE_BITSIZE (GET_MODE (operands[0])) - width - bitpos;
++      
++      if (width == 32)
++        {
++	  base_addr = adjust_address (operands[1], SImode,
++				      bitpos / BITS_PER_UNIT);
++	  emit_insn (gen_unaligned_loadsi (operands[0], base_addr));
++        }
++      else
++        {
++	  rtx dest = operands[0];
++	  rtx tmp = gen_reg_rtx (SImode);
++	  
++	  /* We may get a paradoxical subreg here.  Strip it off.  */
++	  if (GET_CODE (dest) == SUBREG
++	      && GET_MODE (dest) == SImode
++	      && GET_MODE (SUBREG_REG (dest)) == HImode)
++	    dest = SUBREG_REG (dest);
++	  
++	  if (GET_MODE_BITSIZE (GET_MODE (dest)) != width)
++	    FAIL;
++	  
++	  base_addr = adjust_address (operands[1], HImode,
++				      bitpos / BITS_PER_UNIT);
++	  emit_insn (gen_unaligned_loadhis (tmp, base_addr));
++	  emit_move_insn (gen_lowpart (SImode, dest), tmp);
++	}
++
++      DONE;
++    }
++  else if (!s_register_operand (operands[1], GET_MODE (operands[1])))
++    FAIL;
++  else if (GET_MODE (operands[0]) == SImode
++	   && GET_MODE (operands[1]) == SImode)
++    {
++      emit_insn (gen_extv_regsi (operands[0], operands[1], operands[2],
++				 operands[3]));
++      DONE;
++    }
++
++  FAIL;
++})
++
++; Helper to expand register forms of extv with the proper modes.
++
++(define_expand "extv_regsi"
++  [(set (match_operand:SI 0 "s_register_operand" "")
++	(sign_extract:SI (match_operand:SI 1 "s_register_operand" "")
++			 (match_operand 2 "const_int_operand" "")
++			 (match_operand 3 "const_int_operand" "")))]
++  ""
++{
++})
++
++; ARMv6+ unaligned load/store instructions (used for packed structure accesses).
++
++(define_insn "unaligned_loadsi"
++  [(set (match_operand:SI 0 "s_register_operand" "=l,r")
++	(unspec:SI [(match_operand:SI 1 "memory_operand" "Uw,m")]
++		   UNSPEC_UNALIGNED_LOAD))]
++  "unaligned_access && TARGET_32BIT"
++  "ldr%?\t%0, %1\t@ unaligned"
++  [(set_attr "arch" "t2,any")
++   (set_attr "length" "2,4")
++   (set_attr "predicable" "yes")
++   (set_attr "type" "load1")])
++
++(define_insn "unaligned_loadhis"
++  [(set (match_operand:SI 0 "s_register_operand" "=l,r")
++	(sign_extend:SI
++	  (unspec:HI [(match_operand:HI 1 "memory_operand" "Uw,m")]
++		     UNSPEC_UNALIGNED_LOAD)))]
++  "unaligned_access && TARGET_32BIT"
++  "ldr%(sh%)\t%0, %1\t@ unaligned"
++  [(set_attr "arch" "t2,any")
++   (set_attr "length" "2,4")
++   (set_attr "predicable" "yes")
++   (set_attr "type" "load_byte")])
++
++(define_insn "unaligned_loadhiu"
++  [(set (match_operand:SI 0 "s_register_operand" "=l,r")
++	(zero_extend:SI
++	  (unspec:HI [(match_operand:HI 1 "memory_operand" "Uw,m")]
++		     UNSPEC_UNALIGNED_LOAD)))]
++  "unaligned_access && TARGET_32BIT"
++  "ldr%(h%)\t%0, %1\t@ unaligned"
++  [(set_attr "arch" "t2,any")
++   (set_attr "length" "2,4")
++   (set_attr "predicable" "yes")
++   (set_attr "type" "load_byte")])
++
++(define_insn "unaligned_storesi"
++  [(set (match_operand:SI 0 "memory_operand" "=Uw,m")
++	(unspec:SI [(match_operand:SI 1 "s_register_operand" "l,r")]
++		   UNSPEC_UNALIGNED_STORE))]
++  "unaligned_access && TARGET_32BIT"
++  "str%?\t%1, %0\t@ unaligned"
++  [(set_attr "arch" "t2,any")
++   (set_attr "length" "2,4")
++   (set_attr "predicable" "yes")
++   (set_attr "type" "store1")])
++
++(define_insn "unaligned_storehi"
++  [(set (match_operand:HI 0 "memory_operand" "=Uw,m")
++	(unspec:HI [(match_operand:HI 1 "s_register_operand" "l,r")]
++		   UNSPEC_UNALIGNED_STORE))]
++  "unaligned_access && TARGET_32BIT"
++  "str%(h%)\t%1, %0\t@ unaligned"
++  [(set_attr "arch" "t2,any")
++   (set_attr "length" "2,4")
++   (set_attr "predicable" "yes")
++   (set_attr "type" "store1")])
++
++(define_insn "*extv_reg"
+   [(set (match_operand:SI 0 "s_register_operand" "=r")
+ 	(sign_extract:SI (match_operand:SI 1 "s_register_operand" "r")
+                          (match_operand:SI 2 "const_int_operand" "M")
+@@ -6038,8 +6264,8 @@
+ 
+ 
+ (define_insn "*arm_movqi_insn"
+-  [(set (match_operand:QI 0 "nonimmediate_operand" "=r,r,r,m")
+-	(match_operand:QI 1 "general_operand" "rI,K,m,r"))]
++  [(set (match_operand:QI 0 "nonimmediate_operand" "=r,r,l,Uu,r,m")
++	(match_operand:QI 1 "general_operand" "rI,K,Uu,l,m,r"))]
+   "TARGET_32BIT
+    && (   register_operand (operands[0], QImode)
+        || register_operand (operands[1], QImode))"
+@@ -6047,10 +6273,14 @@
+    mov%?\\t%0, %1
+    mvn%?\\t%0, #%B1
+    ldr%(b%)\\t%0, %1
++   str%(b%)\\t%1, %0
++   ldr%(b%)\\t%0, %1
+    str%(b%)\\t%1, %0"
+-  [(set_attr "type" "*,*,load1,store1")
+-   (set_attr "insn" "mov,mvn,*,*")
+-   (set_attr "predicable" "yes")]
++  [(set_attr "type" "*,*,load1,store1,load1,store1")
++   (set_attr "insn" "mov,mvn,*,*,*,*")
++   (set_attr "predicable" "yes")
++   (set_attr "arch" "any,any,t2,t2,any,any")
++   (set_attr "length" "4,4,2,2,4,4")]
+ )
+ 
+ (define_insn "*thumb1_movqi_insn"
+
+=== modified file 'gcc/config/arm/arm.opt'
+--- old/gcc/config/arm/arm.opt	2011-09-19 07:44:24 +0000
++++ new/gcc/config/arm/arm.opt	2011-10-11 02:31:01 +0000
+@@ -173,3 +173,7 @@
+ Target Report Var(fix_cm3_ldrd) Init(2)
+ Avoid overlapping destination and address registers on LDRD instructions
+ that may trigger Cortex-M3 errata.
++
++munaligned-access
++Target Report Var(unaligned_access) Init(2)
++Enable unaligned word and halfword accesses to packed data.
+
+=== modified file 'gcc/config/arm/constraints.md'
+--- old/gcc/config/arm/constraints.md	2011-09-12 14:14:00 +0000
++++ new/gcc/config/arm/constraints.md	2011-10-11 02:31:01 +0000
+@@ -36,6 +36,7 @@
+ ;; The following memory constraints have been used:
+ ;; in ARM/Thumb-2 state: Q, Ut, Uv, Uy, Un, Um, Us
+ ;; in ARM state: Uq
++;; in Thumb state: Uu, Uw
+ 
+ 
+ (define_register_constraint "f" "TARGET_ARM ? FPA_REGS : NO_REGS"
+@@ -344,6 +345,27 @@
+  (and (match_code "mem")
+       (match_test "REG_P (XEXP (op, 0))")))
+ 
++(define_memory_constraint "Uu"
++ "@internal
++  In Thumb state an address that is valid in 16bit encoding."
++ (and (match_code "mem")
++      (match_test "TARGET_THUMB
++		   && thumb1_legitimate_address_p (GET_MODE (op), XEXP (op, 0),
++						   0)")))
++
++; The 16-bit post-increment LDR/STR accepted by thumb1_legitimate_address_p
++; are actually LDM/STM instructions, so cannot be used to access unaligned
++; data.
++(define_memory_constraint "Uw"
++ "@internal
++  In Thumb state an address that is valid in 16bit encoding, and that can be
++  used for unaligned accesses."
++ (and (match_code "mem")
++      (match_test "TARGET_THUMB
++		   && thumb1_legitimate_address_p (GET_MODE (op), XEXP (op, 0),
++						   0)
++		   && GET_CODE (XEXP (op, 0)) != POST_INC")))
++
+ ;; We used to have constraint letters for S and R in ARM state, but
+ ;; all uses of these now appear to have been removed.
+ 
+
+=== modified file 'gcc/expmed.c'
+--- old/gcc/expmed.c	2011-05-22 19:02:59 +0000
++++ new/gcc/expmed.c	2011-10-11 02:31:01 +0000
+@@ -657,6 +657,10 @@
+       && GET_MODE (value) != BLKmode
+       && bitsize > 0
+       && GET_MODE_BITSIZE (op_mode) >= bitsize
++      /* Do not use insv for volatile bitfields when
++         -fstrict-volatile-bitfields is in effect.  */
++      && !(MEM_P (op0) && MEM_VOLATILE_P (op0)
++	   && flag_strict_volatile_bitfields > 0)
+       && ! ((REG_P (op0) || GET_CODE (op0) == SUBREG)
+ 	    && (bitsize + bitpos > GET_MODE_BITSIZE (op_mode)))
+       && insn_data[CODE_FOR_insv].operand[1].predicate (GEN_INT (bitsize),
+@@ -700,19 +704,21 @@
+ 	  copy_back = true;
+ 	}
+ 
+-      /* On big-endian machines, we count bits from the most significant.
+-	 If the bit field insn does not, we must invert.  */
+-
+-      if (BITS_BIG_ENDIAN != BYTES_BIG_ENDIAN)
+-	xbitpos = unit - bitsize - xbitpos;
+-
+       /* We have been counting XBITPOS within UNIT.
+ 	 Count instead within the size of the register.  */
+-      if (BITS_BIG_ENDIAN && !MEM_P (xop0))
++      if (BYTES_BIG_ENDIAN && !MEM_P (xop0))
+ 	xbitpos += GET_MODE_BITSIZE (op_mode) - unit;
+ 
+       unit = GET_MODE_BITSIZE (op_mode);
+ 
++      /* If BITS_BIG_ENDIAN is zero on a BYTES_BIG_ENDIAN machine, we count
++         "backwards" from the size of the unit we are inserting into.
++	 Otherwise, we count bits from the most significant on a
++	 BYTES/BITS_BIG_ENDIAN machine.  */
++
++      if (BITS_BIG_ENDIAN != BYTES_BIG_ENDIAN)
++	xbitpos = unit - bitsize - xbitpos;
++
+       /* Convert VALUE to op_mode (which insv insn wants) in VALUE1.  */
+       value1 = value;
+       if (GET_MODE (value) != op_mode)
+@@ -1528,6 +1534,10 @@
+   if (ext_mode != MAX_MACHINE_MODE
+       && bitsize > 0
+       && GET_MODE_BITSIZE (ext_mode) >= bitsize
++      /* Do not use extv/extzv for volatile bitfields when
++         -fstrict-volatile-bitfields is in effect.  */
++      && !(MEM_P (op0) && MEM_VOLATILE_P (op0)
++	   && flag_strict_volatile_bitfields > 0)
+       /* If op0 is a register, we need it in EXT_MODE to make it
+ 	 acceptable to the format of ext(z)v.  */
+       && !(GET_CODE (op0) == SUBREG && GET_MODE (op0) != ext_mode)
+@@ -1552,17 +1562,20 @@
+ 	/* Get ref to first byte containing part of the field.  */
+ 	xop0 = adjust_address (xop0, byte_mode, xoffset);
+ 
+-      /* On big-endian machines, we count bits from the most significant.
+-	 If the bit field insn does not, we must invert.  */
+-      if (BITS_BIG_ENDIAN != BYTES_BIG_ENDIAN)
+-	xbitpos = unit - bitsize - xbitpos;
+-
+       /* Now convert from counting within UNIT to counting in EXT_MODE.  */
+-      if (BITS_BIG_ENDIAN && !MEM_P (xop0))
++      if (BYTES_BIG_ENDIAN && !MEM_P (xop0))
+ 	xbitpos += GET_MODE_BITSIZE (ext_mode) - unit;
+ 
+       unit = GET_MODE_BITSIZE (ext_mode);
+ 
++      /* If BITS_BIG_ENDIAN is zero on a BYTES_BIG_ENDIAN machine, we count
++         "backwards" from the size of the unit we are extracting from.
++	 Otherwise, we count bits from the most significant on a
++	 BYTES/BITS_BIG_ENDIAN machine.  */
++
++      if (BITS_BIG_ENDIAN != BYTES_BIG_ENDIAN)
++	xbitpos = unit - bitsize - xbitpos;
++
+       if (xtarget == 0)
+ 	xtarget = xspec_target = gen_reg_rtx (tmode);
+ 
+

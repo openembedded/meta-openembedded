@@ -1,0 +1,378 @@
+2011-10-06  Ira Rosen  <ira.rosen@linaro.org>
+
+	Backport from mainline:
+
+	2011-09-25  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-data-ref.c (dr_analyze_innermost): Add new argument.
+	Allow not simple iv if analyzing basic block.
+	(create_data_ref): Update call to dr_analyze_innermost.
+	(stmt_with_adjacent_zero_store_dr_p, ref_base_address): Likewise.
+	* tree-loop-distribution.c (generate_memset_zero): Likewise.
+	* tree-predcom.c (find_looparound_phi): Likewise.
+	* tree-data-ref.h (dr_analyze_innermost): Add new argument.
+
+	gcc/testsuite/
+	* gcc.dg/vect/bb-slp-24.c: New.
+
+
+	2011-09-15  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-vect-data-refs.c (vect_analyze_data_ref_dependence): Allow
+	read-after-read dependencies in basic block SLP.
+
+	gcc/testsuite/
+	* gcc.dg/vect/bb-slp-25.c: New.
+
+
+	2011-04-21  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	gcc/
+	* tree-vect-data-refs.c (vect_drs_dependent_in_basic_block): Use
+	operand_equal_p to compare DR_BASE_ADDRESSes.
+	(vect_check_interleaving): Likewise.
+
+	gcc/testsuite/
+	* gcc.dg/vect/vect-119.c: New test.
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-24.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-24.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-24.c	2011-10-02 08:43:10 +0000
+@@ -0,0 +1,59 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define A 3
++#define N 256
++
++short src[N], dst[N];
++
++void foo (short * __restrict__ dst, short * __restrict__ src, int h,
++          int stride, int dummy)
++{
++  int i;
++  h /= 8;
++  for (i = 0; i < h; i++)
++    {
++      dst[0] += A*src[0];
++      dst[1] += A*src[1];
++      dst[2] += A*src[2];
++      dst[3] += A*src[3];
++      dst[4] += A*src[4];
++      dst[5] += A*src[5];
++      dst[6] += A*src[6];
++      dst[7] += A*src[7];
++      dst += stride;
++      src += stride;
++      if (dummy == 32)
++        abort ();
++    }
++}
++
++
++int main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      dst[i] = 0;
++      src[i] = i;
++    }
++
++  foo (dst, src, N, 8, 0);
++
++  for (i = 0; i < N; i++)
++    {
++      if (dst[i] != A * i)
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target vect_element_align } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-25.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-25.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-25.c	2011-10-02 08:43:10 +0000
+@@ -0,0 +1,59 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define A 3
++#define B 4
++#define N 256
++
++short src[N], dst[N];
++
++void foo (short * __restrict__ dst, short * __restrict__ src, int h, int stride, int dummy)
++{
++  int i;
++  h /= 16;
++  for (i = 0; i < h; i++)
++    {
++      dst[0] += A*src[0] + src[stride];
++      dst[1] += A*src[1] + src[1+stride];
++      dst[2] += A*src[2] + src[2+stride];
++      dst[3] += A*src[3] + src[3+stride];
++      dst[4] += A*src[4] + src[4+stride];
++      dst[5] += A*src[5] + src[5+stride];
++      dst[6] += A*src[6] + src[6+stride];
++      dst[7] += A*src[7] + src[7+stride];
++      dst += 8;
++      src += 8;
++      if (dummy == 32)
++        abort ();
++   }
++}
++
++
++int main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++       dst[i] = 0;
++       src[i] = i;
++    }
++
++  foo (dst, src, N, 8, 0);
++
++  for (i = 0; i < N/2; i++)
++    {
++      if (dst[i] != A * i + i + 8)
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target vect_element_align } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-119.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-119.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-119.c	2011-10-02 08:43:10 +0000
+@@ -0,0 +1,28 @@
++/* { dg-do compile } */
++
++#define OUTER 32
++#define INNER 40
++
++static unsigned int
++bar (const unsigned int x[INNER][2], unsigned int sum)
++{
++  int i;
++
++  for (i = 0; i < INNER; i++)
++    sum += x[i][0] * x[i][0] + x[i][1] * x[i][1];
++  return sum;
++}
++
++unsigned int foo (const unsigned int x[OUTER][INNER][2])
++{
++  int i;
++  unsigned int sum;
++
++  sum = 0.0f;
++  for (i = 0; i < OUTER; i++)
++    sum = bar (x[i], sum);
++  return sum;
++}
++
++/* { dg-final { scan-tree-dump-times "Detected interleaving of size 2" 1 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/tree-data-ref.c'
+--- old/gcc/tree-data-ref.c	2011-05-26 14:27:33 +0000
++++ new/gcc/tree-data-ref.c	2011-10-02 08:43:10 +0000
+@@ -721,11 +721,11 @@
+ }
+ 
+ /* Analyzes the behavior of the memory reference DR in the innermost loop or
+-   basic block that contains it. Returns true if analysis succeed or false
++   basic block that contains it.  Returns true if analysis succeed or false
+    otherwise.  */
+ 
+ bool
+-dr_analyze_innermost (struct data_reference *dr)
++dr_analyze_innermost (struct data_reference *dr, struct loop *nest)
+ {
+   gimple stmt = DR_STMT (dr);
+   struct loop *loop = loop_containing_stmt (stmt);
+@@ -768,14 +768,25 @@
+     }
+   else
+     base = build_fold_addr_expr (base);
++
+   if (in_loop)
+     {
+       if (!simple_iv (loop, loop_containing_stmt (stmt), base, &base_iv,
+                       false))
+         {
+-          if (dump_file && (dump_flags & TDF_DETAILS))
+-	    fprintf (dump_file, "failed: evolution of base is not affine.\n");
+-          return false;
++          if (nest)
++            {
++              if (dump_file && (dump_flags & TDF_DETAILS))
++                fprintf (dump_file, "failed: evolution of base is not"
++                                    " affine.\n");
++              return false;
++            }
++          else
++            {
++              base_iv.base = base;
++              base_iv.step = ssize_int (0);
++              base_iv.no_overflow = true;
++            }
+         }
+     }
+   else
+@@ -800,10 +811,18 @@
+       else if (!simple_iv (loop, loop_containing_stmt (stmt),
+                            poffset, &offset_iv, false))
+         {
+-          if (dump_file && (dump_flags & TDF_DETAILS))
+-            fprintf (dump_file, "failed: evolution of offset is not"
+-                                " affine.\n");
+-          return false;
++          if (nest)
++            {
++              if (dump_file && (dump_flags & TDF_DETAILS))
++                fprintf (dump_file, "failed: evolution of offset is not"
++                                    " affine.\n");
++              return false;
++            }
++          else
++            {
++              offset_iv.base = poffset;
++              offset_iv.step = ssize_int (0);
++            }
+         }
+     }
+ 
+@@ -967,7 +986,7 @@
+   DR_REF (dr) = memref;
+   DR_IS_READ (dr) = is_read;
+ 
+-  dr_analyze_innermost (dr);
++  dr_analyze_innermost (dr, nest);
+   dr_analyze_indices (dr, nest, loop);
+   dr_analyze_alias (dr);
+ 
+@@ -5185,7 +5204,7 @@
+   DR_STMT (dr) = stmt;
+   DR_REF (dr) = op0;
+ 
+-  res = dr_analyze_innermost (dr)
++  res = dr_analyze_innermost (dr, loop_containing_stmt (stmt))
+     && stride_of_unit_type_p (DR_STEP (dr), TREE_TYPE (op0));
+ 
+   free_data_ref (dr);
+@@ -5225,7 +5244,7 @@
+ 
+   DR_STMT (dr) = stmt;
+   DR_REF (dr) = *ref->pos;
+-  dr_analyze_innermost (dr);
++  dr_analyze_innermost (dr, loop_containing_stmt (stmt));
+   base_address = DR_BASE_ADDRESS (dr);
+ 
+   if (!base_address)
+
+=== modified file 'gcc/tree-data-ref.h'
+--- old/gcc/tree-data-ref.h	2011-03-27 09:38:18 +0000
++++ new/gcc/tree-data-ref.h	2011-10-02 08:43:10 +0000
+@@ -386,7 +386,7 @@
+ DEF_VEC_ALLOC_O (data_ref_loc, heap);
+ 
+ bool get_references_in_stmt (gimple, VEC (data_ref_loc, heap) **);
+-bool dr_analyze_innermost (struct data_reference *);
++bool dr_analyze_innermost (struct data_reference *, struct loop *);
+ extern bool compute_data_dependences_for_loop (struct loop *, bool,
+ 					       VEC (loop_p, heap) **,
+ 					       VEC (data_reference_p, heap) **,
+
+=== modified file 'gcc/tree-loop-distribution.c'
+--- old/gcc/tree-loop-distribution.c	2011-05-11 13:07:54 +0000
++++ new/gcc/tree-loop-distribution.c	2011-10-02 08:43:10 +0000
+@@ -267,7 +267,7 @@
+ 
+   DR_STMT (dr) = stmt;
+   DR_REF (dr) = op0;
+-  res = dr_analyze_innermost (dr);
++  res = dr_analyze_innermost (dr, loop_containing_stmt (stmt));
+   gcc_assert (res && stride_of_unit_type_p (DR_STEP (dr), TREE_TYPE (op0)));
+ 
+   nb_bytes = build_size_arg_loc (loc, nb_iter, op0, &stmt_list);
+
+=== modified file 'gcc/tree-predcom.c'
+--- old/gcc/tree-predcom.c	2011-02-11 14:19:44 +0000
++++ new/gcc/tree-predcom.c	2011-10-02 08:43:10 +0000
+@@ -1114,7 +1114,7 @@
+   memset (&init_dr, 0, sizeof (struct data_reference));
+   DR_REF (&init_dr) = init_ref;
+   DR_STMT (&init_dr) = phi;
+-  if (!dr_analyze_innermost (&init_dr))
++  if (!dr_analyze_innermost (&init_dr, loop))
+     return NULL;
+ 
+   if (!valid_initializer_p (&init_dr, ref->distance + 1, root->ref))
+
+=== modified file 'gcc/tree-vect-data-refs.c'
+--- old/gcc/tree-vect-data-refs.c	2011-07-04 11:13:51 +0000
++++ new/gcc/tree-vect-data-refs.c	2011-10-02 08:43:10 +0000
+@@ -353,11 +353,7 @@
+ 
+   /* Check that the data-refs have same bases and offsets.  If not, we can't
+      determine if they are dependent.  */
+-  if ((DR_BASE_ADDRESS (dra) != DR_BASE_ADDRESS (drb)
+-       && (TREE_CODE (DR_BASE_ADDRESS (dra)) != ADDR_EXPR
+-           || TREE_CODE (DR_BASE_ADDRESS (drb)) != ADDR_EXPR
+-           || TREE_OPERAND (DR_BASE_ADDRESS (dra), 0)
+-           != TREE_OPERAND (DR_BASE_ADDRESS (drb),0)))
++  if (!operand_equal_p (DR_BASE_ADDRESS (dra), DR_BASE_ADDRESS (drb), 0)
+       || !dr_equal_offsets_p (dra, drb))
+     return true;
+ 
+@@ -403,11 +399,7 @@
+ 
+   /* Check that the data-refs have same first location (except init) and they
+      are both either store or load (not load and store).  */
+-  if ((DR_BASE_ADDRESS (dra) != DR_BASE_ADDRESS (drb)
+-       && (TREE_CODE (DR_BASE_ADDRESS (dra)) != ADDR_EXPR
+-	   || TREE_CODE (DR_BASE_ADDRESS (drb)) != ADDR_EXPR
+-	   || TREE_OPERAND (DR_BASE_ADDRESS (dra), 0)
+-	   != TREE_OPERAND (DR_BASE_ADDRESS (drb),0)))
++  if (!operand_equal_p (DR_BASE_ADDRESS (dra), DR_BASE_ADDRESS (drb), 0)
+       || !dr_equal_offsets_p (dra, drb)
+       || !tree_int_cst_compare (DR_INIT (dra), DR_INIT (drb))
+       || DR_IS_READ (dra) != DR_IS_READ (drb))
+@@ -615,6 +607,11 @@
+       if (vect_check_interleaving (dra, drb))
+          return false;
+ 
++      /* Read-read is OK (we need this check here, after checking for
++         interleaving).  */
++      if (DR_IS_READ (dra) && DR_IS_READ (drb))
++        return false;
++
+       if (vect_print_dump_info (REPORT_DR_DETAILS))
+         {
+           fprintf (vect_dump, "can't determine dependence between ");
+

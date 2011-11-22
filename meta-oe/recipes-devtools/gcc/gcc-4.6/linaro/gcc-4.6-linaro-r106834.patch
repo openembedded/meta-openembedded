@@ -1,0 +1,1505 @@
+	2011-10-18  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* doc/md.texi (vec_widen_ushiftl_hi, vec_widen_ushiftl_lo,
+	vec_widen_sshiftl_hi, vec_widen_sshiftl_lo): Document.
+	* tree-pretty-print.c (dump_generic_node): Handle WIDEN_LSHIFT_EXPR,
+	VEC_WIDEN_LSHIFT_HI_EXPR and VEC_WIDEN_LSHIFT_LO_EXPR.
+	(op_code_prio): Likewise.
+	(op_symbol_code): Handle WIDEN_LSHIFT_EXPR.
+	* optabs.c (optab_for_tree_code): Handle
+	VEC_WIDEN_LSHIFT_HI_EXPR and VEC_WIDEN_LSHIFT_LO_EXPR.
+	(init-optabs): Initialize optab codes for vec_widen_u/sshiftl_hi/lo.
+	* optabs.h (enum optab_index): Add OTI_vec_widen_u/sshiftl_hi/lo.
+	* genopinit.c (optabs): Initialize the new optabs.
+	* expr.c (expand_expr_real_2): Handle
+	VEC_WIDEN_LSHIFT_HI_EXPR and VEC_WIDEN_LSHIFT_LO_EXPR.
+	* gimple-pretty-print.c (dump_binary_rhs): Likewise.
+	* tree-vectorizer.h (NUM_PATTERNS): Increase to 8.
+	* tree.def (WIDEN_LSHIFT_EXPR, VEC_WIDEN_LSHIFT_HI_EXPR,
+	VEC_WIDEN_LSHIFT_LO_EXPR): New.
+	* cfgexpand.c (expand_debug_expr): Handle new tree codes.
+	* tree-vect-patterns.c (vect_vect_recog_func_ptrs): Add
+	vect_recog_widen_shift_pattern.
+	(vect_handle_widen_mult_by_const): Rename...
+	(vect_handle_widen_op_by_const): ...to this.  Handle shifts.
+	Add a new argument, update documentation.
+	(vect_recog_widen_mult_pattern): Assume that only second
+	operand can be constant.  Update call to
+	vect_handle_widen_op_by_const.
+	(vect_recog_over_widening_pattern): Fix typo.
+	(vect_recog_widen_shift_pattern): New.
+	* tree-vect-stmts.c (vectorizable_type_promotion): Handle
+	widening shifts.
+	(supportable_widening_operation): Likewise.
+	* tree-inline.c (estimate_operator_cost): Handle new tree codes.
+	* tree-vect-generic.c (expand_vector_operations_1): Likewise.
+	* tree-cfg.c (verify_gimple_assign_binary): Likewise.
+	* config/arm/neon.md (neon_vec_<US>shiftl_<mode>): New.
+	(vec_widen_<US>shiftl_lo_<mode>, neon_vec_<US>shiftl_hi_<mode>,
+	vec_widen_<US>shiftl_hi_<mode>, neon_vec_<US>shift_left_<mode>):
+	Likewise.
+	* config/arm/predicates.md (const_neon_scalar_shift_amount_operand):
+	New.
+	* config/arm/iterators.md (V_innermode): New.
+	* tree-vect-slp.c (vect_build_slp_tree): Require same shift operand
+	for widening shift.
+
+	gcc/testsuite
+	* testsuite/lib/target-supports.exp
+	(check_effective_target_vect_widen_shift): New.
+	* gcc.dg/vect/vect-widen-shift-s16.c: New.
+	* gcc.dg/vect/vect-widen-shift-s8.c: New.
+	* gcc.dg/vect/vect-widen-shift-u16.c: New.
+	* gcc.dg/vect/vect-widen-shift-u8.c: New.
+
+	2011-10-06  Jakub Jelinek  <jakub@redhat.com>
+
+	gcc/
+	* tree-vect-patterns.c (vect_pattern_recog_1): Use
+	vect_recog_func_ptr typedef for the first argument.
+	(vect_pattern_recog): Rename vect_recog_func_ptr variable
+	to vect_recog_func, use vect_recog_func_ptr typedef for it.
+
+	2011-10-16  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	PR tree-optimization/50727
+	* tree-vect-patterns.c (vect_operation_fits_smaller_type): Add
+	DEF_STMT to the list of statements to be replaced by the
+	pattern statements.
+
+	2011-10-09  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	PR tree-optimization/50635
+	* tree-vect-patterns.c (vect_handle_widen_mult_by_const): Add
+	DEF_STMT to the list of statements to be replaced by the
+	pattern statements.
+	(vect_handle_widen_mult_by_const): Don't check TYPE_OUT.
+
+=== modified file 'gcc/cfgexpand.c'
+--- old/gcc/cfgexpand.c	2011-07-01 09:19:21 +0000
++++ new/gcc/cfgexpand.c	2011-10-23 13:33:07 +0000
+@@ -3215,6 +3215,8 @@
+     case VEC_UNPACK_LO_EXPR:
+     case VEC_WIDEN_MULT_HI_EXPR:
+     case VEC_WIDEN_MULT_LO_EXPR:
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
+       return NULL;
+ 
+    /* Misc codes.  */
+
+=== modified file 'gcc/config/arm/iterators.md'
+--- old/gcc/config/arm/iterators.md	2011-09-06 14:29:24 +0000
++++ new/gcc/config/arm/iterators.md	2011-10-23 13:33:07 +0000
+@@ -388,6 +388,9 @@
+ (define_mode_attr qhs_extenddi_cstr [(SI "r") (HI "rm") (QI "rUq")])
+ (define_mode_attr qhs_zextenddi_cstr [(SI "r") (HI "rm") (QI "rm")])
+ 
++;; Mode attribute for vshll.
++(define_mode_attr V_innermode [(V8QI "QI") (V4HI "HI") (V2SI "SI")])
++
+ ;;----------------------------------------------------------------------------
+ ;; Code attributes
+ ;;----------------------------------------------------------------------------
+
+=== modified file 'gcc/config/arm/neon.md'
+--- old/gcc/config/arm/neon.md	2011-10-03 01:32:17 +0000
++++ new/gcc/config/arm/neon.md	2011-10-23 13:33:07 +0000
+@@ -5316,6 +5316,44 @@
+  }
+ )
+ 
++(define_insn "neon_vec_<US>shiftl_<mode>"
++ [(set (match_operand:<V_widen> 0 "register_operand" "=w")
++       (SE:<V_widen> (ashift:VW (match_operand:VW 1 "register_operand" "w")
++       (match_operand:<V_innermode> 2 "const_neon_scalar_shift_amount_operand" ""))))]
++  "TARGET_NEON"
++{
++  return "vshll.<US><V_sz_elem> %q0, %P1, %2";
++}
++  [(set_attr "neon_type" "neon_shift_1")]
++)
++
++(define_expand "vec_widen_<US>shiftl_lo_<mode>"
++  [(match_operand:<V_unpack> 0 "register_operand" "")
++   (SE:<V_unpack> (match_operand:VU 1 "register_operand" ""))
++   (match_operand:SI 2 "immediate_operand" "i")]
++ "TARGET_NEON && !BYTES_BIG_ENDIAN"
++ {
++  emit_insn (gen_neon_vec_<US>shiftl_<V_half> (operands[0],
++		simplify_gen_subreg (<V_HALF>mode, operands[1], <MODE>mode, 0),
++		operands[2]));
++   DONE;
++ }
++)
++
++(define_expand "vec_widen_<US>shiftl_hi_<mode>"
++  [(match_operand:<V_unpack> 0 "register_operand" "")
++   (SE:<V_unpack> (match_operand:VU 1 "register_operand" ""))
++   (match_operand:SI 2 "immediate_operand" "i")]
++ "TARGET_NEON && !BYTES_BIG_ENDIAN"
++ {
++  emit_insn (gen_neon_vec_<US>shiftl_<V_half> (operands[0],
++                simplify_gen_subreg (<V_HALF>mode, operands[1], <MODE>mode,
++				     GET_MODE_SIZE (<V_HALF>mode)),
++                operands[2]));
++   DONE;
++ }
++)
++
+ ;; Vectorize for non-neon-quad case
+ (define_insn "neon_unpack<US>_<mode>"
+  [(set (match_operand:<V_widen> 0 "register_operand" "=w")
+@@ -5392,6 +5430,34 @@
+  }
+ )
+ 
++(define_expand "vec_widen_<US>shiftl_hi_<mode>"
++ [(match_operand:<V_double_width> 0 "register_operand" "")
++   (SE:<V_double_width> (match_operand:VDI 1 "register_operand" ""))
++   (match_operand:SI 2 "immediate_operand" "i")]
++ "TARGET_NEON"
++ {
++   rtx tmpreg = gen_reg_rtx (<V_widen>mode);
++   emit_insn (gen_neon_vec_<US>shiftl_<mode> (tmpreg, operands[1], operands[2]));
++   emit_insn (gen_neon_vget_high<V_widen_l> (operands[0], tmpreg));
++
++   DONE;
++ }
++)
++
++(define_expand "vec_widen_<US>shiftl_lo_<mode>"
++  [(match_operand:<V_double_width> 0 "register_operand" "")
++   (SE:<V_double_width> (match_operand:VDI 1 "register_operand" ""))
++   (match_operand:SI 2 "immediate_operand" "i")]
++ "TARGET_NEON"
++ {
++   rtx tmpreg = gen_reg_rtx (<V_widen>mode);
++   emit_insn (gen_neon_vec_<US>shiftl_<mode> (tmpreg, operands[1], operands[2]));
++   emit_insn (gen_neon_vget_low<V_widen_l> (operands[0], tmpreg));
++
++   DONE;
++ }
++)
++
+ ;; The case when using all quad registers.
+ (define_insn "vec_pack_trunc_<mode>"
+  [(set (match_operand:<V_narrow_pack> 0 "register_operand" "=&w")
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-10-10 11:43:28 +0000
++++ new/gcc/config/arm/predicates.md	2011-10-23 13:33:07 +0000
+@@ -136,6 +136,11 @@
+ 	    (match_operand 0 "s_register_operand"))
+        (match_operand 0 "const_int_operand")))
+ 
++(define_predicate "const_neon_scalar_shift_amount_operand"
++  (and (match_code "const_int")
++       (match_test "((unsigned HOST_WIDE_INT) INTVAL (op)) <= GET_MODE_BITSIZE (mode)
++	&& ((unsigned HOST_WIDE_INT) INTVAL (op)) > 0")))
++
+ (define_predicate "arm_add_operand"
+   (ior (match_operand 0 "arm_rhs_operand")
+        (match_operand 0 "arm_neg_immediate_operand")))
+
+=== modified file 'gcc/doc/md.texi'
+--- old/gcc/doc/md.texi	2011-08-13 08:32:32 +0000
++++ new/gcc/doc/md.texi	2011-10-23 13:33:07 +0000
+@@ -4230,6 +4230,17 @@
+ elements of the two vectors, and put the N/2 products of size 2*S in the
+ output vector (operand 0).
+ 
++@cindex @code{vec_widen_ushiftl_hi_@var{m}} instruction pattern
++@cindex @code{vec_widen_ushiftl_lo_@var{m}} instruction pattern
++@cindex @code{vec_widen_sshiftl_hi_@var{m}} instruction pattern
++@cindex @code{vec_widen_sshiftl_lo_@var{m}} instruction pattern
++@item @samp{vec_widen_ushiftl_hi_@var{m}}, @samp{vec_widen_ushiftl_lo_@var{m}}
++@itemx @samp{vec_widen_sshiftl_hi_@var{m}}, @samp{vec_widen_sshiftl_lo_@var{m}}
++Signed/Unsigned widening shift left.  The first input (operand 1) is a vector
++with N signed/unsigned elements of size S@.  Operand 2 is a constant.  Shift
++the high/low elements of operand 1, and put the N/2 results of size 2*S in the
++output vector (operand 0).
++
+ @cindex @code{mulhisi3} instruction pattern
+ @item @samp{mulhisi3}
+ Multiply operands 1 and 2, which have mode @code{HImode}, and store
+
+=== modified file 'gcc/expr.c'
+--- old/gcc/expr.c	2011-08-25 11:42:09 +0000
++++ new/gcc/expr.c	2011-10-23 13:33:07 +0000
+@@ -8290,6 +8290,19 @@
+ 	return target;
+       }
+ 
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
++      {
++        tree oprnd0 = treeop0;
++        tree oprnd1 = treeop1;
++
++        expand_operands (oprnd0, oprnd1, NULL_RTX, &op0, &op1, EXPAND_NORMAL);
++        target = expand_widen_pattern_expr (ops, op0, op1, NULL_RTX,
++                                            target, unsignedp);
++        gcc_assert (target);
++        return target;
++      }
++
+     case VEC_PACK_TRUNC_EXPR:
+     case VEC_PACK_SAT_EXPR:
+     case VEC_PACK_FIX_TRUNC_EXPR:
+
+=== modified file 'gcc/genopinit.c'
+--- old/gcc/genopinit.c	2011-07-15 13:06:31 +0000
++++ new/gcc/genopinit.c	2011-10-23 13:33:07 +0000
+@@ -268,6 +268,10 @@
+   "set_optab_handler (vec_widen_umult_lo_optab, $A, CODE_FOR_$(vec_widen_umult_lo_$a$))",
+   "set_optab_handler (vec_widen_smult_hi_optab, $A, CODE_FOR_$(vec_widen_smult_hi_$a$))",
+   "set_optab_handler (vec_widen_smult_lo_optab, $A, CODE_FOR_$(vec_widen_smult_lo_$a$))",
++  "set_optab_handler (vec_widen_ushiftl_hi_optab, $A, CODE_FOR_$(vec_widen_ushiftl_hi_$a$))",
++  "set_optab_handler (vec_widen_ushiftl_lo_optab, $A, CODE_FOR_$(vec_widen_ushiftl_lo_$a$))",
++  "set_optab_handler (vec_widen_sshiftl_hi_optab, $A, CODE_FOR_$(vec_widen_sshiftl_hi_$a$))",
++  "set_optab_handler (vec_widen_sshiftl_lo_optab, $A, CODE_FOR_$(vec_widen_sshiftl_lo_$a$))",
+   "set_optab_handler (vec_unpacks_hi_optab, $A, CODE_FOR_$(vec_unpacks_hi_$a$))",
+   "set_optab_handler (vec_unpacks_lo_optab, $A, CODE_FOR_$(vec_unpacks_lo_$a$))",
+   "set_optab_handler (vec_unpacku_hi_optab, $A, CODE_FOR_$(vec_unpacku_hi_$a$))",
+
+=== modified file 'gcc/gimple-pretty-print.c'
+--- old/gcc/gimple-pretty-print.c	2011-05-05 15:42:22 +0000
++++ new/gcc/gimple-pretty-print.c	2011-10-23 13:33:07 +0000
+@@ -343,6 +343,8 @@
+     case VEC_EXTRACT_ODD_EXPR:
+     case VEC_INTERLEAVE_HIGH_EXPR:
+     case VEC_INTERLEAVE_LOW_EXPR:
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
+       for (p = tree_code_name [(int) code]; *p; p++)
+ 	pp_character (buffer, TOUPPER (*p));
+       pp_string (buffer, " <");
+
+=== modified file 'gcc/optabs.c'
+--- old/gcc/optabs.c	2011-08-11 15:46:01 +0000
++++ new/gcc/optabs.c	2011-10-23 13:33:07 +0000
+@@ -454,6 +454,14 @@
+       return TYPE_UNSIGNED (type) ?
+ 	vec_widen_umult_lo_optab : vec_widen_smult_lo_optab;
+ 
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++      return TYPE_UNSIGNED (type) ?
++        vec_widen_ushiftl_hi_optab : vec_widen_sshiftl_hi_optab;
++
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
++      return TYPE_UNSIGNED (type) ?
++        vec_widen_ushiftl_lo_optab : vec_widen_sshiftl_lo_optab;
++
+     case VEC_UNPACK_HI_EXPR:
+       return TYPE_UNSIGNED (type) ?
+ 	vec_unpacku_hi_optab : vec_unpacks_hi_optab;
+@@ -6351,6 +6359,10 @@
+   init_optab (vec_widen_umult_lo_optab, UNKNOWN);
+   init_optab (vec_widen_smult_hi_optab, UNKNOWN);
+   init_optab (vec_widen_smult_lo_optab, UNKNOWN);
++  init_optab (vec_widen_ushiftl_hi_optab, UNKNOWN);
++  init_optab (vec_widen_ushiftl_lo_optab, UNKNOWN);
++  init_optab (vec_widen_sshiftl_hi_optab, UNKNOWN);
++  init_optab (vec_widen_sshiftl_lo_optab, UNKNOWN);
+   init_optab (vec_unpacks_hi_optab, UNKNOWN);
+   init_optab (vec_unpacks_lo_optab, UNKNOWN);
+   init_optab (vec_unpacku_hi_optab, UNKNOWN);
+
+=== modified file 'gcc/optabs.h'
+--- old/gcc/optabs.h	2011-07-27 14:12:45 +0000
++++ new/gcc/optabs.h	2011-10-23 13:33:07 +0000
+@@ -350,6 +350,12 @@
+   OTI_vec_widen_umult_lo,
+   OTI_vec_widen_smult_hi,
+   OTI_vec_widen_smult_lo,
++  /* Widening shift left.
++     The high/low part of the resulting vector is returned.  */
++  OTI_vec_widen_ushiftl_hi,
++  OTI_vec_widen_ushiftl_lo,
++  OTI_vec_widen_sshiftl_hi,
++  OTI_vec_widen_sshiftl_lo,
+   /* Extract and widen the high/low part of a vector of signed or
+      floating point elements.  */
+   OTI_vec_unpacks_hi,
+@@ -542,6 +548,10 @@
+ #define vec_widen_umult_lo_optab (&optab_table[OTI_vec_widen_umult_lo])
+ #define vec_widen_smult_hi_optab (&optab_table[OTI_vec_widen_smult_hi])
+ #define vec_widen_smult_lo_optab (&optab_table[OTI_vec_widen_smult_lo])
++#define vec_widen_ushiftl_hi_optab (&optab_table[OTI_vec_widen_ushiftl_hi])
++#define vec_widen_ushiftl_lo_optab (&optab_table[OTI_vec_widen_ushiftl_lo])
++#define vec_widen_sshiftl_hi_optab (&optab_table[OTI_vec_widen_sshiftl_hi])
++#define vec_widen_sshiftl_lo_optab (&optab_table[OTI_vec_widen_sshiftl_lo])
+ #define vec_unpacks_hi_optab (&optab_table[OTI_vec_unpacks_hi])
+ #define vec_unpacks_lo_optab (&optab_table[OTI_vec_unpacks_lo])
+ #define vec_unpacku_hi_optab (&optab_table[OTI_vec_unpacku_hi])
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-shift-s16.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-shift-s16.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-shift-s16.c	2011-10-23 13:33:07 +0000
+@@ -0,0 +1,107 @@
++/* { dg-require-effective-target vect_int } */
++/* { dg-require-effective-target vect_shift } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 64
++#define C 16
++
++__attribute__ ((noinline)) void
++foo (short *src, int *dst)
++{
++  int i;
++  short b, b0, b1, b2, b3, *s = src;
++  int *d = dst;
++
++  for (i = 0; i < N/4; i++)
++    {
++      b0 = *s++;
++      b1 = *s++;
++      b2 = *s++;
++      b3 = *s++;
++      *d = b0 << C;
++      d++;
++      *d = b1 << C;
++      d++;
++      *d = b2 << C;
++      d++;
++      *d = b3 << C;
++      d++;
++    }
++
++  s = src;
++  d = dst;
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      if (*d != b << C)
++        abort ();
++      d++;
++    }
++
++  s = src;
++  d = dst;
++  for (i = 0; i < N/4; i++)
++    {
++      b0 = *s++;
++      b1 = *s++;
++      b2 = *s++;
++      b3 = *s++;
++      *d = b0 << C;
++      d++;
++      *d = b1 << C;
++      d++;
++      *d = b2 << C;
++      d++;
++      *d = b3 << 6;
++      d++;
++    }
++
++  s = src;
++  d = dst;
++  for (i = 0; i < N/4; i++)
++    {
++      b = *s++;
++      if (*d != b << C)
++        abort ();
++      d++;
++      b = *s++;
++      if (*d != b << C)
++        abort ();
++      d++;
++      b = *s++;
++      if (*d != b << C)
++        abort ();
++      d++;
++      b = *s++;
++      if (*d != b << 6)
++        abort ();
++      d++;
++    }
++}
++
++int main (void)
++{
++  int i;
++  short in[N];
++  int out[N];
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in[i] = i;
++      out[i] = 255;
++      __asm__ volatile ("");
++    }
++
++  foo (in, out);
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_shift_pattern: detected" 8 "vect" { target vect_widen_shift } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 2 loops" 1 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-shift-s8.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-shift-s8.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-shift-s8.c	2011-10-23 13:33:07 +0000
+@@ -0,0 +1,58 @@
++/* { dg-require-effective-target vect_int } */
++/* { dg-require-effective-target vect_shift } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 64
++#define C 12
++
++__attribute__ ((noinline)) void
++foo (char *src, int *dst)
++{
++  int i;
++  char b, *s = src;
++  int *d = dst;
++
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      *d = b << C;
++      d++;
++    }
++
++  s = src;
++  d = dst;
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      if (*d != b << C)
++        abort ();
++      d++;
++    }
++}
++
++int main (void)
++{
++  int i;
++  char in[N];
++  int out[N];
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in[i] = i;
++      out[i] = 255;
++      __asm__ volatile ("");
++    }
++
++  foo (in, out);
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_shift_pattern: detected" 1 "vect" { target vect_widen_shift } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-shift-u16.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-shift-u16.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-shift-u16.c	2011-10-23 13:33:07 +0000
+@@ -0,0 +1,58 @@
++/* { dg-require-effective-target vect_int } */
++/* { dg-require-effective-target vect_shift } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 64
++#define C 7
++
++__attribute__ ((noinline)) void
++foo (unsigned short *src, unsigned int *dst)
++{
++  int i;
++  unsigned short b, *s = src;
++  unsigned int *d = dst;
++
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      *d = b << C;
++      d++;
++    }
++
++  s = src;
++  d = dst;
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      if (*d != b << C)
++        abort ();
++      d++;
++    }
++}
++
++int main (void)
++{
++  int i;
++  unsigned short in[N];
++  unsigned int out[N];
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in[i] = i;
++      out[i] = 255;
++      __asm__ volatile ("");
++    }
++
++  foo (in, out);
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_shift_pattern: detected" 1 "vect" { target vect_widen_shift } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/vect-widen-shift-u8.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-shift-u8.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-shift-u8.c	2011-10-23 13:33:07 +0000
+@@ -0,0 +1,65 @@
++/* { dg-require-effective-target vect_int } */
++/* { dg-require-effective-target vect_shift } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define N 64
++#define C1 10
++#define C2 5
++
++__attribute__ ((noinline)) void
++foo (unsigned char *src, unsigned int *dst1, unsigned int *dst2)
++{
++  int i;
++  unsigned char b, *s = src;
++  unsigned int *d1 = dst1, *d2 = dst2;
++
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      *d1 = b << C1;
++      d1++;
++      *d2 = b << C2;
++      d2++;
++    }
++
++  s = src;
++  d1 = dst1;
++  d2 = dst2;
++  for (i = 0; i < N; i++)
++    {
++      b = *s++;
++      if (*d1 != b << C1 || *d2 != b << C2)
++        abort ();
++      d1++;
++      d2++;
++    }
++}
++
++int main (void)
++{
++  int i;
++  unsigned char in[N];
++  unsigned int out1[N];
++  unsigned int out2[N];
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      in[i] = i;
++      out1[i] = 255;
++      out2[i] = 255;
++      __asm__ volatile ("");
++    }
++
++  foo (in, out1, out2);
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_shift_pattern: detected" 1 "vect" { target vect_widen_shift } } } */
++/* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
++
+
+=== modified file 'gcc/testsuite/lib/target-supports.exp'
+--- old/gcc/testsuite/lib/target-supports.exp	2011-10-06 11:08:08 +0000
++++ new/gcc/testsuite/lib/target-supports.exp	2011-10-23 13:33:07 +0000
+@@ -2783,6 +2783,26 @@
+ }
+ 
+ # Return 1 if the target plus current options supports a vector
++# widening shift, 0 otherwise.
++#
++# This won't change for different subtargets so cache the result.
++
++proc check_effective_target_vect_widen_shift { } {
++    global et_vect_widen_shift_saved
++
++    if [info exists et_vect_shift_saved] {
++        verbose "check_effective_target_vect_widen_shift: using cached result" 2
++    } else {
++        set et_vect_widen_shift_saved 0
++        if { ([istarget arm*-*-*] && [check_effective_target_arm_neon_ok]) } {
++            set et_vect_widen_shift_saved 1
++        }
++    }
++    verbose "check_effective_target_vect_widen_shift: returning $et_vect_widen_shift_saved" 2
++    return $et_vect_widen_shift_saved
++}
++
++# Return 1 if the target plus current options supports a vector
+ # dot-product of signed chars, 0 otherwise.
+ #
+ # This won't change for different subtargets so cache the result.
+
+=== modified file 'gcc/tree-cfg.c'
+--- old/gcc/tree-cfg.c	2011-07-15 13:44:50 +0000
++++ new/gcc/tree-cfg.c	2011-10-23 13:33:07 +0000
+@@ -3473,6 +3473,44 @@
+ 	return false;
+       }
+ 
++    case WIDEN_LSHIFT_EXPR:
++      {
++        if (!INTEGRAL_TYPE_P (lhs_type)
++            || !INTEGRAL_TYPE_P (rhs1_type)
++            || TREE_CODE (rhs2) != INTEGER_CST
++            || (2 * TYPE_PRECISION (rhs1_type) > TYPE_PRECISION (lhs_type)))
++          {
++            error ("type mismatch in widening vector shift expression");
++            debug_generic_expr (lhs_type);
++            debug_generic_expr (rhs1_type);
++            debug_generic_expr (rhs2_type);
++            return true;
++          }
++
++        return false;
++      }
++
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
++      {
++        if (TREE_CODE (rhs1_type) != VECTOR_TYPE
++            || TREE_CODE (lhs_type) != VECTOR_TYPE
++            || !INTEGRAL_TYPE_P (TREE_TYPE (rhs1_type))
++            || !INTEGRAL_TYPE_P (TREE_TYPE (lhs_type))
++            || TREE_CODE (rhs2) != INTEGER_CST
++            || (2 * TYPE_PRECISION (TREE_TYPE (rhs1_type))
++                > TYPE_PRECISION (TREE_TYPE (lhs_type))))
++          {
++            error ("type mismatch in widening vector shift expression");
++            debug_generic_expr (lhs_type);
++            debug_generic_expr (rhs1_type);
++            debug_generic_expr (rhs2_type);
++            return true;
++          }
++
++        return false;
++      }
++
+     case PLUS_EXPR:
+     case MINUS_EXPR:
+       {
+
+=== modified file 'gcc/tree-inline.c'
+--- old/gcc/tree-inline.c	2011-08-13 08:32:32 +0000
++++ new/gcc/tree-inline.c	2011-10-23 13:33:07 +0000
+@@ -3343,6 +3343,7 @@
+     case DOT_PROD_EXPR:
+     case WIDEN_MULT_PLUS_EXPR:
+     case WIDEN_MULT_MINUS_EXPR:
++    case WIDEN_LSHIFT_EXPR:
+ 
+     case VEC_WIDEN_MULT_HI_EXPR:
+     case VEC_WIDEN_MULT_LO_EXPR:
+@@ -3357,6 +3358,8 @@
+     case VEC_EXTRACT_ODD_EXPR:
+     case VEC_INTERLEAVE_HIGH_EXPR:
+     case VEC_INTERLEAVE_LOW_EXPR:
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
+ 
+       return 1;
+ 
+
+=== modified file 'gcc/tree-pretty-print.c'
+--- old/gcc/tree-pretty-print.c	2010-11-05 09:00:50 +0000
++++ new/gcc/tree-pretty-print.c	2011-10-23 13:33:07 +0000
+@@ -1539,6 +1539,7 @@
+     case RROTATE_EXPR:
+     case VEC_LSHIFT_EXPR:
+     case VEC_RSHIFT_EXPR:
++    case WIDEN_LSHIFT_EXPR:
+     case BIT_IOR_EXPR:
+     case BIT_XOR_EXPR:
+     case BIT_AND_EXPR:
+@@ -2209,6 +2210,22 @@
+       pp_string (buffer, " > ");
+       break;
+ 
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++      pp_string (buffer, " VEC_WIDEN_LSHIFT_HI_EXPR < ");
++      dump_generic_node (buffer, TREE_OPERAND (node, 0), spc, flags, false);
++      pp_string (buffer, ", ");
++      dump_generic_node (buffer, TREE_OPERAND (node, 1), spc, flags, false);
++      pp_string (buffer, " > ");
++      break;
++
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
++      pp_string (buffer, " VEC_WIDEN_LSHIFT_HI_EXPR < ");
++      dump_generic_node (buffer, TREE_OPERAND (node, 0), spc, flags, false);
++      pp_string (buffer, ", ");
++      dump_generic_node (buffer, TREE_OPERAND (node, 1), spc, flags, false);
++      pp_string (buffer, " > ");
++      break;
++
+     case VEC_UNPACK_HI_EXPR:
+       pp_string (buffer, " VEC_UNPACK_HI_EXPR < ");
+       dump_generic_node (buffer, TREE_OPERAND (node, 0), spc, flags, false);
+@@ -2531,6 +2548,9 @@
+     case RSHIFT_EXPR:
+     case LROTATE_EXPR:
+     case RROTATE_EXPR:
++    case VEC_WIDEN_LSHIFT_HI_EXPR:
++    case VEC_WIDEN_LSHIFT_LO_EXPR:
++    case WIDEN_LSHIFT_EXPR:
+       return 11;
+ 
+     case WIDEN_SUM_EXPR:
+@@ -2706,6 +2726,9 @@
+     case VEC_RSHIFT_EXPR:
+       return "v>>";
+ 
++    case WIDEN_LSHIFT_EXPR:
++      return "w<<";
++
+     case POINTER_PLUS_EXPR:
+       return "+";
+ 
+
+=== modified file 'gcc/tree-vect-generic.c'
+--- old/gcc/tree-vect-generic.c	2011-02-08 14:16:50 +0000
++++ new/gcc/tree-vect-generic.c	2011-10-23 13:33:07 +0000
+@@ -552,7 +552,9 @@
+       || code == VEC_UNPACK_LO_EXPR
+       || code == VEC_PACK_TRUNC_EXPR
+       || code == VEC_PACK_SAT_EXPR
+-      || code == VEC_PACK_FIX_TRUNC_EXPR)
++      || code == VEC_PACK_FIX_TRUNC_EXPR
++      || code == VEC_WIDEN_LSHIFT_HI_EXPR
++      || code == VEC_WIDEN_LSHIFT_LO_EXPR)
+     type = TREE_TYPE (rhs1);
+ 
+   /* Optabs will try converting a negation into a subtraction, so
+
+=== modified file 'gcc/tree-vect-patterns.c'
+--- old/gcc/tree-vect-patterns.c	2011-09-05 06:23:37 +0000
++++ new/gcc/tree-vect-patterns.c	2011-10-23 13:33:07 +0000
+@@ -48,12 +48,15 @@
+ static gimple vect_recog_pow_pattern (VEC (gimple, heap) **, tree *, tree *);
+ static gimple vect_recog_over_widening_pattern (VEC (gimple, heap) **, tree *,
+                                                  tree *);
++static gimple vect_recog_widen_shift_pattern (VEC (gimple, heap) **,
++                                       tree *, tree *);
+ static vect_recog_func_ptr vect_vect_recog_func_ptrs[NUM_PATTERNS] = {
+ 	vect_recog_widen_mult_pattern,
+ 	vect_recog_widen_sum_pattern,
+ 	vect_recog_dot_prod_pattern,
+ 	vect_recog_pow_pattern,
+-        vect_recog_over_widening_pattern};
++        vect_recog_over_widening_pattern,
++	vect_recog_widen_shift_pattern};
+ 
+ 
+ /* Function widened_name_p
+@@ -331,27 +334,38 @@
+   return pattern_stmt;
+ }
+ 
+-/* Handle two cases of multiplication by a constant.  The first one is when
+-   the constant, CONST_OPRND, fits the type (HALF_TYPE) of the second
+-   operand (OPRND).  In that case, we can peform widen-mult from HALF_TYPE to
+-   TYPE.
++
++/* Handle widening operation by a constant.  At the moment we support MULT_EXPR
++   and LSHIFT_EXPR.
++
++   For MULT_EXPR we check that CONST_OPRND fits HALF_TYPE, and for LSHIFT_EXPR
++   we check that CONST_OPRND is less or equal to the size of HALF_TYPE.
+ 
+    Otherwise, if the type of the result (TYPE) is at least 4 times bigger than
+-   HALF_TYPE, and CONST_OPRND fits an intermediate type (2 times smaller than
+-   TYPE), we can perform widen-mult from the intermediate type to TYPE and
+-   replace a_T = (TYPE) a_t; with a_it - (interm_type) a_t;  */
++   HALF_TYPE, and there is an intermediate type (2 times smaller than TYPE)
++   that satisfies the above restrictions,  we can perform a widening opeartion
++   from the intermediate type to TYPE and replace a_T = (TYPE) a_t;
++   with a_it = (interm_type) a_t;  */
+ 
+ static bool
+-vect_handle_widen_mult_by_const (gimple stmt, tree const_oprnd, tree *oprnd,
+-                                 VEC (gimple, heap) **stmts, tree type,
+-                                 tree *half_type, gimple def_stmt)
++vect_handle_widen_op_by_const (gimple stmt, enum tree_code code,
++                               tree const_oprnd, tree *oprnd,
++                               VEC (gimple, heap) **stmts, tree type,
++                               tree *half_type, gimple def_stmt)
+ {
+   tree new_type, new_oprnd, tmp;
+   gimple new_stmt;
+   loop_vec_info loop_info = STMT_VINFO_LOOP_VINFO (vinfo_for_stmt (stmt));
+   struct loop *loop = LOOP_VINFO_LOOP (loop_info);
+ 
+-  if (int_fits_type_p (const_oprnd, *half_type))
++  if (code != MULT_EXPR && code != LSHIFT_EXPR)
++    return false;
++
++  if (((code == MULT_EXPR && int_fits_type_p (const_oprnd, *half_type))
++        || (code == LSHIFT_EXPR
++            && compare_tree_int (const_oprnd, TYPE_PRECISION (*half_type))
++                != 1))
++      && TYPE_PRECISION (type) == (TYPE_PRECISION (*half_type) * 2))
+     {
+       /* CONST_OPRND is a constant of HALF_TYPE.  */
+       *oprnd = gimple_assign_rhs1 (def_stmt);
+@@ -364,14 +378,16 @@
+       || !vinfo_for_stmt (def_stmt))
+     return false;
+ 
+-  /* TYPE is 4 times bigger than HALF_TYPE, try widen-mult for
++  /* TYPE is 4 times bigger than HALF_TYPE, try widening operation for
+      a type 2 times bigger than HALF_TYPE.  */
+   new_type = build_nonstandard_integer_type (TYPE_PRECISION (type) / 2,
+                                              TYPE_UNSIGNED (type));
+-  if (!int_fits_type_p (const_oprnd, new_type))
++  if ((code == MULT_EXPR && !int_fits_type_p (const_oprnd, new_type))
++      || (code == LSHIFT_EXPR
++          && compare_tree_int (const_oprnd, TYPE_PRECISION (new_type)) == 1))
+     return false;
+ 
+-  /* Use NEW_TYPE for widen_mult.  */
++  /* Use NEW_TYPE for widening operation.  */
+   if (STMT_VINFO_RELATED_STMT (vinfo_for_stmt (def_stmt)))
+     {
+       new_stmt = STMT_VINFO_RELATED_STMT (vinfo_for_stmt (def_stmt));
+@@ -381,6 +397,7 @@
+           || TREE_TYPE (gimple_assign_lhs (new_stmt)) != new_type)
+         return false;
+ 
++      VEC_safe_push (gimple, heap, *stmts, def_stmt);
+       *oprnd = gimple_assign_lhs (new_stmt);
+     }
+   else
+@@ -392,7 +409,6 @@
+       new_oprnd = make_ssa_name (tmp, NULL);
+       new_stmt = gimple_build_assign_with_ops (NOP_EXPR, new_oprnd, *oprnd,
+                                                NULL_TREE);
+-      SSA_NAME_DEF_STMT (new_oprnd) = new_stmt;
+       STMT_VINFO_RELATED_STMT (vinfo_for_stmt (def_stmt)) = new_stmt;
+       VEC_safe_push (gimple, heap, *stmts, def_stmt);
+       *oprnd = new_oprnd;
+@@ -402,7 +418,6 @@
+   return true;
+ }
+ 
+-
+ /* Function vect_recog_widen_mult_pattern
+ 
+    Try to find the following pattern:
+@@ -491,7 +506,7 @@
+   enum tree_code dummy_code;
+   int dummy_int;
+   VEC (tree, heap) *dummy_vec;
+-  bool op0_ok, op1_ok;
++  bool op1_ok;
+ 
+   if (!is_gimple_assign (last_stmt))
+     return NULL;
+@@ -511,38 +526,23 @@
+     return NULL;
+ 
+   /* Check argument 0.  */
+-  op0_ok = widened_name_p (oprnd0, last_stmt, &half_type0, &def_stmt0, false);
++  if (!widened_name_p (oprnd0, last_stmt, &half_type0, &def_stmt0, false))
++    return NULL;
+   /* Check argument 1.  */
+   op1_ok = widened_name_p (oprnd1, last_stmt, &half_type1, &def_stmt1, false);
+ 
+-  /* In case of multiplication by a constant one of the operands may not match
+-     the pattern, but not both.  */
+-  if (!op0_ok && !op1_ok)
+-     return NULL;
+-
+-  if (op0_ok && op1_ok)
++  if (op1_ok)
+     {
+       oprnd0 = gimple_assign_rhs1 (def_stmt0);
+       oprnd1 = gimple_assign_rhs1 (def_stmt1);
+     }
+-  else if (!op0_ok)
+-    {
+-      if (TREE_CODE (oprnd0) == INTEGER_CST
+-          && TREE_CODE (half_type1) == INTEGER_TYPE
+-          && vect_handle_widen_mult_by_const (last_stmt, oprnd0, &oprnd1, 
+-		                              stmts, type,
+-                                              &half_type1, def_stmt1))
+-        half_type0 = half_type1;
+-      else
+-        return NULL;
+-    }
+-  else if (!op1_ok)
++  else
+     {
+       if (TREE_CODE (oprnd1) == INTEGER_CST
+           && TREE_CODE (half_type0) == INTEGER_TYPE
+-          && vect_handle_widen_mult_by_const (last_stmt, oprnd1, &oprnd0,
+-		                              stmts, type,
+-                                              &half_type0, def_stmt0))
++          && vect_handle_widen_op_by_const (last_stmt, MULT_EXPR, oprnd1,
++                                            &oprnd0, stmts, type,
++                                            &half_type0, def_stmt0))
+         half_type1 = half_type0;
+       else
+         return NULL;
+@@ -998,6 +998,7 @@
+                   || TREE_TYPE (gimple_assign_lhs (new_stmt)) != interm_type)
+                 return false;
+ 
++              VEC_safe_push (gimple, heap, *stmts, def_stmt);
+               oprnd = gimple_assign_lhs (new_stmt);
+             }
+           else
+@@ -1128,7 +1129,7 @@
+          statetments, except for the case when the last statement in the
+          sequence doesn't have a corresponding pattern statement.  In such
+          case we associate the last pattern statement with the last statement
+-         in the sequence.  Therefore, we only add an original statetement to
++         in the sequence.  Therefore, we only add the original statement to
+          the list if we know that it is not the last.  */
+       if (prev_stmt)
+         VEC_safe_push (gimple, heap, *stmts, prev_stmt);
+@@ -1215,6 +1216,231 @@
+ }
+ 
+ 
++/* Detect widening shift pattern:
++
++   type a_t;
++   TYPE a_T, res_T;
++
++   S1 a_t = ;
++   S2 a_T = (TYPE) a_t;
++   S3 res_T = a_T << CONST;
++
++  where type 'TYPE' is at least double the size of type 'type'.
++
++  Also detect unsigned cases:
++
++  unsigned type a_t;
++  unsigned TYPE u_res_T;
++  TYPE a_T, res_T;
++
++  S1 a_t = ;
++  S2 a_T = (TYPE) a_t;
++  S3 res_T = a_T << CONST;
++  S4 u_res_T = (unsigned TYPE) res_T;
++
++  And a case when 'TYPE' is 4 times bigger than 'type'.  In that case we
++  create an additional pattern stmt for S2 to create a variable of an
++  intermediate type, and perform widen-shift on the intermediate type:
++
++  type a_t;
++  interm_type a_it;
++  TYPE a_T, res_T, res_T';
++
++  S1 a_t = ;
++  S2 a_T = (TYPE) a_t;
++      '--> a_it = (interm_type) a_t;
++  S3 res_T = a_T << CONST;
++      '--> res_T' = a_it <<* CONST;
++
++  Input/Output:
++
++  * STMTS: Contains a stmt from which the pattern search begins.
++    In case of unsigned widen-shift, the original stmt (S3) is replaced with S4
++    in STMTS.  When an intermediate type is used and a pattern statement is
++    created for S2, we also put S2 here (before S3).
++
++  Output:
++
++  * TYPE_IN: The type of the input arguments to the pattern.
++
++  * TYPE_OUT: The type of the output of this pattern.
++
++  * Return value: A new stmt that will be used to replace the sequence of
++    stmts that constitute the pattern.  In this case it will be:
++    WIDEN_LSHIFT_EXPR <a_t, CONST>.  */
++
++static gimple
++vect_recog_widen_shift_pattern (VEC (gimple, heap) **stmts,
++                                tree *type_in, tree *type_out)
++{
++  gimple last_stmt = VEC_pop (gimple, *stmts);
++  gimple def_stmt0;
++  tree oprnd0, oprnd1;
++  tree type, half_type0;
++  gimple pattern_stmt, orig_stmt = NULL;
++  tree vectype, vectype_out = NULL_TREE;
++  tree dummy;
++  tree var;
++  enum tree_code dummy_code;
++  int dummy_int;
++  VEC (tree, heap) * dummy_vec;
++  gimple use_stmt = NULL;
++  bool over_widen = false;
++
++  if (!is_gimple_assign (last_stmt) || !vinfo_for_stmt (last_stmt))
++    return NULL;
++
++  orig_stmt = last_stmt;
++  if (STMT_VINFO_IN_PATTERN_P (vinfo_for_stmt (last_stmt)))
++    {
++      /* This statement was also detected as over-widening operation (it can't
++         be any other pattern, because only over-widening detects shifts).
++         LAST_STMT is the final type demotion statement, but its related
++         statement is shift.  We analyze the related statement to catch cases:
++
++         orig code:
++          type a_t;
++          itype res;
++          TYPE a_T, res_T;
++
++          S1 a_T = (TYPE) a_t;
++          S2 res_T = a_T << CONST;
++          S3 res = (itype)res_T;
++
++          (size of type * 2 <= size of itype
++           and size of itype * 2 <= size of TYPE)
++
++         code after over-widening pattern detection:
++
++          S1 a_T = (TYPE) a_t;
++               --> a_it = (itype) a_t;
++          S2 res_T = a_T << CONST;
++          S3 res = (itype)res_T;  <--- LAST_STMT
++               --> res = a_it << CONST;
++
++         after widen_shift:
++
++          S1 a_T = (TYPE) a_t;
++               --> a_it = (itype) a_t; - redundant
++          S2 res_T = a_T << CONST;
++          S3 res = (itype)res_T;
++               --> res = a_t w<< CONST;
++
++      i.e., we replace the three statements with res = a_t w<< CONST.  */
++      last_stmt = STMT_VINFO_RELATED_STMT (vinfo_for_stmt (last_stmt));
++      over_widen = true;
++    }
++
++  if (gimple_assign_rhs_code (last_stmt) != LSHIFT_EXPR)
++    return NULL;
++
++  oprnd0 = gimple_assign_rhs1 (last_stmt);
++  oprnd1 = gimple_assign_rhs2 (last_stmt);
++  if (TREE_CODE (oprnd0) != SSA_NAME || TREE_CODE (oprnd1) != INTEGER_CST)
++    return NULL;
++
++  /* Check operand 0: it has to be defined by a type promotion.  */
++  if (!widened_name_p (oprnd0, last_stmt, &half_type0, &def_stmt0, false))
++    return NULL;
++
++  /* Check operand 1: has to be positive.  We check that it fits the type
++     in vect_handle_widen_op_by_const ().  */
++  if (tree_int_cst_compare (oprnd1, size_zero_node) <= 0)
++    return NULL;
++
++  oprnd0 = gimple_assign_rhs1 (def_stmt0);
++  type = gimple_expr_type (last_stmt);
++
++  /* Check if this a widening operation.  */
++  if (!vect_handle_widen_op_by_const (last_stmt, LSHIFT_EXPR, oprnd1,
++                                      &oprnd0, stmts,
++                                      type, &half_type0, def_stmt0))
++    return NULL;
++
++  /* Handle unsigned case.  Look for
++     S4  u_res_T = (unsigned TYPE) res_T;
++     Use unsigned TYPE as the type for WIDEN_LSHIFT_EXPR.  */
++  if (TYPE_UNSIGNED (type) != TYPE_UNSIGNED (half_type0))
++    {
++      tree lhs = gimple_assign_lhs (last_stmt), use_lhs;
++      imm_use_iterator imm_iter;
++      use_operand_p use_p;
++      int nuses = 0;
++      tree use_type;
++
++      if (over_widen)
++        {
++          /* In case of over-widening pattern, S4 should be ORIG_STMT itself.
++             We check here that TYPE is the correct type for the operation,
++             i.e., it's the type of the original result.  */
++          tree orig_type = gimple_expr_type (orig_stmt);
++          if ((TYPE_UNSIGNED (type) != TYPE_UNSIGNED (orig_type))
++              || (TYPE_PRECISION (type) != TYPE_PRECISION (orig_type)))
++            return NULL;
++        }
++      else
++        {
++          FOR_EACH_IMM_USE_FAST (use_p, imm_iter, lhs)
++            {
++              if (is_gimple_debug (USE_STMT (use_p)))
++                continue;
++              use_stmt = USE_STMT (use_p);
++              nuses++;
++            }
++
++          if (nuses != 1 || !is_gimple_assign (use_stmt)
++              || !CONVERT_EXPR_CODE_P (gimple_assign_rhs_code (use_stmt)))
++            return NULL;
++
++          use_lhs = gimple_assign_lhs (use_stmt);
++          use_type = TREE_TYPE (use_lhs);
++
++          if (!INTEGRAL_TYPE_P (use_type)
++              || (TYPE_UNSIGNED (type) == TYPE_UNSIGNED (use_type))
++              || (TYPE_PRECISION (type) != TYPE_PRECISION (use_type)))
++            return NULL;
++
++          type = use_type;
++        }
++    }
++
++  /* Pattern detected.  */
++  if (vect_print_dump_info (REPORT_DETAILS))
++    fprintf (vect_dump, "vect_recog_widen_shift_pattern: detected: ");
++
++  /* Check target support.  */
++  vectype = get_vectype_for_scalar_type (half_type0);
++  vectype_out = get_vectype_for_scalar_type (type);
++
++  if (!vectype
++      || !vectype_out
++      || !supportable_widening_operation (WIDEN_LSHIFT_EXPR, last_stmt,
++                                          vectype_out, vectype,
++                                          &dummy, &dummy, &dummy_code,
++                                          &dummy_code, &dummy_int,
++                                          &dummy_vec))
++    return NULL;
++
++  *type_in = vectype;
++  *type_out = vectype_out;
++
++  /* Pattern supported.  Create a stmt to be used to replace the pattern.  */
++  var = vect_recog_temp_ssa_var (type, NULL);
++  pattern_stmt =
++    gimple_build_assign_with_ops (WIDEN_LSHIFT_EXPR, var, oprnd0, oprnd1);
++
++  if (vect_print_dump_info (REPORT_DETAILS))
++    print_gimple_stmt (vect_dump, pattern_stmt, 0, TDF_SLIM);
++
++  if (use_stmt)
++    last_stmt = use_stmt;
++  else
++    last_stmt = orig_stmt;
++
++  VEC_safe_push (gimple, heap, *stmts, last_stmt);
++  return pattern_stmt;
++}
++
+ /* Mark statements that are involved in a pattern.  */
+ 
+ static inline void
+@@ -1278,7 +1504,8 @@
+ static void
+ vect_pattern_recog_1 (
+ 	gimple (* vect_recog_func) (VEC (gimple, heap) **, tree *, tree *),
+-	gimple_stmt_iterator si)
++	gimple_stmt_iterator si,
++	VEC (gimple, heap) **stmts_to_replace)
+ {
+   gimple stmt = gsi_stmt (si), pattern_stmt;
+   stmt_vec_info stmt_info;
+@@ -1288,14 +1515,14 @@
+   enum tree_code code;
+   int i;
+   gimple next;
+-  VEC (gimple, heap) *stmts_to_replace = VEC_alloc (gimple, heap, 1);
+ 
+-  VEC_quick_push (gimple, stmts_to_replace, stmt);
+-  pattern_stmt = (* vect_recog_func) (&stmts_to_replace, &type_in, &type_out);
++  VEC_truncate (gimple, *stmts_to_replace, 0);
++  VEC_quick_push (gimple, *stmts_to_replace, stmt);
++  pattern_stmt = (* vect_recog_func) (stmts_to_replace, &type_in, &type_out);
+   if (!pattern_stmt)
+     return;
+ 
+-  stmt = VEC_last (gimple, stmts_to_replace);
++  stmt = VEC_last (gimple, *stmts_to_replace);
+   stmt_info = vinfo_for_stmt (stmt);
+   loop_vinfo = STMT_VINFO_LOOP_VINFO (stmt_info);
+  
+@@ -1303,8 +1530,6 @@
+     {
+       /* No need to check target support (already checked by the pattern
+          recognition function).  */
+-      if (type_out)
+-	gcc_assert (VECTOR_MODE_P (TYPE_MODE (type_out)));
+       pattern_vectype = type_out ? type_out : type_in;
+     }
+   else
+@@ -1360,8 +1585,8 @@
+   /* It is possible that additional pattern stmts are created and inserted in
+      STMTS_TO_REPLACE.  We create a stmt_info for each of them, and mark the
+      relevant statements.  */
+-  for (i = 0; VEC_iterate (gimple, stmts_to_replace, i, stmt)
+-              && (unsigned) i < (VEC_length (gimple, stmts_to_replace) - 1);
++  for (i = 0; VEC_iterate (gimple, *stmts_to_replace, i, stmt)
++	      && (unsigned) i < (VEC_length (gimple, *stmts_to_replace) - 1);
+        i++)
+     {
+       stmt_info = vinfo_for_stmt (stmt);
+@@ -1374,8 +1599,6 @@
+ 
+       vect_mark_pattern_stmts (stmt, pattern_stmt, NULL_TREE);
+     }
+-
+-  VEC_free (gimple, heap, stmts_to_replace);
+ }
+ 
+ 
+@@ -1465,6 +1688,7 @@
+   gimple_stmt_iterator si;
+   unsigned int i, j;
+   gimple (* vect_recog_func_ptr) (VEC (gimple, heap) **, tree *, tree *);
++  VEC (gimple, heap) *stmts_to_replace = VEC_alloc (gimple, heap, 1);
+ 
+   if (vect_print_dump_info (REPORT_DETAILS))
+     fprintf (vect_dump, "=== vect_pattern_recog ===");
+@@ -1480,8 +1704,11 @@
+           for (j = 0; j < NUM_PATTERNS; j++)
+             {
+               vect_recog_func_ptr = vect_vect_recog_func_ptrs[j];
+-              vect_pattern_recog_1 (vect_recog_func_ptr, si);
++	      vect_pattern_recog_1 (vect_recog_func_ptr, si,
++				    &stmts_to_replace);
+             }
+         }
+     }
++
++  VEC_free (gimple, heap, stmts_to_replace);
+ }
+
+=== modified file 'gcc/tree-vect-slp.c'
+--- old/gcc/tree-vect-slp.c	2011-10-23 11:29:25 +0000
++++ new/gcc/tree-vect-slp.c	2011-10-27 11:27:59 +0000
+@@ -480,6 +480,11 @@
+ 		    }
+ 		}
+ 	    }
++	  else if (rhs_code == WIDEN_LSHIFT_EXPR)
++            {
++              need_same_oprnds = true;
++              first_op1 = gimple_assign_rhs2 (stmt);
++            }
+ 	}
+       else
+ 	{
+
+=== modified file 'gcc/tree-vect-stmts.c'
+--- old/gcc/tree-vect-stmts.c	2011-10-23 11:29:25 +0000
++++ new/gcc/tree-vect-stmts.c	2011-10-27 11:27:59 +0000
+@@ -3359,6 +3359,7 @@
+   VEC (tree, heap) *vec_oprnds0 = NULL, *vec_oprnds1 = NULL;
+   VEC (tree, heap) *vec_dsts = NULL, *interm_types = NULL, *tmp_vec_dsts = NULL;
+   bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_info);
++  unsigned int k;
+ 
+   if (!STMT_VINFO_RELEVANT_P (stmt_info) && !bb_vinfo)
+     return false;
+@@ -3375,7 +3376,8 @@
+ 
+   code = gimple_assign_rhs_code (stmt);
+   if (!CONVERT_EXPR_CODE_P (code)
+-      && code != WIDEN_MULT_EXPR)
++      && code != WIDEN_MULT_EXPR
++      && code != WIDEN_LSHIFT_EXPR)
+     return false;
+ 
+   scalar_dest = gimple_assign_lhs (stmt);
+@@ -3403,7 +3405,7 @@
+       bool ok;
+ 
+       op1 = gimple_assign_rhs2 (stmt);
+-      if (code == WIDEN_MULT_EXPR)
++      if (code == WIDEN_MULT_EXPR || code == WIDEN_LSHIFT_EXPR)
+         {
+ 	  /* For WIDEN_MULT_EXPR, if OP0 is a constant, use the type of
+ 	     OP1.  */
+@@ -3480,7 +3482,7 @@
+     fprintf (vect_dump, "transform type promotion operation. ncopies = %d.",
+                         ncopies);
+ 
+-  if (code == WIDEN_MULT_EXPR)
++  if (code == WIDEN_MULT_EXPR || code == WIDEN_LSHIFT_EXPR)
+     {
+       if (CONSTANT_CLASS_P (op0))
+ 	op0 = fold_convert (TREE_TYPE (op1), op0);
+@@ -3521,6 +3523,8 @@
+       if (op_type == binary_op)
+         vec_oprnds1 = VEC_alloc (tree, heap, 1);
+     }
++  else if (code == WIDEN_LSHIFT_EXPR)
++    vec_oprnds1 = VEC_alloc (tree, heap, slp_node->vec_stmts_size);
+ 
+   /* In case the vectorization factor (VF) is bigger than the number
+      of elements that we can fit in a vectype (nunits), we have to generate
+@@ -3534,15 +3538,33 @@
+       if (j == 0)
+         {
+           if (slp_node)
+-              vect_get_slp_defs (op0, op1, slp_node, &vec_oprnds0,
+-                                 &vec_oprnds1, -1);
+-          else
++	    {
++	      if (code == WIDEN_LSHIFT_EXPR)
++                {
++                  vec_oprnd1 = op1;
++		  /* Store vec_oprnd1 for every vector stmt to be created
++		     for SLP_NODE.  We check during the analysis that all
++		     the shift arguments are the same.  */
++                  for (k = 0; k < slp_node->vec_stmts_size - 1; k++)
++                    VEC_quick_push (tree, vec_oprnds1, vec_oprnd1);
++
++    		  vect_get_slp_defs (op0, NULL_TREE, slp_node, &vec_oprnds0, NULL,
++ 	                             -1);
++                }
++              else
++                vect_get_slp_defs (op0, op1, slp_node, &vec_oprnds0,
++                                   &vec_oprnds1, -1);
++	    }
++	  else
+             {
+               vec_oprnd0 = vect_get_vec_def_for_operand (op0, stmt, NULL);
+               VEC_quick_push (tree, vec_oprnds0, vec_oprnd0);
+               if (op_type == binary_op)
+                 {
+-                  vec_oprnd1 = vect_get_vec_def_for_operand (op1, stmt, NULL);
++                  if (code == WIDEN_LSHIFT_EXPR)
++                    vec_oprnd1 = op1;
++                  else
++                    vec_oprnd1 = vect_get_vec_def_for_operand (op1, stmt, NULL);
+                   VEC_quick_push (tree, vec_oprnds1, vec_oprnd1);
+                 }
+             }
+@@ -3553,7 +3575,10 @@
+           VEC_replace (tree, vec_oprnds0, 0, vec_oprnd0);
+           if (op_type == binary_op)
+             {
+-              vec_oprnd1 = vect_get_vec_def_for_stmt_copy (dt[1], vec_oprnd1);
++              if (code == WIDEN_LSHIFT_EXPR)
++                vec_oprnd1 = op1;
++              else
++                vec_oprnd1 = vect_get_vec_def_for_stmt_copy (dt[1], vec_oprnd1);
+               VEC_replace (tree, vec_oprnds1, 0, vec_oprnd1);
+             }
+         }
+@@ -5853,6 +5878,19 @@
+         }
+       break;
+ 
++    case WIDEN_LSHIFT_EXPR:
++      if (BYTES_BIG_ENDIAN)
++        {
++          c1 = VEC_WIDEN_LSHIFT_HI_EXPR;
++          c2 = VEC_WIDEN_LSHIFT_LO_EXPR;
++        }
++      else
++        {
++          c2 = VEC_WIDEN_LSHIFT_HI_EXPR;
++          c1 = VEC_WIDEN_LSHIFT_LO_EXPR;
++        }
++      break;
++
+     CASE_CONVERT:
+       if (BYTES_BIG_ENDIAN)
+         {
+
+=== modified file 'gcc/tree-vectorizer.h'
+--- old/gcc/tree-vectorizer.h	2011-09-05 06:23:37 +0000
++++ new/gcc/tree-vectorizer.h	2011-10-23 13:33:07 +0000
+@@ -896,7 +896,7 @@
+    Additional pattern recognition functions can (and will) be added
+    in the future.  */
+ typedef gimple (* vect_recog_func_ptr) (VEC (gimple, heap) **, tree *, tree *);
+-#define NUM_PATTERNS 5
++#define NUM_PATTERNS 6 
+ void vect_pattern_recog (loop_vec_info);
+ 
+ /* In tree-vectorizer.c.  */
+
+=== modified file 'gcc/tree.def'
+--- old/gcc/tree.def	2011-01-21 14:14:12 +0000
++++ new/gcc/tree.def	2011-10-23 13:33:07 +0000
+@@ -1092,6 +1092,19 @@
+    is subtracted from t3.  */
+ DEFTREECODE (WIDEN_MULT_MINUS_EXPR, "widen_mult_minus_expr", tcc_expression, 3)
+ 
++/* Widening shift left.
++   The first operand is of type t1.
++   The second operand is the number of bits to shift by; it need not be the
++   same type as the first operand and result.
++   Note that the result is undefined if the second operand is larger
++   than or equal to the first operand's type size.
++   The type of the entire expression is t2, such that t2 is at least twice
++   the size of t1.
++   WIDEN_LSHIFT_EXPR is equivalent to first widening (promoting)
++   the first argument from type t1 to type t2, and then shifting it
++   by the second argument.  */
++DEFTREECODE (WIDEN_LSHIFT_EXPR, "widen_lshift_expr", tcc_binary, 2)
++
+ /* Fused multiply-add.
+    All operands and the result are of the same type.  No intermediate
+    rounding is performed after multiplying operand one with operand two
+@@ -1147,6 +1160,16 @@
+ DEFTREECODE (VEC_INTERLEAVE_HIGH_EXPR, "vec_interleavehigh_expr", tcc_binary, 2)
+ DEFTREECODE (VEC_INTERLEAVE_LOW_EXPR, "vec_interleavelow_expr", tcc_binary, 2)
+ 
++/* Widening vector shift left in bits.
++   Operand 0 is a vector to be shifted with N elements of size S.
++   Operand 1 is an integer shift amount in bits.
++   The result of the operation is N elements of size 2*S.
++   VEC_WIDEN_LSHIFT_HI_EXPR computes the N/2 high results.
++   VEC_WIDEN_LSHIFT_LO_EXPR computes the N/2 low results.
++ */
++DEFTREECODE (VEC_WIDEN_LSHIFT_HI_EXPR, "widen_lshift_hi_expr", tcc_binary, 2)
++DEFTREECODE (VEC_WIDEN_LSHIFT_LO_EXPR, "widen_lshift_lo_expr", tcc_binary, 2)
++
+ /* PREDICT_EXPR.  Specify hint for branch prediction.  The
+    PREDICT_EXPR_PREDICTOR specify predictor and PREDICT_EXPR_OUTCOME the
+    outcome (0 for not taken and 1 for taken).  Once the profile is guessed
+

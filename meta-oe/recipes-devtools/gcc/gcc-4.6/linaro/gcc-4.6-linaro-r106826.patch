@@ -1,0 +1,362 @@
+2011-10-16  Ira Rosen  <ira.rosen@linaro.org>
+
+	Backport from mainline:
+
+	2011-09-27  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-vect-stmts.c (vectorizable_type_demotion): Handle basic block
+	vectorization.
+	(vectorizable_type_promotion): Likewise.
+	(vect_analyze_stmt): Call vectorizable_type_demotion and
+	vectorizable_type_promotion for basic blocks.
+	(supportable_widening_operation): Don't assume loop vectorization.
+	* tree-vect-slp.c (vect_build_slp_tree): Allow multiple types for
+	basic blocks.  Update vectorization factor for basic block
+	vectorization.
+	(vect_analyze_slp_instance): Allow multiple types for basic block
+	vectorization.  Recheck unrolling factor after construction of SLP
+	instance.
+
+	gcc/testsuite/
+	* gcc.dg/vect/bb-slp-11.c: Expect to get vectorized with 64-bit
+	vectors.
+	* gcc.dg/vect/bb-slp-27.c: New.
+	* gcc.dg/vect/bb-slp-28.c: New.
+
+
+	2011-10-04  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/testsuite/
+	* lib/target-supports.exp (check_effective_target_vect_multiple_sizes):
+	Make et_vect_multiple_sizes_saved global.
+	(check_effective_target_vect64): Make et_vect64_saved global.
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/bb-slp-11.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-11.c	2011-10-02 10:40:34 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-11.c	2011-10-06 11:08:08 +0000
+@@ -48,8 +48,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 0 "slp" } } */
+-/* { dg-final { scan-tree-dump-times "SLP with multiple types" 1 "slp" { xfail vect_multiple_sizes } } } */
+-/* { dg-final { scan-tree-dump-times "SLP with multiple types" 2 "slp" { target vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target vect64 } } } */
+ /* { dg-final { cleanup-tree-dump "slp" } } */
+   
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-27.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-27.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-27.c	2011-10-06 11:08:08 +0000
+@@ -0,0 +1,49 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define A 3
++#define N 16
++
++short src[N], dst[N];
++
++void foo (int a)
++{
++  dst[0] += a*src[0];
++  dst[1] += a*src[1];
++  dst[2] += a*src[2];
++  dst[3] += a*src[3];
++  dst[4] += a*src[4];
++  dst[5] += a*src[5];
++  dst[6] += a*src[6];
++  dst[7] += a*src[7];
++}
++
++
++int main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      dst[i] = 0;
++      src[i] = i;
++    }
++
++  foo (A);
++
++  for (i = 0; i < 8; i++)
++    {
++      if (dst[i] != A * i)
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target { vect_int_mult && { vect_unpack && vect_pack_trunc } } } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-28.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-28.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-28.c	2011-10-06 11:08:08 +0000
+@@ -0,0 +1,71 @@
++/* { dg-require-effective-target vect_int } */
++
++#include <stdarg.h>
++#include "tree-vect.h"
++
++#define A 300
++#define N 16
++
++char src[N];
++short dst[N];
++short src1[N], dst1[N];
++
++void foo (int a)
++{
++  dst[0] = (short) (a * (int) src[0]);
++  dst[1] = (short) (a * (int) src[1]);
++  dst[2] = (short) (a * (int) src[2]);
++  dst[3] = (short) (a * (int) src[3]);
++  dst[4] = (short) (a * (int) src[4]);
++  dst[5] = (short) (a * (int) src[5]);
++  dst[6] = (short) (a * (int) src[6]);
++  dst[7] = (short) (a * (int) src[7]);
++  dst[8] = (short) (a * (int) src[8]);
++  dst[9] = (short) (a * (int) src[9]);
++  dst[10] = (short) (a * (int) src[10]);
++  dst[11] = (short) (a * (int) src[11]);
++  dst[12] = (short) (a * (int) src[12]);
++  dst[13] = (short) (a * (int) src[13]);
++  dst[14] = (short) (a * (int) src[14]);
++  dst[15] = (short) (a * (int) src[15]);
++
++  dst1[0] += src1[0];
++  dst1[1] += src1[1];
++  dst1[2] += src1[2];
++  dst1[3] += src1[3];
++  dst1[4] += src1[4];
++  dst1[5] += src1[5];
++  dst1[6] += src1[6];
++  dst1[7] += src1[7];
++}
++
++
++int main (void)
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      dst[i] = 2;
++      dst1[i] = 0;
++      src[i] = i;
++      src1[i] = i+2;
++    }
++
++  foo (A);
++
++  for (i = 0; i < N; i++)
++    {
++      if (dst[i] != A * i
++          || (i < N/2 && dst1[i] != i + 2))
++        abort ();
++    }
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target { vect_int_mult &&  { vect_pack_trunc && vect_unpack } } } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== modified file 'gcc/testsuite/lib/target-supports.exp'
+--- old/gcc/testsuite/lib/target-supports.exp	2011-10-02 10:40:34 +0000
++++ new/gcc/testsuite/lib/target-supports.exp	2011-10-06 11:08:08 +0000
+@@ -3268,7 +3268,7 @@
+ # Return 1 if the target supports multiple vector sizes
+ 
+ proc check_effective_target_vect_multiple_sizes { } {
+-    global et_vect_multiple_sizes
++    global et_vect_multiple_sizes_saved
+ 
+     if [info exists et_vect_multiple_sizes_saved] {
+         verbose "check_effective_target_vect_multiple_sizes: using cached result" 2
+@@ -3286,7 +3286,7 @@
+ # Return 1 if the target supports vectors of 64 bits.
+ 
+ proc check_effective_target_vect64 { } {
+-    global et_vect64
++    global et_vect64_saved
+ 
+     if [info exists et_vect64_saved] {
+         verbose "check_effective_target_vect64: using cached result" 2
+
+=== modified file 'gcc/tree-vect-slp.c'
+--- old/gcc/tree-vect-slp.c	2011-10-02 10:40:34 +0000
++++ new/gcc/tree-vect-slp.c	2011-10-06 11:08:08 +0000
+@@ -386,20 +386,15 @@
+           return false;
+         }
+ 
+-      ncopies = vectorization_factor / TYPE_VECTOR_SUBPARTS (vectype);
+-      if (ncopies != 1)
+-        {
+-	  if (vect_print_dump_info (REPORT_SLP))
+-            fprintf (vect_dump, "SLP with multiple types ");
+-
+-          /* FORNOW: multiple types are unsupported in BB SLP.  */
+-	  if (bb_vinfo)
+-	    return false;
+-        }
+-
+       /* In case of multiple types we need to detect the smallest type.  */
+       if (*max_nunits < TYPE_VECTOR_SUBPARTS (vectype))
+-        *max_nunits = TYPE_VECTOR_SUBPARTS (vectype);
++        {
++          *max_nunits = TYPE_VECTOR_SUBPARTS (vectype);
++          if (bb_vinfo)
++            vectorization_factor = *max_nunits;
++        }
++
++      ncopies = vectorization_factor / TYPE_VECTOR_SUBPARTS (vectype);
+ 
+       if (is_gimple_call (stmt))
+ 	rhs_code = CALL_EXPR;
+@@ -1183,7 +1178,6 @@
+   if (loop_vinfo)
+     vectorization_factor = LOOP_VINFO_VECT_FACTOR (loop_vinfo);
+   else
+-    /* No multitypes in BB SLP.  */
+     vectorization_factor = nunits;
+ 
+   /* Calculate the unrolling factor.  */
+@@ -1246,16 +1240,23 @@
+ 			   &max_nunits, &load_permutation, &loads,
+ 			   vectorization_factor))
+     {
++      /* Calculate the unrolling factor based on the smallest type.  */
++      if (max_nunits > nunits)
++        unrolling_factor = least_common_multiple (max_nunits, group_size)
++                           / group_size;
++
++      if (unrolling_factor != 1 && !loop_vinfo)
++        {
++          if (vect_print_dump_info (REPORT_SLP))
++            fprintf (vect_dump, "Build SLP failed: unrolling required in basic"
++                               " block SLP");
++          return false;
++        }
++
+       /* Create a new SLP instance.  */
+       new_instance = XNEW (struct _slp_instance);
+       SLP_INSTANCE_TREE (new_instance) = node;
+       SLP_INSTANCE_GROUP_SIZE (new_instance) = group_size;
+-      /* Calculate the unrolling factor based on the smallest type in the
+-         loop.  */
+-      if (max_nunits > nunits)
+-        unrolling_factor = least_common_multiple (max_nunits, group_size)
+-                           / group_size;
+-
+       SLP_INSTANCE_UNROLLING_FACTOR (new_instance) = unrolling_factor;
+       SLP_INSTANCE_OUTSIDE_OF_LOOP_COST (new_instance) = outside_cost;
+       SLP_INSTANCE_INSIDE_OF_LOOP_COST (new_instance) = inside_cost;
+
+=== modified file 'gcc/tree-vect-stmts.c'
+--- old/gcc/tree-vect-stmts.c	2011-10-04 08:57:25 +0000
++++ new/gcc/tree-vect-stmts.c	2011-10-16 12:16:07 +0000
+@@ -3081,11 +3081,9 @@
+   VEC (tree, heap) *vec_oprnds0 = NULL;
+   VEC (tree, heap) *vec_dsts = NULL, *interm_types = NULL, *tmp_vec_dsts = NULL;
+   tree last_oprnd, intermediate_type;
+-
+-  /* FORNOW: not supported by basic block SLP vectorization.  */
+-  gcc_assert (loop_vinfo);
+-
+-  if (!STMT_VINFO_RELEVANT_P (stmt_info))
++  bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_info);
++
++  if (!STMT_VINFO_RELEVANT_P (stmt_info) && !bb_vinfo)
+     return false;
+ 
+   if (STMT_VINFO_DEF_TYPE (stmt_info) != vect_internal_def)
+@@ -3113,7 +3111,7 @@
+ 	     && SCALAR_FLOAT_TYPE_P (TREE_TYPE (op0))
+ 	     && CONVERT_EXPR_CODE_P (code))))
+     return false;
+-  if (!vect_is_simple_use_1 (op0, loop_vinfo, NULL,
++  if (!vect_is_simple_use_1 (op0, loop_vinfo, bb_vinfo,
+ 			     &def_stmt, &def, &dt[0], &vectype_in))
+     {
+       if (vect_print_dump_info (REPORT_DETAILS))
+@@ -3360,11 +3358,9 @@
+   int multi_step_cvt = 0;
+   VEC (tree, heap) *vec_oprnds0 = NULL, *vec_oprnds1 = NULL;
+   VEC (tree, heap) *vec_dsts = NULL, *interm_types = NULL, *tmp_vec_dsts = NULL;
+-
+-  /* FORNOW: not supported by basic block SLP vectorization.  */
+-  gcc_assert (loop_vinfo);
+-
+-  if (!STMT_VINFO_RELEVANT_P (stmt_info))
++  bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_info);
++
++  if (!STMT_VINFO_RELEVANT_P (stmt_info) && !bb_vinfo)
+     return false;
+ 
+   if (STMT_VINFO_DEF_TYPE (stmt_info) != vect_internal_def)
+@@ -3393,7 +3389,7 @@
+ 	     && SCALAR_FLOAT_TYPE_P (TREE_TYPE (op0))
+ 	     && CONVERT_EXPR_CODE_P (code))))
+     return false;
+-  if (!vect_is_simple_use_1 (op0, loop_vinfo, NULL,
++  if (!vect_is_simple_use_1 (op0, loop_vinfo, bb_vinfo,
+ 			     &def_stmt, &def, &dt[0], &vectype_in))
+     {
+       if (vect_print_dump_info (REPORT_DETAILS))
+@@ -5153,7 +5149,9 @@
+     else
+       {
+         if (bb_vinfo)
+-          ok = (vectorizable_shift (stmt, NULL, NULL, node)
++          ok = (vectorizable_type_promotion (stmt, NULL, NULL, node)
++                || vectorizable_type_demotion (stmt, NULL, NULL, node)
++               || vectorizable_shift (stmt, NULL, NULL, node)
+                 || vectorizable_operation (stmt, NULL, NULL, node)
+                 || vectorizable_assignment (stmt, NULL, NULL, node)
+                 || vectorizable_load (stmt, NULL, NULL, node, NULL)
+@@ -5780,7 +5778,7 @@
+ {
+   stmt_vec_info stmt_info = vinfo_for_stmt (stmt);
+   loop_vec_info loop_info = STMT_VINFO_LOOP_VINFO (stmt_info);
+-  struct loop *vect_loop = LOOP_VINFO_LOOP (loop_info);
++  struct loop *vect_loop = NULL;
+   bool ordered_p;
+   enum machine_mode vec_mode;
+   enum insn_code icode1, icode2;
+@@ -5789,6 +5787,9 @@
+   tree wide_vectype = vectype_out;
+   enum tree_code c1, c2;
+ 
++  if (loop_info)
++    vect_loop = LOOP_VINFO_LOOP (loop_info);
++
+   /* The result of a vectorized widening operation usually requires two vectors
+      (because the widened results do not fit int one vector). The generated
+      vector results would normally be expected to be generated in the same
+@@ -5809,7 +5810,8 @@
+      iterations in parallel).  We therefore don't allow to change the order
+      of the computation in the inner-loop during outer-loop vectorization.  */
+ 
+-   if (STMT_VINFO_RELEVANT (stmt_info) == vect_used_by_reduction
++   if (vect_loop
++       && STMT_VINFO_RELEVANT (stmt_info) == vect_used_by_reduction
+        && !nested_in_vect_loop_p (vect_loop, stmt))
+      ordered_p = false;
+    else
+

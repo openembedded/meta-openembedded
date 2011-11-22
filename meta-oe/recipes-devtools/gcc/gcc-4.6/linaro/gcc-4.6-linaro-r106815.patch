@@ -1,0 +1,528 @@
+2011-09-25  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/testsuite/
+	* lib/target-supports.exp (check_effective_target_vect_multiple_sizes):
+	Replace check_effective_target_arm_neon with
+	check_effective_target_arm_neon_ok.
+
+	Backport from mainline:
+
+	2011-09-06  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* config/arm/arm.c (arm_preferred_simd_mode): Check
+	TARGET_NEON_VECTORIZE_DOUBLE instead of
+	TARGET_NEON_VECTORIZE_QUAD.
+	(arm_autovectorize_vector_sizes): Likewise.
+	* config/arm/arm.opt (mvectorize-with-neon-quad): Make inverse
+	mask of mvectorize-with-neon-double.  Add RejectNegative.
+	(mvectorize-with-neon-double): New.
+
+	gcc/testsuite/
+	* lib/target-supports.exp (check_effective_target_vect_multiple_sizes):
+	New procedure.
+	(add_options_for_quad_vectors): Replace with ...
+	(add_options_for_double_vectors): ... this.
+	* gfortran.dg/vect/pr19049.f90: Expect more printings on targets that
+	support multiple vector sizes since the vectorizer attempts to
+	vectorize with both vector sizes.
+	* gcc.dg/vect/no-vfa-vect-79.c,
+	gcc.dg/vect/no-vfa-vect-102a.c, gcc.dg/vect/vect-outer-1a.c,
+	gcc.dg/vect/vect-outer-1b.c, gcc.dg/vect/vect-outer-2b.c,
+	gcc.dg/vect/vect-outer-3a.c, gcc.dg/vect/no-vfa-vect-37.c,
+	gcc.dg/vect/vect-outer-3b.c, gcc.dg/vect/no-vfa-vect-101.c,
+	gcc.dg/vect/no-vfa-vect-102.c, gcc.dg/vect/vect-reduc-dot-s8b.c,
+	gcc.dg/vect/vect-outer-1.c, gcc.dg/vect/vect-104.c: Likewise.
+	* gcc.dg/vect/vect-42.c: Run with 64 bit vectors if applicable.
+	* gcc.dg/vect/vect-multitypes-6.c, gcc.dg/vect/vect-52.c,
+	gcc.dg/vect/vect-54.c, gcc.dg/vect/vect-46.c, gcc.dg/vect/vect-48.c,
+	gcc.dg/vect/vect-96.c, gcc.dg/vect/vect-multitypes-3.c,
+	gcc.dg/vect/vect-40.c: Likewise.
+	* gcc.dg/vect/vect-outer-5.c: Remove quad-vectors option as
+	redundant.
+	* gcc.dg/vect/vect-109.c, gcc.dg/vect/vect-peel-1.c,
+	gcc.dg/vect/vect-peel-2.c, gcc.dg/vect/slp-25.c,
+	gcc.dg/vect/vect-multitypes-1.c, gcc.dg/vect/slp-3.c,
+	gcc.dg/vect/no-vfa-pr29145.c, gcc.dg/vect/vect-multitypes-4.c:
+	Likewise.
+	* gcc.dg/vect/vect-peel-4.c: Make ia global.
+	
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-09-15 09:45:31 +0000
++++ new/gcc/config/arm/arm.c	2011-09-19 07:44:24 +0000
+@@ -22974,7 +22974,7 @@
+   return false;
+ }
+ 
+-/* Use the option -mvectorize-with-neon-quad to override the use of doubleword
++/* Use the option -mvectorize-with-neon-double to override the use of quardword
+    registers when autovectorizing for Neon, at least until multiple vector
+    widths are supported properly by the middle-end.  */
+ 
+@@ -22985,15 +22985,15 @@
+     switch (mode)
+       {
+       case SFmode:
+-	return TARGET_NEON_VECTORIZE_QUAD ? V4SFmode : V2SFmode;
++	return TARGET_NEON_VECTORIZE_DOUBLE ? V2SFmode : V4SFmode;
+       case SImode:
+-	return TARGET_NEON_VECTORIZE_QUAD ? V4SImode : V2SImode;
++	return TARGET_NEON_VECTORIZE_DOUBLE ? V2SImode : V4SImode;
+       case HImode:
+-	return TARGET_NEON_VECTORIZE_QUAD ? V8HImode : V4HImode;
++	return TARGET_NEON_VECTORIZE_DOUBLE ? V4HImode : V8HImode;
+       case QImode:
+-	return TARGET_NEON_VECTORIZE_QUAD ? V16QImode : V8QImode;
++	return TARGET_NEON_VECTORIZE_DOUBLE ? V8QImode : V16QImode;
+       case DImode:
+-	if (TARGET_NEON_VECTORIZE_QUAD)
++	if (!TARGET_NEON_VECTORIZE_DOUBLE)
+ 	  return V2DImode;
+ 	break;
+ 
+@@ -24226,7 +24226,7 @@
+ static unsigned int
+ arm_autovectorize_vector_sizes (void)
+ {
+-  return TARGET_NEON_VECTORIZE_QUAD ? 16 | 8 : 0;
++  return TARGET_NEON_VECTORIZE_DOUBLE ? 0 : (16 | 8);
+ }
+ 
+ static bool
+
+=== modified file 'gcc/config/arm/arm.opt'
+--- old/gcc/config/arm/arm.opt	2009-06-18 11:24:10 +0000
++++ new/gcc/config/arm/arm.opt	2011-09-19 07:44:24 +0000
+@@ -158,9 +158,13 @@
+ Assume big endian bytes, little endian words
+ 
+ mvectorize-with-neon-quad
+-Target Report Mask(NEON_VECTORIZE_QUAD)
++Target Report RejectNegative InverseMask(NEON_VECTORIZE_DOUBLE)
+ Use Neon quad-word (rather than double-word) registers for vectorization
+ 
++mvectorize-with-neon-double
++Target Report RejectNegative Mask(NEON_VECTORIZE_DOUBLE)
++Use Neon double-word (rather than quad-word) registers for vectorization
++
+ mword-relocations
+ Target Report Var(target_word_relocations) Init(TARGET_DEFAULT_WORD_RELOCATIONS)
+ Only generate absolute relocations on word sized values.
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-pr29145.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-pr29145.c	2011-04-28 11:46:58 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-pr29145.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-vect-101.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-vect-101.c	2007-09-04 12:05:19 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-vect-101.c	2011-09-19 07:44:24 +0000
+@@ -45,6 +45,7 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" } } */
+-/* { dg-final { scan-tree-dump-times "can't determine dependence" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "can't determine dependence" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "can't determine dependence" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-vect-102.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-vect-102.c	2007-09-12 07:48:44 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-vect-102.c	2011-09-19 07:44:24 +0000
+@@ -53,6 +53,7 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" } } */
+-/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-vect-102a.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-vect-102a.c	2007-09-12 07:48:44 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-vect-102a.c	2011-09-19 07:44:24 +0000
+@@ -53,6 +53,7 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" } } */
+-/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-vect-37.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-vect-37.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-vect-37.c	2011-09-19 07:44:24 +0000
+@@ -58,5 +58,6 @@
+    If/when the aliasing problems are resolved, unalignment may
+    prevent vectorization on some targets.  */
+ /* { dg-final { scan-tree-dump-times "vectorized 2 loops" 1 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "can't determine dependence between" 2 "vect" } } */
++/* { dg-final { scan-tree-dump-times "can't determine dependence" 2 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "can't determine dependence" 4 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/no-vfa-vect-79.c'
+--- old/gcc/testsuite/gcc.dg/vect/no-vfa-vect-79.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/no-vfa-vect-79.c	2011-09-19 07:44:24 +0000
+@@ -46,5 +46,6 @@
+   If/when the aliasing problems are resolved, unalignment may
+   prevent vectorization on some targets.  */
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect"  { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "can't determine dependence between" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "can't determine dependence" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "can't determine dependence" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-25.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-25.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-25.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/slp-3.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-3.c	2011-04-28 11:46:58 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-3.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-104.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-104.c	2007-09-12 07:48:44 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-104.c	2011-09-19 07:44:24 +0000
+@@ -64,6 +64,7 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" } } */
+-/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "possible dependence between data-refs" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+ 
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-109.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-109.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-109.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-40.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-40.c	2009-05-25 14:18:21 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-40.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_float } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-42.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-42.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-42.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_float } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-46.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-46.c	2009-05-25 14:18:21 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-46.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_float } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-48.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-48.c	2009-11-04 10:22:22 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-48.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_float } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-52.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-52.c	2009-11-04 10:22:22 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-52.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_float } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-54.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-54.c	2009-10-27 11:46:07 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-54.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_float } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-96.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-96.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-96.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_int } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-multitypes-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-multitypes-1.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-multitypes-1.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-multitypes-3.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-multitypes-3.c	2009-11-04 10:22:22 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-multitypes-3.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_int } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-multitypes-4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-multitypes-4.c	2010-10-04 14:59:30 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-multitypes-4.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-multitypes-6.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-multitypes-6.c	2009-11-10 18:01:22 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-multitypes-6.c	2011-09-19 07:44:24 +0000
+@@ -1,4 +1,5 @@
+ /* { dg-require-effective-target vect_int } */
++/* { dg-add-options double_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-1.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-1.c	2011-09-19 07:44:24 +0000
+@@ -22,5 +22,6 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED" 1 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-1a.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-1a.c	2009-06-16 06:21:12 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-1a.c	2011-09-19 07:44:24 +0000
+@@ -20,5 +20,6 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED" 1 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-1b.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-1b.c	2007-08-19 11:02:48 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-1b.c	2011-09-19 07:44:24 +0000
+@@ -22,5 +22,6 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED" 1 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-2b.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-2b.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-2b.c	2011-09-19 07:44:24 +0000
+@@ -37,5 +37,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "strided access in outer loop." 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 2 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-3a.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-3a.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-3a.c	2011-09-19 07:44:24 +0000
+@@ -49,5 +49,6 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED" 1 "vect" { xfail vect_no_align } } } */
+-/* { dg-final { scan-tree-dump-times "step doesn't divide the vector-size" 2 "vect" } } */
++/* { dg-final { scan-tree-dump-times "step doesn't divide the vector-size" 2 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "step doesn't divide the vector-size" 3 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-3b.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-3b.c	2009-05-08 12:39:01 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-3b.c	2011-09-19 07:44:24 +0000
+@@ -49,5 +49,6 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "OUTER LOOP VECTORIZED" 1 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "strided access in outer loop" 2 "vect" } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 2 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "strided access in outer loop" 4 "vect" { target vect_multiple_sizes } } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-outer-5.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-outer-5.c	2011-04-28 11:46:58 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-outer-5.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_float } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include <signal.h>
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-peel-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-peel-1.c	2011-01-10 12:41:40 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-peel-1.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-peel-2.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-peel-2.c	2011-01-10 12:41:40 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-peel-2.c	2011-09-19 07:44:24 +0000
+@@ -1,5 +1,4 @@
+ /* { dg-require-effective-target vect_int } */
+-/* { dg-add-options quad_vectors } */
+ 
+ #include <stdarg.h>
+ #include "tree-vect.h"
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-peel-4.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-peel-4.c	2011-01-10 12:41:40 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-peel-4.c	2011-09-19 07:44:24 +0000
+@@ -6,12 +6,12 @@
+ #define N 128
+ 
+ int ib[N+7];
++int ia[N+1];
+ 
+ __attribute__ ((noinline))
+ int main1 ()
+ {
+   int i;
+-  int ia[N+1];
+ 
+   /* Don't peel keeping one load and the store aligned.  */
+   for (i = 0; i <= N; i++)
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-reduc-dot-s8b.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-reduc-dot-s8b.c	2010-05-27 12:23:45 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-reduc-dot-s8b.c	2011-09-19 07:44:24 +0000
+@@ -58,7 +58,8 @@
+ }
+ 
+ /* { dg-final { scan-tree-dump-times "vect_recog_dot_prod_pattern: detected" 1 "vect" { xfail *-*-* } } } */
+-/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 1 "vect" } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 1 "vect" { xfail vect_multiple_sizes } } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_mult_pattern: detected" 2 "vect" { target vect_multiple_sizes } } } */
+ 
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" { xfail *-*-* } } } */
+ 
+
+=== modified file 'gcc/testsuite/gfortran.dg/vect/pr19049.f90'
+--- old/gcc/testsuite/gfortran.dg/vect/pr19049.f90	2005-07-25 11:05:07 +0000
++++ new/gcc/testsuite/gfortran.dg/vect/pr19049.f90	2011-09-19 07:44:24 +0000
+@@ -19,6 +19,7 @@
+       end
+ 
+ ! { dg-final { scan-tree-dump-times "vectorized 1 loops" 0 "vect" } }
+-! { dg-final { scan-tree-dump-times "complicated access pattern" 1 "vect" } }
++! { dg-final { scan-tree-dump-times "complicated access pattern" 1 "vect" { xfail vect_multiple_sizes } } }
++! { dg-final { scan-tree-dump-times "complicated access pattern" 2 "vect" { target vect_multiple_sizes } } }
+ ! { dg-final { cleanup-tree-dump "vect" } }
+ 
+
+=== modified file 'gcc/testsuite/lib/target-supports.exp'
+--- old/gcc/testsuite/lib/target-supports.exp	2011-08-13 08:32:32 +0000
++++ new/gcc/testsuite/lib/target-supports.exp	2011-09-20 07:54:28 +0000
+@@ -3265,6 +3265,24 @@
+     }]
+ }
+ 
++# Return 1 if the target supports multiple vector sizes
++
++proc check_effective_target_vect_multiple_sizes { } {
++    global et_vect_multiple_sizes
++
++    if [info exists et_vect_multiple_sizes_saved] {
++        verbose "check_effective_target_vect_multiple_sizes: using cached result" 2
++    } else {
++        set et_vect_multiple_sizes_saved 0
++          if { ([istarget arm*-*-*] && [check_effective_target_arm_neon_ok]) } {
++           set et_vect_multiple_sizes_saved 1
++        }
++    }
++
++    verbose "check_effective_target_vect_multiple_sizes: returning $et_vect_multiple_sizes_saved" 2
++    return $et_vect_multiple_sizes_saved
++}
++
+ # Return 1 if the target supports section-anchors
+ 
+ proc check_effective_target_section_anchors { } {
+@@ -3648,11 +3666,11 @@
+     return $flags
+ }
+ 
+-# Add to FLAGS the flags needed to enable 128-bit vectors.
++# Add to FLAGS the flags needed to enable 64-bit vectors.
+ 
+-proc add_options_for_quad_vectors { flags } {
++proc add_options_for_double_vectors { flags } {
+     if [is-effective-target arm_neon_ok] {
+-	return "$flags -mvectorize-with-neon-quad"
++	return "$flags -mvectorize-with-neon-double"
+     }
+ 
+     return $flags
+

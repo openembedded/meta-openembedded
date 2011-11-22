@@ -1,0 +1,24 @@
+2011-10-21  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from FSF mainline:
+	
+	2011-10-21  Andrew Stubbs  <ams@codesourcery.com>
+
+	PR target/50809
+
+	gcc/
+	* config/arm/driver-arm.c (vendors): Make static.
+
+=== modified file 'gcc/config/arm/driver-arm.c'
+--- old/gcc/config/arm/driver-arm.c	2011-10-19 17:07:55 +0000
++++ new/gcc/config/arm/driver-arm.c	2011-10-21 19:27:47 +0000
+@@ -49,7 +49,7 @@
+     {NULL, NULL, NULL}
+ };
+ 
+-struct {
++static struct {
+   const char *vendor_no;
+   const struct vendor_cpu *vendor_parts;
+ } vendors[] = {
+

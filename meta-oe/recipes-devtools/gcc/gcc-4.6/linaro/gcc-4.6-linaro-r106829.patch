@@ -1,0 +1,147 @@
+2011-10-19  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from FSF:
+
+	2011-09-09  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config/arm/arm-cores.def (generic-armv7-a): New architecture.
+	* config/arm/arm-tables.opt: Regenerate.
+	* config/arm/arm-tune.md: Regenerate.
+	* config/arm/arm.c (arm_file_start): Output .arch directive when
+	user passes -mcpu=generic-*.
+	(arm_issue_rate): Add genericv7a support.
+	* config/arm/arm.h (EXTRA_SPECS): Add asm_cpu_spec.
+	(ASM_CPU_SPEC): New define.
+	* config/arm/elf.h (ASM_SPEC): Use %(asm_cpu_spec).
+	* config/arm/semi.h (ASM_SPEC): Likewise.
+	* doc/invoke.texi (ARM Options): Document -mcpu=generic-*
+	and -mtune=generic-*.
+
+=== modified file 'gcc/config/arm/arm-cores.def'
+--- old/gcc/config/arm/arm-cores.def	2011-06-14 16:00:30 +0000
++++ new/gcc/config/arm/arm-cores.def	2011-10-19 16:46:51 +0000
+@@ -124,6 +124,7 @@
+ ARM_CORE("mpcore",	  mpcore,	6K,				 FL_LDSCHED | FL_VFPV2, 9e)
+ ARM_CORE("arm1156t2-s",	  arm1156t2s,	6T2,				 FL_LDSCHED, v6t2)
+ ARM_CORE("arm1156t2f-s",  arm1156t2fs,  6T2,				 FL_LDSCHED | FL_VFPV2, v6t2)
++ARM_CORE("generic-armv7-a", genericv7a,	7A,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-a5",	  cortexa5,	7A,				 FL_LDSCHED, cortex_a5)
+ ARM_CORE("cortex-a8",	  cortexa8,	7A,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-a9",	  cortexa9,	7A,				 FL_LDSCHED, cortex_a9)
+@@ -135,3 +136,4 @@
+ ARM_CORE("cortex-m3",	  cortexm3,	7M,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-m1",	  cortexm1,	6M,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-m0",	  cortexm0,	6M,				 FL_LDSCHED, cortex)
++
+
+=== modified file 'gcc/config/arm/arm-tune.md'
+--- old/gcc/config/arm/arm-tune.md	2011-06-14 14:37:30 +0000
++++ new/gcc/config/arm/arm-tune.md	2011-10-19 16:46:51 +0000
+@@ -1,5 +1,5 @@
+ ;; -*- buffer-read-only: t -*-
+ ;; Generated automatically by gentune.sh from arm-cores.def
+ (define_attr "tune"
+-	"arm2,arm250,arm3,arm6,arm60,arm600,arm610,arm620,arm7,arm7d,arm7di,arm70,arm700,arm700i,arm710,arm720,arm710c,arm7100,arm7500,arm7500fe,arm7m,arm7dm,arm7dmi,arm8,arm810,strongarm,strongarm110,strongarm1100,strongarm1110,fa526,fa626,arm7tdmi,arm7tdmis,arm710t,arm720t,arm740t,arm9,arm9tdmi,arm920,arm920t,arm922t,arm940t,ep9312,arm10tdmi,arm1020t,arm9e,arm946es,arm966es,arm968es,arm10e,arm1020e,arm1022e,xscale,iwmmxt,iwmmxt2,fa606te,fa626te,fmp626,fa726te,arm926ejs,arm1026ejs,arm1136js,arm1136jfs,arm1176jzs,arm1176jzfs,mpcorenovfp,mpcore,arm1156t2s,arm1156t2fs,cortexa5,cortexa8,cortexa9,cortexa15,cortexr4,cortexr4f,cortexr5,cortexm4,cortexm3,cortexm1,cortexm0"
++	"arm2,arm250,arm3,arm6,arm60,arm600,arm610,arm620,arm7,arm7d,arm7di,arm70,arm700,arm700i,arm710,arm720,arm710c,arm7100,arm7500,arm7500fe,arm7m,arm7dm,arm7dmi,arm8,arm810,strongarm,strongarm110,strongarm1100,strongarm1110,fa526,fa626,arm7tdmi,arm7tdmis,arm710t,arm720t,arm740t,arm9,arm9tdmi,arm920,arm920t,arm922t,arm940t,ep9312,arm10tdmi,arm1020t,arm9e,arm946es,arm966es,arm968es,arm10e,arm1020e,arm1022e,xscale,iwmmxt,iwmmxt2,fa606te,fa626te,fmp626,fa726te,arm926ejs,arm1026ejs,arm1136js,arm1136jfs,arm1176jzs,arm1176jzfs,mpcorenovfp,mpcore,arm1156t2s,arm1156t2fs,genericv7a,cortexa5,cortexa8,cortexa9,cortexa15,cortexr4,cortexr4f,cortexr5,cortexm4,cortexm3,cortexm1,cortexm0"
+ 	(const (symbol_ref "((enum attr_tune) arm_tune)")))
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-10-11 02:31:01 +0000
++++ new/gcc/config/arm/arm.c	2011-10-19 16:46:51 +0000
+@@ -22185,6 +22185,8 @@
+       const char *fpu_name;
+       if (arm_selected_arch)
+ 	asm_fprintf (asm_out_file, "\t.arch %s\n", arm_selected_arch->name);
++      else if (strncmp (arm_selected_cpu->name, "generic", 7) == 0)
++	asm_fprintf (asm_out_file, "\t.arch %s\n", arm_selected_cpu->name + 8);
+       else
+ 	asm_fprintf (asm_out_file, "\t.cpu %s\n", arm_selected_cpu->name);
+ 
+@@ -23717,6 +23719,7 @@
+     case cortexr4:
+     case cortexr4f:
+     case cortexr5:
++    case genericv7a:
+     case cortexa5:
+     case cortexa8:
+     case cortexa9:
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-09-05 14:32:11 +0000
++++ new/gcc/config/arm/arm.h	2011-10-19 16:46:51 +0000
+@@ -198,6 +198,7 @@
+    Do not define this macro if it does not need to do anything.  */
+ #define EXTRA_SPECS						\
+   { "subtarget_cpp_spec",	SUBTARGET_CPP_SPEC },           \
++  { "asm_cpu_spec",		ASM_CPU_SPEC },			\
+   SUBTARGET_EXTRA_SPECS
+ 
+ #ifndef SUBTARGET_EXTRA_SPECS
+@@ -2278,4 +2279,8 @@
+    instruction.  */
+ #define MAX_LDM_STM_OPS 4
+ 
++#define ASM_CPU_SPEC \
++   " %{mcpu=generic-*:-march=%*;"				\
++   "   :%{mcpu=*:-mcpu=%*} %{march=*:-march=%*}}"
++
+ #endif /* ! GCC_ARM_H */
+
+=== modified file 'gcc/config/arm/elf.h'
+--- old/gcc/config/arm/elf.h	2009-06-21 19:48:15 +0000
++++ new/gcc/config/arm/elf.h	2011-10-19 16:46:51 +0000
+@@ -56,8 +56,7 @@
+ #define ASM_SPEC "\
+ %{mbig-endian:-EB} \
+ %{mlittle-endian:-EL} \
+-%{mcpu=*:-mcpu=%*} \
+-%{march=*:-march=%*} \
++%(asm_cpu_spec) \
+ %{mapcs-*:-mapcs-%*} \
+ %(subtarget_asm_float_spec) \
+ %{mthumb-interwork:-mthumb-interwork} \
+
+=== modified file 'gcc/config/arm/semi.h'
+--- old/gcc/config/arm/semi.h	2007-08-02 09:49:31 +0000
++++ new/gcc/config/arm/semi.h	2011-10-19 16:46:51 +0000
+@@ -65,8 +65,7 @@
+ #define ASM_SPEC "\
+ %{fpic|fpie: -k} %{fPIC|fPIE: -k} \
+ %{mbig-endian:-EB} \
+-%{mcpu=*:-mcpu=%*} \
+-%{march=*:-march=%*} \
++%(arm_cpu_spec) \
+ %{mapcs-float:-mfloat} \
+ %{msoft-float:-mfloat-abi=soft} %{mhard-float:-mfloat-abi=hard} \
+ %{mfloat-abi=*} %{mfpu=*} \
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2011-08-13 08:32:32 +0000
++++ new/gcc/doc/invoke.texi	2011-10-19 16:46:51 +0000
+@@ -10215,6 +10215,10 @@
+ @samp{cortex-m0},
+ @samp{xscale}, @samp{iwmmxt}, @samp{iwmmxt2}, @samp{ep9312}.
+ 
++@option{-mcpu=generic-@var{arch}} is also permissible, and is
++equivalent to @option{-march=@var{arch} -mtune=generic-@var{arch}}.
++See @option{-mtune} for more information.
++
+ @item -mtune=@var{name}
+ @opindex mtune
+ This option is very similar to the @option{-mcpu=} option, except that
+@@ -10226,6 +10230,13 @@
+ For some ARM implementations better performance can be obtained by using
+ this option.
+ 
++@option{-mtune=generic-@var{arch}} specifies that GCC should tune the
++performance for a blend of processors within architecture @var{arch}.
++The aim is to generate code that run well on the current most popular
++processors, balancing between optimizations that benefit some CPUs in the
++range, and avoiding performance pitfalls of other CPUs.  The effects of
++this option may change in future GCC versions as CPU models come and go.
++
+ @item -march=@var{name}
+ @opindex march
+ This specifies the name of the target ARM architecture.  GCC uses this
+

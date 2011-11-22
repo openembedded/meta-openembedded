@@ -53,4 +53,26 @@ file://linaro/gcc-4.6-linaro-r106805.patch \
 file://linaro/gcc-4.6-linaro-r106806.patch \
 file://linaro/gcc-4.6-linaro-r106807.patch \
 file://linaro/gcc-4.6-linaro-r106811.patch \
+file://linaro/gcc-4.6-linaro-r106814.patch \
+file://linaro/gcc-4.6-linaro-r106815.patch \
+file://linaro/gcc-4.6-linaro-r106816.patch \
+file://linaro/gcc-4.6-linaro-r106817.patch \
+file://linaro/gcc-4.6-linaro-r106818.patch \
+file://linaro/gcc-4.6-linaro-r106819.patch \
+file://linaro/gcc-4.6-linaro-r106820.patch \
+file://linaro/gcc-4.6-linaro-r106821.patch \
+file://linaro/gcc-4.6-linaro-r106825.patch \
+file://linaro/gcc-4.6-linaro-r106826.patch \
+file://linaro/gcc-4.6-linaro-r106827.patch \
+file://linaro/gcc-4.6-linaro-r106828.patch \
+file://linaro/gcc-4.6-linaro-r106829.patch \
+file://linaro/gcc-4.6-linaro-r106830.patch \
+file://linaro/gcc-4.6-linaro-r106831.patch \
+file://linaro/gcc-4.6-linaro-r106832.patch \
+file://linaro/gcc-4.6-linaro-r106833.patch \
+file://linaro/gcc-4.6-linaro-r106834.patch \
+file://linaro/gcc-4.6-linaro-r106836.patch \
+file://linaro/gcc-4.6-linaro-r106839.patch \
+file://linaro/gcc-4.6-linaro-r106840.patch \
+file://linaro/gcc-4.6-linaro-r106841.patch \
 "

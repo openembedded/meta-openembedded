@@ -1,0 +1,124 @@
+2011-10-13  Andrew Stubbs  <ams@codesourcery.com>
+
+	Backport from mainline:
+
+	2011-10-07  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config/arm/predicates.md (shift_amount_operand): Remove constant
+	range check.
+	(shift_operator): Check range of constants for all shift operators.
+
+	gcc/testsuite/
+	* gcc.dg/pr50193-1.c: New file.
+	* gcc.target/arm/shiftable.c: New file.
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-10-03 09:47:33 +0000
++++ new/gcc/config/arm/predicates.md	2011-10-10 11:43:28 +0000
+@@ -129,11 +129,12 @@
+   (ior (match_operand 0 "arm_rhs_operand")
+        (match_operand 0 "memory_operand")))
+ 
++;; This doesn't have to do much because the constant is already checked
++;; in the shift_operator predicate.
+ (define_predicate "shift_amount_operand"
+   (ior (and (match_test "TARGET_ARM")
+ 	    (match_operand 0 "s_register_operand"))
+-       (and (match_operand 0 "const_int_operand")
+-	    (match_test "INTVAL (op) > 0"))))
++       (match_operand 0 "const_int_operand")))
+ 
+ (define_predicate "arm_add_operand"
+   (ior (match_operand 0 "arm_rhs_operand")
+@@ -219,13 +220,20 @@
+        (match_test "mode == GET_MODE (op)")))
+ 
+ ;; True for shift operators.
++;; Notes:
++;;  * mult is only permitted with a constant shift amount
++;;  * patterns that permit register shift amounts only in ARM mode use
++;;    shift_amount_operand, patterns that always allow registers do not,
++;;    so we don't have to worry about that sort of thing here.
+ (define_special_predicate "shift_operator"
+   (and (ior (ior (and (match_code "mult")
+ 		      (match_test "power_of_two_operand (XEXP (op, 1), mode)"))
+ 		 (and (match_code "rotate")
+ 		      (match_test "GET_CODE (XEXP (op, 1)) == CONST_INT
+ 				   && ((unsigned HOST_WIDE_INT) INTVAL (XEXP (op, 1))) < 32")))
+-	    (match_code "ashift,ashiftrt,lshiftrt,rotatert"))
++	    (and (match_code "ashift,ashiftrt,lshiftrt,rotatert")
++		 (match_test "GET_CODE (XEXP (op, 1)) != CONST_INT
++			      || ((unsigned HOST_WIDE_INT) INTVAL (XEXP (op, 1))) < 32")))
+        (match_test "mode == GET_MODE (op)")))
+ 
+ ;; True for MULT, to identify which variant of shift_operator is in use.
+
+=== added file 'gcc/testsuite/gcc.target/arm/shiftable.c'
+--- old/gcc/testsuite/gcc.target/arm/shiftable.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/shiftable.c	2011-10-10 11:43:28 +0000
+@@ -0,0 +1,63 @@
++/* { dg-do compile } */
++/* { dg-options "-O2" } */
++/* { dg-require-effective-target arm32 } */
++
++/* ARM has shift-and-alu insns.  Depending on the ALU op GCC represents some
++   of these as a left shift, others as a multiply.  Check that we match the
++    right one.  */
++
++int
++plus (int a, int b)
++{
++  return (a * 64) + b;
++}
++
++/* { dg-final { scan-assembler "add.*\[al]sl #6" } } */
++
++int
++minus (int a, int b)
++{
++  return a - (b * 64);
++}
++
++/* { dg-final { scan-assembler "sub.*\[al]sl #6" } } */
++
++int
++ior (int a, int b)
++{
++  return (a * 64) | b;
++}
++
++/* { dg-final { scan-assembler "orr.*\[al]sl #6" } } */
++
++int
++xor (int a, int b)
++{
++  return (a * 64) ^ b;
++}
++
++/* { dg-final { scan-assembler "eor.*\[al]sl #6" } } */
++
++int
++and (int a, int b)
++{
++  return (a * 64) & b;
++}
++
++/* { dg-final { scan-assembler "and.*\[al]sl #6" } } */
++
++int
++rsb (int a, int b)
++{
++  return (a * 64) - b;
++}
++
++/* { dg-final { scan-assembler "rsb.*\[al]sl #6" } } */
++
++int
++mvn (int a, int b)
++{
++  return ~(a * 64);
++}
++
++/* { dg-final { scan-assembler "mvn.*\[al]sl #6" } } */
+
