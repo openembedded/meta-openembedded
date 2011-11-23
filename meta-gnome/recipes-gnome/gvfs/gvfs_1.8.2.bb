@@ -6,7 +6,7 @@ DEPENDS = "gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
 # optional: obexftp libcdio libimobiledevice 
 # building against gnome-disk-utility is also possible, but brings dependency loops :(
 
-PR = "r5"
+PR = "r6"
 
 inherit gnome
 
@@ -29,4 +29,4 @@ FILES_gvfsd-ftp = "${libexecdir}/gvfsd-ftp ${datadir}/gvfs/mounts/ftp.mount"
 FILES_gvfsd-sftp = "${libexecdir}/gvfsd-sftp ${datadir}/gvfs/mounts/sftp.mount"
 FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.mount"
 
-RRECOMMENDS_gvfs-sftp += "openssh-sftp openssh-ssh"
+RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
