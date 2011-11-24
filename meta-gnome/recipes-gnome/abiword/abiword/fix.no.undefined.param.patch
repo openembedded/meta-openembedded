@@ -1,0 +1,104 @@
+| make[3]: Entering directory
+`/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/abiword-2.8.6-r0/abiword-2.8.6/src'
+| /bin/sh ../arm-oe-linux-gnueabi-libtool --tag=CXX   --mode=link
+arm-oe-linux-gnueabi-g++  -march=armv7-a -fno-tree-vectorize
+-mthumb-interwork -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a8
+--sysroot=/OE/shr-core/tmp/sysroots/nokia900  -O2 -pipe -g
+-feliminate-unused-debug-types -fpermissive
+-fvisibility-inlines-hidden  --no-undefined -avoid-version
+-export-dynamic -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -o
+abiword abiword-UnixMain.o libabiword-2.8.la  -pthread -lfribidi -lwv
+-lpng -lgsf-1 -lxml2 -lenchant -lz -lgtk-x11-2.0 -lgdk-x11-2.0
+-latk-1.0 -lpangoft2-1.0 -lpangocairo-1.0 -lpango-1.0 -lfreetype
+-lfontconfig -lrsvg-2 -lm -lgio-2.0 -lgdk_pixbuf-2.0 -lcairo
+-lgmodule-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0   -ljpeg
+| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-g++
+-march=armv7-a -fno-tree-vectorize -mthumb-interwork
+-mfloat-abi=softfp -mfpu=neon -mtune=cortex-a8
+--sysroot=/OE/shr-core/tmp/sysroots/nokia900 -O2 -pipe -g
+-feliminate-unused-debug-types -fpermissive
+-fvisibility-inlines-hidden --no-undefined -Wl,-O1
+-Wl,--hash-style=gnu -Wl,--as-needed -o .libs/abiword
+abiword-UnixMain.o -pthread -Wl,--export-dynamic
+./.libs/libabiword-2.8.so -L=/usr/lib
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libfribidi.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libwv.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgsf-1.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libbz2.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libenchant.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgtk-x11-2.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgdk-x11-2.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libatk-1.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/librsvg-2.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libxml2.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpangocairo-1.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpangoft2-1.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libstdc++.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpango-1.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgdk_pixbuf-2.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgio-2.0.so -lresolv
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libcairo.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpixman-1.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libfontconfig.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libexpat.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libfreetype.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libpng12.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libXrender.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libX11.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libxcb.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libXau.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libXdmcp.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libERROR: Function
+'do_compile' failed (see
+/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/abiword-2.8.6-r0/temp/log.do_compile.10916
+for further information)
+| z.so -lm /OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgmodule-2.0.so
+-ldl /OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgobject-2.0.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libffi.so
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libgthread-2.0.so -lpthread
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libglib-2.0.so -lrt
+/OE/shr-core/tmp/sysroots/nokia900/usr/lib/libjpeg.so -pthread
+| arm-oe-linux-gnueabi-g++: error: unrecognized option '--no-undefined'
+| make[3]: *** [abiword] Error 1
+| make[3]: Leaving directory
+`/OE/shr-core/tmp/work/armv7a-vfp-neon-oe-linux-gnueabi/abiword-2.8.6-r0/abiword-2.8.6/src'
+
+Maybe it's related to
+http://lists.gnu.org/archive/html/libtool/2011-03/msg00015.html
+
+Remove extra '-' in no-undefined.
+
+Upstream-Status: Pending
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+diff -uNr abiword-2.8.6.orig/src/Makefile.am abiword-2.8.6/src/Makefile.am
+--- abiword-2.8.6.orig/src/Makefile.am	2009-09-09 15:11:01.000000000 +0200
++++ abiword-2.8.6/src/Makefile.am	2011-11-23 09:06:06.000000000 +0100
+@@ -44,7 +44,7 @@
+ 
+ libabiword_2_8_la_LDFLAGS = \
+ 	$(DEPS_LIBS) \
+-	--no-undefined \
++	-no-undefined \
+ 	-avoid-version \
+ 	-export-dynamic
+ 
+@@ -107,7 +107,7 @@
+ 
+ AbiWord_LDFLAGS = \
+ 	$(DEPS_LIBS) \
+-	--no-undefined \
++	-no-undefined \
+ 	-avoid-version \
+ 	-export-dynamic \
+ 	-headerpad_max_install_names 
+@@ -129,7 +129,7 @@
+ 
+ abiword_LDFLAGS = \
+ 	$(platform_ldflags) \
+-	--no-undefined      \
++	-no-undefined      \
+ 	-avoid-version      \
+ 	-export-dynamic
+ 
