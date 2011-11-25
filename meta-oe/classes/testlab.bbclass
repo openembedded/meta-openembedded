@@ -77,7 +77,8 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
 		mkdir -p ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}
 		cp ${TESTLAB_DIR}/*package* ${TESTLAB_DIR}/depends.dot ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}
 		# force change to record builds where the testlab contents didn't change, but other things (e.g. git rev) did
-		echo "${MACHINE}: ${IMAGE_BASENAME} configured for ${DISTRO} ${DISTRO_VERSION} using branch ${METADATA_BRANCH} and revision ${METADATA_REVISION} " > ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}/build-id
+		echo "${MACHINE}: ${IMAGE_BASENAME} configured for ${DISTRO} ${DISTRO_VERSION}" > ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}/build-id
+		echo "${@testlab_get_layers(bb, d)}" >> ${TESTLABREMOTEDIR}/${TESTLABLOGDIR}/build-id
 		# This runs inside fakeroot, so the git author is listed as root (or whatever root configured it to be) :(
 		( cd ${TESTLABREMOTEDIR}/
 		  git add ${TESTLABLOGDIR}/*
@@ -87,3 +88,27 @@ fi
 }
 
 IMAGE_POSTPROCESS_COMMAND += "  do_testlab ;"
+
+def testlab_get_layers(bb, d):
+	layers = (bb.data.getVar("BBLAYERS", d, 1) or "").split()
+	layers_branch_rev = ["%-17s = \"%s:%s\"" % (os.path.basename(i), \
+		base_get_metadata_git_branch(i, None).strip().strip('()'), \
+		base_get_metadata_git_revision(i, None)) \
+			for i in layers]
+	i = len(layers_branch_rev)-1
+	p1 = layers_branch_rev[i].find("=")
+	s1= layers_branch_rev[i][p1:]
+	while i > 0:
+		p2 = layers_branch_rev[i-1].find("=")
+		s2= layers_branch_rev[i-1][p2:]
+		if s1 == s2:
+			layers_branch_rev[i-1] = layers_branch_rev[i-1][0:p2]
+			i -= 1
+		else:
+			i -= 1
+			p1 = layers_branch_rev[i].find("=")
+			s1= layers_branch_rev[i][p1:]
+
+	layertext = "Configured Openembedded layers:\n%s\n" % '\n'.join(layers_branch_rev)
+	return layertext
+
