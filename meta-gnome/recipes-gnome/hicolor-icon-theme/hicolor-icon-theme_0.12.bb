@@ -13,6 +13,9 @@ PR = "r1"
 SRC_URI = "http://icon-theme.freedesktop.org/releases/${BPN}-${PV}.tar.gz \
         file://index.theme"
 
+SRC_URI[md5sum] = "55cafbcef8bcf7107f6d502149eb4d87"
+SRC_URI[sha256sum] = "9edca690617eaa19054951ca53501c802180262be8880ed84754ac46c93bec73"
+
 FILES_${PN} += "${datadir}/icons"
 
 do_install_append () {
