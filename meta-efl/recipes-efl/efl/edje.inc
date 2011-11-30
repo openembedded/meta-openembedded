@@ -2,8 +2,9 @@ DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
 DEPENDS = "lua5.1 eet evas ecore embryo edje-native"
 DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native"
 DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native"
-LICENSE = "MIT BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=1f2d83425ec8dfae5cd77f8ce52e872c"
+# GPLv2 because of epp in PN-utils
+LICENSE = "MIT BSD GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
 
 inherit efl
 
