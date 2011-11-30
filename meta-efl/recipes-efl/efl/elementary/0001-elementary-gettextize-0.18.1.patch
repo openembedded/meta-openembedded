@@ -1,0 +1,76 @@
+From 5b81eac20242ece02f8bc42549783604a326f75d Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 17 Nov 2011 11:36:29 +0100
+Subject: [PATCH] elementary: gettextize
+
+* was complaining about wrong version
+  *** error: gettext infrastructure mismatch: using a Makefile.in.in from gettext version 0.17 but the autoconf macros are from gettext version 0.18
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Makefile.am  |    2 +-
+ configure.ac |    4 ++--
+ po/ChangeLog |   11 +++++++++++
+ 3 files changed, 14 insertions(+), 3 deletions(-)
+ delete mode 100644 ChangeLog
+
+diff --git a/ChangeLog b/ChangeLog
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/Makefile.am b/Makefile.am
+index 46d2871..419a429 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -56,7 +56,7 @@ endif
+ 
+ 
+ 
+-EXTRA_DIST = \
++EXTRA_DIST = config.rpath  \
+ README \
+ AUTHORS \
+ COPYING \
+diff --git a/configure.ac b/configure.ac
+index e5ad88c..f204693 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -631,7 +631,7 @@ EFL_ENABLE_BIN([elementary-test])
+ EFL_ENABLE_BIN([elementary-config])
+ 
+ m4_ifdef([AM_GNU_GETTEXT_VERSION], [
+-AM_GNU_GETTEXT_VERSION([0.17])
++AM_GNU_GETTEXT_VERSION([0.18.1])
+ ])
+ 
+ m4_ifdef([AM_GNU_GETTEXT], [
+@@ -657,7 +657,7 @@ EFL_CHECK_BUILD_EXAMPLES([enable_build_examples="yes"], [enable_build_examples="
+ EFL_CHECK_INSTALL_EXAMPLES([enable_install_examples="yes"], [enable_install_examples="no"])
+ 
+ 
+-AC_OUTPUT([
++AC_OUTPUT([ po/Makefile.in
+ Makefile
+ elementary.spec
+ elementary.pc
+diff --git a/po/ChangeLog b/po/ChangeLog
+index 31234d3..8ca1011 100644
+--- a/po/ChangeLog
++++ b/po/ChangeLog
+@@ -1,3 +1,14 @@
++2011-11-17  gettextize  <bug-gnu-gettext@gnu.org>
++
++	* Makefile.in.in: New file, from gettext-0.18.1.
++	* Rules-quot: New file, from gettext-0.18.1.
++	* boldquot.sed: New file, from gettext-0.18.1.
++	* en@boldquot.header: New file, from gettext-0.18.1.
++	* en@quot.header: New file, from gettext-0.18.1.
++	* insert-header.sin: New file, from gettext-0.18.1.
++	* quot.sed: New file, from gettext-0.18.1.
++	* remove-potcdate.sin: New file, from gettext-0.18.1.
++
+ 2010-12-26  gettextize  <bug-gnu-gettext@gnu.org>
+ 
+ 	* Makefile.in.in: New file, from gettext-0.17.
+-- 
+1.7.8.rc1
+
