@@ -10,7 +10,8 @@ S = "${WORKDIR}/${SRCNAME}"
 
 EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
 
+PR = "r1"
 PV = "0.0.4+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
-RDEPENDS_${PN} = "${PN}-themes"
+RDEPENDS_${PN} += "${PN}-themes sessreg xauth"
