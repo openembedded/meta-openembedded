@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=550b8cea13dacc4bf00508a8cce1074c"
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r0"
+INC_PR = "r1"
 
 SRCNAME = "e_dbus"
 
@@ -17,7 +17,7 @@ FILES_${PN}-enotify = "${libdir}/libenotify.so.* ${bindir}/e-notify-send"
 FILES_${PN}-edbus = "${libdir}/libedbus.so.*"
 FILES_${PN}-enm = "${libdir}/libenm.so.*"
 FILES_${PN}-ehal = "${libdir}/libehal.so.*"
-FILES_${PN}-econnman = "${libdir}/libeconnman.so.*"
+FILES_${PN}-econnman = "${libdir}/libeconnman.so.* ${libdir}/libeconnman0_7x.so.*"
 FILES_${PN}-eofono = "${libdir}/libeofono.so.*"
 FILES_${PN}-eukit = "${libdir}/libeukit.so.*"
 FILES_${PN}-ebluez = "${libdir}/libebluez.so.*"
