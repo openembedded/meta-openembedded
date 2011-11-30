@@ -13,13 +13,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 "
 
 SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};proto=http;scmdata=keep \
-           file://epdf.poppler-0.16.api.change.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
 EXTRA_OECONF = "\
     --enable-poppler \
-    --disable-ewl \
     --disable-mupdf \
 "
 
