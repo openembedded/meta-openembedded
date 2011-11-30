@@ -9,14 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=14096c769ae0cbb5fcb94ec468be11b3\
 PR = "${INC_PR}.0"
 
 SRC_URI = "http://xorg.freedesktop.org/archive/individual/lib/${BPN}-${PV}.tar.gz \
-           file://0001-Generic-C-implementation-of-pixman_blt-with-overlapp.patch \
-           file://0002-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch \
-           file://0003-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch \
-           file://0004-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch \
-"
+           file://0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch \
+          "
 
-SRC_URI[md5sum] = "3dd0d9ed05dbf0e5e75d526ebae42e11"
-SRC_URI[sha256sum] = "51f4f26be030e476a1b481a8f76e6695b45d1dce084beae5251236c3bb2a1f89"
+SRC_URI[md5sum] = "a2d0b120509bdccb10aa7f4bec3730e4"
+SRC_URI[sha256sum] = "a5647c7158f103eedff5fba799018f4169f6b26b573ab7685812ebc9a1c5d2e4"
 
 NEON = " --disable-arm-neon "
 NEON_armv7a = " "
