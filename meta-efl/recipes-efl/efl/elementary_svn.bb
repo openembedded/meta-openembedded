@@ -14,6 +14,7 @@ S = "${WORKDIR}/${SRCNAME}"
 EXTRA_OECONF = "\
   --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
   --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+  --disable-web \
 "
 
 do_compile_append() {
