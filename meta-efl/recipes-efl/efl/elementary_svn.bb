@@ -1,6 +1,6 @@
 DESCRIPTION = "EFL based widget set for mobile devices"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=cdc6c12b238ccd62635a7517dfe89438"
+LIC_FILES_CHKSUM = "file://COPYING;md5=10a051c72424b80bc784a3903651b43b"
 DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb"
 PV = "0.8.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
