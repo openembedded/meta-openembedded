@@ -15,3 +15,4 @@ PV = "0.0.4+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 RDEPENDS_${PN} += "${PN}-themes sessreg xauth"
+CONFFILES_${PN} += "${sysconfdir}/elsa.conf"
