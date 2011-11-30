@@ -5,7 +5,6 @@ PR = "${INC_PR}.1"
 
 require e-module.inc
 
-SRCREV = "64510" 
-# EFL_SRCREV
+SRCREV = "${EFL_SRCREV}"
 
 DEPENDS += "elementary"
