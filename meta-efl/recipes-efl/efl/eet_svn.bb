@@ -1,7 +1,7 @@
 require eet.inc
 
-SRCREV = "${EFL_SRCREV}"
-PV = "1.4.999+svnr${SRCPV}"
+SRCREV = "${EFL_SRCREV_1.1.0}"
+PV = "1.5.0+svnr${SRCPV}"
 PR = "${INC_PR}.0"
 DEFAULT_PREFERENCE = "-1"
 
