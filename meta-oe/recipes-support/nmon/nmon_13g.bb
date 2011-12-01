@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/Documentation.txt;md5=dbb13658cf55d687c4f2ff771a696d4a"
 DEPENDS = "ncurses"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/nmon/lmon13g.c;name=lmon \
            ${SOURCEFORGE_MIRROR}/nmon/Documentation.txt;name=doc \
@@ -16,7 +16,7 @@ SRC_URI[doc.md5sum] = "dbb13658cf55d687c4f2ff771a696d4a"
 SRC_URI[doc.sha256sum] = "1f7f83afe62a7210be5e83cd24157adb854c14599efe0b377a7ecca933869278"
 
 CFLAGS += "-D JFS -D GETUSER -Wall -D LARGEMEM"
-LDFLAGS += "-lncursesw"
+LDFLAGS += "-ltinfo -lncursesw"
 ASNEEDED_pn-nmon = ""
 
 do_compile() {
