@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SECTION = "x11/gnome"
 
-PR = "r4"
+PR = "r5"
 
 DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
 
@@ -26,8 +26,11 @@ do_configure_prepend() {
 }
 
 pkg_postinst_append () {
-	gconftool-2 --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-		--direct --load /etc/gconf/schemas/panel-default-setup.entries
+if [ -n "$D" ]; then
+	exit 1
+fi
+	gconftool-2 --config-source=xml:readwrite:${sysconfdir}/gconf/gconf.xml.defaults \
+		--direct --load ${sysconfdir}/gconf/schemas/panel-default-setup.entries
 }
 
 PACKAGES =+ "libpanel-applet"
