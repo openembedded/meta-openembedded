@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
 DEPENDS = "gtk+ gettext intltool libxfce4util startup-notification xfconf"
 
-PR = "r0"
+PR = "r1"
 
 inherit xfce
 
