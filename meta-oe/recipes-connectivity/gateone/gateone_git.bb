@@ -2,10 +2,10 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
 LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
 
-PR = "r12"
+PR = "r13"
 
 PV = "0.9"
-SRCREV = "3983772b2294ea976d6f1422dc294b8950ad0e75"
+SRCREV = "e0e23fae6ee7f1276e27e38f9ca4ac619b292308"
 SRC_URI = "git://github.com/liftoff/GateOne.git \
            file://gateone-avahi.service \
            file://gateone.service \
@@ -15,9 +15,7 @@ S = "${WORKDIR}/git"
 
 inherit distutils allarch systemd
 
-do_configure_prepend() {
-	sed -i -e s:/opt:${D}${localstatedir}/lib: setup.py
-}
+export prefix = "${localstatedir}/lib"
 
 do_install_append() {
 	install -d ${D}${localstatedir}/log/${BPN}
@@ -32,7 +30,7 @@ do_install_append() {
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE = "gateone.service"
 
-FILES_${PN} = "${localstatedir} ${base_libdir} ${sysconfdir}"
+FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir}"
 RDEPENDS_${PN} = "python-tornado \
                   python-datetime \
                   python-shell \
