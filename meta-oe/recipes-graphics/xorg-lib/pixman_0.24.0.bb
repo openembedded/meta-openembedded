@@ -18,4 +18,6 @@ SRC_URI[sha256sum] = "a5647c7158f103eedff5fba799018f4169f6b26b573ab7685812ebc9a1
 NEON = " --disable-arm-neon "
 NEON_armv7a = " "
 
-EXTRA_OECONF = "${NEON} --disable-gtk"
+IWMMXT = " --disable-arm-iwmmxt "                                                                                                                             
+                                                                                                                                                              
+EXTRA_OECONF += "${NEON} ${IWMMXT} --disable-gtk"                                                                                                                           
