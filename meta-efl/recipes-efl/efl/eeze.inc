@@ -13,3 +13,5 @@ AUTO_LIBNAME_PKGS = ""
 
 FILES_${PN} += "${libdir}/enlightenment/utils/eeze_scanner"
 FILES_${PN}-dbg += "${libdir}/enlightenment/utils/.debug"
+
+RRECOMMENDS_${PN} += "eject"
