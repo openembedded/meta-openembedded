@@ -6,9 +6,7 @@ PV = "0.8.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 inherit efl gettext
-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep \
-  file://0001-elementary-gettextize-0.18.1.patch \
-"
+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
 EXTRA_OECONF = "\
