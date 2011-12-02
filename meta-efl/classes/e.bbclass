@@ -7,10 +7,6 @@ do_prepsources () {
 }
 addtask prepsources after do_patch before do_configure
 
-do_configure_prepend() {
-	autopoint || touch config.rpath
-}
-
 do_configure_append() {
 	find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
 }
