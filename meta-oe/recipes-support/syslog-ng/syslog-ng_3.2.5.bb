@@ -1,5 +1,5 @@
 require syslog-ng.inc
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 SRC_URI += " \
   file://syslog-ng.conf \
