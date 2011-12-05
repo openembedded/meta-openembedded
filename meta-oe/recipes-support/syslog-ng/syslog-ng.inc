@@ -28,17 +28,20 @@ EXTRA_OECONF = " \
 "
 
 do_configure_prepend() {
-	eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+        eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
 }
 
+# rename modules.conf because it breaks update-modules 
+# see http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-October/035537.html
 do_install_append() {
+        mv ${D}/${sysconfdir}/modules.conf ${D}/${sysconfdir}/scl-modules.conf
+        sed -i "s#@include 'modules.conf'#@include 'scl-modules.conf'#g" ${D}/${sysconfdir}/scl.conf
         install -d ${D}/${sysconfdir}/${PN}
         install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${PN}.conf
         install -d ${D}/${sysconfdir}/init.d
         install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
 }
 
-PACKAGES =+ "${PN}-config"
 FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
             ${base_bindir}/* ${base_sbindir}/* \
@@ -46,10 +49,7 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} 
             ${datadir}/${BPN} ${libdir}/${BPN}/*${SOLIBS} \
             ${datadir}/include/scl/ ${datadir}/xsd"
 FILES_${PN}-dev += "${libdir}/${BPN}/lib*.la ${libdir}/${BPN}/*${SOLIBSDEV}"
-# moved intentionaly to ${PN}-config without RDEPENDing on it, because it breaks update-modules 
-# see http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-October/035537.html
-FILES_${PN}-config += "${syconfdir}/modules.conf"
-CONFFILES_${PN} = "${sysconfdir}/${PN}.conf"
+CONFFILES_${PN} = "${sysconfdir}/${PN}.conf ${sysconfdir}/scl.conf ${sysconfdir}/scl-modules.conf"
 
 pkg_postinst_${PN} () {
         /etc/init.d/syslog stop
