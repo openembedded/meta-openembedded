@@ -39,7 +39,6 @@ file://linaro/gcc-4.6-linaro-r106786.patch \
 file://linaro/gcc-4.6-linaro-r106787.patch \
 file://linaro/gcc-4.6-linaro-r106789.patch \
 file://linaro/gcc-4.6-linaro-r106792.patch \
-file://linaro/gcc-4.6-linaro-r106793.patch \
 file://linaro/gcc-4.6-linaro-r106794.patch \
 file://linaro/gcc-4.6-linaro-r106796.patch \
 file://linaro/gcc-4.6-linaro-r106797.patch \
