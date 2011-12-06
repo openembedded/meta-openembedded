@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 
 PV = "4.5"
-PR = "r43"
+PR = "r44"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -23,8 +23,7 @@ PR = "r43"
 # which will be next minor release and so on.
 
 BINV = "${PV}.4"
-
-SRCREV = 178923
+SRCREV = 181733
 BRANCH = "gcc-4_5-branch"
 PR_append = "+svnr${SRCPV}"
 
@@ -179,7 +178,6 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://linaro/gcc-4.5-linaro-r99483.patch \
        file://linaro/gcc-4.5-linaro-r99488.patch \
        file://linaro/gcc-4.5-linaro-r99489.patch \
-       file://linaro/gcc-4.5-linaro-r99491.patch \
        file://linaro/gcc-4.5-linaro-r99494.patch \
        file://linaro/gcc-4.5-linaro-r99495.patch \
        file://linaro/gcc-4.5-linaro-r99498.patch \
@@ -208,7 +206,8 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://linaro/gcc-4.5-linaro-r99536.patch \
        file://linaro/gcc-4.5-linaro-r99537.patch \
        file://linaro/gcc-4.5-linaro-r99540.patch \
-       file://linaro/gcc-4.5-linaro-r99541.patch \
+       file://linaro/gcc-4.5-linaro-r99548.patch \
+       file://linaro/gcc-4.5-linaro-r99549.patch \
 	\
        file://more-epilogues.patch \
        file://gcc-scalar-widening-pr45847.patch \
@@ -233,6 +232,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://gcc-poison-parameters.patch \
        file://gcc-ppc-config-fix.patch \
        file://use-defaults.h-and-t-oe-in-B.patch \
+       file://gcc-with-linker-hash-style.patch \
        "
 
 # Language Overrides
@@ -252,6 +252,9 @@ EXTRA_OECONF_BASE = "--enable-lto \
                      --disable-bootstrap \
                      --disable-libgomp \
                      --disable-libmudflap \
+		     --with-linker-hash-style=${LINKER_HASH_STYLE} \
+		     --with-ppl=no \
+		     --with-cloog=no \
                      --enable-cheaders=c_global "
 
 EXTRA_OECONF_INITIAL = "--disable-libmudflap \

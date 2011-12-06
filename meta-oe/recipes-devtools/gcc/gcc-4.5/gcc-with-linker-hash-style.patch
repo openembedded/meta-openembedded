@@ -1,0 +1,212 @@
+Upstream-Status: Backport
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+commit 3cb9bbfa927aa187048534f9069202c017a78e38
+Author: ppluzhnikov <ppluzhnikov@138bc75d-0d04-0410-961f-82ee72b054a4>
+Date:   Wed May 11 18:28:14 2011 +0000
+
+    2011-05-11  Satoru Takabayashi  <satorux@google.com>
+    	    Paul Pluzhnikov  <ppluzhnikov@google.com>
+    
+    	* gcc/doc/install.texi (Configuration): Document
+    	--with-linker-hash-style.
+    	* gcc/gcc.c (init_spec): Handle LINKER_HASH_STYLE.
+    	* gcc/config.in: Add LINKER_HASH_STYLE.
+    	* gcc/configure.ac: Add --with-linker-hash-style.
+    	* gcc/configure: Regenerate.
+    
+    
+    
+    git-svn-id: svn+ssh://gcc.gnu.org/svn/gcc/trunk@173668 138bc75d-0d04-0410-961f-82ee72b054a4
+
+Index: gcc-4_5-branch/gcc/config.in
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config.in	2011-12-03 13:41:00.000000000 -0800
++++ gcc-4_5-branch/gcc/config.in	2011-12-03 13:44:46.287530329 -0800
+@@ -113,6 +113,12 @@
+ #endif
+ 
+ 
++/* The linker hash style */
++#ifndef USED_FOR_TARGET
++#undef LINKER_HASH_STYLE
++#endif
++
++
+ /* Define to enable LTO support. */
+ #ifndef USED_FOR_TARGET
+ #undef ENABLE_LTO
+Index: gcc-4_5-branch/gcc/configure
+===================================================================
+--- gcc-4_5-branch.orig/gcc/configure	2011-12-03 13:41:00.000000000 -0800
++++ gcc-4_5-branch/gcc/configure	2011-12-03 13:46:12.747530321 -0800
+@@ -600,6 +600,7 @@
+ 
+ ac_subst_vars='LTLIBOBJS
+ LIBOBJS
++enable_target_optspace
+ enable_plugin
+ pluginlibs
+ LIBELFINC
+@@ -915,7 +916,7 @@
+ with_slibdir
+ enable_poison_system_directories
+ enable_plugin
+-enable_target_optspace
++with_linker_hash_style
+ '
+       ac_precious_vars='build_alias
+ host_alias
+@@ -1663,6 +1664,8 @@
+                           with the compiler
+   --with-system-zlib      use installed libz
+   --with-slibdir=DIR      shared libraries in DIR [LIBDIR]
++  --with-linker-hash-style={sysv,gnu,both}
++                          specify the linker hash style
+ 
+ Some influential environment variables:
+   CC          C compiler command
+@@ -17115,7 +17118,7 @@
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17114 "configure"
++#line 17121 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -17221,7 +17224,7 @@
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17220 "configure"
++#line 17227 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -25659,12 +25662,42 @@
+ 
+ fi
+ 
+-if test x"$enable_target_optspace" != x; then :
++
++if test x"$enable_target_optspace" != x; then
+ 
+ $as_echo "#define ENABLE_TARGET_OPTSPACE 1" >>confdefs.h
+ 
+ fi
+ 
++# Specify what hash style to use by default.
++
++# Check whether --with-linker-hash-style was given.
++if test "${with_linker_hash_style+set}" = set; then :
++  withval=$with_linker_hash_style; case x"$withval" in
++   xsysv)
++     LINKER_HASH_STYLE=sysv
++     ;;
++   xgnu)
++     LINKER_HASH_STYLE=gnu
++     ;;
++   xboth)
++     LINKER_HASH_STYLE=both
++     ;;
++   *)
++     as_fn_error "$withval is an invalid option to --with-linker-hash-style" "$LINENO" 5
++     ;;
++ esac
++else
++  LINKER_HASH_STYLE=''
++fi
++
++if test x"${LINKER_HASH_STYLE}" != x; then
++
++cat >>confdefs.h <<_ACEOF
++#define LINKER_HASH_STYLE "$LINKER_HASH_STYLE"
++_ACEOF
++
++fi
+ 
+ # Configure the subdirectories
+ # AC_CONFIG_SUBDIRS($subdirs)
+Index: gcc-4_5-branch/gcc/configure.ac
+===================================================================
+--- gcc-4_5-branch.orig/gcc/configure.ac	2011-12-03 13:41:00.000000000 -0800
++++ gcc-4_5-branch/gcc/configure.ac	2011-12-03 13:41:04.499530358 -0800
+@@ -4664,6 +4664,30 @@
+   AC_DEFINE(ENABLE_TARGET_OPTSPACE, 1, [Define to enable target optspace support.])
+ fi
+ 
++# Specify what hash style to use by default.
++AC_ARG_WITH([linker-hash-style],
++[AC_HELP_STRING([--with-linker-hash-style={sysv,gnu,both}],
++                [specify the linker hash style])],
++[case x"$withval" in
++   xsysv)
++     LINKER_HASH_STYLE=sysv
++     ;;
++   xgnu)
++     LINKER_HASH_STYLE=gnu
++     ;;
++   xboth)
++     LINKER_HASH_STYLE=both
++     ;;
++   *)
++     AC_MSG_ERROR([$withval is an invalid option to --with-linker-hash-style])
++     ;;
++ esac],
++[LINKER_HASH_STYLE=''])
++if test x"${LINKER_HASH_STYLE}" != x; then
++  AC_DEFINE_UNQUOTED(LINKER_HASH_STYLE, "$LINKER_HASH_STYLE",
++                                         [The linker hash style])
++fi
++
+ # Configure the subdirectories
+ # AC_CONFIG_SUBDIRS($subdirs)
+ 
+Index: gcc-4_5-branch/gcc/doc/install.texi
+===================================================================
+--- gcc-4_5-branch.orig/gcc/doc/install.texi	2011-12-03 13:15:09.000000000 -0800
++++ gcc-4_5-branch/gcc/doc/install.texi	2011-12-03 13:41:04.499530358 -0800
+@@ -1630,6 +1630,11 @@
+ support @option{--build-id} option, a warning is issued and the
+ @option{--enable-linker-build-id} option is ignored.  The default is off.
+ 
++@item --with-linker-hash-style=@var{choice}
++Tells GCC to pass @option{--hash-style=@var{choice}} option to the
++linker for all final links. @var{choice} can be one of
++@samp{sysv}, @samp{gnu}, and @samp{both} where @samp{sysv} is the default.
++
+ @item --enable-gnu-unique-object
+ @itemx --disable-gnu-unique-object
+ Tells GCC to use the gnu_unique_object relocation for C++ template
+Index: gcc-4_5-branch/gcc/gcc.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/gcc.c	2011-12-03 13:41:00.000000000 -0800
++++ gcc-4_5-branch/gcc/gcc.c	2011-12-03 13:41:04.499530358 -0800
+@@ -1917,7 +1917,8 @@
+   }
+ #endif
+ 
+-#if defined LINK_EH_SPEC || defined LINK_BUILDID_SPEC
++#if defined LINK_EH_SPEC || defined LINK_BUILDID_SPEC || \
++    defined LINKER_HASH_STYLE
+ # ifdef LINK_BUILDID_SPEC
+   /* Prepend LINK_BUILDID_SPEC to whatever link_spec we had before.  */
+   obstack_grow (&obstack, LINK_BUILDID_SPEC, sizeof(LINK_BUILDID_SPEC) - 1);
+@@ -1926,6 +1927,16 @@
+   /* Prepend LINK_EH_SPEC to whatever link_spec we had before.  */
+   obstack_grow (&obstack, LINK_EH_SPEC, sizeof(LINK_EH_SPEC) - 1);
+ # endif
++# ifdef LINKER_HASH_STYLE
++  /* Prepend --hash-style=LINKER_HASH_STYLE to whatever link_spec we had
++     before.  */
++  {
++    static const char hash_style[] = "--hash-style=";
++    obstack_grow (&obstack, hash_style, sizeof(hash_style) - 1);
++    obstack_grow (&obstack, LINKER_HASH_STYLE, sizeof(LINKER_HASH_STYLE) - 1);
++    obstack_1grow (&obstack, ' ');
++  }
++# endif
+   obstack_grow0 (&obstack, link_spec, strlen (link_spec));
+   link_spec = XOBFINISH (&obstack, const char *);
+ #endif
