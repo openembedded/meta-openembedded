@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.mplayerhq.hu/"
 DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses lame libxv virtual/libx11 virtual/kernel libass \
 	   ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad liba52 lame', d)}"
 
-#RDEPENDS_${PN} = "mplayer-common"
+RDEPENDS_${PN} = "mplayer-common"
 PROVIDES = "mplayer"
 RPROVIDES_${PN} = "mplayer"
 RCONFLICTS_${PN} = "mplayer"
@@ -22,7 +22,7 @@ SRCREV = "e3f5043233336d8b4b0731c6a8b42a8fda5535ac"
 ARM_INSTRUCTION_SET = "ARM"
 
 PV = "2.0+gitr${SRCPV}"
-PR = "r1"
+PR = "r2"
 
 PARALLEL_MAKE = ""
 
