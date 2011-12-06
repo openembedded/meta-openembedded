@@ -3,7 +3,7 @@ require recipes-core/eglibc/eglibc.inc
 DEPENDS += "gperf-native"
 PR = "r27"
 
-SRCREV = "14158"
+SRCREV = "15872"
 
 EGLIBC_BRANCH="eglibc-2_12"
 SRC_URI = "svn://www.eglibc.org/svn/branches/;module=${EGLIBC_BRANCH};proto=http \
