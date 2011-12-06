@@ -1,7 +1,7 @@
 require recipes-core/eglibc/eglibc.inc
 
 DEPENDS += "gperf-native"
-PR = "r27"
+PR = "r28"
 
 SRCREV = "15872"
 
