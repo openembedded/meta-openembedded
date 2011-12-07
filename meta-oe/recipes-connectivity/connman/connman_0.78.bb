@@ -1,5 +1,4 @@
 require connman.inc
-PR = "r4"
 
 EXTRA_OECONF += "\
   --disable-gtk-doc \
@@ -18,13 +17,13 @@ EXTRA_OECONF += "\
   --with-ntpd=${bindir}/ntpd \
 "
 
-SRC_URI  = "\
-  http://www.kernel.org/pub/linux/network/connman/connman-${PV}.tar.gz \
-  file://connman \
-"
+S = "${WORKDIR}/git"
 
-SRC_URI[md5sum] = "2e95edb0ead4fff3e84458f7fa192a64"
-SRC_URI[sha256sum] = "df6e926c4b0ccbab26d6e21b9935ab72fa5adf275eb7ac2b48540117ae84cbcc"
+# 0.78 tag
+SRCREV = "02f5d5fe2d7c71514a6387ba2b772b42d8e8d297"
+
+SRC_URI  = "git://git.kernel.org/pub/scm/network/connman/connman.git \
+            file://connman"
 
 # alg-test doesn't build, so disable that and test for if_alg.h as this header is only in 2.6.39
 do_configure_prepend() {
