@@ -5,6 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 SECTION = "x11/applications"
 DEPENDS = "gtk+ poppler"
 
+PR = "r1"
+
+EXTRA_OECONF += "--without-cups"
+
 inherit autotools gettext
 
 SRC_URI = "http://www.emma-soft.com/projects/epdfview/chrome/site/releases/epdfview-${PV}.tar.bz2"
