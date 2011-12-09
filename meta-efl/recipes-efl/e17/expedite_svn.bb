@@ -1,9 +1,10 @@
 DESCRIPTION = "Expedite is a comprehensive benchmarking suite for Evas"
 DEPENDS = "eet evas"
-RDEPENDS_${PN} = "expedite-themes evas-engine-buffer evas-engine-fb evas-engine-software-generic evas-engine-software-x11 evas-engine-gl-x11 evas-loader-png"
 LICENSE = "MIT BSD"
+
 SRCREV = "${EFL_SRCREV_1.1.0}"
 PV = "1.1.0+svnr${SRCPV}"
+PR = "r1"
 
 inherit e
 SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
@@ -27,3 +28,5 @@ EXTRA_OECONF = "\
 "
 
 FILES_${PN} += "${datadir}"
+RDEPENDS_${PN} = "expedite-themes evas-engine-fb evas-engine-software-generic evas-engine-software-x11 evas-engine-gl-x11 evas-loader-png"
+
