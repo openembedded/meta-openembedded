@@ -2,8 +2,10 @@ DESCRIPTION = "Utilities for working with generic SCSI devices"
 HOMEPAGE = "http://sg.danny.cz/sg/sg3_utils.html"
 SECTION = "console/admin"
 
-LICENSE = "GPLv2+ && BSD"
+LICENSE = "GPLv2+ & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1cc481c050dc92e12db9c8145043d5dc"
+
+PR = "r1"
 
 SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
 RC_URI[md5sum] = "9431e1944cde829a24dedf027e1364b5"
