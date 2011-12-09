@@ -8,7 +8,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r2"
+INC_PR = "r3"
 FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
 
 python populate_packages_prepend () {
@@ -32,7 +32,6 @@ FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/"
 PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-*"
 
 RRECOMMENDS_${PN} = " \
-  evas-engine-buffer \
   evas-engine-fb \
   evas-engine-software-generic \
   evas-engine-software-x11 \
@@ -42,7 +41,6 @@ RRECOMMENDS_${PN} = " \
  \
   evas-loader-png \
   evas-loader-jpeg \
-  evas-loader-eet \
   evas-loader-gif \
   evas-loader-svg \
 "
@@ -87,13 +85,14 @@ EVAS_OECONF = " \
                 --enable-fb \
                 --disable-directfb \
                 --disable-sdl \
-                --enable-buffer \
+                --enable-buffer=static \
+                --enable-static-software-generic \
                 --disable-software-ddraw \
                 --disable-software-qtopia \
                 --disable-software-xcb \
                 --disable-xrender-xcb \
                 --disable-glitz-x11 \
-                --enable-image-loader-eet \
+                --enable-image-loader-eet=static \
                 --disable-image-loader-edb \
                 --enable-image-loader-png \
                 --enable-image-loader-jpeg \
