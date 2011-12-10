@@ -1,5 +1,5 @@
 DESCRIPTION = "Gnome keyring library"
-LICENSE = "LGPLv2 && GPLv2"
+LICENSE = "LGPLv2 & GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING;md5=0914b9d3ebaba41ef2e3e0ae16f296cf"
 
