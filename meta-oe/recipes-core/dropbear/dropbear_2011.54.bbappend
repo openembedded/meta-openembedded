@@ -1,6 +1,6 @@
 inherit systemd
 
-PR .= ".meta-oe.1"
+PRINC = "1"
 
 # look for files in the layer first
 FILESEXTRAPATHS := "${THISDIR}/${PN}"
