@@ -5,8 +5,6 @@ HOMEPAGE = "http://www.gtk.org"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 SECTION = "libs"
 
-PR = "r1"
-
 DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
            gtk-doc-native docbook-utils-native libxrandr libgcrypt \
            libxdamage libxrender libxcomposite cairo gdk-pixbuf"
@@ -18,9 +16,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
                     file://gdk/gdk.h;endline=27;md5=07db285ec208fb3e0bf7d861b0614202 \
                     file://tests/testgtk.c;endline=27;md5=ac85be7b810a1e9b00479af8e2018053"
 
-SRC_URI = "http://download.gnome.org/sources/gtk+/3.0/gtk+-${PV}.tar.bz2"
-SRC_URI[md5sum] = "9792d52737b05227659b75eea770fbdf"
-SRC_URI[sha256sum] = "852d848e2e51373daf04446dc7b427f91bf6953632b45fbe173fb5ed0694100f"
+SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.bz2"
+SRC_URI[md5sum] = "afc3a739d6ff39d3b81cf69119833c46"
+SRC_URI[sha256sum] = "feef531b33f379015537f1aeb31e5121776671e5e8c2aa3e58ca1f8fac51e802"
 
 inherit autotools pkgconfig
 
