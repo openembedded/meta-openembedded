@@ -11,20 +11,20 @@ INITRAMFS_IMAGE ?= ""
 INITRAMFS_TASK ?= ""
 
 python __anonymous () {
-    kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
+    kerneltype = d.getVar('KERNEL_IMAGETYPE', 1) or ''
     if kerneltype == 'uImage':
-    	depends = bb.data.getVar("DEPENDS", d, 1)
+    	depends = d.getVar("DEPENDS", 1)
     	depends = "%s u-boot-mkimage-native" % depends
-    	bb.data.setVar("DEPENDS", depends, d)
+    	d.setVar("DEPENDS", depends)
 
-    image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
+    image = d.getVar('INITRAMFS_IMAGE', True)
     if image:
-    	bb.data.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs', d)
+    	d.setVar('INITRAMFS_TASK', '${INITRAMFS_IMAGE}:do_rootfs')
 
-    machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+    machine_kernel_pr = d.getVar('MACHINE_KERNEL_PR', True)
 
     if machine_kernel_pr:
-    	bb.data.setVar('PR', machine_kernel_pr, d)
+    	d.setVar('PR', machine_kernel_pr)
 }
 
 inherit kernel-arch deploy
@@ -36,7 +36,7 @@ PACKAGES_DYNAMIC += "kernel-firmware-*"
 export OS = "${TARGET_OS}"
 export CROSS_COMPILE = "${TARGET_PREFIX}"
 
-KERNEL_PRIORITY = "${@bb.data.getVar('PV',d,1).split('-')[0].split('.')[-1]}"
+KERNEL_PRIORITY = "${@d.getVar('PV',1).split('-')[0].split('.')[-1]}"
 
 KERNEL_RELEASE ?= "${KERNEL_VERSION}"
 
@@ -61,7 +61,7 @@ KERNEL_IMAGEDEST = "boot"
 #
 # configuration
 #
-export CMDLINE_CONSOLE = "console=${@bb.data.getVar("KERNEL_CONSOLE",d,1) or "ttyS0"}"
+export CMDLINE_CONSOLE = "console=${@d.getVar("KERNEL_CONSOLE",1) or "ttyS0"}"
 
 KERNEL_VERSION = "${@get_kernelversion('${B}')}"
 
@@ -80,10 +80,15 @@ EXTRA_OEMAKE = ""
 
 KERNEL_ALT_IMAGETYPE ??= ""
 
+KERNEL_IMAGETYPE_FOR_MAKE = "${@(lambda s: s[:-3] if s[-3:] == ".gz" else s)(d.getVar('KERNEL_IMAGETYPE', 1))}"
+
 kernel_do_compile() {
 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
 	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-	oe_runmake ${KERNEL_IMAGETYPE} ${KERNEL_ALT_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+	oe_runmake ${KERNEL_IMAGETYPE_FOR_MAKE} ${KERNEL_ALT_IMAGETYPE} CC="${KERNEL_CC}" LD="${KERNEL_LD}"
+	if test "${KERNEL_IMAGETYPE_FOR_MAKE}.gz" = "${KERNEL_IMAGETYPE}"; then
+		gzip -9c < "${KERNEL_IMAGETYPE_FOR_MAKE}" > "${KERNEL_OUTPUT}"
+	fi
 }
 
 do_compile_kernelmodules() {
@@ -103,6 +108,8 @@ kernel_do_install() {
 	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
 		oe_runmake DEPMOD=echo INSTALL_MOD_PATH="${D}" modules_install
+		rm -f "${D}/lib/modules/${KERNEL_VERSION}/modules.order"
+		rm -f "${D}/lib/modules/${KERNEL_VERSION}/modules.builtin"
 	else
 		bbnote "no modules to install"
 	fi
@@ -150,7 +157,7 @@ kernel_do_install() {
 	#
 	cp -fR * $kerneldir
 	cp .config $kerneldir
-	if [ ! "${S}" == "${B}" ]; then
+	if [ "${S}" != "${B}" ]; then
 		cp -fR ${S}/* $kerneldir
 	fi
 	install -m 0644 ${KERNEL_OUTPUT} $kerneldir/${KERNEL_IMAGETYPE}
@@ -169,6 +176,13 @@ kernel_do_install() {
 	make -C $kerneldir _mrproper_scripts
 	find $kerneldir -path $kerneldir/scripts -prune -o -name "*.[csS]" -exec rm '{}' \;
 	find $kerneldir/Documentation -name "*.txt" -exec rm '{}' \;
+
+	# As of Linux kernel version 3.0.1, the clean target removes
+	# arch/powerpc/lib/crtsavres.o which is present in
+	# KBUILD_LDFLAGS_MODULE, making it required to build external modules.
+	if [ ${ARCH} = "powerpc" ]; then
+		cp arch/powerpc/lib/crtsavres.o $kerneldir/arch/powerpc/lib/crtsavres.o
+	fi
 
 	# Remove the following binaries which cause strip errors
 	# during do_package for cross-compiled platforms
@@ -195,7 +209,7 @@ kernel_do_configure() {
 	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
 		cp "${WORKDIR}/defconfig" "${B}/.config"
 	fi
-        yes '' | oe_runmake oldconfig
+	yes '' | oe_runmake oldconfig
 
 	if [ ! -z "${INITRAMFS_IMAGE}" ]; then
 		for img in cpio.gz cpio.lzo cpio.lzma cpio.xz; do
@@ -297,10 +311,10 @@ module_conf_rfcomm = "alias bt-proto-3 rfcomm"
 python populate_packages_prepend () {
 	def extract_modinfo(file):
 		import tempfile, re
-		tempfile.tempdir = bb.data.getVar("WORKDIR", d, 1)
+		tempfile.tempdir = d.getVar("WORKDIR", 1)
 		tf = tempfile.mkstemp()
 		tmpfile = tf[1]
-		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (bb.data.getVar("PATH", d, 1), bb.data.getVar("HOST_PREFIX", d, 1) or "", file, tmpfile)
+		cmd = "PATH=\"%s\" %sobjcopy -j .modinfo -O binary %s %s" % (d.getVar("PATH", 1), d.getVar("HOST_PREFIX", 1) or "", file, tmpfile)
 		os.system(cmd)
 		f = open(tmpfile)
 		l = f.read().split("\000")
@@ -319,18 +333,18 @@ python populate_packages_prepend () {
 	def parse_depmod():
 		import re
 
-		dvar = bb.data.getVar('PKGD', d, 1)
+		dvar = d.getVar('PKGD', 1)
 		if not dvar:
 			bb.error("PKGD not defined")
 			return
 
-		kernelver = bb.data.getVar('KERNEL_VERSION', d, 1)
+		kernelver = d.getVar('KERNEL_VERSION', 1)
 		kernelver_stripped = kernelver
 		m = re.match('^(.*-hh.*)[\.\+].*$', kernelver)
 		if m:
 			kernelver_stripped = m.group(1)
-		path = bb.data.getVar("PATH", d, 1)
-		host_prefix = bb.data.getVar("HOST_PREFIX", d, 1) or ""
+		path = d.getVar("PATH", 1)
+		host_prefix = d.getVar("HOST_PREFIX", 1) or ""
 
 		cmd = "PATH=\"%s\" %sdepmod -n -a -r -b %s -F %s/boot/System.map-%s %s" % (path, host_prefix, dvar, dvar, kernelver, kernelver_stripped)
 		f = os.popen(cmd, 'r')
@@ -368,9 +382,9 @@ python populate_packages_prepend () {
 	
 	def get_dependencies(file, pattern, format):
                 # file no longer includes PKGD
-		file = file.replace(bb.data.getVar('PKGD', d, 1) or '', '', 1)
+		file = file.replace(d.getVar('PKGD', 1) or '', '', 1)
                 # instead is prefixed with /lib/modules/${KERNEL_VERSION}
-                file = file.replace("/lib/modules/%s/" % bb.data.getVar('KERNEL_VERSION', d, 1) or '', '', 1)
+                file = file.replace("/lib/modules/%s/" % d.getVar('KERNEL_VERSION', 1) or '', '', 1)
 
 		if module_deps.has_key(file):
 			import re
@@ -389,84 +403,85 @@ python populate_packages_prepend () {
 		import re
 		vals = extract_modinfo(file)
 
-		dvar = bb.data.getVar('PKGD', d, 1)
+		dvar = d.getVar('PKGD', 1)
 
 		# If autoloading is requested, output /etc/modutils/<name> and append
 		# appropriate modprobe commands to the postinst
-		autoload = bb.data.getVar('module_autoload_%s' % basename, d, 1)
+		autoload = d.getVar('module_autoload_%s' % basename, 1)
 		if autoload:
 			name = '%s/etc/modutils/%s' % (dvar, basename)
 			f = open(name, 'w')
 			for m in autoload.split():
 				f.write('%s\n' % m)
 			f.close()
-			postinst = bb.data.getVar('pkg_postinst_%s' % pkg, d, 1)
+			postinst = d.getVar('pkg_postinst_%s' % pkg, 1)
 			if not postinst:
 				bb.fatal("pkg_postinst_%s not defined" % pkg)
-			postinst += bb.data.getVar('autoload_postinst_fragment', d, 1) % autoload
-			bb.data.setVar('pkg_postinst_%s' % pkg, postinst, d)
+			postinst += d.getVar('autoload_postinst_fragment', 1) % autoload
+			d.setVar('pkg_postinst_%s' % pkg, postinst)
 
 		# Write out any modconf fragment
-		modconf = bb.data.getVar('module_conf_%s' % basename, d, 1)
+		modconf = d.getVar('module_conf_%s' % basename, 1)
 		if modconf:
 			name = '%s/etc/modprobe.d/%s.conf' % (dvar, basename)
 			f = open(name, 'w')
 			f.write("%s\n" % modconf)
 			f.close()
 
-		files = bb.data.getVar('FILES_%s' % pkg, d, 1)
+		files = d.getVar('FILES_%s' % pkg, 1)
 		files = "%s /etc/modutils/%s /etc/modutils/%s.conf /etc/modprobe.d/%s.conf" % (files, basename, basename, basename)
-		bb.data.setVar('FILES_%s' % pkg, files, d)
+		d.setVar('FILES_%s' % pkg, files)
 
 		if vals.has_key("description"):
-			old_desc = bb.data.getVar('DESCRIPTION_' + pkg, d, 1) or ""
-			bb.data.setVar('DESCRIPTION_' + pkg, old_desc + "; " + vals["description"], d)
+			old_desc = d.getVar('DESCRIPTION_' + pkg, 1) or ""
+			d.setVar('DESCRIPTION_' + pkg, old_desc + "; " + vals["description"])
 
-		rdepends_str = bb.data.getVar('RDEPENDS_' + pkg, d, 1)
+		rdepends_str = d.getVar('RDEPENDS_' + pkg, 1)
 		if rdepends_str:
 			rdepends = rdepends_str.split()
 		else:
 			rdepends = []
 		rdepends.extend(get_dependencies(file, pattern, format))
-		bb.data.setVar('RDEPENDS_' + pkg, ' '.join(rdepends), d)
+		d.setVar('RDEPENDS_' + pkg, ' '.join(rdepends))
 
 	module_deps = parse_depmod()
 	module_regex = '^(.*)\.k?o$'
 	module_pattern = 'kernel-module-%s'
 
-	postinst = bb.data.getVar('pkg_postinst_modules', d, 1)
-	postrm = bb.data.getVar('pkg_postrm_modules', d, 1)
+	postinst = d.getVar('pkg_postinst_modules', 1)
+	postrm = d.getVar('pkg_postrm_modules', 1)
 	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.bin$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
 	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.fw$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
-	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='update-modules kernel-%s' % bb.data.getVar("KERNEL_VERSION", d, 1))
+	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.cis$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
+	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='update-modules kernel-%s' % d.getVar("KERNEL_VERSION", 1))
 
 	import re
 	metapkg = "kernel-modules"
-	bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
-	bb.data.setVar('FILES_' + metapkg, "", d)
+	d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+	d.setVar('FILES_' + metapkg, "")
 	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg', 'kernel-misc' ]
 	for l in module_deps.values():
 		for i in l:
 			pkg = module_pattern % legitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1))
 			blacklist.append(pkg)
 	metapkg_rdepends = []
-	packages = bb.data.getVar('PACKAGES', d, 1).split()
+	packages = d.getVar('PACKAGES', 1).split()
 	for pkg in packages[1:]:
 		if not pkg in blacklist and not pkg in metapkg_rdepends:
 			metapkg_rdepends.append(pkg)
-	bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
-	bb.data.setVar('DESCRIPTION_' + metapkg, 'Kernel modules meta package', d)
+	d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
+	d.setVar('DESCRIPTION_' + metapkg, 'Kernel modules meta package')
 	packages.append(metapkg)
-	bb.data.setVar('PACKAGES', ' '.join(packages), d)
+	d.setVar('PACKAGES', ' '.join(packages))
 }
 
 # Support checking the kernel size since some kernels need to reside in partitions
 # with a fixed length or there is a limit in transferring the kernel to memory
 do_sizecheck() {
 	if [ ! -z "${KERNEL_IMAGE_MAXSIZE}" ]; then
-        	size=`ls -l arch/${ARCH}/boot/${KERNEL_IMAGETYPE} | awk '{ print $5}'`
+		size=`ls -l ${KERNEL_OUTPUT} | awk '{ print $5}'`
         	if [ $size -ge ${KERNEL_IMAGE_MAXSIZE} ]; then
-                	rm arch/${ARCH}/boot/${KERNEL_IMAGETYPE}
+			rm ${KERNEL_OUTPUT}
                 	die  "This kernel (size=$size > ${KERNEL_IMAGE_MAXSIZE}) is too big for your device. Please reduce the size of the kernel by making more of it modular."
         	fi
     	fi
@@ -503,7 +518,7 @@ KERNEL_IMAGE_BASE_NAME[vardepsexclude] = "DATETIME"
 KERNEL_IMAGE_SYMLINK_NAME ?= "${KERNEL_IMAGETYPE}-${MACHINE}"
 
 kernel_do_deploy() {
-	install -m 0644 arch/${ARCH}/boot/${KERNEL_IMAGETYPE} ${DEPLOYDIR}/${KERNEL_IMAGE_BASE_NAME}.bin
+	install -m 0644 ${KERNEL_OUTPUT} ${DEPLOYDIR}/${KERNEL_IMAGE_BASE_NAME}.bin
 	if (grep -q -i -e '^CONFIG_MODULES=y$' .config); then
 		tar -cvzf ${DEPLOYDIR}/modules-${KERNEL_VERSION}-${PR}-${MACHINE}.tgz -C ${D} lib
 	fi
@@ -511,6 +526,8 @@ kernel_do_deploy() {
 	cd ${DEPLOYDIR}
 	rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
 	ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+
+	cp ${COREBASE}/meta/files/deploydir_readme.txt ${DEPLOYDIR}/README_-_DO_NOT_DELETE_FILES_IN_THIS_DIRECTORY.txt
 }
 do_deploy[dirs] = "${DEPLOYDIR} ${B}"
 
