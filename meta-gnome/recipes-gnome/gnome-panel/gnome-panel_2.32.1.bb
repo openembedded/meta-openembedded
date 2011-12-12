@@ -1,5 +1,5 @@
 DESCRIPTION = "GNOME panel"
-LICENSE = "GPLv2 && LGPLv2 && GFDLv1.1"
+LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING-DOCS;md5=c9211dab3ae61e580f48432020784324 \
