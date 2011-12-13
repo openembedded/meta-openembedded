@@ -49,3 +49,11 @@ for r in $wanted_by; do
 	ln -s $service_file $ROOT/etc/systemd/system/$r.wants
 	echo "Enabled $service for $wanted_by."
 done
+
+# call us for the other required scripts
+also=$(grep Also $ROOT/$service_file \
+           | sed 's,Also=,,g' \
+           | tr ',' '\n')
+for a in $also; do
+	$0 --root=$ROOT enable $a
+done
