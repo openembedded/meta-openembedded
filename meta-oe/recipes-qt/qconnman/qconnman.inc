@@ -9,7 +9,7 @@ PR = "r1"
 inherit autotools
 
 PV = "0.0+gitr${SRCPV}"
-SRCREV = "9bab120f426e41552c369b7030414c792dd25a91"
+SRCREV = "f976b18c7c5584627224784801803e9fd3ebe0ff"
 SRC_URI = "git://github.com/OSSystems/qconnman.git"
 
 S = "${WORKDIR}/git/"
