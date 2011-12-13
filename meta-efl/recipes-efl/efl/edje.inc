@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
 inherit efl
 
 BBCLASSEXTEND = "native nativesdk"
-INC_PR = "r1"
+INC_PR = "r2"
 
 do_configure_prepend_virtclass-native() {
 	sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
@@ -56,3 +56,7 @@ FILES_${PN}-utils = "\
   ${libdir}/edje/utils/epp \
   ${datadir}/edje/include/edje.inc \
 "
+
+FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.${SOLIBS}"
+FILES_${PN}-dev += "${libdir}/${PN}/modules/*/*/module.la"
+FILES_${PN}-dbg += "${libdir}/${PN}/modules/*/*/.debug"
