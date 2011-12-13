@@ -13,7 +13,6 @@ SRCNAME = "vala"
 inherit e-base autotools pkgconfig vala
 
 SRC_URI = "${E_SVN}/trunk/BINDINGS;module=${SRCNAME};proto=http \
-  file://0001-BINDINS-vala-update-genlist-gengrid-callbacks-s-labe.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"
 

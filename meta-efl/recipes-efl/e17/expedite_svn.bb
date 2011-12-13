@@ -2,7 +2,7 @@ DESCRIPTION = "Expedite is a comprehensive benchmarking suite for Evas"
 DEPENDS = "eet evas"
 LICENSE = "MIT BSD"
 
-SRCREV = "${EFL_SRCREV_1.1.0}"
+SRCREV = "${EFL_SRCREV}"
 PV = "1.1.0+svnr${SRCPV}"
 PR = "r1"
 
