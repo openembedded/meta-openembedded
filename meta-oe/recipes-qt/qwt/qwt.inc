@@ -1,6 +1,5 @@
 DESCRIPTION = "Qt Widget Extension for Technical Applications"
 SECTION = "libs"
-PRIORITY = "optional"
 
 # LGPLv2.1 + some exceptions
 LICENSE = "QWTv1.0"
