@@ -1,7 +1,6 @@
 LICENSE= "MIT"
 DESCRIPTION = "X Server Nokia 770 extensions library"
 SECTION = "x11/libs"
-PRIORITY = "optional"
 DEPENDS = "virtual/libx11 libxext"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=db043791349ba57ad1169e1c92477cb6"
