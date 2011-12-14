@@ -2,7 +2,6 @@ DESCRIPTION = "A full-featured SSL VPN solution via tun device."
 HOMEPAGE = "http://openvpn.sourceforge.net"
 SECTION = "console/network"
 LICENSE = "GPLv2"
-PRIORITY = "optional"
 DEPENDS = "lzo openssl"
 RRECOMMENDS_${PN} = "kernel-module-tun"
 
