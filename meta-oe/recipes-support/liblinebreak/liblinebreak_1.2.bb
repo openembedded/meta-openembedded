@@ -3,7 +3,6 @@ HOMEPAGE = "http://vimgadgets.sourceforge.net/liblinebreak/"
 SECTION = "libs"
 LICENSE = "zlib"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=3715191da62bafb5cfc4ff36195b2ec3"
-PRIORITY = "optional"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/vimgadgets/liblinebreak/${PV}/liblinebreak-${PV}.tar.gz"
 SRC_URI[md5sum] = "d18039259001ccb24b5dd4648c49c5ad"
