@@ -1,7 +1,6 @@
 DESCRIPTION = "Library for reading some sort of media format."
 SECTION = "libs"
 LICENSE = "GPLv2"
-PRIORITY = "optional"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=381c8cbe277a7bc1ee2ae6083a04c958"
 
