@@ -1,6 +1,6 @@
 require fftw.inc
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://www.fftw.org/fftw-${PV}.tar.gz \
            file://vesperix-neon.patch \

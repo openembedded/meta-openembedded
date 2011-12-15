@@ -3,7 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 DEPENDS += "perl-native"
 BBCLASSEXTEND = "native"
 
-PRINC = "6"
+PRINC = "7"
 
 SRC_URI += " file://0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch"
 
