@@ -1,0 +1,2 @@
+# Specify rng device
+RNG_DEVICE=/dev/hwrng
