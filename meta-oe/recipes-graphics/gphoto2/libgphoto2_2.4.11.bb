@@ -3,6 +3,8 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
 
+PR = "r1"
+
 DEPENDS = "libtool jpeg virtual/libusb0 libexif"
 
 # The .fdi and .rules files were generated with:
@@ -38,7 +40,7 @@ do_install_append() {
 
 PACKAGES =+ "libgphotoport libgphoto2-camlibs"
 FILES_libgphoto2-camlibs = "${libdir}/libgphoto2*/*/*.so*"
-RDEPENDS_${PN} = "libgphoto2-camlibs"
+RRECOMMENDS_${PN} = "libgphoto2-camlibs"
 
 FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*" 
 
