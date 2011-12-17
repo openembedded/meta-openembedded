@@ -3,8 +3,7 @@ HOMEPAGE = "http://pcsclite.alioth.debian.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c8e551349dc346258274f0007679e149"
 DEPENDS = "udev"
-RDEPENDS += "ccid"
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "https://alioth.debian.org/frs/download.php/3533/pcsc-lite-${PV}.tar.bz2"
 
@@ -22,5 +21,7 @@ EXTRA_OECONF = " \
 S = "${WORKDIR}/pcsc-lite-${PV}"
 
 PACKAGES =+ "${PN}-lib"
+
+RRECOMMENDS_${PN} = "ccid"
 
 FILES_${PN}-lib = "${libdir}/lib*${SOLIBS}"
