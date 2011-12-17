@@ -5,22 +5,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
-PR = "r2"
-
 EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
                 --x-libraries=${STAGING_LIBDIR} \
                 --enable-dbus \
                 --disable-libQgpsmm \
 "
 
-SRC_URI = "http://download.berlios.de/${PN}/${P}.tar.gz;name=gpsd \
-           file://libtool.patch \
-           file://fix-build-with-python2.7.patch \
+SRC_URI = "http://download.berlios.de/${PN}/${P}bis.tar.gz;name=gpsd \
            file://gpsd-default \
            file://gpsd \
            file://60-gpsd.rules"
-SRC_URI[gpsd.md5sum] = "12535a9ed9fecf9ea2c5bdc9840da5ae"
-SRC_URI[gpsd.sha256sum] = "832343a53921a8371efa540ba57c91dadedda445e571c1beb97c06539ef450ae"
+SRC_URI[gpsd.md5sum] = "52b00cab0fb34bbf1923ae35c7ced6c4"
+SRC_URI[gpsd.sha256sum] = "c6d72565bc06b802c749e69808eb7c6ee165962dc17383971c9001b5e1763690"
 
 inherit autotools update-rc.d python-dir
 
