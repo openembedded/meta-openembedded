@@ -10,12 +10,13 @@ inherit autotools
 
 SRCREV = "25"
 PV = "0.0.1+svnr${SRCPV}"
-PR = "r10"
+PR = "r11"
 
 SRC_URI = "svn://e-tasks.googlecode.com/svn;module=trunk;proto=http \
            file://genlist_item_insert_before.api.patch \
            file://0001-adapt-to-newer-elm-API.patch \
-           file://depends.eina.patch"
+           file://depends.eina.patch \
+           file://0001-fix-changed-callback-name.patch"
 S = "${WORKDIR}/trunk"
 
 do_install_append() {
