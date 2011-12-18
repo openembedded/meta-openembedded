@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 SRCREV = "c6c2dfcf15c1d93b2189adff6f71c5c4b6b05338"
 
 PV = "0.6.2+${PR}+gitr${SRCPV}"
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 SRC_URI = "git://git.libav.org/libav.git;protocol=git"
 

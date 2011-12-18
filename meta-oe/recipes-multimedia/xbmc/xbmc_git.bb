@@ -9,7 +9,7 @@ DEPENDS = "expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconf
 SRCREV = "379d13c8e9a0e64f1f36b3fb216e5caedb0df73e"
 
 PV = "11.0"
-PR = "r0"
+PR = "r1"
 PR_append = "+gitr${SRCPV}"
 SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
