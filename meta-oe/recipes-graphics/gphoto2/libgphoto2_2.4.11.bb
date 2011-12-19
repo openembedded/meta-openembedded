@@ -3,7 +3,7 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "libtool jpeg virtual/libusb0 libexif"
 
@@ -46,6 +46,7 @@ FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
 
 FILES_${PN} += "${base_libdir}/udev/* ${datadir}/hal"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
+FILES_${PN}-dev += "${libdir}/*/*/*.la"
 
 
 
