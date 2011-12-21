@@ -1,0 +1,26 @@
+ptpd: fix ftbfs by including limits.h so MAX_INT defined
+
+The current recipe for ptpd fails to build with:
+
+| arith.c: In function 'fromInternalTime':
+| arith.c:46: error: 'INT_MAX' undeclared (first use in this function)
+| arith.c:46: error: (Each undeclared identifier is reported only once
+| arith.c:46: error: for each function it appears in.)
+| arith.c: In function 'toInternalTime':
+| arith.c:64: error: 'INT_MAX' undeclared (first use in this function)
+| make: *** [arith.o] Error 1
+| make: *** Waiting for unfinished jobs....
+| FATAL: oe_runmake failed
+
+diff --git a/src/arith.c b/src/arith.c
+--- a/src/arith.c
++++ b/src/arith.c
+@@ -1,6 +1,7 @@
+ /* arith.c */
+ 
+ #include "ptpd.h"
++#include <limits.h>
+ 
+ /* from annex C of the spec */
+ UInteger32 crc_algorithm(Octet *buf, Integer16 length)
+
