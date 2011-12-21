@@ -1,0 +1,58 @@
+From 4f890adb39b52bc43c578966071625004988e3b8 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier at gentoo.org>
+Date: Thu, 18 Nov 2010 22:11:48 -0500
+Subject: [PATCH] ftp: rename ruserpass to avoid C library collision
+
+The C library itself defines a "ruserpass" function.  When linking
+statically, it is possible to hit a symbol collision linker error.
+So rename the local ftp version to "remote_userpass".
+
+Signed-off-by: Mike Frysinger <vapier at gentoo.org>
+---
+ ftp/extern.h    |    2 +-
+ ftp/ftp.c       |    2 +-
+ ftp/ruserpass.c |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/ftp/extern.h b/ftp/extern.h
+index 8cdb8aa..037cb61 100644
+--- a/ftp/extern.h
++++ b/ftp/extern.h
+@@ -119,7 +119,7 @@ void reset (int, char **);
+ void restart (int, char **);
+ void rmthelp (int, char **);
+ void rmtstatus (int, char **);
+-int ruserpass (char *, char **, char **, char **);
++int remote_userpass (char *, char **, char **, char **);
+ void sendrequest (char *, char *, char *, int);
+ void setascii (int, char **);
+ void setbell (int, char **);
+diff --git a/ftp/ftp.c b/ftp/ftp.c
+index c20ba41..95675cc 100644
+--- a/ftp/ftp.c
++++ b/ftp/ftp.c
+@@ -251,7 +251,7 @@ login (char *host)
+   int n, aflag = 0;
+ 
+   user = pass = acct = 0;
+-  if (ruserpass (host, &user, &pass, &acct) < 0)
++  if (remote_userpass (host, &user, &pass, &acct) < 0)
+     {
+       code = -1;
+       return (0);
+diff --git a/ftp/ruserpass.c b/ftp/ruserpass.c
+index 8572b95..c08fbc0 100644
+--- a/ftp/ruserpass.c
++++ b/ftp/ruserpass.c
+@@ -111,7 +111,7 @@ static struct toktab
+ };
+ 
+ int
+-ruserpass (char *host, char **aname, char **apass, char **aacct)
++remote_userpass (char *host, char **aname, char **apass, char **aacct)
+ {
+   char *hdir, buf[BUFSIZ], *tmp;
+   char *myname = 0, *mydomain;
+-- 
+1.7.3.2
+

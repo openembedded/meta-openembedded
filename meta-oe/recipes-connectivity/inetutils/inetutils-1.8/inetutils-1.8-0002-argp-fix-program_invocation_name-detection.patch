@@ -1,0 +1,51 @@
+From 93dbd3319232613ff8f5f3f08bf5f57b21980ef1 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier at gentoo.org>
+Date: Thu, 18 Nov 2010 17:14:21 -0500
+Subject: [PATCH gnulib] argp: fix program_invocation_name detection
+
+The current program_invocation_name symbol detection fails if the argp.h
+header is missing.  So check for the header first before detecting if the
+symbol exists.
+
+Signed-off-by: Mike Frysinger <vapier at gentoo.org>
+---
+ m4/argp.m4 |   15 +++++++++++++--
+ 1 files changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/m4/argp.m4 b/m4/argp.m4
+index d3ca5ba..efa562c 100644
+--- a/m4/argp.m4
++++ b/m4/argp.m4
+@@ -31,8 +31,14 @@ AC_DEFUN([gl_ARGP],
+   # are defined elsewhere. It is improbable that only one of them will
+   # be defined and other not, I prefer to stay on the safe side and to
+   # test each one separately.
++  AC_CHECK_HEADERS_ONCE([argp.h])
+   AC_MSG_CHECKING([whether program_invocation_name is defined])
+-  AC_TRY_LINK([#include <argp.h>],
++  AC_TRY_LINK([
++#include <errno.h>
++#ifdef HAVE_ARGP_H
++# include <argp.h>
++#endif
++],
+               [ program_invocation_name = "test"; ],
+               [ AC_DEFINE([HAVE_PROGRAM_INVOCATION_NAME], [1],
+                  [Define if program_invocation_name is defined])
+@@ -40,7 +46,12 @@ AC_DEFUN([gl_ARGP],
+               [ AC_MSG_RESULT([no])] )
+ 
+   AC_MSG_CHECKING([whether program_invocation_short_name is defined])
+-  AC_TRY_LINK([#include <argp.h>],
++  AC_TRY_LINK([
++#include <errno.h>
++#ifdef HAVE_ARGP_H
++# include <argp.h>
++#endif
++],
+               [ program_invocation_short_name = "test"; ],
+               [ AC_DEFINE([HAVE_PROGRAM_INVOCATION_SHORT_NAME], [1],
+                  [Define if program_invocation_short_name is defined])
+-- 
+1.7.3.2
+

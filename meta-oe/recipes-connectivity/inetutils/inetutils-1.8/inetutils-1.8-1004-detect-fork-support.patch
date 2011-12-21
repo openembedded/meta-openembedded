@@ -1,0 +1,54 @@
+From 0acaed0d4b2bf9495e71ec4c898733bed2a86be0 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier at gentoo.org>
+Date: Thu, 18 Nov 2010 22:27:55 -0500
+Subject: [PATCH] detect fork() support
+
+Linux/nommu systems cannot support a fork(), so add a configure test for
+it so apps can pick that or vfork().
+
+Signed-off-by: Mike Frysinger <vapier at gentoo.org>
+---
+ configure.ac                |    2 +-
+ libinetutils/libinetutils.h |    9 +++++++++
+ 2 files changed, 10 insertions(+), 1 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 25cc3db..98196f4 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -580,7 +580,7 @@ AC_FUNC_MALLOC
+ AC_FUNC_REALLOC
+ 
+ AC_CHECK_FUNCS(bcopy bcmp bzero cfsetspeed cgetent daemon dirfd fchdir flock \
+-               fpathconf ftruncate \
++               fork fpathconf ftruncate \
+ 	       getcwd getmsg getspnam initgroups initsetproctitle killpg \
+                mkstemp ptsname \
+                setegid seteuid setpgid \
+diff --git a/libinetutils/libinetutils.h b/libinetutils/libinetutils.h
+index 19bbde5..86365b0 100644
+--- a/libinetutils/libinetutils.h
++++ b/libinetutils/libinetutils.h
+@@ -17,6 +17,8 @@
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see `http://www.gnu.org/licenses/'. */
+ 
++#include <config.h>
++
+ #include "argp-version-etc.h"
+ 
+ void utmp_init (char *line, char *user, char *id);
+@@ -32,3 +34,10 @@ extern const char *default_program_authors[];
+ #define iu_argp_init(name, authors)				\
+   argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";		\
+   argp_version_setup (name, authors);
++
++#ifdef HAVE_FORK
++# define fork_exit(s) exit(s)
++#else
++# define fork() vfork()
++# define fork_exit(s) _exit(s)
++#endif
+-- 
+1.7.3.2
+

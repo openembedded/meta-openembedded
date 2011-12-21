@@ -1,0 +1,109 @@
+From 1dee55b90d2971859377156e6210efdfdf1bac84 Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier at gentoo.org>
+Date: Fri, 19 Nov 2010 20:26:48 -0500
+Subject: [PATCH] ftpd: add daemon (-D) nommu support
+
+The current daemon design of ftpd is to:
+	- loop in server_mode() waiting for a connection
+	- fork a child and return to main() to process like inetd
+	- have parent continue looping in server_mode()
+
+On a nommu system where we can only vfork(), the child returning
+from server_mode() corrupts the stack and messes up the the parent.
+So rather than having the child return, exec a new ftpd process in
+the normal inetd mode.  This also fixes the problem in nommu where
+a vfork-ed child pauses the parent until it either exits or execs
+something.
+
+Signed-off-by: Mike Frysinger <vapier at gentoo.org>
+---
+ ftpd/extern.h      |    3 ++-
+ ftpd/ftpd.c        |   17 ++++++++++++++---
+ ftpd/server_mode.c |    9 ++++++++-
+ 3 files changed, 24 insertions(+), 5 deletions(-)
+
+diff --git a/ftpd/extern.h b/ftpd/extern.h
+index 2483fe6..81182e0 100644
+--- a/ftpd/extern.h
++++ b/ftpd/extern.h
+@@ -110,7 +110,8 @@ extern char tmpline[];
+ extern off_t restart_point;
+ 
+ /* Exported from server_mode.c.  */
+-extern int server_mode (const char *pidfile, struct sockaddr_in *phis_addr);
++extern int server_mode (const char *pidfile, struct sockaddr_in *phis_addr,
++			char *argv[]);
+ 
+ /* Credential for the request.  */
+ struct credentials
+diff --git a/ftpd/ftpd.c b/ftpd/ftpd.c
+index aed74e6..c5c4c90 100644
+--- a/ftpd/ftpd.c
++++ b/ftpd/ftpd.c
+@@ -424,8 +424,7 @@ main (int argc, char *argv[], char **envp)
+   argp_parse (&argp, argc, argv, 0, &index, NULL);
+   
+   /* Bail out, wrong usage */
+-  argc -= index;
+-  if (argc != 0)
++  if (argc - index != 0)
+     error (1, 0, "surplus arguments; try `%s --help' for more info",
+ 	   program_name);
+ 
+@@ -438,7 +437,19 @@ main (int argc, char *argv[], char **envp)
+      fd = accept(). tcpd is check if compile with the support  */
+   if (daemon_mode)
+     {
+-      if (server_mode (pid_file, &his_addr) < 0)
++#ifndef HAVE_FORK
++      /* Shift out the daemon option in subforks  */
++      int i;
++      for (i = 0; i < argc; ++i)
++	if (strcmp (argv[i], "-D") == 0)
++	  {
++	    int j;
++	    for (j = i; j < argc; ++j)
++	      argv[j] = argv[j + 1];
++	    argv[--argc] = NULL;
++	  }
++#endif
++      if (server_mode (pid_file, &his_addr, argv) < 0)
+ 	exit (1);
+     }
+   else
+diff --git a/ftpd/server_mode.c b/ftpd/server_mode.c
+index 3d3a498..605e13e 100644
+--- a/ftpd/server_mode.c
++++ b/ftpd/server_mode.c
+@@ -37,6 +37,8 @@
+ # include <tcpd.h>
+ #endif
+ 
++#include <libinetutils.h>
++
+ static void reapchild (int);
+ 
+ #define DEFPORT 21
+@@ -92,7 +94,7 @@ reapchild (int signo ARG_UNUSED)
+ }
+ 
+ int
+-server_mode (const char *pidfile, struct sockaddr_in *phis_addr)
++server_mode (const char *pidfile, struct sockaddr_in *phis_addr, char *argv[])
+ {
+   int ctl_sock, fd;
+   struct servent *sv;
+@@ -176,5 +178,10 @@ server_mode (const char *pidfile, struct sockaddr_in *phis_addr)
+   if (!check_host ((struct sockaddr *) phis_addr))
+     return -1;
+ #endif
++
++#ifndef HAVE_FORK
++  _exit(execvp(argv[0], argv));
++#endif
++
+   return fd;
+ }
+-- 
+1.7.3.2
+

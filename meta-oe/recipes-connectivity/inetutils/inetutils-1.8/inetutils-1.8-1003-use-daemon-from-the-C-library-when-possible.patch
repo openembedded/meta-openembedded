@@ -1,0 +1,42 @@
+From 3b9f64c6a668849b37b884a7826885c70b95787b Mon Sep 17 00:00:00 2001
+From: Mike Frysinger <vapier at gentoo.org>
+Date: Thu, 18 Nov 2010 22:24:06 -0500
+Subject: [PATCH] use daemon from the C library when possible
+
+Signed-off-by: Mike Frysinger <vapier at gentoo.org>
+---
+ configure.ac          |    2 +-
+ libinetutils/daemon.c |    2 ++
+ 2 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 79d655c..25cc3db 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -579,7 +579,7 @@ AC_FUNC_MMAP
+ AC_FUNC_MALLOC
+ AC_FUNC_REALLOC
+ 
+-AC_CHECK_FUNCS(bcopy bcmp bzero cfsetspeed cgetent dirfd fchdir flock \
++AC_CHECK_FUNCS(bcopy bcmp bzero cfsetspeed cgetent daemon dirfd fchdir flock \
+                fpathconf ftruncate \
+ 	       getcwd getmsg getspnam initgroups initsetproctitle killpg \
+                mkstemp ptsname \
+diff --git a/libinetutils/daemon.c b/libinetutils/daemon.c
+index 2156af4..9beb255 100644
+--- a/libinetutils/daemon.c
++++ b/libinetutils/daemon.c
+@@ -197,8 +197,10 @@ waitdaemon (int nochdir, int noclose, int maxwait)
+   return ppid;
+ }
+ 
++#ifndef HAVE_DAEMON
+ int
+ daemon (int nochdir, int noclose)
+ {
+   return (waitdaemon (nochdir, noclose, 0) == -1) ? -1 : 0;
+ }
++#endif
+-- 
+1.7.3.2
+
