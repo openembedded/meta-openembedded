@@ -1,0 +1,14 @@
+Taken from pld-linux.org:
+http://cvs.pld-linux.org/cgi-bin/cvsweb.cgi/packages/ipsec-tools/ipsec-tools-install.patch
+
+--- ipsec-tools-0.7.2/src/racoon/Makefile.am~	2008-07-23 13:48:40.000000000 +0200
++++ ipsec-tools-0.7.2/src/racoon/Makefile.am	2009-07-04 01:43:48.148433975 +0200
+@@ -3,7 +3,7 @@
+ sbin_PROGRAMS = racoon racoonctl plainrsa-gen
+ noinst_PROGRAMS = eaytest
+ include_racoon_HEADERS = racoonctl.h var.h vmbuf.h misc.h gcmalloc.h admin.h \
+-	schedule.h sockmisc.h vmbuf.h isakmp_var.h isakmp.h isakmp_xauth.h \
++	schedule.h sockmisc.h isakmp_var.h isakmp.h isakmp_xauth.h \
+ 	isakmp_cfg.h isakmp_unity.h ipsec_doi.h evt.h
+ lib_LTLIBRARIES = libracoon.la
+ 
