@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 
 PV = "4.5"
-PR = "r44"
+PR = "r45"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -226,13 +226,13 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://fedora/gcc45-no-add-needed.patch;striplevel=0 \
        file://optional_libstdc.patch \
        file://64bithack.patch \
-       file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
        file://COLLECT_GCC_OPTIONS.patch \
        file://gcc-poison-dir-extend.patch \
        file://gcc-poison-parameters.patch \
        file://gcc-ppc-config-fix.patch \
        file://use-defaults.h-and-t-oe-in-B.patch \
        file://gcc-with-linker-hash-style.patch \
+       file://GPLUSPLUS_INCLUDE_DIR_with_sysroot.patch \
        "
 
 # Language Overrides
