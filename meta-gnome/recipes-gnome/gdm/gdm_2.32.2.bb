@@ -20,6 +20,8 @@ SRC_URI += " \
             file://gdm.service \
            "
 
+SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
+SRC_URI[archive.sha256sum] = "034d23af0ea18d86e5543e707212d9297ec7d83f221808968af266dbebc0e703"
 
 EXTRA_OECONF = " --enable-authentication-scheme=shadow \
                  --enable-debug=yes \
