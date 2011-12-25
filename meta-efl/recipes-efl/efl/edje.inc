@@ -57,6 +57,6 @@ FILES_${PN}-utils = "\
   ${datadir}/edje/include/edje.inc \
 "
 
-FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.${SOLIBS}"
+FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.so"
 FILES_${PN}-dev += "${libdir}/${PN}/modules/*/*/module.la"
 FILES_${PN}-dbg += "${libdir}/${PN}/modules/*/*/.debug"
