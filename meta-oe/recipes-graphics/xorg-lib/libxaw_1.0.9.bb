@@ -5,7 +5,7 @@ DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp pr
 LIC_FILES_CHKSUM = "file://COPYING;md5=f1beacbc336a5a256bb28dbfcf01c2be"
 
 PE = "1"
-PR = "r11"
+PR = "r12"
 
 SRC_URI[md5sum] = "ccc57478c41b7a75b9702241b889b1d4"
 SRC_URI[sha256sum] = "a83977546b78e24ac5dca86affc10b6404a87c16272405b05386feca1a2db037"
