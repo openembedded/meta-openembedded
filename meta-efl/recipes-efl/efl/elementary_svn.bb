@@ -52,6 +52,7 @@ FILES_${PN}-tests = "\
   ${bindir}/elementary* \
   ${datadir}/elementary/images \
   ${datadir}/elementary/objects \
+  ${datadir}/elementary/examples \
   ${datadir}/applications/* \
   ${datadir}/icons/* \
   ${libdir}/elementary/modules/test_entry/* \
