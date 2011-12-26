@@ -28,5 +28,5 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
                     ${libdir}/tumbler-1/plugins/cache/.debug \
 "
 
-SRC_URI[md5sum] = "e7ba3b8f21f8f7e736f1e214906b4ca9"
-SRC_URI[sha256sum] = "9e41fe8f76f9422fb4f804e9635f6734552f0d82361f9971c0442a2119d451b6"
+SRC_URI[md5sum] = "c6cf6821f5d884cbf2c26f45f2fecc74"
+SRC_URI[sha256sum] = "b3066d17b7e1fee5135eb876a7c2c50a1221bd0d447c3dd7c36efe6d7f3874cb"
