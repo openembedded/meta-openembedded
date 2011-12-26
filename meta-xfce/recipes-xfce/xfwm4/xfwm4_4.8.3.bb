@@ -6,12 +6,8 @@ DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbu
 
 inherit xfce update-alternatives
 
-# SRC_URI must follow inherited one
-SRC_URI += " \
-    file://relative-symlinks-docs.patch \
-"
-SRC_URI[md5sum] = "41b730d5abf39a69fc3b221728ddaa75"
-SRC_URI[sha256sum] = "6db2a6148d63d45699dbf6403fb227f8cbd529dcec7ee0827342940c442b0747"
+SRC_URI[md5sum] = "66cb65797cea8a62563f69b833c7888b"
+SRC_URI[sha256sum] = "0b0e8bea0b257958ad416ab5678cf0cdd7e909943d4d5ab32afc35295a78227e"
 
 EXTRA_OECONF += " --enable-startup-notification"
 
