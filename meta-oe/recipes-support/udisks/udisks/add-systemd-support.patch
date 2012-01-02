@@ -1,0 +1,112 @@
+From 7a485d491697906b445020dfcb37fe91806d7134 Mon Sep 17 00:00:00 2001
+From: Lennart Poettering <lennart@poettering.net>
+Date: Thu, 22 Jul 2010 02:20:22 +0200
+Subject: [PATCH] systemd: install systemd unit files
+Upstream-Status: ?
+Based on: https://www.libreoffice.org/bugzilla/show_bug.cgi?id=29205
+---
+ Makefile.am                            |    5 ++++-
+ configure.ac                           |    9 +++++++++
+ data/.gitignore                        |    1 +
+ data/Makefile.am                       |   11 ++++++++++-
+ data/org.freedesktop.UDisks.service.in |    2 +-
+ data/udisks-daemon.service.in          |   12 ++++++++++++
+ 6 files changed, 37 insertions(+), 3 deletions(-)
+ create mode 100644 data/udisks-daemon.service.in
+
+diff --git a/Makefile.am b/Makefile.am
+index 588f05d..c3aaeea 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -24,7 +24,10 @@ EXTRA_DIST = 			\
+ 	ChangeLog
+ 
+ # xsltproc barfs on 'make distcheck'; disable for now
+-DISTCHECK_CONFIGURE_FLAGS=--disable-man-pages --disable-gtk-doc
++DISTCHECK_CONFIGURE_FLAGS = \
++	--disable-man-pages \
++	--disable-gtk-doc \
++	--with-systemdsystemunitdir=$$dc_install_base/$(systemdsystemunitdir)
+ 
+ clean-local :
+ 	rm -f *~
+diff --git a/configure.ac b/configure.ac
+index a9141bf..39bbd7a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -232,6 +232,15 @@ AC_SUBST([GETTEXT_PACKAGE])
+ AM_GLIB_GNU_GETTEXT
+ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[gettext domain])
+ 
++# systemd
++
++AC_ARG_WITH([systemdsystemunitdir],
++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
++        [],
++        [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
++AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir"])
++
+ AC_OUTPUT([
+ Makefile
+ data/Makefile
+diff --git a/data/Makefile.am b/data/Makefile.am
+index ca6d8ac..bf5c1a7 100644
+--- a/data/Makefile.am
++++ b/data/Makefile.am
+@@ -35,6 +35,14 @@ avahiservicedir = $(sysconfdir)/avahi/services
+ avahiservice_DATA = udisks.service
+ endif # REMOTE_ACCESS_ENABLED
+ 
++if HAVE_SYSTEMD
++systemdsystemunit_DATA = \
++	udisks-daemon.service
++
++udisks-daemon.service: udisks-daemon.service.in
++	@sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
++endif
++
+ EXTRA_DIST = 						\
+ 	80-udisks.rules					\
+ 	$(dbusif_DATA)					\
+@@ -42,7 +50,8 @@ EXTRA_DIST = 						\
+ 	$(dbusconf_in_files)				\
+ 	udisks.pc.in					\
+ 	udisks.service					\
++	udisks-daemon.service.in                        \
+ 	$(NULL)
+ 
+ clean-local :
+-	rm -f *~ $(service_DATA) $(dbusconf_DATA)
++	rm -f *~ $(service_DATA) $(dbusconf_DATA) udisks-daemon.service
+diff --git a/data/org.freedesktop.UDisks.service.in b/data/org.freedesktop.UDisks.service.in
+index b3606a6..6ba2cd0 100644
+--- a/data/org.freedesktop.UDisks.service.in
++++ b/data/org.freedesktop.UDisks.service.in
+@@ -2,4 +2,4 @@
+ Name=org.freedesktop.UDisks
+ Exec=@libexecdir@/udisks-daemon
+ User=root
+-
++SystemdService=udisks-daemon.service
+diff --git a/data/udisks-daemon.service.in b/data/udisks-daemon.service.in
+new file mode 100644
+index 0000000..78379b2
+--- /dev/null
++++ b/data/udisks-daemon.service.in
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Disk Manager
++After=syslog.target
++
++[Service]
++Type=dbus
++BusName=org.freedesktop.UDisks
++ExecStart=@libexecdir@/udisks-daemon
++StandardOutput=syslog
++
++[Install]
++WantedBy=graphical.target
+-- 
+1.7.0.1
+

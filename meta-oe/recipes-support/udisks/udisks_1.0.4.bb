@@ -6,15 +6,23 @@ DEPENDS = "libatasmart sg3-utils polkit udev dbus-glib glib-2.0"
 # optional dependencies: device-mapper parted
 
 SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
+           file://add-systemd-support.patch \
            file://optional-depends.patch"
 
 SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
 SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
 
-inherit autotools
+PR = "r1"
 
-# No docbook-xsl-native recipe available
-EXTRA_OECONF = "--enable-man-pages=no"
+inherit autotools systemd
+
+SYSTEMD_PACKAGES = "${PN}-systemd"
+SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
+
+PACKAGES =+ "${PN}-systemd"
+
+FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
+RDEPENDS_${PN}-systemd = "${PN}"
 
 FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
                 ${datadir}/dbus-1/ \
