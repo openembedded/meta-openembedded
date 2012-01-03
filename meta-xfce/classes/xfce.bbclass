@@ -1,7 +1,7 @@
 HOMEPAGE = "http://www.xfce.org"
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
 
-inherit autotools gtk-icon-cache pkgconfig
+inherit autotools gettext gtk-icon-cache pkgconfig
 
 FILES_${PN} += "${datadir}/icons/* ${datadir}/applications/* ${libdir}/xfce4/modules/*.so*"
 FILES_${PN}-doc += "${datadir}/xfce4/doc"
