@@ -4,8 +4,11 @@ SECTION = "x11/application"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
+PR = "r1"
 
 inherit xfce-app
+
+SRC_URI += "file://add-locale_h.patch"
 
 RRECOMMENDS_${PN} += "tumbler"
 
