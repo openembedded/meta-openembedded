@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe
 SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
            file://remove-c-rehash.patch"
 
-SRC_URI[md5sum] = "dfd593c9f89e64351aae78b9be588696"
-SRC_URI[sha256sum] = "318bbf0f7c0a32adc10105f843148fd0e9e3b013de75645c02ea858652240924"
+SRC_URI[md5sum] = "f99a90a91b23338b4df765c0d18eba73"
+SRC_URI[sha256sum] = "6f0633136d17ffef3ed0adfb171a00136a320f0fd79c9c75733ac02662a754a7"
 
 inherit autotools allarch
 
