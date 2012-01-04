@@ -1,6 +1,6 @@
 require ntp.inc
 
-PR = "r3"
+PR = "r4"
 
 inherit systemd
 
@@ -13,6 +13,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/${P}.tar.gz \
         file://ntpd \
         file://ntp.conf \
         file://ntpdate \
+        file://ntpdate.service \
         file://ntpd.service \
 "
 
@@ -29,6 +30,7 @@ do_install_append() {
 	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
 
 	install -d ${D}${base_libdir}/systemd/system
+	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${base_libdir}/systemd/system/
 	install -m 0644 ${WORKDIR}/ntpd.service ${D}${base_libdir}/systemd/system/
 }
 

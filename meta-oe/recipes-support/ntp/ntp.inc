@@ -28,7 +28,8 @@ EXTRA_OECONF = "--without-openssl --without-crypto ac_cv_header_readline_history
 CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
 
 PACKAGES += "ntpdate ${PN}-bin ${PN}-tickadj ${PN}-utils"
-# NOTE: you don't need ntpdate, use "ntpdc -q -g -x"
+# NOTE: you don't need ntpdate, use "ntpd -q -g -x"
+# or the ntpdate systemd service
 
 # This should use rc.update
 FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/init.d/ntpdate"
