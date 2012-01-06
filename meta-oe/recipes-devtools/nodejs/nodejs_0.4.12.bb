@@ -32,6 +32,7 @@ do_install () {
 }
 
 RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
+RDEPENDS_${PN}_virtclass-native = "curl-native python-native"
 
 FILES_${PN} += "${libdir}/node/wafadmin"
 BBCLASSEXTEND = "native"
