@@ -20,7 +20,7 @@ inherit useradd pkgconfig autotools vala perlnative
 
 SRCREV = "f6cebb3bd5a00d79c8131637c0f6796a75e6af99"
 
-SRC_URI = "git://anongit.freedesktop.org/systemd;protocol=git \
+SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://0001-disable-xsltproc-completely.patch \
            ${UCLIBCPATCHES} \
           "
