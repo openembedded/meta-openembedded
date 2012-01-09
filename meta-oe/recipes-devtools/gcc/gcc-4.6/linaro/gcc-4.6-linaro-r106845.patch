@@ -1,0 +1,1818 @@
+2011-11-28  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	Backport from mainline (svn r19983):
+
+	2011-10-14  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	gcc/testsuite/
+	* gcc.dg/di-longlong64-sync-1.c: New test.
+	* gcc.dg/di-sync-multithread.c: New test.
+	* gcc.target/arm/di-longlong64-sync-withhelpers.c: New test.
+	* gcc.target/arm/di-longlong64-sync-withldrexd.c: New test.
+	* lib/target-supports.exp: (arm_arch_*_ok): Series of effective-target
+	tests for v5, v6, v6k, and v7-a, and add-options helpers.
+	(check_effective_target_arm_arm_ok): New helper.
+	(check_effective_target_sync_longlong): New helper.
+
+2011-11-28  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	Backport from mainline (svn r19982):
+
+	2011-10-14  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	gcc/
+	* config/arm/linux-atomic-64bit.c: New (based on linux-atomic.c).
+	* config/arm/linux-atomic.c: Change comment to point to 64bit version.
+	(SYNC_LOCK_RELEASE): Instantiate 64bit version.
+	* config/arm/t-linux-eabi: Pull in linux-atomic-64bit.c.
+
+2011-11-28  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	Backport from mainline (svn r19981):
+
+	2011-10-14  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	gcc/
+	* config/arm/arm.c (arm_output_ldrex): Support ldrexd.
+	(arm_output_strex): Support strexd.
+	(arm_output_it): New helper to output it in Thumb2 mode only.
+	(arm_output_sync_loop): Support DI mode.  Change comment to
+	not support const_int.
+	(arm_expand_sync): Support DI mode.
+	* config/arm/arm.h (TARGET_HAVE_LDREXBHD): Split into LDREXBH
+	and LDREXD.
+	* config/arm/iterators.md (NARROW): move from sync.md.
+	(QHSD): New iterator for all current ARM integer modes.
+	(SIDI): New iterator for SI and DI modes only.
+	* config/arm/sync.md (sync_predtab): New mode_attr.
+	(sync_compare_and_swapsi): Fold into sync_compare_and_swap<mode>.
+	(sync_lock_test_and_setsi): Fold into sync_lock_test_and_setsi<mode>.
+	(sync_<sync_optab>si): Fold into sync_<sync_optab><mode>.
+	(sync_nandsi): Fold into sync_nand<mode>.
+	(sync_new_<sync_optab>si): Fold into sync_new_<sync_optab><mode>.
+	(sync_new_nandsi): Fold into sync_new_nand<mode>.
+	(sync_old_<sync_optab>si): Fold into sync_old_<sync_optab><mode>.
+	(sync_old_nandsi): Fold into sync_old_nand<mode>.
+	(sync_compare_and_swap<mode>): Support SI & DI.
+	(sync_lock_test_and_set<mode>): Likewise.
+	(sync_<sync_optab><mode>): Likewise.
+	(sync_nand<mode>): Likewise.
+	(sync_new_<sync_optab><mode>): Likewise.
+	(sync_new_nand<mode>): Likewise.
+	(sync_old_<sync_optab><mode>): Likewise.
+	(sync_old_nand<mode>): Likewise.
+	(arm_sync_compare_and_swapsi): Turn into iterator on SI & DI.
+	(arm_sync_lock_test_and_setsi): Likewise.
+	(arm_sync_new_<sync_optab>si): Likewise.
+	(arm_sync_new_nandsi): Likewise.
+	(arm_sync_old_<sync_optab>si): Likewise.
+	(arm_sync_old_nandsi): Likewise.
+	(arm_sync_compare_and_swap<mode> NARROW): use sync_predtab, fix indent.
+	(arm_sync_lock_test_and_setsi<mode> NARROW): Likewise.
+	(arm_sync_new_<sync_optab><mode> NARROW): Likewise.
+	(arm_sync_new_nand<mode> NARROW): Likewise.
+	(arm_sync_old_<sync_optab><mode> NARROW): Likewise.
+	(arm_sync_old_nand<mode> NARROW): Likewise.
+
+2011-11-28  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	Backport from mainline (svn r19980):
+
+	2011-10-14  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	PR target/48126
+
+	gcc/
+	* config/arm/arm.c (arm_output_sync_loop): Move label before barrier.
+
+2011-11-28  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	Backport from mainline (svn r19979):
+
+	2011-10-14  David Alan Gilbert  <david.gilbert@linaro.org>
+
+	gcc/
+	* config/arm/arm.h (TARGET_HAVE_DMB_MCR): MCR Not available in Thumb1.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-11-21 01:45:54 +0000
++++ new/gcc/config/arm/arm.c	2011-11-28 15:07:01 +0000
+@@ -24307,12 +24307,26 @@
+ 		  rtx target,
+ 		  rtx memory)
+ {
+-  const char *suffix = arm_ldrex_suffix (mode);
+-  rtx operands[2];
++  rtx operands[3];
+ 
+   operands[0] = target;
+-  operands[1] = memory;
+-  arm_output_asm_insn (emit, 0, operands, "ldrex%s\t%%0, %%C1", suffix);
++  if (mode != DImode)
++    {
++      const char *suffix = arm_ldrex_suffix (mode);
++      operands[1] = memory;
++      arm_output_asm_insn (emit, 0, operands, "ldrex%s\t%%0, %%C1", suffix);
++    }
++  else
++    {
++      /* The restrictions on target registers in ARM mode are that the two
++	 registers are consecutive and the first one is even; Thumb is
++	 actually more flexible, but DI should give us this anyway.
++	 Note that the 1st register always gets the lowest word in memory.  */
++      gcc_assert ((REGNO (target) & 1) == 0);
++      operands[1] = gen_rtx_REG (SImode, REGNO (target) + 1);
++      operands[2] = memory;
++      arm_output_asm_insn (emit, 0, operands, "ldrexd\t%%0, %%1, %%C2");
++    }
+ }
+ 
+ /* Emit a strex{b,h,d, } instruction appropriate for the specified
+@@ -24325,14 +24339,41 @@
+ 		  rtx value,
+ 		  rtx memory)
+ {
+-  const char *suffix = arm_ldrex_suffix (mode);
+-  rtx operands[3];
++  rtx operands[4];
+ 
+   operands[0] = result;
+   operands[1] = value;
+-  operands[2] = memory;
+-  arm_output_asm_insn (emit, 0, operands, "strex%s%s\t%%0, %%1, %%C2", suffix,
+-		       cc);
++  if (mode != DImode)
++    {
++      const char *suffix = arm_ldrex_suffix (mode);
++      operands[2] = memory;
++      arm_output_asm_insn (emit, 0, operands, "strex%s%s\t%%0, %%1, %%C2",
++			  suffix, cc);
++    }
++  else
++    {
++      /* The restrictions on target registers in ARM mode are that the two
++	 registers are consecutive and the first one is even; Thumb is
++	 actually more flexible, but DI should give us this anyway.
++	 Note that the 1st register always gets the lowest word in memory.  */
++      gcc_assert ((REGNO (value) & 1) == 0 || TARGET_THUMB2);
++      operands[2] = gen_rtx_REG (SImode, REGNO (value) + 1);
++      operands[3] = memory;
++      arm_output_asm_insn (emit, 0, operands, "strexd%s\t%%0, %%1, %%2, %%C3",
++			   cc);
++    }
++}
++
++/* Helper to emit an it instruction in Thumb2 mode only; although the assembler
++   will ignore it in ARM mode, emitting it will mess up instruction counts we
++   sometimes keep 'flags' are the extra t's and e's if it's more than one
++   instruction that is conditional.  */
++static void
++arm_output_it (emit_f emit, const char *flags, const char *cond)
++{
++  rtx operands[1]; /* Don't actually use the operand.  */
++  if (TARGET_THUMB2)
++    arm_output_asm_insn (emit, 0, operands, "it%s\t%s", flags, cond);
+ }
+ 
+ /* Helper to emit a two operand instruction.  */
+@@ -24374,7 +24415,7 @@
+ 
+    required_value:
+ 
+-   RTX register or const_int representing the required old_value for
++   RTX register representing the required old_value for
+    the modify to continue, if NULL no comparsion is performed.  */
+ static void
+ arm_output_sync_loop (emit_f emit,
+@@ -24388,7 +24429,13 @@
+ 		      enum attr_sync_op sync_op,
+ 		      int early_barrier_required)
+ {
+-  rtx operands[1];
++  rtx operands[2];
++  /* We'll use the lo for the normal rtx in the none-DI case
++     as well as the least-sig word in the DI case.  */
++  rtx old_value_lo, required_value_lo, new_value_lo, t1_lo;
++  rtx old_value_hi, required_value_hi, new_value_hi, t1_hi;
++
++  bool is_di = mode == DImode;
+ 
+   gcc_assert (t1 != t2);
+ 
+@@ -24399,82 +24446,142 @@
+ 
+   arm_output_ldrex (emit, mode, old_value, memory);
+ 
++  if (is_di)
++    {
++      old_value_lo = gen_lowpart (SImode, old_value);
++      old_value_hi = gen_highpart (SImode, old_value);
++      if (required_value)
++	{
++	  required_value_lo = gen_lowpart (SImode, required_value);
++	  required_value_hi = gen_highpart (SImode, required_value);
++	}
++      else
++	{
++	  /* Silence false potentially unused warning.  */
++	  required_value_lo = NULL_RTX;
++	  required_value_hi = NULL_RTX;
++	}
++      new_value_lo = gen_lowpart (SImode, new_value);
++      new_value_hi = gen_highpart (SImode, new_value);
++      t1_lo = gen_lowpart (SImode, t1);
++      t1_hi = gen_highpart (SImode, t1);
++    }
++  else
++    {
++      old_value_lo = old_value;
++      new_value_lo = new_value;
++      required_value_lo = required_value;
++      t1_lo = t1;
++
++      /* Silence false potentially unused warning.  */
++      t1_hi = NULL_RTX;
++      new_value_hi = NULL_RTX;
++      required_value_hi = NULL_RTX;
++      old_value_hi = NULL_RTX;
++    }
++
+   if (required_value)
+     {
+-      rtx operands[2];
++      operands[0] = old_value_lo;
++      operands[1] = required_value_lo;
+ 
+-      operands[0] = old_value;
+-      operands[1] = required_value;
+       arm_output_asm_insn (emit, 0, operands, "cmp\t%%0, %%1");
++      if (is_di)
++        {
++          arm_output_it (emit, "", "eq");
++          arm_output_op2 (emit, "cmpeq", old_value_hi, required_value_hi);
++        }
+       arm_output_asm_insn (emit, 0, operands, "bne\t%sLSYB%%=", LOCAL_LABEL_PREFIX);
+     }
+ 
+   switch (sync_op)
+     {
+     case SYNC_OP_ADD:
+-      arm_output_op3 (emit, "add", t1, old_value, new_value);
++      arm_output_op3 (emit, is_di ? "adds" : "add",
++		      t1_lo, old_value_lo, new_value_lo);
++      if (is_di)
++	arm_output_op3 (emit, "adc", t1_hi, old_value_hi, new_value_hi);
+       break;
+ 
+     case SYNC_OP_SUB:
+-      arm_output_op3 (emit, "sub", t1, old_value, new_value);
++      arm_output_op3 (emit, is_di ? "subs" : "sub",
++		      t1_lo, old_value_lo, new_value_lo);
++      if (is_di)
++	arm_output_op3 (emit, "sbc", t1_hi, old_value_hi, new_value_hi);
+       break;
+ 
+     case SYNC_OP_IOR:
+-      arm_output_op3 (emit, "orr", t1, old_value, new_value);
++      arm_output_op3 (emit, "orr", t1_lo, old_value_lo, new_value_lo);
++      if (is_di)
++	arm_output_op3 (emit, "orr", t1_hi, old_value_hi, new_value_hi);
+       break;
+ 
+     case SYNC_OP_XOR:
+-      arm_output_op3 (emit, "eor", t1, old_value, new_value);
++      arm_output_op3 (emit, "eor", t1_lo, old_value_lo, new_value_lo);
++      if (is_di)
++	arm_output_op3 (emit, "eor", t1_hi, old_value_hi, new_value_hi);
+       break;
+ 
+     case SYNC_OP_AND:
+-      arm_output_op3 (emit,"and", t1, old_value, new_value);
++      arm_output_op3 (emit,"and", t1_lo, old_value_lo, new_value_lo);
++      if (is_di)
++	arm_output_op3 (emit, "and", t1_hi, old_value_hi, new_value_hi);
+       break;
+ 
+     case SYNC_OP_NAND:
+-      arm_output_op3 (emit, "and", t1, old_value, new_value);
+-      arm_output_op2 (emit, "mvn", t1, t1);
++      arm_output_op3 (emit, "and", t1_lo, old_value_lo, new_value_lo);
++      if (is_di)
++	arm_output_op3 (emit, "and", t1_hi, old_value_hi, new_value_hi);
++      arm_output_op2 (emit, "mvn", t1_lo, t1_lo);
++      if (is_di)
++	arm_output_op2 (emit, "mvn", t1_hi, t1_hi);
+       break;
+ 
+     case SYNC_OP_NONE:
+       t1 = new_value;
++      t1_lo = new_value_lo;
++      if (is_di)
++	t1_hi = new_value_hi;
+       break;
+     }
+ 
++  /* Note that the result of strex is a 0/1 flag that's always 1 register.  */
+   if (t2)
+     {
+-       arm_output_strex (emit, mode, "", t2, t1, memory);
+-       operands[0] = t2;
+-       arm_output_asm_insn (emit, 0, operands, "teq\t%%0, #0");
+-       arm_output_asm_insn (emit, 0, operands, "bne\t%sLSYT%%=",
+-			    LOCAL_LABEL_PREFIX);
++      arm_output_strex (emit, mode, "", t2, t1, memory);
++      operands[0] = t2;
++      arm_output_asm_insn (emit, 0, operands, "teq\t%%0, #0");
++      arm_output_asm_insn (emit, 0, operands, "bne\t%sLSYT%%=",
++			   LOCAL_LABEL_PREFIX);
+     }
+   else
+     {
+       /* Use old_value for the return value because for some operations
+ 	 the old_value can easily be restored.  This saves one register.  */
+-      arm_output_strex (emit, mode, "", old_value, t1, memory);
+-      operands[0] = old_value;
++      arm_output_strex (emit, mode, "", old_value_lo, t1, memory);
++      operands[0] = old_value_lo;
+       arm_output_asm_insn (emit, 0, operands, "teq\t%%0, #0");
+       arm_output_asm_insn (emit, 0, operands, "bne\t%sLSYT%%=",
+ 			   LOCAL_LABEL_PREFIX);
+ 
++      /* Note that we only used the _lo half of old_value as a temporary
++	 so in DI we don't have to restore the _hi part.  */
+       switch (sync_op)
+ 	{
+ 	case SYNC_OP_ADD:
+-	  arm_output_op3 (emit, "sub", old_value, t1, new_value);
++	  arm_output_op3 (emit, "sub", old_value_lo, t1_lo, new_value_lo);
+ 	  break;
+ 
+ 	case SYNC_OP_SUB:
+-	  arm_output_op3 (emit, "add", old_value, t1, new_value);
++	  arm_output_op3 (emit, "add", old_value_lo, t1_lo, new_value_lo);
+ 	  break;
+ 
+ 	case SYNC_OP_XOR:
+-	  arm_output_op3 (emit, "eor", old_value, t1, new_value);
++	  arm_output_op3 (emit, "eor", old_value_lo, t1_lo, new_value_lo);
+ 	  break;
+ 
+ 	case SYNC_OP_NONE:
+-	  arm_output_op2 (emit, "mov", old_value, required_value);
++	  arm_output_op2 (emit, "mov", old_value_lo, required_value_lo);
+ 	  break;
+ 
+ 	default:
+@@ -24482,8 +24589,11 @@
+ 	}
+     }
+ 
++  /* Note: label is before barrier so that in cmp failure case we still get
++     a barrier to stop subsequent loads floating upwards past the ldrex
++     PR target/48126.  */
++  arm_output_asm_insn (emit, 1, operands, "%sLSYB%%=:", LOCAL_LABEL_PREFIX);
+   arm_process_output_memory_barrier (emit, NULL);
+-  arm_output_asm_insn (emit, 1, operands, "%sLSYB%%=:", LOCAL_LABEL_PREFIX);
+ }
+ 
+ static rtx
+@@ -24577,7 +24687,7 @@
+     target = gen_reg_rtx (mode);
+ 
+   memory = arm_legitimize_sync_memory (memory);
+-  if (mode != SImode)
++  if (mode != SImode && mode != DImode)
+     {
+       rtx load_temp = gen_reg_rtx (SImode);
+ 
+
+=== modified file 'gcc/config/arm/arm.h'
+--- old/gcc/config/arm/arm.h	2011-11-21 01:45:54 +0000
++++ new/gcc/config/arm/arm.h	2011-11-28 15:07:01 +0000
+@@ -300,7 +300,8 @@
+ #define TARGET_HAVE_DMB		(arm_arch7)
+ 
+ /* Nonzero if this chip implements a memory barrier via CP15.  */
+-#define TARGET_HAVE_DMB_MCR	(arm_arch6k && ! TARGET_HAVE_DMB)
++#define TARGET_HAVE_DMB_MCR	(arm_arch6 && ! TARGET_HAVE_DMB \
++				 && ! TARGET_THUMB1)
+ 
+ /* Nonzero if this chip implements a memory barrier instruction.  */
+ #define TARGET_HAVE_MEMORY_BARRIER (TARGET_HAVE_DMB || TARGET_HAVE_DMB_MCR)
+@@ -308,8 +309,12 @@
+ /* Nonzero if this chip supports ldrex and strex */
+ #define TARGET_HAVE_LDREX	((arm_arch6 && TARGET_ARM) || arm_arch7)
+ 
+-/* Nonzero if this chip supports ldrex{bhd} and strex{bhd}.  */
+-#define TARGET_HAVE_LDREXBHD	((arm_arch6k && TARGET_ARM) || arm_arch7)
++/* Nonzero if this chip supports ldrex{bh} and strex{bh}.  */
++#define TARGET_HAVE_LDREXBH	((arm_arch6k && TARGET_ARM) || arm_arch7)
++
++/* Nonzero if this chip supports ldrexd and strexd.  */
++#define TARGET_HAVE_LDREXD	(((arm_arch6k && TARGET_ARM) || arm_arch7) \
++				 && arm_arch_notm)
+ 
+ /* Nonzero if integer division instructions supported.  */
+ #define TARGET_IDIV		((TARGET_ARM && arm_arch_arm_hwdiv) \
+
+=== modified file 'gcc/config/arm/iterators.md'
+--- old/gcc/config/arm/iterators.md	2011-10-23 13:33:07 +0000
++++ new/gcc/config/arm/iterators.md	2011-11-28 15:07:01 +0000
+@@ -33,6 +33,15 @@
+ ;; A list of integer modes that are up to one word long
+ (define_mode_iterator QHSI [QI HI SI])
+ 
++;; A list of integer modes that are less than a word
++(define_mode_iterator NARROW [QI HI])
++
++;; A list of all the integer modes upto 64bit
++(define_mode_iterator QHSD [QI HI SI DI])
++
++;; A list of the 32bit and 64bit integer modes
++(define_mode_iterator SIDI [SI DI])
++
+ ;; Integer element sizes implemented by IWMMXT.
+ (define_mode_iterator VMMX [V2SI V4HI V8QI])
+ 
+
+=== added file 'gcc/config/arm/linux-atomic-64bit.c'
+--- old/gcc/config/arm/linux-atomic-64bit.c	1970-01-01 00:00:00 +0000
++++ new/gcc/config/arm/linux-atomic-64bit.c	2011-10-14 15:50:44 +0000
+@@ -0,0 +1,166 @@
++/* 64bit Linux-specific atomic operations for ARM EABI.
++   Copyright (C) 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
++   Based on linux-atomic.c
++
++   64 bit additions david.gilbert@linaro.org
++
++This file is part of GCC.
++
++GCC is free software; you can redistribute it and/or modify it under
++the terms of the GNU General Public License as published by the Free
++Software Foundation; either version 3, or (at your option) any later
++version.
++
++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
++WARRANTY; without even the implied warranty of MERCHANTABILITY or
++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
++for more details.
++
++Under Section 7 of GPL version 3, you are granted additional
++permissions described in the GCC Runtime Library Exception, version
++3.1, as published by the Free Software Foundation.
++
++You should have received a copy of the GNU General Public License and
++a copy of the GCC Runtime Library Exception along with this program;
++see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
++<http://www.gnu.org/licenses/>.  */
++
++/* 64bit helper functions for atomic operations; the compiler will
++   call these when the code is compiled for a CPU without ldrexd/strexd.
++   (If the CPU had those then the compiler inlines the operation).
++
++   These helpers require a kernel helper that's only present on newer
++   kernels; we check for that in an init section and bail out rather
++   unceremoneously.  */
++
++extern unsigned int __write (int fd, const void *buf, unsigned int count);
++extern void abort (void);
++
++/* Kernel helper for compare-and-exchange.  */
++typedef int (__kernel_cmpxchg64_t) (const long long* oldval,
++					const long long* newval,
++					long long *ptr);
++#define __kernel_cmpxchg64 (*(__kernel_cmpxchg64_t *) 0xffff0f60)
++
++/* Kernel helper page version number.  */
++#define __kernel_helper_version (*(unsigned int *)0xffff0ffc)
++
++/* Check that the kernel has a new enough version at load.  */
++static void __check_for_sync8_kernelhelper (void)
++{
++  if (__kernel_helper_version < 5)
++    {
++      const char err[] = "A newer kernel is required to run this binary. "
++				"(__kernel_cmpxchg64 helper)\n";
++      /* At this point we need a way to crash with some information
++	 for the user - I'm not sure I can rely on much else being
++	 available at this point, so do the same as generic-morestack.c
++	 write () and abort ().  */
++      __write (2 /* stderr.  */, err, sizeof (err));
++      abort ();
++    }
++};
++
++static void (*__sync8_kernelhelper_inithook[]) (void)
++		__attribute__ ((used, section (".init_array"))) = {
++  &__check_for_sync8_kernelhelper
++};
++
++#define HIDDEN __attribute__ ((visibility ("hidden")))
++
++#define FETCH_AND_OP_WORD64(OP, PFX_OP, INF_OP)			\
++  long long HIDDEN						\
++  __sync_fetch_and_##OP##_8 (long long *ptr, long long val)	\
++  {								\
++    int failure;						\
++    long long tmp,tmp2;						\
++								\
++    do {							\
++      tmp = *ptr;						\
++      tmp2 = PFX_OP (tmp INF_OP val);				\
++      failure = __kernel_cmpxchg64 (&tmp, &tmp2, ptr);		\
++    } while (failure != 0);					\
++								\
++    return tmp;							\
++  }
++
++FETCH_AND_OP_WORD64 (add,   , +)
++FETCH_AND_OP_WORD64 (sub,   , -)
++FETCH_AND_OP_WORD64 (or,    , |)
++FETCH_AND_OP_WORD64 (and,   , &)
++FETCH_AND_OP_WORD64 (xor,   , ^)
++FETCH_AND_OP_WORD64 (nand, ~, &)
++
++#define NAME_oldval(OP, WIDTH) __sync_fetch_and_##OP##_##WIDTH
++#define NAME_newval(OP, WIDTH) __sync_##OP##_and_fetch_##WIDTH
++
++/* Implement both __sync_<op>_and_fetch and __sync_fetch_and_<op> for
++   subword-sized quantities.  */
++
++#define OP_AND_FETCH_WORD64(OP, PFX_OP, INF_OP)			\
++  long long HIDDEN						\
++  __sync_##OP##_and_fetch_8 (long long *ptr, long long val)	\
++  {								\
++    int failure;						\
++    long long tmp,tmp2;						\
++								\
++    do {							\
++      tmp = *ptr;						\
++      tmp2 = PFX_OP (tmp INF_OP val);				\
++      failure = __kernel_cmpxchg64 (&tmp, &tmp2, ptr);		\
++    } while (failure != 0);					\
++								\
++    return tmp2;						\
++  }
++
++OP_AND_FETCH_WORD64 (add,   , +)
++OP_AND_FETCH_WORD64 (sub,   , -)
++OP_AND_FETCH_WORD64 (or,    , |)
++OP_AND_FETCH_WORD64 (and,   , &)
++OP_AND_FETCH_WORD64 (xor,   , ^)
++OP_AND_FETCH_WORD64 (nand, ~, &)
++
++long long HIDDEN
++__sync_val_compare_and_swap_8 (long long *ptr, long long oldval,
++				long long newval)
++{
++  int failure;
++  long long actual_oldval;
++
++  while (1)
++    {
++      actual_oldval = *ptr;
++
++      if (__builtin_expect (oldval != actual_oldval, 0))
++	return actual_oldval;
++
++      failure = __kernel_cmpxchg64 (&actual_oldval, &newval, ptr);
++
++      if (__builtin_expect (!failure, 1))
++	return oldval;
++    }
++}
++
++typedef unsigned char bool;
++
++bool HIDDEN
++__sync_bool_compare_and_swap_8 (long long *ptr, long long oldval,
++				 long long newval)
++{
++  int failure = __kernel_cmpxchg64 (&oldval, &newval, ptr);
++  return (failure == 0);
++}
++
++long long HIDDEN
++__sync_lock_test_and_set_8 (long long *ptr, long long val)
++{
++  int failure;
++  long long oldval;
++
++  do {
++    oldval = *ptr;
++    failure = __kernel_cmpxchg64 (&oldval, &val, ptr);
++  } while (failure != 0);
++
++  return oldval;
++}
+
+=== modified file 'gcc/config/arm/linux-atomic.c'
+--- old/gcc/config/arm/linux-atomic.c	2011-01-03 20:52:22 +0000
++++ new/gcc/config/arm/linux-atomic.c	2011-10-14 15:50:44 +0000
+@@ -32,8 +32,8 @@
+ #define __kernel_dmb (*(__kernel_dmb_t *) 0xffff0fa0)
+ 
+ /* Note: we implement byte, short and int versions of atomic operations using
+-   the above kernel helpers, but there is no support for "long long" (64-bit)
+-   operations as yet.  */
++   the above kernel helpers; see linux-atomic-64bit.c for "long long" (64-bit)
++   operations.  */
+ 
+ #define HIDDEN __attribute__ ((visibility ("hidden")))
+ 
+@@ -273,6 +273,7 @@
+     *ptr = 0;								\
+   }
+ 
++SYNC_LOCK_RELEASE (long long,   8)
+ SYNC_LOCK_RELEASE (int,   4)
+ SYNC_LOCK_RELEASE (short, 2)
+ SYNC_LOCK_RELEASE (char,  1)
+
+=== modified file 'gcc/config/arm/sync.md'
+--- old/gcc/config/arm/sync.md	2010-12-31 13:25:33 +0000
++++ new/gcc/config/arm/sync.md	2011-10-14 15:47:15 +0000
+@@ -1,6 +1,7 @@
+ ;; Machine description for ARM processor synchronization primitives.
+ ;; Copyright (C) 2010 Free Software Foundation, Inc.
+ ;; Written by Marcus Shawcroft (marcus.shawcroft@arm.com)
++;; 64bit Atomics by Dave Gilbert (david.gilbert@linaro.org)
+ ;;
+ ;; This file is part of GCC.
+ ;;
+@@ -33,31 +34,24 @@
+   MEM_VOLATILE_P (operands[0]) = 1;
+ })
+ 
+-(define_expand "sync_compare_and_swapsi"
+-  [(set (match_operand:SI 0 "s_register_operand")
+-        (unspec_volatile:SI [(match_operand:SI 1 "memory_operand")
+-			     (match_operand:SI 2 "s_register_operand")
+-			     (match_operand:SI 3 "s_register_operand")]
+-			     VUNSPEC_SYNC_COMPARE_AND_SWAP))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omrn;
+-    generator.u.omrn = gen_arm_sync_compare_and_swapsi;
+-    arm_expand_sync (SImode, &generator, operands[0], operands[1], operands[2],
+-                     operands[3]);
+-    DONE;
+-  })
+ 
+-(define_mode_iterator NARROW [QI HI])
++(define_mode_attr sync_predtab [(SI "TARGET_HAVE_LDREX &&
++					TARGET_HAVE_MEMORY_BARRIER")
++				(QI "TARGET_HAVE_LDREXBH &&
++					TARGET_HAVE_MEMORY_BARRIER")
++				(HI "TARGET_HAVE_LDREXBH &&
++					TARGET_HAVE_MEMORY_BARRIER")
++				(DI "TARGET_HAVE_LDREXD &&
++					ARM_DOUBLEWORD_ALIGN &&
++					TARGET_HAVE_MEMORY_BARRIER")])
+ 
+ (define_expand "sync_compare_and_swap<mode>"
+-  [(set (match_operand:NARROW 0 "s_register_operand")
+-        (unspec_volatile:NARROW [(match_operand:NARROW 1 "memory_operand")
+-			     (match_operand:NARROW 2 "s_register_operand")
+-			     (match_operand:NARROW 3 "s_register_operand")]
++  [(set (match_operand:QHSD 0 "s_register_operand")
++        (unspec_volatile:QHSD [(match_operand:QHSD 1 "memory_operand")
++			     (match_operand:QHSD 2 "s_register_operand")
++			     (match_operand:QHSD 3 "s_register_operand")]
+ 			     VUNSPEC_SYNC_COMPARE_AND_SWAP))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omrn;
+@@ -67,25 +61,11 @@
+     DONE;
+   })
+ 
+-(define_expand "sync_lock_test_and_setsi"
+-  [(match_operand:SI 0 "s_register_operand")
+-   (match_operand:SI 1 "memory_operand")
+-   (match_operand:SI 2 "s_register_operand")]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_lock_test_and_setsi;
+-    arm_expand_sync (SImode, &generator, operands[0], operands[1], NULL,
+-                     operands[2]);
+-    DONE;
+-  })
+-
+ (define_expand "sync_lock_test_and_set<mode>"
+-  [(match_operand:NARROW 0 "s_register_operand")
+-   (match_operand:NARROW 1 "memory_operand")
+-   (match_operand:NARROW 2 "s_register_operand")]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "s_register_operand")
++   (match_operand:QHSD 1 "memory_operand")
++   (match_operand:QHSD 2 "s_register_operand")]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+@@ -115,51 +95,25 @@
+ 				(plus "*")
+ 				(minus "*")])
+ 
+-(define_expand "sync_<sync_optab>si"
+-  [(match_operand:SI 0 "memory_operand")
+-   (match_operand:SI 1 "s_register_operand")
+-   (syncop:SI (match_dup 0) (match_dup 1))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_new_<sync_optab>si;
+-    arm_expand_sync (SImode, &generator, NULL, operands[0], NULL, operands[1]);
+-    DONE;
+-  })
+-
+-(define_expand "sync_nandsi"
+-  [(match_operand:SI 0 "memory_operand")
+-   (match_operand:SI 1 "s_register_operand")
+-   (not:SI (and:SI (match_dup 0) (match_dup 1)))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_new_nandsi;
+-    arm_expand_sync (SImode, &generator, NULL, operands[0], NULL, operands[1]);
+-    DONE;
+-  })
+-
+ (define_expand "sync_<sync_optab><mode>"
+-  [(match_operand:NARROW 0 "memory_operand")
+-   (match_operand:NARROW 1 "s_register_operand")
+-   (syncop:NARROW (match_dup 0) (match_dup 1))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "memory_operand")
++   (match_operand:QHSD 1 "s_register_operand")
++   (syncop:QHSD (match_dup 0) (match_dup 1))]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+     generator.u.omn = gen_arm_sync_new_<sync_optab><mode>;
+     arm_expand_sync (<MODE>mode, &generator, NULL, operands[0], NULL,
+-    		     operands[1]);
++		     operands[1]);
+     DONE;
+   })
+ 
+ (define_expand "sync_nand<mode>"
+-  [(match_operand:NARROW 0 "memory_operand")
+-   (match_operand:NARROW 1 "s_register_operand")
+-   (not:NARROW (and:NARROW (match_dup 0) (match_dup 1)))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "memory_operand")
++   (match_operand:QHSD 1 "s_register_operand")
++   (not:QHSD (and:QHSD (match_dup 0) (match_dup 1)))]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+@@ -169,57 +123,27 @@
+     DONE;
+   })
+ 
+-(define_expand "sync_new_<sync_optab>si"
+-  [(match_operand:SI 0 "s_register_operand")
+-   (match_operand:SI 1 "memory_operand")
+-   (match_operand:SI 2 "s_register_operand")
+-   (syncop:SI (match_dup 1) (match_dup 2))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_new_<sync_optab>si;
+-    arm_expand_sync (SImode, &generator, operands[0], operands[1], NULL,
+-                     operands[2]);
+-    DONE;
+-  })
+-
+-(define_expand "sync_new_nandsi"
+-  [(match_operand:SI 0 "s_register_operand")
+-   (match_operand:SI 1 "memory_operand")
+-   (match_operand:SI 2 "s_register_operand")
+-   (not:SI (and:SI (match_dup 1) (match_dup 2)))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_new_nandsi;
+-    arm_expand_sync (SImode, &generator, operands[0], operands[1], NULL,
+-    		     operands[2]);
+-    DONE;
+-  })
+-
+ (define_expand "sync_new_<sync_optab><mode>"
+-  [(match_operand:NARROW 0 "s_register_operand")
+-   (match_operand:NARROW 1 "memory_operand")
+-   (match_operand:NARROW 2 "s_register_operand")
+-   (syncop:NARROW (match_dup 1) (match_dup 2))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "s_register_operand")
++   (match_operand:QHSD 1 "memory_operand")
++   (match_operand:QHSD 2 "s_register_operand")
++   (syncop:QHSD (match_dup 1) (match_dup 2))]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+     generator.u.omn = gen_arm_sync_new_<sync_optab><mode>;
+     arm_expand_sync (<MODE>mode, &generator, operands[0], operands[1],
+-    		     NULL, operands[2]);
++		     NULL, operands[2]);
+     DONE;
+   })
+ 
+ (define_expand "sync_new_nand<mode>"
+-  [(match_operand:NARROW 0 "s_register_operand")
+-   (match_operand:NARROW 1 "memory_operand")
+-   (match_operand:NARROW 2 "s_register_operand")
+-   (not:NARROW (and:NARROW (match_dup 1) (match_dup 2)))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "s_register_operand")
++   (match_operand:QHSD 1 "memory_operand")
++   (match_operand:QHSD 2 "s_register_operand")
++   (not:QHSD (and:QHSD (match_dup 1) (match_dup 2)))]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+@@ -229,57 +153,27 @@
+     DONE;
+   });
+ 
+-(define_expand "sync_old_<sync_optab>si"
+-  [(match_operand:SI 0 "s_register_operand")
+-   (match_operand:SI 1 "memory_operand")
+-   (match_operand:SI 2 "s_register_operand")
+-   (syncop:SI (match_dup 1) (match_dup 2))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_old_<sync_optab>si;
+-    arm_expand_sync (SImode, &generator, operands[0], operands[1], NULL,
+-                     operands[2]);
+-    DONE;
+-  })
+-
+-(define_expand "sync_old_nandsi"
+-  [(match_operand:SI 0 "s_register_operand")
+-   (match_operand:SI 1 "memory_operand")
+-   (match_operand:SI 2 "s_register_operand")
+-   (not:SI (and:SI (match_dup 1) (match_dup 2)))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    struct arm_sync_generator generator;
+-    generator.op = arm_sync_generator_omn;
+-    generator.u.omn = gen_arm_sync_old_nandsi;
+-    arm_expand_sync (SImode, &generator, operands[0], operands[1], NULL,
+-                     operands[2]);
+-    DONE;
+-  })
+-
+ (define_expand "sync_old_<sync_optab><mode>"
+-  [(match_operand:NARROW 0 "s_register_operand")
+-   (match_operand:NARROW 1 "memory_operand")
+-   (match_operand:NARROW 2 "s_register_operand")
+-   (syncop:NARROW (match_dup 1) (match_dup 2))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "s_register_operand")
++   (match_operand:QHSD 1 "memory_operand")
++   (match_operand:QHSD 2 "s_register_operand")
++   (syncop:QHSD (match_dup 1) (match_dup 2))]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+     generator.u.omn = gen_arm_sync_old_<sync_optab><mode>;
+     arm_expand_sync (<MODE>mode, &generator, operands[0], operands[1],
+-    		     NULL, operands[2]);
++		     NULL, operands[2]);
+     DONE;
+   })
+ 
+ (define_expand "sync_old_nand<mode>"
+-  [(match_operand:NARROW 0 "s_register_operand")
+-   (match_operand:NARROW 1 "memory_operand")
+-   (match_operand:NARROW 2 "s_register_operand")
+-   (not:NARROW (and:NARROW (match_dup 1) (match_dup 2)))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  [(match_operand:QHSD 0 "s_register_operand")
++   (match_operand:QHSD 1 "memory_operand")
++   (match_operand:QHSD 2 "s_register_operand")
++   (not:QHSD (and:QHSD (match_dup 1) (match_dup 2)))]
++  "<sync_predtab>"
+   {
+     struct arm_sync_generator generator;
+     generator.op = arm_sync_generator_omn;
+@@ -289,22 +183,22 @@
+     DONE;
+   })
+ 
+-(define_insn "arm_sync_compare_and_swapsi"
+-  [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (unspec_volatile:SI
+-	  [(match_operand:SI 1 "arm_sync_memory_operand" "+Q")
+-   	   (match_operand:SI 2 "s_register_operand" "r")
+-	   (match_operand:SI 3 "s_register_operand" "r")]
+-	  VUNSPEC_SYNC_COMPARE_AND_SWAP))
+-   (set (match_dup 1) (unspec_volatile:SI [(match_dup 2)]
++(define_insn "arm_sync_compare_and_swap<mode>"
++  [(set (match_operand:SIDI 0 "s_register_operand" "=&r")
++        (unspec_volatile:SIDI
++	 [(match_operand:SIDI 1 "arm_sync_memory_operand" "+Q")
++	  (match_operand:SIDI 2 "s_register_operand" "r")
++	  (match_operand:SIDI 3 "s_register_operand" "r")]
++	 VUNSPEC_SYNC_COMPARE_AND_SWAP))
++   (set (match_dup 1) (unspec_volatile:SIDI [(match_dup 2)]
+                                           VUNSPEC_SYNC_COMPARE_AND_SWAP))
+    (set (reg:CC CC_REGNUM) (unspec_volatile:CC [(match_dup 1)]
+                                                 VUNSPEC_SYNC_COMPARE_AND_SWAP))
+    ]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+-  } 
++  }
+   [(set_attr "sync_result"          "0")
+    (set_attr "sync_memory"          "1")
+    (set_attr "sync_required_value"  "2")
+@@ -318,7 +212,7 @@
+         (zero_extend:SI
+ 	  (unspec_volatile:NARROW
+ 	    [(match_operand:NARROW 1 "arm_sync_memory_operand" "+Q")
+-   	     (match_operand:SI 2 "s_register_operand" "r")
++	     (match_operand:SI 2 "s_register_operand" "r")
+ 	     (match_operand:SI 3 "s_register_operand" "r")]
+ 	    VUNSPEC_SYNC_COMPARE_AND_SWAP)))
+    (set (match_dup 1) (unspec_volatile:NARROW [(match_dup 2)]
+@@ -326,10 +220,10 @@
+    (set (reg:CC CC_REGNUM) (unspec_volatile:CC [(match_dup 1)]
+                                                 VUNSPEC_SYNC_COMPARE_AND_SWAP))
+    ]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+-  } 
++  }
+   [(set_attr "sync_result"          "0")
+    (set_attr "sync_memory"          "1")
+    (set_attr "sync_required_value"  "2")
+@@ -338,18 +232,18 @@
+    (set_attr "conds" "clob")
+    (set_attr "predicable" "no")])
+ 
+-(define_insn "arm_sync_lock_test_and_setsi"
+-  [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (match_operand:SI 1 "arm_sync_memory_operand" "+Q"))
++(define_insn "arm_sync_lock_test_and_set<mode>"
++  [(set (match_operand:SIDI 0 "s_register_operand" "=&r")
++	(match_operand:SIDI 1 "arm_sync_memory_operand" "+Q"))
+    (set (match_dup 1)
+-        (unspec_volatile:SI [(match_operand:SI 2 "s_register_operand" "r")]
+-	                    VUNSPEC_SYNC_LOCK))
++	(unspec_volatile:SIDI [(match_operand:SIDI 2 "s_register_operand" "r")]
++	VUNSPEC_SYNC_LOCK))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+-  } 
++  }
+   [(set_attr "sync_release_barrier" "no")
+    (set_attr "sync_result"          "0")
+    (set_attr "sync_memory"          "1")
+@@ -364,10 +258,10 @@
+         (zero_extend:SI (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q")))
+    (set (match_dup 1)
+         (unspec_volatile:NARROW [(match_operand:SI 2 "s_register_operand" "r")]
+-	                        VUNSPEC_SYNC_LOCK))
++				VUNSPEC_SYNC_LOCK))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+   } 
+@@ -380,22 +274,48 @@
+    (set_attr "conds" "clob")
+    (set_attr "predicable" "no")])
+ 
+-(define_insn "arm_sync_new_<sync_optab>si"
++(define_insn "arm_sync_new_<sync_optab><mode>"
++  [(set (match_operand:SIDI 0 "s_register_operand" "=&r")
++        (unspec_volatile:SIDI [(syncop:SIDI
++			       (match_operand:SIDI 1 "arm_sync_memory_operand" "+Q")
++			       (match_operand:SIDI 2 "s_register_operand" "r"))
++			    ]
++			    VUNSPEC_SYNC_NEW_OP))
++   (set (match_dup 1)
++	(unspec_volatile:SIDI [(match_dup 1) (match_dup 2)]
++			    VUNSPEC_SYNC_NEW_OP))
++   (clobber (reg:CC CC_REGNUM))
++   (clobber (match_scratch:SI 3 "=&r"))]
++  "<sync_predtab>"
++  {
++    return arm_output_sync_insn (insn, operands);
++  }
++  [(set_attr "sync_result"          "0")
++   (set_attr "sync_memory"          "1")
++   (set_attr "sync_new_value"       "2")
++   (set_attr "sync_t1"              "0")
++   (set_attr "sync_t2"              "3")
++   (set_attr "sync_op"              "<sync_optab>")
++   (set_attr "conds" "clob")
++   (set_attr "predicable" "no")])
++
++(define_insn "arm_sync_new_<sync_optab><mode>"
+   [(set (match_operand:SI 0 "s_register_operand" "=&r")
+         (unspec_volatile:SI [(syncop:SI
+-                               (match_operand:SI 1 "arm_sync_memory_operand" "+Q")
+-                               (match_operand:SI 2 "s_register_operand" "r"))
+-	                    ]
+-	                    VUNSPEC_SYNC_NEW_OP))
++			       (zero_extend:SI
++				 (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
++			       (match_operand:SI 2 "s_register_operand" "r"))
++			    ]
++			    VUNSPEC_SYNC_NEW_OP))
+    (set (match_dup 1)
+-        (unspec_volatile:SI [(match_dup 1) (match_dup 2)]
+-	                    VUNSPEC_SYNC_NEW_OP))
++	(unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
++				VUNSPEC_SYNC_NEW_OP))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+-  } 
++  }
+   [(set_attr "sync_result"          "0")
+    (set_attr "sync_memory"          "1")
+    (set_attr "sync_new_value"       "2")
+@@ -405,22 +325,22 @@
+    (set_attr "conds" "clob")
+    (set_attr "predicable" "no")])
+ 
+-(define_insn "arm_sync_new_nandsi"
+-  [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (unspec_volatile:SI [(not:SI (and:SI
+-                               (match_operand:SI 1 "arm_sync_memory_operand" "+Q")
+-                               (match_operand:SI 2 "s_register_operand" "r")))
+-	                    ]
+-	                    VUNSPEC_SYNC_NEW_OP))
++(define_insn "arm_sync_new_nand<mode>"
++  [(set (match_operand:SIDI 0 "s_register_operand" "=&r")
++        (unspec_volatile:SIDI [(not:SIDI (and:SIDI
++			       (match_operand:SIDI 1 "arm_sync_memory_operand" "+Q")
++			       (match_operand:SIDI 2 "s_register_operand" "r")))
++			    ]
++			    VUNSPEC_SYNC_NEW_OP))
+    (set (match_dup 1)
+-        (unspec_volatile:SI [(match_dup 1) (match_dup 2)]
+-	                    VUNSPEC_SYNC_NEW_OP))
++	(unspec_volatile:SIDI [(match_dup 1) (match_dup 2)]
++			    VUNSPEC_SYNC_NEW_OP))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+-  } 
++  }
+   [(set_attr "sync_result"          "0")
+    (set_attr "sync_memory"          "1")
+    (set_attr "sync_new_value"       "2")
+@@ -430,50 +350,24 @@
+    (set_attr "conds" "clob")
+    (set_attr "predicable" "no")])
+ 
+-(define_insn "arm_sync_new_<sync_optab><mode>"
+-  [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (unspec_volatile:SI [(syncop:SI
+-                               (zero_extend:SI
+-			         (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
+-                               (match_operand:SI 2 "s_register_operand" "r"))
+-	                    ]
+-	                    VUNSPEC_SYNC_NEW_OP))
+-   (set (match_dup 1)
+-        (unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
+-	                        VUNSPEC_SYNC_NEW_OP))
+-   (clobber (reg:CC CC_REGNUM))
+-   (clobber (match_scratch:SI 3 "=&r"))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    return arm_output_sync_insn (insn, operands);
+-  } 
+-  [(set_attr "sync_result"          "0")
+-   (set_attr "sync_memory"          "1")
+-   (set_attr "sync_new_value"       "2")
+-   (set_attr "sync_t1"              "0")
+-   (set_attr "sync_t2"              "3")
+-   (set_attr "sync_op"              "<sync_optab>")
+-   (set_attr "conds" "clob")
+-   (set_attr "predicable" "no")])
+-
+ (define_insn "arm_sync_new_nand<mode>"
+   [(set (match_operand:SI 0 "s_register_operand" "=&r")
+         (unspec_volatile:SI
+ 	  [(not:SI
+ 	     (and:SI
+-               (zero_extend:SI	  
+-	         (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
+-               (match_operand:SI 2 "s_register_operand" "r")))
++	       (zero_extend:SI
++		 (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
++	       (match_operand:SI 2 "s_register_operand" "r")))
+ 	  ] VUNSPEC_SYNC_NEW_OP))
+    (set (match_dup 1)
+         (unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
+-	                        VUNSPEC_SYNC_NEW_OP))
++				VUNSPEC_SYNC_NEW_OP))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+-  } 
++  }
+   [(set_attr "sync_result"          "0")
+    (set_attr "sync_memory"          "1")
+    (set_attr "sync_new_value"       "2")
+@@ -483,20 +377,20 @@
+    (set_attr "conds" "clob")
+    (set_attr "predicable" "no")])
+ 
+-(define_insn "arm_sync_old_<sync_optab>si"
+-  [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (unspec_volatile:SI [(syncop:SI
+-                               (match_operand:SI 1 "arm_sync_memory_operand" "+Q")
+-                               (match_operand:SI 2 "s_register_operand" "r"))
+-	                    ]
+-	                    VUNSPEC_SYNC_OLD_OP))
++(define_insn "arm_sync_old_<sync_optab><mode>"
++  [(set (match_operand:SIDI 0 "s_register_operand" "=&r")
++	(unspec_volatile:SIDI [(syncop:SIDI
++			       (match_operand:SIDI 1 "arm_sync_memory_operand" "+Q")
++			       (match_operand:SIDI 2 "s_register_operand" "r"))
++			    ]
++			    VUNSPEC_SYNC_OLD_OP))
+    (set (match_dup 1)
+-        (unspec_volatile:SI [(match_dup 1) (match_dup 2)]
+-	                    VUNSPEC_SYNC_OLD_OP))
++        (unspec_volatile:SIDI [(match_dup 1) (match_dup 2)]
++			      VUNSPEC_SYNC_OLD_OP))
+    (clobber (reg:CC CC_REGNUM))
+-   (clobber (match_scratch:SI 3 "=&r"))
++   (clobber (match_scratch:SIDI 3 "=&r"))
+    (clobber (match_scratch:SI 4 "<sync_clobber>"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+   } 
+@@ -509,47 +403,21 @@
+    (set_attr "conds" "clob")
+    (set_attr "predicable" "no")])
+ 
+-(define_insn "arm_sync_old_nandsi"
+-  [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (unspec_volatile:SI [(not:SI (and:SI
+-                               (match_operand:SI 1 "arm_sync_memory_operand" "+Q")
+-                               (match_operand:SI 2 "s_register_operand" "r")))
+-	                    ]
+-	                    VUNSPEC_SYNC_OLD_OP))
+-   (set (match_dup 1)
+-        (unspec_volatile:SI [(match_dup 1) (match_dup 2)]
+-	                    VUNSPEC_SYNC_OLD_OP))
+-   (clobber (reg:CC CC_REGNUM))
+-   (clobber (match_scratch:SI 3 "=&r"))
+-   (clobber (match_scratch:SI 4 "=&r"))]
+-  "TARGET_HAVE_LDREX && TARGET_HAVE_MEMORY_BARRIER"
+-  {
+-    return arm_output_sync_insn (insn, operands);
+-  } 
+-  [(set_attr "sync_result"          "0")
+-   (set_attr "sync_memory"          "1")
+-   (set_attr "sync_new_value"       "2")
+-   (set_attr "sync_t1"              "3")
+-   (set_attr "sync_t2"              "4")
+-   (set_attr "sync_op"              "nand")
+-   (set_attr "conds" 		    "clob")
+-   (set_attr "predicable" "no")])
+-
+ (define_insn "arm_sync_old_<sync_optab><mode>"
+   [(set (match_operand:SI 0 "s_register_operand" "=&r")
+         (unspec_volatile:SI [(syncop:SI
+-                               (zero_extend:SI
+-			         (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
+-                               (match_operand:SI 2 "s_register_operand" "r"))
+-	                    ]
+-	                    VUNSPEC_SYNC_OLD_OP))
++			       (zero_extend:SI
++				 (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
++			       (match_operand:SI 2 "s_register_operand" "r"))
++			    ]
++			    VUNSPEC_SYNC_OLD_OP))
+    (set (match_dup 1)
+-        (unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
+-	                    VUNSPEC_SYNC_OLD_OP))
++	(unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
++			    VUNSPEC_SYNC_OLD_OP))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))
+    (clobber (match_scratch:SI 4 "<sync_clobber>"))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+   } 
+@@ -563,20 +431,46 @@
+    (set_attr "predicable" "no")])
+ 
+ (define_insn "arm_sync_old_nand<mode>"
++  [(set (match_operand:SIDI 0 "s_register_operand" "=&r")
++	(unspec_volatile:SIDI [(not:SIDI (and:SIDI
++			       (match_operand:SIDI 1 "arm_sync_memory_operand" "+Q")
++			       (match_operand:SIDI 2 "s_register_operand" "r")))
++			    ]
++			    VUNSPEC_SYNC_OLD_OP))
++   (set (match_dup 1)
++        (unspec_volatile:SIDI [(match_dup 1) (match_dup 2)]
++	                    VUNSPEC_SYNC_OLD_OP))
++   (clobber (reg:CC CC_REGNUM))
++   (clobber (match_scratch:SIDI 3 "=&r"))
++   (clobber (match_scratch:SI 4 "=&r"))]
++  "<sync_predtab>"
++  {
++    return arm_output_sync_insn (insn, operands);
++  } 
++  [(set_attr "sync_result"          "0")
++   (set_attr "sync_memory"          "1")
++   (set_attr "sync_new_value"       "2")
++   (set_attr "sync_t1"              "3")
++   (set_attr "sync_t2"              "4")
++   (set_attr "sync_op"              "nand")
++   (set_attr "conds" 		    "clob")
++   (set_attr "predicable" "no")])
++
++(define_insn "arm_sync_old_nand<mode>"
+   [(set (match_operand:SI 0 "s_register_operand" "=&r")
+-        (unspec_volatile:SI [(not:SI (and:SI
+-                               (zero_extend:SI
+-			         (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
+-                               (match_operand:SI 2 "s_register_operand" "r")))
+-	                    ]
+-	                    VUNSPEC_SYNC_OLD_OP))
++	(unspec_volatile:SI [(not:SI (and:SI
++			       (zero_extend:SI
++				 (match_operand:NARROW 1 "arm_sync_memory_operand" "+Q"))
++			       (match_operand:SI 2 "s_register_operand" "r")))
++			    ]
++			    VUNSPEC_SYNC_OLD_OP))
+    (set (match_dup 1)
+-        (unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
+-	                    VUNSPEC_SYNC_OLD_OP))
++	(unspec_volatile:NARROW [(match_dup 1) (match_dup 2)]
++			    VUNSPEC_SYNC_OLD_OP))
+    (clobber (reg:CC CC_REGNUM))
+    (clobber (match_scratch:SI 3 "=&r"))
+    (clobber (match_scratch:SI 4 "=&r"))]
+-  "TARGET_HAVE_LDREXBHD && TARGET_HAVE_MEMORY_BARRIER"
++  "<sync_predtab>"
+   {
+     return arm_output_sync_insn (insn, operands);
+   } 
+
+=== modified file 'gcc/config/arm/t-linux-eabi'
+--- old/gcc/config/arm/t-linux-eabi	2011-01-03 20:52:22 +0000
++++ new/gcc/config/arm/t-linux-eabi	2011-10-14 15:50:44 +0000
+@@ -36,3 +36,4 @@
+ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+ 
+ LIB2FUNCS_STATIC_EXTRA += $(srcdir)/config/arm/linux-atomic.c
++LIB2FUNCS_STATIC_EXTRA += $(srcdir)/config/arm/linux-atomic-64bit.c
+
+=== added file 'gcc/testsuite/gcc.dg/di-longlong64-sync-1.c'
+--- old/gcc/testsuite/gcc.dg/di-longlong64-sync-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/di-longlong64-sync-1.c	2011-10-14 15:56:32 +0000
+@@ -0,0 +1,164 @@
++/* { dg-do run } */
++/* { dg-require-effective-target sync_longlong } */
++/* { dg-options "-std=gnu99" } */
++/* { dg-message "note: '__sync_fetch_and_nand' changed semantics in GCC 4.4" "" { target *-*-* } 0 } */
++/* { dg-message "note: '__sync_nand_and_fetch' changed semantics in GCC 4.4" "" { target *-*-* } 0 } */
++
++
++/* Test basic functionality of the intrinsics.  The operations should
++   not be optimized away if no one checks the return values.  */
++
++/* Based on ia64-sync-[12].c, but 1) long on ARM is 32 bit so use long long
++   (an explicit 64bit type maybe a better bet) and 2) Use values that cross
++   the 32bit boundary and cause carries since the actual maths are done as
++   pairs of 32 bit instructions.  */
++
++/* Note: This file is #included by some of the ARM tests.  */
++
++__extension__ typedef __SIZE_TYPE__ size_t;
++
++extern void abort (void);
++extern void *memcpy (void *, const void *, size_t);
++extern int memcmp (const void *, const void *, size_t);
++
++/* Temporary space where the work actually gets done.  */
++static long long AL[24];
++/* Values copied into AL before we start.  */
++static long long init_di[24] = { 0x100000002ll, 0x200000003ll, 0, 1,
++
++				 0x100000002ll, 0x100000002ll,
++				 0x100000002ll, 0x100000002ll,
++
++				 0, 0x1000e0de0000ll,
++				 42 , 0xc001c0de0000ll,
++
++				 -1ll, 0, 0xff00ff0000ll, -1ll,
++
++				 0, 0x1000e0de0000ll,
++				 42 , 0xc001c0de0000ll,
++
++				 -1ll, 0, 0xff00ff0000ll, -1ll};
++/* This is what should be in AL at the end.  */
++static long long test_di[24] = { 0x1234567890ll, 0x1234567890ll, 1, 0,
++
++				 0x100000002ll, 0x100000002ll,
++				 0x100000002ll, 0x100000002ll,
++
++				 1, 0xc001c0de0000ll,
++				 20, 0x1000e0de0000ll,
++
++				 0x300000007ll , 0x500000009ll,
++				 0xf100ff0001ll, ~0xa00000007ll,
++
++				 1, 0xc001c0de0000ll,
++				 20, 0x1000e0de0000ll,
++
++				 0x300000007ll , 0x500000009ll,
++				 0xf100ff0001ll, ~0xa00000007ll };
++
++/* First check they work in terms of what they do to memory.  */
++static void
++do_noret_di (void)
++{
++  __sync_val_compare_and_swap (AL+0, 0x100000002ll, 0x1234567890ll);
++  __sync_bool_compare_and_swap (AL+1, 0x200000003ll, 0x1234567890ll);
++  __sync_lock_test_and_set (AL+2, 1);
++  __sync_lock_release (AL+3);
++
++  /* The following tests should not change the value since the
++     original does NOT match.  */
++  __sync_val_compare_and_swap (AL+4, 0x000000002ll, 0x1234567890ll);
++  __sync_val_compare_and_swap (AL+5, 0x100000000ll, 0x1234567890ll);
++  __sync_bool_compare_and_swap (AL+6, 0x000000002ll, 0x1234567890ll);
++  __sync_bool_compare_and_swap (AL+7, 0x100000000ll, 0x1234567890ll);
++
++  __sync_fetch_and_add (AL+8, 1);
++  __sync_fetch_and_add (AL+9, 0xb000e0000000ll); /* + to both halves & carry.  */
++  __sync_fetch_and_sub (AL+10, 22);
++  __sync_fetch_and_sub (AL+11, 0xb000e0000000ll);
++
++  __sync_fetch_and_and (AL+12, 0x300000007ll);
++  __sync_fetch_and_or (AL+13, 0x500000009ll);
++  __sync_fetch_and_xor (AL+14, 0xe00000001ll);
++  __sync_fetch_and_nand (AL+15, 0xa00000007ll);
++
++  /* These should be the same as the fetch_and_* cases except for
++     return value.  */
++  __sync_add_and_fetch (AL+16, 1);
++  /* add to both halves & carry.  */
++  __sync_add_and_fetch (AL+17, 0xb000e0000000ll);
++  __sync_sub_and_fetch (AL+18, 22);
++  __sync_sub_and_fetch (AL+19, 0xb000e0000000ll);
++
++  __sync_and_and_fetch (AL+20, 0x300000007ll);
++  __sync_or_and_fetch (AL+21, 0x500000009ll);
++  __sync_xor_and_fetch (AL+22, 0xe00000001ll);
++  __sync_nand_and_fetch (AL+23, 0xa00000007ll);
++}
++
++/* Now check return values.  */
++static void
++do_ret_di (void)
++{
++  if (__sync_val_compare_and_swap (AL+0, 0x100000002ll, 0x1234567890ll) !=
++	0x100000002ll) abort ();
++  if (__sync_bool_compare_and_swap (AL+1, 0x200000003ll, 0x1234567890ll) !=
++	1) abort ();
++  if (__sync_lock_test_and_set (AL+2, 1) != 0) abort ();
++  __sync_lock_release (AL+3); /* no return value, but keep to match results.  */
++
++  /* The following tests should not change the value since the
++     original does NOT match.  */
++  if (__sync_val_compare_and_swap (AL+4, 0x000000002ll, 0x1234567890ll) !=
++	0x100000002ll) abort ();
++  if (__sync_val_compare_and_swap (AL+5, 0x100000000ll, 0x1234567890ll) !=
++	0x100000002ll) abort ();
++  if (__sync_bool_compare_and_swap (AL+6, 0x000000002ll, 0x1234567890ll) !=
++	0) abort ();
++  if (__sync_bool_compare_and_swap (AL+7, 0x100000000ll, 0x1234567890ll) !=
++	0) abort ();
++
++  if (__sync_fetch_and_add (AL+8, 1) != 0) abort ();
++  if (__sync_fetch_and_add (AL+9, 0xb000e0000000ll) != 0x1000e0de0000ll) abort ();
++  if (__sync_fetch_and_sub (AL+10, 22) != 42) abort ();
++  if (__sync_fetch_and_sub (AL+11, 0xb000e0000000ll) != 0xc001c0de0000ll)
++	abort ();
++
++  if (__sync_fetch_and_and (AL+12, 0x300000007ll) != -1ll) abort ();
++  if (__sync_fetch_and_or (AL+13, 0x500000009ll) != 0) abort ();
++  if (__sync_fetch_and_xor (AL+14, 0xe00000001ll) != 0xff00ff0000ll) abort ();
++  if (__sync_fetch_and_nand (AL+15, 0xa00000007ll) != -1ll) abort ();
++
++  /* These should be the same as the fetch_and_* cases except for
++     return value.  */
++  if (__sync_add_and_fetch (AL+16, 1) != 1) abort ();
++  if (__sync_add_and_fetch (AL+17, 0xb000e0000000ll) != 0xc001c0de0000ll)
++	abort ();
++  if (__sync_sub_and_fetch (AL+18, 22) != 20) abort ();
++  if (__sync_sub_and_fetch (AL+19, 0xb000e0000000ll) != 0x1000e0de0000ll)
++	abort ();
++
++  if (__sync_and_and_fetch (AL+20, 0x300000007ll) != 0x300000007ll) abort ();
++  if (__sync_or_and_fetch (AL+21, 0x500000009ll) != 0x500000009ll) abort ();
++  if (__sync_xor_and_fetch (AL+22, 0xe00000001ll) != 0xf100ff0001ll) abort ();
++  if (__sync_nand_and_fetch (AL+23, 0xa00000007ll) != ~0xa00000007ll) abort ();
++}
++
++int main ()
++{
++  memcpy (AL, init_di, sizeof (init_di));
++
++  do_noret_di ();
++
++  if (memcmp (AL, test_di, sizeof (test_di)))
++    abort ();
++
++  memcpy (AL, init_di, sizeof (init_di));
++
++  do_ret_di ();
++
++  if (memcmp (AL, test_di, sizeof (test_di)))
++    abort ();
++
++  return 0;
++}
+
+=== added file 'gcc/testsuite/gcc.dg/di-sync-multithread.c'
+--- old/gcc/testsuite/gcc.dg/di-sync-multithread.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/di-sync-multithread.c	2011-10-14 15:56:32 +0000
+@@ -0,0 +1,205 @@
++/* { dg-do run } */
++/* { dg-require-effective-target sync_longlong } */
++/* { dg-require-effective-target pthread_h } */
++/* { dg-require-effective-target pthread } */
++/* { dg-options "-pthread -std=gnu99" } */
++
++/* test of long long atomic ops performed in parallel in 3 pthreads
++   david.gilbert@linaro.org */
++
++#include <pthread.h>
++#include <unistd.h>
++
++/*#define DEBUGIT 1 */
++
++#ifdef DEBUGIT
++#include <stdio.h>
++
++#define DOABORT(x,...) {\
++	 fprintf (stderr, x, __VA_ARGS__); fflush (stderr); abort ();\
++	 }
++
++#else
++
++#define DOABORT(x,...) abort ();
++
++#endif
++
++/* Passed to each thread to describe which bits it is going to work on.  */
++struct threadwork {
++  unsigned long long count; /* incremented each time the worker loops.  */
++  unsigned int thread;    /* ID */
++  unsigned int addlsb;    /* 8 bit */
++  unsigned int logic1lsb; /* 5 bit */
++  unsigned int logic2lsb; /* 8 bit */
++};
++
++/* The shared word where all the atomic work is done.  */
++static volatile long long workspace;
++
++/* A shared word to tell the workers to quit when non-0.  */
++static long long doquit;
++
++extern void abort (void);
++
++/* Note this test doesn't test the return values much.  */
++void*
++worker (void* data)
++{
++  struct threadwork *tw = (struct threadwork*)data;
++  long long add1bit = 1ll << tw->addlsb;
++  long long logic1bit = 1ll << tw->logic1lsb;
++  long long logic2bit = 1ll << tw->logic2lsb;
++
++  /* Clear the bits we use.  */
++  __sync_and_and_fetch (&workspace, ~(0xffll * add1bit));
++  __sync_fetch_and_and (&workspace, ~(0x1fll * logic1bit));
++  __sync_fetch_and_and (&workspace, ~(0xffll * logic2bit));
++
++  do
++    {
++      long long tmp1, tmp2, tmp3;
++      /* OK, lets try and do some stuff to the workspace - by the end
++         of the main loop our area should be the same as it is now - i.e. 0.  */
++
++      /* Push the arithmetic section upto 128 - one of the threads will
++         case this to carry accross the 32bit boundary.  */
++      for (tmp2 = 0; tmp2 < 64; tmp2++)
++	{
++	  /* Add 2 using the two different adds.  */
++	  tmp1 = __sync_add_and_fetch (&workspace, add1bit);
++	  tmp3 = __sync_fetch_and_add (&workspace, add1bit);
++
++	  /* The value should be the intermediate add value in both cases.  */
++	  if ((tmp1 & (add1bit * 0xff)) != (tmp3 & (add1bit * 0xff)))
++	    DOABORT ("Mismatch of add intermediates on thread %d "
++			"workspace=0x%llx tmp1=0x%llx "
++			"tmp2=0x%llx tmp3=0x%llx\n",
++			 tw->thread, workspace, tmp1, tmp2, tmp3);
++	}
++
++      /* Set the logic bits.  */
++      tmp2=__sync_or_and_fetch (&workspace,
++			  0x1fll * logic1bit | 0xffll * logic2bit);
++
++      /* Check the logic bits are set and the arithmetic value is correct.  */
++      if ((tmp2 & (0x1fll * logic1bit | 0xffll * logic2bit
++			| 0xffll * add1bit))
++	  != (0x1fll * logic1bit | 0xffll * logic2bit | 0x80ll * add1bit))
++	DOABORT ("Midloop check failed on thread %d "
++			"workspace=0x%llx tmp2=0x%llx "
++			"masktmp2=0x%llx expected=0x%llx\n",
++		tw->thread, workspace, tmp2,
++		tmp2 & (0x1fll * logic1bit | 0xffll * logic2bit |
++			 0xffll * add1bit),
++		(0x1fll * logic1bit | 0xffll * logic2bit | 0x80ll * add1bit));
++
++      /* Pull the arithmetic set back down to 0 - again this should cause a
++	 carry across the 32bit boundary in one thread.  */
++
++      for (tmp2 = 0; tmp2 < 64; tmp2++)
++	{
++	  /* Subtract 2 using the two different subs.  */
++	  tmp1=__sync_sub_and_fetch (&workspace, add1bit);
++	  tmp3=__sync_fetch_and_sub (&workspace, add1bit);
++
++	  /* The value should be the intermediate sub value in both cases.  */
++	  if ((tmp1 & (add1bit * 0xff)) != (tmp3 & (add1bit * 0xff)))
++	    DOABORT ("Mismatch of sub intermediates on thread %d "
++			"workspace=0x%llx tmp1=0x%llx "
++			"tmp2=0x%llx tmp3=0x%llx\n",
++			tw->thread, workspace, tmp1, tmp2, tmp3);
++	}
++
++
++      /* Clear the logic bits.  */
++      __sync_fetch_and_xor (&workspace, 0x1fll * logic1bit);
++      tmp3=__sync_and_and_fetch (&workspace, ~(0xffll * logic2bit));
++
++      /* The logic bits and the arithmetic bits should be zero again.  */
++      if (tmp3 & (0x1fll * logic1bit | 0xffll * logic2bit | 0xffll * add1bit))
++	DOABORT ("End of worker loop; bits none 0 on thread %d "
++			"workspace=0x%llx tmp3=0x%llx "
++			"mask=0x%llx maskedtmp3=0x%llx\n",
++		tw->thread, workspace, tmp3, (0x1fll * logic1bit |
++			0xffll * logic2bit | 0xffll * add1bit),
++		tmp3 & (0x1fll * logic1bit | 0xffll * logic2bit | 0xffll * add1bit));
++
++      __sync_add_and_fetch (&tw->count, 1);
++    }
++  while (!__sync_bool_compare_and_swap (&doquit, 1, 1));
++
++  pthread_exit (0);
++}
++
++int
++main ()
++{
++  /* We have 3 threads doing three sets of operations, an 8 bit
++     arithmetic field, a 5 bit logic field and an 8 bit logic
++     field (just to pack them all in).
++
++  6      5       4       4       3       2       1
++  3      6       8       0       2       4       6       8       0
++  |...,...|...,...|...,...|...,...|...,...|...,...|...,...|...,...
++  - T0   --  T1  -- T2   --T2 --  T0  -*- T2-- T1-- T1   -***- T0-
++   logic2  logic2  arith   log2  arith  log1 log1  arith     log1
++
++  */
++  unsigned int t;
++  long long tmp;
++  int err;
++
++  struct threadwork tw[3]={
++    { 0ll, 0, 27, 0, 56 },
++    { 0ll, 1,  8,16, 48 },
++    { 0ll, 2, 40,21, 35 }
++  };
++
++  pthread_t threads[3];
++
++  __sync_lock_release (&doquit);
++
++  /* Get the work space into a known value - All 1's.  */
++  __sync_lock_release (&workspace); /* Now all 0.  */
++  tmp = __sync_val_compare_and_swap (&workspace, 0, -1ll);
++  if (tmp!=0)
++    DOABORT ("Initial __sync_val_compare_and_swap wasn't 0 workspace=0x%llx "
++		"tmp=0x%llx\n", workspace,tmp);
++
++  for (t = 0; t < 3; t++)
++  {
++    err=pthread_create (&threads[t], NULL , worker, &tw[t]);
++    if (err) DOABORT ("pthread_create failed on thread %d with error %d\n",
++	t, err);
++  };
++
++  sleep (5);
++
++  /* Stop please.  */
++  __sync_lock_test_and_set (&doquit, 1ll);
++
++  for (t = 0; t < 3; t++)
++    {
++      err=pthread_join (threads[t], NULL);
++      if (err)
++	DOABORT ("pthread_join failed on thread %d with error %d\n", t, err);
++    };
++
++  __sync_synchronize ();
++
++  /* OK, so all the workers have finished -
++     the workers should have zero'd their workspace, the unused areas
++     should still be 1.  */
++  if (!__sync_bool_compare_and_swap (&workspace, 0x040000e0ll, 0))
++    DOABORT ("End of run workspace mismatch, got %llx\n", workspace);
++
++  /* All the workers should have done some work.  */
++  for (t = 0; t < 3; t++)
++    {
++      if (tw[t].count == 0) DOABORT ("Worker %d gave 0 count\n", t);
++    };
++
++  return 0;
++}
++
+
+=== added file 'gcc/testsuite/gcc.target/arm/di-longlong64-sync-withhelpers.c'
+--- old/gcc/testsuite/gcc.target/arm/di-longlong64-sync-withhelpers.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/di-longlong64-sync-withhelpers.c	2011-10-14 15:56:32 +0000
+@@ -0,0 +1,14 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_arch_v5_ok } */
++/* { dg-options "-std=gnu99" } */
++/* { dg-add-options arm_arch_v5 } */
++/* { dg-message "note: '__sync_fetch_and_nand' changed semantics in GCC 4.4" "" { target *-*-* } 0 } */
++/* { dg-message "note: '__sync_nand_and_fetch' changed semantics in GCC 4.4" "" { target *-*-* } 0 } */
++/* { dg-message "file included" "In file included" { target *-*-* } 0 } */
++
++#include "../../gcc.dg/di-longlong64-sync-1.c"
++
++/* On an old ARM we have no ldrexd or strexd so we have to use helpers.  */
++/* { dg-final { scan-assembler-not "ldrexd" } } */
++/* { dg-final { scan-assembler-not "strexd" } } */
++/* { dg-final { scan-assembler "__sync_" } } */
+
+=== added file 'gcc/testsuite/gcc.target/arm/di-longlong64-sync-withldrexd.c'
+--- old/gcc/testsuite/gcc.target/arm/di-longlong64-sync-withldrexd.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/di-longlong64-sync-withldrexd.c	2011-10-14 15:56:32 +0000
+@@ -0,0 +1,17 @@
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_arm_ok } */
++/* { dg-options "-marm -std=gnu99" } */
++/* { dg-require-effective-target arm_arch_v6k_ok } */
++/* { dg-add-options arm_arch_v6k } */
++/* { dg-message "note: '__sync_fetch_and_nand' changed semantics in GCC 4.4" "" { target *-*-* } 0 } */
++/* { dg-message "note: '__sync_nand_and_fetch' changed semantics in GCC 4.4" "" { target *-*-* } 0 } */
++/* { dg-message "file included" "In file included" { target *-*-* } 0 } */
++
++#include "../../gcc.dg/di-longlong64-sync-1.c"
++
++/* We should be using ldrexd, strexd and no helpers or shorter ldrex.  */
++/* { dg-final { scan-assembler-times "\tldrexd" 46 } } */
++/* { dg-final { scan-assembler-times "\tstrexd" 46 } } */
++/* { dg-final { scan-assembler-not "__sync_" } } */
++/* { dg-final { scan-assembler-not "ldrex\t" } } */
++/* { dg-final { scan-assembler-not "strex\t" } } */
+
+=== modified file 'gcc/testsuite/lib/target-supports.exp'
+--- old/gcc/testsuite/lib/target-supports.exp	2011-11-22 17:10:17 +0000
++++ new/gcc/testsuite/lib/target-supports.exp	2011-11-28 15:07:01 +0000
+@@ -2000,6 +2000,47 @@
+ 		check_effective_target_arm_fp16_ok_nocache]
+ }
+ 
++# Creates a series of routines that return 1 if the given architecture
++# can be selected and a routine to give the flags to select that architecture
++# Note: Extra flags may be added to disable options from newer compilers
++# (Thumb in particular - but others may be added in the future)
++# Usage: /* { dg-require-effective-target arm_arch_v5_ok } */
++#        /* { dg-add-options arm_arch_v5 } */
++foreach { armfunc armflag armdef } { v5 "-march=armv5 -marm" __ARM_ARCH_5__
++				     v6 "-march=armv6" __ARM_ARCH_6__
++				     v6k "-march=armv6k" __ARM_ARCH_6K__
++				     v7a "-march=armv7-a" __ARM_ARCH_7A__ } {
++    eval [string map [list FUNC $armfunc FLAG $armflag DEF $armdef ] {
++	proc check_effective_target_arm_arch_FUNC_ok { } {
++	    if { [ string match "*-marm*" "FLAG" ] &&
++		![check_effective_target_arm_arm_ok] } {
++		return 0
++	    }
++	    return [check_no_compiler_messages arm_arch_FUNC_ok assembly {
++		#if !defined (DEF)
++		#error FOO
++		#endif
++	    } "FLAG" ]
++	}
++
++	proc add_options_for_arm_arch_FUNC { flags } {
++	    return "$flags FLAG"
++	}
++    }]
++}
++
++# Return 1 if this is an ARM target where -marm causes ARM to be
++# used (not Thumb)
++
++proc check_effective_target_arm_arm_ok { } {
++    return [check_no_compiler_messages arm_arm_ok assembly {
++	#if !defined (__arm__) || defined (__thumb__) || defined (__thumb2__)
++	#error FOO
++	#endif
++    } "-marm"]
++}
++
++
+ # Return 1 is this is an ARM target where -mthumb causes Thumb-1 to be
+ # used.
+ 
+@@ -3384,6 +3425,31 @@
+     return $et_sync_int_long_saved
+ }
+ 
++# Return 1 if the target supports atomic operations on "long long" and can
++# execute them
++# So far only put checks in for ARM, others may want to add their own
++proc check_effective_target_sync_longlong { } {
++    return [check_runtime sync_longlong_runtime {
++      #include <stdlib.h>
++      int main ()
++      {
++	long long l1;
++
++	if (sizeof (long long) != 8)
++	  exit (1);
++
++      #ifdef __arm__
++	/* Just check for native; checking for kernel fallback is tricky.  */
++	asm volatile ("ldrexd r0,r1, [%0]" : : "r" (&l1) : "r0", "r1");
++      #else
++      # error "Add other suitable archs here"
++      #endif
++
++	exit (0);
++      }
++    } "" ]
++}
++
+ # Return 1 if the target supports atomic operations on "char" and "short".
+ 
+ proc check_effective_target_sync_char_short { } {
+

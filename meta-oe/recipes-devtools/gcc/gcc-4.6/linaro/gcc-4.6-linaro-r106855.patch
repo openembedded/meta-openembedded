@@ -1,0 +1,22 @@
+2012-01-05  Michael Hope  <michael.hope@linaro.org>
+
+	Backport from mainline r182271:
+
+	2011-12-13  Revital Eres  <revital.eres@linaro.org>
+
+	gcc/
+	* modulo-sched.c (mark_loop_unsched): Free bbs.
+
+=== modified file 'gcc/modulo-sched.c'
+--- old/gcc/modulo-sched.c	2011-10-30 05:31:00 +0000
++++ new/gcc/modulo-sched.c	2012-01-05 02:45:23 +0000
+@@ -1204,6 +1204,8 @@
+ 
+   for (i = 0; i < loop->num_nodes; i++)
+     bbs[i]->flags |= BB_DISABLE_SCHEDULE;
++
++  free (bbs);
+ }
+ 
+ /* Return true if all the BBs of the loop are empty except the
+

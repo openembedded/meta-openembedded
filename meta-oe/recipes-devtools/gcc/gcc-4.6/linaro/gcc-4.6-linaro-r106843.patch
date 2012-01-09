@@ -1,0 +1,805 @@
+2011-11-22  Ira Rosen  <ira.rosen@linaro.org>
+ 	Backport from mainline:
+ 
+	2011-11-06  Ira Rosen  <ira.rosen@linaro.org>
+
+	gcc/
+	* tree-vectorizer.h (vectorizable_condition): Add argument.
+	* tree-vect-loop.c (vectorizable_reduction): Fail for condition
+	in SLP.  Update calls to vectorizable_condition.
+	* tree-vect-stmts.c (vect_is_simple_cond): Add basic block info to
+	the arguments.  Pass it to vect_is_simple_use_1.
+	(vectorizable_condition): Add slp_node to the arguments.  Support
+	vectorization of basic blocks.  Fail for reduction in SLP.  Update
+	calls to vect_is_simple_cond and vect_is_simple_use.  Support SLP:
+	call vect_get_slp_defs to get vector operands.
+	(vect_analyze_stmt): Update calls to vectorizable_condition.
+	(vect_transform_stmt): Likewise.
+	* tree-vect-slp.c (vect_create_new_slp_node): Handle COND_EXPR.
+	(vect_get_and_check_slp_defs): Handle COND_EXPR.  Allow pattern
+	def stmts.
+	(vect_build_slp_tree): Handle COND_EXPR.
+	(vect_analyze_slp_instance): Push pattern statements to root node.
+	(vect_get_constant_vectors): Fix comments.  Handle COND_EXPR.
+
+	gcc/testsuite/
+	* gcc.dg/vect/bb-slp-cond-1.c: New test.
+	* gcc.dg/vect/slp-cond-1.c: New test.
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-cond-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-cond-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-cond-1.c	2011-11-20 08:24:08 +0000
+@@ -0,0 +1,46 @@
++/* { dg-require-effective-target vect_condition } */
++
++#include "tree-vect.h"
++
++#define N 128
++
++__attribute__((noinline, noclone)) void
++foo (int *a, int stride)
++{
++  int i;
++
++  for (i = 0; i < N/stride; i++, a += stride)
++   {
++     a[0] = a[0] ? 1 : 5;
++     a[1] = a[1] ? 2 : 6;
++     a[2] = a[2] ? 3 : 7;
++     a[3] = a[3] ? 4 : 8;
++   }
++}
++
++
++int a[N];
++int main ()
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    a[i] = i;
++
++  foo (a, 4);
++
++  for (i = 1; i < N; i++)
++    if (a[i] != i%4 + 1)
++      abort ();
++
++  if (a[0] != 5)
++    abort ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target vect_element_align } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/slp-cond-1.c'
+--- old/gcc/testsuite/gcc.dg/vect/slp-cond-1.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/slp-cond-1.c	2011-11-20 08:24:08 +0000
+@@ -0,0 +1,126 @@
++/* { dg-require-effective-target vect_condition } */
++#include "tree-vect.h"
++
++#define N 32
++int a[N], b[N];
++int d[N], e[N];
++int k[N];
++
++__attribute__((noinline, noclone)) void
++f1 (void)
++{
++  int i;
++  for (i = 0; i < N/4; i++)
++    {
++      k[4*i] = a[4*i] < b[4*i] ? 17 : 0;
++      k[4*i+1] = a[4*i+1] < b[4*i+1] ? 17 : 0;
++      k[4*i+2] = a[4*i+2] < b[4*i+2] ? 17 : 0;
++      k[4*i+3] = a[4*i+3] < b[4*i+3] ? 17 : 0;
++    }
++}
++
++__attribute__((noinline, noclone)) void
++f2 (void)
++{
++  int i;
++  for (i = 0; i < N/2; ++i)
++    {
++      k[2*i] = a[2*i] < b[2*i] ? 0 : 24;
++      k[2*i+1] = a[2*i+1] < b[2*i+1] ? 7 : 4;
++    }
++}
++
++__attribute__((noinline, noclone)) void
++f3 (void)
++{
++  int i;
++  for (i = 0; i < N/2; ++i)
++    {
++      k[2*i] = a[2*i] < b[2*i] ? 51 : 12;
++      k[2*i+1] = a[2*i+1] > b[2*i+1] ? 51 : 12;
++    }
++}
++
++__attribute__((noinline, noclone)) void
++f4 (void)
++{
++  int i;
++  for (i = 0; i < N/2; ++i)
++    {
++      int d0 = d[2*i], e0 = e[2*i];
++      int d1 = d[2*i+1], e1 = e[2*i+1];
++      k[2*i] = a[2*i] >= b[2*i] ? d0 : e0;
++      k[2*i+1] = a[2*i+1] >= b[2*i+1] ? d1 : e1;
++    }
++}
++
++int
++main ()
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      switch (i % 9)
++	{
++	case 0: asm (""); a[i] = - i - 1; b[i] = i + 1; break;
++	case 1: a[i] = 0; b[i] = 0; break;
++	case 2: a[i] = i + 1; b[i] = - i - 1; break;
++	case 3: a[i] = i; b[i] = i + 7; break;
++	case 4: a[i] = i; b[i] = i; break;
++	case 5: a[i] = i + 16; b[i] = i + 3; break;
++	case 6: a[i] = - i - 5; b[i] = - i; break;
++	case 7: a[i] = - i; b[i] = - i; break;
++	case 8: a[i] = - i; b[i] = - i - 7; break;
++	}
++      d[i] = i;
++      e[i] = 2 * i;
++    }
++  f1 ();
++  for (i = 0; i < N; i++)
++    if (k[i] != ((i % 3) == 0 ? 17 : 0))
++      abort ();
++
++  f2 ();
++  for (i = 0; i < N; i++)
++    {
++      switch (i % 9)
++        {
++        case 0:
++	case 6:
++	  if (k[i] != ((i/9 % 2) == 0 ? 0 : 7))
++	    abort ();
++	  break;
++        case 1:
++        case 5:
++        case 7:
++	  if (k[i] != ((i/9 % 2) == 0 ? 4 : 24))
++            abort ();
++          break;
++        case 2:
++        case 4:
++        case 8:
++	  if (k[i] != ((i/9 % 2) == 0 ? 24 : 4))
++            abort ();
++          break;
++        case 3:
++	  if (k[i] != ((i/9 % 2) == 0 ? 7 : 0))
++            abort ();
++          break;
++        }
++    }
++
++  f3 ();
++
++  f4 ();
++  for (i = 0; i < N; i++)
++    if (k[i] != ((i % 3) == 0 ? e[i] : d[i]))
++      abort ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "vectorizing stmts using SLP" 3 "vect" } } */
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/tree-vect-loop.c'
+--- old/gcc/tree-vect-loop.c	2011-11-14 11:38:08 +0000
++++ new/gcc/tree-vect-loop.c	2011-11-20 08:24:08 +0000
+@@ -4087,6 +4087,9 @@
+       gcc_unreachable ();
+     }
+ 
++  if (code == COND_EXPR && slp_node)
++    return false;
++
+   scalar_dest = gimple_assign_lhs (stmt);
+   scalar_type = TREE_TYPE (scalar_dest);
+   if (!POINTER_TYPE_P (scalar_type) && !INTEGRAL_TYPE_P (scalar_type)
+@@ -4161,7 +4164,7 @@
+ 
+   if (code == COND_EXPR)
+     {
+-      if (!vectorizable_condition (stmt, gsi, NULL, ops[reduc_index], 0))
++      if (!vectorizable_condition (stmt, gsi, NULL, ops[reduc_index], 0, NULL))
+         {
+           if (vect_print_dump_info (REPORT_DETAILS))
+             fprintf (vect_dump, "unsupported condition in reduction");
+@@ -4433,7 +4436,7 @@
+           gcc_assert (!slp_node);
+           vectorizable_condition (stmt, gsi, vec_stmt, 
+                                   PHI_RESULT (VEC_index (gimple, phis, 0)), 
+-                                  reduc_index);
++                                  reduc_index, NULL);
+           /* Multiple types are not supported for condition.  */
+           break;
+         }
+
+=== modified file 'gcc/tree-vect-slp.c'
+--- old/gcc/tree-vect-slp.c	2011-11-14 11:38:08 +0000
++++ new/gcc/tree-vect-slp.c	2011-11-21 06:58:40 +0000
+@@ -109,7 +109,11 @@
+   if (is_gimple_call (stmt))
+     nops = gimple_call_num_args (stmt);
+   else if (is_gimple_assign (stmt))
+-    nops = gimple_num_ops (stmt) - 1;
++    {
++      nops = gimple_num_ops (stmt) - 1;
++      if (gimple_assign_rhs_code (stmt) == COND_EXPR)
++	nops = 4;
++    }
+   else
+     return NULL;
+ 
+@@ -190,20 +194,51 @@
+   bool different_types = false;
+   bool pattern = false;
+   slp_oprnd_info oprnd_info, oprnd0_info, oprnd1_info;
++  int op_idx = 1;
++  tree compare_rhs = NULL_TREE, rhs = NULL_TREE;
++  int cond_idx = -1;
+ 
+   if (loop_vinfo)
+     loop = LOOP_VINFO_LOOP (loop_vinfo);
+ 
+   if (is_gimple_call (stmt))
+     number_of_oprnds = gimple_call_num_args (stmt);
++  else if (is_gimple_assign (stmt))
++    {
++      number_of_oprnds = gimple_num_ops (stmt) - 1;
++      if (gimple_assign_rhs_code (stmt) == COND_EXPR)
++	{ 	      
++          number_of_oprnds = 4;
++	  cond_idx = 0;
++	  rhs = gimple_assign_rhs1 (stmt);
++	}	  
++    }
+   else
+-    number_of_oprnds = gimple_num_ops (stmt) - 1;
++    return false;
+ 
+   for (i = 0; i < number_of_oprnds; i++)
+     {
+-      oprnd = gimple_op (stmt, i + 1);
++      if (compare_rhs)
++	oprnd = compare_rhs;
++      else
++        oprnd = gimple_op (stmt, op_idx++);
++
+       oprnd_info = VEC_index (slp_oprnd_info, *oprnds_info, i);
+ 
++      if (-1 < cond_idx && cond_idx < 4)
++	{
++  	  if (compare_rhs)
++	    compare_rhs = NULL_TREE;
++	  else	  
++	    oprnd = TREE_OPERAND (rhs, cond_idx++);
++	}
++		      
++      if (COMPARISON_CLASS_P (oprnd))
++        {
++          compare_rhs = TREE_OPERAND (oprnd, 1);
++          oprnd = TREE_OPERAND (oprnd, 0);
++	}
++
+       if (!vect_is_simple_use (oprnd, loop_vinfo, bb_vinfo, &def_stmt, &def,
+                                &dt)
+ 	  || (!def_stmt && dt != vect_constant_def))
+@@ -243,8 +278,7 @@
+           def_stmt = STMT_VINFO_RELATED_STMT (vinfo_for_stmt (def_stmt));
+           dt = STMT_VINFO_DEF_TYPE (vinfo_for_stmt (def_stmt));
+ 
+-          if (dt == vect_unknown_def_type
+-	      || STMT_VINFO_PATTERN_DEF_STMT (vinfo_for_stmt (def_stmt)))
++          if (dt == vect_unknown_def_type)
+             {
+               if (vect_print_dump_info (REPORT_DETAILS))
+                 fprintf (vect_dump, "Unsupported pattern.");
+@@ -423,6 +457,7 @@
+   VEC (gimple, heap) *stmts = SLP_TREE_SCALAR_STMTS (*node);
+   gimple stmt = VEC_index (gimple, stmts, 0);
+   enum tree_code first_stmt_code = ERROR_MARK, rhs_code = ERROR_MARK;
++  enum tree_code first_cond_code = ERROR_MARK;
+   tree lhs;
+   bool stop_recursion = false, need_same_oprnds = false;
+   tree vectype, scalar_type, first_op1 = NULL_TREE;
+@@ -439,11 +474,18 @@
+   VEC (slp_oprnd_info, heap) *oprnds_info;
+   unsigned int nops;
+   slp_oprnd_info oprnd_info;
++  tree cond;
+ 
+   if (is_gimple_call (stmt))
+     nops = gimple_call_num_args (stmt);
++  else if (is_gimple_assign (stmt))
++    {
++      nops = gimple_num_ops (stmt) - 1;
++      if (gimple_assign_rhs_code (stmt) == COND_EXPR)
++	nops = 4;
++    }
+   else
+-    nops = gimple_num_ops (stmt) - 1;
++    return false;
+ 
+   oprnds_info = vect_create_oprnd_info (nops, group_size);
+ 
+@@ -484,6 +526,22 @@
+ 	  return false;
+ 	}
+ 
++       if (is_gimple_assign (stmt)
++	   && gimple_assign_rhs_code (stmt) == COND_EXPR
++           && (cond = TREE_OPERAND (gimple_assign_rhs1 (stmt), 0))
++           && !COMPARISON_CLASS_P (cond))
++        {
++          if (vect_print_dump_info (REPORT_SLP))
++            {
++              fprintf (vect_dump,
++                       "Build SLP failed: condition is not comparison ");
++              print_gimple_stmt (vect_dump, stmt, 0, TDF_SLIM);
++            }
++
++          vect_free_oprnd_info (&oprnds_info);
++          return false;
++        }
++
+       scalar_type = vect_get_smallest_scalar_type (stmt, &dummy, &dummy);
+       vectype = get_vectype_for_scalar_type (scalar_type);
+       if (!vectype)
+@@ -737,7 +795,8 @@
+ 
+ 	  /* Not memory operation.  */
+ 	  if (TREE_CODE_CLASS (rhs_code) != tcc_binary
+-	      && TREE_CODE_CLASS (rhs_code) != tcc_unary)
++	      && TREE_CODE_CLASS (rhs_code) != tcc_unary
++              && rhs_code != COND_EXPR)
+ 	    {
+ 	      if (vect_print_dump_info (REPORT_SLP))
+ 		{
+@@ -750,6 +809,26 @@
+ 	      return false;
+ 	    }
+ 
++          if (rhs_code == COND_EXPR)
++            {
++              tree cond_expr = TREE_OPERAND (gimple_assign_rhs1 (stmt), 0);
++
++	      if (i == 0)
++		first_cond_code = TREE_CODE (cond_expr);
++              else if (first_cond_code != TREE_CODE (cond_expr))
++                {
++                  if (vect_print_dump_info (REPORT_SLP))
++                    {
++                      fprintf (vect_dump, "Build SLP failed: different"
++					  " operation");
++                      print_gimple_stmt (vect_dump, stmt, 0, TDF_SLIM);
++                    }
++
++		  vect_free_oprnd_info (&oprnds_info);
++                  return false;
++		}
++            }
++
+ 	  /* Find the def-stmts.  */
+ 	  if (!vect_get_and_check_slp_defs (loop_vinfo, bb_vinfo, *node, stmt,
+ 					    ncopies_for_cost, (i == 0),
+@@ -1395,7 +1474,12 @@
+       /* Collect the stores and store them in SLP_TREE_SCALAR_STMTS.  */
+       while (next)
+         {
+-          VEC_safe_push (gimple, heap, scalar_stmts, next);
++          if (STMT_VINFO_IN_PATTERN_P (vinfo_for_stmt (next))
++              && STMT_VINFO_RELATED_STMT (vinfo_for_stmt (next)))
++            VEC_safe_push (gimple, heap, scalar_stmts,
++                       STMT_VINFO_RELATED_STMT (vinfo_for_stmt (next)));
++          else
++            VEC_safe_push (gimple, heap, scalar_stmts, next);
+           next = DR_GROUP_NEXT_DR (vinfo_for_stmt (next));
+         }
+     }
+@@ -1404,7 +1488,7 @@
+       /* Collect reduction statements.  */
+       VEC (gimple, heap) *reductions = LOOP_VINFO_REDUCTIONS (loop_vinfo);
+       for (i = 0; VEC_iterate (gimple, reductions, i, next); i++)
+-        VEC_safe_push (gimple, heap, scalar_stmts, next);
++	VEC_safe_push (gimple, heap, scalar_stmts, next);
+     }
+ 
+   node = vect_create_new_slp_node (scalar_stmts);
+@@ -2160,15 +2244,15 @@
+ 
+      For example, we have two scalar operands, s1 and s2 (e.g., group of
+      strided accesses of size two), while NUNITS is four (i.e., four scalars
+-     of this type can be packed in a vector). The output vector will contain
+-     two copies of each scalar operand: {s1, s2, s1, s2}. (NUMBER_OF_COPIES
++     of this type can be packed in a vector).  The output vector will contain
++     two copies of each scalar operand: {s1, s2, s1, s2}.  (NUMBER_OF_COPIES
+      will be 2).
+ 
+      If GROUP_SIZE > NUNITS, the scalars will be split into several vectors
+      containing the operands.
+ 
+      For example, NUNITS is four as before, and the group size is 8
+-     (s1, s2, ..., s8). We will create two vectors {s1, s2, s3, s4} and
++     (s1, s2, ..., s8).  We will create two vectors {s1, s2, s3, s4} and
+      {s5, s6, s7, s8}.  */
+ 
+   number_of_copies = least_common_multiple (nunits, group_size) / group_size;
+@@ -2180,8 +2264,18 @@
+         {
+           if (is_store)
+             op = gimple_assign_rhs1 (stmt);
+-          else
++          else if (gimple_assign_rhs_code (stmt) != COND_EXPR)
+             op = gimple_op (stmt, op_num + 1);
++	  else
++	    {
++	      if (op_num == 0 || op_num == 1)
++		{
++		  tree cond = TREE_OPERAND (gimple_assign_rhs1 (stmt), 0);
++		  op = TREE_OPERAND (cond, op_num);
++		}
++	      else
++		op = TREE_OPERAND (gimple_assign_rhs1 (stmt), op_num - 1);
++	    }
+ 
+           if (reduc_index != -1)
+             {
+
+=== modified file 'gcc/tree-vect-stmts.c'
+--- old/gcc/tree-vect-stmts.c	2011-11-22 16:52:23 +0000
++++ new/gcc/tree-vect-stmts.c	2011-11-22 17:10:17 +0000
+@@ -4816,7 +4816,7 @@
+    condition operands are supportable using vec_is_simple_use.  */
+ 
+ static bool
+-vect_is_simple_cond (tree cond, loop_vec_info loop_vinfo)
++vect_is_simple_cond (tree cond, loop_vec_info loop_vinfo, bb_vec_info bb_vinfo)
+ {
+   tree lhs, rhs;
+   tree def;
+@@ -4831,7 +4831,7 @@
+   if (TREE_CODE (lhs) == SSA_NAME)
+     {
+       gimple lhs_def_stmt = SSA_NAME_DEF_STMT (lhs);
+-      if (!vect_is_simple_use (lhs, loop_vinfo, NULL, &lhs_def_stmt, &def,
++      if (!vect_is_simple_use (lhs, loop_vinfo, bb_vinfo, &lhs_def_stmt, &def,
+                                &dt))
+ 	return false;
+     }
+@@ -4842,7 +4842,7 @@
+   if (TREE_CODE (rhs) == SSA_NAME)
+     {
+       gimple rhs_def_stmt = SSA_NAME_DEF_STMT (rhs);
+-      if (!vect_is_simple_use (rhs, loop_vinfo, NULL, &rhs_def_stmt, &def,
++      if (!vect_is_simple_use (rhs, loop_vinfo, bb_vinfo, &rhs_def_stmt, &def,
+                                &dt))
+ 	return false;
+     }
+@@ -4868,7 +4868,8 @@
+ 
+ bool
+ vectorizable_condition (gimple stmt, gimple_stmt_iterator *gsi,
+-			gimple *vec_stmt, tree reduc_def, int reduc_index)
++			gimple *vec_stmt, tree reduc_def, int reduc_index,
++			slp_tree slp_node)
+ {
+   tree scalar_dest = NULL_TREE;
+   tree vec_dest = NULL_TREE;
+@@ -4885,19 +4886,24 @@
+   tree def;
+   enum vect_def_type dt, dts[4];
+   int nunits = TYPE_VECTOR_SUBPARTS (vectype);
+-  int ncopies = LOOP_VINFO_VECT_FACTOR (loop_vinfo) / nunits;
++  int ncopies;
+   enum tree_code code;
+   stmt_vec_info prev_stmt_info = NULL;
+-  int j;
++  int i, j;
++  bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_info);
++  VEC (tree, heap) *vec_oprnds0 = NULL, *vec_oprnds1 = NULL;
++  VEC (tree, heap) *vec_oprnds2 = NULL, *vec_oprnds3 = NULL;
+ 
+-  /* FORNOW: unsupported in basic block SLP.  */
+-  gcc_assert (loop_vinfo);
++  if (slp_node || PURE_SLP_STMT (stmt_info))
++    ncopies = 1;
++  else
++    ncopies = LOOP_VINFO_VECT_FACTOR (loop_vinfo) / nunits;
+ 
+   gcc_assert (ncopies >= 1);
+-  if (reduc_index && ncopies > 1)
++  if (reduc_index && (ncopies > 1 || STMT_SLP_TYPE (stmt_info)))
+     return false; /* FORNOW */
+ 
+-  if (!STMT_VINFO_RELEVANT_P (stmt_info))
++  if (!STMT_VINFO_RELEVANT_P (stmt_info) && !bb_vinfo) 
+     return false;
+ 
+   if (STMT_VINFO_DEF_TYPE (stmt_info) != vect_internal_def
+@@ -4905,10 +4911,6 @@
+            && reduc_def))
+     return false;
+ 
+-  /* FORNOW: SLP not supported.  */
+-  if (STMT_SLP_TYPE (stmt_info))
+-    return false;
+-
+   /* FORNOW: not yet supported.  */
+   if (STMT_VINFO_LIVE_P (stmt_info))
+     {
+@@ -4932,7 +4934,7 @@
+   then_clause = TREE_OPERAND (op, 1);
+   else_clause = TREE_OPERAND (op, 2);
+ 
+-  if (!vect_is_simple_cond (cond_expr, loop_vinfo))
++  if (!vect_is_simple_cond (cond_expr, loop_vinfo, bb_vinfo))
+     return false;
+ 
+   /* We do not handle two different vector types for the condition
+@@ -4944,7 +4946,7 @@
+   if (TREE_CODE (then_clause) == SSA_NAME)
+     {
+       gimple then_def_stmt = SSA_NAME_DEF_STMT (then_clause);
+-      if (!vect_is_simple_use (then_clause, loop_vinfo, NULL,
++      if (!vect_is_simple_use (then_clause, loop_vinfo, bb_vinfo,
+ 			       &then_def_stmt, &def, &dt))
+ 	return false;
+     }
+@@ -4956,7 +4958,7 @@
+   if (TREE_CODE (else_clause) == SSA_NAME)
+     {
+       gimple else_def_stmt = SSA_NAME_DEF_STMT (else_clause);
+-      if (!vect_is_simple_use (else_clause, loop_vinfo, NULL,
++      if (!vect_is_simple_use (else_clause, loop_vinfo, bb_vinfo,
+ 			       &else_def_stmt, &def, &dt))
+ 	return false;
+     }
+@@ -4974,7 +4976,15 @@
+       return expand_vec_cond_expr_p (TREE_TYPE (op), vec_mode);
+     }
+ 
+-  /* Transform */
++  /* Transform.  */
++
++  if (!slp_node)
++    {
++      vec_oprnds0 = VEC_alloc (tree, heap, 1);
++      vec_oprnds1 = VEC_alloc (tree, heap, 1);
++      vec_oprnds2 = VEC_alloc (tree, heap, 1);
++      vec_oprnds3 = VEC_alloc (tree, heap, 1);
++    }
+ 
+   /* Handle def.  */
+   scalar_dest = gimple_assign_lhs (stmt);
+@@ -4983,67 +4993,118 @@
+   /* Handle cond expr.  */
+   for (j = 0; j < ncopies; j++)
+     {
+-      gimple new_stmt;
++      gimple new_stmt = NULL;
+       if (j == 0)
+ 	{
+-	  gimple gtemp;
+-	  vec_cond_lhs =
++          if (slp_node)
++            {
++              VEC (tree, heap) *ops = VEC_alloc (tree, heap, 4);
++              VEC (slp_void_p, heap) *vec_defs;
++
++	      vec_defs = VEC_alloc (slp_void_p, heap, 4);
++              VEC_safe_push (tree, heap, ops, TREE_OPERAND (cond_expr, 0));
++              VEC_safe_push (tree, heap, ops, TREE_OPERAND (cond_expr, 1));
++              VEC_safe_push (tree, heap, ops, then_clause);
++              VEC_safe_push (tree, heap, ops, else_clause);
++              vect_get_slp_defs (ops, slp_node, &vec_defs, -1);
++              vec_oprnds3 = (VEC (tree, heap) *) VEC_pop (slp_void_p, vec_defs);
++              vec_oprnds2 = (VEC (tree, heap) *) VEC_pop (slp_void_p, vec_defs);
++              vec_oprnds1 = (VEC (tree, heap) *) VEC_pop (slp_void_p, vec_defs);
++              vec_oprnds0 = (VEC (tree, heap) *) VEC_pop (slp_void_p, vec_defs);
++
++              VEC_free (tree, heap, ops);
++              VEC_free (slp_void_p, heap, vec_defs);
++            }
++          else
++            {
++	      gimple gtemp;
++	      vec_cond_lhs =
+ 	      vect_get_vec_def_for_operand (TREE_OPERAND (cond_expr, 0),
+ 					    stmt, NULL);
+-	  vect_is_simple_use (TREE_OPERAND (cond_expr, 0), loop_vinfo,
++	      vect_is_simple_use (TREE_OPERAND (cond_expr, 0), loop_vinfo,
+ 			      NULL, &gtemp, &def, &dts[0]);
+-	  vec_cond_rhs =
+-	      vect_get_vec_def_for_operand (TREE_OPERAND (cond_expr, 1),
+-					    stmt, NULL);
+-	  vect_is_simple_use (TREE_OPERAND (cond_expr, 1), loop_vinfo,
+-			      NULL, &gtemp, &def, &dts[1]);
+-	  if (reduc_index == 1)
+-	    vec_then_clause = reduc_def;
+-	  else
+-	    {
+-	      vec_then_clause = vect_get_vec_def_for_operand (then_clause,
+-							      stmt, NULL);
+-	      vect_is_simple_use (then_clause, loop_vinfo,
+-				  NULL, &gtemp, &def, &dts[2]);
+-	    }
+-	  if (reduc_index == 2)
+-	    vec_else_clause = reduc_def;
+-	  else
+-	    {
+-	      vec_else_clause = vect_get_vec_def_for_operand (else_clause,
+-							      stmt, NULL);
+-	      vect_is_simple_use (else_clause, loop_vinfo,
++
++	      vec_cond_rhs =
++		vect_get_vec_def_for_operand (TREE_OPERAND (cond_expr, 1),
++						stmt, NULL);
++	      vect_is_simple_use (TREE_OPERAND (cond_expr, 1), loop_vinfo,
++					NULL, &gtemp, &def, &dts[1]);
++	      if (reduc_index == 1)
++		vec_then_clause = reduc_def;
++	      else
++		{
++		  vec_then_clause = vect_get_vec_def_for_operand (then_clause,
++		 		  			      stmt, NULL);
++	          vect_is_simple_use (then_clause, loop_vinfo,
++					  NULL, &gtemp, &def, &dts[2]);
++		}
++	      if (reduc_index == 2)
++		vec_else_clause = reduc_def;
++	      else
++		{
++		  vec_else_clause = vect_get_vec_def_for_operand (else_clause,
++							      stmt, NULL);
++		  vect_is_simple_use (else_clause, loop_vinfo,
+ 				  NULL, &gtemp, &def, &dts[3]);
++		}
+ 	    }
+ 	}
+       else
+ 	{
+-	  vec_cond_lhs = vect_get_vec_def_for_stmt_copy (dts[0], vec_cond_lhs);
+-	  vec_cond_rhs = vect_get_vec_def_for_stmt_copy (dts[1], vec_cond_rhs);
++	  vec_cond_lhs = vect_get_vec_def_for_stmt_copy (dts[0],
++						VEC_pop (tree, vec_oprnds0));
++	  vec_cond_rhs = vect_get_vec_def_for_stmt_copy (dts[1],
++						VEC_pop (tree, vec_oprnds1));
+ 	  vec_then_clause = vect_get_vec_def_for_stmt_copy (dts[2],
+-							    vec_then_clause);
++						VEC_pop (tree, vec_oprnds2));
+ 	  vec_else_clause = vect_get_vec_def_for_stmt_copy (dts[3],
+-							    vec_else_clause);
++						VEC_pop (tree, vec_oprnds3));
++	}
++
++      if (!slp_node)
++        {
++	  VEC_quick_push (tree, vec_oprnds0, vec_cond_lhs);
++	  VEC_quick_push (tree, vec_oprnds1, vec_cond_rhs);
++	  VEC_quick_push (tree, vec_oprnds2, vec_then_clause);
++	  VEC_quick_push (tree, vec_oprnds3, vec_else_clause);
+ 	}
+ 
+       /* Arguments are ready.  Create the new vector stmt.  */
+-      vec_compare = build2 (TREE_CODE (cond_expr), vectype,
+-			    vec_cond_lhs, vec_cond_rhs);
+-      vec_cond_expr = build3 (VEC_COND_EXPR, vectype,
+-			      vec_compare, vec_then_clause, vec_else_clause);
+-
+-      new_stmt = gimple_build_assign (vec_dest, vec_cond_expr);
+-      new_temp = make_ssa_name (vec_dest, new_stmt);
+-      gimple_assign_set_lhs (new_stmt, new_temp);
+-      vect_finish_stmt_generation (stmt, new_stmt, gsi);
+-      if (j == 0)
+-        STMT_VINFO_VEC_STMT (stmt_info) = *vec_stmt = new_stmt;
+-      else
+-        STMT_VINFO_RELATED_STMT (prev_stmt_info) = new_stmt;
+-
+-      prev_stmt_info = vinfo_for_stmt (new_stmt);
++      FOR_EACH_VEC_ELT (tree, vec_oprnds0, i, vec_cond_lhs)
++        {
++          vec_cond_rhs = VEC_index (tree, vec_oprnds1, i);
++          vec_then_clause = VEC_index (tree, vec_oprnds2, i);
++          vec_else_clause = VEC_index (tree, vec_oprnds3, i);
++
++          vec_compare = build2 (TREE_CODE (cond_expr), vectype,
++  			       vec_cond_lhs, vec_cond_rhs);
++          vec_cond_expr = build3 (VEC_COND_EXPR, vectype,
++ 		         vec_compare, vec_then_clause, vec_else_clause);
++
++          new_stmt = gimple_build_assign (vec_dest, vec_cond_expr);
++          new_temp = make_ssa_name (vec_dest, new_stmt);
++          gimple_assign_set_lhs (new_stmt, new_temp);
++          vect_finish_stmt_generation (stmt, new_stmt, gsi);
++          if (slp_node)
++            VEC_quick_push (gimple, SLP_TREE_VEC_STMTS (slp_node), new_stmt);
++        }
++
++        if (slp_node)
++          continue;
++
++        if (j == 0)
++          STMT_VINFO_VEC_STMT (stmt_info) = *vec_stmt = new_stmt;
++        else
++          STMT_VINFO_RELATED_STMT (prev_stmt_info) = new_stmt;
++
++        prev_stmt_info = vinfo_for_stmt (new_stmt);
+     }
+ 
++  VEC_free (tree, heap, vec_oprnds0);
++  VEC_free (tree, heap, vec_oprnds1);
++  VEC_free (tree, heap, vec_oprnds2);
++  VEC_free (tree, heap, vec_oprnds3);
++
+   return true;
+ }
+ 
+@@ -5217,7 +5278,7 @@
+             || vectorizable_call (stmt, NULL, NULL)
+             || vectorizable_store (stmt, NULL, NULL, NULL)
+             || vectorizable_reduction (stmt, NULL, NULL, NULL)
+-            || vectorizable_condition (stmt, NULL, NULL, NULL, 0));
++            || vectorizable_condition (stmt, NULL, NULL, NULL, 0, NULL));
+     else
+       {
+         if (bb_vinfo)
+@@ -5227,7 +5288,8 @@
+                 || vectorizable_operation (stmt, NULL, NULL, node)
+                 || vectorizable_assignment (stmt, NULL, NULL, node)
+                 || vectorizable_load (stmt, NULL, NULL, node, NULL)
+-                || vectorizable_store (stmt, NULL, NULL, node));
++                || vectorizable_store (stmt, NULL, NULL, node)
++                || vectorizable_condition (stmt, NULL, NULL, NULL, 0, node));
+       }
+ 
+   if (!ok)
+@@ -5343,8 +5405,7 @@
+       break;
+ 
+     case condition_vec_info_type:
+-      gcc_assert (!slp_node);
+-      done = vectorizable_condition (stmt, gsi, &vec_stmt, NULL, 0);
++      done = vectorizable_condition (stmt, gsi, &vec_stmt, NULL, 0, slp_node);
+       gcc_assert (done);
+       break;
+ 
+
+=== modified file 'gcc/tree-vectorizer.h'
+--- old/gcc/tree-vectorizer.h	2011-11-22 16:52:23 +0000
++++ new/gcc/tree-vectorizer.h	2011-11-22 17:10:17 +0000
+@@ -832,7 +832,7 @@
+ extern void vect_remove_stores (gimple);
+ extern bool vect_analyze_stmt (gimple, bool *, slp_tree);
+ extern bool vectorizable_condition (gimple, gimple_stmt_iterator *, gimple *,
+-                                    tree, int);
++                                    tree, int, slp_tree);
+ extern void vect_get_load_cost (struct data_reference *, int, bool,
+                                 unsigned int *, unsigned int *);
+ extern void vect_get_store_cost (struct data_reference *, int, unsigned int *);
+

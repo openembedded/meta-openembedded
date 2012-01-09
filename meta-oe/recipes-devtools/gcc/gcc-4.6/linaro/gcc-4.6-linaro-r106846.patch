@@ -1,0 +1,487 @@
+2011-11-27  Ira Rosen  <ira.rosen@linaro.org>
+
+	Needs to be merged upstream:
+
+	gcc/
+	* tree-vect-patterns.c (widened_name_p): Rename to ...
+	(type_conversion_p): ... this.  Add new argument to determine
+	if it's a promotion or demotion operation.  Check for
+	CONVERT_EXPR_CODE_P instead of NOP_EXPR.
+	(vect_recog_dot_prod_pattern): Call type_conversion_p instead
+	widened_name_p.
+	(vect_recog_widen_mult_pattern, vect_recog_widen_sum_pattern,
+	vect_operation_fits_smaller_type, vect_recog_widen_shift_pattern):
+	Likewise.
+	(vect_recog_mixed_size_cond_pattern): Likewise and allow
+	non-constant then and else clauses.
+
+	gcc/testsuite/
+	* gcc.dg/vect/bb-slp-cond-3.c: New test.
+	* gcc.dg/vect/bb-slp-cond-4.c: New test.
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-cond-3.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-cond-3.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-cond-3.c	2011-11-27 11:29:32 +0000
+@@ -0,0 +1,85 @@
++/* { dg-require-effective-target vect_condition } */
++
++#include "tree-vect.h"
++
++#define N 64 
++
++/* Comparison in int, then/else and result in unsigned char.  */ 
++
++static inline unsigned char
++foo (int x, int y, int a, int b)
++{
++  if (x >= y)
++    return a;
++  else
++    return b;
++}
++
++__attribute__((noinline, noclone)) void
++bar (unsigned char * __restrict__ a, unsigned char * __restrict__ b,
++     unsigned char * __restrict__ c, unsigned char * __restrict__ d,
++     unsigned char * __restrict__ e, int stride, int w)
++{
++  int i;
++  for (i = 0; i < N/stride; i++, a += stride, b += stride, c += stride,
++				d += stride, e += stride)
++    {
++      e[0] = foo (c[0], d[0], a[0] * w, b[0] * w);
++      e[1] = foo (c[1], d[1], a[1] * w, b[1] * w);
++      e[2] = foo (c[2], d[2], a[2] * w, b[2] * w);
++      e[3] = foo (c[3], d[3], a[3] * w, b[3] * w);
++      e[4] = foo (c[4], d[4], a[4] * w, b[4] * w);
++      e[5] = foo (c[5], d[5], a[5] * w, b[5] * w);
++      e[6] = foo (c[6], d[6], a[6] * w, b[6] * w);
++      e[7] = foo (c[7], d[7], a[7] * w, b[7] * w);
++      e[8] = foo (c[8], d[8], a[8] * w, b[8] * w);
++      e[9] = foo (c[9], d[9], a[9] * w, b[9] * w);
++      e[10] = foo (c[10], d[10], a[10] * w, b[10] * w);
++      e[11] = foo (c[11], d[11], a[11] * w, b[11] * w);
++      e[12] = foo (c[12], d[12], a[12] * w, b[12] * w);
++      e[13] = foo (c[13], d[13], a[13] * w, b[13] * w);
++      e[14] = foo (c[14], d[14], a[14] * w, b[14] * w);
++      e[15] = foo (c[15], d[15], a[15] * w, b[15] * w);
++    }
++}
++
++
++unsigned char a[N], b[N], c[N], d[N], e[N];
++
++int main ()
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      a[i] = i;
++      b[i] = 5;
++      e[i] = 0;
++
++      switch (i % 9)
++        {
++        case 0: asm (""); c[i] = i; d[i] = i + 1; break;
++        case 1: c[i] = 0; d[i] = 0; break;
++        case 2: c[i] = i + 1; d[i] = i - 1; break;
++        case 3: c[i] = i; d[i] = i + 7; break;
++        case 4: c[i] = i; d[i] = i; break;
++        case 5: c[i] = i + 16; d[i] = i + 3; break;
++        case 6: c[i] = i - 5; d[i] = i; break;
++        case 7: c[i] = i; d[i] = i; break;
++        case 8: c[i] = i; d[i] = i - 7; break;
++        }
++    }
++
++  bar (a, b, c, d, e, 16, 2);
++  for (i = 0; i < N; i++)
++    if (e[i] != ((i % 3) == 0 ? 10 : 2 * i))
++      abort ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target { vect_element_align && vect_int_mult } } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== added file 'gcc/testsuite/gcc.dg/vect/bb-slp-cond-4.c'
+--- old/gcc/testsuite/gcc.dg/vect/bb-slp-cond-4.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/bb-slp-cond-4.c	2011-11-27 11:29:32 +0000
+@@ -0,0 +1,85 @@
++/* { dg-require-effective-target vect_condition } */
++
++#include "tree-vect.h"
++
++#define N 64 
++
++/* Comparison in short, then/else and result in int.  */
++static inline int
++foo (short x, short y, int a, int b)
++{
++  if (x >= y)
++    return a;
++  else
++    return b;
++}
++
++__attribute__((noinline, noclone)) void
++bar (short * __restrict__ a, short * __restrict__ b,
++     short * __restrict__ c, short * __restrict__ d,
++     int * __restrict__ e, int stride, int w)
++{
++  int i;
++  for (i = 0; i < N/stride; i++, a += stride, b += stride, c += stride,
++				d += stride, e += stride)
++    {
++      e[0] = foo (c[0], d[0], a[0], b[0]);
++      e[1] = foo (c[1], d[1], a[1], b[1]);
++      e[2] = foo (c[2], d[2], a[2], b[2]);
++      e[3] = foo (c[3], d[3], a[3], b[3]);
++      e[4] = foo (c[4], d[4], a[4], b[4]);
++      e[5] = foo (c[5], d[5], a[5], b[5]);
++      e[6] = foo (c[6], d[6], a[6], b[6]);
++      e[7] = foo (c[7], d[7], a[7], b[7]);
++      e[8] = foo (c[8], d[8], a[8], b[8]);
++      e[9] = foo (c[9], d[9], a[9], b[9]);
++      e[10] = foo (c[10], d[10], a[10], b[10]);
++      e[11] = foo (c[11], d[11], a[11], b[11]);
++      e[12] = foo (c[12], d[12], a[12], b[12]);
++      e[13] = foo (c[13], d[13], a[13], b[13]);
++      e[14] = foo (c[14], d[14], a[14], b[14]);
++      e[15] = foo (c[15], d[15], a[15], b[15]);
++    }
++}
++
++
++short a[N], b[N], c[N], d[N];
++int e[N];
++
++int main ()
++{
++  int i;
++
++  check_vect ();
++
++  for (i = 0; i < N; i++)
++    {
++      a[i] = i;
++      b[i] = 5;
++      e[i] = 0;
++
++      switch (i % 9)
++        {
++        case 0: asm (""); c[i] = - i - 1; d[i] = i + 1; break;
++        case 1: c[i] = 0; d[i] = 0; break;
++        case 2: c[i] = i + 1; d[i] = - i - 1; break;
++        case 3: c[i] = i; d[i] = i + 7; break;
++        case 4: c[i] = i; d[i] = i; break;
++        case 5: c[i] = i + 16; d[i] = i + 3; break;
++        case 6: c[i] = - i - 5; d[i] = - i; break;
++        case 7: c[i] = - i; d[i] = - i; break;
++        case 8: c[i] = - i; d[i] = - i - 7; break;
++        }
++    }
++
++  bar (a, b, c, d, e, 16, 2);
++  for (i = 0; i < N; i++)
++    if (e[i] != ((i % 3) == 0 ? 5 : i))
++      abort ();
++
++  return 0;
++}
++
++/* { dg-final { scan-tree-dump-times "basic block vectorized using SLP" 1 "slp" { target vect_element_align } } } */
++/* { dg-final { cleanup-tree-dump "slp" } } */
++
+
+=== modified file 'gcc/tree-vect-patterns.c'
+--- old/gcc/tree-vect-patterns.c	2011-11-23 07:49:33 +0000
++++ new/gcc/tree-vect-patterns.c	2011-11-27 12:17:31 +0000
+@@ -62,18 +62,16 @@
+ 	vect_recog_mixed_size_cond_pattern};
+ 
+ 
+-/* Function widened_name_p
+-
+-   Check whether NAME, an ssa-name used in USE_STMT,
+-   is a result of a type-promotion, such that:
+-     DEF_STMT: NAME = NOP (name0)
+-   where the type of name0 (HALF_TYPE) is smaller than the type of NAME.
++/* Check whether NAME, an ssa-name used in USE_STMT,
++   is a result of a type promotion or demotion, such that:
++      DEF_STMT: NAME = NOP (name0)
++   where the type of name0 (ORIG_TYPE) is smaller/bigger than the type of NAME.
+    If CHECK_SIGN is TRUE, check that either both types are signed or both are
+    unsigned.  */
+ 
+ static bool
+-widened_name_p (tree name, gimple use_stmt, tree *half_type, gimple *def_stmt,
+-		bool check_sign)
++type_conversion_p (tree name, gimple use_stmt, bool check_sign,
++                   tree *orig_type, gimple *def_stmt, bool *promotion)
+ {
+   tree dummy;
+   gimple dummy_gimple;
+@@ -96,21 +94,27 @@
+       && dt != vect_external_def && dt != vect_constant_def)
+     return false;
+ 
+-  if (! *def_stmt)
++  if (!*def_stmt)
+     return false;
+ 
+   if (!is_gimple_assign (*def_stmt))
+     return false;
+ 
+-  if (gimple_assign_rhs_code (*def_stmt) != NOP_EXPR)
++  if (!CONVERT_EXPR_CODE_P (gimple_assign_rhs_code (*def_stmt)))
+     return false;
+ 
+   oprnd0 = gimple_assign_rhs1 (*def_stmt);
+ 
+-  *half_type = TREE_TYPE (oprnd0);
+-  if (!INTEGRAL_TYPE_P (type) || !INTEGRAL_TYPE_P (*half_type)
+-      || ((TYPE_UNSIGNED (type) != TYPE_UNSIGNED (*half_type)) && check_sign)
+-      || (TYPE_PRECISION (type) < (TYPE_PRECISION (*half_type) * 2)))
++  *orig_type = TREE_TYPE (oprnd0);
++  if (!INTEGRAL_TYPE_P (type) || !INTEGRAL_TYPE_P (*orig_type)
++      || ((TYPE_UNSIGNED (type) != TYPE_UNSIGNED (*orig_type)) && check_sign))
++    return false;
++
++  if (TYPE_PRECISION (type) >= (TYPE_PRECISION (*orig_type) * 2))
++    *promotion = true;
++  else if (TYPE_PRECISION (*orig_type) >= (TYPE_PRECISION (type) * 2))
++    *promotion = false;
++  else
+     return false;
+ 
+   if (!vect_is_simple_use (oprnd0, loop_vinfo, bb_vinfo, &dummy_gimple, &dummy,
+@@ -192,6 +196,7 @@
+   loop_vec_info loop_info = STMT_VINFO_LOOP_VINFO (stmt_vinfo);
+   struct loop *loop;
+   tree var, rhs;
++  bool promotion;
+ 
+   if (!loop_info)
+     return NULL;
+@@ -255,7 +260,9 @@
+         return NULL;
+       stmt = last_stmt;
+ 
+-      if (widened_name_p (oprnd0, stmt, &half_type, &def_stmt, true))
++      if (type_conversion_p (oprnd0, stmt, true, &half_type, &def_stmt,
++                             &promotion)
++          && promotion)
+         {
+           stmt = def_stmt;
+           oprnd0 = gimple_assign_rhs1 (stmt);
+@@ -310,10 +317,14 @@
+       if (!types_compatible_p (TREE_TYPE (oprnd0), prod_type)
+           || !types_compatible_p (TREE_TYPE (oprnd1), prod_type))
+         return NULL;
+-      if (!widened_name_p (oprnd0, stmt, &half_type0, &def_stmt, true))
++      if (!type_conversion_p (oprnd0, stmt, true, &half_type0, &def_stmt,
++                              &promotion)
++          || !promotion)
+         return NULL;
+       oprnd00 = gimple_assign_rhs1 (def_stmt);
+-      if (!widened_name_p (oprnd1, stmt, &half_type1, &def_stmt, true))
++      if (!type_conversion_p (oprnd0, stmt, true, &half_type1, &def_stmt,
++                              &promotion)
++          || !promotion)
+         return NULL;
+       oprnd01 = gimple_assign_rhs1 (def_stmt);
+       if (!types_compatible_p (half_type0, half_type1))
+@@ -526,7 +537,7 @@
+   enum tree_code dummy_code;
+   int dummy_int;
+   VEC (tree, heap) *dummy_vec;
+-  bool op1_ok;
++  bool op1_ok, promotion;
+ 
+   if (!is_gimple_assign (last_stmt))
+     return NULL;
+@@ -546,12 +557,14 @@
+     return NULL;
+ 
+   /* Check argument 0.  */
+-  if (!widened_name_p (oprnd0, last_stmt, &half_type0, &def_stmt0, false))
++  if (!type_conversion_p (oprnd0, last_stmt, false, &half_type0, &def_stmt0,
++                          &promotion)
++      || !promotion)
+     return NULL;
+-  /* Check argument 1.  */
+-  op1_ok = widened_name_p (oprnd1, last_stmt, &half_type1, &def_stmt1, false);
+-
+-  if (op1_ok)
++   /* Check argument 1.  */
++  op1_ok = type_conversion_p (oprnd1, last_stmt, false, &half_type1,
++                              &def_stmt1, &promotion);
++  if (op1_ok && promotion)
+     {
+       oprnd0 = gimple_assign_rhs1 (def_stmt0);
+       oprnd1 = gimple_assign_rhs1 (def_stmt1);
+@@ -793,6 +806,7 @@
+   loop_vec_info loop_info = STMT_VINFO_LOOP_VINFO (stmt_vinfo);
+   struct loop *loop;
+   tree var;
++  bool promotion;
+ 
+   if (!loop_info)
+     return NULL;
+@@ -832,8 +846,10 @@
+      Left to check that oprnd0 is defined by a cast from type 'type' to type
+      'TYPE'.  */
+ 
+-  if (!widened_name_p (oprnd0, last_stmt, &half_type, &stmt, true))
+-    return NULL;
++  if (!type_conversion_p (oprnd0, last_stmt, true, &half_type, &stmt,
++                          &promotion)
++      || !promotion)
++     return NULL;
+ 
+   oprnd0 = gimple_assign_rhs1 (stmt);
+   *type_in = half_type;
+@@ -899,6 +915,7 @@
+   gimple def_stmt, new_stmt;
+   bool first = false;
+   loop_vec_info loop_info = STMT_VINFO_LOOP_VINFO (vinfo_for_stmt (stmt));
++  bool promotion;
+   bb_vec_info bb_info = STMT_VINFO_BB_VINFO (vinfo_for_stmt (stmt));
+   struct loop *loop = NULL;
+ 
+@@ -933,7 +950,9 @@
+   else
+     {
+       first = true;
+-      if (!widened_name_p (oprnd, stmt, &half_type, &def_stmt, false)
++      if (!type_conversion_p (oprnd, stmt, false, &half_type, &def_stmt,
++                               &promotion)
++         || !promotion
+           || !gimple_bb (def_stmt)
+           || (loop && !flow_bb_inside_loop_p (loop, gimple_bb (def_stmt)))
+ 	  || (!loop && gimple_bb (def_stmt) != BB_VINFO_BB (bb_info)
+@@ -1327,6 +1346,7 @@
+   VEC (tree, heap) * dummy_vec;
+   gimple use_stmt = NULL;
+   bool over_widen = false;
++  bool promotion;
+ 
+   if (!is_gimple_assign (last_stmt) || !vinfo_for_stmt (last_stmt))
+     return NULL;
+@@ -1381,8 +1401,10 @@
+     return NULL;
+ 
+   /* Check operand 0: it has to be defined by a type promotion.  */
+-  if (!widened_name_p (oprnd0, last_stmt, &half_type0, &def_stmt0, false))
+-    return NULL;
++  if (!type_conversion_p (oprnd0, last_stmt, false, &half_type0, &def_stmt0,
++                          &promotion)
++      || !promotion)
++     return NULL;
+ 
+   /* Check operand 1: has to be positive.  We check that it fits the type
+      in vect_handle_widen_op_by_const ().  */
+@@ -1492,9 +1514,9 @@
+      S1  a_T = x_t CMP y_t ? b_T : c_T;
+ 
+    where type 'TYPE' is an integral type which has different size
+-   from 'type'.  b_T and c_T are constants and if 'TYPE' is wider
++   from 'type'.  b_T and c_T are either constants (and if 'TYPE' is wider
+    than 'type', the constants need to fit into an integer type
+-   with the same width as 'type'.
++   with the same width as 'type') or results of conversion from 'type'.
+ 
+    Input:
+ 
+@@ -1523,6 +1545,9 @@
+   enum machine_mode cmpmode;
+   gimple pattern_stmt, def_stmt;
+   loop_vec_info loop_vinfo = STMT_VINFO_LOOP_VINFO (stmt_vinfo);
++  tree orig_type0 = NULL_TREE, orig_type1 = NULL_TREE;
++  gimple def_stmt0 = NULL, def_stmt1 = NULL;
++  bool promotion;
+   bb_vec_info bb_vinfo = STMT_VINFO_BB_VINFO (stmt_vinfo);
+ 
+   if (!is_gimple_assign (last_stmt)
+@@ -1535,25 +1560,40 @@
+   then_clause = TREE_OPERAND (op, 1);
+   else_clause = TREE_OPERAND (op, 2);
+ 
+-  if (TREE_CODE (then_clause) != INTEGER_CST
+-      || TREE_CODE (else_clause) != INTEGER_CST)
+-    return NULL;
+-
+   if (!COMPARISON_CLASS_P (cond_expr))
+     return NULL;
+ 
+   type = gimple_expr_type (last_stmt);
+   comp_type = TREE_TYPE (TREE_OPERAND (cond_expr, 0));
+-  if (!INTEGRAL_TYPE_P (comp_type)
+-      || !INTEGRAL_TYPE_P (type))
+-    return NULL;
+-
+   comp_vectype = get_vectype_for_scalar_type (comp_type);
+   if (comp_vectype == NULL_TREE)
+     return NULL;
+ 
++  if (types_compatible_p (type, comp_type)
++      || !INTEGRAL_TYPE_P (comp_type)
++      || !INTEGRAL_TYPE_P (type))
++    return NULL;
++
++  if ((TREE_CODE (then_clause) != INTEGER_CST
++       && !type_conversion_p (then_clause, last_stmt, false, &orig_type0,
++			      &def_stmt0, &promotion))
++      || (TREE_CODE (else_clause) != INTEGER_CST
++	  && !type_conversion_p (else_clause, last_stmt, false, &orig_type1,
++				 &def_stmt1, &promotion)))
++    return NULL;
++
++  if (orig_type0 && orig_type1
++      && (!types_compatible_p (orig_type0, orig_type1)
++	  || !types_compatible_p (orig_type0, comp_type)))
++    return NULL;
++
++  if (orig_type0)
++    then_clause = gimple_assign_rhs1 (def_stmt0);
++
++  if (orig_type1)
++    else_clause = gimple_assign_rhs1 (def_stmt1);
++
+   cmpmode = GET_MODE_INNER (TYPE_MODE (comp_vectype));
+-
+   if (GET_MODE_BITSIZE (TYPE_MODE (type)) == GET_MODE_BITSIZE (cmpmode))
+     return NULL;
+ 
+@@ -1561,18 +1601,15 @@
+   if (vectype == NULL_TREE)
+     return NULL;
+ 
+-  if (types_compatible_p (vectype, comp_vectype))
+-    return NULL;
+-
+   if (!expand_vec_cond_expr_p (comp_vectype, TYPE_MODE (comp_vectype)))
+     return NULL;
+ 
+-  if (GET_MODE_BITSIZE (TYPE_MODE (type)) > GET_MODE_BITSIZE (cmpmode))
+-    {
+-      if (!int_fits_type_p (then_clause, comp_type)
+-	  || !int_fits_type_p (else_clause, comp_type))
+-	return NULL;
+-    }
++  if (GET_MODE_BITSIZE (TYPE_MODE (type)) > GET_MODE_BITSIZE (cmpmode)
++      && ((TREE_CODE (then_clause) == INTEGER_CST
++           && !int_fits_type_p (then_clause, comp_type))
++          || (TREE_CODE (else_clause) == INTEGER_CST
++              && !int_fits_type_p (else_clause, comp_type))))
++    return NULL;
+ 
+   tmp = build3 (COND_EXPR, comp_type, unshare_expr (cond_expr),
+ 		fold_convert (comp_type, then_clause),
+
