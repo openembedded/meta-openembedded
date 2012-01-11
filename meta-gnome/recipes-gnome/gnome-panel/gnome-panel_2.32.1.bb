@@ -23,6 +23,7 @@ EXTRA_OECONF = "--disable-scrollkeeper --disable-eds --enable-bonobo=no --with-i
 do_configure_prepend() {
 	gnome-doc-prepare --automake
 	sed -i -e s:help:: ${S}/Makefile.am
+	sed -i -e s:^#!@PYTHON@:#!/usr/bin/python: ${S}/gnome-panel/gnome-panel-add.in
 }
 
 pkg_postinst_append () {
