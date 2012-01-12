@@ -32,6 +32,8 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 do_configure_prepend() {
     # skip first
     sed -i "s#for pylibpath in '/usr/lib'#for pylibpath in #g" ${S}/configure.ac
+    # disable xmlto, in case xsltproc doesn't work xmlto is used and fails 
+    sed -i "s#AC_CHECK_PROG(WITH_XMLTO#AC_CHECK_PROG(WITH_XMLTO_DISABLED_IN_OE#g" ${S}/configure.ac
 }
 
 do_compile_prepend() {
