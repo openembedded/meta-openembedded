@@ -2,6 +2,8 @@ DESCRIPTION = "UPower is an abstraction for enumerating power devices, listening
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
 
+PR = "r1"
+
 DEPENDS = "libusb1 udev glib-2.0 dbus-glib polkit"
 
 SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
@@ -17,6 +19,8 @@ do_configure_prepend() {
 	sed -i -e 's: doc : :g' ${S}/Makefile.am
 }	
 
+
+RRECOMMENDS_${PN} += "pm-utils"
 FILES_${PN} += "${datadir}/dbus-1/ \
                 ${datadir}/polkit-1/ \
                 ${base_libdir}/udev/* \
