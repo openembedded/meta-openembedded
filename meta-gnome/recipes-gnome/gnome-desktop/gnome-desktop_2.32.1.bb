@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-PR = "r2"
+PR = "r3"
 
 inherit gnome pkgconfig
 
@@ -16,11 +16,14 @@ DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils"
 EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
 
 do_configure_prepend () {
-    cp ${STAGING_DATADIR}/gnome-common/data/omf.make ${S}
+	cp ${STAGING_DATADIR}/gnome-common/data/omf.make ${S}
+	sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
 }
 
 PACKAGES =+ "libgnome-desktop"
 FILES_libgnome-desktop = "${libdir}/lib*${SOLIBS} ${datadir}/libgnome-desktop/pnp.ids"
 FILES_${PN} += "${datadir}/gnome-about"
 
+# for gnome-about
+RRECOMMENDS_${PN} += "python-pygtk python-pycairo"
 
