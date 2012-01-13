@@ -4,8 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 DEPENDS = "evas ecore edje elementary webkit-efl"
 PV = "0.3.0.0+svnr${SRCPV}"
 PR = "r2"
-SRCREV = "67278"
-#SRCREV = "${EFL_SRCREV}"
+SRCREV = "${EFL_SRCREV}"
 
 inherit e gettext
 SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
