@@ -28,3 +28,4 @@ FILES_libturbojpeg = "${libdir}/libturbojpeg.so"
 INSANE_SKIP_libturbojpeg = "dev-so"
 
 BBCLASSEXTEND = "native"
+DEPENDS_virtclass-native = "nasm-native"
