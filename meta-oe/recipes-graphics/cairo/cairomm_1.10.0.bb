@@ -1,4 +1,4 @@
-require cairo.inc
+require recipes-graphics/cairo/cairo.inc
 
 DESCRIPTION = "C++ bindings for Cairo graphics library"
 
