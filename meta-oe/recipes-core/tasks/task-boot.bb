@@ -2,7 +2,7 @@ DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r56"
+PR = "r57"
 
 inherit task
 
@@ -16,12 +16,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
-# update-alternatives script installed in rootfs needs to be the same as
-# u-a script used for building image which is defined with
-# PREFERRED_PROVIDER_virtual/update-alternatives-native
-
-DISTRO_UPDATE_ALTERNATIVES ?= "${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "${PREFERRED_PROVIDER_virtual/update-alternatives}", d)}"
-
 # Make sure we build the kernel
 DEPENDS = "virtual/kernel"
 
@@ -34,7 +28,6 @@ RDEPENDS_${PN} = "\
     busybox \
     netbase \
     ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
-    ${DISTRO_UPDATE_ALTERNATIVES} \
     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
     "
 
