@@ -30,6 +30,7 @@ EXTRA_OECONF += " \
                  --enable-gtk2-dependency \
                  --disable-glibtest \
                  --enable-modules \
+                 --disable-cups \
 "
 
 # Make a symlink to our libtool
