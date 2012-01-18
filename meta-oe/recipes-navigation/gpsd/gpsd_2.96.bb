@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
+PR = "r1"
+
 EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
                 --x-libraries=${STAGING_LIBDIR} \
                 --enable-dbus \
@@ -14,14 +16,20 @@ EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
 SRC_URI = "http://download.berlios.de/${PN}/${P}bis.tar.gz;name=gpsd \
            file://gpsd-default \
            file://gpsd \
+           file://gpsd.socket \
+           file://gpsd.service \
            file://60-gpsd.rules"
 SRC_URI[gpsd.md5sum] = "52b00cab0fb34bbf1923ae35c7ced6c4"
 SRC_URI[gpsd.sha256sum] = "c6d72565bc06b802c749e69808eb7c6ee165962dc17383971c9001b5e1763690"
 
-inherit autotools update-rc.d python-dir
+inherit autotools update-rc.d python-dir systemd
 
 INITSCRIPT_NAME = "gpsd"
 INITSCRIPT_PARAMS = "defaults 35"
+
+SYSTEMD_PACKAGES = "${PN}-systemd"
+SYSTEMD_SERVICE = "${PN}.socket"
+
 
 LDFLAGS += "-L${STAGING_LIBDIR} -lm"
 export STAGING_INCDIR
@@ -60,6 +68,11 @@ do_install_append() {
     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
     install -d ${D}${base_libdir}/udev/
     install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
+
+    #support for systemd
+    install -d ${D}${base_libdir}/systemd/system
+    install -m 644 ${WORKDIR}/${PN}.socket ${D}${base_libdir}/systemd/system
+    install -m 644 ${WORKDIR}/${PN}.service ${D}${base_libdir}/systemd/system
 }
 
 pkg_postinst_${PN}-conf() {
@@ -70,7 +83,7 @@ pkg_postrm_${PN}-conf() {
 	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
 }
 
-PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
+PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils ${PN}-systemd"
 
 FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
 
@@ -78,7 +91,7 @@ RDEPENDS_${PN} = "gpsd-gpsctl"
 RRECOMMENDS_${PN} = "gpsd-conf gpsd-udev"
 
 DESCRIPTION_gpsd-udev = "udev relevant files to use gpsd hotplugging"
-FILES_gpsd-udev = "${base_libdir}/* ${sysconfdir}/udev/*"
+FILES_gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
 RDEPENDS_gpsd-udev += "udev gpsd-conf"
 
 DESCRIPTION_libgpsd = "C service library used for communicating with gpsd"
@@ -100,3 +113,6 @@ RDEPENDS_gps-utils = "python-pygps"
 DESCRIPTION_python-pygps = "Python bindings to gpsd"
 FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS_python-pygps = "python-core python-curses gpsd python-json"
+
+FILES_${PN}-systemd += "${base_libdir}/systemd"
+RDEPENDS_${PN}-systemd += "${PN}"
