@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r8"
+PR = "r9"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -58,10 +58,14 @@ do_install() {
 	ln -s ${base_bindir}/systemd ${D}/init
 }
 
-PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs"
+PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-r lock"
+
+FILES_${PN}-analyze = "${bindir}/systemd-analyze"
+RDEPENDS_${PN}-analyze = "python-dbus"
+RRECOMMENDS_${PN}-analyze = "python-pycairo"
 
 FILES_${PN}-initramfs = "/init"
 RDEPENDS_${PN}-initramfs = "${PN}"
