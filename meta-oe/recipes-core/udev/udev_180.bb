@@ -1,0 +1,89 @@
+DESCRIPTION = "udev is a daemon which dynamically creates and removes device nodes from \
+/dev/, handles hotplug events and loads drivers at boot time."
+
+DEFAULT_PREFERENCE = "-1"
+
+# udev 169 and up require kernel 2.6.36 for ARM: 
+# http://git.kernel.org/?p=linux/hotplug/udev.git;a=commit;h=67a77c8bf299f6264f001677becd056316ebce2f
+
+LICENSE = "GPLv2+ & LGPLv2.1+"
+LICENSE_${PN} = "GPLv2+"
+LICENSE_libudev = "LGPLv2.1+"
+LICENSE_libgudev = "LGPLv2.1+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://src/COPYING;md5=17c4e5fb495e6707ac92a3864926f979 \
+                    file://src/extras/gudev/COPYING;md5=fb494485a7d0505308cb68e4997cc266"
+
+# glib-2.0: Needed for udev-extras
+# util-linux: Needed for libblkid
+# kmod: needed for libkmod
+DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
+
+# f13289ffdf077f75c8710e977ffe538b66885762 -> 180 tag
+SRCREV = "f13289ffdf077f75c8710e977ffe538b66885762"
+
+# version specific SRC_URI
+SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
+           file://gtk-doc.make"
+
+# generic SRC_URI
+SRC_URI += " \
+       file://touchscreen.rules \
+       file://modprobe.rules \
+"
+
+S = "${WORKDIR}/git"
+
+# Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
+
+inherit autotools
+
+EXTRA_OECONF += " \
+                  --disable-introspection \
+                  --with-pci-ids-path=/usr/share/misc \
+                  ac_cv_file__usr_share_pci_ids=no \
+                  ac_cv_file__usr_share_hwdata_pci_ids=no \
+                  ac_cv_file__usr_share_misc_pci_ids=yes \
+                  --sbindir=${base_sbindir} \
+                  --libexecdir=${base_libdir} \
+                  --with-rootlibdir=${base_libdir} \
+                  --with-rootprefix= \
+                  --disable-gtk-doc-html \
+                  --with-systemdsystemunitdir=${base_libdir}/systemd/system/ \
+"
+
+do_configure_prepend() {
+	cp ${WORKDIR}/gtk-doc.make ${S}
+}
+
+PACKAGES =+ "${PN}-systemd libudev libgudev udev-consolekit udev-utils"
+
+FILES_${PN}-systemd = "${base_libdir}/systemd"
+RDEPENDS_${PN}-systemd += "udev"
+
+FILES_libudev = "${base_libdir}/libudev.so.*"
+FILES_libgudev = "${base_libdir}/libgudev*.so.*"
+
+RDEPENDS_${PN} += "udev-utils"
+RPROVIDES_${PN} = "hotplug"
+FILES_${PN} += "${usrbindir}/* ${usrsbindir}/udevd"
+FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
+
+# udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
+# is ${prefix}/lib64
+FILES_${PN} += "/lib/udev*"
+FILES_${PN}-dbg += "/lib/udev/.debug"
+
+FILES_${PN}-consolekit += "${libdir}/ConsoleKit"
+RDEPENDS_${PN}-consolekit += "consolekit"
+
+FILES_udev-utils = "${bindir}/udevadm"
+
+do_install () {
+	install -d ${D}${usrsbindir} \
+		   ${D}${sbindir}
+	oe_runmake 'DESTDIR=${D}' INSTALL=install install
+
+	install -m 0644 ${WORKDIR}/*.rules         ${D}${sysconfdir}/udev/rules.d/
+}
+
