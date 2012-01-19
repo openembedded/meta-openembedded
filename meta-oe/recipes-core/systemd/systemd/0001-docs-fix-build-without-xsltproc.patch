@@ -1,0 +1,38 @@
+From 97719ec99e3bd0040b616b044ab6ae33ae1cfd15 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 2 Oct 2011 19:54:29 +0200
+Subject: [PATCH 1/2] docs: fix build without xsltproc
+
+Make would choke on missing rules for man/systemd.1
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ Makefile.am |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 110a2f4..a5e57b7 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -650,6 +650,7 @@ EXTRA_DIST += \
+ 	src/acl-util.h \
+ 	src/logs-show.h
+ 
++if HAVE_XSLTPROC
+ MANPAGES = \
+ 	man/systemd.1 \
+ 	man/systemctl.1 \
+@@ -721,6 +722,10 @@ EXTRA_DIST += \
+ 	$(XML_IN_FILES) \
+ 	${nodist_man_MANS:=.in} \
+ 	${XML_IN_FILES:.xml.in=.html.in}
++else
++MANPAGES =
++MANPAGES_ALIAS =
++endif
+ 
+ systemd_SOURCES = \
+ 	src/main.c
+-- 
+1.7.2.5
+

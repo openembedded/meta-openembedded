@@ -14,14 +14,14 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r7"
+PR = "r8"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "f6cebb3bd5a00d79c8131637c0f6796a75e6af99"
+SRCREV = "a3f914b2a21decb0c4bd7a763ddd3ace215091cb"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://0001-disable-xsltproc-completely.patch \
+           file://0001-docs-fix-build-without-xsltproc.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
@@ -38,7 +38,8 @@ SYSTEMDDISTRO_angstrom = "angstrom"
 
 # The gtk+ tools should get built as a separate recipe e.g. systemd-tools
 EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
-                 --with-rootdir=${base_prefix} \
+                 --with-rootprefix=${base_prefix} \
+                 --with-rootlibdir=${base_libdir} \
                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
                  --disable-gtk \
                "
