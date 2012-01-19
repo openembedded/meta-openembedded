@@ -1,6 +1,8 @@
 DESCRIPTION = "Python Imaging Library"
 SECTION = "devel/python"
 
+PR = "r1"
+
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://README;beginline=92;endline=117;md5=003338c482e1d2eb2e4d862897f3abbf"
 
@@ -30,6 +32,9 @@ do_install() {
     install -d ${D}${datadir}/doc/${PN}/html/
     install -m 0644 ${S}/README ${D}${datadir}/doc/${PN}/
     install -m 0644 ${S}/Docs/* ${D}${datadir}/doc/${PN}/html/
+
+    # get rid of #!/usr/local/bin/python
+    sed -i -e 's:/usr/local/bin/:${bindir}/env :g' ${D}${bindir}/*
 
 }
 RDEPENDS_${PN} = "python-lang python-stringold"
