@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://README.txt;md5=72c4840d07b65659b60b3fa405c7da36"
 PV_MAJOR = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
 VIMDIR = "${@bb.data.getVar('PV',d,1).split('.')[0]}${@bb.data.getVar('PV',d,1).split('.')[1]}"
 
-INC_PR = "r10"
+INC_PR = "r11"
 
 SRC_URI = " \
   ftp://ftp.vim.org/pub/vim/unix/vim-${PV_MAJOR}.tar.bz2;name=vim${PV_MAJOR}tarbz2 \
@@ -56,6 +56,11 @@ EXTRA_OECONF = " \
   vim_cv_toupper_broken=no \
   vim_cv_tty_group=world \
 "
+
+# Work around rpm picking up csh as a dep
+do_install_append() {
+	chmod -x ${D}${datadir}/vim/vim72/tools/vim132
+}
 
 PACKAGES =+ "vim-common vim-syntax vim-help vim-tutor"
 FILES_vim-syntax = "${datadir}/vim/vim${VIMVER}/syntax"
