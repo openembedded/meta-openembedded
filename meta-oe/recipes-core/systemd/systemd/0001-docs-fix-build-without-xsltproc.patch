@@ -7,6 +7,9 @@ Make would choke on missing rules for man/systemd.1
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
+
+Upstream-status: rejected [fix your docbook install]
+
  Makefile.am |    5 +++++
  1 files changed, 5 insertions(+), 0 deletions(-)
 
