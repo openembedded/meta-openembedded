@@ -1,5 +1,5 @@
 require abiword-2.5.inc
-DEPENDS += " loudmouth libwmf-native gtkmathview asio"
+DEPENDS += " librsvg loudmouth libwmf-native gtkmathview asio"
 RCONFLICTS_${PN} = "abiword-embedded"
 
 PR = "r1"
