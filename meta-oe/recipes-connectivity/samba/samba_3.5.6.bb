@@ -15,6 +15,7 @@ S = "${WORKDIR}/samba-${PV}/source3"
 
 EXTRA_OECONF += "\
 	ac_cv_path_PYTHON=/not/exist \
+	ac_cv_path_PYTHON_CONFIG=/not/exist \
 	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
 	samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
 	linux_getgrouplist_ok=no \
