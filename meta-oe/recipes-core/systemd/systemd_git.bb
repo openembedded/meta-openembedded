@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r9"
+PR = "r10"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -76,6 +76,8 @@ FILES_${PN}-vconsole-setup = "${base_libdir}/systemd/systemd-vconsole-setup \
                               ${base_libdir}/systemd/system/systemd-vconsole-setup.service \
                               ${base_libdir}/systemd/system/sysinit.target.wants/systemd-vconsole-setup.service"
 
+RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
+
 FILES_${PN} += " ${base_bindir}/* \
                 ${datadir}/dbus-1/services \
                 ${datadir}/dbus-1/system-services \
@@ -102,8 +104,7 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 # of blacklist support, so use proper modprobe from module-init-tools
 # And pull in the kernel modules mentioned in INSTALL
 # swapon -p is also not supported by busybox
-RRECOMMENDS_${PN} += "kbd kbd-consolefonts \
-                      systemd-serialgetty \
+RRECOMMENDS_${PN} += "systemd-serialgetty \
                       util-linux-agetty \
                       util-linux-swaponoff \
                       util-linux-fsck e2fsprogs-e2fsck \
