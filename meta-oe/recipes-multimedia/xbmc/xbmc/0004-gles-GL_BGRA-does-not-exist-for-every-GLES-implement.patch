@@ -1,0 +1,31 @@
+From 8bb5efe64ecf56e096cfa7bd721ed0e61175e839 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 22 Jan 2012 10:59:53 +0100
+Subject: [PATCH 4/4] [gles] GL_BGRA does not exist for every GLES implementation
+
+The GLES implementation that TI supports for the catalog chips lacks GL_BGRA
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+Upstream-status: Accepted
+
+ xbmc/cores/VideoRenderers/OverlayRendererGL.cpp |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/xbmc/cores/VideoRenderers/OverlayRendererGL.cpp b/xbmc/cores/VideoRenderers/OverlayRendererGL.cpp
+index b5d00a7..a1a37d0 100644
+--- a/xbmc/cores/VideoRenderers/OverlayRendererGL.cpp
++++ b/xbmc/cores/VideoRenderers/OverlayRendererGL.cpp
+@@ -65,7 +65,9 @@ static void LoadTexture(GLenum target
+   int bytesPerPixel;
+   switch (externalFormat)
+   {
++#ifndef HAS_GLES
+   case GL_BGRA:
++#endif
+   case GL_RGBA:
+     bytesPerPixel = 4;
+     break;
+-- 
+1.7.2.5
+

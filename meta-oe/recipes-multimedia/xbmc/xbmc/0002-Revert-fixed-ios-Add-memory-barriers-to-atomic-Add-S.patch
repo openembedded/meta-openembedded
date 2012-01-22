@@ -1,4 +1,4 @@
-From 84494a538fe3b2aad64ef82673a3a2b576acb7f4 Mon Sep 17 00:00:00 2001
+From 7b2a8a7869d257cba35f53f6d877877c29cdac27 Mon Sep 17 00:00:00 2001
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 Date: Sun, 14 Aug 2011 21:53:47 +0200
 Subject: [PATCH 2/4] Revert "fixed:[ios] Add memory barriers to atomic Add/Subtract and Increment/Decrement functions to ensure synchronized accesses."

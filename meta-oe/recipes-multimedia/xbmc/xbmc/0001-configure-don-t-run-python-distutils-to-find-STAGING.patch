@@ -1,4 +1,4 @@
-From 46d747f48a5e099644c37cc5e345960d714ff5d5 Mon Sep 17 00:00:00 2001
+From 0dce5a2abd9f42876616c35772a4d71c5399543c Mon Sep 17 00:00:00 2001
 From: Koen Kooi <koen@dominion.thruhere.net>
 Date: Sat, 17 Dec 2011 11:38:15 +0100
 Subject: [PATCH 1/4] configure: don't run python distutils to find STAGING_INCDIR/python, it is not safe for per-machine sysroots

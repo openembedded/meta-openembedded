@@ -1,4 +1,4 @@
-From 7ed1e824d92b014aeb3c8855f807af022cd21475 Mon Sep 17 00:00:00 2001
+From aaae1616a09d359b52e929f944ca0ceb4bb7f831 Mon Sep 17 00:00:00 2001
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 Date: Sun, 14 Aug 2011 21:55:09 +0200
 Subject: [PATCH 3/4] Revert "fixed:[ios] Add memory barriers to cas() assembly to ensure alignment of memory accesses."
