@@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
 # When bumping SRCREV make sure you bump PR here and in dependant recipes (gst-ffmpeg, gnash, omxil, etc) to account for SOVERSION changes
-SRCREV = "c6c2dfcf15c1d93b2189adff6f71c5c4b6b05338"
+SRCREV = "62c473934822afd317dfef27754a0ff71f58ce2a"
 
-PV = "0.6.2+${PR}+gitr${SRCPV}"
-PR = "${INC_PR}.1"
+PV = "0.6.5"
+PR = "${INC_PR}.0"
 
-SRC_URI = "git://git.libav.org/libav.git;protocol=git"
+SRC_URI = "git://git.libav.org/libav.git;protocol=git;branch=release/0.6"
 
 S = "${WORKDIR}/git"
 
