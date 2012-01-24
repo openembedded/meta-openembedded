@@ -7,21 +7,23 @@ LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a
 
 ARM_INSTRUCTION_SET = "arm"
 
-DEPENDS = "python-numpy ffmpeg gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
+DEPENDS = "python-numpy gstreamer gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
 
 SRC_URI = "svn://code.ros.org/svn/opencv/tags/2.3.1;module=opencv;proto=https \
            file://opencv/0001-Fix-CMakeLists.txt-numpy-detection.patch \
           "
 
-SRCREV = "6923"
+SRCREV = "7198"
 
 PV = "2.3.1"
-PR = "r0"
+PR = "r2"
 
 S = "${WORKDIR}/opencv"
 
 EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIRS=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
                  -DBUILD_PYTHON_SUPPORT=ON \
+                 -DWITH_FFMPEG=OFF \
+                 -DWITH_GSTREAMER=ON \
                 "
 
 inherit distutils-base pkgconfig cmake

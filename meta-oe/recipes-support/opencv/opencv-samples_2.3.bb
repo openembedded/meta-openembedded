@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a
 SRC_URI = "svn://code.ros.org/svn/opencv/tags/2.3.1;module=opencv;proto=https \
 "
 
-SRCREV = "6923"
+SRCREV = "7198"
 PV = "2.3.1"
-PR = "r0"
+PR = "r2"
 
 S = "${WORKDIR}/opencv"
 
