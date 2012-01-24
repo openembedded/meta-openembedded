@@ -31,11 +31,9 @@ EXTRA_FFCONF ?= ""
 EXTRA_OECONF = " \
         --enable-shared \
         --enable-pthreads \
-        --disable-stripping \
         --enable-gpl \
         --enable-postproc \
         --enable-avfilter \
-        --enable-avfilter-lavf \
         \
         --cross-prefix=${TARGET_PREFIX} \
         --prefix=${prefix} \
