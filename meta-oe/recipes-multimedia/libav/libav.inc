@@ -11,7 +11,7 @@ ARM_INSTRUCTION_SET = "arm"
 # faac faad2 lame schroedinger libgsm
 DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 
-INC_PR = "r3"
+INC_PR = "r4"
 
 inherit autotools pkgconfig
 
@@ -34,6 +34,8 @@ EXTRA_OECONF = " \
         --disable-stripping \
         --enable-gpl \
         --enable-postproc \
+        --enable-avfilter \
+        --enable-avfilter-lavf \
         \
         --cross-prefix=${TARGET_PREFIX} \
         --prefix=${prefix} \
@@ -64,6 +66,10 @@ do_configure() {
 	cd ${B}
 	${S}/configure ${EXTRA_OECONF}
 	sed -i -e s:Os:O4:g ${B}/config.h
+}
+
+do_install_append() {
+	install -m 0644 ${S}/libavfilter/*.h ${D}${includedir}/libavfilter/
 }
 
 FFMPEG_LIBS = "libavcodec libavdevice libavformat \
