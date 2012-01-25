@@ -2,7 +2,7 @@ DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
 LICENSE = "AGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
 
-PR = "r14"
+PR = "r15"
 
 PV = "0.9"
 SRCREV = "a68444610efa2892842893dae828a28527e64a6e"
@@ -51,6 +51,7 @@ RDEPENDS_${PN} = "python-tornado \
                   python-multiprocessing \
                   python-pkgutil \
                   python-imaging \
+                  python-xml \
                   file \
                   openssh-ssh \
                   mime-support \
