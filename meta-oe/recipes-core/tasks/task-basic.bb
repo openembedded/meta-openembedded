@@ -5,7 +5,7 @@ DESCRIPTION = "Basic task to get a device online"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r4"
+PR = "r5"
 
 inherit task
 
@@ -19,9 +19,9 @@ MACHINE_EXTRA_RRECOMMENDS ?= ""
 
 #
 # Select between dropbear and openssh
-# Set TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp" in your DISTRO config to get openssh(d)
+# Set TASK_BASIC_SSHDAEMON = "openssh-sshd openssh-sftp openssh-sftp-server" in your DISTRO config to get openssh(d)
 #
-TASK_BASIC_SSHDAEMON ?= "dropbear-systemd openssh-sftp"
+TASK_BASIC_SSHDAEMON ?= "dropbear-systemd openssh-sftp openssh-sftp-server"
 
 #
 # The section below is designed to match with task-boot, but doesn't depend on it to allow for more freedom 
