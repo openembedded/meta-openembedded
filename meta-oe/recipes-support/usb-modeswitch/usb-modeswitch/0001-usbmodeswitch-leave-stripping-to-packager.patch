@@ -1,0 +1,29 @@
+From 4d3fb03d89f685e1fe1d4b544bcb1be04cbade6f Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 28 Jan 2012 10:16:24 +0100
+Subject: [PATCH] usbmodeswitch: leave stripping to packager
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+
+Upstream-status: Unknown
+
+ Makefile |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 2072976..a71780a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -46,7 +46,7 @@ distclean:
+ 	cd jim && $(MAKE) distclean
+ 
+ install-common:
+-	install -D -s --mode=755 usb_modeswitch $(SBINDIR)/usb_modeswitch
++	install -D --mode=755 usb_modeswitch $(SBINDIR)/usb_modeswitch
+ 	install -D --mode=755 usb_modeswitch.sh $(UDEVDIR)/usb_modeswitch
+ 	install -D --mode=644 usb_modeswitch.conf $(ETCDIR)/usb_modeswitch.conf
+ 	install -D --mode=644 usb_modeswitch.1 $(MANDIR)/usb_modeswitch.1
+-- 
+1.7.2.5
+

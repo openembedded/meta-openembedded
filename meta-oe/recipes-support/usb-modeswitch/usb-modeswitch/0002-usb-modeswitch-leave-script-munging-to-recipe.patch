@@ -1,0 +1,45 @@
+From 86f80442a3fb2b7f9bd1d4ba339fff967c04c3a7 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sat, 28 Jan 2012 12:17:47 +0100
+Subject: [PATCH] usb-modeswitch: leave script munging to recipe
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+
+Upstream-status: Unknown
+
+ Makefile |   13 +------------
+ 1 files changed, 1 insertions(+), 12 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index a71780a..a26b8de 100644
+--- a/Makefile
++++ b/Makefile
+@@ -51,23 +51,12 @@ install-common:
+ 	install -D --mode=644 usb_modeswitch.conf $(ETCDIR)/usb_modeswitch.conf
+ 	install -D --mode=644 usb_modeswitch.1 $(MANDIR)/usb_modeswitch.1
+ 	install -d $(DESTDIR)/var/lib/usb_modeswitch
+-
+-install-script:
+-	@SHELL=`which tclsh 2>/dev/null`; \
+-	if [ -z $$SHELL ]; then \
+-		SHELL="`which jimsh 2>/dev/null`"; \
+-		if [ -z $$SHELL ]; then \
+-			echo "Warning: no Tcl interpreter found!"; \
+-			SHELL="/usr/bin/tclsh"; \
+-		fi \
+-	fi ; \
+-	sed 's_!/usr/bin/tclsh_!'"$$SHELL"'_' <usb_modeswitch.tcl >usb_modeswitch_dispatcher
+ 	install -D --mode=755 usb_modeswitch_dispatcher $(SBINDIR)/usb_modeswitch_dispatcher
+ 
+ install-binary:
+ 	install -D --mode=755 usb_modeswitch_dispatcher $(SBINDIR)/usb_modeswitch_dispatcher
+ 
+-install: all install-common install-script
++install: all install-common
+ 
+ install-shared: shared install-common install-binary
+ 
+-- 
+1.7.2.5
+
