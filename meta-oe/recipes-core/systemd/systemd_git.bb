@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r12"
+PR = "r13"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -104,11 +104,13 @@ RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 # of blacklist support, so use proper modprobe from module-init-tools
 # And pull in the kernel modules mentioned in INSTALL
 # swapon -p is also not supported by busybox
+# busybox mount is broken
 RRECOMMENDS_${PN} += "systemd-serialgetty \
                       util-linux-agetty \
                       util-linux-swaponoff \
                       util-linux-fsck e2fsprogs-e2fsck \
                       module-init-tools \
+                      util-linux-mount util-linux-umount \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
 "
 
