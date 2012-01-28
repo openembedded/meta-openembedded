@@ -5,7 +5,7 @@ DESCRIPTION = "Basic task to get a device online"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r5"
+PR = "r6"
 
 inherit task
 
@@ -55,7 +55,6 @@ RRECOMMENDS_${PN} = "\
 	\
 	tzdata \
 	\
-	rsyslog-systemd \
 	cpufrequtils \
 	htop \
     "
