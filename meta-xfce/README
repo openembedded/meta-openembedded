@@ -12,4 +12,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
 
 When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix meta-xfce'
 
-Interim layer maintainer: Andreas Müller <schnitzeltony@gmx.de>
+Interim layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
