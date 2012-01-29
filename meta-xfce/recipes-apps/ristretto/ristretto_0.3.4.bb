@@ -9,5 +9,5 @@ inherit xfce-app
 
 RRECOMMENDS_${PN} += "tumbler"
 
-SRC_URI[md5sum] = "ab54fffe197c220bf26553c9a4f95658"
-SRC_URI[sha256sum] = "a28c9e472c329b5f3136ebea887dec5ba93a37d5562b493633161392aff5545f"
+SRC_URI[md5sum] = "86c042ee4ffefb0ff5e806849ec4d33c"
+SRC_URI[sha256sum] = "e2ed5c6bc3f56cf82942c54d1492e54607ccf073c7963c1df5fa2cd3a9a71a32"
