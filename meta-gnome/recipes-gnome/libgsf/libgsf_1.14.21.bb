@@ -3,6 +3,8 @@ LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
                     file://COPYING.LIB;md5=61464cfe342798eeced82efe9ae55f63"
 
+PR = "r1"
+
 SECTION = "libs"
 
 DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
@@ -18,9 +20,4 @@ EXTRA_OECONF = "\
 		--disable-gtk-doc \
 		--with-bz2"
 
-PACKAGES =+ "${PN}-gnome ${PN}-gnome-dev "
 RDEPENDS_${PN} = "gconf" 
-
-FILES_${PN}-gnome = "${libdir}/libgsf-gnome-1.so.*"
-FILES_${PN}-gnome-dev = "${libdir}/libgsf-gnome-1.* ${includedir}/libgsf-1/gsf-gnome"
-
