@@ -1,7 +1,9 @@
 DESCRIPTION = "Simple DirectMedia Layer truetype font library."
 SECTION = "libs"
 DEPENDS = "virtual/libsdl freetype"
-LICENSE = "LGPL"
+LICENSE = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
+
 PR = "r1"
 
 SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
