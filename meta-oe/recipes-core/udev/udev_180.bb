@@ -19,20 +19,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 # kmod: needed for libkmod
 DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
 
-# f13289ffdf077f75c8710e977ffe538b66885762 -> 180 tag
-SRCREV = "f13289ffdf077f75c8710e977ffe538b66885762"
-
 # version specific SRC_URI
-SRC_URI = "git://git.kernel.org/pub/scm/linux/hotplug/udev.git;protocol=git \
+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/${P}.tar.gz \
            file://gtk-doc.make"
+SRC_URI[md5sum] = "7a74429e5b4d5cc3d389945774807e46"
+SRC_URI[sha256sum] = "d8f021cc940da7c1f928e2e651c6aa00c5695f3227f560de4a65584e2f089115"
 
 # generic SRC_URI
 SRC_URI += " \
        file://touchscreen.rules \
        file://modprobe.rules \
 "
-
-S = "${WORKDIR}/git"
 
 # Machine specific udev rules should be in their own recipe that ${PN} can add to RRECOMMENDS
 
