@@ -3,6 +3,8 @@ FILESEXTRAPATHS := "${THISDIR}/files"
 
 inherit systemd
 
+PRINC := "${@int(PRINC) + 1}"
+
 SYSTEMD_PACKAGES = "dhcp-server-systemd"
 SYSTEMD_SERVICE_dhcp-server-systemd = "dhcpd.service"
 
