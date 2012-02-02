@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
 DEPENDS = "libxml2 nodejs-native"
 
-PR = "r12"
+PR = "r13"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -112,13 +112,7 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
 FILES_${PN} += "${base_libdir}/systemd/system"
 RDEPENDS_${PN} = "nodejs gzip"
 
-pkg_postinst_${PN} () {
-    # can't do this offline
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
+inherit systemd
 
-    if [ -e ${base_bindir}/systemctl ] ; then
-        systemctl enable cloud9.service
-    fi
-}
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "cloud9.service"
