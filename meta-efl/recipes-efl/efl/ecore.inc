@@ -10,7 +10,7 @@ DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
 inherit efl gettext
 
 BBCLASSEXTEND = "native"
-INC_PR = "r0"
+INC_PR = "r1"
 
 do_configure_prepend() {
 	touch ${S}/po/Makefile.in.in || true
@@ -57,7 +57,9 @@ RREPLACES_${PN}-txt = "libecore-txt-ver-pre-svn-01-0"
 RREPLACES_${PN}-x = "libecore-x-ver-pre-svn-01-0"
 RREPLACES_${PN}-input = "libecore-input-ver-pre-svn-01-0"
 
-FILES_${PN} = "${libdir}/libecore*.so.*"
+FILES_${PN} = "${libdir}/libecore*.so.* \
+  ${bindir} \
+"
 FILES_${PN}-con = "${libdir}/libecore_con*.so.*"
 FILES_${PN}-config = "${libdir}/libecore_config*.so.*"
 FILES_${PN}-desktop = "${libdir}/libecore_desktop*.so.*"
@@ -66,14 +68,15 @@ FILES_${PN}-sdl = "${libdir}/libecore_sdl*.so.*"
 FILES_${PN}-evas = "${libdir}/libecore_evas*.so.*"
 FILES_${PN}-fb = "${libdir}/libecore_fb*.so.*"
 FILES_${PN}-file = "${libdir}/libecore_file*.so.*"
-FILES_${PN}-imf = "${libdir}/libecore_imf*.so.*"
+FILES_${PN}-imf = "${libdir}/libecore_imf*.so.* \
+  ${libdir}/ecore/immodules/*.so \
+"
 FILES_${PN}-imf-evas = "${libdir}/libecore_imf_evas*.so.*"
 FILES_${PN}-ipc = "${libdir}/libecore_ipc*.so.*"
 FILES_${PN}-job = "${libdir}/libecore_job*.so.*"
 FILES_${PN}-txt = "${libdir}/libecore_txt*.so.*"
 FILES_${PN}-x = "${libdir}/libecore_x*.so.*"
 FILES_${PN}-input = "${libdir}/libecore_input*.so.*"
-FILES_${PN}-dev += "${libdir}/ecore/immodules/*.so"
 
 ECORE_OECONF = "\
   --x-includes=${STAGING_INCDIR}/X11 \
