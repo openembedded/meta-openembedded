@@ -14,14 +14,15 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r13"
+PR = "r15"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "bbd9b8c2139a70005e4e83d198575e2a10fe1db2"
+SRCREV = "d26e4270409506cd398875216413b651d6ee7de6"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://0001-docs-fix-build-without-xsltproc.patch \
+           file://0002-systemd-logind-don-t-kill-user-processes-on-exit.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""

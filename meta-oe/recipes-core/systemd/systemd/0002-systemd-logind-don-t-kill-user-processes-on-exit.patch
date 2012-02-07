@@ -1,0 +1,31 @@
+From eccbcfd37d41e1cb66bdf19cded899a36cc3842d Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 7 Feb 2012 10:12:51 +0100
+Subject: [PATCH 2/2] systemd-logind: don't kill user processes on exit
+
+This fixed screen and tmux
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+Upstream-status: Unknown
+
+---
+ src/login/systemd-logind.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/login/systemd-logind.conf b/src/login/systemd-logind.conf
+index 9909804..ba69b6c 100644
+--- a/src/login/systemd-logind.conf
++++ b/src/login/systemd-logind.conf
+@@ -9,7 +9,7 @@
+ 
+ [Login]
+ #NAutoVTs=6
+-#KillUserProcesses=no
++KillUserProcesses=no
+ #KillOnlyUsers=
+ #KillExcludeUsers=root
+ #Controllers=
+-- 
+1.7.2.5
+
