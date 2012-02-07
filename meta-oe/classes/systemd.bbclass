@@ -1,4 +1,4 @@
-DEPENDS_append = " systemd systemd-systemctl-native"
+DEPENDS_append = " systemd-systemctl-native"
 
 systemd_postinst() {
 OPTS=""
