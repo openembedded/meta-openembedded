@@ -2,12 +2,12 @@ DESCRIPTION = "Various tools relating to the Simple Network Management Protocol"
 HOMEPAGE = "http://www.net-snmp.org/"
 LICENSE = "BSD"
 
-DEPENDS = "openssl"
+DEPENDS = "openssl libnl"
 RDEPENDS_${PN}-server += "net-snmp-mibs"
 RDEPENDS_${PN}-client += "net-snmp-mibs"
 RDEPENDS_${PN}-dev = "net-snmp-client (= ${EXTENDPV}) net-snmp-server (= ${EXTENDPV})"
 RRECOMMENDS_${PN}-dbg = "net-snmp-client (= ${EXTENDPV}) net-snmp-server (= ${EXTENDPV})"
-INC_PR = "r0"
+INC_PR = "r1"
 
 inherit autotools update-rc.d siteinfo
 
