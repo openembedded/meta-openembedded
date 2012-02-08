@@ -1,8 +1,9 @@
 require net-snmp.inc
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+        file://sync-with-5.7-branch.patch \
         file://init \
         file://snmpd.conf \
         file://snmptrapd.conf"
