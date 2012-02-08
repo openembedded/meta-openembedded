@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r15"
+PR = "r16"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -59,6 +59,11 @@ do_install() {
 	ln -s ${base_bindir}/systemd ${D}/init
 }
 
+python populate_packages_prepend (){
+	systemdlibdir = d.getVar("base_libdir", True)
+	do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'Systemd %s library', extra_depends='', allow_links=True)
+}
+
 PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
 
 USERADD_PACKAGES = "${PN}"
@@ -79,7 +84,7 @@ FILES_${PN}-vconsole-setup = "${base_libdir}/systemd/systemd-vconsole-setup \
 
 RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
 
-FILES_${PN} += " ${base_bindir}/* \
+FILES_${PN} = " ${base_bindir}/* \
                 ${datadir}/dbus-1/services \
                 ${datadir}/dbus-1/system-services \
                 ${datadir}/polkit-1 \
@@ -93,6 +98,11 @@ FILES_${PN} += " ${base_bindir}/* \
                 ${bindir}/systemd* \
                 ${libdir}/tmpfiles.d/*.conf \
                 ${libdir}/systemd \
+                ${libdir}/binfmt.d \
+                ${libdir}/modules-load.d \
+                ${libdir}/sysctl.d \
+                ${localstatedir} \
+                ${libexecdir} \
                "
 
 FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug ${base_libdir}/security/.debug/"
