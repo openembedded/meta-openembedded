@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9c42325015702feda4f4d2f19a55b767 \
                     file://COPYING.MPL;md5=3c617710e51cdbe0fc00716f056dfb1a \
 "
 
+PR = "r1"
+
 DEPENDS = "glib-2.0 gstreamer"
 
 inherit autotools

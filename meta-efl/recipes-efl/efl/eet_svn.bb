@@ -2,7 +2,7 @@ require eet.inc
 
 SRCREV = "${EFL_SRCREV}"
 PV = "1.5.0+svnr${SRCPV}"
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = "\

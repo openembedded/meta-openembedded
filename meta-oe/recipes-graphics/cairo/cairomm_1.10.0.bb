@@ -5,6 +5,8 @@ DESCRIPTION = "C++ bindings for Cairo graphics library"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
 
+PR = "r1"
+
 DEPENDS = "cairo libsigc++-2.0"
 
 SRC_URI = "http://cairographics.org/releases/cairomm-${PV}.tar.gz;name=archive"

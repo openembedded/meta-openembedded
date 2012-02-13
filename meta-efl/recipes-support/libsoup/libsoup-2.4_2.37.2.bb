@@ -5,6 +5,8 @@ BUGTRACKER = "https://bugzilla.gnome.org/"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
+PR = "r1"
+
 # unstable version
 DEFAULT_PREFERENCE = "-1"
 

@@ -1,6 +1,6 @@
 require mysql5_${PV}.inc
 inherit native
-PR ="r2"
+PR ="r3"
 
 SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
            file://fix-abi-check-gcc45.patch"

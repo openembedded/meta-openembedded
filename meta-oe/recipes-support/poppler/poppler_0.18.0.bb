@@ -1,5 +1,7 @@
 require poppler.inc
 
+PR = "r1"
+
 DEPENDS += "lcms"
 
 EXTRA_OECONF_append = " --disable-abiword-output "

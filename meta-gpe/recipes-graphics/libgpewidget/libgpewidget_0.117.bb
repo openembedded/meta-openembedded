@@ -5,7 +5,7 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d8045f3b8f929c1cb29a1e3fd737b499"
 
 DEPENDS = "gtk+ cairo libxinerama libxcomposite libxrender gtk-doc"
-PR = "r0"
+PR = "r1"
 
 SRC_URI += "file://pkgconfig.patch;striplevel=0"
 SRC_URI[md5sum] = "b85a839264a35d0faf9a1a38c486e189"
