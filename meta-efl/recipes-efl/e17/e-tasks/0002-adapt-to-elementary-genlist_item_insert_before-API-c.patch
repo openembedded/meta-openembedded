@@ -1,0 +1,27 @@
+From 80893c65d5ea68f18e26169323a62eeac14ae177 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 14 Feb 2012 20:53:48 +0100
+Subject: [PATCH 2/8] adapt to elementary genlist_item_insert_before API
+ change from r55869
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ src/gui.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/src/gui.c b/src/gui.c
+index 113c807..f58dcd6 100644
+--- a/src/gui.c
++++ b/src/gui.c
+@@ -1067,7 +1067,7 @@ void create_new_task(void *data, Evas_Object *obj, void *event_info)
+ 	if(strcmp(sel_category, " All Tasks ")==0) strcpy(Task[i].cat, "Personal");
+ 	else strcpy(Task[i].cat, sel_category);
+ 	if(item) { 
+-		task_list[i] = elm_genlist_item_insert_after(list, &itc1, &Task[i], item, ELM_GENLIST_ITEM_NONE,
++		task_list[i] = elm_genlist_item_insert_after(list, &itc1, &Task[i], NULL, item, ELM_GENLIST_ITEM_NONE,
+ 								  NULL, NULL);
+ 	}
+ 	//cater for no items in list
+-- 
+1.7.8.4
+

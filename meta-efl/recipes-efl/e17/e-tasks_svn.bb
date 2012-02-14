@@ -10,13 +10,18 @@ inherit autotools
 
 SRCREV = "25"
 PV = "0.0.1+svnr${SRCPV}"
-PR = "r11"
+PR = "r12"
 
 SRC_URI = "svn://e-tasks.googlecode.com/svn;module=trunk;proto=http \
-           file://genlist_item_insert_before.api.patch \
-           file://0001-adapt-to-newer-elm-API.patch \
-           file://depends.eina.patch \
-           file://0001-fix-changed-callback-name.patch"
+  file://0001-depend-on-eina-not-eina-0.patch \
+  file://0002-adapt-to-elementary-genlist_item_insert_before-API-c.patch \
+  file://0003-adapt-to-newer-elm-API.patch \
+  file://0004-fix-changed-callback-name.patch \
+  file://0005-adapt-to-even-newer-elm-API.patch \
+  file://0006-remove-deprecated-API.patch \
+  file://0007-db_sqlite-fix-warning.patch \
+  file://0008-fix-warning-about-incompatible-pointer-types.patch \
+"
 S = "${WORKDIR}/trunk"
 
 do_install_append() {

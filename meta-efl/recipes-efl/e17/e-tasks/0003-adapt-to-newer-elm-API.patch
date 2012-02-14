@@ -1,7 +1,7 @@
-From 1204c115e006b380c2c64452c9d35f0d695502fe Mon Sep 17 00:00:00 2001
+From 377c4266e9356239c43ac5711a06831ee74f9eef Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Tue, 6 Dec 2011 19:07:56 +0100
-Subject: [PATCH] adapt to newer elm API
+Subject: [PATCH 3/8] adapt to newer elm API
 
 * sed 's/elm_button_label_set/elm_object_text_set/g' -i src/gui.c
   sed 's/elm_button_label_set/elm_object_text_set/g' -i src/db_sqlite.c
@@ -76,7 +76,7 @@ index dfee471..fde2181 100644
  			tystr = strdup(cate);
  			evas_object_smart_callback_add(bt, "clicked", set_category, (char *)tystr);
 diff --git a/src/gui.c b/src/gui.c
-index 113c807..5c8003c 100644
+index f58dcd6..f6f1c6c 100644
 --- a/src/gui.c
 +++ b/src/gui.c
 @@ -51,11 +51,11 @@ void select_category(void *data, Evas_Object *obj, void *event_info)
@@ -652,5 +652,5 @@ index 113c807..5c8003c 100644
  	evas_object_size_hint_align_set(done_button, -1.0, -1.0);
  	elm_box_pack_end(hbox, done_button);
 -- 
-1.7.8
+1.7.8.4
 

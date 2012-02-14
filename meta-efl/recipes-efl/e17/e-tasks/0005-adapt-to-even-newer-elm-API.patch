@@ -1,0 +1,182 @@
+From aa1ac5f8d2133ae04099a155811b65733447e34d Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 14 Feb 2012 20:51:09 +0100
+Subject: [PATCH 5/8] adapt to even newer elm API
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ src/db_sqlite.c |    2 +-
+ src/db_sqlite.h |    2 +-
+ src/gui.c       |   30 +++++++++++++++---------------
+ src/main.c      |    2 +-
+ 4 files changed, 18 insertions(+), 18 deletions(-)
+
+diff --git a/src/db_sqlite.c b/src/db_sqlite.c
+index fde2181..3eb7790 100644
+--- a/src/db_sqlite.c
++++ b/src/db_sqlite.c
+@@ -192,7 +192,7 @@ void load_data(void)
+ void show_cat_tasks(char *ca)
+ {
+ 	int i;
+-	Elm_Genlist_Item *item;
++	Elm_Object_Item *item;
+ 	
+ 	elm_genlist_clear(list);
+ 	if (strcmp(ca, " All Tasks ") == 0) {
+diff --git a/src/db_sqlite.h b/src/db_sqlite.h
+index b595488..469aa48 100644
+--- a/src/db_sqlite.h
++++ b/src/db_sqlite.h
+@@ -39,7 +39,7 @@ extern Evas_Object *list, *hs, *hs1, *cat_list, *sel_cat_bt;
+ void restore_state(void);
+ extern char home_dir[255], sel_category[255];
+ extern Elm_Genlist_Item_Class itc1, itc2;
+-extern Elm_Genlist_Item *task_list[500];
++extern Elm_Object_Item *task_list[500];
+ extern int total_tasks;
+ typedef struct{
+ 	int no;
+diff --git a/src/gui.c b/src/gui.c
+index 69b06d8..0291378 100644
+--- a/src/gui.c
++++ b/src/gui.c
+@@ -26,7 +26,7 @@ char dummy_cat[255];
+ 
+ typedef struct _Details
+ {
+-	Elm_Genlist_Item *item;
++	Elm_Object_Item *item;
+ 	Evas_Object *button;
+ 	Evas_Object *hover;
+ 	char *data;
+@@ -67,7 +67,7 @@ void select_category(void *data, Evas_Object *obj, void *event_info)
+ {
+ 	char tystr[2];
+ 	char te_data[255], *task_entry;
+-	Elm_Genlist_Item *item;
++	Elm_Object_Item *item;
+ 	_Task *tsk=NULL;
+ 
+ 	//for entries, get entry data and check agianst previous task text, date
+@@ -89,7 +89,7 @@ void select_category(void *data, Evas_Object *obj, void *event_info)
+ 	}
+ 	
+ 	Evas_Object *li = data;
+-	item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(li);
++	item = (Elm_Object_Item *)elm_genlist_selected_item_get(li);
+ 	tsk = (_Task *)elm_genlist_item_data_get(item);
+ 	last_rec = tsk->no;
+ 	elm_object_text_set(cat_bt, tsk->cat);
+@@ -111,7 +111,7 @@ void set_priority(void *data, Evas_Object *obj, void *event_info)
+ 	sprintf(tystr, "%d", ty);
+ 	elm_object_text_set(pr_bt, tystr);
+ 	
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	evas_object_hide(hv);
+ 	if (!item) {
+ 		dummy_pr = atoi(prio);
+@@ -125,10 +125,10 @@ void set_priority(void *data, Evas_Object *obj, void *event_info)
+ 
+ void set_category(void *data, Evas_Object *obj, void *event_info)
+ {
+-	Elm_Genlist_Item *item;
++	Elm_Object_Item *item;
+ 	//change category value of selected task
+ 	char *category = data;
+-	item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	evas_object_hide(hs);
+ 	if (!item) return;
+ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(item);
+@@ -146,7 +146,7 @@ void set_date(void *data, Evas_Object *obj, void *event_info)
+ 	//set the date
+ 	elm_object_text_set(date_bt, dt);
+ 	evas_object_hide(date_hs);
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	if (!item) {
+ 		strcpy(dummy_date, dt);
+ 		return;
+@@ -260,8 +260,8 @@ void det_page_done(void *data, Evas_Object *obj, void *event_info)
+ 	if(WRITE) {
+ 		WRITE = 0;
+ 		update_record (tsk->no);
+-		Elm_Genlist_Item *item;
+-		item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++		Elm_Object_Item *item;
++		item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 		if(item) elm_genlist_item_update(task_list[tsk->no]);
+ 		last_rec = -1;
+ 		item = elm_genlist_first_item_get(list);
+@@ -293,7 +293,7 @@ void create_details_page(void *data, Evas_Object *obj, void *event_info)
+ 	curtime = time (NULL);
+ 	
+ 	//check task selected - otherwise return
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	if(!item) return;
+ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(item);
+ 	det_page = elm_win_add(NULL, "inwin", ELM_WIN_BASIC);
+@@ -566,7 +566,7 @@ void save_button_clicked(void *data, Evas_Object *obj, void *event_info)
+ 	char te_data[255], *task_entry;
+ 	
+ 	//get task no
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	if (item) {
+ 		_Task *tsk = (_Task *)elm_genlist_item_data_get(item);
+ 		
+@@ -626,7 +626,7 @@ void note_done(void *data, Evas_Object *obj, void *event_info)
+ 	char tystr[255];
+ 	//Evas_Object *en = data;
+ 	
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(item);
+ 	sprintf(tystr, "%s", elm_entry_entry_get(data));
+ 	if (strcmp(tystr, "<br>") == 0) strcpy(tystr, "");
+@@ -641,7 +641,7 @@ void note_button_clicked(void *data, Evas_Object *obj, void *event_info)
+ 	Evas_Object *bg, *bx, *bx2, *bt, *en;
+ 	//char buf[PATH_MAX];
+ 
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(list);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(list);
+ 	if(!item) return;
+ 	_Task *tsk = (_Task *)elm_genlist_item_data_get(item);
+ 
+@@ -1056,7 +1056,7 @@ void create_new_task(void *data, Evas_Object *obj, void *event_info)
+ 	
+ 	//get selected task if any
+ 	Evas_Object *li = data;
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(li);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(li);
+ 	if (!item) item = elm_genlist_last_item_get(list);	//insert new line at end of list
+ 
+ 	Task[i].no = i;
+@@ -1193,7 +1193,7 @@ void cat_list_selected(void *data, Evas_Object *obj, void *event_info)
+ void  del_cat_button_clicked(void *data, Evas_Object *obj, void *event_info)
+ {
+ 	Evas_Object *li = data;
+-	Elm_Genlist_Item *item = (Elm_Genlist_Item *)elm_genlist_selected_item_get(li);
++	Elm_Object_Item *item = (Elm_Object_Item *)elm_genlist_selected_item_get(li);
+ 	char *_cat = (char *)elm_genlist_item_data_get(item);
+ 	//delete category from db
+ 	del_category(_cat);
+diff --git a/src/main.c b/src/main.c
+index 116b84c..89bbb39 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -27,7 +27,7 @@
+ #include "db_sqlite.h"
+ 
+ char home_dir[255], sel_category[255];
+-Elm_Genlist_Item *task_list[500];
++Elm_Object_Item *task_list[500];
+ Evas_Object *list, *hs, *pr_hs, *date_hs, *entry, *hs1, *tk, *hv, *pr_bt, *cat_list, *win, *cat_hv_bx, *note_win;
+ Evas_Object *c_pr_bt, *cat_dialog, *cat_bt, *sel_cat_bt, *date_bt, *det_page, *entry, *new_button, *note_entry;
+ int total_tasks, WRITE=0, last_rec= -1;
+-- 
+1.7.8.4
+

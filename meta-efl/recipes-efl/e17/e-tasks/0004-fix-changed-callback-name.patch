@@ -1,7 +1,7 @@
-From d6d24a1776594e71ee66db78cc234f38f97f6825 Mon Sep 17 00:00:00 2001
+From 4ca9e2aac3e9f1a981b48552c3aff255863cd1fe Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Sat, 17 Dec 2011 03:12:29 +0100
-Subject: [PATCH] fix changed callback name
+Subject: [PATCH 4/8] fix changed callback name
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
@@ -10,7 +10,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/gui.c b/src/gui.c
-index 5c8003c..b032ee5 100644
+index f6f1c6c..69b06d8 100644
 --- a/src/gui.c
 +++ b/src/gui.c
 @@ -1230,7 +1230,7 @@ void edit_cat(void)
@@ -36,5 +36,5 @@ index 12072f5..116b84c 100644
  	//open database 
  	open_database();
 -- 
-1.7.8
+1.7.8.4
 

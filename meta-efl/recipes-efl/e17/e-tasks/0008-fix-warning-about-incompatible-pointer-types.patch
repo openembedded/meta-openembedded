@@ -1,0 +1,79 @@
+From a9c2240e8ad46a06a4599a444ff8296f5b61b5a9 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 14 Feb 2012 21:13:22 +0100
+Subject: [PATCH 8/8] fix warning about incompatible pointer types
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ src/gui.c |   16 ++++++++--------
+ 1 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/src/gui.c b/src/gui.c
+index c798f75..beac463 100644
+--- a/src/gui.c
++++ b/src/gui.c
+@@ -728,7 +728,7 @@ void create_cat_hover(void)
+ //for genlist
+ Elm_Genlist_Item_Class itc1;
+ 
+-char *gl_text_get(const void *data, Evas_Object *obj, const char *part)
++char *gl_text_get(void *data, Evas_Object *obj, const char *part)
+ {
+ 	_Task *tsk = (_Task *)data;
+ 	char tystr[255], *ty;
+@@ -739,7 +739,7 @@ char *gl_text_get(const void *data, Evas_Object *obj, const char *part)
+ 	//return NULL;
+ }
+ 
+-Evas_Object *gl_content_get(const void *data, Evas_Object *obj, const char *part)
++Evas_Object *gl_content_get(void *data, Evas_Object *obj, const char *part)
+ {
+ 	_Task *tsk = (_Task *)data;
+ 	
+@@ -824,12 +824,12 @@ Evas_Object *gl_content_get(const void *data, Evas_Object *obj, const char *part
+ 	return NULL;
+ }
+ 
+-Eina_Bool gl_state_get(const void *data, Evas_Object *obj, const char *part)
++Eina_Bool gl_state_get(void *data, Evas_Object *obj, const char *part)
+ {
+    return 0;
+ }
+ 
+-void gl_del(const void *data, Evas_Object *obj)
++void gl_del(void *data, Evas_Object *obj)
+ {
+ 	return;
+ }
+@@ -1203,24 +1203,24 @@ void  del_cat_button_clicked(void *data, Evas_Object *obj, void *event_info)
+ 	if(strcmp(sel_category, _cat) == 0) select_category (" All Tasks ", NULL, NULL);
+ }
+ 
+-char *cat_text_get(const void *data, Evas_Object *obj, const char *part)
++char *cat_text_get(void *data, Evas_Object *obj, const char *part)
+ {
+ 	char *_cat = (char *)data;
+ 	char *ty = strdup(_cat);
+ 	return (ty);
+ }
+ 
+-Evas_Object *cat_content_get(const void *data, Evas_Object *obj, const char *part)
++Evas_Object *cat_content_get(void *data, Evas_Object *obj, const char *part)
+ {
+ 	return NULL;
+ }
+ 
+-Eina_Bool cat_state_get(const void *data, Evas_Object *obj, const char *part)
++Eina_Bool cat_state_get(void *data, Evas_Object *obj, const char *part)
+ {
+    return 0;
+ }
+ 
+-void cat_del (const void *data, Evas_Object *obj)
++void cat_del (void *data, Evas_Object *obj)
+ {
+ }
+ 
+-- 
+1.7.8.4
+
