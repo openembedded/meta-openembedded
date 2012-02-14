@@ -11,6 +11,7 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
 
 SRCREV = "105069"
 PV = "1.7.3+svnr${SRCPV}"
+PR = "r1"
 
 SRCREV_FORMAT = "source"
 
@@ -18,6 +19,7 @@ SRC_URI = "\
   svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;proto=http;subdir=src \
   svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;proto=http;subdir=src \
   svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;proto=http;subdir=src \
+  file://0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch \
   file://CMakeLists.txt \
 "
 

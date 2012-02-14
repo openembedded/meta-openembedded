@@ -1,0 +1,28 @@
+From 079acc344dc12818d8b56bf80a42065d8429f7ef Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 14 Feb 2012 09:56:53 +0100
+Subject: [PATCH] JavaScriptCore: add EINA_LIBRARIES to shell build for Efl
+
+* needed for libwtf_efl
+* otherwise fails with ../wtf/libwtf_efl.so.0.1.0: error: undefined reference to 'eina_module_free'
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Source/JavaScriptCore/shell/PlatformEfl.cmake |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/Source/JavaScriptCore/shell/PlatformEfl.cmake b/Source/JavaScriptCore/shell/PlatformEfl.cmake
+index c35af2d..ef3f437 100644
+--- a/Source/JavaScriptCore/shell/PlatformEfl.cmake
++++ b/Source/JavaScriptCore/shell/PlatformEfl.cmake
+@@ -1,6 +1,7 @@
+ LIST(APPEND JSC_LIBRARIES
+     ${Glib_LIBRARIES}
+     ${ECORE_LIBRARIES}
++    ${EINA_LIBRARIES}
+     ${CMAKE_DL_LIBS}
+ )
+ 
+-- 
+1.7.8.4
+
