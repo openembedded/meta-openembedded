@@ -1,0 +1,17 @@
+Our automake-1.11.2 doesn't support it yet, see:
+http://lists.gnu.org/archive/html/automake/2011-12/msg00081.html
+
+Upstream-Status: Inappropriate [fix or upgrade oe-core automake]
+
+diff -uNr ImageMagick-6.7.5-6.orig/configure.ac ImageMagick-6.7.5-6/configure.ac
+--- ImageMagick-6.7.5-6.orig/configure.ac	2012-02-12 18:07:28.000000000 +0100
++++ ImageMagick-6.7.5-6/configure.ac	2012-02-15 12:55:47.668813474 +0100
+@@ -128,7 +128,7 @@
+ # Ensure that make can run correctly
+ AM_SANITY_CHECK
+ 
+-AM_INIT_AUTOMAKE([1.11 color-tests foreign parallel-tests silent-rules subdir-objects dist-bzip2 dist-lzip dist-xz dist-zip])
++AM_INIT_AUTOMAKE([1.11 color-tests foreign parallel-tests silent-rules subdir-objects dist-bzip2 dist-xz dist-zip])
+ 
+ # Enable support for silent build rules
+ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
