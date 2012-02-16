@@ -3,9 +3,11 @@ FILESEXTRAPATHS := "${THISDIR}/files"
 
 inherit systemd
 
-PRINC := "${@int(PRINC) + 2}"
+PRINC := "${@int(PRINC) + 3}"
 
-SYSTEMD_PACKAGES = "dhcp-server-systemd"
+SYSTEMD_PACKAGES = "dhcp-server-systemd dhcp-relay-systemd"
 SYSTEMD_SERVICE_dhcp-server-systemd = "dhcpd.service"
+SYSTEMD_SERVICE_dhcp-relay-systemd = "dhcrelay.service"
 
-SRC_URI += "file://dhcpd.service"
+SRC_URI += "file://dhcpd.service \
+            file://dhcrelay.service"

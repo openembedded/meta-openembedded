@@ -1,0 +1,10 @@
+[Unit]
+Description=DHCP Relay Agent Daemon
+After=syslog.target network.target
+
+[Service]
+EnvironmentFile=/etc/default/dhcp-relay
+ExecStart=/usr/sbin/dhcrelay -d $DHCRELAYARGS
+
+[Install]
+WantedBy=multi-user.target
