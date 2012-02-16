@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7ec1bcc46f28b11f4722e20d9b7dd4d5"
 # update-rc.d and update-alternatives is important
 RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
 
-INC_PR = "r6"
+INC_PR = "r7"
 
 inherit autotools systemd
 
@@ -26,7 +26,7 @@ EXTRA_OECONF = " \
   --disable-pcre \
   --disable-sql \
   --enable-systemd \
-  --with-systemdsystemunitdir=${base_libdir}/systemd/system \
+  --with-systemdsystemunitdir=${systemd_unitdir}/system \
 "
 
 do_configure_prepend() {
@@ -46,11 +46,6 @@ do_install_append() {
 
 SYSTEMD_PACKAGES = "${PN}-systemd"
 SYSTEMD_SERVICE = "${PN}.service"
-
-PACKAGES =+ "${PN}-systemd"
-
-FILES_${PN}-systemd += "${base_libdir}/systemd"
-RDEPENDS_${PN}-systemd += "${PN}"
 
 FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
