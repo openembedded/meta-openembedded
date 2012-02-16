@@ -13,6 +13,7 @@ SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
 SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
 
 do_install_append() {
+	install -d ${D}${sysconfdir}/default
 	install -m 0644 ${WORKDIR}/busybox-syslog.default ${D}${sysconfdir}/default/busybox-syslog
 
 	install -d ${D}${base_libdir}/systemd/system
