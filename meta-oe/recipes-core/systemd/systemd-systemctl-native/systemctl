@@ -10,50 +10,59 @@ while [ $# != 0 ]; do
 		enable)
 			shift
 
-			service="$1"
+			services="$1"
+			in_enable="1"
 			shift
 			;;
 		--root=*)
 			ROOT=${opt##--root=}
+			in_enable="0"
 			shift
 			;;
 		*)
-			echo "'$opt' is an unkown option; exiting with error"
-			exit 1
+			if [ "$in_enable" = "1" ]; then
+				services="$services $opt" 
+				shift
+			else
+				echo "'$opt' is an unkown option; exiting with error"
+				exit 1
+			fi
 			;;
 	esac
 done
 
-# find service file
-for p in $ROOT/etc/systemd/system \
-         $ROOT/lib/systemd/system \
-         $ROOT/usr/lib/systemd/system; do
-	if [ -e $p/$service ]; then
-		service_file=$p/$service
-		service_file=${service_file##$ROOT}
+for service in "$services"; do
+	# find service file
+	for p in $ROOT/etc/systemd/system \
+		 $ROOT/lib/systemd/system \
+		 $ROOT/usr/lib/systemd/system; do
+		if [ -e $p/$service ]; then
+			service_file=$p/$service
+			service_file=${service_file##$ROOT}
+		fi
+	done
+	if [ -z "$service_file" ]; then
+		echo "'$service' couldn't be found; exiting with error"
+		exit 1
 	fi
-done
-if [ -z "$service_file" ]; then
-	echo "'$service' couldn't be found; exiting with error"
-	exit 1
-fi
 
-# create the required symbolic links
-wanted_by=$(grep WantedBy $ROOT/$service_file \
-                | sed 's,WantedBy=,,g' \
-                | tr ',' '\n' \
-                | grep '\.target$')
+	# create the required symbolic links
+	wanted_by=$(grep WantedBy $ROOT/$service_file \
+		        | sed 's,WantedBy=,,g' \
+		        | tr ',' '\n' \
+		        | grep '\.target$')
 
-for r in $wanted_by; do
-	mkdir -p $ROOT/etc/systemd/system/$r.wants
-	ln -s $service_file $ROOT/etc/systemd/system/$r.wants
-	echo "Enabled $service for $wanted_by."
-done
+	for r in $wanted_by; do
+		mkdir -p $ROOT/etc/systemd/system/$r.wants
+		ln -s $service_file $ROOT/etc/systemd/system/$r.wants
+		echo "Enabled $service for $wanted_by."
+	done
 
-# call us for the other required scripts
-also=$(grep Also $ROOT/$service_file \
-           | sed 's,Also=,,g' \
-           | tr ',' '\n')
-for a in $also; do
-	$0 --root=$ROOT enable $a
+	# call us for the other required scripts
+	also=$(grep Also $ROOT/$service_file \
+		   | sed 's,Also=,,g' \
+		   | tr ',' '\n')
+	for a in $also; do
+		$0 --root=$ROOT enable $a
+	done
 done
