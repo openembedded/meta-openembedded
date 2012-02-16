@@ -63,8 +63,17 @@ def systemd_after_parse(d):
 				if systemd_services == "":
 					raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_SERVICE / %s" % (bb_filename, service_pkg)
 
+	# prepend systemd-packages not already included
+	def systemd_create_package(pkg_systemd):
+		packages = d.getVar('PACKAGES', 1)
+		if not pkg_systemd in packages:
+			packages = "%s %s" % (pkg_systemd, packages)
+			d.setVar('PACKAGES', packages)
+
 
 	systemd_check_vars()
+	for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+		systemd_create_package(pkg_systemd)
 
 
 python __anonymous() {
