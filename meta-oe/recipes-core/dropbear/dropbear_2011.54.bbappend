@@ -1,6 +1,6 @@
 inherit systemd
 
-PRINC := "${@int(PRINC) + 1}"
+PRINC := "${@int(PRINC) + 2}"
 
 # look for files in the layer first
 FILESEXTRAPATHS := "${THISDIR}/${PN}"
@@ -13,14 +13,5 @@ SYSTEMD_PACKAGES = "${PN}-systemd"
 SYSTEMD_SERVICE_${PN}-systemd = "dropbear.socket"
 
 do_install_append() {
-	install -d ${D}${base_libdir}/systemd/system
-	install -m 0644 ${WORKDIR}/dropbearkey.service ${D}${base_libdir}/systemd/system/
-	install -m 0644 ${WORKDIR}/dropbear@.service ${D}${base_libdir}/systemd/system/
-	install -m 0644 ${WORKDIR}/dropbear.socket ${D}${base_libdir}/systemd/system/
-	ln -sf /dev/null ${D}${base_libdir}/systemd/system/dropbear.service
+	ln -sf /dev/null ${D}${systemd_unitdir}/system/dropbear.service
 }
-
-PACKAGES += "${PN}-systemd"
-
-RDEPENDS_${PN}-systemd += "dropbear"
-FILES_${PN}-systemd = "${base_libdir}/systemd"
