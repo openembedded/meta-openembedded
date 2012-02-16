@@ -72,7 +72,7 @@ python __anonymous() {
 }
 
 python populate_packages_prepend () {
-	def systemd_package(pkg):
+	def systemd_generate_package_scripts(pkg):
 		bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
 		localdata = bb.data.createCopy(d)
 		overrides = bb.data.getVar("OVERRIDES", localdata, 1)
@@ -96,10 +96,10 @@ python populate_packages_prepend () {
 		prerm += bb.data.getVar('systemd_prerm', localdata, 1)
 		bb.data.setVar('pkg_prerm_%s' % pkg, prerm, d)
 
-	        postrm = bb.data.getVar('pkg_postrm', localdata, 1)
-	        if not postrm:
-	                postrm = '#!/bin/sh\n'
-                postrm += bb.data.getVar('systemd_postrm', localdata, 1)
+		postrm = bb.data.getVar('pkg_postrm', localdata, 1)
+		if not postrm:
+			postrm = '#!/bin/sh\n'
+		postrm += bb.data.getVar('systemd_postrm', localdata, 1)
 		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
 
 		rdepends = explode_deps(bb.data.getVar('RDEPENDS_' + pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "")
@@ -107,7 +107,6 @@ python populate_packages_prepend () {
 		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
 
 
-	pkgs = bb.data.getVar('SYSTEMD_PACKAGES', d, 1)
-	for pkg in pkgs.split():
-		systemd_package(pkg)
+	for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+		systemd_generate_package_scripts(pkg_systemd)
 }
