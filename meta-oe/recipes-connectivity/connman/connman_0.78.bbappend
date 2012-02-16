@@ -1,13 +1,8 @@
 inherit systemd
 
-EXTRA_OECONF += "--with-systemdunitdir=${base_libdir}/systemd/system/"
+EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
 
-PRINC := "${@int(PRINC) + 1}"
+PRINC := "${@int(PRINC) + 2}"
 
 SYSTEMD_PACKAGES = "${PN}-systemd"
 SYSTEMD_SERVICE_${PN}-systemd = "connman.service"
-
-# systemd files
-PACKAGES =+ "${PN}-systemd"
-FILES_${PN}-systemd += "${base_libdir}/systemd"
-RDEPENDS_${PN}-systemd += "${PN}"
