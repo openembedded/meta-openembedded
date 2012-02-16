@@ -80,6 +80,17 @@ python __anonymous() {
     systemd_after_parse(d)
 }
 
+# automatically install all *.service and *.socket supplied in recipe's SRC_URI
+do_install_append() {
+    install -d ${D}${systemd_unitdir}/system
+    for service in `find ${WORKDIR} -maxdepth 1 -name '*.service' -o -name '*.socket'` ; do
+	# ensure installing systemd-files only (e.g not avahi *.service)
+	if grep -q '\[Unit\]' $service ; then
+	        install -m 644 $service ${D}${systemd_unitdir}/system
+	fi
+    done
+}
+
 python populate_packages_prepend () {
 	def systemd_generate_package_scripts(pkg):
 		bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
