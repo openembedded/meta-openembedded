@@ -8,14 +8,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9c42325015702feda4f4d2f19a55b767 \
                     file://COPYING.MPL;md5=3c617710e51cdbe0fc00716f056dfb1a \
 "
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "glib-2.0 gstreamer"
 
 inherit autotools
 
 FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
-FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*a"
+FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"
+FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
 FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
 
 do_compile_append() {
