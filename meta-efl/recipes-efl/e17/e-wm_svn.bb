@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r23"
+PR = "r24"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -12,6 +12,7 @@ S = "${WORKDIR}/${SRCNAME}"
 
 SRC_URI = "\
   ${E_SVN}/trunk;module=${SRCNAME};proto=http \
+  file://0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch \
   file://enlightenment_start.oe \
   file://applications.menu \
 "
