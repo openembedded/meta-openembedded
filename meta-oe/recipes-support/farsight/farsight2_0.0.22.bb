@@ -5,7 +5,7 @@ SRC_URI = "http://farsight.freedesktop.org/releases/farsight2/${P}.tar.gz"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "libnice glib-2.0 libxml2 zlib dbus gstreamer gst-plugins-base"
 
@@ -18,7 +18,8 @@ EXTRA_OECONF = " \
 "
 
 FILES_${PN} += "${libdir}/*/*.so"
-FILES_${PN}-dev += "${libdir}/*/*a"
+FILES_${PN}-dev += "${libdir}/*/*.la"
+FILES_${PN}-staticdev += "${libdir}/*/*.a"
 FILES_${PN}-dbg += "${libdir}/*/.debug"
 
 
