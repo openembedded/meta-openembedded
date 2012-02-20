@@ -12,7 +12,6 @@ S = "${WORKDIR}/${SRCNAME}"
 
 SRC_URI = "\
   ${E_SVN}/trunk;module=${SRCNAME};proto=http \
-  file://0001-Revert-Illume-Remove-the-popup.-It-s-not-needed-now.patch \
   file://enlightenment_start.oe \
   file://applications.menu \
 "
