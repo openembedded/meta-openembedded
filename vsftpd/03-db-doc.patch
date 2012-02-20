@@ -1,0 +1,19 @@
+Author: shaul Karl <shaulkarl@yahoo.com>
+Description:
+ A short explanation how to find out the right db version (Closes: #478282).
+
+diff -Naurp vsftpd.orig/EXAMPLE/VIRTUAL_USERS/README vsftpd/EXAMPLE/VIRTUAL_USERS/README
+--- vsftpd.orig/EXAMPLE/VIRTUAL_USERS/README	2009-01-31 00:02:36.000000000 +0000
++++ vsftpd/EXAMPLE/VIRTUAL_USERS/README	2009-01-31 01:38:11.000000000 +0000
+@@ -21,7 +21,10 @@ NOTE: Many systems have multiple version
+ need to use e.g. db3_load for correct operation. This is known to affect
+ some Debian systems. The core issue is that pam_userdb expects its login
+ database to be a specific db version (often db3, whereas db4 may be installed
+-on your system).
++on your system). You might check ahead what specific db version you'll need
++by looking at the dependcies of the pam module. Some methods to do that is to
++run ldd on the pam_userdb.so or look at the dependencies of the package with
++the pam modules.
+ 
+ This will create /etc/vsftpd_login.db. Obviously, you may want to make sure
+ the permissions are restricted:

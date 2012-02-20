@@ -1,0 +1,18 @@
+Author: Daniel Jacobowitz <dan@debian.org>
+Description: Build with tcpwrapper and SSL support.
+
+diff -Naurp vsftpd.orig/builddefs.h vsftpd/builddefs.h
+--- vsftpd.orig/builddefs.h	2009-01-31 00:02:36.000000000 +0000
++++ vsftpd/builddefs.h	2009-01-31 00:26:34.000000000 +0000
+@@ -1,9 +1,9 @@
+ #ifndef VSF_BUILDDEFS_H
+ #define VSF_BUILDDEFS_H
+ 
+-#undef VSF_BUILD_TCPWRAPPERS
++#define VSF_BUILD_TCPWRAPPERS 1
+ #define VSF_BUILD_PAM
+-#undef VSF_BUILD_SSL
++#define VSF_BUILD_SSL
+ 
+ #endif /* VSF_BUILDDEFS_H */
+ 

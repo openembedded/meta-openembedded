@@ -1,0 +1,81 @@
+Author: Jiri Skala <jskala@redhat.com>
+Description: trim white spaces from option values (Closes: #419857, #536803).
+
+diff -Naurp vsftpd.orig/parseconf.c vsftpd/parseconf.c
+--- vsftpd.orig/parseconf.c	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/parseconf.c	2009-10-18 11:28:31.000000000 +0200
+@@ -275,7 +275,7 @@ vsf_parseconf_load_setting(const char* p
+         }
+         else
+         {
+-          *p_curr_setting = str_strdup(&s_value_str);
++          *p_curr_setting = str_strdup_trimmed(&s_value_str);
+         }
+         return;
+       }
+diff -Naurp vsftpd.orig/str.c vsftpd/str.c
+--- vsftpd.orig/str.c	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/str.c	2009-10-18 11:28:31.000000000 +0200
+@@ -89,6 +89,18 @@ str_strdup(const struct mystr* p_str)
+   return vsf_sysutil_strdup(str_getbuf(p_str));
+ }
+ 
++const char*
++str_strdup_trimmed(const struct mystr* p_str)
++{
++  const char* p_trimmed = str_getbuf(p_str);
++  int h, t, newlen;
++
++  for (h = 0; h < (int)str_getlen(p_str) && vsf_sysutil_isspace(p_trimmed[h]); h++) ;
++  for (t = str_getlen(p_str) - 1; t >= 0 && vsf_sysutil_isspace(p_trimmed[t]); t--) ;
++  newlen = t - h + 1;
++  return newlen ? vsf_sysutil_strndup(p_trimmed+h, (unsigned int)newlen) : 0L;
++}
++
+ void
+ str_alloc_alt_term(struct mystr* p_str, const char* p_src, char term)
+ {
+diff -Naurp vsftpd.orig/str.h vsftpd/str.h
+--- vsftpd.orig/str.h	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/str.h	2009-10-18 11:28:31.000000000 +0200
+@@ -31,6 +31,7 @@ void str_alloc_ulong(struct mystr* p_str
+ void str_alloc_filesize_t(struct mystr* p_str, filesize_t the_filesize);
+ void str_copy(struct mystr* p_dest, const struct mystr* p_src);
+ const char* str_strdup(const struct mystr* p_str);
++const char* str_strdup_trimmed(const struct mystr* p_str);
+ void str_empty(struct mystr* p_str);
+ void str_free(struct mystr* p_str);
+ void str_trunc(struct mystr* p_str, unsigned int trunc_len);
+diff -Naurp vsftpd.orig/sysutil.c vsftpd/sysutil.c
+--- vsftpd.orig/sysutil.c	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/sysutil.c	2009-10-18 11:28:31.000000000 +0200
+@@ -1033,6 +1033,18 @@ vsf_sysutil_strdup(const char* p_str)
+   return strdup(p_str);
+ }
+ 
++char*
++vsf_sysutil_strndup(const char* p_str, unsigned int p_len)
++{
++  char *new = (char *)malloc(p_len+1);
++
++  if (new == NULL)
++    return NULL;
++
++  new[p_len]='\0';
++  return (char *)memcpy(new, p_str, p_len);
++}
++
+ void
+ vsf_sysutil_memclr(void* p_dest, unsigned int size)
+ {
+diff -Naurp vsftpd.orig/sysutil.h vsftpd/sysutil.h
+--- vsftpd.orig/sysutil.h	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/sysutil.h	2009-10-18 11:28:31.000000000 +0200
+@@ -186,6 +186,7 @@ int vsf_sysutil_wait_get_exitcode(
+ /* Various string functions */
+ unsigned int vsf_sysutil_strlen(const char* p_text);
+ char* vsf_sysutil_strdup(const char* p_str);
++char* vsf_sysutil_strndup(const char* p_str, unsigned int p_len);
+ void vsf_sysutil_memclr(void* p_dest, unsigned int size);
+ void vsf_sysutil_memcpy(void* p_dest, const void* p_src,
+                         const unsigned int size);

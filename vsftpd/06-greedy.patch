@@ -1,0 +1,32 @@
+Author: Martin Nagy <mnagy@redhat.com>
+Description: Fix file listing issue with wildcard (Bugzilla: #392181).
+
+diff -Naurp vsftpd.orig/ls.c vsftpd/ls.c
+--- vsftpd.orig/ls.c	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/ls.c	2009-10-18 11:48:29.000000000 +0200
+@@ -281,6 +281,25 @@ vsf_filename_passes_filter(const struct 
+       {
+         goto out;
+       }
++      if (!must_match_at_current_pos)
++      {
++        struct mystr scan_fwd = INIT_MYSTR;
++
++        str_mid_to_end(&name_remain_str, &scan_fwd,
++                        indexx + str_getlen(&s_match_needed_str));
++        /* We're allowed to be greedy, test if it match further along
++         * keep advancing indexx while we can still match.
++         */
++        while( (locate_result = str_locate_str(&scan_fwd, &s_match_needed_str)),
++            locate_result.found )
++        {
++          indexx += locate_result.index + str_getlen(&s_match_needed_str);
++          str_mid_to_end(&scan_fwd, &temp_str,
++                         locate_result.index + str_getlen(&s_match_needed_str));
++          str_copy(&scan_fwd, &temp_str);
++        }
++       str_free(&scan_fwd);
++      }
+       /* Chop matched string out of remainder */
+       str_mid_to_end(&name_remain_str, &temp_str,
+                      indexx + str_getlen(&s_match_needed_str));

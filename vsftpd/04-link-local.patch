@@ -1,0 +1,91 @@
+Author: Michael Stapelberg <michael@stapelberg.de>
+Description:
+ vsftpd does not accept IPv6 scope identifier in listen_address6
+ (Closes: #544993).
+ .
+ When specifying a link-local address, you need a scope identifier (tha name of
+ the index usually), thus you cannot use the following:
+ listen_address6=fe80::21f:16ff:fe06:3aab
+ but you have to use:
+ listen_address6=fe80::21f:16ff:fe06:3aab%eth0
+ so that it is clear on which interface this link-local address should be used.
+ .
+ Unfortunately, vsftpd does not correctly parse the address mentioned above and
+ thus fails to be useful in link-local-only environments.
+ .
+ This patch fixes it.
+
+diff -Naurp vsftpd.orig/standalone.c vsftpd/standalone.c
+--- vsftpd.orig/standalone.c	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/standalone.c	2009-10-17 17:10:02.000000000 +0200
+@@ -7,6 +7,8 @@
+  * Code to listen on the network and launch children servants.
+  */
+ 
++#include <net/if.h>
++
+ #include "standalone.h"
+ 
+ #include "parseconf.h"
+@@ -111,8 +113,17 @@ vsf_standalone_main(void)
+     else
+     {
+       struct mystr addr_str = INIT_MYSTR;
++      struct mystr scope_id = INIT_MYSTR;
+       const unsigned char* p_raw_addr;
++      unsigned int if_index = 0;
++
++      /* See if we got a scope id */
+       str_alloc_text(&addr_str, tunable_listen_address6);
++      str_split_char(&addr_str, &scope_id, '%');
++      if (str_getlen(&scope_id) > 0) {
++        if_index = if_nametoindex(str_getbuf(&scope_id));
++        str_free(&scope_id);
++      }
+       p_raw_addr = vsf_sysutil_parse_ipv6(&addr_str);
+       str_free(&addr_str);
+       if (!p_raw_addr)
+@@ -120,6 +131,7 @@ vsf_standalone_main(void)
+         die2("bad listen_address6: ", tunable_listen_address6);
+       }
+       vsf_sysutil_sockaddr_set_ipv6addr(p_sockaddr, p_raw_addr);
++      vsf_sysutil_sockaddr_set_ipv6scope(p_sockaddr, if_index);
+     }
+     retval = vsf_sysutil_bind(listen_sock, p_sockaddr);
+     vsf_sysutil_free(p_sockaddr);
+diff -Naurp vsftpd.orig/sysutil.c vsftpd/sysutil.c
+--- vsftpd.orig/sysutil.c	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/sysutil.c	2009-10-17 17:10:02.000000000 +0200
+@@ -2039,6 +2039,19 @@ vsf_sysutil_sockaddr_set_ipv6addr(struct
+   }
+ }
+ 
++int
++vsf_sysutil_sockaddr_get_ipv6scope(struct vsf_sysutil_sockaddr* p_sockptr)
++{
++  return p_sockptr->u.u_sockaddr_in6.sin6_scope_id;
++}
++
++void
++vsf_sysutil_sockaddr_set_ipv6scope(struct vsf_sysutil_sockaddr* p_sockptr,
++                                  const int scope_id)
++{
++  p_sockptr->u.u_sockaddr_in6.sin6_scope_id = scope_id;
++}
++
+ const void*
+ vsf_sysutil_sockaddr_ipv6_v4(const struct vsf_sysutil_sockaddr* p_addr)
+ {
+diff -Naurp vsftpd.orig/sysutil.h vsftpd/sysutil.h
+--- vsftpd.orig/sysutil.h	2009-10-02 14:15:18.000000000 +0200
++++ vsftpd/sysutil.h	2009-10-17 17:10:02.000000000 +0200
+@@ -228,6 +228,9 @@ void vsf_sysutil_sockaddr_set_ipv4addr(s
+                                        const unsigned char* p_raw);
+ void vsf_sysutil_sockaddr_set_ipv6addr(struct vsf_sysutil_sockaddr* p_sockptr,
+                                        const unsigned char* p_raw);
++void vsf_sysutil_sockaddr_set_ipv6scope(struct vsf_sysutil_sockaddr* p_sockptr,
++                                      const int scope_id);
++int vsf_sysutil_sockaddr_get_ipv6scope(struct vsf_sysutil_sockaddr* p_sockptr);
+ void vsf_sysutil_sockaddr_set_any(struct vsf_sysutil_sockaddr* p_sockaddr);
+ unsigned short vsf_sysutil_sockaddr_get_port(
+     const struct vsf_sysutil_sockaddr* p_sockptr);

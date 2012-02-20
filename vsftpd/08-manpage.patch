@@ -1,0 +1,23 @@
+Author: Daniel Baumann <daniel.baumann@progress-technologies.net>
+Description: Fixing manpage formating.
+
+diff -Naurp vsftpd.orig/vsftpd.8 vsftpd/vsftpd.8
+--- vsftpd.orig/vsftpd.8	2009-07-17 20:56:23.000000000 +0000
++++ vsftpd/vsftpd.8	2010-04-08 05:18:00.000000000 +0000
+@@ -57,4 +57,3 @@ setting and any identical setting that w
+ .Pa /etc/vsftpd.conf
+ .Sh SEE ALSO
+ .Xr vsftpd.conf 5
+-.end
+diff -Naurp vsftpd.orig/vsftpd.conf.5 vsftpd/vsftpd.conf.5
+--- vsftpd.orig/vsftpd.conf.5	2009-10-19 02:46:30.000000000 +0000
++++ vsftpd/vsftpd.conf.5	2010-04-08 05:18:08.000000000 +0000
+@@ -404,7 +404,7 @@ reuse (which proves that they know the s
+ channel). Although this is a secure default, it may break many FTP clients,
+ so you may want to disable it. For a discussion of the consequences, see
+ http://scarybeastsecurity.blogspot.com/2009/02/vsftpd-210-released.html
+-(Added in v2.1.0).
++ (Added in v2.1.0).
+ 
+ Default: YES
+ .TP

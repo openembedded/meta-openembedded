@@ -1,0 +1,58 @@
+Author: Chuck Short <zulcss@ubuntu.com>
+Description: Adding support for UTF8.
+
+diff -Naurp vsftpd.orig/features.c vsftpd/features.c
+--- vsftpd.orig/features.c	2008-12-04 06:00:47.000000000 +0000
++++ vsftpd/features.c	2010-02-25 13:28:06.000000000 +0000
+@@ -21,6 +21,10 @@ handle_feat(struct vsf_session* p_sess)
+     vsf_cmdio_write_raw(p_sess, " AUTH SSL\r\n");
+     vsf_cmdio_write_raw(p_sess, " AUTH TLS\r\n");
+   }
++  if (tunable_utf8_filesystem)
++  {
++     vsf_cmdio_write_raw(p_sess, " UTF8\r\n");
++  }
+   if (tunable_port_enable)
+   {
+     vsf_cmdio_write_raw(p_sess, " EPRT\r\n");
+diff -Naurp vsftpd.orig/parseconf.c vsftpd/parseconf.c
+--- vsftpd.orig/parseconf.c	2009-08-07 18:46:40.000000000 +0000
++++ vsftpd/parseconf.c	2010-02-25 13:28:06.000000000 +0000
+@@ -28,6 +28,7 @@ static struct parseconf_bool_setting
+ parseconf_bool_array[] =
+ {
+   { "anonymous_enable", &tunable_anonymous_enable },
++  { "utf8_filesystem", &tunable_utf8_filesystem },
+   { "local_enable", &tunable_local_enable },
+   { "pasv_enable", &tunable_pasv_enable },
+   { "port_enable", &tunable_port_enable },
+diff -Naurp vsftpd.orig/tunables.c vsftpd/tunables.c
+--- vsftpd.orig/tunables.c	2009-07-15 20:08:27.000000000 +0000
++++ vsftpd/tunables.c	2010-02-25 13:28:06.000000000 +0000
+@@ -10,6 +10,7 @@
+ 
+ int tunable_anonymous_enable;
+ int tunable_local_enable;
++int tunable_utf8_filesystem;
+ int tunable_pasv_enable;
+ int tunable_port_enable;
+ int tunable_chroot_local_user;
+@@ -146,6 +147,7 @@ tunables_load_defaults()
+ {
+   tunable_anonymous_enable = 1;
+   tunable_local_enable = 0;
++  tunable_utf8_filesystem = 0;
+   tunable_pasv_enable = 1;
+   tunable_port_enable = 1;
+   tunable_chroot_local_user = 0;
+diff -Naurp vsftpd.orig/tunables.h vsftpd/tunables.h
+--- vsftpd.orig/tunables.h	2009-07-07 01:37:28.000000000 +0000
++++ vsftpd/tunables.h	2010-02-25 13:28:06.000000000 +0000
+@@ -11,6 +11,7 @@ void tunables_load_defaults();
+ /* Booleans */
+ extern int tunable_anonymous_enable;          /* Allow anon logins */
+ extern int tunable_local_enable;              /* Allow local logins */
++extern int tunable_utf8_filesystem;           /* Server uses UTF8 Filesystem */
+ extern int tunable_pasv_enable;               /* Allow PASV */
+ extern int tunable_port_enable;               /* Allow PORT */
+ extern int tunable_chroot_local_user;         /* Restrict local to home dir */

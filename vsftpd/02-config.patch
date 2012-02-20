@@ -1,0 +1,120 @@
+Author: Daniel Jacobowitz <dan@debian.org>
+Description: Set default configuration.
+
+diff -Naurp vsftpd.orig/tunables.c vsftpd/tunables.c
+--- vsftpd.orig/tunables.c	2009-07-15 22:08:27.000000000 +0200
++++ vsftpd/tunables.c	2009-11-06 13:33:34.000000000 +0100
+@@ -246,7 +246,7 @@ tunables_load_defaults()
+   /* -rw------- */
+   tunable_chown_upload_mode = 0600;
+ 
+-  install_str_setting("/usr/share/empty", &tunable_secure_chroot_dir);
++  install_str_setting("/var/run/vsftpd/empty", &tunable_secure_chroot_dir);
+   install_str_setting("ftp", &tunable_ftp_username);
+   install_str_setting("root", &tunable_chown_username);
+   install_str_setting("/var/log/xferlog", &tunable_xferlog_file);
+@@ -256,7 +256,7 @@ tunables_load_defaults()
+   install_str_setting(0, &tunable_ftpd_banner);
+   install_str_setting("/etc/vsftpd.banned_emails", &tunable_banned_email_file);
+   install_str_setting("/etc/vsftpd.chroot_list", &tunable_chroot_list_file);
+-  install_str_setting("ftp", &tunable_pam_service_name);
++  install_str_setting("vsftpd", &tunable_pam_service_name);
+   install_str_setting("ftp", &tunable_guest_username);
+   install_str_setting("/etc/vsftpd.user_list", &tunable_userlist_file);
+   install_str_setting(0, &tunable_anon_root);
+diff -Naurp vsftpd.orig/vsftpd.conf vsftpd/vsftpd.conf
+--- vsftpd.orig/vsftpd.conf	2009-11-06 08:41:11.000000000 +0100
++++ vsftpd/vsftpd.conf	2009-11-06 13:35:37.000000000 +0100
+@@ -8,6 +8,17 @@
+ # Please read the vsftpd.conf.5 manual page to get a full idea of vsftpd's
+ # capabilities.
+ #
++#
++# Run standalone?  vsftpd can run either from an inetd or as a standalone
++# daemon started from an initscript.
++listen=YES
++#
++# Run standalone with IPv6?
++# Like the listen parameter, except vsftpd will listen on an IPv6 socket
++# instead of an IPv4 one. This parameter and the listen parameter are mutually
++# exclusive.
++#listen_ipv6=YES
++#
+ # Allow anonymous FTP? (Beware - allowed by default if you comment this out).
+ anonymous_enable=YES
+ #
+@@ -34,6 +45,12 @@ anonymous_enable=YES
+ # go into a certain directory.
+ dirmessage_enable=YES
+ #
++# If enabled, vsftpd will display directory listings with the time
++# in  your  local  time  zone.  The default is to display GMT. The
++# times returned by the MDTM FTP command are also affected by this
++# option.
++use_localtime=YES
++#
+ # Activate logging of uploads/downloads.
+ xferlog_enable=YES
+ #
+@@ -89,6 +106,11 @@ connect_from_port_20=YES
+ # (default follows)
+ #banned_email_file=/etc/vsftpd.banned_emails
+ #
++# You may restrict local users to their home directories.  See the FAQ for
++# the possible risks in this before using chroot_local_user or
++# chroot_list_enable below.
++#chroot_local_user=YES
++#
+ # You may specify an explicit list of local users to chroot() to their home
+ # directory. If chroot_local_user is YES, then this list becomes a list of
+ # users to NOT chroot().
+@@ -103,12 +125,20 @@ connect_from_port_20=YES
+ # the presence of the "-R" option, so there is a strong case for enabling it.
+ #ls_recurse_enable=YES
+ #
+-# When "listen" directive is enabled, vsftpd runs in standalone mode and
+-# listens on IPv4 sockets. This directive cannot be used in conjunction
+-# with the listen_ipv6 directive.
+-listen=YES
++# Customization
+ #
+-# This directive enables listening on IPv6 sockets. To listen on IPv4 and IPv6
+-# sockets, you must run two copies of vsftpd with two configuration files.
+-# Make sure, that one of the listen options is commented !!
+-#listen_ipv6=YES
++# Some of vsftpd's settings don't fit the filesystem layout by
++# default.
++#
++# This option should be the name of a directory which is empty.  Also, the
++# directory should not be writable by the ftp user. This directory is used
++# as a secure chroot() jail at times vsftpd does not require filesystem
++# access.
++secure_chroot_dir=/var/run/vsftpd/empty
++#
++# This string is the name of the PAM service vsftpd will use.
++pam_service_name=vsftpd
++#
++# This option specifies the location of the RSA certificate to use for SSL
++# encrypted connections.
++rsa_cert_file=/etc/ssl/private/vsftpd.pem
+diff -Naurp vsftpd.orig/vsftpd.conf.5 vsftpd/vsftpd.conf.5
+--- vsftpd.orig/vsftpd.conf.5	2009-11-06 08:41:11.000000000 +0100
++++ vsftpd/vsftpd.conf.5	2009-11-06 13:37:10.000000000 +0100
+@@ -940,7 +940,7 @@ Default: nobody
+ .B pam_service_name
+ This string is the name of the PAM service vsftpd will use.
+ 
+-Default: ftp
++Default: vsftpd
+ .TP
+ .B pasv_address
+ Use this option to override the IP address that vsftpd will advertise in
+@@ -969,7 +969,7 @@ This option should be the name of a dire
+ directory should not be writable by the ftp user. This directory is used
+ as a secure chroot() jail at times vsftpd does not require filesystem access.
+ 
+-Default: /usr/share/empty
++Default: /var/run/vsftpd/empty
+ .TP
+ .B ssl_ciphers
+ This option can be used to select which SSL ciphers vsftpd will allow for

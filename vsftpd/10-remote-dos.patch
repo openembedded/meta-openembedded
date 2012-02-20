@@ -1,0 +1,69 @@
+Author: Ben Hutchings <ben@decadent.org.uk>
+Description: Remote DoS on Linux 2.6.32 (Closes: #629373).
+
+diff -Naurp vsftpd.orig/sysdeputil.c vsftpd/sysdeputil.c
+--- vsftpd.orig/sysdeputil.c	2010-03-26 04:25:33.000000000 +0100
++++ vsftpd/sysdeputil.c	2011-09-05 15:16:05.347070790 +0200
+@@ -25,6 +25,11 @@
+   #define _LARGEFILE64_SOURCE 1
+ #endif
+ 
++#ifdef __linux__
++  #include <stdio.h>
++  #include <sys/utsname.h>
++#endif
++
+ /* For INT_MAX */
+ #include <limits.h>
+ 
+@@ -1259,11 +1264,36 @@ vsf_set_term_if_parent_dies()
+ #endif
+ }
+ 
++#ifdef VSF_SYSDEP_HAVE_LINUX_CLONE
++/* On Linux versions <2.6.35, netns cleanup may be so slow that
++ * creating a netns per connection allows a remote denial-of-service.
++ * We therefore do not use CLONE_NEWNET on these versions.
++ */
++static int
++vsf_sysutil_netns_cleanup_is_fast(void)
++{
++#ifdef __linux__
++  struct utsname utsname;
++  int r1, r2, r3 = 0;
++  return (uname(&utsname) == 0 &&
++	  sscanf(utsname.release, "%d.%d.%d", &r1, &r2, &r3) >= 2 &&
++	  ((r1 << 16) | (r2 << 8) | r3) >= ((2 << 16) | (6 << 8) | 35));
++#else
++  /* Assume any other kernel that has the feature don't have this problem */
++  return 1;
++#endif
++}
++#endif
++
+ int
+ vsf_sysutil_fork_isolate_all_failok()
+ {
+ #ifdef VSF_SYSDEP_HAVE_LINUX_CLONE
+-  static int cloneflags_work = 1;
++  static int cloneflags_work = -1;
++  if (cloneflags_work < 0)
++  {
++    cloneflags_work = vsf_sysutil_netns_cleanup_is_fast();
++  }
+   if (cloneflags_work)
+   {
+     int ret = syscall(__NR_clone,
+@@ -1309,7 +1339,11 @@ int
+ vsf_sysutil_fork_newnet()
+ {
+ #ifdef VSF_SYSDEP_HAVE_LINUX_CLONE
+-  static int cloneflags_work = 1;
++  static int cloneflags_work = -1;
++  if (cloneflags_work < 0)
++  {
++    cloneflags_work = vsf_sysutil_netns_cleanup_is_fast();
++  }
+   if (cloneflags_work)
+   {
+     int ret = syscall(__NR_clone, CLONE_NEWNET | SIGCHLD, NULL);
