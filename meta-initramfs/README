@@ -1,0 +1,34 @@
+meta-initramfs
+==============
+
+This layer contains the metadata necessary to build the klibc library and
+utilities (shared and static) plus other tools useful for the creation of
+small-sized initramfs.
+
+
+Dependencies
+------------
+
+This layer depends on:
+
+URI: git://git.openembedded.org/openembedded-core
+branch: master
+revision: HEAD
+
+
+Maintenance
+-----------
+
+Send patches / pull requests to openembedded-devel@lists.openembedded.org
+with '[meta-initramfs]' in the subject.
+
+Layer maintainers: Andrea Adami <andrea.adami@gmail.com>
+                   Paul Eggleton <paul.eggleton@linux.intel.com>
+
+
+License
+-------
+
+All metadata is MIT licensed unless otherwise stated. Source code included
+in tree for individual recipes is under the LICENSE stated in each recipe
+(.bb file) unless otherwise stated.
