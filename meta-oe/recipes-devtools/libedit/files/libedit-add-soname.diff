@@ -1,0 +1,12 @@
+Add sonmae option in compiler switches. This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93
+
+Upstream-Status: Inappropriate [not author]
+
+--- Makefile.orig	2005-04-20 18:12:45.000000000 +0200
++++ Makefile	2005-04-20 18:14:37.000000000 +0200
+@@ -101,4 +101,4 @@
+ libedit.a: ${OOBJS}
+ 	ar -r $@ .a/*
+ libedit.so: ${OOBJS}
+-	${CC} --shared -o $@ .so/* ${LIBS}
++	${CC} --shared -Wl,-soname=libedit.so.0 -o $@ .so/* ${LIBS}

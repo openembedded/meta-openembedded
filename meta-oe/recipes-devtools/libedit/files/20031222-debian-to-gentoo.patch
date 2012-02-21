@@ -1,0 +1,125 @@
+This patch is from openembedded 4e75705872fd9f289bbf4c74a912ca4710f50b93. 
+
+Upstream-Status: Inappropriate [not author]
+diff -ur netbsd-cvs/Makefile libedit-20031222/Makefile
+--- netbsd-cvs/Makefile	2003-12-22 13:44:24.798012752 -0500
++++ libedit-20031222/Makefile	2003-12-22 14:55:15.133863488 -0500
+@@ -5,6 +5,7 @@
+ 
+ WARNS=	3
+ LIB=	edit
++LIBS=-lncurses
+ 
+ OSRCS=	chared.c common.c el.c emacs.c fcns.c help.c hist.c key.c map.c \
+ 	parse.c prompt.c read.c refresh.c search.c sig.c term.c tty.c vi.c
+@@ -22,9 +23,10 @@
+ 	editline.3 tok_line.3 editline.3 tok_str.3
+ 
+ # For speed and debugging
+-#SRCS=   ${OSRCS} tokenizer.c history.c readline.c
++SRCS=   ${OSRCS} tokenizer.c history.c readline.c vis.c unvis.c fgetln.c strlcat.c strlcpy.c
+ # For protection
+-SRCS=	editline.c tokenizer.c history.c readline.c
++#SRCS=	editline.c tokenizer.c history.c readline.c
++OOBJS= $(patsubst %.c,%.o,$(SRCS))
+ 
+ LIBEDITDIR?=${.CURDIR}
+ 
+@@ -38,6 +40,7 @@
+ CPPFLAGS+=-I. -I${.CURDIR}
+ CPPFLAGS+=#-DDEBUG_TTY -DDEBUG_KEY -DDEBUG_READ -DDEBUG -DDEBUG_REFRESH
+ CPPFLAGS+=#-DDEBUG_PASTE -DDEBUG_EDIT
++CFLAGS+=-I. -include ../glibc-bsd-glue/bsdcompat.h -I../glibc-compat -I../glibc-bsd-glue
+ 
+ AHDR=vi.h emacs.h common.h 
+ ASRC=${LIBEDITDIR}/vi.c ${LIBEDITDIR}/emacs.c ${LIBEDITDIR}/common.c
+@@ -46,46 +49,56 @@
+ CLEANFILES+=	${AHDR} fcns.h help.h fcns.c help.c
+ 
+ SUBDIR=	readline
++HOST_SH=sh
++LIBEDITDIR=.
++all: .depend libedit.a libedit.so
+ 
+ vi.h: vi.c makelist
+ 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/vi.c \
+-	    > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	    > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ emacs.h: emacs.c makelist
+ 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/emacs.c \
+-	    > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	    > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ common.h: common.c makelist
+ 	${HOST_SH} ${LIBEDITDIR}/makelist -h ${LIBEDITDIR}/common.c \
+-	    > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	    > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ fcns.h: ${AHDR} makelist
+-	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	${HOST_SH} ${LIBEDITDIR}/makelist -fh ${AHDR} > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ fcns.c: ${AHDR} fcns.h help.h makelist
+-	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	${HOST_SH} ${LIBEDITDIR}/makelist -fc ${AHDR} > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ help.c: ${ASRC} makelist 
+-	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	${HOST_SH} ${LIBEDITDIR}/makelist -bc ${ASRC} > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ help.h: ${ASRC} makelist
+-	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	${HOST_SH} ${LIBEDITDIR}/makelist -bh ${ASRC} > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ editline.c: ${OSRCS}
+-	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > ${.TARGET}.tmp && \
+-	    mv ${.TARGET}.tmp ${.TARGET}
++	${HOST_SH} ${LIBEDITDIR}/makelist -e ${.ALLSRC:T} > $@.tmp && \
++	    mv $@.tmp $@
+ 
+ test.o:	${LIBEDITDIR}/TEST/test.c
+ 	
+ test:	libedit.a test.o 
+-	${CC} ${LDFLAGS} ${.ALLSRC} -o ${.TARGET} libedit.a ${LDADD} -ltermcap
++	${CC} ${LDFLAGS} ${.ALLSRC} -o $@ libedit.a ${LDADD} -ltermcap
+ 
+-.include <bsd.lib.mk>
+-.include <bsd.subdir.mk>
++.depend: vi.h emacs.h common.h fcns.h help.h help.c
++	-mkdir .a .so
++.c.o:
++	${CC} ${CFLAGS} -c $< -o .a/$*
++	${CC} ${CFLAGS} -fPIC -c $< -o .so/$*
++libedit.a: ${OOBJS}
++	ar -r $@ .a/*
++libedit.so: ${OOBJS}
++	${CC} --shared -o $@ .so/* ${LIBS}
+diff -ur netbsd-cvs/el.c libedit-20031222/el.c
+--- netbsd-cvs/el.c	2003-12-22 13:44:25.474909848 -0500
++++ libedit-20031222/el.c	2003-12-22 15:00:15.545194024 -0500
+@@ -439,8 +439,10 @@
+ 		static const char elpath[] = "/.editrc";
+ 		char path[MAXPATHLEN];
+ 
++#if 0
+ 		if (issetugid())
+ 			return (-1);
++#endif
+ 		if ((ptr = getenv("HOME")) == NULL)
+ 			return (-1);
+ 		if (strlcpy(path, ptr, sizeof(path)) >= sizeof(path))
