@@ -22,6 +22,7 @@ do_configure() {
             --infodir=${infodir} \
             --mandir=${mandir} \
             --disable-hildon \
+            --disable-gtk3 \
 }
 
 LDFLAGS_append = " -ljavascriptcoregtk-1.0 "
