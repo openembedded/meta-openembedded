@@ -22,8 +22,9 @@ DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
 # version specific SRC_URI
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/${P}.tar.gz \
            file://gtk-doc.make"
-SRC_URI[md5sum] = "7a74429e5b4d5cc3d389945774807e46"
-SRC_URI[sha256sum] = "d8f021cc940da7c1f928e2e651c6aa00c5695f3227f560de4a65584e2f089115"
+
+SRC_URI[md5sum] = "86fed9d76060c8157e550ca1b4ee3250"
+SRC_URI[sha256sum] = "b4b0fb6553926bb83ff43b65df44f29a3bce0980a970bcc4a80d5e4f81946f30"
 
 # generic SRC_URI
 SRC_URI += " \
