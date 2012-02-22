@@ -12,7 +12,7 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
 SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
 SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
 
-PR = "r3"
+PR = "r4"
 
 inherit autotools systemd
 
@@ -21,11 +21,6 @@ SYSTEMD_SERVICE_${PN}-systemd = "udisks-daemon.service"
 
 EXTRA_OECONF = "--disable-man-pages"
 
-PACKAGES =+ "${PN}-systemd"
-
-FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
-RDEPENDS_${PN}-systemd = "${PN}"
-
 FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
                 ${datadir}/dbus-1/ \
                 ${datadir}/polkit-1 \
@@ -33,5 +28,3 @@ FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
 "
 
 FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
-
-
