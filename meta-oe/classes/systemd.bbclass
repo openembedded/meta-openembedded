@@ -127,6 +127,8 @@ python populate_packages_prepend () {
 		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
 
 
-	for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
-		systemd_generate_package_scripts(pkg_systemd)
+	# run all modifications once when creating package
+	if os.path.exists('${D}'):
+		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+			systemd_generate_package_scripts(pkg_systemd)
 }
