@@ -1,4 +1,4 @@
-GCC-4_6-BRANCH-LINARO-BACKPORTS = "        \
+GCC-4_6-BRANCH-LINARO-BACKPORTS ?= "        \
 file://linaro/gcc-4.6-linaro-r106720.patch \
 file://linaro/gcc-4.6-linaro-r106733.patch \
 file://linaro/gcc-4.6-linaro-r106737.patch \
