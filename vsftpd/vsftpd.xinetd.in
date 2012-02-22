@@ -1,7 +1,0 @@
-service ftp
-{
-	socket_type = stream
-	user = root
-	server = @SBINDIR@/vsftpd
-	wait = no
-}
