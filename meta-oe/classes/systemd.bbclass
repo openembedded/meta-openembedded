@@ -122,10 +122,6 @@ python populate_packages_prepend () {
 		postrm += bb.data.getVar('systemd_postrm', localdata, 1)
 		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
 
-		rdepends = explode_deps(bb.data.getVar('RDEPENDS_' + pkg, d, 0) or bb.data.getVar('RDEPENDS', d, 0) or "")
-		rdepends.append("systemd")
-		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
-
 	# add files to FILES_*-systemd if existent and not already done
 	def systemd_append_file(pkg_systemd, file_append):
 		appended = False
@@ -185,10 +181,27 @@ python populate_packages_prepend () {
 					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entry %s does not exist" % \
 						(pkg_systemd, service)
 
+	# *-systemd packages get RDEPENDS to systemd and their base package
+	def systemd_add_rdepends(pkg_systemd):
+		# RDEPENDS_${pkg_systemd} += pkg_systemd_base systemd
+		rdepends = d.getVar('RDEPENDS_' + pkg_systemd, 1) or ""
+		rdepends_arr = rdepends.split()
+		if not 'systemd' in rdepends_arr:
+			rdepends = '%s %s' % (rdepends, 'systemd')
+		pkg_systemd_base = pkg_systemd.replace('-systemd', '')
+		# no automatism for:
+		# recipes setting rdepends themselves AND
+		# not rdepending myself AND
+		# avoid double entries
+		if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
+			rdepends = '%s %s' % (rdepends, pkg_systemd_base)
+		d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
+
 
 	# run all modifications once when creating package
 	if os.path.exists('${D}'):
 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
 			systemd_generate_package_scripts(pkg_systemd)
+			systemd_add_rdepends(pkg_systemd)
 		systemd_check_services()
 }
