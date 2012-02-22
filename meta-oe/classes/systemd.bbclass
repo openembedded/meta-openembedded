@@ -126,9 +126,69 @@ python populate_packages_prepend () {
 		rdepends.append("systemd")
 		bb.data.setVar('RDEPENDS_' + pkg, " " + " ".join(rdepends), d)
 
+	# add files to FILES_*-systemd if existent and not already done
+	def systemd_append_file(pkg_systemd, file_append):
+		appended = False
+		if os.path.exists('${D}' + file_append):
+			var_name = "FILES_" + pkg_systemd
+			files = d.getVar(var_name, 0) or ""
+			if file_append not in files.split():
+				d.setVar(var_name, "%s %s" % (files, file_append))
+				appended = True
+		return appended
+
+	# add systemd files to FILES_*-systemd, parse for Also= and follow recursive
+	def systemd_add_files_and_parse(pkg_systemd, path, service, keys):
+		# avoid infinite recursion
+		if systemd_append_file(pkg_systemd, path + service):
+			fullpath = '${D}' + path + service
+			if service.find('.socket') != -1:
+				# for *.socket add *.service and *@.service
+				service_base = service.replace('.socket', '')
+				systemd_add_files_and_parse(pkg_systemd, path, service_base + '.service', keys)
+				systemd_add_files_and_parse(pkg_systemd, path, service_base + '@.service', keys)
+			for key in keys.split():
+				# recurse all dependencies found in keys ('Also';'Conflicts';..) and add to files
+				cmd = "grep %s %s | sed 's,%s=,,g' | tr ',' '\\n'" % (key, fullpath, key)
+				pipe = os.popen(cmd, 'r')
+				line = pipe.readline()
+				while line:
+					line = line.replace('\n', '')
+					systemd_add_files_and_parse(pkg_systemd, path, line, keys)
+					line = pipe.readline()
+				pipe.close()
+
+	# check service-files and call systemd_add_files_and_parse for each entry
+	def systemd_check_services():
+		searchpaths = '/etc/systemd/system/ /lib/systemd/system/ /usr/lib/systemd/system/'
+		systemd_packages = d.getVar('SYSTEMD_PACKAGES', 1)
+		has_exactly_one_service = len(systemd_packages.split()) == 1
+		if has_exactly_one_service:
+			systemd_services = d.getVar('SYSTEMD_SERVICE' + "_" + systemd_packages, 1) or d.getVar('SYSTEMD_SERVICE', 1)
+			has_exactly_one_service = len(systemd_services.split()) == 1
+
+		keys = 'Also' # Conflicts??
+		if has_exactly_one_service:
+			# single service gets also the /dev/null dummies
+			keys = 'Also Conflicts'
+		# scan for all in SYSTEMD_SERVICE[]
+		for pkg_systemd in systemd_packages.split():
+			systemd_services = d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) or d.getVar('SYSTEMD_SERVICE', 1)
+			for service in systemd_services.split():
+				path_found = ''
+				for path in searchpaths.split():
+					if os.path.exists('${D}' + path + service):
+						path_found = path
+				if path_found != '':
+					systemd_add_files_and_parse(pkg_systemd, path_found, service, keys)
+				else:
+					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entry %s does not exist" % \
+						(pkg_systemd, service)
+
 
 	# run all modifications once when creating package
 	if os.path.exists('${D}'):
 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
 			systemd_generate_package_scripts(pkg_systemd)
+		systemd_check_services()
 }
