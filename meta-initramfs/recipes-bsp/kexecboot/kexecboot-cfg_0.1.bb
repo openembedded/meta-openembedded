@@ -3,14 +3,14 @@ SECTION = "base"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r13"
+PR = "r14"
 
 INHIBIT_DEFAULT_DEPS = "1"
 
 SRC_URI = "file://icon.xpm"
 
 CMDLINE ?= ""
-CMDLINE_DEBUG ?= "${@base_conditional('DISTRO_TYPE', 'release', 'quiet', 'debug',d)}"
+CMDLINE_DEBUG ?= "quiet"
 
 # Note: for qvga the label is currently limited to about 24 chars
 KEXECBOOT_LABEL ?= "${@d.getVar('DISTRO', True) or d.getVar('DISTRO_VERSION', True)}-${MACHINE}"
@@ -45,7 +45,7 @@ APPEND=${CMDLINE} ${CMDLINE_DEBUG}
 #
 # Second kernel stanza.
 # KERNEL=/boot/${KERNEL_IMAGETYPE}-test
-# LABEL=${DISTRO}-${MACHINE}-test
+# LABEL=${KEXECBOOT_LABEL}-test
 # APPEND=${CMDLINE}
 #' >> ${S}/boot.cfg
 }
