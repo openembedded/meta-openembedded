@@ -1,6 +1,6 @@
 require ntp.inc
 
-PR = "r4"
+PR = "r5"
 
 inherit systemd
 
@@ -29,14 +29,14 @@ do_install_append() {
 	install -d ${D}/${sysconfdir}/network/if-up.d
 	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
 
-	install -d ${D}${base_libdir}/systemd/system
-	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${base_libdir}/systemd/system/
-	install -m 0644 ${WORKDIR}/ntpd.service ${D}${base_libdir}/systemd/system/
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
+	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
 }
 
 PACKAGES =+ "${PN}-systemd"
 
-FILES_${PN}-systemd = "${base_libdir}/systemd/system/"
+FILES_${PN}-systemd = "${systemd_unitdir}/system/"
 RDEPENDS_${PN}-systemd = "${PN}"
 
 FILES_${PN}-bin = "${bindir}/ntp-wait ${bindir}/ntpdc ${bindir}/ntpq ${bindir}/ntptime ${bindir}/ntptrace"
