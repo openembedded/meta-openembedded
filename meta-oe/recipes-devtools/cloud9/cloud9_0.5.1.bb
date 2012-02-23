@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
 DEPENDS = "libxml2 nodejs-native"
 
-PR = "r13"
+PR = "r14"
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/o3;destsuffix=o3;name=o3 \
@@ -98,8 +98,8 @@ do_install () {
  install -m 0644 ${WORKDIR}/o3/modules/o3.js ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/o3.js
  install -m 0755 ${WORKDIR}/o3/o3.node ${D}${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o3-xml/o3.node
 
- install -m 0755 -d ${D}${base_libdir}/systemd/system
- install -m 0644 ${WORKDIR}/cloud9.service ${D}${base_libdir}/systemd/system/
+ install -m 0755 -d ${D}${systemd_unitdir}/system
+ install -m 0644 ${WORKDIR}/cloud9.service ${D}${systemd_unitdir}/system/
 
   install -m 0755 -d ${D}${sysconfdir}/avahi/services/
   install -m 0644 ${WORKDIR}/cloud9-avahi.service ${D}${sysconfdir}/avahi/services/
@@ -109,7 +109,7 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
                     ${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/.debug \
                    "
 
-FILES_${PN} += "${base_libdir}/systemd/system"
+FILES_${PN} += "${systemd_unitdir}/system"
 RDEPENDS_${PN} = "nodejs gzip"
 
 inherit systemd
