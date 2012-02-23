@@ -2,7 +2,7 @@ DESCRIPTION = "PostgreSQL is a powerful, open source relational database system.
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
 DEPENDS = "zlib readline tzcode-native"
-INC_PR = "r5"
+INC_PR = "r6"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -22,6 +22,8 @@ EXTRA_OECONF_sh4 = "--disable-spinlocks"
 do_compile_append() {
          cp /usr/sbin/zic ${S}/src/timezone/
 }
+
+SSTATE_SCAN_FILES += "Makefile.global"
 
 PACKAGES =+ "${PN}-client ${PN}-server-dev ${PN}-timezone \
              libecpg-compat-dbg libecpg-compat \
