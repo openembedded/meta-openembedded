@@ -4,16 +4,11 @@ SECTION = "console"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 PV = "1.0"
-PR = "r18"
+PR = "r19"
 
-inherit task
+inherit task allarch
 
 PACKAGES += "${PN}-debug"
-
-def get_ltrace(bb, d):
-    if bb.data.getVar('TARGET_ARCH', d, 1) in [ 'sh4', 'sh3' ] :
-        return ""
-    return "ltrace"
 
 RDEPENDS_${PN} = "\
   dbus-daemon-proxy \
@@ -39,7 +34,6 @@ RDEPENDS_${PN}-debug = "\
   devmem2 \
   i2c-tools \
   gdb \
-  ${@get_ltrace(bb, d)} \
   mkdump \
   mioctl \
   procps \
@@ -49,4 +43,8 @@ RDEPENDS_${PN}-debug = "\
   serial-forward \
   strace \
   tcpdump \
+"
+
+RRECOMMENDS_${PN}-debug = "\
+  ltrace \
 "
