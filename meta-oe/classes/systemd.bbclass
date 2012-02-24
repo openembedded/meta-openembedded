@@ -28,40 +28,34 @@ systemctl disable ${SYSTEMD_SERVICE}
 
 def systemd_after_parse(d):
 	def systemd_check_vars():
-		bpn = d.getVar('BPN', 1)
-		# not for native / only at parse time
-		if d.getVar('BB_WORKERCONTEXT', True) is None and \
-		bpn + "-native" != d.getVar('PN', 1) and \
-		bpn + "-cross" != d.getVar('PN', 1) and \
-		bpn + "-nativesdk" != d.getVar('PN', 1):
-			bb_filename = d.getVar('FILE')
-			packages = d.getVar('PACKAGES', 1)
+		bb_filename = d.getVar('FILE')
+		packages = d.getVar('PACKAGES', 1)
 
-			# check SYSTEMD_PACKAGES
-			systemd_pkgs = d.getVar('SYSTEMD_PACKAGES', 1) or ""
-			if systemd_pkgs == "":
-				raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_PACKAGES" % bb_filename
-			for pkg_systemd in systemd_pkgs.split():
-				if pkg_systemd.find("-systemd") == -1:
-					if pkg_systemd != d.getVar('PN', 1):
-						raise bb.build.FuncFailed, \
-							"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
-							(bb_filename, pkg_systemd)
-					else:
-						bb.warn("%s: it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd" % bb_filename)
+		# check SYSTEMD_PACKAGES
+		systemd_pkgs = d.getVar('SYSTEMD_PACKAGES', 1) or ""
+		if systemd_pkgs == "":
+			raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_PACKAGES" % bb_filename
+		for pkg_systemd in systemd_pkgs.split():
+			if pkg_systemd.find("-systemd") == -1:
+				if pkg_systemd != d.getVar('PN', 1):
+					raise bb.build.FuncFailed, \
+						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
+						(bb_filename, pkg_systemd)
 				else:
-					pkg_systemd_base = pkg_systemd.replace('-systemd', '')
-					if pkg_systemd_base not in packages:
-						raise bb.build.FuncFailed, \
-							"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
-							( bb_filename, pkg_systemd)
+					bb.warn("%s: it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd" % bb_filename)
+			else:
+				pkg_systemd_base = pkg_systemd.replace('-systemd', '')
+				if pkg_systemd_base not in packages:
+					raise bb.build.FuncFailed, \
+						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
+						( bb_filename, pkg_systemd)
 
-			# check SYSTEMD_SERVICE
-			for pkg_systemd in systemd_pkgs.split():
-				service_pkg = 'SYSTEMD_SERVICE' + "_" + pkg_systemd
-				systemd_services = d.getVar(service_pkg, 1) or d.getVar('SYSTEMD_SERVICE', 1) or ""
-				if systemd_services == "":
-					raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_SERVICE / %s" % (bb_filename, service_pkg)
+		# check SYSTEMD_SERVICE
+		for pkg_systemd in systemd_pkgs.split():
+			service_pkg = 'SYSTEMD_SERVICE' + "_" + pkg_systemd
+			systemd_services = d.getVar(service_pkg, 1) or d.getVar('SYSTEMD_SERVICE', 1) or ""
+			if systemd_services == "":
+				raise bb.build.FuncFailed, "\n\n%s inherits systemd but doesn't set SYSTEMD_SERVICE / %s" % (bb_filename, service_pkg)
 
 	# prepend systemd-packages not already included
 	def systemd_create_package(pkg_systemd):
@@ -71,9 +65,15 @@ def systemd_after_parse(d):
 			d.setVar('PACKAGES', packages)
 
 
-	systemd_check_vars()
-	for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
-		systemd_create_package(pkg_systemd)
+	bpn = d.getVar('BPN', 1)
+	# not for native / only at parse time
+	if d.getVar('BB_WORKERCONTEXT', True) is None and \
+	bpn + "-native" != d.getVar('PN', 1) and \
+	bpn + "-cross" != d.getVar('PN', 1) and \
+	bpn + "-nativesdk" != d.getVar('PN', 1):
+		systemd_check_vars()
+		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
+			systemd_create_package(pkg_systemd)
 
 
 python __anonymous() {
