@@ -1,7 +1,10 @@
 DESCRIPTION = "openbox Window Manager"
 SECTION = "x11/wm"
+DEPENDS = "glib-2.0 pango libxml2 virtual/libx11"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+
+PR = "r1"
 
 SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz \
            file://fix-dialog-buttons.patch;patch=1 \
