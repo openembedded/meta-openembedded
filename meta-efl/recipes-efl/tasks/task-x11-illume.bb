@@ -7,7 +7,7 @@ PR = "r2"
 
 # WORK IN PROGRESS
 
-inherit task
+inherit task allarch
 
 # Default theme and config
 ETHEME ?= "e-wm-theme-default"
