@@ -1,0 +1,26 @@
+From ce6f0cabb65e67dd4d31e1e555db8bc6eaf435d3 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 24 Feb 2012 07:35:38 +0100
+Subject: [PATCH] man: disable man page generation because we don't have
+ working xsltproc
+
+Upstream-Status: Inappropriate [build system specific change]
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Makefile.am |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 141c102..a8bdfd1 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,4 +1,4 @@
+-SUBDIRS = . libkmod/docs man
++SUBDIRS = . libkmod/docs
+ 
+ DISTCLEAN_LOCAL_HOOKS =
+ EXTRA_DIST =
+-- 
+1.7.8.4
+
