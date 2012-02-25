@@ -28,6 +28,9 @@ systemctl disable ${SYSTEMD_SERVICE}
 
 def systemd_after_parse(d):
 	def systemd_check_vars():
+		if d.getVar('BB_WORKERCONTEXT', True) is not None:
+			return
+
 		bb_filename = d.getVar('FILE')
 		packages = d.getVar('PACKAGES', 1)
 
@@ -66,11 +69,9 @@ def systemd_after_parse(d):
 
 
 	bpn = d.getVar('BPN', 1)
-	# not for native / only at parse time
-	if d.getVar('BB_WORKERCONTEXT', True) is None and \
-	bpn + "-native" != d.getVar('PN', 1) and \
-	bpn + "-cross" != d.getVar('PN', 1) and \
-	bpn + "-nativesdk" != d.getVar('PN', 1):
+	if bpn + "-native" != d.getVar('PN', 1) and \
+		    bpn + "-cross" != d.getVar('PN', 1) and \
+		    bpn + "-nativesdk" != d.getVar('PN', 1):
 		systemd_check_vars()
 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
 			systemd_create_package(pkg_systemd)
