@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SECTION = "x11/gnome"
 
-PR = "r5"
+PR = "r6"
 
 DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
 
@@ -35,7 +35,7 @@ fi
 }
 
 PACKAGES =+ "libpanel-applet"
-FILES_libpanel-applet = "${libdir}/libpanel-applet-2.so.*"
+FILES_libpanel-applet = "${libdir}/libpanel-applet-*.so.*"
 
 FILES_${PN} =+ "${datadir}/gnome* \
                 ${datadir}/dbus-1 \
