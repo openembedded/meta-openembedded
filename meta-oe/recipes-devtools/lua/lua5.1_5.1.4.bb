@@ -39,7 +39,6 @@ do_install () {
 	install -d ${D}${libdir}/pkgconfig
 	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
 }
-NATIVE_INSTALL_WORKS = 1
 BBCLASSEXTEND = "native"
 
 SRC_URI[md5sum] = "d0870f2de55d59c1c8419f36e8fac150"
