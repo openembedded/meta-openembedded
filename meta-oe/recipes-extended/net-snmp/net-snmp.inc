@@ -44,7 +44,7 @@ FILES_${PN}-mibs = "${datadir}/snmp/mibs"
 FILES_${PN}-server = "${sbindir}/* ${sysconfdir}"
 FILES_${PN}-client = "${bindir}/* ${datadir}/snmp/"
 FILES_${PN}-dbg += "${libdir}/.debug/ ${sbindir}/.debug/ ${bindir}/.debug/"
-FILES_${PN}-dev += ${bindir}/net-snmp-config ${bindir}/mib2c ${bindir}/mib2c-update"
+FILES_${PN}-dev += "${bindir}/net-snmp-config ${bindir}/mib2c ${bindir}/mib2c-update"
 
 CONFFILES_${PN}-server = "${sysconfdir}/snmp/snmpd.conf \
                           ${sysconfdir}/snmp/snmptrapd.conf"

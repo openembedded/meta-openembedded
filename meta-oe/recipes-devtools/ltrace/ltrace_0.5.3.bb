@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 PR = "r4"
 
 # ltrace is not ported to sh3/sh4 targets at this time
-COMPATIBLE_TARGET_SYS = (?!sh[34])
+COMPATIBLE_TARGET_SYS = "(?!sh[34])"
 
 SRC_URI = "\
   ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}.orig.tar.gz;name=archive \

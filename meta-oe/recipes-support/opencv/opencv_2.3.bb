@@ -65,7 +65,7 @@ FILES_${PN}-doc = "${datadir}/OpenCV/doc"
 
 ALLOW_EMPTY_${PN} = "1"
 
-INSANE_SKIP_python-opencv = True
+INSANE_SKIP_python-opencv = "True"
 DESCRIPTION_python-opencv = "Python bindings to opencv"
 FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS_python-opencv = "python-core python-numpy"

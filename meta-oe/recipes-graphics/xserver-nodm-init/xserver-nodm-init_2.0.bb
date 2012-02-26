@@ -9,7 +9,7 @@ SRC_URI = "file://xserver-nodm \
            file://xserver-nodm.service \
            file://gplv2-license.patch \
 "
-S = ${WORKDIR}
+S = "${WORKDIR}"
 
 inherit allarch
 

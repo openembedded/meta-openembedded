@@ -23,7 +23,7 @@ PR = "r45"
 # which will be next minor release and so on.
 
 BINV = "${PV}.4"
-SRCREV = 181733
+SRCREV = "181733"
 BRANCH = "gcc-4_5-branch"
 PR_append = "+svnr${SRCPV}"
 

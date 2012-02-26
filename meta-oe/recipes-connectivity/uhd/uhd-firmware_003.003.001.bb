@@ -23,5 +23,5 @@ do_install() {
 }
 
 PACKAGES = "${PN}"
-FILES_${PN} = ${datadir}/uhd/images
+FILES_${PN} = "${datadir}/uhd/images"
 

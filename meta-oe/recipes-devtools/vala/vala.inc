@@ -22,4 +22,4 @@ inherit autotools
 
 EXTRA_OECONF = "--disable-vapigen"
 
-FILES_${PN}-doc += ${datadir}/devhelp
+FILES_${PN}-doc += "${datadir}/devhelp"
