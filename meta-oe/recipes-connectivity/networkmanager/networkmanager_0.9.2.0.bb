@@ -4,7 +4,7 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
 
-PR = "r3"
+PR = "r4"
 
 DEPENDS = "systemd libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
 inherit gnome gettext
@@ -62,6 +62,7 @@ FILES_libnmutil += "${libdir}/libnm-util.so.*"
 FILES_libnmglib += "${libdir}/libnm_glib.so.*"
 FILES_libnmglib-vpn += "${libdir}/libnm_glib_vpn.so.*"
 
+systemd_unitdir = "${base_libdir}/systemd/system"
 
 FILES_${PN} += " \
 		${libexecdir} \
