@@ -1,6 +1,6 @@
 require poppler.inc
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS += "lcms"
 
