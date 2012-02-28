@@ -5,10 +5,10 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
-           file://remove-c-rehash.patch"
+           file://0001-update-ca-certificates-remove-c-rehash.patch"
 
-SRC_URI[md5sum] = "f99a90a91b23338b4df765c0d18eba73"
-SRC_URI[sha256sum] = "6f0633136d17ffef3ed0adfb171a00136a320f0fd79c9c75733ac02662a754a7"
+SRC_URI[md5sum] = "391dea8d827db935ca0d0d1e6641bf23"
+SRC_URI[sha256sum] = "95f3eac93dad4433b5731bc9e106a26e2ccf210acace1927e597477b24187dce"
 
 inherit autotools allarch
 
