@@ -9,7 +9,7 @@ DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2d
 SRCREV = "1fef727af39c0c6e5264ee14fe4c78f8567f035e"
 
 PV = "11.0"
-PR = "r7"
+PR = "r8"
 PR_append = "+gitr${SRCPV}"
 SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
@@ -64,7 +64,11 @@ FILES_${PN} += "${datadir}/xsessions ${datadir}/icons"
 FILES_${PN}-dbg += "${libdir}/xbmc/.debug ${libdir}/xbmc/*/.debug ${libdir}/xbmc/*/*/.debug ${libdir}/xbmc/*/*/*/.debug"
 
 # xbmc uses some kind of dlopen() method for libcec so we need to add it manually
-RRECOMMENDS_${PN}_append = " libcec"
+RRECOMMENDS_${PN}_append = " libcec \
+                             python \
+                             python-lang \
+                             python-re \
+                             "
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 glibc-gconv-ibm850"
 
 
