@@ -1,0 +1,56 @@
+From e73eb2c343006865ff3faf7777ab93ccfd1762d6 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 28 Feb 2012 14:09:08 +0100
+Subject: [PATCH] xinput_calibrator_pointercal.sh: specify output type since 'auto' doesn't always pick 'xinput'
+
+Also deal with pointercal files that contain '# replace with valid machine specific pointercal.xinput'
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+
+Upstream-status: Submitted
+
+ scripts/xinput_calibrator_pointercal.sh |   22 +++++++++++++++-------
+ 1 files changed, 15 insertions(+), 7 deletions(-)
+
+diff --git a/scripts/xinput_calibrator_pointercal.sh b/scripts/xinput_calibrator_pointercal.sh
+index 579509c..fccb197 100755
+--- a/scripts/xinput_calibrator_pointercal.sh
++++ b/scripts/xinput_calibrator_pointercal.sh
+@@ -6,18 +6,26 @@
+ #
+ # original script: Martin Jansa <Martin.Jansa@gmail.com>, 2010-01-31
+ # updated by Tias Guns <tias@ulyssis.org>, 2010-02-15
++# updated by Koen Kooi <koen@dominion.thruhere.net>, 2012-02-28
++
++PATH="/usr/bin:$PATH"
+ 
+ BINARY="xinput_calibrator"
+ CALFILE="/etc/pointercal.xinput"
+ LOGFILE="/var/log/xinput_calibrator.pointercal.log"
+ 
+ if [ -e $CALFILE ] ; then
+-  echo "Using calibration data stored in $CALFILE"
+-  . $CALFILE
+-else
+-  CALDATA=`$BINARY -v | tee $LOGFILE | grep '    xinput set' | sed 's/^    //g; s/$/;/g'`
+-  if [ ! -z "$CALDATA" ] ; then
+-    echo $CALDATA > $CALFILE
+-    echo "Calibration data stored in $CALFILE (log in $LOGFILE)"
++  if grep replace $CALFILE ; then
++    echo "Empty calibration file found, removing it"
++    rm $CALFILE
++  else
++    echo "Using calibration data stored in $CALFILE"
++    . $CALFILE && exit 0
+   fi
+ fi
++
++CALDATA=`$BINARY --output-type xinput -v | tee $LOGFILE | grep '    xinput set' | sed 's/^    //g; s/$/;/g'`
++if [ ! -z "$CALDATA" ] ; then
++  echo $CALDATA > $CALFILE
++  echo "Calibration data stored in $CALFILE (log in $LOGFILE)"
++fi
+-- 
+1.7.2.5
+
