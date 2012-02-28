@@ -4,7 +4,7 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
 
-PR = "r2"
+PR = "r3"
 
 DEPENDS = "tiff zlib libpng jpeg virtual/libsdl"
 
