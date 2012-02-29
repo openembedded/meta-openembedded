@@ -8,8 +8,9 @@ do_install() {
 
         # the crosscompiler is packaged by klcc-cross
         # remove klcc
-        # remove also from FILES_libklibc-dev
         rm ${D}${base_bindir}/klcc
+        # remove now empty dir
+        rmdir ${D}${base_bindir}
 
         # remove Linux headers .install and ..install.cmd files
         find ${D}${base_libdir}/klibc/include -name '.install' -delete
@@ -21,15 +22,11 @@ do_install() {
 
 }
 
-PACKAGES = "libklibc libklibc-dev"
+PACKAGES = "libklibc libklibc-staticdev libklibc-dev"
 FILES_libklibc = "${base_libdir}/klibc-*.so"
+FILES_libklibc-staticdev = "${base_libdir}/klibc/lib/libc.a"
 FILES_libklibc-dev = "${base_libdir}/klibc.so \
                       ${base_libdir}/klibc/lib/* \
                       ${base_libdir}/klibc/include/* \
                       "
-# see above
-# do not package it in -dev
-#                      ${base_bindir}/klcc \
-
 require klibc.inc
-require klibc-checksums_${PV}.inc

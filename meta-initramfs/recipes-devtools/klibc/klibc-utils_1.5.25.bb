@@ -14,4 +14,3 @@ FILES_${PN} = ""
 
 require klibc-utils.inc
 require klibc.inc
-require klibc-checksums_${PV}.inc
