@@ -31,7 +31,7 @@ inherit distutils-base pkgconfig cmake
 export BUILD_SYS
 export HOST_SYS
 export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
-export PYTHON=${STAGING_BINDIR_NATIVE}/python
+export PYTHON="${STAGING_BINDIR_NATIVE}/python"
 
 TARGET_CC_ARCH += "-I${S}/include "
 

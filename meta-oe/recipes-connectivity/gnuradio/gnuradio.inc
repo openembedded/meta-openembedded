@@ -10,7 +10,7 @@ INC_PR = "r1"
 inherit distutils-base autotools pkgconfig
 
 export BUILD_SYS
-export HOST_SYS=${MULTIMACH_TARGET_SYS}
+export HOST_SYS="${MULTIMACH_TARGET_SYS}"
 
 EXTRA_OECONF = " \
   --program-prefix= \
