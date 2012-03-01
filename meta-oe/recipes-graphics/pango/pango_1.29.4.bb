@@ -10,5 +10,6 @@ SRC_URI[archive.sha256sum] = "f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a
 
 SRC_URI += "file://no-tests.patch"
 
-PR = "r3"
+PR = "r4"
 
+EXTRA_OECONF += "--disable-introspection"
