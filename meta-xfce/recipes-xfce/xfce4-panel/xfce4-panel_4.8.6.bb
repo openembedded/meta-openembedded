@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
 DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
 
-PR = "r1"
+PR = "r2"
 
 inherit xfce
 
@@ -27,7 +27,7 @@ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
 FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
 		   "
 
-FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.*a \
+FILES_${PN}-staticdev += "${libdir}/xfce4/panel/plugins/*.*a \
                    "
 
 SRC_URI[md5sum] = "9d7bf0503d5867c4044cef04bb5845b1"
