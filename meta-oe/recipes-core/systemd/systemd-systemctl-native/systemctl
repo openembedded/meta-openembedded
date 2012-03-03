@@ -31,7 +31,7 @@ while [ $# != 0 ]; do
 	esac
 done
 
-for service in "$services"; do
+for service in $services; do
 	# find service file
 	for p in $ROOT/etc/systemd/system \
 		 $ROOT/lib/systemd/system \
