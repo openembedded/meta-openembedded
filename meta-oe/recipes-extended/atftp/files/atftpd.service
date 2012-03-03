@@ -4,7 +4,6 @@ After=syslog.target network.target
 
 [Service]
 Type=forking
-PIDFile=/var/run/atftpd.pid
 ExecStart=/usr/sbin/atftpd --daemon --port 69
 
 [Install]
