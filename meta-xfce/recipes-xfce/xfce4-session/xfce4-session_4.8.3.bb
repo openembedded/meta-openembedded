@@ -5,8 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf xfce4-panel gconf gnome-keyring"
 RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth"
 
-PR = "r1"
-
 inherit xfce
 
 # protect from frightening message that xfce might not work correctly
@@ -21,7 +19,7 @@ FILES_${PN} += "${libdir}/xfce4/*/*/*.so \
 
 FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
 
-FILES_${PN}-dev += "${libdir}/xfce4/*/*/*.*a"
+FILES_${PN}-staticdev += "${libdir}/xfce4/*/*/*.*a"
 
-SRC_URI[md5sum] = "48780cbcf784ab64debc9312f17765f2"
-SRC_URI[sha256sum] = "31bca2a559e05a8a859f150394a901517e5842414ef171a85c5da234e344c0d0"
+SRC_URI[md5sum] = "461cc38bbd37cab881adbdf943f9a402"
+SRC_URI[sha256sum] = "f0801b8c0ffa7e5d41b29b8df281ac127adf467bf50e8ded8aebe5a02bd99338"
