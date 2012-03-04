@@ -6,11 +6,11 @@ SECTION = "console/network"
 
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3ea27a26302ba9ad8b80a24781d41767"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c3159ad36d96a939fcd8f2c2c9b9d08a"
 
-SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/8.2/Twisted-${PV}.tar.bz2 "
-SRC_URI[md5sum] = "c85f151999df3ecf04c49a781b4438d2"
-SRC_URI[sha256sum] = "e0602bb05e31f6100b6f9ab35cfa93ab9f7a1c50a351a0ddfcd236a923bddfb0"
+SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${PV}.tar.bz2 "
+SRC_URI[md5sum] = "73da62c793269eade8121da336b01ba5"
+SRC_URI[sha256sum] = "562ed61c18aa72da99c23fb19c2c101d178995eb3a78ab3c09560a613e180c84"
 
 S = "${WORKDIR}/Twisted-${PV}"
 
@@ -95,6 +95,7 @@ ${bindir}/tkmktap \
 ${bindir}/trial \
 ${bindir}/easy_install* \
 ${bindir}/pyhtmlizer \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.so \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__init__.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/notestplugin.py* \
