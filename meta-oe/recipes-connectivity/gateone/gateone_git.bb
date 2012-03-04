@@ -1,11 +1,9 @@
 DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
 LICENSE = "AGPLv3"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=07d5a2790569bd3e3b422b69ccd43bec"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
 
-PR = "r16"
-
-PV = "0.9"
-SRCREV = "a68444610efa2892842893dae828a28527e64a6e"
+PV = "1.0"
+SRCREV = "0dfa4196ca514e075199c0dbf849353c6aa2976b"
 SRC_URI = "git://github.com/liftoff/GateOne.git \
            file://gateone-avahi.service \
            file://gateone.service \
