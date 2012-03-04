@@ -24,7 +24,7 @@ index cfff0ba..c181f24 100644
 -        # exist on some platforms (specifically WinXP, although
 -        # newer versions of windows have it)
 -        flags |= socket.AI_ADDRCONFIG
-     for res in socket.getaddrinfo(address, port, family, socket.SOCK_STREAM,
+     for res in set(socket.getaddrinfo(address, port, family, socket.SOCK_STREAM,
                                    0, flags):
          af, socktype, proto, canonname, sockaddr = res
 -- 
