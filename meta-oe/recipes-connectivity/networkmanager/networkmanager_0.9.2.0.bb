@@ -23,8 +23,9 @@ EXTRA_OECONF = " \
 		--with-distro=debian \
 		--with-crypto=gnutls \
 		--disable-more-warnings \
-        --with-dhclient=${base_sbindir}/dhclient \
-        --with-iptables=${sbindir}/iptables \
+                --with-dhclient=${base_sbindir}/dhclient \
+                --with-iptables=${sbindir}/iptables \
+                --with-tests \
 "
 
 do_configure_prepend() {
@@ -37,17 +38,14 @@ do_configure_prepend() {
 # Work around dbus permission problems since we lack a proper at_console
 do_install_prepend() {
 	sed -i -e s:deny:allow:g ${S}/src/NetworkManager.conf
-	sed -i -e s:deny:allow:g ${S}/system-settings/src/nm-system-settings.conf || true
 	sed -i -e s:deny:allow:g ${S}/callouts/nm-dispatcher.conf
 }
 
 do_install_append () {
 	install -d ${D}/etc/dbus-1/event.d
-	# Test binaries
+	# Additional test binaries
 	install -d ${D}/usr/bin
-	install -m 0755 ${S}/test/.libs/nm-tool ${D}/usr/bin
 	install -m 0755 ${S}/test/.libs/libnm* ${D}/usr/bin
-	install -m 0755 ${S}/test/.libs/nm-online ${D}/usr/bin
 
 	install -d ${D}/etc/NetworkManager/
 
@@ -85,14 +83,9 @@ FILES_${PN}-dbg += "${libdir}/NetworkManager/.debug/ \
 		    ${libdir}/pppd/*/.debug/ "
 
 FILES_${PN}-dev += "${datadir}/NetworkManager/gdb-cmd \
-                    ${libdir}/pppd/*/*.a \
                     ${libdir}/pppd/*/*.la \
-                    ${libdir}/NetworkManager/*.a \
                     ${libdir}/NetworkManager/*.la"
 
 FILES_${PN}-tests = "${bindir}/nm-tool \
                      ${bindir}/libnm_glib_test \
-                     ${bindir}/nminfotest \
-                     ${bindir}/nm-online \
-                     ${bindir}/nm-supplicant \
-                     ${bindir}/nm-testdevices"
+                     ${bindir}/nm-online"
