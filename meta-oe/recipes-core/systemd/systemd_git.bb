@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r18"
+PR = "r19"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -59,6 +59,9 @@ do_install() {
 
 	# provide support for initramfs
 	ln -s ${base_bindir}/systemd ${D}/init
+
+	# create dir for journal
+	install -d ${D}${localstatedir}/log/journal
 }
 
 python populate_packages_prepend (){
