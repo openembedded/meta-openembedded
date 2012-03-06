@@ -4,14 +4,10 @@ DEPENDS = "glib-2.0 pango libxml2 virtual/libx11"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r1"
+SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz"
 
-SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz \
-           file://fix-dialog-buttons.patch;patch=1 \
-           file://fix-decorations.patch;patch=1"
-
-SRC_URI[md5sum] = "30e669134fa81df810fe7d1dc59cd931"
-SRC_URI[sha256sum] = "2e7579389c30e6bb08cc721a2c1af512e049fec2670e71715aa1c4e129ec349d"
+SRC_URI[md5sum] = "00441b53cf14c03566c8e82643544ff9"
+SRC_URI[sha256sum] = "6fa90016530b3aa6102e254079461977439398531fb23e7ec076ff2c140fea0a"
 
 inherit autotools gettext update-alternatives
 
