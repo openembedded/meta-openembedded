@@ -19,8 +19,8 @@
 === modified file 'gcc/combine.c'
 Index: gcc-4_6-branch/gcc/combine.c
 ===================================================================
---- gcc-4_6-branch.orig/gcc/combine.c	2011-09-16 19:58:21.000000000 -0700
-+++ gcc-4_6-branch/gcc/combine.c	2011-09-16 20:05:36.626650681 -0700
+--- gcc-4_6-branch.orig/gcc/combine.c	2012-03-05 00:16:20.000000000 -0800
++++ gcc-4_6-branch/gcc/combine.c	2012-03-05 16:05:01.212928507 -0800
 @@ -391,8 +391,8 @@
  static void undo_all (void);
  static void undo_commit (void);
@@ -32,7 +32,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  static rtx simplify_if_then_else (rtx);
  static rtx simplify_set (rtx);
  static rtx simplify_logical (rtx);
-@@ -3112,12 +3112,12 @@
+@@ -3119,12 +3119,12 @@
  	  if (i1)
  	    {
  	      subst_low_luid = DF_INSN_LUID (i1);
@@ -47,7 +47,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  	    }
  	}
  
-@@ -3129,7 +3129,7 @@
+@@ -3136,7 +3136,7 @@
  	 self-referential RTL when we will be substituting I1SRC for I1DEST
  	 later.  Likewise if I0 feeds into I2, either directly or indirectly
  	 through I1, and I0DEST is in I0SRC.  */
@@ -56,7 +56,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  		      (i1_feeds_i2_n && i1dest_in_i1src)
  		      || ((i0_feeds_i2_n || (i0_feeds_i1_n && i1_feeds_i2_n))
  			  && i0dest_in_i0src));
-@@ -3168,7 +3168,7 @@
+@@ -3180,7 +3180,7 @@
  	 copy of I1SRC each time we substitute it, in order to avoid creating
  	 self-referential RTL when we will be substituting I0SRC for I0DEST
  	 later.  */
@@ -65,7 +65,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  		      i0_feeds_i1_n && i0dest_in_i0src);
        substed_i1 = 1;
  
-@@ -3198,7 +3198,7 @@
+@@ -3214,7 +3214,7 @@
  
        n_occurrences = 0;
        subst_low_luid = DF_INSN_LUID (i0);
@@ -74,16 +74,16 @@ Index: gcc-4_6-branch/gcc/combine.c
        substed_i0 = 1;
      }
  
-@@ -3260,7 +3260,7 @@
+@@ -3276,7 +3276,7 @@
  	{
  	  rtx t = i1pat;
  	  if (i0_feeds_i1_n)
--	    t = subst (t, i0dest, i0src, 0, 0);
-+	    t = subst (t, i0dest, i0src, 0, 0, 0);
+-	    t = subst (t, i0dest, i0src_copy ? i0src_copy : i0src, 0, 0);
++	    t = subst (t, i0dest, i0src_copy ? i0src_copy : i0src, 0, 0, 0);
  
  	  XVECEXP (newpat, 0, --total_sets) = t;
  	}
-@@ -3268,10 +3268,10 @@
+@@ -3284,10 +3284,10 @@
  	{
  	  rtx t = i2pat;
  	  if (i1_feeds_i2_n)
@@ -91,12 +91,12 @@ Index: gcc-4_6-branch/gcc/combine.c
 +	    t = subst (t, i1dest, i1src_copy ? i1src_copy : i1src, 0, 0,
  		       i0_feeds_i1_n && i0dest_in_i0src);
  	  if ((i0_feeds_i1_n && i1_feeds_i2_n) || i0_feeds_i2_n)
--	    t = subst (t, i0dest, i0src, 0, 0);
-+	    t = subst (t, i0dest, i0src, 0, 0, 0);
+-	    t = subst (t, i0dest, i0src_copy2 ? i0src_copy2 : i0src, 0, 0);
++	    t = subst (t, i0dest, i0src_copy2 ? i0src_copy2 : i0src, 0, 0, 0);
  
  	  XVECEXP (newpat, 0, --total_sets) = t;
  	}
-@@ -4943,11 +4943,13 @@
+@@ -4959,11 +4959,13 @@
  
     IN_DEST is nonzero if we are processing the SET_DEST of a SET.
  
@@ -111,7 +111,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  {
    enum rtx_code code = GET_CODE (x);
    enum machine_mode op0_mode = VOIDmode;
-@@ -5008,7 +5010,7 @@
+@@ -5024,7 +5026,7 @@
        && GET_CODE (XVECEXP (x, 0, 0)) == SET
        && GET_CODE (SET_SRC (XVECEXP (x, 0, 0))) == ASM_OPERANDS)
      {
@@ -120,7 +120,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
        /* If this substitution failed, this whole thing fails.  */
        if (GET_CODE (new_rtx) == CLOBBER
-@@ -5025,7 +5027,7 @@
+@@ -5041,7 +5043,7 @@
  	      && GET_CODE (dest) != CC0
  	      && GET_CODE (dest) != PC)
  	    {
@@ -129,7 +129,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
  	      /* If this substitution failed, this whole thing fails.  */
  	      if (GET_CODE (new_rtx) == CLOBBER
-@@ -5071,8 +5073,8 @@
+@@ -5087,8 +5089,8 @@
  		    }
  		  else
  		    {
@@ -140,7 +140,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
  		      /* If this substitution failed, this whole thing
  			 fails.  */
-@@ -5149,7 +5151,9 @@
+@@ -5165,7 +5167,9 @@
  				&& (code == SUBREG || code == STRICT_LOW_PART
  				    || code == ZERO_EXTRACT))
  			       || code == SET)
@@ -151,7 +151,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
  	      /* If we found that we will have to reject this combination,
  		 indicate that by returning the CLOBBER ourselves, rather than
-@@ -5206,7 +5210,7 @@
+@@ -5222,7 +5226,7 @@
        /* If X is sufficiently simple, don't bother trying to do anything
  	 with it.  */
        if (code != CONST_INT && code != REG && code != CLOBBER)
@@ -160,7 +160,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
        if (GET_CODE (x) == code)
  	break;
-@@ -5226,10 +5230,12 @@
+@@ -5242,10 +5246,12 @@
     expression.
  
     OP0_MODE is the original mode of XEXP (x, 0).  IN_DEST is nonzero
@@ -175,7 +175,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  {
    enum rtx_code code = GET_CODE (x);
    enum machine_mode mode = GET_MODE (x);
-@@ -5284,8 +5290,8 @@
+@@ -5300,8 +5306,8 @@
  	     false arms to store-flag values.  Be careful to use copy_rtx
  	     here since true_rtx or false_rtx might share RTL with x as a
  	     result of the if_then_else_cond call above.  */
@@ -186,7 +186,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
  	  /* If true_rtx and false_rtx are not general_operands, an if_then_else
  	     is unlikely to be simpler.  */
-@@ -5629,7 +5635,7 @@
+@@ -5645,7 +5651,7 @@
  	{
  	  /* Try to simplify the expression further.  */
  	  rtx tor = simplify_gen_binary (IOR, mode, XEXP (x, 0), XEXP (x, 1));
@@ -195,7 +195,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
  	  /* If we could, great.  If not, do not go ahead with the IOR
  	     replacement, since PLUS appears in many special purpose
-@@ -5722,7 +5728,16 @@
+@@ -5738,7 +5744,16 @@
  	     ZERO_EXTRACT is indeed appropriate, it will be placed back by
  	     the call to make_compound_operation in the SET case.  */
  
@@ -213,7 +213,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  	      && new_code == NE && GET_MODE_CLASS (mode) == MODE_INT
  	      && op1 == const0_rtx
  	      && mode == GET_MODE (op0)
-@@ -5768,7 +5783,10 @@
+@@ -5784,7 +5799,10 @@
  
  	  /* If STORE_FLAG_VALUE is -1, we have cases similar to
  	     those above.  */
@@ -225,7 +225,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  	      && new_code == NE && GET_MODE_CLASS (mode) == MODE_INT
  	      && op1 == const0_rtx
  	      && (num_sign_bit_copies (op0, mode)
-@@ -5966,11 +5984,11 @@
+@@ -5982,11 +6000,11 @@
        if (reg_mentioned_p (from, true_rtx))
  	true_rtx = subst (known_cond (copy_rtx (true_rtx), true_code,
  				      from, true_val),
@@ -239,7 +239,7 @@ Index: gcc-4_6-branch/gcc/combine.c
  
        SUBST (XEXP (x, 1), swapped ? false_rtx : true_rtx);
        SUBST (XEXP (x, 2), swapped ? true_rtx : false_rtx);
-@@ -6187,11 +6205,11 @@
+@@ -6203,11 +6221,11 @@
  	{
  	  temp = subst (simplify_gen_relational (true_code, m, VOIDmode,
  						 cond_op0, cond_op1),

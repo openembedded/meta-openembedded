@@ -1,0 +1,28 @@
+2012-02-20  Andrew Stubbs  <ams@codesourcery.com>
+
+	gcc/
+	* config/arm/arm.c (arm_print_operand): Avoid null-pointer
+	dereference from MEM_SIZE.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2012-02-09 00:47:59 +0000
++++ new/gcc/config/arm/arm.c	2012-02-20 15:32:26 +0000
+@@ -17446,6 +17446,7 @@
+ 	rtx addr;
+ 	bool postinc = FALSE;
+ 	unsigned align, memsize, align_bits;
++	rtx memsize_rtx;
+ 
+ 	gcc_assert (GET_CODE (x) == MEM);
+ 	addr = XEXP (x, 0);
+@@ -17460,7 +17461,8 @@
+ 	   instruction (for some alignments) as an aid to the memory subsystem
+ 	   of the target.  */
+ 	align = MEM_ALIGN (x) >> 3;
+-	memsize = INTVAL (MEM_SIZE (x));
++	memsize_rtx = MEM_SIZE (x);
++	memsize = memsize_rtx ? INTVAL (memsize_rtx) : 0;
+ 	
+ 	/* Only certain alignment specifiers are supported by the hardware.  */
+ 	if (memsize == 16 && (align % 32) == 0)
+

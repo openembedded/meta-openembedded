@@ -1,0 +1,76 @@
+2012-01-18  Michael Hope  <michael.hope@linaro.org>
+
+	Backport from mainline r183126:
+
+	2012-01-12  Ira Rosen  <irar@il.ibm.com>
+
+	gcc/
+	PR tree-optimization/51799
+	* tree-vect-patterns.c (vect_recog_over_widening_pattern): Check
+	that the last operation is a type demotion.
+
+	gcc/testsuite/
+	* gcc.dg/vect/pr51799.c: New test.
+	* gcc.dg/vect/vect-widen-shift-u8.c: Expect two widening shift
+	patterns.
+
+=== added file 'gcc/testsuite/gcc.dg/vect/pr51799.c'
+--- old/gcc/testsuite/gcc.dg/vect/pr51799.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.dg/vect/pr51799.c	2012-01-18 01:53:19 +0000
+@@ -0,0 +1,18 @@
++/* { dg-do compile } */
++
++typedef signed char int8_t;
++typedef unsigned char uint8_t;
++typedef signed short int16_t;
++typedef unsigned long uint32_t;
++void
++f0a (uint32_t * __restrict__ result, int8_t * __restrict__ arg1,
++     uint32_t * __restrict__ arg4, int8_t temp_6)
++{
++  int idx;
++  for (idx = 0; idx < 416; idx += 1)
++    {
++      result[idx] = (uint8_t)(((arg1[idx] << 7) + arg4[idx]) * temp_6);
++    }
++}
++
++/* { dg-final { cleanup-tree-dump "vect" } } */
+
+=== modified file 'gcc/testsuite/gcc.dg/vect/vect-widen-shift-u8.c'
+--- old/gcc/testsuite/gcc.dg/vect/vect-widen-shift-u8.c	2011-10-23 13:33:07 +0000
++++ new/gcc/testsuite/gcc.dg/vect/vect-widen-shift-u8.c	2012-01-18 01:53:19 +0000
+@@ -59,7 +59,6 @@
+   return 0;
+ }
+ 
+-/* { dg-final { scan-tree-dump-times "vect_recog_widen_shift_pattern: detected" 1 "vect" { target vect_widen_shift } } } */
++/* { dg-final { scan-tree-dump-times "vect_recog_widen_shift_pattern: detected" 2 "vect" { target vect_widen_shift } } } */
+ /* { dg-final { scan-tree-dump-times "vectorized 1 loops" 1 "vect" } } */
+ /* { dg-final { cleanup-tree-dump "vect" } } */
+-
+
+=== modified file 'gcc/tree-vect-patterns.c'
+--- old/gcc/tree-vect-patterns.c	2011-12-20 07:47:44 +0000
++++ new/gcc/tree-vect-patterns.c	2012-01-18 01:53:19 +0000
+@@ -1224,13 +1224,15 @@
+     {
+       use_lhs = gimple_assign_lhs (use_stmt);
+       use_type = TREE_TYPE (use_lhs);
+-      /* Support only type promotion or signedess change.  Check that USE_TYPE
+-        is not bigger than the original type.  */
++      /* Support only type demotion or signedess change.  */
+       if (!INTEGRAL_TYPE_P (use_type)
+-          || TYPE_PRECISION (new_type) > TYPE_PRECISION (use_type)
+-         || TYPE_PRECISION (type) < TYPE_PRECISION (use_type))
++	  || TYPE_PRECISION (type) <= TYPE_PRECISION (use_type))
+         return NULL;
+ 
++      /* Check that NEW_TYPE is not bigger than the conversion result.  */
++      if (TYPE_PRECISION (new_type) > TYPE_PRECISION (use_type))
++	return NULL;
++
+       if (TYPE_UNSIGNED (new_type) != TYPE_UNSIGNED (use_type)
+           || TYPE_PRECISION (new_type) != TYPE_PRECISION (use_type))
+         {
+

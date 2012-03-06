@@ -48,8 +48,10 @@
 	Return true for NEON.
 
 === modified file 'gcc/testsuite/gcc.dg/vect/pr30858.c'
---- old/gcc/testsuite/gcc.dg/vect/pr30858.c	2007-02-22 08:16:18 +0000
-+++ new/gcc/testsuite/gcc.dg/vect/pr30858.c	2011-11-20 09:11:09 +0000
+Index: gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/pr30858.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/testsuite/gcc.dg/vect/pr30858.c	2012-01-04 15:33:52.000000000 -0800
++++ gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/pr30858.c	2012-03-05 16:23:47.748983031 -0800
 @@ -11,5 +11,6 @@
  }
  
@@ -58,10 +60,10 @@
 +/* { dg-final { scan-tree-dump-times "Unknown def-use cycle pattern." 1 "vect" { xfail vect_multiple_sizes } } } */
 +/* { dg-final { scan-tree-dump-times "Unknown def-use cycle pattern." 2 "vect" { target vect_multiple_sizes } } } */
  /* { dg-final { cleanup-tree-dump "vect" } } */
-
-=== added file 'gcc/testsuite/gcc.dg/vect/vect-cond-8a.c'
---- old/gcc/testsuite/gcc.dg/vect/vect-cond-8a.c	1970-01-01 00:00:00 +0000
-+++ new/gcc/testsuite/gcc.dg/vect/vect-cond-8a.c	2011-11-20 09:11:09 +0000
+Index: gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/vect-cond-8a.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_6-branch/gcc/testsuite/gcc.dg/vect/vect-cond-8a.c	2012-03-05 16:23:47.748983031 -0800
 @@ -0,0 +1,75 @@
 +/* { dg-require-effective-target vect_condition } */
 +
@@ -138,24 +140,10 @@
 +
 +/* { dg-final { scan-tree-dump-times "note: vectorized 1 loops" 3 "vect" } } */
 +/* { dg-final { cleanup-tree-dump "vect" } } */
-
-=== modified file 'gcc/testsuite/lib/target-supports.exp'
---- old/gcc/testsuite/lib/target-supports.exp	2011-11-21 01:45:54 +0000
-+++ new/gcc/testsuite/lib/target-supports.exp	2011-11-22 16:52:23 +0000
-@@ -3150,7 +3150,8 @@
- 	     || [istarget ia64-*-*]
- 	     || [istarget i?86-*-*]
- 	     || [istarget spu-*-*]
--	     || [istarget x86_64-*-*] } {
-+	     || [istarget x86_64-*-*]
-+	     || ([istarget arm*-*-*] && [check_effective_target_arm_neon_ok]) } {
- 	   set et_vect_cond_saved 1
- 	}
-     }
-
-=== modified file 'gcc/tree-vect-patterns.c'
---- old/gcc/tree-vect-patterns.c	2011-10-23 13:33:07 +0000
-+++ new/gcc/tree-vect-patterns.c	2011-11-20 09:11:09 +0000
+Index: gcc-4_6-branch/gcc/tree-vect-patterns.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vect-patterns.c	2012-03-05 16:23:10.000000000 -0800
++++ gcc-4_6-branch/gcc/tree-vect-patterns.c	2012-03-05 16:23:47.748983031 -0800
 @@ -50,13 +50,16 @@
                                                   tree *);
  static gimple vect_recog_widen_shift_pattern (VEC (gimple, heap) **,
@@ -299,14 +287,14 @@
        def_stmt = STMT_VINFO_PATTERN_DEF_STMT (pattern_stmt_info);
 -      set_vinfo_for_stmt (def_stmt,
 -                          new_stmt_vec_info (def_stmt, loop_vinfo, NULL));
-+      def_stmt_info = vinfo_for_stmt (def_stmt);
+-      gimple_set_bb (def_stmt, gimple_bb (orig_stmt));
+       def_stmt_info = vinfo_for_stmt (def_stmt);
 +      if (def_stmt_info == NULL)
 +	{
 +	  def_stmt_info = new_stmt_vec_info (def_stmt, loop_vinfo, NULL);
 +	  set_vinfo_for_stmt (def_stmt, def_stmt_info);
 +	}
-       gimple_set_bb (def_stmt, gimple_bb (orig_stmt));
--      def_stmt_info = vinfo_for_stmt (def_stmt);
++      gimple_set_bb (def_stmt, gimple_bb (orig_stmt));
        STMT_VINFO_RELATED_STMT (def_stmt_info) = orig_stmt;
        STMT_VINFO_DEF_TYPE (def_stmt_info)
  	= STMT_VINFO_DEF_TYPE (orig_stmt_info);
@@ -316,10 +304,10 @@
      }
  }
  
-
-=== modified file 'gcc/tree-vect-stmts.c'
---- old/gcc/tree-vect-stmts.c	2011-11-14 11:38:08 +0000
-+++ new/gcc/tree-vect-stmts.c	2011-11-22 16:52:23 +0000
+Index: gcc-4_6-branch/gcc/tree-vect-stmts.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vect-stmts.c	2012-03-05 16:23:11.000000000 -0800
++++ gcc-4_6-branch/gcc/tree-vect-stmts.c	2012-03-05 16:23:47.748983031 -0800
 @@ -655,20 +655,40 @@
                tree rhs = gimple_assign_rhs1 (stmt);
                unsigned int op_num;
@@ -372,10 +360,10 @@
                      break;
                     
                    case GIMPLE_BINARY_RHS:
-
-=== modified file 'gcc/tree-vectorizer.h'
---- old/gcc/tree-vectorizer.h	2011-11-14 11:38:08 +0000
-+++ new/gcc/tree-vectorizer.h	2011-11-22 16:52:23 +0000
+Index: gcc-4_6-branch/gcc/tree-vectorizer.h
+===================================================================
+--- gcc-4_6-branch.orig/gcc/tree-vectorizer.h	2012-03-05 16:23:11.000000000 -0800
++++ gcc-4_6-branch/gcc/tree-vectorizer.h	2012-03-05 16:23:47.748983031 -0800
 @@ -917,7 +917,7 @@
     Additional pattern recognition functions can (and will) be added
     in the future.  */
@@ -385,4 +373,3 @@
  void vect_pattern_recog (loop_vec_info);
  
  /* In tree-vectorizer.c.  */
-

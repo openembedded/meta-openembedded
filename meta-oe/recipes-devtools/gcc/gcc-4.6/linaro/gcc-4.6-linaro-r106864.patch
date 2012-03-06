@@ -1,0 +1,63 @@
+ 2012-01-16  Michael Hope  <michael.hope@linaro.org>
+ 
+	Backport from mainline r181210:
+
+	gcc/
+	2011-11-07  Matthew Gretton-Dann  <matthew.gretton-dann@arm.com>
+
+	* config/arm/arm-cores.def: Add -mcpu=cortex-a7.
+	* config/arm/arm-tables.opt: Regenerate.
+	* config/arm/arm-tune.md: Likewise.
+	* config/arm/bpabi.h (BE8_LINK_SPEC): Add Cortex A-7.
+	* doc/invoke.texi: Document -mcpu=cortex-a7.
+
+=== modified file 'gcc/config/arm/arm-cores.def'
+--- old/gcc/config/arm/arm-cores.def	2012-01-15 22:02:31 +0000
++++ new/gcc/config/arm/arm-cores.def	2012-01-23 00:36:02 +0000
+@@ -126,6 +126,7 @@
+ ARM_CORE("arm1156t2f-s",  arm1156t2fs,  6T2,				 FL_LDSCHED | FL_VFPV2, v6t2)
+ ARM_CORE("generic-armv7-a", genericv7a,	7A,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-a5",	  cortexa5,	7A,				 FL_LDSCHED, cortex_a5)
++ARM_CORE("cortex-a7",	  cortexa7,	7A,				 FL_LDSCHED | FL_THUMB_DIV | FL_ARM_DIV, cortex)
+ ARM_CORE("cortex-a8",	  cortexa8,	7A,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-a9",	  cortexa9,	7A,				 FL_LDSCHED, cortex_a9)
+ ARM_CORE("cortex-a15",	  cortexa15,	7A,				 FL_LDSCHED | FL_THUMB_DIV | FL_ARM_DIV, cortex_a15)
+
+=== modified file 'gcc/config/arm/arm-tune.md'
+--- old/gcc/config/arm/arm-tune.md	2011-10-19 16:46:51 +0000
++++ new/gcc/config/arm/arm-tune.md	2012-01-15 22:43:29 +0000
+@@ -1,5 +1,5 @@
+ ;; -*- buffer-read-only: t -*-
+ ;; Generated automatically by gentune.sh from arm-cores.def
+ (define_attr "tune"
+-	"arm2,arm250,arm3,arm6,arm60,arm600,arm610,arm620,arm7,arm7d,arm7di,arm70,arm700,arm700i,arm710,arm720,arm710c,arm7100,arm7500,arm7500fe,arm7m,arm7dm,arm7dmi,arm8,arm810,strongarm,strongarm110,strongarm1100,strongarm1110,fa526,fa626,arm7tdmi,arm7tdmis,arm710t,arm720t,arm740t,arm9,arm9tdmi,arm920,arm920t,arm922t,arm940t,ep9312,arm10tdmi,arm1020t,arm9e,arm946es,arm966es,arm968es,arm10e,arm1020e,arm1022e,xscale,iwmmxt,iwmmxt2,fa606te,fa626te,fmp626,fa726te,arm926ejs,arm1026ejs,arm1136js,arm1136jfs,arm1176jzs,arm1176jzfs,mpcorenovfp,mpcore,arm1156t2s,arm1156t2fs,genericv7a,cortexa5,cortexa8,cortexa9,cortexa15,cortexr4,cortexr4f,cortexr5,cortexm4,cortexm3,cortexm1,cortexm0"
++	"arm2,arm250,arm3,arm6,arm60,arm600,arm610,arm620,arm7,arm7d,arm7di,arm70,arm700,arm700i,arm710,arm720,arm710c,arm7100,arm7500,arm7500fe,arm7m,arm7dm,arm7dmi,arm8,arm810,strongarm,strongarm110,strongarm1100,strongarm1110,fa526,fa626,arm7tdmi,arm7tdmis,arm710t,arm720t,arm740t,arm9,arm9tdmi,arm920,arm920t,arm922t,arm940t,ep9312,arm10tdmi,arm1020t,arm9e,arm946es,arm966es,arm968es,arm10e,arm1020e,arm1022e,xscale,iwmmxt,iwmmxt2,fa606te,fa626te,fmp626,fa726te,arm926ejs,arm1026ejs,arm1136js,arm1136jfs,arm1176jzs,arm1176jzfs,mpcorenovfp,mpcore,arm1156t2s,arm1156t2fs,genericv7a,cortexa5,cortexa7,cortexa8,cortexa9,cortexa15,cortexr4,cortexr4f,cortexr5,cortexm4,cortexm3,cortexm1,cortexm0"
+ 	(const (symbol_ref "((enum attr_tune) arm_tune)")))
+
+=== modified file 'gcc/config/arm/bpabi.h'
+--- old/gcc/config/arm/bpabi.h	2011-11-02 21:02:53 +0000
++++ new/gcc/config/arm/bpabi.h	2012-01-15 22:43:29 +0000
+@@ -56,6 +56,7 @@
+   "|march=armv4|mcpu=fa526|mcpu=fa626:--fix-v4bx}"
+ 
+ #define BE8_LINK_SPEC " %{mbig-endian:%{march=armv7-a|mcpu=cortex-a5"\
++  "|mcpu=cortex-a7"\
+   "|mcpu=cortex-a8|mcpu=cortex-a9|mcpu=cortex-a15|mcpu=generic-armv7-a"\
+   ":%{!r:--be8}}}"
+ 
+
+=== modified file 'gcc/doc/invoke.texi'
+--- old/gcc/doc/invoke.texi	2012-01-05 15:35:39 +0000
++++ new/gcc/doc/invoke.texi	2012-01-15 22:43:29 +0000
+@@ -10202,8 +10202,8 @@
+ @samp{arm10e}, @samp{arm1020e}, @samp{arm1022e},
+ @samp{arm1136j-s}, @samp{arm1136jf-s}, @samp{mpcore}, @samp{mpcorenovfp},
+ @samp{arm1156t2-s}, @samp{arm1156t2f-s}, @samp{arm1176jz-s}, @samp{arm1176jzf-s},
+-@samp{cortex-a5}, @samp{cortex-a8}, @samp{cortex-a9}, @samp{cortex-a15},
+-@samp{cortex-r4}, @samp{cortex-r4f}, @samp{cortex-r5},
++@samp{cortex-a5}, @samp{cortex-a7}, @samp{cortex-a8}, @samp{cortex-a9}, 
++@samp{cortex-a15}, @samp{cortex-r4}, @samp{cortex-r4f}, @samp{cortex-r5},
+ @samp{cortex-m4}, @samp{cortex-m3},
+ @samp{cortex-m1},
+ @samp{cortex-m0},
+

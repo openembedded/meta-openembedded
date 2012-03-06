@@ -1,0 +1,126 @@
+2012-02-24  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	Backport from mainline.
+        2011-12-05  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	gcc/
+	* config/arm/arm.c (vfp3_const_double_for_fract_bits): Define.
+	* config/arm/arm-protos.h (vfp3_const_double_for_fract_bits): Declare.
+	* config/arm/constraints.md ("Dt"): New constraint.
+	* config/arm/predicates.md (const_double_vcvt_power_of_two_reciprocal):
+	New.
+	* config/arm/vfp.md (*arm_combine_vcvt_f32_s32): New.
+	(*arm_combine_vcvt_f32_u32): New.
+
+	LP:#900426
+
+	2011-12-06  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+        * config/arm/vfp.md (*combine_vcvt_f64_<FCVTI32typename>): Fix
+       formatting character for vmov.f64 case.
+
+2012-02-24  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	gcc/
+	* config/arm/arm.c (arm_print_operand): Remove wrongly merged code.
+	 (vfp3_const_double_for_fract_bits): Likewise.
+
+=== modified file 'gcc/config/arm/arm-protos.h'
+--- old/gcc/config/arm/arm-protos.h	2011-12-06 10:42:29 +0000
++++ new/gcc/config/arm/arm-protos.h	2012-02-22 13:31:54 +0000
+@@ -238,6 +238,7 @@
+ };
+ 
+ extern const struct tune_params *current_tune;
++extern int vfp3_const_double_for_fract_bits (rtx);
+ #endif /* RTX_CODE */
+ 
+ #endif /* ! GCC_ARM_PROTOS_H */
+
+=== modified file 'gcc/config/arm/constraints.md'
+--- old/gcc/config/arm/constraints.md	2011-12-06 10:42:29 +0000
++++ new/gcc/config/arm/constraints.md	2012-02-22 13:31:54 +0000
+@@ -29,7 +29,7 @@
+ ;; in Thumb-1 state: I, J, K, L, M, N, O
+ 
+ ;; The following multi-letter normal constraints have been used:
+-;; in ARM/Thumb-2 state: Da, Db, Dc, Dn, Dl, DL, Dv, Dy, Di, Dz
++;; in ARM/Thumb-2 state: Da, Db, Dc, Dn, Dl, DL, Dv, Dy, Di, Dt, Dz
+ ;; in Thumb-1 state: Pa, Pb, Pc, Pd
+ ;; in Thumb-2 state: Pj, PJ, Ps, Pt, Pu, Pv, Pw, Px, Py
+ 
+@@ -291,6 +291,12 @@
+  (and (match_code "const_double")
+       (match_test "TARGET_32BIT && TARGET_VFP_DOUBLE && vfp3_const_double_rtx (op)")))
+ 
++(define_constraint "Dt" 
++ "@internal
++  In ARM/ Thumb2 a const_double which can be used with a vcvt.f32.s32 with fract bits operation"
++  (and (match_code "const_double")
++       (match_test "TARGET_32BIT && TARGET_VFP && vfp3_const_double_for_fract_bits (op)")))
++
+ (define_memory_constraint "Ut"
+  "@internal
+   In ARM/Thumb-2 state an address valid for loading/storing opaque structure
+
+=== modified file 'gcc/config/arm/predicates.md'
+--- old/gcc/config/arm/predicates.md	2011-12-06 10:42:29 +0000
++++ new/gcc/config/arm/predicates.md	2012-02-22 13:31:54 +0000
+@@ -725,6 +725,11 @@
+   return true; 
+ })
+ 
++(define_predicate "const_double_vcvt_power_of_two_reciprocal"
++  (and (match_code "const_double")
++       (match_test "TARGET_32BIT && TARGET_VFP 
++       		    && vfp3_const_double_for_fract_bits (op)")))
++
+ (define_special_predicate "neon_struct_operand"
+   (and (match_code "mem")
+        (match_test "TARGET_32BIT && neon_vector_mem_operand (op, 2)")))
+
+=== modified file 'gcc/config/arm/vfp.md'
+--- old/gcc/config/arm/vfp.md	2011-12-06 10:42:29 +0000
++++ new/gcc/config/arm/vfp.md	2012-02-22 13:31:54 +0000
+@@ -1131,9 +1131,40 @@
+    (set_attr "type" "fcmpd")]
+ )
+ 
++;; Fixed point to floating point conversions. 
++(define_code_iterator FCVT [unsigned_float float])
++(define_code_attr FCVTI32typename [(unsigned_float "u32") (float "s32")])
++
++(define_insn "*combine_vcvt_f32_<FCVTI32typename>"
++  [(set (match_operand:SF 0 "s_register_operand" "=t")
++	(mult:SF (FCVT:SF (match_operand:SI 1 "s_register_operand" "0"))
++		 (match_operand 2 
++			"const_double_vcvt_power_of_two_reciprocal" "Dt")))]
++  "TARGET_32BIT && TARGET_HARD_FLOAT && TARGET_VFP3 && !flag_rounding_math"
++  "vcvt.f32.<FCVTI32typename>\\t%0, %1, %v2"
++ [(set_attr "predicable" "no")
++  (set_attr "type" "f_cvt")]
++)
++
++;; Not the ideal way of implementing this. Ideally we would be able to split
++;; this into a move to a DP register and then a vcvt.f64.i32
++(define_insn "*combine_vcvt_f64_<FCVTI32typename>"
++  [(set (match_operand:DF 0 "s_register_operand" "=x,x,w")
++	(mult:DF (FCVT:DF (match_operand:SI 1 "s_register_operand" "r,t,r"))
++		 (match_operand 2 
++		     "const_double_vcvt_power_of_two_reciprocal" "Dt,Dt,Dt")))]
++  "TARGET_32BIT && TARGET_HARD_FLOAT && TARGET_VFP3 && !flag_rounding_math 
++  && !TARGET_VFP_SINGLE"
++  "@
++  vmov.f32\\t%0, %1\;vcvt.f64.<FCVTI32typename>\\t%P0, %P0, %v2
++  vmov.f32\\t%0, %1\;vcvt.f64.<FCVTI32typename>\\t%P0, %P0, %v2
++  vmov.f64\\t%P0, %1, %1\; vcvt.f64.<FCVTI32typename>\\t%P0, %P0, %v2"
++ [(set_attr "predicable" "no")
++  (set_attr "type" "f_cvt")
++  (set_attr "length" "8")]
++)
+ 
+ ;; Store multiple insn used in function prologue.
+-
+ (define_insn "*push_multi_vfp"
+   [(match_parallel 2 "multi_register_push"
+     [(set (match_operand:BLK 0 "memory_operand" "=m")
+

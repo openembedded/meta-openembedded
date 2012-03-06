@@ -1,0 +1,25 @@
+2012-01-20  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	Backport from mainline
+        2012-01-20  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	PR target/51819
+	* config/arm/arm.c (arm_print_operand): Correct output of alignment
+	hints for neon loads and stores.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2012-01-23 00:06:27 +0000
++++ new/gcc/config/arm/arm.c	2012-01-23 18:54:21 +0000
+@@ -17463,9 +17463,9 @@
+ 	/* Only certain alignment specifiers are supported by the hardware.  */
+ 	if (memsize == 16 && (align % 32) == 0)
+ 	  align_bits = 256;
+-	else if ((memsize == 8 || memsize == 16) && (align % 16) == 0)
++	else if (memsize == 16 && (align % 16) == 0)
+ 	  align_bits = 128;
+-	else if ((align % 8) == 0)
++	else if (memsize >= 8 && (align % 8) == 0)
+ 	  align_bits = 64;
+ 	else
+ 	  align_bits = 0;
+

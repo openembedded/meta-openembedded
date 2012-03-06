@@ -37,8 +37,10 @@
 	* config/arm/arm.md (*arm_movqi_insn): Compute attr "length".
 
 === modified file 'gcc/config/arm/arm-protos.h'
---- old/gcc/config/arm/arm-protos.h	2011-10-03 09:46:40 +0000
-+++ new/gcc/config/arm/arm-protos.h	2011-10-11 01:56:19 +0000
+Index: gcc-4_6-branch/gcc/config/arm/arm-protos.h
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/arm/arm-protos.h	2012-03-05 16:07:15.000000000 -0800
++++ gcc-4_6-branch/gcc/config/arm/arm-protos.h	2012-03-05 16:07:50.392936694 -0800
 @@ -59,6 +59,7 @@
  					   int);
  extern rtx thumb_legitimize_reload_address (rtx *, enum machine_mode, int, int,
@@ -47,10 +49,10 @@
  extern int arm_const_double_rtx (rtx);
  extern int neg_const_double_rtx_ok_for_fpa (rtx);
  extern int vfp3_const_double_rtx (rtx);
-
-=== modified file 'gcc/config/arm/arm.c'
---- old/gcc/config/arm/arm.c	2011-10-03 09:46:40 +0000
-+++ new/gcc/config/arm/arm.c	2011-10-11 02:31:01 +0000
+Index: gcc-4_6-branch/gcc/config/arm/arm.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/arm/arm.c	2012-03-05 16:07:15.000000000 -0800
++++ gcc-4_6-branch/gcc/config/arm/arm.c	2012-03-05 16:07:50.400936694 -0800
 @@ -2065,6 +2065,28 @@
  	fix_cm3_ldrd = 0;
      }
@@ -80,7 +82,7 @@
    if (TARGET_THUMB1 && flag_schedule_insns)
      {
        /* Don't warn since it's on by default in -O2.  */
-@@ -6106,7 +6128,7 @@
+@@ -6123,7 +6145,7 @@
     addresses based on the frame pointer or arg pointer until the
     reload pass starts.  This is so that eliminating such addresses
     into stack based ones won't produce impossible code.  */
@@ -89,7 +91,7 @@
  thumb1_legitimate_address_p (enum machine_mode mode, rtx x, int strict_p)
  {
    /* ??? Not clear if this is right.  Experiment.  */
-@@ -22226,6 +22248,10 @@
+@@ -22251,6 +22273,10 @@
  	val = 6;
        asm_fprintf (asm_out_file, "\t.eabi_attribute 30, %d\n", val);
  
@@ -100,22 +102,22 @@
        /* Tag_ABI_FP_16bit_format.  */
        if (arm_fp16_format)
  	asm_fprintf (asm_out_file, "\t.eabi_attribute 38, %d\n",
-
-=== modified file 'gcc/config/arm/arm.md'
---- old/gcc/config/arm/arm.md	2011-10-03 09:47:33 +0000
-+++ new/gcc/config/arm/arm.md	2011-10-11 02:31:01 +0000
-@@ -113,6 +113,10 @@
-    (UNSPEC_SYMBOL_OFFSET 27) ; The offset of the start of the symbol from
+Index: gcc-4_6-branch/gcc/config/arm/arm.md
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/arm/arm.md	2012-03-05 16:07:15.000000000 -0800
++++ gcc-4_6-branch/gcc/config/arm/arm.md	2012-03-05 16:09:26.284941314 -0800
+@@ -114,6 +114,10 @@
                               ; another symbolic address.
     (UNSPEC_MEMORY_BARRIER 28) ; Represent a memory barrier.
-+   (UNSPEC_UNALIGNED_LOAD 29)  ; Used to represent ldr/ldrh instructions that access
+    (UNSPEC_PIC_UNIFIED 29)  ; Create a common pic addressing form.
++   (UNSPEC_UNALIGNED_LOAD 30)  ; Used to represent ldr/ldrh instructions that access
 +                               ; unaligned locations, on architectures which support
 +                               ; that.
-+   (UNSPEC_UNALIGNED_STORE 30) ; Same for str/strh.
++   (UNSPEC_UNALIGNED_STORE 31) ; Same for str/strh.
    ]
  )
  
-@@ -2463,10 +2467,10 @@
+@@ -2461,10 +2465,10 @@
  ;;; this insv pattern, so this pattern needs to be reevalutated.
  
  (define_expand "insv"
@@ -130,51 +132,59 @@
    "TARGET_ARM || arm_arch_thumb2"
    "
    {
-@@ -2477,35 +2481,70 @@
+@@ -2475,35 +2479,70 @@
  
      if (arm_arch_thumb2)
        {
 -	bool use_bfi = TRUE;
 -
 -	if (GET_CODE (operands[3]) == CONST_INT)
--	  {
--	    HOST_WIDE_INT val = INTVAL (operands[3]) & mask;
--
--	    if (val == 0)
--	      {
--		emit_insn (gen_insv_zero (operands[0], operands[1],
--					  operands[2]));
 +        if (unaligned_access && MEM_P (operands[0])
 +	    && s_register_operand (operands[3], GET_MODE (operands[3]))
 +	    && (width == 16 || width == 32) && (start_bit % BITS_PER_UNIT) == 0)
-+	  {
+ 	  {
+-	    HOST_WIDE_INT val = INTVAL (operands[3]) & mask;
 +	    rtx base_addr;
 +
 +	    if (BYTES_BIG_ENDIAN)
 +	      start_bit = GET_MODE_BITSIZE (GET_MODE (operands[3])) - width
 +			  - start_bit;
-+
+ 
+-	    if (val == 0)
 +	    if (width == 32)
-+	      {
+ 	      {
+-		emit_insn (gen_insv_zero (operands[0], operands[1],
+-					  operands[2]));
+-		DONE;
 +	        base_addr = adjust_address (operands[0], SImode,
 +					    start_bit / BITS_PER_UNIT);
 +		emit_insn (gen_unaligned_storesi (base_addr, operands[3]));
-+	      }
+ 	      }
 +	    else
 +	      {
 +	        rtx tmp = gen_reg_rtx (HImode);
-+
+ 
+-	    /* See if the set can be done with a single orr instruction.  */
+-	    if (val == mask && const_ok_for_arm (val << start_bit))
+-	      use_bfi = FALSE;
 +	        base_addr = adjust_address (operands[0], HImode,
 +					    start_bit / BITS_PER_UNIT);
 +		emit_move_insn (tmp, gen_lowpart (HImode, operands[3]));
 +		emit_insn (gen_unaligned_storehi (base_addr, tmp));
 +	      }
 +	    DONE;
-+	  }
+ 	  }
+-	  
+-	if (use_bfi)
 +	else if (s_register_operand (operands[0], GET_MODE (operands[0])))
-+	  {
+ 	  {
+-	    if (GET_CODE (operands[3]) != REG)
+-	      operands[3] = force_reg (SImode, operands[3]);
 +	    bool use_bfi = TRUE;
-+
+ 
+-	    emit_insn (gen_insv_t2 (operands[0], operands[1], operands[2],
+-				    operands[3]));
+-	    DONE;
 +	    if (GET_CODE (operands[3]) == CONST_INT)
 +	      {
 +		HOST_WIDE_INT val = INTVAL (operands[3]) & mask;
@@ -198,24 +208,9 @@
 +
 +		emit_insn (gen_insv_t2 (operands[0], operands[1], operands[2],
 +					operands[3]));
- 		DONE;
- 	      }
--
--	    /* See if the set can be done with a single orr instruction.  */
--	    if (val == mask && const_ok_for_arm (val << start_bit))
--	      use_bfi = FALSE;
--	  }
--	  
--	if (use_bfi)
--	  {
--	    if (GET_CODE (operands[3]) != REG)
--	      operands[3] = force_reg (SImode, operands[3]);
--
--	    emit_insn (gen_insv_t2 (operands[0], operands[1], operands[2],
--				    operands[3]));
--	    DONE;
--	  }
-+	  }
++		DONE;
++	      }
+ 	  }
 +	else
 +	  FAIL;
        }
@@ -226,7 +221,7 @@
      target = copy_rtx (operands[0]);
      /* Avoid using a subreg as a subtarget, and avoid writing a paradoxical 
         subreg as the final target.  */
-@@ -3697,12 +3736,10 @@
+@@ -3695,12 +3734,10 @@
  ;; to reduce register pressure later on.
  
  (define_expand "extzv"
@@ -243,7 +238,7 @@
    "TARGET_THUMB1 || arm_arch_thumb2"
    "
    {
-@@ -3711,10 +3748,57 @@
+@@ -3709,10 +3746,57 @@
      
      if (arm_arch_thumb2)
        {
@@ -304,7 +299,7 @@
  
      operands[3] = GEN_INT (rshift);
      
-@@ -3724,12 +3808,154 @@
+@@ -3722,12 +3806,154 @@
          DONE;
        }
        
@@ -462,7 +457,7 @@
    [(set (match_operand:SI 0 "s_register_operand" "=r")
  	(sign_extract:SI (match_operand:SI 1 "s_register_operand" "r")
                           (match_operand:SI 2 "const_int_operand" "M")
-@@ -6038,8 +6264,8 @@
+@@ -6069,8 +6295,8 @@
  
  
  (define_insn "*arm_movqi_insn"
@@ -473,7 +468,7 @@
    "TARGET_32BIT
     && (   register_operand (operands[0], QImode)
         || register_operand (operands[1], QImode))"
-@@ -6047,10 +6273,14 @@
+@@ -6078,10 +6304,14 @@
     mov%?\\t%0, %1
     mvn%?\\t%0, #%B1
     ldr%(b%)\\t%0, %1
@@ -491,10 +486,10 @@
  )
  
  (define_insn "*thumb1_movqi_insn"
-
-=== modified file 'gcc/config/arm/arm.opt'
---- old/gcc/config/arm/arm.opt	2011-09-19 07:44:24 +0000
-+++ new/gcc/config/arm/arm.opt	2011-10-11 02:31:01 +0000
+Index: gcc-4_6-branch/gcc/config/arm/arm.opt
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/arm/arm.opt	2012-03-05 16:07:14.000000000 -0800
++++ gcc-4_6-branch/gcc/config/arm/arm.opt	2012-03-05 16:07:50.404936697 -0800
 @@ -173,3 +173,7 @@
  Target Report Var(fix_cm3_ldrd) Init(2)
  Avoid overlapping destination and address registers on LDRD instructions
@@ -503,10 +498,10 @@
 +munaligned-access
 +Target Report Var(unaligned_access) Init(2)
 +Enable unaligned word and halfword accesses to packed data.
-
-=== modified file 'gcc/config/arm/constraints.md'
---- old/gcc/config/arm/constraints.md	2011-09-12 14:14:00 +0000
-+++ new/gcc/config/arm/constraints.md	2011-10-11 02:31:01 +0000
+Index: gcc-4_6-branch/gcc/config/arm/constraints.md
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/arm/constraints.md	2012-03-05 16:07:14.000000000 -0800
++++ gcc-4_6-branch/gcc/config/arm/constraints.md	2012-03-05 16:07:50.404936697 -0800
 @@ -36,6 +36,7 @@
  ;; The following memory constraints have been used:
  ;; in ARM/Thumb-2 state: Q, Ut, Uv, Uy, Un, Um, Us
@@ -543,10 +538,10 @@
  ;; We used to have constraint letters for S and R in ARM state, but
  ;; all uses of these now appear to have been removed.
  
-
-=== modified file 'gcc/expmed.c'
---- old/gcc/expmed.c	2011-05-22 19:02:59 +0000
-+++ new/gcc/expmed.c	2011-10-11 02:31:01 +0000
+Index: gcc-4_6-branch/gcc/expmed.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/expmed.c	2012-01-04 15:37:51.000000000 -0800
++++ gcc-4_6-branch/gcc/expmed.c	2012-03-05 16:07:50.404936697 -0800
 @@ -657,6 +657,10 @@
        && GET_MODE (value) != BLKmode
        && bitsize > 0
@@ -625,4 +620,3 @@
        if (xtarget == 0)
  	xtarget = xspec_target = gen_reg_rtx (tmode);
  
-

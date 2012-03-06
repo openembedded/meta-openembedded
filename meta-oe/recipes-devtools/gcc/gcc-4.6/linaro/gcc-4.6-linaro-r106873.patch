@@ -1,0 +1,80 @@
+ 2012-02-24  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+ 
+	LP:#922474
+	gcc/
+	* config/arm/sync.md (sync_lock_releasedi): Define.
+	(arm_sync_lock_releasedi): Likewise.
+	gcc/testsuite
+ 	Backport from mainline.
+        2012-01-30  Greta Yorsh  <Greta.Yorsh@arm.com>
+	* gcc.target/arm/di-longlong64-sync-withldrexd.c: Accept
+	new code generated for __sync_lock_release.
+
+=== modified file 'gcc/config/arm/arm.md'
+--- old/gcc/config/arm/arm.md	2012-02-01 14:13:07 +0000
++++ new/gcc/config/arm/arm.md	2012-02-22 18:37:56 +0000
+@@ -157,6 +157,7 @@
+    (VUNSPEC_SYNC_OP               23)	; Represent a sync_<op>
+    (VUNSPEC_SYNC_NEW_OP           24)	; Represent a sync_new_<op>
+    (VUNSPEC_SYNC_OLD_OP           25)	; Represent a sync_old_<op>
++   (VUNSPEC_SYNC_RELEASE 	  26)	; Represent a sync_lock_release.
+   ]
+ )
+ 
+
+=== modified file 'gcc/config/arm/sync.md'
+--- old/gcc/config/arm/sync.md	2011-10-14 15:47:15 +0000
++++ new/gcc/config/arm/sync.md	2012-02-22 18:37:56 +0000
+@@ -494,3 +494,36 @@
+    (set_attr "conds" "unconditional")
+    (set_attr "predicable" "no")])
+ 
++(define_expand "sync_lock_releasedi"
++ [(match_operand:DI 0 "memory_operand")
++  (match_operand:DI 1 "s_register_operand")]
++ "TARGET_HAVE_LDREXD && ARM_DOUBLEWORD_ALIGN && TARGET_HAVE_MEMORY_BARRIER"
++ { 
++   struct arm_sync_generator generator;
++   rtx tmp1 = gen_reg_rtx (DImode);
++   generator.op = arm_sync_generator_omn;
++   generator.u.omn = gen_arm_sync_lock_releasedi;
++   arm_expand_sync (DImode, &generator, operands[1], operands[0], NULL, tmp1);
++   DONE;
++ }
++)
++
++(define_insn "arm_sync_lock_releasedi"
++ [(set (match_operand:DI 2 "s_register_operand" "=&r")
++       (unspec_volatile:DI [(match_operand:DI 1 "arm_sync_memory_operand" "+Q")
++       			    (match_operand:DI 0 "s_register_operand" "r")]
++			    VUNSPEC_SYNC_RELEASE))
++  (clobber (reg:CC CC_REGNUM))
++  (clobber (match_scratch:SI 3 "=&r"))]
++  "TARGET_HAVE_LDREXD && ARM_DOUBLEWORD_ALIGN && TARGET_HAVE_MEMORY_BARRIER"
++ {
++  return arm_output_sync_insn (insn, operands);
++ }
++ [(set_attr "sync_memory"          "1")
++  (set_attr "sync_result" 	   "2")
++  (set_attr "sync_t1" 		   "2")
++  (set_attr "sync_t2" 		   "3")
++  (set_attr "sync_new_value" 	   "0")
++  (set_attr "conds"             "clob")
++  (set_attr "predicable"          "no")]
++)
+
+=== modified file 'gcc/testsuite/gcc.target/arm/di-longlong64-sync-withldrexd.c'
+--- old/gcc/testsuite/gcc.target/arm/di-longlong64-sync-withldrexd.c	2011-10-14 15:56:32 +0000
++++ new/gcc/testsuite/gcc.target/arm/di-longlong64-sync-withldrexd.c	2012-02-22 18:37:56 +0000
+@@ -10,8 +10,8 @@
+ #include "../../gcc.dg/di-longlong64-sync-1.c"
+ 
+ /* We should be using ldrexd, strexd and no helpers or shorter ldrex.  */
+-/* { dg-final { scan-assembler-times "\tldrexd" 46 } } */
+-/* { dg-final { scan-assembler-times "\tstrexd" 46 } } */
++/* { dg-final { scan-assembler-times "\tldrexd" 48 } } */
++/* { dg-final { scan-assembler-times "\tstrexd" 48 } } */
+ /* { dg-final { scan-assembler-not "__sync_" } } */
+ /* { dg-final { scan-assembler-not "ldrex\t" } } */
+ /* { dg-final { scan-assembler-not "strex\t" } } */
+

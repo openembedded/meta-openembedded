@@ -1,0 +1,46 @@
+ 2012-02-24  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+ 
+	Backport from mainline.
+	gcc/
+        2012-02-21  Matthew Gretton-Dann  <matthew.gretton-dann@arm.com>
+
+        Revert r183011
+        * config/arm/arm-cores.def (cortex-a15): Use generic Cortex tuning
+        parameters.
+        * config/arm/arm.c (arm_cortex_a15_tune): Remove.
+
+=== modified file 'gcc/config/arm/arm-cores.def'
+--- old/gcc/config/arm/arm-cores.def	2012-01-23 00:36:02 +0000
++++ new/gcc/config/arm/arm-cores.def	2012-02-22 15:53:56 +0000
+@@ -129,7 +129,7 @@
+ ARM_CORE("cortex-a7",	  cortexa7,	7A,				 FL_LDSCHED | FL_THUMB_DIV | FL_ARM_DIV, cortex)
+ ARM_CORE("cortex-a8",	  cortexa8,	7A,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-a9",	  cortexa9,	7A,				 FL_LDSCHED, cortex_a9)
+-ARM_CORE("cortex-a15",	  cortexa15,	7A,				 FL_LDSCHED | FL_THUMB_DIV | FL_ARM_DIV, cortex_a15)
++ARM_CORE("cortex-a15",	  cortexa15,	7A,				 FL_LDSCHED | FL_THUMB_DIV | FL_ARM_DIV, cortex)
+ ARM_CORE("cortex-r4",	  cortexr4,	7R,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-r4f",	  cortexr4f,	7R,				 FL_LDSCHED, cortex)
+ ARM_CORE("cortex-r5",	  cortexr5,	7R,				 FL_LDSCHED | FL_ARM_DIV, cortex)
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2012-02-24 16:20:29 +0000
++++ new/gcc/config/arm/arm.c	2012-02-24 17:33:58 +0000
+@@ -988,17 +988,6 @@
+   arm_default_branch_cost
+ };
+ 
+-const struct tune_params arm_cortex_a15_tune =
+-{
+-  arm_9e_rtx_costs,
+-  NULL,
+-  1,						/* Constant limit.  */
+-  1,						/* Max cond insns.  */
+-  ARM_PREFETCH_NOT_BENEFICIAL,			/* TODO: Calculate correct values.  */
+-  false,					/* Prefer constant pool.  */
+-  arm_cortex_a5_branch_cost
+-};
+-
+ const struct tune_params arm_fa726te_tune =
+ {
+   arm_9e_rtx_costs,
+
