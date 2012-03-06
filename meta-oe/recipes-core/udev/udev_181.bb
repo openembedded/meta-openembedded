@@ -19,6 +19,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 # kmod: needed for libkmod
 DEPENDS = "gperf-native usbutils acl glib-2.0 util-linux kmod"
 
+PR = "r1"
+
 # version specific SRC_URI
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/${P}.tar.gz \
            file://gtk-doc.make"
@@ -73,7 +75,7 @@ FILES_${PN} += "/lib/udev*"
 FILES_${PN}-dbg += "/lib/udev/.debug"
 
 FILES_${PN}-consolekit += "${libdir}/ConsoleKit"
-RDEPENDS_${PN}-consolekit += "consolekit"
+RDEPENDS_${PN}-consolekit += "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
 
 FILES_udev-utils = "${bindir}/udevadm"
 
