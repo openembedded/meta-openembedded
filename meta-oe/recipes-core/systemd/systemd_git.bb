@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "xz docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
+DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -14,16 +14,14 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r19"
+PR = "r21"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "d26e4270409506cd398875216413b651d6ee7de6"
+SRCREV = "48496df65c3ad1e3ad055d2b4632da7b73211715"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://0001-docs-fix-build-without-xsltproc.patch \
            file://0002-systemd-logind-don-t-kill-user-processes-on-exit.patch \
-           file://0001-systemd-journald-fix-endianess-bug.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
@@ -45,6 +43,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
                  --disable-gtk \
                  --enable-xz \
+                 --disable-manpages \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
@@ -58,7 +57,7 @@ do_install() {
 	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
 
 	# provide support for initramfs
-	ln -s ${base_bindir}/systemd ${D}/init
+	ln -s ${base_libdir}/systemd/systemd ${D}/init
 
 	# create dir for journal
 	install -d ${D}${localstatedir}/log/journal
@@ -134,7 +133,7 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
 # u-a for runlevel and telinit
 
 pkg_postinst_systemd () {
-update-alternatives --install ${base_sbindir}/init init ${base_bindir}/systemd 300
+update-alternatives --install ${base_sbindir}/init init ${base_libdir}/systemd/systemd 300
 update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
@@ -142,7 +141,7 @@ update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/s
 }
 
 pkg_prerm_systemd () {
-update-alternatives --remove init ${base_bindir}/systemd
+update-alternatives --remove init ${base_libdir}/systemd/systemd
 update-alternatives --remove halt ${base_bindir}/systemctl
 update-alternatives --remove reboot ${base_bindir}/systemctl
 update-alternatives --remove shutdown ${base_bindir}/systemctl
