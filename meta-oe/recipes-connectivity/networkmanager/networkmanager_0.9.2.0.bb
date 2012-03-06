@@ -4,10 +4,10 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
 
-PR = "r4"
+PR = "r5"
 
 DEPENDS = "systemd libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
-inherit gnome gettext
+inherit gnome gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
@@ -56,13 +56,14 @@ do_install_append () {
 	install -d ${D}/etc/NetworkManager/VPN
 }
 
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE = "NetworkManager.service"
+
 PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests" 
 
 FILES_libnmutil += "${libdir}/libnm-util.so.*"
 FILES_libnmglib += "${libdir}/libnm_glib.so.*"
 FILES_libnmglib-vpn += "${libdir}/libnm_glib_vpn.so.*"
-
-systemd_unitdir = "${base_libdir}/systemd/system"
 
 FILES_${PN} += " \
 		${libexecdir} \
@@ -71,7 +72,7 @@ FILES_${PN} += " \
 		${datadir}/polkit-1 \
 		${datadir}/dbus-1 \
 		${base_libdir}/udev/* \
-        ${systemd_unitdir} \
+                ${systemd_unitdir}/system/NetworkManager-wait-online.service \
 "
 
 RRECOMMENDS_${PN} += "iptables"
@@ -95,22 +96,3 @@ FILES_${PN}-tests = "${bindir}/nm-tool \
                      ${bindir}/nm-online \
                      ${bindir}/nm-supplicant \
                      ${bindir}/nm-testdevices"
-
-
-pkg_postinst_${PN}() {
-    # can't do this offline
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-    
-    systemctl enable NetworkManager.service
-}
-
-pkg_prerm_${PN}() {
-    # can't do this offline
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-
-    systemctl disable NetworkManager.service
-}
