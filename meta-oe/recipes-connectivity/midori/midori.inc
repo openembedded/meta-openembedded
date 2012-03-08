@@ -31,7 +31,7 @@ do_install() {
 	oe_runmake DESTDIR=${D} install
 }
 
-RRECOMMENDS_${PN} += "glib-networking ca-certificates"
+RRECOMMENDS_${PN} += "glib-networking ca-certificates gnome-icon-theme"
 
 FILES_${PN}-dev += "${datadir}/vala/vapi"
 
