@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 
 ### BEGIN INIT INFO
 # Provides:          udev
@@ -18,10 +18,8 @@ export TZ=/etc/localtime
 [ -f /etc/udev/udev.conf ] && . /etc/udev/udev.conf
 
 kill_udevd() {
-	if [ -x /sbin/pidof ]; then
-		pid=`/sbin/pidof -x udevd`
-		[ -n "$pid" ] && kill $pid
-	fi
+	pid=`pidof -x udevd`
+	[ -n "$pid" ] && kill $pid
 }
 
 export ACTION=add
