@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 
 PV = "4.5"
-PR = "r46"
+PR = "r47"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -23,7 +23,7 @@ PR = "r46"
 # which will be next minor release and so on.
 
 BINV = "${PV}.4"
-SRCREV = "181733"
+SRCREV = "184907"
 BRANCH = "gcc-4_5-branch"
 PR_append = "+svnr${SRCPV}"
 
@@ -80,7 +80,6 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://linaro/gcc-4.5-linaro-r99344.patch \
        file://linaro/gcc-4.5-linaro-r99345.patch \
        file://linaro/gcc-4.5-linaro-r99346.patch \
-       file://linaro/gcc-4.5-linaro-r99347.patch \
        file://linaro/gcc-4.5-linaro-r99348.patch \
        file://linaro/gcc-4.5-linaro-r99349.patch \
        file://linaro/gcc-4.5-linaro-r99351.patch \

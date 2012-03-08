@@ -99,7 +99,7 @@
 Index: gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml	2011-06-16 18:46:26.355282255 -0700
++++ gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml	2012-03-06 12:51:19.980547615 -0800
 @@ -0,0 +1,333 @@
 +(* Auto-generate ARM ldm/stm patterns
 +   Copyright (C) 2010 Free Software Foundation, Inc.
@@ -436,8 +436,8 @@ Index: gcc-4_5-branch/gcc/config/arm/arm-ldmstm.ml
 +  patterns ();
 Index: gcc-4_5-branch/gcc/config/arm/arm-protos.h
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm-protos.h	2011-06-16 18:46:18.000000000 -0700
-+++ gcc-4_5-branch/gcc/config/arm/arm-protos.h	2011-06-16 18:46:26.355282255 -0700
+--- gcc-4_5-branch.orig/gcc/config/arm/arm-protos.h	2012-03-06 12:47:54.000000000 -0800
++++ gcc-4_5-branch/gcc/config/arm/arm-protos.h	2012-03-06 12:51:19.980547615 -0800
 @@ -99,14 +99,11 @@
  extern int label_mentioned_p (rtx);
  extern RTX_CODE minmax_code (rtx);
@@ -460,8 +460,8 @@ Index: gcc-4_5-branch/gcc/config/arm/arm-protos.h
  extern enum machine_mode arm_select_dominance_cc_mode (rtx, rtx,
 Index: gcc-4_5-branch/gcc/config/arm/arm.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm.c	2011-06-16 18:46:23.000000000 -0700
-+++ gcc-4_5-branch/gcc/config/arm/arm.c	2011-06-16 18:46:26.365282255 -0700
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.c	2012-03-06 12:47:56.000000000 -0800
++++ gcc-4_5-branch/gcc/config/arm/arm.c	2012-03-06 12:51:19.988547639 -0800
 @@ -753,6 +753,12 @@
    "hi", "ls", "ge", "lt", "gt", "le", "al", "nv"
  };
@@ -475,7 +475,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  #define ARM_LSL_NAME (TARGET_UNIFIED_ASM ? "lsl" : "asl")
  #define streq(string1, string2) (strcmp (string1, string2) == 0)
  
-@@ -9668,24 +9674,125 @@
+@@ -9647,24 +9653,125 @@
    return 0;
  }
  
@@ -612,7 +612,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
    /* Loop over the operands and check that the memory references are
       suitable (i.e. immediate offsets from the same base register).  At
-@@ -9723,32 +9830,30 @@
+@@ -9702,32 +9809,30 @@
  	  if (i == 0)
  	    {
  	      base_reg = REGNO (reg);
@@ -659,7 +659,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  	}
        else
  	/* Not a suitable memory address.  */
-@@ -9757,167 +9862,90 @@
+@@ -9736,167 +9841,90 @@
  
    /* All the useful information has now been extracted from the
       operands into unsorted_regs and unsorted_offsets; additionally,
@@ -888,7 +888,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
    /* Loop over the operands and check that the memory references are
       suitable (i.e. immediate offsets from the same base register).  At
-@@ -9952,32 +9980,32 @@
+@@ -9931,32 +9959,32 @@
  	      && (GET_CODE (offset = XEXP (XEXP (operands[nops + i], 0), 1))
  		  == CONST_INT)))
  	{
@@ -937,7 +937,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  	}
        else
  	/* Not a suitable memory address.  */
-@@ -9986,111 +10014,65 @@
+@@ -9965,111 +9993,65 @@
  
    /* All the useful information has now been extracted from the
       operands into unsorted_regs and unsorted_offsets; additionally,
@@ -1087,7 +1087,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
    /* XScale has load-store double instructions, but they have stricter
       alignment requirements than load-store multiple, so we cannot
-@@ -10127,18 +10109,10 @@
+@@ -10106,18 +10088,10 @@
        start_sequence ();
  
        for (i = 0; i < count; i++)
@@ -1109,7 +1109,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
        seq = get_insns ();
        end_sequence ();
-@@ -10147,41 +10121,40 @@
+@@ -10126,41 +10100,40 @@
      }
  
    result = gen_rtx_PARALLEL (VOIDmode,
@@ -1170,7 +1170,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
       the pros/cons of ldm/stm usage for XScale.  */
    if (low_irq_latency || (arm_tune_xscale && count <= 2 && ! optimize_size))
      {
-@@ -10190,18 +10163,10 @@
+@@ -10169,18 +10142,10 @@
        start_sequence ();
  
        for (i = 0; i < count; i++)
@@ -1192,7 +1192,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  
        seq = get_insns ();
        end_sequence ();
-@@ -10210,29 +10175,319 @@
+@@ -10189,29 +10154,319 @@
      }
  
    result = gen_rtx_PARALLEL (VOIDmode,
@@ -1522,7 +1522,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  }
  
  int
-@@ -10268,20 +10523,21 @@
+@@ -10247,20 +10502,21 @@
    for (i = 0; in_words_to_go >= 2; i+=4)
      {
        if (in_words_to_go > 4)
@@ -1554,8 +1554,8 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.c
  					       dstbase, &dstoffset));
 Index: gcc-4_5-branch/gcc/config/arm/arm.h
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm.h	2011-06-16 18:46:20.000000000 -0700
-+++ gcc-4_5-branch/gcc/config/arm/arm.h	2011-06-16 18:46:26.375282255 -0700
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.h	2012-03-06 12:47:55.000000000 -0800
++++ gcc-4_5-branch/gcc/config/arm/arm.h	2012-03-06 12:51:19.988547639 -0800
 @@ -1143,6 +1143,9 @@
    ((MODE) == TImode || (MODE) == EImode || (MODE) == OImode \
     || (MODE) == CImode || (MODE) == XImode)
@@ -1577,8 +1577,8 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.h
  #endif /* ! GCC_ARM_H */
 Index: gcc-4_5-branch/gcc/config/arm/arm.md
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/arm.md	2011-06-16 18:46:23.000000000 -0700
-+++ gcc-4_5-branch/gcc/config/arm/arm.md	2011-06-16 18:46:26.375282255 -0700
+--- gcc-4_5-branch.orig/gcc/config/arm/arm.md	2012-03-06 12:47:56.000000000 -0800
++++ gcc-4_5-branch/gcc/config/arm/arm.md	2012-03-06 12:51:19.992547622 -0800
 @@ -6282,7 +6282,7 @@
  
  ;; load- and store-multiple insns
@@ -1969,7 +1969,7 @@ Index: gcc-4_5-branch/gcc/config/arm/arm.md
 Index: gcc-4_5-branch/gcc/config/arm/ldmstm.md
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gcc-4_5-branch/gcc/config/arm/ldmstm.md	2011-06-16 18:46:26.375282255 -0700
++++ gcc-4_5-branch/gcc/config/arm/ldmstm.md	2012-03-06 12:51:19.992547622 -0800
 @@ -0,0 +1,1191 @@
 +/* ARM ldm/stm instruction patterns.  This file was automatically generated
 +   using arm-ldmstm.ml.  Please do not edit manually.
@@ -3164,8 +3164,8 @@ Index: gcc-4_5-branch/gcc/config/arm/ldmstm.md
 +
 Index: gcc-4_5-branch/gcc/config/arm/predicates.md
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/arm/predicates.md	2011-06-16 18:46:18.000000000 -0700
-+++ gcc-4_5-branch/gcc/config/arm/predicates.md	2011-06-16 18:46:26.375282255 -0700
+--- gcc-4_5-branch.orig/gcc/config/arm/predicates.md	2012-03-06 12:47:54.000000000 -0800
++++ gcc-4_5-branch/gcc/config/arm/predicates.md	2012-03-06 12:51:19.992547622 -0800
 @@ -211,6 +211,11 @@
    (and (match_code "ior,xor,and")
         (match_test "mode == GET_MODE (op)")))
@@ -3314,8 +3314,8 @@ Index: gcc-4_5-branch/gcc/config/arm/predicates.md
    return true;
 Index: gcc-4_5-branch/gcc/config/i386/i386.md
 ===================================================================
---- gcc-4_5-branch.orig/gcc/config/i386/i386.md	2011-06-16 18:46:21.000000000 -0700
-+++ gcc-4_5-branch/gcc/config/i386/i386.md	2011-06-16 18:46:26.385282255 -0700
+--- gcc-4_5-branch.orig/gcc/config/i386/i386.md	2012-03-06 12:47:55.000000000 -0800
++++ gcc-4_5-branch/gcc/config/i386/i386.md	2012-03-06 12:51:19.996547605 -0800
 @@ -4960,6 +4960,7 @@
     (set (match_operand:SSEMODEI24 2 "register_operand" "")
  	(fix:SSEMODEI24 (match_dup 0)))]
@@ -3324,7 +3324,7 @@ Index: gcc-4_5-branch/gcc/config/i386/i386.md
     && peep2_reg_dead_p (2, operands[0])"
    [(set (match_dup 2) (fix:SSEMODEI24 (match_dup 1)))]
    "")
-@@ -20057,15 +20058,14 @@
+@@ -20089,15 +20090,14 @@
  ;;  leal    (%edx,%eax,4), %eax
  
  (define_peephole2
@@ -3345,7 +3345,7 @@ Index: gcc-4_5-branch/gcc/config/i386/i386.md
  		   (clobber (reg:CC FLAGS_REG))])]
    "INTVAL (operands[2]) >= 0 && INTVAL (operands[2]) <= 3
     /* Validate MODE for lea.  */
-@@ -20074,31 +20074,27 @@
+@@ -20106,31 +20106,27 @@
  	    || GET_MODE (operands[0]) == HImode))
         || GET_MODE (operands[0]) == SImode
         || (TARGET_64BIT && GET_MODE (operands[0]) == DImode))
@@ -3391,8 +3391,8 @@ Index: gcc-4_5-branch/gcc/config/i386/i386.md
  
 Index: gcc-4_5-branch/gcc/genoutput.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/genoutput.c	2011-06-16 17:59:04.000000000 -0700
-+++ gcc-4_5-branch/gcc/genoutput.c	2011-06-16 18:46:26.385282255 -0700
+--- gcc-4_5-branch.orig/gcc/genoutput.c	2012-03-06 11:53:32.000000000 -0800
++++ gcc-4_5-branch/gcc/genoutput.c	2012-03-06 12:51:20.000547582 -0800
 @@ -266,6 +266,8 @@
  
        printf ("    %d,\n", d->strict_low);
@@ -3404,8 +3404,8 @@ Index: gcc-4_5-branch/gcc/genoutput.c
        printf("  },\n");
 Index: gcc-4_5-branch/gcc/genrecog.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/genrecog.c	2011-06-16 17:59:04.000000000 -0700
-+++ gcc-4_5-branch/gcc/genrecog.c	2011-06-16 18:46:26.395282255 -0700
+--- gcc-4_5-branch.orig/gcc/genrecog.c	2012-03-06 11:53:32.000000000 -0800
++++ gcc-4_5-branch/gcc/genrecog.c	2012-03-06 12:51:20.000547582 -0800
 @@ -1782,20 +1782,11 @@
    int odepth = strlen (oldpos);
    int ndepth = strlen (newpos);
@@ -3429,8 +3429,8 @@ Index: gcc-4_5-branch/gcc/genrecog.c
      {
 Index: gcc-4_5-branch/gcc/recog.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/recog.c	2011-06-16 18:46:02.000000000 -0700
-+++ gcc-4_5-branch/gcc/recog.c	2011-06-16 18:46:26.395282255 -0700
+--- gcc-4_5-branch.orig/gcc/recog.c	2012-03-06 12:47:48.000000000 -0800
++++ gcc-4_5-branch/gcc/recog.c	2012-03-06 13:04:05.780584592 -0800
 @@ -2082,6 +2082,7 @@
  			       recog_data.operand_loc,
  			       recog_data.constraints,
@@ -3508,7 +3508,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  
    gcc_assert (peep2_insn_data[ofs].insn != NULL_RTX);
  
-@@ -2996,12 +3006,8 @@
+@@ -2997,12 +3007,8 @@
    gcc_assert (from < MAX_INSNS_PER_PEEP2 + 1);
    gcc_assert (to < MAX_INSNS_PER_PEEP2 + 1);
  
@@ -3523,17 +3523,17 @@ Index: gcc-4_5-branch/gcc/recog.c
  
    gcc_assert (peep2_insn_data[from].insn != NULL_RTX);
    REG_SET_TO_HARD_REG_SET (live, peep2_insn_data[from].live_before);
-@@ -3010,8 +3016,7 @@
-     {
-       HARD_REG_SET this_live;
+@@ -3016,8 +3022,7 @@
+ 	   *def_rec; def_rec++)
+ 	SET_HARD_REG_BIT (live, DF_REF_REGNO (*def_rec));
  
 -      if (++from >= MAX_INSNS_PER_PEEP2 + 1)
 -	from = 0;
 +      from = peep2_buf_position (from + 1);
-       gcc_assert (peep2_insn_data[from].insn != NULL_RTX);
-       REG_SET_TO_HARD_REG_SET (this_live, peep2_insn_data[from].live_before);
-       IOR_HARD_REG_SET (live, this_live);
-@@ -3104,19 +3109,234 @@
+     }
+ 
+   cl = (class_str[0] == 'r' ? GENERAL_REGS
+@@ -3107,19 +3112,234 @@
    COPY_REG_SET (peep2_insn_data[MAX_INSNS_PER_PEEP2].live_before, live);
  }
  
@@ -3771,7 +3771,7 @@ Index: gcc-4_5-branch/gcc/recog.c
    df_analyze ();
  
    /* Initialize the regsets we're going to use.  */
-@@ -3126,214 +3346,59 @@
+@@ -3129,214 +3349,59 @@
  
    FOR_EACH_BB_REVERSE (bb)
      {
@@ -4028,7 +4028,7 @@ Index: gcc-4_5-branch/gcc/recog.c
  	}
      }
  
-@@ -3341,7 +3406,7 @@
+@@ -3344,7 +3409,7 @@
    for (i = 0; i < MAX_INSNS_PER_PEEP2 + 1; ++i)
      BITMAP_FREE (peep2_insn_data[i].live_before);
    BITMAP_FREE (live);
@@ -4039,8 +4039,8 @@ Index: gcc-4_5-branch/gcc/recog.c
  #endif /* HAVE_peephole2 */
 Index: gcc-4_5-branch/gcc/recog.h
 ===================================================================
---- gcc-4_5-branch.orig/gcc/recog.h	2011-06-16 17:59:04.000000000 -0700
-+++ gcc-4_5-branch/gcc/recog.h	2011-06-16 18:46:26.405282255 -0700
+--- gcc-4_5-branch.orig/gcc/recog.h	2012-03-06 11:53:32.000000000 -0800
++++ gcc-4_5-branch/gcc/recog.h	2012-03-06 12:51:20.000547582 -0800
 @@ -194,6 +194,9 @@
    /* Gives the constraint string for operand N.  */
    const char *constraints[MAX_RECOG_OPERANDS];
@@ -4062,8 +4062,8 @@ Index: gcc-4_5-branch/gcc/recog.h
  
 Index: gcc-4_5-branch/gcc/reload.c
 ===================================================================
---- gcc-4_5-branch.orig/gcc/reload.c	2011-06-16 17:59:04.000000000 -0700
-+++ gcc-4_5-branch/gcc/reload.c	2011-06-16 18:46:26.405282255 -0700
+--- gcc-4_5-branch.orig/gcc/reload.c	2012-03-06 11:53:32.000000000 -0800
++++ gcc-4_5-branch/gcc/reload.c	2012-03-06 12:51:20.004547561 -0800
 @@ -3631,7 +3631,7 @@
  		   || modified[j] != RELOAD_WRITE)
  		  && j != i

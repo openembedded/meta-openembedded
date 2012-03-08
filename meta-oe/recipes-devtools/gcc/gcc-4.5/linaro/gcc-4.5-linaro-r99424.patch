@@ -66,8 +66,10 @@
 	* gcc.target/i386/volatile-bitfields-2.c: New.
 
 === modified file 'gcc/calls.c'
---- old/gcc/calls.c	2010-10-04 00:50:43 +0000
-+++ new/gcc/calls.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/calls.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/calls.c	2012-03-06 13:05:56.524590011 -0800
++++ gcc-4_5-branch/gcc/calls.c	2012-03-06 13:36:10.276677792 -0800
 @@ -878,7 +878,7 @@
  	    int bitsize = MIN (bytes * BITS_PER_UNIT, BITS_PER_WORD);
  
@@ -77,10 +79,10 @@
  				      word_mode, word_mode);
  
  	    /* There is no need to restrict this code to loading items
-
-=== modified file 'gcc/common.opt'
---- old/gcc/common.opt	2010-07-29 14:59:35 +0000
-+++ new/gcc/common.opt	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/common.opt
+===================================================================
+--- gcc-4_5-branch.orig/gcc/common.opt	2012-03-06 13:05:48.400589618 -0800
++++ gcc-4_5-branch/gcc/common.opt	2012-03-06 13:36:35.608679018 -0800
 @@ -613,6 +613,10 @@
  Common Report Var(flag_loop_block) Optimization
  Enable Loop Blocking transformation
@@ -92,10 +94,10 @@
  fguess-branch-probability
  Common Report Var(flag_guess_branch_prob) Optimization
  Enable guessing of branch probabilities
-
-=== modified file 'gcc/config/h8300/h8300.c'
---- old/gcc/config/h8300/h8300.c	2010-04-02 18:54:46 +0000
-+++ new/gcc/config/h8300/h8300.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/config/h8300/h8300.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/h8300/h8300.c	2012-03-06 11:53:30.000000000 -0800
++++ gcc-4_5-branch/gcc/config/h8300/h8300.c	2012-03-06 13:36:35.528679014 -0800
 @@ -403,6 +403,10 @@
  	 restore er6 though, so bump up the cost.  */
        h8300_move_ratio = 6;
@@ -107,10 +109,10 @@
  }
  
  /* Implement REG_CLASS_FROM_LETTER.
-
-=== modified file 'gcc/config/m32c/m32c.c'
---- old/gcc/config/m32c/m32c.c	2009-10-22 18:46:26 +0000
-+++ new/gcc/config/m32c/m32c.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/config/m32c/m32c.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/m32c/m32c.c	2012-03-06 11:53:16.000000000 -0800
++++ gcc-4_5-branch/gcc/config/m32c/m32c.c	2012-03-06 13:36:35.488679012 -0800
 @@ -428,6 +428,10 @@
  
    if (TARGET_A24)
@@ -122,12 +124,12 @@
  }
  
  /* Defining data structures for per-function information */
-
-=== modified file 'gcc/config/rx/rx.c'
---- old/gcc/config/rx/rx.c	2010-07-27 14:39:53 +0000
-+++ new/gcc/config/rx/rx.c	2010-11-04 12:43:52 +0000
-@@ -2187,6 +2187,14 @@
-     }
+Index: gcc-4_5-branch/gcc/config/rx/rx.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/rx/rx.c	2012-03-06 11:53:17.000000000 -0800
++++ gcc-4_5-branch/gcc/config/rx/rx.c	2012-03-06 13:36:35.508679013 -0800
+@@ -2417,6 +2417,14 @@
+   return ! TYPE_PACKED (record_type);
  }
  
 +static void
@@ -139,11 +141,11 @@
 +}
 +
  
- static bool
- rx_allocate_stack_slots_for_args (void)
-@@ -2759,6 +2767,9 @@
- #undef  TARGET_CC_MODES_COMPATIBLE
- #define TARGET_CC_MODES_COMPATIBLE		rx_cc_modes_compatible
+ /* Returns true if X a legitimate constant for an immediate
+    operand on the RX.  X is already known to satisfy CONSTANT_P.  */
+@@ -2794,6 +2802,9 @@
+ #undef  TARGET_PROMOTE_FUNCTION_MODE
+ #define TARGET_PROMOTE_FUNCTION_MODE		rx_promote_function_mode
  
 +#undef  TARGET_OPTION_OVERRIDE
 +#define TARGET_OPTION_OVERRIDE			rx_option_override
@@ -151,10 +153,10 @@
  struct gcc_target targetm = TARGET_INITIALIZER;
  
  /* #include "gt-rx.h" */
-
-=== modified file 'gcc/config/sh/sh.c'
---- old/gcc/config/sh/sh.c	2010-05-05 21:12:17 +0000
-+++ new/gcc/config/sh/sh.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/config/sh/sh.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/config/sh/sh.c	2012-03-06 11:53:20.000000000 -0800
++++ gcc-4_5-branch/gcc/config/sh/sh.c	2012-03-06 13:36:35.516679013 -0800
 @@ -950,6 +950,10 @@
  
    if (sh_fixed_range_str)
@@ -166,10 +168,10 @@
  }
  
  /* Print the operand address in x to the stream.  */
-
-=== modified file 'gcc/doc/invoke.texi'
---- old/gcc/doc/invoke.texi	2010-10-04 00:50:43 +0000
-+++ new/gcc/doc/invoke.texi	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/doc/invoke.texi
+===================================================================
+--- gcc-4_5-branch.orig/gcc/doc/invoke.texi	2012-03-06 13:05:56.988590034 -0800
++++ gcc-4_5-branch/gcc/doc/invoke.texi	2012-03-06 13:36:36.048679039 -0800
 @@ -922,7 +922,7 @@
  -fargument-noalias-global  -fargument-noalias-anything @gol
  -fleading-underscore  -ftls-model=@var{model} @gol
@@ -213,10 +215,10 @@
  @end table
  
  @c man end
-
-=== modified file 'gcc/expmed.c'
---- old/gcc/expmed.c	2010-10-04 00:50:43 +0000
-+++ new/gcc/expmed.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/expmed.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expmed.c	2012-03-06 13:05:56.876590028 -0800
++++ gcc-4_5-branch/gcc/expmed.c	2012-03-06 13:36:35.104678993 -0800
 @@ -47,7 +47,7 @@
  static rtx extract_fixed_bit_field (enum machine_mode, rtx,
  				    unsigned HOST_WIDE_INT,
@@ -458,10 +460,10 @@
        bitsdone += thissize;
  
        /* Shift this part into place for the result.  */
-
-=== modified file 'gcc/expr.c'
---- old/gcc/expr.c	2010-10-04 00:50:43 +0000
-+++ new/gcc/expr.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/expr.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expr.c	2012-03-06 13:05:57.720590069 -0800
++++ gcc-4_5-branch/gcc/expr.c	2012-03-06 13:40:14.504689612 -0800
 @@ -1749,7 +1749,7 @@
  		  && (!REG_P (tmps[i]) || GET_MODE (tmps[i]) != mode))
  		tmps[i] = extract_bit_field (tmps[i], bytelen * BITS_PER_UNIT,
@@ -498,7 +500,16 @@
  					  NULL_RTX, copy_mode, copy_mode));
      }
  
-@@ -2970,7 +2970,7 @@
+@@ -2291,7 +2291,7 @@
+ 	 xbitpos for the destination store (right justified).  */
+       store_bit_field (dst_word, bitsize, xbitpos % BITS_PER_WORD, word_mode,
+ 		       extract_bit_field (src_word, bitsize,
+-					  bitpos % BITS_PER_WORD, 1,
++					  bitpos % BITS_PER_WORD, 1, false,
+ 					  NULL_RTX, word_mode, word_mode));
+     }
+ 
+@@ -3075,7 +3075,7 @@
      }
  
    return extract_bit_field (cplx, ibitsize, imag_p ? ibitsize : 0,
@@ -507,7 +518,7 @@
  }
  
  /* A subroutine of emit_move_insn_1.  Yet another lowpart generator.
-@@ -4233,6 +4233,13 @@
+@@ -4338,6 +4338,13 @@
  
        to_rtx = expand_normal (tem);
  
@@ -517,11 +528,11 @@
 +	  && GET_CODE (to_rtx) == MEM
 +	  && flag_strict_volatile_bitfields > 0)
 +	to_rtx = adjust_address (to_rtx, mode1, 0);
-+ 
++
        if (offset != 0)
  	{
  	  enum machine_mode address_mode;
-@@ -5993,6 +6000,12 @@
+@@ -6106,6 +6113,12 @@
  	mode = DECL_MODE (field);
        else if (DECL_MODE (field) == BLKmode)
  	blkmode_bitfield = true;
@@ -534,7 +545,7 @@
  
        *punsignedp = DECL_UNSIGNED (field);
      }
-@@ -8848,6 +8861,7 @@
+@@ -8978,6 +8991,7 @@
  	HOST_WIDE_INT bitsize, bitpos;
  	tree offset;
  	int volatilep = 0, must_force_mem;
@@ -542,7 +553,7 @@
  	tree tem = get_inner_reference (exp, &bitsize, &bitpos, &offset,
  					&mode1, &unsignedp, &volatilep, true);
  	rtx orig_op0, memloc;
-@@ -8857,6 +8871,11 @@
+@@ -8987,6 +9001,11 @@
  	   infinitely recurse.  */
  	gcc_assert (tem != exp);
  
@@ -554,7 +565,7 @@
  	/* If TEM's type is a union of variable size, pass TARGET to the inner
  	   computation, since it will need a temporary and TARGET is known
  	   to have to do.  This occurs in unchecked conversion in Ada.  */
-@@ -8873,6 +8892,14 @@
+@@ -9003,6 +9022,14 @@
  			  || modifier == EXPAND_STACK_PARM)
  			 ? modifier : EXPAND_NORMAL);
  
@@ -569,7 +580,7 @@
  	mode2
  	  = CONSTANT_P (op0) ? TYPE_MODE (TREE_TYPE (tem)) : GET_MODE (op0);
  
-@@ -8998,6 +9025,9 @@
+@@ -9128,6 +9155,9 @@
  		&& GET_MODE_CLASS (mode) != MODE_COMPLEX_FLOAT
  		&& modifier != EXPAND_CONST_ADDRESS
  		&& modifier != EXPAND_INITIALIZER)
@@ -579,7 +590,7 @@
  	    /* If the field isn't aligned enough to fetch as a memref,
  	       fetch it as a bit field.  */
  	    || (mode1 != BLKmode
-@@ -9058,7 +9088,7 @@
+@@ -9188,7 +9218,7 @@
  	    if (MEM_P (op0) && REG_P (XEXP (op0, 0)))
  	      mark_reg_pointer (XEXP (op0, 0), MEM_ALIGN (op0));
  
@@ -588,11 +599,11 @@
  				     (modifier == EXPAND_STACK_PARM
  				      ? NULL_RTX : target),
  				     ext_mode, ext_mode);
-
-=== modified file 'gcc/expr.h'
---- old/gcc/expr.h	2010-02-19 09:53:51 +0000
-+++ new/gcc/expr.h	2010-11-04 12:43:52 +0000
-@@ -802,7 +802,7 @@
+Index: gcc-4_5-branch/gcc/expr.h
+===================================================================
+--- gcc-4_5-branch.orig/gcc/expr.h	2012-03-06 11:53:32.000000000 -0800
++++ gcc-4_5-branch/gcc/expr.h	2012-03-06 13:05:59.668590163 -0800
+@@ -804,7 +804,7 @@
  extern void store_bit_field (rtx, unsigned HOST_WIDE_INT,
  			     unsigned HOST_WIDE_INT, enum machine_mode, rtx);
  extern rtx extract_bit_field (rtx, unsigned HOST_WIDE_INT,
@@ -601,11 +612,11 @@
  			      enum machine_mode, enum machine_mode);
  extern rtx extract_low_bits (enum machine_mode, enum machine_mode, rtx);
  extern rtx expand_mult (enum machine_mode, rtx, rtx, rtx, int);
-
-=== modified file 'gcc/fold-const.c'
---- old/gcc/fold-const.c	2010-10-04 00:50:43 +0000
-+++ new/gcc/fold-const.c	2010-11-04 12:43:52 +0000
-@@ -4208,11 +4208,16 @@
+Index: gcc-4_5-branch/gcc/fold-const.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/fold-const.c	2012-03-06 13:05:56.880590028 -0800
++++ gcc-4_5-branch/gcc/fold-const.c	2012-03-06 13:36:03.276677454 -0800
+@@ -4215,11 +4215,16 @@
  
    /* See if we can find a mode to refer to this field.  We should be able to,
       but fail if we can't.  */
@@ -627,11 +638,11 @@
    if (nmode == VOIDmode)
      return 0;
  
-
-=== modified file 'gcc/stmt.c'
---- old/gcc/stmt.c	2010-08-13 11:53:46 +0000
-+++ new/gcc/stmt.c	2010-11-04 12:43:52 +0000
-@@ -1751,7 +1751,7 @@
+Index: gcc-4_5-branch/gcc/stmt.c
+===================================================================
+--- gcc-4_5-branch.orig/gcc/stmt.c	2012-03-06 13:05:54.568589917 -0800
++++ gcc-4_5-branch/gcc/stmt.c	2012-03-06 13:36:34.948678986 -0800
+@@ -1754,7 +1754,7 @@
  	     xbitpos for the destination store (right justified).  */
  	  store_bit_field (dst, bitsize, xbitpos % BITS_PER_WORD, word_mode,
  			   extract_bit_field (src, bitsize,
@@ -640,10 +651,10 @@
  					      NULL_RTX, word_mode, word_mode));
  	}
  
-
-=== added file 'gcc/testsuite/gcc.target/i386/volatile-bitfields-1.c'
---- old/gcc/testsuite/gcc.target/i386/volatile-bitfields-1.c	1970-01-01 00:00:00 +0000
-+++ new/gcc/testsuite/gcc.target/i386/volatile-bitfields-1.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/testsuite/gcc.target/i386/volatile-bitfields-1.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_5-branch/gcc/testsuite/gcc.target/i386/volatile-bitfields-1.c	2012-03-06 13:05:59.672590164 -0800
 @@ -0,0 +1,17 @@
 +/* { dg-do compile } */
 +/* { dg-options "-O2 -fstrict-volatile-bitfields" } */
@@ -662,10 +673,10 @@
 +}
 +
 +/* { dg-final { scan-assembler "mov(b|zbl).*bits" } } */
-
-=== added file 'gcc/testsuite/gcc.target/i386/volatile-bitfields-2.c'
---- old/gcc/testsuite/gcc.target/i386/volatile-bitfields-2.c	1970-01-01 00:00:00 +0000
-+++ new/gcc/testsuite/gcc.target/i386/volatile-bitfields-2.c	2010-11-04 12:43:52 +0000
+Index: gcc-4_5-branch/gcc/testsuite/gcc.target/i386/volatile-bitfields-2.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ gcc-4_5-branch/gcc/testsuite/gcc.target/i386/volatile-bitfields-2.c	2012-03-06 13:05:59.672590164 -0800
 @@ -0,0 +1,17 @@
 +/* { dg-do compile } */
 +/* { dg-options "-O2 -fno-strict-volatile-bitfields" } */
@@ -684,4 +695,3 @@
 +}
 +
 +/* { dg-final { scan-assembler "movl.*bits" } } */
-
