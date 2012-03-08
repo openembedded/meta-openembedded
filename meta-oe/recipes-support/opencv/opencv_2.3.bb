@@ -16,7 +16,7 @@ SRC_URI = "svn://code.ros.org/svn/opencv/tags/2.3.1;module=opencv;proto=https \
 SRCREV = "7198"
 
 PV = "2.3.1"
-PR = "r2"
+PR = "r3"
 
 S = "${WORKDIR}/opencv"
 

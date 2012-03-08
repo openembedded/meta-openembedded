@@ -9,7 +9,7 @@ DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2d
 SRCREV = "f38655f1b565926846c1e17e0e7801c811037b1f"
 
 PV = "11.0"
-PR = "r10"
+PR = "r11"
 PR_append = "+gitr${SRCPV}"
 SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
