@@ -3,8 +3,9 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=156745cad721a8783cb847e82b79f586"
 SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms-${PV}.tar.gz"
+DEPENDS = "tiff"
 
-PR = "r3"
+PR = "r4"
 
 BBCLASSEXTEND = "native"
 
