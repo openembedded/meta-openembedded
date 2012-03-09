@@ -1,0 +1,26 @@
+--- netperf-2.4.4/src/netserver.c	2007-10-17 17:09:12.000000000 -0400
++++ netperf-2.4.4.new/src/netserver.c	2011-01-23 12:26:39.000000000 -0500
+@@ -567,7 +567,11 @@
+   fflush (stdin);
+   fflush (stdout);
+   fflush (stderr);
++#if defined(HAVE_FORK)
+   switch (fork())
++#else
++  switch (vfork())
++#endif
+     {
+     case -1:  	
+       perror("netperf server error");
+@@ -712,7 +716,11 @@
+ #else
+       signal(SIGCLD, SIG_IGN);
+ 	  
++#if defined(HAVE_FORK)
+ 	  switch (fork())
++#else
++	  switch (vfork())
++#endif
+ 	    {
+ 	    case -1:
+ 	      /* something went wrong */

@@ -1,0 +1,24 @@
+Index: netperf-2.4.4/src/netlib.c
+===================================================================
+--- netperf-2.4.4.orig/src/netlib.c	2007-10-17 23:16:02.000000000 +0200
++++ netperf-2.4.4/src/netlib.c	2008-12-03 17:56:32.000000000 +0100
+@@ -1988,10 +1988,15 @@
+      fall-back on what we had before, which is to use just the size of
+      an unsigned long. raj 2006-09-14 */
+ 
+-#if defined(__CPU_SETSIZE)
+-#define NETPERF_CPU_SETSIZE __CPU_SETSIZE
+-#define NETPERF_CPU_SET(cpu, cpusetp)  __CPU_SET(cpu, cpusetp)
+-#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO (cpusetp)
++#if defined(CPU_SETSIZE)
++#define NETPERF_CPU_SETSIZE CPU_SETSIZE
++#define NETPERF_CPU_SET(cpu, cpusetp)  CPU_SET(cpu, cpusetp)
++#define NETPERF_CPU_ZERO(cpusetp)      CPU_ZERO (cpusetp)
++  typedef cpu_set_t netperf_cpu_set_t;
++#elif defined(__CPU_SETSIZE)
++#define NETPERF_CPU_SETSIZE __CPU_SETSIZE
++#define NETPERF_CPU_SET(cpu, cpusetp)  __CPU_SET (cpu, cpusetp)
++#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO (cpusetp)
+   typedef cpu_set_t netperf_cpu_set_t;
+ #else
+ #define NETPERF_CPU_SETSIZE sizeof(unsigned long)
