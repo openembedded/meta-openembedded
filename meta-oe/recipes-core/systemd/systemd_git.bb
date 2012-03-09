@@ -14,11 +14,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r21"
+PR = "r22"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "48496df65c3ad1e3ad055d2b4632da7b73211715"
+SRCREV = "03f38e74984d93aa83c056893d414a5e3eac5763"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://0002-systemd-logind-don-t-kill-user-processes-on-exit.patch \
@@ -44,6 +44,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-gtk \
                  --enable-xz \
                  --disable-manpages \
+                 --disable-coredump \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
