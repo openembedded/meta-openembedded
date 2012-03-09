@@ -3,7 +3,7 @@ DESCRIPTION = "Units to make systemd work better with existing sysvinit scripts"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r14"
+PR = "r15"
 
 inherit allarch
 
@@ -12,9 +12,9 @@ SRC_URI = "file://*.service"
 do_install() {
 	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
 	install -d ${D}${base_libdir}/systemd/system/sysinit.target.wants/
-	install -m 0644 ${WORKDIR}/opkg.service ${D}${base_libdir}/systemd/system
-	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/basic.target.wants/
-	ln -sf ../opkg.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+	install -m 0644 ${WORKDIR}/run-postinsts.service ${D}${base_libdir}/systemd/system
+	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/basic.target.wants/
+	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
 
 	install -m 0644 ${WORKDIR}/machineid.service ${D}${base_libdir}/systemd/system
 	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/

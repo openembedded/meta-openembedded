@@ -1,12 +1,12 @@
 [Unit]
-Description=Opkg first boot configure
+Description=Run pending postinsts
 DefaultDependencies=no
-ConditionPathExists=|/etc/rcS.d/S98configure
+ConditionPathExists=|/etc/rcS.d/S98run-postinsts
 After=remount-rootfs.service
 Before=sysinit.target
 
 [Service]
-ExecStart=/etc/rcS.d/S98configure
+ExecStart=/etc/rcS.d/S98run-postinsts
 RemainAfterExit=No
 Type=oneshot
 StandardOutput=syslog
