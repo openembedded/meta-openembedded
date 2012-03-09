@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
 
-PR = "r6"
+PR = "r7"
 
-inherit gnome update-rc.d
+inherit gnome update-rc.d systemd
 
 SRC_URI += " \
             file://cross-xdetection.diff \
@@ -46,31 +46,10 @@ do_install_append() {
 	install -d ${D}/${sysconfdir}/gdm/Init
 	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
 
-	install -d ${D}${base_libdir}/systemd/system
-	install -m 0644 ${WORKDIR}/gdm.service ${D}${base_libdir}/systemd/system/ 
 }
 
-PACKAGES =+ "gdm-systemd"
-FILES_gdm-systemd = "${base_libdir}/systemd"
-RDEPENDS_gdm-systemd = "gdm"
-
-pkg_postinst_gdm-systemd() {
-	# can't do this offline
-	if [ "x$D" != "x" ]; then
-		exit 1
-	fi
-	
-	systemctl enable gdm.service
-}
-
-pkg_postrm_gdm-systemd() {
-	# can't do this offline
-	if [ "x$D" != "x" ]; then
-		exit 1
-	fi
-
-	systemctl disable gdm.service
-}
+SYSTEMD_PACKAGES = "${PN}-systemd"
+SYSTEMD_SERVICE = "gdm.service"
 
 FILES_${PN} += "${datadir}/icon* \
 		${datadir}/xsession* \
