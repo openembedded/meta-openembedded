@@ -8,21 +8,12 @@ DEPENDS = "elementary eina edbus sqlite3"
 
 inherit autotools
 
-SRCREV = "25"
-PV = "0.0.1+svnr${SRCPV}"
-PR = "r12"
+SRCREV = "b640f0e7287877983645d9d9a36f85a0b6a54631"
+PV = "0.0.2+gitr${SRCPV}"
 
-SRC_URI = "svn://e-tasks.googlecode.com/svn;module=trunk;proto=http \
-  file://0001-depend-on-eina-not-eina-0.patch \
-  file://0002-adapt-to-elementary-genlist_item_insert_before-API-c.patch \
-  file://0003-adapt-to-newer-elm-API.patch \
-  file://0004-fix-changed-callback-name.patch \
-  file://0005-adapt-to-even-newer-elm-API.patch \
-  file://0006-remove-deprecated-API.patch \
-  file://0007-db_sqlite-fix-warning.patch \
-  file://0008-fix-warning-about-incompatible-pointer-types.patch \
+SRC_URI = "git://github.com/shr-project/e-tasks.git;protocol=git;branch=master \
 "
-S = "${WORKDIR}/trunk"
+S = "${WORKDIR}/git"
 
 do_install_append() {
         install -d "${D}/${datadir}/pixmaps"
