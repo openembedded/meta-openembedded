@@ -3,7 +3,7 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=10a051c72424b80bc784a3903651b43b"
 DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb poppler"
 PV = "0.8.0+svnr${SRCPV}"
-PR = "r2"
+PR = "r3"
 SRCREV = "${EFL_SRCREV}"
 
 inherit efl gettext
@@ -32,6 +32,11 @@ RSUGGESTS_${PN} = "${PN}-tests ${PN}-accessibility"
 
 FILES_${PN} += "\
   ${libdir}/edje/modules/elm \
+  ${libdir}/elementary/modules/datetime_input_ctxpopup/*/module.so \
+"
+
+FILES_${PN}-dev += "\
+  ${libdir}/elementary/modules/datetime_input_ctxpopup/*/module.la \
 "
 
 FILES_${PN}-themes = "\
@@ -46,6 +51,7 @@ FILES_${PN}-dbg += "\
   ${libdir}/elementary/modules/test_entry/*/.debug \
   ${libdir}/elementary/modules/test_map/*/.debug \
   ${libdir}/elementary/modules/access_output/*/.debug \
+  ${libdir}/elementary/modules/datetime_input_ctxpopup/*/.debug \
   ${libdir}/edje/modules/elm/*/.debug \
 "
 
