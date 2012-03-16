@@ -6,13 +6,13 @@ LICENSE = "ISC"
 
 DEPENDS = "enca fontconfig freetype libpng"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.bz2"
 
 inherit autotools pkgconfig
 
-OE_EXTRACONF = " \
+EXTRA_OECONF = " \
 	--enable-enca \
 	--enable-fontconfig \
 	--enable-png \
