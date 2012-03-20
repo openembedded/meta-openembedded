@@ -3,12 +3,12 @@ DESCRIPTION = "kmod - handle kernel modules"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PR = "r2"
+PR = "r3"
 
 inherit autotools gitpkgv
 
 PKGV = "${GITPKGVTAG}"
-SRCREV = "80e54cb675d08f4f81b093a1919465ea86110a3b"
+SRCREV = "8885ced062131214448fae056ef453f094303805"
 SRC_URI = "git://git.profusion.mobi/kmod.git \
            file://0001-man-disable-man-page-generation-because-we-don-t-hav.patch \
 "
