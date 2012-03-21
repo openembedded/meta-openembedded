@@ -1,9 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 
-DEPENDS += "perl-native"
-BBCLASSEXTEND += "native"
-
-PRINC := "${@int(PRINC) + 8}"
+PRINC := "${@int(PRINC) + 9}"
 
 SRC_URI += " file://0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch"
 

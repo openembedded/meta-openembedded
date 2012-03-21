@@ -1,2 +1,0 @@
-BBCLASSEXTEND = "native"
-
