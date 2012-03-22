@@ -50,7 +50,7 @@ EXTRA_OECONF += " \
                   --libexecdir=${base_libdir}/udev \
                   --with-rootlibdir=${base_libdir} \
                   --disable-gtk-doc-html \
-                  --with-systemdsystemunitdir=${base_libdir}/systemd/system/ \
+                  --with-systemdsystemunitdir=${systemd_unitdir}/system/ \
 "
 
 do_configure_prepend() {
@@ -59,7 +59,7 @@ do_configure_prepend() {
 
 PACKAGES =+ "${PN}-systemd libudev libgudev udev-utils udev-consolekit"
 
-FILES_${PN}-systemd = "${base_libdir}/systemd"
+FILES_${PN}-systemd = "${systemd_unitdir}"
 RDEPENDS_${PN}-systemd += "udev"
 
 FILES_libudev = "${base_libdir}/libudev.so.*"
