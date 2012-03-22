@@ -1,7 +1,5 @@
 DEPENDS_append = " systemd-systemctl-native"
 
-systemd_unitdir = "${base_libdir}/systemd"
-
 systemd_postinst() {
 OPTS=""
 
