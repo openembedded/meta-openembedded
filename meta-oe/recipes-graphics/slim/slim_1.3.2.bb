@@ -49,8 +49,8 @@ do_install() {
   install -d ${D}${sysconfdir}/pam.d/
   install -m 0644 ${WORKDIR}/slim.pamd ${D}${sysconfdir}/pam.d/slim
 
-  install -d ${D}${base_libdir}/systemd/system/
-  install -m 0644 ${WORKDIR}/*.service ${D}${base_libdir}/systemd/system/
+  install -d ${D}${systemd_unitdir}/system/
+  install -m 0644 ${WORKDIR}/*.service ${D}${systemd_unitdir}/system/
 
   echo 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
   echo 'sessionstop_cmd     /usr/bin/sessreg -d -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
@@ -58,7 +58,7 @@ do_install() {
 
 
 RDEPENDS_${PN} = "perl xauth freetype sessreg "
-FILES_${PN} += "${base_libdir}/systemd/system/"
+FILES_${PN} += "${systemd_unitdir}/system/"
 
 pkg_postinst_${PN} () {
 if test "x$D" != "x"; then
