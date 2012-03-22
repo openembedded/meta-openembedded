@@ -10,15 +10,15 @@ inherit allarch
 SRC_URI = "file://*.service"
 
 do_install() {
-	install -d ${D}${base_libdir}/systemd/system/basic.target.wants
-	install -d ${D}${base_libdir}/systemd/system/sysinit.target.wants/
-	install -m 0644 ${WORKDIR}/run-postinsts.service ${D}${base_libdir}/systemd/system
-	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/basic.target.wants/
-	ln -sf ../run-postinsts.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
+	install -d ${D}${systemd_unitdir}/system/basic.target.wants
+	install -d ${D}${systemd_unitdir}/system/sysinit.target.wants/
+	install -m 0644 ${WORKDIR}/run-postinsts.service ${D}${systemd_unitdir}/system
+	ln -sf ../run-postinsts.service ${D}${systemd_unitdir}/system/basic.target.wants/
+	ln -sf ../run-postinsts.service ${D}${systemd_unitdir}/system/sysinit.target.wants/
 
-	install -m 0644 ${WORKDIR}/machineid.service ${D}${base_libdir}/systemd/system
-	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/sysinit.target.wants/
-	ln -sf ../machineid.service ${D}${base_libdir}/systemd/system/basic.target.wants/
+	install -m 0644 ${WORKDIR}/machineid.service ${D}${systemd_unitdir}/system
+	ln -sf ../machineid.service ${D}${systemd_unitdir}/system/sysinit.target.wants/
+	ln -sf ../machineid.service ${D}${systemd_unitdir}/system/basic.target.wants/
 
 	# hack to make old style sysvinit postinsts succeed
 	install -d ${D}${bindir}
@@ -33,12 +33,12 @@ echo -n "Disabling the following sysv scripts: "
 
 for i in busybox-udhcpc dnsmasq hwclock.sh networking syslog syslog.busybox ; do
 	if [ -e $i ] ; then
-		echo -n "$i " ; ln -s /dev/null $D${base_libdir}/systemd/system/$i.service
+		echo -n "$i " ; ln -s /dev/null $D${systemd_unitdir}/system/$i.service
 	fi
 done ; echo
 }
 
-FILES_${PN} = "${base_libdir}/systemd/system ${bindir}"
+FILES_${PN} = "${systemd_unitdir}/system ${bindir}"
 RDPEPENDS_${PN} = "systemd"
 
 
