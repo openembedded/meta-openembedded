@@ -26,12 +26,12 @@ def get_console(d):
 do_install() {
 	if [ ! ${@get_baudrate(d)} = "" ]; then
 		sed -i -e s/\@BAUDRATE\@/${@get_baudrate(d)}/g ${WORKDIR}/serial-getty@.service
-		install -d ${D}${base_libdir}/systemd/system/
+		install -d ${D}${systemd_unitdir}/system/
 		install -d ${D}${sysconfdir}/systemd/system/getty.target.wants/
-		install ${WORKDIR}/serial-getty@.service ${D}${base_libdir}/systemd/system/
+		install ${WORKDIR}/serial-getty@.service ${D}${systemd_unitdir}/system/
 
 		# enable the service
-		ln -sf ${base_libdir}/systemd/system/serial-getty@.service \
+		ln -sf ${systemd_unitdir}/system/serial-getty@.service \
 			${D}${sysconfdir}/systemd/system/getty.target.wants/serial-getty@${@get_console(d)}.service
 	fi
 }
@@ -42,5 +42,5 @@ RRECOMMENDS_${PN} = ""
 RDEPENDS_${PN} = "systemd"
 
 # This is a machine specific file
-FILES_${PN} = "${base_libdir}/systemd/system/serial-getty@.service ${sysconfdir}"
+FILES_${PN} = "${systemd_unitdir}/system/serial-getty@.service ${sysconfdir}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
