@@ -56,10 +56,10 @@ do_configure_prepend() {
 do_install() {
 	autotools_do_install
 	# provided by a seperate recipe
-	rm ${D}${base_libdir}/systemd/system/serial-getty* -f
+	rm ${D}${systemd_unitdir}/system/serial-getty* -f
 
 	# provide support for initramfs
-	ln -s ${base_libdir}/systemd/systemd ${D}/init
+	ln -s ${systemd_unitdir}/systemd ${D}/init
 
 	# create dir for journal
 	install -d ${D}${localstatedir}/log/journal
@@ -84,9 +84,9 @@ RDEPENDS_${PN}-initramfs = "${PN}"
 
 FILES_${PN}-gui = "${bindir}/systemadm"
 
-FILES_${PN}-vconsole-setup = "${base_libdir}/systemd/systemd-vconsole-setup \
-                              ${base_libdir}/systemd/system/systemd-vconsole-setup.service \
-                              ${base_libdir}/systemd/system/sysinit.target.wants/systemd-vconsole-setup.service"
+FILES_${PN}-vconsole-setup = "${systemd_unitdir}/systemd-vconsole-setup \
+                              ${systemd_unitdir}/system/systemd-vconsole-setup.service \
+                              ${systemd_unitdir}/system/sysinit.target.wants/systemd-vconsole-setup.service"
 
 RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
 
@@ -96,8 +96,8 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${datadir}/polkit-1 \
                 ${datadir}/${PN} \
                 ${sysconfdir} \
-                ${base_libdir}/systemd/* \
-                ${base_libdir}/systemd/system/* \
+                ${systemd_unitdir}/* \
+                ${systemd_unitdir}/system/* \
                 ${base_libdir}/udev/rules.d \
                 ${base_libdir}/security/*.so \
                 /cgroup \
@@ -111,7 +111,7 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${libexecdir} \
                "
 
-FILES_${PN}-dbg += "${base_libdir}/systemd/.debug ${base_libdir}/systemd/*/.debug ${base_libdir}/security/.debug/"
+FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/"
 FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/"
 
 RDEPENDS_${PN} += "dbus-systemd udev-systemd"
@@ -135,7 +135,7 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
 # u-a for runlevel and telinit
 
 pkg_postinst_systemd () {
-update-alternatives --install ${base_sbindir}/init init ${base_libdir}/systemd/systemd 300
+update-alternatives --install ${base_sbindir}/init init ${systemd_unitdir}/systemd 300
 update-alternatives --install ${base_sbindir}/halt halt ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/reboot reboot ${base_bindir}/systemctl 300
 update-alternatives --install ${base_sbindir}/shutdown shutdown ${base_bindir}/systemctl 300
@@ -143,7 +143,7 @@ update-alternatives --install ${base_sbindir}/poweroff poweroff ${base_bindir}/s
 }
 
 pkg_prerm_systemd () {
-update-alternatives --remove init ${base_libdir}/systemd/systemd
+update-alternatives --remove init ${systemd_unitdir}/systemd
 update-alternatives --remove halt ${base_bindir}/systemctl
 update-alternatives --remove reboot ${base_bindir}/systemctl
 update-alternatives --remove shutdown ${base_bindir}/systemctl
