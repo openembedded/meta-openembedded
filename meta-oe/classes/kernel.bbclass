@@ -36,7 +36,9 @@ PACKAGES_DYNAMIC += "kernel-firmware-*"
 export OS = "${TARGET_OS}"
 export CROSS_COMPILE = "${TARGET_PREFIX}"
 
-KERNEL_PRIORITY = "${@d.getVar('PV',1).split('-')[0].split('.')[-1]}"
+KERNEL_PRIORITY ?= "${@int(d.getVar('PV',1).split('-')[0].split('+')[0].split('.')[0]) * 10000 + \
+                       int(d.getVar('PV',1).split('-')[0].split('+')[0].split('.')[1]) * 100 + \
+                       int(d.getVar('PV',1).split('-')[0].split('+')[0].split('.')[-1])}"
 
 KERNEL_RELEASE ?= "${KERNEL_VERSION}"
 
