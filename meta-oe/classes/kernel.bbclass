@@ -110,6 +110,8 @@ kernel_do_install() {
 		oe_runmake DEPMOD=echo INSTALL_MOD_PATH="${D}" modules_install
 		rm -f "${D}/lib/modules/${KERNEL_VERSION}/modules.order"
 		rm -f "${D}/lib/modules/${KERNEL_VERSION}/modules.builtin"
+		rm "${D}/lib/modules/${KERNEL_VERSION}/build"
+		rm "${D}/lib/modules/${KERNEL_VERSION}/source"
 	else
 		bbnote "no modules to install"
 	fi
@@ -454,6 +456,14 @@ python populate_packages_prepend () {
 	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.fw$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
 	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.cis$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
 	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='update-modules kernel-%s' % d.getVar("KERNEL_VERSION", True))
+
+	# If modutils and modprobe.d are empty at this point, remove them to
+	# avoid warnings. removedirs only raises an OSError if an empty
+	# directory cannot be removed.
+	dvar = d.getVar('PKGD', True)
+	for dir in ["%s/etc/modutils" % (dvar), "%s/etc/modprobe.d" % (dvar)]:
+		if len(os.listdir(dir)) == 0:
+			os.rmdir(dir)
 
 	import re
 	metapkg = "kernel-modules"
