@@ -420,16 +420,14 @@ python populate_packages_prepend () {
 		# appropriate modprobe commands to the postinst
 		autoload = d.getVar('module_autoload_%s' % basename, True)
 		if autoload:
-			name = '%s/etc/modutils/%s' % (dvar, basename)
-			f = open(name, 'w')
-			for m in autoload.split():
-				f.write('%s\n' % m)
-			f.close()
 			name = '%s/etc/modules-load.d/%s.conf' % (dvar, basename)
 			f = open(name, 'w')
 			for m in autoload.split():
 				f.write('%s\n' % m)
 			f.close()
+			modutils_name = '%s/etc/modutils/%s' % (dvar, basename)
+			modutils_target = '../modules-load.d/%s.conf' % (basename)
+			os.symlink(modutils_target, modutils_name)
 			postinst = d.getVar('pkg_postinst_%s' % pkg, True)
 			if not postinst:
 				bb.fatal("pkg_postinst_%s not defined" % pkg)
