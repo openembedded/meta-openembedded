@@ -209,6 +209,12 @@ sysroot_stage_all_append() {
 }
 
 kernel_do_configure() {
+	# fixes extra + in /lib/modules/2.6.37+
+	# $ scripts/setlocalversion . => +
+	# $ make kernelversion => 2.6.37
+	# $ make kernelrelease => 2.6.37+
+	touch ${B}/.scmversion
+
 	# Copy defconfig to .config if .config does not exist. This allows
 	# recipes to manage the .config themselves in do_configure_prepend().
 	if [ -f "${WORKDIR}/defconfig" ] && [ ! -f "${B}/.config" ]; then
