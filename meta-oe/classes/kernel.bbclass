@@ -128,7 +128,6 @@ kernel_do_install() {
 	install -m 0644 .config ${D}/boot/config-${KERNEL_VERSION}
 	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
 	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/boot/Module.symvers-${KERNEL_VERSION}
-	install -d ${D}/etc/modutils
 	install -d ${D}/etc/modules-load.d
 	install -d ${D}/etc/modprobe.d
 
@@ -416,7 +415,7 @@ python populate_packages_prepend () {
 
 		dvar = d.getVar('PKGD', True)
 
-		# If autoloading is requested, output /etc/modutils/<name> and append
+		# If autoloading is requested, output /etc/modules-load.d/<name>.conf and append
 		# appropriate modprobe commands to the postinst
 		autoload = d.getVar('module_autoload_%s' % basename, True)
 		if autoload:
@@ -425,9 +424,6 @@ python populate_packages_prepend () {
 			for m in autoload.split():
 				f.write('%s\n' % m)
 			f.close()
-			modutils_name = '%s/etc/modutils/%s' % (dvar, basename)
-			modutils_target = '../modules-load.d/%s.conf' % (basename)
-			os.symlink(modutils_target, modutils_name)
 			postinst = d.getVar('pkg_postinst_%s' % pkg, True)
 			if not postinst:
 				bb.fatal("pkg_postinst_%s not defined" % pkg)
@@ -443,7 +439,7 @@ python populate_packages_prepend () {
 			f.close()
 
 		files = d.getVar('FILES_%s' % pkg, True)
-		files = "%s /etc/modutils/%s /etc/modutils/%s.conf /etc/modules-load.d/%s.conf /etc/modprobe.d/%s.conf" % (files, basename, basename, basename, basename)
+		files = "%s /etc/modules-load.d/%s.conf /etc/modprobe.d/%s.conf" % (files, basename, basename)
 		d.setVar('FILES_%s' % pkg, files)
 
 		if vals.has_key("description"):
@@ -469,11 +465,11 @@ python populate_packages_prepend () {
 	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.cis$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
 	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='update-modules kernel-%s' % d.getVar("KERNEL_VERSION", True))
 
-	# If modutils and modprobe.d are empty at this point, remove them to
+	# If modules-load.d and modprobe.d are empty at this point, remove them to
 	# avoid warnings. removedirs only raises an OSError if an empty
 	# directory cannot be removed.
 	dvar = d.getVar('PKGD', True)
-	for dir in ["%s/etc/modutils" % (dvar), "%s/etc/modprobe.d" % (dvar), "%s/etc/modules-load.d" % (dvar)]:
+	for dir in ["%s/etc/modprobe.d" % (dvar), "%s/etc/modules-load.d" % (dvar)]:
 		if len(os.listdir(dir)) == 0:
 			os.rmdir(dir)
 
