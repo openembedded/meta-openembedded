@@ -6,9 +6,9 @@ LICENSE="GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7c0048536e43642a1f3a724c2909872b \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-PR = "r5"
+PR = "r6"
 
-DEPENDS = "libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
+DEPENDS = "gdk-pixbuf gtk+ libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
 # optional: tracker
 
 inherit gnome
