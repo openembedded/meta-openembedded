@@ -9,8 +9,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 Index: git/src/mount-setup.c
 ===================================================================
---- git.orig/src/mount-setup.c	2012-01-25 21:27:23.000000000 -0800
-+++ git/src/mount-setup.c	2012-01-25 21:59:43.897031326 -0800
+--- git.orig/src/mount-setup.c	2012-01-26 21:15:12.573084007 -0800
++++ git/src/mount-setup.c	2012-01-26 21:15:16.005084174 -0800
 @@ -182,10 +182,10 @@
          (void) fgets(buf, sizeof(buf), f);
  
@@ -49,8 +49,8 @@ Index: git/src/mount-setup.c
                  if (r < 0) {
 Index: git/src/socket-util.c
 ===================================================================
---- git.orig/src/socket-util.c	2012-01-25 21:27:23.000000000 -0800
-+++ git/src/socket-util.c	2012-01-25 21:59:43.897031326 -0800
+--- git.orig/src/socket-util.c	2012-01-26 21:15:12.593084008 -0800
++++ git/src/socket-util.c	2012-01-26 21:15:16.005084174 -0800
 @@ -192,7 +192,7 @@
  int socket_address_parse_netlink(SocketAddress *a, const char *s) {
          int family;
@@ -81,8 +81,8 @@ Index: git/src/socket-util.c
  
 Index: git/src/swap.c
 ===================================================================
---- git.orig/src/swap.c	2012-01-25 21:27:23.000000000 -0800
-+++ git/src/swap.c	2012-01-25 21:59:43.897031326 -0800
+--- git.orig/src/swap.c	2012-01-26 21:15:12.593084008 -0800
++++ git/src/swap.c	2012-01-26 21:15:16.005084174 -0800
 @@ -1049,11 +1049,12 @@
          (void) fscanf(m->proc_swaps, "%*s %*s %*s %*s %*s\n");
  
@@ -113,8 +113,8 @@ Index: git/src/swap.c
                          return -ENOMEM;
 Index: git/src/tmpfiles.c
 ===================================================================
---- git.orig/src/tmpfiles.c	2012-01-25 21:27:23.000000000 -0800
-+++ git/src/tmpfiles.c	2012-01-25 22:06:58.649052774 -0800
+--- git.orig/src/tmpfiles.c	2012-01-26 21:15:12.617084010 -0800
++++ git/src/tmpfiles.c	2012-01-26 23:17:01.185437712 -0800
 @@ -73,8 +73,8 @@
  typedef struct Item {
          ItemType type;
@@ -180,6 +180,15 @@ Index: git/src/tmpfiles.c
                     &n) < 2) {
                  log_error("[%s:%u] Syntax error.", fname, line);
                  r = -EIO;
+@@ -944,7 +941,7 @@
+         if (n >= 0)  {
+                 n += strspn(buffer+n, WHITESPACE);
+                 if (buffer[n] != 0 && (buffer[n] != '-' || buffer[n+1] != 0)) {
+-                        i->argument = unquote(buffer+n, "\"");
++                        strcpy(i->argument, unquote(buffer+n, "\""));
+                         if (!i->argument) {
+                                 log_error("Out of memory");
+                                 return -ENOMEM;
 @@ -1096,11 +1093,6 @@
          r = 0;
  
@@ -194,8 +203,8 @@ Index: git/src/tmpfiles.c
  
 Index: git/src/mount.c
 ===================================================================
---- git.orig/src/mount.c	2012-01-25 21:27:23.000000000 -0800
-+++ git/src/mount.c	2012-01-25 21:59:43.901031505 -0800
+--- git.orig/src/mount.c	2012-01-26 21:15:12.573084007 -0800
++++ git/src/mount.c	2012-01-26 21:15:16.005084174 -0800
 @@ -24,6 +24,7 @@
  #include <mntent.h>
  #include <sys/epoll.h>
@@ -282,8 +291,8 @@ Index: git/src/mount.c
          free(o);
 Index: git/src/umount.c
 ===================================================================
---- git.orig/src/umount.c	2012-01-25 21:27:23.000000000 -0800
-+++ git/src/umount.c	2012-01-25 21:59:43.901031505 -0800
+--- git.orig/src/umount.c	2012-01-26 21:15:12.617084010 -0800
++++ git/src/umount.c	2012-01-26 21:15:16.005084174 -0800
 @@ -60,7 +60,9 @@
  
  static int mount_points_list_get(MountPoint **head) {
