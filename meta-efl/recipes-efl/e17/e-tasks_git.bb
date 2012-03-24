@@ -10,6 +10,7 @@ inherit autotools
 
 SRCREV = "b640f0e7287877983645d9d9a36f85a0b6a54631"
 PV = "0.0.2+gitr${SRCPV}"
+PR = "r1"
 
 SRC_URI = "git://github.com/shr-project/e-tasks.git;protocol=git;branch=master \
 "
