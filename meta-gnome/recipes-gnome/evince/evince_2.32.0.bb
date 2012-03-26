@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
 SECTION = "x11/office"
 DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
 
-PR = "r1"
+PR = "r2"
 
 inherit gnome pkgconfig gtk-icon-cache
 
@@ -30,8 +30,10 @@ PACKAGES =+ "${PN}-nautilus-extension"
 FILES_${PN} += "${datadir}/dbus-1"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug \
                     ${libdir}/*/*/*/.debug"
-FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
-FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
+FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la \
+                    ${libdir}/evince/*/backends/*.la"
+FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
+                          ${libdir}/evince/*/backends/*.a"
 FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
 
 pkg_postinst_${PN} () {
