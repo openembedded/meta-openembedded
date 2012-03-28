@@ -3,6 +3,8 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
+PR = "r1"
+
 inherit autotools pkgconfig
 
 DEPENDS = "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
@@ -18,6 +20,8 @@ PARALLEL_MAKE = ""
 
 PACKAGES =+ "cgroups-pam-plugin"
 FILES_cgroups-pam-plugin = "${base_libdir}/security/pam_cgroup.so*"
+FILES_${PN}-dbg += "${base_libdir}/security/.debug"
+FILES_${PN}-dev += "${base_libdir}/security/*.la"
 
 # We really need the symlink so :(
 ERROR_QA = "debug-deps dev-deps debug-files arch la2 pkgconfig la perms"
