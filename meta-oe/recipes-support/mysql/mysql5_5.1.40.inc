@@ -78,8 +78,8 @@ pkg_postrm_mysql5-server () {
 }
 
 PACKAGES = "${PN}-dbg ${PN} \
-libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-dbg \
-libmysqlclient libmysqlclient-dev libmysqlclient-dbg \
+libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysqlclient-r-dbg \
+libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclient-dbg \
 ${PN}-client ${PN}-server ${PN}-leftovers"
 CONFFILES_${PN}-server += "${sysconfdir}/my.cnf"
 
@@ -87,18 +87,28 @@ FILES_${PN} = " "
 RDEPENDS_${PN} = "${PN}-client ${PN}-server"
 ALLOW_EMPTY_${PN} = "1"
 
-FILES_libmysqlclient = "${libdir}/libmysqlclient.so.*"
+FILES_libmysqlclient = "\
+${libdir}/libmysqlclient.so.* \
+${libdir}/plugin/*.so.*"
 FILES_libmysqlclient-dev = " \
 ${includedir}/mysql/ \
-${libdir}/lib* \
-${libdir}/plugin/* \
+${libdir}/libmysqlclient.so \
+${libdir}/libmysqlclient.la \
+${libdir}/plugin/*.so \
+${libdir}/plugin/*.la \
 ${sysconfdir}/aclocal \
 ${bindir}/mysql_config"
+FILES_libmysqlclient-staticdev = "\
+${libdir}/*.a \
+${libdir}/plugin/*.a"
 FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
 /usr/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
 
 FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
-FILES_libmysqlclient-r-dev = "${libdir}/libmysqlclient_r.*"
+FILES_libmysqlclient-r-dev = "\
+${libdir}/libmysqlclient_r.so \
+${libdir}/libmysqlclient_r.la"
+FILES_libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
 FILES_libmysqlclient-r-dbg = "${libdir}/plugin/.debuglibmysqlclient_r.so.*"
 
 FILES_${PN}-client = "\
