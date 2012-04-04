@@ -3,6 +3,7 @@
 ROOT=
 
 # parse command line params
+action=
 while [ $# != 0 ]; do
 	opt="$1"
 
@@ -10,17 +11,26 @@ while [ $# != 0 ]; do
 		enable)
 			shift
 
+			action="$opt"
 			services="$1"
-			in_enable="1"
+			cmd_args="1"
+			shift
+			;;
+		disable)
+			shift
+
+			action="$opt"
+			services="$1"
+			cmd_args="1"
 			shift
 			;;
 		--root=*)
 			ROOT=${opt##--root=}
-			in_enable="0"
+			cmd_args="0"
 			shift
 			;;
 		*)
-			if [ "$in_enable" = "1" ]; then
+			if [ "$cmd_args" = "1" ]; then
 				services="$services $opt" 
 				shift
 			else
@@ -53,9 +63,15 @@ for service in $services; do
 		        | grep '\.target$')
 
 	for r in $wanted_by; do
-		mkdir -p $ROOT/etc/systemd/system/$r.wants
-		ln -s $service_file $ROOT/etc/systemd/system/$r.wants
-		echo "Enabled $service for $wanted_by."
+		if [ "$action" = "enable" ]; then
+			mkdir -p $ROOT/etc/systemd/system/$r.wants
+			ln -s $service_file $ROOT/etc/systemd/system/$r.wants
+			echo "Enabled $service for $wanted_by."
+		else
+			rm -f $ROOT/etc/systemd/system/$r.wants/$service_file
+			rmdirs -p $ROOT/etc/systemd/system/$r.wants
+			echo "Disabled $service for $wanted_by."
+		fi
 	done
 
 	# call us for the other required scripts
@@ -63,6 +79,8 @@ for service in $services; do
 		   | sed 's,Also=,,g' \
 		   | tr ',' '\n')
 	for a in $also; do
-		$0 --root=$ROOT enable $a
+		if [ "$action" = "enable" ]; then
+			$0 --root=$ROOT enable $a
+		fi
 	done
 done
