@@ -1,5 +1,5 @@
 DESCRIPTION = "v4l2 and IR applications"
-LICENSE = "GPLv2/LGPLv2.1"
+LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
 
@@ -7,6 +7,8 @@ DEPENDS = "jpeg"
 
 # libv4l was absorbed into this, let OE know that
 PROVIDES = "libv4l"
+
+PR = "r1"
 
 SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
 SRCREV = "v4l-utils-${PV}"
