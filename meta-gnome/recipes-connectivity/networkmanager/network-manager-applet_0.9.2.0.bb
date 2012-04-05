@@ -2,7 +2,7 @@ DESCRIPTION = "GTK+ applet for NetworkManager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
-DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libglade gconf gnome-keyring"
+DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libglade gconf gnome-keyring libgnome-keyring iso-codes"
 
 inherit gnome
 
@@ -32,5 +32,7 @@ FILES_${PN} += "${datadir}/nm-applet/ \
         "
 
 FILES_${PN} += "${libdir}/gnome-bluetooth/plugins/*.so"
+FILES_${PN}-dev += "${libdir}/gnome-bluetooth/plugins/libnma.la"
+FILES_${PN}-staticdev += "${libdir}/gnome-bluetooth/plugins/libnma.a"
 FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
 
