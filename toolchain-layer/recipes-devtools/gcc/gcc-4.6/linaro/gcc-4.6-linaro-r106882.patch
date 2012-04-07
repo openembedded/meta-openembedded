@@ -1,0 +1,53 @@
+2012-03-26  Ulrich Weigand  <ulrich.weigand@linaro.org>
+
+	LP 960283
+	LP 960274
+	LP 960817
+
+	Backport from mainline:
+
+	gcc/
+	PR tree-optimization/52686
+	* tree-vect-data-refs.c (vect_get_smallest_scalar_type): Handle
+	WIDEN_LSHIFT_EXPR.
+
+	gcc/testsuite/
+	PR tree-optimization/52686
+	* gcc.target/arm/pr52686.c: New test.
+
+=== added file 'gcc/testsuite/gcc.target/arm/pr52686.c'
+--- old/gcc/testsuite/gcc.target/arm/pr52686.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/pr52686.c	2012-03-23 16:26:22 +0000
+@@ -0,0 +1,19 @@
++/* PR target/52375 */
++/* { dg-do compile } */
++/* { dg-require-effective-target arm_neon_ok } */
++/* { dg-options "-march=armv7-a -mfloat-abi=softfp -mfpu=neon -O -ftree-vectorize" } */
++
++unsigned int output[4];
++
++void test (unsigned short *p)
++{
++  unsigned int x = *p;
++  if (x)
++    {
++      output[0] = x << 1;
++      output[1] = x << 1;
++      output[2] = x << 1;
++      output[3] = x << 1;
++    }
++}
++
+
+=== modified file 'gcc/tree-vect-data-refs.c'
+--- old/gcc/tree-vect-data-refs.c	2012-01-05 15:35:39 +0000
++++ new/gcc/tree-vect-data-refs.c	2012-03-23 16:26:22 +0000
+@@ -111,6 +111,7 @@
+   if (is_gimple_assign (stmt)
+       && (gimple_assign_cast_p (stmt)
+           || gimple_assign_rhs_code (stmt) == WIDEN_MULT_EXPR
++          || gimple_assign_rhs_code (stmt) == WIDEN_LSHIFT_EXPR
+           || gimple_assign_rhs_code (stmt) == FLOAT_EXPR))
+     {
+       tree rhs_type = TREE_TYPE (gimple_assign_rhs1 (stmt));
+

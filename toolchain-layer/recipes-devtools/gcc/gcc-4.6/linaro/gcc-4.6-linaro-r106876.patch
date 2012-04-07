@@ -1,0 +1,109 @@
+2012-03-06  Ramana Radhakrishnan  <ramana.radhakrishnan@linaro.org>
+
+	LP:942307
+    	gcc/
+    	PR target/50305
+    	* config/arm/arm.c (arm_legitimize_reload_address): Recognize
+    	output of a previous pass through legitimize_reload_address.
+    	Do not attempt to optimize addresses if the base register is
+    	equivalent to a constant.
+    	gcc/testsuite/
+    	PR target/50305
+    	* gcc.target/arm/pr50305.c: New test.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2012-03-02 13:53:14 +0000
++++ new/gcc/config/arm/arm.c	2012-03-06 11:01:55 +0000
+@@ -6632,9 +6632,26 @@
+ 			       int opnum, int type,
+ 			       int ind_levels ATTRIBUTE_UNUSED)
+ {
++  /* We must recognize output that we have already generated ourselves.  */
++  if (GET_CODE (*p) == PLUS
++      && GET_CODE (XEXP (*p, 0)) == PLUS
++      && GET_CODE (XEXP (XEXP (*p, 0), 0)) == REG
++      && GET_CODE (XEXP (XEXP (*p, 0), 1)) == CONST_INT
++      && GET_CODE (XEXP (*p, 1)) == CONST_INT)
++    {
++      push_reload (XEXP (*p, 0), NULL_RTX, &XEXP (*p, 0), NULL,
++		   MODE_BASE_REG_CLASS (mode), GET_MODE (*p),
++		   VOIDmode, 0, 0, opnum, (enum reload_type) type);
++      return true;
++    }
++
+   if (GET_CODE (*p) == PLUS
+       && GET_CODE (XEXP (*p, 0)) == REG
+       && ARM_REGNO_OK_FOR_BASE_P (REGNO (XEXP (*p, 0)))
++      /* If the base register is equivalent to a constant, let the generic
++	 code handle it.  Otherwise we will run into problems if a future
++	 reload pass decides to rematerialize the constant.  */
++      && !reg_equiv_constant [ORIGINAL_REGNO (XEXP (*p, 0))]
+       && GET_CODE (XEXP (*p, 1)) == CONST_INT)
+     {
+       HOST_WIDE_INT val = INTVAL (XEXP (*p, 1));
+
+=== added file 'gcc/testsuite/gcc.target/arm/pr50305.c'
+--- old/gcc/testsuite/gcc.target/arm/pr50305.c	1970-01-01 00:00:00 +0000
++++ new/gcc/testsuite/gcc.target/arm/pr50305.c	2012-03-01 13:07:48 +0000
+@@ -0,0 +1,60 @@
++/* { dg-do compile } */
++/* { dg-skip-if "incompatible options" { arm*-*-* } { "-march=*" } { "-march=armv7-a" } } */
++/* { dg-options "-O2 -fno-omit-frame-pointer -marm -march=armv7-a -mfpu=vfp3" } */
++
++struct event {
++ unsigned long long id;
++ unsigned int flag;
++};
++
++void dummy(void)
++{
++  /* This is here to ensure that the offset of perf_event_id below
++     relative to the LANCHOR symbol exceeds the allowed displacement.  */
++  static int __warned[300];
++ __warned[0] = 1;
++}
++
++extern void *kmem_cache_alloc_trace (void *cachep);
++extern void *cs_cachep;
++extern int nr_cpu_ids;
++
++struct event *
++event_alloc (int cpu)
++{
++ static unsigned long long __attribute__((aligned(8))) perf_event_id;
++ struct event *event;
++ unsigned long long result;
++ unsigned long tmp;
++
++ if (cpu >= nr_cpu_ids)
++  return 0;
++
++ event = kmem_cache_alloc_trace (cs_cachep);
++
++ __asm__ __volatile__ ("dmb" : : : "memory");
++
++ __asm__ __volatile__("@ atomic64_add_return\n"
++"1:	ldrexd	%0, %H0, [%3]\n"
++"	adds	%0, %0, %4\n"
++"	adc	%H0, %H0, %H4\n"
++"	strexd	%1, %0, %H0, [%3]\n"
++"	teq	%1, #0\n"
++"	bne	1b"
++ : "=&r" (result), "=&r" (tmp), "+Qo" (perf_event_id)
++ : "r" (&perf_event_id), "r" (1LL)
++ : "cc");
++
++ __asm__ __volatile__ ("dmb" : : : "memory");
++
++ event->id = result;
++
++ if (cpu)
++  event->flag = 1;
++
++ for (cpu = 0; cpu < nr_cpu_ids; cpu++)
++   kmem_cache_alloc_trace (cs_cachep);
++
++ return event;
++}
++
+

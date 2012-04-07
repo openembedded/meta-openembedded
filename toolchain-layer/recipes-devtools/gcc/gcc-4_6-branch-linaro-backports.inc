@@ -93,4 +93,9 @@ file://linaro/gcc-4.6-linaro-r106872.patch \
 file://linaro/gcc-4.6-linaro-r106873.patch \
 file://linaro/gcc-4.6-linaro-r106874.patch \
 file://linaro/fix_linaro_106872.patch \
+file://linaro/gcc-4.6-linaro-r106876.patch \
+file://linaro/gcc-4.6-linaro-r106877.patch \
+file://linaro/gcc-4.6-linaro-r106878.patch \
+file://linaro/gcc-4.6-linaro-r106879.patch \
+file://linaro/gcc-4.6-linaro-r106882.patch \
 "
