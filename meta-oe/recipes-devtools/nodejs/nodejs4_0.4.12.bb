@@ -28,11 +28,8 @@ do_compile () {
 }
 
 do_install () {
-  DESTDIR=${D} oe_runmake install
+  install -d ${D}${bindir}
+  install -m 0755 build/default/node ${D}${bindir}/node4
 }
 
-RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
-RDEPENDS_${PN}_virtclass-native = "curl-native python-native"
 
-FILES_${PN} += "${libdir}/node/wafadmin"
-BBCLASSEXTEND = "native"
