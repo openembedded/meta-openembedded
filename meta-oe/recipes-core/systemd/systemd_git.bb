@@ -14,15 +14,13 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r23"
+PR = "r24"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "5ebff5337594d690b322078c512eb222d34aaa82"
+SRCREV = "3eff4208ffecedd778fec260f0d4b18e94dab443"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://0001-Revert-journald-allocate-PAGE_SIZE-bytes-for-selinux.patch \
-           file://0002-systemd-logind-don-t-kill-user-processes-on-exit.patch \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
