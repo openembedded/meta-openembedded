@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r24"
+PR = "r25"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -86,7 +86,7 @@ FILES_${PN}-vconsole-setup = "${systemd_unitdir}/systemd-vconsole-setup \
                               ${systemd_unitdir}/system/systemd-vconsole-setup.service \
                               ${systemd_unitdir}/system/sysinit.target.wants/systemd-vconsole-setup.service"
 
-RRECOMMENDS_$PN}-vconsole-setup = "kbd kbd-consolefonts"
+RRECOMMENDS_${PN}-vconsole-setup = "kbd kbd-consolefonts"
 
 FILES_${PN} = " ${base_bindir}/* \
                 ${datadir}/dbus-1/services \
