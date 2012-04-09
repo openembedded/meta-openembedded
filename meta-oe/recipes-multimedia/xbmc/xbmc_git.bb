@@ -58,6 +58,11 @@ do_compile_prepend() {
 	sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir)::g' ${S}/Makefile	
 }
 
+# on ARM architectures xbmc will use GLES which will make the regular wrapper fail, so start it directly
+do_install_append_arm() {
+	sed -i -e 's:Exec=xbmc:Exec=${libdir}/xbmc/xbmc.bin:g' ${D}${datadir}/applications/xbmc.desktop
+}
+
 FILES_${PN} += "${datadir}/xsessions ${datadir}/icons"
 FILES_${PN}-dbg += "${libdir}/xbmc/.debug ${libdir}/xbmc/*/.debug ${libdir}/xbmc/*/*/.debug ${libdir}/xbmc/*/*/*/.debug"
 
