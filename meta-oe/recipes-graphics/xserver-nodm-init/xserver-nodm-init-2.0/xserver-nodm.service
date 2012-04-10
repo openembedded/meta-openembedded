@@ -2,7 +2,7 @@
 Description=Xserver startup with a display manager
 
 [Service]
-ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /usr/bin/Xorg
+ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
 
 [Install]
 WantedBy=multi-user.target
