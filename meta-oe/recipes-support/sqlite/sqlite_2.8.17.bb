@@ -22,7 +22,7 @@ inherit autotools pkgconfig
 do_configure() {
     echo "main.mk is patched, no need to configure"
     # make pkgconfig.bbclass pick this up
-    mv ${WORKDIR}/sqlite.pc ${S}
+    cp ${WORKDIR}/sqlite.pc ${S}
 }
 
 do_compile() {
