@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Calibrate Touchscreen
+Exec=xinput_calibrator_once.sh
+Terminal=false
+Type=Application
+Icon=xinput_calibrator
+StartupNotify=true
+Categories=System;Settings;
