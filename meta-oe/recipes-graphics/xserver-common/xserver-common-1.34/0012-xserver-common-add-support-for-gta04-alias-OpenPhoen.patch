@@ -1,15 +1,16 @@
-From 95d741d6849a2faddf8c1e930c7250ead90e7bed Mon Sep 17 00:00:00 2001
-From: Klaus Kurzmann <mok@fluxnetz.de>
-Date: Thu, 20 Oct 2011 09:05:43 +0200
-Subject: [PATCH] gta04
+From d194f0302582f1ca599f2ea58c15e15f4fd6bdef Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 11 Apr 2012 14:41:52 +0200
+Subject: [PATCH 12/12] xserver-common: add support for gta04 alias
+ OpenPhoenux
 
-Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
  X11/xserver-common |    8 ++++++++
  1 files changed, 8 insertions(+), 0 deletions(-)
 
 diff --git a/X11/xserver-common b/X11/xserver-common
-index 448b262..208bbfd 100644
+index 55594fd..434333e 100644
 --- a/X11/xserver-common
 +++ b/X11/xserver-common
 @@ -161,6 +161,14 @@ else
@@ -28,5 +29,5 @@ index 448b262..208bbfd 100644
              ARGS="$ARGS -screen 240x320"
              DPI="170" ;;
 -- 
-1.7.7
+1.7.8.5
 

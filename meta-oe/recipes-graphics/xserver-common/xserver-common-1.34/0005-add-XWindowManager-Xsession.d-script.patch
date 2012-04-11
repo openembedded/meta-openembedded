@@ -1,0 +1,26 @@
+From b01a532ebb525552e23d7169a2aeb55c42b3ec99 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 11 Apr 2012 14:32:13 +0200
+Subject: [PATCH 05/12] add XWindowManager Xsession.d script
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ X11/Xsession.d/90xXWindowManager |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+ create mode 100644 X11/Xsession.d/90xXWindowManager
+
+diff --git a/X11/Xsession.d/90xXWindowManager b/X11/Xsession.d/90xXWindowManager
+new file mode 100644
+index 0000000..3df8435
+--- /dev/null
++++ b/X11/Xsession.d/90xXWindowManager
+@@ -0,0 +1,6 @@
++#!/bin/sh
++if [ -x $HOME/.Xsession ]; then
++    exec $HOME/.Xsession
++else
++    exec /usr/bin/x-window-manager
++fi
+-- 
+1.7.8.5
+
