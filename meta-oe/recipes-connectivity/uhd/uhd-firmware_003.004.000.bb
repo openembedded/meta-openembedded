@@ -4,15 +4,15 @@ HOMEPAGE = "http://www.ettus.com"
 PE = "1"
 
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=52f5a4b60aca734da1b0e78078aeea71"
+LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=d8a4f8958d3b56a11bbb1bb134826b28"
 
 inherit allarch
 
-SRC_URI = "http://www.ettus.com/downloads/uhd_releases/${@'${PV}'.replace('.', '_')}/images-only/UHD-images-${PV}.tar.gz"
-SRC_URI[md5sum] = "84ec78ec03699a96d64210b93019f782"
-SRC_URI[sha256sum] = "53712db43b324adad1b83617f99f7b73682bcd0078bbc9915d0a376f4ca41289"
+SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
+SRC_URI[md5sum] = "4269fac82df1fe593ba76206773ce551"
+SRC_URI[sha256sum] = "4b80ebf90079a823212d3b77e5311ef1b467497a4a3585c2cfb4fe65bff71acf"
 
-S = "${WORKDIR}/UHD-images-${PV}-59f407f"
+S = "${WORKDIR}/uhd-images_${PV}-release"
 
 do_install() {
 	install -d ${D}${datadir}/uhd/images
