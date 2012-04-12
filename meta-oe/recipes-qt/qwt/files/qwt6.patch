@@ -1,0 +1,86 @@
+- add support for SUFFIX_STR
+---
+diff --git a/examples/examples.pri b/examples/examples.pri
+index a6911c8..854ce89 100644
+--- a/examples/examples.pri
++++ b/examples/examples.pri
+@@ -13,9 +13,17 @@ include( $${QWT_ROOT}/qwtbuild.pri )
+ 
+ TEMPLATE     = app
+ 
++SUFFIX_STR =
++CONFIG(debug, debug|release) {
++    SUFFIX_STR = $${DEBUG_SUFFIX}
++}
++else {
++    SUFFIX_STR = $${RELEASE_SUFFIX}
++}
++
+ INCLUDEPATH += $${QWT_ROOT}/src
+ DEPENDPATH  += $${QWT_ROOT}/src
+-DESTDIR      = $${QWT_ROOT}/examples/bin
++DESTDIR      = $${QWT_ROOT}/examples/bin$${SUFFIX_STR}
+ 
+ QMAKE_RPATHDIR *= $${QWT_ROOT}/lib
+ 
+diff --git a/qwtconfig.pri b/qwtconfig.pri
+index b0d2110..be119b7 100644
+--- a/qwtconfig.pri
++++ b/qwtconfig.pri
+@@ -30,6 +30,13 @@ QWT_INSTALL_DOCS      = $${QWT_INSTALL_PREFIX}/doc
+ QWT_INSTALL_HEADERS   = $${QWT_INSTALL_PREFIX}/include
+ QWT_INSTALL_LIBS      = $${QWT_INSTALL_PREFIX}/lib
+ 
++DEBUG_SUFFIX        = 
++RELEASE_SUFFIX      = 
++
++win32 {
++    DEBUG_SUFFIX      = d
++}
++
+ ######################################################################
+ # Designer plugin
+ ######################################################################
+diff --git a/src/src.pro b/src/src.pro
+index beb7125..ebf8ea6 100644
+--- a/src/src.pro
++++ b/src/src.pro
+@@ -13,8 +13,16 @@ QWT_ROOT = $${PWD}/..
+ include( $${QWT_ROOT}/qwtconfig.pri )
+ include( $${QWT_ROOT}/qwtbuild.pri )
+ 
++SUFFIX_STR =
++CONFIG(debug, debug|release) {
++    SUFFIX_STR = $${DEBUG_SUFFIX}
++}
++else {
++    SUFFIX_STR = $${RELEASE_SUFFIX}
++}
++
+ TEMPLATE          = lib
+-TARGET            = $$qtLibraryTarget(qwt)
++TARGET            = $$qtLibraryTarget(qwt)$${SUFFIX_STR}
+ 
+ DESTDIR           = $${QWT_ROOT}/lib
+ 
+diff --git a/textengines/mathml/mathml.pro b/textengines/mathml/mathml.pro
+index b0ed9f9..403828b 100644
+--- a/textengines/mathml/mathml.pro
++++ b/textengines/mathml/mathml.pro
+@@ -12,7 +12,15 @@ message(Beside the Qwt license you also have to take care of its license. )
+ 
+ include( $${PWD}/../textengines.pri )
+ 
+-TARGET    = $$qtLibraryTarget(qwtmathml)
++SUFFIX_STR =
++CONFIG(debug, debug|release) {
++    SUFFIX_STR = $${DEBUG_SUFFIX}
++}
++else {
++    SUFFIX_STR = $${RELEASE_SUFFIX}
++}
++
++TARGET    = $$qtLibraryTarget(qwtmathml$${SUFFIX_STR})
+ QT       += xml
+ 
+ HEADERS = \
