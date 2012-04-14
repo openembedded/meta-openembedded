@@ -1,7 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${P}:"
 
 DEPENDS += "perl-native"
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND += "native"
 
 PRINC = "7"
 

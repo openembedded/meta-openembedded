@@ -1,1 +1,1 @@
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND += "native"
