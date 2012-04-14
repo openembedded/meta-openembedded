@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r26"
+PR = "r27"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -64,6 +64,10 @@ do_install() {
 
 	# create dir for journal
 	install -d ${D}${localstatedir}/log/journal
+
+	# create machine-id
+	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
+	touch ${D}${sysconfdir}/machine-id
 }
 
 python populate_packages_prepend (){
