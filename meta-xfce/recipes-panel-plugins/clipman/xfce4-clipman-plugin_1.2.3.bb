@@ -8,5 +8,5 @@ inherit xfce-panel-plugin
 
 DEPENDS += "xfconf xproto libxtst"
 
-SRC_URI[md5sum] = "60df7769a8271d7fcab177210f4291e8"
-SRC_URI[sha256sum] = "fcac10bc150eb2f73955f28184ac2b8324c9aabc3d773242eadcec137e1096a1"
+SRC_URI[md5sum] = "61f3be97efa379cb358980c94e14692a"
+SRC_URI[sha256sum] = "4424447067cb2c3972c375330d2e1d19f12e59c41bd03e111c2e6e9e174a5067"
