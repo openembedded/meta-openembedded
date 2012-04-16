@@ -5,7 +5,7 @@ After=syslog.target
 [Service]
 Type=oneshot
 EnvironmentFile=-/etc/sysconfig/lighttpd
-ExecStart=/usr/sbin/lighttpd -D -f /etc/lighttpd/lighttpd.conf
+ExecStart=/usr/sbin/lighttpd -D -f /etc/lighttpd.conf
 RemainAfterExit=yes
 
 [Install]
