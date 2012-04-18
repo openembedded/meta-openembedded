@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://debian/README;md5=36bbe2ace0a05c3fb684b73208fbf30b"
 
 DEPENDS = "file"
 RRECOMMENDS_${PN} = "file"
-PR = "r2"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
 S = "${WORKDIR}/${PN}"
@@ -55,5 +54,5 @@ do_install () {
 	cd ${D}${mandir}/man1; ln -s run-mailcap.1.gz print.1.gz
 }
 
-SRC_URI[md5sum] = "048aa29c31f067382cd669ee20934b9e"
-SRC_URI[sha256sum] = "4f65183200955540c097b82bfb18f5d21b636ca79f47cd018a4ea8b89cd2998c"
+SRC_URI[md5sum] = "d6e5d715e331147352c50c158dbdec6d"
+SRC_URI[sha256sum] = "a529c7892cb786f514af71f4ca5a4c3ebc58b538a49ff959c0d97592d38f040a"
