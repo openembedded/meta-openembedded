@@ -106,5 +106,6 @@ RDEPENDS_${PN} = "nodejs4 gzip"
 
 inherit systemd
 
+NATIVE_SYSTEMD_SUPPORT = "1"
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "cloud9.service"
