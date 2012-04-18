@@ -95,19 +95,19 @@ case "$1" in
   start)
 		echo "Starting $DESC" "$NAME"
 		do_start
-		return $?
+		exit $?
 	;;
   stop)
 	echo "Stopping $DESC" "$NAME"
 	do_stop
-	return $?
+	exit $?
 	;;
   status)
        ;;
   reload|force-reload)
 	echo "Reloading $DESC" "$NAME"
 	do_reload
-	return $?
+	exit $?
 	;;
   restart)
 	#
@@ -119,11 +119,11 @@ case "$1" in
 	case "$?" in
 	  0|1)
 		do_start
-		return $?
+		exit $?
 		;;
 	  *)
 	 	# Failed to stop
-		return 1
+		exit 1
 		;;
 	esac
 	;;
