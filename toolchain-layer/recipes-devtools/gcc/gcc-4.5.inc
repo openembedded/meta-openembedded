@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 
 PV = "4.5"
-PR = "r48"
+PR = "r49"
 
 # BINV should be incremented after updating to a revision
 # after a minor gcc release (e.g. 4.5.1 or 4.5.2) has been made
@@ -38,6 +38,7 @@ SRC_URI = "svn://gcc.gnu.org/svn/gcc/branches;module=${BRANCH};proto=http \
        file://gcc-armv4-pass-fix-v4bx-to-ld.patch \
        file://sh4-multilib.patch \
        file://arm-lib1funcs.as-fix-mismatch-between-conditions-of-an-IT-block.patch \
+       file://cpp-honour-sysroot.patch \
        \
        file://linaro/gcc-4.5-linaro-r99297.patch \
        file://linaro/gcc-4.5-linaro-r99298.patch \
