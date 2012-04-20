@@ -3,3 +3,4 @@ QT_SQL_DRIVER_FLAGS = "-no-sql-ibase -plugin-sql-mysql -no-sql-odbc -plugin-sql-
 QT_CONFIG_FLAGS += "-I${STAGING_INCDIR}/mysql \
                     -I${STAGING_INCDIR}/postgresql"
 
+PRINC := "${@int(PRINC) + 1}"
