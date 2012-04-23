@@ -34,7 +34,6 @@ EXTRA_OESCONS = " \
   debug='true' \
   strip='false' \
   systemd='true' \
-  pkgconfig='${PKG_CONFIG_DIR}' \
 "
 
 do_compile_prepend() {
