@@ -5,16 +5,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
-PR = "r0"
-
-SRC_URI = "http://download.savannah.gnu.org/releases/gpsd/gpsd-${PV}.tar.gz;name=gpsd \
-           file://gpsd-default \
-           file://gpsd \
-           file://gpsd.socket \
-           file://gpsd.service \
-           file://60-gpsd.rules"
-SRC_URI[gpsd.md5sum] = "c01353459faa68834309109d4e868460"
-SRC_URI[gpsd.sha256sum] = "79f7de9ead63c7f5d2c9a92e85b5f82e53323c4d451ef8e27ea265ac3ef9a70f"
+SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+  file://gpsd-default \
+  file://gpsd \
+  file://gpsd.socket \
+  file://gpsd.service \
+  file://60-gpsd.rules \
+"
+SRC_URI[md5sum] = "c01353459faa68834309109d4e868460"
+SRC_URI[sha256sum] = "79f7de9ead63c7f5d2c9a92e85b5f82e53323c4d451ef8e27ea265ac3ef9a70f"
 
 inherit scons update-rc.d python-dir systemd
 
@@ -23,7 +22,6 @@ INITSCRIPT_PARAMS = "defaults 35"
 
 SYSTEMD_PACKAGES = "${PN}-systemd"
 SYSTEMD_SERVICE = "${PN}.socket"
-
 
 LDFLAGS += "-L${STAGING_LIBDIR} -lm"
 export STAGING_INCDIR
@@ -66,13 +64,10 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/60-gpsd.rules ${D}/${sysconfdir}/udev/rules.d
     install -d ${D}${base_libdir}/udev/
     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
-    install -d ${D}${base_libdir}/udev/
 
     #support for python
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-    for f in ${S}/gps/* ;do
-        install $f ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-    done
+    install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
 }
 
 pkg_postinst_${PN}-conf() {
@@ -80,10 +75,12 @@ pkg_postinst_${PN}-conf() {
 }
 
 pkg_postrm_${PN}-conf() {
-	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
+	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
 }
 
 PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
+
+FILES_gpsd-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc"
 
 FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
 
