@@ -28,6 +28,7 @@ __version__ = "$Revision: 0.5 $"
 
 # The standard set of variables often found in .bb files in the preferred order
 OE_vars = [
+    'SUMMARY',
     'DESCRIPTION',
     'AUTHOR',
     'HOMEPAGE',
