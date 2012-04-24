@@ -14,7 +14,6 @@ SRC_URI_append = " \
   file://0001-COPYING-add-GPLv2-license-file.patch \
   file://0002-add-setdpi-Xinit.d-script.patch \
   file://0003-add-89xdgautostart-Xsession.d-script.patch \
-  file://0004-add-Ts_Calibrate_xinput_calibrator-Xsession.d-script.patch \
   file://0005-add-XWindowManager-Xsession.d-script.patch \
   file://0006-add-support-for-etc-X11-xserver-system.patch \
   file://0007-use-own-functions-file-instead-etc-init.d-functions.patch \
