@@ -10,6 +10,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
   file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
   file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
   file://0004-SConstruct-remove-rpath.patch \
+  file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
   file://gpsd-default \
   file://gpsd \
   file://60-gpsd.rules \
