@@ -46,13 +46,18 @@ do_compile_prepend() {
     export HOST_SYS="${HOST_SYS}"
 }
 
-do_install_prepend() {
+do_install() {
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
     export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
     export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
 
     export BUILD_SYS="${BUILD_SYS}"
     export HOST_SYS="${HOST_SYS}"
+
+    export DESTDIR="${D}"
+    # prefix is used for RPATH and DESTDIR/prefix for instalation
+    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix} install ${EXTRA_OESCONS}|| \
+      bbfatal "scons install execution failed."
 }
 
 do_install_append() {
