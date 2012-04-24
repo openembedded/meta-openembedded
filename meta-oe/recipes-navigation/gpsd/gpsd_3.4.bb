@@ -6,6 +6,7 @@ DEPENDS = "dbus dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
+  file://0001-SConstruct-fix-DSO-build-for-ntpshm-garmin_monitor.patch \
   file://gpsd-default \
   file://gpsd \
   file://gpsd.socket \
@@ -23,11 +24,8 @@ INITSCRIPT_PARAMS = "defaults 35"
 SYSTEMD_PACKAGES = "${PN}-systemd"
 SYSTEMD_SERVICE = "${PN}.socket"
 
-LDFLAGS += "-L${STAGING_LIBDIR} -lm"
 export STAGING_INCDIR
 export STAGING_LIBDIR
-
-CC += "${LDFLAGS}"
 
 EXTRA_OESCONS = " \
   libQgpsmm='false' \

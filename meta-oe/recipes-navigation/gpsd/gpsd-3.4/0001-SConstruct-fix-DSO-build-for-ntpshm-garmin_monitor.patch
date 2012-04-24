@@ -1,0 +1,41 @@
+From e1f780fc2355c22c2c3f0a70c1a1ef2669779c53 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 24 Apr 2012 13:42:38 +0200
+Subject: [PATCH] SConstruct: fix DSO build for ntpshm, garmin_monitor
+
+| x86_64-oe-linux-gcc -m64
+--sysroot=/OE/shr-core/tmp-eglibc/sysroots/qemux86-64 -o gpsmon
+--sysroot=/OE/shr-core/tmp-eglibc/sysroots/qemux86-64
+-Wl,-rpath=/OE/shr-core/tmp-eglibc/work/x86_64-oe-linux/gpsd/gpsd-3.4-r2/gpsd-3.4
+-Wl,-rpath=/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib gpsmon.o
+monitor_italk.o monitor_nmea.o monitor_oncore.o monitor_sirf.o
+monitor_superstar2.o monitor_tnt.o monitor_ubx.o monitor_garmin.o -L.
+-L/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib
+-L/OE/shr-core/tmp-eglibc/sysroots/qemux86-64/lib -lrt -lbluetooth
+-lgpsd -lusb-1.0 -lbluetooth -lgps -lncurses -ltinfo
+
+/OE/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/4.6.4/ld:
+* ntpshm.o: undefined reference to symbol 'log@@GLIBC_2.2.5'
+* monitor_garmin.o: undefined reference to symbol 'hypot@@GLIBC_2.2.5'
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ SConstruct |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 7bd44a1..9ff00c1 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -806,7 +806,7 @@ if qt_env:
+ # The libraries have dependencies on system libraries
+ 
+ gpslibs = ["-lgps"]
+-gpsdlibs = ["-lgpsd"] + usblibs + bluezlibs + gpslibs
++gpsdlibs = ["-lgpsd"] + ["-lm"] + usblibs + bluezlibs + gpslibs
+ 
+ # Source groups
+ 
+-- 
+1.7.8.5
+
