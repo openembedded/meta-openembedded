@@ -7,6 +7,8 @@ PROVIDES = "virtual/gpsd"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
   file://0001-SConstruct-fix-DSO-build-for-ntpshm-garmin_monitor.patch \
+  file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
+  file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
   file://gpsd-default \
   file://gpsd \
   file://gpsd.socket \
@@ -28,16 +30,19 @@ export STAGING_INCDIR
 export STAGING_LIBDIR
 
 EXTRA_OESCONS = " \
+  sysroot=${STAGING_DIR_TARGET} \
   libQgpsmm='false' \
   debug='true' \
   strip='false' \
   systemd='true' \
 "
+# this cannot be used, because then chrpath is not found and only static lib is built
+# target=${HOST_SYS}
 
 do_compile_prepend() {
-    export LIBPATH="${STAGING_LIBDIR}"
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
     export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
+
     export BUILD_SYS="${BUILD_SYS}"
     export HOST_SYS="${HOST_SYS}"
 }
