@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c18cc221a14a84b033db27794dc36df8"
 inherit efl
 
 BBCLASSEXTEND = "native nativesdk"
-INC_PR = "r2"
+INC_PR = "r0"
 
 do_configure_prepend_virtclass-native() {
 	sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
@@ -47,8 +47,6 @@ RRECOMMENDS_${PN}-utils = "\
 DEBIAN_NOAUTONAME_${PN}-utils = "1"
 # Some upgrade path tweaking
 AUTO_LIBNAME_PKGS = ""
-
-RREPLACES_${PN} = "libedje-ver-pre-svn-00-0 libedje-ver-pre-svn-01-0"
 
 FILES_${PN}-utils = "\
   ${bindir}/edje_* \

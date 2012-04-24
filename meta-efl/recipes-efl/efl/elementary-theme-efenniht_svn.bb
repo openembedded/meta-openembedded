@@ -16,7 +16,6 @@ SRCREV_ELM_REV ?= "${EFL_SRCREV}"
 
 SRCREV_FORMAT = "THM_REV"
 PV = "0.0+svnr${SRCPV}"
-PR = "r1"
 
 inherit e-base allarch
 

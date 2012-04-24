@@ -3,7 +3,7 @@ SECTION = "x11/multimedia"
 DEPENDS = "e-wm"
 
 SRCREV = "${EFL_SRCREV}"
-INC_PR = "r5"
+INC_PR = "r0"
 
 SRCNAME = "E-MODULES-EXTRA/${PN}"
 

@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454
 SECTION = "x11"
 DEPENDS = "edje-native"
 PV = "1.0+svnr${SRCPV}"
-PR = "r7"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e-base update-alternatives allarch

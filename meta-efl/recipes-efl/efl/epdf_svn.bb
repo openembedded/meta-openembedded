@@ -2,7 +2,6 @@ DESCRIPTION = "Epdf is the glue between EFL and libpoppler"
 
 DEPENDS = "poppler evas ecore"
 PV = "0.1.0+svnr${SRCPV}"
-PR = "r8"
 SRCREV = "${EFL_SRCREV}"
 
 inherit efl

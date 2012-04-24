@@ -2,7 +2,6 @@ DESCRIPTION = "EFL-based weather widget library"
 LICENSE = "LGPL"
 DEPENDS = "ecore edje"
 PV = "0.0.0+svnr${SRCPV}"
-PR = "r0"
 SRCREV = "${EFL_SRCREV}"
 
 inherit efl

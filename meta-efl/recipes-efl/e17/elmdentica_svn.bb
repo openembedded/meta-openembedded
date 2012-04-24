@@ -12,7 +12,6 @@ S = "${WORKDIR}/${SRCNAME}"
 EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc"
 
 PV = "0.9.9+svnr${SRCPV}"
-PR = "r3"
 SRCREV = "${EFL_SRCREV}"
 
 RDEPENDS_${PN} = "${PN}-themes"

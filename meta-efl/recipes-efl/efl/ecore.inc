@@ -10,7 +10,7 @@ DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
 inherit efl gettext
 
 BBCLASSEXTEND = "native"
-INC_PR = "r1"
+INC_PR = "r0"
 
 do_configure_prepend() {
 	touch ${S}/po/Makefile.in.in || true
@@ -38,24 +38,6 @@ PACKAGES =+ "\
     "
 # Some upgrade path tweaking
 AUTO_LIBNAME_PKGS = ""
-
-RREPLACES_${PN} = "libecore-ver-pre-svn-00-0 libecore-ver-pre-svn-01-0"
-REPLACES_${PN}-tests = "libecore-ver-pre-svn-01-tests"
-RREPLACES_${PN}-con = "libecore-ver-pre-svn-01-con libecore-con-ver-pre-svn-01-0"
-RREPLACES_${PN}-config = "libecore-config-ver-pre-svn-01-0"
-RREPLACES_${PN}-desktop = "libecore-desktop-ver-pre-svn-01-0"
-RREPLACES_${PN}-directfb = "libecore-directfb-ver-pre-svn-01-0"
-RREPLACES_${PN}-sdl = "libecore-sdl-ver-pre-svn-01-0"
-RREPLACES_${PN}-evas = "libecore-evas-ver-pre-svn-01-0"
-RREPLACES_${PN}-fb = "libecore-fb-ver-pre-svn-01-0"
-RREPLACES_${PN}-file = "libecore-file-ver-pre-svn-01-0"
-RREPLACES_${PN}-imf-evas = "libecore-imf-evas-ver-pre-svn-01-0"
-RREPLACES_${PN}-imf = "libecore-imf-ver-pre-svn-01-0"
-RREPLACES_${PN}-ipc = "libecore-ipc-ver-pre-svn-01-0"
-RREPLACES_${PN}-job = "libecore-job-ver-pre-svn-01-0"
-RREPLACES_${PN}-txt = "libecore-txt-ver-pre-svn-01-0"
-RREPLACES_${PN}-x = "libecore-x-ver-pre-svn-01-0"
-RREPLACES_${PN}-input = "libecore-input-ver-pre-svn-01-0"
 
 FILES_${PN} = "${libdir}/libecore*.so.* \
   ${bindir} \
