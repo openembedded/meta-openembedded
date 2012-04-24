@@ -17,8 +17,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
 EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no --with-systemd "
 EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
 
-SYSTEMD_PACKAGES = "${PN}-server-systemd"
-SYSTEMD_SERVICE_${PN}-server-systemd = "snmpd.service snmptrapd.service"
+SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
+                    ${PN}-server-snmptrapd-systemd"
+
+SYSTEMD_SERVICE_${PN}-server-snmpd-systemd = "snmpd.service"
+SYSTEMD_SERVICE_${PN}-server-snmptrapd-systemd =  "snmptrapd.service"
 
 do_configure_prepend() {
         gnu-configize -f
@@ -35,4 +38,5 @@ CCACHE = ""
 SRC_URI[md5sum] = "c95d08fd5d93df0c11a2e1bdf0e01e0b"
 SRC_URI[sha256sum] = "7c71c9650c65b715356547e20ca2dbe6313944278af8cc19c32a5337f46b181f"
 
-RDEPENDS_${PN}-server-systemd = "${PN}-server"
+RDEPENDS_${PN}-server-snmpd-systemd = "${PN}-server-snmpd"
+RDEPENDS_${PN}-server-snmptrapd-systemd = "${PN}-server-snmptrapd"

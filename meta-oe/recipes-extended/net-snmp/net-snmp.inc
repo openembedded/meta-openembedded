@@ -3,11 +3,13 @@ HOMEPAGE = "http://www.net-snmp.org/"
 LICENSE = "BSD"
 
 DEPENDS = "openssl libnl"
-RDEPENDS_${PN}-server += "net-snmp-mibs"
+RDEPENDS_${PN}-server-snmpd += "net-snmp-mibs"
+RDEPENDS_${PN}-server-snmptrapd += "net-snmp-server-snmpd"
+RDEPENDS_${PN}-server += "net-snmp-server-snmpd net-snmp-server-snmptrapd"
 RDEPENDS_${PN}-client += "net-snmp-mibs"
 RDEPENDS_${PN}-dev = "net-snmp-client (= ${EXTENDPV}) net-snmp-server (= ${EXTENDPV})"
 RRECOMMENDS_${PN}-dbg = "net-snmp-client (= ${EXTENDPV}) net-snmp-server (= ${EXTENDPV})"
-INC_PR = "r2"
+INC_PR = "r3"
 
 inherit autotools update-rc.d siteinfo
 
@@ -37,17 +39,19 @@ do_install_append() {
 }
 
 PACKAGES = "net-snmp-dbg net-snmp-doc net-snmp-dev net-snmp-staticdev net-snmp-static net-snmp-libs \
-            net-snmp-mibs net-snmp-server net-snmp-client"
+            net-snmp-mibs net-snmp-server net-snmp-client net-snmp-server-snmpd net-snmp-server-snmptrapd"
 
+ALLOW_EMPTY_${PN}-server = "1"
 FILES_${PN}-libs = "${libdir}/lib*${SOLIBS}"
 FILES_${PN}-mibs = "${datadir}/snmp/mibs"
-FILES_${PN}-server = "${sbindir}/* ${sysconfdir}"
+FILES_${PN}-server-snmpd = "${sbindir}/snmpd ${sysconfdir}/snmp/snmpd.conf ${sysconfdir}/init.d"
+FILES_${PN}-server-snmptrapd = "${sbindir}/snmptrapd ${sysconfdir}/snmp/snmptrapd.conf"
 FILES_${PN}-client = "${bindir}/* ${datadir}/snmp/"
 FILES_${PN}-dbg += "${libdir}/.debug/ ${sbindir}/.debug/ ${bindir}/.debug/"
 FILES_${PN}-dev += "${bindir}/net-snmp-config ${bindir}/mib2c ${bindir}/mib2c-update"
 
-CONFFILES_${PN}-server = "${sysconfdir}/snmp/snmpd.conf \
-                          ${sysconfdir}/snmp/snmptrapd.conf"
+CONFFILES_${PN}-server-snmpd = "${sysconfdir}/snmp/snmpd.conf"
+CONFFILES_${PN}-server-snmptrapd = "${sysconfdir}/snmp/snmptrapd.conf"
 
 INITSCRIPT_PACKAGES = "${PN}-server"
 INITSCRIPT_NAME_${PN}-server = "snmpd"
