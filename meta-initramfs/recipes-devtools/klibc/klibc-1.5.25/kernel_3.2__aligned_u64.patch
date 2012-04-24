@@ -1,0 +1,46 @@
+From 7f47891c1678874cccca66cd25e6a13486c86d78 Mon Sep 17 00:00:00 2001
+From: =?utf8?q?Maciej=20=C5=BBenczykowski?= <zenczykowski@gmail.com>
+Date: Sun, 6 Nov 2011 14:33:40 -0800
+Subject: [PATCH] [klibc] include: [sys/types.h] -> linux/types.h and
+ __aligned_u64
+
+When building klibc 1.5.25 against linux/master (ie. post 3.1) I'm seeing:
+
+klibc/generated/include/linux/if_packet.h:176: error: expected
+specifier-qualifier-list before '__aligned_u64'
+
+which seems to come from upstream commits:
+0d4691ce112be025019999df5f2a5e00c03f03c2 remotes/linux/master~90^2~408  (origin)
+96c131842aab45b5d139d0bcb417796819f5ee92 remotes/linux/master~90^2~169
+ (change from aligned_u64 to __aligned_u64)
+
+and collides with klibc/usr/include/sys/types.h
+
+/* Keeps linux/types.h from getting included elsewhere */
+#define _LINUX_TYPES_H
+
+not defining __aligned_u64 like the kernel's include/linux/types.h does.
+
+Signed-off-by: maximilian attems <max@stro.at>
+---
+ usr/include/sys/types.h |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/usr/include/sys/types.h b/usr/include/sys/types.h
+index 6780ed1..3a4c738 100644
+--- a/usr/include/sys/types.h
++++ b/usr/include/sys/types.h
+@@ -100,6 +100,10 @@ typedef uint16_t __sum16;
+ typedef uint32_t __sum32;
+ typedef uint64_t __sum64;
+ 
++#define __aligned_u64 __u64 __attribute__((aligned(8)))
++#define __aligned_be64 __be64 __attribute__((aligned(8)))
++#define __aligned_le64 __le64 __attribute__((aligned(8)))
++
+ /*
+  * Some headers seem to require this...
+  */
+-- 
+1.7.6.5
+

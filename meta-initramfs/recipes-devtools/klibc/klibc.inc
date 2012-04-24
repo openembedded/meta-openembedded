@@ -12,7 +12,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 # debugsources.list: No such file or directory:
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INC_PR = "r2"
+INC_PR = "r3"
 
 KLIBC_ARCH = '${TARGET_ARCH}'
 KLIBC_ARCH_armeb = 'arm'
@@ -34,6 +34,7 @@ SRC_URI += "file://fstype-sane-vfat-and-jffs2-for-1.5.patch \
             file://dash_readopt.patch \
             file://wc.patch \
             file://staging.patch \
+            file://kernel_3.2__aligned_u64.patch  \
             "
 
 S = "${WORKDIR}/git"
