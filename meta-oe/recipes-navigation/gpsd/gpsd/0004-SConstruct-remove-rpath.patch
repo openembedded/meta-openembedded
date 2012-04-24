@@ -1,0 +1,41 @@
+From b59f8c5bf8519a5ca114696e79b8690ebb68e0d3 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 24 Apr 2012 16:24:35 +0200
+Subject: [PATCH 4/4] SConstruct: remove rpath
+
+* even with correct prefix (without DESTDIR) included it's redundant
+  WARNING: QA Issue: libgps:
+  /work/armv4t-oe-linux-gnueabi/gpsd/gpsd-3.5-r0/packages-split/libgps/usr/lib/libgps.so.20.0
+  contains probably-redundant RPATH /usr/lib
+* and with prefix from scons.bbclass it's invalid
+  WARNING: QA Issue: package libgps contains bad RPATH
+  /OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/gpsd/gpsd-3.5-r0/image/usr/lib
+  in file
+  /OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/gpsd/gpsd-3.5-r0/packages-split/libgps/usr/lib/libgps.so.20.0
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ SConstruct |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 0cf5799..3c919fc 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -1152,8 +1152,11 @@ if qt_env:
+ 
+ # We don't use installdir here in order to avoid having DESTDIR affect the rpath
+ if env["shared"]:
+-    env.AddPostAction(binaryinstall, '$CHRPATH -r "%s" "$TARGET"' \
+-                      % (installdir('libdir', False), ))
++    if env['sysroot']:
++        env.AddPostAction(binaryinstall, '$CHRPATH -d "$TARGET"')
++    else:
++        env.AddPostAction(binaryinstall, '$CHRPATH -r "%s" "$TARGET"' \
++                         % (installdir('libdir', False), ))
+ 
+ if not env['debug'] and not env['profiling'] and env['strip']:
+     env.AddPostAction(binaryinstall, '$STRIP $TARGET')
+-- 
+1.7.8.5
+
