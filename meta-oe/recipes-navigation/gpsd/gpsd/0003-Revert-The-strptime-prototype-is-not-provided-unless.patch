@@ -1,0 +1,39 @@
+From c6bb11767172407bfaaebd962b4d12cd8e8a1fb0 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 24 Apr 2012 14:57:04 +0200
+Subject: [PATCH 3/4] Revert "The strptime prototype is not provided unless
+ explicitly requested."
+
+* This reverts commit 615d3eb14ea4833ce38ea89ec385308f4f679b33.
+* with _XOPEN_SOURCE defined, we don't have
+  CLOCK_REALTIME and timespec defined and build fails:
+  | arm-oe-linux-gnueabi-gcc -march=armv4t -mthumb -mthumb-interwork -mtune=arm920t --sysroot=/OE/shr-core/tmp-eglibc/sysroots/om-gta02 -o gpsutils.os -c -O2 -pipe -g -feliminate-unused-debug-types --sysroot=/OE/shr-core/tmp-eglibc/sysroots/om-gta02 -O2 -fPIC gpsutils.c
+  | gpsutils.c: In function 'timestamp':
+  | gpsutils.c:299:22: error: storage size of 'ts' isn't known
+  | gpsutils.c:300:34: error: 'CLOCK_REALTIME' undeclared (first use in this function)
+  | gpsutils.c:300:34: note: each undeclared identifier is reported only once for each function it appears in
+  | gpsutils.c: In function 'unix_to_iso8601':
+  | gpsutils.c:385:11: warning: incompatible implicit declaration of built-in function 'snprintf' [enabled by default]
+---
+ gpsutils.c |    5 -----
+ 1 files changed, 0 insertions(+), 5 deletions(-)
+
+diff --git a/gpsutils.c b/gpsutils.c
+index 60c4ae9..a1530ec 100644
+--- a/gpsutils.c
++++ b/gpsutils.c
+@@ -3,11 +3,6 @@
+  * This file is Copyright (c) 2010 by the GPSD project
+  * BSD terms apply: see the file COPYING in the distribution root for details.
+  */
+-
+-/* The strptime prototype is not provided unless explicitly requested.
+- *  So add the define that POSIX says to to avoid: */
+-#define _XOPEN_SOURCE
+-
+ #include <stdio.h>
+ #include <time.h>
+ #include <sys/time.h>
+-- 
+1.7.8.5
+
