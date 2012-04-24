@@ -41,6 +41,7 @@ EXTRA_OESCONS = " \
 
 do_compile_prepend() {
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+    export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
     export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
 
     export BUILD_SYS="${BUILD_SYS}"
@@ -49,6 +50,7 @@ do_compile_prepend() {
 
 do_install_prepend() {
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+    export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
     export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
 
     export BUILD_SYS="${BUILD_SYS}"
