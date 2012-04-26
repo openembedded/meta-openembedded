@@ -1,6 +1,6 @@
 DESCRIPTION = "Enlightenment Input Output Library"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=403f20cf42c847686ac2956f14bfa30f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=180fca752525726bd6ba021689509a08"
 DEPENDS = "ecore eina"
 
 inherit efl
