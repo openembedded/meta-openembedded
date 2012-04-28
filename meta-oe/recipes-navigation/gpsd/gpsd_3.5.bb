@@ -12,6 +12,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
   file://0003-Revert-The-strptime-prototype-is-not-provided-unless.patch \
   file://0004-SConstruct-remove-rpath.patch \
   file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+  file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
   file://gpsd-default \
   file://gpsd \
   file://60-gpsd.rules \
