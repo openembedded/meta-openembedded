@@ -9,9 +9,10 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
            libpng libxt fontconfig cairo freetype glib-2.0 libsoup-2.4 \
            libxml2 pango eina ecore evas edje"
 
-SRCREV = "105069"
-PV = "1.7.3+svnr${SRCPV}"
-PR = "r3"
+# 120145 and 122103 introduces dependency on libsoup-2.39.3 and glib-networking-2.33.2
+SRCREV = "120144"
+PV = "1.9.3+svnr${SRCPV}"
+PR = "r1"
 
 SRCREV_FORMAT = "source"
 
@@ -19,8 +20,6 @@ SRC_URI = "\
   svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;protocol=http;subdir=src \
   svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
   svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
-  file://0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch \
-  file://0001-CMake-Do-not-pass-P-to-the-preprocessor-when-running.patch \
   file://CMakeLists.txt \
 "
 
@@ -34,7 +33,7 @@ inherit cmake lib_package pkgconfig perlnative pythonnative
 
 ARM_INSTRUCTION_SET = "arm"
 
-EXTRA_OECMAKE = "-DPORT=Efl -DSHARED_CORE=ON"
+EXTRA_OECMAKE = "-DPORT=Efl -DSHARED_CORE=On -DENABLE_DRAG_SUPPORT=On"
 
 LEAD_SONAME = "libewebkit.so"
 PACKAGES =+ "${PN}launcher-dbg ${PN}launcher"

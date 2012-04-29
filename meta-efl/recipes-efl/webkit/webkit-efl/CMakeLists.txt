@@ -11,19 +11,15 @@ ENDIF ()
 # -----------------------------------------------------------------------------
 # Default library type
 # -----------------------------------------------------------------------------
-SET(ENABLE_WEBCORE On)
+SET(ENABLE_WEBCORE ON)
 
 IF (NOT ENABLE_WEBKIT AND NOT ENABLE_WEBKIT2)
-    SET(ENABLE_WEBKIT On)
+    SET(ENABLE_WEBKIT ON)
 ENDIF ()
 
-OPTION(ONLY_BUILD_JAVASCRIPTCORE "only build JavaScriptCore")
-IF (ONLY_BUILD_JAVASCRIPTCORE)
-    SET(ENABLE_WEBCORE Off)
-    SET(ENABLE_WEBKIT Off)
-    SET(ENABLE_WEBKIT2 Off)
-ENDIF ()
+SET(ENABLE_TOOLS ON)
 
+SET(WTF_DIR "${CMAKE_SOURCE_DIR}/Source/WTF")
 SET(JAVASCRIPTCORE_DIR "${CMAKE_SOURCE_DIR}/Source/JavaScriptCore")
 SET(WEBCORE_DIR "${CMAKE_SOURCE_DIR}/Source/WebCore")
 SET(WEBKIT_DIR "${CMAKE_SOURCE_DIR}/Source/WebKit")
@@ -35,9 +31,14 @@ SET(TOOLS_DIR "${CMAKE_SOURCE_DIR}/Tools")
 SET(DERIVED_SOURCES_DIR "${CMAKE_BINARY_DIR}/DerivedSources")
 SET(DERIVED_SOURCES_JAVASCRIPTCORE_DIR "${CMAKE_BINARY_DIR}/DerivedSources/JavaScriptCore")
 SET(DERIVED_SOURCES_WEBCORE_DIR "${CMAKE_BINARY_DIR}/DerivedSources/WebCore")
+SET(DERIVED_SOURCES_WEBKIT_DIR "${CMAKE_BINARY_DIR}/DerivedSources/WebKit")
 SET(DERIVED_SOURCES_WEBKIT2_DIR "${CMAKE_BINARY_DIR}/DerivedSources/WebKit2")
 
 SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/Source/cmake")
+
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 INCLUDE(WebKitMacros)
 INCLUDE(WebKitFS)
@@ -109,30 +110,37 @@ SET(JavaScriptCore_LIBRARY_NAME JavaScriptCore)
 SET(WebCore_LIBRARY_NAME WebCore)
 SET(WebKit_LIBRARY_NAME WebKit)
 SET(WebKit2_LIBRARY_NAME WebKit2)
+SET(WebCoreTestSupport_LIBRARY_NAME WebCoreTestSupport)
 
 # -----------------------------------------------------------------------------
 # Default library types
 # -----------------------------------------------------------------------------
-OPTION(SHARED_CORE "build WTF, JavaScriptCore and WebCore as shared libraries")
+OPTION(SHARED_CORE "build JavaScriptCore and WebCore as shared libraries")
 
 IF (SHARED_CORE)
-    SET(WTF_LIBRARY_TYPE SHARED)
     SET(JavaScriptCore_LIBRARY_TYPE SHARED)
     SET(WebCore_LIBRARY_TYPE SHARED)
 ELSE ()
-    SET(WTF_LIBRARY_TYPE STATIC)
     SET(JavaScriptCore_LIBRARY_TYPE STATIC)
     SET(WebCore_LIBRARY_TYPE STATIC)
 ENDIF ()
 
 SET(WebKit_LIBRARY_TYPE SHARED)
 SET(WebKit2_LIBRARY_TYPE SHARED)
+SET(WebCoreTestSupport_LIBRARY_TYPE STATIC)
 
 # -----------------------------------------------------------------------------
 # Port-specific options
 # -----------------------------------------------------------------------------
 INCLUDE(OptionsCommon)
 INCLUDE(Options${PORT})
+
+# -----------------------------------------------------------------------------
+# Enable API unit tests and create a target for the test runner
+# -----------------------------------------------------------------------------
+IF (ENABLE_API_TESTS)
+    ENABLE_TESTING()
+ENDIF ()
 
 # -----------------------------------------------------------------------------
 # Install JavaScript shell
@@ -152,9 +160,7 @@ ADD_SUBDIRECTORY(Source)
 # -----------------------------------------------------------------------------
 # Add tools
 # -----------------------------------------------------------------------------
-ADD_SUBDIRECTORY(Tools)
+IF (ENABLE_TOOLS)
+    ADD_SUBDIRECTORY(Tools)
+ENDIF ()
 
-# -----------------------------------------------------------------------------
-# Prints a summary of all enabled/disabled features
-# -----------------------------------------------------------------------------
-WEBKIT_PRINT_FEATURES()
