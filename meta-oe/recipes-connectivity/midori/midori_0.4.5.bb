@@ -4,12 +4,10 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 DEPENDS = "webkit-gtk libsoup-2.4 libsexy openssl vala-native python-native python-docutils-native librsvg-native"
 
-PR = "r1"
-
 SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
           "
-SRC_URI[midori.md5sum] = "a6578ebfd237c0f22cce49113b95f70c"
-SRC_URI[midori.sha256sum] = "fadd43f76c1c9f6a16483e60a804e58fb6817c6a595b1acdd59bcbdd7b35bca2"
+SRC_URI[midori.md5sum] = "14288197a1e2251b7c0803e1448daa0e"
+SRC_URI[midori.sha256sum] = "7b57cf3ebb56eef586351f2ae9f71ec9683aedff0b79a071b70b811d9876ff84"
 
 inherit gtk-icon-cache pkgconfig
 
