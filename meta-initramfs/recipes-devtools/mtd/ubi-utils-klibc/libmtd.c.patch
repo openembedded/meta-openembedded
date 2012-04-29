@@ -1,0 +1,24 @@
+--- a/lib/libmtd.c	2012-04-29 21:44:52.000000000 +0200
++++ b/lib/libmtd.c	2012-04-29 21:43:04.000000000 +0200
+@@ -441,8 +441,8 @@
+ 		return -1;
+ 	}
+ 
+-	major = major(st.st_rdev);
+-	minor = minor(st.st_rdev);
++	major = __major(st.st_rdev);
++	minor = __minor(st.st_rdev);
+ 
+ 	if (mtd_get_info((libmtd_t *)lib, &info))
+ 		return -1;
+@@ -1381,8 +1381,8 @@
+ 		return -1;
+ 	}
+ 
+-	major = major(st.st_rdev);
+-	minor = minor(st.st_rdev);
++	major = __major(st.st_rdev);
++	minor = __minor(st.st_rdev);
+ 
+ 	if (mtd_get_info((libmtd_t *)lib, &info))
+ 		return -1;
