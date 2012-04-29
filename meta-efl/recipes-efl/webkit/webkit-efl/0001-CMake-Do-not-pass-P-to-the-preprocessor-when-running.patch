@@ -1,0 +1,76 @@
+From 3dfc99730b99472d642f19b825fb9794e32a05c4 Mon Sep 17 00:00:00 2001
+From: "rakuco@webkit.org"
+ <rakuco@webkit.org@268f45cc-cd09-0410-ab3c-d52691b4dbfc>
+Date: Tue, 10 Apr 2012 22:59:04 +0000
+Subject: [PATCH] [CMake] Do not pass -P to the preprocessor when running
+ make_names.pl.
+ https://bugs.webkit.org/show_bug.cgi?id=83225
+
+Reviewed by Rob Buis.
+
+This is necessary to make CMake-based ports build with the
+recently-released GCC 4.7.0, whose preprocessor seems to ignore
+empty lines when -P is passed to it.  Such behavior breaks
+make_names.pl (in fact, InFilesParser.pm), which expects an empty
+line to separate common and specific sections in .in files.
+
+A fix for this same problem has been supposedly done in r84123,
+but as the CMake-based ports always pass --preprocessor to the
+Perl tools the fix never reached us.
+
+The idea is to define CODE_GENERATOR_PREPROCESSOR_WITH_LINEMARKERS
+for (!MSVC && !QNX) and use it in the macros which call
+make_names.pl.
+
+* Source/cmake/OptionsCommon.cmake:
+* Source/cmake/WebKitMacros.cmake:
+
+git-svn-id: http://svn.webkit.org/repository/webkit/trunk@113786 268f45cc-cd09-0410-ab3c-d52691b4dbfc
+---
+ ChangeLog                        |   24 ++++++++++++++++++++++++
+ Source/cmake/OptionsCommon.cmake |    7 +++++++
+ Source/cmake/WebKitMacros.cmake  |    2 +-
+ 3 files changed, 32 insertions(+), 1 deletions(-)
+
+diff --git a/Source/cmake/OptionsCommon.cmake b/Source/cmake/OptionsCommon.cmake
+index 11581e6..37cb4a8 100644
+--- a/Source/cmake/OptionsCommon.cmake
++++ b/Source/cmake/OptionsCommon.cmake
+@@ -5,14 +5,21 @@ IF (WTF_OS_UNIX)
+     ADD_DEFINITIONS(-DXP_UNIX)
+ ENDIF (WTF_OS_UNIX)
+ 
++# CODE_GENERATOR_PREPROCESSOR_WITH_LINEMARKERS only matters with GCC >= 4.7.0.  Since this
++# version, -P does not output empty lines, which currently breaks make_names.pl in
++# WebCore. Investigating whether make_names.pl should be changed instead is left as an exercise to
++# the reader.
+ IF (MSVC)
+     # FIXME: Some codegenerators don't support paths with spaces. So use the executable name only.
+     GET_FILENAME_COMPONENT(CODE_GENERATOR_PREPROCESSOR_EXECUTABLE ${CMAKE_CXX_COMPILER} NAME)
+     SET(CODE_GENERATOR_PREPROCESSOR "${CODE_GENERATOR_PREPROCESSOR_EXECUTABLE} /nologo /EP")
++    SET(CODE_GENERATOR_PREPROCESSOR_WITH_LINEMARKERS "${CODE_GENERATOR_PREPROCESSOR}")
+ ELSEIF (CMAKE_SYSTEM_NAME MATCHES QNX)
+     SET(CODE_GENERATOR_PREPROCESSOR "${CMAKE_CXX_COMPILER} -E -Wp,-P -x c++")
++    SET(CODE_GENERATOR_PREPROCESSOR_WITH_LINEMARKERS "${CODE_GENERATOR_PREPROCESSOR}")
+ ELSE ()
+     SET(CODE_GENERATOR_PREPROCESSOR "${CMAKE_CXX_COMPILER} -E -P -x c++")
++    SET(CODE_GENERATOR_PREPROCESSOR_WITH_LINEMARKERS "${CMAKE_CXX_COMPILER} -E -x c++")
+ ENDIF ()
+ 
+ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
+diff --git a/Source/cmake/WebKitMacros.cmake b/Source/cmake/WebKitMacros.cmake
+index 3abe342..4e7ca9f 100644
+--- a/Source/cmake/WebKitMacros.cmake
++++ b/Source/cmake/WebKitMacros.cmake
+@@ -89,7 +89,7 @@ MACRO (GENERATE_DOM_NAMES _namespace _attrs)
+     ADD_CUSTOM_COMMAND(
+         OUTPUT  ${_outputfiles}
+         DEPENDS ${NAMES_GENERATOR} ${SCRIPTS_BINDINGS} ${_attrs} ${_tags}
+-        COMMAND ${PERL_EXECUTABLE} -I${WEBCORE_DIR}/bindings/scripts ${NAMES_GENERATOR} --preprocessor "${CODE_GENERATOR_PREPROCESSOR}" --outputDir ${DERIVED_SOURCES_WEBCORE_DIR} ${_arguments} ${_additionArguments}
++        COMMAND ${PERL_EXECUTABLE} -I${WEBCORE_DIR}/bindings/scripts ${NAMES_GENERATOR} --preprocessor "${CODE_GENERATOR_PREPROCESSOR_WITH_LINEMARKERS}" --outputDir ${DERIVED_SOURCES_WEBCORE_DIR} ${_arguments} ${_additionArguments}
+         VERBATIM)
+ ENDMACRO ()
+ 
+-- 
+1.7.7
+
