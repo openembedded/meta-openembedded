@@ -1,0 +1,48 @@
+../../../src/frontend/common/TemplateBuilder.hh:50:113: warning: 'linkerAssoc' was not declared in this scope, and no declarations were found by argument-dependent lookup at the point of instantiation [-fpermissive]
+../../../src/frontend/common/TemplateBuilder.hh:50:113: note: declarations in dependent base 'custom_reader_Builder' are not found by unqualified lookup
+../../../src/frontend/common/TemplateBuilder.hh:50:113: note: use 'this->linkerAssoc' instead
+../../../src/frontend/common/TemplateBuilder.hh:54:111: error: redeclaration of 'SmartPtr<BoxMLDecorElement> elem'
+../../../src/frontend/common/TemplateBuilder.hh:50:49: error: 'SmartPtr<BoxMLDecorElement> elem' previously declared here
+../../../src/frontend/common/TemplateBuilder.hh:55:2: warning: 'linkerAdd' was not declared in this scope, and no declarations were found by argument-dependent lookup at the point of instantiation [-fpermissive]
+../../../src/frontend/common/TemplateBuilder.hh:55:2: note: declarations in dependent base 'custom_reader_Builder' are not found by unqualified lookup
+../../../src/frontend/common/TemplateBuilder.hh:55:2: note: use 'this->linkerAdd' instead
+
+--- gtkmathview-0.8.0.orig/src/frontend/common/TemplateBuilder.hh	2007-08-17 12:02:34.000000000 +0200
++++ gtkmathview-0.8.0/src/frontend/common/TemplateBuilder.hh	2012-04-30 11:45:07.000000000 +0200
+@@ -47,12 +47,13 @@
+   SmartPtr<typename ElementBuilder::type>
+   getElement(const typename Model::Element& el) const
+   {
+-    if (SmartPtr<typename ElementBuilder::type> elem = smart_cast<typename ElementBuilder::type>(linkerAssoc(el)))
++    SmartPtr<typename ElementBuilder::type> elem = NULL;
++    if (elem = smart_cast<typename ElementBuilder::type>(this->linkerAssoc(el)))
+       return elem;
+     else
+       {
+-	SmartPtr<typename ElementBuilder::type> elem = ElementBuilder::type::create(ElementBuilder::getContext(*this));
+-	linkerAdd(el, elem);
++	elem = ElementBuilder::type::create(ElementBuilder::getContext(*this));
++	this->linkerAdd(el, elem);
+ 	return elem;
+       }
+   }
+--- gtkmathview-0.8.0.orig/mathmlsvg/main.cc	2012-04-30 11:35:19.000000000 +0200
++++ gtkmathview-0.8.0/mathmlsvg/main.cc	2012-04-30 11:51:19.000000000 +0200
+@@ -20,6 +20,7 @@
+ 
+ #include <cassert>
+ #include <fstream>
++#include <unistd.h>
+ #include <string.h>
+ #include <popt.h>
+ 
+--- gtkmathview-0.8.0.orig/mathmlps/main.cc	2012-04-30 11:35:19.000000000 +0200
++++ gtkmathview-0.8.0/mathmlps/main.cc	2012-04-30 11:50:57.000000000 +0200
+@@ -20,6 +20,7 @@
+ 
+ #include <cassert>
+ #include <fstream>
++#include <unistd.h>
+ #include <string.h>
+ #include <popt.h>
+ 
