@@ -2,12 +2,13 @@ require abiword-2.5.inc
 DEPENDS += " librsvg loudmouth libwmf-native gtkmathview asio"
 RCONFLICTS_${PN} = "abiword-embedded"
 
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "http://www.abisource.com/downloads/abiword/${PV}/source/abiword-${PV}.tar.gz;name=abiword \
            file://autogen-common.sh \
            file://nodolt.patch \
-           file://fix.no.undefined.param.patch"
+           file://fix.no.undefined.param.patch \
+           file://abiword.fix.glib-2.32.patch"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
 
