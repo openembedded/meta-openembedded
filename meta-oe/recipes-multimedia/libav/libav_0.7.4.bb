@@ -10,9 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 SRCREV = "d4653e882fee5a2876c3878bc23d26799e3380ad"
 
 PV = "0.7.4"
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
-SRC_URI = "git://git.libav.org/libav.git;protocol=git;branch=release/0.7"
+SRC_URI = "git://git.libav.org/libav.git;protocol=git;branch=release/0.7 \
+  file://h264_qpel_mmx.patch \
+"
 
 S = "${WORKDIR}/git"
 
