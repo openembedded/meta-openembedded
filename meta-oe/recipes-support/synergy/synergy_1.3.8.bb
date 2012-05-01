@@ -1,7 +1,7 @@
 DESCRIPTION = "Synergy - control multiple computers with one keyboard and mouse"
 HOMEPAGE = "http://synergy.googlecode.com"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9772a11e3569985855e2ce450e56f991"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0"
 SECTION = "x11/utils"
 
 DEPENDS = "libx11 libxtst"
@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "0afc83e4ed0b46ed497d4229b2b2854e8d3c581a112f4da05110943edb
 
 S = "${WORKDIR}/${PN}-${PV}-Source"
 
-inherit cmake siteinfo
+inherit cmake
 
 do_install() {
 	install -d ${D}/usr/bin
