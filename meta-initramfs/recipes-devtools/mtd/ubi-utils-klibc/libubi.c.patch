@@ -1,5 +1,5 @@
---- a/ubi-utils/libubi.c	2012-04-29 21:44:52.000000000 +0200
-+++ b/ubi-utils/libubi.c	2012-04-29 21:43:52.000000000 +0200
+--- a/ubi-utils/libubi.c	2012-05-01 01:57:51.000000000 +0200
++++ b/ubi-utils/libubi.c	2012-05-01 01:55:14.000000000 +0200
 @@ -36,6 +36,26 @@
  #include "libubi_int.h"
  #include "common.h"
@@ -49,6 +49,15 @@
  
  	if (minor != 0) {
  		errno = EINVAL;
+@@ -686,7 +706,7 @@
+  * success and %-1 in case of failure. @r->ubi_num contains newly created UBI
+  * device number.
+  */
+-static int do_attach(const char *node, const struct ubi_attach_req *r)
++static int do_attach(const char *node, struct ubi_attach_req *r)
+ {
+ 	int fd, ret;
+ 
 @@ -757,8 +777,8 @@
  				  mtd_dev_node);
  	}

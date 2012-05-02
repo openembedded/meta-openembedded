@@ -1,6 +1,6 @@
---- a/Makefile	2012-04-29 18:15:30.000000000 +0200
-+++ b/Makefile	2012-04-29 00:43:03.000000000 +0200
-@@ -16,27 +16,11 @@
+--- a/Makefile	2012-05-01 19:46:47.000000000 +0200
++++ b/Makefile	2012-05-01 19:48:01.000000000 +0200
+@@ -16,27 +16,13 @@
  
  TESTS = tests
  
@@ -13,16 +13,14 @@
 -	rfddump rfdformat \
 -	serve_image recv_image \
 -	sumtool jffs2reader
--UBI_BINS = \
--	ubiupdatevol ubimkvol ubirmvol ubicrc32 ubinfo ubiattach \
--	ubidetach ubinize ubiformat ubirename mtdinfo ubirsvol
--
+ UBI_BINS = \
+ 	ubiupdatevol ubimkvol ubirmvol ubicrc32 ubinfo ubiattach \
+ 	ubidetach ubinize ubiformat ubirename mtdinfo ubirsvol
+ 
 -BINS = $(MTD_BINS)
 -BINS += mkfs.ubifs/mkfs.ubifs
 -BINS += $(addprefix ubi-utils/,$(UBI_BINS))
 -SCRIPTS = flash_eraseall
-+UBI_BINS = ubiupdatevol ubimkvol ubirmvol ubinfo ubiattach ubidetach ubirename mtdinfo ubirsvol
-+
 +BINS = $(addprefix ubi-utils/,$(UBI_BINS))
  
  TARGETS = $(BINS)
@@ -31,7 +29,7 @@
  
  OBJDEPS = $(BUILDDIR)/include/version.h
  
-@@ -58,7 +42,7 @@
+@@ -58,12 +44,9 @@
  	rm -f $(BUILDDIR)/include/version.h
  	$(MAKE) -C $(TESTS) clean
  
@@ -39,8 +37,13 @@
 +install:: $(addprefix $(BUILDDIR)/,${BINS})
  	mkdir -p ${DESTDIR}/${SBINDIR}
  	install -m 0755 $^ ${DESTDIR}/${SBINDIR}/
- 	mkdir -p ${DESTDIR}/${MANDIR}/man1
-@@ -88,7 +72,6 @@
+-	mkdir -p ${DESTDIR}/${MANDIR}/man1
+-	install -m 0644 mkfs.jffs2.1 ${DESTDIR}/${MANDIR}/man1/
+-	-gzip -9f ${DESTDIR}/${MANDIR}/man1/*.1
+ 
+ tests::
+ 	$(MAKE) -C $(TESTS)
+@@ -88,7 +71,6 @@
  LDFLAGS_jffs2reader = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
  LDLIBS_jffs2reader  = -lz $(LZOLDLIBS)
  
