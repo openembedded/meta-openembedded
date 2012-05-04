@@ -1,0 +1,29 @@
+From 5266eb72cbc8193faa2345b8774b0f159e61c067 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 24 Apr 2012 11:52:35 +0200
+Subject: [PATCH 2/4] SConstruct: respect sysroot also in SPLINTOPTS
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ SConstruct |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 21b2205..0cf5799 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -1224,7 +1224,10 @@ def Utility(target, source, action):
+ 
+ # Report splint warnings
+ # Note: test_bits.c is unsplintable because of the PRI64 macros.
+-env['SPLINTOPTS'] = "-I/usr/include/libusb-1.0 +quiet"
++if env['sysroot']:
++    env['SPLINTOPTS'] = "-I%s/usr/include/libusb-1.0 +quiet" % env['sysroot']
++else:
++    env['SPLINTOPTS'] = "-I/usr/include/libusb-1.0 +quiet"
+ 
+ def Splint(target,sources, description, params):
+     return Utility(target,sources+generated_sources,[
+-- 
+1.7.8.5
+

@@ -1,0 +1,36 @@
+From 7427bb23092b3e395d14e42cd3b64691082fe826 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 24 Apr 2012 10:58:26 +0200
+Subject: [PATCH 1/4] SConstruct: respect sysroot setting when prepending
+ LIBPATH/RPATH
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ SConstruct |   11 ++++++++---
+ 1 files changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 22bc9f4..21b2205 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -269,9 +269,14 @@ def installdir(dir, add_destdir=True):
+     return wrapped
+ 
+ # Honor the specified installation prefix in link paths.
+-env.Prepend(LIBPATH=[installdir('libdir')])
+-if env["shared"]:
+-    env.Prepend(RPATH=[installdir('libdir')])
++if env['sysroot']:
++    env.Prepend(LIBPATH=[os.path.normpath("%s/%s/%s" % (env['sysroot'], env['prefix'], env['libdir']))])
++    if env["shared"]:
++        env.Prepend(RPATH=[os.path.normpath("%s/%s/%s" % (env['sysroot'], env['prefix'], env['libdir']))])
++else:
++    env.Prepend(LIBPATH=[installdir('libdir')])
++    if env["shared"]:
++        env.Prepend(RPATH=[installdir('libdir')])
+ 
+ # Give deheader a way to set compiler flags
+ if 'MORECFLAGS' in os.environ:
+-- 
+1.7.8.5
+
