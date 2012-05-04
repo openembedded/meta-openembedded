@@ -1,11 +1,11 @@
 DESCRIPTION = "XFS Filesystem Utilities"
 HOMEPAGE = "http://oss.sgi.com/projects/xfs"
 SECTION = "base"
-LICENSE = "LGPL2.1"
-
-LIC_FILES_CHKSUM = "file://Makefile;endline=3;md5=def2844770bb44eba37bc9ca8610fad4"
-
+LICENSE = "GPLv2"
+LICENSE_libhandle = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
 DEPENDS = "util-linux"
+PR = "r1"
 
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
 	file://remove-install-as-user.patch \
@@ -15,8 +15,13 @@ SRC_URI[sha256sum] = "e150914210ac5fd29c098ef0fd94bdec51d2fb231cf9faa765c16ec6d7
 
 inherit autotools
 
-FILES_${PN}-dev += "${base_libdir}/libhandle.la \
-                    ${base_libdir}/libhandle.so"
+PACKAGES =+ "${PN}-fsck ${PN}-mkfs libhandle"
+
+RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs"
+
+FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
+FILES_${PN}-mkfs = "${base_sbindir}/mkfs.xfs"
+FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
 
 EXTRA_OECONF = "--enable-gettext=no"
 do_configure () {
@@ -34,13 +39,9 @@ do_install () {
 	oe_runmake install
 	# needed for xfsdump
 	oe_runmake install-dev
-	# replace extra links to /usr/lib with relative links (otherwise autotools_prepackage_lamangler fails to read nonexistent link)
-	rm -f ${D}/${base_libdir}/libhandle.la
-	rm -f ${D}/${base_libdir}/libhandle.a
-	ln -s ../usr/lib/libhandle.la ${D}/${base_libdir}/libhandle.la
-	ln -s ../usr/lib/libhandle.a ${D}/${base_libdir}/libhandle.a
-
-	# and link from /usr/lib/libhandle.so to /lib/libhandle.so
-	rm -f ${D}/${libdir}/libhandle.so
-	ln -s ../../lib/libhandle.a ${D}/${libdir}/libhandle.so
+	rm ${D}${base_libdir}/libhandle.a
+	rm ${D}${base_libdir}/libhandle.la
+	rm ${D}${base_libdir}/libhandle.so
+	rm ${D}${libdir}/libhandle.so
+	ln -s ../..${base_libdir}/libhandle.so.1 ${D}${libdir}/libhandle.so
 }
