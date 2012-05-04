@@ -1,0 +1,21 @@
+--- abiword-2.8.6/goffice-bits/goffice/app/goffice-app.h	2012-04-30 15:06:28.000000000 +0200
++++ abiword-2.8.6.orig/goffice-bits/goffice/app/goffice-app.h	2007-01-17 00:17:27.000000000 +0100
+@@ -22,7 +22,7 @@
+ #ifndef GOFFICE_APP_H
+ #define GOFFICE_APP_H
+ 
+-#include <glib/gmacros.h>
++#include <glib.h>
+ 
+ G_BEGIN_DECLS
+ 
+--- abiword-2.8.6/src/af/util/xp/ut_go_file.h	2012-04-30 15:08:43.000000000 +0200
++++ abiword-2.8.6.orig/src/af/util/xp/ut_go_file.h	2009-08-27 15:27:10.000000000 +0200
+@@ -31,7 +31,6 @@
+ 
+ #include <glib.h>
+ #include <gsf/gsf.h>
+-#include <glib/gerror.h>
+ #include <time.h>
+ 
+ G_BEGIN_DECLS

@@ -1,0 +1,11 @@
+diff -uNr tangogps-0.99.4.orig/src/map_management.c tangogps-0.99.4/src/map_management.c
+--- tangogps-0.99.4.orig/src/map_management.c	2010-06-25 11:40:05.000000000 +0200
++++ tangogps-0.99.4/src/map_management.c	2012-04-30 07:43:58.551301271 +0200
+@@ -2,7 +2,6 @@
+ 
+ #include <glib.h>
+ #include <gtk/gtk.h>
+-#include <glib/gstring.h>
+ #include <glib/gprintf.h>
+ #include <gconf/gconf.h>
+ #include <math.h>
