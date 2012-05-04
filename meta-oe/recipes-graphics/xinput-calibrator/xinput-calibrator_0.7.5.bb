@@ -4,7 +4,7 @@ LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
 DEPENDS = "virtual/libx11 libxi"
 
-PR = "r5"
+PR = "r6"
 
 inherit autotools systemd
 
@@ -33,5 +33,5 @@ SYSTEMD_PACKAGES = "${PN}-systemd"
 SYSTEMD_SERVICE = "${PN}.service"
 
 FILES_${PN} += "${sysconfdir}/xdg/autostart"
-RDEPENDS_${PN} = "xinput"
+RDEPENDS_${PN} = "xinput xterm"
 RRECOMMENDS_${PN} = "pointercal-xinput"
