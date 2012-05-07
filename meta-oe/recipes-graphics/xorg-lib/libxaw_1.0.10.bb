@@ -2,13 +2,12 @@ require recipes-graphics/xorg-lib/xorg-lib-common.inc
 DESCRIPTION = "X Athena Widget Set"
 DEPENDS += "xproto virtual/libx11 libxext xextproto libxt libxmu libxpm libxp printproto libxau xmlto-native"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=f1beacbc336a5a256bb28dbfcf01c2be"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1c65719d42900bb81b83e8293c20a364"
 
 PE = "1"
-PR = "r12"
 
-SRC_URI[md5sum] = "ccc57478c41b7a75b9702241b889b1d4"
-SRC_URI[sha256sum] = "a83977546b78e24ac5dca86affc10b6404a87c16272405b05386feca1a2db037"
+SRC_URI[md5sum] = "f1ea52debce7a18cc26b21647a00ad8b"
+SRC_URI[sha256sum] = "2d96bcf92638b8ec5c91d379f5ec2e7b15133adeb2ba22066d48bf3239ee1bdd"
 
 # disable docs as groff detection doesn't work on some hosts while cross compilling
 EXTRA_OECONF += " --disable-docs "
