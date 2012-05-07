@@ -2,10 +2,10 @@ DESCRIPTION = "Gnome session manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r1"
+PR = "r2"
 
 SECTION = "x11/gnome"
-DEPENDS = "gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
+DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
 
 inherit gnome 
 
