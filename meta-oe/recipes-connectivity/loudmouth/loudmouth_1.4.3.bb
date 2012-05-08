@@ -8,7 +8,10 @@ DEPENDS = "glib-2.0 check openssl"
 
 inherit gnomebase
 
-SRC_URI += "file://04-use-pkg-config-for-gnutls.patch"
+PR = "r1"
+
+SRC_URI += "file://04-use-pkg-config-for-gnutls.patch \
+            file://glib-2.32.patch"
 
 SRC_URI[archive.md5sum] = "55339ca42494690c3942ee1465a96937"
 SRC_URI[archive.sha256sum] = "95a93f5d009b71ea8193d994aa11f311bc330a3efe1b7cd74dc48f11c7f929e3"
