@@ -4,7 +4,7 @@ DESCRIPTION = "Gentium fonts - TTF Version"
 HOMEPAGE = "http://scripts.sil.org/gentium"
 LICENSE = "SIL Open Font License"
 LICENSE_URL = "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=OFL"
-PR = "r4"
+PR = "r5"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz \
            file://OFL.gz"

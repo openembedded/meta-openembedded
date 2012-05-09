@@ -12,11 +12,15 @@ do_install() {
 }
 
 pkg_postinst_append() {
-    update-fonts
+    if [ -z "$D" ]; then
+        update-fonts
+    fi
 }
 
 pkg_postrm_append() {
-    update-fonts
+    if [ -z "$D" ]; then
+        update-fonts
+    fi
 }
 
 inherit allarch

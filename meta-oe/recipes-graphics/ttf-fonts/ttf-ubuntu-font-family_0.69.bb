@@ -3,7 +3,7 @@ require ttf.inc
 DESCRIPTION = "Ubuntu Font Family - TTF Version"
 HOMEPAGE = "http://font.ubuntu.com"
 LICENSE = "UFL"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://font.ubuntu.com/download/ubuntu-font-family-${PV}+ufl.zip"
 SRC_URI[md5sum] = "2c3287ea72f81ce025095f7a6d68af28"
