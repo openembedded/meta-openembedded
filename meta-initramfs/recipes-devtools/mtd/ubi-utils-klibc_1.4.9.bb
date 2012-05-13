@@ -6,7 +6,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
                     file://include/common.h;beginline=1;endline=17;md5=ba05b07912a44ea2bf81ce409380049c"
 
-PR = "r1"
+PR = "r2"
 
 inherit klibc
 
@@ -36,7 +36,6 @@ PACKAGES =+ "ubinfo-klibc ubiattach-klibc ubidetach-klibc mtdinfo-klibc ubiupdat
              ubimkvol-klibc ubirename-klibc ubirmvol-klibc ubirsvol-klibc \
              ubinize-klibc ubiformat-klibc ubicrc32-klibc"
 
-FILES_ubicrc32-klibc = "${sbindir}/ubicrc32"
 FILES_ubinfo-klibc = "${sbindir}/ubinfo"
 FILES_ubiattach-klibc = "${sbindir}/ubiattach"
 FILES_ubidetach-klibc = "${sbindir}/ubidetach"
@@ -48,4 +47,4 @@ FILES_ubirmvol-klibc = "${sbindir}/ubirmvol"
 FILES_ubirsvol-klibc = "${sbindir}/ubirsvol"
 FILES_ubinize-klibc = "${sbindir}/ubinize"
 FILES_ubiformat-klibc = "${sbindir}/ubiformat"
-
+FILES_ubicrc32-klibc = "${sbindir}/ubicrc32"

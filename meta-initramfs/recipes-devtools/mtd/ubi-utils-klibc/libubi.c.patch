@@ -1,32 +1,5 @@
 --- a/ubi-utils/libubi.c	2012-05-01 01:57:51.000000000 +0200
 +++ b/ubi-utils/libubi.c	2012-05-01 01:55:14.000000000 +0200
-@@ -36,6 +36,26 @@
- #include "libubi_int.h"
- #include "common.h"
- 
-+/* parts of mtd/ubi-user.h */
-+
-+/* Set an UBI volume property */
-+#define UBI_IOCSETPROP _IOW(UBI_VOL_IOC_MAGIC, 6, struct ubi_set_prop_req)
-+
-+/**
-+ * struct ubi_set_prop_req - a data structure used to set an ubi volume
-+ *                           property.
-+ * @property: property to set (%UBI_PROP_DIRECT_WRITE)
-+ * @padding: reserved for future, not used, has to be zeroed
-+ * @value: value to set
-+ */
-+struct ubi_set_prop_req {
-+	uint8_t  property;
-+	uint8_t  padding[7];
-+	uint64_t value;
-+}  __attribute__ ((packed));
-+
-+/* end parts of mtd/ubi-user.h */
-+
- /**
-  * mkpath - compose full path from 2 given components.
-  * @path: the first component
 @@ -382,8 +402,8 @@
  		return errmsg("\"%s\" is not a character device", node);
  	}
