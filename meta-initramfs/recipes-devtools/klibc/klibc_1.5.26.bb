@@ -2,23 +2,9 @@ PR = "${INC_PR}.0"
 
 export INST = "${D}"
 
-do_compile_prepend() {
-
-    # after kernel 3.1 the headers are moved in /generated
-    if [ ! -e ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/bitsperlong.h ]
-    then
-        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/bitsperlong.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/bitsperlong.h
-        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/errno.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/errno.h
-        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/ioctl.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/ioctl.h
-        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/poll.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/poll.h
-        ln -sf ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/generated/asm/resource.h ${STAGING_KERNEL_DIR}/arch/${TARGET_ARCH}/include/asm/resource.h
-    fi
-
-}
-
 do_install() {
 
-        oe_runmake install
+        oe_runmake DESTDIR="${D}" install
 
         # the crosscompiler is packaged by klcc-cross
         # remove klcc

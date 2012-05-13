@@ -6,25 +6,11 @@ Signed-off-by: Thomas Kunze <thommycheck@gmx.de>
 Minor edits following upstream changes
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
-Index: klibc-1.5.24/Makefile
-===================================================================
---- a/Makefile	2011-07-27 15:50:53.000000000 +0200
-+++ b/Makefile	2011-08-01 00:47:56.000000000 +0200
-@@ -39,7 +39,7 @@
- export PERL       := perl
- 
- # Location for installation
--export prefix      = /usr
-+export prefix      = $(INST)
- export bindir      = $(prefix)/bin
- export libdir      = $(prefix)/lib
- export mandir      = $(prefix)/man
-
 Index: klibc-1.5.24/scripts/Kbuild.install
 ===================================================================
 --- a/scripts/Kbuild.install	2011-07-27 15:50:53.000000000 +0200
 +++ b/scripts/Kbuild.install	2011-08-01 00:03:03.000000000 +0200
-@@ -88,16 +88,12 @@
+@@ -88,13 +88,10 @@
  header:
  	$(Q)echo "  INSTALL headers + man pages to $(INSTALLROOT)$(INSTALLDIR)"
  	$(Q)mkdir -p $(INSTALLROOT)$(bindir)
@@ -35,8 +21,13 @@ Index: klibc-1.5.24/scripts/Kbuild.install
  	$(Q)mkdir -p $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
  	$(Q)mkdir -p $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)lib
 -	$(Q)mkdir -p $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)bin
- 	$(Q)$(MAKE) -C $(KLIBCKERNELSRC) ARCH=$(KLIBCARCH) INSTALL_HDR_PATH=$(INSTALLROOT)$(INSTALLDIR)/$(KCROSS) headers_install
+ 	$(Q)for x in $(KLIBCKERNELSRC)/include/asm $(KLIBCKERNELSRC)/include/asm* $(KLIBCKERNELSRC)/include/linux $(KLIBCKERNELSRC)/include/mtd; do \
+ 		ln -sf $${x} $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/ || exit; \
+ 	done
+@@ -103,7 +100,6 @@
+ 	done
  	$(Q)cp -rf usr/include/. $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include/.
+ 	$(Q)chmod -R a+rX $(INSTALLROOT)$(INSTALLDIR)/$(KCROSS)include
 -	$(Q)$(install-data) $(srctree)/klcc/klcc.1 $(INSTALLROOT)$(mandir)/man1/$(KCROSS)klcc.1
  	$(Q)$(install-bin) $(objtree)/klcc/$(KCROSS)klcc $(INSTALLROOT)$(bindir)
  

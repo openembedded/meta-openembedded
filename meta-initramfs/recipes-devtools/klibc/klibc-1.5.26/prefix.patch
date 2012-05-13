@@ -1,0 +1,14 @@
+Index: klibc-1.5.24/Makefile
+===================================================================
+--- a/Makefile	2011-07-27 15:50:53.000000000 +0200
++++ b/Makefile	2011-08-01 00:47:56.000000000 +0200
+@@ -39,7 +39,7 @@
+ export PERL       := perl
+ 
+ # Location for installation
+-export prefix      = /usr
++export prefix      = $(INST)
+ export bindir      = $(prefix)/bin
+ export libdir      = $(prefix)/lib
+ export mandir      = $(prefix)/man
+
