@@ -4,17 +4,13 @@ export INST = "${D}"
 
 do_install() {
 
-        oe_runmake DESTDIR="${D}" install
+        oe_runmake install
 
         # the crosscompiler is packaged by klcc-cross
         # remove klcc
         rm ${D}${base_bindir}/klcc
         # remove now empty dir
         rmdir ${D}${base_bindir}
-
-        # remove Linux headers .install and ..install.cmd files
-        find ${D}${base_libdir}/klibc/include -name '.install' -delete
-        find ${D}${base_libdir}/klibc/include -name '..install.cmd' -delete
 
         install -d ${D}${base_libdir}
         install -m 755 usr/klibc/klibc-*.so ${D}${base_libdir}

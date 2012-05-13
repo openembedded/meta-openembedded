@@ -11,11 +11,6 @@ DEPENDS = "klibc"
 
 FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 
-# ${TARGET_PREFIX}klcc is just a
-# perl wrapper around gcc-cross
-# so give it the same arch and path
-#PACKAGE_ARCH = "${TUNE_PKGARCH}"
-
 inherit cross
 
 do_configure () {

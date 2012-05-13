@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
 # debugsources.list: No such file or directory:
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INC_PR = "r1"
+INC_PR = "r0"
 
 KLIBC_ARCH = '${TARGET_ARCH}'
 KLIBC_ARCH_armeb = 'arm'
@@ -21,7 +21,7 @@ KLIBC_ARCH_i586 = 'i386'
 KLIBC_ARCH_i686 = 'i386'
 KLIBC_ARCH_pentium = 'i386'
 
-SRCREV = "c7dedd5d11b075b5e6cecd6aa82b70b748179121"
+SRCREV = "f8e0ad9812f5e3fe0e7006061b1d5f9f67a80325"
 SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
 
 SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch"
@@ -34,17 +34,16 @@ SRC_URI += "file://fstype-sane-vfat-and-jffs2-for-1.5.patch \
             file://wc.patch \
             file://prefix.patch \
             file://staging.patch \
-            file://kernel_3.2__aligned_u64.patch  \
             "
 
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'CROSS_COMPILE=${TARGET_PREFIX}' \
-                'KLIBCKERNELSRC=${STAGING_DIR_TARGET}/${exec_prefix}' \
+                'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
                 "
 
 do_configure () {
 
-        ln -sf "${STAGING_DIR_TARGET}/${exec_prefix}" linux
+        ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
 }
