@@ -68,8 +68,8 @@ for service in $services; do
 			ln -s $service_file $ROOT/etc/systemd/system/$r.wants
 			echo "Enabled $service for $wanted_by."
 		else
-			rm -f $ROOT/etc/systemd/system/$r.wants/$service_file
-			rmdirs -p $ROOT/etc/systemd/system/$r.wants
+			rm -f $ROOT/etc/systemd/system/$r.wants/$service
+			rmdir --ignore-fail-on-non-empty -p $ROOT/etc/systemd/system/$r.wants
 			echo "Disabled $service for $wanted_by."
 		fi
 	done
