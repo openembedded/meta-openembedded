@@ -1,0 +1,31 @@
+From c339eaaa514b8edcfe8de5c9610b8f2591ec221a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 14 May 2012 17:36:37 +0200
+Subject: [PATCH] gvfsfusedaemon.c: fix glib build
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Upstream-status: Applied but we can not use it because newer versions depend
+on gnome-disk-utiltity >= V3.02 which depends on gtk+ V3
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ client/gvfsfusedaemon.c |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
+
+diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
+index bc3090d..f2e708e 100644
+--- a/client/gvfsfusedaemon.c
++++ b/client/gvfsfusedaemon.c
+@@ -41,8 +41,6 @@
+ #include <glib/gprintf.h>
+ #include <gio/gio.h>
+ 
+-#include <glib/gurifuncs.h>
+-
+ /* stuff from common/ */
+ #include <gdaemonmount.h>
+ #include <gvfsdaemonprotocol.h>
+-- 
+1.7.6.5
+
