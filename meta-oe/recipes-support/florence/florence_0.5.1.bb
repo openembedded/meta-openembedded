@@ -6,9 +6,12 @@ HOMEPAGE = "http://florence.sourceforge.net/english.html"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
+PR = "r1"
+
 DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-native"
 
-SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2"
+SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
+           file://0001-Fix-glib-includes.patch"
 SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
 SRC_URI[sha256sum] = "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240ac8719a68b192d5bc62"
 
