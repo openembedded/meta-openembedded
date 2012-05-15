@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME settings daemon"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
-PR = "r5"
+PR = "r6"
 
 DEPENDS = "libsndfile1 libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
 
@@ -30,4 +30,6 @@ FILES_${PN} += "${libdir}/gnome-settings-daemon-2.0/*.so ${libdir}/gnome-setting
                 ${datadir}/xsession*"
 
 FILES_${PN}-dbg += "${libdir}/gnome-settings-daemon-2.0/.debug"
-FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.a ${libdir}/gnome-settings-daemon-2.0/*.la"
+FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.la"
+FILES_${PN}-staticdev += "${libdir}/gnome-settings-daemon-2.0/*.a"
+
