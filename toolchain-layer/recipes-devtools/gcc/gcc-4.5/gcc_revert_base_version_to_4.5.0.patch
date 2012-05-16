@@ -1,9 +1,0 @@
-the svn patch changed the BASE-VER to 4.5.1, bring it back to 4.5.0
-- Nitin A Kamble nitin.a.kamble@intel.com
-- 2010/07/20
-
---- gcc-4.5.0/gcc/BASE-VER	2010-07-20 00:57:37.000000000 -0700
-+++ gcc-4.5.0.new/gcc/BASE-VER	2010-07-20 01:06:17.000000000 -0700
-@@ -1 +1 @@
--4.5.1
-+4.5.0
