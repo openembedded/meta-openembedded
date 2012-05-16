@@ -33,6 +33,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            file://index.js \
            file://cloud9.service \
            file://cloud9-avahi.service \
+           file://0001-ide-use-node-as-interpreter-for-sketches-instead-of-.patch \
           "
 
 SRCREV_cloud9ide = "c4e2574896a22bb749f0500b25f41c888d346bed"
@@ -102,7 +103,7 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
                     ${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/.debug \
                    "
 
-RDEPENDS_${PN} = "nodejs4 gzip"
+RDEPENDS_${PN} = "nodejs4 nodejs gzip"
 
 inherit systemd
 
