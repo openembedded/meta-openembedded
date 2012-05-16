@@ -3,7 +3,7 @@ HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
-DEFAULT_PREFERENCE = "-1"
+PR = "r1"
 
 DEPENDS = "libxml2 nodejs-native"
 
