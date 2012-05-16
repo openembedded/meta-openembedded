@@ -15,12 +15,7 @@ fi
 }
 
 systemd_prerm() {
-if [ -z "$D" ]; then
-    systemctl stop ${SYSTEMD_SERVICE}
-fi
-}
-
-systemd_postrm() {
+systemctl stop ${SYSTEMD_SERVICE}
 systemctl disable ${SYSTEMD_SERVICE}
 }
 
@@ -93,7 +88,7 @@ do_install_append() {
 
 python populate_packages_prepend () {
 	def systemd_generate_package_scripts(pkg):
-		bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
+		bb.debug(1, 'adding systemd calls to postinst/prerm for %s' % pkg)
 		localdata = bb.data.createCopy(d)
 		overrides = bb.data.getVar("OVERRIDES", localdata, 1)
 		bb.data.setVar("OVERRIDES", "%s:%s" % (pkg, overrides), localdata)
@@ -115,12 +110,6 @@ python populate_packages_prepend () {
 			prerm = '#!/bin/sh\n'
 		prerm += bb.data.getVar('systemd_prerm', localdata, 1)
 		bb.data.setVar('pkg_prerm_%s' % pkg, prerm, d)
-
-		postrm = bb.data.getVar('pkg_postrm', localdata, 1)
-		if not postrm:
-			postrm = '#!/bin/sh\n'
-		postrm += bb.data.getVar('systemd_postrm', localdata, 1)
-		bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
 
 	# add files to FILES_*-systemd if existent and not already done
 	def systemd_append_file(pkg_systemd, file_append):
