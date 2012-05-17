@@ -3,7 +3,7 @@ SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus"
-INC_PR = "r2"
+INC_PR = "r3"
 
 inherit autotools gettext pkgconfig gconf perlnative
 
@@ -43,7 +43,7 @@ FILES_libpurple-dbg += "${libdir}/.debug/libpurple* \
                         ${libdir}/purple-2/.debug"
 FILES_libgnt         = "${libdir}/libgnt.so.* ${libdir}/gnt/*.so" 
 FILES_libgnt-dev     = "${libdir}/gnt/*.la" 
-FILES_libgnt-dbg     = "${libdir}/gnt/.debug \
+FILES_libgnt-dbg     = "${libdir}/gnt/.debug"
 FILES_finch          = "${bindir}/finch"
 FILES_finch-dev      = "${libdir}/finch/*.la"
 FILES_finch-dbg      = "${bindir}/.debug/finch \
