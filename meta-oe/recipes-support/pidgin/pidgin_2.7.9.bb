@@ -1,5 +1,5 @@
 require pidgin.inc
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 
 DEPENDS += "farsight2 libidn"
 
@@ -19,4 +19,5 @@ EXTRA_OECONF += "\
   --disable-meanwhile \
   --disable-nm \
   --disable-screensaver \
+  --enable-nss=no \
 "
