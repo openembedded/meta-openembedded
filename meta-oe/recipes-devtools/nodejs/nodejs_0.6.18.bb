@@ -5,9 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=914812f2875eef849b5c509cc25dcb4f"
 
 DEPENDS = "openssl"
 
-SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz"
-SRC_URI[md5sum] = "55641d5d280cdd4e0c030c203107599d"
-SRC_URI[sha256sum] = "8dfe5948de27e37a14af184f06e7bd89a23c3b248af44c8ef5cffcd0e4c65778"
+SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+           file://gcc-4.7.patch"
+
+SRC_URI[md5sum] = "4a3d3123ccc7b9b21c1990fe074e3d14"
+SRC_URI[sha256sum] = "6cf4311ecbc1700e88f4382a31b3a7017c1572cd641fd06e653fc1692c2cffff"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -42,14 +44,14 @@ do_configure () {
 }
 
 do_compile_virtclass-native () {
-  make
+  make BUILDTYPE=Release
 }
 
 do_compile () {
   export PATH=${WORKDIR}:${PATH}
   export CC=gcc
   export CXX=g++
-  make
+  make BUILDTYPE=Release
 }
 
 do_install () {
