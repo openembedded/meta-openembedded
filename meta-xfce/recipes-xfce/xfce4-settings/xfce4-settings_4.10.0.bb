@@ -6,9 +6,11 @@ DEPENDS = "exo gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtual/libx1
 
 inherit xfce
 
-SRC_URI += "file://0001-xfsettingsd-use-gnome-as-default-icon-theme.patch"
+SRC_URI += "file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
+            file://0002-xsettings.xml-Set-default-themes.patch"
+SRC_URI[md5sum] = "cc4dd9179ead9046c056431f01a12000"
+SRC_URI[sha256sum] = "0843f09ba9673f1d1b5df8dce4a17b63c183a9ba3be75fb6ef99a67fc8c1f77e"
 
-SRC_URI[md5sum] = "4669298cc8a4abf0e5a410016b575030"
-SRC_URI[sha256sum] = "d878cc474e1e677e9607279b9a1007cb90ed35ff078de180259a8b2b8d06bc2e"
+FILES_${PN} += "${libdir}/xfce4"
 
 RRECOMMENDS_${PN} += "gnome-icon-theme"
