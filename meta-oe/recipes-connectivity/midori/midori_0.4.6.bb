@@ -8,8 +8,8 @@ PR = "r1"
 
 SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
           "
-SRC_URI[midori.md5sum] = "14288197a1e2251b7c0803e1448daa0e"
-SRC_URI[midori.sha256sum] = "7b57cf3ebb56eef586351f2ae9f71ec9683aedff0b79a071b70b811d9876ff84"
+SRC_URI[midori.md5sum] = "3c3f0030611d9126ab90be48d44cab57"
+SRC_URI[midori.sha256sum] = "910f47bd2b5f2998cd4fce45c08f9e282318820b68562d0bade2096b9a17e3ea"
 
 inherit gtk-icon-cache pkgconfig
 
