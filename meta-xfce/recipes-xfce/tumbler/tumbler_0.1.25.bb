@@ -1,10 +1,13 @@
 DESCRIPTION="Thumbnail service implementing the thumbnail management D-Bus specification"
 SECTION = "x11/libs"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "dbus-glib freetype gdk-pixbuf poppler"
 
 inherit xfce
+
+SRC_URI[md5sum] = "d4edc15c172714c7a3eaf3c719b8faf6"
+SRC_URI[sha256sum] = "02d5de508d8c18692a25a832a9280c2043f6b7c90dd3fcbd87f5955337015546"
 
 INSANE_SKIP_${PN} = "dev-so"
 
@@ -27,6 +30,3 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
                     ${libdir}/tumbler-1/plugins/.debug \
                     ${libdir}/tumbler-1/plugins/cache/.debug \
 "
-
-SRC_URI[md5sum] = "c6cf6821f5d884cbf2c26f45f2fecc74"
-SRC_URI[sha256sum] = "b3066d17b7e1fee5135eb876a7c2c50a1221bd0d447c3dd7c36efe6d7f3874cb"
