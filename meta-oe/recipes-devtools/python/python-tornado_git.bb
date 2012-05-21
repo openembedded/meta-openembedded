@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://README;md5=e7fb9954003d7cd93322ccf282210d1c"
 
 PV = "2.2"
 SRCREV = "02bc76155de5bf4dca243e4d0c019c0ac4c8b3be"
+PR = "r1"
 SRC_URI = "git://github.com/facebook/tornado.git;branch=branch2.2 \
            file://0001-disable-AI_ADDRCONFIG-flag.patch \
           "

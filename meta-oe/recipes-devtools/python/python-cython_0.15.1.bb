@@ -6,7 +6,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
 SRCNAME = "Cython"
 BBCLASSEXTEND = "native"
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz \
            file://0001-Don-t-append-docs-to-_Extension.extension.__doc__.patch \

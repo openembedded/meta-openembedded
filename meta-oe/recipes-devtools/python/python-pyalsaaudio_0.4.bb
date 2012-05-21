@@ -4,7 +4,7 @@ DEPENDS = "alsa-lib"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
 SRCNAME = "pyalsaaudio"
-PR = "ml1"
+PR = "ml2"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/pyalsaaudio/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"

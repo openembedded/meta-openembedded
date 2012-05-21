@@ -3,6 +3,7 @@ SECTION = "console/network"
 
 LICENSE = "ZPL-2.1"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
+PR = "r1"
 
 SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
 SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"

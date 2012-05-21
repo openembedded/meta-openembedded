@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 HOMEPAGE = "http://vobject.skyhouseconsulting.com/" 
 SRCNAME = "vobject" 
 RDEPENDS_${PN} = "python python-dateutil"
-PR = "r3"
+PR = "r4"
 
 SRC_URI = "http://vobject.skyhouseconsulting.com/${SRCNAME}-${PV}.tar.gz" 
 S = "${WORKDIR}/${SRCNAME}-${PV}" 

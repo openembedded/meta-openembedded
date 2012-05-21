@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
 DEPENDS = "libyaml python-cython-native"
 SRCREV = "344"
 PV = "3.08+svnr${SRCPV}"
-PR = "ml1"
+PR = "ml2"
 
 SRC_URI = "\
   svn://svn.pyyaml.org/pyyaml;module=trunk;proto=http \

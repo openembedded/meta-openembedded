@@ -4,7 +4,7 @@ HOMEPAGE = "http://codespeak.net/lxml"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=7de92baeb3b7bfaebe72404155fdb346"
 SRCNAME = "lxml"
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "libxml2 libxslt"
 RDEPENDS_${PN} += "libxml2 libxslt python-compression"

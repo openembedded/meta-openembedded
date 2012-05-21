@@ -4,6 +4,7 @@ SECTION = "devel/python"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8a9f8dcfcd28c34daa443e5b1d29813b"
+PR = "r1"
 
 SRCNAME = "simplejson"
 
