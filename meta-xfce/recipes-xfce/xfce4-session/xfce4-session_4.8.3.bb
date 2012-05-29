@@ -3,7 +3,8 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf xfce4-panel gconf gnome-keyring"
-RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth"
+RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit"
+PR = "r1"
 
 inherit xfce
 
