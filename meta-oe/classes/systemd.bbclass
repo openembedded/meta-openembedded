@@ -24,6 +24,12 @@ systemd_postrm() {
 systemctl disable ${SYSTEMD_SERVICE}
 }
 
+def get_package_var(d, var, pkg):
+	val = (d.getVar('%s_%s' % (var, pkg), d, 1) or "").strip()
+	if val == "":
+		val = (d.getVar(var, d, 1) or "").strip()
+	return val
+
 def systemd_after_parse(d):
 	def systemd_check_vars():
 		if d.getVar('BB_WORKERCONTEXT', True) is not None:
@@ -155,8 +161,7 @@ python populate_packages_prepend () {
 		systemd_packages = d.getVar('SYSTEMD_PACKAGES', 1)
 		has_exactly_one_service = len(systemd_packages.split()) == 1
 		if has_exactly_one_service:
-			systemd_services = d.getVar('SYSTEMD_SERVICE' + "_" + systemd_packages, 1) or d.getVar('SYSTEMD_SERVICE', 1)
-			has_exactly_one_service = len(systemd_services.split()) == 1
+			has_exactly_one_service = len(get_package_var(d, 'SYSTEMD_SERVICE', systemd_packages).split()) == 1
 
 		keys = 'Also' # Conflicts??
 		if has_exactly_one_service:
@@ -164,8 +169,7 @@ python populate_packages_prepend () {
 			keys = 'Also Conflicts'
 		# scan for all in SYSTEMD_SERVICE[]
 		for pkg_systemd in systemd_packages.split():
-			systemd_services = d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) or d.getVar('SYSTEMD_SERVICE', 1)
-			for service in systemd_services.split():
+			for service in get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd).split():
 				path_found = ''
 				for path in searchpaths.split():
 					if os.path.exists('${D}' + path + service):
@@ -196,7 +200,7 @@ python populate_packages_prepend () {
 	# run all modifications once when creating package
 	if os.path.exists('${D}'):
 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
-			if d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1) and d.getVar('SYSTEMD_SERVICE' + "_" + pkg_systemd, 1).strip():
+			if get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd) != "":
 				systemd_generate_package_scripts(pkg_systemd)
 				systemd_add_rdepends(pkg_systemd)
 		systemd_check_services()
