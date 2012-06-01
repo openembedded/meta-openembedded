@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
+PR = "r1"
+
 SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
 
 DEFAULT_PREFERENCE = "-1"
