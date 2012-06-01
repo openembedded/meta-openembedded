@@ -54,11 +54,6 @@ def systemd_after_parse(d):
 						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
 						( bb_filename, pkg_systemd)
 
-		# check SYSTEMD_SERVICE
-		for pkg_systemd in systemd_pkgs.split():
-			service_pkg = 'SYSTEMD_SERVICE' + "_" + pkg_systemd
-			systemd_services = d.getVar(service_pkg, 1) or d.getVar('SYSTEMD_SERVICE', 1) or ""
-
 	# prepend systemd-packages not already included
 	def systemd_create_package(pkg_systemd):
 		packages = d.getVar('PACKAGES', 1)
