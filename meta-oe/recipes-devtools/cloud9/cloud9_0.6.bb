@@ -3,7 +3,7 @@ HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "libxml2 nodejs-native"
 
@@ -31,7 +31,6 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
            git://github.com/ajaxorg/treehugger.git;destsuffix=git/support/treehugger;name=treehugger \
            git://github.com/ajaxorg/UglifyJS.git;destsuffix=git/support/uglify-js;name=uglify-js \
            file://index.js \
-           file://cloud9.service \
            file://cloud9-avahi.service \
            file://0001-ide-use-node-as-interpreter-for-sketches-instead-of-.patch \
           "
@@ -104,9 +103,3 @@ FILES_${PN}-dbg += "${datadir}/cloud9/support/jsdav/support/node-o3-xml-v4/lib/o
                    "
 
 RDEPENDS_${PN} = "nodejs4 nodejs gzip"
-
-inherit systemd
-
-NATIVE_SYSTEMD_SUPPORT = "1"
-SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "cloud9.service"
