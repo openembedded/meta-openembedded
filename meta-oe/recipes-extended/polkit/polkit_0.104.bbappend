@@ -1,6 +1,6 @@
-PRINC := "${@int(PRINC) + 3}"
+PRINC := "${@int(PRINC) + 4}"
 
-POLKITAUTH ??= "systemd"
+POLKITAUTH ??= "consolekit"
 
 PACKAGECONFIG += "${POLKITAUTH}"
 PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
