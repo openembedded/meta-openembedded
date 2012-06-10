@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
 
-PR = "r8"
+PR = "r9"
 
-inherit gnome update-rc.d systemd
+inherit gnome update-rc.d
 
 SRC_URI += " \
             file://cross-xdetection.diff \
@@ -17,7 +17,6 @@ SRC_URI += " \
             file://gdm.conf \
             file://gdm-pam \
             file://Default \
-            file://gdm.service \
            "
 
 SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
@@ -47,9 +46,6 @@ do_install_append() {
 	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
 
 }
-
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "gdm.service"
 
 FILES_${PN} += "${datadir}/icon* \
 		${datadir}/xsession* \
