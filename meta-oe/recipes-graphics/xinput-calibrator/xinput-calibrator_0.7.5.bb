@@ -4,13 +4,12 @@ LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=998e238a7638a7446eaeb02398f691fc"
 DEPENDS = "virtual/libx11 libxi"
 
-PR = "r7"
+PR = "r8"
 
-inherit autotools systemd
+inherit autotools
 
 SRC_URI = "http://github.com/downloads/tias/xinput_calibrator/xinput_calibrator-${PV}.tar.gz \
            file://0001-xinput_calibrator_pointercal.sh-specify-output-type-.patch \
-           file://xinput-calibrator.service \
            file://xinput-calibrator-autostart.desktop \
 "
 SRC_URI[md5sum] = "20da0a2055a5a75962add8c6b44f60fa"
@@ -28,9 +27,6 @@ do_install_append() {
         install -d ${D}${sysconfdir}/xdg/autostart
         install -m 0644 ${WORKDIR}/xinput-calibrator-autostart.desktop ${D}${sysconfdir}/xdg/autostart
 }
-
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "${PN}.service"
 
 FILES_${PN} += "${sysconfdir}/xdg/autostart"
 RDEPENDS_${PN} = "xinput xterm"
