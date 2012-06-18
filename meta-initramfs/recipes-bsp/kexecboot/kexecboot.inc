@@ -43,11 +43,12 @@ do_install () {
         install -d ${D}/proc
         install -d ${D}/mnt
         install -d ${D}/dev
+        install -d ${D}/sys
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FILES_${PN} += " ${bindir}/kexecboot /init /proc /mnt /dev"
+FILES_${PN} += " ${bindir}/kexecboot /init /proc /mnt /dev /sys"
 
 pkg_postinst_${PN} () {
         ln -sf ${bindir}/kexecboot $D/init
