@@ -9,7 +9,7 @@ IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
 # avoid circular dependencies
 EXTRA_IMAGEDEPENDS = ""
 
-IMAGE_INSTALL = "kexec kexecboot"
+IMAGE_INSTALL = "kexec kexecboot ubiattach"
 
 # Do not pollute the initrd image with rootfs features
 IMAGE_FEATURES = ""
