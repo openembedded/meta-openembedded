@@ -1,5 +1,5 @@
 DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
-DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina"
+DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina libsndfile1"
 DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native eina-native"
 DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native eina-native"
 # GPLv2 because of epp in PN-utils
@@ -34,6 +34,11 @@ do_compile_append() {
 # Since r44323 edje has a fixed-point mode
 require edje-fpu.inc
 EXTRA_OECONF += "${@get_edje_fpu_setting(bb, d)}"
+
+SNDFILE = "--enable-sndfile"
+SNDFILE_virtclass-native = "--disable-sndfile"
+SNDFILE_virtclass-nativesdk = "--disable-sndfile"
+EXTRA_OECONF += "${SNDFILE}"
 
 PACKAGES =+ "${PN}-utils"
 RDEPENDS_${PN}-utils = "cpp cpp-symlinks embryo-tests"
