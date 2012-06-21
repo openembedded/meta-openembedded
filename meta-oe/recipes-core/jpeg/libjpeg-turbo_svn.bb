@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe
                     file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
 "
 PV = "8d+1.2.1"
+PR = "r1"
 SRCREV = "837"
 SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;proto=https;module=trunk"
 
@@ -29,3 +30,5 @@ INSANE_SKIP_libturbojpeg = "dev-so"
 
 BBCLASSEXTEND = "native"
 DEPENDS_virtclass-native = "nasm-native"
+
+LEAD_SONAME = "libjpeg.so.8"
