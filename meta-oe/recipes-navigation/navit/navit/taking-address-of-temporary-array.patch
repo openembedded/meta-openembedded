@@ -1,0 +1,76 @@
+Upstream-Status: Pending
+
+Description: Fix g++ error "taking address of temporary array"
+Author: Gilles Filippini <pini@debian.org>
+Forwarded: no
+Bug-Debian: http://bugs.debian.org/676006
+Last-Update: 2012-06-05
+Index: navit/navit/graphics/qt_qpainter/RenderArea.cpp
+===================================================================
+--- navit.orig/navit/graphics/qt_qpainter/RenderArea.cpp	2012-06-05 23:16:42.000000000 +0200
++++ navit/navit/graphics/qt_qpainter/RenderArea.cpp	2012-06-05 23:15:47.000000000 +0200
+@@ -239,13 +239,14 @@
+ #else
+ 	const char *text=str.toUtf8().constData();
+ #endif
++	char text1[2] = { '\0', '\0' };
+ 	dbg(0,"enter text='%s' 0x%x (%d) key=%d\n", text, text[0], strlen(text), event->key());
+ 	if (!text || !text[0] || text[0] == 0x7f) {
+ 		dbg(0,"special key\n");
+ 		switch (event->key()) {
+ 		case 4099:
+ 			{
+-				text=(char []){NAVIT_KEY_BACKSPACE,'\0'};
++				text1[0] = NAVIT_KEY_BACKSPACE;
+ 			}
+ 			break;
+ 		case 4101:
+@@ -253,7 +254,7 @@
+ 		QT_QPAINTER_CUSTOM_RETURN
+ #endif
+ 			{
+-				text=(char []){NAVIT_KEY_RETURN,'\0'};
++				text1[0] = NAVIT_KEY_RETURN;
+ 			}
+ 			break;
+ 		case 4114:
+@@ -261,7 +262,7 @@
+ 		QT_QPAINTER_CUSTOM_LEFT
+ #endif
+ 			{
+-				text=(char []){NAVIT_KEY_LEFT,'\0'};
++				text1[0] = NAVIT_KEY_LEFT;
+ 			}
+ 			break;
+ 		case 4115:
+@@ -269,7 +270,7 @@
+ 		QT_QPAINTER_CUSTOM_UP
+ #endif
+ 			{
+-				text=(char []){NAVIT_KEY_UP,'\0'};
++				text1[0] = NAVIT_KEY_UP;
+ 			}
+ 			break;
+ 		case 4116:
+@@ -277,7 +278,7 @@
+ 		QT_QPAINTER_CUSTOM_RIGHT
+ #endif
+ 			{
+-				text=(char []){NAVIT_KEY_RIGHT,'\0'};
++				text1[0] = NAVIT_KEY_RIGHT;
+ 			}
+ 			break;
+ 		case 4117:
+@@ -285,10 +286,11 @@
+ 		QT_QPAINTER_CUSTOM_DOWN
+ #endif
+ 			{
+-				text=(char []){NAVIT_KEY_DOWN,'\0'};
++				text1[0] = NAVIT_KEY_DOWN;
+ 			}
+ 			break;
+ 		}
++		if (text1[0]) text = text1;
+ 	}
+ 	callback_list_call_attr_1(this->cbl, attr_keypress, (void *)text);
+ 	event->accept();
