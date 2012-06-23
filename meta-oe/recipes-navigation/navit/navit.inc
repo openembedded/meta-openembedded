@@ -13,7 +13,7 @@ RRECOMMENDS_${PN} = "gpsd ${PN}-dbus ${PN}-speech-cmdline ${PN}-gui-internal ${P
 RSUGGESTS_${PN} = "flite-alsa espeak ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-qml ${PN}-graphics-sdl ${PN}-graphics-qt ${PN}-maptool"
 
 PE = "1"
-INC_PR = "r8"
+INC_PR = "r9"
 
 inherit autotools gettext
 
@@ -52,7 +52,7 @@ SRC_URI += "file://navit.xml \
             file://plugins.xml \
            "
 
-FILES_${PN} += "${libdir}/${PN}/*/*.so"
+FILES_${PN} += "${libdir}/${PN}/*/*.so ${datadir}/icons"
 FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
 FILES_${PN}-maptool = " ${bindir}/maptool "
 FILES_${PN}-config = " ${datadir}/navit/*.xml "
@@ -73,10 +73,6 @@ do_configure_prepend() {
 }
 
 do_install_append() {
-        install -d ${D}${datadir}/applications/
-        install -m 0644 ${S}/navit/xpm/desktop_icons/navit.desktop ${D}${datadir}/applications/
-        install -d ${D}${datadir}/pixmaps/
-        install -m 0644 ${S}/navit/xpm/desktop_icons/128x128/navit.png ${D}${datadir}/pixmaps/
 	# fix QA issue
 	sed -i 's#Categories=GTK;Utility;Geography;#Categories=Graphics;#g' ${D}${datadir}/applications/navit.desktop
 
