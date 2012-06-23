@@ -55,6 +55,7 @@ do_configure() {
 do_install_append() {
         install -d ${D}${datadir}/pixmaps/
         mv ${D}${datadir}/icons/* ${D}${datadir}/pixmaps/
+        rmdir ${D}${datadir}/icons
 }
 
 PACKAGES += " abiword-clipart abiword-icons abiword-strings abiword-systemprofiles abiword-templates "

@@ -2,7 +2,7 @@ require abiword-2.5.inc
 DEPENDS += " librsvg loudmouth libwmf-native gtkmathview asio"
 RCONFLICTS_${PN} = "abiword-embedded"
 
-PR = "r3"
+PR = "r4"
 
 SRC_URI = "http://www.abisource.com/downloads/abiword/${PV}/source/abiword-${PV}.tar.gz;name=abiword \
            file://autogen-common.sh \
@@ -58,6 +58,8 @@ python populate_packages_prepend () {
 	bb.data.setVar('PACKAGES', ' '.join(packages), d)
 }
 
-FILES_${PN}-dev += "${libdir}/abiword-${SHRT_VER}/plugins/*.la"
+# don't steal /usr/lib/libabiword-2.8.so from ${PN}
+# in this case it's needed in ${PN}
+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${libdir}/abiword*.la ${libdir}/abiword-${SHRT_VER}/plugins/*.la ${libdir}/libabiword*.la"
 FILES_${PN}-dbg += "${libdir}/abiword-${SHRT_VER}/plugins/.debug"
 FILES_${PN}-doc += "${datadir}/abiword-*/readme*"
