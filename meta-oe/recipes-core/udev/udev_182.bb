@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://src/COPYING;md5=17c4e5fb495e6707ac92a3864926f979 \
                     file://src/gudev/COPYING;md5=fb494485a7d0505308cb68e4997cc266"
 
+PR = "r1"
 # glib-2.0: Needed for udev-extras
 # util-linux: Needed for libblkid
 # kmod: needed for libkmod
@@ -51,6 +52,7 @@ do_configure_prepend() {
 	cp ${WORKDIR}/gtk-doc.make ${S}
 }
 
+LDFLAGS_prepend-libc-uclibc = " -lrt "
 PACKAGES =+ "${PN}-systemd libudev libgudev udev-consolekit udev-utils"
 
 FILES_${PN}-systemd = "${systemd_unitdir}"
