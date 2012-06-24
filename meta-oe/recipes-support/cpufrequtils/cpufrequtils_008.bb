@@ -11,7 +11,9 @@ SRCREV = "a2f0c39d5f21596bb9f5223e895c0ff210b265d0"
 SRC_URI = "git://github.com/emagii/cpufrequtils.git \
           "
 
-PR = "r3"
+CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' == 'no']} "
+
+PR = "r4"
 
 S = "${WORKDIR}/git"
 
