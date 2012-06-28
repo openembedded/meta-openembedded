@@ -1,0 +1,223 @@
+Upstream-Status: Inappropriate [distribution: codesourcery]
+
+       gcc/
+       2008-07-02  Joseph Myers  <joseph@codesourcery.com>
+       * c-incpath.c: Include toplev.h.
+       (merge_include_chains): Use warning instead of cpp_error for
+       system directory poisoning diagnostic.
+       * Makefile.in (c-incpath.o): Depend on toplev.h.
+       * gcc.c (LINK_COMMAND_SPEC): Pass
+       --error-poison-system-directories if
+       -Werror=poison-system-directories.
+
+       2007-06-13  Joseph Myers  <joseph@codesourcery.com>
+       * common.opt (--Wno-poison-system-directories): New.
+       * doc/invoke.texi (-Wno-poison-system-directories): Document.
+       * c-incpath.c: Include flags.h.
+       (merge_include_chains): Check flag_poison_system_directories.
+       * gcc.c (LINK_COMMAND_SPEC): Pass --no-poison-system-directories
+       to linker if -Wno-poison-system-directories.
+       * Makefile.in (c-incpath.o): Depend on $(FLAGS_H).
+
+       2007-03-20  Daniel Jacobowitz  <dan@codesourcery.com>
+                   Joseph Myers  <joseph@codesourcery.com>
+       * configure.ac (--enable-poison-system-directories): New option.
+       * configure, config.in: Regenerate.
+       * c-incpath.c (merge_include_chains): If
+       ENABLE_POISON_SYSTEM_DIRECTORIES defined, warn for use of
+       /usr/include, /usr/local/include or /usr/X11R6/include.
+
+Index: gcc-4_6-branch/gcc/common.opt
+===================================================================
+--- gcc-4_6-branch.orig/gcc/common.opt	2012-03-03 01:03:17.000000000 -0800
++++ gcc-4_6-branch/gcc/common.opt	2012-03-04 09:24:54.410624483 -0800
+@@ -567,6 +567,10 @@
+ Common Var(warn_padded) Warning
+ Warn when padding is required to align structure members
+ 
++Wpoison-system-directories
++Common Var(flag_poison_system_directories) Init(1) Warning
++Warn for -I and -L options using system directories if cross compiling
++
+ Wshadow
+ Common Var(warn_shadow) Warning
+ Warn when one local variable shadows another
+Index: gcc-4_6-branch/gcc/config.in
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config.in	2012-03-03 01:03:17.000000000 -0800
++++ gcc-4_6-branch/gcc/config.in	2012-03-04 09:24:54.410624483 -0800
+@@ -144,6 +144,12 @@
+ #endif
+ 
+ 
++/* Define to warn for use of native system header directories */
++#ifndef USED_FOR_TARGET
++#undef ENABLE_POISON_SYSTEM_DIRECTORIES
++#endif
++
++
+ /* Define if you want all operations on RTL (the basic data structure of the
+    optimizer and back end) to be checked for dynamic type safety at runtime.
+    This is quite expensive. */
+Index: gcc-4_6-branch/gcc/configure.ac
+===================================================================
+--- gcc-4_6-branch.orig/gcc/configure.ac	2012-03-04 09:22:07.000000000 -0800
++++ gcc-4_6-branch/gcc/configure.ac	2012-03-04 09:24:54.410624483 -0800
+@@ -4692,6 +4692,16 @@
+ fi)
+ AC_SUBST(slibdir)
+ 
++AC_ARG_ENABLE([poison-system-directories],
++             AS_HELP_STRING([--enable-poison-system-directories],
++                            [warn for use of native system header directories]),,
++             [enable_poison_system_directories=no])
++if test "x${enable_poison_system_directories}" = "xyes"; then
++  AC_DEFINE([ENABLE_POISON_SYSTEM_DIRECTORIES],
++           [1],
++           [Define to warn for use of native system header directories])
++fi
++
+ # Substitute configuration variables
+ AC_SUBST(subdirs)
+ AC_SUBST(srcdir)
+Index: gcc-4_6-branch/gcc/doc/invoke.texi
+===================================================================
+--- gcc-4_6-branch.orig/gcc/doc/invoke.texi	2012-03-03 00:46:39.000000000 -0800
++++ gcc-4_6-branch/gcc/doc/invoke.texi	2012-03-04 09:24:54.414624482 -0800
+@@ -257,6 +257,7 @@
+ -Woverlength-strings  -Wpacked  -Wpacked-bitfield-compat  -Wpadded @gol
+ -Wparentheses  -Wpedantic-ms-format -Wno-pedantic-ms-format @gol
+ -Wpointer-arith  -Wno-pointer-to-int-cast @gol
++-Wno-poison-system-directories @gol
+ -Wredundant-decls @gol
+ -Wreturn-type  -Wsequence-point  -Wshadow @gol
+ -Wsign-compare  -Wsign-conversion  -Wstack-protector @gol
+@@ -3782,6 +3783,14 @@
+  for most targets, it is made up of code and thus requires the stack
+  to be made executable in order for the program to work properly.
+ 
++@item -Wno-poison-system-directories
++@opindex Wno-poison-system-directories
++Do not warn for @option{-I} or @option{-L} options using system
++directories such as @file{/usr/include} when cross compiling.  This
++option is intended for use in chroot environments when such
++directories contain the correct headers and libraries for the target
++system rather than the host.
++
+ @item -Wfloat-equal
+ @opindex Wfloat-equal
+ @opindex Wno-float-equal
+Index: gcc-4_6-branch/gcc/gcc.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/gcc.c	2012-03-03 01:03:17.000000000 -0800
++++ gcc-4_6-branch/gcc/gcc.c	2012-03-04 09:24:54.418624482 -0800
+@@ -659,6 +659,8 @@
+     %{flto} %{flto=*} %l " LINK_PIE_SPEC \
+    "%X %{o*} %{e*} %{N} %{n} %{r}\
+     %{s} %{t} %{u*} %{z} %{Z} %{!nostdlib:%{!nostartfiles:%S}}\
++    %{Wno-poison-system-directories:--no-poison-system-directories}\
++    %{Werror=poison-system-directories:--error-poison-system-directories}\
+     %{static:} %{L*} %(mfwrap) %(link_libgcc) %o\
+     %{fopenmp|ftree-parallelize-loops=*:%:include(libgomp.spec)%(link_gomp)}\
+     %(mflib) " STACK_SPLIT_SPEC "\
+Index: gcc-4_6-branch/gcc/incpath.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/incpath.c	2012-03-03 01:03:17.000000000 -0800
++++ gcc-4_6-branch/gcc/incpath.c	2012-03-04 09:24:54.418624482 -0800
+@@ -353,6 +353,24 @@
+ 	}
+       fprintf (stderr, _("End of search list.\n"));
+     }
++
++#ifdef ENABLE_POISON_SYSTEM_DIRECTORIES
++  if (flag_poison_system_directories)
++    {
++       struct cpp_dir *p;
++
++       for (p = heads[QUOTE]; p; p = p->next)
++         {
++          if ((!strncmp (p->name, "/usr/include", 12))
++              || (!strncmp (p->name, "/usr/local/include", 18))
++              || (!strncmp (p->name, "/usr/X11R6/include", 18)))
++            warning (OPT_Wpoison_system_directories,
++                     "include location \"%s\" is unsafe for "
++                     "cross-compilation",
++                     p->name);
++         }
++    }
++#endif
+ }
+ 
+ /* Use given -I paths for #include "..." but not #include <...>, and
+Index: gcc-4_6-branch/gcc/Makefile.in
+===================================================================
+--- gcc-4_6-branch.orig/gcc/Makefile.in	2012-03-04 09:22:05.000000000 -0800
++++ gcc-4_6-branch/gcc/Makefile.in	2012-03-04 09:24:54.418624482 -0800
+@@ -2179,7 +2179,7 @@
+ 
+ incpath.o: incpath.c incpath.h $(CONFIG_H) $(SYSTEM_H) $(CPPLIB_H) \
+ 		intl.h prefix.h coretypes.h $(TM_H) cppdefault.h $(TARGET_H) \
+-		$(MACHMODE_H)
++		$(MACHMODE_H) $(FLAGS_H) toplev.h
+ 
+ prefix.o: prefix.c $(CONFIG_H) $(SYSTEM_H) coretypes.h $(TM_H) prefix.h \
+ 	Makefile $(BASEVER)
+Index: gcc-4_6-branch/gcc/configure
+===================================================================
+--- gcc-4_6-branch.orig/gcc/configure	2012-03-04 09:22:07.000000000 -0800
++++ gcc-4_6-branch/gcc/configure	2012-03-04 09:25:31.502626277 -0800
+@@ -912,6 +912,7 @@
+ enable_maintainer_mode
+ enable_version_specific_runtime_libs
+ with_slibdir
++enable_poison_system_directories
+ enable_plugin
+ enable_libquadmath_support
+ '
+@@ -1623,6 +1624,8 @@
+   --enable-version-specific-runtime-libs
+                           specify that runtime libraries should be
+                           installed in a compiler-specific directory
++  --enable-poison-system-directories
++                          warn for use of native system header directories
+   --enable-plugin         enable plugin support
+   --disable-libquadmath-support
+                           disable libquadmath support for Fortran
+@@ -17498,7 +17501,7 @@
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17501 "configure"
++#line 17504 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -17604,7 +17607,7 @@
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17607 "configure"
++#line 17610 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -26125,6 +26128,19 @@
+ 
+ 
+ 
++# Check whether --enable-poison-system-directories was given.
++if test "${enable_poison_system_directories+set}" = set; then :
++  enableval=$enable_poison_system_directories;
++else
++  enable_poison_system_directories=no
++fi
++
++if test "x${enable_poison_system_directories}" = "xyes"; then
++
++$as_echo "#define ENABLE_POISON_SYSTEM_DIRECTORIES 1" >>confdefs.h
++
++fi
++
+ # Substitute configuration variables
+ 
+ 

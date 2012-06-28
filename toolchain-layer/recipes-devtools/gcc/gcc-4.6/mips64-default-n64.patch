@@ -1,0 +1,32 @@
+MIPS64 defaults to n32 ABI, this patch makes it
+so that it defaults to N64 ABI
+
+Upstream-Status: Inappropriate [OE config specific]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Index: gcc-4_6-branch/gcc/config.gcc
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config.gcc	2012-04-22 19:12:12.431061229 -0700
++++ gcc-4_6-branch/gcc/config.gcc	2012-04-22 19:13:36.307065289 -0700
+@@ -1882,7 +1882,7 @@
+ mips64*-*-linux* | mipsisa64*-*-linux*)
+ 	tm_file="dbxelf.h elfos.h gnu-user.h linux.h glibc-stdint.h ${tm_file} mips/linux.h mips/linux64.h"
+ 	tmake_file="${tmake_file} mips/t-linux64 mips/t-libgcc-mips16"
+-	tm_defines="${tm_defines} MIPS_ABI_DEFAULT=ABI_N32"
++	tm_defines="${tm_defines} MIPS_ABI_DEFAULT=ABI_64"
+ 	case ${target} in
+ 		mips64el-st-linux-gnu)
+ 			tm_file="${tm_file} mips/st.h"
+Index: gcc-4_6-branch/gcc/config/mips/linux64.h
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/mips/linux64.h	2012-04-22 19:10:59.743057711 -0700
++++ gcc-4_6-branch/gcc/config/mips/linux64.h	2012-04-22 19:11:56.919060479 -0700
+@@ -26,7 +26,7 @@
+   BASE_DRIVER_SELF_SPECS, \
+   LINUX_DRIVER_SELF_SPECS \
+   " %{!EB:%{!EL:%(endian_spec)}}" \
+-  " %{!mabi=*: -mabi=n32}"
++  " %{!mabi=*: -mabi=64}"
+ 
+ #undef LIB_SPEC
+ #define LIB_SPEC "\

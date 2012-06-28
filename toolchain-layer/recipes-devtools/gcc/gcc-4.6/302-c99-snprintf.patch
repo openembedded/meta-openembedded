@@ -1,0 +1,15 @@
+Upstream-Status: Pending
+
+Index: gcc-4.6.0/libstdc++-v3/include/c_std/cstdio
+===================================================================
+--- gcc-4.6.0.orig/libstdc++-v3/include/c_std/cstdio
++++ gcc-4.6.0/libstdc++-v3/include/c_std/cstdio
+@@ -136,7 +136,7 @@ namespace std
+   using ::vsprintf;
+ } // namespace std
+ 
+-#if _GLIBCXX_USE_C99
++#if _GLIBCXX_USE_C99 || defined(__UCLIBC__)
+ 
+ #undef snprintf
+ #undef vfscanf

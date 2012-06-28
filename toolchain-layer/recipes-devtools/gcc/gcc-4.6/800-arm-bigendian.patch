@@ -1,0 +1,36 @@
+Upstream-Status: Pending
+
+By Lennert Buytenhek <buytenh@wantstofly.org>
+Adds support for arm*b-linux* big-endian ARM targets
+
+See http://gcc.gnu.org/PR16350
+
+Index: gcc-4.6.0/gcc/config/arm/linux-elf.h
+===================================================================
+--- gcc-4.6.0.orig/gcc/config/arm/linux-elf.h
++++ gcc-4.6.0/gcc/config/arm/linux-elf.h
+@@ -51,7 +51,7 @@
+ 
+ #undef  MULTILIB_DEFAULTS
+ #define MULTILIB_DEFAULTS \
+-	{ "marm", "mlittle-endian", "mhard-float", "mno-thumb-interwork" }
++	{ "marm", TARGET_ENDIAN_OPTION, "mhard-float", "mno-thumb-interwork" }
+ 
+ /* Now we define the strings used to build the spec file.  */
+ #undef  LIB_SPEC
+Index: gcc-4.6.0/gcc/config.gcc
+===================================================================
+--- gcc-4.6.0.orig/gcc/config.gcc
++++ gcc-4.6.0/gcc/config.gcc
+@@ -822,6 +822,11 @@ arm*-*-linux*)			# ARM GNU/Linux with EL
+ 	esac
+ 	tmake_file="${tmake_file} t-linux arm/t-arm"
+ 	case ${target} in
++	arm*b-*)
++		tm_defines="${tm_defines} TARGET_BIG_ENDIAN_DEFAULT=1"
++		;;
++	esac
++	case ${target} in
+ 	arm*-*-linux-*eabi)
+ 	    tm_file="$tm_file arm/bpabi.h arm/linux-eabi.h"
+ 	    tm_file="$tm_file ../../libgcc/config/arm/bpabi-lib.h"

@@ -1,0 +1,30 @@
+Upstream-Status: Inappropriate [embedded specific]
+
+upstream: n/a
+comment: Use the preprocessor we have just compiled instead the one of
+the system. There might be incompabilities between us and them.
+
+Index: gcc-4.6.0/Makefile.in
+===================================================================
+--- gcc-4.6.0.orig/Makefile.in
++++ gcc-4.6.0/Makefile.in
+@@ -270,6 +270,7 @@ BASE_TARGET_EXPORTS = \
+ 	AR="$(AR_FOR_TARGET)"; export AR; \
+ 	AS="$(COMPILER_AS_FOR_TARGET)"; export AS; \
+ 	CC="$(CC_FOR_TARGET) $(XGCC_FLAGS_FOR_TARGET) $$TFLAGS"; export CC; \
++	CPP="$(CC_FOR_TARGET) -E"; export CPP; \
+ 	CFLAGS="$(CFLAGS_FOR_TARGET)"; export CFLAGS; \
+ 	CONFIG_SHELL="$(SHELL)"; export CONFIG_SHELL; \
+ 	CPPFLAGS="$(CPPFLAGS_FOR_TARGET)"; export CPPFLAGS; \
+Index: gcc-4.6.0/Makefile.tpl
+===================================================================
+--- gcc-4.6.0.orig/Makefile.tpl
++++ gcc-4.6.0/Makefile.tpl
+@@ -273,6 +273,7 @@ BASE_TARGET_EXPORTS = \
+ 	AR="$(AR_FOR_TARGET)"; export AR; \
+ 	AS="$(COMPILER_AS_FOR_TARGET)"; export AS; \
+ 	CC="$(CC_FOR_TARGET) $(XGCC_FLAGS_FOR_TARGET) $$TFLAGS"; export CC; \
++	CPP="$(CC_FOR_TARGET) -E"; export CPP; \
+ 	CFLAGS="$(CFLAGS_FOR_TARGET)"; export CFLAGS; \
+ 	CONFIG_SHELL="$(SHELL)"; export CONFIG_SHELL; \
+ 	CPPFLAGS="$(CPPFLAGS_FOR_TARGET)"; export CPPFLAGS; \

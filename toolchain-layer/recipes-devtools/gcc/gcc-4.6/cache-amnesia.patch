@@ -1,0 +1,33 @@
+Upstream-Status: Inappropriate [embedded specific]
+
+---
+ gcc/configure    |    2 +-
+ gcc/configure.ac |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+Index: gcc-4.6.0/gcc/configure
+===================================================================
+--- gcc-4.6.0.orig/gcc/configure
++++ gcc-4.6.0/gcc/configure
+@@ -10898,7 +10898,7 @@ else
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+ 	LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+-	${realsrcdir}/configure \
++	CONFIG_SITE= ${realsrcdir}/configure --cache-file=./other.cache \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
+ 	CFLAGS="${saved_CFLAGS}"
+Index: gcc-4.6.0/gcc/configure.ac
+===================================================================
+--- gcc-4.6.0.orig/gcc/configure.ac
++++ gcc-4.6.0/gcc/configure.ac
+@@ -1435,7 +1435,7 @@ else
+ 	saved_CFLAGS="${CFLAGS}"
+ 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
+ 	LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+-	${realsrcdir}/configure \
++	CONFIG_SITE= ${realsrcdir}/configure --cache-file=./other.cache \
+ 		--enable-languages=${enable_languages-all} \
+ 		--target=$target_alias --host=$build_alias --build=$build_alias
+ 	CFLAGS="${saved_CFLAGS}"

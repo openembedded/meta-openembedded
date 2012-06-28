@@ -1,0 +1,186 @@
+source: http://patchwork.ozlabs.org/patch/129800/
+Upstream-Status: Submitted
+
+ChangeLog
+        * Makefile.in (gcc_gxx_include_dir_add_sysroot): New.
+          (PREPROCESSOR_DEFINES): Define GPLUSPLUS_INCLUDE_DIR_ADD_SYSROOT.
+
+        * cppdefault.c (cpp_include_defaults): replace hard coded "1" with
+          GPLUSPLUS_INCLUDE_DIR_ADD_SYSROOT for "add_sysroot" field.
+
+        * configure.ac (AC_SUBST): Add gcc_gxx_include_dir_add_sysroot to
+          control whether sysroot should be prepended to gxx include dir.
+
+        * configure: Regenerate.
+
+Hi, this is a follow up for issue "http://codereview.appspot.com/4641076".
+
+The rationale for the patch copied from previous thread:
+=======================================
+The setup:
+
+Configuring a toolchain targeting x86-64 GNU Linux (Ubuntu Lucid), as a
+cross-compiler.  Using a sysroot to provide the Lucid headers+libraries,
+with the sysroot path being within the GCC install tree.  Want to use the
+Lucid system libstdc++ and headers, which means that I'm not
+building/installing libstdc++-v3.
+
+So, configuring with:
+  --with-sysroot="$SYSROOT"
+  --disable-libstdc++-v3 \
+  --with-gxx-include-dir="$SYSROOT/usr/include/c++/4.4" \
+(among other options).
+
+Hoping to support two usage models with this configuration, w.r.t. use of
+the sysroot:
+
+(1) somebody installs the sysroot in the normal location relative to the
+GCC install, and relocates the whole bundle (sysroot+GCC).  This works
+great AFAICT, GCC finds its includes (including the C++ includes) thanks
+to the add_standard_paths iprefix handling.
+
+(2) somebody installs the sysroot in a non-standard location, and uses
+--sysroot to try to access it.  This works fine for the C headers, but
+doesn't work.
+
+For the C headers, add_standard_paths prepends the sysroot location to
+the /usr/include path (since that's what's specified in cppdefault.c for
+that path).  It doesn't do the same for the C++ include path, though
+(again, as specified in cppdefault.c).
+
+add_standard_paths doesn't attempt to relocate built-in include paths that
+start with the compiled-in sysroot location (e.g., the g++ include dir, in
+this case).  This isn't surprising really: normally you either prepend the
+sysroot location or you don't (as specified by cppdefault.c); none of the
+built-in paths normally *start* with the sysroot location and need to be
+relocated.  However, in this odd-ball case of trying to use the C++ headers
+from the sysroot, one of the paths *does* need to be relocated in this way.
+===========================
+Index: gcc-4_6-branch/gcc/Makefile.in
+===================================================================
+--- gcc-4_6-branch.orig/gcc/Makefile.in	2012-03-04 09:33:36.000000000 -0800
++++ gcc-4_6-branch/gcc/Makefile.in	2012-03-04 09:41:06.858672113 -0800
+@@ -587,6 +587,7 @@
+ build_tooldir = $(exec_prefix)/$(target_noncanonical)
+ # Directory in which the compiler finds target-independent g++ includes.
+ gcc_gxx_include_dir = @gcc_gxx_include_dir@
++gcc_gxx_include_dir_add_sysroot = @gcc_gxx_include_dir_add_sysroot@
+ # Directory to search for site-specific includes.
+ local_includedir = $(local_prefix)/include
+ includedir = $(prefix)/include
+@@ -3964,6 +3965,7 @@
+   -DGCC_INCLUDE_DIR=\"$(libsubdir)/include\" \
+   -DFIXED_INCLUDE_DIR=\"$(libsubdir)/include-fixed\" \
+   -DGPLUSPLUS_INCLUDE_DIR=\"$(gcc_gxx_include_dir)\" \
++  -DGPLUSPLUS_INCLUDE_DIR_ADD_SYSROOT=$(gcc_gxx_include_dir_add_sysroot) \
+   -DGPLUSPLUS_TOOL_INCLUDE_DIR=\"$(gcc_gxx_include_dir)/$(target_noncanonical)\" \
+   -DGPLUSPLUS_BACKWARD_INCLUDE_DIR=\"$(gcc_gxx_include_dir)/backward\" \
+   -DLOCAL_INCLUDE_DIR=\"$(local_includedir)\" \
+Index: gcc-4_6-branch/gcc/configure.ac
+===================================================================
+--- gcc-4_6-branch.orig/gcc/configure.ac	2012-03-04 09:33:36.000000000 -0800
++++ gcc-4_6-branch/gcc/configure.ac	2012-03-04 09:41:06.862671939 -0800
+@@ -144,6 +144,15 @@
+   fi
+ fi
+ 
++gcc_gxx_include_dir_add_sysroot=0
++if test "${with_sysroot+set}" = set; then :
++  gcc_gxx_without_sysroot=`expr "${gcc_gxx_include_dir}" : "${with_sysroot}"'\(.*\)'`
++  if test "${gcc_gxx_without_sysroot}"; then :
++    gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
++    gcc_gxx_include_dir_add_sysroot=1
++  fi
++fi
++
+ AC_ARG_WITH(cpp_install_dir,
+ [  --with-cpp-install-dir=DIR
+                           install the user visible C preprocessor in DIR
+@@ -4727,6 +4736,7 @@
+ AC_SUBST(float_h_file)
+ AC_SUBST(gcc_config_arguments)
+ AC_SUBST(gcc_gxx_include_dir)
++AC_SUBST(gcc_gxx_include_dir_add_sysroot)
+ AC_SUBST(host_exeext)
+ AC_SUBST(host_xm_file_list)
+ AC_SUBST(host_xm_include_list)
+Index: gcc-4_6-branch/gcc/cppdefault.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/cppdefault.c	2012-03-03 01:03:17.000000000 -0800
++++ gcc-4_6-branch/gcc/cppdefault.c	2012-03-04 09:41:06.862671939 -0800
+@@ -48,15 +48,18 @@
+ = {
+ #ifdef GPLUSPLUS_INCLUDE_DIR
+     /* Pick up GNU C++ generic include files.  */
+-    { GPLUSPLUS_INCLUDE_DIR, "G++", 1, 1, 0, 0 },
++    { GPLUSPLUS_INCLUDE_DIR, "G++", 1, 1,
++      GPLUSPLUS_INCLUDE_DIR_ADD_SYSROOT, 0 },
+ #endif
+ #ifdef GPLUSPLUS_TOOL_INCLUDE_DIR
+     /* Pick up GNU C++ target-dependent include files.  */
+-    { GPLUSPLUS_TOOL_INCLUDE_DIR, "G++", 1, 1, 0, 1 },
++    { GPLUSPLUS_TOOL_INCLUDE_DIR, "G++", 1, 1,
++      GPLUSPLUS_INCLUDE_DIR_ADD_SYSROOT, 1 },
+ #endif
+ #ifdef GPLUSPLUS_BACKWARD_INCLUDE_DIR
+     /* Pick up GNU C++ backward and deprecated include files.  */
+-    { GPLUSPLUS_BACKWARD_INCLUDE_DIR, "G++", 1, 1, 0, 0 },
++    { GPLUSPLUS_BACKWARD_INCLUDE_DIR, "G++", 1, 1,
++      GPLUSPLUS_INCLUDE_DIR_ADD_SYSROOT, 0 },
+ #endif
+ #ifdef GCC_INCLUDE_DIR
+     /* This is the dir for gcc's private headers.  */
+Index: gcc-4_6-branch/gcc/configure
+===================================================================
+--- gcc-4_6-branch.orig/gcc/configure	2012-03-04 09:33:36.000000000 -0800
++++ gcc-4_6-branch/gcc/configure	2012-03-04 09:41:12.462671816 -0800
+@@ -636,6 +636,7 @@
+ host_xm_include_list
+ host_xm_file_list
+ host_exeext
++gcc_gxx_include_dir_add_sysroot
+ gcc_gxx_include_dir
+ gcc_config_arguments
+ float_h_file
+@@ -3313,6 +3314,15 @@
+   fi
+ fi
+ 
++gcc_gxx_include_dir_add_sysroot=0
++if test "${with_sysroot+set}" = set; then :
++  gcc_gxx_without_sysroot=`expr "${gcc_gxx_include_dir}" : "${with_sysroot}"'\(.*\)'`
++  if test "${gcc_gxx_without_sysroot}"; then :
++    gcc_gxx_include_dir="${gcc_gxx_without_sysroot}"
++    gcc_gxx_include_dir_add_sysroot=1
++  fi
++fi
++
+ 
+ # Check whether --with-cpp_install_dir was given.
+ if test "${with_cpp_install_dir+set}" = set; then :
+@@ -17504,7 +17514,7 @@
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17507 "configure"
++#line 17517 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -17610,7 +17620,7 @@
+   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
+   lt_status=$lt_dlunknown
+   cat > conftest.$ac_ext <<_LT_EOF
+-#line 17613 "configure"
++#line 17623 "configure"
+ #include "confdefs.h"
+ 
+ #if HAVE_DLFCN_H
+@@ -26141,6 +26151,7 @@
+ 
+ 
+ 
++
+ 
+ 
+ 

@@ -1,0 +1,16 @@
+Upstream-Status: Inappropriate [embedded specific]
+
+Index: gcc-4.6.0/libstdc++-v3/configure
+===================================================================
+--- gcc-4.6.0.orig/libstdc++-v3/configure
++++ gcc-4.6.0/libstdc++-v3/configure
+@@ -18302,6 +18302,9 @@ $as_echo_n "checking for ISO C99 support
+     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #include <complex.h>
++#ifdef __UCLIBC__
++#error ugly hack to make sure configure test fails here for cross until uClibc supports the complex funcs
++#endif
+ int
+ main ()
+ {

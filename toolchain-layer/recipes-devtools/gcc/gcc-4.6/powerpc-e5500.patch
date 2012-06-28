@@ -1,0 +1,465 @@
+Upstream-Status: Pending
+
+Implements basic e5500 enablement in gcc, with a scheduler, -mcpu
+flag, etc...
+
+Also splits the masks for popcntb, popcntd, and cmpb. Originally those
+masks would also control other instructions that e5500 does not
+support (so, we either get none or all).
+
+For the lack of means to do tests, those instructions were never
+enabled until now. The new instructions enabled with this patch are:
+popcntb, popcntw, popcntd, bpermd, prtyw, prtyd, cmpb, ldbrx, and
+stdbrx.
+
+Signed-off-by: Edmar Wienskoski <edmar@freescale.com>
+Signed-off-by: Kumar Gala <galak@kernel.crashing.org>
+
+Index: gcc-4_6-branch/gcc/config.gcc
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config.gcc
++++ gcc-4_6-branch/gcc/config.gcc
+@@ -395,7 +395,7 @@ powerpc*-*-*)
+ 	extra_headers="ppc-asm.h altivec.h spe.h ppu_intrinsics.h paired.h spu2vmx.h vec_types.h si2vmx.h"
+ 	need_64bit_hwint=yes
+ 	case x$with_cpu in
+-	    xpowerpc64|xdefault64|x6[23]0|x970|xG5|xpower[34567]|xpower6x|xrs64a|xcell|xa2|xe500mc64)
++	    xpowerpc64|xdefault64|x6[23]0|x970|xG5|xpower[34567]|xpower6x|xrs64a|xcell|xa2|xe500mc64|xe5500)
+ 		cpu_is_64bit=yes
+ 		;;
+ 	esac
+@@ -3493,7 +3493,7 @@ case "${target}" in
+ 			| 401 | 403 | 405 | 405fp | 440 | 440fp | 464 | 464fp \
+ 			| 476 | 476fp | 505 | 601 | 602 | 603 | 603e | ec603e \
+ 			| 604 | 604e | 620 | 630 | 740 | 750 | 7400 | 7450 \
+-			| a2 | e300c[23] | 854[08] | e500mc | e500mc64 | titan\
++			| a2 | e300c[23] | 854[08] | e500mc | e500mc64 | e5500 | titan\
+ 			| 801 | 821 | 823 | 860 | 970 | G3 | G4 | G5 | cell)
+ 				# OK
+ 				;;
+Index: gcc-4_6-branch/gcc/config/rs6000/e5500.md
+===================================================================
+--- /dev/null
++++ gcc-4_6-branch/gcc/config/rs6000/e5500.md
+@@ -0,0 +1,176 @@
++;; Pipeline description for Freescale PowerPC e5500 core.
++;;   Copyright (C) 2011 Free Software Foundation, Inc.
++;;   Contributed by Edmar Wienskoski (edmar@freescale.com)
++;;
++;; This file is part of GCC.
++;;
++;; GCC is free software; you can redistribute it and/or modify it
++;; under the terms of the GNU General Public License as published
++;; by the Free Software Foundation; either version 3, or (at your
++;; option) any later version.
++;;
++;; GCC is distributed in the hope that it will be useful, but WITHOUT
++;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
++;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
++;; License for more details.
++;;
++;; You should have received a copy of the GNU General Public License
++;; along with GCC; see the file COPYING3.  If not see
++;; <http://www.gnu.org/licenses/>.
++;;
++;; e5500 64-bit SFX(2), CFX, LSU, FPU, BU
++;; Max issue 3 insns/clock cycle (includes 1 branch)
++
++(define_automaton "e5500_most,e5500_long")
++(define_cpu_unit "e5500_decode_0,e5500_decode_1" "e5500_most")
++
++;; SFX.
++(define_cpu_unit "e5500_sfx_0,e5500_sfx_1" "e5500_most")
++
++;; CFX.
++(define_cpu_unit "e5500_cfx_stage0,e5500_cfx_stage1" "e5500_most")
++
++;; Non-pipelined division.
++(define_cpu_unit "e5500_cfx_div" "e5500_long")
++
++;; LSU.
++(define_cpu_unit "e5500_lsu" "e5500_most")
++
++;; FPU.
++(define_cpu_unit "e5500_fpu" "e5500_long")
++
++;; BU.
++(define_cpu_unit "e5500_bu" "e5500_most")
++
++;; The following units are used to make the automata deterministic.
++(define_cpu_unit "present_e5500_decode_0" "e5500_most")
++(define_cpu_unit "present_e5500_sfx_0" "e5500_most")
++(presence_set "present_e5500_decode_0" "e5500_decode_0")
++(presence_set "present_e5500_sfx_0" "e5500_sfx_0")
++
++;; Some useful abbreviations.
++(define_reservation "e5500_decode"
++    "e5500_decode_0|e5500_decode_1+present_e5500_decode_0")
++(define_reservation "e5500_sfx"
++   "e5500_sfx_0|e5500_sfx_1+present_e5500_sfx_0")
++
++;; SFX.
++(define_insn_reservation "e5500_sfx" 1
++  (and (eq_attr "type" "integer,insert_word,insert_dword,delayed_compare,\
++	shift,cntlz,exts")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_sfx")
++
++(define_insn_reservation "e5500_sfx2" 2
++  (and (eq_attr "type" "cmp,compare,fast_compare,trap")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_sfx")
++
++(define_insn_reservation "e5500_delayed" 2
++  (and (eq_attr "type" "var_shift_rotate,var_delayed_compare,popcnt")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_sfx*2")
++
++(define_insn_reservation "e5500_two" 2
++  (and (eq_attr "type" "two")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_decode+e5500_sfx,e5500_sfx")
++
++(define_insn_reservation "e5500_three" 3
++  (and (eq_attr "type" "three")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,(e5500_decode+e5500_sfx)*2,e5500_sfx")
++
++;; SFX - Mfcr.
++(define_insn_reservation "e5500_mfcr" 4
++  (and (eq_attr "type" "mfcr")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_sfx_0*4")
++
++;; SFX - Mtcrf.
++(define_insn_reservation "e5500_mtcrf" 1
++  (and (eq_attr "type" "mtcr")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_sfx_0")
++
++;; SFX - Mtjmpr.
++(define_insn_reservation "e5500_mtjmpr" 1
++  (and (eq_attr "type" "mtjmpr,mfjmpr")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_sfx")
++
++;; CFX - Multiply.
++(define_insn_reservation "e5500_multiply" 4
++  (and (eq_attr "type" "imul")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_cfx_stage0,e5500_cfx_stage1")
++
++(define_insn_reservation "e5500_multiply_i" 5
++  (and (eq_attr "type" "imul2,imul3,imul_compare")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_cfx_stage0,\
++   e5500_cfx_stage0+e5500_cfx_stage1,e5500_cfx_stage1")
++
++;; CFX - Divide.
++(define_insn_reservation "e5500_divide" 16
++  (and (eq_attr "type" "idiv")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_cfx_stage0+e5500_cfx_div,\
++   e5500_cfx_div*15")
++
++(define_insn_reservation "e5500_divide_d" 26
++  (and (eq_attr "type" "ldiv")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_cfx_stage0+e5500_cfx_div,\
++   e5500_cfx_div*25")
++
++;; LSU - Loads.
++(define_insn_reservation "e5500_load" 3
++  (and (eq_attr "type" "load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,\
++			load_l,sync")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_lsu")
++
++(define_insn_reservation "e5500_fpload" 4
++  (and (eq_attr "type" "fpload,fpload_ux,fpload_u")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_lsu")
++
++;; LSU - Stores.
++(define_insn_reservation "e5500_store" 3
++  (and (eq_attr "type" "store,store_ux,store_u,store_c")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_lsu")
++
++(define_insn_reservation "e5500_fpstore" 3
++  (and (eq_attr "type" "fpstore,fpstore_ux,fpstore_u")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_lsu")
++
++;; FP.
++(define_insn_reservation "e5500_float" 7
++  (and (eq_attr "type" "fpsimple,fp,fpcompare,dmul")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_fpu")
++
++(define_insn_reservation "e5500_sdiv" 20
++  (and (eq_attr "type" "sdiv")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_fpu*20")
++
++(define_insn_reservation "e5500_ddiv" 35
++  (and (eq_attr "type" "ddiv")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_fpu*35")
++
++;; BU.
++(define_insn_reservation "e5500_branch" 1
++  (and (eq_attr "type" "jmpreg,branch,isync")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_bu")
++
++;; BU - CR logical.
++(define_insn_reservation "e5500_cr_logical" 1
++  (and (eq_attr "type" "cr_logical,delayed_cr")
++       (eq_attr "cpu" "ppce5500"))
++  "e5500_decode,e5500_bu")
+Index: gcc-4_6-branch/gcc/config/rs6000/rs6000-opts.h
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/rs6000/rs6000-opts.h
++++ gcc-4_6-branch/gcc/config/rs6000/rs6000-opts.h
+@@ -53,6 +53,7 @@ enum processor_type
+    PROCESSOR_PPCE300C3,
+    PROCESSOR_PPCE500MC,
+    PROCESSOR_PPCE500MC64,
++   PROCESSOR_PPCE5500,
+    PROCESSOR_POWER4,
+    PROCESSOR_POWER5,
+    PROCESSOR_POWER6,
+Index: gcc-4_6-branch/gcc/config/rs6000/rs6000.c
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/rs6000/rs6000.c
++++ gcc-4_6-branch/gcc/config/rs6000/rs6000.c
+@@ -779,6 +779,25 @@ struct processor_costs ppce500mc64_cost 
+   1,			/* prefetch streams /*/
+ };
+ 
++/* Instruction costs on PPCE5500 processors.  */
++static const
++struct processor_costs ppce5500_cost = {
++  COSTS_N_INSNS (5),    /* mulsi */
++  COSTS_N_INSNS (5),    /* mulsi_const */
++  COSTS_N_INSNS (5),    /* mulsi_const9 */
++  COSTS_N_INSNS (5),    /* muldi */
++  COSTS_N_INSNS (14),   /* divsi */
++  COSTS_N_INSNS (14),   /* divdi */
++  COSTS_N_INSNS (7),    /* fp */
++  COSTS_N_INSNS (10),   /* dmul */
++  COSTS_N_INSNS (36),   /* sdiv */
++  COSTS_N_INSNS (66),   /* ddiv */
++  64,			/* cache line size */
++  32,			/* l1 cache */
++  128,			/* l2 cache */
++  1,			/* prefetch streams /*/
++};
++
+ /* Instruction costs on AppliedMicro Titan processors.  */
+ static const
+ struct processor_costs titan_cost = {
+@@ -1784,6 +1803,9 @@ static struct rs6000_ptt const processor
+    | MASK_ISEL},
+   {"e500mc64", PROCESSOR_PPCE500MC64, POWERPC_BASE_MASK | MASK_POWERPC64
+    | MASK_PPC_GFXOPT | MASK_ISEL},
++  {"e5500", PROCESSOR_PPCE5500, POWERPC_BASE_MASK | MASK_POWERPC64
++   | MASK_PPC_GFXOPT | MASK_ISEL | MASK_CMPB | MASK_POPCNTB
++   | MASK_POPCNTD},
+   {"860", PROCESSOR_MPCCORE, POWERPC_BASE_MASK | MASK_SOFT_FLOAT},
+   {"970", PROCESSOR_POWER4,
+    POWERPC_7400_MASK | MASK_PPC_GPOPT | MASK_MFCRF | MASK_POWERPC64},
+@@ -2741,7 +2763,8 @@ rs6000_option_override_internal (bool gl
+ 		   : PROCESSOR_DEFAULT));
+ 
+   if (rs6000_cpu == PROCESSOR_PPCE300C2 || rs6000_cpu == PROCESSOR_PPCE300C3
+-      || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64)
++      || rs6000_cpu == PROCESSOR_PPCE500MC || rs6000_cpu == PROCESSOR_PPCE500MC64
++      || rs6000_cpu == PROCESSOR_PPCE5500)
+     {
+       if (TARGET_ALTIVEC)
+ 	error ("AltiVec not supported in this target");
+@@ -2842,9 +2865,14 @@ rs6000_option_override_internal (bool gl
+      user's opinion, though.  */
+   if (rs6000_block_move_inline_limit == 0
+       && (rs6000_cpu == PROCESSOR_PPCE500MC
+-	  || rs6000_cpu == PROCESSOR_PPCE500MC64))
++	  || rs6000_cpu == PROCESSOR_PPCE500MC64
++	  || rs6000_cpu == PROCESSOR_PPCE5500))
+     rs6000_block_move_inline_limit = 128;
+ 
++  /* Those machines does not have fsqrt instruction */
++  if (rs6000_cpu == PROCESSOR_PPCE5500)
++    target_flags &= ~MASK_PPC_GPOPT;
++
+   /* store_one_arg depends on expand_block_move to handle at least the
+      size of reg_parm_stack_space.  */
+   if (rs6000_block_move_inline_limit < (TARGET_POWERPC64 ? 64 : 32))
+@@ -2976,7 +3004,8 @@ rs6000_option_override_internal (bool gl
+ #endif
+ 
+   if (TARGET_E500 || rs6000_cpu == PROCESSOR_PPCE500MC
+-      || rs6000_cpu == PROCESSOR_PPCE500MC64)
++      || rs6000_cpu == PROCESSOR_PPCE500MC64
++      || rs6000_cpu == PROCESSOR_PPCE5500)
+     {
+       /* The e500 and e500mc do not have string instructions, and we set
+ 	 MASK_STRING above when optimizing for size.  */
+@@ -3023,7 +3052,8 @@ rs6000_option_override_internal (bool gl
+ 				 || rs6000_cpu == PROCESSOR_POWER6
+ 				 || rs6000_cpu == PROCESSOR_POWER7
+ 				 || rs6000_cpu == PROCESSOR_PPCE500MC
+-				 || rs6000_cpu == PROCESSOR_PPCE500MC64);
++				 || rs6000_cpu == PROCESSOR_PPCE500MC64
++				 || rs6000_cpu == PROCESSOR_PPCE5500);
+ 
+   /* Allow debug switches to override the above settings.  These are set to -1
+      in rs6000.opt to indicate the user hasn't directly set the switch.  */
+@@ -3245,6 +3275,10 @@ rs6000_option_override_internal (bool gl
+ 	rs6000_cost = &ppce500mc64_cost;
+ 	break;
+ 
++      case PROCESSOR_PPCE5500:
++	rs6000_cost = &ppce5500_cost;
++	break;
++
+       case PROCESSOR_TITAN:
+ 	rs6000_cost = &titan_cost;
+ 	break;
+@@ -23227,6 +23261,7 @@ rs6000_adjust_cost (rtx insn, rtx link, 
+                  || rs6000_cpu_attr == CPU_PPC750
+                  || rs6000_cpu_attr == CPU_PPC7400
+                  || rs6000_cpu_attr == CPU_PPC7450
++                 || rs6000_cpu_attr == CPU_PPCE5500
+                  || rs6000_cpu_attr == CPU_POWER4
+                  || rs6000_cpu_attr == CPU_POWER5
+ 		 || rs6000_cpu_attr == CPU_POWER7
+@@ -23771,6 +23806,7 @@ rs6000_issue_rate (void)
+   case CPU_PPCE300C3:
+   case CPU_PPCE500MC:
+   case CPU_PPCE500MC64:
++  case CPU_PPCE5500:
+   case CPU_TITAN:
+     return 2;
+   case CPU_RIOS2:
+Index: gcc-4_6-branch/gcc/config/rs6000/rs6000.h
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/rs6000/rs6000.h
++++ gcc-4_6-branch/gcc/config/rs6000/rs6000.h
+@@ -168,6 +168,7 @@
+ %{mcpu=e300c3: -me300} \
+ %{mcpu=e500mc: -me500mc} \
+ %{mcpu=e500mc64: -me500mc64} \
++%{mcpu=e5500: -me5500} \
+ %{maltivec: -maltivec} \
+ %{mvsx: -mvsx %{!maltivec: -maltivec} %{!mcpu*: %(asm_cpu_power7)}} \
+ -many"
+@@ -477,13 +478,13 @@ extern int rs6000_vector_align[];
+ 
+ #define TARGET_FCTIDZ	TARGET_FCFID
+ #define TARGET_STFIWX	TARGET_PPC_GFXOPT
+-#define TARGET_LFIWAX	TARGET_CMPB
+-#define TARGET_LFIWZX	TARGET_POPCNTD
+-#define TARGET_FCFIDS	TARGET_POPCNTD
+-#define TARGET_FCFIDU	TARGET_POPCNTD
+-#define TARGET_FCFIDUS	TARGET_POPCNTD
+-#define TARGET_FCTIDUZ	TARGET_POPCNTD
+-#define TARGET_FCTIWUZ	TARGET_POPCNTD
++#define TARGET_LFIWAX	(TARGET_CMPB && rs6000_cpu != PROCESSOR_PPCE5500)
++#define TARGET_LFIWZX	(TARGET_POPCNTD && rs6000_cpu != PROCESSOR_PPCE5500)
++#define TARGET_FCFIDS	TARGET_LFIWZX
++#define TARGET_FCFIDU	TARGET_LFIWZX
++#define TARGET_FCFIDUS	TARGET_LFIWZX
++#define TARGET_FCTIDUZ	TARGET_LFIWZX
++#define TARGET_FCTIWUZ	TARGET_LFIWZX
+ 
+ /* E500 processors only support plain "sync", not lwsync.  */
+ #define TARGET_NO_LWSYNC TARGET_E500
+@@ -494,10 +495,12 @@ extern int rs6000_vector_align[];
+ 
+ #define TARGET_FRE	(TARGET_HARD_FLOAT && TARGET_FPRS \
+ 			 && TARGET_DOUBLE_FLOAT \
+-			 && (TARGET_POPCNTB || VECTOR_UNIT_VSX_P (DFmode)))
++			 && (TARGET_POPCNTB || VECTOR_UNIT_VSX_P (DFmode)) \
++			 && rs6000_cpu != PROCESSOR_PPCE5500)
+ 
+ #define TARGET_FRSQRTES	(TARGET_HARD_FLOAT && TARGET_POPCNTB \
+-			 && TARGET_FPRS && TARGET_SINGLE_FLOAT)
++			 && TARGET_FPRS && TARGET_SINGLE_FLOAT \
++			 && rs6000_cpu != PROCESSOR_PPCE5500)
+ 
+ #define TARGET_FRSQRTE	(TARGET_HARD_FLOAT && TARGET_FPRS \
+ 			 && TARGET_DOUBLE_FLOAT \
+Index: gcc-4_6-branch/gcc/config/rs6000/rs6000.md
+===================================================================
+--- gcc-4_6-branch.orig/gcc/config/rs6000/rs6000.md
++++ gcc-4_6-branch/gcc/config/rs6000/rs6000.md
+@@ -126,7 +126,7 @@
+ 
+ ;; Define an insn type attribute.  This is used in function unit delay
+ ;; computations.
+-(define_attr "type" "integer,two,three,load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,store,store_ux,store_u,fpload,fpload_ux,fpload_u,fpstore,fpstore_ux,fpstore_u,vecload,vecstore,imul,imul2,imul3,lmul,idiv,ldiv,insert_word,branch,cmp,fast_compare,compare,var_delayed_compare,delayed_compare,imul_compare,lmul_compare,fpcompare,cr_logical,delayed_cr,mfcr,mfcrf,mtcr,mfjmpr,mtjmpr,fp,fpsimple,dmul,sdiv,ddiv,ssqrt,dsqrt,jmpreg,brinc,vecsimple,veccomplex,vecdiv,veccmp,veccmpsimple,vecperm,vecfloat,vecfdiv,isync,sync,load_l,store_c,shift,trap,insert_dword,var_shift_rotate,cntlz,exts,mffgpr,mftgpr,isel"
++(define_attr "type" "integer,two,three,load,load_ext,load_ext_u,load_ext_ux,load_ux,load_u,store,store_ux,store_u,fpload,fpload_ux,fpload_u,fpstore,fpstore_ux,fpstore_u,vecload,vecstore,imul,imul2,imul3,lmul,idiv,ldiv,insert_word,branch,cmp,fast_compare,compare,var_delayed_compare,delayed_compare,imul_compare,lmul_compare,fpcompare,cr_logical,delayed_cr,mfcr,mfcrf,mtcr,mfjmpr,mtjmpr,fp,fpsimple,dmul,sdiv,ddiv,ssqrt,dsqrt,jmpreg,brinc,vecsimple,veccomplex,vecdiv,veccmp,veccmpsimple,vecperm,vecfloat,vecfdiv,isync,sync,load_l,store_c,shift,trap,insert_dword,var_shift_rotate,cntlz,exts,mffgpr,mftgpr,isel,popcnt"
+   (const_string "integer"))
+ 
+ ;; Define floating point instruction sub-types for use with Xfpu.md
+@@ -148,7 +148,7 @@
+ ;; Processor type -- this attribute must exactly match the processor_type
+ ;; enumeration in rs6000.h.
+ 
+-(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,power4,power5,power6,power7,cell,ppca2,titan"
++(define_attr "cpu" "rios1,rios2,rs64a,mpccore,ppc403,ppc405,ppc440,ppc476,ppc601,ppc603,ppc604,ppc604e,ppc620,ppc630,ppc750,ppc7400,ppc7450,ppc8540,ppce300c2,ppce300c3,ppce500mc,ppce500mc64,ppce5500,power4,power5,power6,power7,cell,ppca2,titan"
+   (const (symbol_ref "rs6000_cpu_attr")))
+ 
+ 
+@@ -176,6 +176,7 @@
+ (include "e300c2c3.md")
+ (include "e500mc.md")
+ (include "e500mc64.md")
++(include "e5500.md")
+ (include "power4.md")
+ (include "power5.md")
+ (include "power6.md")
+@@ -2302,13 +2303,17 @@
+         (unspec:GPR [(match_operand:GPR 1 "gpc_reg_operand" "r")]
+                      UNSPEC_POPCNTB))]
+   "TARGET_POPCNTB"
+-  "popcntb %0,%1")
++  "popcntb %0,%1"
++  [(set_attr "length" "4")
++   (set_attr "type" "popcnt")])
+ 
+ (define_insn "popcntd<mode>2"
+   [(set (match_operand:GPR 0 "gpc_reg_operand" "=r")
+ 	(popcount:GPR (match_operand:GPR 1 "gpc_reg_operand" "r")))]
+   "TARGET_POPCNTD"
+-  "popcnt<wd> %0,%1")
++  "popcnt<wd> %0,%1"
++  [(set_attr "length" "4")
++   (set_attr "type" "popcnt")])
+ 
+ (define_expand "popcount<mode>2"
+   [(set (match_operand:GPR 0 "gpc_reg_operand" "")
+@@ -5957,10 +5962,10 @@
+    && ((TARGET_PPC_GFXOPT
+         && !HONOR_NANS (<MODE>mode)
+         && !HONOR_SIGNED_ZEROS (<MODE>mode))
+-       || TARGET_CMPB
++       || TARGET_LFIWAX
+        || VECTOR_UNIT_VSX_P (<MODE>mode))"
+ {
+-  if (TARGET_CMPB || VECTOR_UNIT_VSX_P (<MODE>mode))
++  if (TARGET_LFIWAX || VECTOR_UNIT_VSX_P (<MODE>mode))
+     {
+       emit_insn (gen_copysign<mode>3_fcpsgn (operands[0], operands[1],
+ 					     operands[2]));
+@@ -5979,7 +5984,7 @@
+ 	(unspec:SFDF [(match_operand:SFDF 1 "gpc_reg_operand" "<rreg2>")
+ 		      (match_operand:SFDF 2 "gpc_reg_operand" "<rreg2>")]
+ 		     UNSPEC_COPYSIGN))]
+-  "TARGET_CMPB && !VECTOR_UNIT_VSX_P (<MODE>mode)"
++  "TARGET_LFIWAX && !VECTOR_UNIT_VSX_P (<MODE>mode)"
+   "fcpsgn %0,%2,%1"
+   [(set_attr "type" "fp")])
+ 

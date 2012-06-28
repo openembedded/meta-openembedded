@@ -1,0 +1,35 @@
+Upstream-Status:Backport
+2011-08-18  Richard Sandiford  <richard.sandiford@linaro.org>
+
+ 	gcc/
+ 	Backport from mainline:
+ 
+	2011-08-18  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* config/arm/arm.c (arm_rtx_costs_1): Don't modify the costs of SET.
+	(arm_size_rtx_costs): Likewise.
+
+=== modified file 'gcc/config/arm/arm.c'
+--- old/gcc/config/arm/arm.c	2011-08-12 08:08:31 +0000
++++ new/gcc/config/arm/arm.c	2011-08-18 13:53:37 +0000
+@@ -7464,6 +7464,9 @@
+ 	*total = COSTS_N_INSNS (4);
+       return true;
+ 
++    case SET:
++      return false;
++
+     default:
+       *total = COSTS_N_INSNS (4);
+       return false;
+@@ -7811,6 +7814,9 @@
+       *total = COSTS_N_INSNS (1) + 1;
+       return true;
+ 
++    case SET:
++      return false;
++
+     default:
+       if (mode != VOIDmode)
+ 	*total = COSTS_N_INSNS (ARM_NUM_REGS (mode));
+
