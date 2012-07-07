@@ -1,10 +1,11 @@
 require ${BPN}.inc
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 SRC_URI = "\
   ${E_MIRROR}/${SRCNAME}-${PV}.tar.gz \
   file://fix-ecore-fb-initialization.patch \
+  file://0001-ecore_exe-fix-compilation-on-fedora-18.patch \
 "
 
 SRC_URI[md5sum] = "557f8411d323b14ed7bf1be368ab302a"
