@@ -2,7 +2,7 @@ DESCRIPTION = "The X Window System -- install this task to get a client/server b
 SECTION = "x11/server"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-PR = "r10"
+PR = "r11"
 
 inherit task allarch
 
@@ -16,8 +16,8 @@ RRECOMMENDS_${PN} = "\
 # xserver-common, x11-common
 VIRTUAL-RUNTIME_xserver_common ?= "xserver-common"
 
-# elsa, xserver-nodm-init or xserver-nodm-init-systemd
-VIRTUAL-RUNTIME_graphical_init_manager ?= "xserver-nodm-init-systemd"
+# elsa or xserver-nodm-init(-systemd)
+VIRTUAL-RUNTIME_graphical_init_manager ?= "xserver-nodm-init"
 
 RDEPENDS_${PN}-utils = "\
   ${VIRTUAL-RUNTIME_xserver_common} \
