@@ -180,8 +180,21 @@ python populate_packages_prepend () {
 					raise bb.build.FuncFailed, "\n\nFor package %s SYSTEMD_SERVICE-entry %s does not exist" % \
 						(pkg_systemd, service)
 
-	# *-systemd packages get RDEPENDS to systemd and their base package
-	def systemd_add_rdepends(pkg_systemd):
+	"""     Setup rdepends / rrecommmends as:
+
+                -----------------------------
+                |  pkg_systemd_base: 'foo'  |
+                -----------------------------
+                           |    ^
+                           |    |                 --------------
+               rrecommends |    | rdepends        | 'systemd'  |
+                           |    |               ->--------------
+                           V    |              / rdepends
+                ------------------------------/
+                | pkg_systemd: 'foo-systemd' |
+                ------------------------------
+	"""
+	def systemd_add_rdepends_rrecommends(pkg_systemd):
 		# RDEPENDS_${pkg_systemd} += pkg_systemd_base systemd
 		rdepends = d.getVar('RDEPENDS_' + pkg_systemd, 1) or ""
 		rdepends_arr = rdepends.split()
@@ -195,13 +208,18 @@ python populate_packages_prepend () {
 		if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
 			rdepends = '%s %s' % (rdepends, pkg_systemd_base)
 		d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
-
+		# RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
+		rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
+		# not rrecommending myself AND avoid double entries
+		if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
+			rrecommends = '%s %s' % (rrecommends, pkg_systemd)
+		d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
 
 	# run all modifications once when creating package
 	if os.path.exists('${D}'):
 		for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
 			if get_package_var(d, 'SYSTEMD_SERVICE', pkg_systemd) != "":
 				systemd_generate_package_scripts(pkg_systemd)
-				systemd_add_rdepends(pkg_systemd)
+				systemd_add_rdepends_rrecommends(pkg_systemd)
 		systemd_check_services()
 }
