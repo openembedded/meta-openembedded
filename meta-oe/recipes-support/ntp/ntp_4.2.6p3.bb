@@ -1,11 +1,6 @@
 require ntp.inc
 
-PR = "r5"
-
-inherit systemd
-
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE_${PN}-systemd = "ntpd.service"
+PR = "r6"
 
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
         file://tickadj.c.patch \
@@ -13,8 +8,6 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
         file://ntpd \
         file://ntp.conf \
         file://ntpdate \
-        file://ntpdate.service \
-        file://ntpd.service \
 "
 
 SRC_URI[md5sum] = "59876a9009b098ff59767ee45a88ebd2"
@@ -28,16 +21,7 @@ do_install_append() {
 	install -m 755 ${WORKDIR}/ntpd ${D}/${sysconfdir}/init.d
 	install -d ${D}/${sysconfdir}/network/if-up.d
 	install -m 755 ${WORKDIR}/ntpdate ${D}/${sysconfdir}/network/if-up.d
-
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
-	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
 }
-
-PACKAGES =+ "${PN}-systemd"
-
-FILES_${PN}-systemd = "${systemd_unitdir}/system/"
-RDEPENDS_${PN}-systemd = "${PN}"
 
 FILES_${PN}-bin = "${bindir}/ntp-wait ${bindir}/ntpdc ${bindir}/ntpq ${bindir}/ntptime ${bindir}/ntptrace"
 FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd"
