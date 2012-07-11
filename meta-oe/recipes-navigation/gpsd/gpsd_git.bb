@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
-PR = "r1"
+PR = "r2"
 
 SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
 
@@ -25,13 +25,12 @@ SRC_URI = "git://git.sv.gnu.org/gpsd.git;protocol=git;branch=master \
 "
 S = "${WORKDIR}/git"
 
-inherit scons update-rc.d python-dir systemd
+inherit scons update-rc.d python-dir
 
 INITSCRIPT_NAME = "gpsd"
 INITSCRIPT_PARAMS = "defaults 35"
 
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "${PN}.socket"
+SYSTEMD_OESCONS ??= "false"
 
 export STAGING_INCDIR
 export STAGING_LIBDIR
@@ -41,7 +40,7 @@ EXTRA_OESCONS = " \
   libQgpsmm='false' \
   debug='true' \
   strip='false' \
-  systemd='true' \
+  systemd='${SYSTEMD_OESCONS}' \
 "
 # this cannot be used, because then chrpath is not found and only static lib is built
 # target=${HOST_SYS}
@@ -84,11 +83,6 @@ do_install_append() {
     #support for python
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
     install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-
-    #support for systemd
-    install -d ${D}${systemd_unitdir}/system/
-    install -m 0644 ${S}/systemd/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
-    install -m 0644 ${S}/systemd/${PN}.socket ${D}${systemd_unitdir}/system/${PN}.socket
 }
 
 pkg_postinst_${PN}-conf() {
