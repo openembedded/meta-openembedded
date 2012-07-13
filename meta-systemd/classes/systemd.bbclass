@@ -1,5 +1,7 @@
 DEPENDS_append = " systemd-systemctl-native"
 
+SYSTEMD_AUTO_ENABLE ??= "enable"
+
 systemd_postinst() {
 OPTS=""
 
@@ -7,9 +9,9 @@ if [ -n "$D" ]; then
     OPTS="--root=$D"
 fi
 
-systemctl $OPTS enable ${SYSTEMD_SERVICE}
+systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
 
-if [ -z "$D" ]; then
+if [ -z "$D" -a ${SYSTEMD_AUTO_ENABLE} = "enable" ]; then
     systemctl start ${SYSTEMD_SERVICE}
 fi
 }
