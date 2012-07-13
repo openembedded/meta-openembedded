@@ -9,7 +9,7 @@ DEPENDS += "qwt libsocketcan"
 
 PV = "0.5+svnr${SRCPV}"
 SRCREV = "48"
-SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;proto=https"
+SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;protocol=https"
 
 S = "${WORKDIR}/qcanobserver/DeviceLib/linux/SocketCAN"
 

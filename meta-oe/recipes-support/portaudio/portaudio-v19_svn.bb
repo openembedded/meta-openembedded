@@ -6,7 +6,7 @@ SRCREV = "1387"
 PV = "v19+svnr${SRCPV}"
 PR = "r0"
 
-SRC_URI = "svn://www.portaudio.com/repos/portaudio;module=trunk;proto=http"
+SRC_URI = "svn://www.portaudio.com/repos/portaudio;module=trunk;protocol=http"
 S = "${WORKDIR}/trunk"
 
 inherit autotools

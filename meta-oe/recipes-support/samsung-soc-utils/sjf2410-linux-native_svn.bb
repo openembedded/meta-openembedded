@@ -7,7 +7,7 @@ SRCREV = "4268"
 PV = "0.1+svnr${SRCPV}"
 PR = "r1"
 
-SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=sjf2410-linux;proto=http"
+SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=sjf2410-linux;protocol=http"
 S = "${WORKDIR}/sjf2410-linux"
 
 inherit native deploy

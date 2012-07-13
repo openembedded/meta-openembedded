@@ -9,7 +9,7 @@ DEPENDS += "qwt"
 
 PV = "0.5+svnr${SRCPV}"
 SRCREV = "48"
-SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;proto=https \
+SRC_URI = "svn://qcanobserver.svn.sourceforge.net/svnroot;module=qcanobserver;protocol=https \
            file://0001-messagebufferinterface.cpp-add-sys-socket.h-as-inclu.patch \
            file://0002-qconsole-writethread-gcc-4.5-fixes.patch  \
            file://candemo.xml"

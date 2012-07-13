@@ -7,7 +7,7 @@ SRCREV = "4949"
 PV = "1.0+svnr${SRCPV}"
 PR = "r2"
 
-SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=gpio;proto=http"
+SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=gpio;protocol=http"
 S = "${WORKDIR}/gpio"
 
 do_compile() {

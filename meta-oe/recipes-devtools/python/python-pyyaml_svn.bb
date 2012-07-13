@@ -9,7 +9,7 @@ PV = "3.08+svnr${SRCPV}"
 PR = "ml2"
 
 SRC_URI = "\
-  svn://svn.pyyaml.org/pyyaml;module=trunk;proto=http \
+  svn://svn.pyyaml.org/pyyaml;module=trunk;protocol=http \
   file://setup.py \
 "
 S = "${WORKDIR}/trunk"

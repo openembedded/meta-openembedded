@@ -6,7 +6,7 @@ SRCREV = "5394"
 PV = "0.0.0+svnr${SRCPV}"
 PR = "r2"
 
-SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=AR6kSDK.build_sw.18;proto=http"
+SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=AR6kSDK.build_sw.18;protocol=http"
 S = "${WORKDIR}/AR6kSDK.build_sw.18/host/tools/wmiconfig"
 
 TARGET_CC_ARCH += "${LDFLAGS}"

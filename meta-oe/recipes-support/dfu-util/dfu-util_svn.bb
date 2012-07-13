@@ -9,7 +9,7 @@ PR = "r2"
 
 DEPENDS = "virtual/libusb0 usbpath"
 
-SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=dfu-util;proto=http"
+SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=dfu-util;protocol=http"
 S = "${WORKDIR}/dfu-util"
 
 inherit autotools
