@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=914812f2875eef849b5c509cc25dcb4f"
 DEPENDS = "openssl"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-           file://gcc-4.7.patch"
+           file://fix-hardfloat-detection.patch"
 
 SRC_URI[md5sum] = "4a3d3123ccc7b9b21c1990fe074e3d14"
 SRC_URI[sha256sum] = "6cf4311ecbc1700e88f4382a31b3a7017c1572cd641fd06e653fc1692c2cffff"
