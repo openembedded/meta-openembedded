@@ -4,8 +4,6 @@ URI: git://git.openembedded.org/openembedded-core
 branch: master
 revision: HEAD
 
-And optionally:
-
 URI: git://git.openembedded.org/meta-openembedded/meta-oe
 branch: master
 revision: HEAD
