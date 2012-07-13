@@ -11,7 +11,7 @@ SRCNAME = "vala"
 
 inherit e-base autotools pkgconfig vala
 
-SRC_URI = "${E_SVN}/trunk/BINDINGS;module=${SRCNAME};proto=http \
+SRC_URI = "${E_SVN}/trunk/BINDINGS;module=${SRCNAME};protocol=http \
 "
 S = "${WORKDIR}/${SRCNAME}"
 

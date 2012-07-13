@@ -16,9 +16,9 @@ PR = "r2"
 SRCREV_FORMAT = "source"
 
 SRC_URI = "\
-  svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;proto=http;subdir=src \
-  svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;proto=http;subdir=src \
-  svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;proto=http;subdir=src \
+  svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;protocol=http;subdir=src \
+  svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
+  svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
   file://0001-JavaScriptCore-add-EINA_LIBRARIES-to-shell-build-for.patch \
   file://0001-CMake-Do-not-pass-P-to-the-preprocessor-when-running.patch \
   file://CMakeLists.txt \

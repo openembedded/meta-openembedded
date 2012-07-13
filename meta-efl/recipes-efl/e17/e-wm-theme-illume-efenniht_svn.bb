@@ -18,7 +18,7 @@ PV = "0.0+svnr${SRCPV}"
 inherit e-base allarch
 
 SRCNAME = "efenniht"
-SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};proto=http \
+SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};protocol=http \
            file://LICENSE \
 "
 S = "${WORKDIR}/${SRCNAME}"

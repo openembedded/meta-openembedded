@@ -10,7 +10,7 @@ inherit e update-alternatives gettext
 S = "${WORKDIR}/${SRCNAME}"
 
 SRC_URI = "\
-  ${E_SVN}/trunk;module=${SRCNAME};proto=http \
+  ${E_SVN}/trunk;module=${SRCNAME};protocol=http \
   file://enlightenment_start.oe \
   file://applications.menu \
 "

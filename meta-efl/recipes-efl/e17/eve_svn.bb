@@ -6,7 +6,7 @@ PV = "0.3.0.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e gettext
-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
 do_configure_prepend() {

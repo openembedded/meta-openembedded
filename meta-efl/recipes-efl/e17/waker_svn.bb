@@ -8,7 +8,7 @@ SRCREV = "${EFL_SRCREV}"
 inherit efl
 
 SRC_URI = "\
-  ${E_SVN}/trunk/TMP/st;module=${SRCNAME};proto=http \
+  ${E_SVN}/trunk/TMP/st;module=${SRCNAME};protocol=http \
   file://0001-waker-remove-old-ecore_string_init-and-ecore_string_.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"

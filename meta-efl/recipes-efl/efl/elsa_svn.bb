@@ -7,7 +7,7 @@ SECTION = "e/apps"
 PR = "r2"
 
 inherit e gettext
-SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};proto=http;scmdata=keep \
+SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
   file://0001-pam-use-common-auth-instead-of-system-auth.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"

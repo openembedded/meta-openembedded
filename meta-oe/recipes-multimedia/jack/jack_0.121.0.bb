@@ -15,7 +15,7 @@ DEPENDS = "alsa-lib"
 
 SVNPV = "${@'${PV}'.replace('.', '_')}"
 SRCREV = "4484"
-SRC_URI = "svn://subversion.jackaudio.org/jack/tags;module=RELEASE_${SVNPV};proto=http \
+SRC_URI = "svn://subversion.jackaudio.org/jack/tags;module=RELEASE_${SVNPV};protocol=http \
            file://remove-wrong-host-test.patch \
            file://jack_fix_TWL4030_alsa_capture.patch \
           "

@@ -15,7 +15,7 @@ ALTERNATIVE_PRIORITY = "10"
 
 SRCNAME = "b_and_w"
 
-SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};proto=http \
+SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};protocol=http \
            file://LICENSE \
 "
 S = "${WORKDIR}/${SRCNAME}"

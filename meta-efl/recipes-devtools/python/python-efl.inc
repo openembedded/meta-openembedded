@@ -15,7 +15,7 @@ export HOST_SYS
 
 inherit e-base autotools pkgconfig distutils-base
 
-SRC_URI = "${E_SVN}/trunk/BINDINGS/python;module=${SRCNAME};proto=http"
+SRC_URI = "${E_SVN}/trunk/BINDINGS/python;module=${SRCNAME};protocol=http"
 S = "${WORKDIR}/${SRCNAME}"
 
 

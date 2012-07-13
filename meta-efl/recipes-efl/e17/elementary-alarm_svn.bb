@@ -6,7 +6,7 @@ PV = "0.0.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e
-SRC_URI = "${E_SVN}/trunk/TMP/st;module=${SRCNAME};proto=http;scmdata=keep"
+SRC_URI = "${E_SVN}/trunk/TMP/st;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
 RDEPENDS_${PN} = "waker"

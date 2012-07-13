@@ -8,5 +8,5 @@ PV = "0.3.0.042+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e
-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};proto=http;scmdata=keep"
+SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"

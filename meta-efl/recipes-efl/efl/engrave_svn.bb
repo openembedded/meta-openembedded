@@ -6,5 +6,5 @@ PV = "0.0.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 inherit efl
-SRC_URI = "${E_SVN}/OLD;module=${SRCNAME};proto=http;scmdata=keep"
+SRC_URI = "${E_SVN}/OLD;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
