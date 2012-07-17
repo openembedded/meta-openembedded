@@ -196,7 +196,7 @@ kernel_do_install() {
 	# during do_package for cross-compiled platforms
 	bin_files="arch/powerpc/boot/addnote arch/powerpc/boot/hack-coff \
 	           arch/powerpc/boot/mktree scripts/kconfig/zconf.tab.o \
-		   scripts/kconfig/conf.o"
+		   scripts/kconfig/conf.o scripts/kconfig/kxgettext.o"
 	for entry in $bin_files; do
 		rm -f $kerneldir/$entry
 	done
