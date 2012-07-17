@@ -1,0 +1,90 @@
+SECTION = "console/network"
+DESCRIPTION = "A server-side, HTML-embedded scripting language. This package provides the apache php module."
+LICENSE = "PHP"
+DEPENDS = "apache2-native apache2 zlib"
+
+SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
+           file://configure.patch \
+           file://pthread-check.patch \
+           file://70_mod_php5.conf \
+           "
+
+S = "${WORKDIR}/php-${PV}"
+
+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
+
+inherit autotools
+
+CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
+
+EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
+                --enable-maintainer-zts \
+                --without-mysql \
+		--enable-force-cgi-redirect \
+		--disable-cgi \
+		--disable-cli \
+		--disable-pdo \
+		--without-pear \
+		--without-iconv \
+		--disable-ipv6 \
+		--disable-xml \
+		--disable-xmlreader \
+		--disable-xmlwriter \
+		--disable-simplexml \
+		--disable-libxml \
+		--disable-dom \
+                --disable-rpath \
+                --libdir=${libdir}/php5 \
+                --with-zlib --with-zlib-dir=${STAGING_DIR_TARGET}${exec_prefix} \
+                --with-config-file-path=${sysconfdir}/php/apache2-php5"
+
+# to get postgres support, add it to the DEPENDS above
+# and uncomment this line.  similar for mysql
+#EXTRA_OECONF += " --with-pgsql=${STAGING_DIR_HOST}${layout_exec_prefix}"
+
+acpaths = ""
+
+#
+# override the autotools do_configure, which runs autoconf,
+# which breaks everything...
+#
+do_configure() {
+	find . -name config.m4 -o -name configure | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
+	export PHP_LIBXML_DIR=${STAGING_DIR_NATIVE}${layout_exec_prefix} 
+	oe_runconf
+}
+
+do_install  () {
+	install -d ${D}${libdir}/apache2/modules
+	install -d ${D}${sysconfdir}/apache2/modules.d
+	install -d ${D}${sysconfdir}/php/apache2-php5
+	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
+	install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
+	cat ${S}/php.ini-dist | \
+		sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
+		> ${D}${sysconfdir}/php/apache2-php5/php.ini
+
+	install -d ${D}${bindir}
+	install -m 755 scripts/phpize ${D}${bindir}
+	install -m 755 scripts/php-config ${D}${bindir}
+
+	oe_runmake install-build install-headers INSTALL_ROOT=${D}
+}
+
+SYSROOT_PREPROCESS_FUNCS += "php_sysroot_preprocess"
+
+php_sysroot_preprocess () {
+        install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+        install -m 755 ${D}${bindir}/phpize ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+        install -m 755 ${D}${bindir}/php-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+
+	sed -i 's!eval echo /!eval echo ${STAGING_DIR_HOST}/!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/phpize
+	sed -i 's!^include_dir=.*!include_dir=${STAGING_INCDIR}/php!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/php-config
+}
+
+RDEPENDS_${PN} = "apache2"
+
+FILES_${PN} = "${libdir}/apache2 ${sysconfdir}"
+FILES_${PN}-dev += "${bindir}/phpize ${bindir}/php-config ${libdir}/php5"
+FILES_${PN}-dbg += "${libdir}/apache2/modules/.debug"
+
