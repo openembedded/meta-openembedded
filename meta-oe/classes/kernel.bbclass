@@ -474,7 +474,7 @@ python populate_packages_prepend () {
 	metapkg = "kernel-modules"
 	d.setVar('ALLOW_EMPTY_' + metapkg, "1")
 	d.setVar('FILES_' + metapkg, "")
-	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'perf', 'perf-dbg', 'kernel-misc' ]
+	blacklist = [ 'kernel-dev', 'kernel-image', 'kernel-base', 'kernel-vmlinux', 'kernel-misc' ]
 	for l in module_deps.values():
 		for i in l:
 			pkg = module_pattern % legitimize_package_name(re.match(module_regex, os.path.basename(i)).group(1))
@@ -552,8 +552,3 @@ addtask deploy before do_build after do_install
 
 EXPORT_FUNCTIONS do_deploy
 
-# perf must be enabled in individual kernel recipes
-PACKAGES =+ "perf-dbg perf"
-FILES_perf = "${bindir}/* \
-              ${libexecdir}"
-FILES_perf-dbg = "${FILES_${PN}-dbg}"
