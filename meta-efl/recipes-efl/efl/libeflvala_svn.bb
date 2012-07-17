@@ -6,6 +6,7 @@ SECTION = "devel"
 DEPENDS = "vala-native glib-2.0 dbus dbus-glib eina eet evas ecore edje elementary tiff"
 PV = "2011.01.13.1+svnr${SRCPV}"
 PE = "1"
+PR = "r1"
 SRCREV = "${EFL_SRCREV}"
 SRCNAME = "vala"
 
