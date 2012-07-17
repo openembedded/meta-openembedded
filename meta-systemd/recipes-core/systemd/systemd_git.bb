@@ -1,9 +1,14 @@
 DESCRIPTION = "Systemd a init replacement"
 HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline udev dbus libcap libcgroup tcp-wrappers"
+LICENSE = "GPLv2 & LGPLv2.1 & MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
+                    file://LICENSE.LGPL2.1;md5=fb919cc88dbe06ec0b0bd50e001ccf1f \
+                    file://LICENSE.MIT;md5=544799d0b492f119fa04641d1b8868ed"
+
+PROVIDES = "udev"
+
+DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline dbus libcap libcgroup tcp-wrappers"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -14,20 +19,17 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r27"
+PR = "r0"
 
 inherit useradd pkgconfig autotools vala perlnative
 
-SRCREV = "3eff4208ffecedd778fec260f0d4b18e94dab443"
+SRCREV = "cd96b3b86abb4a88cac2722bdfb6e5d4413f6831"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           ${UCLIBCPATCHES} \
+           file://gtk-doc.make \
+           file://touchscreen.rules \
+           file://modprobe.rules \
           "
-UCLIBCPATCHES = ""
-UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
-                             file://format-replace-m-uclibc.patch \
-                            "
-
 LDFLAGS_libc-uclibc_append = " -lrt"
 
 S = "${WORKDIR}/git"
@@ -39,16 +41,26 @@ SYSTEMDDISTRO_angstrom = "angstrom"
 EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --with-rootprefix=${base_prefix} \
                  --with-rootlibdir=${base_libdir} \
+                 --sbindir=${base_sbindir} \
+                 --libexecdir=${base_libdir} \
                  ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
-                 --disable-gtk \
                  --enable-xz \
                  --disable-manpages \
                  --disable-coredump \
+                 --disable-introspection \
+                 --with-pci-ids-path=/usr/share/misc \
+                 ac_cv_file__usr_share_pci_ids=no \
+                 ac_cv_file__usr_share_hwdata_pci_ids=no \
+                 ac_cv_file__usr_share_misc_pci_ids=yes \
+                 --disable-gtk-doc-html \ 
+                 --disable-tcpwrap \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
 do_configure_prepend() {
 	sed -i /xsltproc/d configure.ac
+
+	cp ${WORKDIR}/gtk-doc.make ${S}/docs/
 
 	# we only have /home/root, not /root
 	sed -i -e 's:=/root:=/home/root:g' units/*.service*
@@ -68,6 +80,8 @@ do_install() {
 	# create machine-id
 	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
 	touch ${D}${sysconfdir}/machine-id
+
+	install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
 }
 
 python populate_packages_prepend (){
@@ -100,10 +114,18 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${datadir}/dbus-1/system-services \
                 ${datadir}/polkit-1 \
                 ${datadir}/${PN} \
-                ${sysconfdir} \
+                ${sysconfdir}/bash_completion.d/ \
+                ${sysconfdir}/binfmt.d/ \
+                ${sysconfdir}/dbus-1/ \
+                ${sysconfdir}/machine-id \
+                ${sysconfdir}/modules-load.d/ \
+                ${sysconfdir}/sysctl.d/ \
+                ${sysconfdir}/systemd/ \
+                ${sysconfdir}/tmpfiles.d/ \
+                ${sysconfdir}/xdg/ \
                 ${systemd_unitdir}/* \
                 ${systemd_unitdir}/system/* \
-                ${base_libdir}/udev/rules.d \
+                ${base_libdir}/udev/rules.d/99-systemd.rules \
                 ${base_libdir}/security/*.so \
                 /cgroup \
                 ${bindir}/systemd* \
@@ -114,6 +136,10 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${libdir}/sysctl.d \
                 ${localstatedir} \
                 ${libexecdir} \
+                ${base_libdir}/udev/rules.d/70-uaccess.rules \
+                ${base_libdir}/udev/rules.d/71-seat.rules \
+                ${base_libdir}/udev/rules.d/73-seat-late.rules \
+                ${base_libdir}/udev/rules.d/99-systemd.rules \
                "
 
 FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/"
@@ -135,6 +161,45 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
                       util-linux-mount util-linux-umount \
                       kernel-module-autofs4 kernel-module-unix kernel-module-ipv6 \
 "
+
+PACKAGES =+ "udev-dbg udev udev-consolekit udev-utils udev-systemd"
+
+FILES_udev-dbg += "${base_libdir}/udev/.debug"
+
+RDEPENDS_udev += "udev-utils"
+RPROVIDES_udev = "hotplug"
+
+FILES_udev += "${base_libdir}/udev/udevd \
+               ${base_libdir}/systemd/systemd-udevd \
+               ${base_libdir}/udev/accelerometer \
+               ${base_libdir}/udev/ata_id \
+               ${base_libdir}/udev/cdrom_id \
+               ${base_libdir}/udev/collect \
+               ${base_libdir}/udev/findkeyboards \
+               ${base_libdir}/udev/keyboard-force-release.sh \
+               ${base_libdir}/udev/keymap \
+               ${base_libdir}/udev/mtd_probe \
+               ${base_libdir}/udev/scsi_id \
+               ${base_libdir}/udev/v4l_id \
+               ${base_libdir}/udev/keymaps \
+               ${base_libdir}/udev/rules.d/4*.rules \
+               ${base_libdir}/udev/rules.d/5*.rules \
+               ${base_libdir}/udev/rules.d/6*.rules \
+               ${base_libdir}/udev/rules.d/70-power-switch.rules \
+               ${base_libdir}/udev/rules.d/75*.rules \
+               ${base_libdir}/udev/rules.d/78*.rules \
+               ${base_libdir}/udev/rules.d/8*.rules \
+               ${base_libdir}/udev/rules.d/95*.rules \
+               ${sysconfdir}/udev \
+              "
+
+FILES_udev-consolekit += "${libdir}/ConsoleKit"
+RDEPENDS_udev-consolekit += "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
+
+FILES_udev-utils = "${bindir}/udevadm"
+
+FILES_udev-systemd = "${base_libdir}/systemd/system/*udev* ${base_libdir}/systemd/system/*.wants/*udev*"
+RDEPENDS_udev-systemd = "udev"
 
 # TODO:
 # u-a for runlevel and telinit
