@@ -13,3 +13,5 @@ fi
 glib-compile-schemas ${datadir}/glib-2.0/schemas
 }
 
+SRC_URI[archive.md5sum] = "d42f0d79d6449a0eb1bb502eee8eb709"
+SRC_URI[archive.sha256sum] = "6e72158a0e70ae50b8bb992e1486dd2fda43207f4ec4eb03a0d769f210363fd9"
