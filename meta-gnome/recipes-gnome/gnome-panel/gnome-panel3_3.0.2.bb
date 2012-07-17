@@ -2,6 +2,7 @@ DESCRIPTION = "GNOME panel"
 LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
 
 BPN = "gnome-panel"
+PR = "r1"
 
 DEFAULT_PREFERENCE = "-1"
 
