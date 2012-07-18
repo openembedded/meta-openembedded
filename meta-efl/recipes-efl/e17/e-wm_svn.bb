@@ -72,6 +72,7 @@ PACKAGES =+ "\
   ${PN}-theme-default \
   ${PN}-background-dark-gradient \
   ${PN}-background-light-gradient \
+  ${PN}-backgrounds \
   ${PN}-images \
   ${PN}-icons \
   ${PN}-other \
@@ -123,7 +124,8 @@ FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-background-dark-gradient = "${datadir}/enlightenment/data/backgrounds/Dark_Gradient.edj"
 FILES_${PN}-background-light-gradient = "${datadir}/enlightenment/data/backgrounds/Light_Gradient.edj"
-FILES_${PN}-images = "${datadir}/enlightenment/data/images"
+FILES_${PN}-backgrounds = "${datadir}/enlightenment/data/backgrounds/*.edj"
+FILES_${PN}-images = "${datadir}/enlightenment/data/images ${datadir}/enlightenment/data/flags"
 FILES_${PN}-icons = "${datadir}/enlightenment/data/icons"
 FILES_${PN}-other = "${datadir}/enlightenment/data/other"
 FILES_${PN}-input-methods = "${datadir}/enlightenment/data/input_methods"
@@ -133,6 +135,7 @@ FILES_${PN}-menu = "${sysconfdir}/xdg/menus/applications.menu"
 
 FILES_efm-desktop-icon = "\
   ${datadir}/applications/efm.desktop \
+  ${datadir}/applications/enlightenment_filemanager.desktop \
   ${datadir}/icons/e-module-fileman.png \
 "
 
