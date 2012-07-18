@@ -1,0 +1,38 @@
+From 7c25cbf1901e9be1c0bebca6c9bcaa79dbbdf849 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 18 Jul 2012 17:54:50 +0200
+Subject: [PATCH] eve: update for newer webkit-efl
+
+* ewk_settings_icon_database_icon_object_add was renamed to ewk_settings_icon_database_icon_object_get
+  in webkit r113173 (see https://bugs.webkit.org/show_bug.cgi?id=82438)
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ src/bin/chrome.c |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/bin/chrome.c b/src/bin/chrome.c
+index e402cad..ee8f0c4 100644
+--- a/src/bin/chrome.c
++++ b/src/bin/chrome.c
+@@ -985,7 +985,7 @@ _chrome_state_apply(Evas_Object *chrome, Evas_Object *view)
+    if (old_icon) evas_object_del(old_icon);
+    if (url)
+      {
+-        favicon = ewk_settings_icon_database_icon_object_add(url, canvas);
++        favicon = ewk_settings_icon_database_icon_object_get(url, canvas);
+         if (favicon)
+            elm_object_part_content_set(text_url, "icon", favicon);
+      }
+@@ -2456,7 +2456,7 @@ more_content_get(void *data, Evas_Object *obj, const char *part)
+           {
+              Evas_Object *chrome = evas_object_data_get(obj, "chrome");
+              Evas *canvas = evas_object_evas_get(chrome);
+-             icon = ewk_settings_icon_database_icon_object_add(mmi->next, canvas);
++             icon = ewk_settings_icon_database_icon_object_get(mmi->next, canvas);
+           }
+         return icon;
+      }
+-- 
+1.7.8.6
+
