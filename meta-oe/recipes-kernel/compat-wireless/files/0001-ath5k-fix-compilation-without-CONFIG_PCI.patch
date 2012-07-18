@@ -1,0 +1,33 @@
+From fb323acc0b01bcf1ecafb9330c4fbb41cf942139 Mon Sep 17 00:00:00 2001
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+Date: Wed, 18 Jul 2012 01:01:52 +0200
+Subject: [PATCH] ath5k: fix compilation without CONFIG_PCI
+
+Without that fix we have:
+  [...]/drivers/net/wireless/ath/ath5k/led.c: In function 'ath5k_init_leds':
+  [...]/drivers/net/wireless/ath/ath5k/led.c:179:2: error: implicit declaration of function 'pci_match_id' [-Werror=implicit-function-declaration]
+When CONFIG_PCI is not set.
+
+Upstream-Status: Pending: Not submitted yet.
+
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ drivers/net/wireless/ath/ath5k/led.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/drivers/net/wireless/ath/ath5k/led.c b/drivers/net/wireless/ath/ath5k/led.c
+index c044476..a4de133 100644
+--- a/drivers/net/wireless/ath/ath5k/led.c
++++ b/drivers/net/wireless/ath/ath5k/led.c
+@@ -173,7 +173,7 @@ int __devinit ath5k_init_leds(struct ath5k_hw *ah)
+ 	if (!ah->pdev)
+ 		return 0;
+ 
+-#ifdef CONFIG_ATHEROS_AR231X
++#if defined(CONFIG_ATHEROS_AR231X) || !defined(CONFIG_PCI)
+ 	match = NULL;
+ #else
+ 	match = pci_match_id(&ath5k_led_devices[0], pdev);
+-- 
+1.7.4.1
+
