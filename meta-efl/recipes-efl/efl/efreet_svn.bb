@@ -1,5 +1,7 @@
 require ${BPN}.inc
 
+inherit gettext
+
 SRCREV = "${EFL_SRCREV}"
 PV = "1.2.1+svnr${SRCPV}"
 PR = "${INC_PR}.0"
