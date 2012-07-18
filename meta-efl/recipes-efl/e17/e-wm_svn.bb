@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r1"
+PR = "r2"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -182,7 +182,6 @@ FILES_${PN}-doc += "\
 CONFFILES_${PN}-menu = "${sysconfdir}/xdg/menus/applications.menu"
 CONFFILES_${PN}-sysactions = "/etc/enlightenment/sysactions.conf"
 
-ALTERNATIVE_PATH = "${bindir}/enlightenment_start.oe"
-ALTERNATIVE_NAME = "x-window-manager"
-ALTERNATIVE_LINK = "${bindir}/x-window-manager"
-ALTERNATIVE_PRIORITY = "16"
+ALTERNATIVE_${PN} = "x-window-manager"
+ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/enlightenment_start.oe"
+ALTERNATIVE_PRIORITY[x-window-manager] = "16"
