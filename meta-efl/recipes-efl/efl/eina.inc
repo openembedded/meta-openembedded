@@ -11,7 +11,3 @@ inherit efl
 AUTO_LIBNAME_PKGS = ""
 
 FILES_${PN} += "${libdir}/eina"
-
-do_install_append() {
-  rmdir ${D}${bindir}
-}
