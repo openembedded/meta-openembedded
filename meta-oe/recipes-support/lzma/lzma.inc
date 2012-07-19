@@ -14,10 +14,10 @@ SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@bb.data.getVar('PV',
 EXTRA_OEMAKE = "-f makefile.gcc"
 
 do_unpack_append() {
-        import oe.process
-        # Replace MS-DOS line-endings with Unix style line-endings
-        oe.process.run("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
-                       cwd=d.getVar("S", True))
+    import oe.process
+    # Replace MS-DOS line-endings with Unix style line-endings
+    oe.process.run("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
+               cwd=d.getVar("S", True))
 }
 
 do_compile() {
