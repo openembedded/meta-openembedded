@@ -5,7 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
 PR = "r3"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
-	   file://config.h \
+           ${CONFIGFILESURI} \
+	  "
+CONFIGFILESURI ?= ""
+
+CONFIGFILESURI_arm = "file://config.h \
+	   file://numpyconfig.h \
+	  "
+CONFIGFILESURI_mipsel = "file://config.h \
 	   file://numpyconfig.h \
 	  "
 
