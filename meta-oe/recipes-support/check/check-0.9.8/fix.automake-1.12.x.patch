@@ -1,0 +1,26 @@
+Fixes this error:
+
+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libcompat.la': linking libtool libraries using a non-POSIX
+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
+| lib/Makefile.am:3:   while processing Libtool library 'libcompat.la'
+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libcheck.la': linking libtool libraries using a non-POSIX
+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
+| src/Makefile.am:3:   while processing Libtool library 'libcheck.la'
+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libcheckinternal.la': linking libtool libraries using a non-POSIX
+| /var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
+| src/Makefile.am:4:   while processing Libtool library 'libcheckinternal.la'
+| autoreconf: automake failed with exit status: 1
+
+Upstream-Status: Pending
+
+diff -uNr check-0.9.8.orig//configure.ac check-0.9.8/configure.ac
+--- check-0.9.8.orig//configure.ac	2009-09-23 12:50:08.000000000 +0200
++++ check-0.9.8/configure.ac	2012-07-19 17:43:51.000000000 +0200
+@@ -102,6 +102,7 @@
+ AC_PROG_INSTALL
+ AC_PROG_LN_S
+ AC_PROG_LIBTOOL
++AM_PROG_AR
+ 
+ # add these options to CFLAGS if the compiler supports them
+ AC_DEFUN([AX_CFLAGS_ADD],[AX_C_CHECK_FLAG($1, , , CFLAGS="$CFLAGS $1")])
