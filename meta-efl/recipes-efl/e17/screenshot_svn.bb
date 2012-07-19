@@ -10,7 +10,7 @@ DEPENDS += "emprint"
 RDEPENDS_${PN} += "emprint"
 
 do_configure_prepend() {
-	sed -i -e 's:AC_MSG_ERROR(emprint not found):echo foo:g' ${S}/configure.ac
+    sed -i -e 's:AC_MSG_ERROR(emprint not found):echo foo:g' ${S}/configure.ac
 }
 
 

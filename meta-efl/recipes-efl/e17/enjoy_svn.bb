@@ -35,9 +35,9 @@ do_configure_prepend() {
 }
 
 pkg_postinst_${PN} () {
-	echo "enjoy:	SCAN and LIBRARY MANAGER are not implemeted yet!"
-	echo "enjoy:	Meanwhile please run:"
-	echo "enjoy:	test-lms -m mono -p id3 -i 5000 -s /path/to/your/music/dir /home/root/.config/enjoy/media.db"
-	echo "enjoy:"
-	echo "enjoy:	Use test-lms -P to see available formats that can be scanned"
+    echo "enjoy:    SCAN and LIBRARY MANAGER are not implemeted yet!"
+    echo "enjoy:    Meanwhile please run:"
+    echo "enjoy:    test-lms -m mono -p id3 -i 5000 -s /path/to/your/music/dir /home/root/.config/enjoy/media.db"
+    echo "enjoy:"
+    echo "enjoy:    Use test-lms -P to see available formats that can be scanned"
 }

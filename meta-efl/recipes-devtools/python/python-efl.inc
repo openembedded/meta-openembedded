@@ -20,24 +20,24 @@ S = "${WORKDIR}/${SRCNAME}"
 
 
 do_configure_prepend() {
-	# prefix CYTHON_.*_INCLUDEDIR with path to STAGING_DIR_HOST also use $PKG_CONFIG instead of pkg-config directly
-        sed -i "s#\`\$PKG_CONFIG --variable=includedir \"python-evas#${STAGING_DIR_HOST}\`\$PKG_CONFIG --variable=includedir \"python-evas#g" ${S}/configure.ac
+    # prefix CYTHON_.*_INCLUDEDIR with path to STAGING_DIR_HOST also use $PKG_CONFIG instead of pkg-config directly
+    sed -i "s#\`\$PKG_CONFIG --variable=includedir \"python-evas#${STAGING_DIR_HOST}\`\$PKG_CONFIG --variable=includedir \"python-evas#g" ${S}/configure.ac
 }
 
 do_install_append() {
-	if [ -e examples ]; then
-		for i in `find examples -name "*.edc"`; do
-			cd ${S}/`dirname $i`
-			echo "Generating .edj file for $i..."
-			edje_cc `basename $i`
-			echo "Removing sources in this directory..."
-			rm -f *.edc *.png *.ttf *.jpeg
-		done
-		cd ${S}
-		install -d ${D}${datadir}/${PN}/
-		cp -a examples ${D}${datadir}/${PN}/
-		find ${D}${datadir}/${PN}/examples -name ".svn" | xargs rm -rf
-	fi
+    if [ -e examples ]; then
+        for i in `find examples -name "*.edc"`; do
+            cd ${S}/`dirname $i`
+            echo "Generating .edj file for $i..."
+            edje_cc `basename $i`
+            echo "Removing sources in this directory..."
+            rm -f *.edc *.png *.ttf *.jpeg
+        done
+        cd ${S}
+        install -d ${D}${datadir}/${PN}/
+        cp -a examples ${D}${datadir}/${PN}/
+        find ${D}${datadir}/${PN}/examples -name ".svn" | xargs rm -rf
+    fi
 }
 
 FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*.egg/*/*/.debug"

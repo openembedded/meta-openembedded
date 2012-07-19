@@ -2,7 +2,7 @@ SECTION = "x11/data"
 
 SRC_URI = "git://git.shr-project.org/repo/illume-keyboards.git;protocol=http;branch=master \
            file://0001-Makefile-update-KEYBOARDS_DIR-for-new-illume2.patch \
-	   file://LICENSE"
+           file://LICENSE"
 S = "${WORKDIR}/git"
 
 SRCREV = "4064489f359a1addf572089b582f317dff5f50e1"
@@ -93,6 +93,6 @@ DESCRIPTION_illume-keyboard-persian = "Illume keyboard with persian layout"
 FILES_illume-keyboard-persian = "${KEYBOARDS_DIR}/Persian.kbd ${KEYBOARDS_DIR}/Persian.png"
 
 do_install() {
-	make DESTDIR=${D} install
+    make DESTDIR=${D} install
 }
 

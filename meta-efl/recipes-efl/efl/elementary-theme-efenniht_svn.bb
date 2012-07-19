@@ -26,12 +26,12 @@ SRC_URI += "file://LICENSE"
 S = "${WORKDIR}/${SRCNAME}"
 
 do_compile() {
-	${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images -id ${WORKDIR}/themes/ ${S}/elm-efenniht.edc -o ${S}/elm-efenniht.edj
+    ${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images -id ${WORKDIR}/themes/ ${S}/elm-efenniht.edc -o ${S}/elm-efenniht.edj
 }
 
 do_install() {
-        install -d ${D}${datadir}/elementary/themes/
-        install -m 0644 ${S}/elm-efenniht.edj ${D}${datadir}/elementary/themes/
+    install -d ${D}${datadir}/elementary/themes/
+    install -m 0644 ${S}/elm-efenniht.edj ${D}${datadir}/elementary/themes/
 }
 
 FILES_${PN} = "${datadir}/elementary/themes/"

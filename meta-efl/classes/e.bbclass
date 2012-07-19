@@ -3,12 +3,12 @@ SECTION = "e/apps"
 inherit e-base autotools pkgconfig binconfig
 
 do_prepsources () {
-	make clean distclean || true
+    make clean distclean || true
 }
 addtask prepsources after do_patch before do_configure
 
 do_configure_append() {
-	find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
 }
 
 export CURL_CONFIG = "${STAGING_BINDIR_CROSS}/curl-config"

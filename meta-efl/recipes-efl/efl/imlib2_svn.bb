@@ -12,8 +12,8 @@ SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
 EXTRA_OECONF = "--with-x \
-		--x-includes=${STAGING_INCDIR} \
-		--x-libraries=${STAGING_LIBDIR} "
+                --x-includes=${STAGING_INCDIR} \
+                --x-libraries=${STAGING_LIBDIR} "
 
 # TODO: Use more fine granular version
 #OE_LT_RPATH_ALLOW=":${libdir}/imlib2/loaders:${libdir}/imlib2/filters:"

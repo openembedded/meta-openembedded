@@ -24,12 +24,12 @@ SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};protocol=http \
 S = "${WORKDIR}/${SRCNAME}"
 
 do_compile() {
-	${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images ${S}/efenniht.edc -o ${S}/efenniht.edj
+    ${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images ${S}/efenniht.edc -o ${S}/efenniht.edj
 }
 
 do_install() {
-        install -d ${D}${datadir}/enlightenment/data/themes/
-        install -m 0644 ${S}/efenniht.edj ${D}${datadir}/enlightenment/data/themes/
+    install -d ${D}${datadir}/enlightenment/data/themes/
+    install -m 0644 ${S}/efenniht.edj ${D}${datadir}/enlightenment/data/themes/
 }
 
 FILES_${PN} = "${datadir}/enlightenment/data/themes/"

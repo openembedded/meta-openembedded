@@ -25,7 +25,7 @@ EXTRA_OECONF = "\
 "
 
 do_configure_prepend() {
-	autopoint || true
+    autopoint || true
 }
 
 do_install_append() {

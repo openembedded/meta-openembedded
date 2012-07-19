@@ -13,8 +13,8 @@ BBCLASSEXTEND = "native"
 INC_PR = "r0"
 
 do_configure_prepend() {
-	touch ${S}/po/Makefile.in.in || true
-	sed -i -e 's: po::g' ${S}/Makefile.am
+    touch ${S}/po/Makefile.in.in || true
+    sed -i -e 's: po::g' ${S}/Makefile.am
 }
 
 FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
