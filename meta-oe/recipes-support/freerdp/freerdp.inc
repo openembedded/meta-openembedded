@@ -26,25 +26,25 @@ FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
 PACKAGES_DYNAMIC = "libfreerdp-plugin-*"
 
 python populate_packages_prepend () {
-        freerdp_root = bb.data.expand('${libdir}/freerdp', d)
+    freerdp_root = bb.data.expand('${libdir}/freerdp', d)
 
-        do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
-                output_pattern='libfreerdp-plugin-%s',
-                description='FreeRDP plugin %s',
-                prepend=True, extra_depends='libfreerdp-plugin-audin')
+    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
+        output_pattern='libfreerdp-plugin-%s',
+        description='FreeRDP plugin %s',
+        prepend=True, extra_depends='libfreerdp-plugin-audin')
 
-        do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
-                output_pattern='libfreerdp-plugin-%s',
-                description='FreeRDP plugin %s',
-                prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
+    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
+        output_pattern='libfreerdp-plugin-%s',
+        description='FreeRDP plugin %s',
+        prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
 
-        do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
-                output_pattern='libfreerdp-plugin-%s',
-                description='FreeRDP plugin %s',
-                prepend=True, extra_depends='libfreerdp-plugin-tsmf')
+    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
+        output_pattern='libfreerdp-plugin-%s',
+        description='FreeRDP plugin %s',
+        prepend=True, extra_depends='libfreerdp-plugin-tsmf')
 
-        do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
-                output_pattern='libfreerdp-plugin-%s',
-                description='FreeRDP plugin %s',
-                prepend=True, extra_depends='')
+    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
+        output_pattern='libfreerdp-plugin-%s',
+        description='FreeRDP plugin %s',
+        prepend=True, extra_depends='')
 }

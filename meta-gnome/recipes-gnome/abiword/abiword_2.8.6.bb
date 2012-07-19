@@ -102,21 +102,21 @@ FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
 PACKAGES_DYNAMIC = "${PN}-meta ${PN}-plugin-*"
 
 python populate_packages_prepend () {
-	abiword_libdir    = bb.data.expand('${libdir}/abiword-2.8/plugins', d)
-	do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
+    abiword_libdir    = bb.data.expand('${libdir}/abiword-2.8/plugins', d)
+    do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
 
-	metapkg = "abiword-meta"
-	bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
-	bb.data.setVar('FILES_' + metapkg, "", d)
-	blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
-	metapkg_rdepends = []
-	packages = bb.data.getVar('PACKAGES', d, 1).split()
-	for pkg in packages[1:]:
-                if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
-                	print "Modifying ", pkg
-                	metapkg_rdepends.append(pkg)
-	bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
-	bb.data.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package', d)
-	packages.append(metapkg)
-	bb.data.setVar('PACKAGES', ' '.join(packages), d)
+    metapkg = "abiword-meta"
+    bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
+    bb.data.setVar('FILES_' + metapkg, "", d)
+    blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
+    metapkg_rdepends = []
+    packages = bb.data.getVar('PACKAGES', d, 1).split()
+    for pkg in packages[1:]:
+        if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
+            print "Modifying ", pkg
+            metapkg_rdepends.append(pkg)
+    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
+    bb.data.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package', d)
+    packages.append(metapkg)
+    bb.data.setVar('PACKAGES', ' '.join(packages), d)
 }

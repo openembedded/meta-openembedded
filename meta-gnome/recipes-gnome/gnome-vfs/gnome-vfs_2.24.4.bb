@@ -43,8 +43,8 @@ FILES_${PN}-doc += " ${datadir}/gtk-doc"
 PACKAGES_DYNAMIC = "gnome-vfs-plugin-*"
 
 python populate_packages_prepend () {
-	print bb.data.getVar('FILES_gnome-vfs', d, 1)
+    print bb.data.getVar('FILES_gnome-vfs', d, 1)
 
-	plugindir = bb.data.expand('${libdir}/gnome-vfs-2.0/modules/', d)
-	do_split_packages(d, plugindir, '^lib(.*)\.so$', 'gnome-vfs-plugin-%s', 'GNOME VFS plugin for %s')
+    plugindir = bb.data.expand('${libdir}/gnome-vfs-2.0/modules/', d)
+    do_split_packages(d, plugindir, '^lib(.*)\.so$', 'gnome-vfs-plugin-%s', 'GNOME VFS plugin for %s')
 }

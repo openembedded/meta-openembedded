@@ -1,4 +1,4 @@
-DESCRIPTION = "The GNU Compact Disc Input and Control library (libcdio) contains a library for CD-ROM and CD image access."
+ESCRIPTION = "The GNU Compact Disc Input and Control library (libcdio) contains a library for CD-ROM and CD image access."
 HOMEPAGE = "http://www.gnu.org/software/libcdio/"
 SECTION = "libs"
 
@@ -22,7 +22,7 @@ FILES_${PN} = "${libdir}/${PN}${SOLIB}"
 FILES_${PN}-utils = "${bindir}/*"
 
 python populate_packages_prepend () {
-        glibdir = bb.data.expand('${libdir}', d)
-        do_split_packages(d, glibdir, '^lib(.*)\.so\..*', 'lib%s', 'gstreamer %s library', extra_depends='', allow_links=True)
+    glibdir = bb.data.expand('${libdir}', d)
+    do_split_packages(d, glibdir, '^lib(.*)\.so\..*', 'lib%s', 'gstreamer %s library', extra_depends='', allow_links=True)
 }
 

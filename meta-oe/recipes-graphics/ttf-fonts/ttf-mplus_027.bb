@@ -9,8 +9,8 @@ SRC_URI = "http://osdn.dl.sourceforge.jp/mplus-fonts/6650/mplus-TESTFLIGHT-${PV}
 S = "${WORKDIR}/mplus-TESTFLIGHT-${PV}"
 
 python populate_packages_prepend() {
-	plugindir = bb.data.expand('${datadir}/fonts/ttf-mplus/', d)
-	do_split_packages(d, plugindir, '^(.*)\.ttf$', 'ttf-%s', 'TTF Font %s', extra_depends = "ttf-common")
+    plugindir = bb.data.expand('${datadir}/fonts/ttf-mplus/', d)
+    do_split_packages(d, plugindir, '^(.*)\.ttf$', 'ttf-%s', 'TTF Font %s', extra_depends = "ttf-common")
 }
 
 do_install() {

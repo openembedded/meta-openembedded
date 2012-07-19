@@ -12,8 +12,8 @@ SRC_URI[sha256sum] = "0b0e8bea0b257958ad416ab5678cf0cdd7e909943d4d5ab32afc35295a
 EXTRA_OECONF += " --enable-startup-notification"
 
 python populate_packages_prepend () {
-	themedir = bb.data.expand('${datadir}/themes', d)
-	do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4 theme %s', allow_dirs=True)
+    themedir = bb.data.expand('${datadir}/themes', d)
+    do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4 theme %s', allow_dirs=True)
 }
 
 PACKAGES_DYNAMIC += "xfwm4-theme-*"

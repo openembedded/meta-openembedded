@@ -12,14 +12,14 @@ INC_PR = "r0"
 FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
 
 python populate_packages_prepend () {
-        for plugin_type in "engines loaders savers".split():
-            bb.note( "splitting packages for evas %s..." % plugin_type )
-            basedir = bb.data.expand( '${libdir}/evas/modules/%s' % plugin_type, d )
+    for plugin_type in "engines loaders savers".split():
+        bb.note( "splitting packages for evas %s..." % plugin_type )
+        basedir = bb.data.expand( '${libdir}/evas/modules/%s' % plugin_type, d )
 
-            do_split_packages(d, basedir, '^(.*)',
-            output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
-            description = 'Evas module %s',
-            allow_dirs=True, recursive=False, extra_depends="" )
+        do_split_packages(d, basedir, '^(.*)',
+        output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
+        description = 'Evas module %s',
+        allow_dirs=True, recursive=False, extra_depends="" )
 }
 
 do_install_append() {

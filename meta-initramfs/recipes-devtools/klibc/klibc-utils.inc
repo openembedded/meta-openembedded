@@ -62,9 +62,9 @@ PACKAGES_DYNAMIC = "${KLIBC_UTILS_PKGNAME}-*"
 
 python populate_packages_prepend () {
 
-        base_bin_dir = bb.data.expand('${base_bindir}', d)
-        do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_links=True, allow_dirs=True)
+    base_bin_dir = bb.data.expand('${base_bindir}', d)
+    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_links=True, allow_dirs=True)
 
-        base_sbin_dir = bb.data.expand('${base_sbindir}', d)
-        do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_dirs=True)
+    base_sbin_dir = bb.data.expand('${base_sbindir}', d)
+    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_dirs=True)
 }
