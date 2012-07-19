@@ -12,12 +12,15 @@ DEPENDS = "glib-2.0 gtk+3"
 
 inherit vala
 
+PR = "r1"
+
 PACKAGES =+ "dconf-editor"
 
 FILES_dconf-editor = "${bindir}/dconf-editor ${datadir}/dconf-editor/"
 FILES_${PN} += "${datadir}/dbus-1/ \
                 ${libdir}/gio/modules/*.so \
                "
+FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
 
 pkg_postinst_${PN} () {
 if [ -n "$D" ]; then
