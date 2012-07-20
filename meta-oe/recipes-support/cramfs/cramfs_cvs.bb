@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/linux/COPYING;md5=9579385572eb40eded61dcb0
 DEPENDS = "zlib"
 SRCDATE = "20110110"
 PV = "1.1+cvs${SRCDATE}"
+PR = "r1"
 
 SRC_URI = "cvs://anonymous@cramfs.cvs.sourceforge.net/cvsroot/cramfs;module=linux"
 S = "${WORKDIR}/linux/scripts/cramfs"
@@ -16,7 +17,7 @@ EXTRA_OEMAKE = "\
 
 
 do_compile_prepend() {
-        ln -s GNUmakefile Makefile
+        ln -sf GNUmakefile Makefile
 }
 
 do_install() {
