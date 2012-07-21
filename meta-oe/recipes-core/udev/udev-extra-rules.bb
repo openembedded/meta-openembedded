@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 inherit allarch
 
-PR = "r3"
+PR = "r4"
 
 SRC_URI = " \
        file://automount.rules \
@@ -17,7 +17,7 @@ SRC_URI = " \
 
 
 do_install() {
-	install -d ${D}${sysconfdir}/udev/rules.d
+    install -d ${D}${sysconfdir}/udev/rules.d
 
     install -m 0644 ${WORKDIR}/automount.rules     ${D}${sysconfdir}/udev/rules.d/automount.rules
     install -m 0644 ${WORKDIR}/autonet.rules       ${D}${sysconfdir}/udev/rules.d/autonet.rules
@@ -33,3 +33,4 @@ do_install() {
 
 FILES_${PN} = "${sysconfdir}/udev"
 RDEPENDS_${PN} = "udev"
+CONFFILES_${PN} = "${sysconfdir}/udev/mount.blacklist"
