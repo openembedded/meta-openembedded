@@ -19,7 +19,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r2"
+PR = "r3"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -29,6 +29,7 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://gtk-doc.make \
            file://touchscreen.rules \
            file://modprobe.rules \
+           file://var-run.conf \
           "
 LDFLAGS_libc-uclibc_append = " -lrt"
 
@@ -82,6 +83,8 @@ do_install() {
 	touch ${D}${sysconfdir}/machine-id
 
 	install -m 0644 ${WORKDIR}/*.rules ${D}${sysconfdir}/udev/rules.d/
+
+	install -m 0644 ${WORKDIR}/var-run.conf ${D}${sysconfdir}/tmpfiles.d/
 }
 
 python populate_packages_prepend (){
