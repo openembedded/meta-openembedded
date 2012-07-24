@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus dbus-glib ncurses python libusb1"
 PROVIDES = "virtual/gpsd"
 
-PR = "r2"
+PR = "r3"
 
 SRCREV = "f8744f4af8cef211de698df5d8e6caddfe33f29d"
 
@@ -25,7 +25,7 @@ SRC_URI = "git://git.sv.gnu.org/gpsd.git;protocol=git;branch=master \
 "
 S = "${WORKDIR}/git"
 
-inherit scons update-rc.d python-dir
+inherit scons update-rc.d python-dir pythonnative
 
 INITSCRIPT_NAME = "gpsd"
 INITSCRIPT_PARAMS = "defaults 35"
