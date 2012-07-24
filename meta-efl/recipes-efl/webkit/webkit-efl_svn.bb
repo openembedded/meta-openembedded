@@ -11,7 +11,7 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
 
 SRCREV = "105069"
 PV = "1.7.3+svnr${SRCPV}"
-PR = "r2"
+PR = "r3"
 
 SRCREV_FORMAT = "source"
 
@@ -30,7 +30,7 @@ do_configure_prepend() {
   cp ${WORKDIR}/CMakeLists.txt ${S};
 }
 
-inherit cmake lib_package pkgconfig perlnative
+inherit cmake lib_package pkgconfig perlnative pythonnative
 
 ARM_INSTRUCTION_SET = "arm"
 
