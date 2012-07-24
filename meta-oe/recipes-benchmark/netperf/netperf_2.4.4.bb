@@ -13,12 +13,22 @@ SRC_URI="ftp://ftp.netperf.org/netperf/archive/netperf-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "0e942f22864e601406a994420231075b"
 SRC_URI[sha256sum] = "28e76af491ea3696885e4558ae2f5628a4b9ebdbefc2f1d9cf1b35db2813e497"
 
+PR = "r1"
+
 inherit update-rc.d autotools
 
 S = "${WORKDIR}/netperf-${PV}"
 
 # cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
 CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
+
+do_configure_prepend () {
+    sed -i -e 's,^ *NETHOME=.*$,NETHOME=${bindir},' \
+           -e 's,^ *NETPERF=\./netperf$,NETPERF=${bindir}/netperf,' \
+           -e 's,^ *NETPERF=/usr/bin/netperf$,NETPERF=${bindir}/netperf,' \
+           -e 's,^ *NETPERF_CMD=.*$,NETPERF_CMD=${bindir}/netperf,' \
+           doc/examples/*_script
+}
 
 do_install() {
         install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
