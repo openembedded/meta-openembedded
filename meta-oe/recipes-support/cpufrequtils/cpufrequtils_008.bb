@@ -9,11 +9,12 @@ SRCREV = "a2f0c39d5f21596bb9f5223e895c0ff210b265d0"
 # SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/cpufreq/cpufrequtils.git \
 
 SRC_URI = "git://github.com/emagii/cpufrequtils.git \
+           file://0001-dont-unset-cflags.patch \
           "
 
 CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' == 'no']} "
 
-PR = "r4"
+PR = "r5"
 
 S = "${WORKDIR}/git"
 
