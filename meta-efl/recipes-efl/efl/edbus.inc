@@ -1,5 +1,5 @@
 DESCRIPTION = "DBus and HAL convenience wrappers for EFL"
-DEPENDS = "dbus ecore"
+DEPENDS = "dbus ecore eina"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=550b8cea13dacc4bf00508a8cce1074c"
 
