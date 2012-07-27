@@ -9,7 +9,7 @@ INC_PR = "r3"
 
 export XDG_DATA_DIRS = "${STAGING_DATADIR}"
 
-SRC_URI = "http://downloads.freesmartphone.org/sources/vala-dbus-binding-tool-${PV}.tar.bz2;name=archive"
+SRC_URI = "http://downloads.freesmartphone.org/sources/${BPN}/${BP}.tar.bz2;name=archive"
 
 inherit autotools perlnative
 
