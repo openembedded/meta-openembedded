@@ -1,19 +1,15 @@
 DESCRIPTION = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
 HOMEPAGE = "http://fuse.sf.net"
 SECTION = "libs"
-LICENSE = "GPLv2&LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
-
-PR = "r1"
+LICENSE = "GPLv2 & LGPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
-           file://define_GNU_SOURCE.patch \
            file://gold-unversioned-symbol.patch \
           "
-
-SRC_URI[md5sum] = "eaa32c8cef56a981656a786f258a002a"
-SRC_URI[sha256sum] = "1ec1913e38f09b2a9ec1579e1800805b5e2c747d1dce515e316dbb665ca139d6"
+SRC_URI[md5sum] = "c646133c7bbf8ad9d2ced0888dc4a319"
+SRC_URI[sha256sum] = "51803d8224bf6adab052b340614980b28861f317c261eab1f1e9c6cf17b3dd75"
 
 inherit autotools pkgconfig
 
