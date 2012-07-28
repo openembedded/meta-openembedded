@@ -3,12 +3,16 @@ LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
                     file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
 
+PR = "r1"
+
 DEPENDS = "jpeg"
 
 # libv4l was absorbed into this, let OE know that
 PROVIDES = "libv4l"
 
-SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git"
+SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
+           file://0001-disable-qv4l2-build.patch \
+          "
 # 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag
 SRCREV = "54f16ca8183dd8ae8bf4ccc07949795aff0301f5"
 
