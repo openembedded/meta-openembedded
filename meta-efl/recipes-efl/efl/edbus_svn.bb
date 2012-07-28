@@ -8,6 +8,5 @@ DEFAULT_PREFERENCE = "-1"
 EXTRA_OECONF += "--disable-performance_test"
 SRC_URI = "\
   ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
-  file://0001-edbus-configure.ac-fixup-performance_test.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"
