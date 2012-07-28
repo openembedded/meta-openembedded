@@ -1,6 +1,6 @@
 HOMEPAGE = "http://www.enlightenment.org"
 SRCNAME ?= "${BPN}"
 
-EFL_SRCREV ?= "74419"
+EFL_SRCREV ?= "74527"
 
 ARM_INSTRUCTION_SET = "arm"
