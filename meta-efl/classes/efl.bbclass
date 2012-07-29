@@ -60,4 +60,4 @@ FILES_${PN}-dbg +=   "${libdir}/${PN}/.debug \
 
 FILES_${PN}-tests  = "${bindir}/${PN} \
                       ${bindir}/*_* \
-                      ${datadir}"
+                      ${datadir}/${PN}"
