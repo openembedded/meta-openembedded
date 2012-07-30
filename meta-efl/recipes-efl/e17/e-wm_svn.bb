@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r2"
+PR = "r3"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -54,6 +54,10 @@ RDEPENDS_${PN} += "\
   edje-utils \
   ${PN}-utils \
   dbus-x11 \
+  evas-loader-png \
+  evas-loader-jpeg \
+  evas-loader-gif \
+  evas-generic-loader-svg \
 "
 
 # Uclibc build don't have 'glibc-utils'
