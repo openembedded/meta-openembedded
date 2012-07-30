@@ -1,0 +1,24 @@
+pending upstream, fixed in 23.2
+http://debbugs.gnu.org/cgi-bin/bugreport.cgi?bug=5047
+https://bugzilla.redhat.com/show_bug.cgi?id=540921
+diff -up emacs-23.1/configure.in.cpp emacs-23.1/configure.in
+--- emacs-23.1/configure.in.cpp	2009-11-30 13:24:53.000000000 +0100
++++ emacs-23.1/configure.in	2009-11-30 13:25:45.000000000 +0100
+@@ -2983,7 +2983,7 @@ echo creating lib-src/Makefile
+   sed -e '1,/start of cpp stuff/d'\
+       -e 's,/\*\*/#\(.*\)$,/* \1 */,' \
+       < Makefile.c > junk.c
+-  $CPP $cpp_undefs -I. -I$srcdir/src $CPPFLAGS junk.c | \
++  $CPP -P $cpp_undefs -I. -I$srcdir/src $CPPFLAGS junk.c | \
+       sed -e 's/^ /	/' -e '/^#/d' -e '/^[ 	]*$/d' > junk2.c
+   cat junk1.c junk2.c > Makefile.new
+   rm -f junk.c junk1.c junk2.c
+@@ -2999,7 +2999,7 @@ echo creating src/Makefile
+   sed -e '1,/start of cpp stuff/d'\
+       -e 's,/\*\*/#\(.*\)$,/* \1 */,' \
+       < Makefile.c > junk.c
+-  $CPP $cpp_undefs -I. -I$srcdir/src $CPPFLAGS junk.c | \
++  $CPP -P $cpp_undefs -I. -I$srcdir/src $CPPFLAGS junk.c | \
+       sed -e 's/^ /	/' -e '/^#/d' -e '/^[ 	]*$/d' > junk2.c
+   cat junk1.c junk2.c > Makefile.new
+   rm -f junk.c junk1.c junk2.c
