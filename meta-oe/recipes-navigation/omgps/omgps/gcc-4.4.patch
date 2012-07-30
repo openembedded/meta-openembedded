@@ -1,0 +1,68 @@
+diff -uNr omgps.orig/src/include/map_repo.h omgps/src/include/map_repo.h
+--- omgps.orig/src/include/map_repo.h	2009-07-20 19:54:08.000000000 +0200
++++ omgps/src/include/map_repo.h	2010-01-17 14:55:24.000000000 +0100
+@@ -3,6 +3,9 @@
+ 
+ #include <glib.h>
+ #include <gdk/gdk.h>
++// workaround Python.h unconditionally (re)defines _XOPEN_SOURCE and _POSIX_C_SOURCE
++#undef _XOPEN_SOURCE
++#undef _POSIX_C_SOURCE
+ #include <Python.h>
+ 
+ #define MAP_MAX_BG_COLORS	5
+diff -uNr omgps.orig/src/include/py_ext.h omgps/src/include/py_ext.h
+--- omgps.orig/src/include/py_ext.h	2009-07-20 19:54:08.000000000 +0200
++++ omgps/src/include/py_ext.h	2010-01-17 14:55:57.000000000 +0100
+@@ -4,8 +4,8 @@
+ void py_ext_init();
+ void py_ext_cleanup();
+ 
+-void inline py_ext_trylock();
+-void inline py_ext_lock();
+-void inline py_ext_unlock();
++void py_ext_trylock();
++void py_ext_lock();
++void py_ext_unlock();
+ 
+ #endif /* PY_EXT_H_ */
+diff -uNr omgps.orig/src/include/uart.h omgps/src/include/uart.h
+--- omgps.orig/src/include/uart.h	2009-07-20 19:54:08.000000000 +0200
++++ omgps/src/include/uart.h	2010-01-17 14:33:00.000000000 +0100
+@@ -12,9 +12,9 @@
+ extern void uart_cleanup();
+ extern void uart_close();
+ 
+-extern inline int read_with_timeout(U1 *buf, int len);
+-extern inline int write_with_timeout(U1 *buf, int len);
+-extern inline gboolean read_fixed_len(U1 *buf, int expected_len);
++extern int read_with_timeout(U1 *buf, int len);
++extern int write_with_timeout(U1 *buf, int len);
++extern gboolean read_fixed_len(U1 *buf, int expected_len);
+ 
+ extern int sysfs_get_gps_device_power();
+ extern gboolean gps_device_power_on();
+diff -uNr omgps.orig/src/py_ext.c omgps/src/py_ext.c
+--- omgps.orig/src/py_ext.c	2009-07-20 19:54:08.000000000 +0200
++++ omgps/src/py_ext.c	2010-01-17 14:56:46.000000000 +0100
+@@ -26,17 +26,17 @@
+ 		Py_Finalize();
+ }
+ 
+-void inline py_ext_trylock()
++void py_ext_trylock()
+ {
+ 	TRYLOCK_MUTEX(&lock);
+ }
+ 
+-void inline py_ext_lock()
++void py_ext_lock()
+ {
+ 	LOCK_MUTEX(&lock);
+ }
+ 
+-void inline py_ext_unlock()
++void py_ext_unlock()
+ {
+ 	UNLOCK_MUTEX(&lock);
+ }

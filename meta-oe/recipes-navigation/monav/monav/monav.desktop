@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=MoNav
+Exec=monav
+Icon=monav
+Terminal=false
+Type=Application
+Categories=Utility;Geography;
+X-MB-SingleInstance=true
+StartupNotify=true
+Comment=Fast navigation system featuring exact routing.
