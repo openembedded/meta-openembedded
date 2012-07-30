@@ -1,0 +1,44 @@
+Upstream-Status: Backport
+
+It's fixed in 4.6 and 4.7(HEAD)
+
+http://sourceforge.net/tracker/?func=detail&aid=3523591&group_id=2055&atid=102055
+
+diff -uNr gnuplot-4.4.4.orig/Makefile.am gnuplot-4.4.4/Makefile.am
+--- gnuplot-4.4.4.orig/Makefile.am	2012-07-20 10:54:49.075828905 +0200
++++ gnuplot-4.4.4/Makefile.am	2012-07-20 10:55:22.380831313 +0200
+@@ -1,5 +1,5 @@
+ ## Process this file with automake to produce Makefile.in -*-Makefile-*-
+-AUTOMAKE_OPTIONS = foreign 1.2h
++AUTOMAKE_OPTIONS = foreign
+ 
+ SUBDIRS = config m4 term src  $(LISPDIR) man share
+ 
+diff -uNr gnuplot-4.4.4.orig/configure.in gnuplot-4.4.4/configure.in
+--- gnuplot-4.4.4.orig/configure.in	2011-09-02 06:09:40.000000000 +0200
++++ gnuplot-4.4.4/configure.in	2012-07-20 10:55:53.289833224 +0200
+@@ -16,10 +16,11 @@
+ dnl configure.in body
+ 
+ dnl Compiler characteristics
+-dnl Check for ANSI C prototypes, the const and inline keywords,
+-dnl and ANSI style stringification
++dnl Check for the const and inline keywords and ANSI style stringification
++dnl automake 1.12 dropped support for AM_C_PROTOTYPES and ansi2knr
++dnl But our code still tests for #ifdef PROTOTYPES, so define it here
++AC_DEFINE(PROTOTYPES,1,[Automake 1.12 dropped support for building without prototypes])
+ AC_PROG_CC
+-AM_C_PROTOTYPES
+ AC_PROG_CPP
+ AC_C_CONST
+ AC_C_INLINE
+diff -uNr gnuplot-4.4.4.orig/src/Makefile.am gnuplot-4.4.4/src/Makefile.am
+--- gnuplot-4.4.4.orig/src/Makefile.am	2010-10-06 06:53:16.000000000 +0200
++++ gnuplot-4.4.4/src/Makefile.am	2012-07-20 10:56:02.376834548 +0200
+@@ -1,5 +1,5 @@
+ ## Process this file with automake to produce Makefile.in -*-Makefile-*-
+-AUTOMAKE_OPTIONS = ansi2knr foreign 1.2h
++AUTOMAKE_OPTIONS = foreign
+ 
+ # in the spirit of automake ...
+ pkglibexecdir = $(libexecdir)/@PACKAGE@/@VERSION_MAJOR@
