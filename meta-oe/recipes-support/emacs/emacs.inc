@@ -10,7 +10,7 @@ DEPENDS +=" liblockfile"
 
 X11DEPENDS = "gtk+ libungif dbus"
 
-EXTRA_OECONF =  "--without-sound "
+EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
 PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x,${X11DEPENDS}"
@@ -22,7 +22,7 @@ PACKAGES =+ "${PN}-el"
 FILES_${PN}-el = "${datadir}/emacs/*/*/*.el.gz \
                   ${datadir}/emacs/*/*/*/*.el.gz"
 
-FILES_${PN} += "${datadir}/emacs"
+FILES_${PN} += "${datadir}/emacs ${datadir}/icons"
 
 FILES_${PN}-dbg += "${libexecdir}/emacs/*/*/.debug ${datadir}/emacs/*/*/.debug"
 
