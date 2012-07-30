@@ -1,0 +1,13 @@
+src/fl_set_fonts_xft.cxx is using fontconfig symbols
+
+--- a/makeinclude.in	2012-01-26 18:09:58.628799060 +0100
++++ b/makeinclude.in	2012-01-26 18:08:58.115801758 +0100
+@@ -81,7 +81,7 @@
+ AUDIOLIBS	= @AUDIOLIBS@
+ DSOFLAGS	= -L. @DSOFLAGS@
+ LDFLAGS		= $(OPTIM) @LDFLAGS@
+-LDLIBS		= @LIBS@
++LDLIBS		= @LIBS@ -lfontconfig
+ GLDLIBS		= @GLLIB@ @LIBS@
+ LINKFLTK	= @LINKFLTK@
+ LINKFLTKGL	= @LINKFLTKGL@
