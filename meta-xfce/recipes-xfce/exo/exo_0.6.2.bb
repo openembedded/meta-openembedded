@@ -4,9 +4,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "gtk+ libxfce4util virtual/libx11 perl-native cairo"
 
-PR = "r0"
+PR = "r1"
 
-inherit xfce
+inherit xfce pythonnative
 
 # SRC_URI must follow inherited one
 SRC_URI += " \
@@ -15,7 +15,6 @@ SRC_URI += " \
     file://gnome-mount \
     file://fix-qa-desktop-type-error.patch \
 "
-
 
 # see http://wiki.xfce.org/gnomemount-replacement
 do_install_append () {
