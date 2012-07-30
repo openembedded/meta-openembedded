@@ -1,0 +1,10 @@
+--- claws-mail-3.6.1/src/gtk/Makefile.am-orig	2008-10-10 00:17:55.000000000 -0700
++++ claws-mail-3.6.1/src/gtk/Makefile.am	2010-03-28 16:08:40.000000000 -0700
+@@ -62,7 +62,6 @@ clawsgtkinclude_HEADERS = \
+ 	menu.h \
+ 	pluginwindow.h \
+ 	prefswindow.h \
+-	gtkvscrollbutton.h \
+ 	progressdialog.h \
+ 	quicksearch.h \
+ 	sslcertwindow.h \

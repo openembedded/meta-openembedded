@@ -1,0 +1,11 @@
+--- claws-mail-3.6.1.orig/src/common/defs.h	2007-12-18 09:20:54.000000000 +0100
++++ claws-mail-3.6.1/src/common/defs.h	2012-05-06 08:17:56.049692494 +0200
+@@ -24,8 +24,6 @@
+ #  include "config.h"
+ #endif
+ 
+-#include <glibconfig.h>
+-
+ #ifdef G_OS_WIN32
+ #  include <glib/gwin32.h>
+ #endif

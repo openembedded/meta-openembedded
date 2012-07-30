@@ -1,0 +1,218 @@
+Index: mailmbox-1.14/src/plugin_gtk.c
+===================================================================
+--- mailmbox-1.14.orig/src/plugin_gtk.c	2008-12-04 06:18:50.000000000 +0300
++++ mailmbox-1.14/src/plugin_gtk.c	2008-12-04 06:49:40.000000000 +0300
+@@ -35,39 +35,41 @@
+
+ #include "pluginconfig.h"
+
+-static void new_folder_cb(FolderView *folderview, guint action, GtkWidget *widget);
+-static void delete_folder_cb(FolderView *folderview, guint action, GtkWidget *widget);
+-static void rename_folder_cb(FolderView *folderview, guint action, GtkWidget *widget);
+-static void move_folder_cb(FolderView *folderview, guint action, GtkWidget *widget);
+-static void update_tree_cb(FolderView *folderview, guint action, GtkWidget *widget);
+-static void remove_mailbox_cb(FolderView *folderview, guint action, GtkWidget *widget);
+-static void add_mailbox(gpointer callback_data, guint callback_action, GtkWidget *widget);
+-
+-static GtkItemFactoryEntry claws_mailmbox_popup_entries[] =
+-{
+-	{N_("/Create _new folder..."),	 NULL, new_folder_cb,     0, NULL},
+-	{N_("/---"),			 NULL, NULL,              0, "<Separator>"},
+-	{N_("/_Rename folder..."),	 NULL, rename_folder_cb,  0, NULL},
+-	{N_("/M_ove folder..."), 	 NULL, move_folder_cb,    0, NULL},
+-	{N_("/Cop_y folder..."),	 NULL, move_folder_cb,    1, NULL},
+-	{N_("/---"),			 NULL, NULL,              0, "<Separator>"},
+-	{N_("/_Delete folder"),		 NULL, delete_folder_cb,  0, NULL},
+-	{N_("/---"),			 NULL, NULL,              0, "<Separator>"},
+-	{N_("/_Check for new messages"), NULL, update_tree_cb,    0, NULL},
+-	{N_("/C_heck for new folders"),  NULL, update_tree_cb,    1, NULL},
+-	{N_("/R_ebuild folder tree"),	 NULL, update_tree_cb,    2, NULL},
+-	{N_("/---"),			 NULL, NULL, 		  0, "<Separator>"},
+-	{N_("/Remove _mailbox"),	 NULL, remove_mailbox_cb, 0, NULL},
+-	{N_("/---"),			 NULL, NULL, 		  0, "<Separator>"},
++static void new_folder_cb(GtkAction *action, gpointer data);
++static void delete_folder_cb(GtkAction *action, gpointer data);
++static void rename_folder_cb(GtkAction *action, gpointer data);
++static void move_folder_cb(GtkAction *action, gpointer data);
++static void update_tree_cb(GtkAction *action, gpointer data);
++static void remove_mailbox_cb(GtkAction *action, gpointer data);
++static void add_mailbox(gpointer callback_data, guint callback_action, gpointer data);
++
++static GtkActionEntry claws_mailmbox_popup_entries[] =
++{
++	{"FolderViewPopup/CreateNewFolder",	NULL, N_("/Create _new folder..."), NULL, NULL, G_CALLBACK(new_folder_cb) },
++	{"FolderViewPopup/---",			NULL, N_("/---") },
++	{"FolderViewPopup/RenameFolder",	NULL, N_("/_Rename folder..."), NULL, NULL, G_CALLBACK(rename_folder_cb) },
++	{"FolderViewPopup/MoveFolder",		NULL, N_("/M_ove folder..."), NULL, NULL, G_CALLBACK(move_folder_cb) },
++	{"FolderViewPopup/CopyFolder",		NULL, N_("/Cop_y folder..."), NULL, NULL, G_CALLBACK(move_folder_cb) },
++	{"FolderViewPopup/---",			NULL, N_("/---") },
++	{"FolderViewPopup/DeleteFolder",	NULL, N_("/_Delete folder"), NULL, NULL, G_CALLBACK(delete_folder_cb) },
++	{"FolderViewPopup/---",			NULL, N_("/---") },
++	{"FolderViewPopup/CheckNewMessages",	NULL, N_("/_Check for new messages"), NULL, NULL, G_CALLBACK(update_tree_cb) },
++	{"FolderViewPopup/CheckNewFolders",	NULL, N_("/C_heck for new folders"), NULL, NULL, G_CALLBACK(update_tree_cb) },
++	{"FolderViewPopup/RebuildfTree",	NULL, N_("/R_ebuild folder tree"), NULL, NULL, G_CALLBACK(update_tree_cb) },
++	{"FolderViewPopup/---",			NULL, N_("/---") },
++	{"FolderViewPopup/RemoveMailbox",	NULL, N_("/Remove _mailbox"), NULL, NULL, G_CALLBACK(remove_mailbox_cb) },
+ };
+
+-static void set_sensitivity(GtkItemFactory *factory, FolderItem *item);
++static void set_sensitivity(GtkUIManager *factory, FolderItem *item);
+
+ static FolderViewPopup claws_mailmbox_popup =
+ {
+	"mailmbox",
+	"<MailmboxFolder>",
+-	NULL,
++	claws_mailmbox_popup_entries,
++	G_N_ELEMENTS(claws_mailmbox_popup_entries),
++	NULL, 0,
++	NULL, 0, 0, NULL, NULL,
+	set_sensitivity
+ };
+
+@@ -85,11 +87,6 @@
+	GtkItemFactory *ifactory;
+	MainWindow *mainwin = mainwindow_get_mainwindow();
+
+-	n_entries = sizeof(claws_mailmbox_popup_entries) /
+-		sizeof(claws_mailmbox_popup_entries[0]);
+-	for (i = 0; i < n_entries; i++)
+-		claws_mailmbox_popup.entries = g_slist_append(claws_mailmbox_popup.entries, &claws_mailmbox_popup_entries[i]);
+-
+	folderview_register_popup(&claws_mailmbox_popup);
+
+	ifactory = gtk_item_factory_from_widget(mainwin->menubar);
+@@ -115,7 +112,7 @@
+	gtk_item_factory_delete_item(ifactory, mainwindow_add_mailbox.path);
+ }
+
+-static void set_sensitivity(GtkItemFactory *factory, FolderItem *item)
++static void set_sensitivity(GtkUIManager *factory, FolderItem *item)
+ {
+ #define SET_SENS(name, sens) \
+	menu_set_sensitive(factory, name, sens)
+@@ -132,10 +129,13 @@
+ #undef SET_SENS
+ }
+
+-static void update_tree_cb(FolderView *folderview, guint action,
+-			   GtkWidget *widget)
++#define DO_ACTION(name, act)	{ if (!strcmp(a_name, name)) act; }
++
++static void update_tree_cb(GtkAction *action, gpointer data)
+ {
++	FolderView *folderview = (FolderView *)data;
+	FolderItem *item;
++	const gchar *a_name = gtk_action_get_name(action);
+
+	item = folderview_get_selected_item(folderview);
+	g_return_if_fail(item != NULL);
+@@ -144,16 +144,12 @@
+
+	g_return_if_fail(item->folder != NULL);
+
+-	if (action == 0)
+-		folderview_check_new(item->folder);
+-	else if (action == 1)
+-		folderview_rescan_tree(item->folder, FALSE);
+-	else if (action == 2)
+-		folderview_rescan_tree(item->folder, TRUE);
++	DO_ACTION("FolderViewPopup/CheckNewMessages", folderview_check_new(item->folder));
++	DO_ACTION("FolderViewPopup/CheckNewFolders", folderview_rescan_tree(item->folder, FALSE));
++	DO_ACTION("FolderViewPopup/RebuildTree", folderview_rescan_tree(item->folder, FALSE));
+ }
+
+-static void add_mailbox(gpointer callback_data, guint callback_action,
+-                        GtkWidget *widget)
++static void add_mailbox(gpointer callback_data, guint callback_action, gpointer data)
+ {
+	MainWindow *mainwin = (MainWindow *) callback_data;
+	gchar *path, *basename;
+@@ -193,10 +189,10 @@
+	return;
+ }
+
+-static void new_folder_cb(FolderView *folderview, guint action,
+-		          GtkWidget *widget)
++static void new_folder_cb(GtkAction *action, gpointer data)
+ {
+-	GtkCTree *ctree = GTK_CTREE(folderview->ctree);
++	FolderView *folderview = (FolderView *)data;
++	GtkCMCTree *ctree = GTK_CMCTREE(folderview->ctree);
+	FolderItem *item;
+	FolderItem *new_item;
+	gchar *new_folder;
+@@ -245,9 +241,10 @@
+	folder_write_list();
+ }
+
+-static void remove_mailbox_cb(FolderView *folderview, guint action, GtkWidget *widget)
++static void remove_mailbox_cb(GtkAction *action, gpointer data)
+ {
+-	GtkCTree *ctree = GTK_CTREE(folderview->ctree);
++	FolderView *folderview = (FolderView *)data;
++	GtkCMCTree *ctree = GTK_CMCTREE(folderview->ctree);
+	GtkCTreeNode *node;
+	FolderItem *item;
+	gchar *name;
+@@ -276,10 +273,10 @@
+	folder_destroy(item->folder);
+ }
+
+-static void delete_folder_cb(FolderView *folderview, guint action,
+-			     GtkWidget *widget)
++static void delete_folder_cb(GtkAction *action, gpointer data)
+ {
+-	GtkCTree *ctree = GTK_CTREE(folderview->ctree);
++	FolderView *folderview = (FolderView *)data;
++	GtkCMCTree *ctree = GTK_CMCTREE(folderview->ctree);
+	FolderItem *item;
+	gchar *message, *name;
+	AlertValue avalue;
+@@ -329,24 +326,41 @@
+
+ }
+
+-static void move_folder_cb(FolderView *folderview, guint action, GtkWidget *widget)
++static void move_folder_cb(GtkAction *action, gpointer data)
++{
++	FolderView *folderview = (FolderView *)data;
++	FolderItem *from_folder = NULL, *to_folder = NULL;
++
++	from_folder = folderview_get_selected_item(folderview);
++	if (!from_folder || from_folder->folder->klass != claws_mailmbox_get_class())
++		return;
++
++	to_folder = foldersel_folder_sel(from_folder->folder, FOLDER_SEL_MOVE, NULL, TRUE);
++	if (!to_folder)
++		return;
++
++	folderview_move_folder(folderview, from_folder, to_folder, 0);
++}
++
++static void copy_folder_cb(GtkAction *action, gpointer data)
+ {
++	FolderView *folderview = (FolderView *)data;
+	FolderItem *from_folder = NULL, *to_folder = NULL;
+
+	from_folder = folderview_get_selected_item(folderview);
+	if (!from_folder || from_folder->folder->klass != claws_mailmbox_get_class())
+		return;
+
+-	to_folder = foldersel_folder_sel(from_folder->folder, FOLDER_SEL_MOVE, NULL);
++	to_folder = foldersel_folder_sel(from_folder->folder, FOLDER_SEL_MOVE, NULL, TRUE);
+	if (!to_folder)
+		return;
+
+-	folderview_move_folder(folderview, from_folder, to_folder, action);
++	folderview_move_folder(folderview, from_folder, to_folder, 1);
+ }
+
+-static void rename_folder_cb(FolderView *folderview, guint action,
+-			     GtkWidget *widget)
++static void rename_folder_cb(GtkAction *action, gpointer data)
+ {
++	FolderView *folderview = (FolderView *)data;
+	FolderItem *item, *parent;
+	gchar *new_folder;
+	gchar *name;
