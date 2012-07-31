@@ -50,18 +50,72 @@ do_compile_prepend() {
 	if [ -e $treedir ];then
 		rm -rf $treedir
 	fi
-	mkdir $treedir
-	cp -pPR ${STAGING_DIR_TARGET}/* $treedir
-	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/lib/libgcc_s.so ]; then
-                cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/lib/libgcc_s.so $treedir/lib
-        fi
-        if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/lib/libgcc_s.so.* ]; then
-                cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/lib/libgcc_s.so.* $treedir/lib
-        fi
+
+	# copy only as much stuff as we need
+	# before: 5.5G   ../../qemu-treedir/
+	# after:   86M   ../../qemu-treedir/
+	mkdir -p $treedir/${base_libdir}
+	cp -pPR \
+	${STAGING_DIR_TARGET}/${base_libdir}/ld-* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libc.* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libc-* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libm-* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libm.* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libtinfo.so.* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libresolv* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libdl* \
+	${STAGING_DIR_TARGET}/${base_libdir}/librt* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libresolv* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libgcc_s.so.* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libuuid.so.* \
+	${STAGING_DIR_TARGET}/${base_libdir}/libpthread* $treedir/${base_libdir}/
+
+	cp -pPR \
+	${STAGING_DIR_TARGET}/${libdir}/libICE.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libSM.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libatk-1.0.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libcairo.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libdbus-1.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libdbus-glib-1.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libexpat.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libffi.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libfontconfig.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libfreetype.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libgconf-2.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libgif.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libjpeg.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/liblzma.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libpixman-1.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libpng12.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/librsvg-2.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libstdc++.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libtiff.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libxml2.so.* \
+	${STAGING_DIR_TARGET}/${libdir}/libz.so.* $treedir/${base_libdir}/
+
+	# X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
+	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libX*.so.* $treedir/${base_libdir}/
+
+	# gdk-x11 gdk_pixbuf gio glib gmodule gobject gthread gtk-x11
+	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libg*-2.0.so.* $treedir/${base_libdir}/
+
+	# pango pangocairo pangoft2
+	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libpango*-1.0.so.* $treedir/${base_libdir}/
+
+	# xcb-render xcb-shm xcb
+	cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libxcb*.so.* $treedir/${base_libdir}/
+
+	#cp -pPR ${STAGING_DIR_TARGET}/* $treedir
+	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so ]; then
+		cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so $treedir/lib
+	fi
+	if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* ]; then
+		cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* $treedir/lib
+	fi
 	# stupid hack, but without it, it tries to use /usr/lib/libc.so from host and fails
 	# temacs: error while loading shared libraries: /usr/lib/libc.so: ELF file version does not match current one
-	if [ ! -f $treedir/lib/libc.so ]; then
-		ln -s libc.so.6 $treedir/lib/libc.so
+	if [ ! -f $treedir/${base_libdir}/libc.so ]; then
+		ln -s libc.so.6 $treedir/${base_libdir}/libc.so
 	fi
 }
 
