@@ -1,7 +1,5 @@
 require emacs.inc
 
-DEFAULT_PREFERENCE = "-1"
-
 SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz;name=tarball \
            file://use-qemu.patch \
            file://nostdlib-unwind.patch \
