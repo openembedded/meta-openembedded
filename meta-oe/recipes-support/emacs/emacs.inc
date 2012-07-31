@@ -65,4 +65,10 @@ do_compile_prepend() {
 	fi
 }
 
+do_install_append() {
+	# freaks package.bbclass and whole bitbake call returns error code
+	# ERROR: runstrip: ''arm-oe-linux-gnueabi-strip'  '/var/lib/jenkins/jobs/shr-core-branches/workspace/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/emacs-23.4-r0/package/usr/share/emacs/23.4/etc/tutorials/TUTORIAL.ko'' strip command failed
+	mv ${D}${datadir}/${BPN}/${PV}/etc/tutorials/TUTORIAL.ko ${D}${datadir}/${BPN}/${PV}/etc/tutorials/TUTORIAL.KO
+}
+
 EXTRA_OEMAKE += 'QEMU="${QEMU}"'
