@@ -2,11 +2,11 @@ DESCRIPTION = "GNOME settings daemon"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
-PR = "r6"
+PR = "r7"
 
 DEPENDS = "libsndfile1 libxtst glib-2.0 polkit gtk+ gconf dbus-glib libnotify libgnomekbd libxklavier gnome-doc-utils gnome-desktop"
 
-inherit gtk-doc gnome
+inherit gnome
 
 SRC_URI = "git://git.gnome.org/gnome-settings-daemon;protocol=git;branch=gnome-2-32"
 SRCREV = "0160f6725cfb872e017f3958f108792c3b882872"
