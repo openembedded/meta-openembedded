@@ -1,0 +1,28 @@
+#
+# (C) Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+#
+Index: anki-0.4.3/setup.py
+===================================================================
+--- anki-0.4.3.orig/setup.py	2008-02-12 19:17:56.000000000 +0000
++++ anki-0.4.3/setup.py	2008-02-12 19:19:29.000000000 +0000
+@@ -3,10 +3,8 @@
+ from setuptools import setup, find_packages
+ import sys, os
+ 
+-import ankiqt
+-
+ setup(name='ankiqt',
+-      version=ankiqt.appVersion,
++      version=os.environ["BUILD_PV"],
+       description='An intelligent spaced-repetition memory training program',
+       long_description="",
+       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+@@ -24,7 +22,7 @@
+       license='GPLv2',
+       packages=find_packages(),
+       include_package_data=True,
+-      install_requires = 'anki >= ' + ankiqt.appVersion,
++      install_requires = 'anki >= ' + os.environ["BUILD_PV"],
+       zip_safe=False,
+       package_data={'ankiqt':
+                     ['locale/*/*/*']},

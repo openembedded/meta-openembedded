@@ -1,0 +1,14 @@
+--- libanki.orig/setup.py	2008-01-02 13:22:22.000000000 +0100
++++ libanki/setup.py	2012-08-02 11:39:13.604173933 +0200
+@@ -3,10 +3,8 @@
+ from setuptools import setup, find_packages
+ import sys, os
+ 
+-import anki
+-
+ setup(name='anki',
+-      version=anki.version,
++      version=os.environ["BUILD_PV"],
+       description='An intelligent spaced-repetition memory training library',
+       long_description="",
+       # Get strings from http://www.python.org/pypi?%3Aaction=list_classifiers
