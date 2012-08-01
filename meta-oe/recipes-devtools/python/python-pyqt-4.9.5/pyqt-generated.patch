@@ -1,0 +1,12 @@
+diff -uNr PyQt-x11-gpl-4.9.5.orig/QtGui/sipQtGuiQSystemTrayIcon.cpp PyQt-x11-gpl-4.9.5/QtGui/sipQtGuiQSystemTrayIcon.cpp
+--- PyQt-x11-gpl-4.9.5.orig/QtGui/sipQtGuiQSystemTrayIcon.cpp	2012-10-01 16:48:16.496700577 +0200
++++ PyQt-x11-gpl-4.9.5/QtGui/sipQtGuiQSystemTrayIcon.cpp	2012-10-01 21:40:43.063130099 +0200
+@@ -993,8 +993,6 @@
+         qtgui_untrack(sipCpp);
+ #line 995 "QtGui/sipQtGuiQSystemTrayIcon.cpp"
+ 
+-    QSystemTrayIcon *sipCpp = reinterpret_cast<QSystemTrayIcon *>(sipCppV);
+-
+     if (QThread::currentThread() == sipCpp->thread())
+         delete sipCpp;
+     else

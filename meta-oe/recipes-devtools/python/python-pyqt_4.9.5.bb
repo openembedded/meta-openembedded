@@ -7,27 +7,21 @@ LIC_FILES_CHKSUM = "\
   file://GPL_EXCEPTION.TXT;md5=b73b0be471db679533dc94781c14af58 \
   file://GPL_EXCEPTION_ADDENDUM.TXT;md5=c1e04ec2aa0911061005a801abf81e40 \
   file://OPENSOURCE-NOTICE.TXT;md5=6ad9123620cc04a22c394753ad4767d7 \
-  file://LICENSE-MERGED-GPL2-GPL3;md5=53ced8933428255115039368cdca0aef \
-  file://LICENSE.GPL2;md5=59bccd9d4dcaae9e668798337b91a022 \
-  file://LICENSE.GPL3;md5=da83bb3624af9ff4808aa9ffc49fc582 \
+  file://LICENSE.GPL2;md5=276c6b9cad5f85a3af3534299825feff \
+  file://LICENSE.GPL3;md5=eda942b9c6ba7eb0f40fee79e94950d5 \
 "
 
 DEPENDS = "sip-native python-sip"
 RDEPENDS_${PN} = "python-core"
-SRCNAME = "pyqt"
 
-PYQT_OE_VERSION = "Qt_4_7_1"
+PYQT_OE_VERSION = "Qt_4_8_3"
 
 SRC_URI = "\
-  http://www.riverbankcomputing.co.uk/static/Downloads/PyQt4/PyQt-x11-gpl-${PV}.tar.gz \
-  \
-  file://fix_qthelp_ftbfs.diff \
-  file://fix_the_QAssitant_ftbfs.diff \
-  file://assistantclient-fix.patch \
+  ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
   file://pyqt-generated.patch;apply=no \
 "
-SRC_URI[md5sum] = "97c5dc1042feb5b3fe20baabad055af1"
-SRC_URI[sha256sum] = "fcfa3ecc0b4fad6d93227751b36a6f81ea104ee19dd26905f52de59f060b3e98"
+SRC_URI[md5sum] = "e4cdd6619c63655f7510efb4df8462fb"
+SRC_URI[sha256sum] = "75ff0a3a088ae22c4d6e8adb242f7e593104af93933cbdd9900bc7b06f46191e"
 S = "${WORKDIR}/PyQt-x11-gpl-${PV}"
 
 # arm and mips machines need some extra patches
