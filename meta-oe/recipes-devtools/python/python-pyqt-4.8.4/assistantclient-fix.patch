@@ -1,0 +1,13 @@
+Index: PyQt-x11-gpl-4.8.3/sip/QtAssistant/qassistantclient.sip
+===================================================================
+--- PyQt-x11-gpl-4.8.3.orig/sip/QtAssistant/qassistantclient.sip
++++ PyQt-x11-gpl-4.8.3/sip/QtAssistant/qassistantclient.sip
+@@ -33,7 +33,7 @@
+ class QAssistantClient : QObject
+ {
+ %TypeHeaderCode
+-#include <qassistantclient.h>
++#include <QtAssistant/qassistantclient.h>
+ %End
+ 
+ %ConvertToSubClassCode
