@@ -1,0 +1,1 @@
+require python-sip.inc
