@@ -5,7 +5,7 @@ DEPENDS = "elfutils binutils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 
-PR = "r4"
+PR = "r5"
 
 # ltrace is not ported to sh3/sh4 targets at this time
 COMPATIBLE_TARGET_SYS = "(?!sh[34])"
@@ -52,7 +52,7 @@ do_compile() {
 		sparc*)   LTRACE_ARCH=sparc ;;
 		x86_64*)  LTRACE_ARCH=x86_64 ;;
 	esac
-	oe_runmake LDFLAGS=${TARGET_LDFLAGS} LIBS="-lsupc++ -liberty -Wl,-Bstatic -lelf -Wl,-Bdynamic" ${EXTRA_OEMAKE} ARCH=${LTRACE_ARCH}
+	oe_runmake LDFLAGS="${TARGET_LDFLAGS}" LIBS="-lsupc++ -liberty -Wl,-Bstatic -lelf -Wl,-Bdynamic" ${EXTRA_OEMAKE} ARCH=${LTRACE_ARCH}
 }
 
 do_install() {
