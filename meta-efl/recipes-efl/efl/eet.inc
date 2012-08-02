@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=da947f414a2ca4323245f1abb1980953"
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r0"
+INC_PR = "r1"
 
 EXTRA_OECONF = "\
   --enable-openssl \
@@ -15,4 +15,10 @@ EXTRA_OECONF = "\
   --disable-coverage \
   --enable-old-eet-file-format \
   --disable-assert \
+"
+
+PACKAGES =+ "${PN}-utils"
+
+FILES_${PN}-utils = "\
+  ${bindir}/${PN} \
 "
