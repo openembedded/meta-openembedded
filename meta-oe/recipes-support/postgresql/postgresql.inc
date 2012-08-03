@@ -2,7 +2,7 @@ DESCRIPTION = "PostgreSQL is a powerful, open source relational database system.
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
 DEPENDS = "zlib readline tzcode-native"
-INC_PR = "r6"
+INC_PR = "r7"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -17,7 +17,8 @@ export LDFLAGS_SL = "${LDFLAGS}"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF_sh4 = "--disable-spinlocks"
+EXTRA_OECONF = "--disable-rpath"
+EXTRA_OECONF_sh4 = "--disable-spinlocks --disable-rpath"
 
 do_compile_append() {
          cp /usr/sbin/zic ${S}/src/timezone/
