@@ -1,7 +1,9 @@
 DESCRIPTION = "Open Source multimedia player."
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mplayerhq.hu/"
-DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses lame libxv virtual/libx11 libass \
+DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
+           libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses lame \
+           libxv virtual/libx11 libass speex \
 	   ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad liba52 lame', d)}"
 
 RDEPENDS_${PN} = "mplayer-common"
@@ -21,7 +23,7 @@ SRCREV = "e3f5043233336d8b4b0731c6a8b42a8fda5535ac"
 ARM_INSTRUCTION_SET = "arm"
 
 PV = "2.0+gitr${SRCPV}"
-PR = "r8"
+PR = "r9"
 
 PARALLEL_MAKE = ""
 
@@ -74,7 +76,7 @@ EXTRA_OECONF = " \
 	--disable-real \
 	--disable-xvid \
 	\
-	--disable-speex \
+	--enable-speex \
 	--enable-theora \
 	--disable-ladspa \
 	--disable-libdv \
