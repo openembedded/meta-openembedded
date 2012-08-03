@@ -2,7 +2,7 @@ DESCRIPTION = "PostgreSQL is a powerful, open source relational database system.
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
 DEPENDS = "zlib readline tzcode-native"
-INC_PR = "r7"
+INC_PR = "r8"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -52,20 +52,26 @@ FILES_${PN}-doc += "${prefix}/doc/"
 FILES_${PN}-timezone = "${datadir}/${PN}/timezone"
 FILES_${PN}-server-dev = "${includedir}/${PN}/server"
 
-FILES_libecpg = "${libdir}/libecpg*.so.*"
+FILES_libecpg = "${libdir}/libecpg*${SOLIBS}"
 FILES_libecpg-dbg = "${libdir}/.debug/libecpg*"
-FILES_libecpg-dev = "${libdir}/libecpg*.a ${libdir}/libecpg*.so \
-                     ${libdir}/libpgtypes*.a ${libdir}/libpgtypes*.so \
+FILES_libecpg-dev = "${libdir}/libecpg*${SOLIBSDEV} \
+                     ${libdir}/libpgtypes*${SOLIBSDEV} \
                      ${includedir}/ecpg*.h ${includedir}/${PN}/ecpg*.h \
                      ${includedir}/pgtypes*.h ${includedir}/${PN}/informix \
                      ${includedir}/sql3types.h ${includedir}/sqlca.h"
+FILES_libecpg-staticdev = "${libdir}/libecpg*.a"
+SECTION_libecpg-staticdev = "devel"
+RDEPENDS_libecpg-staticdev = "libecpg-dev (= ${EXTENDPKGV})"
 
-FILES_libpq = "${libdir}/libpq*.so.*"
+FILES_libpq = "${libdir}/libpq*${SOLIBS}"
 FILES_libpq-dbg = "${libdir}/.debug/libpq* ${libdir}/${PN}/pgxs/src/test/regress/.debug/*"
-FILES_libpq-dev = "${libdir}/libpq*.a ${libdir}/libpq*.so ${libdir}/libpgport.a \
+FILES_libpq-dev = "${libdir}/libpq*${SOLIBSDEV} \
                    ${includedir}"
+FILES_libpq-staticdev = "${libdir}/libpq*.a"
+SECTION_libpq-staticdev = "devel"
+RDEPENDS_libpq-staticdev = "libpq-dev (= ${EXTENDPKGV})"
 
-FILES_libecpg-compat = "${libdir}/libecpg_compat*.so.*"
+FILES_libecpg-compat = "${libdir}/libecpg_compat*${SOLIBS}"
 FILES_libecpg-compat-dbg = "${libdir}/.debug/libecpg_compat*"
-FILES_libpgtypes = "${libdir}/libpgtypes*.so.*"
+FILES_libpgtypes = "${libdir}/libpgtypes*${SOLIBS}"
 FILES_libpgtypes-dbg = "${libdir}/.debug/libpgtypes*"
