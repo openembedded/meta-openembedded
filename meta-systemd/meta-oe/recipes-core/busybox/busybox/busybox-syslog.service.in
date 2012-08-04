@@ -10,3 +10,4 @@ Sockets=syslog.socket
 [Install]
 WantedBy=multi-user.target
 Also=busybox-klogd.service
+Alias=syslog.service
