@@ -1,0 +1,30 @@
+hardcoding cpp does not work when cross compiling systemd.
+since it will use the include headers from host system and
+syscalls are different for different architectures.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Upstream-Status: Pending
+
+Index: systemd-187/Makefile.am
+===================================================================
+--- systemd-187.orig/Makefile.am	2012-07-29 16:39:57.628405921 -0700
++++ systemd-187/Makefile.am	2012-07-29 16:40:37.248405921 -0700
+@@ -1026,7 +1026,7 @@
+ 	src/core/syscall-to-name.h
+ 
+ src/core/syscall-list.txt: Makefile
+-	$(AM_V_GEN)cpp $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include sys/syscall.h < /dev/null | $(AWK) '/^#define[ \t]+__NR_[^ ]+[ \t]+[0-9]/ { sub(/__NR_/, "", $$2); print $$2; }' > $@
++	$(AM_V_GEN)$(CPP) $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include sys/syscall.h < /dev/null | $(AWK) '/^#define[ \t]+__NR_[^ ]+[ \t]+[0-9]/ { sub(/__NR_/, "", $$2); print $$2; }' > $@
+ 
+ src/core/syscall-from-name.gperf: src/core/syscall-list.txt Makefile
+ 	$(AM_V_GEN)$(AWK) 'BEGIN{ print "struct syscall_name { const char* name; int id; };"; print "%null-strings"; print "%%";} { printf "%s, __NR_%s\n", $$1, $$1 }' < $< > $@
+@@ -2199,7 +2199,7 @@
+ 
+ src/udev/keymap/keys.txt: Makefile
+ 	$(AM_V_at)mkdir -p src/udev/keymap
+-	$(AM_V_GEN)cpp $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include linux/input.h < /dev/null | $(AWK) '/^#define[ \t]+KEY_[^ ]+[ \t]+[0-9]/ { if ($$2 != "KEY_MAX") { print $$2 } }' | sed 's/^KEY_COFFEE$$/KEY_SCREENLOCK/' > $@
++	$(AM_V_GEN)$(CPP) $(AM_CPPFLAGS) $(CPPFLAGS) -dM -include linux/input.h < /dev/null | $(AWK) '/^#define[ \t]+KEY_[^ ]+[ \t]+[0-9]/ { if ($$2 != "KEY_MAX") { print $$2 } }' | sed 's/^KEY_COFFEE$$/KEY_SCREENLOCK/' > $@
+ 
+ src/udev/keymap/keys-from-name.gperf: src/udev/keymap/keys.txt Makefile
+ 	$(AM_V_GEN)$(AWK) 'BEGIN{ print "struct key { const char* name; unsigned short id; };"; print "%null-strings"; print "%%";} { print $$1 ", " $$1 }' < $< > $@

@@ -27,6 +27,7 @@ SRCREV = "3fd89536883ea9e24e69f28de0d11cd7cffb42ce"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://use-rootlibdir.patch \
+           file://use-cross-cpp.patch \
            file://gtk-doc.make \
            file://touchscreen.rules \
            file://modprobe.rules \
@@ -62,6 +63,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
 do_configure_prepend() {
+	export CPP="${HOST_PREFIX}cpp ${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}"
 	sed -i /xsltproc/d configure.ac
 
 	cp ${WORKDIR}/gtk-doc.make ${S}/docs/
