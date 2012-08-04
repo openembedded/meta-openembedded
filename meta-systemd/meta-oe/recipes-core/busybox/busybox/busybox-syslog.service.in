@@ -3,7 +3,6 @@ Description=System Logging Service
 Wants=busybox-klogd.service
 
 [Service]
-ExecStartPre=/bin/systemctl stop systemd-kmsg-syslogd.service
 EnvironmentFile=-/etc/default/busybox-syslog
 ExecStart=@base_sbindir@/syslogd -n $OPTIONS
 Sockets=syslog.socket
