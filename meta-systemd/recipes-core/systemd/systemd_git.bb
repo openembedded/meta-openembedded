@@ -19,18 +19,20 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r4"
+PR = "r5"
 
-inherit useradd pkgconfig autotools vala perlnative
+inherit useradd pkgconfig autotools perlnative
 
-SRCREV = "cd96b3b86abb4a88cac2722bdfb6e5d4413f6831"
+SRCREV = "3fd89536883ea9e24e69f28de0d11cd7cffb42ce"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
+           file://use-rootlibdir.patch \
            file://gtk-doc.make \
            file://touchscreen.rules \
            file://modprobe.rules \
            file://var-run.conf \
           "
+
 LDFLAGS_libc-uclibc_append = " -lrt"
 
 S = "${WORKDIR}/git"
@@ -38,6 +40,9 @@ S = "${WORKDIR}/git"
 SYSTEMDDISTRO ?= "debian"
 SYSTEMDDISTRO_angstrom = "angstrom"
 
+CACHED_CONFIGUREVARS = "ac_cv_file__usr_share_pci_ids=no \
+			ac_cv_file__usr_share_hwdata_pci_ids=no \
+			ac_cv_file__usr_share_misc_pci_ids=yes"
 # The gtk+ tools should get built as a separate recipe e.g. systemd-tools
 EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --with-rootprefix=${base_prefix} \
@@ -50,11 +55,9 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-coredump \
                  --disable-introspection \
                  --with-pci-ids-path=/usr/share/misc \
-                 ac_cv_file__usr_share_pci_ids=no \
-                 ac_cv_file__usr_share_hwdata_pci_ids=no \
-                 ac_cv_file__usr_share_misc_pci_ids=yes \
                  --disable-gtk-doc-html \ 
                  --disable-tcpwrap \
+                 --enable-split-usr \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false

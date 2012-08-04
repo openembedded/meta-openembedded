@@ -154,7 +154,10 @@ python populate_packages_prepend () {
 
     # check service-files and call systemd_add_files_and_parse for each entry
     def systemd_check_services():
-        searchpaths = '/etc/systemd/system/ /lib/systemd/system/ /usr/lib/systemd/system/'
+        base_libdir = d.getVar('base_libdir', 1)
+        searchpaths = '/etc/systemd/system/' + ' '
+        searchpaths += d.getVar('base_libdir', 1) + '/systemd/system/' + ' '
+        searchpaths += d.getVar('libdir', 1) + '/systemd/system/' + ' '
         systemd_packages = d.getVar('SYSTEMD_PACKAGES', 1)
         has_exactly_one_service = len(systemd_packages.split()) == 1
         if has_exactly_one_service:
