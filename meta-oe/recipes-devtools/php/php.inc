@@ -7,13 +7,15 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
            libc-client openssl"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
 S = "${WORKDIR}/php-${PV}"
 
 inherit autotools pkgconfig pythonnative
+
+SSTATE_SCAN_FILES += "build-defs.h"
 
 # Common EXTRA_OECONF
 COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
