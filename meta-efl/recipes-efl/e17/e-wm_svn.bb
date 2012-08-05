@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r3"
+PR = "r4"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -110,6 +110,7 @@ FILES_${PN} = "\
   ${libdir}/enlightenment/*plugins/*/*/* \
   ${libdir}/enlightenment/preload/e_precache.so \
   ${datadir}/enlightenment/data/icons \
+  ${datadir}/enlightenment/data/favorites \
   ${datadir}/enlightenment/data/input_methods \
   ${datadir}/enlightenment/data/config/profile.cfg \
   ${datadir}/enlightenment/AUTHORS \
