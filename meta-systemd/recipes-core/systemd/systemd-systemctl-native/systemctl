@@ -25,6 +25,14 @@ while [ $# != 0 ]; do
 			cmd_args="1"
 			shift
 			;;
+		mask)
+			shift
+
+			action="$opt"
+			services="$1"
+			cmd_args="1"
+			shift
+			;;
 		--root=*)
 			ROOT=${opt##--root=}
 			cmd_args="0"
@@ -43,6 +51,16 @@ while [ $# != 0 ]; do
 done
 
 for service in $services; do
+	if [ "$action" = "mask" ]; then
+		if [ ! -d $ROOT/etc/systemd/system/ ]; then
+			mkdir -p $ROOT/etc/systemd/system/
+		fi
+		cmd="ln -s /dev/null $ROOT/etc/systemd/system/$service"
+		echo "$cmd"
+		$cmd
+		exit 0
+	fi
+
 	echo "Try to find location of $service..."
 	# find service file
 	for p in $ROOT/etc/systemd/system \
