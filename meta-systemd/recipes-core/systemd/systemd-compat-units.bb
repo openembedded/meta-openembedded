@@ -3,7 +3,7 @@ DESCRIPTION = "Units to make systemd work better with existing sysvinit scripts"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r16"
+PR = "r17"
 
 inherit allarch
 
@@ -38,11 +38,17 @@ SYSTEMD_DISABLED_SYSV_SERVICES = " \
 pkg_postinst_${PN} () {
 cd $D${sysconfdir}/init.d
 
-echo -n "Disabling the following sysv scripts: "
+echo "Disabling the following sysv scripts: "
+
+OPTS=""
+
+if [ -n "$D" ]; then
+    OPTS="--root=$D"
+fi
 
 for i in ${SYSTEMD_DISABLED_SYSV_SERVICES} ; do
-    if [ \( -e $i -o $i.sh \) -a ! -e $D${base_libdir}/systemd/system/$i.service ] ; then
-        echo -n "$i " ; ln -s /dev/null $D${base_libdir}/systemd/system/$i.service
+    if [ \( -e $i -o $i.sh \) -a ! -e $D${sysconfdir}/systemd/system/$i.service ] ; then
+        echo -n "$i: " ; systemctl ${OPTS} mask $i.service
     fi
 done ; echo
 }
