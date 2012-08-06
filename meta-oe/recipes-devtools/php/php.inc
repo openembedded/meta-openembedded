@@ -13,7 +13,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
 S = "${WORKDIR}/php-${PV}"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig pythonnative
 
 # Common EXTRA_OECONF
 COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
