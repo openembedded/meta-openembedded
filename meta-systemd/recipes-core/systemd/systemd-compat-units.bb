@@ -3,7 +3,7 @@ DESCRIPTION = "Units to make systemd work better with existing sysvinit scripts"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r15"
+PR = "r16"
 
 inherit allarch
 
@@ -26,15 +26,24 @@ do_install() {
 	chmod 0755 ${D}${bindir}/runlevel
 }
 
+SYSTEMD_DISABLED_SYSV_SERVICES = " \
+  busybox-udhcpc \
+  dnsmasq \
+  hwclock \
+  networking \
+  syslog \
+  syslog.busybox \
+"
+
 pkg_postinst_${PN} () {
 cd $D${sysconfdir}/init.d
 
 echo -n "Disabling the following sysv scripts: "
 
-for i in busybox-udhcpc dnsmasq hwclock.sh networking syslog syslog.busybox ; do
-	if [ -e $i ] ; then
-		echo -n "$i " ; ln -s /dev/null $D${systemd_unitdir}/system/$i.service
-	fi
+for i in ${SYSTEMD_DISABLED_SYSV_SERVICES} ; do
+    if [ \( -e $i -o $i.sh \) -a ! -e $D${base_libdir}/systemd/system/$i.service ] ; then
+        echo -n "$i " ; ln -s /dev/null $D${base_libdir}/systemd/system/$i.service
+    fi
 done ; echo
 }
 
