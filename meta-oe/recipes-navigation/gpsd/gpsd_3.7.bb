@@ -5,12 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
 PROVIDES = "virtual/gpsd"
 
-PR = "r5"
+PR = "r0"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-  file://0001-SConstruct-respect-sysroot-setting-when-prepending-L.patch \
   file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
-  file://0003-Revert-The-strptime-prototype-is-not-provided-unless.patch \
   file://0004-SConstruct-remove-rpath.patch \
   file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
   file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
@@ -18,8 +16,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
   file://gpsd \
   file://60-gpsd.rules \
 "
-SRC_URI[md5sum] = "e96881798a0ab67aa3cd5f3249f0e536"
-SRC_URI[sha256sum] = "5ebb0b00c49421eb8fbead81342e5ce63e82065e5ff27da586f10e342b999171"
+SRC_URI[md5sum] = "52d9785eaf1a51298bb8900dbde88f98"
+SRC_URI[sha256sum] = "7800c478ee9d7ca7a502b0f892828561b1fbf7bc69d9d38c447c82c3628302ac"
 
 inherit scons update-rc.d python-dir pythonnative
 
