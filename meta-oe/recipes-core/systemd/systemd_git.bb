@@ -14,7 +14,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r27"
+PR = "r28"
 
 inherit useradd pkgconfig autotools vala perlnative
 
@@ -22,6 +22,7 @@ SRCREV = "3eff4208ffecedd778fec260f0d4b18e94dab443"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            ${UCLIBCPATCHES} \
+           file://var-run.conf \
           "
 UCLIBCPATCHES = ""
 UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
@@ -68,6 +69,8 @@ do_install() {
 	# create machine-id
 	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
 	touch ${D}${sysconfdir}/machine-id
+
+	install -m 0644 ${WORKDIR}/var-run.conf ${D}${sysconfdir}/tmpfiles.d/
 }
 
 python populate_packages_prepend (){
