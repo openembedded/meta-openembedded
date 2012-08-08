@@ -5,6 +5,7 @@ SECTION = "console/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gmp openssl flex-native flex bison-native"
+PR = "r1"
 
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
 SRC_URI[md5sum] = "c8b861305def7c0abae04f7bbefec212"
@@ -18,4 +19,11 @@ inherit autotools
 
 RRECOMMENDS_${PN} = "kernel-module-ipsec"
 
-FILES_${PN}-dbg += "${libexecdir}/ipsec/.debug ${libexecdir}/ipsec/plugins/.debug"
+PACKAGES += "${PN}-plugins"
+FILES_${PN} += "${libdir}/ipsec/lib*${SOLIBS}"
+FILES_${PN}-dev += "${libdir}/ipsec/lib*${SOLIBSDEV} ${libdir}/ipsec/*.la"
+FILES_${PN}-staticdev += "${libdir}/ipsec/*.a"
+FILES_${PN}-dbg += "${libdir}/ipsec/.debug ${libdir}/ipsec/plugins/.debug ${libexecdir}/ipsec/.debug"
+FILES_${PN}-plugins += "${libdir}/ipsec/plugins/*"
+
+INSANE_SKIP_${PN}-plugins = "staticdev"
