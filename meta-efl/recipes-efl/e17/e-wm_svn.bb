@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r4"
+PR = "r5"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -66,9 +66,13 @@ RDEPENDS_${PN}_append_libc-glibc = " glibc-utils "
 # The systray module used to be external, but is part of e-wm now
 RREPLACES_${PN} = "systray"
 
+RREPLACES_${PN}-config-mobile = "${PN}-config-illume2"
+RCONFLICTS_${PN}-config-mobile = "${PN}-config-illume2"
+RPROVIDES_${PN}-config-mobile = "${PN}-config-illume2"
+
 PACKAGES =+ "\
   ${PN}-config-default \
-  ${PN}-config-illume2 \
+  ${PN}-config-mobile \
   ${PN}-config-minimalist \
   ${PN}-config-netbook \
   ${PN}-config-scaleable \
@@ -120,7 +124,7 @@ FILES_${PN} = "\
 "
 
 FILES_${PN}-config-default = "${datadir}/enlightenment/data/config/default"
-FILES_${PN}-config-illume2 = "${datadir}/enlightenment/data/config/illume"
+FILES_${PN}-config-mobile = "${datadir}/enlightenment/data/config/mobile"
 FILES_${PN}-config-minimalist = "${datadir}/enlightenment/data/config/minimalist"
 FILES_${PN}-config-netbook = "${datadir}/enlightenment/data/config/netbook"
 FILES_${PN}-config-scaleable = "${datadir}/enlightenment/data/config/scaleable"
