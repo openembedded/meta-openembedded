@@ -2,7 +2,7 @@
 Description=Login manager for Enlightenment
 
 [Service]
-ExecStart=/usr/sbin/elsa
+ExecStart=/usr/sbin/entrance
 
 [Install]
-WantedBy=multi-user.target
+Alias=display-manager.service
