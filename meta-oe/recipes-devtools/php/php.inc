@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
            libc-client openssl"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r1"
+INC_PR = "r2"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
@@ -43,9 +43,6 @@ LIBS_pn-php =" -lpthread "
 export LIBS
 THREADS_pn-php = "pthread"
 export THREADS
-LD_LIBRARY_PATH_virtclass-native = "${STAGING_LIBDIR_NATIVE}"
-LD_LIBRARY_PATH_pn-php = "${STAGING_LIBDIR}"
-export LD_LIBRARY_PATH
 export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
 export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
 CFLAGS += " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -D_GNU_SOURCE"
