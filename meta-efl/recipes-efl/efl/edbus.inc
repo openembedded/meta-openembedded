@@ -14,6 +14,8 @@ INC_PR = "r0"
 SRCNAME = "e_dbus"
 
 EXTRA_OECONF += "--enable-build-test-gui"
+# it needs to be disabled, because creates circular dependency on elementary
+EXTRA_OECONF += "--disable-edbus-performance-test"
 
 PACKAGES =+ "${PN}-enotify ${PN}-edbus ${PN}-enm ${PN}-ehal ${PN}-econnman ${PN}-eofono ${PN}-eukit ${PN}-ebluez ${PN}-test-gui"
 FILES_${PN}-enotify = "${libdir}/libenotify.so.* ${bindir}/e-notify-send"
@@ -25,3 +27,5 @@ FILES_${PN}-eofono = "${libdir}/libeofono.so.*"
 FILES_${PN}-eukit = "${libdir}/libeukit.so.*"
 FILES_${PN}-ebluez = "${libdir}/libebluez.so.*"
 FILES_${PN}-test-gui = "${bindir}/e_dbus_hal"
+FILES_${PN} += "${datadir}/e_dbus/logo.png"
+

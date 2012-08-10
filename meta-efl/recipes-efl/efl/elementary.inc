@@ -1,11 +1,11 @@
 DESCRIPTION = "EFL based widget set for mobile devices"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=10a051c72424b80bc784a3903651b43b"
-DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb poppler"
+DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb poppler eio"
 
 inherit efl gettext
 
-INC_PR = "r1"
+INC_PR = "r0"
 
 EXTRA_OECONF = "\
   --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \

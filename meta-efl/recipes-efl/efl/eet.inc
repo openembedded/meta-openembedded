@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=da947f414a2ca4323245f1abb1980953"
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r1"
+INC_PR = "r0"
 
 EXTRA_OECONF = "\
   --enable-openssl \

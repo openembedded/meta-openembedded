@@ -10,7 +10,7 @@ DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
 inherit efl gettext
 
 BBCLASSEXTEND = "native"
-INC_PR = "r1"
+INC_PR = "r0"
 
 do_configure_prepend() {
     touch ${S}/po/Makefile.in.in || true
