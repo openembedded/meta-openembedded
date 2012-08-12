@@ -9,7 +9,9 @@ IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
 # avoid circular dependencies
 EXTRA_IMAGEDEPENDS = ""
 
-IMAGE_INSTALL = "kexec kexecboot ubiattach"
+# for ubiattach we have to install full mtd-utils (>700KiB)
+# or use ubiattach-klibc instead
+IMAGE_INSTALL = "kexec kexecboot mtd-utils"
 
 # Do not pollute the initrd image with rootfs features
 IMAGE_FEATURES = ""
