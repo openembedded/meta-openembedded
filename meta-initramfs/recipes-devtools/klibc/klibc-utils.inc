@@ -40,7 +40,6 @@ do_install_append() {
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/mkdir ${D}${base_bindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/mkfifo ${D}${base_bindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/mknod ${D}${base_bindir}
-        install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/modprobe ${D}${base_sbindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/mount ${D}${base_bindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/mv ${D}${base_bindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/nuke ${D}${base_bindir}
@@ -53,7 +52,6 @@ do_install_append() {
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/true ${D}${base_bindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/umount ${D}${base_bindir}
         install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/uname ${D}${base_bindir}
-        install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/wc ${D}${base_bindir}
         ln -s gzip ${D}${base_bindir}/gunzip
         ln -s gzip ${D}${base_bindir}/zcat
 }
@@ -77,7 +75,6 @@ RDEPENDS_klibc-utils-minips = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-mkdir = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-mkfifo = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-mknod = "${THIS_LIBKLIBC}"
-RDEPENDS_klibc-utils-modprobe = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-mount = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-mv = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-nfsmount = "${THIS_LIBKLIBC}"
@@ -94,7 +91,6 @@ RDEPENDS_klibc-utils-sync = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-true = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-umount = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-uname = "${THIS_LIBKLIBC}"
-RDEPENDS_klibc-utils-wc = "${THIS_LIBKLIBC}"
 
 PACKAGES_DYNAMIC = "${KLIBC_UTILS_PKGNAME}-*"
 
