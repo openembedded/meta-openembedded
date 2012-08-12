@@ -58,13 +58,51 @@ do_install_append() {
         ln -s gzip ${D}${base_bindir}/zcat
 }
 
+RDEPENDS_klibc-utils-cat = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-chroot = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-cpio = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-dd = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-dmesg = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-false = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-fstype = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-gzip = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-halt = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-ipconfig = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-kill = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-kinit.shared = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-ln = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-losetup = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-ls = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-minips = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-mkdir = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-mkfifo = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-mknod = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-modprobe = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-mount = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-mv = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-nfsmount = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-nuke = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-pivot-root = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-poweroff = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-readlink = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-reboot = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-resume = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-run-init = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-sh.shared = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-sleep = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-sync = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-true = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-umount = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-uname = "${THIS_LIBKLIBC}"
+RDEPENDS_klibc-utils-wc = "${THIS_LIBKLIBC}"
+
 PACKAGES_DYNAMIC = "${KLIBC_UTILS_PKGNAME}-*"
 
 python populate_packages_prepend () {
 
     base_bin_dir = bb.data.expand('${base_bindir}', d)
-    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_links=True, allow_dirs=True)
+    do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='', allow_links=True, allow_dirs=True)
 
     base_sbin_dir = bb.data.expand('${base_sbindir}', d)
-    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', allow_dirs=True)
+    do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='', allow_dirs=True)
 }
