@@ -6,8 +6,8 @@ AUTHOR = "Gustavo Sverzut Barbieri <barbieri@gmail.com>"
 # the extension modules.
 DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
 RDEPENDS_${PN} += "python-lang"
-PV = "0.7.3+svnr${SRCPV}"
-INC_PR = "r2"
+PV = "1.6.99+svnr${SRCPV}"
+INC_PR = "r0"
 
 # necessary to let the call for python-config succeed
 export BUILD_SYS
