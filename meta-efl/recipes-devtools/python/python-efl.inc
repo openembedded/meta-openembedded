@@ -6,7 +6,6 @@ AUTHOR = "Gustavo Sverzut Barbieri <barbieri@gmail.com>"
 # the extension modules.
 DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
 RDEPENDS_${PN} += "python-lang"
-PV = "1.6.99+svnr${SRCPV}"
 INC_PR = "r0"
 
 # necessary to let the call for python-config succeed
@@ -15,8 +14,12 @@ export HOST_SYS
 
 inherit e-base autotools pkgconfig distutils-base
 
-SRC_URI = "${E_SVN}/trunk/BINDINGS/python;module=${SRCNAME};protocol=http"
-S = "${WORKDIR}/${SRCNAME}"
+SRCVER = "${PV}"
+
+SRC_URI = "\
+  ${E_MIRROR}/BINDINGS/python/${SRCNAME}-${SRCVER}.tar.bz2 \
+"
+S = "${WORKDIR}/${SRCNAME}-${SRCVER}"
 
 
 do_configure_prepend() {
