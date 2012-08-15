@@ -12,7 +12,7 @@ PV = "gitr${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 PR = "r0"
 
-inherit pkgconfig cmake
+inherit pkgconfig cmake gitpkgv
 
 SRCREV = "e952627ff4c116b4ce8541c91cb96bd5422c4a0d"
 SRC_URI = "git://github.com/OSSystems/FreeRDP-Extension-XPUnlimited.git;protocol=git"
