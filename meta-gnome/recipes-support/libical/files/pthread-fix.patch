@@ -1,0 +1,52 @@
+New added pthread feathre leads some deadlock with some unlock code missing.
+This patch fix it.
+
+Signed-off-by: Zhai Edwin <edwin.zhai@intel.com>
+
+Upstream-Status: Pending
+
+Index: libical-0.47/src/libical/icaltimezone.c
+===================================================================
+--- libical-0.47.orig/src/libical/icaltimezone.c	2011-12-16 13:42:25.000000000 +0800
++++ libical-0.47/src/libical/icaltimezone.c	2011-12-16 14:16:25.000000000 +0800
+@@ -1773,7 +1773,7 @@
+     filename = (char*) malloc (filename_len);
+     if (!filename) {
+ 	icalerror_set_errno(ICAL_NEWFAILED_ERROR);
+-	return;
++	goto out;
+     }
+ 
+     snprintf (filename, filename_len, "%s/%s.ics", get_zone_directory(),
+@@ -1783,7 +1783,7 @@
+     free (filename);
+     if (!fp) {
+ 	icalerror_set_errno(ICAL_FILE_ERROR);
+-	return;
++	goto out;
+     }
+ 
+ 	
+@@ -1807,7 +1807,7 @@
+ 
+     if (!subcomp) {
+ 	icalerror_set_errno(ICAL_PARSE_ERROR);
+-	return;
++	goto out;
+     }
+ 
+     icaltimezone_get_vtimezone_properties (zone, subcomp);
+@@ -1817,10 +1817,12 @@
+     icalcomponent_free(comp);
+     }
+ #endif 
+-#ifdef HAVE_PTHREAD
++
+  out:
++#ifdef HAVE_PTHREAD
+     pthread_mutex_unlock(&builtin_mutex);
+ #endif
++    return;
+ }
+ 
+ 
