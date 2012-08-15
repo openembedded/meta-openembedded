@@ -1,0 +1,28 @@
+Upstream-Status: Pending
+
+Fixed these kinds if warning-errors
+
+warning: 'libebookbackendfile.la': linking libtool libraries using a non-POSIX archiver requires 'AM_PROG_AR' in 'configure.ac'
+Signed-Off-By: Nitin A Kamble <nitin.a.kamble@intel.com>
+2012/07/09
+
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac
++++ git/configure.ac
+@@ -17,6 +17,7 @@ dnl This number is meaningless, but we'r
+ dnl library names for backward compatibility.
+ m4_define([api_version], [1.2])
+ 
++
+ dnl Autoconf / Automake Initialization
+ AC_PREREQ(2.58)
+ AC_INIT([evolution-data-server],[eds_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=Evolution-Data-Server])
+@@ -30,6 +31,7 @@ AC_LANG(C)
+ 
+ dnl Automake 1.11 - Silent Build Rules
+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
++m4_ifdef([AM_PROG_AR], [AM_PROG_AR]) # required by automake 1.12
+ 
+ dnl Required Package Versions
+ m4_define([glib_minimum_version], [2.16.1])

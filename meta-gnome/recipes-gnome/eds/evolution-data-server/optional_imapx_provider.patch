@@ -1,0 +1,64 @@
+Upstream-Status: Inappropriate [disable feature]
+
+Index: git/camel/providers/Makefile.am
+===================================================================
+--- git.orig/camel/providers/Makefile.am	2010-07-06 18:49:34.000000000 +0800
++++ git/camel/providers/Makefile.am	2010-07-08 17:23:56.000000000 +0800
+@@ -6,6 +6,10 @@
+ IMAP4_DIR=imap4
+ endif
+ 
++if ENABLE_IMAPX
++IMAPX_DIR=imapx
++endif
++
+ if ENABLE_HULA
+ HULA_DIR=hula
+ endif
+@@ -15,6 +19,6 @@
+ SENDMAIL_DIR=sendmail
+ endif
+ 
+-SUBDIRS = pop3 $(SENDMAIL_DIR) smtp imap imapx $(IMAP4_DIR) $(NNTP_DIR) local groupwise $(HULA_DIR)
++SUBDIRS = pop3 $(SENDMAIL_DIR) smtp imap $(IMAPX_DIR) $(IMAP4_DIR) $(NNTP_DIR) local groupwise $(HULA_DIR)
+ 
+ -include $(top_srcdir)/git.mk
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac	2010-07-08 17:24:36.000000000 +0800
++++ git/configure.ac	2010-07-08 17:32:06.000000000 +0800
+@@ -1002,6 +1002,26 @@
+ AM_CONDITIONAL(ENABLE_IMAP4, [test x$enable_imap4 = xyes])
+ 
+ dnl ******************************
++dnl IMAPX code support.
++dnl ******************************
++AC_ARG_ENABLE(imapx,
++	AS_HELP_STRING([--enable-imapx=no/yes],
++	[Attempt to compile yet another, incomplete, very unsupported IMAPv4r1 implementation]),
++	[],[enable_imapx=no])
++
++if test "x$enable_imapx" = "xyes"; then
++	AC_DEFINE(ENABLE_IMAPX,1,[Really don't try this at home])
++	AC_PATH_PROG(GPERF, gperf)
++	if test -z "$GPERF" ; then
++	AC_MSG_ERROR([You need gperf to compile imapx provider])
++	fi
++	msg_imapx=yes
++else
++	msg_imapx=no
++fi
++AM_CONDITIONAL(ENABLE_IMAPX, [test x$enable_imapx = xyes])
++
++dnl ******************************
+ dnl Hula support
+ dnl ******************************
+ AC_ARG_ENABLE([hula],
+@@ -1541,3 +1561,7 @@
+ if test "x$msg_hula" = "xyes"; then
+ 	echo "Hula support:	$msg_hula"
+ fi
++
++if test "x$msg_imapx" = "xyes"; then
++	echo "IMAPX support:	$msg_imapx"
++fi

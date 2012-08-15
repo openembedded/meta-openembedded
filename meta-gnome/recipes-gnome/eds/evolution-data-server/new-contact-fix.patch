@@ -1,0 +1,23 @@
+When contacts called for the 1st time, adding new contact always failed but
+worked after restart. The reason is e-addressbook-factory used to handle
+addressbook leads a segmentation fault. Root cause is that factory would create
+the data base if not exist, but use it without proper initialization.
+
+This patch fix it.
+
+Upstream-Status: Submitted
+
+Signed-off-by: Edwin Zhai <edwin.zhai@intel.com>
+Index: git/addressbook/backends/file/e-book-backend-file.c
+===================================================================
+--- git.orig/addressbook/backends/file/e-book-backend-file.c	2010-10-20 16:14:31.000000000 +0800
++++ git/addressbook/backends/file/e-book-backend-file.c	2010-10-22 14:11:47.000000000 +0800
+@@ -1217,6 +1217,8 @@
+ 				EContact *contact = NULL;
+ 				EBookBackendSyncStatus status;
+ 
++				/* Initialize file_db, or else following do_create cause seg fault */
++				bf->priv->file_db = db;
+ 				status = do_create (bf, XIMIAN_VCARD, &contact);
+ 				if (status != GNOME_Evolution_Addressbook_Success)
+ 					g_warning ("Cannot create default contact: %d", status);

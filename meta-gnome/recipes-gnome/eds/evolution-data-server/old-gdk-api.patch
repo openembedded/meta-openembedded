@@ -1,0 +1,19 @@
+Do not disable old API after upgrading gtk+.
+This avoid build error due to defination missing.
+
+Signed-off-by: Zhai Edwin <edwin.zhai@intel.com>
+
+Upstream-Status: Inappropriate [configuration]
+
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac	2010-12-16 10:25:24.000000000 +0800
++++ git/configure.ac	2010-12-16 10:25:58.000000000 +0800
+@@ -147,7 +147,6 @@
+ AS_COMPILER_FLAGS(WARNING_FLAGS,
+ 	"-DG_DISABLE_DEPRECATED
+ 	-DPANGO_DISABLE_DEPRECATED
+-	-DGDK_DISABLE_DEPRECATED
+ 	-DGDK_PIXBUF_DISABLE_DEPRECATED
+ 	-DG_DISABLE_SINGLE_INCLUDES
+ 	-DGTK_DISABLE_SINGLE_INCLUDES

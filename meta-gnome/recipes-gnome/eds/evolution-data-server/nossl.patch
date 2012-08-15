@@ -1,0 +1,70 @@
+Upstream-Status: Inappropriate [disable feature]
+
+Index: git/camel/Makefile.am
+===================================================================
+--- git.orig/camel/Makefile.am	2010-02-05 15:25:09.000000000 +0000
++++ git/camel/Makefile.am	2010-02-05 15:25:20.000000000 +0000
+@@ -80,7 +80,6 @@
+ 	camel-store-summary.c			\
+ 	camel-store.c				\
+ 	camel-tcp-stream-raw.c			\
+-	camel-tcp-stream-ssl.c			\
+ 	camel-tcp-stream.c			\
+ 	camel-transport.c			\
+ 	camel-uid-cache.c			\
+@@ -133,7 +132,6 @@
+ 	camel-store-summary.h			\
+ 	camel-store.h				\
+ 	camel-tcp-stream-raw.h			\
+-	camel-tcp-stream-ssl.h			\
+ 	camel-tcp-stream.h			\
+ 	camel-transport.h			\
+ 	camel-uid-cache.h			\
+Index: git/camel/camel.h
+===================================================================
+--- git.orig/camel/camel.h	2010-02-05 15:26:30.000000000 +0000
++++ git/camel/camel.h	2010-02-05 15:26:52.000000000 +0000
+@@ -122,7 +122,6 @@
+ #include <camel/camel-string-utils.h>
+ #include <camel/camel-tcp-stream.h>
+ #include <camel/camel-tcp-stream-raw.h>
+-#include <camel/camel-tcp-stream-ssl.h>
+ #include <camel/camel-text-index.h>
+ #include <camel/camel-transport.h>
+ #include <camel/camel-trie.h>
+Index: git/camel/providers/imap/camel-imap-store.c
+===================================================================
+--- git.orig/camel/providers/imap/camel-imap-store.c	2010-02-05 15:28:19.000000000 +0000
++++ git/camel/providers/imap/camel-imap-store.c	2010-02-05 15:28:38.000000000 +0000
+@@ -51,7 +51,6 @@
+ #include "camel/camel-stream.h"
+ #include "camel/camel-string-utils.h"
+ #include "camel/camel-tcp-stream-raw.h"
+-#include "camel/camel-tcp-stream-ssl.h"
+ #include "camel/camel-url.h"
+ #include "camel/camel-utf8.h"
+ 
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac	2010-02-05 15:31:59.000000000 +0000
++++ git/configure.ac	2010-02-05 15:33:00.000000000 +0000
+@@ -1272,7 +1272,8 @@
+ dnl We have fixed all our instances to use <libical/ical.h>. Until the .pc from
+ dnl libical is fixed, we have to work-around the buggy CFlags.
+ dnl *****
+-	LIBICAL_EXTRA_CFLAGS=" -I`$PKG_CONFIG --variable=includedir libical` "
++	m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
++	LIBICAL_EXTRA_CFLAGS=" -I$PKG_CONFIG_SYSROOT_DIR`$PKG_CONFIG --variable=includedir libical` "
+ 	LIBICAL_EXTRA_LIBS=""
+ 	AC_SUBST(LIBICAL_EXTRA_CFLAGS)
+ 	AC_SUBST(LIBICAL_EXTRA_LIBS)
+Index: git/calendar/libecal/libecal.pc.in
+===================================================================
+--- git.orig/calendar/libecal/libecal.pc.in	2010-02-05 15:39:41.000000000 +0000
++++ git/calendar/libecal/libecal.pc.in	2010-02-05 15:39:55.000000000 +0000
+@@ -12,4 +12,4 @@
+ Version: @VERSION@
+ Requires: libical >= @LIBICAL_REQUIRED@ libedataserver-1.2 dbus-glib-1
+ Libs: -L${libdir} -lecal-1.2
+-Cflags: -I${privincludedir} @LIBICAL_EXTRA_CFLAGS@
++Cflags: -I${privincludedir}
