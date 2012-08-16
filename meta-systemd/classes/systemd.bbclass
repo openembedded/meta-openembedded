@@ -2,6 +2,8 @@ DEPENDS_append = " systemd-systemctl-native"
 
 SYSTEMD_AUTO_ENABLE ??= "enable"
 
+SYSTEMD_AUTO_RRECOMMENDS ??= "enable"
+
 systemd_postinst() {
 OPTS=""
 
@@ -208,12 +210,14 @@ python populate_packages_prepend () {
         if len(rdepends_arr) == 0 and pkg_systemd != '${PN}' and not pkg_systemd_base in rdepends:
             rdepends = '%s %s' % (rdepends, pkg_systemd_base)
         d.setVar('RDEPENDS_' + pkg_systemd, rdepends)
-        # RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
-        rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
-        # not rrecommending myself AND avoid double entries
-        if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
-            rrecommends = '%s %s' % (rrecommends, pkg_systemd)
-        d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
+        auto_rrecommends = d.getVar('SYSTEMD_AUTO_RRECOMMENDS', 1) or 'enable'
+        if auto_rrecommends == 'enable':
+            # RRECOMMENDS_${pkg_systemd_base} += pkg_systemd systemd
+            rrecommends = d.getVar('RRECOMMENDS_' + pkg_systemd_base, 1) or ""
+            # not rrecommending myself AND avoid double entries
+            if pkg_systemd != pkg_systemd_base and not pkg_systemd in rrecommends.split():
+                rrecommends = '%s %s' % (rrecommends, pkg_systemd)
+            d.setVar('RRECOMMENDS_' + pkg_systemd_base, rrecommends)
 
     # run all modifications once when creating package
     if os.path.exists('${D}'):
