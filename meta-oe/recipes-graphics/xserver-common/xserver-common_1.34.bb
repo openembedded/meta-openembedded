@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PR = "r7"
+PR = "r8"
 
 # we are using a gpe-style Makefile
 inherit gpe
@@ -22,6 +22,7 @@ SRC_URI_append = " \
   file://0010-xserver-common-add-support-for-nexus-S-alias-herring.patch \
   file://0011-xserver-common-add-support-for-nexus-one-alias-mahim.patch \
   file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
+  file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
 "
 
 do_install_append() {
