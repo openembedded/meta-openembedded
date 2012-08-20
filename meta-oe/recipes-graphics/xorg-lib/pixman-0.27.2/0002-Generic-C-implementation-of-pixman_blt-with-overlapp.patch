@@ -1,8 +1,13 @@
-From 0c7aa6a3ebc29d7986d2417371df210f3e9a65b4 Mon Sep 17 00:00:00 2001
-From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-Date: Tue, 16 Mar 2010 16:55:28 +0100
-Subject: [PATCH 8/8] Generic C implementation of pixman_blt with overlapping support
+From 211b2bcdb19f86f3868a18520df7dcb4fd122f05 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 19 Aug 2012 14:48:00 +0200
+Subject: [PATCH 2/2] Generic C implementation of pixman_blt with overlapping
+ support
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+This was ported from meta-oe's patch [1]:
 Uses memcpy/memmove functions to copy pixels, can handle the
 case when both source and destination areas are in the same
 image (this is useful for scrolling).
@@ -13,16 +18,22 @@ src_stride == dst_stride). Copying direction is undefined
 for the images with different source and destination stride
 which happen to be in the overlapped areas (but this is an
 unrealistic case anyway).
+
+[1] http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-graphics/xorg-lib/pixman-0.26.2/0008-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
+
+Upstream-Status: Unknown - this patch is in meta-oe for a while
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  pixman/pixman-general.c |   21 ++++++++++++++++++---
  pixman/pixman-private.h |   43 +++++++++++++++++++++++++++++++++++++++++++
  2 files changed, 61 insertions(+), 3 deletions(-)
 
 diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-index 2ccdfcd..90461b6 100644
+index d4b2daa..a86b206 100644
 --- a/pixman/pixman-general.c
 +++ b/pixman/pixman-general.c
-@@ -227,9 +227,24 @@ general_blt (pixman_implementation_t *imp,
+@@ -215,9 +215,24 @@ general_blt (pixman_implementation_t *imp,
               int                      width,
               int                      height)
  {
@@ -51,10 +62,10 @@ index 2ccdfcd..90461b6 100644
  
  static pixman_bool_t
 diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-index cbd48f3..c20d9f0 100644
+index d5e6a72..c77d256 100644
 --- a/pixman/pixman-private.h
 +++ b/pixman/pixman-private.h
-@@ -10,6 +10,7 @@
+@@ -24,6 +24,7 @@
  
  #include "pixman.h"
  #include <time.h>
@@ -62,9 +73,9 @@ index cbd48f3..c20d9f0 100644
  #include <assert.h>
  #include <stdio.h>
  #include <string.h>
-@@ -998,4 +999,46 @@ void pixman_timer_register (pixman_timer_t *timer);
- 
- #endif /* PIXMAN_TIMERS */
+@@ -1096,6 +1097,48 @@ void pixman_timer_register (pixman_timer_t *timer);
+ extern const uint8_t linear_to_srgb[4096];
+ extern const uint16_t srgb_to_linear[256];
  
 +/* a helper function, can blit 8-bit images with src/dst overlapping support */
 +static inline void
@@ -108,7 +119,9 @@ index cbd48f3..c20d9f0 100644
 +    }
 +}
 +
+ #endif /* __ASSEMBLER__ */
+ 
  #endif /* PIXMAN_PRIVATE_H */
 -- 
-1.6.6.1
+1.7.4.4
 
