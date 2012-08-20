@@ -1,0 +1,67 @@
+This patch enable owl menu, which is hidden in the title bar to save space on
+small screen. It has not been used for a long time, rebase needed.
+
+Upstream-Status: Inappropriate [enable feature]
+
+Index: src/gtk/tasks-ui.xml
+===================================================================
+--- src/gtk/tasks-ui.xml	(revision 338)
++++ src/gtk/tasks-ui.xml	(working copy)
+@@ -7,17 +7,14 @@
+       <menuitem action="EditTask"/>
+       <menuitem action="CompleteTask"/>
+       <separator/>
++      <menuitem action="Undo"/>
++      <menuitem action="Redo"/>
++      <separator/>
+       <menuitem action="DeleteTask"/>
+       <menuitem action="PurgeTasks"/>
+       <separator/>
++      <menuitem action="About"/>
+       <menuitem action="Quit"/>
+     </menu>
+-    <menu action="EditMenu">
+-      <menuitem action="Undo"/>
+-      <menuitem action="Redo"/>
+-    </menu>
+-    <menu action="HelpMenu">
+-      <menuitem action="About"/>
+-    </menu>
+   </menubar>
+ </ui>
+Index: src/gtk/main.c
+===================================================================
+--- src/gtk/main.c	(revision 338)
++++ src/gtk/main.c	(working copy)
+@@ -21,6 +21,7 @@
+ #include <libecal/e-cal.h>
+ #include <glib/gi18n.h>
+ #include <gtk/gtk.h>
++#include <libowl/owlwindowmenu.h>
+ 
+ #include <libkoto/ical-util.h>
+ #include <libkoto/koto-actions.h>
+@@ -564,8 +565,8 @@
+   gtk_window_add_accel_group (GTK_WINDOW (window), gtk_ui_manager_get_accel_group (ui_manager));
+   gtk_ui_manager_ensure_update (ui_manager);
+ 
+-  menu = gtk_ui_manager_get_widget (ui_manager, "/MenuBar");
+-  gtk_box_pack_start (GTK_BOX (top_box), menu, FALSE, FALSE, 0);
++  menu = gtk_ui_manager_get_widget (ui_manager, "/MenuBar/TasksMenu");
++  owl_set_window_menu_item (GTK_WINDOW (window), GTK_MENU_ITEM (menu));
+ 
+   box = gtk_vbox_new (FALSE, 4);
+   gtk_container_set_border_width (GTK_CONTAINER (box), 4);
+Index: src/gtk/Makefile.am
+===================================================================
+--- src/gtk/Makefile.am	(revision 338)
++++ src/gtk/Makefile.am	(working copy)
+@@ -4,7 +4,7 @@
+ bin_PROGRAMS = tasks
+ tasks_CPPFLAGS = -I$(top_srcdir)/
+ tasks_CFLAGS = $(WARN_CFLAGS) $(GTK_CFLAGS) $(ECAL_CFLAGS) $(SEXY_CFLAGS)
+-tasks_LDADD = $(top_builddir)/libkoto/libkoto.a $(GTK_LIBS) $(ECAL_LIBS) $(SEXY_LIBS) 
++tasks_LDADD = $(top_builddir)/libkoto/libkoto.a $(GTK_LIBS) $(ECAL_LIBS) $(SEXY_LIBS)  -lowl
+ 
+ tasks_SOURCES = \
+ 	main.c \

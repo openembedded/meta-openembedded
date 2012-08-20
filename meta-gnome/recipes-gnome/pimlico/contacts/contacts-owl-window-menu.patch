@@ -1,0 +1,54 @@
+Upstream-Status: Inappropriate [enable feature]
+
+Index: contacts-0.9/src/contacts-gtk.c
+===================================================================
+--- contacts-0.9.orig/src/contacts-gtk.c	2008-06-06 12:56:08.000000000 +0100
++++ contacts-0.9/src/contacts-gtk.c	2008-06-16 08:14:28.000000000 +0100
+@@ -220,8 +220,8 @@
+ 	vbox7 = gtk_vbox_new (FALSE, 0);
+ 	gtk_container_add (GTK_CONTAINER (main_window), vbox7);
+ 
+-	main_menubar = gtk_menu_bar_new ();
+-	gtk_box_pack_start (GTK_BOX (vbox7), main_menubar, FALSE, FALSE, 0);
++	main_menubar = gtk_menu_new ();
++	gtk_widget_show (main_menubar);
+ 
+ 	contacts_menu = gtk_menu_item_new_with_mnemonic (_("C_ontacts"));
+ 	gtk_container_add (GTK_CONTAINER (main_menubar), contacts_menu);
+Index: contacts-0.9/src/Makefile.am
+===================================================================
+--- contacts-0.9.orig/src/Makefile.am	2008-06-03 09:16:56.000000000 +0100
++++ contacts-0.9/src/Makefile.am	2008-06-16 08:15:34.000000000 +0100
+@@ -40,7 +40,7 @@
+                     contacts-@FRONTEND@.c \
+                     contacts-@FRONTEND@.h
+ 
+-contacts_LDADD   = $(CONTACTS_LIBS) $(DBUS_LIBS)
++contacts_LDADD   = $(CONTACTS_LIBS) $(DBUS_LIBS) -lowl
+ 
+ contacts_LDFLAGS = @CONTACTS_LIBS@ @DBUS_LIBS@
+ 
+Index: contacts-0.9/src/contacts-main.c
+===================================================================
+--- contacts-0.9.orig/src/contacts-main.c	2008-06-06 10:26:52.000000000 +0100
++++ contacts-0.9/src/contacts-main.c	2008-06-16 08:14:28.000000000 +0100
+@@ -27,6 +27,8 @@
+ #include <libgnomevfs/gnome-vfs.h>
+ #endif
+ 
++#include <libowl/owlwindowmenu.h>
++
+ #include "bacon-message-connection.h"
+ #include "contacts-defs.h"
+ #include "contacts-utils.h"
+@@ -266,6 +268,10 @@
+ 		gtk_widget_show_all (widget);
+ 	}
+ 
++	gtk_widget_show_all (data->ui->main_menubar);
++	owl_set_window_menu (GTK_WINDOW (data->ui->main_window),
++			     GTK_MENU (data->ui->main_menubar));
++
+ 	gtk_main ();
+ 
+ 	/* if we have modified the current contact, but not saved it, do so now */
