@@ -1,4 +1,4 @@
-From c36cd1201711560b914e567922903083c3b46ff1 Mon Sep 17 00:00:00 2001
+From 657571197c9d369e12ae31b6777a1929fe3680ef Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Sat, 29 Oct 2011 00:16:55 +0200
 Subject: [PATCH] ecore-fb: fix ts init
@@ -11,31 +11,31 @@ get at least a working touchscreen w/ tslib again.
 Signed-off-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- src/lib/ecore_fb/ecore_fb.c |    4 ++++
+ ecore/src/lib/ecore_fb/ecore_fb.c |    4 ++++
  1 files changed, 4 insertions(+), 0 deletions(-)
 
 diff --git a/src/lib/ecore_fb/ecore_fb.c b/src/lib/ecore_fb/ecore_fb.c
-index ca7d73d..5b99989 100644
+index 5b2b84b..a1904b3 100644
 --- a/src/lib/ecore_fb/ecore_fb.c
 +++ b/src/lib/ecore_fb/ecore_fb.c
-@@ -39,6 +39,9 @@ ecore_fb_init(const char *name __UNUSED__)
+@@ -46,6 +46,9 @@ ecore_fb_init(const char *name __UNUSED__)
     if (!ecore_fb_vt_init())
        return --_ecore_fb_init_count;
  
 +   if (!ecore_fb_ts_init())
 +      return --_ecore_fb_init_count;
 +
-    _ecore_fb_size_get(&_ecore_fb_console_w, &_ecore_fb_console_h);
- 
-    return _ecore_fb_init_count;
-@@ -59,6 +62,7 @@ ecore_fb_shutdown(void)
-    if (--_ecore_fb_init_count != 0)
-       return _ecore_fb_init_count;
- 
+    if (!oldhand)
+      {
+         oldhand = signal(SIGINT, nosigint);
+@@ -77,6 +80,7 @@ ecore_fb_shutdown(void)
+         oldhand = NULL;
+      }
+    
 +   ecore_fb_ts_shutdown();
     ecore_fb_vt_shutdown();
  
     return _ecore_fb_init_count;
 -- 
-1.7.7.1
+1.7.8.6
 

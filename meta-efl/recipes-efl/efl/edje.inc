@@ -1,5 +1,5 @@
 DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
-DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina libsndfile1"
+DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina libsndfile1 eio"
 DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native eina-native"
 DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native eina-native"
 # GPLv2 because of epp in PN-utils
@@ -12,19 +12,19 @@ BBCLASSEXTEND = "native nativesdk"
 INC_PR = "r0"
 
 do_configure_prepend_virtclass-native() {
-	sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
-	sed -i 's: cpp -I: /usr/bin/cpp -I:' ${S}/src/bin/edje_cc_parse.c
-	sed -i 's:\"gcc -I:\"/usr/bin/gcc -I:' ${S}/src/bin/edje_cc_parse.c
+    sed -i 's:EMBRYO_PREFIX"/bin:"${STAGING_BINDIR}:' ${S}/src/bin/edje_cc_out.c
+    sed -i 's: cpp -I: /usr/bin/cpp -I:' ${S}/src/bin/edje_cc_parse.c
+    sed -i 's:\"gcc -I:\"/usr/bin/gcc -I:' ${S}/src/bin/edje_cc_parse.c
 }
 # The new lua stuff is a bit broken...
 do_configure_append() {
-	for i in $(find "${S}" -name "Makefile") ; do
-		sed -i -e 's:-L/usr/local/lib::g'  $i
-	done
+    for i in $(find "${S}" -name "Makefile") ; do
+        sed -i -e 's:-L/usr/local/lib::g'  $i
+    done
 }
 
 do_compile_append() {
-	sed -i -e s:local/::g -e 's:-L${STAGING_LIBDIR}::g' ${S}/edje.pc
+    sed -i -e s:local/::g -e 's:-L${STAGING_LIBDIR}::g' ${S}/edje.pc
 }
 
 # gain some extra performance at the expense of RAM - generally i'd say bad
@@ -60,6 +60,7 @@ FILES_${PN}-utils = "\
   ${datadir}/edje/include/edje.inc \
 "
 
-FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.so"
+FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.so \
+                ${datadir}/mime/packages/edje.xml"
 FILES_${PN}-dev += "${libdir}/${PN}/modules/*/*/module.la"
 FILES_${PN}-dbg += "${libdir}/${PN}/modules/*/*/.debug"

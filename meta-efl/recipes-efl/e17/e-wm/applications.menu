@@ -85,10 +85,10 @@
     <Directory>Accessories.directory</Directory>
     <Include>
       <And>
-	<Or>
+        <Or>
           <Category>Applications</Category>
-	  <Category>Utility</Category>
-	</Or>
+          <Category>Utility</Category>
+        </Or>
         <Not>
           <Category>System</Category>
           <Category>Office</Category>

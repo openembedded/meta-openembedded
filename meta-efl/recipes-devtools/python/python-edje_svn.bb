@@ -1,9 +1,10 @@
-require python-efl.inc
-LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-PR = "${INC_PR}.2"
+require ${BPN}.inc
+PR = "${INC_PR}.0"
 SRCREV = "${EFL_SRCREV}"
-DEPENDS += "edje python-evas"
-RDEPENDS_${PN} += "python-evas"
+PV = "1.6.99+svnr${SRCPV}"
+DEFAULT_PREFERENCE = "-1"
+
+SRC_URI = "${E_SVN}/trunk/BINDINGS/python;module=${SRCNAME};protocol=http"
+S = "${WORKDIR}/${SRCNAME}"
 
 SRC_URI += "file://0001-fix-unicode-conversion.patch"

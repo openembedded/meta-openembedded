@@ -20,6 +20,15 @@ python populate_packages_prepend () {
         output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
         description = 'Evas module %s',
         allow_dirs=True, recursive=False, extra_depends="" )
+        
+        plugin_type = "cserve2"
+        bb.note( "splitting packages for evas %s..." % plugin_type )
+        basedir = bb.data.expand( '${libdir}/evas/%s/loaders' % plugin_type, d )
+
+        do_split_packages(d, basedir, '^(.*)',
+        output_pattern = 'evas-' + plugin_type + "-%s",
+        description = 'Evas csever2 loader module %s',
+        allow_dirs=True, recursive=False, extra_depends="" )
 }
 
 do_install_append() {
@@ -27,9 +36,16 @@ do_install_append() {
 }
 
 FILES_${PN}-dev += "${libdir}/evas/modules/*/*/*/*.a ${libdir}/evas/modules/*/*/*/*.la"
-FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/"
+FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/ ${libdir}/evas/cserve2/loaders/*/*/.debug/"
+FILES_${PN}-cserve2 += "${libexecdir}/evas_cserve2* ${libexecdir}/dummy_slave"
 
-PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-*"
+PACKAGES += "${PN}-cserve2"
+PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-* evas-cserve2-*"
+
+# evas-loader-svg is gone as we don't have esvg and probably won't have anytime soon
+# http://www.intesis.hr/news/16-esvg-source
+# http://blog.gmane.org/gmane.comp.window-managers.enlightenment.user/page=3
+RRECOMMENDS_${PN} += "evas-loader-generic evas-generic-loader-svn"
 
 RRECOMMENDS_${PN} = " \
   evas-engine-fb \

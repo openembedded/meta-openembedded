@@ -3,7 +3,6 @@ LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 DEPENDS = "evas ecore edje elementary webkit-efl"
 PV = "0.3.0.0+svnr${SRCPV}"
-PR = "r1"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e gettext
@@ -15,7 +14,6 @@ do_configure_prepend() {
 }
 
 SRC_URI += "file://eve-theme-for-smaller-screens.patch \
-  file://0001-eve-update-for-newer-webkit-efl.patch \
 "
 
 EXTRA_OECONF = "\

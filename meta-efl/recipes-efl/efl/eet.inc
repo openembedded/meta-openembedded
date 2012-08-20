@@ -16,3 +16,9 @@ EXTRA_OECONF = "\
   --enable-old-eet-file-format \
   --disable-assert \
 "
+
+PACKAGES =+ "${PN}-utils"
+
+FILES_${PN}-utils = "\
+  ${bindir}/${PN} \
+"

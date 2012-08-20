@@ -1,6 +1,9 @@
 HOMEPAGE = "http://www.enlightenment.org"
 SRCNAME ?= "${BPN}"
+SRCVER ?= "${PV}"
 
-EFL_SRCREV ?= "70490"
+EFL_SRCREV ?= "75359"
 
 ARM_INSTRUCTION_SET = "arm"
+
+S = "${WORKDIR}/${SRCNAME}-${SRCVER}"

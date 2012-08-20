@@ -7,7 +7,7 @@ PR = "${INC_PR}.0"
 require e-module.inc
 
 do_configure_prepend() {
-	autopoint || touch config.rpath
+    autopoint || touch config.rpath
 }
 
 # Calls /usr/bin/eject for media

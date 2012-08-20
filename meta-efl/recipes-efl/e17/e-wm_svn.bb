@@ -1,10 +1,10 @@
 DESCRIPTION = "The Enlightenment Window Manager Version 17"
-DEPENDS = "eet evas eina ecore edje efreet edbus eeze"
+DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary"
 LICENSE = "MIT BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=2667a0f4120372ea91f7467cdff4095f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r2"
+PR = "r5"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -25,7 +25,7 @@ EXTRA_OECONF = "\
 "
 
 do_configure_prepend() {
-	autopoint || true
+    autopoint || true
 }
 
 do_install_append() {
@@ -54,6 +54,10 @@ RDEPENDS_${PN} += "\
   edje-utils \
   ${PN}-utils \
   dbus-x11 \
+  evas-loader-png \
+  evas-loader-jpeg \
+  evas-loader-gif \
+  evas-generic-loader-svg \
 "
 
 # Uclibc build don't have 'glibc-utils'
@@ -62,9 +66,13 @@ RDEPENDS_${PN}_append_libc-glibc = " glibc-utils "
 # The systray module used to be external, but is part of e-wm now
 RREPLACES_${PN} = "systray"
 
+RREPLACES_${PN}-config-mobile = "${PN}-config-illume2"
+RCONFLICTS_${PN}-config-mobile = "${PN}-config-illume2"
+RPROVIDES_${PN}-config-mobile = "${PN}-config-illume2"
+
 PACKAGES =+ "\
   ${PN}-config-default \
-  ${PN}-config-illume2 \
+  ${PN}-config-mobile \
   ${PN}-config-minimalist \
   ${PN}-config-netbook \
   ${PN}-config-scaleable \
@@ -72,6 +80,7 @@ PACKAGES =+ "\
   ${PN}-theme-default \
   ${PN}-background-dark-gradient \
   ${PN}-background-light-gradient \
+  ${PN}-backgrounds \
   ${PN}-images \
   ${PN}-icons \
   ${PN}-other \
@@ -105,6 +114,7 @@ FILES_${PN} = "\
   ${libdir}/enlightenment/*plugins/*/*/* \
   ${libdir}/enlightenment/preload/e_precache.so \
   ${datadir}/enlightenment/data/icons \
+  ${datadir}/enlightenment/data/favorites \
   ${datadir}/enlightenment/data/input_methods \
   ${datadir}/enlightenment/data/config/profile.cfg \
   ${datadir}/enlightenment/AUTHORS \
@@ -114,7 +124,7 @@ FILES_${PN} = "\
 "
 
 FILES_${PN}-config-default = "${datadir}/enlightenment/data/config/default"
-FILES_${PN}-config-illume2 = "${datadir}/enlightenment/data/config/illume"
+FILES_${PN}-config-mobile = "${datadir}/enlightenment/data/config/mobile"
 FILES_${PN}-config-minimalist = "${datadir}/enlightenment/data/config/minimalist"
 FILES_${PN}-config-netbook = "${datadir}/enlightenment/data/config/netbook"
 FILES_${PN}-config-scaleable = "${datadir}/enlightenment/data/config/scaleable"
@@ -123,7 +133,8 @@ FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-background-dark-gradient = "${datadir}/enlightenment/data/backgrounds/Dark_Gradient.edj"
 FILES_${PN}-background-light-gradient = "${datadir}/enlightenment/data/backgrounds/Light_Gradient.edj"
-FILES_${PN}-images = "${datadir}/enlightenment/data/images"
+FILES_${PN}-backgrounds = "${datadir}/enlightenment/data/backgrounds/*.edj"
+FILES_${PN}-images = "${datadir}/enlightenment/data/images ${datadir}/enlightenment/data/flags"
 FILES_${PN}-icons = "${datadir}/enlightenment/data/icons"
 FILES_${PN}-other = "${datadir}/enlightenment/data/other"
 FILES_${PN}-input-methods = "${datadir}/enlightenment/data/input_methods"
@@ -133,6 +144,7 @@ FILES_${PN}-menu = "${sysconfdir}/xdg/menus/applications.menu"
 
 FILES_efm-desktop-icon = "\
   ${datadir}/applications/efm.desktop \
+  ${datadir}/applications/enlightenment_filemanager.desktop \
   ${datadir}/icons/e-module-fileman.png \
 "
 

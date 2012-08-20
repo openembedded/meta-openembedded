@@ -1,6 +1,6 @@
 DESCRIPTION = "Enjoy music player"
 LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0f507c68d42d1cc0fcb507d007112bf2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 DEPENDS = "evas ecore edje elementary emotion lightmediascanner"
 SRCREV = "${EFL_SRCREV}"
 PV = "0.0+svnr${SRCPV}"
@@ -35,9 +35,9 @@ do_configure_prepend() {
 }
 
 pkg_postinst_${PN} () {
-	echo "enjoy:	SCAN and LIBRARY MANAGER are not implemeted yet!"
-	echo "enjoy:	Meanwhile please run:"
-	echo "enjoy:	test-lms -m mono -p id3 -i 5000 -s /path/to/your/music/dir /home/root/.config/enjoy/media.db"
-	echo "enjoy:"
-	echo "enjoy:	Use test-lms -P to see available formats that can be scanned"
+    echo "enjoy:    SCAN and LIBRARY MANAGER are not implemeted yet!"
+    echo "enjoy:    Meanwhile please run:"
+    echo "enjoy:    test-lms -m mono -p id3 -i 5000 -s /path/to/your/music/dir /home/root/.config/enjoy/media.db"
+    echo "enjoy:"
+    echo "enjoy:    Use test-lms -P to see available formats that can be scanned"
 }

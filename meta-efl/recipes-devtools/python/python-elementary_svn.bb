@@ -1,7 +1,8 @@
-require python-efl.inc
-LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
-PR = "${INC_PR}.6"
+require ${BPN}.inc
+PR = "${INC_PR}.0"
 SRCREV = "${EFL_SRCREV}"
-DEPENDS += "elementary python-evas"
-RDEPENDS_${PN} += "python-evas python-ecore python-edje" 
+PV = "1.6.99+svnr${SRCPV}"
+DEFAULT_PREFERENCE = "-1"
+
+SRC_URI = "${E_SVN}/trunk/BINDINGS/python;module=${SRCNAME};protocol=http"
+S = "${WORKDIR}/${SRCNAME}"

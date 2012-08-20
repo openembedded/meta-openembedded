@@ -10,13 +10,13 @@ inherit e-base autotools
 # evas-native looks at this var, so keep it
 
 do_configure_prepend() {
-	autopoint || touch config.rpath
+    autopoint || touch config.rpath
 }
 
 do_install_prepend () {
-	for i in `find ${S}/ -name "*.pc" -type f` ; do \
-		sed -i -e 's:-L${STAGING_LIBDIR}:-L\$\{libdir\}:g' -e 's:-I${STAGING_LIBDIR}:-I\$\{libdir\}:g' -e 's:-I${STAGING_INCDIR}:-I\$\{includedir\}:g' $i
-	done
+    for i in `find ${S}/ -name "*.pc" -type f` ; do \
+        sed -i -e 's:-L${STAGING_LIBDIR}:-L\$\{libdir\}:g' -e 's:-I${STAGING_LIBDIR}:-I\$\{libdir\}:g' -e 's:-I${STAGING_INCDIR}:-I\$\{includedir\}:g' $i
+    done
 }
 
 PACKAGES =+ "${PN}-themes"
@@ -60,4 +60,4 @@ FILES_${PN}-dbg +=   "${libdir}/${PN}/.debug \
 
 FILES_${PN}-tests  = "${bindir}/${PN} \
                       ${bindir}/*_* \
-                      ${datadir}"
+                      ${datadir}/${PN}"
