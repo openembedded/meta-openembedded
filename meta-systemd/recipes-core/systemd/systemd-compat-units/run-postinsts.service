@@ -2,7 +2,7 @@
 Description=Run pending postinsts
 DefaultDependencies=no
 ConditionPathExists=|/etc/rcS.d/S98run-postinsts
-After=remount-rootfs.service
+After=remount-rootfs.service tmp.mount
 Before=sysinit.target
 
 [Service]
