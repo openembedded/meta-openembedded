@@ -6,8 +6,8 @@ LICENSE = "QWTv1.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=dac2743472b0462ff3cfb4af42051c88"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt \
-	file://qwt6.patch \
-	"
+           file://qwt6.patch \
+           file://qwt6-fix-linking-with-ld-gold.patch"
 
 S = "${WORKDIR}/qwt-${PV}"
 
