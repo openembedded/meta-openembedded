@@ -19,7 +19,7 @@ DEPENDS = "gperf-native usbutils acl glib-2.0"
 PR = "r4"
 
 # version specific SRC_URI
-SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/hotplug/udev-${PV}.tar.bz2 \
            file://0001-rip-put-doc-generation-it-depends-on-a-working-docto.patch \
            file://gtk-doc.make"
 
