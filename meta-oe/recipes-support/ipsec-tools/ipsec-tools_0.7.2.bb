@@ -1,6 +1,6 @@
 require ipsec-tools.inc
 
-LIC_FILES_CHKSUM = "file://Makefile.in;endline=14;md5=c73d05590728997bfbab5c671ed38366"
+LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
 
 SRC_URI += "file://ipsec-tools-install.patch"
 SRC_URI[ipsec-tools-0.7.2.md5sum] = "72861f005746ee27984b2ee715ecc629"
