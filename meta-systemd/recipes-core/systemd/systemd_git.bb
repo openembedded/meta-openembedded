@@ -32,8 +32,11 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://touchscreen.rules \
            file://modprobe.rules \
            file://var-run.conf \
+           ${UCLIBCPATCHES} \
           "
-
+UCLIBCPATCHES = ""
+UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
+                            "
 LDFLAGS_libc-uclibc_append = " -lrt"
 
 S = "${WORKDIR}/git"
