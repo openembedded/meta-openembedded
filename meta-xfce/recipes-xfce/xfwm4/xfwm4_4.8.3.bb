@@ -3,6 +3,7 @@ SECTION = "x11/wm"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
 DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbus-glib startup-notification"
+PR = "r1"
 
 inherit xfce update-alternatives
 
@@ -18,10 +19,9 @@ python populate_packages_prepend () {
 
 PACKAGES_DYNAMIC += "xfwm4-theme-*"
 
-ALTERNATIVE_NAME = "x-window-manager"
-ALTERNATIVE_LINK = "${bindir}/x-window-manager"
-ALTERNATIVE_PATH = "${bindir}/xfce4-session"
-ALTERNATIVE_PRIORITY = "30"
+ALTERNATIVE_${PN} = "x-window-manager"
+ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/xfwm4"
+ALTERNATIVE_PRIORITY[x-window-manager] = "30"
 
 RDEPENDS_${PN} = "xfwm4-theme-default"
 FILES_${PN} += "${libdir}/xfce4/xfwm4/helper-dialog \
