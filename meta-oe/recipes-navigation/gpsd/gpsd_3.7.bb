@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
 DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
 PROVIDES = "virtual/gpsd"
 
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
   file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
@@ -94,7 +94,7 @@ FILES_gpsd-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.p
 FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
 
 RDEPENDS_${PN} = "gpsd-gpsctl"
-RRECOMMENDS_${PN} = "gpsd-conf gpsd-udev"
+RRECOMMENDS_${PN} = "gpsd-conf gpsd-udev gpsd-machine-conf"
 
 DESCRIPTION_gpsd-udev = "udev relevant files to use gpsd hotplugging"
 FILES_gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
