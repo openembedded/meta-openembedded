@@ -46,18 +46,13 @@ def systemd_after_parse(d):
 			if pkg_systemd.find("-systemd") == -1:
 				if pkg_systemd != d.getVar('PN', 1):
 					raise bb.build.FuncFailed, \
-						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
+						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN}" % \
 						(bb_filename, pkg_systemd)
-				else:
-					# Only complain if recipe lacks native systemd support
-					native_systemd_support = d.getVar('NATIVE_SYSTEMD_SUPPORT', 1) or ""
-					if native_systemd_support == "":
-						bb.warn("%s: it is recommended to set SYSTEMD_PACKAGES as <existing-package>-systemd" % bb_filename)
 			else:
 				pkg_systemd_base = pkg_systemd.replace('-systemd', '')
 				if pkg_systemd_base not in packages:
 					raise bb.build.FuncFailed, \
-						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN} (deprecated)" % \
+						"\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN}" % \
 						( bb_filename, pkg_systemd)
 
 	# prepend systemd-packages not already included
