@@ -5,7 +5,7 @@ PR = "r2"
 
 inherit gnome
 
-DEPENDS = "libglade libart-lgpl virtual/gail"
+DEPENDS = "gtk+ libglade libart-lgpl"
 
 EXTRA_OECONF = "--disable-gtk-doc"
 

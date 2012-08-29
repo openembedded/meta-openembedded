@@ -5,7 +5,7 @@ SECTION = "x11/gnome/libs"
 
 inherit gnome
 
-DEPENDS = "libglade libart-lgpl virtual/gail xineramaproto"
+DEPENDS = "gtk+ libglade libart-lgpl xineramaproto"
 
 EXTRA_OECONF = "--disable-gtk-doc"
 
