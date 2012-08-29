@@ -15,4 +15,4 @@ SRC_URI[sha256sum] = "55604002526c800539f2a8a79e7df3bf23717f45e4bfab31c154c8d01c
 FILES_${PN} += "${libdir}/gtk-2.0/*/engines \
                 ${datadir}/themes/"
 FILES_${PN}-dbg += "${libdir}/gtk-2.0/*/engines/.debug"
-
+FILES_${PN}-staticdev += "${libdir}/gtk-2.0/*/engines/*.a"
