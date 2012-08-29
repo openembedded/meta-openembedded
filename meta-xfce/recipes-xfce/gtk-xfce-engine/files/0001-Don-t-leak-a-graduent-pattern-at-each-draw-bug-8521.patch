@@ -1,0 +1,30 @@
+From 868e3fcbb14b836b6f5f1cc73314aebe8453a939 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 29 Aug 2012 19:59:24 +0200
+Subject: [PATCH] Don't leak a graduent pattern at each draw (bug #8521)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Backport [1]
+[1] http://git.xfce.org/xfce/gtk-xfce-engine/commit/?id=964d4a05896bcb6dfbeec34dccb77e4f381363f1
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/gradient_draw.c |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/src/gradient_draw.c b/src/gradient_draw.c
+index 02deb88..37af559 100644
+--- a/src/gradient_draw.c
++++ b/src/gradient_draw.c
+@@ -278,4 +278,6 @@ void gradient_draw_shaded(cairo_t *cr, gint x, gint y, gint width, gint height,
+     cairo_fill (cr);
+ 
+     cairo_restore(cr);
++
++    cairo_pattern_destroy(gradient);
+ }
+-- 
+1.7.6.5
+
