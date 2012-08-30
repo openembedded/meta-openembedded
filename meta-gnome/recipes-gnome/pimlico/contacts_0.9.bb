@@ -1,6 +1,6 @@
 require contacts.inc
 
-PR = "r7"
+PR = "r8"
 
 SRC_URI =+ "http://pimlico-project.org/sources/${BPN}/${BPN}-${PV}.tar.gz"
 

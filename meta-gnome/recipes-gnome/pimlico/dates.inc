@@ -9,12 +9,3 @@ DEPENDS = "glib-2.0 gtk+ libglade evolution-data-server"
 RDEPENDS_${PN} = "libedata-cal"
 
 inherit autotools gettext pkgconfig gtk-icon-cache
-
-# Poky/Sato specific enhancements
-OWL = "--disable-owl"
-OWL_poky = "--enable-owl --disable-dnd"
-
-EXTRA_OECONF += "${OWL}"
-DEPENDS_append_poky = " libowl"
-SRC_URI_append_poky = " file://dates-owl-window-menu.patch;apply=yes "
-

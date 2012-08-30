@@ -10,6 +10,4 @@ SRC_URI = "http://pimlico-project.org/sources/${BPN}/${BPN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "0afd969758561599fd782e1effb39c08"
 SRC_URI[sha256sum] = "1a7fdc5f95a2193a1a25fdb13f071867fb7e42245ce19ccee4bcccb69e557f2e"
 
-OWL_poky = "--with-owl"
-
-PR = "r2"
+PR = "r3"
