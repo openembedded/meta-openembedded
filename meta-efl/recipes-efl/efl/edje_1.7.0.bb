@@ -1,0 +1,10 @@
+require ${BPN}.inc
+
+PR = "${INC_PR}.0"
+
+SRC_URI = "\
+  ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+"
+
+SRC_URI[md5sum] = "37e15c5d6e7c2676728bda75109b2218"
+SRC_URI[sha256sum] = "d6df9a7bf11c4605f55a2e7c209210044f8dc4f3332135f6256676d2f937621b"
