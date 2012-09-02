@@ -7,9 +7,8 @@ DEPENDS = "openssl"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
            file://fix-hardfloat-detection.patch"
-
-SRC_URI[md5sum] = "4a3d3123ccc7b9b21c1990fe074e3d14"
-SRC_URI[sha256sum] = "6cf4311ecbc1700e88f4382a31b3a7017c1572cd641fd06e653fc1692c2cffff"
+SRC_URI[md5sum] = "fcf8e0f2981f9dd66606a2162a2df55d"
+SRC_URI[sha256sum] = "b7bf4cf143ddf46ba5e975761b98a38dd3d72b176fd5d4bb2f9c9e7bbe6c4b15"
 
 S = "${WORKDIR}/node-v${PV}"
 
