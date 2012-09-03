@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
 
 PROVIDES = "udev"
 
-DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline dbus libcap libcgroup tcp-wrappers usbutils glib-2.0"
+DEPENDS = "xz kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline dbus libcap libcgroup tcp-wrappers usbutils glib-2.0 libgcrypt"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SERIAL_CONSOLE ?= "115200 /dev/ttyS0"
@@ -19,15 +19,14 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r5"
+PR = "r6"
 
 inherit useradd pkgconfig autotools perlnative
 
-SRCREV = "3fd89536883ea9e24e69f28de0d11cd7cffb42ce"
+SRCREV = "38a60d7112d33ffd596b23e8df53d75a7c09e71b"
 
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://use-rootlibdir.patch \
-           file://use-cross-cpp.patch \
            file://gtk-doc.make \
            file://touchscreen.rules \
            file://modprobe.rules \
@@ -35,7 +34,12 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            ${UCLIBCPATCHES} \
           "
 UCLIBCPATCHES = ""
-UCLIBCPATCHES_libc-uclibc = "file://paper-over-mkostemp.patch \
+UCLIBCPATCHES_libc-uclibc = "file://systemd-pam-configure-check-uclibc.patch \
+                             file://systemd-pam-fix-execvpe.patch \
+                             file://systemd-pam-fix-fallocate.patch \
+                             file://systemd-pam-fix-getty-unit.patch \
+                             file://systemd-pam-fix-mkostemp.patch \
+                             file://systemd-pam-fix-msformat.patch \
                             "
 LDFLAGS_libc-uclibc_append = " -lrt"
 
