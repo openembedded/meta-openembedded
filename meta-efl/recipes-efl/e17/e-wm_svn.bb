@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r5"
+PR = "r6"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -163,7 +163,7 @@ FILES_illume-keyboard-default-terminal = "\
 "
 
 RRECOMMENDS_${PN}-config-default = "${PN}-theme-default"
-RRECOMMENDS_${PN}-config-illume2 = "\
+RRECOMMENDS_${PN}-config-mobile = "\
   illume-keyboard-default-alpha \
   illume-keyboard-default-numeric \
   illume-keyboard-default-terminal \
