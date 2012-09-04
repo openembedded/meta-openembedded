@@ -3,15 +3,13 @@ SECTION = "x11/wm"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${TOPDIR}/meta-openembedded/meta-efl/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 PV = "1.0"
-PR = "r2"
-
-# WORK IN PROGRESS
+PR = "r3"
 
 inherit task allarch
 
 # Default theme and config
 ETHEME ?= "e-wm-theme-default"
-ECONFIG ?= "e-wm-config-illume2"
+ECONFIG ?= "e-wm-config-mobile"
 
 RDEPENDS_${PN} = "\
   task-x11-server \
