@@ -2,7 +2,7 @@ DESCRIPTION = "Basic task to get a device booting"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r57"
+PR = "r58"
 
 inherit packagegroup
 
@@ -18,6 +18,10 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 
 # Make sure we build the kernel
 DEPENDS = "virtual/kernel"
+
+RPROVIDES_${PN} += "task-boot"
+RREPLACES_${PN} += "task-boot"
+RCONFLICTS_${PN} += "task-boot"
 
 #
 # minimal set of packages - needed to boot

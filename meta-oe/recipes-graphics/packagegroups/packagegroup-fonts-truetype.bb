@@ -3,7 +3,7 @@ SECTION = "fonts"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 PV = "1.0"
-PR = "r1"
+PR = "r2"
 
 inherit packagegroup allarch
 
@@ -12,14 +12,26 @@ PACKAGES += "\
   ${PN}-chinese \
   ${PN}-japanese \
 "
+RPROVIDES_${PN} += "task-fonts-truetype"
+RPROVIDES_${PN}-core += "task-fonts-truetype-core"
+RPROVIDES_${PN}-chinese += "task-fonts-truetype-chinese"
+RPROVIDES_${PN}-japanese += "task-fonts-truetype-japanese"
+RREPLACES_${PN} += "task-fonts-truetype"
+RREPLACES_${PN}-core += "task-fonts-truetype-core"
+RREPLACES_${PN}-chinese += "task-fonts-truetype-chinese"
+RREPLACES_${PN}-japanese += "task-fonts-truetype-japanese"
+RCONFLICTS_${PN} += "task-fonts-truetype"
+RCONFLICTS_${PN}-core += "task-fonts-truetype-core"
+RCONFLICTS_${PN}-chinese += "task-fonts-truetype-chinese"
+RCONFLICTS_${PN}-japanese += "task-fonts-truetype-japanese"
 
-RRECOMMENDS_packagegroup-fonts-truetype = "\
+RRECOMMENDS_${PN} = "\
   ${PN}-core \
   ${PN}-chinese \
   ${PN}-japanese \
 "
 
-RDEPENDS_packagegroup-fonts-truetype-core = "\
+RDEPENDS_${PN}-core = "\
   fontconfig-utils \
   \
   ttf-dejavu-common \
@@ -28,12 +40,12 @@ RDEPENDS_packagegroup-fonts-truetype-core = "\
 "
 #  ttf-dejavu-serif \
 
-RDEPENDS_packagegroup-fonts-truetype-chinese = "\
+RDEPENDS_${PN}-chinese = "\
   ${PN}-core \
   ttf-arphic-uming \
 "
 
-RDEPENDS_packagegroup-fonts-truetype-japanese = "\
+RDEPENDS_${PN}-japanese = "\
   ${PN}-core \
   ttf-sazanami-gothic \
   ttf-sazanami-mincho \
