@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 PV = "1.0"
 PR = "r1"
 
-inherit task allarch
+inherit packagegroup allarch
 
 PACKAGES += "\
   ${PN}-core \
@@ -13,13 +13,13 @@ PACKAGES += "\
   ${PN}-japanese \
 "
 
-RRECOMMENDS_task-fonts-truetype = "\
+RRECOMMENDS_packagegroup-fonts-truetype = "\
   ${PN}-core \
   ${PN}-chinese \
   ${PN}-japanese \
 "
 
-RDEPENDS_task-fonts-truetype-core = "\
+RDEPENDS_packagegroup-fonts-truetype-core = "\
   fontconfig-utils \
   \
   ttf-dejavu-common \
@@ -28,12 +28,12 @@ RDEPENDS_task-fonts-truetype-core = "\
 "
 #  ttf-dejavu-serif \
 
-RDEPENDS_task-fonts-truetype-chinese = "\
+RDEPENDS_packagegroup-fonts-truetype-chinese = "\
   ${PN}-core \
   ttf-arphic-uming \
 "
 
-RDEPENDS_task-fonts-truetype-japanese = "\
+RDEPENDS_packagegroup-fonts-truetype-japanese = "\
   ${PN}-core \
   ttf-sazanami-gothic \
   ttf-sazanami-mincho \

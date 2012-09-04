@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 PR = "r3"
 
-inherit task
+inherit packagegroup
 
 # mandatory
 RDEPENDS_${PN} = " \
-    task-xfce-base \
+    packagegroup-xfce-base \
 "
 
 # nice to have

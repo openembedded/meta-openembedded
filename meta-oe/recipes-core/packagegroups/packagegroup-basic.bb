@@ -1,4 +1,4 @@
-# This recipe is intended as a 'simpler' replacement for task-base.
+# This recipe is intended as a 'simpler' replacement for packagegroup-base.
 # Please communicate your use cases and suggestions to the mailinglist(s)
 
 DESCRIPTION = "Basic task to get a device online"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 PR = "r9"
 
-inherit task
+inherit packagegroup
 
 # packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
 #
@@ -24,7 +24,7 @@ MACHINE_EXTRA_RRECOMMENDS ?= ""
 TASK_BASIC_SSHDAEMON ?= "dropbear openssh-sftp openssh-sftp-server"
 
 #
-# The section below is designed to match with task-boot, but doesn't depend on it to allow for more freedom 
+# The section below is designed to match with packagegroup-boot, but doesn't depend on it to allow for more freedom 
 # when writing image recipes.
 # It also avoids the choice between connman/networkmanager/ifupdown since that is an image feature, not a
 # distro feature.

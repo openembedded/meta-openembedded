@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 PR = "r57"
 
-inherit task
+inherit packagegroup
 
 # packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
 #

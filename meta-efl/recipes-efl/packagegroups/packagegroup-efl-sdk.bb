@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 ALLOW_EMPTY = "1"
 
-require task-efl-sdk.inc
+require packagegroup-efl-sdk.inc
 
-PACKAGES = "${PN} ${PN}-dbg"
+PACKAGES = "${PN}"
 
 RDEPENDS_${PN} = "\
-    task-core-standalone-sdk-target \
+    packagegroup-core-sdk \
     ${SDK-EFL} \
     ${SDK-EXTRAS}"
