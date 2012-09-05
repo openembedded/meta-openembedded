@@ -8,7 +8,10 @@ DEPENDS = "libxml2 glib-2.0 swig python"
 
 inherit cmake pkgconfig
 
-SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2"
+SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
+           file://fix-parallel-make.patch \
+"
+
 SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
 SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
 
