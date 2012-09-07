@@ -1,0 +1,13 @@
+[Unit]
+Description=DNS forwarder and DHCP server
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/run/dnsmasq.pid
+ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
+ExecReload=/bin/kill -HUP $(/bin/cat /run/dnsmasq.pid)
+
+[Install]
+WantedBy=multi-user.target
+
