@@ -21,8 +21,13 @@ RDEPENDS += "\
        "
 
 inherit e gettext
-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
+SRC_URI = " \
+  ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
+  file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
+"
 S = "${WORKDIR}/${SRCNAME}"
+
+PR = "r1"
 
 FILES_${PN} += "${datadir}/icons/"
 
