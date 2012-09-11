@@ -8,7 +8,7 @@ DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-na
 inherit efl
 
 BBCLASSEXTEND = "native"
-INC_PR = "r0"
+INC_PR = "r1"
 FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
 
 python populate_packages_prepend () {
@@ -112,7 +112,6 @@ EVAS_OECONF = " \
                 --enable-convert-16-rgb-rot-90 \
                 --disable-convert-16-rgb-rot-180 \
                 --enable-convert-16-rgb-rot-270 \
-                ${EVAS_CPU_TWEAKS} \
 "
 
 # either sgx or 6410 atm
@@ -124,6 +123,7 @@ GLES ?= "sgx"
 # If the above sentence confuse you: everything is built and configured as before if you don't have the SDK
 
 EXTRA_OECONF = "${EVAS_OECONF} \
+                ${EVAS_CPU_TWEAKS} \
                 --enable-pthreads \
                 --enable-async-events \
                 --enable-async-preload \
