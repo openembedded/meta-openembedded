@@ -5,9 +5,9 @@ SECTION = "libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r1"
+PR = "r2"
 
-DEPENDS_virtclass-native = "libpng jpeg"
+DEPENDS_virtclass-native = "libpng-native jpeg-native"
 DEPENDS = "libpng jpeg expat gtk+"
 
 BBCLASSEXTEND = "native"
