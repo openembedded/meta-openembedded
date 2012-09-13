@@ -7,7 +7,9 @@ HOMEPAGE = "http://www.netfilter.org/projects/libnfnetlink/index.html"
 SECTION = "devel/libs"
 LICENSE = "GPLv2+"
 
-LIC_FILES_CHKSUM = "file://Makefile.in;endline=13;md5=a44bb8f4c22793d55c5e879eec256702"
+PR = "r1"
+
+LIC_FILES_CHKSUM = "file://src/libnfnetlink.c;beginline=3;endline=11;md5=28bd3bf7f60a78101491eef6b9bb9eba"
 
 SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=libnfnetlink-${PV}"
 SRC_URI[libnfnetlink-1.0.0.md5sum] = "016fdec8389242615024c529acc1adb8"
