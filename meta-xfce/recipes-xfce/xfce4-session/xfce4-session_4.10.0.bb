@@ -2,13 +2,14 @@ DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment
 SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
-DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf xfce4-panel gconf gnome-keyring"
-RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit"
-PR = "r2"
+DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf gnome-keyring"
+RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
 
 inherit xfce
 
-SRC_URI += "file://0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch"
+SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
+SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a72c46ce"
+SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch"
 
 # protect from frightening message that xfce might not work correctly
 pkg_postinst_${PN} () {
@@ -17,12 +18,9 @@ pkg_postinst_${PN} () {
 
 FILES_${PN} += "${libdir}/xfce4/*/*/*.so \
                 ${libdir}/xfce4/session/*-*-* \
-                ${datadir}/xfce4/*/* \
+                ${datadir}/xsessions \
                 ${datadir}/themes/Default/balou/*"
 
 FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
 
 FILES_${PN}-staticdev += "${libdir}/xfce4/*/*/*.*a"
-
-SRC_URI[md5sum] = "461cc38bbd37cab881adbdf943f9a402"
-SRC_URI[sha256sum] = "f0801b8c0ffa7e5d41b29b8df281ac127adf467bf50e8ded8aebe5a02bd99338"

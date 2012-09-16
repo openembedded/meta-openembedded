@@ -1,56 +1,39 @@
-From 64c0acb072057023870881f9fbac29ce08d357db Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 5 Sep 2012 20:14:09 +0200
-Subject: [PATCH] Don't loose xfwm4 when closing session with multiple windows
- waiting for user input
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From 9f3077be682355e1cd07e9a9463e76307292208c Mon Sep 17 00:00:00 2001
+From: Dimitar Zhekov <hamster@mbox.contact.bg>
+Date: Thu, 30 Aug 2012 22:52:14 +0200
+Subject: [PATCH] Handle multiple interactive session save (bug #5379).
 
-When closing a session with more than one window open and waiting for unsaved
-data to be closed, at the next session xfwm4 was not started properly.
+Additionnaly, we now use SmSaveGlobal on log out / shutdown without
+session save which avoids data loss. Previously clients would not save
+anything on log out without session save.
 
-The bug(fix) could be reproduced by
-
-* opening gedit
-* entering some text
-* opening terminal
-* closing session (no YNC-dialog / wait ~1min to close session)
-* reopen session
-
-Bugreport with this patch is found at [1] further discussion at [2].
-
-Upstream-Status: Pending
-
-[1] https://bugzilla.xfce.org/show_bug.cgi?id=5379
-[2] http://mail.xfce.org/pipermail/xfce/2012-August/031174.html
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Based on original work by Chris Bainbridge (chris.bainbridge@gmail.com).
 ---
+Upstream-status: applied
  xfce4-session/xfsm-manager.c |   81 ++++++++++++++++++++++++-----------------
  1 files changed, 47 insertions(+), 34 deletions(-)
 
 diff --git a/xfce4-session/xfsm-manager.c b/xfce4-session/xfsm-manager.c
-index 3078d6a..3cc4c89 100644
+index bf6a446..35811c5 100644
 --- a/xfce4-session/xfsm-manager.c
 +++ b/xfce4-session/xfsm-manager.c
-@@ -96,6 +96,7 @@ struct _XfsmManager
+@@ -98,6 +98,7 @@ struct _XfsmManager
  
-   XfsmManagerState state;
-   XfsmShutdownType shutdown_type;
-+  gboolean         save_session;
+   XfsmShutdownType  shutdown_type;
+   XfsmShutdown     *shutdown_helper;
++  gboolean          save_session;
  
    gboolean         session_chooser;
    gchar           *session_name;
-@@ -225,6 +226,7 @@ xfsm_manager_init (XfsmManager *manager)
-   manager->session_chooser = FALSE;
+@@ -230,6 +231,7 @@ xfsm_manager_init (XfsmManager *manager)
    manager->failsafe_mode = TRUE;
    manager->shutdown_type = XFSM_SHUTDOWN_LOGOUT;
+   manager->shutdown_helper = xfsm_shutdown_get ();
 +  manager->save_session = TRUE;
  
    manager->pending_properties = g_queue_new ();
    manager->starting_properties = g_queue_new ();
-@@ -981,7 +983,9 @@ xfsm_manager_interact (XfsmManager *manager,
+@@ -989,7 +991,9 @@ xfsm_manager_interact (XfsmManager *manager,
            XfsmClient *cl = lp->data;
            if (xfsm_client_get_state (cl) == XFSM_CLIENT_INTERACTING)
              {
@@ -61,9 +44,9 @@ index 3078d6a..3cc4c89 100644
                return;
              }
          }
-@@ -1158,44 +1162,47 @@ xfsm_manager_save_yourself_global (XfsmManager     *manager,
+@@ -1138,44 +1142,47 @@ xfsm_manager_save_yourself_global (XfsmManager     *manager,
+         }
      }
- #endif
  
 -  if (!shutdown || shutdown_save)
 +  /* don't save the session if shutting down without save */
@@ -140,7 +123,7 @@ index 3078d6a..3cc4c89 100644
      }
  }
  
-@@ -1267,7 +1274,12 @@ xfsm_manager_save_yourself_done (XfsmManager *manager,
+@@ -1249,7 +1256,12 @@ xfsm_manager_save_yourself_done (XfsmManager *manager,
                                   XfsmClient  *client,
                                   gboolean     success)
  {
@@ -154,7 +137,7 @@ index 3078d6a..3cc4c89 100644
      {
        xfsm_verbose ("Client Id = %s send SAVE YOURSELF DONE, while not being "
                      "in save mode. Prepare to be nuked!\n",
-@@ -1539,7 +1551,8 @@ xfsm_manager_complete_saveyourself (XfsmManager *manager)
+@@ -1521,7 +1533,8 @@ xfsm_manager_complete_saveyourself (XfsmManager *manager)
    xfsm_verbose ("Manager finished SAVE YOURSELF, session data will be stored now.\n\n");
  
    /* all clients done, store session data */
@@ -165,5 +148,5 @@ index 3078d6a..3cc4c89 100644
    if (manager->state == XFSM_MANAGER_CHECKPOINT)
      {
 -- 
-1.7.6.5
+1.7.4.4
 
