@@ -3,13 +3,11 @@ SECTION = "x11/libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
 DEPENDS = "gtk+ intltool libxfce4util startup-notification xfconf"
-PR = "r1"
 
 inherit xfce
 
 SRC_URI += "file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch"
 
-FILES_${PN} += "${libdir}/xfce4/modules ${libdir}/libglade/2.0/*.so ${datadir}/xfce4/mime ${datadir}/icons/hicolor"
+SRC_URI[md5sum] = "6df1ce474a3d4885aee31cda9dbc9192"
+SRC_URI[sha256sum] = "a2b9fa288ccb5f16fa13264e507ba3f7b8da0176da259a11239f21538c0ea3e2"
 
-SRC_URI[md5sum] = "30bd432dd0f19305e846a122d4c7c6fe"
-SRC_URI[sha256sum] = "39cbed29da06960074014b74abc2ba57db49dc81ab8995fb2160579c51669956"
