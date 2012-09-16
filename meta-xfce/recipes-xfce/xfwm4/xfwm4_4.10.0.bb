@@ -3,14 +3,11 @@ SECTION = "x11/wm"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
 DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbus-glib startup-notification"
-PR = "r1"
 
 inherit xfce update-alternatives
 
-SRC_URI[md5sum] = "66cb65797cea8a62563f69b833c7888b"
-SRC_URI[sha256sum] = "0b0e8bea0b257958ad416ab5678cf0cdd7e909943d4d5ab32afc35295a78227e"
-
-EXTRA_OECONF += " --enable-startup-notification"
+SRC_URI[md5sum] = "333e5e25a85411c304e9b4474bf00537"
+SRC_URI[sha256sum] = "492357bf48121ebffabf2bf0d3b84213d19bf81087321175d687c8a68efe1f9c"
 
 python populate_packages_prepend () {
     themedir = bb.data.expand('${datadir}/themes', d)
