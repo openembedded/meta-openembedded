@@ -12,7 +12,6 @@ RCONFLICTS_${PN} += "task-xfce-base"
 
 RDEPENDS_${PN} = " \
     xfwm4 \
-    xfwm4-theme-default \
     xfce4-session \     
     xfconf \
     xfdesktop \
