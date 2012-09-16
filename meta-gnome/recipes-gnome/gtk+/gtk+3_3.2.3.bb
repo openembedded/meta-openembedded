@@ -22,7 +22,7 @@ SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.xz \
 SRC_URI[md5sum] = "b4edcc69e39159dd7be17828249afb46"
 SRC_URI[sha256sum] = "e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d"
 
-PR = "r1"
+PR = "r2"
 
 inherit autotools pkgconfig
 

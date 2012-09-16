@@ -1,6 +1,6 @@
 require libgee.inc
 PE = "1"
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 DEPENDS += "gobject-introspection-stub"
 DEPENDS_virtclass-native += "gobject-introspection-stub-native"
 

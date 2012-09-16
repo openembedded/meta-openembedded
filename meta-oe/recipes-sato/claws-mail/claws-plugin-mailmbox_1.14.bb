@@ -4,6 +4,8 @@ DEPENDS = "claws-mail"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
+PR = "r1"
+
 SRC_URI = "http://www.claws-mail.org/downloads/plugins/mailmbox-${PV}.tar.gz\
            file://claws-plugin-mailmbox-fixup.patch"
 SRC_URI[md5sum] = "0a5907628c1112cf8e5fe251ed1db551"

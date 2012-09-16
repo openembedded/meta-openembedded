@@ -1,5 +1,5 @@
 require pidgin.inc
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
 DEPENDS += "farsight2 libidn"
 
