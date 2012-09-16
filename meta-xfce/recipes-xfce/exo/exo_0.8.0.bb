@@ -1,20 +1,20 @@
 DESCRIPTION="Application library for the Xfce desktop environment"
 SECTION = "x11"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-DEPENDS = "gtk+ libxfce4util virtual/libx11 perl-native cairo"
-
-PR = "r1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 perl-native cairo"
 
 inherit xfce pythonnative
 
 # SRC_URI must follow inherited one
 SRC_URI += " \
-    file://exo-no-tests-0.6.patch \
+    file://exo-no-tests-0.8.patch \
     file://configure.patch \
     file://gnome-mount \
-    file://fix-qa-desktop-type-error.patch \
 "
+
+SRC_URI[md5sum] = "189bd19210e1d7d8601be1cdf27bf259"
+SRC_URI[sha256sum] = "6e21aa30692affcb45fc8283d034da4a02221d26e3e1facb968d04fed4ba05b0"
 
 # see http://wiki.xfce.org/gnomemount-replacement
 do_install_append () {
@@ -30,6 +30,3 @@ FILES_${PN} += "${datadir}/xfce4/ \
 
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug \
                    "
-
-SRC_URI[md5sum] = "e25333df350abc30999cd16fe96ab690"
-SRC_URI[sha256sum] = "f49cf6a85546f47a1dddb58ce9a5f9364384a6f173cba99deb879e027c811f39"
