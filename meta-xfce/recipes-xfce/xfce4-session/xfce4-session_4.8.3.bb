@@ -4,9 +4,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf xfce4-panel gconf gnome-keyring"
 RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit"
-PR = "r1"
+PR = "r2"
 
 inherit xfce
+
+SRC_URI += "file://0001-Don-t-loose-xfwm4-when-closing-session-with-multiple.patch"
 
 # protect from frightening message that xfce might not work correctly
 pkg_postinst_${PN} () {
