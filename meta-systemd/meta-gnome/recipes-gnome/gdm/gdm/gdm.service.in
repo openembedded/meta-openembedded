@@ -3,7 +3,7 @@ Description=Gnome Display Manager
 After=systemd-user-sessions.service
 
 [Service]
-ExecStart=/usr/sbin/gdm -nodaemon
+ExecStart=%sbindir%/gdm -nodaemon
 StandardOutput=syslog
 
 [Install]
