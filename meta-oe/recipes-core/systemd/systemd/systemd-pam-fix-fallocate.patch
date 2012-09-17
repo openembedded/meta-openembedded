@@ -1,0 +1,82 @@
+Index: git/src/journal/journal-file.c
+===================================================================
+--- git.orig/src/journal/journal-file.c	2012-09-02 09:49:15.126089594 -0700
++++ git/src/journal/journal-file.c	2012-09-02 09:49:17.118089670 -0700
+@@ -34,6 +34,8 @@
+ #include "compress.h"
+ #include "fsprg.h"
+ 
++#include "config.h"
++
+ #define DEFAULT_DATA_HASH_TABLE_SIZE (2047ULL*sizeof(HashItem))
+ #define DEFAULT_FIELD_HASH_TABLE_SIZE (333ULL*sizeof(HashItem))
+ 
+@@ -262,7 +264,7 @@
+ 
+ static int journal_file_allocate(JournalFile *f, uint64_t offset, uint64_t size) {
+         uint64_t old_size, new_size;
+-        int r;
++        int r = 0;
+ 
+         assert(f);
+ 
+@@ -307,10 +309,25 @@
+         /* Note that the glibc fallocate() fallback is very
+            inefficient, hence we try to minimize the allocation area
+            as we can. */
++#ifdef HAVE_POSIX_ALLOCATE
+         r = posix_fallocate(f->fd, old_size, new_size - old_size);
+         if (r != 0)
+                 return -r;
+ 
++#else
++	/* Use good old method to write zeros into the journal file
++	   perhaps very inefficient yet working. */
++	if(new_size > old_size) {
++		char *buf = alloca(new_size - old_size);
++		off_t oldpos = lseek(f->fd, 0, SEEK_CUR);
++		bzero(buf, new_size - old_size);
++		lseek(f->fd, old_size, SEEK_SET);
++		r = write(f->fd, buf, new_size - old_size);
++		lseek(f->fd, oldpos, SEEK_SET);
++	}
++	if (r < 0)
++		return -errno;
++#endif /* HAVE_POSIX_FALLOCATE */
+         if (fstat(f->fd, &f->last_stat) < 0)
+                 return -errno;
+ 
+Index: git/src/journal/journald-kmsg.c
+===================================================================
+--- git.orig/src/journal/journald-kmsg.c	2012-09-02 09:49:15.130089595 -0700
++++ git/src/journal/journald-kmsg.c	2012-09-02 12:26:17.326447895 -0700
+@@ -404,6 +404,7 @@
+ 
+ int server_open_kernel_seqnum(Server *s) {
+         int fd;
++	int r = 0;
+         uint64_t *p;
+ 
+         assert(s);
+@@ -417,8 +418,19 @@
+                 log_error("Failed to open /run/systemd/journal/kernel-seqnum, ignoring: %m");
+                 return 0;
+         }
+-
+-        if (posix_fallocate(fd, 0, sizeof(uint64_t)) < 0) {
++#ifdef HAVE_POSIX_ALLOCATE
++        r = posix_fallocate(fd, 0, sizeof(uint64_t));
++#else
++	/* Use good old method to write zeros into the journal file
++	   perhaps very inefficient yet working. */
++	char *buf = alloca(sizeof(uint64_t));
++	off_t oldpos = lseek(fd, 0, SEEK_CUR);
++	bzero(buf, sizeof(uint64_t));
++	lseek(fd, 0, SEEK_SET);
++	r = write(fd, buf, sizeof(uint64_t));
++	lseek(fd, oldpos, SEEK_SET);
++#endif /* HAVE_POSIX_FALLOCATE */
++	if (r < 0) {
+                 log_error("Failed to allocate sequential number file, ignoring: %m");
+                 close_nointr_nofail(fd);
+                 return 0;
