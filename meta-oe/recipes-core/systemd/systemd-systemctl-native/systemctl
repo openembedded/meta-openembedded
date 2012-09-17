@@ -81,7 +81,7 @@ for service in $services; do
 	wanted_by=$(grep WantedBy $ROOT/$service_file \
 		        | sed 's,WantedBy=,,g' \
 		        | tr ',' '\n' \
-		        | grep '\.target$')
+		        | grep '\(\.target$\)\|\(\.service$\)')
 
 	for r in $wanted_by; do
 		echo "WantedBy=$r found in $service"
