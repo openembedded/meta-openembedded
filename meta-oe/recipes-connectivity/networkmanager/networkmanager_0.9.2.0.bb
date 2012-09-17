@@ -4,13 +4,14 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
 
-PR = "r7"
+PR = "r8"
 
 DEPENDS = "libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
 inherit gnome gettext
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
+    file://0002-ppp-don-t-use-struct-ifpppstatsreq-that-was-removed-.patch \
     file://gtk-doc.make \
 "
 SRC_URI[md5sum] = "bc0b00b8a187762d93c50a9706b4c5c3"
