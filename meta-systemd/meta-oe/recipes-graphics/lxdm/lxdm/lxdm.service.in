@@ -1,0 +1,10 @@
+[Unit]
+Description=LXDE Display Manager
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=%sbindir%/lxdm
+StandardOutput=syslog
+
+[Install]
+Alias=display-manager.service
