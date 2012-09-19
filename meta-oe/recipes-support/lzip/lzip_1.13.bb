@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/lzip/lzip-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "69a40172db5ce896b58d862c50fcd517"
-SRC_URI[sha256sum] = "eabc590d02d404dc1a1cc8e2777ed398370174b68edb22043c8ca0b209dfcd27"
+SRC_URI[md5sum] = "2f401e995c36cca05bd1805aa9c28231"
+SRC_URI[sha256sum] = "c73d36c0a926b71d484eacc192262a1d209674e3f903016f2c74a2bcbc5c28ac"
 
 CONFIGUREOPTS = "\
     '--srcdir=${S}' \
