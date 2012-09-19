@@ -2,15 +2,15 @@ DESCRIPTION = "GNOME themes"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2b543dc97eb7594d026af39d9b54204b"
 
-PR = "r1"
+PR = "r2"
 
 SECTION = "x11/gnome"
-DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native"
+DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
 RDEPENDS_${PN} = "gnome-icon-theme"
 
 EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
 
-inherit gnome
+inherit gnome perlnative
 
 do_configure_prepend() {
 	sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libexecdir}:g' configure.in
