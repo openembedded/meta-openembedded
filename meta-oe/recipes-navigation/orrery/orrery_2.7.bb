@@ -3,6 +3,7 @@ HOMEPAGE    = "http://projects.openmoko.org/projects/orrery/"
 SECTION = "x11/scientific"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://orrery.c;endline=25;md5=d792bdf2b591972da175aecc38d88cfe"
+DEPENDS = "gtk+"
 
 inherit autotools
 
