@@ -2,7 +2,7 @@ DESCRIPTION = "LZMA is a general compression method. LZMA provides high compress
 HOMEPAGE = "http://www.7-zip.org/"
 LICENSE = "LGPL"
 LIC_FILES_CHKSUM = "file://lzma.txt;md5=20251cdc2e3793cceab11878d0aa11b1"
-INC_PR = "r6"
+INC_PR = "r7"
 
 SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@bb.data.getVar('PV',d,1).replace('.','')}.tar.bz2;subdir=${BPN}-${PV} \
            file://001-large_files.patch \
@@ -14,10 +14,10 @@ SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@bb.data.getVar('PV',
 EXTRA_OEMAKE = "-f makefile.gcc"
 
 do_unpack_append() {
-    import oe.process
+    import subprocess
     # Replace MS-DOS line-endings with Unix style line-endings
-    oe.process.run("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
-               cwd=d.getVar("S", True))
+    subprocess.call("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
+                     cwd=d.getVar("S", True), shell=True)
 }
 
 do_compile() {
@@ -32,5 +32,4 @@ do_install() {
         oe_libinstall -a -C C/LzmaUtil liblzma ${D}${libdir}
 }
 
-NATIVE_INSTALL_WORKS = "1"
 BBCLASSEXTEND = "native"
