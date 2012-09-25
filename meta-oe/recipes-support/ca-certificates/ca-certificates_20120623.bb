@@ -2,13 +2,13 @@ DESCRIPTION = "Common CA certificates"
 HOMEPAGE = "http://packages.debian.org/sid/ca-certificates"
 SECTION = "misc"
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://debian/copyright;md5=6275b491c91b57d92ebe11205ebf4dfe"
+LIC_FILES_CHKSUM = "file://debian/copyright;md5=6135800ff6d893c7904d7aad90972eb5"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/c/ca-certificates/ca-certificates_${PV}.tar.gz \
            file://0001-update-ca-certificates-remove-c-rehash.patch"
 
-SRC_URI[md5sum] = "391dea8d827db935ca0d0d1e6641bf23"
-SRC_URI[sha256sum] = "95f3eac93dad4433b5731bc9e106a26e2ccf210acace1927e597477b24187dce"
+SRC_URI[md5sum] = "5105d4cc086f0d4ecf7bf2e4c4667289"
+SRC_URI[sha256sum] = "878cd1130ba056fe5f96decde7e5fc1b71d35eb8565a1515744912e100731ee9"
 
 inherit autotools allarch
 
