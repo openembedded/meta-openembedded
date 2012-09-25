@@ -3,6 +3,9 @@ require ttf.inc
 DESCRIPTION = "MPlus font - TTF Edition"
 HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
 LICENSE = "${PN}"
+LIC_FILES_CHKSUM = "file://LICENSE_E;md5=ac161e96eda00db9a3aec7870b5d9658 \
+                    file://LICENSE_J;md5=a120ca8d7c8e4a475d5277c9aeb95221 \
+"
 PR = "r2"
 
 SRC_URI = "http://osdn.dl.sourceforge.jp/mplus-fonts/6650/mplus-TESTFLIGHT-${PV}.tar.gz"
