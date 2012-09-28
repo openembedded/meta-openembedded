@@ -12,8 +12,12 @@ SRC_URI[sha256sum] = "ae9706285510554cc0813ac92522e0d1672b0ddb065307bfacfcff3c32
 
 inherit autotools pkgconfig perlnative
 
+PR = "r1"
+
 do_configure_prepend() {
-  mv ${S}/configure.in ${S}/configure.ac
+  if [ -f ${S}/configure.in ] ; then
+    mv ${S}/configure.in ${S}/configure.ac
+  fi
 }
 
 RRECOMMENDS_${PN} = "gpsd"
