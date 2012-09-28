@@ -17,7 +17,7 @@ EXTRA_OECONF = "--disable-kernel-module"
 
 PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
 
-RRECOMMENDS_${PN} = "kernel-module-fuse""
+RRECOMMENDS_${PN} = "kernel-module-fuse"
 
 FILES_${PN} += "${libdir}/libfuse.so.*"
 FILES_${PN}-dev += "${libdir}/libfuse*.la"

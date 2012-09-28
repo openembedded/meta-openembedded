@@ -7,7 +7,7 @@ DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
 RDEPENDS_${PN} += "uhd-firmware"
 
 PE = "1"
-INC_PR = "r1"
+INC_PR = "r2"
 
 inherit cmake
 
@@ -20,7 +20,7 @@ FILES_${PN} += "${libdir}/libuhd.so \
 FILES_${PN}-tests += "${datadir}/uhd/tests/*"
 FILES_${PN}-e1xx += "${datadir}/uhd/usrp_e_utils/*"
 FILES_${PN}-dbg += "${datadir}/uhd/examples/.debug/* \
-"                   ${datadir}/uhd/utils/.debug/* \
+                    ${datadir}/uhd/utils/.debug/* \
                     ${datadir}/uhd/tests/.debug/* \
                     ${datadir}/uhd/usrp_e_utils/.debug/*"
 FILES_${PN}-examples = "${datadir}/uhd/examples/*"
