@@ -1,0 +1,61 @@
+Patch from http://patch-tracker.debian.org/package/ptpd
+
+Description: Executable name ptpd
+ This patch adjusts the binary executable to be called ptpd instead of ptpd2.
+ Similarly, the man page name is adjusted.
+Author: Roland Stigge <stigge@antcom.de>
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ src/Makefile |    4 ++--
+ src/ptpd2.8  |    8 ++++----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index dbbe525..a672625 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -1,4 +1,4 @@
+-# Makefile for ptpd2
++# Makefile for ptpd
+ 
+ #
+ # Compile time defines:
+@@ -42,7 +42,7 @@ CFLAGS += -DPTP_EXPERIMENTAL
+ 
+ LDFLAGS+= -lm -lrt
+ 
+-PROG = ptpd2
++PROG = ptpd
+ SRCS = ptpd.c arith.c bmc.c protocol.c display.c\
+ 	dep/msg.c dep/net.c dep/servo.c dep/startup.c dep/sys.c dep/timer.c
+ 
+diff --git a/src/ptpd2.8 b/src/ptpd2.8
+index c6100f4..21f1906 100644
+--- a/src/ptpd2.8
++++ b/src/ptpd2.8
+@@ -1,9 +1,9 @@
+ .\" -*- nroff -*"
+-.TH ptpd2 8 "January, 2012" "version 2.2.0" "Precision Time Protocol daemon"
++.TH ptpd 8 "January, 2012" "version 2.2.0" "Precision Time Protocol daemon"
+ .SH NAME
+-ptpd2 \- Precision Time Protocol daemon (1588-2008)
++ptpd \- Precision Time Protocol daemon (1588-2008)
+ .SH SYNOPSIS
+-.B ptpd2
++.B ptpd
+ [?]
+ [-B]
+ [-c]
+@@ -182,7 +182,7 @@ run as master without NTP
+ set an initial delay request value
+ .TP
+ .B \-L
+-enable running multiple ptpd2 daemons
++enable running multiple ptpd daemons
+ .TP
+ .B \-j
+ turn off IGMP refresh messages
+-- 
+1.7.4
+

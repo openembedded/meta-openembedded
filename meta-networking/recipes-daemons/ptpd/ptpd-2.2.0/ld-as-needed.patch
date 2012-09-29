@@ -1,0 +1,37 @@
+Patch from http://patch-tracker.debian.org/package/ptpd
+
+Description: Fix ld --as-needed
+ This patch fixes the order of gcc arguments to fix ld --as-needed
+Author: Roland Stigge <stigge@antcom.de>
+Bug-Debian: http://bugs.debian.org/607583
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ src/Makefile |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index a672625..88a2fc8 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -40,7 +40,7 @@ CFLAGS += -DDBG_SIGUSR2_CHANGE_DEBUG
+ 
+ CFLAGS += -DPTP_EXPERIMENTAL
+ 
+-LDFLAGS+= -lm -lrt
++LIBS += -lm -lrt
+ 
+ PROG = ptpd
+ SRCS = ptpd.c arith.c bmc.c protocol.c display.c\
+@@ -63,7 +63,7 @@ TAGFILES = GPATH GRTAGS GSYMS GTAGS cscope.in.out cscope.out cscope.po.out
+ all: $(PROG)
+ 
+ $(PROG): $(OBJS)
+-	$(CC) -o $@ $(OBJS) $(LDFLAGS)
++	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
+ 
+ $(OBJS): $(HDRS)
+ 
+-- 
+1.7.4
+
