@@ -2,13 +2,13 @@ DESCRIPTION = "USB CEC Adaptor communication Library"
 HOMEPAGE = "http://libcec.pulse-eight.com/"
 
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=185ead350fec5fc223da0f65f9a802af"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
 
-DEPENDS = "udev"
+DEPENDS = "udev lockdev"
 
-PR = "r1"
-PV = "1.4.0"
-SRCREV = "2db8981f49fbd167ddbbf19c1fbadd064abc332a"
+PV = "1.9.0"
+
+SRCREV = "9884e9ffc5293de5bb9092db1ed581f213a678df"
 SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
 
 S = "${WORKDIR}/git"
