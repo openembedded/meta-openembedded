@@ -1,0 +1,23 @@
+Using the way swig interface is installed leads to a bad path in ${D}.
+The interface ended up in ${D}/${STAGING_DIR_NATIVE} which is wrong. The
+fix is to define a variable in recipe which is used in install rule by
+talloc.
+
+Upstream-Status: Inappropriate [build system specific]
+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+
+Index: talloc-2.0.1/talloc.mk
+===================================================================
+--- talloc-2.0.1.orig/talloc.mk	2009-10-11 16:42:24.000000000 +0300
++++ talloc-2.0.1/talloc.mk	2012-09-13 23:15:05.283539702 +0300
+@@ -23,8 +23,8 @@
+ 	${INSTALLCMD} -m 644 talloc.pc $(DESTDIR)$(libdir)/pkgconfig
+ 	if [ -f talloc.3 ];then ${INSTALLCMD} -d $(DESTDIR)$(mandir)/man3; fi
+ 	if [ -f talloc.3 ];then ${INSTALLCMD} -m 644 talloc.3 $(DESTDIR)$(mandir)/man3; fi
+-	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)`swig -swiglib` || true
+-	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)`swig -swiglib` || true
++	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)/$(SWIGLIBDIR) || true
++	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
+ 
+ doc:: talloc.3 talloc.3.html
+ 
