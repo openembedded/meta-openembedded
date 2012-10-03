@@ -11,7 +11,7 @@ ARM_INSTRUCTION_SET = "arm"
 # faac faad2 lame schroedinger libgsm
 DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 
-INC_PR = "r4"
+INC_PR = "r5"
 
 inherit autotools pkgconfig
 
@@ -73,7 +73,7 @@ do_install_append() {
 FFMPEG_LIBS = "libavcodec libavdevice libavformat \
                libavutil libpostproc libswscale libavfilter"
 
-PACKAGES += "${PN}-vhook-dbg ${PN}-vhook"
+PACKAGES += "${PN}-vhook-dbg ${PN}-vhook ffmpeg-x264-presets"
 
 RSUGGESTS_${PN} = "mplayer"
 FILES_${PN} = "${bindir}"
@@ -82,51 +82,41 @@ FILES_${PN}-dev = "${includedir}/${PN}"
 FILES_${PN}-vhook = "${libdir}/vhook"
 FILES_${PN}-vhook-dbg += "${libdir}/vhook/.debug"
 
-
-PACKAGES += "ffmpeg-x264-presets \
-             libavcodec  libavcodec-dev  libavcodec-dbg \
-             libavdevice libavdevice-dev libavdevice-dbg \
-             libavformat libavformat-dev libavformat-dbg \
-             libavutil   libavutil-dev   libavutil-dbg \
-             libpostproc libpostproc-dev libpostproc-dbg \
-             libswscale  libswscale-dev  libswscale-dbg \
-             libavfilter libavfilter-dev libavfilter-dbg \
-             libavcore   libavcore-dev   libavcore-dbg \
-            "
-
 FILES_ffmpeg-x264-presets = "${datadir}/*.ffpreset"
 
 LEAD_SONAME = "libavcodec.so"
 
 FILES_${PN}-dev = "${includedir}"
-FILES_libavcodec = "${libdir}/libavcodec*.so.*"
-FILES_libavcodec-dev = "${libdir}/libavcodec*.so ${libdir}/pkgconfig/libavcodec.pc ${libdir}/libavcodec*.a"
-FILES_libavcodec-dbg += "${libdir}/.debug/libavcodec*"
 
-FILES_libavdevice = "${libdir}/libavdevice*.so.*"
-FILES_libavdevice-dev = "${libdir}/libavdevice*.so ${libdir}/pkgconfig/libavdevice.pc ${libdir}/libavdevice*.a"
-FILES_libavdevice-dbg += "${libdir}/.debug/libavdevice*"
+python populate_packages_prepend() {
+    av_libdir = bb.data.expand('${libdir}', d)
+    av_pkgconfig = bb.data.expand('${libdir}/pkgconfig', d)
 
-FILES_libavformat = "${libdir}/libavformat*.so.*"
-FILES_libavformat-dev = "${libdir}/libavformat*.so ${libdir}/pkgconfig/libavformat.pc ${libdir}/libavformat*.a"
-FILES_libavformat-dbg += "${libdir}/.debug/libavformat*"
+    # Runtime package
+    do_split_packages(d, av_libdir, '^lib(.*)\.so\..*',
+                      output_pattern='lib%s',
+                      description='libav %s library',
+                      prepend=True,
+                      allow_links=True)
 
-FILES_libavutil = "${libdir}/libavutil*.so.*"
-FILES_libavutil-dev = "${libdir}/libavutil*.so ${libdir}/pkgconfig/libavutil.pc ${libdir}/libavutil*.a"
-FILES_libavutil-dbg += "${libdir}/.debug/libavutil*"
+    # Development packages (-dev, -staticdev)
+    do_split_packages(d, av_libdir, '^lib(.*)\.so$',
+                      output_pattern='lib%s-dev',
+                      description='libav %s development package',
+                      extra_depends='${PN}-dev',
+                      prepend=True,
+                      allow_links=True)
+    do_split_packages(d, av_pkgconfig, '^lib(.*)\.pc$',
+                      output_pattern='lib%s-dev',
+                      description='libav %s development package',
+                      extra_depends='${PN}-dev',
+                      prepend=True)
+    do_split_packages(d, av_libdir, '^lib(.*)\.a$',
+                      output_pattern='lib%s-staticdev',
+                      description='libav %s development package - static library',
+                      extra_depends='${PN}-dev',
+                      prepend=True,
+                      allow_links=True)
+}
 
-FILES_libpostproc = "${libdir}/libpostproc*.so.*"
-FILES_libpostproc-dev = "${libdir}/libpostproc*.so  ${libdir}/pkgconfig/libpostproc.pc ${libdir}/libpostproc*.a ${includedir}/postproc"
-FILES_libpostproc-dbg += "${libdir}/.debug/libpostproc*"
-
-FILES_libswscale = "${libdir}/libswscale*.so.*"
-FILES_libswscale-dev = "${libdir}/libswscale*.so ${libdir}/pkgconfig/libswscale.pc ${libdir}/libswscale*.a"
-FILES_libswscale-dbg += "${libdir}/.debug/libswscale*"
-
-FILES_libavfilter = "${libdir}/libavfilter*.so.*"
-FILES_libavfilter-dev = "${libdir}/libavfilter*.so ${libdir}/pkgconfig/libavfilter.pc ${libdir}/libavfilter*.a"
-FILES_libavfilter-dbg += "${libdir}/.debug/libavfilter*"
-
-FILES_libavcore = "${libdir}/libavcore*.so.*"
-FILES_libavcore-dev = "${libdir}/libavcore*.so ${libdir}/pkgconfig/libavcore.pc ${libdir}/libavcore*.a"
-FILES_libavcore-dbg += "${libdir}/.debug/libavcore*"
+PACKAGES_DYNAMIC = "lib*"
