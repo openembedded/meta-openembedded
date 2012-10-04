@@ -6,6 +6,8 @@ HOMEPAGE ="http://sourceforge.net/projects/musicpd"
 DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio \
            ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad lame libid3tag', d)}"
 
+PR = "r1"
+
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/musicpd/${PN}/${PV}/${PN}-${PV}.tar.bz2 \
     file://mpd.conf.in \
