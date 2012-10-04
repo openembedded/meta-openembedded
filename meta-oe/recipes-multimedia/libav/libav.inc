@@ -11,7 +11,7 @@ ARM_INSTRUCTION_SET = "arm"
 # faac faad2 lame schroedinger libgsm
 DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 
-INC_PR = "r5"
+INC_PR = "r6"
 
 inherit autotools pkgconfig
 
@@ -38,8 +38,8 @@ EXTRA_OECONF = " \
         --cross-prefix=${TARGET_PREFIX} \
         --prefix=${prefix} \
         \
-        --enable-ffserver \
-        --enable-ffplay \
+        --enable-avserver \
+        --enable-avplay \
         --enable-x11grab \
         --enable-libtheora  \
         --enable-libvorbis \
@@ -82,7 +82,7 @@ FILES_${PN}-dev = "${includedir}/${PN}"
 FILES_${PN}-vhook = "${libdir}/vhook"
 FILES_${PN}-vhook-dbg += "${libdir}/vhook/.debug"
 
-FILES_ffmpeg-x264-presets = "${datadir}/*.ffpreset"
+FILES_ffmpeg-x264-presets = "${datadir}/*.avpreset"
 
 LEAD_SONAME = "libavcodec.so"
 
