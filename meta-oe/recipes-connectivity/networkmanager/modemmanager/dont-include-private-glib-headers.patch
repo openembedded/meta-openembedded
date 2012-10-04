@@ -1,0 +1,94 @@
+From 28f64090dfa15097587bbea69209df10b8ab8593 Mon Sep 17 00:00:00 2001
+From: Aleksander Morgado <aleksander@lanedo.com>
+Date: Mon, 24 Oct 2011 19:09:11 +0000
+Subject: core: don't include private headers from glib
+
+The "glib/gtypes.h" is now considered private, and only "glib.h" should be
+included directly.
+---
+diff --git a/src/mm-at-serial-port.h b/src/mm-at-serial-port.h
+index 5d5f13f..cec5dc3 100644
+--- a/src/mm-at-serial-port.h
++++ b/src/mm-at-serial-port.h
+@@ -18,7 +18,6 @@
+ #define MM_AT_SERIAL_PORT_H
+ 
+ #include <glib.h>
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ 
+ #include "mm-serial-port.h"
+diff --git a/src/mm-manager.h b/src/mm-manager.h
+index 1c98458..c6a64bd 100644
+--- a/src/mm-manager.h
++++ b/src/mm-manager.h
+@@ -17,7 +17,6 @@
+ #ifndef MM_MANAGER_H
+ #define MM_MANAGER_H
+ 
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ #include <dbus/dbus-glib.h>
+ #include "mm-modem.h"
+diff --git a/src/mm-modem-base.h b/src/mm-modem-base.h
+index 933aae1..be11af6 100644
+--- a/src/mm-modem-base.h
++++ b/src/mm-modem-base.h
+@@ -18,7 +18,6 @@
+ #define MM_MODEM_BASE_H
+ 
+ #include <glib.h>
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ 
+ #include "mm-port.h"
+diff --git a/src/mm-plugin-base.h b/src/mm-plugin-base.h
+index 4b0932c..5b049a4 100644
+--- a/src/mm-plugin-base.h
++++ b/src/mm-plugin-base.h
+@@ -17,7 +17,6 @@
+ #define MM_PLUGIN_BASE_H
+ 
+ #include <glib.h>
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ 
+ #define G_UDEV_API_IS_SUBJECT_TO_CHANGE
+diff --git a/src/mm-port.h b/src/mm-port.h
+index 4bcffd4..df935db 100644
+--- a/src/mm-port.h
++++ b/src/mm-port.h
+@@ -17,7 +17,6 @@
+ #define MM_PORT_H
+ 
+ #include <glib.h>
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ 
+ typedef enum {
+diff --git a/src/mm-qcdm-serial-port.h b/src/mm-qcdm-serial-port.h
+index 2786ee8..605016d 100644
+--- a/src/mm-qcdm-serial-port.h
++++ b/src/mm-qcdm-serial-port.h
+@@ -18,7 +18,6 @@
+ #define MM_QCDM_SERIAL_PORT_H
+ 
+ #include <glib.h>
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ 
+ #include "mm-serial-port.h"
+diff --git a/src/mm-serial-port.h b/src/mm-serial-port.h
+index eb12cbb..9450926 100644
+--- a/src/mm-serial-port.h
++++ b/src/mm-serial-port.h
+@@ -18,7 +18,6 @@
+ #define MM_SERIAL_PORT_H
+ 
+ #include <glib.h>
+-#include <glib/gtypes.h>
+ #include <glib-object.h>
+ 
+ #include "mm-port.h"
+--
+cgit v0.9.0.2-2-gbebe
