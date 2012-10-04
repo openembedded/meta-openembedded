@@ -83,7 +83,7 @@ do_configure_prepend() {
     echo "LIBS+=-L../qpy/QtCore/ -lqpycore" >>QtCore/QtCore.pro
     echo "LIBS+=-L../qpy/QtDeclarative/ -lqpydeclarative" >>QtDeclarative/QtDeclarative.pro
     # hack for broken generated code (duplicated sipCpp declaration).
-    patch -p1 < ${WORKDIR}/pyqt-generated.patch
+    patch -p1 < ${WORKDIR}/pyqt-generated.patch || echo "pyqt-generated.patch failed to apply, probably reexecuting do_configure, ignoring that"
 }
 
 do_install() {
