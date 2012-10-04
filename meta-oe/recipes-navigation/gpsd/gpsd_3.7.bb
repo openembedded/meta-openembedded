@@ -2,10 +2,12 @@ DESCRIPTION = "A TCP/IP Daemon simplifying the communication with GPS devices"
 SECTION = "console/network"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
-DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-native"
+DEPENDS = "dbus dbus-glib ncurses python libusb1 chrpath-replacement-native"
 PROVIDES = "virtual/gpsd"
 
-PR = "r1"
+EXTRANATIVEPATH += "chrpath-native"
+
+PR = "r2"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
   file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
