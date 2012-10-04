@@ -16,6 +16,7 @@ SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=
 SRCREV = "8988"
 
 PV = "2.4.2"
+PR = "r1"
 
 S = "${WORKDIR}/opencv"
 
