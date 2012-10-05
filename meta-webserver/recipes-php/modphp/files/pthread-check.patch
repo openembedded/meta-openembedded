@@ -1,0 +1,64 @@
+Hack configure script so it does not disable pthread support when cross-compiling
+
+Upstream-Status: Inapproprate [config]
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+diff --git a/configure b/configure
+index 03d8f95..6794d45 100755
+--- a/configure
++++ b/configure
+@@ -3506,7 +3506,7 @@ fi
+   
+ if test "$cross_compiling" = yes; then
+   
+-    pthreads_working=no
++    pthreads_working=yes
+   case $host_alias in
+   *netware*)
+     pthreads_working=yes
+@@ -3566,7 +3566,7 @@ else
+       
+ if test "$cross_compiling" = yes; then
+   
+-    pthreads_working=no
++    pthreads_working=yes
+   case $host_alias in
+   *netware*)
+     pthreads_working=yes
+@@ -3636,7 +3636,7 @@ if test "$pthreads_working" != "yes"; then
+     
+ if test "$cross_compiling" = yes; then
+   
+-    pthreads_working=no
++    pthreads_working=yes
+   case $host_alias in
+   *netware*)
+     pthreads_working=yes
+@@ -106833,7 +106833,7 @@ fi
+   
+ if test "$cross_compiling" = yes; then
+   
+-    pthreads_working=no
++    pthreads_working=yes
+   case $host_alias in
+   *netware*)
+     pthreads_working=yes
+@@ -106893,7 +106893,7 @@ else
+       
+ if test "$cross_compiling" = yes; then
+   
+-    pthreads_working=no
++    pthreads_working=yes
+   case $host_alias in
+   *netware*)
+     pthreads_working=yes
+@@ -106963,7 +106963,7 @@ if test "$pthreads_working" != "yes"; then
+     
+ if test "$cross_compiling" = yes; then
+   
+-    pthreads_working=no
++    pthreads_working=yes
+   case $host_alias in
+   *netware*)
+     pthreads_working=yes

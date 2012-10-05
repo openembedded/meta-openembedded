@@ -1,0 +1,73 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: httpd
+# Required-Start: $local_fs $remote_fs $network $named
+# Required-Stop: $local_fs $remote_fs $network
+# Should-Start: distcache
+# Short-Description: start and stop Apache HTTP Server
+# Description: The Apache HTTP Server is an extensible server
+#  implementing the current HTTP standards.
+### END INIT INFO
+
+ARGS="-D SSL -k start"
+NAME=apache2
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+DAEMON=/usr/sbin/httpd
+SUEXEC=/usr/lib/apache/suexec
+PIDFILE=/var/run/$NAME.pid
+CONF=/etc/apache2/httpd.conf
+APACHECTL=/usr/sbin/apachectl 
+
+trap "" 1
+export LANG=C
+export PATH
+
+test -f $DAEMON || exit 0
+test -f $APACHECTL || exit 0
+
+# ensure we don't leak environment vars into apachectl
+APACHECTL="env -i LANG=${LANG} PATH=${PATH} $APACHECTL"
+
+case "$1" in
+  start)
+    echo -n "Starting web server: $NAME"
+    $APACHECTL $ARGS
+    ;;
+
+  stop)
+    $APACHECTL stop
+    ;;
+
+  reload)
+    echo -n "Reloading $NAME configuration"
+    $APACHECTL reload
+    ;;
+
+  reload-modules)
+    echo -n "Reloading $NAME modules"
+    $APACHECTL restart
+    ;;
+
+  restart)
+    $APACHECTL restart
+    exit $?
+    ;;
+
+  force-reload)
+    $0 reload-modules
+    exit $?
+    ;;
+
+  *)
+    echo "Usage: /etc/init.d/$NAME {start|stop|reload|reload-modules|force-reload|restart}"
+    exit 1
+    ;;
+esac
+
+if [ $? = 0 ]; then
+	echo .
+	exit 0
+else
+	echo failed
+	exit 1
+fi
