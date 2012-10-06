@@ -8,13 +8,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
 
 DEPENDS = "fuse virtual/libusb0"
 
-PR = "r1"
-
 SRC_URI = "${SOURCEFORGE_MIRROR}/owfs/owfs-${PV}.tar.gz \
            file://owhttpd \
            file://owserver "
-SRC_URI[md5sum] = "24ec3d04ded1b199831f03e70d9e2f1f"
-SRC_URI[sha256sum] = "5bbc4ff01865e114f52ef75fd7dd3a5ee52b9ad6841504cc6155a353c516ed87"
+SRC_URI[md5sum] = "9aebee6c0e724553f5be6a542494eae5"
+SRC_URI[sha256sum] = "2374ce7864927a430da83691eb994382407e2dba492f9789b560d025841cc8ba"
 
 inherit autotools update-rc.d
 
@@ -69,4 +67,3 @@ INITSCRIPT_NAME_owserver = "owserver"
 INITSCRIPT_NAME_owhttpd = "owhttpd"
 INITSCRIPT_PARAMS_owserver = "defaults 20"
 INITSCRIPT_PARAMS_owhttpd = "defaults 21"
-
