@@ -20,27 +20,27 @@ CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
 EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
                 --enable-maintainer-zts \
                 --without-mysql \
-		--enable-force-cgi-redirect \
-		--disable-cgi \
-		--disable-cli \
-		--disable-pdo \
-		--without-pear \
-		--without-iconv \
-		--disable-ipv6 \
-		--disable-xml \
-		--disable-xmlreader \
-		--disable-xmlwriter \
-		--disable-simplexml \
-		--disable-libxml \
-		--disable-dom \
+                --enable-force-cgi-redirect \
+                --disable-cgi \
+                --disable-cli \
+                --disable-pdo \
+                --without-pear \
+                --without-iconv \
+                --disable-ipv6 \
+                --disable-xml \
+                --disable-xmlreader \
+                --disable-xmlwriter \
+                --disable-simplexml \
+                --disable-libxml \
+                --disable-dom \
                 --disable-rpath \
                 --libdir=${libdir}/php5 \
                 --with-zlib --with-zlib-dir=${STAGING_DIR_TARGET}${exec_prefix} \
                 --with-config-file-path=${sysconfdir}/php/apache2-php5"
 
-# to get postgres support, add it to the DEPENDS above
-# and uncomment this line.  similar for mysql
-#EXTRA_OECONF += " --with-pgsql=${STAGING_DIR_HOST}${layout_exec_prefix}"
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config,--without-mysqli,mysql5"
+PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,mysql5"
 
 acpaths = ""
 
@@ -60,7 +60,7 @@ do_install  () {
 	install -d ${D}${sysconfdir}/php/apache2-php5
 	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
 	install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
-	cat ${S}/php.ini-dist | \
+	cat ${S}/php.ini-production | \
 		sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
 		> ${D}${sysconfdir}/php/apache2-php5/php.ini
 
