@@ -9,12 +9,12 @@
 #  implementing the current HTTP standards.
 ### END INIT INFO
 
-ARGS="-D SSL -k start"
+ARGS="-D SSL -D PHP5 -k start"
 NAME=apache2
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 DAEMON=/usr/sbin/httpd
 SUEXEC=/usr/lib/apache/suexec
-PIDFILE=/var/run/$NAME.pid
+PIDFILE=/var/apache2/logs/httpd.pid
 CONF=/etc/apache2/httpd.conf
 APACHECTL=/usr/sbin/apachectl 
 
@@ -40,7 +40,7 @@ case "$1" in
 
   reload)
     echo -n "Reloading $NAME configuration"
-    $APACHECTL reload
+    kill -HUP `cat $PIDFILE`
     ;;
 
   reload-modules)

@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
 RDEPENDS_${PN} += "openssl libgcc"
 SECTION = "net"
 LICENSE = "Apache-2.0"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://server-makefile.patch \
@@ -68,8 +68,12 @@ do_install_append() {
 	# Expat should be found in the staging area via DEPENDS...
 	rm -f ${D}/${libdir}/libexpat.*
 
-	# Ensure configuration file pulls in modules.d
-	printf "\nInclude ${sysconfdir}/${PN}/modules.d/*\n\n" >> ${D}/${sysconfdir}/${PN}/httpd.conf
+	install -d ${D}${sysconfdir}/${PN}/conf.d
+	install -d ${D}${sysconfdir}/${PN}/modules.d
+
+	# Ensure configuration file pulls in conf.d and modules.d
+	printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${PN}/httpd.conf
+	printf "\nIncludeOptional ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${PN}/httpd.conf
 }
 
 SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
