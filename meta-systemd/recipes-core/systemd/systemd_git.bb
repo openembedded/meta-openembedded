@@ -90,6 +90,7 @@ do_configure_prepend() {
 
 do_install() {
 	autotools_do_install
+	install -d ${D}${base_sbindir}
 	# provided by a seperate recipe
 	rm ${D}${systemd_unitdir}/system/serial-getty* -f
 
@@ -98,7 +99,10 @@ do_install() {
 
 	# create dir for journal
 	install -d ${D}${localstatedir}/log/journal
-
+	# udevd is needed in initramfs which was provided by udev in OE-Core
+	# so we need to provide that otherwise it pulls in both systemd and
+	# udev
+	ln -s ${systemd_unitdir}/systemd-udevd ${D}${base_sbindir}/udevd
 	# create machine-id
 	# 20:12 < mezcalero> koen: you have three options: a) run systemd-machine-id-setup at install time, b) have / read-only and an empty file there (for stateless) and c) boot with / writable
 	touch ${D}${sysconfdir}/machine-id
@@ -159,24 +163,24 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${sysconfdir}/init.d/README \
                 ${systemd_unitdir}/* \
                 ${systemd_unitdir}/system/* \
-                ${base_libdir}/udev/rules.d/99-systemd.rules \
+                /lib/udev/rules.d/99-systemd.rules \
                 ${base_libdir}/security/*.so \
                 /cgroup \
                 ${bindir}/systemd* \
                 ${bindir}/localectl \
                 ${bindir}/hostnamectl \
                 ${bindir}/timedatectl \
-                ${libdir}/tmpfiles.d/*.conf \
-                ${libdir}/systemd \
-                ${libdir}/binfmt.d \
-                ${libdir}/modules-load.d \
-                ${libdir}/sysctl.d \
+                ${exec_prefix}/lib/tmpfiles.d/*.conf \
+                ${exec_prefix}/lib/systemd \
+                ${exec_prefix}/lib/binfmt.d \
+                ${exec_prefix}/lib/modules-load.d \
+                ${exec_prefix}/lib/sysctl.d \
                 ${localstatedir} \
                 ${libexecdir} \
-                ${base_libdir}/udev/rules.d/70-uaccess.rules \
-                ${base_libdir}/udev/rules.d/71-seat.rules \
-                ${base_libdir}/udev/rules.d/73-seat-late.rules \
-                ${base_libdir}/udev/rules.d/99-systemd.rules \
+                /lib/udev/rules.d/70-uaccess.rules \
+                /lib/udev/rules.d/71-seat.rules \
+                /lib/udev/rules.d/73-seat-late.rules \
+                /lib/udev/rules.d/99-systemd.rules \
                "
 FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/ ${PYTHON_SITEPACKAGES_DIR}/systemd/.debug/"
 FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/ ${sysconfdir}/rpm/macros.systemd ${PYTHON_SITEPACKAGES_DIR}/systemd/*.la"
@@ -200,42 +204,43 @@ RRECOMMENDS_${PN} += "systemd-serialgetty \
 
 PACKAGES =+ "udev-dbg udev udev-consolekit udev-utils udev-systemd"
 
-FILES_udev-dbg += "${base_libdir}/udev/.debug"
+FILES_udev-dbg += "/lib/udev/.debug"
 
 RDEPENDS_udev += "udev-utils"
 RPROVIDES_udev = "hotplug"
 
-FILES_udev += "${base_libdir}/udev/udevd \
-               ${base_libdir}/systemd/systemd-udevd \
-               ${base_libdir}/udev/accelerometer \
-               ${base_libdir}/udev/ata_id \
-               ${base_libdir}/udev/cdrom_id \
-               ${base_libdir}/udev/collect \
-               ${base_libdir}/udev/findkeyboards \
-               ${base_libdir}/udev/keyboard-force-release.sh \
-               ${base_libdir}/udev/keymap \
-               ${base_libdir}/udev/mtd_probe \
-               ${base_libdir}/udev/scsi_id \
-               ${base_libdir}/udev/v4l_id \
-               ${base_libdir}/udev/keymaps \
-               ${base_libdir}/udev/rules.d/4*.rules \
-               ${base_libdir}/udev/rules.d/5*.rules \
-               ${base_libdir}/udev/rules.d/6*.rules \
-               ${base_libdir}/udev/rules.d/70-power-switch.rules \
-               ${base_libdir}/udev/rules.d/75*.rules \
-               ${base_libdir}/udev/rules.d/78*.rules \
-               ${base_libdir}/udev/rules.d/8*.rules \
-               ${base_libdir}/udev/rules.d/95*.rules \
-               ${base_libdir}/udev/hwdb.d \
+FILES_udev += "${base_sbindir}/udevd \
+               /lib/udev/udevd \
+               /lib/systemd/systemd-udevd \
+               /lib/udev/accelerometer \
+               /lib/udev/ata_id \
+               /lib/udev/cdrom_id \
+               /lib/udev/collect \
+               /lib/udev/findkeyboards \
+               /lib/udev/keyboard-force-release.sh \
+               /lib/udev/keymap \
+               /lib/udev/mtd_probe \
+               /lib/udev/scsi_id \
+               /lib/udev/v4l_id \
+               /lib/udev/keymaps \
+               /lib/udev/rules.d/4*.rules \
+               /lib/udev/rules.d/5*.rules \
+               /lib/udev/rules.d/6*.rules \
+               /lib/udev/rules.d/70-power-switch.rules \
+               /lib/udev/rules.d/75*.rules \
+               /lib/udev/rules.d/78*.rules \
+               /lib/udev/rules.d/8*.rules \
+               /lib/udev/rules.d/95*.rules \
+               /lib/udev/hwdb.d \
                ${sysconfdir}/udev \
               "
 
-FILES_udev-consolekit += "${libdir}/ConsoleKit"
+FILES_udev-consolekit += "/lib/ConsoleKit"
 RDEPENDS_udev-consolekit += "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
 
 FILES_udev-utils = "${bindir}/udevadm"
 
-FILES_udev-systemd = "${base_libdir}/systemd/system/*udev* ${base_libdir}/systemd/system/*.wants/*udev*"
+FILES_udev-systemd = "${systemd_unitdir}/system/*udev* ${systemd_unitdir}/system/*.wants/*udev*"
 RDEPENDS_udev-systemd = "udev"
 
 # TODO:

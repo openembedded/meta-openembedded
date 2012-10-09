@@ -70,7 +70,8 @@ def systemd_after_parse(d):
     bpn = d.getVar('BPN', 1)
     if bpn + "-native" != d.getVar('PN', 1) and \
             bpn + "-cross" != d.getVar('PN', 1) and \
-            bpn + "-nativesdk" != d.getVar('PN', 1):
+            not d.getVar('MLPREFIX', 1) and \
+            "nativesdk-" + bpn != d.getVar('PN', 1):
         systemd_check_vars()
         for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
             systemd_create_package(pkg_systemd)
@@ -158,8 +159,8 @@ python populate_packages_prepend () {
     def systemd_check_services():
         base_libdir = d.getVar('base_libdir', 1)
         searchpaths = '/etc/systemd/system/' + ' '
-        searchpaths += d.getVar('base_libdir', 1) + '/systemd/system/' + ' '
-        searchpaths += d.getVar('libdir', 1) + '/systemd/system/' + ' '
+        searchpaths += '/lib/systemd/system/' + ' '
+        searchpaths += '/usr/lib/systemd/system/' + ' '
         systemd_packages = d.getVar('SYSTEMD_PACKAGES', 1)
         has_exactly_one_service = len(systemd_packages.split()) == 1
         if has_exactly_one_service:
