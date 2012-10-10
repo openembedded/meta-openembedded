@@ -3,7 +3,6 @@ extensible web server."
 SUMMARY = "Apache HTTP Server"
 HOMEPAGE = "http://httpd.apache.org/"
 DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
-RDEPENDS_${PN} += "openssl libgcc"
 SECTION = "net"
 LICENSE = "Apache-2.0"
 PR = "r2"
@@ -103,12 +102,12 @@ INITSCRIPT_NAME = "apache2"
 INITSCRIPT_PARAMS = "defaults 91 20"
 LEAD_SONAME = "libapr-1.so.0"
 
+PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+
 CONFFILES_${PN} = "${sysconfdir}/${PN}/httpd.conf \
 		   ${sysconfdir}/${PN}/magic \
 		   ${sysconfdir}/${PN}/mime.types \
 		   ${sysconfdir}/init.d/${PN} "
-
-PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
 
 # we override here rather than append so that .so links are
 # included in the runtime package rather than here (-dev)
@@ -139,4 +138,6 @@ FILES_${PN} += "${datadir}/${PN}/htdocs ${datadir}/${PN}/cgi-bin"
 FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
 
 FILES_${PN}-dbg += "${libdir}/${PN}/modules/.debug"
+
+RDEPENDS_${PN} += "openssl libgcc"
 
