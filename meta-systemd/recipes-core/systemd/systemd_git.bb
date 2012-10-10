@@ -23,8 +23,7 @@ PR = "r7"
 
 inherit useradd pkgconfig autotools perlnative
 
-SRCREV = "38a60d7112d33ffd596b23e8df53d75a7c09e71b"
-
+SRCREV = "a3eb665e0c12df35e807611582e7332ebed325b1"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://use-rootlibdir.patch \
            file://gtk-doc.make \
@@ -40,6 +39,7 @@ UCLIBCPATCHES_libc-uclibc = "file://systemd-pam-configure-check-uclibc.patch \
                              file://systemd-pam-fix-getty-unit.patch \
                              file://systemd-pam-fix-mkostemp.patch \
                              file://systemd-pam-fix-msformat.patch \
+                             file://optional_secure_getenv.patch \
                             "
 LDFLAGS_libc-uclibc_append = " -lrt"
 
