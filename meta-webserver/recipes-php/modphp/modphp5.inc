@@ -1,6 +1,6 @@
 SECTION = "console/network"
 DESCRIPTION = "A server-side, HTML-embedded scripting language. This package provides the apache php module."
-LICENSE = "PHP"
+LICENSE = "PHP-3.0"
 DEPENDS = "apache2-native apache2 zlib"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
