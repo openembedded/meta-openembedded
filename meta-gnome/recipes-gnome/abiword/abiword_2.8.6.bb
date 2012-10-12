@@ -99,7 +99,7 @@ FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/AbiWord/strings"
 FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/AbiWord/system.profile*"
 FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
 
-PACKAGES_DYNAMIC = "${PN}-meta ${PN}-plugin-*"
+PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
 
 python populate_packages_prepend () {
     abiword_libdir    = bb.data.expand('${libdir}/abiword-2.8/plugins', d)

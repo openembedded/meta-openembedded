@@ -119,4 +119,4 @@ python populate_packages_prepend() {
                       allow_links=True)
 }
 
-PACKAGES_DYNAMIC = "lib(av(codec|device|filter|format|util)|postproc)*"
+PACKAGES_DYNAMIC += "^lib(av(codec|device|filter|format|util)|postproc).*"

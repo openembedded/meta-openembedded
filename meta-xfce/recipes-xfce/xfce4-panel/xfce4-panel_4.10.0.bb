@@ -20,7 +20,7 @@ python populate_packages_prepend() {
                                          '${bindir}/*%s*'])
 }
 
-PACKAGES_DYNAMIC = "${PN}-plugin-*"
+PACKAGES_DYNAMIC += "^${PN}-plugin-.*"
 
 FILES_${PN} += "${libdir}/xfce4/panel/migrate \
                 ${libdir}/xfce4/panel/wrapper"

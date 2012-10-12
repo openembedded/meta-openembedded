@@ -23,7 +23,7 @@ PACKAGES =+ "libfreerdp"
 LEAD_SONAME = "libfreerdp.so"
 FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
 
-PACKAGES_DYNAMIC = "libfreerdp-plugin-*"
+PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
 
 python populate_packages_prepend () {
     freerdp_root = bb.data.expand('${libdir}/freerdp', d)

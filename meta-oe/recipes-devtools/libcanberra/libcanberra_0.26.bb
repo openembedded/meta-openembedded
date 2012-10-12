@@ -35,7 +35,7 @@ python populate_packages_prepend() {
 
 PACKAGES =+ "${PN}-gtk"
 
-PACKAGES_DYNAMIC = "libcanberra-*"
+PACKAGES_DYNAMIC += "^libcanberra-.*"
 
 FILES_${PN}-gtk = "\
   ${sysconfdir}/gconf \

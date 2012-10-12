@@ -249,7 +249,7 @@ pkg_prerm_${PN}-slapd () {
     update-rc.d $D openldap remove
 }
 
-PACKAGES_DYNAMIC = "openldap-backends openldap-backend-*"
+PACKAGES_DYNAMIC += "^openldap-backends.* ^openldap-backend-.*"
 
 python populate_packages_prepend () {
     backend_dir    = bb.data.expand('${libexecdir}/openldap', d)

@@ -92,7 +92,7 @@ RDEPENDS_klibc-utils-true = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-umount = "${THIS_LIBKLIBC}"
 RDEPENDS_klibc-utils-uname = "${THIS_LIBKLIBC}"
 
-PACKAGES_DYNAMIC = "${KLIBC_UTILS_PKGNAME}-*"
+PACKAGES_DYNAMIC += "^${KLIBC_UTILS_PKGNAME}-.*"
 
 python populate_packages_prepend () {
 

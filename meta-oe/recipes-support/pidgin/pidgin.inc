@@ -56,7 +56,7 @@ RRECOMMENDS_${PN} = "${PN}-data libpurple-plugin-ssl-gnutls libpurple-protocol-i
 FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"
 FILES_${PN}-dev += "${libdir}/${PN}/*.la"
 
-PACKAGES_DYNAMIC = "libpurple-protocol-* libpurple-plugin-* pidgin-plugin-* finch-plugin-*"
+PACKAGES_DYNAMIC += "^libpurple-protocol-.* ^libpurple-plugin-.* ^pidgin-plugin-.* ^finch-plugin-.*"
 
 python populate_packages_prepend () {
     pidgroot = bb.data.expand('${libdir}/pidgin', d)

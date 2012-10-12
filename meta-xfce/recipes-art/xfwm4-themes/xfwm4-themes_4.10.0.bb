@@ -16,4 +16,4 @@ python populate_packages_prepend () {
     do_split_packages(d, themedir, '^(.*)', 'xfwm4-old-theme-%s', 'XFWM4 theme %s', allow_dirs=True)
 }
 
-PACKAGES_DYNAMIC += "xfwm4-old-theme-*"
+PACKAGES_DYNAMIC += "^xfwm4-old-theme-.*"

@@ -40,7 +40,7 @@ FILES_${PN}-dbg += "${libdir}/evas/modules/*/*/*/.debug/ ${libdir}/evas/cserve2/
 FILES_${PN}-cserve2 += "${libexecdir}/evas_cserve2* ${libexecdir}/dummy_slave"
 
 PACKAGES += "${PN}-cserve2"
-PACKAGES_DYNAMIC = "evas-engine-* evas-loader-* evas-saver-* evas-cserve2-*"
+PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve2-.*"
 
 # evas-loader-svg is gone as we don't have esvg and probably won't have anytime soon
 # http://www.intesis.hr/news/16-esvg-source

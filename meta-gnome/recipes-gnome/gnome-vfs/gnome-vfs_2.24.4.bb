@@ -40,7 +40,7 @@ FILES_${PN}-dbg += " ${libdir}/gnome-vfs-2.0/modules/.debug"
 FILES_${PN}-dev += " ${libdir}/gnome-vfs-2.0/include"
 FILES_${PN}-doc += " ${datadir}/gtk-doc"
 
-PACKAGES_DYNAMIC = "gnome-vfs-plugin-*"
+PACKAGES_DYNAMIC += "^gnome-vfs-plugin-.*"
 
 python populate_packages_prepend () {
     print bb.data.getVar('FILES_gnome-vfs', d, 1)

@@ -73,5 +73,5 @@ python populate_packages_prepend() {
     do_split_packages(d, plugindir, '(.*)\.so$', 'lcdd-driver-%s', 'LCDd driver for %s', prepend=True)
 }
 
-PACKAGES_DYNAMIC = "lcdd-driver-*"
+PACKAGES_DYNAMIC += "^lcdd-driver-.*"
 

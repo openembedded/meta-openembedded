@@ -14,7 +14,7 @@ python populate_packages_prepend () {
     do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4 theme %s', allow_dirs=True)
 }
 
-PACKAGES_DYNAMIC += "xfwm4-theme-*"
+PACKAGES_DYNAMIC += "^xfwm4-theme-.*"
 
 ALTERNATIVE_${PN} = "x-window-manager"
 ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/xfwm4"

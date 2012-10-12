@@ -20,7 +20,7 @@ EXTRA_OECONF += "--with-plugins=none"
 
 PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome"
 
-PACKAGES_DYNAMIC += "${PN}-theme-*"
+PACKAGES_DYNAMIC += "^${PN}-theme-.*"
 
 python populate_packages_prepend() {
     theme_dir = bb.data.expand('${datadir}/themes/', d)

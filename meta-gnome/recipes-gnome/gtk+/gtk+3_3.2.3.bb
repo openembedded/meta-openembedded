@@ -72,7 +72,7 @@ FILES_${PN}-dbg += " \
                     ${libdir}/gtk-3.0/modules/.debug"
 
 
-PACKAGES_DYNAMIC += "gtk3-immodule-* gtk3-printbackend-*"
+PACKAGES_DYNAMIC += "^gtk3-immodule-.* ^gtk3-printbackend-.*"
 
 python populate_packages_prepend () {
     import os.path

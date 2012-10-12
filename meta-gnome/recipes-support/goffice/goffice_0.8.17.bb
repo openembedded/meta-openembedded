@@ -36,7 +36,7 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} 
             ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
             ${libdir}/bonobo/servers"
 
-PACKAGES_DYNAMIC = "goffice-plugin-*"
+PACKAGES_DYNAMIC += "^goffice-plugin-.*"
 
 python populate_packages_prepend () {
     goffice_libdir = bb.data.expand('${libdir}/goffice/${PV}/plugins/', d)

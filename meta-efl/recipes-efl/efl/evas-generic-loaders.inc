@@ -30,4 +30,4 @@ python populate_packages_prepend () {
 FILES_evas-generic-loader-xcf += "${libdir}/evas/utils/*.xcf.gz"
 FILES_${PN}-dbg += "${libdir}/evas/utils/.debug"
 
-PACKAGES_DYNAMIC = "evas-generic-loader-*"
+PACKAGES_DYNAMIC += "^evas-generic-loader-.*"
