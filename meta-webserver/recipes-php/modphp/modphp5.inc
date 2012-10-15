@@ -49,6 +49,7 @@ acpaths = ""
 # which breaks everything...
 #
 do_configure() {
+	gnu-configize --force
 	find . -name config.m4 -o -name configure | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
 	export PHP_LIBXML_DIR=${STAGING_DIR_NATIVE}${layout_exec_prefix} 
 	oe_runconf
