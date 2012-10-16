@@ -1,0 +1,86 @@
+From 279a693ce4ef3a887ce8d4fa59e0f2616a14d91a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Fri, 11 Nov 2011 13:14:45 +0100
+Subject: [PATCH] Allow to install RubyGems into custom location, outside of
+ Ruby tree.
+
+---
+ configure.in      |    8 ++++++++
+ tool/mkconfig.rb  |    1 +
+ tool/rbinstall.rb |    9 +++++++++
+ version.c         |    4 ++++
+ 4 files changed, 22 insertions(+)
+
+--- a/configure.in
++++ b/configure.in
+@@ -2801,6 +2801,13 @@
+     dir="${VENDOR_DIR}"
+ done
+ 
++AC_ARG_WITH(rubygemsdir,
++           AS_HELP_STRING([--with-rubygemsdir=DIR], [custom rubygems directory]),
++            [rubygemsdir=$withval])
++if test "$rubygemsdir" != ""; then
++    AC_DEFINE_UNQUOTED(RUBYGEMS_DIR,"$rubygemsdir")
++fi
++
+ if test "${LOAD_RELATIVE+set}"; then
+     AC_DEFINE_UNQUOTED(LOAD_RELATIVE, $LOAD_RELATIVE)
+     RUBY_EXEC_PREFIX=""
+@@ -2921,6 +2928,7 @@
+ AC_SUBST(rubyhdrdir)dnl
+ AC_SUBST(sitehdrdir)dnl
+ AC_SUBST(vendorhdrdir)dnl
++AC_SUBST(rubygemsdir)dnl
+ 
+ AC_ARG_WITH(opt-dir,
+ 	AS_HELP_STRING([--with-opt-dir=DIR], [add optional headers and libraries DIR]))
+--- a/tool/mkconfig.rb
++++ b/tool/mkconfig.rb
+@@ -78,6 +78,7 @@
+     when /^RUBY_SO_NAME$/; next if $so_name
+     when /^arch$/; if val.empty? then val = arch else arch = val end
+     when /^sitearch/; val = '$(arch)' if val.empty?
++    when /^rubygemsdir/; next if val.empty?
+     end
+     case val
+     when /^\$\(ac_\w+\)$/; next
+--- a/tool/rbinstall.rb
++++ b/tool/rbinstall.rb
+@@ -300,6 +300,7 @@
+ sitearchlibdir = CONFIG["sitearchdir"]
+ vendorlibdir = CONFIG["vendorlibdir"]
+ vendorarchlibdir = CONFIG["vendorarchdir"]
++rubygemsdir = CONFIG["rubygemsdir"]
+ mandir = CONFIG["mandir"]
+ capidir = CONFIG["docdir"]
+ configure_args = Shellwords.shellwords(CONFIG["configure_args"])
+@@ -487,7 +488,15 @@
+ install?(:local, :comm, :lib) do
+   prepare "library scripts", rubylibdir
+   noinst = %w[README* *.txt *.rdoc]
++  noinst += %w[*ubygems.rb rubygems/ datadir.rb] if rubygemsdir
+   install_recursive(File.join(srcdir, "lib"), rubylibdir, :no_install => noinst, :mode => $data_mode)
++  if rubygemsdir
++    noinst = %w[obsolete.rb]
++    install_recursive(File.join(srcdir, "lib", "rubygems"), File.join(rubygemsdir, "rubygems"), :mode => $data_mode)
++    install_recursive(File.join(srcdir, "lib", "rbconfig"), File.join(rubygemsdir, "rbconfig"), :no_install => noinst, :mode => $data_mode)
++    install(File.join(srcdir, "lib", "ubygems.rb"), File.join(rubygemsdir, "ubygems.rb"), :mode => $data_mode)
++    install(File.join(srcdir, "lib", "rubygems.rb"), File.join(rubygemsdir, "rubygems.rb"), :mode => $data_mode)
++  end
+ end
+ 
+ install?(:local, :arch, :lib) do
+--- a/version.c
++++ b/version.c
+@@ -97,6 +97,10 @@
+ #endif
+ #endif
+ 
++#ifdef RUBYGEMS_DIR
++    RUBYGEMS_DIR "\0"
++#endif
++
+     RUBY_LIB "\0"
+ #ifdef RUBY_THIN_ARCHLIB
+     RUBY_THIN_ARCHLIB "\0"

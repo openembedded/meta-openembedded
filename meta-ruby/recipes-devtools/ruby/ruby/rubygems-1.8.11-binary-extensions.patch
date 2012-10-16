@@ -1,0 +1,296 @@
+From 5a37a3489491a33f2e7011043fbbcd9a765e1777 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Thu, 3 Nov 2011 16:43:05 +0100
+Subject: [PATCH 1/6] Add dedicate extensions folder into $LOAD_PATH.
+
+---
+ lib/rubygems/specification.rb |   37 ++++++++++++++++++++++++++++++-------
+ 1 files changed, 30 insertions(+), 7 deletions(-)
+
+diff --git a/lib/rubygems/specification.rb b/lib/rubygems/specification.rb
+index 97db19e..263e7d3 100644
+--- a/lib/rubygems/specification.rb
++++ b/lib/rubygems/specification.rb
+@@ -843,6 +843,12 @@ class Gem::Specification
+       File.join full_gem_path, path
+     end
+ 
++    unless extensions.empty?
++      paths += require_paths.map do |path|
++        File.join ext_dir, path
++      end
++    end
++
+     # gem directories must come after -I and ENV['RUBYLIB']
+     insert_index = Gem.load_path_insert_index
+ 
+@@ -954,16 +960,16 @@ class Gem::Specification
+ 
+   def contains_requirable_file? file
+     root = full_gem_path
++    ext = ext_dir
++
++    require_paths.any? do |lib|
++      base = ["#{root}/#{lib}/#{file}"]
++      base << "#{ext}/#{lib}/#{file}" unless extensions.empty?
+ 
+-    require_paths.each do |lib|
+-      base = "#{root}/#{lib}/#{file}"
+-      Gem.suffixes.each do |suf|
+-        path = "#{base}#{suf}"
+-        return true if File.file? path
++      base.any? do |path|
++        Gem.suffixes.any? { |suf| File.file? "#{path}#{suf}" }
+       end
+     end
+-
+-    return false
+   end
+ 
+   ##
+@@ -1273,6 +1279,23 @@ class Gem::Specification
+   end
+ 
+   ##
++  # Returns the full path to this spec's ext directory.
++  # eg: /usr/local/lib/ruby/1.8/exts/mygem-1.0
++
++  def ext_dir
++    @gem_dir ||= File.expand_path File.join(exts_dir, full_name)
++  end
++
++  ##
++  # Returns the full path to the exts directory containing this spec's
++  # gem directory. eg: /usr/local/lib/ruby/1.8/exts
++
++  def exts_dir
++    # TODO: this logic seems terribly broken, but tests fail if just base_dir
++    @exts_dir ||= File.join(loaded_from && base_dir || Gem.dir, "exts")
++  end
++
++  ##
+   # Deprecated and ignored, defaults to true.
+   #
+   # Formerly used to indicate this gem was RDoc-capable.
+-- 
+1.7.7.3
+
+
+From 671e4285bf9db948bc5f054d7d3d931cdd7a17f8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Wed, 16 Nov 2011 13:26:48 +0100
+Subject: [PATCH 2/6] Use spec's ext dir for extension installation.
+
+---
+ lib/rubygems/installer.rb     |    2 +-
+ lib/rubygems/specification.rb |    7 +++----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/lib/rubygems/installer.rb b/lib/rubygems/installer.rb
+index 74d803d..0063c7f 100644
+--- a/lib/rubygems/installer.rb
++++ b/lib/rubygems/installer.rb
+@@ -499,7 +499,7 @@ TEXT
+   def build_extensions
+     return if spec.extensions.empty?
+     say "Building native extensions.  This could take a while..."
+-    dest_path = File.join gem_dir, spec.require_paths.first
++    dest_path = spec.ext_dir
+     ran_rake = false # only run rake once
+ 
+     spec.extensions.each do |extension|
+diff --git a/lib/rubygems/specification.rb b/lib/rubygems/specification.rb
+index 263e7d3..d31b93b 100644
+--- a/lib/rubygems/specification.rb
++++ b/lib/rubygems/specification.rb
+@@ -1283,16 +1283,15 @@ class Gem::Specification
+   # eg: /usr/local/lib/ruby/1.8/exts/mygem-1.0
+ 
+   def ext_dir
+-    @gem_dir ||= File.expand_path File.join(exts_dir, full_name)
++    @ext_dir ||= File.join exts_dir, full_name, require_paths.first
+   end
+ 
+   ##
+   # Returns the full path to the exts directory containing this spec's
+-  # gem directory. eg: /usr/local/lib/ruby/1.8/exts
++  # gem directory. eg: /usr/local/lib/ruby/1.8/gems
+ 
+   def exts_dir
+-    # TODO: this logic seems terribly broken, but tests fail if just base_dir
+-    @exts_dir ||= File.join(loaded_from && base_dir || Gem.dir, "exts")
++    @exts_dir ||= gems_dir
+   end
+ 
+   ##
+-- 
+1.7.7.3
+
+
+From 11b4a0cbadd8b1d3320f838881aa60feb6f848e7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Wed, 16 Nov 2011 14:52:16 +0100
+Subject: [PATCH 3/6] Simplify the extending of $LOAD_PATH for binary gems.
+
+---
+ lib/rubygems/specification.rb |   11 +++++------
+ 1 files changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/lib/rubygems/specification.rb b/lib/rubygems/specification.rb
+index d31b93b..e65ea2d 100644
+--- a/lib/rubygems/specification.rb
++++ b/lib/rubygems/specification.rb
+@@ -843,11 +843,7 @@ class Gem::Specification
+       File.join full_gem_path, path
+     end
+ 
+-    unless extensions.empty?
+-      paths += require_paths.map do |path|
+-        File.join ext_dir, path
+-      end
+-    end
++    paths << ext_dir unless extensions.empty? || paths.include?(ext_dir)
+ 
+     # gem directories must come after -I and ENV['RUBYLIB']
+     insert_index = Gem.load_path_insert_index
+@@ -1291,7 +1287,10 @@ class Gem::Specification
+   # gem directory. eg: /usr/local/lib/ruby/1.8/gems
+ 
+   def exts_dir
+-    @exts_dir ||= gems_dir
++    @exts_dir ||= begin
++      dirs = Gem.default_dirs.detect {|location, paths| paths[:gem_dir] == base_dir}
++      dirs ? File.join(dirs.last[:ext_dir], 'exts') : gems_dir
++    end
+   end
+ 
+   ##
+-- 
+1.7.7.3
+
+
+From 5d46cd2b1ac9517a9cbcfa430261e62bb3a376b8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Fri, 9 Dec 2011 16:31:04 +0100
+Subject: [PATCH 4/6] Fix the binary extension search path construction.
+
+---
+ lib/rubygems/installer.rb     |    2 +-
+ lib/rubygems/specification.rb |    4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/lib/rubygems/installer.rb b/lib/rubygems/installer.rb
+index 0063c7f..83b8fd5 100644
+--- a/lib/rubygems/installer.rb
++++ b/lib/rubygems/installer.rb
+@@ -499,7 +499,7 @@ TEXT
+   def build_extensions
+     return if spec.extensions.empty?
+     say "Building native extensions.  This could take a while..."
+-    dest_path = spec.ext_dir
++    dest_path = File.join spec.ext_dir, spec.require_paths.first
+     ran_rake = false # only run rake once
+ 
+     spec.extensions.each do |extension|
+diff --git a/lib/rubygems/specification.rb b/lib/rubygems/specification.rb
+index e65ea2d..8be2ade 100644
+--- a/lib/rubygems/specification.rb
++++ b/lib/rubygems/specification.rb
+@@ -843,7 +843,7 @@ class Gem::Specification
+       File.join full_gem_path, path
+     end
+ 
+-    paths << ext_dir unless extensions.empty? || paths.include?(ext_dir)
++    paths << File.join(ext_dir, require_paths.first) unless extensions.empty? || (ext_dir == full_gem_path)
+ 
+     # gem directories must come after -I and ENV['RUBYLIB']
+     insert_index = Gem.load_path_insert_index
+@@ -1279,7 +1279,7 @@ class Gem::Specification
+   # eg: /usr/local/lib/ruby/1.8/exts/mygem-1.0
+ 
+   def ext_dir
+-    @ext_dir ||= File.join exts_dir, full_name, require_paths.first
++    @ext_dir ||= File.join exts_dir, full_name
+   end
+ 
+   ##
+-- 
+1.7.7.3
+
+
+From 6229583633802b45e5a3e5689ab9077347cd9ef7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Tue, 13 Dec 2011 12:14:54 +0100
+Subject: [PATCH 5/6] Remove binary extensions during uninstall.
+
+---
+ lib/rubygems/uninstaller.rb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/lib/rubygems/uninstaller.rb b/lib/rubygems/uninstaller.rb
+index cc32ea4..94d78e0 100644
+--- a/lib/rubygems/uninstaller.rb
++++ b/lib/rubygems/uninstaller.rb
+@@ -213,6 +213,7 @@ class Gem::Uninstaller
+       File.writable?(spec.base_dir)
+ 
+     FileUtils.rm_rf spec.full_gem_path
++    FileUtils.rm_rf spec.ext_dir
+ 
+     # TODO: should this be moved to spec?... I vote eww (also exists in docmgr)
+     old_platform_name = [spec.name,
+-- 
+1.7.7.3
+
+
+From bc40e1b9f60a9a04456e3504ffe6ee600b6da269 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Tue, 13 Dec 2011 14:27:14 +0100
+Subject: [PATCH 6/6] Avoid dependency on customized operating_system.rb.
+
+---
+ lib/rubygems/defaults.rb      |   11 +++++++++++
+ lib/rubygems/specification.rb |    5 +----
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/lib/rubygems/defaults.rb b/lib/rubygems/defaults.rb
+index 20b4198..6d8711f 100644
+--- a/lib/rubygems/defaults.rb
++++ b/lib/rubygems/defaults.rb
+@@ -87,6 +87,17 @@ module Gem
+   end
+ 
+   ##
++  # Returns binary extensions dir for specified RubyGems base dir or nil
++  # if such directory cannot be determined.
++  #
++  # By default, the binary extensions are located side by side with their
++  # Ruby counterparts, therefore nil is returned
++
++  def self.default_ext_dir_for base_dir
++    nil
++  end
++
++  ##
+   # The default system-wide source info cache directory
+ 
+   def self.default_system_source_cache_dir
+diff --git a/lib/rubygems/specification.rb b/lib/rubygems/specification.rb
+index 8be2ade..f54210a 100644
+--- a/lib/rubygems/specification.rb
++++ b/lib/rubygems/specification.rb
+@@ -1287,10 +1287,7 @@ class Gem::Specification
+   # gem directory. eg: /usr/local/lib/ruby/1.8/gems
+ 
+   def exts_dir
+-    @exts_dir ||= begin
+-      dirs = Gem.default_dirs.detect {|location, paths| paths[:gem_dir] == base_dir}
+-      dirs ? File.join(dirs.last[:ext_dir], 'exts') : gems_dir
+-    end
++    @exts_dir ||= Gem.default_ext_dir_for(base_dir) || gems_dir
+   end
+ 
+   ##
+-- 
+1.7.7.3
+

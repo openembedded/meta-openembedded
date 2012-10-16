@@ -1,0 +1,12 @@
+diff -up ruby-1.9.3-p0/ext/tk/extconf.rb.orig ruby-1.9.3-p0/ext/tk/extconf.rb
+--- ruby-1.9.3-p0/ext/tk/extconf.rb.orig	2011-06-29 16:11:19.000000000 +0200
++++ ruby-1.9.3-p0/ext/tk/extconf.rb	2011-10-18 16:15:59.406299659 +0200
+@@ -114,7 +114,7 @@ def is_macosx?
+ end
+ 
+ def maybe_64bit?
+-  /64|universal/ =~ RUBY_PLATFORM
++  /64|universal|s390x/ =~ RUBY_PLATFORM
+ end
+ 
+ def check_tcltk_version(version)

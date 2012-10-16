@@ -1,0 +1,11 @@
+--- ruby-1.9.3-p0/lib/mkmf.rb.debug	2011-08-11 15:07:37.000000000 +0900
++++ ruby-1.9.3-p0/lib/mkmf.rb	2012-01-29 21:34:17.000000000 +0900
+@@ -1638,7 +1638,7 @@
+ SHELL = /bin/sh
+ 
+ # V=0 quiet, V=1 verbose.  other values don't work.
+-V = 0
++V = 1
+ Q1 = $(V:1=)
+ Q = $(Q1:0=@)
+ n=$(NULLCMD)

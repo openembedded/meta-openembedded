@@ -1,0 +1,149 @@
+From fa1a50ad10814f724b8713865dc222724cb955ab Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?V=C3=ADt=20Ondruch?= <vondruch@redhat.com>
+Date: Thu, 25 Aug 2011 14:33:51 +0200
+Subject: [PATCH] Allow to disable versioned paths.
+
+---
+ configure.in     |   11 +++++++++++
+ tool/mkconfig.rb |    9 ++++++---
+ version.c        |   10 ++++++++++
+ 3 files changed, 27 insertions(+), 3 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index e742e74..86cb68f 100644
+--- a/configure.in
++++ b/configure.in
+@@ -2963,6 +2963,17 @@ else
+ fi
+ AC_SUBST(USE_RUBYGEMS)
+ 
++AC_ARG_ENABLE(versioned-paths,
++	AS_HELP_STRING([--disable-versioned-paths], [disable paths with version number]),
++	[enable_versioned_paths="$enableval"], [enable_versioned_paths=yes])
++if test x"$enable_versioned_paths" = xno; then
++    AC_DEFINE(DISABLE_VERSIONED_PATHS, 1)
++    USE_VERSIONED_PATHS=NO
++else
++    USE_VERSIONED_PATHS=YES
++fi
++AC_SUBST(USE_VERSIONED_PATHS)
++
+ arch_hdrdir="${EXTOUT}/include/${arch}/ruby"
+ AS_MKDIR_P("${arch_hdrdir}")
+ config_h="${arch_hdrdir}/config.h"
+diff --git a/tool/mkconfig.rb b/tool/mkconfig.rb
+index a2221f0..47d8c8f 100755
+--- a/tool/mkconfig.rb
++++ b/tool/mkconfig.rb
+@@ -42,6 +42,7 @@ v_others = []
+ vars = {}
+ continued_name = nil
+ continued_line = nil
++path_version = "/$(ruby_version)"
+ File.foreach "config.status" do |line|
+   next if /^#/ =~ line
+   name = nil
+@@ -138,6 +139,8 @@ File.foreach "config.status" do |line|
+     case name
+     when "ruby_version"
+       version = val[/\A"(.*)"\z/, 1]
++    when /^USE_VERSIONED_PATHS$/
++      path_version = nil if /NO/ =~ val
+     end
+   end
+ #  break if /^CEOF/
+@@ -203,15 +206,15 @@ end
+ print(*v_fast)
+ print(*v_others)
+ print <<EOS
+-  CONFIG["rubylibdir"] = "$(rubylibprefix)/$(ruby_version)"
++  CONFIG["rubylibdir"] = "$(rubylibprefix)#{path_version}"
+   CONFIG["archdir"] = "$(rubylibdir)/$(arch)"
+ EOS
+ print <<EOS unless v_disabled["sitedir"]
+-  CONFIG["sitelibdir"] = "$(sitedir)/$(ruby_version)"
++  CONFIG["sitelibdir"] = "$(sitedir)#{path_version}"
+   CONFIG["sitearchdir"] = "$(sitelibdir)/$(sitearch)"
+ EOS
+ print <<EOS unless v_disabled["vendordir"]
+-  CONFIG["vendorlibdir"] = "$(vendordir)/$(ruby_version)"
++  CONFIG["vendorlibdir"] = "$(vendordir)#{path_version}"
+   CONFIG["vendorarchdir"] = "$(vendorlibdir)/$(sitearch)"
+ EOS
+ print <<EOS
+diff --git a/version.c b/version.c
+index 59d4e5e..641dc33 100644
+--- a/version.c
++++ b/version.c
+@@ -38,9 +38,15 @@
+ #define RUBY_VENDOR_LIB RUBY_LIB_PREFIX"/vendor_ruby"
+ #endif
+ 
++#ifdef DISABLE_VERSIONED_PATHS
++#define RUBY_LIB                    RUBY_LIB_PREFIX
++#define RUBY_SITE_LIB2              RUBY_SITE_LIB
++#define RUBY_VENDOR_LIB2            RUBY_VENDOR_LIB
++#else
+ #define RUBY_LIB                    RUBY_LIB_PREFIX  "/"RUBY_LIB_VERSION
+ #define RUBY_SITE_LIB2              RUBY_SITE_LIB    "/"RUBY_LIB_VERSION
+ #define RUBY_VENDOR_LIB2            RUBY_VENDOR_LIB  "/"RUBY_LIB_VERSION
++#endif
+ #define RUBY_ARCHLIB                RUBY_LIB         "/"RUBY_ARCH
+ #define RUBY_SITE_ARCHLIB           RUBY_SITE_LIB2   "/"RUBY_SITEARCH
+ #define RUBY_VENDOR_ARCHLIB         RUBY_VENDOR_LIB2 "/"RUBY_SITEARCH
+@@ -75,8 +81,10 @@ const char ruby_initial_load_paths[] =
+     RUBY_SITE_THIN_ARCHLIB "\0"
+ #endif
+     RUBY_SITE_ARCHLIB "\0"
++#ifndef DISABLE_VERSIONED_PATHS
+     RUBY_SITE_LIB "\0"
+ #endif
++#endif
+ 
+ #ifndef NO_RUBY_VENDOR_LIB
+     RUBY_VENDOR_LIB2 "\0"
+@@ -84,8 +92,10 @@ const char ruby_initial_load_paths[] =
+     RUBY_VENDOR_THIN_ARCHLIB "\0"
+ #endif
+     RUBY_VENDOR_ARCHLIB "\0"
++#ifndef DISABLE_VERSIONED_PATHS
+     RUBY_VENDOR_LIB "\0"
+ #endif
++#endif
+ 
+     RUBY_LIB "\0"
+ #ifdef RUBY_THIN_ARCHLIB
+-- 
+1.7.7.3
+diff --git a/lib/rdoc/ri/paths.rb b/lib/rdoc/ri/paths.rb
+index a3c65bf..0575730 100644
+--- a/lib/rdoc/ri/paths.rb
++++ b/lib/rdoc/ri/paths.rb
+@@ -11,9 +11,9 @@ module RDoc::RI::Paths
+   version = RbConfig::CONFIG['ruby_version']
+ 
+   base    = if RbConfig::CONFIG.key? 'ridir' then
+-              File.join RbConfig::CONFIG['ridir'], version
++              File.join [RbConfig::CONFIG['ridir'], RbConfig::CONFIG['USE_VERSIONED_PATHS'] == 'YES' ? version : nil].compact
+             else
+-              File.join RbConfig::CONFIG['datadir'], 'ri', version
++              File.join [RbConfig::CONFIG['datadir'], 'ri', RbConfig::CONFIG['USE_VERSIONED_PATHS'] == 'YES' ? version : nil].compact
+             end
+ 
+   SYSDIR  = File.join base, "system"
+diff --git a/tool/rbinstall.rb b/tool/rbinstall.rb
+index cec8c9f..fed14d2 100755
+--- a/tool/rbinstall.rb
++++ b/tool/rbinstall.rb
+@@ -379,7 +379,7 @@ end
+ 
+ install?(:doc, :rdoc) do
+   if $rdocdir
+-    ridatadir = File.join(CONFIG['ridir'], CONFIG['ruby_version'], "system")
++    ridatadir = File.join([CONFIG['ridir'], RbConfig::CONFIG['USE_VERSIONED_PATHS'] == 'YES' ? version : nil, "system"].compact)
+     prepare "rdoc", ridatadir
+     install_recursive($rdocdir, ridatadir, :mode => $data_mode)
+   end
+-- 
+1.7.6
+
