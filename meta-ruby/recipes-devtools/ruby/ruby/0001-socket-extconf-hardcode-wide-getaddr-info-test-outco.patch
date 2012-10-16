@@ -1,0 +1,31 @@
+From 9341293e71c03fe606edc9157bf1e13e3dd5b507 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 17 Dec 2010 11:35:38 +0100
+Subject: [PATCH] socket extconf: hardcode wide-getaddr info test outcome to true
+
+Without this the socket extension doesn't build correctly
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ ext/socket/extconf.rb |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/ext/socket/extconf.rb b/ext/socket/extconf.rb
+index ece6158..5fba46c 100644
+--- a/ext/socket/extconf.rb
++++ b/ext/socket/extconf.rb
+@@ -222,6 +222,11 @@ main()
+   exit(EXIT_FAILURE);
+ }
+ EOF
++
++# Ignore the actual result of the above test and assume that
++# everything is OK.
++getaddr_info_ok = true
++
+ end
+ if ipv6 and not getaddr_info_ok
+   abort <<EOS
+-- 
+1.6.6.1
+
