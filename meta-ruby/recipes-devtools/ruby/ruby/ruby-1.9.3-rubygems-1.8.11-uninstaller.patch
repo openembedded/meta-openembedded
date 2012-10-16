@@ -1,0 +1,76 @@
+--- ruby-1.9.3-p0/lib/rubygems/uninstaller.rb.orig	2011-10-31 10:22:36.321579483 +0100
++++ ruby-1.9.3-p0/lib/rubygems/uninstaller.rb	2011-10-31 10:34:25.563626119 +0100
+@@ -51,15 +51,14 @@
+     @bin_dir           = options[:bin_dir]
+     @format_executable = options[:format_executable]
+ 
++    if options[:force]
++      @force_all = true
++      @force_ignore = true
++    end
++
+     # only add user directory if install_dir is not set
+     @user_install = false
+     @user_install = options[:user_install] unless options[:install_dir]
+-
+-    if @user_install then
+-      Gem.use_paths Gem.user_dir, @gem_home
+-    else
+-      Gem.use_paths @gem_home
+-    end
+   end
+ 
+   ##
+@@ -69,10 +68,24 @@
+   def uninstall
+     list = Gem::Specification.find_all_by_name(@gem, @version)
+ 
++    list, other_repo_specs = list.partition do |spec|
++      @gem_home == spec.base_dir or
++      (@user_install and spec.base_dir == Gem.user_dir)
++    end
++
+     if list.empty? then
+-      raise Gem::InstallError, "gem #{@gem.inspect} is not installed"
++      raise Gem::InstallError, "gem #{@gem.inspect} is not installed" if
++        other_repo_specs.empty?
++
++      other_repos = other_repo_specs.map { |spec| spec.base_dir }.uniq
++
++      message = ["#{@gem} is not installed in GEM_HOME, try:"]
++      message.concat other_repos.map { |repo|
++        "\tgem uninstall -i #{repo} #{@gem}"
++      }
+ 
+-    elsif list.size > 1 and @force_all then
++      raise Gem::InstallError, message.join("\n")
++    elsif @force_all then
+       remove_all list
+ 
+     elsif list.size > 1 then
+@@ -250,12 +263,10 @@
+     msg << "\t#{spec.full_name}"
+ 
+     spec.dependent_gems.each do |dep_spec, dep, satlist|
+-      msg <<
+-        ("#{dep_spec.name}-#{dep_spec.version} depends on " +
+-         "[#{dep.name} (#{dep.requirement})]")
++      msg << "#{dep_spec.name}-#{dep_spec.version} depends on #{dep}"
+     end
+ 
+-    msg << 'If you remove this gems, one or more dependencies will not be met.'
++    msg << 'If you remove this gem, one or more dependencies will not be met.'
+     msg << 'Continue with Uninstall?'
+     return ask_yes_no(msg.join("\n"), true)
+   end
+
+--- ruby-1.9.3-p0/test/rubygems/test_gem_uninstaller.rb.orig	2011-11-03 08:58:31.411272176 +0100
++++ ruby-1.9.3-p0/test/rubygems/test_gem_uninstaller.rb	2011-11-03 08:58:43.010272351 +0100
+@@ -225,7 +225,7 @@
+ 
+     uninstaller = Gem::Uninstaller.new('a')
+ 
+-    use_ui Gem::MockGemUi.new("2\n") do
++    use_ui Gem::MockGemUi.new("2\ny\n") do
+       uninstaller.uninstall
+     end

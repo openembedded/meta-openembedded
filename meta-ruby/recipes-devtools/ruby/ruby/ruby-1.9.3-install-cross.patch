@@ -1,0 +1,16 @@
+---
+ Makefile.in |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -210,7 +210,8 @@
+ 	@$(RM) fake.rb fake-rbconfig.rb
+ 	$(INSTALL_DATA) $(arch_hdrdir)/ruby/config.h $(XRUBY_RUBYHDRDIR)/$(arch)/ruby
+ 	$(INSTALL_DATA) $(top_srcdir)/include/ruby/win32.h $(XRUBY_RUBYHDRDIR)/ruby
+-	$(INSTALL_DATA) $(LIBRUBY) $(LIBRUBY_A) $(XRUBY_RUBYLIBDIR)/$(arch)
++	$(INSTALL_DATA) $(LIBRUBY) $(XRUBY_RUBYLIBDIR)/$(arch)
++	$(INSTALL_DATA) $(LIBRUBY_A) $(XRUBY_RUBYLIBDIR)/$(arch)
+ 	$(INSTALL_PROGRAM) $(LIBRUBY_SO) $(XRUBY_RUBYLIBDIR)/$(arch)
+ 
+ Makefile:	$(srcdir)/Makefile.in $(srcdir)/enc/Makefile.in

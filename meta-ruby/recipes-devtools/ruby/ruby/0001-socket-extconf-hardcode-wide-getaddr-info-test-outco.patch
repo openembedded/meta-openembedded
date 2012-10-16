@@ -8,13 +8,11 @@ Without this the socket extension doesn't build correctly
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
  ext/socket/extconf.rb |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
+ 1 file changed, 5 insertions(+)
 
-diff --git a/ext/socket/extconf.rb b/ext/socket/extconf.rb
-index ece6158..5fba46c 100644
 --- a/ext/socket/extconf.rb
 +++ b/ext/socket/extconf.rb
-@@ -222,6 +222,11 @@ main()
+@@ -356,6 +356,11 @@
    exit(EXIT_FAILURE);
  }
  EOF
@@ -23,9 +21,6 @@ index ece6158..5fba46c 100644
 +# everything is OK.
 +getaddr_info_ok = true
 +
- end
  if ipv6 and not getaddr_info_ok
    abort <<EOS
--- 
-1.6.6.1
-
+ 
