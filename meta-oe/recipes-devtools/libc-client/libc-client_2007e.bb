@@ -1,10 +1,12 @@
 DESCRIPTION = "UW c-client library for mail protocols"
 SECTION = "devel"
 
-LICENSE = "University of Washingtons Free-Fork License"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a6a4ddbb7cd2999f6827ee143f6fcd97"
 
 DEPENDS = "openssl libpam"
+
+PR = "r1"
 
 SRC_URI = "ftp://ftp.cac.washington.edu/imap/imap-${PV}.tar.gz \
            file://quote_cctype.patch"
