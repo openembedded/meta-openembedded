@@ -4,7 +4,9 @@ HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
 
-DEPENDS = "libpng zlib cairo glib-2.0 libxml2"
+DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2"
+
+PR = "r1"
 
 SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
            file://0001-rrdtool-eradicate-tcl-support.patch \
