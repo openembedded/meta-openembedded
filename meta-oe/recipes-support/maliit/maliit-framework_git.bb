@@ -4,7 +4,7 @@ HOMEPAGE = "https://wiki.maliit.org/Main_Page"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
 
-inherit autotools qt4x11
+inherit autotools qt4x11 gtk-immodules-cache
 
 
 SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
@@ -16,9 +16,8 @@ SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
 PV = "0.92.3+git${SRCPV}"
 
 
-PACKAGES =+ "\
-    ${PN}-gtk \
-    "
+PACKAGES =+ "${PN}-gtk"
+GTKIMMODULES_PACKAGES = "${PN}-gtk"
 
 # Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
 RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
@@ -58,29 +57,12 @@ EXTRA_QMAKEVARS_PRE = "\
     CONFIG+=local-install \
     "
 
-do_install() {
-    cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
+EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
 
+do_install_append() {
     #Fix absolute paths
-    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-framework.prf
-    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ./maliit-plugins.prf
-}
-
-
-
-# Update the inputmethod modules in gtk
-pkg_postinst_${PN}-gtk() {
-if [ "x$D" != "x" ]; then
-    exit 1
-fi
-gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
-}
-
-pkg_postrm_${PN}-gtk() {
-if [ "x$D" != "x" ]; then
-    exit 1
-fi
-gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
+    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-framework.prf
+    sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-plugins.prf
 }
 
 S= "${WORKDIR}/git"
