@@ -1,0 +1,34 @@
+From fb6acbd2af9ed288c1c4f4200fc73d8d9955486a Mon Sep 17 00:00:00 2001
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Date: Wed, 1 Aug 2012 13:33:10 +0200
+Subject: [PATCH] Fix QT_IM_PLUGIN_PATH to allow openembedded to build Maliit
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ input-context/input-context.pri |   10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/input-context/input-context.pri b/input-context/input-context.pri
+index d94e6a3..d460e70 100644
+--- a/input-context/input-context.pri
++++ b/input-context/input-context.pri
+@@ -25,8 +25,10 @@ for(OPTION,$$list($$lower($$COV_OPTION))){
+ 
+ QMAKE_CLEAN += $$OBJECTS_DIR/*.gcno $$OBJECTS_DIR/*.gcda
+ 
+-QT_IM_PLUGIN_PATH = $$[QT_INSTALL_PLUGINS]/inputmethods
+-QT_PREFIX = $$[QT_INSTALL_PREFIX]
+-local-install {
+-    QT_IM_PLUGIN_PATH = $$replace(QT_IM_PLUGIN_PATH, $$QT_PREFIX, $$PREFIX)
++isEmpty(QT_IM_PLUGIN_PATH) {
++    QT_IM_PLUGIN_PATH = $$[QT_INSTALL_PLUGINS]/inputmethods
++    QT_PREFIX = $$[QT_INSTALL_PREFIX]
++    local-install {
++        QT_IM_PLUGIN_PATH = $$replace(QT_IM_PLUGIN_PATH, $$QT_PREFIX, $$PREFIX)
++    }
+ }
+-- 
+1.7.9.5
+
