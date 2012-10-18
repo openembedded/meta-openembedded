@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
            file://gold-unversioned-symbol.patch \
           "
-SRC_URI[md5sum] = "c646133c7bbf8ad9d2ced0888dc4a319"
-SRC_URI[sha256sum] = "51803d8224bf6adab052b340614980b28861f317c261eab1f1e9c6cf17b3dd75"
+SRC_URI[md5sum] = "7d80d0dc9cc2b9199a0c53787c151205"
+SRC_URI[sha256sum] = "81a728fb3f87da33063068735e2fb7e2cd89df207d32687d3d3278385279cefc"
 
 inherit autotools pkgconfig
 
