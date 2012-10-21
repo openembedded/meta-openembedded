@@ -3,7 +3,7 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
 
-PR = "r2"
+PR = "r3"
 
 DEPENDS = "libtool jpeg virtual/libusb0 libexif"
 
@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://10-camera-libgphoto2-device.fdi \
            file://10-camera-libgphoto2.fdi \
            file://40-libgphoto2.rules \
+           file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
 "
 
 SRC_URI[libgphoto2.md5sum] = "16a22b9739e45a95980ed62705fe7333"
@@ -25,6 +26,7 @@ inherit autotools pkgconfig gettext lib_package
 EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
 
 do_configure_append() {
+	cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
 	cd ${S}/libgphoto2_port/
 	autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
 	cd ${S}
