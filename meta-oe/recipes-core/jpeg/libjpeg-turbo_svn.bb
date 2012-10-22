@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe
                     file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
 "
 PV = "8d+1.2.1"
-PR = "r1"
+PR = "r2"
 SRCREV = "837"
 SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=https;module=trunk"
 
@@ -15,6 +15,9 @@ S = "${WORKDIR}/trunk"
 
 # Drop-in replacement for jpeg
 PROVIDES = "jpeg"
+RPROVIDES_${PN} += "jpeg"
+RREPLACES_${PN} += "jpeg"
+RCONFLICTS_${PN} += "jpeg"
 
 inherit autotools pkgconfig
 
