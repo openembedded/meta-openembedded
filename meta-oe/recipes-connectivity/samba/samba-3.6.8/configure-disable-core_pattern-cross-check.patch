@@ -1,0 +1,20 @@
+--- samba-3.6.8/source3/configure.orig	2012-10-01 16:28:17.559074996 -0300
++++ samba-3.6.8/source3/configure	2012-10-01 16:39:07.747700087 -0300
+@@ -16718,7 +16718,7 @@
+ #################################################
+ # Check to see if core dump directory is defined in linux
+ # with /proc/sys/kernel/core_pattern
+-
++if false; then
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for /proc/sys/kernel/core_pattern" >&5
+ $as_echo_n "checking for /proc/sys/kernel/core_pattern... " >&6; }
+ if ${ac_cv_file__proc_sys_kernel_core_pattern+:} false; then :
+@@ -16739,7 +16739,7 @@
+ $as_echo "#define HAVE_SYS_KERNEL_PROC_CORE_PATTERN 1" >>confdefs.h
+ 
+ fi
+-
++fi
+ 
+ #############################
+ # check if building with gpfs

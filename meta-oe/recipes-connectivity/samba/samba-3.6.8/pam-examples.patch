@@ -1,0 +1,17 @@
+Description: Fix examples directory location  in pam_smbpass README
+Author: Christian Perrier <bubulle@debian.org>
+Forwarded: not-needed
+
+Index: experimental/source3/pam_smbpass/README
+===================================================================
+--- experimental.orig/source3/pam_smbpass/README
++++ experimental/source3/pam_smbpass/README
+@@ -37,7 +37,7 @@
+ 	smbconf=<file>	-	specify an alternate path to the smb.conf
+ 				file.
+ 
+-See the samples/ directory for example PAM configurations using this
++See the examples/ directory for example PAM configurations using this
+ module.
+ 
+ Thanks go to the following people:

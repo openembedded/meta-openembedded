@@ -1,0 +1,18 @@
+Description: Use the pager alternative as pager is PAGER is undefined
+Author: Steve Langasek <vorlon@debian.org>
+Bug-Debian: http://bugs.debian.org/135603
+Forwarded: not-needed
+
+Index: experimental/source3/include/local.h
+===================================================================
+--- experimental.orig/source3/include/local.h
++++ experimental/source3/include/local.h
+@@ -127,7 +127,7 @@
+ /* the default pager to use for the client "more" command. Users can
+    override this with the PAGER environment variable */
+ #ifndef PAGER
+-#define PAGER "more"
++#define PAGER "/usr/bin/pager"
+ #endif
+ 
+ /* the size of the uid cache used to reduce valid user checks */

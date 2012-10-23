@@ -1,0 +1,15 @@
+Description: Fix path to perl binary in example file
+Author: Christian Perrier <bubulle@debian.org>
+Bug-Debian: http://bugs.debian.org/601406
+Forwarded: not-needed
+
+Index: samba/examples/misc/wall.perl
+===================================================================
+--- samba.orig/examples/misc/wall.perl
++++ samba/examples/misc/wall.perl
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl
++#!/usr/bin/perl
+ # 
+ #@(#) smb-wall.pl Description:
+ #@(#) A perl script which allows you to announce whatever you choose to

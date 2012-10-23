@@ -1,0 +1,38 @@
+#! /bin/sh 
+
+### BEGIN INIT INFO
+# Provides:          winbind
+# Required-Start:    $network $remote_fs $syslog
+# Required-Stop:     $network $remote_fs $syslog
+# Should-Start:      samba
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: start Winbind daemon
+### END INIT INFO
+
+winbind=/usr/sbin/winbindd
+test -x "$winbind" || exit 0
+
+case "$1" in
+  start)
+    echo -n "Starting Winbind... "
+    start-stop-daemon --start --quiet --exec $winbind
+    echo "done"
+    ;;
+  stop)
+    echo -n "Stopping Winbind... "
+    start-stop-daemon --stop --quiet --pidfile /var/run/winbind.pid
+    echo "done"
+    ;;
+  reload|force-reload)
+    start-stop-daemon --stop --quiet --signal 1 --exec $winbind
+    ;;
+  restart)
+    $0 stop && sleep 2 && $0 start
+    ;;
+  *)
+    echo "Usage: /etc/init.d/winbind {start|stop|reload|restart|force-reload}"
+    exit 1
+esac
+
+exit 0

@@ -1,0 +1,54 @@
+From 185cd4c79492a7de5988f9407d764cdb3a0e2e10 Mon Sep 17 00:00:00 2001
+From: Simo Sorce <idra@samba.org>
+Date: Wed, 11 May 2011 17:50:07 -0400
+Subject: [PATCH] libutil: use AI_ADDRCONFIG only when AI_NUMERIC is not defined
+
+This flag prevents startup w/o ip addresses assigned to any interface.
+If AI_NUMERIC is passed it should be safe to avoid it.
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ lib/util/util_net.c |   16 +++++++++++-----
+ 1 files changed, 11 insertions(+), 5 deletions(-)
+
+Index: samba/lib/util/util_net.c
+===================================================================
+--- samba.orig/lib/util/util_net.c
++++ samba/lib/util/util_net.c
+@@ -64,10 +64,9 @@
+ 			ppres);
+ 
+ 	if (ret) {
+-		DEBUG(3,("interpret_string_addr_internal: getaddrinfo failed "
+-			"for name %s [%s]\n",
+-			str,
+-			gai_strerror(ret) ));
++		DEBUG(3, ("interpret_string_addr_internal: "
++			  "getaddrinfo failed for name %s (flags %d) [%s]\n",
++			  str, flags, gai_strerror(ret)));
+ 		return false;
+ 	}
+ 	return true;
+@@ -88,6 +87,7 @@
+ #if defined(HAVE_IPV6)
+ 	char addr[INET6_ADDRSTRLEN];
+ 	unsigned int scope_id = 0;
++	int int_flags;
+ 
+ 	if (strchr_m(str, ':')) {
+ 		char *p = strchr_m(str, '%');
+@@ -108,7 +108,13 @@
+ 
+ 	zero_sockaddr(pss);
+ 
+-	if (!interpret_string_addr_internal(&res, str, flags|AI_ADDRCONFIG)) {
++	if (flags & AI_NUMERICHOST) {
++		int_flags = flags;
++	} else {
++		int_flags = flags|AI_ADDRCONFIG;
++	}
++
++	if (!interpret_string_addr_internal(&res, str, int_flags)) {
+ 		return false;
+ 	}
+ 	if (!res) {

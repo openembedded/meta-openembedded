@@ -1,0 +1,34 @@
+Description: Add mention about some user for user information in smbspool manpage
+Author: Christian Perrier <bubulle@debian.org>
+Bug-Debian: http://bugs.debian.org/387266
+Forwarded: yes
+Bug: https://bugzilla.samba.org/show_bug.cgi?id=4104
+
+Index: samba/docs-xml/manpages-3/smbspool.8.xml
+===================================================================
+--- samba.orig/docs-xml/manpages-3/smbspool.8.xml
++++ samba/docs-xml/manpages-3/smbspool.8.xml
+@@ -73,7 +73,9 @@
+ 		</para></listitem>
+ 
+ 		<listitem><para>The user argument (argv[2]) contains the 
+-		print user's name and is presently not used by smbspool.
++		print user's name and is presently not used by smbspool
++		except in Kerberos environments to access the user's
++		ticket cache.
+ 		</para></listitem>
+ 
+ 		<listitem><para>The title argument (argv[3]) contains the 
+Index: samba/docs/manpages/smbspool.8
+===================================================================
+--- samba.orig/docs/manpages/smbspool.8
++++ samba/docs/manpages/smbspool.8
+@@ -114,7 +114,7 @@
+ .sp -1
+ .IP \(bu 2.3
+ .\}
+-The user argument (argv[2]) contains the print user\'s name and is presently not used by smbspool\&.
++The user argument (argv[2]) contains the print user\'s name and is presently not used by smbspool except in Kerberos environments to access the user\'s ticket cache\&.
+ .RE
+ .sp
+ .RS 4

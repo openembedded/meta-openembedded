@@ -1,0 +1,31 @@
+Description: Do not build VFS examples
+Author: Christian Perrier <bubulle@debian.org>
+Forwarded: not-needed
+
+Index: samba/source3/Makefile.in
+===================================================================
+--- samba.orig/source3/Makefile.in
++++ samba/source3/Makefile.in
+@@ -1616,8 +1616,7 @@
+ 
+ 
+ everything:: all libtalloc libsmbclient libnetapi debug2html smbfilter talloctort replacetort smbconftort modules torture \
+-	$(EVERYTHING_PROGS) \
+-	vfs_examples
++	$(EVERYTHING_PROGS)
+ 
+ .SUFFIXES:
+ .SUFFIXES: .c .o .lo
+@@ -3552,12 +3551,3 @@
+ bin/ndrdump4: $(BINARY_PREREQS)
+ 	$(MAKE) -f Makefile-smbtorture4 bin/ndrdump4
+ 
+-.PHONY: vfs_examples
+-
+-vfs_examples:
+-	( \
+-	cd ../examples/VFS && \
+-	./configure && \
+-	make clean && \
+-	make \
+-	)

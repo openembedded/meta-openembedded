@@ -1,0 +1,38 @@
+Description: Enable net usershares by default at build time
+ Enable net usershares by default at build time, with a limit of
+ 100, and update the corresponding documentation.
+Author: Mathias Gug <mathiaz@ubuntu.com>,
+Author: Steve Langasek <vorlon@debian.org>
+Bug-Debian: http://bugs.debian.org/443230
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/samba/+bug/128548
+Forwarded: not-needed
+
+Index: experimental/docs/manpages/net.8
+===================================================================
+--- experimental.orig/docs/manpages/net.8
++++ experimental/docs/manpages/net.8
+@@ -800,9 +800,9 @@
+ .RE
+ .SS "USERSHARE"
+ .PP
+-Starting with version 3\&.0\&.23, a Samba server now supports the ability for non\-root users to add user defined shares to be exported using the "net usershare" commands\&.
++Starting with version 3\&.0\&.23, a Samba server now supports the ability for non\-root users to add user-defined shares to be exported using the "net usershare" commands\&.
+ .PP
+-To set this up, first set up your smb\&.conf by adding to the [global] section: usershare path = /usr/local/samba/lib/usershares Next create the directory /usr/local/samba/lib/usershares, change the owner to root and set the group owner to the UNIX group who should have the ability to create usershares, for example a group called "serverops"\&. Set the permissions on /usr/local/samba/lib/usershares to 01770\&. (Owner and group all access, no access for others, plus the sticky bit, which means that a file in that directory can be renamed or deleted only by the owner of the file)\&. Finally, tell smbd how many usershares you will allow by adding to the [global] section of smb\&.conf a line such as : usershare max shares = 100\&. To allow 100 usershare definitions\&. Now, members of the UNIX group "serverops" can create user defined shares on demand using the commands below\&.
++Members of the UNIX group "sambashare" can create user-defined shares on demand using the commands below\&.
+ .PP
+ The usershare commands are:
+ .RS 4
+Index: experimental/source3/param/loadparm.c
+===================================================================
+--- experimental.orig/source3/param/loadparm.c
++++ experimental/source3/param/loadparm.c
+@@ -5461,7 +5461,7 @@
+ 	string_set(&Globals.szUsersharePath, s);
+ 	SAFE_FREE(s);
+ 	string_set(&Globals.szUsershareTemplateShare, "");
+-	Globals.iUsershareMaxShares = 0;
++	Globals.iUsershareMaxShares = 100;
+ 	/* By default disallow sharing of directories not owned by the sharer. */
+ 	Globals.bUsershareOwnerOnly = True;
+ 	/* By default disallow guest access to usershares. */

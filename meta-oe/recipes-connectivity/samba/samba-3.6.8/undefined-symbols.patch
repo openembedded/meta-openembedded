@@ -1,0 +1,24 @@
+Description: Fix missing symbols
+ Fix missing symbols in libsmbclient (and libnss_wins), and add
+ -Wl,-z,defs to the libsmbclient link options to prevent future
+ instances of undefined symbols.
+ .
+ This should be forwarded upstream once there's a configure test
+ for it.
+Author: Steve Langasek <vorlon@debian.org>
+Bug-Debian: http://bugs.debian.org/281181
+Forwarded: no
+
+Index: experimental/source3/Makefile.in
+===================================================================
+--- experimental.orig/source3/Makefile.in
++++ experimental/source3/Makefile.in
+@@ -2281,7 +2281,7 @@
+ 
+ $(LIBSMBCLIENT_SHARED_TARGET_SONAME): $(BINARY_PREREQS) $(LIBSMBCLIENT_OBJ) $(LIBSMBCLIENT_THREAD_OBJ) $(LIBSMBCLIENT_SYMS) $(LIBTALLOC) $(LIBTDB) $(LIBWBCLIENT)
+ 	@echo Linking shared library $@
+-	@$(SHLD_DSO) $(LIBSMBCLIENT_OBJ) $(LIBSMBCLIENT_THREAD_OBJ) \
++	@$(SHLD_DSO) -Wl,-z,defs $(LIBSMBCLIENT_OBJ) $(LIBSMBCLIENT_THREAD_OBJ) \
+ 		$(LIBTALLOC_LIBS) $(LIBTDB_LIBS) $(LIBWBCLIENT_LIBS) $(LIBS) \
+ 		$(KRB5LIBS) $(LDAP_LIBS) $(NSCD_LIBS) $(ZLIB_LIBS) $(PTHREAD_LDFLAGS) \
+ 		@SONAMEFLAG@`basename $@`

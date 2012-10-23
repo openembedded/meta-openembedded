@@ -1,0 +1,18 @@
+Description: Fix WHATSNEW.txt link in HTML documentation summary to fit Debian files organization
+Author: Christian Perrier <bubulle@debian.org>
+Bug-Debian: http://bugs.debian.org/604768
+Forwarded: not-needed
+
+Index: samba/docs/htmldocs/index.html
+===================================================================
+--- samba.orig/docs/htmldocs/index.html
++++ samba/docs/htmldocs/index.html
+@@ -27,7 +27,7 @@
+  <td valign="top">The Samba man pages in HTML.</td>
+ </tr>
+ <tr>
+- <td valign="top"><a href="../../WHATSNEW.txt">WHATSNEW</a></td>
++ <td valign="top"><a href="../WHATSNEW.txt">WHATSNEW</a></td>
+   <td valign="top">Samba Release Notes.</td>
+ </tr>
+ </table></body></html>

@@ -1,0 +1,21 @@
+Description: only export public symbols
+ Force usage of the symbols list when linking shared libraries. Otherwise,
+ private symbols get exported in libsmbclient and libwbclient.
+Forwarded: no
+Author: Ivo De Decker <ivo.dedecker@ugent.be>
+Last-Update: 2012-06-27
+
+--- samba-3.6.6.orig/source3/Makefile.in
++++ samba-3.6.6/source3/Makefile.in
+@@ -28,8 +28,9 @@ SHLD=@SHLD@
+ LIB_PATH_VAR=@LIB_PATH_VAR@
+ 
+ ## Dynamic shared libraries build settings
+-DSO_EXPORTS_CMD=-Wl,--version-script,$(srcdir)/exports/`basename $@ | sed 's:\.@SHLIBEXT@[\.0-9]*$$:.@SYMSEXT@:'`
+-DSO_EXPORTS=@DSO_EXPORTS@
++# force using syms file
++DSO_EXPORTS=-Wl,--version-script,$(srcdir)/exports/`basename $@ | sed 's:\.@SHLIBEXT@[\.0-9]*$$:.@SYMSEXT@:'`
++#DSO_EXPORTS=@DSO_EXPORTS@
+ SHLD_DSO = $(SHLD) $(LDSHFLAGS) $(DSO_EXPORTS) -o $@
+ 
+ # The MODULE_EXPORTS variable contains the platform-specific linker flags

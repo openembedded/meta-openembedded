@@ -1,0 +1,302 @@
+Description: Remove documentation parts that do not apply to Debian
+Author: Christian Perrier <bubulle@debian.org>
+Forwarded: not-needed
+
+Index: experimental/docs/manpages/swat.8
+===================================================================
+--- experimental.orig/docs/manpages/swat.8
++++ experimental/docs/manpages/swat.8
+@@ -111,86 +111,6 @@
+ .RS 4
+ Print a summary of command line options\&.
+ .RE
+-.SH "INSTALLATION"
+-.PP
+-Swat is included as binary package with most distributions\&. The package manager in this case takes care of the installation and configuration\&. This section is only for those who have compiled swat from scratch\&.
+-.PP
+-After you compile SWAT you need to run
+-make install
+-to install the
+-swat
+-binary and the various help files and images\&. A default install would put these in:
+-.sp
+-.RS 4
+-.ie n \{\
+-\h'-04'\(bu\h'+03'\c
+-.\}
+-.el \{\
+-.sp -1
+-.IP \(bu 2.3
+-.\}
+-/usr/local/samba/sbin/swat
+-.RE
+-.sp
+-.RS 4
+-.ie n \{\
+-\h'-04'\(bu\h'+03'\c
+-.\}
+-.el \{\
+-.sp -1
+-.IP \(bu 2.3
+-.\}
+-/usr/local/samba/swat/images/*
+-.RE
+-.sp
+-.RS 4
+-.ie n \{\
+-\h'-04'\(bu\h'+03'\c
+-.\}
+-.el \{\
+-.sp -1
+-.IP \(bu 2.3
+-.\}
+-/usr/local/samba/swat/help/*
+-.RE
+-.sp
+-.RE
+-.SS "Inetd Installation"
+-.PP
+-You need to edit your
+-/etc/inetd\&.conf
+-and
+-/etc/services
+-to enable SWAT to be launched via
+-inetd\&.
+-.PP
+-In
+-/etc/services
+-you need to add a line like this:
+-.PP
+-swat 901/tcp
+-.PP
+-Note for NIS/YP and LDAP users \- you may need to rebuild the NIS service maps rather than alter your local
+-/etc/services
+-file\&.
+-.PP
+-the choice of port number isn\'t really important except that it should be less than 1024 and not currently used (using a number above 1024 presents an obscure security hole depending on the implementation details of your
+-inetd
+-daemon)\&.
+-.PP
+-In
+-/etc/inetd\&.conf
+-you should add a line like this:
+-.PP
+-swat stream tcp nowait\&.400 root /usr/local/samba/sbin/swat swat
+-.PP
+-Once you have edited
+-/etc/services
+-and
+-/etc/inetd\&.conf
+-you need to send a HUP signal to inetd\&. To do this use
+-kill \-1 PID
+-where PID is the process ID of the inetd daemon\&.
+ .SH "LAUNCHING"
+ .PP
+ To launch SWAT just run your favorite web browser and point it at "http://localhost:901/"\&.
+@@ -208,14 +128,11 @@
+ This file must contain a mapping of service name (e\&.g\&., swat) to service port (e\&.g\&., 901) and protocol type (e\&.g\&., tcp)\&.
+ .RE
+ .PP
+-/usr/local/samba/lib/smb\&.conf
++/etc/samba/smb\&.conf
+ .RS 4
+ This is the default location of the
+ \fBsmb.conf\fR(5)
+-server configuration file that swat edits\&. Other common places that systems install this file are
+-/usr/samba/lib/smb\&.conf
+-and
+-/etc/smb\&.conf\&. This file describes all the services the server is to make available to clients\&.
++server configuration file that swat edits\&. This file describes all the services the server is to make available to clients\&.
+ .RE
+ .SH "WARNINGS"
+ .PP
+Index: experimental/docs/manpages/nmbd.8
+===================================================================
+--- experimental.orig/docs/manpages/nmbd.8
++++ experimental/docs/manpages/nmbd.8
+@@ -115,10 +115,7 @@
+ to answer any name queries\&. Adding a line to this file affects name NetBIOS resolution from this host
+ \fIONLY\fR\&.
+ .sp
+-The default path to this file is compiled into Samba as part of the build process\&. Common defaults are
+-/usr/local/samba/lib/lmhosts,
+-/usr/samba/lib/lmhosts
+-or
++The default path to this file is
+ /etc/samba/lmhosts\&. See the
+ \fBlmhosts\fR(5)
+ man page for details on the contents of this file\&.
+@@ -187,14 +184,11 @@
+ inetd, this file must contain a mapping of service name (e\&.g\&., netbios\-ssn) to service port (e\&.g\&., 139) and protocol type (e\&.g\&., tcp)\&.
+ .RE
+ .PP
+-/usr/local/samba/lib/smb\&.conf
++/etc/samba/smb\&.conf
+ .RS 4
+ This is the default location of the
+ \fBsmb.conf\fR(5)
+-server configuration file\&. Other common places that systems install this file are
+-/usr/samba/lib/smb\&.conf
+-and
+-/etc/samba/smb\&.conf\&.
++server configuration file\&.
+ .sp
+ When run as a WINS server (see the
+ \m[blue]\fBwins support\fR\m[]
+@@ -238,10 +232,8 @@
+ will accept SIGHUP, which will cause it to dump out its namelists into the file
+ namelist\&.debug
+ in the
+-/usr/local/samba/var/locks
+-directory (or the
+-var/locks
+-directory configured under wherever Samba was configured to install itself)\&. This will also cause
++/var/run/samba
++directory\&. This will also cause
+ nmbd
+ to dump out its server database in the
+ log\&.nmb
+Index: experimental/docs/manpages/smbd.8
+===================================================================
+--- experimental.orig/docs/manpages/smbd.8
++++ experimental/docs/manpages/smbd.8
+@@ -169,14 +169,11 @@
+ inetd, this file must contain a mapping of service name (e\&.g\&., netbios\-ssn) to service port (e\&.g\&., 139) and protocol type (e\&.g\&., tcp)\&.
+ .RE
+ .PP
+-/usr/local/samba/lib/smb\&.conf
++/etc/samba/smb\&.conf
+ .RS 4
+ This is the default location of the
+ \fBsmb.conf\fR(5)
+-server configuration file\&. Other common places that systems install this file are
+-/usr/samba/lib/smb\&.conf
+-and
+-/etc/samba/smb\&.conf\&.
++server configuration file\&.
+ .sp
+ This file describes all the services the server is to make available to clients\&. See
+ \fBsmb.conf\fR(5)
+Index: experimental/docs/manpages/lmhosts.5
+===================================================================
+--- experimental.orig/docs/manpages/lmhosts.5
++++ experimental/docs/manpages/lmhosts.5
+@@ -96,10 +96,8 @@
+ file\&.
+ .SH "FILES"
+ .PP
+-lmhosts is loaded from the configuration directory\&. This is usually
+-/etc/samba
+-or
+-/usr/local/samba/lib\&.
++lmhosts is loaded from the configuration directory\&. This is
++/etc/samba\&.
+ .SH "VERSION"
+ .PP
+ This man page is correct for version 3 of the Samba suite\&.
+Index: experimental/docs/manpages/ntlm_auth.1
+===================================================================
+--- experimental.orig/docs/manpages/ntlm_auth.1
++++ experimental/docs/manpages/ntlm_auth.1
+@@ -43,7 +43,7 @@
+ Some of these commands also require access to the directory
+ winbindd_privileged
+ in
+-$LOCKDIR\&. This should be done either by running this command as root or providing group access to the
++/var/run/samba\F[]\&. This should be done either by running this command as root or providing group access to the
+ winbindd_privileged
+ directory\&. For security reasons, this directory should not be world\-accessable\&.
+ .SH "OPTIONS"
+@@ -69,7 +69,7 @@
+ Requires access to the directory
+ winbindd_privileged
+ in
+-$LOCKDIR\&. The protocol used is described here:
++/var/run/samba\&. The protocol used is described here:
+ http://devel\&.squid\-cache\&.org/ntlm/squid_helper_protocol\&.html\&. This protocol has been extended to allow the NTLMSSP Negotiate packet to be included as an argument to the
+ YR
+ command\&. (Thus avoiding loss of information in the protocol exchange)\&.
+@@ -92,7 +92,7 @@
+ Requires access to the directory
+ winbindd_privileged
+ in
+-$LOCKDIR\&.
++/var/run/samba\&.
+ .RE
+ .PP
+ gss\-spnego\-client
+Index: experimental/docs/manpages/tdbbackup.8
+===================================================================
+--- experimental.orig/docs/manpages/tdbbackup.8
++++ experimental/docs/manpages/tdbbackup.8
+@@ -77,7 +77,7 @@
+ .\}
+ 
+ secrets\&.tdb
+-\- usual location is in the /usr/local/samba/private directory, or on some systems in /etc/samba\&.
++\- usual location is in the /var/lib/samba directory\&.
+ .RE
+ .sp
+ .RS 4
+@@ -90,7 +90,7 @@
+ .\}
+ 
+ passdb\&.tdb
+-\- usual location is in the /usr/local/samba/private directory, or on some systems in /etc/samba\&.
++\- usual location is in the /var/lib/samba directory\&.
+ .RE
+ .sp
+ .RS 4
+@@ -103,7 +103,7 @@
+ .\}
+ 
+ *\&.tdb
+-located in the /usr/local/samba/var directory or on some systems in the /var/cache or /var/lib/samba directories\&.
++located in the /var/lib/samba and /var/run/samba directories\&.
+ .RE
+ .SH "VERSION"
+ .PP
+Index: experimental/docs/manpages/winbindd.8
+===================================================================
+--- experimental.orig/docs/manpages/winbindd.8
++++ experimental/docs/manpages/winbindd.8
+@@ -550,16 +550,16 @@
+ file are owned by root\&.
+ .RE
+ .PP
+-$LOCKDIR/winbindd_privileged/pipe
++/var/run/samba/winbindd_privileged/pipe
+ .RS 4
+ The UNIX pipe over which \'privileged\' clients communicate with the
+ winbindd
+ program\&. For security reasons, access to some winbindd functions \- like those needed by the
+ ntlm_auth
+-utility \- is restricted\&. By default, only users in the \'root\' group will get this access, however the administrator may change the group permissions on $LOCKDIR/winbindd_privileged to allow programs like \'squid\' to use ntlm_auth\&. Note that the winbind client will only attempt to connect to the winbindd daemon if both the
+-$LOCKDIR/winbindd_privileged
++utility \- is restricted\&. By default, only users in the \'root\' group will get this access, however the administrator may change the group permissions on /var/run/samba/winbindd_privileged to allow programs like \'squid\' to use ntlm_auth\&. Note that the winbind client will only attempt to connect to the winbindd daemon if both the
++/var/run/samba/winbindd_privileged
+ directory and
+-$LOCKDIR/winbindd_privileged/pipe
++/var/run/samba/winbindd_privileged/pipe
+ file are owned by root\&.
+ .RE
+ .PP
+@@ -568,15 +568,12 @@
+ Implementation of name service switch library\&.
+ .RE
+ .PP
+-$LOCKDIR/winbindd_idmap\&.tdb
++/var/run/samba/winbindd_idmap\&.tdb
+ .RS 4
+-Storage for the Windows NT rid to UNIX user/group id mapping\&. The lock directory is specified when Samba is initially compiled using the
+-\fI\-\-with\-lockdir\fR
+-option\&. This directory is by default
+-/usr/local/samba/var/locks\&.
++Storage for the Windows NT rid to UNIX user/group id mapping\&.
+ .RE
+ .PP
+-$LOCKDIR/winbindd_cache\&.tdb
++/var/run/samba/winbindd_cache\&.tdb
+ .RS 4
+ Storage for cached user and group information\&.
+ .RE

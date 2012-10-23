@@ -1,0 +1,11 @@
+--- samba-3.6.6/source3/configure.orig	2012-10-01 15:50:15.371574883 -0300
++++ samba-3.6.6/source3/configure	2012-10-01 15:50:35.563699659 -0300
+@@ -13302,7 +13302,7 @@
+ 	# getaddrinfo is broken on some AIX systems
+ 	# see bug 5910, use our replacements if we detect
+ 	# a broken system.
+-	if test "$cross_compiling" = yes; then :
++	if test "$cross_compiling" = foo; then :
+   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+ as_fn_error "cannot run test program while cross compiling

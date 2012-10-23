@@ -1,0 +1,65 @@
+Description: Prepare the sources to better respect FHS
+ This patch was historically very long but most parts have
+ been integrated upstream.
+ .
+ The last remaining bit is the location of "private files
+ We historically have them in /var/lib/samba while upstream
+ has them in /etc/samba
+ .
+ We need to provide a migraiton path and go back to the "normal"
+ file layout
+Author: Eloy A. Paris <peloy@debian.org>
+Bug-Debian: http://bugs.debian.org/49011
+Forwarded: not-needed
+
+
+Index: samba/source3/passdb/pdb_tdb.c
+===================================================================
+--- samba.orig/source3/passdb/pdb_tdb.c
++++ samba/source3/passdb/pdb_tdb.c
+@@ -1260,7 +1260,7 @@
+ 	/* save the path for later */
+ 
+ 	if (!location) {
+-		if (asprintf(&tdbfile, "%s/%s", lp_private_dir(),
++		if (asprintf(&tdbfile, "%s/%s", lp_statedir(),
+ 			     PASSDB_FILE_NAME) < 0) {
+ 			return NT_STATUS_NO_MEMORY;
+ 		}
+Index: samba/source3/passdb/secrets.c
+===================================================================
+--- samba.orig/source3/passdb/secrets.c
++++ samba/source3/passdb/secrets.c
+@@ -64,7 +64,7 @@
+ 		return True;
+ 
+ 	fname = talloc_asprintf(talloc_tos(), "%s/secrets.tdb",
+-				lp_private_dir());
++				lp_statedir());
+ 	if (fname == NULL) {
+ 		return false;
+ 	}
+Index: samba/docs/manpages/smb.conf.5
+===================================================================
+--- samba.orig/docs/manpages/smb.conf.5
++++ samba/docs/manpages/smb.conf.5
+@@ -7167,7 +7167,7 @@
+ .\}
+ tdbsam
+ \- The TDB based password storage backend\&. Takes a path to the TDB as an optional argument (defaults to passdb\&.tdb in the
+-\m[blue]\fBprivate dir\fR\m[]
++\m[blue]\fBstate directory\fR\m[]
+ directory\&.
+ .RE
+ .sp
+@@ -8038,9 +8038,7 @@
+ .PP
+ .RS 4
+ This parameters defines the directory smbd will use for storing such files as
+-smbpasswd
+-and
+-secrets\&.tdb\&.
++smbpasswd\&. secrets\&.tdb is stored in state directory on Debian systems\&.
+ .sp
+ Default:
+ \fI\fIprivate dir\fR\fR\fI = \fR\fI${prefix}/private\fR\fI \fR

@@ -1,0 +1,47 @@
+Description: nss_wins stop clobbering other daemon's log
+Author: Christian Perrier <bubulle@debian.org>,Buchan Milne 
+Bug-Debian: http://bugs.debian.org/598313
+Forwarded: yes
+Bug: https://bugzilla.samba.org/show_bug.cgi?id=7499
+
+Index: samba/lib/util/debug.c
+===================================================================
+--- samba.orig/lib/util/debug.c
++++ samba/lib/util/debug.c
+@@ -474,15 +474,17 @@
+ 
+ 	if (state.logtype == DEBUG_FILE) {
+ #ifdef WITH_SYSLOG
+-		const char *p = strrchr_m( prog_name,'/' );
+-		if (p)
+-			prog_name = p + 1;
++		if (prog_name) {
++			const char *p = strrchr_m( prog_name,'/' );
++			if (p)
++				prog_name = p + 1;
+ #ifdef LOG_DAEMON
+-		openlog( prog_name, LOG_PID, SYSLOG_FACILITY );
++			openlog( prog_name, LOG_PID, SYSLOG_FACILITY );
+ #else
+-		/* for old systems that have no facility codes. */
+-		openlog( prog_name, LOG_PID );
++			/* for old systems that have no facility codes. */
++			openlog( prog_name, LOG_PID );
+ #endif
++		}
+ #endif
+ 	}
+ }
+Index: samba/nsswitch/wins.c
+===================================================================
+--- samba.orig/nsswitch/wins.c
++++ samba/nsswitch/wins.c
+@@ -52,7 +52,7 @@
+ 	lp_set_cmdline("log level", "0");
+ 
+ 	TimeInit();
+-	setup_logging("nss_wins",False);
++	setup_logging(NULL,False);
+ 	lp_load(get_dyn_CONFIGFILE(),True,False,False,True);
+ 	load_interfaces();
+ }
