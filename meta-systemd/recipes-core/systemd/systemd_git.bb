@@ -19,7 +19,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r8"
+PR = "r9"
 
 inherit useradd pkgconfig autotools perlnative
 
@@ -67,6 +67,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-tcpwrap \
                  --enable-split-usr \
                  --disable-microhttpd \
+                 --without-python \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
