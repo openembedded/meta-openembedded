@@ -1,7 +1,5 @@
 require ntp.inc
 
-PR = "r6"
-
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
         file://tickadj.c.patch \
         file://ntp-4.2.4_p6-nano.patch \
