@@ -19,11 +19,11 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r7"
+PR = "r8"
 
 inherit useradd pkgconfig autotools perlnative
 
-SRCREV = "a3eb665e0c12df35e807611582e7332ebed325b1"
+SRCREV = "4d92e078e9d7e9a9d346065ea5e4afbafbdadb48"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://use-rootlibdir.patch \
            file://gtk-doc.make \
@@ -66,6 +66,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-gtk-doc-html \ 
                  --disable-tcpwrap \
                  --enable-split-usr \
+                 --disable-microhttpd \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
@@ -138,12 +139,16 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${sysconfdir}/systemd/ \
                 ${sysconfdir}/tmpfiles.d/ \
                 ${sysconfdir}/xdg/ \
+                ${sysconfdir}/init.d/README \
                 ${systemd_unitdir}/* \
                 ${systemd_unitdir}/system/* \
                 ${base_libdir}/udev/rules.d/99-systemd.rules \
                 ${base_libdir}/security/*.so \
                 /cgroup \
                 ${bindir}/systemd* \
+                ${bindir}/localectl \
+                ${bindir}/hostnamectl \
+                ${bindir}/timedatectl \
                 ${libdir}/tmpfiles.d/*.conf \
                 ${libdir}/systemd \
                 ${libdir}/binfmt.d \
