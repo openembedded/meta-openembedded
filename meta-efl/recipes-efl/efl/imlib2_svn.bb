@@ -4,10 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
 # can also depend on tiff34, ungif or gif, z, bz2, id3tag
 DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"
 PROVIDES = "virtual/imlib2"
-PV = "1.4.2.001+svnr${SRCPV}"
+PV = "1.4.5+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
-inherit efl
+inherit efl binconfig
 SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
@@ -19,10 +19,6 @@ EXTRA_OECONF = "--with-x \
 #OE_LT_RPATH_ALLOW=":${libdir}/imlib2/loaders:${libdir}/imlib2/filters:"
 OE_LT_RPATH_ALLOW = "any"
 OE_LT_RPATH_ALLOW[export]="1"
-
-do_install_append() {
-    install -m 0755 imlib2-config ${STAGING_BINDIR_CROSS}
-}
 
 PACKAGES =+ "imlib2-loaders-dbg imlib2-filters-dbg imlib2-loaders imlib2-filters"
 FILES_${PN} = "${libdir}/lib*.so.* ${libdir}/imlib2/*/*.so"
