@@ -4,8 +4,8 @@ HOMEPAGE = "http://tangogps.org/"
 SECTION = "x11/applications"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-DEPENDS = "curl gtk+ gconf sqlite3 libexif libsoup-2.4 bluez4"
-PR = "r2"
+DEPENDS = "curl gtk+ sqlite3 libexif libsoup-2.4 bluez4"
+PR = "r3"
 
 SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz \
            file://remove.unused.header.patch \
@@ -14,6 +14,6 @@ SRC_URI = "http://www.tangogps.org/downloads/${P}.tar.gz \
 SRC_URI[md5sum] = "0f07ede94a21eb84f5e017fa88a1fc3d"
 SRC_URI[sha256sum] = "660fdf89ef3c379f2fc0c2a9d0c9d3bfa5345835786b72bf9f513ba9ec2c812a"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig gconf
 
 RRECOMMENDS_${PN} = "gpsd"
