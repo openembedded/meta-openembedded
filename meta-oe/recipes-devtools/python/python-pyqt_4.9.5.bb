@@ -15,6 +15,7 @@ DEPENDS = "sip-native python-sip"
 RDEPENDS_${PN} = "python-core"
 
 PYQT_OE_VERSION = "Qt_4_8_3"
+PR = "r1"
 
 SRC_URI = "\
   ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
@@ -88,22 +89,15 @@ do_configure_prepend() {
 
 do_install() {
     install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4
+    install -d ${D}${datadir}/sip/qt/
     for module in ${SIP_MODULES}
     do
+        install -m 0644 ${S}/sip/${module}/*.sip ${D}${datadir}/sip/qt/
         echo "from PyQt4.${module} import *\n" >> ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/Qt.py
         install -m 0755 ${module}/lib${module}.so ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/${module}.so
     done
     cp -pPR elementtree ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
     cp __init__.py ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
-
-    install -d ${STAGING_SIPDIR}/qt/
-    install -d ${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages
-    for module in ${SIP_MODULES}
-    do
-        install -m 0644 ${S}/sip/${module}/*.sip ${STAGING_SIPDIR}/qt/
-        install -m 0755 ${module}/lib${module}.so ${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/${module}.so
-    done
 }
 
-FILES_${PN} = "${libdir}/${PYTHON_DIR}/site-packages"
-
+FILES_${PN} = "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/qt/"
