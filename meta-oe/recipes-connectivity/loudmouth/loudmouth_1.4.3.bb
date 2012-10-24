@@ -4,11 +4,11 @@ HOMEPAGE = "http://www.loudmouth-project.org/"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c4f38aef94828f6b280e00d1173be689"
 
-DEPENDS = "glib-2.0 check openssl"
+DEPENDS = "glib-2.0 libcheck openssl"
 
 inherit gnomebase
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI += "file://04-use-pkg-config-for-gnutls.patch \
             file://glib-2.32.patch"
