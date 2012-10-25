@@ -44,10 +44,6 @@ index 9ef8a1f..0000000
 -You can get a svn copy of the upstream source with:
 -
 -  svn checkout http://waf.googlecode.com/svn/trunk/ waf-read-only
-diff --git a/buildtools/bin/waf-svn b/buildtools/bin/waf-svn
-deleted file mode 100755
-index 6d54d5f..0000000
-Binary files a/buildtools/bin/waf-svn and /dev/null differ
 diff --git a/buildtools/update-waf.sh b/buildtools/update-waf.sh
 new file mode 100755
 index 0000000..bb3a4bf
