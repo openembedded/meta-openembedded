@@ -16,6 +16,7 @@ SRCREV_ELM_REV ?= "${EFL_SRCREV}"
 
 SRCREV_FORMAT = "THM_REV"
 PV = "0.0+svnr${SRCPV}"
+PR = "r1"
 
 inherit e-base allarch
 
@@ -26,7 +27,7 @@ SRC_URI += "file://LICENSE"
 S = "${WORKDIR}/${SRCNAME}"
 
 do_compile() {
-    ${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images -id ${WORKDIR}/themes/ ${S}/elm-efenniht.edc -o ${S}/elm-efenniht.edj
+    ${STAGING_BINDIR_NATIVE}/edje_cc -id ${S}/images -id ${WORKDIR}/themes/images ${S}/elm-efenniht.edc -o ${S}/elm-efenniht.edj
 }
 
 do_install() {
