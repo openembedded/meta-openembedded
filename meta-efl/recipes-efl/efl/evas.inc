@@ -2,8 +2,8 @@ DESCRIPTION = "Evas is the Enlightenment canvas API"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b9b25b03d63aa496552658c7e78b11a1"
 # can also depend on valgrind, libsdl-x11, directfb
-DEPENDS = "librsvg eina eet freetype jpeg libpng virtual/libx11 libxext libxrender fontconfig libfribidi giflib"
-DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-native eet-native eina-native libfribidi-native"
+DEPENDS = "librsvg eina eet freetype jpeg libpng tiff virtual/libx11 libxext libxrender fontconfig libfribidi giflib"
+DEPENDS_virtclass-native = "freetype-native libxext-native libpng-native jpeg-native tiff-native eet-native eina-native libfribidi-native"
 
 inherit efl
 
