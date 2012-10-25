@@ -300,15 +300,15 @@ Index: samba/swat/lang/tr/help/welcome.html
 @@ -40,7 +40,6 @@
     <ul>
      <li><a href="/swat/help/smbstatus.1.html" target="docs">smbstatus</a> - Samba gözlemcisi
-     <li><a href="/swat/help/testparm.1.html" target="docs">testparm</a> - ayar dosyas?n? kontrol eder
--    <li><a href="/swat/help/testprns.1.html" target="docs">testprns</a> - yaz?c? ayarlar?n? kontrol eder
-     <li><a href="/swat/help/nmblookup.1.html" target="docs">nmblookup</a> - NetBIOS isim sorgulama arac?
+     <li><a href="/swat/help/testparm.1.html" target="docs">testparm</a> - ayar dosyasını kontrol eder
+-    <li><a href="/swat/help/testprns.1.html" target="docs">testprns</a> - yazıcı ayarlarını kontrol eder
+     <li><a href="/swat/help/nmblookup.1.html" target="docs">nmblookup</a> - NetBIOS isim sorgulama aracı
     </ul>
   <li><b>Kitaplar</b>
 @@ -66,4 +65,4 @@
  
-  E?er SWAT'?n bu sürümü ile ilgili konular? tart??mak istiyorsan?z, lütfen
+  Eğer SWAT'ın bu sürümü ile ilgili konuları tartışmak istiyorsanız, lütfen
  <A HREF="http://lists.samba.org/">samba</A> eposta listesine üye olun.
 - 
 \ No newline at end of file
-+
++ 

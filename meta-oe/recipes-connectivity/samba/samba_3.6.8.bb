@@ -3,6 +3,8 @@ require samba-basic.inc
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
+PR = "r1"
+
 SRC_URI += "\
     file://config-h.patch \
     file://documentation.patch;patchdir=.. \
