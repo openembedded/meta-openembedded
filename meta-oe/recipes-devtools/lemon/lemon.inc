@@ -23,4 +23,3 @@ do_install() {
 
 BBCLASSEXTEND = "native"
 
-NATIVE_INSTALL_WORKS = "1"

@@ -20,8 +20,6 @@ do_install() {
         install -m 0755 sql/gen_lex_hash ${D}${bindir}/
 }
 
-NATIVE_INSTALL_WORKS = "1"
-
 PSTAGING_DISABLED = "1"
 
 SRC_URI[md5sum] = "32e7373c16271606007374396e6742ad"

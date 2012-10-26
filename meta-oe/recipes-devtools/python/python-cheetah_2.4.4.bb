@@ -14,7 +14,6 @@ inherit setuptools
 
 RDEPENDS_${PN} = "python-pickle python-pprint"
 
-NATIVE_INSTALL_WORKS = "1"
 BBCLASSEXTEND = "native"
 
 SRC_URI[md5sum] = "853917116e731afbc8c8a43c37e6ddba"

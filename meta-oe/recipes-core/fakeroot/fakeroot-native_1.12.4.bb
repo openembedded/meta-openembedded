@@ -13,8 +13,6 @@ python () {
         bb.data.setVar('EXTRA_OECONF', ' --with-ipc=tcp --program-prefix= ', d)
 }
 
-NATIVE_INSTALL_WORKS = "1"
-
 RDEPENDS_${PN} = "util-linux-native"
 
 SRC_URI[md5sum] = "aaefede2405a40c87438e7e833d69b70"

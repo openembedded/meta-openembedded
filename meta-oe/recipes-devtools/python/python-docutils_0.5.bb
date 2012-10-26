@@ -15,6 +15,5 @@ S = "${WORKDIR}/docutils-${PV}"
 
 inherit distutils
 
-NATIVE_INSTALL_WORKS = "1"
 BBCLASSEXTEND = "native"
 

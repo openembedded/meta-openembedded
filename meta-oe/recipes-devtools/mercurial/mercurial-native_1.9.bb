@@ -21,4 +21,3 @@ do_install () {
         oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
 }
 
-NATIVE_INSTALL_WORKS = "1"

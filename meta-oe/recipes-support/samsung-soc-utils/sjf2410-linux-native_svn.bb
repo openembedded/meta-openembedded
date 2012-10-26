@@ -15,8 +15,6 @@ do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
 
 CFLAGS += "-DLINUX_PPDEV"
 
-NATIVE_INSTALL_WORKS = "1"
-
 do_compile() {
 	oe_runmake
 }
