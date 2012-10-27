@@ -2,7 +2,7 @@ DESCRIPTION = "Ecore is the Enlightenment application framework library"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d6ff2c3c85de2faf5fd7dcd9ccfc8886"
 DEPENDS = "virtual/libiconv tslib curl eet evas glib-2.0 gnutls \
-           libxtst libxcomposite libxinerama libxscrnsaver libxdamage libxrandr libxcursor"
+           libxtst libxcomposite libxinerama libxscrnsaver libxdamage libxrandr libxcursor libxfixes"
 DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
 # optional
 # DEPENDS += "directfb virtual/libsdl openssl virtual/libiconv"
@@ -10,7 +10,7 @@ DEPENDS_virtclass-native = "eet-native evas-native gettext-native"
 inherit efl gettext
 
 BBCLASSEXTEND = "native"
-INC_PR = "r1"
+INC_PR = "r2"
 
 do_configure_prepend() {
     touch ${S}/po/Makefile.in.in || true
@@ -96,4 +96,19 @@ EXTRA_OECONF = "${ECORE_OECONF} \
 EXTRA_OECONF_virtclass-native = "\
                  ${ECORE_OECONF} \
                  --disable-curl \
+                 --disable-ecore-x-composite \
+                 --disable-ecore-x-damage \
+                 --disable-ecore-x-dpms \
+                 --disable-ecore-x-randr \
+                 --disable-ecore-x-render \
+                 --disable-ecore-x-screensaver \
+                 --disable-ecore-x-shape \
+                 --disable-ecore-x-sync \
+                 --disable-ecore-x-xfixes \
+                 --disable-ecore-x-xinerama \
+                 --disable-ecore-x-xprint \
+                 --disable-ecore-x-xtest \
+                 --disable-ecore-x-cursor \
+                 --disable-ecore-x-input \
+                 --disable-ecore-x-dri \
 "
