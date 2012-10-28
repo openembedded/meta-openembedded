@@ -21,7 +21,7 @@ SRC_URI[md5sum] = "f883b0a7f26229a9c66fd6a1a94381aa"
 SRC_URI[sha256sum] = "d99089a63a6cfc1a6a4a026be9278028d47d224088d24b1853acb67e95683a15"
 
 #want 2.x from 2.x.y for the installation directory
-SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
 PR = "r7"
 
@@ -102,21 +102,21 @@ FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
 PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
 
 python populate_packages_prepend () {
-    abiword_libdir    = bb.data.expand('${libdir}/abiword-2.8/plugins', d)
+    abiword_libdir    = d.expand('${libdir}/abiword-2.8/plugins')
     do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
 
     metapkg = "abiword-meta"
-    bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
-    bb.data.setVar('FILES_' + metapkg, "", d)
+    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+    d.setVar('FILES_' + metapkg, "")
     blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
     metapkg_rdepends = []
-    packages = bb.data.getVar('PACKAGES', d, 1).split()
+    packages = d.getVar('PACKAGES', 1).split()
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
             print "Modifying ", pkg
             metapkg_rdepends.append(pkg)
-    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
-    bb.data.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package', d)
+    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
+    d.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package')
     packages.append(metapkg)
-    bb.data.setVar('PACKAGES', ' '.join(packages), d)
+    d.setVar('PACKAGES', ' '.join(packages))
 }

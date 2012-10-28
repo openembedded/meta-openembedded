@@ -10,8 +10,8 @@ SRC_URI[md5sum] = "cf7351a4b952dbe3fc5ff509c68def33"
 SRC_URI[sha256sum] = "3321f998af2bbd14ba68654a8881774f6ea2ec4f1a3544598e7f47d3ed0009b9"
 
 python populate_packages_prepend() {
-    plugin_dir = bb.data.expand('${libdir}/xfce4/panel/plugins/', d)
-    plugin_name = bb.data.expand('${PN}-plugin-%s', d)
+    plugin_dir = d.expand('${libdir}/xfce4/panel/plugins/')
+    plugin_name = d.expand('${PN}-plugin-%s')
     do_split_packages(d, plugin_dir, '^lib(.*).so$', plugin_name,
                       '${PN} plugin for %s', extra_depends='', prepend=True,
                       aux_files_pattern=['${datadir}/xfce4/panel/plugins/%s.desktop',

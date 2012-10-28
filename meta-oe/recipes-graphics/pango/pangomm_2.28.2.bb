@@ -8,7 +8,7 @@ PR = "r2"
 
 DEPENDS = "mm-common cairomm glibmm"
 
-SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
 SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/pangomm/${SHRT_VER}/pangomm-${PV}.tar.bz2"
 SRC_URI[md5sum] = "005a474863495d3c6267429a80da6cf2"

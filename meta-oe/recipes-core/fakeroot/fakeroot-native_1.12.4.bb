@@ -9,8 +9,8 @@ EXTRA_OECONF = "--program-prefix="
 
 # Compatability for the rare systems not using or having SYSV
 python () {
-    if bb.data.getVar('HOST_NONSYSV', d, True) and bb.data.getVar('HOST_NONSYSV', d, True) != '0':
-        bb.data.setVar('EXTRA_OECONF', ' --with-ipc=tcp --program-prefix= ', d)
+    if d.getVar('HOST_NONSYSV', True) and d.getVar('HOST_NONSYSV', True) != '0':
+        d.setVar('EXTRA_OECONF', ' --with-ipc=tcp --program-prefix= ')
 }
 
 RDEPENDS_${PN} = "util-linux-native"

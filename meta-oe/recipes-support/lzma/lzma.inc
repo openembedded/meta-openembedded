@@ -4,7 +4,7 @@ LICENSE = "LGPL"
 LIC_FILES_CHKSUM = "file://lzma.txt;md5=20251cdc2e3793cceab11878d0aa11b1"
 INC_PR = "r7"
 
-SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@bb.data.getVar('PV',d,1).replace('.','')}.tar.bz2;subdir=${BPN}-${PV} \
+SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@d.getVar('PV',1).replace('.','')}.tar.bz2;subdir=${BPN}-${PV} \
            file://001-large_files.patch \
            file://002-lzmp.patch \
            file://003-compile_fixes.patch \

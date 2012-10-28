@@ -26,7 +26,7 @@ FILES_libfreerdp = "${libdir}/lib*${SOLIBS}"
 PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
 
 python populate_packages_prepend () {
-    freerdp_root = bb.data.expand('${libdir}/freerdp', d)
+    freerdp_root = d.expand('${libdir}/freerdp')
 
     do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
         output_pattern='libfreerdp-plugin-%s',

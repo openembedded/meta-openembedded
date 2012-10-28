@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "291ac350cc5eb4a01b0d651ca99fae64cee8a1c06b2005277fab5a4356
 S = "${WORKDIR}"
 FILES_${PN}-dev = "${includedir}/libintl.h ${libdir}/libintl.a"
 
-CFLAGS_append = " -fPIC -Wall -I ../../include ${@['-DSTUB_ONLY', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']}"
+CFLAGS_append = " -fPIC -Wall -I ../../include ${@['-DSTUB_ONLY', ''][d.getVar('USE_NLS', 1) != 'no']}"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_compile() {

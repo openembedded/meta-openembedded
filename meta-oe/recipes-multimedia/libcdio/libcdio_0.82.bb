@@ -22,7 +22,7 @@ FILES_${PN} = "${libdir}/${PN}${SOLIB}"
 FILES_${PN}-utils = "${bindir}/*"
 
 python populate_packages_prepend () {
-    glibdir = bb.data.expand('${libdir}', d)
+    glibdir = d.expand('${libdir}')
     do_split_packages(d, glibdir, '^lib(.*)\.so\..*', 'lib%s', 'gstreamer %s library', extra_depends='', allow_links=True)
 }
 

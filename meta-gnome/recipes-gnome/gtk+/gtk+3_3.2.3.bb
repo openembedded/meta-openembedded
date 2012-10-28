@@ -77,17 +77,17 @@ PACKAGES_DYNAMIC += "^gtk3-immodule-.* ^gtk3-printbackend-.*"
 python populate_packages_prepend () {
     import os.path
 
-    prologue = bb.data.getVar("postinst_prologue", d, 1)
+    prologue = d.getVar("postinst_prologue", 1)
 
-    gtk_libdir = bb.data.expand('${libdir}/gtk-3.0/${LIBV}', d)
+    gtk_libdir = d.expand('${libdir}/gtk-3.0/${LIBV}')
     immodules_root = os.path.join(gtk_libdir, 'immodules')
     printmodules_root = os.path.join(gtk_libdir, 'printbackends');
 
     do_split_packages(d, immodules_root, '^im-(.*)\.so$', 'gtk3-immodule-%s', 'GTK input module for %s', prologue + 'gtk-query-immodules-3.0 > /etc/gtk-3.0/gtk.immodules')
     do_split_packages(d, printmodules_root, '^libprintbackend-(.*)\.so$', 'gtk3-printbackend-%s', 'GTK printbackend module for %s')
 
-    if (bb.data.getVar('DEBIAN_NAMES', d, 1)):
-        bb.data.setVar('PKG_${PN}', 'libgtk-3.0', d)
+    if (d.getVar('DEBIAN_NAMES', 1)):
+        d.setVar('PKG_${PN}', 'libgtk-3.0')
 }
 
 postinst_prologue() {

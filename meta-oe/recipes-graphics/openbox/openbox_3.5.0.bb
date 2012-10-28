@@ -23,8 +23,8 @@ PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome"
 PACKAGES_DYNAMIC += "^${PN}-theme-.*"
 
 python populate_packages_prepend() {
-    theme_dir = bb.data.expand('${datadir}/themes/', d)
-    theme_name = bb.data.expand('${PN}-theme-%s', d)
+    theme_dir = d.expand('${datadir}/themes/')
+    theme_name = d.expand('${PN}-theme-%s')
     do_split_packages(d, theme_dir, '(.*)', theme_name, '${PN} theme for %s', extra_depends='', allow_dirs=True)
 }
 

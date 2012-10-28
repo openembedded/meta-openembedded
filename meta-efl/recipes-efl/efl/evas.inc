@@ -14,7 +14,7 @@ FILESPATHPKG =. "${BPN}-${PV}:${BPN}:"
 python populate_packages_prepend () {
     for plugin_type in "engines loaders savers".split():
         bb.note( "splitting packages for evas %s..." % plugin_type )
-        basedir = bb.data.expand( '${libdir}/evas/modules/%s' % plugin_type, d )
+        basedir = d.expand( '${libdir}/evas/modules/%s' % plugin_type)
 
         do_split_packages(d, basedir, '^(.*)',
         output_pattern = 'evas-' + plugin_type[:-1] + "-%s",
@@ -23,7 +23,7 @@ python populate_packages_prepend () {
         
         plugin_type = "cserve2"
         bb.note( "splitting packages for evas %s..." % plugin_type )
-        basedir = bb.data.expand( '${libdir}/evas/%s/loaders' % plugin_type, d )
+        basedir = d.expand( '${libdir}/evas/%s/loaders' % plugin_type)
 
         do_split_packages(d, basedir, '^(.*)',
         output_pattern = 'evas-' + plugin_type + "-%s",

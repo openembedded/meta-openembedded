@@ -19,7 +19,7 @@ EXTRA_OECONF = " \
 
 python populate_packages_prepend () {
     bb.note( "splitting packages for evas generic loaders" )
-    basedir = bb.data.expand( '${libdir}/evas/utils', d )
+    basedir = d.expand( '${libdir}/evas/utils')
 
     do_split_packages(d, basedir, '^evas_image_loader\.(.*)$',
     output_pattern = "evas-generic-loader-%s",

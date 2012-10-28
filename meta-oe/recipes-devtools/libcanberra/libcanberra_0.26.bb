@@ -29,7 +29,7 @@ EXTRA_OECONF = "\
 # enable pulse again when pulseaudio >= 0.9.11 is the default in OE
 
 python populate_packages_prepend() {
-    plugindir = bb.data.expand('${libdir}/${P}/', d)
+    plugindir = d.expand('${libdir}/${P}/')
     do_split_packages(d, plugindir, '^libcanberra-(.*)\.so$', 'libcanberra-%s', '%s support library', extra_depends='' )
 }
 

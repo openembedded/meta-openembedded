@@ -11,7 +11,7 @@ LICENSE = "OpenLDAP"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3d82d3085f228af211a6502c7ea7c3c7"
 SECTION = "libs"
 
-LDAP_VER = "${@'.'.join(bb.data.getVar('PV',d,1).split('.')[0:2])}"
+LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
 
 SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${P}.tgz"
 SRC_URI += "file://openldap-m4-pthread.patch"
@@ -252,19 +252,19 @@ pkg_prerm_${PN}-slapd () {
 PACKAGES_DYNAMIC += "^openldap-backends.* ^openldap-backend-.*"
 
 python populate_packages_prepend () {
-    backend_dir    = bb.data.expand('${libexecdir}/openldap', d)
+    backend_dir    = d.expand('${libexecdir}/openldap')
     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 
     metapkg = "openldap-backends"
-    bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
-    bb.data.setVar('FILES_' + metapkg, "", d)
+    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+    d.setVar('FILES_' + metapkg, "")
     metapkg_rdepends = []
-    packages = bb.data.getVar('PACKAGES', d, 1).split()
+    packages = d.getVar('PACKAGES', 1).split()
     for pkg in packages[1:]:
         if pkg.count("openldap-backend-") and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale"):
             metapkg_rdepends.append(pkg)
-    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
-    bb.data.setVar('DESCRIPTION_' + metapkg, 'OpenLDAP backends meta package', d)
+    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
+    d.setVar('DESCRIPTION_' + metapkg, 'OpenLDAP backends meta package')
     packages.append(metapkg)
-    bb.data.setVar('PACKAGES', ' '.join(packages), d)
+    d.setVar('PACKAGES', ' '.join(packages))
 }

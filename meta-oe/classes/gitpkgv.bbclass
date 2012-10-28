@@ -51,14 +51,14 @@ def get_git_pkgv(d, use_tags):
     import os
     import bb
 
-    src_uri = bb.data.getVar('SRC_URI', d, 1).split()
+    src_uri = d.getVar('SRC_URI', 1).split()
     fetcher = bb.fetch2.Fetch(src_uri, d)
     ud = fetcher.ud
 
     #
     # If SRCREV_FORMAT is set respect it for tags
     #
-    format = bb.data.getVar('SRCREV_FORMAT', d, True)
+    format = d.getVar('SRCREV_FORMAT', True)
     if not format:
         format = 'default'
 

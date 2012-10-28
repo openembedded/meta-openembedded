@@ -29,9 +29,9 @@ systemctl disable ${SYSTEMD_SERVICE}
 }
 
 def get_package_var(d, var, pkg):
-    val = (d.getVar('%s_%s' % (var, pkg), d, 1) or "").strip()
+    val = (d.getVar('%s_%s' % (var, pkg), 1) or "").strip()
     if val == "":
-        val = (d.getVar(var, d, 1) or "").strip()
+        val = (d.getVar(var, 1) or "").strip()
     return val
 
 def systemd_after_parse(d):
@@ -94,9 +94,9 @@ do_install_append() {
 python populate_packages_prepend () {
     def systemd_generate_package_scripts(pkg):
         bb.debug(1, 'adding systemd calls to postinst/postrm for %s' % pkg)
-        localdata = bb.data.createCopy(d)
-        overrides = bb.data.getVar("OVERRIDES", localdata, 1)
-        bb.data.setVar("OVERRIDES", "%s:%s" % (pkg, overrides), localdata)
+        localdata = d.createCopy()
+        overrides = localdata.getVar("OVERRIDES", 1)
+        localdata.setVar("OVERRIDES", "%s:%s" % (pkg, overrides))
         bb.data.update_data(localdata)
 
         """
@@ -104,23 +104,23 @@ python populate_packages_prepend () {
         execute on the target. Not doing so may cause systemd postinst invoked
         twice to cause unwanted warnings.
         """ 
-        postinst = bb.data.getVar('pkg_postinst', localdata, 1)
+        postinst = localdata.getVar('pkg_postinst', 1)
         if not postinst:
             postinst = '#!/bin/sh\n'
-        postinst += bb.data.getVar('systemd_postinst', localdata, 1)
-        bb.data.setVar('pkg_postinst_%s' % pkg, postinst, d)
+        postinst += localdata.getVar('systemd_postinst', 1)
+        d.setVar('pkg_postinst_%s' % pkg, postinst)
 
-        prerm = bb.data.getVar('pkg_prerm', localdata, 1)
+        prerm = localdata.getVar('pkg_prerm', 1)
         if not prerm:
             prerm = '#!/bin/sh\n'
-        prerm += bb.data.getVar('systemd_prerm', localdata, 1)
-        bb.data.setVar('pkg_prerm_%s' % pkg, prerm, d)
+        prerm += localdata.getVar('systemd_prerm', 1)
+        d.setVar('pkg_prerm_%s' % pkg, prerm)
 
-        postrm = bb.data.getVar('pkg_postrm', localdata, 1)
+        postrm = localdata.getVar('pkg_postrm', 1)
         if not postrm:
             postrm = '#!/bin/sh\n'
-        postrm += bb.data.getVar('systemd_postrm', localdata, 1)
-        bb.data.setVar('pkg_postrm_%s' % pkg, postrm, d)
+        postrm += localdata.getVar('systemd_postrm', 1)
+        d.setVar('pkg_postrm_%s' % pkg, postrm)
 
     # add files to FILES_*-systemd if existent and not already done
     def systemd_append_file(pkg_systemd, file_append):

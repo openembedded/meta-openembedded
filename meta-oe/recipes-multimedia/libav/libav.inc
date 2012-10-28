@@ -89,8 +89,8 @@ LEAD_SONAME = "libavcodec.so"
 FILES_${PN}-dev = "${includedir}"
 
 python populate_packages_prepend() {
-    av_libdir = bb.data.expand('${libdir}', d)
-    av_pkgconfig = bb.data.expand('${libdir}/pkgconfig', d)
+    av_libdir = d.expand('${libdir}')
+    av_pkgconfig = d.expand('${libdir}/pkgconfig')
 
     # Runtime package
     do_split_packages(d, av_libdir, '^lib(.*)\.so\..*',

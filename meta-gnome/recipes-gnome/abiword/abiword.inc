@@ -17,7 +17,7 @@ CVSURI = "cvs://anoncvs:anoncvs@anoncvs.abisource.com/cvsroot;module=abi"
 CVSSRC = "${WORKDIR}/abi"
 
 #want 2.x from 2.x.y for the installation directory
-SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
 FILES_${PN} += " \
 		${datadir}/icons/* \

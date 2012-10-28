@@ -40,23 +40,23 @@ TARGET_CC_ARCH += "-I${S}/include "
 PACKAGES += "${PN}-apps python-opencv"
 
 python populate_packages_prepend () {
-    cv_libdir = bb.data.expand('${libdir}', d)
-    cv_libdir_dbg = bb.data.expand('${libdir}/.debug', d)
+    cv_libdir = d.expand('${libdir}')
+    cv_libdir_dbg = d.expand('${libdir}/.debug')
     do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev', allow_links=True)
     do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
     do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
     do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV %s library', extra_depends='', allow_links=True)
 
-    pn = bb.data.getVar('PN', d, 1)
+    pn = d.getVar('PN', 1)
     metapkg =  pn + '-dev'
-    bb.data.setVar('ALLOW_EMPTY_' + metapkg, "1", d)
+    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
     blacklist = [ metapkg ]
     metapkg_rdepends = [ ] 
-    packages = bb.data.getVar('PACKAGES', d, 1).split()
+    packages = d.getVar('PACKAGES', 1).split()
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.endswith('-dev'):
             metapkg_rdepends.append(pkg)
-    bb.data.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
+    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
 }
 
 FILES_${PN} = ""
