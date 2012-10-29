@@ -1,22 +1,25 @@
-# Copyright (C) 2010, 2011 O.S. Systems Software Ltda. All Rights Reserved
+# Copyright (C) 2010-2012 O.S. Systems Software Ltda. All Rights Reserved
 # Released under the MIT license
 
 DESCRIPTION = "FreeRDP RDP client"
 HOMEPAGE = "http://www.freerdp.com"
-DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite"
+DEPENDS = "virtual/libx11 openssl libxcursor libxv cups alsa-lib pulseaudio pcsc-lite libxkbfile libxinerama"
 SECTION = "x11/network"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 INC_PR = "r1"
 
-inherit pkgconfig autotools
+inherit pkgconfig cmake
 
-EXTRA_OECONF += "--with-smartcard --with-xvideo"
-
-do_install_append() {
-	rm ${D}${libdir}/freerdp/*.a ${D}${libdir}/freerdp/*.la
-}
+EXTRA_OECMAKE += "-DWITH_PULSEAUDIO=ON \
+                  -DWITH_PCSC=ON \
+                  -DWITH_CUPS=ON \
+                  -DWITH_FFMPEG=OFF \
+                  -DWITH_CUNIT=OFF \
+                  -DWITH_X11=ON \
+                  -DWITH_XKBFILE=ON \
+                  -DWITH_XINERAMA=ON"
 
 PACKAGES =+ "libfreerdp"
 
