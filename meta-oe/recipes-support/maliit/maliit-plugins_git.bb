@@ -8,6 +8,8 @@ inherit autotools qt4x11
 
 DEPENDS = "maliit-framework"
 
+RDEPENDS_${PN} += "qt4-plugin-iconengine-svgicon qt4-plugin-imageformat-svg"
+
 SRC_URI = "git://gitorious.org/maliit/maliit-plugins.git;branch=master"
 
 SRCREV = "0760e585df494b394df1b887e5138ffef19c481f"
@@ -23,12 +25,8 @@ FILES_${PN} += "\
     ${datadir} \
     "
 
-FILES_${PN}-dbg += "\
-    ${libdir}/maliit/plugins-*/.debug \
-    "
+FILES_${PN}-dbg += "${libdir}/maliit/plugins-*/.debug"
 
 S= "${WORKDIR}/git"
 
-do_install() {
-  cd ${S} && (INSTALL_ROOT=${D} oe_runmake install)
-}
+EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
