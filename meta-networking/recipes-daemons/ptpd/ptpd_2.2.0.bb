@@ -8,8 +8,9 @@ SECTION = "network"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://../COPYRIGHT;md5=3d8ac2c46c116bce2d2ad838b6cf3491"
 
+PR = "r1"
+
 SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz \
-           file://adjust-daemon-name.patch;striplevel=2 \
            file://ld-as-needed.patch;striplevel=2 \
 "
 
@@ -22,6 +23,6 @@ EXTRA_OEMAKE = ""
 
 do_install() {
         install -d ${D}${bindir} ${D}${mandir}/man8
-        install -m 0755 ptpd ${D}${bindir}
+        install -m 0755 ptpd2 ${D}${bindir}
         install -m 0644 ptpd2.8 ${D}${mandir}/man8
 }
