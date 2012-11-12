@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "python-native"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
 SRC_URI[md5sum] = "d4842129fa2732eb6ed1180467bc32e2"
@@ -16,6 +16,10 @@ inherit native
 
 EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
+
+do_configure_append () {
+        sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
+}
 
 do_install () {
         oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
