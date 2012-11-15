@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 DEPENDS = "gtk+ python-pygobject dbus-glib"
 SRCREV = "109"
 PV = "0.1+svnr${SRCPV}"
+PR = "r1"
 S = "${WORKDIR}/${PN}"
 
 do_configure_prepend() {
@@ -18,6 +19,7 @@ SRC_URI = "svn://omgps.googlecode.com/svn/trunk;module=omgps;protocol=http \
            file://sysfs.node.2.6.32.patch \
            file://fix.capability.patch \
            file://use.unused.variable.patch \
+           file://fix.build.with.glib.2.34.patch \
 "
 
 inherit autotools
