@@ -22,9 +22,7 @@ systemd_prerm() {
 if [ -z "$D" ]; then
     systemctl stop ${SYSTEMD_SERVICE}
 fi
-}
 
-systemd_postrm() {
 systemctl disable ${SYSTEMD_SERVICE}
 }
 
@@ -119,12 +117,6 @@ python populate_packages_prepend () {
             prerm = '#!/bin/sh\n'
         prerm += localdata.getVar('systemd_prerm', 1)
         d.setVar('pkg_prerm_%s' % pkg, prerm)
-
-        postrm = localdata.getVar('pkg_postrm', 1)
-        if not postrm:
-            postrm = '#!/bin/sh\n'
-        postrm += localdata.getVar('systemd_postrm', 1)
-        d.setVar('pkg_postrm_%s' % pkg, postrm)
 
     # add files to FILES_*-systemd if existent and not already done
     def systemd_append_file(pkg_systemd, file_append):
