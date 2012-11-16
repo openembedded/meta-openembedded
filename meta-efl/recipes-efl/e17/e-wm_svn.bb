@@ -1,10 +1,10 @@
 DESCRIPTION = "The Enlightenment Window Manager Version 17"
-DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary"
+DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary libxcb xcb-util-keysyms"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r6"
+PR = "r7"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -40,7 +40,7 @@ do_install_append() {
     echo "Categories=Application;" >> ${D}/${datadir}/applications/efm.desktop
     echo "StartupNotify=true" >> ${D}/${datadir}/applications/efm.desktop
     install -d ${D}/${datadir}/icons/
-    install -m 644 ${S}/data/themes/images/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
+    install -m 644 ${S}/data/themes/img/O/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
 
     install -d ${D}/${sysconfdir}/xdg/menus
     install -m 644 ${WORKDIR}/applications.menu ${D}/${sysconfdir}/xdg/menus/
@@ -111,6 +111,7 @@ FILES_${PN} = "\
   ${libdir}/enlightenment/modules/*/*.* \
   ${libdir}/enlightenment/modules/*/*/* \
   ${libdir}/enlightenment/modules/*/*/.order \
+  ${libdir}/enlightenment/modules/keyboards/ignore_built_in_keyboards \
   ${libdir}/enlightenment/*plugins/*/*/* \
   ${libdir}/enlightenment/preload/e_precache.so \
   ${datadir}/enlightenment/data/icons \
@@ -182,6 +183,7 @@ RRECOMMENDS_${PN}-config-standard = "${PN}-theme-default"
 
 FILES_${PN}-dbg += "\
   ${libdir}/enlightenment/modules/*/*/.debug/ \
+  ${libdir}/enlightenment/modules/policies/.debug/ \
   ${libdir}/enlightenment/preload/.debug/ \
   ${libdir}/enlightenment/utils/.debug/ \
   ${libdir}/enlightenment/*plugins/*/*/.debug \
