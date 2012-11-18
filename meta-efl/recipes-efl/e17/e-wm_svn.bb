@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r7"
+PR = "r8"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -46,6 +46,13 @@ do_install_append() {
     install -m 644 ${WORKDIR}/applications.menu ${D}/${sysconfdir}/xdg/menus/
     for I in `find ${D}/${libdir}/enlightenment -name "*.a" -print`; do rm -f $I; done
     for I in `find ${D}/${libdir}/enlightenment -name "*.la" -print`; do rm -f $I; done
+
+    # work around for issue caused in r78978, more infor in:
+    # http://sourceforge.net/mailarchive/forum.php?thread_name=20121118194904.GA3438%40jama.jama.net&forum_name=enlightenment-devel
+    mv ${D}/${libdir}/enlightenment/modules/policies ${D}/${libdir}/enlightenment/modules/illume2/ \
+      || echo "illume2 policies are in correct place now"
+    mv ${D}/${libdir}/enlightenment/modules/keyboards ${D}/${libdir}/enlightenment/modules/illume2/ \
+      || echo "illume2 keyboards are in correct place now"
 }
 
 RDEPENDS_${PN} += "\
