@@ -10,7 +10,7 @@ SRC_URI = "${GNOME_MIRROR}/${SRC_NAME}/${SHRT_VER}/${SRC_NAME}-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "10bfb957fa4a8935a0b4afaee7d71df7"
 SRC_URI[sha256sum] = "62bfce3f678f9347a19c766944e8aef7b89bc32b25ac23eb3e4c25929ce8974c"
 
-PR = "r4"
+PR = "r5"
 BBCLASSEXTEND = "native"
 
 IDL_COMPILER_DEPENDS = "orbit2-native"
@@ -24,7 +24,8 @@ PARALLEL_MAKE = ""
 
 
 FILES_${PN} += "${libdir}/orbit-2.0/*.so"
-FILES_${PN}-dev += "${libdir}/orbit-2.0/*.a ${libdir}/orbit-2.0/*.la"
+FILES_${PN}-dev += "${libdir}/orbit-2.0/*.la"
+FILES_${PN}-staticdev += "${libdir}/orbit-2.0/*.a"
 FILES_${PN}-dbg += "${libdir}/orbit-2.0/.debug"
 
 S = "${WORKDIR}/${SRC_NAME}-${PV}"
