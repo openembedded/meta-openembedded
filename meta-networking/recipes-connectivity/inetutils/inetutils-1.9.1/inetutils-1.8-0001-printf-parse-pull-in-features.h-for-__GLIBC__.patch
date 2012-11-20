@@ -3,6 +3,8 @@ From: Mike Frysinger <vapier at gentoo.org>
 Date: Thu, 18 Nov 2010 16:59:14 -0500
 Subject: [PATCH gnulib] printf-parse: pull in features.h for __GLIBC__
 
+Upstream-Status: Pending
+
 Signed-off-by: Mike Frysinger <vapier at gentoo.org>
 ---
  lib/printf-parse.h |    3 +++

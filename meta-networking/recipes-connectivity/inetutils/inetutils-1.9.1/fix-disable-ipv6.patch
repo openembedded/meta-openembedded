@@ -1,5 +1,7 @@
 Upstream: http://www.mail-archive.com/bug-inetutils@gnu.org/msg02103.html
 
+Upstream-Status: Pending
+
 diff -ur inetutils-1.8.orig/ping/ping_common.h inetutils-1.8/ping/ping_common.h
 --- inetutils-1.8.orig/ping/ping_common.h	2010-05-15 20:55:47.000000000 +0930
 +++ inetutils-1.8/ping/ping_common.h	2010-12-01 12:19:08.000000000 +1030

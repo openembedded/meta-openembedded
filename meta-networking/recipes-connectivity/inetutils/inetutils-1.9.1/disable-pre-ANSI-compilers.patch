@@ -1,0 +1,16 @@
+Upstream-Status: Pending
+
+disable pre-ANSI compilers
+
+Signed-off-by: Chunrong Guo <b40290@freescale.com>
+--- inetutils-1.9.1/configure.ac	2012-01-06 22:05:05.000000000 +0800
++++ inetutils-1.9.1/configure.ac	2012-11-12 14:05:30.756957063 +0800
+@@ -586,7 +586,7 @@
+ 		  #include <arpa/tftp.h>])
+ 
+ ### Checks for compiler characteristics.
+-AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
++#AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
+ AC_C_CONST
+ 
+ dnl See if `weak refs' are possible; these make it possible (with shared

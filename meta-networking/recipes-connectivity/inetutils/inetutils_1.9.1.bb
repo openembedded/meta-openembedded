@@ -6,21 +6,19 @@ SECTION = "libs"
 DEPENDS = "ncurses"
 LICENSE = "GPLv3"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=adefda309052235aa5d1e99ce7557010"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
+
 
 SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+           file://disable-pre-ANSI-compilers.patch \
+           file://version.patch \
+           file://remove-gets.patch \
            file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch \
-           file://inetutils-1.8-0002-argp-fix-program_invocation_name-detection.patch \
            file://inetutils-1.8-0003-wchar.patch \
-           file://inetutils-1.8-1001-ftp-rename-ruserpass-to-avoid-C-library-collision.patch \
-           file://inetutils-1.8-1002-rshd-detect-__rcmd_errstr-support-in-the-C-lib.patch \
-           file://inetutils-1.8-1003-use-daemon-from-the-C-library-when-possible.patch \
-           file://inetutils-1.8-1004-detect-fork-support.patch \
-           file://inetutils-1.8-1005-ftpd-add-daemon-D-nommu-support.patch \
            file://fix-disable-ipv6.patch \
 " 
-SRC_URI[md5sum] = "ad8fdcdf1797b9ca258264a6b04e48fd"
-SRC_URI[sha256sum] = "c8500baee04b9ea408c9e65e24ad7f5b41e7d96d42fb1d29abf25b52b68311c7"
+SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
+SRC_URI[sha256sum] = "02a9ebde8a198cb85f87545b9d88fb103a183958139864a85fe9e027ad79ff2b"
 
 inherit autotools gettext
 
