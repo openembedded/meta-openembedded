@@ -6,7 +6,7 @@ After=syslog.target network.target
 Type=forking
 PIDFile=/var/run/dhclient.pid
 EnvironmentFile=-/etc/default/dhcp-client
-ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q $INTERFACES -lf /var/lib/dhcp/dhclient.leases
+ExecStart=/sbin/dhclient -cf /etc/dhcp/dhclient.conf -q -lf /var/lib/dhcp/dhclient.leases $INTERFACES
 
 [Install]
 WantedBy=multi-user.target
