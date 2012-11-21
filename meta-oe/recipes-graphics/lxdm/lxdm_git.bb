@@ -12,8 +12,10 @@ SRC_URI = " \
 
 LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)}"
 
-SRCREV = "d681bc90b62ec2e13ed62fc30cdaf5dbbba23cdc"
+SRCREV = "65e7cc8fdc150c2b925eb348ce82de17dee5eb0b"
 PV = "0.4.2+git${SRCPV}"
+PE = "1"
+PR = "r1"
 
 DEPENDS = "cairo consolekit dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
 
@@ -24,10 +26,14 @@ inherit autotools gettext
 
 S = "${WORKDIR}/git"
 
+SYSTEMD_UNITDIR ??= "no"
+EXTRA_OECONF = "--with-systemdsystemunitdir=${SYSTEMD_UNITDIR}"
+
 do_compile_append() {
 	# default background configured not available / no password field available
 	sed -i 	-e 's,bg=,# bg=,g' \
 		-e 's,# skip_password=,skip_password=,g' \
+		-e 's,keyboard=0,keyboard=1,g' \
 		${S}/data/lxdm.conf.in
 	# add default configuration
 	oe_runmake -C ${S}/data lxdm.conf
@@ -59,4 +65,4 @@ done
 sed -i "s:last_langs=.*$:last_langs=$langs:g" ${localstatedir}/lib/lxdm/lxdm.conf
 }
 
-RDEPENDS_${PN} = "pam-plugin-loginuid"
+RDEPENDS_${PN} = "pam-plugin-loginuid setxkbmap"
