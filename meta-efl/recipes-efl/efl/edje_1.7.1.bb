@@ -4,6 +4,7 @@ PR = "${INC_PR}.0"
 
 SRC_URI = "\
   ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+  file://r79484.patch \
 "
 
 SRC_URI[md5sum] = "f0be474e4b4d51704dc64ec27941c2ad"
