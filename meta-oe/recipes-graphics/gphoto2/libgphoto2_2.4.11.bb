@@ -3,7 +3,7 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
 
-PR = "r3"
+PR = "r4"
 
 DEPENDS = "libtool jpeg virtual/libusb0 libexif"
 
