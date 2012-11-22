@@ -12,7 +12,7 @@ Dependencies
 This layer depends on:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: master
+branch: danny
 revision: HEAD
 
 
@@ -21,7 +21,10 @@ Maintenance
 -----------
 
 Send patches / pull requests to openembedded-devel@lists.openembedded.org
-with '[meta-webserver]' in the subject.
+with '[meta-webserver][danny]' in the subject.
+
+When sending single patches, please using something like
+'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-webserver][danny][PATCH'
 
 Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
 

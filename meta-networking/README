@@ -18,7 +18,7 @@ Dependencies
 This layer depends on:
 
 URI: git://git.openembedded.org/openembedded-core
-branch: master
+branch: danny
 revision: HEAD
 
 Maintenance
@@ -26,3 +26,6 @@ Maintenance
 
 Please see the MAINTAINERS file for information on contacting the
 maintainers of this layer, as well as instructions for submitting patches. 
+
+When sending single patches, please using something like
+'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-networking][danny][PATCH'
