@@ -4,7 +4,7 @@ Before=ntpd.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/ntpd -q -g -x
+ExecStart=/usr/bin/ntpdate-sync silent
 RemainAfterExit=yes
 
 [Install]
