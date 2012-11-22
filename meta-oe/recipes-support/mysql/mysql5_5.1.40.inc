@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
 
 DEPENDS = "ncurses"
-PR = "r10"
+PR = "r11"
 
 SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
            file://configure.in.patch \
@@ -13,7 +13,7 @@ SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
            file://misc.m4.patch \
            file://Makefile.am.patch \
            file://fix_host_path.patch \
-	   file://configure-ps-cache-check.patch \
+           file://configure-ps-cache-check.patch \
            file://fix-abi-check-gcc45.patch \
            file://my.cnf \
            file://mysqld.sh"
@@ -36,6 +36,12 @@ EXTRA_OECONF = " --with-atomic-ops=up --with-embedded-server --prefix=/usr --sys
 
 do_configure_append() {
      sed -i /comp_err/d ${S}/sql/share/Makefile
+
+     # handle distros with different values of ${libexecdir}
+     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
+     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysql_install_db.sh
+     sed -i -e "s:mysqld libexec:mysqld $libexecdir2:g" ${S}/scripts/mysql_install_db.sh
+     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysqld_safe.sh
 }
 
 SYSROOT_PREPROCESS_FUNCS += "mysql5_sysroot_preprocess"
