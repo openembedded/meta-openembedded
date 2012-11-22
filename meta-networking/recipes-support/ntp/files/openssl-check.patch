@@ -1,0 +1,59 @@
+Hack OpenSSL check to work when libssl and libcrypto aren't in same dir
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ configure         |    4 ++--
+ m4/ntp_openssl.m4 |    4 ++--
+ sntp/configure    |    4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/configure b/configure
+index aae2c01..6a3c15e 100755
+--- a/configure
++++ b/configure
+@@ -22868,8 +22868,8 @@ case "$ans" in
+ 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
+ 	    ;;
+ 	 *)
+-	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
+-	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
++	    test -f $i/libssl.so && break
++	    test -f $i/libssl.a && break
+ 	    ;;
+ 	esac
+     done
+diff --git a/m4/ntp_openssl.m4 b/m4/ntp_openssl.m4
+index 7d9f477..67bdd55 100644
+--- a/m4/ntp_openssl.m4
++++ b/m4/ntp_openssl.m4
+@@ -41,8 +41,8 @@ case "$ans" in
+ 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
+ 	    ;;
+ 	 *)
+-	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
+-	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
++	    test -f $i/libssl.so && break
++	    test -f $i/libssl.a && break
+ 	    ;;
+ 	esac
+     done
+diff --git a/sntp/configure b/sntp/configure
+index 7782c29..55e82d9 100755
+--- a/sntp/configure
++++ b/sntp/configure
+@@ -14810,8 +14810,8 @@ case "$ans" in
+ 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
+ 	    ;;
+ 	 *)
+-	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
+-	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
++	    test -f $i/libssl.so && break
++	    test -f $i/libssl.a && break
+ 	    ;;
+ 	esac
+     done
+-- 
+1.7.1
+
