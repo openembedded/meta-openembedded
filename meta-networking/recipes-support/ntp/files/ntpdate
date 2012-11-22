@@ -6,11 +6,16 @@ test -x /usr/bin/ntpdate || exit 0
 
 if test -f /etc/default/ntpdate ; then
 . /etc/default/ntpdate
-else
-NTPSERVERS="pool.ntp.org"
 fi
 
-test -n "$NTPSERVERS" || exit 0
+if [ "$NTPSERVERS" = "" ] ; then
+	if [ "$METHOD" = "" -a "$1" != "silent" ] ; then
+		echo "Please set NTPSERVERS in /etc/default/ntpdate"
+		exit 1
+	else
+		exit 0
+	fi
+fi
 
 # This is a heuristic:  The idea is that if a static interface is brought
 # up, that is a major event, and we can put in some extra effort to fix

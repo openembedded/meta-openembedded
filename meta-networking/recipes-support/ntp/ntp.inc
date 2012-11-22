@@ -17,6 +17,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntpd \
            file://ntp.conf \
            file://ntpdate \
+           file://ntpdate.default \
            "
 
 inherit autotools update-rc.d
@@ -37,15 +38,20 @@ do_install_append() {
 	install -d ${D}${sysconfdir}/init.d
 	install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
 	install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
+	install -d ${D}${bindir}
+	install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
 
 	# Fix hardcoded paths in scripts
-	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd
-	sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd
-	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd
-	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd
+	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+	sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+	sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
 
-	install -d ${D}${sysconfdir}/network/if-up.d
-	install -m 755 ${WORKDIR}/ntpdate ${D}${sysconfdir}/network/if-up.d
+	install -d ${D}/${sysconfdir}/default
+	install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
+	install -d ${D}/${sysconfdir}/network/if-up.d
+	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
 }
 
 PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
@@ -64,9 +70,10 @@ RSUGGESTS_${PN} = "iana-etc"
 FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
 FILES_${PN}-tickadj = "${bindir}/tickadj"
 FILES_${PN}-utils = "${bindir}"
-FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate"
+FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate-sync ${bindir}/ntpdate-sync ${sysconfdir}/default/ntpdate"
 
 CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
+CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
 
 INITSCRIPT_NAME = "ntpd"
 # No dependencies, so just go in at the standard level (20)
@@ -79,7 +86,7 @@ else
         if ! grep -q -s ntpdate /var/spool/cron/root; then
                 echo "adding crontab"
                 test -d /var/spool/cron || mkdir -p /var/spool/cron
-                echo "30 * * * *    /usr/bin/ntpdate -b -s -u pool.ntp.org" >> /var/spool/cron/root
+                echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/root
         fi
 fi
 }
