@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.freedesktop.org/wiki/Software/systemd"
 
 LICENSE = "GPLv2 & LGPLv2.1 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
-                    file://LICENSE.LGPL2.1;md5=fb919cc88dbe06ec0b0bd50e001ccf1f \
+                    file://LICENSE.LGPL2.1;md5=f0df8fd67dfa1db3cc0bd431837f0b89 \
                     file://LICENSE.MIT;md5=544799d0b492f119fa04641d1b8868ed"
 
 PROVIDES = "udev"
@@ -19,7 +19,7 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r12"
+PR = "r13"
 
 # need to export these variables for python-config to work
 export BUILD_SYS
@@ -29,9 +29,10 @@ export STAGING_LIBDIR
 
 inherit useradd pkgconfig autotools perlnative pythonnative python-dir
 
-SRCREV = "4d92e078e9d7e9a9d346065ea5e4afbafbdadb48"
+SRCREV = "decd634e801bee2c554edb35383cc9d43417a850"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://use-rootlibdir.patch \
+           file://0001-Revert-systemd-analyze-use-argparse-instead-of-getop.patch \
+           file://0002-Revert-analyze-use-GDBus-instead-of-dbus-python.patch \
            file://gtk-doc.make \
            file://touchscreen.rules \
            file://modprobe.rules \
@@ -119,7 +120,7 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-r lock"
 
 FILES_${PN}-analyze = "${bindir}/systemd-analyze"
-RDEPENDS_${PN}-analyze = "python-dbus"
+RDEPENDS_${PN}-analyze = "python-dbus python-argparse python-textutils"
 RRECOMMENDS_${PN}-analyze = "python-pycairo"
 
 FILES_python-${PN}-journal = "${PYTHON_SITEPACKAGES_DIR}/systemd/*.py* ${PYTHON_SITEPACKAGES_DIR}/systemd/*.so"
@@ -225,6 +226,7 @@ FILES_udev += "${base_libdir}/udev/udevd \
                ${base_libdir}/udev/rules.d/78*.rules \
                ${base_libdir}/udev/rules.d/8*.rules \
                ${base_libdir}/udev/rules.d/95*.rules \
+               ${base_libdir}/udev/hwdb.d \
                ${sysconfdir}/udev \
               "
 

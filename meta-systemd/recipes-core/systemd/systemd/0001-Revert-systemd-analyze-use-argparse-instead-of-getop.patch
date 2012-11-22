@@ -1,0 +1,103 @@
+From 2003e63f48cee2f497de7b90b66284f98c1c9919 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 10 Dec 2012 12:24:32 +0100
+Subject: [PATCH 1/2] Revert "systemd-analyze: use argparse instead of getopt"
+
+This reverts commit 0c0271841ab45595f71528c50bcf1904d4b841d5.
+
+Argparse is broken in current OE python
+---
+ src/analyze/systemd-analyze |   60 ++++++++++++++++++++++++++++---------------
+ 1 files changed, 39 insertions(+), 21 deletions(-)
+
+diff --git a/src/analyze/systemd-analyze b/src/analyze/systemd-analyze
+index 88699d6..87a83dd 100755
+--- a/src/analyze/systemd-analyze
++++ b/src/analyze/systemd-analyze
+@@ -1,7 +1,6 @@
+ #!/usr/bin/python
+ 
+-import sys, os
+-import argparse
++import getopt, sys, os
+ from gi.repository import Gio
+ try:
+         import cairo
+@@ -76,6 +75,20 @@ def draw_text(context, x, y, text, size = 12, r = 0, g = 0, b = 0, vcenter = 0.5
+ 
+         context.restore()
+ 
++def usage():
++        sys.stdout.write("""systemd-analyze [--user] time
++systemd-analyze [--user] blame
++systemd-analyze [--user] plot
++
++Process systemd profiling information
++
++  -h --help         Show this help
++""")
++
++def help():
++        usage()
++        sys.exit()
++
+ def time():
+ 
+         initrd_time, start_time, finish_time = acquire_start_time()
+@@ -266,29 +279,34 @@ def plot():
+ 
+         surface.finish()
+ 
+-parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
+-                                 description='Process systemd profiling information',
+-                                 epilog='''\
+-time - print time spent in the kernel before reaching userspace
+-blame - print list of running units ordered by time to init
+-plot - output SVG graphic showing service initialization
+-''')
+-
+-parser.add_argument('action', choices=('time', 'blame', 'plot'),
+-                    default='time', nargs='?',
+-                    help='action to perform (default: time)')
+-parser.add_argument('--user', action='store_true',
+-                    help='use the session bus')
++def unknown_verb():
++        sys.stderr.write("Unknown verb '%s'.\n" % args[0])
++        usage()
++        sys.exit(1)
+ 
+-args = parser.parse_args()
++bus = Gio.BusType.SYSTEM
+ 
+-if args.user:
+-        bus = Gio.BusType.SESSION
+-else:
+-        bus = Gio.BusType.SYSTEM
++try:
++        opts, args = getopt.gnu_getopt(sys.argv[1:], "h", ["help", "user"])
++except getopt.GetoptError as err:
++        sys.stdout.write(str(err) + "\n")
++        usage()
++        sys.exit(2)
++for o, a in opts:
++        if o in ("-h", "--help"):
++                help()
++        elif o == '--user':
++                bus = Gio.BusType.SESSION
++        else:
++                assert False, "unhandled option"
+ 
+ verb = {'time' : time,
+ 	'blame': blame,
+ 	'plot' : plot,
++	'help' : help,
+ 	}
+-verb.get(args.action)()
++
++if len(args) == 0:
++        time()
++else:
++        verb.get(args[0], unknown_verb)()
+-- 
+1.7.7.6
+
