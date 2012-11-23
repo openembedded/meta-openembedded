@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r8"
+PR = "r9"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -58,6 +58,7 @@ do_install_append() {
 RDEPENDS_${PN} += "\
   shared-mime-info \
   mime-support \
+  setxkbmap \
   edje-utils \
   ${PN}-utils \
   dbus-x11 \
