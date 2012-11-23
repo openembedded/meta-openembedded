@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r9"
+PR = "r10"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -31,6 +31,10 @@ do_configure_prepend() {
 do_install_append() {
     # customising - should rather make this simple upstream
     install -m 755 ${WORKDIR}/enlightenment_start.oe ${D}/${bindir}
+
+    # security reasons, e-wm checks that in runtime
+    # xinit[418]: ERROR: CONFIGURATION FILE HAS BAD PERMISSIONS
+    chmod 600 ${D}/${sysconfdir}/enlightenment/sysactions.conf
 
     install -d ${D}/${datadir}/applications/
     install -m 644 ${S}/src/modules/fileman/module.desktop ${D}/${datadir}/applications/efm.desktop
