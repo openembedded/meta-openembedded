@@ -4,13 +4,13 @@ HOMEPAGE = "http://www.ettus.com"
 PE = "1"
 
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=d8a4f8958d3b56a11bbb1bb134826b28"
+LIC_FILES_CHKSUM = "file://share/uhd/images/usrp_e100_fpga_v2.bin;md5=8df143216c46b7c49804f95056c7057a"
 
 inherit allarch
 
 SRC_URI = "http://files.ettus.com/binaries/uhd_stable/releases/uhd_${PV}-release/uhd-images_${PV}-release.tar.gz"
-SRC_URI[md5sum] = "4269fac82df1fe593ba76206773ce551"
-SRC_URI[sha256sum] = "4b80ebf90079a823212d3b77e5311ef1b467497a4a3585c2cfb4fe65bff71acf"
+SRC_URI[md5sum] = "dd2373263740d2d48fb39e57846bcd2a"
+SRC_URI[sha256sum] = "352fbf69fbfff03a02b5d9b3c398771db40e4c5b77f99f0fdbff67c547cc0d18"
 
 S = "${WORKDIR}/uhd-images_${PV}-release"
 
