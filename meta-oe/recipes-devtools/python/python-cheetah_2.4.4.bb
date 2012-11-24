@@ -13,6 +13,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 inherit setuptools
 
 RDEPENDS_${PN} = "python-pickle python-pprint"
+RDEPENDS_${PN}_class-native = ""
 
 BBCLASSEXTEND = "native"
 
