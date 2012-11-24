@@ -1,10 +1,10 @@
 require uhd.inc
 
-PV = "3.4.1"
+PV = "3.5.0"
 PR = "${INC_PR}.0"
 
-SRC_URI = "git://ettus.sourcerepo.com/ettus/uhd.git;protocol=git \
+SRC_URI = "git://ettus.sourcerepo.com/ettus/uhd.git;branch=maint;protocol=git \
           "
 S = "${WORKDIR}/git/host"
 
-SRCREV = "3fb067567b0c799b3c707938491eb8489d85fefa"
+SRCREV = "5cb9779da40491b06157596b06422f704a58c7d0"
