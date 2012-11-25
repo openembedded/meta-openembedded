@@ -5,26 +5,22 @@ HOMEPAGE = "http://httpd.apache.org/"
 DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
 SECTION = "net"
 LICENSE = "Apache-2.0"
-PR = "r3"
+PR = "r0"
 
 SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://server-makefile.patch \
            file://httpd-2.4.1-corelimit.patch \
            file://httpd-2.4.1-export.patch \
            file://httpd-2.4.1-selinux.patch \
-           file://httpd-2.4.2-r1326980+.patch \
-           file://httpd-2.4.2-r1327036+.patch \
            file://httpd-2.4.2-r1332643.patch \
-           file://httpd-2.4.2-r1337344+.patch \
-           file://httpd-2.4.2-restart.patch \
            file://apache-configure_perlbin.patch \
            file://replace-lynx-to-curl-in-apachectl-script.patch \
            file://apache-ssl-ltmain-rpath.patch \
            file://init"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
-SRC_URI[md5sum] = "6bb12f726e22656f0ad2baf91f1f8329"
-SRC_URI[sha256sum] = "5382f9c507d3d02706e33d6308ea041f39e8511b5948aef0ca188df8f90159b8"
+SRC_URI[md5sum] = "87aaf7bc7e8715f0455997bb8c6791aa"
+SRC_URI[sha256sum] = "d82102b9c111f1892fb20a2bccf4370de579c6521b2f172ed0b36f2759fb249e"
 
 S = "${WORKDIR}/httpd-${PV}"
 
