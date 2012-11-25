@@ -1,7 +1,7 @@
 SECTION = "console/network"
 DESCRIPTION = "A server-side, HTML-embedded scripting language. This package provides the apache php module."
 LICENSE = "PHP-3.0"
-DEPENDS = "apache2-native apache2 zlib"
+DEPENDS = "apache2-native apache2 zlib bzip2"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://configure.patch \
@@ -36,6 +36,9 @@ EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
                 --disable-rpath \
                 --libdir=${libdir}/php5 \
                 --with-zlib --with-zlib-dir=${STAGING_DIR_TARGET}${exec_prefix} \
+                --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
+                --enable-zip \
+                --enable-mbstring \
                 --with-config-file-path=${sysconfdir}/php/apache2-php5"
 
 PACKAGECONFIG ??= ""
