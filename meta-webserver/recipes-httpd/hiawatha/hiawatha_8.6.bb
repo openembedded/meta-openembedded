@@ -4,6 +4,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "libxml2 libxslt"
 
+PR = "r1"
+
 SECTION = "net"
 
 SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
@@ -36,10 +38,20 @@ EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
                   -DWORK_DIR=/var/lib/hiawatha "
 
 do_install_append() {
-
     # Copy over init script and sed in the correct sbin path
     sed -i 's,sed_sbin_path,${sbindir},' ${WORKDIR}/hiawatha-init
     mkdir -p ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/hiawatha-init ${D}${sysconfdir}/init.d/hiawatha
 
+    # configure php-fcgi to have a working configuration
+    # by default if php is installed
+    echo "Server = ${bindir}/php-cgi ; 2 ; 127.0.0.1:2005 ; nobody:nobody ; ${sysconfdir}/php/hiawatha-php5/php.ini" >> ${D}${sysconfdir}/hiawatha/php-fcgi.conf
 }
+
+CONFFILES_${PN} = " \
+    ${sysconfdir}/hiawatha/cgi-wrapper.conf \
+    ${sysconfdir}/hiawatha/hiawatha.conf \
+    ${sysconfdir}/hiawatha/index.xslt \
+    ${sysconfdir}/hiawatha/mimetype.conf \
+    ${sysconfdir}/hiawatha/php-fcgi.conf \
+    "
