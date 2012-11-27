@@ -1,13 +1,13 @@
 DESCRIPTION = "A server-side, HTML-embedded scripting language. This package provides the CGI."
 HOMEPAGE = "http://www.php.net"
 SECTION = "console/network"
-LICENSE = "PHP"
+LICENSE = "PHP-3.0"
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
            libc-client openssl"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r2"
+INC_PR = "r0"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 

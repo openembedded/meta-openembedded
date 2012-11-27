@@ -15,5 +15,5 @@ SRC_URI_append_pn-php += "file://iconv.patch \
             file://php_exec_native.patch \
             "
 
-SRC_URI[md5sum] = "2286f5a82a6e8397955a0025c1c2ad98"
-SRC_URI[sha256sum] = "30ae880f22e3ee93eccc9b80e3c58b0d6364d139bb4366dcc27f2fab658d3198"
+SRC_URI[md5sum] = "e1d2a3ec7849d4b3032bd1abf1916aa4"
+SRC_URI[sha256sum] = "814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db021020594e2469fd6"
