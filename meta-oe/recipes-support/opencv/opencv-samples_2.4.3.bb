@@ -8,14 +8,13 @@ DEPENDS = "opencv"
 LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14 \
 "
 
-SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=http \
-          "
+SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
+           "
 
-SRCREV = "8988"
+SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
+SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
 
-PV = "2.4.2"
-
-S = "${WORKDIR}/opencv"
+S = "${WORKDIR}/OpenCV-${PV}"
 
 do_install() {
     cd samples/c

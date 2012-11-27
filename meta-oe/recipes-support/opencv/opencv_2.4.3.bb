@@ -9,23 +9,21 @@ ARM_INSTRUCTION_SET = "arm"
 
 DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
 
-SRC_URI = "svn://code.opencv.org/svn/opencv/branches/2.4;module=opencv;protocol=http \
-           file://0001-Fix-CMakeLists.txt-numpy-detection.patch \
-          "
+SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
+           "
 
-SRCREV = "8988"
+SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
+SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
 
-PV = "2.4.2"
-PR = "r1"
+S = "${WORKDIR}/OpenCV-${PV}"
 
-S = "${WORKDIR}/opencv"
-
-EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIRS=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
+EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
                  -DBUILD_PYTHON_SUPPORT=ON \
                  -DWITH_FFMPEG=ON \
                  -DWITH_GSTREAMER=OFF \
                  -DWITH_V4L=ON \
                  -DWITH_GTK=ON \
+                 -DCMAKE_SKIP_RPATH=ON \
                 "
 
 inherit distutils-base pkgconfig cmake
@@ -58,6 +56,8 @@ python populate_packages_prepend () {
             metapkg_rdepends.append(pkg)
     d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
 }
+
+PACKAGES_DYNAMIC += "^libopencv-.*"
 
 FILES_${PN} = ""
 FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
