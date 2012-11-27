@@ -1,0 +1,7 @@
+# Watchquagga configuration
+#watch_daemons="zebra bgpd ospfd ospf6d ripd ripngd"
+watch_daemons="zebra"
+
+# To enable restarts, uncomment this line (but first be sure to edit
+# the WATCH_DAEMONS line to reflect the daemons you are actually using):
+watch_options="-z -b_ -r/etc/init.d/quagga_restart_%s -s/etc/init.d/quagga_start_%s -k/etc/init.d/quagga_stop_%s"

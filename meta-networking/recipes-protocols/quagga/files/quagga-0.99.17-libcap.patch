@@ -1,0 +1,64 @@
+From 63e97633d01908da6d3776ac61e4033e6fa91e5c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Diego=20Elio=20Petten=C3=B2?= <flameeyes@gmail.com>
+Date: Sun, 5 Sep 2010 18:19:09 +0200
+Subject: [PATCH] build: fix linking position for libcap
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+ * lib/Makefile.am: link libzebra to libcap, since it uses symbols
+   from there.
+ * zebra/Makefile.am: no need to link libcap here now, since it's not
+   used directly (libtool with apply transitive dependencies for
+   static linking).
+
+Signed-off-by: Diego Elio Pettenò <flameeyes@gmail.com>
+
+Imported from Gentoo by Paul Eggleton <paul.eggleton@linux.intel.com>
+Upstream-Status: Pending
+
+---
+ lib/Makefile.am   |    2 +-
+ zebra/Makefile.am |    5 ++---
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/lib/Makefile.am b/lib/Makefile.am
+index 315e919..6e69993 100644
+--- a/lib/Makefile.am
++++ b/lib/Makefile.am
+@@ -18,7 +18,7 @@ BUILT_SOURCES = memtypes.h route_types.h
+ 
+ libzebra_la_DEPENDENCIES = @LIB_REGEX@
+ 
+-libzebra_la_LIBADD = @LIB_REGEX@
++libzebra_la_LIBADD = @LIB_REGEX@ $(LIBCAP)
+ 
+ pkginclude_HEADERS = \
+ 	buffer.h checksum.h command.h filter.h getopt.h hash.h \
+diff --git a/zebra/Makefile.am b/zebra/Makefile.am
+index 542f36f..d09a209 100644
+--- a/zebra/Makefile.am
++++ b/zebra/Makefile.am
+@@ -5,7 +5,6 @@ DEFS = @DEFS@ -DSYSCONFDIR=\"$(sysconfdir)/\" -DMULTIPATH_NUM=@MULTIPATH_NUM@
+ INSTALL_SDATA=@INSTALL@ -m 600
+ 
+ LIB_IPV6 = @LIB_IPV6@
+-LIBCAP = @LIBCAP@
+ 
+ ipforward = @IPFORWARD@
+ if_method = @IF_METHOD@
+@@ -39,9 +38,9 @@ noinst_HEADERS = \
+ 	connected.h ioctl.h rib.h rt.h zserv.h redistribute.h debug.h rtadv.h \
+ 	interface.h ipforward.h irdp.h router-id.h kernel_socket.h
+ 
+-zebra_LDADD = $(otherobj) $(LIBCAP) $(LIB_IPV6) ../lib/libzebra.la
++zebra_LDADD = $(otherobj) ../lib/libzebra.la $(LIB_IPV6)
+ 
+-testzebra_LDADD = $(LIBCAP) $(LIB_IPV6) ../lib/libzebra.la
++testzebra_LDADD = ../lib/libzebra.la $(LIB_IPV6)
+ 
+ zebra_DEPENDENCIES = $(otherobj)
+ 
+-- 
+1.7.2.2
+

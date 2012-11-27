@@ -1,0 +1,19 @@
+At first this worked, then I tried a clean build in a directory that
+contained lib in it (oe/build/titan-glibc) and vtysh no longer
+worked. It's test for the lib directory was excepting anything
+containing lib.
+
+With this patch you still cannot have lib in the path anywhere, but
+at least things containing lib will now work.
+
+--- quagga-0.99.2/vtysh/extract.pl.in	2005/11/16 04:12:04	1.1
++++ quagga-0.99.2/vtysh/extract.pl.in	2005/11/16 04:12:16
+@@ -89,7 +89,7 @@
+ 	$cmd =~ s/\s+$//g;
+ 
+         # $protocol is VTYSH_PROTO format for redirection of user input
+-    	if ($file =~ /lib/) {
++    	if ($file =~ /\/lib\//) {
+            if ($file =~ /keychain.c/) {
+               $protocol = "VTYSH_RIPD";
+            }
