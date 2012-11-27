@@ -1,0 +1,58 @@
+From 678d71e3b50f566776dbc29db49a1128be89caf6 Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Fri, 26 Oct 2012 10:07:31 +0100
+Subject: [PATCH] Adjust CFLAGS for building within OE
+
+Updated version of cflags.patch from OE-Classic written by
+Vladimir Sorokin <sorokin@altell.ru>.
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ Makefile |    8 +++++---
+ 1 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 6f6481f..c7602db 100644
+--- a/Makefile
++++ b/Makefile
+@@ -62,7 +62,7 @@ OSFLAGS?= -DLINUX -I$(KERNELSRC)/include/
+ # are packages seperately (eg kernel-headers on Fedora)
+ # Note: 2.6.23+ support still needs some changes in the xl2tpd source
+ #
+-#OSFLAGS+= -DUSE_KERNEL
++OSFLAGS+= -DUSE_KERNEL
+ #
+ #
+ # Uncomment the next line for FreeBSD
+@@ -90,7 +90,6 @@ OSFLAGS?= -DLINUX -I$(KERNELSRC)/include/
+ 
+ IPFLAGS?= -DIP_ALLOCATION
+ 
+-CFLAGS+= $(DFLAGS) -O2 -fno-builtin -Wall -DSANITY $(OSFLAGS) $(IPFLAGS)
+ HDRS=l2tp.h avp.h misc.h control.h call.h scheduler.h file.h aaa.h md5.h
+ OBJS=xl2tpd.o pty.o misc.o control.o avp.o call.o network.o avpsend.o scheduler.o file.o aaa.o md5.o
+ SRCS=${OBJS:.o=.c} ${HDRS}
+@@ -110,6 +109,9 @@ all: $(EXEC) pfc $(CONTROL_EXEC)
+ clean:
+ 	rm -f $(OBJS) $(EXEC) pfc.o pfc $(CONTROL_EXEC)
+ 
++%.o: %.c
++	$(CC) $(CFLAGS) $(DFLAGS) -O2 -DSANITY $(OSFLAGS) $(IPFLAGS) -o $@ -c $<
++
+ $(EXEC): $(OBJS) $(HDRS)
+ 	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
+ 
+@@ -117,7 +119,7 @@ $(CONTROL_EXEC): $(CONTROL_SRCS)
+ 	$(CC) $(CONTROL_SRCS) -o $@
+ 
+ pfc:
+-	$(CC) $(CFLAGS) -c contrib/pfc.c
++	$(CC) $(CFLAGS) $(DFLAGS) -O2 -DSANITY $(OSFLAGS) $(IPFLAGS) -c contrib/pfc.c
+ 	$(CC) $(LDFLAGS) -o pfc pfc.o -lpcap $(LDLIBS)
+ 
+ romfs:
+-- 
+1.7.1
+
