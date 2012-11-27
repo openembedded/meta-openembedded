@@ -1,0 +1,31 @@
+Disable gtk check that breaks with current autotools
+
+Ideally we would have a proper fix for this and send that upstream instead.
+
+Upstream-Status: Pending
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+diff --git a/configure.in b/configure.in
+index 8474543..5118565 100644
+--- a/configure.in
++++ b/configure.in
+@@ -48,16 +48,8 @@ AC_ARG_ENABLE(ipv6,
+ [  --disable-ipv6          Do not enable IPv6],
+ WANTS_IPV6=$enableval, WANTS_IPV6=yes)
+    
+-if test "x$WANTS_GTK" = "xyes"; then
+-        AM_PATH_GTK_2_0(2.6.0, CFLAGS="$CFLAGS $GTK_CFLAGS"
+-                           LIBS="$LIBS $GTK_LIBS -lm",
+-                           AC_MSG_WARN(Building without GTK2 display support)
+-                   AC_DEFINE(NO_GTK, 1, [Define if you don't have the GTK+ libraries available.])
+-                           GTK_OBJ="")
+-else
+-	AC_DEFINE(NO_GTK)
+-	GTK_OBJ=""
+-fi
++AC_DEFINE(NO_GTK, 1, [Define if you don't have the GTK+ libraries available.])
++GTK_OBJ=""
+ 
+ AC_CHECK_FUNC(socket, , 
+   AC_CHECK_LIB(socket, socket, , AC_MSG_ERROR(No socket library found)))
