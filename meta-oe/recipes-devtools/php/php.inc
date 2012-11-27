@@ -4,16 +4,16 @@ SECTION = "console/network"
 LICENSE = "PHP-3.0"
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
-           libc-client openssl"
+           libc-client openssl sqlite3"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
 S = "${WORKDIR}/php-${PV}"
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig pythonnative gettext
 
 SSTATE_SCAN_FILES += "build-defs.h"
 
@@ -22,6 +22,7 @@ COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
 EXTRA_OECONF = "--enable-mbstring --enable-discard-path --enable-wddx \
                 --enable-magic-quotes --enable-fastcgi \
                 --with-imap=${STAGING_DIR_HOST} \
+                --with-gettext=${STAGING_LIBDIR}/.. \
                 --with-imap-ssl=${STAGING_DIR_HOST} \
                 --with-zlib --with-zlib-dir=${STAGING_LIBDIR}/.. \
                 --with-iconv=${STAGING_LIBDIR}/.. \
@@ -29,8 +30,9 @@ EXTRA_OECONF = "--enable-mbstring --enable-discard-path --enable-wddx \
                 --disable-embedded-mysqli \
                 --with-mysql="${STAGING_DIR_TARGET}${prefix}" \
                 --with-mysqli="${STAGING_BINDIR_CROSS}/mysql_config" \
+		--with-sqlite3=${STAGING_LIBDIR}/.. --enable-sqlite-utf8 \
                 --with-pdo-mysql="${STAGING_BINDIR_CROSS}/mysql_config" \
-                --without-pdo-sqlite ${COMMON_EXTRA_OECONF} \
+                --with-pdo-sqlite=${STAGING_LIBDIR}/.. ${COMMON_EXTRA_OECONF} \
                "
 EXTRA_OECONF_virtclass-native = "--with-cgi --without-libpng --without-libjpeg \
                 --with-zlib --with-zlib-dir=${STAGING_LIBDIR_NATIVE}/.. \
