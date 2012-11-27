@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
            libc-client openssl sqlite3"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r1"
+INC_PR = "r2"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
@@ -20,7 +20,7 @@ SSTATE_SCAN_FILES += "build-defs.h"
 # Common EXTRA_OECONF
 COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
 EXTRA_OECONF = "--enable-mbstring --enable-discard-path --enable-wddx \
-                --enable-magic-quotes --enable-fastcgi \
+                --enable-magic-quotes --enable-fastcgi --enable-fpm \
                 --with-imap=${STAGING_DIR_HOST} \
                 --with-gettext=${STAGING_LIBDIR}/.. \
                 --with-imap-ssl=${STAGING_DIR_HOST} \
@@ -57,25 +57,38 @@ do_install  () {
 
 # fixme
 do_install_append_pn-php() {
-    mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ${D}/${sysconfdir}
+    install -d ${D}/${sysconfdir}/
+    mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
     rm -rf ${D}/${STAGING_DIR_NATIVE}
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
     rm -rf ${D}/.[a-z]*
     sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
+    install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
+    install -d ${D}${sysconfdir}/init.d
+    sed -i 's:=/usr/sbin:=${sbindir}:g' ${S}/sapi/fpm/init.d.php-fpm
+    sed -i 's:=/etc:=${sysconfdir}:g' ${S}/sapi/fpm/init.d.php-fpm
+    sed -i 's:=/var:=${localstatedir}:g' ${S}/sapi/fpm/init.d.php-fpm
+    install -m 0755 ${S}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
 }
 
-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
+PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
 
 RDEPENDS_${PN}-pear = "${PN}"
 RDEPENDS_${PN}-cli = "${PN}"
 RDEPENDS_${PN}-dev = "${PN}"
 
+INITSCRIPT_PACKAGES = "${PN}-fpm"
+inherit update-rc.d
 
 FILES_${PN}-dbg =+ "${bindir}/.debug"
 FILES_${PN}-doc += "${libdir}/php/doc"
 FILES_${PN}-cli = "${bindir}/php"
 FILES_${PN}-cgi = "${bindir}/php-cgi"
+FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm"
+CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
+INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
 FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${libdir}/php/PEAR \
                 ${libdir}/php/PEAR.php ${libdir}/php/System.php \
                 ${libdir}php/peclcmd.php ${libdir}/php/pearcmd.php \
