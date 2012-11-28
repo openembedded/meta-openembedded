@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
            libc-client openssl sqlite3"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r2"
+INC_PR = "r3"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
@@ -65,6 +65,8 @@ do_install_append_pn-php() {
     rm -rf ${D}/.[a-z]*
     sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
+    install -d ${D}/${sysconfdir}/apache2/conf.d
+    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
     install -d ${D}${sysconfdir}/init.d
     sed -i 's:=/usr/sbin:=${sbindir}:g' ${S}/sapi/fpm/init.d.php-fpm
     sed -i 's:=/etc:=${sysconfdir}:g' ${S}/sapi/fpm/init.d.php-fpm
@@ -72,7 +74,7 @@ do_install_append_pn-php() {
     install -m 0755 ${S}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
 }
 
-PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
+PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
 
 RDEPENDS_${PN}-pear = "${PN}"
 RDEPENDS_${PN}-cli = "${PN}"
@@ -86,7 +88,9 @@ FILES_${PN}-doc += "${libdir}/php/doc"
 FILES_${PN}-cli = "${bindir}/php"
 FILES_${PN}-cgi = "${bindir}/php-cgi"
 FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm"
+FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
 CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
 INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
 INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
 FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${libdir}/php/PEAR \
