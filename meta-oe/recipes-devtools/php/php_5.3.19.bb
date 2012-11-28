@@ -15,6 +15,7 @@ SRC_URI_append_pn-php += "file://iconv.patch \
             file://php_exec_native.patch \
             file://fix-fpm-cross-compile.patch \
             file://php-fpm.conf \
+            file://php-fpm-apache.conf \
             "
 
 SRC_URI[md5sum] = "e1d2a3ec7849d4b3032bd1abf1916aa4"
