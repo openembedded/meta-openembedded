@@ -1,11 +1,10 @@
 DESCRIPTION = "Lua is a powerful light-weight programming language designed \
 for extending applications."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=90c3badc6055c699194c4a7cea583296"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=59bdd99bb82238f238cf5c65c21604fd"
 HOMEPAGE = "http://www.lua.org/"
 
 DEPENDS += "readline"
-PR = "r11"
 SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
            file://bitwise_operators.patch \
            file://lua5.1.pc \
@@ -20,7 +19,7 @@ SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
 TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
 EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
 
-do_configure_prepend() {                                                                                                                                     
+do_configure_prepend() {
 	sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
 }
 
@@ -45,5 +44,5 @@ do_install () {
 }
 BBCLASSEXTEND = "native"
 
-SRC_URI[md5sum] = "d0870f2de55d59c1c8419f36e8fac150"
-SRC_URI[sha256sum] = "b038e225eaf2a5b57c9bcc35cd13aa8c6c8288ef493d52970c9545074098af3a"
+SRC_URI[md5sum] = "2e115fe26e435e33b0d5c022e4490567"
+SRC_URI[sha256sum] = "2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333"
