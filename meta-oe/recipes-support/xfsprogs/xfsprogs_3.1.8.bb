@@ -5,13 +5,14 @@ LICENSE = "GPLv2"
 LICENSE_libhandle = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
 DEPENDS = "util-linux"
-PR = "r1"
+PR = "r0"
 
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
 	file://remove-install-as-user.patch \
 "
-SRC_URI[md5sum] = "049cf9873794ea49d0bb3f12d45748a4"
-SRC_URI[sha256sum] = "e150914210ac5fd29c098ef0fd94bdec51d2fb231cf9faa765c16ec6d75c8eaa"
+
+SRC_URI[md5sum] = "f70b2e7200d4c29f0af1cf70e7be1db6"
+SRC_URI[sha256sum] = "74409e2e3748074999df25c00f722621659a0bd3607e677f0bcc4373b8c93eab"
 
 inherit autotools
 
@@ -26,6 +27,7 @@ FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
 EXTRA_OECONF = "--enable-gettext=no"
 do_configure () {
 	export DEBUG="-DNDEBUG"
+	gnu-configize --force
 	oe_runconf
 }
 
