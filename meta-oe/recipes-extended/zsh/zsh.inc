@@ -35,6 +35,7 @@ ALTERNATIVE_PRIORITY = "100"
 export AUTOHEADER = "true"
 
 do_configure () {
+    gnu-configize --force
     oe_runconf
 }
 
