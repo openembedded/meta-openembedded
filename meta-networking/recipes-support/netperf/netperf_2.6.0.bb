@@ -3,7 +3,7 @@ DESCRIPTION = "Network performance benchmark including tests for TCP, UDP, socke
 SECTION = "console/network"
 HOMEPAGE = "http://www.netperf.org/"
 LICENSE = "netperf"
-LICENSE_FLAGS = "commercial"
+LICENSE_FLAGS = "non-commercial"
 
 PR = "r0"
 
