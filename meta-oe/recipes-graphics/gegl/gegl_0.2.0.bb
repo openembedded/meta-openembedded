@@ -7,9 +7,9 @@ inherit gnome
 
 EXTRA_OECONF = "--disable-docs "
 
-SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "c8279b86b3d584ee4f503839fc500425"
-SRC_URI[sha256sum] = "106b9574b6d5fb282683794f7a7f090a1a3f4a388890e592b202827a4ca76f75"
+SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.2/${PN}-${PV}.tar.bz2"
+SRC_URI[md5sum] = "32b00002f1f1e316115c4ed922e1dec8"
+SRC_URI[sha256sum] = "df2e6a0d9499afcbc4f9029c18d9d1e0dd5e8710a75e17c9b1d9a6480dd8d426"
 
 FILES_${PN} += "${libdir}/gegl-*/*.so"
 FILES_${PN}-dev += "${libdir}/gegl-*/*.la"
