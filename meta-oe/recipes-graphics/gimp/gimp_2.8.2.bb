@@ -1,19 +1,16 @@
 DESCRIPTION = "The GIMP is the GNU Image Manipulation Program."
 HOMEPAGE = "http://www.gimp.org"
 SECTION = "x11/graphics"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=878e3965c7b52d85827c75f5a2f3b314"
+LICENSE = "GPLv3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webkit-gtk lcms gegl poppler"
 
-PR = "r1"
-
 inherit gnome
 
-SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.6/gimp-${PV}.tar.bz2 \
-           file://gimp-2.6.11-poppler18.patch"
-SRC_URI[md5sum] = "bb2939fe13e54fc7255cef5d097bb5dd"
-SRC_URI[sha256sum] = "9b6d08d0803b3912ea596d1b77b9c21ee13778c23388a225c004b8c1587cb0a1"
+SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2"
+SRC_URI[md5sum] = "b542138820ca3a41cbd63fc331907955"
+SRC_URI[sha256sum] = "0cd1a7e67e132ead810e16e31ff929394c83fcf841e4a295c45d6f3829601ad9"
 
 EXTRA_OECONF = "--disable-python \
                 --without-wmf"
