@@ -1,7 +1,9 @@
 DESCRIPTION = "Exalt is a network manager for the windows manager Enlightenment DR17."
 HOMEPAGE = "http://watchwolf.fr/wiki/doku.php?id=exalt"
 
-LICENSE = "LGPLv2"
+LICENSE = "LGPLv2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+
 DEPENDS = "elementary vpnc wpa-supplicant ecore eet edbus"
 RDEPENDS_${PN} = "vpnc wpa-supplicant"
 
