@@ -15,7 +15,7 @@ diff --git a/Makefile b/Makefile
 index a71780a..a26b8de 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -51,23 +51,12 @@ install-common:
+@@ -51,20 +51,9 @@
  	install -D --mode=644 usb_modeswitch.conf $(ETCDIR)/usb_modeswitch.conf
  	install -D --mode=644 usb_modeswitch.1 $(MANDIR)/usb_modeswitch.1
  	install -d $(DESTDIR)/var/lib/usb_modeswitch
@@ -32,14 +32,8 @@ index a71780a..a26b8de 100644
 -	sed 's_!/usr/bin/tclsh_!'"$$SHELL"'_' <usb_modeswitch.tcl >usb_modeswitch_dispatcher
  	install -D --mode=755 usb_modeswitch_dispatcher $(SBINDIR)/usb_modeswitch_dispatcher
  
- install-binary:
- 	install -D --mode=755 usb_modeswitch_dispatcher $(SBINDIR)/usb_modeswitch_dispatcher
+-install: install-common install-script
++install: install-common
  
--install: all install-common install-script
-+install: all install-common
- 
- install-shared: shared install-common install-binary
- 
--- 
-1.7.2.5
-
+ install-shared: dispatcher-dynamic install-common
+ 	install -D -s --mode=755 usb_modeswitch_dispatcher $(SBINDIR)/usb_modeswitch_dispatcher
