@@ -9,3 +9,5 @@ BPN = "libnotify"
 
 inherit gnome lib_package
 
+SRC_URI[archive.md5sum] = "d20676bde7bd2d276508d019dc7276f1"
+SRC_URI[archive.sha256sum] = "322541fdf276eb803686df81763a5186af041b2ee3e9cc5fa1dc86c550388c88"
