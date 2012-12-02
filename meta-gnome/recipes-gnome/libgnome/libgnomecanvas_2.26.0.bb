@@ -5,13 +5,16 @@ SECTION = "x11/gnome/libs"
 
 inherit gnome
 
+PR = "r1"
+
 DEPENDS = "gtk+ libglade libart-lgpl xineramaproto"
 
 EXTRA_OECONF = "--disable-gtk-doc"
 
 FILES_${PN} += "${libdir}/libglade/*/libcanvas.so"
 FILES_${PN}-dbg += "${libdir}/libglade/*/.debug/"
-FILES_${PN}-dev += "${libdir}/libglade/*/libcanvas.*a"
+FILES_${PN}-dev += "${libdir}/libglade/*/libcanvas*.la"
+FILES_${PN}-staticdev += "${libdir}/libglade/*/libcanvas*.a"
 
 do_configure_prepend() {
     sed -i -e s:docs::g ${S}/Makefile.am
