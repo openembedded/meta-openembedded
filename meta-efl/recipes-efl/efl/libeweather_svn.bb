@@ -1,5 +1,8 @@
 DESCRIPTION = "EFL-based weather widget library"
-LICENSE = "LGPL"
+LICENSE = "LGPL-2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
+                    file://COPYING-PLAIN;md5=c910b645eda0005ccec46f75203dc96e"
+
 DEPENDS = "ecore edje"
 PV = "0.0.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
