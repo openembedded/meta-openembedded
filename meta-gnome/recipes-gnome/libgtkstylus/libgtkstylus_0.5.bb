@@ -9,6 +9,8 @@ inherit autotools
 
 SRC_URI = "http://burtonini.com/temp/${PN}-${PV}.tar.gz \
 	file://gtkstylus.sh"
+SRC_URI[md5sum] = "fa1c82cd9fd2fafd7ff10d78eb5781c5"
+SRC_URI[sha256sum] = "383e0a22a537f653b8d41688277560f95678a042967198085ec7caa1a5cc2f4c"
 
 do_install_append() {
 	install -d ${D}/${sysconfdir}/X11/Xsession.d
