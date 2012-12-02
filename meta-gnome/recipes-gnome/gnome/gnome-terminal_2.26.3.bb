@@ -14,3 +14,5 @@ do_configure_prepend () {
 	rm -f ${S}/src/terminal-type-builtins.c
 }
 
+SRC_URI[archive.md5sum] = "0395af0d444ed4fbfabf65d3583119c8"
+SRC_URI[archive.sha256sum] = "ecddbf523700820524b2646451c307c5b55078b9cebe5fa464ef626b4b4cbda2"
