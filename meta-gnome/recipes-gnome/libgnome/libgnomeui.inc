@@ -10,7 +10,8 @@ inherit gnome
 FILES_${PN} += "${libdir}/gtk-2.0/*/filesystems/lib*.so \
                 ${libdir}/libglade/*/lib*.so \
                 ${datadir}/pixmaps/gnome-about-logo.png"
-FILES_${PN}-dev += "${libdir}/gtk-2.0/*/filesystems/*.la ${libdir}/gtk-2.0/*/filesystems/*.a ${libdir}/libglade/*/*.la ${libdir}/libglade/*/*.a"
+FILES_${PN}-dev += "${libdir}/gtk-2.0/*/filesystems/*.la ${libdir}/gtk-2.0/*/filesystems/*.a ${libdir}/libglade/*/*.la"
+FILES_${PN}-staticdev += "${libdir}/libglade/*/*.a"
 FILES_${PN}-dbg += "${libdir}/gtk-2.0/*/filesystems/.debug/ ${libdir}/libglade/*/.debug/"
 
 SRC_URI += "file://gnome-stock-pixbufs.h file://no-pixbuf-csource.patch"
