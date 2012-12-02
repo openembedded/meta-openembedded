@@ -5,6 +5,8 @@ SECTION = "x11/gnome/libs"
 
 inherit gnome lib_package
 
+PR = "r1"
+
 SRC_URI[archive.md5sum] = "a4345e6087ae6195d65a4674ffdca559"
 SRC_URI[archive.sha256sum] = "b2c63916866485793b87398266dd7778548c1734923c272a94d84ee011b6f7a4"
 
@@ -20,6 +22,6 @@ do_configure_prepend() {
 
 FILES_${PN} += "${libdir}/bonobo/servers ${libdir}/bonobo/monikers/*.so \
                 ${datadir}/gnome-background-properties ${datadir}/pixmaps"
-FILES_${PN}-dev += "${libdir}/bonobo/monikers/*a"
+FILES_${PN}-dev += "${libdir}/bonobo/monikers/*.la"
+FILES_${PN}-staticdev += "${libdir}/bonobo/monikers/*.a"
 FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug"
-
