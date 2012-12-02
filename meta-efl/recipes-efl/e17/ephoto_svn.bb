@@ -1,9 +1,9 @@
-LICENSE = "MIT CC-BY-SA2.5"
+LICENSE = "MIT GPL-3.0"
 PV = "0.1.0+svnr${SRCREV}"
 PR = "${INC_PR}.0"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=df45d9de58df0b48f515eae8d2421257"
-LIC_FILES_CHKSUM = "file://COPYING.icons;md5=d4e4f10748f3146a089aaa23c9ade59b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fdffcddb366d0cc78e0e46c4ea70c8d9 \
+                    file://COPYING.icons;md5=8f0e2cd40e05189ec81232da84bd6e1a"
 
 require e-module.inc
 
