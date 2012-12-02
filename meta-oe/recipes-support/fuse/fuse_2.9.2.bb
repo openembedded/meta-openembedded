@@ -5,6 +5,8 @@ LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
+PR = "r1"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
            file://gold-unversioned-symbol.patch \
           "
@@ -31,3 +33,7 @@ FILES_fuse-utils = "${bindir} ${base_sbindir}"
 FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
 DEBIAN_NOAUTONAME_fuse-utils = "1"
 DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
+
+do_install_append() {
+  rm -rf ${D}${base_prefix}/dev
+}
