@@ -6,7 +6,7 @@ LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
 DEPENDS = "sqlite3 flac virtual/libiconv"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2 \
 "
@@ -27,6 +27,7 @@ PACKAGES =+ "${PN}-test"
 FILES_${PN}-test = "${bindir}/test-lms"
 
 FILES_${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
+FILES_${PN}-staticdev += "${libdir}/${PN}/plugins/*.a"
 
 # otherwise fails with ERROR: could not add conversion charset 'UTF-16BE': Invalid argument
 RDEPENDS_${PN}-test_append_libc-glibc = " glibc-gconv-utf-16"
