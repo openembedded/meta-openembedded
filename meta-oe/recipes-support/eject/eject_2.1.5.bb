@@ -1,10 +1,7 @@
 DESCRIPTION = "Eject allows removable media (typically a CD-ROM, floppy disk, tape, or JAZ or ZIP disk) to be ejected under software control."
 HOMEPAGE = "http://eject.sourceforge.net/"
 LICENSE = "GPLv2"
-
-LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-
 
 inherit autotools gettext update-alternatives
 
