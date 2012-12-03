@@ -1,4 +1,6 @@
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+
 PV = "0.0.1+svnr${SRCPV}"
 
 require e-module.inc
