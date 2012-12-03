@@ -3,7 +3,7 @@ SECTION = "libs"
 DEPENDS = "gtk+"
 LICENSE = "LGPL-2.0+"
 LIC_FILES_CHKSUM = "file://tap.c;beginline=1;endline=20;md5=71756eeb144e9eeb177c69aa672b1635"
-PR = "r3"
+PR = "r4"
 
 inherit autotools
 
@@ -23,5 +23,5 @@ GTKVER = "2.10.0"
 FILES_${PN} = "${sysconfdir} \
                ${libdir}/gtk-2.0/${GTKVER}/modules/libgtkstylus.so.*"
 FILES_${PN}-dbg += "${libdir}/gtk-2.0/${GTKVER}/modules/.debug"
-FILES_${PN}-dev += "${libdir}/gtk-2.0/${GTKVER}/modules/libgtkstylus.so \
-                    ${libdir}/gtk-2.0/${GTKVER}/modules/libgtkstylus.*a"
+FILES_${PN}-dev += "${libdir}/gtk-2.0/${GTKVER}/modules/libgtkstylus.so"
+FILES_${PN}-staticdev += "${libdir}/gtk-2.0/${GTKVER}/modules/libgtkstylus.*a"
