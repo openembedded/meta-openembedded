@@ -105,6 +105,7 @@ python populate_packages_prepend (){
     systemdlibdir = d.getVar("base_libdir", True)
     do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'Systemd %s library', extra_depends='', allow_links=True)
 }
+PACKAGES_DYNAMIC += "^lib(udev|gudev|systemd).*"
 
 PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
 
