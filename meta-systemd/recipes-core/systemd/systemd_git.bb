@@ -19,9 +19,15 @@ inherit gitpkgv
 PKGV = "v${GITPKGVTAG}"
 
 PV = "git"
-PR = "r10"
+PR = "r11"
 
-inherit useradd pkgconfig autotools perlnative
+# need to export these variables for python-config to work
+export BUILD_SYS
+export HOST_SYS
+export STAGING_INCDIR
+export STAGING_LIBDIR
+
+inherit useradd pkgconfig autotools perlnative pythonnative python-dir
 
 SRCREV = "4d92e078e9d7e9a9d346065ea5e4afbafbdadb48"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
@@ -67,7 +73,7 @@ EXTRA_OECONF = " --with-distro=${SYSTEMDDISTRO} \
                  --disable-tcpwrap \
                  --enable-split-usr \
                  --disable-microhttpd \
-                 --without-python \
+                 --with-python \
                "
 
 # There's no docbook-xsl-native, so for the xsltproc check to false
@@ -107,7 +113,7 @@ python populate_packages_prepend (){
 }
 PACKAGES_DYNAMIC += "^lib(udev|gudev|systemd).*"
 
-PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze"
+PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze python-${PN}-journal"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-r lock"
@@ -115,6 +121,9 @@ GROUPADD_PARAM_${PN} = "-r lock"
 FILES_${PN}-analyze = "${bindir}/systemd-analyze"
 RDEPENDS_${PN}-analyze = "python-dbus"
 RRECOMMENDS_${PN}-analyze = "python-pycairo"
+
+FILES_python-${PN}-journal = "${PYTHON_SITEPACKAGES_DIR}/systemd/*.py* ${PYTHON_SITEPACKAGES_DIR}/systemd/*.so"
+RDEPENDS_python-${PN}-journal = "python-core"
 
 FILES_${PN}-initramfs = "/init"
 RDEPENDS_${PN}-initramfs = "${PN}"
@@ -168,9 +177,8 @@ FILES_${PN} = " ${base_bindir}/* \
                 ${base_libdir}/udev/rules.d/73-seat-late.rules \
                 ${base_libdir}/udev/rules.d/99-systemd.rules \
                "
-
-FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/"
-FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/ ${sysconfdir}/rpm/macros.systemd"
+FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/ ${PYTHON_SITEPACKAGES_DIR}/systemd/.debug/"
+FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/ ${sysconfdir}/rpm/macros.systemd ${PYTHON_SITEPACKAGES_DIR}/systemd/*.la"
 
 RDEPENDS_${PN} += "dbus-systemd udev-systemd"
 
