@@ -18,6 +18,7 @@ PV = "0.92.3+git${SRCPV}"
 EXTRA_QMAKEVARS_PRE = "\
     PREFIX=${prefix} \
     LIBDIR=${libdir} \
+    CONFIG+=nodoc \
     "
 
 FILES_${PN} += "\
