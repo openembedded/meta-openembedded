@@ -9,6 +9,8 @@ SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz"
 SRC_URI[md5sum] = "00441b53cf14c03566c8e82643544ff9"
 SRC_URI[sha256sum] = "6fa90016530b3aa6102e254079461977439398531fb23e7ec076ff2c140fea0a"
 
+PR = "1"
+
 inherit autotools gettext update-alternatives
 
 ALTERNATIVE_PATH = "${bindir}/openbox"
@@ -18,7 +20,7 @@ ALTERNATIVE_PRIORITY = "10"
 
 EXTRA_OECONF += "--with-plugins=none"
 
-PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome"
+PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome ${PN}-config"
 
 PACKAGES_DYNAMIC += "^${PN}-theme-.*"
 
@@ -28,7 +30,7 @@ python populate_packages_prepend() {
     do_split_packages(d, theme_dir, '(.*)', theme_name, '${PN} theme for %s', extra_depends='', allow_dirs=True)
 }
 
-RDEPENDS_${PN} += "${PN}-core"
+RDEPENDS_${PN} += "${PN}-core ${PN}-config"
 FILES_${PN}-core = "${bindir}/openbox ${libdir}/*${SOLIBS}"
 
 FILES_${PN}-lxde += "${datadir}/lxde/ \
@@ -37,3 +39,5 @@ FILES_${PN}-lxde += "${datadir}/lxde/ \
                      ${datadir}/icons"
 
 FILES_${PN}-gnome += "${datadir}/gnome/"
+
+FILES_${PN}-config += "${sysconfdir}"
