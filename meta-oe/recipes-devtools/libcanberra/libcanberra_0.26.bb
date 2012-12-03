@@ -6,7 +6,7 @@ DEPENDS = "alsa-lib gstreamer gtk+ libtool libvorbis gconf"
 SECTION = "libs/multimedia"
 AUTHOR = "Lennart Poettering"
 HOMEPAGE = "http://0pointer.de/lennart/projects/libcanberra"
-PR = "r1"
+PR = "r2"
 
 inherit autotools vala
 
@@ -42,15 +42,19 @@ FILES_${PN}-gtk = "\
   ${bindir}/* \
   ${libdir}/libcanberra-gtk.so.* \
   ${libdir}/gtk-2.0/modules/* \
+  ${libdir}/gtk-3.0/modules/* \
   ${datadir}/gnome \
   ${datadir}/gdm \
 "
 
 FILES_${PN}-dev += "\
+  ${libdir}/gtk-2.0/modules/*.la \
+  ${libdir}/gtk-3.0/modules/*.la \
   ${libdir}/${P}/*.la \
 "
 
 FILES_${PN}-dbg += "\
   ${libdir}/gtk-2.0/modules/.debug \
+  ${libdir}/gtk-3.0/modules/.debug \
   ${libdir}/${P}/.debug \
 "
