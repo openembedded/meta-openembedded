@@ -1,0 +1,38 @@
+From cffca7cb7c055f82ced316ddee90bb701b85b92d Mon Sep 17 00:00:00 2001
+From: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+Date: Tue, 10 Jan 2012 19:15:25 +0300
+Subject: [PATCH] Remove hardcoded /usr/local includes from configure.ac
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Yauhen Kharuzhy <yauhen.kharuzhy@promwad.com>
+---
+ configure.ac |   12 ------------
+ 1 files changed, 0 insertions(+), 12 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index ae00c08..9ba6d8d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -67,18 +67,6 @@ AC_ARG_VAR(PYTHON,local path to the python interpreter)
+ python_possible_path="/usr/bin:/usr/local/bin:/bin:/opt/python/bin:/opt/python/usr/bin:/opt/python/usr/local/bin"
+ AC_PATH_PROG(PYTHON,python,/usr/bin/env python,$python_possible_path)
+ 
+-if test -d /usr/local/include; then
+-  CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+-fi
+-
+-if test -d /usr/kerberos/include; then
+-  CPPFLAGS="$CPPFLAGS -I/usr/kerberos/include"
+-fi
+-
+-if test -d /usr/local/lib; then
+-  LDFLAGS="$LDFLAGS -L/usr/local/lib"
+-fi
+-
+ if uname | fgrep SunOS > /dev/null 2> /dev/null ; then
+   CPPFLAGS="$CPPFLAGS -D_XPG4_2=1"
+ fi
+-- 
+1.7.7.3
+

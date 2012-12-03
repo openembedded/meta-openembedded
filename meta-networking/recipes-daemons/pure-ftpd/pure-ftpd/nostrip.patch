@@ -1,0 +1,30 @@
+From 45eb89d1a6fde65caaf2d6e1a5d527f1ae7beb9c Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Mon, 3 Dec 2012 17:12:11 +0000
+Subject: [PATCH] Don't mess with CFLAGS and LDFLAGS when --with-minimal is specified
+
+We especially don't want stripping enabled.
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ configure.ac |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 3d59409..6836c0e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -413,8 +413,6 @@ AC_ARG_WITH(minimal,
+     AC_DEFINE(NO_FTP_USERS)
+     AC_DEFINE(WITHOUT_ASCII)    
+     AC_DEFINE(BORING_MODE)
+-    CFLAGS="$CFLAGS -Os -fomit-frame-pointer -fgcse -falign-functions=2 -falign-jumps=2 -fno-unroll-loops "
+-    LDFLAGS="$LDFLAGS -s "
+   fi ])
+ 
+ AC_ARG_WITH(paranoidmsg,
+-- 
+1.7.1
+
