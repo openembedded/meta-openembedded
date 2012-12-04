@@ -47,6 +47,9 @@ FILES_${PN}-gtk = "\
   ${datadir}/gdm \
 "
 
+# /usr/lib/gtk-3.0/modules/libcanberra-gtk-module.so > /usr/lib/gtk-3.0/modules/libcanberra-gtk3-module.so
+INSANE_SKIP_${PN}-gtk = "dev-so"
+
 FILES_${PN}-dev += "\
   ${libdir}/gtk-2.0/modules/*.la \
   ${libdir}/gtk-3.0/modules/*.la \
