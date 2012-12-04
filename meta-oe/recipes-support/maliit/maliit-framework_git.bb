@@ -19,7 +19,6 @@ PV = "0.92.3+git${SRCPV}"
 PACKAGES =+ "${PN}-gtk"
 GTKIMMODULES_PACKAGES = "${PN}-gtk"
 
-# Maliit needs Qt configured with -accessibility, a patch for that was already sent and will get merged in post 1.2.
 RDEPENDS_${PN} = "qt4-plugin-inputmethod-imsw-multi libqtsvg4"
 
 RRECOMMENDS_${PN} = "maliit-plugins"
@@ -55,6 +54,7 @@ EXTRA_QMAKEVARS_PRE = "\
     CONFIG+=disable-gconf \
     CONFIG+=disable-gtk-cache-update \
     CONFIG+=local-install \
+    CONFIG+=nosdk \
     "
 
 EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
