@@ -6,7 +6,7 @@ AUTHOR = "Gustavo Sverzut Barbieri <barbieri@gmail.com>"
 # the extension modules.
 DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
 RDEPENDS_${PN} += "python-lang"
-INC_PR = "r0"
+INC_PR = "r1"
 
 # necessary to let the call for python-config succeed
 export BUILD_SYS
@@ -24,7 +24,7 @@ S = "${WORKDIR}/${SRCNAME}-${SRCVER}"
 
 do_configure_prepend() {
     # prefix CYTHON_.*_INCLUDEDIR with path to STAGING_DIR_HOST also use $PKG_CONFIG instead of pkg-config directly
-    sed -i "s#\`\$PKG_CONFIG --variable=includedir \"python-evas#${STAGING_DIR_HOST}\`\$PKG_CONFIG --variable=includedir \"python-evas#g" ${S}/configure.ac
+    sed -i "s#=\`\$PKG_CONFIG --variable=includedir \"python-evas#=${STAGING_DIR_HOST}\`\$PKG_CONFIG --variable=includedir \"python-evas#g" ${S}/configure.ac
 }
 
 do_install_append() {
