@@ -7,7 +7,7 @@ SECTION = "console/network"
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c3159ad36d96a939fcd8f2c2c9b9d08a"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${PV}.tar.bz2 "
 SRC_URI[md5sum] = "73da62c793269eade8121da336b01ba5"
@@ -19,7 +19,7 @@ inherit setuptools
 
 do_install_append() {
     # remove some useless files before packaging
-    find ${D} -name "*.bat" -o -name "*.c" -o -name "*.h" -exec rm {} \;
+    find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
 }
 
 PACKAGES += "\
@@ -167,6 +167,8 @@ ${libdir}/${PYTHON_DIR}/site-packages/twisted/im.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/*.py* \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/topfiles \
+${libdir}/${PYTHON_DIR}/site-packages/Twisted*egg-info \
 "
 
 FILES_${PN}-lore = " \
