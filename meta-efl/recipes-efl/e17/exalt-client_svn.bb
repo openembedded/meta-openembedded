@@ -18,7 +18,7 @@ FILES_${PN} += "${libdir}/enlightenment/modules/*/*.desktop \
                 ${libdir}/enlightenment/modules/*/*.edj \
                 ${libdir}/enlightenment/modules/*/*/*.so"
 
-FILES_${PN}-static += "${libdir}/enlightenment/modules/*/*/*.a"
+FILES_${PN}-staticdev += "${libdir}/enlightenment/modules/*/*/*.a"
 FILES_${PN}-dev += "${libdir}/enlightenment/modules/*/*/*.la"
 FILES_${PN}-dbg += "${libdir}/enlightenment/modules/*/*/.debug"
  
