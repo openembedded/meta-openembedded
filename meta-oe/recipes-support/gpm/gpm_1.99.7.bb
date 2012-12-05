@@ -5,6 +5,8 @@ SECTION = "console/utils"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://gpm2/core/main.c;endline=19;md5=66d3c205c4e7ee5704b2ee351dfed72f"
 
+PR = "r1"
+
 DEPENDS = "ncurses"
 
 SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
@@ -41,3 +43,4 @@ do_install () {
 SRC_URI[md5sum] = "9fdddf5f53cb11d40bb2bb671d3ac544"
 SRC_URI[sha256sum] = "6071378b24494e36ca3ef6377606e7e565040413c86704753a162d2180af32ee"
 
+FILES_${PN} += "${datadir}/emacs"
