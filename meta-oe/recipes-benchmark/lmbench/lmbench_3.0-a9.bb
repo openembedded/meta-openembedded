@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
 
 inherit autotools
 
+PR = "r1"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
 	   file://lmbench-run \
 	   file://rename-line-binary.patch \
@@ -18,7 +20,7 @@ SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8
 
 EXTRA_OEMAKE = 'CC="${CC}" AR="${AR}" RANLIB="${RANLIB}" CFLAGS="${CFLAGS}" \
 		LDFLAGS="${LDFLAGS}" LD="${LD}" OS="${TARGET_SYS}" \
-		TARGET="${TARGET_OS}" BASE="${prefix}"'
+		TARGET="${TARGET_OS}" BASE="${prefix}" MANDIR="${mandir}"'
 
 do_configure() {
 	:
@@ -40,7 +42,6 @@ do_install () {
 	oe_runmake 'BASE=${D}${prefix}' \
 		    -C src install
 	mv ${D}${bindir}/line ${D}${bindir}/lm_line
-	mv ${D}${prefix}/man/* ${D}${mandir}/
 	install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
 	sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
 	       -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
@@ -51,4 +52,4 @@ do_install () {
 }
 
 RDEPENDS_${PN} = "debianutils"
-FILES_${PN} += "${datadir}/lmbench"
+FILES_${PN} += "${datadir}/lmbench ${libdir}/lmbench"
