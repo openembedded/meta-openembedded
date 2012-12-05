@@ -2,17 +2,17 @@ DESCRIPTION = "Gnome session manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r2"
+PR = "r3"
 
 SECTION = "x11/gnome"
 DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native startup-notification"
 
-inherit gnome 
+inherit gnome
 
 SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
 SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
 
-EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set "
+EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set --disable-docbook-docs"
 
 do_configure_append() {
 	for i in $(find ${S} -name "Makefile") ; do
