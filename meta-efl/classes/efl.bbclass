@@ -49,9 +49,7 @@ FILES_${PN}-dev   += "${bindir}/${PN}-config \
                       ${libdir}/edje/modules/${PN}/*/module.la \
 "
 
-FILES_${PN}-static += "${libdir}/${PN}/*.a \
-                       ${libdir}/${PN}/*/*.a \
-"
+FILES_${PN}-staticdev += "${libdir}/${BPN}/*/*.a"
 
 FILES_${PN}-dbg +=   "${libdir}/${PN}/.debug \
                       ${libdir}/${PN}/*/.debug \
