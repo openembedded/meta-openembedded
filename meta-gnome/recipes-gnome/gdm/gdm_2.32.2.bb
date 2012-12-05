@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
 
-PR = "r9"
+PR = "r10"
 
 inherit gnome update-rc.d
 
@@ -25,7 +25,11 @@ SRC_URI[archive.sha256sum] = "034d23af0ea18d86e5543e707212d9297ec7d83f221808968a
 EXTRA_OECONF = " --enable-authentication-scheme=shadow \
                  --enable-debug=yes \
                  --with-console-kit \
-                 --disable-scrollkeeper "
+                 --disable-scrollkeeper"
+
+do_configure_prepend() {
+	sed -i -e "s:\bdocs::g" ${S}/Makefile.am
+}
 
 do_install_prepend() {
 	mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
