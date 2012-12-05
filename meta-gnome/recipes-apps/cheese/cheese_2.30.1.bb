@@ -15,3 +15,7 @@ FILES_${PN} += "${datadir}/dbus-1"
 RRECOMMENDS_${PN} = "gst-plugins-good-meta gst-plugins-base-meta"
 
 EXTRA_OECONF += "--disable-scrollkeeper"
+
+do_configure_prepend() {
+	sed -i -e "s: help : :g" ${S}/Makefile.am
+}
