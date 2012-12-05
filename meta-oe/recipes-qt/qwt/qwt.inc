@@ -22,6 +22,7 @@ do_install() {
     oe_runmake -e install
     install -d ${D}${datadir}/doc/${PN}
     mv ${D}${prefix}/doc/* ${D}${datadir}/doc/${PN}/
+    rmdir ${D}${prefix}/doc
     cd ${S}/examples
     install -d ${D}/${bindir}
     cd bin${QT_LIBINFIX}/
@@ -30,5 +31,8 @@ do_install() {
     done
 }
 
-PACKAGES_prepend = "${PN}-examples "
+PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
 FILES_${PN}-examples = "${bindir}/*"
+FILES_${PN}-features = "${prefix}/features"
+FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
+FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
