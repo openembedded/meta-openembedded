@@ -9,14 +9,13 @@ SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz"
 SRC_URI[md5sum] = "00441b53cf14c03566c8e82643544ff9"
 SRC_URI[sha256sum] = "6fa90016530b3aa6102e254079461977439398531fb23e7ec076ff2c140fea0a"
 
-PR = "1"
+PR = "r2"
 
 inherit autotools gettext update-alternatives
 
-ALTERNATIVE_PATH = "${bindir}/openbox"
-ALTERNATIVE_NAME = "x-window-manager"
-ALTERNATIVE_LINK = "${bindir}/x-window-manager"
-ALTERNATIVE_PRIORITY = "10"
+ALTERNATIVE_${PN}-core = "x-window-manager"
+ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/openbox"
+ALTERNATIVE_PRIORITY[x-window-manager] = "10"
 
 EXTRA_OECONF += "--with-plugins=none"
 
