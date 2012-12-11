@@ -7,13 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
 DEPENDS = "alsa-lib ncurses"
 
 SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
-SRC_URI[md5sum] = "e2abfd2e69fd8b28d965df968d7d44ee"
-SRC_URI[sha256sum] = "45e7c9967d0fb0344f4da539ab343fb979384b36a429a8594c94cf466dff4320"
+SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
+SRC_URI[sha256sum] = "55638cb04f39f4df76c081e22ca7feeea58ddd20ebf779a7db2d38b1ff374cd6"
 
 inherit autotools pkgconfig lib_package
-
-#Has broken libtool usage
-do_configure() {
-	gnu-configize
-	oe_runconf
-}
