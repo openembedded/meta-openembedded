@@ -4,7 +4,7 @@ BPN = "gvfs"
 
 DEPENDS = "gvfs gnome-disk-utility"
 
-PR = "${INC_PR}.2"
+PR = "${INC_PR}.3"
 
 # we need gdu files only: reduce files to delete in libexecdir
 EXTRA_OECONF += "--disable-gphoto2"
@@ -20,6 +20,7 @@ do_install_append() {
 	rm -rf ${D}${datadir}/glib-2.0
 	rm -rf ${D}${datadir}/GConf
 	rm -f ${D}${datadir}/dbus-1/services/gvfs-*
+	rm -rf ${D}${datadir}/locale
 	rm -f ${D}${libexecdir}/gvfsd*
 	rm -f ${D}${libexecdir}/gvfs-fuse-daemon
 	rm -f ${D}${libexecdir}/gvfs-gphoto2-volume-monitor
