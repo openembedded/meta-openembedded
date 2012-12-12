@@ -5,7 +5,7 @@ INHIBIT_DEFAULT_DEPS = "1"
 DEPENDS = "virtual/${TARGET_PREFIX}gcc virtual/${TARGET_PREFIX}g++"
 
 PKGSUFFIX = ""
-PKGSUFFIX_virtclass-nativesdk = "-nativesdk"
+PKGSUFFIX_class-nativesdk = "-nativesdk"
 
 PACKAGES = "\
   ${PN} \
