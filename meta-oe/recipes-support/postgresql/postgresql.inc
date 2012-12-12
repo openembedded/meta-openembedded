@@ -19,6 +19,7 @@ inherit autotools pkgconfig
 
 EXTRA_OECONF = "--disable-rpath"
 EXTRA_OECONF_sh4 = "--disable-spinlocks --disable-rpath"
+EXTRA_OECONF_aarch64 += "--disable-spinlocks"
 
 do_compile_append() {
          cp /usr/sbin/zic ${S}/src/timezone/
