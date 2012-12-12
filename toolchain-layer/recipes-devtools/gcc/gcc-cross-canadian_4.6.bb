@@ -5,8 +5,8 @@ require recipes-devtools/gcc/gcc-cross-canadian.inc
 require recipes-devtools/gcc/gcc-configure-sdk.inc
 require recipes-devtools/gcc/gcc-package-sdk.inc
 
-DEPENDS += "gmp-nativesdk mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
-RDEPENDS_${PN} += "mpfr-nativesdk libmpc-nativesdk elfutils-nativesdk"
+DEPENDS += "nativesdk-gmp nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
+RDEPENDS_${PN} += "nativesdk-mpfr nativesdk-libmpc nativesdk-elfutils"
 
 SYSTEMHEADERS = "/usr/include"
 SYSTEMLIBS = "/lib/"
