@@ -7,7 +7,7 @@ LICENSE = "GPLv2+"
 DEPENDS = "virtual/libusb0 ncurses"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
-                    file://README;startline=60;md5=8237b4d4d80a525b15f8162192e07bee"
+                    file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${P}.tar.gz"
 

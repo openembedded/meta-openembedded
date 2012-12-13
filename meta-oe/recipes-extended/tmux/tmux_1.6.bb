@@ -3,7 +3,7 @@ HOMEPAGE = "http://tmux.sourceforge.net"
 SECTION = "console/utils"
 
 LICENSE = "ISC"
-LIC_FILES_CHKSUM = "file://tmux.c;startline=3;endline=17;md5=f36d9c9e6c1c24996a88891fdf783d04"
+LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=8685b4455330a940fab1ff451aa941a0"
 
 DEPENDS = "ncurses libevent sed-native"
 

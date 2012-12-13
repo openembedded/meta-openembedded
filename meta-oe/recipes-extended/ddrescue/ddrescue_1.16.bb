@@ -7,7 +7,7 @@ SECTION = "console"
 LICENSE = "GPLv3+"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
-                    file://main_common.cc;startline=5;endline=16;md5=0ef2c1bede11c6c9c6c12330d60bc7a7"
+                    file://main_common.cc;beginline=5;endline=16;md5=b5a59150a33658cc1ffc31b1a4ffb9f2"
 
 SRC_URI = "${GNU_MIRROR}/${PN}/${P}.tar.gz"
 SRC_URI[md5sum] = "57b67407e882c6418531d48a2f20d16b"
