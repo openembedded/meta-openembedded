@@ -15,6 +15,7 @@ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
                  --disable-setuid"
 
 do_configure() {
+        gnu-configize --force
         sed -e "s%/usr/contrib/X11R6%${STAGING_LIBDIR}%g" -i configure
         oe_runconf
 }
