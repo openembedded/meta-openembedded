@@ -5,7 +5,7 @@ DEPENDS = "ncurses"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                    file://mtr.c;startline=5;endline=16;md5=87105f8fe9675e897e074869afaafa6f"
+                    file://mtr.c;beginline=5;endline=16;md5=56e390ced194aff352eefab404883057"
 
 SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz \
            file://no-gtk.patch"
