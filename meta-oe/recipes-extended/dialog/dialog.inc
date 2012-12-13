@@ -19,6 +19,7 @@ EXTRA_OECONF = "--with-ncurses \
                 --disable-rpath-hack"
 
 do_configure() {
+    gnu-configize --force
     sed -i 's,${cf_ncuconfig_root}6-config,${cf_ncuconfig_root}-config,g' -i configure
     oe_runconf
 }
