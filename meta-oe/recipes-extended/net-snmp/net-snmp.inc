@@ -38,8 +38,8 @@ do_install_append() {
 		-i ${STAGING_BINDIR}/net-snmp-config
 }
 
-PACKAGES = "net-snmp-dbg net-snmp-doc net-snmp-dev net-snmp-staticdev net-snmp-static net-snmp-libs \
-            net-snmp-mibs net-snmp-server net-snmp-client net-snmp-server-snmpd net-snmp-server-snmptrapd"
+PACKAGES = "${PN}-dbg ${PN}-doc ${PN}-dev ${PN}-staticdev ${PN}-static ${PN}-libs \
+            ${PN}-mibs ${PN}-server ${PN}-client ${PN}-server-snmpd ${PN}-server-snmptrapd"
 
 ALLOW_EMPTY_${PN}-server = "1"
 FILES_${PN}-libs = "${libdir}/lib*${SOLIBS}"
@@ -59,7 +59,7 @@ INITSCRIPT_PARAMS_${PN}-server = "defaults"
 
 LEAD_SONAME = "libnetsnmp.so"
 
-pkg_postrm_net-snmp-server() {
+pkg_postrm_${PN}-server() {
 	if test "x$D" != "x"; then
 		OPT="-r $D "
 	else
