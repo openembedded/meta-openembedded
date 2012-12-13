@@ -4,6 +4,8 @@ DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
  a table of current I/O usage by processes on the system."
 HOMEPAGE = "http://guichaz.free.fr/iotop/"
 
+PR = "r1"
+
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 
@@ -14,9 +16,8 @@ SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d68648
 inherit distutils
 
 do_install_append() {
-	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo
-	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py
-	[ -d ${D}${datadir}/share ] && rmdir ${D}${datadir}/share
+	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo || true
+	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
 }
 
 RDEPENDS_${PN} = "python-distutils python-curses python-textutils \
