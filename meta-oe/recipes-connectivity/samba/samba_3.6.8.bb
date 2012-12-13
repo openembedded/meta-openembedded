@@ -50,6 +50,7 @@ EXTRA_OECONF += "\
 	"
 
 do_configure() {
+	gnu-configize --force
 	oe_runconf
 }
 
