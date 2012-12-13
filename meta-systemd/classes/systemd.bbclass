@@ -53,7 +53,9 @@ def systemd_after_parse(d):
                         "\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN}" % \
                         (bb_filename, pkg_systemd)
             else:
-                pkg_systemd_base = pkg_systemd.replace('-systemd', '')
+                pkg_systemd_base = pkg_systemd
+                if pkg_systemd_base.endswith('-systemd'):
+                    pkg_systemd_base = pkg_systemd[:-8]
                 if pkg_systemd_base not in packages:
                     raise bb.build.FuncFailed, \
                         "\n\n%s: %s in SYSTEMD_PACKAGES does not match <existing-package>-systemd or ${PN}" % \
@@ -68,9 +70,10 @@ def systemd_after_parse(d):
 
 
     bpn = d.getVar('BPN', 1)
+    ml = d.getVar('MLPREFIX', 1) or ""
     if bpn + "-native" != d.getVar('PN', 1) and \
             bpn + "-cross" != d.getVar('PN', 1) and \
-            not d.getVar('MLPREFIX', 1) and \
+            ml + bpn == d.getVar('PN', 1) and \
             "nativesdk-" + bpn != d.getVar('PN', 1):
         systemd_check_vars()
         for pkg_systemd in d.getVar('SYSTEMD_PACKAGES', 1).split():
