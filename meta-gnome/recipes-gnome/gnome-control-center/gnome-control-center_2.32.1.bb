@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "desktop-file-utils-native gnome-menus libunique dbus-glib gnome-desktop libxml2 metacity gconf gnome-settings-daemon librsvg pango libgnomekbd libxklavier libcanberra"
 
+PR = "r1"
+
 inherit gnome
 
 SRC_URI[archive.md5sum] = "b4e8ab5c7556ae07addbfcfb4fa2f761"
@@ -22,8 +24,5 @@ FILES_${PN} += "${datadir}/icon* \
                 ${datadir}/desktop-directories \
                "
 FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
-FILES_${PN}-dev += "${libdir}/window-manager-settings/*a"
-
-
-
-
+FILES_${PN}-dev += "${libdir}/window-manager-settings/*.la"
+FILES_${PN}-staticdev += "${libdir}/window-manager-settings/*.a"
