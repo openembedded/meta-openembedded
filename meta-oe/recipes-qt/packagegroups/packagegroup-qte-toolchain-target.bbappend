@@ -1,3 +1,3 @@
 RDEPENDS_${PN} += "qwt-e-dev"
 
-PRINC = "1"
+PRINC := "${@int(PRINC) + 1}"
