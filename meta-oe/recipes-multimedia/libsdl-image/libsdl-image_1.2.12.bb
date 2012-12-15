@@ -1,16 +1,16 @@
 DESCRIPTION = "Simple DirectMedia Layer image library."
 SECTION = "libs"
 
-LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
+LICENSE = "zlib"
+LIC_FILES_CHKSUM = "file://COPYING;md5=613734b7586e1580ef944961c6d62227"
 
-PR = "r3"
+PR = "r0"
 
 DEPENDS = "tiff zlib libpng jpeg virtual/libsdl"
 
 SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.gz"
-SRC_URI[md5sum] = "6c06584b31559e2b59f2b982d0d1f628"
-SRC_URI[sha256sum] = "75e05d1e95f6277b44797157d9e25a908ba8d08a393216ffb019b0d74de11876"
+SRC_URI[md5sum] = "a0f9098ebe5400f0bdc9b62e60797ecb"
+SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699"
 
 S = "${WORKDIR}/SDL_image-${PV}"
 
@@ -31,4 +31,3 @@ do_configure_prepend() {
 	rm -f acinclude/ltsugar.m4
 	rm -f acinclude/ltversion.m4
 }
-
