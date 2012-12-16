@@ -15,10 +15,10 @@ INC_PR = "r6"
 
 inherit autotools pkgconfig
 
-#        --enable-libgsm \
-#        --enable-libmp3lame \
-#        --enable-libschroedinger \
-#        --enable-libvpx \
+#        --enable-libgsm
+#        --enable-libmp3lame
+#        --enable-libschroedinger
+#        --enable-libvpx
 
 B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
 
