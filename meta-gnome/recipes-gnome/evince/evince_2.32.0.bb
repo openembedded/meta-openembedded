@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
 SECTION = "x11/office"
 DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
 
-PR = "r2"
+PR = "r3"
 
 inherit gnome pkgconfig gtk-icon-cache
 
@@ -17,6 +17,7 @@ EXTRA_OECONF = " --enable-thumbnailer \
                  --enable-nautilus \
                  --disable-scrollkeeper \
                  --enable-pixbuf \
+                 --disable-help \
                "
 
 do_install_append() {
