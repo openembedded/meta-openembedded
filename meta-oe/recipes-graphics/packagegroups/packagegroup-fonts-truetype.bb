@@ -38,7 +38,7 @@ RDEPENDS_${PN}-core = "\
   ttf-dejavu-sans \
   ttf-dejavu-sans-mono \
 "
-#  ttf-dejavu-serif \
+#  ttf-dejavu-serif
 
 RDEPENDS_${PN}-chinese = "\
   ${PN}-core \
