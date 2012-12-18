@@ -10,10 +10,13 @@ ARM_INSTRUCTION_SET = "arm"
 DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpeg bzip2 zlib libpng tiff glib-2.0"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
+           file://opencv-fix-pkgconfig-generation.patch \
            "
 
 SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
 SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
+
+PR = "r1"
 
 S = "${WORKDIR}/OpenCV-${PV}"
 
