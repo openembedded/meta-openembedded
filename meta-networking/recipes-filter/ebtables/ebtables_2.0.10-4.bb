@@ -2,12 +2,13 @@ SUMMARY = "Utility for basic Ethernet frame filtering on a Linux bridge, MAC NAT
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
 SECTION = "console/network"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
            file://installnonroot.patch \
            file://01debian_defaultconfig.patch \
            file://ebtables.init \
+           file://no-as-needed.patch \
            "
 
 SRC_URI[md5sum] = "506742a3d44b9925955425a659c1a8d0"
