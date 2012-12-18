@@ -1,8 +1,8 @@
 [Unit]
 Description=Loads xinput calibration data
 ConditionPathExists=/etc/pointercal.xinput
-Requires=xserver-nodm.service
-After=xserver-nodm.service
+Requires=display-manager.service
+After=display-manager.service
 
 [Service]
 ExecStart=/usr/bin/xinput_calibrator_once.sh
