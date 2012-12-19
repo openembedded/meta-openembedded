@@ -1,11 +1,11 @@
 SECTION = "libs"
 DESCRIPTION = "OSM/Motif implementation."
 LICENSE = "OGPL"
-DEPENDS = "xbitmaps virtual/libx11 libxt libxp libxft"
+DEPENDS = "xbitmaps virtual/libx11 libxt libxft"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=14f692c82491db3d52419929d2f3b343"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://fossies.org/unix/misc/openmotif-2.3.3.tar.gz \
            file://configure.patch;patch=1"
@@ -14,6 +14,8 @@ SRC_URI[md5sum] = "fd27cd3369d6c7d5ef79eccba524f7be"
 SRC_URI[sha256sum] = "c85f5545e218fa0c59a3789192132d472fc5a33e914a221a568eee4fc10cd103"
 
 inherit autotools
+
+EXTRA_OECONF = "--disable-printing"
 
 PACKAGES += "${PN}-bin"
 
