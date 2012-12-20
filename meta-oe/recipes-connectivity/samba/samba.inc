@@ -34,6 +34,8 @@ EXTRA_OECONF='--disable-cups \
               --with-swatdir=${datadir}/swat \
               --with-aio-support \
               --without-libtalloc \
+              --without-acl-support \
+              --disable-avahi \
               samba_cv_struct_timespec=yes \
               libreplace_cv_HAVE_MMAP=${SAMBAMMAP}'
 
