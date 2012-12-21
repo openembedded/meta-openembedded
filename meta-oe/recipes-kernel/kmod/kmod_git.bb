@@ -9,7 +9,7 @@ inherit autotools gitpkgv
 
 PKGV = "${GITPKGVTAG}"
 SRCREV = "8885ced062131214448fae056ef453f094303805"
-SRC_URI = "git://git.profusion.mobi/kmod.git \
+SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kmod/kmod.git \
            file://0001-man-disable-man-page-generation-because-we-don-t-hav.patch \
 "
 
