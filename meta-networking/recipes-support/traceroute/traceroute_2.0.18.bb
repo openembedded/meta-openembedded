@@ -32,10 +32,8 @@ do_install() {
 
     install -d ${D}${mandir}
     install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
-    pushd ${D}${mandir}
-    ln -s ${PN}.8 ${PN}6.8
-    ln -s ${PN}.8 tcptraceroute.8
-    popd
+    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
+    ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
 
 }
 
