@@ -1,0 +1,29 @@
+--- systemd-pam-185/src/nspawn/nspawn.c.orig	2012-06-21 05:31:24.000000000 -0400
++++ systemd-pam-185/src/nspawn/nspawn.c	2012-06-21 05:29:50.000000000 -0400
+@@ -61,6 +61,8 @@
+ #include "path-util.h"
+ #include "loopback-setup.h"
+ 
++#include "config.h"
++
+ static char *arg_directory = NULL;
+ static char *arg_user = NULL;
+ static char **arg_controllers = NULL;
+@@ -1315,9 +1317,14 @@
+ 
+                         a[0] = (char*) "/sbin/init";
+                         execve(a[0], a, (char**) envp);
+-                } else if (argc > optind)
+-                        execvpe(argv[optind], argv + optind, (char**) envp);
+-                else {
++                } else if (argc > optind) {
++#ifdef HAVE_EXECVPE
++			execvpe(argv[optind], argv + optind, (char**) envp);
++#else
++			environ = (char **)envp;
++			execvp(argv[optind], argv + optind);
++#endif	/* HAVE_EXECVPE */
++		} else {
+                         chdir(home ? home : "/root");
+                         execle("/bin/bash", "-bash", NULL, (char**) envp);
+                 }
