@@ -9,5 +9,5 @@ EXTRA_OECONF = "--enable-javascript --with-libfl --enable-graphics \
                 --without-directfb --without-pmshell --without-atheos \
                 --without-x --without-sdl"
 
-SRC_URI[md5sum] = "f0f107cc824b71e43f0c6ab620209daf"
-SRC_URI[sha256sum] = "f32314d851e86ec463967ddce78d051e3953b529878cbaeecf882c625ad29c75"
+SRC_URI[md5sum] = "d06aa6e14b2172d73188871a5357185a"
+SRC_URI[sha256sum] = "0c182b1cbcdfd5cdcd2f75a6032d1a4b660d07c1225c1e07757cec81d3302130"
