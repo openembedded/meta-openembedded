@@ -33,6 +33,11 @@ INITSCRIPT_PARAMS = "defaults"
 # cc1: all warnings being treated as errors
 CFLAGS += "-Wno-extra -Wno-error=unused-but-set-parameter -Wno-error=unused-but-set-variable"
 
+# twiddler is WIP in 1.99.7 and probably not worth fixing (a lot of changes in gpm-2-dev after 1.99.7
+# gpm-1.99.7/src/drivers/twid/twiddler.c:503:14: error: cast to pointer from integer of different size [-Werror=int-to-pointer-cast]
+# /gpm-1.99.7/src/mice.c:221:5: error: (near initialization for 'mice[32].init') [-Werror]
+CFLAGS += "-Wno-error=int-to-pointer-cast -Wno-error"
+
 do_install () {
     oe_runmake 'ROOT=${D}' install
     install -m 0644 src/headers/gpm.h ${D}${includedir}
