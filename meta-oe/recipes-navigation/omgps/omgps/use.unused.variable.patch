@@ -1,3 +1,6 @@
+Upstream-Status: Submitted
+https://code.google.com/p/omgps/issues/detail?id=15
+
 --- a/src/settings.c	2011-12-12 13:21:30.573400795 +0100
 +++ b/src/settings.c	2011-12-12 14:11:05.269606119 +0100
 @@ -278,6 +278,9 @@

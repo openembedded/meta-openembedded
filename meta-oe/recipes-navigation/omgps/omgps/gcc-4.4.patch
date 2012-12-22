@@ -1,3 +1,6 @@
+Upstream-Status: Submitted
+https://code.google.com/p/omgps/issues/detail?id=15
+
 diff -uNr omgps.orig/src/include/map_repo.h omgps/src/include/map_repo.h
 --- omgps.orig/src/include/map_repo.h	2009-07-20 19:54:08.000000000 +0200
 +++ omgps/src/include/map_repo.h	2010-01-17 14:55:24.000000000 +0100

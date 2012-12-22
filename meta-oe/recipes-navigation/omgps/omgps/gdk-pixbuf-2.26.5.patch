@@ -1,0 +1,15 @@
+Upstream-Status: Submitted
+https://code.google.com/p/omgps/issues/detail?id=15
+
+diff -uNr omgps/src/tab_scratch.c omgps.new/src/tab_scratch.c
+--- omgps/src/tab_scratch.c	2012-12-22 18:13:25.994788128 +0100
++++ omgps.new/src/tab_scratch.c	2012-12-22 18:12:45.876790644 +0100
+@@ -51,7 +51,7 @@
+ 	}
+ 
+ 	gboolean ret = gdk_pixbuf_save (pixbuf, buf, SCREENSHOT_FILE_TYPE, &err, "tEXt::Software", "omgps", NULL);
+-	gdk_pixbuf_unref(pixbuf);
++	g_object_unref(pixbuf);
+ 
+ 	if (ret) {
+ 		char buf1[128];

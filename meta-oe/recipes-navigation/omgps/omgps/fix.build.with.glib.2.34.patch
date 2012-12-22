@@ -1,3 +1,6 @@
+Upstream-Status: Submitted
+https://code.google.com/p/omgps/issues/detail?id=15
+
 diff -uNr omgps.orig/src/dbus_intf.c omgps/src/dbus_intf.c
 --- omgps.orig/src/dbus_intf.c	2011-12-12 12:22:47.000000000 +0100
 +++ omgps/src/dbus_intf.c	2012-11-14 14:44:45.435381443 +0100

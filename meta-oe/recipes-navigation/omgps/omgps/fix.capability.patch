@@ -1,3 +1,6 @@
+Upstream-Status: Submitted
+https://code.google.com/p/omgps/issues/detail?id=15
+
 we need to include config.h first to know if HAVE_SYS_CAPABILITY_H is enabled or no, otherwise
 sys/capability.h is not included and later used
 | src/network.c: In function 'can_ping':
