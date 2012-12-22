@@ -109,7 +109,7 @@ do_compile_prepend() {
 		${STAGING_DIR_TARGET}/${libdir}/libjpeg.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/liblzma.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/libpixman-1.so.* \
-		${STAGING_DIR_TARGET}/${libdir}/libpng12.so.* \
+		${STAGING_DIR_TARGET}/${libdir}/libpng1*.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/librsvg-2.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/libstdc++.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/libtiff.so.* \
