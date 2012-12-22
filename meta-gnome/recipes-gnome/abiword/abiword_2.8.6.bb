@@ -13,7 +13,9 @@ SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
            file://autogen-common.sh \
            file://nodolt.patch \
            file://fix.no.undefined.param.patch \
-           file://abiword.fix.glib-2.32.patch"
+           file://abiword.fix.glib-2.32.patch \
+           file://libpng15.patch \
+"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
 
@@ -23,7 +25,7 @@ SRC_URI[sha256sum] = "d99089a63a6cfc1a6a4a026be9278028d47d224088d24b1853acb67e95
 #want 2.x from 2.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
-PR = "r7"
+PR = "r8"
 
 inherit autotools pkgconfig
 
