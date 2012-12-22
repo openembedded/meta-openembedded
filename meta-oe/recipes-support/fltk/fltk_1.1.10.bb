@@ -6,9 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c0b73db66884b6a925e727400315130"
 
 DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
 
+PR = "r1"
+
 SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
            file://disable_test.patch \
            file://dso-fix.patch \
+           file://libpng15.patch \
           "
 
 S = "${WORKDIR}/fltk-${PV}"
