@@ -4,10 +4,10 @@ BPN = "gvfs"
 
 DEPENDS = "gvfs gnome-disk-utility"
 
-PR = "${INC_PR}.3"
+PR = "${INC_PR}.4"
 
 # we need gdu files only: reduce files to delete in libexecdir
-EXTRA_OECONF += "--disable-gphoto2"
+EXTRA_OECONF += "--disable-gphoto2 --disable-afc"
 
 do_install_append() {
 	rm -rf ${D}${sysconfdir}
