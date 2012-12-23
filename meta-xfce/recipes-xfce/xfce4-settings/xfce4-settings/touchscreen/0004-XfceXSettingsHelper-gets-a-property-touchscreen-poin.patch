@@ -235,17 +235,15 @@ index 7657465..76bcea1 100644
      XCloseDisplay (xdisplay);
  
      if (gdk_error_trap_pop () != 0)
-diff --git a/xfsettingsd/xsettings.xml b/xfsettingsd/xsettings.xml
-index 0a579d6..baa413c 100644
 --- a/xfsettingsd/xsettings.xml
 +++ b/xfsettingsd/xsettings.xml
-@@ -41,5 +41,6 @@
+@@ -36,5 +36,6 @@
      <property name="MenuBarAccel" type="string" value="F10"/>
      <property name="CursorThemeName" type="string" value=""/>
      <property name="CursorThemeSize" type="int" value="0"/>
 +    <property name="TouchscreenMode" type="bool" value="false"/>
-     <property name="IMModule" type="string" value=""/>
    </property>
-</channel>-- 
+ </channel>
+-- 
 1.7.6.5
 
