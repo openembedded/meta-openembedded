@@ -6,11 +6,13 @@ LICENSE="GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f08a446809913fc9b3c718f0eaea0426 \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-PR = "r2"
+PR = "r3"
 
 DEPENDS = "libnotify3 gtk+3 libunique gvfs librsvg libexif gnome-desktop3"
 # optional: tracker
 
+# to include nautilus3/no-try-run-strftime.diff before the rest
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 BPN = "nautilus"
 inherit gnome
 
