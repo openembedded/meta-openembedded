@@ -17,8 +17,8 @@ BPN = "nautilus"
 inherit gnome
 
 SRC_URI += "file://no-try-run-strftime.diff"
-SRC_URI[archive.md5sum] = "949187b1f241137ad3a5e6bdca3dfb0b"
-SRC_URI[archive.sha256sum] = "6a4c6b75593f0e815763d0040878cd908da72318f18b05f33d24040e0d602b22"
+SRC_URI[archive.md5sum] = "ecd100ed94431363fa68b217351649c0"
+SRC_URI[archive.sha256sum] = "584e97d3eb093ee16a779809b679150a636bcd4a3767fb604993013b523d2df1"
 
 EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb --enable-nst-extension"
 export SYSROOT = "${STAGING_DIR_HOST}"
