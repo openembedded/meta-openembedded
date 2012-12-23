@@ -7,9 +7,9 @@ DEPENDS = "git-native boost libusb1 uhd-firmware orc-native"
 RDEPENDS_${PN} += "uhd-firmware"
 
 PE = "1"
-INC_PR = "r2"
+INC_PR = "r3"
 
-inherit cmake
+inherit cmake pythonnative
 
 PACKAGES =+ "${PN}-tests ${PN}-examples ${PN}-e1xx"
 
