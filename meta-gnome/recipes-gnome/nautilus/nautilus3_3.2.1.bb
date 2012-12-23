@@ -6,7 +6,7 @@ LICENSE="GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f08a446809913fc9b3c718f0eaea0426 \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-PR = "r3"
+PR = "r4"
 
 DEPENDS = "libnotify3 gtk+3 libunique gvfs librsvg libexif gnome-desktop3"
 # optional: tracker
@@ -35,7 +35,8 @@ FILES_${PN} += "${datadir}/icons \
                 ${datadir}/dbus-1 \
                 ${libdir}/nautilus/extensions*/*.so \
                "
-FILES_${PN}-dbg += "/usr/libexec/.debug"
+FILES_${PN}-dbg += "/usr/libexec/.debug \
+  ${libdir}/nautilus/extensions*/.debug"
 
 # Don't make nautils drag us in
 PRIVATE_LIBS = "libnautilus-extension.so.1"
