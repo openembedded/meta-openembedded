@@ -3,10 +3,11 @@ require gvfs.inc
 DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
 # optional: obexftp libcdio libimobiledevice 
 
-PR = "${INC_PR}.0"
+PR = "${INC_PR}.1"
 
 # in case of gnome-disk-utility was alresdy built: avoid double files
-EXTRA_OECONF += "--disable-gdu"
+# afc is enabled when it detects libimobiledevice
+EXTRA_OECONF += "--disable-gdu --disable-afc"
 
 PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
 
