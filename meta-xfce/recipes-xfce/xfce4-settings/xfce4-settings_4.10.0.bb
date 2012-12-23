@@ -3,12 +3,13 @@ SECTION = "x11/wm"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "exo garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtual/libx11 xrandr libnotify libxcursor libxklavier"
-PR = "r2"
+PR = "r3"
 
 inherit xfce
 
 SRC_URI += "file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
             file://0002-xsettings.xml-Set-default-themes.patch \
+            file://0003-Remember-the-settings-manager-window-size-bug-9384.patch \
             file://touchscreen/invisible \
             file://touchscreen/wait \
             file://touchscreen/0001-add-cursor-theme-xfce-invisible.patch \
