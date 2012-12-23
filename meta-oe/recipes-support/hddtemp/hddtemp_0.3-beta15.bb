@@ -2,11 +2,12 @@ SUMMARY = "Hard disk temperature monitor daemon"
 SECTION = "console/network"
 LICENSE = "GPLv2+"
 
+PR = "r1"
+
 SRC_URI = "http://download.savannah.nongnu.org/releases/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
            file://hddtemp-no-nls-support.patch \
            file://hddtemp_0.3-beta15-52.diff \
            file://hddtemp-0.3-beta15-autodetect-717479.patch \
-           file://hddtemp-db.patch;striplevel=0 \
            file://hddtemp.db \
            file://init \
            "
