@@ -1,6 +1,6 @@
 Remove CC and CFLAGS values, we set these ourselves
 
-Upstream-status: Inappropriate [config]
+Upstream-Status: Inappropriate [config]
 
 diff -urN vblade-19.old//makefile vblade-19//makefile
 --- vblade-19.old//makefile	2008-10-08 22:07:40.000000000 +0100

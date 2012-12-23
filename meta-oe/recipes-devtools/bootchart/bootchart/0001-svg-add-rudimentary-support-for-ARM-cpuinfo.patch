@@ -24,7 +24,7 @@ So no real way to get the actual SoC name, TI AM3359, but a lot better than 'Unk
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
 
-Upstream-status: submitted
+Upstream-Status: submitted
 
  svg.c |    4 ++++
  1 file changed, 4 insertions(+)

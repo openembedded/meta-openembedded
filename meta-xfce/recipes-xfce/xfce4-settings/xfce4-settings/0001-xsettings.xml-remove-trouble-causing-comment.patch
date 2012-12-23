@@ -5,7 +5,7 @@ Subject: [PATCH 1/2] xsettings.xml: remove trouble causing comment
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Upstream-status: Pending
+Upstream-Status: Pending
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>

@@ -5,7 +5,7 @@ Subject: [PATCH] Fix glib includes
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Upstream status: unknown
+Upstream-Status: unknown
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>

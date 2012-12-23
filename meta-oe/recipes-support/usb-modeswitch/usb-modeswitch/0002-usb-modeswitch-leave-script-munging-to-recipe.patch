@@ -6,7 +6,7 @@ Subject: [PATCH] usb-modeswitch: leave script munging to recipe
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
 
-Upstream-status: Unknown
+Upstream-Status: Unknown
 
  Makefile |   13 +------------
  1 files changed, 1 insertions(+), 12 deletions(-)

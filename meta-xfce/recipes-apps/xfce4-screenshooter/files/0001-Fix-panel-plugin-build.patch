@@ -7,7 +7,7 @@ Subject: [PATCH] Fix panel plugin build.
 - Build as a module.
 - Only export needed symbols.
 ---
-Upstream-status: applied
+Upstream-Status: applied
  Makefile.am |   12 +++++++++---
  1 files changed, 9 insertions(+), 3 deletions(-)
 

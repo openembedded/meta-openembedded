@@ -7,7 +7,7 @@ Subject: [PATCH 2/2] svg: open /etc/os-release and use PRETTY_NAME for the
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
 
-Upstream-status: Submitted
+Upstream-Status: Submitted
 
  svg.c |   11 +++++++++++
  1 file changed, 11 insertions(+)

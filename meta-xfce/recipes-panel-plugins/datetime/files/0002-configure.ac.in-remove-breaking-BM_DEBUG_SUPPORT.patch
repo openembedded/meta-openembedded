@@ -5,7 +5,7 @@ Subject: [PATCH] configure.ac.in: remove breaking BM_DEBUG_SUPPORT
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Upstream-status: pending
+Upstream-Status: pending
 
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>

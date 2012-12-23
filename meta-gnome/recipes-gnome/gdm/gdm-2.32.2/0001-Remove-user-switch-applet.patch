@@ -5,7 +5,7 @@ Subject: [PATCH] Remove user switch applet
 
 This hasn't been updated to work with gnome-panel > 2.30.0, so just drop it
 
-Upstream-status: unacceptable, backport
+Upstream-Status: unacceptable, backport
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---

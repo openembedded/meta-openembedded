@@ -5,7 +5,7 @@ Subject: [PATCH] gvfsfusedaemon.c: fix glib build
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Upstream-status: Applied but we can not use it because newer versions depend
+Upstream-Status: Applied but we can not use it because newer versions depend
 on gnome-disk-utiltity >= V3.02 which depends on gtk+ V3
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>

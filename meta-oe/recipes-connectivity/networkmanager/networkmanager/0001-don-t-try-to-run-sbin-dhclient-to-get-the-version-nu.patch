@@ -3,7 +3,7 @@ From: Koen Kooi <koen@dominion.thruhere.net>
 Date: Thu, 17 Nov 2011 11:17:42 +0100
 Subject: [PATCH] don't try to run /sbin/dhclient to get the version number, this break cross-compiling
 
-Upstream-status: Unknown
+Upstream-Status: Unknown
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---

@@ -6,7 +6,7 @@ Subject: [PATCH] php: don't use broken wrapper for mkdir
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
 
-Upstream-status: Inappropriate
+Upstream-Status: Inappropriate
 
  Makefile.global |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)

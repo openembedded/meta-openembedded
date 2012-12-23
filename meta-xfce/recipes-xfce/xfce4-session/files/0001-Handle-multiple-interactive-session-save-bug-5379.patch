@@ -9,7 +9,7 @@ anything on log out without session save.
 
 Based on original work by Chris Bainbridge (chris.bainbridge@gmail.com).
 ---
-Upstream-status: applied
+Upstream-Status: applied
  xfce4-session/xfsm-manager.c |   81 ++++++++++++++++++++++++-----------------
  1 files changed, 47 insertions(+), 34 deletions(-)
 

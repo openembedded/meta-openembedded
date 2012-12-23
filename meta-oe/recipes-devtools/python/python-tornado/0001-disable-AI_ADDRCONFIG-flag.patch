@@ -5,7 +5,7 @@ Subject: [PATCH] disable AI_ADDRCONFIG flag
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Upstream-status: unknown
+Upstream-Status: unknown
 ---
  tornado/netutil.py |    6 ------
  1 files changed, 0 insertions(+), 6 deletions(-)

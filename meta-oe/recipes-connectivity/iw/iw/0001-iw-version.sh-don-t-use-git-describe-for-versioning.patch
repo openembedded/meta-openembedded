@@ -5,7 +5,7 @@ Subject: [PATCH] iw: version.sh: don't use git describe for versioning
 
 It will detect top-level git repositories like the Angstrom setup-scripts and break.
 
-Upstream-status: Unknown
+Upstream-Status: Unknown
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---

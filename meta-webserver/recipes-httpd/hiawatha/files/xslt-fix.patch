@@ -1,4 +1,4 @@
-Upstream Status: Backport
+Upstream-Status: Backport
 Signed-off-by: Jack Mitchell <jack.mitchell@dbbroadcast.co.uk>
 ---
  src/xslt.c | 19 +++++++------------
