@@ -1,0 +1,380 @@
+Patch from Henning. %m is a glibc only thing. For uclibc we need to do it
+differently. So we use static strings instead of mallocing them and free'ing
+
+I dont know if upstream systemd have plans to make systemd work on non
+glibc system libraries if not then this patch would not make sense for 
+upstream
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Index: git/src/mount-setup.c
+===================================================================
+--- git.orig/src/mount-setup.c	2012-01-25 21:27:23.000000000 -0800
++++ git/src/mount-setup.c	2012-01-25 21:59:43.897031326 -0800
+@@ -182,10 +182,10 @@
+         (void) fgets(buf, sizeof(buf), f);
+ 
+         for (;;) {
+-                char *controller;
++                char controller[30];
+                 int enabled = 0;
+ 
+-                if (fscanf(f, "%ms %*i %*i %i", &controller, &enabled) != 2) {
++                if (fscanf(f, "%s %*i %*i %i", controller, &enabled) != 2) {
+ 
+                         if (feof(f))
+                                 break;
+@@ -196,14 +196,12 @@
+                 }
+ 
+                 if (!enabled) {
+-                        free(controller);
+                         continue;
+                 }
+ 
+                 r = set_put(controllers, controller);
+                 if (r < 0) {
+                         log_error("Failed to add controller to set.");
+-                        free(controller);
+                         goto finish;
+                 }
+         }
+@@ -273,7 +271,6 @@
+                 p.fatal = false;
+ 
+                 r = mount_one(&p, true);
+-                free(controller);
+                 free(where);
+ 
+                 if (r < 0) {
+Index: git/src/socket-util.c
+===================================================================
+--- git.orig/src/socket-util.c	2012-01-25 21:27:23.000000000 -0800
++++ git/src/socket-util.c	2012-01-25 21:59:43.897031326 -0800
+@@ -192,7 +192,7 @@
+ int socket_address_parse_netlink(SocketAddress *a, const char *s) {
+         int family;
+         unsigned group = 0;
+-        char* sfamily = NULL;
++        char sfamily[50];
+         assert(a);
+         assert(s);
+ 
+@@ -200,17 +200,14 @@
+         a->type = SOCK_RAW;
+ 
+         errno = 0;
+-        if (sscanf(s, "%ms %u", &sfamily, &group) < 1)
++        if (sscanf(s, "%49s %u", &sfamily, &group) < 1)
+                 return errno ? -errno : -EINVAL;
+ 
+         if ((family = netlink_family_from_string(sfamily)) < 0)
+                 if (safe_atoi(sfamily, &family) < 0) {
+-                        free(sfamily);
+                         return -EINVAL;
+                 }
+ 
+-        free(sfamily);
+-
+         a->sockaddr.nl.nl_family = AF_NETLINK;
+         a->sockaddr.nl.nl_groups = group;
+ 
+Index: git/src/swap.c
+===================================================================
+--- git.orig/src/swap.c	2012-01-25 21:27:23.000000000 -0800
++++ git/src/swap.c	2012-01-25 21:59:43.897031326 -0800
+@@ -1049,11 +1049,12 @@
+         (void) fscanf(m->proc_swaps, "%*s %*s %*s %*s %*s\n");
+ 
+         for (i = 1;; i++) {
+-                char *dev = NULL, *d;
++                char *d;
++                char dev[20];
+                 int prio = 0, k;
+ 
+                 if ((k = fscanf(m->proc_swaps,
+-                                "%ms "  /* device/file */
++                                "%19s "  /* device/file */
+                                 "%*s "  /* type of swap */
+                                 "%*s "  /* swap size */
+                                 "%*s "  /* used */
+@@ -1064,12 +1065,10 @@
+                                 break;
+ 
+                         log_warning("Failed to parse /proc/swaps:%u.", i);
+-                        free(dev);
+                         continue;
+                 }
+ 
+                 d = cunescape(dev);
+-                free(dev);
+ 
+                 if (!d)
+                         return -ENOMEM;
+Index: git/src/tmpfiles.c
+===================================================================
+--- git.orig/src/tmpfiles.c	2012-01-25 21:27:23.000000000 -0800
++++ git/src/tmpfiles.c	2012-01-25 22:06:58.649052774 -0800
+@@ -73,8 +73,8 @@
+ typedef struct Item {
+         ItemType type;
+ 
+-        char *path;
+-        char *argument;
++        char path[50];
++        char argument[50];
+         uid_t uid;
+         gid_t gid;
+         mode_t mode;
+@@ -822,7 +822,6 @@
+         case CREATE_CHAR_DEVICE:
+         case CREATE_BLOCK_DEVICE:
+         case IGNORE_PATH:
+-        case RELABEL_PATH:
+         case RECURSIVE_RELABEL_PATH:
+         case WRITE_FILE:
+                 break;
+@@ -858,8 +857,6 @@
+ static void item_free(Item *i) {
+         assert(i);
+ 
+-        free(i->path);
+-        free(i->argument);
+         free(i);
+ }
+ 
+@@ -906,7 +903,7 @@
+ 
+ static int parse_line(const char *fname, unsigned line, const char *buffer) {
+         Item *i, *existing;
+-        char *mode = NULL, *user = NULL, *group = NULL, *age = NULL;
++        char mode[50], user[50], group[50], age[50];
+         char type;
+         Hashmap *h;
+         int r, n = -1;
+@@ -923,18 +920,18 @@
+ 
+         if (sscanf(buffer,
+                    "%c "
+-                   "%ms "
+-                   "%ms "
+-                   "%ms "
+-                   "%ms "
+-                   "%ms "
++                   "%s "
++                   "%s "
++                   "%s "
++                   "%s "
++                   "%s "
+                    "%n",
+                    &type,
+                    &i->path,
+-                   &mode,
+-                   &user,
+-                   &group,
+-                   &age,
++                   mode,
++                   user,
++                   group,
++                   age,
+                    &n) < 2) {
+                 log_error("[%s:%u] Syntax error.", fname, line);
+                 r = -EIO;
+@@ -1096,11 +1093,6 @@
+         r = 0;
+ 
+ finish:
+-        free(user);
+-        free(group);
+-        free(mode);
+-        free(age);
+-
+         if (i)
+                 item_free(i);
+ 
+Index: git/src/mount.c
+===================================================================
+--- git.orig/src/mount.c	2012-01-25 21:27:23.000000000 -0800
++++ git/src/mount.c	2012-01-25 21:59:43.901031505 -0800
+@@ -24,6 +24,7 @@
+ #include <mntent.h>
+ #include <sys/epoll.h>
+ #include <signal.h>
++#include <string.h>
+ 
+ #include "unit.h"
+ #include "mount.h"
+@@ -1561,7 +1562,13 @@
+ static int mount_load_proc_self_mountinfo(Manager *m, bool set_flags) {
+         int r = 0;
+         unsigned i;
+-        char *device, *path, *options, *options2, *fstype, *d, *p, *o;
++        char *d, *p, *o;
++        char device[50];
++        char path[50];
++        char options[50];
++        char options2[50];
++        char fstype[50];
++
+ 
+         assert(m);
+ 
+@@ -1570,26 +1577,26 @@
+         for (i = 1;; i++) {
+                 int k;
+ 
+-                device = path = options = options2 = fstype = d = p = o = NULL;
++                d = p = o = NULL;
+ 
+                 if ((k = fscanf(m->proc_self_mountinfo,
+                                 "%*s "       /* (1) mount id */
+                                 "%*s "       /* (2) parent id */
+                                 "%*s "       /* (3) major:minor */
+                                 "%*s "       /* (4) root */
+-                                "%ms "       /* (5) mount point */
+-                                "%ms"        /* (6) mount options */
++                                "%49s "       /* (5) mount point */
++                                "%49s"        /* (6) mount options */
+                                 "%*[^-]"     /* (7) optional fields */
+                                 "- "         /* (8) separator */
+-                                "%ms "       /* (9) file system type */
+-                                "%ms"        /* (10) mount source */
+-                                "%ms"        /* (11) mount options 2 */
++                                "%49s "       /* (9) file system type */
++                                "%49s"        /* (10) mount source */
++                                "%49s"        /* (11) mount options 2 */
+                                 "%*[^\n]",   /* some rubbish at the end */
+-                                &path,
+-                                &options,
+-                                &fstype,
+-                                &device,
+-                                &options2)) != 5) {
++                                path,
++                                options,
++                                fstype,
++                                device,
++                                options2)) != 5) {
+ 
+                         if (k == EOF)
+                                 break;
+@@ -1613,22 +1620,12 @@
+                         r = k;
+ 
+ clean_up:
+-                free(device);
+-                free(path);
+-                free(options);
+-                free(options2);
+-                free(fstype);
+                 free(d);
+                 free(p);
+                 free(o);
+         }
+ 
+ finish:
+-        free(device);
+-        free(path);
+-        free(options);
+-        free(options2);
+-        free(fstype);
+         free(d);
+         free(p);
+         free(o);
+Index: git/src/umount.c
+===================================================================
+--- git.orig/src/umount.c	2012-01-25 21:27:23.000000000 -0800
++++ git/src/umount.c	2012-01-25 21:59:43.901031505 -0800
+@@ -60,7 +60,9 @@
+ 
+ static int mount_points_list_get(MountPoint **head) {
+         FILE *proc_self_mountinfo;
+-        char *path, *p;
++        char *p;
++        char path[50];
++
+         unsigned int i;
+         int r;
+ 
+@@ -72,17 +74,17 @@
+         for (i = 1;; i++) {
+                 int k;
+                 MountPoint *m;
+-                char *root;
++                char root[50];
+                 bool skip_ro;
+ 
+-                path = p = NULL;
++                p = NULL;
+ 
+                 if ((k = fscanf(proc_self_mountinfo,
+                                 "%*s "       /* (1) mount id */
+                                 "%*s "       /* (2) parent id */
+                                 "%*s "       /* (3) major:minor */
+-                                "%ms "       /* (4) root */
+-                                "%ms "       /* (5) mount point */
++                                "%49s "       /* (4) root */
++                                "%49s "       /* (5) mount point */
+                                 "%*s"        /* (6) mount options */
+                                 "%*[^-]"     /* (7) optional fields */
+                                 "- "         /* (8) separator */
+@@ -90,24 +92,21 @@
+                                 "%*s"        /* (10) mount source */
+                                 "%*s"        /* (11) mount options 2 */
+                                 "%*[^\n]",   /* some rubbish at the end */
+-                                &root,
+-                                &path)) != 2) {
++                                root,
++                                path)) != 2) {
+                         if (k == EOF)
+                                 break;
+ 
+                         log_warning("Failed to parse /proc/self/mountinfo:%u.", i);
+ 
+-                        free(path);
+                         continue;
+                 }
+ 
+                 /* If we encounter a bind mount, don't try to remount
+                  * the source dir too early */
+                 skip_ro = !streq(root, "/");
+-                free(root);
+ 
+                 p = cunescape(path);
+-                free(path);
+ 
+                 if (!p) {
+                         r = -ENOMEM;
+@@ -152,28 +151,28 @@
+ 
+         for (i = 2;; i++) {
+                 MountPoint *swap;
+-                char *dev = NULL, *d;
++                char *d;
++                char dev[50];
++
+                 int k;
+ 
+                 if ((k = fscanf(proc_swaps,
+-                                "%ms " /* device/file */
++                                "%50s " /* device/file */
+                                 "%*s " /* type of swap */
+                                 "%*s " /* swap size */
+                                 "%*s " /* used */
+                                 "%*s\n", /* priority */
+-                                &dev)) != 1) {
++                                dev)) != 1) {
+ 
+                         if (k == EOF)
+                                 break;
+ 
+                         log_warning("Failed to parse /proc/swaps:%u.", i);
+ 
+-                        free(dev);
+                         continue;
+                 }
+ 
+                 if (endswith(dev, "(deleted)")) {
+-                        free(dev);
+                         continue;
+                 }
+ 
