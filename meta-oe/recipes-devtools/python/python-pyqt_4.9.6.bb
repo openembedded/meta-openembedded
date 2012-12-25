@@ -21,8 +21,8 @@ SRC_URI = "\
   ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
   file://pyqt-generated.patch;apply=no \
 "
-SRC_URI[md5sum] = "e4cdd6619c63655f7510efb4df8462fb"
-SRC_URI[sha256sum] = "75ff0a3a088ae22c4d6e8adb242f7e593104af93933cbdd9900bc7b06f46191e"
+SRC_URI[md5sum] = "514e1f9597771dc732ba75ba9fa5c6b6"
+SRC_URI[sha256sum] = "a350f9e5c6d8062671c0f29bf1a70824719b18175ce8372c29bf7c1eda44b18d"
 S = "${WORKDIR}/PyQt-x11-gpl-${PV}"
 
 # arm and mips machines need some extra patches
