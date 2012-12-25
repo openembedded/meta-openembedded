@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://siplib.sbf.in;endline=15;md5=e0e7b5d0c4656666df09826e
 DEPENDS = "python"
 RDEPENDS_${PN} = "python-core"
 
-SRC_URI = "http://www.riverbankcomputing.com/static/Downloads/sip4/sip-${PV}.tar.gz"
+# riverbankcomputing is upstream, but keeps only latest version, sf usually have few older
+#SRC_URI = "http://www.riverbankcomputing.com/static/Downloads/sip4/sip-${PV}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
 
 S = "${WORKDIR}/sip-${PV}/siplib"
 
