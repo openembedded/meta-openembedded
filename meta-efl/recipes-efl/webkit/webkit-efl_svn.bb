@@ -12,7 +12,7 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
 # 120145 and 122103 introduces dependency on libsoup-2.39.3 and glib-networking-2.33.2
 SRCREV = "120144"
 PV = "1.9.3+svnr${SRCPV}"
-PR = "r1"
+PR = "r2"
 
 SRCREV_FORMAT = "source"
 
@@ -21,6 +21,7 @@ SRC_URI = "\
   svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
   svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
   file://CMakeLists.txt \
+  file://bison-2.6.patch \
 "
 
 S = "${WORKDIR}/src"
