@@ -24,7 +24,7 @@ CONFIG_DRIVER_PRISM54=y
 
 # Driver interface for drivers using the nl80211 kernel interface
 CONFIG_DRIVER_NL80211=y
-CONFIG_LIBNL20=y
+CONFIG_LIBNL32=y
 # driver_nl80211.c requires a rather new libnl (version 1.1) which may not be
 # shipped with your distribution yet. If that is the case, you need to build
 # newer libnl version and point the hostapd build to use it.

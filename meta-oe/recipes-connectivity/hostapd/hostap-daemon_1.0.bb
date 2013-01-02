@@ -26,6 +26,7 @@ do_configure() {
 }
 
 do_compile() {
+	export CFLAGS="-MMD -O2 -Wall -g -I${STAGING_INCDIR}/libnl3"
 	make
 }
 
