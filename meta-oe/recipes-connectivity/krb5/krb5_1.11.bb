@@ -35,5 +35,6 @@ python do_unpack() {
 }
 
 do_configure() {
-	oe_runconf
+    gnu-configize --force
+    oe_runconf
 }
