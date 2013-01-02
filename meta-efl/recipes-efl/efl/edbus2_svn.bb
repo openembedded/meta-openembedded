@@ -6,7 +6,7 @@ PR = "${INC_PR}.1"
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = "\
-  ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
+  ${E_SVN}/trunk/IN-EFL;module=${SRCNAME};protocol=http;scmdata=keep \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
