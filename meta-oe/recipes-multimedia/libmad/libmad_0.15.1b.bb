@@ -6,10 +6,14 @@ DEPENDS = "libid3tag"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
+PR = "r1"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/mad/libmad-${PV}.tar.gz \
            file://add-pkgconfig.patch \
            file://mad.diff \
-           file://mad-mips-h-constraint.patch"
+           file://mad-mips-h-constraint.patch \
+           file://obsolete_automake_macros.patch \
+"
 
 SRC_URI_append_avr32 = " file://libmad-0.15.1b-avr32-optimization.patch"
 
