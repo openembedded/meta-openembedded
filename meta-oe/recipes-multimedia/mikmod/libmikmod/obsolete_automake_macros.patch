@@ -1,0 +1,15 @@
+Upstream-Status: Submitted (https://sourceforge.net/tracker/?func=detail&aid=3599281&group_id=40531&atid=428227)
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+diff -Nurd libmikmod-3.1.12/configure.in libmikmod-3.1.12/configure.in
+--- libmikmod-3.1.12/configure.in	2007-12-15 11:22:57.000000000 +0200
++++ libmikmod-3.1.12/configure.in	2013-01-03 07:26:10.662775603 +0200
+@@ -13,7 +13,7 @@
+ LIBMIKMOD_VERSION=$LIBMIKMOD_MAJOR_VERSION.$LIBMIKMOD_MINOR_VERSION.$LIBMIKMOD_MICRO_VERSION$BETA
+
+ AM_INIT_AUTOMAKE(libmikmod,$LIBMIKMOD_VERSION)
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS(config.h)
+ AM_MAINTAINER_MODE
+
+ # ==============================================================

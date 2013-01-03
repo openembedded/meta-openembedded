@@ -11,6 +11,7 @@ SRC_URI = "\
   file://autofoo.patch \
   file://ldflags.patch \
   file://CVE-2010-2971.patch \
+  file://obsolete_automake_macros.patch \
 "
 
 SRC_URI[md5sum] = "9f3c740298260d5f88981fc0d51f6f16"
