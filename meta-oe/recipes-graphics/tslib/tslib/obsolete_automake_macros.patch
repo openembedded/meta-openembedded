@@ -1,0 +1,16 @@
+Upstream-Status: Submitted [https://github.com/kergoth/tslib/pull/14]
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+diff --git a/configure.ac b/configure.ac
+index c42be91..6d71be0 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -6,7 +6,7 @@ AC_INIT(tslib, 1.0.0, kergoth@handhelds.org)
+ # AC_CONFIG_AUX_DIR(config)
+ AM_INIT_AUTOMAKE(dist-bzip2)
+ AC_CONFIG_SRCDIR([src/ts_close.c])
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS(config.h)
+
+ PACKAGE_DESCRIPTION="Touchscreen Access Library"
+ AC_SUBST(PACKAGE_DESCRIPTION)

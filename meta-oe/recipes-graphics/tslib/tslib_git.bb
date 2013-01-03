@@ -10,11 +10,12 @@ SECTION = "base"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-PR = "r0"
+PR = "r1"
 
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = "git://github.com/kergoth/tslib.git;protocol=git \
+           file://obsolete_automake_macros.patch \
            file://ts.conf \
            file://tslib.sh"
 SRCREV = "e17263ef401ee885a27d649b90b577cfb44500e0"
