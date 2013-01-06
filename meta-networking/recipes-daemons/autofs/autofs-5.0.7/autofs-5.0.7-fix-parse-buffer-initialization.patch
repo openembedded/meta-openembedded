@@ -1,0 +1,51 @@
+autofs-5.0.7 - fix parse buffer initialization
+
+From: Ian Kent <ikent@redhat.com>
+
+When parsing a master map entry, if the mount point path is longer than
+the following map string the lexical analyzer buffer may not have a null
+terminator where it is expected. If the map name string also contains a
+string that is the same as a map type at the end the map name the map
+name is not constructed correctly because of this lack of a string
+terminator in the buffer.
+---
+
+ CHANGELOG        |    1 +
+ lib/master_tok.l |    4 +++-
+ 2 files changed, 4 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 34c70fa..276d6ba 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -3,6 +3,7 @@
+ - fix nobind sun escaped map entries.
+ - fix use cache entry after free in lookup_prune_one_cache().
+ - fix ipv6 proximity calculation.
++- fix parse buffer initialization.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/lib/master_tok.l b/lib/master_tok.l
+index 0d6edb7..30abb15 100644
+--- a/lib/master_tok.l
++++ b/lib/master_tok.l
+@@ -74,7 +74,8 @@ int my_yyinput(char *, int);
+ #define unput(c) (*(char *) --line = c)
+ #endif
+ 
+-char buff[1024];
++#define BUFF_LEN	1024
++char buff[BUFF_LEN];
+ char *bptr;
+ char *optr = buff;
+ unsigned int tlen;
+@@ -174,6 +175,7 @@ OPTNTOUT	(-n{OPTWS}|-n{OPTWS}={OPTWS}|--negative-timeout{OPTWS}|--negative-timeo
+ 		*bptr = '\0';
+ 		strcpy(master_lval.strtype, buff);
+ 		bptr = buff;
++		memset(buff, 0, BUFF_LEN);
+ 		return(PATH);
+ 	}
+ 

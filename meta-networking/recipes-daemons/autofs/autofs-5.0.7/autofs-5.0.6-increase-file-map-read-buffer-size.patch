@@ -1,0 +1,38 @@
+autofs-5.0.6 - increase file map read buffer size
+
+From: Ian Kent <raven@themaw.net>
+
+The file map entry read buffer can be too small for larger
+multi-mount map entries so increase it.
+---
+
+ CHANGELOG           |    1 +
+ include/automount.h |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 9cdad6e..3bdf8a4 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -13,6 +13,7 @@
+ - README: update mailing list subscription info.
+ - allow non root user to check status.
+ - fix recursive mount deadlock.
++- increase file map read buffer size.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/include/automount.h b/include/automount.h
+index 561fcc2..37541f5 100644
+--- a/include/automount.h
++++ b/include/automount.h
+@@ -233,7 +233,7 @@ int rmdir_path(struct autofs_point *ap, const char *path, dev_t dev);
+ #define AUTOFS_LOOKUP_VERSION 5
+ 
+ #define KEY_MAX_LEN    NAME_MAX
+-#define MAPENT_MAX_LEN 4095
++#define MAPENT_MAX_LEN 16384
+ #define PARSE_MAX_BUF	KEY_MAX_LEN + MAPENT_MAX_LEN + 2
+ 
+ int lookup_nss_read_master(struct master *master, time_t age);

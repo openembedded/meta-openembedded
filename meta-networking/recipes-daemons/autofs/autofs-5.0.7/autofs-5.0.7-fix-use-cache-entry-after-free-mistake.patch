@@ -1,0 +1,49 @@
+autofs-5.0.7 - fix use cache entry after free mistake
+
+From: Ian Kent <ikent@redhat.com>
+
+Fix an obvious use after free mistake in lookup_prune_one_cache().
+---
+
+ CHANGELOG       |    1 +
+ daemon/lookup.c |    7 +++++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index faf4c80..dc38580 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -1,6 +1,7 @@
+ ??/??/2012 autofs-5.0.8
+ =======================
+ - fix nobind sun escaped map entries.
++- fix use cache entry after free in lookup_prune_one_cache().
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/daemon/lookup.c b/daemon/lookup.c
+index 7909536..e3d9536 100644
+--- a/daemon/lookup.c
++++ b/daemon/lookup.c
+@@ -1103,15 +1103,18 @@ void lookup_prune_one_cache(struct autofs_point *ap, struct mapent_cache *mc, ti
+ 		if (valid)
+ 			cache_delete(mc, key);
+ 		else if (!is_mounted(_PROC_MOUNTS, path, MNTS_AUTOFS)) {
++			dev_t devid = ap->dev;
+ 			status = CHE_FAIL;
++			if (ap->type == LKP_DIRECT)
++				devid = this->dev;
+ 			if (this->ioctlfd == -1)
+ 				status = cache_delete(mc, key);
+ 			if (status != CHE_FAIL) {
+ 				if (ap->type == LKP_INDIRECT) {
+ 					if (ap->flags & MOUNT_FLAG_GHOST)
+-						rmdir_path(ap, path, ap->dev);
++						rmdir_path(ap, path, devid);
+ 				} else
+-					rmdir_path(ap, path, this->dev);
++					rmdir_path(ap, path, devid);
+ 			}
+ 		}
+ 		cache_unlock(mc);

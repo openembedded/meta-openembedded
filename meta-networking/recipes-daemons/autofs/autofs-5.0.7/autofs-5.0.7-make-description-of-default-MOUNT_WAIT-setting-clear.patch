@@ -1,0 +1,57 @@
+autofs-5.0.7 - make description of default MOUNT_WAIT setting clear
+
+From: Ian Kent <ikent@redhat.com>
+
+
+---
+
+ CHANGELOG                      |    1 +
+ redhat/autofs.sysconfig.in     |    5 +++--
+ samples/autofs.conf.default.in |    5 +++--
+ 3 files changed, 7 insertions(+), 4 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 79cf673..961e340 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -8,6 +8,7 @@
+ - dont wait forever to restart.
+ - add timeout option description to man page.
+ - fix null map entry order handling.
++- make description of default MOUNT_WAIT setting clear.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/redhat/autofs.sysconfig.in b/redhat/autofs.sysconfig.in
+index 36b924d..a8992c4 100644
+--- a/redhat/autofs.sysconfig.in
++++ b/redhat/autofs.sysconfig.in
+@@ -18,8 +18,9 @@ TIMEOUT=300
+ # 	       Setting this timeout can cause problems when
+ # 	       mount would otherwise wait for a server that
+ # 	       is temporarily unavailable, such as when it's
+-# 	       restarting. The defailt of waiting for mount(8)
+-# 	       usually results in a wait of around 3 minutes.
++# 	       restarting. The default setting (-1) of waiting
++# 	       for mount(8) usually results in a wait of around
++# 	       3 minutes.
+ #
+ #MOUNT_WAIT=-1
+ #
+diff --git a/samples/autofs.conf.default.in b/samples/autofs.conf.default.in
+index ac2f63b..1da89cf 100644
+--- a/samples/autofs.conf.default.in
++++ b/samples/autofs.conf.default.in
+@@ -18,8 +18,9 @@ TIMEOUT=300
+ # 	       Setting this timeout can cause problems when
+ # 	       mount would otherwise wait for a server that
+ # 	       is temporarily unavailable, such as when it's
+-# 	       restarting. The defailt of waiting for mount(8)
+-# 	       usually results in a wait of around 3 minutes.
++# 	       restarting. The default setting (-1) of waiting
++# 	       for mount(8) usually results in a wait of around
++# 	       3 minutes.
+ #
+ #MOUNT_WAIT=-1
+ #

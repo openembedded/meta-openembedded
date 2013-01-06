@@ -1,0 +1,57 @@
+autofs-5.0.7 - Handle new location of systemd
+
+From: Frederic Crozat <fcrozat@suse.com>
+
+Some distributions are moving systemd unit files from /lib to
+/usr/lib, so we need to test both directories.
+
+edit: imk
+It occurs to me I've forgotten to check for the 64 bit variants
+of the directories, so add them as well.
+end edit: imk
+---
+
+ CHANGELOG  |    1 +
+ aclocal.m4 |    2 +-
+ configure  |    2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 3bdf8a4..8f6bb3a 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -14,6 +14,7 @@
+ - allow non root user to check status.
+ - fix recursive mount deadlock.
+ - increase file map read buffer size.
++- handle new location of systemd.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/aclocal.m4 b/aclocal.m4
+index 1798c8b..47bca0c 100644
+--- a/aclocal.m4
++++ b/aclocal.m4
+@@ -234,7 +234,7 @@ AC_DEFUN([AF_WITH_SYSTEMD],
+ [if test "$withval" = yes; then
+   if test -z "$systemddir"; then
+     AC_MSG_CHECKING([location of the systemd unit files directory])
+-    for systemd_d in /lib/systemd/system; do
++    for systemd_d in /usr/lib/systemd/system /usr/lib64/systemd/system /lib/systemd/system /lib64/systemd/system; do
+       if test -z "$systemddir"; then
+         if test -d "$systemd_d"; then
+           systemddir="$systemd_d"
+diff --git a/configure b/configure
+index ba3bba6..3722a46 100755
+--- a/configure
++++ b/configure
+@@ -2157,7 +2157,7 @@ if test "${with_systemd+set}" = set; then :
+   if test -z "$systemddir"; then
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking location of the systemd unit files directory" >&5
+ $as_echo_n "checking location of the systemd unit files directory... " >&6; }
+-    for systemd_d in /lib/systemd/system; do
++    for systemd_d in /usr/lib/systemd/system /usr/lib64/systemd/system /lib/systemd/system /lib64/systemd/system; do
+       if test -z "$systemddir"; then
+         if test -d "$systemd_d"; then
+           systemddir="$systemd_d"

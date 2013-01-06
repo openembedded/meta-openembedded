@@ -1,0 +1,78 @@
+autofs-5.0.6 - fix recursive mount deadlock
+
+From: Ian Kent <raven@themaw.net>
+
+Prior to the vfs-automount changes that went into 2.6.38
+and were finalized in 3.1 it was not possible to block
+path walks into multi-mounts whose root was covered by
+another mount. To deal with that a write lock was used
+to ensure the mount tree construction was completed. This
+restricts the types of recursively defined mount maps that
+can be used and can lead to a deadlock during lookup.
+
+Now that we can prevent processes walking into multi-mounts
+that are under construction we no longer need to use a
+write lock.
+
+Also, in the patch below, a cache writelock is changed to
+a read lock because a write lock isn't needed since the
+map cache entry isn't being updated.
+---
+
+ CHANGELOG       |    1 +
+ daemon/direct.c |   14 ++++++++++++--
+ 2 files changed, 13 insertions(+), 2 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 936c9ab..9cdad6e 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -12,6 +12,7 @@
+ - configure.in: allow cross compilation.
+ - README: update mailing list subscription info.
+ - allow non root user to check status.
++- fix recursive mount deadlock.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/daemon/direct.c b/daemon/direct.c
+index 7e2f0d7..3e09c5d 100644
+--- a/daemon/direct.c
++++ b/daemon/direct.c
+@@ -1285,6 +1285,8 @@ int handle_packet_missing_direct(struct autofs_point *ap, autofs_packet_missing_
+ 	struct timespec wait;
+ 	struct timeval now;
+ 	int ioctlfd, len, state;
++	unsigned int kver_major = get_kver_major();
++	unsigned int kver_minor = get_kver_minor();
+ 
+ 	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &state);
+ 
+@@ -1297,8 +1299,16 @@ int handle_packet_missing_direct(struct autofs_point *ap, autofs_packet_missing_
+ 	 * cache entry we will not be able to find the mapent. So
+ 	 * we must take the source writelock to ensure the parent
+ 	 * has mount is complete before we look for the entry.
++	 *
++	 * Since the vfs-automount kernel changes we can now block
++	 * on covered mounts during mount tree construction so a
++	 * write lock is no longer needed. So we now can handle a
++	 * wider class of recursively define mount lookups.
+ 	 */
+-	master_source_writelock(ap->entry);
++	if (kver_major > 5 || (kver_major == 5 && kver_minor > 1))
++		master_source_readlock(ap->entry);
++	else
++		master_source_writelock(ap->entry);
+ 	map = ap->entry->maps;
+ 	while (map) {
+ 		/*
+@@ -1311,7 +1321,7 @@ int handle_packet_missing_direct(struct autofs_point *ap, autofs_packet_missing_
+ 		}
+ 
+ 		mc = map->mc;
+-		cache_writelock(mc);
++		cache_readlock(mc);
+ 		me = cache_lookup_ino(mc, pkt->dev, pkt->ino);
+ 		if (me)
+ 			break;

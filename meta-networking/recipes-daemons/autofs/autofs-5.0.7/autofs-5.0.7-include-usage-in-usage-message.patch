@@ -1,0 +1,25 @@
+autofs-5.0.7 - include usage in usage message
+
+From: Ian Kent <ikent@redhat.com>
+
+Since usage is a case entry we should also nclude it in the usage
+message.
+---
+
+ redhat/autofs.init.in |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+
+diff --git a/redhat/autofs.init.in b/redhat/autofs.init.in
+index 8e355da..ec6d5d6 100644
+--- a/redhat/autofs.init.in
++++ b/redhat/autofs.init.in
+@@ -155,7 +155,7 @@ function reload() {
+ }
+ 
+ function usage_message() {
+-	echo $"Usage: $0 {start|forcestart|stop|status|restart|force-reload|forcerestart|reload|condrestart|try-restart}"
++	echo $"Usage: $0 {start|forcestart|stop|status|restart|force-reload|forcerestart|reload|condrestart|try-restart|usage}"
+ }
+ 
+ RETVAL=0

@@ -1,0 +1,28 @@
+autofs-5.0.7 - configure: allow cross compilation update
+
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+
+Run "make distclean" to update configure. This should have been included
+in 5936c738 when configure.in was updated but it was missed.
+---
+
+ configure |    5 +----
+ 1 files changed, 1 insertions(+), 4 deletions(-)
+
+
+diff --git a/configure b/configure
+index bf62203..ba3bba6 100755
+--- a/configure
++++ b/configure
+@@ -5378,10 +5378,7 @@ DAEMON_LDFLAGS=
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether gcc -fPIE works" >&5
+ $as_echo_n "checking whether gcc -fPIE works... " >&6; }
+ if test "$cross_compiling" = yes; then :
+-  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+-$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+-as_fn_error $? "cannot run test program while cross compiling
+-See \`config.log' for more details" "$LINENO" 5; }
++  gcc_supports_pie=no
+ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */

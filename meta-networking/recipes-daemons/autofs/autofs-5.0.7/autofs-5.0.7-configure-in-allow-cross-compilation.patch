@@ -1,0 +1,41 @@
+autofs-5.0.7 - configure.in: allow cross compilation
+
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+
+The default behaviour of AC_RUN_IFELSE is to stop with an error if cross
+compiling. Avoid this by providing the optional 4th argument to set
+gcc_supports_pie=no if support for PIE cannot be detected.
+
+Signed-off-by: Chris Packham <chris.packham@alliedtelesis.co.nz>
+---
+
+ CHANGELOG    |    1 +
+ configure.in |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 961e340..fe801e8 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -9,6 +9,7 @@
+ - add timeout option description to man page.
+ - fix null map entry order handling.
+ - make description of default MOUNT_WAIT setting clear.
++- configure.in: allow cross compilation.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/configure.in b/configure.in
+index 1a24e34..90bda62 100644
+--- a/configure.in
++++ b/configure.in
+@@ -307,7 +307,7 @@ DAEMON_CFLAGS=
+ DAEMON_LDFLAGS=
+ AC_MSG_CHECKING([whether gcc -fPIE works])
+ AC_RUN_IFELSE([AC_LANG_PROGRAM([[]], [[int main(void) {return 0;}]])],
+-	      [gcc_supports_pie=yes], [gcc_supports_pie=no])
++	      [gcc_supports_pie=yes], [gcc_supports_pie=no], [gcc_supports_pie=no])
+ AC_MSG_RESULT([$gcc_supports_pie])
+ if test $gcc_supports_pie = yes ; then
+ 	DAEMON_CFLAGS="-fPIE"

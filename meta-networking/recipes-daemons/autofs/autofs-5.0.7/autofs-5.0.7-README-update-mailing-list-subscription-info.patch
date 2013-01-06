@@ -1,0 +1,56 @@
+autofs-5.0.7 - README: update mailing list subscription info
+
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+
+Following the kernel.org compromise the mailing list was moved to
+vger.kernel.org. Update the subscription info and add URLs for the gmane
+mailing list archive.
+
+Signed-off-by: Chris Packham <chris.packham@alliedtelesis.co.nz>
+---
+
+ CHANGELOG |    1 +
+ README    |   17 ++++++++++++++---
+ 2 files changed, 15 insertions(+), 3 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index fe801e8..44c9fb2 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -10,6 +10,7 @@
+ - fix null map entry order handling.
+ - make description of default MOUNT_WAIT setting clear.
+ - configure.in: allow cross compilation.
++- README: update mailing list subscription info.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/README b/README
+index cef16a9..9024e64 100644
+--- a/README
++++ b/README
+@@ -43,9 +43,20 @@ Fitzhardinge's <jeremy@goop.org> work on autofs 3. Further enhancements
+ have been made by Ian Kent <raven@themaw.net>.
+ 
+ If you use or want to help develop autofs, please join the autofs
+-mailing list by visiting:
++mailing list by sending an email to:
+ 
+-	http://linux.kernel.org/mailman/listinfo/autofs
++	majordomo@vger.kernel.org
+ 
+-and folling the instructions there to subscribe to the autofs mailing list.
++With the body text:
++
++	subscribe autofs
++
++Once subscribed you can send patches to:
++
++	autofs@vger.kernel.org
++
++The autofs mailing list archive can be viewed on gmane:
++
++	http://news.gmane.org/gmane.linux.kernel.autofs
++	http://blog.gmane.org/gmane.linux.kernel.autofs
+ 

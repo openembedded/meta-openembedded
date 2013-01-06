@@ -1,0 +1,37 @@
+autofs-5.0.7 - fix typo in automount(8)
+
+From: Ian Kent <ikent@redhat.com>
+
+
+---
+
+ CHANGELOG       |    1 +
+ man/automount.8 |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 276d6ba..6051723 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -4,6 +4,7 @@
+ - fix use cache entry after free in lookup_prune_one_cache().
+ - fix ipv6 proximity calculation.
+ - fix parse buffer initialization.
++- fix typo in automount(8).
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/man/automount.8 b/man/automount.8
+index 0186984..dddebce 100644
+--- a/man/automount.8
++++ b/man/automount.8
+@@ -51,7 +51,7 @@ are over-ridden macro definitions of the same name specified in
+ mount entries.
+ .TP
+ .I "\-f, \-\-foreground"
+-Run the daemon in the forground and log to stderr instead of syslog."
++Run the daemon in the foreground and log to stderr instead of syslog."
+ .TP
+ .I "\-r, \-\-random-multimount-selection"
+ Enables the use of ramdom selection when choosing a host from a

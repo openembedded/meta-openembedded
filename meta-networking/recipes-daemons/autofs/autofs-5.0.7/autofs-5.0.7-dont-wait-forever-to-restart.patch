@@ -1,0 +1,54 @@
+autofs-5.0.7 - dont wait forever to restart
+
+From: Ian Kent <ikent@redhat.com>
+
+When restarting autofs the daemon must be stopped before it is started
+again if it is to function properly. At the moment the init script waits
+forever which is not ok if the daemon won't exit for some reason.
+
+So, if the daemon is still running after the stop, run stop() again, wait
+a bit longer and if it still hasn't stopped kill it with a SIGKILL to clear
+the way for the startup.
+---
+
+ CHANGELOG             |    1 +
+ redhat/autofs.init.in |   13 ++++++++++---
+ 2 files changed, 11 insertions(+), 3 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 6051723..93b9c26 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -5,6 +5,7 @@
+ - fix ipv6 proximity calculation.
+ - fix parse buffer initialization.
+ - fix typo in automount(8).
++- dont wait forever to restart.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/redhat/autofs.init.in b/redhat/autofs.init.in
+index ec6d5d6..cd5cb34 100644
+--- a/redhat/autofs.init.in
++++ b/redhat/autofs.init.in
+@@ -129,9 +129,16 @@ function restart() {
+ 	status autofs > /dev/null 2>&1
+ 	if [ $? -eq 0 ]; then
+ 		stop
+-		while [ -n "`pidof $prog`" ] ; do
+-			sleep 5
+-		done
++		if [ -n "`pidof $prog`" ]; then
++			# If we failed to stop, try at least one more time
++			# after waiting a little while
++			sleep 20
++			stop
++			auto_pid=`pidof $prog`
++			if [ -n "$auto_pid" ]; then
++				kill -9 $auto_pid
++			fi
++		fi
+ 	fi
+ 	start
+ }

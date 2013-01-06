@@ -1,0 +1,297 @@
+autofs-5.0.7 - fix ipv6 proximity calculation
+
+From: Ian Kent <ikent@redhat.com>
+
+The socket based ioctl used to get interface information only
+return IPv4 information. Change get_proximity() function to use
+getifaddrs(3) instead.
+---
+
+ CHANGELOG            |    1 
+ modules/replicated.c |  149 ++++++++++++++------------------------------------
+ 2 files changed, 42 insertions(+), 108 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index dc38580..34c70fa 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -2,6 +2,7 @@
+ =======================
+ - fix nobind sun escaped map entries.
+ - fix use cache entry after free in lookup_prune_one_cache().
++- fix ipv6 proximity calculation.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/replicated.c b/modules/replicated.c
+index 78046c6..bd6003b 100644
+--- a/modules/replicated.c
++++ b/modules/replicated.c
+@@ -52,6 +52,7 @@
+ #include <net/if.h>
+ #include <netinet/in.h>
+ #include <netdb.h>
++#include <ifaddrs.h>
+ 
+ #include "rpc_subs.h"
+ #include "replicated.h"
+@@ -110,58 +111,18 @@ void seed_random(void)
+ 	return;
+ }
+ 
+-static int alloc_ifreq(struct ifconf *ifc, int sock)
+-{
+-	int ret, lastlen = ifc_last_len, len = ifc_buf_len;
+-	char err_buf[MAX_ERR_BUF], *buf;
+-
+-	while (1) {
+-		buf = malloc(len);
+-		if (!buf) {
+-			char *estr = strerror_r(errno, err_buf, MAX_ERR_BUF);
+-			logerr("malloc: %s", estr);
+-			return 0;
+-		}
+-
+-		ifc->ifc_len = len;
+-		ifc->ifc_req = (struct ifreq *) buf;
+-
+-		ret = ioctl(sock, SIOCGIFCONF, ifc);
+-		if (ret == -1) {
+-			char *estr = strerror_r(errno, err_buf, MAX_ERR_BUF);
+-			logerr("ioctl: %s", estr);
+-			free(buf);
+-			return 0;
+-		}
+-
+-		if (ifc->ifc_len <= lastlen)
+-			break;
+-
+-		lastlen = ifc->ifc_len;
+-		len += MAX_IFC_BUF;
+-		free(buf);
+-	}
+-
+-	if (lastlen != ifc_last_len) {
+-		ifc_last_len = lastlen;
+-		ifc_buf_len = len;
+-	}
+-
+-	return 1;
+-}
+-
+ static unsigned int get_proximity(struct sockaddr *host_addr)
+ {
++	struct ifaddrs *ifa = NULL;
++	struct ifaddrs *this;
+ 	struct sockaddr_in *addr, *msk_addr, *if_addr;
+ 	struct sockaddr_in6 *addr6, *msk6_addr, *if6_addr;
+ 	struct in_addr *hst_addr;
+ 	struct in6_addr *hst6_addr;
+ 	int addr_len;
+-	char buf[MAX_ERR_BUF], *ptr;
+-	struct ifconf ifc;
+-	struct ifreq *ifr, nmptr;
+-	int sock, ret, i;
++	char buf[MAX_ERR_BUF];
+ 	uint32_t mask, ha, ia, *mask6, *ha6, *ia6;
++	int ret;
+ 
+ 	addr = NULL;
+ 	addr6 = NULL;
+@@ -170,13 +131,14 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ 	mask6 = NULL;
+ 	ha6 = NULL;
+ 	ia6 = NULL;
++	ha = 0;
+ 
+ 	switch (host_addr->sa_family) {
+ 	case AF_INET:
+ 		addr = (struct sockaddr_in *) host_addr;
+ 		hst_addr = (struct in_addr *) &addr->sin_addr;
+ 		ha = ntohl((uint32_t) hst_addr->s_addr);
+-		addr_len = sizeof(hst_addr);
++		addr_len = sizeof(*hst_addr);
+ 		break;
+ 
+ 	case AF_INET6:
+@@ -186,7 +148,7 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ 		addr6 = (struct sockaddr_in6 *) host_addr;
+ 		hst6_addr = (struct in6_addr *) &addr6->sin6_addr;
+ 		ha6 = &hst6_addr->s6_addr32[0];
+-		addr_len = sizeof(hst6_addr);
++		addr_len = sizeof(*hst6_addr);
+ 		break;
+ #endif
+ 
+@@ -194,36 +156,29 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ 		return PROXIMITY_ERROR;
+ 	}
+ 
+-	sock = open_sock(AF_INET, SOCK_DGRAM, 0);
+-	if (sock < 0) {
++	ret = getifaddrs(&ifa);
++	if (ret) {
+ 		char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-		logerr("socket creation failed: %s", estr);
++		logerr("getifaddrs: %s", estr);
+ 		return PROXIMITY_ERROR;
+ 	}
+ 
+-	if (!alloc_ifreq(&ifc, sock)) {
+-		close(sock);
+-		return PROXIMITY_ERROR;
+-	}
+-
+-	/* For each interface */
+-
+-	/* Is the address a local interface */
+-	i = 0;
+-	ptr = (char *) &ifc.ifc_buf[0];
+-
+-	while (ptr < (char *) ifc.ifc_req + ifc.ifc_len) {
+-		ifr = (struct ifreq *) ptr;
++	this = ifa;
++	while (this) {
++		if (this->ifa_flags & IFF_POINTOPOINT ||
++		    this->ifa_addr->sa_data == NULL) {
++			this = this->ifa_next;
++			continue;
++		}
+ 
+-		switch (ifr->ifr_addr.sa_family) {
++		switch (this->ifa_addr->sa_family) {
+ 		case AF_INET:
+ 			if (host_addr->sa_family == AF_INET6)
+ 				break;
+-			if_addr = (struct sockaddr_in *) &ifr->ifr_addr;
++			if_addr = (struct sockaddr_in *) this->ifa_addr;
+ 			ret = memcmp(&if_addr->sin_addr, hst_addr, addr_len);
+ 			if (!ret) {
+-				close(sock);
+-				free(ifc.ifc_req);
++				freeifaddrs(ifa);
+ 				return PROXIMITY_LOCAL;
+ 			}
+ 			break;
+@@ -234,55 +189,41 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ #else
+ 			if (host_addr->sa_family == AF_INET)
+ 				break;
+-
+-			if6_addr = (struct sockaddr_in6 *) &ifr->ifr_addr;
++			if6_addr = (struct sockaddr_in6 *) this->ifa_addr;
+ 			ret = memcmp(&if6_addr->sin6_addr, hst6_addr, addr_len);
+ 			if (!ret) {
+-				close(sock);
+-				free(ifc.ifc_req);
++				freeifaddrs(ifa);
+ 				return PROXIMITY_LOCAL;
+ 			}
+ #endif
+-
+ 		default:
+ 			break;
+ 		}
+-
+-		i++;
+-		ptr = (char *) &ifc.ifc_req[i];
++		this = this->ifa_next;
+ 	}
+ 
+-	i = 0;
+-	ptr = (char *) &ifc.ifc_buf[0];
+-
+-	while (ptr < (char *) ifc.ifc_req + ifc.ifc_len) {
+-		ifr = (struct ifreq *) ptr;
+-
+-		nmptr = *ifr;
+-		ret = ioctl(sock, SIOCGIFNETMASK, &nmptr);
+-		if (ret == -1) {
+-			char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+-			logerr("ioctl: %s", estr);
+-			close(sock);
+-			free(ifc.ifc_req);
+-			return PROXIMITY_ERROR;
++	this = ifa;
++	while (this) {
++		if (this->ifa_flags & IFF_POINTOPOINT ||
++		    this->ifa_addr->sa_data == NULL) {
++			this = this->ifa_next;
++			continue;
+ 		}
+ 
+-		switch (ifr->ifr_addr.sa_family) {
++		switch (this->ifa_addr->sa_family) {
+ 		case AF_INET:
+ 			if (host_addr->sa_family == AF_INET6)
+ 				break;
+-			if_addr = (struct sockaddr_in *) &ifr->ifr_addr;
++			if_addr = (struct sockaddr_in *) this->ifa_addr;
+ 			ia =  ntohl((uint32_t) if_addr->sin_addr.s_addr);
+ 
+-			/* Is the address within a localiy attached subnet */
++			/* Is the address within a localy attached subnet */
+ 
+-			msk_addr = (struct sockaddr_in *) &nmptr.ifr_netmask;
++			msk_addr = (struct sockaddr_in *) this->ifa_netmask;
+ 			mask = ntohl((uint32_t) msk_addr->sin_addr.s_addr);
+ 
+ 			if ((ia & mask) == (ha & mask)) {
+-				close(sock);
+-				free(ifc.ifc_req);
++				freeifaddrs(ifa);
+ 				return PROXIMITY_SUBNET;
+ 			}
+ 
+@@ -304,8 +245,7 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ 				break;
+ 
+ 			if ((ia & mask) == (ha & mask)) {
+-				close(sock);
+-				free(ifc.ifc_req);
++				freeifaddrs(ifa);
+ 				return PROXIMITY_NET;
+ 			}
+ 			break;
+@@ -316,35 +256,28 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ #else
+ 			if (host_addr->sa_family == AF_INET)
+ 				break;
+-
+-			if6_addr = (struct sockaddr_in6 *) &ifr->ifr_addr;
++			if6_addr = (struct sockaddr_in6 *) this->ifa_addr;
+ 			ia6 = &if6_addr->sin6_addr.s6_addr32[0];
+ 
+ 			/* Is the address within the network of the interface */
+ 
+-			msk6_addr = (struct sockaddr_in6 *) &nmptr.ifr_netmask;
++			msk6_addr = (struct sockaddr_in6 *) this->ifa_netmask;
+ 			mask6 = &msk6_addr->sin6_addr.s6_addr32[0];
+ 
+ 			if (ipv6_mask_cmp(ha6, ia6, mask6)) {
+-				close(sock);
+-				free(ifc.ifc_req);
++				freeifaddrs(ifa);
+ 				return PROXIMITY_SUBNET;
+ 			}
+ 
+ 			/* How do we define "local network" in ipv6? */
+ #endif
+-			break;
+-
+ 		default:
+ 			break;
+ 		}
+-
+-		i++;
+-		ptr = (char *) &ifc.ifc_req[i];
++		this = this->ifa_next;
+ 	}
+ 
+-	close(sock);
+-	free(ifc.ifc_req);
++	freeifaddrs(ifa);
+ 
+ 	return PROXIMITY_OTHER;
+ }

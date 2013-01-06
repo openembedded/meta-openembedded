@@ -1,0 +1,42 @@
+autofs-5.0.7 - add timeout option description to man page
+
+From: Ian Kent <ikent@redhat.com>
+
+The pseudo option used t set the timeout for map entries is one of
+the most most frequently used autofs options but is not mentioned
+in auto.master(5).
+---
+
+ CHANGELOG            |    1 +
+ man/auto.master.5.in |    5 +++++
+ 2 files changed, 6 insertions(+), 0 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 93b9c26..7b8d185 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -6,6 +6,7 @@
+ - fix parse buffer initialization.
+ - fix typo in automount(8).
+ - dont wait forever to restart.
++- add timeout option description to man page.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/man/auto.master.5.in b/man/auto.master.5.in
+index 54269f8..21d7544 100644
+--- a/man/auto.master.5.in
++++ b/man/auto.master.5.in
+@@ -167,6 +167,11 @@ server is specified in the map entry. If no server weights are given
+ then each available server will be tried in the order listed, within
+ proximity.
+ .TP
++.I "\-t, \-\-timeout <seconds>"
++Set the expire timeout for map entries. This option can be used to
++override the global default given either on the command line
++or in the configuration.
++.TP
+ .I "\-n, \-\-negative\-timeout <seconds>"
+ Set the timeout for caching failed key lookups. This option can be
+ used to override the global default given either on the command line

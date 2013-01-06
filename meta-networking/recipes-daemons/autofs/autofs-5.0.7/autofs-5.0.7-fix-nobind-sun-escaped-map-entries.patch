@@ -1,0 +1,47 @@
+autofs-5.0.7 - fix nobind sun escaped map entries
+
+From: Ian Kent <ikent@redhat.com>
+
+If a map contains a Sun colon escape to indicate the mount is a local
+file system and the "nobind" option is present there is no hostname in
+the mount location and the mount fails.
+---
+
+ CHANGELOG           |    4 ++++
+ modules/mount_nfs.c |    5 +++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 67fdcec..faf4c80 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -1,3 +1,7 @@
++??/??/2012 autofs-5.0.8
++=======================
++- fix nobind sun escaped map entries.
++
+ 25/07/2012 autofs-5.0.7
+ =======================
+ - fix ipv6 name for lookup fix.
+diff --git a/modules/mount_nfs.c b/modules/mount_nfs.c
+index 9b8e5f1..bbbb1de 100644
+--- a/modules/mount_nfs.c
++++ b/modules/mount_nfs.c
+@@ -263,13 +263,14 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int
+ 			} else
+ 				strcpy(loc, n_addr);
+ 		} else {
+-			loc = malloc(strlen(this->name) + strlen(this->path) + 2);
++			char *host = this->name ? this->name : "localhost";
++			loc = malloc(strlen(host) + strlen(this->path) + 2);
+ 			if (!loc) {
+ 				char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+ 				error(ap->logopt, "malloc: %s", estr);
+ 				goto forced_fail;
+ 			}
+-			strcpy(loc, this->name);
++			strcpy(loc, host);
+ 		}
+ 		strcat(loc, ":");
+ 		strcat(loc, this->path);

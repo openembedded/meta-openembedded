@@ -1,0 +1,81 @@
+autofs-5.0.7 - fix null map entry order handling
+
+From: Ian Kent <ikent@redhat.com>
+
+If a null map entry appears after a corresponding indirect map entry
+autofs doesn't handle it properly.
+
+Since it appears after the map entry it should'nt affect it but autofs
+doesn't account for this case and assumes the map entry is already
+mounted and tries to shut it down causing attempted access to facilities
+that don't exist.
+---
+
+ CHANGELOG    |    1 +
+ lib/master.c |   32 +++++++++++++++++++++++++++++---
+ 2 files changed, 30 insertions(+), 3 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 7b8d185..79cf673 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -7,6 +7,7 @@
+ - fix typo in automount(8).
+ - dont wait forever to restart.
+ - add timeout option description to man page.
++- fix null map entry order handling.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/lib/master.c b/lib/master.c
+index 904b13d..a0e62f2 100644
+--- a/lib/master.c
++++ b/lib/master.c
+@@ -1179,9 +1179,35 @@ int master_mount_mounts(struct master *master, time_t age, int readall)
+ 
+ 		cache_readlock(nc);
+ 		ne = cache_lookup_distinct(nc, this->path);
+-		if (ne && this->age > ne->age) {
++		/*
++		 * If this path matched a nulled entry the master map entry
++		 * must be an indirect mount so the master map entry line
++		 * number may be obtained from this->maps.
++		 */
++		if (ne) {
++			int lineno = ne->age;
+ 			cache_unlock(nc);
+-			st_add_task(ap, ST_SHUTDOWN_PENDING);
++
++			/* null entry appears after map entry */
++			if (this->maps->master_line < lineno) {
++				warn(ap->logopt,
++				     "ignoring null entry that appears after "
++				     "existing entry for %s", this->path);
++				goto cont;
++			}
++			if (ap->state != ST_INIT) {
++				st_add_task(ap, ST_SHUTDOWN_PENDING);
++				continue;
++			}
++			/*
++			 * The map entry hasn't been started yet and we've
++			 * seen a preceeding null map entry for it so just
++			 * delete it from the master map entry list so it
++			 * doesn't get in the road.
++			 */
++			list_del_init(&this->list);
++			master_free_mapent_sources(ap->entry, 1);
++			master_free_mapent(ap->entry);
+ 			continue;
+ 		}
+ 		nested = cache_partial_match(nc, this->path);
+@@ -1194,7 +1220,7 @@ int master_mount_mounts(struct master *master, time_t age, int readall)
+ 				cache_delete(nc, nested->key);
+ 		}
+ 		cache_unlock(nc);
+-
++cont:
+ 		st_mutex_lock();
+ 
+ 		state_pipe = this->ap->state_pipe[1];

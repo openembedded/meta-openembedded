@@ -1,0 +1,69 @@
+autofs-5.0.7 - allow non root user to check status
+
+From: Ian Kent <ikent@redhat.com>
+
+
+---
+
+ CHANGELOG             |    1 +
+ redhat/autofs.init.in |   20 +++++++++++++-------
+ 2 files changed, 14 insertions(+), 7 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 44c9fb2..936c9ab 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -11,6 +11,7 @@
+ - make description of default MOUNT_WAIT setting clear.
+ - configure.in: allow cross compilation.
+ - README: update mailing list subscription info.
++- allow non root user to check status.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/redhat/autofs.init.in b/redhat/autofs.init.in
+index cd5cb34..fe18b3e 100644
+--- a/redhat/autofs.init.in
++++ b/redhat/autofs.init.in
+@@ -167,6 +167,19 @@ function usage_message() {
+ 
+ RETVAL=0
+ 
++# allow non-root users to read status / usage
++
++case "$1" in
++	status)
++		status -p @@autofspiddir@@/autofs.pid -l autofs $prog
++		exit 0;
++		;;
++	usage)
++		usage_message
++		exit 0;
++		;;
++esac
++
+ # Only the root user may change the service status
+ if [ `id -u` -ne 0 ] && [ "$1" != "status" ]; then
+ 	echo "insufficient privilege to change service status"
+@@ -184,9 +197,6 @@ case "$1" in
+ 	stop)
+ 		stop
+ 		;;
+-	status)
+-		status -p @@autofspiddir@@/autofs.pid -l autofs $prog
+-		;;
+ 	restart|force-reload)
+ 		restart
+ 		;;
+@@ -202,10 +212,6 @@ case "$1" in
+ 			restart
+ 		fi
+ 		;;
+-	usage)
+-		usage_message
+-		exit 0
+-		;;
+ 	*)
+ 		usage_message
+ 		exit 2
