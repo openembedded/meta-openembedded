@@ -11,18 +11,18 @@ DEPENDS = "glib-2.0 pango atk jpeg libpng libxext libxcursor \
 
 LICENSE = "LGPLv2 & LGPLv2+ & LGPLv2.1+"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
-                    file://gtk/gtk.h;endline=27;md5=c59e0b4490dd135a5726ebf851f9b17f \
-                    file://gdk/gdk.h;endline=27;md5=07db285ec208fb3e0bf7d861b0614202 \
-                    file://tests/testgtk.c;endline=27;md5=ac85be7b810a1e9b00479af8e2018053"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+                    file://gtk/gtk.h;endline=25;md5=1d8dc0fccdbfa26287a271dce88af737 \
+                    file://gdk/gdk.h;endline=25;md5=c920ce39dc88c6f06d3e7c50e08086f2 \
+                    file://tests/testgtk.c;endline=25;md5=cb732daee1d82af7a2bf953cf3cf26f1"
 
-SRC_URI = "http://download.gnome.org/sources/gtk+/3.2/gtk+-${PV}.tar.xz \
-  file://fix.build.automake-1.12.x.patch \
+SRC_URI = "http://download.gnome.org/sources/gtk+/3.4/gtk+-${PV}.tar.xz \
 "
-SRC_URI[md5sum] = "b4edcc69e39159dd7be17828249afb46"
-SRC_URI[sha256sum] = "e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d"
 
-PR = "r2"
+SRC_URI[md5sum] = "1b2cf29502a6394e8d4b30f7f5bb9131"
+SRC_URI[sha256sum] = "f154e460075034da4c0ce89c320025dcd459da2a1fdf32d92a09522eaca242c7"
+
+PR = "r0"
 
 inherit autotools pkgconfig
 
@@ -45,12 +45,17 @@ do_configure_prepend() {
 PACKAGES =+ "${PN}-demo"
 LIBV = "3.0.0"
 
-FILES_${PN}-demo = "${bindir}/gtk3-demo ${datadir}/gtk-3.0/demo"
+FILES_${PN}-demo = "${bindir}/gtk3-demo \
+                    ${datadir}/gtk-3.0/demo \
+                    ${bindir}/gtk3-demo-application \
+                    ${bindir}/gtk3-widget-factory \
+"
 
 FILES_${PN} = "${bindir}/gtk-update-icon-cache \
                ${bindir}/gtk-query-immodules-3.0 \
                ${libdir}/lib*${SOLIBS} \
                ${datadir}/themes ${sysconfdir} ${datadir}/glib-2.0/schemas/ \
+               ${datadir}/gtk-3.0/gtkbuilder.rng \
                ${libdir}/gtk-3.0/${LIBV}/engines/libpixmap.so \
                ${libdir}/gtk-3.0/modules/*.so"
 
