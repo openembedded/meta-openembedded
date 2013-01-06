@@ -1,0 +1,12 @@
+diff -git a/Makefile.in b/Makefile.in
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -446,7 +446,7 @@
+ 
+ gethost:  gethost.c sh.err.h tc.const.h sh.h
+ 	rm -f gethost
+-	${CC} -o gethost ${LDFLAGS} ${CFLAGS} ${CPPFLAGS} ${DFLAGS} $(srcdir)/gethost.c ${LIBES} ${EXTRALIBS}
++	${BUILD_CC} -o gethost ${BUILD_LDFLAGS} ${BUILD_CFLAGS} ${BUILD_CPPFLAGS} ${DFLAGS} $(srcdir)/gethost.c ${LIBES} ${EXTRALIBS}
+ 
+ tc.defs.c:	gethost host.defs
+ 	@rm -f $@.tmp

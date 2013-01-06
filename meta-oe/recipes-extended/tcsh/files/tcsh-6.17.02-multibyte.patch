@@ -1,0 +1,16 @@
+Author:  Jean-Luc Leger <reiga@dspnet.fr.eu.org>
+Description: fix broken globbing expansion
+Debian-Bug: #603545
+--- a/tc.str.c
++++ b/tc.str.c
+@@ -104,8 +104,9 @@ rt_mbtowc(Char *pwc, const char *s, size_t n)
+ 
+     memset (&mb, 0, sizeof mb);
+     ret = mbrtowc(&tmp, s, n, &mb);
+-    if (ret > 0) {
++    if (ret >= 0)
+ 	*pwc = tmp;
++    if (ret > 0) {
+ #ifdef UTF16_STRINGS
+ 	if (tmp >= 0xd800 && tmp <= 0xdbff) {
+ 	    /* UTF-16 surrogate pair.  Fetch second half and compute

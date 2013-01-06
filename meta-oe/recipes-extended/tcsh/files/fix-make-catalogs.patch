@@ -1,0 +1,27 @@
+Author: christos <christos>
+Date:   Thu May 13 18:39:02 2010 +0000
+
+    add a rule to make catalogs and propagate ${MAKE} instead of hard-coding make.
+
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -687,7 +687,7 @@ shar:
+ 	rm -rf tcsh-${VERSION}
+ 
+ catalogs:
+-	@(cd nls; make catalogs)
++	@(cd nls; ${MAKE})
+ 
+ tcsh-${VERSION}.tar.Z:
+ 	rm -rf tcsh-${VERSION} 
+--- a/nls/Makefile.in
++++ b/nls/Makefile.in
+@@ -18,7 +18,7 @@ install:	$(INSTALLED)
+ 	$(INSTALL) $< $@
+ 
+ %.cat:
+-	$(GENCAT) $@ $(@:%.cat=%)/*set*
++	cat $(@:%.cat=%)/charset $(@:%.cat=%)/set* | $(GENCAT) $@ 
+ 
+ clean:
+ 	$(RM) $(CATALOGS)
