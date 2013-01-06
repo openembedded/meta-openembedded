@@ -1,0 +1,16 @@
+--- pwdutils-2.6/lib/copy_xattr.c.orig	2005-04-16 17:15:52.916660880 -0700
++++ pwdutils-2.6/lib/copy_xattr.c	2005-04-16 17:18:10.345768480 -0700
+@@ -127,8 +127,11 @@
+ 
+ 	  if (lsetxattr (to, name, value, size, 0) != 0)
+ 	    {
+-	      if (strcmp (name, "security.selinux") == 0 &&
+-		  is_selinux_enabled() == 0)
++	      if (strcmp (name, "security.selinux") == 0
++#if defined(WITH_SELINUX)
++				  && is_selinux_enabled() == 0
++#endif
++				  )
+ 		fprintf (stderr,
+ 			 _("SELinux not enabled, ignore attribute %s for `%s'.\n"),
+ 			 name, to);

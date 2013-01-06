@@ -1,0 +1,12 @@
+--- pwdutils-2.6/configure.in.orig	2005-04-19 20:22:36.603052192 -0700
++++ pwdutils-2.6/configure.in	2005-04-19 21:09:45.308023672 -0700
+@@ -178,6 +178,9 @@
+     AC_CHECK_LIB(ldap, main, LDAP_LIBS="-lldap $LDAP_LIBS" found_ldap_lib=yes,,$LDAP_LIBS)
+   fi
+ 
++  dnl this always needs dl
++  AC_CHECK_LIB(dl, dlopen, LDAP_LIBS="$LDAP_LIBS -ldl")
++
+   if test -z "$found_ldap_lib" -a \( $with_ldap_lib = auto -o $with_ldap_lib = netscape5 \); then
+     AC_CHECK_LIB(ldap50, main, LDAP_LIBS="-lldap50 -lssldap50 -lssl3 -lnss3 -lnspr4 -lprldap50 -lplc4 -lplds4" found_ldap_lib=yes need_pthread=true,, -lpthread)
+   fi
