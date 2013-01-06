@@ -1,0 +1,13 @@
+Index: LuaJIT-2.0.0/src/lj_vmmath.c
+===================================================================
+--- LuaJIT-2.0.0.orig/src/lj_vmmath.c	2012-11-08 02:10:00.000000000 -0800
++++ LuaJIT-2.0.0/src/lj_vmmath.c	2012-11-19 22:15:28.613527136 -0800
+@@ -22,7 +22,7 @@
+ LJ_FUNCA double lj_vm_tanh(double x) { return tanh(x); }
+ #endif
+ 
+-#if !LJ_TARGET_X86ORX64
++#if !(LJ_TARGET_X86ORX64 || LJ_TARGET_PPCSPE)
+ double lj_vm_foldarith(double x, double y, int op)
+ {
+   switch (op) {
