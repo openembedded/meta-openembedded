@@ -1,0 +1,12 @@
+diff -Nurd xmlto-0.0.25/configure.in xmlto-0.0.25/configure.in
+--- xmlto-0.0.25/configure.in	2011-12-01 17:49:00.000000000 +0200
++++ xmlto-0.0.25/configure.in	2013-01-07 05:24:16.169953519 +0200
+@@ -1,7 +1,7 @@
+ AC_INIT(xmlto, 0.0.25)
+ AC_CONFIG_SRCDIR(xmlto.spec.in)
+ AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects 1.6])
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS(config.h)
+
+ AC_PROG_CC
+ AM_PROG_CC_C_O
