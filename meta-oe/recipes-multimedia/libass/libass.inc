@@ -5,7 +5,7 @@ SECTION = "libs/multimedia"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ae98663bac55afe5d989919d296f28a"
 
-DEPENDS = "enca fontconfig freetype libpng"
+DEPENDS = "enca fontconfig freetype libpng fribidi"
 
 INC_PR = "r1"
 
