@@ -5,10 +5,10 @@ another server or reference time source, such as a radio \
 or satellite receiver or modem."
 HOMEPAGE = "http://support.ntp.org"
 SECTION = "console/network"
-LICENSE = "ntp"
+LICENSE = "NTP"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fea4b50c33b18c2194b4b1c9ca512670"
 
-INC_PR = "r2"
+INC_PR = "r3"
 
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
            file://tickadj.c.patch \
