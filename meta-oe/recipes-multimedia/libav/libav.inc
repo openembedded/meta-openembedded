@@ -32,7 +32,6 @@ EXTRA_OECONF = " \
         --enable-shared \
         --enable-pthreads \
         --enable-gpl \
-        --enable-postproc \
         --enable-avfilter \
         \
         --cross-prefix=${TARGET_PREFIX} \
