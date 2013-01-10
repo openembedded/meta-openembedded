@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 DEPENDS += "openldap libtirpc flex-native bison-native"
 
-inherit autotools systemd
+inherit autotools
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch \
@@ -39,9 +39,6 @@ inherit update-rc.d
 
 INITSCRIPT_NAME = "autofs"
 INITSCRIPT_PARAMS = "defaults"
-
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "autofs.service"
 
 # FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
 CFLAGS += "${LDFLAGS}"
