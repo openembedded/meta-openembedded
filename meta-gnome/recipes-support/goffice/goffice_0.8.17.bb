@@ -7,8 +7,11 @@ DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+ pango cairo libgsf libpcre li
 
 inherit gnome pkgconfig perlnative
 
+PR = "r1"
+
 SRC_URI += " file://c99math.patch \
-             file://nodolt.patch "
+             file://nodolt.patch \
+             file://pcre-8.30.patch"
 
 SRC_URI[archive.md5sum] = "b4c924457163e02daf8a8d2428f51d10"
 SRC_URI[archive.sha256sum] = "dd8caef5fefffbc53938fa619de9f58e7c4dc71a1803de134065d42138a68c06"
