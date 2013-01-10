@@ -5,13 +5,14 @@ SECTION = "console/utils"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://gpm2/core/main.c;endline=19;md5=66d3c205c4e7ee5704b2ee351dfed72f"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS = "ncurses"
 
 SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
            file://no-docs.patch \
            file://processcreds.patch \
+           file://eglibc-2.17.patch \
            file://init"
 
 inherit autotools update-rc.d
