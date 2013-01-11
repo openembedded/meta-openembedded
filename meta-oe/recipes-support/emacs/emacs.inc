@@ -13,7 +13,7 @@ X11DEPENDS = " \
   jpeg xz pixman libpng librsvg tiff libcroco \
   libx11 libxau libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes \
   libxft libxpm libxrandr libxrender \
-  gdk-pixbuf glib-2.0 gtk+ pango libxcb \
+  gdk-pixbuf glib-2.0 gtk+ pango libxcb harfbuzz icu \
 " 
 
 EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
@@ -115,6 +115,10 @@ do_compile_prepend() {
 		${STAGING_DIR_TARGET}/${libdir}/libtiff.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/libxml2.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/libcroco-0.6.so.* \
+		${STAGING_DIR_TARGET}/${libdir}/libharfbuzz.so.* \
+		${STAGING_DIR_TARGET}/${libdir}/libicule.so.* \
+		${STAGING_DIR_TARGET}/${libdir}/libicuuc.so.* \
+		${STAGING_DIR_TARGET}/${libdir}/libicudata.so.* \
 		${STAGING_DIR_TARGET}/${libdir}/libz.so.* $treedir/${base_libdir}/
 
 		# X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
