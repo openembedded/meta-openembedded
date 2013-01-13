@@ -6,6 +6,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PV = "0.0.0+git${SRCPV}"
+PR = "r1"
 
 DEFAULT_PREFERENCE = "-1"
 
@@ -39,10 +40,6 @@ EXTRA_OECONF = " \
         --sysroot="${STAGING_DIR_TARGET}" \
         ${EXTRA_FFCONF} \
 "
-
-#| yasm not found, use --disable-yasm for a crippled build
-EXTRA_OECONF_append_x86-64 = " --disable-yasm"
-EXTRA_OECONF_append_x86 = " --disable-yasm"
 
 do_configure() {
     ./configure ${EXTRA_OECONF}
