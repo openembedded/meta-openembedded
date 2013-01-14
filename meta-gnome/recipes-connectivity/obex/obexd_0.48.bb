@@ -1,16 +1,16 @@
 DESCRIPTION = "OBEX Server and Client"
-DEPENDS = "openobex glib-2.0 dbus bluez4 libical"
+DEPENDS = "glib-2.0 dbus bluez4 libical"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "files://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
-PR = "r2"
+PR = "r0"
 
 SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz \
            file://ssize_t_definition.patch \
           "
-SRC_URI[md5sum] = "3fb9cb9d7ab119753253ff784235a364"
-SRC_URI[sha256sum] = "104fc50eb8bf41d690d31588c3a4829a75dc7738b1c76cf260171d8f525da758"
+SRC_URI[md5sum] = "d03cf9bad2983243837f4f6d76ef14a6"
+SRC_URI[sha256sum] = "eaa9d8d9542700e6750918d72a3ce00f8cf3a2771d3e2516efd1be5a05f78582"
 
 inherit autotools
 
