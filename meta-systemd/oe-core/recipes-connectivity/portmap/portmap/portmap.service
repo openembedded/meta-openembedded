@@ -1,0 +1,10 @@
+[Unit]
+Description=Portmap
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/portmap -l
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
