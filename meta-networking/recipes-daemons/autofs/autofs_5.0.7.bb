@@ -30,6 +30,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://cross.patch \
            file://libtirpc.patch \
            file://libtirpc-name-clash-backout.patch \
+           file://autofs-5.0.7-do-not-check-for-modprobe.patch \
           "
 
 SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
