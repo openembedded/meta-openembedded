@@ -4,16 +4,13 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "libxml2 libxslt"
 
-PR = "r2"
-
 SECTION = "net"
 
 SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
-           file://hiawatha-init \
-           file://xslt-fix.patch "
+           file://hiawatha-init "
 
-SRC_URI[md5sum] = "372ea9e8329ed36e4fb781fdc1a6734c"
-SRC_URI[sha256sum] = "1a7fa98ce66beb54fc8490cc787461d719a98cb0e4a81caedfa18ac8b5ba3b3b"
+SRC_URI[md5sum] = "712b1822ef525153dc4347417252768d"
+SRC_URI[sha256sum] = "c35e1e975962e1105d7914f74901e304ba90681985c94236c113eaca502b5e34"
 
 inherit cmake update-rc.d
 
