@@ -7,7 +7,7 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native mysql5 \
            libc-client openssl sqlite3"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-INC_PR = "r3"
+INC_PR = "r4"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
 
@@ -55,14 +55,22 @@ do_install  () {
     oe_runmake 'INSTALL_ROOT=${D}' install
 }
 
+do_install_append_pn-php-native() {
+    rm -rf ${D}/${libdir}/php/.registry
+    rm -rf ${D}/${libdir}/php/.channels
+    rm -rf ${D}/${libdir}/php/.[a-z]*
+}
+
 # fixme
 do_install_append_pn-php() {
     install -d ${D}/${sysconfdir}/
     mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
-    rm -rf ${D}/${STAGING_DIR_NATIVE}
+    rm -rf ${D}/${TMPDIR}
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
     rm -rf ${D}/.[a-z]*
+    rm -rf ${D}/var
+    rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
     sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
     install -d ${D}/${sysconfdir}/apache2/conf.d
@@ -72,6 +80,11 @@ do_install_append_pn-php() {
     sed -i 's:=/etc:=${sysconfdir}:g' ${S}/sapi/fpm/init.d.php-fpm
     sed -i 's:=/var:=${localstatedir}:g' ${S}/sapi/fpm/init.d.php-fpm
     install -m 0755 ${S}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
+    TMP=`dirname ${D}/${TMPDIR}`
+    while test ${TMP} != ${D}; do
+      rmdir ${TMP}
+      TMP=`dirname ${TMP}`;
+    done
 }
 
 PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
