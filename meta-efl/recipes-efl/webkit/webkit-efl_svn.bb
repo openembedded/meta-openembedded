@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8ba
 
 DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
            libpng libxt fontconfig cairo freetype glib-2.0 libsoup-2.4 \
-           libxml2 pango eina ecore evas edje"
+           libxml2 pango eina ecore evas edje edbus"
 
 # 120145 and 122103 introduces dependency on libsoup-2.39.3 and glib-networking-2.33.2
 SRCREV = "120144"
