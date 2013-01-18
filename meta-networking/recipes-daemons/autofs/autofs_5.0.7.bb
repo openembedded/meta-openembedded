@@ -3,7 +3,9 @@ SECTION = "base"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-DEPENDS += "openldap libtirpc flex-native bison-native"
+PR = "r1"
+
+DEPENDS += "libtirpc flex-native bison-native"
 
 inherit autotools
 
@@ -31,6 +33,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://libtirpc.patch \
            file://libtirpc-name-clash-backout.patch \
            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
+           file://fix_disable_ldap.patch \
           "
 
 SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
