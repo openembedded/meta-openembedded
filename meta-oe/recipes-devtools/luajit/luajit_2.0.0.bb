@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=9511885992e4900014e3b13ca6372b7d"
 HOMEPAGE = "http://luajit.org"
 
 DEPENDS += "lua5.1"
-PR = "r0"
+PR = "r1"
 SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
            file://disable_lj_vm_foldarith_for_spe.patch \
           "
@@ -17,7 +17,7 @@ inherit pkgconfig binconfig
 
 do_configure_prepend() {
 	sed -i -e s:/usr/local:${prefix}:g ${S}/Makefile
-	sed -i -e s:/lib:${base_libdir}:g ${S}/Makefile
+	sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
 }
 
 EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX}'
