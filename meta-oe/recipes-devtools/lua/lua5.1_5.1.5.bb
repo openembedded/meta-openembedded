@@ -4,6 +4,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=59bdd99bb82238f238cf5c65c21604fd"
 HOMEPAGE = "http://www.lua.org/"
 
+PR = "r1"
+
 DEPENDS += "readline"
 SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
            file://bitwise_operators.patch \
@@ -21,6 +23,7 @@ EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLD
 
 do_configure_prepend() {
 	sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
+	sed -i -e s:lib/lua/5.1/:${base_libdir}/lua/5.1/:g src/luaconf.h
 }
 
 do_compile () {
@@ -34,6 +37,8 @@ do_install () {
 		'INSTALL_INC=${D}${includedir}/' \
 		'INSTALL_MAN=${D}${mandir}/man1' \
 		'INSTALL_SHARE=${D}${datadir}/lua' \
+		'INSTALL_LIB=${D}${libdir}' \
+		'INSTALL_CMOD=${D}${libdir}/lua/5.1' \
 		install
 	install -d ${D}${libdir}/pkgconfig
 	install -m 0644 ${WORKDIR}/lua5.1.pc ${D}${libdir}/pkgconfig/lua5.1.pc
