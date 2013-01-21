@@ -26,7 +26,7 @@ do_install_append() {
 	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
 }
 
-FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
+FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${localstatedir}/volatile/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
 RDEPENDS_${PN} = "file \
                   mime-support \
                   openssh-ssh \
