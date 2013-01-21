@@ -63,4 +63,8 @@ do_configure_prepend () {
         fi
 }
 
+do_install_append () {
+	test -d ${D}/run && rmdir ${D}/run
+}
+
 INSANE_SKIP_${PN} = "dev-so"
