@@ -185,7 +185,7 @@ FILES_${PN} = " ${base_bindir}/* \
 FILES_${PN}-dbg += "${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/ ${PYTHON_SITEPACKAGES_DIR}/systemd/.debug/"
 FILES_${PN}-dev += "${base_libdir}/security/*.la ${datadir}/dbus-1/interfaces/ ${sysconfdir}/rpm/macros.systemd ${PYTHON_SITEPACKAGES_DIR}/systemd/*.la"
 
-RDEPENDS_${PN} += "dbus-systemd udev-systemd"
+RDEPENDS_${PN} += "udev-systemd"
 
 # kbd -> loadkeys,setfont
 # systemd calls 'modprobe -sab --', which busybox doesn't support due to lack 
