@@ -9,6 +9,7 @@ PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
            file://gold-unversioned-symbol.patch \
+           file://aarch64.patch \
           "
 SRC_URI[md5sum] = "7d80d0dc9cc2b9199a0c53787c151205"
 SRC_URI[sha256sum] = "81a728fb3f87da33063068735e2fb7e2cd89df207d32687d3d3278385279cefc"
