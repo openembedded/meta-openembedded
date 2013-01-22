@@ -7,7 +7,7 @@ SECTION = "console/network"
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c3159ad36d96a939fcd8f2c2c9b9d08a"
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${PV}.tar.bz2 "
 SRC_URI[md5sum] = "73da62c793269eade8121da336b01ba5"
@@ -62,7 +62,9 @@ FILES_${PN}-test = " \
 "
 
 FILES_${PN}-protocols = " \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/ \
+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
 "
 
 FILES_${PN}-zsh = " \
