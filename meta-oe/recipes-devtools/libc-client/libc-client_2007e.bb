@@ -32,3 +32,4 @@ do_install() {
         install c-client/c-client.a ${D}${libdir}/libc-client.a
 }
 
+ALLOW_EMPTY_${PN} = "1"
