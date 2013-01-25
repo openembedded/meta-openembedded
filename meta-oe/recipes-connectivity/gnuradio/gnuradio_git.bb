@@ -4,8 +4,17 @@ SECTION =  "apps"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "uhd gsl fftwf python alsa-lib boost cppunit \
-           swig-native python-numpy python-pygtk orc qt4-x11-free qwt"
+DEPENDS = "gsl fftwf python alsa-lib boost cppunit \
+           swig-native python-numpy python-cheetah-native orc"
+
+#Available PACKAGECONFIG options are qt grc uhd
+PACKAGECONFIG ??= "qtgui grc uhd"
+
+PACKAGECONFIG[uhd] = "-DENABLE_GR_UHD=ON,-DENABLE_GR_UHD=OFF,uhd,"
+PACKAGECONFIG[grc] = "-DENABLE_GRC=ON,-DENABLE_GRC=OFF,python-pygtk python-cheetah, "
+
+PACKAGECONFIG[qtgui] = "-DENABLE_GR_QTGUI=ON,-DENABLE_GR_QTGUI=OFF,qt4-x11-free qwt, "
+
 
 inherit distutils-base cmake pkgconfig
 
@@ -16,8 +25,9 @@ RDEPENDS_${PN} = "python-core python-audio python-threading python-codecs \
                   python-lang python-textutils python-shell python-pickle \
                   python-compiler python-pkgutil python-pydoc python-mmap \
                   python-netclient python-difflib \
-                  python-pprint python-numpy python-pygtk python-lxml \
+                  python-pprint python-numpy  \
                  "
+RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah"
 
 C_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
@@ -68,7 +78,19 @@ S="${WORKDIR}/git"
 OECMAKE_BUILDPATH = "${S}/build"
 OECMAKE_SOURCEPATH = "${S}"
 
-EXTRA_OECMAKE = "-DENABLE_GR_ATSC=FALSE -DENABLE_GR_QTGUI=ON -DENABLE_GR_WXGUI=OFF -DENABLE_GR_VIDEO_SDL=OFF -DQT_HEADERS_DIR=${STAGING_INCDIR}/qt4 -DQT_QTCORE_INCLUDE_DIR=${STAGING_INCDIR}/qt4/QtCore -DQT_LIBRARY_DIR=${STAGING_LIBDIR} -DQT_QTCORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtCore.so -DQT_QTGUI_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtGui.so -DENABLE_GR_FCD=OFF -DIMPORT_EXECUTABLES=${S}/gr-vocoder/lib/generate_codebook.txt"
+EXTRA_OECMAKE = "-DENABLE_GR_ATSC=FALSE \
+                 -DENABLE_GR_FCD=OFF \
+                 -DENABLE_GR_WXGUI=OFF \
+                 -DENABLE_GR_VIDEO_SDL=OFF \
+                 -DIMPORT_EXECUTABLES=${S}/gr-vocoder/lib/generate_codebook.txt \
+                 -DQT_HEADERS_DIR=${STAGING_INCDIR}/qt4 \
+                 -DQT_QTCORE_INCLUDE_DIR=${STAGING_INCDIR}/qt4/QtCore \
+                 -DQT_LIBRARY_DIR=${STAGING_LIBDIR} \
+                 -DQT_QTCORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtCore.so \
+                 -DQT_QTGUI_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtGui.so \
+"
+
+inherit distutils-base cmake pkgconfig
 
 EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
 
