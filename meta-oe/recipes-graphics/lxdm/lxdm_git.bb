@@ -15,7 +15,7 @@ LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam
 SRCREV = "65e7cc8fdc150c2b925eb348ce82de17dee5eb0b"
 PV = "0.4.2+git${SRCPV}"
 PE = "1"
-PR = "r2"
+PR = "r3"
 
 DEPENDS = "cairo consolekit dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
 
@@ -30,9 +30,10 @@ SYSTEMD_UNITDIR ??= "no"
 EXTRA_OECONF = "--with-systemdsystemunitdir=${SYSTEMD_UNITDIR}"
 
 do_compile_append() {
-	# default background configured not available / no password field available
+	# default background configured not available / no password field available / no default screensaver
 	sed -i 	-e 's,bg=,# bg=,g' \
 		-e 's,# skip_password=,skip_password=,g' \
+		-e 's,# arg=.*,arg=${bindir}/X -s 0,g' \
 		${S}/data/lxdm.conf.in
 	# add default configuration
 	oe_runmake -C ${S}/data lxdm.conf
