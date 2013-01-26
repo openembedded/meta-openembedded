@@ -3,6 +3,8 @@ PRIORITY = "optional"
 LICENSE = "GPL-2.0"
 SECTION = "console/network"
 
+RDEPENDS_${PN} += "perl"
+
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 SRC_URI = " \
 	${SOURCEFORGE_MIRROR}/ebtables/arptables-v${PV}.tar.gz;name=arptables \
