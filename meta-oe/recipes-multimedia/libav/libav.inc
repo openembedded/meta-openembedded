@@ -9,9 +9,9 @@ PROVIDES = "ffmpeg"
 ARM_INSTRUCTION_SET = "arm"
 
 # faac faad2 lame schroedinger libgsm
-DEPENDS = "virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
+DEPENDS = "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 
-INC_PR = "r6"
+INC_PR = "r7"
 
 inherit autotools pkgconfig
 
@@ -42,6 +42,7 @@ EXTRA_OECONF = " \
         --enable-x11grab \
         --enable-libtheora  \
         --enable-libvorbis \
+        --enable-libx264 \
         --arch=${TARGET_ARCH} \
         --target-os="linux" \
         --enable-cross-compile \
