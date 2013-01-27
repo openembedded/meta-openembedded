@@ -1,4 +1,4 @@
-SUMMARY = "foo"
+SUMMARY = "Apcupsd a daemon for controlling APC UPSes"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c12853cc7fdf20d17b4fddefd26b7802"
@@ -30,6 +30,10 @@ do_configure() {
 
 	# m4 macros are missing, using autotools_do_configure leads to linking errors with gethostname_re
 	oe_runconf
+}
+
+do_install_append() {
+	rm ${D}${datadir}/hal -rf
 }
 
 
