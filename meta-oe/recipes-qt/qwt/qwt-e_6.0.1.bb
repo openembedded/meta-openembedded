@@ -9,4 +9,6 @@ SRC_URI[qwt.sha256sum] = "3fe19dd5962d705632fc2ef616b009299de6cf1e702538296924db
 
 RPROVIDES_${PN}-dev = "libqwt-dev"
 
+# Conflicts with qwt, only one qwt* can be built in world
+# | Project ERROR: local build will conflict with sysroots/qemuarm/usr/lib/libqwt.*
 EXCLUDE_FROM_WORLD = "1"
