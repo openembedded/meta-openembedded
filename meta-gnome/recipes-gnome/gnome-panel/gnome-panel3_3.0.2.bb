@@ -4,6 +4,9 @@ LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
 BPN = "gnome-panel"
 PR = "r1"
 
+# conflicts with gnome-panel, because they provide the same package
+# http://patches.openembedded.org/patch/43105/
+EXCLUDE_FROM_WORLD = "1"
 DEFAULT_PREFERENCE = "-1"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
