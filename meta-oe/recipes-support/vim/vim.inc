@@ -7,17 +7,18 @@ LICENSE = "vim"
 LIC_FILES_CHKSUM = "file://README.txt;md5=72c4840d07b65659b60b3fa405c7da36"
 
 PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
-VIMDIR = "${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
+VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
-INC_PR = "r11"
+INC_PR = "r12"
 
 SRC_URI = " \
-  ftp://ftp.vim.org/pub/vim/unix/vim-${PV_MAJOR}.tar.bz2;name=vim${PV_MAJOR}tarbz2 \
-  ftp://ftp.vim.org/pub/vim/extra/vim-${PV_MAJOR}-extra.tar.gz;name=vim${PV_MAJOR}extratargz \
-  ftp://ftp.vim.org/pub/vim/extra/vim-${PV_MAJOR}-lang.tar.gz;name=vim${PV_MAJOR}langtargz \
+  ftp://ftp.${PN}.org/pub/${PN}/unix/${PN}-${PV_MAJOR}.tar.bz2;name=${VIMDIR} \
+  ftp://ftp.${PN}.org/pub/${PN}/extra/${PN}-${PV_MAJOR}-extra.tar.gz;name=${VIMDIR}-extra \
+  ftp://ftp.${PN}.org/pub/${PN}/extra/${PN}-${PV_MAJOR}-lang.tar.gz;name=${VIMDIR}-lang \
+  file://vimrc \
 "
 
-S = "${WORKDIR}/vim${VIMDIR}/src"
+S = "${WORKDIR}/${VIMDIR}/src"
 
 inherit autotools update-alternatives
 
@@ -32,16 +33,14 @@ do_configure () {
   touch auto/config.mk auto/config.h
 }
 
+#Available PACKAGECONFIG options are gtkgui, x11, tiny
+PACKAGECONFIG ??= ""
 
-
-VIMFEATURES ?= "big"
-VIMX ?= "--without-x"
-VIMGUI ?= "no"
+PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
+PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
+PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
 
 EXTRA_OECONF = " \
-  --enable-gui=${VIMGUI} \
-  --with-features=${VIMFEATURES} \
-  ${VIMX} \
   --disable-gpm \
   --disable-gtktest \
   --disable-xim \
@@ -59,24 +58,20 @@ EXTRA_OECONF = " \
 
 # Work around rpm picking up csh as a dep
 do_install_append() {
-	chmod -x ${D}${datadir}/vim/vim72/tools/vim132
+	chmod -x ${D}${datadir}/${PN}/${VIMDIR}/tools/vim132
+	install -m 0644 ${WORKDIR}/vimrc ${D}/${datadir}/${PN}
 }
 
-PACKAGES =+ "vim-common vim-syntax vim-help vim-tutor"
-FILES_vim-syntax = "${datadir}/vim/vim${VIMVER}/syntax"
-FILES_vim-help = "${datadir}/vim/vim${VIMVER}/doc"
-FILES_vim-tutor = "${datadir}/vim/vim${VIMVER}/tutor ${bindir}/vimtutor"
+PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
+FILES_${PN}-syntax = "${datadir}/${PN}/${VIMDIR}/syntax"
+FILES_${PN}-help = "${datadir}/${PN}/${VIMDIR}/doc"
+FILES_${PN}-tutor = "${datadir}/${PN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
+FILES_${PN}-vimrc = "${datadir}/${PN}/vimrc"
+FILES_${PN}-data = "${datadir}/${PN}"
 
 ALTERNATIVE_NAME = "vi"
-ALTERNATIVE_PATH = "${bindir}/vim"
+ALTERNATIVE_PATH = "${bindir}/${PN}"
 ALTERNATIVE_LINK = "${base_bindir}/vi"
 ALTERNATIVE_PRIORITY = "100"
-
-SRC_URI[vim7.2tarbz2.md5sum] = "f0901284b338e448bfd79ccca0041254"
-SRC_URI[vim7.2tarbz2.sha256sum] = "914db0f2205ebd6f02878295ec2506036ea7500399db112c61a01491cd9a1d86"
-SRC_URI[vim7.2langtargz.md5sum] = "d8884786979e0e520c112faf2e176f05"
-SRC_URI[vim7.2langtargz.sha256sum] = "11607f539a4518b550bf1606b7d3a6f36c1ffdf566c058e7d94bced78034cd5b"
-SRC_URI[vim7.2extratargz.md5sum] = "35e04482f07c57221c9a751aaa3b8dac"
-SRC_URI[vim7.2extratargz.sha256sum] = "20894ac79672160bfc4f1d2f9f9775b34d944762d655307a91ca96d358faa04d"
 
 PARALLEL_MAKE = ""

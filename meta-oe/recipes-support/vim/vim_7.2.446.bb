@@ -1,15 +1,6 @@
-# vim-tiny sets that too
-VIMFEATURES ?= "big"
+require ${PN}.inc
 
-# GUI type - gvim recipe sets "gtk2"
-VIMGUI ?= "no"
-
-# gvim recipes uses "--with-x"
-VIMX ?= "--without-x"
-
-require vim.inc
-
-PR = "${INC_PR}.3"
+PR = "${INC_PR}.0"
 
 # 001-446; 401-446 are not yet available online
 SRC_URI += "http://ftp.vim.org/pub/vim/patches/7.2/7.2.001-100.gz;name=p001-100;apply=yes;patchdir=..;pnum=0"
@@ -17,6 +8,13 @@ SRC_URI += "http://ftp.vim.org/pub/vim/patches/7.2/7.2.101-200.gz;name=p101-200;
 SRC_URI += "http://ftp.vim.org/pub/vim/patches/7.2/7.2.201-300.gz;name=p201-300;apply=yes;patchdir=..;pnum=0"
 SRC_URI += "http://ftp.vim.org/pub/vim/patches/7.2/7.2.301-400.gz;name=p301-400;apply=yes;patchdir=..;pnum=0"
 SRC_URI += "file://401-446.diff;patchdir=..;pnum=0"
+
+SRC_URI[vim72.md5sum] = "f0901284b338e448bfd79ccca0041254"
+SRC_URI[vim72.sha256sum] = "914db0f2205ebd6f02878295ec2506036ea7500399db112c61a01491cd9a1d86"
+SRC_URI[vim72-lang.md5sum] = "d8884786979e0e520c112faf2e176f05"
+SRC_URI[vim72-lang.sha256sum] = "11607f539a4518b550bf1606b7d3a6f36c1ffdf566c058e7d94bced78034cd5b"
+SRC_URI[vim72-extra.md5sum] = "35e04482f07c57221c9a751aaa3b8dac"
+SRC_URI[vim72-extra.sha256sum] = "20894ac79672160bfc4f1d2f9f9775b34d944762d655307a91ca96d358faa04d"
 
 SRC_URI[p001-100.md5sum] = "ba91b19374cee90f71b8f4ab1d92dc0f"
 SRC_URI[p001-100.sha256sum] = "519f4fea460e4f7a737ea8006c0dc1684982f8372d1581fb963a5d58f8007f67"
@@ -28,14 +26,3 @@ SRC_URI[p301-400.md5sum] = "137b5821ff4a2266796d14d867be5f9f"
 SRC_URI[p301-400.sha256sum] = "41f022ec829786a008685c0b00acf8be09525755a94a06236a4b879b1f84b5f4"
 
 SRC_URI += "file://configure.in_remove_CC_quotes.patch;patchdir=.."
-SRC_URI += "file://vimrc"
-
-do_install_append() {
-    install -m 0644 ${WORKDIR}/vimrc ${D}/${datadir}/vim
-}
-
-RCONFLICTS_${PN} = "gvim"
-RREPLACES_${PN} = "vim-tiny"
-PACKAGES =+ "${PN}-vimrc"
-
-FILES_${PN}-vimrc = "${datadir}/vim/vimrc"
