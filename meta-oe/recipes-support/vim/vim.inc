@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://README.txt;md5=72c4840d07b65659b60b3fa405c7da36"
 PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
-INC_PR = "r12"
+INC_PR = "r13"
 
 SRC_URI = " \
   ftp://ftp.${PN}.org/pub/${PN}/unix/${PN}-${PV_MAJOR}.tar.bz2;name=${VIMDIR} \
@@ -69,9 +69,9 @@ FILES_${PN}-tutor = "${datadir}/${PN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
 FILES_${PN}-vimrc = "${datadir}/${PN}/vimrc"
 FILES_${PN}-data = "${datadir}/${PN}"
 
-ALTERNATIVE_NAME = "vi"
-ALTERNATIVE_PATH = "${bindir}/${PN}"
-ALTERNATIVE_LINK = "${base_bindir}/vi"
-ALTERNATIVE_PRIORITY = "100"
+ALTERNATIVE_${PN} = "vi"
+ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
+ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+ALTERNATIVE_PRIORITY[vi] = "100"
 
 PARALLEL_MAKE = ""
