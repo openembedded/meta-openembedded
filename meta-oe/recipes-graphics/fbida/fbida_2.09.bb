@@ -8,13 +8,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
 DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif"
 
-SRC_URI = "http://dl.bytesex.org/releases/fbida/fbida-${PV}.tar.gz"
-SRC_URI[md5sum] = "9b3693ab26a58194e36b479bffb61ed0"
-SRC_URI[sha256sum] = "298e7f3545e33596a5876f6b9c3da7ef475c2692e5fab0df824fbcd7a489cd80"
+SRC_URI = "git://git.kraxel.org/fbida"
+SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
+S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "STRIP="
 
 do_compile() {
+	sed -i -e 's: cpp: ${TARGET_PREFIX}cpp:g' GNUmakefile
 	oe_runmake
 }
 
