@@ -2,7 +2,7 @@ DESCRIPTION = "Full-featured IRC chat client with scripting support"
 LICENSE = "GPLv2+"
 HOMEPAGE = "http://www.xchat.org"
 SECTION = "x11/network"
-DEPENDS = "libgcrypt zlib gtk+"
+DEPENDS = "libgcrypt zlib gtk+ libsexy"
 DEPENDS += "gdk-pixbuf-native"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
