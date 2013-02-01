@@ -16,7 +16,7 @@ HOMEPAGE="http://www.linux-nis.org/nis/ypbind-mt/index.html"
 
 require nis.inc
 
-SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${P}.tar.bz2"
+SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2"
 SRC_URI[md5sum] = "135834db97d78ff6d79fdee2810b4056"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=082c9a0886c7c3db1bc862b5b62ffe08"
