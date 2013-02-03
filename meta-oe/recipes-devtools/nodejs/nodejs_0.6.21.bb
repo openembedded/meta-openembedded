@@ -54,7 +54,8 @@ do_compile () {
 }
 
 do_install () {
-  DESTDIR=${D} oe_runmake install
+  export DESTDIR=${D} 
+  oe_runmake install
 }
 
 RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
