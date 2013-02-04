@@ -1,6 +1,6 @@
 require qconnman.inc
 
-RCONFLICTS = "qconnman-e"
+RCONFLICTS_${PN} = "qconnman-e"
 
 inherit qt4x11
 
