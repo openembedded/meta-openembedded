@@ -12,7 +12,7 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
 #3d needed for ogg playback
 #4th needed for flac playback
 #5th needed binary to create db
-RDEPENDS += "\
+RDEPENDS_${PN} += "\
        gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 gst-plugins-good-autodetect \
        ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad gst-plugins-good-id3demux', d)} \
        gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
