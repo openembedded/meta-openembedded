@@ -31,7 +31,7 @@ do_configure_prepend() {
 	sed -i -e s:help:: ${S}/Makefile.am
 }
 
-pkg_postinst_append () {
+pkg_postinst_${PN}_append () {
 	gconftool-2 --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
 		--direct --load /etc/gconf/schemas/panel-default-setup.entries
 }

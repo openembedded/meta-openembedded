@@ -26,7 +26,7 @@ do_configure_prepend() {
 	sed -i -e s:^#!@PYTHON@:#!/usr/bin/python: ${S}/gnome-panel/gnome-panel-add.in
 }
 
-pkg_postinst_append () {
+pkg_postinst_${PN}_append () {
 if [ -n "$D" ]; then
 	exit 1
 fi
