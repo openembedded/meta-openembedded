@@ -9,17 +9,18 @@ LICENSE = "Public domain"
 LIC_FILES_CHKSUM = "file://README;md5=97d739900be6e852830f55aa3c07d4a0"
 SRC_DISTRIBUTE_LICENSES += "${PN}"
 RPROVIDES_${PN} = "virtual-japanese-font"
-PR = "r7"
+PR = "r8"
 
 SRC_URI = "http://osdn.dl.sourceforge.jp/efont/10087/sazanami-20040629.tar.bz2"
 S = "${WORKDIR}/sazanami-20040629"
 
-PACKAGES = "${PN}-dbg ttf-sazanami-gothic ttf-sazanami-mincho"
-RRECOMMENDS_${PN}-dbg = ""
+PACKAGES = "ttf-sazanami-gothic ttf-sazanami-mincho"
+UPDATE_FONTS_PACKAGES = "ttf-sazanami-gothic ttf-sazanami-mincho"
+
 FILES_ttf-sazanami-gothic = "${datadir}/fonts/truetype/sazanami-gothic.ttf \
-			     ${datadir}/doc/ttf-sazanami-gothic/README"
+                             ${datadir}/doc/ttf-sazanami-gothic/README"
 FILES_ttf-sazanami-mincho = "${datadir}/fonts/truetype/sazanami-mincho.ttf \
-			     ${datadir}/doc/ttf-sazanami-mincho/README"
+                             ${datadir}/doc/ttf-sazanami-mincho/README"
 
 do_install_append() {
 	# README contains the redistribution license

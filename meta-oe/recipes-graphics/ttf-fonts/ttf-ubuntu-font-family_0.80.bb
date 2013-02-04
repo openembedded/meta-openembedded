@@ -13,8 +13,8 @@ SRC_URI[sha256sum] = "107170099bbc3beae8602b97a5c423525d363106c3c24f787d43e09811
 
 S = "${WORKDIR}/ubuntu-font-family-${PV}"
 
-PACKAGES = "${PN}-dbg ttf-ubuntu-mono ttf-ubuntu-sans"
-RRECOMMENDS_${PN}-dbg = ""
+PACKAGES = "ttf-ubuntu-mono ttf-ubuntu-sans"
+UPDATE_FONTS_PACKAGES = "ttf-ubuntu-mono ttf-ubuntu-sans"
 
 FILES_ttf-ubuntu-mono  = "${datadir}/fonts/truetype/*Mono*"
 FILES_ttf-ubuntu-sans  = "${datadir}/fonts/truetype/Ubuntu-*"

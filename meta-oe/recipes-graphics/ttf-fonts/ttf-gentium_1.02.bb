@@ -6,7 +6,7 @@ LICENSE = "OFL"
 LICENSE_URL = "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=OFL"
 LIC_FILES_CHKSUM = "file://OFL;md5=33a5bf7b98a9c0ae87430760ba762295 \
 "
-PR = "r6"
+PR = "r7"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/t/ttf-gentium/ttf-gentium_${PV}.orig.tar.gz "
 
@@ -22,15 +22,16 @@ do_install_append() {
 
 }
 
-PACKAGES = "${PN}-dbg ${PN} ${PN}-alt"
+PACKAGES = "${PN} ${PN}-alt"
+UPDATE_FONTS_PACKAGES = "${PN} ${PN}-alt"
 
-FILES_ttf-gentium-alt = "${datadir}/fonts/truetype/GenAI*.ttf \
-                         ${datadir}/fonts/truetype/GenAR*.ttf \
-			 ${datadir}/doc/ttf-gentium-alt/*"
+FILES_${PN}-alt = "${datadir}/fonts/truetype/GenAI*.ttf \
+                   ${datadir}/fonts/truetype/GenAR*.ttf \
+                   ${datadir}/doc/ttf-gentium-alt/*"
 
 FILES_${PN} = "${datadir}/fonts/truetype/GenI*.ttf \
                ${datadir}/fonts/truetype/GenR*.ttf \
-	       ${datadir}/doc/ttf-gentium/*"
+               ${datadir}/doc/ttf-gentium/*"
 
 SRC_URI[md5sum] = "4c3e6ae586be277537ebb68f2a45b883"
 SRC_URI[sha256sum] = "4746c04c9a4ad9e0788a38e0a2f81919a630d8070ceabc89f156b6d41d8ceb37"
