@@ -3,7 +3,7 @@ SECTION = "x11/wm"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
 
-PR = "r7"
+PR = "r8"
 
 inherit packagegroup
 
@@ -40,6 +40,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-fsguard-plugin \
     xfce4-battery-plugin \
     xfce4-mount-plugin \
+    xfce4-brightness-plugin \
     \
     xfce4-appfinder \
     xfce4-screenshooter \
