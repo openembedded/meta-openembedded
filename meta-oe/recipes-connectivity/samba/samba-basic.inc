@@ -9,7 +9,7 @@ EXTRA_OECONF += "\
         --without-ldap \
         --without-krb5"
 
-PACKAGES =+ "libwbclient libwinbind libwinbind-dbg winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
+PACKAGES =+ "libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
 
 FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
                      ${libdir}/security/.debug/pam_winbind.so \
@@ -41,13 +41,14 @@ FILES_winbind = "${sbindir}/winbindd \
                  ${bindir}/ntlm_auth \
                  ${sysconfdir}/init.d/winbind \
 "
-FILES_libwinbind = "${libdir}/libnss_*${SOLIBS} \
-                    ${libdir}/idmap/*.so \
-                    ${libdir}/nss_info \
+FILES_libwinbind = "${libdir}/idmap/*.so \
                     ${libdir}/pdb \
                     ${libdir}/gpext \
                     ${libdir}/perfcount \
                     ${libdir}/security/pam_winbind.so \
 "
+
+FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
+                        ${libdir}/nss_info"
 
 FILES_swat       = "${sbindir}/swat ${datadir}/swat ${libdir}/*.msg"
