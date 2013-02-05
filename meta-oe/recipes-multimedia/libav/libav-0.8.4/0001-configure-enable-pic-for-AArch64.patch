@@ -5,7 +5,7 @@ Subject: [PATCH] configure: enable pic for AArch64
 
 Signed-off-by: Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
 
-Upstream-status: Backport
+Upstream-Status: Backport
 ---
  configure |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

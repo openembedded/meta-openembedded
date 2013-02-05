@@ -6,7 +6,7 @@ Subject: [PATCH] Remove gnome-keyring remains.
 Not required anymore. gnome_keyring_daemon_prepare_environment_sync
 is a stub function that does nothing.
 
-Upstream-status: backport [1]
+Upstream-Status: backport [1]
 
 [1] http://git.xfce.org/xfce/xfce4-session/commit/?id=7a75a8a0f7089b716e702e6bb0cf13fc3194e3db
 ---

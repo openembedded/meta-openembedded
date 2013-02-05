@@ -4,9 +4,9 @@ Date: Sun, 4 Nov 2012 21:23:36 +0100
 Subject: [PATCH] Add shutdown/reboot functionality for systemd (bug #8729).
 
 Based on patch by Christian Hesse and Evangelos Foutras.
----
 
-Upstream-status: backport
+Upstream-Status: backport
+---
  configure.in                  |    4 +
  xfce4-session/Makefile.am     |   14 ++-
  xfce4-session/xfsm-shutdown.c |   35 ++++++-

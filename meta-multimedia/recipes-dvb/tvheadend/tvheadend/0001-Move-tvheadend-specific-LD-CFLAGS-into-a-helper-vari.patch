@@ -6,7 +6,7 @@ Subject: [PATCH] Move tvheadend specific LD/CFLAGS into a helper variable to
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
-Upstream-status: Inappropriate [OE specific]
+Upstream-Status: Inappropriate [OE specific]
 ---
  Makefile              |   20 ++++++++++----------
  support/configure.inc |    8 ++++----
