@@ -96,7 +96,7 @@ do_install_append() {
 
 
 
-pkg_postinst_winbind () {
+pkg_postinst_libnss-winbind () {
     # add wins to the list of resolvers
     ns=$D${sysconfdir}/nsswitch.conf
     if ! grep "hosts:.*wins" $ns > /dev/null; then
