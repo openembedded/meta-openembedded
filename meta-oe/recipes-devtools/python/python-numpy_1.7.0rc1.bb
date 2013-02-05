@@ -1,14 +1,20 @@
 DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
 SECTION = "devel/python"
 LICENSE = "PSF"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3c42211d73c3faa1026e671dd39883fa"
-PR = "r5"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f87832d854acbade6e9f5c601c8b30b1"
+PR = "r0"
+PV = "1.6.99+1.7.0rc1"
+REALPV = "1.7.0rc1"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${REALPV}.tar.gz \
            ${CONFIGFILESURI} \
+           file://aarch64.patch \
 	  "
 CONFIGFILESURI ?= ""
 
+CONFIGFILESURI_aarch64 = "file://config.h \
+	   file://_numpyconfig.h \
+	  "
 CONFIGFILESURI_arm = "file://config.h \
 	   file://numpyconfig.h \
 	  "
@@ -16,7 +22,7 @@ CONFIGFILESURI_mipsel = "file://config.h \
 	   file://numpyconfig.h \
 	  "
 
-S = "${WORKDIR}/numpy-${PV}"
+S = "${WORKDIR}/numpy-${REALPV}"
 
 inherit distutils
 
@@ -29,14 +35,27 @@ do_compile_prepend() {
 	 cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/core/include/numpy/
 }
 
-SRC_URI[md5sum] = "5c7b5349dc3161763f7f366ceb96516b"
-SRC_URI[sha256sum] = "2e7bb84573e5123e07f3c919fd433bc09b78d606252b6b719e385c2a981d8e06"
-
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
+SRC_URI[md5sum] = "a4719f5a1853bc0f8892a5956d5c4229"
+SRC_URI[sha256sum] = "45ea23622f72d86bc3614446d668ee962c0475ee7b91a93ef85a5e0493962de5"
 
+# install what is needed for numpy.test()
 RDEPENDS_${PN} = "python-unittest \
                   python-difflib \
                   python-pprint \
                   python-pickle \
                   python-shell \
+                  python-nose \
+                  python-doctest \
+                  python-datetime \
+                  python-distutils \
+                  python-misc \
+                  python-mmap \
+                  python-netclient \
+                  python-numbers \
+                  python-pydoc \
+                  python-pkgutil \
+                  python-email \
+                  python-subprocess \
+                  python-compression \
                  "
