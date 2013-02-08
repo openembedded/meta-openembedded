@@ -1,17 +1,16 @@
+SUMMARY = "Python XML bindings for libxml2 and libxslt"
 DESCRIPTION = "Powerful and Pythonic XML processing library combining \
 libxml2/libxslt with the ElementTree API."
 HOMEPAGE = "http://codespeak.net/lxml"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=7de92baeb3b7bfaebe72404155fdb346"
+LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b"
 SRCNAME = "lxml"
-PR = "r2"
 
 DEPENDS = "libxml2 libxslt"
-RDEPENDS_${PN} += "libxml2 libxslt python-compression"
 
 SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz;name=lxml"
-SRC_URI[lxml.md5sum] = "d6c612d63a84d79440912a1b29d3b981"
-SRC_URI[lxml.sha256sum] = "89b73925b5e3295dcf4675cb948007a20eb029fe35c9a162ae19ec11f1abafe5"
+SRC_URI[lxml.md5sum] = "38b15b0dd5e9292cf98be800e84a3ce4"
+SRC_URI[lxml.sha256sum] = "cadba4cf0e235127795f76a6f7092cb035da23a6e9ec4c93f8af43a6784cd101"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
@@ -28,7 +27,7 @@ DISTUTILS_INSTALL_ARGS += " \
 "
 
 BBCLASSEXTEND = "native nativesdk"
+
+RDEPENDS_${PN} += "libxml2 libxslt python-compression"
 RDEPENDS_${PN}_virtclass-native = "libxml2-native libxslt-native"
-
-
 
