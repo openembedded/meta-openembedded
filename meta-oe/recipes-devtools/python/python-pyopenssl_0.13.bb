@@ -1,7 +1,7 @@
-DESCRIPTION = "Simple Python wrapper around the OpenSSL library"
+SUMMARY = "Simple Python wrapper around the OpenSSL library"
 SECTION = "devel/python"
 
-LICENSE = "Apache"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRCNAME = "pyOpenSSL"
