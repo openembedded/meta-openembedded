@@ -1,0 +1,54 @@
+From 394108035d350ae662a431c80131f812b5f72dff Mon Sep 17 00:00:00 2001
+From: Venture Research <tech@ventureresearch.com>
+Date: Fri, 8 Feb 2013 20:22:19 -0600
+Subject: [PATCH] lua: update Makefile to use environment build settings
+
+OE-specific parameters, instead of overriding all of these simply use
+the ones that are already passed in. Also configure for only Linux...
+
+Signed-off-by: Venture Research <tech@ventureresearch.com>
+---
+ deps/lua/src/Makefile | 18 +++++++-----------
+ 1 file changed, 7 insertions(+), 11 deletions(-)
+
+diff --git a/deps/lua/src/Makefile b/deps/lua/src/Makefile
+index 77d6a48..888d0da 100644
+--- a/deps/lua/src/Makefile
++++ b/deps/lua/src/Makefile
+@@ -5,18 +5,14 @@
+ # == CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT =======================
+ 
+ # Your platform. See PLATS for possible values.
+-PLAT= none
++PLAT= linux
+ 
+-CC= gcc
+-CFLAGS= -O2 -Wall $(MYCFLAGS)
+-AR= ar rcu
+-RANLIB= ranlib
+-RM= rm -f
+-LIBS= -lm $(MYLIBS)
+-
+-MYCFLAGS=
++MYCFLAGS=-DLUA_USE_LINUX
+ MYLDFLAGS=
+-MYLIBS=
++MYLIBS=-Wl,-E -ldl -lreadline -lhistory -lncurses
++
++CFLAGS += $(MYCFLAGS)
++LIBS += -lm $(MYLIBS)
+ 
+ # == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
+ 
+@@ -48,7 +44,7 @@ o:	$(ALL_O)
+ a:	$(ALL_A)
+ 
+ $(LUA_A): $(CORE_O) $(LIB_O)
+-	$(AR) $@ $?
++	$(AR) rcu $@ $?
+ 	$(RANLIB) $@
+ 
+ $(LUA_T): $(LUA_O) $(LUA_A)
+-- 
+1.8.1.2
+
