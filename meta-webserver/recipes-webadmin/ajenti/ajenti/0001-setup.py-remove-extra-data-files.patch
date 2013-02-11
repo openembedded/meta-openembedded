@@ -1,0 +1,33 @@
+From 37bf4c471f23140e00fe87dde6f7c3cf38933c22 Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Mon, 12 Mar 2012 02:01:48 +0000
+Subject: [PATCH] setup.py: remove extra data files
+
+Don't install files using setup.py, since this fails due to absolute
+paths and we can easily install these within the recipe instead.
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ setup.py |    6 ------
+ 1 files changed, 0 insertions(+), 6 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 8daea4c..11e3acb 100755
+--- a/setup.py
++++ b/setup.py
+@@ -18,10 +18,4 @@ setup(
+     packages = find_packages(),
+     package_data={'': ['files/*.*', 'files/*/*.*', 'files/*/*/*.*', 'templates/*.*', 'widgets/*.*', 'layout/*.*']},
+     scripts=['ajenti-panel', 'ajenti-pkg'],
+-    data_files=[
+-        ('/etc/ajenti', ['packaging/files/ajenti.conf']),
+-        ('/etc/ajenti/users', ['packaging/files/admin.conf']),
+-        ('/etc/init.d', ['packaging/files/ajenti']),
+-        ('/var/lib/ajenti/plugins', ['packaging/files/.placeholder']),
+-    ],
+ )
+-- 
+1.7.5.4
+

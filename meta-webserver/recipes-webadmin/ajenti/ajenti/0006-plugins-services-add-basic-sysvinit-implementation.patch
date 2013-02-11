@@ -1,0 +1,119 @@
+From 57f949a7ab34812d8384bf41c05c3b25bdade92b Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Sun, 18 Mar 2012 14:26:34 +0000
+Subject: [PATCH] plugins/services: add basic sysvinit implementation
+
+This allows operation on systems that don't have the "service" command.
+The PID finding is a little hacky but mostly works. Note that this uses
+psutil to detect whether the service is really running rather than just
+assuming that it is if the pid file exists.
+
+Note: you need to remove s_upstart.py before this will work.
+
+Upstream-Status: Pending
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ plugins/services/s_init.py |   90 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 90 insertions(+), 0 deletions(-)
+ create mode 100755 plugins/services/s_init.py
+
+diff --git a/plugins/services/s_init.py b/plugins/services/s_init.py
+new file mode 100755
+index 0000000..6f38b0a
+--- /dev/null
++++ b/plugins/services/s_init.py
+@@ -0,0 +1,90 @@
++# Basic sysvinit service backend implementation for Ajenti Services plugin
++#
++# Copyright (C) 2012 Intel Corporation
++# Author: Paul Eggleton <paul.eggleton@linux.intel.com>
++#
++
++import os
++import psutil
++
++from ajenti.com import *
++from ajenti.utils import *
++from ajenti import apis
++from ajenti.api import *
++
++def find_service_pid(service):
++    svcfile = os.path.join('/etc/init.d', service)
++    pidfile = ''
++    try:
++        svcf = open(svcfile)
++    except:
++        return None
++    while 1:
++        line = svcf.readline()
++        if not line:
++            break
++        if line.startswith('PID='):
++            pidfile = line.split('=')[1].strip("'\n\r \"")
++            break
++    svcf.close()
++    if not pidfile:
++        pf = '/var/run/%s.pid' % service
++        if os.path.exists(pf):
++            pidfile = pf
++        else:
++            pf = '/var/run/%sd.pid' % service
++            if os.path.exists(pf):
++                pidfile = pf
++    if pidfile:
++        pidf = open(pidfile)
++        pid = pidf.readline()
++        pidf.close
++        if pid:
++            pid = pid.strip()
++            pid = int(pid)
++            try:
++                p = psutil.Process(pid)
++            except:
++                pid = None
++        return pid
++    return None
++
++
++class UpstartServiceManager(Plugin):
++    implements(apis.services.IServiceManager)
++    platform = ['debian']
++
++    def list_all(self):
++        r = []
++
++        blacklist = 'functions mountall.sh save-rtc.sh umountnfs.sh populate-volatile.sh rcS bootlogd urandom halt sendsigs single bootmisc.sh sysfs.sh mountnfs.sh busybox-udhcpc devpts.sh banner.sh modutils.sh checkroot.sh networking umountfs udev rc hostname.sh fbsetup stop-bootlogd rmnologin.sh reboot hwclock.sh read-only-rootfs-hook.sh functions.initscripts syslog.busybox'.split()
++
++        for f in os.listdir('/etc/init.d'):
++            if not f in blacklist:
++                svc = apis.services.Service()
++                svc.name = f
++                pid = find_service_pid(f)
++                if pid:
++                    svc.status = 'running'
++                else:
++                    svc.status = 'stopped'
++                r.append(svc)
++
++        return sorted(r, key=lambda s: s.name)
++
++    def get_status(self, name):
++        pid = find_service_pid(name)
++        if pid:
++            return 'running'
++        else:
++            return 'stopped'
++
++    def start(self, name):
++        shell('/etc/init.d/%s start' % name)
++
++    def stop(self, name):
++        shell('/etc/init.d/%s stop' % name)
++
++    def restart(self, name):
++        shell('/etc/init.d/%s restart' % name)
++
+-- 
+1.7.5.4
+

@@ -1,0 +1,29 @@
+From cde811cfffba48c148b60fb1083fe8fd409b8b24 Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Tue, 13 Mar 2012 01:52:34 +0000
+Subject: [PATCH 1/2] plugins/hddstat: fix disk usage check to work with
+ busybox
+
+busybox df does not have --total, so fake it using awk.
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ plugins/hddstat/usage.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/plugins/hddstat/usage.py b/plugins/hddstat/usage.py
+index 3c84181..cf5f037 100644
+--- a/plugins/hddstat/usage.py
++++ b/plugins/hddstat/usage.py
+@@ -7,7 +7,7 @@ class DiskUsageMeter(LinearMeter):
+     transform = 'percent'
+     
+     def get_usage(self):
+-        u = int(shell('df --total | grep total').split().pop().strip('%'))
++        u = int(round(float(shell("df -P | awk 'NR > 1 {total+=$3+$4 ; used+=$3} END { print used/total*100}'").strip())))
+         return u
+     
+     def get_value(self):
+-- 
+1.7.4.4
+

@@ -1,0 +1,23 @@
+From 75b5109ceb4874c967daf6c1e8434e6093b1df79 Mon Sep 17 00:00:00 2001
+From: Kevin Strasser <kevin.strasser@linux.intel.com>
+Date: Mon, 29 Oct 2012 01:44:10 -0700
+Subject: [PATCH] plugins/services: replace s_upstart with s_init in MODULES
+
+Signed-off-by: Kevin Strasser <kevin.strasser@linux.intel.com>
+---
+ plugins/services/__init__.py |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plugins/services/__init__.py b/plugins/services/__init__.py
+index 6cf58e5..ced3300 100755
+--- a/plugins/services/__init__.py
++++ b/plugins/services/__init__.py
+@@ -1,4 +1,4 @@
+-MODULES = ['api', 'main', 'meter', 'widget', 's_upstart', 's_arch', 's_bsd', 's_centos', 's_gentoo']
++MODULES = ['api', 'main', 'meter', 'widget', 's_init', 's_arch', 's_bsd', 's_centos', 's_gentoo']
+ 
+ DEPS =  [
+     (['centos', 'fedora'],
+-- 
+1.7.9.5
+

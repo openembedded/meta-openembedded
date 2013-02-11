@@ -1,0 +1,47 @@
+From 552c46fb22fe336175c42612c33ceb0828ddd6aa Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Tue, 13 Mar 2012 01:54:09 +0000
+Subject: [PATCH 2/2] plugins/sysload: fix to work with busybox
+
+The busybox free command does not support -b, so specify -k (which is
+also ignored, but will help if real "free" is being used) and multiply
+kb values by 1024.
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ plugins/sysload/ss_linux.py |   18 +++++++++++-------
+ 1 files changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/plugins/sysload/ss_linux.py b/plugins/sysload/ss_linux.py
+index cab7708..be60c53 100644
+--- a/plugins/sysload/ss_linux.py
++++ b/plugins/sysload/ss_linux.py
+@@ -11,14 +11,18 @@ class LinuxSysStat(Plugin):
+         return open('/proc/loadavg', 'r').read().split()[0:3]
+ 
+     def get_ram(self):
+-        s = shell('free -b | grep Mem').split()[1:]
+-        t = int(s[0])
+-        u = int(s[1])
+-        b = int(s[4])
+-        c = int(s[5])
++        # busybox free doesn't support -b
++        s = shell('free -k | grep Mem').split()[1:]
++        t = int(s[0]) * 1024
++        u = int(s[1]) * 1024
++        b = int(s[4]) * 1024
++        if len(s) > 5:
++                c = int(s[5]) * 1024
++        else:
++                c = 0
+         u -= c + b;
+         return (u, t)
+ 
+     def get_swap(self):
+-        s = shell('free -b | grep Swap').split()[1:]
+-        return (int(s[1]), int(s[0]))
++        s = shell('free -k | grep Swap').split()[1:]
++        return (int(s[1]) * 1024, int(s[0]) * 1024)
+-- 
+1.7.4.4
+

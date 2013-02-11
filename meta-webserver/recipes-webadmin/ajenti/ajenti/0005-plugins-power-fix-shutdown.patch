@@ -1,0 +1,31 @@
+From acd997cf610f8e9b0dbea00d2f1184d256d1b85b Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Sat, 17 Mar 2012 23:50:48 +0000
+Subject: [PATCH] plugins/power: fix shutdown
+
+Fix shutdown to use the -h option together with -P (which is required
+for sysvinit shutdown.)
+
+Upstream-Status: Pending
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ plugins/power/main.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/plugins/power/main.py b/plugins/power/main.py
+index 0ab6337..069bde7 100755
+--- a/plugins/power/main.py
++++ b/plugins/power/main.py
+@@ -57,7 +57,7 @@ class PowerPlugin(CategoryPlugin):
+     @event('button/click')
+     def on_aclick(self, event, params, vars=None):
+         if params[0] == 'shutdown':
+-            shell('shutdown -P now')
++            shell('shutdown -h -P now')
+         if params[0] == 'reboot':
+             shell('reboot')
+ 
+-- 
+1.7.5.4
+

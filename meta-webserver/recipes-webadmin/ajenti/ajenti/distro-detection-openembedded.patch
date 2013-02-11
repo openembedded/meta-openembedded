@@ -1,0 +1,42 @@
+From 5b3864f5ff76915887774fa78961616b6e7c1649 Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Thu, 15 Mar 2012 03:25:36 +0000
+Subject: [PATCH] Hardcode distro detection
+
+Use "openembedded" as the distro identification string if none is able
+to be detected.
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ ajenti/utils/utils.py |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/ajenti/utils/utils.py b/ajenti/utils/utils.py
+index c7e1463..98199c0 100755
+--- a/ajenti/utils/utils.py
++++ b/ajenti/utils/utils.py
+@@ -41,6 +41,7 @@ def detect_platform(mapping=True):
+     platform_mapping = {
+         'ubuntu': 'debian',
+         'linuxmint': 'debian',
++        'openembedded': 'debian',
+     }
+ 
+     if platform.system() != 'Linux':
+@@ -57,7 +58,10 @@ def detect_platform(mapping=True):
+         try:
+             dist = shell('strings -4 /etc/issue').split()[0]
+         except:
+-            dist = 'unknown'
++            dist = ''
++
++    if dist == '':
++        dist = 'openembedded'
+ 
+     res = dist.strip().lower()
+     if res in base_mapping:
+-- 
+1.7.4.4
+
