@@ -1,0 +1,41 @@
+Fix Makefile:
+* don't overwrite CFLAGS but append to it
+* use gcc as CC only if CC is not already defined
+* use -I= to include paths
+* fix compile of minidlna binary by removing ${LIBS} dependency
+
+Upstream-status: Pending
+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+
+Index: minidlna-1.0.25/Makefile
+===================================================================
+--- minidlna-1.0.25.orig/Makefile	2012-01-18 00:49:01.000000000 +0200
++++ minidlna-1.0.25/Makefile	2013-02-10 17:46:49.000000000 +0200
+@@ -12,13 +12,13 @@
+ #
+ #CFLAGS = -Wall -O -D_GNU_SOURCE -g -DDEBUG
+ #CFLAGS = -Wall -g -Os -D_GNU_SOURCE
+-CFLAGS = -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
+-	 -I/usr/include/ffmpeg \
+-	 -I/usr/include/libavutil -I/usr/include/libavcodec -I/usr/include/libavformat \
+-	 -I/usr/include/ffmpeg/libavutil -I/usr/include/ffmpeg/libavcodec -I/usr/include/ffmpeg/libavformat
++CFLAGS += -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
++	 -I=/usr/include/ffmpeg \
++	 -I=/usr/include/libavutil -I=/usr/include/libavcodec -I=/usr/include/libavformat \
++	 -I=/usr/include/ffmpeg/libavutil -I=/usr/include/ffmpeg/libavcodec -I=/usr/include/ffmpeg/libavformat
+ #STATIC_LINKING: CFLAGS += -DSTATIC
+ #STATIC_LINKING: LDFLAGS = -static
+-CC = gcc
++CC ?= gcc
+ RM = rm -f
+ INSTALL = install
+
+@@ -64,7 +64,7 @@
+ 	$(INSTALL) -d $(ETCINSTALLDIR)
+ 	$(INSTALL) --mode=0644 minidlna.conf $(ETCINSTALLDIR)
+
+-minidlna:	$(BASEOBJS) $(LNXOBJS) $(LIBS)
++minidlna:	$(BASEOBJS) $(LNXOBJS)
+ 	@echo Linking $@
+ 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(BASEOBJS) $(LNXOBJS) $(LIBS)
+
