@@ -4,9 +4,13 @@ HOMEPAGE = "http://www.videolan.org/developers/x264.html"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
+PR = "r1"
+
 DEPENDS = "yasm-native"
 
-SRC_URI = "git://git.videolan.org/x264.git"
+SRC_URI = "git://git.videolan.org/x264.git \
+    file://don-t-default-to-cortex-a9-with-neon.patch \
+    "
 SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
 
 PV = "r2230+git"
