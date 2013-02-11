@@ -4,9 +4,9 @@ LICENSE = "Arphic Public License"
 LIC_FILES_CHKSUM = "file://README;md5=62be011094b7865ddc4d1a648444d31a"
 SRC_DISTRIBUTE_LICENSES += "${PN}"
 RPROVIDES_${PN} = "virtual-chinese-font"
-PR = "r5"
+PR = "r6"
 
-UPDATE_FONTS_PACKAGES = "${PN}"
+FONT_PACKAGES = "${PN}"
 
 SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/t/ttf-arphic-uming/ttf-arphic-uming_0.2.${PV}.1.orig.tar.gz"
 S = "${WORKDIR}"

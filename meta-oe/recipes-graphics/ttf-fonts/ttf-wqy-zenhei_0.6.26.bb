@@ -5,7 +5,7 @@ AUTHOR = "Qianqian Fang and The WenQuanYi Project Contributors"
 HOMEPAGE = "http://wqy.sourceforge.net/en/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cf540fc7d35b5777e36051280b3a911c"
-PR = "r3"
+PR = "r4"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}-0.tar.gz"
 S = "${WORKDIR}/wqy-zenhei"
@@ -17,7 +17,7 @@ do_install_append () {
 }
 
 PACKAGES = "${PN}"
-UPDATE_FONTS_PACKAGES = "${PN}"
+FONT_PACKAGES = "${PN}"
 
 FILES_${PN} = "${datadir}/fonts ${sysconfdir}"
 

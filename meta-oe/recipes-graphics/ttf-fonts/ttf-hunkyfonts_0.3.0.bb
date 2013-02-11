@@ -4,14 +4,14 @@ DESCRIPTION = "Hunky fonts - TTF Version"
 HOMEPAGE = "http://sourceforge.net/projects/hunkyfonts"
 LICENSE = "LGPL"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=7fbc338309ac38fefcd64b04bb903e34"
-PR = "r6"
+PR = "r7"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
 
 S = "${WORKDIR}/hunkyfonts-${PV}/TTF/"
 
 PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
-UPDATE_FONTS_PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
+FONT_PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
 
 FILES_ttf-hunky-sans = "${datadir}/fonts/truetype/HunkySans*.ttf"
 FILES_ttf-hunky-serif = "${datadir}/fonts/truetype/HunkySerif*.ttf"

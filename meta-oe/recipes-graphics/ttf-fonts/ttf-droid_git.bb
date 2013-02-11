@@ -6,7 +6,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://README.txt;md5=83544262a86f1f1ec761e75897df92bc"
 SRCREV = "21e6e2de1f0062f949fcc52d0b4559dfa3246e0e"
 PV = "0.1+gitr${SRCPV}"
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "git://github.com/android/platform_frameworks_base.git;protocol=git;branch=master"
 
@@ -18,7 +18,7 @@ do_install_prepend() {
 
 PACKAGES = "ttf-droid-sans ttf-droid-sans-mono \
             ttf-droid-sans-fallback ttf-droid-sans-japanese ttf-droid-serif"
-UPDATE_FONTS_PACKAGES = "ttf-droid-sans ttf-droid-sans-mono ttf-droid-sans-fallback ttf-droid-sans-japanese ttf-droid-serif"
+FONT_PACKAGES = "ttf-droid-sans ttf-droid-sans-mono ttf-droid-sans-fallback ttf-droid-sans-japanese ttf-droid-serif"
 
 FILES_ttf-droid-sans = "${datadir}/fonts/truetype/DroidSans.ttf ${datadir}/fonts/truetype/DroidSans-Bold.ttf"
 FILES_ttf-droid-sans-mono = "${datadir}/fonts/truetype/DroidSansMono.ttf"

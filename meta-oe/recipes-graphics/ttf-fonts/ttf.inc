@@ -9,4 +9,4 @@ do_install() {
     find ./ -name '*.tt[cf]' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
 }
 
-inherit allarch update-fonts
+inherit allarch fontcache
