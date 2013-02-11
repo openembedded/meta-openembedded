@@ -1,0 +1,37 @@
+From 3850acef7d914a22e3fc4130ad43b2cc47338d6f Mon Sep 17 00:00:00 2001
+From: "Felipe F. Tonello" <ftonello@cercacor.com>
+Date: Mon, 7 Jan 2013 17:13:22 -0800
+Subject: [PATCH] added flags to disable qml plugin and test program to
+ compile
+
+This is usefull when there is no need to compile test program and qml plugin.
+
+Upstream-Status: Accepted
+
+Signed-off-by: Felipe F. Tonello <ftonello@cercacor.com>
+---
+ connman-qt.pro |   11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/connman-qt.pro b/connman-qt.pro
+index 7d9ec99..425c41f 100644
+--- a/connman-qt.pro
++++ b/connman-qt.pro
+@@ -1,4 +1,13 @@
+ TEMPLATE = subdirs
+-SUBDIRS += libconnman-qt test plugin
++SUBDIRS += libconnman-qt
+ CONFIG += ordered
+ 
++# CONFIG flag to disable test program
++!notest {
++    SUBDIRS += test
++}
++
++# CONFIG flag to disable qml plugin
++!noplugin {
++    SUBDIRS += plugin
++}
+-- 
+1.7.9.5
+
