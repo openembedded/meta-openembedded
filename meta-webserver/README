@@ -12,8 +12,25 @@ Dependencies
 This layer depends on:
 
 URI: git://git.openembedded.org/openembedded-core
+subdirectory: meta
 branch: master
 revision: HEAD
+
+For some recipes, the meta-oe layer is required:
+
+URI: git://git.openembedded.org/meta-openembedded
+subdirectory: meta-oe
+branch: master
+revision: HEAD
+
+
+
+Layout
+------
+
+recipes-httpd/      Web servers
+recipes-php/        PHP and PHP applications
+recipes-webadmin/   Standalone web administration interfaces
 
 
 
