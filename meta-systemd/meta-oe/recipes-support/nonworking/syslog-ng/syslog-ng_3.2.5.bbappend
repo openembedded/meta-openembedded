@@ -7,5 +7,6 @@ EXTRA_OECONF += " \
   --with-systemdsystemunitdir=${systemd_unitdir}/system \
 "
 
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "${PN}.service"
+SYSTEMD_PACKAGES = "${PN}"
+RPROVIDES_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "${PN}.service"

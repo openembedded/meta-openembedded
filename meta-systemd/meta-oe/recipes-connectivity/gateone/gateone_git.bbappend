@@ -7,5 +7,10 @@ inherit systemd
 SRC_URI += "file://gateone.service"
 
 NATIVE_SYSTEMD_SUPPORT = "1"
-SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE = "gateone.service"
+SYSTEMD_SERVICE_${PN} = "gateone.service"
+
+do_install_append() {
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
+}
+

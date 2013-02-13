@@ -8,8 +8,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 SRC_URI += "file://busybox-syslog.service.in \
             file://busybox-klogd.service.in"
 
-SYSTEMD_PACKAGES = "${PN}-syslog-systemd"
-SYSTEMD_SERVICE_${PN}-syslog-systemd = "busybox-syslog.service"
+SYSTEMD_PACKAGES = "${PN}-syslog"
+SYSTEMD_SERVICE_${PN}-syslog = "busybox-syslog.service"
 
 do_install_append() {
 	install -d ${D}${systemd_unitdir}/system
@@ -20,4 +20,4 @@ do_install_append() {
 
 	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
 }
-FILES_${PN}-syslog-systemd = "${systemd_unitdir}/system/syslog.service"
+FILES_${PN}-syslog += "${systemd_unitdir}/system/syslog.service"

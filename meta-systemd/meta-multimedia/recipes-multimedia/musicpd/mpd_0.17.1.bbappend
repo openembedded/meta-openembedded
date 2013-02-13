@@ -10,5 +10,6 @@ do_install_append() {
         ${D}/${systemd_unitdir}/system/mpd.service
 }
 
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "mpd.service"
+SYSTEMD_PACKAGES = "${PN}"
+RPROVIDES_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "mpd.service"

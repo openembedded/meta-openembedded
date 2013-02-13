@@ -1,13 +1,19 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PRINC := "${@int(PRINC) + 1}"
+PRINC := "${@int(PRINC) + 2}"
 
 inherit systemd
 
 SRC_URI += "file://entrance.service"
 
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "entrance.service"
+RPROVIDES_${PN} += "${PN}-systemd"
 
-RCONFLICTS_${PN}-systemd += "xserver-nodm-init-systemd"
-RREPLACES_${PN}-systemd += "xserver-nodm-init-systemd"
+SYSTEMD_SERVICE_${PN} = "entrance.service"
+
+do_install_append() {
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/entrance.service ${D}${systemd_unitdir}/system
+}
+
+RCONFLICTS_${PN} += "xserver-nodm-init-systemd"
+RREPLACES_${PN} += "xserver-nodm-init-systemd"

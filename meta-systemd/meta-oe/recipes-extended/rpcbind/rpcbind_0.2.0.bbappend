@@ -7,6 +7,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://rpcbind.service"
 
-SYSTEMD_PACKAGES = "${PN}-systemd"
-SYSTEMD_SERVICE = "rpcbind.service"
+SYSTEMD_PACKAGES = "${PN}"
+RPROVIDES_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "rpcbind.service"
+
+do_install_append() {
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/rpcbind.service ${D}${systemd_unitdir}/system
+}
 
