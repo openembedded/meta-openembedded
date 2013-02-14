@@ -8,6 +8,7 @@ DEPENDS = "openssl libpcre"
 
 inherit cmake
 
+PR = "r1"
 PV = "1.7.3+git"
 
 SRCREV = "4acfa46c321a344b9a6ce4128e72d1e02828d8a0"
@@ -23,3 +24,9 @@ EXTRA_OECMAKE = " \
                  -DRADIUS=FALSE \
                  -DNETSNMP=FALSE \
                 "
+FILES_${PN}-dbg += "/usr/lib/${BPN}/.debug/*"
+
+PACKAGES =+ "${PN}-libs"
+FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
+INSANE_SKIP_${PN}-libs = "dev-so"
+RDEPENDS_${PN} += "${PN}-libs"
