@@ -3,6 +3,8 @@ PRIORITY = "optional"
 LICENSE = "GPL-2.0"
 SECTION = "console/network"
 
+PR = "r2"
+
 RDEPENDS_${PN} += "perl"
 
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
@@ -19,6 +21,11 @@ S = "${WORKDIR}/arptables-v${PV}"
 do_compile () {
 	oe_runmake
 }
+
+# the install target is not multi-job safe, but it doesn't do much
+# so we just install serially
+#
+PARALLEL_MAKEINST = "-j1"
 
 fakeroot do_install () {
 	oe_runmake 'BINDIR=${sbindir}' 'MANDIR=${mandir}/' 'DESTDIR=${D}' install
