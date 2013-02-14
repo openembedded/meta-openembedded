@@ -2,14 +2,10 @@ DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f87832d854acbade6e9f5c601c8b30b1"
-PR = "r0"
-PV = "1.6.99+1.7.0rc1"
-REALPV = "1.7.0rc1"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${REALPV}.tar.gz \
-           ${CONFIGFILESURI} \
-           file://aarch64.patch \
-	  "
+SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
+           ${CONFIGFILESURI} "
+
 CONFIGFILESURI ?= ""
 
 CONFIGFILESURI_aarch64 = "file://config.h \
@@ -22,7 +18,7 @@ CONFIGFILESURI_mipsel = "file://config.h \
 	   file://numpyconfig.h \
 	  "
 
-S = "${WORKDIR}/numpy-${REALPV}"
+S = "${WORKDIR}/numpy-${PV}"
 
 inherit distutils
 
@@ -36,8 +32,9 @@ do_compile_prepend() {
 }
 
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
-SRC_URI[md5sum] = "a4719f5a1853bc0f8892a5956d5c4229"
-SRC_URI[sha256sum] = "45ea23622f72d86bc3614446d668ee962c0475ee7b91a93ef85a5e0493962de5"
+
+SRC_URI[md5sum] = "4fa54e40b6a243416f0248123b6ec332"
+SRC_URI[sha256sum] = "f4fa70b7edbab65ee6432eb63743f5489f1919c614632b20b2fb45aa7e682ac6"
 
 # install what is needed for numpy.test()
 RDEPENDS_${PN} = "python-unittest \
