@@ -11,6 +11,8 @@ LICENSE = "GPL-2.0 LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING.LIB;md5=bbb461211a33b134d42ed5ee802b37ff"
 
+PR = "r1"
+
 inherit update-alternatives
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
@@ -26,14 +28,14 @@ do_compile() {
 
 do_install() {
     install -d ${D}${bindir}
-    install -m755 ${PN}/${PN} ${D}${bindir}
+    install -m755 ${BPN}/${BPN} ${D}${bindir}
 
     install -m755 wrappers/tcptraceroute ${D}${bindir}
 
     install -d ${D}${mandir}
-    install -p -m644 ${PN}/${PN}.8 ${D}${mandir}
-    ln -s ${PN}.8 ${D}${mandir}/${PN}6.8
-    ln -s ${PN}.8 ${D}${mandir}/tcptraceroute.8
+    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}
+    ln -s ${BPN}.8 ${D}${mandir}/${BPN}6.8
+    ln -s ${BPN}.8 ${D}${mandir}/tcptraceroute.8
 
 }
 
