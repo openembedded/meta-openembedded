@@ -4,7 +4,7 @@ LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 PV = "0.16.999.060+svnr${SRCPV}"
-PR = "r6"
+PR = "r7"
 SRCREV = "${EFL_SRCREV}"
 
 inherit e update-alternatives gettext
@@ -14,6 +14,7 @@ SRC_URI = "\
   ${E_SVN}/trunk;module=${SRCNAME};protocol=http \
   file://enlightenment_start.oe \
   file://applications.menu \
+  file://Fix-Illume-Home-Button.diff \
 "
 
 EXTRA_OECONF = "\
