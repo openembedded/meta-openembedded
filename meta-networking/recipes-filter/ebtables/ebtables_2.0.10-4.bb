@@ -2,7 +2,7 @@ SUMMARY = "Utility for basic Ethernet frame filtering on a Linux bridge, MAC NAT
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
 SECTION = "console/network"
-PR = "r1"
+PR = "r2"
 
 RDEPENDS_${PN} += "perl"
 
@@ -44,6 +44,11 @@ do_install () {
 	# Fix hardcoded paths in scripts
 	sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
 	sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
+
+	# The script ebtables-save refernces perl in exec_prefix, so
+	# move it to sbindir to avoid QA issue
+	install -d ${D}/${sbindir}
+	mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
 }
 
 CONFFILES_${PN} += "${sysconfdir}/default/ebtables"
