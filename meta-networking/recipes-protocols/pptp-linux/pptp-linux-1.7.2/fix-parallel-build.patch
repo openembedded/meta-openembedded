@@ -1,0 +1,19 @@
+pptp.c and version.c depend on config.h
+
+Upstream-Status: Backport
+
+Upstream has already similar fixes. Will be available on next release.
+
+Signed-off-by: Jesse Zhang <sen.zhang@windriver.com>
+
+--- a/Makefile	2013-02-27 17:09:24.431226665 +0800
++++ b/Makefile	2013-02-27 17:09:03.442075550 +0800
+@@ -43,6 +43,8 @@
+ pptpsetup.8: pptpsetup
+ 	pod2man $? > $@
+ 
++pptp.o version.o: config.h
++
+ config.h: 
+ 	echo "/* text added by Makefile target config.h */" > config.h
+ 	echo "#define PPTP_LINUX_VERSION \"$(VERSION)$(RELEASE)\"" >> config.h

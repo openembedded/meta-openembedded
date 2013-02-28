@@ -9,10 +9,12 @@ SECTION = "network"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
-           file://options.pptp"
+           file://options.pptp \
+           file://fix-parallel-build.patch \
+           "
 
 SRC_URI[md5sum] = "4c3d19286a37459a632c7128c92a9857"
 SRC_URI[sha256sum] = "e98ae0065d2a39fa3131654ff28cb7070e996f668ed6d0e7d9a445b8d37694bc"
