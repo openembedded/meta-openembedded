@@ -6,15 +6,39 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e7807a6282784a7dde4c846626b08fc6 \
                     file://LICENSE-UNIVERSITIES;md5=8ce9dcc8f7c994de4a408b205c72ba08"
 
 SECTION = "devel"
-INC_PR = "r2"
+INC_PR = "r3"
 
-DEPENDS = "python"
+DEPENDS = "libpcre python"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
 
-inherit autotools
+inherit autotools pythonnative
 
-EXTRA_OECONF = " --without-guile "
+EXTRA_OECONF = " \
+	--with-python=${PYTHON} \
+	--without-allegrocl \
+	--without-android \
+	--without-boost \
+	--without-chicken \
+	--without-clisp \
+	--without-csharp \
+	--without-d \
+	--without-gcj \
+	--without-go \
+	--without-guile \
+	--without-java \
+	--without-lua \
+	--without-mzscheme \
+	--without-ocaml \
+	--without-octave \
+	--without-perl5 \
+	--without-pike \
+	--without-php \
+	--without-python3 \
+	--without-r \
+	--without-ruby \
+	--without-tcl \
+"
 
 BBCLASSEXTEND = "native"
 
