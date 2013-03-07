@@ -7,7 +7,7 @@ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
 inherit autotools binconfig perlnative
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
 SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
@@ -25,6 +25,7 @@ LDFLAGS_append += "-lpthread"
 
 FILES_${PN}-doc += "${datadir}/examples"
 FILES_${PN} += "${datadir}/gnats"
+FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
 
 krb5_do_unpack() {
     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
