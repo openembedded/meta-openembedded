@@ -1,0 +1,39 @@
+From 9ac15a092c50bb95973d1d81200af031109ad377 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 3 Feb 2013 23:31:50 +0100
+Subject: [PATCH 1/2] align vapi dir
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
+Upstream-Status: : Inappropriate [configuration]
+---
+ configure.ac |   10 ++--------
+ 1 files changed, 2 insertions(+), 8 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 1692ce9..f43f904 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -35,14 +35,8 @@ M8T_CHECK_PACKAGE([EXO], [exo-1], [0.8.0])
+ 
+ dnl Check for Vala
+ M8T_CHECK_VALA([0.16.0])
+-AC_ARG_WITH([default-vapidir],
+-		AC_HELP_STRING([--with-default-vapidir],
+-				[Use default VAPI prefix from Vala installation]),
+-		[],
+-		[with_default_vapidir=no])
+-if test x"$with_default_vapidir" == xno ; then
+-	AC_SUBST([vapidir], [${datarootdir}/vala-0.16/vapi])
+-fi
++
++AC_SUBST([vapidir], [${datarootdir}/vala/vapi])
+ 
+ dnl Makefile outputs
+ AC_OUTPUT([
+-- 
+1.7.4.4
+
