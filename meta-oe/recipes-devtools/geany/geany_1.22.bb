@@ -3,9 +3,9 @@ HOMEPAGE = "http://www.geany.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
 DEPENDS = "gtk+"
-PR = "r1"
+PR = "r2"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig perlnative
 
 SRC_URI = " \
     http://download.geany.org/${PN}-${PV}.tar.bz2 \
