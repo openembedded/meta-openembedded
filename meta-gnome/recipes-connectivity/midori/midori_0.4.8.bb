@@ -6,10 +6,10 @@ DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native l
 
 SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
           "
-SRC_URI[midori.md5sum] = "06db7b88a41e9b2265728960d5e98f35"
-SRC_URI[midori.sha256sum] = "65bf9976733597c405492ce91aa664fd10547cb7df16e0a70f260c7a3e97ea5d"
+SRC_URI[midori.md5sum] = "ce1b01fa5aa33d2ee50196df0c71e96f"
+SRC_URI[midori.sha256sum] = "40bf23f84a3537f54d7eb45df1da40ebef54c321b1b34d0d0c8e45bb0cce5e9f"
 
-inherit gtk-icon-cache pkgconfig vala
+inherit gtk-icon-cache pkgconfig vala pythonnative
 
 do_configure() {
     sed -i -e 's:, shell=False::g' -e s:/usr/X11R6/include::g -e s:/usr/X11R6/lib::g wscript
@@ -26,8 +26,8 @@ do_configure() {
             --includedir=${includedir} \
             --infodir=${infodir} \
             --mandir=${mandir} \
-            --disable-hildon \
             --disable-gtk3 \
+            --disable-zeitgeist \
 }
 
 PARALLEL_MAKE = ""
