@@ -9,8 +9,8 @@ SECTION = "net"
 SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
            file://hiawatha-init "
 
-SRC_URI[md5sum] = "712b1822ef525153dc4347417252768d"
-SRC_URI[sha256sum] = "c35e1e975962e1105d7914f74901e304ba90681985c94236c113eaca502b5e34"
+SRC_URI[md5sum] = "5def93779bbc10a021796abd3609caf7"
+SRC_URI[sha256sum] = "2583d8e7f48ddc6cdedc27bb51d3e130679fc2f4411622bae9ddce3ef965d063"
 
 inherit cmake update-rc.d
 
