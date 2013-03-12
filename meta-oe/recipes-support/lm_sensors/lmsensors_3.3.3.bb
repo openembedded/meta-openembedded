@@ -11,11 +11,8 @@ SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2
            file://fancontrol.init \
            file://sensord.init \
 "
-
-SRC_URI[md5sum] = "f357ba00b080ab102a170f7bf8bb2578"
-SRC_URI[sha256sum] = "f13dd885406841a7352ccfb8b9ccb23c4c057abe3de4258da5444c149a9e3ae1"
-
-PR = "r1"
+SRC_URI[md5sum] = "73c2fcccdab6049d289c5e0c596192a1"
+SRC_URI[sha256sum] = "ecc91ba3d918e96fb7d5eb9acce978af803b130e0b33b08d5ea05b2bfca84955"
 
 inherit update-rc.d
 
@@ -29,6 +26,7 @@ S = "${WORKDIR}/lm_sensors-${PV}"
 
 EXTRA_OEMAKE = 'LINUX=${STAGING_KERNEL_DIR} EXLDFLAGS="${LDFLAGS}" \
 		MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
+	        LIBDIR=${libdir} \
 		CC="${CC}" AR="${AR}"'
 
 do_compile() {
