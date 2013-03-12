@@ -11,7 +11,7 @@ ARM_INSTRUCTION_SET = "arm"
 # faac faad2 lame schroedinger libgsm
 DEPENDS = "x264 virtual/libsdl zlib libogg libvorbis libvpx libtheora ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'liba52', d)}"
 
-INC_PR = "r7"
+INC_PR = "r8"
 
 inherit autotools pkgconfig
 
@@ -96,6 +96,7 @@ python populate_packages_prepend() {
     do_split_packages(d, av_libdir, '^lib(.*)\.so\..*',
                       output_pattern='lib%s',
                       description='libav %s library',
+                      extra_depends='',
                       prepend=True,
                       allow_links=True)
 
