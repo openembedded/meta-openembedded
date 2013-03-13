@@ -5,10 +5,11 @@ LICENSE = "GPLv2"
 LICENSE_libhandle = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
 DEPENDS = "util-linux"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
 	file://remove-install-as-user.patch \
+	file://drop-configure-check-for-aio.patch \
 "
 
 SRC_URI[md5sum] = "f70b2e7200d4c29f0af1cf70e7be1db6"
@@ -26,6 +27,13 @@ FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
 
 EXTRA_OECONF = "--enable-gettext=no"
 do_configure () {
+	# Prevent Makefile from calling configure without arguments,
+	# when do_configure gets called for a second time.
+	rm -f include/builddefs include/platform_defs.h
+	# Recreate configure script.
+	rm -f configure
+	oe_runmake configure
+	# Configure.
 	export DEBUG="-DNDEBUG"
 	gnu-configize --force
 	oe_runconf
