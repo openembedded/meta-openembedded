@@ -3,7 +3,7 @@ SECTION = "base"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS += "libtirpc flex-native bison-native"
 
@@ -27,6 +27,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://autofs-5.0.6-fix-recursive-mount-deadlock.patch \
            file://autofs-5.0.6-increase-file-map-read-buffer-size.patch \
            file://autofs-5.0.7-handle-new-location-of-systemd.patch \
+           file://autofs-5.0.7-make-yellow-pages-support-optional.patch \
+           file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
            file://Makefile.rules-cross.patch \
            file://no-bash.patch \
            file://cross.patch \
