@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=9511885992e4900014e3b13ca6372b7d"
 HOMEPAGE = "http://luajit.org"
 
 DEPENDS += "lua5.1"
-PR = "r1"
+PR = "r2"
 SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
            file://disable_lj_vm_foldarith_for_spe.patch \
           "
@@ -20,7 +20,7 @@ do_configure_prepend() {
 	sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
 }
 
-EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX}'
+EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} TARGET_CFLAGS="${TOOLCHAIN_OPTIONS}" TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}"'
 EXTRA_OEMAKE_append_powerpc = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_x86-64 = ' HOST_CC="${BUILD_CC}"'
 EXTRA_OEMAKE_append_i586 = ' HOST_CC="${BUILD_CC} -m32"'
