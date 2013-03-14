@@ -16,20 +16,21 @@ SRC_URI[sha256sum] = "15bdfdcec58a7da30adc87ac2b078e4417dbe5392f3afb719f9ba6d062
 
 S = "${WORKDIR}/tinyxml"
 
-CXXFLAGS += "-fPIC"
+EXTRA_CXXFLAGS = "-I. -fPIC"
 
 do_compile() {
-    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxml.o ${S}/tinyxml.cpp
-    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlerror.o ${S}/tinyxmlerror.cpp
-    ${CXX} ${CXXFLAGS} -I${S} -c -o ${S}/tinyxmlparser.o ${S}/tinyxmlparser.cpp
+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml.o tinyxml.cpp
+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlerror.o tinyxmlerror.cpp
+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxmlparser.o tinyxmlparser.cpp
     ${CXX} ${CXXFLAGS} \
             -shared \
             -Wl,-soname,libtinyxml.so.${PV} \
-            -o ${S}/libtinyxml.so.${PV} \
+            -o libtinyxml.so.${PV} \
             ${LDFLAGS} \
-            ${S}/tinyxml.o \
-            ${S}/tinyxmlparser.o \
-            ${S}/tinyxmlerror.o
+            tinyxml.o \
+            tinyxmlparser.o \
+            tinyxmlerror.o
+
 }
 
 do_install() {
@@ -41,3 +42,4 @@ do_install() {
     install -m 0644 ${S}/tinyxml.h ${D}${includedir}
 }
 
+BBCLASSEXTEND += "native"
