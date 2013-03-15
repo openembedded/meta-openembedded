@@ -5,7 +5,7 @@ LICENSE = "GPLv2 & LGPLv3 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
 
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
            file://apache.conf"
@@ -18,13 +18,13 @@ S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 inherit allarch
 
 do_install() {
-	install -d ${D}${datadir}/${PN}
-	cp -a * ${D}${datadir}/${PN}
+	install -d ${D}${datadir}/${BPN}
+	cp -a * ${D}${datadir}/${BPN}
 
 	install -d ${D}${sysconfdir}/apache2/conf.d
 	install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
 }
 
-FILES_${PN} = "${datadir}/${PN} \
+FILES_${PN} = "${datadir}/${BPN} \
                ${sysconfdir}/apache2/conf.d"
 
