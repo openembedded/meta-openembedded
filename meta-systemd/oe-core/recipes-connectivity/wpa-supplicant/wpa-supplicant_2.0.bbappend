@@ -8,7 +8,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install_append () {
     install -d ${D}${systemd_unitdir}/system
-    install -m 644 ${S}/systemd/*.service ${D}${systemd_unitdir}/system
+    install -m 644 ${S}/wpa_supplicant/systemd/*.service ${D}${systemd_unitdir}/system
 }
 
 # systemd.bbclass does not catch all multiple-instance-service-files
