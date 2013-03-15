@@ -4,7 +4,7 @@ HOMEPAGE = "http://netcat.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2 \
            file://obsolete_autoconf_macros.patch \
@@ -17,6 +17,6 @@ inherit autotools
 
 do_install_append() {
         install -d ${D}${bindir}
-        mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
+        mv ${D}${bindir}/nc ${D}${bindir}/nc.${BPN}
 }
 ALTERNATIVE_PRIORITY = "100"
