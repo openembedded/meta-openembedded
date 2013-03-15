@@ -8,6 +8,7 @@ LICENSE = "GPLv3"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
 
+PR = "r1"
 
 SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
            file://disable-pre-ANSI-compilers.patch \
@@ -37,27 +38,27 @@ do_configure_prepend () {
 do_install () {
 	autotools_do_install
 	install -d ${D}${base_sbindir} ${D}${base_bindir}
-	mv ${D}${bindir}/tftp ${D}${bindir}/tftp.${PN}
-	mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${PN}
-	mv ${D}${bindir}/logger ${D}${bindir}/logger.${PN}
-	mv ${D}${bindir}/traceroute ${D}${bindir}/traceroute.${PN}
-	mv ${D}${bindir}/hostname ${D}${base_bindir}/hostname.${PN}
-	mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/ifconfig.${PN}
+	mv ${D}${bindir}/tftp ${D}${bindir}/tftp.${BPN}
+	mv ${D}${bindir}/telnet ${D}${bindir}/telnet.${BPN}
+	mv ${D}${bindir}/logger ${D}${bindir}/logger.${BPN}
+	mv ${D}${bindir}/traceroute ${D}${bindir}/traceroute.${BPN}
+	mv ${D}${bindir}/hostname ${D}${base_bindir}/hostname.${BPN}
+	mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/ifconfig.${BPN}
 }
 
 pkg_postinst_${PN} () {
-	update-alternatives --install ${bindir}/tftp tftp tftp.${PN} 100
-	update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
-	update-alternatives --install ${bindir}/logger logger logger.${PN} 100
-	update-alternatives --install ${bindir}/traceroute traceroute traceroute.${PN} 100
-	update-alternatives --install ${base_bindir}/hostname hostname hostname.${PN} 100
-	update-alternatives --install ${base_sbindir}/ifconfig ifconfig ifconfig.${PN} 100
+	update-alternatives --install ${bindir}/tftp tftp tftp.${BPN} 100
+	update-alternatives --install ${bindir}/telnet telnet telnet.${BPN} 100
+	update-alternatives --install ${bindir}/logger logger logger.${BPN} 100
+	update-alternatives --install ${bindir}/traceroute traceroute traceroute.${BPN} 100
+	update-alternatives --install ${base_bindir}/hostname hostname hostname.${BPN} 100
+	update-alternatives --install ${base_sbindir}/ifconfig ifconfig ifconfig.${BPN} 100
 }
 
 pkg_prerm_${PN} () {
-	update-alternatives --remove tftp tftp.${PN}
-	update-alternatives --remove telnet telnet.${PN}
-	update-alternatives --remove logger logger.${PN}
-	update-alternatives --remove traceroute traceroute.${PN}
-	update-alternatives --remove ifconfig ifconfig.${PN}
+	update-alternatives --remove tftp tftp.${BPN}
+	update-alternatives --remove telnet telnet.${BPN}
+	update-alternatives --remove logger logger.${BPN}
+	update-alternatives --remove traceroute traceroute.${BPN}
+	update-alternatives --remove ifconfig ifconfig.${BPN}
 }
