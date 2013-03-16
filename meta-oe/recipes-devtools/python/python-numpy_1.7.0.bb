@@ -18,6 +18,10 @@ CONFIGFILESURI_mipsel = "file://config.h \
 	   file://numpyconfig.h \
 	  "
 
+CONFIGFILESURI_i586 = "file://config.h \
+                       file://numpyconfig.h \
+                      "
+
 S = "${WORKDIR}/numpy-${PV}"
 
 inherit distutils
