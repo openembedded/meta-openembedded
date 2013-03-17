@@ -20,6 +20,10 @@ PR = "r2"
 
 S = "${WORKDIR}/OpenCV-${PV}"
 
+# Do an out-of-tree build
+OECMAKE_SOURCEPATH = "${S}"
+OECMAKE_BUILDPATH = "${WORKDIR}/build-${TARGET_ARCH}"
+
 EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
                  -DBUILD_PYTHON_SUPPORT=ON \
                  -DWITH_FFMPEG=ON \
