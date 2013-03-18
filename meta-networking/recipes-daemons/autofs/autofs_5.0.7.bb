@@ -41,7 +41,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
 SRC_URI[sha256sum] = "08c4304d8076dc80c14df559bc5fd821b67ef3457b245f61068bd053d8f94ccc"
 
-inherit update-rc.d
+inherit update-rc.d pkgconfig
 
 INITSCRIPT_NAME = "autofs"
 INITSCRIPT_PARAMS = "defaults"
@@ -49,8 +49,10 @@ INITSCRIPT_PARAMS = "defaults"
 # FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
 CFLAGS += "${LDFLAGS}"
 
+PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
+
 EXTRA_OEMAKE = "DONTSTRIP=1"
-EXTRA_OECONF += "--with-systemd --disable-mount-locking \
+EXTRA_OECONF += "--disable-mount-locking \
                 --enable-ignore-busy --with-openldap=no \
                 --with-sasl=no --with-libtirpc=yes \
                 --with-path=${STAGING_BINDIR_NATIVE} \
