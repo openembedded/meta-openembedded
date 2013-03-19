@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
 DEPENDS = "expat neon"
 
 PV = "5.0.1+git${SRCPV}"
-PR = "r0"
+PR = "r1"
 
 SRCREV = "0749dd0a35b4a54316da064475863a4ac6e28e7e"
 SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
@@ -21,8 +21,9 @@ inherit cmake pkgconfig
 
 do_configure_prepend() {
     # The native build really doesn't like being rebuilt, so delete
-    # it if it's already present.
-    rm -rf build-native
+    # it if it's already present. Also delete all other files not
+    # known to Git to fix subsequent invocations of do_configure.
+    git clean -dfx -e /.pc/ -e /patches/ .
     mkdir build-native
     cd build-native
     cmake -DCMAKE_C_FLAGS=${BUILD_CFLAGS} \
