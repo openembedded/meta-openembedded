@@ -1,0 +1,46 @@
+From 8fb8b406bab50c5ef8c5d4f743e3f13924bd5f73 Mon Sep 17 00:00:00 2001
+From: David Zeuthen <davidz@redhat.com>
+Date: Mon, 6 Feb 2012 11:26:06 -0500
+Subject: [PATCH 2/2] PolkitUnixSession: Actually return TRUE if a session exists
+
+Also, don't treat the integer returned by sd_session_get_uid() as a
+boolean because that's just confusing.
+
+Signed-off-by: David Zeuthen <davidz@redhat.com>
+---
+
+Upstream-Status: Accepted
+
+ src/polkit/polkitunixsession-systemd.c |   12 +++++-------
+ 1 files changed, 5 insertions(+), 7 deletions(-)
+
+diff --git a/src/polkit/polkitunixsession-systemd.c b/src/polkit/polkitunixsession-systemd.c
+index 94a7ee4..8a8bf65 100644
+--- a/src/polkit/polkitunixsession-systemd.c
++++ b/src/polkit/polkitunixsession-systemd.c
+@@ -361,17 +361,15 @@ polkit_unix_session_to_string (PolkitSubject *subject)
+ 
+ static gboolean
+ polkit_unix_session_exists_sync (PolkitSubject   *subject,
+-                                    GCancellable    *cancellable,
+-                                    GError         **error)
++                                 GCancellable    *cancellable,
++                                 GError         **error)
+ {
+   PolkitUnixSession *session = POLKIT_UNIX_SESSION (subject);
+-  gboolean ret;
++  gboolean ret = FALSE;
+   uid_t uid;
+ 
+-  ret = FALSE;
+-
+-  if (!sd_session_get_uid (session->session_id, &uid))
+-    ret = FALSE;
++  if (sd_session_get_uid (session->session_id, &uid) == 0)
++    ret = TRUE;
+ 
+   return ret;
+ }
+-- 
+1.7.2.5
+

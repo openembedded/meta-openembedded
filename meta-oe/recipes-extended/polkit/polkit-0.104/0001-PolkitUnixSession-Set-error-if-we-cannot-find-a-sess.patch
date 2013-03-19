@@ -1,0 +1,70 @@
+From c46d2d13eac240d2a609b2dd8fc617ea18a78bfa Mon Sep 17 00:00:00 2001
+From: David Zeuthen <davidz@redhat.com>
+Date: Mon, 6 Feb 2012 11:24:53 -0500
+Subject: [PATCH 1/2] PolkitUnixSession: Set error if we cannot find a session for the given pid
+
+Also, don't treat the integer returned by sd_pid_get_session() as a
+boolean because that's just confusing. Also, don't confuse memory
+supposed to be freed by g_free() and free(3) with each other. See
+
+ https://bugzilla.redhat.com/show_bug.cgi?id=787222
+
+for more details.
+
+Signed-off-by: David Zeuthen <davidz@redhat.com>
+---
+
+Upstream-Status: Accepted
+
+ src/polkit/polkitunixsession-systemd.c |   21 ++++++++++++++++-----
+ 1 files changed, 16 insertions(+), 5 deletions(-)
+
+diff --git a/src/polkit/polkitunixsession-systemd.c b/src/polkit/polkitunixsession-systemd.c
+index e7e913f..94a7ee4 100644
+--- a/src/polkit/polkitunixsession-systemd.c
++++ b/src/polkit/polkitunixsession-systemd.c
+@@ -23,6 +23,7 @@
+ #  include "config.h"
+ #endif
+ 
++#include <stdlib.h>
+ #include <string.h>
+ #include "polkitunixsession.h"
+ #include "polkitsubject.h"
+@@ -450,9 +451,8 @@ polkit_unix_session_initable_init (GInitable     *initable,
+                                    GError       **error)
+ {
+   PolkitUnixSession *session = POLKIT_UNIX_SESSION (initable);
+-  gboolean ret;
+-
+-  ret = FALSE;
++  gboolean ret = FALSE;
++  char *s;
+ 
+   if (session->session_id != NULL)
+     {
+@@ -461,8 +461,19 @@ polkit_unix_session_initable_init (GInitable     *initable,
+       goto out;
+     }
+ 
+-  if (!sd_pid_get_session (session->pid, &session->session_id))
+-    ret = TRUE;
++  if (sd_pid_get_session (session->pid, &s) == 0)
++    {
++      session->session_id = g_strdup (s);
++      free (s);
++      ret = TRUE;
++      goto out;
++    }
++
++  g_set_error (error,
++               POLKIT_ERROR,
++               POLKIT_ERROR_FAILED,
++               "No session for pid %d",
++               (gint) session->pid);
+ 
+ out:
+   return ret;
+-- 
+1.7.2.5
+
