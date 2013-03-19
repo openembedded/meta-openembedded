@@ -1,0 +1,72 @@
+autofs-5.0.7 - fix systemd unidir in spec file
+
+From: Ian Kent <raven@themaw.net>
+
+
+---
+ CHANGELOG   |    1 +
+ autofs.spec |   16 ++++++++--------
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index b6b2679..ecdea0b 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -35,6 +35,7 @@
+ - add symlink pseudo option.
+ - fix requires in spec file.
+ - fix libtirpc build option to require libtirpc-devel if needed.
++- fix systemd unidir in spec file.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/autofs.spec b/autofs.spec
+index f77acc1..a768e44 100644
+--- a/autofs.spec
++++ b/autofs.spec
+@@ -76,7 +76,7 @@ inkludera n
+ %setup -q
+ echo %{version}-%{release} > .version
+ %if %{with_systemd}
+-  %define _unitdir %{?_unitdir:/lib/systemd/system}
++  %define unitdir %{?_unitdir:/lib/systemd/system}
+   %define systemd_configure_arg --with-systemd
+ %endif
+ %if %{with_libtirpc}
+@@ -95,7 +95,7 @@ CFLAGS="$RPM_OPT_FLAGS -Wall" make initdir=/etc/rc.d/init.d DONTSTRIP=1
+ %install
+ rm -rf $RPM_BUILD_ROOT
+ %if %{with_systemd}
+-install -d -m 755 $RPM_BUILD_ROOT%{_unitdir}
++install -d -m 755 $RPM_BUILD_ROOT%{unitdir}
+ %else
+ mkdir -p -m755 $RPM_BUILD_ROOT/etc/rc.d/init.d
+ %endif
+@@ -109,9 +109,13 @@ make install mandir=%{_mandir} initdir=/etc/rc.d/init.d INSTALLROOT=$RPM_BUILD_R
+ echo make -C redhat
+ make -C redhat
+ %if %{with_systemd}
+-install -m 644 redhat/autofs.service $RPM_BUILD_ROOT%{_unitdir}/autofs.service
++# Configure can get this wrong when the unit files appear under /lib and /usr/lib
++find $RPM_BUILD_ROOT -type f -name autofs.service -exec rm -f {} \;
++install -m 644 redhat/autofs.service $RPM_BUILD_ROOT%{unitdir}/autofs.service
++%define init_file_name %{unitdir}/autofs.service
+ %else
+ install -m 755 redhat/autofs.init $RPM_BUILD_ROOT/etc/rc.d/init.d/autofs
++%define init_file_name /etc/rc.d/init.d/autofs
+ %endif
+ install -m 644 redhat/autofs.sysconfig $RPM_BUILD_ROOT/etc/sysconfig/autofs
+ 
+@@ -170,11 +174,7 @@ fi
+ %files
+ %defattr(-,root,root)
+ %doc CREDITS CHANGELOG INSTALL COPY* README* samples/ldap* samples/autofs.schema samples/autofs_ldap_auth.conf
+-%if %{with_systemd}
+-%{_unitdir}/autofs.service
+-%else
+-%config /etc/rc.d/init.d/autofs
+-%endif
++%config %{init_file_name}
+ %config(noreplace) /etc/auto.master
+ %config(noreplace,missingok) /etc/auto.misc
+ %config(noreplace,missingok) /etc/auto.net

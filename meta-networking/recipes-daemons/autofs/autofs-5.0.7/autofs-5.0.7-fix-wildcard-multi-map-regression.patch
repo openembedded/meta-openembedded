@@ -1,0 +1,225 @@
+autofs-5.0.7 - fix wildcard multi map regression
+
+From: Ian Kent <raven@themaw.net>
+
+A recent patch that removed code to add the current map entry when
+being parsed if it didn't already exist cause wildcard indirect
+multi-mount map entries to fail to mount.
+
+Indirect multi-mount map entries need the entry matched by a wildcard
+lookup to be added to the map entry cache because subsequent operations
+expect a distinct map entry to be present or they will fail. This is
+what the code that was removed did but it did so in the wrong place
+which caused a deadlock situation.
+---
+ CHANGELOG                |    1 +
+ modules/lookup_file.c    |   23 ++++++++++++++++-------
+ modules/lookup_ldap.c    |   19 +++++++++++++++----
+ modules/lookup_nisplus.c |   21 ++++++++++++++++-----
+ modules/lookup_sss.c     |   17 ++++++++++++++---
+ modules/lookup_yp.c      |   21 ++++++++++++++++-----
+ 6 files changed, 78 insertions(+), 24 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 97d6f48..46ef335 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -29,6 +29,7 @@
+ - modules/replicated.c: use sin6_addr.s6_addr32.
+ - workaround missing GNU versionsort extension.
+ - dont fail on master map self include.
++- fix wildcard multi map regression.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/lookup_file.c b/modules/lookup_file.c
+index f37bed9..65e5ee6 100644
+--- a/modules/lookup_file.c
++++ b/modules/lookup_file.c
+@@ -1040,7 +1040,7 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 			return NSS_STATUS_UNAVAIL;
+ 		}
+ 
+-		cache_readlock(mc);
++		cache_writelock(mc);
+ 		me = cache_lookup_first(mc);
+ 		if (me && st.st_mtime <= me->age) {
+ 			/*
+@@ -1082,7 +1082,7 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 		}
+ 	}
+ 
+-	cache_readlock(mc);
++	cache_writelock(mc);
+ do_cache_lookup:
+ 	me = cache_lookup(mc, key);
+ 	/*
+@@ -1098,11 +1098,20 @@ do_cache_lookup:
+ 		if (!me)
+ 			me = cache_lookup_distinct(mc, "*");
+ 	}
+-	if (me && me->mapent && (me->source == source || *me->key == '/')) {
+-		pthread_cleanup_push(cache_lock_cleanup, mc);
+-		strcpy(mapent_buf, me->mapent);
+-		mapent = mapent_buf;
+-		pthread_cleanup_pop(0);
++	if (me && me->mapent) {
++		/*
++		 * Add wildcard match for later validation checks and
++		 * negative cache lookups.
++		 */
++		if (ap->type == LKP_INDIRECT && *me->key == '*') {
++			ret = cache_update(mc, source, key, me->mapent, me->age);
++			if (!(ret & (CHE_OK | CHE_UPDATED)))
++				me = NULL;
++		}
++		if (me && (me->source == source || *me->key == '/')) {
++			strcpy(mapent_buf, me->mapent);
++			mapent = mapent_buf;
++		}
+ 	}
+ 	cache_unlock(mc);
+ 
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 431e50d..83e3215 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -2969,7 +2969,7 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 			return status;
+ 	}
+ 
+-	cache_readlock(mc);
++	cache_writelock(mc);
+ 	me = cache_lookup(mc, key);
+ 	/* Stale mapent => check for entry in alternate source or wildcard */
+ 	if (me && !me->mapent) {
+@@ -2979,9 +2979,20 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 		if (!me)
+ 			me = cache_lookup_distinct(mc, "*");
+ 	}
+-	if (me && me->mapent && (me->source == source || *me->key == '/')) {
+-		strcpy(mapent_buf, me->mapent);
+-		mapent = mapent_buf;
++	if (me && me->mapent) {
++		/*
++		 * Add wildcard match for later validation checks and
++		 * negative cache lookups.
++		 */
++		if (ap->type == LKP_INDIRECT && *me->key == '*') {
++			ret = cache_update(mc, source, key, me->mapent, me->age);
++			if (!(ret & (CHE_OK | CHE_UPDATED)))
++				me = NULL;
++		}
++		if (me && (me->source == source || *me->key == '/')) {
++			strcpy(mapent_buf, me->mapent);
++			mapent = mapent_buf;
++		}
+ 	}
+ 	cache_unlock(mc);
+ 
+diff --git a/modules/lookup_nisplus.c b/modules/lookup_nisplus.c
+index 9fced96..8237a1e 100644
+--- a/modules/lookup_nisplus.c
++++ b/modules/lookup_nisplus.c
+@@ -561,7 +561,7 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 			return status;
+ 	}
+ 
+-	cache_readlock(mc);
++	cache_writelock(mc);
+ 	me = cache_lookup(mc, key);
+ 	/* Stale mapent => check for entry in alternate source or wildcard */
+ 	if (me && !me->mapent) {
+@@ -571,10 +571,21 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 		if (!me)
+ 			me = cache_lookup_distinct(mc, "*");
+ 	}
+-	if (me && me->mapent && (me->source == source || *me->key == '/')) {
+-		mapent_len = strlen(me->mapent);
+-		mapent = malloc(mapent_len + 1);
+-		strcpy(mapent, me->mapent);
++	if (me && me->mapent) {
++		/*
++		 * Add wildcard match for later validation checks and
++		 * negative cache lookups.
++		 */
++		if (ap->type == LKP_INDIRECT && *me->key == '*') {
++			ret = cache_update(mc, source, key, me->mapent, me->age);
++			if (!(ret & (CHE_OK | CHE_UPDATED)))
++				me = NULL;
++		}
++		if (me && (me->source == source || *me->key == '/')) {
++			mapent_len = strlen(me->mapent);
++			mapent = malloc(mapent_len + 1);
++			strcpy(mapent, me->mapent);
++		}
+ 	}
+ 	cache_unlock(mc);
+ 
+diff --git a/modules/lookup_sss.c b/modules/lookup_sss.c
+index e0b84cc..5c2ed0a 100644
+--- a/modules/lookup_sss.c
++++ b/modules/lookup_sss.c
+@@ -645,9 +645,20 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 		if (!me)
+ 			me = cache_lookup_distinct(mc, "*");
+ 	}
+-	if (me && me->mapent && (me->source == source || *me->key == '/')) {
+-		strcpy(mapent_buf, me->mapent);
+-		mapent = mapent_buf;
++	if (me && me->mapent) {
++		/*
++		 * Add wildcard match for later validation checks and
++		 * negative cache lookups.
++		 */
++		if (ap->type == LKP_INDIRECT && *me->key == '*') {
++			ret = cache_update(mc, source, key, me->mapent, me->age);
++			if (!(ret & (CHE_OK | CHE_UPDATED)))
++				me = NULL;
++		}
++		if (me && (me->source == source || *me->key == '/')) {
++			strcpy(mapent_buf, me->mapent);
++			mapent = mapent_buf;
++		}
+ 	}
+ 	cache_unlock(mc);
+ 
+diff --git a/modules/lookup_yp.c b/modules/lookup_yp.c
+index 720df2e..a716e1f 100644
+--- a/modules/lookup_yp.c
++++ b/modules/lookup_yp.c
+@@ -662,7 +662,7 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 			return status;
+ 	}
+ 
+-	cache_readlock(mc);
++	cache_writelock(mc);
+ 	me = cache_lookup(mc, key);
+ 	/* Stale mapent => check for entry in alternate source or wildcard */
+ 	if (me && !me->mapent) {
+@@ -672,10 +672,21 @@ int lookup_mount(struct autofs_point *ap, const char *name, int name_len, void *
+ 		if (!me)
+ 			me = cache_lookup_distinct(mc, "*");
+ 	}
+-	if (me && me->mapent && (me->source == source || *me->key == '/')) {
+-		mapent_len = strlen(me->mapent);
+-		mapent = alloca(mapent_len + 1);
+-		strcpy(mapent, me->mapent);
++	if (me && me->mapent) {
++		/*
++		 * Add wildcard match for later validation checks and
++		 * negative cache lookups.
++		 */
++		if (ap->type == LKP_INDIRECT && *me->key == '*') {
++			ret = cache_update(mc, source, key, me->mapent, me->age);
++			if (!(ret & (CHE_OK | CHE_UPDATED)))
++				me = NULL;
++		}
++		if (me && (me->source == source || *me->key == '/')) {
++			mapent_len = strlen(me->mapent);
++			mapent = alloca(mapent_len + 1);
++			strcpy(mapent, me->mapent);
++		}
+ 	}
+ 	cache_unlock(mc);
+ 

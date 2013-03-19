@@ -1,0 +1,471 @@
+autofs-5.0.7 - use numeric protocol ids instead of protoent structs
+
+From: Leonardo Chiquitto <leonardo.lists@gmail.com>
+
+The function getprotobyname() is not reentrant, so we can't call
+it simultaneously from multiple threads. Instead of switching to
+the reentrant version which adds more complexity to the code,
+lets use numeric protocol IDs instead of protoent structures.
+---
+
+ CHANGELOG            |    1 +
+ include/rpc_subs.h   |    4 +--
+ lib/rpc_subs.c       |   80 ++++++++++++++++++--------------------------------
+ modules/replicated.c |   42 +++++++++++---------------
+ 4 files changed, 50 insertions(+), 77 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 4cf5621..ba1d65b 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -23,6 +23,7 @@
+ - fix use get_proximity() without libtirpc.
+ - don't use dirent d_type to filter out files in scandir()
+ - don't schedule new alarms after readmap.
++- use numeric protocol ids instead of protoent structs.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/include/rpc_subs.h b/include/rpc_subs.h
+index ca474d9..b6d59f9 100644
+--- a/include/rpc_subs.h
++++ b/include/rpc_subs.h
+@@ -54,7 +54,7 @@ struct conn_info {
+ 	unsigned short port;
+ 	unsigned long program;
+ 	unsigned long version;
+-	struct protoent *proto;
++	int proto;
+ 	unsigned int send_sz;
+ 	unsigned int recv_sz;
+ 	struct timeval timeout;
+@@ -66,7 +66,7 @@ int rpc_udp_getclient(struct conn_info *, unsigned int, unsigned int);
+ void rpc_destroy_udp_client(struct conn_info *);
+ int rpc_tcp_getclient(struct conn_info *, unsigned int, unsigned int);
+ void rpc_destroy_tcp_client(struct conn_info *);
+-int rpc_portmap_getclient(struct conn_info *, const char *, struct sockaddr *, size_t, const char *, unsigned int);
++int rpc_portmap_getclient(struct conn_info *, const char *, struct sockaddr *, size_t, int, unsigned int);
+ int rpc_portmap_getport(struct conn_info *, struct pmap *, unsigned short *);
+ int rpc_ping_proto(struct conn_info *);
+ int rpc_ping(const char *, long, long, unsigned int);
+diff --git a/lib/rpc_subs.c b/lib/rpc_subs.c
+index d33a3c4..ad1d557 100644
+--- a/lib/rpc_subs.c
++++ b/lib/rpc_subs.c
+@@ -170,7 +170,7 @@ static int rpc_do_create_client(struct sockaddr *addr, struct conn_info *info, i
+ 
+ 	*client = NULL;
+ 
+-	proto = info->proto->p_proto;
++	proto = info->proto;
+ 	if (proto == IPPROTO_UDP)
+ 		type = SOCK_DGRAM;
+ 	else
+@@ -201,7 +201,7 @@ static int rpc_do_create_client(struct sockaddr *addr, struct conn_info *info, i
+ 	in4_raddr = (struct sockaddr_in *) addr;
+ 	in4_raddr->sin_port = htons(info->port);
+ 
+-	switch (info->proto->p_proto) {
++	switch (info->proto) {
+ 	case IPPROTO_UDP:
+ 		clnt = clntudp_bufcreate(in4_raddr,
+ 					 info->program, info->version,
+@@ -241,7 +241,7 @@ static int rpc_do_create_client(struct sockaddr *addr, struct conn_info *info, i
+ 
+ 	*client = NULL;
+ 
+-	proto = info->proto->p_proto;
++	proto = info->proto;
+ 	if (proto == IPPROTO_UDP)
+ 		type = SOCK_DGRAM;
+ 	else
+@@ -292,11 +292,11 @@ static int rpc_do_create_client(struct sockaddr *addr, struct conn_info *info, i
+ 	nb_addr.maxlen = nb_addr.len = slen;
+ 	nb_addr.buf = addr;
+ 
+-	if (info->proto->p_proto == IPPROTO_UDP)
++	if (info->proto == IPPROTO_UDP)
+ 		clnt = clnt_dg_create(*fd, &nb_addr,
+ 				      info->program, info->version,
+ 				      info->send_sz, info->recv_sz);
+-	else if (info->proto->p_proto == IPPROTO_TCP) {
++	else if (info->proto == IPPROTO_TCP) {
+ 		ret = connect_nb(*fd, addr, slen, &info->timeout);
+ 		if (ret < 0)
+ 			return ret;
+@@ -355,7 +355,7 @@ static int create_client(struct conn_info *info, CLIENT **client)
+ 	memset(&hints, 0, sizeof(hints));
+ 	hints.ai_flags = AI_ADDRCONFIG;
+ 	hints.ai_family = AF_UNSPEC;
+-	if (info->proto->p_proto == IPPROTO_UDP)
++	if (info->proto == IPPROTO_UDP)
+ 		hints.ai_socktype = SOCK_DGRAM;
+ 	else
+ 		hints.ai_socktype = SOCK_STREAM;
+@@ -370,7 +370,7 @@ static int create_client(struct conn_info *info, CLIENT **client)
+ 
+ 	haddr = ai;
+ 	while (haddr) {
+-		if (haddr->ai_protocol != info->proto->p_proto) {
++		if (haddr->ai_protocol != info->proto) {
+ 			haddr = haddr->ai_next;
+ 			continue;
+ 		}
+@@ -417,16 +417,11 @@ out_close:
+ int rpc_udp_getclient(struct conn_info *info,
+ 		      unsigned int program, unsigned int version)
+ {
+-	struct protoent *pe_proto;
+ 	CLIENT *client;
+ 	int ret;
+ 
+ 	if (!info->client) {
+-		pe_proto = getprotobyname("udp");
+-		if (!pe_proto)
+-			return -ENOENT;
+-
+-		info->proto = pe_proto;
++		info->proto = IPPROTO_UDP;
+ 		info->timeout.tv_sec = RPC_TOUT_UDP;
+ 		info->timeout.tv_usec = 0;
+ 		info->send_sz = UDPMSGSIZE;
+@@ -458,16 +453,11 @@ void rpc_destroy_udp_client(struct conn_info *info)
+ int rpc_tcp_getclient(struct conn_info *info,
+ 		      unsigned int program, unsigned int version)
+ {
+-	struct protoent *pe_proto;
+ 	CLIENT *client;
+ 	int ret;
+ 
+ 	if (!info->client) {
+-		pe_proto = getprotobyname("tcp");
+-		if (!pe_proto)
+-			return -ENOENT;
+-
+-		info->proto = pe_proto;
++		info->proto = IPPROTO_TCP;
+ 		info->timeout.tv_sec = RPC_TOUT_TCP;
+ 		info->timeout.tv_usec = 0;
+ 		info->send_sz = 0;
+@@ -513,23 +503,18 @@ void rpc_destroy_tcp_client(struct conn_info *info)
+ 
+ int rpc_portmap_getclient(struct conn_info *info,
+ 			  const char *host, struct sockaddr *addr, size_t addr_len,
+-			  const char *proto, unsigned int option)
++			  int proto, unsigned int option)
+ {
+-	struct protoent *pe_proto;
+ 	CLIENT *client;
+ 	int ret;
+ 
+-	pe_proto = getprotobyname(proto);
+-	if (!pe_proto)
+-		return -ENOENT;
+-
+ 	info->host = host;
+ 	info->addr = addr;
+ 	info->addr_len = addr_len;
+ 	info->program = PMAPPROG;
+ 	info->port = PMAPPORT;
+ 	info->version = PMAPVERS;
+-	info->proto = pe_proto;
++	info->proto = proto;
+ 	info->send_sz = RPCSMALLMSGSIZE;
+ 	info->recv_sz = RPCSMALLMSGSIZE;
+ 	info->timeout.tv_sec = PMAP_TOUT_UDP;
+@@ -537,7 +522,7 @@ int rpc_portmap_getclient(struct conn_info *info,
+ 	info->close_option = option;
+ 	info->client = NULL;
+ 
+-	if (pe_proto->p_proto == IPPROTO_TCP)
++	if (info->proto == IPPROTO_TCP)
+ 		info->timeout.tv_sec = PMAP_TOUT_TCP;
+ 
+ 	ret = create_client(info, &client);
+@@ -555,7 +540,7 @@ int rpc_portmap_getport(struct conn_info *info,
+ 	struct conn_info pmap_info;
+ 	CLIENT *client;
+ 	enum clnt_stat status;
+-	int proto = info->proto->p_proto;
++	int proto = info->proto;
+ 	int ret;
+ 
+ 	memset(&pmap_info, 0, sizeof(struct conn_info));
+@@ -633,13 +618,13 @@ int rpc_ping_proto(struct conn_info *info)
+ {
+ 	CLIENT *client;
+ 	enum clnt_stat status;
+-	int proto = info->proto->p_proto;
++	int proto = info->proto;
+ 	int ret;
+ 
+ 	if (info->client)
+ 		client = info->client;
+ 	else {
+-		if (info->proto->p_proto == IPPROTO_UDP) {
++		if (info->proto == IPPROTO_UDP) {
+ 			info->send_sz = UDPMSGSIZE;
+ 			info->recv_sz = UDPMSGSIZE;
+ 		}
+@@ -688,7 +673,7 @@ int rpc_ping_proto(struct conn_info *info)
+ 
+ static unsigned int __rpc_ping(const char *host,
+ 				unsigned long version,
+-				char *proto,
++				int proto,
+ 				long seconds, long micros,
+ 				unsigned int option)
+ {
+@@ -696,6 +681,7 @@ static unsigned int __rpc_ping(const char *host,
+ 	struct conn_info info;
+ 	struct pmap parms;
+ 
++	info.proto = proto;
+ 	info.host = host;
+ 	info.addr = NULL;
+ 	info.addr_len = 0;
+@@ -710,13 +696,9 @@ static unsigned int __rpc_ping(const char *host,
+ 
+ 	status = RPC_PING_FAIL;
+ 
+-	info.proto = getprotobyname(proto);
+-	if (!info.proto)
+-		return status;
+-
+ 	parms.pm_prog = NFS_PROGRAM;
+ 	parms.pm_vers = version;
+-	parms.pm_prot = info.proto->p_proto;
++	parms.pm_prot = info.proto;
+ 	parms.pm_port = 0;
+ 
+ 	status = rpc_portmap_getport(&info, &parms, &info.port);
+@@ -734,19 +716,19 @@ int rpc_ping(const char *host, long seconds, long micros, unsigned int option)
+ 	unsigned long vers2 = NFS2_VERSION;
+ 	unsigned int status;
+ 
+-	status = __rpc_ping(host, vers2, "udp", seconds, micros, option);
++	status = __rpc_ping(host, vers2, IPPROTO_UDP, seconds, micros, option);
+ 	if (status > 0)
+ 		return RPC_PING_V2 | RPC_PING_UDP;
+ 
+-	status = __rpc_ping(host, vers3, "udp", seconds, micros, option);
++	status = __rpc_ping(host, vers3, IPPROTO_UDP, seconds, micros, option);
+ 	if (status > 0)
+ 		return RPC_PING_V3 | RPC_PING_UDP;
+ 
+-	status = __rpc_ping(host, vers2, "tcp", seconds, micros, option);
++	status = __rpc_ping(host, vers2, IPPROTO_TCP, seconds, micros, option);
+ 	if (status > 0)
+ 		return RPC_PING_V2 | RPC_PING_TCP;
+ 
+-	status = __rpc_ping(host, vers3, "tcp", seconds, micros, option);
++	status = __rpc_ping(host, vers3, IPPROTO_TCP, seconds, micros, option);
+ 	if (status > 0)
+ 		return RPC_PING_V3 | RPC_PING_TCP;
+ 
+@@ -769,7 +751,7 @@ int rpc_time(const char *host,
+ 	double taken;
+ 	struct timeval start, end;
+ 	struct timezone tz;
+-	char *proto = (ping_proto & RPC_PING_UDP) ? "udp" : "tcp";
++	int proto = (ping_proto & RPC_PING_UDP) ? IPPROTO_UDP : IPPROTO_TCP;
+ 	unsigned long vers = ping_vers;
+ 
+ 	gettimeofday(&start, &tz);
+@@ -791,12 +773,12 @@ static int rpc_get_exports_proto(struct conn_info *info, exports *exp)
+ {
+ 	CLIENT *client;
+ 	enum clnt_stat status;
+-	int proto = info->proto->p_proto;
++	int proto = info->proto;
+ 	unsigned int option = info->close_option;
+ 	int vers_entry;
+ 	int ret;
+ 
+-	if (info->proto->p_proto == IPPROTO_UDP) {
++	if (info->proto == IPPROTO_UDP) {
+ 		info->send_sz = UDPMSGSIZE;
+ 		info->recv_sz = UDPMSGSIZE;
+ 	}
+@@ -903,11 +885,9 @@ exports rpc_get_exports(const char *host, long seconds, long micros, unsigned in
+ 	parms.pm_port = 0;
+ 
+ 	/* Try UDP first */
+-	info.proto = getprotobyname("udp");
+-	if (!info.proto)
+-		goto try_tcp;
++	info.proto = IPPROTO_UDP;
+ 
+-	parms.pm_prot = info.proto->p_proto;
++	parms.pm_prot = info.proto;
+ 
+ 	status = rpc_portmap_getport(&info, &parms, &info.port);
+ 	if (status < 0)
+@@ -920,11 +900,9 @@ exports rpc_get_exports(const char *host, long seconds, long micros, unsigned in
+ 		return exportlist;
+ 
+ try_tcp:
+-	info.proto = getprotobyname("tcp");
+-	if (!info.proto)
+-		return NULL;
++	info.proto = IPPROTO_TCP;
+ 
+-	parms.pm_prot = info.proto->p_proto;
++	parms.pm_prot = info.proto;
+ 
+ 	status = rpc_portmap_getport(&info, &parms, &info.port);
+ 	if (status < 0)
+diff --git a/modules/replicated.c b/modules/replicated.c
+index 6b96320..dbd5513 100644
+--- a/modules/replicated.c
++++ b/modules/replicated.c
+@@ -419,7 +419,7 @@ void free_host_list(struct host **list)
+ 
+ static unsigned int get_nfs_info(unsigned logopt, struct host *host,
+ 			 struct conn_info *pm_info, struct conn_info *rpc_info,
+-			 const char *proto, unsigned int version, int port)
++			 int proto, unsigned int version, int port)
+ {
+ 	unsigned int random_selection = host->options & MOUNT_FLAG_RANDOM_SELECT;
+ 	unsigned int use_weight_only = host->options & MOUNT_FLAG_USE_WEIGHT_ONLY;
+@@ -433,22 +433,18 @@ static unsigned int get_nfs_info(unsigned logopt, struct host *host,
+ 	int status, count = 0;
+ 
+ 	if (host->addr)
+-		debug(logopt, "called with host %s(%s) proto %s version 0x%x",
++		debug(logopt, "called with host %s(%s) proto %d version 0x%x",
+ 		      host->name, get_addr_string(host->addr, buf, len),
+ 		      proto, version);
+ 	else
+ 		debug(logopt,
+-		      "called for host %s proto %s version 0x%x",
++		      "called for host %s proto %d version 0x%x",
+ 		      host->name, proto, version);
+ 
+-	rpc_info->proto = getprotobyname(proto);
+-	if (!rpc_info->proto)
+-		return 0;
+-
++	rpc_info->proto = proto;
+ 	memset(&parms, 0, sizeof(struct pmap));
+-
+ 	parms.pm_prog = NFS_PROGRAM;
+-	parms.pm_prot = rpc_info->proto->p_proto;
++	parms.pm_prot = proto;
+ 
+ 	if (!(version & NFS4_REQUESTED))
+ 		goto v3_ver;
+@@ -479,7 +475,7 @@ static unsigned int get_nfs_info(unsigned logopt, struct host *host,
+ 		}
+ 	}
+ 
+-	if (rpc_info->proto->p_proto == IPPROTO_UDP)
++	if (rpc_info->proto == IPPROTO_UDP)
+ 		status = rpc_udp_getclient(rpc_info, NFS_PROGRAM, NFS4_VERSION);
+ 	else
+ 		status = rpc_tcp_getclient(rpc_info, NFS_PROGRAM, NFS4_VERSION);
+@@ -540,7 +536,7 @@ v3_ver:
+ 			goto v2_ver;
+ 	}
+ 
+-	if (rpc_info->proto->p_proto == IPPROTO_UDP)
++	if (rpc_info->proto == IPPROTO_UDP)
+ 		status = rpc_udp_getclient(rpc_info, NFS_PROGRAM, NFS3_VERSION);
+ 	else
+ 		status = rpc_tcp_getclient(rpc_info, NFS_PROGRAM, NFS3_VERSION);
+@@ -587,7 +583,7 @@ v2_ver:
+ 			goto done_ver;
+ 	}
+ 
+-	if (rpc_info->proto->p_proto == IPPROTO_UDP)
++	if (rpc_info->proto == IPPROTO_UDP)
+ 		status = rpc_udp_getclient(rpc_info, NFS_PROGRAM, NFS2_VERSION);
+ 	else
+ 		status = rpc_tcp_getclient(rpc_info, NFS_PROGRAM, NFS2_VERSION);
+@@ -618,7 +614,7 @@ v2_ver:
+ 	}
+ 
+ done_ver:
+-	if (rpc_info->proto->p_proto == IPPROTO_UDP) {
++	if (rpc_info->proto == IPPROTO_UDP) {
+ 		rpc_destroy_udp_client(rpc_info);
+ 		rpc_destroy_udp_client(pm_info);
+ 	} else {
+@@ -675,7 +671,7 @@ static int get_vers_and_cost(unsigned logopt, struct host *host,
+ 
+ 	if (version & TCP_REQUESTED) {
+ 		supported = get_nfs_info(logopt, host,
+-				   &pm_info, &rpc_info, "tcp", vers, port);
++				   &pm_info, &rpc_info, IPPROTO_TCP, vers, port);
+ 		if (IS_ERR(supported)) {
+ 			if (ERR(supported) == EHOSTUNREACH ||
+ 			    ERR(supported) == ETIMEDOUT)
+@@ -688,7 +684,7 @@ static int get_vers_and_cost(unsigned logopt, struct host *host,
+ 
+ 	if (version & UDP_REQUESTED) {
+ 		supported = get_nfs_info(logopt, host,
+-				   &pm_info, &rpc_info, "udp", vers, port);
++				   &pm_info, &rpc_info, IPPROTO_UDP, vers, port);
+ 		if (IS_ERR(supported)) {
+ 			if (!ret && ERR(supported) == ETIMEDOUT)
+ 				return ret;
+@@ -709,7 +705,7 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 	socklen_t len = INET6_ADDRSTRLEN;
+ 	char buf[len + 1];
+ 	struct conn_info pm_info, rpc_info;
+-	const char *proto;
++	int proto;
+ 	unsigned int vers;
+ 	struct timeval start, end;
+ 	struct timezone tz;
+@@ -748,10 +744,10 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 	 *  So, we do the conversion here.
+ 	 */
+ 	if (version & UDP_SELECTED_MASK) {
+-		proto = "udp";
++		proto = IPPROTO_UDP;
+ 		version >>= 8;
+ 	} else
+-		proto = "tcp";
++		proto = IPPROTO_TCP;
+ 
+ 	switch (version) {
+ 	case NFS2_SUPPORTED:
+@@ -768,9 +764,7 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 		return 0;
+ 	}
+ 
+-	rpc_info.proto = getprotobyname(proto);
+-	if (!rpc_info.proto)
+-		return 0;
++	rpc_info.proto = proto;
+ 
+ 	if (port > 0)
+ 		rpc_info.port = port;
+@@ -786,14 +780,14 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 
+ 		memset(&parms, 0, sizeof(struct pmap));
+ 		parms.pm_prog = NFS_PROGRAM;
+-		parms.pm_prot = rpc_info.proto->p_proto;
++		parms.pm_prot = rpc_info.proto;
+ 		parms.pm_vers = vers;
+ 		ret = rpc_portmap_getport(&pm_info, &parms, &rpc_info.port);
+ 		if (ret < 0)
+ 			goto done;
+ 	}
+ 
+-	if (rpc_info.proto->p_proto == IPPROTO_UDP)
++	if (rpc_info.proto == IPPROTO_UDP)
+ 		status = rpc_udp_getclient(&rpc_info, NFS_PROGRAM, vers);
+ 	else
+ 		status = rpc_tcp_getclient(&rpc_info, NFS_PROGRAM, vers);
+@@ -815,7 +809,7 @@ static int get_supported_ver_and_cost(unsigned logopt, struct host *host,
+ 		}
+ 	}
+ done:
+-	if (rpc_info.proto->p_proto == IPPROTO_UDP) {
++	if (rpc_info.proto == IPPROTO_UDP) {
+ 		rpc_destroy_udp_client(&rpc_info);
+ 		rpc_destroy_udp_client(&pm_info);
+ 	} else {

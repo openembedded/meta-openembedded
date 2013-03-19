@@ -1,0 +1,39 @@
+autofs-5.0.7 -  modules/replicated.c: use sin6_addr.s6_addr32
+
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+
+The exported in6.h kernel header provides a convenience macro s6_addr32
+for accessing the 32bit words of an ipv6 address. Use this instead of
+__in6_u.__u6_addr32.
+---
+
+ CHANGELOG            |    1 +
+ modules/replicated.c |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index ed17163..4eaa9f9 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -26,6 +26,7 @@
+ - use numeric protocol ids instead of protoent structs.
+ - lib/defaults.c: use WITH_LDAP conditional around LDAP types.
+ - make yellow pages support optional.
++- modules/replicated.c: use sin6_addr.s6_addr32.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/replicated.c b/modules/replicated.c
+index dbd5513..26f64b8 100644
+--- a/modules/replicated.c
++++ b/modules/replicated.c
+@@ -1146,7 +1146,7 @@ try_name:
+ 				rr4++;
+ 		} else if (this->ai_family == AF_INET6) {
+ 			struct sockaddr_in6 *addr = (struct sockaddr_in6 *) this->ai_addr;
+-			if (!IN6_IS_ADDR_LOOPBACK(addr->sin6_addr.__in6_u.__u6_addr32))
++			if (!IN6_IS_ADDR_LOOPBACK(addr->sin6_addr.s6_addr32))
+ 				rr6++;
+ 		}
+ 		this = this->ai_next;

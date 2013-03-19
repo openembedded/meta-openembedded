@@ -1,0 +1,45 @@
+autofs-5.0.7 - fix submount offset delete
+
+From: Ian Kent <ikent@redhat.com>
+
+As part of the implementation to allow for limited update of
+the internal hosts map by using a HUP signal some code that
+deleted any offset entries from the cache on lookup was removed
+as it appeared to not be needed.
+
+There is however a case where it is needed to avoid a duplicate
+cache entry failure on lookup.
+---
+
+ CHANGELOG          |    1 +
+ daemon/automount.c |    4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 7eb7235..76c1f73 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -18,6 +18,7 @@
+ - fix map entry duplicate offset detection.
+ - Allow nsswitch.conf to not contain "automount:" lines.
+ - fix nobind man page description.
++- fix submount offset delete.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/daemon/automount.c b/daemon/automount.c
+index e56f9e1..4a3eb3d 100644
+--- a/daemon/automount.c
++++ b/daemon/automount.c
+@@ -544,8 +544,8 @@ int umount_multi(struct autofs_point *ap, const char *path, int incl)
+ 	 * If we are a submount we need to umount any offsets our
+ 	 * parent may have mounted over top of us.
+ 	 */
+-	/*if (ap->submount)
+-		left += umount_subtree_mounts(ap->parent, path, is_autofs_fs);*/
++	if (ap->submount)
++		left += umount_subtree_mounts(ap->parent, path, is_autofs_fs);
+ 
+ 	left += umount_subtree_mounts(ap, path, is_autofs_fs);
+ 

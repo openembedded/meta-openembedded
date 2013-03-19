@@ -1,0 +1,46 @@
+autofs-5.0.7 - fix nobind man page description
+
+From: Ian Kent <raven@themaw.net>
+
+Update auto.master(5) to better describe the behavior of the "nobind"
+option when used with direct mounts maps.
+---
+
+ CHANGELOG            |    1 +
+ man/auto.master.5.in |   10 +++++++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 16ac2a0..7eb7235 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -17,6 +17,7 @@
+ - handle new location of systemd.
+ - fix map entry duplicate offset detection.
+ - Allow nsswitch.conf to not contain "automount:" lines.
++- fix nobind man page description.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/man/auto.master.5.in b/man/auto.master.5.in
+index 21d7544..8007542 100644
+--- a/man/auto.master.5.in
++++ b/man/auto.master.5.in
+@@ -151,9 +151,13 @@ can't be mounted.
+ This is an autofs specific option that is a pseudo mount option and
+ so is given without a leading dash. It may be used either in the master
+ map entry (so it effects all the map entries) or with individual map
+-entries to prevent bind mounting of local NFS filesystems. Bind mounting
+-of NFS file systems can also be prevented for specific map entrys by
+-adding the "port=" mount option to the entries.
++entries to prevent bind mounting of local NFS filesystems. For direct
++mount maps the option is only effective if specified on the first direct
++map entry and is applied to all direct mount maps in the master map. It
++is ignored if given on subsequent direct map entries. It may be used
++on individual map entries of both types. Bind mounting of NFS file
++systems can also be prevented for specific map entrys by adding the
++"port=" mount option to the entries.
+ .TP
+ .I "\-r, \-\-random-multimount-selection"
+ Enables the use of ramdom selection when choosing a host from a

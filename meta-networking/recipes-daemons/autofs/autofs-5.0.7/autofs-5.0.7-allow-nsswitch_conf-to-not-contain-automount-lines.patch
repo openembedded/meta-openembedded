@@ -1,0 +1,50 @@
+autofs-5.0.7 - Allow nsswitch.conf to not contain "automount:" lines
+
+From: Michael Tokarev <mjt@tls.msk.ru>
+
+Current code does not allow a case when nsswitch.conf
+does not mention automount map at all, like all new
+installations.  It logs a rather unpleasant error
+message instead:
+
+ syntax error in nsswitch config near [ syntax error ]
+
+this patch has a minimal fix, to allo "file" to be empty.
+
+Whole parser in C is about 25 lines of code, the "grammar"
+is trivial, and it is better to ditch all this yacc/lex
+stuff, but that will be much more intrusive change.
+
+Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
+Cc: 682266@bugs.debian.org
+---
+
+ CHANGELOG       |    1 +
+ lib/nss_parse.y |    1 +
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index bd0dd82..16ac2a0 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -16,6 +16,7 @@
+ - increase file map read buffer size.
+ - handle new location of systemd.
+ - fix map entry duplicate offset detection.
++- Allow nsswitch.conf to not contain "automount:" lines.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/lib/nss_parse.y b/lib/nss_parse.y
+index a39fda4..055e9d7 100644
+--- a/lib/nss_parse.y
++++ b/lib/nss_parse.y
+@@ -72,6 +72,7 @@ file: {
+ 		nss_debug = YYDEBUG;
+ #endif
+ 	} sources NL
++	| /* empty */
+ 	;
+ 
+ sources: nss_source

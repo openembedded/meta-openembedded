@@ -1,0 +1,54 @@
+autofs-5.0.7 - fix use get_proximity() without libtirpc
+
+From: Ian Kent <raven@themaw.net>
+
+If autofs is not using libtirpc and there are any configured IPv6
+interfaces then get_proximity() will fail with PROXIMITY_UNSUPPORTED.
+
+In this case when checking interfaces the IPv6 interfaces need to be
+ignored.
+---
+
+ CHANGELOG            |    1 +
+ modules/replicated.c |    8 ++------
+ 2 files changed, 3 insertions(+), 6 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 5bcb1af..460bd27 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -20,6 +20,7 @@
+ - fix nobind man page description.
+ - fix submount offset delete.
+ - fix init script status return.
++- fix use get_proximity() without libtirpc.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/replicated.c b/modules/replicated.c
+index bd6003b..6b96320 100644
+--- a/modules/replicated.c
++++ b/modules/replicated.c
+@@ -184,9 +184,7 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ 			break;
+ 
+ 		case AF_INET6:
+-#ifndef WITH_LIBTIRPC
+-			return PROXIMITY_UNSUPPORTED;
+-#else
++#ifdef WITH_LIBTIRPC
+ 			if (host_addr->sa_family == AF_INET)
+ 				break;
+ 			if6_addr = (struct sockaddr_in6 *) this->ifa_addr;
+@@ -251,9 +249,7 @@ static unsigned int get_proximity(struct sockaddr *host_addr)
+ 			break;
+ 
+ 		case AF_INET6:
+-#ifndef WITH_LIBTIRPC
+-			return PROXIMITY_UNSUPPORTED;
+-#else
++#ifdef WITH_LIBTIRPC
+ 			if (host_addr->sa_family == AF_INET)
+ 				break;
+ 			if6_addr = (struct sockaddr_in6 *) this->ifa_addr;

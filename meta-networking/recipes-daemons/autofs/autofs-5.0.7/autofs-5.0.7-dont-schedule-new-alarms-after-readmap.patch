@@ -1,0 +1,69 @@
+autofs-5.0.7 - don't schedule new alarms after readmap
+
+From: Leonardo Chiquitto <leonardo.lists@gmail.com>
+
+Currently, a new alarm is scheduled every time the daemon receives
+a SIGHUP (map re-read) or SIGUSR1 (forced expiration). Besides that,
+map re-reads started on demand when a map is found to be outdated
+also generate a new alarm.
+
+Once added, these alarms are never deleted and hence increase the
+number of times the daemon wakes up to run the expiration procedure.
+After a couple of months, in setups with many mount points, it's
+normal to see automount waking up every second to handle the
+expiration timer.
+
+This patch removes the alarm scheduling from the readmap cleanup
+routine and makes sure the alarm is re-added after the expiration
+process only when it was not triggered by SIGUSR1.
+
+I couldn't think of any use case to justify keeping these alarms:
+it's critical to have the alarm ticking every timeout/4 seconds,
+but more than one periodic alarm running doesn't seem to make
+sense.
+---
+
+ CHANGELOG      |    1 +
+ daemon/state.c |    6 +-----
+ 2 files changed, 2 insertions(+), 5 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index c9be73e..4cf5621 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -22,6 +22,7 @@
+ - fix init script status return.
+ - fix use get_proximity() without libtirpc.
+ - don't use dirent d_type to filter out files in scandir()
++- don't schedule new alarms after readmap.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/daemon/state.c b/daemon/state.c
+index b451c56..6e23022 100644
+--- a/daemon/state.c
++++ b/daemon/state.c
+@@ -144,7 +144,7 @@ void expire_cleanup(void *arg)
+ 					ap->submount = 2;
+ 			}
+ 
+-			if (!ap->submount)
++			if (ap->state == ST_EXPIRE && !ap->submount)
+ 				alarm_add(ap, ap->exp_runfreq);
+ 
+ 			/* FALLTHROUGH */
+@@ -330,13 +330,9 @@ static void do_readmap_cleanup(void *arg)
+ 	ap = ra->ap;
+ 
+ 	st_mutex_lock();
+-
+ 	ap->readmap_thread = 0;
+ 	st_set_done(ap);
+-	if (!ap->submount)
+-		alarm_add(ap, ap->exp_runfreq);
+ 	st_ready(ap);
+-
+ 	st_mutex_unlock();
+ 
+ 	free(ra);

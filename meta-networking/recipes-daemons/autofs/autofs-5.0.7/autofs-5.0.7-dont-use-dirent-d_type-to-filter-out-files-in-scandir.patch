@@ -1,0 +1,41 @@
+autofs-5.0.7 - don't use dirent d_type to filter out files in scandir()
+
+From: Leonardo Chiquitto <leonardo.lists@gmail.com>
+
+The "d_type" field of a dirent structure is not filled in by all
+file systems (XFS being one example), so we can't rely on it to
+check file types.
+---
+
+ CHANGELOG            |    1 +
+ modules/lookup_dir.c |    4 ----
+ 2 files changed, 1 insertions(+), 4 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 460bd27..c9be73e 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -21,6 +21,7 @@
+ - fix submount offset delete.
+ - fix init script status return.
+ - fix use get_proximity() without libtirpc.
++- don't use dirent d_type to filter out files in scandir()
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/lookup_dir.c b/modules/lookup_dir.c
+index 658cc29..33901c0 100644
+--- a/modules/lookup_dir.c
++++ b/modules/lookup_dir.c
+@@ -103,10 +103,6 @@ static int acceptable_dirent_p(const struct dirent *e)
+ {
+   size_t namesz;
+ 
+-
+-  if (!(e->d_type == DT_REG || e->d_type == DT_LNK))
+-	  return 0;
+-
+   namesz = strlen(e->d_name);
+   if (!namesz)
+ 	  return 0;

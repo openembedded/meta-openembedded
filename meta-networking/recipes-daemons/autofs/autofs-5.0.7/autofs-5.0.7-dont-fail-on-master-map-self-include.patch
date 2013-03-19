@@ -1,0 +1,59 @@
+autofs-5.0.7 - dont fail on master map self include
+
+From: Ian Kent <raven@themaw.net>
+
+When reading the master map a self included file map should skip the source
+and proceed to the next so, in this case, return an nss status that will
+allow the map read to continue. In particular not NSS_STATUS_UNAVAIL which
+causes the lookup to record a failure or NSS_STATUS_SUCCESS which indicates
+a successful lookup and termintes the reading of sources.
+---
+ CHANGELOG             |    1 +
+ modules/lookup_file.c |    7 ++++---
+ 2 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 39388a5..97d6f48 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -28,6 +28,7 @@
+ - make yellow pages support optional.
+ - modules/replicated.c: use sin6_addr.s6_addr32.
+ - workaround missing GNU versionsort extension.
++- dont fail on master map self include.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/lookup_file.c b/modules/lookup_file.c
+index facb305..f37bed9 100644
+--- a/modules/lookup_file.c
++++ b/modules/lookup_file.c
+@@ -397,8 +397,9 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 	unsigned int path_len, ent_len;
+ 	int entry, cur_state;
+ 
++	/* Don't return fail on self include, skip source */
+ 	if (master->recurse)
+-		return NSS_STATUS_UNAVAIL;
++		return NSS_STATUS_TRYAGAIN;
+ 
+ 	if (master->depth > MAX_INCLUDE_DEPTH) {
+ 		error(logopt, MODPREFIX
+@@ -443,7 +444,7 @@ int lookup_read_master(struct master *master, time_t age, void *context)
+ 
+ 			inc = check_master_self_include(master, ctxt);
+ 			if (inc) 
+-				master->recurse = 1;;
++				master->recurse = 1;
+ 			master->depth++;
+ 			status = lookup_nss_read_master(master, age);
+ 			if (!status) {
+@@ -645,7 +646,7 @@ int lookup_read_map(struct autofs_point *ap, time_t age, void *context)
+ 	mc = source->mc;
+ 
+ 	if (source->recurse)
+-		return NSS_STATUS_UNAVAIL;
++		return NSS_STATUS_TRYAGAIN;
+ 
+ 	if (source->depth > MAX_INCLUDE_DEPTH) {
+ 		error(ap->logopt,

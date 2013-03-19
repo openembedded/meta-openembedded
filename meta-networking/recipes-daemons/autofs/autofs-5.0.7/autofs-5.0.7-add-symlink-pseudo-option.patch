@@ -1,0 +1,217 @@
+autofs-5.0.7 - add symlink pseudo option
+
+From: Ian Kent <raven@themaw.net>
+
+Add a "symlink" pseudo option to tell the bind mount module to symlink
+instead of bind when mounting mounts other than direct mounts and
+non-root indirect mount offset mounts (aka. non-root multi-mount
+entries).
+---
+ CHANGELOG              |    1 +
+ include/automount.h    |    3 +++
+ lib/master_parse.y     |    8 +++++++-
+ lib/master_tok.l       |    1 +
+ man/auto.master.5.in   |    8 ++++++++
+ modules/mount_autofs.c |    5 +++++
+ modules/mount_bind.c   |   36 +++++++++++++++++++++++++++++++++++-
+ 7 files changed, 60 insertions(+), 2 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index c189483..247d334 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -32,6 +32,7 @@
+ - fix wildcard multi map regression.
+ - fix file descriptor leak when reloading the daemon.
+ - depricate nosymlink pseudo option.
++- add symlink pseudo option.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/include/automount.h b/include/automount.h
+index 37541f5..e72fa0d 100644
+--- a/include/automount.h
++++ b/include/automount.h
+@@ -455,6 +455,9 @@ struct kernel_mod_version {
+ /* Don't use bind mounts even when system supports them */
+ #define MOUNT_FLAG_NOBIND		0x0020
+ 
++/* Use symlinks instead of bind mounting local mounts */
++#define MOUNT_FLAG_SYMLINK		0x0040
++
+ struct autofs_point {
+ 	pthread_t thid;
+ 	char *path;			/* Mount point name */
+diff --git a/lib/master_parse.y b/lib/master_parse.y
+index f925b5a..11caf5b 100644
+--- a/lib/master_parse.y
++++ b/lib/master_parse.y
+@@ -57,6 +57,7 @@ static char *type;
+ static char *format;
+ static long timeout;
+ static long negative_timeout;
++static unsigned symlnk;
+ static unsigned nobind;
+ static unsigned ghost;
+ extern unsigned global_selection_options;
+@@ -100,7 +101,7 @@ static int master_fprintf(FILE *, char *, ...);
+ %token COMMENT
+ %token MAP
+ %token OPT_TIMEOUT OPT_NTIMEOUT OPT_NOBIND OPT_NOGHOST OPT_GHOST OPT_VERBOSE
+-%token OPT_DEBUG OPT_RANDOM OPT_USE_WEIGHT
++%token OPT_DEBUG OPT_RANDOM OPT_USE_WEIGHT OPT_SYMLINK
+ %token COLON COMMA NL DDASH
+ %type <strtype> map
+ %type <strtype> options
+@@ -186,6 +187,7 @@ line:
+ 	| PATH OPT_USE_WEIGHT { master_notify($1); YYABORT; }
+ 	| PATH OPT_DEBUG { master_notify($1); YYABORT; }
+ 	| PATH OPT_TIMEOUT { master_notify($1); YYABORT; }
++	| PATH OPT_SYMLINK { master_notify($1); YYABORT; }
+ 	| PATH OPT_NOBIND { master_notify($1); YYABORT; }
+ 	| PATH OPT_GHOST { master_notify($1); YYABORT; }
+ 	| PATH OPT_NOGHOST { master_notify($1); YYABORT; }
+@@ -557,6 +559,7 @@ option: daemon_option
+ 
+ daemon_option: OPT_TIMEOUT NUMBER { timeout = $2; }
+ 	| OPT_NTIMEOUT NUMBER { negative_timeout = $2; }
++	| OPT_SYMLINK	{ symlnk = 1; }
+ 	| OPT_NOBIND	{ nobind = 1; }
+ 	| OPT_NOGHOST	{ ghost = 0; }
+ 	| OPT_GHOST	{ ghost = 1; }
+@@ -627,6 +630,7 @@ static void local_init_vars(void)
+ 	debug = 0;
+ 	timeout = -1;
+ 	negative_timeout = 0;
++	symlnk = 0;
+ 	nobind = 0;
+ 	ghost = defaults_get_browse_mode();
+ 	random_selection = global_selection_options & MOUNT_FLAG_RANDOM_SELECT;
+@@ -811,6 +815,8 @@ int master_parse_entry(const char *buffer, unsigned int default_timeout, unsigne
+ 		entry->ap->flags |= MOUNT_FLAG_RANDOM_SELECT;
+ 	if (use_weight)
+ 		entry->ap->flags |= MOUNT_FLAG_USE_WEIGHT_ONLY;
++	if (symlnk)
++		entry->ap->flags |= MOUNT_FLAG_SYMLINK;
+ 	if (negative_timeout)
+ 		entry->ap->negative_timeout = negative_timeout;
+ 
+diff --git a/lib/master_tok.l b/lib/master_tok.l
+index 30abb15..f9b4e55 100644
+--- a/lib/master_tok.l
++++ b/lib/master_tok.l
+@@ -361,6 +361,7 @@ OPTNTOUT	(-n{OPTWS}|-n{OPTWS}={OPTWS}|--negative-timeout{OPTWS}|--negative-timeo
+ 		return(NUMBER);
+ 	}
+ 
++	-?symlink		{ return(OPT_SYMLINK); }
+ 	-?nobind		{ return(OPT_NOBIND); }
+ 	-?nobrowse		{ return(OPT_NOGHOST); }
+ 	-g|--ghost|-?browse	{ return(OPT_GHOST); }
+diff --git a/man/auto.master.5.in b/man/auto.master.5.in
+index 8007542..bbea43a 100644
+--- a/man/auto.master.5.in
++++ b/man/auto.master.5.in
+@@ -159,6 +159,14 @@ on individual map entries of both types. Bind mounting of NFS file
+ systems can also be prevented for specific map entrys by adding the
+ "port=" mount option to the entries.
+ .TP
++.I "symlink"
++This option makes bind mounting use a symlink instead of an actual bind
++mount. It is an autofs specific option that is a pseudo mount option and
++so is given without a leading dash. It may be used with indirect map
++entries only, either in the master map (so it effects all map entries)
++or with individual map entries. The option is ignored for direct mounts
++and non-root offest mount entries.
++.TP
+ .I "\-r, \-\-random-multimount-selection"
+ Enables the use of ramdom selection when choosing a host from a
+ list of replicated servers. This option is applied to this mount
+diff --git a/modules/mount_autofs.c b/modules/mount_autofs.c
+index ef16020..8c1e600 100644
+--- a/modules/mount_autofs.c
++++ b/modules/mount_autofs.c
+@@ -51,6 +51,7 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name,
+ 	int argc, status;
+ 	int nobind = ap->flags & MOUNT_FLAG_NOBIND;
+ 	int ghost = ap->flags & MOUNT_FLAG_GHOST;
++	int symlnk = ap->flags & MOUNT_FLAG_SYMLINK;
+ 	time_t timeout = ap->entry->maps->exp_timeout;
+ 	unsigned logopt = ap->logopt;
+ 	struct map_type_info *info;
+@@ -120,6 +121,8 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name,
+ 				nobind = 1;
+ 			else if (strncmp(cp, "browse", 6) == 0)
+ 				ghost = 1;
++			else if (strncmp(cp, "symlink", 7) == 0)
++				symlnk = 1;
+ 			else if (strncmp(cp, "timeout=", 8) == 0) {
+ 				char *val = strchr(cp, '=');
+ 				unsigned tout;
+@@ -158,6 +161,8 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name,
+ 	}
+ 	nap = entry->ap;
+ 	nap->parent = ap;
++	if (symlnk)
++		nap->flags |= MOUNT_FLAG_SYMLINK;
+ 
+ 	argc = 1;
+ 
+diff --git a/modules/mount_bind.c b/modules/mount_bind.c
+index 9bce686..4975294 100644
+--- a/modules/mount_bind.c
++++ b/modules/mount_bind.c
+@@ -73,10 +73,44 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int
+ 	char buf[MAX_ERR_BUF];
+ 	int err;
+ 	int i, len;
++	int symlnk = (*name != '/' && (ap->flags & MOUNT_FLAG_SYMLINK));
+ 
+ 	if (ap->flags & MOUNT_FLAG_REMOUNT)
+ 		return 0;
+ 
++	/* Extract "symlink" pseudo-option which forces local filesystems
++	 * to be symlinked instead of bound.
++	 */
++	if (*name != '/' && !symlnk && options) {
++		const char *comma;
++		int o_len = strlen(options) + 1;
++
++		for (comma = options; *comma != '\0';) {
++			const char *cp;
++			const char *end;
++
++			while (*comma == ',')
++				comma++;
++
++			/* Skip leading white space */
++			while (*comma == ' ' || *comma == '\t')
++				comma++;
++
++			cp = comma;
++			while (*comma != '\0' && *comma != ',')
++				comma++;
++
++			/* Skip trailing white space */
++			end = comma - 1;
++			while (*comma == ' ' || *comma == '\t')
++				end--;
++
++			o_len = end - cp + 1;
++			if (strncmp("symlink", cp, o_len) == 0)
++				symlnk = 1;
++		}
++	}
++
+ 	/* Root offset of multi-mount */
+ 	len = strlen(root);
+ 	if (root[len - 1] == '/') {
+@@ -100,7 +134,7 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int
+ 	if (options == NULL || *options == '\0')
+ 		options = "defaults";
+ 
+-	if (bind_works) {
++	if (!symlnk && bind_works) {
+ 		int status, existed = 1;
+ 
+ 		debug(ap->logopt, MODPREFIX "calling mkdir_path %s", fullpath);

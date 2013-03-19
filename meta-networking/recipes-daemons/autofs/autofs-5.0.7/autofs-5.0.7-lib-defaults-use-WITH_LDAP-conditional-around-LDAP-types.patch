@@ -1,0 +1,448 @@
+autofs-5.0.7 - lib/defaults.c: use WITH_LDAP conditional around LDAP types
+
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+
+Wrap the inclusion of lookup_ldap.h and functions that use ldap_uri or
+ldap_schema with the WITH_LDAP conditional. WITH_LDAP is set by the
+configure step when LDAP support is not desired. This also allows
+compilation on a system that doesn't have any LDAP libraries.
+---
+
+ CHANGELOG             |    1 
+ include/defaults.h    |   14 +-
+ include/lookup_ldap.h |    1 
+ lib/defaults.c        |  325 +++++++++++++++++++++++++------------------------
+ modules/lookup_ldap.c |    1 
+ 5 files changed, 175 insertions(+), 167 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index ba1d65b..1130db6 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -24,6 +24,7 @@
+ - don't use dirent d_type to filter out files in scandir()
+ - don't schedule new alarms after readmap.
+ - use numeric protocol ids instead of protoent structs.
++- lib/defaults.c: use WITH_LDAP conditional around LDAP types.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/include/defaults.h b/include/defaults.h
+index cda2174..871e14b 100644
+--- a/include/defaults.h
++++ b/include/defaults.h
+@@ -44,8 +44,16 @@
+ 
+ #define DEFAULT_MAP_HASH_TABLE_SIZE	1024
+ 
++#ifdef WITH_LDAP
+ struct ldap_schema;
+ struct ldap_searchdn;
++void defaults_free_uris(struct list_head *);
++struct list_head *defaults_get_uris(void);
++struct ldap_schema *defaults_get_default_schema(void);
++void defaults_free_searchdns(struct ldap_searchdn *);
++struct ldap_searchdn *defaults_get_searchdns(void);
++struct ldap_schema *defaults_get_schema(void);
++#endif
+ 
+ unsigned int defaults_read_config(unsigned int);
+ const char *defaults_get_master_map(void);
+@@ -57,12 +65,6 @@ unsigned int defaults_get_logging(void);
+ const char *defaults_get_ldap_server(void);
+ unsigned int defaults_get_ldap_timeout(void);
+ unsigned int defaults_get_ldap_network_timeout(void);
+-struct list_head *defaults_get_uris(void);
+-void defaults_free_uris(struct list_head *);
+-struct ldap_schema *defaults_get_default_schema(void);
+-struct ldap_schema *defaults_get_schema(void);
+-struct ldap_searchdn *defaults_get_searchdns(void);
+-void defaults_free_searchdns(struct ldap_searchdn *);
+ unsigned int defaults_get_mount_nfs_default_proto(void);
+ unsigned int defaults_get_append_options(void);
+ unsigned int defaults_get_mount_wait(void);
+diff --git a/include/lookup_ldap.h b/include/lookup_ldap.h
+index e441a61..9a4ce73 100644
+--- a/include/lookup_ldap.h
++++ b/include/lookup_ldap.h
+@@ -8,7 +8,6 @@
+ #include <openssl/evp.h>
+ #include <openssl/err.h>
+ #include <sasl/sasl.h>
+-#include <libxml/tree.h>
+ #include <krb5.h>
+ #endif
+ 
+diff --git a/lib/defaults.c b/lib/defaults.c
+index 5ce71b7..ae1162f 100644
+--- a/lib/defaults.c
++++ b/lib/defaults.c
+@@ -17,9 +17,12 @@
+ #include <ctype.h>
+ #include <string.h>
+ 
++#include "config.h"
+ #include "list.h"
+ #include "defaults.h"
++#ifdef WITH_LDAP
+ #include "lookup_ldap.h"
++#endif
+ #include "log.h"
+ #include "automount.h"
+ 
+@@ -197,6 +200,7 @@ static int parse_line(char *line, char **res, char **value)
+ 	return 1;
+ }
+ 
++#ifdef WITH_LDAP
+ void defaults_free_uris(struct list_head *list)
+ {
+ 	struct list_head *next;
+@@ -290,166 +294,6 @@ struct list_head *defaults_get_uris(void)
+ 	return list;
+ }
+ 
+-/*
+- * Read config env variables and check they have been set.
+- *
+- * This simple minded routine assumes the config file
+- * is valid bourne shell script without spaces around "="
+- * and that it has valid values.
+- */
+-unsigned int defaults_read_config(unsigned int to_syslog)
+-{
+-	FILE *f;
+-	char buf[MAX_LINE_LEN];
+-	char *res;
+-
+-	f = open_fopen_r(DEFAULTS_CONFIG_FILE);
+-	if (!f)
+-		return 0;
+-
+-	while ((res = fgets(buf, MAX_LINE_LEN, f))) {
+-		char *key, *value;
+-
+-		if (!parse_line(res, &key, &value))
+-			continue;
+-
+-		if (check_set_config_value(key, ENV_NAME_MASTER_MAP, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_TIMEOUT, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_NEGATIVE_TIMEOUT, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_BROWSE_MODE, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_LOGGING, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_LDAP_TIMEOUT, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_LDAP_NETWORK_TIMEOUT, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_MAP_OBJ_CLASS, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_ENTRY_OBJ_CLASS, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_MAP_ATTR, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_ENTRY_ATTR, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_NAME_VALUE_ATTR, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_APPEND_OPTIONS, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_MOUNT_WAIT, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_UMOUNT_WAIT, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_AUTH_CONF_FILE, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_MAP_HASH_TABLE_SIZE, value, to_syslog) ||
+-		    check_set_config_value(key, ENV_MOUNT_NFS_DEFAULT_PROTOCOL, value, to_syslog))
+-			;
+-	}
+-
+-	if (!feof(f) || ferror(f)) {
+-		if (!to_syslog) {
+-			fprintf(stderr,
+-				"fgets returned error %d while reading %s\n",
+-				ferror(f), DEFAULTS_CONFIG_FILE);
+-		} else {
+-			logmsg("fgets returned error %d while reading %s",
+-			      ferror(f), DEFAULTS_CONFIG_FILE);
+-		}
+-		fclose(f);
+-		return 0;
+-	}
+-
+-	fclose(f);
+-	return 1;
+-}
+-
+-const char *defaults_get_master_map(void)
+-{
+-	char *master;
+-
+-	master = get_env_string(ENV_NAME_MASTER_MAP);
+-	if (!master)
+-		return strdup(default_master_map_name);
+-
+-	return (const char *) master;
+-}
+-
+-int defaults_master_set(void)
+-{
+-	char *val = getenv(ENV_NAME_MASTER_MAP);
+-	if (!val)
+-		return 0;
+-
+-	return 1;
+-}
+-
+-unsigned int defaults_get_timeout(void)
+-{
+-	long timeout;
+-
+-	timeout = get_env_number(ENV_NAME_TIMEOUT);
+-	if (timeout < 0)
+-		timeout = DEFAULT_TIMEOUT;
+-
+-	return (unsigned int) timeout;
+-}
+-
+-unsigned int defaults_get_negative_timeout(void)
+-{
+-	long n_timeout;
+-
+-	n_timeout = get_env_number(ENV_NAME_NEGATIVE_TIMEOUT);
+-	if (n_timeout <= 0)
+-		n_timeout = DEFAULT_NEGATIVE_TIMEOUT;
+-
+-	return (unsigned int) n_timeout;
+-}
+-
+-unsigned int defaults_get_browse_mode(void)
+-{
+-	int res;
+-
+-	res = get_env_yesno(ENV_NAME_BROWSE_MODE);
+-	if (res < 0)
+-		res = DEFAULT_BROWSE_MODE;
+-
+-	return res;
+-}
+-
+-unsigned int defaults_get_logging(void)
+-{
+-	char *res;
+-	unsigned int logging = DEFAULT_LOGGING;
+-
+-	res = get_env_string(ENV_NAME_LOGGING);
+-	if (!res)
+-		return logging;
+-
+-	if (!strcasecmp(res, "none"))
+-		logging = DEFAULT_LOGGING;
+-	else {
+-		if (!strcasecmp(res, "verbose"))
+-			logging |= LOGOPT_VERBOSE;
+-
+-		if (!strcasecmp(res, "debug"))
+-			logging |= LOGOPT_DEBUG;
+-	}
+-
+-	free(res);
+-
+-	return logging;
+-}
+-
+-unsigned int defaults_get_ldap_timeout(void)
+-{
+-	int res;
+-
+-	res = get_env_number(ENV_LDAP_TIMEOUT);
+-	if (res < 0)
+-		res = DEFAULT_LDAP_TIMEOUT;
+-
+-	return res;
+-}
+-
+-unsigned int defaults_get_ldap_network_timeout(void)
+-{
+-	int res;
+-
+-	res = get_env_number(ENV_LDAP_NETWORK_TIMEOUT);
+-	if (res < 0)
+-		res = DEFAULT_LDAP_NETWORK_TIMEOUT;
+-
+-	return res;
+-}
+-
+ struct ldap_schema *defaults_get_default_schema(void)
+ {
+ 	struct ldap_schema *schema;
+@@ -645,6 +489,167 @@ struct ldap_schema *defaults_get_schema(void)
+ 
+ 	return schema;
+ }
++#endif
++
++/*
++ * Read config env variables and check they have been set.
++ *
++ * This simple minded routine assumes the config file
++ * is valid bourne shell script without spaces around "="
++ * and that it has valid values.
++ */
++unsigned int defaults_read_config(unsigned int to_syslog)
++{
++	FILE *f;
++	char buf[MAX_LINE_LEN];
++	char *res;
++
++	f = open_fopen_r(DEFAULTS_CONFIG_FILE);
++	if (!f)
++		return 0;
++
++	while ((res = fgets(buf, MAX_LINE_LEN, f))) {
++		char *key, *value;
++
++		if (!parse_line(res, &key, &value))
++			continue;
++
++		if (check_set_config_value(key, ENV_NAME_MASTER_MAP, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_TIMEOUT, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_NEGATIVE_TIMEOUT, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_BROWSE_MODE, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_LOGGING, value, to_syslog) ||
++		    check_set_config_value(key, ENV_LDAP_TIMEOUT, value, to_syslog) ||
++		    check_set_config_value(key, ENV_LDAP_NETWORK_TIMEOUT, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_MAP_OBJ_CLASS, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_ENTRY_OBJ_CLASS, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_MAP_ATTR, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_ENTRY_ATTR, value, to_syslog) ||
++		    check_set_config_value(key, ENV_NAME_VALUE_ATTR, value, to_syslog) ||
++		    check_set_config_value(key, ENV_APPEND_OPTIONS, value, to_syslog) ||
++		    check_set_config_value(key, ENV_MOUNT_WAIT, value, to_syslog) ||
++		    check_set_config_value(key, ENV_UMOUNT_WAIT, value, to_syslog) ||
++		    check_set_config_value(key, ENV_AUTH_CONF_FILE, value, to_syslog) ||
++		    check_set_config_value(key, ENV_MAP_HASH_TABLE_SIZE, value, to_syslog) ||
++		    check_set_config_value(key, ENV_MOUNT_NFS_DEFAULT_PROTOCOL, value, to_syslog))
++			;
++	}
++
++	if (!feof(f) || ferror(f)) {
++		if (!to_syslog) {
++			fprintf(stderr,
++				"fgets returned error %d while reading %s\n",
++				ferror(f), DEFAULTS_CONFIG_FILE);
++		} else {
++			logmsg("fgets returned error %d while reading %s",
++			      ferror(f), DEFAULTS_CONFIG_FILE);
++		}
++		fclose(f);
++		return 0;
++	}
++
++	fclose(f);
++	return 1;
++}
++
++const char *defaults_get_master_map(void)
++{
++	char *master;
++
++	master = get_env_string(ENV_NAME_MASTER_MAP);
++	if (!master)
++		return strdup(default_master_map_name);
++
++	return (const char *) master;
++}
++
++int defaults_master_set(void)
++{
++	char *val = getenv(ENV_NAME_MASTER_MAP);
++	if (!val)
++		return 0;
++
++	return 1;
++}
++
++unsigned int defaults_get_timeout(void)
++{
++	long timeout;
++
++	timeout = get_env_number(ENV_NAME_TIMEOUT);
++	if (timeout < 0)
++		timeout = DEFAULT_TIMEOUT;
++
++	return (unsigned int) timeout;
++}
++
++unsigned int defaults_get_negative_timeout(void)
++{
++	long n_timeout;
++
++	n_timeout = get_env_number(ENV_NAME_NEGATIVE_TIMEOUT);
++	if (n_timeout <= 0)
++		n_timeout = DEFAULT_NEGATIVE_TIMEOUT;
++
++	return (unsigned int) n_timeout;
++}
++
++unsigned int defaults_get_browse_mode(void)
++{
++	int res;
++
++	res = get_env_yesno(ENV_NAME_BROWSE_MODE);
++	if (res < 0)
++		res = DEFAULT_BROWSE_MODE;
++
++	return res;
++}
++
++unsigned int defaults_get_logging(void)
++{
++	char *res;
++	unsigned int logging = DEFAULT_LOGGING;
++
++	res = get_env_string(ENV_NAME_LOGGING);
++	if (!res)
++		return logging;
++
++	if (!strcasecmp(res, "none"))
++		logging = DEFAULT_LOGGING;
++	else {
++		if (!strcasecmp(res, "verbose"))
++			logging |= LOGOPT_VERBOSE;
++
++		if (!strcasecmp(res, "debug"))
++			logging |= LOGOPT_DEBUG;
++	}
++
++	free(res);
++
++	return logging;
++}
++
++unsigned int defaults_get_ldap_timeout(void)
++{
++	int res;
++
++	res = get_env_number(ENV_LDAP_TIMEOUT);
++	if (res < 0)
++		res = DEFAULT_LDAP_TIMEOUT;
++
++	return res;
++}
++
++unsigned int defaults_get_ldap_network_timeout(void)
++{
++	int res;
++
++	res = get_env_number(ENV_LDAP_NETWORK_TIMEOUT);
++	if (res < 0)
++		res = DEFAULT_LDAP_NETWORK_TIMEOUT;
++
++	return res;
++}
+ 
+ unsigned int defaults_get_mount_nfs_default_proto(void)
+ {
+diff --git a/modules/lookup_ldap.c b/modules/lookup_ldap.c
+index 3bc4dc5..431e50d 100644
+--- a/modules/lookup_ldap.c
++++ b/modules/lookup_ldap.c
+@@ -28,6 +28,7 @@
+ #include <arpa/nameser.h>
+ #include <resolv.h>
+ #include <lber.h>
++#include <libxml/tree.h>
+ 
+ #define MODULE_LOOKUP
+ #include "automount.h"

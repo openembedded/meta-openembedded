@@ -1,0 +1,179 @@
+autofs-5.0.7 - fix file descriptor leak when reloading the daemon
+
+From: Leonardo Chiquitto <leonardo.lists@gmail.com>
+
+A customer reported that AutoFS may leak file descriptors when some
+maps are modified and the daemon reloaded. I'm able to reproduce the
+problem on 5.0.7 by following these steps:
+
+1. Configure a simple direct mount:
+
+# cat /etc/auto.master
+/-	/etc/auto.direct
+
+# cat /etc/auto.direct
+/nfs   server:/nfs
+
+2. Start the automounter and do NOT trigger the mount
+
+3. Replace /etc/auto.direct with:
+
+# cat /etc/auto.direct
+/nfs/1  server:/nfs
+/nfs/2  server:/nfs
+
+4. Reload:
+
+# kill -HUP $(pidof automount)
+
+>From now on, every reload will leak a file descriptor:
+
+# ls -la /proc/$(pidof automount)/fd | grep /nfs
+lr-x------ 1 root root 64 Aug 14 22:08 11 -> /nfs
+lr-x------ 1 root root 64 Aug 14 22:08 12 -> /nfs
+lr-x------ 1 root root 64 Aug 14 22:08 13 -> /nfs
+lr-x------ 1 root root 64 Aug 14 22:08 14 -> /nfs
+lr-x------ 1 root root 64 Aug 14 22:08 5 -> /nfs
+
+I've investigated the problem and discovered that the leak happens in
+do_umount_autofs_direct():
+
+- edit imk
+The same leak is present in umount_autofs_offset() also.
+Updated patch to cover that too.
+- end edit
+
+int do_umount_autofs_direct(struct autofs_point *ap, struct mnt_list
+*mnts, struct mapent *me)
+{
+(...)
+	if (me->ioctlfd != -1) {
+		if (tree_is_mounted(mnts, me->key, MNTS_REAL)) {
+			error(ap->logopt,
+			      "attempt to umount busy direct mount %s",
+			      me->key);
+			return 1;
+		}
+		ioctlfd = me->ioctlfd;
+	} else	// ioctlfd == -1
+		ops->open(ap->logopt, &ioctlfd, me->dev, me->key);  <= we open it here
+
+	if (ioctlfd >= 0) {
+		unsigned int status = 1;
+
+		rv = ops->askumount(ap->logopt, ioctlfd, &status);
+				/// at this point, rv == 0 and status == 0
+		if (rv) {
+			char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+			error(ap->logopt, "ioctl failed: %s", estr);
+			return 1;
+		} else if (!status) {
+				/// at this point, ap->state == ST_READMAP
+			if (ap->state != ST_SHUTDOWN_FORCE) {
+				error(ap->logopt,
+				      "ask umount returned busy for %s",
+				      me->key);
+				return 1;			<= we return here, without closing the fd
+			} else {
+				me->ioctlfd = -1;
+				ops->catatonic(ap->logopt, ioctlfd);
+				ops->close(ap->logopt, ioctlfd);
+				goto force_umount;
+			}
+(...)
+---
+ CHANGELOG       |    1 +
+ daemon/direct.c |   19 ++++++++++++++++---
+ 2 files changed, 17 insertions(+), 3 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 46ef335..a7ed212 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -30,6 +30,7 @@
+ - workaround missing GNU versionsort extension.
+ - dont fail on master map self include.
+ - fix wildcard multi map regression.
++- fix file descriptor leak when reloading the daemon.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/daemon/direct.c b/daemon/direct.c
+index 3e09c5d..228a666 100644
+--- a/daemon/direct.c
++++ b/daemon/direct.c
+@@ -86,7 +86,8 @@ int do_umount_autofs_direct(struct autofs_point *ap, struct mnt_list *mnts, stru
+ {
+ 	struct ioctl_ops *ops = get_ioctl_ops();
+ 	char buf[MAX_ERR_BUF];
+-	int ioctlfd, rv, left, retries;
++	int ioctlfd = -1, rv, left, retries;
++	int opened = 0;
+ 
+ 	left = umount_multi(ap, me->key, 0);
+ 	if (left) {
+@@ -103,8 +104,10 @@ int do_umount_autofs_direct(struct autofs_point *ap, struct mnt_list *mnts, stru
+ 			return 1;
+ 		}
+ 		ioctlfd = me->ioctlfd;
+-	} else
++	} else {
+ 		ops->open(ap->logopt, &ioctlfd, me->dev, me->key);
++		opened = 1;
++	}
+ 
+ 	if (ioctlfd >= 0) {
+ 		unsigned int status = 1;
+@@ -113,12 +116,16 @@ int do_umount_autofs_direct(struct autofs_point *ap, struct mnt_list *mnts, stru
+ 		if (rv) {
+ 			char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+ 			error(ap->logopt, "ioctl failed: %s", estr);
++			if (opened && ioctlfd != -1)
++				ops->close(ap->logopt, ioctlfd);
+ 			return 1;
+ 		} else if (!status) {
+ 			if (ap->state != ST_SHUTDOWN_FORCE) {
+ 				error(ap->logopt,
+ 				      "ask umount returned busy for %s",
+ 				      me->key);
++				if (opened && ioctlfd != -1)
++					ops->close(ap->logopt, ioctlfd);
+ 				return 1;
+ 			} else {
+ 				me->ioctlfd = -1;
+@@ -536,7 +543,8 @@ int umount_autofs_offset(struct autofs_point *ap, struct mapent *me)
+ {
+ 	struct ioctl_ops *ops = get_ioctl_ops();
+ 	char buf[MAX_ERR_BUF];
+-	int ioctlfd, rv = 1, retries;
++	int ioctlfd = -1, rv = 1, retries;
++	int opened = 0;
+ 
+ 	if (me->ioctlfd != -1) {
+ 		if (is_mounted(_PATH_MOUNTED, me->key, MNTS_REAL)) {
+@@ -554,6 +562,7 @@ int umount_autofs_offset(struct autofs_point *ap, struct mapent *me)
+ 			return 0;
+ 		}
+ 		ops->open(ap->logopt, &ioctlfd, me->dev, me->key);
++		opened = 1;
+ 	}
+ 
+ 	if (ioctlfd >= 0) {
+@@ -563,6 +572,8 @@ int umount_autofs_offset(struct autofs_point *ap, struct mapent *me)
+ 		if (rv) {
+ 			char *estr = strerror_r(errno, buf, MAX_ERR_BUF);
+ 			logerr("ioctl failed: %s", estr);
++			if (opened && ioctlfd != -1)
++				ops->close(ap->logopt, ioctlfd);
+ 			return 1;
+ 		} else if (!status) {
+ 			if (ap->state != ST_SHUTDOWN_FORCE) {
+@@ -570,6 +581,8 @@ int umount_autofs_offset(struct autofs_point *ap, struct mapent *me)
+ 					error(ap->logopt,
+ 					     "ask umount returned busy for %s",
+ 					     me->key);
++				if (opened && ioctlfd != -1)
++					ops->close(ap->logopt, ioctlfd);
+ 				return 1;
+ 			} else {
+ 				me->ioctlfd = -1;

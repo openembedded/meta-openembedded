@@ -1,0 +1,149 @@
+autofs-5.0.7 - workaround missing GNU versionsort extension
+
+From: Chris Packham <chris.packham@alliedtelesis.co.nz>
+
+alphasort() and scandir() are specified in POSIX.1-2008, versionsort()
+is a GNU extension. When versionsort isn't available fallback to using
+alphasort.
+---
+
+ CHANGELOG            |    1 +
+ configure            |   62 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ configure.in         |    6 +++++
+ include/config.h.in  |    3 ++
+ modules/lookup_dir.c |    5 ++++
+ 5 files changed, 77 insertions(+), 0 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 4eaa9f9..39388a5 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -27,6 +27,7 @@
+ - lib/defaults.c: use WITH_LDAP conditional around LDAP types.
+ - make yellow pages support optional.
+ - modules/replicated.c: use sin6_addr.s6_addr32.
++- workaround missing GNU versionsort extension.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/configure b/configure
+index cf6428c..c1423d8 100755
+--- a/configure
++++ b/configure
+@@ -4010,6 +4010,68 @@ $as_echo "yes" >&6; }
+   KRB5_FLAGS=`$KRB5_CONFIG --cflags`
+ fi
+ 
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing versionsort" >&5
++$as_echo_n "checking for library containing versionsort... " >&6; }
++if ${ac_cv_search_versionsort+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  ac_func_search_save_LIBS=$LIBS
++cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
++/* Override any GCC internal prototype to avoid an error.
++   Use char because int might match the return type of a GCC
++   builtin and then its argument prototype would still apply.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++char versionsort ();
++int
++main ()
++{
++return versionsort ();
++  ;
++  return 0;
++}
++_ACEOF
++for ac_lib in '' ; do
++  if test -z "$ac_lib"; then
++    ac_res="none required"
++  else
++    ac_res=-l$ac_lib
++    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
++  fi
++  if ac_fn_c_try_link "$LINENO"; then :
++  ac_cv_search_versionsort=$ac_res
++fi
++rm -f core conftest.err conftest.$ac_objext \
++    conftest$ac_exeext
++  if ${ac_cv_search_versionsort+:} false; then :
++  break
++fi
++done
++if ${ac_cv_search_versionsort+:} false; then :
++
++else
++  ac_cv_search_versionsort=no
++fi
++rm conftest.$ac_ext
++LIBS=$ac_func_search_save_LIBS
++fi
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_search_versionsort" >&5
++$as_echo "$ac_cv_search_versionsort" >&6; }
++ac_res=$ac_cv_search_versionsort
++if test "$ac_res" != no; then :
++  test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
++
++fi
++
++if test "$ac_cv_search_versionsort" = "no"; then
++
++$as_echo "#define WITHOUT_VERSIONSORT 1" >>confdefs.h
++
++fi
++
+ #
+ # glibc/libc 6 new libraries
+ #
+diff --git a/configure.in b/configure.in
+index 363c376..4029375 100644
+--- a/configure.in
++++ b/configure.in
+@@ -163,6 +163,12 @@ AF_SLOPPY_MOUNT()
+ AF_CHECK_LIBXML()
+ AF_CHECK_KRB5()
+ 
++AC_SEARCH_LIBS([versionsort],[])
++if test "$ac_cv_search_versionsort" = "no"; then
++	AC_DEFINE(WITHOUT_VERSIONSORT, 1,
++		[Define if your C library does not provide versionsort])
++fi
++
+ #
+ # glibc/libc 6 new libraries
+ #
+diff --git a/include/config.h.in b/include/config.h.in
+index 7f1c5b5..a2a05a8 100644
+--- a/include/config.h.in
++++ b/include/config.h.in
+@@ -135,6 +135,9 @@
+ /* Define to 1 to use the libtirpc tsd usage workaround */
+ #undef TIRPC_WORKAROUND
+ 
++/* Define if your C library does not provide versionsort */
++#undef WITHOUT_VERSIONSORT
++
+ /* Define if using the dmalloc debugging malloc package */
+ #undef WITH_DMALLOC
+ 
+diff --git a/modules/lookup_dir.c b/modules/lookup_dir.c
+index 33901c0..07471b7 100644
+--- a/modules/lookup_dir.c
++++ b/modules/lookup_dir.c
+@@ -39,6 +39,11 @@
+ #define AUTOFS_DIR_EXT ".autofs"
+ #define AUTOFS_DIR_EXTSIZ (sizeof(AUTOFS_DIR_EXT) - 1)
+ 
++/* Work around non-GNU systems that don't provide versionsort */
++#ifdef WITHOUT_VERSIONSORT
++#define versionsort alphasort
++#endif
++
+ struct lookup_context {
+   const char *mapname;
+ };

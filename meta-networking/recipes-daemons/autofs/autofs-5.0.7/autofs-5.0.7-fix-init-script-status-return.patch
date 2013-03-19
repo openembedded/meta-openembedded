@@ -1,0 +1,39 @@
+autofs-5.0.7 - fix init script status return
+
+From: Ian Kent <ikent@redhat.com>
+
+The patch that added the piddir to configure to fix incorrect init
+script status() function returns failed to actually return the value
+to the user.
+---
+
+ CHANGELOG             |    1 +
+ redhat/autofs.init.in |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 76c1f73..5bcb1af 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -19,6 +19,7 @@
+ - Allow nsswitch.conf to not contain "automount:" lines.
+ - fix nobind man page description.
+ - fix submount offset delete.
++- fix init script status return.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/redhat/autofs.init.in b/redhat/autofs.init.in
+index fe18b3e..9d008ff 100644
+--- a/redhat/autofs.init.in
++++ b/redhat/autofs.init.in
+@@ -172,7 +172,7 @@ RETVAL=0
+ case "$1" in
+ 	status)
+ 		status -p @@autofspiddir@@/autofs.pid -l autofs $prog
+-		exit 0;
++		exit $?;
+ 		;;
+ 	usage)
+ 		usage_message

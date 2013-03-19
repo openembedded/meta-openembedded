@@ -1,0 +1,37 @@
+autofs-5.0.7 - fix map entry duplicate offset detection
+
+From: Ian Kent <raven@themaw.net>
+
+Recent changes broke the detection of duplicate offsets in map entries.
+---
+
+ CHANGELOG   |    1 +
+ lib/cache.c |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 8f6bb3a..bd0dd82 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -15,6 +15,7 @@
+ - fix recursive mount deadlock.
+ - increase file map read buffer size.
+ - handle new location of systemd.
++- fix map entry duplicate offset detection.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/lib/cache.c b/lib/cache.c
+index 9179ad5..1e05a99 100644
+--- a/lib/cache.c
++++ b/lib/cache.c
+@@ -659,7 +659,7 @@ int cache_update_offset(struct mapent_cache *mc, const char *mkey, const char *k
+ 
+ 	me = cache_lookup_distinct(mc, key);
+ 	if (me && me->age == age) {
+-		if (me->multi != owner)
++		if (me->multi == owner)
+ 			return CHE_DUPLICATE;
+ 	}
+ 

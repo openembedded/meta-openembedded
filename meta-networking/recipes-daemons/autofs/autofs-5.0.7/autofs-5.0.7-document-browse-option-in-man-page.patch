@@ -1,0 +1,46 @@
+autofs-5.0.7 - document browse option in man page
+
+From: Ian Kent <raven@themaw.net>
+
+The "browse" option has remained undocumented for a long time.
+Finally add a section for it to auto.master(5) making special
+note of the potential performance implications.
+---
+ CHANGELOG            |    1 +
+ man/auto.master.5.in |   11 +++++++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index ecdea0b..d8e4049 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -36,6 +36,7 @@
+ - fix requires in spec file.
+ - fix libtirpc build option to require libtirpc-devel if needed.
+ - fix systemd unidir in spec file.
++- document browse option in man page.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/man/auto.master.5.in b/man/auto.master.5.in
+index bbea43a..c552e56 100644
+--- a/man/auto.master.5.in
++++ b/man/auto.master.5.in
+@@ -147,6 +147,17 @@ multiple file systems should be mounted (`multimounts'). If this option
+ is given, no file system is mounted at all if at least one file system
+ can't be mounted.
+ .TP
++.I "[no]browse"
++This is an autofs specific option that is a pseudo mount option and
++so is given without a leading dash. Use of the browse option pre-creates
++mount point directories for indirect mount maps so the map keys can be
++seen in a directory listing without being mounted. Use of this option
++can cause performance problem if the indirect map is large so it should
++be used with caution. The internal program default is to enable browse
++mode for indirect mounts but the default installed configuration overrides
++this by setting BROWSE_MODE to "no" because of the potential performance
++problem.
++.TP
+ .I "nobind"
+ This is an autofs specific option that is a pseudo mount option and
+ so is given without a leading dash. It may be used either in the master

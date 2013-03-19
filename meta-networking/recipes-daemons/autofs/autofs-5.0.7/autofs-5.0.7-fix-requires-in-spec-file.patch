@@ -1,0 +1,37 @@
+autofs-5.0.7 - fix requires in spec file
+
+From: Ian Kent <raven@themaw.net>
+
+Fix the use of depricated reqires in tar spec file.
+---
+ CHANGELOG   |    1 +
+ autofs.spec |    4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index 247d334..e848bcd 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -33,6 +33,7 @@
+ - fix file descriptor leak when reloading the daemon.
+ - depricate nosymlink pseudo option.
+ - add symlink pseudo option.
++- fix requires in spec file.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/autofs.spec b/autofs.spec
+index b8a3b7a..703f7a9 100644
+--- a/autofs.spec
++++ b/autofs.spec
+@@ -25,8 +25,8 @@ Buildroot: %{_tmppath}/%{name}-tmp
+ %if %{with_systemd}
+ BuildRequires: systemd-units
+ %endif
+-BuildPrereq: autoconf, hesiod-devel, openldap-devel, bison, flex, cyrus-sasl-devel
+-Prereq: chkconfig
++BuildRequires: autoconf, hesiod-devel, openldap-devel, bison, flex, cyrus-sasl-devel
++Requires: chkconfig
+ Requires: /bin/bash mktemp sed textutils sh-utils grep /bin/ps
+ %if %{with_systemd}
+ Requires(post): systemd-sysv

@@ -1,0 +1,92 @@
+autofs-5.0.7 - update kernel include files
+
+From: Ian Kent <raven@themaw.net>
+
+Update autofs include files to include the latest changes.
+---
+ include/linux/auto_fs.h  |   33 ++++++++++-----------------------
+ include/linux/auto_fs4.h |    3 ++-
+ 2 files changed, 12 insertions(+), 24 deletions(-)
+
+diff --git a/include/linux/auto_fs.h b/include/linux/auto_fs.h
+index 91d414f..64df1a6 100644
+--- a/include/linux/auto_fs.h
++++ b/include/linux/auto_fs.h
+@@ -14,13 +14,8 @@
+ #ifndef _LINUX_AUTO_FS_H
+ #define _LINUX_AUTO_FS_H
+ 
+-#ifdef __KERNEL__
+-#include <linux/fs.h>
+-#include <linux/limits.h>
+ #include <linux/types.h>
+-#include <linux/ioctl.h>
+-#else
+-#include <asm/types.h>
++#ifndef __KERNEL__
+ #include <sys/ioctl.h>
+ #endif /* __KERNEL__ */
+ 
+@@ -32,25 +27,16 @@
+ #define AUTOFS_MIN_PROTO_VERSION	AUTOFS_PROTO_VERSION
+ 
+ /*
+- * Architectures where both 32- and 64-bit binaries can be executed
+- * on 64-bit kernels need this.  This keeps the structure format
+- * uniform, and makes sure the wait_queue_token isn't too big to be
+- * passed back down to the kernel.
+- *
+- * This assumes that on these architectures:
+- * mode     32 bit    64 bit
+- * -------------------------
+- * int      32 bit    32 bit
+- * long     32 bit    64 bit
+- *
+- * If so, 32-bit user-space code should be backwards compatible.
++ * The wait_queue_token (autofs_wqt_t) is part of a structure which is passed
++ * back to the kernel via ioctl from userspace. On architectures where 32- and
++ * 64-bit userspace binaries can be executed it's important that the size of
++ * autofs_wqt_t stays constant between 32- and 64-bit Linux kernels so that we
++ * do not break the binary ABI interface by changing the structure size.
+  */
+-
+-#if defined(__sparc__) || defined(__mips__) || defined(__x86_64__) \
+- || defined(__powerpc__) || defined(__s390__)
+-typedef unsigned int autofs_wqt_t;
+-#else
++#if defined(__ia64__) || defined(__alpha__) /* pure 64bit architectures */
+ typedef unsigned long autofs_wqt_t;
++#else
++typedef unsigned int autofs_wqt_t;
+ #endif
+ 
+ /* Packet types */
+@@ -81,6 +67,7 @@ struct autofs_packet_expire {
+ #define AUTOFS_IOC_FAIL       _IO(0x93,0x61)
+ #define AUTOFS_IOC_CATATONIC  _IO(0x93,0x62)
+ #define AUTOFS_IOC_PROTOVER   _IOR(0x93,0x63,int)
++#define AUTOFS_IOC_SETTIMEOUT32 _IOWR(0x93,0x64,compat_ulong_t)
+ #define AUTOFS_IOC_SETTIMEOUT _IOWR(0x93,0x64,unsigned long)
+ #define AUTOFS_IOC_EXPIRE     _IOR(0x93,0x65,struct autofs_packet_expire)
+ 
+diff --git a/include/linux/auto_fs4.h b/include/linux/auto_fs4.h
+index 55fa478..e02982f 100644
+--- a/include/linux/auto_fs4.h
++++ b/include/linux/auto_fs4.h
+@@ -12,6 +12,7 @@
+ #define _LINUX_AUTO_FS4_H
+ 
+ /* Include common v3 definitions */
++#include <linux/types.h>
+ #include <linux/auto_fs.h>
+ 
+ /* autofs v4 definitions */
+@@ -23,7 +24,7 @@
+ #define AUTOFS_MIN_PROTO_VERSION	3
+ #define AUTOFS_MAX_PROTO_VERSION	5
+ 
+-#define AUTOFS_PROTO_SUBVERSION		1
++#define AUTOFS_PROTO_SUBVERSION		2
+ 
+ /* Mask for expire behaviour */
+ #define AUTOFS_EXP_IMMEDIATE		1

@@ -1,0 +1,24 @@
+autofs-5.0.7 - fix automounter support on parisc
+
+From: Helge Deller <deller@gmx.de>
+
+This patch fixes automounter support on the parisc architecture with
+64-bit kernel and 32-bit userspace.
+
+Signed-off-by: Helge Deller <deller@gmx.de>
+---
+ daemon/automount.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/daemon/automount.c b/daemon/automount.c
+index 4a3eb3d..4c651cf 100644
+--- a/daemon/automount.c
++++ b/daemon/automount.c
+@@ -610,6 +610,7 @@ static size_t get_kpkt_len(void)
+ 		if (strcmp(un.machine, "alpha") == 0 ||
+ 		    strcmp(un.machine, "ia64") == 0 ||
+ 		    strcmp(un.machine, "x86_64") == 0 ||
++		    strcmp(un.machine, "parisc64") == 0 ||
+ 		    strcmp(un.machine, "ppc64") == 0)
+ 			pkt_len += 4;
+ 

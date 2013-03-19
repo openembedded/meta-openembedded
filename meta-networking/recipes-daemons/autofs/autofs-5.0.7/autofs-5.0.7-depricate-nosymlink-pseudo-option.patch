@@ -1,0 +1,40 @@
+autofs-5.0.7 - depricate nosymlink pseudo option
+
+From: Ian Kent <raven@themaw.net>
+
+The undocumented "nosymlink" option was the only way to force local
+NFS mounting until the more descriptive "nobind" option was added.
+
+So depricate the "nosymlink" option in favour of the "nobind" option.
+---
+ CHANGELOG           |    1 +
+ modules/mount_nfs.c |    4 ++++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/CHANGELOG b/CHANGELOG
+index a7ed212..c189483 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -31,6 +31,7 @@
+ - dont fail on master map self include.
+ - fix wildcard multi map regression.
+ - fix file descriptor leak when reloading the daemon.
++- depricate nosymlink pseudo option.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
+diff --git a/modules/mount_nfs.c b/modules/mount_nfs.c
+index bbbb1de..e61320b 100644
+--- a/modules/mount_nfs.c
++++ b/modules/mount_nfs.c
+@@ -125,6 +125,10 @@ int mount_mount(struct autofs_point *ap, const char *root, const char *name, int
+ 
+ 			o_len = end - cp + 1;
+ 			if (strncmp("nosymlink", cp, o_len) == 0) {
++				warn(ap->logopt, MODPREFIX
++				     "the \"nosymlink\" option is depricated "
++				     "and will soon be removed, "
++				     "use the \"nobind\" option instead");
+ 				nosymlink = 1;
+ 			} else if (strncmp("nobind", cp, o_len) == 0) {
+ 				nobind = 1;

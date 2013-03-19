@@ -1,5 +1,3 @@
-Upstream-Status: Backport
-
 autofs-5.0.7 - make yellow pages support optional
 
 From: Chris Packham <chris.packham@alliedtelesis.co.nz>
@@ -8,6 +6,7 @@ If rpcsvc/ypclnt.h is not available don't compile in Yellow Pages
 support.
 ---
 
+ CHANGELOG           |    1 +
  Makefile.conf.in    |    3 +++
  configure           |   16 ++++++++++++++++
  configure.in        |    9 +++++++++
@@ -17,6 +16,18 @@ support.
  7 files changed, 39 insertions(+), 3 deletions(-)
 
 
+diff --git a/CHANGELOG b/CHANGELOG
+index 1130db6..ed17163 100644
+--- a/CHANGELOG
++++ b/CHANGELOG
+@@ -25,6 +25,7 @@
+ - don't schedule new alarms after readmap.
+ - use numeric protocol ids instead of protoent structs.
+ - lib/defaults.c: use WITH_LDAP conditional around LDAP types.
++- make yellow pages support optional.
+ 
+ 25/07/2012 autofs-5.0.7
+ =======================
 diff --git a/Makefile.conf.in b/Makefile.conf.in
 index 802318b..3766d45 100644
 --- a/Makefile.conf.in
