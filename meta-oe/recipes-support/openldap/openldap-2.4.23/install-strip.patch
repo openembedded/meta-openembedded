@@ -8,7 +8,7 @@
  	$(CC) $(LT_CFLAGS) $(LDFLAGS) $(LTFLAGS_MOD)
  
 -LTINSTALL = $(LIBTOOL) --mode=install $(INSTALL) 
-+LTINSTALL = STRIPPROG="@STRIP@" $(LIBTOOL) --mode=install $(top_srcdir)/contrib/ldapc++/install-sh -c
++LTINSTALL = STRIPPROG="" $(LIBTOOL) --mode=install $(top_srcdir)/contrib/ldapc++/install-sh -c
  LTFINISH = $(LIBTOOL) --mode=finish
  
  # Misc UNIX commands used in build environment
