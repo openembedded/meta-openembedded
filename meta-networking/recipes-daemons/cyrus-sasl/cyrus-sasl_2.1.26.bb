@@ -11,7 +11,8 @@ inherit autotools pkgconfig
 EXTRA_OECONF += "--with-dblib=berkeley \
                  --with-bdb-libdir=${STAGING_LIBDIR} \
                  --with-bdb-incdir=${STAGING_INCDIR} \
-                 --without-pam --without-opie --without-des"
+                 --without-pam --without-opie --without-des \
+                 andrew_cv_runpath_switch=none"
 
 do_configure_prepend () {
     rm -f acinclude.m4 config/libtool.m4
