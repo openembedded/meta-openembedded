@@ -52,32 +52,32 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 ${SNMP_CONF}"
 
 do_install () {
-        # Install init script and default settings
-        install -m 0755 -d ${D}${sysconfdir}/default ${D}${sysconfdir}/init.d \
-                           ${D}${sysconfdir}/quagga ${D}${sysconfdir}/default/volatiles
-        install -m 0644 ${WORKDIR}/quagga.default ${D}${sysconfdir}/default/quagga
-        install -m 0644 ${WORKDIR}/watchquagga.default ${D}${sysconfdir}/default/watchquagga
-        install -m 0755 ${WORKDIR}/quagga.init ${D}${sysconfdir}/init.d/quagga
-        install -m 0755 ${WORKDIR}/watchquagga.init ${D}${sysconfdir}/init.d/watchquagga
-        install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
+    # Install init script and default settings
+    install -m 0755 -d ${D}${sysconfdir}/default ${D}${sysconfdir}/init.d \
+    ${D}${sysconfdir}/quagga ${D}${sysconfdir}/default/volatiles
+    install -m 0644 ${WORKDIR}/quagga.default ${D}${sysconfdir}/default/quagga
+    install -m 0644 ${WORKDIR}/watchquagga.default ${D}${sysconfdir}/default/watchquagga
+    install -m 0755 ${WORKDIR}/quagga.init ${D}${sysconfdir}/init.d/quagga
+    install -m 0755 ${WORKDIR}/watchquagga.init ${D}${sysconfdir}/init.d/watchquagga
+    install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
 
-        # Install sample configurations for the daemons
-        for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
-            install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
-        done
+    # Install sample configurations for the daemons
+    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
+        install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
+    done
 
-        # Install quagga
-        oe_runmake install DESTDIR=${D} prefix=${prefix} \
-                sbindir=${sbindir} \
-                sysconfdir=${sysconfdir}/quagga \
-                localstatedir=${localstatedir}/run/quagga
+    # Install quagga
+    oe_runmake install DESTDIR=${D} prefix=${prefix} \
+            sbindir=${sbindir} \
+            sysconfdir=${sysconfdir}/quagga \
+            localstatedir=${localstatedir}/run/quagga
 
-	# Fix hardcoded paths
-	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/*
-	sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/quagga
-	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/watchquagga
-	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
-	sed -i 's!^PATH=.*!PATH=${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!' ${D}${sysconfdir}/init.d/*
+    # Fix hardcoded paths
+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/*
+    sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/quagga
+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/watchquagga
+    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
+    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!' ${D}${sysconfdir}/init.d/*
 }
 
 # Split into a main package and separate per-protocol packages
@@ -125,10 +125,10 @@ pkg_postinst_${PN} () {
         exit 1
     fi
     for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
-	chown quagga:quaggavty ${sysconfdir}/quagga
-	chown quagga:quagga ${sysconfdir}/quagga/*.conf
-	chmod 750 ${sysconfdir}/quagga
-	chown 640 ${sysconfdir}/quagga/*.conf
+    chown quagga:quaggavty ${sysconfdir}/quagga
+    chown quagga:quagga ${sysconfdir}/quagga/*.conf
+    chmod 750 ${sysconfdir}/quagga
+    chown 640 ${sysconfdir}/quagga/*.conf
     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
         ${sysconfdir}/init.d/populate-volatile.sh update
     fi
