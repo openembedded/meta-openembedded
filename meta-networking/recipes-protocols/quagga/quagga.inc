@@ -9,11 +9,13 @@ HOMEPAGE = "http://www.quagga.net/"
 SECTION = "network"
 LICENSE = "GPL-2.0 & LGPL-2.0"
 DEPENDS = "readline ncurses perl-native"
+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
+SNMP_CONF="${@base_contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 QUAGGASUBDIR = ""
 # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
@@ -46,7 +48,8 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 --enable-configfile-mask=0640 \
                 --enable-logfile-mask=0640 \
                 --enable-rtadv \
-                --enable-tcp-md5"
+                --enable-linux24-tcp-md5 \
+                ${SNMP_CONF}"
 
 do_install () {
         # Install init script and default settings
@@ -57,6 +60,12 @@ do_install () {
         install -m 0755 ${WORKDIR}/quagga.init ${D}${sysconfdir}/init.d/quagga
         install -m 0755 ${WORKDIR}/watchquagga.init ${D}${sysconfdir}/init.d/watchquagga
         install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
+
+        # Install sample configurations for the daemons
+        for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
+            install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
+        done
+
         # Install quagga
         oe_runmake install DESTDIR=${D} prefix=${prefix} \
                 sbindir=${sbindir} \
@@ -106,17 +115,23 @@ INITSCRIPT_PARAMS_${PN}                 = "defaults 15 85"
 INITSCRIPT_NAME_${PN}-watchquagga       = "watchquagga"
 INITSCRIPT_PARAMS_${PN}-watchquagga     = "defaults 90 10"
 
+# Add quagga's user and group
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system quagga ; --system quaggavty"
 USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga quagga"
 
 pkg_postinst_${PN} () {
-	for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
+    if [ "x$D" != "x" ] ; then
+        exit 1
+    fi
+    for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
 	chown quagga:quaggavty ${sysconfdir}/quagga
 	chown quagga:quagga ${sysconfdir}/quagga/*.conf
 	chmod 750 ${sysconfdir}/quagga
 	chown 640 ${sysconfdir}/quagga/*.conf
-	${sysconfdir}/init.d/populate-volatile.sh update
+    if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
+        ${sysconfdir}/init.d/populate-volatile.sh update
+    fi
 }
 
 # Stop apps before uninstall
