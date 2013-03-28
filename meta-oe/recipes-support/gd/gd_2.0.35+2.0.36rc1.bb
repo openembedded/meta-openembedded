@@ -9,6 +9,8 @@ SRC_URI = "http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz"
 SRC_URI[md5sum] = "39ac48e6d5e0012a3bd2248a0102f209"
 SRC_URI[sha256sum] = "dd7c1795271221b9237769b96b8cec7fbdc5db7b8954d864ead51fc1296a6ac8"
 
+MIRRORS += "http://www.libgd.org/releases/ http://fossies.org/unix/www/ \n"
+
 S = "${WORKDIR}/gd-2.0.36RC1"
 
 inherit autotools binconfig gettext
