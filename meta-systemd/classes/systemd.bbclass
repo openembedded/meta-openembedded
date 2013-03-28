@@ -33,6 +33,14 @@ def get_package_var(d, var, pkg):
     return val
 
 def systemd_after_parse(d):
+    features = d.getVar("DISTRO_FEATURES", True).split()
+    # If the distro features have systemd but not sysvinit, inhibit update-rcd
+    # from doing any work so that pure-systemd images don't have redundant init
+    # files.
+    if "systemd" in features:
+        if "sysvinit" not in features:
+            d.setVar("INHIBIT_UPDATERCD_BBCLASS", "1")
+
     def systemd_check_vars():
         if d.getVar('BB_WORKERCONTEXT', True) is not None:
             return
