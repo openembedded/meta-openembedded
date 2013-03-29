@@ -1,0 +1,39 @@
+From f11b9c71080513f9b867ba8f40613ba2ebc6e960 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 29 Mar 2013 15:17:17 +0100
+Subject: [PATCH] setup.py: link in sysroot, not in host directories
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+Upstream-status: Unknown
+---
+ setup.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index e7c49eb..8deaa34 100644
+--- a/setup.py
++++ b/setup.py
+@@ -40,7 +40,7 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+             self.openssl = 'c:\\pkg'
+         else:
+             self.libraries = ['ssl', 'crypto']
+-            self.openssl = '/usr'
++            self.openssl = os.environ.get( "STAGING_DIR" )
+        
+     
+     def finalize_options(self):
+@@ -49,8 +49,8 @@ class _M2CryptoBuildExt(build_ext.build_ext):
+ 
+         build_ext.build_ext.finalize_options(self)
+ 
+-        opensslIncludeDir = os.path.join(self.openssl, 'include')
+-        opensslLibraryDir = os.path.join(self.openssl, 'lib')
++        opensslIncludeDir = os.environ.get( "STAGING_INCDIR" )
++        opensslLibraryDir = os.environ.get( "STAGING_LIBDIR" )
+         
+         self.swig_opts = ['-I%s' % i for i in self.include_dirs + \
+                           [opensslIncludeDir]]
+-- 
+1.8.1.4
+
