@@ -3,7 +3,7 @@ DESCRIPTION = "Userspace library providing a programming interface (API) to acce
 HOMEPAGE = "http://www.netfilter.org/projects/libnetfilter_queue/index.html"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-DEPENDS = "libnfnetlink"
+DEPENDS = "libnfnetlink libmnl"
 
 SRC_URI = "http://www.netfilter.org/projects/libnetfilter_queue/files/libnetfilter_queue-${PV}.tar.bz2;name=tar"
 SRC_URI[tar.md5sum] = "df09befac35cb215865b39a36c96a3fa"
