@@ -11,3 +11,5 @@ SRC_URI[libyaml.sha256sum] = "7bf81554ae5ab2d9b6977da398ea789722e0db75b86bffdaeb
 S = "${WORKDIR}/yaml-${PV}"
 
 inherit autotools
+
+BBCLASSEXTEND = "native"
