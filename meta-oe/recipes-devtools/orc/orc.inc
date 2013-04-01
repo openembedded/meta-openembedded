@@ -3,13 +3,13 @@ HOMEPAGE = "http://code.entropywave.com/projects/orc/"
 LICENSE = "orc"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1400bd9d09e8af56b9ec982b3d85797e"
 
-INC_PR = "r0"
+INC_PR = "r1"
 
 SRC_URI = "http://code.entropywave.com/download/orc/orc-${PV}.tar.gz;name=orc"
 
 inherit autotools pkgconfig
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
 PACKAGES =+ "orc-examples"
 FILES_orc-examples = "${libdir}/orc/*"
