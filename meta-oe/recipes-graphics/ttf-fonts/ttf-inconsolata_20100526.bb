@@ -1,0 +1,26 @@
+require ttf.inc
+
+DESCRIPTION = "Inconsolata font - TTF Version"
+HOMEPAGE = "http://www.levien.com/type/myfonts/inconsolata.html"
+LICENSE = "SIL Open Font License"
+PR = "r0"
+
+SRC_URI = "http://levien.com/type/myfonts/Inconsolata.otf \
+	   file://OFL.txt"
+
+S = "${WORKDIR}/ttf-inconsolata-${PV}"
+
+FILES_${PN} = "${datadir}/fonts/truetype/Inconsolata.ttf \
+	       ${datadir}/doc/ttf-inconsolata/*"
+
+do_configure() {
+	mv ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
+}
+
+do_install_append() {
+	install -d ${D}${datadir}/doc/ttf-inconsolata/
+	install -m 0644 ${WORKDIR}/OFL.txt ${D}${datadir}/doc/ttf-inconsolata/
+}
+
+SRC_URI[md5sum] = "0fbe014c1f0fb5e3c71140ff0dc63edf"
+SRC_URI[sha256sum] = "1561e616c414a1b82d6e6dfbd18e5726fd65028913ade191e5fa38b6ec375a1a"
