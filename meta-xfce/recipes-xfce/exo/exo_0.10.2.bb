@@ -3,7 +3,8 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
-PR = "r1"
+DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native"
+PR = "r2"
 
 inherit xfce pythonnative perlnative
 
@@ -12,6 +13,10 @@ SRC_URI += " \
     file://exo-no-tests-0.8.patch \
     file://configure.patch \
     file://gnome-mount \
+"
+
+SRC_URI_append_class-native = " \
+    file://reduce-build-to-exo-csource-only.patch \
 "
 
 SRC_URI[md5sum] = "c70f2a217811bfba2e62f938d4b8f748"
@@ -31,3 +36,5 @@ FILES_${PN} += "${datadir}/xfce4/ \
 
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug \
                    "
+
+BBCLASSEXTEND = "native"
