@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6e8dee932c26f2dab503abf70c96d8bb"
 PR = "${INC_PR}.0"
 
 SRC_URI += "file://libvpx-configure-support-blank-prefix.patch \
+            file://do-not-hardcode-softfp-float-api.patch \
             file://CVE-2010-4203.patch \
             "
 
