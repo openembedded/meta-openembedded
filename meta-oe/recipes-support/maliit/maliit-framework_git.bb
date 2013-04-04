@@ -11,6 +11,7 @@ SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
     file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
+    file://maliit-server.desktop \
     "
 
 SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
@@ -28,6 +29,7 @@ RRECOMMENDS_${PN} = "maliit-plugins"
 FILES_${PN} += "\
     ${libdir}/maliit/plugins-*/factories/libmaliit-plugins-quick-factory-*.so \
     ${libdir}/qt4/plugins/inputmethods/*.so \
+    ${datadir}/applications/maliit-server.desktop \
     "
 
 FILES_${PN}-dbg += "\
@@ -64,6 +66,9 @@ do_install_append() {
     #Fix absolute paths
     sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-framework.prf
     sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-plugins.prf
+
+    install -d ${D}${datadir}/applications
+    install -m 644 ${WORKDIR}/maliit-server.desktop ${D}${datadir}/applications
 }
 
 pkg_postinst_${PN} () {
@@ -73,6 +78,7 @@ if [ "x$D" != "x" ]; then
     exit 1
 fi
 echo "export QT_IM_MODULE=Maliit" >> /etc/xprofile
+ln -s /usr/share/applications/maliit-server.desktop /etc/xdg/autostart/maliit-server.desktop
 }
 
 pkg_postrm_${PN} () {
@@ -84,7 +90,7 @@ fi
 if [ -e "/etc/xprofile" ]; then
     sed -i -e "g|export QT_IM_MODULE=Maliit|d" /etc/xprofile
 fi
-
+rm -f /etc/xdg/autostart/maliit-server.desktop
 }
 
 S = "${WORKDIR}/git"
