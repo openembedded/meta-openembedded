@@ -1,0 +1,23 @@
+From cc33efdedbec9e9a55e9a0c6756516fd84d42e53 Mon Sep 17 00:00:00 2001
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Date: Fri, 1 Mar 2013 11:31:41 +0100
+Subject: [PATCH] Link to libmaliit-1,0 in inputcontext plugin
+
+Signed-off-by: Samuel Stirtzel <s.stirtzel@googlemail.com>
+---
+ .../input-context-plugin/input-context-plugin.pro  |    2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/input-context/input-context-plugin/input-context-plugin.pro b/input-context/input-context-plugin/input-context-plugin.pro
+index eefbe93..296e2fa 100644
+--- a/input-context/input-context-plugin/input-context-plugin.pro
++++ b/input-context/input-context-plugin/input-context-plugin.pro
+@@ -15,3 +15,5 @@ CONFIG += plugin
+
+ INSTALLS    += target
+ target.path += $$QT_IM_PLUGIN_PATH
++
++LIBS += -L../../lib -l"maliit-1.0"
+--
+1.7.9.5
+

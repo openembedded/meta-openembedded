@@ -10,6 +10,7 @@ inherit autotools qt4x11 gtk-immodules-cache
 SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
+    file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
     "
 
 SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
@@ -65,4 +66,25 @@ do_install_append() {
     sed -i -e "s|/usr|${STAGING_DIR_TARGET}${prefix}|" ${D}/${datadir}/qt4/mkspecs/features/maliit-plugins.prf
 }
 
-S= "${WORKDIR}/git"
+pkg_postinst_${PN} () {
+#!/bin/sh
+# should run online
+if [ "x$D" != "x" ]; then
+    exit 1
+fi
+echo "export QT_IM_MODULE=Maliit" >> /etc/xprofile
+}
+
+pkg_postrm_${PN} () {
+#!/bin/sh
+# should run online
+if [ "x$D" = "x" ]; then
+    exit 1
+fi
+if [ -e "/etc/xprofile" ]; then
+    sed -i -e "g|export QT_IM_MODULE=Maliit|d" /etc/xprofile
+fi
+
+}
+
+S = "${WORKDIR}/git"
