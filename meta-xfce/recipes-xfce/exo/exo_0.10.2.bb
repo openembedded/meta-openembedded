@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
 DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native"
-PR = "r2"
+PR = "r3"
 
 inherit xfce pythonnative perlnative
 
@@ -28,6 +28,8 @@ do_install_append () {
 	install -m 755 ${WORKDIR}//gnome-mount ${D}${bindir}/exo-mount-wrapper
 }
 
+PACKAGES =+ "exo-csource"
+
 # Note: python bindings did not work in oe-dev and are about to be moved to
 # pyxfce see http://comments.gmane.org/gmane.comp.desktop.xfce.devel.version4/19560
 FILES_${PN} += "${datadir}/xfce4/ \
@@ -36,5 +38,7 @@ FILES_${PN} += "${datadir}/xfce4/ \
 
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug \
                    "
+
+FILES_exo-csource += "${bindir}/exo-csource"
 
 BBCLASSEXTEND = "native"
