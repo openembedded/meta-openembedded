@@ -7,5 +7,5 @@ SRC_URI = "\
   file://fix-ecore-fb-initialization.patch \
 "
 
-SRC_URI[md5sum] = "96f85bcb720db2c723bf296b4d5d0bb6"
-SRC_URI[sha256sum] = "71618e58564b19705f9d02cf69d0459400e15d6b2a55baf53784c5dc5ec89c42"
+SRC_URI[md5sum] = "a41828b5b4ca42283d8658c0fe54db07"
+SRC_URI[sha256sum] = "94e08f58acb5021727ecd4d6da0ac7dc3db672542ac5fcd71681835190ad6555"

@@ -1,0 +1,39 @@
+From a7ffaed7a67a8cad8bff1134926668f6d01a5ad6 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 5 Apr 2013 11:43:53 +0200
+Subject: [PATCH] evas: common_16: add missing FRIBIDI_CFLAGS
+
+Now with including fribidi.h instead of fribidi/fribidi.h we need
+FRIBIDI_CFLAGS to pass -I/usr/include/fribidi, fixes build issue:
+
+| make[5]: *** [evas_soft16_image_scaled_sampled.lo] Error 1
+| In file included from ../../../../src/lib/include/../engines/common/evas_text_utils.h:15:0,
+|                  from ../../../../src/lib/include/../engines/common/evas_font_ot.h:37,
+|                  from ../../../../src/lib/include/evas_common.h:940,
+|                  from ../../../../src/lib/include/evas_common_soft16.h:4,
+|                  from evas_soft16_rectangle.c:1:
+| ../../../../src/lib/include/../engines/common/language/evas_bidi_utils.h:31:22: fatal error: fribidi.h: No such file or directory
+| compilation terminated.
+| make[5]: *** [evas_soft16_rectangle.lo] Error 1
+| make[5]: Leaving directory `/OE/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/evas/2_1.7.6-r1.0/evas-1.7.6/src/lib/engines/common_16'
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ src/lib/engines/common_16/Makefile.am | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/lib/engines/common_16/Makefile.am b/src/lib/engines/common_16/Makefile.am
+index cfa1347..7f630a9 100644
+--- a/src/lib/engines/common_16/Makefile.am
++++ b/src/lib/engines/common_16/Makefile.am
+@@ -7,6 +7,7 @@ AM_CPPFLAGS = \
+ -I$(top_srcdir)/src/lib/include \
+ @FREETYPE_CFLAGS@ \
+ @PIXMAN_CFLAGS@ \
++@FRIBIDI_CFLAGS@ \
+ @VALGRIND_CFLAGS@ \
+ @EVAS_GENERAL_CFLAGS@ \
+ @EET_CFLAGS@ \
+-- 
+1.8.1.5
+
