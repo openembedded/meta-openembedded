@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 gtk+ libxfce4util libxfce4ui libwnck xfconf dbus-glib thunar
 
 inherit xfce
 
-SRC_URI[md5sum] = "d5f6fb9fdde3ddff5804b2a251892936"
-SRC_URI[sha256sum] = "897ae6ee435dcc89809ad70c15c5d15347d1cf4fc8033238b17dcc47836c2d7b"
+SRC_URI[md5sum] = "54a84ce63046c279fc3ec3f436d2f1b0"
+SRC_URI[sha256sum] = "49a6e0be513e307e896f7e5929825babec9bbcd4b2e73552f9d27647a4db797d"
 
 FILES_${PN} += "${datadir}/backgrounds"
