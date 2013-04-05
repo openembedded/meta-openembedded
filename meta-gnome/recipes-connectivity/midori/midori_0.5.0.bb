@@ -4,10 +4,10 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
 DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native librsvg-native libnotify libunique"
 
-SRC_URI = "http://archive.xfce.org/src/apps/midori/0.4/midori-${PV}.tar.bz2;name=midori \
+SRC_URI = "http://archive.xfce.org/src/apps/midori/0.5/midori-${PV}.tar.bz2;name=midori \
           "
-SRC_URI[midori.md5sum] = "ce1b01fa5aa33d2ee50196df0c71e96f"
-SRC_URI[midori.sha256sum] = "40bf23f84a3537f54d7eb45df1da40ebef54c321b1b34d0d0c8e45bb0cce5e9f"
+SRC_URI[midori.md5sum] = "ad11685633e23f8173e2cd947d945cce"
+SRC_URI[midori.sha256sum] = "d280c19bb135f2b644a67d9f34d1ec1c148ceb14b5de11ce6c23f64c15be5df0"
 
 inherit gtk-icon-cache pkgconfig vala pythonnative
 
