@@ -5,7 +5,7 @@ DEPENDS = "apache2-native apache2 zlib bzip2"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://configure.patch \
-           file://pthread-check.patch \
+           file://pthread-check-threads-m4.patch \
            file://70_mod_php5.conf \
            "
 
