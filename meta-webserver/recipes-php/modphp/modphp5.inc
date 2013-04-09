@@ -2,11 +2,13 @@ SECTION = "console/network"
 DESCRIPTION = "A server-side, HTML-embedded scripting language. This package provides the apache php module."
 LICENSE = "PHP-3.0"
 DEPENDS = "apache2-native apache2 zlib bzip2"
+INC_PR = "r1"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://configure.patch \
            file://pthread-check-threads-m4.patch \
            file://70_mod_php5.conf \
+           file://php-5.3.14-aconf259.patch \
            "
 
 S = "${WORKDIR}/php-${PV}"
@@ -41,25 +43,21 @@ EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
                 --enable-mbstring \
                 --with-config-file-path=${sysconfdir}/php/apache2-php5"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "mysql"
 PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config,--without-mysqli,mysql5"
 PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--without-pgsql,mysql5"
 
 acpaths = ""
 
-#
-# override the autotools do_configure, which runs autoconf,
-# which breaks everything...
-#
-do_configure() {
-	gnu-configize --force
-	find . -name config.m4 -o -name configure | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
-	export PHP_LIBXML_DIR=${STAGING_DIR_NATIVE}${layout_exec_prefix} 
-	oe_runconf
+do_configure_prepend () {
+        rm -f build/libtool.m4 ltmain.sh aclocal.m4
+        find . -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
+}
 
+do_configure_append() {
 	# No libtool, we really don't want rpath set...
-	sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-	sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+	sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${HOST_SYS}-libtool
+	sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${HOST_SYS}-libtool
 }
 
 do_install  () {
@@ -76,6 +74,8 @@ do_install  () {
 	install -d ${D}${bindir}
 	install -m 755 scripts/phpize ${D}${bindir}
 	install -m 755 scripts/php-config ${D}${bindir}
+	cat aclocal-copy/libtool.m4 aclocal-copy/lt~obsolete.m4 aclocal-copy/ltoptions.m4 \
+		aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > build/libtool.m4
 
 	oe_runmake install-build install-headers INSTALL_ROOT=${D}
 }
