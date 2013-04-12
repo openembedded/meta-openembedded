@@ -1,3 +1,3 @@
-PRINC := "${@int(PRINC) + 3}"
+PRINC := "${@int(PRINC) + 4}"
 
 RPROVIDES_${PN} += "${PN}-systemd"
