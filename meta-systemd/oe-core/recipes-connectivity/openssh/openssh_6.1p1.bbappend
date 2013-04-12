@@ -1,13 +1,13 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PRINC := "${@int(PRINC) + 2}"
+PRINC := "${@int(PRINC) + 3}"
 
-SYSTEMD_PACKAGES = "openssh-sshd"
-SYSTEMD_SERVICE_openssh-sshd = "sshd.socket"
-FILES_openssh-sshd += "${systemd_unitdir}/system/sshd.socket"
-RPROVIDES_openssh-sshd += "openssh-sshd-systemd"
-RREPLACES_openssh-sshd += "openssh-sshd-systemd"
-RCONFLICTS_openssh-sshd += "openssh-sshd-systemd"
+SYSTEMD_PACKAGES = "${PN}-sshd"
+SYSTEMD_SERVICE_${PN}-sshd = "sshd.socket"
+FILES_${PN}-sshd += "${systemd_unitdir}/system/sshd.socket"
+RPROVIDES_${PN}-sshd += "${PN}-sshd-systemd"
+RREPLACES_${PN}-sshd += "${PN}-sshd-systemd"
+RCONFLICTS_${PN}-sshd += "${PN}-sshd-systemd"
 
 inherit systemd
 
