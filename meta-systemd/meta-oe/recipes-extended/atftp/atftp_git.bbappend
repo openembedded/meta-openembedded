@@ -6,12 +6,12 @@ inherit systemd
 
 SRC_URI += "file://atftpd.service"
 
-SYSTEMD_PACKAGES = "atftpd"
-SYSTEMD_SERVICE_atftpd = "atftpd.service"
-FILES_atftpd += "${systemd_unitdir}/system/atftpd.service"
-RPROVIDES_atftpd += "atftpd-systemd"
-RREPLACES_atftpd += "atftpd-systemd"
-RCONFLICTS_atftpd += "atftpd-systemd"
+SYSTEMD_PACKAGES = "${PN}d"
+SYSTEMD_SERVICE_${PN}d = "atftpd.service"
+FILES_${PN}d += "${systemd_unitdir}/system/atftpd.service"
+RPROVIDES_${PN}d += "${PN}d-systemd"
+RREPLACES_${PN}d += "${PN}d-systemd"
+RCONFLICTS_${PN}d += "${PN}d-systemd"
 do_install_append() {
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/atftpd.service ${D}${systemd_unitdir}/system
