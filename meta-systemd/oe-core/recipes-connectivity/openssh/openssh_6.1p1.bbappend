@@ -6,6 +6,8 @@ SYSTEMD_PACKAGES = "openssh-sshd"
 SYSTEMD_SERVICE_openssh-sshd = "sshd.socket"
 FILES_openssh-sshd += "${systemd_unitdir}/system/sshd.socket"
 RPROVIDES_openssh-sshd += "openssh-sshd-systemd"
+RREPLACES_openssh-sshd += "openssh-sshd-systemd"
+RCONFLICTS_openssh-sshd += "openssh-sshd-systemd"
 
 inherit systemd
 

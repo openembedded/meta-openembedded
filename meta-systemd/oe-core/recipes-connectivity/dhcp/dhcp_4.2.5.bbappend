@@ -14,8 +14,14 @@ FILES_dhcp-server += "${systemd_unitdir}/system/dhcpd.service"
 FILES_dhcp-relay += "${systemd_unitdir}/system/dhrelay.service"
 FILES_dhcp-client += "${systemd_unitdir}/system/dhclient.service"
 RPROVIDES_dhcp-server += "dhcp-server-systemd"
+RREPLACES_dhcp-server += "dhcp-server-systemd"
+RCONFLICTS_dhcp-server += "dhcp-server-systemd"
 RPROVIDES_dhcp-relay += "dhcp-relay-systemd"
+RREPLACES_dhcp-relay += "dhcp-relay-systemd"
+RCONFLICTS_dhcp-relay += "dhcp-relay-systemd"
 RPROVIDES_dhcp-client += "dhcp-client-systemd"
+RREPLACES_dhcp-client += "dhcp-client-systemd"
+RCONFLICTS_dhcp-client += "dhcp-client-systemd"
 
 SRC_URI += "file://dhcpd.service \
             file://dhclient.service \

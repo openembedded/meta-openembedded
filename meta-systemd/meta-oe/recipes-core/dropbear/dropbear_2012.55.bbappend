@@ -10,6 +10,8 @@ SRC_URI += "file://dropbearkey.service \
             file://dropbear.socket"
 
 RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "dropbear.socket"
 
 do_install_append() {
