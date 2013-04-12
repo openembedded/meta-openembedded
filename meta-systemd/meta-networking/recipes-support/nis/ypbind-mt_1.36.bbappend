@@ -7,7 +7,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://ypbind.service"
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "ypbind.service"
 do_install_append() {

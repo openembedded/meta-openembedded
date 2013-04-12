@@ -14,6 +14,5 @@ do_install_append() {
 		> ${D}${systemd_unitdir}/system/gdm.service
 }
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "gdm.service"

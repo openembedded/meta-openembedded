@@ -5,7 +5,6 @@ PRINC := "${@int(PRINC) + 3}"
 
 inherit systemd
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "crond.service"
 

@@ -6,7 +6,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://gpsd.service"
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${PN}.socket"
 SYSTEMD_OESCONS = "true"

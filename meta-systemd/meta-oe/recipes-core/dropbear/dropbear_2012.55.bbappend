@@ -9,7 +9,6 @@ SRC_URI += "file://dropbearkey.service \
             file://dropbear@.service \
             file://dropbear.socket"
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "dropbear.socket"
 

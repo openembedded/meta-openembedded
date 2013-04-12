@@ -9,7 +9,6 @@ SRC_URI += "file://cloud9.service"
 inherit systemd
 
 NATIVE_SYSTEMD_SUPPORT = "1"
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "cloud9.service"
 do_install_append() {

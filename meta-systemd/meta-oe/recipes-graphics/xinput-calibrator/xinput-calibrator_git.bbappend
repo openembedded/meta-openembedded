@@ -6,7 +6,6 @@ inherit systemd
 
 SRC_URI += "file://xinput-calibrator.service"
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${PN}.service"
 

@@ -8,7 +8,6 @@ SRC_URI += " \
         file://zram.service \
 "
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "zram.service"
 

@@ -15,7 +15,6 @@ do_install_append() {
 	install -m 0644 ${WORKDIR}/xserver-nodm.service ${D}${systemd_unitdir}/system
 }
 
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "xserver-nodm.service"
 

@@ -4,7 +4,6 @@ PRINC := "${@int(PRINC) + 6}"
 SRC_URI += " file://keymaps.service"
 
 inherit systemd
-SYSTEMD_PACKAGES = "${PN}"
 RPROVIDES_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${PN}.service"
 

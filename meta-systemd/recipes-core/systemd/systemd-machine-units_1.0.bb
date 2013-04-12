@@ -9,6 +9,5 @@ PR = "r1"
 
 inherit systemd
 SYSTEMD_SERVICE_${PN} = ""
-SYSTEMD_PACKAGES = "${PN}"
 NATIVE_SYSTEMD_SUPPORT = "1"
 ALLOW_EMPTY_${PN} = "1"
