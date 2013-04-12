@@ -28,8 +28,20 @@ do_compile () {
 }
 
 do_install () {
-  install -d ${D}${bindir}
-  install -m 0755 build/default/node ${D}${bindir}/node4
+  DESTDIR=${D} oe_runmake install
+
+  # fix namespace conflicts with other nodejs recipes
+  mv ${D}${bindir}/node ${D}${bindir}/node4
+  mv ${D}${bindir}/node-waf ${D}${bindir}/node4-waf
+
+  mv ${D}${includedir}/node ${D}${includedir}/node4
+
+  mv ${D}${libdir}/node ${D}${libdir}/node4
+  mv ${D}${libdir}/pkgconfig/nodejs.pc ${D}${libdir}/pkgconfig/nodejs4.pc
+  sed -i -e s:include/node:include/node4: ${D}${libdir}/pkgconfig/nodejs4.pc
+
+  mv ${D}${datadir}/man/man1/node.1 ${D}${datadir}/man/man1/node4.1
 }
 
-
+FILES_${PN} += "${libdir}/node4/wafadmin"
+BBCLASSEXTEND = "native"
