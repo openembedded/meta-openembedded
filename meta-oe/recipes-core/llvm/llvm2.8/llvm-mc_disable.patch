@@ -1,0 +1,12 @@
+Index: llvm-2.8/tools/CMakeLists.txt
+===================================================================
+--- llvm-2.8.orig/tools/CMakeLists.txt	2010-08-24 11:16:51.000000000 +0200
++++ llvm-2.8/tools/CMakeLists.txt	2011-12-21 16:47:47.718508763 +0100
+@@ -14,7 +14,6 @@
+ add_subdirectory(opt)
+ add_subdirectory(llvm-as)
+ add_subdirectory(llvm-dis)
+-add_subdirectory(llvm-mc)
+ 
+ add_subdirectory(llc)
+ add_subdirectory(llvm-ranlib)
