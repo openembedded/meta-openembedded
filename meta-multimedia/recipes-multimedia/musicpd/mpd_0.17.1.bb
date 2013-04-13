@@ -6,7 +6,7 @@ HOMEPAGE ="http://sourceforge.net/projects/musicpd"
 DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio \
            ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad lame libid3tag', d)}"
 
-PR = "r1"
+PR = "r4"
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/musicpd/${PN}/${PV}/${PN}-${PV}.tar.bz2 \
@@ -16,9 +16,10 @@ SRC_URI = " \
 SRC_URI[md5sum] = "da3f3d6617a877192db4c6f53504cd38"
 SRC_URI[sha256sum] = "b18cdb1b779ca2ab323e212a0af4a567b7da4881a4e96868a8979bdfdbe7c2e8"
 
-inherit autotools useradd
+inherit autotools useradd systemd
 
 EXTRA_OECONF = "enable_bzip2=yes"
+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
 do_install_append() {
     install -d ${D}/${localstatedir}/lib/mpd/music
@@ -36,7 +37,18 @@ do_install_append() {
         -e 's|%log_file%|${localstatedir}/log/mpd.log|' \
         -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
         ${D}/${sysconfdir}/mpd.conf
+
+    if [ -e ${D}/${systemd_unitdir}/system/mpd.service ] ; then
+        sed -i \
+            's|^ExecStart=.*|ExecStart=${bindir}/mpd --no-daemon|' \
+            ${D}/${systemd_unitdir}/system/mpd.service
+    fi
 }
+
+RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "mpd.service"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = " \
