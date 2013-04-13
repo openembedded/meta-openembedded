@@ -16,6 +16,6 @@ EXTRA_OEMAKE = "'INCLUDE=-I${STAGING_INCDIR}/xorg -I${STAGING_INCDIR}/pixman-1'"
 
 #skip xorg-driver-common.inc AC_CHECK_FILE mangling
 do_configure_prepend () {
-	sed 's#gcc#${CC}#g' -i Makefile
-	return
+    sed 's#gcc#${CC}#g' -i Makefile
+    return
 }

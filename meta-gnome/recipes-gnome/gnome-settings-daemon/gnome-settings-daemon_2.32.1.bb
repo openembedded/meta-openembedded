@@ -17,10 +17,10 @@ EXTRA_OECONF = "--disable-esd \
                 --x-includes=${STAGING_INCDIR} \
                 --x-libraries=${STAGING_LIBDIR} \
                 --enable-polkit \
-               "
+"
 
 do_configure_prepend() {
-	sed -i -e 's:-L$libdir::g' -e 's:-I$includedir::g' configure.ac
+    sed -i -e 's:-L$libdir::g' -e 's:-I$includedir::g' configure.ac
 }
 
 FILES_${PN} += "${libdir}/gnome-settings-daemon-2.0/*.so ${libdir}/gnome-settings-daemon-2.0/*plugin \

@@ -13,29 +13,29 @@ PR = "r0"
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = " \
-  http://hostap.epitest.fi/releases/hostapd-${PV}.tar.gz \
-  file://defconfig \
-  file://init \
+    http://hostap.epitest.fi/releases/hostapd-${PV}.tar.gz \
+    file://defconfig \
+    file://init \
 "
 
 S = "${WORKDIR}/hostapd-${PV}/hostapd"
 
 
 do_configure() {
-	install -m 0644 ${WORKDIR}/defconfig ${S}/.config
+    install -m 0644 ${WORKDIR}/defconfig ${S}/.config
 }
 
 do_compile() {
-	export CFLAGS="-MMD -O2 -Wall -g -I${STAGING_INCDIR}/libnl3"
-	make
+    export CFLAGS="-MMD -O2 -Wall -g -I${STAGING_INCDIR}/libnl3"
+    make
 }
 
 do_install() {
-	install -d ${D}${sbindir} ${D}${sysconfdir}/init.d
-	install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
-	install -m 0755 ${S}/hostapd ${D}${sbindir}
-	install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
-	install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
+    install -d ${D}${sbindir} ${D}${sysconfdir}/init.d
+    install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
+    install -m 0755 ${S}/hostapd ${D}${sbindir}
+    install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
+    install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
 }
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"

@@ -12,24 +12,24 @@ SRC_URI[archive.sha256sum] = "287301692224cc1bb20abe8bc52140461f565e58898a99daef
 # GTK2.x mode
 EXTRA_OECONF += "--with-gtkver=2 \
                  --with-bluetooth=yes \
-                "
+"
 
 do_configure_append() {
-        rm config.log
-        # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
-        for i in $(find ${S} -name "Makefile") ; do
-            sed -i -e s:-Werror::g $i
-        done
+    rm config.log
+    # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
+    for i in $(find ${S} -name "Makefile") ; do
+        sed -i -e s:-Werror::g $i
+    done
 }
 
 RDEPENDS_${PN} =+ "networkmanager"
 RRECOMMENDS_${PN} =+ "gnome-bluetooth gnome-keyring"
 
 FILES_${PN} += "${datadir}/nm-applet/ \
-        ${datadir}/libnm-gtk/wifi.ui \
-        ${datadir}/gnome-vpn-properties/ \
-        ${datadir}/gnome/autostart/ \
-        "
+    ${datadir}/libnm-gtk/wifi.ui \
+    ${datadir}/gnome-vpn-properties/ \
+    ${datadir}/gnome/autostart/ \
+"
 
 FILES_${PN} += "${libdir}/gnome-bluetooth/plugins/*.so"
 FILES_${PN}-dev += "${libdir}/gnome-bluetooth/plugins/libnma.la"

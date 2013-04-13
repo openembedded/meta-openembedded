@@ -15,17 +15,17 @@ inherit autotools gettext
 S = "${WORKDIR}/dpkg-${PV}"
 
 EXTRA_OECONF = " \
-  --with-start-stop-daemon \
-  --without-bz2 \
-  --without-deselect \
-  --without-install-info \
-  --without-selinux \
-  --without-update-alternatives \
+    --with-start-stop-daemon \
+    --without-bz2 \
+    --without-deselect \
+    --without-install-info \
+    --without-selinux \
+    --without-update-alternatives \
 "
 
 do_install_append () {
-  # remove everything that is not related to start-stop-daemon, since there
-  # is no explicit rule for only installing ssd
-  find ${D} -type f -not -name "*start-stop-daemon*" -exec rm {} \;
-  find ${D} -depth -type d -empty -exec rmdir {} \;
+    # remove everything that is not related to start-stop-daemon, since there
+    # is no explicit rule for only installing ssd
+    find ${D} -type f -not -name "*start-stop-daemon*" -exec rm {} \;
+    find ${D} -depth -type d -empty -exec rmdir {} \;
 }

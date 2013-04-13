@@ -30,67 +30,67 @@ inherit autotools update-rc.d
 CFLAGS_append = " -DPATH_MAX=4096"
 CFLAGS_prepend = "-I${STAGING_INCDIR}/openssl "
 EXTRA_OECONF = "--enable-ssl \
-		--with-ssl=${STAGING_LIBDIR}/.. \
-		--with-expat=${STAGING_LIBDIR}/.. \
-		--with-apr=${WORKDIR}/apr-1-config \
-		--with-apr-util=${WORKDIR}/apu-1-config \
-		--enable-info \
-		--enable-rewrite \
-		--with-dbm=sdbm \
-		--with-berkeley-db=no \
-		--localstatedir=/var/${PN} \
-		--with-gdbm=no \
-		--with-ndbm=no \
-		--includedir=${includedir}/${PN} \
-		--datadir=${datadir}/${PN} \
-		--sysconfdir=${sysconfdir}/${PN} \
-                --libexecdir=${libdir}/${PN}/modules \
-		ap_cv_void_ptr_lt_long=no \
-		--enable-mpms-shared \
-		ac_cv_have_threadsafe_pollset=no"
+    --with-ssl=${STAGING_LIBDIR}/.. \
+    --with-expat=${STAGING_LIBDIR}/.. \
+    --with-apr=${WORKDIR}/apr-1-config \
+    --with-apr-util=${WORKDIR}/apu-1-config \
+    --enable-info \
+    --enable-rewrite \
+    --with-dbm=sdbm \
+    --with-berkeley-db=no \
+    --localstatedir=/var/${PN} \
+    --with-gdbm=no \
+    --with-ndbm=no \
+    --includedir=${includedir}/${PN} \
+    --datadir=${datadir}/${PN} \
+    --sysconfdir=${sysconfdir}/${PN} \
+    --libexecdir=${libdir}/${PN}/modules \
+    ap_cv_void_ptr_lt_long=no \
+    --enable-mpms-shared \
+    ac_cv_have_threadsafe_pollset=no"
 
 do_configure_prepend() {
-	# FIXME: this hack is required to work around an issue with apr/apr-util
-	# Can be removed when fixed in OE-Core (also revert --with-* options above)
-	# see http://bugzilla.yoctoproject.org/show_bug.cgi?id=3267
-	cp ${STAGING_BINDIR_CROSS}/apr-1-config ${STAGING_BINDIR_CROSS}/apu-1-config ${WORKDIR}
-	sed -i -e 's:location=source:location=installed:' ${WORKDIR}/apr-1-config
-	sed -i -e 's:location=source:location=installed:' ${WORKDIR}/apu-1-config
+    # FIXME: this hack is required to work around an issue with apr/apr-util
+    # Can be removed when fixed in OE-Core (also revert --with-* options above)
+    # see http://bugzilla.yoctoproject.org/show_bug.cgi?id=3267
+    cp ${STAGING_BINDIR_CROSS}/apr-1-config ${STAGING_BINDIR_CROSS}/apu-1-config ${WORKDIR}
+    sed -i -e 's:location=source:location=installed:' ${WORKDIR}/apr-1-config
+    sed -i -e 's:location=source:location=installed:' ${WORKDIR}/apu-1-config
 }
 
 do_install_append() {
-	install -d ${D}/${sysconfdir}/init.d
-	cat ${WORKDIR}/init | \
-		sed -e 's,/usr/sbin/,${sbindir}/,g' \
-		    -e 's,/usr/bin/,${bindir}/,g' \
-		    -e 's,/usr/lib,${libdir}/,g' \
-		    -e 's,/etc/,${sysconfdir}/,g' \
-		    -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
-	chmod 755 ${D}/${sysconfdir}/init.d/${PN}
-	# remove the goofy original files...
-	rm -rf ${D}/${sysconfdir}/${PN}/original
-	# Expat should be found in the staging area via DEPENDS...
-	rm -f ${D}/${libdir}/libexpat.*
+    install -d ${D}/${sysconfdir}/init.d
+    cat ${WORKDIR}/init | \
+        sed -e 's,/usr/sbin/,${sbindir}/,g' \
+            -e 's,/usr/bin/,${bindir}/,g' \
+            -e 's,/usr/lib,${libdir}/,g' \
+            -e 's,/etc/,${sysconfdir}/,g' \
+            -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${PN}
+    chmod 755 ${D}/${sysconfdir}/init.d/${PN}
+    # remove the goofy original files...
+    rm -rf ${D}/${sysconfdir}/${PN}/original
+    # Expat should be found in the staging area via DEPENDS...
+    rm -f ${D}/${libdir}/libexpat.*
 
-	install -d ${D}${sysconfdir}/${PN}/conf.d
-	install -d ${D}${sysconfdir}/${PN}/modules.d
+    install -d ${D}${sysconfdir}/${PN}/conf.d
+    install -d ${D}${sysconfdir}/${PN}/modules.d
 
-	# Ensure configuration file pulls in conf.d and modules.d
-	printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${PN}/httpd.conf
-	printf "\nIncludeOptional ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${PN}/httpd.conf
+    # Ensure configuration file pulls in conf.d and modules.d
+    printf "\nIncludeOptional ${sysconfdir}/${PN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${PN}/httpd.conf
+    printf "\nIncludeOptional ${sysconfdir}/${PN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${PN}/httpd.conf
 }
 
 SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
 
 apache_sysroot_preprocess () {
-	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-	install -m 755 ${D}${bindir}/apxs ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-	sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${PN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
-	sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+    install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+    install -m 755 ${D}${bindir}/apxs ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+    sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${PN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+    sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
 
-	sed -i 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
-	sed -i 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
-	sed -i 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
+    sed -i 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
+    sed -i 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
+    sed -i 's!^includedir = .*!includedir = ${STAGING_INCDIR}/apache2!' ${SYSROOT_DESTDIR}${datadir}/${PN}/build/config_vars.mk
 }
 
 #
@@ -103,21 +103,21 @@ LEAD_SONAME = "libapr-1.so.0"
 PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
 
 CONFFILES_${PN} = "${sysconfdir}/${PN}/httpd.conf \
-		   ${sysconfdir}/${PN}/magic \
-		   ${sysconfdir}/${PN}/mime.types \
-		   ${sysconfdir}/init.d/${PN} "
+    ${sysconfdir}/${PN}/magic \
+    ${sysconfdir}/${PN}/mime.types \
+    ${sysconfdir}/init.d/${PN} "
 
 # we override here rather than append so that .so links are
 # included in the runtime package rather than here (-dev)
 # and to get build, icons, error into the -dev package
 FILES_${PN}-dev = "${datadir}/${PN}/build \
-		${datadir}/${PN}/icons \
-		${datadir}/${PN}/error \
-		${bindir}/apr-config ${bindir}/apu-config \
-		${libdir}/apr*.exp \
-		${includedir}/${PN} \
-		${libdir}/*.la \
-		${libdir}/*.a"
+    ${datadir}/${PN}/icons \
+    ${datadir}/${PN}/error \
+    ${bindir}/apr-config ${bindir}/apu-config \
+    ${libdir}/apr*.exp \
+    ${includedir}/${PN} \
+    ${libdir}/*.la \
+    ${libdir}/*.a"
 
 # manual to manual
 FILES_${PN}-doc += " ${datadir}/${PN}/manual"
@@ -126,8 +126,8 @@ FILES_${PN}-doc += " ${datadir}/${PN}/manual"
 # override this too - here is the default, less datadir
 #
 FILES_${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir}/lib*.so.* ${sysconfdir} \
-		${sharedstatedir} ${localstatedir} /bin /sbin /lib/*.so* \
-		${libdir}/${PN}"
+    ${sharedstatedir} ${localstatedir} /bin /sbin /lib/*.so* \
+    ${libdir}/${PN}"
 
 # we want htdocs and cgi-bin to go with the binary
 FILES_${PN} += "${datadir}/${PN}/htdocs ${datadir}/${PN}/cgi-bin"

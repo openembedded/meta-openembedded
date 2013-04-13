@@ -26,11 +26,11 @@ RCONFLICTS_dhcp-client += "dhcp-client-systemd"
 SRC_URI += "file://dhcpd.service \
             file://dhclient.service \
             file://dhcrelay.service \
-           "
+"
 do_install_append() {
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/dhcpd.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/dhclient.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/dhcrelay.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/dhcpd.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/dhclient.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/dhcrelay.service ${D}${systemd_unitdir}/system
 }
 

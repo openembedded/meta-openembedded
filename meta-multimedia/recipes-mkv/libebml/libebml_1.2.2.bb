@@ -7,25 +7,25 @@ SRC_URI[md5sum] = "726cc2bd1a525929ff35ff9854c0ebab"
 SRC_URI[sha256sum] = "476b08c6436a96c024a53e788e7c945ce9b41cd8654165763444aa7e5245b7a5"
 
 do_compile() {
-	cd ${S}/make/linux
-	oe_runmake CROSS="${TARGET_PREFIX}"
+    cd ${S}/make/linux
+    oe_runmake CROSS="${TARGET_PREFIX}"
 }
 
 do_install() {
-	cd ${S}/make/linux
+    cd ${S}/make/linux
 
-	install -d ${D}${libdir}
-	install -m 0644 libebml.a ${D}${libdir}
-	install -m 0755 libebml.so.* ${D}${libdir}
-	cp -a libebml.so ${D}${libdir}
+    install -d ${D}${libdir}
+    install -m 0644 libebml.a ${D}${libdir}
+    install -m 0755 libebml.so.* ${D}${libdir}
+    cp -a libebml.so ${D}${libdir}
 
-	install -d ${D}${includedir}/ebml
-	for i in ../../ebml/*.h; do
-		install -m 0644 $i ${D}${includedir}/ebml
-	done
+    install -d ${D}${includedir}/ebml
+    for i in ../../ebml/*.h; do
+        install -m 0644 $i ${D}${includedir}/ebml
+    done
 
-	install -d ${D}${includedir}/ebml/c
-	for i in ../../ebml/c/*.h; do
-		install -m 0644 $i ${D}${includedir}/ebml/c
-	done
+    install -d ${D}${includedir}/ebml/c
+    for i in ../../ebml/c/*.h; do
+        install -m 0644 $i ${D}${includedir}/ebml/c
+    done
 }

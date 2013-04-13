@@ -16,4 +16,4 @@ inherit setuptools
 RDEPENDS_${PN} = "python-threading \
                   python-netclient \
                   python-html \
-                 "
+"

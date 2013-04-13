@@ -14,6 +14,6 @@ SRC_URI[sha256sum] = "42d7271fbc796e53db71bb221f311b9ff3c51d90a71c9487a9bd3101ca
 EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLMAN=${mandir}"
 
 do_install() {
-	oe_runmake -e install DESTDIR=${D} PREFIX=${prefix}
+    oe_runmake -e install DESTDIR=${D} PREFIX=${prefix}
 }
 

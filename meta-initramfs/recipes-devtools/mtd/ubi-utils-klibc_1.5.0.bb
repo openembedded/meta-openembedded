@@ -16,7 +16,7 @@ SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=ca39eb1d98e736
             file://libubi.c.patch \
             file://libiniparser.c.patch \
             file://ubiformat.c.patch \
-            "
+"
 
 S = "${WORKDIR}/git/"
 

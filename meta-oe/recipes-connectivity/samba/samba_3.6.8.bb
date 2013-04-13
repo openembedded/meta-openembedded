@@ -36,24 +36,24 @@ SRC_URI[sha256sum] = "4f5a171a8d902c6b4f822ed875c51eb8339196d9ccf0ecd7f6521c966b
 S = "${WORKDIR}/samba-${PV}/source3"
 
 EXTRA_OECONF += "\
-	ac_cv_path_PYTHON=/not/exist \
-	ac_cv_path_PYTHON_CONFIG=/not/exist \
-	SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
-	samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
-	linux_getgrouplist_ok=no \
-	samba_cv_HAVE_BROKEN_GETGROUPS=no \
-	samba_cv_HAVE_FTRUNCATE_EXTEND=yes \
-	samba_cv_have_setresuid=yes \
-	samba_cv_have_setresgid=yes \
-	samba_cv_HAVE_WRFILE_KEYTAB=yes \
-	samba_cv_linux_getgrouplist_ok=yes \
-	"
+    ac_cv_path_PYTHON=/not/exist \
+    ac_cv_path_PYTHON_CONFIG=/not/exist \
+    SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes \
+    samba_cv_CC_NEGATIVE_ENUM_VALUES=yes \
+    linux_getgrouplist_ok=no \
+    samba_cv_HAVE_BROKEN_GETGROUPS=no \
+    samba_cv_HAVE_FTRUNCATE_EXTEND=yes \
+    samba_cv_have_setresuid=yes \
+    samba_cv_have_setresgid=yes \
+    samba_cv_HAVE_WRFILE_KEYTAB=yes \
+    samba_cv_linux_getgrouplist_ok=yes \
+"
 
 do_configure() {
-	gnu-configize --force
-	oe_runconf
+    gnu-configize --force
+    oe_runconf
 }
 
 do_compile () {
-	base_do_compile
+    base_do_compile
 }

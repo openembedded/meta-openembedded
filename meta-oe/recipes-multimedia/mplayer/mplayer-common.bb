@@ -12,9 +12,9 @@ SRC_URI = "file://mplayer.conf"
 
 # Yes, really /usr/etc!!!
 do_install() {
-	install -d "${D}/usr${sysconfdir}/mplayer"
+    install -d "${D}/usr${sysconfdir}/mplayer"
 
-	install -m 0644 ${WORKDIR}/mplayer.conf "${D}/usr${sysconfdir}/mplayer"
+    install -m 0644 ${WORKDIR}/mplayer.conf "${D}/usr${sysconfdir}/mplayer"
 }
 
 FILES_${PN} = "/usr${sysconfdir}/mplayer"

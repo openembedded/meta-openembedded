@@ -19,5 +19,5 @@ SRC_URI[sha256sum] = "9edca690617eaa19054951ca53501c802180262be8880ed84754ac46c9
 FILES_${PN} += "${datadir}/icons"
 
 do_install_append () {
-	install -m 0644 ${WORKDIR}/index.theme ${D}/${datadir}/icons/hicolor
+    install -m 0644 ${WORKDIR}/index.theme ${D}/${datadir}/icons/hicolor
 }

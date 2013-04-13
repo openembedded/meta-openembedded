@@ -10,7 +10,7 @@ PR = "r5"
 inherit gpe pkgconfig autotools gtk-doc
 
 SRC_URI += "file://pkgconfig.patch;striplevel=0 \
-  file://glib-2.32.patch \
+    file://glib-2.32.patch \
 "
 SRC_URI[md5sum] = "b85a839264a35d0faf9a1a38c486e189"
 SRC_URI[sha256sum] = "f96d30c09b0395ea4e146730fd52d9ea303b619bb139051d9f12d3f868a9e18c"

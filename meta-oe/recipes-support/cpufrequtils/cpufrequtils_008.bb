@@ -10,7 +10,7 @@ SRCREV = "a2f0c39d5f21596bb9f5223e895c0ff210b265d0"
 
 SRC_URI = "git://github.com/emagii/cpufrequtils.git \
            file://0001-dont-unset-cflags.patch \
-          "
+"
 
 CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' == 'no']} "
 
@@ -23,10 +23,10 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 EXTRA_OEMAKE = "V=1 CROSS=${TARGET_PREFIX} LIBTOOL='${HOST_SYS}-libtool --tag cc' STRIPCMD=echo"
 
 do_compile() {
-        oe_runmake
+    oe_runmake
 }
 
 do_install() {
-        oe_runmake -e install DESTDIR=${D}
+    oe_runmake -e install DESTDIR=${D}
 }
 

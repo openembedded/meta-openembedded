@@ -12,15 +12,15 @@ SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
 SRC_URI[archive.sha256sum] = "03e461b6bda7f773f8018d25fa3213d3073d4dc83a76e6b39d962652f4de6a98"
 
 SRC_URI += "\
-     file://disable-scrollkeeper.patch \
-     file://fix-dbus-interfaces.patch \
-     file://sysrooted-pkg-config.patch \
-     "
+    file://disable-scrollkeeper.patch \
+    file://fix-dbus-interfaces.patch \
+    file://sysrooted-pkg-config.patch \
+"
 
 EXTRA_OECONF += "--disable-scrollkeeper"
 
 do_configure_prepend() {
-       sed -i -e "s: help : :g" ${S}/Makefile.am
+    sed -i -e "s: help : :g" ${S}/Makefile.am
 }
 
 PACKAGES =+ "${PN}-nautilus-extension"

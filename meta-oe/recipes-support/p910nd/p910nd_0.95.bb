@@ -12,10 +12,10 @@ SRC_URI[md5sum] = "c7ac6afdf7730ac8387a8e87198d4491"
 SRC_URI[sha256sum] = "7d78642c86dc247fbdef1ff85c56629dcdc6b2a457c786420299e284fffcb029"
 
 do_compile () {
-	${CC} ${LDFLAGS} -o p910nd p910nd.c
+    ${CC} ${LDFLAGS} -o p910nd p910nd.c
 }
 
 do_install () {
-	install -D -m 0755 ${S}/p910nd ${D}${sbindir}/p910nd
-	install -D -m 0644 ${S}/p910nd.conf ${D}${sysconfdir}/p910nd.conf
+    install -D -m 0755 ${S}/p910nd ${D}${sbindir}/p910nd
+    install -D -m 0644 ${S}/p910nd.conf ${D}${sysconfdir}/p910nd.conf
 }

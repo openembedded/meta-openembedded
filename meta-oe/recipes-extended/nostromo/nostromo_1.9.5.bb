@@ -7,7 +7,7 @@ SRC_URI = "http://www.nazgul.ch/dev/${PN}-${PV}.tar.gz \
            file://nhttpd.conf \
            file://volatiles \
            file://nostromo \
-           "
+"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 

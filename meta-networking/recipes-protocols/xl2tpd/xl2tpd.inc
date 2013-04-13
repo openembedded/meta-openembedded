@@ -15,22 +15,22 @@ S = "${WORKDIR}/git"
 inherit update-rc.d
 
 do_compile () {
-	oe_runmake CFLAGS="${CFLAGS} -DLINUX" LDFLAGS="${LDFLAGS}" PREFIX="${prefix}" KERNELSRC=${STAGING_KERNEL_DIR} all
+    oe_runmake CFLAGS="${CFLAGS} -DLINUX" LDFLAGS="${LDFLAGS}" PREFIX="${prefix}" KERNELSRC=${STAGING_KERNEL_DIR} all
 }
 
 do_install () {
-	oe_runmake PREFIX="${D}${prefix}" install
+    oe_runmake PREFIX="${D}${prefix}" install
 
-	install -d ${D}${sysconfdir}/init.d
-	touch ${D}${sysconfdir}/xl2tpd.conf
-	install -m 0755 debian/xl2tpd.init ${D}${sysconfdir}/init.d/xl2tpd
-	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
-	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
-	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
-	sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/xl2tpd
+    install -d ${D}${sysconfdir}/init.d
+    touch ${D}${sysconfdir}/xl2tpd.conf
+    install -m 0755 debian/xl2tpd.init ${D}${sysconfdir}/init.d/xl2tpd
+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
+    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
+    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/xl2tpd
 
-	install -d ${D}${sysconfdir}/default
-	install -m 0644 debian/xl2tpd.default ${D}${sysconfdir}/default/xl2tpd
+    install -d ${D}${sysconfdir}/default
+    install -m 0644 debian/xl2tpd.default ${D}${sysconfdir}/default/xl2tpd
 }
 
 CONFFILES_${PN} += "${sysconfdir}/xl2tpd.conf ${sysconfdir}/default/xl2tpd"

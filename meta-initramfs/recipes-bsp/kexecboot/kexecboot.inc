@@ -38,12 +38,12 @@ inherit autotools
 EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
 
 do_install () {
-        install -d ${D}${bindir}
-        install -m 0755 kexecboot ${D}${bindir}/
-        install -d ${D}/proc
-        install -d ${D}/mnt
-        install -d ${D}/dev
-        install -d ${D}/sys
+    install -d ${D}${bindir}
+    install -m 0755 kexecboot ${D}${bindir}/
+    install -d ${D}/proc
+    install -d ${D}/mnt
+    install -d ${D}/dev
+    install -d ${D}/sys
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -51,5 +51,5 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 FILES_${PN} += " ${bindir}/kexecboot /init /proc /mnt /dev /sys"
 
 pkg_postinst_${PN} () {
-        ln -sf ${bindir}/kexecboot $D/init
+    ln -sf ${bindir}/kexecboot $D/init
 }

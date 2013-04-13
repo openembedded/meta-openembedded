@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://tunctl.c;beginline=1;endline=4;md5=ff3a09996bc5fff6bc
 SRC_URI = "${SOURCEFORGE_MIRROR}/tunctl/tunctl-${PV}.tar.gz"
 
 do_compile() {
-	oe_runmake tunctl
+    oe_runmake tunctl
 }
 
 do_install() {
-	install -d ${D}/${sbindir}
-	install -m 755 tunctl ${D}/${sbindir}
+    install -d ${D}/${sbindir}
+    install -m 755 tunctl ${D}/${sbindir}
 }

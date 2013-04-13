@@ -8,7 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${PN}-${PV}.tar.gz \
            file://setup-add-sleep-after-cups-reset.patch \
            file://fix-libusb-paths.patch \
            file://cups-1.6.patch \
-	  "
+"
 
 DEPENDS += "cups python libusb"
 
@@ -34,7 +34,7 @@ EXTRA_OECONF += "\
         --disable-foomatic-drv-install \
         --enable-foomatic-ppd-install  \
         --enable-foomatic-rip-hplip-install \
-        "
+"
 
 PACKAGES += "${PN}-ppd ${PN}-cups ${PN}-backend ${PN}-filter ${PN}-hal"
 
@@ -49,7 +49,7 @@ RDEPENDS_${PN} += " \
         python-resource \
         python-terminal \
         python-subprocess\
-        "
+"
 
 # need to snag the debug file or OE will fail on backend package
 FILES_${PN}-dbg += "\

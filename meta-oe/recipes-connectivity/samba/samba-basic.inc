@@ -1,6 +1,6 @@
 SRC_URI += "file://config-lfs.patch \
             file://quota.patch;striplevel=0 \
-            "
+"
 
 EXTRA_OECONF += "\
         --enable-nss-wrapper \

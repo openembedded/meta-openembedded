@@ -36,22 +36,22 @@ do_configure_prepend() {
 }
 
 do_install_append() {
-	install -d ${D}${sysconfdir}
-	install -d ${D}${sysconfdir}/ajenti
-	install -m 0644 packaging/files/ajenti.conf ${D}${sysconfdir}/ajenti/
-	install -d ${D}${sysconfdir}/ajenti/users
-	install -m 0644 packaging/files/admin.conf ${D}${sysconfdir}/ajenti/users/
-	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 packaging/files/ajenti ${D}${sysconfdir}/init.d/
-	install -d ${D}${localstatedir}
-	install -d ${D}${localstatedir}/lib
-	install -d ${D}${localstatedir}/lib/ajenti
-	install -d ${D}${localstatedir}/lib/ajenti/plugins
-	install -m 0644 packaging/files/.placeholder ${D}${localstatedir}/lib/ajenti/plugins
+    install -d ${D}${sysconfdir}
+    install -d ${D}${sysconfdir}/ajenti
+    install -m 0644 packaging/files/ajenti.conf ${D}${sysconfdir}/ajenti/
+    install -d ${D}${sysconfdir}/ajenti/users
+    install -m 0644 packaging/files/admin.conf ${D}${sysconfdir}/ajenti/users/
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 packaging/files/ajenti ${D}${sysconfdir}/init.d/
+    install -d ${D}${localstatedir}
+    install -d ${D}${localstatedir}/lib
+    install -d ${D}${localstatedir}/lib/ajenti
+    install -d ${D}${localstatedir}/lib/ajenti/plugins
+    install -m 0644 packaging/files/.placeholder ${D}${localstatedir}/lib/ajenti/plugins
 
-	for plugin in plugins/* ; do
-		cp -r $plugin ${D}${localstatedir}/lib/ajenti/plugins/
-	done
+    for plugin in plugins/* ; do
+        cp -r $plugin ${D}${localstatedir}/lib/ajenti/plugins/
+    done
 }
 
 INITSCRIPT_NAME = "ajenti"

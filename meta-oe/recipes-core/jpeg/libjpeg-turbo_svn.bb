@@ -23,7 +23,7 @@ inherit autotools pkgconfig
 
 EXTRA_OECONF = "--with-jpeg8 "
 
-PACKAGES =+         "jpeg-tools libturbojpeg"
+PACKAGES =+ "jpeg-tools libturbojpeg"
 
 DESCRIPTION_jpeg-tools = "The jpeg-tools package includes the client programs for access libjpeg functionality.  These tools allow for the compression, decompression, transformation and display of JPEG files."
 FILES_jpeg-tools =  "${bindir}/*"

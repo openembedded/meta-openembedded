@@ -11,8 +11,8 @@ SRC_URI[archive.sha256sum] = "278a5c00ce07e6a3ea440d289de22dbec3ebec4ded4ff3b4c4
 EXTRA_OECONF += " --disable-nss --with-distributor-name=${DISTRO} --without-ca-file"
 
 do_configure_prepend() {
-        touch ${S}/gnome-doc-utils.make
-        sed -i -e s:help::g Makefile.am
+    touch ${S}/gnome-doc-utils.make
+    sed -i -e s:help::g Makefile.am
 }
 
 FILES_${PN} += "${datadir}/icons ${datadir}/dbus-1"

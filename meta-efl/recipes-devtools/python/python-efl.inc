@@ -17,7 +17,7 @@ inherit e-base autotools pkgconfig distutils-base
 SRCVER = "${PV}"
 
 SRC_URI = "\
-  ${E_MIRROR}/BINDINGS/python/${SRCNAME}-${SRCVER}.tar.bz2 \
+    ${E_MIRROR}/BINDINGS/python/${SRCNAME}-${SRCVER}.tar.bz2 \
 "
 S = "${WORKDIR}/${SRCNAME}-${SRCVER}"
 

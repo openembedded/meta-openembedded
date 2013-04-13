@@ -23,6 +23,6 @@ ALTERNATIVE_PRIORITY[x-window-manager] = "30"
 RDEPENDS_${PN} = "xfwm4-theme-default"
 FILES_${PN} += "${libdir}/xfce4/xfwm4/helper-dialog \
                 ${datadir}/xfwm4/defaults \
-               "
+"
 FILES_${PN}-dbg += "${libexecdir}/xfce4/xfwm4/.debug/*"
 

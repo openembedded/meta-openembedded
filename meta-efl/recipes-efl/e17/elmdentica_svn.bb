@@ -19,5 +19,5 @@ SRCREV = "${EFL_SRCREV}"
 RDEPENDS_${PN} = "${PN}-themes"
 
 do_configure_prepend() {
-        autopoint --force
+    autopoint --force
 }

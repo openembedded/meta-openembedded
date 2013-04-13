@@ -17,13 +17,13 @@ SRC_URI[ssvb.sha256sum] = "bfddd3226a499ffdf71bb58c05ccdc6dac5bb2c2c3bdb10ac610e
 S = "${WORKDIR}"
 
 do_compile() {
-	${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn
-	${CC} ${CFLAGS} ${LDFLAGS} ssvb-cpuburn-a8.S -o burn-neona8
+    ${CC} ${CFLAGS} ${LDFLAGS} burn.S -o burn
+    ${CC} ${CFLAGS} ${LDFLAGS} ssvb-cpuburn-a8.S -o burn-neona8
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install -m 0755 ${S}/burn ${D}${bindir}/burn-neon
-	install -m 0755 ${S}/burn-neona8 ${D}${bindir}/
+    install -d ${D}${bindir}
+    install -m 0755 ${S}/burn ${D}${bindir}/burn-neon
+    install -m 0755 ${S}/burn-neona8 ${D}${bindir}/
 }
 

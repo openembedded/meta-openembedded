@@ -10,7 +10,7 @@ SRC_URI = "http://download.savannah.nongnu.org/releases/hddtemp/hddtemp-0.3-beta
            file://hddtemp-0.3-beta15-autodetect-717479.patch \
            file://hddtemp.db \
            file://init \
-           "
+"
 
 SRC_URI[md5sum] = "8b829339e1ae9df701684ec239021bb8"
 SRC_URI[sha256sum] = "618541584054093d53be8a2d9e81c97174f30f00af91cb8700a97e442d79ef5b"
@@ -22,10 +22,10 @@ inherit autotools gettext update-rc.d
 FILES_${PN} += "/usr/share/misc/hddtemp.db"
 
 do_install_append() {
-	install -d ${D}/usr/share/misc/
-	install -m 0644 ${WORKDIR}/hddtemp.db ${D}/usr/share/misc/hddtemp.db
-	install -d ${D}${sysconfdir}/init.d
-	install -m 0644 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hddtemp
+    install -d ${D}/usr/share/misc/
+    install -m 0644 ${WORKDIR}/hddtemp.db ${D}/usr/share/misc/hddtemp.db
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0644 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hddtemp
 }
 
 INITSCRIPT_NAME = "hddtemp"

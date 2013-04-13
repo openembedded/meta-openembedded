@@ -12,5 +12,5 @@ SRC_URI[sha256sum] = "0cb09e26678d1531a4fd40a748abff5142bfdad3ae11cfe3bb7ad7317a
 inherit autotools lib_package
 
 do_compile_append() {
-	sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
+    sed -i s:-L${STAGING_LIBDIR}::g libmicrohttpd.pc
 }

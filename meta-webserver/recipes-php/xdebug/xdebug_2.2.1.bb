@@ -16,17 +16,17 @@ inherit autotools
 EXTRA_OECONF += "--enable-xdebug -with-php-config=${STAGING_BINDIR_CROSS}/php-config"
 
 do_configure() {
-	${STAGING_BINDIR_CROSS}/phpize
+    ${STAGING_BINDIR_CROSS}/phpize
 
-	# Running autoreconf as autotools_do_configure would do here
-	# breaks the libtool configuration resulting in a failure later
-	# in do_compile. It's possible this may be fixable, however the
-	# easiest course of action for the moment is to avoid doing that.
-	oe_runconf
+    # Running autoreconf as autotools_do_configure would do here
+    # breaks the libtool configuration resulting in a failure later
+    # in do_compile. It's possible this may be fixable, however the
+    # easiest course of action for the moment is to avoid doing that.
+    oe_runconf
 }
 
 do_install() {
-	oe_runmake install INSTALL_ROOT=${D}
+    oe_runmake install INSTALL_ROOT=${D}
 }
 
 FILES_${PN} += "${libdir}/php5/extensions/*/*.so"

@@ -52,4 +52,4 @@ CONFFILES_${PN} = " \
     ${sysconfdir}/hiawatha/index.xslt \
     ${sysconfdir}/hiawatha/mimetype.conf \
     ${sysconfdir}/hiawatha/php-fcgi.conf \
-    "
+"

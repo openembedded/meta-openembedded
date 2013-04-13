@@ -11,7 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
            file://01debian_defaultconfig.patch \
            file://ebtables.init \
            file://no-as-needed.patch \
-           "
+"
 
 SRC_URI[md5sum] = "506742a3d44b9925955425a659c1a8d0"
 SRC_URI[sha256sum] = "dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9a4455d"
@@ -31,24 +31,24 @@ EXTRA_OEMAKE = " \
         'CFLAGS=${CFLAGS}' \
         'LDFLAGS=${LDFLAGS} -Wl,--no-as-needed' \
         'LD=${LD}' \
-        "
+"
 
 do_install () {
-	install -d ${D}${sysconfdir}/init.d
-	install -d ${D}${sysconfdir}/default
-	install -d ${D}${sysconfdir}/ebtables
-	oe_runmake DESTDIR='${D}' install
-	install -m 0755 ${WORKDIR}/ebtables.init ${D}/${sysconfdir}/init.d/ebtables
-	mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
+    install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/default
+    install -d ${D}${sysconfdir}/ebtables
+    oe_runmake DESTDIR='${D}' install
+    install -m 0755 ${WORKDIR}/ebtables.init ${D}/${sysconfdir}/init.d/ebtables
+    mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
 
-	# Fix hardcoded paths in scripts
-	sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
-	sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
+    # Fix hardcoded paths in scripts
+    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
 
-	# The script ebtables-save refernces perl in exec_prefix, so
-	# move it to sbindir to avoid QA issue
-	install -d ${D}/${sbindir}
-	mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
+    # The script ebtables-save refernces perl in exec_prefix, so
+    # move it to sbindir to avoid QA issue
+    install -d ${D}/${sbindir}
+    mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
 }
 
 CONFFILES_${PN} += "${sysconfdir}/default/ebtables"

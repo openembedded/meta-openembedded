@@ -34,24 +34,24 @@ EXTRA_OECONF += "--disable-option-checking"
 
 # configure.in has errors
 do_configure() {
-	oe_runconf
+    oe_runconf
 }
 
 do_install() {
-	oe_runmake install INSTALLROOT=${D}
-	mv ${D}${bindir}/tftp ${D}${bindir}/tftp-hpa
-	mv ${D}${sbindir}/in.tftpd ${D}${sbindir}/in.tftpd-hpa
+    oe_runmake install INSTALLROOT=${D}
+    mv ${D}${bindir}/tftp ${D}${bindir}/tftp-hpa
+    mv ${D}${sbindir}/in.tftpd ${D}${sbindir}/in.tftpd-hpa
 
-	install -m 755 -d ${D}${localstatedir}/lib/tftpboot/
-	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/tftpd-hpa
-	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
-	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
-	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
-	sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/tftpd-hpa
+    install -m 755 -d ${D}${localstatedir}/lib/tftpboot/
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/tftpd-hpa
+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
+    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
+    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/tftpd-hpa
 
-	install -d ${D}${sysconfdir}/default
-	install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/tftpd-hpa
+    install -d ${D}${sysconfdir}/default
+    install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/tftpd-hpa
 }
 
 FILES_${PN} = "${bindir}"

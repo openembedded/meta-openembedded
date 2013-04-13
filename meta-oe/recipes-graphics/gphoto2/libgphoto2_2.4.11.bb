@@ -26,10 +26,10 @@ inherit autotools pkgconfig gettext lib_package
 EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
 
 do_configure_append() {
-	cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
-	cd ${S}/libgphoto2_port/
-	autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
-	cd ${S}
+    cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
+    cd ${S}/libgphoto2_port/
+    autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
+    cd ${S}
 }
 
 do_install_append() {

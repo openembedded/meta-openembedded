@@ -19,11 +19,11 @@ EXTRA_OECONF += "--enable-nautilus-sendto=no"
 
 # No native docbook XSL stylesheets recipe in OE yet
 do_configure_prepend() {
-	sed -i s/help// Makefile.am
+    sed -i s/help// Makefile.am
 }
 
 do_configure_append() {
-	sed -i 's,func_fatal_error "error: cannot install,echo "bogus message about,' ${HOST_SYS}-libtool
+    sed -i 's,func_fatal_error "error: cannot install,echo "bogus message about,' ${HOST_SYS}-libtool
 }
 
 RRECOMMENDS_${PN} += "obexd obex-data-server"

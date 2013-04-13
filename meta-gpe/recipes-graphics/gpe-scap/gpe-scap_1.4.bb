@@ -16,7 +16,7 @@ GPE_TARBALL_SUFFIX = "bz2"
 inherit gpe autotools
 
 SRC_URI += "file://0001-Fix-the-ordering-of-LDADD-options-to-fix-a-compilati.patch \
-  file://use.libsoup-2.4.patch \
+    file://use.libsoup-2.4.patch \
 "
 
 RREPLACES_${PN} = "gpe-screenshot"

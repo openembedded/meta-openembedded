@@ -35,9 +35,9 @@ RCONFLICTS_${PN} += "task-basic"
 # Util-linux (u)mount is included because the busybox one can't handle /etc/mtab being symlinked to /proc/mounts
 #
 RDEPENDS_${PN} = "\
-	${TASK_BASIC_SSHDAEMON} \
-	avahi-daemon avahi-utils \
-	"
+    ${TASK_BASIC_SSHDAEMON} \
+    avahi-daemon avahi-utils \
+"
 
 #
 # The following section is split in 3:
@@ -46,16 +46,16 @@ RDEPENDS_${PN} = "\
 #   3) Nice to have: packages that are nice to have, but aren't strictly needed  
 #
 RRECOMMENDS_${PN} = "\
-	${MACHINE_EXTRA_RRECOMMENDS} \
-	${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
-	${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
-	${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
-	\
-	${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \
-	${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
-	\
-	tzdata \
-	\
-	cpufrequtils \
-	htop \
-    "
+    ${MACHINE_EXTRA_RRECOMMENDS} \
+    ${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
+    ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
+    ${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
+    \
+    ${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \
+    ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
+    \
+    tzdata \
+    \
+    cpufrequtils \
+    htop \
+"

@@ -21,17 +21,17 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF = "--disable-scrollkeeper --disable-eds --enable-bonobo=no --with-in-process-applets=none"
 
 do_configure_prepend() {
-	gnome-doc-prepare --automake
-	sed -i -e s:help:: ${S}/Makefile.am
-	sed -i -e s:^#!@PYTHON@:#!/usr/bin/python: ${S}/gnome-panel/gnome-panel-add.in
+    gnome-doc-prepare --automake
+    sed -i -e s:help:: ${S}/Makefile.am
+    sed -i -e s:^#!@PYTHON@:#!/usr/bin/python: ${S}/gnome-panel/gnome-panel-add.in
 }
 
 pkg_postinst_${PN}_append () {
 if [ -n "$D" ]; then
-	exit 1
+    exit 1
 fi
-	gconftool-2 --config-source=xml:readwrite:${sysconfdir}/gconf/gconf.xml.defaults \
-		--direct --load ${sysconfdir}/gconf/schemas/panel-default-setup.entries
+    gconftool-2 --config-source=xml:readwrite:${sysconfdir}/gconf/gconf.xml.defaults \
+        --direct --load ${sysconfdir}/gconf/schemas/panel-default-setup.entries
 }
 
 PACKAGES =+ "libpanel-applet"
@@ -42,6 +42,6 @@ FILES_${PN} =+ "${datadir}/gnome* \
                 ${datadir}/icons \
                 ${datadir}/PolicyKit \
                 ${libdir}/bonobo \
-               "
+"
 
 

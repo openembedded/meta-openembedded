@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
 PR = "r2"
 
 SRC_URI = "http://sylpheed.sraoss.jp/sylpheed/v2.7/sylpheed-${PV}.tar.bz2 \
-  file://glib-2.32.patch \
+    file://glib-2.32.patch \
 "
 SRC_URI[md5sum] = "1f470525c1fbe53253813a0978c18228"
 SRC_URI[sha256sum] = "8bb6457db4e2eea1877b487d9ac8513546372db9a6a2e4271d11229f4af84e23"

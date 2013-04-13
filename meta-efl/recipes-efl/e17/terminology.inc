@@ -10,11 +10,11 @@ INC_PR = "r2"
 PE = "2"
 
 EXTRA_OECONF = "\
-  --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
 "
 
 FILES_${PN} += "\
-        ${datadir}/icons/terminology.png \
+    ${datadir}/icons/terminology.png \
 "
 
 # doesn't start without own theme

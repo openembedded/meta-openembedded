@@ -15,10 +15,10 @@ SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f611
 EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set --disable-docbook-docs"
 
 do_configure_append() {
-	for i in $(find ${S} -name "Makefile") ; do
-		sed -i -e s:"GCONFTOOL = .*/usr/bin/gconftool-2":"GCONFTOOL = /usr/bin/gconftool-2":g $i
-		sed -i -e s:"GCONF_SANITY_CHECK = set":"GCONF_SANITY_CHECK = /usr/libexec/gconf-sanity-check-2":g $i
-	done	
+    for i in $(find ${S} -name "Makefile") ; do
+        sed -i -e s:"GCONFTOOL = .*/usr/bin/gconftool-2":"GCONFTOOL = /usr/bin/gconftool-2":g $i
+        sed -i -e s:"GCONF_SANITY_CHECK = set":"GCONF_SANITY_CHECK = /usr/libexec/gconf-sanity-check-2":g $i
+    done    
 }
 
 RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-ck-connector', '', d)}"

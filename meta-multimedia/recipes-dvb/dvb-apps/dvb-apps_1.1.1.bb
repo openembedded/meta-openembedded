@@ -10,36 +10,36 @@ SRCREV = "3fc7dfa68484"
 S = "${WORKDIR}/${BPN}"
 
 do_configure() {
-	sed -i -e s:/usr/include:${STAGING_INCDIR}:g util/av7110_loadkeys/generate-keynames.sh 
+    sed -i -e s:/usr/include:${STAGING_INCDIR}:g util/av7110_loadkeys/generate-keynames.sh 
 }
 
 do_install() {
-	make DESTDIR=${D} install
-	install -d ${D}/${bindir}
-	install -d ${D}/${docdir}/dvb-apps
-	install -d ${D}/${docdir}/dvb-apps/scan
-	install -d ${D}/${docdir}/dvb-apps/szap
-	chmod a+rx ${D}/${libdir}/*.so*
+    make DESTDIR=${D} install
+    install -d ${D}/${bindir}
+    install -d ${D}/${docdir}/dvb-apps
+    install -d ${D}/${docdir}/dvb-apps/scan
+    install -d ${D}/${docdir}/dvb-apps/szap
+    chmod a+rx ${D}/${libdir}/*.so*
 
-	# Install tests
-	install -m 0755 ${S}/test/setvoltage      ${D}${bindir}/test_setvoltage
-	install -m 0755 ${S}/test/set22k          ${D}${bindir}/test_set22k
-	install -m 0755 ${S}/test/sendburst       ${D}${bindir}/test_sendburst
-	install -m 0755 ${S}/test/diseqc          ${D}${bindir}/test_diseqc
-	install -m 0755 ${S}/test/test_sections   ${D}${bindir}/
-	install -m 0755 ${S}/test/test_av_play    ${D}${bindir}/
-	install -m 0755 ${S}/test/test_stillimage ${D}${bindir}/
-	install -m 0755 ${S}/test/test_dvr_play   ${D}${bindir}/
-	install -m 0755 ${S}/test/test_tt         ${D}${bindir}/
-	install -m 0755 ${S}/test/test_sec_ne     ${D}${bindir}/
-	install -m 0755 ${S}/test/test_stc        ${D}${bindir}/
-	install -m 0755 ${S}/test/test_av         ${D}${bindir}/
-	install -m 0755 ${S}/test/test_vevent     ${D}${bindir}/
-	install -m 0755 ${S}/test/test_pes        ${D}${bindir}/
-	install -m 0755 ${S}/test/test_dvr        ${D}${bindir}/
+    # Install tests
+    install -m 0755 ${S}/test/setvoltage      ${D}${bindir}/test_setvoltage
+    install -m 0755 ${S}/test/set22k          ${D}${bindir}/test_set22k
+    install -m 0755 ${S}/test/sendburst       ${D}${bindir}/test_sendburst
+    install -m 0755 ${S}/test/diseqc          ${D}${bindir}/test_diseqc
+    install -m 0755 ${S}/test/test_sections   ${D}${bindir}/
+    install -m 0755 ${S}/test/test_av_play    ${D}${bindir}/
+    install -m 0755 ${S}/test/test_stillimage ${D}${bindir}/
+    install -m 0755 ${S}/test/test_dvr_play   ${D}${bindir}/
+    install -m 0755 ${S}/test/test_tt         ${D}${bindir}/
+    install -m 0755 ${S}/test/test_sec_ne     ${D}${bindir}/
+    install -m 0755 ${S}/test/test_stc        ${D}${bindir}/
+    install -m 0755 ${S}/test/test_av         ${D}${bindir}/
+    install -m 0755 ${S}/test/test_vevent     ${D}${bindir}/
+    install -m 0755 ${S}/test/test_pes        ${D}${bindir}/
+    install -m 0755 ${S}/test/test_dvr        ${D}${bindir}/
 
-	cp -pPR ${S}/util/szap/channels-conf* ${D}/${docdir}/dvb-apps/szap/
-	cp -pPR ${S}/util/szap/README   ${D}/${docdir}/dvb-apps/szap/
+    cp -pPR ${S}/util/szap/channels-conf* ${D}/${docdir}/dvb-apps/szap/
+    cp -pPR ${S}/util/szap/README   ${D}/${docdir}/dvb-apps/szap/
 }
 
 python populate_packages_prepend () {

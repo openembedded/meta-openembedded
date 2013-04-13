@@ -20,5 +20,5 @@ S = "${WORKDIR}/${PN}-${PV}"
 inherit autotools binconfig
 
 do_configure_prepend() {
-        rm -f aclocal.m4 Makefile.am ltmain.sh
+    rm -f aclocal.m4 Makefile.am ltmain.sh
 }

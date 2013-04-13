@@ -1,13 +1,13 @@
 require libav.inc
 
 EXTRA_OECONF += " \
-        --enable-postproc \
+    --enable-postproc \
 "
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/libav-0.8.4:"
 
 SRC_URI_append = " \
-          file://0001-configure-enable-pic-for-AArch64.patch \
+    file://0001-configure-enable-pic-for-AArch64.patch \
 "
 LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.GPLv3;md5=d32239bcb673463ab874e80d47fae504 \

@@ -12,9 +12,9 @@ DEPENDS = "libnice glib-2.0 libxml2 zlib dbus gstreamer gst-plugins-base"
 inherit autotools
 
 EXTRA_OECONF = " \
-  --disable-debug \
-  --disable-gtk-doc \
-  --disable-python \
+    --disable-debug \
+    --disable-gtk-doc \
+    --disable-python \
 "
 
 FILES_${PN} += "${libdir}/*/*.so"

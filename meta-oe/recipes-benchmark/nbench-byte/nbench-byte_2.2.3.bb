@@ -14,11 +14,11 @@ SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed
 
 TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
 do_compile() {
-	oe_runmake
+    oe_runmake
 }
 
 do_install () {
-	install -d ${D}${bindir}
-	install -m 0644 NNET.DAT ${D}${bindir}/
-	install -m 0755 nbench ${D}${bindir}/
+    install -d ${D}${bindir}
+    install -m 0644 NNET.DAT ${D}${bindir}/
+    install -m 0755 nbench ${D}${bindir}/
 }

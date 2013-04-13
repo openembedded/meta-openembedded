@@ -15,9 +15,9 @@ RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "dropbear.socket"
 
 do_install_append() {
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/dropbearkey.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/dropbear@.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/dropbear.socket ${D}${systemd_unitdir}/system
-	ln -sf /dev/null ${D}${systemd_unitdir}/system/dropbear.service
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/dropbearkey.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/dropbear@.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/dropbear.socket ${D}${systemd_unitdir}/system
+    ln -sf /dev/null ${D}${systemd_unitdir}/system/dropbear.service
 }

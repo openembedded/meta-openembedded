@@ -16,7 +16,7 @@ PR = "r1"
 inherit update-alternatives
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/traceroute-2.0.18/traceroute-2.0.18.tar.gz \
-          "
+"
 
 SRC_URI[md5sum] = "b7254149b7f081cce07f4b9e065ba5ef"
 SRC_URI[sha256sum] = "5994a88520927fefe3c9754aaf1e02b4d0f3f8fb1f521a68fa86215c3fcab9ef"

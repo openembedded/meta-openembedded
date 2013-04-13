@@ -26,25 +26,25 @@ RDEPENDS_${PN} = "python-core python-audio python-threading python-codecs \
                   python-compiler python-pkgutil python-pydoc python-mmap \
                   python-netclient python-difflib \
                   python-pprint python-numpy  \
-                 "
+"
 RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah"
 
 C_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 do_configure_prepend() {
-	${BUILD_CC} ${S}/gr-vocoder/lib/codec2/generate_codebook.c -o ${S}/gr-vocoder/lib/generate_codebook -lm
-	echo "ADD_EXECUTABLE(generate_codebook IMPORTED)" >${S}/gr-vocoder/lib/generate_codebook.txt
-	echo "SET_PROPERTY(TARGET generate_codebook APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)" >>${S}/gr-vocoder/lib/generate_codebook.txt
-	echo 'SET_TARGET_PROPERTIES(generate_codebook PROPERTIES IMPORTED_LOCATION_RELEASE "${S}/gr-vocoder/lib/generate_codebook")' >>${S}/gr-vocoder/lib/generate_codebook.txt
+    ${BUILD_CC} ${S}/gr-vocoder/lib/codec2/generate_codebook.c -o ${S}/gr-vocoder/lib/generate_codebook -lm
+    echo "ADD_EXECUTABLE(generate_codebook IMPORTED)" >${S}/gr-vocoder/lib/generate_codebook.txt
+    echo "SET_PROPERTY(TARGET generate_codebook APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)" >>${S}/gr-vocoder/lib/generate_codebook.txt
+    echo 'SET_TARGET_PROPERTIES(generate_codebook PROPERTIES IMPORTED_LOCATION_RELEASE "${S}/gr-vocoder/lib/generate_codebook")' >>${S}/gr-vocoder/lib/generate_codebook.txt
 }
 
 do_compile_prepend() {
-	cp ${S}/gr-vocoder/lib/codec2/defines.h ${OECMAKE_BUILDPATH}/gr-vocoder/lib/codec2
+    cp ${S}/gr-vocoder/lib/codec2/defines.h ${OECMAKE_BUILDPATH}/gr-vocoder/lib/codec2
 }
 
 PACKAGES += " \
-  ${PN}-examples \
-  ${PN}-grc \
+    ${PN}-examples \
+    ${PN}-grc \
 "
 
 FILES_${PN}-grc = "${datadir}/gnuradio/grc"
@@ -57,7 +57,7 @@ FILES_${PN} += "${prefix}/etc/gnuradio/*"
 FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/gnuradio/.debug \
                     ${PYTHON_SITEPACKAGES_DIR}/gnuradio/*/.debug \
                     ${datadir}/gnuradio/examples/*/.debug \
-		   "
+"
 FILES_${PN}-examples = "${datadir}/gnuradio/examples"
 
 PV = "3.6.4.1"
@@ -96,7 +96,7 @@ EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
 
 # Only builds for machines with neon instructions. Problem is in upstream cmake.
 python () {
-        if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False, d):
-                raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
+    if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False, d):
+        raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
 }
 

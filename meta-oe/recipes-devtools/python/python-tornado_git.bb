@@ -7,7 +7,7 @@ PV = "2.2.1+git${SRCPV}"
 SRCREV = "c501917eba46dec30b1f2ef12497dffc4beec505"
 SRC_URI = "git://github.com/facebook/tornado.git;branch=branch2.2 \
            file://0001-disable-AI_ADDRCONFIG-flag.patch \
-          "
+"
 
 S = "${WORKDIR}/git"
 

@@ -18,11 +18,11 @@ EXTRA_OECONF = " --enable-thumbnailer \
                  --disable-scrollkeeper \
                  --enable-pixbuf \
                  --disable-help \
-               "
+"
 
 do_install_append() {
-	install -d install -d ${D}${datadir}/pixmaps
-	install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
+    install -d install -d ${D}${datadir}/pixmaps
+    install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
 }
 
 RDEPENDS_${PN} += "glib-2.0-utils"

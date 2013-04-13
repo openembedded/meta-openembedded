@@ -11,10 +11,10 @@ SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=gpio;protocol=http"
 S = "${WORKDIR}/gpio"
 
 do_compile() {
-	${CC} ${CFLAGS} ${LDFLAGS} -static -o ${PN} gpio-s3c6410.c
+    ${CC} ${CFLAGS} ${LDFLAGS} -static -o ${PN} gpio-s3c6410.c
 }
 
 do_install() {
-	install -d ${D}${sbindir}
-	install -m 0755 ${PN} ${D}${sbindir}
+    install -d ${D}${sbindir}
+    install -m 0755 ${PN} ${D}${sbindir}
 }

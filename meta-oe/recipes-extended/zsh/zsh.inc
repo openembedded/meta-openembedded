@@ -25,7 +25,7 @@ EXTRA_OECONF = " \
     --disable-gdbm \
     --disable-dynamic \
     zsh_cv_shared_environ=yes \
-    "
+"
 
 ALTERNATIVE_${PN} = "sh"
 ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
@@ -53,4 +53,4 @@ FILES_${PN}-dbg += "\
     ${libdir}/${PN}/${PV}/${PN}/.debug/*.so \
     ${libdir}/${PN}/${PV}/${PN}/db/.debug/*.so \
     ${libdir}/${PN}/${PV}/${PN}/net/.debug/*.so \
-    "
+"

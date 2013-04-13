@@ -12,7 +12,7 @@ EXTRA_OECONF = "--disable-fortran --enable-single --enable-shared"
 inherit autotools pkgconfig
 
 do_compile_prepend() {
-	sed -i -e 's:all-recursive:$(RECURSIVE_TARGETS):g' ${S}/Makefile
+    sed -i -e 's:all-recursive:$(RECURSIVE_TARGETS):g' ${S}/Makefile
 }
 
 SRC_URI[md5sum] = "9356e5e9dcb3f1481977009720a2ccf8"

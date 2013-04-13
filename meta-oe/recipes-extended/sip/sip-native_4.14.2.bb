@@ -22,14 +22,14 @@ export STAGING_LIBDIR
 export STAGING_INCDIR
 
 do_configure_prepend() {
-        cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
+    cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
 }
 do_install() {
-        install -d ${D}${bindir}
-        install -m 0755 sip ${D}${bindir}/sip
-        # python-pyqt expects sip4
-        ln -sf sip ${D}${bindir}/sip4
-        cd ${WORKDIR}/sip-${PV} && python configure.py
-        install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-        install -m 0755 sip*.py ${D}${PYTHON_SITEPACKAGES_DIR}
+    install -d ${D}${bindir}
+    install -m 0755 sip ${D}${bindir}/sip
+    # python-pyqt expects sip4
+    ln -sf sip ${D}${bindir}/sip4
+    cd ${WORKDIR}/sip-${PV} && python configure.py
+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}
+    install -m 0755 sip*.py ${D}${PYTHON_SITEPACKAGES_DIR}
 }

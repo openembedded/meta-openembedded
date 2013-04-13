@@ -11,7 +11,7 @@ PE = "1"
 SRC_URI = "git://gitorious.org/meego-developer-tools/bootchart.git \
            file://0001-svg-add-rudimentary-support-for-ARM-cpuinfo.patch \
            file://0002-svg-open-etc-os-release-and-use-PRETTY_NAME-for-the-.patch \
-          "
+"
 
 SRCREV = "872fb107028e377eef3c0c7c8a6e0f7c32b8ebb8"
 

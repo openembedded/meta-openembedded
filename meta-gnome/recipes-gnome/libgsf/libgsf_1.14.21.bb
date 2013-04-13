@@ -15,9 +15,9 @@ SRC_URI[archive.md5sum] = "2b702648b853402554c97d75405c60d3"
 SRC_URI[archive.sha256sum] = "eef0a9d6eca4e6af6c16b208947e3c958c428b94d22792bdd0b80c08a4b301db"
 
 EXTRA_OECONF = "\
-		--without-python \
-		--without-gnome-vfs --without-bonobo \
-		--disable-gtk-doc \
-		--with-bz2"
+        --without-python \
+        --without-gnome-vfs --without-bonobo \
+        --disable-gtk-doc \
+        --with-bz2"
 
 RDEPENDS_${PN} = "gconf" 

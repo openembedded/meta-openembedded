@@ -15,11 +15,11 @@ SRC_URI[sha256sum] = "217efa814fb031ad136bd3dcf89ca219dd6d7ee01aa7e65c56c56b7737
 S = "${WORKDIR}/uhd-images_${PV}-release"
 
 do_install() {
-	install -d ${D}${datadir}/uhd/images
-	install -d ${D}${datadir}/uhd/images/bit
-	install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
-	rm -rf ${S}/share/uhd/images/bit
-	install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
+    install -d ${D}${datadir}/uhd/images
+    install -d ${D}${datadir}/uhd/images/bit
+    install -m 0644 ${S}/share/uhd/images/bit/* ${D}${datadir}/uhd/images/bit
+    rm -rf ${S}/share/uhd/images/bit
+    install -m 0644 ${S}/share/uhd/images/* ${D}${datadir}/uhd/images
 }
 
 PACKAGES = "${PN}"

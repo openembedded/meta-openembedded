@@ -18,11 +18,11 @@ EXTRA_OEMAKE = "CC='${CC}' \
                 libdc-usr=${STAGING_INCDIR}/libdivecomputer/* \
                 LIBDIVECOMPUTERINCLUDES=${STAGING_INCDIR}/libdivecomputer \
                 LIBDIVECOMPUTERARCHIVE=${STAGING_LIBDIR}/libdivecomputer.a \
-               "
+"
 
 do_install() {
-	oe_runmake install DESTDIR=${D}
-	rm ${D}${datadir}/icons/hicolor/icon-theme.cache
+    oe_runmake install DESTDIR=${D}
+    rm ${D}${datadir}/icons/hicolor/icon-theme.cache
 }
 
 FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/subsurface.svg"

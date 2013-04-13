@@ -1,7 +1,7 @@
 SUMMARY = "Simple top-like I/O monitor"
 DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
- It watches I/O usage information output by the Linux kernel and displays \
- a table of current I/O usage by processes on the system."
+    It watches I/O usage information output by the Linux kernel and displays \
+    a table of current I/O usage by processes on the system."
 HOMEPAGE = "http://guichaz.free.fr/iotop/"
 
 PR = "r1"
@@ -16,8 +16,8 @@ SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d68648
 inherit distutils
 
 do_install_append() {
-	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo || true
-	rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
+    rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo || true
+    rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
 }
 
 RDEPENDS_${PN} = "python-distutils python-curses python-textutils \

@@ -22,7 +22,7 @@ EXTRA_OECONF = " \
     --disable-artstest \
 "
 do_configure_prepend() {
-	sed -i -e 's:/usr/include/mme:${STAGING_INCDIR}/mme:g' configure.ac
+    sed -i -e 's:/usr/include/mme:${STAGING_INCDIR}/mme:g' configure.ac
 }
 
 PACKAGES =+ "esddsp esd esd-utils"

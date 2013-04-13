@@ -14,10 +14,10 @@ SRC_URI[sha256sum] = "dc20f97a49e1ff1becf7853ef5f137ed30a4c27490540e755021d78d33
 S = "${WORKDIR}/OpenZone"
 
 do_install() {
-	install -d ${D}${datadir}/icons
-	for theme in `find -name '*.tar.xz'`; do
-		tar -Jxf ${theme} -C ${D}${datadir}/icons
-	done
+    install -d ${D}${datadir}/icons
+    for theme in `find -name '*.tar.xz'`; do
+        tar -Jxf ${theme} -C ${D}${datadir}/icons
+    done
 }
 
 python populate_packages_prepend () {

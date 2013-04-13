@@ -1,8 +1,8 @@
 require fftw.inc
 
 EXTRA_OECONF = "--disable-fortran --enable-single --enable-shared \
-  --enable-threads \
-  ${@base_contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
+    --enable-threads \
+    ${@base_contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
 "
 
 SRC_URI[md5sum] = "0a05ca9c7b3bfddc8278e7c40791a1c2"

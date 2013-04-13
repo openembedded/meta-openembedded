@@ -11,15 +11,15 @@ PR = "r3"
 SRC_URI = " \
            file://init \
            file://zram.service \
-          "
+"
 
 do_install () {
-	# Sysvinit
-	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/zram
+    # Sysvinit
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/zram
 
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
 }
 
 FILES_${PN} = "${sysconfdir}/init.d"

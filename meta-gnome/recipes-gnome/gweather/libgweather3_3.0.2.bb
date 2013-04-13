@@ -11,7 +11,7 @@ SRC_URI[archive.md5sum] = "f1a96c6f19c9a0bc6b4e12acc9a8a85d"
 SRC_URI[archive.sha256sum] = "9041526fa0466b99dae5cf06c2cc70376f25531eec5d58b1e1378acfb302410c"
 
 do_configure_prepend() {
-	sed -i -e 's: doc : :g' ${S}/Makefile.am
+    sed -i -e 's: doc : :g' ${S}/Makefile.am
 }
 
 FILES_${PN} += "${datadir}/gnome* \

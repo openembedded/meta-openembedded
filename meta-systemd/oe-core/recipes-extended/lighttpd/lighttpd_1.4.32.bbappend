@@ -12,7 +12,7 @@ RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "lighttpd.service"
 
 do_install_append() {
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/lighttpd.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/lighttpd.service ${D}${systemd_unitdir}/system
 }
 

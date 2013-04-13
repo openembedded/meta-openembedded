@@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
 inherit autotools lib_package
 
 do_install_append() {
-	sed -i -e s://:/:g -e 's:=${libdir}/libudev.la:-ludev:g' ${D}${libdir}/libatasmart.la
+    sed -i -e s://:/:g -e 's:=${libdir}/libudev.la:-ludev:g' ${D}${libdir}/libatasmart.la
 }
 
 PACKAGES =+ "${PN}-dev-vala"

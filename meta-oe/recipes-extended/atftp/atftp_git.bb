@@ -13,7 +13,7 @@ SRC_URI = "git://atftp.git.sourceforge.net/gitroot/atftp/atftp;protocol=git \
            file://atftpd-0.7_unprotected_assignments_crash.patch \
            file://atftpd.init \
            file://atftpd.service \   
-          "
+"
 S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d useradd systemd
@@ -43,9 +43,9 @@ PACKAGES =+ "atftpd"
 FILES_${PN} = "${bindir}/*"
 
 FILES_${PN}d = "${sbindir}/* \
-  ${sysconfdir}/init.d/* \
-  /srv/tftp \
-  ${systemd_unitdir}/system/atftpd.service \
+    ${sysconfdir}/init.d/* \
+    /srv/tftp \
+    ${systemd_unitdir}/system/atftpd.service \
 "
 
 SYSTEMD_PACKAGES = "${PN}d"

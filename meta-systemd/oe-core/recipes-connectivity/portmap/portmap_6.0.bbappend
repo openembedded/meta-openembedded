@@ -12,7 +12,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 SRC_URI_append = " file://portmap.service"
 do_install_append() {
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/portmap.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/portmap.service ${D}${systemd_unitdir}/system
 }
 

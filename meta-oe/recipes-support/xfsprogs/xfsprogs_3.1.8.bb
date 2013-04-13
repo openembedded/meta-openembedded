@@ -8,8 +8,8 @@ DEPENDS = "util-linux"
 PR = "r1"
 
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
-	file://remove-install-as-user.patch \
-	file://drop-configure-check-for-aio.patch \
+    file://remove-install-as-user.patch \
+    file://drop-configure-check-for-aio.patch \
 "
 
 SRC_URI[md5sum] = "f70b2e7200d4c29f0af1cf70e7be1db6"
@@ -27,16 +27,16 @@ FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
 
 EXTRA_OECONF = "--enable-gettext=no"
 do_configure () {
-	# Prevent Makefile from calling configure without arguments,
-	# when do_configure gets called for a second time.
-	rm -f include/builddefs include/platform_defs.h
-	# Recreate configure script.
-	rm -f configure
-	oe_runmake configure
-	# Configure.
-	export DEBUG="-DNDEBUG"
-	gnu-configize --force
-	oe_runconf
+    # Prevent Makefile from calling configure without arguments,
+    # when do_configure gets called for a second time.
+    rm -f include/builddefs include/platform_defs.h
+    # Recreate configure script.
+    rm -f configure
+    oe_runmake configure
+    # Configure.
+    export DEBUG="-DNDEBUG"
+    gnu-configize --force
+    oe_runconf
 }
 
 LIBTOOL = "${HOST_SYS}-libtool"
@@ -45,13 +45,13 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 PARALLEL_MAKE = ""
 
 do_install () {
-	export DIST_ROOT=${D}
-	oe_runmake install
-	# needed for xfsdump
-	oe_runmake install-dev
-	rm ${D}${base_libdir}/libhandle.a
-	rm ${D}${base_libdir}/libhandle.la
-	rm ${D}${base_libdir}/libhandle.so
-	rm ${D}${libdir}/libhandle.so
-	ln -s ../..${base_libdir}/libhandle.so.1 ${D}${libdir}/libhandle.so
+    export DIST_ROOT=${D}
+    oe_runmake install
+    # needed for xfsdump
+    oe_runmake install-dev
+    rm ${D}${base_libdir}/libhandle.a
+    rm ${D}${base_libdir}/libhandle.la
+    rm ${D}${base_libdir}/libhandle.so
+    rm ${D}${libdir}/libhandle.so
+    ln -s ../..${base_libdir}/libhandle.so.1 ${D}${libdir}/libhandle.so
 }

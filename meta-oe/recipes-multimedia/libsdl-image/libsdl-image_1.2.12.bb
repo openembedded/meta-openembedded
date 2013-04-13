@@ -22,12 +22,12 @@ export SDL_CONFIG = "${STAGING_BINDIR_CROSS}/sdl-config"
 EXTRA_OECONF += "--disable-jpg-shared --disable-png-shared -disable-tif-shared"
 
 do_configure_prepend() {
-	# Removing this file fixes a libtool version mismatch.
-	rm -f acinclude/libtool.m4
-	rm -f acinclude/sdl.m4
-	rm -f acinclude/pkg.m4
-	rm -f acinclude/lt~obsolete.m4
-	rm -f acinclude/ltoptions.m4
-	rm -f acinclude/ltsugar.m4
-	rm -f acinclude/ltversion.m4
+    # Removing this file fixes a libtool version mismatch.
+    rm -f acinclude/libtool.m4
+    rm -f acinclude/sdl.m4
+    rm -f acinclude/pkg.m4
+    rm -f acinclude/lt~obsolete.m4
+    rm -f acinclude/ltoptions.m4
+    rm -f acinclude/ltsugar.m4
+    rm -f acinclude/ltversion.m4
 }

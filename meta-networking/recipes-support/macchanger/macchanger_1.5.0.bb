@@ -12,14 +12,14 @@ SRC_URI[md5sum] = "79b7cdaeca3d8ebafa764c4b0dd03ab7"
 SRC_URI[sha256sum] = "d44bfa27cb29c5a718627cb3ef3aa42eb5130426545eb2031120826cd73fa8fe"
 
 FILES_${PN} = " \
-  ${bindir}/${PN} \
-  ${datadir}/${PN}/wireless.list \
-  ${datadir}/${PN}/OUI.list \
+    ${bindir}/${PN} \
+    ${datadir}/${PN}/wireless.list \
+    ${datadir}/${PN}/OUI.list \
 "
 
 FILES_${PN}-doc = " \
-  ${datadir}/info \
-  ${datadir}/man \
+    ${datadir}/info \
+    ${datadir}/man \
 "
 
 inherit autotools

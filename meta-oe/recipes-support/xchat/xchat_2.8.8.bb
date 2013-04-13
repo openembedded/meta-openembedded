@@ -9,15 +9,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 PR = "r1"
 
 SRC_URI = "http://xchat.org/files/source/2.8/xchat-${PV}.tar.bz2 \
-  file://glib-2.32.patch \
+    file://glib-2.32.patch \
 "
 
 inherit autotools gettext
 
 EXTRA_OECONF = "\
-  --disable-perl \
-  --disable-python \
-  --disable-tcl \
+    --disable-perl \
+    --disable-python \
+    --disable-tcl \
 "
 do_configure_prepend(){
     rm -f ${S}/po/Makefile.in.in

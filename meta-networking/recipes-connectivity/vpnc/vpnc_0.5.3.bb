@@ -12,10 +12,10 @@ CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
 LDFLAGS_append = " -lgcrypt -lgpg-error"
 
 do_install () {
-	sed -i s:m600:m\ 600:g Makefile	
-	oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr' install
-	rm -f ${D}${sysconfdir}/vpnc/vpnc.conf #This file is useless
-	install ${WORKDIR}/default.conf ${D}${sysconfdir}/vpnc/default.conf
+    sed -i s:m600:m\ 600:g Makefile    
+    oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr' install
+    rm -f ${D}${sysconfdir}/vpnc/vpnc.conf #This file is useless
+    install ${WORKDIR}/default.conf ${D}${sysconfdir}/vpnc/default.conf
 }
 
 CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"

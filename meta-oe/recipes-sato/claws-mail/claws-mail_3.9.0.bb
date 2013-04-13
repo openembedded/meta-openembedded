@@ -20,22 +20,22 @@ do_configure_append() {
 # FIXME: maemo builds may want --enable-maemo
 # FIXME: some platforms may want --enable-generic-umpc
 EXTRA_OECONF = " \
-        --disable-aspell-test \
-        --enable-aspell \
-        --disable-manual \
-        --disable-crash-dialog \
-        --disable-jpilot \
-        --disable-trayicon-plugin \
-        --disable-spamassassin-plugin \
-        --disable-bogofilter-plugin \
-        --disable-pgpcore-plugin \
-        --disable-pgpmime-plugin \
-        --disable-pgpinline-plugin \
-        --disable-dillo-viewer-plugin \
-        --disable-clamav-plugin \
-        --disable-gnomeprint \
-        --disable-valgrind \
-        "
+    --disable-aspell-test \
+    --enable-aspell \
+    --disable-manual \
+    --disable-crash-dialog \
+    --disable-jpilot \
+    --disable-trayicon-plugin \
+    --disable-spamassassin-plugin \
+    --disable-bogofilter-plugin \
+    --disable-pgpcore-plugin \
+    --disable-pgpmime-plugin \
+    --disable-pgpinline-plugin \
+    --disable-dillo-viewer-plugin \
+    --disable-clamav-plugin \
+    --disable-gnomeprint \
+    --disable-valgrind \
+"
 
 # Remove enchant references:
 do_install_prepend() {

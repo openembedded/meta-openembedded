@@ -17,9 +17,9 @@ EXTRA_OECONF = " --disable-documentation "
 LIBV = "2.4.0"
 
 do_install_append () {
-        install -d ${D}${includedir}/gtkmm-2.4
-        install -m 0644 gdk/gdkmmconfig.h ${D}${includedir}/gtkmm-2.4
-        install -m 0644 gtk/gtkmmconfig.h ${D}${includedir}/gtkmm-2.4
+    install -d ${D}${includedir}/gtkmm-2.4
+    install -m 0644 gdk/gdkmmconfig.h ${D}${includedir}/gtkmm-2.4
+    install -m 0644 gtk/gtkmmconfig.h ${D}${includedir}/gtkmm-2.4
 }
 
 PACKAGES =+ "${PN}-demo"

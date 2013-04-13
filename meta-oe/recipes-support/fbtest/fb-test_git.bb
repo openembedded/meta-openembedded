@@ -11,9 +11,9 @@ SRC_URI = "git://github.com/prpplague/fb-test-app.git"
 S = "${WORKDIR}/git"
 
 do_install() {
-	install -d ${D}${bindir}
-	for prog in perf rect fb-test offset ; do
-		install -m 0755 $prog ${D}${bindir}
-	done
+    install -d ${D}${bindir}
+    for prog in perf rect fb-test offset ; do
+        install -m 0755 $prog ${D}${bindir}
+    done
 }
 

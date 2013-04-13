@@ -9,18 +9,18 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
 CONFIGFILESURI ?= ""
 
 CONFIGFILESURI_aarch64 = "file://config.h \
-	   file://_numpyconfig.h \
-	  "
+       file://_numpyconfig.h \
+"
 CONFIGFILESURI_arm = "file://config.h \
-	   file://numpyconfig.h \
-	  "
+       file://numpyconfig.h \
+"
 CONFIGFILESURI_mipsel = "file://config.h \
-	   file://numpyconfig.h \
-	  "
+       file://numpyconfig.h \
+"
 
 CONFIGFILESURI_i586 = "file://config.h \
                        file://numpyconfig.h \
-                      "
+"
 
 S = "${WORKDIR}/numpy-${PV}"
 
@@ -29,10 +29,10 @@ inherit distutils
 # Make the build fail and replace *config.h with proper one
 # This is a ugly, ugly hack - Koen
 do_compile_prepend() {
-         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
-         ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
-         true
-	 cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/core/include/numpy/
+    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
+    ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
+    true
+    cp ${WORKDIR}/*config.h ${S}/build/$(ls ${S}/build | grep src)/numpy/core/include/numpy/
 }
 
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
@@ -59,4 +59,4 @@ RDEPENDS_${PN} = "python-unittest \
                   python-email \
                   python-subprocess \
                   python-compression \
-                 "
+"

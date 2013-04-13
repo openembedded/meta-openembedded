@@ -22,8 +22,8 @@ BRANCH = "master"
 SRCREV = "3af5bd38d82255942f582398160a5d3354346ca3"
 
 SRC_URI = " \
-  git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
-  file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
+    git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
+    file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -33,37 +33,37 @@ QT_IMPORTS_DIR = "${libdir}/qt4/imports"
 PLUGINS_TARGET = "${QT_IMPORTS_DIR}/MeeGo/Connman"
 
 EXTRA_QMAKEVARS_PRE = " \
-  CONFIG+=notest \
+    CONFIG+=notest \
 "
 
 do_configure_prepend() {
-  # Hack *.pro variables
-  find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
+    # Hack *.pro variables
+    find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
 }
 
 do_install() {
-  export INSTALL_ROOT=${D}
-  oe_runmake install
+    export INSTALL_ROOT=${D}
+    oe_runmake install
 }
 
 FILES_${PN} = " \
-  ${libdir}/libconnman-qt4${SOLIBS} \
+    ${libdir}/libconnman-qt4${SOLIBS} \
 "
 
 FILES_${PN}-dev = " \
-  ${includedir}/connman-qt/* \
-  ${libdir}/libconnman-qt4${SOLIBSDEV} \
-  ${libdir}/libconnman-qt4.prl \
-  ${libdir}/pkgconfig/connman-qt4.pc \
-  ${libdir}/connman-qt4.pc \
+    ${includedir}/connman-qt/* \
+    ${libdir}/libconnman-qt4${SOLIBSDEV} \
+    ${libdir}/libconnman-qt4.prl \
+    ${libdir}/pkgconfig/connman-qt4.pc \
+    ${libdir}/connman-qt4.pc \
 "
 
 FILES_${PN}-plugin = " \
-  ${PLUGINS_TARGET}/qmldir \
-  ${PLUGINS_TARGET}/lib*.so \
+    ${PLUGINS_TARGET}/qmldir \
+    ${PLUGINS_TARGET}/lib*.so \
 "
 
 FILES_${PN}-plugin-dbg = " \
-  ${PLUGINS_TARGET}/.debug \
-  ${PLUGINS_TARGET}/.debug/* \
+    ${PLUGINS_TARGET}/.debug \
+    ${PLUGINS_TARGET}/.debug/* \
 "

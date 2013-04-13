@@ -12,11 +12,11 @@ SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy;protocol=g
 S = "${WORKDIR}/git"
 
 do_compile() {
-	${CC} ${LDFLAGS} `pkg-config --cflags --libs dbus-glib-1` -o dbus-daemon-proxy dbus-daemon-proxy.c
+    ${CC} ${LDFLAGS} `pkg-config --cflags --libs dbus-glib-1` -o dbus-daemon-proxy dbus-daemon-proxy.c
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install -m 0755 dbus-daemon-proxy ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 0755 dbus-daemon-proxy ${D}${bindir}
 }
 

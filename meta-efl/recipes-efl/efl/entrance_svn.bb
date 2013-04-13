@@ -6,8 +6,8 @@ SECTION = "e/apps"
 
 inherit e gettext systemd
 SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
-  file://0001-pam-use-common-auth-instead-of-system-auth.patch \
-  file://entrance.service \
+    file://0001-pam-use-common-auth-instead-of-system-auth.patch \
+    file://entrance.service \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
@@ -33,6 +33,6 @@ RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "entrance.service"
 
 do_install_append() {
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/entrance.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/entrance.service ${D}${systemd_unitdir}/system
 }

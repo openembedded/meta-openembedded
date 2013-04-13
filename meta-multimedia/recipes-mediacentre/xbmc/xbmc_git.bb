@@ -16,23 +16,23 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
            file://0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch \
            file://0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch \
            file://configure.in-Avoid-running-code.patch \
-          "
+"
 
 inherit autotools gettext python-dir
 
 S = "${WORKDIR}/git"
 
 CACHED_CONFIGUREVARS += " \
- ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
+    ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
 "
 
 EXTRA_OECONF = " \
- --disable-rpath \
- --enable-gles \
- --enable-libusb \
- --enable-airplay \
- --disable-optical-drive \
- --enable-external-libraries \
+    --disable-rpath \
+    --enable-gles \
+    --enable-libusb \
+    --enable-airplay \
+    --disable-optical-drive \
+    --enable-external-libraries \
 "
 
 FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
@@ -48,27 +48,27 @@ export STAGING_INCDIR
 export PYTHON_DIR
 
 do_configure() {
-	sh bootstrap
-	oe_runconf
+    sh bootstrap
+    oe_runconf
 }
 
 PARALLEL_MAKE = ""
 
 do_compile_prepend() {
-	for i in $(find . -name "Makefile") ; do
-		sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' $i
-	done
+    for i in $(find . -name "Makefile") ; do
+        sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' $i
+    done
 
-	for i in $(find . -name "*.mak*" -o	-name "Makefile") ; do
-		sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir):-rpath ${libdir}:g' $i
-	done
+    for i in $(find . -name "*.mak*" -o    -name "Makefile") ; do
+        sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' -e 's:-rpath \$(libdir):-rpath ${libdir}:g' $i
+    done
 }
 
 INSANE_SKIP_${PN} = "rpaths"
 
 # on ARM architectures xbmc will use GLES which will make the regular wrapper fail, so start it directly
 do_install_append_arm() {
-	sed -i -e 's:Exec=xbmc:Exec=${libdir}/xbmc/xbmc.bin:g' ${D}${datadir}/applications/xbmc.desktop
+    sed -i -e 's:Exec=xbmc:Exec=${libdir}/xbmc/xbmc.bin:g' ${D}${datadir}/applications/xbmc.desktop
 }
 
 FILES_${PN} += "${datadir}/xsessions ${datadir}/icons"
@@ -81,5 +81,5 @@ RRECOMMENDS_${PN}_append = " libcec \
                              python-re \
                              python-netclient \
                              libcurl \
-                             "
+"
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 glibc-gconv-ibm850"

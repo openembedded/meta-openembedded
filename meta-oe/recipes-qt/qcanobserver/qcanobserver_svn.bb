@@ -19,23 +19,23 @@ S = "${WORKDIR}/qcanobserver/"
 CXXFLAGS += " -DPF_CAN=29  -DAF_CAN=PF_CAN"
 
 do_configure_prepend() {
-	sed -i -e s:/usr/include/qwt5/:${STAGING_INCDIR}:g -e 's:-L/usr/lib/:-L${STAGING_DIR_TARGET}/lib -ldl:g' *.pro
+    sed -i -e s:/usr/include/qwt5/:${STAGING_INCDIR}:g -e 's:-L/usr/lib/:-L${STAGING_DIR_TARGET}/lib -ldl:g' *.pro
 }
 
 do_configure_append() {
-	sed -i -e s:-L/usr/lib::g Makefile
+    sed -i -e s:-L/usr/lib::g Makefile
 }
 
 do_install() {
-	install -d ${D}${datadir}/qcanobserver
-	install -d ${D}${datadir}/qcanobserver/cfg
-	install -d ${D}${datadir}/qcanobserver/lib
-	install -d ${D}${datadir}/qcanobserver/db
+    install -d ${D}${datadir}/qcanobserver
+    install -d ${D}${datadir}/qcanobserver/cfg
+    install -d ${D}${datadir}/qcanobserver/lib
+    install -d ${D}${datadir}/qcanobserver/db
 
-	install -m 0755 ${S}/QCanObserver ${D}${datadir}/qcanobserver
+    install -m 0755 ${S}/QCanObserver ${D}${datadir}/qcanobserver
 
-	install -m 0644 ${WORKDIR}/candemo.xml ${D}${datadir}/qcanobserver/db
-	install -m 0644 ${S}/db/*.xml ${D}${datadir}/qcanobserver/db
+    install -m 0644 ${WORKDIR}/candemo.xml ${D}${datadir}/qcanobserver/db
+    install -m 0644 ${S}/db/*.xml ${D}${datadir}/qcanobserver/db
 }
 
 FILES_${PN}-dbg += "${datadir}/qcanobserver/.debug"

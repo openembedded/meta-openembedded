@@ -14,14 +14,14 @@ S = "${WORKDIR}/git"
 inherit gitpkgv pkgconfig
 
 do_compile() {
-	oe_runmake \
-		CC="${CC}" \
-		CFLAGS="`pkg-config --cflags vte`${CFLAGS}" \
-		LDFLAGS="`pkg-config --libs vte` ${LDFLAGS}"
+    oe_runmake \
+        CC="${CC}" \
+        CFLAGS="`pkg-config --cflags vte`${CFLAGS}" \
+        LDFLAGS="`pkg-config --libs vte` ${LDFLAGS}"
 }
 
 do_install() {
-	oe_runmake PREFIX="${prefix}" DESTDIR="${D}" install
+    oe_runmake PREFIX="${prefix}" DESTDIR="${D}" install
 }
 
 RDEPENDS_${PN}_append_libc-glibc += "glibc-gconv-ibm437"

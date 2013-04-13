@@ -19,29 +19,29 @@ LCD_DEFAULT_DRIVER ?= "curses"
 EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS} --enable-libusb"
 
 do_install () {
-	# binaries
-	install -D -m 0755 server/LCDd ${D}${sbindir}/LCDd
-	install -D -m 0755 clients/lcdproc/lcdproc ${D}${bindir}/lcdproc
+    # binaries
+    install -D -m 0755 server/LCDd ${D}${sbindir}/LCDd
+    install -D -m 0755 clients/lcdproc/lcdproc ${D}${bindir}/lcdproc
 
-	# init scripts
-	install -d ${D}${sysconfdir}/init.d
-	# so far, not fixed :-( and now even uglier :-((
-	cat scripts/init-LCDd.debian | sed -e s'/--oknodo//' -e 's/ -s -f / -s 1 -f 1 /' -e 's/force-reload/force-restart/' -e 's/sleep 1/sleep 4/' > ${D}${sysconfdir}/init.d/lcdd
-	chmod 0755 ${D}${sysconfdir}/init.d/lcdd
-	install -m 0755 scripts/init-lcdproc.debian ${D}${sysconfdir}/init.d/lcdproc
-	sed -i s'/--oknodo//' ${D}${sysconfdir}/init.d/lcdproc
+    # init scripts
+    install -d ${D}${sysconfdir}/init.d
+    # so far, not fixed :-( and now even uglier :-((
+    cat scripts/init-LCDd.debian | sed -e s'/--oknodo//' -e 's/ -s -f / -s 1 -f 1 /' -e 's/force-reload/force-restart/' -e 's/sleep 1/sleep 4/' > ${D}${sysconfdir}/init.d/lcdd
+    chmod 0755 ${D}${sysconfdir}/init.d/lcdd
+    install -m 0755 scripts/init-lcdproc.debian ${D}${sysconfdir}/init.d/lcdproc
+    sed -i s'/--oknodo//' ${D}${sysconfdir}/init.d/lcdproc
 
-	# configuration files
-	install -m 0644 LCDd.conf ${D}${sysconfdir}/LCDd.conf
-	sed -i 's!^DriverPath=.*!DriverPath=${libdir}/lcdproc/!' ${D}${sysconfdir}/LCDd.conf
-	sed -i 's!^Driver=.*!Driver=${LCD_DEFAULT_DRIVER}!' ${D}${sysconfdir}/LCDd.conf
-	install -m 0644 clients/lcdproc/lcdproc.conf ${D}${sysconfdir}/lcdproc.conf
+    # configuration files
+    install -m 0644 LCDd.conf ${D}${sysconfdir}/LCDd.conf
+    sed -i 's!^DriverPath=.*!DriverPath=${libdir}/lcdproc/!' ${D}${sysconfdir}/LCDd.conf
+    sed -i 's!^Driver=.*!Driver=${LCD_DEFAULT_DRIVER}!' ${D}${sysconfdir}/LCDd.conf
+    install -m 0644 clients/lcdproc/lcdproc.conf ${D}${sysconfdir}/lcdproc.conf
 
-	# driver library files
-	install -d ${D}${libdir}/lcdproc
-	for i in server/drivers/*.so; do
-		install -m 0644 $i ${D}${libdir}/lcdproc/
-	done
+    # driver library files
+    install -d ${D}${libdir}/lcdproc
+    for i in server/drivers/*.so; do
+        install -m 0644 $i ${D}${libdir}/lcdproc/
+    done
 }
 
 PACKAGES =+ "lcdd"
@@ -49,8 +49,8 @@ PACKAGES =+ "lcdd"
 RRECOMMENDS_${PN} = "lcdd"
 
 FILES_lcdd = "${sysconfdir}/LCDd.conf \
-	${sbindir}/LCDd \
-	${sysconfdir}/init.d/lcdd"
+    ${sbindir}/LCDd \
+    ${sysconfdir}/init.d/lcdd"
 
 CONFFILES_lcdd = "${sysconfdir}/LCDd.conf"
 CONFFILES_${PN} = "${sysconfdir}/lcdproc.conf"

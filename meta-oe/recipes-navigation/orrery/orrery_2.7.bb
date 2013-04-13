@@ -18,8 +18,8 @@ SRC_URI[sha256sum] = "645166a5e05b2064ab630534a514697fc47b681951e7fe1d635c259cbd
 S = "${WORKDIR}/${PN}"
 
 do_configure_prepend() {
-  # fix DSO issue with binutils-2.22
-  sed -i 's/ -lrt/ -lrt -lm/g' ${S}/Makefile.am
+    # fix DSO issue with binutils-2.22
+    sed -i 's/ -lrt/ -lrt -lm/g' ${S}/Makefile.am
 }
 do_install_append() {
     install -d ${D}${datadir}/orrery

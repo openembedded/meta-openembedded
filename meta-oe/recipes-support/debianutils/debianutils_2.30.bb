@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "d62e98fee5b1a758d83b62eed8d8bdec473677ff782fed89fc4ae3ba3f
 inherit autotools
 
 do_configure_prepend() {
-	sed -i -e 's:tempfile.1 which.1:which.1:g' Makefile.am
+    sed -i -e 's:tempfile.1 which.1:which.1:g' Makefile.am
 }
 
 do_install_append() {
@@ -30,11 +30,9 @@ pkg_prerm_${PN} () {
 if [ "x$D" != "x" ]; then
     echo "can't do u-a offline" ; exit 1
 else
-
     for app in add-shell  installkernel  mkboot  remove-shell run-parts  savelog  sensible-browser  sensible-editor  sensible-pager  tempfile  which ; do
        update-alternatives --remove $app $app.${PN}
     done
-
 fi
 }
 
@@ -42,7 +40,6 @@ pkg_postinst_${PN} () {
 if [ "x$D" != "x" ]; then
     echo "can't do u-a offline" ; exit 1
 else
-
     for app in add-shell  installkernel  mkboot  remove-shell ; do
         update-alternatives --install ${sbindir}/$app $app $app.${PN} 100
     done
@@ -54,7 +51,6 @@ else
     for app in run-parts  tempfile ; do
         update-alternatives --install ${base_bindir}/$app $app $app.${PN} 100
     done
-
 fi
 }
 

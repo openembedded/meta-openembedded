@@ -6,7 +6,7 @@ KLIBC_UTILS_PKGNAME = "klibc-static-utils"
 FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 
 do_install() {
-        :
+    :
 }
 
 PACKAGES_${PN} = "${PN}"

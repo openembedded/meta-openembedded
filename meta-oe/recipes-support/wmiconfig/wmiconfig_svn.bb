@@ -12,7 +12,7 @@ S = "${WORKDIR}/AR6kSDK.build_sw.18/host/tools/wmiconfig"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install() {
-	install -d ${D}${bindir}
-	install -m 0755 wmiconfig ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 0755 wmiconfig ${D}${bindir}
 }
 

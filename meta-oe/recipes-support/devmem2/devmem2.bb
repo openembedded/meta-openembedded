@@ -10,12 +10,12 @@ S = "${WORKDIR}"
 CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
 
 do_compile() {
-	${CC} -o devmem2 devmem2.c ${CFLAGS} ${LDFLAGS}
+    ${CC} -o devmem2 devmem2.c ${CFLAGS} ${LDFLAGS}
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install devmem2 ${D}${bindir}
+    install -d ${D}${bindir}
+    install devmem2 ${D}${bindir}
 }
 
 SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"

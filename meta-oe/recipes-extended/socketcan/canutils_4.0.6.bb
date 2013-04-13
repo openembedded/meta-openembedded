@@ -9,7 +9,7 @@ DEPENDS = "libsocketcan"
 
 TAG = "canutils-${PV}"
 SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git;tag=${TAG} \
-        "
+"
 
 S = "${WORKDIR}/git"
 

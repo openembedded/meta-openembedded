@@ -14,13 +14,13 @@ SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.gz"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = " \
-	--enable-enca \
-	--enable-fontconfig \
-	--enable-png \
+    --enable-enca \
+    --enable-fontconfig \
+    --enable-png \
 "
 
 PACKAGES =+ "${PN}-tests"
 
 FILES_${PN}-tests = " \
-	${libdir}/test/test \
+    ${libdir}/test/test \
 "

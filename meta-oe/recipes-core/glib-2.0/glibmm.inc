@@ -14,11 +14,11 @@ SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}
 inherit autotools pkgconfig
 
 do_install_append() {
-	install -d ${D}${datadir}/glibmm-2.4
-	install -d ${D}${datadir}/aclocal
+    install -d ${D}${datadir}/glibmm-2.4
+    install -d ${D}${datadir}/aclocal
 
-	install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
-	install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/ || true
+    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
+    install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/ || true
 }
 
 FILES_${PN} = "${libdir}/lib*.so.*"

@@ -12,7 +12,7 @@ SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
     file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
     file://maliit-server.desktop \
-    "
+"
 
 SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
 PV = "0.92.3+git${SRCPV}"
@@ -30,7 +30,7 @@ FILES_${PN} += "\
     ${libdir}/maliit/plugins-*/factories/libmaliit-plugins-quick-factory-*.so \
     ${libdir}/qt4/plugins/inputmethods/*.so \
     ${datadir}/applications/maliit-server.desktop \
-    "
+"
 
 FILES_${PN}-dbg += "\
     ${libdir}/maliit-framework-tests \
@@ -38,7 +38,7 @@ FILES_${PN}-dbg += "\
     ${libdir}/maliit/plugins-*/factories/.debug \
     ${libdir}/qt4/plugins/.debug \
     ${libdir}/qt4/plugins/inputmethods/.debug \
-    "
+"
 
 FILES_${PN}-dev += "${datadir}/qt4"
 
@@ -46,7 +46,7 @@ FILES_${PN}-gtk +="\
     ${bindir}/maliit-exampleapp-gtk* \
     \
     ${libdir}/gtk-*/*/immodules/libim-maliit.so\
-    "
+"
 
 EXTRA_QMAKEVARS_PRE = "\
     PREFIX=${prefix} \
@@ -58,7 +58,7 @@ EXTRA_QMAKEVARS_PRE = "\
     CONFIG+=disable-gtk-cache-update \
     CONFIG+=local-install \
     CONFIG+=nosdk \
-    "
+"
 
 EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
 

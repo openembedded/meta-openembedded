@@ -14,7 +14,7 @@ EXTRA_OECONF = "--with-samba-includes=${STAGING_INCDIR} \
                 --with-samba-libs=${STAGING_LIBDIR} \
                 --with-archive-includes=${STAGING_INCDIR} \
                 --with-archive-libs=${STAGING_LIBDIR} \
-               "
+"
 
 FILES_${PN} += "${datadir}/dbus-1/services/*"
 

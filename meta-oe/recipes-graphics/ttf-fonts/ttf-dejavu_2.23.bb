@@ -20,8 +20,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2 \
 S = "${WORKDIR}/dejavu-fonts-ttf-${PV}/ttf"
 
 do_install_append () { 
-	install -d ${D}${sysconfdir}/fonts/conf.d/
-	install -m 0644 ${WORKDIR}/30-dejavu-aliases.conf ${D}${sysconfdir}/fonts/conf.d/
+    install -d ${D}${sysconfdir}/fonts/conf.d/
+    install -m 0644 ${WORKDIR}/30-dejavu-aliases.conf ${D}${sysconfdir}/fonts/conf.d/
 }
 
 PACKAGES = "\

@@ -12,12 +12,12 @@ EXTRA_OEMAKE = ""
 EXTRA_OECONF = " --with-embedded-server "
 
 do_install() {
-        oe_runmake 'DESTDIR=${D}' install
-        mv -f ${D}${libdir}/mysql/* ${D}${libdir}
-        rmdir ${D}${libdir}/mysql
+    oe_runmake 'DESTDIR=${D}' install
+    mv -f ${D}${libdir}/mysql/* ${D}${libdir}
+    rmdir ${D}${libdir}/mysql
 
-        install -d ${D}${bindir}
-        install -m 0755 sql/gen_lex_hash ${D}${bindir}/
+    install -d ${D}${bindir}
+    install -m 0755 sql/gen_lex_hash ${D}${bindir}/
 }
 
 SRC_URI[md5sum] = "32e7373c16271606007374396e6742ad"

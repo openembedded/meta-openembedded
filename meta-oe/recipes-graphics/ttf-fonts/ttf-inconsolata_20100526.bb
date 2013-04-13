@@ -7,20 +7,20 @@ LIC_FILES_CHKSUM = "file://../OFL.txt;md5=969851e3a70122069a4d9ee61dd5a2ed"
 PR = "r0"
 
 SRC_URI = "http://levien.com/type/myfonts/Inconsolata.otf \
-	   file://OFL.txt"
+    file://OFL.txt"
 
 S = "${WORKDIR}/ttf-inconsolata-${PV}"
 
 FILES_${PN} = "${datadir}/fonts/truetype/Inconsolata.ttf \
-	       ${datadir}/doc/ttf-inconsolata/*"
+    ${datadir}/doc/ttf-inconsolata/*"
 
 do_configure() {
-	mv ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
+    mv ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
 }
 
 do_install_append() {
-	install -d ${D}${datadir}/doc/ttf-inconsolata/
-	install -m 0644 ${WORKDIR}/OFL.txt ${D}${datadir}/doc/ttf-inconsolata/
+    install -d ${D}${datadir}/doc/ttf-inconsolata/
+    install -m 0644 ${WORKDIR}/OFL.txt ${D}${datadir}/doc/ttf-inconsolata/
 }
 
 SRC_URI[md5sum] = "0fbe014c1f0fb5e3c71140ff0dc63edf"

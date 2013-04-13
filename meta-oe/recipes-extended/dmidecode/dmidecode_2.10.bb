@@ -10,11 +10,11 @@ SRC_URI = "http://savannah.nongnu.org/download/dmidecode/${P}.tar.bz2"
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 
 do_compile() {
-	oe_runmake
+    oe_runmake
 }
 
 do_install() {
-	oe_runmake DESTDIR="${D}" install
+    oe_runmake DESTDIR="${D}" install
 }
 
 SRC_URI[md5sum] = "3c9c4d55a40b78600f3b43bfa64616f9"

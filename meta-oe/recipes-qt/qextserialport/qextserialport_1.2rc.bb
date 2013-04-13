@@ -15,7 +15,7 @@ inherit qt4x11 pkgconfig
 DEPENDS = "udev"
 
 SRC_URI = " \
-  http://qextserialport.googlecode.com/files/qextserialport-${REAL_PV}.zip \
+    http://qextserialport.googlecode.com/files/qextserialport-${REAL_PV}.zip \
 "
 
 SRC_URI[md5sum] = "ffa061edb9f64666468d18402eee6108"
@@ -26,30 +26,30 @@ S = "${WORKDIR}/qextserialport-${REAL_PV}"
 FILES_${PN} = "${libdir}/libqextserialport${SOLIBS}"
 
 FILES_${PN}-dev = " \
-  ${libdir}/libqextserialport${SOLIBSDEV} \
-  ${libdir}/libqextserialport.prl \
-  ${includedir}/QtExtSerialPort/*.h \
-  ${datadir}/qt4/mkspecs/features/extserialport.prf \
+    ${libdir}/libqextserialport${SOLIBSDEV} \
+    ${libdir}/libqextserialport.prl \
+    ${includedir}/QtExtSerialPort/*.h \
+    ${datadir}/qt4/mkspecs/features/extserialport.prf \
 "
 
 FILES_${PN}-dbg += " \
-  ${libdir}/.debug/libqextserialport.so* \
+    ${libdir}/.debug/libqextserialport.so* \
 "
 
 do_configure_prepend() {
-  # based on the documentation, this line make sure we use udev in linux
-  cd ${S} && echo "linux*:CONFIG += qesp_linux_udev" > .qmake.cache
+    # based on the documentation, this line make sure we use udev in linux
+    cd ${S} && echo "linux*:CONFIG += qesp_linux_udev" > .qmake.cache
 
-  # Hacking hardcoded qmake variables
-  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_HEADERS\],${includedir},g' '{}' ';'
-  find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_LIBS\],${libdir},g' '{}' ';'
-  find *.pro -exec sed -i -e 's,$$\[QMAKE_MKSPECS\],${datadir}/qt4/mkspecs/,g' '{}' ';'
+    # Hacking hardcoded qmake variables
+    find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_HEADERS\],${includedir},g' '{}' ';'
+    find *.pro -exec sed -i -e 's,$$\[QT_INSTALL_LIBS\],${libdir},g' '{}' ';'
+    find *.pro -exec sed -i -e 's,$$\[QMAKE_MKSPECS\],${datadir}/qt4/mkspecs/,g' '{}' ';'
 }
 
 do_install() {
-  export INSTALL_ROOT=${D}
-  oe_runmake install
+    export INSTALL_ROOT=${D}
+    oe_runmake install
 
-  # This is necessary to make it work with the qt based SDK
-  cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|${STAGING_INCDIR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
+    # This is necessary to make it work with the qt based SDK
+    cd ${D}/${datadir}/qt4/mkspecs/features && sed -i -e "s|${STAGING_INCDIR_NATIVE}/qt4|\$(OE_QMAKE_INCDIR_QT)/..|" ./extserialport.prf
 }

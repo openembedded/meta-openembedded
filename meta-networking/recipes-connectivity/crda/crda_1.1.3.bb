@@ -9,7 +9,7 @@ DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
 
 SRC_URI = "http://wireless.kernel.org/download/crda/${P}.tar.bz2;name=crda \
            http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.11-regulatory.bin;name=bin \
-          "
+"
 SRC_URI[crda.md5sum] = "29579185e06a75675507527243d28e5c"
 SRC_URI[crda.sha256sum] = "aa8a7fe92f0765986c421a5b6768a185375ac210393df0605ee132f6754825f0"
 SRC_URI[bin.md5sum] = "e0c8a5ca63fb8bf803213f9a0c90b50b"
@@ -20,19 +20,19 @@ inherit python-dir pythonnative
 EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D}"
 
 do_compile() {
-	oe_runmake all_noverify
+    oe_runmake all_noverify
 }
 
 do_install() {
-	oe_runmake install
+    oe_runmake install
 
-	install -d ${D}${libdir}/crda/
+    install -d ${D}${libdir}/crda/
 
-	install -m 0644 ${WORKDIR}/2013.01.11-regulatory.bin ${D}${libdir}/crda/regulatory.bin
+    install -m 0644 ${WORKDIR}/2013.01.11-regulatory.bin ${D}${libdir}/crda/regulatory.bin
 }
 
 
 RDEPENDS_${PN} = "udev"
 FILES_${PN} += "${libdir}crda/regulatory.bin \
                 ${base_libdir}/udev/rules.d/85-regulatory.rules \
-               "
+"

@@ -3,7 +3,7 @@ require ${BPN}.inc
 PR = "${INC_PR}.0"
 
 SRC_URI = "\
-  ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
 "
 
 SRC_URI[md5sum] = "eb15b6faa1e4a30f80622a1381c670fc"

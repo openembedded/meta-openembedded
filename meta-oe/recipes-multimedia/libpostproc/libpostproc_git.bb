@@ -24,21 +24,21 @@ EXTRA_FFCONF_armv7a = "--cpu=cortex-a8"
 EXTRA_FFCONF ?= ""
 
 EXTRA_OECONF = " \
-        --enable-shared \
-        --enable-pthreads \
-        --enable-gpl \
-        --enable-postproc \
-        \
-        --cross-prefix=${TARGET_PREFIX} \
-        --prefix=${prefix} \
-        \
-        --arch=${TARGET_ARCH} \
-        --target-os="linux" \
-        --enable-cross-compile \
-        --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
-        --extra-ldflags="${TARGET_LDFLAGS}" \
-        --sysroot="${STAGING_DIR_TARGET}" \
-        ${EXTRA_FFCONF} \
+    --enable-shared \
+    --enable-pthreads \
+    --enable-gpl \
+    --enable-postproc \
+    \
+    --cross-prefix=${TARGET_PREFIX} \
+    --prefix=${prefix} \
+    \
+    --arch=${TARGET_ARCH} \
+    --target-os="linux" \
+    --enable-cross-compile \
+    --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
+    --extra-ldflags="${TARGET_LDFLAGS}" \
+    --sysroot="${STAGING_DIR_TARGET}" \
+    ${EXTRA_FFCONF} \
 "
 
 do_configure() {

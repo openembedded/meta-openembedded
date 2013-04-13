@@ -40,7 +40,7 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
                 --without-libradius \
                 --without-gssapi \
                 --without-libpam \
-		--disable-security-context"
+                --disable-security-context"
 
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
 CFLAGS += "-fno-strict-aliasing"

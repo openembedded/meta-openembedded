@@ -8,7 +8,7 @@ DEFAULT_PREFERENCE = "-1"
 SRCNAME_append = "-1.7"
 
 SRC_URI = "\
-  ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
-  file://fix-ecore-fb-initialization.patch \
+    ${E_SVN}/branches;module=${SRCNAME};protocol=http;scmdata=keep \
+    file://fix-ecore-fb-initialization.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"

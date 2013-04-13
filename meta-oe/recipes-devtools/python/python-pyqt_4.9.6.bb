@@ -4,11 +4,11 @@ AUTHOR = "Phil Thomson @ riverbank.co.uk"
 SECTION = "devel/python"
 LICENSE = "GPLv2 & GPLv3 & GPL_EXCEPTION"
 LIC_FILES_CHKSUM = "\
-  file://GPL_EXCEPTION.TXT;md5=b73b0be471db679533dc94781c14af58 \
-  file://GPL_EXCEPTION_ADDENDUM.TXT;md5=c1e04ec2aa0911061005a801abf81e40 \
-  file://OPENSOURCE-NOTICE.TXT;md5=6ad9123620cc04a22c394753ad4767d7 \
-  file://LICENSE.GPL2;md5=276c6b9cad5f85a3af3534299825feff \
-  file://LICENSE.GPL3;md5=eda942b9c6ba7eb0f40fee79e94950d5 \
+    file://GPL_EXCEPTION.TXT;md5=b73b0be471db679533dc94781c14af58 \
+    file://GPL_EXCEPTION_ADDENDUM.TXT;md5=c1e04ec2aa0911061005a801abf81e40 \
+    file://OPENSOURCE-NOTICE.TXT;md5=6ad9123620cc04a22c394753ad4767d7 \
+    file://LICENSE.GPL2;md5=276c6b9cad5f85a3af3534299825feff \
+    file://LICENSE.GPL3;md5=eda942b9c6ba7eb0f40fee79e94950d5 \
 "
 
 DEPENDS = "sip-native python-sip"
@@ -18,8 +18,8 @@ PYQT_OE_VERSION = "Qt_4_8_3"
 PR = "r1"
 
 SRC_URI = "\
-  ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
-  file://pyqt-generated.patch;apply=no \
+    ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
+    file://pyqt-generated.patch;apply=no \
 "
 SRC_URI[md5sum] = "514e1f9597771dc732ba75ba9fa5c6b6"
 SRC_URI[sha256sum] = "a350f9e5c6d8062671c0f29bf1a70824719b18175ce8372c29bf7c1eda44b18d"
@@ -27,11 +27,11 @@ S = "${WORKDIR}/PyQt-x11-gpl-${PV}"
 
 # arm and mips machines need some extra patches
 SRC_URI_append_arm = "\
-  file://qreal_float_support.diff \
+    file://qreal_float_support.diff \
 "
 
 SRC_URI_append_mipsel = "\
-  file://qreal_float_support.diff \
+    file://qreal_float_support.diff \
 "
 
 inherit qt4x11 sip distutils-base
@@ -51,16 +51,16 @@ SIP_MODULES = "QtCore QtDeclarative QtGui QtNetwork QtSql QtSvg QtXml QtWebKit"
 MAKE_MODULES = "qpy ${SIP_MODULES}"
 
 EXTRA_QMAKEVARS_POST += "\
-  INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/Qt \
-  INCLUDEPATH+=${STAGING_INCDIR}/${PYTHON_DIR} \
-  INCLUDEPATH+=../qpy/QtCore \
-  INCLUDEPATH+=../qpy/QtGui \
-  INCLUDEPATH+=../qpy/QtDeclarative \
-  INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtCore \
-  INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtGui \
-  INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtDeclarative \
-  INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtWebKit \
-  INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtNetwork \
+    INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/Qt \
+    INCLUDEPATH+=${STAGING_INCDIR}/${PYTHON_DIR} \
+    INCLUDEPATH+=../qpy/QtCore \
+    INCLUDEPATH+=../qpy/QtGui \
+    INCLUDEPATH+=../qpy/QtDeclarative \
+    INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtCore \
+    INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtGui \
+    INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtDeclarative \
+    INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtWebKit \
+    INCLUDEPATH+=${OE_QMAKE_INCDIR_QT}/QtNetwork \
 "
 FIX_QREAL = "\
 "

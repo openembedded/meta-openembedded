@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "14cfc584cd3714fe8c9a2cdc8388be49e08b5e395d95e6bcd11d4410e2
 
 EXTRA_OEMAKE = "ds9097 ds9097u \
                 SYSTYPE='Linux' \
-               "
+"
 # Fix GNU_HASH QA errors
 TARGET_CC_ARCH += "${CFLAGS} ${LDFLAGS}"
 

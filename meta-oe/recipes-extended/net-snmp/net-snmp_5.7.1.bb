@@ -18,12 +18,12 @@ EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
 EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
 
 do_configure_prepend() {
-        gnu-configize -f
-        # We better change sources and re-autoconf here, but
-        # required autoconf is too new for us.
-        sed -e '/echo.*\".*\\\\.*\"/s/echo/echo -e/g' \
-            -e 's/tail -1/tail -n 1/g'                \
-            -i configure
+    gnu-configize -f
+    # We better change sources and re-autoconf here, but
+    # required autoconf is too new for us.
+    sed -e '/echo.*\".*\\\\.*\"/s/echo/echo -e/g' \
+        -e 's/tail -1/tail -n 1/g' \
+        -i configure
 }
 
 PARALLEL_MAKE = ""

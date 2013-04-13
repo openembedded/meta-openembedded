@@ -21,15 +21,15 @@ EXTRA_OEMAKE = "CC='${CC}'"
 HEADERS = "src/c-client/*.h src/osdep/unix/*.h c-client/auths.c c-client/linkage.c c-client/linkage.h c-client/osdep.h"
 
 do_compile() {
-        echo "SSLINCLUDE=${STAGING_INCDIR} SSLLIB=${STAGING_LIBDIR}" > ${S}/SPECIALS
-        oe_runmake lnp
+    echo "SSLINCLUDE=${STAGING_INCDIR} SSLLIB=${STAGING_LIBDIR}" > ${S}/SPECIALS
+    oe_runmake lnp
 }
 
 do_install() {
-        install -d ${D}${includedir}/c-client
-        install ${HEADERS} ${D}${includedir}/c-client
-        install -d ${D}${libdir}
-        install c-client/c-client.a ${D}${libdir}/libc-client.a
+    install -d ${D}${includedir}/c-client
+    install ${HEADERS} ${D}${includedir}/c-client
+    install -d ${D}${libdir}
+    install c-client/c-client.a ${D}${libdir}/libc-client.a
 }
 
 ALLOW_EMPTY_${PN} = "1"

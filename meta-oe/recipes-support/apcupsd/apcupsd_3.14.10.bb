@@ -15,25 +15,25 @@ EXTRA_OECONF = "--enable-usb \
                 --with-distname=${DISTRO}"
 
 do_configure() {
-	export topdir=${S}
-	cp -a ${S}/autoconf/configure.in ${S}
+    export topdir=${S}
+    cp -a ${S}/autoconf/configure.in ${S}
 
-	if ! [ -d ${S}/platforms/${DISTRO} ] ; then
-		cp -a ${S}/platforms/unknown ${S}/platforms/${DISTRO} 
-	fi
+    if ! [ -d ${S}/platforms/${DISTRO} ] ; then
+        cp -a ${S}/platforms/unknown ${S}/platforms/${DISTRO} 
+    fi
 
-	gnu-configize --force
-	# install --help says '-c' is an ignored option, but it turns out that the argument to -c isn't ignored, so drop the complete '-c path/to/strip' line
-	sed -i -e 's:$(INSTALL_PROGRAM) $(STRIP):$(INSTALL_PROGRAM):g' ${S}/autoconf/targets.mak
-	# Searching in host dirs triggers the QA checks
-	sed -i -e 's:-I/usr/local/include::g' -e 's:-L/usr/local/lib64::g' -e 's:-L/usr/local/lib::g' ${S}/configure
+    gnu-configize --force
+    # install --help says '-c' is an ignored option, but it turns out that the argument to -c isn't ignored, so drop the complete '-c path/to/strip' line
+    sed -i -e 's:$(INSTALL_PROGRAM) $(STRIP):$(INSTALL_PROGRAM):g' ${S}/autoconf/targets.mak
+    # Searching in host dirs triggers the QA checks
+    sed -i -e 's:-I/usr/local/include::g' -e 's:-L/usr/local/lib64::g' -e 's:-L/usr/local/lib::g' ${S}/configure
 
-	# m4 macros are missing, using autotools_do_configure leads to linking errors with gethostname_re
-	oe_runconf
+    # m4 macros are missing, using autotools_do_configure leads to linking errors with gethostname_re
+    oe_runconf
 }
 
 do_install_append() {
-	rm ${D}${datadir}/hal -rf
+    rm ${D}${datadir}/hal -rf
 }
 
 

@@ -11,30 +11,30 @@ SRC_URI[archive.sha256sum] = "1dbe5177df46a9c7250735e05e77129fe7ec04840771accfa8
 
 SRC_URI += " \
             file://system-tools-backends \
-           "
+"
 
 # This needs to move to meta-angstrom
 SRC_URI_append_angstrom = " \
             file://add-angstrom-distro.patch \
-           "
+"
 
 EXTRA_OECONF = " --with-net-dbus=${libdir}/perl5 "
 
 do_configure() {
-	rm missing || true
-	automake --add-missing
-	sed -i -e 's:CC=$(CC):CC="$(CC)":g' ${S}/Net-DBus/Makefile.am
-	sed -i -e 's:CC=$(CC):CC="$(CC)":g' ${S}/Net-DBus/Makefile.in
-	libtoolize --force --install
-	aclocal
+    rm missing || true
+    automake --add-missing
+    sed -i -e 's:CC=$(CC):CC="$(CC)":g' ${S}/Net-DBus/Makefile.am
+    sed -i -e 's:CC=$(CC):CC="$(CC)":g' ${S}/Net-DBus/Makefile.in
+    libtoolize --force --install
+    aclocal
     gnu-configize
-	oe_runconf
-	cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}
+    oe_runconf
+    cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}
 }
 
 do_install_append () {
-	install -d ${D}/${sysconfdir}/init.d
-	install -m 0755 ${WORKDIR}/system-tools-backends ${D}/${sysconfdir}/init.d/	
+    install -d ${D}/${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/system-tools-backends ${D}/${sysconfdir}/init.d/    
 }
 
 INITSCRIPT_NAME = "system-tools-backends"

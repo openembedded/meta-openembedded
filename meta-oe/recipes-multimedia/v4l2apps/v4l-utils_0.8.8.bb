@@ -13,7 +13,7 @@ inherit autotools gettext
 PROVIDES = "libv4l"
 
 SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
-          "
+"
 # 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag
 SRCREV = "0298efdcd1153b8f719b9164548a3f0546f0cb7c"
 
@@ -22,10 +22,10 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF = "--disable-qv4l2 --enable-shared" 
 
 do_configure() {
-	# autotools_do_configure fails with:
-	# | configure.ac:139: error: required file 'build-aux/config.rpath' not found
-	autoreconf -vfi 
-	oe_runconf
+    # autotools_do_configure fails with:
+    # | configure.ac:139: error: required file 'build-aux/config.rpath' not found
+    autoreconf -vfi 
+    oe_runconf
 }
 
 PACKAGES =+ "rc-keymaps libv4l libv4l-dbg libv4l-dev"

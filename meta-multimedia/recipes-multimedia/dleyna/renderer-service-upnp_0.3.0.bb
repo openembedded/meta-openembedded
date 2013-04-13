@@ -14,8 +14,8 @@ SRC_URI[sha256sum] = "d6623d98dd35ee32bc08349b4a22d12101dda38a2ece1e468ff0160e51
 inherit autotools
 
 do_install_append() {
-	install -d ${D}${bindir}
-        install -m 0755 test/rendererconsole.py ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 0755 test/rendererconsole.py ${D}${bindir}
 }
 
 PACKAGES =+ "${PN}-tests"

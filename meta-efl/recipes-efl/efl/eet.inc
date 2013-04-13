@@ -9,16 +9,16 @@ BBCLASSEXTEND = "native"
 INC_PR = "r0"
 
 EXTRA_OECONF = "\
-  --enable-openssl \
-  --enable-cypher \
-  --enable-signature \
-  --disable-coverage \
-  --enable-old-eet-file-format \
-  --disable-assert \
+    --enable-openssl \
+    --enable-cypher \
+    --enable-signature \
+    --disable-coverage \
+    --enable-old-eet-file-format \
+    --disable-assert \
 "
 
 PACKAGES =+ "${PN}-utils"
 
 FILES_${PN}-utils = "\
-  ${bindir}/${PN} \
+    ${bindir}/${PN} \
 "

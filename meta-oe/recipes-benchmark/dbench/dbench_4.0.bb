@@ -8,9 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "popt"
 
 SRC_URI = "\
-  http://samba.org/ftp/tridge/dbench/dbench-${PV}.tar.gz \
-  file://destdir.patch \
-  file://makefile.patch"
+    http://samba.org/ftp/tridge/dbench/dbench-${PV}.tar.gz \
+    file://destdir.patch \
+    file://makefile.patch"
 
 inherit autotools
 

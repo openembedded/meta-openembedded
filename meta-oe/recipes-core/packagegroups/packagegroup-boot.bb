@@ -33,9 +33,9 @@ RDEPENDS_${PN} = "\
     netbase \
     ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
-    "
+"
 
 RRECOMMENDS_${PN} = "\
     kernel \
     ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS} \
-    "
+"

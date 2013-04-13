@@ -12,13 +12,13 @@ SRC_URI[archive.sha256sum] = "b628edfd39e3a6b374ce133f367d3568475eb4e981a367f4f9
 SRC_URI += "file://0001-Fix-glib-includes.patch"
 
 do_configure_prepend() {
-        sed -i -e s:help::g ${S}/Makefile.am
+    sed -i -e s:help::g ${S}/Makefile.am
 }
 
 FILES_${PN} += "${datadir}/icons \
                 ${datadir}/dbus-1 \
                 ${datadir}/gnome/autostart \
-		"
+"
 
 FILES_${PN}-doc += "${datadir}/omf \
                     ${datadir}/gnome/help "

@@ -19,7 +19,7 @@ PACKAGES =+ "dconf-editor"
 FILES_dconf-editor = "${bindir}/dconf-editor ${datadir}/dconf-editor/"
 FILES_${PN} += "${datadir}/dbus-1/ \
                 ${libdir}/gio/modules/*.so \
-               "
+"
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
 
 pkg_postinst_${PN} () {

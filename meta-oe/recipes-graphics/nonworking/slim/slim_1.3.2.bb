@@ -8,19 +8,19 @@ PR = "r1"
 DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SRC_URI = " \
-  http://download.berlios.de/${PN}/${P}.tar.gz \
-  file://0002-Fix-image-handling-integer-overflows.patch \
-  file://0003-Fix-build-failure-with-ld-as-needed.patch \
-  file://0004-Add-support-libpng15.patch \
-  file://0005-Remove-path-of-gcc-amd-g-and-version-of-g.patch \
-  file://0006-Remove-localhost-from-Authenticator-of-pam.patch \
-  file://0007-Fix-tty-slowness.patch \
-  file://0008-restart-Xserver-if-killed.patch \
-  file://slim-dynwm \
-  file://update_slim_wmlist \
-  file://Makefile.oe \
-  file://slim.pamd \
-  file://slim.service \
+    http://download.berlios.de/${PN}/${P}.tar.gz \
+    file://0002-Fix-image-handling-integer-overflows.patch \
+    file://0003-Fix-build-failure-with-ld-as-needed.patch \
+    file://0004-Add-support-libpng15.patch \
+    file://0005-Remove-path-of-gcc-amd-g-and-version-of-g.patch \
+    file://0006-Remove-localhost-from-Authenticator-of-pam.patch \
+    file://0007-Fix-tty-slowness.patch \
+    file://0008-restart-Xserver-if-killed.patch \
+    file://slim-dynwm \
+    file://update_slim_wmlist \
+    file://Makefile.oe \
+    file://slim.pamd \
+    file://slim.service \
 "
 
 SRC_URI[md5sum] = "ca1ae6120e6f4b4969f2d6cf94f47b42"
@@ -28,32 +28,32 @@ SRC_URI[sha256sum] = "f1560125005f253b9b88220598fed7a9575ef405716862c6ca3fcc72db
 
 
 EXTRA_OEMAKE += " \
-  USE_PAM=${@base_contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
-  PREFIX=${prefix} \
-  CFGDIR=${sysconfdir} \
-  MANDIR=${mandir} \
-  DESTDIR=${D} \
-  CFLAGS+=-I${STAGING_INCDIR}/freetype2 \
-  CXXFLAGS+=-I${STAGING_INCDIR}/freetype2 \
+    USE_PAM=${@base_contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
+    PREFIX=${prefix} \
+    CFGDIR=${sysconfdir} \
+    MANDIR=${mandir} \
+    DESTDIR=${D} \
+    CFLAGS+=-I${STAGING_INCDIR}/freetype2 \
+    CXXFLAGS+=-I${STAGING_INCDIR}/freetype2 \
 "
 
 do_compile_prepend() {
-  cp -pP ${WORKDIR}/Makefile.oe ${S}/Makefile
+    cp -pP ${WORKDIR}/Makefile.oe ${S}/Makefile
 }
 
 do_install() {
-  oe_runmake install
-  install -d ${D}${bindir}
-  install -m 0755 ${WORKDIR}/slim-dynwm ${D}${bindir}/
-  install -m 0755 ${WORKDIR}/update_slim_wmlist ${D}${bindir}/
-  install -d ${D}${sysconfdir}/pam.d/
-  install -m 0644 ${WORKDIR}/slim.pamd ${D}${sysconfdir}/pam.d/slim
+    oe_runmake install
+    install -d ${D}${bindir}
+    install -m 0755 ${WORKDIR}/slim-dynwm ${D}${bindir}/
+    install -m 0755 ${WORKDIR}/update_slim_wmlist ${D}${bindir}/
+    install -d ${D}${sysconfdir}/pam.d/
+    install -m 0644 ${WORKDIR}/slim.pamd ${D}${sysconfdir}/pam.d/slim
 
-  install -d ${D}${systemd_unitdir}/system/
-  install -m 0644 ${WORKDIR}/*.service ${D}${systemd_unitdir}/system/
+    install -d ${D}${systemd_unitdir}/system/
+    install -m 0644 ${WORKDIR}/*.service ${D}${systemd_unitdir}/system/
 
-  echo 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
-  echo 'sessionstop_cmd     /usr/bin/sessreg -d -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
+    echo 'sessionstart_cmd    /usr/bin/sessreg -a -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
+    echo 'sessionstop_cmd     /usr/bin/sessreg -d -l $DISPLAY %user' >> ${D}${sysconfdir}/slim.conf
 }
 
 
@@ -62,7 +62,7 @@ FILES_${PN} += "${systemd_unitdir}/system/"
 
 pkg_postinst_${PN} () {
 if test "x$D" != "x"; then
-	exit 1
+    exit 1
 fi
 systemctl enable slim.service
 
@@ -73,7 +73,7 @@ echo "${bindir}/slim" > ${sysconfdir}/X11/default-display-manager
 
 pkg_postrm_${PN} () {
 if test "x$D" != "x"; then
-	exit 1
+    exit 1
 fi
 systemctl disable slim.service
 sed -i /slim/d $D${sysconfdir}/X11/default-display-manager || true

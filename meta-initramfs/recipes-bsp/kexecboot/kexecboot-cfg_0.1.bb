@@ -50,9 +50,9 @@ APPEND=${CMDLINE} ${CMDLINE_DEBUG}
 }
 
 do_install () {
-        install -d ${D}/boot
-        install -m 0644 boot.cfg ${D}/boot/boot.cfg
-        install -m 0644 icon.xpm ${D}/boot/icon.xpm
+    install -d ${D}/boot
+    install -m 0644 boot.cfg ${D}/boot/boot.cfg
+    install -m 0644 icon.xpm ${D}/boot/icon.xpm
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

@@ -40,8 +40,8 @@ LDFLAGS += "-lpthread"
 #PARALLEL_MAKE = ""
 
 do_configure_append () {
-        cp ${WORKDIR}/iconv-detect.h ${S}
-        sed -i 's/-DG_DISABLE_DEPRECATED//g' ${S}/libedataserver/Makefile
+    cp ${WORKDIR}/iconv-detect.h ${S}
+    sed -i 's/-DG_DISABLE_DEPRECATED//g' ${S}/libedataserver/Makefile
 }
 
 EXTRA_OECONF = "--without-openldap --with-dbus --without-bug-buddy \

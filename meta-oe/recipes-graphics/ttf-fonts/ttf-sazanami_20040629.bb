@@ -23,12 +23,12 @@ FILES_ttf-sazanami-mincho = "${datadir}/fonts/truetype/sazanami-mincho.ttf \
                              ${datadir}/doc/ttf-sazanami-mincho/README"
 
 do_install_append() {
-	# README contains the redistribution license
-	install -d ${D}${datadir}/doc/
-	install -d ${D}${datadir}/doc/ttf-sazanami-gothic
-	install -d ${D}${datadir}/doc/ttf-sazanami-mincho
-	install -m 0644 ${S}/README ${D}${datadir}/doc/ttf-sazanami-gothic
-	install -m 0644 ${S}/README ${D}${datadir}/doc/ttf-sazanami-mincho
+    # README contains the redistribution license
+    install -d ${D}${datadir}/doc/
+    install -d ${D}${datadir}/doc/ttf-sazanami-gothic
+    install -d ${D}${datadir}/doc/ttf-sazanami-mincho
+    install -m 0644 ${S}/README ${D}${datadir}/doc/ttf-sazanami-gothic
+    install -m 0644 ${S}/README ${D}${datadir}/doc/ttf-sazanami-mincho
 }
 
 SRC_URI[md5sum] = "ceef10579a75c92483171f3bd7f77df2"

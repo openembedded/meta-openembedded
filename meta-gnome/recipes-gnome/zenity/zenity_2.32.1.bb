@@ -13,6 +13,6 @@ SRC_URI[archive.sha256sum] = "8838be041a07364b62a4281c971392e4a09bb01bb3237a836e
 EXTRA_OECONF += "--disable-scrollkeeper"
 # remove -I/usr/include from zenity_CPPFLAGS
 do_configure_prepend() {
-	sed -i -e '/-I$(includedir)/d' src/Makefile.am
+    sed -i -e '/-I$(includedir)/d' src/Makefile.am
 }
 

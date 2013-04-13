@@ -13,8 +13,8 @@ do_compile() {
     done
 }
 do_install () {
-        install -d ${D}${sysconfdir}/opkg
-        install -m 0644 ${S}/${sysconfdir}/opkg/* ${D}${sysconfdir}/opkg/
+    install -d ${D}${sysconfdir}/opkg
+    install -m 0644 ${S}/${sysconfdir}/opkg/* ${D}${sysconfdir}/opkg/
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"

@@ -19,7 +19,7 @@ do_configure_prepend() {
 }
 
 RDEPENDS_${PN} = "\
-  python-ctypes \
-  python-subprocess \
-  python-misc \
+    python-ctypes \
+    python-subprocess \
+    python-misc \
 "

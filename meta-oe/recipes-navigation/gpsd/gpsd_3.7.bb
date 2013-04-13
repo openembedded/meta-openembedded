@@ -10,14 +10,14 @@ EXTRANATIVEPATH += "chrpath-native"
 PR = "r6"
 
 SRC_URI = "http://download.savannah.gnu.org/releases/${PN}/${P}.tar.gz \
-  file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
-  file://0004-SConstruct-remove-rpath.patch \
-  file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-  file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
-  file://gpsd-default \
-  file://gpsd \
-  file://60-gpsd.rules \
-  file://gpsd.service \
+    file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
+    file://0004-SConstruct-remove-rpath.patch \
+    file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+    file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
+    file://gpsd-default \
+    file://gpsd \
+    file://60-gpsd.rules \
+    file://gpsd.service \
 "
 SRC_URI[md5sum] = "52d9785eaf1a51298bb8900dbde88f98"
 SRC_URI[sha256sum] = "7800c478ee9d7ca7a502b0f892828561b1fbf7bc69d9d38c447c82c3628302ac"
@@ -33,11 +33,11 @@ export STAGING_INCDIR
 export STAGING_LIBDIR
 
 EXTRA_OESCONS = " \
-  sysroot=${STAGING_DIR_TARGET} \
-  libQgpsmm='false' \
-  debug='true' \
-  strip='false' \
-  systemd='${SYSTEMD_OESCONS}' \
+    sysroot=${STAGING_DIR_TARGET} \
+    libQgpsmm='false' \
+    debug='true' \
+    strip='false' \
+    systemd='${SYSTEMD_OESCONS}' \
 "
 # this cannot be used, because then chrpath is not found and only static lib is built
 # target=${HOST_SYS}
@@ -88,11 +88,11 @@ do_install_append() {
 }
 
 pkg_postinst_${PN}-conf() {
-	update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 10
+    update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 10
 }
 
 pkg_postrm_${PN}-conf() {
-	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
+    update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
 }
 
 PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"

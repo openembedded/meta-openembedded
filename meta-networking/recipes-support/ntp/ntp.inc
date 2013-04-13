@@ -20,7 +20,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntpdate.default \
            file://ntpdate.service \
            file://ntpd.service \
-           "
+"
 
 inherit autotools update-rc.d systemd
 
@@ -37,27 +37,27 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           openssl"
 
 do_install_append() {
-	install -d ${D}${sysconfdir}/init.d
-	install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
-	install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
-	install -d ${D}${bindir}
-	install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
+    install -d ${D}${sysconfdir}/init.d
+    install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
+    install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
+    install -d ${D}${bindir}
+    install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
 
-	# Fix hardcoded paths in scripts
-	sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-	sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-	sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-	sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-	sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
+    # Fix hardcoded paths in scripts
+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+    sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+    sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+    sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
 
-	install -d ${D}/${sysconfdir}/default
-	install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
-	install -d ${D}/${sysconfdir}/network/if-up.d
-	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
+    install -d ${D}/${sysconfdir}/default
+    install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
+    install -d ${D}/${sysconfdir}/network/if-up.d
+    ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
 
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
-	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
 }
 
 PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
@@ -89,10 +89,10 @@ FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd $
 FILES_${PN}-tickadj = "${bindir}/tickadj"
 FILES_${PN}-utils = "${bindir}"
 FILES_ntpdate = "${bindir}/ntpdate \
-  ${sysconfdir}/network/if-up.d/ntpdate-sync \
-  ${bindir}/ntpdate-sync \
-  ${sysconfdir}/default/ntpdate \
-  ${systemd_unitdir}/system/ntpdate.service \
+    ${sysconfdir}/network/if-up.d/ntpdate-sync \
+    ${bindir}/ntpdate-sync \
+    ${sysconfdir}/default/ntpdate \
+    ${systemd_unitdir}/system/ntpdate.service \
 "
 
 CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
@@ -104,13 +104,13 @@ INITSCRIPT_PARAMS = "defaults"
 
 pkg_postinst_ntpdate() {
 if test "x$D" != "x"; then
-        exit 1
+    exit 1
 else
-        if ! grep -q -s ntpdate /var/spool/cron/root; then
-                echo "adding crontab"
-                test -d /var/spool/cron || mkdir -p /var/spool/cron
-                echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/root
-        fi
+    if ! grep -q -s ntpdate /var/spool/cron/root; then
+        echo "adding crontab"
+        test -d /var/spool/cron || mkdir -p /var/spool/cron
+        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/root
+    fi
 fi
 }
 

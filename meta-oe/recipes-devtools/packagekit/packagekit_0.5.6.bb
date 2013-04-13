@@ -26,20 +26,20 @@ EXTRA_OECONF = "--with-security-framework=dummy \
                 --disable-local  \
                 --disable-networkmanager \
                 ac_cv_path_XMLTO=no \
-                "
+"
 
 #do_configure_prepend() {
-#	mkdir -p m4
-#	echo "EXTRA_DIST=" > gtk-doc.make
+#    mkdir -p m4
+#    echo "EXTRA_DIST=" > gtk-doc.make
 #}
 
 do_configure_append() {
-	for i in $(find . -name Makefile) ; do
-	        sed -i -e s:${STAGING_DIR_NATIVE}::g \
+    for i in $(find . -name Makefile) ; do
+        sed -i -e s:${STAGING_DIR_NATIVE}::g \
                -e s:${bindir}/mkdir:${STAGING_BINDIR_NATIVE}/mkdir:g \
                -e s:/usr/bin/intltool-merge:${STAGING_BINDIR_NATIVE}/intltool-merge:g \
-	$i
-	done
+               $i
+    done
 }
 
 PACKAGES =+ "${PN}-website"

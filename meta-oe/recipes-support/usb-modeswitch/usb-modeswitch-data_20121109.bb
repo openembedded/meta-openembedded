@@ -9,7 +9,7 @@ SRC_URI[md5sum] = "a7d23a03157871013a0d708ab2b1b6df"
 SRC_URI[sha256sum] = "a74346a471d540ba9da7d7b332ad35ea05ff7375297c0da87da5be675293d5a5"
 
 do_install() {
-	oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D}
 }
 
 RDEPENDS_${PN} = "usb-modeswitch"

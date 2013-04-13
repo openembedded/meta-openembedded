@@ -26,4 +26,4 @@ FILES_${PN} += "${libdir}/xfce4/panel/migrate \
                 ${libdir}/xfce4/panel/wrapper"
 
 FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
-		   "
+"

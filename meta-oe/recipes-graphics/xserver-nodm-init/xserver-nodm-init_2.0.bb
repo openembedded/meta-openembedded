@@ -19,13 +19,13 @@ INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ."
 INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
 
 do_install() {
-	install -d ${D}${sysconfdir}/init.d
-	install xserver-nodm ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/init.d
+    install xserver-nodm ${D}${sysconfdir}/init.d
 
-	install -d ${D}${sysconfdir}/default
-	install -d ${D}${systemd_unitdir}/system
-	install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
-	install -m 0644 ${WORKDIR}/xserver-nodm.service ${D}${systemd_unitdir}/system
+    install -d ${D}${sysconfdir}/default
+    install -d ${D}${systemd_unitdir}/system
+    install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
+    install -m 0644 ${WORKDIR}/xserver-nodm.service ${D}${systemd_unitdir}/system
 }
 
 RDEPENDS_${PN} = "xserver-common (>= 1.30) xinit"

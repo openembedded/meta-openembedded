@@ -16,17 +16,17 @@ do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
 CFLAGS += "-DLINUX_PPDEV"
 
 do_compile() {
-	oe_runmake
+    oe_runmake
 }
 
 do_install() {
-        install -d ${D}/${bindir}
-        install -m 0755 sjf2410 ${D}/${bindir}
+    install -d ${D}/${bindir}
+    install -m 0755 sjf2410 ${D}/${bindir}
 }
 
 do_deploy() {
-        install -d ${DEPLOY_DIR_TOOLS}
-        install -m 0755 sjf2410 ${DEPLOY_DIR_TOOLS}/sjf2410-${PV}
+    install -d ${DEPLOY_DIR_TOOLS}
+    install -m 0755 sjf2410 ${DEPLOY_DIR_TOOLS}/sjf2410-${PV}
 }
 
 addtask deploy before do_build after do_install

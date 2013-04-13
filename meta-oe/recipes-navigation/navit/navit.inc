@@ -18,14 +18,14 @@ INC_PR = "r9"
 inherit autotools gettext
 
 EXTRA_OECONF += " \
-  --disable-binding-python \
-  --disable-samplemap \
-  --enable-avoid-unaligned \
-  --enable-graphics-qt-qpainter \
-  --enable-gui-qml \
-  --enable-svg2png-scaling-flag=32 \
-  --disable-speech-speech-dispatcher \
-  --enable-cache-size=20971520 \
+    --disable-binding-python \
+    --disable-samplemap \
+    --enable-avoid-unaligned \
+    --enable-graphics-qt-qpainter \
+    --enable-gui-qml \
+    --enable-svg2png-scaling-flag=32 \
+    --disable-speech-speech-dispatcher \
+    --enable-cache-size=20971520 \
 "
 
 #  --enable-avoid-float \
@@ -38,19 +38,19 @@ PACKAGES =+ "${PN}-maptool ${PN}-config ${PN}-dbus ${PN}-speech-cmdline ${PN}-sp
 EXTRA_AUTORECONF = " -I m4"
 
 CONFFILES_${PN}-config += "${datadir}/navit/navit.default.xml \
-                    ${datadir}/navit/navit.xml \
-                    ${datadir}/navit/maps.xml \
-                    ${datadir}/navit/osd.xml \
-                    ${datadir}/navit/speech.xml \
-                    ${datadir}/navit/plugins.xml \
-                   "
+    ${datadir}/navit/navit.xml \
+    ${datadir}/navit/maps.xml \
+    ${datadir}/navit/osd.xml \
+    ${datadir}/navit/speech.xml \
+    ${datadir}/navit/plugins.xml \
+"
 
 SRC_URI += "file://navit.xml \
             file://maps.xml \
             file://osd.xml \
             file://speech.xml \
             file://plugins.xml \
-           "
+"
 
 FILES_${PN} += "${libdir}/${PN}/*/*.so ${datadir}/icons"
 FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
@@ -68,21 +68,21 @@ FILES_${PN}-graphics-gtk = " ${libdir}/${PN}/graphics/libgraphics_gtk_drawing_ar
 FILES_${PN}-icons = "/usr/share/navit/xpm/"
 
 do_configure_prepend() {
-  # MOC=`$PKG_CONFIG QtGui --variable=moc_location` returns only /usr/bin/moc4 which is not available on hosts without Qt
-  sed -i "s#MOC=#MOC=${STAGING_DIR_NATIVE}#g" ${S}/configure.in
+    # MOC=`$PKG_CONFIG QtGui --variable=moc_location` returns only /usr/bin/moc4 which is not available on hosts without Qt
+    sed -i "s#MOC=#MOC=${STAGING_DIR_NATIVE}#g" ${S}/configure.in
 }
 
 do_install_append() {
-	# fix QA issue
-	sed -i 's#Categories=GTK;Utility;Geography;#Categories=Graphics;#g' ${D}${datadir}/applications/navit.desktop
+    # fix QA issue
+    sed -i 's#Categories=GTK;Utility;Geography;#Categories=Graphics;#g' ${D}${datadir}/applications/navit.desktop
 
-	rm ${D}${libdir}/${PN}/*/*.la
+    rm ${D}${libdir}/${PN}/*/*.la
 
-        #Use split config
-        mv ${D}${datadir}/navit/navit.xml ${D}${datadir}/navit/navit.default.xml
-        install -m 0644 ${WORKDIR}/navit.xml ${D}${datadir}/navit/navit.xml
-        install -m 0644 ${WORKDIR}/maps.xml ${D}${datadir}/navit/maps.xml
-        install -m 0644 ${WORKDIR}/osd.xml ${D}${datadir}/navit/osd.xml
-        install -m 0644 ${WORKDIR}/speech.xml ${D}${datadir}/navit/speech.xml
-        install -m 0644 ${WORKDIR}/plugins.xml ${D}${datadir}/navit/plugins.xml
+    #Use split config
+    mv ${D}${datadir}/navit/navit.xml ${D}${datadir}/navit/navit.default.xml
+    install -m 0644 ${WORKDIR}/navit.xml ${D}${datadir}/navit/navit.xml
+    install -m 0644 ${WORKDIR}/maps.xml ${D}${datadir}/navit/maps.xml
+    install -m 0644 ${WORKDIR}/osd.xml ${D}${datadir}/navit/osd.xml
+    install -m 0644 ${WORKDIR}/speech.xml ${D}${datadir}/navit/speech.xml
+    install -m 0644 ${WORKDIR}/plugins.xml ${D}${datadir}/navit/plugins.xml
 }

@@ -21,15 +21,15 @@ do_unpack_append() {
 }
 
 do_compile() {
-        oe_runmake CFLAGS='${CFLAGS} -c' -C C/LzmaUtil
-        oe_runmake CXX_C='${CC} ${CFLAGS}' CXX='${CXX} ${CXXFLAGS}' \
-		-C CPP/7zip/Compress/LZMA_Alone
+    oe_runmake CFLAGS='${CFLAGS} -c' -C C/LzmaUtil
+    oe_runmake CXX_C='${CC} ${CFLAGS}' CXX='${CXX} ${CXXFLAGS}' \
+    -C CPP/7zip/Compress/LZMA_Alone
 }
 
 do_install() {
-        install -d ${D}${bindir} ${D}${libdir}
-        install -m 0755 CPP/7zip/Compress/LZMA_Alone/lzma ${D}${bindir}
-        oe_libinstall -a -C C/LzmaUtil liblzma ${D}${libdir}
+    install -d ${D}${bindir} ${D}${libdir}
+    install -m 0755 CPP/7zip/Compress/LZMA_Alone/lzma ${D}${bindir}
+    oe_libinstall -a -C C/LzmaUtil liblzma ${D}${libdir}
 }
 
 BBCLASSEXTEND = "native"

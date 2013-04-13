@@ -14,7 +14,7 @@ SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;protocol=git;branch=m
            file://0001-fix-build-with-KMS-disabled.patch \
            file://0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch \
            file://0001-glamo-driver-remove-references-to-mibstore.patch \   
-          "
+"
 
 S = "${WORKDIR}/git"
 SRCREV = "cb9ed17035a79e49dde26a1e7e2bc5f10fd8144b"

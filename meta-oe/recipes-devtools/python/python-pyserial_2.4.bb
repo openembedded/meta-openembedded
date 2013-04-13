@@ -13,9 +13,9 @@ inherit setuptools
 # FIXME might stop packaging serialwin32 and serialjava files
 
 RDEPENDS_${PN} = "\
-  python-fcntl \
-  python-io \
-  python-stringold \
+    python-fcntl \
+    python-io \
+    python-stringold \
 "
 
 SRC_URI[md5sum] = "eec19df59fd75ba5a136992897f8e468"

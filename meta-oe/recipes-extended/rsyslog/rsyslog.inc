@@ -15,8 +15,8 @@ inherit autotools systemd
 EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
 do_install_append() {
-        install -d ${D}/${sysconfdir}/${PN}
-        install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+    install -d ${D}/${sysconfdir}/${PN}
+    install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
 }
 
 CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"

@@ -12,7 +12,7 @@ SRC_URI += "file://elf.patch \
             file://string.patch \
             file://syscall.patch \
             file://other.patch \
-            "
+"
 
 S = "${WORKDIR}/kexec-tools-${PV}"
 

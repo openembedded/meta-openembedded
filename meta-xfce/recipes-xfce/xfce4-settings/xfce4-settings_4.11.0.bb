@@ -23,9 +23,9 @@ SRC_URI[sha256sum] = "4a4f1e79a58b524f3a6dd030b6fc687671b35566f847e6f516c6f84211
 FILES_${PN} += "${libdir}/xfce4"
 
 do_install_prepend() {
-	# somehow binary files are not patched correctly by oe-patch - so copy them
-	cp ${WORKDIR}/touchscreen/invisible ${S}/cursors
-	cp ${WORKDIR}/touchscreen/wait ${S}/cursors
+    # somehow binary files are not patched correctly by oe-patch - so copy them
+    cp ${WORKDIR}/touchscreen/invisible ${S}/cursors
+    cp ${WORKDIR}/touchscreen/wait ${S}/cursors
 }
 
 RRECOMMENDS_${PN} += "gnome-icon-theme"

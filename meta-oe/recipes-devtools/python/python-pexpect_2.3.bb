@@ -11,11 +11,11 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 inherit distutils
 
 RDEPENDS_${PN} = "\
-  python-core \
-  python-io \
-  python-terminal \
-  python-resource \
-  python-fcntl \
+    python-core \
+    python-io \
+    python-terminal \
+    python-resource \
+    python-fcntl \
 "
 
 

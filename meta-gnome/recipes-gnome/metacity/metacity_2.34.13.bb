@@ -20,10 +20,10 @@ ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/metacity"
 ALTERNATIVE_PRIORITY = "10"
 
 EXTRA_OECONF += "--disable-verbose \
-	         --disable-xinerama"
+             --disable-xinerama"
 
 do_configure_prepend() {
-	sed -i -e 's:$ZENITY:$NOZENITY:g' -e 's:-Werror::g' ${S}/configure.in
+    sed -i -e 's:$ZENITY:$NOZENITY:g' -e 's:-Werror::g' ${S}/configure.in
 }
 
 FILES_${PN} += "${datadir}/themes ${datadir}/gnome-control-center ${datadir}/gnome"

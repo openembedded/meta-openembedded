@@ -18,11 +18,11 @@ S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 inherit allarch
 
 do_install() {
-	install -d ${D}${datadir}/${BPN}
-	cp -a * ${D}${datadir}/${BPN}
+    install -d ${D}${datadir}/${BPN}
+    cp -a * ${D}${datadir}/${BPN}
 
-	install -d ${D}${sysconfdir}/apache2/conf.d
-	install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
+    install -d ${D}${sysconfdir}/apache2/conf.d
+    install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
 }
 
 FILES_${PN} = "${datadir}/${BPN} \

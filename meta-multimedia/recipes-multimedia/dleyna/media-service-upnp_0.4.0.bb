@@ -14,8 +14,8 @@ SRC_URI[sha256sum] = "9cdee47bbbfa3de5aaa5cf3fc9e208ccd97e5079f6d8fa84a6d1f24a1b
 inherit autotools
 
 do_install_append() {
-	install -d ${D}${bindir}
-        install -m 0755 dms-info ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 0755 dms-info ${D}${bindir}
 }
 
 PACKAGES =+ "${PN}-tests"

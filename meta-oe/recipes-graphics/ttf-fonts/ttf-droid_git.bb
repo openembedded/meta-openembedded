@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/android/platform_frameworks_base.git;protocol=git;br
 S = "${WORKDIR}/git/data/fonts"
 
 do_install_prepend() {
-	rm ${S}/Ahem.ttf MTLc3m.ttf DroidSansArabic.ttf DroidSansThai.ttf Clockopia.ttf MTLmr3m.ttf DroidSansHebrew.ttf DroidSansFallbackLegacy.ttf # we're not packaging it
+    rm ${S}/Ahem.ttf MTLc3m.ttf DroidSansArabic.ttf DroidSansThai.ttf Clockopia.ttf MTLmr3m.ttf DroidSansHebrew.ttf DroidSansFallbackLegacy.ttf # we're not packaging it
 }
 
 PACKAGES = "ttf-droid-sans ttf-droid-sans-mono \

@@ -11,11 +11,11 @@ PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
 LCD_DRIVERS_append = "${@base_contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
 
 do_install_append () {
-	# binaries
-	install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
+    # binaries
+    install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
 
-	# configuration files
-	install -D -m 0644 clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
+    # configuration files
+    install -D -m 0644 clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
 }
 
 PACKAGES =+ "lcdvc"

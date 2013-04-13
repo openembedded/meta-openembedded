@@ -13,10 +13,10 @@ PR = "r3"
 inherit autotools systemd
 
 EXTRA_OECONF = " \
-	--disable-libusb \
-	--enable-libudev \
-	--enable-usbdropdir=${libdir}/pcsc/drivers \
-	"
+    --disable-libusb \
+    --enable-libudev \
+    --enable-usbdropdir=${libdir}/pcsc/drivers \
+"
 
 S = "${WORKDIR}/pcsc-lite-${PV}"
 

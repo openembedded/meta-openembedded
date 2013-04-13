@@ -23,7 +23,7 @@ EXTRA_OECMAKE = " \
                  -DLOG_PGSQL=FALSE \
                  -DRADIUS=FALSE \
                  -DNETSNMP=FALSE \
-                "
+"
 FILES_${PN}-dbg += "/usr/lib/${BPN}/.debug/*"
 
 PACKAGES =+ "${PN}-libs"

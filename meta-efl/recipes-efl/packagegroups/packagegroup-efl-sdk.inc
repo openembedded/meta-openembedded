@@ -8,7 +8,7 @@ SDK-EFL = " \
      lua5.1-dev \
      edje-dev \
      elementary-dev \
-    "
+"
 
 SDK-EXTRAS ?= ""
 SDK-EXTRAS_qemux86 ?= " valgrind lttng-ust-dev"

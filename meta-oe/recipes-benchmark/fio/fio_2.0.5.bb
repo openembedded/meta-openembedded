@@ -21,7 +21,7 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS}' LDFLAGS='${LDFLAGS}'"
 
 do_install() {
-	oe_runmake install DESTDIR=${D} bindir=${bindir} mandir=${mandir}
-	install -d ${D}/${docdir}/${PN}
-	cp -a ${S}/examples ${D}/${docdir}/${PN}/
+    oe_runmake install DESTDIR=${D} bindir=${bindir} mandir=${mandir}
+    install -d ${D}/${docdir}/${PN}
+    cp -a ${S}/examples ${D}/${docdir}/${PN}/
 }

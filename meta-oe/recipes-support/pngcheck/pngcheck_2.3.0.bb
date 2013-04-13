@@ -10,13 +10,13 @@ SRC_URI[md5sum] = "980bd6d9a3830fdce746d7fe3c9166ee"
 SRC_URI[sha256sum] = "77f0a039ac64df55fbd06af6f872fdbad4f639d009bbb5cd5cbe4db25690f35f"
 
 do_compile() {
-	oe_runmake -f Makefile.unx INCS=-I${STAGING_DIR_HOST}${incdir} LIBS=${STAGING_DIR_HOST}${libdir}/libz.a
+    oe_runmake -f Makefile.unx INCS=-I${STAGING_DIR_HOST}${incdir} LIBS=${STAGING_DIR_HOST}${libdir}/libz.a
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install pngcheck ${D}${bindir}
-	install png-fix-IDAT-windowsize ${D}${bindir}
-	install pngsplit ${D}${bindir}
+    install -d ${D}${bindir}
+    install pngcheck ${D}${bindir}
+    install png-fix-IDAT-windowsize ${D}${bindir}
+    install pngsplit ${D}${bindir}
 }
 

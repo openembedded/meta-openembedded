@@ -19,12 +19,12 @@ EXTRA_QMAKEVARS_PRE = "\
     PREFIX=${prefix} \
     LIBDIR=${libdir} \
     CONFIG+=nodoc \
-    "
+"
 
 FILES_${PN} += "\
     ${libdir}/maliit \
     ${datadir} \
-    "
+"
 
 FILES_${PN}-dbg += "${libdir}/maliit/plugins-*/.debug"
 

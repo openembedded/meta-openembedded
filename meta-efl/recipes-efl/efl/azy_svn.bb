@@ -15,14 +15,14 @@ BBCLASSEXTEND = "native"
 EXTRA_OECONF += " --disable-mysql-tests"
 
 do_configure_prepend_class-target() {
-  sed -i "s#\./lemon#${STAGING_BINDIR_NATIVE}/azy_lemon#g" ${S}/src/bin/Makefile.am
-  sed -i "s#\$(top_builddir)/src/bin/azy_parser -H -p -o#${STAGING_BINDIR_NATIVE}/azy_parser -H -p -o#g" ${S}/src/tests/Makefile.am
-  sed -i "s#\$(top_builddir)/src/bin/azy_parser -eHn -m#${STAGING_BINDIR_NATIVE}/azy_parser -eHn -m#g" ${S}/src/tests/identi.ca/Makefile.am
+    sed -i "s#\./lemon#${STAGING_BINDIR_NATIVE}/azy_lemon#g" ${S}/src/bin/Makefile.am
+    sed -i "s#\$(top_builddir)/src/bin/azy_parser -H -p -o#${STAGING_BINDIR_NATIVE}/azy_parser -H -p -o#g" ${S}/src/tests/Makefile.am
+    sed -i "s#\$(top_builddir)/src/bin/azy_parser -eHn -m#${STAGING_BINDIR_NATIVE}/azy_parser -eHn -m#g" ${S}/src/tests/identi.ca/Makefile.am
 }
 
 do_install_append_class-native() {
-  install -d ${D}/${bindir}
-  install -m 0755 ${S}/src/bin/lemon ${D}/${bindir}/azy_lemon
+    install -d ${D}/${bindir}
+    install -m 0755 ${S}/src/bin/lemon ${D}/${bindir}/azy_lemon
 }
 
 inherit efl

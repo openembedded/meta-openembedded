@@ -26,10 +26,10 @@ EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb "
 export SYSROOT = "${STAGING_DIR_HOST}"
 
 do_configure() {
-	sed -i -e /docs/d Makefile.am
-	autotools_do_configure
-	# We need native orbit-idl with target idl files. No way to say it in a clean way:
-	find -name Makefile -exec sed -i '/\/usr\/bin\/orbit-idl-2/{s:/usr/bin:${STAGING_BINDIR_NATIVE}:;s:/usr/share:${STAGING_DATADIR}:g}' {} \;
+    sed -i -e /docs/d Makefile.am
+    autotools_do_configure
+    # We need native orbit-idl with target idl files. No way to say it in a clean way:
+    find -name Makefile -exec sed -i '/\/usr\/bin\/orbit-idl-2/{s:/usr/bin:${STAGING_BINDIR_NATIVE}:;s:/usr/share:${STAGING_DATADIR}:g}' {} \;
 }
 
 RDEPENDS_${PN} = "gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash glib-networking"

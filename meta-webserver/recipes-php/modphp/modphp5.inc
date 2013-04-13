@@ -9,7 +9,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://pthread-check-threads-m4.patch \
            file://70_mod_php5.conf \
            file://php-5.3.14-aconf259.patch \
-           "
+"
 
 S = "${WORKDIR}/php-${PV}"
 
@@ -50,45 +50,45 @@ PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--witho
 acpaths = ""
 
 do_configure_prepend () {
-        rm -f build/libtool.m4 ltmain.sh aclocal.m4
-        find . -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
+    rm -f build/libtool.m4 ltmain.sh aclocal.m4
+    find . -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
 }
 
 do_configure_append() {
-	# No libtool, we really don't want rpath set...
-	sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${HOST_SYS}-libtool
-	sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${HOST_SYS}-libtool
+    # No libtool, we really don't want rpath set...
+    sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${HOST_SYS}-libtool
+    sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${HOST_SYS}-libtool
 }
 
 do_install  () {
-	install -d ${D}${libdir}/apache2/modules
-	install -d ${D}${sysconfdir}/apache2/modules.d
-	install -d ${D}${sysconfdir}/php/apache2-php5
-	install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
-	sed -i s,lib/,${libdir}/, ${WORKDIR}/70_mod_php5.conf
-	install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
-	cat ${S}/php.ini-production | \
-		sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
-		> ${D}${sysconfdir}/php/apache2-php5/php.ini
+    install -d ${D}${libdir}/apache2/modules
+    install -d ${D}${sysconfdir}/apache2/modules.d
+    install -d ${D}${sysconfdir}/php/apache2-php5
+    install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
+    sed -i s,lib/,${libdir}/, ${WORKDIR}/70_mod_php5.conf
+    install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
+    cat ${S}/php.ini-production | \
+        sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
+        > ${D}${sysconfdir}/php/apache2-php5/php.ini
 
-	install -d ${D}${bindir}
-	install -m 755 scripts/phpize ${D}${bindir}
-	install -m 755 scripts/php-config ${D}${bindir}
-	cat aclocal-copy/libtool.m4 aclocal-copy/lt~obsolete.m4 aclocal-copy/ltoptions.m4 \
-		aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > build/libtool.m4
+    install -d ${D}${bindir}
+    install -m 755 scripts/phpize ${D}${bindir}
+    install -m 755 scripts/php-config ${D}${bindir}
+    cat aclocal-copy/libtool.m4 aclocal-copy/lt~obsolete.m4 aclocal-copy/ltoptions.m4 \
+        aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > build/libtool.m4
 
-	oe_runmake install-build install-headers INSTALL_ROOT=${D}
+    oe_runmake install-build install-headers INSTALL_ROOT=${D}
 }
 
 SYSROOT_PREPROCESS_FUNCS += "php_sysroot_preprocess"
 
 php_sysroot_preprocess () {
-        install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-        install -m 755 ${D}${bindir}/phpize ${SYSROOT_DESTDIR}${bindir_crossscripts}/
-        install -m 755 ${D}${bindir}/php-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+    install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+    install -m 755 ${D}${bindir}/phpize ${SYSROOT_DESTDIR}${bindir_crossscripts}/
+    install -m 755 ${D}${bindir}/php-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
 
-	sed -i 's!eval echo /!eval echo ${STAGING_DIR_HOST}/!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/phpize
-	sed -i 's!^include_dir=.*!include_dir=${STAGING_INCDIR}/php!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/php-config
+    sed -i 's!eval echo /!eval echo ${STAGING_DIR_HOST}/!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/phpize
+    sed -i 's!^include_dir=.*!include_dir=${STAGING_INCDIR}/php!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/php-config
 }
 
 RDEPENDS_${PN} = "apache2"

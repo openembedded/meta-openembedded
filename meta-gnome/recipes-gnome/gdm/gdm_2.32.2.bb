@@ -18,7 +18,7 @@ SRC_URI += " \
             file://gdm-pam \
             file://Default \
             file://gdm.service.in \
-           "
+"
 
 SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
 SRC_URI[archive.sha256sum] = "034d23af0ea18d86e5543e707212d9297ec7d83f221808968af266dbebc0e703"
@@ -29,36 +29,36 @@ EXTRA_OECONF = " --enable-authentication-scheme=shadow \
                  --disable-scrollkeeper"
 
 do_configure_prepend() {
-	sed -i -e "s:\bdocs::g" ${S}/Makefile.am
+    sed -i -e "s:\bdocs::g" ${S}/Makefile.am
 }
 
 do_install_prepend() {
-	mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
-	cp ${WORKDIR}/%gconf-tree.xml ${D}/var/lib/gdm/.gconf.mandatory/
+    mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
+    cp ${WORKDIR}/%gconf-tree.xml ${D}/var/lib/gdm/.gconf.mandatory/
 }
 
 do_install_append() {
-	install -d ${D}/${sysconfdir}/init.d
-	install -m 0755 ${WORKDIR}/gdm ${D}/${sysconfdir}/init.d/
+    install -d ${D}/${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/gdm ${D}/${sysconfdir}/init.d/
 
-	install -d ${D}/${sysconfdir}/gdm
-	install -m 0644 ${WORKDIR}/gdm.conf ${D}/${sysconfdir}/gdm/
+    install -d ${D}/${sysconfdir}/gdm
+    install -m 0644 ${WORKDIR}/gdm.conf ${D}/${sysconfdir}/gdm/
 
-	install -d ${D}/${sysconfdir}/pam.d
-	install -m 0755 ${WORKDIR}/gdm-pam       ${D}/${sysconfdir}/pam.d/gdm
+    install -d ${D}/${sysconfdir}/pam.d
+    install -m 0755 ${WORKDIR}/gdm-pam       ${D}/${sysconfdir}/pam.d/gdm
 
-	install -d ${D}/${sysconfdir}/gdm/Init
-	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
+    install -d ${D}/${sysconfdir}/gdm/Init
+    install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
 
-	install -d ${D}${systemd_unitdir}/system
-	sed -e 's,%sbindir%,${sbindir},g' \
-		< ${WORKDIR}/gdm.service.in \
-		> ${D}${systemd_unitdir}/system/gdm.service
+    install -d ${D}${systemd_unitdir}/system
+    sed -e 's,%sbindir%,${sbindir},g' \
+        < ${WORKDIR}/gdm.service.in \
+        > ${D}${systemd_unitdir}/system/gdm.service
 }
 
 FILES_${PN} += "${datadir}/icon* \
-		${datadir}/xsession* \
-               "
+    ${datadir}/xsession* \
+"
 
 RDEPENDS_${PN} += "grep dbus-x11 shadow"
 # "libpam-base-files"
@@ -81,8 +81,8 @@ pkg_postinst_${PN} () {
     grep "^gdm:" /etc/passwd > /dev/null || adduser --disabled-password --system --home /var/lib/gdm gdm --ingroup gdm -g gdm
 
 if [ -d /var/lib/gdm ]; then
-  chown -R gdm:gdm /var/lib/gdm
-  chmod 0750 /var/lib/gdm
+    chown -R gdm:gdm /var/lib/gdm
+    chmod 0750 /var/lib/gdm
 fi
 
 # Register up as default dm
@@ -94,5 +94,5 @@ echo "${bindir}/gdm" > ${sysconfdir}/X11/default-display-manager
 pkg_postrm_${PN} () {
     deluser gdm || true
     delgroup gdm || true
-	sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
+    sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
 }

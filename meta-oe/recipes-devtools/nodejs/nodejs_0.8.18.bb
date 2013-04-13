@@ -21,18 +21,18 @@ ARCHFLAGS ?= ""
 
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
-  export LD="${CXX}"
+    export LD="${CXX}"
 
-  ./configure --prefix=${prefix} --without-snapshot ${ARCHFLAGS}
+    ./configure --prefix=${prefix} --without-snapshot ${ARCHFLAGS}
 }
 
 do_compile () {
-  export LD="${CXX}"
-  make BUILDTYPE=Release
+    export LD="${CXX}"
+    make BUILDTYPE=Release
 }
 
 do_install () {
-  oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D}
 }
 
 RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "

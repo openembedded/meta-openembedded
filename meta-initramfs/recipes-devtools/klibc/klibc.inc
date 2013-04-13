@@ -28,26 +28,25 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
 
 SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
                                  file://armv4-fix-v4bx.patch \
-                               "
+"
 SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
                                     file://armv4-fix-v4bx.patch \
-                                  "
+"
 
 SRC_URI += "file://klibc-linux-libc-dev.patch \
             file://prefix.patch \
             file://staging.patch \
-            "
+"
 
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'CROSS_COMPILE=${TARGET_PREFIX}' \
                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
-                "
+"
 
 do_configure () {
-
-        ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
+    ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
 }
 
 THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"

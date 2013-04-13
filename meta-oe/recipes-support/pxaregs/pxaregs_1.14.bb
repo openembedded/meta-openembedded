@@ -17,8 +17,8 @@ do_compile() {
 }
 
 do_install() {
-	install -d ${D}${sbindir}/
-	install -m 0755 pxaregs ${D}${sbindir}/
+    install -d ${D}${sbindir}/
+    install -m 0755 pxaregs ${D}${sbindir}/
 }
 
 SRC_URI[md5sum] = "a43baa88842cd5926dbffb6fb87624f6"

@@ -15,9 +15,9 @@ inherit autotools pkgconfig perlnative gconf
 PR = "r2"
 
 do_configure_prepend() {
-  if [ -f ${S}/configure.in ] ; then
+    if [ -f ${S}/configure.in ] ; then
     mv ${S}/configure.in ${S}/configure.ac
-  fi
+    fi
 }
 
 RRECOMMENDS_${PN} = "gpsd"

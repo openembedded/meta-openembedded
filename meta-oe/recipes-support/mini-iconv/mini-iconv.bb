@@ -17,5 +17,5 @@ SRC_URI[sha256sum] = "3552262bf1bcf8e859a2a3a7adfb0367af8593383e730c492e981477aa
 S = "${WORKDIR}/${PN}"
 
 do_install() {
-	oe_runmake install DESTDIR=${D} PREFIX=${prefix} LIB=${base_libdir}
+    oe_runmake install DESTDIR=${D} PREFIX=${prefix} LIB=${base_libdir}
 }

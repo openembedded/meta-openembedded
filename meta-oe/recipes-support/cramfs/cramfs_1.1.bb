@@ -17,13 +17,13 @@ EXTRA_OEMAKE = "\
 "
 
 do_compile_prepend() {
-        ln -sf GNUmakefile Makefile
+    ln -sf GNUmakefile Makefile
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install mkcramfs ${D}${bindir}
-	install cramfsck ${D}${bindir}
+    install -d ${D}${bindir}
+    install mkcramfs ${D}${bindir}
+    install cramfsck ${D}${bindir}
 }
 
 BBCLASSEXTEND = "native"

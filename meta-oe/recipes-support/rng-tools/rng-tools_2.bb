@@ -13,13 +13,13 @@ SRC_URI[sha256sum] = "1126f0ecc8cab3af14a562cddc5d8ffeef47df7eba34a7aadcdee35a25
 inherit autotools update-rc.d
 
 do_install_append() {
-        install -d "${D}${sysconfdir}/init.d"
-        install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
-        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
-            ${D}${sysconfdir}/init.d/rng-tools
+    install -d "${D}${sysconfdir}/init.d"
+    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
+    sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
+        ${D}${sysconfdir}/init.d/rng-tools
 
-        install -d "${D}${sysconfdir}/default"
-        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+    install -d "${D}${sysconfdir}/default"
+    install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
 }
 
 INITSCRIPT_NAME = "rng-tools"

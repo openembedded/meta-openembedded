@@ -6,16 +6,16 @@ DEPENDS = "alsa-lib"
 PR = "r1"
 
 SRC_URI = "ftp://ftp.alsa-project.org/pub/oss-lib/alsa-oss-${PV}.tar.bz2 \
-	   file://libio.patch \
-	  "
+    file://libio.patch \
+"
 
 inherit autotools
 
 LEAD_SONAME = "libaoss.so.0"
 
 do_configure_prepend () {
-	touch NEWS README AUTHORS ChangeLog
-	sed -i "s/libaoss.so/${LEAD_SONAME}/" ${S}/alsa/aoss.in
+    touch NEWS README AUTHORS ChangeLog
+    sed -i "s/libaoss.so/${LEAD_SONAME}/" ${S}/alsa/aoss.in
 }
 
 SRC_URI[md5sum] = "1b1850c2fc91476a73d50f537cbd402f"

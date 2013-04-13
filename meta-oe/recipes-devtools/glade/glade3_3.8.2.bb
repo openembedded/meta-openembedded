@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "f180a5018eee6e3fe574854cb025af897dd9962b01d17d5752e626876d
 EXTRA_OECONF += "--disable-scrollkeeper"
 
 do_configure_prepend() {
-	sed -i '/^if HAVE_GNOME_DOC_UTILS/,/^endif/d' ${S}/Makefile.am
+    sed -i '/^if HAVE_GNOME_DOC_UTILS/,/^endif/d' ${S}/Makefile.am
 }
 
 FILES_${PN} += "${datadir}/icons"

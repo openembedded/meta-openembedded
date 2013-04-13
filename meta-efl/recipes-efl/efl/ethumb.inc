@@ -8,9 +8,9 @@ INC_PR = "r0"
 inherit efl
 
 EXTRA_OECONF = "\
-  --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-  --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
-  --disable-docs \
+    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+    --disable-docs \
 "
 
 # Some upgrade path tweaking, as in evas

@@ -18,12 +18,12 @@ RDEPENDS_${PN} += "\
        gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
        gst-plugins-good-flac \
        lightmediascanner-test \
-       "
+"
 
 inherit e gettext
 SRC_URI = " \
-  ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
-  file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
+    ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
+    file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
@@ -32,11 +32,11 @@ PR = "r1"
 FILES_${PN} += "${datadir}/icons/"
 
 EXTRA_OECONF = "\
-  --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
 "
 
 do_configure_prepend() {
-       autopoint || touch config.rpath
+    autopoint || touch config.rpath
 }
 
 pkg_postinst_${PN} () {

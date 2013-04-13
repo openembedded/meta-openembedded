@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/liftoff/GateOne.git \
            file://gateone-avahi.service \
            file://server.conf \
            file://gateone.service \
-          "
+"
 
 S = "${WORKDIR}/git"
 
@@ -19,15 +19,15 @@ inherit distutils allarch python-dir systemd
 export prefix = "${localstatedir}/lib"
 
 do_install_append() {
-	install -d ${D}${localstatedir}/log/${BPN}
+    install -d ${D}${localstatedir}/log/${BPN}
 
-	install -m 0755 -d ${D}${sysconfdir}/avahi/services/
-	install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+    install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+    install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
 
-	install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
-	
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
+    
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
 }
 
 FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${localstatedir}/volatile/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
@@ -60,6 +60,6 @@ RDEPENDS_${PN} = "file \
                   python-tornado \
                   python-unixadmin \
                   python-xml \
-                 "
+"
 
 SYSTEMD_SERVICE_${PN} = "gateone.service"

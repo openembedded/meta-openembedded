@@ -20,10 +20,10 @@ S = "${WORKDIR}/mpg123-${PV}"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = " \
-	--enable-shared \
-	${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
-	${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
-	${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '--with-default-audio=alsa', '', d)} \
-	${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '--with-default-audio=pulse', '', d)} \
-	"
+    --enable-shared \
+    ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
+    ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '--with-default-audio=alsa', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '--with-default-audio=pulse', '', d)} \
+"
 

@@ -48,17 +48,17 @@ PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve
 RRECOMMENDS_${PN} += "evas-loader-generic evas-generic-loader-svn"
 
 RRECOMMENDS_${PN} = " \
-  evas-engine-fb \
-  evas-engine-software-generic \
-  evas-engine-software-x11 \
-  evas-engine-software-16 \
-  evas-engine-software-16-x11 \
-  evas-engine-xrender-x11 \
- \
-  evas-loader-png \
-  evas-loader-jpeg \
-  evas-loader-gif \
-  evas-loader-svg \
+    evas-engine-fb \
+    evas-engine-software-generic \
+    evas-engine-software-x11 \
+    evas-engine-software-16 \
+    evas-engine-software-16-x11 \
+    evas-engine-xrender-x11 \
+    \
+    evas-loader-png \
+    evas-loader-jpeg \
+    evas-loader-gif \
+    evas-loader-svg \
 "
 
 # Some upgrade path tweaking

@@ -136,33 +136,33 @@ pkg_postinst_${PN} () {
 
 # Stop apps before uninstall
 pkg_prerm_${PN} () {
-        ${sysconfdir}/init.d/quagga stop
+    ${sysconfdir}/init.d/quagga stop
 }
 
 pkg_prerm_${PN}-ospfd () {
-        ${sysconfdir}/init.d/quagga stop ospfd
+    ${sysconfdir}/init.d/quagga stop ospfd
 }
 
 pkg_prerm_${PN}-ospf6d () {
-        ${sysconfdir}/init.d/quagga stop ospf6d
+    ${sysconfdir}/init.d/quagga stop ospf6d
 }
 
 pkg_prerm_${PN}-babeld () {
-        ${sysconfdir}/init.d/quagga stop babeld
+    ${sysconfdir}/init.d/quagga stop babeld
 }
 
 pkg_prerm_${PN}-bgpd () {
-        ${sysconfdir}/init.d/quagga stop bgpd
+    ${sysconfdir}/init.d/quagga stop bgpd
 }
 
 pkg_prerm_${PN}-ripd () {
-        ${sysconfdir}/init.d/quagga stop ripd
+    ${sysconfdir}/init.d/quagga stop ripd
 }
 
 pkg_prerm_${PN}-ripngd () {
-        ${sysconfdir}/init.d/quagga stop ripngd
+    ${sysconfdir}/init.d/quagga stop ripngd
 }
 
 pkg_prerm_${PN}-isisd () {
-        ${sysconfdir}/init.d/quagga stop isisd
+    ${sysconfdir}/init.d/quagga stop isisd
 }

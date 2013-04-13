@@ -22,10 +22,10 @@ PACKAGES += "${PN}-bin"
 FILES_${PN}-bin = "${bindir}"
 
 do_compile() {
-	(
-		# HACK: build a native binaries need during the build
-		unset CC LD CXX CCLD CFLAGS
-		oe_runmake -C config/util CC="${BUILD_CC}" LD="${BUILD_LD}" CXX="${BUILD_CXX}" LIBS="" makestrs
+    (
+        # HACK: build a native binaries need during the build
+        unset CC LD CXX CCLD CFLAGS
+        oe_runmake -C config/util CC="${BUILD_CC}" LD="${BUILD_LD}" CXX="${BUILD_CXX}" LIBS="" makestrs
     )
     if [ "$?" != "0" ]; then
         exit 1

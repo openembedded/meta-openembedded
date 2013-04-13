@@ -13,7 +13,7 @@ inherit autotools
 BBCLASSEXTEND = "native"
 
 do_configure_prepend() {
-	# workaround for endless do_configure loop:
-	# make: Warning: File `Makefile.am' has modification time 5.3e+04 s in the future
-	touch ${S}/*
+    # workaround for endless do_configure loop:
+    # make: Warning: File `Makefile.am' has modification time 5.3e+04 s in the future
+    touch ${S}/*
 }

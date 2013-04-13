@@ -16,7 +16,7 @@ S = "${WORKDIR}/${PN}-${PV}-Source"
 inherit cmake
 
 do_install() {
-	install -d ${D}/usr/bin
-	install -m 0755 ${S}/bin/synergy* ${D}/usr/bin/
+    install -d ${D}/usr/bin
+    install -m 0755 ${S}/bin/synergy* ${D}/usr/bin/
 }
 

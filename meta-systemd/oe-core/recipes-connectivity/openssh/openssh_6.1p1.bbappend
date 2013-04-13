@@ -13,9 +13,9 @@ inherit systemd
 
 SRC_URI += "file://sshd.socket file://sshd@.service file://sshdgenkeys.service"
 do_install_append() {
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/sshd.socket ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/sshd@.service ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/sshdgenkeys.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/sshd.socket ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/sshd@.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/sshdgenkeys.service ${D}${systemd_unitdir}/system
 }
 

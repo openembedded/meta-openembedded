@@ -18,36 +18,36 @@ RCONFLICTS_${PN} += "task-cli-tools"
 RCONFLICTS_${PN}-debug += "task-cli-tools-debug"
 
 RDEPENDS_${PN} = "\
-  dbus-daemon-proxy \
-  dosfstools \
-  htop \
-  iptables \
-  lsof \
-  mbuffer \
-  mtd-utils \
-  nano \
-  nfs-utils-client \
-  nmon \
-  powertop \
-  screen \
-  socat \
-  sysstat \
+    dbus-daemon-proxy \
+    dosfstools \
+    htop \
+    iptables \
+    lsof \
+    mbuffer \
+    mtd-utils \
+    nano \
+    nfs-utils-client \
+    nmon \
+    powertop \
+    screen \
+    socat \
+    sysstat \
 "
 
 RDEPENDS_${PN}-debug = "\
-  evtest \
-  devmem2 \
-  i2c-tools \
-  gdb \
-  procps \
-  pxaregs \
-  s3c24xx-gpio \
-  s3c64xx-gpio \
-  serial-forward \
-  strace \
-  tcpdump \
+    evtest \
+    devmem2 \
+    i2c-tools \
+    gdb \
+    procps \
+    pxaregs \
+    s3c24xx-gpio \
+    s3c64xx-gpio \
+    serial-forward \
+    strace \
+    tcpdump \
 "
 
 RRECOMMENDS_${PN}-debug = "\
-  ltrace \
+    ltrace \
 "

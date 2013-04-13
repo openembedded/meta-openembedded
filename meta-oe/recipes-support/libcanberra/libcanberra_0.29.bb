@@ -14,15 +14,15 @@ SRC_URI[md5sum] = "2594093a5d61047bd9cc87e955f86df8"
 SRC_URI[sha256sum] = "127a5ef07805856d63758e5180ebfb241d1f80094fd301c287591a15b8cfcd72"
 
 EXTRA_OECONF = "\
-  --enable-null \
-  --enable-alsa \
-  --enable-gstreamer \
-  --enable-pulse \
-  --disable-oss \
-  --enable-gtk \
-  --enable-gtk3 \
-  --disable-tdb \
-  --disable-lynx \
+    --enable-null \
+    --enable-alsa \
+    --enable-gstreamer \
+    --enable-pulse \
+    --disable-oss \
+    --enable-gtk \
+    --enable-gtk3 \
+    --disable-tdb \
+    --disable-lynx \
 "
 
 python populate_packages_prepend() {

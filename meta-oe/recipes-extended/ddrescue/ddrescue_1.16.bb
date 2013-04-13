@@ -1,7 +1,7 @@
 SUMMARY = "Data recovery tool"
 DESCRIPTION = "GNU ddrescue is a data recovery tool. It copies data \
- from one file or block device (hard disc, cdrom, etc) to another, \
- trying hard to rescue data in case of read errors."
+    from one file or block device (hard disc, cdrom, etc) to another, \
+    trying hard to rescue data in case of read errors."
 HOMEPAGE = "http://www.gnu.org/software/ddrescue/ddrescue.html"
 SECTION = "console"
 LICENSE = "GPLv3+"

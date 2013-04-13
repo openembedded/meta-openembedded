@@ -9,14 +9,14 @@ PR = "r1"
 LICENSE = "LGPLv2.1 GPLv2"
 LIC_FILES_CHKSUM= "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
                    file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
-                  "
+"
 
 DEPENDS = "virtual/libusb0"
 DEPENDS_virtclass-native = "virtual/libusb0-native"
 
 SRC_URI = "http://www.intra2net.com/en/developer/libftdi/download/libftdi-${PV}.tar.gz \
            file://libtool-m4.patch \
-          "
+"
 SRC_URI[md5sum] = "e6e25f33b4327b1b7aa1156947da45f3"
 SRC_URI[sha256sum] = "567c9d2c42d92fc401c5aba2deed45ffb2433990984e816bcdf31e441aef06be"
 

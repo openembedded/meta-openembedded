@@ -13,6 +13,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://src/contacts-gtk.c;endline=21;md5=1c2e3f55b215635eff4ba76f7696f8ee"
 
 do_configure_prepend () {
-	# It used 8 spaces to instead of a tab, but it doesn't work for us
-	sed -i 's/^        $(MAKE) dist distdir=/\t$(MAKE) dist distdir/' Makefile.am
+    # It used 8 spaces to instead of a tab, but it doesn't work for us
+    sed -i 's/^        $(MAKE) dist distdir=/\t$(MAKE) dist distdir/' Makefile.am
 }

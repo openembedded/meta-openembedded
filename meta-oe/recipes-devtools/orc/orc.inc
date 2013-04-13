@@ -21,5 +21,5 @@ python populate_packages_prepend () {
 }
 
 do_compile_prepend_virtclass-native () {
-	sed -i -e 's#/tmp#.#g' ${S}/orc/orccodemem.c
+    sed -i -e 's#/tmp#.#g' ${S}/orc/orccodemem.c
 }

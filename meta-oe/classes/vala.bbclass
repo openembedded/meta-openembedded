@@ -12,7 +12,7 @@ export XDG_DATA_DIRS = "${STAGING_DATADIR}"
 
 # Package additional files
 FILES_${PN}-dev += "\
-  ${datadir}/vala/vapi/*.vapi \
-  ${datadir}/vala/vapi/*.deps \
-  ${datadir}/gir-1.0 \
+    ${datadir}/vala/vapi/*.vapi \
+    ${datadir}/vala/vapi/*.deps \
+    ${datadir}/gir-1.0 \
 "

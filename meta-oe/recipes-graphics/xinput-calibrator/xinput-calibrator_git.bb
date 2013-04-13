@@ -19,15 +19,15 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF += "--with-gui=x11"
 
 do_install_append() {
-        install -d ${D}${bindir}
-        install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
+    install -d ${D}${bindir}
+    install -m 0755 scripts/xinput_calibrator_pointercal.sh ${D}${bindir}/xinput_calibrator_once.sh
 
-        install -d ${D}${sysconfdir}/xdg/autostart
-        sed -i -e 's,^Exec=.*,Exec=${bindir}/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
-        install -m 0644 scripts/xinput_calibrator.desktop ${D}${sysconfdir}/xdg/autostart
+    install -d ${D}${sysconfdir}/xdg/autostart
+    sed -i -e 's,^Exec=.*,Exec=${bindir}/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
+    install -m 0644 scripts/xinput_calibrator.desktop ${D}${sysconfdir}/xdg/autostart
 
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/xinput-calibrator.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/xinput-calibrator.service ${D}${systemd_unitdir}/system
 }
 
 FILES_${PN} += "${sysconfdir}/xdg/autostart"

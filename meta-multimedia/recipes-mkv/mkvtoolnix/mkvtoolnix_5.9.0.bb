@@ -13,18 +13,18 @@ SRC_URI[sha256sum] = "d913f531331c3332d2fb334c872ea19bfea7293dfedc4bf33ae7162e4e
 inherit autotools
 
 EXTRA_OECONF = " --with-boost-libdir=${STAGING_LIBDIR} \
-               "
+"
 
 # remove some hardcoded searchpaths
 do_configure_prepend() {
-	sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e s:/usr/local/include:${STAGING_INCDIR}:g ac/ebml.m4
+    sed -i -e s:/usr/local/lib:${STAGING_LIBDIR}:g -e s:/usr/local/include:${STAGING_INCDIR}:g ac/ebml.m4
 }
 
 # Yeah, no makefile
 do_compile() {
-	./drake
+    ./drake
 }
 
 do_install() {
-	./drake install DESTDIR=${D}
+    ./drake install DESTDIR=${D}
 }

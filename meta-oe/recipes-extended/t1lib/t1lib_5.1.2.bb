@@ -22,8 +22,8 @@ EXTRA_OECONF = "--with-x --without-athena"
 EXTRA_OEMAKE = "without_doc"
 
 do_configure() {
-	rm -f ${S}/ac-tools/aclocal.m4
-	autotools_do_configure
+    rm -f ${S}/ac-tools/aclocal.m4
+    autotools_do_configure
 }
 
 FILES_${PN} += " ${datadir}/t1lib/t1lib.config"

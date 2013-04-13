@@ -20,15 +20,15 @@ CVSSRC = "${WORKDIR}/abi"
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
 FILES_${PN} += " \
-		${datadir}/icons/* \
-		${datadir}/mime-info \
-		${datadir}/abiword-${SHRT_VER}/glade \
-		${datadir}/abiword-${SHRT_VER}/system.profile-en \
-		${datadir}/abiword-${SHRT_VER}/system.profile-en-GB \
-  "
+    ${datadir}/icons/* \
+    ${datadir}/mime-info \
+    ${datadir}/abiword-${SHRT_VER}/glade \
+    ${datadir}/abiword-${SHRT_VER}/system.profile-en \
+    ${datadir}/abiword-${SHRT_VER}/system.profile-en-GB \
+"
 
-#		${datadir}/abiword-${SHRT_VER}/templates/normal.awt \
-#		${datadir}/abiword-${SHRT_VER}/templates/normal.awt-en_GB \
+#    ${datadir}/abiword-${SHRT_VER}/templates/normal.awt \
+#    ${datadir}/abiword-${SHRT_VER}/templates/normal.awt-en_GB \
 
 inherit autotools pkgconfig
 
@@ -40,10 +40,10 @@ PARALLEL_MAKE = ""
 # --disable-exports options
 
 EXTRA_OECONF = " --enable-embedded=poky    \
-		 --disable-printing   \
-		 --with-sys-wv 	     \
-		 --disable-exports    \
-		 --disable-spellcheck"
+    --disable-printing \
+    --with-sys-wv \
+    --disable-exports \
+    --disable-spellcheck"
 
 # TODO -- refactor this, so that instead of two strings and profiles
 # packages we have lots of locale packages, each with a set of strings and
@@ -51,14 +51,14 @@ EXTRA_OECONF = " --enable-embedded=poky    \
 #
 PACKAGES += " abiword-strings abiword-systemprofiles"
 
-FILES_abiword-strings 		+= "${datadir}/abiword-${SHRT_VER}/strings"
-FILES_abiword-systemprofiles 	+= "${datadir}/abiword-${SHRT_VER}/system.profile*"
+FILES_abiword-strings += "${datadir}/abiword-${SHRT_VER}/strings"
+FILES_abiword-systemprofiles += "${datadir}/abiword-${SHRT_VER}/system.profile*"
 
 # AbiWord configure.ac does not play nicely with autoreconf
 # so use the autogen.sh script that comes with AbiWord
 #
 do_configure() {
-	cd ${S}
-	export NOCONFIGURE="no"; ./autogen.sh
-	oe_runconf
+    cd ${S}
+    export NOCONFIGURE="no"; ./autogen.sh
+    oe_runconf
 }

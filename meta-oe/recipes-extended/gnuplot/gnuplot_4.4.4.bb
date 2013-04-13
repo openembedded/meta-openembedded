@@ -3,11 +3,11 @@ require gnuplot.inc
 PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${PN}-${PV}.tar.gz;name=archive \
-   http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
-   file://subdirs.patch \
-   file://gnuplot.desktop \
-   file://gnuplot.png \
-   file://automake-1.12.x.patch \
+    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
+    file://subdirs.patch \
+    file://gnuplot.desktop \
+    file://gnuplot.png \
+    file://automake-1.12.x.patch \
 "
 
 SRC_URI[archive.md5sum] = "97a43328e81e57ebed7f135ca0c07e82"

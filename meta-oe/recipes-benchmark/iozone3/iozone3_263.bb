@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://iozone.c;beginline=237;endline=241;md5=ab42a6185fd044
 
 
 SRC_URI = "http://www.iozone.org/src/current/iozone3_263.tar \
-	   file://copyright.txt \
-           file://fileop-arm.patch \
-           "
+    file://copyright.txt \
+    file://fileop-arm.patch \
+"
 SRC_URI[md5sum] = "44fd88df361ec4508e10c8d6615245fa"
 SRC_URI[sha256sum] = "920fde1a3843539570e2df4aa611e74df102e52d363c5973d5a9d15bdf976461"
 
@@ -23,26 +23,26 @@ EXTRA_OEMAKE = "linux CC='${CC}'"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install() {
-       install -d ${D}${bindir} \
-                  ${D}${mandir}/man1 \
-		  ${D}${datadir}/doc/${PN}/examples
+    install -d ${D}${bindir} \
+        ${D}${mandir}/man1 \
+    ${D}${datadir}/doc/${PN}/examples
 
-       install -m 0755 ${S}/iozone ${D}${bindir}
-       install -m 0755 ${S}/fileop ${D}${bindir}
-       install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/iozone.1 ${D}${mandir}/man1/
-       install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${PN}/
+    install -m 0755 ${S}/iozone ${D}${bindir}
+    install -m 0755 ${S}/fileop ${D}${bindir}
+    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/iozone.1 ${D}${mandir}/man1/
+    install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${PN}/
 
-       install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${PN}/examples
-       install -m 0644 ${S}/client_list ${D}${datadir}/doc/${PN}/examples
-       install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${PN}/examples
+    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${PN}/examples
+    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${PN}/examples
+    install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${PN}/examples
 
-       install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${PN}/examples
-       install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${PN}/examples
-       install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${PN}/examples
+    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${PN}/examples
+    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${PN}/examples
+    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${PN}/examples
 
-       install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Iozone_ps.gz ${D}${datadir}/doc/${PN}/
-       install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/IOzone_msword_98.pdf ${D}${datadir}/doc/${PN}/
-       install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Run_rules.doc ${D}${datadir}/doc/${PN}/
+    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Iozone_ps.gz ${D}${datadir}/doc/${PN}/
+    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/IOzone_msword_98.pdf ${D}${datadir}/doc/${PN}/
+    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Run_rules.doc ${D}${datadir}/doc/${PN}/
 }
 
 FILES_${PN} += "${datadir}/doc/${PN}/copyright.txt"
@@ -66,7 +66,7 @@ FILES_${PN} += "${datadir}/doc/${PN}/copyright.txt"
 #
 # Marcin,
 #
-#         Re-distribution is permitted as long as the copyright is
+#     Re-distribution is permitted as long as the copyright is
 #     maintained and the source code is not changed. I do not
 #     see a problem with your mods to enable fileop for Linux-arm,
 #     as these mods have been returned to the Iozone folks,

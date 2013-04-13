@@ -9,8 +9,8 @@ PR = "r0"
 
 SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.tar.gz \
            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
-	   file://nostrip.patch \
-           "
+           file://nostrip.patch \
+"
 SRC_URI[md5sum] = "bbcb48e8aa6ec1abff9775b89f84af91"
 SRC_URI[sha256sum] = "90fb63b1a9d448076aa9f3e3c74b298965f98e03c824e9a4d241fffe8eb3a130"
 

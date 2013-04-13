@@ -15,5 +15,5 @@ inherit autotools
 
 # ZNC has a custom autogen.sh that states that this command is needed *and* expected to fail
 do_configure_prepend() {
-	automake --add-missing || true
+    automake --add-missing || true
 }

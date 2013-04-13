@@ -15,10 +15,10 @@ RPROVIDES_${PN} += "task-x11-illume"
 RREPLACES_${PN} += "task-x11-illume"
 RCONFLICTS_${PN} += "task-x11-illume"
 RDEPENDS_${PN} = "\
-  packagegroup-core-x11-xserver \
-  packagegroup-core-x11-utils \
-  \
-  e-wm \
-  ${ECONFIG} \
-  ${ETHEME} \
+    packagegroup-core-x11-xserver \
+    packagegroup-core-x11-utils \
+    \
+    e-wm \
+    ${ECONFIG} \
+    ${ETHEME} \
 "

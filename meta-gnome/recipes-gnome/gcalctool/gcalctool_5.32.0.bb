@@ -14,5 +14,5 @@ SRC_URI[sha256sum] = "346f645c0fdef900642f6e9a2c18e7ba9a7ca9bc62fe2b08eb418f065a
 inherit autotools pkgconfig gsettings
 
 do_configure_prepend() {
-	sed -i -e "s: help: :g" ${S}/Makefile.am
+    sed -i -e "s: help: :g" ${S}/Makefile.am
 }

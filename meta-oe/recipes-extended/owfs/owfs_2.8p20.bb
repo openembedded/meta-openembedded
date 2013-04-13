@@ -29,13 +29,13 @@ EXTRA_OECONF = " \
                  --disable-owphp \
                  --disable-owpython \
                  --disable-owperl \
-                 "
+"
 
 do_install_prepend() {
-        install -d ${D}${sysconfdir}/default/
-        install -d ${D}${sysconfdir}/init.d/
-        install -m 0755 ${WORKDIR}/owhttpd ${D}${sysconfdir}/init.d/owhttpd
-        install -m 0755 ${WORKDIR}/owserver ${D}${sysconfdir}/init.d/owserver
+    install -d ${D}${sysconfdir}/default/
+    install -d ${D}${sysconfdir}/init.d/
+    install -m 0755 ${WORKDIR}/owhttpd ${D}${sysconfdir}/init.d/owhttpd
+    install -m 0755 ${WORKDIR}/owserver ${D}${sysconfdir}/init.d/owserver
 }
 
 PACKAGES =+ "owftpd owhttpd owserver owshell libowcapi libow libownet owmon owtap"

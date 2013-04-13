@@ -23,68 +23,68 @@ do_install_append() {
 }
 
 PACKAGES += "\
-  ${PN}-zsh \
-  ${PN}-test \
-  ${PN}-protocols \
-  ${PN}-bin \
-  ${PN}-conch \
-  ${PN}-lore \
-  ${PN}-mail \
-  ${PN}-names \
-  ${PN}-news \
-  ${PN}-runner \
-  ${PN}-web \
-  ${PN}-words \
-  ${PN}-flow \
-  ${PN}-pair \
-  ${PN}-core \
+    ${PN}-zsh \
+    ${PN}-test \
+    ${PN}-protocols \
+    ${PN}-bin \
+    ${PN}-conch \
+    ${PN}-lore \
+    ${PN}-mail \
+    ${PN}-names \
+    ${PN}-news \
+    ${PN}-runner \
+    ${PN}-web \
+    ${PN}-words \
+    ${PN}-flow \
+    ${PN}-pair \
+    ${PN}-core \
 "
 
 RDEPENDS_${PN} = "python-core python-zopeinterface"
 RDEPENDS_${PN} += "\
-  ${PN}-bin \
-  ${PN}-conch \
-  ${PN}-lore \
-  ${PN}-mail \
-  ${PN}-names \
-  ${PN}-news \
-  ${PN}-runner \
-  ${PN}-web \
-  ${PN}-words \
+    ${PN}-bin \
+    ${PN}-conch \
+    ${PN}-lore \
+    ${PN}-mail \
+    ${PN}-names \
+    ${PN}-news \
+    ${PN}-runner \
+    ${PN}-web \
+    ${PN}-words \
 "
 
 ALLOW_EMPTY_${PN} = "1"
 FILES_${PN} = ""
 
 FILES_${PN}-test = " \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
 "
 
 FILES_${PN}-protocols = " \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
 "
 
 FILES_${PN}-zsh = " \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
 "
 
 FILES_${PN}-bin = " \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/_c_urlarg.so \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/cBanana.so \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/_c_urlarg.so \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/cBanana.so \
 "
 
 FILES_${PN}-conch = " \
-  ${bindir}/ckeygen \
-  ${bindir}/tkconch \
-  ${bindir}/conch \
-  ${bindir}/conchftp \
-  ${bindir}/cftp \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_conch.py* \
-  ${libdir}/${PYTHON_DIR}/site-packages/twisted/conch  \
+    ${bindir}/ckeygen \
+    ${bindir}/tkconch \
+    ${bindir}/conch \
+    ${bindir}/conchftp \
+    ${bindir}/cftp \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_conch.py* \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/conch  \
 "
 
 FILES_${PN}-core = " \

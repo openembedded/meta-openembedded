@@ -22,12 +22,12 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
 inherit autotools update-rc.d
 
 do_install() {
-        # Install init script and default settings
-        install -m 0755 -d ${D}${sysconfdir}/default ${D}${sysconfdir}/init.d
-        install -m 0644 ${WORKDIR}/pppoe-server.default ${D}${sysconfdir}/default/pppoe-server
-        install -m 0755 ${WORKDIR}/pppoe-server.init ${D}${sysconfdir}/init.d/pppoe-server
-        # Install
-        oe_runmake -C ${S} RPM_INSTALL_ROOT=${D} docdir=${docdir} install
+    # Install init script and default settings
+    install -m 0755 -d ${D}${sysconfdir}/default ${D}${sysconfdir}/init.d
+    install -m 0644 ${WORKDIR}/pppoe-server.default ${D}${sysconfdir}/default/pppoe-server
+    install -m 0755 ${WORKDIR}/pppoe-server.init ${D}${sysconfdir}/init.d/pppoe-server
+    # Install
+    oe_runmake -C ${S} RPM_INSTALL_ROOT=${D} docdir=${docdir} install
 }
 
 # Insert server package before main package

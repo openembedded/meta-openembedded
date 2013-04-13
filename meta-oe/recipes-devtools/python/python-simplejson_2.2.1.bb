@@ -17,11 +17,11 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 inherit distutils
 
 RDEPENDS_${PN} = "\
-  python-core \
-  python-re \
-  python-io \
-  python-netserver \
-  python-numbers \
+    python-core \
+    python-re \
+    python-io \
+    python-netserver \
+    python-numbers \
 "
 
 

@@ -3,11 +3,11 @@ require gsoap_${PV}.inc
 DEPENDS = "gsoap-native openssl"
 
 do_install_append() {
-   install -d ${D}${libdir}
-   for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++ libgsoap++ libgsoapck
-   do
-       oe_libinstall -C gsoap $lib ${D}${libdir}
-   done
+    install -d ${D}${libdir}
+    for lib in libgsoapssl libgsoapssl++ libgsoap libgsoapck++ libgsoap++ libgsoapck
+    do
+        oe_libinstall -C gsoap $lib ${D}${libdir}
+    done
 }
 
 FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"

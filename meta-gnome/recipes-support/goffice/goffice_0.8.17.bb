@@ -19,25 +19,25 @@ SRC_URI[archive.sha256sum] = "dd8caef5fefffbc53938fa619de9f58e7c4dc71a1803de1340
 FILES_${PN}-dbg += "${libdir}/goffice/${PV}/plugins/*/.debug"
 
 RRECOMMENDS_${PN} = " \
-  goffice-plugin-plot-barcol \
-  goffice-plugin-plot-distrib \
-  goffice-plugin-plot-pie \
-  goffice-plugin-plot-radar \
-  goffice-plugin-plot-surface \
-  goffice-plugin-plot-xy \
-  goffice-plugin-reg-linear \
-  goffice-plugin-reg-logfit \
-  goffice-plugin-smoothing \
+    goffice-plugin-plot-barcol \
+    goffice-plugin-plot-distrib \
+    goffice-plugin-plot-pie \
+    goffice-plugin-plot-radar \
+    goffice-plugin-plot-surface \
+    goffice-plugin-plot-xy \
+    goffice-plugin-reg-linear \
+    goffice-plugin-reg-logfit \
+    goffice-plugin-smoothing \
 "
 
 FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-            ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-            ${base_bindir}/* ${base_sbindir}/* \
-            ${base_libdir}/*${SOLIBS} \
-            ${datadir}/${PN} \
-            ${datadir}/pixmaps ${datadir}/applications \
-            ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
-            ${libdir}/bonobo/servers"
+    ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+    ${base_bindir}/* ${base_sbindir}/* \
+    ${base_libdir}/*${SOLIBS} \
+    ${datadir}/${PN} \
+    ${datadir}/pixmaps ${datadir}/applications \
+    ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
+    ${libdir}/bonobo/servers"
 
 PACKAGES_DYNAMIC += "^goffice-plugin-.*"
 

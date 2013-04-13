@@ -44,9 +44,9 @@ PACKAGES =+ "${PN}-utils"
 RDEPENDS_${PN}-utils = "cpp cpp-symlinks embryo-tests"
 
 RRECOMMENDS_${PN}-utils = "\
-  evas-saver-png \
-  evas-saver-jpeg \
-  evas-saver-eet \
+    evas-saver-png \
+    evas-saver-jpeg \
+    evas-saver-eet \
 "
 
 DEBIAN_NOAUTONAME_${PN}-utils = "1"
@@ -54,10 +54,10 @@ DEBIAN_NOAUTONAME_${PN}-utils = "1"
 AUTO_LIBNAME_PKGS = ""
 
 FILES_${PN}-utils = "\
-  ${bindir}/edje_* \
-  ${bindir}/inkscape2edc \
-  ${libdir}/edje/utils/epp \
-  ${datadir}/edje/include/edje.inc \
+    ${bindir}/edje_* \
+    ${bindir}/inkscape2edc \
+    ${libdir}/edje/utils/epp \
+    ${datadir}/edje/include/edje.inc \
 "
 
 FILES_${PN} += "${libdir}/${PN}/modules/*/*/module.so \

@@ -8,11 +8,11 @@ SRC_URI = "http://poppler.freedesktop.org/${PN}-${PV}.tar.gz"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "\
-  --enable-xpdf-headers \
-  --disable-gtk-test \
-  --disable-poppler-qt \
-  --disable-poppler-qt4 \
-  --enable-zlib \
+    --enable-xpdf-headers \
+    --disable-gtk-test \
+    --disable-poppler-qt \
+    --disable-poppler-qt4 \
+    --enable-zlib \
 "
 
 # check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points

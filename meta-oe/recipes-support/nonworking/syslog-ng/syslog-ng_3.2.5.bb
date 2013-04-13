@@ -2,8 +2,8 @@ require syslog-ng.inc
 PR = "${INC_PR}.1"
 
 SRC_URI += " \
-  file://syslog-ng.conf \
-  file://initscript \
+    file://syslog-ng.conf \
+    file://initscript \
 "
 
 SRC_URI[md5sum] = "60737452ce898f9dc7170dfdc9bfd732"

@@ -21,11 +21,11 @@ FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
 FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
 
 do_compile_append() {
-        for i in $(find ${S} -name "*.pc") ; do
-            sed -i -e s:${STAGING_DIR_TARGET}::g \
-                   -e s:/${TARGET_SYS}::g \
-                      $i
-        done
+    for i in $(find ${S} -name "*.pc") ; do
+        sed -i -e s:${STAGING_DIR_TARGET}::g \
+               -e s:/${TARGET_SYS}::g \
+                  $i
+    done
 }
 
 

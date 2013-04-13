@@ -15,38 +15,38 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
 inherit autotools pythonnative
 
 EXTRA_OECONF = " \
-	--with-python=${PYTHON} \
-	--without-allegrocl \
-	--without-android \
-	--without-boost \
-	--without-chicken \
-	--without-clisp \
-	--without-csharp \
-	--without-d \
-	--without-gcj \
-	--without-go \
-	--without-guile \
-	--without-java \
-	--without-lua \
-	--without-mzscheme \
-	--without-ocaml \
-	--without-octave \
-	--without-perl5 \
-	--without-pike \
-	--without-php \
-	--without-python3 \
-	--without-r \
-	--without-ruby \
-	--without-tcl \
+    --with-python=${PYTHON} \
+    --without-allegrocl \
+    --without-android \
+    --without-boost \
+    --without-chicken \
+    --without-clisp \
+    --without-csharp \
+    --without-d \
+    --without-gcj \
+    --without-go \
+    --without-guile \
+    --without-java \
+    --without-lua \
+    --without-mzscheme \
+    --without-ocaml \
+    --without-octave \
+    --without-perl5 \
+    --without-pike \
+    --without-php \
+    --without-python3 \
+    --without-r \
+    --without-ruby \
+    --without-tcl \
 "
 
 BBCLASSEXTEND = "native"
 
 do_configure() {
-	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/Tools/config
-	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/Tools/config
-	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
-	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
-	oe_runconf
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/Tools/config
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/Tools/config
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
+    oe_runconf
 }
 

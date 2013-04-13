@@ -27,13 +27,13 @@ SRC_URI[archive.sha256sum] = "25db8ec026c4bf47f0ef5cc7e2712f2aad175bd7fb8e4952ef
 EXTRA_OECONF = "--disable-scrollkeeper --disable-eds --enable-bonobo=no --with-in-process-applets=none"
 
 do_configure_prepend() {
-	gnome-doc-prepare --automake
-	sed -i -e s:help:: ${S}/Makefile.am
+    gnome-doc-prepare --automake
+    sed -i -e s:help:: ${S}/Makefile.am
 }
 
 pkg_postinst_${PN}_append () {
-	gconftool-2 --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
-		--direct --load /etc/gconf/schemas/panel-default-setup.entries
+    gconftool-2 --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults \
+        --direct --load /etc/gconf/schemas/panel-default-setup.entries
 }
 
 PACKAGES =+ "libpanel-applet"
@@ -44,6 +44,6 @@ FILES_${PN} =+ "${datadir}/gnome* \
                 ${datadir}/icons \
                 ${datadir}/PolicyKit \
                 ${libdir}/bonobo \
-               "
+"
 
 

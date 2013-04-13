@@ -17,17 +17,17 @@ PR = "r2"
 SRCREV_FORMAT = "source"
 
 SRC_URI = "\
-  svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;protocol=http;subdir=src \
-  svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
-  svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
-  file://CMakeLists.txt \
-  file://bison-2.6.patch \
+    svn://svn.webkit.org/repository/webkit/trunk;module=Source;name=source;protocol=http;subdir=src \
+    svn://svn.webkit.org/repository/webkit/trunk/;module=WebKitLibraries;protocol=http;subdir=src \
+    svn://svn.webkit.org/repository/webkit/trunk/;module=Tools;protocol=http;subdir=src \
+    file://CMakeLists.txt \
+    file://bison-2.6.patch \
 "
 
 S = "${WORKDIR}/src"
 
 do_configure_prepend() {
-  cp ${WORKDIR}/CMakeLists.txt ${S};
+    cp ${WORKDIR}/CMakeLists.txt ${S};
 }
 
 inherit cmake lib_package pkgconfig perlnative pythonnative

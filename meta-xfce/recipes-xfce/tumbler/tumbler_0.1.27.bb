@@ -20,7 +20,7 @@ FILES_${PN} += "${datadir}/dbus-1/services \
                 ${libdir}/tumbler-1/tumblerd \
                 ${libdir}/tumbler-1/plugins/*.so \
                 ${libdir}/tumbler-1/plugins/cache/*.so \
-               "
+"
 
 FILES_${PN}-dev += "${libdir}/tumbler-1/plugins/*.la \
                     ${libdir}/tumbler-1/plugins/cache/*.la"

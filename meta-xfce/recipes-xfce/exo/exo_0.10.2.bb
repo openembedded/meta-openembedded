@@ -27,10 +27,10 @@ PACKAGES =+ "exo-csource"
 # pyxfce see http://comments.gmane.org/gmane.comp.desktop.xfce.devel.version4/19560
 FILES_${PN} += "${datadir}/xfce4/ \
                 ${libdir}/xfce4/exo-1 \
-               "
+"
 
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug \
-                   "
+"
 
 FILES_exo-csource += "${bindir}/exo-csource"
 

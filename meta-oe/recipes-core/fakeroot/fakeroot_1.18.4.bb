@@ -6,18 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 PR = "r0"
 
 SRC_URI = "\
-  ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
+    ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \
 "
 
 inherit autotools
 
 do_configure_prepend() {
-        mkdir -p ${S}/build-aux
+    mkdir -p ${S}/build-aux
 }
 
 do_install_append() {
-        install -d ${D}${includedir}/fakeroot
-        install -m 644 *.h ${D}${includedir}/fakeroot
+    install -d ${D}${includedir}/fakeroot
+    install -m 644 *.h ${D}${includedir}/fakeroot
 }
 
 # fakeroot needs getopt which is provided by the util-linux package

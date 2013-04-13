@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng"
 SRC_URI = "${SOURCEFORGE_MIRROR}/matplotlib/matplotlib-${PV}.tar.gz \
            file://fix_setup.patch \
            file://fix_setupext.patch \
-	  "
+"
 
 S = "${WORKDIR}/matplotlib-${PV}"
 
@@ -19,9 +19,9 @@ EXTRA_OECONF = "--disable-docs --with-python-includes=${STAGING_INCDIR}/../"
 inherit distutils
 
 do_compile_prepend() {
-         BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
-         ${STAGING_BINDIR_NATIVE}/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
-         true
+    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
+    ${STAGING_BINDIR_NATIVE}/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
+    true
 }
 
 # need to export these variables for python-config to work

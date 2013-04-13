@@ -11,7 +11,7 @@ DEPENDS = "python-numpy v4l-utils libav gtk+ libtool swig swig-native python jpe
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
            file://opencv-fix-pkgconfig-generation.patch \
-           "
+"
 
 SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
 SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
@@ -32,7 +32,7 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
                  -DWITH_GTK=ON \
                  -DCMAKE_SKIP_RPATH=ON \
                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
-                "
+"
 
 inherit distutils-base pkgconfig cmake
 
@@ -81,6 +81,6 @@ FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS_python-opencv = "python-core python-numpy"
 
 do_install_append() {
-	cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
-	sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
+    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
+    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
 }

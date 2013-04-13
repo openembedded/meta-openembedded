@@ -14,9 +14,9 @@ SRC_URI[sha256sum] = "2d96bcf92638b8ec5c91d379f5ec2e7b15133adeb2ba22066d48bf3239
 EXTRA_OECONF += " --disable-docs "
 
 do_install_append () {
-        ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
-        ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so.7
-        ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so
+    ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
+    ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so.7
+    ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so
 }
 
 PACKAGES =+ "libxaw6 libxaw7 libxaw8"

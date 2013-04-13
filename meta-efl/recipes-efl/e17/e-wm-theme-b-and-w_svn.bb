@@ -18,14 +18,14 @@ SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};protocol=http"
 S = "${WORKDIR}/${SRCNAME}/e"
 
 do_compile() {
-	# unfortunately hardcoded edje_cc in Makefile     
-	sed -i "s#\tedje_cc#\t${STAGING_BINDIR_NATIVE}/edje_cc#g" Makefile
-	make
+    # unfortunately hardcoded edje_cc in Makefile     
+    sed -i "s#\tedje_cc#\t${STAGING_BINDIR_NATIVE}/edje_cc#g" Makefile
+    make
 }
 
 do_install() {
-        install -d ${D}${datadir}/enlightenment/data/themes/
-        install -m 0644 ${S}/b_and_w.edj ${D}${datadir}/enlightenment/data/themes/
+    install -d ${D}${datadir}/enlightenment/data/themes/
+    install -m 0644 ${S}/b_and_w.edj ${D}${datadir}/enlightenment/data/themes/
 }
 
 FILES_${PN} = "${datadir}/enlightenment/data/themes/"

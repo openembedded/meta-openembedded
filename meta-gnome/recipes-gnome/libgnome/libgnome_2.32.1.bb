@@ -16,8 +16,8 @@ EXTRA_OECONF += "--disable-gtk-doc"
 
 do_configure_prepend() {
     sed -i -e s:docs::g ${S}/Makefile.am
-	echo "EXTRA_DIST = version.xml" > gnome-doc-utils.make
-	echo "EXTRA_DIST = version.xml" > gtk-doc.make
+    echo "EXTRA_DIST = version.xml" > gnome-doc-utils.make
+    echo "EXTRA_DIST = version.xml" > gtk-doc.make
 }
 
 FILES_${PN} += "${libdir}/bonobo/servers ${libdir}/bonobo/monikers/*.so \

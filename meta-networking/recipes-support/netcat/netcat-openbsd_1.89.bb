@@ -19,14 +19,14 @@ S = "${WORKDIR}/${BPN}-${PV}.orig"
 do_configure[noexec] = "1"
 
 do_compile() {
-	cd ${S}
-        while read line; do patch -p1 <debian/patches/$line; done <debian/patches/series
-	pkgrel=4
-	oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
+    cd ${S}
+    while read line; do patch -p1 <debian/patches/$line; done <debian/patches/series
+    pkgrel=4
+    oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
 }
 
 do_install() {
-        install -d ${D}${bindir}
-        install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
+    install -d ${D}${bindir}
+    install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
 }
 ALTERNATIVE_PRIORITY = "50"

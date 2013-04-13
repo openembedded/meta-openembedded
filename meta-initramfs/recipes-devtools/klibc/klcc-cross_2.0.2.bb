@@ -14,14 +14,14 @@ FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 inherit cross
 
 do_configure () {
-        :
+    :
 }
 
 do_compile() {
-        oe_runmake klcc
+    oe_runmake klcc
 }
 
 do_install() {
-        install -d ${D}${base_bindir}
-        install -m 0755 klcc/klcc ${D}${base_bindir}/${TARGET_PREFIX}klcc
+    install -d ${D}${base_bindir}
+    install -m 0755 klcc/klcc ${D}${base_bindir}/${TARGET_PREFIX}klcc
 }

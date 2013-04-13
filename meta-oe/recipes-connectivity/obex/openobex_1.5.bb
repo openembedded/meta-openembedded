@@ -6,7 +6,7 @@ DEPENDS = "virtual/libusb0 bluez4"
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
                     file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
-                   "
+"
 
 SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/openobex-${PV}.tar.gz \
            file://disable-cable-test.patch \
@@ -21,8 +21,8 @@ EXTRA_OECONF = "--enable-apps --enable-syslog --enable-dump \
                 --with-usb=${STAGING_LIBDIR}/.. --with-bluez=${STAGING_LIBDIR}/.."
 
 do_install_append() {
-	install -d ${D}${datadir}/aclocal
-	install -m 0644 ${S}/openobex.m4 ${D}${datadir}/aclocal
+    install -d ${D}${datadir}/aclocal
+    install -m 0644 ${S}/openobex.m4 ${D}${datadir}/aclocal
 }
 
 PACKAGES += "openobex-apps"

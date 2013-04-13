@@ -14,8 +14,8 @@ EXTRA_OECONF = "--disable-option-checking"
 
 # NOTE: autotools_stage_all does nothing here, we need to do it manually
 do_install_append() {
-	install -d ${D}${includedir}/libmodplug
-	install -m 0644 ${S}/src/modplug.h ${D}${includedir}/libmodplug
-	install -m 0644 ${S}/src/modplug.h ${D}${includedir}/
+    install -d ${D}${includedir}/libmodplug
+    install -m 0644 ${S}/src/modplug.h ${D}${includedir}/libmodplug
+    install -m 0644 ${S}/src/modplug.h ${D}${includedir}/
 }
 

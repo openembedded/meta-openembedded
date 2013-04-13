@@ -21,17 +21,17 @@ inherit autotools pkgconfig binconfig update-rc.d systemd
 EXTRA_OECONF = "--disable-static \
                 --disable-nls \
                ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
-               "
+"
 
 do_install_append () {
-	install -m 0755 -d ${D}${sysconfdir}/init.d
-	install -m 755 ${WORKDIR}/cherokee.init ${D}${sysconfdir}/init.d/cherokee
+    install -m 0755 -d ${D}${sysconfdir}/init.d
+    install -m 755 ${WORKDIR}/cherokee.init ${D}${sysconfdir}/init.d/cherokee
 
-	# clean up .la files for plugins
-	rm -f ${D}${libdir}/cherokee/*.la
+    # clean up .la files for plugins
+    rm -f ${D}${libdir}/cherokee/*.la
 
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/cherokee.service ${D}${systemd_unitdir}/system
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/cherokee.service ${D}${systemd_unitdir}/system
 }
 
 # Put -dev near the front so we can move the .la files into it with a wildcard
@@ -45,7 +45,7 @@ FILES_libcherokee-base = "${libdir}/libcherokee-base${SOLIBS}"
 CONFFILES_${PN} = " \
                    ${sysconfdir}/cherokee/cherokee.conf \
                    ${sysconfdir}/init.d/cherokee \
-                  "
+"
 
 INITSCRIPT_NAME = "cherokee"
 INITSCRIPT_PARAMS = "defaults 91 91"

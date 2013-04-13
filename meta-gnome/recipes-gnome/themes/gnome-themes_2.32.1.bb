@@ -13,7 +13,7 @@ EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
 inherit gnome perlnative
 
 do_configure_prepend() {
-	sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libdir}/icon-naming-utils:g' configure.in
+    sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libdir}/icon-naming-utils:g' configure.in
 }
 
 PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"

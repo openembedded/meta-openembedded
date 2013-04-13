@@ -8,21 +8,21 @@ INC_PR = "r3"
 inherit autotools gettext pkgconfig gconf perlnative
 
 EXTRA_OECONF = " \
-		--enable-vv \
-		--disable-perl \
-		--disable-tcl \
-		--disable-gevolution \
-		--disable-schemas-install \
-		--x-includes=${STAGING_INCDIR} \
-		--x-libraries=${STAGING_LIBDIR} \
-		--enable-gnutls=yes \
-		--with-ncurses-headers=${STAGING_INCDIR} \
-		--with-gnutls-includes=${STAGING_INCDIR} \
-		--with-gnutls-libs=${STAGING_LIBDIR} \
-		"
+        --enable-vv \
+        --disable-perl \
+        --disable-tcl \
+        --disable-gevolution \
+        --disable-schemas-install \
+        --x-includes=${STAGING_INCDIR} \
+        --x-libraries=${STAGING_LIBDIR} \
+        --enable-gnutls=yes \
+        --with-ncurses-headers=${STAGING_INCDIR} \
+        --with-gnutls-includes=${STAGING_INCDIR} \
+        --with-gnutls-libs=${STAGING_LIBDIR} \
+"
 
 do_configure_prepend() {
-	touch ${S}/po/Makefile
+    touch ${S}/po/Makefile
 }
 
 OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
@@ -50,7 +50,7 @@ FILES_finch-dbg      = "${bindir}/.debug/finch \
                         ${libdir}/finch/.debug"
 
 FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
-	       ${datadir}/applications"
+           ${datadir}/applications"
 RRECOMMENDS_${PN} = "${PN}-data libpurple-plugin-ssl-gnutls libpurple-protocol-irc libpurple-protocol-xmpp"
 
 FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"

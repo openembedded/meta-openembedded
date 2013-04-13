@@ -21,18 +21,18 @@ VPXTARGET_armv7a = "armv7-linux-gcc"
 VPXTARGET ?= "generic-gnu"
 
 CONFIGUREOPTS = " \
-          --target=${VPXTARGET} \
-          --enable-vp8 \
-          --enable-libs \
-          --disable-install-docs \
+    --target=${VPXTARGET} \
+    --enable-vp8 \
+    --enable-libs \
+    --disable-install-docs \
 "
 do_configure() {
-	${S}/configure ${CONFIGUREOPTS}
+    ${S}/configure ${CONFIGUREOPTS}
 }
 do_compile() {
-	oe_runmake
+    oe_runmake
 }
 do_install() {
-	oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D}
 }
 

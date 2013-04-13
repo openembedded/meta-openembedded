@@ -16,7 +16,7 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF += "--enable-maintainer-mode"
 
 do_configure_prepend() {
-	NOCONFIGURE=yes ./autogen.sh
+    NOCONFIGURE=yes ./autogen.sh
 }
 
 FILES_${PN} += "${datadir}/xfce4/closebutton/themes"

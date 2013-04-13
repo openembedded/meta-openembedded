@@ -10,11 +10,11 @@ INC_PR = "r0"
 SRCNAME = "evas_generic_loaders"
 
 EXTRA_OECONF = " \
-  --enable-poppler \
-  --enable-svg \
-  --disable-gstreamer \
-  --disable-libraw \
-  --disable-spectre \
+    --enable-poppler \
+    --enable-svg \
+    --disable-gstreamer \
+    --disable-libraw \
+    --disable-spectre \
 "
 
 python populate_packages_prepend () {

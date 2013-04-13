@@ -16,13 +16,13 @@ S = "${WORKDIR}/qcanobserver/DeviceLib/linux/SocketCAN"
 CXXFLAGS += " -DPF_CAN=29  -DAF_CAN=PF_CAN"
 
 do_configure_prepend() {
-	sed -i s:/usr/include/qwt5/:${STAGING_INCDIR}:g *.pro
+    sed -i s:/usr/include/qwt5/:${STAGING_INCDIR}:g *.pro
 }
 
 do_install() {
-	install -d ${D}${datadir}/qcanobserver/lib
+    install -d ${D}${datadir}/qcanobserver/lib
 
-	install -m 0755 ${S}/lib* ${D}${datadir}/qcanobserver/lib/
+    install -m 0755 ${S}/lib* ${D}${datadir}/qcanobserver/lib/
 }
 
 FILES_${PN} += "${datadir}/qcanobserver/lib"

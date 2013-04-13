@@ -29,17 +29,17 @@ EXTRA_QMAKEVARS_POST += " TEMPLATE=lib \
 
 
 do_configure_prepend() {
-	cat siplib.sbf.in | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, | sed s,@CFG_MODULE_BASENAME@,sip, > siplib.pro
-	cat siplib.c.in | sed s,@CFG_MODULE_BASENAME@,sip, > siplib.c
-	cat sip.h.in | sed -e s,@CFG_MODULE_NAME@,sip,g > sip.h
+    cat siplib.sbf.in | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, | sed s,@CFG_MODULE_BASENAME@,sip, > siplib.pro
+    cat siplib.c.in | sed s,@CFG_MODULE_BASENAME@,sip, > siplib.c
+    cat sip.h.in | sed -e s,@CFG_MODULE_NAME@,sip,g > sip.h
 }
 
 do_install() {
-	install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/
-	install -m 0755 libsip.so.1.0.0 ${D}${libdir}/${PYTHON_DIR}/site-packages/sip.so
-	# sipconfig.py sipdistutils.py
-	install -d ${D}${includedir}
-	install -m 0644 ../siplib/sip.h ${D}${includedir}/sip.h
+    install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/
+    install -m 0755 libsip.so.1.0.0 ${D}${libdir}/${PYTHON_DIR}/site-packages/sip.so
+    # sipconfig.py sipdistutils.py
+    install -d ${D}${includedir}
+    install -m 0644 ../siplib/sip.h ${D}${includedir}/sip.h
 }
 
 FILES_${PN} = "${libdir}/${PYTHON_DIR}/site-packages/sip.so"

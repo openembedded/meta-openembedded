@@ -11,7 +11,7 @@ do_compile() {
 }
 
 do_install() {
-	oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D}
 }
 
 FILES_${PN} += "${datadir}"

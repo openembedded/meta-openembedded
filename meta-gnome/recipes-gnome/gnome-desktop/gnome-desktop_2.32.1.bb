@@ -16,8 +16,8 @@ DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils"
 EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
 
 do_configure_prepend () {
-	cp ${STAGING_DATADIR_NATIVE}/gnome-common/data/omf.make ${S}
-	sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
+    cp ${STAGING_DATADIR_NATIVE}/gnome-common/data/omf.make ${S}
+    sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
 }
 
 PACKAGES =+ "libgnome-desktop"

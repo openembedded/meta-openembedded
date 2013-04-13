@@ -19,6 +19,6 @@ SRC_URI += "file://gnome-stock-pixbufs.h file://no-pixbuf-csource.patch"
 EXTRA_OECONF = "--disable-gtk-doc"
 
 do_configure_prepend() {
-	install -m 0644 ${WORKDIR}/gnome-stock-pixbufs.h ${S}/libgnomeui/pixmaps/gnome-stock-pixbufs.h
+    install -m 0644 ${WORKDIR}/gnome-stock-pixbufs.h ${S}/libgnomeui/pixmaps/gnome-stock-pixbufs.h
 }
 

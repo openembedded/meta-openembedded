@@ -25,9 +25,9 @@ INITSCRIPT_PARAMS_${PN}-sensord = "defaults 67"
 S = "${WORKDIR}/lm_sensors-${PV}"
 
 EXTRA_OEMAKE = 'LINUX=${STAGING_KERNEL_DIR} EXLDFLAGS="${LDFLAGS}" \
-		MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
-	        LIBDIR=${libdir} \
-		CC="${CC}" AR="${AR}"'
+        MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
+        LIBDIR=${libdir} \
+        CC="${CC}" AR="${AR}"'
 
 do_compile() {
     oe_runmake user PROG_EXTRA="sensors sensord"

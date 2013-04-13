@@ -16,7 +16,7 @@ SRC_URI[archive.sha256sum] = "cf809695230ab8892a078be454a42ade865754c72ec1da7c3d
 SRC_URI += "file://parallel.patch"
 
 do_install_append () {
-	rm ${D}${libdir}/${BPN}/extensions/*.a
+    rm ${D}${libdir}/${BPN}/extensions/*.a
 }
 
 FILES_${PN} += "${datadir}/icons"

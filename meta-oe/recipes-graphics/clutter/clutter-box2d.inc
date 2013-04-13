@@ -8,8 +8,8 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit autotools pkgconfig gtk-doc
 
 do_install_append () {
-	install -d ${D}${bindir}
-	install ${S}/examples/.libs/blockbox ${D}${bindir}
+    install -d ${D}${bindir}
+    install ${S}/examples/.libs/blockbox ${D}${bindir}
 }
 
 FILESPATH = "${FILE_DIRNAME}/clutter-box2d"

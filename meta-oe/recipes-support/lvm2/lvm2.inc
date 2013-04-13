@@ -23,7 +23,7 @@ EXTRA_OECONF = "--with-user= \
                 --enable-pkgconfig \
                 --enable-dmeventd \
                 --with-udev-prefix= \
-              "
+"
 
 inherit autotools
 

@@ -16,7 +16,7 @@ PV = "0.4.9+git"
 EXTRA_OEMAKE = "MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} libdir=${base_libdir}/multipath"
 
 do_install() {
-	oe_runmake install
+    oe_runmake install
 }
 
 FILES_${PN}-dbg += "${base_libdir}/multipath/.debug"

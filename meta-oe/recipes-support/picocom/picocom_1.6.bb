@@ -9,8 +9,8 @@ SRC_URI = "http://picocom.googlecode.com/files/picocom-1.6.tar.gz"
 CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
 
 do_install () {
-	install -d ${D}${bindir}
-	install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
+    install -d ${D}${bindir}
+    install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
 }
 
 SRC_URI[md5sum] = "426c3d30b82cbc80b0dafdccd6020c6c"

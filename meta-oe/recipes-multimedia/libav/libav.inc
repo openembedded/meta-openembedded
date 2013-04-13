@@ -15,10 +15,10 @@ INC_PR = "r8"
 
 inherit autotools pkgconfig
 
-#        --enable-libgsm
-#        --enable-libmp3lame
-#        --enable-libschroedinger
-#        --enable-libvpx
+#    --enable-libgsm
+#    --enable-libmp3lame
+#    --enable-libschroedinger
+#    --enable-libvpx
 
 B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
 
@@ -29,28 +29,28 @@ EXTRA_FFCONF_armv7a = "--cpu=cortex-a8"
 EXTRA_FFCONF ?= ""
 
 EXTRA_OECONF = " \
-        --enable-shared \
-        --enable-pthreads \
-        --enable-gpl \
-        --enable-avfilter \
-        \
-        --cross-prefix=${TARGET_PREFIX} \
-        --prefix=${prefix} \
-        \
-        --enable-avserver \
-        --enable-avplay \
-        --enable-x11grab \
-        --enable-libtheora  \
-        --enable-libvorbis \
-        --enable-libx264 \
-        --arch=${TARGET_ARCH} \
-        --target-os="linux" \
-        --enable-cross-compile \
-        --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
-        --extra-ldflags="${TARGET_LDFLAGS}" \
-        --sysroot="${STAGING_DIR_TARGET}" \
-        --enable-hardcoded-tables \
-        ${EXTRA_FFCONF} \
+    --enable-shared \
+    --enable-pthreads \
+    --enable-gpl \
+    --enable-avfilter \
+    \
+    --cross-prefix=${TARGET_PREFIX} \
+    --prefix=${prefix} \
+    \
+    --enable-avserver \
+    --enable-avplay \
+    --enable-x11grab \
+    --enable-libtheora  \
+    --enable-libvorbis \
+    --enable-libx264 \
+    --arch=${TARGET_ARCH} \
+    --target-os="linux" \
+    --enable-cross-compile \
+    --extra-cflags="${TARGET_CFLAGS} ${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}" \
+    --extra-ldflags="${TARGET_LDFLAGS}" \
+    --sysroot="${STAGING_DIR_TARGET}" \
+    --enable-hardcoded-tables \
+    ${EXTRA_FFCONF} \
 "
 
 #| yasm not found, use --disable-yasm for a crippled build
@@ -58,16 +58,16 @@ EXTRA_OECONF_append_x86-64 = " --disable-yasm"
 EXTRA_OECONF_append_x86 = " --disable-yasm"
 
 do_configure() {
-	# We don't have TARGET_PREFIX-pkgconfig
-	sed -i '/pkg_config_default="${cross_prefix}${pkg_config_default}"/d' ${S}/configure
-	mkdir -p ${B}
-	cd ${B}
-	${S}/configure ${EXTRA_OECONF}
-	sed -i -e s:Os:O4:g ${B}/config.h
+    # We don't have TARGET_PREFIX-pkgconfig
+    sed -i '/pkg_config_default="${cross_prefix}${pkg_config_default}"/d' ${S}/configure
+    mkdir -p ${B}
+    cd ${B}
+    ${S}/configure ${EXTRA_OECONF}
+    sed -i -e s:Os:O4:g ${B}/config.h
 }
 
 do_install_append() {
-	install -m 0644 ${S}/libavfilter/*.h ${D}${includedir}/libavfilter/
+    install -m 0644 ${S}/libavfilter/*.h ${D}${includedir}/libavfilter/
 }
 
 FFMPEG_LIBS = "libavcodec libavdevice libavformat \

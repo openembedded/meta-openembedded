@@ -17,9 +17,9 @@ CFLAGS += "-fno-inline"
 EXTRA_OECONF += "--enable-password-save"
 
 do_install_append() {
-        install -d ${D}/${sysconfdir}/init.d
-        install -d ${D}/${sysconfdir}/openvpn
-        install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
+    install -d ${D}/${sysconfdir}/init.d
+    install -d ${D}/${sysconfdir}/openvpn
+    install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
 }
 
 SRC_URI[md5sum] = "7486d3e270ba4b033e311d3e022a0ad7"

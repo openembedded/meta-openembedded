@@ -18,7 +18,7 @@ inherit autotools gettext
 # a security problem (and this fix to the build problem is *much*
 # easier and more maintainable.)
 do_install() {
-	oe_runmake 'DESTDIR=${D}' install-strip
+    oe_runmake 'DESTDIR=${D}' install-strip
 }
 
 # An attempt to build on uclibc will fail, causing annoyance,

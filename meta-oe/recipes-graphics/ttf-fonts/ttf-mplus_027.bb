@@ -18,8 +18,8 @@ python populate_packages_prepend() {
 }
 
 do_install() {
-	install -d ${D}${datadir}/fonts/ttf-mplus
-	install -m 0644 *.ttf ${D}${datadir}/fonts/ttf-mplus/
+    install -d ${D}${datadir}/fonts/ttf-mplus
+    install -m 0644 *.ttf ${D}${datadir}/fonts/ttf-mplus/
 }
 
 SRC_URI[md5sum] = "d1400184b51b3871e8d2fca6c50e18ae"

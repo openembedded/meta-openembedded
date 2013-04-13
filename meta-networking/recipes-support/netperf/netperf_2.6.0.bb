@@ -26,31 +26,31 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
 # autotools.bbclass attends to include m4 files with path depth <= 2 by
 # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
 do_configure_prepend() {
-	test -d m4/m4 && mv -f m4/m4 m4-files
+    test -d m4/m4 && mv -f m4/m4 m4-files
 }
 
 do_install() {
-	sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${WORKDIR}/init
+    sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${WORKDIR}/init
 
-	install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
-	install -m 4755 src/netperf ${D}${bindir}
-	install -m 4755 src/netserver ${D}${sbindir}
-	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/netperf
+    install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
+    install -m 4755 src/netperf ${D}${bindir}
+    install -m 4755 src/netserver ${D}${sbindir}
+    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/netperf
 
-	# man
-	install -d ${D}${mandir}/man1/
-	install -m 0644 doc/netserver.man ${D}${mandir}/man1/netserver.1
-	install -m 0644 doc/netperf.man ${D}${mandir}/man1/netperf.1
+    # man
+    install -d ${D}${mandir}/man1/
+    install -m 0644 doc/netserver.man ${D}${mandir}/man1/netserver.1
+    install -m 0644 doc/netperf.man ${D}${mandir}/man1/netperf.1
 
-	# move scripts to examples directory
-	install -d ${D}${docdir}/netperf/examples
-	install -m 0644 doc/examples/*_script ${D}${docdir}/netperf/examples/
+    # move scripts to examples directory
+    install -d ${D}${docdir}/netperf/examples
+    install -m 0644 doc/examples/*_script ${D}${docdir}/netperf/examples/
 
-	# docs ..
-	install -m 0644 COPYING ${D}${docdir}/netperf
-	install -m 0644 Release_Notes ${D}${docdir}/netperf
-	install -m 0644 README ${D}${docdir}/netperf
-	install -m 0644 doc/netperf_old.ps ${D}${docdir}/netperf
+    # docs ..
+    install -m 0644 COPYING ${D}${docdir}/netperf
+    install -m 0644 Release_Notes ${D}${docdir}/netperf
+    install -m 0644 README ${D}${docdir}/netperf
+    install -m 0644 doc/netperf_old.ps ${D}${docdir}/netperf
 }
 
 INITSCRIPT_NAME="netperf"

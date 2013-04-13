@@ -12,7 +12,7 @@ S = "${WORKDIR}/fftw-${PV}"
 inherit autotools pkgconfig
 
 do_configure_prepend() {
-        echo 'AM_PROG_AS' >> ${S}/configure.ac 
+    echo 'AM_PROG_AS' >> ${S}/configure.ac 
 }
 
 PACKAGES =+ "lib${PN}"

@@ -15,12 +15,12 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "STRIP="
 
 do_compile() {
-	sed -i -e 's: cpp: ${TARGET_PREFIX}cpp:g' GNUmakefile
-	oe_runmake
+    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp:g' GNUmakefile
+    oe_runmake
 }
 
 do_install() {
-	oe_runmake 'DESTDIR=${D}' install
+    oe_runmake 'DESTDIR=${D}' install
 }
 
 RDEPENDS_${PN} = "ttf-dejavu-sans-mono"

@@ -59,7 +59,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://libtirpc-name-clash-backout.patch \
            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
            file://fix_disable_ldap.patch \
-          "
+"
 
 SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
 SRC_URI[sha256sum] = "08c4304d8076dc80c14df559bc5fd821b67ef3457b245f61068bd053d8f94ccc"
@@ -81,19 +81,19 @@ EXTRA_OECONF += "--disable-mount-locking \
                 --enable-ignore-busy --with-openldap=no \
                 --with-sasl=no --with-libtirpc=yes \
                 --with-path=${STAGING_BINDIR_NATIVE} \
-                "
+"
 CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
                         ac_cv_path_RPCGEN=rpcgen \
-                       "
+"
 
 do_configure_prepend () {
-        if [ ! -e acinclude.m4 ]; then
-                cp aclocal.m4 acinclude.m4
-        fi
+    if [ ! -e acinclude.m4 ]; then
+        cp aclocal.m4 acinclude.m4
+    fi
 }
 
 do_install_append () {
-	test -d ${D}/run && rmdir ${D}/run
+    test -d ${D}/run && rmdir ${D}/run
 }
 
 INSANE_SKIP_${PN} = "dev-so"

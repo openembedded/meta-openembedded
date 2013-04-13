@@ -22,7 +22,7 @@ S = "${WORKDIR}/ptpd-${PV}/src"
 EXTRA_OEMAKE = ""
 
 do_install() {
-        install -d ${D}${bindir} ${D}${mandir}/man8
-        install -m 0755 ptpd2 ${D}${bindir}
-        install -m 0644 ptpd2.8 ${D}${mandir}/man8
+    install -d ${D}${bindir} ${D}${mandir}/man8
+    install -m 0755 ptpd2 ${D}${bindir}
+    install -m 0644 ptpd2.8 ${D}${mandir}/man8
 }

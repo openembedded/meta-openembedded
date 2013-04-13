@@ -11,7 +11,7 @@ SRC_URI = "http://redis.googlecode.com/files/redis-${PV}.tar.gz \
            file://oe-use-libc-malloc.patch \
            file://redis.conf \
            file://init-redis-server \
-          "
+"
 
 inherit update-rc.d
 

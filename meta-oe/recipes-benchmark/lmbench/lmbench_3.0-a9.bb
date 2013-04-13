@@ -15,7 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
            file://update-results-script.patch \
            file://obey-ranlib.patch \
            file://update-config-script.patch \ 
-           "
+"
 SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
 SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
 
@@ -24,32 +24,32 @@ EXTRA_OEMAKE = 'CC="${CC}" AR="${AR}" RANLIB="${RANLIB}" CFLAGS="${CFLAGS}" \
                 TARGET="${TARGET_OS}" BASE="${prefix}" MANDIR="${mandir}"'
 
 do_configure() {
-	:
+    :
 }
 
 do_compile () {
-	. ${CONFIG_SITE}
-	if [ X"$ac_cv_uint" = X"yes" ]; then
-		CFLAGS="${CFLAGS} -DHAVE_uint"
-	fi
-	install -d ${S}/bin/${TARGET_SYS}
-	oe_runmake -C src
+    . ${CONFIG_SITE}
+    if [ X"$ac_cv_uint" = X"yes" ]; then
+        CFLAGS="${CFLAGS} -DHAVE_uint"
+    fi
+    install -d ${S}/bin/${TARGET_SYS}
+    oe_runmake -C src
 }
 
 do_install () {
-	install -d ${D}${localstatedir}/run/lmbench \
-		   ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
-		   ${D}${datadir}/lmbench/scripts
-	oe_runmake 'BASE=${D}${prefix}' \
-		    -C src install
-	mv ${D}${bindir}/line ${D}${bindir}/lm_line
-	install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
-	sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
-	       -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
-	       -e 's,^CONFIG=.*$,CONFIG=$SHAREDIR/`$SCRIPTSDIR/config`,;' \
-	       ${D}${bindir}/lmbench-run
-	install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
-	install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
+    install -d ${D}${localstatedir}/run/lmbench \
+           ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
+           ${D}${datadir}/lmbench/scripts
+    oe_runmake 'BASE=${D}${prefix}' \
+            -C src install
+    mv ${D}${bindir}/line ${D}${bindir}/lm_line
+    install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
+    sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
+           -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
+           -e 's,^CONFIG=.*$,CONFIG=$SHAREDIR/`$SCRIPTSDIR/config`,;' \
+           ${D}${bindir}/lmbench-run
+    install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
+    install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
 }
 
 RDEPENDS_${PN} = "debianutils"

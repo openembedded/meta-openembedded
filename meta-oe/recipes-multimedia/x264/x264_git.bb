@@ -10,7 +10,7 @@ DEPENDS = "yasm-native"
 
 SRC_URI = "git://git.videolan.org/x264.git \
     file://don-t-default-to-cortex-a9-with-neon.patch \
-    "
+"
 SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
 
 PV = "r2230+git"
@@ -34,7 +34,7 @@ EXTRA_OECONF = '--prefix=${prefix} \
                '
 
 do_configure() {
-	./configure ${EXTRA_OECONF}
+    ./configure ${EXTRA_OECONF}
 }
 
 # Get rid of -e
@@ -42,5 +42,5 @@ EXTRA_OEMAKE = ""
 AS = "${TARGET_PREFIX}gcc"
 
 do_install() {
-	oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D}
 }

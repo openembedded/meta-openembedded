@@ -15,14 +15,14 @@ inherit autotools pkgconfig
 EXTRA_OECONF = " --with-backend=linux"
 
 do_configure_prepend() {
-	sed -i -e s:-nonet:\:g ${S}/doc/man/Makefile.am
-	sed -i -e 's: doc : :g' ${S}/Makefile.am
-}	
+    sed -i -e s:-nonet:\:g ${S}/doc/man/Makefile.am
+    sed -i -e 's: doc : :g' ${S}/Makefile.am
+}    
 
 FILES_${PN} += "${datadir}/dbus-1/ \
                 ${datadir}/polkit-1/ \
                 ${base_libdir}/udev/* \
-               "
+"
 
 FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
 

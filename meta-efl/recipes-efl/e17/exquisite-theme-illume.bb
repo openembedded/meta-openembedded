@@ -21,7 +21,7 @@ SRC_URI = "${E_SVN}/trunk/THEMES;module=${SRCNAME};protocol=http \
 S = "${WORKDIR}/${SRCNAME}"
 
 do_compile() {
-   ${STAGING_BINDIR_NATIVE}/edje_cc exquisite.edc illume.edj
+    ${STAGING_BINDIR_NATIVE}/edje_cc exquisite.edc illume.edj
 }
 
 do_install() {

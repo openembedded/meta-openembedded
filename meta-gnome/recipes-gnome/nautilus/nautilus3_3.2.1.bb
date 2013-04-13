@@ -24,8 +24,8 @@ EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb --enable-nst-extensi
 export SYSROOT = "${STAGING_DIR_HOST}"
 
 do_configure() {
-	sed -i -e /docs/d Makefile.am
-	autotools_do_configure
+    sed -i -e /docs/d Makefile.am
+    autotools_do_configure
 }
 
 RDEPENDS_${PN} = "gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash glib-2.0-utils"
@@ -34,9 +34,9 @@ FILES_${PN} += "${datadir}/icons \
                 ${datadir}/nautilus* \
                 ${datadir}/dbus-1 \
                 ${libdir}/nautilus/extensions*/*.so \
-               "
+"
 FILES_${PN}-dbg += "/usr/libexec/.debug \
-  ${libdir}/nautilus/extensions*/.debug"
+    ${libdir}/nautilus/extensions*/.debug"
 
 # Don't make nautils drag us in
 PRIVATE_LIBS = "libnautilus-extension.so.1"

@@ -50,9 +50,9 @@ do_configure() {
 }
 
 do_install_append() {
-        install -d ${D}${datadir}/pixmaps/
-        mv ${D}${datadir}/icons/* ${D}${datadir}/pixmaps/
-        rmdir ${D}${datadir}/icons
+    install -d ${D}${datadir}/pixmaps/
+    mv ${D}${datadir}/icons/* ${D}${datadir}/pixmaps/
+    rmdir ${D}${datadir}/icons
 }
 
 PACKAGES += " ${PN}-clipart ${PN}-icons ${PN}-strings ${PN}-systemprofiles ${PN}-templates "

@@ -1,8 +1,8 @@
 DESCRIPTION = "Parallelism library for C++ - runtime files \
- TBB is a library that helps you leverage multi-core processor \
- performance without having to be a threading expert. It represents a \
- higher-level, task-based parallelism that abstracts platform details \
- and threading mechanism for performance and scalability."
+    TBB is a library that helps you leverage multi-core processor \
+    performance without having to be a threading expert. It represents a \
+    higher-level, task-based parallelism that abstracts platform details \
+    and threading mechanism for performance and scalability."
 HOMEPAGE = "http://threadingbuildingblocks.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2c7f2caf277a3933e3acdf7f89d54cc1"

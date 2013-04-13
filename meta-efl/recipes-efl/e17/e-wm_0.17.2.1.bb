@@ -7,9 +7,9 @@ SRCNAME = "enlightenment"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 SRC_URI = "\
-  ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
-  file://enlightenment_start.oe \
-  file://applications.menu \
+    ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+    file://enlightenment_start.oe \
+    file://applications.menu \
 "
 
 SRC_URI[md5sum] = "e78018ba7a4622efbcbebd6d093b7fa4"

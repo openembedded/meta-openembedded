@@ -20,10 +20,10 @@ LDFLAGS += "-ltinfo -lncursesw"
 ASNEEDED_pn-nmon = ""
 
 do_compile() {
-	${CC} ${CFLAGS} ${LDFLAGS} ${WORKDIR}/lmon13g.c -o nmon
+    ${CC} ${CFLAGS} ${LDFLAGS} ${WORKDIR}/lmon13g.c -o nmon
 }
 
 do_install() {
-	install -d ${D}${bindir}
-	install -m 0755 nmon ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 0755 nmon ${D}${bindir}
 }

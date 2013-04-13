@@ -21,18 +21,18 @@ SRC_URI += "file://splashfuncs"
 inherit update-rc.d
 
 do_install_prepend() {
-  install -d ${D}/mnt/.splash/
-  install -d ${D}${sysconfdir}/init.d
-  install -m 0755 ${WORKDIR}/exquisite-init ${D}${sysconfdir}/init.d/exquisite
-  install -d ${D}${sysconfdir}/default
-  install -m 0755 ${WORKDIR}/splashfuncs ${D}${sysconfdir}/default/splashfuncs
-  install -d ${D}${bindir}
-  ln -s exquisite-write ${D}${bindir}/splash-write
+    install -d ${D}/mnt/.splash/
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/exquisite-init ${D}${sysconfdir}/init.d/exquisite
+    install -d ${D}${sysconfdir}/default
+    install -m 0755 ${WORKDIR}/splashfuncs ${D}${sysconfdir}/default/splashfuncs
+    install -d ${D}${bindir}
+    ln -s exquisite-write ${D}${bindir}/splash-write
 }
 
 
 do_install_append() {
-  rm -rf ${D}${datadir}/exquisite/data/fonts/*
+    rm -rf ${D}${datadir}/exquisite/data/fonts/*
 }
 
 INITSCRIPT_NAME = "exquisite"
