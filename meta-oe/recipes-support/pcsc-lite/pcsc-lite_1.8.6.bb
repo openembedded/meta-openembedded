@@ -8,7 +8,9 @@ SRC_URI = "https://alioth.debian.org/frs/download.php/3757/pcsc-lite-${PV}.tar.b
 SRC_URI[md5sum] = "3e4b777231d35ce35c15c0704f936eaa"
 SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0e6a77a"
 
-inherit autotools
+PR = "r3"
+
+inherit autotools systemd
 
 EXTRA_OECONF = " \
 	--disable-libusb \
@@ -23,3 +25,8 @@ PACKAGES =+ "${PN}-lib"
 RRECOMMENDS_${PN} = "ccid"
 
 FILES_${PN}-lib = "${libdir}/lib*${SOLIBS}"
+
+RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "pcscd.socket"
