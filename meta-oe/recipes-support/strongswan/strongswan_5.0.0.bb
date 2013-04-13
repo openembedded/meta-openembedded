@@ -5,7 +5,7 @@ SECTION = "console/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gmp openssl flex-native flex bison-native"
-PR = "r2"
+PR = "r5"
 
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2"
 SRC_URI[md5sum] = "c8b861305def7c0abae04f7bbefec212"
@@ -15,11 +15,9 @@ EXTRA_OECONF = "--disable-curl --disable-soup --disable-ldap \
 		--enable-gmp --disable-mysql --disable-sqlite \
 		--enable-openssl"
 
-SYSTEMD_UNITDIR ??= "no"
+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
-EXTRA_OECONF += "--with-systemdsystemunitdir=${SYSTEMD_UNITDIR}"
-
-inherit autotools
+inherit autotools systemd
 
 RRECOMMENDS_${PN} = "kernel-module-ipsec"
 
@@ -31,3 +29,8 @@ FILES_${PN}-dbg += "${libdir}/ipsec/.debug ${libdir}/ipsec/plugins/.debug ${libe
 FILES_${PN}-plugins += "${libdir}/ipsec/plugins/*"
 
 INSANE_SKIP_${PN}-plugins = "staticdev"
+
+RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "${PN}.service"
