@@ -3,8 +3,9 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
-PR = "r2"
+PR = "r5"
 
 inherit xfce
 
@@ -13,6 +14,7 @@ SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a7
 SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch \
             file://0002-Remove-gnome-keyring-remains.patch \
             file://0003-configure.in-hard-code-path-to-iceauth.patch \
+            file://0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch \
 "
 
 # protect from frightening message that xfce might not work correctly
