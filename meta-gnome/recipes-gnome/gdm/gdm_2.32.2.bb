@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
 
-PR = "r10"
+PR = "r15"
 
-inherit gnome update-rc.d
+inherit gnome update-rc.d systemd
 
 SRC_URI += " \
             file://cross-xdetection.diff \
@@ -17,6 +17,7 @@ SRC_URI += " \
             file://gdm.conf \
             file://gdm-pam \
             file://Default \
+            file://gdm.service.in \
            "
 
 SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
@@ -49,6 +50,10 @@ do_install_append() {
 	install -d ${D}/${sysconfdir}/gdm/Init
 	install -m 0755 ${WORKDIR}/Default ${D}/${sysconfdir}/gdm/Init
 
+	install -d ${D}${systemd_unitdir}/system
+	sed -e 's,%sbindir%,${sbindir},g' \
+		< ${WORKDIR}/gdm.service.in \
+		> ${D}${systemd_unitdir}/system/gdm.service
 }
 
 FILES_${PN} += "${datadir}/icon* \
@@ -59,6 +64,10 @@ RDEPENDS_${PN} += "grep dbus-x11 shadow"
 # "libpam-base-files"
 CONFFILES_${PN} += "${sysconfdir}/gdm/gdm.conf ${sysconfdir}/init.d/gdm"
 RRECOMMENDS_${PN} += "openssh-misc desktop-file-utils glib-2.0-utils metacity gnome-session polkit-gnome consolekit"
+
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "gdm.service"
 
 INITSCRIPT_NAME = "gdm"
 INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
@@ -87,7 +96,3 @@ pkg_postrm_${PN} () {
     delgroup gdm || true
 	sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
 }
-
-
-
-
