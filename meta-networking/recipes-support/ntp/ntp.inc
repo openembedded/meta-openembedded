@@ -8,7 +8,7 @@ SECTION = "console/network"
 LICENSE = "NTP"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fea4b50c33b18c2194b4b1c9ca512670"
 
-INC_PR = "r3"
+INC_PR = "r6"
 
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
            file://tickadj.c.patch \
@@ -18,9 +18,11 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntp.conf \
            file://ntpdate \
            file://ntpdate.default \
+           file://ntpdate.service \
+           file://ntpd.service \
            "
 
-inherit autotools update-rc.d
+inherit autotools update-rc.d systemd
 
 # The ac_cv_header_readline_history is to stop ntpdc depending on either
 # readline or curses
@@ -52,6 +54,10 @@ do_install_append() {
 	install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
 	install -d ${D}/${sysconfdir}/network/if-up.d
 	ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
+
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
+	install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
 }
 
 PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
@@ -65,12 +71,29 @@ RPROVIDES_${PN}-utils = "${PN}-bin"
 RREPLACES_${PN}-utils = "${PN}-bin"
 RCONFLICTS_${PN}-utils = "${PN}-bin"
 
+SYSTEMD_PACKAGES = "${PN} ntpdate"
+SYSTEMD_SERVICE_${PN} = "ntpd.service"
+SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
+
+RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+
+RPROVIDES_ntpdate += "ntpdate-systemd"
+RREPLACES_ntpdate += "ntpdate-systemd"
+RCONFLICTS_ntpdate += "ntpdate-systemd"
+
 RSUGGESTS_${PN} = "iana-etc"
 
 FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${sbindir} ${libdir}"
 FILES_${PN}-tickadj = "${bindir}/tickadj"
 FILES_${PN}-utils = "${bindir}"
-FILES_ntpdate = "${bindir}/ntpdate ${sysconfdir}/network/if-up.d/ntpdate-sync ${bindir}/ntpdate-sync ${sysconfdir}/default/ntpdate"
+FILES_ntpdate = "${bindir}/ntpdate \
+  ${sysconfdir}/network/if-up.d/ntpdate-sync \
+  ${bindir}/ntpdate-sync \
+  ${sysconfdir}/default/ntpdate \
+  ${systemd_unitdir}/system/ntpdate.service \
+"
 
 CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
 CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
