@@ -28,7 +28,7 @@ do_compile () {
 }
 
 do_install () {
-  DESTDIR=${D} oe_runmake install
+  oe_runmake install DESTDIR=${D}
 
   # fix namespace conflicts with other nodejs recipes
   mv ${D}${bindir}/node ${D}${bindir}/node4
