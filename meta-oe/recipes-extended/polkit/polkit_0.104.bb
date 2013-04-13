@@ -15,7 +15,7 @@ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 # there is no --enable/--disable option for consolekit and it's not picked by shlibs, so add it to RDEPENDS
 PACKAGECONFIG[consolekit] = ",,,consolekit"
 
-PR = "r9"
+PR = "r12"
 
 PAM_SRC_URI = "file://polkit-1_pam.patch"
 SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
@@ -41,4 +41,3 @@ FILES_${PN} += "${libdir}/${BPN}-1/extensions/*.so \
                 ${datadir}/dbus-1/system-services/*"
 FILES_${PN}-dbg += "${libdir}/${BPN}-1/extensions/.debug/*.so"
 FILES_${PN}-dev += "${libdir}/${BPN}-1/extensions/*.la "
-
