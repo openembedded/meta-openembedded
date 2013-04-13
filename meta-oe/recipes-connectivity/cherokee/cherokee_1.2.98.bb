@@ -5,16 +5,18 @@ SECTION = "network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r6"
+PR = "r9"
 
 DEPENDS = "libpcre openssl mysql5 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SRC_URI = "http://www.cherokee-project.com/download/1.2/${PV}/cherokee-${PV}.tar.gz \
-           file://cherokee.init"
+           file://cherokee.init \
+           file://cherokee.service \
+"
 SRC_URI[md5sum] = "21b01e7d45c0e82ecc0c4257a9c27feb"
 SRC_URI[sha256sum] = "042b5687b1a3db3ca818167548ce5d32c35e227c6640732dcb622a6f4a078b7d"
 
-inherit autotools pkgconfig binconfig update-rc.d
+inherit autotools pkgconfig binconfig update-rc.d systemd
 
 EXTRA_OECONF = "--disable-static \
                 --disable-nls \
@@ -27,6 +29,9 @@ do_install_append () {
 
 	# clean up .la files for plugins
 	rm -f ${D}${libdir}/cherokee/*.la
+
+	install -d ${D}${systemd_unitdir}/system
+	install -m 0644 ${WORKDIR}/cherokee.service ${D}${systemd_unitdir}/system
 }
 
 # Put -dev near the front so we can move the .la files into it with a wildcard
@@ -44,3 +49,8 @@ CONFFILES_${PN} = " \
 
 INITSCRIPT_NAME = "cherokee"
 INITSCRIPT_PARAMS = "defaults 91 91"
+
+RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "cherokee.service"
