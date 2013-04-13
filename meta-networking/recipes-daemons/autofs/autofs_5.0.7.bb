@@ -3,11 +3,11 @@ SECTION = "base"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-PR = "r3"
+PR = "r6"
 
 DEPENDS += "libtirpc flex-native bison-native"
 
-inherit autotools
+inherit autotools systemd
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch \
@@ -97,3 +97,8 @@ do_install_append () {
 }
 
 INSANE_SKIP_${PN} = "dev-so"
+
+RPROVIDES_${PN} += "${PN}-systemd"
+RREPLACES_${PN} += "${PN}-systemd"
+RCONFLICTS_${PN} += "${PN}-systemd"
+SYSTEMD_SERVICE_${PN} = "autofs.service"
