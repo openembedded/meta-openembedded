@@ -4,10 +4,12 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
 
-PR = "r8"
+PR = "r11"
 
 DEPENDS = "libnl dbus dbus-glib udev wireless-tools polkit gnutls util-linux ppp"
-inherit gnome gettext
+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+
+inherit gnome gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.bz2 \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
@@ -20,8 +22,6 @@ SRC_URI[sha256sum] = "a178ed2f0b5a1045ec47b217ea531d0feba9208f6bcfe64b701174a5c1
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
-SYSTEMD_UNITDIR ??= "no"
-
 EXTRA_OECONF = " \
 		--with-distro=debian \
 		--with-crypto=gnutls \
@@ -29,8 +29,9 @@ EXTRA_OECONF = " \
                 --with-dhclient=${base_sbindir}/dhclient \
                 --with-iptables=${sbindir}/iptables \
                 --with-tests \
-                --with-systemdsystemunitdir=${SYSTEMD_UNITDIR} \
 "
+
+EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
 do_configure_prepend() {
     cp ${WORKDIR}/gtk-doc.make ${S}/
@@ -71,6 +72,7 @@ FILES_${PN} += " \
 		${datadir}/polkit-1 \
 		${datadir}/dbus-1 \
 		${base_libdir}/udev/* \
+		${systemd_unitdir}/system/NetworkManager-wait-online.service \
 "
 
 RRECOMMENDS_${PN} += "iptables"
@@ -89,3 +91,5 @@ FILES_${PN}-dev += "${datadir}/NetworkManager/gdb-cmd \
 FILES_${PN}-tests = "${bindir}/nm-tool \
                      ${bindir}/libnm_glib_test \
                      ${bindir}/nm-online"
+
+SYSTEMD_SERVICE_${PN} = "NetworkManager.service"
