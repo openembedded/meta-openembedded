@@ -8,7 +8,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://libnl-3-support.patch \
         file://init \
         file://snmpd.conf \
-        file://snmptrapd.conf"
+        file://snmptrapd.conf \
+        file://systemd-support.patch \
+        file://snmpd.service \
+        file://snmptrapd.service \
+"
 
 EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
 EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
