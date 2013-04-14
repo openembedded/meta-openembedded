@@ -2,9 +2,11 @@ DESCRIPTION = "libetpan is a library for communicating with mail and news server
 It supports the protocols SMTP, POP3, IMAP and NNTP."
 HOMEPAGE = "http://www.etpan.org"
 SECTION = "libs"
-DEPENDS = "gnutls"
+DEPENDS = "gnutls liblockfile"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f18ebe7e452708c26f83954f81062ba7"
+
+PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/libetpan/libetpan-${PV}.tar.gz \
            file://libetpan-autoreconf.patch \
