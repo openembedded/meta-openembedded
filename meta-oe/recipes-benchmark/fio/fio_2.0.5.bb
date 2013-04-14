@@ -14,7 +14,8 @@ DEPENDS = "libaio"
 
 # rev for v2.0.5
 SRCREV = "02efadeb8b05144bcf2fc7796e1da2e7db211d00"
-SRC_URI = "git://git.kernel.dk/fio.git"
+SRC_URI = "git://git.kernel.dk/fio.git \
+           file://0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch"
 
 S = "${WORKDIR}/git"
 

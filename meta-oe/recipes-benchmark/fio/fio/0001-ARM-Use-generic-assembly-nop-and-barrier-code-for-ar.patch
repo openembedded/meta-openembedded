@@ -1,0 +1,30 @@
+From 152b969cd4ff5b4b7e1c65eca1f9ab243b8a30c8 Mon Sep 17 00:00:00 2001
+From: Otavio Salvador <otavio@ossystems.com.br>
+Date: Sun, 14 Apr 2013 13:53:35 -0300
+Subject: [PATCH] ARM: Use generic assembly nop and barrier code for armv6
+
+Upstream-Status: Submitted
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ arch/arch-arm.h |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/arch/arch-arm.h b/arch/arch-arm.h
+index 658b688..7cd9502 100644
+--- a/arch/arch-arm.h
++++ b/arch/arch-arm.h
+@@ -18,7 +18,9 @@
+ #define __NR_sys_vmsplice	343
+ #endif
+ 
+-#if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) || defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__)
++#if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) \
++	|| defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__) \
++	|| defined(__ARM_ARCH_6__)  || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6Z__) || defined(__ARM_ARCH_6ZK__)
+ #define nop             __asm__ __volatile__("mov\tr0,r0\t@ nop\n\t")
+ #define read_barrier()	__asm__ __volatile__ ("" : : : "memory")
+ #define write_barrier()	__asm__ __volatile__ ("" : : : "memory")
+-- 
+1.7.2.5
+
