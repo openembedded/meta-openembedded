@@ -1,6 +1,6 @@
 inherit systemd
 
-PRINC := "${@int(PRINC) + 2}"
+PRINC := "${@int(PRINC) + 3}"
 
 # look for files in the layer first
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
@@ -21,3 +21,7 @@ do_install_append() {
 	ln -sf /dev/null ${D}${systemd_unitdir}/system/syslog.service
 }
 FILES_${PN}-syslog += "${systemd_unitdir}/system/syslog.service"
+
+RPROVIDES_${PN}-syslog += "${PN}-syslog-systemd"
+RREPLACES_${PN}-syslog += "${PN}-syslog-systemd"
+RCONFLICTS_${PN}-syslog += "${PN}-syslog-systemd"
