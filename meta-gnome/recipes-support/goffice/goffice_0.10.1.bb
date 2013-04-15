@@ -1,20 +1,16 @@
 DESCRIPTION="Gnome Office Library"
 
 LICENSE="GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=fa1348b178f4a7322170203c6c36f4c3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=6dc33ff21e1ba1ac1a2a1069d361e29e"
 
-DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+ pango cairo libgsf libpcre libxml2 libart-lgpl"
+DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+3 pango cairo libgsf libpcre libxml2 libart-lgpl"
 
 inherit gnome pkgconfig perlnative
 
-PR = "r1"
+GNOME_COMPRESS_TYPE = "xz"
 
-SRC_URI += " file://c99math.patch \
-             file://nodolt.patch \
-             file://pcre-8.30.patch"
-
-SRC_URI[archive.md5sum] = "b4c924457163e02daf8a8d2428f51d10"
-SRC_URI[archive.sha256sum] = "dd8caef5fefffbc53938fa619de9f58e7c4dc71a1803de134065d42138a68c06"
+SRC_URI[archive.md5sum] = "90fd17c6fe205b779571e00d9b0b4727"
+SRC_URI[archive.sha256sum] = "5c38f4e81e874cc8e89481b080f77c47c72bfd6fe2526f4fc2ef87c17f96cad0"
 
 FILES_${PN}-dbg += "${libdir}/goffice/${PV}/plugins/*/.debug"
 
@@ -38,6 +34,8 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} 
     ${datadir}/pixmaps ${datadir}/applications \
     ${datadir}/idl ${datadir}/omf ${datadir}/sounds \
     ${libdir}/bonobo/servers"
+
+FILES_${PN}-locale = "${libdir}/locale"
 
 PACKAGES_DYNAMIC += "^goffice-plugin-.*"
 
