@@ -1,16 +1,21 @@
-DESCRIPTION = "Secure ftp server"
-HOMEPAGE="https://security.appspot.com/vsftpd.html"
+SUMMARY = "Very Secure FTP server"
+HOMEPAGE = "https://security.appspot.com/vsftpd.html"
 SECTION = "network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271"
 
 DEPENDS = "libcap"
 
-SRC_URI = "https://security.appspot.com/downloads/vsftpd-2.3.5.tar.gz \
-           file://makefile.patch \
+SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
+           file://makefile-destdir.patch \
+           file://makefile-libs.patch \
+           file://makefile-strip.patch \
            file://nopam.patch \
            file://init \
            file://vsftpd.conf"
+
+SRC_URI[md5sum] = "01398a5bef8e85b6cf2c213a4b011eca"
+SRC_URI[sha256sum] = "d87ee2987df8f03e1dbe294905f7907b2798deb89c67ca965f6e2f60879e54f1"
 
 inherit update-rc.d useradd
 
@@ -43,6 +48,4 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp \
                        --shell /bin/false ftp "
 GROUPADD_PARAM_${PN} = "-r ftp"
-                     
-SRC_URI[md5sum] = "01398a5bef8e85b6cf2c213a4b011eca"
-SRC_URI[sha256sum] = "d87ee2987df8f03e1dbe294905f7907b2798deb89c67ca965f6e2f60879e54f1"
+

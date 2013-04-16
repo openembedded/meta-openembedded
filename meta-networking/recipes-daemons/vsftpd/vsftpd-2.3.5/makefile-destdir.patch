@@ -1,17 +1,14 @@
-diff -ur vsftpd-2.0.1_org/Makefile vsftpd-2.0.1_patch/Makefile
---- vsftpd-2.0.1_org/Makefile	2004-06-06 18:21:27.000000000 +0200
-+++ vsftpd-2.0.1_patch/Makefile	2004-07-21 09:50:25.245576352 +0200
-@@ -5,7 +5,7 @@
- #CFLAGS = -g
- CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
- 
--LIBS	=	`./vsf_findlibs.sh`
-+LIBS	=	-lssl -lcrypto -lnsl -lresolv
- LINK	=	-Wl,-s
- 
- OBJS	=	main.o utility.o prelogin.o ftpcmdio.o postlogin.o privsock.o \
-@@ -24,21 +24,21 @@
- 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS)
+Use DESTDIR within install to allow installing under a prefix
+
+Upstream-Status: Pending
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+diff --git a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -24,21 +24,21 @@ vsftpd: $(OBJS)
+ 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS) $(LDFLAGS)
  
  install:
 -	if [ -x /usr/local/sbin ]; then \
