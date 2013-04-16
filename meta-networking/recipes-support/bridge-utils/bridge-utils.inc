@@ -1,7 +1,9 @@
-DESCRIPTION = "Tools for ethernet bridging."
-HOMEPAGE = "http://bridge.sourceforge.net/"
+SUMMARY = "Tools for ethernet bridging"
+HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bridge"
 SECTION = "console/network"
 LICENSE = "GPLv2"
+
+DEPENDS = "sysfsutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
 
@@ -16,7 +18,6 @@ do_install_append () {
     install -d ${D}/${sysconfdir}/network/if-post-down.d
 }
 
-DEPENDS = "sysfsutils"
 RRECOMMENDS_${PN} = "kernel-module-bridge"
 
 pkg_postinst_${PN} () {
