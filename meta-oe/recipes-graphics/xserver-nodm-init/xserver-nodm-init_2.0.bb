@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SECTION = "x11"
 
-PR = "r21"
+PR = "r22"
 
 SRC_URI = "file://xserver-nodm \
            file://gplv2-license.patch \
@@ -23,9 +23,12 @@ do_install() {
     install xserver-nodm ${D}${sysconfdir}/init.d
 
     install -d ${D}${sysconfdir}/default
-    install -d ${D}${systemd_unitdir}/system
-    install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
-    install -m 0644 ${WORKDIR}/xserver-nodm.service ${D}${systemd_unitdir}/system
+
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install xserver-nodm.conf ${D}${sysconfdir}/default/xserver-nodm
+        install -m 0644 ${WORKDIR}/xserver-nodm.service ${D}${systemd_unitdir}/system
+    fi
 }
 
 RDEPENDS_${PN} = "xserver-common (>= 1.30) xinit"
