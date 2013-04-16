@@ -54,6 +54,7 @@ EXTRA_OECONF = " \
     vim_cv_tgent=non-zero \
     vim_cv_toupper_broken=no \
     vim_cv_tty_group=world \
+    STRIP=/bin/true \
 "
 
 # Work around rpm picking up csh as a dep
