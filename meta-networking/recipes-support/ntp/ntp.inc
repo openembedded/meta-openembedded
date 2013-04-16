@@ -20,6 +20,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntpdate.default \
            file://ntpdate.service \
            file://ntpd.service \
+           file://sntp.service \
+           file://sntp \
 "
 
 inherit autotools update-rc.d systemd
@@ -52,15 +54,18 @@ do_install_append() {
 
     install -d ${D}/${sysconfdir}/default
     install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
+    install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
+
     install -d ${D}/${sysconfdir}/network/if-up.d
     ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/ntpdate.service ${D}${systemd_unitdir}/system/
     install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
+    install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
 }
 
-PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils"
+PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils sntp"
 # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
 
 # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
@@ -71,9 +76,10 @@ RPROVIDES_${PN}-utils = "${PN}-bin"
 RREPLACES_${PN}-utils = "${PN}-bin"
 RCONFLICTS_${PN}-utils = "${PN}-bin"
 
-SYSTEMD_PACKAGES = "${PN} ntpdate"
+SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
 SYSTEMD_SERVICE_${PN} = "ntpd.service"
 SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
+SYSTEMD_SERVICE_sntp = "sntp.service"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
@@ -94,6 +100,9 @@ FILES_ntpdate = "${bindir}/ntpdate \
     ${sysconfdir}/default/ntpdate \
     ${systemd_unitdir}/system/ntpdate.service \
 "
+FILES_sntp = "${bindir}/sntp \
+              ${sysconfdir}/default/sntp \
+             "
 
 CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
 CONFFILES_ntpdate = "${sysconfdir}/default/ntpdate"
