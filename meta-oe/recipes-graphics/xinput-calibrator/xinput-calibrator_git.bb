@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://src/calibrator.cpp;endline=22;md5=1bcba08f67cdb56f340
 DEPENDS = "virtual/libx11 libxi"
 
 PV = "0.7.5+git${SRCPV}"
-PR = "r5"
+PR = "r6"
 
 inherit autotools systemd
 
@@ -26,8 +26,10 @@ do_install_append() {
     sed -i -e 's,^Exec=.*,Exec=${bindir}/xinput_calibrator_once.sh,' scripts/xinput_calibrator.desktop
     install -m 0644 scripts/xinput_calibrator.desktop ${D}${sysconfdir}/xdg/autostart
 
-    install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/xinput-calibrator.service ${D}${systemd_unitdir}/system
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/xinput-calibrator.service ${D}${systemd_unitdir}/system
+    fi
 }
 
 FILES_${PN} += "${sysconfdir}/xdg/autostart"
