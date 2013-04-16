@@ -8,6 +8,11 @@ hardwared BLOCKSIZE setting of 1432).
 block rollover
 http://www.compuphase.com/tftp.htm
 
+Patch originally from OpenSUSE:
+https://build.opensuse.org/package/show?package=atftp&project=openSUSE%3A12.2
+
+Upstream-Status: Pending
+
 Index: git/tftp_def.h
 ===================================================================
 --- git.orig/tftp_def.h	2012-11-19 16:28:50.221027144 -0800

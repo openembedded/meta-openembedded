@@ -1,4 +1,4 @@
-DESCRIPTION = "Advanced TFTP server and client"
+SUMMARY = "Advanced TFTP server and client"
 SECTION = "network"
 HOMEPAGE = "http://packages.debian.org/atftp"
 LICENSE = "GPLv2"
@@ -38,7 +38,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/atftpd.service ${D}${systemd_unitdir}/system
 }
 
-PACKAGES =+ "atftpd"
+PACKAGES =+ "${PN}d"
 
 FILES_${PN} = "${bindir}/*"
 

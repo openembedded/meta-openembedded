@@ -1,3 +1,10 @@
+Avoid assigning thread data outside of mutex lock
+
+Patch originally from OpenSUSE:
+https://build.opensuse.org/package/show?package=atftp&project=openSUSE%3A12.2
+
+Upstream-Status: Pending
+
 Index: git/tftpd_list.c
 ===================================================================
 --- git.orig/tftpd_list.c	2012-10-24 21:48:47.000000000 -0700
