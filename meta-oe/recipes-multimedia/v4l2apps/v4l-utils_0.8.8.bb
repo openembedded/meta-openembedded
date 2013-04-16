@@ -13,6 +13,7 @@ inherit autotools gettext
 PROVIDES = "libv4l"
 
 SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
+           file://openat.patch \
 "
 # 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag
 SRCREV = "0298efdcd1153b8f719b9164548a3f0546f0cb7c"

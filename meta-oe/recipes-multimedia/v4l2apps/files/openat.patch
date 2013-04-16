@@ -1,0 +1,38 @@
+From ac8eb4d8e1c16b907e795da123a032869c77c56f Mon Sep 17 00:00:00 2001
+From: Riku Voipio <riku.voipio@linaro.org>
+Date: Tue, 22 Jan 2013 12:44:48 +0200
+Subject: [PATCH] libv4lsyscall-priv.h: use openat when available
+
+New architectures such as 64-Bit arm build kernels without legacy
+system calls - Such as the the no-at system calls. Thus, use
+SYS_openat whenever it is available.
+
+Signed-off-by: Riku Voipio <riku.voipio@linaro.org>
+Signed-off-by: Mauro Carvalho Chehab <mchehab@redhat.com>
+
+Upstream-status: backport
+---
+ lib/libv4lconvert/libv4lsyscall-priv.h |    5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/lib/libv4lconvert/libv4lsyscall-priv.h b/lib/libv4lconvert/libv4lsyscall-priv.h
+index 2dac49a..cdd38bc 100644
+--- a/lib/libv4lconvert/libv4lsyscall-priv.h
++++ b/lib/libv4lconvert/libv4lsyscall-priv.h
+@@ -72,8 +72,13 @@ typedef off_t __off_t;
+ 
+ #ifndef CONFIG_SYS_WRAPPER
+ 
++#ifdef SYS_openat
++#define SYS_OPEN(file, oflag, mode) \
++	syscall(SYS_openat, AT_FDCWD, (const char *)(file), (int)(oflag), (mode_t)(mode))
++#else
+ #define SYS_OPEN(file, oflag, mode) \
+ 	syscall(SYS_open, (const char *)(file), (int)(oflag), (mode_t)(mode))
++#endif
+ #define SYS_CLOSE(fd) \
+ 	syscall(SYS_close, (int)(fd))
+ #define SYS_IOCTL(fd, cmd, arg) \
+-- 
+1.7.10.4
+
