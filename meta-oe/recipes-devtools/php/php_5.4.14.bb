@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
 PR = "${INC_PR}.0"
 
 SRC_URI += "file://acinclude-xml2-config.patch \
-            file://php-m4-divert.patch \
             file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch"
 
 SRC_URI_append_pn-php += "file://iconv.patch \
@@ -18,5 +17,5 @@ SRC_URI_append_pn-php += "file://iconv.patch \
             file://php-fpm-apache.conf \
 "
 
-SRC_URI[md5sum] = "e1d2a3ec7849d4b3032bd1abf1916aa4"
-SRC_URI[sha256sum] = "814ce55b950158c4ddadbcd0b2d7d8cb4b570de4a29b9db021020594e2469fd6"
+SRC_URI[md5sum] = "cfdc044be2c582991a1fe0967898fa38"
+SRC_URI[sha256sum] = "5450f3843bc651eb3fb00601f0cce1930aaaf65c7c966c02fe4a46f9c81be20a"

@@ -64,7 +64,9 @@ do_install_append_pn-php-native() {
 # fixme
 do_install_append_pn-php() {
     install -d ${D}/${sysconfdir}/
-    mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
+    if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
+         mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
+    fi
     rm -rf ${D}/${TMPDIR}
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
