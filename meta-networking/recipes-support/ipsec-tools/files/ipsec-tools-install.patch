@@ -1,3 +1,7 @@
+Avoid attempting to install vmbuf.h twice
+
+Upstream-Status: Accepted
+
 Taken from pld-linux.org:
 http://cvs.pld-linux.org/cgi-bin/cvsweb.cgi/packages/ipsec-tools/ipsec-tools-install.patch
 
