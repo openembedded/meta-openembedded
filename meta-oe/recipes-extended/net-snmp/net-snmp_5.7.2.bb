@@ -1,11 +1,8 @@
 require net-snmp.inc
 
-PR = "${INC_PR}.4"
 LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
-        file://sync-with-5.7-branch.patch \
-        file://libnl-3-support.patch \
         file://init \
         file://snmpd.conf \
         file://snmptrapd.conf \
@@ -14,6 +11,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://snmptrapd.service \
         file://ifmib.patch \
 "
+
+PR = "${INC_PR}.0"
 
 EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
 EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
@@ -30,5 +29,5 @@ do_configure_prepend() {
 PARALLEL_MAKE = ""
 CCACHE = ""
 
-SRC_URI[md5sum] = "c95d08fd5d93df0c11a2e1bdf0e01e0b"
-SRC_URI[sha256sum] = "7c71c9650c65b715356547e20ca2dbe6313944278af8cc19c32a5337f46b181f"
+SRC_URI[md5sum] = "5bddd02e2f82b62daa79f82717737a14"
+SRC_URI[sha256sum] = "09ed31b4cc1f3c0411ef9a16eff79ef3b30d89c32ca46d5a01a41826c4ceb816"
