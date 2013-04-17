@@ -12,6 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://systemd-support.patch \
         file://snmpd.service \
         file://snmptrapd.service \
+        file://ifmib.patch \
 "
 
 EXTRA_OECONF += "--disable-embedded-perl --with-perl-modules=no"
