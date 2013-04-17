@@ -91,8 +91,8 @@ INITSCRIPT_PARAMS_${PN}-server = "defaults"
 
 EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
 
-SYSTEMD_PACKAGES = "${PN}-server-snmpd-systemd \
-                    ${PN}-server-snmptrapd-systemd"
+SYSTEMD_PACKAGES = "${PN}-server-snmpd \
+                    ${PN}-server-snmptrapd"
 
 SYSTEMD_SERVICE_${PN}-server-snmpd = "snmpd.service"
 SYSTEMD_SERVICE_${PN}-server-snmptrapd =  "snmptrapd.service"
