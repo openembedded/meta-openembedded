@@ -7,15 +7,18 @@ DEPENDS = "libxml2 libxslt"
 SECTION = "net"
 
 SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
-           file://hiawatha-init "
+           file://hiawatha-init \
+           file://hiawatha.service "
 
-SRC_URI[md5sum] = "5def93779bbc10a021796abd3609caf7"
-SRC_URI[sha256sum] = "2583d8e7f48ddc6cdedc27bb51d3e130679fc2f4411622bae9ddce3ef965d063"
-
-inherit cmake update-rc.d
+SRC_URI[md5sum] = "8abc4f85dbb9a76ed66e7f35de520064"
+SRC_URI[sha256sum] = "5e40119afb050b11737250c08d89ac7ba7472645738a48c06aa79979a19729fc"
 
 INITSCRIPT_NAME = "hiawatha"
 INITSCRIPT_PARAMS = "defaults 70"
+
+SYSTEMD_SERVICE_${PN} = "hiawatha.service"
+
+inherit cmake update-rc.d systemd
 
 EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
                   -DENABLE_CACHE=OFF \
@@ -44,6 +47,12 @@ do_install_append() {
     # configure php-fcgi to have a working configuration
     # by default if php is installed
     echo "Server = ${bindir}/php-cgi ; 2 ; 127.0.0.1:2005 ; nobody:nobody ; ${sysconfdir}/php/hiawatha-php5/php.ini" >> ${D}${sysconfdir}/hiawatha/php-fcgi.conf
+
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}/${systemd_unitdir}/system
+        install -m 644 ${WORKDIR}/hiawatha.service ${D}/${systemd_unitdir}/system
+    fi
+
 }
 
 CONFFILES_${PN} = " \
