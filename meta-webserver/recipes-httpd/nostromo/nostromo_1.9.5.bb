@@ -1,3 +1,4 @@
+SUMMARY = "A simple, fast and secure HTTP server"
 HOMEPAGE = "http://www.nazgul.ch/dev_nostromo.html"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://src/nhttpd/main.c;beginline=2;endline=14;md5=e5ec3fa723b29b7d59d205afd8d36938"
@@ -8,6 +9,9 @@ SRC_URI = "http://www.nazgul.ch/dev/${PN}-${PV}.tar.gz \
            file://volatiles \
            file://nostromo \
 "
+
+SRC_URI[md5sum] = "dc6cfd6b5aae04c370c7f818fa7bde55"
+SRC_URI[sha256sum] = "5f62578285e02449406b46cf06a7888fe3dc4a90bedf58cc18523bad62f6b914"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
@@ -44,8 +48,5 @@ do_install() {
     install -m 0644 icons/file.gif ${D}${localstatedir}/nostromo/icons/file.gif
     chown -R www-data:www-data ${D}/${localstatedir}/nostromo ${D}/${localstatedir}/log/nostromo ${D}/${localstatedir}/run/nostromo
 }
-
-SRC_URI[md5sum] = "dc6cfd6b5aae04c370c7f818fa7bde55"
-SRC_URI[sha256sum] = "5f62578285e02449406b46cf06a7888fe3dc4a90bedf58cc18523bad62f6b914"
 
 CONFFILES_${PN} += "/var/nostromo/conf/mimes ${sysconfdir}/nhttpd.conf"
