@@ -1,5 +1,5 @@
-DESCRIPTION = "Cherokee Web Server fast and secure"
-DESCRIPTION_cget = "Small downloader based in the Cherokee client library"
+SUMMARY = "Cherokee Web Server fast and secure"
+SUMMARY_cget = "Small downloader based in the Cherokee client library"
 HOMEPAGE = "http://www.cherokee-project.com/"
 SECTION = "network"
 LICENSE = "GPLv2"
