@@ -13,7 +13,7 @@ URLV = "${@d.getVar('PV',1)[0:4]}.${@d.getVar('PV',1)[4:6]}.${@d.getVar('PV',1)[
 SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
            file://config.linux-cross"
 # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
-MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/pub/videolan/testing/contrib/live555/ \n"
+MIRRORS += "http://www.live555.com/liveMedia/public/ http://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/ \n"
 
 S = "${WORKDIR}/live"
 TARGET_CC_ARCH += "${LDFLAGS}"
