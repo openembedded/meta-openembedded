@@ -2,6 +2,8 @@ require llvm.inc
 
 PR = "${INC_PR}.0"
 
+SRC_URI += "file://0035-gcc-4.7.patch"
+
 SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
 
 PARALLEL_MAKE_virtclass-native = ""

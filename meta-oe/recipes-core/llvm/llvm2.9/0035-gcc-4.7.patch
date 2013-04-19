@@ -1,0 +1,16 @@
+Upstream-Status: Pending
+
+Imported from http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=673266
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+--- a/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-17 16:11:46.956180361 +0200
++++ b/lib/ExecutionEngine/JIT/Intercept.cpp	2012-05-17 16:14:35.256184996 +0200
+@@ -52,6 +52,7 @@
+ #include <sys/stat.h>
+ #endif
+ #include <fcntl.h>
++#include <unistd.h>
+ /* stat functions are redirecting to __xstat with a version number.  On x86-64 
+  * linking with libc_nonshared.a and -Wl,--export-dynamic doesn't make 'stat' 
+  * available as an exported symbol, so we have to add it explicitly.
