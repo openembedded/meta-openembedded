@@ -4,6 +4,15 @@ PR = "${INC_PR}.0"
 
 SRC_URI += "file://0035-gcc-4.7.patch"
 
+# 0019-issue6065.patch is still needed but a bit modified, because it was resolved by
+# http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?r1=120304&r2=124694&pathrev=124694
+# http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?diff_format=h&r1=57911&r2=57910&pathrev=57911
+# and still it fails with 
+# {standard input}:31: Error: invalid register list to push/pop instruction -- `pop {r0,r1,r2,r3,lr}'
+# make[2]: *** [lib/Target/ARM/CMakeFiles/LLVMARMCodeGen.dir/ARMJITInfo.cpp.o] Error 1
+# SRC_URI += "file://0019-issue6065.patch"
+ARM_INSTRUCTION_SET = "arm"
+
 SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
 
 PARALLEL_MAKE_virtclass-native = ""

@@ -1,0 +1,35 @@
+--- llvm-2.9.orig/lib/Target/ARM/ARMJITInfo.cpp	2013-04-19 14:49:28.063566919 +0200
++++ llvm-2.9/lib/Target/ARM/ARMJITInfo.cpp	2013-04-19 15:24:31.065435029 +0200
+@@ -59,7 +59,17 @@
+     // for the real target function right now. We have to act as if this
+     // whole compilation callback doesn't exist as far as the caller is
+     // concerned, so we can't just preserve the callee saved regs.
++    // stmdb introduced in http://llvm.org/viewvc/llvm-project/llvm/trunk/lib/Target/ARM/ARMJITInfo.cpp?diff_format=h&r1=57911&r2=57910&pathrev=57911
++    // but fails on armv4t
++    // | {standard input}: Assembler messages:
++    // | {standard input}:22: Error: selected processor does not support Thumb mode `stmdb sp!,{r0,r1,r2,r3,lr}'
++    // | {standard input}:31: Error: lo register required -- `ldmia sp!,{r0,r1,r2,r3,lr}'
++    // | {standard input}:32: Error: lo register required -- `ldr pc,[sp],#4'
++#ifndef __thumb__
+     "stmdb sp!, {r0, r1, r2, r3, lr}\n"
++#else
++    "push {r0, r1, r2, r3, lr}\n"
++#endif
+ #if (defined(__VFP_FP__) && !defined(__SOFTFP__))
+     "fstmfdd sp!, {d0, d1, d2, d3, d4, d5, d6, d7}\n"
+ #endif
+@@ -99,8 +109,14 @@
+     // The above twiddling of the saved return addresses allows us to
+     // deallocate everything, including the LR the stub saved, with two
+     // updating load instructions.
++#ifndef __thumb__
+     "ldmia  sp!, {r0, r1, r2, r3, lr}\n"
+     "ldr    pc, [sp], #4\n"
++#else
++    // thumb dont allow lr and pc to be poped in the same instruction.
++    "pop {r0, r1, r2, r3, lr}\n"
++    "pop {pc}\n"
++#endif
+       );
+ #else  // Not an ARM host
+   void ARMCompilationCallback() {
