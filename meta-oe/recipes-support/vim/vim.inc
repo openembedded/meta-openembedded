@@ -4,20 +4,16 @@ DEPENDS = "ncurses"
 # vimdiff doesn't like busybox diff
 RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
-LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=cd49910a3dde6fe0a7e24ebe8cbf7066"
+LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=4c91d841bb7b75f68b5bb8ad7118f5b8"
 
 PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
 INC_PR = "r13"
 
-SRC_URI = " \
-    ftp://ftp.${PN}.org/pub/${PN}/unix/${PN}-${PV_MAJOR}.tar.bz2;name=${VIMDIR} \
-    ftp://ftp.${PN}.org/pub/${PN}/extra/${PN}-${PV_MAJOR}-extra.tar.gz;name=${VIMDIR}-extra \
-    ftp://ftp.${PN}.org/pub/${PN}/extra/${PN}-${PV_MAJOR}-lang.tar.gz;name=${VIMDIR}-lang \
-"
+SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
 
-S = "${WORKDIR}/${VIMDIR}/src"
+S = "${WORKDIR}/${PN}/src"
 
 inherit autotools update-alternatives
 
