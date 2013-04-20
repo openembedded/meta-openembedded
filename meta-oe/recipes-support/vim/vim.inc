@@ -15,7 +15,6 @@ SRC_URI = " \
     ftp://ftp.${PN}.org/pub/${PN}/unix/${PN}-${PV_MAJOR}.tar.bz2;name=${VIMDIR} \
     ftp://ftp.${PN}.org/pub/${PN}/extra/${PN}-${PV_MAJOR}-extra.tar.gz;name=${VIMDIR}-extra \
     ftp://ftp.${PN}.org/pub/${PN}/extra/${PN}-${PV_MAJOR}-lang.tar.gz;name=${VIMDIR}-lang \
-    file://vimrc \
 "
 
 S = "${WORKDIR}/${VIMDIR}/src"
@@ -57,10 +56,12 @@ EXTRA_OECONF = " \
     STRIP=/bin/true \
 "
 
-# Work around rpm picking up csh as a dep
 do_install_append() {
+    # Work around rpm picking up csh as a dep
     chmod -x ${D}${datadir}/${PN}/${VIMDIR}/tools/vim132
-    install -m 0644 ${WORKDIR}/vimrc ${D}/${datadir}/${PN}
+
+    # Install example vimrc from runtime files
+    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${PN}/vimrc
 }
 
 PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
