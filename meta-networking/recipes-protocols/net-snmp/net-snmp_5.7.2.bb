@@ -1,11 +1,10 @@
-DESCRIPTION = "Various tools relating to the Simple Network Management Protocol"
+SUMMARY = "Various tools relating to the Simple Network Management Protocol"
 HOMEPAGE = "http://www.net-snmp.org/"
 LICENSE = "BSD"
 
-SRC_URI[md5sum] = "5bddd02e2f82b62daa79f82717737a14"
-SRC_URI[sha256sum] = "09ed31b4cc1f3c0411ef9a16eff79ef3b30d89c32ca46d5a01a41826c4ceb816"
-
 LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5a622ea24634e"
+
+DEPENDS = "openssl libnl pciutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://init \
@@ -17,13 +16,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://ifmib.patch \
 "
 
-DEPENDS = "openssl libnl pciutils"
-RDEPENDS_${PN}-server-snmpd += "net-snmp-mibs"
-RDEPENDS_${PN}-server-snmptrapd += "net-snmp-server-snmpd"
-RDEPENDS_${PN}-server += "net-snmp-server-snmpd net-snmp-server-snmptrapd"
-RDEPENDS_${PN}-client += "net-snmp-mibs"
-RDEPENDS_${PN}-dev = "net-snmp-client (= ${EXTENDPKGV}) net-snmp-server (= ${EXTENDPKGV})"
-RRECOMMENDS_${PN}-dbg = "net-snmp-client (= ${EXTENDPKGV}) net-snmp-server (= ${EXTENDPKGV})"
+SRC_URI[md5sum] = "5bddd02e2f82b62daa79f82717737a14"
+SRC_URI[sha256sum] = "09ed31b4cc1f3c0411ef9a16eff79ef3b30d89c32ca46d5a01a41826c4ceb816"
 
 inherit autotools update-rc.d siteinfo systemd
 
@@ -96,6 +90,13 @@ SYSTEMD_PACKAGES = "${PN}-server-snmpd \
 
 SYSTEMD_SERVICE_${PN}-server-snmpd = "snmpd.service"
 SYSTEMD_SERVICE_${PN}-server-snmptrapd =  "snmptrapd.service"
+
+RDEPENDS_${PN}-server-snmpd += "net-snmp-mibs"
+RDEPENDS_${PN}-server-snmptrapd += "net-snmp-server-snmpd"
+RDEPENDS_${PN}-server += "net-snmp-server-snmpd net-snmp-server-snmptrapd"
+RDEPENDS_${PN}-client += "net-snmp-mibs"
+RDEPENDS_${PN}-dev = "net-snmp-client (= ${EXTENDPKGV}) net-snmp-server (= ${EXTENDPKGV})"
+RRECOMMENDS_${PN}-dbg = "net-snmp-client (= ${EXTENDPKGV}) net-snmp-server (= ${EXTENDPKGV})"
 
 RPROVIDES_${PN}-server-snmpd += "${PN}-server-snmpd-systemd"
 RREPLACES_${PN}-server-snmpd += "${PN}-server-snmpd-systemd"
