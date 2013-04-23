@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 inherit xfce-panel-plugin
 
-DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf"
+DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf libunique"
 
 SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
 
