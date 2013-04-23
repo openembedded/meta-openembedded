@@ -2,7 +2,7 @@ require ttf.inc
 
 DESCRIPTION = "Inconsolata font - TTF Version"
 HOMEPAGE = "http://www.levien.com/type/myfonts/inconsolata.html"
-LICENSE = "SIL Open Font License"
+LICENSE = "OFL-1.1"
 LIC_FILES_CHKSUM = "file://../OFL.txt;md5=969851e3a70122069a4d9ee61dd5a2ed"
 PR = "r0"
 
