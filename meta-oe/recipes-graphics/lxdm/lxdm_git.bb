@@ -15,7 +15,7 @@ LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam
 SRCREV = "65e7cc8fdc150c2b925eb348ce82de17dee5eb0b"
 PV = "0.4.2+git${SRCPV}"
 PE = "1"
-PR = "r6"
+PR = "r7"
 
 DEPENDS = "cairo consolekit dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
 
@@ -49,19 +49,16 @@ do_install_append() {
 
 # make installed languages choosable
 pkg_postinst_${PN} () {
-if [ "x$D" != "x" ]; then
-    exit 1
-fi
 langs=""
-for lang in `find ${libdir}/locale -maxdepth 1 | grep _ | sort`; do
-    lang=`basename $lang`
-    if [ "x$langs" = "x" ]; then
-        langs="$lang"
-    else
-        langs="$langs $lang"
-    fi
+for lang in `find $D${libdir}/locale -maxdepth 1 | grep _ | sort`; do
+lang=`basename $lang`
+if [ "x$langs" = "x" ]; then
+    langs="$lang"
+else
+   langs="$langs $lang"
+fi
 done
-sed -i "s:last_langs=.*$:last_langs=$langs:g" ${localstatedir}/lib/lxdm/lxdm.conf
+sed -i "s:last_langs=.*$:last_langs=$langs:g" $D${localstatedir}/lib/lxdm/lxdm.conf
 }
 
 RDEPENDS_${PN} = "pam-plugin-loginuid setxkbmap"
