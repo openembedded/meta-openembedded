@@ -65,7 +65,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
 }
 
-PACKAGES += "ntpdate ${PN}-tickadj ${PN}-utils sntp"
+PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
 # NOTE: you don't need ntpdate, use "ntpd -q -g -x"
 
 # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
