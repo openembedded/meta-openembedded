@@ -10,8 +10,8 @@ SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
            file://hiawatha-init \
            file://hiawatha.service "
 
-SRC_URI[md5sum] = "8abc4f85dbb9a76ed66e7f35de520064"
-SRC_URI[sha256sum] = "5e40119afb050b11737250c08d89ac7ba7472645738a48c06aa79979a19729fc"
+SRC_URI[md5sum] = "833ffc295310cb30694e2b6a2c7ffc9c"
+SRC_URI[sha256sum] = "699958c178757be0a5074093c15a136cd4387403e60911d29520d362f345ab48"
 
 INITSCRIPT_NAME = "hiawatha"
 INITSCRIPT_PARAMS = "defaults 70"
