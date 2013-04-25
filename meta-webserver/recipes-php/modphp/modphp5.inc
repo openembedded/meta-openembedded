@@ -8,7 +8,6 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://configure.patch \
            file://pthread-check-threads-m4.patch \
            file://70_mod_php5.conf \
-           file://php-5.3.14-aconf259.patch \
 "
 
 S = "${WORKDIR}/php-${PV}"
