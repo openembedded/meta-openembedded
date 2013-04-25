@@ -1,0 +1,69 @@
+From 023b17f53d888dfb45981b141ce4dc151ab140f0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 4 Apr 2013 20:23:00 +0200
+Subject: [PATCH] remove classes and properties which are not supported by
+ gtk+
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+unsupported classes caused nm-connection editor to crash
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/connection-editor/ce-page-general.ui      |    7 +------
+ src/connection-editor/nm-connection-editor.ui |    2 +-
+ 2 files changed, 2 insertions(+), 7 deletions(-)
+
+diff --git a/src/connection-editor/ce-page-general.ui b/src/connection-editor/ce-page-general.ui
+index f505c14..a3e8d2b 100644
+--- a/src/connection-editor/ce-page-general.ui
++++ b/src/connection-editor/ce-page-general.ui
+@@ -37,8 +37,6 @@
+       <object class="GtkComboBox" id="dependent_vpn_combo">
+         <property name="visible">True</property>
+         <property name="can_focus">False</property>
+-        <property name="margin_left">26</property>
+-        <property name="margin_bottom">12</property>
+         <property name="model">dependent_vpn_model</property>
+         <child>
+           <object class="GtkCellRendererText" id="renderer1"/>
+@@ -59,7 +57,6 @@
+         <property name="visible">True</property>
+         <property name="can_focus">True</property>
+         <property name="receives_default">False</property>
+-        <property name="margin_bottom">12</property>
+         <property name="use_underline">True</property>
+         <property name="xalign">0</property>
+         <property name="draw_indicator">True</property>
+@@ -86,11 +83,9 @@
+       </packing>
+     </child>
+     <child>
+-      <object class="GtkBox" id="box2">
++      <object class="GtkVBox" id="box2">
+         <property name="visible">True</property>
+         <property name="can_focus">False</property>
+-        <property name="valign">start</property>
+-        <property name="vexpand">True</property>
+         <property name="spacing">6</property>
+         <child>
+           <object class="GtkLabel" id="firewall_zone_label">
+diff --git a/src/connection-editor/nm-connection-editor.ui b/src/connection-editor/nm-connection-editor.ui
+index 74ee266..6f1e166 100644
+--- a/src/connection-editor/nm-connection-editor.ui
++++ b/src/connection-editor/nm-connection-editor.ui
+@@ -11,7 +11,7 @@
+     <property name="icon_name">preferences-system-network</property>
+     <property name="type_hint">dialog</property>
+     <child internal-child="vbox">
+-      <object class="GtkBox" id="dialog-vbox2">
++      <object class="GtkVBox" id="dialog-vbox2">
+         <property name="visible">True</property>
+         <property name="can_focus">False</property>
+         <property name="orientation">vertical</property>
+-- 
+1.7.6.5
+
