@@ -1,0 +1,32 @@
+From 1137846f778dc9f3be0c89cb2df18d3a37f844d7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 19 Apr 2013 18:34:09 +0200
+Subject: [PATCH] NetworkManager.service: remove reference to
+ NetworkManager-wait-online.service
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+* NetworkManager-wait-online.service crashes
+* NetworkManager works fine without NetworkManager-wait-online
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ data/NetworkManager.service.in |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
+
+diff --git a/data/NetworkManager.service.in b/data/NetworkManager.service.in
+index 16b53b6..a2e913c 100644
+--- a/data/NetworkManager.service.in
++++ b/data/NetworkManager.service.in
+@@ -18,5 +18,4 @@ KillMode=process
+ [Install]
+ WantedBy=multi-user.target
+ Alias=dbus-org.freedesktop.NetworkManager.service
+-Also=NetworkManager-wait-online.service
+ 
+-- 
+1.7.4.4
+

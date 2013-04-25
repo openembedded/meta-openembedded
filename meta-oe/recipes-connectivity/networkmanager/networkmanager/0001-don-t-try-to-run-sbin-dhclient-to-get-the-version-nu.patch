@@ -1,32 +1,36 @@
-From 6e7ff802b689df18d7bd1d1a83639925371650cc Mon Sep 17 00:00:00 2001
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 17 Nov 2011 11:17:42 +0100
-Subject: [PATCH] don't try to run /sbin/dhclient to get the version number, this break cross-compiling
+From 7dd40db6606c3b3559365a03944cb99aee5ceabc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 4 Apr 2013 12:57:58 +0200
+Subject: [PATCH] don't try to run /sbin/dhclient to get the version number,
+ this break cross-compiling
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upstream-Status: Unknown
+Upstream-Status: Inappropriate [build system specific]
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
  configure.ac |    6 ------
  1 files changed, 0 insertions(+), 6 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 5ee0cb0..b727db7 100644
+index cc66e9b..7163287 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -497,12 +497,6 @@ case "${with_dhclient}" in
- 	/*)
- 		DHCLIENT_PATH="${with_dhclient}"
- 		DHCLIENT_VERSION=4
--		if test -x "${with_dhclient}"; then
--			case `"${with_dhclient}" --version 2>&1` in
--				"isc-dhclient-4"*) DHCLIENT_VERSION=4; break;;
--				"isc-dhclient-V3"*) DHCLIENT_VERSION=3; break;;
--			esac
+@@ -488,12 +488,6 @@ AS_IF([test -z "$with_dhcpcd"], with_dhcpcd=yes)
+ # Search and check the executables
+ if test "$with_dhclient" = "yes"; then
+ 	AC_PATH_PROGS(with_dhclient, dhclient, no, /sbin:/usr/sbin:/usr/local/sbin)
+-	if test "$with_dhclient" != "no"; then
+-		if ! $with_dhclient --version 2>&1 | grep -q "^isc-dhclient-4\."; then
+-			AC_MSG_WARN([Cannot use dhclient, version 4.x is required])
+-			with_dhclient=no
 -		fi
- 		AC_MSG_NOTICE(using dhclient at ${DHCLIENT_PATH})
- 		;;
- 	no)	AC_MSG_NOTICE(dhclient support disabled)
+-	fi
+ fi
+ if test "$with_dhcpcd" = "yes"; then
+ 	AC_PATH_PROGS(with_dhcpcd, dhcpcd, no, /sbin:/usr/sbin:/usr/local/sbin)
 -- 
-1.7.2.5
+1.7.6.5
 
