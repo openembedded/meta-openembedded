@@ -8,8 +8,8 @@ URI: git://git.openembedded.org/meta-openembedded
 branch: dylan
 revision: HEAD
 
-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][dylan]' in the subject'
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-ruby][dylan]' in the subject'
 
-When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][dylan][PATCH'
+When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-ruby][dylan][PATCH'
 
 Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
