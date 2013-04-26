@@ -12,4 +12,5 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gpe]
 
 When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gpe][PATCH'
 
-Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+Interim layer maintainers: Koen Kooi <koen@dominion.thruhere.net>
+                           Martin Jansa <martin.jansa@gmail.com>
