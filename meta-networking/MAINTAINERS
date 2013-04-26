@@ -6,7 +6,7 @@ development mailing list (openembedded-devel@lists.openembedded.org) with
 
 When sending single patches, please use something like:
 
-   git send-email -1 \
+   git send-email -1 -M \
         --to openembedded-devel@lists.openembedded.org \
         --subject-prefix=meta-networking][PATCH
 
