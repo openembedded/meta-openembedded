@@ -1,0 +1,15 @@
+This layer depends on:
+
+URI: git://git.openembedded.org/openembedded-core
+branch: dylan
+revision: HEAD
+
+URI: git://git.openembedded.org/meta-openembedded
+branch: dylan
+revision: HEAD
+
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome][dylan]' in the subject'
+
+When sending single patches, please using something like 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][dylan][PATCH'
+
+Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
