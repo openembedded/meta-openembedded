@@ -10,6 +10,7 @@ revision: HEAD
 
 Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-efl][dylan]' in the subject'
 
-When sending single patches, please using something like 'git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-efl][dylan][PATCH'
+When sending single patches, please using something like:
+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-efl][dylan][PATCH'
 
 Interim layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
