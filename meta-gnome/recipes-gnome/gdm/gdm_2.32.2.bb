@@ -4,9 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolekit libpam gnome-doc-utils gtk+ xrdb"
 
-PR = "r15"
+PR = "r16"
 
-inherit gnome update-rc.d systemd
+inherit gnome update-rc.d systemd useradd
 
 SRC_URI += " \
             file://cross-xdetection.diff \
@@ -33,8 +33,8 @@ do_configure_prepend() {
 }
 
 do_install_prepend() {
-    mkdir -p ${D}/var/lib/gdm/.gconf.mandatory
-    cp ${WORKDIR}/%gconf-tree.xml ${D}/var/lib/gdm/.gconf.mandatory/
+    install -d ${D}/${localstatedir}/lib/gdm/.gconf.mandatory
+    install ${WORKDIR}/%gconf-tree.xml ${D}/${localstatedir}/lib/gdm/.gconf.mandatory/
 }
 
 do_install_append() {
@@ -54,6 +54,9 @@ do_install_append() {
     sed -e 's,%sbindir%,${sbindir},g' \
         < ${WORKDIR}/gdm.service.in \
         > ${D}${systemd_unitdir}/system/gdm.service
+
+    chown -R gdm:gdm ${D}${localstatedir}/lib/gdm
+    chmod 0750 ${D}${localstatedir}/lib/gdm
 }
 
 FILES_${PN} += "${datadir}/icon* \
@@ -72,23 +75,13 @@ SYSTEMD_SERVICE_${PN} = "gdm.service"
 INITSCRIPT_NAME = "gdm"
 INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
 
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
+
 pkg_postinst_${PN} () {
-    # can't do this offline
-    if [ "x$D" != "x" ]; then
-        exit 1
-    fi
-    grep "^gdm:" /etc/group > /dev/null || addgroup gdm
-    grep "^gdm:" /etc/passwd > /dev/null || adduser --disabled-password --system --home /var/lib/gdm gdm --ingroup gdm -g gdm
-
-if [ -d /var/lib/gdm ]; then
-    chown -R gdm:gdm /var/lib/gdm
-    chmod 0750 /var/lib/gdm
-fi
-
 # Register up as default dm
-mkdir -p ${sysconfdir}/X11/
-echo "${bindir}/gdm" > ${sysconfdir}/X11/default-display-manager
-
+mkdir -p $D${sysconfdir}/X11/
+echo "${bindir}/gdm" > $D${sysconfdir}/X11/default-display-manager
 }
 
 pkg_postrm_${PN} () {
