@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 
 DEPENDS = "dbus gtk+3"
 
+# conflicts with libnotify, mixing them in build breaks couple of packages
+EXCLUDE_FROM_WORLD = "1"
+
 BPN = "libnotify"
 
 inherit gnome lib_package

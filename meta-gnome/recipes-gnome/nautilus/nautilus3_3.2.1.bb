@@ -11,6 +11,9 @@ PR = "r4"
 DEPENDS = "libnotify3 gtk+3 libunique gvfs librsvg libexif gnome-desktop3"
 # optional: tracker
 
+# needs libnotify3 which conflicts with libnotify, mixing them in build breaks couple of packages
+EXCLUDE_FROM_WORLD = "1"
+
 # to include nautilus3/no-try-run-strftime.diff before the rest
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 BPN = "nautilus"
