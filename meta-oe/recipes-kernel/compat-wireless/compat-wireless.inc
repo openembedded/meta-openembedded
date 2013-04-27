@@ -6,6 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d7810fab7487fb0aad327b76f1be7cd7"
 RDEPENDS_${PN} = "wireless-tools"
 INC_PR = "r1"
 
+# depends on config options which are not enabled in qemu* MACHINEs by default
+# config.mk:25: *** "ERROR: your kernel has CONFIG_CFG80211=y, you should have it CONFIG_CFG80211=m if you want to use this thing.".  Stop.
+EXCLUDE_FROM_WORLD = "1"
+
 COMPAT_WIRELESS_VERSION = "${PV}-1"
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
