@@ -3,9 +3,8 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth consolekit upower"
-PR = "r6"
+RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower"
+PR = "r7"
 
 inherit xfce update-alternatives
 
@@ -24,6 +23,10 @@ ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
 pkg_postinst_${PN} () {
     echo 127.0.0.1    ${MACHINE} >> /etc/hosts
 }
+
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
+PACKAGECONFIG[systemd] = "--enable-systemd, --disable-systemd, polkit, systemd"
+PACKAGECONFIG[consolekit] = ",,,consolekit"
 
 FILES_${PN} += "${libdir}/xfce4/*/*/*.so \
                 ${libdir}/xfce4/session/*-*-* \
