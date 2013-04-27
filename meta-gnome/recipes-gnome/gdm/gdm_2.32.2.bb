@@ -9,25 +9,27 @@ PR = "r17"
 inherit gnome update-rc.d systemd useradd
 
 SRC_URI += " \
-            file://cross-xdetection.diff \
-            file://0001-Remove-user-switch-applet.patch \
-            file://0002-gdm-user-manager.c-avoid-displaying-system-users-in-.patch \
-            file://sysrooted-pkg-config.patch \
-            file://%gconf-tree.xml \
-            file://gdm \
-            file://gdm.conf \
-            file://gdm-pam \
-            file://Default \
-            file://gdm.service.in \
+    file://cross-xdetection.diff \
+    file://0001-Remove-user-switch-applet.patch \
+    file://0002-gdm-user-manager.c-avoid-displaying-system-users-in-.patch \
+    file://sysrooted-pkg-config.patch \
+    file://%gconf-tree.xml \
+    file://gdm \
+    file://gdm.conf \
+    file://gdm-pam \
+    file://Default \
+    file://gdm.service.in \
 "
 
 SRC_URI[archive.md5sum] = "dbe5187a2e17881cc454e313e0ae8d1e"
 SRC_URI[archive.sha256sum] = "034d23af0ea18d86e5543e707212d9297ec7d83f221808968af266dbebc0e703"
 
-EXTRA_OECONF = " --enable-authentication-scheme=shadow \
-                 --enable-debug=yes \
-                 --with-console-kit \
-                 --disable-scrollkeeper"
+EXTRA_OECONF = " \
+    --enable-authentication-scheme=shadow \
+    --enable-debug=yes \
+    --with-console-kit \
+    --disable-scrollkeeper \
+"
 
 do_configure_prepend() {
     sed -i -e "s:\bdocs::g" ${S}/Makefile.am
