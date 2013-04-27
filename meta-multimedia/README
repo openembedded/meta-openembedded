@@ -4,7 +4,8 @@ URI: git://git.openembedded.org/openembedded-core
 branch: master
 revision: HEAD
 
-URI: git://git.openembedded.org/meta-openembedded/meta-oe
+URI: git://git.openembedded.org/meta-openembedded
+layers: meta-oe, meta-ruby
 branch: master
 revision: HEAD
 
