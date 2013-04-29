@@ -5,10 +5,11 @@ SECTION = "x11/gnome/libs"
 
 inherit gnome lib_package
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI[archive.md5sum] = "a4345e6087ae6195d65a4674ffdca559"
 SRC_URI[archive.sha256sum] = "b2c63916866485793b87398266dd7778548c1734923c272a94d84ee011b6f7a4"
+SRC_URI += "file://0001-libgnome-Makefile.am-allow-deprecated-symbols.patch"
 
 DEPENDS += "libcanberra gconf-native gnome-vfs libbonobo esound"
 
