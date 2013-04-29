@@ -54,11 +54,9 @@ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
 export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
 CFLAGS += " -D_GNU_SOURCE"
 
-acpaths = ""
+EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
 
-do_install  () {
-    oe_runmake 'INSTALL_ROOT=${D}' install
-}
+acpaths = ""
 
 do_install_append_pn-php-native() {
     rm -rf ${D}/${libdir}/php/.registry
