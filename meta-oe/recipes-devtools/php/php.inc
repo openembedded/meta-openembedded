@@ -50,9 +50,6 @@ PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
                           , \
                           ,sqlite3"
 
-LIBS_virtclass-native = " -lxml2 "
-LIBS_pn-php =" -lpthread "
-export LIBS
 THREADS_pn-php = "pthread"
 export THREADS
 export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
