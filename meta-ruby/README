@@ -1,10 +1,10 @@
 This layer depends on:
 
-URI: git://git.openembedded.org/openembedded-core
+URI: git://github.com/openembedded/oe-core.git
 branch: master
 revision: HEAD
 
-URI: git://git.openembedded.org/meta-openembedded
+URI: git://github.com/openembedded/meta-oe.git
 branch: master
 revision: HEAD
 

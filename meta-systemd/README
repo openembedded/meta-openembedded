@@ -1,12 +1,12 @@
 This layer depends on:
 
-URI: git://git.openembedded.org/openembedded-core
+URI: git://github.com/openembedded/oe-core.git
 branch: master
 revision: HEAD
 
 And we're working to break the dependency on this one:
 
-URI: git://git.openembedded.org/meta-openembedded
+URI: git://github.com/openembedded/meta-oe.git
 branch: master
 revision: HEAD
 

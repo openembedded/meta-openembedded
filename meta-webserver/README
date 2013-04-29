@@ -11,14 +11,14 @@ Dependencies
 
 This layer depends on:
 
-URI: git://git.openembedded.org/openembedded-core
+URI: git://github.com/openembedded/oe-core.git
 subdirectory: meta
 branch: master
 revision: HEAD
 
 For some recipes, the meta-oe layer is required:
 
-URI: git://git.openembedded.org/meta-openembedded
+URI: git://github.com/openembedded/meta-oe.git
 subdirectory: meta-oe
 branch: master
 revision: HEAD
