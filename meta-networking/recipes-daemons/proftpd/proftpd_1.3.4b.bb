@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://make.patch \
@@ -47,6 +47,10 @@ do_install () {
 
     install -d ${D}${sysconfdir}/default
     install -m 0755 ${WORKDIR}/default ${D}${sysconfdir}/default/proftpd
+
+    # create the pub directory
+    mkdir -p ${D}/home/${FTPUSER}/pub/
+    chown -R ${FTPUSER}:${FTPGROUP} ${D}/home/${FTPUSER}/pub
 }
 
 INITSCRIPT_NAME = "proftpd"
@@ -55,13 +59,3 @@ INITSCRIPT_PARAM = "defaults 85 15"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "${FTPGROUP}"
 USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
-
-pkg_postinst_${PN} () {
-    if [ "x$D" != "x" ] ; then
-        exit 1
-    fi
-
-    # create the pub directory
-    mkdir -p /home/${FTPUSER}/pub/
-    chown -R ${FTPUSER}:${FTPGROUP} /home/${FTPUSER}/pub
-}
