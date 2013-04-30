@@ -3,12 +3,13 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 inherit systemd
 
-PRINC := "${@int(PRINC) + 2}"
+PRINC := "${@int(PRINC) + 3}"
 
 SYSTEMD_PACKAGES = "dhcp-server dhcp-relay dhcp-client"
 SYSTEMD_SERVICE_dhcp-server = "dhcpd.service"
 SYSTEMD_SERVICE_dhcp-relay = "dhcrelay.service"
 SYSTEMD_SERVICE_dhcp-client = "dhclient.service"
+SYSTEMD_AUTO_ENABLE_dhcp-client = "disable"
 
 FILES_dhcp-server += "${systemd_unitdir}/system/dhcpd.service"
 FILES_dhcp-relay += "${systemd_unitdir}/system/dhrelay.service"
