@@ -4,7 +4,7 @@ SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d82268718c68bda0b091006ec6e583c6"
 SRCNAME = "${PN}"
-PR = "r3"
+PR = "r0"
 
 SRC_URI = "http://labix.org/download/python-dateutil/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
@@ -19,5 +19,5 @@ RDEPENDS_${PN} = "\
     python-datetime \
 "
 
-SRC_URI[md5sum] = "2a5f25ab12fcefcf0b21348f2d47595a"
-SRC_URI[sha256sum] = "74b615c6a55b4421187feba1633fc233e7c5ebdd7abe9b092447a32946823357"
+SRC_URI[md5sum] = "35f3732db3f2cc4afdc68a8533b60a52"
+SRC_URI[sha256sum] = "c08aca7d85f8f8eed61e83b3423b829262c596a9a78f7ca3de0bcee2217d0e3b"
