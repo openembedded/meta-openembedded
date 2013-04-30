@@ -4,7 +4,7 @@ SECTION = "console/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
 
-PR = "r9"
+PR = "r10"
 
 SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
            file://top-autoconf.patch \
@@ -29,6 +29,7 @@ do_install() {
     install -m 0755 ${WORKDIR}/pppoe-server.init ${D}${sysconfdir}/init.d/pppoe-server
     # Install
     oe_runmake -C ${S} RPM_INSTALL_ROOT=${D} docdir=${docdir} install
+    chmod 4755 ${D}${sbindir}/pppoe
 }
 
 # Insert server package before main package
@@ -40,13 +41,6 @@ FILES_${PN}-server = "${sysconfdir}/default/pppoe-server \
                       ${sysconfdir}/ppp/pppoe-server-options"
 FILES_${PN}-relay = "${sbindir}/pppoe-relay"
 FILES_${PN}-sniff = "${sbindir}/pppoe-sniff"
-
-pkg_postinst_${PN} () {
-    if [ x"$D" != "x" ]; then
-        exit 1
-    fi
-    chmod 4755 ${sbindir}/pppoe
-}
 
 CONFFILES_${PN} = "${sysconfdir}/ppp/pppoe.conf \
                    ${sysconfdir}/ppp/firewall-standalone \
