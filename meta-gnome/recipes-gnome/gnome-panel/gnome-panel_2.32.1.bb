@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SECTION = "x11/gnome"
 
-PR = "r6"
+PR = "r7"
 
 DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
 
-inherit gtk-doc gnome gettext pkgconfig
+inherit gtk-doc gnome gettext pkgconfig gconf
 
 SRCREV = "6a364b6a4a9beed3da9ca6f5b0dac81eb99dea2a"
 SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32"
@@ -26,14 +26,6 @@ do_configure_prepend() {
     sed -i -e s:^#!@PYTHON@:#!/usr/bin/python: ${S}/gnome-panel/gnome-panel-add.in
 }
 
-pkg_postinst_${PN}_append () {
-if [ -n "$D" ]; then
-    exit 1
-fi
-    gconftool-2 --config-source=xml:readwrite:${sysconfdir}/gconf/gconf.xml.defaults \
-        --direct --load ${sysconfdir}/gconf/schemas/panel-default-setup.entries
-}
-
 PACKAGES =+ "libpanel-applet"
 FILES_libpanel-applet = "${libdir}/libpanel-applet-*.so.*"
 
@@ -43,5 +35,3 @@ FILES_${PN} =+ "${datadir}/gnome* \
                 ${datadir}/PolicyKit \
                 ${libdir}/bonobo \
 "
-
-
