@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=6eb631b6da7fdb01508a80213ffc35ff"
 DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl python libass libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo enca avahi libsamplerate0 libxinerama libxrandr libxtst bzip2 virtual/libsdl jasper zip-native zlib libtinyxml"
 #require recipes/egl/egl.inc
 
+
 SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
 
 PV = "11.0"
@@ -30,13 +31,17 @@ CACHED_CONFIGUREVARS += " \
     ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
 "
 
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'opengl', 'opengl', 'openglesv2', d)}"
+PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,glew"
+PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,"
+
 EXTRA_OECONF = " \
     --disable-rpath \
-    --enable-gles \
     --enable-libusb \
     --enable-airplay \
     --disable-optical-drive \
     --enable-external-libraries \
+    ${@base_contains('DISTRO_FEATURES', 'opengl', '--enable-gl', '--enable-gles', d)} \
 "
 
 FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
@@ -79,11 +84,14 @@ FILES_${PN} += "${datadir}/xsessions ${datadir}/icons"
 FILES_${PN}-dbg += "${libdir}/xbmc/.debug ${libdir}/xbmc/*/.debug ${libdir}/xbmc/*/*/.debug ${libdir}/xbmc/*/*/*/.debug"
 
 # xbmc uses some kind of dlopen() method for libcec so we need to add it manually
+# OpenGL builds need glxinfo, that's in mesa-demos
 RRECOMMENDS_${PN}_append = " libcec \
                              python \
                              python-lang \
                              python-re \
                              python-netclient \
                              libcurl \
+                             xdpyinfo \
+                             ${@base_contains('DISTRO_FEATURES', 'opengl', 'mesa-demos', '', d)} \
 "
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 glibc-gconv-ibm850"
