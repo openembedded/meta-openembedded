@@ -15,12 +15,16 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=eden;protocol=git \
            file://0001-configure-don-t-run-python-distutils-to-find-STAGING.patch \
            file://0002-Revert-fixed-ios-Add-memory-barriers-to-atomic-Add-S.patch \
            file://0003-Revert-fixed-ios-Add-memory-barriers-to-cas-assembly.patch \
+           file://0004-configure-cope-with-ld-is-gold-DISTRO_FEATURE.patch \
            file://configure.in-Avoid-running-code.patch \
 "
 
 inherit autotools gettext python-dir
 
 S = "${WORKDIR}/git"
+
+# breaks compilation
+CCACHE = ""
 
 CACHED_CONFIGUREVARS += " \
     ac_cv_path_PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python" \
