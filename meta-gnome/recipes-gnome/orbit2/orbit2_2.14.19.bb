@@ -1,16 +1,18 @@
 DESCRIPTION = "CORBA ORB"
 SECTION = "x11/gnome/libs"
 LICENSE = "GPL-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 SRC_NAME = "ORBit2"
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
-SRC_URI = "${GNOME_MIRROR}/${SRC_NAME}/${SHRT_VER}/${SRC_NAME}-${PV}.tar.bz2 \
-           file://configure-lossage.patch \
-           file://pkgconfig-fix.patch"
-SRC_URI[md5sum] = "10bfb957fa4a8935a0b4afaee7d71df7"
-SRC_URI[sha256sum] = "62bfce3f678f9347a19c766944e8aef7b89bc32b25ac23eb3e4c25929ce8974c"
+SRC_URI = " \
+    ${GNOME_MIRROR}/${SRC_NAME}/${SHRT_VER}/${SRC_NAME}-${PV}.tar.bz2 \
+    file://configure-lossage.patch \
+    file://pkgconfig-fix.patch \
+    file://0001-linc2-src-Makefile.am-fix-build-with-glib-2.36.patch \
+"
+SRC_URI[md5sum] = "7082d317a9573ab338302243082d10d1"
+SRC_URI[sha256sum] = "55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550"
 
-PR = "r5"
 BBCLASSEXTEND = "native"
 
 IDL_COMPILER_DEPENDS = "orbit2-native"
