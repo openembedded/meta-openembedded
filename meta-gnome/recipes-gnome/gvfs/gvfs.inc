@@ -4,11 +4,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
 
 inherit gnome
 
-INC_PR = "r9"
+INC_PR = "r0"
 
-SRC_URI[archive.md5sum] = "402f94b187b197b403d25c85caeb9562"
-SRC_URI[archive.sha256sum] = "0895ac8f6d416e1b15433b6b6b68eb119c6e8b04fdb66db665d684355ef89345"
-SRC_URI += "file://0001-gvfsfusedaemon.c-fix-glib-build.patch"
+GNOME_COMPRESS_TYPE = "xz"
+
+SRC_URI[archive.md5sum] = "0c968704be003d2f6eab29388c41664e"
+SRC_URI[archive.sha256sum] = "cd30facee5ad6cd0fafc5337bbf7c06a0bff3936f9ff2ae31519b301efcc9288"
+SRC_URI += " \
+    file://0001-Revert-Respect-UDISKS_AUTOMOUNT_HINT-available-in-re.patch \
+    file://0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch \
+    file://0003-Adapt-to-glib-mutex-API-changes.patch \
+    file://0004-Adapt-to-glib-thread-API-changes.patch \
+"
 
 EXTRA_OECONF = "--with-samba-includes=${STAGING_INCDIR} \
                 --with-samba-libs=${STAGING_LIBDIR} \

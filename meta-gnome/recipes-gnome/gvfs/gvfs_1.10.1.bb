@@ -3,7 +3,7 @@ require gvfs.inc
 DEPENDS = "samba libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
 # optional: obexftp libcdio libimobiledevice 
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.0"
 
 # in case of gnome-disk-utility was alresdy built: avoid double files
 # afc is enabled when it detects libimobiledevice

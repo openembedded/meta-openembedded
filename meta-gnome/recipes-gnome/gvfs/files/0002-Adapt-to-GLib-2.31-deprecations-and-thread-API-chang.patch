@@ -1,0 +1,599 @@
+From bd014bd8a442cae12aace7deb6e6a4d21ac3dd0e Mon Sep 17 00:00:00 2001
+From: Matthias Clasen <mclasen@redhat.com>
+Date: Fri, 21 Oct 2011 14:15:09 +0200
+Subject: [PATCH] Adapt to GLib 2.31 deprecations and thread API changes
+
+GStaticMutex and GStaticRWLock have been replaced by GMutex
+and GRWLock, and g_thread_init() is no longer needed.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=661148
+
+Upstream-Status: Backport
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ client/gdaemonvfs.c                          |    5 +-
+ client/gvfsdaemondbus.c                      |   15 ++++---
+ client/gvfsfusedaemon.c                      |    1 -
+ common/gmounttracker.c                       |   43 ++++++------------
+ configure.ac                                 |    2 +-
+ daemon/daemon-main.c                         |    1 -
+ daemon/gvfsdaemonutils.c                     |    8 ++--
+ daemon/main.c                                |    2 -
+ metadata/metatree.c                          |   60 +++++++++++++-------------
+ monitor/proxy/gvfsproxyvolumemonitordaemon.c |    1 -
+ 10 files changed, 60 insertions(+), 78 deletions(-)
+
+diff --git a/client/gdaemonvfs.c b/client/gdaemonvfs.c
+index 0f021b9..ae17c3c 100644
+--- a/client/gdaemonvfs.c
++++ b/client/gdaemonvfs.c
+@@ -298,9 +298,8 @@ g_daemon_vfs_init (GDaemonVfs *vfs)
+ 
+   bindtextdomain (GETTEXT_PACKAGE, GVFS_LOCALEDIR);
+   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+-  
+-  if (g_thread_supported ())
+-    dbus_threads_init_default ();
++
++  dbus_threads_init_default ();
+ 
+   vfs->async_bus = dbus_bus_get_private (DBUS_BUS_SESSION, NULL);
+ 
+diff --git a/client/gvfsdaemondbus.c b/client/gvfsdaemondbus.c
+index f32a6f8..2cfd2e6 100644
+--- a/client/gvfsdaemondbus.c
++++ b/client/gvfsdaemondbus.c
+@@ -53,7 +53,10 @@ typedef struct {
+ static gint32 vfs_data_slot = -1;
+ static GOnce once_init_dbus = G_ONCE_INIT;
+ 
+-static GStaticPrivate local_connections = G_STATIC_PRIVATE_INIT;
++typedef struct _ThreadLocalConnections ThreadLocalConnections;
++static void free_local_connections (ThreadLocalConnections *local);
++
++static GPrivate local_connections = G_PRIVATE_INIT((GDestroyNotify)free_local_connections);
+ 
+ /* dbus id -> async connection */
+ static GHashTable *async_map = NULL;
+@@ -862,10 +865,10 @@ _g_vfs_daemon_call_sync (DBusMessage *message,
+  *               get per-thread synchronous dbus connections             *
+  *************************************************************************/
+ 
+-typedef struct {
++struct _ThreadLocalConnections {
+   GHashTable *connections;
+   DBusConnection *session_bus;
+-} ThreadLocalConnections;
++};
+ 
+ static void
+ free_mount_connection (DBusConnection *conn)
+@@ -891,7 +894,7 @@ invalidate_local_connection (const char *dbus_id,
+   
+   _g_daemon_vfs_invalidate_dbus_id (dbus_id);
+ 
+-  local = g_static_private_get (&local_connections);
++  local = g_private_get (&local_connections);
+   if (local)
+     g_hash_table_remove (local->connections, dbus_id);
+   
+@@ -916,13 +919,13 @@ _g_dbus_connection_get_sync (const char *dbus_id,
+ 
+   g_once (&once_init_dbus, vfs_dbus_init, NULL);
+ 
+-  local = g_static_private_get (&local_connections);
++  local = g_private_get (&local_connections);
+   if (local == NULL)
+     {
+       local = g_new0 (ThreadLocalConnections, 1);
+       local->connections = g_hash_table_new_full (g_str_hash, g_str_equal,
+ 						  g_free, (GDestroyNotify)free_mount_connection);
+-      g_static_private_set (&local_connections, local, (GDestroyNotify)free_local_connections);
++      g_private_set (&local_connections, local);
+     }
+ 
+   if (dbus_id == NULL)
+diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
+index a4ba32c..7cfa81c 100644
+--- a/client/gvfsfusedaemon.c
++++ b/client/gvfsfusedaemon.c
+@@ -2425,7 +2425,6 @@ gint
+ main (gint argc, gchar *argv [])
+ {
+   g_type_init ();
+-  g_thread_init (NULL);
+ 
+   return fuse_main (argc, argv, &vfs_oper, NULL /* user data */);
+ }
+diff --git a/common/gmounttracker.c b/common/gmounttracker.c
+index 519cd47..135a2b2 100644
+--- a/common/gmounttracker.c
++++ b/common/gmounttracker.c
+@@ -49,7 +49,7 @@ struct _GMountTracker
+ {
+   GObject parent_instance;
+ 
+-  GMutex *lock;
++  GMutex lock;
+   GList *mounts;
+   DBusConnection *connection;
+ };
+@@ -258,8 +258,7 @@ g_mount_tracker_finalize (GObject *object)
+ 
+   tracker = G_MOUNT_TRACKER (object);
+ 
+-  if (tracker->lock)
+-    g_mutex_free (tracker->lock);
++  g_mutex_clear (&tracker->lock);
+   
+   g_list_foreach (tracker->mounts,
+ 		  (GFunc)g_mount_info_unref, NULL);
+@@ -382,21 +381,18 @@ static void
+ g_mount_tracker_add_mount (GMountTracker *tracker,
+ 			   GMountInfo *info)
+ {
+-  if (tracker->lock)
+-    g_mutex_lock (tracker->lock);
++  g_mutex_lock (&tracker->lock);
+   
+   /* Don't add multiple times */
+   if (g_mount_tracker_find (tracker, info))
+     {
+-      if (tracker->lock)
+-	g_mutex_unlock (tracker->lock);
++      g_mutex_unlock (&tracker->lock);
+       return;
+     }
+ 
+   tracker->mounts = g_list_prepend (tracker->mounts, g_mount_info_ref (info));
+ 
+-  if (tracker->lock)
+-    g_mutex_unlock (tracker->lock);
++  g_mutex_unlock (&tracker->lock);
+   
+   g_signal_emit (tracker, signals[MOUNTED], 0, info);
+ }
+@@ -408,16 +404,14 @@ g_mount_tracker_remove_mount (GMountTracker *tracker,
+   GList *l;
+   GMountInfo *old_info;
+ 
+-  if (tracker->lock)
+-    g_mutex_lock (tracker->lock);
++  g_mutex_lock (&tracker->lock);
+   
+   l = g_mount_tracker_find (tracker, info);
+   
+   /* Don't remove multiple times */
+   if (l == NULL)
+     {
+-      if (tracker->lock)
+-	g_mutex_unlock (tracker->lock);
++      g_mutex_unlock (&tracker->lock);
+       return;
+     }
+ 
+@@ -425,8 +419,7 @@ g_mount_tracker_remove_mount (GMountTracker *tracker,
+   
+   tracker->mounts = g_list_delete_link (tracker->mounts, l);
+   
+-  if (tracker->lock)
+-    g_mutex_unlock (tracker->lock);
++  g_mutex_unlock (&tracker->lock);
+ 
+   g_signal_emit (tracker, signals[UNMOUNTED], 0, old_info);
+   g_mount_info_unref (old_info);
+@@ -548,8 +541,6 @@ init_connection (GMountTracker *tracker)
+ static void
+ g_mount_tracker_init (GMountTracker *tracker)
+ {
+-  if (g_thread_supported ())
+-    tracker->lock = g_mutex_new ();
+ }
+ 
+ 
+@@ -588,8 +579,7 @@ g_mount_tracker_list_mounts (GMountTracker *tracker)
+   GList *res, *l;
+   GMountInfo *copy;
+ 
+-  if (tracker->lock)
+-    g_mutex_lock (tracker->lock);
++  g_mutex_lock (&tracker->lock);
+   
+   res = NULL;
+   for (l = tracker->mounts; l != NULL; l = l->next)
+@@ -598,8 +588,7 @@ g_mount_tracker_list_mounts (GMountTracker *tracker)
+       res = g_list_prepend (res, copy);
+     }
+ 
+-  if (tracker->lock)
+-    g_mutex_unlock (tracker->lock);
++  g_mutex_unlock (&tracker->lock);
+   
+   return g_list_reverse (res);
+ }
+@@ -611,8 +600,7 @@ g_mount_tracker_find_by_mount_spec (GMountTracker *tracker,
+   GList *l;
+   GMountInfo *info, *found;
+ 
+-  if (tracker->lock)
+-    g_mutex_lock (tracker->lock);
++  g_mutex_lock (&tracker->lock);
+ 
+   found = NULL;
+   for (l = tracker->mounts; l != NULL; l = l->next)
+@@ -626,8 +614,7 @@ g_mount_tracker_find_by_mount_spec (GMountTracker *tracker,
+ 	}
+     }
+ 
+-  if (tracker->lock)
+-    g_mutex_unlock (tracker->lock);
++  g_mutex_unlock (&tracker->lock);
+   
+   return found;
+ }
+@@ -641,8 +628,7 @@ g_mount_tracker_has_mount_spec (GMountTracker *tracker,
+   GMountInfo *info;
+   gboolean found;
+ 
+-  if (tracker->lock)
+-    g_mutex_lock (tracker->lock);
++  g_mutex_lock (&tracker->lock);
+ 
+   found = FALSE;
+   for (l = tracker->mounts; l != NULL; l = l->next)
+@@ -656,8 +642,7 @@ g_mount_tracker_has_mount_spec (GMountTracker *tracker,
+ 	}
+     }
+ 
+-  if (tracker->lock)
+-    g_mutex_unlock (tracker->lock);
++  g_mutex_unlock (&tracker->lock);
+   
+   return found;
+ }
+diff --git a/configure.ac b/configure.ac
+index ee2f90f..be0c6a1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -46,7 +46,7 @@ GTK_DOC_CHECK
+ DISTCHECK_CONFIGURE_FLAGS="--enable-gtk-doc"
+ AC_SUBST(DISTCHECK_CONFIGURE_FLAGS)
+ 
+-PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.29.14 gthread-2.0 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0 )
++PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.31.0 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0 )
+ 
+ PKG_CHECK_MODULES(DBUS, dbus-1)
+ 
+diff --git a/daemon/daemon-main.c b/daemon/daemon-main.c
+index ef9025c..ff2bfde 100644
+--- a/daemon/daemon-main.c
++++ b/daemon/daemon-main.c
+@@ -63,7 +63,6 @@ daemon_init (void)
+   textdomain (GETTEXT_PACKAGE);
+   
+   dbus_threads_init_default ();
+-  g_thread_init (NULL);
+   g_type_init ();
+ 
+   g_log_set_handler (NULL, G_LOG_LEVEL_DEBUG, log_debug, NULL);
+diff --git a/daemon/gvfsdaemonutils.c b/daemon/gvfsdaemonutils.c
+index f03d4b2..1efcf87 100644
+--- a/daemon/gvfsdaemonutils.c
++++ b/daemon/gvfsdaemonutils.c
+@@ -41,7 +41,7 @@
+ #include "gvfsdaemonprotocol.h"
+ 
+ static gint32 extra_fd_slot = -1;
+-static GStaticMutex extra_lock = G_STATIC_MUTEX_INIT;
++static GMutex extra_lock;
+ 
+ typedef struct {
+   int extra_fd;
+@@ -93,7 +93,7 @@ dbus_connection_send_fd (DBusConnection *connection,
+       return FALSE;
+     }
+ 
+-  g_static_mutex_lock (&extra_lock);
++  g_mutex_lock (&extra_lock);
+ 
+   if (_g_socket_send_fd (extra->extra_fd, fd) == -1)
+     {
+@@ -103,13 +103,13 @@ dbus_connection_send_fd (DBusConnection *connection,
+ 		   g_io_error_from_errno (errsv),
+ 		   _("Error sending file descriptor: %s"),
+ 		   g_strerror (errsv));
+-      g_static_mutex_unlock (&extra_lock);
++      g_mutex_unlock (&extra_lock);
+       return FALSE;
+     }
+ 
+   *fd_id = extra->fd_count++;
+ 
+-  g_static_mutex_unlock (&extra_lock);
++  g_mutex_unlock (&extra_lock);
+ 
+   return TRUE;
+ }
+diff --git a/daemon/main.c b/daemon/main.c
+index 4703562..2b2d549 100644
+--- a/daemon/main.c
++++ b/daemon/main.c
+@@ -52,8 +52,6 @@ main (int argc, char *argv[])
+   bindtextdomain (GETTEXT_PACKAGE, GVFS_LOCALEDIR);
+   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+   textdomain (GETTEXT_PACKAGE);
+-  
+-  g_thread_init (NULL);
+ 
+ #ifdef SIGPIPE
+   signal (SIGPIPE, SIG_IGN);
+diff --git a/metadata/metatree.c b/metadata/metatree.c
+index 3420ad0..850866e 100644
+--- a/metadata/metatree.c
++++ b/metadata/metatree.c
+@@ -68,7 +68,7 @@
+ 
+ #define KEY_IS_LIST_MASK (1<<31)
+ 
+-static GStaticRWLock metatree_lock = G_STATIC_RW_LOCK_INIT;
++static GRWLock metatree_lock;
+ 
+ typedef enum {
+   JOURNAL_OP_SET_KEY,
+@@ -591,7 +591,7 @@ meta_tree_lookup_by_name (const char *name,
+ MetaTree *
+ meta_tree_ref (MetaTree *tree)
+ {
+-  g_atomic_int_exchange_and_add ((int *)&tree->ref_count, 1);
++  g_atomic_int_inc ((int *)&tree->ref_count);
+   return tree;
+ }
+ 
+@@ -672,17 +672,17 @@ meta_tree_refresh (MetaTree *tree)
+ {
+   gboolean needs_refresh;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+   needs_refresh =
+     meta_tree_needs_rereading (tree) ||
+     meta_tree_has_new_journal_entries (tree);
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+ 
+   if (needs_refresh)
+     {
+-      g_static_rw_lock_writer_lock (&metatree_lock);
++      g_rw_lock_writer_lock (&metatree_lock);
+       meta_tree_refresh_locked (tree);
+-      g_static_rw_lock_writer_unlock (&metatree_lock);
++      g_rw_lock_writer_unlock (&metatree_lock);
+     }
+ }
+ 
+@@ -1468,7 +1468,7 @@ meta_tree_lookup_key_type  (MetaTree                         *tree,
+   MetaKeyType type;
+   gpointer value;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+ 
+   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+ 						    path,
+@@ -1492,7 +1492,7 @@ meta_tree_lookup_key_type  (MetaTree                         *tree,
+     type = META_KEY_TYPE_STRING;
+ 
+  out:
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+   return type;
+ }
+ 
+@@ -1506,7 +1506,7 @@ meta_tree_get_last_changed (MetaTree *tree,
+   gpointer value;
+   guint64 res, mtime;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+ 
+   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+ 						    path,
+@@ -1526,7 +1526,7 @@ meta_tree_get_last_changed (MetaTree *tree,
+   g_free (new_path);
+ 
+  out:
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+ 
+   return res;
+ }
+@@ -1543,7 +1543,7 @@ meta_tree_lookup_string (MetaTree   *tree,
+   char *new_path;
+   char *res;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+ 
+   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+ 						    path,
+@@ -1572,7 +1572,7 @@ meta_tree_lookup_string (MetaTree   *tree,
+     res = g_strdup (verify_string (tree, ent->value));
+ 
+  out:
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+ 
+   return res;
+ }
+@@ -1621,7 +1621,7 @@ meta_tree_lookup_stringv   (MetaTree                         *tree,
+   char **res;
+   guint32 num_strings, i;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+ 
+   new_path = meta_journal_reverse_map_path_and_key (tree->journal,
+ 						    path,
+@@ -1658,7 +1658,7 @@ meta_tree_lookup_stringv   (MetaTree                         *tree,
+     }
+ 
+  out:
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+ 
+   return res;
+ }
+@@ -1876,7 +1876,7 @@ meta_tree_enumerate_dir (MetaTree                         *tree,
+   MetaFileDir *dir;
+   char *res_path;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+ 
+   data.children = children =
+     g_hash_table_new_full (g_str_hash,
+@@ -1922,7 +1922,7 @@ meta_tree_enumerate_dir (MetaTree                         *tree,
+  out:
+   g_free (res_path);
+   g_hash_table_destroy (children);
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+ }
+ 
+ typedef struct {
+@@ -2116,7 +2116,7 @@ meta_tree_enumerate_keys (MetaTree                         *tree,
+   GHashTableIter iter;
+   char *res_path;
+ 
+-  g_static_rw_lock_reader_lock (&metatree_lock);
++  g_rw_lock_reader_lock (&metatree_lock);
+ 
+   keydata.keys = keys =
+     g_hash_table_new_full (g_str_hash,
+@@ -2170,7 +2170,7 @@ meta_tree_enumerate_keys (MetaTree                         *tree,
+  out:
+   g_free (res_path);
+   g_hash_table_destroy (keys);
+-  g_static_rw_lock_reader_unlock (&metatree_lock);
++  g_rw_lock_reader_unlock (&metatree_lock);
+ }
+ 
+ 
+@@ -2371,9 +2371,9 @@ meta_tree_flush (MetaTree *tree)
+ {
+   gboolean res;
+ 
+-  g_static_rw_lock_writer_lock (&metatree_lock);
++  g_rw_lock_writer_lock (&metatree_lock);
+   res = meta_tree_flush_locked (tree);
+-  g_static_rw_lock_writer_unlock (&metatree_lock);
++  g_rw_lock_writer_unlock (&metatree_lock);
+   return res;
+ }
+ 
+@@ -2386,7 +2386,7 @@ meta_tree_unset (MetaTree                         *tree,
+   guint64 mtime;
+   gboolean res;
+ 
+-  g_static_rw_lock_writer_lock (&metatree_lock);
++  g_rw_lock_writer_lock (&metatree_lock);
+ 
+   if (tree->journal == NULL ||
+       !tree->journal->journal_valid)
+@@ -2412,7 +2412,7 @@ meta_tree_unset (MetaTree                         *tree,
+   g_string_free (entry, TRUE);
+ 
+  out:
+-  g_static_rw_lock_writer_unlock (&metatree_lock);
++  g_rw_lock_writer_unlock (&metatree_lock);
+   return res;
+ }
+ 
+@@ -2426,7 +2426,7 @@ meta_tree_set_string (MetaTree                         *tree,
+   guint64 mtime;
+   gboolean res;
+ 
+-  g_static_rw_lock_writer_lock (&metatree_lock);
++  g_rw_lock_writer_lock (&metatree_lock);
+ 
+   if (tree->journal == NULL ||
+       !tree->journal->journal_valid)
+@@ -2452,7 +2452,7 @@ meta_tree_set_string (MetaTree                         *tree,
+   g_string_free (entry, TRUE);
+ 
+  out:
+-  g_static_rw_lock_writer_unlock (&metatree_lock);
++  g_rw_lock_writer_unlock (&metatree_lock);
+   return res;
+ }
+ 
+@@ -2466,7 +2466,7 @@ meta_tree_set_stringv (MetaTree                         *tree,
+   guint64 mtime;
+   gboolean res;
+ 
+-  g_static_rw_lock_writer_lock (&metatree_lock);
++  g_rw_lock_writer_lock (&metatree_lock);
+ 
+   if (tree->journal == NULL ||
+       !tree->journal->journal_valid)
+@@ -2492,7 +2492,7 @@ meta_tree_set_stringv (MetaTree                         *tree,
+   g_string_free (entry, TRUE);
+ 
+  out:
+-  g_static_rw_lock_writer_unlock (&metatree_lock);
++  g_rw_lock_writer_unlock (&metatree_lock);
+   return res;
+ }
+ 
+@@ -2504,7 +2504,7 @@ meta_tree_remove (MetaTree *tree,
+   guint64 mtime;
+   gboolean res;
+ 
+-  g_static_rw_lock_writer_lock (&metatree_lock);
++  g_rw_lock_writer_lock (&metatree_lock);
+ 
+   if (tree->journal == NULL ||
+       !tree->journal->journal_valid)
+@@ -2530,7 +2530,7 @@ meta_tree_remove (MetaTree *tree,
+   g_string_free (entry, TRUE);
+ 
+  out:
+-  g_static_rw_lock_writer_unlock (&metatree_lock);
++  g_rw_lock_writer_unlock (&metatree_lock);
+   return res;
+ }
+ 
+@@ -2543,7 +2543,7 @@ meta_tree_copy (MetaTree                         *tree,
+   guint64 mtime;
+   gboolean res;
+ 
+-  g_static_rw_lock_writer_lock (&metatree_lock);
++  g_rw_lock_writer_lock (&metatree_lock);
+ 
+   if (tree->journal == NULL ||
+       !tree->journal->journal_valid)
+@@ -2569,7 +2569,7 @@ meta_tree_copy (MetaTree                         *tree,
+   g_string_free (entry, TRUE);
+ 
+  out:
+-  g_static_rw_lock_writer_unlock (&metatree_lock);
++  g_rw_lock_writer_unlock (&metatree_lock);
+   return res;
+ }
+ 
+diff --git a/monitor/proxy/gvfsproxyvolumemonitordaemon.c b/monitor/proxy/gvfsproxyvolumemonitordaemon.c
+index 4be64e0..fe2f1a7 100644
+--- a/monitor/proxy/gvfsproxyvolumemonitordaemon.c
++++ b/monitor/proxy/gvfsproxyvolumemonitordaemon.c
+@@ -2050,7 +2050,6 @@ g_vfs_proxy_volume_monitor_daemon_init (void)
+   textdomain (GETTEXT_PACKAGE);
+ 
+   dbus_threads_init_default ();
+-  g_thread_init (NULL);
+   g_type_init ();
+ }
+ 
+-- 
+1.7.6.5
+

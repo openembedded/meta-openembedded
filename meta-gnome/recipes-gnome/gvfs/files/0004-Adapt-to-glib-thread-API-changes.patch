@@ -1,0 +1,44 @@
+From 008031adbe2fd118a4e9a3c7219a9777cab1bb75 Mon Sep 17 00:00:00 2001
+From: Tomas Bzatek <tbzatek@redhat.com>
+Date: Wed, 26 Oct 2011 14:12:13 +0200
+Subject: [PATCH 2/2] Adapt to glib thread API changes
+
+Last piece in order to fix https://bugzilla.gnome.org/show_bug.cgi?id=661148
+
+Upstream-Status: Backport
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ client/gvfsfusedaemon.c        |    2 +-
+ daemon/trashlib/trashexpunge.c |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/gvfsfusedaemon.c b/client/gvfsfusedaemon.c
+index c986f69..5e79638 100644
+--- a/client/gvfsfusedaemon.c
++++ b/client/gvfsfusedaemon.c
+@@ -2358,7 +2358,7 @@ vfs_init (struct fuse_conn_info *conn)
+   volume_monitor = g_object_new (g_type_from_name ("GDaemonVolumeMonitor"), NULL);
+   
+   subthread_main_loop = g_main_loop_new (NULL, FALSE);
+-  subthread = g_thread_create ((GThreadFunc) subthread_main, NULL, FALSE, NULL);
++  subthread = g_thread_new ("gvfs-fuse-sub", (GThreadFunc) subthread_main, NULL);
+ 
+   /* Indicate O_TRUNC support for open() */
+   conn->want |= FUSE_CAP_ATOMIC_O_TRUNC;
+diff --git a/daemon/trashlib/trashexpunge.c b/daemon/trashlib/trashexpunge.c
+index a5cf975..677fb81 100644
+--- a/daemon/trashlib/trashexpunge.c
++++ b/daemon/trashlib/trashexpunge.c
+@@ -124,7 +124,7 @@ trash_expunge (GFile *directory)
+     {
+       GThread *thread;
+ 
+-      thread = g_thread_create (trash_expunge_thread, NULL, FALSE, NULL);
++      thread = g_thread_new ("trash-expunge", trash_expunge_thread, NULL);
+       g_assert (thread != NULL);
+       trash_expunge_alive = TRUE;
+     }
+-- 
+1.7.6.5
+
