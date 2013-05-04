@@ -47,20 +47,17 @@ FILES_${PN}-dbg    += "${libdir}/vlc/*/.debug ${libdir}/vlc/plugins/*/.debug"
 
 EXTRA_OECONF = "\
     --enable-dvdread \
-    --enable-libtool \
     --with-contrib \
     --enable-run-as-root \
-    --disable-wxwidgets \
-    --enable-x11 --enable-xvideo \ 
+    --enable-xvideo \ 
     --disable-screen --disable-caca \
     --enable-httpd --enable-vlm \
     --enable-freetype \
     --enable-sdl \ 
     --enable-png \
     --enable-live555 --enable-tremor \
-    --enable-v4l2 --enable-v4l --disable-aa --enable-wma --disable-faad \
+    --enable-v4l2 --enable-v4l --disable-aa --disable-faad \
     --enable-dbus \
-    --disable-hal \    
     --without-contrib \
     --without-kde-solid \
     --disable-opengl --disable-glx \
