@@ -4,7 +4,7 @@ SECTION = "libs/multimedia"
 LICENSE = "LGPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
 
-DEPENDS = "alsa-lib ncurses"
+DEPENDS = "alsa-lib ncurses glib-2.0"
 
 SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
 SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
