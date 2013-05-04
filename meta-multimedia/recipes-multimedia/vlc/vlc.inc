@@ -65,6 +65,9 @@ EXTRA_OECONF = "\
     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
     ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
+    ${@base_conditional('ENTERPRISE_DISTRO', '1', \
+	'--disable-mad --disable-id3tag --disable-a52 --disable-libmpeg2', \
+	'--enable-mad --enable-id3tag --enable-a52 --enable-libmpeg2', d)} \
 "
 
 
