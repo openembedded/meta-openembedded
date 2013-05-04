@@ -1,7 +1,7 @@
 DESCRIPTION = "Fluidsynth is a software synthesizer"
 HOMEPAGE = "http://www.fluidsynth.org/"
 SECTION = "libs/multimedia"
-LICENSE = "LGPLv-2.0+"
+LICENSE = "LGPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
 
 DEPENDS = "alsa-lib ncurses"
