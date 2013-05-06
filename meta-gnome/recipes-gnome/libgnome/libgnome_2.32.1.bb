@@ -25,4 +25,11 @@ FILES_${PN} += "${libdir}/bonobo/servers ${libdir}/bonobo/monikers/*.so \
                 ${datadir}/gnome-background-properties ${datadir}/pixmaps"
 FILES_${PN}-dev += "${libdir}/bonobo/monikers/*.la"
 FILES_${PN}-staticdev += "${libdir}/bonobo/monikers/*.a"
+
+PACKAGES =+ "gnome-common-schemas"
+
+FILES_gnome-common-schemas = "${datadir}/gnome-background-properties ${datadir}/pixmaps ${sysconfdir}"
+
+RDEPENDS_${PN} = "gnome-common-schemas"
+
 FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug"
