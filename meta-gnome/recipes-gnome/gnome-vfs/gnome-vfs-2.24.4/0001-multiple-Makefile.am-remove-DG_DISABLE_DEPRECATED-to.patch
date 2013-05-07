@@ -1,0 +1,42 @@
+From 536e9b57cada4a9f92e073fdf01cdf1def435b6b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 7 May 2013 14:56:06 +0200
+Subject: [PATCH] multiple Makefile.am: remove -DG_DISABLE_DEPRECATED to fix
+ build with glib-2.36
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ daemon/Makefile.am      |    1 -
+ libgnomevfs/Makefile.am |    1 -
+ 2 files changed, 0 insertions(+), 2 deletions(-)
+
+diff --git a/daemon/Makefile.am b/daemon/Makefile.am
+index ca57467..040484f 100644
+--- a/daemon/Makefile.am
++++ b/daemon/Makefile.am
+@@ -8,7 +8,6 @@ INCLUDES= \
+ 	-D_LARGEFILE64_SOURCE                   \
+ 	-D_POSIX_PTHREAD_SEMANTICS		\
+ 	-D_REENTRANT				\
+-	-DG_DISABLE_DEPRECATED			\
+ 	-DGNOME_VFS_PREFIX=\"$(prefix)\"	\
+ 	-DGNOME_VFS_DATADIR=\"$(datadir)\"	\
+ 	-DGNOME_VFS_LIBDIR=\"$(libdir)\"	\
+diff --git a/libgnomevfs/Makefile.am b/libgnomevfs/Makefile.am
+index 69a02e0..5d7d759 100644
+--- a/libgnomevfs/Makefile.am
++++ b/libgnomevfs/Makefile.am
+@@ -19,7 +19,6 @@ INCLUDES =					\
+ 	-D_LARGEFILE64_SOURCE                   \
+ 	-D_POSIX_PTHREAD_SEMANTICS		\
+ 	-D_REENTRANT				\
+-	-DG_DISABLE_DEPRECATED			\
+ 	-DGNOME_VFS_PREFIX=\"$(prefix)\"	\
+ 	-DGNOME_VFS_BINDIR=\"$(bindir)\"	\
+ 	-DGNOME_VFS_DATADIR=\"$(datadir)\"	\
+-- 
+1.7.6.5
+
