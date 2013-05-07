@@ -10,5 +10,5 @@ SRC_URI[sha256sum] = "7f6507d400d07edfd1ea8205da36808009b0c539f5b8a6e0ab54337b95
 
 S = "${WORKDIR}/feedparser-${PV}"
 
-inherit distutils
+inherit setuptools
 
