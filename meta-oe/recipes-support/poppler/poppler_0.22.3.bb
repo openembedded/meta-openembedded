@@ -3,12 +3,10 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = "http://poppler.freedesktop.org/${PN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "12658f3308597e57f3faff538cc73baf"
-SRC_URI[sha256sum] = "33421148cdc8e043da291dece2cce1cea6220d49a50c00c56d56d6435501d42e"
+SRC_URI[md5sum] = "be915388eaad6865cee5a156c8119ec1"
+SRC_URI[sha256sum] = "916a931cbef951366014f13d5f4a574657ccc064ac41051df96dd58e22934431"
 
 DEPENDS = "fontconfig jpeg zlib gtk+ cairo tiff lcms"
-
-PR = "r1"
 
 inherit autotools pkgconfig
 
