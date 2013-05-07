@@ -2,8 +2,6 @@ require poppler.inc
 
 DEPENDS += "lcms"
 
-EXTRA_OECONF_append = " --disable-abiword-output "
-
 RDEPENDS_${PN} = "poppler-data"
 
 SRC_URI[md5sum] = "12658f3308597e57f3faff538cc73baf"
