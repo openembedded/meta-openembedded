@@ -5,7 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4870b98343f0bbb25fa43b9d2ba59448 \
                     file://COPYING.gpl2;md5=751419260aa954499f7abaabaa882bbe \
 "
 
+inherit allarch
+
 SRC_URI = "http://poppler.freedesktop.org/${PN}-${PV}.tar.gz"
+SRC_URI[md5sum] = "a8a7ca808827dd674faba6e4fc73b471"
+SRC_URI[sha256sum] = "f306901dfa5bda90cd6663d4eedb1c773c3c709de78018c79f1282b2c8f90afa"
 
 do_compile() {
 }
@@ -15,7 +19,3 @@ do_install() {
 }
 
 FILES_${PN} += "${datadir}"
-inherit allarch
-
-SRC_URI[md5sum] = "448dd7c5077570e340340706cef931aa"
-SRC_URI[sha256sum] = "3190bc457bafe4b158f79a08e8a3f1824031ec12acefc359e68e0f04da0f70fd"
