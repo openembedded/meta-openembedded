@@ -5,6 +5,7 @@ LICENSE = "GPLv3 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 PV = "5.9"
+PR = "r1"
 
 SRCREV = "353d491dcb5d69d31434abeb962c8e9a49c36867"
 SRC_URI = "git://git.samba.org/cifs-utils.git"
@@ -18,3 +19,5 @@ do_install_append() {
     # is installed to /sbin
     rmdir ${D}${bindir} ${D}${sbindir}
 }
+
+RRECOMMENDS_${PN} = "kernel-module-cifs"
