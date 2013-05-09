@@ -94,9 +94,10 @@ do_install_append() {
 
     rmdir --ignore-fail-on-non-empty ${D}${base_sbindir}
     sed -i -e '1s,#!.*perl,#!${USRBINPATH}/env perl,' ${D}${bindir}/findsmb
+
+    # usershare mount place
+    mkdir -p ${D}${localstatedir}/lib/samba/usershares
 }
-
-
 
 pkg_postinst_libnss-winbind () {
     # add wins to the list of resolvers
