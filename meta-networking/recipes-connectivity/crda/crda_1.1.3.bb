@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
 
 DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
 
-SRC_URI = "http://wireless.kernel.org/download/crda/${P}.tar.bz2;name=crda \
+SRC_URI = "http://wireless.kernel.org/download/crda/${BP}.tar.bz2;name=crda \
            http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.11-regulatory.bin;name=bin \
 "
 SRC_URI[crda.md5sum] = "29579185e06a75675507527243d28e5c"
