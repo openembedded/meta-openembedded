@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
 
 PR = "r10"
 
-SRC_URI = "http://www.roaringpenguin.com/files/download/${P}.tar.gz \
+SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
            file://top-autoconf.patch \
            file://configure_in_cross.patch \
            file://pppoe-src-restrictions.patch \
