@@ -1,38 +1,58 @@
-DESCRIPTION = "The MySQL Open Source Database System"
-HOMEPAGE = "http://www.mysql.com/"
+SUMMARY = "A robust, scalable, and reliable SQL server"
+HOMEPAGE = "http://mariadb.org"
 SECTION = "libs"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=477ab0a4c8ca64b482b3f2a365d0fdfa"
+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "ncurses zlib"
-PR = "r11"
 
-SRC_URI = "http://downloads.mysql.com/archives/mysql-5.1/mysql-${PV}.tar.gz \
+SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x86/mariadb-${PV}.tar.gz \
            file://configure.in.patch \
            file://plug.in.patch \
            file://misc.m4.patch \
            file://Makefile.am.patch \
            file://fix_host_path.patch \
            file://configure-ps-cache-check.patch \
-           file://fix-abi-check-gcc45.patch \
+           file://fix-cve-2013-1861-1.patch \
+           file://fix-cve-2013-1861-2.patch \
            file://my.cnf \
            file://mysqld.sh"
 
-S = "${WORKDIR}/mysql-${PV}"
+SRC_URI[md5sum] = "44c331fa91943155e4796f89e17a0612"
+SRC_URI[sha256sum] = "33471e9275c9b03919cabc38eb39f807d645adabf6a1a18f2e41ed73f47677c8"
+
+S = "${WORKDIR}/mariadb-${PV}"
 
 BINCONFIG_GLOB = "mysql_config"
 
-inherit autotools binconfig update-rc.d
+inherit autotools binconfig update-rc.d useradd
 
 INITSCRIPT_PACKAGES = "${PN}-server"
 INITSCRIPT_NAME = "mysqld"
 INITSCRIPT_PARAMS = "start 45 5 . stop 45 0 6 1 ."
 
+USERADD_PACKAGES = "${PN}-server"
+USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g nogroup mysql"
+
+
 export ac_cv_path_PS="/bin/ps"
 export ac_cv_FIND_PROC="/bin/ps p \$\$PID | grep -v grep | grep mysqld > /dev/null"
 PARALLEL_MAKE = " "
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
-EXTRA_OECONF = " --with-atomic-ops=up --with-embedded-server --prefix=/usr --sysconfdir=/etc/mysql --localstatedir=/var/mysql --disable-dependency-tracking --without-raid --without-debug --with-low-memory --without-query-cache --without-man --without-docs --without-innodb --with-zlib-dir=${STAGING_EXECPREFIXDIR}"
+EXTRA_OECONF = "--with-atomic-ops=up \
+                --with-embedded-server \
+                --sysconfdir=/etc/mysql \
+                --localstatedir=/var/mysql \
+                --disable-dependency-tracking \
+                --without-debug \
+                --with-low-memory \
+                --without-query-cache \
+                --without-plugin-maria \
+                --without-man \
+                --without-docs \
+                --with-zlib-dir=${STAGING_EXECPREFIXDIR} \
+                --with-pic \
+                "
 
 do_configure_append() {
     sed -i /comp_err/d ${S}/sql/share/Makefile
@@ -44,14 +64,14 @@ do_configure_append() {
     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysqld_safe.sh
 }
 
-SYSROOT_PREPROCESS_FUNCS += "mysql5_sysroot_preprocess"
+SYSROOT_PREPROCESS_FUNCS += "mariadb_sysroot_preprocess"
 
 # We need to append this so it runs *after* binconfig's preprocess function
 #
 # We really don't care exactly what the directories were set to originally.
 # plugindir is not fixed, but we don't create any plugins.
 #
-mysql5_sysroot_preprocess () {
+mariadb_sysroot_preprocess () {
     sed -i -es,^pkgincludedir=.*,pkgincludedir=\'${STAGING_INCDIR}/mysql\', ${SYSROOT_DESTDIR}${bindir_crossscripts}/mysql_config
     sed -i -es,^pkglibdir=.*,pkglibdir=\'${STAGING_LIBDIR}\', ${SYSROOT_DESTDIR}${bindir_crossscripts}/mysql_config
 }
@@ -66,12 +86,10 @@ do_install() {
     install -m 0755 ${WORKDIR}/mysqld.sh ${D}/etc/init.d/mysqld
 }
 
-pkg_postinst_mysql5-server () {
+pkg_postinst_${PN}-server () {
     if [ "x$D" != "x" ]; then
         exit 1
     fi
-
-    grep mysql /etc/passwd || adduser --disabled-password --home=/var/mysql --ingroup nogroup mysql
 
     #Install the database
     test -d /usr/bin || mkdir -p /usr/bin
@@ -83,14 +101,10 @@ pkg_postinst_mysql5-server () {
 
 }
 
-pkg_postrm_mysql5-server () {
-    grep mysql /etc/passwd && deluser mysql
-}
-
 PACKAGES = "${PN}-dbg ${PN} \
     libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysqlclient-r-dbg \
     libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclient-dbg \
-    ${PN}-client ${PN}-server ${PN}-leftovers"
+    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-leftovers"
 CONFFILES_${PN}-server += "${sysconfdir}/my.cnf"
 
 FILES_${PN} = " "
@@ -114,12 +128,22 @@ FILES_libmysqlclient-staticdev = "\
 FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
     /usr/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
 
+# Avoid warnings about ha_xtradb.so.0.0.0 and ha_innodb_plugin.so.0.0.0
+# which are intentionally non-PIC on 32-bit x86 (see e.g.
+# storage/xtradb/plug.in in the source)
+INSANE_SKIP_libmysqlclient_append_i586 = " textrel"
+
 FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
 FILES_libmysqlclient-r-dev = "\
     ${libdir}/libmysqlclient_r.so \
     ${libdir}/libmysqlclient_r.la"
 FILES_libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
 FILES_libmysqlclient-r-dbg = "${libdir}/plugin/.debuglibmysqlclient_r.so.*"
+
+FILES_libmysqld = "\
+    ${libdir}/libmysqld.so.*"
+FILES_libmysqld-dev = "\
+    ${libdir}/libmysqld.so"
 
 FILES_${PN}-client = "\
     ${bindir}/myisam_ftdump \

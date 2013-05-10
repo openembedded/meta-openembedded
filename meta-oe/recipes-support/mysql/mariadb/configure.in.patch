@@ -1,0 +1,13 @@
+Index: mysql-5.1.40/configure.in
+===================================================================
+--- mysql-5.1.40.orig/configure.in
++++ mysql-5.1.40/configure.in
+@@ -226,8 +226,6 @@ else
+   AC_PATH_PROG(AS, as, as)
+ fi
+ 
+-# Still need ranlib for readline; local static use only so no libtool.
+-AC_PROG_RANLIB
+ # We use libtool
+ #AC_LIBTOOL_WIN32_DLL
+ AC_PROG_LIBTOOL
