@@ -21,6 +21,9 @@ do_install() {
 
     install -d ${D}${sysconfdir}/apache2/conf.d
     install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
+
+    # Remove a few scripts that explicitly require bash (!)
+    rm -f ${D}${datadir}/phpmyadmin/libraries/transformations/*.sh
 }
 
 FILES_${PN} = "${datadir}/${BPN} \
