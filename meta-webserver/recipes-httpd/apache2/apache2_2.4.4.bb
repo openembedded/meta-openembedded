@@ -31,8 +31,8 @@ CFLAGS_prepend = "-I${STAGING_INCDIR}/openssl "
 EXTRA_OECONF = "--enable-ssl \
     --with-ssl=${STAGING_LIBDIR}/.. \
     --with-expat=${STAGING_LIBDIR}/.. \
-    --with-apr=${WORKDIR}/apr-1-config \
-    --with-apr-util=${WORKDIR}/apu-1-config \
+    --with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+    --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
     --enable-info \
     --enable-rewrite \
     --with-dbm=sdbm \
@@ -47,15 +47,6 @@ EXTRA_OECONF = "--enable-ssl \
     ap_cv_void_ptr_lt_long=no \
     --enable-mpms-shared \
     ac_cv_have_threadsafe_pollset=no"
-
-do_configure_prepend() {
-    # FIXME: this hack is required to work around an issue with apr/apr-util
-    # Can be removed when fixed in OE-Core (also revert --with-* options above)
-    # see http://bugzilla.yoctoproject.org/show_bug.cgi?id=3267
-    cp ${STAGING_BINDIR_CROSS}/apr-1-config ${STAGING_BINDIR_CROSS}/apu-1-config ${WORKDIR}
-    sed -i -e 's:location=source:location=installed:' ${WORKDIR}/apr-1-config
-    sed -i -e 's:location=source:location=installed:' ${WORKDIR}/apu-1-config
-}
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
