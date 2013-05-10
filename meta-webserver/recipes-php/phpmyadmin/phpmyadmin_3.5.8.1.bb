@@ -5,13 +5,11 @@ LICENSE = "GPLv2 & LGPLv3 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
 
-PR = "r1"
-
 SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
            file://apache.conf"
 
-SRC_URI[md5sum] = "3f8993fe0f2fee1a022768278c6a270b"
-SRC_URI[sha256sum] = "d02de081c522d3026f4a8418538f7ff05adf280afa404851a5f7f4ef895b4a7d"
+SRC_URI[md5sum] = "76976c227041ac7109506b29aec3083a"
+SRC_URI[sha256sum] = "c66737ff55369b1c9e4b116e68f3c517faf7c4bc17e289d008d74fde6c8260f6"
 
 S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 
