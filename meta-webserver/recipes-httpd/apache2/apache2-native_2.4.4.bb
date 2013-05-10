@@ -5,7 +5,6 @@ HOMEPAGE = "http://httpd.apache.org/"
 DEPENDS = "expat-native pcre-native apr-native apr-util-native"
 SECTION = "net"
 LICENSE = "Apache-2.0"
-PR = "r0"
 
 inherit native
 
@@ -14,8 +13,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2"
 S = "${WORKDIR}/httpd-${PV}"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
-SRC_URI[md5sum] = "87aaf7bc7e8715f0455997bb8c6791aa"
-SRC_URI[sha256sum] = "d82102b9c111f1892fb20a2bccf4370de579c6521b2f172ed0b36f2759fb249e"
+SRC_URI[md5sum] = "0e712ee2119cd798c8ae39d5f11a9206"
+SRC_URI[sha256sum] = "92aabddeca76a4ac7330b143df1407bbf35574c7291c15172238ac598d97655c"
 
 do_configure () {
     ./configure --with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \

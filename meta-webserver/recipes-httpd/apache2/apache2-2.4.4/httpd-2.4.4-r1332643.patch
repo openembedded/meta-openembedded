@@ -23,8 +23,8 @@ http://svn.apache.org/viewvc?view=revision&revision=1332643
 
 Upstream-Status: Backport
 
---- httpd-2.4.2/modules/ssl/ssl_private.h
-+++ httpd-2.4.2/modules/ssl/ssl_private.h
+--- httpd-2.4.4/modules/ssl/ssl_private.h
++++ httpd-2.4.4/modules/ssl/ssl_private.h
 @@ -139,6 +139,11 @@
  #define HAVE_FIPS
  #endif
@@ -37,7 +37,7 @@ Upstream-Status: Backport
  #if (OPENSSL_VERSION_NUMBER >= 0x10000000)
  #define MODSSL_SSL_CIPHER_CONST const
  #define MODSSL_SSL_METHOD_CONST const
-@@ -811,6 +816,7 @@
+@@ -840,6 +845,7 @@ int          ssl_callback_ServerNameIndication(SSL *, int *, modssl_ctx_t *);
  int         ssl_callback_SessionTicket(SSL *, unsigned char *, unsigned char *,
                                         EVP_CIPHER_CTX *, HMAC_CTX *, int);
  #endif
@@ -45,9 +45,9 @@ Upstream-Status: Backport
  
  /**  Session Cache Support  */
  void         ssl_scache_init(server_rec *, apr_pool_t *);
---- httpd-2.4.2/modules/ssl/mod_ssl.c
-+++ httpd-2.4.2/modules/ssl/mod_ssl.c
-@@ -260,6 +260,18 @@
+--- httpd-2.4.4/modules/ssl/mod_ssl.c
++++ httpd-2.4.4/modules/ssl/mod_ssl.c
+@@ -272,6 +272,18 @@ static const command_rec ssl_config_cmds[] = {
      AP_END_CMD
  };
  
@@ -66,9 +66,9 @@ Upstream-Status: Backport
  /*
   *  the various processing hooks
   */
---- httpd-2.4.2/modules/ssl/mod_ssl.h
-+++ httpd-2.4.2/modules/ssl/mod_ssl.h
-@@ -63,5 +63,26 @@
+--- httpd-2.4.4/modules/ssl/mod_ssl.h
++++ httpd-2.4.4/modules/ssl/mod_ssl.h
+@@ -63,5 +63,26 @@ APR_DECLARE_OPTIONAL_FN(int, ssl_proxy_enable, (conn_rec *));
  
  APR_DECLARE_OPTIONAL_FN(int, ssl_engine_disable, (conn_rec *));
  
@@ -95,9 +95,9 @@ Upstream-Status: Backport
 +
  #endif /* __MOD_SSL_H__ */
  /** @} */
---- httpd-2.4.2/modules/ssl/ssl_engine_init.c
-+++ httpd-2.4.2/modules/ssl/ssl_engine_init.c
-@@ -681,6 +681,11 @@
+--- httpd-2.4.4/modules/ssl/ssl_engine_init.c
++++ httpd-2.4.4/modules/ssl/ssl_engine_init.c
+@@ -725,6 +725,11 @@ static void ssl_init_ctx_callbacks(server_rec *s,
  #endif
  
      SSL_CTX_set_info_callback(ctx, ssl_callback_Info);
@@ -109,8 +109,8 @@ Upstream-Status: Backport
  }
  
  static void ssl_init_ctx_verify(server_rec *s,
---- httpd-2.4.2/modules/ssl/ssl_engine_io.c
-+++ httpd-2.4.2/modules/ssl/ssl_engine_io.c
+--- httpd-2.4.4/modules/ssl/ssl_engine_io.c
++++ httpd-2.4.4/modules/ssl/ssl_engine_io.c
 @@ -28,6 +28,7 @@
                                    core keeps dumping.''
                                              -- Unknown    */
@@ -119,7 +119,7 @@ Upstream-Status: Backport
  #include "apr_date.h"
  
  /*  _________________________________________________________________
-@@ -297,6 +298,7 @@
+@@ -297,6 +298,7 @@ typedef struct {
      apr_pool_t *pool;
      char buffer[AP_IOBUFSIZE];
      ssl_filter_ctx_t *filter_ctx;
@@ -127,7 +127,7 @@ Upstream-Status: Backport
  } bio_filter_in_ctx_t;
  
  /*
-@@ -1374,6 +1376,27 @@
+@@ -1385,6 +1387,27 @@ static apr_status_t ssl_io_filter_input(ap_filter_t *f,
          APR_BRIGADE_INSERT_TAIL(bb, bucket);
      }
  
@@ -155,7 +155,7 @@ Upstream-Status: Backport
      return APR_SUCCESS;
  }
  
-@@ -1855,6 +1878,7 @@
+@@ -1866,6 +1889,7 @@ static void ssl_io_input_add_filter(ssl_filter_ctx_t *filter_ctx, conn_rec *c,
      inctx->block = APR_BLOCK_READ;
      inctx->pool = c->pool;
      inctx->filter_ctx = filter_ctx;
@@ -163,8 +163,8 @@ Upstream-Status: Backport
  }
  
  /* The request_rec pointer is passed in here only to ensure that the
---- httpd-2.4.2/modules/ssl/ssl_engine_kernel.c
-+++ httpd-2.4.2/modules/ssl/ssl_engine_kernel.c
+--- httpd-2.4.4/modules/ssl/ssl_engine_kernel.c
++++ httpd-2.4.4/modules/ssl/ssl_engine_kernel.c
 @@ -29,6 +29,7 @@
                                    time I was too famous.''
                                              -- Unknown                */
@@ -173,10 +173,10 @@ Upstream-Status: Backport
  #include "util_md5.h"
  
  static void ssl_configure_env(request_rec *r, SSLConnRec *sslconn);
-@@ -2143,3 +2144,84 @@
-     return -1;
+@@ -2186,3 +2187,84 @@ int ssl_callback_SRPServerParams(SSL *ssl, int *ad, void *arg)
  }
- #endif
+ 
+ #endif /* OPENSSL_NO_SRP */
 +
 +#ifdef HAVE_TLS_NPN
 +/*

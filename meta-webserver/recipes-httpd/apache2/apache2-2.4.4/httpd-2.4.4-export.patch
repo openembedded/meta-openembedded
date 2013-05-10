@@ -8,8 +8,8 @@ Upstream-Status: Pending
 
 Note: EXPORT_DIRS change is conditional on using shared apr
 
---- httpd-2.4.1/server/Makefile.in.export
-+++ httpd-2.4.1/server/Makefile.in
+--- httpd-2.4.4/server/Makefile.in.export
++++ httpd-2.4.4/server/Makefile.in
 @@ -57,9 +57,6 @@ export_files:
  	( for dir in $(EXPORT_DIRS); do \
  	      ls $$dir/*.h ; \
@@ -17,6 +17,6 @@ Note: EXPORT_DIRS change is conditional on using shared apr
 -	  for dir in $(EXPORT_DIRS_APR); do \
 -	      ls $$dir/ap[ru].h $$dir/ap[ru]_*.h 2>/dev/null; \
 -	  done; \
- 	) | sort -u > $@
+ 	) | sed -e s,//,/,g | sort -u > $@
  
  exports.c: export_files
