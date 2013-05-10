@@ -19,6 +19,7 @@ inherit autotools
 CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
 
 EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
+                --with-pic \
                 --enable-maintainer-zts \
                 --without-mysql \
                 --enable-force-cgi-redirect \
