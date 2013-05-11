@@ -18,12 +18,10 @@ PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg"
 RRECOMMENDS_${PN} = "${PN}-plugin"
 
 BRANCH = "master"
-# this matches 0.4.0 tag
-SRCREV = "3af5bd38d82255942f582398160a5d3354346ca3"
+SRCREV = "6a5e4f981112a90a8c19d82bd671da389d2af993"
 
 SRC_URI = " \
     git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
-    file://0001-added-flags-to-disable-qml-plugin-and-test-program-t.patch \
 "
 
 S = "${WORKDIR}/git"
