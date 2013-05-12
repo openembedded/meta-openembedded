@@ -1,7 +1,5 @@
-Index: kexec-tools-2.0.2/kexec/kexec-syscall.h
-===================================================================
---- kexec-tools-2.0.2.orig/kexec/kexec-syscall.h	2010-07-29 06:19:59.000000000 +0200
-+++ kexec-tools-2.0.2/kexec/kexec-syscall.h	2010-08-02 00:13:39.000000000 +0200
+--- a/kexec/kexec-syscall.h
++++ b/kexec/kexec-syscall.h
 @@ -2,7 +2,7 @@
  #define KEXEC_SYSCALL_H
  
