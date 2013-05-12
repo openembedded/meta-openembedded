@@ -1,0 +1,42 @@
+From 8bd7428c28750f682fe3cc1a35291e5696c17638 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 12 May 2013 18:00:06 +0200
+Subject: [PATCH] splash/Splash.cc: add cast to fix build for
+ --enable-fixedpoint
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+| Splash.cc:1497:30: error: conversion from 'SplashCoord {aka FixedPoint}' to 'Guchar {aka unsigned char}' is ambiguous
+| Splash.cc:1497:30: note: candidates are:
+| In file included from SplashMath.h:27:0,
+|                  from Splash.cc:44:
+| ../goo/FixedPoint.h:45:3: note: FixedPoint::operator int()
+| ../goo/FixedPoint.h:43:3: note: FixedPoint::operator double()
+| ../goo/FixedPoint.h:41:3: note: FixedPoint::operator float()
+
+Upstream-Status: Submitted [1]
+
+[1] http://lists.freedesktop.org/archives/poppler/2013-May/010247.html
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ splash/Splash.cc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/splash/Splash.cc b/splash/Splash.cc
+index cd0ec72..6630370 100644
+--- a/splash/Splash.cc
++++ b/splash/Splash.cc
+@@ -1494,7 +1494,7 @@ inline void Splash::drawAALine(SplashPipe *pipe, int x0, int x1, int y) {
+ #endif
+ 
+     if (t != 0) {
+-      pipe->shape = aaGamma[t];
++      pipe->shape = (int)aaGamma[t];
+       (this->*pipe->run)(pipe);
+       updateModX(x);
+       updateModY(y);
+-- 
+1.7.4.4
+
