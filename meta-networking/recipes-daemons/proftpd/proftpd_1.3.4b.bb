@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-PR = "r2"
+PR = "r3"
 
 SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://make.patch \
@@ -59,3 +59,5 @@ INITSCRIPT_PARAM = "defaults 85 15"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "${FTPGROUP}"
 USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
+
+FILES_${PN} += "/home/${FTPUSER}"
