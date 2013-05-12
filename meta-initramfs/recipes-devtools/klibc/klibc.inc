@@ -16,10 +16,13 @@ KLIBC_ARCH = '${TARGET_ARCH}'
 KLIBC_ARCH_armeb = 'arm'
 KLIBC_ARCH_mipsel = 'mips'
 KLIBC_ARCH_x86 = 'i386'
+KLIBC_ARCH_x86-64 = 'x86_64'
 KLIBC_ARCH_i486 = 'i386'
 KLIBC_ARCH_i586 = 'i386'
 KLIBC_ARCH_i686 = 'i386'
 KLIBC_ARCH_pentium = 'i386'
+KLIBC_ARCH_powerpc = 'ppc'
+KLIBC_ARCH_powerpc64 = 'ppc64'
 
 export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
 
