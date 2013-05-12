@@ -1,4 +1,3 @@
-RDEPENDS_${PN} = "kexec"
 PV = "0.5.9"
 PR = "r10+gitr${SRCREV}"
 
