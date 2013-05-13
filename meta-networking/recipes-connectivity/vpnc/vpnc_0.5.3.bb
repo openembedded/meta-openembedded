@@ -6,7 +6,7 @@ PRIORITY = "optional"
 LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
 DEPENDS = "libgcrypt"
-RDEPENDS_${PN} = "kernel-module-tun"
+RDEPENDS_${PN} = "kernel-module-tun perl"
 
 CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
 LDFLAGS_append = " -lgcrypt -lgpg-error"
