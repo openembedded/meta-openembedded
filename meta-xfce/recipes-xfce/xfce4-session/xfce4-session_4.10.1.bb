@@ -4,16 +4,13 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
 RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower"
-PR = "r7"
 
 inherit xfce update-alternatives
 
-SRC_URI[md5sum] = "4768e1a41a0287af6aad18b329a0f230"
-SRC_URI[sha256sum] = "bb8aa9a74c3d382840596fb4875144d66c7f3f47c8e9ee81d31e3428a72c46ce"
-SRC_URI += "file://0001-Handle-multiple-interactive-session-save-bug-5379.patch \
-            file://0002-Remove-gnome-keyring-remains.patch \
-            file://0003-configure.in-hard-code-path-to-iceauth.patch \
-            file://0001-Add-shutdown-reboot-functionality-for-systemd-bug-87.patch \
+SRC_URI[md5sum] = "1757657c1d590aa6274b7b7cbba33352"
+SRC_URI[sha256sum] = "0154fabdc398798c3445374ccc52a2f5bcb2d867fc94bc54114395b24f9cfc83"
+SRC_URI += " \
+    file://0001-configure.in-hard-code-path-to-iceauth.patch \
 "
 
 ALTERNATIVE_${PN} = "x-session-manager"

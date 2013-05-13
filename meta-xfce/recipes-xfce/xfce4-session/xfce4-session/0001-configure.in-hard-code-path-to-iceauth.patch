@@ -1,7 +1,7 @@
 From a629b051f4e5462150c77b95574bbc7a33bc9666 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Mon, 31 Dec 2012 16:35:29 +0100
-Subject: [PATCH] configure.in: hard code path to iceauth
+Subject: [PATCH] configure.ac: hard code path to iceauth
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -13,13 +13,13 @@ Upstream-Status: Inappropriate [config]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- configure.in |    8 +-------
+ configure.ac |    8 +-------
  1 files changed, 1 insertions(+), 7 deletions(-)
 
-diff --git a/configure.in b/configure.in
+diff --git a/configure.ac b/configure.ac
 index 3cf3510..505e744 100644
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -111,13 +111,7 @@ XDT_FEATURE_DEBUG([xfsm_debug_default])
  dnl Check for linker optimizations
  XDT_FEATURE_LINKER_OPTS()
