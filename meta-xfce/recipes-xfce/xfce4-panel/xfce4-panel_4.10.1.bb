@@ -6,8 +6,8 @@ DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/lib
 
 inherit xfce
 
-SRC_URI[md5sum] = "cf7351a4b952dbe3fc5ff509c68def33"
-SRC_URI[sha256sum] = "3321f998af2bbd14ba68654a8881774f6ea2ec4f1a3544598e7f47d3ed0009b9"
+SRC_URI[md5sum] = "8a1f8371fc725ba00f4594c5c0f81c59"
+SRC_URI[sha256sum] = "573052ed1b65e247415f92df120c8a78f9e4152c2636d38c923f82e32b8475d6"
 
 python populate_packages_prepend() {
     plugin_dir = d.expand('${libdir}/xfce4/panel/plugins/')
