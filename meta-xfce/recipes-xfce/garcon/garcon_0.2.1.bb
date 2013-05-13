@@ -6,7 +6,7 @@ DEPENDS = "glib-2.0 xfce4-dev-tools-native libxfce4util"
 
 inherit xfce
 
-SRC_URI[md5sum] = "301e7b8015060dd30407b68dd8c4bdb7"
-SRC_URI[sha256sum] = "02dea3edb9c0039eca4748e964c61b0e1cc10f2d7f9ce0c837287ac5fa9ef76c"
+SRC_URI[md5sum] = "c3cf89c836be0ddb281c81e4808fb68b"
+SRC_URI[sha256sum] = "48b644b8b2ffe597974e2526ca1a5d2d7da6a09c2d434f008dec80e9152701f7"
 
 FILES_${PN} += "${datadir}/desktop-directories"
