@@ -6,5 +6,5 @@ DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
 
 inherit xfce
 
-SRC_URI[md5sum] = "2e8defcd40cbf6afedde531b27314511"
-SRC_URI[sha256sum] = "0979fee12880bb5f011ab38d6c7cc9afe5fd68eb96ccda895cb56dbc16e7608e"
+SRC_URI[md5sum] = "11eec87e8eda2bc62512c2416cb807a1"
+SRC_URI[sha256sum] = "e82cd1ad715c02a385b3cf6646cb89aa3c4724446dac1d7e424971df12f6cfbb"
