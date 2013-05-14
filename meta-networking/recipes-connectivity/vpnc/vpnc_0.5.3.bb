@@ -6,7 +6,6 @@ PRIORITY = "optional"
 LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
 DEPENDS = "libgcrypt"
-RDEPENDS_${PN} = "kernel-module-tun perl"
 
 CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
 LDFLAGS_append = " -lgcrypt -lgpg-error"
@@ -19,6 +18,7 @@ do_install () {
 }
 
 CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
+RDEPENDS_${PN} = "kernel-module-tun perl-module-io-file"
 
 SRC_URI = "http://www.unix-ag.uni-kl.de/~massar/vpnc/vpnc-${PV}.tar.gz \
            file://makeman.patch \
