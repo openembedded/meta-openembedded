@@ -1,0 +1,33 @@
+From 839e0933f09309a0374aa58cc58439c3a1f157b2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 14 May 2013 10:24:48 +0200
+Subject: [PATCH] ut_maliit_glib_settings: fix build for glib 2.36
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [code removed upstream]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../ut_maliit_glib_settings.c                      |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c b/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c
+index 476ba33..09b6261 100644
+--- a/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c
++++ b/tests/ut_maliit_glib_settings/ut_maliit_glib_settings.c
+@@ -188,8 +188,9 @@ test_settings_manager_emits_disconnected(void)
+ int
+ main (int argc, char **argv) {
+     g_test_init(&argc, &argv, NULL);
++#if !GLIB_CHECK_VERSION (2, 36, 0)
+     g_type_init();
+-
++#endif
+     g_test_add_func("/ut_maliit_glib_settings/MaliitSettingsManager/preferred_description_locale/default",
+                     test_preferred_description_locale_default);
+     g_test_add_func("/ut_maliit_glib_settings/MaliitSettingsManager/preferred_description_locale/set-get-roundtrip",
+-- 
+1.7.6.5
+

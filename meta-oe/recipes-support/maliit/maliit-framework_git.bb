@@ -11,11 +11,13 @@ SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
     file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
+    file://0002-ut_maliit_glib_settings-fix-build-for-glib-2.36.patch \
     file://maliit-server.desktop \
 "
 
 SRCREV = "750842dec74a9b17dca91ef779c4fc5a43c4d9dc"
 PV = "0.92.3+git${SRCPV}"
+PR = "r1"
 
 
 PACKAGES =+ "${PN}-gtk"
