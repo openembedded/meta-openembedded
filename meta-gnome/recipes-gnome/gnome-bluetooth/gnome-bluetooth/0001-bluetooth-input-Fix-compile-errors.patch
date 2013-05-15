@@ -1,0 +1,37 @@
+From e3c789d6dca9a8a99b60b86e28d8119c55253c13 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 15 May 2013 08:37:03 -0700
+Subject: [PATCH] bluetooth-input: Fix compile errors
+
+XID is unsigned long type so %d will error out with -Wformat
+where format warnings are being treated at errors
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Upstream-Status: Unknown
+---
+ wizard/bluetooth-input.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/wizard/bluetooth-input.c b/wizard/bluetooth-input.c
+index b3fbdaf..d17e67c 100644
+--- a/wizard/bluetooth-input.c
++++ b/wizard/bluetooth-input.c
+@@ -190,12 +190,12 @@ bluetooth_input_check_for_devices (BluetoothInput *input)
+ 		if (bluetooth_input_device_get_type (&device_info[i], &is_mouse, &is_keyboard) == FALSE)
+ 			continue;
+ 		if (is_mouse != FALSE) {
+-			g_message ("has mouse: %s (id = %d)", device_info[i].name, device_info[i].id);
++			g_message ("has mouse: %s (id = %lu)", device_info[i].name, device_info[i].id);
+ 			has_mouse = TRUE;
+ 			//break;
+ 		}
+ 		if (is_keyboard != FALSE) {
+-			g_message ("has keyboard: %s (id = %d)", device_info[i].name, device_info[i].id);
++			g_message ("has keyboard: %s (id = %lu)", device_info[i].name, device_info[i].id);
+ 			has_keyboard = TRUE;
+ 			//break;
+ 		}
+-- 
+1.7.9.5
+
