@@ -26,6 +26,7 @@ EXTRA_OECONF = " \
                 ${FPLAYOUT} \
                 --disable-perl --with-libperl=no --with-perl-bindings=no \
                 --with-libgcrypt=${STAGING_BINDIR_CROSS}/libgcrypt-config \
+                --disable-notify_desktop \
 "
 
 do_install_append() {
