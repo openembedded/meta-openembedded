@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
 
 PR = "r2"
 
-DEPENDS = "mm-common cairomm glibmm"
+DEPENDS = "mm-common cairomm glibmm pango"
 
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
