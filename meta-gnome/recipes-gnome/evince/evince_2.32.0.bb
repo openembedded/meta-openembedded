@@ -4,11 +4,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
 SECTION = "x11/office"
 DEPENDS = "gnome-icon-theme gnome-doc-utils-native libgnome-keyring nautilus tiff libxt ghostscript poppler libxml2 gtk+ gconf libglade"
 
-PR = "r4"
+PR = "r5"
 
 inherit gnome pkgconfig gtk-icon-cache gsettings
 
-SRC_URI += "file://cross-compile-fix.patch"
+SRC_URI += " \
+    file://cross-compile-fix.patch \
+    file://0001-tiff-fix-compile-warning.patch \
+"
 
 SRC_URI[archive.md5sum] = "ebc3ce6df8dcbf29cb9492f8dd031319"
 SRC_URI[archive.sha256sum] = "2a4c91ae38f8b5028cebb91b9da9ddc50ea8ae3f3d429df89ba351da2d787ff7"
