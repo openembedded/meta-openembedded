@@ -70,7 +70,7 @@ SRCREV = "5f69899e059e9bea58f92af61f70fc3f63825087"
 GIT_REPO = "gnuradio.git"
 GIT_BRANCH = "master"
 
-SRC_URI = "git://gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
+SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
 "
 
 S="${WORKDIR}/git"
@@ -82,21 +82,18 @@ EXTRA_OECMAKE = "-DENABLE_GR_ATSC=FALSE \
                  -DENABLE_GR_FCD=OFF \
                  -DENABLE_GR_WXGUI=OFF \
                  -DENABLE_GR_VIDEO_SDL=OFF \
+                 -DENABLE_SPHINX=OFF -DENABLE_DOXYGEN=OFF \
                  -DIMPORT_EXECUTABLES=${S}/gr-vocoder/lib/generate_codebook.txt \
                  -DQT_HEADERS_DIR=${STAGING_INCDIR}/qt4 \
                  -DQT_QTCORE_INCLUDE_DIR=${STAGING_INCDIR}/qt4/QtCore \
                  -DQT_LIBRARY_DIR=${STAGING_LIBDIR} \
                  -DQT_QTCORE_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtCore.so \
                  -DQT_QTGUI_LIBRARY_RELEASE=${STAGING_LIBDIR}/libQtGui.so \
+                 ${@base_contains('TUNE_FEATURES', 'neon', \
+                     '-Dhave_mfpu_neon=1', '-Dhave_mfpu_neon=0', d)} \
 "
 
 inherit distutils-base cmake pkgconfig
 
 EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
-
-# Only builds for machines with neon instructions. Problem is in upstream cmake.
-python () {
-    if not oe.utils.contains ('TUNE_FEATURES', 'neon', True, False, d):
-        raise bb.parse.SkipPackage("'neon' not in TUNE_FEATURES")
-}
 
