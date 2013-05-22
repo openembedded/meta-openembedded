@@ -1,9 +1,10 @@
 require ${BPN}.inc
 
-PR = "${INC_PR}.1"
+PR = "${INC_PR}.2"
 
 SRC_URI = "\
     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+    file://revert.r83789.patch \
 "
 
 SRC_URI[md5sum] = "980abd6f645a38aa0a5d74f11a0e07f9"
