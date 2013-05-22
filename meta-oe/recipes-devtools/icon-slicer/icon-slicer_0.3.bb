@@ -1,8 +1,7 @@
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-DEPENDS = "gtk+ popt"
-DEPENDS_class-native = "popt-native"
+DEPENDS = "gdk-pixbuf popt"
 
 SRC_URI = "http://freedesktop.org/software/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-Makefile.am-no-examples.patch"
