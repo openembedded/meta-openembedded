@@ -3,7 +3,7 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
 
-DEPENDS = "alsa-lib"
+DEPENDS = "alsa-lib texinfo"
 
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/mikmod/libmikmod-${PV}.tar.gz \
