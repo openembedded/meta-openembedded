@@ -4,11 +4,17 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1793ef52a5d577794cd886a501a7f861"
 HOMEPAGE = "http://luajit.org"
 
 DEPENDS += "lua5.1"
-SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz;name=tarball \
            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+           http://luajit.org/download/v2.0.1_hotfix1.patch;name=hotfix1 \
           "
-SRC_URI[md5sum] = "85e406e8829602988eb1233a82e29f1f"
-SRC_URI[sha256sum] = "2371cceb53453d8a7b36451e6a0ccdb66236924545d6042ddd4c34e9668990c0"
+SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
+
+SRC_URI[tarball.md5sum] = "85e406e8829602988eb1233a82e29f1f"
+SRC_URI[tarball.sha256sum] = "2371cceb53453d8a7b36451e6a0ccdb66236924545d6042ddd4c34e9668990c0"
+
+SRC_URI[hotfix1.md5sum] = "5186c5901e37679a3c835d7b7cdac88e"
+SRC_URI[hotfix1.sha256sum] = "143898de3fe84455684fddb92947d36c1a51c6a6e3884813fe5e025bd4652368"
 
 S = "${WORKDIR}/LuaJIT-${PV}"
 
