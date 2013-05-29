@@ -15,8 +15,6 @@ ARM_INSTRUCTION_SET = "arm"
 
 SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
 
-PARALLEL_MAKE_virtclass-native = ""
-
 LLVM_EXTRA_ARCH = "X86;"
 LLVM_EXTRA_ARCH_x86 = ""
 LLVM_EXTRA_ARCH_x86-64 = ""

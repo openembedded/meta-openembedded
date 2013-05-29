@@ -103,6 +103,11 @@ FILES_${PN}-dev = " \
                    ${libdir}/llvm${LLVM_RELEASE}/*.a \
 "
 
+base_do_compile_prepend() {
+    # Avoid *** No rule to make target `native/bin/tblgen', needed by `include/llvm/Intrinsics.gen.tmp'
+    oe_runmake tblgen
+}
+
 do_install() {
     # Install into a private directory to be able to reorganize the files.
 
