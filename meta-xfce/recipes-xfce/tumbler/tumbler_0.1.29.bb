@@ -6,8 +6,8 @@ DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl"
 
 inherit xfce
 
-SRC_URI[md5sum] = "3fa90528c3e7e77d8ace4bffcf0a2748"
-SRC_URI[sha256sum] = "4c60b3b92877257fcc54d18acbbe4ad73c84a7ff7608a430ad5a05b452923869"
+SRC_URI[md5sum] = "f844215c5e3918eae58abdd85f146780"
+SRC_URI[sha256sum] = "c3bac4ee609e22be6c7f01a4fdf6086bc6b57940d82f99570a2d9d547a32fc93"
 
 INSANE_SKIP_${PN} = "dev-so"
 
