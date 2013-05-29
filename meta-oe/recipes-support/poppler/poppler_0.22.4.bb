@@ -2,14 +2,11 @@ DESCRIPTION = "Poppler is a PDF rendering library based on the xpdf-3.0 code bas
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PR = "r2"
-
 SRC_URI = " \
     http://poppler.freedesktop.org/${PN}-${PV}.tar.gz \
-    file://0001-splash-Splash.cc-add-cast-to-fix-build-for-enable-fi.patch \
 "
-SRC_URI[md5sum] = "be915388eaad6865cee5a156c8119ec1"
-SRC_URI[sha256sum] = "916a931cbef951366014f13d5f4a574657ccc064ac41051df96dd58e22934431"
+SRC_URI[md5sum] = "49d55921ce795778c7231fe9f2fe923b"
+SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1dce13b"
 
 DEPENDS = "fontconfig jpeg zlib gtk+ cairo tiff lcms"
 
