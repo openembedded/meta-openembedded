@@ -62,6 +62,7 @@ EXTRA_OECMAKE = "\
     -DLLVM_ENABLE_ASSERTIONS:BOOL=ON \
     -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
     -DBUILD_SHARED_LIBS:BOOL=ON \
+    -DCMAKE_SKIP_BUILD_RPATH:BOOL=ON \
 "
 # We need to reset this to avoid breakage as we build out of tree
 TOOLCHAIN_OPTIONS = ""
