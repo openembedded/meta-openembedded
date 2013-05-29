@@ -6,8 +6,8 @@ DEPENDS = "webkit-gtk libsoup-2.4 openssl python-native python-docutils-native l
 
 SRC_URI = "http://archive.xfce.org/src/apps/midori/0.5/midori-${PV}.tar.bz2;name=midori \
 "
-SRC_URI[midori.md5sum] = "ad11685633e23f8173e2cd947d945cce"
-SRC_URI[midori.sha256sum] = "d280c19bb135f2b644a67d9f34d1ec1c148ceb14b5de11ce6c23f64c15be5df0"
+SRC_URI[midori.md5sum] = "e2c1e0b617397ec9f9eef4fdb47b3565"
+SRC_URI[midori.sha256sum] = "a9c5cb4606e8e4967a2b980caa9ada25623c50d927a302b6bf73eeac5815c97c"
 
 inherit gtk-icon-cache pkgconfig vala pythonnative
 
