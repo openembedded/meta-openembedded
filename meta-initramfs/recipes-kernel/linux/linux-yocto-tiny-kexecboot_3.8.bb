@@ -1,4 +1,4 @@
-require recipes-kernel/linux/linux-yocto-tiny_3.4.bb
+require recipes-kernel/linux/linux-yocto-tiny_3.8.bb
 
 PACKAGES = ""
 PROVIDES = ""
