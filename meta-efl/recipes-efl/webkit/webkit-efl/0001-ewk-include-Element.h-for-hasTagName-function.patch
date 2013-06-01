@@ -1,0 +1,43 @@
+From 3de7c4633751c3e55152d4e2429dfcc0f69a1de3 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 1 Jun 2013 19:23:54 +0200
+Subject: [PATCH] ewk: include Element.h for hasTagName function
+
+* ewebkit build fails like gtk in http://trac.webkit.org/changeset/72745
+  | ../../../lib/libwebcore_efl.so.0.1.0: undefined reference to `WebCore::Node::hasTagName(WebCore::QualifiedName const&) const'
+  | collect2: error: ld returned 1 exit status
+  | make[2]: *** [bin/DumpRenderTree] Error 1
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Source/WebKit/efl/ewk/ewk_frame.cpp | 1 +
+ Source/WebKit/efl/ewk/ewk_view.cpp  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/Source/WebKit/efl/ewk/ewk_frame.cpp b/Source/WebKit/efl/ewk/ewk_frame.cpp
+index fd1ffd2..c86601a 100644
+--- a/Source/WebKit/efl/ewk/ewk_frame.cpp
++++ b/Source/WebKit/efl/ewk/ewk_frame.cpp
+@@ -32,6 +32,7 @@
+ #include "FocusController.h"
+ #include "FrameLoaderClientEfl.h"
+ #include "FrameView.h"
++#include "Element.h"
+ #include "HTMLCollection.h"
+ #include "HTMLHeadElement.h"
+ #include "HTMLImageElement.h"
+diff --git a/Source/WebKit/efl/ewk/ewk_view.cpp b/Source/WebKit/efl/ewk/ewk_view.cpp
+index 9798e94..7a5da60 100644
+--- a/Source/WebKit/efl/ewk/ewk_view.cpp
++++ b/Source/WebKit/efl/ewk/ewk_view.cpp
+@@ -36,6 +36,7 @@
+ #include "FocusController.h"
+ #include "FrameLoaderClientEfl.h"
+ #include "FrameView.h"
++#include "Element.h"
+ #include "GraphicsContext.h"
+ #include "HTMLElement.h"
+ #include "HTMLInputElement.h"
+-- 
+1.8.2.1
+
