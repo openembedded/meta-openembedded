@@ -10,11 +10,12 @@ SRC_URI = "git://github.com/liftoff/GateOne.git \
            file://gateone-avahi.service \
            file://server.conf \
            file://gateone.service \
+           file://gateone-init \
 "
 
 S = "${WORKDIR}/git"
 
-inherit distutils allarch python-dir systemd
+inherit distutils allarch python-dir systemd update-rc.d
 
 export prefix = "${localstatedir}/lib"
 
@@ -28,6 +29,9 @@ do_install_append() {
     
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
+
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/gateone-init ${D}${sysconfdir}/init.d/gateone
 }
 
 FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${localstatedir}/volatile/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
@@ -63,3 +67,4 @@ RDEPENDS_${PN} = "file \
 "
 
 SYSTEMD_SERVICE_${PN} = "gateone.service"
+INITSCRIPT_NAME = "gateone"
