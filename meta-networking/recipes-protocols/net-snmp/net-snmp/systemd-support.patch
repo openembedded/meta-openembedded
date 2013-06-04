@@ -7,12 +7,14 @@ fef6cddfdb94da1a6b1fb768af62918b80f11fd3
 0641e43c694c485cbbffef0556efc4641bd3ff50
 76530a89f1c8bbd0b63acce63e10d5d4812a1a16 (conflict resolved)
 bf108d7f1354f6276fc43c129963f2c49b9fc242
+3692875172352f72cf3afd0d35f355e83d7e421b
 74412748067c685e1d8ab6ed3bcc3ca9c2774844
 86132e3f1e6ef7b4e0b96d8fa24e37c81b71b0e0
 63557cf8986a33dba1d4429b583a901361052c4f
 
 Upstream-Status: Backport
 
+Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
 diff --git a/README.systemd b/README.systemd
 new file mode 100644
 index 0000000..f731851
@@ -89,10 +91,10 @@ index b177d5b..08bdfc7 100644
  #endif
  
  #ifndef WIN32
-+#ifndef NETSNMP_NO_SYSYSTEMD
++#ifndef NETSNMP_NO_SYSTEMD
 +    /* check if systemd has sockets for us and don't close them */
 +    prepared_sockets = netsnmp_sd_listen_fds(0);
-+#endif /* NETSNMP_NO_SYSYSTEMD */
++#endif /* NETSNMP_NO_SYSTEMD */
 +
      /*
       * close all non-standard file descriptors we may have
