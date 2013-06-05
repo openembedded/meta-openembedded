@@ -40,7 +40,7 @@ EXTRA_OECONF = " \
     --without-tcl \
 "
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
 do_configure() {
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/Tools/config
