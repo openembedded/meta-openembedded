@@ -94,6 +94,7 @@ do_compile_prepend() {
         # after:   86M   ../../qemu-treedir/
         cp -pPR \
         ${STAGING_DIR_TARGET}/${base_libdir}/libuuid.so.* \
+        ${STAGING_DIR_TARGET}/${base_libdir}/libz.so.* \
         ${STAGING_DIR_TARGET}/${libdir}/libICE.so.* \
         ${STAGING_DIR_TARGET}/${libdir}/libSM.so.* \
         ${STAGING_DIR_TARGET}/${libdir}/libatk-1.0.so.* \
@@ -118,8 +119,7 @@ do_compile_prepend() {
         ${STAGING_DIR_TARGET}/${libdir}/libharfbuzz.so.* \
         ${STAGING_DIR_TARGET}/${libdir}/libicule.so.* \
         ${STAGING_DIR_TARGET}/${libdir}/libicuuc.so.* \
-        ${STAGING_DIR_TARGET}/${libdir}/libicudata.so.* \
-        ${STAGING_DIR_TARGET}/${libdir}/libz.so.* $treedir/${base_libdir}/
+        ${STAGING_DIR_TARGET}/${libdir}/libicudata.so.* $treedir/${base_libdir}/
 
         # X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
         cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libX*.so.* $treedir/${base_libdir}/
