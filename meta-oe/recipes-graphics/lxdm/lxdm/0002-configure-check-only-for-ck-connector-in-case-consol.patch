@@ -1,0 +1,48 @@
+From 8657bfcfc5c26382989001e9b6d18295d740c709 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 7 Jun 2013 14:13:41 +0200
+Subject: [PATCH] configure: check only for ck-connector in case consolekit is
+ enabled
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+it failed for --disable-consolekit with
+
+| lxdm.c:70:26: fatal error: ck-connector.h: No such file or directory
+| compilation terminated.
+| make[2]: *** [lxdm_binary-lxdm.o] Error 1
+
+Upstream-Status: submitted [1]
+
+[1] http://sourceforge.net/mailarchive/message.php?msg_id=31010893
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 9e21a22..49ba944 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -28,8 +28,6 @@ if test "x$USE_PAM" != "xno" ; then
+ 		 fi])
+ fi
+ 
+-AC_CHECK_LIB([ck-connector],[ck_connector_open_session])
+-
+ # Checks for header files.
+ AC_PATH_X
+ AC_CHECK_HEADERS([shadow.h stdlib.h string.h unistd.h utmpx.h])
+@@ -102,6 +100,7 @@ if test "x$enable_consolekit" = "xyes" ; then
+ 	AC_SUBST(CONSOLEKIT_LIBS)],[
+ 	echo "ConsoleKit devel package not found"
+ 	])
++  AC_CHECK_LIB([ck-connector],[ck_connector_open_session])
+ fi
+ 
+ 
+-- 
+1.7.6.5
+
