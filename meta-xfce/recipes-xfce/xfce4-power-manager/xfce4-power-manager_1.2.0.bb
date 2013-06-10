@@ -9,13 +9,18 @@ inherit xfce
 
 DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
            libxrandr virtual/libx11 libxext xfce4-panel"
-RDEPENDS_${PN} = "networkmanager udisks upower polkit"
+
+SRC_URI += "file://0001-Add-shutdown-reboot-functionality-for-systemd.patch"
+
+RDEPENDS_${PN} = "networkmanager udisks upower ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
 
 EXTRA_OECONF = " \
-    --enable-polkit \
     --enable-network-manager \
     --enable-panel-plugins \
 "
+
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+PACKAGECONFIG[systemd] = "--enable-polkit, --disable-polkit, polkit"
 
 PACKAGES += "xfce4-brightness-plugin"
 FILES_${PN} += "${datadir}/polkit-1"
