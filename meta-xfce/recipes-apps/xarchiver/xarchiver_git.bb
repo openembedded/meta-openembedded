@@ -1,22 +1,28 @@
 DESCRIPTION = "Lightweight, desktop independent GTK+ archive manager"
 HOMEPAGE = "http://xarchiver.sourceforge.net"
 SECTION = "x11"
-PR = "r3"
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${P}.tar.bz2"
-SRC_URI[md5sum] = "2bc7f06403cc6582dd4a8029ec9d038d"
-SRC_URI[sha256sum] = "cea932ff9d505969201fd502470bbebbc5726ab3d6765e142fc8295aa677ad2a"
+SRC_URI = "git://gitorious.org/xfce/xarchiver.git;protocol=git;branch=master"
+SRCREV = "e80e90528c9aab2fe36d9078b945b44c05cc20d3"
+PV = "0.5.3"
+S = "${WORKDIR}/git"
 
 inherit gettext pkgconfig autotools gtk-icon-cache
 
 # install tap files for thunar-archive-plugin in ${libdir}/thunar-archive-plugin
 EXTRA_OECONF += "--libexecdir=${libdir}"
 
+EXTRA_OECONF += "--enable-maintainer-mode"
+
+do_configure_prepend() {
+       NOCONFIGURE=yes ./autogen.sh
+}
+
 FILES_${PN} += "${libdir}/thunar-archive-plugin"
 
-RRECOMMENDS_${PN} = "lzop zip tar bzip2 unzip"
+RRECOMMENDS_${PN} = "lzop zip tar bzip2 unzip xz"
