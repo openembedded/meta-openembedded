@@ -15,6 +15,8 @@ PR = "r12"
 
 inherit autotools gnome gtk-doc pkgconfig gsettings
 
+SRC_URI += "file://egg-asn1x.patch"
+
 DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
 
@@ -24,7 +26,6 @@ SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
 SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
 
 FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr"
-                
 
 FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
                     ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
