@@ -3,7 +3,7 @@ Description=Xserver startup with a display manager
 
 [Service]
 EnvironmentFile=/etc/default/xserver-nodm
-ExecStart=/usr/bin/xinit /etc/X11/Xsession -- /etc/X11/Xserver
+ExecStart=/etc/X11/Xserver
 
 [Install]
 Alias=display-manager.service
