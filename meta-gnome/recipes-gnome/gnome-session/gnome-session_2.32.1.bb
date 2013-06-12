@@ -9,6 +9,8 @@ DEPENDS = "libxtst gtk+ glib-2.0 upower dbus-glib gconf pango gdk-pixbuf-native 
 
 inherit gnome
 
+SRC_URI += "file://use_G_GINT64_FORMAT.patch"
+
 SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
 SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
 
