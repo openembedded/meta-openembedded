@@ -6,7 +6,10 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 SRC_URI = "file://llvm-config"
 
-do_install() {
+ALLOW_EMPTY_${PN} = "1"
+SYSROOT_PREPROCESS_FUNCS_append_class-target = " llvm_common_sysroot_preprocess"
+
+llvm_common_sysroot_preprocess() {
     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}/
     install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
 }
