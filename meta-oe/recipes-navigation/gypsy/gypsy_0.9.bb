@@ -13,7 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
 SECTION = "x11"
 DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt"
 
-SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz"
+SRC_URI = "http://gypsy.freedesktop.org/releases/gypsy-${PV}.tar.gz \
+           file://0001-g_type_init-is-deprecated-for-glib-2.35.0.patch \
+          "
 PR = "r1"
 
 inherit autotools pkgconfig
