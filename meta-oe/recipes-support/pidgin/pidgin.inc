@@ -23,6 +23,7 @@ EXTRA_OECONF = " \
 
 do_configure_prepend() {
     touch ${S}/po/Makefile
+    sed -i "s#PY_VERSION=`$PYTHON -c 'import sys ; print sys.version[0:3]'`#PY_VERSION=${PYTHON_BASEVERSION}#g" ${S}/configure.ac
 }
 
 OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
