@@ -141,6 +141,12 @@ do_install() {
         # later for native case
         install -d ${D}${bindir}
         install -m 0755 bin/llvm-config ${D}${bindir}
+}
+
+SYSROOT_PREPROCESS_FUNCS_append_class-target = " llvm_sysroot_preprocess"
+
+llvm_sysroot_preprocess() {
+    cd ${OECMAKE_BUILDPATH}
 
     # Fix the paths in the config script to make it find the binaries and
     # library files. Doing so allows 3rd party configure scripts working
