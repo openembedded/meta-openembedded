@@ -1,0 +1,33 @@
+From 22bcf06637d64e40af6c152e28b31eef41e3f583 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Jun 2013 02:35:22 -0700
+Subject: [PATCH] g_type_init() is deprecated for glib >= 2.35.0
+
+Call it for old versions.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Upstream-Status: Pending
+---
+ src/main.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/main.c b/src/main.c
+index e984da4..a63ddf3 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -486,9 +486,9 @@ int main(int argc, char **argv)
+ 		if (strcmp(argv[1], "-log2file") == 0)
+ 			log2console = FALSE;
+ 	}
+-
++#if !GLIB_CHECK_VERSION(2,35,0)
+ 	g_type_init();
+-
++#endif
+ 	gdk_threads_init();
+ 
+ 	gdk_threads_enter();
+-- 
+1.7.9.5
+
