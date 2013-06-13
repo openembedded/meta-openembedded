@@ -3,9 +3,15 @@ Linux-2.6 IPsec implementation."
 HOMEPAGE = "http://ipsec-tools.sourceforge.net/"
 SECTION = "console/network"
 LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
+
 DEPENDS = "virtual/kernel openssl readline flex"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/ipsec-tools/ipsec-tools-${PV}.tar.bz2;name=ipsec-tools-${PV}"
+SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
+           file://0001-Fix-warning-with-gcc-4.8.patch \
+          "
+SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
+SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
 
 inherit autotools
 
@@ -44,8 +50,3 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
 
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
 CFLAGS += "-fno-strict-aliasing"
-
-# Sometimes it attempts to use y.tab.c before it is actually
-# generated. Note that the failure case is very rare, but it does
-# happen.
-PARALLEL_MAKE = ""
