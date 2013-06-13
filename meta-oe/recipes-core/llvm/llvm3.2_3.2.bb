@@ -18,8 +18,7 @@ inherit autotools perlnative pythonnative
 
 LLVM_BUILD_DIR = "${WORKDIR}/llvm-${PV}.build"
 LLVM_INSTALL_DIR = "${WORKDIR}/llvm-install"
-LLVM_RELEASE = "3.2"
-LLVM_DIR = "llvm${LLVM_RELEASE}"
+LLVM_DIR = "llvm${PV}"
 
 EXTRA_OECONF += "--disable-assertions \
                  --enable-debug-runtime \
@@ -92,7 +91,7 @@ do_install() {
 
 	install -d ${D}${libdir}/${LLVM_DIR}
 	mv ${LLVM_INSTALL_DIR}${libdir}/* ${D}${libdir}/${LLVM_DIR}/
-	ln -s ${LLVM_DIR}/libLLVM-${LLVM_RELEASE}.so ${D}${libdir}/libLLVM-${LLVM_RELEASE}.so
+	ln -s ${LLVM_DIR}/libLLVM-${PV}.so ${D}${libdir}/libLLVM-${PV}.so
 
 	install -d ${D}${docdir}/${LLVM_DIR}
 	mv ${LLVM_INSTALL_DIR}${prefix}/docs/llvm/* ${D}${docdir}/${LLVM_DIR}
@@ -102,5 +101,5 @@ SYSROOT_PREPROCESS_FUNCS += "llvm_sysroot_preprocess"
 
 llvm_sysroot_preprocess() {
 	install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
-	mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${LLVM_RELEASE}
+	mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${PV}
 }
