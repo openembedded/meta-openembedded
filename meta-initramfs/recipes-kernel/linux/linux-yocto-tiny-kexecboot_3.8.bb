@@ -1,4 +1,5 @@
 require recipes-kernel/linux/linux-yocto-tiny_3.8.bb
+SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
 
 PACKAGES = ""
 PROVIDES = ""
