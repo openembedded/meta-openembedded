@@ -1,6 +1,7 @@
 PR = "${INC_PR}.0"
 
 require klibc.inc
+SUMMARY = "The klcc crosscompiler for klibc"
 
 export KLCC_INST = "${STAGING_DIR_TARGET}/lib/klibc"
 
