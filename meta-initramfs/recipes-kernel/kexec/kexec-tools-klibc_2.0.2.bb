@@ -1,5 +1,6 @@
 # the binaries are statically linked against klibc
 require recipes-kernel/kexec/kexec-tools.inc
+SUMMARY = "Kexec tools, statically compiled against klibc"
 SRC_URI[md5sum] = "92eff93b097475b7767f8c98df84408a"
 SRC_URI[sha256sum] = "09e180ff36dee087182cdc939ba6c6917b6adbb5fc12d589f31fd3659b6471f2"
 
