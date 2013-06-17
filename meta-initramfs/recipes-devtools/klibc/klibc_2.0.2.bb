@@ -24,3 +24,4 @@ FILES_libklibc-dev = "${base_libdir}/klibc.so \
                       ${base_libdir}/klibc/include/* \
 "
 require klibc.inc
+SUMMARY = "klibc, a small C library for use with initramfs"
