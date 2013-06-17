@@ -14,3 +14,4 @@ FILES_${PN} = ""
 
 require klibc-utils.inc
 require klibc.inc
+SUMMARY = "klibc utils for initramfs statically compiled"
