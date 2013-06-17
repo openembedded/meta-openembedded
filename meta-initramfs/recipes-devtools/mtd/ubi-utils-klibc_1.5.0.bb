@@ -1,4 +1,5 @@
-DESCRIPTION = "Tools for managing memory technology devices."
+SUMMARY = "UBI utils statically compiled against klibc"
+DESCRIPTION = "Small sized tools from mtd-utils for use with initramfs."
 SECTION = "base"
 DEPENDS = "zlib lzo e2fsprogs util-linux"
 HOMEPAGE = "http://www.linux-mtd.infradead.org/"
