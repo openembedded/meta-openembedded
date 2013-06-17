@@ -9,3 +9,4 @@ S = "${WORKDIR}/git"
 inherit klibc
 
 require kexecboot.inc
+SUMMARY = "kexecboot linux-as-bootloader, statically compiled against klibc"
