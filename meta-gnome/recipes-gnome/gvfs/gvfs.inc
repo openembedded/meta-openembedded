@@ -17,9 +17,7 @@ SRC_URI += " \
     file://0004-Adapt-to-glib-thread-API-changes.patch \
 "
 
-EXTRA_OECONF = "--with-samba-includes=${STAGING_INCDIR} \
-                --with-samba-libs=${STAGING_LIBDIR} \
-                --with-archive-includes=${STAGING_INCDIR} \
+EXTRA_OECONF = "--with-archive-includes=${STAGING_INCDIR} \
                 --with-archive-libs=${STAGING_LIBDIR} \
 "
 
