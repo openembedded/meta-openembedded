@@ -1,4 +1,5 @@
-DESCRIPTION = "Configuration file for kexecboot"
+SUMMARY = "Configuration files for kexecboot"
+DESCRIPTION = "Default icon and boot.cfg for kexecboot linux-as-bootloader."
 SECTION = "base"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
@@ -23,6 +24,7 @@ do_install_prepend () {
 echo '# First kernel stanza.
 # Show this label in kexecboot menu.
 LABEL=${KEXECBOOT_LABEL}
+#
 # Specify full kernel path on target.
 KERNEL=/boot/${KERNEL_IMAGETYPE}
 #
