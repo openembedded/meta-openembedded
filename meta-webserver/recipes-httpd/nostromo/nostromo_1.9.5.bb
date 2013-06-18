@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.nazgul.ch/dev_nostromo.html"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://src/nhttpd/main.c;beginline=2;endline=14;md5=e5ec3fa723b29b7d59d205afd8d36938"
 
-SRC_URI = "http://www.nazgul.ch/dev/${PN}-${PV}.tar.gz \
+SRC_URI = "http://www.nazgul.ch/dev/${BPN}-${PV}.tar.gz \
            file://0001-GNUmakefile-add-possibility-to-override-variables.patch \
            file://nhttpd.conf \
            file://volatiles \
