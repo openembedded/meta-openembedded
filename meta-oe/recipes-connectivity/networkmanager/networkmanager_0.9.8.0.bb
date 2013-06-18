@@ -50,14 +50,14 @@ do_install_prepend() {
 }
 
 do_install_append () {
-    install -d ${D}/etc/dbus-1/event.d
+    install -d ${D}${sysconfdir}/dbus-1/event.d
     # Additional test binaries
-    install -d ${D}/usr/bin
-    install -m 0755 ${S}/test/.libs/libnm* ${D}/usr/bin
+    install -d ${D}${bindir}
+    install -m 0755 ${S}/test/.libs/libnm* ${D}${bindir}
 
     # Install an empty VPN folder as nm-connection-editor will happily segfault without it :o.
     # With or without VPN support built in ;).
-    install -d ${D}/etc/NetworkManager/VPN
+    install -d ${D}${sysconfdir}/NetworkManager/VPN
 }
 
 PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion"
