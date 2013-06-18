@@ -16,7 +16,8 @@ the warning and does not need replacing anything.
  src/racoon/ipsec_doi.c | 1 -
  1 file changed, 1 deletion(-)
 
-Upstream-Status: Submitted
+Upstream-Status: Accepted
+	(in CVS HEAD and 0_8-stable, expected to be present in next release)
 
 diff --git a/src/racoon/ipsec_doi.c b/src/racoon/ipsec_doi.c
 index 2b48d49..4e9d3a8 100644
