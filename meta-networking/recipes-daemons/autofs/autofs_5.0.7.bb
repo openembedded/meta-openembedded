@@ -59,6 +59,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://libtirpc-name-clash-backout.patch \
            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
            file://fix_disable_ldap.patch \
+           file://autofs-5.0.7-fix-lib-deps.patch \
 "
 
 SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
@@ -87,6 +88,7 @@ CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
 "
 
 do_configure_prepend () {
+    sed -e "s:filagdir:flagdir:" -i configure.in
     if [ ! -e acinclude.m4 ]; then
         cp aclocal.m4 acinclude.m4
     fi
