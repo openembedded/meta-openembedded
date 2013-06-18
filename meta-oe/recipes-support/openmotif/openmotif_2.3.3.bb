@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=14f692c82491db3d52419929d2f3b343"
 
 PR = "r3"
 
-SRC_URI = "http://fossies.org/unix/misc/openmotif-2.3.3.tar.gz \
+SRC_URI = "http://motif.ics.com/sites/default/files/openmotif-2.3.3.tar.gz \
            file://configure.patch;patch=1"
 
 SRC_URI[md5sum] = "fd27cd3369d6c7d5ef79eccba524f7be"
