@@ -27,7 +27,7 @@ RDEPENDS_${PN} = "python-core python-audio python-threading python-codecs \
                   python-netclient python-difflib \
                   python-pprint python-numpy  \
 "
-RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah"
+RDEPENDS_${PN}-grc = "python-pygtk python-lxml python-cheetah python-netserver"
 
 C_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
@@ -43,34 +43,35 @@ do_compile_prepend() {
 }
 
 PACKAGES += " \
-    ${PN}-examples \
     ${PN}-grc \
+    ${PN}-examples \
 "
 
 FILES_${PN}-grc = "${datadir}/gnuradio/grc"
+FILES_${PN}-examples = "${datadir}/gnuradio/examples"
 
-FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/gnuradio/*"
-FILES_${PN} += "${datadir}/gnuradio/*"
+FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/gnuradio"
+FILES_${PN} += "${datadir}/gnuradio/modtool"
 # The following needs fixing upstream
-FILES_${PN} += "${prefix}/etc/gnuradio/*"
+FILES_${PN} += "${prefix}/etc/gnuradio"
 
 FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/gnuradio/.debug \
                     ${PYTHON_SITEPACKAGES_DIR}/gnuradio/*/.debug \
                     ${datadir}/gnuradio/examples/*/.debug \
 "
-FILES_${PN}-examples = "${datadir}/gnuradio/examples"
 
-PV = "3.6.4.1"
+PV = "3.6.5"
 
 FILESPATHPKG_prepend = "gnuradio-git:"
 
-SRCREV = "5f69899e059e9bea58f92af61f70fc3f63825087"
+SRCREV = "a7b3a9339106aaba72195b693dfeaa98f194e0d5"
 
 # Make it easy to test against developer repos and branches
 GIT_REPO = "gnuradio.git"
 GIT_BRANCH = "master"
 
 SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
+           file://0001-gr-trellis-Kill-docs-hard.patch \
 "
 
 S="${WORKDIR}/git"

@@ -1,0 +1,38 @@
+From 473342055e423384e2b17cc0957613299382fb79 Mon Sep 17 00:00:00 2001
+From: Philip Balister <philip@balister.org>
+Date: Mon, 17 Jun 2013 10:58:29 -0400
+Subject: [PATCH] gr-trellis : Kill docs hard.
+
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ gr-trellis/CMakeLists.txt | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/gr-trellis/CMakeLists.txt b/gr-trellis/CMakeLists.txt
+index 16a3e7c..95e1420 100644
+--- a/gr-trellis/CMakeLists.txt
++++ b/gr-trellis/CMakeLists.txt
+@@ -50,12 +50,6 @@ if(ENABLE_GR_TRELLIS)
+ include(GrPackage)
+ CPACK_SET(CPACK_COMPONENT_GROUP_TRELLIS_DESCRIPTION "GNU Radio Trellis Blocks")
+ 
+-CPACK_COMPONENT("trellis_docs"
+-    GROUP        "Trellis"
+-    DISPLAY_NAME "Documentation"
+-    DESCRIPTION  "Doxygen HTML and XML"
+-)
+-
+ CPACK_COMPONENT("trellis_runtime"
+     GROUP        "Trellis"
+     DISPLAY_NAME "Runtime"
+@@ -95,7 +89,6 @@ CPACK_COMPONENT("trellis_swig"
+ # Add subdirectories
+ ########################################################################
+ add_subdirectory(src/lib)
+-add_subdirectory(doc)
+ if(ENABLE_PYTHON)
+     add_subdirectory(grc)
+     add_subdirectory(src/python)
+-- 
+1.7.11.7
+
