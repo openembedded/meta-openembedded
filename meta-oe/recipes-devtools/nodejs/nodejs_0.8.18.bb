@@ -1,15 +1,15 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
-# tools/wrk is under Apache-2.0
-LICENSE = "MIT & BSD & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1b19aee7bf088151c559f3ec9f830b44"
+LICENSE = "MIT & BSD"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=95a589a3257ab7dfe37d8a8379e3c72d"
 
 DEPENDS = "openssl"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+           file://0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch \
 "
-SRC_URI[md5sum] = "a4554450864af89c4420c54349b62295"
-SRC_URI[sha256sum] = "1c960d2822447a9e4f7c46b832ff05e86743033c6643d644975af1cbf6a44fb8"
+SRC_URI[md5sum] = "25ed6aa5710ac46b867ff3f17a4da1d6"
+SRC_URI[sha256sum] = "1d63dd42f9bd22f087585ddf80a881c6acbe1664891b1dda3b71306fe9ae00f9"
 
 S = "${WORKDIR}/node-v${PV}"
 
