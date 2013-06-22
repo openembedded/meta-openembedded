@@ -1,6 +1,6 @@
 DESCRIPTION = "Simple DirectMedia Layer mixer library."
 SECTION = "libs"
-DEPENDS = "virtual/libsdl flac libmikmod libvorbis  ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'libmad', d)}"
+DEPENDS = "virtual/libsdl flac libmikmod libvorbis"
 LICENSE = "zlib"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a37a47a0e579e461474cd03b9e05199d"
 
@@ -16,7 +16,9 @@ S = "${WORKDIR}/SDL_mixer-${PV}"
 inherit autotools
 
 EXTRA_AUTORECONF += "--include=acinclude"
-EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --enable-music-ogg-tremor ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '--enable-music-mp3-mad-gpl', d)} LIBS=-L${STAGING_LIBDIR}"
+EXTRA_OECONF = "--disable-music-mp3 --enable-music-ogg --enable-music-ogg-tremor LIBS=-L${STAGING_LIBDIR}"
+
+PACKAGECONFIG[mad] = "--enable-music-mp3-mad-gpl,--disable-music-mp3-mad-gpl,libmad"
 
 do_configure () {
     # Remove old libtool macros.
