@@ -1,11 +1,10 @@
 DESCRIPTION = "Enjoy music player"
 LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
-DEPENDS = "evas ecore edje elementary emotion lightmediascanner edbus2"
+DEPENDS = "evas ecore edje elementary emotion lightmediascanner edbus2 gst-plugins-good"
 SRCREV = "${EFL_SRCREV}"
 PV = "0.0+svnr${SRCPV}"
 
-DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly', d)}"
 
 #1st needed for all formats
 #2nd needed for mp3 playback
@@ -14,7 +13,6 @@ DEPENDS += "gst-plugins-good ${@base_conditional('ENTERPRISE_DISTRO', '1', '', '
 #5th needed binary to create db
 RDEPENDS_${PN} += "\
        gst-plugins-base-typefindfunctions gst-plugins-base-playbin gst-plugins-base-volume gst-plugins-base-decodebin2 gst-plugins-good-autodetect \
-       ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'gst-plugins-ugly-mad gst-plugins-good-id3demux', d)} \
        gst-plugins-base-ogg gst-plugins-base-ivorbisdec \
        gst-plugins-good-flac \
        lightmediascanner-test \
@@ -34,6 +32,9 @@ FILES_${PN} += "${datadir}/icons/"
 EXTRA_OECONF = "\
     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
 "
+
+PACKAGECONFIG[mad] = ",,gst-plugins-ugly,gst-plugins-ugly-mad"
+PACKAGECONFIG[id3demux] = ",,,gst-plugins-good-id3demux"
 
 do_configure_prepend() {
     autopoint || touch config.rpath
