@@ -7,13 +7,13 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
                     file://pinpoint.c;beginline=6;endline=17;md5=201d438283607da393fae6aca085454c"
 
-DEPENDS = "gnome-common glib-2.0 gdk-pixbuf clutter-1.8 clutter-gst-1.8"
+DEPENDS = "gnome-common glib-2.0 gdk-pixbuf clutter-1.0 clutter-gst-1.0"
 
 inherit autotools gettext
 
-SRC_URI = "git://git.gnome.org/browse/pinpoint;protocol=http"
+SRC_URI = "git://git.gnome.org/pinpoint"
 
-SRCREV = "5b22660f5b247023ca409403f1c2cc834d8ce632"
+SRCREV = "80a056c57e819d0b75035424638813b0670830e1"
 PV = "0.1.4+gitr${SRCPV}"
 
 S = "${WORKDIR}/git"
