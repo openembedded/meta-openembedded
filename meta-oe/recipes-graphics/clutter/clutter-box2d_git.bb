@@ -10,5 +10,5 @@ SRC_URI = "git://git.gnome.org/clutter-box2d.git"
 
 S = "${WORKDIR}/git"
 
-DEPENDS += "clutter-1.8"
+DEPENDS += "clutter-1.0"
 PROVIDES = "clutter-box2d-1.6"
