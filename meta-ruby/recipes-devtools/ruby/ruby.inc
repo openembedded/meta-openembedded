@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "\
     file://COPYING;md5=837b32593517ae48b9c3b5c87a5d288c \
     file://BSDL;md5=3949e007205deef714bd225e1ee4a8ea \
     file://GPL;md5=393a5ca445f6965873eca0259a17f833 \
-    file://LEGAL;md5=e88686821918c0b6d2b1b8328116cec5 \
+    file://LEGAL;md5=3ce1fae39fe573b818c0af162bce6579 \
 "
 
 DEPENDS = "ruby-native zlib openssl tcl"

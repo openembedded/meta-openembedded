@@ -9,16 +9,13 @@ SRC_URI += "\
     file://ruby-1.9.3-disable-versioned-paths.patch \
     file://ruby-1.9.3-fix-s390x-build.patch \
     file://ruby-1.9.3-rubygems-1.8.11-uninstaller.patch \
-    file://ruby-1.9.3-webrick-test-fix.patch \
-    file://ruby-1.9.3-bignum-test-fix.patch \
     file://ruby-1.9.3-custom-rubygems-location.patch \
     file://rubygems-1.8.11-binary-extensions.patch \
     file://ruby-1.9.3-mkmf-verbose.patch \
     file://ruby-1.9.3-install-cross.patch \
 "
-
-SRC_URI[md5sum] = "bc0c715c69da4d1d8bd57069c19f6c0e"
-SRC_URI[sha256sum] = "46e2fa80be7efed51bd9cdc529d1fe22ebc7567ee0f91db4ab855438cf4bd8bb"
+SRC_URI[md5sum] = "993c72f7f805a9eb453f90b0b7fe0d2b"
+SRC_URI[sha256sum] = "d192d1afc46a7ef27b9d0a3c7a67b509048984db2c38907aa82641bdf980acf4"
 
 EXTRA_OECONF = "\
     --enable-wide-getaddrinfo \
