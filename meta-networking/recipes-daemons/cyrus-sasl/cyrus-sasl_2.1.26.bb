@@ -4,7 +4,8 @@ DEPENDS = "openssl virtual/db"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
 
-SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz "
+SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
+	   file://avoid-to-call-AC_TRY_RUN.patch"
 
 inherit autotools pkgconfig
 
@@ -13,6 +14,9 @@ EXTRA_OECONF += "--with-dblib=berkeley \
                  --with-bdb-incdir=${STAGING_INCDIR} \
                  --without-pam --without-opie --without-des \
                  andrew_cv_runpath_switch=none"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
 
 do_configure_prepend () {
     rm -f acinclude.m4 config/libtool.m4
