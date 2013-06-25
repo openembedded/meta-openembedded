@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          fancontrol
 # Required-Start:    $local_fs
@@ -16,8 +16,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="fan control daemon"
 NAME="fancontrol"
 FANCONTROL=`which $NAME`
-
-. /etc/init.d/functions || exit 1
+PIDFILE="/var/run/fancontrol.pid"
 
 # Exit if the package is not installed
 [ -x "$FANCONTROL" ] || exit 0
@@ -25,12 +24,12 @@ FANCONTROL=`which $NAME`
 case "$1" in
     start)
         echo -n "Starting $DESC: $NAME... "
-        /sbin/start-stop-daemon -S -x $FANCONTROL -b -- $FANCONTROL_ARGS
+        start-stop-daemon -S -p $PIDFILE -b -x $FANCONTROL
         echo "done."
         ;;
     stop)
         echo -n "Stopping $DESC: $NAME... "
-        /sbin/start-stop-daemon -K -x $FANCONTROL
+        start-stop-daemon -K -p $PIDFILE
         echo "done."
         ;;
     restart)
