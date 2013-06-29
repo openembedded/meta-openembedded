@@ -1,10 +1,7 @@
 require llvm.inc
+require llvm2.inc
 
-#LICENSE = "University of Illinois/NCSA Open Source License"
-LICENSE = "NCSA"
-LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0ac5f799a2d89477c75b0a378b221855"
-
-PR = "${INC_PR}.2"
+PR = "r3"
 
 SRC_URI += " \
             file://30may-llvm2.8-pr399-ppc-arm.patch \
@@ -12,8 +9,6 @@ SRC_URI += " \
             file://add-unistd.patch \
             file://llvm-mc_disable.patch \
 "
-
-LLVM_RELEASE = "2.8"
 
 EXTRA_OECMAKE += " -DBUILD_SHARED_LIBS:BOOL=OFF "
 
