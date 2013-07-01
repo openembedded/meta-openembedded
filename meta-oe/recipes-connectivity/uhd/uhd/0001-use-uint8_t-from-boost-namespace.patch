@@ -1,0 +1,29 @@
+From 317f6f08cedf005ce1f2d6f0d04cfb2659863423 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 30 Jun 2013 22:10:50 -0700
+Subject: [PATCH] use uint8_t from boost namespace
+
+Fixes errors like
+codec_ctrl.cpp:113:10: error: 'uint8_t' was not declared in this scope
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ host/lib/usrp/e100/codec_ctrl.cpp |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/host/lib/usrp/e100/codec_ctrl.cpp b/host/lib/usrp/e100/codec_ctrl.cpp
+index 13b3bc9..2c13176 100644
+--- a/host/lib/usrp/e100/codec_ctrl.cpp
++++ b/host/lib/usrp/e100/codec_ctrl.cpp
+@@ -110,7 +110,7 @@ e100_codec_ctrl_impl::e100_codec_ctrl_impl(spi_iface::sptr iface){
+     //_ad9862_regs.dis2 = ad9862_regs_t::DIS2_DIS; needed for transmit
+ 
+     //write the register settings to the codec
+-    for (uint8_t addr = 0; addr <= 25; addr++){
++    for (boost::uint8_t addr = 0; addr <= 25; addr++){
+         this->send_reg(addr);
+     }
+ 
+-- 
+1.7.9.5
+
