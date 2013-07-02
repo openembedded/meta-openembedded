@@ -11,3 +11,4 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${PN}-${PV}.tar.bz2"
 
 inherit autotools
 
+ALLOW_EMPTY_${PN} = "1"
