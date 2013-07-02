@@ -1,7 +1,7 @@
 require ruby.inc
 PR = "${INC_PR}.0"
 
-DEPENDS += "libyaml"
+DEPENDS += "libyaml ruby-native"
 
 SRC_URI += "\
     file://0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch \
