@@ -2,6 +2,8 @@ require xorg-doc-common.inc
 PE = "1"
 PR = "${INC_PR}.0"
 
+DEPENDS += "util-macros"
+
 LIC_FILES_CHKSUM = "file://COPYING;md5=c8c6c808cd3c797a07b24e443af1c449"
 
 SRC_URI[md5sum] = "2588efb3f49f7fc6ecf41ce42e0b2e5e"
