@@ -1,6 +1,6 @@
 require gsoap_${PV}.inc
 
-DEPENDS = "gsoap-native openssl"
+DEPENDS = "gsoap-native openssl zlib"
 
 do_install_append() {
     install -d ${D}${libdir}
