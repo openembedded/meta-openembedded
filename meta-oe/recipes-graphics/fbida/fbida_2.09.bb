@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "STRIP="
 
 do_compile() {
-    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp:g' GNUmakefile
+    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I{STAGING_INCDIR}:g' GNUmakefile
     oe_runmake
 }
 
