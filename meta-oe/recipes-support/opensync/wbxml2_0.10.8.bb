@@ -4,6 +4,8 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c1128ee5341ccd5927d8bafe4b6266e1"
 
+DEPENDS = "expat"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/libwbxml/libwbxml-${PV}.tar.gz"
 
 SRC_URI[md5sum] = "f5031e9f730ffd9dc6a2d1ded585e1d1"
