@@ -37,9 +37,18 @@ do_compile () {
 }
 
 do_install () {
-    install -d ${D}${localstatedir}/run/lmbench \
+    install -d ${D}${sysconfdir}/default/volatiles \
            ${D}${bindir} ${D}${mandir} ${D}${libdir}/lmbench \
            ${D}${datadir}/lmbench/scripts
+
+    echo "d root root 0755 ${localstatedir}/run/${BPN} none" \
+           > ${D}${sysconfdir}/default/volatiles/99_lmbench
+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d /run/${BPN} - - - -" \
+              > ${D}${sysconfdir}/tmpfiles.d/lmbench.conf
+    fi
+
     oe_runmake 'BASE=${D}${prefix}' \
             -C src install
     mv ${D}${bindir}/line ${D}${bindir}/lm_line
@@ -50,6 +59,16 @@ do_install () {
            ${D}${bindir}/lmbench-run
     install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
     install -m 0755 ${S}/scripts/* ${D}${datadir}/lmbench/scripts
+}
+
+pkg_postinst_${PN} () {
+    if [ -z "$D" ]; then
+        if command -v systemd-tmpfiles >/dev/null; then
+            systemd-tmpfiles --create
+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+            ${sysconfdir}/init.d/populate-volatile.sh update
+        fi
+    fi
 }
 
 RDEPENDS_${PN} = "debianutils"
