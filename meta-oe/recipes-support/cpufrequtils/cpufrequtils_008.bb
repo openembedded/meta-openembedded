@@ -1,5 +1,7 @@
 DESCRIPTION = "To make access to the Linux kernel cpufreq subsystem easier for users and cpufreq userspace tools, a cpufrequtils package was created"
 
+inherit gettext
+
 DEPENDS = "libtool-cross"
 
 LICENSE = "GPLv2"
