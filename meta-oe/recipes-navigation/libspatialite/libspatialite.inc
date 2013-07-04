@@ -1,7 +1,7 @@
 DESCRIPTION = "Library extending the SQLite core to support fully fledged Spatial SQL capabilities"
 HOMEPAGE = "https://www.gaia-gis.it/fossil/libspatialite/"
 SECTION = "libs"
-DEPENDS = "proj geos"
+DEPENDS = "proj geos sqlite3"
 
 INC_PR = "r0"
 
