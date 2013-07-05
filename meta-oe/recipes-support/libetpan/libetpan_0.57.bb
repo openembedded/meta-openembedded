@@ -14,7 +14,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/libetpan/libetpan-${PV}.tar.gz \
 
 inherit autotools pkgconfig gettext binconfig
 
-EXTRA_OECONF = "--without-openssl --with-gnutls --disable-db"
+EXTRA_OECONF = "--without-openssl --without-sasl --with-gnutls --disable-db"
 
 PARALLEL_MAKE = ""
 
