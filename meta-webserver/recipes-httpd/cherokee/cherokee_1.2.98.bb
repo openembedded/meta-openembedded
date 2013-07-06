@@ -32,6 +32,8 @@ do_install_append () {
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/cherokee.service ${D}${systemd_unitdir}/system
+    rmdir "${D}${localstatedir}/run"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
 }
 
 # Put -dev near the front so we can move the .la files into it with a wildcard
