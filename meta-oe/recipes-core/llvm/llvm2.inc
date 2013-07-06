@@ -1,5 +1,5 @@
 DEPENDS = "llvm${LLVM_RELEASE}-native llvm-common"
-DEPENDS_virtclass-native = "llvm-common-native cmake-native"
+DEPENDS_class-native = "llvm-common-native cmake-native"
 
 SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.tgz"
 S = "${WORKDIR}/llvm-${PV}"
@@ -57,7 +57,7 @@ PACKAGES_DYNAMIC = "llvm-*"
 
 # the difference to the non-native build is that we do not need
 # to declare the location of the tblgen executable.
-EXTRA_OECMAKE_virtclass-native = "\
+EXTRA_OECMAKE_class-native = "\
     -DLLVM_TARGETS_TO_BUILD=${LLVM_ARCH} \
     -DCMAKE_LINKER:FILEPATH=${LD} \
     -DCMAKE_AR:FILEPATH=${AR} \
@@ -68,9 +68,9 @@ EXTRA_OECMAKE_virtclass-native = "\
     -DNM_PATH:FILEPATH=${NM} \
 "
 
-PACKAGES_virtclass-native = ""
+PACKAGES_class-native = ""
 
-PACKAGES_DYNAMIC_virtclass-native = ""
+PACKAGES_DYNAMIC_class-native = ""
 
 python populate_packages_prepend () {
     libllvm_libdir = bb.data.expand('${libdir}/${LLVM_DIR}', d)
@@ -130,7 +130,7 @@ llvm_sysroot_preprocess() {
         install -m 0755 bin/llvm-config${LLVM_RELEASE} ${SYSROOT_DESTDIR}${bindir_crossscripts}
 }
 
-do_install_virtclass-native() {
+do_install_class-native() {
     # Install into a private directory to be able to reorganize the files.
     cd ${LLVM_BUILD_DIR}
     oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install

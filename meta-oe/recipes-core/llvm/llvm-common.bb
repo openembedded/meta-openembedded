@@ -14,7 +14,7 @@ llvm_common_sysroot_preprocess() {
     install -m 0755 ${WORKDIR}/llvm-config ${SYSROOT_DESTDIR}${bindir_crossscripts}/
 }
 
-do_install_virtclass-native() {
+do_install_class-native() {
     install -d ${D}${bindir}
     install -m 0755 ${WORKDIR}/llvm-config ${D}${bindir}
 }
