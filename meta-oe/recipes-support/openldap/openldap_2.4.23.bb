@@ -235,6 +235,8 @@ do_install_append() {
     chmod 755 ${D}${sysconfdir}/init.d/openldap
     # This is duplicated in /etc/openldap and is for slapd
     rm -f ${D}${localstatedir}/openldap-data/DB_CONFIG.example
+    rmdir "${D}${localstatedir}/run"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
 }
 
 pkg_postinst_${PN}-slapd () {
