@@ -60,6 +60,9 @@ do_install_append() {
 
     chown -R gdm:gdm ${D}${localstatedir}/lib/gdm
     chmod 0750 ${D}${localstatedir}/lib/gdm
+
+    rm -rf "${D}${localstatedir}/run"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
 }
 
 FILES_${PN} += "${datadir}/icon* \
