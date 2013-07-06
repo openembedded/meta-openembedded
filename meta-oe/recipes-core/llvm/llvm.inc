@@ -32,11 +32,33 @@ inherit perlnative pythonnative
 LLVM_RELEASE = "${PV}"
 LLVM_DIR = "llvm${LLVM_RELEASE}"
 
-FILES_${PN}-dbg += "${bindir}/${LLVM_DIR}/.debug \
-                    ${libdir}/${LLVM_DIR}/.debug \
+ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY_${PN}-staticdev = "1"
+FILES_${PN} = ""
+FILES_${PN}-staticdev = ""
+DOTDEBUG-dbg = " ${bindir}/${LLVM_DIR}/.debug \
+                 ${libdir}/${LLVM_DIR}/.debug/BugpointPasses.so \
+                 ${libdir}/${LLVM_DIR}/.debug/LLVMHello.so \
+                 /usr/src/debug \
 "
-FILES_${PN}-dev += "${bindir} \
+
+FILES_${PN}-dev += "${bindir}/${LLVM_DIR} \
                     ${libdir}/${LLVM_DIR}/BugpointPasses.so \
                     ${libdir}/${LLVM_DIR}/LLVMHello.so \
 "
-FILES_${PN}-staticdev = "${libdir}/${LLVM_DIR}/*.a"
+
+PACKAGES_DYNAMIC = "^libllvm-.*$"
+
+python llvm_populate_packages() {
+    libllvm_libdir = bb.data.expand('${libdir}/${LLVM_DIR}', d)
+    split_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s', 'Split package for %s', allow_dirs=True)
+    split_dbg_packages = do_split_packages(d, libllvm_libdir+'/.debug', '^lib(.*)\.so$', 'libllvm${LLVM_RELEASE}-%s-dbg', 'Split debug package for %s', allow_dirs=True)
+    split_staticdev_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.a$', 'libllvm${LLVM_RELEASE}-%s-staticdev', 'Split staticdev package for %s', allow_dirs=True)
+    if split_packages:
+        pn = d.getVar('PN', True)
+        d.appendVar('RDEPENDS_' + pn, ' '+' '.join(split_packages))
+        d.appendVar('RDEPENDS_' + pn + '-dbg', ' '+' '.join(split_dbg_packages))
+        d.appendVar('RDEPENDS_' + pn + '-staticdev', ' '+' '.join(split_staticdev_packages))
+}
+
+PACKAGESPLITFUNCS_prepend = "llvm_populate_packages "

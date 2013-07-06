@@ -53,8 +53,6 @@ EXTRA_OECMAKE = "\
 # We need to reset this to avoid breakage as we build out of tree
 TOOLCHAIN_OPTIONS = ""
 
-PACKAGES_DYNAMIC = "llvm-*"
-
 # the difference to the non-native build is that we do not need
 # to declare the location of the tblgen executable.
 EXTRA_OECMAKE_class-native = "\
@@ -67,18 +65,6 @@ EXTRA_OECMAKE_class-native = "\
     -DCMAKE_STRIP:FILEPATH=${STRIP} \
     -DNM_PATH:FILEPATH=${NM} \
 "
-
-PACKAGES_class-native = ""
-
-PACKAGES_DYNAMIC_class-native = ""
-
-python populate_packages_prepend () {
-    libllvm_libdir = bb.data.expand('${libdir}/${LLVM_DIR}', d)
-    do_split_packages(d, libllvm_libdir, '^lib(.*)\.so$', 'libllvm-%s', 'Split package for %s', allow_dirs=True)
-}
-
-FILES_${PN} = ""
-ALLOW_EMPTY_${PN} = "1"
 
 base_do_compile_prepend() {
     # Avoid *** No rule to make target `native/bin/tblgen', needed by `include/llvm/Intrinsics.gen.tmp'

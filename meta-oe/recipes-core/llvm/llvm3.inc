@@ -18,10 +18,6 @@ EXTRA_OECONF += "--disable-assertions \
                  --enable-shared \
                  --enable-targets=host-only"
 EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
-FILES_${PN} = "${libdir}/lib*.so \
-               ${libdir}/${LLVM_DIR}/*"
-FILES_SOLIBSDEV = ""
-INSANE_SKIP_${PN} = "dev-so"
 
 do_configure_prepend() {
     # Remove RPATHs
