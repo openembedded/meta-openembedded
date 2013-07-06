@@ -110,11 +110,6 @@ do_install() {
 
     # LLVM does not install this by default.
     install bin/tblgen ${D}${bindir}/${LLVM_DIR}
-
-    # we install it here unmodified for native and none native and overwrite it
-    # later for native case
-    install -d ${D}${bindir}
-    install -m 0755 bin/llvm-config ${D}${bindir}
 }
 
 SYSROOT_PREPROCESS_FUNCS_append_class-target = " llvm_sysroot_preprocess"
