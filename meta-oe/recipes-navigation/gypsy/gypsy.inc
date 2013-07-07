@@ -6,7 +6,7 @@ client applications, passing the data as simple values for the clients \
 to use."
 LICENSE = "GPLv2.0 & LGPLv2.1"
 SECTION = "x11"
-DEPENDS = "glib-2.0 dbus bluez4 dbus-glib"
+DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native"
 
 inherit autotools pkgconfig gtk-doc
 
