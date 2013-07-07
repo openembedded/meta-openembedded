@@ -11,7 +11,7 @@ PV = "0.0.1"
 PR = "r4"
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
 EXTRA_OECONF = "--with-kernel-headers=${STAGING_EXECPREFIXDIR}"
 
