@@ -9,7 +9,7 @@ PV = "0.0.1"
 PR = "r3"
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
 # It needs some kernel definitions only for v4l2, so it isn't machine specific
 EXTRA_OECONF = "--with-kernel-headers=${STAGING_KERNEL_DIR}"
