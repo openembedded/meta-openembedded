@@ -4,13 +4,12 @@ LICENSE = "PortAudio"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"
 
 PV = "v19+svnr${SRCPV}"
-PR = "r0"
 
 SRCREV = "1387"
 SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;module=trunk;protocol=http"
 S = "${WORKDIR}/trunk"
 
-inherit autotools
+inherit autotools pkgconfig
 
 PACKAGECONFIG ??= "alsa jack"
 PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
