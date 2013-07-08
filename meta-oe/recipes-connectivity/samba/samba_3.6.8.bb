@@ -57,3 +57,9 @@ do_configure() {
 do_compile () {
     base_do_compile
 }
+
+do_install_append() {
+    rmdir "${D}${localstatedir}/lock"
+    rmdir "${D}${localstatedir}/run"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+}
