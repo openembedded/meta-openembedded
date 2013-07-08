@@ -7,6 +7,7 @@ SRC_URI = "http://www.nazgul.ch/dev/${BPN}-${PV}.tar.gz \
            file://0001-GNUmakefile-add-possibility-to-override-variables.patch \
            file://nhttpd.conf \
            file://volatiles \
+           file://tmpfiles.conf \
            file://nostromo \
 "
 
@@ -35,18 +36,29 @@ do_install() {
     install -d ${D}${localstatedir}/nostromo/conf
     install -d ${D}${localstatedir}/nostromo/htdocs/cgi-bin
     install -d ${D}${localstatedir}/nostromo/icons
-    install -d ${D}${localstatedir}/log/nostromo
-    install -d ${D}${localstatedir}/run/nostromo
     install -d ${D}${sysconfdir}/init.d
     install -m 0644 conf/mimes ${D}${localstatedir}/nostromo/conf/mimes
     install -m 0644 ${WORKDIR}/nhttpd.conf ${D}${sysconfdir}
     install -m 0755 ${WORKDIR}/nostromo ${D}${sysconfdir}/init.d
-    install -c -D -m 644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/nostromo
+    install -D -m 0644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/nostromo
+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -D -m 0644 ${WORKDIR}/tmpfiles.conf ${D}${sysconfdir}/tmpfiles.d/nostromo.conf
+    fi
     install -m 0644 htdocs/index.html ${D}${localstatedir}/nostromo/htdocs/index.html
     install -m 0644 htdocs/nostromo.gif ${D}${localstatedir}/nostromo/htdocs/nostromo.gif
     install -m 0644 icons/dir.gif ${D}${localstatedir}/nostromo/icons/dir.gif
     install -m 0644 icons/file.gif ${D}${localstatedir}/nostromo/icons/file.gif
-    chown -R www-data:www-data ${D}/${localstatedir}/nostromo ${D}/${localstatedir}/log/nostromo ${D}/${localstatedir}/run/nostromo
+    chown -R www-data:www-data ${D}/${localstatedir}/nostromo
 }
 
 CONFFILES_${PN} += "/var/nostromo/conf/mimes ${sysconfdir}/nhttpd.conf"
+
+pkg_postinst_${PN} () {
+    if [ -z "$D" ]; then
+        if [ -e /sys/fs/cgroup/systemd ]; then
+            systemd-tmpfiles --create
+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+            ${sysconfdir}/init.d/populate-volatile.sh update
+        fi
+    fi
+}
