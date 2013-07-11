@@ -4,7 +4,7 @@ SUMMARY = "Drivers for character-based LCD displays"
 HOMEPAGE = "http://lcdproc.org"
 SECTION = "utils"
 LICENSE = "GPLv2+"
-DEPENDS = "virtual/libusb0 ncurses"
+DEPENDS = "ncurses"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
                     file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
@@ -16,7 +16,11 @@ inherit autotools update-rc.d
 LCD_DRIVERS ?= "all"
 LCD_DEFAULT_DRIVER ?= "curses"
 
-EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS} --enable-libusb"
+PACKAGECONFIG ??= "usb"
+PACKAGECONFIG[usb] = "--enable-libusb,--disable-libusb,virtual/libusb0"
+PACKAGECONFIG[ftdi] = "--enable-libftdi,--disable-libftdi,libftdi"
+
+EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS}"
 
 do_install () {
     # binaries
