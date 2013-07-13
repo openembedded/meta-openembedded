@@ -10,8 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c030468238b2cf89925a57f2780396a7 \
                     file://COPYING.LGPL;md5=e77fe93202736b47c07035910f47974a \
 "
 
-
-DEPENDS = "alsa-lib"
+DEPENDS = "alsa-lib libsamplerate0 readline"
 
 SVNPV = "${@'${PV}'.replace('.', '_')}"
 SRCREV = "4484"
