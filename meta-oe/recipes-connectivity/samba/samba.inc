@@ -1,6 +1,6 @@
 SECTION = "console/network"
 LICENSE = "GPL-3.0"
-DEPENDS = "readline virtual/libiconv talloc"
+DEPENDS = "readline virtual/libiconv talloc zlib popt"
 
 SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
            file://volatiles.03_samba \
@@ -33,11 +33,16 @@ EXTRA_OECONF='--disable-cups \
               --with-mandir=${mandir} \
               --with-swatdir=${datadir}/swat \
               --with-aio-support \
+              --with-winbind \
+              --with-wbclient \
               --without-libtalloc \
               --without-acl-support \
               --disable-avahi \
               samba_cv_struct_timespec=yes \
               libreplace_cv_HAVE_MMAP=${SAMBAMMAP}'
+
+PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
 
 INITSCRIPT_PACKAGES = "samba winbind"
 INITSCRIPT_NAME_samba = "samba"
