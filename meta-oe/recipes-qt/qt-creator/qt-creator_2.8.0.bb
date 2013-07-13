@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LGPL_EXCEPTION.TXT;md5=eb6c371255e1262c55ae9b652a90b5
                     file://LICENSE.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
 SECTION = "qt/app"
 
-SRC_URI = "http://download.qt-project.org/official_releases/qtcreator/2.7/${PV}/${BP}-src.tar.gz"
-SRC_URI[md5sum] = "7f1c10740784d3edf2347c27be21fd1a"
-SRC_URI[sha256sum] = "5df913faa43a5fbf44fb1f25faaf6d258134b8f9e6b8ef8a21277136dec9e189"
+SRC_URI = "http://download.qt-project.org/official_releases/qtcreator/2.8/${PV}/${BP}-src.tar.gz"
+SRC_URI[md5sum] = "5aacdad4491b7dda9758a81384d8da79"
+SRC_URI[sha256sum] = "7ac5d9a36c2f561f74d77378d4eae95a78c7752b323e1df924d6e895e99f45d2"
 
 S = "${WORKDIR}/${BP}-src"
 
