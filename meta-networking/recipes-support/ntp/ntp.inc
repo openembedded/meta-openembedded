@@ -37,6 +37,8 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           --with-crypto, \
                           --without-openssl --without-crypto, \
                           openssl"
+PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
+PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
 
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
