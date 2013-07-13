@@ -1,0 +1,33 @@
+--- libgphoto2-2.4.11.orig/configure.ac	2013-07-19 21:59:10.857223729 +0200
++++ libgphoto2-2.4.11/configure.ac	2013-07-19 22:06:13.873233928 +0200
+@@ -270,15 +270,21 @@
+ dnl ---------------------------------------------------------------------------
+ dnl check for libgd
+ dnl ---------------------------------------------------------------------------
+-LIBGD=""
+-libgd_msg="no"
+-AC_SUBST(LIBGD)
+-AC_CHECK_LIB(gd,gdImageCreateTrueColor,[
+-	AC_CHECK_HEADER(gd.h,[
+-		AC_DEFINE(HAVE_GD,1,[define if we have LIBGD and its headers])
+-		LIBGD="-lgd"
+-		libgd_msg="yes"
+-	])
++AC_ARG_ENABLE([gd],
++[AS_HELP_STRING([--enable-gd],
++                [enable gd support])],[
++        LIBGD=""
++        libgd_msg="no"
++        AC_SUBST(LIBGD)
++        if test "x$enableval" != "xno"; then
++                AC_CHECK_LIB(gd,gdImageCreateTrueColor,[
++                        AC_CHECK_HEADER(gd.h,[
++                                AC_DEFINE(HAVE_GD,1,[define if we have LIBGD and its headers])
++                                LIBGD="-lgd"
++                                libgd_msg="yes"
++                        ])
++                ])
++        fi
+ ])
+ GP_CONFIG_MSG([GD conversion support],[${libgd_msg}])
+ 
