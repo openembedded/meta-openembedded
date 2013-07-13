@@ -11,6 +11,9 @@ S = "${WORKDIR}/LVM2.${PV}"
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://lvm.conf"
 
+PACKAGECONFIG ??= "readline"
+PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+
 # Unset user/group to unbreak install.
 EXTRA_OECONF = "--with-user= \
                 --with-group= \
