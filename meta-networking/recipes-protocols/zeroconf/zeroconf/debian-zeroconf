@@ -35,10 +35,10 @@ done
 
 # should we only allocate an address if we do not already have one?
 if [ -n "$FALLBACK" ]; then
-    /bin/ip addr show $IFACE scope global | grep -q "inet"
+    /sbin/ip addr show $IFACE scope global | grep -q "inet"
     IP=$?
     if [ $IP -eq 0 ]; then
-        /bin/ip route add 169.254.0.0/16 dev $IFACE
+        /sbin/ip route add 169.254.0.0/16 dev $IFACE
         exit 0
     fi
 fi
