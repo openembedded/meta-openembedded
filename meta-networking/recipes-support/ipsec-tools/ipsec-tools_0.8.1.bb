@@ -5,7 +5,7 @@ SECTION = "console/network"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
 
-DEPENDS = "virtual/kernel openssl readline flex"
+DEPENDS = "virtual/kernel openssl readline flex bison-native"
 
 SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
            file://0001-Fix-warning-with-gcc-4.8.patch \
@@ -46,7 +46,9 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
                 --without-libradius \
                 --without-gssapi \
                 --without-libpam \
-                --disable-security-context"
+                --disable-security-context \
+                --enable-shared \
+                ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6=yes', '', d)}"
 
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
 CFLAGS += "-fno-strict-aliasing"
