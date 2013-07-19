@@ -10,7 +10,7 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 diff --git a/Makefile b/Makefile
 --- a/Makefile
 +++ b/Makefile
-@@ -5,7 +5,7 @@ IFLAGS  = -idirafter dummyinc
+@@ -5,7 +5,7 @@
  #CFLAGS = -g
  CFLAGS	=	-O2 -Wall -W -Wshadow #-pedantic -Werror -Wconversion
  

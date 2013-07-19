@@ -7,8 +7,8 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 diff --git a/Makefile b/Makefile
 --- a/Makefile
 +++ b/Makefile
-@@ -24,21 +24,21 @@ vsftpd: $(OBJS)
- 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS) $(LDFLAGS)
+@@ -24,21 +24,21 @@
+ 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LIBS)
  
  install:
 -	if [ -x /usr/local/sbin ]; then \
