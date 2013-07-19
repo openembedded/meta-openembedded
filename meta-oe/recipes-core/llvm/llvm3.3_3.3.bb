@@ -2,7 +2,7 @@ require llvm.inc
 require llvm3.inc
 
 DEPENDS += "zlib"
-EXTRA_OECONF = "--enable-zlib"
+EXTRA_OECONF += "--enable-zlib"
 
 SRC_URI_append_libc-uclibc = " file://arm_fenv_uclibc.patch "
 SRC_URI[md5sum] = "40564e1dc390f9844f1711c08b08e391"
