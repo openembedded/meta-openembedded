@@ -5,21 +5,39 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
 
 SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
-	   file://avoid-to-call-AC_TRY_RUN.patch"
+	   file://avoid-to-call-AC_TRY_RUN.patch \
+	   file://Fix-hardcoded-libdir.patch" 
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig useradd
 
 EXTRA_OECONF += "--with-dblib=berkeley \
                  --with-bdb-libdir=${STAGING_LIBDIR} \
                  --with-bdb-incdir=${STAGING_INCDIR} \
-                 --without-pam --without-opie --without-des \
+                 --with-bdb=db-5.3 \
+                 --with-plugindir="${libdir}/sasl2/" \
                  andrew_cv_runpath_switch=none"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "ntlm \
+        ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+        ${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+        "
 PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
+PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
+PACKAGECONFIG[opie] = "--with-opie,--without-opie,opie,"
+PACKAGECONFIG[des] = "--with-des,--without-des,,"
+PACKAGECONFIG[ldap] = "--with-ldap=${STAGING_LIBDIR} --enable-ldapdb,--without-ldap --disable-ldapdb,openldap,"
+PACKAGECONFIG[ntlm] = "--with-ntlm,--without-ntlm,,"
+
+CFLAGS += "-fPIC"
 
 do_configure_prepend () {
     rm -f acinclude.m4 config/libtool.m4
+
+    # make it be able to work with db 5.0 version
+    local sed_files="sasldb/db_berkeley.c utils/dbconverter-2.c"
+    for sed_file in $sed_files; do
+        sed -i 's#DB_VERSION_MAJOR == 4.*#(&) || DB_VERSION_MAJOR == 5#' $sed_file
+    done
 }
 
 do_compile_prepend () {
@@ -29,8 +47,11 @@ do_compile_prepend () {
     cd ..
 }
 
+USERADD_PACKAGES = "${PN}-bin"
+GROUPADD_PARAM_${PN}-bin = "--system mail"
+USERADD_PARAM_${PN}-bin = "--system --home=/var/spool/mail -g mail cyrus"
+
 pkg_postinst_${PN}-bin () {
-    grep cyrus /etc/passwd || adduser --disabled-password --home=/var/spool/mail --ingroup mail -g "Cyrus sasl" cyrus
     echo "cyrus" | saslpasswd2 -p -c cyrus
     chgrp mail /etc/sasldb2
 }
