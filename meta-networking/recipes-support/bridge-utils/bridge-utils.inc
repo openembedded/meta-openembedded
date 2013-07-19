@@ -5,7 +5,11 @@ LICENSE = "GPLv2"
 
 DEPENDS = "sysfsutils"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz \
+          file://bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch \
+          file://bridge-utils-1.5-fix-error-message-for-incorrect-command.patch \
+          file://bridge-utils-1.5-fix-incorrect-command-in-manual.patch \
+"
 
 inherit autotools
 
