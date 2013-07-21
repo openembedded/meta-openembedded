@@ -24,6 +24,11 @@ SRC_URI[sha256sum] = "02a9ebde8a198cb85f87545b9d88fb103a183958139864a85fe9e027ad
 inherit autotools gettext
 
 noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
+
+PACKAGECONFIG ??= "ftp uucpd"
+PACKAGECONFIG[ftp] = "--enable-ftp,--disable-ftp,readline"
+PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
+
 EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
         --with-path-procnet-dev=/proc/net/dev \
         ${noipv6} \
