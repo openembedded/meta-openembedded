@@ -28,6 +28,10 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 EXTRA_FFCONF_armv7a = "--cpu=cortex-a8"
 EXTRA_FFCONF ?= ""
 
+PACKAGECONFIG ??= "bzip2"
+PACKAGECONFIG[jack] = "--enable-indev=jack,--disable-indev=jack,jack"
+PACKAGECONFIG[bzip2] = "--enable-bzlib,--disable-bzlib,bzip2"
+
 EXTRA_OECONF = " \
     --enable-shared \
     --enable-pthreads \
