@@ -15,6 +15,10 @@ SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456
 
 S = "${WORKDIR}/${P}/src/"
 
+PACKAGECONFIG ??= "openssl"
+PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
+PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
+
 EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
 CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
