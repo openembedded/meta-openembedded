@@ -8,6 +8,9 @@ SRC_URI = "http://www.ece.uvic.ca/~mdadams/jasper/software/jasper-${PV}.zip"
 
 inherit autotools lib_package
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[jpeg] = "--enable-libjpeg,--disable-libjpeg,jpeg"
+
 EXTRA_OECONF = "--enable-shared"
 
 SRC_URI[md5sum] = "a342b2b4495b3e1394e161eb5d85d754"
