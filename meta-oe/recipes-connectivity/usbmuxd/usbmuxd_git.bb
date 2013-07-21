@@ -17,3 +17,5 @@ S = "${WORKDIR}/git"
 
 FILES_${PN} += "${base_libdir}/udev/rules.d/"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[plist] = "-DWANT_PLIST=1,-DWANT_PLIST=0,libplist"
