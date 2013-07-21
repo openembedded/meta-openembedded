@@ -12,6 +12,9 @@ SRC_URI = "git://git.samba.org/cifs-utils.git"
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
+
 inherit autotools
 
 do_install_append() {
