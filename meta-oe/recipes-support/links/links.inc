@@ -10,4 +10,8 @@ SRC_URI = "http://links.twibright.com/download/links-${PV}.tar.bz2 \
            file://ac-prog-cxx.patch \
 "
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
+PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,lzma"
+
 inherit autotools
