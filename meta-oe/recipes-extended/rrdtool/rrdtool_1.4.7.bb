@@ -19,6 +19,9 @@ inherit autotools gettext
 
 EXTRA_AUTORECONF = "-I m4"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[dbi] = "--enable-libdbi,--disable-libdbi,libdbi"
+
 EXTRA_OECONF = " \
     --enable-shared \
     --enable-local-libpng \
