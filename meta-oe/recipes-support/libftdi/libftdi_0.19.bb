@@ -20,6 +20,9 @@ SRC_URI = "http://www.intra2net.com/en/developer/libftdi/download/libftdi-${PV}.
 SRC_URI[md5sum] = "e6e25f33b4327b1b7aa1156947da45f3"
 SRC_URI[sha256sum] = "567c9d2c42d92fc401c5aba2deed45ffb2433990984e816bcdf31e441aef06be"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[cpp-wrapper] = "--enable-libftdipp,--disable-libftdipp,boost"
+
 inherit autotools binconfig pkgconfig
 
 BBCLASSEXTEND = "native"
