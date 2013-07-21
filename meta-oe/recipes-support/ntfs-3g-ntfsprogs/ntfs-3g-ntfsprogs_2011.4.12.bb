@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "aa8c747f0bfe819b2387b05e12db8d35e4ac96dcb2432873a0b939e248
 
 inherit autotools
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[uuid] = "--with-uuid,--without-uuid,util-linux"
+
 # required or it calls ldconfig at install step
 EXTRA_OEMAKE = "LDCONFIG=echo"
 
