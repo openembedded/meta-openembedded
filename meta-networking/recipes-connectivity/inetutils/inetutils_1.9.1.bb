@@ -29,6 +29,11 @@ inherit autotools gettext update-alternatives
 
 SRC_URI += "${@base_contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
 noipv6="${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6 gl_cv_socket_ipv6=no', d)}"
+
+PACKAGECONFIG ??= "ftp uucpd"
+PACKAGECONFIG[ftp] = "--enable-ftp,--disable-ftp,readline"
+PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
+
 EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
         --with-path-procnet-dev=/proc/net/dev \
         ${noipv6} \
