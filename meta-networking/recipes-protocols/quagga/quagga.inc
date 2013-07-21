@@ -30,6 +30,9 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
            file://watchquagga.default \
            file://volatiles.03_quagga"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+
 inherit autotools update-rc.d useradd
 
 EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
