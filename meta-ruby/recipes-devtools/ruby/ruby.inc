@@ -14,8 +14,8 @@ LIC_FILES_CHKSUM = "\
     file://LEGAL;md5=3ce1fae39fe573b818c0af162bce6579 \
 "
 
-DEPENDS = "ruby-native zlib openssl tcl"
-DEPENDS_virtclass-native = ""
+DEPENDS = "ruby-native zlib openssl tcl libyaml db gdbm readline"
+DEPENDS_class-native = ""
 
 INC_PR = "r1"
 
