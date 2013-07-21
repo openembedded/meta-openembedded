@@ -30,6 +30,7 @@ EXTRA_OECONF = '--prefix=${prefix} \
                 --enable-shared \
                 --enable-static \
                 --disable-lavf \
+                --disable-swscale \
                 ${X264_DISABLE_ASM} \
                '
 
