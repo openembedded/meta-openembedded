@@ -11,6 +11,9 @@ SRC_URI[sha256sum] = "e708b66f6cec9ba090877e8eb38e5627ac69aea9ebd9bca1360a29c739
 
 inherit autotools
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[md5] = "--enable-md5,--disable-md5,openssl"
+
 do_configure() {
     gnu-configize
     oe_runconf
