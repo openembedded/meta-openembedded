@@ -13,6 +13,9 @@ PR = "r4"
 
 DEPENDS = "glib-2.0 gstreamer"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
+
 inherit autotools
 
 FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
