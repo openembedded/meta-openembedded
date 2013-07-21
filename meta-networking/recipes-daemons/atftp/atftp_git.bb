@@ -18,6 +18,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d useradd systemd
 
+PACKAGECONFIG ??= "tcp-wrappers"
+PACKAGECONFIG[pcre] = "--enable-libpcre,--disable-libpcre,libpcre"
+PACKAGECONFIG[tcp-wrappers] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
+PACKAGECONFIG[readline] = "--enable-libreadline,--disable-libreadline,readline"
+
 INITSCRIPT_PACKAGES = "${PN}d"
 INITSCRIPT_NAME_${PN}d = "atftpd"
 INITSCRIPT_PARAMS_${PN}d = "defaults 80"
