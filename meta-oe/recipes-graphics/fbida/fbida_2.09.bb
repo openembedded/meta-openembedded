@@ -6,7 +6,7 @@ SECTION = "utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
-DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif"
+DEPENDS = "virtual/libiconv libpng jpeg fontconfig freetype libexif curl libungif tiff"
 
 SRC_URI = "git://git.kraxel.org/fbida"
 SRCREV = "cb0ce5fa5f42bfaea4f8f326bcd8914dd14e782d"
