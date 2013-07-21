@@ -1,8 +1,6 @@
 require ruby.inc
 PR = "${INC_PR}.0"
 
-DEPENDS += "libyaml ruby-native"
-
 SRC_URI += "\
     file://0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch \
     file://ruby-1.9.3-always-use-i386.patch \
