@@ -28,6 +28,7 @@ EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dl
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gd] = "--enable-gd,--disable-gd,gd"
+PACKAGECONFIG[serial] = "--enable-serial,--disable-serial,lockdev"
 
 do_configure_append() {
     cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
