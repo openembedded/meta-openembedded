@@ -14,7 +14,7 @@ NAME=apache2
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 DAEMON=/usr/sbin/httpd
 SUEXEC=/usr/lib/apache/suexec
-PIDFILE=/var/apache2/logs/httpd.pid
+PIDFILE=/run/httpd.pid
 CONF=/etc/apache2/httpd.conf
 APACHECTL=/usr/sbin/apachectl 
 
