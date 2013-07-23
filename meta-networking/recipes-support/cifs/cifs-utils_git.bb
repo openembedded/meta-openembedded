@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
 
-inherit autotools
+inherit autotools pkgconfig
 
 do_install_append() {
     # Remove empty /usr/bin and /usr/sbin directories since the mount helper
