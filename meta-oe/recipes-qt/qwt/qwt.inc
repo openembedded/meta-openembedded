@@ -29,10 +29,12 @@ do_install() {
     for i in * ; do
         cp -pPR ${i} ${D}/${bindir}/${i}${QT_LIBINFIX}
     done
+    install -d ${D}${libdir}/${QT_DIR_NAME}
+    mv ${D}${prefix}/plugins ${D}${libdir}/${QT_DIR_NAME}
 }
 
 PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
 FILES_${PN}-examples = "${bindir}/*"
 FILES_${PN}-features = "${prefix}/features"
-FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
-FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
+FILES_${PN}-plugins = "${libdir}/${QT_DIR_NAME}/plugins/designer/*.so"
+FILES_${PN}-dbg += "${libdir}/${QT_DIR_NAME}/plugins/designer/.debug"
