@@ -1,4 +1,16 @@
-require ${BPN}.inc
+DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
+
+inherit efl
+
+LICENSE = "MIT BSD CompuPhase"
+LIC_FILES_CHKSUM = "file://COPYING;md5=220a7f1107df42c62428d8ebe559ed14"
+
+BBCLASSEXTEND = "native"
+
+DEPENDS += "eina"
+
+# Some upgrade path tweaking
+AUTO_LIBNAME_PKGS = ""
 
 SRC_URI = "\
     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
