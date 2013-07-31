@@ -29,3 +29,8 @@ FILES_imlib2-loaders = "${libdir}/imlib2/loaders/*.so"
 FILES_imlib2-filters = "${libdir}/imlib2/filters/*.so"
 FILES_imlib2-loaders-dbg += "${libdir}/imlib2/loaders/.debug"
 FILES_imlib2-filters-dbg += "${libdir}/imlib2/filters/.debug"
+
+# png.so jpeg.so id3.so are also provided by lightmediascanner
+PRIVATE_LIBS_imlib2-loaders = "pnm.so lbm.so argb.so tiff.so zlib.so bmp.so tga.so gif.so xpm.so bz2.so"
+
+PRIVATE_LIBS_imlib2-filters = "bumpmap.so colormod.so testfilter.so"

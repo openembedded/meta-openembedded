@@ -31,3 +31,6 @@ FILES_${PN}-staticdev += "${libdir}/${PN}/plugins/*.a"
 
 # otherwise fails with ERROR: could not add conversion charset 'UTF-16BE': Invalid argument
 RDEPENDS_${PN}-test_append_libc-glibc = " glibc-gconv-utf-16"
+
+# png.so jpeg.so id3.so are provided also by imlib2-loaders
+PRIVATE_LIBS_${PN} = "video-dummy.so png.so jpeg.so id3.so pls.so audio-dummy.so rm.so ogg.so dummy.so m3u.so flac.so asf.so"
