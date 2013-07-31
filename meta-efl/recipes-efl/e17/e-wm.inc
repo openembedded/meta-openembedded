@@ -3,7 +3,6 @@ DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary libxcb xcb-
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
-INC_PR = "r11"
 
 inherit e update-alternatives gettext
 S = "${WORKDIR}/${SRCNAME}"

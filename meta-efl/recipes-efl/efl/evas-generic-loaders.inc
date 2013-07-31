@@ -5,8 +5,6 @@ DEPENDS = "eina poppler librsvg cairo"
 
 inherit efl
 
-INC_PR = "r0"
-
 SRCNAME = "evas_generic_loaders"
 
 EXTRA_OECONF = " \

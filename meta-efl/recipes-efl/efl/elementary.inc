@@ -5,8 +5,6 @@ DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb poppler eio"
 
 inherit efl gettext
 
-INC_PR = "r0"
-
 EXTRA_OECONF = "\
     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
     --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
