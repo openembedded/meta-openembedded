@@ -114,14 +114,10 @@ INITSCRIPT_NAME = "ntpd"
 INITSCRIPT_PARAMS = "defaults"
 
 pkg_postinst_ntpdate() {
-if test "x$D" != "x"; then
-    exit 1
-else
-    if ! grep -q -s ntpdate /var/spool/cron/root; then
+    if ! grep -q -s ntpdate $D/var/spool/cron/root; then
         echo "adding crontab"
-        test -d /var/spool/cron || mkdir -p /var/spool/cron
-        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> /var/spool/cron/root
+        test -d $D/var/spool/cron || mkdir -p $D/var/spool/cron
+        echo "30 * * * *    ${bindir}/ntpdate-sync silent" >> $D/var/spool/cron/root
     fi
-fi
 }
 
