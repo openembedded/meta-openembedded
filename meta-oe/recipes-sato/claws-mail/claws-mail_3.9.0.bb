@@ -1,6 +1,6 @@
 SECTION = "x11/network"
 DESCRIPTION = "Mail user agent"
-DEPENDS = "gtk+ libetpan openssl aspell"
+DEPENDS = "gtk+ libetpan openssl aspell curl"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e059bde2972c1790af786f3e86bac22e"
 
