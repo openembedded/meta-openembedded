@@ -11,6 +11,9 @@ EXTRA_OECONF = "\
     --disable-web \
 "
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[eweather] = "--enable-eweather,--disable-eweather,libeweather"
+
 do_compile_append() {
     sed -i -e s:${STAGING_DIR_TARGET}::g \
            -e s:/${TARGET_SYS}::g \
