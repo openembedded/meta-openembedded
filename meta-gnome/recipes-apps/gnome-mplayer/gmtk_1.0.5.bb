@@ -13,4 +13,4 @@ SRC_URI[sha256sum] = "a07130d62719e8c1244f8405dd97445798df5204fc0f3f2f2b669b1251
 
 EXTRA_OECONF = "--disable-gconf --with-gio --with-alsa --enable-keystore"
 
-inherit gettext pkgconfig autotools
+inherit gettext pkgconfig autotools gconf
