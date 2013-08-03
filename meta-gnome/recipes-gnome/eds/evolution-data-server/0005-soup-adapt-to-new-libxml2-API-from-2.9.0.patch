@@ -1,7 +1,7 @@
-From 5083b22669f0d2102b72956a2b8afd9432303ce5 Mon Sep 17 00:00:00 2001
+From ac95e89749a01618f98b554a98e78d7c988bfc10 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Tue, 27 Nov 2012 08:46:51 +0100
-Subject: [PATCH] soup: adapt to new libxml2 API from 2.9.0
+Subject: [PATCH 5/5] soup: adapt to new libxml2 API from 2.9.0
 
 * for more info see
   https://mail.gnome.org/archives/xml/2012-August/msg00005.html
@@ -9,14 +9,13 @@ Subject: [PATCH] soup: adapt to new libxml2 API from 2.9.0
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
  calendar/backends/caldav/e-cal-backend-caldav.c | 21 +++++++++++++++++++++
- servers/google/libgdata/gdata-entry.c           |  8 ++++++++
- 2 files changed, 29 insertions(+)
+ 1 file changed, 21 insertions(+)
 
 diff --git a/calendar/backends/caldav/e-cal-backend-caldav.c b/calendar/backends/caldav/e-cal-backend-caldav.c
-index 5e7ecc4..b7f4afb 100644
+index 12f8f22..5555a3e 100644
 --- a/calendar/backends/caldav/e-cal-backend-caldav.c
 +++ b/calendar/backends/caldav/e-cal-backend-caldav.c
-@@ -1038,8 +1038,13 @@ check_calendar_changed_on_server (ECalBackendCalDAV *cbdav)
+@@ -1172,8 +1172,13 @@ check_calendar_changed_on_server (ECalBackendCalDAV *cbdav)
  	soup_message_set_request (message,
  				  "application/xml",
  				  SOUP_MEMORY_COPY,
@@ -30,7 +29,7 @@ index 5e7ecc4..b7f4afb 100644
  
  	/* Send the request now */
  	send_and_handle_redirection (priv->session, message, NULL);
-@@ -1180,8 +1185,13 @@ caldav_server_list_objects (ECalBackendCalDAV *cbdav, CalDAVObject **objs, gint
+@@ -1321,8 +1326,13 @@ caldav_server_list_objects (ECalBackendCalDAV *cbdav,
  	soup_message_set_request (message,
  				  "application/xml",
  				  SOUP_MEMORY_COPY,
@@ -44,7 +43,7 @@ index 5e7ecc4..b7f4afb 100644
  
  	/* Send the request now */
  	send_and_handle_redirection (priv->session, message, NULL);
-@@ -1502,8 +1512,14 @@ caldav_receive_schedule_outbox_url (ECalBackendCalDAV *cbdav)
+@@ -1715,8 +1725,14 @@ caldav_receive_schedule_outbox_url (ECalBackendCalDAV *cbdav)
  	soup_message_set_request (message,
  				  "application/xml",
  				  SOUP_MEMORY_COPY,
@@ -59,7 +58,7 @@ index 5e7ecc4..b7f4afb 100644
  
  	/* Send the request now */
  	send_and_handle_redirection (priv->session, message, NULL);
-@@ -1552,8 +1568,13 @@ caldav_receive_schedule_outbox_url (ECalBackendCalDAV *cbdav)
+@@ -1765,8 +1781,13 @@ caldav_receive_schedule_outbox_url (ECalBackendCalDAV *cbdav)
  		soup_message_set_request (message,
  				  "application/xml",
  				  SOUP_MEMORY_COPY,
@@ -73,28 +72,6 @@ index 5e7ecc4..b7f4afb 100644
  
  		/* Send the request now */
  		send_and_handle_redirection (priv->session, message, NULL);
-diff --git a/servers/google/libgdata/gdata-entry.c b/servers/google/libgdata/gdata-entry.c
-index ab69eb0..3f05b17 100644
---- a/servers/google/libgdata/gdata-entry.c
-+++ b/servers/google/libgdata/gdata-entry.c
-@@ -877,9 +877,17 @@ gdata_entry_new_from_xmlptr (xmlDocPtr doc, xmlNodePtr cur)
- 		xmlOutputBufferFlush (buf);
- 
- 		if (buf->conv == NULL)
-+#ifdef LIBXML2_NEW_BUFFER
-+			xmlString = g_strdup ((gchar *) xmlOutputBufferGetContent(buf));
-+#else
- 			xmlString = g_strdup ((gchar *)buf->buffer->content);
-+#endif
- 		else
-+#ifdef LIBXML2_NEW_BUFFER
-+			xmlString = g_strdup ((gchar *) xmlBufContent(buf));
-+#else
- 			xmlString = g_strdup ((gchar *)buf->conv->content);
-+#endif
- 		xmlOutputBufferClose (buf);
- 	}
- 
 -- 
-1.8.0
+1.8.3.2
 

@@ -1,4 +1,7 @@
-Upstream-Status: Inappropriate [embedded specific]
+From 37b227cff78fd4c652651662dafd71537280824e Mon Sep 17 00:00:00 2001
+From: Nitin A Kamble <nitin.a.kamble@intel.com>
+Date: Sun, 4 Aug 2013 09:16:59 +0200
+Subject: [PATCH 3/5] Disable Werror for automake
 
 Avoid these warning-errors
 
@@ -65,19 +68,30 @@ servers/groupwise/Makefile.am:85: warning: '%'-style pattern rules are a GNU mak
 servers/groupwise/Makefile.am:91: warning: pkgconfig_DATA:-$(API_VERSION: non-POSIX variable name
 autoreconf: automake failed with exit status: 1
 
-Signed-Off-By: Nitin A Kamble <nitin.a.kamble@intel.com>
-2012/07/09
+Upstream-Status: Inappropriate [embedded specific]
 
-Index: git/configure.ac
-===================================================================
---- git.orig/configure.ac
-+++ git/configure.ac
+Signed-Off-By: Nitin A Kamble <nitin.a.kamble@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Conflicts:
+	configure.ac
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 49d7506..1c802ff 100644
+--- a/configure.ac
++++ b/configure.ac
 @@ -21,7 +21,7 @@ m4_define([api_version], [1.2])
  dnl Autoconf / Automake Initialization
- AC_PREREQ(2.58)
+ AC_PREREQ(2.62)
  AC_INIT([evolution-data-server],[eds_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=Evolution-Data-Server])
--AM_INIT_AUTOMAKE([gnu 1.9 tar-ustar -Wall -Werror foreign])
-+AM_INIT_AUTOMAKE([gnu 1.9 tar-ustar -Wall foreign])
+-AM_INIT_AUTOMAKE([gnu 1.10 tar-ustar dist-xz no-dist-gzip -Wall -Wno-portability -Werror foreign])
++AM_INIT_AUTOMAKE([gnu 1.10 tar-ustar dist-xz no-dist-gzip -Wall -Wno-portability foreign])
  AC_CONFIG_MACRO_DIR([m4])
  AC_CONFIG_SRCDIR(README)
  AC_CONFIG_HEADERS(config.h)
+-- 
+1.8.3.2
+

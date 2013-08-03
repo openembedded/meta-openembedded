@@ -5,31 +5,29 @@ BUGTRACKER = "https://bugzilla.gnome.org/"
 LICENSE = "LGPLv2 & LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
                     file://camel/camel.h;endline=24;md5=b02175c88f821224746b347a89731a2b \
-                    file://libedataserver/e-data-server-util.h;endline=23;md5=9df8127bd8cfdc5469e938fc710d1f40 \
+                    file://libedataserver/e-data-server-util.h;endline=20;md5=934502f03c84523aa059d4825887b380 \
                     file://calendar/libecal/e-cal.h;endline=24;md5=5d496b9b6fd2a4fdbbfc31ef9455c9d0"
 
-DEPENDS = "intltool-native glib-2.0 gtk+ gconf dbus db gnome-common virtual/libiconv zlib libsoup-2.4 libglade libical gnome-keyring gperf-native"
+DEPENDS = "intltool-native glib-2.0 gtk+3 gconf dbus db gnome-common virtual/libiconv zlib libsoup-2.4 libglade libical libgnome-keyring gperf-native libgdata nss"
 
-SRCREV = "3ca578d968d09785933ebbb45b66b3bccdbd5832"
+SRCREV = "a9e4e74ec4473a4fd09e56b690bd4fa72f686687"
 
-PV = "2.30+git${SRCPV}"
-PR = "r4"
+# 3.4 series needs libgdata-0.10*, 3.8 series needs also libsecret instead of gnome-keyring
+PV = "3.2.3+git${SRCPV}"
 
-SRC_URI = "git://git.gnome.org/evolution-data-server;protocol=git \
-           file://oh-contact.patch;striplevel=0 \
-           file://nossl.patch \
-           file://optional_imapx_provider.patch \
-           file://new-contact-fix.patch \
-           file://old-gdk-api.patch \
-           file://depbuildfix.patch \
-           file://fix_for_automake-1.12.x.patch \
-           file://avoid_automake_errors.patch \
-           file://0001-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
-           file://iconv-detect.h"
+SRC_URI = " \
+    git://git.gnome.org/evolution-data-server;protocol=git \
+    file://0001-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+    file://0002-Fix-for-automake-1.12.x.patch \
+    file://0003-Disable-Werror-for-automake.patch \
+    file://0004-configure-Fix-libical-pkg-config-trying-to-use-host-.patch \
+    file://0005-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
+    file://iconv-detect.h \
+"
 
 S = "${WORKDIR}/git"
 
-inherit autotools gtk-doc pkgconfig
+inherit autotools gtk-doc pkgconfig gettext
 
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread"
@@ -41,12 +39,12 @@ LDFLAGS += "-lpthread"
 
 do_configure_append () {
     cp ${WORKDIR}/iconv-detect.h ${S}
-    sed -i 's/-DG_DISABLE_DEPRECATED//g' ${S}/libedataserver/Makefile
 }
 
 EXTRA_OECONF = "--without-openldap --with-dbus --without-bug-buddy \
                 --with-soup --with-libdb=${STAGING_DIR_HOST}${prefix} \
-                --disable-smime --disable-ssl --disable-nntp --without-weather"
+                --disable-nntp --without-weather --disable-goa --disable-uoa --disable-weather"
+#		--disable-ssl --disable-smime --disable-ssl
 
 PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
              libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
@@ -55,17 +53,20 @@ PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
 
 FILES_${PN} =+ "${datadir}/evolution-data-server-*/ui/"
 FILES_${PN}-dev =+ "${libdir}/pkgconfig/evolution-data-server-*.pc"
-FILES_${PN}-dbg =+ "${libdir}/evolution-data-server-*/camel-providers/.debug \
+FILES_${PN}-dbg =+ "${libdir}/evolution-data-server*/camel-providers/.debug \
+                    ${libdir}/evolution-data-server*/calendar-backends/.debug \
+                    ${libdir}/evolution-data-server*/addressbook-backends/.debug \
                     ${libdir}/evolution-data-server*/extensions/.debug/"
+
 RRECOMMENDS_${PN}-dev += "libecal-dev libebook-dev"
 
-FILES_libcamel = "${libexecdir}/camel-* ${libdir}/libcamel-*.so.* \
+FILES_libcamel = "${libdir}/libcamel-*.so.* \
                   ${libdir}/libcamel-provider-*.so.* \
-                  ${libdir}/evolution-data-server-*/camel-providers/*.so \
-                  ${libdir}/evolution-data-server-*/camel-providers/*.urls"
+                  ${libdir}/evolution-data-server*/camel-providers/*.so \
+                  ${libdir}/evolution-data-server*/camel-providers/*.urls"
 FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
                       ${libdir}/pkgconfig/camel*pc \
-                    ${libdir}/evolution-data-server-*/camel-providers/*.la \
+                      ${libdir}/evolution-data-server*/camel-providers/*.la \
                       ${includedir}/evolution-data-server*/camel"
 
 FILES_libebook = "${libdir}/libebook-*.so.*"
