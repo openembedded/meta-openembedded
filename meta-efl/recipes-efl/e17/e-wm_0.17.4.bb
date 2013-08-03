@@ -1,7 +1,5 @@
 require ${BPN}.inc
 
-PR = "${INC_PR}.0"
-
 SRCNAME = "enlightenment"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
@@ -12,5 +10,5 @@ SRC_URI = "\
     file://applications.menu \
 "
 
-SRC_URI[md5sum] = "e20f4d75a40f3de0dcd2862ca0483ebc"
-SRC_URI[sha256sum] = "fb4856c705633f8cbac7b576387204d56a1dbd652005b11a0e5bfdf0f1ca389e"
+SRC_URI[md5sum] = "ce3b7c8f05975521bdfe1edb72c8e245"
+SRC_URI[sha256sum] = "090447607c850f98ce8c2089c55e15d77b35a9014eddff9119f38b0e0e49f0b7"
