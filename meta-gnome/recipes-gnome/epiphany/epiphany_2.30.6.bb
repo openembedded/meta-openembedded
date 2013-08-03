@@ -2,7 +2,7 @@ DESCRIPTION = "GNOME default webbrowser"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates"
+DEPENDS = "gnome-doc-utils libsoup-2.4 webkit-gtk gtk+ gconf iso-codes startup-notification ca-certificates libgnome-keyring"
 
 inherit gnome
 SRC_URI[archive.md5sum] = "0c566b3ffd428d2135e3c8cb65352d64"
