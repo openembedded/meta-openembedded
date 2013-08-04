@@ -15,4 +15,5 @@ SRC_URI = "git://git.gnome.org/${BPN};protocol=git \
     file://make-382.patch \
     file://dso_linking_change_build_fix.patch \
     file://uclibc-NL_TIME_FIRST_WEEKDAY-absent.patch \
+    file://0001-Update-to-new-evolution-data-server-e_source_-color-.patch \
 "
