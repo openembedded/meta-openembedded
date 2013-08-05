@@ -4,7 +4,7 @@ DEPENDS = "udev"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
-INC_PR = "r1"
+INC_PR = "r2"
 
 
 S = "${WORKDIR}/LVM2.${PV}"
@@ -40,4 +40,5 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
 FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
 
+RDEPENDS_${PN} = "bash"
 EXTRA_OECONF = "--with-usrlibdir=${libdir}"
