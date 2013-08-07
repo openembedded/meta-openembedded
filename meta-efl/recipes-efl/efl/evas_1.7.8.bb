@@ -166,6 +166,9 @@ EXTRA_OECONF_virtclass-native = "${EVAS_OECONF} \
                 --disable-convert-32-rgb-rot-270 \
 "
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
+
 SRC_URI = "\
     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
 "
