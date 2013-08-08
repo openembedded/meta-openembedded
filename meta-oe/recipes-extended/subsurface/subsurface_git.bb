@@ -2,7 +2,7 @@ DESCRIPTION = "Subsurface is an open source dive log program."
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "libdivecomputer gtk+ libxml2 glib-2.0"
+DEPENDS = "libdivecomputer gtk+ libxml2 glib-2.0 gconf"
 
 inherit gtk-icon-cache
 
