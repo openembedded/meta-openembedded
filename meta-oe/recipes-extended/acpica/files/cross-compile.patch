@@ -1,0 +1,19 @@
+Description: add cross compile support
+Forwarded: not-needed
+Author: Fathi Boudra <fathi.boudra@linaro.org>
+
+---
+ generate/unix/Makefile.config |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/generate/unix/Makefile.config
++++ b/generate/unix/Makefile.config
+@@ -35,7 +35,7 @@
+ .SUFFIXES :
+ PROGS = acpibin acpidump acpiexec acpihelp acpinames acpisrc acpixtract iasl
+ HOST ?= _CYGWIN
+-CC =    gcc
++CC ?=    $(CROSS_COMPILE)gcc
+ 
+ #
+ # Common defines
