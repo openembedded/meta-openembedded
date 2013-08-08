@@ -1,4 +1,4 @@
-DEPENDS = "llvm${LLVM_RELEASE}-native llvm-common"
+DEPENDS = "llvm${LLVM_RELEASE}-native llvm-common perl-native"
 DEPENDS_class-native = "llvm-common-native cmake-native"
 
 SRC_URI = "http://llvm.org/releases/${PV}/llvm-${PV}.tgz"
