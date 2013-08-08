@@ -3,7 +3,7 @@ DESCRIPTION="Gnome Office Library"
 LICENSE="GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6dc33ff21e1ba1ac1a2a1069d361e29e"
 
-DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+3 pango cairo libgsf libpcre libxml2 libart-lgpl"
+DEPENDS = "libxml-parser-perl-native glib-2.0 gtk+3 pango cairo libgsf libpcre libxml2 libart-lgpl librsvg"
 
 inherit gnome pkgconfig perlnative
 
