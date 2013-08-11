@@ -32,12 +32,16 @@ SYSTEMD_OESCONS = "${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false
 export STAGING_INCDIR
 export STAGING_LIBDIR
 
+PACKAGECONFIG ??= "bluez"
+PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez4"
+
 EXTRA_OESCONS = " \
     sysroot=${STAGING_DIR_TARGET} \
     libQgpsmm='false' \
     debug='true' \
     strip='false' \
     systemd='${SYSTEMD_OESCONS}' \
+    ${EXTRA_OECONF} \
 "
 # this cannot be used, because then chrpath is not found and only static lib is built
 # target=${HOST_SYS}
