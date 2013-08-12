@@ -1,0 +1,61 @@
+From d6cbd8bbc34529a1aff74b5ee73366b89526c961 Mon Sep 17 00:00:00 2001
+From: Joe MacDonald <joe@deserted.net>
+Date: Fri, 22 Mar 2013 08:54:44 +0000
+Subject: [PATCH] doc: fix makeinfo errors and one warning
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+commit 4afa50b added few lines that are syntactically incorrect
+with leading plus sign.
+
+Upstream-Status: Backport [http://git.savannah.gnu.org/gitweb/?p=quagga.git;a=commit;h=b58c90807c9d0bfa9601704c7490a16070906004]
+
+Cc: Denis Ovsienko <infrastation@yandex.ru>
+Signed-off-by: Timo Teräs <timo.teras@iki.fi>
+Signed-off-by: David Lamparter <equinox@opensourcerouting.org>
+Signed-off-by: Joe MacDonald <joe@deserted.net>
+---
+ doc/ipv6.texi   |    4 ++--
+ doc/quagga.texi |    6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/doc/ipv6.texi b/doc/ipv6.texi
+index b6cc437..2482c1c 100644
+--- a/doc/ipv6.texi
++++ b/doc/ipv6.texi
+@@ -136,8 +136,8 @@ for the lowest preference possible.
+ Default: 0
+ @end deffn
+ 
+-+@deffn {Interface Command} {ipv6 nd home-agent-lifetime <0-65520>} {}
+-+@deffnx {Interface Command} {no ipv6 nd home-agent-lifetime [<0-65520>]} {}
++@deffn {Interface Command} {ipv6 nd home-agent-lifetime <0-65520>} {}
++@deffnx {Interface Command} {no ipv6 nd home-agent-lifetime [<0-65520>]} {}
+ The value to be placed in Home Agent Option, when Home Agent config flag is set, 
+ which indicates to hosts Home Agent Lifetime. The default value of 0 means to
+ place the current Router Lifetime value.
+diff --git a/doc/quagga.texi b/doc/quagga.texi
+index ff913aa..b4105ac 100644
+--- a/doc/quagga.texi
++++ b/doc/quagga.texi
+@@ -1,13 +1,13 @@
+ \input texinfo @c -*- texinfo -*-
++@c Set variables - sourced from defines.texi
++@include defines.texi
++
+ @c %**start of header
+ @setchapternewpage odd
+ @settitle @uref{http://www.quagga.net,,@value{PACKAGE_NAME}}
+ @setfilename quagga.info
+ @c %**end of header
+ 
+-@c Set variables - sourced from defines.texi
+-@include defines.texi
+-
+ @c automake will automatically generate version.texi
+ @c and set EDITION, VERSION, UPDATED and UPDATED-MONTH
+ @include version.texi
+-- 
+1.7.10.4
+
