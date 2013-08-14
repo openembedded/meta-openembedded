@@ -1,18 +1,19 @@
-DESCRIPTION = "1-Wire file system"
+SUMMARY = "1-Wire file system"
+DESCRIPTION = "OWFS is an easy way to use the powerful 1-wire system of Dallas/Maxim"
 HOMEPAGE = "http://www.owfs.org/"
 SECTION = "console/network"
 
 LICENSE = "GPLv2 & LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a0bc427f423a41220ab79a0b392218bd \
+                    file://COPYING.LIB;md5=865c4bd642d9e04f43925ad7e929ae87"
 
 DEPENDS = "fuse virtual/libusb0"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/owfs/owfs-${PV}.tar.gz \
            file://owhttpd \
            file://owserver "
-SRC_URI[md5sum] = "9aebee6c0e724553f5be6a542494eae5"
-SRC_URI[sha256sum] = "2374ce7864927a430da83691eb994382407e2dba492f9789b560d025841cc8ba"
+SRC_URI[md5sum] = "56ba145be208002e58775a7203369851"
+SRC_URI[sha256sum] = "9d22dbff72d235476688c02669f7171b23e21dffadf40bbdd3b8263908218424"
 
 inherit autotools update-rc.d
 
