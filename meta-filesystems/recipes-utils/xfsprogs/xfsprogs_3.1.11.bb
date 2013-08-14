@@ -5,15 +5,14 @@ LICENSE = "GPLv2"
 LICENSE_libhandle = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
 DEPENDS = "util-linux"
-PR = "r1"
 
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
     file://remove-install-as-user.patch \
     file://drop-configure-check-for-aio.patch \
 "
 
-SRC_URI[md5sum] = "f70b2e7200d4c29f0af1cf70e7be1db6"
-SRC_URI[sha256sum] = "74409e2e3748074999df25c00f722621659a0bd3607e677f0bcc4373b8c93eab"
+SRC_URI[md5sum] = "de9f1f45026c2f4e0776058d429ff4b6"
+SRC_URI[sha256sum] = "adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be"
 
 inherit autotools
 
