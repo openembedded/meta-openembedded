@@ -1,10 +1,8 @@
 DESCRIPTION = "Simple DirectMedia Layer image library."
 SECTION = "libs"
 
-LICENSE = "zlib"
+LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://COPYING;md5=613734b7586e1580ef944961c6d62227"
-
-PR = "r0"
 
 DEPENDS = "tiff zlib libpng jpeg virtual/libsdl"
 
