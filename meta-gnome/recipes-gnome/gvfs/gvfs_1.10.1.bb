@@ -1,6 +1,6 @@
 require gvfs.inc
 
-DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 fuse avahi fuse gconf libgphoto2"
+DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf libgphoto2"
 # optional: obexftp libcdio libimobiledevice 
 
 PR = "${INC_PR}.0"
@@ -26,3 +26,5 @@ PACKAGECONFIG ?= "${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'samba',
 
 PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
                         --with-samba-libs=${STAGING_LIBDIR}, --disable-samba, samba"
+# needs meta-filesystems
+PACKAGECONFIG[fuse] = "--enable-fuse, --disable-fuse, fuse"
