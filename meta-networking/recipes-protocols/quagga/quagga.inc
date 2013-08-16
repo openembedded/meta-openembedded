@@ -5,7 +5,7 @@ Unix platforms, particularly FreeBSD, Linux, Solaris and NetBSD. \
 Quagga is a fork of GNU Zebra which was developed by Kunihiro \
 Ishiguro. The Quagga tree aims to build a more involved community \
 around Quagga than the current centralised model of GNU Zebra."
-HOMEPAGE = "http://www.quagga.net/"
+HOMEPAGE = "http://www.nongnu.org/quagga/"
 SECTION = "network"
 LICENSE = "GPL-2.0 & LGPL-2.0"
 DEPENDS = "readline ncurses perl-native"
@@ -16,6 +16,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
 
 INC_PR = "r2"
+
+# the "ip" command from busybox is not sufficient (flush by protocol flushes all routes)
+RDEPENDS_${PN} += "iproute2"
 
 QUAGGASUBDIR = ""
 # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
@@ -128,11 +131,11 @@ pkg_postinst_${PN} () {
     if [ "x$D" != "x" ] ; then
         exit 1
     fi
-    for f in bgpd babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
+    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
     chown quagga:quaggavty ${sysconfdir}/quagga
     chown quagga:quagga ${sysconfdir}/quagga/*.conf
     chmod 750 ${sysconfdir}/quagga
-    chown 640 ${sysconfdir}/quagga/*.conf
+    chmod 640 ${sysconfdir}/quagga/*.conf
     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
         ${sysconfdir}/init.d/populate-volatile.sh update
     fi
