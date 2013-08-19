@@ -1,8 +1,8 @@
 SECTION = "console/network"
 DESCRIPTION = "A server-side, HTML-embedded scripting language. This package provides the apache php module."
 LICENSE = "PHP-3.0"
-DEPENDS = "apache2-native apache2 zlib bzip2"
 INC_PR = "r1"
+DEPENDS = "apache2-native apache2 zlib bzip2 libmcrypt"
 
 SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://configure.patch \
@@ -12,7 +12,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
 
 S = "${WORKDIR}/php-${PV}"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5bb09683f8f09b15b7076f4b4c31d61f"
 
 inherit autotools
 
@@ -39,6 +39,7 @@ EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
                 --libdir=${libdir}/php5 \
                 --with-zlib --with-zlib-dir=${STAGING_DIR_TARGET}${exec_prefix} \
                 --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
+                --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
                 --enable-zip \
                 --enable-mbstring \
                 --with-config-file-path=${sysconfdir}/php/apache2-php5"
