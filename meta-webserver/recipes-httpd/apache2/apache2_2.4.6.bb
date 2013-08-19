@@ -19,8 +19,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://init"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
-SRC_URI[md5sum] = "0e712ee2119cd798c8ae39d5f11a9206"
-SRC_URI[sha256sum] = "92aabddeca76a4ac7330b143df1407bbf35574c7291c15172238ac598d97655c"
+SRC_URI[md5sum] = "ea5e361ca37b8d7853404419dd502efe"
+SRC_URI[sha256sum] = "dc9f3625ebc08bea55eeb0d16e71fba656f252e6cd0aa244ee7806dc3b022fea"
 
 S = "${WORKDIR}/httpd-${PV}"
 
