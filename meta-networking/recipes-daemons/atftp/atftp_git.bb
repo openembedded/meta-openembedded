@@ -13,6 +13,7 @@ SRC_URI = "git://git.code.sf.net/p/atftp/code \
            file://atftpd-0.7_unprotected_assignments_crash.patch \
            file://atftpd.init \
            file://atftpd.service \   
+           file://atftp-0.7-sorcerers_apprentice.patch \
 "
 S = "${WORKDIR}/git"
 
