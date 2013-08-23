@@ -6,6 +6,14 @@ HOMEPAGE = "http://mpg123.de/"
 BUGTRACKER = "http://sourceforge.net/p/mpg123/bugs/"
 SECTION = "multimedia"
 
+# The options should be mutually exclusive for configuration script.
+# If both alsa and pulseaudio are specified (as in the default distro features)
+# pulseaudio takes precedence.
+PACKAGECONFIG_ALSA = "${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)}"
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '${PACKAGECONFIG_ALSA}', d)}"
+PACKAGECONFIG[pulseaudio] = "--with-default-audio=pulse,,pulseaudio"
+PACKAGECONFIG[alsa] = "--with-default-audio=alsa,,alsa-lib"
+
 LICENSE = "LGPLv2.1"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
@@ -23,7 +31,5 @@ EXTRA_OECONF = " \
     --enable-shared \
     ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', '--with-default-audio=alsa', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', '--with-default-audio=pulse', '', d)} \
 "
 
