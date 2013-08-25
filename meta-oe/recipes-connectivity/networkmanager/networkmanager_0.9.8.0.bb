@@ -40,6 +40,7 @@ PACKAGECONFIG[systemd] = " \
 "
 # consolekit is not picked by shlibs, so add it to RDEPENDS too
 PACKAGECONFIG[consolekit] = "--with-session-tracking=consolekit,,consolekit,consolekit"
+PACKAGECONFIG[concheck] = "--enable-concheck,--disable-concheck,libsoup-2.4"
 
 # Work around dbus permission problems since we lack a proper at_console
 do_install_prepend() {
