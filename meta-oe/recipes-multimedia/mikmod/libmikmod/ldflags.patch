@@ -5,8 +5,8 @@ diff -urN libmikmod-3.1.12.orig/libmikmod/Makefile.in libmikmod-3.1.12/libmikmod
  	rm -f Makefile
  
  $(LIB): $(OBJ)
--	$(LIBTOOL) --mode=link $(CC) -version-info 2:4:0 -o $@ $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
-+	$(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -version-info 2:4:0 -o $@ $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
+-	$(LIBTOOL) --mode=link $(CC) -version-info 3:0:0 -o $@ $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
++	$(LIBTOOL) --mode=link $(CC) $(LDFLAGS) -version-info 3:0:0 -o $@ $(OBJ) $(LIBRARY_LIB) -rpath $(DESTDIR)$(libdir)
  
  dl_hpux.lo:	$(top_srcdir)/dlapi/dl_hpux.c \
  			$(top_srcdir)/dlapi/dlfcn.h

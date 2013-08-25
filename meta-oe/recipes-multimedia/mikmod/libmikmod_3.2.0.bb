@@ -6,16 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
 DEPENDS = "alsa-lib texinfo"
 
 SRC_URI = "\
-    ${SOURCEFORGE_MIRROR}/mikmod/libmikmod-${PV}.tar.gz \
+    http://mikmod.shlomifish.org/files/${P}.tar.gz \
     file://m4.patch \
     file://autofoo.patch \
     file://ldflags.patch \
-    file://CVE-2010-2971.patch \
     file://obsolete_automake_macros.patch \
 "
 
-SRC_URI[md5sum] = "9f3c740298260d5f88981fc0d51f6f16"
-SRC_URI[sha256sum] = "891a2b780306e6ef86e381f459e71a085d4e7f56c970a879d3bf341c01bdfc32"
+SRC_URI[md5sum] = "96e9820d72a41fe27ff304071739696c"
+SRC_URI[sha256sum] = "734c8490bbf9b0c587920b92414dcfa3c2267838a0cdf698d5f1fb6bba8f661e"
 
 inherit autotools binconfig lib_package
 
