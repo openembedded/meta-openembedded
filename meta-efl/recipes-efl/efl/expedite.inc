@@ -7,6 +7,9 @@ INC_PR = "r0"
 
 inherit e
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[sdl] = "--enable-opengl-sdl,--disable-opengl-sdl,libsdl"
+
 EXTRA_OECONF = "\
     --x-includes=${STAGING_INCDIR}/X11 \
     --x-libraries=${STAGING_LIBDIR} \
