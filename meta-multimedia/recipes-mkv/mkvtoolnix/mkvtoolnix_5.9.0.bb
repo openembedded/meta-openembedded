@@ -18,6 +18,9 @@ inherit autotools gettext
 RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i386').replace('i686', 'i386') }"
 export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[flac] = "--with-flac,--without-flac,flac"
+
 EXTRA_OECONF = " --with-boost-libdir=${STAGING_LIBDIR} \
 "
 
