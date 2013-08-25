@@ -17,6 +17,13 @@ ALTERNATIVE_${PN}-core = "x-window-manager"
 ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/openbox"
 ALTERNATIVE_PRIORITY[x-window-manager] = "10"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
+PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+PACKAGECONFIG[xrandr] = "--enable-xrandr,--disable-xrandr,libxrandr"
+PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
+PACKAGECONFIG[xcursor] = "--enable-xcursor,--disable-xcursor,libxcursor"
+
 EXTRA_OECONF += "--with-plugins=none"
 
 PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome ${PN}-config"
