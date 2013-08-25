@@ -2,7 +2,7 @@ DESCRIPTION = "Helper lib for keyboard management"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
 
-DEPENDS = "xkbcomp gtk+ iso-codes "
+DEPENDS = "xkbcomp gtk+ iso-codes libxi"
 
 inherit gnome
 
