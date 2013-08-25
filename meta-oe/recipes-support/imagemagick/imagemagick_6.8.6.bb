@@ -20,6 +20,9 @@ inherit autotools binconfig pkgconfig
 # if someone needs xml support then fix it first
 EXTRA_OECONF = "--program-prefix= --without-x --without-perl --disable-openmp --without-xml --disable-opencl"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[jp2] = "--with-jp2,--without-jp2,jasper"
+
 FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/filters \
