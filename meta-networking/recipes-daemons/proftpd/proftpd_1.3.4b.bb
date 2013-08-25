@@ -19,6 +19,9 @@ SRC_URI[sha256sum] = "9f659585cea90fc6af34a0ffae4a90e4ed37abe92dbd9b6c311f95a436
 
 inherit autotools useradd update-rc.d
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses,--disable-curses --disable-ncurses,ncurses"
+
 EXTRA_OECONF = "--disable-cap \
                 --disable-auth-pam \
 "
