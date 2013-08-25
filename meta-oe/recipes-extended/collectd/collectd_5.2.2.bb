@@ -21,6 +21,13 @@ FPLAYOUT ?= "--with-fp-layout=nothing"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp --with-libnetsnmp=no,net-snmp"
+PACKAGECONFIG[libmemcached] = "--with-libmemcached,--without-libmemcached,libmemcached"
+PACKAGECONFIG[iptables] = "--enable-iptables,--disable-iptables,iptables"
+PACKAGECONFIG[postgresql] = "--enable-postgresql,--disable-postgresql,postgresql"
+PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
+PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
+PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
+PACKAGECONFIG[sensors] = "--enable-sensors,--disable-sensors,lmsensors"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
