@@ -1,19 +1,16 @@
 DESCRIPTION = "ImageMagick is an image convertion tools"
 SECTION = "console/utils"
 LICENSE = "ImageMagick"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=944f66dcedc98d5a4e5d964bd3b32e7b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b1bf06a8d02cb00b02dea7d03ef9525f"
 # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw"
 
-PR = "r5"
-
-PATCHSET = "6"
+PATCHSET = "8"
 SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-           file://PerlMagic_MakePatch.patch \
            file://remove.dist-lzip.patch \
 "
-SRC_URI[md5sum] = "bcf07cf0822572fa2b47fa6d506f699a"
-SRC_URI[sha256sum] = "d9347f31d3d35b40009e1bbcf713c5ad252411e05ee621d5a7dae01e47bdbd80"
+SRC_URI[md5sum] = "ea66fbb6fc1354312bc4971c0a0cfb3c"
+SRC_URI[sha256sum] = "eb33e0ba6aeb542b7127ee1c2f62961236428b233e9911aa86e1b66b3342ea1d"
 
 S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
 
@@ -27,8 +24,8 @@ FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/filters \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/coders \
-                ${libdir}/ImageMagick-${PV}/config/ \
-                ${datadir}/ImageMagick-${PV}"
+                ${libdir}/ImageMagick-${PV}/config-Q16 \
+                ${datadir}/ImageMagick-6 "
 
 FILES_${PN}-dev += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
 
