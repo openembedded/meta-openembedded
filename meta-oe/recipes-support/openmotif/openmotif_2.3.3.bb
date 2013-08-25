@@ -15,6 +15,10 @@ SRC_URI[sha256sum] = "c85f5545e218fa0c59a3789192132d472fc5a33e914a221a568eee4fc1
 
 inherit autotools
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
+PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
+
 EXTRA_OECONF = "X_CFLAGS=-I${STAGING_INCDIR} --disable-printing"
 
 PACKAGES += "${PN}-bin"
