@@ -16,6 +16,9 @@ PACKAGECONFIG[pulseaudio] = "--with-pulseaudio=dyn,--with-pulseaudio=no,pulseaud
 PACKAGECONFIG[alsa] = "--with-alsa=dyn,--with-alsa=no,alsa-lib,"
 PACKAGECONFIG[wavpack] = "--with-wavpack=dyn,--with-wavpack=no,wavpack,"
 PACKAGECONFIG[magic] = "--with-magic,--without-magic,file,"
+PACKAGECONFIG[mad] = "--with-mad,--without-mad,libmad,"
+PACKAGECONFIG[id3tag] = "--with-id3tag,--without-id3tag,libid3tag,"
+PACKAGECONFIG[lame] = "--with-lame,--without-lame,lame,"
 
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
