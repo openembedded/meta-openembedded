@@ -19,6 +19,9 @@ PR = "r9"
 
 inherit autotools systemd
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
+
 EXTRA_OECONF = "--disable-man-pages"
 
 FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
