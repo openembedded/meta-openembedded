@@ -12,6 +12,9 @@ SRC_URI[sha256sum] = "81eb44c0453b264a737d32f763a31d5b1776f050a47d5be85fc5e9caf8
 
 inherit autotools pkgconfig gettext
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[idevice] = "--with-idevice,--without-idevice,libimobiledevice libplist"
+
 EXTRA_OECONF = " --with-backend=linux"
 
 do_configure_prepend() {
