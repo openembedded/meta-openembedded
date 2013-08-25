@@ -17,6 +17,12 @@ do_configure_append() {
     cd po ; for PO in *.po ; do MO=`echo $PO | sed s/\\.po//`.gmo ; if ! test -f $MO ; then msgfmt $PO -o $MO ; fi ; done
 }
 
+PACKAGECONFIG ??= "startup-notification dbus"
+PACKAGECONFIG[enchant] = "--enable-enchant,--disable-enchant,enchant"
+PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
+PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap"
+
 # FIXME: maemo builds may want --enable-maemo
 # FIXME: some platforms may want --enable-generic-umpc
 EXTRA_OECONF = " \
