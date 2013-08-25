@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
 
 PR = "r2"
 
-DEPENDS = "jpeg"
+DEPENDS = "jpeg virtual/libx11"
 
 inherit autotools gettext
 
