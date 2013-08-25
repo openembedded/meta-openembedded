@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 PR = "r2"
 
 SECTION = "x11/libs"
-DEPENDS = "gobject-introspection-stub gtk+ gdk-pixbuf-native"
+DEPENDS = "gobject-introspection-stub gtk+ gdk-pixbuf-native libxres"
 
 PACKAGECONFIG ??= "startup-notification"
 PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"

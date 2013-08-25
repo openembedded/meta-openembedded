@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 BPN = "libwnck"
 
 SECTION = "x11/libs"
-DEPENDS = "gobject-introspection-stub gtk+3 gdk-pixbuf-native"
+DEPENDS = "gobject-introspection-stub gtk+3 gdk-pixbuf-native libxres"
 
 PR = "r1"
 
