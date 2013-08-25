@@ -14,6 +14,9 @@ SRC_URI[archive.sha256sum] = "8919e725aadd785380350c8dec7427d82cf33164bc9a9a549d
 
 GNOME_COMPRESS_TYPE = "xz"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[gdk-pixbuf] = "--with-gdk-pixbuf,--without-gdk-pixbuf,gdk-pixbuf"
+
 EXTRA_OECONF = "\
     --without-python \
     --without-gnome-vfs \
