@@ -11,6 +11,9 @@ SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[consolekit] = "--enable-consolekit,--disable-consolekit,consolekit"
+
 EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc ${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-pam', d)}"
 
 PR = "r4"
