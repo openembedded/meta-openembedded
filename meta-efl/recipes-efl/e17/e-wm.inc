@@ -7,6 +7,9 @@ SRCNAME = "e"
 inherit e update-alternatives gettext
 S = "${WORKDIR}/${SRCNAME}"
 
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
+
 EXTRA_OECONF = "\
     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
     --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
