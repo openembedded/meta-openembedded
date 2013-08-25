@@ -14,6 +14,10 @@ SRC_URI = "http://xchat.org/files/source/2.8/xchat-${PV}.tar.bz2 \
 
 inherit autotools gettext
 
+PACKAGECONFIG ??= "dbus"
+PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
+PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl"
+
 EXTRA_OECONF = "\
     --disable-perl \
     --disable-python \
