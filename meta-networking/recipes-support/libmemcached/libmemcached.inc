@@ -7,4 +7,7 @@ SRC_URI = "http://launchpad.net/libmemcached/1.0/${PV}/+download/libmemcached-${
 
 TARGET_LDFLAGS += "-luuid"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[sasl] = "--enable-sasl,--disable-sasl,cyrus-sasl"
+
 inherit autotools gettext pkgconfig
