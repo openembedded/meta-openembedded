@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.abiword.org"
 SECTION = "x11/office"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
-DEPENDS     = "perl-native wv libgsf libglade libfribidi jpeg libpng libxml2 \
-               librsvg loudmouth libwmf-native gtkmathview asio"
+DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
+               librsvg libwmf-native gtkmathview asio"
 RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 RCONFLICTS_${PN} = "${PN}-embedded"
@@ -31,12 +31,17 @@ inherit autotools pkgconfig
 
 PARALLEL_MAKE = ""
 
+PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp collab-backend-service"
+PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
+PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth gtk+"
+PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
+PACKAGECONFIG[collab-backend-service] = "--enable-collab-backend-service,--disable-collab-backend-service,libgsf libxml2 libsoup-2.4 gnutls"
+PACKAGECONFIG[collab-backend-telepathy] = "--enable-collab-backend-telepathy,--disable-collab-backend-telepathy,libgsf libxml2 telepathy-glib telepathy-mission-control"
+PACKAGECONFIG[collab-backend-sugar] = "--enable-collab-backend-sugar,--disable-collab-backend-sugar,libgsf libxml2 dbus-glib"
+
 EXTRA_OECONF = " --disable-static  \
                  --enable-plugins \
                  --without-gnomevfs \
-                 --enable-collab-backend-xmpp \
-                 --enable-collab-backend-tcp \
-                 --enable-collab-backend-service \
                  --with-libwmf-config=${STAGING_DIR} \
 "
 
