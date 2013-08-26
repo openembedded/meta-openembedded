@@ -17,8 +17,8 @@ SRC_URI = "https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
     file://no-werror.patch \
     file://fix-parallel-build.patch"
 
-SRC_URI[md5sum] = "b7112b3deffef8fe25aac7810cc419a9"
-SRC_URI[sha256sum] = "888dda6227265c396a686624f971c51693c2bba84f24c634536234c8dca7b465"
+SRC_URI[md5sum] = "6694a6a5baa4a23fba892b8ad23f3959"
+SRC_URI[sha256sum] = "dcaf8bcdd146006e7c480d4249e014e38eb2ae3e4d2d40f90ec454312cc7e4d1"
 
 S = "${WORKDIR}/acpica-unix2-${PV}"
 
