@@ -18,6 +18,9 @@ SRC_URI[archive.sha256sum] = "0eafd1be5516a41ebc0f0c3acff0b0763da105a4178b5eee0f
 
 S = "${WORKDIR}/PackageKit-${PV}"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[service-packs] = "--enable-service-packs,--disable-service-packs,libarchive"
+
 EXTRA_OECONF = "--with-security-framework=dummy \
                 --with-default-backend=opkg \
                 --enable-opkg \
