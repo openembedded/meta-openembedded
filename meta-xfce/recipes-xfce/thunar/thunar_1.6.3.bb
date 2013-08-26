@@ -12,6 +12,9 @@ SRC_URI = "http://archive.xfce.org/src/xfce/${PN}/${@'${PV}'[0:3]}/Thunar-${PV}.
 
 S = "${WORKDIR}/Thunar-${PV}/"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
+
 FILES_${PN} += "${libdir}/thunarx-2/* \
                 ${libdir}/xfce4/panel/plugins/* \
                 ${libdir}/Thunar/[Tt]hunar* \
