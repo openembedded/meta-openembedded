@@ -17,7 +17,8 @@ PR="r1"
 
 SRC_URI="https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
     file://cross-compile.patch \
-    file://no-werror.patch"
+    file://no-werror.patch \
+    file://fix-parallel-build.patch"
 
 SRC_URI[md5sum] = "b7112b3deffef8fe25aac7810cc419a9"
 SRC_URI[sha256sum] = "888dda6227265c396a686624f971c51693c2bba84f24c634536234c8dca7b465"

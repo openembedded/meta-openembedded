@@ -1,0 +1,80 @@
+diff --git a/generate/unix/iasl/Makefile b/generate/unix/iasl/Makefile
+index e9520ed..1b73d7a 100644
+--- a/generate/unix/iasl/Makefile
++++ b/generate/unix/iasl/Makefile
+@@ -212,13 +212,10 @@ INTERMEDIATES = \
+ MISC = \
+ 	$(OBJDIR)/aslcompilerparse.h\
+ 	$(OBJDIR)/aslcompiler.y.h\
+-	$(OBJDIR)/aslcompilerparse.output\
+ 	$(OBJDIR)/dtparserparse.h\
+ 	$(OBJDIR)/dtparser.y.h\
+-	$(OBJDIR)/dtparserparse.output\
+ 	$(OBJDIR)/prparserparse.h\
+-	$(OBJDIR)/prparser.y.h\
+-	$(OBJDIR)/prparserparse.output
++	$(OBJDIR)/prparser.y.h
+ 
+ #
+ # Flags specific to iASL compiler
+@@ -240,21 +237,29 @@ include ../Makefile.rules
+ $(OBJDIR)/aslcompilerlex.c :   $(ASL_COMPILER)/aslcompiler.l $(ASL_COMPILER)/aslsupport.l
+ 	$(LEX) $(LFLAGS) -PAslCompiler -o$@ $(ASL_COMPILER)/aslcompiler.l
+ 
+-$(OBJDIR)/aslcompilerparse.c $(OBJDIR)/aslcompilerparse.h : $(ASL_COMPILER)/aslcompiler.y
++$(OBJDIR)/aslcompilerparse.c : $(ASL_COMPILER)/aslcompiler.y
+ 	$(YACC) $(YFLAGS) -pAslCompiler -o$@ $?
+ 
+ $(OBJDIR)/dtparserlex.c :      $(ASL_COMPILER)/dtparser.l
+ 	$(LEX) $(LFLAGS) -PDtParser -o$@ $?
+ 
+-$(OBJDIR)/dtparserparse.c $(OBJDIR)/dtparserparse.h : $(ASL_COMPILER)/dtparser.y
++$(OBJDIR)/dtparserparse.c : $(ASL_COMPILER)/dtparser.y
+ 	$(YACC) $(YFLAGS) -pDtParser -o$@ $?
+ 
+ $(OBJDIR)/prparserlex.c :      $(ASL_COMPILER)/prparser.l
+ 	$(LEX) $(LFLAGS) -PPrParser -o$@ $?
+ 
+-$(OBJDIR)/prparserparse.c $(OBJDIR)/prparserparse.h : $(ASL_COMPILER)/prparser.y
++$(OBJDIR)/prparserparse.c : $(ASL_COMPILER)/prparser.y
+ 	$(YACC) $(YFLAGS) -pPrParser -o$@ $?
+ 
++$(OBJDIR)/aslcompilerparse.h : $(OBJDIR)/aslcompilerparse.c
++	touch $@
++
++$(OBJDIR)/dtparserparse.h : $(OBJDIR)/dtparserparse.c
++	touch $@
++
++$(OBJDIR)/prparserparse.h:  $(OBJDIR)/prparserparse.c
++	touch $@
+ 
+ #
+ # Rename the headers produced by bison/yacc
+@@ -279,19 +284,21 @@ $(OBJDIR)/prparser.y.h: $(OBJDIR)/prparserparse.h
+ # by the utilities above and they are not necessarily ANSI C, etc.
+ #
+ $(OBJDIR)/aslcompilerlex.o :   $(OBJDIR)/aslcompilerlex.c
+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
+ 
+ $(OBJDIR)/aslcompilerparse.o : $(OBJDIR)/aslcompilerparse.c
+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
+ 
+ $(OBJDIR)/dtparserlex.o :      $(OBJDIR)/dtparserlex.c
+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
+ 
+ $(OBJDIR)/dtparserparse.o :    $(OBJDIR)/dtparserparse.c
+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
+ 
+ $(OBJDIR)/prparserlex.o :      $(OBJDIR)/prparserlex.c
+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
+ 
+ $(OBJDIR)/prparserparse.o :    $(OBJDIR)/prparserparse.c
+-	$(CC) -c $(CFLAGS) -Wall -o$@ $?
++	$(CC) -c $(CFLAGS) -Wall -o$@ $<
++
++$(OBJECTS): $(HEADERS)
