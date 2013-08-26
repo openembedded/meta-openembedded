@@ -9,5 +9,8 @@ SRCREV = "${EFL_SRCREV}"
 
 inherit efl
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[ncurses] = "--enable-ncurses,--disable-ncurses,ncurses"
+
 SRC_URI = "${E_SVN}/OLD;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
