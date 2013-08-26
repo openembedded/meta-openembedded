@@ -9,4 +9,7 @@ inherit xfce
 SRC_URI[md5sum] = "54a84ce63046c279fc3ec3f436d2f1b0"
 SRC_URI[sha256sum] = "49a6e0be513e307e896f7e5929825babec9bbcd4b2e73552f9d27647a4db797d"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+
 FILES_${PN} += "${datadir}/backgrounds"
