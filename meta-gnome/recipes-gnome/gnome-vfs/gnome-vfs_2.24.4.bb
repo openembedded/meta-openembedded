@@ -31,6 +31,7 @@ SRC_URI[archive.sha256sum] = "62de64b5b804eb04104ff98fcd6a8b7276d510a49fbd9c0feb
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
 PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
+PACKAGECONFIG[fam] = "--enable-fam,--disable-fam,gamin"
 
 EXTRA_OECONF = " --disable-hal \
                  --disable-openssl \
