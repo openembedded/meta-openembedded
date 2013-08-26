@@ -20,6 +20,9 @@ SRC_URI += "file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
 SRC_URI[md5sum] = "3bf42281b64b10b2691008cd693f7dbd"
 SRC_URI[sha256sum] = "4a4f1e79a58b524f3a6dd030b6fc687671b35566f847e6f516c6f84211191698"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
+
 FILES_${PN} += "${libdir}/xfce4"
 
 do_install_prepend() {
