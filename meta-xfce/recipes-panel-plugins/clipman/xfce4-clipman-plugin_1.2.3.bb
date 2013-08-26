@@ -10,3 +10,6 @@ DEPENDS += "xfconf xproto libxtst"
 
 SRC_URI[md5sum] = "61f3be97efa379cb358980c94e14692a"
 SRC_URI[sha256sum] = "4424447067cb2c3972c375330d2e1d19f12e59c41bd03e111c2e6e9e174a5067"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[unique] = "--enable-unique,--disable-unique,libunique"
