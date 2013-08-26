@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace
 
 S = "${WORKDIR}/release_${PV}"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis"
+
 inherit autotools pkgconfig
 
 do_install_append() {
