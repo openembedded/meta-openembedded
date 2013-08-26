@@ -9,4 +9,7 @@ inherit xfce
 SRC_URI[md5sum] = "250af757ea629c7c27f554d17119080c"
 SRC_URI[sha256sum] = "ff0887c862b578580d05f4cd7db66081382ff143f9cc7ea3c9ba58cf5d02bceb"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+
 RDEPENDS_${PN} = "eject"
