@@ -1,27 +1,25 @@
 PR = "${INC_PR}.0"
 
-export INST = "${D}"
-
 do_install() {
     oe_runmake install
 
     # the crosscompiler is packaged by klcc-cross
     # remove klcc
-    rm ${D}${base_bindir}/klcc
+    rm ${D}${bindir}/klcc
     # remove now empty dir
-    rmdir ${D}${base_bindir}
+    rmdir ${D}${bindir}
 
-    install -d ${D}${base_libdir}
-    install -m 755 usr/klibc/klibc-*.so ${D}${base_libdir}
-    (cd  ${D}${base_libdir}; ln -s klibc-*.so klibc.so)
+    install -d ${D}${libdir}
+    install -m 755 usr/klibc/klibc-*.so ${D}${libdir}
+    (cd  ${D}${libdir}; ln -s klibc-*.so klibc.so)
 }
 
 PACKAGES = "libklibc libklibc-staticdev libklibc-dev"
-FILES_libklibc = "${base_libdir}/klibc-*.so"
-FILES_libklibc-staticdev = "${base_libdir}/klibc/lib/libc.a"
-FILES_libklibc-dev = "${base_libdir}/klibc.so \
-                      ${base_libdir}/klibc/lib/* \
-                      ${base_libdir}/klibc/include/* \
+FILES_libklibc = "${libdir}/klibc-*.so"
+FILES_libklibc-staticdev = "${libdir}/klibc/lib/libc.a"
+FILES_libklibc-dev = "${libdir}/klibc.so \
+                      ${libdir}/klibc/lib/* \
+                      ${libdir}/klibc/include/* \
 "
 require klibc.inc
 SUMMARY = "klibc, a small C library for use with initramfs"

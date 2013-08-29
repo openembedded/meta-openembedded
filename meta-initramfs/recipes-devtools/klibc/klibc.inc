@@ -37,7 +37,6 @@ SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
 "
 
 SRC_URI += "file://klibc-linux-libc-dev.patch \
-            file://prefix.patch \
             file://staging.patch \
 "
 
@@ -46,6 +45,9 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'CROSS_COMPILE=${TARGET_PREFIX}' \
                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
+                'prefix=${exec_prefix}' \
+                'INSTALLROOT=${D}' \
+                'SHLIBDIR=${libdir}' \
 "
 
 do_configure () {
