@@ -28,8 +28,8 @@ S = "${WORKDIR}/kexec-tools-${PV}"
 
 EXTRA_OECONF += "--without-zlib --without-lzma --without-xen"
 
-CFLAGS += "-I${STAGING_DIR_HOST}${base_libdir}/klibc/include -I${STAGING_DIR_HOST}${base_libdir}/klibc/include/bits32"
-CFLAGS_x86-64 += "-I${STAGING_DIR_HOST}${base_libdir}/klibc/include -I${STAGING_DIR_HOST}${base_libdir}/klibc/include/bits64"
+CFLAGS += "-I${STAGING_DIR_HOST}${libdir}/klibc/include -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits32"
+CFLAGS_x86-64 += "-I${STAGING_DIR_HOST}${libdir}/klibc/include -I${STAGING_DIR_HOST}${libdir}/klibc/include/bits64"
 
 PACKAGES =+ "kexec-klibc kdump-klibc"
 
