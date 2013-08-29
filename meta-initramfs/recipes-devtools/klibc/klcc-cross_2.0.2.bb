@@ -3,10 +3,7 @@ PR = "${INC_PR}.0"
 require klibc.inc
 SUMMARY = "The klcc crosscompiler for klibc"
 
-export KLCC_INST = "${STAGING_DIR_TARGET}/lib/klibc"
-
-SRC_URI += "file://klcc_prefix.patch \
-            file://use-env-for-perl.patch"
+SRC_URI += "file://use-env-for-perl.patch"
 
 DEPENDS = "klibc"
 
@@ -19,10 +16,10 @@ do_configure () {
 }
 
 do_compile() {
-    oe_runmake klcc
+    oe_runmake 'INSTALLDIR=${STAGING_DIR_TARGET}${target_libdir}/klibc' klcc
 }
 
 do_install() {
-    install -d ${D}${base_bindir}
-    install -m 0755 klcc/klcc ${D}${base_bindir}/${TARGET_PREFIX}klcc
+    install -d ${D}${bindir}
+    install -m 0755 klcc/klcc ${D}${bindir}/${TARGET_PREFIX}klcc
 }
