@@ -1,0 +1,29 @@
+Upstream-Status:Inappropriate [embedded specific]
+
+fix the below error:
+configure: error: cannot run test program while cross compiling
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+
+--- a/m4/sf.m4old	2013-08-30 04:08:18.768409680 -0500
++++ b/m4/sf.m4	2013-08-30 04:09:24.591367890 -0500
+@@ -135,19 +135,6 @@
+         exit 1
+     fi
+     AC_MSG_CHECKING([for libpcap version >= $1])
+-    AC_RUN_IFELSE(
+-    [AC_LANG_PROGRAM(
+-    [[
+-    #include <pcap.h>
+-    #include <string.h>
+-    extern char pcap_version[];
+-    ]],
+-    [[
+-        if (strcmp(pcap_version, $1) < 0)
+-            return 1;
+-    ]])],
+-    [libpcap_version_1x="yes"],
+-    [libpcap_version_1x="no"])
+     if test "x$libpcap_version_1x" = "xno"; then
+         AC_MSG_RESULT(no)
+         echo
