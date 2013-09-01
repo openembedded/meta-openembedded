@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
 DEPENDS = "util-linux lvm2 popt libgcrypt"
 
 SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
-SRC_URI[md5sum] = "f374d11e3b0e7ca0f805756fd02e34ff"
-SRC_URI[sha256sum] = "baf36e663c03eb6440482d91c486d61ed47ce5c9268ad04c18ca09082755149c"
+SRC_URI[md5sum] = "cd834da49fbe92dd66df02cc5c61280f"
+SRC_URI[sha256sum] = "15723f0198303d4bcb99d480b7a773918e2d319f0348457988c063bdd03e109a"
 
 inherit autotools gettext
 
@@ -29,3 +29,5 @@ RRECOMMENDS_${PN} = "kernel-module-aes-generic \
                      kernel-module-cbc \
                      kernel-module-sha256-generic \
 "
+
+EXTRA_OECONF = "--enable-static"
