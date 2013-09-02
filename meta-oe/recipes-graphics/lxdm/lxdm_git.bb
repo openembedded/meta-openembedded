@@ -3,7 +3,7 @@ HOMEPAGE = "http://blog.lxde.org/?p=531"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = " \
-    git://lxde.git.sourceforge.net/gitroot/lxde/${BPN};protocol=git;branch=master \
+    git://lxde.git.sourceforge.net/gitroot/lxde/${BPN};branch=master \
     file://lxdm.conf \
     file://lxdm-pam \
     file://lxdm-pam-debug \

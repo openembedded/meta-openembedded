@@ -12,7 +12,7 @@ inherit autotools gettext
 # libv4l was absorbed into this, let OE know that
 PROVIDES = "libv4l"
 
-SRC_URI = "git://linuxtv.org/v4l-utils.git;protocol=git \
+SRC_URI = "git://linuxtv.org/v4l-utils.git \
            file://openat.patch \
 "
 # 54f16ca8183dd8ae8bf4ccc07949795aff0301f5 -> v0.8.8 tag

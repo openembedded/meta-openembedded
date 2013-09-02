@@ -11,7 +11,7 @@ PR = "r0"
 
 inherit klibc
 
-SRC_URI = "git://git.infradead.org/mtd-utils.git;protocol=git;tag=ca39eb1d98e736109c64ff9c1aa2a6ecca222d8f \
+SRC_URI = "git://git.infradead.org/mtd-utils.git;tag=ca39eb1d98e736109c64ff9c1aa2a6ecca222d8f \
             file://Makefile.patch \
             file://common.mk.patch \
             file://libubi.c.patch \

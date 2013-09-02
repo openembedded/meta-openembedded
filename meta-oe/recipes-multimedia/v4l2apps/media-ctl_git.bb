@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
 
 DEPENDS = "linux-libc-headers"
 
-SRC_URI = "git://git.ideasonboard.org/media-ctl.git;protocol=git"
+SRC_URI = "git://git.ideasonboard.org/media-ctl.git"
 SRCREV = "a6ec4a37028952ffd6e62eb52648cf66248eb519"
 
 PV = "0.0.1"

@@ -9,7 +9,7 @@ PE = "2"
 PV = "1.0.0+gitr${SRCPV}"
 PR = "${INC_PR}.4"
 
-SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;protocol=git;branch=master \
+SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;branch=master \
            file://0001-glamo-kms-driver-drop-unused-xf86_config.patch \
            file://0001-fix-build-with-KMS-disabled.patch \
            file://0003-glamo-driver-adapt-to-xserver-0.13-video-API.patch \

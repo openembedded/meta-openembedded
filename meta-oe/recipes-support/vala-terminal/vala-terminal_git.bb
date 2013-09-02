@@ -10,7 +10,7 @@ PR = "r1"
 
 inherit autotools perlnative vala
 
-SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;protocol=git;branch=master"
+SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;branch=master"
 S = "${WORKDIR}/git"
 
 RDEPENDS_${PN} = "ttf-liberation-mono"

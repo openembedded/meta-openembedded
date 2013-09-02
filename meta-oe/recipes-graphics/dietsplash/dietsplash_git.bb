@@ -8,7 +8,7 @@ PV = "0.3"
 PR = "r1"
 
 SRCREV = "3098e4ad8aa07ad90b2a4413c0abeb6dcd8f1233"
-SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git;protocol=git"
+SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git"
 
 inherit autotools
 

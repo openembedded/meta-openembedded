@@ -70,7 +70,7 @@ SRCREV = "a7b3a9339106aaba72195b693dfeaa98f194e0d5"
 GIT_REPO = "gnuradio.git"
 GIT_BRANCH = "master"
 
-SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH};protocol=git \
+SRC_URI = "git://git.gnuradio.org/${GIT_REPO};branch=${GIT_BRANCH} \
            file://0001-gr-trellis-Kill-docs-hard.patch \
 "
 

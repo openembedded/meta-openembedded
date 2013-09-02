@@ -8,7 +8,7 @@ DEPENDS = "libxxf86misc libsndfile1 libxtst glib-2.0 polkit gtk+ gconf dbus-glib
 
 inherit gnome
 
-SRC_URI = "git://git.gnome.org/gnome-settings-daemon;protocol=git;branch=gnome-2-32"
+SRC_URI = "git://git.gnome.org/gnome-settings-daemon;branch=gnome-2-32"
 SRCREV = "0160f6725cfb872e017f3958f108792c3b882872"
 
 S = "${WORKDIR}/git"

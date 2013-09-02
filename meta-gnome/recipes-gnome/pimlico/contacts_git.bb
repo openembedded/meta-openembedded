@@ -11,7 +11,7 @@ PR = "r4"
 
 S = "${WORKDIR}/git"
 
-SRC_URI =+ "git://git.gnome.org/${BPN};protocol=git \
+SRC_URI =+ "git://git.gnome.org/${BPN} \
         file://make-382.patch"
 
 S = "${WORKDIR}/git"

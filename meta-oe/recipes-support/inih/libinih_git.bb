@@ -9,7 +9,7 @@ PR = "r3"
 
 # The github repository provides a cmake and pkg-config integration
 SRCREV = "7a43a3655ceffa9f0f7fd68262d8d478c6d0d0af"
-SRC_URI = "git://github.com/OSSystems/inih.git;protocol=git"
+SRC_URI = "git://github.com/OSSystems/inih.git"
 
 S = "${WORKDIR}/git"
 

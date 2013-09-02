@@ -14,5 +14,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://src/main.c;beginline=1;endline=25;md5=3fe64e27e61b289b77383a54a982cbdd \
                     file://gypsy/gypsy-time.h;beginline=1;endline=24;md5=06432ea19a7b6607428d04d9dadc37fd"
 
-SRC_URI = "git://anongit.freedesktop.org/gypsy;protocol=git \
+SRC_URI = "git://anongit.freedesktop.org/gypsy \
            file://fixups.patch"

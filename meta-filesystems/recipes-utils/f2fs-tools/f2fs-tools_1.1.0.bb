@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=15667d9b3cb737b57471c148b7c50734"
 DEPENDS = "util-linux"
 
 SRCREV = "da59f6146c37e727bb83ae4922ca56d42958e61c"
-SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git;protocol=git"
+SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git"
 S = "${WORKDIR}/git"
 
 inherit autotools

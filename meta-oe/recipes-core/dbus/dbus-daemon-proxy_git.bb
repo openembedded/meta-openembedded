@@ -8,7 +8,7 @@ PR = "r1"
 
 ASNEEDED_pn-dbus-daemon-proxy = ""
 
-SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy;protocol=git"
+SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy"
 S = "${WORKDIR}/git"
 
 do_compile() {

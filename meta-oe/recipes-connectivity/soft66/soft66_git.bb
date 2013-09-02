@@ -9,7 +9,7 @@ PV = "0.1.3+gitr${SRCPV}"
 PR = "r1"
 
 SRCREV = "a1dab25e73896c90c98227ac8055f227b830d512"
-SRC_URI = "git://home.horsten.com/soft66;protocol=git \
+SRC_URI = "git://home.horsten.com/soft66 \
 file://fix-ar.patch"
 
 S = "${WORKDIR}/git"

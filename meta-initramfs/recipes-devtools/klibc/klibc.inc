@@ -27,7 +27,7 @@ KLIBC_ARCH_powerpc64 = 'ppc64'
 export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
 
 SRCREV = "f05ff116bb9edbbb81d82fa47b78e630ce878470"
-SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git;protocol=git"
+SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
 
 SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
                                  file://armv4-fix-v4bx.patch \

@@ -9,7 +9,7 @@ SECTION = "base"
 
 SRCREV = "900d203aa9e41288545368ea40da0bee89f7907f"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f12611e65e064515ce264249b2bdea98"
-SRC_URI = "git://git.concurrencykit.org/ck.git;protocol=git \
+SRC_URI = "git://git.concurrencykit.org/ck.git \
            file://cross.patch \
 "
 
