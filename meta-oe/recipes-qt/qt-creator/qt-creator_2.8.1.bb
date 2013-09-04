@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://LGPL_EXCEPTION.TXT;md5=eb6c371255e1262c55ae9b652a90b5
                     file://LICENSE.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
 SECTION = "qt/app"
 
-SRC_URI = "http://download.qt-project.org/official_releases/qtcreator/2.8/${PV}/${BP}-src.tar.gz"
-SRC_URI[md5sum] = "5aacdad4491b7dda9758a81384d8da79"
-SRC_URI[sha256sum] = "7ac5d9a36c2f561f74d77378d4eae95a78c7752b323e1df924d6e895e99f45d2"
+SRC_URI = "http://download.qt-project.org/official_releases/qtcreator/2.8/${PV}/${BP}-src.tar.gz \
+           file://fix.missing.cpuid.h.patch \
+           file://qbs_transformer_product.patch"
+SRC_URI[md5sum] = "79ef6c6ece0c00035ef744c9d6e3bd3b"
+SRC_URI[sha256sum] = "d5ae007a297a4288d0e95fd605edbfb8aee80f6788c7a6cfb9cb297f50c364b9"
 
 S = "${WORKDIR}/${BP}-src"
 

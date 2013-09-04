@@ -1,0 +1,93 @@
+From c1c7cb2a5e6220a74f374a301e648479029f8a0e Mon Sep 17 00:00:00 2001
+From: Joerg Bornemann <joerg.bornemann@digia.com>
+Date: Mon, 12 Aug 2013 09:27:47 +0200
+Subject: [PATCH] introduce Transformer::product()
+
+Simplifies the calling code.
+Remove pointless nullpointer check from jscommandexecutor.
+
+Upstream-Status: Backport
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+
+Change-Id: I867181d2b750f32f04376ce860f5dee6555d3e33
+Reviewed-by: Christian Kandeler <christian.kandeler@digia.com>
+---
+ src/lib/buildgraph/jscommandexecutor.cpp      | 5 +----
+ src/lib/buildgraph/processcommandexecutor.cpp | 6 ++----
+ src/lib/buildgraph/transformer.cpp            | 7 +++++++
+ src/lib/buildgraph/transformer.h              | 1 +
+ 4 files changed, 11 insertions(+), 8 deletions(-)
+
+diff --git a/src/shared/qbs/src/lib/buildgraph/jscommandexecutor.cpp b/src/shared/qbs/src/lib/buildgraph/jscommandexecutor.cpp
+index b7f5b1d..24ffb7e 100644
+--- a/src/shared/qbs/src/lib/buildgraph/jscommandexecutor.cpp
++++ b/src/shared/qbs/src/lib/buildgraph/jscommandexecutor.cpp
+@@ -79,10 +79,7 @@ public slots:
+         m_result.errorMessage.clear();
+         ScriptEngine * const scriptEngine = provideScriptEngine();
+         QScriptValue scope = scriptEngine->newObject();
+-        Artifact *someOutputArtifact = *transformer->outputs.begin();
+-        if (!someOutputArtifact->product.isNull())
+-            setupScriptEngineForProduct(scriptEngine, someOutputArtifact->product,
+-                                        transformer->rule, scope);
++        setupScriptEngineForProduct(scriptEngine, transformer->product(), transformer->rule, scope);
+         transformer->setupInputs(scriptEngine, scope);
+         transformer->setupOutputs(scriptEngine, scope);
+ 
+diff --git a/src/shared/qbs/src/lib/buildgraph/processcommandexecutor.cpp b/src/shared/qbs/src/lib/buildgraph/processcommandexecutor.cpp
+index 78f77c3..d123fe8 100644
+--- a/src/shared/qbs/src/lib/buildgraph/processcommandexecutor.cpp
++++ b/src/shared/qbs/src/lib/buildgraph/processcommandexecutor.cpp
+@@ -276,8 +276,7 @@ void ProcessCommandExecutor::removeResponseFile()
+ 
+ QString ProcessCommandExecutor::findProcessCommandInPath()
+ {
+-    Artifact * const outputNode = *transformer()->outputs.begin();
+-    const ResolvedProductPtr product = outputNode->product;
++    const ResolvedProductPtr product = transformer()->product();
+     const ProcessCommand * const cmd = processCommand();
+     QString fullProgramPath = product->executablePathCache.value(cmd->program());
+     if (!fullProgramPath.isEmpty())
+@@ -309,8 +308,7 @@ QString ProcessCommandExecutor::findProcessCommandInPath()
+ 
+ QString ProcessCommandExecutor::findProcessCommandBySuffix()
+ {
+-    Artifact * const outputNode = *transformer()->outputs.begin();
+-    const ResolvedProductPtr product = outputNode->product;
++    const ResolvedProductPtr product = transformer()->product();
+     const ProcessCommand * const cmd = processCommand();
+     QString fullProgramPath = product->executablePathCache.value(cmd->program());
+     if (!fullProgramPath.isEmpty())
+diff --git a/src/shared/qbs/src/lib/buildgraph/transformer.cpp b/src/shared/qbs/src/lib/buildgraph/transformer.cpp
+index ce6baa7..363e08d 100644
+--- a/src/shared/qbs/src/lib/buildgraph/transformer.cpp
++++ b/src/shared/qbs/src/lib/buildgraph/transformer.cpp
+@@ -85,6 +85,13 @@ QScriptValue Transformer::translateInOutputs(QScriptEngine *scriptEngine, const
+     return jsTagFiles;
+ }
+ 
++ResolvedProductPtr Transformer::product() const
++{
++    if (outputs.isEmpty())
++        return ResolvedProductPtr();
++    return (*outputs.begin())->product;
++}
++
+ void Transformer::setupInputs(QScriptEngine *scriptEngine, QScriptValue targetScriptValue)
+ {
+     const QString &defaultModuleName = rule->module->name;
+diff --git a/src/shared/qbs/src/lib/buildgraph/transformer.h b/src/shared/qbs/src/lib/buildgraph/transformer.h
+index c9c88b6..d26c391 100644
+--- a/src/shared/qbs/src/lib/buildgraph/transformer.h
++++ b/src/shared/qbs/src/lib/buildgraph/transformer.h
+@@ -65,6 +65,7 @@ public:
+                                            const ArtifactList &artifacts,
+                                            const QString &defaultModuleName);
+ 
++    ResolvedProductPtr product() const;
+     void setupInputs(QScriptEngine *scriptEngine, QScriptValue targetScriptValue);
+     void setupOutputs(QScriptEngine *scriptEngine, QScriptValue targetScriptValue);
+     void createCommands(const PrepareScriptConstPtr &script,
+-- 
+1.8.4
+
