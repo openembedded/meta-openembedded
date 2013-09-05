@@ -8,6 +8,7 @@ DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
 
 DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
             virtual/libgl xineramaproto libpciaccess"
+RDEPENDS_${PN} += "xserver-xorg-module-exa"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
