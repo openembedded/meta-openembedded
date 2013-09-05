@@ -61,7 +61,7 @@ CONFFILES_${PN} += "/var/nostromo/conf/mimes ${sysconfdir}/nhttpd.conf"
 pkg_postinst_${PN} () {
     if [ -z "$D" ]; then
         if [ -e /sys/fs/cgroup/systemd ]; then
-            systemd-tmpfiles --create
+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/nostromo.conf
         elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
             ${sysconfdir}/init.d/populate-volatile.sh update
         fi
