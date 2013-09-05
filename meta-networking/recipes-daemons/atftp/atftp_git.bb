@@ -8,7 +8,7 @@ PR = "r3"
 
 SRCREV = "be3291a18c069ae23a124ffdc56d64a5ff0bbec7"
 
-SRC_URI = "git://atftp.git.sourceforge.net/gitroot/atftp/atftp \
+SRC_URI = "git://git.code.sf.net/p/atftp/code \
            file://atftpd-0.7_circumvent_tftp_size_restrictions.patch \
            file://atftpd-0.7_unprotected_assignments_crash.patch \
            file://atftpd.init \
