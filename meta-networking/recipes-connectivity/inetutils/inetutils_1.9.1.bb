@@ -70,6 +70,8 @@ do_install_append () {
     cp ${WORKDIR}/telnet.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/telnet
     cp ${WORKDIR}/tftpd.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/tftpd
     rm -rf ${D}${libexecdir}/
+    # remove usr/lib if empty
+    rmdir ${D}${libdir}
 }
 
 PACKAGES =+ "${PN}-ping ${PN}-ping6 ${PN}-hostname ${PN}-ifconfig \
