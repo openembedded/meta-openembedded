@@ -6,7 +6,7 @@ Requires=tracker-store.service
 [Service]
 Environment=HOME=/home/root
 EnvironmentFile=-/tmp/tracker.env
-ExecStart=/usr/libexec/tracker-miner-fs
+ExecStart=@LIBEXECDIR@/tracker-miner-fs
 
 [Install]
 WantedBy=multi-user.target

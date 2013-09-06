@@ -6,7 +6,7 @@ BindTo=tracker-dbus.service
 
 [Service]
 EnvironmentFile=-/tmp/tracker.env
-ExecStart=/usr/libexec/tracker-store
+ExecStart=@LIBEXECDIR@/tracker-store
 
 [Install]
 WantedBy=multi-user.target

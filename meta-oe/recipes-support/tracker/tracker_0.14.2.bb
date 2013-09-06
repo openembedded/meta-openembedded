@@ -32,14 +32,17 @@ EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
 LEAD_SONAME = "libtrackerclient.so.0"
 
 do_install_append() {
-   cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
-#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
-#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
+    cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
+#   install -d ${D}/${sysconfdir}/X11/Xsession.d/
+#   install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
+           -e 's,@BASE_BINDIR@,${base_bindir},g' \
+               ${D}${systemd_unitdir}/system/*.service
 }
 
 PACKAGES =+ "${PN}-tests ${PN}-vala ${PN}-nautilus-extension"

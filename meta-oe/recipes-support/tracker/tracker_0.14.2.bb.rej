@@ -1,0 +1,36 @@
+--- meta-oe/recipes-support/tracker/tracker_0.14.2.bb
++++ meta-oe/recipes-support/tracker/tracker_0.14.2.bb
+@@ -13,7 +13,7 @@
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
+            file://0005-Fix-missing-gobject-introspection-checks.patch \
+            file://enable-sqlite-crosscompile.patch \
+-	   file://fix-removable-media-detection.patch \
++           file://fix-removable-media-detection.patch \
+            file://90tracker \
+            file://tracker-store.service \
+            file://tracker-miner-fs.service \
+@@ -32,14 +32,17 @@
+ LEAD_SONAME = "libtrackerclient.so.0"
+ 
+ do_install_append() {
+-   cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
+-#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
+-#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
++	cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
++	#  install -d ${D}/${sysconfdir}/X11/Xsession.d/
++	#  install -m 0755 ${WORKDIR}/90tracker  ${D}/${sysconfdir}/X11/Xsession.d/
+ 
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/tracker-store.service ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/tracker-miner-fs.service ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/tracker-dbus.service ${D}${systemd_unitdir}/system
++	sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
++		-e 's,@BASE_BINDIR@,${base_bindir},g' \
++		${D}${systemd_unitdir}/system/*.service
+ }
+ 
+ PACKAGES =+ "${PN}-tests ${PN}-vala ${PN}-nautilus-extension"
