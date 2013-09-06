@@ -22,5 +22,5 @@ do_install() {
     oe_runmake install DESTDIR=${D}
 }
 
-FILES_${PN} += "${libdir}"
-FILES_${PN}-dbg += "${libdir}/uml/.debug"
+FILES_${PN} += "${exec_prefix}${nonarch_base_libdir}"
+FILES_${PN}-dbg += "${exec_prefix}${nonarch_base_libdir}/uml/.debug"
