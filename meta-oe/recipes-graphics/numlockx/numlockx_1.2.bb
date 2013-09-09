@@ -3,7 +3,7 @@ HOMEPAGE = "http://home.kde.org/~seli/numlockx/"
 SECTION = "x11/apps"
 LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dcb1cc75e21540a4a66b54e38d95b047"
-DEPENDS = "imake-native virtual/libx11 libxtst"
+DEPENDS = "virtual/libx11 libxtst"
 
 SRC_URI = "http://home.kde.org/~seli/numlockx/numlockx-${PV}.tar.gz"
 
