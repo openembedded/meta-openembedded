@@ -16,7 +16,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://replace-lynx-to-curl-in-apachectl-script.patch \
            file://apache-ssl-ltmain-rpath.patch \
            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-           file://init"
+           file://init \
+           file://apache2-volatile.conf"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
 SRC_URI[md5sum] = "ea5e361ca37b8d7853404419dd502efe"
@@ -70,6 +71,11 @@ do_install_append() {
     printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
     # match with that is in init script
     printf "\nPidFile /run/httpd.pid" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+
+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then 
+        install -d ${D}${sysconfdir}/tmpfiles.d/
+        install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
+    fi
 }
 
 SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
