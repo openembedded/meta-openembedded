@@ -27,6 +27,8 @@ S = "${WORKDIR}/httpd-${PV}"
 
 inherit autotools update-rc.d
 
+SSTATE_SCAN_FILES += "apxs"
+
 CFLAGS_append = " -DPATH_MAX=4096"
 CFLAGS_prepend = "-I${STAGING_INCDIR}/openssl "
 EXTRA_OECONF = "--enable-ssl \
