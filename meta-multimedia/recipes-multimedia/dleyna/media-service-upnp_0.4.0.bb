@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
 
 DEPENDS = "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
 
-SRC_URI = "https://github.com/01org/${BPN}/archive/v${PV}.zip"
-SRC_URI[md5sum] = "9fc4db84b3459bc77232b24bde48b000"
-SRC_URI[sha256sum] = "9cdee47bbbfa3de5aaa5cf3fc9e208ccd97e5079f6d8fa84a6d1f24a1b760237"
+SRC_URI = "git://github.com/01org/${BPN}.git"
+SRCREV = "1996ecbe4a06c95d22f7d958e32e3d28f7a4a2e9"
+S = "${WORKDIR}/git"
 
 inherit autotools
 
