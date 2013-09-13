@@ -1,19 +1,18 @@
-DESCRIPTION = "Vi IMproved - enhanced vi editor"
+SUMMARY = "Vi IMproved - enhanced vi editor"
 SECTION = "console/utils"
 DEPENDS = "ncurses"
 # vimdiff doesn't like busybox diff
 RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
-LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=4c91d841bb7b75f68b5bb8ad7118f5b8"
+LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
 
-PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
-VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
-
-INC_PR = "r13"
-
-SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
+SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+	file://configure.in_remove_CC_quotes.patch;patchdir=.."
+SRCREV = "v7-4-027"
 
 S = "${WORKDIR}/${PN}/src"
+
+VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
 inherit autotools update-alternatives
 
@@ -28,7 +27,7 @@ do_configure () {
     touch auto/config.mk auto/config.h
 }
 
-#Available PACKAGECONFIG options are gtkgui, x11, tiny
+#Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
 PACKAGECONFIG ??= ""
 
 PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
@@ -76,5 +75,3 @@ ALTERNATIVE_${PN} = "vi"
 ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
 ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
 ALTERNATIVE_PRIORITY[vi] = "100"
-
-PARALLEL_MAKE = ""
