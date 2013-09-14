@@ -5,9 +5,7 @@ LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://src/proxy-libintl/COPYING.LIB.txt;md5=bc400bc21422f9a92e76ec2c5167ca2e"
 
 PR = "r1"
-PROVIDES = "virtual/libintl virtual/gettext"
-RPROVIDES_${PN} += "gettext"
-RPROVIDES_${PN}-dev += "gettext-dev"
+PROVIDES = "virtual/libintl"
 
 SRC_URI = " \
     http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/${PN}-dev_${PV}_win32.zip \
