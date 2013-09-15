@@ -22,5 +22,38 @@ do_install() {
 do_package() {
 }
 
+do_package_deb() {
+    :
+}
+
 do_package_ipk() {
+    :
+}
+
+do_package_rpm() {
+    :
+}
+
+do_package_tar() {
+    :
+}
+
+do_package_write_deb() {
+    :
+}
+
+do_package_write_ipk() {
+    :
+}
+
+do_package_write_rpm() {
+    :
+}
+
+do_package_write_tar() {
+    :
+}
+
+do_packagedata() {
+    :
 }
