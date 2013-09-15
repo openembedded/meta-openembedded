@@ -21,8 +21,11 @@ do_configure_prepend () {
 }
 
 do_install_prepend () {
-echo '# First kernel stanza.
+echo '# /boot/boot.cfg - KEXECBOOT configuration file.
+#
+# First kernel stanza.
 # Show this label in kexecboot menu.
+#
 LABEL=${KEXECBOOT_LABEL}
 #
 # Specify full kernel path on target.
@@ -48,7 +51,7 @@ APPEND=${CMDLINE} ${CMDLINE_DEBUG}
 # LABEL=${KEXECBOOT_LABEL}-test
 # KERNEL=/boot/${KERNEL_IMAGETYPE}-test
 # APPEND=${CMDLINE}
-#' >> ${S}/boot.cfg
+#' > ${S}/boot.cfg
 }
 
 do_install () {
