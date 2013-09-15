@@ -8,6 +8,8 @@ KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${PR}-$
 KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
 
 INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
+INITRAMFS_TASK = "initramfs-kexecboot-klibc-image:do_rootfs"
+
 
 do_populate_sysroot() {
     :
@@ -15,4 +17,10 @@ do_populate_sysroot() {
 
 do_install() {
     :
+}
+
+do_package() {
+}
+
+do_package_ipk() {
 }
