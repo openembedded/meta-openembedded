@@ -6,9 +6,9 @@ DEPENDS = "exo garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtua
 
 inherit xfce
 
-SRC_URI += "file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
+SRC_URI = " git://gitorious.org/xfce/xfce4-settings.git;protocol=git;branch=for-oe \
+            file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
             file://0002-xsettings.xml-Set-default-themes.patch \
-            file://0003-Remember-the-settings-manager-window-size-bug-9384.patch \
             file://touchscreen/invisible \
             file://touchscreen/wait \
             file://touchscreen/0001-add-cursor-theme-xfce-invisible.patch \
@@ -17,13 +17,24 @@ SRC_URI += "file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
             file://touchscreen/0004-XfceXSettingsHelper-gets-a-property-touchscreen-poin.patch \
             file://touchscreen/0005-pointers-detect-a-change-of-pointer-device-used-and-.patch \
 "
-SRC_URI[md5sum] = "3bf42281b64b10b2691008cd693f7dbd"
-SRC_URI[sha256sum] = "4a4f1e79a58b524f3a6dd030b6fc687671b35566f847e6f516c6f84211191698"
+SRCREV = "b7a0e1fd77f5bb5c372223ff62aec7acf252f061"
+S = "${WORKDIR}/git"
+PV = "4.10.0+git${SRCPV}"
+ 
+EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','datetime-setter','',d)}"
+PACKAGECONFIG[datetime-setter] = "--enable-datetime-settings, --disable-datetime-settings,, tzdata"
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
 
-FILES_${PN} += "${libdir}/xfce4"
+do_configure_prepend() {
+    NOCONFIGURE=yes ./autogen.sh
+}
+
+FILES_${PN} += " \
+    ${libdir}/xfce4 \
+    ${datadir}/xfce4 \
+"
 
 do_install_prepend() {
     # somehow binary files are not patched correctly by oe-patch - so copy them

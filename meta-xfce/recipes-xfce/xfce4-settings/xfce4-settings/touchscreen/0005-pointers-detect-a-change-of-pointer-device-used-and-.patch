@@ -133,7 +133,7 @@ index 62ebc60..32662cc 100644
  
      (*G_OBJECT_CLASS (xfce_pointers_helper_parent_class)->finalize) (object);
  }
-@@ -267,17 +295,17 @@ static void
+@@ -267,19 +295,19 @@ static void
  xfce_pointers_helper_syndaemon_check (XfcePointersHelper *helper)
  {
  #ifdef DEVICE_PROPERTIES
@@ -146,7 +146,9 @@ index 62ebc60..32662cc 100644
 -    Atom        *props;
 -    gint         i, nprops;
 -    gboolean     have_synaptics = FALSE;
--    gchar       *args[] = { "syndaemon", "-i", "2.0", "-K", "-R", NULL };
+-    gdouble      disable_duration;
+-    gchar        disable_duration_string[64];
+-    gchar       *args[] = { "syndaemon", "-i", disable_duration_string, "-K", "-R", NULL };
 -    GError      *error = NULL;
 +    Display               *xdisplay = GDK_DISPLAY ();
 +    XDeviceInfo           *device_list;
@@ -157,7 +159,9 @@ index 62ebc60..32662cc 100644
 +    Atom                  *props;
 +    gint                   i, nprops;
 +    gboolean               have_synaptics = FALSE;
-+    gchar                 *args[] = { "syndaemon", "-i", "2.0", "-K", "-R", NULL };
++    gdouble                disable_duration;
++    gchar                  disable_duration_string[64];
++    gchar                 *args[] = { "syndaemon", "-i", disable_duration_string, "-K", "-R", NULL };
 +    GError                *error = NULL;
  
      /* only stop a running daemon */
