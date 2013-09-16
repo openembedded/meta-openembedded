@@ -6,9 +6,20 @@ DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbu
 
 inherit xfce update-alternatives
 
-SRC_URI[md5sum] = "10de50c79ed944cbb9c87741062c2a76"
-SRC_URI[sha256sum] = "380c44fba6eb779e34be0fe94f3726cfa131803014d6073c45aec8a1257fa740"
-SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
+SRC_URI = " \
+    git://git.xfce.org/xfce/xfwm4;protocol=git \
+    file://0001-don-t-block-display-events-when-time-is-set-backward.patch \
+"
+
+SRCREV = "bce3062d0879ab8504c446f99ad57c9fd76c5097"
+S = "${WORKDIR}/git"
+PV = "4.10.1+git${SRCPV}"
+
+EXTRA_OECONF += "--enable-maintainer-mode"
+
+do_configure_prepend() {
+       NOCONFIGURE=yes ./autogen.sh
+}
 
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
