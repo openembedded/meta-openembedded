@@ -32,6 +32,7 @@ python populate_packages_prepend() {
 }
 
 PACKAGES =+ "${PN}-gnome ${PN}-gtk2 ${PN}-gtk3 ${PN}-systemd"
+PACKAGES_DYNAMIC += "^libcanberra-.*"
 
 FILES_${PN} = "${bindir}/ ${libdir}/${BPN}.so.*"
 
