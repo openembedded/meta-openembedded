@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1 \
                     file://src/canberra.h;beginline=7;endline=24;md5=c616c687cf8da540a14f917e0d23ab03"
 
 DEPENDS = "alsa-lib gstreamer gtk+ gtk+3 libtool libvorbis pulseaudio"
-PR = "r0"
 
 inherit autotools
 
