@@ -42,6 +42,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-mount-plugin \
     xfce4-brightness-plugin \
     xfce4-closebutton-plugin \
+    xfce4-equake-plugin \
     \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
