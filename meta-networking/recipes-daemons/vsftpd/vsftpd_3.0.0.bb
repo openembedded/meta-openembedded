@@ -14,6 +14,8 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
            file://vsftpd.conf \
            file://vsftpd.user_list \
            file://vsftpd.ftpusers \
+           file://change-secure_chroot_dir.patch \
+           file://volatiles.99_vsftpd \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
@@ -40,7 +42,7 @@ LDFLAGS_append =" -lcrypt -lcap"
 do_configure() {
     # Fix hardcoded /usr, /etc, /var mess.
     cat tunables.c|sed s:\"/usr:\"${prefix}:g|sed s:\"/var:\"${localstatedir}:g \
-    |sed s:\"${prefix}/share/empty:\"${localstatedir}/share/empty:g |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
+    |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
     mv tunables.c.new tunables.c
 }
 
@@ -57,6 +59,8 @@ do_install() {
     install -m 600 ${WORKDIR}/vsftpd.conf ${D}${sysconfdir}/vsftpd.conf
     install -d ${D}${sysconfdir}/init.d/
     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vsftpd
+    install -d ${D}/${sysconfdir}/default/volatiles
+    install -m 644 ${WORKDIR}/volatiles.99_vsftpd ${D}/${sysconfdir}/default/volatiles/99_vsftpd
 
     install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
     install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
