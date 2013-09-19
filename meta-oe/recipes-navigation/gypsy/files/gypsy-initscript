@@ -1,0 +1,61 @@
+#! /bin/sh
+#
+# based on gypsy-example-initscript in gypsy repository
+# there are some little modifications to work with OE based distros
+# []' Felipe Tonello eu@felipetonello.com
+#
+
+set -e
+
+DESC="Gypsy daemon"
+NAME="gypsy-daemon"
+DAEMON=/usr/lib/gypsy/$NAME
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+USER=root
+
+# Gracefully exit if the package has been removed.
+test -x $DAEMON || exit 0
+
+#
+#	Function that starts the daemon/service.
+#
+d_start() {
+	start-stop-daemon --start --quiet --pidfile $PIDFILE \
+		--user $USER --exec $DAEMON -- $DAEMON_OPTS
+}
+
+#
+#	Function that stops the daemon/service.
+#
+d_stop() {
+	start-stop-daemon --stop --quiet --pidfile $PIDFILE \
+		 --oknodo --user $USER --exec $DAEMON
+}
+
+
+case "$1" in
+  start)
+	echo -n "Starting $DESC: $NAME"
+	d_start
+	echo "."
+	;;
+  stop)
+	echo -n "Stopping $DESC: $NAME"
+	d_stop
+	echo "."
+	;;
+  restart|force-reload)
+	echo -n "Restarting $DESC: $NAME"
+	d_stop
+	sleep 1
+	d_start
+	echo "."
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
