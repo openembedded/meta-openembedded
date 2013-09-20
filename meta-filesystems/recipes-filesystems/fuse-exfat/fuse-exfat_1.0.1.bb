@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
 "
 DEPENDS = "fuse virtual/libc"
-RDEPENDS_${PN} += "util-linux-mount"
+RRECOMMENDS_${PN} = "util-linux-mount"
 
 inherit scons
 

@@ -23,7 +23,8 @@ EXTRA_OEMAKE = "LDCONFIG=echo"
 PACKAGES =+ "ntfs-3g ntfsprogs libntfs-3g"
 
 FILES_ntfs-3g = "${base_sbindir}/*.ntfs-3g ${bindir}/ntfs-3g* ${base_sbindir}/mount.ntfs"
-RDEPENDS_ntfs-3g += "fuse util-linux-mount"
+RDEPENDS_ntfs-3g += "fuse"
+RRECOMMENDS_ntfs-3g = "util-linux-mount"
 
 FILES_ntfsprogs = "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
 FILES_libntfs-3g = "${libdir}/*${SOLIBS}"
