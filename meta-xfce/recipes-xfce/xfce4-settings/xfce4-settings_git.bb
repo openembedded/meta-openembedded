@@ -23,9 +23,13 @@ PV = "4.10.0+git${SRCPV}"
  
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','datetime-setter','',d)}"
+PACKAGECONFIG ??= " \
+    ${@base_contains('DISTRO_FEATURES','systemd','datetime-setter','',d)} \
+    ${@base_contains('DISTRO_FEATURES','alsa','sound-setter', base_contains('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
+"
 PACKAGECONFIG[datetime-setter] = "--enable-datetime-settings, --disable-datetime-settings,, tzdata"
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
+PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
 
 do_configure_prepend() {
     NOCONFIGURE=yes ./autogen.sh
@@ -43,3 +47,5 @@ do_install_prepend() {
 }
 
 RRECOMMENDS_${PN} += "gnome-icon-theme"
+RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES','alsa','libcanberra-alsa','',d)}"
+RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES','pulseaudio','libcanberra-pulse','',d)}"
