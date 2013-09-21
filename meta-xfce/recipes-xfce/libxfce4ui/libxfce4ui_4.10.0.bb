@@ -9,6 +9,7 @@ inherit xfce
 SRC_URI = " \
     git://git.xfce.org/xfce/libxfce4ui;protocol=git \
     file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
+    file://0002-configure.ac.in-remove-optional-gtk3-support.patch \
 "
 SRCREV = "530b72f50fcbd8cb4b970fcc97be0321bf78183e"
 PV = "4.10.0+git${SRCPV}"

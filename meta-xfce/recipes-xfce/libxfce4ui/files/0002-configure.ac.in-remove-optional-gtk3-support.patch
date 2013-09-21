@@ -1,0 +1,37 @@
+From d61dc6718a2abaf70d19f17d34128cb7e161e057 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 18 Sep 2013 20:50:11 +0200
+Subject: [PATCH] configure.ac.in: remove optional gtk3 support
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+it drags in gtk3 if that was build before. This is not yet wanted
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac.in | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/configure.ac.in b/configure.ac.in
+index e47df04..b6edab1 100644
+--- a/configure.ac.in
++++ b/configure.ac.in
+@@ -129,12 +129,6 @@ XDT_CHECK_PACKAGE([GOBJECT], [gobject-2.0], [2.28.0])
+ XDT_CHECK_PACKAGE([GTK2], [gtk+-2.0], [2.24.0])
+ XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.10.0])
+ 
+-dnl ***********************************************************
+-dnl *** Optional support for a GTK+3 version of the library ***
+-dnl ***********************************************************
+-XDT_CHECK_OPTIONAL_PACKAGE([GTK3],
+-                           [gtk+-3.0], [3.2.0], [gtk3],
+-                           [GTK+ 3 support])
+ AM_CONDITIONAL([ENABLE_GTK3_LIBRARY], [test "x$GTK3_FOUND" = "xyes"])
+ 
+ dnl *************************************************
+-- 
+1.8.3.1
+
