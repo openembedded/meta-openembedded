@@ -47,14 +47,12 @@ FILES_${PN}-dev += "${datadir}/vala/vapi ${libdir}/*/modules/*.la ${libdir}/*/*.
 FILES_${PN}-dbg += "${libdir}/${P}/.debug ${libdir}/gtk-*/modules/.debug"
 
 FILES_${PN}-gtk2 = "${libdir}/${BPN}-gtk.so.* \
-                    ${libdir}/gtk-2.0/modules/*.la \
                     ${libdir}/gtk-2.0/modules/*.so \
                     ${bindir}/canberra-gtk-play"
 
 # -gtk3 ships a symlink to a .so
 INSANE_SKIP_${PN}-gtk3 = "dev-so"
 FILES_${PN}-gtk3 = "${libdir}/${BPN}-gtk3.so.* \
-                    ${libdir}/gtk-3.0/modules/*.la \
                     ${libdir}/gtk-3.0/modules/*.so \
                     ${bindir}/canberra-gtk3-play"
 
