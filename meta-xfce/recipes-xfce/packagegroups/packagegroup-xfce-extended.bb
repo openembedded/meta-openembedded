@@ -43,6 +43,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-brightness-plugin \
     xfce4-closebutton-plugin \
     xfce4-equake-plugin \
+    xfce4-notes-plugin \
     \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
@@ -52,4 +53,5 @@ RRECOMMENDS_${PN} = " \
     xfce4-power-manager \
     xfce4-mixer \
     ristretto \
+    xfce4-taskmanager \
 "
