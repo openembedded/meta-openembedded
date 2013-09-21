@@ -1,0 +1,29 @@
+From 9902fb9d4fce474426c35b73617149014799a0c8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 19 Sep 2013 16:43:59 +0200
+Subject: [PATCH] do not build documantation - Makefile has no install target
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [config]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ Makefile.am | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 6ffa8d9..6aef17a 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,5 @@
+ SUBDIRS =								\
+ 	po								\
+-	doc								\
+ 	src
+ 
+ desktopdir = $(datadir)/applications
+-- 
+1.8.3.1
+
