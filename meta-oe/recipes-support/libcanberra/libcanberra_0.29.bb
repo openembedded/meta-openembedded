@@ -8,7 +8,10 @@ DEPENDS = "gstreamer gtk+ gtk+3 libtool libvorbis"
 
 inherit autotools
 
-SRC_URI = "http://0pointer.de/lennart/projects/${BPN}/${BPN}-${PV}.tar.xz"
+SRC_URI = " \
+    http://0pointer.de/lennart/projects/${BPN}/${BPN}-${PV}.tar.xz \
+    file://0001-build-gtk-and-gtk3-version-for-canberra_gtk_play.patch \
+"
 SRC_URI[md5sum] = "2594093a5d61047bd9cc87e955f86df8"
 SRC_URI[sha256sum] = "127a5ef07805856d63758e5180ebfb241d1f80094fd301c287591a15b8cfcd72"
 
@@ -39,19 +42,21 @@ PACKAGES_DYNAMIC += "^libcanberra-.*"
 
 FILES_${PN} = "${bindir}/ ${libdir}/${BPN}.so.*"
 
-FILES_${PN}-dev += "${datadir}/vala/vapi"
+FILES_${PN}-dev += "${datadir}/vala/vapi ${libdir}/*/modules/*.la ${libdir}/*/*.la"
 
 FILES_${PN}-dbg += "${libdir}/${P}/.debug ${libdir}/gtk-*/modules/.debug"
 
 FILES_${PN}-gtk2 = "${libdir}/${BPN}-gtk.so.* \
                     ${libdir}/gtk-2.0/modules/*.la \
-                    ${libdir}/gtk-2.0/modules/*.so"
+                    ${libdir}/gtk-2.0/modules/*.so \
+                    ${bindir}/canberra-gtk-play"
 
 # -gtk3 ships a symlink to a .so
 INSANE_SKIP_${PN}-gtk3 = "dev-so"
 FILES_${PN}-gtk3 = "${libdir}/${BPN}-gtk3.so.* \
                     ${libdir}/gtk-3.0/modules/*.la \
-                    ${libdir}/gtk-3.0/modules/*.so"
+                    ${libdir}/gtk-3.0/modules/*.so \
+                    ${bindir}/canberra-gtk3-play"
 
 FILES_${PN}-gnome = "${libdir}/gnome-settings-daemon-3.0/ \
                      ${datadir}/gdm/ ${datadir}/gnome/"
