@@ -1,0 +1,20 @@
+Upstream-Status: Inappropriate [oe-core specific]
+
+TESTS_64 is empty, install will fail due to missing file operand
+
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+
+Index: git/tests/Makefile
+===================================================================
+--- git.orig/tests/Makefile
++++ git/tests/Makefile
+@@ -292,7 +292,7 @@ obj64/install:
+ 	$(INSTALL) -m 755 wrapper-utils.sh $(DESTDIR)$(INST_TESTSDIR64)/obj64
+ 	$(INSTALL) -m 755 $(HELPERS:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
+ 	$(INSTALL) -m 755 $(HELPER_LIBS:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
+-	$(INSTALL) -m 755 $(TESTS_64:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
++#	$(INSTALL) -m 755 $(TESTS_64:%=obj64/%) $(DESTDIR)$(INST_TESTSDIR64)/obj64
+ 	$(INSTALL) -m 755 run_tests.py $(DESTDIR)$(INST_TESTSDIR64)
+ 
+ install: $(OBJDIRS:%=%/install)

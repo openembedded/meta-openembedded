@@ -1,0 +1,62 @@
+Upstream-Status: Pending
+
+From 9bb940bd6a86f09280bdcd48a7177a835d72a25c Mon Sep 17 00:00:00 2001
+From: Steve Capper <steve.capper@linaro.org>
+Date: Wed, 10 Apr 2013 15:52:46 +0100
+Subject: [PATCH] Aarch64 unit test fixes.
+
+On Aarch64, zero bytes are illegal instructions, this is added to
+the icache-hygiene test.
+
+In mremap-expand-slice-collision, if __LP64__ is defined then
+mappings are attempted at 1TB boundaries which are outside the
+allowable mmap region for Aarch64. For __aarch64__ we change this
+mapping back to 256MB slices.
+
+Signed-off-by: Steve Capper <steve.capper@linaro.org>
+---
+ tests/icache-hygiene.c                |    7 ++++---
+ tests/mremap-expand-slice-collision.c |    2 +-
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/tests/icache-hygiene.c b/tests/icache-hygiene.c
+index 51792b3..876ce10 100644
+--- a/tests/icache-hygiene.c
++++ b/tests/icache-hygiene.c
+@@ -54,7 +54,7 @@ static void cacheflush(void *p)
+ {
+ #if defined(__powerpc__)
+ 	asm volatile("dcbst 0,%0; sync; icbi 0,%0; isync" : : "r"(p));
+-#elif defined(__arm__)
++#elif defined(__arm__) || defined(__aarch64__)
+ 	__clear_cache(p, p + COPY_SIZE);
+ #endif
+ }
+@@ -87,8 +87,9 @@ static void *sig_expected;
+ static void sig_handler(int signum, siginfo_t *si, void *uc)
+ {
+ #if defined(__powerpc__) || defined(__powerpc64__) || defined(__ia64__) || \
+-    defined(__s390__) || defined(__s390x__) || defined(__sparc__)
+-	/* On powerpc and ia64 and s390, 0 bytes are an illegal
++    defined(__s390__) || defined(__s390x__) || defined(__sparc__) || \
++    defined(__aarch64__)
++	/* On powerpc, ia64, s390 and Aarch64, 0 bytes are an illegal
+ 	 * instruction, so, if the icache is cleared properly, we SIGILL
+ 	 * as soon as we jump into the cleared page */
+ 	if (signum == SIGILL) {
+diff --git a/tests/mremap-expand-slice-collision.c b/tests/mremap-expand-slice-collision.c
+index c25f4c6..853f3c3 100644
+--- a/tests/mremap-expand-slice-collision.c
++++ b/tests/mremap-expand-slice-collision.c
+@@ -38,7 +38,7 @@ void init_slice_boundary(int fd)
+ 	unsigned long slice_size;
+ 	void *p1, *p2, *heap;
+ 	int slices_ok, i, rc;
+-#ifdef __LP64__
++#if defined(__LP64__) && !defined(__aarch64__)
+ 	/* powerpc: 1TB slices starting at 1 TB */
+ 	slice_boundary = 0x10000000000;
+ 	slice_size = 0x10000000000;
+-- 
+1.7.9.5
+

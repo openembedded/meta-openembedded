@@ -1,0 +1,48 @@
+From 355c014573de7f95202cc7c819f81f0f230e4a1a Mon Sep 17 00:00:00 2001
+From: Ting Liu <b28495@freescale.com>
+Date: Mon, 18 Jun 2012 16:37:05 +0800
+Subject: [PATCH] skip checking LIB32 and LIB64 if they point to the same place
+
+
+Upstream-Status: Inappropriate [oe-core specific]
+Signed-off-by: Ting Liu <b28495@freescale.com>
+---
+ Makefile |   22 +++++++++++-----------
+ 1 files changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 1017950..bac5f01 100644
+--- a/Makefile
++++ b/Makefile
+@@ -131,17 +131,17 @@ endif
+ 
+ # If TMPLIB64 is set, then sure we are not resolving LIB32 and LIB64 to the
+ # same place
+-ifdef TMPLIB64
+-
+-REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
+-REALLIB64 = $(realpath $(PREFIX)/$(LIB64))
+-ifneq ($(realpath $(PREFIX)),)
+-ifeq ($(REALLIB32),$(REALLIB64))
+-$(error LIB32 ($(PREFIX)/$(LIB32) to $(REALLIB32)) and LIB64 ($(PREFIX)/$(LIB64) to $(REALLIB64)) are resolving to the same place. Manually specify LIB32 and LIB64. e.g. make PREFIX=$(PREFIX) LIB32=lib32 LIB64=lib64)
+-endif
+-endif
+-
+-endif
++#ifdef TMPLIB64
++#
++#REALLIB32 = $(realpath $(PREFIX)/$(LIB32))
++#REALLIB64 = $(realpath $(PREFIX)/$(LIB64))
++#ifneq ($(realpath $(PREFIX)),)
++#ifeq ($(REALLIB32),$(REALLIB64))
++#$(error LIB32 ($(PREFIX)/$(LIB32) to $(REALLIB32)) and LIB64 ($(PREFIX)/$(LIB64) to $(REALLIB64)) are resolving to the same place. Manually specify LIB32 and LIB64. e.g. make PREFIX=$(PREFIX) LIB32=lib32 LIB64=lib64)
++#endif
++#endif
++#
++#endif
+ 
+ HEADERDIR = $(PREFIX)/include
+ LIBDIR32 = $(PREFIX)/$(LIB32)
+-- 
+1.7.0.4
+

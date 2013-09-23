@@ -1,0 +1,38 @@
+Upstream-Status: Pending
+
+From c7fcb7270bb510d7271a1c0cea095a4dbea49420 Mon Sep 17 00:00:00 2001
+From: Steve Capper <steve.capper@linaro.org>
+Date: Mon, 3 Jun 2013 17:00:45 +0100
+Subject: [PATCH] Add PROT_NONE to the mprotect test.
+
+The mprotect unit test checks PROT_READ and PROT_READ | PROT_WRITE
+protections. We recently found that PROT_NONE wasn't properly
+supported in our huge page kernel code.
+
+This patch adds PROT_NONE tests to mprotect. The expected behaviour
+is that neither reads nor writes should succeed.
+
+Signed-off-by: Steve Capper <steve.capper@linaro.org>
+---
+ tests/mprotect.c |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/tests/mprotect.c b/tests/mprotect.c
+index aa4673e..db6a662 100644
+--- a/tests/mprotect.c
++++ b/tests/mprotect.c
+@@ -213,5 +213,11 @@ int main(int argc, char *argv[])
+ 	test_mprotect(fd, "RW->R 1/2", 2*hpage_size, PROT_READ|PROT_WRITE,
+ 		      hpage_size, PROT_READ);
+ 
++	/* PROT_NONE tests */
++	test_mprotect(fd, "NONE->R", hpage_size, PROT_NONE,
++		      hpage_size, PROT_READ);
++	test_mprotect(fd, "NONE->RW", hpage_size, PROT_NONE,
++		      hpage_size, PROT_READ|PROT_WRITE);
++
+ 	PASS();
+ }
+-- 
+1.7.9.5
+

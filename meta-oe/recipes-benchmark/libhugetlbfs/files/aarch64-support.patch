@@ -1,0 +1,88 @@
+Upstream-Status: Pending
+
+From 52b8430eb4f03e35721f29862de33041fe9c9768 Mon Sep 17 00:00:00 2001
+From: Steve Capper <steve.capper@linaro.org>
+Date: Wed, 10 Apr 2013 14:51:12 +0100
+Subject: [PATCH] Aarch64 support.
+
+This patch adds support for Aarch64.
+
+As with ARMv7, We do not add the xBT/xBDT style linker scripts as
+these have been deprecated in favour of adjusting the page sizes
+via command line parameter to ld.
+
+Signed-off-by: Steve Capper <steve.capper@linaro.org>
+---
+ Makefile               |    7 +++++++
+ sys-aarch64elf_linux.S |   34 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 sys-aarch64elf_linux.S
+
+diff --git a/Makefile b/Makefile
+index 48205af..28ceade 100644
+--- a/Makefile
++++ b/Makefile
+@@ -57,6 +57,12 @@ TMPLIB32 = lib
+ ELF32 += armelf_linux_eabi
+ CUSTOM_LDSCRIPTS = no
+ else
++ifeq ($(ARCH),aarch64)
++CC64 = gcc
++ELF64 = aarch64elf_linux
++TMPLIB64 = lib64
++CUSTOM_LDSCRIPTS = no
++else
+ ifeq ($(ARCH),i386)
+ CC32 = gcc
+ ELF32 = elf_i386
+@@ -100,6 +106,7 @@ endif
+ endif
+ endif
+ endif
++endif
+ 
+ ifdef CC32
+ OBJDIRS += obj32
+diff --git a/sys-aarch64elf_linux.S b/sys-aarch64elf_linux.S
+new file mode 100644
+index 0000000..699ff4c
+--- /dev/null
++++ b/sys-aarch64elf_linux.S
+@@ -0,0 +1,34 @@
++/*
++ * libhugetlbfs - Easy use of Linux hugepages
++ * Copyright (C) 2013 Linaro Ltd.
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public License
++ * version 2.1 as published by the Free Software Foundation.
++ *
++ * This library is distributed in the hope that it will be useful, but
++ * WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this library; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
++ */
++
++        .text
++
++        .globl  direct_syscall
++
++
++direct_syscall:
++	uxtw	x8, w0
++	mov	x0, x1
++	mov	x1, x2
++	mov	x2, x3
++	mov	x3, x4
++	mov	x4, x5
++	mov	x5, x6
++	mov	x6, x7
++	svc	0x0
++	RET
+-- 
+1.7.9.5
+
