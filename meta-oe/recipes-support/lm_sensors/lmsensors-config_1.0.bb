@@ -12,6 +12,8 @@ SRC_URI = "file://fancontrol \
            file://sensors.conf \
 "
 
+RDEPENDS_${PN}-dev = ""
+
 do_install() {
     # Install fancontrol configuration file
     install -d ${D}${sysconfdir}
