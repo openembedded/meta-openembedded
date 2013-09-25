@@ -73,6 +73,8 @@ do_install_append() {
     printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
     # match with that is in init script
     printf "\nPidFile /run/httpd.pid" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+    # Set 'ServerName' to fix error messages when restart apache service
+    sed -i 's/^#ServerName www.example.com/ServerName localhost/' ${D}/${sysconfdir}/${BPN}/httpd.conf
 
     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then 
         install -d ${D}${sysconfdir}/tmpfiles.d/
