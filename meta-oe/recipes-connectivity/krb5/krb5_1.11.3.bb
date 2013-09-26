@@ -2,16 +2,15 @@ DESCRIPTION = "A network authentication protocol"
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=e8fad1d174de32f8da0ddc56b67b6941"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=1d9c8180d79838c02eb5eb1a3b184eb9"
 DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
 inherit autotools binconfig perlnative
 
-PR = "r2"
-
-SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${PV}/${P}-signed.tar"
-SRC_URI[md5sum] = "1a13c53899806c4da99a798a04d25545"
-SRC_URI[sha256sum] = "fe37fb93b398db98a1b23f814673ea2ae4b90138f85e1a4027ef639456a78651"
+SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar"
+SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
+SRC_URI[sha256sum] = "9abd94bb94a70996da0f8d90408957154bb543271b097e86c63eb33e5f5751b5"
 
 S = "${WORKDIR}/${P}/src/"
 
