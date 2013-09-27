@@ -8,52 +8,18 @@ KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${PR}-$
 KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
 
 INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
-INITRAMFS_TASK = "initramfs-kexecboot-klibc-image:do_rootfs"
+INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
 
-
-do_populate_sysroot() {
-    :
-}
-
-do_install() {
-    :
-}
-
-do_package() {
-}
-
-do_package_deb() {
-    :
-}
-
-do_package_ipk() {
-    :
-}
-
-do_package_rpm() {
-    :
-}
-
-do_package_tar() {
-    :
-}
-
-do_package_write_deb() {
-    :
-}
-
-do_package_write_ipk() {
-    :
-}
-
-do_package_write_rpm() {
-    :
-}
-
-do_package_write_tar() {
-    :
-}
-
-do_packagedata() {
-    :
-}
+# disable unneeded tasks
+do_install[noexec] = "1"
+do_package[noexec] = "1"
+do_packagedata[noexec] = "1"
+do_package_deb[noexec] = "1"
+do_package_ipk[noexec] = "1"
+do_package_rpm[noexec] = "1"
+do_package_tar[noexec] = "1"
+do_package_write_deb[noexec] = "1"
+do_package_write_ipk[noexec] = "1"
+do_package_write_rpm[noexec] = "1"
+do_package_write_tar[noexec] = "1"
+do_populate_sysroot[noexec] = "1"
