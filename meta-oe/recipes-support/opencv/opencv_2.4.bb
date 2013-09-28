@@ -9,16 +9,14 @@ ARM_INSTRUCTION_SET = "arm"
 
 DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-${PV}.tar.bz2 \
+SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
+SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
            file://opencv-fix-pkgconfig-generation.patch \
 "
 
-SRC_URI[md5sum] = "c0a5af4ff9d0d540684c0bf00ef35dbe"
-SRC_URI[sha256sum] = "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b035233f58146f6f59b"
+PV = "2.4.3+git${SRCPV}"
 
-PR = "r2"
-
-S = "${WORKDIR}/OpenCV-${PV}"
+S = "${WORKDIR}/git"
 
 # Do an out-of-tree build
 OECMAKE_SOURCEPATH = "${S}"
