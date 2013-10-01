@@ -8,7 +8,9 @@ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 inherit autotools binconfig perlnative
 
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
-SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar"
+SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar \
+           file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
+"
 SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
 SRC_URI[sha256sum] = "9abd94bb94a70996da0f8d90408957154bb543271b097e86c63eb33e5f5751b5"
 
@@ -17,6 +19,7 @@ S = "${WORKDIR}/${P}/src/"
 PACKAGECONFIG ??= "openssl"
 PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
 PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
+PACKAGECONFIG[keyutils] = "--enable-keyutils,--disable-keyutils,keyutils"
 
 EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
 CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
@@ -42,5 +45,6 @@ python do_unpack() {
 
 do_configure() {
     gnu-configize --force
+    autoreconf
     oe_runconf
 }
