@@ -1,0 +1,49 @@
+From 055d1ffa81d0730e92aa3f1ed5045cd805c74957 Mon Sep 17 00:00:00 2001
+From: Nickolai Zeldovich <nickolai@csail.mit.edu>
+Date: Sun, 3 Mar 2013 01:38:22 -0500
+Subject: [PATCH] Fix dependencies in tests/gssapi
+
+Use $(COMMON_DEPS) instead of $(COMMON_DEPLIBS) for dependencies; the
+latter appears to be a typo.  Fixes build when using "make -j".
+
+ticket: 7587 (new)
+target_version: 1.11.2
+tags: pullup
+
+Upstream-Status: Backport
+http://krbdev.mit.edu/rt/Ticket/Display.html?id=7587
+
+---
+ tests/gssapi/Makefile.in | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tests/gssapi/Makefile.in b/tests/gssapi/Makefile.in
+index 5620234..6a5870b 100644
+--- a/tests/gssapi/Makefile.in
++++ b/tests/gssapi/Makefile.in
+@@ -45,11 +45,11 @@ t_accname: t_accname.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_accname.o $(COMMON_LIBS)
+ t_ccselect: t_ccselect.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_ccselect.o $(COMMON_LIBS)
+-t_credstore: t_credstore.o $(COMMON_DEPLIBS)
++t_credstore: t_credstore.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_credstore.o $(COMMON_LIBS)
+ t_export_cred: t_export_cred.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_export_cred.o $(COMMON_LIBS)
+-t_export_name: t_export_name.o $(COMMON_DEPLIBS)
++t_export_name: t_export_name.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_export_name.o $(COMMON_LIBS)
+ t_gssexts: t_gssexts.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_gssexts.o $(COMMON_LIBS)
+@@ -67,7 +67,7 @@ t_s4u: t_s4u.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_s4u.o $(COMMON_LIBS)
+ t_s4u2proxy_krb5: t_s4u2proxy_krb5.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_s4u2proxy_krb5.o $(COMMON_LIBS)
+-t_saslname: t_saslname.o $(COMMON_DEPLIBS)
++t_saslname: t_saslname.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_saslname.o $(COMMON_LIBS)
+ t_spnego: t_spnego.o $(COMMON_DEPS)
+ 	$(CC_LINK) -o $@ t_spnego.o $(COMMON_LIBS)
+-- 
+1.8.4
+
