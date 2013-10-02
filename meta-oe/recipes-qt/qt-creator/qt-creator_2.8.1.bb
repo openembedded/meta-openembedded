@@ -29,4 +29,6 @@ FILES_${PN}-dbg += "${datadir}/qtcreator/*/*/*/*/.debug \
                     ${libdir}/qtcreator/.debug \
                     ${libdir}/qtcreator/*/*/.debug"
 RRECOMMENDS_${PN} += "packagegroup-core-buildessential \
-                      packagegroup-qt-toolchain-target"
+                      packagegroup-qt-toolchain-target \
+                      qt4-plugin-sqldriver-sqlite \
+"
