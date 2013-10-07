@@ -19,7 +19,7 @@ SRC_URI = " git://gitorious.org/xfce/xfce4-settings.git;protocol=git;branch=for-
 "
 SRCREV = "b7a0e1fd77f5bb5c372223ff62aec7acf252f061"
 S = "${WORKDIR}/git"
-PV = "4.10.0+git${SRCPV}"
+PV = "4.11.0+git${SRCPV}"
  
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
