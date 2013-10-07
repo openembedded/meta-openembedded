@@ -8,8 +8,8 @@ PR = "r0"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
-SRC_URI[md5sum] = "5e5c467e920240c20f165687d7ac3709"
-SRC_URI[sha256sum] = "11d340eb7f87909a596bac054cc927df757dc2fc7c90b50a832c30e9bf84c9ad"
+SRC_URI[md5sum] = "e49cec9861b45dc0b36eae33bf8a14fa"
+SRC_URI[sha256sum] = "b351872da46ed8378dff90a87673f5ec1e0bdd94324558ebc898e1d115e9d71c"
 
 inherit autotools
 
