@@ -1,6 +1,9 @@
 # klcc-cross depends on klibc
 DEPENDS =+ "klcc-cross"
 
+# Default for klcc is to build static binaries.
+# Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
+
 export CC = "${TARGET_PREFIX}klcc"
 export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4 -mthumb-interwork"
 
