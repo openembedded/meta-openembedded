@@ -80,6 +80,7 @@ do_install() {
     oe_runmake 'DESTDIR=${D}' install
     mv -f ${D}${libdir}/mysql/* ${D}${libdir}
     rmdir ${D}${libdir}/mysql
+    find ${D}${libdir} -name '*.la'|xargs sed -i 's#${libdir}/mysql#${libdir}#'
 
     install -d ${D}/etc/init.d
     install -m 0644 ${WORKDIR}/my.cnf ${D}/etc/
