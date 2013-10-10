@@ -15,6 +15,7 @@ SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x8
            file://configure-ps-cache-check.patch \
            file://fix-cve-2013-1861-1.patch \
            file://fix-cve-2013-1861-2.patch \
+           file://zlib-let-libdir-configurable.patch \
            file://my.cnf \
            file://mysqld.sh"
 
@@ -51,6 +52,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
                 --without-man \
                 --without-docs \
                 --with-zlib-dir=${STAGING_EXECPREFIXDIR} \
+                --with-baselib-dir=${base_libdir} \
                 --with-pic \
                 "
 
