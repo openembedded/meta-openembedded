@@ -3,23 +3,13 @@ DESCRIPTION = "Default icon and boot.cfg for kexecboot linux-as-bootloader."
 SECTION = "base"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58"
-
 PR = "r14"
 
-INHIBIT_DEFAULT_DEPS = "1"
-
 SRC_URI = "file://icon.xpm"
-
-CMDLINE ?= ""
-CMDLINE_DEBUG ?= "quiet"
-
-# Note: for qvga the label is currently limited to about 24 chars
-KEXECBOOT_LABEL ?= "${@d.getVar('DISTRO', True) or d.getVar('DISTRO_VERSION', True)}-${MACHINE}"
 
 do_configure_prepend () {
     install -m 0644 ${WORKDIR}/icon.xpm ${S}
 }
-
 do_install_prepend () {
 echo '# /boot/boot.cfg - KEXECBOOT configuration file.
 #
@@ -53,7 +43,6 @@ APPEND=${CMDLINE} ${CMDLINE_DEBUG}
 # APPEND=${CMDLINE}
 #' > ${S}/boot.cfg
 }
-
 do_install () {
     install -d ${D}/boot
     install -m 0644 boot.cfg ${D}/boot/boot.cfg
@@ -63,3 +52,11 @@ do_install () {
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 FILES_${PN} += "/boot/*"
+
+CMDLINE ?= ""
+CMDLINE_DEBUG ?= "quiet"
+
+INHIBIT_DEFAULT_DEPS = "1"
+
+# Note: for qvga the label is currently limited to about 24 chars
+KEXECBOOT_LABEL ?= "${@d.getVar('DISTRO', True) or d.getVar('DISTRO_VERSION', True)}-${MACHINE}"
