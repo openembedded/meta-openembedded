@@ -36,12 +36,10 @@ DESCRIPTION = "kexecboot is a graphical linux-as-bootloader implementation based
 HOMEPAGE = "http://kexecboot.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-SRCREV = "0bcc14671aa2d84ec20f260582aca36bb901ccf1"
-PV = "0.5.9.1"
 
-SRC_URI = "git://github.com/kexecboot/kexecboot.git"
-
-S = "${WORKDIR}/git"
+SRC_URI = "https://github.com/kexecboot/kexecboot/archive/v${PV}.tar.gz"
+SRC_URI[md5sum] = "46b7c1a6f20531be56445ebb8669a2b8"
+SRC_URI[sha256sum] = "6b360b8aa59bc5d68a96705349a0dd416f8ed704e931fa0ac7849298258f0f15"
 
 inherit autotools
 
