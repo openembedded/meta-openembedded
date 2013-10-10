@@ -64,7 +64,7 @@ do_install() {
 
     install -m 600 ${WORKDIR}/vsftpd.ftpusers ${D}${sysconfdir}/
     install -m 600 ${WORKDIR}/vsftpd.user_list ${D}${sysconfdir}/
-    if ! test -z ${PAMLIB} ; then
+    if ! test -z "${PAMLIB}" ; then
         install -d ${D}${sysconfdir}/pam.d/
         cp ${S}/RedHat/vsftpd.pam ${D}${sysconfdir}/pam.d/vsftpd
         sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
