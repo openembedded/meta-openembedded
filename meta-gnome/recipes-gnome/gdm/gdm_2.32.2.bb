@@ -63,6 +63,12 @@ do_install_append() {
 
     rm -rf "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+
+    rm -f ${D}${datadir}/gdm/autostart/LoginWindow/at-spi-registryd-wrapper.desktop
+    rm -f ${D}${datadir}/gdm/autostart/LoginWindow/orca-screen-reader.desktop
+    rm -f ${D}${datadir}/gdm/autostart/LoginWindow/gnome-mag.desktop
+    rm -f ${D}${datadir}/gdm/autostart/LoginWindow/gok.desktop
+    rm -f ${D}${datadir}/gdm/autostart/LoginWindow/metacity.desktop
 }
 
 FILES_${PN} += "${datadir}/icon* \
