@@ -2,6 +2,7 @@ DESCRIPTION = "A sophisticated Numeric Processing Package for Python"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f87832d854acbade6e9f5c601c8b30b1"
+PR = "r1"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/numpy-${PV}.tar.gz \
            ${CONFIGFILESURI} "
@@ -13,6 +14,10 @@ CONFIGFILESURI_aarch64 = " \
     file://_numpyconfig.h \
 "
 CONFIGFILESURI_arm = " \
+    file://config.h \
+    file://numpyconfig.h \
+"
+CONFIGFILESURI_armeb = " \
     file://config.h \
     file://numpyconfig.h \
 "
