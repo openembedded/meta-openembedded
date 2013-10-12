@@ -18,19 +18,20 @@ set -e
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DESC="HPA's tftpd"
-NAME=in.tftpd
-DAEMON=/usr/sbin/$NAME
-PIDFILE=/var/run/$NAME.pid
+NAME=in.tftpd-hpa
 SCRIPTNAME=/etc/init.d/tftpd-hpa
-
-# Gracefully exit if the package has been removed.
-test -x $DAEMON || exit 0
 
 # Read config file if it is present.
 if [ -r /etc/default/tftpd-hpa ]
 then
 	. /etc/default/tftpd-hpa
 fi
+
+DAEMON=/usr/sbin/$NAME
+PIDFILE=/var/run/$NAME.pid
+
+# Gracefully exit if the package has been removed.
+test -x $DAEMON || exit 0
 
 if [ "$RUN_DAEMON" != "yes" ] ; then
          echo "tftpd-hpa disabled in /etc/default/tftpd-hpa"
