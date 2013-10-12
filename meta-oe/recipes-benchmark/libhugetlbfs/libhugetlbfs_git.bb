@@ -14,6 +14,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
     file://fix-lib64-can-not-be-shiped-in-64bit-target.patch \
     file://tests-Makefile-install-static-4G-edge-testcases.patch \
+    file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
 "
 
 S = "${WORKDIR}/git"
