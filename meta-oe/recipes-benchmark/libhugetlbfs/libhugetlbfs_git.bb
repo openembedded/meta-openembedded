@@ -10,10 +10,10 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
     file://aarch64-support.patch \
     file://aarch64-unit-test-fixes.patch \
     file://add-PROT-NONE-to-the-mprotest-test.patch \
-    file://install64-fix.patch \
     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
     file://fix-lib64-can-not-be-shiped-in-64bit-target.patch \
+    file://tests-Makefile-install-static-4G-edge-testcases.patch \
 "
 
 S = "${WORKDIR}/git"
