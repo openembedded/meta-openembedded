@@ -15,6 +15,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
     file://fix-lib64-can-not-be-shiped-in-64bit-target.patch \
     file://tests-Makefile-install-static-4G-edge-testcases.patch \
     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+    file://0001-install-perl-lib-to-directory-perl-instead-of-perl5.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -43,10 +44,9 @@ do_install() {
 
 PARALLEL_MAKE_pn-${PN} = ""
 
-PACKAGES =+ "${PN}-perl ${PN}-tests ${PN}-perl5"
+PACKAGES =+ "${PN}-perl ${PN}-tests "
 FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
 FILES_${PN}-perl = "${libdir}/perl"
-FILES_${PN}-perl5 = "${libdir}/perl5 "
 FILES_${PN}-tests += "/opt/libhugetlbfs/tests"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
