@@ -7,14 +7,9 @@ DEPENDS = "alsa-lib texinfo"
 
 SRC_URI = "\
     http://mikmod.shlomifish.org/files/${P}.tar.gz \
-    file://m4.patch \
-    file://autofoo.patch \
-    file://ldflags.patch \
-    file://obsolete_automake_macros.patch \
 "
-
-SRC_URI[md5sum] = "96e9820d72a41fe27ff304071739696c"
-SRC_URI[sha256sum] = "734c8490bbf9b0c587920b92414dcfa3c2267838a0cdf698d5f1fb6bba8f661e"
+SRC_URI[md5sum] = "60ac77a804d082230df3009af11ef44f"
+SRC_URI[sha256sum] = "2311b209255bf24e95161907a16778cb054ac6d447fd8d05f1f0e41a555c7580"
 
 inherit autotools binconfig lib_package
 
