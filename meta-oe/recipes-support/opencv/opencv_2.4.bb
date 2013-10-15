@@ -9,12 +9,12 @@ ARM_INSTRUCTION_SET = "arm"
 
 DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0"
 
-SRCREV = "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
+SRCREV = "c5afaa4e8dfe507e87531f7688b9cf65c1f701c6"
 SRC_URI = "git://github.com/Itseez/opencv.git;branch=2.4 \
            file://opencv-fix-pkgconfig-generation.patch \
 "
 
-PV = "2.4.3+git${SRCPV}"
+PV = "2.4.6+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
