@@ -3,13 +3,12 @@ HOMEPAGE = "http://libjpeg-turbo.org/"
 
 LICENSE ="BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe21d \
-                    file://jpeglib.h;endline=14;md5=7bb9a39828a1b1e84acd4e8aec1e5532 \
-                    file://djpeg.c;endline=13;md5=e85613b52f2906c5dfc0e21ec902cb33 \
+                    file://jpeglib.h;endline=14;md5=a08bb0a80f782a9f8da313cc4015ed6f \
+                    file://djpeg.c;endline=13;md5=03db065044529233c296324be85530ab \
 "
-PV = "8d+1.2.1"
-PR = "r2"
-SRCREV = "837"
-SRC_URI = "svn://libjpeg-turbo.svn.sourceforge.net/svnroot/libjpeg-turbo;protocol=https;module=trunk"
+PV = "8d+1.3.0"
+SRCREV = "988"
+SRC_URI = "svn://svn.code.sf.net/p/libjpeg-turbo/code;protocol=svn;module=trunk"
 
 S = "${WORKDIR}/trunk"
 
