@@ -9,6 +9,7 @@ SRC_URI = " \
     file://configure-lossage.patch \
     file://pkgconfig-fix.patch \
     file://0001-linc2-src-Makefile.am-fix-build-with-glib-2.36.patch \
+    file://0002-Use-AM_CPPFLAGS-instead-of-INCLUDES-and-fix-problem-.patch \
 "
 SRC_URI[md5sum] = "7082d317a9573ab338302243082d10d1"
 SRC_URI[sha256sum] = "55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550"
