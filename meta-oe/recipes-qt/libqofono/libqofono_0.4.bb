@@ -18,7 +18,7 @@ PACKAGES =+ "${PN}-plugin ${PN}-plugin-dbg ${PN}-test"
 RRECOMMENDS_${PN} = "${PN}-plugin"
 
 SRC_URI = " \
-    git://github.com/nemomobile/${PN}.git;branch=${BRANCH} \
+    git://github.com/nemomobile/${BPN}.git;branch=${BRANCH} \
 "
 S = "${WORKDIR}/git"
 
