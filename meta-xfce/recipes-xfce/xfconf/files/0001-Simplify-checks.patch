@@ -1,0 +1,112 @@
+From 233f7d3a9b0f98b794548433cead77633aab5f7d Mon Sep 17 00:00:00 2001
+From: Nick Schermer <nick@xfce.org>
+Date: Sun, 6 Jan 2013 12:46:47 +0100
+Subject: [PATCH] Simplify checks.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: backport [1]
+
+[1] http://git.xfce.org/xfce/xfconf/commit/?id=233f7d3a9b0f98b794548433cead77633aab5f7d
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ tests/Makefile.am         |  1 -
+ tests/Makefile.inc        |  9 +--------
+ tests/test-template.sh.in | 49 -----------------------------------------------
+ 3 files changed, 1 insertion(+), 58 deletions(-)
+ delete mode 100644 tests/test-template.sh.in
+
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 57165d9..57ba7e8 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -13,5 +13,4 @@ clean-local:
+ 
+ EXTRA_DIST = \
+ 	$(test_scripts) \
+-	test-template.sh.in \
+ 	tests-common.h
+diff --git a/tests/Makefile.inc b/tests/Makefile.inc
+index 2ed3431..7a5a715 100644
+--- a/tests/Makefile.inc
++++ b/tests/Makefile.inc
+@@ -13,9 +13,7 @@
+ # along with this program; if not, write to the Free Software
+ # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ 
+-check_SCRIPTS = $(addsuffix .sh,$(check_PROGRAMS))
+-
+-TESTS = $(check_SCRIPTS)
++TESTS = $(check_PROGRAMS)
+ TESTS_ENVIRONMENT = XDG_CONFIG_HOME="$(top_builddir)/tests/test-xdg_config_home" XFCONFD="$(top_builddir)/xfconfd/xfconfd"
+ 
+ AM_CFLAGS = \
+@@ -27,8 +25,3 @@ AM_CFLAGS = \
+ LIBS = \
+ 	$(top_builddir)/xfconf/libxfconf-$(LIBXFCONF_VERSION_API).la
+ 
+-%.sh: $(top_srcdir)/tests/test-template.sh.in Makefile
+-	sed -e 's/@TEST_NAME@/$@/; s/\.sh//;' <$(top_srcdir)/tests/test-template.sh.in >$@
+-	chmod 755 $@
+-
+-CLEANFILES = $(check_SCRIPTS)
+diff --git a/tests/test-template.sh.in b/tests/test-template.sh.in
+deleted file mode 100644
+index 2e638a8..0000000
+--- a/tests/test-template.sh.in
++++ /dev/null
+@@ -1,49 +0,0 @@
+-#!/bin/sh
+-
+-cleanup() {
+-    if [ "$XFCONFD_PID" ]; then
+-        kill -TERM $XFCONFD_PID 2>/dev/null
+-        sleep 1
+-        kill -KILL $XFCONFD_PID 2>/dev/null
+-    fi
+-
+-    kill -TERM $DBUS_SESSION_BUS_PID 2>/dev/null
+-    sleep 1
+-    kill -KILL $DBUS_SESSION_BUS_PID 2>/dev/null
+-}
+-
+-die() {
+-    [ "$1" ] && echo "$1" >&2
+-    cleanup
+-    exit 1
+-}
+-
+-# some buildbots have problems with the tests (dbus not
+-# working properly without an X11 server).
+-if [ -n "$XFCONF_SKIP_TESTS" ]; then
+-  echo "Warning: Tests disabled, skipping @TEST_NAME@" >&2
+-  exit 0
+-fi
+-
+-unset DBUS_SESSION_BUS_ADDRESS
+-unset DBUS_SESSION_BUS_PID
+-unset XFCONFD_PID
+-
+-eval `dbus-launch --sh-syntax`
+-export DBUS_SESSION_BUS_ADDRESS
+-export DBUS_SESSION_BUS_PID
+-
+-[ "$DBUS_SESSION_BUS_PID" ] || die "DBus failed to start"
+-
+-trap "die Interrupted" INT
+-
+-eval `$XFCONFD --daemon 2>/dev/null` || die "Failed to start xfconfd"
+-
+-export XDG_CONFIG_HOME  # make sure it's exported from the makefile
+-export XDG_CONFIG_DIRS=""
+-
+-./@TEST_NAME@ || die "Test Failed"
+-
+-cleanup
+-
+-exit 0
+-- 
+1.8.3.1
+

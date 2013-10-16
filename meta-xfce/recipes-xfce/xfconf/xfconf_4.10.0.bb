@@ -6,6 +6,7 @@ DEPENDS = "dbus-glib libxfce4util perl-native"
 
 inherit xfce
 
+SRC_URI += "file://0001-Simplify-checks.patch"
 SRC_URI[md5sum] = "4ed48150a03fb5f42b455494307b7f28"
 SRC_URI[sha256sum] = "175219a441cc7d0f210bbd1a3b0abba41598627cd9db27235811400c3e100576"
 
