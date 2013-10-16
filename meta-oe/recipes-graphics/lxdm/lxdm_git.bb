@@ -8,15 +8,13 @@ SRC_URI = " \
     file://lxdm-pam \
     file://lxdm-pam-debug \
     ${@base_contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
-    file://0002-configure-check-only-for-ck-connector-in-case-consol.patch \
 "
 
 LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)}"
 
-SRCREV = "65e7cc8fdc150c2b925eb348ce82de17dee5eb0b"
-PV = "0.4.2+git${SRCPV}"
+SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
+PV = "0.5.0+git${SRCPV}"
 PE = "1"
-PR = "r7"
 
 DEPENDS = "cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
 DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
