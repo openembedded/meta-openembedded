@@ -1,4 +1,4 @@
-DESCRIPTION = "XFS Filesystem Utilities"
+SUMMARY = "XFS Filesystem Utilities"
 HOMEPAGE = "http://oss.sgi.com/projects/xfs"
 SECTION = "base"
 LICENSE = "GPLv2"
