@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
 DEPENDS = "alsa-lib texinfo"
 
 SRC_URI = "\
-    http://mikmod.shlomifish.org/files/${P}.tar.gz \
+    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "60ac77a804d082230df3009af11ef44f"
-SRC_URI[sha256sum] = "2311b209255bf24e95161907a16778cb054ac6d447fd8d05f1f0e41a555c7580"
+SRC_URI[md5sum] = "0e0f9bce8f8e598ca292b41e0ae385c8"
+SRC_URI[sha256sum] = "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563168e270cf79b2437"
 
 inherit autotools binconfig lib_package
 
