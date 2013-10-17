@@ -24,6 +24,7 @@ SRC_URI += " \
     file://gconftool-lossage.patch \
     file://gnome-vfs-no-kerberos.patch;striplevel=0 \
     file://0001-multiple-Makefile.am-remove-DG_DISABLE_DEPRECATED-to.patch \
+    file://do-not-use-srcdir-variable.patch \
 "
 
 SRC_URI[archive.md5sum] = "a05fab03eeef10a47dd156b758982f2e"
