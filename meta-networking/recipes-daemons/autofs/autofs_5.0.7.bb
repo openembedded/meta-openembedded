@@ -85,6 +85,7 @@ EXTRA_OECONF += "--disable-mount-locking \
 "
 CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
                         ac_cv_path_RPCGEN=rpcgen \
+                        systemddir=${systemd_unitdir}/system \
 "
 
 do_configure_prepend () {
