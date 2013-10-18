@@ -3,7 +3,7 @@ HOMEPAGE = "http://sourceforge.net/projects/libdc1394/"
 SECTION = "libs"
 LICENSE = "LGPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c848e78d9a4a5cc69906178e4d6fbd64"
-DEPENDS += "libxv virtual/libsdl virtual/libx11 libusb1 libraw1394"
+DEPENDS += "libusb1 libraw1394"
 
 PV = "2.2.1+gitr${SRCPV}"
 
@@ -15,6 +15,6 @@ SRC_URI = "git://git.code.sf.net/p/libdc1394/code;branch=master;protocol=git \
 
 S = "${WORKDIR}/git/${PN}"
 
-inherit autotools pkgconfig sdl
+inherit autotools pkgconfig
 
 EXTRA_OECONF += "--disable-doxygen-doc"
