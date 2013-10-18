@@ -37,8 +37,8 @@ do_configure() {
 
 do_install() {
         oe_runmake PREFIX=${prefix} DESTDIR=${D}  \
-          INST_TESTSDIR32=/opt/libhugetlbfs/tests \
-          INST_TESTSDIR64=/opt/libhugetlbfs/tests \
+          INST_TESTSDIR32=${libdir}/libhugetlbfs/tests \
+          INST_TESTSDIR64=${libdir}/libhugetlbfs/tests \
           install-tests
 }
 
@@ -47,6 +47,6 @@ PARALLEL_MAKE_pn-${PN} = ""
 PACKAGES =+ "${PN}-perl ${PN}-tests "
 FILES_${PN}-dbg += "${libdir}/libhugetlbfs/tests/obj32/.debug ${libdir}/libhugetlbfs/tests/obj64/.debug"
 FILES_${PN}-perl = "${libdir}/perl"
-FILES_${PN}-tests += "/opt/libhugetlbfs/tests"
+FILES_${PN}-tests += "${libdir}/libhugetlbfs/tests"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
