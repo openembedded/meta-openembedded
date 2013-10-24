@@ -31,7 +31,8 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
            file://quagga.default \
            file://watchquagga.init \
            file://watchquagga.default \
-           file://volatiles.03_quagga"
+           file://volatiles.03_quagga \
+           file://ripd-fix-two-bugs-after-received-SIGHUP.patch"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
