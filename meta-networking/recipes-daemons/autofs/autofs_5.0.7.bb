@@ -96,7 +96,12 @@ do_configure_prepend () {
 }
 
 do_install_append () {
-    test -d ${D}/run && rmdir ${D}/run
+    if [ -d ${D}/run ]; then
+	rmdir ${D}/run
+    fi
+    if [ -d ${D}${localstatedir}/run ]; then
+	rmdir ${D}${localstatedir}/run
+    fi
 }
 
 INSANE_SKIP_${PN} = "dev-so"
