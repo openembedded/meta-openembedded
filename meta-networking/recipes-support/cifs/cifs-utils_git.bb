@@ -20,7 +20,7 @@ inherit autotools pkgconfig
 do_install_append() {
     # Remove empty /usr/bin and /usr/sbin directories since the mount helper
     # is installed to /sbin
-    rmdir ${D}${bindir} ${D}${sbindir}
+    rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
 }
 
 RRECOMMENDS_${PN} = "kernel-module-cifs"
