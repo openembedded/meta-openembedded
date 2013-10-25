@@ -4,12 +4,14 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=59bdd99bb82238f238cf5c65c21604fd"
 HOMEPAGE = "http://www.lua.org/"
 
-PR = "r1"
+PR = "r2"
 
 DEPENDS += "readline"
 SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
            file://bitwise_operators.patch \
            file://lua5.1.pc \
+           file://luaorg_1.patch \
+           file://luaorg_2.patch \
 "
 S = "${WORKDIR}/lua-${PV}"
 

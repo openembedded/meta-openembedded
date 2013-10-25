@@ -1,0 +1,18 @@
+lua.org patch 1 for lua-5.1.5.
+from http://www.lua.org/bugs.html
+
+Upstream-Status: Backport
+
+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+diff -Nurd lua-5.1.5/src/Makefile lua-5.1.5/src/Makefile
+--- lua-5.1.5/src/Makefile	2012-02-13 22:41:22.000000000 +0200
++++ lua-5.1.5/src/Makefile	2013-10-25 11:29:49.769540434 +0300
+@@ -48,7 +48,7 @@
+ a:	$(ALL_A)
+ 
+ $(LUA_A): $(CORE_O) $(LIB_O)
+-	$(AR) $@ $(CORE_O) $(LIB_O)	# DLL needs all object files
++	$(AR) $@ $(CORE_O) $(LIB_O)
+ 	$(RANLIB) $@
+ 
+ $(LUA_T): $(LUA_O) $(LUA_A)
