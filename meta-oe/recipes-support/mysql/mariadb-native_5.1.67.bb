@@ -5,7 +5,6 @@ PROVIDES += "mysql5-native"
 
 RDEPENDS_${PN} = ""
 PACKAGES = ""
-DEPENDS = "ncurses-native"
 EXTRA_OEMAKE = ""
 EXTRA_OECONF = " --with-embedded-server "
 
