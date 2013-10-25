@@ -27,7 +27,7 @@ S = "${WORKDIR}/httpd-${PV}"
 
 inherit autotools update-rc.d
 
-SSTATE_SCAN_FILES += "apxs"
+SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
 CFLAGS_append = " -DPATH_MAX=4096"
 CFLAGS_prepend = "-I${STAGING_INCDIR}/openssl "
