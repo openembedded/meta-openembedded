@@ -25,6 +25,7 @@ PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
 EXTRA_OECONF = "--disable-static \
                 --disable-nls \
                ${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam', '--disable-pam', d)} \
+               --with-wwwroot=${localstatedir}/www/cherokee \
 "
 
 do_install_append () {
@@ -47,6 +48,9 @@ FILES_cget = "${bindir}/cget"
 FILES_libcherokee-server = "${libdir}/libcherokee-server${SOLIBS}"
 FILES_libcherokee-client = "${libdir}/libcherokee-client${SOLIBS}"
 FILES_libcherokee-base = "${libdir}/libcherokee-base${SOLIBS}"
+
+# Pack the htdocs
+FILES_${PN} += "${localstatedir}/www/cherokee"
 
 CONFFILES_${PN} = " \
                    ${sysconfdir}/cherokee/cherokee.conf \
