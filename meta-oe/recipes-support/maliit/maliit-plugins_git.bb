@@ -10,7 +10,7 @@ DEPENDS = "maliit-framework"
 
 RDEPENDS_${PN} += "qt4-plugin-iconengine-svgicon qt4-plugin-imageformat-svg"
 
-SRC_URI = "git://gitorious.org/maliit/maliit-plugins.git;branch=master"
+SRC_URI = "git://github.com/maliit/plugins.git;branch=master"
 
 SRCREV = "0760e585df494b394df1b887e5138ffef19c481f"
 PV = "0.92.3+git${SRCPV}"

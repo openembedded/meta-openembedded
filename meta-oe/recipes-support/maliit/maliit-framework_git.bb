@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
 inherit autotools qt4x11 gtk-immodules-cache
 
 
-SRC_URI = "git://gitorious.org/maliit/maliit-framework.git;branch=master \
+SRC_URI = "git://github.com/maliit/framework.git;branch=master \
     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
     file://0001-Fix-QT_IM_PLUGIN_PATH-to-allow-openembedded-to-build.patch \
     file://0001-Link-to-libmaliit-1-0-in-inputcontext-plugin.patch \
