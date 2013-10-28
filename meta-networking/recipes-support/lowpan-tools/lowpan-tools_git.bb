@@ -13,7 +13,9 @@ SRCREV = "a1d9615adde6d1a568813c24a128273ed755af04"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools python-dir
+
+CACHED_CONFIGUREVARS += "am_cv_python_pythondir=${PYTHON_SITEPACKAGES_DIR}/lowpan-tools"
 
 do_install_append() {
 	rmdir ${D}${localstatedir}/run
