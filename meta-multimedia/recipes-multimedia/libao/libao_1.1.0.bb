@@ -11,6 +11,8 @@ SRC_URI[sha256sum] = "29de5bb9b1726ba890455ef7e562d877df87811febb0d99ee69164b88c
 
 inherit autotools
 
+PACKAGES_DYNAMIC += "^${BPN}-plugin-.*"
+
 do_install_append () {
     find "${D}" -name '*.la' -exec rm -f {} +
 }
