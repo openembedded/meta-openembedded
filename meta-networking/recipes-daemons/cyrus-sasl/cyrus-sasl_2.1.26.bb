@@ -9,6 +9,7 @@ SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
 	   file://Fix-hardcoded-libdir.patch \
 	   file://debian_patches_0009_sasldb_al.diff \
 	   file://debian_patches_0014_avoid_pic_overwrite.diff \
+	   file://sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch \
 	   "
 
 inherit autotools pkgconfig useradd
