@@ -27,8 +27,9 @@ do_configure_prepend() {
     sed -i -e "s: help : :g" ${S}/Makefile.am
 }
 
-PACKAGES =+ "${PN}-nautilus-extension"
+PACKAGES =+ "${PN}-nautilus-extension ${PN}-libs"
 FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
+FILES_${PN}-libs += "${libdir}/libgdu*.so.*"
 FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
 FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
 FILES_${PN}-dbg += "${libdir}/nautilus/extensions-2.0/.debug"
