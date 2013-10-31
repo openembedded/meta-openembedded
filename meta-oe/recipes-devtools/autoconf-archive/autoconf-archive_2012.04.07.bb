@@ -1,6 +1,5 @@
 require autoconf-archive.inc
 
-PR = "r0"
 
 PARALLEL_MAKE = ""
 

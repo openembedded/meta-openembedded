@@ -5,7 +5,6 @@ HOMEPAGE = "http://www.netperf.org/"
 LICENSE = "netperf"
 LICENSE_FLAGS = "non-commercial"
 
-PR = "r0"
 
 SRC_URI="ftp://ftp.netperf.org/netperf/netperf-${PV}.tar.bz2 \
          file://cpu_set.patch \

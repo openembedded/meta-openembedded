@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "\
     file://src/ptp.c;beginline=3;endline=22;md5=dafe6cfd1782f56471bb94ab06624c1f \
     file://examples/albums.c;beginline=5;endline=21;md5=84f4e55dfec49e898b7f68a828c15620 \
 "
-PR = "r0"
 
 DEPENDS += "libusb1"
 

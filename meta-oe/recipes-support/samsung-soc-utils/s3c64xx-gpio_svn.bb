@@ -5,7 +5,6 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://gpio-s3c6410.c;endline=12;md5=060cda1be945ad9194593f11d56d55c7"
 SRCREV = "4949"
 PV = "1.0+svnr${SRCPV}"
-PR = "r0"
 
 SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=gpio;protocol=http"
 S = "${WORKDIR}/gpio"

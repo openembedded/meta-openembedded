@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f72405080
 
 SECTION = "qt/lib"
 
-PR = "r0"
 
 inherit qt4x11 pkgconfig
 

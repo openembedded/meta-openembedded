@@ -3,4 +3,3 @@ inherit native pythonnative
 
 DEPENDS = "python-native"
 RDEPENDS_${PN} = ""
-PR = "r0"

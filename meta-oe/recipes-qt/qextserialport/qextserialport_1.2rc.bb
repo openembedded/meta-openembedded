@@ -4,7 +4,6 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b866a28cda707ec714878bd933f46251"
 SECTION = "qt/libs"
 
-PR = "r0"
 
 # 1.2rc as version will sort lower then 1.2 when it's released
 REAL_PV = "1.2rc"

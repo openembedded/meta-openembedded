@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
 
 DEPENDS = "modphp"
 
-PR = "r0"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 

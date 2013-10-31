@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://README;md5=533bea47338d490e86744c6a0c5692e7"
 DEPENDS = "libpcap"
 # There are major API changes beween libnet v1.0 and libnet v1.1
 PROVIDES = "libnet-1.1"
-PR = "r0"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/libnet-dev/${PN}-${PV}.tar.gz \
            file://fix-endianess-test.patch"

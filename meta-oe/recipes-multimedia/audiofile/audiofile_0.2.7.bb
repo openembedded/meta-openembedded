@@ -7,7 +7,6 @@ SECTION = "libs"
 LICENSE = "LGPLv2 & GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
                     file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
-PR = "r0"
 
 SRC_URI = "http://www.68k.org/~michael/audiofile/${PN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "a39be317a7b1971b408805dc5e371862"

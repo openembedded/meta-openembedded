@@ -1,6 +1,5 @@
 require recipes-graphics/xorg-driver/xorg-driver-input.inc
 DESCRIPTION = "X.Org X server -- multitouch input driver"
-PR = "r0"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
 
