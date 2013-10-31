@@ -4,8 +4,7 @@ HOMEPAGE = "http://sourceforge.net/projects/log4cplus/"
 BUGTRACKER = "http://sourceforge.net/p/log4cplus/bugs/"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://INSTALL;md5=fd3fffde3e364ca1fb46c81b741a766a"
-
+LIC_FILES_CHKSUM = "file://INSTALL;md5=0278479fa183a2ff8ab216669424b764"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/log4cplus/log4cplus-stable/${PV}/log4cplus-${PV}.tar.gz"
 
