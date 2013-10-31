@@ -4,7 +4,6 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib"
 
-PR = "r0"
 
 inherit xfce-app
 

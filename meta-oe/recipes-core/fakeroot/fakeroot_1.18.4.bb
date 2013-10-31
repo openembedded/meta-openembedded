@@ -3,7 +3,6 @@ HOMEPAGE = "http://fakeroot.alioth.debian.org"
 SECTION = "base"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
-PR = "r0"
 
 SRC_URI = "\
     ${DEBIAN_MIRROR}/main/f/fakeroot/fakeroot_${PV}.orig.tar.bz2 \

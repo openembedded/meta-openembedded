@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ae9e161311a5a0768c333b537a40e332"
 
 DEPENDS = "libcap"
 
-PR = "r0"
 
 SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.tar.gz \
            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \

@@ -8,7 +8,6 @@ DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
 inherit update-rc.d
 INITSCRIPT_NAME = "hostapd"
 
-PR = "r0"
 
 DEFAULT_PREFERENCE = "-1"
 

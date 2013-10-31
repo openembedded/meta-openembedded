@@ -2,7 +2,6 @@ DESCRIPTION = "UNIX Shell similar to the Korn shell"
 HOMEPAGE="http://www.zsh.org"
 SECTION = "base/shell"
 
-PR = "r0"
 
 LICENSE = "ZSH"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=ad234d4b46db63491c4a9789da4fb341"

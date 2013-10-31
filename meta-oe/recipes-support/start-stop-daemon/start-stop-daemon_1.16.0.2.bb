@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aa
 # start-stop-daemon is usually shipped by dpkg
 DEPENDS = "ncurses"
 RCONFLICS_${PN} = "dpkg" 
-PR = "r0"
 
 SRC_URI = "http://sources.openembedded.org/dpkg_${PV}.tar.bz2"
 SRC_URI[md5sum] = "d211a84f38987771a49ad1c0f144334a"
