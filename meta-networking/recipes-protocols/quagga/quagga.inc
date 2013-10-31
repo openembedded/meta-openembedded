@@ -74,6 +74,14 @@ do_install () {
         install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
     done
 
+    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
+	touch ${D}${sysconfdir}/quagga/$f.conf
+    done
+    chown quagga:quaggavty ${D}${sysconfdir}/quagga
+    chown quagga:quagga ${D}${sysconfdir}/quagga/*.conf
+    chmod 750 ${D}${sysconfdir}/quagga
+    chmod 640 ${D}${sysconfdir}/quagga/*.conf
+
     # Install quagga
     oe_runmake install DESTDIR=${D} prefix=${prefix} \
             sbindir=${sbindir} \
@@ -109,7 +117,17 @@ FILES_${PN}-watchquagga = "${sbindir}/watchquagga ${sysconfdir}/default/watchqua
                            ${sysconfdir}/init.d/watchquagga"
 
 # Indicate that the default files are configuration files
-CONFFILES_${PN} = "${sysconfdir}/default/quagga"
+CONFFILES_${PN} = "${sysconfdir}/default/quagga \
+                   ${sysconfdir}/quagga/bgpd.conf \
+                   ${sysconfdir}/quagga/vtysh.conf \
+                   ${sysconfdir}/quagga/babeld.conf \
+                   ${sysconfdir}/quagga/isisd.conf \
+                   ${sysconfdir}/quagga/ospfd.conf \
+                   ${sysconfdir}/quagga/ripngd.conf \
+                   ${sysconfdir}/quagga/zebra.conf \
+                   ${sysconfdir}/quagga/ripd.conf \
+                   ${sysconfdir}/quagga/ospf6d.conf \
+                  "
 CONFFILES_${PN}-watchquagga = "${sysconfdir}/default/watchquagga"
 
 # Stop the names being rewritten due to the internal shared libraries
@@ -133,14 +151,6 @@ GROUPADD_PARAM_${PN} = "--system quagga ; --system quaggavty"
 USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga quagga"
 
 pkg_postinst_${PN} () {
-    if [ "x$D" != "x" ] ; then
-        exit 1
-    fi
-    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do touch ${sysconfdir}/quagga/$f.conf; done
-    chown quagga:quaggavty ${sysconfdir}/quagga
-    chown quagga:quagga ${sysconfdir}/quagga/*.conf
-    chmod 750 ${sysconfdir}/quagga
-    chmod 640 ${sysconfdir}/quagga/*.conf
     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
         ${sysconfdir}/init.d/populate-volatile.sh update
     fi
