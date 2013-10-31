@@ -55,11 +55,6 @@ USERADD_PACKAGES = "${PN}-bin"
 GROUPADD_PARAM_${PN}-bin = "--system mail"
 USERADD_PARAM_${PN}-bin = "--system --home=/var/spool/mail -g mail cyrus"
 
-pkg_postinst_${PN}-bin () {
-    echo "cyrus" | saslpasswd2 -p -c cyrus
-    chgrp mail /etc/sasldb2
-}
-
 SRC_URI[md5sum] = "a7f4e5e559a0e37b3ffc438c9456e425"
 SRC_URI[sha256sum] = "8fbc5136512b59bb793657f36fadda6359cae3b08f01fd16b3d406f1345b7bc3"
 
