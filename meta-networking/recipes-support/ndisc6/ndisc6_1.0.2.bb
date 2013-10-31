@@ -49,14 +49,8 @@ servers through slateless IPv6 autoconfiguration."
 
 do_install_append () {
     rm -rf ${D}${localstatedir}
-}
-# Enable SUID bit for applications that need it
-pkg_postinst_${PN}-rltraceroute6 () {
-    chmod 4555 ${bindir}/rltraceroute6
-}
-pkg_postinst_${PN}-ndisc6 () {
-    chmod 4555 ${bindir}/ndisc6
-}
-pkg_postinst_${PN}-rdisc6 () {
-    chmod 4555 ${bindir}/rdisc6
+    # Enable SUID bit for applications that need it
+    chmod 4555 ${D}${bindir}/rltraceroute6
+    chmod 4555 ${D}${bindir}/ndisc6
+    chmod 4555 ${D}${bindir}/rdisc6
 }
