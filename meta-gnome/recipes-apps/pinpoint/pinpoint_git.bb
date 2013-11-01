@@ -18,3 +18,4 @@ PV = "0.1.4+gitr${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+RRECOMMENDS_${PN} = "gdk-pixbuf-loader-jpeg gdk-pixbuf-loader-png"
