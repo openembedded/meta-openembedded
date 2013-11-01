@@ -60,6 +60,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
            file://fix_disable_ldap.patch \
            file://autofs-5.0.7-fix-lib-deps.patch \
+           file://0001-systemd-allow-with-systemd-to-take-a-path-arg.patch \
 "
 
 SRC_URI[md5sum] = "bc46838dece83c02d800ff144ed9f431"
@@ -73,7 +74,7 @@ INITSCRIPT_PARAMS = "defaults"
 # FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
 CFLAGS += "${LDFLAGS}"
 
-PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
+PACKAGECONFIG[systemd] = "--with-systemd=${systemd_unitdir}/system,--without-systemd,systemd"
 
 PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
@@ -85,7 +86,6 @@ EXTRA_OECONF += "--disable-mount-locking \
 "
 CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
                         ac_cv_path_RPCGEN=rpcgen \
-                        systemddir=${systemd_unitdir}/system \
 "
 
 do_configure_prepend () {
