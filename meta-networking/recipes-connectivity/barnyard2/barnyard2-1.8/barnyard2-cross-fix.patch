@@ -1,0 +1,24 @@
+Upstream-Status: Pending
+
+Index: barnyard2-1.8/configure.in
+===================================================================
+--- barnyard2-1.8.orig/configure.in	2010-08-03 15:12:06.000000000 +0400
++++ barnyard2-1.8/configure.in	2010-08-03 15:13:46.000000000 +0400
+@@ -73,7 +73,7 @@
+     # libpcap doesn't even LOOK at the timeout you give it under Linux
+     AC_DEFINE([PCAP_TIMEOUT_IGNORED],[1],[Define if pcap timeout is ignored])
+     AC_SUBST(extra_incl)
+-    extra_incl="-I/usr/include/pcap"
++    extra_incl="-I=/usr/include/pcap"
+     ;;
+   *-hpux10*|*-hpux11*)
+     AC_DEFINE([HPUX],[1],[Define if HP-UX 10 or 11])
+@@ -230,7 +230,7 @@
+ # In case INADDR_NONE is not defined (like on Solaris)
+ have_inaddr_none="no"
+ AC_MSG_CHECKING([for INADDR_NONE])
+-AC_RUN_IFELSE(
++AC_COMPILE_IFELSE(
+ [AC_LANG_PROGRAM(
+ [[
+ #include <sys/types.h>
