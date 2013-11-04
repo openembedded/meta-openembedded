@@ -22,6 +22,12 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[dbus] = "COPTS=-DHAVE_DBUS,,dbus"
 EXTRA_OEMAKE = "${EXTRA_OECONF}"
 
+do_compile_append() {
+    # build dhcp_release
+    cd ${S}/contrib/wrt
+    oe_runmake
+}
+
 do_install () {
     oe_runmake "PREFIX=${D}${prefix}" \
                "BINDIR=${D}${bindir}" \
@@ -33,6 +39,8 @@ do_install () {
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/dnsmasq.service ${D}${systemd_unitdir}/system
+
+    install -m 0755 ${S}/contrib/wrt/dhcp_release ${D}${bindir}
 
     if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
         install -d ${D}${sysconfdir}/dbus-1/system.d
