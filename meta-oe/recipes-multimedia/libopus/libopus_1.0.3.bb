@@ -6,11 +6,11 @@ technology from Skype's SILK codec and Xiph.Org's CELT codec."
 HOMEPAGE = "http://www.opus-codec.org/"
 SECTION = "libs/multimedia"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=6d9f9b3714db6bbcfb6e42170d9c664d"
+LIC_FILES_CHKSUM = "file://COPYING;md5=225b2f817ea798b7c705fe1214694891"
 
 SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
-SRC_URI[md5sum] = "c7161b247a8437ae6b0f11dd872e69e8"
-SRC_URI[sha256sum] = "b1cad6846a8f819a141009fe3f8f10c946e8eff7e9c2339cd517bb136cc59eae"
+SRC_URI[md5sum] = "86eedbd3c5a0171d2437850435e6edff"
+SRC_URI[sha256sum] = "191a089c92dbc403de6980463dd3604b65beb12d283c607e246c8076363cb49c"
 
 S = "${WORKDIR}/opus-${PV}"
 
