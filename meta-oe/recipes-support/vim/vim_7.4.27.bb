@@ -7,7 +7,7 @@ LICENSE = "vim"
 LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
 
 SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
-	file://configure.in_remove_CC_quotes.patch;patchdir=.."
+	   file://configure.in_remove_CC_quotes.patch;patchdir=.."
 SRCREV = "v7-4-027"
 
 S = "${WORKDIR}/${PN}/src"
@@ -60,6 +60,8 @@ do_install_append() {
     # Install example vimrc from runtime files
     install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${PN}/vimrc
 }
+
+PARALLEL_MAKEINST = ""
 
 PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
 FILES_${PN}-syntax = "${datadir}/${PN}/${VIMDIR}/syntax"
