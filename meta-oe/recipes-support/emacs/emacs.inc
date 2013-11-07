@@ -19,7 +19,8 @@ X11DEPENDS = " \
 EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x,${X11DEPENDS}"
+PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x --without-dbus,${X11DEPENDS}"
+
 
 inherit autotools
 
@@ -87,7 +88,7 @@ do_compile_prepend() {
     ${STAGING_DIR_TARGET}/${base_libdir}/libgcc_s.so.* \
     ${STAGING_DIR_TARGET}/${base_libdir}/libpthread* $treedir/${base_libdir}/
 
-    if [ ! -z "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}" ] ; then
+    if [ ! -z "${@base_contains('PACKAGECONFIG', 'x11', 'x11', '', d)}" ] ; then
         echo "X11 build enabled"
         # copy only as much stuff as we need
         # before: 5.5G   ../../qemu-treedir/
