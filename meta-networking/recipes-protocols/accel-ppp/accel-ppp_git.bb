@@ -30,3 +30,12 @@ PACKAGES =+ "${PN}-libs"
 FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
 INSANE_SKIP_${PN}-libs = "dev-so"
 RDEPENDS_${PN} += "${PN}-libs"
+
+do_install_prepend() {
+    cmlist=`find ${S} -name CMakeLists.txt`
+    for file in $cmlist; do
+        sed -i -e "s:LIBRARY DESTINATION lib/accel-ppp:LIBRARY DESTINATION ${baselib}/accel-ppp:g" \
+               -e "s:\${CMAKE_INSTALL_PREFIX}/lib/accel-ppp:\${CMAKE_INSTALL_PREFIX}/${baselib}/accel-ppp:g" \
+               $cmlist
+    done
+}
