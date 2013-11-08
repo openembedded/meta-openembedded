@@ -67,9 +67,8 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/ntpd.service ${D}${systemd_unitdir}/system/
     install -m 0644 ${WORKDIR}/sntp.service ${D}${systemd_unitdir}/system/
 
-    # see http://www.freedesktop.org/wiki/Software/systemd/timedated/
-    install -d ${D}${libdir}/systemd/ntp-units.d
-    install -m 0644 ${WORKDIR}/ntpd.list ${D}${libdir}/systemd/ntp-units.d/60-ntpd.list
+    install -d ${D}${systemd_unitdir}/ntp-units.d
+    install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
 }
 
 PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
