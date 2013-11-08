@@ -32,12 +32,14 @@ SRC_URI = "http://download.savannah.gnu.org/releases/quagga${QUAGGASUBDIR}/quagg
            file://watchquagga.init \
            file://watchquagga.default \
            file://volatiles.03_quagga \
+           file://quagga.pam \
            file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
            file://quagga-Avoid-duplicate-connected-address.patch \
 "
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
+PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
 
 inherit autotools update-rc.d useradd
 
@@ -100,6 +102,15 @@ do_install () {
     # Remove generated info dir file, it doesn't belong in the generated
     # package.
     rm -f ${D}${infodir}/dir
+
+    # For PAM
+    for feature in ${DISTRO_FEATURES}; do
+        if [ "$feature" = "pam" ]; then
+            install -D -m 644 ${WORKDIR}/quagga.pam ${D}/${sysconfdir}/pam.d/quagga
+            break
+        fi
+    done
+
 }
 
 # Split into a main package and separate per-protocol packages
