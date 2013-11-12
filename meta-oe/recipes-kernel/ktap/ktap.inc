@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.ktap.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE-GPL;md5=eb723b61539feef013de476e68b5c50a"
 
-SRCREV = "6a5100b77321ce5792dfea34fa500ea537b1858c"
+SRCREV = "c507eeca662ff00bf67f8c94df35254e0966f214"
 SRC_URI = "git://github.com/ktap/ktap.git"
 
 S = "${WORKDIR}/git"
