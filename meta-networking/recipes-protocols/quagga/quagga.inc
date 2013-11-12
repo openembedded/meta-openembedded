@@ -148,7 +148,7 @@ INITSCRIPT_PARAMS_${PN}-watchquagga     = "defaults 90 10"
 # Add quagga's user and group
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system quagga ; --system quaggavty"
-USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga quagga"
+USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga --shell /bin/false quagga"
 
 pkg_postinst_${PN} () {
     if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
