@@ -120,5 +120,5 @@ SRC_URI = "\
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[wayland] = "--enable-ecore-wayland,--disable-ecore-wayland,wayland xkbcommon"
 
-SRC_URI[md5sum] = "5a8ca096d8c15647b2493d4664a4b895"
-SRC_URI[sha256sum] = "26cb1dc02213a221fdec32ef4ea4ece608e5239bdbd19c9d62b09cf931863738"
+SRC_URI[md5sum] = "2d5a4fb8f702628f5c7b785309be01ab"
+SRC_URI[sha256sum] = "c145cc00280d3a310c76e5e6a9fb509c81b8b173f04458c97ea4ae6bf563eaf3"

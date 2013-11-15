@@ -18,5 +18,5 @@ SRC_URI = "\
     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
 "
 
-SRC_URI[md5sum] = "e04679ac7967e698c8c4013b9fd209a1"
-SRC_URI[sha256sum] = "54c96192cb46f5dce851934adb1633b45e5b007ad3cd05495102eeb255bced31"
+SRC_URI[md5sum] = "171bbc41a5e5d202d0dc57c34e318c14"
+SRC_URI[sha256sum] = "ff72204490e740adaa7980bad1a060dae8113c308c6083e5bcee380a11dad1f4"
