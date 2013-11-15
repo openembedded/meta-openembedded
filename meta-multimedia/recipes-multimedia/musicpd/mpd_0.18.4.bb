@@ -5,15 +5,15 @@ HOMEPAGE ="http://sourceforge.net/projects/musicpd"
 
 DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
 
-PR = "r4"
-
 SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/musicpd/${PN}/${PV}/${PN}-${PV}.tar.bz2 \
+    http://www.musicpd.org/download/${PN}/stable/${PN}-0.18.tar.xz \
     file://mpd.conf.in \
 "
 
-SRC_URI[md5sum] = "da3f3d6617a877192db4c6f53504cd38"
-SRC_URI[sha256sum] = "b18cdb1b779ca2ab323e212a0af4a567b7da4881a4e96868a8979bdfdbe7c2e8"
+SRC_URI[md5sum] = "0d881fb32f9d31afcdb0bb13cb78b9ab"
+SRC_URI[sha256sum] = "6b171985f192603150c879d105dc4d05d701ac60a2db41630a4dce823e068388"
+
+S = "${WORKDIR}/${PN}-0.18"
 
 inherit autotools useradd systemd
 
