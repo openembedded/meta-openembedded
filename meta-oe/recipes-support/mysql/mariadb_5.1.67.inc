@@ -16,6 +16,7 @@ SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x8
            file://fix-cve-2013-1861-1.patch \
            file://fix-cve-2013-1861-2.patch \
            file://zlib-let-libdir-configurable.patch \
+           file://storage-forbids-absolute-addresses-on-IA-32.patch \
            file://my.cnf \
            file://mysqld.sh"
 

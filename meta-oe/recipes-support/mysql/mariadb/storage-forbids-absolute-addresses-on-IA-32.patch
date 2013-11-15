@@ -1,0 +1,44 @@
+storage: forbids absolute addresses on IA-32
+
+The shared lib has relocations in .text
+...
+WARNING: QA Issue: ELF binary '/usr/lib/plugin/ha_xtradb.so.0.0.0' has relocations in .text
+WARNING: QA Issue: ELF binary '/usr/lib/plugin/ha_innodb_plugin.so.0.0.0' has relocations in .text
+...
+
+Upstream-Status: Pending
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ storage/innodb_plugin/plug.in |    2 +-
+ storage/xtradb/plug.in        |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/storage/innodb_plugin/plug.in b/storage/innodb_plugin/plug.in
+--- a/storage/innodb_plugin/plug.in
++++ b/storage/innodb_plugin/plug.in
+@@ -50,7 +50,7 @@ MYSQL_PLUGIN_ACTIONS(innodb_plugin,  [
+ 		;;
+ 	*86)
+ 		# Use absolute addresses on IA-32
+-		INNODB_DYNAMIC_CFLAGS="$INNODB_DYNAMIC_CFLAGS -prefer-non-pic"
++		# INNODB_DYNAMIC_CFLAGS="$INNODB_DYNAMIC_CFLAGS -prefer-non-pic"
+ 		;;
+   esac
+   AC_SUBST(INNODB_DYNAMIC_CFLAGS)
+diff --git a/storage/xtradb/plug.in b/storage/xtradb/plug.in
+index a33f4dc..4c186fd 100644
+--- a/storage/xtradb/plug.in
++++ b/storage/xtradb/plug.in
+@@ -51,7 +51,7 @@ MYSQL_PLUGIN_ACTIONS(xtradb,  [
+ 		;;
+ 	*86)
+ 		# Use absolute addresses on IA-32
+-		INNODB_DYNAMIC_CFLAGS="$INNODB_DYNAMIC_CFLAGS -prefer-non-pic"
++		# INNODB_DYNAMIC_CFLAGS="$INNODB_DYNAMIC_CFLAGS -prefer-non-pic"
+ 		;;
+   esac
+   AC_SUBST(INNODB_DYNAMIC_CFLAGS)
+-- 
+1.7.9.5
+
