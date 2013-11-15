@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
 PR = "r1"
 
 SRC_URI = "http://wireless.kernel.org/download/${PN}/${P}.tar.bz2 \
-           file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch"
+           file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch \
+           file://dont.call.git.rev-parse.on.parent.dir.patch"
 
 SRC_URI[md5sum] = "727892c0fb35c80ee3849fbe89b45350"
 SRC_URI[sha256sum] = "ca10e4827a5f0a36e093aee6ad81b5febf81f8097d7d858889ac51ff364168c1"
