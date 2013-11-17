@@ -10,7 +10,6 @@ SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
 S = "${WORKDIR}/${PN}"
 
 FILES_${PN} += " ${libdir}/mime"
-inherit allarch
 
 docdir_append = "/${PN}"
 
