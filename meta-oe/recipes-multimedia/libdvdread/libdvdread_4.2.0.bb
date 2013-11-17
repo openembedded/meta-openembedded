@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "0bea15da842a4b04a482b009d72dcc6d9c9524ccc1bf67e5748319ec5a
 
 inherit autotools lib_package binconfig pkgconfig
 
-CONFIGUREOPTS := "${@d.getVar('CONFIGUREOPTS', True).replace('--disable-silent-rules', ' ')}"
+CONFIGUREOPTS_remove = "--disable-silent-rules"
 
 do_configure_prepend() {
     # For some weird reason, libdvdread only provides a `configure2' script...
