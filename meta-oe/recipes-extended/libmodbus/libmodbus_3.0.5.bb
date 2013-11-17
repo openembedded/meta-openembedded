@@ -8,9 +8,9 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "http://github.com/downloads/stephane/${BPN}/${BP}.tar.gz"
+SRC_URI = "http://libmodbus.org/site_media/build/${BP}.tar.gz"
 
 inherit autotools pkgconfig
 
-SRC_URI[md5sum] = "b5042d833c6c132e6fb2551af133a342"
-SRC_URI[sha256sum] = "6fc7cf91f7293e522afde6ae5fc605c6cd7bdca4ee2ec953db5bb91158ab8677"
+SRC_URI[md5sum] = "18860375a7aa0ca9cba7d6ece54ab666"
+SRC_URI[sha256sum] = "19aad5d55fa315602d6e836a858a3802f1608f9d824afba05fa12a58a1b1e656"
