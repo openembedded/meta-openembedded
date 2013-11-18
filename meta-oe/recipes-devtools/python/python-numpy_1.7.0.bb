@@ -40,7 +40,7 @@ inherit distutils
 
 # Make the build fail and replace *config.h with proper one
 # This is a ugly, ugly hack - Koen
-do_compile_prepend() {
+do_compile_prepend_class-target() {
     BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
     ${STAGING_BINDIR_NATIVE}/python-native/python setup.py build ${DISTUTILS_BUILD_ARGS} || \
     true
@@ -72,3 +72,7 @@ RDEPENDS_${PN} = "python-unittest \
                   python-subprocess \
                   python-compression \
 "
+
+RDEPENDS_${PN}_class-native = ""
+
+BBCLASSEXTEND = "native nativesdk"
