@@ -1,5 +1,7 @@
 #! /bin/sh
 #
+PATH=/sbin:/bin:/usr/bin:/usr/sbin
+
 # ntpd	init.d script for ntpdc from ntp.isc.org
 test -x /usr/bin/ntpd -a -r /etc/ntp.conf || exit 0
 # rcS contains TICKADJ
