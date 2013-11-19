@@ -13,5 +13,9 @@ do_install() {
 }
 
 inherit allarch
-CONFFILES_${PN} = "${sysconfdir}/fb.modes"
 
+# fb.modes file is MACHINE_ARCH, base.bbclass correctly changes it to MACHINE_ARCH, but too late for allarch.bbclass
+# to disable "all" behavior (found when comparing qemuarm and qemux86 signatures)
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+CONFFILES_${PN} = "${sysconfdir}/fb.modes"
