@@ -60,7 +60,7 @@ INITSCRIPT_NAME = "proftpd"
 INITSCRIPT_PARAM = "defaults 85 15"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "${FTPGROUP}"
+GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
 USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
 
 FILES_${PN} += "/home/${FTPUSER}"
