@@ -34,6 +34,15 @@ CONFIGFILESURI_x86-64 = " \
     file://_numpyconfig.h \
 "
 
+CONFIGFILESURI_powerpc = " \
+    file://config.h \
+    file://numpyconfig.h \
+"
+CONFIGFILESURI_powerpc64 = " \
+    file://config.h \
+    file://_numpyconfig.h \
+"
+
 S = "${WORKDIR}/numpy-${PV}"
 
 inherit distutils
