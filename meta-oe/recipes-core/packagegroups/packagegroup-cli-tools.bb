@@ -45,7 +45,6 @@ RDEPENDS_${PN}-debug = "\
     s3c64xx-gpio \
     serial-forward \
     strace \
-    tcpdump \
 "
 
 RRECOMMENDS_${PN}-debug = "\
