@@ -20,7 +20,7 @@ SRCREV = "0298efdcd1153b8f719b9164548a3f0546f0cb7c"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF = "--disable-qv4l2 --enable-shared" 
+EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev" 
 
 do_configure() {
     # autotools_do_configure fails with:
