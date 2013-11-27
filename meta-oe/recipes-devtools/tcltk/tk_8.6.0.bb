@@ -24,18 +24,31 @@ EXTRA_OECONF = "\
     --enable-threads \
     --with-x \
     --with-tcl=${STAGING_BINDIR_CROSS} \
+    --libdir=${libdir} \
 "
 
 do_install_append() {
-    mv libtk8.6.so libtk8.6.so.0
+    ln -sf libtk8.6.so ${D}${libdir}/libtk8.6.so.0
     oe_libinstall -so libtk8.6 ${D}${libdir}
     ln -sf wish8.6 ${D}${bindir}/wish
+	
+    # Even after passing libdir=${libdir} at config, some incorrect dirs are still generated for the multilib build
+    if [ "$libdir" != "/usr/lib" ]; then
+        # Move files to correct library directory
+        mv ${D}/usr/lib/tk8.6/* ${D}/${libdir}/tk8.6/
+        # Remove unneeded/incorrect dir ('usr/lib/')
+        rm -rf ${D}/usr/lib
+    fi
 }
 
 PACKAGES =+ "${PN}-lib"
 
-FILES_${PN}-lib = "${libdir}/libtk8.6.so.*"
+FILES_${PN}-lib = "${libdir}/libtk8.6.so*"
 FILES_${PN} += "${libdir}/tk*"
+
+# isn't getting picked up by shlibs code
+RDEPENDS_${PN} += "tk-lib"
+RDEPENDS_${PN}_class-native = ""
 
 BINCONFIG_GLOB = "*Config.sh"
 BBCLASSEXTEND = "native"
