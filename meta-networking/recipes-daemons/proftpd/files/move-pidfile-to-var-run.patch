@@ -1,0 +1,39 @@
+move pidfile to /var/run
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ configure    |    2 +-
+ configure.in |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure b/configure
+index e6268f5..ebed38e 100755
+--- a/configure
++++ b/configure
+@@ -33587,7 +33587,7 @@ cat >>confdefs.h <<_ACEOF
+ _ACEOF
+ 
+ cat >>confdefs.h <<_ACEOF
+-#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
++#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"`"
+ _ACEOF
+ 
+ 
+diff --git a/configure.in b/configure.in
+index df9186a..e2ae868 100644
+--- a/configure.in
++++ b/configure.in
+@@ -2790,7 +2790,7 @@ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
+ 
+ AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
+ AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
+-AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`")
++AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
+ 
+ prefix="$pr_saved_prefix"
+ exec_prefix="$pr_saved_exec_prefix"
+-- 
+1.7.10.4
+
