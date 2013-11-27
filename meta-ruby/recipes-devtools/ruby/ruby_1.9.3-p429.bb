@@ -17,10 +17,10 @@ SRC_URI[sha256sum] = "d192d1afc46a7ef27b9d0a3c7a67b509048984db2c38907aa82641bdf9
 
 EXTRA_OECONF = "\
     --enable-wide-getaddrinfo \
-    --with-rubygemsdir=${datadir}/rubygems \
     --disable-versioned-paths \
     --disable-rpath \
     --enable-shared \
+    --enable-load-relative \
 "
 
 EXTRA_OEMAKE = " \
