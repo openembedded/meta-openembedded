@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "efd08b610210d39977ec3175fa82dad9fbd33587930081be2a905a712d
 inherit autotools
 CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
 
-EXTRA_OECONF = "--without-crypto --disable-rpath \
+EXTRA_OECONF = "--without-crypto \
         ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6', '--disable-ipv6', d)}"
 
 EXTRA_AUTORECONF += " -I m4"
