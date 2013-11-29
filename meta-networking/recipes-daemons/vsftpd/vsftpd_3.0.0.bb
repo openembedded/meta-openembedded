@@ -70,6 +70,7 @@ do_install() {
         sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
         sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
     fi
+    install -d ${D}${localstatedir}/run/vsftpd/empty
 }
 
 INITSCRIPT_PACKAGES = "${PN}"
