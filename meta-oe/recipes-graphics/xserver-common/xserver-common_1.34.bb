@@ -28,6 +28,13 @@ SRC_URI_append = " \
 
 do_install_append() {
     sed -i 's:^BINDIR=.*$:BINDIR=${bindir}:' ${D}/etc/X11/xserver-common
+    # Rename all Xsession files not ending with .sh
+    # Unfortunatelly when xinput-calibrator was moved to oe-core
+    # its Xsession file got name 30xinput_calibrate.sh and ls -X sorts it
+    # last, not respecting numbers for sorting them
+    for i in ${D}/${sysconfdir}/X11/Xsession.d/*; do
+        echo $i | grep '.sh$' || mv $i $i.sh
+    done
 }
 
 inherit allarch
