@@ -38,6 +38,7 @@ EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
         --with-path-procnet-dev=/proc/net/dev \
         ${noipv6} \
         --with-path-login=/bin/login \
+        --with-libreadline-prefix=${STAGING_DIR_HOST}${prefix} \
 "
 
 do_configure_prepend () {
