@@ -10,15 +10,14 @@ SECTION = "console/tools"
 LICENSE = "BSD | GPLv2"
 LIC_FILES_CHKSUM = "file://generate/unix/readme.txt;md5=204407e197c1a01154a48f6c6280c3aa"
 DEPENDS = "bison flex"
-PR="r1"
 
 SRC_URI = "https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
     file://cross-compile.patch \
     file://no-werror.patch \
-    file://fix-parallel-build.patch"
+    "
 
-SRC_URI[md5sum] = "6694a6a5baa4a23fba892b8ad23f3959"
-SRC_URI[sha256sum] = "dcaf8bcdd146006e7c480d4249e014e38eb2ae3e4d2d40f90ec454312cc7e4d1"
+SRC_URI[md5sum] = "1bd5b14c4c567ca2a113c05f4b28f29c"
+SRC_URI[sha256sum] = "d699a880b84e04205eda2d5ad048c1c38a57289240caa5f0fb7ebdcd3aac83d2"
 
 S = "${WORKDIR}/acpica-unix2-${PV}"
 
