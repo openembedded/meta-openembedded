@@ -24,8 +24,15 @@ inherit autotools
 PACKAGE_BEFORE_PN += "${PN}-server"
 FILES_${PN}-server = "${bindir}/mosh-server"
 
-# mosh uses SSH to authenticate and the client uses OpenSSH-specific features
-RDEPENDS_${PN} += "openssh-ssh"
-# The server seemed not to work with dropbear either
-RDEPENDS_${PN}-server += "openssh-sshd"
+NEEDED_PERL_MODULES = "\
+	perl-module-socket \
+	perl-module-getopt-long \
+	perl-module-errno \
+	perl-module-io-socket-inet \
+	perl-module-posix \
+"
 
+# mosh uses SSH to authenticate and the client uses OpenSSH-specific features
+RDEPENDS_${PN} += "openssh-ssh ${NEEDED_PERL_MODULES}"
+# The server seemed not to work with dropbear either
+RDEPENDS_${PN}-server += "openssh-sshd ${NEEDED_PERL_MODULES}"
