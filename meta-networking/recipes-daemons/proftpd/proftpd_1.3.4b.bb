@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://proftpd-basic.init \
            file://default \
            file://move-pidfile-to-var-run.patch \
+           file://close-RequireValidShell-check.patch \
 "
 
 SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
@@ -62,6 +63,7 @@ INITSCRIPT_PARAM = "defaults 85 15"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
-USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} ${FTPUSER}"
+USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} --home-dir /var/lib/${FTPUSER} --no-create-home \
+                       --shell /bin/false ${FTPUSER}"
 
 FILES_${PN} += "/home/${FTPUSER}"
