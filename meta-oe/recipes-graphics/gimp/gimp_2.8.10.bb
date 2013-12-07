@@ -8,9 +8,11 @@ DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webk
 
 inherit gnome
 
-SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2"
-SRC_URI[md5sum] = "b542138820ca3a41cbd63fc331907955"
-SRC_URI[sha256sum] = "0cd1a7e67e132ead810e16e31ff929394c83fcf841e4a295c45d6f3829601ad9"
+SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
+           file://freetype.patch \
+          "
+SRC_URI[md5sum] = "84c964aab7044489af69f7319bb59b47"
+SRC_URI[sha256sum] = "e7fd8b19f989138d826003c75f56bd5b6f136eef597e86e3978ede0bba470ae6"
 
 EXTRA_OECONF = "--disable-python \
                 --without-wmf"
@@ -21,3 +23,4 @@ do_configure_append() {
 }
 
 FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
+FILES_${PN}  += "${datadir}/appdata"
