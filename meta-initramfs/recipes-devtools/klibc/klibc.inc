@@ -13,6 +13,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INC_PR = "r1"
 
 KLIBC_ARCH = '${TARGET_ARCH}'
+KLIBC_ARCH_aarch64 = 'arm64'
 KLIBC_ARCH_armeb = 'arm'
 KLIBC_ARCH_mipsel = 'mips'
 KLIBC_ARCH_x86 = 'i386'
