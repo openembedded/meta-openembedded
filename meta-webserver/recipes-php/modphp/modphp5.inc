@@ -42,7 +42,8 @@ EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
                 --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
                 --enable-zip \
                 --enable-mbstring \
-                --with-config-file-path=${sysconfdir}/php/apache2-php5"
+                --with-config-file-path=${sysconfdir}/php/apache2-php5 \
+                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)}"
 
 PACKAGECONFIG ??= "mysql"
 PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config,--without-mysqli,mysql5"
