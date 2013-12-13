@@ -1,0 +1,31 @@
+Upstream-status: backport
+
+From 602070f9cce790debd8d1469254e7726ab499ae7 Mon Sep 17 00:00:00 2001
+From: Peter Eisentraut <peter_e@gmx.net>
+Date: Fri, 29 Mar 2013 21:39:55 -0400
+Subject: [PATCH] ecpg: Parallel make fix
+
+In some parallel make situations, the install-headers target could be
+called before the installation directories are created by installdirs,
+causing the installation to fail.  Fix that by making install-headers
+depend on installdirs.
+---
+ src/interfaces/ecpg/include/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/interfaces/ecpg/include/Makefile b/src/interfaces/ecpg/include/Makefile
+index eab833b..e92e56f 100644
+--- a/src/interfaces/ecpg/include/Makefile
++++ b/src/interfaces/ecpg/include/Makefile
+@@ -18,7 +18,7 @@ ecpg_headers = ecpgerrno.h ecpglib.h ecpgtype.h sqlca.h sql3types.h ecpg_informi
+ 	sqlda.h sqlda-compat.h sqlda-native.h
+ informix_headers = datetime.h decimal.h sqltypes.h
+ 
+-install-headers: $(ecpg_headers) $(informix_headers)
++install-headers: $(ecpg_headers) $(informix_headers) installdirs
+ 	$(INSTALL_DATA) $(addprefix $(srcdir)/,$(ecpg_headers)) '$(DESTDIR)$(includedir)/'
+ 	$(INSTALL_DATA) $(addprefix $(srcdir)/,$(informix_headers)) '$(DESTDIR)$(informix_esql_dir)/'
+ 	$(INSTALL_DATA) $(ecpg_config_h) '$(DESTDIR)$(includedir)'
+-- 
+1.8.3.4
+
