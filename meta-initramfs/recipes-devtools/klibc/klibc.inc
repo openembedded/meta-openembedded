@@ -10,8 +10,6 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
 # debugsources.list: No such file or directory:
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
-INC_PR = "r1"
-
 KLIBC_ARCH = '${TARGET_ARCH}'
 KLIBC_ARCH_aarch64 = 'arm64'
 KLIBC_ARCH_armeb = 'arm'
@@ -27,7 +25,7 @@ KLIBC_ARCH_powerpc64 = 'ppc64'
 
 export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
 
-SRCREV = "f05ff116bb9edbbb81d82fa47b78e630ce878470"
+SRCREV = "f0440baf7f2dc1d9a25863c184d0a8fb73c4ee6c"
 SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
 
 SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \

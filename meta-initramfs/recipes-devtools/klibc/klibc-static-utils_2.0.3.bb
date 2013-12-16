@@ -1,5 +1,3 @@
-PR = "${INC_PR}.0"
-
 KLIBC_UTILS_VARIANT = "static"
 KLIBC_UTILS_PKGNAME = "klibc-static-utils"
 

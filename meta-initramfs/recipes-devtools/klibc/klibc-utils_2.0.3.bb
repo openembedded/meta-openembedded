@@ -1,5 +1,3 @@
-PR = "${INC_PR}.0"
-
 KLIBC_UTILS_VARIANT = "shared"
 KLIBC_UTILS_PKGNAME = "klibc-utils"
 

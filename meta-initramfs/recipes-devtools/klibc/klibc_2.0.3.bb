@@ -1,5 +1,3 @@
-PR = "${INC_PR}.0"
-
 do_install() {
     oe_runmake install
 
