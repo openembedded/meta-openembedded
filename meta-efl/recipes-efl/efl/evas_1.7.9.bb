@@ -46,7 +46,7 @@ PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve
 # http://blog.gmane.org/gmane.comp.window-managers.enlightenment.user/page=3
 RRECOMMENDS_${PN} += "evas-loader-generic evas-generic-loader-svn"
 
-RRECOMMENDS_${PN} = " \
+RRECOMMENDS_${PN} += " \
     evas-engine-fb \
     evas-engine-software-generic \
     evas-engine-software-x11 \
