@@ -20,6 +20,7 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
            file://rsh.xinetd.inetutils \
            file://telnet.xinetd.inetutils \
            file://tftpd.xinetd.inetutils \
+           file://inetutils-1.9-PATH_PROCNET_DEV.patch \
 "
 
 SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
