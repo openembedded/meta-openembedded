@@ -20,6 +20,7 @@ do_configure() {
                 --bindir=${bindir} \
                 --datadir=${datadir} \
                 --arch=${TARGET_ARCH} \
+                --disable-dvbscan \
                 --disable-bundle
 }
 
