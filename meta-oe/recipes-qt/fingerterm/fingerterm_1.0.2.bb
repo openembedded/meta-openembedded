@@ -27,7 +27,7 @@ FILES_${PN} = " \
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0744 ${S}/${PN} ${D}${bindir}
+    install -m 0755 ${S}/${PN} ${D}${bindir}
 
     sed -i -e '/Exec.*/d' fingerterm.desktop
     sed -i -e '/Icon.*/d' fingerterm.desktop
