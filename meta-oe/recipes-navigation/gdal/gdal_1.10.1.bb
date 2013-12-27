@@ -1,0 +1,105 @@
+DESCRIPTION = "GDAL is a translator library for raster geospatial data formats"
+HOMEPAGE = "http://www.gdal.org/"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"
+
+DEPENDS = "proj sqlite3"
+
+SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${P}.tar.xz"
+
+SRC_URI[md5sum] = "f354c614aea76e5630e4edbf06e5c292"
+SRC_URI[sha256sum] = "e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60b91639fb8d443791"
+
+inherit autotools lib_package binconfig
+
+EXTRA_OECONF = "--without-perl \
+                --without-php \
+                --without-ruby \
+                --without-python \
+                \
+                --without-grass \
+                --without-libgrass \
+                --without-cfitsio \
+                --without-dds \
+                --without-gta \
+                --without-pcidsk \
+                --without-ogdi \
+                --without-fme \
+                --without-hdf4 \
+                --without-hdf5 \
+                --without-pg \
+                --without-jpeg12 \
+                --without-ogdi \
+                --without-netcdf \
+                --without-openjpeg \
+                --without-fgdb \
+                --without-ecw \
+                --without-kakadu \
+                --without-mrsid \
+                --without-jp2mrsid \
+                --without-mrsid_lidar \
+                --without-msg \
+                --without-bsb \
+                --without-grib \
+                --without-mysql \
+                --without-ingres \
+                --without-odbc \
+                --without-dods_root \
+                --without-xml2 \
+                --without-spatialite \
+                --without-pcre \
+                --without-dwgdirect \
+                --without-dwgdirect \
+                --without-idb \
+                --without-sde \
+                --without-sde-version \
+                --without-epsilon \
+                --without-webp \
+                --without-opencl \
+                --without-opencl-include \
+                --without-opencl-lib \
+                --without-freexl \
+                --without-pam \
+                --without-poppler \
+                --without-podofo \
+                --without-podofo-lib \
+                --without-podofo-extra-lib-for-test \
+                --without-static_proj4 \
+                --without-perl \
+                --without-php \
+                --without-ruby \
+                --without-python \
+                --without-java \
+                --without-mdb \
+                --without-jvm-lib \
+                --without-jvm-lib-add-rpath \
+                --without-rasdaman \
+                --without-armadillo \
+                \
+                --with-pcraster=internal \
+                --with-geotiff=internal \
+"
+
+EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
+
+PACKAGECONFIG ?= "geos png jasper"
+PACKAGECONFIG[geos] = "--with-geos,--without-geos,geos"
+PACKAGECONFIG[lzma] = "--with-liblzma,--without-liblzma,xz"
+PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
+PACKAGECONFIG[tiff] = "--with-libtiff,--without-tiff,tiff"
+PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
+PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
+PACKAGECONFIG[z] = "--with-libz,--without-libz,zlib"
+PACKAGECONFIG[jasper] = "--with-jasper,--without-jasper,jasper"
+PACKAGECONFIG[curl] = "--with-curl,--without-curl,curl"
+
+do_configure_prepend () {
+    # The configure script has many hardcoded paths to search
+    # for the library headers when using external libraries,
+    # workaround it.
+    sed -e 's,/usr/include,NON_EXISTENT_DIR,g' \
+        -e 's,/usr/lib,NON_EXISTENT_DIR,g' \
+        -i ${S}/configure.in
+}
+
+FILES_${PN} += "${libdir}/gdalplugins"
