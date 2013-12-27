@@ -34,3 +34,6 @@ do_install_append() {
     # when called. Add the symbolic to let mount could find ntfs.
     ln -sf mount.ntfs-3g ${D}/${base_sbindir}/mount.ntfs
 }
+
+# Satisfy the -dev runtime dependency
+ALLOW_EMPTY_${PN} = "1"
