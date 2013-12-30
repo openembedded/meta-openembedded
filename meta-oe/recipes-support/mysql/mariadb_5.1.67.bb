@@ -1,6 +1,6 @@
 require ${PN}_${PV}.inc
 
-DEPENDS += "mariadb-native"
+DEPENDS += "mariadb-native ncurses zlib"
 
 PROVIDES += "mysql5"
 

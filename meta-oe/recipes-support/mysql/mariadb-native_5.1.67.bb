@@ -2,6 +2,7 @@ require mariadb_${PV}.inc
 inherit native
 
 PROVIDES += "mysql5-native"
+DEPENDS = "ncurses-native zlib-native"
 
 RDEPENDS_${PN} = ""
 PACKAGES = ""
