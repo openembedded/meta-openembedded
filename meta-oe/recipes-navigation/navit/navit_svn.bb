@@ -6,4 +6,5 @@ PR = "${INC_PR}.3"
 
 S = "${WORKDIR}/${PN}"
 SRC_URI += "svn://anonymous@navit.svn.sourceforge.net/svnroot/navit/trunk;module=navit;protocol=http \
+    file://freetype-include-path.patch \
 "
