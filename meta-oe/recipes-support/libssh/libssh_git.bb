@@ -7,7 +7,8 @@ DEPENDS = "zlib openssl libgcrypt"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
 
-SRC_URI = "git://git.libssh.org/projects/libssh.git"
+PV = "0.5.5+gitr${SRCPV}"
+SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-5"
 SRCREV = "43914a5f07702fe292a968322d5ff2627e0431db"
 S = "${WORKDIR}/git"
 
