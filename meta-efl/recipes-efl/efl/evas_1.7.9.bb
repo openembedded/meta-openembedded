@@ -171,6 +171,7 @@ PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
 
 SRC_URI = "\
     ${E_MIRROR}/${SRCNAME}-${SRCVER}.tar.gz \
+    file://0001-evas_font_load-Fix-build-with-newer-freetype.patch \
 "
 
 SRC_URI[md5sum] = "c96a23ede14cd0adb7e8e549e8acdee1"
