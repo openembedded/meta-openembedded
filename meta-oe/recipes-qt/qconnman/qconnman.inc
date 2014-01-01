@@ -10,6 +10,6 @@ inherit autotools
 
 PV = "0.0+gitr${SRCPV}"
 SRCREV = "f976b18c7c5584627224784801803e9fd3ebe0ff"
-SRC_URI = "git://github.com/OSSystems/qconnman-ui.git"
+SRC_URI = "git://github.com/OSSystems/qconnman-ui.git;branch=stable"
 
 S = "${WORKDIR}/git/"
