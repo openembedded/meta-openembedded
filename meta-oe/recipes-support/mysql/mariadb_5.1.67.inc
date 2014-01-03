@@ -16,7 +16,8 @@ SRC_URI = "http://mirrors.coreix.net/mariadb/mariadb-${PV}/kvm-tarbake-jaunty-x8
            file://zlib-let-libdir-configurable.patch \
            file://storage-forbids-absolute-addresses-on-IA-32.patch \
            file://my.cnf \
-           file://mysqld.sh"
+           file://mysqld.sh \
+           file://avoid-plugin-options-warnings.patch"
 
 SRC_URI[md5sum] = "44c331fa91943155e4796f89e17a0612"
 SRC_URI[sha256sum] = "33471e9275c9b03919cabc38eb39f807d645adabf6a1a18f2e41ed73f47677c8"
