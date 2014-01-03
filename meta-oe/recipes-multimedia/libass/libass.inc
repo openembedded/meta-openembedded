@@ -19,7 +19,6 @@ PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
 EXTRA_OECONF = " \
     --enable-enca \
     --enable-fontconfig \
-    --enable-png \
 "
 
 PACKAGES =+ "${PN}-tests"
