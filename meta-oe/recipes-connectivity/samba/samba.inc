@@ -29,7 +29,7 @@ EXTRA_OECONF='--disable-cups \
               --with-lockdir=${localstatedir}/lock \
               --with-piddir=${localstatedir}/run \
               --with-logfilebase=${localstatedir}/log \
-              --with-libdir=${libdir} \
+              --libdir=${libdir} \
               --with-mandir=${mandir} \
               --with-swatdir=${datadir}/swat \
               --with-aio-support \
