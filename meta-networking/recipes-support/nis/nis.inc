@@ -9,7 +9,7 @@ SECTION = "console/network"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 # install is broken because src/Makefile heroically adds '-s'
 # to the install flags - passing -s to the build /usr/bin/install!
