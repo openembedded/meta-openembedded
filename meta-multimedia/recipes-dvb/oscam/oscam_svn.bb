@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "libusb1 openssl"
 
 SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http"
-SRCREV = "7974"
+SRCREV = "9164"
 PV = "1.10+${SRCPV}"
 
 S = "${WORKDIR}/trunk"
