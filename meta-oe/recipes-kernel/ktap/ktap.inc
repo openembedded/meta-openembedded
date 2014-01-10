@@ -9,3 +9,5 @@ SRC_URI = "git://github.com/ktap/ktap.git"
 
 S = "${WORKDIR}/git"
 
+# Package config is abused as a general compile time configuration tool.
+PACKAGECONFIG[ffi] = ""

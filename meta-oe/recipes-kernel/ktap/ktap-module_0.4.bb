@@ -6,8 +6,11 @@ DESCRIPTION = "KTAP is a scripting dynamic tracing tool for Linux"
 
 inherit module
 
+# Available package configs: ffi (only supported on x86_64)
+PACKAGECONFIG ?= ""
+
 # Only build the module
-MAKE_TARGETS = "mod"
+MAKE_TARGETS = "${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} mod"
 
 # Kernel module packages MUST begin with 'kernel-module-', otherwise
 # multilib image generation can fail.
