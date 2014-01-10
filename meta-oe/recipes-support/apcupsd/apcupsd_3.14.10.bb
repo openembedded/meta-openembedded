@@ -11,7 +11,8 @@ inherit autotools
 
 LD = "${CXX}"
 
-EXTRA_OECONF = "--enable-usb \
+EXTRA_OECONF = "--without-x \
+                --enable-usb \
                 --with-distname=${DISTRO}"
 
 do_configure() {
