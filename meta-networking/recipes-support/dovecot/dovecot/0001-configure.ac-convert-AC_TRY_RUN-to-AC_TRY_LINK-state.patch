@@ -1,0 +1,91 @@
+From 483f120603ada8db680085e3f462396da937e036 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 8 Jan 2014 09:30:36 +0100
+Subject: [PATCH] configure.ac: convert AC_TRY_RUN to AC_TRY_LINK statements
+
+This is not completely safe, but it's the least invasive fix.
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Upstream-status: Inappropriate
+---
+ configure.ac | 23 +++++++----------------
+ 1 file changed, 7 insertions(+), 16 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 95984bb..dff1f87 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -499,13 +499,10 @@ have_ioloop=no
+ 
+ if test "$ioloop" = "best" || test "$ioloop" = "epoll"; then
+   AC_CACHE_CHECK([whether we can use epoll],i_cv_epoll_works,[
+-    AC_TRY_RUN([
++    AC_TRY_LINK([
+       #include <sys/epoll.h>
+-  
+-      int main()
+-      {
+-	return epoll_create(5) < 1;
+-      }
++     ], [ 
++       epoll_create(5) < 1;
+     ], [
+       i_cv_epoll_works=yes
+     ], [
+@@ -551,15 +548,13 @@ have_notify=none
+ if test "$notify" = "" || test "$notify" = "inotify" ; then
+   dnl * inotify?
+   AC_CACHE_CHECK([whether we can use inotify],i_cv_inotify_works,[
+-    AC_TRY_RUN([
++    AC_TRY_LINK([
+       #define _GNU_SOURCE
+       #include <sys/ioctl.h>
+       #include <fcntl.h>
+       #include <sys/inotify.h>
+       #include <stdio.h>
+-    
+-      int main()
+-      {
++    ], [
+ 	int wd, fd;
+ 	char * fn = "/tmp";
+       
+@@ -581,8 +576,6 @@ if test "$notify" = "" || test "$notify" = "inotify" ; then
+ 	inotify_rm_watch (fd, wd);
+   
+ 	close (fd);
+-	return 0;
+-      }
+     ], [
+       i_cv_inotify_works=yes
+     ], [
+@@ -670,7 +663,7 @@ fi
+ dnl * Old glibcs have broken posix_fallocate(). Make sure not to use it.
+ dnl * It may also be broken in AIX.
+ AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate_works,[
+-  AC_TRY_RUN([
++  AC_TRY_LINK([
+     #define _XOPEN_SOURCE 600
+     #include <stdio.h>
+     #include <stdlib.h>
+@@ -679,7 +672,7 @@ AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate_works,[
+     #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
+       possibly broken posix_fallocate
+     #endif
+-    int main() {
++   ], [
+       int fd = creat("conftest.temp", 0600);
+       int ret;
+       if (fd == -1) {
+@@ -688,8 +681,6 @@ AC_CACHE_CHECK([whether posix_fallocate() works],i_cv_posix_fallocate_works,[
+       }
+       ret = posix_fallocate(fd, 1024, 1024) < 0 ? 1 : 0;
+       unlink("conftest.temp");
+-      return ret;
+-    }
+   ], [
+     i_cv_posix_fallocate_works=yes
+   ], [
+-- 
+1.8.4.2
+
