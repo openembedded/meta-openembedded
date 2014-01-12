@@ -9,7 +9,7 @@ Add support for TLS Next Protocol Negotiation:
 * modules/ssl/ssl_engine_io.c (ssl_io_filter_input): Invoke
   next-protocol discovery hook.
 
-* modules/ssl/ssl_engine_kernel.c (ssl_callback_AdvertiseNextProtos): 
+* modules/ssl/ssl_engine_kernel.c (ssl_callback_AdvertiseNextProtos):
   New callback.
 
 * modules/ssl/ssl_private.h: Add prototype.
@@ -17,37 +17,36 @@ Add support for TLS Next Protocol Negotiation:
 Submitted by: Matthew Steele <mdsteele google.com>
   with slight tweaks by jorton
 
-https://bugzilla.redhat.com//show_bug.cgi?id=809599
-
 http://svn.apache.org/viewvc?view=revision&revision=1332643
-
+https://bugzilla.redhat.com//show_bug.cgi?id=809599
 Upstream-Status: Backport
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ CHANGES                         |  2 +
+ modules/ssl/mod_ssl.c           | 12 ++++++
+ modules/ssl/mod_ssl.h           | 21 +++++++++++
+ modules/ssl/ssl_engine_init.c   |  5 +++
+ modules/ssl/ssl_engine_io.c     | 24 ++++++++++++
+ modules/ssl/ssl_engine_kernel.c | 82 +++++++++++++++++++++++++++++++++++++++++
+ modules/ssl/ssl_private.h       |  6 +++
+ 7 files changed, 152 insertions(+)
 
---- httpd-2.4.4/modules/ssl/ssl_private.h
-+++ httpd-2.4.4/modules/ssl/ssl_private.h
-@@ -139,6 +139,11 @@
- #define HAVE_FIPS
- #endif
+diff --git a/CHANGES b/CHANGES
+--- a/CHANGES
++++ b/CHANGES
+@@ -1,6 +1,8 @@
+                                                          -*- coding: utf-8 -*-
  
-+#if OPENSSL_VERSION_NUMBER >= 0x10001000L && !defined(OPENSSL_NO_NEXTPROTONEG) \
-+    && !defined(OPENSSL_NO_TLSEXT)
-+#define HAVE_TLS_NPN
-+#endif
-+
- #if (OPENSSL_VERSION_NUMBER >= 0x10000000)
- #define MODSSL_SSL_CIPHER_CONST const
- #define MODSSL_SSL_METHOD_CONST const
-@@ -840,6 +845,7 @@ int          ssl_callback_ServerNameIndication(SSL *, int *, modssl_ctx_t *);
- int         ssl_callback_SessionTicket(SSL *, unsigned char *, unsigned char *,
-                                        EVP_CIPHER_CTX *, HMAC_CTX *, int);
- #endif
-+int ssl_callback_AdvertiseNextProtos(SSL *ssl, const unsigned char **data, unsigned int *len, void *arg);
+ Changes with Apache 2.4.7
++  *) mod_ssl: Add support for TLS Next Protocol Negotiation.  PR 52210.
++     [Matthew Steele <mdsteele google.com>]
  
- /**  Session Cache Support  */
- void         ssl_scache_init(server_rec *, apr_pool_t *);
---- httpd-2.4.4/modules/ssl/mod_ssl.c
-+++ httpd-2.4.4/modules/ssl/mod_ssl.c
-@@ -272,6 +272,18 @@ static const command_rec ssl_config_cmds[] = {
+   *) APR 1.5.0 or later is now required for the event MPM.
+   
+diff --git a/modules/ssl/mod_ssl.c b/modules/ssl/mod_ssl.c
+--- a/modules/ssl/mod_ssl.c
++++ b/modules/ssl/mod_ssl.c
+@@ -275,6 +275,18 @@ static const command_rec ssl_config_cmds[] = {
      AP_END_CMD
  };
  
@@ -66,8 +65,9 @@ Upstream-Status: Backport
  /*
   *  the various processing hooks
   */
---- httpd-2.4.4/modules/ssl/mod_ssl.h
-+++ httpd-2.4.4/modules/ssl/mod_ssl.h
+diff --git a/modules/ssl/mod_ssl.h b/modules/ssl/mod_ssl.h
+--- a/modules/ssl/mod_ssl.h
++++ b/modules/ssl/mod_ssl.h
 @@ -63,5 +63,26 @@ APR_DECLARE_OPTIONAL_FN(int, ssl_proxy_enable, (conn_rec *));
  
  APR_DECLARE_OPTIONAL_FN(int, ssl_engine_disable, (conn_rec *));
@@ -95,10 +95,11 @@ Upstream-Status: Backport
 +
  #endif /* __MOD_SSL_H__ */
  /** @} */
---- httpd-2.4.4/modules/ssl/ssl_engine_init.c
-+++ httpd-2.4.4/modules/ssl/ssl_engine_init.c
-@@ -725,6 +725,11 @@ static void ssl_init_ctx_callbacks(server_rec *s,
- #endif
+diff --git a/modules/ssl/ssl_engine_init.c b/modules/ssl/ssl_engine_init.c
+--- a/modules/ssl/ssl_engine_init.c
++++ b/modules/ssl/ssl_engine_init.c
+@@ -546,6 +546,11 @@ static void ssl_init_ctx_callbacks(server_rec *s,
+     SSL_CTX_set_tmp_dh_callback(ctx,  ssl_callback_TmpDH);
  
      SSL_CTX_set_info_callback(ctx, ssl_callback_Info);
 +
@@ -109,8 +110,9 @@ Upstream-Status: Backport
  }
  
  static void ssl_init_ctx_verify(server_rec *s,
---- httpd-2.4.4/modules/ssl/ssl_engine_io.c
-+++ httpd-2.4.4/modules/ssl/ssl_engine_io.c
+diff --git a/modules/ssl/ssl_engine_io.c b/modules/ssl/ssl_engine_io.c
+--- a/modules/ssl/ssl_engine_io.c
++++ b/modules/ssl/ssl_engine_io.c
 @@ -28,6 +28,7 @@
                                    core keeps dumping.''
                                              -- Unknown    */
@@ -127,7 +129,7 @@ Upstream-Status: Backport
  } bio_filter_in_ctx_t;
  
  /*
-@@ -1385,6 +1387,27 @@ static apr_status_t ssl_io_filter_input(ap_filter_t *f,
+@@ -1412,6 +1414,27 @@ static apr_status_t ssl_io_filter_input(ap_filter_t *f,
          APR_BRIGADE_INSERT_TAIL(bb, bucket);
      }
  
@@ -155,7 +157,7 @@ Upstream-Status: Backport
      return APR_SUCCESS;
  }
  
-@@ -1866,6 +1889,7 @@ static void ssl_io_input_add_filter(ssl_filter_ctx_t *filter_ctx, conn_rec *c,
+@@ -1893,6 +1916,7 @@ static void ssl_io_input_add_filter(ssl_filter_ctx_t *filter_ctx, conn_rec *c,
      inctx->block = APR_BLOCK_READ;
      inctx->pool = c->pool;
      inctx->filter_ctx = filter_ctx;
@@ -163,8 +165,9 @@ Upstream-Status: Backport
  }
  
  /* The request_rec pointer is passed in here only to ensure that the
---- httpd-2.4.4/modules/ssl/ssl_engine_kernel.c
-+++ httpd-2.4.4/modules/ssl/ssl_engine_kernel.c
+diff --git a/modules/ssl/ssl_engine_kernel.c b/modules/ssl/ssl_engine_kernel.c
+--- a/modules/ssl/ssl_engine_kernel.c
++++ b/modules/ssl/ssl_engine_kernel.c
 @@ -29,6 +29,7 @@
                                    time I was too famous.''
                                              -- Unknown                */
@@ -173,10 +176,10 @@ Upstream-Status: Backport
  #include "util_md5.h"
  
  static void ssl_configure_env(request_rec *r, SSLConnRec *sslconn);
-@@ -2186,3 +2187,84 @@ int ssl_callback_SRPServerParams(SSL *ssl, int *ad, void *arg)
+@@ -2139,3 +2140,84 @@ int ssl_callback_SRPServerParams(SSL *ssl, int *ad, void *arg)
  }
  
- #endif /* OPENSSL_NO_SRP */
+ #endif /* HAVE_SRP */
 +
 +#ifdef HAVE_TLS_NPN
 +/*
@@ -257,4 +260,30 @@ Upstream-Status: Backport
 +    *size_out = size;
 +    return SSL_TLSEXT_ERR_OK;
 +}
++#endif /* HAVE_TLS_NPN */
+diff --git a/modules/ssl/ssl_private.h b/modules/ssl/ssl_private.h
+--- a/modules/ssl/ssl_private.h
++++ b/modules/ssl/ssl_private.h
+@@ -123,6 +123,11 @@
+ #define MODSSL_SSL_METHOD_CONST
+ #endif
+ 
++#if OPENSSL_VERSION_NUMBER >= 0x10001000L && !defined(OPENSSL_NO_NEXTPROTONEG) \
++    && !defined(OPENSSL_NO_TLSEXT)
++#define HAVE_TLS_NPN
 +#endif
++
+ #if defined(OPENSSL_FIPS)
+ #define HAVE_FIPS
+ #endif
+@@ -800,6 +805,7 @@ int          ssl_callback_ServerNameIndication(SSL *, int *, modssl_ctx_t *);
+ int         ssl_callback_SessionTicket(SSL *, unsigned char *, unsigned char *,
+                                        EVP_CIPHER_CTX *, HMAC_CTX *, int);
+ #endif
++int ssl_callback_AdvertiseNextProtos(SSL *ssl, const unsigned char **data, unsigned int *len, void *arg);
+ 
+ /**  Session Cache Support  */
+ void         ssl_scache_init(server_rec *, apr_pool_t *);
+-- 
+1.8.1.2
+

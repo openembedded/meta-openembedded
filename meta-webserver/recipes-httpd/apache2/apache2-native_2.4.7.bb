@@ -12,9 +12,9 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2"
 
 S = "${WORKDIR}/httpd-${PV}"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
-SRC_URI[md5sum] = "ea5e361ca37b8d7853404419dd502efe"
-SRC_URI[sha256sum] = "dc9f3625ebc08bea55eeb0d16e71fba656f252e6cd0aa244ee7806dc3b022fea"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+SRC_URI[md5sum] = "170d7fb6fe5f28b87d1878020a9ab94e"
+SRC_URI[sha256sum] = "64368d8301836815ae237f2b62d909711c896c1bd34573771e0ee5ad808ce71b"
 
 do_configure () {
     ./configure --with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \

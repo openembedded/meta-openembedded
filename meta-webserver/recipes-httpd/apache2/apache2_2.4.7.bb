@@ -11,17 +11,17 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://httpd-2.4.1-corelimit.patch \
            file://httpd-2.4.4-export.patch \
            file://httpd-2.4.1-selinux.patch \
-           file://httpd-2.4.4-r1332643.patch \
            file://apache-configure_perlbin.patch \
            file://replace-lynx-to-curl-in-apachectl-script.patch \
            file://apache-ssl-ltmain-rpath.patch \
            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
+           file://npn-patch-2.4.7.patch \
            file://init \
            file://apache2-volatile.conf"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=eff226ae95d0516d6210ed77dfdf2dcc"
-SRC_URI[md5sum] = "ea5e361ca37b8d7853404419dd502efe"
-SRC_URI[sha256sum] = "dc9f3625ebc08bea55eeb0d16e71fba656f252e6cd0aa244ee7806dc3b022fea"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+SRC_URI[md5sum] = "170d7fb6fe5f28b87d1878020a9ab94e"
+SRC_URI[sha256sum] = "64368d8301836815ae237f2b62d909711c896c1bd34573771e0ee5ad808ce71b"
 
 S = "${WORKDIR}/httpd-${PV}"
 
