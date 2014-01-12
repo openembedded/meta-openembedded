@@ -1,0 +1,15 @@
+Upstream-Status: Backport http://trac.webkit.org/changeset/160834
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Index: a/Source/WTF/wtf/dtoa/double-conversion.cc
+===================================================================
+--- a/Source/WTF/wtf/dtoa/double-conversion.cc	(revision 160833)
++++ b/Source/WTF/wtf/dtoa/double-conversion.cc	(revision 160834)
+@@ -447,5 +447,5 @@
+         const int kBufferSize = kMaxSignificantDigits + 10;
+         char buffer[kBufferSize];  // NOLINT: size is known at compile time.
+-        int buffer_pos = 0;
++        unsigned buffer_pos = 0;
+         
+         // Exponent will be adjusted if insignificant digits of the integer part
