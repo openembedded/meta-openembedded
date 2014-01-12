@@ -22,7 +22,6 @@ EXTRA_OECONF = "--with-apxs2=${STAGING_BINDIR_CROSS}/apxs \
                 --with-pic \
                 --enable-maintainer-zts \
                 --without-mysql \
-                --enable-force-cgi-redirect \
                 --disable-cgi \
                 --disable-cli \
                 --disable-pdo \
