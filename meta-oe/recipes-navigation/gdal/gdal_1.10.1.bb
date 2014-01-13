@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gdal.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"
 
-DEPENDS = "proj sqlite3"
+DEPENDS = "proj sqlite3 tiff"
 
 SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${P}.tar.xz"
 
@@ -80,6 +80,7 @@ EXTRA_OECONF = "--without-perl \
                 --with-geotiff=internal \
                 \
                 --with-sqlite3=${STAGING_LIBDIR} \
+                --with-libtiff=${STAGING_LIBDIR} \
 "
 
 EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
@@ -88,7 +89,6 @@ PACKAGECONFIG ?= "geos png jasper"
 PACKAGECONFIG[geos] = "--with-geos,--without-geos,geos"
 PACKAGECONFIG[lzma] = "--with-liblzma,--without-liblzma,xz"
 PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
-PACKAGECONFIG[tiff] = "--with-libtiff,--without-tiff,tiff"
 PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
 PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
 PACKAGECONFIG[z] = "--with-libz,--without-libz,zlib"
