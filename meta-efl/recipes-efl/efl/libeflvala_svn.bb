@@ -13,6 +13,7 @@ SRCNAME = "vala"
 inherit e-base autotools pkgconfig vala
 
 SRC_URI = "${E_SVN}/trunk/BINDINGS;module=${SRCNAME};protocol=http \
+    file://disable.eina.test.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
