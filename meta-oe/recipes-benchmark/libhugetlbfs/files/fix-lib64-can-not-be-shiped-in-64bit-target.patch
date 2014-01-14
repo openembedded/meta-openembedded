@@ -34,7 +34,7 @@ Signed-off-by: Guo Chunrong <B40290@freescale.com>
  ifeq ($(ARCH),aarch64)
 -CC64 = gcc
 +CC64 = $(CC)
- ELF64 = aarch64elf_linux
+ ELF64 = aarch64elf
 -TMPLIB64 = lib64
 +TMPLIB64 = lib
  CUSTOM_LDSCRIPTS = no

@@ -5,11 +5,8 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 DEPENDS = "sysfsutils perl"
 RDEPENDS_${PN} += "python python-io python-lang python-subprocess python-resource"
 
-SRCREV = "49fedbe172343b3f7b39dc81bd2d81a18a34eb2f"
-SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
-    file://aarch64-support.patch \
-    file://aarch64-unit-test-fixes.patch \
-    file://add-PROT-NONE-to-the-mprotest-test.patch \
+SRCBRANCH = "next"
+SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code;branch=${SRCBRANCH} \
     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
     file://fix-lib64-can-not-be-shiped-in-64bit-target.patch \
@@ -17,6 +14,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
     file://0001-install-perl-lib-to-directory-perl-instead-of-perl5.patch \
 "
+SRCREV = "6824d18d5f33fdab445a8eff147fcdb6361f5791"
 
 S = "${WORKDIR}/git"
 
