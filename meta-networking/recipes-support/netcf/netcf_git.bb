@@ -18,6 +18,7 @@ S = "${WORKDIR}/git"
 
 inherit gettext autotools
 
+EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 do_configure_prepend() {
 	cd ${S}
 	./bootstrap
