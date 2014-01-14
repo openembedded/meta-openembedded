@@ -44,7 +44,6 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
                 --with-readline \
                 --with-openssl=${STAGING_LIBDIR}/.. \
                 --without-libradius \
-                --without-gssapi \
                 --without-libpam \
                 --disable-security-context \
                 --enable-shared \
