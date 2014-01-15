@@ -12,20 +12,17 @@ SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-5"
 SRCREV = "43914a5f07702fe292a968322d5ff2627e0431db"
 S = "${WORKDIR}/git"
 
-OECMAKE_BUILDPATH = "${S}/build"
-OECMAKE_SOURCEPATH = "${S}"
 EXTRA_OECMAKE = " \
     -DWITH_GCRYPT=1 \
     -DWITH_PCAP=1 \
     -DWITH_SFTP=1 \
     -DWITH_ZLIB=1 \
     "
-EXTRA_OEMAKE = "-C ${OECMAKE_BUILDPATH}"
 
 inherit cmake
 
 do_configure_prepend () {
     # Disable building of examples
-    sed -i -e '/add_subdirectory(examples)/s/^/#DONOTWANT/' CMakeLists.txt \
-        || bb_fatal "Failed to disable examples"
+    sed -i -e '/add_subdirectory(examples)/s/^/#DONOTWANT/' ${S}/CMakeLists.txt \
+        || bbfatal "Failed to disable examples"
 }
