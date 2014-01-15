@@ -60,10 +60,6 @@ RDEPENDS_${PN} += "\
     edje-utils \
     ${PN}-utils \
     dbus-x11 \
-    evas-loader-png \
-    evas-loader-jpeg \
-    evas-loader-gif \
-    evas-generic-loader-svg \
 "
 
 # Uclibc build don't have 'glibc-utils'
