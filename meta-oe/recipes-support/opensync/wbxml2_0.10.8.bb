@@ -15,17 +15,7 @@ S = "${WORKDIR}/libwbxml-${PV}"
 
 inherit cmake pkgconfig
 
-EXTRA_OECMAKE += " . -B${WORKDIR}/build "
-
 PACKAGES += "${PN}-tools"
 
 FILES_${PN}-tools = "${bindir}"
 FILES_${PN} = "${libdir}/*.so.*"
-
-do_build_prepend() {
-    cd ${WORKDIR}/build
-}
-
-do_install_prepend() {
-    cd ${WORKDIR}/build
-}
