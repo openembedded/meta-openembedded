@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc77069
 
 SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
 	   file://configure.in_remove_CC_quotes.patch;patchdir=.."
-SRCREV = "v7-4-027"
+SRCREV = "v7-4-155"
 
 S = "${WORKDIR}/${PN}/src"
 
