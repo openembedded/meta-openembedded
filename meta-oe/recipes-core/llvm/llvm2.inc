@@ -20,12 +20,7 @@ LLVM_RELEASE = "${PV}"
 
 BBCLASSEXTEND = "native"
 
-LLVM_BUILD_DIR = "${B}/build"
 LLVM_INSTALL_DIR = "${B}/llvm-install"
-
-# llvm *must* be built out of tree
-OECMAKE_SOURCEPATH = ".."
-OECMAKE_BUILDPATH = "build"
 
 # other architectures require X86 available,
 LLVM_EXTRA_ARCH = "X86;"
@@ -73,7 +68,7 @@ base_do_compile_prepend() {
 
 do_install() {
     # Install into a private directory to be able to reorganize the files.
-    cd ${LLVM_BUILD_DIR}
+    cd ${B}
     oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install
 
     # Create our custom target directories
@@ -101,7 +96,7 @@ do_install() {
 SYSROOT_PREPROCESS_FUNCS_append_class-target = " llvm_sysroot_preprocess"
 
 llvm_sysroot_preprocess() {
-    cd ${LLVM_BUILD_DIR}
+    cd ${B}
 
     # Fix the paths in the config script to make it find the binaries and
     # library files. Doing so allows 3rd party configure scripts working
@@ -118,7 +113,7 @@ llvm_sysroot_preprocess() {
 
 do_install_class-native() {
     # Install into a private directory to be able to reorganize the files.
-    cd ${LLVM_BUILD_DIR}
+    cd ${B}
     oe_runmake DESTDIR=${LLVM_INSTALL_DIR} install
 
     # Create our custom target directories
