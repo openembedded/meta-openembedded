@@ -12,7 +12,6 @@ LIC_FILES_CHKSUM = "file://generate/unix/readme.txt;md5=204407e197c1a01154a48f6c
 DEPENDS = "bison flex"
 
 SRC_URI = "https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz \
-    file://cross-compile.patch \
     file://no-werror.patch \
     "
 SRC_URI[md5sum] = "fcd4b7304f1bfabc7d4b9cfdecc6b0c6"
@@ -20,7 +19,7 @@ SRC_URI[sha256sum] = "0d5bd32690ab77e21ab143ef25361c314a4ed13c33a5fb3ddd6f5559ab
 
 S = "${WORKDIR}/acpica-unix2-${PV}"
 
-EXTRA_OEMAKE = "'OPT_CFLAGS=-Wall'"
+EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc 'OPT_CFLAGS=-Wall'"
 
 do_install() {
     install -D -p -m0755 generate/unix/bin*/iasl ${D}${bindir}/iasl
