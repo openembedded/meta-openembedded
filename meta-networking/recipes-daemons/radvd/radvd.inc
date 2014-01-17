@@ -1,4 +1,11 @@
 SUMMARY = "IPv6 router advertisement daemon"
+DESCRIPTION = "radvd is the router advertisement daemon for IPv6. It \
+listens to router solicitations and sends router \
+advertisements as described in RFC 2461, Neighbor \
+Discovery for IP Version 6 (IPv6). With these \
+advertisements hosts can automatically configure their \
+addresses and some other parameters. They also can \
+choose a default router based on these advertisements."
 HOMEPAGE = "http://www.litech.org/radvd/"
 SECTION = "console/network"
 DEPENDS = "flex-native libdaemon"

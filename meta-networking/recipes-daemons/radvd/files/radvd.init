@@ -9,6 +9,9 @@
 # Description:    router advertisement daemon
 ### END INIT INFO
 
+# Source function library.
+. /etc/init.d/functions
+
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/sbin/radvd
 NAME=radvd
@@ -95,6 +98,10 @@ case "$1" in
 	rm -f $SAVED_SETTINGS
 	echo "$NAME."
 	;;
+  status)
+	status $DAEMON;
+	exit $?
+	;;
   reload|force-reload)
 	echo "Reloading $DESC configuration files."
 	start-stop-daemon --stop --signal HUP --quiet --pidfile \
@@ -116,7 +123,7 @@ case "$1" in
 	;;
   *)
 	N=/etc/init.d/$NAME
-	echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $N {start|stop|status|restart|reload|force-reload}" >&2
 	exit 1
 	;;
 esac
