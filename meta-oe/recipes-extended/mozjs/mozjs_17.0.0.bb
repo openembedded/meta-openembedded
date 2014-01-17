@@ -23,6 +23,7 @@ EXTRA_OECONF = " \
     --prefix=${prefix} \
     --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
     --enable-threadsafe \
+    --libdir=${libdir} \
 "
 
 # mozjs requires autoreconf 2.13
