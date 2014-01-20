@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 PV = "0.3"
 PR = "r1"
 
-SRCREV = "3098e4ad8aa07ad90b2a4413c0abeb6dcd8f1233"
+SRCREV = "f7aadacbe3c19e37ea938e00a5141b577fb74a5e"
 SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git"
 
 inherit autotools
