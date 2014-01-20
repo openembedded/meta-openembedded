@@ -12,7 +12,6 @@ DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
 RDEPENDS_${PN} += "python-lang"
 
 PROVIDES = "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas"
-RPROVIDES_${PN} += "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas"
 
 # necessary to let the call for python-config succeed
 export BUILD_SYS
@@ -27,7 +26,45 @@ SRC_URI = "\
 "
 S = "${WORKDIR}/${SRCNAME}-${SRCVER}"
 
-FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*.egg/*/*/.debug"
+do_install_append() {
+    # drop all .pyo, pyc files
+    find ${D}${libdir}/${PYTHON_DIR}/site-packages -name \*.pyo -o -name \*.pyc | xargs rm -f
+}
 
-PACKAGES += "${PN}-examples"
+PACKAGES += "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas ${PN}-examples"
+
+FILES_${PN} = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/python_efl*egg-info \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/eo.so \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/utils \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/__init__.py \
+"
+FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*.egg/*/*/.debug"
+FILES_${PN}-dev += "${libdir}/${PYTHON_DIR}/site-packages/*/*.la"
+
 FILES_${PN}-examples = "${datadir}/${PN}/examples"
+
+FILES_python-ecore = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/ecore/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore.so \
+"
+FILES_python-eldbus = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/e_dbus/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/dbus_mainloop.so \
+"
+FILES_python-edje = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/edje/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/edje*so \
+"
+FILES_python-elementary = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/elementary/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/elementary/ \
+"
+FILES_python-emotion = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/emotion/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/emotion.so \
+"
+FILES_python-evas = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/evas/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/evas.so \
+"
