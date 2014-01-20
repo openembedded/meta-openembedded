@@ -19,6 +19,7 @@ EXTRA_OECONF_append_class-target = "\
 BBCLASSEXTEND = "native"
 
 PACKAGECONFIG[eweather] = "--enable-eweather,--disable-eweather,libeweather"
+PACKAGECONFIG[ewebkit] = "--with-elementary-web-backend=ewebkit,--with-elementary-web-backend=none,webkit-efl"
 
 do_compile_append_class-target() {
     sed -i -e s:${STAGING_DIR_TARGET}::g \
