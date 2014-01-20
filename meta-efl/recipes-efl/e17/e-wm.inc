@@ -7,7 +7,8 @@ SRCNAME = "e"
 inherit e update-alternatives gettext
 S = "${WORKDIR}/${SRCNAME}"
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+                   ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
 
 EXTRA_OECONF = "\
@@ -29,16 +30,6 @@ do_install_append() {
     # security reasons, e-wm checks that in runtime
     # xinit[418]: ERROR: CONFIGURATION FILE HAS BAD PERMISSIONS
     chmod 600 ${D}/${sysconfdir}/enlightenment/sysactions.conf
-
-    install -d ${D}/${datadir}/applications/
-    install -m 644 ${S}/src/modules/fileman/module.desktop ${D}/${datadir}/applications/efm.desktop
-    sed "s#Type=Link#Type=Application#g" -i ${D}/${datadir}/applications/efm.desktop
-    echo "Exec=enlightenment_remote -efm-open-dir" >> ${D}/${datadir}/applications/efm.desktop
-    echo "Terminal=false" >> ${D}/${datadir}/applications/efm.desktop
-    echo "Categories=Application;" >> ${D}/${datadir}/applications/efm.desktop
-    echo "StartupNotify=true" >> ${D}/${datadir}/applications/efm.desktop
-    install -d ${D}/${datadir}/icons/
-    install -m 644 ${S}/data/themes/img/O/icon_icon_theme.png ${D}/${datadir}/icons/e-module-fileman.png
 
     install -d ${D}/${sysconfdir}/xdg/menus
     install -m 644 ${WORKDIR}/applications.menu ${D}/${sysconfdir}/xdg/menus/
@@ -124,6 +115,7 @@ FILES_${PN} = "\
     ${datadir}/enlightenment/COPYING \
     ${datadir}/xsessions/enlightenment.desktop \
     ${sysconfdir}/xdg \
+    ${systemd_unitdir} \
 "
 
 FILES_${PN}-config-default = "${datadir}/enlightenment/data/config/default"
