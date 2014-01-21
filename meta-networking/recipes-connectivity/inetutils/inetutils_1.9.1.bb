@@ -38,6 +38,7 @@ PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
 EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
         ${noipv6} \
         --with-libreadline-prefix=${STAGING_LIBDIR} \
+        --enable-rpath=no \
 "
 
 do_configure_prepend () {
