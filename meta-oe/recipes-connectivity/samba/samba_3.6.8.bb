@@ -29,11 +29,15 @@ SRC_URI += "\
     file://only_export_public_symbols.patch;patchdir=.. \
     file://configure-disable-getaddrinfo-cross.patch;patchdir=.. \
     file://configure-disable-core_pattern-cross-check.patch;patchdir=.. \
+    file://configure-libunwind.patch;patchdir=.. \
 "
 SRC_URI[md5sum] = "fbb245863eeef2fffe172df779a217be"
 SRC_URI[sha256sum] = "4f5a171a8d902c6b4f822ed875c51eb8339196d9ccf0ecd7f6521c966b3514de"
 
 S = "${WORKDIR}/samba-${PV}/source3"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[libunwind] = "--enable-libunwind,--disable-libunwind,libunwind"
 
 EXTRA_OECONF += "\
     ac_cv_path_PYTHON=/not/exist \
