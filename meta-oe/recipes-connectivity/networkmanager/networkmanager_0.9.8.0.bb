@@ -35,7 +35,7 @@ EXTRA_OECONF = " \
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
 PACKAGECONFIG[systemd] = " \
     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
-    --without-systemdsystemunitdir=, \
+    --without-systemdsystemunitdir, \
     polkit \
 "
 # consolekit is not picked by shlibs, so add it to RDEPENDS too
