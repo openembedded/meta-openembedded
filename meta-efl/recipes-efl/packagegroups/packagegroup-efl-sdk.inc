@@ -1,13 +1,8 @@
 SDK-EFL = " \
-     eina-dev \
-     eet-dev \
-     evas-dev \
-     embryo-dev \
-     ecore-dev \
+     efl-dev \
+     elementary-dev \
      edbus-dev \
      lua5.1-dev \
-     edje-dev \
-     elementary-dev \
 "
 
 SDK-EXTRAS ?= ""
