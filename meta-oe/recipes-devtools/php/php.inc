@@ -9,7 +9,11 @@ DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
 INC_PR = "r5"
 
-SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2"
+# The new PHP downloads server groups PHP releases by major version so find
+# the major version of the PHP recipe.
+PHP_MAJVER = "${@d.getVar('PV',1).split('.')[0]}"
+
+SRC_URI = "http://museum.php.net/php${PHP_MAJVER}/php-${PV}.tar.bz2"
 
 S = "${WORKDIR}/php-${PV}"
 
