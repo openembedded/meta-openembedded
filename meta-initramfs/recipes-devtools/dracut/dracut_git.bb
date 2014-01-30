@@ -4,10 +4,12 @@ DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut (the t
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "bb1ba3a1ca9dd6284f6319eb197de4a757a7f99d"
-SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git \
-           file://0001-Use-builtin-xz-lzma-option-to-use-all-cores-for-mult.patch \
-          "
+PE = "1"
+PV = "036"
+
+# v036 tag
+SRCREV = "d50a99c5ceeb7107f624c5d3238d37509b2217a8"
+SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
 
 S = "${WORKDIR}/git"
 
@@ -34,5 +36,6 @@ FILES_${PN} += "${datadir}/bash-completion \
 RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid bash ldd"
 # This could be optimized a bit, but let's avoid non-booting systems :)
 RRECOMMENDS_${PN} = " \
-                     kernel-modules \ 
+                     kernel-modules \
+                     coreutils \ 
                     "
