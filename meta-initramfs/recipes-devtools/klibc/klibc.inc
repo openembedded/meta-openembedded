@@ -53,4 +53,4 @@ do_configure () {
     ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
 }
 
-THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
+THIS_LIBKLIBC = "libklibc (= ${PV})"
