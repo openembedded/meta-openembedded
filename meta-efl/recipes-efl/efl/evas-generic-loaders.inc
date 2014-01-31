@@ -1,6 +1,6 @@
 DESCRIPTION = "Evas generic loaders"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=06568fc31423f3c8ad84f375e061c342"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f86abf15f4d911ae87092e90222d0ef3"
 DEPENDS = "eina poppler librsvg cairo"
 
 inherit efl
@@ -15,17 +15,56 @@ EXTRA_OECONF = " \
     --disable-spectre \
 "
 
-python populate_packages_prepend () {
+PACKAGESPLITFUNCS_prepend = "split_evas_loader_packages "
+
+python split_evas_loader_packages () {
     bb.note( "splitting packages for evas generic loaders" )
     basedir = d.expand( '${libdir}/evas/utils')
 
-    do_split_packages(d, basedir, '^evas_image_loader\.(.*)$',
+    do_split_packages(d, basedir, 'evas_image_loader\.(.*)$',
     output_pattern = "evas-generic-loader-%s",
     description = 'Evas generic loaders - module %s',
     allow_dirs=True, recursive=False, extra_depends="" )
+
+    do_split_packages(d, basedir, 'evas_generic_pdf_loader\.(.*)$',
+    output_pattern = "evas-generic-pdf-loader-%s",
+    description = 'Evas generic pdf loaders - module %s',
+    allow_dirs=True, recursive=False, extra_depends="" )
 }
 
-FILES_evas-generic-loader-xcf += "${libdir}/evas/utils/*.xcf.gz"
+# add symlinks for different format (it doesn't make much sense to package them in separate packages)
+FILES_evas-generic-loader-xcf += " \
+    ${libdir}/evas/utils/evas_image_loader.xcf.gz \
+"
+FILES_evas-generic-loader-svg += " \
+    ${libdir}/evas/utils/evas_image_loader.svg.gz \
+    ${libdir}/evas/utils/evas_image_loader.svgz \
+"
+FILES_evas-generic-loader-pdf += " \
+    ${libdir}/evas/utils/evas_image_loader.doc \
+    ${libdir}/evas/utils/evas_image_loader.docx \
+    ${libdir}/evas/utils/evas_image_loader.odp \
+    ${libdir}/evas/utils/evas_image_loader.ods \
+    ${libdir}/evas/utils/evas_image_loader.odt \
+    ${libdir}/evas/utils/evas_image_loader.ppt \
+    ${libdir}/evas/utils/evas_image_loader.pptx \
+    ${libdir}/evas/utils/evas_image_loader.rtf \
+    ${libdir}/evas/utils/evas_image_loader.xls \
+    ${libdir}/evas/utils/evas_image_loader.xlsx \
+"
+FILES_evas-generic-pdf-loader-libreoffice += " \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.doc \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.docx \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.odp \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.ods \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.odt \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.ppt \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.pptx \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.rtf \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.xls \
+    ${libdir}/evas/utils/evas_generic_pdf_loader.xlsx \
+"
+
 FILES_${PN}-dbg += "${libdir}/evas/utils/.debug"
 
-PACKAGES_DYNAMIC += "^evas-generic-loader-.*"
+PACKAGES_DYNAMIC += "^evas-generic-loader-.* ^evas-generic-pdf-loader-.*"
