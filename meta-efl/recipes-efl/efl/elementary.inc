@@ -1,26 +1,34 @@
 DESCRIPTION = "EFL based widget set for mobile devices"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=10a051c72424b80bc784a3903651b43b"
-DEPENDS = "eet-native efreet evas ecore edje eet edbus ethumb poppler eio"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ae1a906a61040d01df137a6b2c6acb68"
+DEPENDS = "eet-native edje-native elementary-native efreet evas ecore edje eet eldbus ethumb poppler eio"
+DEPENDS_class-native = "efl-native"
 
 inherit efl gettext
 
 EXTRA_OECONF = "\
-    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
     --disable-web \
 "
+EXTRA_OECONF_append_class-target = "\
+    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
+    --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
+    --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
+"
 
-PACKAGECONFIG ??= ""
+BBCLASSEXTEND = "native"
+
 PACKAGECONFIG[eweather] = "--enable-eweather,--disable-eweather,libeweather"
 
-do_compile_append() {
+do_compile_append_class-target() {
     sed -i -e s:${STAGING_DIR_TARGET}::g \
            -e s:/${TARGET_SYS}::g \
               elementary.pc
 }
 
 PACKAGES += "${PN}-configs ${PN}-accessibility"
+
+RDEPENDS_${PN}_class-native = ""
 
 RDEPENDS_${PN} = "\
     ${PN}-themes \
@@ -31,10 +39,14 @@ RSUGGESTS_${PN} = "${PN}-tests ${PN}-accessibility"
 FILES_${PN} += "\
     ${libdir}/edje/modules/elm \
     ${libdir}/elementary/modules/datetime_input_ctxpopup/*/module.so \
+    ${libdir}/elementary/modules/prefs/*/module.so \
+    ${libdir}/elementary/modules/prefs/*/*.edj \
 "
 
 FILES_${PN}-dev += "\
-    ${libdir}/elementary/modules/datetime_input_ctxpopup/*/module.la \
+    ${bindir}/elm_prefs_cc \
+    ${libdir}/elementary/modules/*/*/module.la \
+    ${libdir}/cmake \
 "
 
 FILES_${PN}-themes = "\
@@ -46,10 +58,7 @@ FILES_${PN}-configs = "\
 "
 
 FILES_${PN}-dbg += "\
-    ${libdir}/elementary/modules/test_entry/*/.debug \
-    ${libdir}/elementary/modules/test_map/*/.debug \
-    ${libdir}/elementary/modules/access_output/*/.debug \
-    ${libdir}/elementary/modules/datetime_input_ctxpopup/*/.debug \
+    ${libdir}/elementary/modules/*/*/.debug \
     ${libdir}/edje/modules/elm/*/.debug \
 "
 
