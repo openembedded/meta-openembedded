@@ -1,4 +1,4 @@
-From ac4c8a57e8a042acd4b8ff803d3d3574b0e7a7fb Mon Sep 17 00:00:00 2001
+From 751505501e0db31cf766ec0ae95a6968b4d1eb93 Mon Sep 17 00:00:00 2001
 From: Alban Browaeys <prahal@yahoo.com>
 Date: Wed, 5 Sep 2012 02:58:26 +0000
 Subject: [PATCH] always use position as percent and define a 1 seconds
@@ -7,12 +7,12 @@ Subject: [PATCH] always use position as percent and define a 1 seconds
 Fix "reverb" effect: ie loop between setting the slider to match
 the position and handling slider to position (seek).
 ---
- data/themes/default.edc |    8 +++-----
- src/bin/win.c           |   28 ++++++++++++++++++++++------
+ data/themes/default.edc |  8 +++-----
+ src/bin/win.c           | 28 ++++++++++++++++++++++------
  2 files changed, 25 insertions(+), 11 deletions(-)
 
 diff --git a/data/themes/default.edc b/data/themes/default.edc
-index 65efddf..27bb9e4 100644
+index ebf8ba4..7a906b1 100644
 --- a/data/themes/default.edc
 +++ b/data/themes/default.edc
 @@ -186,7 +186,6 @@ collections {
@@ -42,7 +42,7 @@ index 65efddf..27bb9e4 100644
              } else if (type == MSG_INT && id == MSG_SHUFFLE) {
                 external_param_set_bool(PART:"buttons.shuffle", "state", getarg(2));
              } else if (type == MSG_INT && id == MSG_LOOP) {
-@@ -687,7 +685,7 @@ collections {
+@@ -689,7 +687,7 @@ collections {
              source: "progress.slider";
              signal: "changed";
              script {
@@ -52,7 +52,7 @@ index 65efddf..27bb9e4 100644
           }
           program {
 diff --git a/src/bin/win.c b/src/bin/win.c
-index 63951db..ad93ab5 100644
+index 2f65953..428e268 100644
 --- a/src/bin/win.c
 +++ b/src/bin/win.c
 @@ -194,8 +194,8 @@ _win_play_eval(Win *w)
@@ -129,5 +129,5 @@ index 63951db..ad93ab5 100644
  }
  
 -- 
-1.7.7
+1.8.5.2
 

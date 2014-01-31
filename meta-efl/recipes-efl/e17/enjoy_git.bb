@@ -1,10 +1,10 @@
 SUMMARY = "Enjoy music player"
 LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
-DEPENDS = "evas ecore edje elementary emotion lightmediascanner edbus2 gst-plugins-good"
-SRCREV = "${EFL_SRCREV}"
-PV = "0.0+svnr${SRCPV}"
+DEPENDS = "evas ecore edje elementary emotion lightmediascanner eldbus gst-plugins-good"
 
+SRCREV = "aa8fec69e885eec048a849c2b34059ec58404e02"
+PV = "0.1.0+gitr${SRCPV}"
 
 #1st needed for all formats
 #2nd needed for mp3 playback
@@ -20,12 +20,10 @@ RDEPENDS_${PN} += "\
 
 inherit e gettext
 SRC_URI = " \
-    ${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep \
+    git://git.enlightenment.org/apps/enjoy.git \
     file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
 "
-S = "${WORKDIR}/${SRCNAME}"
-
-PR = "r1"
+S = "${WORKDIR}/git"
 
 FILES_${PN} += "${datadir}/icons/"
 
