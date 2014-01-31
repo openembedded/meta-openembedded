@@ -4,7 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=03f6c2cf2bef233fadf7d0769f5bfda7"
 DEPENDS = "evas ecore edje elementary eina eet emotion"
 
 inherit e gettext
-INC_PR = "r2"
 
 # Because latest release we have is 0.1.0 which sorts lower then 0.1.0+svnr${SRCPV} already in feeds
 PE = "2"
