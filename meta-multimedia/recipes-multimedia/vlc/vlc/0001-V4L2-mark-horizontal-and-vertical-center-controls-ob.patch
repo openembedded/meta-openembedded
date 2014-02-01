@@ -1,0 +1,53 @@
+From 4da99e58bd1b06267793ef728a368e4032789376 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?R=C3=A9mi=20Denis-Courmont?= <remi@remlab.net>
+Date: Sat, 1 Oct 2011 22:58:21 +0300
+Subject: [PATCH] V4L2: mark horizontal and vertical center controls obsolete
+
+Upstream-Status: Backport
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+They were deprecated in Linux version 2.6.26.
+---
+ modules/access/v4l2/controls.c |  2 --
+ modules/access/v4l2/video.c    | 12 ++----------
+ 2 files changed, 2 insertions(+), 12 deletions(-)
+
+diff -uNr vlc-1.1.11.orig/modules/access/v4l2.c vlc-1.1.11/modules/access/v4l2.c
+--- vlc-1.1.11.orig/modules/access/v4l2.c	2011-06-03 19:59:40.000000000 +0200
++++ vlc-1.1.11/modules/access/v4l2.c	2014-02-01 07:38:28.905142516 +0100
+@@ -159,12 +159,6 @@
+ #define VFLIP_TEXT N_( "Vertical flip" )
+ #define VFLIP_LONGTEXT N_( \
+     "Flip the video vertically (if supported by the v4l2 driver)." )
+-#define HCENTER_TEXT N_( "Horizontal centering" )
+-#define HCENTER_LONGTEXT N_( \
+-    "Set the camera's horizontal centering (if supported by the v4l2 driver)." )
+-#define VCENTER_TEXT N_( "Vertical centering" )
+-#define VCENTER_LONGTEXT N_( \
+-    "Set the camera's vertical centering (if supported by the v4l2 driver)." )
+ 
+ #define AUDIO_VOLUME_TEXT N_( "Volume" )
+ #define AUDIO_VOLUME_LONGTEXT N_( \
+@@ -351,10 +345,8 @@
+                  HFLIP_LONGTEXT, true )
+     add_integer( CFG_PREFIX "vflip", -1, NULL, VFLIP_TEXT,
+                  VFLIP_LONGTEXT, true )
+-    add_integer( CFG_PREFIX "hcenter", -1, NULL, HCENTER_TEXT,
+-                 HCENTER_LONGTEXT, true )
+-    add_integer( CFG_PREFIX "vcenter", -1, NULL, VCENTER_TEXT,
+-                 VCENTER_LONGTEXT, true )
++    add_obsolete_integer( CFG_PREFIX "hcenter" ) /* since Linux 2.6.26 */
++    add_obsolete_integer( CFG_PREFIX "vcenter" ) /* since Linux 2.6.26 */
+     add_integer( CFG_PREFIX "audio-volume", -1, NULL, AUDIO_VOLUME_TEXT,
+                 AUDIO_VOLUME_LONGTEXT, true )
+     add_integer( CFG_PREFIX "audio-balance", -1, NULL, AUDIO_BALANCE_TEXT,
+@@ -518,8 +510,6 @@
+     { "gain", V4L2_CID_GAIN },
+     { "hflip", V4L2_CID_HFLIP },
+     { "vflip", V4L2_CID_VFLIP },
+-    { "hcenter", V4L2_CID_HCENTER },
+-    { "vcenter", V4L2_CID_VCENTER },
+     { NULL, 0 }
+ };
+ 
