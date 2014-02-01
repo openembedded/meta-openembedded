@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ed7e492ee44e70125a5d42e118354a13"
 require vlc.inc
 
 SRC_URI += "file://0001-V4L2-mark-horizontal-and-vertical-center-controls-ob.patch"
+SRC_URI += "file://0002-fix-build-with-newer-freetype.patch"
 
 PR = "r4"
 

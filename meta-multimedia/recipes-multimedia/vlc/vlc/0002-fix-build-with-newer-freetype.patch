@@ -1,0 +1,16 @@
+Upstream-Status: Pending
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+diff -uNr vlc-1.1.11.orig/modules/misc/freetype.c vlc-1.1.11/modules/misc/freetype.c
+--- vlc-1.1.11.orig/modules/misc/freetype.c	2011-07-09 17:18:51.000000000 +0200
++++ vlc-1.1.11/modules/misc/freetype.c	2014-02-01 07:45:32.078131862 +0100
+@@ -60,7 +60,7 @@
+ #endif
+ 
+ /* Freetype */
+-#include <freetype/ftsynth.h>
++#include <freetype2/ftsynth.h>
+ #include FT_FREETYPE_H
+ #include FT_GLYPH_H
+ #define FT_FLOOR(X)     ((X & -64) >> 6)
