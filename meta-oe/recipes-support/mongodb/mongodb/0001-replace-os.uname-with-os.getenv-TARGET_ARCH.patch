@@ -1,0 +1,50 @@
+From ef482650fb6d990e4953104d7141d9a0fa4c872f Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen.kooi@linaro.org>
+Date: Tue, 4 Feb 2014 10:56:35 +0100
+Subject: [PATCH] replace os.uname with os.getenv(OE_TARGET_ARCH)
+
+This fixes crosscompilation
+
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+Upstream-Status: Inappropiate [OE specific]
+---
+ SConstruct | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 4f26be7..a353323 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -265,9 +265,9 @@ add_option( "pch" , "use precompiled headers to speed up the build (experimental
+ add_option( "distcc" , "use distcc for distributing builds" , 0 , False )
+ 
+ # debugging/profiling help
+-if os.sys.platform.startswith("linux") and (os.uname()[-1] == 'x86_64'):
++if os.sys.platform.startswith("linux") and (os.getenv("OE_TARGET_ARCH") == 'x86_64'):
+     defaultAllocator = 'tcmalloc'
+-elif (os.sys.platform == "darwin") and (os.uname()[-1] == 'x86_64'):
++elif (os.sys.platform == "darwin") and (os.getenv("OE_TARGET_ARCH") == 'x86_64'):
+     defaultAllocator = 'tcmalloc'
+ else:
+     defaultAllocator = 'system'
+@@ -673,7 +673,7 @@ if has_option( "full" ):
+ # ---- other build setup -----
+ 
+ if "uname" in dir(os):
+-    processor = os.uname()[4]
++    processor = os.getenv("OE_TARGET_ARCH")
+ else:
+     processor = "i386"
+ 
+@@ -702,7 +702,7 @@ elif linux:
+ 
+     env.Append( LIBS=['m'] )
+ 
+-    if os.uname()[4] == "x86_64" and not force32:
++    if os.getenv("OE_TARGET_ARCH") == "x86_64" and not force32:
+         linux64 = True
+         nixLibPrefix = "lib64"
+         env.Append( EXTRALIBPATH=["/usr/lib64" , "/lib64" ] )
+-- 
+1.8.4.2
+

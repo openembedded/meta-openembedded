@@ -1,0 +1,64 @@
+From 1f8e10747af3988e8ddee609bea990f622dd746a Mon Sep 17 00:00:00 2001
+From: Michael Hudson-Doyle <michael.hudson@linaro.org>
+Date: Wed, 22 Jan 2014 13:53:10 +1300
+Subject: [PATCH 3/3] * Do not build 'mongo' binary when scripting is disabled
+ * Do not build the jstests when scripting is disabled
+
+---
+ SConstruct           | 8 ++++++--
+ src/mongo/SConscript | 4 +++-
+ 2 files changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 1f14083..a69cf0a 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -437,10 +437,13 @@ else:
+ 
+ static = has_option( "static" )
+ 
+-noshell = has_option( "noshell" ) 
+-
+ disable_scripting = has_option( "disable-scripting" )
+ 
++if not disable_scripting:
++    noshell = has_option( "noshell" )
++else:
++    noshell = True
++
+ asio = has_option( "asio" )
+ 
+ usePCH = has_option( "usePCH" )
+@@ -1671,6 +1674,7 @@ Export("get_option")
+ Export("has_option use_system_version_of_library")
+ Export("installSetup mongoCodeVersion")
+ Export("usev8")
++Export("disable_scripting")
+ Export("darwin windows solaris linux freebsd nix")
+ Export('module_sconscripts')
+ Export("debugBuild optBuild")
+diff --git a/src/mongo/SConscript b/src/mongo/SConscript
+index d84267e..dc0ca3a 100644
+--- a/src/mongo/SConscript
++++ b/src/mongo/SConscript
+@@ -6,6 +6,7 @@ import os
+ import itertools
+ from buildscripts import utils
+ 
++Import("disable_scripting")
+ Import("env")
+ Import("shellEnv")
+ Import("testEnv")
+@@ -1022,7 +1023,8 @@ test = testEnv.Install(
+                     [ f for f in Glob("dbtests/*.cpp")
+                       if not str(f).endswith('framework.cpp') and
+                          not str(f).endswith('framework_options.cpp') and
+-                         not str(f).endswith('framework_options_init.cpp') ],
++                         not str(f).endswith('framework_options_init.cpp') and
++                         not (str(f).endswith('jstests.cpp') and disable_scripting)],
+                     LIBDEPS = [
+                        "mutable_bson_test_utils",
+                        "mongocommon",
+-- 
+1.8.4.2
+

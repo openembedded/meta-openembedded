@@ -1,0 +1,49 @@
+From bffde38f3b3d6285019e38a30c4573326e1dd2ea Mon Sep 17 00:00:00 2001
+From: Michael Hudson-Doyle <michael.hudson@linaro.org>
+Date: Fri, 20 Dec 2013 11:10:43 +1300
+Subject: [PATCH 1/3] Make it possible to disable the use of v8.
+
+Currently v8 is always built in, no matter what you pass to scons.
+
+This removes the (useless) --usev8 flag for scons and replaces it with a
+--disable-scripting option instead.
+---
+ SConstruct | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index fd92fe4..1f14083 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -222,7 +222,7 @@ add_option( "asio" , "Use Asynchronous IO (NOT READY YET)" , 0 , True )
+ add_option( "ssl" , "Enable SSL" , 0 , True )
+ 
+ # library choices
+-add_option( "usev8" , "use v8 for javascript" , 0 , True )
++add_option( "disable-scripting" , "do not build support for javascript" , 0 , True )
+ add_option( "libc++", "use libc++ (experimental, requires clang)", 0, True )
+ 
+ # mongo feature options
+@@ -439,7 +439,7 @@ static = has_option( "static" )
+ 
+ noshell = has_option( "noshell" ) 
+ 
+-usev8 = has_option( "usev8" ) 
++disable_scripting = has_option( "disable-scripting" )
+ 
+ asio = has_option( "asio" )
+ 
+@@ -599,7 +599,9 @@ if has_option( "durableDefaultOn" ):
+ if has_option( "durableDefaultOff" ):
+     env.Append( CPPDEFINES=[ "_DURABLEDEFAULTOFF" ] )
+ 
+-if ( not ( usev8 or justClientLib) ):
++if disable_scripting or justClientLib:
++    usev8 = False
++else:
+     usev8 = True
+ 
+ extraLibPlaces = []
+-- 
+1.8.4.2
+
