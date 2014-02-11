@@ -16,6 +16,7 @@ SRC_URI = "http://www.pengutronix.de/software/xf86-input-tslib/download/xf86-inp
            file://xserver-174-XGetPointerControl.patch \
            file://99-xf86-input-tslib.rules \
            file://xf86-input-tslib-port-ABI-12-r48.patch \
+           file://xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch \
 "
 
 SRC_URI[md5sum] = "b7a4d2f11637ee3fcf432e044b1d017f"
