@@ -12,7 +12,7 @@ inherit autotools
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "5fba3d42f126ce13333fb7d0412d729b753ee5a4"
+SRCREV = "46e8aa7d0dd095300709309301e1c79f0003df40"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
@@ -25,7 +25,7 @@ EXTRA_OEMAKE_append = " \
     prefix=${LTPROOT} \
     CROSS_COMPILE=${HOST_PREFIX} \
     SKIP_IDCHECK=1 \
-    KERNEL_INC=${STAGING_KERNEL_DIR}/include \
+    KERNEL_INC=${STAGING_KERNEL_DIR}/include-generic \
     KERNEL_USR_INC=${STAGING_INCDIR} \
     ALSA_INCPATH=${STAGING_INCDIR} \
     ALSA_LIBPATH=${STAGING_LIBDIR} \
