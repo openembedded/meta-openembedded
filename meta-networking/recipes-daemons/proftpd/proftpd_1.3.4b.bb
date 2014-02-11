@@ -14,6 +14,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://default \
            file://move-pidfile-to-var-run.patch \
            file://close-RequireValidShell-check.patch \
+           file://move-runfile-to-var-run.patch \
 "
 
 SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"

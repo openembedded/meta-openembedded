@@ -1,0 +1,39 @@
+redefine PR_RUN_DIR as ${localstatedir}/run
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ configure    |    2 +-
+ configure.in |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure b/configure
+index ebed38e..445d5bc 100755
+--- a/configure
++++ b/configure
+@@ -33579,7 +33579,7 @@ _ACEOF
+ 
+ 
+ cat >>confdefs.h <<_ACEOF
+-#define PR_RUN_DIR "`eval echo "${localstatedir}"`"
++#define PR_RUN_DIR "`eval echo "${localstatedir}"/run/`"
+ _ACEOF
+ 
+ cat >>confdefs.h <<_ACEOF
+diff --git a/configure.in b/configure.in
+index c17929c..df9186a 100644
+--- a/configure.in
++++ b/configure.in
+@@ -2788,7 +2788,7 @@ locale_dir="`eval echo ${localedir}`"
+ locale_dir="`eval echo ${locale_dir}`"
+ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
+ 
+-AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
++AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}/run"`")
+ AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
+ AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
+ 
+-- 
+1.7.10.4
+
