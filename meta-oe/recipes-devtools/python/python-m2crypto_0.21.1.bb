@@ -16,4 +16,8 @@ S = "${WORKDIR}/M2Crypto-${PV}"
 
 inherit setuptools
 
+SWIG_FEATURES_x86-64 = "-D__x86_64__"
+SWIG_FEATURES ?= ""
+export SWIG_FEATURES
+
 BBCLASSEXTEND = "native"
