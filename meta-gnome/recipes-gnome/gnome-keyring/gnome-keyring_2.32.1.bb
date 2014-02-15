@@ -25,13 +25,15 @@ EXTRA_OECONF = "${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-
 SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
 SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
 
-FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr"
+FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
+                ${base_libdir}/security/*${SOLIBSDEV} \
+               "
 
 FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
                     ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
                     ${libdir}/${BPN}/standalone/*.la \
                     ${base_libdir}/security/*.la \
-                    ${base_libdir}/security/*${SOLIBSDEV}"
+                   "
 
 FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
                     ${libdir}/${BPN}/devel/.debug/ \
