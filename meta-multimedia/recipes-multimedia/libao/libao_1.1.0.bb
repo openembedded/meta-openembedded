@@ -23,3 +23,6 @@ python populate_packages_prepend () {
     do_split_packages(d, rootdir, '^(.*)\.so$', output_pattern='${BPN}-plugin-%s', description='AO %s plugin')
     do_split_packages(d, rootdir_dbg, '^(.*)\.so$', output_pattern='${BPN}-plugin-%s-dbg', description='AO %s plugin debug data')
 }
+
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
