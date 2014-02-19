@@ -5,6 +5,7 @@ PR = "${INC_PR}.0"
 SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
             file://lingering-IP-address-after-deletion-BZ-486.patch \
             file://build-fix-extract.pl-for-cross-compilation.patch \
+            file://babel-close-the-stdout-stderr-as-in-other-daemons.patch \
 "
 
 SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
