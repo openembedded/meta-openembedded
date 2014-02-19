@@ -9,9 +9,6 @@ PACKAGES = ""
 EXTRA_OEMAKE = ""
 EXTRA_OECONF = " --with-embedded-server "
 
-SRC_URI += "file://fix-link-error-ub1310.patch \
-"
-
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
     mv -f ${D}${libdir}/mysql/* ${D}${libdir}
