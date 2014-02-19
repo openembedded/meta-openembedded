@@ -1,4 +1,4 @@
-DESCRIPTION = "Convert the physical locations of a USB device to/from its number"
+SUMMARY = "Convert the physical locations of a USB device to/from its number"
 AUTHOR = "Werner Almesberger <werner@openmoko.org>"
 SECTION = "console/utils"
 LICENSE = "GPLv2+"

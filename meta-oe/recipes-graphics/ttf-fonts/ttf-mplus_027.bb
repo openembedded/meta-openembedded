@@ -1,6 +1,6 @@
 require ttf.inc
 
-DESCRIPTION = "MPlus font - TTF Edition"
+SUMMARY = "MPlus font - TTF Edition"
 HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
 LICENSE = "${PN}"
 LIC_FILES_CHKSUM = "file://LICENSE_E;md5=ac161e96eda00db9a3aec7870b5d9658 \

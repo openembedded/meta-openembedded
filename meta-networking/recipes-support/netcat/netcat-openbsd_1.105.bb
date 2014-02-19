@@ -1,5 +1,5 @@
 require netcat.inc
-DESCRIPTION = "OpenBSD Netcat"
+SUMMARY = "OpenBSD Netcat"
 HOMEPAGE = "http://ftp.debian.org"
 LICENSE = "BSD-3-Clause"
 

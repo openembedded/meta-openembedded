@@ -1,8 +1,8 @@
 require ttf.inc
 
-DESCRIPTION = "Sazanami Gothic/Mincho Japanese TrueType fonts"
-DESCRIPTION_ttf-sazanami-gothic = "Sazanami Gothic Japanese TrueType font"
-DESCRIPTION_ttf-sazanami-mincho = "Sazanami Mincho Japanese TrueType font"
+SUMMARY = "Sazanami Gothic/Mincho Japanese TrueType fonts"
+SUMMARY_ttf-sazanami-gothic = "Sazanami Gothic Japanese TrueType font"
+SUMMARY_ttf-sazanami-mincho = "Sazanami Mincho Japanese TrueType font"
 AUTHOR = "Electronic Font Open Laboratory (/efont/)"
 HOMEPAGE = "http://sourceforge.jp/projects/efont/"
 LICENSE = "Public domain"

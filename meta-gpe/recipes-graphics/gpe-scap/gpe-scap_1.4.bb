@@ -1,4 +1,4 @@
-DESCRIPTION = "A GPE application that allows you to take screenshots."
+SUMMARY = "A GPE application that allows you to take screenshots"
 SECTION = "gpe"
 
 LICENSE = "GPLv2"

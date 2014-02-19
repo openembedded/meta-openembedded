@@ -1,4 +1,4 @@
-DESCRIPTION = "A lightweight PDF viewer based on gtk and poppler"
+SUMMARY = "A lightweight PDF viewer based on gtk and poppler"
 HOMEPAGE = "http://www.emma-soft.com/projects/epdfview/"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"

@@ -1,4 +1,4 @@
-DESCRIPTION = "canutils (PTX flavour)"
+SUMMARY = "canutils (PTX flavour)"
 HOMEPAGE = "http://www.pengutronix.de"
 SECTION = "console/network"
 

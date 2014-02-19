@@ -1,4 +1,4 @@
-DESCRIPTION = "Lightweight media scanner meant to be used in not-so-powerful devices"
+SUMMARY = "Lightweight media scanner meant to be used in not-so-powerful devices"
 AUTHOR = "ProFUSION"
 HOMEPAGE = "http://lms.garage.maemo.org/"
 SECTION = "libs/multimedia"

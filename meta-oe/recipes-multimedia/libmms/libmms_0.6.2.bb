@@ -1,4 +1,4 @@
-DESCRIPTION = "MMS stream protocol library"
+SUMMARY = "MMS stream protocol library"
 HOMEPAGE = "http://sourceforge.net/projects/libmms/"
 SECTION = "libs/multimedia"
 

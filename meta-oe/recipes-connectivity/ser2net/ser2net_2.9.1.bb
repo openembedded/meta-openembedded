@@ -1,4 +1,4 @@
-DESCRIPTION = "A serial to network proxy"
+SUMMARY = "A serial to network proxy"
 SECTION = "console/network"
 HOMEPAGE = "http://sourceforge.net/projects/ser2net/"
 

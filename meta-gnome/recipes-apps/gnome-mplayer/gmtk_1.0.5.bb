@@ -1,4 +1,4 @@
-DESCRIPTION = "GTK+ widget and function libraries for gnome-mplayer"
+SUMMARY = "GTK+ widget and function libraries for gnome-mplayer"
 HOMEPAGE = "http://code.google.com/p/gmtk"
 SECTION = "libs"
 

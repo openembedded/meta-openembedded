@@ -1,4 +1,4 @@
-DESCRIPTION = "Lightweight and minimal (~20K) dumb-terminal emulation program."
+SUMMARY = "Lightweight and minimal (~20K) dumb-terminal emulation program"
 SECTION = "console/utils"
 LICENSE = "GPLv2+"
 HOMEPAGE = "http://code.google.com/p/picocom/"

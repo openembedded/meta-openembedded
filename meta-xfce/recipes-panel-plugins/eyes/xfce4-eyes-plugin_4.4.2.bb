@@ -1,4 +1,4 @@
-DESCRIPTION = "Panel plugin with graphical representation of the cpu frequency"
+SUMMARY = "Panel plugin with graphical representation of the cpu frequency"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-eyes-plugin"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"

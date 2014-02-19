@@ -1,4 +1,4 @@
-DESCRIPTION = "Tool for writing very fast and very flexible scanners"
+SUMMARY = "Tool for writing very fast and very flexible scanners"
 HOMEPAGE = "http://re2c.sourceforge.net/"
 AUTHOR = "Marcus Börger <helly@users.sourceforge.net>"
 SECTION = "devel"

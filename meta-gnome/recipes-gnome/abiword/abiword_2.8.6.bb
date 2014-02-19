@@ -1,4 +1,4 @@
-DESCRIPTION = "AbiWord is free word processing program similar to Microsoft(r) Word"
+SUMMARY = "AbiWord is free word processing program similar to Microsoft(r) Word"
 HOMEPAGE = "http://www.abiword.org"
 SECTION = "x11/office"
 LICENSE = "GPLv2"

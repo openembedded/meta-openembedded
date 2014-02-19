@@ -1,4 +1,9 @@
-DESCRIPTION = "smbnetfs"
+SUMMARY = "FUSE module for mounting an entire SMB/NMB network in a single directory"
+DESCRIPTION = "SMBNetFS is a Linux/FreeBSD filesystem that allow you to use \
+               samba/microsoft network in the same manner as the network \
+               neighborhood in Microsoft Windows. Please donate me to help \
+               in SMBNetFS development."
+
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"

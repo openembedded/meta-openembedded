@@ -1,4 +1,4 @@
-DESCRIPTION = "FFTW benchmarks"
+SUMMARY = "FFTW benchmarks"
 SECTION = "libs"
 LICENSE = "GPLv2"
 

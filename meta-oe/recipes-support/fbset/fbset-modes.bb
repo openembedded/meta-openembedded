@@ -1,4 +1,4 @@
-DESCRIPTION = "Default display timings and resolutions for fbset"
+SUMMARY = "Default display timings and resolutions for fbset"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 

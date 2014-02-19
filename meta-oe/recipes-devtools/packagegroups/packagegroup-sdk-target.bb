@@ -1,4 +1,4 @@
-DESCRIPTION = "Packages required for a target (on-device) SDK"
+SUMMARY = "Packages required for a target (on-device) SDK"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 

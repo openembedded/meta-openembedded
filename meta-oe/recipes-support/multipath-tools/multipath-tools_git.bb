@@ -1,4 +1,4 @@
-DESCRIPTION = "The upstream project used to drive the Device Mapper multipathing driver."
+SUMMARY = "The upstream project used to drive the Device Mapper multipathing driver"
 
 DEPENDS = "lvm2 libaio readline"
 

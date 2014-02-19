@@ -1,6 +1,6 @@
 require recipes-graphics/xorg-app/xorg-app-common.inc
 
-DESCRIPTION = "a simple program for managing utmp/wtmp entries"
+SUMMARY = "a simple program for managing utmp/wtmp entries"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=07e6423e8815e6b372cd45da76faacd0"
 

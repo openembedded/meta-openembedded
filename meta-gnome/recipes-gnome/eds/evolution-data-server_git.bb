@@ -1,4 +1,4 @@
-DESCRIPTION = "Evolution database backend server"
+SUMMARY = "Evolution database backend server"
 HOMEPAGE = "http://www.gnome.org/projects/evolution/"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 

@@ -1,4 +1,5 @@
-SUMMARY = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
+SUMMARY = "Program for providing universal TLS/SSL tunneling service"
+DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
 SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"

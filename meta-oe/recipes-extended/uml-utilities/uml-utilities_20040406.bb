@@ -1,5 +1,5 @@
 SECTION = "console/utils"
-DESCRIPTION = "Utilities for User-Mode-Linux"
+SUMMARY = "Utilities for User-Mode-Linux"
 LICENSE = "GPL-2.0"
 DEPENDS = "zlib ncurses readline"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"

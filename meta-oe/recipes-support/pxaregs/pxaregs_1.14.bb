@@ -1,4 +1,4 @@
-DESCRIPTION = "Tool to display and modify PXA registers at runtime"
+SUMMARY = "Tool to display and modify PXA registers at runtime"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://pxaregs.c;endline=12;md5=2cb6b33300eacdec4d7299bc42533740"
 AUTHOR = "Holger Schurig <hs4233@mail.mn-solutions.de>"

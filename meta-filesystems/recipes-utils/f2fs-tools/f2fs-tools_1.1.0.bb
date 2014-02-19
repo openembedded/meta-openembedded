@@ -1,4 +1,4 @@
-DESCRIPTION = "Tools for Flash-Friendly File System (F2FS)"
+SUMMARY = "Tools for Flash-Friendly File System (F2FS)"
 HOMEPAGE = "http://sourceforge.net/projects/f2fs-tools/"
 
 LICENSE = "GPLv2"

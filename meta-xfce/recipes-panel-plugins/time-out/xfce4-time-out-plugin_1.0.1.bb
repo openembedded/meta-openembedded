@@ -1,4 +1,4 @@
-DESCRIPTION = "This plugin makes it possible to take periodical breaks."
+SUMMARY = "This plugin makes it possible to take periodical breaks"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-time-out-plugin"
 SECTION = "x11/application"
 LICENSE = "GPLv2"

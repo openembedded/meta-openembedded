@@ -1,4 +1,4 @@
-DESCRIPTION = "Devicekit power"
+SUMMARY = "Devicekit power"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=756cf97871f77233638937da21b025d3"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Generic client/server library for SASL authentication."
+SUMMARY = "Generic client/server library for SASL authentication"
 SECTION = "console/network"
 DEPENDS = "openssl virtual/db"
 LICENSE = "BSD"

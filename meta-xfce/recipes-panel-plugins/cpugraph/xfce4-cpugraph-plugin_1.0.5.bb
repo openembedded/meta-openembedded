@@ -1,4 +1,4 @@
-DESCRIPTION = "Panel plugin with graphical representation of the cpu frequency"
+SUMMARY = "Panel plugin with graphical representation of the cpu frequency"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-cpugraph-plugin"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=415654f59d8fa70fe4eac2c3f86c8f5e"

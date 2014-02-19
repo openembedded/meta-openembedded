@@ -1,4 +1,4 @@
-DESCRIPTION = "An Embeddable SQL Database Engine"
+SUMMARY = "An Embeddable SQL Database Engine"
 HOMEPAGE = "http://www.sqlite.org/"
 SECTION = "libs"
 DEPENDS = "readline ncurses"

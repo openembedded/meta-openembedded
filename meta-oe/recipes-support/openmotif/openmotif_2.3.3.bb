@@ -1,5 +1,5 @@
 SECTION = "libs"
-DESCRIPTION = "OSM/Motif implementation."
+SUMMARY = "OSM/Motif implementation"
 LICENSE = "OGPL"
 DEPENDS = "xbitmaps virtual/libx11 libxt libxft xproto"
 

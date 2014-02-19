@@ -1,4 +1,4 @@
-DESCRIPTION = "Simple, fast, extensible JSON encoder/decoder for Python"
+SUMMARY = "Simple, fast, extensible JSON encoder/decoder for Python"
 HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
 SECTION = "devel/python"
 

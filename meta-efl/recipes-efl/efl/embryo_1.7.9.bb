@@ -1,4 +1,4 @@
-DESCRIPTION = "The Enlightenment C-like scripting language for Edje"
+SUMMARY = "The Enlightenment C-like scripting language for Edje"
 
 inherit efl
 

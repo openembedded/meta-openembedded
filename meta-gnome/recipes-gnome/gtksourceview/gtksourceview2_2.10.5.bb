@@ -1,4 +1,4 @@
-DESCRIPTION = "Portable C library for multiline text editing"
+SUMMARY = "Portable C library for multiline text editing"
 HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
 
 LICENSE = "GPLv2"

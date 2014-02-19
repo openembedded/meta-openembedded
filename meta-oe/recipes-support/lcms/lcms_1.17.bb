@@ -1,4 +1,4 @@
-DESCRIPTION = "Little cms is a small-footprint, speed optimized color management engine."
+SUMMARY = "Little cms is a small-footprint, speed optimized color management engine"
 SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=156745cad721a8783cb847e82b79f586"

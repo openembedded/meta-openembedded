@@ -1,4 +1,4 @@
-DESCRIPTION = "Tests large file IO and creation/deletion of small files."
+SUMMARY = "Tests large file IO and creation/deletion of small files"
 HOMEPAGE = "http://www.coker.com.au/bonnie++/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://copyright.txt;md5=cd4dde95a6b9d122f0a9150ae9cc3ee0"

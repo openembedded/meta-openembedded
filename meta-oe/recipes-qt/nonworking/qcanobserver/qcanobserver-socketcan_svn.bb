@@ -1,4 +1,4 @@
-DESCRIPTION = "The Linux CAN Sniffer - SocketCAN driver"
+SUMMARY = "The Linux CAN Sniffer - SocketCAN driver"
 
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://../../../modeltest/LICENSE.GPL;md5=34337af480a8c452bfafe22a78fa20cb"

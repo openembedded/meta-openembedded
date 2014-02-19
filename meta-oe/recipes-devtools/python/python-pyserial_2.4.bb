@@ -1,4 +1,4 @@
-DESCRIPTION = "Serial Port Support for Python"
+SUMMARY = "Serial Port Support for Python"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7424386ffe323e815ee62ee9ad591dd8"

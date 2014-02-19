@@ -1,4 +1,4 @@
-DESCRIPTION = "FBreader is an ebook reader"
+SUMMARY = "FBreader is an ebook reader"
 HOMEPAGE = "http://www.fbreader.org"
 SECTION = "x11/utils"
 LICENSE = "GPLv2+"

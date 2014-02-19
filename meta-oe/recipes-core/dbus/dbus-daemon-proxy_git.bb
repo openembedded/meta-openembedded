@@ -1,4 +1,4 @@
-DESCRIPTION = "dbus forwarding daemon"
+SUMMARY = "dbus forwarding daemon"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://dbus-daemon-proxy.c;endline=19;md5=41df6d21fe1c97d6a1cc22a5bf374cba"
 DEPENDS = "dbus dbus-glib"

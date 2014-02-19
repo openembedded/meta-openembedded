@@ -1,4 +1,4 @@
-DESCRIPTION = "C++ bindings for the pango library."
+SUMMARY = "C++ bindings for the pango library"
 SECTION = "libs"
 LICENSE = "LGPLv2.1 & GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \

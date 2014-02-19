@@ -1,4 +1,4 @@
-DESCRIPTION = "A GTK+ interface to MPlayer"
+SUMMARY = "A GTK+ interface to MPlayer"
 HOMEPAGE = "http://code.google.com/p/gnome-mplayer"
 SECTION = "multimedia"
 

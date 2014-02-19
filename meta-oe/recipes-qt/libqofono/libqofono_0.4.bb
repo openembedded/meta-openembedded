@@ -1,4 +1,4 @@
-DESCRIPTION = "Qt Library for oFono"
+SUMMARY = "Qt Library for oFono"
 HOMEPAGE = "https://github.com/nemomobile/libqofono"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://README;endline=3;md5=8a15bce3921d1238d9a9f23828612947"

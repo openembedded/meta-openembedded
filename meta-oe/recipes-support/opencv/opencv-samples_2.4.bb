@@ -1,4 +1,4 @@
-DESCRIPTION = "Opencv : The Open Computer Vision Library"
+SUMMARY = "Opencv : The Open Computer Vision Library"
 HOMEPAGE = "http://opencv.willowgarage.com/wiki/"
 SECTION = "libs"
 LICENSE = "BSD"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Tools for performance analysis."
+SUMMARY = "Tools for performance analysis"
 HOMEPAGE = "http://lmbench.sourceforge.net/"
 SECTION = "console/utils"
 LICENSE = "GPLv2"

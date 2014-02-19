@@ -1,4 +1,4 @@
-DESCRIPTION = "Transparent Inter-Process Communication protocol"
+SUMMARY = "Transparent Inter-Process Communication protocol"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://tipc-config/tipc-config.c;endline=32;md5=527a3d5745e1581b15a4fddfb5dfda68"
 

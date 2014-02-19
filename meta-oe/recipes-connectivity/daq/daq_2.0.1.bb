@@ -1,4 +1,4 @@
-DESCRIPTION = "The dump DAQ test the various inline mode features "
+SUMMARY = "The dump DAQ test the various inline mode features "
 HOMEPAGE = "http://www.snort.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f9ce51a65dd738dc1ae631d8b21c40e0"

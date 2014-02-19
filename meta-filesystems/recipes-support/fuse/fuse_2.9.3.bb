@@ -1,9 +1,9 @@
-SUMMARY = "With FUSE it is possible to implement a fully functional filesystem in a userspace program"
+SUMMARY = "Implementation of a fully functional filesystem in a userspace program"
 DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspace \
-programs to export a virtual filesystem to the Linux kernel.  FUSE \
-also aims to provide a secure method for non privileged users to \
-create and mount their own filesystem implementations. \
-"
+               programs to export a virtual filesystem to the Linux kernel. FUSE \
+               also aims to provide a secure method for non privileged users to \
+               create and mount their own filesystem implementations. \
+              "
 HOMEPAGE = "http://fuse.sf.net"
 SECTION = "libs"
 LICENSE = "GPLv2 & LGPLv2"

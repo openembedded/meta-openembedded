@@ -1,4 +1,4 @@
-DESCRIPTION = "A shell-script tool for converting XML files to various formats" 
+SUMMARY = "A shell-script tool for converting XML files to various formats"
 HOMEPAGE = "https://fedorahosted.org/xmlto/" 
 SECTION = "docs/xmlto" 
 LICENSE = "GPLv2" 

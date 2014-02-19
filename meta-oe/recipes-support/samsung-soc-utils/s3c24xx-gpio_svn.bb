@@ -1,4 +1,4 @@
-DESCRIPTION = "A user-space tool to show and modify the state of GPIOs on the S3c24xx platform"
+SUMMARY = "A user-space tool to show and modify the state of GPIOs on the S3c24xx platform"
 SECTION = "console/utils"
 AUTHOR = "Werner Almesberger <werner@openmoko.org>"
 LICENSE = "GPLv2+"

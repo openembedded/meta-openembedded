@@ -1,4 +1,4 @@
-DESCRIPTION = "Control basic functions in socketcan from userspace"
+SUMMARY = "Control basic functions in socketcan from userspace"
 HOMEPAGE = "http://www.pengutronix.de"
 SECTION = "libs/network"
 

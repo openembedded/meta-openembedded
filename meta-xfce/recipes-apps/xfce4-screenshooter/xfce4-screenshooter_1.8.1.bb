@@ -1,4 +1,4 @@
-DESCRIPTION = "Application to take screenshots"
+SUMMARY = "Application to take screenshots"
 HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-screenshooter"
 SECTION = "x11/application"
 LICENSE = "GPLv2"

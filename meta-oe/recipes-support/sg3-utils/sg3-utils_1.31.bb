@@ -1,4 +1,4 @@
-DESCRIPTION = "Utilities for working with generic SCSI devices"
+SUMMARY = "Utilities for working with generic SCSI devices"
 HOMEPAGE = "http://sg.danny.cz/sg/sg3_utils.html"
 SECTION = "console/admin"
 

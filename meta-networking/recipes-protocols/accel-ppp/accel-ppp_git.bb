@@ -1,4 +1,4 @@
-SUMMARY = "ACCEL-PPP is a high performance VPN server application for linux."
+SUMMARY = "ACCEL-PPP is a high performance VPN server application for linux"
 HOMEPAGE = "http://sourceforge.net/apps/trac/accel-ppp/wiki"
 
 LICENSE = "GPLv2"

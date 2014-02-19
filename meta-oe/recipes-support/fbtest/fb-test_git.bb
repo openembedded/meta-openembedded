@@ -1,4 +1,4 @@
-DESCRIPTION = "Test suite for Linux framebuffer"
+SUMMARY = "Test suite for Linux framebuffer"
 
 PV = "0.0"
 

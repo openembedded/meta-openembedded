@@ -1,5 +1,5 @@
 require recipes-graphics/xorg-app/xorg-app-common.inc
-DESCRIPTION = "Tool for manipulating ICE protocol authorization records"
+SUMMARY = "Tool for manipulating ICE protocol authorization records"
 LIC_FILES_CHKSUM = "file://COPYING;md5=13f70acf3c27f5f834bbc954df775f8e"
 DEPENDS += "libice"
 PR = "r6"

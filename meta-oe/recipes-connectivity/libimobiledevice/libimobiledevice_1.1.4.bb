@@ -1,4 +1,4 @@
-DESCRIPTION = "A protocol library to access an iPhone or iPod Touch in Linux"
+SUMMARY = "A protocol library to access an iPhone or iPod Touch in Linux"
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "\
     file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \

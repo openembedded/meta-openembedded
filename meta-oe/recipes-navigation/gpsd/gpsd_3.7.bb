@@ -1,4 +1,4 @@
-DESCRIPTION = "A TCP/IP Daemon simplifying the communication with GPS devices"
+SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
 SECTION = "console/network"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
@@ -108,28 +108,28 @@ FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
 RDEPENDS_${PN} = "gpsd-gpsctl"
 RRECOMMENDS_${PN} = "gpsd-conf gpsd-udev gpsd-machine-conf"
 
-DESCRIPTION_gpsd-udev = "udev relevant files to use gpsd hotplugging"
+SUMMARY_gpsd-udev = "udev relevant files to use gpsd hotplugging"
 FILES_gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
 RDEPENDS_gpsd-udev += "udev gpsd-conf"
 
-DESCRIPTION_libgpsd = "C service library used for communicating with gpsd"
+SUMMARY_libgpsd = "C service library used for communicating with gpsd"
 FILES_libgpsd = "${libdir}/libgpsd.so.*"
 
-DESCRIPTION_libgps = "C service library used for communicating with gpsd"
+SUMMARY_libgps = "C service library used for communicating with gpsd"
 FILES_libgps = "${libdir}/libgps.so.*"
 
-DESCRIPTION_gpsd-conf = "gpsd configuration files and init scripts"
+SUMMARY_gpsd-conf = "gpsd configuration files and init scripts"
 FILES_gpsd-conf = "${sysconfdir}"
 CONFFILES_gpsd-conf = "${sysconfdir}/default/gpsd.default"
 
-DESCRIPTION_gpsd-gpsctl = "Tool for tweaking GPS modes"
+SUMMARY_gpsd-gpsctl = "Tool for tweaking GPS modes"
 FILES_gpsd-gpsctl = "${bindir}/gpsctl"
 
-DESCRIPTION_gps-utils = "Utils used for simulating, monitoring,... a GPS"
+SUMMARY_gps-utils = "Utils used for simulating, monitoring,... a GPS"
 FILES_gps-utils = "${bindir}/*"
 RDEPENDS_gps-utils = "python-pygps"
 
-DESCRIPTION_python-pygps = "Python bindings to gpsd"
+SUMMARY_python-pygps = "Python bindings to gpsd"
 FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/*"
 RDEPENDS_python-pygps = "python-core python-curses gpsd python-json"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Libsyncml is an implementation of the SyncML protocol."
+SUMMARY = "Libsyncml is an implementation of the SyncML protocol"
 HOMEPAGE = "https://libsyncml.opensync.org/"
 SECTION = "libs"
 LICENSE = "LGPLv2.1"

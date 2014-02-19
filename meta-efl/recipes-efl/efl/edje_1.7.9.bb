@@ -1,4 +1,4 @@
-DESCRIPTION = "Edje is the Enlightenment graphical design & layout library"
+SUMMARY = "Edje is the Enlightenment graphical design & layout library"
 DEPENDS = "lua5.1 eet evas ecore embryo edje-native eina libsndfile1 eio"
 DEPENDS_virtclass-native = "lua5.1-native evas-native ecore-native eet-native embryo-native eina-native"
 DEPENDS_virtclass-nativesdk = "evas-native ecore-native eet-native embryo-native eina-native"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Library for interacting with ID3 tags."
+SUMMARY = "Library for interacting with ID3 tags"
 SECTION = "libs/multimedia"
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"

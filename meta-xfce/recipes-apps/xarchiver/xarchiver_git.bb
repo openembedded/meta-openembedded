@@ -1,4 +1,4 @@
-DESCRIPTION = "Lightweight, desktop independent GTK+ archive manager"
+SUMMARY = "Lightweight, desktop independent GTK+ archive manager"
 HOMEPAGE = "http://xarchiver.sourceforge.net"
 SECTION = "x11"
 

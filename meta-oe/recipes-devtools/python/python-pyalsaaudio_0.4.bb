@@ -1,4 +1,4 @@
-DESCRIPTION = "Support for the Linux 2.6.x ALSA Sound System"
+SUMMARY = "Support for the Linux 2.6.x ALSA Sound System"
 SECTION = "devel/python"
 DEPENDS = "alsa-lib"
 LICENSE = "PSF"

@@ -1,4 +1,4 @@
-DESCRIPTION = "HP Linux Imaging and Printing"
+SUMMARY = "HP Linux Imaging and Printing"
 LICENSE="GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=442bb3cbbeeb60643a87325718b8a8ee"
 

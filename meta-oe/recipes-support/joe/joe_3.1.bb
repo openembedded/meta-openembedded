@@ -1,5 +1,5 @@
 SECTION = "console/utils"
-DESCRIPTION = "Console text editor with good functionality, good choice for vi-haters."
+SUMMARY = "Console text editor with good functionality, good choice for vi-haters"
 HOMEPAGE = "http://joe-editor.sourceforge.net/"
 LICENSE = "GPLv1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=da10ed7cf8038981c580e11c1d3e8fb6"

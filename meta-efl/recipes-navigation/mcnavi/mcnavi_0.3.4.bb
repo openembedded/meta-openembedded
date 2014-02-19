@@ -1,4 +1,4 @@
-DESCRIPTION = "Free GPS navigation for car and outdoor with OpenStreetMap maps"
+SUMMARY = "Free GPS navigation for car and outdoor with OpenStreetMap maps"
 HOMEPAGE = "http://www.gps-routes.info/index.php?name=Content&pa=showpage&pid=1"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"

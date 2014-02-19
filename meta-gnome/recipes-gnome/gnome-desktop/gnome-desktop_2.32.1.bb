@@ -1,4 +1,4 @@
-DESCRIPTION = "GNOME library for reading .desktop files"
+SUMMARY = "GNOME library for reading .desktop files"
 SECTION = "x11/gnome"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \

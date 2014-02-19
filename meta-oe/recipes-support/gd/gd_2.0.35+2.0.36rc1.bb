@@ -1,7 +1,7 @@
 SECTION = "libs"
 LICENSE = "GD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
-DESCRIPTION = "gd is a library used to create PNG, JPEG, or WBMP images."
+SUMMARY = "gd is a library used to create PNG, JPEG, or WBMP images"
 DEPENDS = "freetype libpng jpeg zlib"
 PR = "r5"
 

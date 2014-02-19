@@ -1,4 +1,4 @@
-DESCRIPTION = "A library which provides easy access to huge pages of memory"
+SUMMARY = "A library which provides easy access to huge pages of memory"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 

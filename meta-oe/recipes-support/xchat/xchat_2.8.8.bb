@@ -1,4 +1,4 @@
-DESCRIPTION = "Full-featured IRC chat client with scripting support"
+SUMMARY = "Full-featured IRC chat client with scripting support"
 LICENSE = "GPLv2+"
 HOMEPAGE = "http://www.xchat.org"
 SECTION = "x11/network"

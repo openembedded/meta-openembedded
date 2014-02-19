@@ -1,5 +1,5 @@
 SECTION = "x11/network"
-DESCRIPTION = "Mail user agent plugins"
+SUMMARY = "Mail user agent plugins"
 DEPENDS = "claws-mail libxml2 curl glib-2.0 gtk+"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0c2348e0a084e573f0220f5e45d8097e"

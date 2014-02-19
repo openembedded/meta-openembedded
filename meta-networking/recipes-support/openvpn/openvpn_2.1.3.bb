@@ -1,4 +1,4 @@
-SUMMARY = "A full-featured SSL VPN solution via tun device."
+SUMMARY = "A full-featured SSL VPN solution via tun device"
 HOMEPAGE = "http://openvpn.sourceforge.net"
 SECTION = "console/network"
 LICENSE = "GPLv2"

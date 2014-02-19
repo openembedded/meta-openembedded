@@ -1,4 +1,4 @@
-DESCRIPTION = "Terminal multiplexer"
+SUMMARY = "Terminal multiplexer"
 HOMEPAGE = "http://tmux.sourceforge.net"
 SECTION = "console/utils"
 

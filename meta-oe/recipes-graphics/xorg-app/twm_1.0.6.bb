@@ -1,5 +1,5 @@
 require recipes-graphics/xorg-app/xorg-app-common.inc
-DESCRIPTION = "tiny window manager"
+SUMMARY = "tiny window manager"
 DEPENDS += " libxext libxt libxmu bison-native"
 
 LICENSE = "MIT"

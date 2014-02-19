@@ -1,4 +1,4 @@
-DESCRIPTION = "GPS application for openmoko freerunner"
+SUMMARY = "GPS application for openmoko freerunner"
 HOMEPAGE = "http://omgps.googlecode.com"
 SECTION = "openmoko/applications"
 LICENSE = "GPLv2"

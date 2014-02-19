@@ -1,4 +1,4 @@
-DESCRIPTION = "dumb networking library"
+SUMMARY = "dumb networking library"
 HOMEPAGE = "http://code.google.com/p/libdnet/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"

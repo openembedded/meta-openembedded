@@ -1,4 +1,4 @@
-DESCRIPTION = "LXDM is the lightweight display manager"
+SUMMARY = "LXDM is the lightweight display manager"
 HOMEPAGE = "http://blog.lxde.org/?p=531"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"

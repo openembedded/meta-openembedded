@@ -1,4 +1,4 @@
-DESCRIPTION = "FLTK is a cross-platform C++ GUI toolkit"
+SUMMARY = "FLTK is a cross-platform C++ GUI toolkit"
 HOMEPAGE = "http://www.fltk.org"
 SECTION = "libs"
 LICENSE = "LGPLv2 & FLTK"

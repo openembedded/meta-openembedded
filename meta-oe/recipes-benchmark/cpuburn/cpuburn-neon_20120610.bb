@@ -1,4 +1,4 @@
-DESCRIPTION = "CPU burn app that loads the NEON coprocessor fully"
+SUMMARY = "CPU burn app that loads the NEON coprocessor fully"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://burn.S;md5=823abc72c2cd448e87df9bc5355a4456"
 

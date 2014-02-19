@@ -1,4 +1,4 @@
-DESCRIPTION = "The GIMP is the GNU Image Manipulation Program."
+SUMMARY = "The GIMP is the GNU Image Manipulation Program"
 HOMEPAGE = "http://www.gimp.org"
 SECTION = "x11/graphics"
 LICENSE = "GPLv3"

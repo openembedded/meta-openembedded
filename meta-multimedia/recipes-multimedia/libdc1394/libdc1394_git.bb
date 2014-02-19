@@ -1,4 +1,4 @@
-DESCRIPTION = "Capture and control API for IIDC compliant cameras"
+SUMMARY = "Capture and control API for IIDC compliant cameras"
 HOMEPAGE = "http://sourceforge.net/projects/libdc1394/"
 SECTION = "libs"
 LICENSE = "LGPL-2.0"

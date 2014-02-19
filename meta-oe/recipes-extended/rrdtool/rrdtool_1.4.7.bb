@@ -1,4 +1,4 @@
-DESCRIPTION = "High performance data logging and graphing system for time series data."
+SUMMARY = "High performance data logging and graphing system for time series data"
 HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 
 LICENSE = "GPLv2"

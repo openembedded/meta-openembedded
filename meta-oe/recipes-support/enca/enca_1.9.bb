@@ -1,4 +1,4 @@
-DESCRIPTION = "Enca is an Extremely Naive Charset Analyser"
+SUMMARY = "Enca is an Extremely Naive Charset Analyser"
 SECTION = "libs"
 HOMEPAGE = "http://trific.ath.cx/software/enca/"
 

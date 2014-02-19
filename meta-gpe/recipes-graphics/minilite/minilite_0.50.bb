@@ -1,4 +1,4 @@
-DESCRIPTION = "GPE Screen light control dockapp"
+SUMMARY = "GPE Screen light control dockapp"
 SECTION = "gpe"
 
 LICENSE = "GPLv2"

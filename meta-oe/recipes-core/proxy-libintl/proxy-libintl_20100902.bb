@@ -1,4 +1,4 @@
-DESCRIPTION = "Proxy libintl"
+SUMMARY = "Proxy libintl"
 HOMEPAGE = "http://ftp.gnome.org/pub/GNOME/binaries/win32/dependencies/"
 SECTION = "libs"
 LICENSE = "LGPLv2"

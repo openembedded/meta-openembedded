@@ -1,5 +1,5 @@
 require recipes-graphics/xorg-driver/xorg-driver-video.inc
-DESCRIPTION = "X.Org X server -- Glamo display driver with KMS support"
+SUMMARY = "X.Org X server -- Glamo display driver with KMS support"
 DEPENDS += "libdrm"
 RDEPENDS_${PN} += "xserver-xorg-module-exa"
 

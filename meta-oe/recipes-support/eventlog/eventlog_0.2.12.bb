@@ -1,4 +1,4 @@
-DESCRIPTION = "Replacement syslog API"
+SUMMARY = "Replacement syslog API"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b8ba8e77bcda9a53fac0fe39fe957767"
 

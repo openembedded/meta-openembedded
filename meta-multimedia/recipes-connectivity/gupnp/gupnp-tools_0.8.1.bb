@@ -1,4 +1,4 @@
-DESCRIPTION = "Tools for GUPnP"
+SUMMARY = "Tools for GUPnP"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://src/network-light/main.c;beginline=1;endline=21;md5=033bf37c030780c5a72165846b3003f6"

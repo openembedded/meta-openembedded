@@ -1,4 +1,7 @@
-SUMMARY = "libsoc is a C library for interfacing with common SoC peripherals through generic kernel interfaces"
+SUMMARY = "Library for interfacing with common SoC peripherals"
+DESCRIPTION = "libsoc is a C library to interface with common peripherals (gpio, i2c, spi, pwm) \
+               found in SoC (System on Chips) through generic Linux Kernel interfaces."
+
 HOMEPAGE = "https://github.com/jackmitch/libsoc"
 
 LICENSE = "LGPLv2.1"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Fribidi library for bidirectional text"
+SUMMARY = "Fribidi library for bidirectional text"
 SECTION = "libs"
 PR = "r1"
 LICENSE = "LGPLv2.1"

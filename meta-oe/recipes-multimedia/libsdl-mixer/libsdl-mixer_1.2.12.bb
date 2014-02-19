@@ -1,4 +1,4 @@
-DESCRIPTION = "Simple DirectMedia Layer mixer library."
+SUMMARY = "Simple DirectMedia Layer mixer library"
 SECTION = "libs"
 DEPENDS = "virtual/libsdl flac libmikmod libvorbis"
 LICENSE = "Zlib"

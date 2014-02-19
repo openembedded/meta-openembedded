@@ -1,4 +1,4 @@
-DESCRIPTION = "A Python crypto and SSL toolkit"
+SUMMARY = "A Python crypto and SSL toolkit"
 HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
 
 DEPENDS = "openssl swig-native"

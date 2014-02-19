@@ -1,6 +1,6 @@
 require ttf.inc
 
-DESCRIPTION = "Gentium fonts - TTF Version"
+SUMMARY = "Gentium fonts - TTF Version"
 HOMEPAGE = "http://scripts.sil.org/gentium"
 LICENSE = "OFL"
 LICENSE_URL = "http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=OFL"

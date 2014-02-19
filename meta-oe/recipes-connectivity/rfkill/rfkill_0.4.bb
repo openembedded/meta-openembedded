@@ -1,4 +1,4 @@
-DESCRIPTION = "rfkill CLI utility"
+SUMMARY = "rfkill CLI utility"
 HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/rfkill"
 SECTION = "base"
 LICENSE = "BSD"

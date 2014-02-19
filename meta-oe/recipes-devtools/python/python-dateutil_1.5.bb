@@ -1,4 +1,4 @@
-DESCRIPTION = "Extensions to the standard Python date/time support"
+SUMMARY = "Extensions to the standard Python date/time support"
 HOMEPAGE = "http://labix.org/python-dateutil"
 SECTION = "devel/python"
 LICENSE = "PSF"

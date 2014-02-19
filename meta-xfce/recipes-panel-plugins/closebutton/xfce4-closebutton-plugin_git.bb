@@ -1,4 +1,4 @@
-DESCRIPTION = "Plugin displaying close button for application currently active"
+SUMMARY = "Plugin displaying close button for application currently active"
 SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"

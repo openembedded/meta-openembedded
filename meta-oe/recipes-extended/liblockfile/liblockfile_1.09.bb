@@ -1,4 +1,4 @@
-DESCRIPTION = "File locking library."
+SUMMARY = "File locking library"
 SECTION = "libs"
 LICENSE = "LGPLv2+ & GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ac284a60d48eaa4bc811cddc377fa341"

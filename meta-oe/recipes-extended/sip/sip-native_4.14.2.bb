@@ -1,4 +1,4 @@
-DESCRIPTION = "SIP is a C++/Python Wrapper Generator"
+SUMMARY = "SIP is a C++/Python Wrapper Generator"
 AUTHOR = "Phil Thompson"
 HOMEPAGE = "http://www.riverbankcomputing.co.uk/sip"
 SECTION = "devel"

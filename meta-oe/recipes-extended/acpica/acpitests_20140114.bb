@@ -1,4 +1,4 @@
-SUMMARY = "Test suite used to validate ACPICA."
+SUMMARY = "Test suite used to validate ACPICA"
 HOMEPAGE = "http://www.acpica.org/"
 
 LICENSE = "Intel"

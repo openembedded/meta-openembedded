@@ -1,4 +1,4 @@
-DESCRIPTION = "gcalctool is a powerful calculator"
+SUMMARY = "gcalctool is a powerful calculator"
 SECTION = "x11"
 DEPENDS = "gtk+ gnome-doc-utils"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Jansson is a C library for encoding, decoding and manipulating JSON data."
+SUMMARY = "Jansson is a C library for encoding, decoding and manipulating JSON data"
 HOMEPAGE = "http://www.digip.org/jansson/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6946b728e700de875e60ebb453cc3a20"

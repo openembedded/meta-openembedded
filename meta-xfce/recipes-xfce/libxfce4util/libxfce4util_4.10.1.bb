@@ -1,4 +1,4 @@
-DESCRIPTION = "Basic utility library for Xfce4"
+SUMMARY = "Basic utility library for Xfce4"
 SECTION = "x11/libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"

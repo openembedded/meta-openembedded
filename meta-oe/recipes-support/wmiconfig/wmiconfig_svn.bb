@@ -1,4 +1,4 @@
-DESCRIPTION = "Atheros 6K Wifi configuration utility"
+SUMMARY = "Atheros 6K Wifi configuration utility"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://wmiconfig.c;endline=19;md5=4394a56bca1c5b2446c9f8e406c82911"
 SECTION = "console/network"

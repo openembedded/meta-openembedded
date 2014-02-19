@@ -1,5 +1,5 @@
 HOMEPAGE = "http://linux.bytesex.org/fbida/"
-DESCRIPTION = "frame buffer image and doc viewer tools"
+SUMMARY = "frame buffer image and doc viewer tools"
 AUTHOR = "Gerd Hoffmann"
 SECTION = "utils"
 

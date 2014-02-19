@@ -1,4 +1,4 @@
-DESCRIPTION = "OBEX Server and Client"
+SUMMARY = "OBEX Server and Client"
 DEPENDS = "glib-2.0 dbus bluez4 libical"
 
 LICENSE = "GPLv2"

@@ -1,4 +1,4 @@
-DESCRIPTION = "USB CEC Adaptor communication Library"
+SUMMARY = "USB CEC Adaptor communication Library"
 HOMEPAGE = "http://libcec.pulse-eight.com/"
 
 LICENSE = "GPLv2+"

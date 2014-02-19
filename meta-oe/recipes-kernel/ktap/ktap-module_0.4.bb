@@ -2,7 +2,7 @@
 
 require ktap.inc
 
-DESCRIPTION = "KTAP is a scripting dynamic tracing tool for Linux"
+SUMMARY = "KTAP is a scripting dynamic tracing tool for Linux"
 
 inherit module
 

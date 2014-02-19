@@ -1,4 +1,4 @@
-DESCRIPTION = "Linux zram compressed in-memory swap"
+SUMMARY = "Linux zram compressed in-memory swap"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 

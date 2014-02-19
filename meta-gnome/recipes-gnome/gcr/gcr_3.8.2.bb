@@ -1,4 +1,4 @@
-DESCRIPTION = "A library for bits of crypto UI and parsing etc"
+SUMMARY = "A library for bits of crypto UI and parsing etc"
 HOMEPAGE = "http://www.gnome.org/"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 

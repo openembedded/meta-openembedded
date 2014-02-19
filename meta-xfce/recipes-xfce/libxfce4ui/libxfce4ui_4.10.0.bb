@@ -1,4 +1,4 @@
-DESCRIPTION = "Xfce4 Widget library and X Window System interaction"
+SUMMARY = "Xfce4 Widget library and X Window System interaction"
 SECTION = "x11/libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Power manager for the Xfce desktop environment"
+SUMMARY = "Power manager for the Xfce desktop environment"
 HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-power-manager"
 SECTION = "x11"
 

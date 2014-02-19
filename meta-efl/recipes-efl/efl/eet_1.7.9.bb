@@ -1,4 +1,4 @@
-DESCRIPTION = "EET is the Enlightenment data storage library"
+SUMMARY = "EET is the Enlightenment data storage library"
 DEPENDS = "pkgconfig zlib jpeg openssl eina gnutls"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=da947f414a2ca4323245f1abb1980953"

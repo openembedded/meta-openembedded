@@ -1,4 +1,4 @@
-DESCRIPTION = "A portable audio library"
+SUMMARY = "A portable audio library"
 SECTION = "libs/multimedia"
 LICENSE = "PortAudio"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02df"

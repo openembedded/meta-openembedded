@@ -3,7 +3,7 @@ SECTION = "kernel/userland"
 LICENSE = "GPLv2 | BSD"
 LIC_FILES_CHKSUM = "file://README;md5=4d709ce0f9c84b87d148e16731f647e1"
 DEPENDS = "libnl openssl"
-DESCRIPTION = "User space daemon for extended IEEE 802.11 management"
+SUMMARY = "User space daemon for extended IEEE 802.11 management"
 
 inherit update-rc.d
 INITSCRIPT_NAME = "hostapd"

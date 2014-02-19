@@ -1,4 +1,4 @@
-DESCRIPTION = "Polish dictionary for Illume keyboard"
+SUMMARY = "Polish dictionary for Illume keyboard"
 SECTION = "x11/data"
 SRCREV = "38fdd9bb0d8296e984bb6443466801eea6f62f00"
 PV = "1.0+gitr${SRCPV}"

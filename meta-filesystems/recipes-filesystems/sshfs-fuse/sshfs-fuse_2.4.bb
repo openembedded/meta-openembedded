@@ -1,4 +1,4 @@
-DESCRIPTION = "This is a filesystem client based on the SSH File Transfer Protocol using FUSE."
+SUMMARY = "This is a filesystem client based on the SSH File Transfer Protocol using FUSE"
 AUTHOR = "Miklos Szeredi <miklos@szeredi.hu>"
 HOMEPAGE = "http://fuse.sourceforge.net/sshfs.html"
 SECTION = "console/network"

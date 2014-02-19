@@ -1,4 +1,4 @@
-DESCRIPTION = "Eeze is a library to simplify the use of devices"
+SUMMARY = "Eeze is a library to simplify the use of devices"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=315521fe061b6fd4290ef01db714a3c8"
 DEPENDS = "ecore eet udev"

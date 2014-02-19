@@ -1,4 +1,4 @@
-SUMMARY = "LibYAML is a YAML parser and emitter written in C."
+SUMMARY = "LibYAML is a YAML parser and emitter written in C"
 HOMEPAGE = "http://pyyaml.org/wiki/LibYAML"
 SECTION = "libs/devel"
 LICENSE = "MIT"

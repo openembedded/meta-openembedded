@@ -1,4 +1,4 @@
-DESCRIPTION = " a Just-In-Time Compiler for Lua"
+SUMMARY = "Just-In-Time Compiler for Lua"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1793ef52a5d577794cd886a501a7f861"
 HOMEPAGE = "http://luajit.org"

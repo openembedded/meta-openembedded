@@ -1,4 +1,4 @@
-DESCRIPTION = "A network authentication protocol"
+SUMMARY = "A network authentication protocol"
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"

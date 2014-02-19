@@ -1,4 +1,4 @@
-DESCRIPTION = "FoxtrotGPS is a map and GPS application using OpenStreetMap"
+SUMMARY = "FoxtrotGPS is a map and GPS application using OpenStreetMap"
 AUTHOR = "Joshua Judson Rosen <rozzin@geekspace.com>"
 HOMEPAGE = "http://www.foxtrotgps.org/"
 SECTION = "x11/applications"

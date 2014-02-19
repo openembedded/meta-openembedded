@@ -1,6 +1,6 @@
 require ttf.inc
 
-DESCRIPTION = "WenQuanYi Zen Hei - A Hei-Ti Style Chinese font"
+SUMMARY = "WenQuanYi Zen Hei - A Hei-Ti Style Chinese font"
 AUTHOR = "Qianqian Fang and The WenQuanYi Project Contributors"
 HOMEPAGE = "http://wqy.sourceforge.net/en/"
 LICENSE = "GPLv2"

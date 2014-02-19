@@ -1,4 +1,4 @@
-DESCRIPTION = "Vala meets the Enlightenment Foundation Libraries"
+SUMMARY = "Vala meets the Enlightenment Foundation Libraries"
 AUTHOR = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"

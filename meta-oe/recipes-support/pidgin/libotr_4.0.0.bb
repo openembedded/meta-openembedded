@@ -1,4 +1,4 @@
-DESCRIPTION = "(OTR) Messaging allows you to have private conversations over instant messaging"
+SUMMARY = "(OTR) Messaging allows you to have private conversations over instant messaging"
 HOMEPAGE = "http://www.cypherpunks.ca/otr/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=92fe174bad6da3763f6e9e9eaff6df24"

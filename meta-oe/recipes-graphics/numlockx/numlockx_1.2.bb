@@ -1,4 +1,4 @@
-DESCRIPTION = "Enable NumLock in X11 sessions"
+SUMMARY = "Enable NumLock in X11 sessions"
 HOMEPAGE = "http://home.kde.org/~seli/numlockx/"
 SECTION = "x11/apps"
 LICENSE = "MIT-X"

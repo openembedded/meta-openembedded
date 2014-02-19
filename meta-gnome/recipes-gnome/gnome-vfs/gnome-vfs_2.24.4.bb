@@ -1,4 +1,4 @@
-DESCRIPTION = "a userspace virtual filesystem"
+SUMMARY = "a userspace virtual filesystem"
 HOMEPAGE = "http://www.gnome.org/"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Eina is the Enlightenment data library"
+SUMMARY = "Eina is the Enlightenment data library"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9cc092d35d7bbfcd986232cde130a551"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Simple client plugin for Music Player Daemon"
+SUMMARY = "Simple client plugin for Music Player Daemon"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mpc-plugin"
 SECTION = "x11/application"
 LICENSE = "BSD"

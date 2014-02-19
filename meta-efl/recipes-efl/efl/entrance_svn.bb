@@ -1,4 +1,4 @@
-DESCRIPTION = "Login manager for Enlightenment"
+SUMMARY = "Login manager for Enlightenment"
 DEPENDS = "efreet eina eet ecore elementary"
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Programmable Completion for Bash 4"
+SUMMARY = "Programmable Completion for Bash 4"
 HOMEPAGE = "http://bash-completion.alioth.debian.org/"
 BUGTRACKER = "https://alioth.debian.org/projects/bash-completion/"
 

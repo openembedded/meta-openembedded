@@ -1,4 +1,4 @@
-DESCRIPTION = "Library for reading mod-like audio files."
+SUMMARY = "Library for reading mod-like audio files"
 HOMEPAGE = "http://modplug-xmms.sf.net"
 
 LICENSE = "PD"

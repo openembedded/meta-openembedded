@@ -1,4 +1,4 @@
-DESCRIPTION = "Gives a fake root environment"
+SUMMARY = "Gives a fake root environment"
 HOMEPAGE = "http://fakeroot.alioth.debian.org"
 SECTION = "base"
 LICENSE = "GPLv3"

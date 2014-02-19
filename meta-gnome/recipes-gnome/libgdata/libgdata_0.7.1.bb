@@ -1,4 +1,4 @@
-DESCRIPTION = "GLib-based library for accessing online service APIs using the GData protocol"
+SUMMARY = "GLib-based library for accessing online service APIs using the GData protocol"
 HOMEPAGE = "http://live.gnome.org/libgdata"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 

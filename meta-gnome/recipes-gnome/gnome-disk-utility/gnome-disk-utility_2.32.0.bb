@@ -1,4 +1,4 @@
-DESCRIPTION = "GNOME disk utility"
+SUMMARY = "GNOME disk utility"
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"

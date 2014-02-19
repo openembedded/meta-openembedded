@@ -1,4 +1,4 @@
-DESCRIPTION = "Media controller control application"
+SUMMARY = "Media controller control application"
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Additional (old) themes for Xfwm4"
+SUMMARY = "Additional (old) themes for Xfwm4"
 SECTION = "x11/wm"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"

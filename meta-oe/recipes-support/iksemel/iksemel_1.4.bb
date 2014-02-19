@@ -1,4 +1,4 @@
-DESCRIPTION = "Fast and portable XML parser and Jabber protocol library"
+SUMMARY = "Fast and portable XML parser and Jabber protocol library"
 AUTHOR = "Gurer Ozen <meduketto at gmail.com>"
 HOMEPAGE = "http://iksemel.googlecode.com"
 SECTION = "libs"

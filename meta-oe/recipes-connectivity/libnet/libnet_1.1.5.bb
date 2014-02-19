@@ -1,4 +1,4 @@
-DESCRIPTION = "A packet dissection and creation library"
+SUMMARY = "A packet dissection and creation library"
 # libnet at packetfactory.net is dead
 HOMEPAGE = "https://github.com/sam-github/libnet"
 SECTION = "libs"

@@ -1,4 +1,4 @@
-DESCRIPTION = "USB Device Firmware Upgrade utility"
+SUMMARY = "USB Device Firmware Upgrade utility"
 SECTION = "devel"
 AUTHOR = "Harald Welte <laforge@openmoko.org>"
 LICENSE = "GPLv2"

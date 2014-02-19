@@ -1,4 +1,4 @@
-DESCRIPTION = "JTAG utility to interface w/ a S3C2410 device"
+SUMMARY = "JTAG utility to interface w/ a S3C2410 device"
 SECTION = "devel"
 AUTHOR = "Harald Welte <laforge@openmoko.org>"
 LICENSE = "GPLv2+"

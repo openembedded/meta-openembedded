@@ -2,7 +2,7 @@ require recipes-graphics/xorg-lib/xorg-lib-common.inc
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b0d5bdc98f7ebab3b6c3791d9bf40907"
 
-DESCRIPTION = "XFIXES Extension"
+SUMMARY = "XFIXES Extension"
 DEPENDS += " xextproto xproto zlib"
 PE = "1"
 PR = "r11"

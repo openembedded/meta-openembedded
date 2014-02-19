@@ -1,4 +1,4 @@
-DESCRIPTION = "Ecore is the Enlightenment application framework library"
+SUMMARY = "Ecore is the Enlightenment application framework library"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d6ff2c3c85de2faf5fd7dcd9ccfc8886"
 DEPENDS = "virtual/libiconv tslib curl eet evas glib-2.0 gnutls \

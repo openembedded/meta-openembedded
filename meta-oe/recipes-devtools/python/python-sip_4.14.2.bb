@@ -1,4 +1,4 @@
-DESCRIPTION = "Runtime helper for sip-generated python wrapper libraries"
+SUMMARY = "Runtime helper for sip-generated python wrapper libraries"
 SECTION = "devel/python"
 HOMEPAGE = "http://www.riverbankcomputing.co.uk/sip"
 AUTHOR = "Phil Thompson"

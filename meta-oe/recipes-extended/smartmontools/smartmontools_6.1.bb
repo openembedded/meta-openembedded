@@ -1,5 +1,5 @@
 SECTION = "console/utils"
-DESCRIPTION = "Control and monitor storage systems using S.M.A.R.T."
+SUMMARY = "Control and monitor storage systems using S.M.A.R.T"
 HOMEPAGE = "http://smartmontools.sourceforge.net/"
 
 LICENSE = "GPLv2"

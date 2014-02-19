@@ -1,4 +1,4 @@
-DESCRIPTION = "Fluidsynth is a software synthesizer"
+SUMMARY = "Fluidsynth is a software synthesizer"
 HOMEPAGE = "http://www.fluidsynth.org/"
 SECTION = "libs/multimedia"
 LICENSE = "LGPL-2.0+"

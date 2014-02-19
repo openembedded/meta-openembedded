@@ -1,6 +1,6 @@
 # (c) Copyright 2012  Hewlett-Packard Development Company, L.P. 
 
-DESCRIPTION = "a simple, small, minimal, C++ XML parser"
+SUMMARY = "a simple, small, minimal, C++ XML parser"
 HOMEPAGE = "http://www.sourceforge.net/projects/tinyxml"
 LICENSE = "Zlib"
 LIC_FILES_CHKSUM = "file://readme.txt;md5=f8f366f3370dda889f60faa7db162cf4"

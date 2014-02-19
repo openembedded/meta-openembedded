@@ -1,4 +1,4 @@
-DESCRIPTION = "Xfce4 development tools"
+SUMMARY = "Xfce4 development tools"
 HOMEPAGE = "http://www.xfce.org"
 SECTION = "x11/libs"
 LICENSE = "GPLv2"

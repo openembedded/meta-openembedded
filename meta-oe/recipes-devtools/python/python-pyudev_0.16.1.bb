@@ -1,4 +1,4 @@
-DESCRIPTION = "A libudev binding"
+SUMMARY = "A libudev binding"
 HOMEPAGE = "http://pypi.python.org/pypi/pyudev"
 SECTION = "devel/python"
 LICENSE = "GPLv2"

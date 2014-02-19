@@ -1,4 +1,4 @@
-DESCRIPTION = "Utility to test for faulty memory subsystem"
+SUMMARY = "Utility to test for faulty memory subsystem"
 HOMEPAGE = "http://pyropus.ca/software/memtester/"
 SECTION = "console/utils"
 LICENSE = "GPLv2"

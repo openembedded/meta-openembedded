@@ -1,4 +1,4 @@
-DESCRIPTION = "Tool Command Language ToolKit Extension"
+SUMMARY = "Tool Command Language ToolKit Extension"
 HOMEPAGE = "http://tcl.sourceforge.net"
 SECTION = "devel/tcltk"
 LICENSE = "tcl"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Compatibility library for accessing secrets"
+SUMMARY = "Compatibility library for accessing secrets"
 HOMEPAGE = "http://www.gnome.org/"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 

@@ -1,4 +1,4 @@
-DESCRIPTION = "Babl is a dynamic, any to any, pixel format conversion library."
+SUMMARY = "Babl is a dynamic, any to any, pixel format conversion library"
 LICENSE = "LGPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 

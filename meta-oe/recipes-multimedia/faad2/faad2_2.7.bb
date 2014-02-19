@@ -1,4 +1,4 @@
-DESCRIPTION = "Library for reading some sort of media format."
+SUMMARY = "Library for reading some sort of media format"
 SECTION = "libs"
 LICENSE = "GPLv2"
 

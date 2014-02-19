@@ -1,4 +1,4 @@
-DESCRIPTION = "Astronomical application which displays the night sky"
+SUMMARY = "Astronomical application which displays the night sky"
 HOMEPAGE    = "http://projects.openmoko.org/projects/orrery/"
 SECTION = "x11/scientific"
 LICENSE = "GPLv2+"

@@ -1,4 +1,4 @@
-DESCRIPTION = "NetworkManager"
+SUMMARY = "NetworkManager"
 SECTION = "net/misc"
 
 LICENSE = "GPLv2+"

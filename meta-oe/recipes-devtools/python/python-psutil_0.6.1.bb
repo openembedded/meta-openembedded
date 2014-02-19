@@ -1,4 +1,4 @@
-DESCRIPTION = "A cross-platform process and system utilities module for Python"
+SUMMARY = "A cross-platform process and system utilities module for Python"
 SECTION = "devel/python"
 HOMEPAGE = "http://code.google.com/p/psutil"
 LICENSE = "BSD"

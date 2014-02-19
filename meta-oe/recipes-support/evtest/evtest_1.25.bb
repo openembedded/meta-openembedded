@@ -1,4 +1,4 @@
-DESCRIPTION = "Simple tool for input event debugging."
+SUMMARY = "Simple tool for input event debugging"
 HOMEPAGE = "http://people.freedesktop.org/~whot/evtest/"
 AUTHOR = "Vojtech Pavlik <vojtech@suse.cz>"
 SECTION = "console/utils"

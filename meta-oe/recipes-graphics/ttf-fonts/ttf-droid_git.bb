@@ -1,6 +1,6 @@
 require ttf.inc
 
-DESCRIPTION = "Droid fonts - TTF Edition"
+SUMMARY = "Droid fonts - TTF Edition"
 HOMEPAGE = "http://www.droidfonts.com/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://README.txt;md5=83544262a86f1f1ec761e75897df92bc"

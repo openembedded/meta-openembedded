@@ -1,4 +1,4 @@
-DESCRIPTION = "A simple text editor for Xfce"
+SUMMARY = "A simple text editor for Xfce"
 SECTION = "x11/application"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"

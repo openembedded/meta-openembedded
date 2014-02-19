@@ -1,4 +1,4 @@
-DESCRIPTION = "Python interface to MySQL"
+SUMMARY = "Python interface to MySQL"
 HOMEPAGE = "https://github.com/farcepest/MySQLdb1"
 SECTION = "devel/python"
 LICENSE = "GPLv2"

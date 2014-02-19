@@ -1,4 +1,4 @@
-DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
+SUMMARY = "Rsyslog is an enhanced multi-threaded syslogd"
 DEPENDS = "zlib libestr json-c"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 HOMEPAGE = "http://www.rsyslog.com/"

@@ -1,5 +1,5 @@
 SECTION = "x11/network"
-DESCRIPTION = "Mail user agent"
+SUMMARY = "Mail user agent"
 DEPENDS = "gtk+ gpgme gnutls"
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \

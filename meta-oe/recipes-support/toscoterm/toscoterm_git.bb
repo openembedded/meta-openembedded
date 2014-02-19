@@ -1,4 +1,4 @@
-DESCRIPTION = "A very small and simple terminal emulator"
+SUMMARY = "A very small and simple terminal emulator"
 SECTION = "x11/applications"
 DEPENDS = "vte"
 

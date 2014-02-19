@@ -1,4 +1,4 @@
-DESCRIPTION = "Set of i2c tools for linux"
+SUMMARY = "Set of i2c tools for linux"
 SECTION = "base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"

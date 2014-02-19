@@ -1,4 +1,4 @@
-SUMMARY = "C++ library for client-side URL transfers."
+SUMMARY = "C++ library for client-side URL transfers"
 HOMEPAGE = "http://code.google.com/p/curlpp/"
 SECTION = "console/network"
 LICENSE = "MIT"

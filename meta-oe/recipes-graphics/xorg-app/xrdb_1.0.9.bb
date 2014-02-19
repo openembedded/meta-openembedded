@@ -1,5 +1,5 @@
 require recipes-graphics/xorg-app/xorg-app-common.inc
-DESCRIPTION = "X server resource database utility"
+SUMMARY = "X server resource database utility"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d1167c4f586bd41f0c62166db4384a69"
 

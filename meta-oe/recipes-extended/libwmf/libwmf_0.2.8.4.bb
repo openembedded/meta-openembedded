@@ -1,4 +1,4 @@
-DESCRIPTION = "Library for converting WMF files"
+SUMMARY = "Library for converting WMF files"
 HOMEPAGE = "http://wvware.sourceforge.net/libwmf.html"
 SECTION = "libs"
 

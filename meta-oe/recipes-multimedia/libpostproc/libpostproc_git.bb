@@ -1,4 +1,4 @@
-DESCRIPTION = "FFmpeg derived postprocessing library"
+SUMMARY = "FFmpeg derived postprocessing library"
 HOMEPAGE = "http://git.videolan.org/?p=libpostproc.git;a=summary"
 SECTION = "libs"
 DEPENDS = "libav"

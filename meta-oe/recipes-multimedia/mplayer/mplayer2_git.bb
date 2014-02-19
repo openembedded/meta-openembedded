@@ -1,4 +1,4 @@
-DESCRIPTION = "Open Source multimedia player."
+SUMMARY = "Open Source multimedia player"
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mplayerhq.hu/"
 DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \

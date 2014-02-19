@@ -1,4 +1,4 @@
-DESCRIPTION = "Lzip is a lossless data compressor based on the LZMA algorithm"
+SUMMARY = "Lzip is a lossless data compressor based on the LZMA algorithm"
 HOMEPAGE = "http://lzip.nongnu.org/lzip.html"
 SECTION = "console/utils"
 LICENSE = "GPLv3"

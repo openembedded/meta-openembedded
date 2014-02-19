@@ -1,4 +1,4 @@
-DESCRIPTION = "Tiny image-viewer"
+SUMMARY = "Tiny image-viewer"
 HOMEPAGE = "http://goodies.xfce.org/projects/applications/ristretto"
 SECTION = "x11/application"
 LICENSE = "GPLv2"

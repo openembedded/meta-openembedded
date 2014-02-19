@@ -1,4 +1,4 @@
-DESCRIPTION = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
+SUMMARY = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
 LICENSE = "AGPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
 

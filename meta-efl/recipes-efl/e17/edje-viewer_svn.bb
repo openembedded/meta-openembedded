@@ -1,4 +1,4 @@
-DESCRIPTION = "Edje_Viewer is just that."
+SUMMARY = "Edje_Viewer is just that"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35 \
                     file://COPYING-PLAIN;md5=e01359041001e8bf24c09acca556e792"

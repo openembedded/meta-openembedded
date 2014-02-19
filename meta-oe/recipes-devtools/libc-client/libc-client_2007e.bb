@@ -1,4 +1,4 @@
-DESCRIPTION = "UW c-client library for mail protocols"
+SUMMARY = "UW c-client library for mail protocols"
 SECTION = "devel"
 
 LICENSE = "Apache-2.0"

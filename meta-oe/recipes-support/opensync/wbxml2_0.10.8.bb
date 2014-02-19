@@ -1,4 +1,4 @@
-DESCRIPTION = "WBXML parsing and encoding library."
+SUMMARY = "WBXML parsing and encoding library"
 HOMEPAGE = "http://libwbxml.opensync.org/"
 SECTION = "libs"
 LICENSE = "LGPLv2.1+"

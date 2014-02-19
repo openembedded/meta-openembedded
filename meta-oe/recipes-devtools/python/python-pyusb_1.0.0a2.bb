@@ -1,4 +1,4 @@
-DESCRIPTION = "PyUSB provides USB access on the Python language"
+SUMMARY = "PyUSB provides USB access on the Python language"
 HOMEPAGE = "http://pyusb.sourceforge.net/"
 SECTION = "devel/python"
 LICENSE = "BSD"

@@ -1,4 +1,4 @@
-DESCRIPTION = "libgphoto2 allows you to access digital cameras"
+SUMMARY = "libgphoto2 allows you to access digital cameras"
 SECTION = "libs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"

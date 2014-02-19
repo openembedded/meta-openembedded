@@ -1,4 +1,4 @@
-DESCRIPTION = "GTK plugin for stylus based systems"
+SUMMARY = "GTK plugin for stylus based systems"
 SECTION = "libs"
 DEPENDS = "gtk+"
 LICENSE = "LGPL-2.0+"

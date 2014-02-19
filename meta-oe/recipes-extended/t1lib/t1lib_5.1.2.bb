@@ -1,4 +1,4 @@
-DESCRIPTION = "A Type1 Font Rastering Library"
+SUMMARY = "A Type1 Font Rastering Library"
 SECTION = "libs"
 DEPENDS = "virtual/libx11 libxaw"
 

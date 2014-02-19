@@ -1,4 +1,4 @@
-DESCRIPTION = "BSD replacement for libreadline"
+SUMMARY = "BSD replacement for libreadline"
 HOMEPAGE = "http://www.thrysoee.dk/editline/"
 SECTION = "libs"
 LICENSE = "BSD"

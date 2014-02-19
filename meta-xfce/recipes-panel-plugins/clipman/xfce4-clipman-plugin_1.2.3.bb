@@ -1,4 +1,4 @@
-DESCRIPTION = "Clipman is a clipboard manager for Xfce"
+SUMMARY = "Clipman is a clipboard manager for Xfce"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-clipman-plugin"
 SECTION = "x11/application"
 LICENSE = "GPLv2"

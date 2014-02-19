@@ -1,5 +1,5 @@
 require recipes-graphics/xorg-driver/xorg-driver-input.inc
-DESCRIPTION = "X.Org X server -- tslib input driver"
+SUMMARY = "X.Org X server -- tslib input driver"
 DEPENDS += "tslib"
 RRECOMMENDS_${PN} += "tslib-calibrate"
 RSUGGESTS_${PN} += "hal"

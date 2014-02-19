@@ -1,4 +1,4 @@
-DESCRIPTION = "Wireless Central Regulatory Domain Agent"
+SUMMARY = "Wireless Central Regulatory Domain Agent"
 HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
 
 LICENSE = "ISC"

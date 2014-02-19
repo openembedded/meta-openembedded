@@ -1,4 +1,4 @@
-DESCRIPTION = "Python Qt4 Bindings"
+SUMMARY = "Python Qt4 Bindings"
 HOMEPAGE = "http://riverbankcomputing.co.uk"
 AUTHOR = "Phil Thomson @ riverbank.co.uk"
 SECTION = "devel/python"

@@ -1,4 +1,4 @@
-DESCRIPTION = "C and C++ INI Library"
+SUMMARY = "C and C++ INI Library"
 HOMEPAGE = "http://code.google.com/p/inih/"
 PV = "0.0+gitr${SRCPV}"
 PKGV = "${GITPKGVTAG}"

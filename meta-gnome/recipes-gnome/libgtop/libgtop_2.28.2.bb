@@ -1,4 +1,4 @@
-DESCRIPTION = "LibGTop2"
+SUMMARY = "LibGTop2"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://copyright.txt;md5=dbc839bf158d19a20e661db14db7a58c"
 

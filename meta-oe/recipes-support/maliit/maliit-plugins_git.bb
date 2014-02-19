@@ -1,4 +1,4 @@
-DESCRIPTION = "Plugins for a virtual keyboard for touch-screen based user interfaces"
+SUMMARY = "Plugins for a virtual keyboard for touch-screen based user interfaces"
 HOMEPAGE = "https://wiki.maliit.org/Main_Page"
 
 LICENSE = "BSD"

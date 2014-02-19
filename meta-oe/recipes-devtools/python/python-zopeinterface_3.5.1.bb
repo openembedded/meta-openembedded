@@ -1,4 +1,4 @@
-DESCRIPTION = "Interface definitions for Zope products"
+SUMMARY = "Interface definitions for Zope products"
 SECTION = "console/network"
 
 LICENSE = "ZPL-2.1"

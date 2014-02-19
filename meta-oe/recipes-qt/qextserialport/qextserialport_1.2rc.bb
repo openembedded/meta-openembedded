@@ -1,4 +1,4 @@
-DESCRIPTION = "Qt Ext Serial Port Library"
+SUMMARY = "Qt Ext Serial Port Library"
 HOMEPAGE = "http://http://code.google.com/p/qextserialport/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b866a28cda707ec714878bd933f46251"

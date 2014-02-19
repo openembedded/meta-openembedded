@@ -1,4 +1,4 @@
-DESCRIPTION = "Adds ID3/OGG tag support to the Thunar bulk rename dialog"
+SUMMARY = "Adds ID3/OGG tag support to the Thunar bulk rename dialog"
 HOMEPAGE = "http://thunar.xfce.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"

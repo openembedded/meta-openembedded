@@ -1,4 +1,4 @@
-DESCRIPTION = "Exalt is a network manager for the windows manager Enlightenment DR17."
+SUMMARY = "Exalt is a network manager for the windows manager Enlightenment DR17"
 HOMEPAGE = "http://watchwolf.fr/wiki/doku.php?id=exalt"
 
 LICENSE = "LGPLv2.1"

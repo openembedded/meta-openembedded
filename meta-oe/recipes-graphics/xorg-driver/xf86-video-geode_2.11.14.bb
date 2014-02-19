@@ -1,7 +1,7 @@
 require recipes-graphics/xorg-driver/xorg-driver-video.inc
 LIC_FILES_CHKSUM = "file://COPYING;md5=e7f3e39474aeea5af381a8e103dafc36"
 
-DESCRIPTION = "X.org server -- Geode GX2/LX display driver"
+SUMMARY = "X.org server -- Geode GX2/LX display driver"
 PR = "${INC_PR}.0"
 
 SRC_URI[md5sum] = "c9a4e1c5438240e5bdce332f92df9163"

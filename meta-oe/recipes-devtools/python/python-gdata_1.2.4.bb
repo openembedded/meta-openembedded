@@ -1,4 +1,4 @@
-DESCRIPTION = "Google Data APIs Python Client Library"
+SUMMARY = "Google Data APIs Python Client Library"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://README.txt;md5=473bd4dff0ddca1f958244b2dc7a162c"

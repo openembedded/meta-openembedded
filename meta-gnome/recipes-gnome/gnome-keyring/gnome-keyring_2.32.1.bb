@@ -1,4 +1,4 @@
-DESCRIPTION = "Password and keyring managing daemon"
+SUMMARY = "Password and keyring managing daemon"
 HOMEPAGE = "http://www.gnome.org/"
 BUGTRACKER = "https://bugzilla.gnome.org/"
 

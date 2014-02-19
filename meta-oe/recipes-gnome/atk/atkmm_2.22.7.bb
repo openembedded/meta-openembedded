@@ -1,4 +1,4 @@
-DESCRIPTION = "C++ bindings for the atk"
+SUMMARY = "C++ bindings for the atk"
 SECTION = "libs"
 
 LICENSE = "LGPLv2.1 & GPLv2"

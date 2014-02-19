@@ -1,4 +1,4 @@
-DESCRIPTION = "nmon performance monitor"
+SUMMARY = "nmon performance monitor"
 HOMEPAGE = "http://nmon.sf.net"
 SECTION = "console/utils"
 LICENSE = "GPLv3"

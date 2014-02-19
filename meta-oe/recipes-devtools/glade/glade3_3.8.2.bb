@@ -1,4 +1,4 @@
-DESCRIPTION = "Glade - A User Interface Designer"
+SUMMARY = "Glade - A User Interface Designer"
 HOMEPAGE = "http://www.gnu.org/software/gnash"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \

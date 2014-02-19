@@ -1,4 +1,4 @@
-DESCRIPTION = "Simple DirectMedia Layer truetype font library."
+SUMMARY = "Simple DirectMedia Layer truetype font library"
 SECTION = "libs"
 DEPENDS = "virtual/libsdl freetype"
 LICENSE = "LGPLv2.1"

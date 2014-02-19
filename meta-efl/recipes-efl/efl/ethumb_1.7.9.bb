@@ -1,4 +1,4 @@
-DESCRIPTION = "EFL based thumbnail generation library"
+SUMMARY = "EFL based thumbnail generation library"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e6a6db9e80255adbafa16e817d9a4d8c"
 DEPENDS = "libexif eet-native evas ecore edje eet edbus emotion epdf"

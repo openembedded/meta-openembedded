@@ -1,4 +1,4 @@
-DESCRIPTION = "openbox Window Manager"
+SUMMARY = "openbox Window Manager"
 SECTION = "x11/wm"
 DEPENDS = "glib-2.0 pango libxml2 virtual/libx11"
 LICENSE = "GPLv2+"

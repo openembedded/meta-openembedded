@@ -1,4 +1,4 @@
-DESCRIPTION = "GNOME editor"
+SUMMARY = "GNOME editor"
 SECTION = "x11/gnome"
 LICENSE = "GPLv2+"
 PR = "r2"

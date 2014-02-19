@@ -1,4 +1,4 @@
-DESCRIPTION = "read temperature sensors in a 1-Wire net"
+SUMMARY = "read temperature sensors in a 1-Wire net"
 SECTION = "util"
 DEPENDS = "libusb1"
 LICENSE = "GPLv2"

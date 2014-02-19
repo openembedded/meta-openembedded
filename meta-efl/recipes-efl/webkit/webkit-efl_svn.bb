@@ -1,4 +1,4 @@
-DESCRIPTION = "Webkit browser engine, EFL edition"
+SUMMARY = "Webkit browser engine, EFL edition"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8bab0b12 \
                     file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \

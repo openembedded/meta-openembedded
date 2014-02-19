@@ -1,4 +1,4 @@
-DESCRIPTION = "Synergy - control multiple computers with one keyboard and mouse"
+SUMMARY = "Synergy - control multiple computers with one keyboard and mouse"
 HOMEPAGE = "http://synergy.googlecode.com"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9772a11e3569985855e2ce450e56f991"
 LICENSE = "GPL-2.0"

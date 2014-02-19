@@ -1,4 +1,4 @@
-DESCRIPTION = "Multiplatform C library implementing the SSHv2 and SSHv1 protocol"
+SUMMARY = "Multiplatform C library implementing the SSHv2 and SSHv1 protocol"
 HOMEPAGE = "http://www.libssh.org"
 SECTION = "libs"
 

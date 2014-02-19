@@ -1,4 +1,4 @@
-DESCRIPTION = "XKB layout switching panel plug-in for the Xfce desktop environment"
+SUMMARY = "XKB layout switching panel plug-in for the Xfce desktop environment"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-xkb-plugin"
 SECTION = "x11/application"
 LICENSE = "Alexander_Iliev"

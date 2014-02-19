@@ -1,4 +1,4 @@
-DESCRIPTION = "GNOME keyboard library"
+SUMMARY = "GNOME keyboard library"
 LICENSE = "LGPL"
 
 DEPENDS = "gconf-dbus dbus libxklavier gtk+"

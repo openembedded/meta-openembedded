@@ -1,4 +1,4 @@
-DESCRIPTION = "A lightweight Terminal Emulator based on libvte, written in Vala."
+SUMMARY = "A lightweight Terminal Emulator based on libvte, written in Vala"
 SECTION = "x11/applications"
 DEPENDS = "vte"
 SRCREV = "0fefa38087581f85fa0631b40500b9428369c146"

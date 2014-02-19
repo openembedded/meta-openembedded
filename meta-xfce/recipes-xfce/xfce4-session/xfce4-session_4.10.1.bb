@@ -1,4 +1,4 @@
-DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
+SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
 SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"

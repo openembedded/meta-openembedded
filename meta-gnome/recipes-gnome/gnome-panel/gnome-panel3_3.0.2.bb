@@ -1,4 +1,4 @@
-DESCRIPTION = "GNOME panel"
+SUMMARY = "GNOME panel"
 LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
 
 BPN = "gnome-panel"

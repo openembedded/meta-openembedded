@@ -1,6 +1,6 @@
 require recipes-graphics/xorg-app/xorg-app-common.inc
 
-DESCRIPTION = "analog / digital clock for X"
+SUMMARY = "analog / digital clock for X"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=857759ade8f2ddde5c7b32ef7356ea36"
 

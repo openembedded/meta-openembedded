@@ -1,4 +1,4 @@
-DESCRIPTION = "PackageKit package management abstraction"
+SUMMARY = "PackageKit package management abstraction"
 SECTION = "libs"
 LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"

@@ -1,4 +1,4 @@
-DESCRIPTION = "GNOME Terminal"
+SUMMARY = "GNOME Terminal"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5b51eba4ba4cafe64073227530c061ed"
 DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte gnome-doc-utils"

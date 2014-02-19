@@ -1,4 +1,4 @@
-DESCRIPTION = "Templatized C++ Command Line Parser" 
+SUMMARY = "Templatized C++ Command Line Parser"
 HOMEPAGE = "http://tclap.sourceforge.net/" 
 LICENSE = "MIT" 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c8ab0ff134bcc584d0e6b5b9f8732453"

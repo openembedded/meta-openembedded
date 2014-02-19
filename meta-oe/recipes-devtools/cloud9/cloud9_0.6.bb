@@ -1,4 +1,4 @@
-DESCRIPTION = "Meet Cloud9, development-as-a-service for Javascripters and other developers"
+SUMMARY = "Meet Cloud9, development-as-a-service for Javascripters and other developers"
 HOMEPAGE = "http://c9.io"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4784c3bcff601fd8f9515f52a11e7018"

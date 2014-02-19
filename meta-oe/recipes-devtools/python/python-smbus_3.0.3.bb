@@ -1,4 +1,4 @@
-DESCRIPTION = "Set of i2c tools for linux - Python module"
+SUMMARY = "Set of i2c tools for linux - Python module"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://smbusmodule.c;startline=1;endline=17;md5=fa24df321a520ff8e10f203425ab9fa8"
 

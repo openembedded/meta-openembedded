@@ -1,4 +1,4 @@
-DESCRIPTION = "Python template engine and code generation tool"
+SUMMARY = "Python template engine and code generation tool"
 SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aff1107514aa6aae948f9fe71fdc393b"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Embedded Linux Device Driver Tests based on Linux Test Project"
+SUMMARY = "Embedded Linux Device Driver Tests based on Linux Test Project"
 HOMEPAGE = "http://arago-project.org/git/projects/test-automation/ltp-ddt.git"
 SECTION = "console/utils"
 LICENSE = "GPLv2"

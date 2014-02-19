@@ -1,4 +1,4 @@
-DESCRIPTION = "e-tasks is a todo program for Openmoko phones"
+SUMMARY = "e-tasks is a todo program for Openmoko phones"
 HOMEPAGE = "http://code.google.com/p/e-tasks/"
 AUTHOR = "cchandel"
 LICENSE = "GPLv3"

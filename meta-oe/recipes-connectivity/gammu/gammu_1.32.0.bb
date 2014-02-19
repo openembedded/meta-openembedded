@@ -1,4 +1,4 @@
-DESCRIPTION = "GNU All Mobile Managment Utilities"
+SUMMARY = "GNU All Mobile Managment Utilities"
 SECTION = "console/network"
 DEPENDS = "cmake-native virtual/libiconv libdbi mysql5"
 LICENSE = "GPLv2"

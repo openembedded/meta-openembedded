@@ -1,4 +1,4 @@
-DESCRIPTION = "Miscellaneous utilities specific to Debian"
+SUMMARY = "Miscellaneous utilities specific to Debian"
 SECTION = "base"
 LICENSE = "GPLv2 & BSD & SMAIL_GPL"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=b948675029f79c64840e78881e91e1d4"

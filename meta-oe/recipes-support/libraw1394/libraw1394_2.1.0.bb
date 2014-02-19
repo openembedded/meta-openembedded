@@ -1,4 +1,4 @@
-DESCRIPTION = "base library for low-level IEEE 1394 accesses"
+SUMMARY = "base library for low-level IEEE 1394 accesses"
 HOMEPAGE = "https://ieee1394.wiki.kernel.org/index.php/Libraries#libraw1394"
 SECTION = "libs"
 LICENSE = "LGPL-2.1"

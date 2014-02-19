@@ -1,4 +1,4 @@
-DESCRIPTION = "Lightweight, cross-platform integrated development environment"
+SUMMARY = "Lightweight, cross-platform integrated development environment"
 
 HOMEPAGE = "http://qt-project.org/"
 LICENSE = "LGPLv2.1"

@@ -1,4 +1,4 @@
-DESCRIPTION = "htop process monitor"
+SUMMARY = "htop process monitor"
 HOMEPAGE = "http://htop.sf.net"
 SECTION = "console/utils"
 LICENSE = "GPLv2"

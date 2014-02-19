@@ -1,4 +1,4 @@
-DESCRIPTION = "A library to handle Apple Property List format whereas it's binary or XML"
+SUMMARY = "A library to handle Apple Property List format whereas it's binary or XML"
 
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \

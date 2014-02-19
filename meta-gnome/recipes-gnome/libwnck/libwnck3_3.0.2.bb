@@ -1,4 +1,4 @@
-DESCRIPTION = "Window navigation construction toolkit"
+SUMMARY = "Window navigation construction toolkit"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 

@@ -1,7 +1,7 @@
 # Copyright (C) 2012 Khem Raj <raj.khem@gmail.com>
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "A minimal iconv implementation w/ support for UTF-8, ASCII, ISO-8859-1"
+SUMMARY = "A minimal iconv implementation w/ support for UTF-8, ASCII, ISO-8859-1"
 HOMEPAGE = "http://tinderbox.dev.gentoo.org/portage/local/misc/mini-iconv/"
 LICENSE = "MPL-1.1"
 SECTION = "libs"

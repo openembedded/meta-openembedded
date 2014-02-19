@@ -1,4 +1,4 @@
-SUMMARY = "libebml is a C++ libary to parse EBML files."
+SUMMARY = "libebml is a C++ libary to parse EBML files"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
 

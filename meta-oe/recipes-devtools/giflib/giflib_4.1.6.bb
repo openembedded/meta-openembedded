@@ -1,4 +1,4 @@
-DESCRIPTION = "shared library for GIF images"
+SUMMARY = "shared library for GIF images"
 SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ae11c61b04b2917be39b11f78d71519a"

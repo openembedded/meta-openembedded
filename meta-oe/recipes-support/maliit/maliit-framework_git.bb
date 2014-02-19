@@ -1,4 +1,4 @@
-DESCRIPTION = "A virtual keyboard for touch-screen based user interfaces"
+SUMMARY = "A virtual keyboard for touch-screen based user interfaces"
 HOMEPAGE = "https://wiki.maliit.org/Main_Page"
 
 LICENSE = "LGPLv2.1"

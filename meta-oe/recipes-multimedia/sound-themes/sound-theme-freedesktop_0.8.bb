@@ -1,4 +1,4 @@
-DESCRIPTION = "Freedesktop sound theme"
+SUMMARY = "Freedesktop sound theme"
 HOMEPAGE = "http://freedesktop.org/wiki/Specifications/sound-theme-spec"
 LICENSE = "GPLv2+ CC-BY-3.0 CC-BY-SA-3.0"
 LIC_FILES_CHKSUM = "file://CREDITS;md5=3213e601ce34bb42ddc3498903ac4e69"

@@ -1,4 +1,4 @@
-DESCRIPTION = "All packages for full XFCE installation"
+SUMMARY = "All packages for full XFCE installation"
 SECTION = "x11/wm"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"

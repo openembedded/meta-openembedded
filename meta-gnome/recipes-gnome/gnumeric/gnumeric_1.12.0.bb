@@ -3,7 +3,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=be0de417af78dd340558810d1ced52e6"
 SECTION = "x11/utils"
 S = "${WORKDIR}/gnumeric-${PV}"
 DEPENDS = "gdk-pixbuf libgsf gtk+3 libxml2 libglade libart-lgpl intltool-native libgnomecanvas libgnomeprint libbonoboui orbit2-native goffice"
-DESCRIPTION = "Gnumeric spreadsheet for GNOME"
+SUMMARY = "Gnumeric spreadsheet for GNOME"
 
 GNOME_COMPRESS_TYPE = "xz"
 

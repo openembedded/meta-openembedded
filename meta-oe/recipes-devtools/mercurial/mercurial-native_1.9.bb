@@ -1,4 +1,4 @@
-DESCRIPTION = "The Mercurial distributed SCM"
+SUMMARY = "The Mercurial distributed SCM"
 HOMEPAGE = "http://mercurial.selenic.com/"
 SECTION = "console/utils"
 LICENSE = "GPLv2"

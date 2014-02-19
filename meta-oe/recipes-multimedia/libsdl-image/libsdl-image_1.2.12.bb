@@ -1,4 +1,4 @@
-DESCRIPTION = "Simple DirectMedia Layer image library."
+SUMMARY = "Simple DirectMedia Layer image library"
 SECTION = "libs"
 
 LICENSE = "Zlib"

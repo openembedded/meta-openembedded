@@ -1,4 +1,4 @@
-DESCRIPTION = "C++ bindings for the glib library."
+SUMMARY = "C++ bindings for the glib library"
 HOMEPAGE = "http://www.gtkmm.org/"
 SECTION = "libs"
 LICENSE = "LGPLv2.1 & GPLv2"

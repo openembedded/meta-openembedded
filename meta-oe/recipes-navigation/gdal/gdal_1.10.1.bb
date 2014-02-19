@@ -1,4 +1,4 @@
-DESCRIPTION = "GDAL is a translator library for raster geospatial data formats"
+SUMMARY = "GDAL is a translator library for raster geospatial data formats"
 HOMEPAGE = "http://www.gdal.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"

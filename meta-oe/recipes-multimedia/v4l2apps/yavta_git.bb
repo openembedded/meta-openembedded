@@ -1,4 +1,4 @@
-DESCRIPTION = "Yet Another V4L2 Test Application"
+SUMMARY = "Yet Another V4L2 Test Application"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
 

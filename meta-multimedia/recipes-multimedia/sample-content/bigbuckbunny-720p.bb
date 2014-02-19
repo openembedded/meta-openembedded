@@ -1,4 +1,4 @@
-DESCRIPTION = "Big Buck Bunny movie - 720P"
+SUMMARY = "Big Buck Bunny movie - 720P"
 LICENSE = "CC-BY-3.0"
 # http://www.bigbuckbunny.org/index.php/about/
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"

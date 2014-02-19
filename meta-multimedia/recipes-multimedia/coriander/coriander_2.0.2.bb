@@ -1,4 +1,4 @@
-DESCRIPTION = "Control and capture GUI for IIDC compliant cameras"
+SUMMARY = "Control and capture GUI for IIDC compliant cameras"
 HOMEPAGE = "http://damien.douxchamps.net/ieee1394/coriander/"
 SECTION = "applications"
 LICENSE = "GPL-3.0"

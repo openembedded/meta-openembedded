@@ -1,4 +1,4 @@
-DESCRIPTION = "ODE is an Open Source Physics Engine."
+SUMMARY = "ODE is an Open Source Physics Engine"
 SECTION = "libs"
 HOMEPAGE = "http://www.ode.org"
 LICENSE = "LGPLv2.1 & BSD"

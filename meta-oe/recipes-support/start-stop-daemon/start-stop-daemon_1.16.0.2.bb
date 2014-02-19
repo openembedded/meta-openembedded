@@ -1,4 +1,4 @@
-DESCRIPTION = "Debian's start-stop-daemon utility extracted from the dpkg \
+SUMMARY = "Debian's start-stop-daemon utility extracted from the dpkg \
 package"
 LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aaa7a370ce4"

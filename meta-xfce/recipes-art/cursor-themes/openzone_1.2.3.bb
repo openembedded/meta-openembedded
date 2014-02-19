@@ -1,4 +1,4 @@
-DESCRIPTION = "X11 Mouse Theme"
+SUMMARY = "X11 Mouse Theme"
 HOMEPAGE = "http://xfce-look.org/content/show.php/OpenZone?content=111343"
 SECTION = "x11/wm"
 LICENSE = "MIT"

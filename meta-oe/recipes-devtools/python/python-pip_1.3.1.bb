@@ -1,4 +1,4 @@
-SUMMARY = "PIP is a tool for installing and managing Python packages."
+SUMMARY = "PIP is a tool for installing and managing Python packages"
 LICENSE = "MIT & GPL"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd00425a3465a0e4c81929b94241d3de"
 

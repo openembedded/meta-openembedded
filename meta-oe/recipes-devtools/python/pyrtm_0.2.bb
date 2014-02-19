@@ -1,4 +1,4 @@
-DESCRIPTION = "Python interface for Remember The Milk API."
+SUMMARY = "Python interface for Remember The Milk API"
 AUTHOR = "Sridhar Ratnakumar / srid"
 HOMEPAGE = "http://pypi.python.org/pypi/pyrtm"
 LICENSE = "MIT"

@@ -1,4 +1,4 @@
-DESCRIPTION = "EFL-based weather widget library"
+SUMMARY = "EFL-based weather widget library"
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
                     file://COPYING-PLAIN;md5=c910b645eda0005ccec46f75203dc96e"

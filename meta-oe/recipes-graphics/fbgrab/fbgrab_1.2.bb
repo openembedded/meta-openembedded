@@ -1,4 +1,4 @@
-DESCRIPTION = "FBGrab is a framebuffer screenshot program."
+SUMMARY = "FBGrab is a framebuffer screenshot program"
 HOMEPAGE = "http://fbgrab.monells.se/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a"

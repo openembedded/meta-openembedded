@@ -1,4 +1,4 @@
-DESCRIPTION = "A client for the Cisco3000 VPN Concentrator"
+SUMMARY = "A client for the Cisco3000 VPN Concentrator"
 HOMEPAGE = "http://www.unix-ag.uni-kl.de/~massar/vpnc/"
 AUTHOR = "Maurice Massar vpnc@unix-ag.uni-kl.de"
 SECTION = "console/network"

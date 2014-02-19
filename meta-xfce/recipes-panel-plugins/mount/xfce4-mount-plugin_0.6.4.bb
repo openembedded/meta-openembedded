@@ -1,4 +1,4 @@
-DESCRIPTION = "Mount/umount utility for the xfce panel"
+SUMMARY = "Mount/umount utility for the xfce panel"
 HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mount-plugin"
 SECTION = "x11/application"
 LICENSE = "GPLv2"
