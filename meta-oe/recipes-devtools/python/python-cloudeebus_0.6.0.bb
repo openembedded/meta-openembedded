@@ -11,7 +11,7 @@ S = "${WORKDIR}/git"
 
 inherit distutils 
 
-DEPENDS_${PN} = "python python-setuptools"
+DEPENDS_${PN} = "python python-distribute"
 RDEPENDS_${PN} = "python python-dbus python-json python-argparse python-pygobject python-autobahn python-twisted python-subprocess"
 
 do_install_prepend() {
