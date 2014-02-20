@@ -8,14 +8,17 @@ PR = "r1"
 PROVIDES += "ltp"
 DEPENDS += "zip-native virtual/kernel alsa-lib"
 
-inherit autotools
+inherit autotools module-base kernel-module-split
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "46e8aa7d0dd095300709309301e1c79f0003df40"
+SRCREV = "4f77e2e33357d2b23211ecd22f27f521aa01469a"
 BRANCH ?= "master"
 
-SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH}"
+SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+           file://0001-wdt_test_suite-Make-sure-to-include-generated-header.patch \
+           file://0001-KERNEL_INC-in-modern-kernel-should-point-at-toplevel.patch \
+          "
 
 S = "${WORKDIR}/git"
 
@@ -25,11 +28,12 @@ EXTRA_OEMAKE_append = " \
     prefix=${LTPROOT} \
     CROSS_COMPILE=${HOST_PREFIX} \
     SKIP_IDCHECK=1 \
-    KERNEL_INC=${STAGING_KERNEL_DIR}/include-generic \
+    KERNEL_INC=${STAGING_KERNEL_DIR} \
     KERNEL_USR_INC=${STAGING_INCDIR} \
     ALSA_INCPATH=${STAGING_INCDIR} \
     ALSA_LIBPATH=${STAGING_LIBDIR} \
     PLATFORM=${MACHINE} \
+    RANLIB=${RANLIB} \
 "
 
 TARGET_CC_ARCH += "${LDFLAGS}"
@@ -44,8 +48,10 @@ FILES_${PN}-dbg += " \
     ${LTPROOT}/testcases/bin/ddt/.debug \
     ${LTPROOT}/testcases/bin/ddt/*/bin/.debug \
     ${LTPROOT}/testcases/bin/ddt/*/test/.debug \
+    ${LTPROOT}/testcases/realtime/*/*/.debug \
 "
 
+FILES_${PN}-staticdev += "${LTPROOT}/lib"
 FILES_${PN} += "${LTPROOT}/*"
 
 do_configure() {
@@ -55,9 +61,17 @@ do_configure() {
     echo "${TAG}" > ${S}/ChangeLog
 }
 
+kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
+
+do_compile_append () {
+    oe_runmake DESTDIR=${D} modules
+}
+
 do_install() {
     oe_runmake DESTDIR=${D} install
     install -d ${D}${datadir}
+    install -d ${D}${kmoddir}
     cp -a ${D}${LTPROOT}/share/* ${D}${datadir}
     rm -rf ${D}${LTPROOT}/share/
+    mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
 }

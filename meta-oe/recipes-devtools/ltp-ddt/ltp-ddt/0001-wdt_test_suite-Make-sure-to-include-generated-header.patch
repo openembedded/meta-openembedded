@@ -1,0 +1,34 @@
+From 4a8f24892514cd5e4d11b9105c843db49eea921b Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 19 Feb 2014 19:41:33 -0800
+Subject: [PATCH] wdt_test_suite: Make sure to include generated headers
+
+This makes sure that its using the generated headers
+and not the raw headers from kernel, generated headers
+are built for the given machine already when kernel is
+built and are available in configured/compiled kernel tree
+already
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ testcases/ddt/wdt_test_suite/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/testcases/ddt/wdt_test_suite/Makefile b/testcases/ddt/wdt_test_suite/Makefile
+index 90a6a90..22a1cfd 100644
+--- a/testcases/ddt/wdt_test_suite/Makefile
++++ b/testcases/ddt/wdt_test_suite/Makefile
+@@ -20,8 +20,8 @@ INCLUDES        = -I $(KERNEL_INC) -I src/interface/common -I ../utils/user
+ INCLUDES        = -I src/parser \
+                   -I src/interface/common \
+                   -I ../utils/user \
+-                  -I $(KERNEL_INC)/include \
+-                  -I $(KERNEL_INC)/arch/arm/include
++                  -I $(KERNEL_INC)/include/generated \
++                  -I $(KERNEL_INC)/arch/arm/include/generated \
+ 
+ #List of source files- Update this on adding a new C file
+ SOURCES := \
+-- 
+1.9.0
+
