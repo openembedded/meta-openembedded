@@ -8,12 +8,10 @@ DEPENDS = "elementary eina edbus sqlite3"
 
 inherit autotools
 
-SRCREV = "b640f0e7287877983645d9d9a36f85a0b6a54631"
+SRCREV = "890f5ee37d1a5fd1ceb2495950d15151d4cf756b"
 PV = "0.0.2+gitr${SRCPV}"
-PR = "r1"
 
-SRC_URI = "git://github.com/shr-project/e-tasks.git;branch=master \
-"
+SRC_URI = "git://github.com/shr-project/e-tasks.git"
 S = "${WORKDIR}/git"
 
 do_install_append() {
