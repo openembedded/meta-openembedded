@@ -1,0 +1,39 @@
+From 56cadbc45c5ef98a7b775638d2109c4a09a58c06 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 22 Feb 2014 18:09:57 +0100
+Subject: [PATCH] configure.ac: Check only for libsystemd not libsystemd-login
+
+* they were merged into libsystemd in systemd-209
+
+Upstream-Status: Pending (it would need to be conditional on systemd version for upstream to accept this)
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index a7b0148..64d513d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -196,7 +196,7 @@ AC_ARG_ENABLE([libsystemd-login],
+               [enable_libsystemd_login=auto])
+ if test "$enable_libsystemd_login" != "no"; then
+   PKG_CHECK_MODULES(LIBSYSTEMD_LOGIN,
+-                    [libsystemd-login],
++                    [libsystemd],
+                     have_libsystemd_login=yes,
+                     have_libsystemd_login=no)
+   if test "$have_libsystemd_login" = "yes"; then
+@@ -223,7 +223,7 @@ AS_IF([test "x$cross_compiling" != "xyes" ], [
+       AS_IF([test "$enable_libsystemd_login" = "no" ], [
+         AC_MSG_WARN([ConsoleKit requested but system appears to use systemd])
+       ], [
+-        AC_MSG_ERROR([ConsoleKit autoconfigured, but systemd is in use (missing libsystemd-login pkg-config?)])
++        AC_MSG_ERROR([ConsoleKit autoconfigured, but systemd is in use (missing libsystemd pkg-config?)])
+       ])
+     ])
+   ])
+-- 
+1.8.5.3
+
