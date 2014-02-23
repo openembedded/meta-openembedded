@@ -4,7 +4,7 @@ AUTHOR = "cchandel"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
 SECTION = "e/apps"
-DEPENDS = "elementary eina edbus sqlite3"
+DEPENDS = "elementary eina eldbus sqlite3"
 
 inherit autotools
 
@@ -12,6 +12,8 @@ SRCREV = "890f5ee37d1a5fd1ceb2495950d15151d4cf756b"
 PV = "0.0.2+gitr${SRCPV}"
 
 SRC_URI = "git://github.com/shr-project/e-tasks.git"
+SRC_URI += "file://0001-dbus-stuff-Convert-to-eldbus.patch"
+
 S = "${WORKDIR}/git"
 
 do_install_append() {
