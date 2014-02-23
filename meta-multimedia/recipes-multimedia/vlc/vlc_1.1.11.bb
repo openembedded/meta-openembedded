@@ -7,6 +7,7 @@ require vlc.inc
 
 SRC_URI += "file://0001-V4L2-mark-horizontal-and-vertical-center-controls-ob.patch"
 SRC_URI += "file://0002-fix-build-with-newer-freetype.patch"
+SRC_URI += "file://0003-fix-build-with-newer-flac-1.3.0.patch"
 
 PR = "r4"
 
