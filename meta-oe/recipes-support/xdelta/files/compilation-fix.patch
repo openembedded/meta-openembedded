@@ -1,0 +1,29 @@
+Upstream-Status: Pending
+http://code.google.com/p/xdelta/issues/detail?id=174
+
+Compilation fix:
+<code>
+| testing/regtest.cc:763:3: error: no matching function for call to 'max(xoff_t, size_t&)'
+</code>
+
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ testing/regtest.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/testing/regtest.cc b/testing/regtest.cc
+index 12b712e..b63a1f9 100644
+--- a/testing/regtest.cc
++++ b/testing/regtest.cc
+@@ -12,7 +12,7 @@ public:
+     Options() : encode_srcwin_maxsz(1<<20), 
+ 		block_size(Constants::BLOCK_SIZE),
+ 		size_known(false) { }
+-    size_t encode_srcwin_maxsz;
++    xoff_t encode_srcwin_maxsz;
+     size_t block_size;
+     bool size_known;
+   };
+-- 
+1.8.5.4
+
