@@ -22,3 +22,7 @@ do_configure_append() {
 
 FILES_${PN} = "${libdir}/lib*${SOLIBS}"
 
+PACKAGECONFIG ?= ""
+# if it isn't explicitly selected and "$build_os" == "$target_os", then configure will run
+# series of AC_TRY_RUN which won't work for cross-compilation and configure fails
+PACKAGECONFIG[double-precision] = "--enable-double-precision,--disable-double-precision"
