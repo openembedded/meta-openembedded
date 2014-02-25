@@ -20,7 +20,6 @@ ALTERNATIVE_LINK_NAME[brctl] = "${sbindir}/brctl"
 EXTRA_OECONF = "--with-linux-headers=${STAGING_INCDIR}"
 
 do_install_append () {
-    mv ${D}${sbindir}/brctl ${D}${sbindir}/brctl.${PN}
     install -d ${D}/${datadir}/bridge-utils
     install -d ${D}/${sysconfdir}/network/if-pre-up.d
     install -d ${D}/${sysconfdir}/network/if-post-down.d
