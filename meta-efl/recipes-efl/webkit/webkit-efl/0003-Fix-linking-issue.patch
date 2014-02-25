@@ -1,0 +1,63 @@
+From 09088da56f3de17ab1cc537627cda6bf808eaf4c Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 27 Feb 2014 14:17:29 +0100
+Subject: [PATCH 3/3] Fix linking issue
+
+* inline function is sometimes not included soon enough
+
+  Partialy taken from:
+  https://bugs.webkit.org/show_bug.cgi?id=124152
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Source/JavaScriptCore/llint/LLIntEntrypoint.cpp          | 3 +++
+ Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp | 3 +++
+ Source/JavaScriptCore/runtime/SymbolTable.cpp            | 4 ++++
+ 3 files changed, 10 insertions(+)
+
+diff --git a/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp b/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp
+index 5d91be6..73cba31 100644
+--- a/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp
++++ b/Source/JavaScriptCore/llint/LLIntEntrypoint.cpp
+@@ -31,6 +31,9 @@
+ #include "CodeBlock.h"
+ #include "JITCode.h"
+ #include "JSObject.h"
++#include "JSCellInlines.h"
++#include "JSDestructibleObject.h"
++#include "SlotVisitorInlines.h"
+ #include "LLIntThunks.h"
+ #include "LowLevelInterpreter.h"
+ #include "MaxFrameExtentForSlowPathCall.h"
+diff --git a/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp b/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp
+index d0583fc..4be5ec3 100644
+--- a/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp
++++ b/Source/JavaScriptCore/runtime/FunctionExecutableDump.cpp
+@@ -25,6 +25,9 @@
+ 
+ #include "config.h"
+ #include "FunctionExecutableDump.h"
++#include "JSCellInlines.h"
++#include "JSDestructibleObject.h"
++#include "SlotVisitorInlines.h"
+ 
+ #include "CodeBlock.h"
+ 
+diff --git a/Source/JavaScriptCore/runtime/SymbolTable.cpp b/Source/JavaScriptCore/runtime/SymbolTable.cpp
+index 6eb0239..21450df 100644
+--- a/Source/JavaScriptCore/runtime/SymbolTable.cpp
++++ b/Source/JavaScriptCore/runtime/SymbolTable.cpp
+@@ -33,6 +33,10 @@
+ #include "JSCInlines.h"
+ #include "SlotVisitorInlines.h"
+ 
++#include "JSCellInlines.h"
++#include "JSDestructibleObject.h"
++#include "SlotVisitorInlines.h"
++
+ namespace JSC {
+ 
+ const ClassInfo SymbolTable::s_info = { "SymbolTable", 0, 0, 0, CREATE_METHOD_TABLE(SymbolTable) };
+-- 
+1.9.0
+

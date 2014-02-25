@@ -1,29 +1,30 @@
-From bfabbcab5dc4fe29bc91bbfbd9c9a404a3e2538b Mon Sep 17 00:00:00 2001
+From b37711ca03ea9410e795f29398069fed9e9c2d30 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Mon, 13 Jan 2014 17:21:25 +0100
-Subject: [PATCH] WebKitHelpers.cmake: Add -Wno-error=cast-align
+Subject: [PATCH 1/3] WebKitHelpers.cmake: Add -Wno-error=cast-align
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- Source/cmake/WebKitHelpers.cmake | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Source/cmake/WebKitHelpers.cmake | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/Source/cmake/WebKitHelpers.cmake b/Source/cmake/WebKitHelpers.cmake
-index 1e51ebc..d813117 100644
+index 409931c..345b346 100644
 --- a/Source/cmake/WebKitHelpers.cmake
 +++ b/Source/cmake/WebKitHelpers.cmake
-@@ -42,7 +42,10 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
+@@ -44,7 +44,11 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
  
          # Enable errors on warning
          if (OPTION_ENABLE_WERROR)
 -            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter ${OLD_COMPILE_FLAGS}")
-+            # /OE/build/shr-core/tmp-eglibc/work/x86_64-oe-linux/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/WebCore/platform/graphics/GlyphPage.h: In member function 'void WebCore::OpenTypeVerticalData::substituteWithVerticalGlyphs(const WebCore::SimpleFontData*, WebCore::GlyphPage*, unsigned int, unsigned int) const': /OE/build/shr-core/tmp-eglibc/work/x86_64-oe-linux/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/WebCore/platform/graphics/GlyphPage.h:120:30: error: array subscript is above array bounds [-Werror=array-bounds]
-+            # | /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:13:50: error: 'GType soup_proxy_uri_resolver_get_type()' is deprecated (declared at /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:48) [-Werror=deprecated-declarations]
-+            # | /OE/build/shr-core/tmp-eglibc/work/cortexa8-vfp-neon-oe-linux-gnueabi/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp:120:133: error: cast from 'uint8_t* {aka unsigned char*}' to 'JSC::IntegralTypedArrayAdaptor<short int, JSC::GenericTypedArrayView<JSC::Int16Adaptor>, JSC::JSGenericTypedArrayView<JSC::Int16Adaptor>, (JSC::TypedArrayType)4u>::Type* {aka short int*}' increases required alignment of target type [-Werror=cast-align]
-+            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=array-bounds -Wno-error=deprecated-declarations -Wno-error=cast-align ${OLD_COMPILE_FLAGS}")
++            # FIXME: When we use -fno-tree-dce to support the jsCStack branch merge, build error occurs due to the uninitialization. Temporarily we set
++            # uninitialized as build warning in order to support the jsCStack merge. https://bugs.webkit.org/show_bug.cgi?id=127777.
++            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=uninitialized ${OLD_COMPILE_FLAGS}")
++	    # | /OE/build/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp:161:104: error: cast from 'uint8_t* {aka unsigned char*}' to 'JSC::FloatTypedArrayAdaptor<double, JSC::GenericTypedArrayView<JSC::Float64Adaptor>, JSC::JSGenericTypedArrayView<JSC::Float64Adaptor>, (JSC::TypedArrayType)9u>::Type* {aka double*}' increases required alignment of target type [-Werror=cast-align]
++            set(OLD_COMPILE_FLAGS "-Wno-error=cast-align -Wno-error=array-bounds -Wno-error=deprecated-declarations ${OLD_COMPILE_FLAGS}")
          endif ()
  
-         # Disable C++0x compat warnings for GCC >= 4.6.0 until we build
+         set_target_properties(${_target} PROPERTIES
 -- 
-1.8.5.2
+1.9.0
 

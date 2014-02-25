@@ -1,0 +1,80 @@
+From e284e92da00011e55d8f79383034e0c9c1a8a106 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 27 Feb 2014 13:40:43 +0100
+Subject: [PATCH 2/3] ARMAssembler.h: Don't generate BKPT and BLX for armv4*
+
+* I haven't tested it in runtime yet, but it's better than to wait for asm failure later:
+  {standard input}: Assembler messages:
+  {standard input}:35: Error: selected processor does not support ARM mode `bkpt #0'
+  {standard input}:62: Error: selected processor does not support ARM mode `blx llint_throw_stack_overflow_error'
+  ...
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ Source/JavaScriptCore/assembler/ARMAssembler.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/Source/JavaScriptCore/assembler/ARMAssembler.h b/Source/JavaScriptCore/assembler/ARMAssembler.h
+index 087d31c..1b40ded 100644
+--- a/Source/JavaScriptCore/assembler/ARMAssembler.h
++++ b/Source/JavaScriptCore/assembler/ARMAssembler.h
+@@ -211,7 +211,9 @@ namespace JSC {
+             LDMIA = 0x08b00000,
+             B = 0x0a000000,
+             BL = 0x0b000000,
++#if WTF_ARM_ARCH_AT_LEAST(5)
+             BX = 0x012fff10,
++#endif
+             VMOV_VFP64 = 0x0c400a10,
+             VMOV_ARM64 = 0x0c500a10,
+             VMOV_VFP32 = 0x0e000a10,
+@@ -223,8 +225,10 @@ namespace JSC {
+             VCVT_F64_F32 = 0x0eb70ac0,
+             VMRS_APSR = 0x0ef1fa10,
+             CLZ = 0x016f0f10,
++#if WTF_ARM_ARCH_AT_LEAST(5)
+             BKPT = 0xe1200070,
+             BLX = 0x012fff30,
++#endif
+ #if WTF_ARM_ARCH_AT_LEAST(7)
+             MOVW = 0x03000000,
+             MOVT = 0x03400000,
+@@ -689,7 +693,11 @@ namespace JSC {
+ 
+         void bkpt(ARMWord value)
+         {
++#if WTF_ARM_ARCH_AT_LEAST(5)
+             m_buffer.putInt(BKPT | ((value & 0xff0) << 4) | (value & 0xf));
++#else
++            // BKPT is available in ARMv5T and above, skip it here
++#endif
+         }
+ 
+         void nop()
+@@ -704,12 +712,23 @@ namespace JSC {
+ 
+         void bx(int rm, Condition cc = AL)
+         {
++#if WTF_ARM_ARCH_AT_LEAST(5)
+             emitInstruction(toARMWord(cc) | BX, 0, 0, RM(rm));
++#else
++            // BX is available in ARMv5T and above.
++            emitInstruction(toARMWord(cc) | MOV, ARMRegisters::pc, ARMRegisters::lr, 0);
++#endif
+         }
+ 
+         AssemblerLabel blx(int rm, Condition cc = AL)
+         {
++#if WTF_ARM_ARCH_AT_LEAST(5)
+             emitInstruction(toARMWord(cc) | BLX, 0, 0, RM(rm));
++#else
++            // BLX is available in ARMv5T and above.
++            emitInstruction(toARMWord(cc) | MOV, ARMRegisters::lr, ARMRegisters::pc, 0);
++            emitInstruction(toARMWord(cc) | MOV, ARMRegisters::pc, RM(rm), 0);
++#endif
+             return m_buffer.label();
+         }
+ 
+-- 
+1.9.0
+

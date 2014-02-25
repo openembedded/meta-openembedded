@@ -13,15 +13,15 @@ DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
            ruby-native"
 
 SRC_URI = "\
-    ${E_RELEASES}/libs/webkit-efl/webkit-efl-159807.tar.xz \
-    file://gcc-4.8.2.fix.patch \
+    ${E_RELEASES}/libs/webkit-efl/webkit-efl-164189.tar.xz \
     file://0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch \
-    file://0001-ButterflyInlines.h-remove-indexingHeader-preCapacity.patch \
+    file://0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch \
+    file://0003-Fix-linking-issue.patch \
 "
-SRC_URI[md5sum] = "3e1377d976460dd14db0dd3cd39b8e48"
-SRC_URI[sha256sum] = "a99531299e41ba4671b32bbf46c3efc4d65960c9c87949a87f76e622c284f178"
+SRC_URI[md5sum] = "731513fc042ec8e03840bc1ab6a66771"
+SRC_URI[sha256sum] = "660aefd65c0e5c6494eaec30539cda5f40fbdff17f28e7e83d341b245227cccd"
 
-S = "${WORKDIR}/${BPN}"
+S = "${WORKDIR}/efl-webkit"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
@@ -37,6 +37,25 @@ EXTRA_OECMAKE = " \
     -DENABLE_ACCESSIBILITY=Off \
     -DENABLE_BATTERY_STATUS=Off \
 "
+# generated ASM code isn't compatible with armv[45]
+# it was removed from macro assembler in upstream commit 121885
+# https://bugs.webkit.org/show_bug.cgi?id=90198
+EXTRA_OECMAKE_append_armv4 = " -DENABLE_LLINT=Off -DENABLE_JIT=Off -DENABLE_DFG_JIT=Off -DENABLE_FTL_JIT=Off"
+EXTRA_OECMAKE_append_armv5 = " -DENABLE_LLINT=Off -DENABLE_JIT=Off -DENABLE_DFG_JIT=Off -DENABLE_FTL_JIT=Off"
+
+# hack it in OptionsEfl.cmake because that overrules -DENABLE_LLINT=Off
+do_configure_prepend_armv4() {
+    sed -i 's/WEBKIT_OPTION_DEFAULT_PORT_VALUE(ENABLE_LLINT ON)/WEBKIT_OPTION_DEFAULT_PORT_VALUE(ENABLE_LLINT OFF)/g' ${S}/Source/cmake/OptionsEfl.cmake
+}
+do_configure_prepend_armv5() {
+    sed -i 's/WEBKIT_OPTION_DEFAULT_PORT_VALUE(ENABLE_LLINT ON)/WEBKIT_OPTION_DEFAULT_PORT_VALUE(ENABLE_LLINT OFF)/g' ${S}/Source/cmake/OptionsEfl.cmake
+}
+
+# and disabled LLINT currently isn't supported, so restrict to armv7a and x86*
+COMPATIBLE_MACHINE = "(-)"
+COMPATIBLE_MACHINE_i586 = "(.*)"
+COMPATIBLE_MACHINE_x86-64 = "(.*)"
+COMPATIBLE_MACHINE_armv7a = "(.*)"
 
 LEAD_SONAME = "libewebkit.so"
 PACKAGES =+ "${PN}launcher-dbg ${PN}launcher ${PN}-inspector"
