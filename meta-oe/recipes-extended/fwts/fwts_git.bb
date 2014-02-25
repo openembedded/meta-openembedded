@@ -5,13 +5,10 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
 
-PV = "14.01.00"
+PV = "14.02.00"
 
-SRCREV = "fef72314787d7b029d932ef56b4a117538cf69e3"
-SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-           file://subdir.patch \
-           file://jsonc.patch \
-          "
+SRCREV = "628534d216f135939f2f7b6b0a6c076c8d73bff9"
+SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
 
 S = "${WORKDIR}/git"
 
