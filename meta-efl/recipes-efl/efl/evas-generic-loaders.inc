@@ -1,6 +1,6 @@
 DESCRIPTION = "Evas generic loaders"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f86abf15f4d911ae87092e90222d0ef3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f3877fbaaa46306051a559814451883c"
 DEPENDS = "eina poppler librsvg cairo"
 
 inherit efl

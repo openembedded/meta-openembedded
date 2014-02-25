@@ -1,6 +1,8 @@
 DESCRIPTION = "Emotion generic players"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=69f44058245ce5c596d56bb622d5dabd"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a0f11eedf8706bf6d4d6639fb67eb8ae"
+
+DEPENDS = "emotion"
 
 inherit efl
 

@@ -3,7 +3,7 @@ LICENSE = "MIT BSD LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a1809a807e39dd48ddcf7be98477d130"
 
 DEPENDS_class-native = "lua5.1-native freetype-native libxext-native libpng-native jpeg-native tiff-native libfribidi-native glib-2.0-native dbus-native"
-DEPENDS = "virtual/libiconv tslib curl glib-2.0 gnutls pkgconfig zlib jpeg openssl libsndfile1 lua5.1 dbus libexif librsvg freetype libpng tiff libxext virtual/libx11 libxrender fontconfig libfribidi giflib udev libxcursor libxcomposite libxinerama libxrandr libxtst libxscrnsaver efl-native"
+DEPENDS = "virtual/libiconv tslib curl glib-2.0 gnutls pkgconfig zlib jpeg openssl libsndfile1 luajit dbus libexif librsvg freetype libpng tiff libxext virtual/libx11 libxrender fontconfig libfribidi giflib udev libxcursor libxcomposite libxinerama libxrandr libxtst libxscrnsaver efl-native"
 
 inherit efl gettext pkgconfig
 
@@ -12,8 +12,14 @@ BBCLASSEXTEND = "native"
 PROVIDES += "ecore edje eet eeze efreet eina eio embryo emotion ethumb evas eldbus"
 
 # we don't have bullet for physics
+# You have chosen to disable physics support. This disables lots of
+# core functionality and is effectively never tested. You are going
+# to find features that suddenly don't work and as a result cause
+# a series of breakages. This is simply not tested so you are on
+# your own in terms of ensuring everything works if you do this
 EXTRA_OECONF = " \
     --disable-physics \
+    --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aaa \
 "
 EXTRA_OECONF_append_class-target = " \
     --with-bin-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
@@ -36,16 +42,19 @@ EXTRA_OECONF_append_class-native = " \
     --disable-image-loader-xpm \
 "
 
-PACKAGECONFIG ??= "opengl-es"
+PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio"
 PACKAGECONFIG_class-native = ""
 
 # sort of tri-state
 PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
 PACKAGECONFIG[opengl-es] = "--with-opengl=es,,virtual/libgles2"
 PACKAGECONFIG[opengl-none] = "--with-opengl=none,,"
-# used only in ecore examples and supports only 0.10 now
 PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
+PACKAGECONFIG[gstreamer1] = "--enable-gstreamer1,--disable-gstreamer1,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
+PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+# we don't have luajit-native now, so use old lua for -native
+PACKAGECONFIG[luajit] = "--disable-lua-old,--enable-lua-old,luajit"
 
 # new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
 do_configure_prepend_class-native() {
@@ -175,6 +184,7 @@ FILES_eet = " \
 "
 FILES_emotion = " \
     ${datadir}/emotion \
+    ${libdir}/emotion/modules/gstreamer1/*/module.so \
 "
 FILES_embryo-tests = " \
     ${datadir}/embryo/ \
@@ -234,6 +244,7 @@ FILES_${PN}-dbg += " \
     ${libdir}/edje/utils/*/.debug \
     ${libdir}/ethumb/*/*/*/.debug \
     ${libdir}/ethumb_client/utils/*/.debug \
+    ${libdir}/emotion/modules/gstreamer1/*/.debug \
 "
 FILES_${PN}-dev += " \
     ${libdir}/cmake \
@@ -242,6 +253,7 @@ FILES_${PN}-dev += " \
     ${libdir}/ethumb*/*/*/*/module.la \
     ${libdir}/eeze*/*/*/*/*/module.la \
     ${libdir}/edje*/*/*/*/module.la \
+    ${libdir}/emotion/modules/gstreamer1/*/module.la \
     ${datadir}/gdb/auto-load \
     ${datadir}/eo/gdb \
     ${bindir}/eldbus-codegen \
