@@ -1,48 +1,19 @@
 DESCRIPTION = "Video player and streamer - davinci edition"
 HOMEPAGE = "http://www.videolan.org"
-LICENSE = "GPLv2"
 SECTION = "multimedia"
 
-DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib"
+LICENSE = "GPL-2.0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "http://download.videolan.org/pub/videolan/vlc/${PV}/vlc-${PV}.tar.bz2"
+DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free \
+   dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib \
+   libdvdcss libdvdread lua-native lua"
+
+SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
 
 inherit autotools gettext
 
 ARM_INSTRUCTION_SET = "arm"
-
-DEPENDS += "libdvdcss libdvdread lua5.1-native lua5.1"
-
-LEAD_SONAME = "libvlc.so.5"
-
-PACKAGES =+ "libvlc-dbg libvlc-dev libvlc"
-
-FILES_libvlc-dev = "${libdir}/lib*.so"
-
-FILES_libvlc-dbg = "\
-    ${libdir}/.debug \
-    ${libdir}/vlc/meta_engine/.debug \
-    ${libdir}/vlc/audio_filter/.debug ${libdir}/vlc/audio_output/.debug \
-    ${libdir}/vlc/demux/.debug ${libdir}/vlc/control/.debug \
-    ${libdir}/vlc/gui/.debug ${libdir}/vlc/packetizer/.debug \
-    ${libdir}/vlc/audio_mixer/.debug ${libdir}/vlc/stream_out/.debug \
-    ${libdir}/vlc/mux/.debug ${libdir}/vlc/access/.debug \
-    ${libdir}/vlc/visualization/.debug ${libdir}/vlc/access_filter/.debug \
-    ${libdir}/vlc/access_output/.debug ${libdir}/vlc/video_output/.debug \
-    ${libdir}/vlc/services_discovery/.debug ${libdir}/vlc/video_chroma/.debug \
-    ${libdir}/vlc/video_codec/.debug ${libdir}/vlc/video_filter/.debug \
-    ${libdir}/vlc/misc/.debug ${libdir}/vlc/codec/.debug \
-"
-
-FILES_libvlc = "${libdir}/lib*.so.*"
-
-FILES_${PN} += "${bindir}/vlc \
-    ${datadir}/applications \
-    ${datadir}/vlc/ \
-    ${datadir}/icons \
-"
-
-FILES_${PN}-dbg    += "${libdir}/vlc/*/.debug ${libdir}/vlc/plugins/*/.debug"
 
 EXTRA_OECONF = "\
     --enable-dvdread \
@@ -71,6 +42,7 @@ PACKAGECONFIG[id3tag] = "--enable-id3tag,--disable-id3tag,libid3tag"
 PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
 PACKAGECONFIG[mpeg2dec] = "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2dec"
 PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
+PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
 
 do_configure() {
     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
@@ -81,6 +53,30 @@ do_configure() {
     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
     oe_runconf
     rm config.log
-    sed -i -e s:-L/usr/lib:-L${STAGING_LIBDIR}/:g vlc-config
+    #sed -i -e s:-L/usr/lib:-L${STAGING_LIBDIR}/:g ${S}/vlc-config
     sed -i -e s:'$(MOC) $(DEFS) $(CPPFLAGS)':'$(MOC) $(DEFS)'\ -I${S}/include\ -DSYS_LINUX:g ${S}/modules/gui/qt4/Makefile
+    sed -i -e s:'${top_builddir_slash}libtool':${TARGET_SYS}-libtool:g ${S}/doltlibtool
 }
+
+# This recipe packages vlc as a library as well, so qt4 dependencies
+# can be avoided when only the library is installed.
+PACKAGES =+ "libvlc"
+
+LEAD_SONAME_libvlc = "libvlc.so.5"
+FILES_libvlc = "${libdir}/lib*.so.*"
+
+FILES_${PN} += "\
+    ${bindir}/vlc \
+    ${datadir}/applications \
+    ${datadir}/vlc/ \
+    ${datadir}/icons \
+"
+
+FILES_${PN}-dbg += "\
+    ${libdir}/vlc/*/.debug \
+    ${libdir}/vlc/plugins/*/.debug \
+"
+
+FILES_${PN}-staticdev += "\
+    ${libdir}/vlc/plugins/*/*.a \
+"
