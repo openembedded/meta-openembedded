@@ -28,3 +28,9 @@ do_package_write_ipk[noexec] = "1"
 do_package_write_rpm[noexec] = "1"
 do_package_write_deb[noexec] = "1"
 do_package_write_tar[noexec] = "1"
+
+# The linux-libc-headers and klibc custom headers are not machine-specific
+# but are installed into machine sysroot.
+# Klcc wrapper is hardcoding som eof these paths thus, to keep te recipe
+# arch-specific, we force the rebuild of klcc-cross for each machine.
+do_compile[vardeps] += "MACHINE"
