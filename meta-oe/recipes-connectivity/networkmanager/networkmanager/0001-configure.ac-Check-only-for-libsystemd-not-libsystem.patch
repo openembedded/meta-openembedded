@@ -1,0 +1,30 @@
+From 10427a19302e871daeeb245581e930dc58195492 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 27 Feb 2014 12:59:03 +0100
+Subject: [PATCH] configure.ac: Check only for libsystemd not libsystemd-login
+
+* they were merged into libsystemd in systemd-209
+
+Upstream-Status: Pending (it would need to be conditional on systemd version for upstream to accept this)
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index cc66e9b..3fe958e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -283,7 +283,7 @@ AS_IF([! (echo "$with_session_tracking" | grep -q -E "^(systemd|consolekit|no)$"
+ AM_CONDITIONAL(SESSION_TRACKING_CK, test "$with_session_tracking" = "consolekit")
+ AM_CONDITIONAL(SESSION_TRACKING_SYSTEMD, test "xwith_session_tracking" = "systemd")
+ if test "$with_session_tracking" = "systemd"; then
+-	PKG_CHECK_MODULES(SYSTEMD_LOGIN, [libsystemd-login])
++	PKG_CHECK_MODULES(SYSTEMD_LOGIN, [libsystemd])
+ 	AC_SUBST(SYSTEMD_LOGIN_CFLAGS)
+ 	AC_SUBST(SYSTEMD_LOGIN_LIBS)
+ fi
+-- 
+1.9.0
+
