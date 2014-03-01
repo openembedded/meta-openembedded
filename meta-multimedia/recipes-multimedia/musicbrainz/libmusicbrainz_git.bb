@@ -37,3 +37,6 @@ do_configure_prepend() {
 
 EXTRA_OECMAKE = "-DLIB_INSTALL_DIR:PATH=${libdir} \
                  -DIMPORT_EXECUTABLES=build-native/ImportExecutables.cmake"
+
+# out-of-tree building doesn't appear to work for this package.
+B = "${S}"
