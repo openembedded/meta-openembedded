@@ -7,6 +7,8 @@ DEPENDS = "gtk+ enca expat bzip2 libgpewidget virtual/libiconv liblinebreak libf
 SRCREV = "2cf1ec0e306e1122dbed850bfa005cd59a6168ee"
 PV = "0.99.5+gitr${SRCPV}"
 
+PR = "r1"
+
 DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = "git://github.com/geometer/FBReader.git;protocol=http;branch=master \

@@ -3,8 +3,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 inherit systemd
 
-PRINC := "${@int(PRINC) + 3}"
-
 SYSTEMD_PACKAGES = "dhcp-server dhcp-relay dhcp-client"
 SYSTEMD_SERVICE_dhcp-server = "dhcpd.service"
 SYSTEMD_SERVICE_dhcp-relay = "dhcrelay.service"

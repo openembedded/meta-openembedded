@@ -6,7 +6,7 @@ SECTION = "audio"
 
 DEPENDS = "libpng libav libsndfile1"
 
-PR = "r1"
+PR = "r2"
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)} \
                    ${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \

@@ -1,5 +1,3 @@
-PRINC := "${@int(PRINC) + 2}"
-
 inherit systemd
 
 RPROVIDES_${PN} += "${PN}-systemd"

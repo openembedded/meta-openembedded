@@ -1,5 +1,3 @@
-PRINC := "${@int(PRINC) + 2}"
-
 inherit systemd
 
 EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
