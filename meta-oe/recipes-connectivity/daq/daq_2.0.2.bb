@@ -10,7 +10,7 @@ DEPENDS = "libpcap libpcre "
 SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
             file://disable-run-test-program-while-cross-compiling.patch "
 
-SRC_URI[md5sum] = "044aa3663d44580d005293eeb8ccf175"
-SRC_URI[sha256sum] = "ebba87c2ec76ac65d2980934423b0597909caead3a86ce5d1ba1ea6ce518ec6d"
+SRC_URI[md5sum] = "865bf9b750a2a2ca632591a3c70b0ea0"
+SRC_URI[sha256sum] = "d65d1e67c4994e02c3142c49a648642e780b7e3d942b4a51f605309beac269a8"
 
 inherit autotools
