@@ -1,6 +1,6 @@
 DESCRIPTION = "${PN} bindings"
 
-LICENSE = "LGPLv3.0"
+LICENSE = "LGPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02"
 # there is also GPLv3.0 in COPYING;md5=d32239bcb673463ab874e80d47fae504 but no file seems to use that
 
