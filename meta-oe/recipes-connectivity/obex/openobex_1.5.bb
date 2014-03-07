@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "e602047570799a47ecb028420bda8f2cef41310e5a99d084de10aa9422
 
 inherit autotools binconfig pkgconfig
 
-EXTRA_OECONF = "--enable-apps --enable-syslog --enable-dump \
+EXTRA_OECONF = "--enable-apps --enable-syslog \
                 --with-usb=${STAGING_LIBDIR}/.. --with-bluez=${STAGING_LIBDIR}/.."
 
 do_install_append() {
