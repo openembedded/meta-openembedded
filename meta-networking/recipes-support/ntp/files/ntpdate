@@ -1,8 +1,8 @@
 #!/bin/sh
 
-PATH=/sbin:/bin:/usr/bin
+PATH=/sbin:/bin:/usr/bin:/usr/sbin
 
-test -x /usr/bin/ntpdate || exit 0
+test -x /usr/sbin/ntpdate || exit 0
 
 if test -f /etc/default/ntpdate ; then
 . /etc/default/ntpdate
@@ -40,7 +40,7 @@ if [ -x /usr/bin/lockfile-create ]; then
 	LOCKTOUCHPID="$!"
 fi
 
-if /usr/bin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
+if /usr/sbin/ntpdate -s $OPTS $NTPSERVERS 2>/dev/null; then
 	if [ "$UPDATE_HWCLOCK" = "yes" ]; then
 		hwclock --systohc || :
 	fi

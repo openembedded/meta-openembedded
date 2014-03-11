@@ -3,7 +3,7 @@
 PATH=/sbin:/bin:/usr/bin:/usr/sbin
 
 # ntpd	init.d script for ntpdc from ntp.isc.org
-test -x /usr/bin/ntpd -a -r /etc/ntp.conf || exit 0
+test -x /usr/sbin/ntpd -a -r /etc/ntp.conf || exit 0
 # rcS contains TICKADJ
 test -r /etc/default/rcS && . /etc/default/rcS
 
@@ -11,9 +11,9 @@ test -r /etc/default/rcS && . /etc/default/rcS
 settick(){
   	# If TICKADJ is set we *must* adjust it before we start, because the
 	# driftfile relies on the correct setting
-	test -n "$TICKADJ" -a -x /usr/bin/tickadj && {
+	test -n "$TICKADJ" -a -x /usr/sbin/tickadj && {
 		echo -n "Setting tick to $TICKADJ: "
-		/usr/bin/tickadj "$TICKADJ"
+		/usr/sbin/tickadj "$TICKADJ"
 		echo "done"
 	}
 }
@@ -23,7 +23,7 @@ startdaemon(){
 	# this.  If ntpd seems to disappear after a while assume TICKADJ
 	# above is set to a totally incorrect value.
 	echo -n "Starting ntpd: "
-	start-stop-daemon --start -x /usr/bin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
+	start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
 	echo "done"
 }
 stopdaemon(){
