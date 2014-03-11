@@ -23,7 +23,7 @@ startdaemon(){
 	# this.  If ntpd seems to disappear after a while assume TICKADJ
 	# above is set to a totally incorrect value.
 	echo -n "Starting ntpd: "
-	start-stop-daemon --start -x /usr/bin/ntpd -- -p /var/run/ntp.pid "$@"
+	start-stop-daemon --start -x /usr/bin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
 	echo "done"
 }
 stopdaemon(){
