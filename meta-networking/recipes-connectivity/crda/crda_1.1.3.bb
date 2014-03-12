@@ -24,7 +24,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake SBINDIR=${sbindir} install
+    oe_runmake SBINDIR=${sbindir}/ install
 
     install -d ${D}${libdir}/crda/
 
