@@ -92,6 +92,10 @@ case "$1" in
 	;;
   stop)
 	echo -n "Stopping $DESC: "
+	if ! [ -f $PIDFILE ] ; then
+		echo "not running."
+		exit 0
+	fi
 	start-stop-daemon --oknodo --stop --pidfile $PIDFILE \
 		--exec $DAEMON
 	restore_settings $SAVED_SETTINGS
