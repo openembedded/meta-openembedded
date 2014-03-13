@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
         file://snmpd.service \
         file://snmptrapd.service \
         file://ifmib.patch \
+        file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
 "
 
 SRC_URI[md5sum] = "a2c83518648b0f2a5d378625e45c0e18"
@@ -28,6 +29,9 @@ PARALLEL_MAKE = ""
 CCACHE = ""
 
 TARGET_CC_ARCH += "${LDFLAGS}"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
 
 EXTRA_OECONF = "--disable-embedded-perl \
                 --with-perl-modules=no \
