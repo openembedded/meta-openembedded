@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
 SECTION = "qt/lib"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
-SRCREV = "ddbeaf72b4d3c49285b0513b28948edacfc40b51"
-PV = "1.0.46+git${SRCPV}"
+SRCREV = "80ac184d859ea90c026403f5a520644945a5081a"
+PV = "1.0.50+git${SRCPV}"
 
 SRC_URI = "git://github.com/nemomobile/libconnman-qt.git;branch=master"
 
@@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
-EXTRA_QMAKEVARS_PRE += "CONFIG+=notests"
+EXTRA_QMAKEVARS_PRE += "CONFIG+=notests TARGET_SUFFIX=${QT_DIR_NAME}"
 
 do_configure_prepend() {
     # Hack *.pro variables
@@ -37,7 +37,6 @@ FILES_${PN}-dev = " \
     ${libdir}/libconnman-qt*${SOLIBSDEV} \
     ${libdir}/libconnman-qt*.prl \
     ${libdir}/pkgconfig/connman-qt*.pc \
-    ${libdir}/connman-qt*.pc \
 "
 FILES_${PN}-plugin = " \
     ${PLUGINS_TARGET}/qmldir \

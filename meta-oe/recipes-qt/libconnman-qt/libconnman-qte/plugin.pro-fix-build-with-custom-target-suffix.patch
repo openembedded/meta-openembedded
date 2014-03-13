@@ -1,0 +1,42 @@
+Upstream-Status: Submitted [https://github.com/nemomobile/libconnman-qt/pull/105]
+
+From 48da520b971af69d22e691a0ef6ff1c3ce901f0d Mon Sep 17 00:00:00 2001
+From: Andreas Oberritter <obi@opendreambox.org>
+Date: Tue, 11 Mar 2014 21:55:37 +0100
+Subject: [PATCH] plugin.pro: fix build with custom target suffix
+
+This went unnoticed because of a previously installed libconnman-qt4.
+
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+---
+ plugin/plugin.pro | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/plugin/plugin.pro b/plugin/plugin.pro
+index c9534cf..9cdaa63 100644
+--- a/plugin/plugin.pro
++++ b/plugin/plugin.pro
+@@ -8,14 +8,18 @@ INCLUDEPATH += ../libconnman-qt
+ LIBS += -L../libconnman-qt
+ QT -= gui
+ 
++isEmpty(TARGET_SUFFIX) {
++    TARGET_SUFFIX = qt$$QT_MAJOR_VERSION
++}
++
++LIBS += -l$$qtLibraryTarget(connman-$$TARGET_SUFFIX)
++
+ equals(QT_MAJOR_VERSION, 4): {
+     QT += declarative
+-    LIBS += -lconnman-qt4
+ }
+ 
+ equals(QT_MAJOR_VERSION, 5): {
+     QT += qml
+-    LIBS += -lconnman-qt5
+     OTHER_FILES += plugin.json qmldirs
+ }
+ 
+-- 
+1.8.3.2
+
