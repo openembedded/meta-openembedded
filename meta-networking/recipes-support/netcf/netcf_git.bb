@@ -12,7 +12,7 @@ PV = "0.2.3+git${SRCPV}"
 SRC_URI = "git://git.fedorahosted.org/netcf.git;protocol=git \
 "
 
-DEPENDS += "augeas libnl libxslt libxml2"
+DEPENDS += "augeas libnl libxslt libxml2 gnulib"
 
 S = "${WORKDIR}/git"
 
@@ -21,6 +21,7 @@ inherit gettext autotools
 EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 do_configure_prepend() {
 	cd ${S}
-	./bootstrap
+	rm -f .gitmodules
+	./bootstrap --gnulib-srcdir=${STAGING_DATADIR}/gnulib
 }
 
