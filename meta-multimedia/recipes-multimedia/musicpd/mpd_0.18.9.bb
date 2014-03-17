@@ -10,8 +10,8 @@ SRC_URI = " \
     file://mpd.conf.in \
 "
 
-SRC_URI[md5sum] = "7bbe1caf5abe404dc985ca4f44984b1f"
-SRC_URI[sha256sum] = "5366378e548fb77996cc33b0e15165ddd84f1e496bdd04616bd593aecdc26450"
+SRC_URI[md5sum] = "0e5156a831d4302d2032998bcfd5c36f"
+SRC_URI[sha256sum] = "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be5346f19de5f699a68de"
 
 inherit autotools useradd systemd
 
