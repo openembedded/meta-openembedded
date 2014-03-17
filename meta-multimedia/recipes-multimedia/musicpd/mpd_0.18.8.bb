@@ -1,19 +1,17 @@
 SUMMARY = "Music Player Daemon"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-HOMEPAGE ="http://sourceforge.net/projects/musicpd"
+HOMEPAGE ="http://www.musicpd.org"
 
 DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
 
 SRC_URI = " \
-    http://www.musicpd.org/download/${PN}/stable/${PN}-0.18.tar.xz \
+    http://www.musicpd.org/download/${PN}/stable/${P}.tar.xz \
     file://mpd.conf.in \
 "
 
-SRC_URI[md5sum] = "0d881fb32f9d31afcdb0bb13cb78b9ab"
-SRC_URI[sha256sum] = "6b171985f192603150c879d105dc4d05d701ac60a2db41630a4dce823e068388"
-
-S = "${WORKDIR}/${PN}-0.18"
+SRC_URI[md5sum] = "7bbe1caf5abe404dc985ca4f44984b1f"
+SRC_URI[sha256sum] = "5366378e548fb77996cc33b0e15165ddd84f1e496bdd04616bd593aecdc26450"
 
 inherit autotools useradd systemd
 
