@@ -2,7 +2,7 @@ require ttf.inc
 
 SUMMARY = "DejaVu font - TTF Edition"
 HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
-LICENSE = "Bitstream Vera"
+LICENSE = "BitstreamVera"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=9f867da7a73fad2715291348e80d0763"
 
 # all subpackages except ${PN}-common itself rdepends on ${PN}-common
@@ -19,7 +19,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/dejavu/dejavu-fonts-ttf-${PV}.tar.bz2 \
 
 S = "${WORKDIR}/dejavu-fonts-ttf-${PV}/ttf"
 
-do_install_append () { 
+do_install_append () {
     install -d ${D}${sysconfdir}/fonts/conf.d/
     install -m 0644 ${WORKDIR}/30-dejavu-aliases.conf ${D}${sysconfdir}/fonts/conf.d/
 }
