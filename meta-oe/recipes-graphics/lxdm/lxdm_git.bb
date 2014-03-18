@@ -16,17 +16,24 @@ SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
 PV = "0.5.0+git${SRCPV}"
 PE = "1"
 
-DEPENDS = "cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango"
+DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes"
 DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}"
 
 # combine oe-core way with angstrom DISTRO_TYPE
 DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
 
-inherit autotools gettext systemd
+inherit autotools pkgconfig gettext systemd
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
+CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset -fno-builtin-strstr "
+
+EXTRA_OECONF += "--enable-gtk3=no --enable-password=yes --with-x -with-xconn=xcb \
+    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
+
+do_configure_prepend() {
+    cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/po/
+}
 
 do_compile_append() {
     # default background configured not available / no password field available / no default screensaver
