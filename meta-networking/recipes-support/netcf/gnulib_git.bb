@@ -16,18 +16,15 @@ SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
 "
 S = "${WORKDIR}/git"
 
-# Git clone a copy of gnulib source to the staging data dir
-sysroot_stage_all () {
-    [ -d ${STAGING_DATADIR}/gnulib/ ] && rm -rf ${STAGING_DATADIR}/gnulib/
+do_install () {
     cd ${S}
     git checkout master
-    git clone ${S} ${STAGING_DATADIR}/gnulib
+    git clone ${S} ${D}/${datadir}/gnulib
 }
 
 do_patch[noexec] = "1"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
-do_install[noexec] = "1"
 do_package[noexec] = "1"
 do_packagedata[noexec] = "1"
 do_package_write_ipk[noexec] = "1"
