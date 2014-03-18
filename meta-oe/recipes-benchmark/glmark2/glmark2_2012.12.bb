@@ -15,21 +15,9 @@ SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
 SRC_URI[md5sum] = "4f306664aa3886fa0cf93853603603f8"
 SRC_URI[sha256sum] = "bea6f9de2cdce376195bd91e4a2fdfdf80bf3e480abff8e05b90a6458c1deb47"
 
-inherit pkgconfig
+inherit waf pkgconfig
 
 PACKAGECONFIG ?= "gl gles2"
 
 PACKAGECONFIG[gl] = "--enable-gl,,virtual/libgl"
 PACKAGECONFIG[gles2] = "--enable-glesv2,,virtual/libgles2"
-
-do_configure() {
-	./waf configure --prefix=${prefix} ${EXTRA_OECONF}
-}
-
-do_compile() {
-	./waf build ${PARALLEL_MAKE}
-}
-
-do_install() {
-	./waf install --destdir=${D}
-}
