@@ -16,19 +16,17 @@ PACKAGECONFIG[alsa] = "--with-default-audio=alsa,,alsa-lib"
 
 LICENSE = "LGPLv2.1"
 LICENSE_FLAGS = "commercial"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a7aa23a2b646eca38ad4eeb7a853761c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/mpg123-${PV}.tar.bz2"
-
-SRC_URI[md5sum] = "f734f9e2982f398a1c919475fc0b3798"
-SRC_URI[sha256sum] = "b6b1aef887835f83ac3d4acb5701ae619041fc60d76548ad779a409080338df7" 
-
-S = "${WORKDIR}/mpg123-${PV}"
+SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
+SRC_URI[md5sum] = "87731f1437cfd8c50537a606d81130e4"
+SRC_URI[sha256sum] = "869024e01d7cb4dae1aea2f2a10420d4be7e1ac02a9c434d06d727599169b01b"
 
 inherit autotools pkgconfig
 
 EXTRA_OECONF = " \
     --enable-shared \
+    --with-module-suffix=.so \
     ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
 "
