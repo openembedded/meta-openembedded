@@ -5,26 +5,25 @@ BUGTRACKER = "https://alioth.debian.org/projects/bash-completion/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PR = "r1"
-
 SECTION = "console/utils"
 
 SRC_URI="http://bash-completion.alioth.debian.org/files/${BPN}-${PV}.tar.bz2"
 
-SRC_URI[md5sum] = "0d903f398be8c8f24bc5ffa6f86127f8"
-SRC_URI[sha256sum] = "e5a490a4301dfb228361bdca2ffca597958e47dd6056005ef9393a5852af5804"
+SRC_URI[md5sum] = "4e2a9f11a4042a38ee79ddcd048e8b9e"
+SRC_URI[sha256sum] = "2b606804a7d5f823380a882e0f7b6c8a37b0e768e72c3d4107c51fbe8a46ae4f"
 
 PARALLEL_MAKE = ""
 
-inherit allarch autotools
+inherit autotools
 
 do_install_append() {
+	# compatdir
 	install -d ${D}${sysconfdir}/bash_completion.d/
 	echo '. ${datadir}/${BPN}/bash_completion' >${D}${sysconfdir}/bash_completion
 
 	# Delete files already provided by util-linux
 	local i
-	for i in cal dmesg hwclock ionice look renice rtcwake; do
+	for i in cal dmesg eject hexdump hwclock ionice look renice rtcwake; do
 		rm ${D}${datadir}/${BPN}/completions/$i
 	done
 }
