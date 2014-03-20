@@ -11,7 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
 # flex with provide /usr/include/FlexLexer.h
 DEPENDS = "flex-native bison-native flex"
 
-SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz"
+SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz \
+           file://cross_cc.patch"
 SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
 SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
 
@@ -37,7 +38,7 @@ EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \
 "
 
 # Note: imlib2 is located in meta-efl layer.
-PACKAGECONFIG ??= "jpeg rl"
+PACKAGECONFIG ?= "jpeg rl hf"
 PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
 PACKAGECONFIG[jpeg] = "--enable-jpeg,--disable-jpeg,jpeg"
 PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
@@ -46,3 +47,4 @@ PACKAGECONFIG[pdf] = "--enable-poppler,--disable-poppler,poppler"
 PACKAGECONFIG[magick] = "--enable-graphicsmagick,--disable-graphicsmagick,imagemagick"
 PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
 PACKAGECONFIG[rl] = "--enable-readline,--disable-readline,readline"
+PACKAGECONFIG[hf] = "--enable-hardcoded-font,--disable-hardcoded-font"
