@@ -39,5 +39,5 @@ do_install() {
 
 }
 
-ALTERNATIVE_${PN} = "traceroute6"
-ALTERNATIVE_LINK_NAME[traceroute6] = "${bindir}/traceroute"
+ALTERNATIVE_${PN} = "traceroute"
+ALTERNATIVE_LINK_NAME[traceroute] = "${bindir}/traceroute"
