@@ -1,7 +1,7 @@
 SUMMARY = "Open Source multimedia player"
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mplayerhq.hu/"
-DEPENDS = "libvpx live555 libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
+DEPENDS = "libvpx libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
            libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
            libxv virtual/libx11 libass speex faad2"
 
@@ -13,11 +13,11 @@ RCONFLICTS_${PN} = "mplayer"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "git://repo.or.cz/mplayer.git;branch=master \
-           file://cross.compile.codec-cfg.patch \
+SRC_URI = "git://repo.or.cz/mplayer.git \
+    file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
 "
 
-SRCREV = "e3f5043233336d8b4b0731c6a8b42a8fda5535ac"
+SRCREV = "2c378c71a4d9b1df382db9aa787b646628b4e3f9"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -47,21 +47,15 @@ EXTRA_OECONF = " \
     --disable-vm \
     --disable-xf86keysym \
     --enable-tv \
-    --disable-tv-v4l1 \     
     --enable-tv-v4l2 \
     --disable-tv-bsdbt848 \
     --enable-rtc \
     --enable-networking \
     --disable-smb \
-    --enable-live \
     --disable-dvdnav \
     --enable-dvdread \
     --disable-dvdread-internal \
     --disable-libdvdcss-internal \
-    --disable-cdparanoia \
-    --enable-freetype \
-    --enable-sortsub \
-    --disable-fribidi \
     --disable-enca \
     --disable-ftp \
     --disable-vstream \
@@ -84,49 +78,31 @@ EXTRA_OECONF = " \
     --disable-musepack \
     \
     --disable-gl \
-    --disable-vesa \
-    --disable-svga \
     --enable-sdl \
-    --disable-aa \
     --disable-caca \
-    --disable-ggi \
-    --disable-ggiwmh \
     --disable-directx \
-    --disable-dxr3 \
     --disable-dvb \
-    --disable-mga \
-    --disable-xmga \
     --enable-xv \
     --disable-vm \
     --disable-xinerama \
     --enable-x11 \
-    --enable-fbdev \
-    --disable-3dfx \
-    --disable-tdfxfb \
-    --disable-s3fb \
     --disable-directfb \
-    --disable-bl \
-    --disable-tdfxvid \
     --disable-tga \
     --disable-pnm \
     --disable-md5sum \
     \
     --enable-alsa \
     --enable-ossaudio \
-    --disable-arts \
-    --disable-esd \
     --disable-pulse \
     --disable-jack \
     --disable-openal \
-    --disable-nas \
-    --disable-sgiaudio \
-    --disable-sunaudio \
-    --disable-win32waveout \
     --enable-select \
     --enable-libass \
     \
-    --extra-libs=' -lXext -lX11 -lBasicUsageEnvironment -lUsageEnvironment -lgroupsock -lliveMedia -lstdc++ -lvorbis ' \
+    --extra-libs=' -lXext -lX11 -lvorbis -ltheoradec -lasound ' \
 "
+# -ltheoradec is missing in:
+# libmpcodecs/vd_theora.o: undefined reference to symbol 'theora_decode_init@@libtheora.so.1.0'
 
 EXTRA_OECONF_append_armv6 = " --enable-armv6"
 EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
@@ -157,7 +133,8 @@ do_compile () {
     oe_runmake
 }
 
-do_install_append() {
+do_install() {
+    oe_runmake 'DESTDIR=${D}' install-no-man
     install -d ${D}/usr/etc/mplayer
     install ${S}/etc/input.conf ${D}/usr/etc/mplayer/
     install ${S}/etc/example.conf ${D}/usr/etc/mplayer/
