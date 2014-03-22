@@ -1,15 +1,12 @@
-KLIBC_UTILS_VARIANT = "shared"
-KLIBC_UTILS_PKGNAME = "klibc-utils"
+SUMMARY = "klibc utils for initramfs"
 
 FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 
-do_install() {
-    :
-}
-
-PACKAGES_${PN} = "${PN}"
+PACKAGES = "${PN}"
 FILES_${PN} = ""
+
+KLIBC_UTILS_VARIANT = "shared"
+KLIBC_UTILS_PKGNAME = "klibc-utils"
 
 require klibc-utils.inc
 require klibc.inc
-SUMMARY = "klibc utils for initramfs"

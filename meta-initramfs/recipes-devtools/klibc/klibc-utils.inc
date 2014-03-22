@@ -1,12 +1,6 @@
-KLIBC_UTILS_VARIANT ?= "shared"
-KLIBC_UTILS_PKGNAME ?= "klibc-utils"
-
-# losetup goes in ${base_sbindir}
-
-do_install_append() {
+do_install() {
     install -d ${D}${base_bindir}
     install -d ${D}${base_sbindir}
-
     # debian packages kinit + kinit.shared but only sh.shared
     if [ "${KLIBC_UTILS_VARIANT}" = "shared" ]; then
         install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
@@ -16,7 +10,6 @@ do_install_append() {
         install -m 755 usr/dash/sh ${D}${base_bindir}/sh
         install -m 755 usr/kinit/kinit ${D}${base_bindir}/kinit
     fi
-
     install -m 755 usr/gzip/gzip ${D}${base_bindir}
     install -m 755 usr/kinit/fstype/${KLIBC_UTILS_VARIANT}/fstype ${D}${base_bindir}
     install -m 755 usr/kinit/ipconfig/${KLIBC_UTILS_VARIANT}/ipconfig ${D}${base_bindir}
@@ -32,6 +25,7 @@ do_install_append() {
     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/halt ${D}${base_bindir}
     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/kill ${D}${base_bindir}
     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/ln ${D}${base_bindir}
+    # losetup goes in ${base_sbindir}
     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/losetup ${D}${base_sbindir}
     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/ls ${D}${base_bindir}
     install -m 755 usr/utils/${KLIBC_UTILS_VARIANT}/minips ${D}${base_bindir}
@@ -54,15 +48,13 @@ do_install_append() {
     ln -s gzip ${D}${base_bindir}/zcat
 }
 
-EXTRA_KLIBC_DEPS = '${@base_conditional("KLIBC_UTILS_VARIANT", "shared", "${THIS_LIBKLIBC}", "", d)}'
+EXTRA_KLIBC_DEPS = "${@base_conditional('KLIBC_UTILS_VARIANT', 'shared', '${THIS_LIBKLIBC}', '', d)}"
 
 PACKAGES_DYNAMIC += "^${KLIBC_UTILS_PKGNAME}-.*"
 
 python populate_packages_prepend () {
-
     base_bin_dir = d.expand('${base_bindir}')
     do_split_packages(d, base_bin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='${EXTRA_KLIBC_DEPS}', allow_links=True, allow_dirs=True)
-
     base_sbin_dir = d.expand('${base_sbindir}')
     do_split_packages(d, base_sbin_dir, '(.*)', '${KLIBC_UTILS_PKGNAME}-%s', 'Klibc util for %s', extra_depends='${EXTRA_KLIBC_DEPS}', allow_dirs=True)
 }

@@ -1,15 +1,12 @@
-KLIBC_UTILS_VARIANT = "static"
-KLIBC_UTILS_PKGNAME = "klibc-static-utils"
+SUMMARY = "klibc utils for initramfs statically compiled"
 
 FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 
-do_install() {
-    :
-}
-
-PACKAGES_${PN} = "${PN}"
+PACKAGES = "${PN}"
 FILES_${PN} = ""
+
+KLIBC_UTILS_VARIANT = "static"
+KLIBC_UTILS_PKGNAME = "klibc-static-utils"
 
 require klibc-utils.inc
 require klibc.inc
-SUMMARY = "klibc utils for initramfs statically compiled"
