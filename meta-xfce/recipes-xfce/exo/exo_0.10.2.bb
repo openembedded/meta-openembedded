@@ -3,7 +3,7 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
-DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native"
+DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
 PR = "r4"
 
 inherit xfce pythonnative perlnative
