@@ -8,5 +8,5 @@ SRC_URI = "\
 # these paths aren't passed in -native build
 SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
 
-SRC_URI[md5sum] = "408b61a080f51731eeed81968d3cc7f5"
-SRC_URI[sha256sum] = "95cb9ade6c1f135b673555d927d13b5e06986353047178125346abdf6c2b4d82"
+SRC_URI[md5sum] = "48a4b155ced187db87c503d4f376aa7a"
+SRC_URI[sha256sum] = "c31644109cd29675bc65b220d19c633c8d089feb955c439988b2e19f026b3376"
