@@ -9,6 +9,7 @@ INC_PR = "r4"
 
 S = "${WORKDIR}/LVM2.${PV}"
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+           file://0001-Replace-CPPFunction-with-rl_completion_func_t.patch \
            file://lvm.conf"
 
 PACKAGECONFIG ??= "readline"

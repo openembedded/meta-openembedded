@@ -1,0 +1,33 @@
+From e2484e179c389b98366c8b66b451d9d2ba8f35e8 Mon Sep 17 00:00:00 2001
+From: Zhenhua Luo <zhenhua.luo@freescale.com>
+Date: Tue, 25 Mar 2014 17:39:43 +0800
+Subject: [PATCH] Replace CPPFunction with rl_completion_func_t
+
+lvm2 depends on readline, CPPFunction has been replaced by rl_completion_func_t
+in recent readline,
+
+Upstream-Status: Inappropriate [configuration]
+The change depends on the build environment, it is required by OpenEmbedded env 
+due to readline upgrade. 
+
+Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
+---
+ tools/lvm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/lvm.c b/tools/lvm.c
+index e002a76..5fa35d2 100644
+--- a/tools/lvm.c
++++ b/tools/lvm.c
+@@ -186,7 +186,7 @@ int lvm_shell(struct cmd_context *cmd, struct cmdline_context *cmdline)
+ 	char *input = NULL, *args[MAX_ARGS], **argv;
+ 
+ 	rl_readline_name = "lvm";
+-	rl_attempted_completion_function = (CPPFunction *) _completion;
++	rl_attempted_completion_function = (rl_completion_func_t *) _completion;
+ 
+ 	_read_history(cmd);
+ 
+-- 
+1.9.1
+
