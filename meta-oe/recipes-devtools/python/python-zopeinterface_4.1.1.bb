@@ -3,11 +3,10 @@ SECTION = "console/network"
 
 LICENSE = "ZPL-2.1"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
-PR = "r1"
 
 SRC_URI = "http://pypi.python.org/packages/source/z/zope.interface/zope.interface-${PV}.tar.gz"
-SRC_URI[md5sum] = "685fc532550abb07cca6190c9cd2b901"
-SRC_URI[sha256sum] = "b81d898532c47f73475c2d0c23580e289eed25923d007eca8e62750c0998bba0"
+SRC_URI[md5sum] = "edcd5f719c5eb2e18894c4d06e29b6c6"
+SRC_URI[sha256sum] = "91cba7b7cd7cb82f6f4e023fe77f94dc3df4ae5287fd55def2148dc232d0c7da"
 
 S = "${WORKDIR}/zope.interface-${PV}"
 
