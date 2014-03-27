@@ -92,6 +92,10 @@ php_sysroot_preprocess () {
     sed -i 's!^include_dir=.*!include_dir=${STAGING_INCDIR}/php!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/php-config
 }
 
+# phpize is not scanned for absolute paths by default (but php-config is).
+#
+SSTATE_SCAN_FILES += "phpize"
+
 RDEPENDS_${PN} = "apache2"
 
 FILES_${PN} = "${libdir}/apache2 ${sysconfdir}"
