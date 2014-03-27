@@ -5,10 +5,10 @@ HOMEPAGE = "http://autobahn.ws/python"
 SECTION = "console/network"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=81964ceb3ab93bfb5e8cfbcd26f3af9c"
+LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=1fdeccf6e5b70cda64cc1345597c18e3"
 
 SRC_URI = "https://pypi.python.org/packages/source/a/autobahn/autobahn-${PV}.zip"
-SRC_URI[md5sum] = "e2c80ba3e46428b32837537609d4d582"
+SRC_URI[md5sum] = "160429e7fb043940e79aa7f4ebbab57a"
 
 S = "${WORKDIR}/autobahn-${PV}"
 
