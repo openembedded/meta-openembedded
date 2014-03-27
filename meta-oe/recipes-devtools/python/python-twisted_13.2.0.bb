@@ -6,12 +6,11 @@ SECTION = "console/network"
 
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c3159ad36d96a939fcd8f2c2c9b9d08a"
-PR = "r3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5602d7228daf59a16f0f1b2640c46bca"
 
-SRC_URI = "http://tmrc.mit.edu/mirror/twisted/Twisted/10.2/Twisted-${PV}.tar.bz2 "
-SRC_URI[md5sum] = "73da62c793269eade8121da336b01ba5"
-SRC_URI[sha256sum] = "562ed61c18aa72da99c23fb19c2c101d178995eb3a78ab3c09560a613e180c84"
+SRC_URI = "https://pypi.python.org/packages/source/T/Twisted/Twisted-${PV}.tar.bz2"
+SRC_URI[md5sum] = "83fe6c0c911cc1602dbffb036be0ba79"
+SRC_URI[sha256sum] = "095175638c019ac7c0604f4c291724a16ff1acd062e181b01293bf4dcbc62cf3"
 
 S = "${WORKDIR}/Twisted-${PV}"
 
@@ -26,7 +25,6 @@ PACKAGES += "\
     ${PN}-zsh \
     ${PN}-test \
     ${PN}-protocols \
-    ${PN}-bin \
     ${PN}-conch \
     ${PN}-lore \
     ${PN}-mail \
@@ -42,7 +40,6 @@ PACKAGES += "\
 
 RDEPENDS_${PN} = "python-core python-zopeinterface"
 RDEPENDS_${PN} += "\
-    ${PN}-bin \
     ${PN}-conch \
     ${PN}-lore \
     ${PN}-mail \
@@ -70,11 +67,7 @@ FILES_${PN}-protocols = " \
 FILES_${PN}-zsh = " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
-"
-
-FILES_${PN}-bin = " \
-    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/_c_urlarg.so \
-    ${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/cBanana.so \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/twisted-completion.zsh \
 "
 
 FILES_${PN}-conch = " \
