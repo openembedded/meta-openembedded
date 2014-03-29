@@ -28,6 +28,7 @@ PACKAGES_prepend = "libuniconf libuniconf-dbg "
 PACKAGES_prepend = "uniconfd uniconfd-dbg "
 PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
 PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
+PACKAGES_prepend = "${PN}-valgrind "
 
 FILES_libuniconf     = "${libdir}/libuniconf.so.*"
 FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
@@ -40,3 +41,5 @@ FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
 
 FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
 FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
+
+FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
