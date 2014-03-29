@@ -10,7 +10,7 @@ PNAME = "gtksourceview"
 
 S = "${WORKDIR}/${PNAME}-${PV}"
 
-inherit gnome lib_package gettext
+inherit gnomebase lib_package gettext
 
 # overrule SRC_URI from gnome.conf
 SRC_URI = "${GNOME_MIRROR}/${PNAME}/${@gnome_verdir("${PV}")}/${PNAME}-${PV}.tar.bz2;name=archive \
