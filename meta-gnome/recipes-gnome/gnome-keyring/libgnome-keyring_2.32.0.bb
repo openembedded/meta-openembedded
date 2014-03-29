@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0914b9d3ebaba41ef2e3e0ae16f296cf \
 SECTION = "x11/gnome/libs"
 PR = "r3"
 
-inherit gnome gtk-doc
+inherit gnomebase gtk-doc
 
 DEPENDS = "dbus libgcrypt glib-2.0 intltool-native"
 
