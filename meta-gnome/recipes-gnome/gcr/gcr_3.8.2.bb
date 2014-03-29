@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
 
 DEPENDS = "gtk+3 p11-kit glib-2.0"
 
-inherit autotools gnome gtk-doc
+inherit autotools gnomebase gtk-icon-cache gtk-doc
 
 GNOME_COMPRESS_TYPE="xz"
 
