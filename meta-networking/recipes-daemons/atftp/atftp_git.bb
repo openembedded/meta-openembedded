@@ -49,7 +49,7 @@ PACKAGES =+ "${PN}d"
 FILES_${PN} = "${bindir}/*"
 
 FILES_${PN}d = "${sbindir}/* \
-    ${sysconfdir}/init.d/* \
+    ${sysconfdir} \
     /srv/tftp \
     ${systemd_unitdir}/system/atftpd.service \
 "
