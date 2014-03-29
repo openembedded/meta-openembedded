@@ -23,7 +23,7 @@ do_install () {
     install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
 }
 
-FILES_${PN} = "${sysconfdir}/init.d"
+FILES_${PN} = "${sysconfdir}"
 INITSCRIPT_NAME = "zram"
 INITSCRIPT_PARAMS = "start 05 2 3 4 5 . stop 22 0 1 6 ."
 
