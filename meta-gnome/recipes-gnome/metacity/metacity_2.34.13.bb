@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
 DEPENDS = "gsettings-desktop-schemas startup-notification gtk+ gconf gdk-pixbuf-native libcanberra gnome-doc-utils libgtop"
 PR = "r1"
 
-inherit gnome update-alternatives
+inherit gnomebase update-alternatives
 
 GNOME_COMPRESS_TYPE = "xz"
 
