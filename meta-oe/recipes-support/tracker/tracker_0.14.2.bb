@@ -7,7 +7,7 @@ HOMEPAGE = "http://projects.gnome.org/tracker/"
 
 PR = "r7"
 
-inherit autotools pkgconfig gnome gettext gsettings systemd
+inherit autotools pkgconfig gnomebase gettext gsettings systemd
 
 VER_DIR = "${@gnome_verdir("${PV}")}"
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
@@ -60,6 +60,8 @@ FILES_${PN} += "${datadir}/dbus-1/ \
 
 FILES_${PN}-dev += "${libdir}/tracker-${VER_DIR}/*.la \
                     ${libdir}/tracker-${VER_DIR}/*.so \
+                    ${libdir}/tracker-${VER_DIR}/*/*.so \
+                    ${libdir}/tracker-${VER_DIR}/*/*.la \
                     ${libdir}/tracker-${VER_DIR}/extract-modules/*.la"
 
 FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
