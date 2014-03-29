@@ -9,7 +9,7 @@ PR = "r1"
 SECTION = "x11/gnome"
 DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi"
 
-inherit gnome
+inherit gnomebase gtk-icon-cache
 
 SRC_URI += "file://0001-bluetooth-input-Fix-compile-errors.patch \
            "
