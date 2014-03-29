@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "gnome-icon-theme"
 
 EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
 
-inherit gnome perlnative
+inherit gnomebase perlnative
 
 do_configure_prepend() {
     sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libdir}/icon-naming-utils:g' configure.in
