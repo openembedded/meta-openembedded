@@ -3,7 +3,9 @@ HOMEPAGE = "http://sourceforge.net/projects/libdc1394/"
 SECTION = "libs"
 LICENSE = "LGPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c848e78d9a4a5cc69906178e4d6fbd64"
-DEPENDS += "libusb1 libraw1394"
+
+# libsdl to provide sdl.m4 with AM_PATH_SDL
+DEPENDS += "libusb1 libraw1394 libsdl"
 
 PV = "2.2.1+gitr${SRCPV}"
 
