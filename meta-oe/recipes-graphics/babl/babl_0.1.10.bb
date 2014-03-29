@@ -2,7 +2,7 @@ SUMMARY = "Babl is a dynamic, any to any, pixel format conversion library"
 LICENSE = "LGPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 
-inherit gnome
+inherit gnomebase
 
 SRC_URI = "ftp://ftp.gimp.org/pub/${PN}/0.1/${PN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "9e1542ab5c0b12ea3af076a9a2f02d79"
