@@ -6,7 +6,7 @@ PR = "r2"
 
 DEPENDS = "gtk+ glib-2.0 libnotify gnome-doc-utils"
 
-inherit gnome
+inherit gnomebase
 SRC_URI += "file://0001-Makefile.am-don-t-build-help.patch"
 SRC_URI[archive.md5sum] = "aa66ec35451b16e424519b4973082170"
 SRC_URI[archive.sha256sum] = "8838be041a07364b62a4281c971392e4a09bb01bb3237a836ec0457ec0ea18ac"
