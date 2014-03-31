@@ -6,7 +6,7 @@ DEPENDS="glib-2.0 gtk+ pango cups intltool libgnomeui"
 
 PR = "r2"
 
-inherit gnome pkgconfig
+inherit gnomebase pkgconfig
 
 do_compile_append () {
     cp libgnomecups-1.0.pc libgnomecups-1.0.pc.old
