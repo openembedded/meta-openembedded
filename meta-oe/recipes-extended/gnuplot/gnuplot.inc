@@ -12,6 +12,7 @@ acpaths = ""
 
 PACKAGECONFIG ??= "cairo"
 PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo pango"
+PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
 
 EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR}/.. \
                 --without-lisp-files \
