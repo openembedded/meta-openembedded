@@ -23,7 +23,7 @@ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${P
 SYSTEMD_SERVICE_${PN} = " tracker-store.service tracker-miner-fs.service tracker-dbus.service "
 SYSTEMD_AUTO_ENABLE = "disable"
 
-EXTRA_OECONF += " tracker_cv_have_ioprio=yes --disable-introspection"
+EXTRA_OECONF += " tracker_cv_have_ioprio=yes"
 
 # Disable the desktop-centric miners
 EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
