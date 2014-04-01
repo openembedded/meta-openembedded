@@ -3,7 +3,7 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
 
-inherit xfce-panel-plugin gtk-icon-cache perlnative
+inherit xfce-panel-plugin xfce-git gtk-icon-cache perlnative
 
 DEPENDS += "exo-native libwnck xfconf"
 
@@ -14,9 +14,5 @@ SRCREV = "bd76154afe26ba8a5251a1887d88f9d855301850"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--enable-maintainer-mode"
-
-do_configure_prepend() {
-    NOCONFIGURE=yes ./autogen.sh
-}
 
 FILES_${PN} += "${datadir}/xfce4/closebutton/themes"
