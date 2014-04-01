@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
 DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbus-glib startup-notification exo-native"
 
-inherit xfce update-alternatives
+inherit xfce xfce-git update-alternatives
 
 SRC_URI = " \
     git://git.xfce.org/xfce/xfwm4;protocol=git \
@@ -16,10 +16,6 @@ S = "${WORKDIR}/git"
 PV = "4.10.1+git${SRCPV}"
 
 EXTRA_OECONF += "--enable-maintainer-mode"
-
-do_configure_prepend() {
-       NOCONFIGURE=yes ./autogen.sh
-}
 
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
