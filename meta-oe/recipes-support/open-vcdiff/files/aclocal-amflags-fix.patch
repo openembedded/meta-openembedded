@@ -1,0 +1,33 @@
+Fix this error:
+
+| aclocal: error: non-option arguments are not accepted: '\'.
+
+Starting from commit v1.11-662-g52246cc, when given non-option arguments, aclocal rejects them, instead of silently ignoring them.
+
+Declare ACLOCAL_AMFLAGS as a single line because autoreconf can't handle multiline.
+
+Notice that ACLOCAL_AMFLAGS is deprecated.
+In configure.ac, AC_CONFIG_MACRO_DIRS should be used (instead of AC_CONFIG_MACRO_DIR) but requires automake 1.13+.
+
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ Makefile.am | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 5c765c7..f4295a6 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,8 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+ # Make sure that when we re-make ./configure, we get the macros we need
+-ACLOCAL_AMFLAGS = -I m4 \
+-                  -I gflags/m4
++ACLOCAL_AMFLAGS = -I m4 -I gflags/m4
+ 
+ # This is so we can #include <google/vcencoder.h> or <gtest/gtest.h>
+ AM_CPPFLAGS = -I$(top_srcdir)/src \
+-- 
+1.8.5.4
+
