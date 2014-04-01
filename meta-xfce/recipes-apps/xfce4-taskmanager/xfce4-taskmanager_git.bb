@@ -2,7 +2,7 @@ SUMMARY = "Easy to use task manager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-inherit xfce-app
+inherit xfce-git xfce-app
 
 DEPENDS = "gtk+ cairo libwnck xfce4-dev-tools-native exo-native"
 
@@ -16,7 +16,3 @@ S = "${WORKDIR}/git"
 PV = "1.0.0+git${SRCPV}"
 
 EXTRA_OECONF += "--enable-maintainer-mode"
-
-do_configure_prepend() {
-       NOCONFIGURE=yes ./autogen.sh
-}
