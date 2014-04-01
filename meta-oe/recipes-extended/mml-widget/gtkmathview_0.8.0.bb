@@ -13,7 +13,7 @@ SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${P}.tar.gz \
 SRC_URI[md5sum] = "b53564e553728d4b69f7d366dfeb5299"
 SRC_URI[sha256sum] = "1dc30175da6a3c560a7d62d1abe1c2f9829d988e6f1a7c5e766544575c558c43"
 
-inherit autotools 
+inherit autotools-brokensep
 
 EXTRA_OECONF = "--disable-binreloc"
 
