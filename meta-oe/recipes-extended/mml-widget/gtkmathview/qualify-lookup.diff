@@ -1,0 +1,13 @@
+Index: gtkmathview-0.8.0/src/frontend/common/TemplateElementIterator.hh
+===================================================================
+--- gtkmathview-0.8.0.orig/src/frontend/common/TemplateElementIterator.hh
++++ gtkmathview-0.8.0/src/frontend/common/TemplateElementIterator.hh
+@@ -43,7 +43,7 @@ protected:
+   findValidNodeForward(const typename Model::Node& p0) const
+   {
+     for (typename Model::Node p = p0; p; p = Model::getNextSibling(p))
+-      if (valid(p)) return Model::asElement(p);
++      if (this->valid(p)) return Model::asElement(p);
+     return typename Model::Element();
+   }
+     
