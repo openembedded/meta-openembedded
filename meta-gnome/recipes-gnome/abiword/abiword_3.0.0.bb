@@ -4,36 +4,29 @@ SECTION = "x11/office"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
 DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
-               librsvg libwmf-native gtkmathview asio"
+               librsvg libwmf-native gtkmathview asio gtk+"
 RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 RCONFLICTS_${PN} = "${PN}-embedded"
 
 SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
+           file://debian_patches_boost54.patch \
            file://autogen-common.sh \
-           file://nodolt.patch \
-           file://fix.no.undefined.param.patch \
-           file://abiword.fix.glib-2.32.patch \
-           file://libpng15.patch \
 "
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
 
-SRC_URI[md5sum] = "f883b0a7f26229a9c66fd6a1a94381aa"
-SRC_URI[sha256sum] = "d99089a63a6cfc1a6a4a026be9278028d47d224088d24b1853acb67e95683a15"
+SRC_URI[md5sum] = "8d9c41cff3a8fbef8d0c835c65600e65"
+SRC_URI[sha256sum] = "d17e318c00ff4eb353e0e7994b098b1d4f9ddd8712ac0261a0e38b89081fac01"
 
-#want 2.x from 2.x.y for the installation directory
+#want 3.x from 3.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
-
-PR = "r8"
 
 inherit autotools pkgconfig
 
-PARALLEL_MAKE = ""
-
 PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp collab-backend-service"
 PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
-PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth gtk+"
+PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth"
 PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
 PACKAGECONFIG[collab-backend-service] = "--enable-collab-backend-service,--disable-collab-backend-service,libgsf libxml2 libsoup-2.4 gnutls"
 PACKAGECONFIG[collab-backend-telepathy] = "--enable-collab-backend-telepathy,--disable-collab-backend-telepathy,libgsf libxml2 telepathy-glib telepathy-mission-control"
@@ -41,7 +34,10 @@ PACKAGECONFIG[collab-backend-sugar] = "--enable-collab-backend-sugar,--disable-c
 
 EXTRA_OECONF = " --disable-static  \
                  --enable-plugins \
+                 --enable-clipart \
+                 --enable-templates \
                  --without-gnomevfs \
+                 --with-gtk2 \
                  --with-libwmf-config=${STAGING_DIR} \
 "
 
@@ -54,13 +50,7 @@ do_configure() {
     autotools_do_configure
 }
 
-do_install_append() {
-    install -d ${D}${datadir}/pixmaps/
-    mv ${D}${datadir}/icons/* ${D}${datadir}/pixmaps/
-    rmdir ${D}${datadir}/icons
-}
-
-PACKAGES += " ${PN}-clipart ${PN}-icons ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
+PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
 
 FILES_${PN} += " \
                 ${libdir}/lib${PN}-*.so \
@@ -86,7 +76,7 @@ FILES_${PN} += " \
                 ${datadir}/${PN}-${SHRT_VER}/Pr*.xml \
 "
 
-# don't steal /usr/lib/libabiword-2.8.so from ${PN}
+# don't steal /usr/lib/libabiword-3.0.so from ${PN}
 # in this case it's needed in ${PN}
 FILES_${PN}-dev = " \
                   ${includedir} \
@@ -101,7 +91,6 @@ FILES_${PN}-doc += "${datadir}/${PN}-*/readme*"
 FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/strings"
 FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/system.profile*"
 FILES_${PN}-clipart        += "${datadir}/${PN}-${SHRT_VER}/clipart"
-FILES_${PN}-icons          += "${datadir}/${PN}-${SHRT_VER}/icons"
 FILES_${PN}-strings        += "${datadir}/${PN}-${SHRT_VER}/AbiWord/strings"
 FILES_${PN}-systemprofiles += "${datadir}/${PN}-${SHRT_VER}/AbiWord/system.profile*"
 FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
@@ -109,7 +98,7 @@ FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
 PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
 
 python populate_packages_prepend () {
-    abiword_libdir    = d.expand('${libdir}/abiword-2.8/plugins')
+    abiword_libdir    = d.expand('${libdir}/${PN}-${SHRT_VER}/plugins')
     do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
 
     metapkg = "abiword-meta"
@@ -127,3 +116,5 @@ python populate_packages_prepend () {
     packages.append(metapkg)
     d.setVar('PACKAGES', ' '.join(packages))
 }
+
+FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
