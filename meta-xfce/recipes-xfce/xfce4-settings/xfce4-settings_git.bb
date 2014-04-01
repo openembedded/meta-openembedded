@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "exo exo-native garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtual/libx11 xrandr libnotify libxcursor libxklavier"
 
-inherit xfce
+inherit xfce xfce-git
 
 SRC_URI = " git://gitorious.org/xfce/xfce4-settings.git;protocol=git;branch=for-oe \
             file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
@@ -30,10 +30,6 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[datetime-setter] = "--enable-datetime-settings, --disable-datetime-settings,, tzdata"
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
 PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
-
-do_configure_prepend() {
-    NOCONFIGURE=yes ./autogen.sh
-}
 
 FILES_${PN} += " \
     ${libdir}/xfce4 \
