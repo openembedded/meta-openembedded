@@ -15,10 +15,10 @@ S = "${WORKDIR}/gd-2.0.36RC1"
 
 inherit autotools binconfig gettext
 
-EXTRA_OECONF += " --with-zlib=${STAGING_LIBDIR}/.. \
+EXTRA_OECONF += " --disable-rpath \
                   --with-png=${STAGING_LIBDIR}/.. \
                   --with-jpeg=${STAGING_LIBDIR}/.. \
-                  --with-freetype \
+                  --with-freetype=${STAGING_LIBDIR}/.. \
                   --without-fontconfig \
                   --without-xpm \
                   --without-x"
