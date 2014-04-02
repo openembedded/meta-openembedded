@@ -2,7 +2,7 @@ DESCRIPTION = "Gnuplot is a portable command-line driven interactive datafile \
 (text or binary) and function plotting utility."
 HOMEPAGE = "http://www.gnuplot.info/"
 SECTION = "console/scientific"
-LICENSE = "BSD-4"
+LICENSE = "gnuplot"
 LIC_FILES_CHKSUM = "file://Copyright;md5=243a186fc2fd3b992125d60d5b1bab8f"
 DEPENDS = "virtual/libx11 gd readline"
 
