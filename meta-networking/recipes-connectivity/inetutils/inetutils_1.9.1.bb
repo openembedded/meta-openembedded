@@ -80,6 +80,12 @@ ${PN}-tftp ${PN}-logger ${PN}-traceroute ${PN}-syslogd \
 ${PN}-ftp ${PN}-ftpd ${PN}-tftpd ${PN}-telnet ${PN}-telnetd ${PN}-inetd \
 ${PN}-rsh ${PN}-rshd"
 
+# The packages tftpd, telnetd and rshd conflict with the ones
+# provided by netkit, so add the corresponding -dbg packages
+# for them to avoid the confliction between the dbg package
+# of inetutils and netkit.
+PACKAGES += "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
+
 ALTERNATIVE_PRIORITY = "80"
 ALTERNATIVE_${PN} = "talk whois"
 ALTERNATIVE_LINK_NAME[talkd]  = "${sbindir}/in.talkd"
@@ -141,18 +147,22 @@ FILES_${PN}-rsh = "${bindir}/rsh.${BPN} ${bindir}/rlogin.${BPN} ${bindir}/rexec.
 
 FILES_${PN}-rshd = "${sbindir}/in.rshd ${sbindir}/in.rlogind ${sbindir}/in.rexecd \
                     ${sysconfdir}/xinetd.d/rsh ${sysconfdir}/xinetd.d/rlogin ${sysconfdir}/xinetd.d/rexec"
+FILES_${PN}-rshd-dbg = "${sbindir}/.debug/in.rshd ${sbindir}/.debug/in.rlogind ${sbindir}/.debug/in.rexecd"
 RDEPENDS_${PN}-rshd += "xinetd tcp-wrappers"
 RCONFLICTS_${PN}-rshd += "netkit-rshd"
 RPROVIDES_${PN}-rshd = "rshd"
 
 FILES_${PN}-ftpd = "${bindir}/ftpd.${BPN}"
+FILES_${PN}-ftpd-dbg = "${bindir}/.debug/ftpd.${BPN}"
 RDEPENDS_${PN}-ftpd += "xinetd"
 
 FILES_${PN}-tftpd = "${sbindir}/in.tftpd ${sysconfdir}/xinetd.d/tftpd"
+FILES_${PN}-tftpd-dbg = "${sbindir}/.debug/in.tftpd"
 RCONFLICTS_${PN}-tftpd += "netkit-tftpd"
 RDEPENDS_${PN}-tftpd += "xinetd"
 
 FILES_${PN}-telnetd = "${sbindir}/in.telnetd ${sysconfdir}/xinetd.d/telnet"
+FILES_${PN}-telnetd-dbg = "${sbindir}/.debug/in.telnetd"
 RCONFLICTS_${PN}-telnetd += "netkit-telnetd"
 RPROVIDES_${PN}-telnetd = "telnetd"
 RDEPENDS_${PN}-telnetd += "xinetd"
