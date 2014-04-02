@@ -1,14 +1,16 @@
-DESCRIPTION = "UNIX Shell similar to the Korn shell"
-HOMEPAGE="http://www.zsh.org"
+SUMMARY = "UNIX Shell similar to the Korn shell"
+DESCRIPTION = "Zsh is a shell designed for interactive use, although it is also a \
+               powerful scripting language. Many of the useful features of bash, \
+               ksh, and tcsh were incorporated into zsh; many original features were added."
+HOMEPAGE = "http://www.zsh.org"
 SECTION = "base/shell"
 
-
-LICENSE = "ZSH"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=ad234d4b46db63491c4a9789da4fb341"
+LICENSE = "zsh"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
 
 DEPENDS = "ncurses bison-native"
 
-SRC_URI = "http://downloads.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
 
 inherit autotools gettext update-alternatives
 
