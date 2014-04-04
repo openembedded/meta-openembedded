@@ -40,7 +40,7 @@ CFLAGS += "-Wno-extra -Wno-error=unused-but-set-parameter -Wno-error=unused-but-
 CFLAGS += "-Wno-error=int-to-pointer-cast -Wno-error"
 
 do_install () {
-    oe_runmake 'ROOT=${D}' install
+    oe_runmake 'DESTDIR=${D}' install
     install -m 0644 src/headers/gpm.h ${D}${includedir}
     install -d ${D}/${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/gpm
