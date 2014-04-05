@@ -7,7 +7,6 @@ DEPENDS = "dbus-glib libxfce4util perl"
 inherit xfce
 
 EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
-EXTRA_OECONF += "--with-sysroot=yes"
 
 SRC_URI += "file://0001-Simplify-checks.patch"
 SRC_URI[md5sum] = "4ed48150a03fb5f42b455494307b7f28"
