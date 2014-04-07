@@ -1,6 +1,6 @@
 SECTION = "console/network"
 LICENSE = "GPL-3.0"
-DEPENDS = "readline virtual/libiconv talloc zlib popt"
+DEPENDS = "readline virtual/libiconv zlib popt"
 
 SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
            file://volatiles.03_samba \
@@ -35,7 +35,6 @@ EXTRA_OECONF='--disable-cups \
               --with-aio-support \
               --with-winbind \
               --with-wbclient \
-              --without-libtalloc \
               --without-acl-support \
               --disable-avahi \
               samba_cv_struct_timespec=yes \
@@ -44,6 +43,7 @@ EXTRA_OECONF='--disable-cups \
 PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
 PACKAGECONFIG[fam] = "--enable-fam,--disable-fam,gamin"
+PACKAGECONFIG[talloc] = "--with-libtalloc,--without-libtalloc,talloc"
 
 INITSCRIPT_PACKAGES = "samba winbind"
 INITSCRIPT_NAME_samba = "samba"
