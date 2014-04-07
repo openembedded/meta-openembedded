@@ -15,6 +15,7 @@ SRC_URI += " \
 
 ALTERNATIVE_${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
+ALTERNATIVE_PRIORITY_${PN} = "100"
 
 # protect from frightening message that xfce might not work correctly
 pkg_postinst_${PN} () {
