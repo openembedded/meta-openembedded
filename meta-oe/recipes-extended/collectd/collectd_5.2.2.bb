@@ -28,7 +28,8 @@ PACKAGECONFIG[postgresql] = "--enable-postgresql --with-libpq=yes, \
 PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
 PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
 PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
-PACKAGECONFIG[sensors] = "--enable-sensors,--disable-sensors,lmsensors"
+PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
+        --disable-sensors --with-libsensors=no,lmsensors"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
