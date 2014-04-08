@@ -19,4 +19,4 @@ S = "${WORKDIR}/git/${PN}"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF += "--disable-doxygen-doc"
+EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
