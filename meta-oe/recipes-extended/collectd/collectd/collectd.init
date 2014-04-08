@@ -146,6 +146,17 @@ d_stop() {
 	return "$rc"
 }
 
+# return:
+#   0 if the daemon is running
+#   3 if the daemon is stopped
+d_status(){
+	if test "$USE_COLLECTDMON" == 1; then
+		status $COLLECTDMON_DAEMON
+	else
+		status $DAEMON
+	fi
+}
+
 case "$1" in
 	start)
 		echo -n "Starting $NAME"
@@ -164,7 +175,7 @@ case "$1" in
 		esac
 		;;
 	status)
-		status_of_proc -p "$_PIDFILE" "$DAEMON" "$NAME" && exit 0 || exit $?
+		d_status
 		;;
 	restart|force-reload)
 		echo -n "Restarting $NAME"
