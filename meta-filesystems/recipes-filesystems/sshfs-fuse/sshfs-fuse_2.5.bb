@@ -13,6 +13,5 @@ inherit autotools
 
 FILES_${PN} += "${libdir}/sshnodelay.so"
 
-SRC_URI[md5sum] = "3c7c3647c52ce84d09486f1da3a3ce24"
-SRC_URI[sha256sum] = "3c93ba8522568093c94ff9c5a3763929380dd229365d905769ff82475d774dd1"
-
+SRC_URI[md5sum] = "17494910db8383a366b1301e5f5148a9"
+SRC_URI[sha256sum] = "e9171452e5d0150b9c6a2158fd2e2dcefb5d5d03ba4d208949e00a3a46c6e63e"
