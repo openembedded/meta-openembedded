@@ -23,25 +23,10 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
            file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
 "
 
-SRC_URI[md5sum] = "81b116edf986d8e13502929a171f4e0d"
-SRC_URI[sha256sum] = "02ae544547211b687818c97bcbf19bf6b8b5be7fda93000525a8765c7bed1ea1"
+SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"
+SRC_URI[sha256sum] = "d695f43cba4748a822fbe864dd32c4887c5da1c71694a47693ace5e88fcf6af6"
 
 EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages --disable-introspection"
-
-do_install_append() {
-    # see configure.log for more details
-    chown root:root ${D}${libdir}/${BPN}-1/polkit-agent-helper-1
-    chmod 4755 ${D}${libdir}/${BPN}-1/polkit-agent-helper-1
-
-    chown root:root ${D}${bindir}/pkexec
-    chmod 4755 ${D}${bindir}/pkexec
-
-    chown polkitd:polkitd ${D}${sysconfdir}/${BPN}-1/rules.d
-    chmod 700 ${D}${sysconfdir}/${BPN}-1/rules.d
-
-    chown polkitd:polkitd ${D}${datadir}/${BPN}-1/rules.d
-    chmod 700 ${D}${datadir}/${BPN}-1/rules.d
-}
 
 PACKAGES =+ "${PN}-examples"
 
