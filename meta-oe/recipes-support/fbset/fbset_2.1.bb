@@ -14,11 +14,11 @@ DEPENDS = "bison-native"
 PR = "r4"
 
 SRC_URI = "http://ftp.debian.org/debian/pool/main/f/fbset/fbset_2.1.orig.tar.gz \
-           file://makefile.patch"
+           file://makefile.patch \
+           file://fbset-2.1-fix-makefile-dep.patch \
+"
 
 inherit autotools update-alternatives
-
-PARALLEL_MAKE = ""
 
 do_install() {
     install -d ${D}${sbindir} ${D}${datadir}/man/man8 ${D}${datadir}/man/man5
