@@ -16,6 +16,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
            file://initd.smartd \
           "
 
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
+                   ${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+                  "
+PACKAGECONFIG[libcap-ng] = "--with-libcap-ng=yes,--with-libcap-ng=no,libcap-ng"
+PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
+
 SRC_URI[md5sum] = "d44f84081a12cef79cd17f78044351fc"
 SRC_URI[sha256sum] = "486f660579bb0fb4f6b927ded7531cb1f99685c666397377761c5b04dd96065b"
 
@@ -29,3 +35,5 @@ do_install_append () {
 
 INITSCRIPT_NAME = "smartd"
 INITSCRIPT_PARAMS = "start 60 . stop 60 0 1 2 3 4 5 6 ."
+
+RDEPENDS_${PN} += "mailx"
