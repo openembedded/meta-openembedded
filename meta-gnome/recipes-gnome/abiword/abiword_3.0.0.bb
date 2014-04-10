@@ -50,6 +50,14 @@ do_configure() {
     autotools_do_configure
 }
 
+do_compile() {
+    cd ${S}/goffice-bits2
+    make goffice-paths.h
+    make libgoffice.la
+    cd ${S}
+    oe_runmake
+}
+
 PACKAGES += " ${PN}-clipart ${PN}-strings ${PN}-systemprofiles ${PN}-templates "
 
 FILES_${PN} += " \
