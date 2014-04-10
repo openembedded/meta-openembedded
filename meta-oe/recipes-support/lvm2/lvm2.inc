@@ -30,6 +30,10 @@ EXTRA_OECONF = "--with-user= \
                 --with-udev-prefix= \
 "
 
+PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+
+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
+
 inherit autotools
 
 do_install_append() {
