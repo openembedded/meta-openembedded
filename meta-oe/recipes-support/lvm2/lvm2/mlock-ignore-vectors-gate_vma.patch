@@ -1,0 +1,31 @@
+Subject: [PATCH] fix: mlock ignore [vectors] gate_vma
+
+Upstream-Status: Pending
+
+linux kernel has a new commit f9d4861f for [vectors] vma on ARM
+"ARM: 7294/1: vectors: use gate_vma for vectors user mapping".
+
+mlock()/munlock() on a gate_vma would cause NOMEM error, so add
+[vectors] to _ignore_maps[], as other gate_vmas [vdso]/[vsyscall]
+did.
+
+Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
+---
+ lib/mm/memlock.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/mm/memlock.c b/lib/mm/memlock.c
+index 8c631bf..a6b1955 100644
+--- a/lib/mm/memlock.c
++++ b/lib/mm/memlock.c
+@@ -84,6 +84,7 @@ static int _default_priority;
+ static const char * const _ignore_maps[] = {
+     "[vdso]",
+     "[vsyscall]",
++    "[vectors]",
+ };
+ 
+ /* default blacklist for maps */
+-- 
+1.7.9.5
+
