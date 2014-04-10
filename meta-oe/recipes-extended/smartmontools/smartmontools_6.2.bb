@@ -12,10 +12,20 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
+           file://initd.smartd \
+          "
 
 SRC_URI[md5sum] = "d44f84081a12cef79cd17f78044351fc"
 SRC_URI[sha256sum] = "486f660579bb0fb4f6b927ded7531cb1f99685c666397377761c5b04dd96065b"
 
-inherit autotools
+inherit autotools update-rc.d
 
+do_install_append () {
+	#install the init.d/smartd
+	install -d ${D}${sysconfdir}/init.d
+	install -p -m 0755 ${WORKDIR}/initd.smartd ${D}${sysconfdir}/init.d/smartd
+}
+
+INITSCRIPT_NAME = "smartd"
+INITSCRIPT_PARAMS = "start 60 . stop 60 0 1 2 3 4 5 6 ."
