@@ -9,7 +9,8 @@ need to link against libfl and so no longer get errors about undefined
 references to yylex.
 
 Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
-Upstream-status: Pending
+Upstream-status: Submitted 2014-03-11
+    see http://sourceforge.net/p/ipsec-tools/mailman/ipsec-tools-devel/thread/CANyK_8ewmxGA3vBVJW6s1APXPmxPR%2BDFWZ61EL8pCt288aKQ6w%40mail.gmail.com/#msg32088797
 ---
  src/libipsec/Makefile.am | 1 -
  src/racoon/Makefile.am   | 2 +-
