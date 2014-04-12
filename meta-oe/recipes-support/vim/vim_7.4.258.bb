@@ -6,9 +6,8 @@ RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
 LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
 
-SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
-	   file://configure.in_remove_CC_quotes.patch;patchdir=.."
-SRCREV = "v7-4-155"
+SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim"
+SRCREV = "v7-4-258"
 
 S = "${WORKDIR}/${PN}/src"
 
