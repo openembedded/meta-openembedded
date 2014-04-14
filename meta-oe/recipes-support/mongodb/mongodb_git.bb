@@ -9,13 +9,14 @@ DEPENDS_append_x86-64 = " gperftools"
 
 inherit scons
 
-PV = "2.5.5+git${SRCPV}"
-SRCREV = "588dc81b0822ebb46f80e152b94527a882e6ea5e"
-SRC_URI = "git://github.com/mongodb/mongo.git \
+PV = "2.6.0+git${SRCPV}"
+SRCREV = "be1905c24c7e5ea258e537fbf0d2c502c4fc6de2"
+SRC_URI = "git://github.com/mongodb/mongo.git;branch=v2.6 \
            file://0001-Make-it-possible-to-disable-the-use-of-v8.patch \
            file://0002-Fix-linking-when-scripting-is-disabled.patch \
            file://0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch \
-           file://0001-replace-os.uname-with-os.getenv-TARGET_ARCH.patch \
+           file://0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch \
+           file://0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch \
           "
 
 S = "${WORKDIR}/git"

@@ -1,7 +1,7 @@
-From ef482650fb6d990e4953104d7141d9a0fa4c872f Mon Sep 17 00:00:00 2001
+From d02f33d860f2d11f71e9056782a2e75603d6ec25 Mon Sep 17 00:00:00 2001
 From: Koen Kooi <koen.kooi@linaro.org>
 Date: Tue, 4 Feb 2014 10:56:35 +0100
-Subject: [PATCH] replace os.uname with os.getenv(OE_TARGET_ARCH)
+Subject: [PATCH 4/5] replace os.uname with os.getenv(OE_TARGET_ARCH)
 
 This fixes crosscompilation
 
@@ -12,10 +12,10 @@ Upstream-Status: Inappropiate [OE specific]
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/SConstruct b/SConstruct
-index 4f26be7..a353323 100644
+index c84a669..05e2ea0 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -265,9 +265,9 @@ add_option( "pch" , "use precompiled headers to speed up the build (experimental
+@@ -257,9 +257,9 @@ add_option( "pch" , "use precompiled headers to speed up the build (experimental
  add_option( "distcc" , "use distcc for distributing builds" , 0 , False )
  
  # debugging/profiling help
@@ -27,7 +27,7 @@ index 4f26be7..a353323 100644
      defaultAllocator = 'tcmalloc'
  else:
      defaultAllocator = 'system'
-@@ -673,7 +673,7 @@ if has_option( "full" ):
+@@ -633,7 +633,7 @@ if has_option( "extralib" ):
  # ---- other build setup -----
  
  if "uname" in dir(os):
@@ -36,7 +36,7 @@ index 4f26be7..a353323 100644
  else:
      processor = "i386"
  
-@@ -702,7 +702,7 @@ elif linux:
+@@ -662,7 +662,7 @@ elif linux:
  
      env.Append( LIBS=['m'] )
  
@@ -46,5 +46,5 @@ index 4f26be7..a353323 100644
          nixLibPrefix = "lib64"
          env.Append( EXTRALIBPATH=["/usr/lib64" , "/lib64" ] )
 -- 
-1.8.4.2
+1.9.0
 

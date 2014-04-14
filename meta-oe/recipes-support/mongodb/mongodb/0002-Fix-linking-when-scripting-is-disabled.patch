@@ -1,7 +1,7 @@
-From 52d68642205626cad3bac3a53e269c765ccff676 Mon Sep 17 00:00:00 2001
+From 5b22f64a2e2237082d2733698b07147d27b09ad2 Mon Sep 17 00:00:00 2001
 From: Michael Hudson-Doyle <michael.hudson@linaro.org>
 Date: Fri, 20 Dec 2013 12:28:27 +1300
-Subject: [PATCH 2/3] Fix linking when scripting is disabled.
+Subject: [PATCH 2/5] Fix linking when scripting is disabled.
 
 ---
  src/mongo/scripting/engine_none.cpp | 4 ++++
@@ -21,5 +21,5 @@ index f5c7109..9ae9d57 100644
 +    }
  }
 -- 
-1.8.4.2
+1.9.0
 

@@ -1,0 +1,127 @@
+From e31f85e6915d4bf6ed76c5da71c235525fa4ecc3 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen.kooi@linaro.org>
+Date: Mon, 14 Apr 2014 10:29:42 +0200
+Subject: [PATCH 5/5] GCC 4.7+ supports atomic ops for armv5 and up, but only
+ exports the functions for armv6 and up. This patch works around the linker
+ problems associated with that.
+
+Forward ported from http://pkgs.fedoraproject.org/cgit/mongodb.git/tree/mongodb-2.4.5-atomics.patch
+
+Upstream-status: pending
+---
+ src/mongo/bson/util/atomic_int.h                   | 26 ++++++++++++
+ src/mongo/platform/atomic_intrinsics_gcc_generic.h | 47 ++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
+
+diff --git a/src/mongo/bson/util/atomic_int.h b/src/mongo/bson/util/atomic_int.h
+index 0b85363..ed02c23 100644
+--- a/src/mongo/bson/util/atomic_int.h
++++ b/src/mongo/bson/util/atomic_int.h
+@@ -24,6 +24,10 @@
+ 
+ #include "mongo/platform/compiler.h"
+ 
++#define GCC_VERSION (__GNUC__ * 10000                 \
++                     + __GNUC_MINOR__ * 100           \
++                     + __GNUC_PATCHLEVEL__)
++
+ namespace mongo {
+ 
+     /**
+@@ -72,6 +76,28 @@ namespace mongo {
+         InterlockedAdd((volatile long *)&x,by);
+     }
+ # endif
++#elif defined(GCC_VERSION) && GCC_VERSION >= 40700
++// in GCC version >= 4.7.0 we can use the built-in atomic operations
++
++    inline void AtomicUInt::set(unsigned newX) {
++        __atomic_store_n (&x, newX, __ATOMIC_SEQ_CST);
++    }
++    AtomicUInt AtomicUInt::operator++() {    // ++prefix
++        return __atomic_add_fetch(&x, 1, __ATOMIC_SEQ_CST);
++    }
++    AtomicUInt AtomicUInt::operator++(int) { // postfix++
++        return __atomic_fetch_add(&x, 1, __ATOMIC_SEQ_CST);
++    }
++    AtomicUInt AtomicUInt::operator--() {    // --prefix
++        return __atomic_add_fetch(&x, -1, __ATOMIC_SEQ_CST);
++    }
++    AtomicUInt AtomicUInt::operator--(int) { // postfix--
++        return __atomic_fetch_add(&x, -1, __ATOMIC_SEQ_CST);
++    }
++    void AtomicUInt::signedAdd(int by) {
++        __atomic_fetch_add(&x, by, __ATOMIC_SEQ_CST);
++    }
++
+ #elif defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
+     // this is in GCC >= 4.1
+     inline void AtomicUInt::set(unsigned newX) { __sync_synchronize(); x = newX; }
+diff --git a/src/mongo/platform/atomic_intrinsics_gcc_generic.h b/src/mongo/platform/atomic_intrinsics_gcc_generic.h
+index 64a2499..b7cc176 100644
+--- a/src/mongo/platform/atomic_intrinsics_gcc_generic.h
++++ b/src/mongo/platform/atomic_intrinsics_gcc_generic.h
+@@ -22,8 +22,53 @@
+ 
+ #include <boost/utility.hpp>
+ 
++#define GCC_VERSION (__GNUC__ * 10000                 \
++                     + __GNUC_MINOR__ * 100           \
++                     + __GNUC_PATCHLEVEL__)
++
+ namespace mongo {
+ 
++// If GCC version >= 4.7.0, we can use the built-in atomic operations
++#if defined(GCC_VERSION) && GCC_VERSION >= 40700
++
++    /**
++     * Instantiation of AtomicIntrinsics<>.
++     */
++    template <typename T>
++    class AtomicIntrinsics {
++    public:
++
++        static T compareAndSwap(volatile T* dest, T expected, T newValue) {
++            return __atomic_compare_exchange_n (dest, &expected, newValue, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
++        }
++
++        static T swap(volatile T* dest, T newValue) {
++            return __atomic_exchange_n (dest, newValue, __ATOMIC_SEQ_CST);
++        }
++
++        static T load(volatile const T* value) {
++            return __atomic_load_n (value, __ATOMIC_SEQ_CST);
++        }
++
++        static T loadRelaxed(volatile const T* value) {
++            return *value;
++        }
++
++        static void store(volatile T* dest, T newValue) {
++            __atomic_store_n (dest, newValue, __ATOMIC_SEQ_CST);
++        }
++
++        static T fetchAndAdd(volatile T* dest, T increment) {
++            return __atomic_fetch_add (dest, increment, __ATOMIC_SEQ_CST);
++        }
++
++    private:
++        AtomicIntrinsics();
++        ~AtomicIntrinsics();
++    };
++
++#else // GCC version < 4.7, so we must use legacy (platform-specific) atomic operations
++
+     /**
+      * Instantiation of AtomicIntrinsics<> for all word types T.
+      */
+@@ -67,4 +112,6 @@ namespace mongo {
+         ~AtomicIntrinsics();
+     };
+ 
++#endif // GCC_VERSION >= 40700
++
+ }  // namespace mongo
+-- 
+1.9.0
+
