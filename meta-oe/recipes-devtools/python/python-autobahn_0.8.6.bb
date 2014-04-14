@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=1fde
 
 SRC_URI = "https://pypi.python.org/packages/source/a/autobahn/autobahn-${PV}.zip"
 SRC_URI[md5sum] = "160429e7fb043940e79aa7f4ebbab57a"
+SRC_URI[sha256sum] = "94ae5c6f37f9fe7c9d3f12c170fcc273afed4104a1c5508b26d6014bb9e6373e"
 
 S = "${WORKDIR}/autobahn-${PV}"
 
