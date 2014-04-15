@@ -12,7 +12,9 @@ LICENSE = "GD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
 DEPENDS = "freetype libpng jpeg zlib"
 
-SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2"
+SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
+           file://fix-the-subdir-objects-error.patch \
+"
 SRC_URI[md5sum] = "5a1d5bab3a4a41d9f111bcceee4ad25b"
 SRC_URI[sha256sum] = "f3e1bc472bd81ee976a739436659fe752a14727a964c64530fde68531ddeee91"
 
