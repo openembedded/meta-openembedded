@@ -3,7 +3,7 @@ SUMMARY = "GNOME disk utility"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
 
-DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart"
+DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart gnome-doc-utils"
 
 PR = "r4"
 
@@ -20,7 +20,7 @@ SRC_URI += "\
 
 EXTRA_OECONF += "--disable-scrollkeeper"
 
-PACKAGECONFIG ??= "nautilus"
+PACKAGECONFIG ??= ""
 PACKAGECONFIG[nautilus] = "--enable-nautilus-extension,--disable-nautilus-extension,nautilus"
 
 do_configure_prepend() {
