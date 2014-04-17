@@ -8,7 +8,7 @@ DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff webk
 
 inherit gnome
 
-SRC_URI = "ftp://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
+SRC_URI = "http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
            file://freetype.patch \
           "
 SRC_URI[md5sum] = "84c964aab7044489af69f7319bb59b47"
