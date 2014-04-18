@@ -10,8 +10,8 @@ SRC_URI = "\
     file://applications.menu \
 "
 
-SRC_URI[md5sum] = "a3a707e32fd72547e0911e3765d112f1"
-SRC_URI[sha256sum] = "a75f85e65038672a0413c74bffc7f4869c3c41090afe6b66876241780e478c2b"
+SRC_URI[md5sum] = "499b92ef38347881c72729f1e066eb20"
+SRC_URI[sha256sum] = "1b05a1d986643a6603b1c20ac87b6864325d0aea22a3d1d096f4063b4fba2f4d"
 
 do_configure_prepend() {
     sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
