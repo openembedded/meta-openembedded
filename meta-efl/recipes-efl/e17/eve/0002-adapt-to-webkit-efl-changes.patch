@@ -1,3 +1,8 @@
+From c1cb2a7b6d8b4661fde442ea4725df6842a94816 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 18 Apr 2014 11:52:18 +0200
+Subject: [PATCH 2/2] adapt to webkit-efl changes
+
 WIP: just fixes the build, probably doesn't render correctly
 
 https://trac.webkit.org/changeset/164168
@@ -7,12 +12,19 @@ https://trac.webkit.org/changeset/162581
 removed ewk_view_pre_render methods (with whole tiled support)
 
 https://git.enlightenment.org/core/elementary.git/commit/?id=0e465290be2016f12adcbc8c8d74645b3e6a1d9a
-ewk_view_tiled_smart_set is gone and ewk_view_single_smart_set is ewk_view_smart_set
+ewk_view_tiled_smart_set is gone and ewk_view_single_smart_set is
+ewk_view_smart_set
 
-Index: src/bin/chrome.c
-===================================================================
---- a/src/bin/chrome.c	(revision 84579)
-+++ b/src/bin/chrome.c	(working copy)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ src/bin/chrome.c |  4 +++-
+ src/bin/view.c   | 22 +++++++---------------
+ 2 files changed, 10 insertions(+), 16 deletions(-)
+
+diff --git a/src/bin/chrome.c b/src/bin/chrome.c
+index ee8f0c4..b46b29d 100644
+--- a/src/bin/chrome.c
++++ b/src/bin/chrome.c
 @@ -5,6 +5,8 @@
  #include <stdio.h>
  #include <string.h>
@@ -22,7 +34,7 @@ Index: src/bin/chrome.c
  #include <Eina.h>
  #include <Elementary.h>
  
-@@ -1997,7 +1999,7 @@
+@@ -1997,7 +1999,7 @@ view_screenshot_add(Evas *evas, const Evas_Object *view)
     if (cairo_status(cairo) != CAIRO_STATUS_SUCCESS)
        goto error_cairo_create;
  
@@ -31,11 +43,11 @@ Index: src/bin/chrome.c
       {
          evas_object_del(img);
          img = NULL;
-Index: src/bin/view.c
-===================================================================
---- a/src/bin/view.c	(revision 84579)
-+++ b/src/bin/view.c	(working copy)
-@@ -335,7 +335,7 @@
+diff --git a/src/bin/view.c b/src/bin/view.c
+index 54de6c1..2b07511 100644
+--- a/src/bin/view.c
++++ b/src/bin/view.c
+@@ -335,7 +335,7 @@ _view_load_finished(void *data, Evas_Object *view, void *event_info __UNUSED__)
     h *= 2;
  
     INF("load finished, pre-render %d,%d+%dx%d at %0.2f", x, y, w, h, zoom);
@@ -44,7 +56,7 @@ Index: src/bin/view.c
  }
  
  /* stop animators, we changed page */
-@@ -435,7 +435,7 @@
+@@ -435,7 +435,7 @@ _view_pan_pre_render(View_Smart_Data *sd, Evas_Coord dx, Evas_Coord dy)
  
     INF("pre-render region %d,%d+%dx%d at %0.2f (viewport=%d,%d+%dx%d)",
         px, py, pw, ph, zoom, x, y, w, h);
@@ -53,7 +65,7 @@ Index: src/bin/view.c
  }
  
  static unsigned int
-@@ -611,7 +611,7 @@
+@@ -611,7 +611,7 @@ _view_pan_start(View_Smart_Data *sd, const Evas_Event_Mouse_Down *ev)
  
     sd->pan.last_move = *p;
  
@@ -62,7 +74,7 @@ Index: src/bin/view.c
  
     /* register function to collect samples and apply scrolls at fixed interval*/
     if (!sd->animator.pan)
-@@ -816,7 +816,7 @@
+@@ -816,7 +816,7 @@ _view_zoom_start(View_Smart_Data *sd, const Evas_Event_Mouse_Down *ev)
     Evas_Coord cw, ch, vw, vh;
     float z, zx, zy;
  
@@ -71,7 +83,7 @@ Index: src/bin/view.c
  
     /* remember starting point so we have a reference */
     sd->zoom.start.zoom = ewk_frame_page_zoom_get(frame);
-@@ -1512,17 +1512,9 @@
+@@ -1512,17 +1512,9 @@ view_add(Evas_Object *parent, Backing_Store bs)
          /* create ewk_view_single subclass, this is done only once! */
          static Ewk_View_Smart_Class api = EWK_VIEW_SMART_CLASS_INIT_NAME_VERSION("EWK_View_Demo");
  
@@ -92,3 +104,6 @@ Index: src/bin/view.c
  
          /* override methods we want custom behavior */
          api.sc.add = _view_smart_add;
+-- 
+1.9.1
+
