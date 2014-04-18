@@ -1,6 +1,6 @@
 SUMMARY = "Vi IMproved - enhanced vi editor"
 SECTION = "console/utils"
-DEPENDS = "ncurses"
+DEPENDS = "ncurses gettext-native"
 # vimdiff doesn't like busybox diff
 RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
@@ -28,11 +28,14 @@ do_configure () {
 
 #Available PACKAGECONFIG options are gtkgui, acl, x11, tiny
 PACKAGECONFIG ??= ""
+PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'acl', 'acl', '', d)}"
+PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
 
 PACKAGECONFIG[gtkgui] = "--enable-gtk2-test --enable-gui=gtk2,--enable-gui=no,gtk+,"
 PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
 PACKAGECONFIG[x11] = "--with-x,--without-x,xt,"
 PACKAGECONFIG[tiny] = "--with-features=tiny,--with-features=big,,"
+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
 
 EXTRA_OECONF = " \
     --disable-gpm \
@@ -68,6 +71,21 @@ FILES_${PN}-help = "${datadir}/${PN}/${VIMDIR}/doc"
 FILES_${PN}-tutor = "${datadir}/${PN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
 FILES_${PN}-vimrc = "${datadir}/${PN}/vimrc"
 FILES_${PN}-data = "${datadir}/${PN}"
+FILES_${PN}-common = " \
+    ${datadir}/${PN}/${VIMDIR}/*.vim \
+    ${datadir}/${PN}/${VIMDIR}/autoload \
+    ${datadir}/${PN}/${VIMDIR}/colors \
+    ${datadir}/${PN}/${VIMDIR}/compiler \
+    ${datadir}/${PN}/${VIMDIR}/ftplugin \
+    ${datadir}/${PN}/${VIMDIR}/indent \
+    ${datadir}/${PN}/${VIMDIR}/keymap \
+    ${datadir}/${PN}/${VIMDIR}/lang \
+    ${datadir}/${PN}/${VIMDIR}/macros \
+    ${datadir}/${PN}/${VIMDIR}/plugin \
+    ${datadir}/${PN}/${VIMDIR}/print \
+    ${datadir}/${PN}/${VIMDIR}/spell \
+    ${datadir}/${PN}/${VIMDIR}/tools \
+"
 
 # Recommend that runtime data is installed along with vim
 RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-data"
