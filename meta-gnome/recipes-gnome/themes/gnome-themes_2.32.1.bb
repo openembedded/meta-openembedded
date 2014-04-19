@@ -8,13 +8,11 @@ SECTION = "x11/gnome"
 DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
 RDEPENDS_${PN} = "gnome-icon-theme"
 
-EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check"
+EXTRA_OECONF += "--enable-all-themes --disable-hicolor-check \
+    --with-iconmap=${STAGING_LIBDIR_NATIVE}/icon-naming-utils/icon-name-mapping \
+"
 
 inherit gnomebase perlnative
-
-do_configure_prepend() {
-    sed -i -e 's:`$PKG_CONFIG --variable=program_path icon-naming-utils`:${STAGING_DIR_NATIVE}${libdir}/icon-naming-utils:g' configure.in
-}
 
 PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"
 FILES_gnome-theme-crux = "${datadir}/themes/Crux ${datadir}/icons/Crux"
@@ -27,6 +25,6 @@ FILES_gnome-theme-mist = "${datadir}/themes/Mist ${datadir}/icons/Mist"
 
 FILES_${PN} += "${datadir}/themes ${datadir}/icons"
 
+SRC_URI += "file://iconpath-option.patch" 
 SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
 SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
-
