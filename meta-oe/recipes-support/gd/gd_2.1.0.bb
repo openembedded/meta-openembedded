@@ -22,7 +22,7 @@ inherit autotools binconfig gettext
 
 EXTRA_OECONF += " --disable-rpath \
                   --with-jpeg=${STAGING_LIBDIR}/.. \
-                  --with-freetype=${STAGING_LIBDIR}/.. \
+                  --with-freetype=yes \
                   --without-fontconfig \
                   --without-xpm \
                   --without-x"
