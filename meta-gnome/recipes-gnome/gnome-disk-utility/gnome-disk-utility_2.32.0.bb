@@ -21,7 +21,7 @@ SRC_URI += "\
 EXTRA_OECONF += "--disable-scrollkeeper"
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[nautilus] = "--enable-nautilus-extension,--disable-nautilus-extension,nautilus"
+PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
 
 do_configure_prepend() {
     sed -i -e "s: help : :g" ${S}/Makefile.am
