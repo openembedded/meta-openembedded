@@ -19,6 +19,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 inherit autotools gettext
 
+ALLOW_EMPTY_${PN} = "1"
+
 # Split into seperate packages since we normal don't want them all
 # The main package is left empty and therefore not created.
 PACKAGES += "${PN}-ndisc6 ${PN}-tcpspray6 ${PN}-rdisc6 \
