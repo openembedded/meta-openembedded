@@ -3,46 +3,49 @@ HOMEPAGE = "http://www.iozone.org/"
 AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.oracle.com>"
 SECTION = "console/tests"
 LICENSE = "iozone3"
-LIC_FILES_CHKSUM = "file://iozone.c;beginline=237;endline=241;md5=ab42a6185fd0443978871f11a007ac0b"
+LIC_FILES_CHKSUM = "file://iozone.c;beginline=266;endline=270;md5=ab42a6185fd0443978871f11a007ac0b"
 
-
-SRC_URI = "http://www.iozone.org/src/current/iozone3_263.tar \
+SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
     file://copyright.txt \
-    file://fileop-arm.patch \
 "
-SRC_URI[md5sum] = "44fd88df361ec4508e10c8d6615245fa"
-SRC_URI[sha256sum] = "920fde1a3843539570e2df4aa611e74df102e52d363c5973d5a9d15bdf976461"
+SRC_URI[md5sum] = "a40dcda593f5841d0aaffe9f21172020"
+SRC_URI[sha256sum] = "9f60e854d7bc5bc3de15355cf5621e15098bd744a26845d11730b3060f4a5fff"
 
-S = "${WORKDIR}/${PN}_${PV}/src/current/"
+S = "${WORKDIR}/${BPN}_${PV}/src/current/"
 
-EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}'"
-EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}'"
-EXTRA_OEMAKE_arm = "linux-arm CC='${CC}'"
-EXTRA_OEMAKE = "linux CC='${CC}'"
+#
+# All other arches can use the default OEMAKE except those
+# explicitly listed below. Another, the iozone3 Makefile
+# needs to be told about the cross-compiler explicitly here.
+#
+EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}' GCC='${CC}'"
+EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
+EXTRA_OEMAKE_arm = "linux-arm CC='${CC}' GCC='${CC}'"
+EXTRA_OEMAKE = "linux CC='${CC}' GCC='${CC}'"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install() {
     install -d ${D}${bindir} \
-        ${D}${mandir}/man1 \
-    ${D}${datadir}/doc/${PN}/examples
+               ${D}${mandir}/man1 \
+               ${D}${datadir}/doc/${BPN}/examples
 
     install -m 0755 ${S}/iozone ${D}${bindir}
     install -m 0755 ${S}/fileop ${D}${bindir}
-    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/iozone.1 ${D}${mandir}/man1/
-    install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${PN}/
+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/iozone.1 ${D}${mandir}/man1/
+    install -m 0644 ${WORKDIR}/copyright.txt ${D}${datadir}/doc/${BPN}/
 
-    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${PN}/examples
-    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${PN}/examples
-    install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${PN}/examples
+    install -m 0644 ${S}/*.dem ${D}${datadir}/doc/${BPN}/examples
+    install -m 0644 ${S}/client_list ${D}${datadir}/doc/${BPN}/examples
+    install -m 0644 ${S}/Gnuplot.txt ${D}${datadir}/doc/${BPN}/examples
 
-    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${PN}/examples
-    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${PN}/examples
-    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${PN}/examples
+    install -m 0755 ${S}/Generate_Graphs ${D}${datadir}/doc/${BPN}/examples
+    install -m 0755 ${S}/gengnuplot.sh ${D}${datadir}/doc/${BPN}/examples
+    install -m 0755 ${S}/report.pl ${D}${datadir}/doc/${BPN}/examples
 
-    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Iozone_ps.gz ${D}${datadir}/doc/${PN}/
-    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/IOzone_msword_98.pdf ${D}${datadir}/doc/${PN}/
-    install -m 0644 ${WORKDIR}/${PN}_${PV}/docs/Run_rules.doc ${D}${datadir}/doc/${PN}/
+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/Iozone_ps.gz ${D}${datadir}/doc/${BPN}/
+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/IOzone_msword_98.pdf ${D}${datadir}/doc/${BPN}/
+    install -m 0644 ${WORKDIR}/${BPN}_${PV}/docs/Run_rules.doc ${D}${datadir}/doc/${BPN}/
 }
 
 FILES_${PN} += "${datadir}/doc/${PN}/copyright.txt"
