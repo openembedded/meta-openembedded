@@ -10,7 +10,6 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
  very easy to setup for the novice user."
 
 DEPENDS = "zlib libestr json-c"
-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 HOMEPAGE = "http://www.rsyslog.com/"
 LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
@@ -27,7 +26,38 @@ SRC_URI[sha256sum] = "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc
 
 inherit autotools pkgconfig systemd update-rc.d
 
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)} --enable-cached-man-pages"
+EXTRA_OECONF += "--enable-cached-man-pages"
+
+# first line is default yes in configure
+PACKAGECONFIG ??= " \
+    zlib rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
+    imdiag gnutls \
+    ${@base_contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
+    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+"
+
+# default yes in configure
+PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib,"
+PACKAGECONFIG[rsyslogd] = "--enable-rsyslogd,--disable-rsyslogd,,"
+PACKAGECONFIG[rsyslogrt] = "--enable-rsyslogrt,--disable-rsyslogrt,,"
+PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,,"
+PACKAGECONFIG[klog] = "--enable-klog,--disable-klog,,"
+PACKAGECONFIG[regexp] = "--enable-regexp,--disable-regexp,,"
+PACKAGECONFIG[uuid] = "--enable-uuid,--disable-uuid,util-linux,"
+PACKAGECONFIG[libgcrypt] = "--enable-libgcrypt,--disable-libgcrypt,libgcrypt,"
+PACKAGECONFIG[testbench] = "--enable-testbench,--disable-testbench,,"
+
+# default no in configure
+PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
+PACKAGECONFIG[imdiag] = "--enable-imdiag,--disable-imdiag,,"
+PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp,"
+PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
+PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
+PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
+PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
+PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
+PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
+PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
 
 do_install_append() {
     install -d "${D}${sysconfdir}/init.d"
