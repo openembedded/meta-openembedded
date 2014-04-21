@@ -64,7 +64,7 @@ chkconfig() {
     if [ ! -e $CONFIG -o ! -s $CONFIG ]; then
         echo ""
 	echo "* $CONFIG does not exist or is empty." 
-	echo "* See /usr/share/doc/radvd/examples/simple-radvd.conf for a simple"
+	echo "* See /usr/share/doc/radvd/radvd.conf.example for a simple"
 	echo "* configuration suitable for most systems, and radvd.conf(5)"
 	echo "* for configuration file syntax. radvd will *not* be started."
 	exit 0
