@@ -10,7 +10,7 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
 SRC_URI[md5sum] = "037e9c9e07d9dbff54dcff09f280fc8c"
 SRC_URI[sha256sum] = "75592483d40dc4f76cc3b41af40caa4be80478946a699d46846d5d03e4d2e09b"
 
-DEPENDS = "openssl xz zlib bzip2"
+DEPENDS = "openssl xz zlib bzip2 libcap"
 
 inherit autotools
 
