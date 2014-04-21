@@ -116,6 +116,19 @@ FILES_${PN} = " "
 RDEPENDS_${PN} = "${PN}-client ${PN}-server"
 ALLOW_EMPTY_${PN} = "1"
 
+RDEPENDS_${PN}-client = "perl perl-module-getopt-long perl-module-file-temp \
+    perl-module-fcntl perl-module-sys-hostname perl-module-ipc-open3 \
+    perl-module-exporter"
+RDEPENDS_${PN}-server = "perl perl-module-getopt-long perl-module-data-dumper \
+    perl-module-file-basename perl-module-file-path perl-module-sys-hostname \
+    perl-module-file-copy perl-module-file-temp perl-module-posix"
+RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-module-getopt-long \
+    perl-module-posix perl-module-data-dumper perl-module-sigtrap perl-module-threads \
+    perl-module-threads-shared perl-module-io-socket perl-module-sys-hostname perl-module-file-copy \
+    perl-module-file-spec perl-module-file-find perl-module-file-basename perl-module-file-path \
+    perl-module-constant perl-module-lib perl-module-file-temp perl-module-file-spec-functions \
+    perl-module-io-socket-inet perl-module-io-select"
+
 FILES_libmysqlclient = "\
     ${libdir}/libmysqlclient.so.* \
     ${libdir}/plugin/*.so.*"
