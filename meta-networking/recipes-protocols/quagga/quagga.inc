@@ -63,6 +63,7 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 --enable-logfile-mask=0640 \
                 --enable-rtadv \
                 --enable-linux24-tcp-md5 \
+                ap_cv_cc_pie=no \
                 ${SNMP_CONF}"
 
 do_install () {
