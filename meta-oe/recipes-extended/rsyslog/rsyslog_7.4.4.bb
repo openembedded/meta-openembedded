@@ -19,12 +19,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
 
 SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://initscript \
+           file://rsyslog.conf \
+           file://rsyslog.logrotate \
 "
 
 SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
 SRC_URI[sha256sum] = "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc2f9087"
 
-inherit autotools pkgconfig systemd update-rc.d
+inherit autotools pkgconfig systemd update-rc.d update-alternatives
 
 EXTRA_OECONF += "--enable-cached-man-pages"
 
@@ -62,7 +64,8 @@ PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
 do_install_append() {
     install -d "${D}${sysconfdir}/init.d"
     install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/rsyslogd
-    install -m 755 ${S}/platform/redhat/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+    install -m 644 ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+    install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.rsyslog
 }
 
 FILES_${PN} += "${bindir}"
@@ -70,9 +73,33 @@ FILES_${PN} += "${bindir}"
 INITSCRIPT_NAME = "rsyslogd"
 INITSCRIPT_PARAMS = "defaults"
 
+# higher than sysklogd's 100
+ALTERNATIVE_PRIORITY = "110"
+
+ALTERNATIVE_${PN} = "rsyslogd syslog-conf syslog-logrotate"
+
+ALTERNATIVE_LINK_NAME[rsyslogd] = "${base_sbindir}/syslogd"
+ALTERNATIVE_TARGET[rsyslogd] = "${sbindir}/rsyslogd"
+ALTERNATIVE_LINK_NAME[syslog-conf] = "${sysconfdir}/syslog.conf"
+ALTERNATIVE_TARGET[syslog-conf] = "${sysconfdir}/rsyslog.conf"
+ALTERNATIVE_LINK_NAME[syslog-logrotate] = "${sysconfdir}/logrotate.d/syslog"
+ALTERNATIVE_TARGET[syslog-logrotate] = "${sysconfdir}/logrotate.rsyslog"
+
 CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+
+RDEPENDS_${PN} += "logrotate"
+
+# no syslog-init for systemd
+python () {
+    if 'sysvinit' in d.getVar("DISTRO_FEATURES", True).split():
+        pn = d.getVar('PN', True)
+        sysconfdir = d.getVar('sysconfdir', True)
+        d.appendVar('ALTERNATIVE_%s' % (pn), ' syslog-init')
+        d.setVarFlag('ALTERNATIVE_LINK_NAME', 'syslog-init', '%s/init.d/syslogd' % (sysconfdir))
+        d.setVarFlag('ALTERNATIVE_TARGET', 'syslog-init', '%s/init.d/rsyslogd' % (sysconfdir))
+}
