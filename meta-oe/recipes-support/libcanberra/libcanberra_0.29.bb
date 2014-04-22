@@ -32,7 +32,7 @@ PACKAGECONFIG[alsa] = "--enable-alsa, --disable-alsa, alsa-lib"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse, --disable-pulse, pulseaudio"
 
 python populate_packages_prepend() {
-    plugindir = d.expand('${libdir}/${P}/')
+    plugindir = d.expand('${libdir}/${BPN}-${PV}/')
     do_split_packages(d, plugindir, '^libcanberra-(.*)\.so$', 'libcanberra-%s', '%s support library', extra_depends='' )
     do_split_packages(d, plugindir, '^libcanberra-(.*)\.la$', 'libcanberra-%s', '%s support library', extra_depends='' )
 }
@@ -44,7 +44,7 @@ FILES_${PN} = "${bindir}/ ${libdir}/${BPN}.so.*"
 
 FILES_${PN}-dev += "${datadir}/vala/vapi ${libdir}/*/modules/*.la ${libdir}/*/*.la"
 
-FILES_${PN}-dbg += "${libdir}/${P}/.debug ${libdir}/gtk-*/modules/.debug"
+FILES_${PN}-dbg += "${libdir}/${BPN}-${PV}/.debug ${libdir}/gtk-*/modules/.debug"
 
 FILES_${PN}-gtk2 = "${libdir}/${BPN}-gtk.so.* \
                     ${libdir}/gtk-2.0/modules/*.so \
