@@ -36,7 +36,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ntp \
                        --shell /bin/false --user-group ntp"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "cap"
 PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           --with-openssl-incdir=${STAGING_INCDIR} \
                           --with-crypto, \
