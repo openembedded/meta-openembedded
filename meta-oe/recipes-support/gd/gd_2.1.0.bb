@@ -30,3 +30,12 @@ EXTRA_OECONF += " --disable-rpath \
                   --without-x"
 
 EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
+
+PACKAGES += "${PN}-tools"
+
+FILES_${PN} = "${libdir}/lib*${SOLIBS}"
+FILES_${PN}-tools = "${bindir}/*"
+
+PROVIDES += "${PN}-tools"
+RPROVIDES_${PN}-tools = "${PN}-tools"
+RDEPENDS_${PN}-tools = "perl perl-module-strict"
