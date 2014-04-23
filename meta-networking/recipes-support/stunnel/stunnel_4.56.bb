@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec8d2778a01c
 
 inherit autotools
 
-EXTRA_OECONF += "--with-ssl='${STAGING_INCDIR}' --disable-fips"
+EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
