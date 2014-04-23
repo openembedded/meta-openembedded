@@ -16,13 +16,15 @@ LDFLAGS += "-lgthread-2.0 -lxml2"
 do_configure_prepend() {
     sed -i s:help::g Makefile.am
 }
+do_install_append() {
+    rm -rf ${D}${datadir}/mime
+}
 
 FILES_${PN} += "${datadir}/icon* \
                 ${datadir}/xsession* \
                 ${libdir}/window-manager-settings/*.so \
                 ${datadir}/gnome \
                 ${datadir}/desktop-directories \
-                ${datadir}/mime \
 "
 FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
 FILES_${PN}-dev += "${libdir}/window-manager-settings/*.la"
