@@ -5,6 +5,7 @@
 DEPENDS += "breakpad breakpad-native"
 
 CFLAGS += "-I${STAGING_DIR_TARGET}${includedir}/breakpad "
+CXXFLAGS += "-I${STAGING_DIR_TARGET}${includedir}/breakpad "
 
 BREAKPAD_BIN ?= ""
 
