@@ -56,3 +56,6 @@ do_install_append() {
 INITSCRIPT_NAME = "collectd"
 INITSCRIPT_PARAMS = "defaults"
 
+# threshold.so load.so are also provided by gegl
+# disk.so is also provided by libgphoto2-camlibs
+PRIVATE_LIBS = "threshold.so load.so disk.so"
