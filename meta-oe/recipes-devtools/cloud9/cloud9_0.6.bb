@@ -40,7 +40,7 @@ SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \
 "
 
 SRCREV_cloud9ide = "c4e2574896a22bb749f0500b25f41c888d346bed"
-SRCREV_o3 = "302cd3a6d5039f53a9fa3932bed88b53281c1e1e"
+SRCREV_o3 = "d66d4e3252e505f44ada6804c8cab39915ce8afd"
 SRCREV_ace = "0fc5392cbe46fb134052c3065a238ad8e3b31cfd"
 SRCREV_acewiki = "d2a65d0addc2e5ab922bbff9cb6022a4652b4f13"
 SRCREV_apf = "2560b762b2b0e5a8b46f8a4062f927a9a9d239f4"
