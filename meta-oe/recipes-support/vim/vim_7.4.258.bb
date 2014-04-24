@@ -17,6 +17,7 @@ S = "${WORKDIR}/${PN}/src"
 VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
 inherit autotools update-alternatives
+inherit autotools-brokensep
 
 # vim configure.in contains functions which got 'dropped' by autotools.bbclass
 do_configure () {
