@@ -35,6 +35,4 @@ do_compile() {
 
 do_install() {
     oe_runmake ORBIT_IDL="${ORBIT_IDL_SRC}" DESTDIR="${D}" install
-    install -d ${D}${datadir}/idl/bonobo-activation-2.0/
-    install idl/*.idl ${D}${datadir}/idl/bonobo-activation-2.0/
 }

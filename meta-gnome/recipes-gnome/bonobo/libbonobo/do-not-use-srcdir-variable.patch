@@ -9,16 +9,16 @@ st-properties.sh'
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Upstream-Status: Not Submitted
 
-Index: libbonobo-2.24.3/tests/Makefile.am
+Index: libbonobo-2.32.1/tests/Makefile.am
 ===================================================================
---- libbonobo-2.24.3.orig/tests/Makefile.am	2009-04-18 05:27:41.000000000 -0700
-+++ libbonobo-2.24.3/tests/Makefile.am	2013-10-17 16:59:45.612989079 -0700
-@@ -53,7 +53,7 @@
+--- libbonobo-2.32.1.orig/tests/Makefile.am	2010-08-29 04:56:00.000000000 -0700
++++ libbonobo-2.32.1/tests/Makefile.am	2014-04-25 15:38:22.024744384 -0700
+@@ -55,7 +55,7 @@
  	MODELS_DIR="$(srcdir)/models"
  
  TESTS = test-moniker$(EXEEXT) test-event-source$(EXEEXT) test-object$(EXEEXT) \
 -	test-stream-mem$(EXEEXT) $(srcdir)/test-properties.sh test-storage-mem$(EXEEXT) \
 +	test-stream-mem$(EXEEXT) test-properties.sh test-storage-mem$(EXEEXT) \
- 	test-generic-factory.sh test-main-loop$(EXEEXT)
- check_SCRIPTS = test-properties.sh test-generic-factory.sh
- EXTRA_DIST=$(check_SCRIPTS) Test_Generic_Factory.server
+ 	test-main-loop$(EXEEXT)
+ 
+ # TESTS += test-generic-factory.sh
