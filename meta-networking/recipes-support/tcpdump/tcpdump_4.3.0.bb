@@ -15,7 +15,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "a3fe4d30ac85ff5467c889ff46b7e1e8"
 SRC_URI[sha256sum] = "efd08b610210d39977ec3175fa82dad9fbd33587930081be2a905a712dba4286"
 
-inherit autotools
+inherit autotools-brokensep
 CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
 
 EXTRA_OECONF = "--without-crypto \
