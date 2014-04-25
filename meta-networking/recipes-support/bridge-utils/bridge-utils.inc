@@ -11,7 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz \
           file://bridge-utils-1.5-fix-incorrect-command-in-manual.patch \
 "
 
-inherit autotools update-alternatives
+inherit autotools-brokensep update-alternatives
 
 ALTERNATIVE_${PN} = "brctl"
 ALTERNATIVE_PRIORITY[brctl] = "100"
