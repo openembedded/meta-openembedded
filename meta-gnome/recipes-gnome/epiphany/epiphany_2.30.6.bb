@@ -12,7 +12,7 @@ EXTRA_OECONF += " --disable-nss --with-distributor-name=${DISTRO} --without-ca-f
 
 do_configure_prepend() {
     touch ${S}/gnome-doc-utils.make
-    sed -i -e s:help::g Makefile.am
+    sed -i -e s:help::g ${S}/Makefile.am
 }
 
 FILES_${PN} += "${datadir}/icons ${datadir}/dbus-1"
