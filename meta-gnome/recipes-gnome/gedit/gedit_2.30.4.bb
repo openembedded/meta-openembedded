@@ -16,8 +16,10 @@ EXTRA_OECONF = "--disable-scrollkeeper \
                 --enable-gvfs-metadata"
 
 do_configure_prepend() {
+    cd ${S}
     gnome-doc-common --copy || true
     gnome-doc-prepare --force --copy || true
+    cd ${B}
 }
 
 FILES_${PN} += "${libdir}/gedit-2/plugin* ${datadir}/gedit-2"
