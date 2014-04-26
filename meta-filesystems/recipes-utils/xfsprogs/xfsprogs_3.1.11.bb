@@ -14,7 +14,7 @@ SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${P}.tar.gz \
 SRC_URI[md5sum] = "de9f1f45026c2f4e0776058d429ff4b6"
 SRC_URI[sha256sum] = "adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be"
 
-inherit autotools
+inherit autotools-brokensep
 
 PACKAGES =+ "${PN}-fsck ${PN}-mkfs libhandle"
 
