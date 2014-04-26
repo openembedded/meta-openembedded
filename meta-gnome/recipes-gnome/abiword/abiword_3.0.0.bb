@@ -4,7 +4,7 @@ SECTION = "x11/office"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
 DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
-               librsvg libwmf-native gtkmathview asio gtk+"
+               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server"
 RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 RCONFLICTS_${PN} = "${PN}-embedded"
@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "d17e318c00ff4eb353e0e7994b098b1d4f9ddd8712ac0261a0e38b8908
 #want 3.x from 3.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 
-inherit autotools pkgconfig
+inherit autotools-brokensep pkgconfig
 
 PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp collab-backend-service"
 PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
@@ -44,17 +44,16 @@ EXTRA_OECONF = " --disable-static  \
 # AbiWord configure.ac does not play nicely with autoreconf
 # so use the autogen.sh script that comes with AbiWord
 do_configure() {
-    install -m 0755 ${WORKDIR}/autogen-common.sh ${S}/autogen-common.sh
-    cd ${S}
+    install -m 0755 ${WORKDIR}/autogen-common.sh ${B}/autogen-common.sh
     ./autogen-common.sh
     autotools_do_configure
 }
 
 do_compile() {
-    cd ${S}/goffice-bits2
+    cd goffice-bits2
     make goffice-paths.h
     make libgoffice.la
-    cd ${S}
+    cd ${B}
     oe_runmake
 }
 
