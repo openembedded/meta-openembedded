@@ -14,7 +14,7 @@ SRC_URI[archive.sha256sum] = "7c568b57358e5c08f4d8dd76dbac7df2539135ad081872b605
 LDFLAGS += "-lgthread-2.0 -lxml2"
 
 do_configure_prepend() {
-    sed -i s:help::g Makefile.am
+    sed -i s:help::g ${S}/Makefile.am
 }
 do_install_append() {
     rm -rf ${D}${datadir}/mime
