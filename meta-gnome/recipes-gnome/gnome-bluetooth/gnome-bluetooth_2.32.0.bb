@@ -21,7 +21,7 @@ EXTRA_OECONF += "--enable-nautilus-sendto=no"
 
 # No native docbook XSL stylesheets recipe in OE yet
 do_configure_prepend() {
-    sed -i s/help// Makefile.am
+    sed -i s/help// ${S}/Makefile.am
 }
 
 do_configure_append() {
