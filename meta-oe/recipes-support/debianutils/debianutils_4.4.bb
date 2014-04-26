@@ -1,18 +1,16 @@
 SUMMARY = "Miscellaneous utilities specific to Debian"
 SECTION = "base"
-LICENSE = "GPLv2 & BSD & SMAIL_GPL"
-LIC_FILES_CHKSUM = "file://debian/copyright;md5=b948675029f79c64840e78881e91e1d4"
-
-PR = "r1"
+LICENSE = "GPLv2 & SMAIL_GPL"
+LIC_FILES_CHKSUM = "file://debian/copyright;md5=f01a5203d50512fc4830b4332b696a9f"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/${BPN}_${PV}.tar.gz"
-SRC_URI[md5sum] = "7fdd5f8395162d8728d4b79e97b9819e"
-SRC_URI[sha256sum] = "d62e98fee5b1a758d83b62eed8d8bdec473677ff782fed89fc4ae3ba3f381401"
+SRC_URI[md5sum] = "c0cb076754d7f4eb1e3397d00916647f"
+SRC_URI[sha256sum] = "190850cdd6b5302e0a1ba1aaed1bc7074d67d3bd8d04c613f242f7145afa53a6"
 
 inherit autotools
 
 do_configure_prepend() {
-    sed -i -e 's:tempfile.1 which.1:which.1:g' Makefile.am
+    sed -i -e 's:tempfile.1 which.1:which.1:g' ${S}/Makefile.am
 }
 
 do_install_append() {
