@@ -11,7 +11,7 @@ PR = "r7"
 
 DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
 
-inherit gtk-doc gnome gettext pkgconfig gconf
+inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf
 
 SRCREV = "6a364b6a4a9beed3da9ca6f5b0dac81eb99dea2a"
 SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32"
