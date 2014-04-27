@@ -12,6 +12,6 @@ SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
 SRC_URI[md5sum] = "e532a3d6648c422347f6d84cac469263"
 SRC_URI[sha256sum] = "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5d7c12ce652ba38f1"
 
-inherit autotools
+inherit autotools-brokensep
 
 S = "${WORKDIR}/sg3_utils-${PV}"

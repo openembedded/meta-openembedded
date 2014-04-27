@@ -12,7 +12,7 @@ SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
 
 S = "${WORKDIR}/samba-${PV}/source"
 
-inherit autotools update-rc.d
+inherit autotools-brokensep update-rc.d
 
 SAMBAMMAP = "no"
 SAMBAMMAP_libc-glibc = "yes"

@@ -10,7 +10,7 @@ SRC_URI = "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
 SRC_URI[md5sum] = "750aa5b5051263a99c6c195888c74968"
 SRC_URI[sha256sum] = "cb3866116634bf65760b6806be4afa7e24a1cad6f145c876df8721f01ba2e2cb"
 
-inherit autotools
+inherit autotools-brokensep
 
 SCRIPTS = "bon_csv2html bon_csv2txt"
 EXES = "bonnie++ zcav"
