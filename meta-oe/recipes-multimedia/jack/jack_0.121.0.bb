@@ -12,14 +12,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c030468238b2cf89925a57f2780396a7 \
 
 DEPENDS = "alsa-lib libsamplerate0 readline"
 
-SVNPV = "${@'${PV}'.replace('.', '_')}"
-SRCREV = "4484"
-SRC_URI = "svn://subversion.jackaudio.org/jack/tags;module=RELEASE_${SVNPV};protocol=http \
+SRCREV = "91a688c602b7ce1711d8ad10fb07ebcf2e530a64"
+SRC_URI = "git://github.com/jackaudio/jack1.git \
            file://remove-wrong-host-test.patch \
            file://jack_fix_TWL4030_alsa_capture.patch \
 "
 
-S = "${WORKDIR}/RELEASE_${SVNPV}"
+S = "${WORKDIR}/git"
 
 inherit autotools
 
