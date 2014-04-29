@@ -25,12 +25,13 @@ do_compile() {
 do_install() {
     install -d ${D}${bindir}
     install -d ${D}${libdir}
-    install -d ${D}${includedir}
+    install -d ${D}${includedir}/espeak
     install -d ${D}${datadir}/espeak-data
 
     # we do not ship "speak" binary though.
     install -m 0755 ${S}/src/espeak ${D}${bindir}
-    install -m 0644 ${S}/src/speak_lib.h ${D}${includedir}
+    install -m 0644 ${S}/src/speak_lib.h ${D}${includedir}/espeak/
+    ln -sf espeak/espeak.h ${D}${includedir}/
     oe_libinstall -so -C src libespeak ${D}${libdir}
 
     if [ "${SITEINFO_ENDIANNESS}" = "be" ] ; then
