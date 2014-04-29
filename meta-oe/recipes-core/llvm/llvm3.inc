@@ -21,14 +21,14 @@ EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
 
 do_configure_prepend() {
     # Remove RPATHs
-    sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' Makefile.rules
+    sed -i 's:$(RPATH) -Wl,$(\(ToolDir\|LibDir\|ExmplDir\))::g' ${S}/Makefile.rules
 
     # Drop "svn" suffix from version string
-    sed -i 's/${PV}svn/${PV}/g' configure
+    sed -i 's/${PV}svn/${PV}/g' ${S}/configure
 
     # Fix paths in llvm-config
-    sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" tools/llvm-config/llvm-config.cpp
-    sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" tools/llvm-config/llvm-config.cpp
+    sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" ${S}/tools/llvm-config/llvm-config.cpp
+    sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
 
     # Fails to build unless using separate directory from source
     mkdir -p ${LLVM_BUILD_DIR}
