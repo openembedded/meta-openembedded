@@ -28,7 +28,7 @@ S = "${WORKDIR}/mariadb-${PV}"
 
 BINCONFIG_GLOB = "mysql_config"
 
-inherit autotools binconfig update-rc.d useradd
+inherit autotools-brokensep binconfig update-rc.d useradd
 
 INITSCRIPT_PACKAGES = "${PN}-server"
 INITSCRIPT_NAME = "mysqld"
@@ -59,7 +59,7 @@ EXTRA_OECONF = "--with-atomic-ops=up \
                 "
 
 do_configure_append() {
-    sed -i /comp_err/d ${S}/sql/share/Makefile
+    sed -i /comp_err/d ${B}/sql/share/Makefile
 
     # handle distros with different values of ${libexecdir}
     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
