@@ -30,7 +30,7 @@ CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
 # autotools.bbclass attends to include m4 files with path depth <= 2 by
 # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
 do_configure_prepend() {
-    test -d m4/m4 && mv -f m4/m4 m4-files
+    test -d ${S}/m4/m4 && mv -f ${S}/m4/m4 ${S}/m4-files
 }
 
 do_install() {
@@ -43,18 +43,18 @@ do_install() {
 
     # man
     install -d ${D}${mandir}/man1/
-    install -m 0644 doc/netserver.man ${D}${mandir}/man1/netserver.1
-    install -m 0644 doc/netperf.man ${D}${mandir}/man1/netperf.1
+    install -m 0644 ${S}/doc/netserver.man ${D}${mandir}/man1/netserver.1
+    install -m 0644 ${S}/doc/netperf.man ${D}${mandir}/man1/netperf.1
 
     # move scripts to examples directory
     install -d ${D}${docdir}/netperf/examples
-    install -m 0644 doc/examples/*_script ${D}${docdir}/netperf/examples/
+    install -m 0644 ${S}/doc/examples/*_script ${D}${docdir}/netperf/examples/
 
     # docs ..
-    install -m 0644 COPYING ${D}${docdir}/netperf
-    install -m 0644 Release_Notes ${D}${docdir}/netperf
-    install -m 0644 README ${D}${docdir}/netperf
-    install -m 0644 doc/netperf_old.ps ${D}${docdir}/netperf
+    install -m 0644 ${S}/COPYING ${D}${docdir}/netperf
+    install -m 0644 ${S}/Release_Notes ${D}${docdir}/netperf
+    install -m 0644 ${S}/README ${D}${docdir}/netperf
+    install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
 }
 
 INITSCRIPT_NAME="netperf"
