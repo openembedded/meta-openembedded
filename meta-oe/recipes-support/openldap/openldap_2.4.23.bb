@@ -29,7 +29,7 @@ PR = "r1"
 # environments
 SRC_URI += "file://install-strip.patch"
 
-inherit autotools
+inherit autotools-brokensep
 
 # CV SETTINGS
 # Required to work round AC_FUNC_MEMCMP which gets the wrong answer
@@ -149,20 +149,6 @@ do_configure() {
     gnu-configize
     autoconf
     oe_runconf
-}
-
-#FIXME: this is a hack, at present an openldap build will pick up the header
-# files from staging rather than the local ones (bad -I order), so remove
-# the headers (from openldap-old.x) before compiling...
-do_compile_prepend() {
-    (
-        cd ${STAGING_INCDIR}
-        rm -f ldap.h ldap_*.h
-    )
-    (
-        cd ${STAGING_LIBDIR}
-        rm -f libldap* liblber*
-    )
 }
 
 LEAD_SONAME = "libldap-${LDAP_VER}.so.*"
