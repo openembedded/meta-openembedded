@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "libpcre json-c"
 
-inherit autotools
+inherit autotools-brokensep
 
 FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
 FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
