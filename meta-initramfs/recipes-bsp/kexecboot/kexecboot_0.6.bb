@@ -42,7 +42,7 @@ SRC_URI = "https://github.com/kexecboot/kexecboot/archive/v${PV}.tar.gz"
 SRC_URI[md5sum] = "46b7c1a6f20531be56445ebb8669a2b8"
 SRC_URI[sha256sum] = "6b360b8aa59bc5d68a96705349a0dd416f8ed704e931fa0ac7849298258f0f15"
 
-inherit autotools
+inherit autotools-brokensep
 
 EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
 
