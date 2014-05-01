@@ -11,8 +11,8 @@ SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2
            file://fancontrol.init \
            file://sensord.init \
 "
-SRC_URI[md5sum] = "73c2fcccdab6049d289c5e0c596192a1"
-SRC_URI[sha256sum] = "ecc91ba3d918e96fb7d5eb9acce978af803b130e0b33b08d5ea05b2bfca84955"
+SRC_URI[md5sum] = "da506dedceb41822e64865f6ba34828a"
+SRC_URI[sha256sum] = "5dae6a665e1150159a93743c4ff1943a7efe02cd9d3bb12c4805e7d7adcf4fcf"
 
 inherit update-rc.d
 
@@ -67,7 +67,7 @@ PACKAGES =+ "${PN}-fancontrol ${PN}-fancontrol-doc"
 PACKAGES =+ "${PN}-sensorsdetect ${PN}-sensorsdetect-doc"
 
 # sensors-conf-convert script
-PACKAGES =+ "${PN}-sensorsconfconvert"
+PACKAGES =+ "${PN}-sensorsconfconvert ${PN}-sensorsconfconvert-doc"
 
 # pwmconfig script
 PACKAGES =+ "${PN}-pwmconfig ${PN}-pwmconfig-doc"
@@ -109,6 +109,7 @@ RDEPENDS_${PN}-sensorsdetect = "${PN}-sensors perl perl-modules"
 
 # sensors-conf-convert script files
 FILES_${PN}-sensorsconfconvert = "${bindir}/sensors-conf-convert"
+FILES_${PN}-sensorsconfconvert-doc = "${mandir}/man8/sensors-conf-convert.8"
 RDEPENDS_${PN}-sensorsconfconvert = "${PN}-sensors perl perl-modules"
 
 # pwmconfig script files
