@@ -7,8 +7,8 @@ DEPENDS = "modphp"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
-SRC_URI[md5sum] = "e49cec9861b45dc0b36eae33bf8a14fa"
-SRC_URI[sha256sum] = "b351872da46ed8378dff90a87673f5ec1e0bdd94324558ebc898e1d115e9d71c"
+SRC_URI[md5sum] = "7e571ce8eb6fa969fd8263969019849d"
+SRC_URI[sha256sum] = "adc6fe92dcff2368be94d20a5997aadb4d46d74551e2dd6602a704a35a195a6f"
 
 inherit autotools
 
