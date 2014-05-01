@@ -15,7 +15,9 @@ inherit autotools
 EXTRA_OECONF += "--enable-xdebug -with-php-config=${STAGING_BINDIR_CROSS}/php-config"
 
 do_configure() {
+    cd ${S}
     ${STAGING_BINDIR_CROSS}/phpize
+    cd ${B}
 
     # Running autoreconf as autotools_do_configure would do here
     # breaks the libtool configuration resulting in a failure later
