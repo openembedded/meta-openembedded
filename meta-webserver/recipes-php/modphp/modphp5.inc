@@ -51,8 +51,8 @@ PACKAGECONFIG[pgsql] = "--with-pgsql=${STAGING_DIR_TARGET}${exec_prefix},--witho
 acpaths = ""
 
 do_configure_prepend () {
-    rm -f build/libtool.m4 ltmain.sh aclocal.m4
-    find . -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
+    rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
+    find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_BINDIR_NATIVE}/httpd!'
 }
 
 do_configure_append() {
@@ -76,7 +76,7 @@ do_install  () {
     install -m 755 scripts/phpize ${D}${bindir}
     install -m 755 scripts/php-config ${D}${bindir}
     cat aclocal-copy/libtool.m4 aclocal-copy/lt~obsolete.m4 aclocal-copy/ltoptions.m4 \
-        aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > build/libtool.m4
+        aclocal-copy/ltsugar.m4 aclocal-copy/ltversion.m4 > ${S}/build/libtool.m4
 
     oe_runmake install-build install-headers INSTALL_ROOT=${D}
 }
