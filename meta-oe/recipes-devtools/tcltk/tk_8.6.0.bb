@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = "file://../license.terms;md5=c88f99decec11afa967ad33d314f87fe
     file://../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
 "
 
+PNBLACKLIST[tk] = "tk8.6.0/unix/libtk8.6.so: error: undefined reference to 'FcCharSetHasChar'"
+
 DEPENDS = "tcl virtual/libx11 libxt"
 
 SRC_URI = "\

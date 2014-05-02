@@ -2,6 +2,8 @@ require emacs.inc
 
 PR = "r4"
 
+PNBLACKLIST[emacs] = "qemu: uncaught target signal 11 (Segmentation fault) - core dumped"
+
 SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz;name=tarball \
            file://use-qemu.patch \
            file://nostdlib-unwind.patch \

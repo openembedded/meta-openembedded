@@ -13,6 +13,8 @@ RCONFLICTS_${PN} = "mplayer"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
+PNBLACKLIST[mplayer2] = "Requires newer libav which has negative D_P"
+
 SRC_URI = "git://repo.or.cz/mplayer.git \
     file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
 "
