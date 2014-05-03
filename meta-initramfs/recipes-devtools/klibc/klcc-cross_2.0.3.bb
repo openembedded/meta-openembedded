@@ -7,28 +7,34 @@ FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 
 SRC_URI += "file://use-env-for-perl.patch"
 
-inherit cross
-
 # disable task already run in klibc recipe
 do_configure[noexec] = "1"
+
 do_compile() {
-    oe_runmake 'INSTALLDIR=${STAGING_DIR_TARGET}${target_libdir}/klibc' klcc
+    oe_runmake 'INSTALLDIR=${STAGING_DIR_TARGET}${libdir}/klibc' klcc
 }
-# The linux-libc-headers and klibc custom headers are not machine-specific
-# but are installed into machine sysroot.
-# Klcc wrapper is hardcoding some of these paths thus, to keep the recipe
-# arch-specific, we force the rebuild of klcc-cross for each machine.
-do_compile[vardeps] += "MACHINE"
+
 do_install() {
-    install -d ${D}${bindir}
-    install -m 0755 klcc/klcc ${D}${bindir}/${TARGET_PREFIX}klcc
+    install -d ${D}${bindir_crossscripts}/
+    install -m 0755 klcc/klcc ${D}${bindir_crossscripts}/${TARGET_PREFIX}klcc
+    # Insert an unencoded path as a comment to trigger the sstate renaming functions
+    sed -i '2i #${STAGING_DIR_TARGET}' ${D}${bindir_crossscripts}/${TARGET_PREFIX}klcc
 }
 
+SYSROOT_PREPROCESS_FUNCS += "klcc_sysroot_preprocess"
 
-# disable unneeded tasks
-do_package[noexec] = "1"
-do_packagedata[noexec] = "1"
-do_package_write_ipk[noexec] = "1"
-do_package_write_rpm[noexec] = "1"
-do_package_write_deb[noexec] = "1"
-do_package_write_tar[noexec] = "1"
+klcc_sysroot_preprocess () {
+       sysroot_stage_dir ${D}${bindir_crossscripts} ${SYSROOT_DESTDIR}${bindir_crossscripts}
+}
+
+deltask do_package
+deltask do_packagedata
+deltask do_package_write_ipk
+deltask do_package_write_rpm
+deltask do_package_write_deb
+deltask do_package_write_tar
+
+SSTATE_SCAN_FILES = "*"
+EXTRA_STAGING_FIXMES = "MANGLEDSTAGINGDIRTARGET MANGLEDSTAGINGDIR"
+MANGLEDSTAGINGDIR = "${@d.getVar("STAGING_DIR", True).replace("/", "\\\\/").replace("-", "\\\\-")}"
+MANGLEDSTAGINGDIRTARGET = "${@d.getVar("STAGING_DIR_TARGET", True).replace("/", "\\\\/").replace("-", "\\\\-")}"
