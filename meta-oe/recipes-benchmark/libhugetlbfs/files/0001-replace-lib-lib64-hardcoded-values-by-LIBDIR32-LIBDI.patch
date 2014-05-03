@@ -1,0 +1,29 @@
+Subject: [PATCH 1/1] Replace lib/lib64 hardcoded values by LIBDIR32/LIBDIR64
+ variables
+
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+
+Upstream-Status: Submitted
+---
+ Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 91502e1..682c0db 100644
+--- a/Makefile
++++ b/Makefile
+@@ -181,9 +181,9 @@ BINDIR = $(PREFIX)/share/libhugetlbfs
+ EXEDIR = $(PREFIX)/bin
+ DOCDIR = $(PREFIX)/share/doc/libhugetlbfs
+ ifdef CC32
+-PMDIR = $(PREFIX)/lib/perl5/TLBC
++PMDIR = $(LIBDIR32)/perl5/TLBC
+ else
+-PMDIR = $(PREFIX)/lib64/perl5/TLBC
++PMDIR = $(LIBDIR64)/perl5/TLBC
+ endif
+ MANDIR1 = $(PREFIX)/share/man/man1
+ MANDIR3 = $(PREFIX)/share/man/man3
+-- 
+1.9.2
+
