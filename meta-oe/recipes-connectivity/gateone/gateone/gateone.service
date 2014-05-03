@@ -4,7 +4,7 @@ ConditionPathExists=|/var/lib/gateone
 
 [Service]
 WorkingDirectory=/var/lib/gateone
-ExecStart=/usr/bin/python gateone.py
+ExecStart=/usr/bin/python /usr/bin/gateone
 
 [Install]
 WantedBy=multi-user.target

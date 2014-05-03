@@ -1,14 +1,14 @@
 SUMMARY = "HTML5 (plugin-free) web-based terminal emulator and SSH client"
 LICENSE = "AGPL-3.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee5b168fc7de89a0cadc49e27830aa2c"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=834cbc6995db88433db17cdf8953a428"
+HOMEPAGE = "http://liftoffsoftware.com/Products/GateOne"
 
-PR = "r13"
-
-PV = "1.1"
-SRCREV = "ea5db3dcb3bbbe445ae6d1a5611c1f8d547c57b9"
+PV = "1.2"
+SRCREV = "1528d324088fc1c180b7fdf50f5b5c1af057eef6"
 SRC_URI = "git://github.com/liftoff/GateOne.git \
+           file://0001-configuration.py-Hack-around-broken-gethostname-thin.patch \
            file://gateone-avahi.service \
-           file://server.conf \
+           file://80oe.conf \
            file://gateone.service \
            file://gateone-init \
 "
@@ -16,33 +16,44 @@ SRC_URI = "git://github.com/liftoff/GateOne.git \
 S = "${WORKDIR}/git"
 
 inherit distutils python-dir systemd update-rc.d
+export prefix = "${localstatedir}"
 
-export prefix = "${localstatedir}/lib"
+DISTUTILS_INSTALL_ARGS = "--root=${D} \
+    --prefix=${prefix} \
+    --install-lib=${PYTHON_SITEPACKAGES_DIR} \
+    --install-data=${PYTHON_SITEPACKAGES_DIR} \
+    --install-scripts=${bindir} \
+    --skip_init_scripts"
 
 do_install_append() {
-    install -d ${D}${localstatedir}/log/${BPN}
 
-    install -m 0755 -d ${D}${sysconfdir}/avahi/services/
-    install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
-
-    install -m 0644 ${WORKDIR}/server.conf ${D}/var/lib/gateone/server.conf
+    # fix up hardcoded paths
+    sed -i -e s:/usr/bin:${bindir}:g ${WORKDIR}/gateone.service
     
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/gateone.service ${D}${systemd_unitdir}/system
 
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/gateone-init ${D}${sysconfdir}/init.d/gateone
+    
+    install -m 0755 -d ${D}${sysconfdir}/avahi/services/
+    install -m 0644 ${WORKDIR}/gateone-avahi.service ${D}${sysconfdir}/avahi/services/
+
+    install -m 0755 -d ${D}${sysconfdir}/gateone/conf.d/
+    install -m 0644 ${WORKDIR}/80oe.conf ${D}${sysconfdir}/gateone/conf.d/80oe.conf
+
+    install -d ${D}${localstatedir}/lib/gateone
 }
 
-FILES_${PN} = "${localstatedir}/lib ${localstatedir}/log ${localstatedir}/volatile/log ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
-RDEPENDS_${PN} = "file \
-                  mime-support \
+FILES_${PN} = "${localstatedir}/lib ${bindir} ${base_libdir} ${sysconfdir} ${PYTHON_SITEPACKAGES_DIR}"
+RDEPENDS_${PN} = "mime-support \
                   openssh-ssh \
                   python-compression \
                   python-crypt \
                   python-datetime \
                   python-email \
                   python-fcntl \
+                  python-futures \
                   python-html \
                   python-imaging \
                   python-io \
@@ -55,6 +66,7 @@ RDEPENDS_${PN} = "file \
                   python-pyopenssl \
                   python-re \
                   python-readline \
+                  python-setuptools \
                   python-shell \
                   python-simplejson \
                   python-subprocess \

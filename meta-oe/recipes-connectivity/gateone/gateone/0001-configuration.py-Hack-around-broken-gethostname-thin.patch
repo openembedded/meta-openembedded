@@ -1,0 +1,26 @@
+From d811d3bdf06d78c93c48bef762c19c392c879077 Mon Sep 17 00:00:00 2001
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 26 Nov 2013 15:54:10 +0100
+Subject: [PATCH] configuration.py: Hack around broken gethostname thingy
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ gateone/core/configuration.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gateone/core/configuration.py b/gateone/core/configuration.py
+index da41cbd..d1c8222 100644
+--- a/gateone/core/configuration.py
++++ b/gateone/core/configuration.py
+@@ -162,7 +162,7 @@ def define_options(installed=True):
+     ]
+     # Used both http and https above to demonstrate that both are acceptable
+     try:
+-        additional_origins = socket.gethostbyname_ex(socket.gethostname())
++        additional_origins = [] # additional_origins = socket.gethostbyname_ex(socket.gethostname())
+     except socket.gaierror:
+         # Couldn't get any IPs from the hostname
+         additional_origins = []
+-- 
+1.8.4.2
+
