@@ -15,6 +15,11 @@ SRC_URI += "\
 SRC_URI[md5sum] = "993c72f7f805a9eb453f90b0b7fe0d2b"
 SRC_URI[sha256sum] = "d192d1afc46a7ef27b9d0a3c7a67b509048984db2c38907aa82641bdf980acf4"
 
+# it's unknown to configure script, but then passed to extconf.rb
+# maybe it's not really needed as we're hardcoding the result with
+# 0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
+
 EXTRA_OECONF = "\
     --enable-wide-getaddrinfo \
     --disable-versioned-paths \
