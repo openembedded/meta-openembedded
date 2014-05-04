@@ -3,7 +3,7 @@ HOMEPAGE = "http://damien.douxchamps.net/ieee1394/coriander/"
 SECTION = "applications"
 LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-DEPENDS = "gtk+ libgnomeui libraw1394 libdc1394 libxv"
+DEPENDS = "gtk+ libgnomeui libraw1394 libdc1394 libxv tiff"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/coriander-2/${PV}/${P}.tar.gz \
            file://cross-compile.patch \
