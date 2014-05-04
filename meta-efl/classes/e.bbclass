@@ -8,7 +8,7 @@ do_prepsources () {
 addtask prepsources after do_patch before do_configure
 
 do_configure_append() {
-    find ${S} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
 }
 
 export CURL_CONFIG = "${STAGING_BINDIR_CROSS}/curl-config"
