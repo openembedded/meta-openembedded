@@ -14,7 +14,7 @@ do_configure_prepend() {
 }
 
 do_install_prepend () {
-    for i in `find ${S}/ -name "*.pc" -type f` ; do \
+    for i in `find ${B}/ -name "*.pc" -type f` ; do \
         sed -i -e 's:-L${STAGING_LIBDIR}:-L\$\{libdir\}:g' -e 's:-I${STAGING_LIBDIR}:-I\$\{libdir\}:g' -e 's:-I${STAGING_INCDIR}:-I\$\{includedir\}:g' $i
     done
 }
