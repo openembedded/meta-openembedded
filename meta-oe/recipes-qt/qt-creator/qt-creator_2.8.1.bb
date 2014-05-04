@@ -32,3 +32,11 @@ RRECOMMENDS_${PN} += "packagegroup-core-buildessential \
                       packagegroup-qt-toolchain-target \
                       qt4-plugin-sqldriver-sqlite \
 "
+
+# the regexp in insane.bbclass doesn't allow this valid path:
+# qt-creator-2.8.1: qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/libqbs_cpp_scanner.so
+# qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/libqbs_qt_scanner.so
+# qt-creator-dbg: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/.debug/libqbs_cpp_scanner.so
+# qt-creator-dbg: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/.debug/libqbs_qt_scanner.so
+INSANE_SKIP_${PN} += "libdir"
+INSANE_SKIP_${PN}-dbg += "libdir"
