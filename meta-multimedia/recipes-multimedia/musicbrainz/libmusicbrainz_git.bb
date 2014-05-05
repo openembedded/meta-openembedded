@@ -3,7 +3,7 @@ DESCRIPTION = "The MusicBrainz client is a library which can be built into other
 HOMEPAGE = "http://musicbrainz.org"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
-DEPENDS = "expat neon"
+DEPENDS = "expat neon neon-native"
 
 PV = "5.0.1+git${SRCPV}"
 PR = "r1"
@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
 S = "${WORKDIR}/git"
 
 LDFLAGS_prepend_libc-uclibc = " -lpthread "
-
 
 inherit cmake pkgconfig
 
