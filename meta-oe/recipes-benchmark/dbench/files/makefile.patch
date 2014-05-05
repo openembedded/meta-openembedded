@@ -10,9 +10,9 @@ Index: dbench-4.0/Makefile.in
 @@ -35,7 +35,7 @@ install: all
  	${INSTALLCMD} -d $(DESTDIR)$(bindir) $(DESTDIR)$(datadir) $(DESTDIR)$(mandir)
  	${INSTALLCMD} dbench tbench tbench_srv $(DESTDIR)$(bindir)
- 	${INSTALLCMD} client.txt $(DESTDIR)$(datadir)
--	${INSTALLCMD} -m644 dbench.1 $(DESTDIR)$(mandir)
-+	${INSTALLCMD} -m 644 dbench.1 $(DESTDIR)$(mandir)
+ 	${INSTALLCMD} @top_srcdir@/client.txt $(DESTDIR)$(datadir)
+-	${INSTALLCMD} -m644 @top_srcdir@/dbench.1 $(DESTDIR)$(mandir)
++	${INSTALLCMD} -m 644 @top_srcdir@/dbench.1 $(DESTDIR)$(mandir)
  	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench.1
  	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench_srv.1
  

@@ -19,8 +19,8 @@ Index: dbench-3.04/Makefile.in
 -	ln -sf dbench.1 $(mandir)/tbench_srv.1
 +	${INSTALLCMD} -d $(DESTDIR)$(bindir) $(DESTDIR)$(datadir) $(DESTDIR)$(mandir)
 +	${INSTALLCMD} dbench tbench tbench_srv $(DESTDIR)$(bindir)
-+	${INSTALLCMD} client.txt $(DESTDIR)$(datadir)
-+	${INSTALLCMD} -m644 dbench.1 $(DESTDIR)$(mandir)
++	${INSTALLCMD} @top_srcdir@/client.txt $(DESTDIR)$(datadir)
++	${INSTALLCMD} -m644 @top_srcdir@/dbench.1 $(DESTDIR)$(mandir)
 +	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench.1
 +	ln -sf dbench.1 $(DESTDIR)$(mandir)/tbench_srv.1
  
