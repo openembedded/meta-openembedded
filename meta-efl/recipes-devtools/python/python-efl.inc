@@ -8,7 +8,7 @@ AUTHOR = "Gustavo Sverzut Barbieri <barbieri@gmail.com>"
 # NOTE: Due to a bug in distutils, even if we don't use pyrex but cython,
 # we need to build pyrex otherwise cython doesn't get called to build
 # the extension modules.
-DEPENDS = "python-cython-native python-pyrex-native python-numeric eina"
+DEPENDS = "python-cython-native python-pyrex-native python-numeric efl elementary"
 RDEPENDS_${PN} += "python-lang"
 
 PROVIDES = "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas"
