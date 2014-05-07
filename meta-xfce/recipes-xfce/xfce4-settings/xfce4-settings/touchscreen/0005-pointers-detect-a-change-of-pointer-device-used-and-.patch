@@ -1,4 +1,4 @@
-From 37f5e33511499d320c3035c5377425004657faa5 Mon Sep 17 00:00:00 2001
+From 78353322ce1070ee1fd7bb5367e2c4dd43928f42 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 Date: Thu, 20 Dec 2012 16:58:19 +0100
 Subject: [PATCH 5/5] pointers: detect a change of pointer-device used and set
@@ -17,11 +17,11 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 Upstream-Status: Submitted [1]
 [1] https://bugzilla.xfce.org/show_bug.cgi?id=9474
 ---
- xfsettingsd/pointers.c |  337 +++++++++++++++++++++++++++++++----------------
- 1 files changed, 222 insertions(+), 115 deletions(-)
+ xfsettingsd/pointers.c | 342 ++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 225 insertions(+), 117 deletions(-)
 
 diff --git a/xfsettingsd/pointers.c b/xfsettingsd/pointers.c
-index 62ebc60..32662cc 100644
+index cfa56e2..41c8bba 100644
 --- a/xfsettingsd/pointers.c
 +++ b/xfsettingsd/pointers.c
 @@ -66,11 +66,9 @@ static void             xfce_pointers_helper_channel_property_changed (XfconfCha
@@ -166,7 +166,7 @@ index 62ebc60..32662cc 100644
  
      /* only stop a running daemon */
      if (!xfconf_channel_get_bool (helper->channel, "/DisableTouchpadWhileTyping", FALSE))
-@@ -297,17 +325,16 @@ xfce_pointers_helper_syndaemon_check (XfcePointersHelper *helper)
+@@ -299,17 +327,16 @@ xfce_pointers_helper_syndaemon_check (XfcePointersHelper *helper)
          if (device_list[n].type != touchpad_type)
              continue;
  
@@ -188,7 +188,7 @@ index 62ebc60..32662cc 100644
          if (gdk_error_trap_pop () == 0
              && props != NULL)
          {
-@@ -317,8 +344,6 @@ xfce_pointers_helper_syndaemon_check (XfcePointersHelper *helper)
+@@ -319,8 +346,6 @@ xfce_pointers_helper_syndaemon_check (XfcePointersHelper *helper)
              XFree (props);
          }
  
@@ -197,7 +197,7 @@ index 62ebc60..32662cc 100644
          if (have_synaptics)
              break;
      }
-@@ -844,24 +869,56 @@ xfce_pointers_helper_change_properties (gpointer key,
+@@ -847,24 +872,56 @@ xfce_pointers_helper_change_properties (gpointer key,
  
  
  static void
@@ -267,8 +267,11 @@ index 62ebc60..32662cc 100644
  
      gdk_error_trap_push ();
      device_list = XListInputDevices (xdisplay, &ndevices);
-@@ -873,84 +930,107 @@ xfce_pointers_helper_restore_devices (XfcePointersHelper *helper,
+@@ -874,86 +931,110 @@ xfce_pointers_helper_restore_devices (XfcePointersHelper *helper,
+         return;
+     }
  
++    device_data = NULL;
      for (n = 0; n < ndevices; n++)
      {
 -        /* filter the pointer devices */
@@ -426,7 +429,7 @@ index 62ebc60..32662cc 100644
  }
  
  
-@@ -961,12 +1041,12 @@ xfce_pointers_helper_channel_property_changed (XfconfChannel      *channel,
+@@ -964,12 +1045,12 @@ xfce_pointers_helper_channel_property_changed (XfconfChannel      *channel,
                                                 const GValue       *value,
                                                 XfcePointersHelper *helper)
  {
@@ -445,7 +448,7 @@ index 62ebc60..32662cc 100644
  
      if (G_UNLIKELY (property_name == NULL))
           return;
-@@ -996,63 +1076,72 @@ xfce_pointers_helper_channel_property_changed (XfconfChannel      *channel,
+@@ -1000,63 +1081,72 @@ xfce_pointers_helper_channel_property_changed (XfconfChannel      *channel,
              /* filter the pointer devices */
              device_info = &device_list[n];
              if (device_info->use != IsXExtensionPointer
@@ -532,7 +535,7 @@ index 62ebc60..32662cc 100644
                  /* stop searching */
                  n = ndevices;
              }
-@@ -1068,26 +1157,44 @@ xfce_pointers_helper_channel_property_changed (XfconfChannel      *channel,
+@@ -1072,26 +1162,44 @@ xfce_pointers_helper_channel_property_changed (XfconfChannel      *channel,
  
  
  
@@ -582,5 +585,5 @@ index 62ebc60..32662cc 100644
  }
 -#endif
 -- 
-1.7.6.5
+1.8.3.1
 
