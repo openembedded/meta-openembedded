@@ -5,9 +5,13 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl qt4-x11-free \
-   dbus libxml2 gnutls tremor faad2 ffmpeg flac libxpm fluidsynth alsa-lib \
-   libdvdcss libdvdread lua-native lua"
+DEPENDS = "libfribidi libtool libgcrypt gst-plugins-bad virtual/libsdl \
+   libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls tremor \
+   faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib libdvdcss \
+   libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs libdc1394 \
+   libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
+   libmtp opencv libopus orc libusb1 schroedinger taglib \
+   tiff xcb-util-keysyms samba"
 
 SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
 
@@ -26,11 +30,11 @@ EXTRA_OECONF = "\
     --enable-sdl \ 
     --enable-png \
     --enable-live555 --enable-tremor \
-    --enable-v4l2 --enable-v4l --disable-aa --disable-faad \
+    --enable-v4l2 --disable-aa --disable-faad \
     --enable-dbus \
     --without-contrib \
     --without-kde-solid \
-    --disable-opengl --disable-glx \
+    --disable-glx \
     --enable-realrtsp \
     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
     ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
@@ -38,11 +42,11 @@ EXTRA_OECONF = "\
 "
 
 PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
-PACKAGECONFIG[id3tag] = "--enable-id3tag,--disable-id3tag,libid3tag"
 PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
-PACKAGECONFIG[mpeg2dec] = "--enable-mpeg2dec,--disable-mpeg2dec,mpeg2dec"
 PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
 PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
+PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
+PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
 
 do_configure() {
     cp ${STAGING_DATADIR}/aclocal/libgcrypt.m4 ${S}/m4/ 
