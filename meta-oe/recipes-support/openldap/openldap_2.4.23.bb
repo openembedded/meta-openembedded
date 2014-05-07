@@ -16,6 +16,8 @@ LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
 SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${P}.tgz \
     file://openldap-m4-pthread.patch \
     file://kill-icu.patch \
+    file://0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch \
+    file://openldap-2.4.28-gnutls-gcrypt.patch \
     file://initscript \
 "
 SRC_URI[md5sum] = "90150b8c0d0192e10b30157e68844ddf"
@@ -48,7 +50,7 @@ PACKAGECONFIG ??= "gnutls modules \
                    ldap meta monitor null passwd shell proxycache dnssrv \
 "
 #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
-PACKAGECONFIG[gnutls] = "--with-tls=gnutls,,gnutls"
+PACKAGECONFIG[gnutls] = "--with-tls=gnutls,,gnutls libgcrypt"
 PACKAGECONFIG[openssl] = "--with-tls=openssl,,openssl"
 
 PACKAGECONFIG[sasl] = "--with-cyrus-sasl,--without-cyrus-sasl,cyrus-sasl"
