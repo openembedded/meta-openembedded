@@ -2,13 +2,13 @@ SUMMARY = "Fluidsynth is a software synthesizer"
 HOMEPAGE = "http://www.fluidsynth.org/"
 SECTION = "libs/multimedia"
 LICENSE = "LGPL-2.0+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=dda26baa823649da9a68947707650272"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e198e9aac94943d0ec29a7dae8c29416"
 
 DEPENDS = "alsa-lib ncurses glib-2.0"
 
-SRC_URI = "http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
-SRC_URI[md5sum] = "0db3da78028d255026230809c6e21b44"
-SRC_URI[sha256sum] = "55638cb04f39f4df76c081e22ca7feeea58ddd20ebf779a7db2d38b1ff374cd6"
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/${PN}-${PV}/${PN}-${PV}.tar.gz"
+SRC_URI[md5sum] = "ae5aca6de824b4173667cbd3a310b263"
+SRC_URI[sha256sum] = "50853391d9ebeda9b4db787efb23f98b1e26b7296dd2bb5d0d96b5bccee2171c"
 
 inherit autotools pkgconfig lib_package
 
@@ -17,4 +17,3 @@ PACKAGECONFIG[sndfile] = "--enable-libsndfile-support,--disable-libsndfile-suppo
 PACKAGECONFIG[jack] = "--enable-jack-support,--disable-jack-support,jack"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse-support,--disable-pulse-support,pulseaudio"
 PACKAGECONFIG[portaudio] = "--enable-portaudio-support,--disable-portaudio-support,portaudio"
-PACKAGECONFIG[readline] = "--with-readline,--without-readline-support,readline"
