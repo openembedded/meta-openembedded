@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fa01bff138cc98a62b8840a157951c88"
 # flex with provide /usr/include/FlexLexer.h
 DEPENDS = "flex-native bison-native flex"
 
-SRC_URI = "http://download.savannah.nongnu.org/releases/fbi-improved/${BPN}-${PV}.tar.gz \
+SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/fbi-improved/${BPN}-${PV}.tar.gz \
            file://cross_cc.patch"
 SRC_URI[md5sum] = "d7362dde5541c2b6439c35c6e2bd5046"
 SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1ea9f686"
