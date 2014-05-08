@@ -12,12 +12,23 @@ DEPENDS = "libpng12 jpeg"
 
 SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "4f306664aa3886fa0cf93853603603f8"
-SRC_URI[sha256sum] = "bea6f9de2cdce376195bd91e4a2fdfdf80bf3e480abff8e05b90a6458c1deb47"
+SRC_URI[md5sum] = "739859cf57d4c8a23452c43e84f66e56"
+SRC_URI[sha256sum] = "bded41aaf918ce062d9b81e42cc5be943e6a80bc4ff9d046983b96102c3df6b5"
 
 inherit waf pkgconfig
 
 PACKAGECONFIG ?= "gl gles2"
 
-PACKAGECONFIG[gl] = "--enable-gl,,virtual/libgl"
-PACKAGECONFIG[gles2] = "--enable-glesv2,,virtual/libgles2"
+PACKAGECONFIG[gl] = ",,virtual/libgl"
+PACKAGECONFIG[gles2] = ",,virtual/libgles2"
+
+python __anonymous() {
+    packageconfig = (d.getVar("PACKAGECONFIG", True) or "").split()
+    flavors = []
+    if "gles2" in packageconfig:
+        flavors.append("x11-glesv2")
+    if "gl" in packageconfig:
+        flavors.append("x11-gl")
+    if flavors:
+        d.appendVar("EXTRA_OECONF", " --with-flavors=%s" % ",".join(flavors))
+}
