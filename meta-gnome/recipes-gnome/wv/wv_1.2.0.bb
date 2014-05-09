@@ -3,7 +3,7 @@ HOMEPAGE = "http://wvware.sourceforge.net/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6cbca01f1c9178aca280e8ff64d85b2f"
 
-DEPENDS = "libgsf glib-2.0"
+DEPENDS = "libgsf glib-2.0 libpng"
 PR = "r5"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/wv-${PV}.tar.gz \
