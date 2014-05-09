@@ -16,6 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://snmpd.service \
         file://snmptrapd.service \
         file://ifmib.patch \
+        file://net-snmp-5.7.2-fix-CVE-2014-2284.patch \
 "
 
 SRC_URI[md5sum] = "5bddd02e2f82b62daa79f82717737a14"
