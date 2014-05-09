@@ -37,6 +37,10 @@ EXTRA_OECONF = "--disable-embedded-perl \
                 --with-defaults \
                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
 
+do_configure_prepend() {
+    export PERLPROG="${bindir}/env perl"
+}
+
 do_install_append() {
     install -d ${D}${sysconfdir}/snmp
     install -d ${D}${sysconfdir}/init.d
