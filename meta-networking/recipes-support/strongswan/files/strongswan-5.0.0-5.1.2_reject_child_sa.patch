@@ -1,0 +1,36 @@
+From b980ba7757dcfedd756aa055b3271ea58cf85aa6 Mon Sep 17 00:00:00 2001
+From: Martin Willi <martin@revosec.ch>
+Date: Thu, 20 Feb 2014 16:08:43 +0100
+Subject: [PATCH] ikev2: Reject CREATE_CHILD_SA exchange on unestablished
+ IKE_SAs
+
+Prevents a responder peer to trick us into established state by starting
+IKE_SA rekeying before the IKE_SA has been authenticated during IKE_AUTH.
+
+Fixes CVE-2014-2338 for 5.x versions of strongSwan.
+---
+ src/libcharon/sa/ikev2/task_manager_v2.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/src/libcharon/sa/ikev2/task_manager_v2.c b/src/libcharon/sa/ikev2/task_manager_v2.c
+index ac3be90..a5252ab 100644
+--- a/src/libcharon/sa/ikev2/task_manager_v2.c
++++ b/src/libcharon/sa/ikev2/task_manager_v2.c
+@@ -780,6 +780,15 @@ static status_t process_request(private_
+ 			case CREATE_CHILD_SA:
+ 			{	/* FIXME: we should prevent this on mediation connections */
+ 				bool notify_found = FALSE, ts_found = FALSE;
++
++				if (this->ike_sa->get_state(this->ike_sa) == IKE_CREATED ||
++					this->ike_sa->get_state(this->ike_sa) == IKE_CONNECTING)
++				{
++					DBG1(DBG_IKE, "received CREATE_CHILD_SA request for "
++						 "unestablished IKE_SA, rejected");
++					return FAILED;
++				}
++
+ 				enumerator = message->create_payload_enumerator(message);
+ 				while (enumerator->enumerate(enumerator, &payload))
+ 				{
+--
+1.8.1.2
