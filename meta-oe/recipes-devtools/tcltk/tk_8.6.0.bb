@@ -15,8 +15,6 @@ LIC_FILES_CHKSUM = "file://../license.terms;md5=c88f99decec11afa967ad33d314f87fe
     file://../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
 "
 
-PNBLACKLIST[tk] = "tk8.6.0/unix/libtk8.6.so: error: undefined reference to 'FcCharSetHasChar'"
-
 DEPENDS = "tcl virtual/libx11 libxt"
 
 SRC_URI = "\
@@ -26,6 +24,7 @@ SRC_URI = "\
     file://tklibrary.diff;striplevel=2 \
     file://tkprivate.diff;striplevel=2 \
     file://fix-xft.diff \
+    file://configure.use.fontconfig.with.xft.patch \
 "
 SRC_URI[md5sum] = "b883a1a3c489c17413fb602a94bf54e8"
 SRC_URI[sha256sum] = "5c708b2b6f658916df59190b27750fa1ea2bc10992108e10f961c0700f058de6"
