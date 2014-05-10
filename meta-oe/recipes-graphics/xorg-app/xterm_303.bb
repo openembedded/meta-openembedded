@@ -24,3 +24,6 @@ do_configure() {
 }
 
 FILES_${PN} += " /usr/lib/X11"
+
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig"
