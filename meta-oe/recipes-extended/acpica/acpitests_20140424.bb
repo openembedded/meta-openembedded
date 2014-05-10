@@ -8,12 +8,13 @@ DEPENDS = "bison flex"
 
 SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;name=acpitests \
            https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz;name=acpica \
-           file://0001-Fixup-aapits-build.patch \
+           file://aapits-linux.patch \
+           file://aapits-makefile.patch \
     "
-SRC_URI[acpitests.md5sum] = "c72b61e092d2b25726dfff6e455116c9"
-SRC_URI[acpitests.sha256sum] = "368f69296edef5138fd33affa2d50bdcdd1dfd2f6919ba782f8ecf03971a3a2c"
-SRC_URI[acpica.md5sum] = "fcd4b7304f1bfabc7d4b9cfdecc6b0c6"
-SRC_URI[acpica.sha256sum] = "0d5bd32690ab77e21ab143ef25361c314a4ed13c33a5fb3ddd6f5559ab24ebc3"
+SRC_URI[acpitests.md5sum] = "bfc399cecb21e9491d362d8e480b2689"
+SRC_URI[acpitests.sha256sum] = "e7d7ff638872543909b38c2498e88958251ee6ce4d22bc13d4e3925771212c0e"
+SRC_URI[acpica.md5sum] = "733532f005fba5d1c5344440651b13d1"
+SRC_URI[acpica.sha256sum] = "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d41dcf00e19d702cdf751bbc"
 
 S = "${WORKDIR}/acpitests-unix-${PV}"
 
