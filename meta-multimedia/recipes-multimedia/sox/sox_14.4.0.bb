@@ -19,6 +19,7 @@ PACKAGECONFIG[magic] = "--with-magic,--without-magic,file,"
 PACKAGECONFIG[mad] = "--with-mad,--without-mad,libmad,"
 PACKAGECONFIG[id3tag] = "--with-id3tag,--without-id3tag,libid3tag,"
 PACKAGECONFIG[lame] = "--with-lame,--without-lame,lame,"
+PACKAGECONFIG[ao] = "--with-ao,--without-ao,libao,"
 
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
