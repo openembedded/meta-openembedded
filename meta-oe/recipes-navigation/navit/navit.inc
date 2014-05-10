@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ed539d099d6ce08de6ea0dfed9ecb333 \
 "
 
 SECTION = "x11/applications"
-DEPENDS = "glib-2.0 gtk+ qt4-x11-free gd gypsy librsvg-native"
+DEPENDS = "glib-2.0 gd gypsy librsvg-native"
 RDEPENDS_${PN} = " ${PN}-icons ${PN}-config "
 RDEPENDS_${PN}-gui-qml = "qt4-plugin-imageformat-svg"
 RRECOMMENDS_${PN} = "gpsd ${PN}-dbus ${PN}-speech-cmdline ${PN}-gui-internal ${PN}-graphics-gtk"
@@ -17,12 +17,17 @@ INC_PR = "r11"
 
 inherit autotools gettext
 
+PACKAGECONFIG ?= "qt"
+PACKAGECONFIG[fribidi] = "--enable-fribidi,--disable-fribidi,fribidi"
+PACKAGECONFIG[imlib2] = "--enable-imlib2,--disable-imlib2,imlib2"
+PACKAGECONFIG[sdl] = "--enable-graphics-sdl,--disable-graphics-sdl,libsdl"
+PACKAGECONFIG[gtk] = "--enable-graphics-gtk-drawing-area --enable-gui-gtk,--disable-graphics-gtk-drawing-area --disable-gui-gtk,gtk+"
+PACKAGECONFIG[qt] = "--enable-graphics-qt-qpainter --enable-gui-qml,--disable-graphics-qt-qpainter --disable-gui-qml,qt4-x11-free"
+
 EXTRA_OECONF += " \
     --disable-binding-python \
     --disable-samplemap \
     --enable-avoid-unaligned \
-    --enable-graphics-qt-qpainter \
-    --enable-gui-qml \
     --enable-svg2png-scaling-flag=32 \
     --disable-speech-speech-dispatcher \
     --enable-cache-size=20971520 \
