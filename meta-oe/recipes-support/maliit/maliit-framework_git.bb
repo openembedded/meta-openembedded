@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
 
 inherit autotools qt4x11 gtk-immodules-cache
 
-DEPENDS = "libxcomposite"
+DEPENDS = "libxcomposite dbus gtk+3 gtk+"
 
 SRC_URI = "git://github.com/maliit/framework.git;branch=master \
     file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
