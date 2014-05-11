@@ -1,5 +1,5 @@
 SUMMARY = "mongodb"
-LICENSE = "AGPLv3 & Apache-2.0"
+LICENSE = "AGPL-3.0 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788 \
                     file://APACHE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
