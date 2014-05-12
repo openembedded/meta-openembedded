@@ -17,9 +17,18 @@ S = "${WORKDIR}/${BPN}-${PV}"
 
 do_configure[noexec] = "1"
 
-do_compile() {
+netcat_do_patch() {
     cd ${S}
     while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
+}
+
+python do_patch() {
+    bb.build.exec_func('netcat_do_patch', d)
+    bb.build.exec_func('patch_do_patch', d)
+}
+
+do_compile() {
+    cd ${S}
     pkgrel=4
     oe_runmake CFLAGS="$CFLAGS -DDEBIAN_VERSION=\"\\\"${pkgrel}\\\"\""
 }
