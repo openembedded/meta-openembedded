@@ -1,0 +1,55 @@
+Upstream-Status: Pending, Submitted
+http://code.google.com/p/xdelta/issues/detail?id=178
+
+xdelta3: add --with-liblzma configure option
+
+As xdelta3 can be compiled with or without liblzma external library, make it configurable.
+Default is autodetect (unchanged behavior).
+
+Signed-off-by: Matthieu Crapet <mcrapet@gmail.com>
+---
+ configure.ac | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 3b430d7..8c53ba8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -8,8 +8,6 @@ AM_INIT_AUTOMAKE([1.9 no-define foreign tar-ustar])
+ AX_CHECK_ALIGNED_ACCESS_REQUIRED
+ AC_PROG_CC
+ AC_PROG_CXX
+-AC_CHECK_HEADERS([lzma.h])
+-AC_CHECK_LIB(lzma, lzma_easy_buffer_encode)
+ AC_CHECK_SIZEOF(size_t)
+ #AM_PATH_PYTHON(,, [:])
+ #AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
+@@ -22,6 +20,25 @@ AC_ARG_ENABLE(debug-symbols,
+    AS_HELP_STRING(--enable-debug-symbols,[Build with debug symbols (default is NO)]),,enableval=no)
+ AM_CONDITIONAL([DEBUG_SYMBOLS], [test ${enableval} = "yes"])
+ 
++AC_ARG_WITH(
++    [liblzma],
++    [AC_HELP_STRING(
++        [--with-liblzma],
++        [build with liblzma support @<:@default=autodetect@:>@])],
++    [USE_LIBLZMA=$withval],
++    [USE_LIBLZMA=auto])
++
++if test "x$USE_LIBLZMA" != xno ; then
++    AC_CHECK_HEADERS([lzma.h],,[
++        if test "x$with_liblzma" = xyes ; then
++            AC_MSG_FAILURE([liblzma includes was not found])
++        fi])
++    AC_CHECK_LIB([lzma], [lzma_easy_buffer_encode],,[
++        if test "x$with_liblzma" = xyes ; then
++            AC_MSG_FAILURE([liblzma library was not found])
++        fi])
++fi
++
+ AC_CONFIG_HEADERS([config.h])
+ AC_CONFIG_FILES([Makefile])
+ AC_OUTPUT
+-- 
+1.8.5.4
+
