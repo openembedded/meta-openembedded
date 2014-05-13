@@ -14,5 +14,5 @@ SRC_URI[sha256sum] = "faee08ba1bd8c22537cd5b7458881d1bdb4985df88ed6bc5967c56881a
 inherit autotools
 
 do_configure_prepend () {
-    sed -i -e 's:-I/usr/local/include::' Makefile.am || bb_fatal "sed failed"
+    sed -i -e 's:-I/usr/local/include::' ${S}/Makefile.am || bb_fatal "sed failed"
 }
