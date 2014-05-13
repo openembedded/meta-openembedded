@@ -10,7 +10,7 @@ PR = "r2"
 SRCREV = "${EFL_SRCREV}"
 SRCNAME = "vala"
 
-inherit e-base autotools pkgconfig vala
+inherit e-base autotools-brokensep pkgconfig vala
 
 SRC_URI = "${E_SVN}/trunk/BINDINGS;module=${SRCNAME};protocol=http \
     file://disable.eina.test.patch \

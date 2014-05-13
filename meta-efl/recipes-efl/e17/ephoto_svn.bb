@@ -12,3 +12,6 @@ inherit gettext
 DEPENDS += "elementary ethumb ecore eio"
 
 SRCNAME = "${PN}"
+
+# autotools-brokensep
+B = "${S}"
