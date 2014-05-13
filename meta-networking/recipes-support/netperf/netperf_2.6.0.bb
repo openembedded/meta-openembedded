@@ -27,6 +27,9 @@ CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
 CFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'largefile', \
     ' -D_FILE_OFFSET_BITS=64', '', d)}"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,"
+
 # autotools.bbclass attends to include m4 files with path depth <= 2 by
 # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
 do_configure_prepend() {
@@ -56,6 +59,8 @@ do_install() {
     install -m 0644 ${S}/README ${D}${docdir}/netperf
     install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
 }
+
+RRECOMMENDS_${PN} += "${@base_contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
 
 INITSCRIPT_NAME="netperf"
 INITSCRIPT_PARAMS="defaults"
