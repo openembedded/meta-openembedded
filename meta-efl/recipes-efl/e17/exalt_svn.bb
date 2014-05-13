@@ -23,11 +23,11 @@ EXTRA_OECONF = " \
 do_install_append() {
     # install dbus config file
     install -d ${D}${sysconfdir}/dbus-1/system.d/
-    install -m 0644 data/daemon/dbus/exalt.conf ${D}${sysconfdir}/dbus-1/system.d/exalt.conf
+    install -m 0644 ${S}/data/daemon/dbus/exalt.conf ${D}${sysconfdir}/dbus-1/system.d/exalt.conf
 
     # install dbus service file
     install -d ${D}${datadir}/dbus-1/system-services/
-    install -m 0644 org.e.Exalt.service ${D}${datadir}/dbus-1/system-services/
+    install -m 0644 ${B}/org.e.Exalt.service ${D}${datadir}/dbus-1/system-services/
 }
 
 FILES_${PN} += "${datadir}/dbus-1"
