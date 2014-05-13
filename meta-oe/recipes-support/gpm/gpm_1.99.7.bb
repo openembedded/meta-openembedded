@@ -15,7 +15,7 @@ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
            file://eglibc-2.17.patch \
            file://init"
 
-inherit autotools update-rc.d
+inherit autotools-brokensep update-rc.d
 
 INITSCRIPT_NAME = "gpm"
 INITSCRIPT_PARAMS = "defaults"
