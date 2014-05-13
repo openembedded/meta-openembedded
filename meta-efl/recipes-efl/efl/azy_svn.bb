@@ -22,7 +22,7 @@ do_configure_prepend_class-target() {
 
 do_install_append_class-native() {
     install -d ${D}/${bindir}
-    install -m 0755 ${S}/src/bin/lemon ${D}/${bindir}/azy_lemon
+    install -m 0755 ${B}/src/bin/lemon ${D}/${bindir}/azy_lemon
 }
 
 inherit efl
