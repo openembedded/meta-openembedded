@@ -15,7 +15,7 @@ SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
 SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f"
 SRC_URI[sha256sum] = "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
 
-inherit autotools gettext pythonnative perlnative python-dir
+inherit autotools-brokensep gettext pythonnative perlnative python-dir
 
 EXTRA_AUTORECONF = "-I m4"
 
@@ -78,11 +78,11 @@ do_configure() {
 	sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
 	    --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
 	    -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
-	    ${S}/bindings/Makefile
+	    ${B}/bindings/Makefile
 
 	#redo the perl bindings
 	(
-	cd bindings/perl-shared;
+	cd ${S}/bindings/perl-shared;
 	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor"
 	    INSTALLPRIVLIB="abc";
 	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
@@ -94,9 +94,9 @@ do_configure() {
 
 	#change the interpreter in file
 	sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
-	    ${S}/examples/Makefile
+	    ${B}/examples/Makefile
 	sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
-	    ${S}/examples/*.pl
+	    ${B}/examples/*.pl
 }
 
 PACKAGES =+ "${PN}-perl ${PN}-python"
