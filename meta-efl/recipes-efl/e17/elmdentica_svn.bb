@@ -17,7 +17,3 @@ PV = "0.9.9+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 RDEPENDS_${PN} = "${PN}-themes"
-
-do_configure_prepend() {
-    autopoint --force
-}
