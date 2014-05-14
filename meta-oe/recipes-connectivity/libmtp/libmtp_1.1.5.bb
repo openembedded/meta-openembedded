@@ -29,8 +29,8 @@ do_unpack[vardeps] += "skip_udev_rules_generation"
 do_unpack[postfuncs] += "skip_udev_rules_generation"
 
 skip_udev_rules_generation () {
-	sed -i -e '/^noinst_DATA=/,/util\/mtp-hotplug -H/d' Makefile.am
-	cp ${WORKDIR}/69-libmtp.rules ${S}/
+    sed -i -e '/^noinst_DATA=/,/util\/mtp-hotplug -H/d' ${S}/Makefile.am
+    cp ${WORKDIR}/69-libmtp.rules ${S}/
 }
 
 inherit autotools pkgconfig lib_package
