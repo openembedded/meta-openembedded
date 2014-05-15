@@ -7,9 +7,8 @@ DEPENDS = "zlib openssl libgcrypt"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
 
-PV = "0.5.5+gitr${SRCPV}"
-SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-5"
-SRCREV = "43914a5f07702fe292a968322d5ff2627e0431db"
+SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-6"
+SRCREV = "87145387aa12b720b52d6bc75b4dd6cd058c868a"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = " \
@@ -26,3 +25,5 @@ do_configure_prepend () {
     sed -i -e '/add_subdirectory(examples)/s/^/#DONOTWANT/' ${S}/CMakeLists.txt \
         || bbfatal "Failed to disable examples"
 }
+
+FILES_${PN}-dev += "${libdir}/cmake"
