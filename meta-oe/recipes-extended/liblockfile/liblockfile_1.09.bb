@@ -17,7 +17,7 @@ inherit autotools-brokensep
 
 # set default mailgroup to mail
 # --with-libnfslock specify where to install nfslock.so.NVER
-EXTRA_OECONF = "--enable-shared --enable-static \
+EXTRA_OECONF = "--enable-shared \
                 --with-mailgroup=mail \
                 --with-libnfslock=${libdir} \
 "
