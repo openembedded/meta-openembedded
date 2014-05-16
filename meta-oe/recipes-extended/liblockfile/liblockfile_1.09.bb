@@ -13,7 +13,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/libl/liblockfile/liblockfile_1.09.orig.tar.gz \
 SRC_URI[md5sum] = "2aa269e4405ee8235ff17d1b357c6ae8"
 SRC_URI[sha256sum] = "16979eba05396365e1d6af7100431ae9d32f9bc063930d1de66298a0695f1b7f"
 
-inherit autotools
+inherit autotools-brokensep
 
 # set default mailgroup to mail
 # --with-libnfslock specify where to install nfslock.so.NVER
