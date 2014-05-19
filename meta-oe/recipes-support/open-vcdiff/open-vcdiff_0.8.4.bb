@@ -9,11 +9,10 @@ HOMEPAGE = "http://code.google.com/p/open-vcdiff/"
 SECTION = "console/utils"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b2c8309843bc5297cfb4dc84f43f3ccc"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ff820d4ddc1ba05b6fd37b41a21506f9"
 
-SRC_URI = "http://open-vcdiff.googlecode.com/files/${BPN}-${PV}.tar.gz \
-           file://aclocal-amflags-fix.patch"
-SRC_URI[md5sum] = "5f848e4916b407879f55e0ca74c3f6af"
-SRC_URI[sha256sum] = "b7e47db78866082e9e8b5782f5491092c8414f0acc0440aea03b14c7d1d3c371"
+SRC_URI = "https://drive.google.com/uc?id=0B5WpIi2fQU1aNGJwVE9hUjU5clU&export=download;downloadfilename=${BP}.tar.gz"
+SRC_URI[md5sum] = "5c0d378d907bebc38b51c3d7e4117011"
+SRC_URI[sha256sum] = "2b142b1027fb0a62c41347600e01a53fa274dad15445a7da48083c830c3138b3"
 
 inherit autotools
