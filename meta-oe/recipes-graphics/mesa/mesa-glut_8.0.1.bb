@@ -9,6 +9,6 @@ PV = "8.0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit autotools-brokensep pkgconfig
 
 DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu"
