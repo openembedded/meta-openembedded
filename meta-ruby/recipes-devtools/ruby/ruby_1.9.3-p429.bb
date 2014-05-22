@@ -33,11 +33,7 @@ EXTRA_OEMAKE = " \
 "
 
 do_install() {
-    if [ ${PN} = "ruby" ]; then
-        oe_runmake 'DESTDIR=${D}' install install-cross
-    else
-        oe_runmake 'DESTDIR=${D}' install
-    fi
+    oe_runmake 'DESTDIR=${D}' install
 }
 
 FILES_${PN} += "${datadir}/rubygems \
