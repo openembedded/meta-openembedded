@@ -65,9 +65,9 @@ index d9541ca..c28b49c 100644
 +	$(MKDIR_P) $(DESTDIR)/examples
 +	cp --parents $(check_DOTLIBS) $(DESTDIR)/examples
 +	cp --parents $(check_SCRIPTS) $(DESTDIR)/examples
-+	cp --parents $(dist_noinst_DATA) $(DESTDIR)/examples
++	$(foreach i, $(dist_noinst_DATA), cp --parents $(srcdir)/$(i) $(DESTDIR)/examples;)
 +	cp Makefile $(DESTDIR)/examples
 +	$(MKDIR_P) $(DESTDIR)/macros
-+	cp ../macros/test-driver $(DESTDIR)/macros
++	cp $(srcdir)/../macros/test-driver $(DESTDIR)/macros
 +	sed -i -e 's|^Makefile:|_Makefile:|' $(DESTDIR)/examples/Makefile
 +
