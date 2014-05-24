@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
 
 SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/openobex-${PV}.tar.gz \
            file://disable-cable-test.patch \
-           file://libusb_crosscompile_check.patch"
+           file://libusb_crosscompile_check.patch \
+           file://separate_builddir.patch"
 
 SRC_URI[md5sum] = "0d83dc86445a46a1b9750107ba7ab65c"
 SRC_URI[sha256sum] = "e602047570799a47ecb028420bda8f2cef41310e5a99d084de10aa9422935e65"
