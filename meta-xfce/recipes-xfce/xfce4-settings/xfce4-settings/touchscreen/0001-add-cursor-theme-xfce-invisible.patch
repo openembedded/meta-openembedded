@@ -223,15 +223,15 @@ index 0000000..c9e5a9f
 +
 +install-data-local:
 +	$(mkinstalldirs) $(DESTDIR)@cursordir@;
-+	$(INSTALL_DATA) index.theme $(DESTDIR)/@cursordir@/..
-+	$(INSTALL_DATA) invisible wait $(DESTDIR)@cursordir@/
++	$(INSTALL_DATA) $(srcdir)/index.theme $(DESTDIR)/@cursordir@/..
++	$(INSTALL_DATA) $(srcdir)/invisible $(srcdir)/wait $(DESTDIR)@cursordir@/
 +	for CURSOR in $(CURSOR_NAMES_INVISIBLE); do \
 +		echo '-- Installing invisible cursor '$$CURSOR; \
-+		ln -s invisible $(DESTDIR)@cursordir@/$$CURSOR; \
++		ln -s $(srcdir)/invisible $(DESTDIR)@cursordir@/$$CURSOR; \
 +	done
 +	for CURSOR in $(CURSOR_NAMES); do \
 +		echo '-- Installing visible cursor '$$CURSOR; \
-+		ln -s wait $(DESTDIR)@cursordir@/$$CURSOR; \
++		ln -s $(srcdir)/wait $(DESTDIR)@cursordir@/$$CURSOR; \
 +	done
 +
 diff --git a/cursors/index.theme b/cursors/index.theme
