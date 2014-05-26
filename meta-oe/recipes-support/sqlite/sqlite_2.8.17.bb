@@ -26,7 +26,7 @@ do_configure() {
 }
 
 do_compile() {
-    oe_runmake -f Makefile.linux-gcc \
+    oe_runmake -f ${S}/Makefile.linux-gcc \
              TOP="${S}" \
              BCC="${BUILD_CC}" \
              TCC="${CC}" \
