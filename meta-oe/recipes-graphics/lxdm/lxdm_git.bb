@@ -42,7 +42,7 @@ do_compile_append() {
         -e 's,# arg=.*,arg=${bindir}/X -s 0,g' \
         ${S}/data/lxdm.conf.in
     # add default configuration
-    oe_runmake -C ${S}/data lxdm.conf
+    oe_runmake -C ${B}/data lxdm.conf
 }
 
 do_install_append() {
