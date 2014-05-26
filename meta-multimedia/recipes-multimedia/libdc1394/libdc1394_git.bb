@@ -17,6 +17,6 @@ SRC_URI = "git://git.code.sf.net/p/libdc1394/code;branch=master;protocol=git \
 
 S = "${WORKDIR}/git/${PN}"
 
-inherit autotools pkgconfig
+inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
