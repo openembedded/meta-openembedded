@@ -3,11 +3,13 @@ HOMEPAGE = "http://www.maier-komor.de/mbuffer.html"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 SECTION = "console/network"
-PR = "r1"
 
-SRC_URI = "http://www.maier-komor.de/software/mbuffer/mbuffer-20091227.tgz"
-SRC_URI[md5sum] = "191663396b4b1752d7104803631b9e54"
-SRC_URI[sha256sum] = "e708b66f6cec9ba090877e8eb38e5627ac69aea9ebd9bca1360a29c7398a88ce"
+SRC_URI = " \
+    http://www.maier-komor.de/software/mbuffer/mbuffer-20140310.tgz \
+"
+
+SRC_URI[md5sum] = "9937d7f666c19a2e6b2499b04dbecc44"
+SRC_URI[sha256sum] = "ab90b6fdce16db2bf08bcda0bc5d2bfb053a9a163d2a24f95fbf246460549b99"
 
 inherit autotools
 
@@ -15,7 +17,7 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[md5] = "--enable-md5,--disable-md5,openssl"
 
 do_configure() {
-    gnu-configize
+    ( cd ${S}; gnu-configize )
     oe_runconf
 }
 
