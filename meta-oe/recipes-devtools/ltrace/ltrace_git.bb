@@ -21,5 +21,5 @@ S = "${WORKDIR}/git"
 inherit autotools
 
 do_configure_prepend () {
-	./autogen.sh
+	( cd ${S}; ./autogen.sh )
 }
