@@ -1,0 +1,13 @@
+diff --git a/scripts/Makefile.am b/scripts/Makefile.am
+index f2f0600..8e677dc 100644
+--- a/scripts/Makefile.am
++++ b/scripts/Makefile.am
+@@ -10,7 +10,7 @@ bin_SCRIPTS =								\
+	xdt-autogen							\
+	xdt-commit
+
+-xdt-autogen: Makefile $(srcdir)/xdt-autogen.in
++xdt-autogen: Makefile xdt-autogen.in
+	rm -f xdt-autogen xdt-autogen.gen
+	sed -e 's,\@DATADIR\@,$(datadir),g' \
+		xdt-autogen.in \
