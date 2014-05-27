@@ -24,7 +24,7 @@ EXTRA_OECONF += " \
 do_configure_append() {
     rm config.log
     # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
-    for i in $(find ${S} -name "Makefile") ; do
+    for i in $(find ${B} -name "Makefile") ; do
         sed -i -e s:-Werror::g $i
     done
 }
@@ -45,4 +45,3 @@ FILES_${PN} += "${libdir}/gnome-bluetooth/plugins/*.so"
 FILES_${PN}-dev += "${libdir}/gnome-bluetooth/plugins/libnma.la"
 FILES_${PN}-staticdev += "${libdir}/gnome-bluetooth/plugins/libnma.a"
 FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
-
