@@ -13,8 +13,8 @@ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
             file://0001-libpcap-search-sysroot-for-headers.patch \
 "
 
-SRC_URI[tarball.md5sum] = "4111df01a4f21bd1d328a18b76d625bd"
-SRC_URI[tarball.sha256sum] = "cfaa5390b1840aaaa68a6c05a7077dd92cb916e6186a014baa451d43cdb0b3bc"
+SRC_URI[tarball.md5sum] = "18111f6de3989ca89add36077a7c2659"
+SRC_URI[tarball.sha256sum] = "3cc6c8a9b52f4c863a5736a73b4012aff340b50b5e002771b04d4877f47cd19e"
 
 inherit autotools  gettext  update-rc.d
 
@@ -28,6 +28,8 @@ EXTRA_OECONF = " \
 	--enable-reload-error-restart \
 	--enable-targetbased \
 	--disable-static-daq \
+	--with-dnet-includes=${STAGING_INCDIR} \
+	--with-dnet-libraries=${STAGING_LIBDIR} \
 	"
 
 do_install_append() {
@@ -69,5 +71,3 @@ FILES_${PN}-dev += " \
 	${libdir}/snort_dynamicrules/*.so \
 	${prefix}/src/snort_dynamicsrc \
 	"
-
-RRECOMMENDS_${PN} += "barnyard2"
