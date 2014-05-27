@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=95a589a3257ab7dfe37d8a8379e3c72d"
 
 DEPENDS = "openssl"
 
+inherit pythonnative
+
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
            file://0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch \
 "
@@ -38,5 +40,5 @@ do_install () {
 RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
 RDEPENDS_${PN}_class-native = ""
 
-FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace"
+FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace ${libdir}/*"
 BBCLASSEXTEND = "native"
