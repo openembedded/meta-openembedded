@@ -55,7 +55,7 @@ do_install_append () {
     install -d ${D}${sysconfdir}/dbus-1/event.d
     # Additional test binaries
     install -d ${D}${bindir}
-    install -m 0755 ${S}/test/.libs/libnm* ${D}${bindir}
+    install -m 0755 ${B}/test/.libs/libnm* ${D}${bindir}
 
     # Install an empty VPN folder as nm-connection-editor will happily segfault without it :o.
     # With or without VPN support built in ;).
