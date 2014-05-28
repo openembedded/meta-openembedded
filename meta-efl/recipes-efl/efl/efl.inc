@@ -22,7 +22,9 @@ EXTRA_OECONF = " \
     --enable-i-really-know-what-i-am-doing-and-that-this-will-probably-break-things-and-i-will-fix-them-myself-and-send-patches-aaa \
 "
 EXTRA_OECONF_append_class-target = " \
-    --with-bin-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
+    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
+    --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
 "
 EXTRA_OECONF_append_class-native = " \
     --disable-fontconfig \
@@ -186,6 +188,7 @@ FILES_efreet = " \
 "
 FILES_eet = " \
     ${bindir}/eet \
+    ${bindir}/vieet \
     ${libdir}/libeet${SOLIBS} \
 "
 FILES_emotion = " \

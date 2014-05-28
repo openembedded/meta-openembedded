@@ -11,12 +11,18 @@ EXTRA_OECONF_append_class-target = "\
     --with-eet-eet=${STAGING_BINDIR_NATIVE}/eet \
     --with-elementary-codegen=${STAGING_BINDIR_NATIVE}/elementary_codegen \
     --with-elm-prefs-cc=${STAGING_BINDIR_NATIVE}/elm_prefs_cc \
+    --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
 "
 
 BBCLASSEXTEND = "native"
 
 PACKAGECONFIG[eweather] = "--enable-eweather,--disable-eweather,libeweather"
 PACKAGECONFIG[ewebkit] = "--with-elementary-web-backend=ewebkit,--with-elementary-web-backend=none,webkit-efl"
+
+do_configure_prepend() {
+    # prefix returned eolian paths with STAGING_DIR_HOST also use $PKG_CONFIG instead of pkg-config directly
+    sed -i "s^DEPS_EOLIAN_FLAGS=\`pkg-config --variable=eolian_flags eo evas edje ecore\`$^DEPS_EOLIAN_FLAGS=\`\$PKG_CONFIG --variable=eolian_flags eo evas edje ecore | sed 's#-I${prefix}#-I${STAGING_DIR_HOST}${prefix}#g'\`^g" ${S}/configure.ac
+}
 
 do_compile_append_class-target() {
     sed -i -e s:${STAGING_DIR_TARGET}::g \
