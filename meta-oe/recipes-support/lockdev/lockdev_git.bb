@@ -10,7 +10,7 @@ SRC_URI = "git://anonscm.debian.org/lockdev/lockdev.git"
 
 S = "${WORKDIR}/git"
 
-inherit lib_package autotools
+inherit lib_package autotools-brokensep
 
 do_configure_prepend () {
     ./scripts/git-version > VERSION
