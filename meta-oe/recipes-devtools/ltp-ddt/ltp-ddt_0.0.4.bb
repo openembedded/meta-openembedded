@@ -63,6 +63,10 @@ do_configure() {
 
 kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
 
+addtask make_scripts after do_patch before do_compile
+do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
+do_make_scripts[deptask] = "do_populate_sysroot"
+
 do_compile_append () {
     oe_runmake DESTDIR=${D} modules
 }
