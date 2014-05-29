@@ -42,5 +42,5 @@ EXTRA_OECONF = " \
 "
 
 do_configure() {
-    ./configure ${EXTRA_OECONF}
+    ${S}/configure ${EXTRA_OECONF}
 }
