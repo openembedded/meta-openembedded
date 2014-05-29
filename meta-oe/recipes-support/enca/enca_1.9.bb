@@ -20,17 +20,17 @@ EXTRA_OECONF = "--with-libiconv-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
 
 do_configure_prepend() {
     # remove failing test which checks for something that isn't even used
-    sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' configure.ac
+    sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' ${S}/configure.ac
 }
 
 do_configure_append() {
-    sed -i s:-I/usr/include::g Makefile
-    sed -i s:-I/usr/include::g */Makefile
+    sed -i s:-I/usr/include::g ${B}/Makefile
+    sed -i s:-I/usr/include::g ${B}/*/Makefile
 }
 
 do_compile() {
     cd ${S}/tools && ${BUILD_CC} -o make_hash make_hash.c
-    cd ..
+    cd ${B}
     oe_runmake
 }
 
