@@ -8,6 +8,7 @@ SRC_URI = "\
     ${E_RELEASES}/apps/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
     file://enlightenment_start.oe \
     file://applications.menu \
+    file://0001-Fix-incorrect-message-type.patch \
 "
 
 SRC_URI[md5sum] = "499b92ef38347881c72729f1e066eb20"
