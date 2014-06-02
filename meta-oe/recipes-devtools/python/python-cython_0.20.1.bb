@@ -6,14 +6,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
 SRCNAME = "Cython"
 BBCLASSEXTEND = "native"
-PR = "r3"
 
-SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz \
-           file://0001-Don-t-append-docs-to-_Extension.extension.__doc__.patch \
-"
+SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-SRC_URI[md5sum] = "171021b3845c9ca8bd6d8185b3cde664"
-SRC_URI[sha256sum] = "248123f2f02f2701a28d9452132ac835533b396a273cda9d361cb65c26067edc"
+SRC_URI[md5sum] = "52431696c64e618036537c4d9aa79d99"
+SRC_URI[sha256sum] = "31a563744a21d7b10355f25a3bca96b37ec5d32bdecfc75e93d65a5f7e62766c"
 
 inherit distutils
