@@ -1,20 +1,21 @@
 SUMMARY = "Just-In-Time Compiler for Lua"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=1793ef52a5d577794cd886a501a7f861"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=97b6446bbf9d55616838f821585c5978"
 HOMEPAGE = "http://luajit.org"
 
-DEPENDS += "lua5.1"
-SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz;name=tarball \
+SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-          "
-SRC_URI[tarball.md5sum] = "112dfb82548b03377fbefbba2e0e3a5b"
-SRC_URI[tarball.sha256sum] = "c05202974a5890e777b181908ac237625b499aece026654d7cc33607e3f46c38"
+"
+SRC_URI[md5sum] = "f14e9104be513913810cd59c8c658dc0"
+SRC_URI[sha256sum] = "55be6cb2d101ed38acca32c5b1f99ae345904b365b642203194c585d27bebd79"
 
 SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
 
 S = "${WORKDIR}/LuaJIT-${PV}"
 
 inherit pkgconfig binconfig
+
+BBCLASSEXTEND = "native"
 
 do_configure_prepend() {
     sed -i -e s:/usr/local:${prefix}:g ${S}/Makefile
@@ -35,9 +36,9 @@ do_compile () {
 
 do_install () {
     oe_runmake 'DESTDIR=${D}' install
-    rmdir ${D}${datadir}/lua/5.1 \
+    rmdir ${D}${datadir}/lua/5.* \
           ${D}${datadir}/lua \
-          ${D}${libdir}/lua/5.1 \
+          ${D}${libdir}/lua/5.* \
           ${D}${libdir}/lua
 }
 
