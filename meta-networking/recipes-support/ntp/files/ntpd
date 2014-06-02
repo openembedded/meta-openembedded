@@ -1,9 +1,22 @@
 #! /bin/sh
-#
+
+### BEGIN INIT INFO
+# Provides:        ntp
+# Required-Start:  $network $remote_fs $syslog
+# Required-Stop:   $network $remote_fs $syslog
+# Default-Start:   2 3 4 5
+# Default-Stop:
+# Short-Description: Start NTP daemon
+### END INIT INFO
+
 PATH=/sbin:/bin:/usr/bin:/usr/sbin
 
+DAEMON=/usr/sbin/ntpd
+PIDFILE=/var/run/ntpd.pid
+
 # ntpd	init.d script for ntpdc from ntp.isc.org
-test -x /usr/sbin/ntpd -a -r /etc/ntp.conf || exit 0
+test -x $DAEMON -a -r /etc/ntp.conf || exit 0
+
 # rcS contains TICKADJ
 test -r /etc/default/rcS && . /etc/default/rcS
 
@@ -23,12 +36,12 @@ startdaemon(){
 	# this.  If ntpd seems to disappear after a while assume TICKADJ
 	# above is set to a totally incorrect value.
 	echo -n "Starting ntpd: "
-	start-stop-daemon --start -x /usr/sbin/ntpd -- -u ntp:ntp -p /var/run/ntp.pid "$@"
+	start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --startas $DAEMON -- -u ntp:ntp -p $PIDFILE "$@"
 	echo "done"
 }
 stopdaemon(){
 	echo -n "Stopping ntpd: "
-	start-stop-daemon --stop -p /var/run/ntp.pid
+	start-stop-daemon --stop --quiet --oknodo -p $PIDFILE
 	echo "done"
 }
 
