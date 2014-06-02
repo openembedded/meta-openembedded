@@ -44,8 +44,8 @@ EXTRA_OECONF_append_class-native = " \
     --disable-image-loader-xpm \
 "
 
-PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio lua-old"
-PACKAGECONFIG_class-native = "lua-old"
+PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio luajit"
+PACKAGECONFIG_class-native = "luajit"
 
 # sort of tri-state
 PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
@@ -58,14 +58,8 @@ PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
 PACKAGECONFIG[gstreamer1] = "--enable-gstreamer1,--disable-gstreamer1,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
 PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
-# we don't have luajit-native now, so use old lua for -native and
-# for target it's also currently failing with luajit
-# | /OE/build/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/core2-64-oe-linux/gcc/x86_64-oe-linux/4.8.2/ld: /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libluajit-5.1.a(lj_err.o): relocation R_X86_64_32S against `.rodata' can not be used when making a shared object; recompile with -fPIC
-# | /OE/build/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/lib/libluajit-5.1.a: error adding symbols: Bad value
-# | collect2: error: ld returned 1 exit status
-# | Makefile:12007: recipe for target 'lib/edje/libedje.la' failed
 PACKAGECONFIG[luajit] = "--disable-lua-old,--enable-lua-old,luajit"
-PACKAGECONFIG[lua-old] = "--enable-lua-old,--disable-lua-old,lua5.1"
+PACKAGECONFIG[lua-old] = "--enable-lua-old,--disable-lua-old,lua"
 
 # new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
 do_configure_prepend_class-native() {
