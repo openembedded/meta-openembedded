@@ -31,7 +31,7 @@ do_install_append() {
     find ${D}${libdir}/${PYTHON_DIR}/site-packages -name \*.pyo -o -name \*.pyc | xargs rm -f
 }
 
-PACKAGES += "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas ${PN}-examples"
+PACKAGES += "python-ecore python-eldbus python-edje python-elementary python-emotion python-evas python-ethumb ${PN}-examples"
 
 FILES_${PN} = " \
     ${libdir}/${PYTHON_DIR}/site-packages/python_efl*egg-info \
@@ -47,6 +47,7 @@ FILES_${PN}-examples = "${datadir}/${PN}/examples"
 FILES_python-ecore = " \
     ${libdir}/${PYTHON_DIR}/site-packages/ecore/ \
     ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore.so \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore \
 "
 FILES_python-eldbus = " \
     ${libdir}/${PYTHON_DIR}/site-packages/e_dbus/ \
@@ -67,4 +68,8 @@ FILES_python-emotion = " \
 FILES_python-evas = " \
     ${libdir}/${PYTHON_DIR}/site-packages/evas/ \
     ${libdir}/${PYTHON_DIR}/site-packages/efl/evas.so \
+"
+FILES_python-ethumb = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/ethumb/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/ethumb*so \
 "
