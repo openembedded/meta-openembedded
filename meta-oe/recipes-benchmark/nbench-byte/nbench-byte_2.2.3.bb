@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7
 SECTION = "console/utils"
 
 SRC_URI = "http://www.tux.org/~mayer/linux/${PN}-${PV}.tar.gz \
-           file://nbench_32bits.patch"
+           file://nbench_32bits.patch \
+           file://Makefile-add-more-dependencies-to-pointer.h.patch"
 
 SRC_URI[md5sum] = "285dfab361080759d477ea1fe7d3093a"
 SRC_URI[sha256sum] = "723dd073f80e9969639eb577d2af4b540fc29716b6eafdac488d8f5aed9101ac"
