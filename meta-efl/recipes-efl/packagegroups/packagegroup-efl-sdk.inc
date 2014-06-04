@@ -2,7 +2,7 @@ SDK-EFL = " \
      efl-dev \
      elementary-dev \
      edbus-dev \
-     lua5.1-dev \
+     luajit-dev \
 "
 
 SDK-EXTRAS ?= ""
