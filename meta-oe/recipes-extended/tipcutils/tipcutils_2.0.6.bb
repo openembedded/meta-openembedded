@@ -20,15 +20,15 @@ do_install_append() {
            multicast_demo stream_demo"
     for i in $demos;do
         install -d ${D}/opt/tipcutils/demos/$i
-        install ${S}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
-        install ${S}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
+        install ${B}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
+        install ${B}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
     done
     install -d ${D}/opt/tipcutils/demos/inventory_sim
-    install ${S}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
+    install ${B}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
 
     install -d ${D}/opt/tipcutils/ptts
-    install ${S}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
-    install ${S}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
+    install ${B}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
+    install ${B}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
 
     install -d ${D}${sysconfdir}
     cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
