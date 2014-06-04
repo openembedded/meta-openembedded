@@ -26,6 +26,6 @@ Please keep this list in alphabetical order.
 Maintainers List (try to look for most precise areas first)
 
 COMMON
-M:      Joe MacDonald <joe.macdonald@windriver.com>
+M:      Joe MacDonald <joe_macdonald@mentor.com>
 F:      conf
 F:      recipes-*
