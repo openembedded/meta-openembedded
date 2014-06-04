@@ -107,14 +107,14 @@ do_configure() {
 	# do_configure_append
 	# workaround perl package related bugs
 	sed -i -e "s:-L/usr/local/lib:-L=/usr/local/lib:g" \
-	    ${S}/src/Makefile.global
+	    ${B}/src/Makefile.global
 	LIBPNA="\${STAGING_LIBDIR_NATIVE}/perl-native"
 	LIBNA="\${STAGING_LIBDIR_NATIVE}"
 	BLIBNA="\${STAGING_BASE_LIBDIR_NATIVE}"
 	sed -i -e "/^perl_archlibexp/s:${LIBPNA}:${STAGING_LIBDIR}:g" \
-	    ${S}/src/Makefile.global
+	    ${B}/src/Makefile.global
 	sed -i -e "/^perl_privlibexp/s:${LIBPNA}:${STAGING_LIBDIR}:g" \
-	    ${S}/src/Makefile.global
+	    ${B}/src/Makefile.global
 	# remove the rpath, replace with correct lib path
 	sed -i \
 	    -e "/^perl_embed_ldflags/s:-Wl,-rpath,${LIBNA}::g" \
@@ -124,7 +124,7 @@ do_configure() {
 	    -e "/^perl_embed_ldflags/s:${LIBPNA}:${STAGING_LIBDIR}:g" \
 	    -e "/^perl_embed_ldflags/s:${LIBNA}:${STAGING_LIBDIR}:g"  \
 	    -e "/^perl_embed_ldflags/s:${BLIBNA}:${STAGING_BASELIBDIR}:g" \
-	${S}/src/Makefile.global
+	${B}/src/Makefile.global
 
 	# workaround perl package's libperl.so problem
 	# we are using perlnative so this perl should have same version
@@ -158,11 +158,11 @@ do_install_append() {
     oe_runmake DESTDIR=${D} -C contrib install
     # install tutorial
     install -d -m 0755 ${D}${libdir}/${BPN}/tutorial
-    install ${S}/src/tutorial/* ${D}${libdir}/${BPN}/tutorial
+    install ${B}/src/tutorial/* ${D}${libdir}/${BPN}/tutorial
 
     # install COPYRIGHT README HISTORY
     install -d -m 0755 ${D}${docdir}/${BPN}
-    for i in ${S}/{COPYRIGHT,README,HISTORY} ${S}/doc/{KNOWN_BUGS,MISSING_FEATURES,README*,bug.template}; do
+    for i in ${B}/{COPYRIGHT,README,HISTORY} ${B}/doc/{KNOWN_BUGS,MISSING_FEATURES,README*,bug.template}; do
         [ -f $i ] && install $i ${D}${docdir}/${BPN}
     done
 
