@@ -12,9 +12,9 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
 "
 SRCREV = "v7-4-258"
 
-S = "${WORKDIR}/${PN}/src"
+S = "${WORKDIR}/${BPN}/src"
 
-VIMDIR = "${PN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
+VIMDIR = "${BPN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
 inherit autotools update-alternatives
 inherit autotools-brokensep
@@ -61,41 +61,41 @@ EXTRA_OECONF = " \
 
 do_install_append() {
     # Work around rpm picking up csh or awk as a dep
-    chmod -x ${D}${datadir}/${PN}/${VIMDIR}/tools/vim132
-    chmod -x ${D}${datadir}/${PN}/${VIMDIR}/tools/mve.awk
+    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
+    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
 
     # Install example vimrc from runtime files
-    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${PN}/vimrc
+    install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
 }
 
 PARALLEL_MAKEINST = ""
 
 PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc"
-FILES_${PN}-syntax = "${datadir}/${PN}/${VIMDIR}/syntax"
-FILES_${PN}-help = "${datadir}/${PN}/${VIMDIR}/doc"
-FILES_${PN}-tutor = "${datadir}/${PN}/${VIMDIR}/tutor ${bindir}/${PN}tutor"
-FILES_${PN}-vimrc = "${datadir}/${PN}/vimrc"
-FILES_${PN}-data = "${datadir}/${PN}"
+FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
+FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
+FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
+FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
+FILES_${PN}-data = "${datadir}/${BPN}"
 FILES_${PN}-common = " \
-    ${datadir}/${PN}/${VIMDIR}/*.vim \
-    ${datadir}/${PN}/${VIMDIR}/autoload \
-    ${datadir}/${PN}/${VIMDIR}/colors \
-    ${datadir}/${PN}/${VIMDIR}/compiler \
-    ${datadir}/${PN}/${VIMDIR}/ftplugin \
-    ${datadir}/${PN}/${VIMDIR}/indent \
-    ${datadir}/${PN}/${VIMDIR}/keymap \
-    ${datadir}/${PN}/${VIMDIR}/lang \
-    ${datadir}/${PN}/${VIMDIR}/macros \
-    ${datadir}/${PN}/${VIMDIR}/plugin \
-    ${datadir}/${PN}/${VIMDIR}/print \
-    ${datadir}/${PN}/${VIMDIR}/spell \
-    ${datadir}/${PN}/${VIMDIR}/tools \
+    ${datadir}/${BPN}/${VIMDIR}/*.vim \
+    ${datadir}/${BPN}/${VIMDIR}/autoload \
+    ${datadir}/${BPN}/${VIMDIR}/colors \
+    ${datadir}/${BPN}/${VIMDIR}/compiler \
+    ${datadir}/${BPN}/${VIMDIR}/ftplugin \
+    ${datadir}/${BPN}/${VIMDIR}/indent \
+    ${datadir}/${BPN}/${VIMDIR}/keymap \
+    ${datadir}/${BPN}/${VIMDIR}/lang \
+    ${datadir}/${BPN}/${VIMDIR}/macros \
+    ${datadir}/${BPN}/${VIMDIR}/plugin \
+    ${datadir}/${BPN}/${VIMDIR}/print \
+    ${datadir}/${BPN}/${VIMDIR}/spell \
+    ${datadir}/${BPN}/${VIMDIR}/tools \
 "
 
 # Recommend that runtime data is installed along with vim
 RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
 
 ALTERNATIVE_${PN} = "vi"
-ALTERNATIVE_TARGET[vi] = "${bindir}/${PN}"
+ALTERNATIVE_TARGET[vi] = "${bindir}/${BPN}"
 ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
 ALTERNATIVE_PRIORITY[vi] = "100"
