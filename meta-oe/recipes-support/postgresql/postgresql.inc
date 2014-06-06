@@ -24,7 +24,7 @@ INC_PR = "r0"
 
 ARM_INSTRUCTION_SET = "arm"
 
-SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${P}.tar.bz2 \
+SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
            file://postgresql.init \
            file://postgresql-bashprofile \
            file://postgresql.pam \
