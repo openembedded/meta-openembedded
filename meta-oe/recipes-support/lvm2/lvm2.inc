@@ -28,6 +28,7 @@ EXTRA_OECONF = "--with-user= \
                 --enable-pkgconfig \
                 --enable-dmeventd \
                 --with-udev-prefix= \
+                --with-usrlibdir=${libdir} \
 "
 
 PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
@@ -47,4 +48,3 @@ FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
 FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
 
 RDEPENDS_${PN} = "bash"
-EXTRA_OECONF = "--with-usrlibdir=${libdir}"
