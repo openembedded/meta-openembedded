@@ -11,7 +11,7 @@ DEPENDS = "yasm-native"
 SRC_URI = "git://git.videolan.org/x264.git \
     file://don-t-default-to-cortex-a9-with-neon.patch \
 "
-SRCREV = "1cffe9f406cc54f4759fc9eeb85598fb8cae66c7"
+SRCREV = "bfed708c5358a2b4ef65923fb0683cefa9184e6f"
 
 PV = "r2230+git"
 
