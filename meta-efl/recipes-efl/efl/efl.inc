@@ -51,6 +51,9 @@ PACKAGECONFIG_class-native = "lua-old"
 PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
 PACKAGECONFIG[opengl-es] = "--with-opengl=es,,virtual/libgles2"
 PACKAGECONFIG[opengl-none] = "--with-opengl=none,,"
+# be aware when enabling this for efl-native, we don't provide gcc-native so you need to make
+# sure that all your builders have g++ which supports -std=gnu++11
+PACKAGECONFIG[c++11] = "--enable-c++11,--disable-c++11"
 PACKAGECONFIG[gstreamer] = "--enable-gstreamer,--disable-gstreamer,gstreamer"
 PACKAGECONFIG[gstreamer1] = "--enable-gstreamer1,--disable-gstreamer1,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
