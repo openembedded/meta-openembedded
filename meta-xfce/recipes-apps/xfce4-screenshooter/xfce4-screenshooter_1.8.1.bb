@@ -11,5 +11,9 @@ SRC_URI += "file://0001-Fix-panel-plugin-build.patch"
 SRC_URI[md5sum] = "d0ffea2052a8e70154cf13789070711f"
 SRC_URI[sha256sum] = "40419892bd28989315eed053c159bba0f4264ed8c6c6738806024e481eab9492"
 
+do_compile_prepend() {
+	mkdir -p lib
+}
+
 FILES_${PN} += "${datadir}/xfce4/panel/plugins \
         ${libdir}/xfce4/panel/plugins"
