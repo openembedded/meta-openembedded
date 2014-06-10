@@ -7,6 +7,10 @@ DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib"
 
 inherit xfce-app
 
+do_compile_prepend() {
+	mkdir -p xfce4-notifyd
+}
+
 FILES_${PN} += " \
     ${libdir}/xfce4/notifyd \
     ${datadir}/themes \
