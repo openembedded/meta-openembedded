@@ -24,6 +24,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
            file://default \
            file://init \
            file://add-error-check-for-disk-filled-up.patch \
+           file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
 "
 
 SRC_URI[md5sum] = "46c9bd20bbffa62f79c958c7b99aac21"
