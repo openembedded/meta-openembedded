@@ -24,7 +24,7 @@ EXTRA_OECONF = " \
              --malloc-libc \
 "
 
-inherit autotools pkgconfig update-rc.d systemd
+inherit autotools-brokensep pkgconfig update-rc.d systemd
 
 INITSCRIPT_NAME = "monkey"
 INITSCRIPT_PARAMS = "defaults 70"
