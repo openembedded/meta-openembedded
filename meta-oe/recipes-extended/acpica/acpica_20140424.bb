@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d41dcf00e19d702cdf
 
 S = "${WORKDIR}/acpica-unix2-${PV}"
 
-EXTRA_OEMAKE = "CC=${TARGET_PREFIX}gcc 'OPT_CFLAGS=-Wall'"
+EXTRA_OEMAKE = "CC='${CC}' 'OPT_CFLAGS=-Wall'"
 
 do_install() {
     install -D -p -m0755 generate/unix/bin*/iasl ${D}${bindir}/iasl
