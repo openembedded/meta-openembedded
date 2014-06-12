@@ -6,23 +6,24 @@ time coordination of LAN connected computers."
 HOMEPAGE = "http://sourceforge.net/projects/ptpd"
 SECTION = "network"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://../COPYRIGHT;md5=3d8ac2c46c116bce2d2ad838b6cf3491"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=4019cad2b3cd55f22ea819ffad6ccd41"
 
-PR = "r1"
+DEPENDS = "libpcap"
 
-SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz \
-           file://ld-as-needed.patch;striplevel=2 \
-"
+inherit autotools
 
-SRC_URI[md5sum] = "c63a3a149d30c710773ccb02df5782a3"
-SRC_URI[sha256sum] = "f2266a22db84318d8b9ce266ea83772c03438c31f4993fa9643fa675a07c26b4"
+SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz"
 
-S = "${WORKDIR}/ptpd-${PV}/src"
+S = "${WORKDIR}/ptpd-${PV}"
+SRC_URI[md5sum] = "f5e931b4a229705ff0dbdfe22490566b"
+SRC_URI[sha256sum] = "1a4e90496f004bfd91657ccc49209101dc25b787e540648c07c0973469f1d8f7"
 
 EXTRA_OEMAKE = ""
 
+EXTRA_OECONF += "--disable-snmp"
+
 do_install() {
     install -d ${D}${bindir} ${D}${mandir}/man8
-    install -m 0755 ptpd2 ${D}${bindir}
-    install -m 0644 ptpd2.8 ${D}${mandir}/man8
+    install -m 0755 ${B}/src/ptpd2 ${D}${bindir}
+    install -m 0644 ${B}/src/ptpd2.8 ${D}${mandir}/man8
 }
