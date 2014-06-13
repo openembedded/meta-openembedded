@@ -113,7 +113,7 @@ RDEPENDS_${PN} += "perl-module-warnings perl-module-xsloader perl-module-posix p
 RDEPENDS_${PN} += "perl-module-fcntl perl-module-tie-hash perl-module-vars perl-module-time-local perl-module-config perl-module-constant"
 RDEPENDS_${PN} += "perl-module-file-glob perl-module-file-copy perl-module-sdbm perl-module-sdbm-file perl-module-timelocal perl-module-feature"
 
-PACKAGES_DYNAMIC += "webmin-module-*"
+PACKAGES_DYNAMIC += "webmin-module-* webmin-theme-*"
 RRECOMMENDS_${PN} += "webmin-module-system-status"
 
 RDEPENDS_webmin-module-proc = "procps"
@@ -128,12 +128,17 @@ python populate_packages_prepend() {
     wadir = bb.data.expand('${libexecdir}/webmin', d)
     wadir_image = bb.data.expand('${D}', d) + wadir
     modules = []
+    themes = []
     for mod in os.listdir(wadir_image):
         modinfo = os.path.join(wadir_image, mod, "module.info")
+        themeinfo = os.path.join(wadir_image, mod, "theme.info")
         if os.path.exists(modinfo):
             modules.append(mod)
+        elif os.path.exists(themeinfo):
+            themes.append(mod)
 
     do_split_packages(d, wadir, '^(%s)$' % "|".join(modules), 'webmin-module-%s', 'Webmin module for %s', allow_dirs=True, prepend=True)
+    do_split_packages(d, wadir, '^(%s)$' % "|".join(themes), 'webmin-theme-%s', 'Webmin theme for %s', allow_dirs=True, prepend=True)
 }
 
 # Time-savers
