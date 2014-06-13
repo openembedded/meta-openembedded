@@ -7,7 +7,7 @@ PR = "r6"
 
 DEPENDS += "libtirpc flex-native bison-native"
 
-inherit autotools systemd
+inherit autotools-brokensep systemd
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.bz2 \
            file://autofs-5.0.7-fix-nobind-sun-escaped-map-entries.patch \
