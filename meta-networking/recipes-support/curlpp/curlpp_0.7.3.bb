@@ -13,7 +13,7 @@ SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
 SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
 SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
 
-inherit autotools pkgconfig binconfig
+inherit autotools-brokensep pkgconfig binconfig
 
 EXTRA_OECONF = "--prefix=${STAGING_DIR} \
 		--with-boost=${STAGING_DIR} \
