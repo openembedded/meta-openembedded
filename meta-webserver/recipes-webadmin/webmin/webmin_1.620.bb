@@ -65,6 +65,9 @@ do_configure() {
     sed -i "s/find_pid_command=.*/find_pid_command=pidof NAME/" config-generic-linux
 }
 
+WEBMIN_LOGIN ?= "admin"
+WEBMIN_PASSWORD ?= "password"
+
 do_install() {
     install -d ${D}${sysconfdir}
     install -d ${D}${sysconfdir}/webmin
@@ -92,8 +95,8 @@ do_install() {
     export real_os_type="${DISTRO_NAME}"
     export real_os_version="${DISTRO_VERSION}"
     export port=10000
-    export login=admin
-    export password=password
+    export login=${WEBMIN_LOGIN}
+    export password=${WEBMIN_PASSWORD}
     export ssl=0
     export atboot=1
     export no_pam=1
