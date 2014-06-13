@@ -12,7 +12,7 @@ SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
 	   file://sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch \
 	   "
 
-inherit autotools pkgconfig useradd
+inherit autotools-brokensep pkgconfig useradd
 
 EXTRA_OECONF += "--with-dblib=berkeley \
                  --with-bdb-libdir=${STAGING_LIBDIR} \
