@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/znc/znc.git"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools-brokensep
 
 # ZNC has a custom autogen.sh that states that this command is needed *and* expected to fail
 do_configure_prepend() {
