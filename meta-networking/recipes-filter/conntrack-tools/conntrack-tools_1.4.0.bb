@@ -13,7 +13,7 @@ SRC_URI = " \
 SRC_URI[tar.md5sum] = "ee737c774e01349f75e935228a2d851b"
 SRC_URI[tar.sha256sum] = "036b032a5c4d180aad686df21399d74506b9b3d3000794eb13ac313482e24896"
 
-inherit autotools update-rc.d
+inherit autotools-brokensep update-rc.d
 
 INITSCRIPT_NAME = "conntrackd"
 
