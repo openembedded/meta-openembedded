@@ -18,5 +18,5 @@ DEPENDS = "libpcap"
 
 EXTRA_OECONF += "--with-libpcap=${STAGING_DIR_HOST}/usr"
 
-inherit siteinfo autotools
+inherit siteinfo autotools-brokensep
 
