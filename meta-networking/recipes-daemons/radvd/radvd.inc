@@ -34,7 +34,7 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/volatiles.03_radvd
     # Documentation
     for i in radvd.conf.example README; do \
-        install -m 0644 $i ${D}${docdir}/radvd; \
+        install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
     done
 }
 
