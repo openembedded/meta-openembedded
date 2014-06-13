@@ -20,7 +20,7 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
 SRC_URI[md5sum] = "0e32760f498f9cde44081ee6aafc823b"
 SRC_URI[sha256sum] = "d916e9cfe1e62395f63a5361936fa855f6d0f0a37dc7227b394cdb725f553479"
 
-inherit autotools update-rc.d
+inherit autotools-brokensep update-rc.d
 
 do_install() {
     # Install init script and default settings
