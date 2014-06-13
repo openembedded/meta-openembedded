@@ -34,6 +34,7 @@ SRC_URI += "\
     file://0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch;patchdir=.. \
     file://samba-3.6.11-CVE-2013-0213-CVE-2013-0214.patch;patchdir=.. \
     file://samba-3.6.16-CVE-2013-4124.patch;patchdir=.. \
+    file://samba-3.6.19-CVE-2013-4475.patch;patchdir=.. \
 "
 SRC_URI[md5sum] = "fbb245863eeef2fffe172df779a217be"
 SRC_URI[sha256sum] = "4f5a171a8d902c6b4f822ed875c51eb8339196d9ccf0ecd7f6521c966b3514de"
