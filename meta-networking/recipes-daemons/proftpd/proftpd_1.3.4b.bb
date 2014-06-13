@@ -20,7 +20,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
 SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
 SRC_URI[sha256sum] = "9f659585cea90fc6af34a0ffae4a90e4ed37abe92dbd9b6c311f95a436c961cb"
 
-inherit autotools useradd update-rc.d
+inherit autotools-brokensep useradd update-rc.d
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses,--disable-curses --disable-ncurses,ncurses"
