@@ -36,6 +36,8 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz;name
            file://quagga.pam \
            file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
            file://quagga-Avoid-duplicate-connected-address.patch \
+           file://0001-bgpd-CVE-2012-1820-DoS-in-bgp_capability_orf.patch \
+           file://0001-bgpd-relax-ORF-capability-length-handling.patch \
 "
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
