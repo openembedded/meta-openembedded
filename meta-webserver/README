@@ -13,14 +13,14 @@ This layer depends on:
 
 URI: git://github.com/openembedded/oe-core.git
 subdirectory: meta
-branch: master
+branch: daisy
 revision: HEAD
 
 For some recipes, the meta-oe layer is required:
 
 URI: git://github.com/openembedded/meta-oe.git
 subdirectory: meta-oe
-branch: master
+branch: daisy
 revision: HEAD
 
 
@@ -38,9 +38,16 @@ Maintenance
 -----------
 
 Send patches / pull requests to openembedded-devel@lists.openembedded.org
-with '[meta-webserver]' in the subject.
+with '[meta-webserver][daisy]' in the subject.
 
 Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+Daisy branch maintainers:
+	Cliff Brake <cliff.brake@gmail.com>
+	Otavio Salvador <otavio@ossystems.com.br>
+	Armin Kuster <akuster808@gmail.com>
+
+Prefix email subject with: [daisy]
 
 
 License
