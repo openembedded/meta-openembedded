@@ -1,6 +1,6 @@
-DESCRIPTION = "pv - Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline."
+SUMMARY = "Terminal-based tool for monitoring the progress of data through a pipeline"
 
-LICENSE = "Artistic-License-2.0"
+LICENSE = "Artistic-2.0"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=9c50db2589ee3ef10a9b7b2e50ce1d02"
 
 SRC_URI = "http://www.ivarch.com/programs/sources/pv-${PV}.tar.bz2"
