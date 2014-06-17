@@ -16,6 +16,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://apache-ssl-ltmain-rpath.patch \
            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
            file://npn-patch-2.4.7.patch \
+           file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
            file://init \
            file://apache2-volatile.conf"
 
