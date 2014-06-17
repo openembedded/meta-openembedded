@@ -15,7 +15,7 @@ do_install_append () {
     install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
 
     # configuration files
-    install -D -m 0644 clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
+    install -D -m 0644 ${S}/clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
 }
 
 PACKAGES =+ "lcdvc"

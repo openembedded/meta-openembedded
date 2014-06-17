@@ -36,10 +36,10 @@ do_install () {
     sed -i s'/--oknodo//' ${D}${sysconfdir}/init.d/lcdproc
 
     # configuration files
-    install -m 0644 LCDd.conf ${D}${sysconfdir}/LCDd.conf
+    install -m 0644 ${S}/LCDd.conf ${D}${sysconfdir}/LCDd.conf
     sed -i 's!^DriverPath=.*!DriverPath=${libdir}/lcdproc/!' ${D}${sysconfdir}/LCDd.conf
     sed -i 's!^Driver=.*!Driver=${LCD_DEFAULT_DRIVER}!' ${D}${sysconfdir}/LCDd.conf
-    install -m 0644 clients/lcdproc/lcdproc.conf ${D}${sysconfdir}/lcdproc.conf
+    install -m 0644 ${S}/clients/lcdproc/lcdproc.conf ${D}${sysconfdir}/lcdproc.conf
 
     # driver library files
     install -d ${D}${libdir}/lcdproc
