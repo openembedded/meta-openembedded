@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f29b21caa8e460097bfad9c026a33621"
 
 inherit autotools qt4x11
 
+PNBLACKLIST[maliit-plugins] = "BROKEN: depends on broken maliit-framework"
+
 DEPENDS = "maliit-framework"
 
 RDEPENDS_${PN} += "qt4-plugin-iconengine-svgicon qt4-plugin-imageformat-svg"
