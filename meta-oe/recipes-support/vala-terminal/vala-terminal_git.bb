@@ -8,6 +8,8 @@ PV = "1.3+gitr${SRCPV}"
 PE = "1"
 PR = "r1"
 
+PNBLACKLIST[vala-terminal] = "BROKEN: Doesn't work with B!=S, touch: cannot touch `src/.stamp': No such file or directory"
+
 inherit autotools perlnative vala
 
 SRC_URI = "${FREESMARTPHONE_GIT}/vala-terminal.git;branch=master"
