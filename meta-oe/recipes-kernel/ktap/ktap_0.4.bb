@@ -22,5 +22,5 @@ do_install() {
     install -m 0755 ${S}/ktap ${D}${bindir}/
 }
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 RDEPENDS_${PN} = "kernel-module-ktapvm"
-
