@@ -1,0 +1,40 @@
+Subject: [PATCH] use pkg-config for ncurses detection.
+
+Upstream-Status: Inappropriate [configuration]
+
+This is a workaround to make dialog be able to build after ncurses-config
+does not work, since the configure file is called directly in dialog bb
+file, and autoconf can not work, make a workaround in configure file.
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ configure |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure b/configure
+index 24e28c1..c78735d 100755
+--- a/configure
++++ b/configure
+@@ -9976,8 +9976,8 @@ fi
+ 
+ if test "$NCURSES_CONFIG" != none ; then
+ 
+-CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
+-LIBS="`$NCURSES_CONFIG --libs` $LIBS"
++CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>&1`"
++LIBS="`pkg-config --short-errors --print-errors --libs "ncurses" 2>&1` $LIBS"
+ 
+ # even with config script, some packages use no-override for curses.h
+ 
+@@ -10096,7 +10096,7 @@ cat >>confdefs.h <<EOF
+ #define $cf_nculib_ROOT 1
+ EOF
+ 
+-cf_cv_ncurses_version=`$NCURSES_CONFIG --version`
++cf_cv_ncurses_version=`pkg-config --short-errors --print-errors --modversion "ncurses"`
+ 
+ else
+ 
+-- 
+1.7.10.4
+
