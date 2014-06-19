@@ -6,6 +6,8 @@ DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-native"
 
 inherit xfce
 
+PNBLACKLIST[tumbler] = "BROKEN: needs to be updated to use freetype2 pkg-config instead of freetype2-config"
+
 SRC_URI[md5sum] = "f844215c5e3918eae58abdd85f146780"
 SRC_URI[sha256sum] = "c3bac4ee609e22be6c7f01a4fdf6086bc6b57940d82f99570a2d9d547a32fc93"
 
