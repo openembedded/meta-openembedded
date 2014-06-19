@@ -18,7 +18,7 @@ SRC_URI = "http://ftp.debian.org/debian/pool/main/f/fbset/fbset_2.1.orig.tar.gz 
            file://fbset-2.1-fix-makefile-dep.patch \
 "
 
-inherit autotools-brokensep update-alternatives
+inherit update-alternatives
 
 do_install() {
     install -d ${D}${sbindir} ${D}${datadir}/man/man8 ${D}${datadir}/man/man5
