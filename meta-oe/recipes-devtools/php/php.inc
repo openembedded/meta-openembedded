@@ -31,12 +31,10 @@ EXTRA_OECONF = "--enable-mbstring \
                 --with-imap-ssl=${STAGING_DIR_HOST} \
                 --with-zlib=${STAGING_LIBDIR}/.. \
                 --with-iconv=${STAGING_LIBDIR}/.. \
-                --with-libxml-dir=${STAGING_BINDIR_CROSS} \
                 ${COMMON_EXTRA_OECONF} \
 "
 EXTRA_OECONF_virtclass-native = " \
                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
-                --with-libxml-dir=${STAGING_BINDIR_NATIVE} \
                 ${COMMON_EXTRA_OECONF} \
 "
 
