@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7c0048536e43642a1f3a724c2909872b \
 
 PR = "r6"
 
+PNBLACKLIST[nautilus] = "BROKEN: doesn't build with B!=S"
+
 DEPENDS = "gdk-pixbuf gtk+ libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
 # optional: tracker
 
