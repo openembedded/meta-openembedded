@@ -7,6 +7,8 @@ PROVIDES = "virtual/imlib2"
 PV = "1.4.5+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
+PNBLACKLIST[imlib2] = "BROKEN: needs to be updated to use freetype2 pkg-config"
+
 inherit efl binconfig
 SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
