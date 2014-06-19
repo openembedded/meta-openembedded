@@ -6,6 +6,8 @@ SECTION = "x11/gnome/libs"
 
 DEPENDS = "gconf gtk+ glib-2.0 libxklavier"
 
+PNBLACKLIST[libgnomekbd] = "BROKEN: wasn't updated to work with B!=S"
+
 inherit gnome
 
 SRC_URI[archive.md5sum] = "de32a6e3e3464b566eecdc4332bf34bd"
