@@ -11,6 +11,8 @@ LIC_FILES_CHKSUM= "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
                    file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
 "
 
+PNBLACKLIST[libftdi] = "BROKEN: needs to be updated to detect libusb with pkg-config instead of libusb-config"
+
 DEPENDS = "virtual/libusb0"
 DEPENDS_virtclass-native = "virtual/libusb0-native"
 
