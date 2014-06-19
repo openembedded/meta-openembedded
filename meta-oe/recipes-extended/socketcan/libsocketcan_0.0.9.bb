@@ -16,5 +16,5 @@ S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 do_configure_prepend() {
-    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: configure.ac
+    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: ${S}/configure.ac
 }
