@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 PR = "r3"
 
+PNBLACKLIST[libwmf] = "BROKEN: needs to be updated to use freetype2 pkg-config instead of freetype-config"
+
 DEPENDS_virtclass-native = "libpng-native jpeg-native"
 DEPENDS = "libpng jpeg expat gtk+"
 
