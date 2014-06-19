@@ -7,6 +7,8 @@ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
 inherit autotools binconfig perlnative
 
+PNBLACKLIST[krb5] = "BROKEN: doesn't build with B!=S"
+
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar \
            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
