@@ -5,6 +5,8 @@ S = "${WORKDIR}/gnumeric-${PV}"
 DEPENDS = "gdk-pixbuf libgsf gtk+3 libxml2 libglade libart-lgpl intltool-native libgnomecanvas libgnomeprint libbonoboui orbit2-native goffice"
 SUMMARY = "Gnumeric spreadsheet for GNOME"
 
+PNBLACKLIST[gnumeric] = "BROKEN: depends on broken libgsf"
+
 GNOME_COMPRESS_TYPE = "xz"
 
 inherit gnome

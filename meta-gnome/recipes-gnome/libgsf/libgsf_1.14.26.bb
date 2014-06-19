@@ -7,6 +7,8 @@ SECTION = "libs"
 
 DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
 
+PNBLACKLIST[libgsf] = "BROKEN: since glib upgrade error: implicit declaration of function 'g_memmove' [-Werror=implicit-function-declaration]"
+
 inherit autotools pkgconfig gnome gconf
 
 SRC_URI[archive.md5sum] = "3c5a4fbd16a727c36974078e6d0e9575"

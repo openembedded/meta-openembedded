@@ -3,6 +3,8 @@ HOMEPAGE = "http://wvware.sourceforge.net/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6cbca01f1c9178aca280e8ff64d85b2f"
 
+PNBLACKLIST[wv] = "BROKEN: depends on broken libgsf"
+
 DEPENDS = "libgsf glib-2.0 libpng"
 PR = "r5"
 
