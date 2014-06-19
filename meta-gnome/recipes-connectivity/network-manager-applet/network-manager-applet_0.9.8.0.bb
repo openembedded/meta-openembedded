@@ -2,6 +2,8 @@ SUMMARY = "GTK+ applet for NetworkManager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
+PNBLACKLIST[network-manager-applet] = "BROKEN: depends on broken networkmanager"
+
 DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libglade gconf gnome-keyring libgnome-keyring iso-codes"
 
 inherit gnome gtk-icon-cache
