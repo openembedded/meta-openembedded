@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
 PR = "r1"
 
+PNBLACKLIST[xchat] = "BROKEN: Doesn't work with B!=S"
+
 SRC_URI = "http://xchat.org/files/source/2.8/xchat-${PV}.tar.bz2 \
     file://glib-2.32.patch \
 "
