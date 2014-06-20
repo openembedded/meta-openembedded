@@ -27,12 +27,11 @@ EXTRA_OECONF = " --disable-scrollkeeper \
 "
 
 do_configure_append() {
-    rm config.log
     # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
-    for i in $(find ${S} -name "Makefile") ; do
+    for i in $(find ${B} -name "Makefile") ; do
         sed -i -e s:-Werror::g $i
     done
-    sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${S}/src/Makefile
+    sed -e "s/libtool --/${TARGET_SYS}-libtool --/" -i ${B}/src/Makefile
 }
 
 PACKAGES =+ "${PN}-applets"
