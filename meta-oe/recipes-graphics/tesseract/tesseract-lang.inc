@@ -10,6 +10,4 @@ do_install() {
     cp ${WORKDIR}/tesseract-ocr/tessdata/${TESSERACT_LANG}.traineddata ${D}${datadir}/tessdata
 }
 
-RDEPENDS_${PN} = "tesseract"
-
 FILES_${PN} += "${datadir}/tessdata"
