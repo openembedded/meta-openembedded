@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "\
     file://examples/albums.c;beginline=5;endline=21;md5=84f4e55dfec49e898b7f68a828c15620 \
 "
 
-DEPENDS += "libusb1"
+DEPENDS += "libusb1 virtual/libiconv"
 
 SCM_URI = "git://git.code.sf.net/p/libmtp/code"
 SRC_URI = "\
