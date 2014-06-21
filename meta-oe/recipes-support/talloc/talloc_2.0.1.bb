@@ -7,6 +7,7 @@ inherit autotools pkgconfig
 
 SRC_URI = "http://samba.org/ftp/${BPN}/${BPN}-${PV}.tar.gz \
            file://install-swig-interface-in-SWINGLIBDIR.patch \
+           file://sepbuild.patch \
 "
 SRC_URI[md5sum] = "c6e736540145ca58cb3dcb42f91cf57b"
 SRC_URI[sha256sum] = "5b810527405f29d54f50efd78bf2c89e318f2cd8bed001f22f2a1412fd27c9b4"
@@ -15,11 +16,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 PR = "r2"
 
-# autoreconf doesn't work well while reconfiguring included libreplace
-do_configure () {
-    gnu-configize
-    oe_runconf
-}
+EXTRA_AUTORECONF = "--exclude=autopoint --exclude=aclocal"
 
 do_install_prepend() {
     # Hack the way swig interface for talloc is installed

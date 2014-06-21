@@ -1,0 +1,27 @@
+Index: talloc-2.0.1/Makefile.in
+===================================================================
+--- talloc-2.0.1.orig/Makefile.in
++++ talloc-2.0.1/Makefile.in
+@@ -33,8 +33,8 @@ EXPORTSFILE = @EXPORTSFILE@
+ 
+ all:: showflags $(EXTRA_TARGETS)
+ 
+-include $(tallocdir)/rules.mk
+-include $(tallocdir)/talloc.mk
++include $(srcdir)/$(tallocdir)/rules.mk
++include $(srcdir)/$(tallocdir)/talloc.mk
+ 
+ @TALLOC_COMPAT1_MK@
+ 
+Index: talloc-2.0.1/libtalloc.m4
+===================================================================
+--- talloc-2.0.1.orig/libtalloc.m4
++++ talloc-2.0.1/libtalloc.m4
+@@ -33,6 +33,6 @@ if test $ac_cv_sizeof_size_t -lt $ac_cv_
+ fi
+ 
+ if test x"$VERSIONSCRIPT" != "x"; then
+-    EXPORTSFILE=talloc.exports
++    EXPORTSFILE=$srcdir/$tallocdir/talloc.exports
+     AC_SUBST(EXPORTSFILE)
+ fi
