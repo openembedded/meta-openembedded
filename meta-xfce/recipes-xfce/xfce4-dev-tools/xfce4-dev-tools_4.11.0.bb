@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "glib-2.0"
 
-inherit autotools
+inherit autotools pkgconfig
 
 BBCLASSEXTEND = "native"
 

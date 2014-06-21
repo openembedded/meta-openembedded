@@ -14,4 +14,4 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
 PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,lzma"
 
-inherit autotools
+inherit autotools pkgconfig

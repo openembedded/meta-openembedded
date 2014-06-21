@@ -13,4 +13,4 @@ SRC_URI[sha256sum] = "9cab6c5d6b792eb828d17cec2b9c1baba2ef57f789a290464afab80b53
 
 DEPENDS = "gtk+"
 
-inherit autotools
+inherit autotools pkgconfig

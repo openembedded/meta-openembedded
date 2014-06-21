@@ -18,7 +18,7 @@ SRC_URI[sha256sum] = "3f6bf2de2952b9adcbeb3db12c2a979e999a81dd1e314a03bc58e24f1e
 
 PARALLEL_MAKE = ""
 
-inherit autotools
+inherit autotools pkgconfig
 
 # Don't use provided regex.c
 EXTRA_OECONF = "fim_cv_regex=no fim_cv_regex_broken=no \

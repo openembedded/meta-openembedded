@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
 
 DEPENDS = "jpeg virtual/libx11"
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 # libv4l was absorbed into this, let OE know that
 PROVIDES = "libv4l"

@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/jackaudio/jack1.git \
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
 EXTRA_OECONF = "--enable-timestamps \
                 --disable-capabilities \

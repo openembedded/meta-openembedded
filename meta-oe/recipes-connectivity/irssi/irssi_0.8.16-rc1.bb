@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "bb6c0125db30b697f80837941c17372b7484c64d57a6920b8bfa7ee3de
 
 S = "${WORKDIR}/irssi-${REALPV}"
 
-inherit autotools
+inherit autotools pkgconfig
 
 EXTRA_OECONF = "--enable-ssl"
 

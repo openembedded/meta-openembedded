@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "762778421fae7c62d5ec6a9d27986166c0dbbe2ff51fc10bb9b8baff5c
 
 GPE_TARBALL_SUFFIX = "bz2"
 
-inherit gpe autotools
+inherit gpe autotools pkgconfig
 
 SRC_URI += "file://0001-Fix-the-ordering-of-LDADD-options-to-fix-a-compilati.patch \
     file://use.libsoup-2.4.patch \

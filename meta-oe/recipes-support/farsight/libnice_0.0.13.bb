@@ -16,7 +16,7 @@ DEPENDS = "glib-2.0 gstreamer"
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
 
-inherit autotools
+inherit autotools pkgconfig
 
 FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
 FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"

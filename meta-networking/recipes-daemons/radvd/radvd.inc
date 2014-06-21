@@ -18,7 +18,7 @@ SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
            file://radvd.init \
            file://volatiles.03_radvd"
 
-inherit autotools update-rc.d useradd
+inherit autotools update-rc.d useradd pkgconfig
 
 do_install_append () {
     install -m 0755 -d ${D}${sysconfdir}/init.d \

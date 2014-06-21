@@ -9,7 +9,7 @@ SRC_URI = "git://git.0pointer.de/libatasmart.git"
 
 S = "${WORKDIR}/git"
 
-inherit autotools lib_package
+inherit autotools lib_package pkgconfig
 
 do_install_append() {
     sed -i -e s://:/:g -e 's:=${libdir}/libudev.la:-ludev:g' ${D}${libdir}/libatasmart.la

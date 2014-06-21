@@ -10,7 +10,7 @@ SRC_URI = "http://sources.openembedded.org/dpkg_${PV}.tar.bz2"
 SRC_URI[md5sum] = "d211a84f38987771a49ad1c0f144334a"
 SRC_URI[sha256sum] = "2a3d4ba83c743b3f004533fdd52372cb7b22f5c1da2042d0a31bbcc2b54c0ea5"
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 S = "${WORKDIR}/dpkg-${PV}"
 

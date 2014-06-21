@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "75592483d40dc4f76cc3b41af40caa4be80478946a699d46846d5d03e4
 
 DEPENDS = "openssl xz zlib bzip2 libcap"
 
-inherit autotools
+inherit autotools pkgconfig
 
 PACKAGECONFIG ??= " \
                    ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \

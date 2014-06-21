@@ -16,7 +16,7 @@ DEPENDS += "augeas libnl libxslt libxml2 gnulib"
 
 S = "${WORKDIR}/git"
 
-inherit gettext autotools-brokensep
+inherit gettext autotools-brokensep pkgconfig
 
 EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 do_configure_prepend() {

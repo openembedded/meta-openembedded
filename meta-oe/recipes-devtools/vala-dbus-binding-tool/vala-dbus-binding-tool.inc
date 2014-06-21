@@ -11,6 +11,6 @@ export XDG_DATA_DIRS = "${STAGING_DATADIR}"
 
 SRC_URI = "http://downloads.freesmartphone.org/sources/${BPN}/${BP}.tar.bz2;name=archive"
 
-inherit autotools perlnative
+inherit autotools perlnative pkgconfig
 
 BBCLASSEXTEND = "native"

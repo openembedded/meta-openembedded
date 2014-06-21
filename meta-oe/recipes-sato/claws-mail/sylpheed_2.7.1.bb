@@ -29,7 +29,7 @@ do_configure_prepend() {
     done
 }
 
-inherit autotools
+inherit autotools pkgconfig
 
 do_install_append() {
     install -d ${D}${datadir}/applications

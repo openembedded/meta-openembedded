@@ -13,7 +13,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "29e61411e51845d5ae71ab676078867e"
 SRC_URI[sha256sum] = "7b8906d1c8866155b31820ef108be92abcee7fcd278d386bf0d449e704ba4696"
 
-inherit autotools pythonnative update-rc.d
+inherit autotools pythonnative update-rc.d pkgconfig
 
 # Floatingpoint layout, architecture dependent
 # 'nothing', 'endianflip' or 'intswap'

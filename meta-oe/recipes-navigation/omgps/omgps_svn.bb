@@ -26,4 +26,4 @@ SRC_URI = "svn://omgps.googlecode.com/svn/trunk;module=omgps;protocol=http \
            file://0001-g_type_init-is-deprecated-for-glib-2.35.0.patch \
 "
 
-inherit autotools
+inherit autotools pkgconfig

@@ -31,7 +31,7 @@ PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
 PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
 PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
 
-inherit autotools systemd
+inherit autotools systemd pkgconfig
 
 RRECOMMENDS_${PN} = "kernel-module-ipsec"
 

@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/01org/${BPN}.git"
 SRCREV = "1996ecbe4a06c95d22f7d958e32e3d28f7a4a2e9"
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
 do_install_append() {
     install -d ${D}${bindir}

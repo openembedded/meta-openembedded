@@ -11,7 +11,7 @@ SRC_URI = "http://www.freedesktop.org/software/desktop-file-utils/releases/deskt
 SRC_URI[md5sum] = "d966b743eb394650f98d5dd56b9aece1"
 SRC_URI[sha256sum] = "d9449956c1c8caa75281a3322b2bb433db42610942f0ceeaa65ccd9636c04231"
 
-inherit autotools
+inherit autotools pkgconfig
 
 CACHED_CONFIGUREVARS += "ac_cv_prog_EMACS=no"
 

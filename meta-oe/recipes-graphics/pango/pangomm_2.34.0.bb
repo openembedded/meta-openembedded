@@ -12,7 +12,7 @@ SRC_URI = "ftp://ftp.gnome.org/pub/GNOME/sources/pangomm/${SHRT_VER}/pangomm-${P
 SRC_URI[md5sum] = "2c702caede167323c9ed9eed2b933098"
 SRC_URI[sha256sum] = "0e82bbff62f626692a00f3772d8b17169a1842b8cc54d5f2ddb1fec2cede9e41"
 
-inherit autotools
+inherit autotools pkgconfig
 
 EXTRA_OECONF = " --disable-documentation "
 

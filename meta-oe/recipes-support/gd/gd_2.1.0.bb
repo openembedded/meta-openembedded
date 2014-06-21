@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "f3e1bc472bd81ee976a739436659fe752a14727a964c64530fde68531d
 
 S = "${WORKDIR}/libgd-${PV}"
 
-inherit autotools binconfig gettext
+inherit autotools binconfig gettext pkgconfig
 
 EXTRA_OECONF += " --disable-rpath \
                   --with-jpeg=${STAGING_LIBDIR}/.. \

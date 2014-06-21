@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2
 
 S = "${WORKDIR}/httpd-${PV}"
 
-inherit autotools update-rc.d
+inherit autotools update-rc.d pkgconfig
 
 SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
