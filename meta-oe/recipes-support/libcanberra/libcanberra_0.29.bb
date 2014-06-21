@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 
 DEPENDS = "gstreamer gtk+ gtk+3 libtool libvorbis"
 
-inherit autotools
+inherit autotools gtk-doc
 
 SRC_URI = " \
     http://0pointer.de/lennart/projects/${BPN}/${BPN}-${PV}.tar.xz \

@@ -17,7 +17,7 @@ SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5
 
 PR = "r9"
 
-inherit autotools systemd
+inherit autotools systemd gtk-doc
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"

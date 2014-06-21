@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
 DEPENDS = "glib-2.0 xfce4-dev-tools-native libxfce4util intltool-native"
 PR = "r1"
 
-inherit xfce
+inherit xfce gtk-doc
 
 SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
 SRC_URI[md5sum] = "c3cf89c836be0ddb281c81e4808fb68b"
