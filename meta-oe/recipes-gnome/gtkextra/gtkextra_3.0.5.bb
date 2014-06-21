@@ -11,6 +11,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gtkextra/${P}.tar.gz \
 SRC_URI[md5sum] = "486cea93666020f85f101ed8341baf41"
 SRC_URI[sha256sum] = "9cab6c5d6b792eb828d17cec2b9c1baba2ef57f789a290464afab80b53969e65"
 
-DEPENDS = "gtk+"
+DEPENDS = "gtk+ gobject-introspection-stub"
 
 inherit autotools pkgconfig
