@@ -1,6 +1,6 @@
 require gvfs.inc
 
-DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf libgphoto2"
+DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf libgphoto2 intltool-native"
 # optional: obexftp libcdio libimobiledevice 
 
 PR = "${INC_PR}.0"

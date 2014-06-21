@@ -4,7 +4,7 @@ BUGTRACKER = "https://bugzilla.gnome.org/"
 
 LICENSE = "GPLv2 & GPLv2+ & GPLv3+ "
 SECTION = "x11"
-DEPENDS = "glib-2.0 gtk+ evolution-data-server"
+DEPENDS = "glib-2.0 gtk+ evolution-data-server intltool-native"
 RDEPENDS_${PN} = "libedata-book"
 
 inherit autotools pkgconfig
