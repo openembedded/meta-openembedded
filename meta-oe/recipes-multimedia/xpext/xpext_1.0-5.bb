@@ -12,9 +12,9 @@ S = "${WORKDIR}/xpext-1.0"
 inherit autotools pkgconfig
 
 do_configure_prepend () {
-    cd ${S}
-    chmod +x ./autogen.sh
-    ./autogen.sh
+    cd ${B}
+    chmod +x ${S}/autogen.sh
+    ${S}/autogen.sh
 }
 
 SRC_URI[md5sum] = "1b0cb67b6f2bd7c4abef17648b062896"
