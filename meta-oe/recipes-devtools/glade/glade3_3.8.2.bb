@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/gnash"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
                     file://COPYING.LGPL;md5=3bf50002aefd002f49e7bb854063f7e7"
-DEPENDS = "gtk+ gnome-doc-utils-native"
+DEPENDS = "gtk+ gnome-doc-utils-native gnome-common libxml2"
 
 PR = "r1"
 
