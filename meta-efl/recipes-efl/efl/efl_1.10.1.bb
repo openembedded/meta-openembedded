@@ -4,8 +4,8 @@ SRC_URI = "\
     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
 "
 
-SRC_URI[md5sum] = "4dedbbbd03ccd3c8ac227b8682d0d0e4"
-SRC_URI[sha256sum] = "55ab54150e4c53781f7b3239f39c11a06c3b9208f4109700bca049c36cd6c49b"
+SRC_URI[md5sum] = "1385f69de925bf242deb1ba86cebc121"
+SRC_URI[sha256sum] = "e791168db744bd7bd4b16ef59659447415403d089f13576cc31081e9184bb7c2"
 
 # Temporary disable until error like the one following are fixed
 # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
