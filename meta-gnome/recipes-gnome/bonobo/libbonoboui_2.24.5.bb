@@ -7,7 +7,7 @@ inherit gnomebase pkgconfig gtk-doc
 SRC_URI[archive.md5sum] = "853be8e28aaa4ce48ba60be7d9046bf4"
 SRC_URI[archive.sha256sum] = "fab5f2ac6c842d949861c07cb520afe5bee3dce55805151ce9cd01be0ec46fcd"
 
-DEPENDS = "libgnomecanvas libbonobo libgnome glib-2.0 gconf libxml2 libglade"
+DEPENDS = "libgnomecanvas libbonobo libgnome glib-2.0 gconf libxml2 libglade gnome-common intltool-native"
 
 FILES_${PN} += "${libdir}/libglade/2.0/*.so"
 FILES_${PN}-dev += "${libdir}/libglade/2.0/*.la ${datadir}/gnome-2.0/ui \
