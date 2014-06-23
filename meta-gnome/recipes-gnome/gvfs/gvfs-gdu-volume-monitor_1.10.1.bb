@@ -2,7 +2,7 @@ require gvfs.inc
 
 BPN = "gvfs"
 
-DEPENDS = "gvfs gnome-disk-utility libgnome-keyring"
+DEPENDS = "gvfs gnome-disk-utility libgnome-keyring intltool-native"
 PR = "${INC_PR}.0"
 
 # we need gdu files only: reduce files to delete in libexecdir
