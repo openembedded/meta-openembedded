@@ -1,17 +1,15 @@
 SUMMARY = "A graphic library for file loading, saving, rendering, and manipulation"
 LICENSE = "MIT BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
-# can also depend on tiff34, ungif or gif, z, bz2, id3tag
+
 DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"
 PROVIDES = "virtual/imlib2"
-PV = "1.4.5+svnr${SRCPV}"
-SRCREV = "${EFL_SRCREV}"
-
-PNBLACKLIST[imlib2] = "BROKEN: needs to be updated to use freetype2 pkg-config"
+PV = "1.4.6+gitr${SRCPV}"
+SRCREV = "560a58e61778d84953944f744a025af6ce986334"
 
 inherit efl binconfig
-SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
-S = "${WORKDIR}/${SRCNAME}"
+SRC_URI = "git://git.enlightenment.org/legacy/${BPN}.git"
+S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
