@@ -8,6 +8,6 @@ S = "${WORKDIR}/git"
 SRCREV = "4acfa720fd37d178a048fc2be17180137d4a70ea"
 PV = "0.0.0+gitr${SRCPV}"
 
-inherit autotools
+inherit autotools-brokensep
 
 FILES_${PN} += "${base_libdir}/udev/rules.d/85-phonet-utils.rules"
