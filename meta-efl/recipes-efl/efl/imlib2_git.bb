@@ -11,6 +11,9 @@ inherit efl binconfig
 SRC_URI = "git://git.enlightenment.org/legacy/${BPN}.git"
 S = "${WORKDIR}/git"
 
+# autotools-brokensep
+B = "${S}"
+
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gif] = "--with-gif,--without-gif,giflib"
 PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"

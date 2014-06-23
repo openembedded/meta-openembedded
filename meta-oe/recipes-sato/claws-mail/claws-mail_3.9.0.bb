@@ -14,7 +14,7 @@ SRC_URI[archive.md5sum] = "4c5ac7b21f0ed17d0f6404124c2229a4"
 SRC_URI[archive.sha256sum] = "ed70975a5056b3ffc4fe6e977f0d9606febc1499763c090241b029a73ff24e65"
 
 do_configure_append() {
-    cd po ; for PO in *.po ; do MO=`echo $PO | sed s/\\.po//`.gmo ; if ! test -f $MO ; then msgfmt $PO -o $MO ; fi ; done
+    cd ${S}/po ; for PO in *.po ; do MO=`echo $PO | sed s/\\.po//`.gmo ; if ! test -f $MO ; then msgfmt $PO -o $MO ; fi ; done; cd ${B}
 }
 
 PACKAGECONFIG ??= "startup-notification dbus"
@@ -52,7 +52,7 @@ do_install_prepend() {
 do_install_append() {
     rm -r ${D}${datadir}/icons
     install -d ${D}${datadir}/pixmaps
-    install -m 0644 claws-mail.png ${D}${datadir}/pixmaps/
+    install -m 0644 ${S}/claws-mail.png ${D}${datadir}/pixmaps/
     sed -i 's/Icon=[^.]*$/&.png/' ${D}${datadir}/applications/claws-mail.desktop
 }
 
