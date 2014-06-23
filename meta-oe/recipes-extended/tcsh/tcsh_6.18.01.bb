@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.tcsh.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://Copyright;md5=1cf29be62df2be1a3763118b25b4c780"
 SECTION = "base"
-DEPENDS = "ncurses"
+DEPENDS = "ncurses gettext-native"
 SRC_URI = " \
     ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}.orig.tar.gz;name=tarball \
     ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-2.diff.gz;name=diffs \
