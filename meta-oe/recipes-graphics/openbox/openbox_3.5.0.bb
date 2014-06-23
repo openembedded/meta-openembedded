@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "6fa90016530b3aa6102e254079461977439398531fb23e7ec076ff2c14
 
 PR = "r2"
 
-inherit autotools gettext update-alternatives
+inherit autotools gettext update-alternatives pkgconfig
 
 ALTERNATIVE_${PN}-core = "x-window-manager"
 ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/openbox"

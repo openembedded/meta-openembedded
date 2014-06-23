@@ -12,7 +12,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${PN}-${PV}.tar.gz \
 
 DEPENDS += "cups python libusb"
 
-inherit autotools python-dir pythonnative
+inherit autotools python-dir pythonnative pkgconfig
 
 export BUILD_SYS
 export HOST_SYS

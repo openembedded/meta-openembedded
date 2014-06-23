@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
 
 DEPENDS = "gnome-common glib-2.0 gdk-pixbuf cogl-1.0 clutter-1.0 clutter-gst-1.0"
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 SRC_URI = "git://git.gnome.org/pinpoint"
 

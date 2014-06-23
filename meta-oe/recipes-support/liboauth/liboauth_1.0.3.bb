@@ -13,4 +13,4 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BP}.tar.gz"
 SRC_URI[md5sum] = "689b46c2b3ab1a39735ac33f714c4f7f"
 SRC_URI[sha256sum] = "0df60157b052f0e774ade8a8bac59d6e8d4b464058cc55f9208d72e41156811f"
 
-inherit autotools
+inherit autotools pkgconfig

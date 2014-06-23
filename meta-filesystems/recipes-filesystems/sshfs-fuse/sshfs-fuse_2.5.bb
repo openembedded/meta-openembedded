@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/${P}.tar.gz"
 S = "${WORKDIR}/${P}"
 
-inherit autotools
+inherit autotools pkgconfig
 
 FILES_${PN} += "${libdir}/sshnodelay.so"
 

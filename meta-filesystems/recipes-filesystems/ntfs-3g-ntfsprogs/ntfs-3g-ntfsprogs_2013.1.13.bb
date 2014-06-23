@@ -12,7 +12,7 @@ S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
 SRC_URI[md5sum] = "2d6fb47ddf62b51733227126fe9227fe"
 SRC_URI[sha256sum] = "4b383f0074a3ab7683339d1f18222b107aaeb4983db119292c43c2b275cefb27"
 
-inherit autotools
+inherit autotools pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[uuid] = "--with-uuid,--without-uuid,util-linux"

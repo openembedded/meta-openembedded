@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a8
 
 S = "${WORKDIR}/SDL_image-${PV}"
 
-inherit autotools
+inherit autotools pkgconfig
 
 export SDL_CONFIG = "${STAGING_BINDIR_CROSS}/sdl-config"
 

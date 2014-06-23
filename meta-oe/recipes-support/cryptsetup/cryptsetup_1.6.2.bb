@@ -15,7 +15,7 @@ SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
 SRC_URI[md5sum] = "cd834da49fbe92dd66df02cc5c61280f"
 SRC_URI[sha256sum] = "15723f0198303d4bcb99d480b7a773918e2d319f0348457988c063bdd03e109a"
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 # Use openssl because libgcrypt drops root privileges
 # if libgcrypt is linked with libcap support

@@ -35,7 +35,7 @@ PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', 
 
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
 
-inherit autotools
+inherit autotools pkgconfig
 
 do_install_append() {
     # Install machine specific configuration file

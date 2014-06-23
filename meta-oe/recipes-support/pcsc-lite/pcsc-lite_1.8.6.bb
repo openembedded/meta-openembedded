@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "1e44049168d1ce55fd56c175f61206955254df0f385455f2a20ec7e8a0
 
 PR = "r3"
 
-inherit autotools systemd
+inherit autotools systemd pkgconfig
 
 EXTRA_OECONF = " \
     --disable-libusb \
