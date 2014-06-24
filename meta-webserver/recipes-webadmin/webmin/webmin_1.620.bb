@@ -20,7 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
 SRC_URI[md5sum] = "e93bc5057a5b7d7e31ecb2bb228d7044"
 SRC_URI[sha256sum] = "3d36153406d8e5d3dcaeadba34dfb5cdbc4060b75c38339174ac97b2277f284b"
 
-inherit allarch perlnative update-rc.d
+inherit perlnative update-rc.d
 
 do_configure() {
     # Remove binaries and plugins for other platforms
