@@ -32,6 +32,8 @@ SRC_URI[sha256sum] = "0a9f88d4c1c02687b4853b02ab5dd8779d4de4ffdb9b2e5c9332841304
 
 inherit autotools-brokensep update-rc.d update-alternatives
 
+export AR = "${HOST_PREFIX}ar cq"
+
 EXTRA_OECONF += "--disable-option-checking"
 
 # configure.in has errors
