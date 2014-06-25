@@ -60,9 +60,10 @@ EXTRA_OECONF = " \
 "
 
 do_install_append() {
-    # Work around rpm picking up csh or awk as a dep
+    # Work around rpm picking up csh or awk or perl as a dep
     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
+    chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/*.pl
 
     # Install example vimrc from runtime files
     install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
