@@ -13,9 +13,6 @@ S = "${WORKDIR}/eigen-eigen-ffa86ffb5570"
 
 inherit cmake
 
-OECMAKE_SOURCEPATH = ".."
-OECMAKE_BUILDPATH = "build"
-
 EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir}"
 
 FILES_${PN} = "${includedir} ${libdir}"
