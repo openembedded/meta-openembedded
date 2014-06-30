@@ -12,8 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c04760d09e8b0fe73283d0cc9e8bea53"
 
 DEPENDS = "libxml2 libxslt"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BPN}-${PV}.tar.gz \
-           file://configure.ac.patch"
+SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BP}.tar.gz \
+           file://configure.ac.patch \
+           file://0001-usage2c.awk-fix-wrong-basename-regexp.patch"
 SRC_URI[md5sum] = "0c6db295d0cf9ff0d439edb755b7e8f6"
 SRC_URI[sha256sum] = "47b4ed042ea2909257f2a386001af49fceb303f84da7214779ccf99fffc6bbba"
 
