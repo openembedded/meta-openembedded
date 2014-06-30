@@ -3,7 +3,8 @@ LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
                     file://COPYING.libv4l;md5=d749e86a105281d7a44c2328acebc4b0"
 
-DEPENDS = "jpeg virtual/libx11"
+DEPENDS = "jpeg \
+           ${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
 
 inherit autotools gettext pkgconfig
 
