@@ -17,5 +17,6 @@ S = "${WORKDIR}/irssi-${REALPV}"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF = "--enable-ssl"
-
+EXTRA_OECONF = "--enable-ssl \
+    --with-ncurses=${STAGING_EXECPREFIXDIR} \
+"
