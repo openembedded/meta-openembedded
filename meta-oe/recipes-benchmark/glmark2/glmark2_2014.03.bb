@@ -18,7 +18,7 @@ SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BP}.tar.gz"
 SRC_URI[md5sum] = "739859cf57d4c8a23452c43e84f66e56"
 SRC_URI[sha256sum] = "bded41aaf918ce062d9b81e42cc5be943e6a80bc4ff9d046983b96102c3df6b5"
 
-inherit waf pkgconfig
+inherit waf pkgconfig distro_features_check
 
 PACKAGECONFIG ?= "gl gles2"
 
