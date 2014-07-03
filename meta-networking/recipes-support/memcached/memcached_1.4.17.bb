@@ -17,7 +17,7 @@ inherit autotools
 DEPENDS += "libevent"
 RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
 
-SRC_URI = "http://www.memcached.org/files/${PN}-${PV}.tar.gz"
+SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz"
 
 SRC_URI[md5sum] = "46402dfbd7faadf6182283dbbd18b1a6"
 SRC_URI[sha256sum] = "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf9926a89999d8cdc0458"
