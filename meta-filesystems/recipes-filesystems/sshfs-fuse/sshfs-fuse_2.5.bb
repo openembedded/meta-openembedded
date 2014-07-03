@@ -6,7 +6,7 @@ LICENSE = "GPLv2"
 DEPENDS = "glib-2.0 fuse"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/${P}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/${BP}.tar.gz"
 S = "${WORKDIR}/${P}"
 
 inherit autotools pkgconfig
