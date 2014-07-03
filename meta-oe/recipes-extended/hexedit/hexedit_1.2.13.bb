@@ -6,7 +6,7 @@ DEPENDS = "ncurses"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-SRC_URI = "http://rigaux.org/${PN}-${PV}.src.tgz \
+SRC_URI = "http://rigaux.org/${BP}.src.tgz \
     file://0001-don-t-strip-when-installing.patch "
 
 SRC_URI[md5sum] = "a5af1378d028512a9cad27a5ba3e15f9"

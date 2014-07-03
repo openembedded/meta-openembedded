@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ea5bed2f60d357618ca161ad539f7c0a"
 SECTION = "console/utils"
 DEPENDS = "libpng zlib"
-SRC_URI = "http://fbgrab.monells.se/${P}.tar.gz"
+SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
 
 inherit autotools
 

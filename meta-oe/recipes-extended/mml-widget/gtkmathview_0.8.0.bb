@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 
 PR = "r3"
 
-SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${P}.tar.gz \
+SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${BP}.tar.gz \
            file://mathview-gcc43x.diff \
            file://mathview-gcc47x.diff \
            file://qualify-lookup.diff \

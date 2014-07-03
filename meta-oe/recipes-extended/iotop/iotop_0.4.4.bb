@@ -9,7 +9,7 @@ PR = "r1"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 
-SRC_URI = "http://guichaz.free.fr/iotop/files/${PN}-${PV}.tar.bz2"
+SRC_URI = "http://guichaz.free.fr/iotop/files/${BP}.tar.bz2"
 SRC_URI[md5sum] = "cdd38b276cbf238676f5d2bcf098ba9c"
 SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d686483df0b0"
 

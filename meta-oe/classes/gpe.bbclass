@@ -1,6 +1,6 @@
 DEPENDS_prepend = "virtual/libintl intltool-native "
 GPE_TARBALL_SUFFIX ?= "gz"
-SRC_URI = "${GPE_MIRROR}/${PN}-${PV}.tar.${GPE_TARBALL_SUFFIX}"
+SRC_URI = "${GPE_MIRROR}/${BP}.tar.${GPE_TARBALL_SUFFIX}"
 FILES_${PN} += "${datadir}/gpe ${datadir}/application-registry"
 SECTION ?= "gpe"
 

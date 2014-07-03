@@ -9,7 +9,7 @@ DEPENDS = "enca fontconfig freetype libpng fribidi"
 
 INC_PR = "r1"
 
-SRC_URI = "http://${PN}.googlecode.com/files/${P}.tar.gz"
+SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
 
 inherit autotools pkgconfig
 

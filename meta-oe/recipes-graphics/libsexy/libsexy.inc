@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 
 DEPENDS = "gtk+ enchant libxml2"
 
-SRC_URI = "http://releases.chipx86.com/libsexy/${PN}/${PN}-${PV}.tar.gz \
+SRC_URI = "http://releases.chipx86.com/libsexy/${BPN}/${BP}.tar.gz \
            file://libsexy-pkgconfig-fixes.patch"
 
 inherit autotools pkgconfig

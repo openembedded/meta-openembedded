@@ -7,7 +7,7 @@ DEPENDS = "gtk+"
 inherit autotools pkgconfig perlnative
 
 SRC_URI = " \
-    http://download.geany.org/${PN}-${PV}.tar.bz2 \
+    http://download.geany.org/${BP}.tar.bz2 \
     file://0001-configure.ac-remove-additional-c-test.patch \
 "
 SRC_URI[md5sum] = "4290e8c32305e916f57bb0f0233bbec2"

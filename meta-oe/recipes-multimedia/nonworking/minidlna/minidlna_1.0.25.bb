@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b1a795ac1a06805cf8fd74920bc46b5c"
 
 DEPENDS = "flac libav jpeg sqlite3 libexif libogg libid3tag"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${PN}/${PN}_${PV}_src.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}_${PV}_src.tar.gz \
     file://search-for-headers-in-staging-dir.patch \
     file://fix-makefile.patch \
 "

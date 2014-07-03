@@ -9,7 +9,7 @@ DEPENDS = "ncurses"
 LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
                     file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${P}.tar.gz"
+SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${BP}.tar.gz"
 
 inherit autotools update-rc.d
 

@@ -6,7 +6,7 @@ inherit autotools gettext pkgconfig
 
 DEPENDS = "libtasn1 libffi"
 
-SRC_URI = "http://p11-glue.freedesktop.org/releases/${PN}-${PV}.tar.gz"
+SRC_URI = "http://p11-glue.freedesktop.org/releases/${BP}.tar.gz"
 SRC_URI[md5sum] = "d96046ab6ac00d005342caf416ed76ab"
 SRC_URI[sha256sum] = "94fbed372c11d0a404762aad966e54eb4f44c1d5b871a1b79a1a3b4cf36ed256"
 

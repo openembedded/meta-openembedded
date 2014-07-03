@@ -1,6 +1,6 @@
 require gnuplot.inc
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${PN}-${PV}.tar.gz;name=archive \
+SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=archive \
     http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
     file://subdirs.patch \
     file://lua-loadlibs-configure-in-fix.patch \

@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = " \
-    http://poppler.freedesktop.org/${PN}-${PV}.tar.gz \
+    http://poppler.freedesktop.org/${BP}.tar.gz \
 "
 SRC_URI[md5sum] = "49d55921ce795778c7231fe9f2fe923b"
 SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1dce13b"

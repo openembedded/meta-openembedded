@@ -8,7 +8,7 @@ DEPENDS = "gnutls"
 
 PR = "r1"
 
-SRC_URI = "http://iksemel.googlecode.com/files/${P}.tar.gz;name=archive \
+SRC_URI = "http://iksemel.googlecode.com/files/${BP}.tar.gz;name=archive \
            file://r25.diff"
 SRC_URI[archive.md5sum] = "532e77181694f87ad5eb59435d11c1ca"
 SRC_URI[archive.sha256sum] = "458c1b8fb3349076a6cecf26c29db1d561315d84e16bfcfba419f327f502e244"

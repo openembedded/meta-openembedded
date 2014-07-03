@@ -10,7 +10,7 @@ inherit autotools binconfig perlnative
 PNBLACKLIST[krb5] = "BROKEN: doesn't build with B!=S"
 
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
-SRC_URI = "http://web.mit.edu/kerberos/dist/${PN}/${SHRT_VER}/${P}-signed.tar \
+SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
 "
 SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"

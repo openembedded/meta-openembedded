@@ -8,7 +8,7 @@ PR = "r1"
 
 inherit autotools
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-${PV}/${PN}-${PV}.tar.bz2;name=faad2 \
+SRC_URI = "${SOURCEFORGE_MIRROR}/faac/faad2-src/faad2-${PV}/${BP}.tar.bz2;name=faad2 \
 "
 
 SRC_URI[faad2.md5sum] = "4c332fa23febc0e4648064685a3d4332"

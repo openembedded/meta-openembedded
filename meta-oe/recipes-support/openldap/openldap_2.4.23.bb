@@ -13,7 +13,7 @@ SECTION = "libs"
 
 LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
 
-SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${P}.tgz \
+SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-m4-pthread.patch \
     file://kill-icu.patch \
     file://0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch \

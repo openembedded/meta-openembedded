@@ -4,7 +4,7 @@ SECTION = "console/network"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
 
-SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${PN}-${PV}.tar.gz \
+SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
             file://iperf-2.0.5_ManPage.patch \
           "
 

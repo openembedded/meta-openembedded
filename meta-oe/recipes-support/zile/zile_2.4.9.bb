@@ -5,7 +5,7 @@ DEPENDS = "ncurses libgc"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "http://ftp.gnu.org/gnu/zile/${P}.tar.gz \
+SRC_URI = "http://ftp.gnu.org/gnu/zile/${BP}.tar.gz \
            file://remove-help2man.patch \
 "
 

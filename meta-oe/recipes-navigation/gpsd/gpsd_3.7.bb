@@ -9,7 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
 
 PR = "r14"
 
-SRC_URI = "${SAVANNAH_GNU_MIRROR}/${PN}/${P}.tar.gz \
+SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
     file://0004-SConstruct-remove-rpath.patch \
     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \

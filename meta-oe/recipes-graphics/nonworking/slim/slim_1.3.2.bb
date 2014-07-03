@@ -8,7 +8,7 @@ PR = "r1"
 DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SRC_URI = " \
-    http://download.berlios.de/${PN}/${P}.tar.gz \
+    http://download.berlios.de/${BPN}/${BP}.tar.gz \
     file://0002-Fix-image-handling-integer-overflows.patch \
     file://0003-Fix-build-failure-with-ld-as-needed.patch \
     file://0004-Add-support-libpng15.patch \

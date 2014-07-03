@@ -3,7 +3,7 @@ HOMEPAGE = "http://labix.org/python-dateutil"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d82268718c68bda0b091006ec6e583c6"
-SRCNAME = "${PN}"
+SRCNAME = "${BPN}"
 
 SRC_URI = "http://labix.org/download/python-dateutil/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"

@@ -1,6 +1,6 @@
 DESCRIPTION = "FarSight is an audio/video conferencing framework specifically designed for Instant Messengers."
 HOMEPAGE = "http://farsight.sf.net"
-SRC_URI = "http://farsight.freedesktop.org/releases/farsight2/${P}.tar.gz"
+SRC_URI = "http://farsight.freedesktop.org/releases/farsight2/${BP}.tar.gz"
 
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
