@@ -6,7 +6,7 @@ HOMEPAGE ="http://www.musicpd.org"
 DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio"
 
 SRC_URI = " \
-    http://www.musicpd.org/download/${PN}/stable/${P}.tar.xz \
+    http://www.musicpd.org/download/${BPN}/stable/${BP}.tar.xz \
     file://mpd.conf.in \
 "
 

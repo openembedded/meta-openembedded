@@ -7,7 +7,7 @@ DEPENDS = "gtk+ libgnomeui libraw1394 libdc1394 libxv tiff"
 
 PNBLACKLIST[coriander] = "BROKEN: fails to use SDL probably because libsdl-config was removed, error: unknown type name 'SDL_Overlay'"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/coriander-2/${PV}/${P}.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/coriander-2/${PV}/${BP}.tar.gz \
            file://cross-compile.patch \
           "
 
