@@ -6,7 +6,7 @@ DEPENDS = "libxml2 libxslt"
 
 SECTION = "net"
 
-SRC_URI = "http://hiawatha-webserver.org/files/${PN}-${PV}.tar.gz \
+SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
            file://hiawatha-init \
            file://hiawatha.service "
 
