@@ -8,7 +8,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "49d55921ce795778c7231fe9f2fe923b"
 SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1dce13b"
 
-DEPENDS = "fontconfig zlib gtk+ cairo lcms"
+DEPENDS = "fontconfig zlib cairo lcms"
 
 inherit autotools pkgconfig gtk-doc
 
