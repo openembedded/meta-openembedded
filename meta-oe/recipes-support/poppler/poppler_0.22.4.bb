@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1
 
 DEPENDS = "fontconfig jpeg zlib gtk+ cairo tiff lcms"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig gtk-doc
 
 EXTRA_OECONF = "\
     --enable-xpdf-headers \
