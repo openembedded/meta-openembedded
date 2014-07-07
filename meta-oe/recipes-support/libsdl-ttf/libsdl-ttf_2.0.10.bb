@@ -8,6 +8,7 @@ PR = "r2"
 
 SRC_URI = "http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-${PV}.tar.gz \
            file://configure.patch \
+           file://use.pkg-config.for.freetype2.patch \
 "
 
 S = "${WORKDIR}/SDL_ttf-${PV}"
