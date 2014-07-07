@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "d9fe0ae8650d43746a48bfb394cab01a319f3809cee19f8ebd16aa985b
 
 S = "${WORKDIR}/gc-7.2"
 
-inherit autotools
+inherit autotools pkgconfig
 
 PACKAGES =+ "${PN}-docs"
 FILES_${PN}-docs = "/usr/share/gc"

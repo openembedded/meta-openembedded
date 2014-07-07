@@ -15,6 +15,6 @@ SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/flor
 SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
 SRC_URI[sha256sum] = "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240ac8719a68b192d5bc62"
 
-inherit gettext autotools gconf
+inherit gettext autotools gconf pkgconfig
 
 EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet"
