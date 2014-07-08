@@ -1,0 +1,23 @@
+Fix getaddinfo check when cross compiling
+
+Upstream-Status: Pending.
+
+AC_TRY_RUN defaults to td_cv_buggygetaddrinfo=yes when
+cross-compiling. So this change indicates that we
+are cross-compiling.
+
+Signed-of-by: Aws Ismail <aws.ismail@windriver.com>
+
+diff --git a/configure.in b/configure.in
+index ca277c0..283035e 100644
+--- a/configure.in
++++ b/configure.in
+@@ -434,7 +434,7 @@ main()
+ ],
+ 	td_cv_buggygetaddrinfo=no,
+ 	td_cv_buggygetaddrinfo=yes,
+-	td_cv_buggygetaddrinfo=yes)])
++	td_cv_buggygetaddrinfo=cross)])
+ 	if test "$td_cv_buggygetaddrinfo" = no; then
+ 		AC_MSG_RESULT(good)
+ 	else

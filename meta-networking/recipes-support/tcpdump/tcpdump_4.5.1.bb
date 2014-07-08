@@ -11,9 +11,13 @@ SRC_URI = " \
     file://0001-minimal-IEEE802.15.4-allowed.patch \
     file://ipv6-cross.patch \
     file://configure.patch \
+    file://unnecessary-to-check-libpcap.patch \
+    file://tcpdump-configure-dlpi.patch \
+    file://tcpdump-cross-getaddrinfo.patch \
 "
-SRC_URI[md5sum] = "a3fe4d30ac85ff5467c889ff46b7e1e8"
-SRC_URI[sha256sum] = "efd08b610210d39977ec3175fa82dad9fbd33587930081be2a905a712dba4286"
+SRC_URI[md5sum] = "973a2513d0076e34aa9da7e15ed98e1b"
+SRC_URI[sha256sum] = "14ab39657128f3a650aed4cf455f76c7590601087b6101c253d698f6e73f0b96"
+export LIBS=" -lpcap"
 
 inherit autotools-brokensep
 CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
