@@ -1,0 +1,66 @@
+Change fixed postconf to a variable for cross-compiling
+
+Upstreamstatus: Inappropriate [embedded specific]
+
+Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+---
+diff --git a/postfix-install b/postfix-install
+index 49225ac..2e4c292 100644
+--- a/postfix-install
++++ b/postfix-install
+@@ -201,8 +201,8 @@ test -z "$non_interactive" -a ! -t 0 && {
+     exit 1
+ }
+ 
+-test -x bin/postconf || {
+-    echo $0: Error: no bin/postconf file. Did you forget to run \"make\"? 1>&2
++test -x "$POSTCONF" || {
++    echo $0: Error: no $POSTCONF file. Did you forget to run \"make\"? 1>&2
+     exit 1
+ }
+ 
+@@ -363,7 +363,7 @@ HTML files. Specify \"no\" if you do not want to install these files."
+ 
+ : ${install_root=/}
+ : ${tempdir=`pwd`}
+-: ${config_directory=`bin/postconf -c conf -h -d config_directory`}
++: ${config_directory=`$POSTCONF -c conf -h -d config_directory`}
+ 
+ # Find out the location of installed configuration files.
+ 
+@@ -433,7 +433,7 @@ test -f $CONFIG_DIRECTORY/main.cf && {
+ 	case "$junk" in
+ 	"") eval unset $name;;
+ 	esac
+-	eval : \${$name=\`bin/postconf -c $CONFIG_DIRECTORY -h $name\`} ||
++	eval : \${$name=\`$POSTCONF -c $CONFIG_DIRECTORY -h $name\`} ||
+ 	    exit 1
+     done
+ }
+@@ -446,7 +446,7 @@ do
+     case "$junk" in
+     "") eval unset $name;;
+     esac
+-    eval : \${$name=\`bin/postconf -c conf -d -h $name\`} || exit 1
++    eval : \${$name=\`$POSTCONF -c conf -d -h $name\`} || exit 1
+ done
+ 
+ # Override settings manually.
+@@ -565,6 +565,8 @@ HTML_DIRECTORY=$install_root$html_directory
+ MANPAGE_DIRECTORY=$install_root$manpage_directory
+ README_DIRECTORY=$install_root$readme_directory
+ 
++test "x$POSTCONF" != "x" || POSTCONF="bin/postconf"
++
+ # Avoid repeated tests for existence of these; default permissions suffice.
+ 
+ test -d $DAEMON_DIRECTORY || mkdir -p $DAEMON_DIRECTORY || exit 1
+@@ -724,7 +726,7 @@ do
+ # Postfix releases, and software should not suddenly be installed in
+ # the wrong place when Postfix is being upgraded.
+ 
+-bin/postconf -c $CONFIG_DIRECTORY -e \
++"$POSTCONF" -c $CONFIG_DIRECTORY -e \
+     "daemon_directory = $daemon_directory" \
+     "data_directory = $data_directory" \
+     "command_directory = $command_directory" \
