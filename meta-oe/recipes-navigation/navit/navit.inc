@@ -15,7 +15,7 @@ RSUGGESTS_${PN} = "flite-alsa espeak ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-q
 PE = "1"
 INC_PR = "r11"
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 PACKAGECONFIG ?= "qt"
 PACKAGECONFIG[fribidi] = "--enable-fribidi,--disable-fribidi,fribidi"
