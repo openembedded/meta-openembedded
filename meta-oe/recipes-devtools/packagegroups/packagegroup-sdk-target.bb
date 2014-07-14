@@ -6,9 +6,9 @@ PR = "r1"
 
 inherit packagegroup allarch
 
-RPROVIDES_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
-RREPLACES_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
-RCONFLICTS_${PN} += "packagegroup-native-sdk task-sdk-target task-native-sdk"
+RPROVIDES_${PN} += "packagegroup-native-sdk"
+RREPLACES_${PN} += "packagegroup-native-sdk"
+RCONFLICTS_${PN} += "packagegroup-native-sdk"
 RDEPENDS_${PN} = "gcc-symlinks g++-symlinks cpp cpp-symlinks \
                   binutils-symlinks \
                   perl-modules \

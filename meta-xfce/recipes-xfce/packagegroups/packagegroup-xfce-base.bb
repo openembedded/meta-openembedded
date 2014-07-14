@@ -6,10 +6,6 @@ PR = "r5"
 
 inherit packagegroup
 
-RPROVIDES_${PN} += "task-xfce-base"
-RREPLACES_${PN} += "task-xfce-base"
-RCONFLICTS_${PN} += "task-xfce-base"
-
 RDEPENDS_${PN} = " \
     xfwm4 \
     xfce4-session \     

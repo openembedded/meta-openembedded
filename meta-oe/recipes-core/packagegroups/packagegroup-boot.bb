@@ -19,10 +19,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
 # Make sure we build the kernel
 DEPENDS = "virtual/kernel"
 
-RPROVIDES_${PN} += "task-boot"
-RREPLACES_${PN} += "task-boot"
-RCONFLICTS_${PN} += "task-boot"
-
 #
 # minimal set of packages - needed to boot
 #

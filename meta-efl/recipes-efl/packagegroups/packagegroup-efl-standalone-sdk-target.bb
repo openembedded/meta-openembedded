@@ -11,9 +11,6 @@ require packagegroup-efl-sdk.inc
 
 PACKAGES = "${PN} ${PN}-dbg"
 
-RPROVIDES_${PN} += "task-efl-standalone-sdk-target"
-RREPLACES_${PN} += "task-efl-standalone-sdk-target"
-RCONFLICTS_${PN} += "task-efl-standalone-sdk-target"
 RDEPENDS_${PN} = "\
     packagegroup-core-standalone-sdk-target \
     ${SDK-EFL} \

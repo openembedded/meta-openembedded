@@ -10,13 +10,6 @@ inherit packagegroup allarch
 
 PACKAGES += "${PN}-debug"
 
-RPROVIDES_${PN} += "task-cli-tools"
-RPROVIDES_${PN}-debug += "task-cli-tools-debug"
-RREPLACES_${PN} += "task-cli-tools"
-RREPLACES_${PN}-debug += "task-cli-tools-debug"
-RCONFLICTS_${PN} += "task-cli-tools"
-RCONFLICTS_${PN}-debug += "task-cli-tools-debug"
-
 RDEPENDS_${PN} = "\
     dbus-daemon-proxy \
     dosfstools \

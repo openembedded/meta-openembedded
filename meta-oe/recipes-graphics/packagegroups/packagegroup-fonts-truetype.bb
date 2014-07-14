@@ -12,18 +12,6 @@ PACKAGES += "\
     ${PN}-chinese \
     ${PN}-japanese \
 "
-RPROVIDES_${PN} += "task-fonts-truetype"
-RPROVIDES_${PN}-core += "task-fonts-truetype-core"
-RPROVIDES_${PN}-chinese += "task-fonts-truetype-chinese"
-RPROVIDES_${PN}-japanese += "task-fonts-truetype-japanese"
-RREPLACES_${PN} += "task-fonts-truetype"
-RREPLACES_${PN}-core += "task-fonts-truetype-core"
-RREPLACES_${PN}-chinese += "task-fonts-truetype-chinese"
-RREPLACES_${PN}-japanese += "task-fonts-truetype-japanese"
-RCONFLICTS_${PN} += "task-fonts-truetype"
-RCONFLICTS_${PN}-core += "task-fonts-truetype-core"
-RCONFLICTS_${PN}-chinese += "task-fonts-truetype-chinese"
-RCONFLICTS_${PN}-japanese += "task-fonts-truetype-japanese"
 
 RRECOMMENDS_${PN} = "\
     ${PN}-core \

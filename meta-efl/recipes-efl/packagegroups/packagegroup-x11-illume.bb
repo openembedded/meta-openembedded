@@ -11,9 +11,6 @@ inherit packagegroup allarch
 ETHEME ?= "e-wm-theme-default"
 ECONFIG ?= "e-wm-config-mobile"
 
-RPROVIDES_${PN} += "task-x11-illume"
-RREPLACES_${PN} += "task-x11-illume"
-RCONFLICTS_${PN} += "task-x11-illume"
 RDEPENDS_${PN} = "\
     packagegroup-core-x11-xserver \
     packagegroup-core-x11-utils \

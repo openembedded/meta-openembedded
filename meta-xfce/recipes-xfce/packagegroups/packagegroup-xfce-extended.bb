@@ -9,10 +9,6 @@ PNBLACKLIST[packagegroup-xfce-extended] = "BROKEN: rdepends on broken xfce4-powe
 
 inherit packagegroup
 
-RPROVIDES_${PN} += "task-xfce-extended"
-RREPLACES_${PN} += "task-xfce-extended"
-RCONFLICTS_${PN} += "task-xfce-extended"
-
 # mandatory
 RDEPENDS_${PN} = " \
     packagegroup-xfce-base \
