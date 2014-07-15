@@ -12,7 +12,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
 
 S = "${WORKDIR}/php-${PV}"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5bb09683f8f09b15b7076f4b4c31d61f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
 
 inherit autotools
 
