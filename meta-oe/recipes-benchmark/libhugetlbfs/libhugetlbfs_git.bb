@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 DEPENDS = "sysfsutils perl"
 RDEPENDS_${PN} += "python python-io python-lang python-subprocess python-resource"
 
+PV = "2.18"
+PE = "1"
+
 SRCREV = "ea3f6b273f535aab38cefae30030774457bbbfe6"
 SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
