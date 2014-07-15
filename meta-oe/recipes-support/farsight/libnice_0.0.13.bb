@@ -23,6 +23,10 @@ FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"
 FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
 FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
 
+do_configure_prepend() {
+    mkdir ${S}/m4 || true
+}
+
 do_compile_append() {
     for i in $(find ${S} -name "*.pc") ; do
         sed -i -e s:${STAGING_DIR_TARGET}::g \
