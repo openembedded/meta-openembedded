@@ -5,6 +5,7 @@ branch: master
 revision: HEAD
 
 URI: git://github.com/openembedded/meta-oe.git
+layers: meta-oe, meta-python
 branch: master
 revision: HEAD
 
