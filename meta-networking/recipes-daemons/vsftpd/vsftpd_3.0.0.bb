@@ -70,7 +70,11 @@ do_install() {
         sed -i "s:/lib/security:${base_libdir}/security:" ${D}${sysconfdir}/pam.d/vsftpd
         sed -i "s:ftpusers:vsftpd.ftpusers:" ${D}${sysconfdir}/pam.d/vsftpd
     fi
-    install -d ${D}${localstatedir}/run/vsftpd/empty
+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d /var/run/vsftpd/empty 0755 root root -" \
+        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+    fi
 }
 
 INITSCRIPT_PACKAGES = "${PN}"
@@ -82,3 +86,13 @@ USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp 
                        --shell /bin/false ftp "
 GROUPADD_PARAM_${PN} = "-r ftp"
 
+pkg_postinst_${PN}() {
+	if [ -n "$D" ]; then
+		exit 0
+	fi
+	if type systemd-tmpfiles >/dev/null; then
+		systemd-tmpfiles --create
+	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+		${sysconfdir}/init.d/populate-volatile.sh update
+	fi
+}
