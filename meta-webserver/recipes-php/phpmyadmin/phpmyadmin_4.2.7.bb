@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
 SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
            file://apache.conf"
 
-SRC_URI[md5sum] = "f787bcf5c98a1702d9c8c653e72eb689"
-SRC_URI[sha256sum] = "fef460aa493f696b8536c273ef126bb142b88dd15c7ef584aca90d2ea07d3bbc"
+SRC_URI[md5sum] = "0dcd755450dac819f33502590c88ad29"
+SRC_URI[sha256sum] = "5d101dd88a99a869bc0c684a7f687cf290abc4bf306daac73337cbde2d7743e4"
 
 S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 
