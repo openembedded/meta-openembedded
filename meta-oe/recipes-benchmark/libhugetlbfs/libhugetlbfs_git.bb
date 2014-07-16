@@ -25,7 +25,10 @@ S = "${WORKDIR}/git"
 COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
 
 LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
-EXTRA_OEMAKE = "'ARCH=${TARGET_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=1"
+LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
+LIBHUGETLBFS_ARCH_powerpc = "ppc"
+LIBHUGETLBFS_ARCH_powerpc64 = "ppc64"
+EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} V=2"
 PARALLEL_MAKE = ""
 CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
 
