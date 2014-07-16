@@ -9,8 +9,6 @@ SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
 SRC_URI[md5sum] = "f14e9104be513913810cd59c8c658dc0"
 SRC_URI[sha256sum] = "55be6cb2d101ed38acca32c5b1f99ae345904b365b642203194c585d27bebd79"
 
-SRC_URI_append_fslmachine = " file://ppc-fixplt.patch "
-
 S = "${WORKDIR}/LuaJIT-${PV}"
 
 inherit pkgconfig binconfig
