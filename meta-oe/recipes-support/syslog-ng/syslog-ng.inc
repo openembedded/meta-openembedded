@@ -1,98 +1,90 @@
-DESCRIPTION = "Alternative system logger daemon"
-DEPENDS = "libol flex eventlog glib-2.0"
-LICENSE = "GPL LGPL"
-LIC_FILES_CHKSUM = "file://COPYING;md5=7ec1bcc46f28b11f4722e20d9b7dd4d5"
+SUMMARY = "Alternative system logger daemon"
+DESCRIPTION = "syslog-ng, as the name shows, is a syslogd replacement, \
+but with new functionality for the new generation. The original syslogd \
+allows messages only to be sorted based on priority/facility pairs; \
+syslog-ng adds the possibility to filter based on message contents using \
+regular expressions. The new configuration scheme is intuitive and powerful. \
+Forwarding logs over TCP and remembering all forwarding hops makes it \
+ideal for firewalled environments. \
+"
+HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging-system"
 
-# syslog initscript is handled explicitly because order of
-# update-rc.d and update-alternatives is important
-RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
+LICENSE = "GPLv2 & LGPLv2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e0e8658d9be248f01b7933df24dc1408"
 
-INC_PR = "r12"
+DEPENDS = "flex eventlog glib-2.0"
 
-inherit autotools systemd
-
-SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source/${BPN}_${PV}.tar.gz"
-
-noipv6 = "${@base_contains('DISTRO_FEATURES', 'ipv6', '', '--disable-ipv6', d)}"
-
-EXTRA_OECONF = " \
-    --with-libnet=${STAGING_BINDIR_CROSS} \
-    --enable-dynamic-linking \
-    ${noipv6} \
-    --enable-ssl \
-    --disable-sub-streams \
-    --disable-pacct \
-    --disable-linux-caps \
-    --disable-pcre \
-    --disable-sql \
+SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source/${BPN}_${PV}.tar.gz \
+           file://syslog-ng.conf \
+           file://initscript \
+           file://volatiles.03_syslog-ng \
 "
 
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--enable-systemd', '--disable-systemd', d)}"
+inherit autotools systemd pkgconfig update-rc.d update-alternatives
+
+EXTRA_OECONF = " \
+    --enable-dynamic-linking \
+    --disable-sub-streams \
+    --disable-pacct \
+    --localstatedir=${localstatedir}/run/${BPN} \
+    --sysconfdir=${sysconfdir}/${BPN} \
+    --with-module-dir=${libdir}/${BPN} \
+    --with-sysroot=${STAGING_DIR_HOST} \
+"
+
+PACKAGECONFIG ??= "openssl \
+    ${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+"
+PACKAGECONFIG[openssl] = "--enable-ssl,--disable-ssl,openssl,"
+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
+PACKAGECONFIG[systemd] = "--enable-systemd --with-systemdsystemunitdir=${systemd_unitdir}/system/,--disable-systemd --without-systemdsystemunitdir,systemd,"
+PACKAGECONFIG[linux-caps] = "--enable-linux-caps,--disable-linux-caps,libcap,"
+PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre,"
+PACKAGECONFIG[dbi] = "--enable-sql,--disable-sql,libdbi,"
+PACKAGECONFIG[libnet] = "--enable-libnet --with-libnet=${STAGING_BINDIR_CROSS},--disable-libnet,libnet,"
+PACKAGECONFIG[smtp] = "--enable-smtp --with-libesmtp=${STAGING_LIBDIR},--disable-smtp,libesmtp,"
 
 do_configure_prepend() {
     eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
 }
 
-# rename modules.conf because it breaks update-modules 
-# see http://lists.linuxtogo.org/pipermail/openembedded-devel/2011-October/035537.html
 do_install_append() {
-    mv ${D}/${sysconfdir}/modules.conf ${D}/${sysconfdir}/scl-modules.conf
-    sed -i "s#@include 'modules.conf'#@include 'scl-modules.conf'#g" ${D}/${sysconfdir}/scl.conf
-    install -d ${D}/${sysconfdir}/${PN}
-    install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${PN}.conf
+    install -d ${D}/${sysconfdir}/${BPN}
+    install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
     install -d ${D}/${sysconfdir}/init.d
-    install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
+    install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${BPN}
+    install -d ${D}/${sysconfdir}/default/volatiles/
+    install -m 755 ${WORKDIR}/volatiles.03_syslog-ng ${D}/${sysconfdir}/default/volatiles/03_syslog-ng
+
+    # Remove /var/run as it is created on startup
+    rm -rf ${D}${localstatedir}/run
 }
 
-FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-    ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-    ${base_bindir}/* ${base_sbindir}/* \
-    ${base_libdir}/*${SOLIBS} \
-    ${datadir}/${BPN} ${libdir}/${BPN}/*${SOLIBS} \
-    ${datadir}/include/scl/ ${datadir}/xsd"
-FILES_${PN}-dev += "${libdir}/${BPN}/lib*.la ${libdir}/${BPN}/*${SOLIBSDEV}"
-CONFFILES_${PN} = "${sysconfdir}/${PN}.conf ${sysconfdir}/scl.conf ${sysconfdir}/scl-modules.conf"
+FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+
+# This overcomes the syslog-ng rdepends on syslog-ng-dev QA Error
+PACKAGES =+ "${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
+FILES_${PN}-libs = "${libdir}/${BPN}/*.so ${libdir}/libsyslog-ng-*.so*"
+FILES_${PN}-libs-dev = "${libdir}/${BPN}/lib*.la"
+FILES_${PN}-libs-dbg = "${libdir}/${BPN}/.debug"
+INSANE_SKIP_${PN}-libs = "dev-so"
+RDEPENDS_${PN} += "${PN}-libs"
+
+CONFFILES_${PN} = "${sysconfdir}/${BPN}.conf ${sysconfdir}/scl.conf"
+
+# syslog initscript is handled explicitly because order of
+# update-rc.d and update-alternatives is important
+RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${PN}.service"
 
-pkg_postinst_${PN} () {
-    /etc/init.d/syslog stop
-    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 200
+ALTERNATIVE_${PN} = "syslog-init"
+ALTERNATIVE_PRIORITY[syslog-init] = "200"
+ALTERNATIVE_LINK_NAME[syslog-init] = "${sysconfdir}/init.d/syslog"
 
-    if test "x$D" != "x"; then
-        OPT="-r $D"
-    else
-        OPT="-s"
-    fi
-    # remove all rc.d-links potentially created from alternative
-    # syslog packages before creating new ones
-    update-rc.d $OPT -f syslog remove
-    update-rc.d $OPT syslog start 20 2 3 4 5 . stop 90 0 1 6 .
-}
-
-pkg_prerm_${PN} () {
-    if test "x$D" = "x"; then
-        if test "$1" = "upgrade" -o "$1" = "remove"; then
-            /etc/init.d/syslog stop
-        fi
-    fi
-
-    update-alternatives --remove syslog-init syslog.${PN}
-}
-
-pkg_postrm_${PN} () {
-    if test "x$D" != "x"; then
-        OPT="-r $D"
-    else
-        OPT=""
-    fi
-    if test "$1" = "remove" -o "$1" = "purge"; then
-        if ! test -e "/etc/init.d/syslog"; then
-            update-rc.d $OPT syslog remove
-        fi
-    fi
-}
+INITSCRIPT_NAME = "syslog"
+INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."

@@ -5,19 +5,31 @@
 # > update-rc.d syslog-ng defaults 5
 #
 
+# Source function library
+. /etc/init.d/functions
 
 syslog_ng=/usr/sbin/syslog-ng
 test -x "$syslog_ng" || exit 0
 
+PIDFILE=/var/run/syslog-ng/syslog-ng.pid
+
+create_xconsole() {
+  test -e /dev/xconsole || mknod -m 640 /dev/xconsole p
+  test -x /sbin/restorecon && /sbin/restorecon /dev/xconsole
+}
+
+RETVAL=0
+
 case "$1" in
   start)
     echo -n "Starting syslog-ng:"
-    start-stop-daemon --start --quiet --exec $syslog_ng
+    create_xconsole
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $syslog_ng
     echo "."
     ;;
   stop)
     echo -n "Stopping syslog-ng:"
-    start-stop-daemon --stop --quiet --pidfile /var/run/syslog-ng.pid
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
     echo "."
     ;;
   reload|force-reload)
@@ -25,7 +37,7 @@ case "$1" in
     ;;
   restart)
     echo "Stopping syslog-ng:"
-    start-stop-daemon --stop --quiet --pidfile /var/run/syslog-ng.pid
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
     echo -n "Waiting for syslog-ng to die off"
     for i in 1 2 3 ;
     do
@@ -34,12 +46,17 @@ case "$1" in
     done
     echo ""
     echo -n "Starting syslog-ng:"
-    start-stop-daemon --start --quiet --exec $syslog_ng
+    create_xconsole
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $syslog_ng
     echo "."
     ;;
+  status)
+    status $syslog_ng
+    RETVAL=$?
+    ;;
   *)
-    echo "Usage: /etc/init.d/syslog-ng {start|stop|reload|restart|force-reload}"
+    echo "Usage: $0 {start|stop|reload|restart|force-reload|status}"
     exit 1
 esac
 
-exit 0
+exit $RETVAL
