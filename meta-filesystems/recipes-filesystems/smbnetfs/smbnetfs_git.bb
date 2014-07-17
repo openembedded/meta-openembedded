@@ -10,7 +10,7 @@ HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"
 
 DEPENDS = "fuse samba"
 
-inherit autotools gitpkgv
+inherit autotools gitpkgv pkgconfig
 
 PKGV = "${GITPKGVTAG}"
 
