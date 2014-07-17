@@ -16,7 +16,7 @@ SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fl
 
 S = "${WORKDIR}/fltk-${PV}"
 
-inherit lib_package autotools binconfig
+inherit lib_package autotools-brokensep binconfig
 
 TARGET_CC_ARCH += "${LDFLAGS} -DXFT_MAJOR=2"
 
