@@ -17,3 +17,5 @@ PV = "0.9.9+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
 RDEPENDS_${PN} = "${PN}-themes"
+
+SRC_URI += "file://configure.patch"

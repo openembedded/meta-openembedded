@@ -12,3 +12,5 @@ do_configure_prepend() {
 
 # Calls /usr/bin/eject for media
 RRECOMMENDS_${PN} += "eject"
+
+SRC_URI += "file://configure.patch"

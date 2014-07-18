@@ -11,3 +11,5 @@ do_configure_prepend() {
     sed -i -e /po/d ${S}/configure.ac
     sed -i -e s:\ po::g ${S}/Makefile.am
 }
+
+SRC_URI += "file://configure.patch"

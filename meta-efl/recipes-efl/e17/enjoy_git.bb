@@ -22,6 +22,7 @@ inherit e gettext
 SRC_URI = " \
     git://git.enlightenment.org/apps/enjoy.git \
     file://0001-always-use-position-as-percent-and-define-a-1-second.patch \
+    file://configure.patch \
 "
 S = "${WORKDIR}/git"
 

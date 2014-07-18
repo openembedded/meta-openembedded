@@ -15,3 +15,5 @@ SRCNAME = "${PN}"
 
 # autotools-brokensep
 B = "${S}"
+
+SRC_URI += "file://configure.patch"
