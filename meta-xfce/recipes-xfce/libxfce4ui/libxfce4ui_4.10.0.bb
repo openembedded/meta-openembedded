@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
 DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
 
-inherit autotools gettext xfce xfce-git
+inherit autotools gettext xfce xfce-git gtk-doc
 
 SRC_URI = " \
     git://git.xfce.org/xfce/libxfce4ui;protocol=git \
