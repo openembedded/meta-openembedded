@@ -14,6 +14,7 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
            file://dont-swallow-errors.patch \
            file://discard-use-of-dnl-in-Makefile.am.patch \
            file://use-ldflags.patch \
+           file://configure.patch \
            file://pppoe-server.default \
            file://pppoe-server.init"
 
