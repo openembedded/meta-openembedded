@@ -30,6 +30,8 @@ EXTRA_OECONF = " \
     --sysconfdir=${sysconfdir}/${BPN} \
     --with-module-dir=${libdir}/${BPN} \
     --with-sysroot=${STAGING_DIR_HOST} \
+    --with-libmongo-client=no --disable-mongodb \
+    --with-librabbitmq-client=no \
 "
 
 PACKAGECONFIG ??= "openssl \
@@ -44,6 +46,8 @@ PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre,"
 PACKAGECONFIG[dbi] = "--enable-sql,--disable-sql,libdbi,"
 PACKAGECONFIG[libnet] = "--enable-libnet --with-libnet=${STAGING_BINDIR_CROSS},--disable-libnet,libnet,"
 PACKAGECONFIG[smtp] = "--enable-smtp --with-libesmtp=${STAGING_LIBDIR},--disable-smtp,libesmtp,"
+PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
+PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
 
 do_configure_prepend() {
     eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"

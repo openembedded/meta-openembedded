@@ -11,6 +11,8 @@ SRC_URI += " \
     file://free-global-LogTemplateOptions.patch \
     file://logwriter-still-free-the-unconsumed-item.patch \
     file://syslog-ng-verify-the-list-before-del.patch \
+    file://configure.patch \
+    file://dbifix.patch \
 "
 
 SRC_URI[md5sum] = "ff3bf223ebafbaa92b69a2d5b729f368"
