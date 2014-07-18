@@ -6,7 +6,7 @@ DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
 DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
 PR = "r4"
 
-inherit xfce pythonnative perlnative
+inherit xfce pythonnative perlnative gtk-doc
 
 # SRC_URI must follow inherited one
 SRC_URI += " \
