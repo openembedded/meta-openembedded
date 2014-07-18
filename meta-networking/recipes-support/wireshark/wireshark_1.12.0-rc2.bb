@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0"
 
 DEPENDS = "perl-native libpcap pcre expat glib-2.0 libsmi"
 
-inherit autotools
+inherit autotools pkgconfig
 
 ARM_INSTRUCTION_SET = "arm"
 
