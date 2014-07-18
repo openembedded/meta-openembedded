@@ -6,7 +6,9 @@ PV = "1.7.3+git${SRCPV}"
 
 inherit autotools
 
-SRCREV = "93788682a4749d8b577ce6549d6d3dd6df166ba4"
+SRCREV = "a4ac64a243af91dc434b7a3915f43482d528a2b1"
 SRC_URI = "git://github.com/bmc/daemonize.git"
 
 S = "${WORKDIR}/git"
+
+EXTRA_AUTORECONF += "--exclude=autoheader"
