@@ -10,7 +10,7 @@ SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${BP}.tar.xz"
 SRC_URI[md5sum] = "f354c614aea76e5630e4edbf06e5c292"
 SRC_URI[sha256sum] = "e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60b91639fb8d443791"
 
-inherit autotools lib_package binconfig
+inherit autotools-brokensep lib_package binconfig
 
 EXTRA_OECONF = "--without-perl \
                 --without-php \
