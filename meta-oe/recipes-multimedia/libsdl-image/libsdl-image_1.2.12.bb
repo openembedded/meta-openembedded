@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=613734b7586e1580ef944961c6d62227"
 
 DEPENDS = "tiff zlib libpng jpeg virtual/libsdl"
 
-SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.gz"
+SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL_image-${PV}.tar.gz \
+           file://configure.patch"
 SRC_URI[md5sum] = "a0f9098ebe5400f0bdc9b62e60797ecb"
 SRC_URI[sha256sum] = "0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699"
 
