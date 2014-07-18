@@ -1,0 +1,59 @@
+[PATCH] Fix the test output format
+
+Upstream-Status: Pending
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ test/regress  |    6 +++---
+ test/regress2 |    9 ++++-----
+ 2 files changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/test/regress b/test/regress
+index 05eff5b..10d72f7 100755
+--- a/test/regress
++++ b/test/regress
+@@ -73,6 +73,7 @@ probe_hardware()
+ 	if [ $numnodes -lt 2 ] ; then
+ 	    echo "need at least two nodes with at least $NEEDPAGES each of"
+ 	    echo "free memory for mempolicy regression tests"
++	    echo "FAIL: numa regress"
+ 	    exit 1
+ 	fi
+ }
+@@ -206,10 +207,9 @@ main()
+ 	rm A B
+ 
+ 	if [ "$EXIT" = 0 ] ; then
+-		echo '========SUCCESS'
++		echo 'PASS: numactl regress'
+ 	else
+-		echo '========FAILURE'
+-		exit 1
++		echo 'FAIL: numactl regress'
+ 	fi
+ }
+ 
+diff --git a/test/regress2 b/test/regress2
+index 6a254fa..9c97943 100755
+--- a/test/regress2
++++ b/test/regress2
+@@ -6,12 +6,11 @@ VALGRIND=${VALGRIND:-}
+ export LD_LIBRARY_PATH=`pwd`/..
+ 
+ T() {
+-       echo "$@" 
+-       if ! $VALGRIND "$@" ;  then
+-	  echo	$1 FAILED!!!!
+-	  exit 1
++       if ! $VALGRIND "$@" 2>&1 1>/dev/null;  then
++	  echo	"FAIL: $1"
++       else
++	  echo "PASS: $1"
+        fi
+-       echo
+ }
+ 
+ # various tests
+-- 
+1.7.10.4
+
