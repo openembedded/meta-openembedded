@@ -6,6 +6,6 @@ DEPENDS = "evas ecore"
 PV = "0.0.0+svnr${SRCPV}"
 SRCREV = "${EFL_SRCREV}"
 
-inherit efl
+inherit efl autotools-brokensep
 SRC_URI = "${E_SVN}/OLD;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
