@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
                     file://mtr.c;beginline=5;endline=16;md5=56e390ced194aff352eefab404883057"
 
 SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz \
+           file://configure.patch \
            file://no-gtk.patch"
 
 SRC_URI[md5sum] = "10601ea543fda3e51545c4bce195b64c"

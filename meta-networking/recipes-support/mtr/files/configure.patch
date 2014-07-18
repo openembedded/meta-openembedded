@@ -1,0 +1,12 @@
+Index: mtr-0.82/configure.in
+===================================================================
+--- mtr-0.82.orig/configure.in	2014-07-16 19:52:56.306026346 +0000
++++ mtr-0.82/configure.in	2014-07-17 21:59:03.208587150 +0000
+@@ -1,5 +1,5 @@
+-AC_INIT(mtr.c)
+-AM_INIT_AUTOMAKE(mtr, 0.82)
++AC_INIT(mtr.c, 0.82)
++AM_INIT_AUTOMAKE([foreign])
+ 
+ 
+ AC_SUBST(GTK_OBJ)
