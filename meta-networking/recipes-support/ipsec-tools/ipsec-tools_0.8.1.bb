@@ -10,6 +10,7 @@ DEPENDS = "virtual/kernel openssl readline flex-native bison-native"
 SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
            file://0001-Fix-warning-with-gcc-4.8.patch \
            file://0002-Don-t-link-against-libfl.patch \
+           file://configure.patch \
           "
 SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
 SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
