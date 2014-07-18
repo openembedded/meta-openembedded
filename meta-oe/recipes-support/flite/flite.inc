@@ -11,7 +11,7 @@ S = "${WORKDIR}/flite-${PV}-release"
 
 CFLAGS += " -lasound "
 
-inherit autotools
+inherit autotools-brokensep
 
 PACKAGES += "lib${PN} lib${PN}-vox8 lib${PN}-vox16"
 
