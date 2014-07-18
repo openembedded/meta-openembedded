@@ -50,6 +50,8 @@ FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
 
 PACKAGES_DYNAMIC = "^libllvm-.*$"
 
+INSANE_SKIP_libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
+
 python llvm_populate_packages() {
     libdir = bb.data.expand('${libdir}', d)
     libllvm_libdir = bb.data.expand('${libdir}/${LLVM_DIR}', d)
@@ -58,8 +60,6 @@ python llvm_populate_packages() {
     split_staticdev_packages = do_split_packages(d, libllvm_libdir, '^lib(.*)\.a$', 'libllvm${LLVM_RELEASE}-%s-staticdev', 'Split staticdev package for %s', allow_dirs=True)
     if split_packages:
         pn = d.getVar('PN', True)
-        for package in split_packages:
-            d.appendVar('INSANE_SKIP_' + package, ' dev-so')
         d.appendVar('RDEPENDS_' + pn, ' '+' '.join(split_packages))
         d.appendVar('RDEPENDS_' + pn + '-dbg', ' '+' '.join(split_dbg_packages))
         d.appendVar('RDEPENDS_' + pn + '-staticdev', ' '+' '.join(split_staticdev_packages))
