@@ -11,7 +11,8 @@ LIC_FILES_CHKSUM = " \
 # file://LICENSE-BSD.TXT;md5=c74e6304a772117e059458fb9763a928
 
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/opende/ode-${PV}.tar.bz2"
+SRC_URI = "${SOURCEFORGE_MIRROR}/opende/ode-${PV}.tar.bz2 \
+           file://configure.patch"
 SRC_URI[md5sum] = "04b32c9645c147e18caff7a597a19f84"
 SRC_URI[sha256sum] = "34ce3e236e313bf109a0cb5546d2fca462aed99f29a42e62bc1463b803c31ef9"
 
