@@ -11,7 +11,8 @@ BBCLASSEXTEND = "native"
 SRCREV = "3172"
 PV = "0.0+svnr${SRCPV}"
 
-SRC_URI = "svn://svn.openmoko.org/trunk/src/host;module=usbpath;protocol=http"
+SRC_URI = "svn://svn.openmoko.org/trunk/src/host;module=usbpath;protocol=http \
+           file://configure.patch"
 
 S = "${WORKDIR}/usbpath"
 
