@@ -11,7 +11,9 @@ PKGV = "${GITPKGVTAG}"
 PV = "1.1"
 
 SRCREV = "bd275d73ac06823619230915a3aa29deddc996fb"
-SRC_URI = "git://subsurface.hohndel.org/subsurface.git"
+SRC_URI = "git://subsurface.hohndel.org/subsurface.git \
+           file://pkgconfig.patch \
+           file://libm.patch"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "CC='${CC}' \
