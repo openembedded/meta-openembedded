@@ -6,6 +6,7 @@ DEPENDS = "libgcrypt libgpg-error"
 
 SRC_URI = "http://www.cypherpunks.ca/otr/${BP}.tar.gz \
            file://fix_qa-issue_include.patch \
+           file://sepbuild.patch \
 "
 
 SRC_URI[md5sum] = "00979dca82d70383fcd1b01f3974363c"
