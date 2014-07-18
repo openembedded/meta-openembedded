@@ -6,7 +6,7 @@ SECTION = "console/utils"
 DEPENDS = "libpng zlib"
 SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
 
-inherit autotools
+inherit autotools-brokensep
 
 S = "${WORKDIR}/${PN}"
 
