@@ -8,11 +8,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://setup-add-sleep-after-cups-reset.patch \
            file://fix-libusb-paths.patch \
            file://cups-1.6.patch \
+           file://configure.patch \
 "
 
 DEPENDS += "cups python libusb"
 
-inherit autotools python-dir pythonnative pkgconfig
+inherit autotools-brokensep python-dir pythonnative pkgconfig
 
 export BUILD_SYS
 export HOST_SYS
