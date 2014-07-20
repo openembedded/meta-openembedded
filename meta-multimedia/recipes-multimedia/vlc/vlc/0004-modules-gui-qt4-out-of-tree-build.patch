@@ -1,0 +1,17 @@
+* modules/gui/qt4/Modules.am not B!=S friendly
+* Simple solution to missing directories in ${B}
+
+Upstream status: Pending
+
+Index: vlc-2.1.4/modules/gui/qt4/Modules.am
+===================================================================
+--- vlc-2.1.4.orig/modules/gui/qt4/Modules.am
++++ vlc-2.1.4/modules/gui/qt4/Modules.am
+@@ -261,6 +261,7 @@ else
+ if HAVE_WIN32
+ 	$(moc_verbose)$(MOC) -D_WIN32 $(DEFS) -I$(top_srcdir)/include -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+ else
++	[ -d $(dir $@) ] || mkdir -p $(dir $@)
+ 	$(moc_verbose)$(MOC) $(DEFS) -I$(top_srcdir)/include -I$(top_builddir)/include -I$(top_builddir) $(CPPFLAGS_qt4) -o $@ $<
+ endif
+ endif
