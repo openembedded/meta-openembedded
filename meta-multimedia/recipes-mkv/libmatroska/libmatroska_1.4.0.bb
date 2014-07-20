@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
 DEPENDS = "libebml"
 
 SRC_URI = "http://dl.matroska.org/downloads/${BPN}/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "f4a8c411f09d39c754eb726efd616043"
-SRC_URI[sha256sum] = "5231ec958571365e719a6fd3c220227af6cf0f14e0bd1bcf766ddbc068d18e69"
+SRC_URI[md5sum] = "5b83155019589b04a49f9db923b5bf74"
+SRC_URI[sha256sum] = "1b6d02e75cdbfb6d282dcf2a902a259c3075404885d5e8063e6652a2b3f6c11b"
 
 do_compile() {
     cd ${S}/make/linux
