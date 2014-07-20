@@ -20,7 +20,7 @@ index 409931c..345b346 100644
 +            # FIXME: When we use -fno-tree-dce to support the jsCStack branch merge, build error occurs due to the uninitialization. Temporarily we set
 +            # uninitialized as build warning in order to support the jsCStack merge. https://bugs.webkit.org/show_bug.cgi?id=127777.
 +            set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=uninitialized ${OLD_COMPILE_FLAGS}")
-+	    # | /OE/build/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp:161:104: error: cast from 'uint8_t* {aka unsigned char*}' to 'JSC::FloatTypedArrayAdaptor<double, JSC::GenericTypedArrayView<JSC::Float64Adaptor>, JSC::JSGenericTypedArrayView<JSC::Float64Adaptor>, (JSC::TypedArrayType)9u>::Type* {aka double*}' increases required alignment of target type [-Werror=cast-align]
++            # | /OE/build/shr-core/tmp-eglibc/work/arm920tt-oe-linux-gnueabi/webkit-efl/2.3.2+svnr159807-r0/webkit-efl/Source/JavaScriptCore/runtime/JSDataViewPrototype.cpp:161:104: error: cast from 'uint8_t* {aka unsigned char*}' to 'JSC::FloatTypedArrayAdaptor<double, JSC::GenericTypedArrayView<JSC::Float64Adaptor>, JSC::JSGenericTypedArrayView<JSC::Float64Adaptor>, (JSC::TypedArrayType)9u>::Type* {aka double*}' increases required alignment of target type [-Werror=cast-align]
 +            set(OLD_COMPILE_FLAGS "-Wno-error=cast-align -Wno-error=array-bounds -Wno-error=deprecated-declarations ${OLD_COMPILE_FLAGS}")
          endif ()
  
