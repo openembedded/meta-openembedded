@@ -7,7 +7,7 @@ LICENSE = "MIT|GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING.MIT;md5=6266718a5241c045c8099d9be48817df \
                     file://COPYING.GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
 SECTION = "libs"
-DEPENDS = "curl"
+DEPENDS = "curl openssl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BP}.tar.gz"
 SRC_URI[md5sum] = "689b46c2b3ab1a39735ac33f714c4f7f"
