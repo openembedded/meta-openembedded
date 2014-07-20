@@ -3,8 +3,8 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
 
 SRC_URI = "http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.bz2"
-SRC_URI[md5sum] = "726cc2bd1a525929ff35ff9854c0ebab"
-SRC_URI[sha256sum] = "476b08c6436a96c024a53e788e7c945ce9b41cd8654165763444aa7e5245b7a5"
+SRC_URI[md5sum] = "efec729bf5a51e649e1d9d1f61c0ae7a"
+SRC_URI[sha256sum] = "83b074d6b62715aa0080406ea84d33df2e44b5d874096640233a4db49b8096de"
 
 do_compile() {
     cd ${S}/make/linux
