@@ -5,6 +5,7 @@ EXTRA_OECONF += " --enable-libxml2=no"
 
 SRC_URI += "file://0001-enable-subdir-objects.patch \
             file://0002-glibc-does-not-provide-strlcpy.patch \
+            file://0003-use-am-path-libgcrypt.patch \
 "
 
 SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
