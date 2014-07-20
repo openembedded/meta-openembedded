@@ -3,7 +3,7 @@ SECTION = "console/network"
 HOMEPAGE = "http://sourceforge.net/projects/ser2net/"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://INSTALL;md5=0659eb117294c490ae3853facd7a6ddd"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
 
