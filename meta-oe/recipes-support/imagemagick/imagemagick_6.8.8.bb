@@ -2,7 +2,7 @@ SUMMARY = "ImageMagick is an image convertion tools"
 SECTION = "console/utils"
 LICENSE = "ImageMagick"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
-# FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
+# FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
 
 PATCHSET = "10"
@@ -21,7 +21,11 @@ inherit autotools binconfig pkgconfig
 EXTRA_OECONF = "--program-prefix= --program-suffix=.im6 --without-x --without-perl --disable-openmp --without-xml --disable-opencl"
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[jp2] = "--with-jp2,--without-jp2,jasper"
+PACKAGECONFIG[jp2] = "--with-jp2,,jasper"
+PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
+PACKAGECONFIG[pango] = "--with-pango,--without-pango,pango cairo"
+PACKAGECONFIG[webp] = "--with-webp,--without-webp,libwebp"
+PACKAGECONFIG[wmf] = "--with-wmf,--without-wmf,libwmf"
 
 FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
