@@ -2,23 +2,38 @@ DESCRIPTION = "multi-protocol instant messaging client"
 SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus intltool-native"
-INC_PR = "r3"
+DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus intltool-native farsight2 libidn"
 
 inherit autotools gettext pkgconfig gconf perlnative
 
+SRC_URI = "\
+    ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
+    file://sanitize-configure.ac.patch \
+    file://pidgin.desktop-set-icon.patch \
+    file://purple-OE-branding-25.patch \
+    file://pidgin-cross-python-265.patch \
+"
+
+SRC_URI[md5sum] = "10a4a69d077893f6dd3438cd8af94e81"
+SRC_URI[sha256sum] = "dc362ed8577f623eea4554a79e917073aa726825074fea402f2e515f0f51f319"
+
 EXTRA_OECONF = " \
-        --enable-vv \
-        --disable-perl \
-        --disable-tcl \
-        --disable-gevolution \
-        --disable-schemas-install \
-        --x-includes=${STAGING_INCDIR} \
-        --x-libraries=${STAGING_LIBDIR} \
-        --enable-gnutls=yes \
-        --with-ncurses-headers=${STAGING_INCDIR} \
-        --with-gnutls-includes=${STAGING_INCDIR} \
-        --with-gnutls-libs=${STAGING_LIBDIR} \
+    --enable-vv \
+    --disable-perl \
+    --disable-tcl \
+    --disable-gevolution \
+    --disable-schemas-install \
+    --x-includes=${STAGING_INCDIR} \
+    --x-libraries=${STAGING_LIBDIR} \
+    --enable-gnutls=yes \
+    --with-ncurses-headers=${STAGING_INCDIR} \
+    --with-gnutls-includes=${STAGING_INCDIR} \
+    --with-gnutls-libs=${STAGING_LIBDIR} \
+    --disable-gtkspell \
+    --disable-meanwhile \
+    --disable-nm \
+    --disable-screensaver \
+    --enable-nss=no \
 "
 
 do_configure_prepend() {
