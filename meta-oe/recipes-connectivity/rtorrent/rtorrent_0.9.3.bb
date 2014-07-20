@@ -3,7 +3,7 @@ HOMEPAGE = "http://libtorrent.rakshasa.no/"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-DEPENDS = "libsigc++-2.0 curl cppunit libtorrent"
+DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
 
 SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
     file://don-t-run-code-while-configuring-package.patch \
