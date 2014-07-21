@@ -4,11 +4,10 @@ SECTION = "console/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "python-native"
-PR = "r2"
 
 SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
-SRC_URI[md5sum] = "d4842129fa2732eb6ed1180467bc32e2"
-SRC_URI[sha256sum] = "711e4b1cd2924a7a88499d6c431a9122390183bf554d4e153edbb3b2f30123e0"
+SRC_URI[md5sum] = "15de301a673b77f839325dba10ed4fc0"
+SRC_URI[sha256sum] = "36e48b59a84ef5a222d06596971e955ac8217e56b076dfb94c8ce5a0c29fd705"
 
 S = "${WORKDIR}/mercurial-${PV}"
 
