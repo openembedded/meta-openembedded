@@ -10,6 +10,16 @@ SRC_URI = "http://www.zeroc.com/download/Ice/3.5/Ice-${PV}.tar.gz \
 SRC_URI[md5sum] = "f00c59983cc904bca977133c0a9b3e80"
 SRC_URI[sha256sum] = "989e51194c6adadbd156da3288e37bad847b93b3b876502e83033b70493af392"
 
+#| MapDb.cpp: In constructor 'Freeze::MapDb::MapDb(const ConnectionIPtr&, const string&, const string&, const string&, const KeyCompareBasePtr&, const std::vector<IceUtil::Handle<Freeze::MapIndexBase> >&, bool)':
+#| MapDb.cpp:138:46: error: call of overloaded 'set_bt_compare(int (*)(DB*, const DBT*, const DBT*))' is ambiguous
+#| MapDb.cpp:138:46: note: candidates are:
+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:272:14: note: virtual int Db::set_bt_compare(bt_compare_fcn_type) <near match>
+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:272:14: note:   no known conversion for argument 1 from 'int (*)(DB*, const DBT*, const DBT*) {aka int (*)(__db*, const __db_dbt*, const __db_dbt*)}' to 'bt_compare_fcn_type {aka int (*)(__db*, const __db_dbt*, const __db_dbt*, long unsigned int*)}'
+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:273:14: note: virtual int Db::set_bt_compare(int (*)(Db*, const Dbt*, const Dbt*, size_t*)) <near match>
+#| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/include/db_cxx.h:273:14: note:   no known conversion for argument 1 from 'int (*)(DB*, const DBT*, const DBT*) {aka int (*)(__db*, const __db_dbt*, const __db_dbt*)}' to 'int (*)(Db*, const Dbt*, const Dbt*, size_t*) {aka int (*)(Db*, const Dbt*, const Dbt*, long unsigned int*)}'
+#| make[3]: *** [MapDb.o] Error 1
+PNBLACKLIST[zeroc-ice] = "BROKEN: not compatible with default db version"
+
 S = "${WORKDIR}/Ice-${PV}"
 
 inherit python-dir pkgconfig
