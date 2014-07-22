@@ -16,7 +16,7 @@ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
 SRC_URI[tarball.md5sum] = "18111f6de3989ca89add36077a7c2659"
 SRC_URI[tarball.sha256sum] = "3cc6c8a9b52f4c863a5736a73b4012aff340b50b5e002771b04d4877f47cd19e"
 
-inherit autotools  gettext  update-rc.d
+inherit autotools gettext update-rc.d pkgconfig
 
 INITSCRIPT_NAME = "snort"
 INITSCRIPT_PARAMS = "defaults"
