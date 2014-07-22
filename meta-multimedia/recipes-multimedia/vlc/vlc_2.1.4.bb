@@ -7,6 +7,7 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
             file://0002-glibc-does-not-provide-strlcpy.patch \
             file://0003-use-am-path-libgcrypt.patch \
             file://0004-modules-gui-qt4-out-of-tree-build.patch \
+            file://0005-libpostproc-header-check.patch \
 "
 
 SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
