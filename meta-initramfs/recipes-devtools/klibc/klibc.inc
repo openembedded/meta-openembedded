@@ -5,7 +5,7 @@ SECTION = "libs"
 LICENSE = "BSD-3-Clause & GPL-2.0 & MIT & Zlib"
 LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8b"
 DEPENDS = "linux-libc-headers perl-native"
-SRCREV = "f0440baf7f2dc1d9a25863c184d0a8fb73c4ee6c"
+SRCREV = "7763dd33e5b8eed4b9e3c583c02c10176fd550d3"
 
 SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
 SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
