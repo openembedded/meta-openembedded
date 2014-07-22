@@ -32,6 +32,12 @@ EXTRA_OECONF = " \
 	--with-dnet-libraries=${STAGING_LIBDIR} \
 	"
 
+# if you want to disable it, you need to patch configure.in first
+# AC_CHECK_HEADERS([openssl/sha.h],, SHA_H="no")
+# is called even with --without-openssl-includes
+PACKAGECONFIG ?= "openssl"
+PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
+
 do_install_append() {
     install -d ${D}/${sysconfdir}/snort/rules
     install -d ${D}/${sysconfdir}/snort/preproc_rules
