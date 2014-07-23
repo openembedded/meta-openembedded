@@ -22,15 +22,15 @@ RETVAL=0
 
 case "$1" in
   start)
-    echo -n "Starting syslog-ng:"
+    [ "${VERBOSE}" != "no" ] && echo -n "Starting syslog-ng:"
     create_xconsole
     start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $syslog_ng
-    echo "."
+    [ "${VERBOSE}" != "no" ] && echo "."
     ;;
   stop)
-    echo -n "Stopping syslog-ng:"
+    [ "${VERBOSE}" != "no" ] && echo -n "Stopping syslog-ng:"
     start-stop-daemon --stop --quiet --pidfile $PIDFILE
-    echo "."
+    [ "${VERBOSE}" != "no" ] && echo "."
     ;;
   reload|force-reload)
     start-stop-daemon --stop --quiet --signal 1 --exec $syslog_ng
