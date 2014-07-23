@@ -13,6 +13,7 @@ EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
                  --x-libraries=${STAGING_LIBDIR} \
                  FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config \
                  --disable-imake \
+                 --disable-rpath-hack \
                  --disable-setuid"
 
 B = "${S}"
