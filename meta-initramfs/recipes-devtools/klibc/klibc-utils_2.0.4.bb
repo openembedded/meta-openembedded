@@ -10,3 +10,5 @@ KLIBC_UTILS_PKGNAME = "klibc-utils"
 
 require klibc-utils.inc
 require klibc.inc
+
+DEPENDS = "klibc"
