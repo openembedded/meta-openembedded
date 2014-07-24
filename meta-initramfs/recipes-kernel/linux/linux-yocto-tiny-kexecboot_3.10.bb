@@ -13,6 +13,7 @@ INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
 # disable unneeded tasks
 do_install[noexec] = "1"
 do_package[noexec] = "1"
+do_package_qa[noexec] = "1"
 do_packagedata[noexec] = "1"
 do_package_deb[noexec] = "1"
 do_package_ipk[noexec] = "1"
