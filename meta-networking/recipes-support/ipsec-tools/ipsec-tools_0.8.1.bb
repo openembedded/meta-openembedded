@@ -11,6 +11,9 @@ SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV
            file://0001-Fix-warning-with-gcc-4.8.patch \
            file://0002-Don-t-link-against-libfl.patch \
            file://configure.patch \
+           file://0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch \
+           file://racoon-check-invalid-pointers.patch \
+           file://racoon-check-invalid-ivm.patch \
           "
 SRC_URI[md5sum] = "d38b39f291ba2962387c3232e7335dd8"
 SRC_URI[sha256sum] = "fa4a95bb36842f001b84c4e7a1bb727e3ee06147edbc830a881d63abe8153dd4"
@@ -46,10 +49,13 @@ EXTRA_OECONF = "--with-kernel-headers=${STAGING_INCDIR} \
                 --with-readline \
                 --with-openssl=${STAGING_LIBDIR}/.. \
                 --without-libradius \
-                --without-libpam \
                 --disable-security-context \
                 --enable-shared \
                 ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6=yes', '', d)}"
 
 # See http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=530527
 CFLAGS += "-fno-strict-aliasing"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam,"
+PACKAGECONFIG[selinux] = "--enable-security-context,--disable-security-context,libselinux,"
