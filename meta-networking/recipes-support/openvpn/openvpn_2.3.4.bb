@@ -28,4 +28,4 @@ do_install_append() {
 
 RRECOMMENDS_${PN} = "kernel-module-tun"
 
-FILES_${PN}-dbg += "/usr/lib/openvpn/plugins/.debug"
+FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
