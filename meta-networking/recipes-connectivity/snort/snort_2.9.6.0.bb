@@ -11,6 +11,7 @@ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
             file://disable-inaddr-none.patch \
             file://disable-dap-address-space-id.patch \
             file://0001-libpcap-search-sysroot-for-headers.patch \
+            file://not-hardcoded-libdir.patch \
 "
 
 SRC_URI[tarball.md5sum] = "18111f6de3989ca89add36077a7c2659"
