@@ -1,12 +1,12 @@
 SUMMARY = "libmatroska is a C++ libary to parse Matroska files (.mkv and .mka)"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=f14599a2f089f6ff8c97e2baa4e3d575"
+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "libebml"
 
 SRC_URI = "http://dl.matroska.org/downloads/${BPN}/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "5b83155019589b04a49f9db923b5bf74"
-SRC_URI[sha256sum] = "1b6d02e75cdbfb6d282dcf2a902a259c3075404885d5e8063e6652a2b3f6c11b"
+SRC_URI[md5sum] = "f61b2e5086f4bb9d24a43cc8af43a719"
+SRC_URI[sha256sum] = "086f21873e925679babdabf793c3bb85c353d0cd79423543a3355e08e8a4efb7"
 
 do_compile() {
     cd ${S}/make/linux
