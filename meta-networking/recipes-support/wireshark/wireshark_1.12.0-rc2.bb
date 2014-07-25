@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.wireshark.org"
 SECTION = "network"
 LICENSE = "GPL-2.0"
 
-DEPENDS = "perl-native libpcap pcre expat glib-2.0 libsmi"
+DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libsmi libnl portaudio-v19 sbc"
 
 inherit autotools pkgconfig
 
