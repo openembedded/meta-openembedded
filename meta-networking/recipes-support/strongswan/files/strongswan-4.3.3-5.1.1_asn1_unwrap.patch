@@ -1,0 +1,28 @@
+strongswan: asn1: Properly check length in asn1_unwrap()
+
+Fixes CVE-2014-2891 in strongSwan releases 4.3.3-5.1.1.
+
+Upstream-Status: Pending
+
+Signed-off-by: Yue Tao <yue.tao@windriver.com>
+
+---
+ src/libstrongswan/asn1/asn1.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/libstrongswan/asn1/asn1.c b/src/libstrongswan/asn1/asn1.c
+index d860ad9..9a5f5c5 100644
+--- a/src/libstrongswan/asn1/asn1.c
++++ b/src/libstrongswan/asn1/asn1.c
+@@ -296,7 +296,7 @@ int asn1_unwrap(chunk_t *blob, chunk_t *inner)
+ 	else
+ 	{	/* composite length, determine number of length octets */
+ 		len &= 0x7f;
+-		if (len == 0 || len > sizeof(res.len))
++		if (len == 0 || len > blob->len || len > sizeof(res.len))
+ 		{
+ 			return ASN1_INVALID;
+ 		}
+-- 
+1.7.10.4
+
