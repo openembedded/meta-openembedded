@@ -7,6 +7,7 @@ SRC_URI += "file://0001-doc-fix-makeinfo-errors-and-one-warning.patch \
             file://build-fix-extract.pl-for-cross-compilation.patch \
             file://babel-close-the-stdout-stderr-as-in-other-daemons.patch \
             file://work-with-new-readline.patch \
+            file://0001-ospfd-CVE-2013-2236-stack-overrun-in-apiserver.patch \
 "
 
 SRC_URI[quagga-0.99.21.md5sum] = "99840adbe57047c90dfba6b6ed9aec7f"
