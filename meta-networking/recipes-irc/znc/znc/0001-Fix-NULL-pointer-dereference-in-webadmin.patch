@@ -1,0 +1,58 @@
+Subject: [PATCH] Fix NULL pointer dereference in webadmin.
+
+Upstream-Status: Backport
+
+commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
+
+Triggerable by any non-admin, if webadmin is loaded.
+
+The only affected version is 1.0
+
+Thanks to ChauffeR (Simone Esposito) for reporting this.
+---
+ modules/webadmin.cpp | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
+index b793c02..816f217 100644
+--- a/modules/webadmin.cpp
++++ b/modules/webadmin.cpp
+@@ -419,7 +419,7 @@ public:
+ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+ 
+ 			// Admin||Self Check
+-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+ 				return false;
+ 			}
+ 
+@@ -448,7 +448,7 @@ public:
+ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+ 
+ 			// Admin||Self Check
+-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+ 				return false;
+ 			}
+ 
+@@ -472,7 +472,7 @@ public:
+ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+ 
+ 			// Admin||Self Check
+-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+ 				return false;
+ 			}
+ 
+@@ -486,7 +486,7 @@ public:
+ 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+ 
+ 			// Admin||Self Check
+-			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
++			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+ 				return false;
+ 			}
+ 
+-- 
+1.8.5.2.233.g932f7e4
+

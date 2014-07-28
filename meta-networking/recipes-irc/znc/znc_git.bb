@@ -7,7 +7,9 @@ DEPENDS = "openssl"
 PV = "1.0+git"
 
 SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
-SRC_URI = "git://github.com/znc/znc.git"
+SRC_URI = "git://github.com/znc/znc.git \
+           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
+          "
 
 S = "${WORKDIR}/git"
 
