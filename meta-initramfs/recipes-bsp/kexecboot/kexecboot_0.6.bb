@@ -48,7 +48,7 @@ EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
 
 do_install () {
     install -d ${D}${bindir}
-    install -m 0755 kexecboot ${D}${bindir}/
+    install -m 0755 kexecboot ${D}${bindir}
     install -d ${D}/proc
     install -d ${D}/mnt
     install -d ${D}/dev
