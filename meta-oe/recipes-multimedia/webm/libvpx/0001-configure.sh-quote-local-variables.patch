@@ -1,0 +1,40 @@
+From f45fe1668401d72c2937a52385b492216715c0f9 Mon Sep 17 00:00:00 2001
+From: James Zern <jzern@google.com>
+Date: Thu, 6 Mar 2014 15:58:37 -0800
+Subject: [PATCH] configure.sh: quote local variables
+
+fixes issue #711
+
+specifying a multiword CC, e.g., CC='gcc -m32', would cause the failure
+under dash
+
+reported in
+https://bugs.gentoo.org/show_bug.cgi?id=498136
+
+patch by floppymaster at gmail dot com
+
+Upstream-Status: Backport [f45fe1668401d72c2937a52385b492216715c0f9]
+
+Change-Id: I2ba246f765646161538622739961ec0f6c2d8c2d
+---
+ build/make/configure.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/build/make/configure.sh b/build/make/configure.sh
+index 449d1b9..43f8e77 100755
+--- a/build/make/configure.sh
++++ b/build/make/configure.sh
+@@ -405,8 +405,8 @@ true
+ }
+ 
+ write_common_target_config_mk() {
+-    local CC=${CC}
+-    local CXX=${CXX}
++    local CC="${CC}"
++    local CXX="${CXX}"
+     enabled ccache && CC="ccache ${CC}"
+     enabled ccache && CXX="ccache ${CXX}"
+     print_webm_license $1 "##" ""
+-- 
+1.8.3.2
+
