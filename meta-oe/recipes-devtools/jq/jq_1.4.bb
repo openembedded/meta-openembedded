@@ -12,10 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=244a1fb9cf472474a062d67069dec653"
 DEPENDS = "flex-native bison-native"
 
 SRC_URI = "http://stedolan.github.io/${BPN}/download/source/${BP}.tar.gz \
-           file://automake-once-fix.patch \
 "
-SRC_URI[md5sum] = "26081b05d22525eca5cbdd8f9f4db17d"
-SRC_URI[sha256sum] = "623f23c36abfc1d96d85020cf421b56f90a229d566f26a4a0d3e8536244bfed7"
+SRC_URI[md5sum] = "e3c75a4f805bb5342c9f4b3603fb248f"
+SRC_URI[sha256sum] = "998c41babeb57b4304e65b4eb73094279b3ab1e63801b6b4bddd487ce009b39d"
 
 inherit autotools
 
