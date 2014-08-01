@@ -5,8 +5,6 @@ S = "${WORKDIR}/gnumeric-${PV}"
 DEPENDS = "gdk-pixbuf libgsf gtk+3 libxml2 libglade libart-lgpl intltool-native libgnomecanvas libgnomeprint libbonoboui orbit2-native goffice"
 SUMMARY = "Gnumeric spreadsheet for GNOME"
 
-PNBLACKLIST[gnumeric] = "BROKEN: depends on broken libgsf"
-
 GNOME_COMPRESS_TYPE = "xz"
 
 inherit gnome
@@ -33,7 +31,7 @@ FILES_gnumeric-goffice = "${libdir}/goffice/*/plugins/gnumeric/*"
 # This hack works around the problem mentioned here:
 # https://mail.gnome.org/archives/gnumeric-list/2010-February/msg00006.html
 do_install_prepend() {
-    sed -i ${S}/doc/C/Makefile -e 's/\tfor file in $(omffile); do/\t-for file in $(omffile); do/'
+    sed -i ${B}/doc/C/Makefile -e 's/\tfor file in $(omffile); do/\t-for file in $(omffile); do/'
 }
 
 python populate_packages_prepend () {
