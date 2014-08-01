@@ -14,8 +14,6 @@ SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
            file://autogen-common.sh \
 "
 
-PNBLACKLIST[abiword] = "BROKEN: depends on broken wv -> libgsf"
-
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
 
 SRC_URI[md5sum] = "8d9c41cff3a8fbef8d0c835c65600e65"
@@ -26,7 +24,7 @@ SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]
 
 inherit autotools-brokensep pkgconfig
 
-PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp collab-backend-service"
+PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp"
 PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
 PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth"
 PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
