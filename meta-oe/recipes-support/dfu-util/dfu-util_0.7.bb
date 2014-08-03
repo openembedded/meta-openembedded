@@ -1,4 +1,14 @@
-require dfu-util.inc
+DESCRIPTION = "USB Device Firmware Upgrade utility"
+SECTION = "devel"
+AUTHOR = "Harald Welte <laforge@openmoko.org>"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+
+SRC_URI = "http://${BPN}.gnumonks.org/releases/${BP}.tar.gz \
+    file://0001-configure.ac-Don-t-check-for-usbpath.patch \
+"
+
+inherit autotools pkgconfig
 
 DEPENDS = "libusb1"
 

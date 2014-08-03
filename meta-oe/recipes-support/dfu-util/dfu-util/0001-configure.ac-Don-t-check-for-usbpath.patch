@@ -1,0 +1,38 @@
+From 63f6f6882f3813ab22c62806feeab942579a2acf Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sun, 3 Aug 2014 17:50:06 +0200
+Subject: [PATCH 1/2] configure.ac: Don't check for usbpath
+
+* otherwise it fails to build with -lusb
+  | main.o: In function `resolve_device_path':
+  | dfu-util/0.7-r0/dfu-util-0.7/src/main.c:371: undefined reference to `usb_path2devnum'
+  | collect2: error: ld returned 1 exit status
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ configure.ac | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 700b556..fb58473 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -22,14 +22,13 @@ AS_IF([test x$native_libusb = xno], [
+     PKG_CHECK_MODULES([USB], [libusb-1.0 >= 1.0.0],,
+         AC_MSG_ERROR([*** Required libusb-1.0 >= 1.0.0 not installed ***]))
+ ])
+-AC_CHECK_LIB([usbpath],[usb_path2devnum],,,-lusb)
+ 
+ LIBS="$LIBS $USB_LIBS"
+ CFLAGS="$CFLAGS $USB_CFLAGS"
+ 
+ # Checks for header files.
+ AC_HEADER_STDC
+-AC_CHECK_HEADERS([usbpath.h windows.h])
++AC_CHECK_HEADERS([windows.h])
+ 
+ # Checks for typedefs, structures, and compiler characteristics.
+ AC_C_CONST
+-- 
+2.0.2
+
