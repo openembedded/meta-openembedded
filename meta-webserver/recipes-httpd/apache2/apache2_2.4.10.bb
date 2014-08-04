@@ -21,8 +21,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://apache2-volatile.conf"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
-SRC_URI[md5sum] = "2ef4e65353497606b24fa9bb3e5a3c40"
-SRC_URI[sha256sum] = "f78cc90dfa47caf3d83ad18fd6b4e85f237777c1733fc9088594b70ce2847603"
+SRC_URI[md5sum] = "44543dff14a4ebc1e9e2d86780507156"
+SRC_URI[sha256sum] = "176c4dac1a745f07b7b91e7f4fd48f9c48049fa6f088efe758d61d9738669c6a"
 
 S = "${WORKDIR}/httpd-${PV}"
 
