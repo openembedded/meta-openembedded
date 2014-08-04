@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "libxml2"
 
-SRCREV = "67f3dfefb0b5708ad5b692f19c1a3a5b135264ca"
+SRCREV = "0e14da978ea906c7fdaf90f54f798a542e79ce8f"
 SRC_URI = "git://anongit.freedesktop.org/evtest;protocol=git"
 
-PV = "1.25+${SRCPV}"
+PV = "1.31+${SRCPV}"
 
 S = "${WORKDIR}/git"
 
