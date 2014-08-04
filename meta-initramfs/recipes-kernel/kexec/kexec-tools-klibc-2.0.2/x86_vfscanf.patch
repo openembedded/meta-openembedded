@@ -16,7 +16,7 @@
 -	retno = vfscanf(fp, scanf_line, argptr);
 +
 +	line = xmalloc(sizeof(line) * line_size);
-+	while(fgets(line, sizeof(line), fp) != 0 ) {
++	while(fgets(line, sizeof(line), fp) != NULL ) {
 +		line_size += MAX_LINE;
 +		line = xrealloc(line,line_size);
 +	}
