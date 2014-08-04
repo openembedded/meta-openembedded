@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 inherit autotools
 
-PNBLACKLIST[libusbg] = "BROKEN: Doesn't work with B!=S and nobody sent patch to fix it"
-
 PV = "0.1.0"
-SRCREV = "7e2b04363f319e8936a606bdb122dbde249a2f58"
-SRC_URI = "git://github.com/libusbg/libusbg.git"
+SRCREV = "a826d136e0e8fa53815f1ba05893e6dd74208c15"
+SRC_URI = "git://github.com/libusbg/libusbg.git \
+           file://0001-Fix-out-of-tree-builds.patch \
+          "
 
 S = "${WORKDIR}/git"
 
