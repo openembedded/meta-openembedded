@@ -7,8 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "libxml2"
 
-SRC_URI = "http://cgit.freedesktop.org/~whot/evtest/snapshot/evtest-${PV}.tar.bz2;name=archive"
-SRC_URI[archive.md5sum] = "770d6af03affe976bdbe3ad1a922c973"
-SRC_URI[archive.sha256sum] = "3d34123c68014dae6f7c19144ef79ea2915fa7a2f89ea35ca375a9cf9e191473"
+SRCREV = "67f3dfefb0b5708ad5b692f19c1a3a5b135264ca"
+SRC_URI = "git://anongit.freedesktop.org/evtest;protocol=git"
+
+PV = "1.25+${SRCPV}"
+
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
