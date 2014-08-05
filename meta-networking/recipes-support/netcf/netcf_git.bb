@@ -25,3 +25,7 @@ do_configure_prepend() {
 	./bootstrap --gnulib-srcdir=${STAGING_DATADIR}/gnulib
 }
 
+do_install_append() {
+     mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
+     rm -rf ${D}${sysconfdir}/rc.d/
+}
