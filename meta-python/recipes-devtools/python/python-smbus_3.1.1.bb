@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://smbusmodule.c;startline=1;endline=17;md5=fa24df321a52
 
 SRC_URI = "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}.tar.bz2 \
 "
-SRC_URI[md5sum] = "511376eed04455cdb277ef19c5f73bb4"
-SRC_URI[sha256sum] = "23b28e474741834e3f1b35b0686528769a13adc92d2ff5603cbda1d6bd5e5629"
+SRC_URI[md5sum] = "0fdbff53ebd0b8d9249256d6c56480b1"
+SRC_URI[sha256sum] = "14d4d7d60d1c12e43f2befe239c682a5c44c27682f153d4b58c1e392d2db1700"
 
 DEPENDS = "i2c-tools"
 
