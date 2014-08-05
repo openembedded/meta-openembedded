@@ -6,14 +6,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
 
 DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2"
 
-PR = "r2"
+SRCREV = "1850e00a17e25e93c39e608f4e2da50f29c5c712"
+PV = "1.4.8"
 
-SRC_URI = "http://oss.oetiker.ch/rrdtool/pub/rrdtool-${PV}.tar.gz \
-           file://0001-rrdtool-eradicate-tcl-support.patch \
-           file://remove_hardcoded_xml_include.patch \
+SRC_URI = "\
+    git://github.com/oetiker/rrdtool-1.x.git;branch=1.4 \
+    file://remove_hardcoded_xml_include.patch \
+    file://0001-removing-testing-leftovers.patch \
 "
-SRC_URI[md5sum] = "ffe369d8921b4dfdeaaf43812100c38f"
-SRC_URI[sha256sum] = "956aaf431c955ba88dd7d98920ade3a8c4bad04adb1f9431377950a813a7af11"
+
+S = "${WORKDIR}/git"
 
 inherit autotools-brokensep gettext pythonnative perlnative python-dir
 
@@ -40,6 +42,7 @@ EXTRA_OECONF = " \
     rd_cv_ieee_works=yes \
     --disable-ruby \
     --disable-lua \
+    --disable-tcl \
     --disable-rpath \
 "
 

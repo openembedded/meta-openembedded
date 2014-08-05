@@ -1,0 +1,39 @@
+From c581b02d074f5a109074bc190f373f5ba4320468 Mon Sep 17 00:00:00 2001
+From: Tobias Oetiker <tobi@oetiker.ch>
+Date: Thu, 3 Oct 2013 15:51:00 +0200
+Subject: [PATCH] removing testing leftovers
+
+Upstream-Status: Backport
+
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+
+---
+ bindings/perl-piped/leaktest.pl | 16 ----------------
+ 1 file changed, 16 deletions(-)
+ delete mode 100644 bindings/perl-piped/leaktest.pl
+
+diff --git a/bindings/perl-piped/leaktest.pl b/bindings/perl-piped/leaktest.pl
+deleted file mode 100644
+index cebf1c7..0000000
+--- a/bindings/perl-piped/leaktest.pl
++++ /dev/null
+@@ -1,16 +0,0 @@
+-#!/bin/perl -w
+-$ENV{PATH}="/usr/ucb";
+-use strict;   
+-use RRDp;     
+-my $rrdfile='/tmp/test.rrd';
+-RRDp::start '/home/oetiker/data/projects/AABN-rrdtool/src/rrdtool';
+-print grep /rrdtool/,`ps au`;
+-print grep /rrdtool/,`ps au`;
+-my $i=0;
+-while ($i<1000) {
+- RRDp::cmd 'info /tmp/test.rrd';
+- $_ = RRDp::read;
+- $i++;
+-}
+-$_ = RRDp::end;
+-print grep /rrdtool/,`ps au`;
+-- 
+1.8.5.5
+
