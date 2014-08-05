@@ -4,12 +4,12 @@ HOMEPAGE = "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/Test
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PV = "0.4.11"
+PV = "0.4.12"
 
 BRANCH ?= "master"
 
-# Corresponds to tag pm-qa-v0.4.11
-SRCREV = "cd280a9ed159100c0f5f3c1eec4ed8465fe0292f"
+# Corresponds to tag pm-qa-v0.4.12
+SRCREV = "16c5d643c2a2318f8dfe12079a160cf41c17ec06"
 
 SRC_URI = "git://git.linaro.org/power/pm-qa.git;protocol=git;branch=${BRANCH}"
 
