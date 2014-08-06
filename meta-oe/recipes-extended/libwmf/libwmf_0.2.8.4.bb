@@ -7,10 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 PR = "r3"
 
-PNBLACKLIST[libwmf] = "BROKEN: needs to be updated to use freetype2 pkg-config instead of freetype-config"
-
-DEPENDS_virtclass-native = "libpng-native jpeg-native"
-DEPENDS = "libpng jpeg expat gtk+"
+DEPENDS_virtclass-native = "freetype-native libpng-native jpeg-native"
+DEPENDS = "freetype libpng jpeg expat gtk+"
 
 BBCLASSEXTEND = "native"
 
@@ -18,7 +16,10 @@ inherit autotools
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/wvware/${BPN}/${PV}/${BPN}-${PV}.tar.gz;name=tarball \
            file://libwmf-0.2.8.4-intoverflow.patch \
-           file://libwmf-0.2.8.4-useafterfree.patch"
+           file://libwmf-0.2.8.4-useafterfree.patch \
+           file://0001-configure-use-pkg-config-for-freetype.patch \
+          "
+
 SRC_URI[tarball.md5sum] = "d1177739bf1ceb07f57421f0cee191e0"
 SRC_URI[tarball.sha256sum] = "5b345c69220545d003ad52bfd035d5d6f4f075e65204114a9e875e84895a7cf8"
 
