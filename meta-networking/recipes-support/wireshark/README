@@ -19,6 +19,10 @@ IMAGE_INSTALL_append = " wireshark"
 Adding the wireshark to your graphical build
 ========================================
 via local.conf
+IMAGE_INSTALL_append = " wireshark"
+
+and one of:
+
 EXTRA_IMAGE_FEATURES += "x11-base"
 
 or use the "core-image-x11"
@@ -29,8 +33,12 @@ Maintenance
 
 Send patches, comments or questions to openembedded-devel@lists.openembedded.org
 
-When sending single patches, please using something like:
-'git send-email -1 --to  openembedded-devel@lists.openembedded.org --cc akuster@mvista.com --subject-prefix=meta-security][PATCH'
+When sending single patches, please use something like:
+
+   git send-email -1 -M \
+       --to openembedded-devel@lists.openembedded.org \
+       --cc akuster@mvista.com \
+       --subject-prefix=meta-networking][PATCH
 
 Maintainer:    Armin Kuster <akuster@mvista.com>
 
