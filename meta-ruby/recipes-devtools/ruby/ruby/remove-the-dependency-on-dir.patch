@@ -1,0 +1,37 @@
+remove a duplicate dependency
+
+Upstream-status: Pending
+
+The install-rb-default dependency is as below:
+
+pre-install-rb-default:
+	mkdir -p $(RUBYLIBDIR)/bigdecimal
+
+install-rb-default: pre-install-rb-default $(RUBYLIBDIR)/bigdecimal
+
+In fact, dependency on $(RUBYLIBDIR)/bigdecimal is duplicate, and not rule
+for $(RUBYLIBDIR)/bigdecimal, once $(RUBYLIBDIR)/bigdecimal is checked before
+pre-install-rb-default, the below error will happen
+	*** No rule to make target `../../.ext/common/yaml', needed by `install-rb-default'.  Stop
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ lib/mkmf.rb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/mkmf.rb b/lib/mkmf.rb
+index 1f5ed76..556684c 100644
+--- a/lib/mkmf.rb
++++ b/lib/mkmf.rb
+@@ -2054,7 +2054,7 @@ static: $(STATIC_LIB)#{$extout ? " install-rb" : ""}
+       end
+       for f in files
+         dest = "#{dir}/#{File.basename(f)}"
+-        mfile.print("install-rb#{sfx}: #{dest} #{dir}\n")
++        mfile.print("install-rb#{sfx}: #{dest}\n")
+         mfile.print("#{dest}: #{f}\n")
+         mfile.print("\t$(Q) $(#{$extout ? 'COPY' : 'INSTALL_DATA'}) #{f} $(@D#{sep})\n")
+         if defined?($installed_list) and !$extout
+-- 
+1.7.10.4
+
