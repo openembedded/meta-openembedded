@@ -5,13 +5,10 @@ DEPENDS = "libav"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PV = "0.0.0+git${SRCPV}"
-PR = "r1"
+PV = "52.3.0+git${SRCPV}"
 
-DEFAULT_PREFERENCE = "-1"
-
-SRCREV = "3b7053f46dbfe4662063345245cb00b6acbbe969"
-SRC_URI = "git://git.videolan.org/libpostproc.git"
+SRCREV = "811db3b957dfde24aef2d0f82e297e5bf552d873"
+SRC_URI = "git://github.com/lu-zero/postproc;protocol=https"
 
 S = "${WORKDIR}/git"
 
