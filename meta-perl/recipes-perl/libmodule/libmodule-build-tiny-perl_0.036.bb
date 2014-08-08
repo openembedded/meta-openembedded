@@ -29,14 +29,13 @@ do_install () {
 RDEPENDS_${PN} = " libextutils-config-perl \
                    libextutils-helpers-perl \
                    libextutils-installpaths-perl \
-		   libtap-harness-env-perl \
                    perl-module-xsloader \
                    perl-module-file-spec \
                    perl-module-io-handle \
                    perl-module-tap-harness-env \
                    perl-module-ipc-open3 \
                    perl-module-file-path \
-                   perl-module-cpan-meta \
+                   perl-module-cpan \
                    perl-module-extutils-cbuilder \
                    perl-module-getopt-long \
                    perl-module-extutils-makemaker \
@@ -44,7 +43,7 @@ RDEPENDS_${PN} = " libextutils-config-perl \
                    perl-module-carp \
                    perl-module-test-more \
                    perl-module-text-parsewords \
-                   perl-module-module-load \
+                   perl-module-load \
                    perl-module-file-temp \
                    perl-module-data-dumper \
                    perl-module-extutils-parsexs \
