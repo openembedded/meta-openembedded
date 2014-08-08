@@ -1,6 +1,8 @@
 require ${PN}_${PV}.inc
 
-DEPENDS += "mariadb-native ncurses zlib"
+EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
+
+DEPENDS += "mariadb-native ncurses zlib readline libaio"
 
 PROVIDES += "mysql5"
 
