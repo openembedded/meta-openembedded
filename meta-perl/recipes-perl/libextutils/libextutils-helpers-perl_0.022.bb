@@ -21,7 +21,7 @@ RDEPENDS_${PN} = " perl-module-file-copy \
                    perl-module-carp \
                    perl-module-test-more \
                    perl-module-text-parsewords \
-                   perl-module-module-load \
+                   perl-module-load \
                    perl-module-file-temp \
                    perl-module-file-spec-functions \
 "
