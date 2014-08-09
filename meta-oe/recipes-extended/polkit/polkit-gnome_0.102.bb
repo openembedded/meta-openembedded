@@ -12,10 +12,10 @@ SRC_URI = "http://hal.freedesktop.org/releases/polkit-gnome-${PV}.tar.bz2 \
 
 PR = "r2"
 
-EXTRA_OECONF = " --disable-scrollkeeper \
-                 --disable-man-pages \
-                 --disable-examples \
-                 --disable-introspection "
+EXTRA_OECONF = "\
+    --disable-examples \
+    --disable-introspection \
+"
 
 inherit autotools gtk-doc pkgconfig
 
