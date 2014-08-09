@@ -1,5 +1,4 @@
 require llvm.inc
-require llvm3.inc
 
 DEPENDS += "zlib"
 EXTRA_OECONF += "--enable-zlib"
