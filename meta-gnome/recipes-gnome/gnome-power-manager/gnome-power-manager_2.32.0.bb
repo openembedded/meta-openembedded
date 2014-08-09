@@ -21,7 +21,6 @@ EXTRA_OECONF = " --disable-scrollkeeper \
                  --disable-applets \
                  --x-includes=${STAGING_INCDIR} \
                  --x-libraries=${STAGING_LIBDIR} \
-                 --with-dpms-ext=${STAGING_INCDIR}/.. \
                  --enable-compile-warnings=no \
                  ac_cv_header_X11_extensions_dpms_h=yes \
 "
