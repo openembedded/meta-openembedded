@@ -16,10 +16,10 @@ S = "${WORKDIR}/git"
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio glib-2.0 libcanberra"
 
-EXTRA_OECONF = "--disable-esd \
-                --x-includes=${STAGING_INCDIR} \
-                --x-libraries=${STAGING_LIBDIR} \
-                --enable-polkit \
+EXTRA_OECONF = " \
+    --x-includes=${STAGING_INCDIR} \
+    --x-libraries=${STAGING_LIBDIR} \
+    --enable-polkit \
 "
 
 do_configure_prepend() {
