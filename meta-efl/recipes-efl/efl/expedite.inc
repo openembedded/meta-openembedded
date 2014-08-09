@@ -15,16 +15,13 @@ EXTRA_OECONF = "\
     --x-libraries=${STAGING_LIBDIR} \
     --enable-simple-x11 \
 \
-    --disable-opengl-glew \
     --enable-software-x11 \
     --enable-xrender-x11 \
     --enable-software-16-x11 \
     --enable-opengl-x11 \
     --enable-fb \
     --disable-software-ddraw \
-    --disable-software-16-ddraw \
     --disable-direct3d \
-    --disable-software-sdl \
 "
 
 FILES_${PN} += "${datadir}"
