@@ -26,8 +26,6 @@ PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap"
 # FIXME: maemo builds may want --enable-maemo
 # FIXME: some platforms may want --enable-generic-umpc
 EXTRA_OECONF = " \
-    --disable-aspell-test \
-    --enable-aspell \
     --disable-manual \
     --disable-crash-dialog \
     --disable-jpilot \
@@ -38,8 +36,6 @@ EXTRA_OECONF = " \
     --disable-pgpmime-plugin \
     --disable-pgpinline-plugin \
     --disable-dillo-viewer-plugin \
-    --disable-clamav-plugin \
-    --disable-gnomeprint \
     --disable-valgrind \
 "
 
