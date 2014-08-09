@@ -21,8 +21,6 @@ inherit autotools pkgconfig
 
 DEPENDS = "gettext-native"
 
-EXTRA_OECONF = "--disable-kernel-module"
-
 PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
 
 RRECOMMENDS_${PN} = "kernel-module-fuse"
