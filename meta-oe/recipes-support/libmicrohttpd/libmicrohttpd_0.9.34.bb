@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
 LICENSE = "LGPL-2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
 SECTION = "net"
-DEPENDS = "libgcrypt gnutls"
+DEPENDS = "libgcrypt gnutls file"
 
 SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
@@ -11,7 +11,8 @@ SRC_URI[sha256sum] = "29a2bfd4fd2ddf60c756b8c283291a134898e3cc143843be421a040be1
 
 inherit autotools lib_package
 
-EXTRA_OECONF += "-disable-static --enable-gnutls"
+# disable spdy, because it depends on openssl
+EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../ --disable-spdy"
 
 PACKAGECONFIG ?= "curl"
 PACKAGECONFIG_append_class-target = "\
