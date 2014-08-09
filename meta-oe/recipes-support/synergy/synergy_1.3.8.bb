@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9772a11e3569985855e2ce450e56f991"
 LICENSE = "GPL-2.0"
 SECTION = "x11/utils"
 
-DEPENDS = "libx11 libxtst"
+DEPENDS = "libx11 libxtst libxinerama"
 
 SRC_URI = "http://synergy.googlecode.com/files/synergy-${PV}-Source.tar.gz"
 
