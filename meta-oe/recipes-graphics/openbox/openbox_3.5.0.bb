@@ -24,8 +24,6 @@ PACKAGECONFIG[xrandr] = "--enable-xrandr,--disable-xrandr,libxrandr"
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"
 PACKAGECONFIG[xcursor] = "--enable-xcursor,--disable-xcursor,libxcursor"
 
-EXTRA_OECONF += "--with-plugins=none"
-
 PACKAGES =+ "${PN}-core ${PN}-lxde ${PN}-gnome ${PN}-config"
 
 PACKAGES_DYNAMIC += "^${PN}-theme-.*"
