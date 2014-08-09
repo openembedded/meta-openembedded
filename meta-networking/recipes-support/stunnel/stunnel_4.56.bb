@@ -3,7 +3,7 @@ DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-sta
 SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"
-DEPENDS = "openssl"
+DEPENDS = "openssl zlib tcp-wrappers"
 
 SRC_URI = "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
 
