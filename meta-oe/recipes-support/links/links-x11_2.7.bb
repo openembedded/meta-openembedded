@@ -8,11 +8,11 @@ SRC_URI += " file://links2.desktop \
 
 S = "${WORKDIR}/links-${PV}"
 
-EXTRA_OECONF = "--enable-javascript --with-libfl --enable-graphics \
+EXTRA_OECONF = "--enable-graphics \
                 --with-ssl=${STAGING_LIBDIR}/.. --with-libjpeg \
                 --without-libtiff --without-svgalib --without-fb \
                 --without-directfb --without-pmshell --without-atheos \
-                --with-x --without-gpm --without-sdl"
+                --with-x --without-gpm"
 
 do_install_append() {
     install -d ${D}/${datadir}/applications
