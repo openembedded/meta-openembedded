@@ -19,8 +19,7 @@ ALTERNATIVE_${PN} = "x-window-manager"
 ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/metacity"
 ALTERNATIVE_PRIORITY = "10"
 
-EXTRA_OECONF += "--disable-verbose \
-             --disable-xinerama"
+EXTRA_OECONF += "--disable-xinerama"
 
 do_configure_prepend() {
     sed -i -e 's:$ZENITY:$NOZENITY:g' -e 's:-Werror::g' ${S}/configure.in
