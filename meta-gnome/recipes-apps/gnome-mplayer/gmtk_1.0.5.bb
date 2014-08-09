@@ -5,7 +5,7 @@ SECTION = "libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
-DEPENDS = "gtk+ alsa-lib glib-2.0 virtual/libx11 intltool-native"
+DEPENDS = "gtk+ alsa-lib glib-2.0 virtual/libx11 intltool-native pulseaudio gtk+3"
 
 SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
 SRC_URI[md5sum] = "e06e9ca8d61d74910343bb3ef4348f7f"
