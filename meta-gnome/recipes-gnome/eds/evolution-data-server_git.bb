@@ -41,10 +41,9 @@ do_configure_append () {
     cp ${WORKDIR}/iconv-detect.h ${S}
 }
 
-EXTRA_OECONF = "--without-openldap --with-dbus --without-bug-buddy \
-                --with-soup --with-libdb=${STAGING_DIR_HOST}${prefix} \
-                --disable-nntp --without-weather --disable-goa --disable-uoa --disable-weather"
-#		--disable-ssl --disable-smime --disable-ssl
+EXTRA_OECONF = "--without-openldap \
+                --with-libdb=${STAGING_DIR_HOST}${prefix} \
+                --disable-nntp --disable-goa --disable-weather"
 
 PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
              libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
