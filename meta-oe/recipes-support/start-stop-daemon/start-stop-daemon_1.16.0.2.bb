@@ -17,7 +17,6 @@ S = "${WORKDIR}/dpkg-${PV}"
 EXTRA_OECONF = " \
     --with-start-stop-daemon \
     --without-bz2 \
-    --without-deselect \
     --without-install-info \
     --without-selinux \
     --without-update-alternatives \
