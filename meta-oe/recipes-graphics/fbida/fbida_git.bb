@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "STRIP="
 
 PACKAGECONFIG ??= "gif png"
-PACKAGECONFIG[gif] = ",,libungif"
+PACKAGECONFIG[gif] = ",,giflib"
 PACKAGECONFIG[png] = ",,libpng"
 PACKAGECONFIG[tiff] = ",,tiff"
 PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
