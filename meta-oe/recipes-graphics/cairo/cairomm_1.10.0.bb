@@ -1,11 +1,11 @@
-require recipes-graphics/cairo/cairo.inc
-
 SUMMARY = "C++ bindings for Cairo graphics library"
 
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
 
 PR = "r1"
+
+inherit autotools pkgconfig
 
 DEPENDS = "cairo libsigc++-2.0"
 
