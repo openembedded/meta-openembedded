@@ -18,9 +18,6 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[gdk-pixbuf] = "--with-gdk-pixbuf,--without-gdk-pixbuf,gdk-pixbuf"
 
 EXTRA_OECONF = "\
-    --without-python \
-    --without-gnome-vfs \
-    --without-bonobo \
     --disable-gtk-doc \
     --with-bz2 \
 "
