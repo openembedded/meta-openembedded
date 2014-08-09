@@ -22,8 +22,6 @@ EXTRA_OECONF = " \
                  --with-fuselib=${STAGING_LIBDIR} \
                  --enable-owfs \
                  --enable-owhttpd \
-                 --enable-cache \
-                 --enable-mt \
                  --enable-w1 \
                  --disable-swig \
                  --disable-owtcl \
