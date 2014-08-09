@@ -12,6 +12,8 @@ SECTION = "libs"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://PATENTS;md5=7ec8a34de2073ea13ea2991006246d20"
 
+DEPENDS = "giflib"
+
 SRC_URI = "https://webp.googlecode.com/files/${BP}.tar.gz"
 SRC_URI[md5sum] = "c8dd1d26eb9566833aba269b86d97e68"
 SRC_URI[sha256sum] = "31913577e96386556855b41d210736449445fe96cfbe9289014e9b8afa944d69"
@@ -43,4 +45,3 @@ PACKAGES =+ "${PN}-gif2webp"
 
 DESCRIPTION_${PN}-gif2webp = "Simple tool to convert animated GIFs to WebP"
 FILES_${PN}-gif2webp = "${bindir}/gif2webp"
-DEPENDS_${PN}-gif2webp += "giflib"
