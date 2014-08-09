@@ -6,6 +6,8 @@ HOMEPAGE = "http://code.google.com/p/protobuf/"
 SECTION = "console/tools"
 LICENSE = "BSD-3-Clause"
 
+DEPENDS = "zlib"
+
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=af6809583bfde9a31595a58bb4a24514"
 
 SRC_URI = "http://protobuf.googlecode.com/files/protobuf-${PV}.tar.gz"
