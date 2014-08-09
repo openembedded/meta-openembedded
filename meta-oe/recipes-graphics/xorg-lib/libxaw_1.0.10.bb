@@ -10,9 +10,6 @@ PR = "r2"
 SRC_URI[md5sum] = "f1ea52debce7a18cc26b21647a00ad8b"
 SRC_URI[sha256sum] = "2d96bcf92638b8ec5c91d379f5ec2e7b15133adeb2ba22066d48bf3239ee1bdd"
 
-# disable docs as groff detection doesn't work on some hosts while cross compilling
-EXTRA_OECONF += " --disable-docs "
-
 do_install_append () {
     ln -sf libXaw6.so.6 ${D}${libdir}/libXaw.so.6
     ln -sf libXaw7.so.7 ${D}${libdir}/libXaw.so.7
