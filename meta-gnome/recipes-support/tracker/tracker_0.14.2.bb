@@ -26,6 +26,9 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 EXTRA_OECONF += " tracker_cv_have_ioprio=yes"
 
+PACKAGECONFIG ?= "nautilus"
+PACKAGECONFIG[nautilus] = "--enable-nautilus-extension,--disable-nautilus-extension,nautilus"
+
 # Disable the desktop-centric miners
 EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
                  --disable-miner-evolution --disable-miner-flickr"
