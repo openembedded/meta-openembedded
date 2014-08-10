@@ -104,6 +104,7 @@ python populate_packages_prepend () {
         allow_dirs=True, recursive=False, extra_depends="" )
 }
 
+PACKAGES += "evas-loader-png evas-engine-software-generic evas-engine-fb"
 PACKAGES_DYNAMIC += "^evas-engine-.* ^evas-loader-.* ^evas-saver-.* ^evas-cserve2-.*"
 
 # PACKAGES_DYNAMIC + do_split_packages isn't used for all libe libs,
