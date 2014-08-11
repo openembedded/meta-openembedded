@@ -22,6 +22,10 @@ INITSCRIPT_PARAMS = "defaults"
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[dbus] = "COPTS=-DHAVE_DBUS,,dbus"
 EXTRA_OEMAKE = "${EXTRA_OECONF}"
+EXTRA_OEMAKE += "\
+    'CFLAGS=${CFLAGS}' \
+    'LDFLAGS=${LDFLAGS}' \
+"
 
 do_compile_append() {
     # build dhcp_release
