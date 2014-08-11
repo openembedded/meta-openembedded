@@ -11,7 +11,6 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
            file://init \
            file://dnsmasq.conf \
            file://dnsmasq.service \
-           file://parallel-make.patch \
 "
 
 inherit pkgconfig update-rc.d systemd

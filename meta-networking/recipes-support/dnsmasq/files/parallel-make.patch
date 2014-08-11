@@ -5,6 +5,7 @@ can't rely on that order when doing a paralllel make build, so add an explicit
 rule to enforce that order.
 
 Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Upstream-status: Pending
 
 --- dnsmasq-2.68.orig/Makefile
 +++ dnsmasq-2.68/Makefile
