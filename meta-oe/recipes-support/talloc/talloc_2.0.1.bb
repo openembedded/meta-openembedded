@@ -29,6 +29,7 @@ do_install_append() {
     ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
     ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
     ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
+    rmdir ${D}${bindir}
 }
 
 PACKAGES += "${PN}-swig"
