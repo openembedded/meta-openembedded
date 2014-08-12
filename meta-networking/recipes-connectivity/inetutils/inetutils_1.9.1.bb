@@ -37,6 +37,7 @@ PACKAGECONFIG[uucpd] = "--enable-uucpd,--disable-uucpd,readline"
 
 EXTRA_OECONF = "--with-ncurses-include-dir=${STAGING_INCDIR} \
         ${noipv6} \
+        inetutils_cv_path_login=${base_bindir}/login \
         --with-libreadline-prefix=${STAGING_LIBDIR} \
         --enable-rpath=no \
 "
