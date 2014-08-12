@@ -1,0 +1,31 @@
+Subject: [PATCH] mkmf.rb: fix race conditions at install-ext
+
+Upstream-Status: backport
+
+* lib/mkmf.rb (create_makefile): fix race conditions at install-ext.
+  target files need to depend on destination directory timestamp
+  files, not phony trgets.
+
+git-svn-id: svn+ssh://ci.ruby-lang.org/ruby/trunk@36863 b2dd03c8-39d4-4d8f-98ff-823fe69b080e
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ lib/mkmf.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/mkmf.rb b/lib/mkmf.rb
+index 556684c..a277354 100644
+--- a/lib/mkmf.rb
++++ b/lib/mkmf.rb
+@@ -2055,7 +2055,7 @@ static: $(STATIC_LIB)#{$extout ? " install-rb" : ""}
+       for f in files
+         dest = "#{dir}/#{File.basename(f)}"
+         mfile.print("install-rb#{sfx}: #{dest}\n")
+-        mfile.print("#{dest}: #{f}\n")
++        mfile.print("#{dest}: #{f} #{timestamp_file(dir)}\n")
+         mfile.print("\t$(Q) $(#{$extout ? 'COPY' : 'INSTALL_DATA'}) #{f} $(@D#{sep})\n")
+         if defined?($installed_list) and !$extout
+           mfile.print("\t@echo #{dest}>>$(INSTALLED_LIST)\n")
+--
+2.0.0
+

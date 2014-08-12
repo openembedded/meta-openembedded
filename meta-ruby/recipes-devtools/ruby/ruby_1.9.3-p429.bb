@@ -12,6 +12,7 @@ SRC_URI += "\
     file://ruby-1.9.3-mkmf-verbose.patch \
     file://ruby-1.9.3-install-cross.patch \
     file://remove-the-dependency-on-dir.patch \
+    file://ruby-mkmf.rb-fix-race-conditions-at-install-ext.patch \
 "
 SRC_URI[md5sum] = "993c72f7f805a9eb453f90b0b7fe0d2b"
 SRC_URI[sha256sum] = "d192d1afc46a7ef27b9d0a3c7a67b509048984db2c38907aa82641bdf980acf4"
