@@ -18,6 +18,7 @@ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source
            file://syslog-ng.conf \
            file://initscript \
            file://volatiles.03_syslog-ng \
+           file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
 "
 
 inherit autotools systemd pkgconfig update-rc.d update-alternatives
@@ -32,7 +33,11 @@ EXTRA_OECONF = " \
     --with-sysroot=${STAGING_DIR_HOST} \
     --with-libmongo-client=no --disable-mongodb \
     --with-librabbitmq-client=no \
+    ${CONFIG_TLS} \
 "
+
+CONFIG_TLS = "--enable-thread-tls"
+CONFIG_TLS_arm = "${@base_conditional( "DEBUG_BUILD", "1", " --disable-thread-tls", " --enable-thread-tls", d )}"
 
 PACKAGECONFIG ??= "openssl \
     ${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
