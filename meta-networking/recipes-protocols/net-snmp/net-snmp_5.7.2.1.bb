@@ -6,9 +6,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
 
 DEPENDS = "openssl libnl pciutils"
 
-PR = "r1"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
         file://init \
         file://snmpd.conf \
         file://snmptrapd.conf \
@@ -16,12 +14,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
         file://snmpd.service \
         file://snmptrapd.service \
         file://ifmib.patch \
-        file://net-snmp-5.7.2-fix-CVE-2014-2284.patch \
-        file://net-snmp-5.7.2-fix-CVE-2014-2285.patch \
 "
 
-SRC_URI[md5sum] = "5bddd02e2f82b62daa79f82717737a14"
-SRC_URI[sha256sum] = "09ed31b4cc1f3c0411ef9a16eff79ef3b30d89c32ca46d5a01a41826c4ceb816"
+SRC_URI[md5sum] = "a2c83518648b0f2a5d378625e45c0e18"
+SRC_URI[sha256sum] = "ac9105539971f7cfb1456a86d479e18e8a8b3712212595ad40504347ba5843da"
 
 inherit autotools update-rc.d siteinfo systemd
 
