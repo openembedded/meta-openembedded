@@ -1,0 +1,38 @@
+From 5af6dec8764375ca4f13bd9fed96af090228351a Mon Sep 17 00:00:00 2001
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
+Date: Mon, 11 Aug 2014 11:06:04 -0500
+Subject: [libhugetlbfs][PATCH] Extend arm32 support to include BE variants
+    
+This patch applies the same technique used by Koen Kool in the following patch
+which was accepted by the libhugetlbfs project:
+    
+[0a4f6] Add aarch64_be_support 2014-03-31 10:52:37
+    
+It modifies the libhugetlbfs Makefile to mark all 32-bit arm architectures
+as supported by the libhugetlbfs build.  Builds and successful functional
+tests have been performed for armv7a LE and BE runtime platforms.
+    
+This patch replaces and renders obsolete the following patch:
+arm32-support.patch submitted by: Chunrong Guo <B40290@freescale.com>
+
+Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+---
+ Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 91502e1..ba79607 100644
+--- a/Makefile
++++ b/Makefile
+@@ -59,7 +59,7 @@ ELF32 = elf32ppclinux
+ TMPLIB32 = lib
+ CPPFLAGS += -DPPC_NO_SEGMENTS
+ else
+-ifeq ($(ARCH),armv7l)
++ifneq (,$(findstring arm,$(ARCH)))
+ CC32 = $(CC)
+ TMPLIB32 = lib
+ ELF32 += armelf_linux_eabi
+-- 
+1.7.9.5
+
