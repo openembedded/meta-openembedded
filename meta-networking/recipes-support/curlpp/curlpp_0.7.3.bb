@@ -4,12 +4,11 @@ SECTION = "console/network"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PNBLACKLIST[curlpp] = "BROKEN: since gcc upgrade to 4.9, error: 'size_t {anonymous}::readData(char*, size_t, size_t)' defined but not used [-Werror=unused-function]"
-
 DEPENDS = "curl boost"
 DEPENDS_class-native = "curl-native"
 
 SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
+           file://example21.cpp-remove-deprecated-code.patch \
 	"
 
 SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
