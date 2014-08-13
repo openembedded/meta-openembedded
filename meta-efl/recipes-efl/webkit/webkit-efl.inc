@@ -1,8 +1,10 @@
 DESCRIPTION = "Webkit browser engine, EFL edition"
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8bab0b12 \
-                    file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
-                    file://Source/WebKit/efl/ewk/EWebKit.h;endline=20;md5=55ea170b1582797d2c69712de850f2fa \
+LICENSE = "GPLv2+ & LGPL-2.1"
+LIC_FILES_CHKSUM = " \
+    file://Source/JavaScriptCore/COPYING.LIB;md5=d0c6d6397a5d84286dda758da57bd691 \
+    file://Source/WebCore/LICENSE-APPLE;md5=4646f90082c40bcf298c285f8bab0b12 \
+    file://Source/WebCore/LICENSE-LGPL-2.1;md5=a778a33ef338abbaf8b8a7c36b6eec80 \
+    file://Source/WebCore/LICENSE-LGPL-2;md5=36357ffde2b64ae177b2494445b79d21 \
 "
 
 # you need harfbuzz with icu enabled, you can add this to your config:
@@ -10,18 +12,15 @@ LIC_FILES_CHKSUM = "file://Source/WebKit/LICENSE;md5=4646f90082c40bcf298c285f8ba
 DEPENDS = "icu libxslt sqlite3 gperf-native bison-native flex-native jpeg \
            libpng libxt fontconfig cairo freetype glib-2.0 libsoup-2.4 \
            libxml2 pango eina ecore evas edje eldbus harfbuzz enchant \
-           ruby-native"
+           ruby-native elementary"
 
+PE = "1"
+
+SRCVER ?= "${PV}"
 SRC_URI = "\
-    ${E_RELEASES}/libs/webkit-efl/webkit-efl-164189.tar.xz \
-    file://0001-WebKitHelpers.cmake-Add-Wno-error-cast-align.patch \
-    file://0002-ARMAssembler.h-Don-t-generate-BKPT-and-BLX-for-armv4.patch \
-    file://0003-Fix-linking-issue.patch \
+    ${E_RELEASES}/libs/webkit-efl/ewebkit-${SRCVER}.tar.xz \
 "
-SRC_URI[md5sum] = "731513fc042ec8e03840bc1ab6a66771"
-SRC_URI[sha256sum] = "660aefd65c0e5c6494eaec30539cda5f40fbdff17f28e7e83d341b245227cccd"
-
-S = "${WORKDIR}/efl-webkit"
+S = "${WORKDIR}/ewebkit"
 
 inherit cmake lib_package pkgconfig perlnative pythonnative
 
@@ -60,8 +59,8 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
 LEAD_SONAME = "libewebkit.so"
 PACKAGES =+ "${PN}launcher-dbg ${PN}launcher ${PN}-inspector"
 
-FILES_${PN} += "${datadir}/webkit-1.0/theme/default.edj ${datadir}/ewebkit-0/themes/default.edj"
+FILES_${PN} += "${datadir}/ewebkit2-1/themes/default.edj"
 FILES_${PN}-dev += "${libdir}/cmake"
 FILES_${PN}launcher = "${bindir}/EWebLauncher"
 FILES_${PN}launcher-dbg = "${bindir}/.debug/EWebLauncher"
-FILES_${PN}-inspector += "${datadir}/ewebkit-0/inspector"
+FILES_${PN}-inspector += "${datadir}/ewebkit2-1/inspector"
