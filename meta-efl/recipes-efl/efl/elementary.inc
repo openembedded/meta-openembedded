@@ -18,6 +18,9 @@ BBCLASSEXTEND = "native"
 
 PACKAGECONFIG[eweather] = "--enable-eweather,--disable-eweather,libeweather"
 PACKAGECONFIG[ewebkit] = "--with-elementary-web-backend=ewebkit,--with-elementary-web-backend=none,webkit-efl"
+# be aware when enabling this for efl-native, we don't provide gcc-native so you need to make
+# sure that all your builders have g++ which supports -std=gnu++11
+PACKAGECONFIG[c++11] = "--enable-cxx-bindings,--disable-cxx-bindings"
 
 do_configure_prepend() {
     # prefix returned eolian paths with STAGING_DIR_HOST also use $PKG_CONFIG instead of pkg-config directly
