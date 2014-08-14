@@ -7,6 +7,9 @@ inherit autotools gettext update-alternatives
 
 SRC_URI = "http://sources.openembedded.org/${BP}.tar.gz \
            file://eject-2.1.5-error-return.patch \
+           file://eject-2.1.1-verbose.patch \
+           file://eject-2.1.5-spaces.patch \
+           file://eject-timeout.patch \
 "
 
 SRC_URI[md5sum] = "b96a6d4263122f1711db12701d79f738"
