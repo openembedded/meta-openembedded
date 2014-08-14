@@ -1,0 +1,23 @@
+set ntp_ok to no if ntp debugging is not enabled.
+
+Upstream-status: Pending
+
+There is a problem in configure.ac file that whether or not
+'--enable-debugging' is specified in configure cmdline, debugging
+is always enabled.
+We should disable ntp debugging by default.
+
+Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+
+---
+--- a/configure.ac
++++ b/configure.ac
+@@ -2458,7 +2458,7 @@
+         [+ include ntpd debugging code]
+     )],
+     [ntp_ok=$enableval],
+-    [ntp_ok=yes]
++    [ntp_ok=no]
+ )
+ case "$ntp_ok" in
+  yes)
