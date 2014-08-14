@@ -24,6 +24,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://sntp \
            file://ntpd.list \
            file://ntp-disable-debugging.patch \
+           file://CVE-2013-5211.patch \
 "
 
 inherit autotools update-rc.d useradd systemd
