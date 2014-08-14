@@ -30,6 +30,8 @@ PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
 PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
 PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
         --disable-sensors --with-libsensors=no,lmsensors"
+PACKAGECONFIG[amqp] = "--enable-amqp --with-librabbitmq=yes, \
+        --disable-amqp --with-librabbitmq=no,rabbitmq-c"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
