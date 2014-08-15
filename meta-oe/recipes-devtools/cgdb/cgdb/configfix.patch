@@ -1,0 +1,40 @@
+diff -rupN cgdb-0.6.7-OLD/configure.in cgdb-0.6.7/configure.in
+--- cgdb-0.6.7-OLD/configure.in	2013-01-14 05:31:53.000000000 -0600
++++ cgdb-0.6.7/configure.in	2014-05-08 13:18:13.864632180 -0500
+@@ -65,8 +65,9 @@ AC_CHECK_HEADERS([getopt.h],
+ 		 [AC_DEFINE(HAVE_GETOPT_H, 1, have getopt_long)])
+ 
+ dnl determine if /dev/ptmx is available for pseudo terminals
+-AC_CHECK_FILE([/dev/ptmx],
+-	      [AC_DEFINE(HAVE_DEV_PTMX, 1, have /dev/ptmx)])
++dnl AC_CHECK_FILE([/dev/ptmx],
++dnl	      [AC_DEFINE(HAVE_DEV_PTMX, 1, have /dev/ptmx)])
++AC_DEFINE(HAVE_DEV_PTMX, 1, have /dev/ptmx)
+ 
+ dnl Checks for typedefs, structures, and compiler characteristics.
+ AC_C_CONST
+@@ -167,15 +168,15 @@ fi
+ 
+ dnl Make sure there is a version of readline that CGDB supports.
+ dnl Simply putting 5.1* -> 5.9* just to take into accout future versions.
+-RL_LIB_READLINE_VERSION
+-case "$ac_cv_rl_version" in
+-5.1*|5.2*|5.3*|5.4*|5.5*|5.6*|5.7*|5.8*|5.9*|6*|7*|8*|9*) ;;
+-*)      AC_MSG_ERROR([CGDB requires GNU readline 5.1 or greater to link.
+-  If you used --with-readline instead of using the system readline library, 
+-  make sure to set the correct readline library on the linker search path 
+-  via LD_LIBRARY_PATH or some other facility.])
+-	;;
+-esac
++dnl RL_LIB_READLINE_VERSION
++dnl case "$ac_cv_rl_version" in
++dnl 5.1*|5.2*|5.3*|5.4*|5.5*|5.6*|5.7*|5.8*|5.9*|6*|7*|8*|9*) ;;
++dnl *)      AC_MSG_ERROR([CGDB requires GNU readline 5.1 or greater to link.
++dnl  If you used --with-readline instead of using the system readline library, 
++dnl  make sure to set the correct readline library on the linker search path 
++dnl  via LD_LIBRARY_PATH or some other facility.])
++dnl	;;
++dnl esac
+ 
+ dnl This will DEFINE the readline headers.
+ RL_LIB_READLINE_INCLUDES
