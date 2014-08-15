@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.wireshark.org"
 SECTION = "network"
 LICENSE = "GPL-2.0"
 
-DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libsmi libnl portaudio-v19 sbc"
+DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
 
 inherit autotools pkgconfig
 
@@ -16,6 +16,8 @@ PACKAGECONFIG ??= "gnutls gcrypt"
 PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${WHICH_GTK}  graphics", "", d)}"
 PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
 
+PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
+PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
 PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
 PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
 PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
