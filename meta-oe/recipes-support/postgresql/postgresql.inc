@@ -42,7 +42,7 @@ enable_pam = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
-PACKAGECONFIG[python] = "--with-python,--wsithout-python,python,python"
+PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
 PACKAGECONFIG[uuid] = "--with-ossp-uuid,--without-ossp-uuid,ossp-uuid,"
 # when tcl native package  is fixed change WORKDIR to STAGING_BINDIR_CROSS
 PACKAGECONFIG[tcl] = \
