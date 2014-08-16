@@ -11,8 +11,8 @@ SRC_URI = "\
     file://0001-Fix-incorrect-message-type.patch \
 "
 
-SRC_URI[md5sum] = "499b92ef38347881c72729f1e066eb20"
-SRC_URI[sha256sum] = "1b05a1d986643a6603b1c20ac87b6864325d0aea22a3d1d096f4063b4fba2f4d"
+SRC_URI[md5sum] = "79c9f524e1d0510061c62c4b038a8ece"
+SRC_URI[sha256sum] = "14c9bde4334d2f8b0776c6113d02b923ab159eea1cbf7013489e4f3bf37a51bb"
 
 do_configure_prepend() {
     sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
