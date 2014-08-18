@@ -9,12 +9,10 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
 
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
         file://fix-funtion-parameter.patch \
-        file://strongswan-5.0.0-5.1.2_reject_child_sa.patch \
-        file://strongswan-4.3.3-5.1.1_asn1_unwrap.patch \
 "
 
-SRC_URI[md5sum] = "e3af3d493d22286be3cd794533a8966a"
-SRC_URI[sha256sum] = "fbf2a668221fc4a36a34bdeac2dfeda25b96f572d551df022585177953622406"
+SRC_URI[md5sum] = "5cee4ee1a6ccb74400758b3ace54d46e"
+SRC_URI[sha256sum] = "b00c30bd2e60ff2e5fc85f54bbad54fe246585812fdf212dbe777a5258da26ce"
 
 EXTRA_OECONF = "--enable-gmp \
         --enable-openssl \
