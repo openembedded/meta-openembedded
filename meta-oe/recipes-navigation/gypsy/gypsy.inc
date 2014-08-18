@@ -11,8 +11,6 @@ DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native libxslt"
 inherit autotools pkgconfig gtk-doc
 PACKAGES += "libgypsy"
 
-EXTRA_OECONF += "--with-distro=debian"
-
 FILES_${PN} = " \
   ${sysconfdir}/gypsy.conf \
   ${sysconfdir}/dbus-1 \
