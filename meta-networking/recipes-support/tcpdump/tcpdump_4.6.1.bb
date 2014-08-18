@@ -6,24 +6,22 @@ SECTION = "console/network"
 DEPENDS = "libpcap"
 
 SRC_URI = " \
-    http://www.tcpdump.org/release/tcpdump-${PV}.tar.gz \
-    file://tcpdump_configure_no_-O2.patch \
-    file://0001-minimal-IEEE802.15.4-allowed.patch \
-    file://ipv6-cross.patch \
+    http://www.tcpdump.org/release/${BP}.tar.gz \
     file://configure.patch \
     file://unnecessary-to-check-libpcap.patch \
     file://tcpdump-configure-dlpi.patch \
     file://tcpdump-cross-getaddrinfo.patch \
 "
-SRC_URI[md5sum] = "973a2513d0076e34aa9da7e15ed98e1b"
-SRC_URI[sha256sum] = "14ab39657128f3a650aed4cf455f76c7590601087b6101c253d698f6e73f0b96"
+SRC_URI[md5sum] = "dab267ec30216a069747d10314079ec7"
+SRC_URI[sha256sum] = "4c88c2a9aeb4047074f344fc9b2b6577b219972d359e192f6d12ccf983a13fd7"
 export LIBS=" -lpcap"
 
 inherit autotools-brokensep
 CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
 
-EXTRA_OECONF = "--without-crypto \
-        ${@base_contains('DISTRO_FEATURES', 'ipv6', '--enable-ipv6', '--disable-ipv6', d)}"
+PACKAGECONFIG ??= "openssl ipv6"
+PACKAGECONFIG[openssl] = "--with-crypto=yes, --without-openssl --without-crypto, openssl"
+PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
 
 EXTRA_AUTORECONF += " -I m4"
 
