@@ -33,11 +33,12 @@ do_install_ptest() {
         local test_binaries="checkaffinity checktopology distance	\
 		ftok mbind_mig_pages migrate_pages move_pages mynode	\
 		nodemap pagesize prefered printcpu randmap realloc_test	\
-		regress regress2 runltp shmtest tbitmap tshared"
+		regress regress2 runltp shmtest tbitmap tshared bind_range"
 
 	[ ! -d ${D}/${PTEST_PATH}/test ] && mkdir -p ${D}/${PTEST_PATH}/test
 	for i in $test_binaries; do
 		install -m 0755 ${B}/test/$i ${D}${PTEST_PATH}/test
 	done
 	install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
+	install -m 0755 ${B}/numactl ${D}${PTEST_PATH}/
 }
