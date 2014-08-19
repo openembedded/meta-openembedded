@@ -52,7 +52,7 @@ do_install () {
               > ${D}${sysconfdir}/tmpfiles.d/lmbench.conf
     fi
 
-    oe_runmake 'BASE=${D}${prefix}' \
+    oe_runmake BASE="${D}${prefix}" MANDIR="${D}${mandir}" \
             -C src install
     mv ${D}${bindir}/line ${D}${bindir}/lm_line
     install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
