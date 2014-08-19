@@ -25,8 +25,8 @@ INITSCRIPT_NAME = "mysqld"
 INITSCRIPT_PARAMS = "start 45 5 . stop 45 0 6 1 ."
 
 USERADD_PACKAGES = "${PN}-server"
-USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g nogroup --shell /bin/false mysql"
-
+USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+GROUPADD_PARAM_${PN}-server = "--system mysql"
 
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
 
