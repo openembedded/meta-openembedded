@@ -1,12 +1,15 @@
-Index: autofs-5.0.7/lib/rpc_subs.c
-===================================================================
---- autofs-5.0.7.orig/lib/rpc_subs.c	2012-07-24 23:05:26.000000000 -0700
-+++ autofs-5.0.7/lib/rpc_subs.c	2012-10-28 14:47:49.008382116 -0700
+---
+ lib/rpc_subs.c |   10 ----------
+ 1 file changed, 10 deletions(-)
+
+diff --git a/lib/rpc_subs.c b/lib/rpc_subs.c
+index 5d6ead0..c7177f2 100644
+--- a/lib/rpc_subs.c
++++ b/lib/rpc_subs.c
 @@ -34,16 +34,6 @@
- #include <pthread.h>
  #include <poll.h>
  
--#ifdef WITH_LIBTIRPC
+ #ifdef WITH_LIBTIRPC
 -#undef auth_destroy
 -#define auth_destroy(auth)                                              \
 -                do {                                                    \
@@ -16,6 +19,10 @@ Index: autofs-5.0.7/lib/rpc_subs.c
 -                } while (0)
 -#endif
 -
- #include "mount.h"
- #include "rpc_subs.h"
- #include "automount.h"
+-#ifdef WITH_LIBTIRPC
+ const rpcprog_t rpcb_prog = RPCBPROG;
+ const rpcvers_t rpcb_version = RPCBVERS;
+ #else
+-- 
+1.7.10.4
+

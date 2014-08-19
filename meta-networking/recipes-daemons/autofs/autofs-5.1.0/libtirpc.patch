@@ -16,11 +16,11 @@ Index: autofs-5.0.7/Makefile.rules
 --- autofs-5.0.7.orig/Makefile.rules	2012-10-28 13:17:45.308237022 -0700
 +++ autofs-5.0.7/Makefile.rules	2012-10-28 13:21:25.720242803 -0700
 @@ -48,7 +48,7 @@
- LDFLAGS += -lpthread
+ LIBS += -lpthread
  
  ifdef TIRPCLIB
 -CFLAGS += -I/usr/include/tirpc
 +CFLAGS += -I=/usr/include/tirpc
- LDFLAGS += $(TIRPCLIB)
+ LIBS += $(TIRPCLIB)
  endif
  
