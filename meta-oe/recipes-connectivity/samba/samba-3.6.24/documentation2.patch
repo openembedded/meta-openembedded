@@ -212,8 +212,8 @@ Index: samba/docs/manpages/nmbd.8
  \fBsmb.conf\fR(5),
  \fBsmbclient\fR(1),
 -\fBtestparm\fR(1),
--\fBtestprns\fR(1), and the Internet RFC\'s
-+\fBtestparm\fR(1), and the Internet RFC\'s
+-\fBtestprns\fR(1), and the Internet RFC\*(Aqs
++\fBtestparm\fR(1), and the Internet RFC\*(Aqs
  rfc1001\&.txt,
  rfc1002\&.txt\&. In addition the CIFS (formerly SMB) specification is available as a link from the Web page
  http://samba\&.org/cifs/\&.
@@ -269,8 +269,8 @@ Index: samba/docs/manpages/smbd.8
  \fBsmb.conf\fR(5),
  \fBsmbclient\fR(1),
 -\fBtestparm\fR(1),
--\fBtestprns\fR(1), and the Internet RFC\'s
-+\fBtestparm\fR(1), and the Internet RFC\'s
+-\fBtestprns\fR(1), and the Internet RFC\*(Aqs
++\fBtestparm\fR(1), and the Internet RFC\*(Aqs
  rfc1001\&.txt,
  rfc1002\&.txt\&. In addition the CIFS (formerly SMB) specification is available as a link from the Web page
  http://samba\&.org/cifs/\&.

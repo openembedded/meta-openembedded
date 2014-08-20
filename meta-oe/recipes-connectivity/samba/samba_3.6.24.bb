@@ -3,8 +3,6 @@ require samba-basic.inc
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-PR = "r8"
-
 SRC_URI += "\
     file://config-h.patch \
     file://documentation.patch;patchdir=.. \
@@ -30,14 +28,9 @@ SRC_URI += "\
     file://configure-disable-getaddrinfo-cross.patch;patchdir=.. \
     file://configure-disable-core_pattern-cross-check.patch;patchdir=.. \
     file://configure-libunwind.patch;patchdir=.. \
-    file://samba-3.6.22-CVE-2013-4496.patch;patchdir=.. \
-    file://0001-PIDL-fix-parsing-linemarkers-in-preprocessor-output.patch;patchdir=.. \
-    file://samba-3.6.11-CVE-2013-0213-CVE-2013-0214.patch;patchdir=.. \
-    file://samba-3.6.16-CVE-2013-4124.patch;patchdir=.. \
-    file://samba-3.6.19-CVE-2013-4475.patch;patchdir=.. \
 "
-SRC_URI[md5sum] = "fbb245863eeef2fffe172df779a217be"
-SRC_URI[sha256sum] = "4f5a171a8d902c6b4f822ed875c51eb8339196d9ccf0ecd7f6521c966b3514de"
+SRC_URI[md5sum] = "d98425c0c2b73e08f048d31ffc727fb0"
+SRC_URI[sha256sum] = "11d0bd04b734731970259efc6692b8e749ff671a9b56d8cc5fa98c192ab234a7"
 
 S = "${WORKDIR}/samba-${PV}/source3"
 
