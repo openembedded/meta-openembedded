@@ -24,7 +24,7 @@ index 22891c0..1c67494 100755
  # Try exportfs -r first
 -if ($config{'apply_cmd'} && &find_byname("nfsd") && &find_byname("mountd")) {
 +if ($config{'apply_cmd'} && &find_byname("mountd")) {
- 	local $out = &backquote_logged("$config{'apply_cmd'} 2>&1 </dev/null");
+ 	my $out = &backquote_logged("$config{'apply_cmd'} 2>&1 </dev/null");
  	if (!$? && $out !~ /invalid|error|failed/i) {
  		# Looks like it worked!
 -- 
