@@ -56,8 +56,8 @@ do_install () {
             -C src install
     mv ${D}${bindir}/line ${D}${bindir}/lm_line
     install -m 0755 ${WORKDIR}/lmbench-run ${D}${bindir}/
-    sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${PN},;' \
-           -e 's,^BINDIR=.*$,BINDIR=${libdir}/${PN},;' \
+    sed -i -e 's,^SHAREDIR=.*$,SHAREDIR=${datadir}/${BPN},;' \
+           -e 's,^BINDIR=.*$,BINDIR=${libdir}/${BPN},;' \
            -e 's,^CONFIG=.*$,CONFIG=`$SCRIPTSDIR/config`,;' \
            ${D}${bindir}/lmbench-run
     install -m 0755 ${S}/scripts/lmbench ${D}${bindir}
