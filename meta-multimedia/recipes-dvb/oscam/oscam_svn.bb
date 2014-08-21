@@ -14,5 +14,5 @@ S = "${WORKDIR}/trunk"
 
 inherit cmake
 
-EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir}"
+EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir} -DCMAKE_BUILD_TYPE=Debug"
 
