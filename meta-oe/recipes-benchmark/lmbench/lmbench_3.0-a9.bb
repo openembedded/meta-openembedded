@@ -74,5 +74,5 @@ pkg_postinst_${PN} () {
     fi
 }
 
-RDEPENDS_${PN} = "debianutils"
+RDEPENDS_${PN} = "perl"
 FILES_${PN} += "${datadir}/lmbench ${libdir}/lmbench"
