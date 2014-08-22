@@ -14,3 +14,11 @@ SRC_URI[md5sum] = "7fc13e1c665bdf7cea19ad08906af91f"
 SRC_URI[sha256sum] = "ed13b606a2aeb5bd6c235f8ed6c9988c99d01a033d0d21d56137c13d5c7be63f"
 
 inherit setuptools
+
+RDEPENDS_${PN} += "\
+    python-distribute \
+    python-netserver \
+    python-subprocess \
+    python-shell \
+"
+RDEPENDS_${PN}_class-native = ""
