@@ -123,7 +123,7 @@ pkg_postinst_${PN}-server () {
     test -d /usr/bin || mkdir -p /usr/bin
     test -e /usr/bin/hostname || ln -s /bin/hostname /usr/bin/hostname
     mkdir /var/lib/mysql
-    chown mysql.nogroup /var/lib/mysql
+    chown mysql.mysql /var/lib/mysql
 
     mysql_install_db --basedir=${prefix} --user=mysql
 
