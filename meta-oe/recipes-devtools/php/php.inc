@@ -35,6 +35,7 @@ EXTRA_OECONF = "--enable-mbstring \
 "
 EXTRA_OECONF_virtclass-native = " \
                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
+                --without-iconv \
                 ${COMMON_EXTRA_OECONF} \
 "
 
