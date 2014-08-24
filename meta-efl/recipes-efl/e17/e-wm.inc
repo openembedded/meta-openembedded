@@ -96,6 +96,8 @@ RRECOMMENDS_${PN} = "\
     ${PN}-other \
     ${PN}-input-methods \
     ${ESYSACTIONS} \
+    efreet \
+    evas-generic-loader-svg \
 "
 
 FILES_${PN} = "\

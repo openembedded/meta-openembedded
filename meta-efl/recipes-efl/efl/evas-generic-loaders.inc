@@ -67,4 +67,5 @@ FILES_evas-generic-pdf-loader-libreoffice += " \
 
 FILES_${PN}-dbg += "${libdir}/evas/utils/.debug"
 
+PACKAGES += "evas-generic-loader-svg"
 PACKAGES_DYNAMIC += "^evas-generic-loader-.* ^evas-generic-pdf-loader-.*"
