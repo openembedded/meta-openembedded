@@ -3,8 +3,6 @@ LICENSE = "Custom"
 
 inherit packagegroup
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 RDEPENDS_${PN} = "\
 	font-adobe-100dpi \
 	font-adobe-utopia-100dpi \

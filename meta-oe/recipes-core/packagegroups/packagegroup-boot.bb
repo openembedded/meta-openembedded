@@ -4,11 +4,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 
 PR = "r58"
 
-inherit packagegroup
-
-# packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
-#
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+inherit packagegroup
 
 #
 # those ones can be set in machine config to supply packages needed to get machine booting
