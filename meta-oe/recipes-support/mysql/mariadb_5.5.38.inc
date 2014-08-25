@@ -9,6 +9,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
            file://remove-bad-path.patch \
            file://fix-mysqlclient-r-version.patch \
            file://my.cnf \
+           file://mysqld.service \
           "
 
 SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
@@ -18,7 +19,7 @@ S = "${WORKDIR}/mariadb-${PV}"
 
 BINCONFIG_GLOB = "mysql_config"
 
-inherit cmake gettext binconfig update-rc.d useradd
+inherit cmake gettext binconfig update-rc.d useradd systemd
 
 INITSCRIPT_PACKAGES = "${PN}-server"
 INITSCRIPT_NAME = "mysqld"
@@ -27,6 +28,10 @@ INITSCRIPT_PARAMS = "start 45 5 . stop 45 0 6 1 ."
 USERADD_PACKAGES = "${PN}-server"
 USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
 GROUPADD_PARAM_${PN}-server = "--system mysql"
+
+SYSTEMD_PACKAGES = "mariadb-server"
+SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
+SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
 
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
 
@@ -112,6 +117,16 @@ do_install() {
     install -d ${D}/${sysconfdir}/init.d
     install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
     mv ${D}/${sysconfdir}/init.d/mysql ${D}/${sysconfdir}/init.d/mysqld
+
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/mysqld.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@BINDIR@,${bindir},g' -e 's,@PREFIX@,${prefix},g' ${D}${systemd_unitdir}/system/mysqld.service
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+	install -d ${D}${sysconfdir}/tmpfiles.d
+	echo "f /var/log/mysqld.err 0640 mysql mysql -" \
+            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
+    fi
 }
 
 pkg_postinst_${PN}-server () {
@@ -247,7 +262,8 @@ FILES_${PN}-server = "\
     ${datadir}/mysql/ \
     ${localstatedir}/mysql/ \
     ${sysconfdir}/init.d \
-    ${sysconfdir}/my.cnf"
+    ${sysconfdir}/my.cnf \
+    ${sysconfdir}/tmpfiles.d"
 
 DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
 FILES_${PN}-leftovers = "/"
