@@ -1,0 +1,29 @@
+From 8526270c418a5dc3d737a8eaff315209433f69d2 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 25 Aug 2014 16:06:03 +0200
+Subject: [PATCH] configure.ac: add foreign
+
+* fixes:
+  | configure.ac:312: error: required file './ABOUT-NLS' not found
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 62c0f6d..49b290b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -34,7 +34,7 @@ AH_BOTTOM([
+ #endif /* EFL_CONFIG_H__ */
+ ])
+ 
+-AM_INIT_AUTOMAKE([1.11 dist-bzip2 -Wno-portability])
++AM_INIT_AUTOMAKE([1.11 dist-bzip2 -Wno-portability foreign])
+ AM_SILENT_RULES([yes])
+ 
+ AC_USE_SYSTEM_EXTENSIONS
+-- 
+2.0.4
+

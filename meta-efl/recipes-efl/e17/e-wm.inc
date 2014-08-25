@@ -10,6 +10,8 @@ S = "${WORKDIR}/${SRCNAME}"
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
                    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
+PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+
 
 EXTRA_OECONF = "\
     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
@@ -21,6 +23,7 @@ EXTRA_OECONF = "\
 
 do_configure_prepend() {
     autopoint || true
+    sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
 }
 
 do_install_append() {
@@ -70,6 +73,7 @@ PACKAGES =+ "\
     ${PN}-config-netbook \
     ${PN}-config-scaleable \
     ${PN}-config-standard \
+    ${PN}-config-tiling \
     ${PN}-theme-default \
     ${PN}-background-dark-gradient \
     ${PN}-background-light-gradient \
@@ -126,6 +130,7 @@ FILES_${PN}-config-minimalist = "${datadir}/enlightenment/data/config/minimalist
 FILES_${PN}-config-netbook = "${datadir}/enlightenment/data/config/netbook"
 FILES_${PN}-config-scaleable = "${datadir}/enlightenment/data/config/scaleable"
 FILES_${PN}-config-standard = "${datadir}/enlightenment/data/config/standard"
+FILES_${PN}-config-tiling = "${datadir}/enlightenment/data/config/tiling"
 FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
 FILES_${PN}-background-dark-gradient = "${datadir}/enlightenment/data/backgrounds/Dark_Gradient.edj"

@@ -13,9 +13,3 @@ SRC_URI = "\
 
 SRC_URI[md5sum] = "79c9f524e1d0510061c62c4b038a8ece"
 SRC_URI[sha256sum] = "14c9bde4334d2f8b0776c6113d02b923ab159eea1cbf7013489e4f3bf37a51bb"
-
-do_configure_prepend() {
-    sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
-}
-
-PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
