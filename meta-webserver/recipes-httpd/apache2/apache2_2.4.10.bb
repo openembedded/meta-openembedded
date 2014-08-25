@@ -18,7 +18,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://npn-patch-2.4.7.patch \
            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
            file://init \
-           file://apache2-volatile.conf"
+           file://apache2-volatile.conf \
+           file://apache2.service"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
 SRC_URI[md5sum] = "44543dff14a4ebc1e9e2d86780507156"
@@ -26,7 +27,10 @@ SRC_URI[sha256sum] = "176c4dac1a745f07b7b91e7f4fd48f9c48049fa6f088efe758d61d9738
 
 S = "${WORKDIR}/httpd-${PV}"
 
-inherit autotools update-rc.d pkgconfig
+inherit autotools update-rc.d pkgconfig systemd
+
+SYSTEMD_SERVICE_${PN} = "apache2.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
 SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
 
@@ -81,6 +85,11 @@ do_install_append() {
         install -d ${D}${sysconfdir}/tmpfiles.d/
         install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
     fi
+
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
+    sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
 }
 
 SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
