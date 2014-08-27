@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis bzip2 lzo file ruby-native"
 
-SRC_URI = "http://www.bunkus.org/videotools/mkvtoolnix/sources/mkvtoolnix-${PV}.tar.xz"
-SRC_URI[md5sum] = "ddd5ce6288d2fdaa6b79cb6d7bfffb04"
-SRC_URI[sha256sum] = "2bbdf060e193d4a7f961f84d28b28d67d859be66e3f2cdf8ee4ae380f8d15725"
+PV = "7.1.0+git${SRCPV}"
+SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
+SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
+
+S = "${WORKDIR}/git"
 
 inherit autotools-brokensep gettext
 
