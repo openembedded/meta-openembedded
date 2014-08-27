@@ -33,7 +33,8 @@ FILES_${PN} += "${datadir}/bash-completion \
                 ${libdir}/kernel \
                "
 
-RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid bash ldd"
+# 'getopt' is in the util-linux main package
+RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux bash ldd"
 # This could be optimized a bit, but let's avoid non-booting systems :)
 RRECOMMENDS_${PN} = " \
                      kernel-modules \
