@@ -33,7 +33,7 @@ do_configure_prepend() {
 
 # Yeah, no makefile
 do_compile() {
-    ${S}/drake
+    ${S}/drake ${PARALLEL_MAKE}
 }
 
 do_install() {
