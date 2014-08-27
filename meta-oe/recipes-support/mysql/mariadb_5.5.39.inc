@@ -12,8 +12,8 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
            file://mysqld.service \
           "
 
-SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
-SRC_URI[sha256sum] = "efc839e6627064b3b5c6c39854198f0d34907f48937804758d4c09c7717be8d3"
+SRC_URI[md5sum] = "917a807d8cf2c8ef9deedd2a89b6decd"
+SRC_URI[sha256sum] = "cb850865ab55ce5f01c99a612cc75b76ead5d75adfa75a606f453d32f9089d14"
 
 S = "${WORKDIR}/mariadb-${PV}"
 
