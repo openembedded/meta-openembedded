@@ -23,7 +23,6 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://sntp.service \
            file://sntp \
            file://ntpd.list \
-           file://ntp-disable-debugging.patch \
            file://CVE-2013-5211.patch \
 "
 
@@ -38,7 +37,8 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ntp \
                        --shell /bin/false --user-group ntp"
 
-PACKAGECONFIG ??= "cap"
+# NB: debug is default-enabled by NTP; keep it default-enabled here.
+PACKAGECONFIG ??= "cap debug"
 PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           --with-openssl-incdir=${STAGING_INCDIR} \
                           --with-crypto, \
@@ -46,6 +46,7 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           openssl"
 PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
 PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
+PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
 
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
