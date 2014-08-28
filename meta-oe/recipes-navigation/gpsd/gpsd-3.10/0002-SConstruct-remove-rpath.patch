@@ -1,7 +1,7 @@
-From 7d736bbd517c12d19d7b85a5b0db84732b2f86da Mon Sep 17 00:00:00 2001
+From d090638ff983e509162d5e3b62aa4918de4aa5fa Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Tue, 24 Apr 2012 16:24:35 +0200
-Subject: [PATCH 2/2] SConstruct: remove rpath
+Subject: [PATCH 2/4] SConstruct: remove rpath
 
 * even with correct prefix (without DESTDIR) included it's redundant
   WARNING: QA Issue: libgps:
@@ -13,19 +13,22 @@ Subject: [PATCH 2/2] SConstruct: remove rpath
   in file
   /OE/shr-core/tmp-eglibc/work/armv4t-oe-linux-gnueabi/gpsd/gpsd-3.5-r0/packages-split/libgps/usr/lib/libgps.so.20.0
 
+Upstream-Status: Inapppropriate [embedded specific]
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 ---
- SConstruct |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
+ SConstruct | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/SConstruct b/SConstruct
-index a1bddb9..3e7c607 100644
+index f0cafa8..ff46713 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -1205,8 +1205,11 @@ if qt_env:
+@@ -1340,8 +1340,11 @@ if qt_env:
+     binaryinstall.append(LibraryInstall(qt_env, installdir('libdir'), compiled_qgpsmmlib))
  
- # We don't use installdir here in order to avoid having DESTDIR affect the rpath
  if env["shared"] and env["chrpath"]:
 -    env.AddPostAction(binaryinstall, '$CHRPATH -r "%s" "$TARGET"' \
 -                      % (installdir('libdir', False), ))
@@ -38,5 +41,5 @@ index a1bddb9..3e7c607 100644
  if not env['debug'] and not env['profiling'] and env['strip']:
      env.AddPostAction(binaryinstall, '$STRIP $TARGET')
 -- 
-1.7.5.4
+1.8.5.5
 

@@ -1,8 +1,8 @@
-From dd3ca38b27cce93f7e932abaa27b41371234fa90 Mon Sep 17 00:00:00 2001
+From ad7b06d375730b30f181c5efb3bf21418f296f73 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Tue, 24 Apr 2012 18:45:14 +0200
-Subject: [PATCH] SConstruct: prefix includepy with sysroot and drop sysroot
- from python_lib_dir
+Subject: [PATCH 3/4] SConstruct: prefix includepy with sysroot and drop
+ sysroot from python_lib_dir
 
 * without PYTHONPATH, distutil's sysconfig returns INCLUDEPY without sysroot prefix
   and with PYTHONPATH from OE it's pointing to native python dir
@@ -30,19 +30,22 @@ Subject: [PATCH] SConstruct: prefix includepy with sysroot and drop sysroot
 * python_lib_dir = python_lib_dir.replace(env['sysroot'], '')
   returns path to target sysroot
 
+Upstream-Status: Inappropriate [embedded specific]
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 ---
- SConstruct |    9 +++++++++
- 1 files changed, 9 insertions(+), 0 deletions(-)
+ SConstruct | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/SConstruct b/SConstruct
-index 3c919fc..8478181 100644
+index ff46713..0e518e7 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -932,6 +932,12 @@ else:
-         if vars[i] is None:
-             vars[i] = []
-     (cc, cxx, opt, basecflags, ccshared, ldshared, so_ext, includepy, ldflags) = vars
+@@ -1089,6 +1089,12 @@ else:
+         basecflags += ' -coverage'
+         ldflags += ' -coverage'
+         ldshared += ' -coverage'
 +
 +    if env['sysroot']:
 +        print "Prefixing includepy '%s' with sysroot prefix" % includepy
@@ -52,7 +55,7 @@ index 3c919fc..8478181 100644
      # in case CC/CXX was set to the scan-build wrapper,
      # ensure that we build the python modules with scan-build, too
      if env['CC'] is None or env['CC'].find('scan-build') < 0:
-@@ -1165,11 +1171,14 @@ if not env['python']:
+@@ -1353,11 +1359,14 @@ if not env['python']:
      python_install = []
  else:
      python_lib_dir = sysconfig.get_python_lib(plat_specific=1)
@@ -68,5 +71,5 @@ index 3c919fc..8478181 100644
      python_modules_install = python_env.Install( DESTDIR + python_module_dir,
                                                  python_modules)
 -- 
-1.7.8.5
+1.8.5.5
 

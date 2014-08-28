@@ -1,7 +1,7 @@
-From ca1a781afbd68697ef2f573557f1f93ec7ab8d3c Mon Sep 17 00:00:00 2001
+From 697e2e9ff97487266d817cdd41bacc83f681e3d7 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Sun, 29 Apr 2012 00:05:59 +0200
-Subject: [PATCH] SConstruct: disable html and man docs building because
+Subject: [PATCH 4/4] SConstruct: disable html and man docs building because
  xmlto-native from OE is broken
 
 It will try to load dtd and fail:
@@ -20,30 +20,33 @@ It will try to load dtd and fail:
 | scons: *** [gpsctl.1] Error 1
 | scons: building terminated because of errors.
 
+Upstream-Status: Inappropriate [disable feature]
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 ---
- SConstruct |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ SConstruct | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/SConstruct b/SConstruct
-index 9c0f751..8236abb 100644
+index 0e518e7..c01a71b 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -560,12 +560,12 @@ size_t strlcpy(/*@out@*/char *dst, /*@in@*/const char *src, size_t size);
+@@ -704,12 +704,12 @@ size_t strlcpy(/*@out@*/char *dst, /*@in@*/const char *src, size_t size);
  
- 
- manbuilder = mangenerator = htmlbuilder = None
--if config.CheckXsltproc():
-+if False and config.CheckXsltproc():
-     mangenerator = 'xsltproc'
-     build = "xsltproc --nonet %s $SOURCE >$TARGET"
-     htmlbuilder = build % docbook_html_uri
-     manbuilder = build % docbook_man_uri
--elif WhereIs("xmlto"):
-+elif False and WhereIs("xmlto"):
-     mangenerator = 'xmlto'
-     htmlbuilder = "xmlto html-nochunks $SOURCE; mv `basename $TARGET` $TARGET"
-     manbuilder = "xmlto man $SOURCE; mv `basename $TARGET` $TARGET"
+     manbuilder = mangenerator = htmlbuilder = None
+     if env['manbuild']:
+-        if config.CheckXsltproc():
++        if False and config.CheckXsltproc():
+             mangenerator = 'xsltproc'
+             build = "xsltproc --nonet %s $SOURCE >$TARGET"
+             htmlbuilder = build % docbook_html_uri
+             manbuilder = build % docbook_man_uri
+-        elif WhereIs("xmlto"):
++        elif False and WhereIs("xmlto"):
+             mangenerator = 'xmlto'
+             xmlto = "xmlto %s $SOURCE || mv `basename $TARGET` `dirname $TARGET`"
+             htmlbuilder = xmlto % "html-nochunks"
 -- 
-1.7.8.6
+1.8.5.5
 

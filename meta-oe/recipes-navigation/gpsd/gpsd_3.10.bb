@@ -7,20 +7,18 @@ PROVIDES = "virtual/gpsd"
 
 EXTRANATIVEPATH += "chrpath-native"
 
-PR = "r14"
-
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-    file://0002-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
-    file://0004-SConstruct-remove-rpath.patch \
-    file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-    file://0001-SConstruct-disable-html-and-man-docs-building-becaus.patch \
+    file://0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
+    file://0002-SConstruct-remove-rpath.patch \
+    file://0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+    file://0004-SConstruct-disable-html-and-man-docs-building-becaus.patch \
     file://gpsd-default \
     file://gpsd \
     file://60-gpsd.rules \
     file://gpsd.service \
 "
-SRC_URI[md5sum] = "52d9785eaf1a51298bb8900dbde88f98"
-SRC_URI[sha256sum] = "7800c478ee9d7ca7a502b0f892828561b1fbf7bc69d9d38c447c82c3628302ac"
+SRC_URI[md5sum] = "fc5b03aae38b9b5b6880b31924d0ace3"
+SRC_URI[sha256sum] = "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320"
 
 inherit scons update-rc.d python-dir pythonnative systemd
 
