@@ -15,3 +15,5 @@ SRC_URI[sha256sum] = "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5d7c12ce652
 inherit autotools-brokensep
 
 S = "${WORKDIR}/sg3_utils-${PV}"
+
+RDEPENDS_${PN} += "bash"
