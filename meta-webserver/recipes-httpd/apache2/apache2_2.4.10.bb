@@ -112,7 +112,7 @@ INITSCRIPT_NAME = "apache2"
 INITSCRIPT_PARAMS = "defaults 91 20"
 LEAD_SONAME = "libapr-1.so.0"
 
-PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+PACKAGES = "${PN}-scripts ${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
 
 CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
                    ${sysconfdir}/${BPN}/magic \
@@ -129,10 +129,15 @@ FILES_${PN}-dev = "${datadir}/${BPN}/build \
                    ${libdir}/apr*.exp \
                    ${includedir}/${BPN} \
                    ${libdir}/*.la \
-                   ${libdir}/*.a"
+                   ${libdir}/*.a \
+                   ${bindir}/apxs \
+                "
+
 
 # manual to manual
 FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
+
+FILES_${PN}-scripts += "${bindir}/dbmmanage"
 
 #
 # override this too - here is the default, less datadir
@@ -150,3 +155,4 @@ FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
 FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
 
 RDEPENDS_${PN} += "openssl libgcc"
+RDEPENDS_${PN}-scripts += "perl ${PN}"
