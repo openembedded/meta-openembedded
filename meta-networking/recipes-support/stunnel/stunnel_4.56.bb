@@ -5,6 +5,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"
 DEPENDS = "openssl zlib tcp-wrappers"
 
+RDEPENDS_${PN} += "perl"
+
 SRC_URI = "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
 
 SRC_URI[md5sum] = "ac4c4a30bd7a55b6687cbd62d864054c"
