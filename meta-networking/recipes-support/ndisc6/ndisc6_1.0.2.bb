@@ -9,6 +9,7 @@ LICENSE = "GPL-2.0"
 # perform the actual trace operation.
 RDEPENDS_${PN}-tcptraceroute6 = "${PN}-rltraceroute6"
 RDEPENDS_${PN}-tracert6 = "${PN}-rltraceroute6"
+RDEPENDS_${PN}-misc += "perl"
 
 SRC_URI = "http://www.remlab.net/files/ndisc6/ndisc6-${PV}.tar.bz2 \
 "
