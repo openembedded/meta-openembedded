@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 RRECOMMENDS_${PN} = "kernel-module-aoe"
 
 SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "cde7f7cedc7cd9938a5ebfd009dd3ec0"
-SRC_URI[sha256sum] = "fd6c57244e9458d7cbe7a0171295ddee4d8cdcae291e40d6acbc641df7296d85"
+SRC_URI[md5sum] = "bff30daa988a65f69d4448ce4726a6db"
+SRC_URI[sha256sum] = "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6b3ed5a8fbdf215ff"
 
 # EXTRA_OEMAKE is typically: -e MAKEFLAGS=
 # the -e causes problems as CFLAGS is modified in the Makefile.
