@@ -8,11 +8,8 @@ LICENSE = "GPLv3"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
 
-PR = "r1"
 SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
-           file://disable-pre-ANSI-compilers.patch \
            file://version.patch \
-           file://remove-gets.patch \
            file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch \
            file://inetutils-1.8-0003-wchar.patch \
            file://rexec.xinetd.inetutils  \
@@ -23,8 +20,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
            file://inetutils-1.9-PATH_PROCNET_DEV.patch \
 "
 
-SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
-SRC_URI[sha256sum] = "02a9ebde8a198cb85f87545b9d88fb103a183958139864a85fe9e027ad79ff2b"
+SRC_URI[md5sum] = "aa1a9a132259db83e66c1f3265065ba2"
+SRC_URI[sha256sum] = "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56a0509117a36a89913"
 
 inherit autotools gettext update-alternatives
 
