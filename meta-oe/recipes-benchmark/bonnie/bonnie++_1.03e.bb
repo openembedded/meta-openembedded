@@ -28,3 +28,5 @@ PACKAGES =+ "bonnie-scripts"
 
 FILES_${PN} = "${sbindir}"
 FILES_bonnie-scripts = "${bindir}"
+
+RDEPENDS_bonnie-scripts += "perl"
