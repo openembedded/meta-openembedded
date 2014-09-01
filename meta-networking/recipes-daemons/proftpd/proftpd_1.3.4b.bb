@@ -68,3 +68,5 @@ USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} --home-dir /var/lib/${FTPUSER} --
                        --shell /bin/false ${FTPUSER}"
 
 FILES_${PN} += "/home/${FTPUSER}"
+
+RDEPENDS_${PN} += "perl"
