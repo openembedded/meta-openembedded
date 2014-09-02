@@ -28,5 +28,5 @@ do_install() {
 }
 
 FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/subsurface.svg"
-RRECOMMENDS_${PN}_append_libc-glibc = " eglibc-gconv-iso8859-15"
+RRECOMMENDS_${PN}_append_libc-glibc = " glibc-gconv-iso8859-15"
 
