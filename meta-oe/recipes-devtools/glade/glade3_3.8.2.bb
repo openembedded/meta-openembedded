@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "f180a5018eee6e3fe574854cb025af897dd9962b01d17d5752e626876d
 
 EXTRA_OECONF += "--disable-scrollkeeper"
 
-PACKAGECONFIG ??= "gnome"
+PACKAGECONFIG ??= ""
 PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
 
 do_configure_prepend() {
