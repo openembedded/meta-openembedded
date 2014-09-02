@@ -15,7 +15,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://samba-config-fix.patch \
            file://proftpd-config-fix.patch \
            file://net-lib.pl.patch \
-           file://media-tomb.patch"
+           file://media-tomb.patch \
+           file://remove-python2.3.patch \
+            "
 
 SRC_URI[md5sum] = "e5261114a6a6ed10caf570d3239ed5b7"
 SRC_URI[sha256sum] = "1a6a8aa62c32c04932b902d17fc1864ee8f3fba03012bd25f709aa65e7e9b0f2"
