@@ -3,15 +3,15 @@ DESCRIPTION = "collectd is a daemon which collects system performance statistics
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool"
+DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool lvm2 libmnl"
 
 SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://no-gcrypt-badpath.patch \
            file://collectd-version.patch \
+           file://glibc-2.20-compatiblity.patch \
            file://collectd.init"
-
-SRC_URI[md5sum] = "29e61411e51845d5ae71ab676078867e"
-SRC_URI[sha256sum] = "7b8906d1c8866155b31820ef108be92abcee7fcd278d386bf0d449e704ba4696"
+SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
+SRC_URI[sha256sum] = "75452129f271cb0aad28e57f12a49070618bbb7b6a9d64cf869e8766fa2f66e0"
 
 inherit autotools pythonnative update-rc.d pkgconfig
 

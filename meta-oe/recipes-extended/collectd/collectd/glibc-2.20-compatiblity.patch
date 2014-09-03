@@ -1,0 +1,102 @@
+This makes it forward compatible with glibc 2.20+ where _BSD_SOURCE
+macro has been deprecated.
+
+Fixes warnings like
+
+usr/include/features.h:148:3: error: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [-Werror=cpp]
+|  # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Upstream-Status: Pending
+Index: collectd-5.4.1/configure.ac
+===================================================================
+--- collectd-5.4.1.orig/configure.ac	2014-09-03 01:21:10.666084244 -0700
++++ collectd-5.4.1/configure.ac	2014-09-03 01:31:27.794084244 -0700
+@@ -1288,6 +1288,7 @@
+ 
+ AC_CHECK_MEMBERS([struct udphdr.uh_dport, struct udphdr.uh_sport], [], [],
+ [#define _BSD_SOURCE
++#define _DEFAULT_SOURCE 1
+ #if HAVE_STDINT_H
+ # include <stdint.h>
+ #endif
+@@ -1309,6 +1310,7 @@
+ ])
+ AC_CHECK_MEMBERS([struct udphdr.dest, struct udphdr.source], [], [],
+ [#define _BSD_SOURCE
++#define _DEFAULT_SOURCE 1
+ #if HAVE_STDINT_H
+ # include <stdint.h>
+ #endif
+Index: collectd-5.4.1/src/dns.c
+===================================================================
+--- collectd-5.4.1.orig/src/dns.c	2014-01-26 00:09:14.856391886 -0800
++++ collectd-5.4.1/src/dns.c	2014-09-03 01:32:37.666084244 -0700
+@@ -22,6 +22,7 @@
+  **/
+ 
+ #define _BSD_SOURCE
++#define _DEFAULT_SOURCE 1
+ 
+ #include "collectd.h"
+ #include "common.h"
+Index: collectd-5.4.1/src/exec.c
+===================================================================
+--- collectd-5.4.1.orig/src/exec.c	2014-01-26 00:09:14.860391963 -0800
++++ collectd-5.4.1/src/exec.c	2014-09-03 01:32:28.874084244 -0700
+@@ -24,6 +24,7 @@
+  **/
+ 
+ #define _BSD_SOURCE /* For setgroups */
++#define _DEFAULT_SOURCE 1
+ 
+ #include "collectd.h"
+ #include "common.h"
+Index: collectd-5.4.1/src/load.c
+===================================================================
+--- collectd-5.4.1.orig/src/load.c	2014-01-26 00:09:23.532559941 -0800
++++ collectd-5.4.1/src/load.c	2014-09-03 01:32:51.462084244 -0700
+@@ -22,6 +22,7 @@
+  **/
+ 
+ #define _BSD_SOURCE
++#define _DEFAULT_SOURCE 1
+ 
+ #include "collectd.h"
+ #include "common.h"
+Index: collectd-5.4.1/src/network.c
+===================================================================
+--- collectd-5.4.1.orig/src/network.c	2014-01-26 00:09:23.532559941 -0800
++++ collectd-5.4.1/src/network.c	2014-09-03 01:32:44.522084244 -0700
+@@ -23,6 +23,7 @@
+  **/
+ 
+ #define _BSD_SOURCE /* For struct ip_mreq */
++#define _DEFAULT_SOURCE 1
+ 
+ #include "collectd.h"
+ #include "plugin.h"
+Index: collectd-5.4.1/src/ntpd.c
+===================================================================
+--- collectd-5.4.1.orig/src/ntpd.c	2014-01-26 00:09:14.880392351 -0800
++++ collectd-5.4.1/src/ntpd.c	2014-09-03 01:32:20.350084244 -0700
+@@ -20,6 +20,7 @@
+  **/
+ 
+ #define _BSD_SOURCE /* For NI_MAXHOST */
++#define _DEFAULT_SOURCE 1
+ 
+ #include "collectd.h"
+ #include "common.h"
+Index: collectd-5.4.1/src/utils_dns.c
+===================================================================
+--- collectd-5.4.1.orig/src/utils_dns.c	2014-01-26 00:09:14.908392893 -0800
++++ collectd-5.4.1/src/utils_dns.c	2014-09-03 01:31:47.062084244 -0700
+@@ -34,6 +34,7 @@
+  */
+ 
+ #define _BSD_SOURCE
++#define _DEFAULT_SOURCE 1
+ 
+ #include "collectd.h"
+ #include "plugin.h"

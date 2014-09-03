@@ -7,11 +7,11 @@ Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-diff --git a/configure.in b/configure.in
-index 98395ed..81c3a2c 100644
---- a/configure.in
-+++ b/configure.in
-@@ -1777,11 +1777,11 @@ then
+Index: collectd-5.4.1/configure.ac
+===================================================================
+--- collectd-5.4.1.orig/configure.ac	2014-09-03 01:20:22.062084244 -0700
++++ collectd-5.4.1/configure.ac	2014-09-03 01:20:22.058084244 -0700
+@@ -1867,11 +1867,11 @@
  		GCRYPT_CPPFLAGS=`"$with_libgcrypt_config" --cflags 2>/dev/null`
  	fi
  
