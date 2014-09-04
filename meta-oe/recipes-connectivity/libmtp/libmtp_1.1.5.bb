@@ -19,6 +19,7 @@ SCM_URI = "git://git.code.sf.net/p/libmtp/code"
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
     file://69-libmtp.rules \
+    file://glibc-2.20.patch \
 "
 SRC_URI[md5sum] = "f80e45c0e6e5798c434bb1c26a7b602d"
 SRC_URI[sha256sum] = "787679171baf8b3cf2fcc03196c705ab4d7cbc969bd71f9d3696be1ce7f1c63a"
