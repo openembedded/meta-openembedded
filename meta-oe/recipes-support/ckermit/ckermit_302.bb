@@ -7,7 +7,11 @@ HOMEPAGE = "http://www.columbia.edu/kermit/"
 SECTION = "console/network"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.TXT;md5=932ca542d6c6cb8a59a0bcd76ab67cc3"
-SRC_URI = "ftp://kermit.columbia.edu/kermit/archives/cku${PV}.tar.gz;subdir=${BPN}-${PV}"
+
+SRC_URI = "ftp://ftp.kermitproject.org/kermit/archives/cku${PV}.tar.gz;subdir=${BPN}-${PV}"
+SRC_URI[md5sum] = "eac4dbf18b45775e4cdee5a7c74762b0"
+SRC_URI[sha256sum] = "0d5f2cd12bdab9401b4c836854ebbf241675051875557783c332a6a40dac0711"
+
 
 export CC2 = "${CC}"
 export BINDIR = "${bindir}"
@@ -52,6 +56,3 @@ do_install () {
     rm ${D}${BINDIR}/kermit-sshsub
     (cd ${D}${BINDIR} && ln -s ${BINDIR}/kermit kermit-sshusb)
 }
-
-SRC_URI[md5sum] = "59e80f909edf305933af8e0348dcc5d7"
-SRC_URI[sha256sum] = "9793eb125f8936b079c6d7e5c3d2ff885cfedc07f9d2dd1e7db928e3029a211a"
