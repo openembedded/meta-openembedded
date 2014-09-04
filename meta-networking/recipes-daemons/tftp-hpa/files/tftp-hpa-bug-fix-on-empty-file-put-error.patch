@@ -1,0 +1,33 @@
+tftp-hpa: bug fix on empty file put error
+
+With the feature that checking the disk filled up, the return value of
+function write_behind was checked and used to detect the disk status.
+While for empty file, without data being written, this function will
+return -1 thus the disk filled up error was miss-raised. Fix it.
+
+Upstream-Status: pending
+
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+---
+ tftpd/tftpd.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+--- a/tftpd/tftpd.c
++++ b/tftpd/tftpd.c
+@@ -1692,7 +1692,7 @@ static void tftp_recvfile(const struct f
+             syslog(LOG_WARNING, "tftpd: write(ack): %m");
+             goto abort;
+         }
+-        if(write_behind(file, pf->f_convert) < 0) {
++        if(write_behind(file, pf->f_convert) < -1) {
+             nak(ENOSPACE, NULL);
+             (void)fclose(file);
+             goto abort;
+@@ -1727,7 +1727,7 @@ static void tftp_recvfile(const struct f
+             goto abort;
+         }
+     } while (size == segsize);
+-    if(write_behind(file, pf->f_convert) < 0) {
++    if(write_behind(file, pf->f_convert) < -1) {
+         nak(ENOSPACE, NULL);
+         (void)fclose(file);
+         goto abort;
