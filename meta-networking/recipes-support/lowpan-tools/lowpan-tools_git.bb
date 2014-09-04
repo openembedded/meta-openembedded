@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "libnl python"
 
-PV = "0.3+git${SRCPV}"
-SRC_URI = "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee/linux-zigbee \
+PV = "0.3.1+git${SRCPV}"
+SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
            file://no-help2man.patch"
-SRCREV = "a1d9615adde6d1a568813c24a128273ed755af04"
+SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
 
 S = "${WORKDIR}/git"
 
