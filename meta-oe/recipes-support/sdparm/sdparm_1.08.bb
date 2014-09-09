@@ -11,7 +11,13 @@ SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
            file://make-sysroot-work.patch \
            "
 
+PACKAGES =+ "${PN}-scripts"
+RDEPENDS_${PN}-scripts += "bash ${PN}"
+
 SRC_URI[md5sum] = "be5786f37499018ef44f409597c92d42"
 SRC_URI[sha256sum] = "376b78a414b1a9c47f3f13dbeb963e7a3ec7be126f83927d6856b5f7ac425e57"
 
 inherit autotools
+
+# Put the bash scripts to ${PN}-scripts
+FILES_${PN}-scripts = "${bindir}/sas_disk_blink ${bindir}/scsi_ch_swp"
