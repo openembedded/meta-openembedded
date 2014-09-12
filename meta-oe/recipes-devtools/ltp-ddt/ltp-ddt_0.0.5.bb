@@ -13,7 +13,7 @@ inherit autotools-brokensep module-base kernel-module-split
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "088356602220dd8b48aeb138d4976c05c0879574"
+SRCREV = "903f70a11eb77cbad62d7ecbe7dcbaf61be8ff99"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
@@ -67,10 +67,6 @@ do_configure() {
 
 kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
 
-do_compile_prepend () {
-    do_make_scripts
-}
-
 do_compile_append () {
     oe_runmake modules
 }
@@ -83,3 +79,8 @@ do_install() {
     rm -rf ${D}${LTPROOT}/share/
     mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
 }
+
+# do_make_scripts should be a separate task for the lock to work
+addtask make_scripts before do_compile
+do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
+do_make_scripts[deptask] = "do_populate_sysroot"
