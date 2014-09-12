@@ -6,17 +6,27 @@ time coordination of LAN connected computers."
 HOMEPAGE = "http://sourceforge.net/projects/ptpd"
 SECTION = "network"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=4019cad2b3cd55f22ea819ffad6ccd41"
+LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
 
 DEPENDS = "libpcap"
 
 inherit autotools
 
-SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz"
+# return something like '1.2.3' or '1.2.3/rc1'
+#
+def get_sub(d):
+    parts = d.getVar('PV',True).split('-')
+    try:
+        return parts[0] + '/' + parts[1]
+    except:
+        return parts[0]
+
+SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz"
+
+SRC_URI[md5sum] = "1ef2f1f2825080a865bbce0eb61246d4"
+SRC_URI[sha256sum] = "2802aab758649bb222859dfcb62a5d282709ccb4d3f1df3f26f739cc091d0c8d"
 
 S = "${WORKDIR}/ptpd-${PV}"
-SRC_URI[md5sum] = "f5e931b4a229705ff0dbdfe22490566b"
-SRC_URI[sha256sum] = "1a4e90496f004bfd91657ccc49209101dc25b787e540648c07c0973469f1d8f7"
 
 EXTRA_OEMAKE = ""
 
