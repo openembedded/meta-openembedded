@@ -1,0 +1,28 @@
+Subject: [PATCH] rsyslog: use serial-tests config needed by ptest
+
+ptest needs buildtest-TESTS and runtest-TESTS targets.
+serial-tests is required to generate those targets.
+
+Upstream-Status: Inappropriate [default automake behavior incompatible with ptest]
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 1b880f8..0e29742 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -3,7 +3,7 @@
+ 
+ AC_PREREQ(2.61)
+ AC_INIT([rsyslog],[7.4.4],[rsyslog@lists.adiscon.com])
+-AM_INIT_AUTOMAKE
++AM_INIT_AUTOMAKE([serial-tests])
+ 
+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+ 
+-- 
+2.0.0
+

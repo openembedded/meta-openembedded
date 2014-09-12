@@ -22,12 +22,15 @@ SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://rsyslog.conf \
            file://rsyslog.logrotate \
            file://use-pkgconfig-to-check-libgcrypt.patch \
+           file://run-ptest \
+           file://rsyslog-fix-ptest-not-finish.patch \
+           file://rsyslog-use-serial-tests-config-needed-by-ptest.patch \
 "
 
 SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
 SRC_URI[sha256sum] = "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc2f9087"
 
-inherit autotools pkgconfig systemd update-rc.d update-alternatives
+inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
 
 EXTRA_OECONF += "--enable-cached-man-pages"
 
@@ -37,6 +40,7 @@ PACKAGECONFIG ??= " \
     imdiag gnutls \
     ${@base_contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
     ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+    ${@base_contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
 "
 
 # default yes in configure
@@ -61,6 +65,50 @@ PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
 PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
 PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
 PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
+PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
+
+TESTDIR = "tests"
+do_compile_ptest() {
+    sed -i 's/\(^buildtest-TESTS: \)/\1 $(check_PROGRAMS) /' ${TESTDIR}/Makefile
+    oe_runmake -C ${TESTDIR} buildtest-TESTS
+}
+
+do_install_ptest() {
+    # install the tests
+    cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
+    cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
+
+    # do NOT need to rebuild Makefile itself
+    sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+
+    # fix the srcdir
+    sed -i 's,^\(srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+
+    # valgrind is not compatible with arm and mips,
+    # so remove related test cases if there is no valgrind.
+    if [ x${VALGRIND} = x ]; then
+        sed -i '/udp-msgreduc-/d' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+    fi
+
+    # install necessary links
+    install -d ${D}${PTEST_PATH}/tools
+    ln -sf ${sbindir}/rsyslogd ${D}${PTEST_PATH}/tools/rsyslogd
+
+    install -d ${D}${PTEST_PATH}/runtime
+    install -d ${D}${PTEST_PATH}/runtime/.libs
+    (
+        cd ${D}/${libdir}/rsyslog
+        allso="*.so"
+        for i in $allso; do
+            ln -sf ${libdir}/rsyslog/$i ${D}${PTEST_PATH}/runtime/.libs/$i
+        done
+    )
+
+    # fix the module load path with runtime/.libs
+    find ${D}${PTEST_PATH}/${TESTDIR} -name \*.conf -exec \
+        sed -i -e 's:../plugins/.*/.libs/:../runtime/.libs/:' \
+        '{}' \;
+}
 
 do_install_append() {
     install -d "${D}${sysconfdir}/init.d"
@@ -94,6 +142,15 @@ RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 
 RDEPENDS_${PN} += "logrotate"
+
+# for rsyslog-ptest
+VALGRIND = "valgrind"
+VALGRIND_mips = ""
+VALGRIND_mips64 = ""
+VALGRIND_arm = ""
+VALGRIND_aarch64 = ""
+RDEPENDS_${PN}-ptest += "make diffutils gzip"
+RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
 
 # no syslog-init for systemd
 python () {
