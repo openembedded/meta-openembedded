@@ -2,33 +2,34 @@ SUMMARY = "Full-featured IRC chat client with scripting support"
 LICENSE = "GPLv2+"
 HOMEPAGE = "http://www.xchat.org"
 SECTION = "x11/network"
+
 DEPENDS = "libgcrypt zlib gtk+ libsexy"
 DEPENDS += "gdk-pixbuf-native"
+
 LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
-PR = "r1"
-
-PNBLACKLIST[xchat] = "BROKEN: Doesn't work with B!=S"
+PR = "r2"
 
 SRC_URI = "http://xchat.org/files/source/2.8/xchat-${PV}.tar.bz2 \
     file://glib-2.32.patch \
+    file://automake-foreign.patch \
+    file://fix-includes-for-separate-build.patch \
 "
 
-inherit autotools gettext
+inherit autotools gettext pkgconfig
 
 PACKAGECONFIG ??= "dbus"
-PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
+PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus-glib"
 PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl"
+PACKAGECONFIG[python] = "--enable-python,--disable-python,python"
 
 EXTRA_OECONF = "\
+    --enable-maintainer-mode \
     --disable-perl \
-    --disable-python \
     --disable-tcl \
 "
-do_configure_prepend(){
-    rm -f ${S}/po/Makefile.in.in
-}
 
+RDEPENDS_${PN} += "dbus"
 FILES_${PN} += "${datadir}/dbus-1"
 FILES_${PN}-dbg += "${libdir}/xchat/plugins/.debug"
 
