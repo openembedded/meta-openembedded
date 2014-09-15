@@ -8,9 +8,9 @@ SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPLv1+"
 HOMEPAGE = "http://search.cpan.org/dist/Net-LibIDN/"
 DEPENDS += "libidn"
-# We must need eglibc-gconvs to enable charset related functions, 
+# We must need glibc-gconvs to enable charset related functions,
 # such as Net::LibIDN::idn_to_ascii().
-RDEPENDS_${PN} += "eglibc-gconvs"
+RDEPENDS_${PN} += "glibc-gconvs"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TH/THOR/Net-LibIDN-${PV}.tar.gz"
 SRC_URI[md5sum] = "c3e4de2065009d67bcb1df0afb473e12"
