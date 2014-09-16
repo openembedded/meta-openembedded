@@ -29,8 +29,8 @@ USERADD_PACKAGES = "${PN}-server"
 USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
 GROUPADD_PARAM_${PN}-server = "--system mysql"
 
-SYSTEMD_PACKAGES = "mariadb-server"
-SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
+SYSTEMD_PACKAGES = "${PN}-server"
+SYSTEMD_SERVICE_${PN}-server = "mysqld.service"
 SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
 
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
