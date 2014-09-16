@@ -30,6 +30,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
            file://postgresql.pam \
            file://0001-Use-pkg-config-for-libxml2-detection.patch \
            file://postgresql-setup \
+           file://postgresql.service \
 "
 
 LEAD_SONAME = "libpq.so"
@@ -37,7 +38,20 @@ LEAD_SONAME = "libpq.so"
 # LDFLAGS for shared libraries
 export LDFLAGS_SL = "${LDFLAGS}"
 
-inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d
+inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd
+
+SYSTEMD_SERVICE_${PN} = "postgresql.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
+pkg_postinst_${PN} () {
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
+        if [ -n "$D" ]; then
+            OPTS="--root=$D"
+        fi
+        systemctl $OPTS mask postgresql-server.service
+    fi
+}
 
 enable_pam = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
@@ -184,6 +198,12 @@ do_install_append() {
         install -d ${D}${sysconfdir}/pam.d
         install -m 644 ${WORKDIR}/postgresql.pam ${D}${sysconfdir}/pam.d/postgresql
     fi
+
+    # Install systemd unit files
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/postgresql.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@BINDIR@,${bindir},g' \
+        ${D}${systemd_unitdir}/system/postgresql.service
 }
 
 SSTATE_SCAN_FILES += "Makefile.global"
