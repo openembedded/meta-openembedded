@@ -2,8 +2,18 @@ DESCRIPTION = "wireshark - a popular network protocol analyzer"
 HOMEPAGE = "http://www.wireshark.org"
 SECTION = "network"
 LICENSE = "GPL-2.0"
+LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
 
 DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
+
+SRC_URI = " \
+    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-${PV}.tar.bz2 \
+"
+
+PE = "1"
+
+SRC_URI[md5sum] = "14b3e3d8979d1eb27ff085bb5f400e67"
+SRC_URI[sha256sum]= "82b26bd416ec15903b27785e35a622687008a743342054e96eaaeaa249be584b"
 
 inherit autotools pkgconfig
 
@@ -27,16 +37,6 @@ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
 
 EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
 
-LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
-SRC_URI = " \
-    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0.tar.bz2 \
-"
-
-PE = "1"
-
-SRC_URI[md5sum] = "8dcfe451d8769901129809d2e19c1fb7"
-SRC_URI[sha256sum]= "0f59fea1c5b35de90af681067e49113fee0dd7a901750a97fa25f4256dbf13c7"
-
 do_configure_prepend() {
     # force to use fallback 
     sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
@@ -44,4 +44,3 @@ do_configure_prepend() {
 
 ALLOW_EMPTY_${PN} = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-
