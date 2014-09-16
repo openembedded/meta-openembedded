@@ -29,6 +29,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
            file://postgresql-bashprofile \
            file://postgresql.pam \
            file://0001-Use-pkg-config-for-libxml2-detection.patch \
+           file://postgresql-setup \
 "
 
 LEAD_SONAME = "libpq.so"
@@ -171,6 +172,7 @@ do_install_append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/${BPN}.init ${D}${sysconfdir}/init.d/${BPN}-server
     sed -i -e "s/^PGVERSION=.*$/PGVERSION=${PV}/g" ${D}${sysconfdir}/init.d/${BPN}-server
+    install -m 0755 ${WORKDIR}/${BPN}-setup ${D}${bindir}/${BPN}-setup
     install -d -m 700 ${D}${localstatedir}/lib/${BPN}/data
     install -d -m 700 ${D}${localstatedir}/lib/${BPN}/backups
     install -m 644 ${WORKDIR}/${BPN}-bashprofile ${D}${localstatedir}/lib/${BPN}/.bash_profile
