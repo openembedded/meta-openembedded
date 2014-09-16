@@ -7,9 +7,9 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
 
 inherit update-rc.d systemd
 INITSCRIPT_NAME = "hostapd"
-SYSTEMD_PACKAGES = "hostapd"
-SYSTEMD_SERVICE_hostapd = "hostapd.service"
-SYSTEMD_AUTO_ENABLE_hostapd = "disable"
+
+SYSTEMD_SERVICE_${PN} = "hostapd.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
 DEFAULT_PREFERENCE = "-1"
 
