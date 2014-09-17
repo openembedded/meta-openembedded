@@ -18,10 +18,12 @@ PR = "r2"
 
 EXTRA_AUTORECONF = "--exclude=autopoint --exclude=aclocal"
 
+DEPENDS += "swig-native"
+
 do_install_prepend() {
     # Hack the way swig interface for talloc is installed
     # This hack is accompanied by install-swig-interface-in-SWINGLIBDIR.patch
-    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
+    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=`readlink -f ${SWIGLIBDIR}` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
 }
 
 do_install_append() {
@@ -29,7 +31,6 @@ do_install_append() {
     ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
     ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
     ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
-    rmdir ${D}${bindir}
 }
 
 PACKAGES += "${PN}-swig"
