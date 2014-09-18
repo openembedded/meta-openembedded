@@ -9,11 +9,14 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://no-gcrypt-badpath.patch \
            file://collectd-version.patch \
            file://glibc-2.20-compatiblity.patch \
-           file://collectd.init"
+           file://collectd.init \
+           file://collectd.service"
 SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
 SRC_URI[sha256sum] = "75452129f271cb0aad28e57f12a49070618bbb7b6a9d64cf869e8766fa2f66e0"
 
-inherit autotools pythonnative update-rc.d pkgconfig
+inherit autotools pythonnative update-rc.d pkgconfig systemd
+
+SYSTEMD_SERVICE_${PN} = "collectd.service"
 
 # Floatingpoint layout, architecture dependent
 # 'nothing', 'endianflip' or 'intswap'
@@ -55,6 +58,12 @@ do_install_append() {
 
     rmdir "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+
+    # Install systemd unit files
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/collectd.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@SBINDIR@,${sbindir},g' \
+        ${D}${systemd_unitdir}/system/collectd.service
 }
 
 INITSCRIPT_NAME = "collectd"
