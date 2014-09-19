@@ -16,6 +16,7 @@ SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
                                     "
 SRC_URI += "file://klibc-linux-libc-dev.patch \
             file://staging.patch \
+            file://klcc-consider-sysroot.patch \
             "
 
 S = "${WORKDIR}/git"
