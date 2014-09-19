@@ -1,0 +1,49 @@
+From bbdd42384d0b5f3ccb11465f63d90097579a1897 Mon Sep 17 00:00:00 2001
+From: Konrad Scherer <konrad.scherer@windriver.com>
+Date: Tue, 10 Jun 2014 15:43:16 +0800
+Subject: [PATCH] imagemagick: do not install magick-baseconfig.h repeatedly
+
+Both targets install-data-local & install-includeHEADERS will install
+header file magick-baseconfig.h to the same location, and they might
+be run in the same time while enabling parallel build:
+
+* target dependencies:
+  + install-data-am: ... install-data-local ... install-includeHEADERS
+
+* make install error:
+  /usr/bin/install: cannot create regular file \
+  `.../usr/include/ImageMagick-6/magick/magick-baseconfig.h': \
+  File exists \
+  make[3]: *** [install-magickincarchHEADERS] Error 1
+
+* reproduce the error:
+  $ /usr/bin/install test /tmp & /usr/bin/install test /tmp
+  [1] 4052
+  /usr/bin/install: cannot create regular file `/tmp/test': File exists
+  [1]+  Exit 1                  /usr/bin/install test /tmp
+
+Just disable the one from install-data-local to remove this race issue.
+
+Upstream-Status: pending
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ magick/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/magick/Makefile.am b/magick/Makefile.am
+index 2f72461..e45466c 100644
+--- a/magick/Makefile.am
++++ b/magick/Makefile.am
+@@ -468,7 +468,7 @@ MAGICK_EXTRA_DIST = \
+ 	magick/xwdfile.h_vms 
+ 
+ # Install magick-baseconfig.h
+-MAGICK_INSTALL_DATA_LOCAL_TARGETS = magick-install-data-local
++MAGICK_INSTALL_DATA_LOCAL_TARGETS =
+ magick-install-data-local:
+ 	$(mkinstalldirs) $(DESTDIR)$(magickincarchdir)
+ 	$(INSTALL_HEADER) magick/magick-baseconfig.h $(DESTDIR)$(magickincarchdir)/magick-baseconfig.h
+-- 
+1.8.2.1
+

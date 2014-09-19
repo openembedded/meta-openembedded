@@ -8,6 +8,7 @@ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
 PATCHSET = "10"
 SRC_URI = "http://www.imagemagick.org/download/legacy/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
            file://remove.dist-lzip.patch \
+           file://do-not-install-magick-baseconfig.h-repeatedly.patch \
 "
 SRC_URI[md5sum] = "a3a0fa301965d6fde68fccd066f62b0b"
 SRC_URI[sha256sum] = "8c0982b2bc0c1cea8ac9627b4e1e5d37f8171ef8282ee09aef32529cf68e1820"
