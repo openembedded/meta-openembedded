@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 DEPENDS = "ruby-native zlib openssl tcl libyaml db gdbm readline"
-DEPENDS_class-native = ""
+DEPENDS_class-native = "libyaml-native"
 
 INC_PR = "r1"
 
