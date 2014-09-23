@@ -21,8 +21,8 @@ index 24e28c1..c78735d 100755
  
 -CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
 -LIBS="`$NCURSES_CONFIG --libs` $LIBS"
-+CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>&1`"
-+LIBS="`pkg-config --short-errors --print-errors --libs "ncurses" 2>&1` $LIBS"
++CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>/dev/null`"
++LIBS="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
  
  # even with config script, some packages use no-override for curses.h
  
