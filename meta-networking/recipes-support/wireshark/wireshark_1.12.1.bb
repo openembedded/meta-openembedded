@@ -8,6 +8,7 @@ DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
 
 SRC_URI = " \
     http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-${PV}.tar.bz2 \
+    file://Do-not-set-CC_FOR_BUILD-flags.patch \
 "
 
 PE = "1"
