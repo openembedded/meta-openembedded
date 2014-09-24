@@ -16,9 +16,13 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
 
 SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
            file://radvd.init \
+           file://radvd.service \
            file://volatiles.03_radvd"
 
-inherit autotools update-rc.d useradd pkgconfig
+inherit autotools update-rc.d useradd pkgconfig systemd
+
+SYSTEMD_SERVICE_${PN} = "radvd.service"
+SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install_append () {
     install -m 0755 -d ${D}${sysconfdir}/init.d \
@@ -32,6 +36,14 @@ do_install_append () {
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
 
     install -m 0644 ${WORKDIR}/volatiles.03_radvd ${D}${sysconfdir}/default/volatiles/volatiles.03_radvd
+
+    # Install systemd service files
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/radvd.service ${D}${systemd_unitdir}/system
+    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' \
+           -e 's#@SBINDIR@#${sbindir}#g' \
+           -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
+
     # Documentation
     for i in radvd.conf.example README; do \
         install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
