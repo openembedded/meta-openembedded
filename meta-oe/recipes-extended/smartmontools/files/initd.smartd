@@ -16,8 +16,8 @@
 # Should-Start:               sendmail
 # Required-Stop:              $syslog $remote_fs
 # Should-Stop:                sendmail
-# Default-Start:              
-# Default-Stop:	              0 1 2 3 4 5 6
+# Default-Start:              2 3 4 5
+# Default-Stop:               0 1 6
 # Short-Description:          Monitors disk and tape health via S.M.A.R.T.
 # Description:                Start S.M.A.R.T. disk and tape monitor.
 ### END INIT INFO
@@ -52,6 +52,10 @@ smartd_opts="--pidfile $SMARTDPID $smartd_opts"
 
 case "$1" in
 	start)
+		if [ "$start_smartd" != "yes" ]; then
+			[ "$VERBOSE" != "no" ] && echo "Not starting S.M.A.R.T. daemon smartd, disabled via /etc/default/smartmontools"
+			exit 0
+		fi
 		echo -n "Starting S.M.A.R.T. daemon: smartd"
 		if start-stop-daemon --start --quiet --pidfile $SMARTDPID \
 			--exec $SMARTD_BIN -- $smartd_opts; then

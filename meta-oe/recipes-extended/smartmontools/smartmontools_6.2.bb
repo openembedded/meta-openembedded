@@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
            file://initd.smartd \
+           file://smartmontools.default \
           "
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
@@ -31,9 +32,11 @@ do_install_append () {
 	#install the init.d/smartd
 	install -d ${D}${sysconfdir}/init.d
 	install -p -m 0755 ${WORKDIR}/initd.smartd ${D}${sysconfdir}/init.d/smartd
+	install -d ${D}${sysconfdir}/default
+	install -p -m 0644 ${WORKDIR}/smartmontools.default ${D}${sysconfdir}/default/smartmontools
 }
 
 INITSCRIPT_NAME = "smartd"
-INITSCRIPT_PARAMS = "start 60 . stop 60 0 1 2 3 4 5 6 ."
+INITSCRIPT_PARAMS = "start 60 2 3 4 5 . stop 60 0 1 6 ."
 
 RDEPENDS_${PN} += "mailx"
