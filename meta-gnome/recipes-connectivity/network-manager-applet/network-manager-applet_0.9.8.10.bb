@@ -2,26 +2,25 @@ SUMMARY = "GTK+ applet for NetworkManager"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
-PNBLACKLIST[network-manager-applet] = "BROKEN: depends on broken networkmanager"
+DEPENDS = "polkit-gnome libnotify libsecret networkmanager dbus-glib gconf gnome-keyring libgnome-keyring iso-codes"
 
-DEPENDS = "gnome-bluetooth polkit-gnome libnotify networkmanager dbus-glib libglade gconf gnome-keyring libgnome-keyring iso-codes"
-
-inherit gnome gtk-icon-cache
+inherit gnomebase gtk-icon-cache
 
 GNOME_COMPRESS_TYPE = "xz"
 
 SRC_URI += " \
     file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
-    file://images/* \
 "
-SRC_URI[archive.md5sum] = "531ce56c51ec86c5d2dc4cbe58649583"
-SRC_URI[archive.sha256sum] = "1afb6e736870ba95132bf0d211c46849e02a820ba3902a059a616be888053590"
+SRC_URI[archive.md5sum] = "5148348c139229c6a753f815f3f11e1c"
+SRC_URI[archive.sha256sum] = "46fee9a1e667d1826e6a94bb6bd2e6bdbde535fc995e534542f5f7e8b8dae0cb"
 
 # GTK2.x mode
 EXTRA_OECONF += " \
     --with-gtkver=2 \
-    --with-bluetooth=yes \
 "
+
+PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth,gnome-bluetooth"
+PACKAGECONFIG ??= ""
 
 do_configure_append() {
     rm config.log
@@ -31,12 +30,8 @@ do_configure_append() {
     done
 }
 
-do_install_append() {
-    install -m 0644 ${WORKDIR}/icons/* ${D}/usr/share/icons/hicolor/22x22/apps/
-}
-
 RDEPENDS_${PN} =+ "networkmanager"
-RRECOMMENDS_${PN} =+ "gnome-bluetooth gnome-keyring"
+RRECOMMENDS_${PN} =+ "gnome-keyring"
 
 FILES_${PN} += " \
     ${datadir}/nm-applet/ \
