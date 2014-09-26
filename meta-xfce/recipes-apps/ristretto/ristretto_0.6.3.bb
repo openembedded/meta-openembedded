@@ -7,7 +7,6 @@ DEPENDS = "exo libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
 
 inherit xfce-app
 
-PNBLACKLIST[ristretto] = "BROKEN: rrecommends broken tumbler"
 RRECOMMENDS_${PN} += "tumbler"
 
 SRC_URI[md5sum] = "6b8c9a5d7ed319e4c84a9fefaa18792c"
