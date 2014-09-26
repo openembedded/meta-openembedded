@@ -4,12 +4,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-native"
 
-inherit xfce
+inherit xfce gtk-doc
 
-PNBLACKLIST[tumbler] = "BROKEN: needs to be updated to use freetype2 pkg-config instead of freetype2-config"
-
-SRC_URI[md5sum] = "f844215c5e3918eae58abdd85f146780"
-SRC_URI[sha256sum] = "c3bac4ee609e22be6c7f01a4fdf6086bc6b57940d82f99570a2d9d547a32fc93"
+SRC_URI[md5sum] = "2524e39439c13238565160da0b6fed2d"
+SRC_URI[sha256sum] = "e7c20d79c830465f8b3b792893f05e8b8d5ba90aec4973e7517e07ef31537304"
+SRC_URI += "file://0001-configure-use-pkg-config-for-freetype2.patch"
 
 INSANE_SKIP_${PN} = "dev-so"
 
