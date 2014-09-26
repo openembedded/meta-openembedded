@@ -4,20 +4,17 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
 
-DEPENDS = "libnl dbus dbus-glib udev wireless-tools gnutls util-linux ppp"
-
-PNBLACKLIST[networkmanager] = "BROKEN: needs to detect gcrypt from pkg-config (error: gnutls explicitly requested but gcrypt not found on system)"
+DEPENDS = "libnl dbus dbus-glib udev wireless-tools nss util-linux ppp"
 
 inherit gnome gettext systemd
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
-    file://0002-NetworkManager.service-remove-reference-to-NetworkMa.patch \
     file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
 "
-SRC_URI[md5sum] = "38d28f6bd9220d85dfff47210706195c"
-SRC_URI[sha256sum] = "c366bcded6354d8186ad93c05d26d6a20bc550aa0391f974704e7a60e9f6096b"
+SRC_URI[md5sum] = "aad2558887e25417c52eb2deaade2f85"
+SRC_URI[sha256sum] = "064d27223d3824859df12e1fb25b787fec1c68bbc864dc52a0289b9211c4c972"
 
 
 S = "${WORKDIR}/NetworkManager-${PV}"
@@ -28,7 +25,7 @@ EXTRA_OECONF = " \
     --disable-ifnet \
     --disable-ifcfg-suse \
     --with-netconfig \
-    --with-crypto=gnutls \
+    --with-crypto=nss \
     --disable-more-warnings \
     --with-dhclient=${base_sbindir}/dhclient \
     --with-iptables=${sbindir}/iptables \
