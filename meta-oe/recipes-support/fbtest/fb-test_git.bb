@@ -1,11 +1,11 @@
 SUMMARY = "Test suite for Linux framebuffer"
 
-PV = "0.0"
+PV = "1.1.0"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 
-SRCREV = "85eab266b123a08098af86afdb1599947d276e32"
+SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
 SRC_URI = "git://github.com/prpplague/fb-test-app.git"
 
 S = "${WORKDIR}/git"
