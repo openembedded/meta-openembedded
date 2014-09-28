@@ -88,12 +88,11 @@ USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp 
 GROUPADD_PARAM_${PN} = "-r ftp"
 
 pkg_postinst_${PN}() {
-	if [ -n "$D" ]; then
-		exit 0
-	fi
+    if [ -z "$D" ]; then
 	if type systemd-tmpfiles >/dev/null; then
-		systemd-tmpfiles --create
+	    systemd-tmpfiles --create
 	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-		${sysconfdir}/init.d/populate-volatile.sh update
+	    ${sysconfdir}/init.d/populate-volatile.sh update
 	fi
+    fi
 }
