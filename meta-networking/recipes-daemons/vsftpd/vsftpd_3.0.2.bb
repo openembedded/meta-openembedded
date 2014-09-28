@@ -16,6 +16,7 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
            file://vsftpd.ftpusers \
            file://change-secure_chroot_dir.patch \
            file://volatiles.99_vsftpd \
+           file://vsftpd.service \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
@@ -35,7 +36,7 @@ PAMLIB = "${@base_contains('DISTRO_FEATURES', 'pam', '-L${STAGING_BASELIBDIR} -l
 NOPAM_SRC ="${@base_contains('PACKAGECONFIG', 'tcp-wrappers', 'file://nopam-with-tcp_wrappers.patch', 'file://nopam.patch', d)}"
 SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d)}"
 
-inherit update-rc.d useradd
+inherit update-rc.d useradd systemd
 
 CONFFILES_${PN} = "${sysconfdir}/vsftpd.conf"
 LDFLAGS_append =" -lcrypt -lcap"
@@ -76,6 +77,11 @@ do_install() {
         echo "d /var/run/vsftpd/empty 0755 root root -" \
         > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
     fi
+
+    # Install systemd unit files
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/vsftpd.service ${D}${systemd_unitdir}/system
+    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/vsftpd.service
 }
 
 INITSCRIPT_PACKAGES = "${PN}"
@@ -86,6 +92,8 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp \
                        --shell /bin/false ftp "
 GROUPADD_PARAM_${PN} = "-r ftp"
+
+SYSTEMD_SERVICE_${PN} = "vsftpd.service"
 
 pkg_postinst_${PN}() {
     if [ -z "$D" ]; then
