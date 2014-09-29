@@ -40,6 +40,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-closebutton-plugin \
     xfce4-equake-plugin \
     xfce4-notes-plugin \
+    xfce4-whiskermenu-plugin \
     \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
