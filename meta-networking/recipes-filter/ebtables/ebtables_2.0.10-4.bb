@@ -15,6 +15,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
            file://installnonroot.patch \
            file://01debian_defaultconfig.patch \
            file://ebtables.init \
+           file://ebtables.common \
+           file://ebtables.service \
            file://no-as-needed.patch \
 "
 
@@ -23,7 +25,7 @@ SRC_URI[sha256sum] = "dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9
 
 S = "${WORKDIR}/ebtables-v${PV}"
 
-inherit update-rc.d
+inherit update-rc.d systemd
 
 EXTRA_OEMAKE = " \
         BINDIR=${base_sbindir} \
@@ -39,27 +41,37 @@ EXTRA_OEMAKE = " \
 "
 
 do_install () {
+    install -d ${D}${sbindir}
+    install -m 0755 ${WORKDIR}/ebtables.common ${D}${sbindir}/ebtables.common
+    # Fix hardcoded paths in scripts
+    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${sbindir}/ebtables.common
+    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sbindir}/ebtables.common
+
     install -d ${D}${sysconfdir}/init.d
     install -d ${D}${sysconfdir}/default
     install -d ${D}${sysconfdir}/ebtables
     oe_runmake DESTDIR='${D}' install
     install -m 0755 ${WORKDIR}/ebtables.init ${D}/${sysconfdir}/init.d/ebtables
     mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
-
-    # Fix hardcoded paths in scripts
-    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
+    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ebtables
 
     # The script ebtables-save refernces perl in exec_prefix, so
     # move it to sbindir to avoid QA issue
     install -d ${D}/${sbindir}
     mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
+
+    # Install systemd service files
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/ebtables.service ${D}${systemd_unitdir}/system
+    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/ebtables.service
 }
 
 CONFFILES_${PN} += "${sysconfdir}/default/ebtables"
 
 INITSCRIPT_NAME = "ebtables"
 INITSCRIPT_PARAMS = "start 41 S . stop 41 6 ."
+
+SYSTEMD_SERVICE_${PN} = "ebtables.service"
 
 FILES_${PN}-dbg += "${base_libdir}/ebtables/.debug"
 FILES_${PN} += "${base_libdir}/ebtables/*.so"
