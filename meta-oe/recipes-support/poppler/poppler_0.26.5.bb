@@ -3,10 +3,10 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = " \
-    http://poppler.freedesktop.org/${BP}.tar.gz \
+    http://poppler.freedesktop.org/${BP}.tar.xz \
 "
-SRC_URI[md5sum] = "49d55921ce795778c7231fe9f2fe923b"
-SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1dce13b"
+SRC_URI[md5sum] = "786c943eee550e3a977c181e7778b1c8"
+SRC_URI[sha256sum] = "de7de5fa337431e5d1f372e8577b3707322f1dbc1dc28a70f2927476f134d1ee"
 
 DEPENDS = "fontconfig zlib cairo lcms"
 
