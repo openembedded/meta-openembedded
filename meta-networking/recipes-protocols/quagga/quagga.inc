@@ -31,13 +31,31 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
            file://quagga.pam \
            file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
            file://quagga-Avoid-duplicate-connected-address.patch \
+           file://babeld.service \
+           file://bgpd.service \
+           file://isisd.service \
+           file://ospf6d.service \
+           file://ospfd.service \
+           file://ripd.service \
+           file://ripngd.service \
+           file://zebra.service \
 "
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
 PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
 
-inherit autotools update-rc.d useradd
+inherit autotools update-rc.d useradd systemd
+
+SYSTEMD_PACKAGES = "${PN} ${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
+SYSTEMD_SERVICE_${PN}-babeld = "babeld.service"
+SYSTEMD_SERVICE_${PN}-bgpd = "bgpd.service"
+SYSTEMD_SERVICE_${PN}-isisd = "isisd.service"
+SYSTEMD_SERVICE_${PN}-ospf6d = "ospf6d.service"
+SYSTEMD_SERVICE_${PN}-ospfd = "ospfd.service"
+SYSTEMD_SERVICE_${PN}-ripd = "ripd.service"
+SYSTEMD_SERVICE_${PN}-ripngd = "ripngd.service"
+SYSTEMD_SERVICE_${PN} = "zebra.service"
 
 EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 --localstatedir=${localstatedir}/run/quagga \
@@ -108,6 +126,35 @@ do_install () {
         fi
     done
 
+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d /var/run/quagga 0755 quagga quagga -" \
+        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+    fi
+
+    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
+        rm -rf ${D}${sysconfdir}/init.d/
+    fi
+
+    install -d ${D}${systemd_unitdir}/system
+    for i in babeld bgpd isisd ospf6d ospfd ripd ripngd zebra; do
+        install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
+    done
+    sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
+        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+        -e 's,@SBINDIR@,${sbindir},g' \
+        -i ${D}${systemd_unitdir}/system/*.service
+}
+
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
+pkg_postinst_${PN} () {
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
+        if [ -n "$D" ]; then
+            OPTS="--root=$D"
+        fi
+        systemctl $OPTS mask quagga.service
+    fi
 }
 
 # Split into a main package and separate per-protocol packages
