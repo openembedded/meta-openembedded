@@ -1,0 +1,13 @@
+[Unit]
+Description=Samba SMB Daemon
+After=syslog.target network.target nmb.service winbind.service
+
+[Service]
+Type=forking
+PIDFile=/var/run/smbd.pid
+LimitNOFILE=16384
+ExecStart=@SBINDIR@/smbd
+ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

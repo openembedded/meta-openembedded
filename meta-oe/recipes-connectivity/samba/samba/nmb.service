@@ -1,0 +1,12 @@
+[Unit]
+Description=Samba NMB Daemon
+After=syslog.target network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/nmbd.pid
+ExecStart=@SBINDIR@/nmbd
+ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

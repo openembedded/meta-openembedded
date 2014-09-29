@@ -8,11 +8,18 @@ SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
            file://init.samba \
            file://init.winbind \
            file://tdb.pc \
+           file://nmb.service \
+           file://smb.service \
+           file://winbind.service \
 "
 
 S = "${WORKDIR}/samba-${PV}/source"
 
-inherit autotools-brokensep update-rc.d
+inherit autotools-brokensep update-rc.d systemd
+
+SYSTEMD_PACKAGES = "${PN} winbind"
+SYSTEMD_SERVICE_${PN} = "nmb.service smb.service"
+SYSTEMD_SERVICE_winbind = "winbind.service"
 
 SAMBAMMAP = "no"
 SAMBAMMAP_libc-glibc = "yes"
@@ -103,6 +110,29 @@ do_install_append() {
 
     # usershare mount place
     mkdir -p ${D}${localstatedir}/lib/samba/usershares
+
+    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
+        rm -rf ${D}${sysconfdir}/init.d/
+    fi
+
+    install -d ${D}${systemd_unitdir}/system
+    for i in nmb smb winbind; do
+        install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
+    done
+    sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
+        -e 's,@SBINDIR@,${sbindir},g' \
+        -i ${D}${systemd_unitdir}/system/*.service
+}
+
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
+pkg_postinst_${PN} () {
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
+        if [ -n "$D" ]; then
+            OPTS="--root=$D"
+        fi
+        systemctl $OPTS mask samba.service
+    fi
 }
 
 pkg_postinst_libnss-winbind () {
