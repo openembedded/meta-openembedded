@@ -6,7 +6,7 @@ HOMEPAGE = "http://mpg123.de/"
 BUGTRACKER = "http://sourceforge.net/p/mpg123/bugs/"
 SECTION = "multimedia"
 
-DEPENDS = "tslib libsdl jack openal-soft portaudio-v19 audiofile esound"
+DEPENDS = "tslib audiofile"
 
 # The options should be mutually exclusive for configuration script.
 # If both alsa and pulseaudio are specified (as in the default distro features)
@@ -15,6 +15,21 @@ PACKAGECONFIG_ALSA = "${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '${PACKAGECONFIG_ALSA}', d)}"
 PACKAGECONFIG[pulseaudio] = "--with-default-audio=pulse,,pulseaudio"
 PACKAGECONFIG[alsa] = "--with-default-audio=alsa,,alsa-lib"
+PACKAGECONFIG[sdl] = ",,libsdl"
+PACKAGECONFIG[openal] = ",,openal-soft"
+PACKAGECONFIG[jack] = ",,jack"
+PACKAGECONFIG[portaudio] = ",,portaudio-v19"
+PACKAGECONFIG[esd] = ",,esound"
+
+# Following are possible sound output modules
+#alsa tinyalsa oss coreaudio sndio sun win32 win32_wasapi os2 esd jack portaudio pulse sdl nas arts openal dummy
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'alsa', 'alsa', '', d)}"
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'pulseaudio', 'pulse', '', d)}"
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'sdl', 'sdl', '', d)}"
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'openal', 'openal', '', d)}"
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'jack', 'jack', '', d)}"
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'portaudio', 'portaudio', '', d)}"
+AUDIOMODS += "${@base_contains('PACKAGECONFIG', 'esd', 'esd', '', d)}"
 
 LICENSE = "LGPLv2.1"
 LICENSE_FLAGS = "commercial"
@@ -28,6 +43,7 @@ inherit autotools pkgconfig
 
 EXTRA_OECONF = " \
     --enable-shared \
+    --with-audio='${AUDIOMODS}' \
     --with-module-suffix=.so \
     ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-cpu=neon', '', d)} \
     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
