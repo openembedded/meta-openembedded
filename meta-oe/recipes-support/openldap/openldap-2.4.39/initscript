@@ -5,8 +5,10 @@
 # > update-rc.d openldap defaults 60
 #
 
+# Source function library.
+. /etc/init.d/functions
 
-slapd=/usr/libexec/slapd
+slapd=/usr/sbin/slapd
 test -x "$slapd" || exit 0
 
 
@@ -21,8 +23,12 @@ case "$1" in
     start-stop-daemon --stop --quiet --pidfile /var/run/slapd.pid
     echo "."
     ;;
+  status)
+    status $slapd;
+    exit $?
+    ;;
   *)
-    echo "Usage: /etc/init.d/openldap {start|stop}"
+    echo "Usage: /etc/init.d/openldap {start|stop|status}"
     exit 1
 esac
 

@@ -1,5 +1,6 @@
 # OpenLDAP, a license free (see http://www.OpenLDAP.org/license.html)
 #
+SUMMARY = "OpenLDAP Directory Service"
 DESCRIPTION = "OpenLDAP Software is an open source implementation of the Lightweight Directory Access Protocol."
 HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # The OpenLDAP Public License - see the HOMEPAGE - defines
@@ -8,7 +9,9 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # basically BSD.  opensource.org does not record this license
 # at present (so it is apparently not OSI certified).
 LICENSE = "OpenLDAP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3d82d3085f228af211a6502c7ea7c3c7"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f2bdbaa4f50199a00b6de2ca7ec1db05 \
+                    file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
+"
 SECTION = "libs"
 
 LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
@@ -16,22 +19,23 @@ LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
 SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-m4-pthread.patch \
     file://kill-icu.patch \
-    file://0205e83f4670d10ad3c6ae4b8fc5ec1d0c7020c0.patch \
+    file://gnutls-Avoid-use-of-deprecated-function.patch \
     file://openldap-2.4.28-gnutls-gcrypt.patch \
+    file://ITS-7723-fix-reference-counting.patch \
+    file://use-urandom.patch \
     file://initscript \
 "
-SRC_URI[md5sum] = "90150b8c0d0192e10b30157e68844ddf"
-SRC_URI[sha256sum] = "5a5ede91d5e8ab3c7f637620aa29a3b96eb34318a8b26c8eef2d2c789fc055e3"
+SRC_URI[md5sum] = "b0d5ee4b252c841dec6b332d679cf943"
+SRC_URI[sha256sum] = "8267c87347103fef56b783b24877c0feda1063d3cb85d070e503d076584bf8a7"
 
 DEPENDS = "util-linux groff-native"
 
-PR = "r1"
 # The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
 # installing .so and executables, this fails in cross compilation
 # environments
 SRC_URI += "file://install-strip.patch"
 
-inherit autotools-brokensep
+inherit autotools-brokensep update-rc.d
 
 # CV SETTINGS
 # Required to work round AC_FUNC_MEMCMP which gets the wrong answer
@@ -47,7 +51,7 @@ EXTRA_OECONF += "--with-yielding-select=yes"
 EXTRA_OECONF += "--enable-dynamic"
 
 PACKAGECONFIG ??= "gnutls modules \
-                   ldap meta monitor null passwd shell proxycache dnssrv \
+                   bdb hdb ldap meta monitor null passwd shell proxycache dnssrv \
 "
 #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
 PACKAGECONFIG[gnutls] = "--with-tls=gnutls,,gnutls libgcrypt"
@@ -64,14 +68,9 @@ EXTRA_OECONF += "--enable-crypt"
 # SLAPD BACKEND
 #
 # The backend must be set by the configuration.  This controls the
-# required database, the default database, bdb, is turned off but
-# can be turned back on again and it *is* below!  The monitor backend
-# is also disabled.  If you try to change the backends but fail to
-# enable a single one the build will fail in an obvious way.
+# required database. 
 #
-EXTRA_OECONF += "--disable-bdb --disable-hdb --disable-monitor"
-#
-# Backends="bdb dnssrv hdb ldap ldbm meta monitor null passwd perl shell sql"
+# Backends="bdb dnssrv hdb ldap mdb meta monitor ndb null passwd perl relay shell sock sql"
 #
 # Note that multiple backends can be built.  The ldbm backend requires a
 # build-time choice of database API.  The bdb backend forces this to be
@@ -82,33 +81,28 @@ md = "${libexecdir}/openldap"
 #--enable-bdb          enable Berkeley DB backend no|yes|mod yes
 # The Berkely DB is the standard choice.  This version of OpenLDAP requires
 # the version 4 implementation or better.
-PACKAGECONFIG[bdb] = "--enable-bdb=mod,--enable-bdb=no,db"
+PACKAGECONFIG[bdb] = "--enable-bdb=yes,--enable-bdb=no,db"
 
 #--enable-dnssrv       enable dnssrv backend no|yes|mod no
 PACKAGECONFIG[dnssrv] = "--enable-dnssrv=mod,--enable-dnssrv=no"
 
 #--enable-hdb          enable Hierarchical DB backend no|yes|mod no
-# This forces ldbm to use Berkeley too, remove to use gdbm
-PACKAGECONFIG[hdb] = "--enable-hdb=mod,--enable-hdb=no,db"
+PACKAGECONFIG[hdb] = "--enable-hdb=yes,--enable-hdb=no,db"
 
 #--enable-ldap         enable ldap backend no|yes|mod no
 PACKAGECONFIG[ldap] = "--enable-ldap=mod,--enable-ldap=no,"
 
-#--enable-ldbm         enable ldbm backend no|yes|mod no
-# ldbm requires further specification of the underlying database API, because
-# bdb is enabled above this must be set to berkeley, however the config
-# defaults this correctly so --with-ldbm-api is *not* set.  The build will
-# fail if bdb is removed, but no database is built to provide the
-# support for ldbm
-# guide.html:<P>back-ldbm was both slow and unreliable. Its byzantine indexing code was prone to spontaneous corruption, as were the underlying database libraries that were commonly used (e.g. GDBM or NDBM). back-bdb and back-hdb are superior in every aspect, with simplified indexing to avoid index corruption, fine-grained locking for greater concurrency, hierarchical caching for greater performance, streamlined on-disk format for greater efficiency and portability, and full transaction support for greater reliability.</P>
-# configure: WARNING: unrecognized options: --disable-silent-rules, --enable-ldbm, --with-ldbm-api
-#PACKAGECONFIG[ldbm] = "--enable-ldbm=mod --with-ldbm-api=gdbm,--enable-ldbm-no,gdbm"
+#--enable-mdb          enable mdb database backend no|yes|mod [yes]
+PACKAGECONFIG[mdb] = "--enable-mdb=mod,--enable-mdb=no,"
 
 #--enable-meta         enable metadirectory backend no|yes|mod no
 PACKAGECONFIG[meta] = "--enable-meta=mod,--enable-meta=no,"
 
 #--enable-monitor      enable monitor backend no|yes|mod yes
 PACKAGECONFIG[monitor] = "--enable-monitor=mod,--enable-monitor=no,"
+
+#--enable-ndb          enable MySQL NDB Cluster backend no|yes|mod [no]
+PACKAGECONFIG[ndb] = "--enable-ndb=mod,--enable-ndb=no,"
 
 #--enable-null         enable null backend no|yes|mod no
 PACKAGECONFIG[null] = "--enable-null=mod,--enable-null=no,"
@@ -122,9 +116,15 @@ PACKAGECONFIG[passwd] = "--enable-passwd=mod,--enable-passwd=no,"
 #  up the build machine perl - not good (inherit perlnative?)
 PACKAGECONFIG[perl] = "--enable-perl=mod,--enable-perl=no,perl"
 
+#--enable-relay        enable relay backend no|yes|mod [yes]
+PACKAGECONFIG[relay] = "--enable-relay=mod,--enable-relay=no,"
+
 #--enable-shell        enable shell backend no|yes|mod no
 # configure: WARNING: Use of --without-threads is recommended with back-shell
 PACKAGECONFIG[shell] = "--enable-shell=mod --without-threads,--enable-shell=no,"
+
+#--enable-sock         enable sock backend no|yes|mod [no]
+PACKAGECONFIG[sock] = "--enable-sock=mod,--enable-sock=no,"
 
 #--enable-sql          enable sql backend no|yes|mod no
 # sql requires some sql backend which provides sql.h, sqlite* provides
@@ -141,7 +141,10 @@ PACKAGECONFIG[proxycache] = "--enable-proxycache=mod,--enable-proxycache=no,"
 FILES_${PN}-overlay-proxycache = "${md}/pcache-*.so.*"
 PACKAGES += "${PN}-overlay-proxycache"
 
-CPPFLAGS_append = " -D_GNU_SOURCE"
+# Append URANDOM_DEVICE='/dev/urandom' to CPPFLAGS:
+# This allows tls to obtain random bits from /dev/urandom, by default
+# it was disabled for cross-compiling.
+CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\'"
 
 do_configure() {
     cp ${STAGING_DATADIR_NATIVE}/libtool/config/ltmain.sh ${S}/build
@@ -176,23 +179,21 @@ do_install_append() {
     chmod 755 ${D}${sysconfdir}/init.d/openldap
     # This is duplicated in /etc/openldap and is for slapd
     rm -f ${D}${localstatedir}/openldap-data/DB_CONFIG.example
+
+    # Installing slapd under ${sbin} is more FHS and LSB compliance
+    mv ${D}${libexecdir}/slapd ${D}/${sbindir}/slapd
+    SLAPTOOLS="slapadd slapcat slapdn slapindex slappasswd slaptest slapauth slapacl slapschema"
+    cd ${D}/${sbindir}/
+    rm -f ${SLAPTOOLS}
+    for i in ${SLAPTOOLS}; do ln -sf slapd $i; done
+
     rmdir "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
 }
 
-pkg_postinst_${PN}-slapd () {
-    if test -n "${D}"; then
-        D="-r $D"
-    fi
-    update-rc.d $D openldap defaults
-}
-
-pkg_prerm_${PN}-slapd () {
-    if test -n "${D}"; then
-        D="-r $D"
-    fi
-    update-rc.d $D openldap remove
-}
+INITSCRIPT_PACKAGES = "${PN}-slapd"
+INITSCRIPT_NAME_${PN}-slapd = "openldap"
+INITSCRIPT_PARAMS_${PN}-slapd = "defaults"
 
 PACKAGES_DYNAMIC += "^openldap-backends.* ^openldap-backend-.*"
 

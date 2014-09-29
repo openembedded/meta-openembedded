@@ -1,0 +1,38 @@
+From 59688044386dfeee0c837a15133f4e878f1bb661 Mon Sep 17 00:00:00 2001
+From: Jan Synacek <jsynacek@redhat.com>
+Date: Wed, 13 Nov 2013 09:06:54 +0100
+Subject: [PATCH] ITS#7723 fix reference counting
+
+Upstream-Status: Backport
+
+Commit 59688044386dfeee0c837a15133f4e878f1bb661 upstream
+
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ libraries/librewrite/session.c |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/libraries/librewrite/session.c b/libraries/librewrite/session.c
+index fcc7698..02fc054 100644
+--- a/libraries/librewrite/session.c
++++ b/libraries/librewrite/session.c
+@@ -161,6 +161,7 @@ rewrite_session_find(
+ #ifdef USE_REWRITE_LDAP_PVT_THREADS
+ 	if ( session ) {
+ 		ldap_pvt_thread_mutex_lock( &session->ls_mutex );
++		session->ls_count++;
+ 	}
+ 	ldap_pvt_thread_rdwr_runlock( &info->li_cookies_mutex );
+ #endif /* USE_REWRITE_LDAP_PVT_THREADS */
+@@ -178,6 +179,7 @@ rewrite_session_return(
+ )
+ {
+ 	assert( session != NULL );
++	session->ls_count--;
+ 	ldap_pvt_thread_mutex_unlock( &session->ls_mutex );
+ }
+ 
+-- 
+1.7.5.4
+
