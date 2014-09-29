@@ -115,6 +115,8 @@ PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-babeld ${PN}-bgpd \
                      ${PN}-ripd ${PN}-ripngd ${PN}-isisd \
                      ${PN}-ospfclient ${PN}-watchquagga"
 
+RDEPENDS_${PN} += "${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
+
 FILES_${PN}-ospfd       = "${sbindir}/ospfd ${libdir}/libospf.so.*"
 FILES_${PN}-ospf6d      = "${sbindir}/ospf6d"
 FILES_${PN}-babeld      = "${sbindir}/babeld"
