@@ -10,11 +10,11 @@ SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;nam
            https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz;name=acpica \
            file://aapits-linux.patch \
            file://aapits-makefile.patch \
-    "
-SRC_URI[acpitests.md5sum] = "bfc399cecb21e9491d362d8e480b2689"
-SRC_URI[acpitests.sha256sum] = "e7d7ff638872543909b38c2498e88958251ee6ce4d22bc13d4e3925771212c0e"
-SRC_URI[acpica.md5sum] = "733532f005fba5d1c5344440651b13d1"
-SRC_URI[acpica.sha256sum] = "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d41dcf00e19d702cdf751bbc"
+"
+SRC_URI[acpitests.md5sum] = "db9d6fdaa8e3eb101d700ee5ba4938ed"
+SRC_URI[acpitests.sha256sum] = "e576c74bf1bf1c9f7348bf9419e05c8acfece7105abcdc052e66670c7af2cf00"
+SRC_URI[acpica.md5sum] = "6f05f0d10166a1b1ff6107f3d1cdf1e5"
+SRC_URI[acpica.sha256sum] = "01d8867656c5ba41dec307c4383ce676196ad4281ac2c9dec9f5be5fac6d888e"
 
 S = "${WORKDIR}/acpitests-unix-${PV}"
 

@@ -326,8 +326,8 @@ diff -urN acpica-unix2-20130626/tests/aapits/Makefile acpica-unix2-20130626-aapi
 --- acpica-unix2-20130626/tests/aapits/Makefile	2013-01-17 12:48:29.000000000 -0700
 +++ acpica-unix2-20130626-aapits/tests/aapits/Makefile	2013-07-25 15:17:09.309236422 -0600
 @@ -194,7 +194,7 @@
- CFLAGS+= -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_EXEC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include 
- 
+ CFLAGS+= -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_APITS -DACPI_EXEC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include
+
  
 -acpiexec : $(patsubst %.c,%.o, $(SRCS))
 +$(PROG) : $(patsubst %.c,%.o, $(SRCS))

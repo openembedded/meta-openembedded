@@ -8,19 +8,27 @@ Upstream-status: Unknown
 diff -urN acpica-unix2-20140325/tests/aapits/Makefile acpica-unix2-20140325/tests/aapits/Makefile
 --- acpica-unix2-20140325/tests/aapits/Makefile	2014-04-05 14:23:14.683636794 -0600
 +++ acpica-unix2-20140325-aapits/tests/aapits/Makefile	2014-04-05 15:10:57.879184598 -0600
-@@ -20,6 +20,7 @@
- 	../../source/components/hardware/hwxface.c \
+@@ -16,6 +16,7 @@
+ 	atosxfwrap.c \
+ 	osunixxf.c \
+ 	../../source/common/ahids.c \
++	../../source/common/ahuuids.c \
  	../../source/common/cmfsize.c \
  	../../source/common/getopt.c \
-+	../../source/common/ahids.c \
- 	../../source/components/debugger/dbcmds.c \
- 	../../source/components/debugger/dbconvert.c \
- 	../../source/components/debugger/dbdisply.c \
-@@ -154,6 +155,7 @@
- 	../../source/components/tables/tbfadt.c \
- 	../../source/components/tables/tbfind.c \
- 	../../source/components/tables/tbinstal.c \
-+	../../source/components/tables/tbdata.c \
- 	../../source/components/tables/tbprint.c \
- 	../../source/components/tables/tbutils.c \
- 	../../source/components/tables/tbxface.c \
+ 	../../source/components/hardware/hwtimer.c \
+@@ -174,6 +175,7 @@
+ 	../../source/components/utilities/utexcep.c \
+ 	../../source/components/utilities/utfileio.c \
+ 	../../source/components/utilities/utglobal.c \
++	../../source/components/utilities/uthex.c \
+ 	../../source/components/utilities/utids.c \
+ 	../../source/components/utilities/utinit.c \
+ 	../../source/components/utilities/utlock.c \
+@@ -189,6 +191,7 @@
+ 	../../source/components/utilities/utstate.c \
+ 	../../source/components/utilities/utstring.c \
+ 	../../source/components/utilities/uttrack.c \
++	../../source/components/utilities/utuuid.c \
+ 	../../source/components/utilities/utxface.c \
+ 	../../source/components/utilities/utxferror.c \
+ 	../../source/components/utilities/utxfinit.c \
