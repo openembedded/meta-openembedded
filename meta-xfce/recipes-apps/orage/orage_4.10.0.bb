@@ -6,8 +6,8 @@ DEPENDS = "gtk+ xfce4-panel libical popt"
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "d5105981a9d77ed22be42615d70f3cc0"
-SRC_URI[sha256sum] = "b19df727da9da48b979e238ac7113c803976de80bd1e2dadf6d84b864956dfd5"
+SRC_URI[md5sum] = "b33fa272d92f539a224a7a40b1926dfc"
+SRC_URI[sha256sum] = "6cb854f3437e31bab23abfce97bd10afa1636a9a1480d80e14e26c85d06be7c0"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
