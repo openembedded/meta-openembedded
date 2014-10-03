@@ -1,5 +1,8 @@
 require fftw.inc
 
+# conflicts with fftw and fftwl
+EXCLUDE_FROM_WORLD = "1"
+
 EXTRA_OECONF += "--enable-single \
     ${@base_contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
 "

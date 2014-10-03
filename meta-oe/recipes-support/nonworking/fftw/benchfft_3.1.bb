@@ -3,7 +3,7 @@ SECTION = "libs"
 LICENSE = "GPLv2"
 
 # single precision fftw is called fftwf 
-DEPENDS = "fftwf"
+DEPENDS = "virtual/fftw"
 
 SRC_URI = "http://www.fftw.org/benchfft/benchfft-${PV}.tar.gz"
 

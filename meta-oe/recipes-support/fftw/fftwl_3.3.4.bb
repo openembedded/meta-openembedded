@@ -1,5 +1,8 @@
 require fftw.inc
 
+# conflicts with fftw and fftwf
+EXCLUDE_FROM_WORLD = "1"
+
 EXTRA_OECONF += "--enable-long-double"
 
 SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
