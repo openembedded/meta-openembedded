@@ -4,29 +4,18 @@ LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "libdivecomputer gtk+ libxml2 glib-2.0 gconf"
 
-inherit gtk-icon-cache
+PNBLACKLIST[subsurface] = "Needs to be upgraded for compatibility with new libdivecomputer"
+
+inherit gtk-icon-cache cmake
 
 inherit gitpkgv
 PKGV = "${GITPKGVTAG}"
-PV = "1.1"
+PV = "4.2"
 
-SRCREV = "bd275d73ac06823619230915a3aa29deddc996fb"
-SRC_URI = "git://subsurface.hohndel.org/subsurface.git \
-           file://pkgconfig.patch \
-           file://libm.patch"
+SRCREV = "f61ee20ba356ecfc4c5b247f548f52d588179c94"
+SRC_URI = "git://subsurface.hohndel.org/subsurface.git"
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "CC='${CC}' \
-                libdc-usr=${STAGING_INCDIR}/libdivecomputer/* \
-                LIBDIVECOMPUTERINCLUDES=${STAGING_INCDIR}/libdivecomputer \
-                LIBDIVECOMPUTERARCHIVE=${STAGING_LIBDIR}/libdivecomputer.a \
-"
-
-do_install() {
-    oe_runmake install DESTDIR=${D}
-    rm ${D}${datadir}/icons/hicolor/icon-theme.cache
-}
-
-FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/subsurface.svg"
+#FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/subsurface.svg"
 RRECOMMENDS_${PN}_append_libc-glibc = " glibc-gconv-iso8859-15"
 
