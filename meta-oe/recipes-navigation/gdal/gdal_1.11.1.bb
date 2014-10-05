@@ -1,14 +1,14 @@
 SUMMARY = "GDAL is a translator library for raster geospatial data formats"
 HOMEPAGE = "http://www.gdal.org/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"
+LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0952e17969fab12227096b5228f23149"
 
-DEPENDS = "proj sqlite3 tiff"
+DEPENDS = "proj sqlite3 tiff json-c"
 
 SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${BP}.tar.xz"
 
-SRC_URI[md5sum] = "f354c614aea76e5630e4edbf06e5c292"
-SRC_URI[sha256sum] = "e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60b91639fb8d443791"
+SRC_URI[md5sum] = "2e126d7c6605691d38f3e71b945f5c73"
+SRC_URI[sha256sum] = "20e1042cff15a71038459a299732fb342428aea9912f32df30c85790fcab6302"
 
 inherit autotools-brokensep lib_package binconfig
 
@@ -79,8 +79,10 @@ EXTRA_OECONF = "--without-perl \
                 --with-pcraster=internal \
                 --with-geotiff=internal \
                 \
-                --with-sqlite3=${STAGING_LIBDIR} \
-                --with-libtiff=${STAGING_LIBDIR} \
+                --with-sqlite3=${STAGING_EXECPREFIXDIR} \
+                --with-libtiff=${STAGING_EXECPREFIXDIR} \
+                --with-libjson-c=${STAGING_EXECPREFIXDIR} \
+                --with-expat=${STAGING_EXECPREFIXDIR} \
 "
 
 EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
