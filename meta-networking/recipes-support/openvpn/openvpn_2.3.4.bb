@@ -18,7 +18,6 @@ CFLAGS += "-fno-inline"
 # I want openvpn to be able to read password from file (hrw)
 EXTRA_OECONF += "--enable-password-save --enable-iproute2"
 EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
-EXTRA_OECONF += "IPROUTE=/bin/ip"
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
