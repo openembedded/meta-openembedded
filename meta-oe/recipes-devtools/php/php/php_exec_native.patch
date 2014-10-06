@@ -1,12 +1,10 @@
----
- sapi/cli/config.m4 |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Upstream-status: Inappriate
 
---- php-5.4.14.orig/sapi/cli/config.m4
-+++ php-5.4.14/sapi/cli/config.m4
-@@ -34,11 +34,11 @@ if test "$PHP_CLI" != "no"; then
-     BUILD_CLI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_BINARY_OBJS) \$(PHP_CLI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CLI_PATH)"
-     ;;
+diff --git a/sapi/cli/config.m4 b/sapi/cli/config.m4
+index cdfa1f7..0fe11e3 100644
+--- a/sapi/cli/config.m4
++++ b/sapi/cli/config.m4
+@@ -36,7 +36,7 @@ if test "$PHP_CLI" != "no"; then
    esac
  
    dnl Set executable for tests
@@ -15,5 +13,6 @@
    PHP_SUBST(PHP_EXECUTABLE)
  
    dnl Expose to Makefile
-   PHP_SUBST(SAPI_CLI_PATH)
-   PHP_SUBST(BUILD_CLI)
+-- 
+1.9.3
+

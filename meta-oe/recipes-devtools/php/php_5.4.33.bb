@@ -10,13 +10,11 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
            libc-client openssl"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
-PR = "r6"
-
 # The new PHP downloads server groups PHP releases by major version so find
 # the major version of the PHP recipe.
 PHP_MAJVER = "${@d.getVar('PV',1).split('.')[0]}"
 
-SRC_URI = "http://museum.php.net/php${PHP_MAJVER}/php-${PV}.tar.bz2 \
+SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://acinclude-xml2-config.patch \
            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
@@ -28,13 +26,12 @@ SRC_URI_append_class-target += " \
             file://pear-makefile.patch \
             file://phar-makefile.patch \
             file://php_exec_native.patch \
-            file://fix-fpm-cross-compile.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
           "
 
-SRC_URI[md5sum] = "cfdc044be2c582991a1fe0967898fa38"
-SRC_URI[sha256sum] = "5450f3843bc651eb3fb00601f0cce1930aaaf65c7c966c02fe4a46f9c81be20a"
+SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
+SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
 
 S = "${WORKDIR}/php-${PV}"
 

@@ -1,18 +1,18 @@
-From 411ec4b31fdcc524f13fe5be80fd6769b7d16a5d Mon Sep 17 00:00:00 2001
+From ebc101e0728b9db6c687cff525e5dfc8eb0edbf3 Mon Sep 17 00:00:00 2001
 From: Koen Kooi <koen@dominion.thruhere.net>
 Date: Thu, 3 Nov 2011 14:27:15 +0100
-Subject: [PATCH] php: don't use broken wrapper for mkdir
+Subject: [PATCH 2/8] php: don't use broken wrapper for mkdir
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
 
 Upstream-Status: Inappropriate
 
- Makefile.global |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ Makefile.global | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/Makefile.global b/Makefile.global
-index 8dad0e4..abdb5d2 100644
+index ff858c2..ae554b4 100644
 --- a/Makefile.global
 +++ b/Makefile.global
 @@ -1,4 +1,4 @@
@@ -22,5 +22,5 @@ index 8dad0e4..abdb5d2 100644
  INSTALL_DATA = $(INSTALL) -m 644
  
 -- 
-1.7.2.5
+1.9.3
 

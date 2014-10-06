@@ -1,5 +1,7 @@
+Upstream-status: Unknown
+
 diff --git a/pear/Makefile.frag b/pear/Makefile.frag
-index 1f6f70e..b19a77c 100644
+index 00bacae..739eeca 100644
 --- a/pear/Makefile.frag
 +++ b/pear/Makefile.frag
 @@ -11,7 +11,7 @@ PEAR_PREFIX = -dp a${program_prefix}
@@ -11,3 +13,6 @@ index 1f6f70e..b19a77c 100644
  
  install-pear:
  	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
+-- 
+1.9.3
+

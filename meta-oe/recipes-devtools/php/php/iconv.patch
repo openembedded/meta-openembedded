@@ -1,8 +1,10 @@
+Upstream-status: Unknown
+
 diff --git a/acinclude.m4 b/acinclude.m4
-index 4c28b80..d6491a1 100644
+index a6c0d84..df11abd 100644
 --- a/acinclude.m4
 +++ b/acinclude.m4
-@@ -2439,7 +2439,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+@@ -2452,7 +2452,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
    dnl Check libc first if no path is provided in --with-iconv
    dnl
  
@@ -25,3 +27,6 @@ index d673b0a..1fbef13 100644
          if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h"; then
            PHP_ICONV_PREFIX="$i"
            break
+-- 
+1.9.3
+
