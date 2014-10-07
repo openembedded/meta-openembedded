@@ -4,6 +4,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SECTION = "x11/gnome/libs"
 DEPENDS = "libxml2 gconf libsoup-2.4 gtk+3"
 
+PNBLACKLIST[libgweather3] = "CONFLICT: 876 files are conflicting with libgweather"
+# e.g. sysroots/qemux86-64/usr/share/libgweather/locations.dtd
+#      sysroots/qemux86-64/usr/share/libgweather/Locations.zh_TW.xml
+
 BPN = "libgweather"
 
 inherit gnome

@@ -4,6 +4,8 @@ LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
 BPN = "gnome-panel"
 PR = "r1"
 
+PNBLACKLIST[gnome-panel3] = "CONFLICT: depends on libgweather3 which conflicts with libgweather"
+
 # conflicts with gnome-panel, because they provide the same package
 # http://patches.openembedded.org/patch/43105/
 EXCLUDE_FROM_WORLD = "1"
