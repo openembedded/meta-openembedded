@@ -12,6 +12,6 @@ SRC_URI = "http://links.twibright.com/download/links-${PV}.tar.bz2 \
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
-PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,lzma"
+PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
 
 inherit autotools pkgconfig
