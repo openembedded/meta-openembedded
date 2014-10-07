@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
 
 DEPENDS = "modphp"
 
+PNBLACKLIST[xdebug] = "CONFLICT: depends on blocked modphp"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
