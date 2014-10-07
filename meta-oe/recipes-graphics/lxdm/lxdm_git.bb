@@ -5,14 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = " \
     git://lxde.git.sourceforge.net/gitroot/lxde/${BPN};branch=master \
     file://lxdm.conf \
-    file://lxdm-pam \
-    file://lxdm-pam-debug \
+    ${@base_contains('DISTRO_FEATURES', 'pam', 'file://lxdm-pam file://lxdm-pam-debug', '', d)} \
     ${@base_contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
+    file://0002-let-autotools-create-lxdm.conf.patch \
 "
 
-LXDM_PAM = "${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)}"
-
-SRCREV = "07fb151a99ef99318b71f3de0afbba977b1e6267"
+SRCREV = "bf90ec7df5ff6745f703500c5792c344fbaef301"
 PV = "0.5.0+git${SRCPV}"
 PE = "1"
 
@@ -29,7 +27,9 @@ S = "${WORKDIR}/git"
 CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset -fno-builtin-strstr "
 
 EXTRA_OECONF += "--enable-gtk3=no --enable-password=yes --with-x -with-xconn=xcb \
-    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)}"
+    ${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/ --disable-consolekit', '--without-systemdsystemunitdir', d)} \
+    ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam', '--without-pam', d)} \
+"
 
 do_configure_prepend() {
     cp ${STAGING_DATADIR}/gettext/po/Makefile.in.in ${S}/po/
@@ -48,10 +48,12 @@ do_compile_append() {
 do_install_append() {
     install -d ${D}${localstatedir}/lib/lxdm
     install -m 644 ${WORKDIR}/lxdm.conf ${D}${localstatedir}/lib/lxdm
-    # ArchLinux version of pam config has the following advantages:
-    # * simple setup of passwordless login
-    # * in XFCE powerdown/restart enabled in logoff dialog
-    install -m 644 ${WORKDIR}/${LXDM_PAM} ${D}${sysconfdir}/pam.d/lxdm
+    if ${@base_contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+        # ArchLinux version of pam config has the following advantages:
+        # * simple setup of passwordless login
+        # * in XFCE powerdown/restart enabled in logoff dialog
+        install -m 644 ${WORKDIR}/${@base_contains("DISTRO_TYPE", "debug", "lxdm-pam-debug", "lxdm-pam",d)} ${D}${sysconfdir}/pam.d/lxdm
+    fi
 }
 
 # make installed languages choosable
@@ -68,7 +70,7 @@ done
 sed -i "s:last_langs=.*$:last_langs=$langs:g" $D${localstatedir}/lib/lxdm/lxdm.conf
 }
 
-RDEPENDS_${PN} = "pam-plugin-loginuid setxkbmap"
+RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
