@@ -7,6 +7,9 @@ PR = "r1"
 DEPENDS += "python-numpy freetype libpng"
 RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng"
 
+PNBLACKLIST[python-matplotlib] = "CONFLICT: 34 files with python-dateutil"
+# e.g. sysroots/qemux86-64/usr/lib/python2.7/site-packages/dateutil/tzwin.pyc
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/matplotlib/matplotlib-${PV}.tar.gz \
            file://fix_setup.patch \
            file://fix_setupext.patch \
