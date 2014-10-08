@@ -195,13 +195,13 @@ INITSCRIPT_PACKAGES = "${PN}-slapd"
 INITSCRIPT_NAME_${PN}-slapd = "openldap"
 INITSCRIPT_PARAMS_${PN}-slapd = "defaults"
 
-PACKAGES_DYNAMIC += "^openldap-backends.* ^openldap-backend-.*"
+PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
 
 python populate_packages_prepend () {
     backend_dir    = d.expand('${libexecdir}/openldap')
     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 
-    metapkg = "openldap-backends"
+    metapkg = "${PN}-backends"
     d.setVar('ALLOW_EMPTY_' + metapkg, "1")
     d.setVar('FILES_' + metapkg, "")
     metapkg_rdepends = []
