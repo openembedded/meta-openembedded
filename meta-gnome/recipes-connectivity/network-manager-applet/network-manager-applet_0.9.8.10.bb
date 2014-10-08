@@ -23,7 +23,6 @@ PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth
 PACKAGECONFIG ??= ""
 
 do_configure_append() {
-    rm config.log
     # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
     for i in $(find ${B} -name "Makefile") ; do
         sed -i -e s:-Werror::g $i
