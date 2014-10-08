@@ -32,7 +32,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar 
 SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
 SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
 
-S = "${WORKDIR}/${P}/src/"
+S = "${WORKDIR}/${BP}/src/"
 
 PACKAGECONFIG ??= "openssl"
 PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
@@ -55,7 +55,7 @@ FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
 
 krb5_do_unpack() {
     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
-    tar xzf ${WORKDIR}/${P}.tar.gz -C ${WORKDIR}/
+    tar xzf ${WORKDIR}/${BP}.tar.gz -C ${WORKDIR}/
 }
 
 python do_unpack() {
