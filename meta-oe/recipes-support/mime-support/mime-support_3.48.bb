@@ -4,6 +4,7 @@ LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://debian/README;md5=36bbe2ace0a05c3fb684b73208fbf30b"
 
 DEPENDS = "file"
+RDEPENDS_${PN} = "perl"
 RRECOMMENDS_${PN} = "file"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
