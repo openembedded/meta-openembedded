@@ -10,7 +10,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-   libmtp opencv libopus orc libusb1 schroedinger taglib \
+   libmtp libopus orc libusb1 schroedinger taglib \
    tiff xcb-util-keysyms samba"
 
 SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
@@ -50,6 +50,7 @@ PACKAGECONFIG[live555] = "--enable-live555,--disable-live555,live555"
 PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
 PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
 PACKAGECONFIG[postproc] = "--enable-postproc,--disable-postproc,libpostproc"
+PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
 
 do_configure_prepend() {
     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
