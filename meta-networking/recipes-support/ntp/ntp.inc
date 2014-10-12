@@ -36,7 +36,9 @@ EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readl
 CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ntp \
+NTP_USER_HOME ?= "/var/lib/ntp"
+USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
+                       --no-create-home \
                        --shell /bin/false --user-group ntp"
 
 # NB: debug is default-enabled by NTP; keep it default-enabled here.
@@ -56,6 +58,9 @@ do_install_append() {
     install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
     install -d ${D}${bindir}
     install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
+
+    install -m 755 -d ${D}${NTP_USER_HOME}
+    chown ntp:ntp ${D}${NTP_USER_HOME}
 
     # Fix hardcoded paths in scripts
     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
@@ -111,6 +116,7 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
 RSUGGESTS_${PN} = "iana-etc"
 
 FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
+    ${NTP_USER_HOME} \
     ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
 "
 FILES_${PN}-tickadj = "${sbindir}/tickadj"
