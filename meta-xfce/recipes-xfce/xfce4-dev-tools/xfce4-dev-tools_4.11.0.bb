@@ -22,3 +22,5 @@ do_install_append() {
 }
 
 FILES_${PN} += "${datadir}/xfce4/dev-tools/m4macros/*.m4"
+
+RDEPENDS_${PN} = "bash"
