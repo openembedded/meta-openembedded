@@ -1,9 +1,20 @@
 This fixes the numpy import problem in setupext.py using a hard-coded path.
 
-diff --git a/setupext.py b/setupext.py
-index 962cedc..82297c4 100644
---- a/setupext.py
-+++ b/setupext.py
+Index: matplotlib-1.1.0/setupext.py
+===================================================================
+--- matplotlib-1.1.0.orig/setupext.py
++++ matplotlib-1.1.0/setupext.py
+@@ -122,8 +122,8 @@ numpy_inc_dirs = []
+ # matplotlib build options, which can be altered using setup.cfg
+ options = {'display_status': True,
+            'verbose': False,
+-           'provide_pytz': 'auto',
+-           'provide_dateutil': 'auto',
++           'provide_pytz': False,
++           'provide_dateutil': False,
+            'build_agg': True,
+            'build_gtk': 'auto',
+            'build_gtkagg': 'auto',
 @@ -176,10 +176,7 @@ if os.path.exists(setup_cfg):
      except: pass
  

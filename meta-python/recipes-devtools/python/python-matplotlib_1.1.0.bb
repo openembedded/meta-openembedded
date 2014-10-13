@@ -4,11 +4,8 @@ LICENSE = "PSF"
 LIC_FILES_CHKSUM = "file://README.txt;md5=83c5bf8b16a5f99507f2f47a21ae3b81"
 PR = "r1"
 
-DEPENDS += "python-numpy freetype libpng"
-RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng"
-
-PNBLACKLIST[python-matplotlib] = "CONFLICT: 34 files with python-dateutil"
-# e.g. sysroots/qemux86-64/usr/lib/python2.7/site-packages/dateutil/tzwin.pyc
+DEPENDS += "python-numpy freetype libpng python-dateutil python-pytz"
+RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng python-dateutil python-pytz"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/matplotlib/matplotlib-${PV}.tar.gz \
            file://fix_setup.patch \
