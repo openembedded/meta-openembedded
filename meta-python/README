@@ -17,12 +17,12 @@ The meta-python layer depends on:
 
 	URI: git://git.openembedded.org/openembedded-core
 	layers: meta
-	branch: master
+	branch: dizzy
 	revision: HEAD
 
 	URI: git://git.openembedded.org/meta-openembedded
 	layers: meta-oe
-	branch: master
+	branch: dizzy
 	revision: HEAD
 
 Please follow the recommended setup procedures of your OE distribution.
@@ -39,10 +39,10 @@ comments and patch review. It is subscriber only, so please register
 before posting.
 
 Send pull requests to openembedded-devel@lists.openembedded.org with
-'[meta-python]' in the subject.
+'[meta-python][dizzy]' in the subject.
 
 When sending single patches, please use something like: 
-'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
+'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][dizzy][PATCH'
 
 Maintenance
 -------------------------
@@ -50,4 +50,11 @@ Maintenance
 Maintainers:
         Tim "moto-timo" Orling <TicoTimo@gmail.com>
         Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
+
+Dizzy branch maintainers:
+    Otavio Salvador <otavio@ossystems.com.br>
+    Armin Kuster <akuster808@gmail.com>
+
+Prefix email subject with: [dizzy]
+
 

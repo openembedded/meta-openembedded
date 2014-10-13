@@ -2,13 +2,13 @@ This file contains a list of maintainers for the meta-networking layer.
 
 Please submit any patches against meta-networking to the OpenEmbedded
 development mailing list (openembedded-devel@lists.openembedded.org) with
-'[meta-networking]' in the subject.
+'[meta-networking][dizzy]' in the subject.
 
 When sending single patches, please use something like:
 
    git send-email -1 -M \
         --to openembedded-devel@lists.openembedded.org \
-        --subject-prefix=meta-networking][PATCH
+        --subject-prefix=meta-networking][dizzy][PATCH
 
 You may also contact the maintainers directly.
 
@@ -24,6 +24,12 @@ Descriptions of section entries:
 Please keep this list in alphabetical order.
 
 Maintainers List (try to look for most precise areas first)
+
+Dizzy branch maintainers:
+    Otavio Salvador <otavio@ossystems.com.br>
+    Armin Kuster <akuster808@gmail.com>
+
+Prefix email subject with: [dizzy]
 
 COMMON
 M:      Joe MacDonald <joe_macdonald@mentor.com>
