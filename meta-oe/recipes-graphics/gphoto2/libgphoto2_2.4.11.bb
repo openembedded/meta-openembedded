@@ -48,6 +48,7 @@ do_install_append() {
 PACKAGES =+ "libgphotoport libgphoto2-camlibs"
 FILES_libgphoto2-camlibs = "${libdir}/libgphoto2*/*/*.so*"
 RRECOMMENDS_${PN} = "libgphoto2-camlibs"
+RDEPENDS_${PN} = "bash"
 
 FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
 
