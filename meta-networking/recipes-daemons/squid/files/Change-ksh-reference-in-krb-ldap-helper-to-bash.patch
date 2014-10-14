@@ -1,0 +1,29 @@
+From 37da4010f41d936c2c727fc32adab832bdde9bec Mon Sep 17 00:00:00 2001
+Message-Id: <37da4010f41d936c2c727fc32adab832bdde9bec.1382481765.git.Jim.Somerville@windriver.com>
+From: Jim Somerville <Jim.Somerville@windriver.com>
+Date: Tue, 22 Oct 2013 18:39:39 -0400
+Subject: [PATCH 1/1] Change ksh reference in krb ldap helper to bash
+
+Very simple cert_tool script with no ksh specifics.
+Change it to use bash so a package dependency doesn't
+get created to ksh.
+
+Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+---
+ helpers/external_acl/kerberos_ldap_group/cert_tool |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
+index 9f14959..b61be5d 100644
+--- a/helpers/external_acl/kerberos_ldap_group/cert_tool
++++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+@@ -1,4 +1,5 @@
+-#!/bin/ksh
++#!/bin/bash
++# The above was originally ksh
+ #
+ #  -----------------------------------------------------------------------------
+ # 
+-- 
+1.7.4.1
+
