@@ -24,7 +24,7 @@ virtual_gid_maps = static:`grep vmail /etc/passwd | cut -d ":" -f 4`
 
 
 # General stuff here again
-config_directory = /etc/postfix
+#config_directory = /etc/postfix
 sample_directory = /etc/postfix
 queue_directory = /var/spool/postfix
 mail_spool_directory = /var/spool/mail
