@@ -93,6 +93,7 @@ FILES_${PN}-common = " \
     ${datadir}/${BPN}/${VIMDIR}/tools \
 "
 
+RDEPENDS_${PN} = "ncurses-terminfo-base"
 # Recommend that runtime data is installed along with vim
 RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
 
