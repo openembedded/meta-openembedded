@@ -62,7 +62,7 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 --enable-exampledir=${docdir}/quagga/examples/ \
                 --enable-vtysh \
                 --enable-isisd \
-                --enable-watchquagga \
+                ${@base_contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
                 --enable-ospf-te \
                 --enable-opaque-lsa \
                 --enable-ipv6 \
@@ -135,6 +135,7 @@ do_install () {
     # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
         rm -rf ${D}${sysconfdir}/init.d/
+        rm -f ${D}${sysconfdir}/default/watchquagga
     fi
 
     install -d ${D}${systemd_unitdir}/system
@@ -160,7 +161,7 @@ pkg_postinst_${PN} () {
 # Split into a main package and separate per-protocol packages
 PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-babeld ${PN}-bgpd \
                      ${PN}-ripd ${PN}-ripngd ${PN}-isisd \
-                     ${PN}-ospfclient ${PN}-watchquagga"
+                     ${PN}-ospfclient ${@base_contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
 
 RDEPENDS_${PN} += "${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
 
