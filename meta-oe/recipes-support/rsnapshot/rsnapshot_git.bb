@@ -24,11 +24,19 @@ SRCREV = "1047cbb57937c29233388e2fcd847fecd3babe74"
 PV = "1.3.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=git \
+           file://configure-fix-cmd_rsync.patch \
           "
 
 S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "logger"
-PACKAGECONFIG[logger] = "--with-logger=${bindir}/logger,--without-logger,,util-linux"
+# Fix rsnapshot.conf.default:
+# don't inject the host path into target configs.
+EXTRA_OECONF += "--without-cp \
+                 --without-rm \
+                 --without-du \
+                 --without-ssh \
+                 --without-logger \
+                 --without-rsync \
+                "
