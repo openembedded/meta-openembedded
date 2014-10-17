@@ -1,7 +1,19 @@
 SUMMARY = "Lightweight crypto and SSL/TLS library"
-DESCRIPTION = "PolarSSL is a fork of the abandonned project XySSL. It \
-is a lean crypto library providing SSL and TLS support \
-in your programs."
+DESCRIPTION = "PolarSSL is a lean open source crypto library         \
+for providing SSL and TLS support in your programs. It offers        \
+an intuitive API and documented header files, so you can actually    \
+understand what the code does. It features:                          \
+                                                                     \
+ - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
+   Camellia and XTEA                                                 \
+ - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
+ - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
+ - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
+   ECDSA and ECDH                                                    \
+ - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
+ - Abstraction layers for ciphers, hashes, public key operations,    \
+   platform abstraction and threading                                \
+"
 
 HOMEPAGE = "https://polarssl.org"
 BUGTRACKER = "https://github.com/polarssl/polarssl/issues"
