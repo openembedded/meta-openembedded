@@ -4,11 +4,8 @@ After=network.target
 ConditionPathExists=@SYSCONFDIR@/radvd.conf
 
 [Service]
-Type=forking
-PIDFile=/var/run/radvd/radvd.pid
 EnvironmentFile=-@SYSCONFDIR@/default/radvd
-ExecStartPre=@BASE_BINDIR@/mkdir -p /var/run/radvd
-ExecStart=@SBINDIR@/radvd $OPTIONS
+ExecStart=@SBINDIR@/radvd -n $OPTIONS
 
 [Install]
 WantedBy=multi-user.target

@@ -17,7 +17,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
 SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
            file://radvd.init \
            file://radvd.service \
-           file://volatiles.03_radvd"
+           file://volatiles.03_radvd \
+           file://radvd.default"
 
 inherit autotools update-rc.d useradd pkgconfig systemd
 
@@ -43,6 +44,9 @@ do_install_append () {
     sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' \
            -e 's#@SBINDIR@#${sbindir}#g' \
            -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
+
+    # Install default environment file
+    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
 
     # Documentation
     for i in radvd.conf.example README; do \
