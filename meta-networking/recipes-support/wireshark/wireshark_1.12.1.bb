@@ -35,6 +35,7 @@ PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
 PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
 PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
 PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
+PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
 
 EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
 
