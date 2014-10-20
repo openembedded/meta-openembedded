@@ -1,0 +1,128 @@
+From d789ef88a8806887bf1160bfa5d3d9eb47b6216c Mon Sep 17 00:00:00 2001
+From: "Marius B. Kotsbak" <marius@kotsbak.com>
+Date: Mon, 11 Aug 2014 22:11:52 +0200
+Subject: [PATCH] Add support for AP mode setting for wifi sharing.
+
+Upstream-Status: Pending [1]
+
+[1] https://bugzilla.gnome.org/show_bug.cgi?id=734589
+---
+ src/connection-editor/ce-page-wifi.ui |  3 +++
+ src/connection-editor/page-wifi.c     | 46 ++++++++++++++++++++---------------
+ 2 files changed, 30 insertions(+), 19 deletions(-)
+
+diff --git a/src/connection-editor/ce-page-wifi.ui b/src/connection-editor/ce-page-wifi.ui
+index e2e544b..b8b27c1 100644
+--- a/src/connection-editor/ce-page-wifi.ui
++++ b/src/connection-editor/ce-page-wifi.ui
+@@ -50,6 +50,9 @@
+       <row>
+         <col id="0" translatable="yes">Ad-hoc</col>
+       </row>
++      <row>
++        <col id="0" translatable="yes">Shared AP</col>
++      </row>
+     </data>
+   </object>
+   <object class="GtkTable" id="WifiPage">
+diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
+index d0a5617..17db2fa 100644
+--- a/src/connection-editor/page-wifi.c
++++ b/src/connection-editor/page-wifi.c
+@@ -59,6 +59,12 @@ typedef struct {
+ 	gboolean disposed;
+ } CEPageWifiPrivate;
+ 
++enum {
++	WIFI_MODE_INFRASTRUCTURE,
++	WIFI_MODE_ADHOC,
++	WIFI_MODE_AP
++};
++
+ static void
+ wifi_private_init (CEPageWifi *self)
+ {
+@@ -244,22 +250,16 @@ mode_combo_changed_cb (GtkComboBox *combo,
+ 	CEPageWifiPrivate *priv = CE_PAGE_WIFI_GET_PRIVATE (self);
+ 	CEPage *parent = CE_PAGE (self);
+ 	GtkWidget *widget_band_label, *widget_chan_label, *widget_bssid_label;
+-	gboolean adhoc;
++	gint wifi_mode;
++	gboolean shared_wifi;
+ 
+- 	switch (gtk_combo_box_get_active (GTK_COMBO_BOX (combo))) {
+- 	case 1: /* adhoc */
+-		adhoc = TRUE;
+- 		break;
+- 	default: /* infrastructure */
+-		adhoc = FALSE;
+- 		break;
+- 	}
++	wifi_mode = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
+ 
+ 	widget_band_label = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_band_label"));
+ 	widget_chan_label = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_channel_label"));
+ 	widget_bssid_label = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_bssid_label"));
+ 
+-	if (adhoc) {
++	if (WIFI_MODE_ADHOC == wifi_mode || WIFI_MODE_AP == wifi_mode) {
+ 		/* For Ad-Hoc show Band and Channel */
+ 		gtk_widget_show (widget_band_label);
+ 		gtk_widget_show (GTK_WIDGET (priv->band));
+@@ -283,12 +283,13 @@ mode_combo_changed_cb (GtkComboBox *combo,
+ 		gtk_widget_show (GTK_WIDGET (priv->bssid));
+ 	}
+ 
+-	gtk_widget_set_sensitive (widget_band_label, adhoc);
+-	gtk_widget_set_sensitive (GTK_WIDGET (priv->band), adhoc);
+-	gtk_widget_set_sensitive (widget_chan_label, adhoc);
+-	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), adhoc);
+-	gtk_widget_set_sensitive (widget_bssid_label, !adhoc);
+-	gtk_widget_set_sensitive (GTK_WIDGET (priv->bssid), !adhoc);
++	shared_wifi = wifi_mode != WIFI_MODE_INFRASTRUCTURE;
++	gtk_widget_set_sensitive (widget_band_label, shared_wifi);
++	gtk_widget_set_sensitive (GTK_WIDGET (priv->band), shared_wifi);
++	gtk_widget_set_sensitive (widget_chan_label, shared_wifi);
++	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), shared_wifi);
++	gtk_widget_set_sensitive (widget_bssid_label, !shared_wifi);
++	gtk_widget_set_sensitive (GTK_WIDGET (priv->bssid), !shared_wifi);
+ 
+ 	ce_page_changed (CE_PAGE (self));
+ }
+@@ -348,9 +349,12 @@ populate_ui (CEPageWifi *self)
+ 		g_byte_array_free (ssid, TRUE);
+ 
+ 	/* Default to Infrastructure */
+-	gtk_combo_box_set_active (priv->mode, 0);
++	gtk_combo_box_set_active (priv->mode, WIFI_MODE_INFRASTRUCTURE);
+ 	if (mode && !strcmp (mode, "adhoc"))
+-		gtk_combo_box_set_active (priv->mode, 1);
++		gtk_combo_box_set_active (priv->mode, WIFI_MODE_ADHOC);
++	else if (mode && !strcmp (mode, "ap"))
++		gtk_combo_box_set_active (priv->mode, WIFI_MODE_AP);
++
+ 	mode_combo_changed_cb (priv->mode, self);
+ 	g_signal_connect (priv->mode, "changed", G_CALLBACK (mode_combo_changed_cb), self);
+ 	g_free (mode);
+@@ -510,14 +514,18 @@ ui_to_setting (CEPageWifi *self)
+ 	GByteArray *bssid = NULL;
+ 	GByteArray *device_mac = NULL;
+ 	GByteArray *cloned_mac = NULL;
++	gint wifi_mode;
+ 	const char *mode;
+ 	const char *band;
+ 	GtkWidget *entry;
+ 
+ 	ssid = ce_page_wifi_get_ssid (self);
+ 
+-	if (gtk_combo_box_get_active (priv->mode) == 1)
++	wifi_mode = gtk_combo_box_get_active (priv->mode);
++	if (WIFI_MODE_ADHOC == wifi_mode)
+ 		mode = "adhoc";
++	else if (WIFI_MODE_AP == wifi_mode)
++		mode = "ap";
+ 	else
+ 		mode = "infrastructure";
+ 
+-- 
+1.9.1

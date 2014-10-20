@@ -1,0 +1,48 @@
+From 7343b16113e378d04e40012abfe5bd96ca776968 Mon Sep 17 00:00:00 2001
+From: "Marius B. Kotsbak" <marius@kotsbak.com>
+Date: Tue, 12 Aug 2014 11:15:20 +0200
+Subject: [PATCH 2/2] Use AP mode for network sharing if device supports it.
+
+Logic taken from similar functionality in gnome-control-center.
+
+Upstream-Status: Backport [1]
+
+[1] https://bug734589.bugzilla-attachments.gnome.org/attachment.cgi?id=283165
+---
+ src/libnm-gtk/nm-wifi-dialog.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/src/libnm-gtk/nm-wifi-dialog.c b/src/libnm-gtk/nm-wifi-dialog.c
+index 3532caa..ca72c96 100644
+--- a/src/libnm-gtk/nm-wifi-dialog.c
++++ b/src/libnm-gtk/nm-wifi-dialog.c
+@@ -1226,10 +1226,26 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
+ 		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
+ 		g_object_set (s_wireless, NM_SETTING_WIRELESS_SSID, validate_dialog_ssid (self), NULL);
+ 
++		/* Fill device */
++		if (device) {
++			combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_combo"));
++			gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
++			gtk_tree_model_get (priv->device_model, &iter, D_DEV_COLUMN, device, -1);
++			g_object_unref (*device);
++		}
++
+ 		if (priv->adhoc_create) {
+ 			NMSettingIP4Config *s_ip4;
+ 
+-			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, "adhoc", NULL);
++			const char *mode;
++
++			/* Use real AP mode if the device supports it */
++			if (device && nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (*device)) & NM_WIFI_DEVICE_CAP_AP)
++				mode = NM_SETTING_WIRELESS_MODE_AP;
++			else
++				mode = NM_SETTING_WIRELESS_MODE_ADHOC;
++
++			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, mode, NULL);
+ 
+ 			s_ip4 = (NMSettingIP4Config *) nm_setting_ip4_config_new ();
+ 			g_object_set (s_ip4, NM_SETTING_IP4_CONFIG_METHOD, NM_SETTING_IP4_CONFIG_METHOD_SHARED, NULL);
+-- 
+1.8.3.1

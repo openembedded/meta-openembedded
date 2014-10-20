@@ -10,6 +10,8 @@ GNOME_COMPRESS_TYPE = "xz"
 
 SRC_URI += " \
     file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
+    file://0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \
+    file://0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch \
 "
 SRC_URI[archive.md5sum] = "5148348c139229c6a753f815f3f11e1c"
 SRC_URI[archive.sha256sum] = "46fee9a1e667d1826e6a94bb6bd2e6bdbde535fc995e534542f5f7e8b8dae0cb"
