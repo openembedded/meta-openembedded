@@ -30,6 +30,7 @@ EXTRA_OECONF = " \
     --with-dhclient=${base_sbindir}/dhclient \
     --with-iptables=${sbindir}/iptables \
     --with-tests \
+    --with-dnsmasq=${bindir}/dnsmasq \
 "
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
@@ -80,7 +81,7 @@ FILES_${PN} += " \
     ${systemd_unitdir}/system/NetworkManager-wait-online.service \
 "
 
-RRECOMMENDS_${PN} += "iptables"
+RRECOMMENDS_${PN} += "iptables dnsmasq"
 RCONFLICTS_${PN} = "connman"
 RDEPENDS_${PN} = " \
     wpa-supplicant \
