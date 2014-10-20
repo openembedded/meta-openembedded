@@ -35,6 +35,11 @@ EXTRA_OECONF = "--disable-embedded-perl \
                 --with-defaults \
                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
 
+CACHED_CONFIGUREVARS = " \
+    ac_cv_header_valgrind_valgrind_h=no \
+    ac_cv_header_valgrind_memcheck_h=no \
+"
+
 do_configure_prepend() {
     export PERLPROG="${bindir}/env perl"
 }
