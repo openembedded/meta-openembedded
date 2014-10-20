@@ -20,6 +20,9 @@ test -x $DAEMON -a -r /etc/ntp.conf || exit 0
 # rcS contains TICKADJ
 test -r /etc/default/rcS && . /etc/default/rcS
 
+# Source function library.
+. /etc/init.d/functions
+
 # Functions to do individual actions
 settick(){
   	# If TICKADJ is set we *must* adjust it before we start, because the
@@ -68,8 +71,12 @@ case "$1" in
 	stopdaemon
 	startdaemon
 	;;
+  status)
+	status /usr/sbin/ntpd;
+	exit $?
+	;;
   *)
-	echo "Usage: ntpd { start | stop | restart | reload }" >&2
+	echo "Usage: ntpd { start | stop | status | restart | reload }" >&2
 	exit 1
 	;;
 esac
