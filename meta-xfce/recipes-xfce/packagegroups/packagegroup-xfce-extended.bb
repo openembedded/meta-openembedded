@@ -36,7 +36,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-fsguard-plugin \
     xfce4-battery-plugin \
     xfce4-mount-plugin \
-    xfce4-brightness-plugin \
+    xfce4-powermanager-plugin \
     xfce4-closebutton-plugin \
     xfce4-equake-plugin \
     xfce4-notes-plugin \
