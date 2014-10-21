@@ -1,4 +1,4 @@
-From cbd9ac1d0769338411297d2cb97f1608c17c8ae9 Mon Sep 17 00:00:00 2001
+From 27f5ca9f1e212e5ab00cde0bfc91282fc7ff5e16 Mon Sep 17 00:00:00 2001
 From: Paul Barker <paul@paulbarker.me.uk>
 Date: Mon, 18 Aug 2014 12:18:16 +0000
 Subject: [PATCH] Match paths with busybox
@@ -8,11 +8,16 @@ update-alternatives, the paths of the links installed by toybox should match
 those installed by busybox. This is accomplished by changing the flags of a few
 tools within toybox.
 
+v2:
+    - Forward ported from v0.4.9 to v0.5.0
+    - Move new 'mount' command
+
 Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 
 Upstream-status: Inappropriate
     (specific to update-alternatives use in OpenEmbedded)
 ---
+ toys/lsb/mount.c        | 2 +-
  toys/lsb/pidof.c        | 2 +-
  toys/other/chvt.c       | 2 +-
  toys/other/ifconfig.c   | 2 +-
@@ -37,8 +42,21 @@ Upstream-status: Inappropriate
  toys/posix/tee.c        | 2 +-
  toys/posix/uniq.c       | 2 +-
  toys/posix/who.c        | 2 +-
- 24 files changed, 28 insertions(+), 28 deletions(-)
+ 25 files changed, 29 insertions(+), 29 deletions(-)
 
+diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
+index 01f5c32..65a5aa2 100644
+--- a/toys/lsb/mount.c
++++ b/toys/lsb/mount.c
+@@ -6,7 +6,7 @@
+  * Note: -hV is bad spec, haven't implemented -FsLU yet
+  * no mtab (/proc/mounts does it) so -n is NOP.
+ 
+-USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
++USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STAYROOT))
+ USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
+ 
+ config MOUNT
 diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
 index 51b742f..a8fc8ef 100644
 --- a/toys/lsb/pidof.c
@@ -66,7 +84,7 @@ index 6544265..a93327f 100644
  config CHVT
    bool "chvt"
 diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
-index a84e26a..66c7179 100644
+index f5d4215..5e7c54c 100644
 --- a/toys/other/ifconfig.c
 +++ b/toys/other/ifconfig.c
 @@ -6,7 +6,7 @@
@@ -226,10 +244,10 @@ index 8e57ca1..0c6c640 100644
  config SYSCTL
    bool "sysctl"
 diff --git a/toys/posix/cut.c b/toys/posix/cut.c
-index 38f136e..87a1f0d 100644
+index 7f10c5e..1ab3ce8 100644
 --- a/toys/posix/cut.c
 +++ b/toys/posix/cut.c
-@@ -4,7 +4,7 @@
+@@ -5,7 +5,7 @@
   *
   * http://pubs.opengroup.org/onlinepubs/9699919799/utilities/cut.html 
  
@@ -265,7 +283,7 @@ index e8517d4..3ac4373 100644
  config HEAD
    bool "head"
 diff --git a/toys/posix/id.c b/toys/posix/id.c
-index a03a097..cfe0b59 100644
+index b4d9c00..df79419 100644
 --- a/toys/posix/id.c
 +++ b/toys/posix/id.c
 @@ -6,10 +6,10 @@
@@ -274,11 +292,11 @@ index a03a097..cfe0b59 100644
  
 -USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_BIN))
 +USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
- USE_ID_GROUPS(OLDTOY(groups, id, NULL, TOYFLAG_USR|TOYFLAG_BIN))
--USE_ID_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_BIN))
--USE_ID_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_BIN))
-+USE_ID_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
-+USE_ID_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
+ USE_GROUPS(OLDTOY(groups, id, NULL, TOYFLAG_USR|TOYFLAG_BIN))
+-USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_BIN))
+-USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_BIN))
++USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
++USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
  
  config ID
    bool "id"
@@ -335,7 +353,7 @@ index 0388510..5574088 100644
  config TEE
    bool "tee"
 diff --git a/toys/posix/uniq.c b/toys/posix/uniq.c
-index bd41d4a..374ceab 100644
+index 3cfdb94..c127cfe 100644
 --- a/toys/posix/uniq.c
 +++ b/toys/posix/uniq.c
 @@ -4,7 +4,7 @@
@@ -361,5 +379,5 @@ index 2c8a2e6..d5cd001 100644
  config WHO
    bool "who"
 -- 
-2.0.4
+2.1.2
 

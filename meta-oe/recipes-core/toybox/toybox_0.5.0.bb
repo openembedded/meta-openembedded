@@ -3,11 +3,11 @@ HOMEPAGE = "http://www.landley.net/toybox/"
 
 SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.bz2 \
     file://0001-Match-paths-with-busybox.patch"
-SRC_URI[md5sum] = "a8f1022175689defec51cf5a71c41326"
-SRC_URI[sha256sum] = "e6dc9052826a3bdae1923e3301c9e3542e890af5ed66534052943f8412255bff"
+SRC_URI[md5sum] = "2cb6e8b34134038d86048e117f77765f"
+SRC_URI[sha256sum] = "2718b42154be041435df48d5b5140f4e307767c36b1017e0c8d0da7f75b327a7"
 
 LICENSE = "BSD-0-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=57cc240a6204b2ea8c68450d42f9d33f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
 
 SECTION = "base"
 
