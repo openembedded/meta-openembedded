@@ -10,7 +10,7 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
            file://disable_acl_header_check.patch;patchdir=.. \
            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
 "
-SRCREV = "v7-4-373"
+SRCREV = "v7-4-481"
 
 S = "${WORKDIR}/${BPN}/src"
 
