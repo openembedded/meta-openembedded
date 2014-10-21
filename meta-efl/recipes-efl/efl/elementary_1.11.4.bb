@@ -8,8 +8,8 @@ SRC_URI = "\
 # these paths aren't passed in -native build
 SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
 
-SRC_URI[md5sum] = "f6939a24ffc50c2e4eac7ed38663f0f3"
-SRC_URI[sha256sum] = "18f7e8fb63fcfd0d5abd213943c0c356b1270a94e20d44b8e6047b1cd0e53010"
+SRC_URI[md5sum] = "531f5e2a0ccd95235a5d30221ffa7003"
+SRC_URI[sha256sum] = "f3ff9d14ccb8621b93f1fe08522bdf31d54382d7e2ab1bf72359b4e65c9d39e4"
 
 # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
 # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
