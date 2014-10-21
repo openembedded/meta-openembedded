@@ -21,6 +21,9 @@ SRC_URI[sha256sum] = "9ba118e4aba04c430bc4d5efb09b31a0277e101c9fd2ef3b80b9c684d7
 # 0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
 UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[valgrind] = "--with-valgrind=yes, --with-valgrind=no, valgrind"
+
 EXTRA_OECONF = "\
     --enable-wide-getaddrinfo \
     --disable-versioned-paths \
