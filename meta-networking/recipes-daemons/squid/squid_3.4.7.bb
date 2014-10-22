@@ -35,6 +35,8 @@ inherit autotools useradd ptest
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
 EXTRA_OECONF += "--with-default-user=squid"
 
 TESTDIR = "test-suite"
