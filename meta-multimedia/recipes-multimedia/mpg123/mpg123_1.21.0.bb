@@ -36,8 +36,8 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
-SRC_URI[md5sum] = "87731f1437cfd8c50537a606d81130e4"
-SRC_URI[sha256sum] = "869024e01d7cb4dae1aea2f2a10420d4be7e1ac02a9c434d06d727599169b01b"
+SRC_URI[md5sum] = "13a9df5d4e7aa110e4ae27cf30128ce9"
+SRC_URI[sha256sum] = "3ad197f77c9ffdf3601e1c3183ae0709ccb3c3de68309527ce9375fcfb15dcba"
 
 inherit autotools pkgconfig
 
