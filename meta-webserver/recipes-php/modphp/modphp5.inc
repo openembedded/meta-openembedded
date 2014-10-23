@@ -9,6 +9,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
            file://pthread-check-threads-m4.patch \
            file://70_mod_php5.conf \
            file://0001-using-pkgconfig-to-check-libxml.patch \
+           file://php-CVE-2014-5120.patch \
 "
 
 S = "${WORKDIR}/php-${PV}"
