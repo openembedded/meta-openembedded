@@ -3,7 +3,8 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 DEPENDS = "sysfsutils perl"
-RDEPENDS_${PN} += "python python-io python-lang python-subprocess python-resource"
+RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource"
+RDEPENDS_${PN}-tests += "bash"
 
 PV = "2.18"
 PE = "1"
