@@ -71,6 +71,7 @@ do_install_append() {
 }
 
 FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+RDEPENDS_${PN} += "gawk"
 
 # This overcomes the syslog-ng rdepends on syslog-ng-dev QA Error
 PACKAGES =+ "${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
