@@ -8,5 +8,5 @@ inherit autotools
 
 EXTRA_OECONF = " --disable-doc "
 
-SRC_URI[md5sum] = "53cfc52a60a156763c425572e5179273"
-SRC_URI[sha256sum] = "84f1bba6cfef1df87f774fceaefc8e73c4cda32e8f6700b224ad0acb5511ba2c"
+SRC_URI[md5sum] = "7f0fdb3ff91d638f5e45ed7536f7eb67"
+SRC_URI[sha256sum] = "7c414acd520c4e4dd7267952f72d738ff50321a7869af4d75c65aefad44f1395"
