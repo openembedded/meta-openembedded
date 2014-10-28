@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=forking
 PIDFile=/run/ntpd.pid
-ExecStart=/usr/sbin/ntpd -p /run/ntpd.pid -g
+ExecStart=/usr/sbin/ntpd -u ntp:ntp -p /run/ntpd.pid -g
 
 [Install]
 WantedBy=multi-user.target
