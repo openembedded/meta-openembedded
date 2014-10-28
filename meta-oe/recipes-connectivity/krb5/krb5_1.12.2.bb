@@ -53,6 +53,9 @@ FILES_${PN} += "${datadir}/gnats"
 FILES_${PN}-doc += "${datadir}/examples"
 FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
 
+# As this recipe doesn't inherit update-rc.d, we need to add this dependency here
+RDEPENDS_${PN} += "initscripts-functions"
+
 krb5_do_unpack() {
     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
     tar xzf ${WORKDIR}/${BP}.tar.gz -C ${WORKDIR}/
