@@ -19,7 +19,7 @@ do_configure_prepend() {
     echo 'AM_PROG_AS' >> ${S}/configure.ac 
 }
 
-PACKAGES =+ "lib${PN}"
-FILES_lib${PN} = "${libdir}/lib*.so.*"
+PACKAGES =+ "lib${BPN}"
+FILES_lib${BPN} = "${libdir}/lib*.so.*"
 
 # rename binary in /bin and use u-a tpo choose between different precision implementations?
