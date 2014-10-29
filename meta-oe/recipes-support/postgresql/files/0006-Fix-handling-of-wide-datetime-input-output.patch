@@ -1,0 +1,465 @@
+From f416622be81d1320417bbc7892fd562cae0dba72 Mon Sep 17 00:00:00 2001
+From: Noah Misch <noah@leadboat.com>
+Date: Mon, 17 Feb 2014 09:33:31 -0500
+Subject: [PATCH] Fix handling of wide datetime input/output.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+commit f416622be81d1320417bbc7892fd562cae0dba72 REL9_2_STABLE
+
+Many server functions use the MAXDATELEN constant to size a buffer for
+parsing or displaying a datetime value.  It was much too small for the
+longest possible interval output and slightly too small for certain
+valid timestamp input, particularly input with a long timezone name.
+The long input was rejected needlessly; the long output caused
+interval_out() to overrun its buffer.  ECPG's pgtypes library has a copy
+of the vulnerable functions, which bore the same vulnerabilities along
+with some of its own.  In contrast to the server, certain long inputs
+caused stack overflow rather than failing cleanly.  Back-patch to 8.4
+(all supported versions).
+
+Reported by Daniel Schüssler, reviewed by Tom Lane.
+
+Security: CVE-2014-0063
+
+
+Upstream-Status: Backport
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ src/include/utils/datetime.h                       |   17 +++++---
+ src/interfaces/ecpg/pgtypeslib/datetime.c          |    4 +-
+ src/interfaces/ecpg/pgtypeslib/dt.h                |   17 +++++---
+ src/interfaces/ecpg/pgtypeslib/dt_common.c         |   44 ++++++++++++++------
+ src/interfaces/ecpg/pgtypeslib/interval.c          |    2 +-
+ src/interfaces/ecpg/pgtypeslib/timestamp.c         |    2 +-
+ .../ecpg/test/expected/pgtypeslib-dt_test2.c       |   22 +++++++---
+ .../ecpg/test/expected/pgtypeslib-dt_test2.stdout  |   19 ++++++++
+ src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc   |   10 ++++
+ src/test/regress/expected/interval.out             |    7 +++
+ src/test/regress/sql/interval.sql                  |    2 +
+ 11 files changed, 111 insertions(+), 35 deletions(-)
+
+diff --git a/src/include/utils/datetime.h b/src/include/utils/datetime.h
+index d73cc8d..4b805b6 100644
+--- a/src/include/utils/datetime.h
++++ b/src/include/utils/datetime.h
+@@ -188,12 +188,17 @@ struct tzEntry;
+ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
+ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_ALL_SECS_M)
+ 
+-#define MAXDATELEN		63		/* maximum possible length of an input date
+-								 * string (not counting tr. null) */
+-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
+-								 * string */
+-#define TOKMAXLEN		10		/* only this many chars are stored in
+-								 * datetktbl */
++/*
++ * Working buffer size for input and output of interval, timestamp, etc.
++ * Inputs that need more working space will be rejected early.  Longer outputs
++ * will overrun buffers, so this must suffice for all possible output.  As of
++ * this writing, interval_out() needs the most space at ~90 bytes.
++ */
++#define MAXDATELEN		128
++/* maximum possible number of fields in a date string */
++#define MAXDATEFIELDS	25
++/* only this many chars are stored in datetktbl */
++#define TOKMAXLEN		10
+ 
+ /* keep this struct small; it gets used a lot */
+ typedef struct
+diff --git a/src/interfaces/ecpg/pgtypeslib/datetime.c b/src/interfaces/ecpg/pgtypeslib/datetime.c
+index 823626f..4adcd1e 100644
+--- a/src/interfaces/ecpg/pgtypeslib/datetime.c
++++ b/src/interfaces/ecpg/pgtypeslib/datetime.c
+@@ -61,14 +61,14 @@ PGTYPESdate_from_asc(char *str, char **endptr)
+ 	int			nf;
+ 	char	   *field[MAXDATEFIELDS];
+ 	int			ftype[MAXDATEFIELDS];
+-	char		lowstr[MAXDATELEN + 1];
++	char		lowstr[MAXDATELEN + MAXDATEFIELDS];
+ 	char	   *realptr;
+ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
+ 
+ 	bool		EuroDates = FALSE;
+ 
+ 	errno = 0;
+-	if (strlen(str) >= sizeof(lowstr))
++	if (strlen(str) > MAXDATELEN)
+ 	{
+ 		errno = PGTYPES_DATE_BAD_DATE;
+ 		return INT_MIN;
+diff --git a/src/interfaces/ecpg/pgtypeslib/dt.h b/src/interfaces/ecpg/pgtypeslib/dt.h
+index dfe6f9e..2780593 100644
+--- a/src/interfaces/ecpg/pgtypeslib/dt.h
++++ b/src/interfaces/ecpg/pgtypeslib/dt.h
+@@ -192,12 +192,17 @@ typedef double fsec_t;
+ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
+ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_M(SECOND))
+ 
+-#define MAXDATELEN		63		/* maximum possible length of an input date
+-								 * string (not counting tr. null) */
+-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
+-								 * string */
+-#define TOKMAXLEN		10		/* only this many chars are stored in
+-								 * datetktbl */
++/*
++ * Working buffer size for input and output of interval, timestamp, etc.
++ * Inputs that need more working space will be rejected early.  Longer outputs
++ * will overrun buffers, so this must suffice for all possible output.  As of
++ * this writing, PGTYPESinterval_to_asc() needs the most space at ~90 bytes.
++ */
++#define MAXDATELEN		128
++/* maximum possible number of fields in a date string */
++#define MAXDATEFIELDS	25
++/* only this many chars are stored in datetktbl */
++#define TOKMAXLEN		10
+ 
+ /* keep this struct small; it gets used a lot */
+ typedef struct
+diff --git a/src/interfaces/ecpg/pgtypeslib/dt_common.c b/src/interfaces/ecpg/pgtypeslib/dt_common.c
+index 6b89e4a..18178dd 100644
+--- a/src/interfaces/ecpg/pgtypeslib/dt_common.c
++++ b/src/interfaces/ecpg/pgtypeslib/dt_common.c
+@@ -1171,15 +1171,22 @@ DecodeNumberField(int len, char *str, int fmask,
+ 	if ((cp = strchr(str, '.')) != NULL)
+ 	{
+ #ifdef HAVE_INT64_TIMESTAMP
+-		char		fstr[MAXDATELEN + 1];
++		char		fstr[7];
++		int			i;
++
++		cp++;
+ 
+ 		/*
+ 		 * OK, we have at most six digits to care about. Let's construct a
+-		 * string and then do the conversion to an integer.
++		 * string with those digits, zero-padded on the right, and then do
++		 * the conversion to an integer.
++		 *
++		 * XXX This truncates the seventh digit, unlike rounding it as do
++		 * the backend and the !HAVE_INT64_TIMESTAMP case.
+ 		 */
+-		strcpy(fstr, (cp + 1));
+-		strcpy(fstr + strlen(fstr), "000000");
+-		*(fstr + 6) = '\0';
++		for (i = 0; i < 6; i++)
++			fstr[i] = *cp != '\0' ? *cp++ : '0';
++		fstr[i] = '\0';
+ 		*fsec = strtol(fstr, NULL, 10);
+ #else
+ 		*fsec = strtod(cp, NULL);
+@@ -1531,15 +1538,22 @@ DecodeTime(char *str, int *tmask, struct tm * tm, fsec_t *fsec)
+ 		else if (*cp == '.')
+ 		{
+ #ifdef HAVE_INT64_TIMESTAMP
+-			char		fstr[MAXDATELEN + 1];
++			char		fstr[7];
++			int			i;
++
++			cp++;
+ 
+ 			/*
+-			 * OK, we have at most six digits to work with. Let's construct a
+-			 * string and then do the conversion to an integer.
++			 * OK, we have at most six digits to care about. Let's construct a
++			 * string with those digits, zero-padded on the right, and then do
++			 * the conversion to an integer.
++			 *
++			 * XXX This truncates the seventh digit, unlike rounding it as do
++			 * the backend and the !HAVE_INT64_TIMESTAMP case.
+ 			 */
+-			strncpy(fstr, (cp + 1), 7);
+-			strcpy(fstr + strlen(fstr), "000000");
+-			*(fstr + 6) = '\0';
++			for (i = 0; i < 6; i++)
++				fstr[i] = *cp != '\0' ? *cp++ : '0';
++			fstr[i] = '\0';
+ 			*fsec = strtol(fstr, &cp, 10);
+ #else
+ 			str = cp;
+@@ -1665,6 +1679,9 @@ DecodePosixTimezone(char *str, int *tzp)
+  *	DTK_NUMBER can hold date fields (yy.ddd)
+  *	DTK_STRING can hold months (January) and time zones (PST)
+  *	DTK_DATE can hold Posix time zones (GMT-8)
++ *
++ * The "lowstr" work buffer must have at least strlen(timestr) + MAXDATEFIELDS
++ * bytes of space.  On output, field[] entries will point into it.
+  */
+ int
+ ParseDateTime(char *timestr, char *lowstr,
+@@ -1677,7 +1694,10 @@ ParseDateTime(char *timestr, char *lowstr,
+ 	/* outer loop through fields */
+ 	while (*(*endstr) != '\0')
+ 	{
++		/* Record start of current field */
+ 		field[nf] = lp;
++		if (nf >= MAXDATEFIELDS)
++			return -1;
+ 
+ 		/* leading digit? then date or time */
+ 		if (isdigit((unsigned char) *(*endstr)))
+@@ -1818,8 +1838,6 @@ ParseDateTime(char *timestr, char *lowstr,
+ 		/* force in a delimiter after each field */
+ 		*lp++ = '\0';
+ 		nf++;
+-		if (nf > MAXDATEFIELDS)
+-			return -1;
+ 	}
+ 
+ 	*numfields = nf;
+diff --git a/src/interfaces/ecpg/pgtypeslib/interval.c b/src/interfaces/ecpg/pgtypeslib/interval.c
+index bcc10ee..fdd8f49 100644
+--- a/src/interfaces/ecpg/pgtypeslib/interval.c
++++ b/src/interfaces/ecpg/pgtypeslib/interval.c
+@@ -1092,7 +1092,7 @@ PGTYPESinterval_from_asc(char *str, char **endptr)
+ 	tm->tm_sec = 0;
+ 	fsec = 0;
+ 
+-	if (strlen(str) >= sizeof(lowstr))
++	if (strlen(str) > MAXDATELEN)
+ 	{
+ 		errno = PGTYPES_INTVL_BAD_INTERVAL;
+ 		return NULL;
+diff --git a/src/interfaces/ecpg/pgtypeslib/timestamp.c b/src/interfaces/ecpg/pgtypeslib/timestamp.c
+index 7d3f7c8..4f91e63 100644
+--- a/src/interfaces/ecpg/pgtypeslib/timestamp.c
++++ b/src/interfaces/ecpg/pgtypeslib/timestamp.c
+@@ -297,7 +297,7 @@ PGTYPEStimestamp_from_asc(char *str, char **endptr)
+ 	char	   *realptr;
+ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
+ 
+-	if (strlen(str) >= sizeof(lowstr))
++	if (strlen(str) > MAXDATELEN)
+ 	{
+ 		errno = PGTYPES_TS_BAD_TIMESTAMP;
+ 		return (noresult);
+diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
+index d3ebb0e..0ba1936 100644
+--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
+@@ -45,6 +45,15 @@ char *dates[] = { "19990108foobar",
+ 				  "1999.008",
+ 				  "J2451187",
+ 				  "January 8, 99 BC",
++				  /*
++				   * Maximize space usage in ParseDateTime() with 25
++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
++				   */
++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++				  /* 26 fields */
++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ 				  NULL };
+ 
+ /* do not conflict with libc "times" symbol */
+@@ -52,6 +61,7 @@ static char *times[] = { "0:04",
+ 				  "1:59 PDT",
+ 				  "13:24:40 -8:00",
+ 				  "13:24:40.495+3",
++				  "13:24:40.123456789+3",
+ 				  NULL };
+ 
+ char *intervals[] = { "1 minute",
+@@ -73,22 +83,22 @@ main(void)
+ 		 
+ 		 
+ 	
+-#line 52 "dt_test2.pgc"
++#line 62 "dt_test2.pgc"
+  date date1 ;
+  
+-#line 53 "dt_test2.pgc"
++#line 63 "dt_test2.pgc"
+  timestamp ts1 , ts2 ;
+  
+-#line 54 "dt_test2.pgc"
++#line 64 "dt_test2.pgc"
+  char * text ;
+  
+-#line 55 "dt_test2.pgc"
++#line 65 "dt_test2.pgc"
+  interval * i1 ;
+  
+-#line 56 "dt_test2.pgc"
++#line 66 "dt_test2.pgc"
+  date * dc ;
+ /* exec sql end declare section */
+-#line 57 "dt_test2.pgc"
++#line 67 "dt_test2.pgc"
+ 
+ 
+ 	int i, j;
+diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
+index 24e9d26..9a4587b 100644
+--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
+@@ -8,85 +8,104 @@ TS[3,0]: 1999-01-08 00:04:00
+ TS[3,1]: 1999-01-08 01:59:00
+ TS[3,2]: 1999-01-08 13:24:40
+ TS[3,3]: 1999-01-08 13:24:40.495
++TS[3,4]: 1999-01-08 13:24:40.123456
+ Date[4]: 1999-01-08 (N - F)
+ TS[4,0]: 1999-01-08 00:04:00
+ TS[4,1]: 1999-01-08 01:59:00
+ TS[4,2]: 1999-01-08 13:24:40
+ TS[4,3]: 1999-01-08 13:24:40.495
++TS[4,4]: 1999-01-08 13:24:40.123456
+ Date[5]: 1999-01-08 (N - F)
+ TS[5,0]: 1999-01-08 00:04:00
+ TS[5,1]: 1999-01-08 01:59:00
+ TS[5,2]: 1999-01-08 13:24:40
+ TS[5,3]: 1999-01-08 13:24:40.495
++TS[5,4]: 1999-01-08 13:24:40.123456
+ Date[6]: 1999-01-18 (N - F)
+ TS[6,0]: 1999-01-18 00:04:00
+ TS[6,1]: 1999-01-18 01:59:00
+ TS[6,2]: 1999-01-18 13:24:40
+ TS[6,3]: 1999-01-18 13:24:40.495
++TS[6,4]: 1999-01-18 13:24:40.123456
+ Date[7]: 2003-01-02 (N - F)
+ TS[7,0]: 2003-01-02 00:04:00
+ TS[7,1]: 2003-01-02 01:59:00
+ TS[7,2]: 2003-01-02 13:24:40
+ TS[7,3]: 2003-01-02 13:24:40.495
++TS[7,4]: 2003-01-02 13:24:40.123456
+ Date[8]: 1999-01-08 (N - F)
+ TS[8,0]: 1999-01-08 00:04:00
+ TS[8,1]: 1999-01-08 01:59:00
+ TS[8,2]: 1999-01-08 13:24:40
+ TS[8,3]: 1999-01-08 13:24:40.495
++TS[8,4]: 1999-01-08 13:24:40.123456
+ Date[9]: 1999-01-08 (N - F)
+ TS[9,0]: 1999-01-08 00:04:00
+ TS[9,1]: 1999-01-08 01:59:00
+ TS[9,2]: 1999-01-08 13:24:40
+ TS[9,3]: 1999-01-08 13:24:40.495
++TS[9,4]: 1999-01-08 13:24:40.123456
+ Date[10]: 1999-01-08 (N - F)
+ TS[10,0]: 1999-01-08 00:04:00
+ TS[10,1]: 1999-01-08 01:59:00
+ TS[10,2]: 1999-01-08 13:24:40
+ TS[10,3]: 1999-01-08 13:24:40.495
++TS[10,4]: 1999-01-08 13:24:40.123456
+ Date[11]: 1999-01-08 (N - F)
+ TS[11,0]: 1999-01-08 00:04:00
+ TS[11,1]: 1999-01-08 01:59:00
+ TS[11,2]: 1999-01-08 13:24:40
+ TS[11,3]: 1999-01-08 13:24:40.495
++TS[11,4]: 1999-01-08 13:24:40.123456
+ Date[12]: 1999-01-08 (N - F)
+ TS[12,0]: 1999-01-08 00:04:00
+ TS[12,1]: 1999-01-08 01:59:00
+ TS[12,2]: 1999-01-08 13:24:40
+ TS[12,3]: 1999-01-08 13:24:40.495
++TS[12,4]: 1999-01-08 13:24:40.123456
+ Date[13]: 2006-01-08 (N - F)
+ TS[13,0]: 2006-01-08 00:04:00
+ TS[13,1]: 2006-01-08 01:59:00
+ TS[13,2]: 2006-01-08 13:24:40
+ TS[13,3]: 2006-01-08 13:24:40.495
++TS[13,4]: 2006-01-08 13:24:40.123456
+ Date[14]: 1999-01-08 (N - F)
+ TS[14,0]: 1999-01-08 00:04:00
+ TS[14,1]: 1999-01-08 01:59:00
+ TS[14,2]: 1999-01-08 13:24:40
+ TS[14,3]: 1999-01-08 13:24:40.495
++TS[14,4]: 1999-01-08 13:24:40.123456
+ Date[15]: 1999-01-08 (N - F)
+ TS[15,0]: 1999-01-08 00:04:00
+ TS[15,1]: 1999-01-08 01:59:00
+ TS[15,2]: 1999-01-08 13:24:40
+ TS[15,3]: 1999-01-08 13:24:40.495
++TS[15,4]: 1999-01-08 13:24:40.123456
+ Date[16]: 1999-01-08 (N - F)
+ TS[16,0]: 1999-01-08 00:04:00
+ TS[16,1]: 1999-01-08 01:59:00
+ TS[16,2]: 1999-01-08 13:24:40
+ TS[16,3]: 1999-01-08 13:24:40.495
++TS[16,4]: 1999-01-08 13:24:40.123456
+ Date[17]: 1999-01-08 (N - F)
+ TS[17,0]: 1999-01-08 00:04:00
+ TS[17,1]: 1999-01-08 01:59:00
+ TS[17,2]: 1999-01-08 13:24:40
+ TS[17,3]: 1999-01-08 13:24:40.495
++TS[17,4]: 1999-01-08 13:24:40.123456
+ Date[18]: 1999-01-08 (N - F)
+ TS[18,0]: 1999-01-08 00:04:00
+ TS[18,1]: 1999-01-08 01:59:00
+ TS[18,2]: 1999-01-08 13:24:40
+ TS[18,3]: 1999-01-08 13:24:40.495
++TS[18,4]: 1999-01-08 13:24:40.123456
+ Date[19]: 0099-01-08 BC (N - F)
+ TS[19,0]: 0099-01-08 00:04:00 BC
+ TS[19,1]: 0099-01-08 01:59:00 BC
+ TS[19,2]: 0099-01-08 13:24:40 BC
++TS[19,4]: 0099-01-08 13:24:40.123456 BC
++Date[20]: - (N - T)
++Date[21]: - (N - T)
+ interval[0]: @ 1 min
+ interval_copy[0]: @ 1 min
+ interval[1]: @ 1 day 12 hours 59 mins 10 secs
+diff --git a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
+index 0edf012..a127dd9 100644
+--- a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++++ b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
+@@ -27,6 +27,15 @@ char *dates[] = { "19990108foobar",
+ 				  "1999.008",
+ 				  "J2451187",
+ 				  "January 8, 99 BC",
++				  /*
++				   * Maximize space usage in ParseDateTime() with 25
++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
++				   */
++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++				  /* 26 fields */
++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ 				  NULL };
+ 
+ /* do not conflict with libc "times" symbol */
+@@ -34,6 +43,7 @@ static char *times[] = { "0:04",
+ 				  "1:59 PDT",
+ 				  "13:24:40 -8:00",
+ 				  "13:24:40.495+3",
++				  "13:24:40.123456789+3",
+ 				  NULL };
+ 
+ char *intervals[] = { "1 minute",
+diff --git a/src/test/regress/expected/interval.out b/src/test/regress/expected/interval.out
+index 3bf2211..99fd0ca 100644
+--- a/src/test/regress/expected/interval.out
++++ b/src/test/regress/expected/interval.out
+@@ -306,6 +306,13 @@ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31
+  @ 4541 years 4 mons 4 days 17 mins 31 secs
+ (1 row)
+ 
++-- test long interval output
++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
++                                         interval                                          
++-------------------------------------------------------------------------------------------
++ @ 100000000 years 10 mons -1000000000 days -1000000000 hours -10 mins -10.000001 secs ago
++(1 row)
++
+ -- test justify_hours() and justify_days()
+ SELECT justify_hours(interval '6 months 3 days 52 hours 3 minutes 2 seconds') as "6 mons 5 days 4 hours 3 mins 2 seconds";
+  6 mons 5 days 4 hours 3 mins 2 seconds 
+diff --git a/src/test/regress/sql/interval.sql b/src/test/regress/sql/interval.sql
+index f1da4c2..7cee286 100644
+--- a/src/test/regress/sql/interval.sql
++++ b/src/test/regress/sql/interval.sql
+@@ -108,6 +108,8 @@ select avg(f1) from interval_tbl;
+ -- test long interval input
+ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31 seconds'::interval;
+ 
++-- test long interval output
++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
+ 
+ -- test justify_hours() and justify_days()
+ 
+-- 
+1.7.5.4
+
