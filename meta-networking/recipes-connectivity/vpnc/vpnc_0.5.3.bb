@@ -7,8 +7,15 @@ LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
 DEPENDS = "libgcrypt"
 
+inherit perlnative
+
 CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
 LDFLAGS_append = " -lgcrypt -lgpg-error"
+
+do_configure_append () {
+    # Make sure we use our nativeperl wrapper
+    sed -i "1s:#!.*:#!/usr/bin/env nativeperl:" ${S}/*.pl
+}
 
 do_install () {
     sed -i s:m600:m\ 600:g Makefile    
