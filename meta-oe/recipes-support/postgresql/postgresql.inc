@@ -36,6 +36,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
            file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
            file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
            file://0006-Fix-handling-of-wide-datetime-input-output.patch \
+           file://0007-Make-pqsignal-available-to-pg_regress-of-ECPG-and-is.patch \
           "
 
 LEAD_SONAME = "libpq.so"
