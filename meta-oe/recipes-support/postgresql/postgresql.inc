@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
            file://postgresql.service \
            file://0001-Use-pkg-config-for-libxml2-detection.patch \
            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
+           file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
           "
 
 LEAD_SONAME = "libpq.so"
