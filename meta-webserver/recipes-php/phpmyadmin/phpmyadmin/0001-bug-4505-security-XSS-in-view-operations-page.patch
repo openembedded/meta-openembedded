@@ -1,0 +1,43 @@
+From 0cd293f5e13aa245e4a57b8d373597cc0e421b6f Mon Sep 17 00:00:00 2001
+From: Madhura Jayaratne <madhura.cj@gmail.com>
+Date: Sun, 17 Aug 2014 08:41:57 -0400
+Subject: [PATCH] bug #4505 [security] XSS in view operations page
+
+Upstream-Status: Backport
+
+Signed-off-by: Marc Delisle <marc@infomarc.info>
+---
+ ChangeLog       |    3 +++
+ js/functions.js |    2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/ChangeLog b/ChangeLog
+index 7afac1a..cec9d77 100644
+--- a/ChangeLog
++++ b/ChangeLog
+@@ -1,6 +1,9 @@
+ phpMyAdmin - ChangeLog
+ ======================
+ 
++4.2.7.1 (2014-08-17)
++- bug #4505 [security] XSS in view operations page
++
+ 4.2.7.0 (2014-07-31)
+ - bug       Broken links on home page
+ - bug #4494 Overlap in navigation panel
+diff --git a/js/functions.js b/js/functions.js
+index 09bfeda..a970a81 100644
+--- a/js/functions.js
++++ b/js/functions.js
+@@ -3585,7 +3585,7 @@ AJAX.registerOnload('functions.js', function () {
+         var question = PMA_messages.strDropTableStrongWarning + ' ';
+         question += $.sprintf(
+             PMA_messages.strDoYouReally,
+-            'DROP VIEW ' + PMA_commonParams.get('table')
++            'DROP VIEW ' + escapeHtml(PMA_commonParams.get('table'))
+         );
+ 
+         $(this).PMA_confirm(question, $(this).attr('href'), function (url) {
+-- 
+1.7.10.4
+
