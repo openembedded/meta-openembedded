@@ -35,7 +35,7 @@ EXTRA_OECONF='--disable-cups \
               --with-privatedir=${sysconfdir}/samba/private \
               --with-lockdir=${localstatedir}/lock \
               --with-piddir=${localstatedir}/run \
-              --with-logfilebase=${localstatedir}/log \
+              --with-logfilebase=${localstatedir}/log/samba \
               --libdir=${libdir} \
               --with-mandir=${mandir} \
               --with-swatdir=${datadir}/swat \
@@ -125,6 +125,12 @@ do_install_append() {
     sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
         -e 's,@SBINDIR@,${sbindir},g' \
         -i ${D}${systemd_unitdir}/system/*.service
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+	install -d ${D}${sysconfdir}/tmpfiles.d
+	echo "d ${localstatedir}/log/samba 0755 root root -" \
+            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
+    fi
 }
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
