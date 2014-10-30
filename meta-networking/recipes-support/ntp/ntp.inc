@@ -129,6 +129,7 @@ FILES_ntpdate = "${sbindir}/ntpdate \
 "
 FILES_sntp = "${sbindir}/sntp \
               ${sysconfdir}/default/sntp \
+              ${systemd_unitdir}/system/sntp.service \
              "
 
 CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
