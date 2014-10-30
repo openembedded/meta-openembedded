@@ -40,6 +40,7 @@ FILES_winbind = "${sbindir}/winbindd \
                  ${bindir}/wbinfo \
                  ${bindir}/ntlm_auth \
                  ${sysconfdir}/init.d/winbind \
+                 ${systemd_unitdir}/system/winbind.service \
 "
 FILES_libwinbind = "${libdir}/idmap/*.so \
                     ${libdir}/pdb \
