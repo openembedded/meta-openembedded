@@ -1,0 +1,27 @@
+From 7df303bc5fa649299e18efeb5d4b801614030488 Mon Sep 17 00:00:00 2001
+From: Harald Judt <h.judt@gmx.at>
+Date: Tue, 3 Jun 2014 19:59:05 +0200
+Subject: [PATCH 2/2] Switch to met.no locationforecastLTS-1.2 API (bug
+ #10916).
+
+Upstream-Status: Applied
+---
+ panel-plugin/weather.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/panel-plugin/weather.c b/panel-plugin/weather.c
+index efa8559..63451fd 100644
+--- a/panel-plugin/weather.c
++++ b/panel-plugin/weather.c
+@@ -660,7 +660,7 @@ update_handler(plugin_data *data)
+         /* build url */
+         url =
+             g_strdup_printf("http://api.yr.no/weatherapi"
+-                            "/locationforecastlts/1.1/?lat=%s;lon=%s;msl=%d",
++                            "/locationforecastlts/1.2/?lat=%s;lon=%s;msl=%d",
+                             data->lat, data->lon, data->msl);
+ 
+         /* start receive thread */
+-- 
+1.8.3.1
+
