@@ -31,7 +31,7 @@ GROUPADD_PARAM_${PN}-server = "--system mysql"
 
 SYSTEMD_PACKAGES = "${PN}-server"
 SYSTEMD_SERVICE_${PN}-server = "mysqld.service"
-SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
+SYSTEMD_AUTO_ENABLE_${PN}-server = "disable"
 
 EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
 
