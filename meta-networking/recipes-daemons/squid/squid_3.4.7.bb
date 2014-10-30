@@ -16,7 +16,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://Set-up-for-cross-compilation.patch \
            file://Skip-AC_RUN_IFELSE-tests.patch \
            file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
-           file://Change-ksh-reference-in-krb-ldap-helper-to-bash.patch \
+           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
            file://squid-use-serial-tests-config-needed-by-ptest.patch \
            file://run-ptest \
            file://volatiles.03_squid \
@@ -63,4 +63,5 @@ FILES_${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"
 FILES_${PN}-dbg += "/usr/src/debug"
 FILES_${PN}-doc += "${datadir}/*.txt"
 
+RDEPENDS_${PN} += "perl"
 RDEPENDS_${PN}-ptest += "make"
