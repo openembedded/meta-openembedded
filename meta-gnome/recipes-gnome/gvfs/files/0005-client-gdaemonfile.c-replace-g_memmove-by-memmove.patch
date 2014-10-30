@@ -1,0 +1,36 @@
+From de7b06dea740900fa63e2e011c9f862fe4b9405c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 27 Oct 2014 10:43:40 +0100
+Subject: [PATCH] client/gdaemonfile.c: replace g_memmove by memmove
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+g_memmove was deprecated in glib 2.40 [1]
+
+Upstream-Status: pending [2]
+
+[1] https://developer.gnome.org/glib/stable/glib-Memory-Allocation.html#g-memmove
+[2] https://bugzilla.gnome.org/show_bug.cgi?id=739233
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ client/gdaemonfile.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/gdaemonfile.c b/client/gdaemonfile.c
+index 15c368c..593ce7a 100644
+--- a/client/gdaemonfile.c
++++ b/client/gdaemonfile.c
+@@ -256,7 +256,7 @@ g_daemon_file_get_parent (GFile *file)
+   len = (guint) 1 + base - path;
+   
+   parent_path = g_new (gchar, len + 1);
+-  g_memmove (parent_path, path, len);
++  memmove (parent_path, path, len);
+   parent_path[len] = 0;
+ 
+   parent = new_file_for_new_path (daemon_file, parent_path);
+-- 
+1.8.3.1
+

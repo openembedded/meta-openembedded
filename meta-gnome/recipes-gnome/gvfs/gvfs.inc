@@ -15,6 +15,7 @@ SRC_URI += " \
     file://0002-Adapt-to-GLib-2.31-deprecations-and-thread-API-chang.patch \
     file://0003-Adapt-to-glib-mutex-API-changes.patch \
     file://0004-Adapt-to-glib-thread-API-changes.patch \
+    file://0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch \
 "
 
 EXTRA_OECONF = "--with-archive-includes=${STAGING_INCDIR} \
