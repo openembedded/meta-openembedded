@@ -1,0 +1,29 @@
+From 90ddeecf60fc029608b972e490b735f3a65ed0cb Mon Sep 17 00:00:00 2001
+From: Madhura Jayaratne <madhura.cj@gmail.com>
+Date: Sun, 17 Aug 2014 08:52:05 -0400
+Subject: [PATCH] bug #4504 [security] Self-XSS in query charts
+
+Upstream-status: Backport
+
+Signed-off-by: Marc Delisle <marc@infomarc.info>
+---
+ js/tbl_chart.js |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+ 4.2.7.0 (2014-07-31)
+diff --git a/js/tbl_chart.js b/js/tbl_chart.js
+index 943d4ae..04c9c40 100644
+--- a/js/tbl_chart.js
++++ b/js/tbl_chart.js
+@@ -47,7 +47,7 @@ function PMA_queryChart(data, columnNames, settings) {
+         },
+         axes : {
+             xaxis : {
+-                label : settings.xaxisLabel
++                label : escapeHtml(settings.xaxisLabel)
+             },
+             yaxis : {
+                 label : settings.yaxisLabel
+-- 
+1.7.10.4
+
