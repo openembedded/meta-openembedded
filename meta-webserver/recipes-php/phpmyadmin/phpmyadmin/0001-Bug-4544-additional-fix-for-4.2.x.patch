@@ -1,0 +1,29 @@
+From 304fb2b645b36a39e03b954fdbd567173ebe6448 Mon Sep 17 00:00:00 2001
+From: Marc Delisle <marc@infomarc.info>
+Date: Wed, 1 Oct 2014 08:09:12 -0400
+Subject: [PATCH] Bug 4544: additional fix for 4.2.x
+
+Upstream-Status: Backport
+
+Signed-off-by: Marc Delisle <marc@infomarc.info>
+---
+ libraries/TableSearch.class.php |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/libraries/TableSearch.class.php b/libraries/TableSearch.class.php
+index a0b3fa4..b7eb42f 100644
+--- a/libraries/TableSearch.class.php
++++ b/libraries/TableSearch.class.php
+@@ -992,7 +992,8 @@ EOT;
+             $html_output .= '<td>' . $properties['collation'] . '</td>';
+             $html_output .= '<td>' . $properties['func'] . '</td>';
+             // here, the data-type attribute is needed for a date/time picker
+-            $html_output .= '<td data-type="' . $properties['type'] . '"'
++            $html_output .= '<td data-type="'
++                . htmlspecialchars($properties['type']) . '"'
+                 . '>' . $properties['value'] . '</td>';
+             $html_output .= '</tr>';
+             //Displays hidden fields
+-- 
+1.7.10.4
+
