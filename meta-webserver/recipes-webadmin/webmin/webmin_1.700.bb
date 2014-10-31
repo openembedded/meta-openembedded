@@ -82,6 +82,7 @@ do_install() {
     install -d ${D}${libexecdir}/webmin
     cp -pPR ${S}/* ${D}${libexecdir}/webmin
     rm -f ${D}${libexecdir}/webmin/webmin-init
+    rm -f ${D}${libexecdir}/webmin/ajaxterm/ajaxterm/configure.initd.gentoo
     rm -rf ${D}${libexecdir}/webmin/patches
 
     # Run setup script
