@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
 DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
 
 PATCHSET = "8"
-SRC_URI = "http://www.imagemagick.org/download/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
 "
 SRC_URI[md5sum] = "7e96f55156d72ce59c76ec93362ec72a"
 SRC_URI[sha256sum] = "51e0eb0b56e2f16be11c29086a97d474ffd07fe4eb5a9858d8a9c8e9c054c99a"
