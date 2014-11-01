@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
 LICENSE = "MIT"
 
 SRC_URI = "https://github.com/alanxz/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
-SRC_URI[md5sum] = "b1f902c658c772cda464754678d8deb6"
-SRC_URI[sha256sum] = "53702ea2ab809af0f923e387458e2cad191d9549f50410035fe82ce5e6ccc4fa"
+SRC_URI[md5sum] = "aa8d4d0b949f508c0da25a9c20bd7da7"
+SRC_URI[sha256sum] = "1ec3c1141593b91c57bf1051657a1d64fb87da38760c7128a9622b107990f2f2"
 
 DEPENDS = "popt openssl"
 
