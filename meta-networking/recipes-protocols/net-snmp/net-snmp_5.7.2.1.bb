@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
 DEPENDS = "openssl libnl pciutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+        file://0001-Added-checks-for-printing-variables-with-wrong-types.patch \
         file://init \
         file://snmpd.conf \
         file://snmptrapd.conf \
