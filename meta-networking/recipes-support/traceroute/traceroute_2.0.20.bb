@@ -20,6 +20,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/${BP}/${BP}.tar.gz \
 SRC_URI[md5sum] = "559f104e155e0e14ee0c717776a745fa"
 SRC_URI[sha256sum] = "2facba9525c95428d7bff3a313fc6ecfd8c529c678ae666c73015558a0edc271"
 
+EXTRA_OEMAKE = "VPATH=${STAGING_LIBDIR}"
+
 do_compile() {
     export LDFLAGS="${TARGET_LDFLAGS} -L${S}/libsupp"
     oe_runmake "env=yes"
