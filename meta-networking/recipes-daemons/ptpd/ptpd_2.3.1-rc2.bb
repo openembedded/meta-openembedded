@@ -21,7 +21,9 @@ def get_sub(d):
     except:
         return parts[0]
 
-SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz"
+SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
+	file://ptpd-add-dpaa-etsec-support.patch \
+"
 
 SRC_URI[md5sum] = "1ef2f1f2825080a865bbce0eb61246d4"
 SRC_URI[sha256sum] = "2802aab758649bb222859dfcb62a5d282709ccb4d3f1df3f26f739cc091d0c8d"
