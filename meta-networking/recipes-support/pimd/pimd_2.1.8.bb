@@ -8,3 +8,10 @@ SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
 SRC_URI[sha256sum] = "01016940543a0a6131d4e6c91b595d47e187012c59a298eec14c3dbc38564b3a"
 
 CFLAGS += "-I ${S}/include "
+
+do_install() {
+	unset datadir
+	unset mandir
+	oe_runmake 'DESTDIR=${D}' install
+}
+
