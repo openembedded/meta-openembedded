@@ -22,6 +22,7 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
 	   file://postfix \
 	   file://internal_recipient \
 	   file://postfix.service \
+	   file://aliasesdb \
 	   "
 
 S = "${WORKDIR}/postfix-${PV}"
@@ -148,6 +149,8 @@ do_install () {
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${WORKDIR}/postfix.service ${D}${systemd_unitdir}/system
 	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${systemd_unitdir}/system/postfix.service
+
+	install -m 0755 ${WORKDIR}/aliasesdb ${D}${exec_prefix}/libexec/postfix/
 
 	install -m 770 -d ${D}${localstatedir}/spool/postfix
 	chown postfix:postfix ${D}${localstatedir}/spool/postfix
