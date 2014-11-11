@@ -4,7 +4,7 @@ HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
 
-DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2"
+DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native"
 
 SRCREV = "1850e00a17e25e93c39e608f4e2da50f29c5c712"
 PV = "1.4.8"
