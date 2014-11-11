@@ -5,14 +5,14 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
 
-PV = "14.05.00"
+PV = "14.09.00"
 
-SRCREV = "fb5385fec1f3468b479e87c0bba38ab76f60915b"
+SRCREV = "cf14f3b4bab716dea95de772ad52786c1cbe862a"
 SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "libpcre json-c"
+DEPENDS = "libpcre json-c glib-2.0"
 
 inherit autotools-brokensep
 
