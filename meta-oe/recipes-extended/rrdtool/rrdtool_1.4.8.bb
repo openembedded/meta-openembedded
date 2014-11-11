@@ -17,7 +17,7 @@ SRC_URI = "\
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep gettext pythonnative perlnative python-dir
+inherit autotools-brokensep gettext pythonnative perlnative python-dir cpan-base
 
 EXTRA_AUTORECONF = "-I m4"
 
@@ -56,6 +56,12 @@ export HOST_SYS
 export STAGING_LIBDIR
 export STAGING_INCDIR
 
+# Env var which tells perl if it should use host (no) or target (yes) settings
+export PERLCONFIGTARGET = "${@is_target(d)}"
+export PERL_INC = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}/CORE"
+export PERL_LIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
+export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
+
 do_configure() {
 	#fix the pkglib problem with newer automake
 	#perl
@@ -71,9 +77,6 @@ do_configure() {
 
 	autotools_do_configure
 
-	perl_version=`perl -v 2>/dev/null | \
-	    sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
-
 	#modify python sitepkg
 	#remove the dependency of perl-shared:Makefile
 	#or perl-shared/Makefile will be regenerated
@@ -86,13 +89,10 @@ do_configure() {
 	#redo the perl bindings
 	(
 	cd ${S}/bindings/perl-shared;
-	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor"
-	    INSTALLPRIVLIB="abc";
-	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
+	perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
 
 	cd ../../bindings/perl-piped;
-	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor";
-	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
+	perl Makefile.PL INSTALLDIRS="vendor";
 	)
 
 	#change the interpreter in file
