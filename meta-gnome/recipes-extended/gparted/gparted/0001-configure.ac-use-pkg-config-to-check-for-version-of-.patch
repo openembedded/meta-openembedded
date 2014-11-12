@@ -1,0 +1,68 @@
+From a39d205ec3c6db6fe98aa2c7f8352db767557f60 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 12 Nov 2014 11:26:19 +0100
+Subject: [PATCH] configure.ac: use pkg-config to check for version of gparted
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+running test programs causes headaches when cross-compiling
+
+Upstream-Status: submitted [1]
+
+[1] https://bugzilla.gnome.org/show_bug.cgi?id=740004
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ configure.ac | 34 ++++++----------------------------
+ 1 file changed, 6 insertions(+), 28 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 37025b0..17bb686 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -48,35 +48,13 @@ LIBPARTED_REQUIRED_VERSION='1.7.1'
+ AC_MSG_CHECKING([for libparted >= $LIBPARTED_REQUIRED_VERSION])
+ LIBPARTED_REQUIRED_INT=`echo "$LIBPARTED_REQUIRED_VERSION" |
+ 	$AWK -F. '{print $1 * 10000 + $2 * 100 + $3}'`
+-AC_RUN_IFELSE(
+-	[AC_LANG_SOURCE(
+-		[[
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <parted/parted.h>
+-
+-int main()
+-{
+-	const char *version = ped_get_version();
+-	if (version == NULL)
+-	{
+-		fprintf(stderr, "ERROR: ped_get_version() returned NULL\n");
+-		return EXIT_FAILURE;
+-	}
+-	printf("%s\n", version);
+-	return EXIT_SUCCESS;
+-}
+-		]]
+-	)],
+-	dnl Run test program again to cache libparted version.
+-	[LIBPARTED_FOUND_VERSION=`./conftest$EXEEXT`
+-	 LIBPARTED_FOUND_INT=`echo "$LIBPARTED_FOUND_VERSION" |
+-		$AWK -F. '{print $1 * 10000 + $2 * 100 + $3}'`
+-	 test "$LIBPARTED_FOUND_INT" -ge "$LIBPARTED_REQUIRED_INT" ||
++
++LIBPARTED_FOUND_VERSION="`pkg-config libparted --modversion`"
++LIBPARTED_FOUND_INT=`echo "$LIBPARTED_FOUND_VERSION" |
++	$AWK -F. '{print $1 * 10000 + $2 * 100 + $3}'`
++
++test "$LIBPARTED_FOUND_INT" -ge "$LIBPARTED_REQUIRED_INT" ||
+ 		AC_MSG_ERROR([*** libparted too old.  Require libparted >= $LIBPARTED_REQUIRED_VERSION but only found libparted $LIBPARTED_FOUND_VERSION.])
+-	],
+-	[AC_MSG_ERROR([*** Error querying libparted version.  Check config.log for details.])]
+-)
+ 
+ 
+ dnl Check for libparted >= 2.2 for improved informing the kernel to
+-- 
+1.8.3.1
+
