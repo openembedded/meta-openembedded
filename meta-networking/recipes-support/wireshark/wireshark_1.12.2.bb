@@ -13,8 +13,8 @@ SRC_URI = " \
 
 PE = "1"
 
-SRC_URI[md5sum] = "14b3e3d8979d1eb27ff085bb5f400e67"
-SRC_URI[sha256sum]= "82b26bd416ec15903b27785e35a622687008a743342054e96eaaeaa249be584b"
+SRC_URI[md5sum] = "2f2a16be8b087227cb17733c72288ae4"
+SRC_URI[sha256sum] = "30ae16b408a592642ce3a84dd9877d24df7a6dae8da4847486965190039df292"
 
 inherit autotools pkgconfig
 
