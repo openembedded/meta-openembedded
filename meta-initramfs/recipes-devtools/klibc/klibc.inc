@@ -24,6 +24,7 @@ S = "${WORKDIR}/git"
 EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'CROSS_COMPILE=${TARGET_PREFIX}' \
                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
+                'KLIBCLIBGCC=${STAGING_DIR_TARGET}${libdir}/${TARGET_SYS}/*/libgcc.a' \
                 'prefix=${exec_prefix}' \
                 'INSTALLROOT=${D}' \
                 'SHLIBDIR=${libdir}' \
