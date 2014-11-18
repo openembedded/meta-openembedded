@@ -1,0 +1,46 @@
+Revert mariadb commit revno 4300 in branch 5.5 which fixes
+https://mariadb.atlassian.net/browse/MDEV-5120.
+
+------------------------------------------------------------
+revno: 4300
+fixes bug: https://mariadb.atlassian.net/browse/MDEV-5120
+committer: Sergei Golubchik <sergii@pisem.net>
+branch nick: 5.5
+timestamp: Thu 2014-10-02 11:57:40 +0200
+message:
+  MDEV-5120 Test suite test maria-no-logging fails
+  
+  stat structure (from <sys/stat.h>) is conditionally defined
+  to have different layout and size depending on the defined macros.
+  The correct macro is defined in my_config.h, which means it MUST be
+  included first (or, at least before <features.h> - so, practically,
+  before including any system headers).
+------------------------------------------------------------
+
+It causes modphp fails to build. Bug MDEV-5120 is an test suite test
+maria-no-logging fails. There is no side effect to revert it.
+
+Upstream-Status: Backport
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+--- mariadb-5.5.40/config.h.cmake.orig	2014-11-13 14:23:50.868147145 +0800
++++ mariadb-5.5.40/config.h.cmake	2014-11-13 14:24:23.372148031 +0800
+@@ -641,17 +641,4 @@
+ #cmakedefine SIZEOF_TIME_T @SIZEOF_TIME_T@
+ #cmakedefine TIME_T_UNSIGNED @TIME_T_UNSIGNED@
+ 
+-/*
+-  stat structure (from <sys/stat.h>) is conditionally defined
+-  to have different layout and size depending on the defined macros.
+-  The correct macro is defined in my_config.h, which means it MUST be
+-  included first (or at least before <features.h> - so, practically,
+-  before including any system headers).
+-
+-  __GLIBC__ is defined in <features.h>
+-*/
+-#ifdef __GLIBC__
+-#error <my_config.h> MUST be included first!
+-#endif
+-
+ #endif

@@ -1,4 +1,4 @@
-require ${PN}_${PV}.inc
+require mariadb.inc
 
 EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
 
@@ -25,4 +25,3 @@ RCONFLICTS_${PN}-client += "mysql5-client"
 RPROVIDES_${PN}-server += "mysql5-server"
 RREPLACES_${PN}-server += "mysql5-server"
 RCONFLICTS_${PN}-server += "mysql5-server"
-
