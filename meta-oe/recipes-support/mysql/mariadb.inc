@@ -135,7 +135,9 @@ PACKAGES = "${PN}-dbg ${PN} \
     libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysqlclient-r-dbg \
     libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclient-dbg \
     libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-leftovers"
-CONFFILES_${PN}-server += "${sysconfdir}/my.cnf"
+CONFFILES_${PN}-server += "${sysconfdir}/my.cnf ${sysconfdir}/my.cnf.d/server.cnf"
+CONFFILES_${PN}-client += "${sysconfdir}/my.cnf.d/mysql-clients.cnf"
+CONFFILES_libmysqlclient += "${sysconfdir}/my.cnf.d/client.cnf"
 
 FILES_${PN} = " "
 RDEPENDS_${PN} = "${PN}-client ${PN}-server"
@@ -155,7 +157,8 @@ RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-modu
     perl-module-io-socket-inet perl-module-io-select"
 
 FILES_libmysqlclient = "\
-    ${libdir}/libmysqlclient.so.*"
+    ${libdir}/libmysqlclient.so.* \
+    ${sysconfdir}/my.cnf.d/client.cnf"
 FILES_libmysqlclient-dev = " \
     ${includedir}/mysql/ \
     ${libdir}/libmysqlclient.so \
@@ -200,7 +203,8 @@ FILES_${PN}-client = "\
     ${bindir}/mysqlshow \
     ${bindir}/mysqlslap \
     ${bindir}/mysqltest_embedded \
-    ${libexecdir}/mysqlmanager"
+    ${libexecdir}/mysqlmanager \
+    ${sysconfdir}/my.cnf.d/mysql-clients.cnf"
 
 FILES_${PN}-server = "\
     ${bindir}/comp_err \
@@ -250,6 +254,7 @@ FILES_${PN}-server = "\
     ${localstatedir}/mysql/ \
     ${sysconfdir}/init.d \
     ${sysconfdir}/my.cnf \
+    ${sysconfdir}/my.cnf.d/server.cnf \
     ${sysconfdir}/tmpfiles.d"
 
 DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
