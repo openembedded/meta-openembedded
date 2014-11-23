@@ -42,7 +42,14 @@ SRC_URI = "https://github.com/kexecboot/kexecboot/archive/v${PV}.tar.gz"
 SRC_URI[md5sum] = "46b7c1a6f20531be56445ebb8669a2b8"
 SRC_URI[sha256sum] = "6b360b8aa59bc5d68a96705349a0dd416f8ed704e931fa0ac7849298258f0f15"
 
-inherit autotools-brokensep
+SRC_URI += "\
+            file://0001-kexecboot-fix-build-when-S-B.patch \
+            file://0002-kexecboot-fix-configure-warnings.patch \
+            file://0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch \
+            file://0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch \
+            "
+
+inherit autotools
 
 EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
 
