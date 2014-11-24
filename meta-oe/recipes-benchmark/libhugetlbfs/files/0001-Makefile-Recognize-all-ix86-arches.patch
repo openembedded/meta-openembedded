@@ -1,0 +1,32 @@
+From a0166583ba5f7b6a6d2de434f633126fb12c9d29 Mon Sep 17 00:00:00 2001
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
+Date: Wed, 24 Sep 2014 15:27:31 -0500
+Subject: [PATCH] Makefile: Recognize all ix86 arches
+
+In a non-native build scenario, the makefile
+only recognized i386 or x86_64 arches.  Added support
+to recognize i486, i586, i686.
+
+Upstream Status: Accepted by libhugetlbfs project
+
+Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+---
+ Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 91502e1..0bfaee8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -71,7 +71,7 @@ ELF64 = aarch64elf
+ TMPLIB64 = lib64
+ CUSTOM_LDSCRIPTS = no
+ else
+-ifeq ($(ARCH),i386)
++ifneq (,$(filter i386 i486 i586 i686,$(ARCH)))
+ CC32 = $(CC)
+ ELF32 = elf_i386
+ TMPLIB32 = lib
+-- 
+1.7.9.5
+
