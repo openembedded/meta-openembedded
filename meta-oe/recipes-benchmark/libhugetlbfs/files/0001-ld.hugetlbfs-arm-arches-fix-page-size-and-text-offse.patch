@@ -1,0 +1,57 @@
+From 1ab6f7f9b34fc745451140fc21db6763dffc5785 Mon Sep 17 00:00:00 2001
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
+Date: Thu, 25 Sep 2014 14:57:06 -0500
+Subject: [PATCH] ld.hugetlbfs: arm arches - fix page size and text offset
+ setup
+
+There's 3 issues fixed:
+* typo on MB variable (MB -> $MB)
+* some linker variants are missing (linux and big endian)
+  - armelfb_linux_eabi
+  - aarch64elfb
+  - aarch64linux
+  - aarch64linuxb
+* text segment offset was not specified for armv7 BE
+
+NOTE: This patch replaces and makes obsolete the following previously
+      submitted patch:
+
+      aarch64: fix page size not properly computed
+      by: Fathi Boudra <fathi.boudra@linaro.org>
+
+Upstream Status: Accepted at libhugetlbfs project
+
+Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+---
+ ld.hugetlbfs |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/ld.hugetlbfs b/ld.hugetlbfs
+index df446dd..4417442 100755
+--- a/ld.hugetlbfs
++++ b/ld.hugetlbfs
+@@ -87,7 +87,7 @@ elf32ppclinux|elf64ppc)	HPAGE_SIZE=$((16*$MB)) SLICE_SIZE=$((256*$MB)) ;;
+ elf64lppc)		HPAGE_SIZE=$((16*$MB)) SLICE_SIZE=$((256*$MB)) ;;
+ elf_i386|elf_x86_64)	HPAGE_SIZE=$((4*$MB)) SLICE_SIZE=$HPAGE_SIZE ;;
+ elf_s390|elf64_s390)	HPAGE_SIZE=$((1*$MB)) SLICE_SIZE=$HPAGE_SIZE ;;
+-armelf_linux_eabi|aarch64elf)	HPAGE_SIZE=$((2*MB)) SLICE_SIZE=$HPAGE_SIZE ;;
++armelf*_linux_eabi|aarch64elf*|aarch64linux*)	HPAGE_SIZE=$((2*$MB)) SLICE_SIZE=$HPAGE_SIZE ;;
+ esac
+ 
+ if [ "$HTLB_ALIGN" == "slice" ]; then
+@@ -96,9 +96,9 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
+ 
+ 	# targeting the ARM platform one needs to explicitly set the text segment offset
+ 	# otherwise it will be NULL.
+-	if [ "$EMU" == "armelf_linux_eabi" ]; then
+-		HTLBOPTS="$HTLBOPTS -Ttext-segment=$SLICE_SIZE"
+-	fi
++	case "$EMU" in
++	armelf*_linux_eabi)	HTLBOPTS="$HTLBOPTS -Ttext-segment=$SLICE_SIZE" ;;
++	esac
+ fi
+ 
+ ${LD} "${args[@]}" ${HTLBOPTS}
+-- 
+1.7.9.5
+
