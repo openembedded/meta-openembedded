@@ -16,7 +16,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
     file://tests-Makefile-install-static-4G-edge-testcases.patch \
     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
     file://0001-aarch64-fix-cross-compilation.patch \
-    file://0001-aarch64-fix-page-size-not-properly-computed.patch \
+    file://0001-ld.hugetlbfs-arm-arches-fix-page-size-and-text-offse.patch \
     file://0001-replace-lib-lib64-hardcoded-values-by-LIBDIR32-LIBDI.patch \
     file://0001-Extend-arm32-support-to-include-BE-variants.patch \
     file://0001-Makefile-Recognize-all-ix86-arches.patch \
