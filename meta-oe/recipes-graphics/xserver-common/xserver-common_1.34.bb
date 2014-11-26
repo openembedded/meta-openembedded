@@ -24,6 +24,7 @@ SRC_URI_append = " \
     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
     file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
+    file://0015-xserver-common-disable-TCP-connections.patch \
 "
 
 do_install_append() {
