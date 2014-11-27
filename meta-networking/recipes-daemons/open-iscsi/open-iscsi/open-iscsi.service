@@ -1,0 +1,18 @@
+[Unit]
+Description=Open-iSCSI
+Documentation=man:iscsid(8) man:iscsiadm(8)
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/iscsid.pid
+ExecStartPre=-/sbin/modprobe -q iscsi_tcp
+ExecStartPre=-/sbin/modprobe -q ib_iser
+ExecStart=/usr/sbin/iscsid -p /var/run/iscsid.pid
+ExecStartPost=-/usr/sbin/iscsiadm -m node --loginall=automatic
+ExecStopPost=/bin/sync
+ExecStopPost=-/sbin/modprobe -r ib_iser
+ExecStopPost=-/sbin/modprobe -r iscsi_tcp
+
+[Install]
+WantedBy=multi-user.target
