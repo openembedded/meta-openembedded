@@ -28,11 +28,15 @@ S = "${WORKDIR}/Net-SSLeay-${PV}"
 
 inherit cpan ptest
 
-EXTRA_CPANFLAGS = "LIBS='-L=${libdir} -L=${base_libdir}' \
-                   INC=-I=${includedir} \
+EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
+                   INC=-I=${STAGING_INCDIR} \
                    'EXTRALIBS=-lssl -lcrypto -lz' \
                    'LDLOADLIBS=-lssl -lcrypto -lz' \
                   "
+
+do_configure_prepend() {
+    export OPENSSL_PREFIX=${STAGING_DIR_NATIVE}${prefix_native}
+}
 
 do_install_ptest() {
     cp -r ${B}/t ${D}${PTEST_PATH}
