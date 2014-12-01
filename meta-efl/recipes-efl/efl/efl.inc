@@ -25,10 +25,14 @@ EXTRA_OECONF_append_class-target = " \
     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
     --with-eolian-gen=${STAGING_BINDIR_NATIVE}/eolian_gen \
     --with-eolian-cxx=${STAGING_BINDIR_NATIVE}/eolian_cxx \
+    --with-elua=${STAGING_BINDIR_NATIVE}/elua \
 "
 EXTRA_OECONF_append_class-native = " \
     --disable-fontconfig \
     --disable-audio \
+    --disable-physics \
+    --disable-multisense \
+    --disable-cserve \
     --with-x11=none \
     --disable-image-loader-bmp \
     --disable-image-loader-eet \
@@ -42,6 +46,8 @@ EXTRA_OECONF_append_class-native = " \
     --disable-image-loader-wbmp \
     --disable-image-loader-webp \
     --disable-image-loader-xpm \
+    --disable-image-loader-tgv \
+    --disable-image-loader-dds \
 "
 
 PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio luajit"

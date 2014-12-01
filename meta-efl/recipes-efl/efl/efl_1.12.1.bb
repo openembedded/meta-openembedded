@@ -2,10 +2,12 @@ require ${BPN}.inc
 
 SRC_URI = "\
     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+    file://0001-configure.ac-Don-t-check-for-Xprint-extension.patch \
+    file://0002-evas_3d-Add-Eet.h-includes.patch \
 "
 
-SRC_URI[md5sum] = "eb2bd4a2f6684211dbd5382db024137d"
-SRC_URI[sha256sum] = "3e5aba667b6cdfb2fb89aa637fa8ee92abc2d9950420cf2b4c540809f238fc78"
+SRC_URI[md5sum] = "ac784b11bd1854459c05a78d783aae57"
+SRC_URI[sha256sum] = "c1074c91e98e15fead0e1999bf7bc7dc5e7205a790655cd9b0ba332c38835fce"
 
 # Temporary disable until error like the one following are fixed
 # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
@@ -21,5 +23,3 @@ PARALLEL_MAKE_class-native = ""
 #Makefile:2163: recipe for target 'all-recursive' failed
 # autotools-brokensep
 B = "${S}"
-
-SRC_URI += "file://0001-configure.ac-Don-t-check-for-Xprint-extension.patch"
