@@ -79,8 +79,9 @@ EXTRA_OECONF = "--without-perl \
                 --with-pcraster=internal \
                 --with-geotiff=internal \
                 \
-                --with-sqlite3=${STAGING_LIBDIR} \
-                --with-libtiff=${STAGING_LIBDIR} \
+                --with-sqlite3=${STAGING_EXECPREFIXDIR} \
+                --with-libtiff=${STAGING_EXECPREFIXDIR} \
+                --with-expat=${STAGING_EXECPREFIXDIR} \
 "
 
 EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
