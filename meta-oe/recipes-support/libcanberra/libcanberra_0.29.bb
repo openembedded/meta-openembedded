@@ -59,4 +59,4 @@ FILES_${PN}-gtk3 = "${libdir}/${BPN}-gtk3.so.* \
 FILES_${PN}-gnome = "${libdir}/gnome-settings-daemon-3.0/ \
                      ${datadir}/gdm/ ${datadir}/gnome/"
 
-FILES_${PN}-systemd = "${base_libdir}/systemd/system/*.service"
+FILES_${PN}-systemd = "${systemd_unitdir}/system/*.service"
