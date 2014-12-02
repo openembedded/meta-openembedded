@@ -17,6 +17,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
            file://npn-patch-2.4.7.patch \
            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+           file://configure-allow-to-disable-selinux-support.patch \
            file://init \
            file://apache2-volatile.conf \
            file://apache2.service \
@@ -57,6 +58,9 @@ EXTRA_OECONF = "--enable-ssl \
     ap_cv_void_ptr_lt_long=no \
     --enable-mpms-shared \
     ac_cv_have_threadsafe_pollset=no"
+
+PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
