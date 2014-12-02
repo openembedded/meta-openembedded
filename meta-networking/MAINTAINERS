@@ -29,3 +29,7 @@ COMMON
 M:      Joe MacDonald <joe_macdonald@mentor.com>
 F:      conf
 F:      recipes-*
+
+NETKIT
+M:      Armin Kuster <akuster808@gmail.com>
+F:      recipes-netkit
