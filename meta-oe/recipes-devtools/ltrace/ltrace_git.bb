@@ -17,12 +17,15 @@ DEPENDS = "elfutils"
 RDEPENDS_${PN} = "elfutils"
 SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
            file://ltrace-0.7.2-unused-typedef.patch \
+           file://configure-allow-to-disable-selinux-support.patch \
           "
 S = "${WORKDIR}/git"
 
 inherit autotools
 
+PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
 PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
 
 do_configure_prepend () {
 	( cd ${S}; ./autogen.sh )
