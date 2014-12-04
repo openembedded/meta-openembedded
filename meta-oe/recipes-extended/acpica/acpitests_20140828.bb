@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://tests/aapits/atexec.c;beginline=1;endline=115;md5=e92
 
 DEPENDS = "bison flex"
 
-PNBLACKLIST[acpitests] = "fails to find string.h since sysroot poisoning was added in internal toolchain"
 
 SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;name=acpitests \
            https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz;name=acpica \
@@ -20,7 +19,7 @@ SRC_URI[acpica.sha256sum] = "01d8867656c5ba41dec307c4383ce676196ad4281ac2c9dec9f
 
 S = "${WORKDIR}/acpitests-unix-${PV}"
 
-EXTRA_OEMAKE = "'CC=${TARGET_PREFIX}gcc ${HOST_CC_ARCH}' 'OPT_CFLAGS=-Wall'"
+EXTRA_OEMAKE = "'${HOST_CC_ARCH}' 'OPT_CFLAGS=-Wall'"
 
 # The Makefiles expect a specific layout
 do_compile() {
