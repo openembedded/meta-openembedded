@@ -9,5 +9,5 @@ PR = "r1"
 BINCONFIG_GLOB = "*-config-2"
 inherit autotools pkgconfig binconfig
 
-SRC_URI[md5sum] = "b43b289a859eb38a710f70622c46e571"
-SRC_URI[sha256sum] = "bccc7e10dae979518ff012f8464e47ec4b3558a5456a94c8679653aa0b262b71"
+SRC_URI[md5sum] = "bb8e10a218fac793a52d404d14adedcb"
+SRC_URI[sha256sum] = "c5d24d8c096546353fbc7cedf208392d5a02afe9d56ebcc1cccb258d7c4d2220"
