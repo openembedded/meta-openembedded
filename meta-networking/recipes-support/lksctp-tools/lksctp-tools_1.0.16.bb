@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae
 #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
 #| collect2: error: ld returned 1 exit status
 #| make[4]: *** [libsctp.la] Error 1
-PNBLACKLIST[lksctp-tools] = "BROKEN: fails to link against sctp_connectx symbol"
+PNBLACKLIST[lksctp-tools] ?= "BROKEN: fails to link against sctp_connectx symbol"
 
 S = "${WORKDIR}/${BP}"
 

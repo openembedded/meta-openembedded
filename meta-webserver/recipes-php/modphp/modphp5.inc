@@ -20,7 +20,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
 
 inherit autotools pkgconfig
 
-PNBLACKLIST[modphp] = "CONFLICT: 466 header files conflict with php"
+PNBLACKLIST[modphp] ?= "CONFLICT: 466 header files conflict with php"
 # e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
 
 CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
