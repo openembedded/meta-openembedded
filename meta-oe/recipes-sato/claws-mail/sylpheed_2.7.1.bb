@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
 
 PR = "r2"
 
-PNBLACKLIST[sylpheed] = "BROKEN: Doesn't work with B!=S"
+PNBLACKLIST[sylpheed] ?= "BROKEN: Doesn't work with B!=S"
 
 SRC_URI = "http://sylpheed.sraoss.jp/sylpheed/v2.7/sylpheed-${PV}.tar.bz2 \
     file://glib-2.32.patch \

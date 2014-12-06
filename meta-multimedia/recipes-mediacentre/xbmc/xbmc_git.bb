@@ -10,7 +10,7 @@ DEPENDS = "libusb1 libcec libplist expat yajl gperf-native libxmu fribidi mpeg2d
 SRCREV = "82388d55dae79cbb2e486e307e23202e76a43efa"
 
 # multiple issues
-PNBLACKLIST[xbmc] = "/usr/include/c++/ctime:70:11: error: '::gmtime' has not been declared"
+PNBLACKLIST[xbmc] ?= "/usr/include/c++/ctime:70:11: error: '::gmtime' has not been declared"
 
 PV = "11.0+gitr${SRCPV}"
 PR = "r14"

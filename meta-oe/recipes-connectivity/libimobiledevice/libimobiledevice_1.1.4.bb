@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "\
 #| configure:17888: checking for native large file support
 #| configure:17891: error: in `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libimobiledevice/1.1.4-r0/libimobiledevice-1.1.4':
 #| configure:17893: error: cannot run test program while cross compiling
-PNBLACKLIST[libimobiledevice] = "cannot run test program while cross compiling"
+PNBLACKLIST[libimobiledevice] ?= "cannot run test program while cross compiling"
 
 HOMEPAGE ="http://www.libimobiledevice.org/"
 

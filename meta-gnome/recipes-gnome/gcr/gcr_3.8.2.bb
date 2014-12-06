@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605"
 
 DEPENDS = "gtk+3 p11-kit glib-2.0 libgcrypt"
 
-PNBLACKLIST[gcr] = "CONFLICT: 4 files conflict with gnome-keyring"
+PNBLACKLIST[gcr] ?= "CONFLICT: 4 files conflict with gnome-keyring"
 # e.g. sysroots/qemux86-64/usr/share/glib-2.0/schemas/org.gnome.crypto.pgp.gschema.xml
 #      sysroots/qemux86-64/usr/share/GConf/gsettings/org.gnome.crypto.pgp.convert
 

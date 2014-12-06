@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f29b21caa8e460097bfad9c026a33621"
 
 inherit autotools qt4x11
 
-PNBLACKLIST[maliit-plugins] = "BROKEN: depends on broken maliit-framework"
+PNBLACKLIST[maliit-plugins] ?= "BROKEN: depends on broken maliit-framework"
 
 DEPENDS = "maliit-framework"
 
