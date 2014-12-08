@@ -141,4 +141,5 @@ do_install() {
     install ${S}/etc/input.conf ${D}/usr/etc/mplayer/
     install ${S}/etc/example.conf ${D}/usr/etc/mplayer/
     install ${S}/etc/codecs.conf ${D}/usr/etc/mplayer/
+    [ -e ${D}/usr/lib ] && rmdir ${D}/usr/lib
 }
