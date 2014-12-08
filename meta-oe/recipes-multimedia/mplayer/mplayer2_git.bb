@@ -36,7 +36,7 @@ CONFFILES_${PN} += "/usr/etc/mplayer/input.conf \
                     /usr/etc/mplayer/codecs.conf \
 "
 
-inherit autotools pkgconfig
+inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF = " \
     --prefix=/usr \
