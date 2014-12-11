@@ -9,6 +9,13 @@ DEPENDS_append_x86-64 = " gperftools"
 
 inherit scons
 
+# Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
+# | Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
+# | scons: *** [build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod] Error 1
+# | scons: building terminated because of errors.
+# | ERROR: scons build execution failed.
+PNBLACKLIST[mongodb] ?= "Fails to build with system boost"
+
 PV = "2.6.0+git${SRCPV}"
 SRCREV = "be1905c24c7e5ea258e537fbf0d2c502c4fc6de2"
 SRC_URI = "git://github.com/mongodb/mongo.git;branch=v2.6 \
