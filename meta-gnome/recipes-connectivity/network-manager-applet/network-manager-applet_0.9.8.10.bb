@@ -8,6 +8,8 @@ inherit gnomebase gtk-icon-cache
 
 GNOME_COMPRESS_TYPE = "xz"
 
+PNBLACKLIST[network-manager-applet] ?= "Depends on broken polkit-gnome"
+
 SRC_URI += " \
     file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
     file://0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \

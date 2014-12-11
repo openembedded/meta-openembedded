@@ -6,6 +6,8 @@ DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolek
 
 PR = "r18"
 
+PNBLACKLIST[gdm] ?= "Depends on broken polkit-gnome"
+
 inherit gnome update-rc.d systemd useradd
 
 SRC_URI += " \
