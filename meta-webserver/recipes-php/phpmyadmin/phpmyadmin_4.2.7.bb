@@ -21,6 +21,8 @@ inherit allarch
 do_install() {
     install -d ${D}${datadir}/${BPN}
     cp -a * ${D}${datadir}/${BPN}
+    # Don't install patches to target
+    rm -rf ${D}${datadir}/${BPN}/patches
 
     install -d ${D}${sysconfdir}/apache2/conf.d
     install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
