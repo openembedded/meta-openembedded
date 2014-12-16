@@ -1,0 +1,22 @@
+omgps: omgps fails compilation due to uninitialized variables
+
+omgps does not compile with gcc 4.9 due to uninitialized variables 
+with the option -Werror=maybe-uninitialized
+To solve the problem, just initiated the variable and checked for side
+effects.
+Upstream-Status: Submitted
++https://code.google.com/p/omgps/issues/detail?id=16
+
+Signed-off-by: Raphael Silva <rapphil@gmail.com>
+diff -urpN omgps.orig/src/sound.c omgps/src/sound.c
+--- omgps.orig/src/sound.c	2014-12-14 15:13:29.609243994 -0200
++++ omgps/src/sound.c	2014-12-14 15:14:13.831116745 -0200
+@@ -44,7 +44,7 @@ static gboolean play_sound_files(char *f
+ 		return FALSE;
+ 
+ 	char *bak = strdup(files);
+-	char *saveptr;
++	char *saveptr = NULL;
+ 	char *p = strtok_r(bak, ";", &saveptr);
+ 
+ 	#define MAX_SOUND_FILES 14
