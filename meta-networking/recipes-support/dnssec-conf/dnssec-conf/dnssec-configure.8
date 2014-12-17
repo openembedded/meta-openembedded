@@ -1,0 +1,179 @@
+'\" t
+.\"     Title: DNSSEC-CONFIGURE
+.\"    Author: [see the "AUTHOR" section]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 10 December 2008
+.\"    Manual: User\(aas Manual
+.\"    Source: User\*(Aqs Manual
+.\"  Language: English
+.\"
+.TH "DNSSEC\-CONFIGURE" "8" "10 December 2008" "User\*(Aqs Manual" "User\(aas Manual"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+dnssec-configure \- update recursive nameserver configuration options and keys for \fIDNSSEC\fR and \fIDLV\fR\&. Currently Bind (named) and Unbound are supported\&.
+.SH "SYNOPSIS"
+.HP \w'\fBdnssec\-configure\fR\ 'u
+\fBdnssec\-configure\fR [\-u] [\-b] \-\-dnssec=\fIon\fR | \fIoff\fR  \-\-dlv=\fIon\fR | \fIoff\fR | \fI<dlvzone>\fR  [\-\-basedir=\fI<dir>\fR] [\-\-norestart] [\-\-nocheck] [\-\-production] [\-\-testing] [\-\-harvest] [\-\-root]
+.HP \w'\fBdnssec\-configure\fR\ 'u
+\fBdnssec\-configure\fR \-\-show [\-u] [\-b]
+.HP \w'\fBdnssec\-configure\fR\ 'u
+\fBdnssec\-configure\fR \-u | \-b  \-\-set=\fIsecion:optname:optval\fR
+.HP \w'\fBdnssec\-configure\fR\ 'u
+\fBdnssec\-configure\fR \-u | \-b  \-\-query=\fIsecion:optname:optval\fR
+.SH "DESCRIPTION"
+.PP
+dnssec\-configure shows or rewrites the configuration files of the
+\fIBind (named)\fR
+and/or the
+\fIUnbound\fR
+nameservers\&. It verifies the configuration before rewriting it, and restarts the nameserver(s) if neccessary\&.
+.SH "OPTIONS"
+.PP
+\fB\-b (\-n)\fR
+.RS 4
+Update the
+\fIBind (named)\fR
+nameserver configuration\&.
+.RE
+.PP
+\fB\-u\fR
+.RS 4
+Update the
+\fIUnbound\fR
+nameserver configuration\&.
+.RE
+.PP
+If neither options are specified,
+\fI\-b \-u\fR
+is assumed\&.
+.PP
+\fB\-\-show\fR
+.RS 4
+Show the current configuration(s) and do not rewrite any configuration files\&. All other options below are ignored\&.
+.RE
+.PP
+\fB\-\-set=\fR<section:optname:optvalue>
+.RS 4
+Set the options optname to value in the specified section of the configuration file\&. This option cannot be used with \-\-dnssec, \-\-dlv, \-\-query or \-\-show\&. This option can be specified multiple times to set more then one option at once\&.
+.RE
+.PP
+\fB\-\-set=\fR<section:optname:optvalue>
+.RS 4
+Query the setting optname in the specified section of the configuration file\&. This option cannot be used with \-\-dnssec, \-\-dlv, \-\-set or \-\-show\&. This option can be specified multiple times to query more then one option at once\&.
+.RE
+.PP
+\fB\-\-dnssec=\fR<on|off>
+.RS 4
+This option will enable or disable all
+\fIDNSSEC\fR
+processing by the nameserver\&. When enabled, detected spoofed or otherwise verifiably false DNS answers will not be returned\&. Instead, a
+\fISERVFAIL\fR
+is returned\&. The application is responsible for further investigation\&. When disabled, classic DNS services run without any advanced protection\&.
+.RE
+.PP
+\fB\-\-dlv=\fR<on|off|\fIdlvzone\fR>
+.RS 4
+This option will enable or disable
+\fIDLV\fR, or "DNSSEC Lookaside Verification" (RFC 5074)\&. This is a method for using DNSSEC in TLD\*(Aqs that themselves do not support DNSSEC\&. It works by offloading DNS queries for all TLD\*(Aqs for which no DNSSEC keys are loaded to a DLV Registry\&. The Trusted Key for the DLV Registry must be available\&. The default DLV Registry (when using the value
+\fIon\fR, is the
+\fBISC DLV\fR
+(http://dlv\&.isc\&.org/)i\&. The ISC DLV Key is pre\-installed with this software\&. You can specify your own DLV Registry, but you must make sure the
+\fIdlvzone\fR\*(Aqs key is installed in
+\fI/etc/pki/dnssec/dlv/dlvzone\&.key\fR\&.
+.RE
+.PP
+\fB\-\-basedir\fR\fI<dir>\fR
+.RS 4
+The basedir for Trusted Key files\&. The default is
+\fI/etc/pki/dnssec\-keys/\fR\&. NOT YET IMPLEMENTED
+.RE
+.PP
+\fB\-\-norestart\fR
+.RS 4
+Do not attempt to restart any running DNS resolving nameservers\&. This is for use within initscripts, where dnssec\-configure is called to update the settings from within a DNS server initscript\&. Otherwise this would cause a loop\&.
+.RE
+.PP
+\fB\-\-nocheck\fR
+.RS 4
+Do not attempt to run unbound\-checkconf or bind\-checkconf\&. This is required for calls within package managers such as RPM where at least for unbound, we are still missing keys/certs and unbound\-checkconf would return an error\&. We cannot generate keys before running unbound\-checkconf, as we might not have enough entropy resulting in a stalled partial install\&.
+.RE
+.PP
+The following options determine which Trusted Keys to preload with the nameserver software\&. Without Trusted Keys, no DNSSEC verification is possible\&. At some point, when the Root is signed, only one key would need to be preloaded\&. This is not yet the case\&.
+.PP
+\fB\-\-production\fR
+.RS 4
+Include Trusted Keys that are in full production\&. These keys have been analysed by people in the DNS community or have been publicly announced by their TLD to be production ready\&. If no Trusted Keys options are specified, only this setting will be enabled\&. These keys can be found in
+\fI/etc/pki/dnssec\-keys/production\&.conf\fR\&.
+.RE
+.PP
+\fB\-\-testing\fR
+.RS 4
+Include Trusted Keys that are in testing mode\&. These keys tend to be reasonably stable, or have been found and verified but not officially announced by its TLD\&. These are not included per default\&. These keys can be found in
+\fI/etc/pki/dnssec\-keys/testing\&.conf\fR\&.
+.RE
+.PP
+\fB\-\-harvest\fR
+.RS 4
+Include Trusted Keys that are harvested and/or added by the local system administrator themselves\&. These keys can be found in
+\fI/etc/pki/dnssec\-keys/harvest\&.conf\fR\&.
+.RE
+.PP
+\fB\-\-root\fR
+.RS 4
+Include the Trusted Keys for the Root Zone\&. Currently the root is not signed, and there is no root key available\&. A test Root key is available from IANA, but this requires using a separate resolver at IANA\*(Aqs\&. Do not use this option\&.
+.RE
+.SH "EXAMPLES"
+.PP
+Enable DNSSEC with production keys and ISC\*(Aqs DLV Registry for all nameserver software found on the machine
+.PP
+\fB# dnssec\-configure \-\-dnssec=on \-\-dlv=on\fR
+.PP
+For the Unbound nameserver, enable DNSSEC with production and testing keys, and use dlv\&.xelerance\&.com as the DLV Registry
+.PP
+\fB# dnssec\-configure \-u \-\-dnssec=on \-\-dlv=dlv\&.xelerance\&.com \-\-production \-\-testing\fR
+.PP
+For the Bind nameserver, disable dnssec
+.PP
+\fB# dnssec\-configure \-b \-\-dnssec=off\fR
+.SH "REQUIREMENTS"
+.PP
+One or both of the known DNSSEC capable nameservers, Bind and Unbound, is required\&. To support
+\fIRFC 5011\fR
+style automatic key updates, the
+\fIautotrust\fR
+software is needed along with a cron daemon\&.
+.SH "TRUSTED KEYS"
+.PP
+The format of the key files is carefully chosen to be compatible with both Bind and Unbound\&. Key files are stored in individual files so that they can be easilly verified and updated by autotrust\&. The keys are grouped in their respective categories production, testing and harvest\&. If you have local DNSSEC keys you wish to preload, you can add these to one of these three directories and re\-run dnssec\-configure to rebuild the production\&.conf, testing\&.conf and harvest\&.conf files based which are based on the contents of the
+\fI/etc/pki/dnssec\-keys/{production,testing,harvest}\fR
+directories\&. If you wish to use another DLV, add the key for the DLV zone to
+\fI/etc/pki/dnssec\-keys/dlv/dlvzone\&.domain\&.key\fR\&.
+.SH "SEE ALSO"
+.PP
+\fIdnskey\-pull\fR(1),
+\fIunbound\-host\fR(1),
+\fIsystem\-config\-dnssec\fR(8),
+\fIautotrust\fR(8),
+\fInamed\&.conf\fR(8),
+\fIunbound\&.conf\fR(8)\&.
+.SH "AUTHOR"
+.PP
+Paul Wouters <paul@xelerance\&.com>

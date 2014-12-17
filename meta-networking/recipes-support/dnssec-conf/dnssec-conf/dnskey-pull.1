@@ -1,0 +1,118 @@
+'\" t
+.\"     Title: DNSKEY-PULL
+.\"    Author: [see the "AUTHOR" section]
+.\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
+.\"      Date: 7 November 2008
+.\"    Manual: User\*(Aqs Manual
+.\"    Source: User's Manual
+.\"  Language: English
+.\"
+.TH "DNSKEY\-PULL" "1" "7 November 2008" "User's Manual" "User\*(Aqs Manual"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+dnskey-pull \- fetch DNSKEY records from a zone, from all sub\-zones or from a webpage
+.SH "SYNOPSIS"
+.HP \w'\fBdnskey\-pull\fR\ 'u
+\fBdnskey\-pull\fR [\-a] [\-t] [\-o\ \fI<output>\fR] [\-s\ \fI<ns>\fR] \fIzone\fR \fI[\&.\&.]\fR
+.HP \w'\fBdnskey\-pull\fR\ 'u
+\fBdnskey\-pull\fR [\-o\ \fI<output>\fR] \fIurl\fR \fI[\&.\&.]\fR
+.SH "DESCRIPTION"
+.PP
+\fBdnskey\-pull\fR
+obtains Key\-Signing\-Key (KSK) DNSKEY records for use as
+\fItrust\-anchor\fR
+with recursing nameserver that are setup to use
+\fBDNSSEC\&.\fR
+.PP
+dnskey\-pull itself performs no DNSSEC validation\&. dnskey\-pull pulls KSK DNSKEY records for a single zone but can also be told, if it has
+\fIzone\-transfer\fR
+(AXFR) permission, to lookup KSK DNSKEY records for all NS records found in a zone\&. This latter feature can be used to find new DNSKEY\*(Aqs in TLD\*(Aqs\&.
+.PP
+The output of this command can be directly included in the configuration files for the
+\fBBind\fR
+and
+\fBUnbound\fR
+recursing nameservers as DNSSEC trust anchor\&.
+.PP
+dnskey\-pull ignores the system\*(Aqs
+/etc/resolv\&.conf
+setting for domain appending, and treats all zone arguments as FQDN\&. It does use the system\*(Aqs resolver settings for recursive lookups\&.
+.SH "OPTIONS"
+.PP
+\fB\-a\fR
+.RS 4
+Use a zone\-transfer (AXFR) to find all NS records in a zone and return any DNSKEY records found for these NS records in
+\fItrusted\-key\fR
+format\&. Note that AXFR is often blocked on nameservers\&.
+.RE
+.PP
+\fB\-s\ \&<\fR\fInameserver>\fR
+.RS 4
+Use the specified nameserver to perform the zone\-transfer (AXFR)\&.
+.RE
+.PP
+\fB\-t\fR
+.RS 4
+Return the resulting DNSKEY\*(Aqs within a
+\fItrusted\-key { };\fR
+statement, compatible for including with a
+\fIbind\fR
+or
+\fIunbound\fR
+nameserver configuration\&.
+.RE
+.SH "EXAMPLES"
+.PP
+Get all DNSKEY records for Top Level Domains (TLD\*(Aqs) in the Root ("\&.") zone, using the F root\-server that allows zone\-transfers:
+.PP
+\fB% dnskey\-pull \-t \-a \-s f\&.root\-servers\&.net \&.\fR
+.PP
+Get a trusted\-key statement for the xelerance\&.com zone:
+.PP
+\fB% dnskey\-pull \-t xelerance\&.com\fR
+.PP
+Get the trusted keys for the TLD\*(Aqs of Sweden, Brasil and Bulgaria:
+.PP
+\fB% dnskey\-pull se\&. br\&. bg\&.\fR
+.PP
+Find all secured
+\fIENUM\fR
+zones:
+.PP
+\fB% dnskey\-pull \-a \-s ns\-pri\&.ripe\&.net\&. e164\&.arpa\&.\fR
+.PP
+Find the keys on the webpage of the Brasil NIC:
+.PP
+\fB% dnskey\-pull https://registro\&.br/ksk/index\&.html\fR
+.SH "EXIT STATUS"
+.PP
+dnskey\-pull returns 0 when it found one or more DNSKEY records, and non\-zero upon finding no DNSKEY records\&.
+.SH "SEE ALSO"
+.PP
+\fBdnssec-configure\fR(1),
+\fBsystem-config-dnssec\fR(1),
+\fBnamed.conf\fR(8),
+\fBunbound.conf\fR(8),
+\fBautotrust\fR(8),
+\fBunbound-host\fR(8)\&.
+.SH "AUTHOR"
+.PP
+Paul Wouters <paul@xelerance\&.com>
