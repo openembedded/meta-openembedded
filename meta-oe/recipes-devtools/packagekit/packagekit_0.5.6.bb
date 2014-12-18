@@ -41,7 +41,6 @@ EXTRA_OECONF = "--with-security-framework=dummy \
 do_configure_append() {
     for i in $(find . -name Makefile) ; do
         sed -i -e s:${STAGING_DIR_NATIVE}::g \
-               -e s:${bindir}/mkdir:${STAGING_BINDIR_NATIVE}/mkdir:g \
                -e s:/usr/bin/intltool-merge:${STAGING_BINDIR_NATIVE}/intltool-merge:g \
                $i
     done
