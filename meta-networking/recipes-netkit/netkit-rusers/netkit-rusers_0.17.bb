@@ -8,6 +8,7 @@ DEPENDS = " tcp-wrappers libtirpc rpcbind"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
            ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-8.diff.gz;name=patch8 \
+           file://rpc.rusersd-Makefile-fix-parallel-build-issue.patch \
 "
 
 SRC_URI[archive.md5sum] = "dc99a80b9fde2ab427c874f88f1c1602"
