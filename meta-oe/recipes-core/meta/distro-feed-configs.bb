@@ -5,10 +5,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
 
 DISTRO_FEED_PREFIX ?= "remote"
 DISTRO_FEED_URI ?= "http://my-distribution.example/remote-feed/"
+DISTRO_FEED_ARCHS ?= "all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}"
 
 do_compile() {
     mkdir -p ${S}/${sysconfdir}/opkg
-    for feed in all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}; do
+    for feed in ${DISTRO_FEED_ARCHS}; do
         echo "src/gz ${DISTRO_FEED_PREFIX}-${feed} ${DISTRO_FEED_URI}/${feed}" > ${S}/${sysconfdir}/opkg/${feed}-feed.conf
     done
 }
