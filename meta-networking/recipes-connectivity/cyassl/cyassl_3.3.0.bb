@@ -1,4 +1,4 @@
-SUMMARY = "CyaSSL Embedded SSL Library"
+SUMMARY = "CyaSSL Lightweight, Embedded SSL Library"
 DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
                optimized for embedded and RTOS environments. It can be \
                Up to 20 times smaller than OpenSSL while still supporting \
@@ -11,7 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.yassl.com/${BP}.zip"
 
-SRC_URI[md5sum] = "72477eb50697e759d309c49cb1aef18a"
-SRC_URI[sha256sum] = "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2adc16d2507b5d0b03e"
+SRC_URI[md5sum] = "0303eb0f2f9065a1207d9104ab0eba7c"
+SRC_URI[sha256sum] = "e51583ea1e4d64537553922d67a96360312811dffef58d4c05506aa98a296fe3"
 
 inherit autotools
+
