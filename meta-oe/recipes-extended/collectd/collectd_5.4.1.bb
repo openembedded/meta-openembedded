@@ -35,8 +35,10 @@ PACKAGECONFIG[sensors] = "--enable-sensors --with-libsensors=yes, \
         --disable-sensors --with-libsensors=no,lmsensors"
 PACKAGECONFIG[amqp] = "--enable-amqp --with-librabbitmq=yes, \
         --disable-amqp --with-librabbitmq=no,rabbitmq-c"
-# protobuf-c that is currently only available in meta-virtualization layer
+# protobuf-c, libvirt that are currently only available in meta-virtualization layer
 PACKAGECONFIG[pinba] = "--enable-pinba,--disable-pinba,protobuf-c-native protobuf-c"
+PACKAGECONFIG[libvirt] = "--enable-libvirt,--disable-libvirt,libvirt"
+PACKAGECONFIG[libesmtp] = "--with-libesmtp,--without-libesmtp,libesmtp"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
