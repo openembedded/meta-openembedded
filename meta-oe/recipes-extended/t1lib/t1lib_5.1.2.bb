@@ -2,7 +2,7 @@ SUMMARY = "A Type1 Font Rastering Library"
 SECTION = "libs"
 DEPENDS = "virtual/libx11 libxaw"
 
-LICENSE = "LGPLv2 GPLv2"
+LICENSE = "LGPLv2 & GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8ca43cbc842c2336e835926c2166c28b \
                     file://LGPL;md5=6e29c688d912da12b66b73e32b03d812 \
 "
