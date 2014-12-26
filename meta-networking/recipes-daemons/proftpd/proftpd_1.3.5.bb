@@ -4,31 +4,60 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-PR = "r4"
-
 SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-           file://make.patch \
            file://basic.conf.patch \
-           file://contrib.patch \
            file://proftpd-basic.init \
            file://default \
-           file://move-pidfile-to-var-run.patch \
            file://close-RequireValidShell-check.patch \
-           file://move-runfile-to-var-run.patch \
-           file://proftpd-sftp.patch \
-"
+           file://contrib.patch  \
+           file://build_fixup.patch \
+           "
 
-SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
-SRC_URI[sha256sum] = "9f659585cea90fc6af34a0ffae4a90e4ed37abe92dbd9b6c311f95a436c961cb"
+SRC_URI[md5sum] = "aff1bff40e675244d72c4667f203e5bb"
+SRC_URI[sha256sum] = "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2ea2cc4e08ccb87715"
 
 inherit autotools-brokensep useradd update-rc.d
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses,--disable-curses --disable-ncurses,ncurses"
+PACKAGECONFIG ??= "sia shadow"
+PACKAGECONFIG += " ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
+PACKAGECONFIG += " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 
-EXTRA_OECONF = "--disable-cap \
-                --disable-auth-pam \
-"
+PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses, --disable-curses --disable-ncurses, ncurses"
+PACKAGECONFIG[openssl] = "--enable-openssl, --disable-openssl, openssl, openssl"
+PACKAGECONFIG[pam] = "--enable-auth-pam, --disable-auth-pam, libpam, libpam"
+PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6"
+PACKAGECONFIG[shadow] = "--enable-shadow, --disable-shadow"
+PACKAGECONFIG[pcre] = "--enable-pcre, --disable-pcre, libpcre "
+
+# enable POSIX.1e capabilities
+PACKAGECONFIG[cap] = "--enable-cap, --disable-cap, libcap, libcap"
+
+#enable support for POSIX ACLs
+PACKAGECONFIG[acl] = "--enable-facl, --disable-facl"
+
+#enable proftpd controls via ftpdct
+PACKAGECONFIG[ctrls] = "--enable-ctrls, --disable-crtls"
+
+#prevent proftpd from using its bundled getopt implementation.
+PACKAGECONFIG[getopt] = "--with-getopt, --without-getopt"
+
+#do not strip debugging symbols from installed code
+PACKAGECONFIG[strip] = "--enable-strip, --disable-strip"
+
+#enable SIA authentication support (Tru64)
+PACKAGECONFIG[sia] = "--enable-sia, --disable-sia"
+PACKAGECONFIG[sendfile] = "-enable-sendfile, --disable-sendfile"
+
+#enable Native Language Support (NLS)
+PACKAGECONFIG[nls] = "--enable-nls, --disable-nls"
+
+#add mod_dso to core modules
+PACKAGECONFIG[dso] = "--enable-dso, --disable-dso"
+PACKAGECONFIG[largefile] = "--enable-largefile, --disable-largefile"
+
+#omit mod_auth_file from core modules
+PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
+
 
 # proftpd uses libltdl which currently makes configuring using
 # autotools.bbclass a pain...
