@@ -1,5 +1,5 @@
 DESCRIPTION = "Navit is a car navigation system with routing engine."
-LICENSE = "GPLv2 LGPLv2"
+LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ed539d099d6ce08de6ea0dfed9ecb333 \
                     file://LGPL-2;md5=3214f080875748938ba060314b4f727d \
                     file://GPL-2;md5=751419260aa954499f7abaabaa882bbe \
