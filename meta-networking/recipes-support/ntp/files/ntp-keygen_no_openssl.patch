@@ -1,0 +1,108 @@
+Fix ntp-keygen build without OpenSSL
+
+Patch borrowed from Gentoo, originally from upstream
+Added --enable-libenvent to config since this version
+does not have local libevent support but we need the 
+functions from the lib.
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+
+Upstream-Status: Backport
+
+Upstream commit:
+http://bk1.ntp.org/ntp-stable/?PAGE=patch&REV=5497b345z5MNTuNvJWuqPSje25NQTg
+Gentoo bugzilla: https://bugs.gentoo.org/show_bug.cgi?id=533238
+
+Signed-off-by: Markos Chandras <hwoarang@gentoo.org>
+
+Index: ntp-4.2.6p5/libntp/ntp_random.c
+===================================================================
+--- ntp-4.2.6p5.orig/libntp/ntp_random.c
++++ ntp-4.2.6p5/libntp/ntp_random.c
+@@ -498,6 +498,21 @@ ntp_random( void )
+ int crypto_rand_init = 0;
+ #endif
+ 
++#ifndef HAVE_ARC4RANDOM_BUF
++static void
++arc4random_buf(void *buf, size_t nbytes);
++
++void
++evutil_secure_rng_get_bytes(void *buf, size_t nbytes);
++
++static void
++arc4random_buf(void *buf, size_t nbytes)
++{
++  evutil_secure_rng_get_bytes(buf, nbytes);
++  return;
++}
++#endif
++
+ /*
+  * ntp_crypto_srandom:
+  *
+Index: ntp-4.2.6p5/util/Makefile.am
+===================================================================
+--- ntp-4.2.6p5.orig/util/Makefile.am
++++ ntp-4.2.6p5/util/Makefile.am
+@@ -21,6 +21,7 @@ AM_CPPFLAGS= -I$(top_srcdir)/include -I$
+ LDADD=		../libntp/libntp.a
+ ntp_keygen_SOURCES = ntp-keygen.c ntp-keygen-opts.c ntp-keygen-opts.h
+ ntp_keygen_LDADD= version.o $(LIBOPTS_LDADD) ../libntp/libntp.a @LCRYPTO@
++ntp_keygen_LDADD += $(LDADD_LIBEVENT)
+ 
+ ETAGS_ARGS=	Makefile.am
+ #EXTRA_DIST=	README TAGS
+Index: ntp-4.2.6p5/configure.ac
+===================================================================
+--- ntp-4.2.6p5.orig/configure.ac
++++ ntp-4.2.6p5/configure.ac
+@@ -376,6 +376,8 @@ AC_CHECK_FUNC([openlog], ,
+ AC_SEARCH_LIBS([MD5Init], [md5 md])
+ AC_CHECK_FUNCS(MD5Init)
+ 
++AC_CHECK_FUNC([arc4random_buf])
++
+ NTP_LINEEDITLIBS
+ 
+ dnl Digital UNIX V4.0 and Solaris 7 have POSIX.1c functions in -lrt
+@@ -5205,6 +5207,39 @@ AC_MSG_RESULT([$ntp_use_dev_clockctl])
+ 
+ AC_CHECK_HEADERS([sys/capability.h sys/prctl.h])
+ 
++AC_MSG_CHECKING([if we have libevent capabilities (libevent)])
++
++case "$ac_cv_header_event2_event-config_h" in
++ yes)
++    case "$host" in
++     *) ntp_have_linuxcaps=yes
++	;;
++    esac
++    ;;
++ *)
++    ntp_have_linuxcaps=no
++    ;;
++esac
++
++AC_ARG_ENABLE(
++    [libevent],
++    [AS_HELP_STRING(
++	[--enable-libevent],
++	[+ Use libevent capabilities for arc4random]
++    )],
++    [ntp_have_libevent=$enableval]
++)
++
++AC_MSG_RESULT([$ntp_have_libevent])
++
++case "$ntp_have_libevent" in
++ yes)
++    AC_DEFINE([HAVE_LIBEVENT], [1],
++	[Do we have libevent capabilities?])
++    LIBS="$LIBS -levent"
++esac
++
++
+ AC_MSG_CHECKING([if we have linux capabilities (libcap)])
+ 
+ case "$ac_cv_header_sys_capability_h$ac_cv_header_sys_prctl_h" in

@@ -26,13 +26,22 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://sntp \
            file://ntpd.list \
            file://CVE-2013-5211.patch \
+           file://ntp-4.2.6p5-cve-2014-9293.patch \
+           file://ntp-4.2.6p5-cve-2014-9294.patch \
+           file://ntp-4.2.6p5-cve-2014-9295.patch \
+           file://ntp-4.2.6p5-cve-2014-9296.patch  \
+           file://ntp-keygen_no_openssl.patch  \
 "
 
 inherit autotools update-rc.d useradd systemd
 
 # The ac_cv_header_readline_history is to stop ntpdc depending on either
 # readline or curses
-EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no --with-binsubdir=sbin"
+EXTRA_OECONF += "--with-net-snmp-config=no \
+                --without-ntpsnmpd \
+                ac_cv_header_readline_history_h=no \
+                --with-binsubdir=sbin"
+
 CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
 
 USERADD_PACKAGES = "${PN}"
@@ -42,7 +51,7 @@ USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
                        --shell /bin/false --user-group ntp"
 
 # NB: debug is default-enabled by NTP; keep it default-enabled here.
-PACKAGECONFIG ??= "cap debug"
+PACKAGECONFIG ??= "event cap debug"
 PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           --with-openssl-incdir=${STAGING_INCDIR} \
                           --with-crypto, \
@@ -51,6 +60,7 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
 PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
 PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
 PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
+PACKAGECONFIG[event] = "--enable-libevent,--disable-libevent, libevent"
 
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
@@ -94,7 +104,7 @@ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
 
 # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
 # with wonky clocks (e.g. OpenSlug)
-RDEPENDS_${PN} = "${PN}-tickadj"
+RDEPENDS_${PN} = "${PN}-tickadj libbsd"
 # Handle move from bin to utils package
 RPROVIDES_${PN}-utils = "${PN}-bin"
 RREPLACES_${PN}-utils = "${PN}-bin"
