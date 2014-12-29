@@ -10,16 +10,26 @@ SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/gkernel/${BP}.tar.gz \
 SRC_URI[md5sum] = "ae89dbfcf08bdfbea19066cfbf599127"
 SRC_URI[sha256sum] = "b71bdfd4222c05e8316001556be90e1606f2a1bac3efde60153bd84e873cc195"
 
+# As the recipe doesn't inherit systemd.bbclass, we need to set this variable
+# manually to avoid unnecessary postinst/preinst generated.
+python () {
+    if not bb.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False, d):
+        d.setVar("INHIBIT_UPDATERCD_BBCLASS", "1")
+}
+
 inherit autotools update-rc.d
 
 do_install_append() {
-    install -d "${D}${sysconfdir}/init.d"
-    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
-    sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
-        ${D}${sysconfdir}/init.d/rng-tools
+    # Only install the init script when 'sysvinit' is in DISTRO_FEATURES.
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        install -d "${D}${sysconfdir}/init.d"
+        install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
+        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
+            ${D}${sysconfdir}/init.d/rng-tools
 
-    install -d "${D}${sysconfdir}/default"
-    install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+        install -d "${D}${sysconfdir}/default"
+        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
+    fi
 }
 
 INITSCRIPT_NAME = "rng-tools"
