@@ -1,4 +1,4 @@
-LICENSE = "MIT GPL-3.0"
+LICENSE = "MIT & GPL-3.0"
 PV = "0.1.0+svnr${SRCREV}"
 PR = "${INC_PR}.0"
 

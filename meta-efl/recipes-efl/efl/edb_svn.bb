@@ -1,5 +1,5 @@
 SUMMARY = "Edb is the Enlightenment database library"
-LICENSE = "MIT BSD"
+LICENSE = "MIT & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d8a7c08df3bc3280208b959be7215c25 \
                     file://COPYING-PLAIN;md5=f59cacc08235a546b0c34a5422133035"
 

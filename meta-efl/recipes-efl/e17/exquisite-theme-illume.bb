@@ -1,5 +1,5 @@
 DDESCRIPTION = "A theme for exquisite"
-LICENSE = "MIT BSD"
+LICENSE = "MIT & BSD"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
 SECTION = "x11"
 DEPENDS = "edje-native"

@@ -1,5 +1,5 @@
 SUMMARY = "A graphic library for file loading, saving, rendering, and manipulation"
-LICENSE = "MIT BSD"
+LICENSE = "MIT & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
 
 DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"

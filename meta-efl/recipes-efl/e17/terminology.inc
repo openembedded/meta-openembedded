@@ -1,5 +1,5 @@
 DESCRIPTION = "Enlightenment Terminal Emulator"
-LICENSE = "MIT BSD"
+LICENSE = "MIT & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9a8682b561bdfa219d59483a679ed80a"
 DEPENDS = "evas ecore edje elementary eina eet emotion"
 

@@ -2,7 +2,7 @@ DESCRIPTION = "b-and-w theme was default E17 theme before alpha3 and some people
 SECTION = "e/utils"
 DEPENDS = "edje-native"
 RDEPENDS_${PN} = "e-wm"
-LICENSE = "MIT BSD"
+LICENSE = "MIT & BSD"
 # upstream was asked to include license infor in THEME dir
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 

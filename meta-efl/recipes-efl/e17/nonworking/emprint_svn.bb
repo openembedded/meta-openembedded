@@ -1,5 +1,5 @@
 DESCRIPTION = "Emprint is a utility for taking screenshots of the entire screen, a specific window, or a specific region."
-LICENSE = "MIT BSD"
+LICENSE = "MIT & BSD"
 DEPENDS = "imlib2 virtual/libx11 ecore evas edje eina"
 PV = "0.0.1+svnr${SRCPV}"
 LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
