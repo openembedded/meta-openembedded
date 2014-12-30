@@ -15,7 +15,7 @@ SECTION = "System Environment/Base"
 SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/r2-1-43.tar.gz"
 SRC_URI[md5sum] = "8fd185ffae710301de3bc297877a404b"
 SRC_URI[sha256sum] = "a630892b5fe59eb9e3bef30c597de1c2b7f35243dea4b0c995fd482aa20c2d6b"
-LICENSE = "PD MIT"
+LICENSE = "PD & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=100fcfb84512ccc03ffc7d89ac391305"
 S = "${WORKDIR}/r2-1-43"
 do_install() {
