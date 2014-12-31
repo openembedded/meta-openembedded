@@ -6,13 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a6a4ddbb7cd2999f6827ee143f6fcd97"
 
 DEPENDS = "openssl libpam"
 
-PR = "r1"
-
 SRC_URI = "ftp://ftp.cac.washington.edu/imap/imap-${PV}.tar.gz \
-           file://quote_cctype.patch"
+           file://quote_cctype.patch \
+           file://imap-2007e-shared.patch \
+           file://imap-2007f-format-security.patch \
+           "
 
-SRC_URI[md5sum] = "7903800dc2604000016de070e0c55840"
-SRC_URI[sha256sum] = "4b1137b87249782496ec3eeacaf83bbf09312a7d2ae3aead262179041b55565f"
+SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
+SRC_URI[sha256sum] = "53e15a2b5c1bc80161d42e9f69792a3fa18332b7b771910131004eb520004a28"
 
 S = "${WORKDIR}/imap-${PV}"
 
@@ -32,4 +33,9 @@ do_install() {
     install c-client/c-client.a ${D}${libdir}/libc-client.a
 }
 
+RPROVIDES_${PN} = "libc-client"
+RREPLACES_${PN} = "libc-client"
+RCONFLICTS_${PN} = "libc-client"
+
 ALLOW_EMPTY_${PN} = "1"
+
