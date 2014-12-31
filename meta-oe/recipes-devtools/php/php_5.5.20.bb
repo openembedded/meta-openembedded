@@ -29,8 +29,8 @@ SRC_URI_append_class-target += " \
             file://70_mod_php5.conf \
           "
 
-SRC_URI[md5sum] = "5cb5f2ed9099299f8a4c952d59d93812"
-SRC_URI[sha256sum] = "00f24226b12fee27e332383b6304f1b9ed3f4d9173dd728a68c5c3f5a59b8ba7"
+SRC_URI[md5sum] = "9dfc1d4d2b44fb7e2b4ee9651d032203"
+SRC_URI[sha256sum] = "f28a150d1cd8991bd1a41dce4fdff4e343d1dbe01a48b9b44bea74532ce0391a"
 
 S = "${WORKDIR}/php-${PV}"
 
