@@ -3,11 +3,11 @@ HOMEPAGE = "http://www.php.net"
 SECTION = "console/network"
 
 LICENSE = "PHP-3.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
-           libc-client openssl"
+           libc-client openssl libmcrypt"
 DEPENDS_virtclass-native = "zlib-native libxml2-native"
 
 # The new PHP downloads server groups PHP releases by major version so find
@@ -30,8 +30,8 @@ SRC_URI_append_class-target += " \
             file://php-fpm-apache.conf \
           "
 
-SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
-SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
+SRC_URI[md5sum] = "5cb5f2ed9099299f8a4c952d59d93812"
+SRC_URI[sha256sum] = "00f24226b12fee27e332383b6304f1b9ed3f4d9173dd728a68c5c3f5a59b8ba7"
 
 S = "${WORKDIR}/php-${PV}"
 
@@ -40,7 +40,7 @@ inherit autotools pkgconfig pythonnative gettext
 SSTATE_SCAN_FILES += "build-defs.h"
 
 # Common EXTRA_OECONF
-COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
+COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared --disable-opcache"
 EXTRA_OECONF = "--enable-mbstring \
                 --enable-wddx \
                 --enable-fpm \
@@ -49,6 +49,7 @@ EXTRA_OECONF = "--enable-mbstring \
                 --with-imap-ssl=${STAGING_DIR_HOST} \
                 --with-zlib=${STAGING_LIBDIR}/.. \
                 --with-iconv=${STAGING_LIBDIR}/.. \
+                --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
                 ${COMMON_EXTRA_OECONF} \
 "
 EXTRA_OECONF_virtclass-native = " \
