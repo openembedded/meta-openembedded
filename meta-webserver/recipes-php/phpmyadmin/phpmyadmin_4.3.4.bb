@@ -6,13 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-           file://0001-bug-4504-security-Self-XSS-in-query-charts.patch \
-           file://0001-bug-4505-security-XSS-in-view-operations-page.patch \
-           file://0001-Bug-4544-additional-fix-for-4.2.x.patch \
            file://apache.conf"
 
-SRC_URI[md5sum] = "0dcd755450dac819f33502590c88ad29"
-SRC_URI[sha256sum] = "5d101dd88a99a869bc0c684a7f687cf290abc4bf306daac73337cbde2d7743e4"
+SRC_URI[md5sum] = "f811243e241ee81defb97e014ca713ef"
+SRC_URI[sha256sum] = "91258e07e04e25c5e49284b194ebff8ffa807ad38832fbe802cc6af3f7cb96d3"
 
 S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 
