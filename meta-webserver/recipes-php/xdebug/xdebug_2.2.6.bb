@@ -6,8 +6,8 @@ DEPENDS = "php"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
-SRC_URI[md5sum] = "7e571ce8eb6fa969fd8263969019849d"
-SRC_URI[sha256sum] = "adc6fe92dcff2368be94d20a5997aadb4d46d74551e2dd6602a704a35a195a6f"
+SRC_URI[md5sum] = "f216356861e27284580d0208060ea7fa"
+SRC_URI[sha256sum] = "6dd1cba0605e75009331aa3625a19ef49ade5a75aa9fe2ff8a818108d2cce84e"
 
 inherit autotools
 
