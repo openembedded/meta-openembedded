@@ -9,7 +9,7 @@ SECTION = "System Environment/Daemons"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0be67017f1c770313ad7b40e18d568f1"
 
-SRC_URI = "http://ncu.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://dnrd.service \
            file://dnrd.conf.sample \
            file://dnrd.init"
