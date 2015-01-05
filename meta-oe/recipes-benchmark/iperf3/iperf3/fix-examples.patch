@@ -1,0 +1,107 @@
+The Makefiles for the examples only work properly when the build is
+done in the same directory as the source.  Fix this in Makefile.am and
+run bootstrap.sh to regenerate Makefile.in.
+
+Upstream-Status: Pending [iperf-dev@googlegroups.com]
+
+Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+---
+
+diff -rupN iperf-3.0.10.old/examples/Makefile.am iperf-3.0.10/examples/Makefile.am
+--- iperf-3.0.10.old/examples/Makefile.am	2014-12-16 13:39:58.000000000 -0600
++++ iperf-3.0.10/examples/Makefile.am	2014-12-29 17:12:02.238979626 -0600
+@@ -2,11 +2,13 @@ noinst_PROGRAMS		= mic mis		# Build, but
+ 
+ mic_SOURCES		= mic.c
+ mic_CFLAGS		= -g
+-mic_LDADD		= ../src/libiperf.la
++mic_LDADD		= $(top_builddir)/src/libiperf.la
+ mic_LDFLAGS		= -g
++mic_CPPFLAGS		= -I$(top_srcdir)/src
+ 
+ mis_SOURCES		= mis.c
+ mis_CFLAGS		= -g
+-mis_LDADD		= ../src/libiperf.la
++mis_LDADD		= $(top_builddir)/src/libiperf.la
+ mis_LDFLAGS		= -g
++mis_CPPFLAGS		= -I$(top_srcdir)/src
+ 
+diff -rupN iperf-3.0.10.old/examples/Makefile.in iperf-3.0.10/examples/Makefile.in
+--- iperf-3.0.10.old/examples/Makefile.in	2014-12-16 13:39:58.000000000 -0600
++++ iperf-3.0.10/examples/Makefile.in	2014-12-29 17:12:07.518979616 -0600
+@@ -94,7 +94,7 @@ CONFIG_CLEAN_VPATH_FILES =
+ PROGRAMS = $(noinst_PROGRAMS)
+ am_mic_OBJECTS = mic-mic.$(OBJEXT)
+ mic_OBJECTS = $(am_mic_OBJECTS)
+-mic_DEPENDENCIES = ../src/libiperf.la
++mic_DEPENDENCIES = $(top_builddir)/src/libiperf.la
+ AM_V_lt = $(am__v_lt_@AM_V@)
+ am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+ am__v_lt_0 = --silent
+@@ -104,7 +104,7 @@ mic_LINK = $(LIBTOOL) $(AM_V_lt) --tag=C
+ 	$(mic_LDFLAGS) $(LDFLAGS) -o $@
+ am_mis_OBJECTS = mis-mis.$(OBJEXT)
+ mis_OBJECTS = $(am_mis_OBJECTS)
+-mis_DEPENDENCIES = ../src/libiperf.la
++mis_DEPENDENCIES = $(top_builddir)/src/libiperf.la
+ mis_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+ 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(mis_CFLAGS) $(CFLAGS) \
+ 	$(mis_LDFLAGS) $(LDFLAGS) -o $@
+@@ -286,12 +286,14 @@ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ mic_SOURCES = mic.c
+ mic_CFLAGS = -g
+-mic_LDADD = ../src/libiperf.la
++mic_LDADD = $(top_builddir)/src/libiperf.la
+ mic_LDFLAGS = -g
++mic_CPPFLAGS = -I$(top_srcdir)/src
+ mis_SOURCES = mis.c
+ mis_CFLAGS = -g
+-mis_LDADD = ../src/libiperf.la
++mis_LDADD = $(top_builddir)/src/libiperf.la
+ mis_LDFLAGS = -g
++mis_CPPFLAGS = -I$(top_srcdir)/src
+ all: all-am
+ 
+ .SUFFIXES:
+@@ -375,32 +377,32 @@ distclean-compile:
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+ 
+ mic-mic.o: mic.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -MT mic-mic.o -MD -MP -MF $(DEPDIR)/mic-mic.Tpo -c -o mic-mic.o `test -f 'mic.c' || echo '$(srcdir)/'`mic.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mic_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -MT mic-mic.o -MD -MP -MF $(DEPDIR)/mic-mic.Tpo -c -o mic-mic.o `test -f 'mic.c' || echo '$(srcdir)/'`mic.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/mic-mic.Tpo $(DEPDIR)/mic-mic.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='mic.c' object='mic-mic.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -c -o mic-mic.o `test -f 'mic.c' || echo '$(srcdir)/'`mic.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mic_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -c -o mic-mic.o `test -f 'mic.c' || echo '$(srcdir)/'`mic.c
+ 
+ mic-mic.obj: mic.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -MT mic-mic.obj -MD -MP -MF $(DEPDIR)/mic-mic.Tpo -c -o mic-mic.obj `if test -f 'mic.c'; then $(CYGPATH_W) 'mic.c'; else $(CYGPATH_W) '$(srcdir)/mic.c'; fi`
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mic_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -MT mic-mic.obj -MD -MP -MF $(DEPDIR)/mic-mic.Tpo -c -o mic-mic.obj `if test -f 'mic.c'; then $(CYGPATH_W) 'mic.c'; else $(CYGPATH_W) '$(srcdir)/mic.c'; fi`
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/mic-mic.Tpo $(DEPDIR)/mic-mic.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='mic.c' object='mic-mic.obj' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -c -o mic-mic.obj `if test -f 'mic.c'; then $(CYGPATH_W) 'mic.c'; else $(CYGPATH_W) '$(srcdir)/mic.c'; fi`
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mic_CPPFLAGS) $(CPPFLAGS) $(mic_CFLAGS) $(CFLAGS) -c -o mic-mic.obj `if test -f 'mic.c'; then $(CYGPATH_W) 'mic.c'; else $(CYGPATH_W) '$(srcdir)/mic.c'; fi`
+ 
+ mis-mis.o: mis.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -MT mis-mis.o -MD -MP -MF $(DEPDIR)/mis-mis.Tpo -c -o mis-mis.o `test -f 'mis.c' || echo '$(srcdir)/'`mis.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mis_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -MT mis-mis.o -MD -MP -MF $(DEPDIR)/mis-mis.Tpo -c -o mis-mis.o `test -f 'mis.c' || echo '$(srcdir)/'`mis.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/mis-mis.Tpo $(DEPDIR)/mis-mis.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='mis.c' object='mis-mis.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -c -o mis-mis.o `test -f 'mis.c' || echo '$(srcdir)/'`mis.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mis_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -c -o mis-mis.o `test -f 'mis.c' || echo '$(srcdir)/'`mis.c
+ 
+ mis-mis.obj: mis.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -MT mis-mis.obj -MD -MP -MF $(DEPDIR)/mis-mis.Tpo -c -o mis-mis.obj `if test -f 'mis.c'; then $(CYGPATH_W) 'mis.c'; else $(CYGPATH_W) '$(srcdir)/mis.c'; fi`
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mis_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -MT mis-mis.obj -MD -MP -MF $(DEPDIR)/mis-mis.Tpo -c -o mis-mis.obj `if test -f 'mis.c'; then $(CYGPATH_W) 'mis.c'; else $(CYGPATH_W) '$(srcdir)/mis.c'; fi`
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/mis-mis.Tpo $(DEPDIR)/mis-mis.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='mis.c' object='mis-mis.obj' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -c -o mis-mis.obj `if test -f 'mis.c'; then $(CYGPATH_W) 'mis.c'; else $(CYGPATH_W) '$(srcdir)/mis.c'; fi`
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mis_CPPFLAGS) $(CPPFLAGS) $(mis_CFLAGS) $(CFLAGS) -c -o mis-mis.obj `if test -f 'mis.c'; then $(CYGPATH_W) 'mis.c'; else $(CYGPATH_W) '$(srcdir)/mis.c'; fi`
+ 
+ mostlyclean-libtool:
+ 	-rm -f *.lo

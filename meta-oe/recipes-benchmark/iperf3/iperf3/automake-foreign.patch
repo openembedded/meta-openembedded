@@ -1,0 +1,19 @@
+Pass the 'foreign' option to automake to enable iperf3 to build.
+
+Upstream-Status: Inappropriate [configuration]
+
+Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+---
+
+diff -rupN iperf-3.0.10.old/configure.ac iperf-3.0.10/configure.ac
+--- iperf-3.0.10.old/configure.ac	2014-12-16 13:39:58.000000000 -0600
++++ iperf-3.0.10/configure.ac	2014-12-29 15:09:27.534992643 -0600
+@@ -32,7 +32,7 @@ AC_CONFIG_AUX_DIR(config)
+ 
+ 
+ # Initialize the automake system
+-AM_INIT_AUTOMAKE
++AM_INIT_AUTOMAKE([foreign])
+ 
+ AM_MAINTAINER_MODE
+ AM_CONFIG_HEADER(src/config.h)
