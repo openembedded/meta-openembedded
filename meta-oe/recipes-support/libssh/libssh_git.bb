@@ -8,8 +8,10 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
 
 SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-6"
-SRCREV = "87145387aa12b720b52d6bc75b4dd6cd058c868a"
+SRCREV = "3880a8ed80a4b1e2c052bd62f328bba2f869d5ae"
 S = "${WORKDIR}/git"
+
+PV = "0.6.4+git${SRCPV}"
 
 EXTRA_OECMAKE = " \
     -DWITH_GCRYPT=1 \
