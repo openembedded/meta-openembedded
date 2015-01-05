@@ -8,7 +8,7 @@ forward certain incoming mail automatically to someone."
 HOMEPAGE = "http://www.procmail.org/"
 SECTION = "Applications/System"
 
-SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${PN}/${BP}.tar.gz \
+SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${BPN}/${BP}.tar.gz \
     file://from-debian-to-fix-compile-errors.patch \
     file://from-debian-to-modify-parameters.patch \
     file://from-debian-to-fix-man-file.patch \
