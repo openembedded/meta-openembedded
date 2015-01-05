@@ -11,11 +11,10 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
            file://my.cnf \
            file://mysqld.service \
            file://configure.cmake-fix-valgrind.patch \
-           file://revert-fix-for-MDEV-5120.patch \
           "
 
-SRC_URI[md5sum] = "561bede89a8bd19c374dad2d8f24fdfe"
-SRC_URI[sha256sum] = "cbde17f4a31483143490def6fcce33310ebae49eafe92dc4ada0e7227202415a"
+SRC_URI[md5sum] = "d2415efc6a6d73d7a58f3c79bb42f2e8"
+SRC_URI[sha256sum] = "a16dc62e4bcabecd5c483f2f8b657483a8c51934e7be5ad4ab21b8baea1f5332"
 
 S = "${WORKDIR}/mariadb-${PV}"
 
