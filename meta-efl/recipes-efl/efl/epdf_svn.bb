@@ -6,7 +6,7 @@ SRCREV = "${EFL_SRCREV}"
 
 inherit efl
 
-LICENSE = "GPLv2 LGPLv3"
+LICENSE = "GPLv2 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6 \
 "
