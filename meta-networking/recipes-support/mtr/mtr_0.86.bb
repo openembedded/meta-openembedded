@@ -5,14 +5,12 @@ DEPENDS = "ncurses"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                    file://mtr.c;beginline=5;endline=16;md5=56e390ced194aff352eefab404883057"
+                    file://mtr.c;beginline=5;endline=16;md5=af1fafbbfa1bfd48af839f4bb3221106"
 
-SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz \
-           file://configure.patch \
-           file://no-gtk.patch"
+SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "10601ea543fda3e51545c4bce195b64c"
-SRC_URI[sha256sum] = "f3b457c9623ae03565688a7ffd49d4843a5e2505ccaf3ba8d9fbd86e3ce9b6a0"
+SRC_URI[md5sum] = "8d63592c9d4579ef20cf491b41843eb2"
+SRC_URI[sha256sum] = "c5d948920b641cc35f8b380fc356ddfe07cce6a9c6474afe242fc58113f28c06"
 
 inherit autotools
 
