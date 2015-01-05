@@ -1,16 +1,14 @@
-SUMMARY = "Lzip is a lossless data compressor based on the LZMA algorithm"
+SUMMARY = "Lossless data compressor based on the LZMA algorithm"
 HOMEPAGE = "http://lzip.nongnu.org/lzip.html"
 SECTION = "console/utils"
-LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
+LICENSE = "GPLv2+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
+                    file://decoder.cc;endline=16;md5=0809128ac32163252846e09a70c8b80b"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/lzip/lzip-${PV}.tar.gz"
 
-# Only the latest version is available in .tar.gz format from savannah.gnu.org,
-# FreeBSD distfiles is known to have version 1.13.
-
-SRC_URI[md5sum] = "e83a364c8544fc66cccb552369d93220"
-SRC_URI[sha256sum] = "7cd3fcda68fc9900efcf7784313e3bdd1303fef1a0546db9723f5e5564dd05b6"
+SRC_URI[md5sum] = "716a9876dc595ec52d4f3bda81e42471"
+SRC_URI[sha256sum] = "128cc25baf92c8b69700831e6f984d954016318cc78edca87870d0c033112751"
 
 CONFIGUREOPTS = "\
     '--srcdir=${S}' \
