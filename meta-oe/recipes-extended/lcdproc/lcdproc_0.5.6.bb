@@ -1,9 +1,7 @@
 require lcdproc5.inc
 
-SRC_URI += "file://automake-111-fix.patch"
-
-SRC_URI[md5sum] = "c92d4529d36eeec6d9d6fd0a4aa3ec82"
-SRC_URI[sha256sum] = "b136b47d7bf585a003334f432d8730a36ef5ed1cd520084b919667d825e48d42"
+SRC_URI[md5sum] = "df4f5c2c7285eaf6979b9c7768b4877f"
+SRC_URI[sha256sum] = "bd2f43c30ff43b30f43110abe6b4a5bc8e0267cb9f57fa97cc5e5ef9488b984a"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
