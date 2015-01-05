@@ -35,6 +35,7 @@ EXTRA_OECONF += "--with-net-snmp-config=no \
                  --without-ntpsnmpd \
                  ac_cv_header_readline_history_h=no \
                  --with-yielding_select=yes \
+                 --with-locfile=redhat \
                  "
 CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
 
@@ -71,10 +72,10 @@ do_install_append() {
     sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
-    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntptrace
-    sed -i '/use/i use warnings;' ${D}${bindir}/ntptrace
-    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntp-wait
-    sed -i '/use/i use warnings;' ${D}${bindir}/ntp-wait
+    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntptrace
+    sed -i '/use/i use warnings;' ${D}${sbindir}/ntptrace
+    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntp-wait
+    sed -i '/use/i use warnings;' ${D}${sbindir}/ntp-wait
 
     install -d ${D}/${sysconfdir}/default
     install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
@@ -90,8 +91,6 @@ do_install_append() {
 
     install -d ${D}${systemd_unitdir}/ntp-units.d
     install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
-
-    rmdir ${D}${sbindir}
 }
 
 PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
@@ -120,19 +119,19 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
 
 RSUGGESTS_${PN} = "iana-etc"
 
-FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
+FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
     ${NTP_USER_HOME} \
     ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
 "
-FILES_${PN}-tickadj = "${bindir}/tickadj"
-FILES_${PN}-utils = "${bindir} ${datadir}/ntp/lib"
-FILES_ntpdate = "${bindir}/ntpdate \
+FILES_${PN}-tickadj = "${sbindir}/tickadj"
+FILES_${PN}-utils = "${sbindir} ${datadir}/ntp/lib"
+FILES_ntpdate = "${sbindir}/ntpdate \
     ${sysconfdir}/network/if-up.d/ntpdate-sync \
     ${bindir}/ntpdate-sync \
     ${sysconfdir}/default/ntpdate \
     ${systemd_unitdir}/system/ntpdate.service \
 "
-FILES_sntp = "${bindir}/sntp \
+FILES_sntp = "${sbindir}/sntp \
               ${sysconfdir}/default/sntp \
               ${systemd_unitdir}/system/sntp.service \
              "
