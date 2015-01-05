@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=af6809583bfde9a31595a58bb4a24514"
 
 SRC_URI = "http://protobuf.googlecode.com/files/protobuf-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "dc84e9912ea768baa1976cb7bbcea7b5"
-SRC_URI[sha256sum] = "eac6969b617f397247e805267da2b0db3ff9e5a9163b123503a192fbb5776567"
+SRC_URI[md5sum] = "b751f772bdeb2812a2a8e7202bf1dae8"
+SRC_URI[sha256sum] = "c55aa3dc538e6fd5eaf732f4eb6b98bdcb7cedb5b91d3b5bdcf29c98c293f58e"
 
 EXTRA_OECONF += " --with-protoc=echo"
 
