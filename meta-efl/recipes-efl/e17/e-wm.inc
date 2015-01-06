@@ -4,7 +4,7 @@ LICENSE = "MIT & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
 SRCNAME = "e"
 
-inherit e update-alternatives gettext
+inherit e update-alternatives gettext pkgconfig
 S = "${WORKDIR}/${SRCNAME}"
 
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \

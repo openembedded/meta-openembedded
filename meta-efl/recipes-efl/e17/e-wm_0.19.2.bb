@@ -11,10 +11,9 @@ DEFAULT_PREFERENCE = "-1"
 
 SRC_URI = "\
     ${E_RELEASES}/apps/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
-    file://0001-configure.ac-add-foreign.patch \
     file://enlightenment_start.oe \
     file://applications.menu \
 "
 
-SRC_URI[md5sum] = "2c5a110496a867253f31cf7ed1a2143a"
-SRC_URI[sha256sum] = "3430d94c3def706de3b421ee48d92f2a475224f2f86111442a5d2d90c2363116"
+SRC_URI[md5sum] = "ca76c640c2a54f89f069176258151334"
+SRC_URI[sha256sum] = "9063d3de704a5700468a558f6707f402fe239c0807bc38ed29aaf7c62db1cd02"
