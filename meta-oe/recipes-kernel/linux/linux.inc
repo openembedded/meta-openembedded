@@ -28,14 +28,14 @@ kernel_conf_variable() {
     CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"
     if test "$2" = "n"
     then
-        echo "# CONFIG_$1 is not set" >> ${S}/.config
+        echo "# CONFIG_$1 is not set" >> ${B}/.config
     else
-        echo "CONFIG_$1=$2" >> ${S}/.config
+        echo "CONFIG_$1=$2" >> ${B}/.config
     fi
 }
 
 do_configure_prepend() {
-    echo "" > ${S}/.config
+    echo "" > ${B}/.config
     CONF_SED_SCRIPT=""
 
     #
@@ -43,8 +43,8 @@ do_configure_prepend() {
     #
     if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
         install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm drivers/video/logo/logo_linux_clut224.ppm
-    kernel_conf_variable LOGO y
-    kernel_conf_variable LOGO_LINUX_CLUT224 y
+        kernel_conf_variable LOGO y
+        kernel_conf_variable LOGO_LINUX_CLUT224 y
     fi
 
     #
@@ -59,7 +59,7 @@ do_configure_prepend() {
 
     # When enabling thumb for userspace we also need thumb support in the kernel
     if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
-    kernel_conf_variable ARM_THUMB y
+        kernel_conf_variable ARM_THUMB y
     fi
 
     kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
@@ -112,9 +112,9 @@ do_configure_prepend() {
     fi
 
     sed -e "${CONF_SED_SCRIPT}" \
-    < '${WORKDIR}/defconfig' >>'${S}/.config'
+    < '${WORKDIR}/defconfig' >>'${B}/.config'
 
-    yes '' | oe_runmake oldconfig
+    yes '' | oe_runmake -C ${S} O=${B} oldconfig
 }
 
 do_configure_append() {
