@@ -13,7 +13,7 @@ HOMEPAGE = "http://www.opensaf.org"
 
 inherit autotools useradd systemd pkgconfig
 
-SRC_URI = "http://jaist.dl.sourceforge.net/project/opensaf/releases/${BPN}-${PV}.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://install-samples-from-srcdir.patch"
 
 SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
@@ -31,10 +31,12 @@ USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nolog
 SYSTEMD_SERVICE_${PN} += "opensafd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-FILES_${PN} += "/run"
+FILES_${PN} += "${localstatedir}/run"
 
 INSANE_SKIP_${PN} = "dev-so"
 
 do_install_append() {
-    rm -rf "${D}${localstatedir}/run"
+    rm -fr "${D}${localstatedir}/lock"
+    rm -fr "${D}${localstatedir}/run"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
 }
