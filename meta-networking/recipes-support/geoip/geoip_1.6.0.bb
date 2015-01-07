@@ -18,17 +18,17 @@ SRC_URI = "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz;name=t
 SRC_URI[tarball.md5sum] = "89f4cdfdab43f1d67364cd7c85bbe8ca"
 SRC_URI[tarball.sha256sum] = "075a0c2815cd099e9ec35c9569db716a3fefcdbb6a10dbfa1ce7c6cd48d4a635"
 
-SRC_URI[GeoIP-dat.md5sum] = "53416cd33e556a8048ac522fc9a98e05"
-SRC_URI[GeoIP-dat.sha256sum] = "a423a0c87bf9a78ef8d68153b424987c6bbddec85b5f784ca747706f4df10361"
+SRC_URI[GeoIP-dat.md5sum] = "4bc1e8280fe2db0adc3fe48663b8926e"
+SRC_URI[GeoIP-dat.sha256sum] = "7fd7e4829aaaae2677a7975eeecd170134195e5b7e6fc7d30bf3caf34db41bcd"
 
-SRC_URI[GeoIPv6-dat.md5sum] = "f1a4abf4015c0300267f4717c9d7ead2"
-SRC_URI[GeoIPv6-dat.sha256sum] = "1a8e61732e39ac9d9acc20d648b2530d7bd0ff1c250f51fd18148931fbfe2830"
+SRC_URI[GeoIPv6-dat.md5sum] = "aac7e6e9b141de80934ecee52daf7f56"
+SRC_URI[GeoIPv6-dat.sha256sum] = "126fd2953eb193e60538e30b4465610530383f7a782745cacdca5ba6825f471c"
 
-SRC_URI[GeoLiteCity-dat.md5sum] = "48af3b8a204d7c5f8e42a4f5f4dd1874"
-SRC_URI[GeoLiteCity-dat.sha256sum] = "2f3f62f171c333cdd4e68534585e51978cb3a12dc7b269786f50daf10071d7d6"
+SRC_URI[GeoLiteCity-dat.md5sum] = "15a42c684c53d2309e6632a6d6e02531"
+SRC_URI[GeoLiteCity-dat.sha256sum] = "5ec02a6d39d545c77ec12cc30c6a8856883d8f55522fc5cd4f25af80163c6b3c"
 
-SRC_URI[GeoLiteCityv6-dat.md5sum] = "a42504adfd8030c3a10f749191598b4a"
-SRC_URI[GeoLiteCityv6-dat.sha256sum] = "4a5eeaa4a9107e6ccdbe94ad1c7c987dc70cd250cd40624ada1e3a03836bbbdb"
+SRC_URI[GeoLiteCityv6-dat.md5sum] = "49d6ec946fa0a2575b5112a68d71f933"
+SRC_URI[GeoLiteCityv6-dat.sha256sum] = "7a345e6cf0e59f8ab589ff15020241f0b03342dd04cc584f814c4f4700d49405"
 
 
 LICENSE = "LGPL-2.1"
