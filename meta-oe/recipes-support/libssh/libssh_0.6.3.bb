@@ -18,6 +18,9 @@ EXTRA_OECMAKE = " \
     -DWITH_ZLIB=1 \
     "
 
+PACKAGECONFIG ??=""
+PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
+
 inherit cmake
 
 do_configure_prepend () {
