@@ -30,8 +30,8 @@ SRC_URI_append_class-target += " \
             file://php-fpm-apache.conf \
           "
 
-SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
-SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
+SRC_URI[md5sum] = "70e223be4bb460e465b7a9d7cb5b9cac"
+SRC_URI[sha256sum] = "b0951608c3e8afb978a624c7f79a889980210f5258f666c1d997bd6491e13241"
 
 S = "${WORKDIR}/php-${PV}"
 
