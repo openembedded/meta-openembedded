@@ -25,6 +25,7 @@ SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
            file://rsyslog-use-serial-tests-config-needed-by-ptest.patch \
+           file://json-0.12-fix.patch \
 "
 
 SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
