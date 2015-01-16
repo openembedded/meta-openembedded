@@ -38,6 +38,7 @@ EXTRA_OECONF = "--disable-embedded-perl \
                 --enable-shared \
                 --disable-manuals \
                 --with-defaults \
+                --with-persistent-directory=${localstatedir}/lib/net-snmp \
                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
 
 # net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp

@@ -28,6 +28,8 @@ case "$1" in
 	echo -n " snmptrapd"
     fi
     echo "."
+
+    test ! -x /sbin/restorecon || /sbin/restorecon -FR /var/lib/net-snmp
     ;;
   stop)
     echo -n "Stopping network management services:"
