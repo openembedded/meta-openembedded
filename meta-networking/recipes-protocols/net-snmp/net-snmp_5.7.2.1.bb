@@ -40,6 +40,9 @@ EXTRA_OECONF = "--disable-embedded-perl \
                 --with-defaults \
                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
 
+# net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp
+EXTRA_OECONF += "--with-mib-modules=smux"
+
 CACHED_CONFIGUREVARS = " \
     ac_cv_header_valgrind_valgrind_h=no \
     ac_cv_header_valgrind_memcheck_h=no \
