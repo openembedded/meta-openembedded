@@ -16,6 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
         file://snmptrapd.service \
         file://ifmib.patch \
         file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
+        file://fix-libtool-finish.patch \
 "
 
 SRC_URI[md5sum] = "a2c83518648b0f2a5d378625e45c0e18"
