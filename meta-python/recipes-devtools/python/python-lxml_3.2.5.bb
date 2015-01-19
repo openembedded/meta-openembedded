@@ -8,9 +8,11 @@ SRCNAME = "lxml"
 
 DEPENDS = "libxml2 libxslt"
 
-SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz;name=lxml"
-SRC_URI[lxml.md5sum] = "38b15b0dd5e9292cf98be800e84a3ce4"
-SRC_URI[lxml.sha256sum] = "cadba4cf0e235127795f76a6f7092cb035da23a6e9ec4c93f8af43a6784cd101"
+SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
+		file://python-lxml-3.2.5-fix-CVE-2014-3146.patch "
+
+SRC_URI[md5sum] = "6c4fb9b1840631cff09b8229a12a9ef7"
+SRC_URI[sha256sum] = "2bf072808a6546d0e56bf1ad3b98a43cca828724360d7419fad135141bd31f7e"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
