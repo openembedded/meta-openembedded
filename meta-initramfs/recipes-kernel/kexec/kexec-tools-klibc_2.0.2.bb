@@ -17,6 +17,7 @@ SRC_URI += " \
             file://purgatory_string.patch \
             file://sha256.patch \
             file://sysconf_nrprocessors.patch \
+            file://fix-out-of-tree-build.patch \
             "
 
 SRC_URI_append_arm = " file://arm_crashdump.patch"
