@@ -69,6 +69,8 @@ do_install () {
     install -p -m 644 ${S}/etc/iscsid.conf ${D}${sysconfdir}/iscsi
     install -p -m 755 ${WORKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
 
+    sed -i -e "s:= /sbin/iscsid:= ${sbindir}/iscsid:" ${D}${sysconfdir}/iscsi/iscsid.conf
+
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/${BPN}/lock - - - -" \
