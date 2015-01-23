@@ -24,6 +24,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://ITS-7723-fix-reference-counting.patch \
     file://use-urandom.patch \
     file://initscript \
+    file://slapd.service \
 "
 SRC_URI[md5sum] = "b0d5ee4b252c841dec6b332d679cf943"
 SRC_URI[sha256sum] = "8267c87347103fef56b783b24877c0feda1063d3cb85d070e503d076584bf8a7"
@@ -35,7 +36,7 @@ DEPENDS = "util-linux groff-native"
 # environments
 SRC_URI += "file://install-strip.patch"
 
-inherit autotools-brokensep update-rc.d
+inherit autotools-brokensep update-rc.d systemd
 
 # CV SETTINGS
 # Required to work round AC_FUNC_MEMCMP which gets the wrong answer
@@ -167,7 +168,7 @@ PACKAGES += "${PN}-slapd ${PN}-slurpd ${PN}-bin"
 FILES_${PN} = "${libdir}/lib*.so.* ${sysconfdir}/openldap/ldap.* ${localstatedir}/openldap-data"
 FILES_${PN}-slapd = "${sysconfdir}/init.d ${libexecdir}/slapd ${sbindir} ${localstatedir}/run ${localstatedir}/volatile/run \
     ${sysconfdir}/openldap/slapd.* ${sysconfdir}/openldap/schema \
-    ${sysconfdir}/openldap/DB_CONFIG.example"
+    ${sysconfdir}/openldap/DB_CONFIG.example ${systemd_unitdir}/system/*"
 FILES_${PN}-slurpd = "${libexecdir}/slurpd ${localstatedir}/openldap-slurp ${localstatedir}/run ${localstatedir}/volatile/run"
 FILES_${PN}-bin = "${bindir}"
 FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libdir}/*.a ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so"
@@ -189,11 +190,18 @@ do_install_append() {
 
     rmdir "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+
+    install -d ${D}${systemd_unitdir}/system/
+    install -m 0644 ${WORKDIR}/slapd.service ${D}${systemd_unitdir}/system/
+    sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/*.service
 }
 
 INITSCRIPT_PACKAGES = "${PN}-slapd"
 INITSCRIPT_NAME_${PN}-slapd = "openldap"
 INITSCRIPT_PARAMS_${PN}-slapd = "defaults"
+SYSTEMD_SERVICE_${PN}-slapd = "hostapd.service"
+SYSTEMD_AUTO_ENABLE_${PN}-slapd ?= "disable"
+
 
 PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
 
