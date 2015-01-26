@@ -9,7 +9,9 @@ SECTION = "network"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;md5=b0fa745303912bd2d64430f7ae69487d"
 
-SRC_URI = "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz \
+# Note that we do not want to use the upstream file name locally.
+#
+SRC_URI = "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz;downloadfilename=${BPN}-${PV}.tar.gz \
            file://run-ptest \
           "
 
