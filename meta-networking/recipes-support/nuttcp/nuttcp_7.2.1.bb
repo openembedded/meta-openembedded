@@ -8,12 +8,12 @@ network layer throughput by transferring memory buffers from a source system \
 across an interconnecting network to a destination system, either transferring \
 data for a specified time interval, or alternatively transferring a specified \
 number of bytes."
-HOMEPAGE = "http://www.nuttcp.net/nuttcp/Welcome%20Page.html"
+HOMEPAGE = "http://www.nuttcp.net/Welcome%20Page.html"
 LICENSE = "GPL-2.0"
 SECTION = "net"
-LIC_FILES_CHKSUM = "file://nuttcp-${PV}.c;beginline=4;endline=30;md5=ae7045c3c3616092e07d87f04ba0d960"
+LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=ae7045c3c3616092e07d87f04ba0d960"
 
-SRC_URI = "http://lcp.nrl.navy.mil/nuttcp/beta/nuttcp-${PV}.c"
+SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c"
 SRC_URI[md5sum] = "1ebf4a08bad2a295a8155f02995e8754"
 SRC_URI[sha256sum] = "c6e33810ccce67260f8d5d627f60e429d44f532365c58ed5673d035e2a59c4db"
 
