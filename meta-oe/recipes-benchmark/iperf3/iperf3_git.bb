@@ -23,3 +23,4 @@ SRCREV = "de420cc741dd8967ebc57f80b7712556442de81b"
 S = "${WORKDIR}/git"
 
 inherit autotools
+BBCLASSEXTEND = "native"
