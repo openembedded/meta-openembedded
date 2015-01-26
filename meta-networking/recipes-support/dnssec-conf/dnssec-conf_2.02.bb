@@ -12,7 +12,8 @@ HOMEPAGE = "https://github.com/xelerance/dnssec-conf"
 SECTION = "System Environment/Daemons"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
-DEPENDS += " xmlto-native docbook-xml-dtd4-native docbook-xsl-stylesheets-native"
+DEPENDS += "xmlto-native docbook-xml-dtd4-native \
+            docbook-xsl-stylesheets-native libxslt-native"
 
 SRC_URI = "git://github.com/xelerance/dnssec-conf.git"
 SRCREV = "8e799683736b4a7b5e5e78f98fba0a6f48393537"
