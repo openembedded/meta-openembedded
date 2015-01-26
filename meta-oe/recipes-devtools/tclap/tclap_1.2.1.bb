@@ -11,4 +11,6 @@ SRC_URI = "git://git.code.sf.net/p/tclap/code \
 S = "${WORKDIR}/git"
 inherit autotools
 
+ALLOW_EMPTY_${PN} = "1"
+
 BBCLASSEXTEND = "native nativesdk"
