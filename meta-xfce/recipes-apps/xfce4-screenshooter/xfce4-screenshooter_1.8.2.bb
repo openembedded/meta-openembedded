@@ -7,13 +7,15 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.0 libsoup-
 
 inherit xfce-app
 
-SRC_URI += "file://0001-Fix-panel-plugin-build.patch"
-SRC_URI[md5sum] = "d0ffea2052a8e70154cf13789070711f"
-SRC_URI[sha256sum] = "40419892bd28989315eed053c159bba0f4264ed8c6c6738806024e481eab9492"
+SRC_URI[md5sum] = "3a32ecc5566453a58f6a4ddd70649444"
+SRC_URI[sha256sum] = "9dce2ddfaa87f703e870e29bae13f3fc82a1b3f06b44f8386640e45a135f5f69"
 
 do_compile_prepend() {
 	mkdir -p lib
 }
 
-FILES_${PN} += "${datadir}/xfce4/panel/plugins \
-        ${libdir}/xfce4/panel/plugins"
+FILES_${PN} += " \
+    ${datadir}/appdata \
+    ${datadir}/xfce4/panel/plugins \
+    ${libdir}/xfce4/panel/plugins \
+"
