@@ -22,6 +22,7 @@ inherit autotools pkgconfig binconfig update-rc.d systemd
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[ffmpeg] = "--with-ffmpeg,--without-ffmpeg,libav"
 PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
+PACKAGECONFIG[geoip] = "--with-geoip,--without-geoip,geoip"
 
 EXTRA_OECONF = "--disable-static \
                 --disable-nls \
