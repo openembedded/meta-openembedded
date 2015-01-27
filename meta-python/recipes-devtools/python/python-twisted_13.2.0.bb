@@ -38,7 +38,13 @@ PACKAGES += "\
     ${PN}-core \
 "
 
+PACKAGES =+ "\
+    ${PN}-src \
+    ${PN}-bin \
+"
+
 RDEPENDS_${PN} = "\
+    ${PN}-bin \
     ${PN}-conch \
     ${PN}-lore \
     ${PN}-mail \
@@ -233,3 +239,9 @@ ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
 "
 
+RDEPENDS_{PN}-src = "${PN}"
+FILES_${PN}-src = " \
+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*.py \
+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
+	"
