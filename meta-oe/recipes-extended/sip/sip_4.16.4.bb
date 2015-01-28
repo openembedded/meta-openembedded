@@ -14,7 +14,9 @@ SRC_URI[sha256sum] = "ceda443fc5e129e67a067e2cd7b73ff037f8b10b50e407baa2b1d9f219
 
 BBCLASSEXTEND = "native"
 
-inherit qmake2 python-dir pythonnative
+inherit qmake2 python-dir pythonnative distro_features_check
+# depends on qt4-x11-free
+REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_QMAKEVARS_POST += "CONFIG=console"
 

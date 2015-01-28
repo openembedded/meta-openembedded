@@ -35,7 +35,9 @@ S = "${WORKDIR}/${BPN}${PV}/unix"
 VER = "${@os.path.splitext(d.getVar('PV', True))[0]}"
 
 LDFLAGS += "-Wl,-rpath,${libdir}/tcltk/${PV}/lib"
-inherit autotools
+inherit autotools distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_OECONF = "\
     --enable-threads \

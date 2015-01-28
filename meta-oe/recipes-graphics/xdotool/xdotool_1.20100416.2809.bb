@@ -7,6 +7,10 @@ DEPENDS = "virtual/libx11 libxtst"
 
 PR = "r1"
 
+inherit distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
+
 SRC_URI = "http://semicomplete.googlecode.com/files/xdotool-${PV}.tar.gz"
 SRC_URI[md5sum] = "1d5be641e512c343abfe5f78b39e6f19"
 SRC_URI[sha256sum] = "42d7271fbc796e53db71bb221f311b9ff3c51d90a71c9487a9bd3101ca39894f"

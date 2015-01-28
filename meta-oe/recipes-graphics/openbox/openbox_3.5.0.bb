@@ -11,7 +11,9 @@ SRC_URI[sha256sum] = "6fa90016530b3aa6102e254079461977439398531fb23e7ec076ff2c14
 
 PR = "r2"
 
-inherit autotools gettext update-alternatives pkgconfig
+inherit autotools gettext update-alternatives pkgconfig distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 ALTERNATIVE_${PN}-core = "x-window-manager"
 ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/openbox"

@@ -3,6 +3,10 @@ require links.inc
 DEPENDS += "virtual/libx11"
 RCONFLICTS_${PN} = "links"
 
+inherit distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
+
 SRC_URI += " file://links2.desktop \
              http://www.xora.org.uk/oe/links2.png;name=icon"
 

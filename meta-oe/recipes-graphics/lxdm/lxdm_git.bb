@@ -20,7 +20,9 @@ DEPENDS += "${@base_contains("DISTRO_FEATURES", "systemd", "", "consolekit", d)}
 # combine oe-core way with angstrom DISTRO_TYPE
 DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d)}"
 
-inherit autotools pkgconfig gettext systemd
+inherit autotools pkgconfig gettext systemd distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 S = "${WORKDIR}/git"
 

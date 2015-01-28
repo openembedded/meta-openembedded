@@ -5,7 +5,9 @@ HOMEPAGE = "http://bitmath.org/code/mtview/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4c61b8950dc1aab4d2aa7c2ae6b1cfb3"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "git://bitmath.org/git/mtview.git;protocol=http"
 SRCREV = "ad437c38dc111cf3990a03abf14efe1b5d89604b"

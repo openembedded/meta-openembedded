@@ -15,7 +15,9 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
 
 SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
 
-inherit autotools gettext pkgconfig
+inherit autotools gettext pkgconfig distro_features_check
+# depends on libxinerama libxpm xcb-util-keysyms
+REQUIRED_DISTRO_FEATURES = "x11"
 
 ARM_INSTRUCTION_SET = "arm"
 

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9772a11e3569985855e2ce450e56f991"
 LICENSE = "GPL-2.0"
 SECTION = "x11/utils"
 
-DEPENDS = "libx11 libxtst libxinerama"
+DEPENDS = "virtual/libx11 libxtst libxinerama"
 
 SRC_URI = "http://synergy.googlecode.com/files/synergy-${PV}-Source.tar.gz"
 
@@ -13,7 +13,9 @@ SRC_URI[sha256sum] = "0afc83e4ed0b46ed497d4229b2b2854e8d3c581a112f4da05110943edb
 
 S = "${WORKDIR}/${PN}-${PV}-Source"
 
-inherit cmake
+inherit cmake distro_features_check
+# depends on virtual/libx11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 do_install() {
     install -d ${D}/usr/bin

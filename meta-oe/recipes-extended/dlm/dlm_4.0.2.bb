@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://README.license;md5=8f0bbcdd678df1bce9863492b6c8832d"
 
 DEPENDS = "corosync systemd"
 
-inherit pkgconfig systemd
+inherit pkgconfig systemd distro_features_check
 
 SYSTEMD_SERVICE_${PN} = "dlm.service"
 SYSTEMD_AUTO_ENABLE = "enable"
