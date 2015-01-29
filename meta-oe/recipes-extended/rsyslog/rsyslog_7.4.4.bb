@@ -38,7 +38,7 @@ EXTRA_OECONF += "--enable-cached-man-pages"
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
     zlib rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
-    imdiag gnutls \
+    imdiag gnutls imfile \
     ${@base_contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
     ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
     ${@base_contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
@@ -58,6 +58,7 @@ PACKAGECONFIG[testbench] = "--enable-testbench,--disable-testbench,,"
 # default no in configure
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
 PACKAGECONFIG[imdiag] = "--enable-imdiag,--disable-imdiag,,"
+PACKAGECONFIG[imfile] = "--enable-imfile,--disable-imfile,,"
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp,"
 PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
