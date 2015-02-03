@@ -39,4 +39,5 @@ EXTRA_OECONF += "--without-cp \
                  --without-ssh \
                  --without-logger \
                  --without-rsync \
+                 ac_cv_path_PERL=${bindir}/perl \
                 "
