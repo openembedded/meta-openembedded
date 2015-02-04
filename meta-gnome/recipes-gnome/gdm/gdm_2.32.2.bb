@@ -88,7 +88,7 @@ RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "gdm.service"
 
 INITSCRIPT_NAME = "gdm"
-INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
+INITSCRIPT_PARAMS = "start 99 5 . stop 20 0 1 2 3 6 ."
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
