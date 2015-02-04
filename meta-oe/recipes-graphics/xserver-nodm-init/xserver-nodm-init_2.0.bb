@@ -15,8 +15,8 @@ S = "${WORKDIR}"
 inherit allarch update-rc.d systemd
 
 INITSCRIPT_NAME = "xserver-nodm"
-INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ."
-INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
+INITSCRIPT_PARAMS = "start 01 5 . stop 01 0 1 2 3 6 ."
+INITSCRIPT_PARAMS_shr = "start 90 5 . stop 90 0 1 2 3 6 ."
 
 do_install() {
     install -d ${D}${sysconfdir}/init.d
