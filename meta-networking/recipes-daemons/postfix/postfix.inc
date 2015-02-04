@@ -124,7 +124,6 @@ do_install_prepend_virtclass-native() {
 }
 
 SYSTEMD_SERVICE_${PN} = "postfix.service"
-SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install () {
     sh ./postfix-install 'install_root=${D}' \
