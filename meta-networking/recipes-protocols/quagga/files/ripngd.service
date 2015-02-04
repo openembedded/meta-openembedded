@@ -1,4 +1,4 @@
-i[Unit]
+[Unit]
 Description=RIP routing daemon for IPv6
 BindTo=zebra.service
 After=zebra.service
