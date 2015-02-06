@@ -4,6 +4,7 @@ After=syslog.target
 After=network.target
 
 [Service]
+PIDFile=/var/lib/mysql/mysqld.pid
 Type=simple
 User=mysql
 Group=mysql

@@ -128,6 +128,7 @@ pkg_postinst_${PN}-server () {
 
     mysql_install_db --basedir=${prefix} --user=mysql
 
+    [ -x /sbin/restorecon ] && /sbin/restorecon -RF /var/lib/mysql
 }
 
 PACKAGES = "${PN}-dbg ${PN} \
