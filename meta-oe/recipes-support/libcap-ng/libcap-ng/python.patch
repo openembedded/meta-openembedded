@@ -1,0 +1,39 @@
+configure.ac - Avoid an incorrect check for python.
+Makefile.am - avoid hard coded host include paths.
+
+Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+
+--- libcap-ng-0.6.5/configure.ac.orig	2012-01-17 13:59:03.645898989 -0600
++++ libcap-ng-0.6.5/configure.ac	2012-01-17 13:59:46.353959252 -0600
+@@ -120,17 +120,8 @@
+ else
+ AC_MSG_RESULT(testing)
+ AM_PATH_PYTHON
+-if test -f /usr/include/python${am_cv_python_version}/Python.h ; then
+-	python_found="yes"
+-	AC_MSG_NOTICE(Python bindings will be built)
+-else
+-	python_found="no"
+-	if test x$use_python = xyes ; then
+-		AC_MSG_ERROR([Python explicitly required and python headers found])
+-	else
+-		AC_MSG_WARN("Python headers not found - python bindings will not be made")
+-	fi
+-fi
++python_found="yes"
++AC_MSG_NOTICE(Python bindings will be built)
+ fi
+ AM_CONDITIONAL(HAVE_PYTHON, test ${python_found} = "yes")
+ 
+--- libcap-ng-0.6.5/bindings/python/Makefile.am.orig	2010-11-03 12:31:59.000000000 -0500
++++ libcap-ng-0.6.5/bindings/python/Makefile.am	2012-01-17 14:05:50.199834467 -0600
+@@ -24,7 +24,8 @@
+ CONFIG_CLEAN_FILES = *.loT *.rej *.orig
+ AM_CFLAGS = -fPIC -DPIC
+ PYLIBVER ?= python$(PYTHON_VERSION)
+-INCLUDES = -I. -I$(top_builddir) -I/usr/include/$(PYLIBVER)
++PYINC ?= /usr/include/$(PYLIBVER)
++INCLUDES = -I. -I$(top_builddir) -I$(PYINC)
+ LIBS = $(top_builddir)/src/libcap-ng.la
+ pyexec_PYTHON = capng.py
+ pyexec_LTLIBRARIES = _capng.la
