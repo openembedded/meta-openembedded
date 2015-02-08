@@ -20,7 +20,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
 SRC_URI[md5sum] = "fc5b03aae38b9b5b6880b31924d0ace3"
 SRC_URI[sha256sum] = "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320"
 
-inherit scons update-rc.d python-dir pythonnative systemd
+inherit scons update-rc.d python-dir pythonnative systemd bluetooth
 
 INITSCRIPT_NAME = "gpsd"
 INITSCRIPT_PARAMS = "defaults 35"
@@ -30,8 +30,8 @@ SYSTEMD_OESCONS = "${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false
 export STAGING_INCDIR
 export STAGING_LIBDIR
 
-PACKAGECONFIG ??= "bluez"
-PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez4"
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
+PACKAGECONFIG[bluez4] = "bluez='true',bluez='false',bluez4"
 
 EXTRA_OESCONS = " \
     sysroot=${STAGING_DIR_TARGET} \
