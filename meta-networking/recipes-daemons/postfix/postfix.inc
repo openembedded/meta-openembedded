@@ -128,7 +128,7 @@ SYSTEMD_SERVICE_${PN} = "postfix.service"
 do_install () {
     sh ./postfix-install 'install_root=${D}' \
         'config_directory=${sysconfdir}/postfix' \
-        'daemon_directory=${exec_prefix}/libexec/postfix' \
+        'daemon_directory=${libexecdir}' \
         'command_directory=${sbindir}' \
         'queue_directory=${localstatedir}/spool/postfix' \
         'sendmail_path=${sbindir}/sendmail.postfix' \
@@ -149,7 +149,7 @@ do_install () {
     install -m 0644 ${WORKDIR}/postfix.service ${D}${systemd_unitdir}/system
     sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${systemd_unitdir}/system/postfix.service
 
-    install -m 0755 ${WORKDIR}/aliasesdb ${D}${exec_prefix}/libexec/postfix/
+    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}
 
     install -m 770 -d ${D}${localstatedir}/spool/postfix
     chown postfix:postfix ${D}${localstatedir}/spool/postfix
@@ -233,5 +233,5 @@ pkg_postinst_${PN} () {
 
 # Exclude .debug directories from the main package
 FILES_${PN} = "${sysconfdir} ${localstatedir} ${bindir}/* ${sbindir}/* \
-               ${exec_prefix}/libexec/postfix/* ${systemd_unitdir}/*"
-FILES_${PN}-dbg += "${exec_prefix}/libexec/postfix/.debug"
+               ${libexecdir}/* ${systemd_unitdir}/*"
+FILES_${PN}-dbg += "${libexecdir}/.debug"
