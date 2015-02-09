@@ -197,6 +197,7 @@ FILES_efreet = " \
 FILES_eet = " \
     ${bindir}/eet \
     ${bindir}/vieet \
+    ${bindir}/diffeet \
     ${libdir}/libeet${SOLIBS} \
 "
 FILES_emotion = " \

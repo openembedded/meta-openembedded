@@ -1,4 +1,4 @@
-From 9db1f2f9dfe785e3a42445b766e7f4736821264a Mon Sep 17 00:00:00 2001
+From b3cbe31c38a088af7b0dade82545475fc9b72492 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Tue, 2 Dec 2014 12:21:10 +0100
 Subject: [PATCH 2/3] evas_3d: Add Eet.h includes
@@ -8,9 +8,9 @@ Subject: [PATCH 2/3] evas_3d: Add Eet.h includes
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- src/lib/evas/canvas/evas_3d_eet.c             | 1 +
- src/lib/evas/canvas/evas_3d_mesh_loader_eet.c | 1 +
- src/lib/evas/canvas/evas_3d_mesh_saver_eet.c  | 1 +
+ src/lib/evas/canvas/evas_3d_eet.c                        | 1 +
+ src/modules/evas/model_loaders/eet/evas_model_load_eet.c | 1 +
+ src/modules/evas/model_savers/eet/evas_model_save_eet.c  | 1 +
  3 files changed, 3 insertions(+)
 
 diff --git a/src/lib/evas/canvas/evas_3d_eet.c b/src/lib/evas/canvas/evas_3d_eet.c
@@ -22,10 +22,10 @@ index 1515f5a..a438217 100644
  #include <stdio.h>
  #include "evas_common_private.h"
  #include "evas_private.h"
-diff --git a/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c b/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c
-index 26c3569..a93efca 100644
---- a/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c
-+++ b/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c
+diff --git a/src/modules/evas/model_loaders/eet/evas_model_load_eet.c b/src/modules/evas/model_loaders/eet/evas_model_load_eet.c
+index 815b9f1..bff2cea 100644
+--- a/src/modules/evas/model_loaders/eet/evas_model_load_eet.c
++++ b/src/modules/evas/model_loaders/eet/evas_model_load_eet.c
 @@ -3,6 +3,7 @@
  #endif
  
@@ -34,10 +34,10 @@ index 26c3569..a93efca 100644
  #include <stdio.h>
  #include "evas_common_private.h"
  #include "evas_private.h"
-diff --git a/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c b/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c
-index c801ac1..0a4d269 100644
---- a/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c
-+++ b/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c
+diff --git a/src/modules/evas/model_savers/eet/evas_model_save_eet.c b/src/modules/evas/model_savers/eet/evas_model_save_eet.c
+index e445dca..2e1cf4e 100644
+--- a/src/modules/evas/model_savers/eet/evas_model_save_eet.c
++++ b/src/modules/evas/model_savers/eet/evas_model_save_eet.c
 @@ -2,6 +2,7 @@
     #include "config.h"
  #endif
@@ -47,5 +47,5 @@ index c801ac1..0a4d269 100644
  #include "evas_common_private.h"
  #include "evas_private.h"
 -- 
-2.1.3
+2.3.0
 
