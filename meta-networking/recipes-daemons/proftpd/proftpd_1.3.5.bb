@@ -11,12 +11,13 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://close-RequireValidShell-check.patch \
            file://contrib.patch  \
            file://build_fixup.patch \
+           file://proftpd.service \
            "
 
 SRC_URI[md5sum] = "aff1bff40e675244d72c4667f203e5bb"
 SRC_URI[sha256sum] = "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2ea2cc4e08ccb87715"
 
-inherit autotools-brokensep useradd update-rc.d
+inherit autotools-brokensep useradd update-rc.d systemd
 
 PACKAGECONFIG ??= "sia shadow"
 PACKAGECONFIG += " ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
@@ -87,10 +88,20 @@ do_install () {
     # create the pub directory
     mkdir -p ${D}/home/${FTPUSER}/pub/
     chown -R ${FTPUSER}:${FTPGROUP} ${D}/home/${FTPUSER}/pub
+
+    install -d ${D}/${systemd_unitdir}/system
+    install -m 644 ${WORKDIR}/proftpd.service ${D}/${systemd_unitdir}/system
+    sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
+        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+        -e 's,@SBINDIR@,${sbindir},g' \
+        -i ${D}${systemd_unitdir}/system/*.service
 }
 
 INITSCRIPT_NAME = "proftpd"
 INITSCRIPT_PARAM = "defaults 85 15"
+
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "proftpd.service"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
