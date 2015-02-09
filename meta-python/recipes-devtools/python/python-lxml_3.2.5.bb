@@ -20,7 +20,7 @@ inherit setuptools
 
 DISTUTILS_BUILD_ARGS += " \
                      --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
-                     --with-xml2-config='${STAGING_BINDIR_CROSS}/xml2-config' \
+                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
 "
 
 DISTUTILS_INSTALL_ARGS += " \
