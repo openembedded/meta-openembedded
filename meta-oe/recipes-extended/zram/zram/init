@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ### BEGIN INIT INFO
 # Provides: zram
 # Required-Start:
@@ -26,7 +26,7 @@ start() {
     #default Factor % = 90 change this value here or create /etc/default/zram
     FACTOR=90
     #& put the above single line in /etc/default/zram with the value you want
-    [ -f /etc/default/zram ] && source /etc/default/zram || true
+    [ -f /etc/default/zram ] && . /etc/default/zram || true
     factor=$FACTOR # percentage
 
     # get the amount of memory in the machine
