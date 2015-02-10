@@ -22,6 +22,7 @@ EXTRA_OECONF += " \
 "
 
 PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth,gnome-bluetooth"
+PACKAGECONFIG[modemmanager] = "--with-modem-manager-1,--without-modem-manager-1,modemmanager"
 PACKAGECONFIG ??= ""
 
 do_configure_append() {
