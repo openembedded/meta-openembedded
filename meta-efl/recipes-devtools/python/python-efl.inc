@@ -46,7 +46,7 @@ FILES_${PN}-examples = "${datadir}/${PN}/examples"
 
 FILES_python-ecore = " \
     ${libdir}/${PYTHON_DIR}/site-packages/ecore/ \
-    ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore.so \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore*.so \
     ${libdir}/${PYTHON_DIR}/site-packages/efl/ecore \
 "
 FILES_python-eldbus = " \
@@ -55,7 +55,7 @@ FILES_python-eldbus = " \
 "
 FILES_python-edje = " \
     ${libdir}/${PYTHON_DIR}/site-packages/edje/ \
-    ${libdir}/${PYTHON_DIR}/site-packages/efl/edje*so \
+    ${libdir}/${PYTHON_DIR}/site-packages/efl/edje*.so \
 "
 FILES_python-elementary = " \
     ${libdir}/${PYTHON_DIR}/site-packages/elementary/ \
