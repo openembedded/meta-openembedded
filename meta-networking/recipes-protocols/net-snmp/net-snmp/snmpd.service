@@ -4,7 +4,7 @@ After=syslog.target network.target
 
 [Service]
 Type=notify
-Environment=OPTIONS="-LS0-6d"
+Environment=OPTIONS="-Ls0-6d"
 EnvironmentFile=-/etc/default/snmpd
 ExecStart=/usr/sbin/snmpd $OPTIONS -f
 ExecReload=/bin/kill -HUP $MAINPID
