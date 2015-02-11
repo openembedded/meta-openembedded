@@ -9,7 +9,8 @@ inherit autotools systemd
 
 SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
            file://openvpn \
-           file://openvpn@.service "
+           file://openvpn@.service \
+           file://openvpn-volatile.conf"
 
 SRC_URI[md5sum] = "6ca03fe0fd093e0d01601abee808835c"
 SRC_URI[sha256sum] = "7baed2ff39c12e1a1a289ec0b46fcc49ff094ca58b8d8d5f29b36ac649ee5b26"
@@ -48,6 +49,9 @@ do_install_append() {
         install -d -m 710 ${D}/${localstatedir}/lib/openvpn
         install -d -m 755 ${D}/${localstatedir}/run/
         install -d -m 755 ${D}/${localstatedir}/run/openvpn
+
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        install -m 0644 ${WORKDIR}/openvpn-volatile.conf ${D}${sysconfdir}/tmpfiles.d/openvpn.conf
     fi
 }
 
