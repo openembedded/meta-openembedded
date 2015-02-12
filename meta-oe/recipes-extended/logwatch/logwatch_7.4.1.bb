@@ -36,7 +36,6 @@ do_install() {
 
     install -m 0755 -d ${D}${sysconfdir}/cron.daily
     install -m 0755 -d ${D}${sbindir}
-    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sysconfdir}/cron.daily/0logwatch
     ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
     cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
     DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
