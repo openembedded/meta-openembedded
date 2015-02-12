@@ -1,0 +1,122 @@
+From 1555f85b222db0d536efe277d31b57b2a8b938f4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 12 Feb 2015 01:19:41 +0100
+Subject: [PATCH] bluetooth-client: use valid interface names
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate[version unmaintained upstream]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ lib/bluetooth-client.c   | 12 ++++++------
+ lib/bluetooth-client.xml |  6 +++---
+ lib/test-agent.c         |  2 +-
+ 3 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/lib/bluetooth-client.c b/lib/bluetooth-client.c
+index d62d56d..02e194c 100644
+--- a/lib/bluetooth-client.c
++++ b/lib/bluetooth-client.c
+@@ -721,7 +721,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
+ 						BLUEZ_DEVICE_INTERFACE, path);
+ 
+ 		if (device != NULL)
+-			device_get_properties(device, &hash, NULL);
++			org_bluez_device_get_properties(device, &hash, NULL);
+ 	} else
+ 		device = NULL;
+ 
+@@ -945,7 +945,7 @@ static void adapter_added(DBusGProxy *manager,
+ 	adapter = dbus_g_proxy_new_from_proxy(manager,
+ 					BLUEZ_ADAPTER_INTERFACE, path);
+ 
+-	adapter_get_properties(adapter, &hash, NULL);
++	org_bluez_adapter_get_properties(adapter, &hash, NULL);
+ 	if (hash != NULL) {
+ 		value = g_hash_table_lookup(hash, "Address");
+ 		address = value ? g_value_get_string(value) : NULL;
+@@ -1178,7 +1178,7 @@ static void bluetooth_client_init(BluetoothClient *client)
+ 	dbus_g_proxy_connect_signal(priv->manager, "DefaultAdapterChanged",
+ 			G_CALLBACK(default_adapter_changed), client, NULL);
+ 
+-	manager_list_adapters(priv->manager, &array, NULL);
++	org_bluez_manager_list_adapters(priv->manager, &array, NULL);
+ 	if (array != NULL) {
+ 		int i;
+ 
+@@ -1189,7 +1189,7 @@ static void bluetooth_client_init(BluetoothClient *client)
+ 		}
+ 	}
+ 
+-	manager_default_adapter(priv->manager, &default_path, NULL);
++	org_bluez_manager_default_adapter(priv->manager, &default_path, NULL);
+ 	if (default_path != NULL) {
+ 		default_adapter_changed(priv->manager, default_path, client);
+ 		g_free(default_path);
+@@ -1541,7 +1541,7 @@ gboolean bluetooth_client_start_discovery(BluetoothClient *client)
+ 	if (adapter == NULL)
+ 		return FALSE;
+ 
+-	adapter_start_discovery(adapter, NULL);
++	org_bluez_adapter_start_discovery(adapter, NULL);
+ 
+ 	g_object_unref(adapter);
+ 
+@@ -1568,7 +1568,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
+ 	if (adapter == NULL)
+ 		return FALSE;
+ 
+-	adapter_stop_discovery(adapter, NULL);
++	org_bluez_adapter_stop_discovery(adapter, NULL);
+ 
+ 	g_object_unref(adapter);
+ 
+diff --git a/lib/bluetooth-client.xml b/lib/bluetooth-client.xml
+index 2326277..38c7fb0 100644
+--- a/lib/bluetooth-client.xml
++++ b/lib/bluetooth-client.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8" ?>
+ 
+ <node name="/">
+-  <interface name="manager">
++  <interface name="org.bluez.manager">
+     <method name="DefaultAdapter">
+       <arg type="o" direction="out"/>
+     </method>
+@@ -16,7 +16,7 @@
+     </method>
+   </interface>
+ 
+-  <interface name="adapter">
++  <interface name="org.bluez.adapter">
+     <method name="GetProperties">
+       <arg type="a{sv}" direction="out"/>
+     </method>
+@@ -44,7 +44,7 @@
+     </method>
+   </interface>
+ 
+-  <interface name="device">
++  <interface name="org.bluez.device">
+     <method name="GetProperties">
+       <arg type="a{sv}" direction="out"/>
+     </method>
+diff --git a/lib/test-agent.c b/lib/test-agent.c
+index 8d60da6..83464eb 100644
+--- a/lib/test-agent.c
++++ b/lib/test-agent.c
+@@ -40,7 +40,7 @@ static gboolean agent_pincode(DBusGMethodInvocation *context,
+ 	GValue *value;
+ 	const gchar *address, *name;
+ 
+-	device_get_properties(device, &hash, NULL);
++	org_bluez_device_get_properties(device, &hash, NULL);
+ 
+ 	if (hash != NULL) {
+ 		value = g_hash_table_lookup(hash, "Address");
+-- 
+1.9.3
+
