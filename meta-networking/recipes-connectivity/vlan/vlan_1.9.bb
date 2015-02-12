@@ -21,6 +21,6 @@ do_compile () {
 }
 
 do_install () {
-    install -d ${D}/${exec_prefix}/bin
-    cp ${S}/vconfig ${D}/${exec_prefix}/bin
+    install -d ${D}/${base_sbindir}
+    install -m 0755 ${S}/vconfig ${D}/${base_sbindir}/
 }
