@@ -37,7 +37,7 @@ do_compile() {
 
 do_install() {
     oe_runmake user_install DESTDIR=${D}
-    install -m 0755 ${S}/prog/sensord/sensord ${D}${bindir}
+    install -m 0755 ${S}/prog/sensord/sensord ${D}${sbindir}
     install -m 0644 ${S}/prog/sensord/sensord.8 ${D}${mandir}/man8
 
     # Install directory
@@ -90,7 +90,7 @@ FILES_${PN}-sensors-doc = "${mandir}/man1 ${mandir}/man5"
 RDEPENDS_${PN}-sensors = "${PN}-libsensors"
 
 # sensord logging daemon
-FILES_${PN}-sensord = "${bindir}/sensord ${sysconfdir}/init.d/sensord"
+FILES_${PN}-sensord = "${sbindir}/sensord ${sysconfdir}/init.d/sensord"
 FILES_${PN}-sensord-dbg = "${bindir}/.debug/sensord"
 FILES_${PN}-sensord-doc = "${mandir}/man8/sensord.8"
 RDEPENDS_${PN}-sensord = "${PN}-sensors rrdtool"
