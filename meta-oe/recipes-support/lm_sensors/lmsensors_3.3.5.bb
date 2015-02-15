@@ -10,11 +10,12 @@ DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
 SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2 \
            file://fancontrol.init \
            file://sensord.init \
+           file://sensord.service \
 "
 SRC_URI[md5sum] = "da506dedceb41822e64865f6ba34828a"
 SRC_URI[sha256sum] = "5dae6a665e1150159a93743c4ff1943a7efe02cd9d3bb12c4805e7d7adcf4fcf"
 
-inherit update-rc.d
+inherit update-rc.d systemd
 
 RDEPENDS_${PN}-dev = ""
 
@@ -23,6 +24,10 @@ INITSCRIPT_NAME_${PN}-fancontrol = "fancontrol"
 INITSCRIPT_NAME_${PN}-sensord = "sensord"
 INITSCRIPT_PARAMS_${PN}-fancontrol = "defaults 66"
 INITSCRIPT_PARAMS_${PN}-sensord = "defaults 67"
+
+SYSTEMD_PACKAGES = "${PN}-sensord"
+SYSTEMD_SERVICE_${PN}-sensord = "sensord.service"
+SYSTEMD_AUTO_ENABLE = "disable"
 
 S = "${WORKDIR}/lm_sensors-${PV}"
 
@@ -49,6 +54,16 @@ do_install() {
 
     # Install sensord init script
     install -m 0755 ${WORKDIR}/sensord.init ${D}${sysconfdir}/init.d/sensord
+
+    # Insall sensord service script
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/sensord.service ${D}${systemd_unitdir}/system
+
+        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/sensord.service
+        sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/sensord.service
+        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/sensord.service
+    fi
 }
 
 # libsensors packages
@@ -90,7 +105,7 @@ FILES_${PN}-sensors-doc = "${mandir}/man1 ${mandir}/man5"
 RDEPENDS_${PN}-sensors = "${PN}-libsensors"
 
 # sensord logging daemon
-FILES_${PN}-sensord = "${sbindir}/sensord ${sysconfdir}/init.d/sensord"
+FILES_${PN}-sensord = "${sbindir}/sensord ${sysconfdir}/init.d/sensord ${systemd_unitdir}/system/sensord.service"
 FILES_${PN}-sensord-dbg = "${bindir}/.debug/sensord"
 FILES_${PN}-sensord-doc = "${mandir}/man8/sensord.8"
 RDEPENDS_${PN}-sensord = "${PN}-sensors rrdtool"

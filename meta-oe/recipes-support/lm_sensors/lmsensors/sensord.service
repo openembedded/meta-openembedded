@@ -1,0 +1,11 @@
+[Unit]
+Description=Sensor Information Logging
+
+[Service]
+Type=forking
+EnvironmentFile=-@SYSCONFDIR@/sensord.conf
+PIDFile=@LOCALSTATEDIR@/run/sensord.pid
+ExecStart=@SBINDIR@/sensord $SENSORD_ARGS
+
+[Install]
+WantedBy=multi-user.target
