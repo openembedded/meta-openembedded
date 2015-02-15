@@ -18,7 +18,7 @@ EXTRA_OECONF += "--with-dblib=berkeley \
                  --with-bdb-libdir=${STAGING_LIBDIR} \
                  --with-bdb-incdir=${STAGING_INCDIR} \
                  --with-bdb=db-5.3 \
-                 --with-plugindir="${libdir}/sasl2/" \
+                 --with-plugindir="${libdir}/sasl2" \
                  andrew_cv_runpath_switch=none"
 
 PACKAGECONFIG ??= "ntlm \
