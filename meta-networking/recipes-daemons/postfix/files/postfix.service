@@ -5,11 +5,11 @@ Conflicts=sendmail.service exim.service
 
 [Service]
 Type=forking
-PIDFile=/var/spool/postfix/pid/master.pid
-ExecStartPre=-/usr/libexec/postfix/aliasesdb
-ExecStart=/usr/sbin/postfix start
-ExecReload=/usr/sbin/postfix reload
-ExecStop=/usr/sbin/postfix stop
+PIDFile=@LOCALSTATEDIR@/spool/postfix/pid/master.pid
+ExecStartPre=-@LIBEXECDIR@/aliasesdb
+ExecStart=@SBINDIR@/postfix start
+ExecReload=@SBINDIR@/postfix reload
+ExecStop=@SBINDIR@/postfix stop
 
 [Install]
 WantedBy=multi-user.target
