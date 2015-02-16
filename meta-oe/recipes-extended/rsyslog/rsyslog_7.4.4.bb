@@ -125,10 +125,10 @@ INITSCRIPT_PARAMS = "defaults"
 # higher than sysklogd's 100
 ALTERNATIVE_PRIORITY = "110"
 
-ALTERNATIVE_${PN} = "rsyslogd syslog-conf syslog-logrotate"
+ALTERNATIVE_${PN} = "syslogd syslog-conf syslog-logrotate"
 
-ALTERNATIVE_LINK_NAME[rsyslogd] = "${base_sbindir}/syslogd"
-ALTERNATIVE_TARGET[rsyslogd] = "${sbindir}/rsyslogd"
+ALTERNATIVE_LINK_NAME[syslogd] = "${base_sbindir}/syslogd"
+ALTERNATIVE_TARGET[syslogd] = "${sbindir}/rsyslogd"
 ALTERNATIVE_LINK_NAME[syslog-conf] = "${sysconfdir}/syslog.conf"
 ALTERNATIVE_TARGET[syslog-conf] = "${sysconfdir}/rsyslog.conf"
 ALTERNATIVE_LINK_NAME[syslog-logrotate] = "${sysconfdir}/logrotate.d/syslog"
