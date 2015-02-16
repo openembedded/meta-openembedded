@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
 
 DEPENDS = "libpcap"
 
-inherit autotools
+inherit autotools systemd
 
 # return something like '1.2.3' or '1.2.3/rc1'
 #
@@ -22,7 +22,9 @@ def get_sub(d):
         return parts[0]
 
 SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
-	file://ptpd-add-dpaa-etsec-support.patch \
+           file://ptpd-add-dpaa-etsec-support.patch \
+           file://ptpd.service \
+           file://ptpd.conf \
 "
 
 SRC_URI[md5sum] = "1ef2f1f2825080a865bbce0eb61246d4"
@@ -38,4 +40,19 @@ do_install() {
     install -d ${D}${bindir} ${D}${mandir}/man8
     install -m 0755 ${B}/src/ptpd2 ${D}${bindir}
     install -m 0644 ${B}/src/ptpd2.8 ${D}${mandir}/man8
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/ptpd.service ${D}${systemd_unitdir}/system
+
+        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/ptpd.service
+        sed -i -e 's#@BINDIR@#${bindir}#g' ${D}${systemd_unitdir}/system/ptpd.service
+
+        install -d ${D}${sysconfdir}/default/
+        install -m 0644 ${WORKDIR}/ptpd.conf ${D}${sysconfdir}/default/ptpd
+    fi
 }
+
+SYSTEMD_PACKAGES = "${PN}"
+SYSTEMD_SERVICE_${PN} = "ptpd.service"
+SYSTEMD_AUTO_ENABLE = "disable"
