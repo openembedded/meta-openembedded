@@ -17,3 +17,4 @@ inherit distutils
 
 FILES_${PN} += "${datadir}/django"
 
+BBCLASSEXTEND = "nativesdk"
