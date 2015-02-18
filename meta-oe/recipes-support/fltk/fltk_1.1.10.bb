@@ -8,6 +8,8 @@ DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
 
 PR = "r1"
 
+PNBLACKLIST[fltk] ?= "broken: still uses /usr/bin/freetype-config"
+
 SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
            file://disable_test.patch \
            file://dso-fix.patch \
