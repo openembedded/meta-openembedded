@@ -1,6 +1,6 @@
 DESCRIPTION = "Enlightenment Terminal Emulator"
-LICENSE = "MIT & BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=9a8682b561bdfa219d59483a679ed80a"
+LICENSE = "MIT & BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4efac6b05b3256ba7da66301ac1ee6c6"
 DEPENDS = "evas ecore edje elementary eina eet emotion"
 
 inherit e gettext
