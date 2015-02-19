@@ -5,6 +5,19 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
 DEPENDS = "libpcap libpcre daq libdnet util-linux"
 
+# Blacklist:
+#
+# http://errors.yoctoproject.org/Errors/Details/8936/
+#
+# snort failure is again very nasty, because it's m4 which eats all
+# available memory and swap before it's killed by OOM killer.
+# 
+# Luckily it always picked m4
+# 
+# [Wed Feb 18 19:00:51 2015] Out of memory: Kill process 28522 (m4) score 961 or sacrifice child
+# [Wed Feb 18 19:10:51 2015] Out of memory: Kill process 45228 (m4) score 958 or sacrifice child
+# ...
+PNBLACKLIST[snort] ?= "BROKEN: autotools processing causes OOM condition on configure"
 
 SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
             file://snort.init \
