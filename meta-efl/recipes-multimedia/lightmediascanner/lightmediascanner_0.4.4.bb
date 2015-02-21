@@ -8,12 +8,12 @@ DEPENDS = "sqlite3 flac virtual/libiconv"
 
 PR = "r2"
 
-SRC_URI = "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2 \
+SRC_URI = "https://github.com/profusion/lightmediascanner/archive/release_${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "f423376a70f8f321af69b12563b176fe"
-SRC_URI[sha256sum] = "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e"
+SRC_URI[md5sum] = "0c758d40eb70288a2c714dfb44c35171"
+SRC_URI[sha256sum] = "1bbc28fbe5efbc24aa4eac9e43bbb178a1669de1418afee47b0c6898aff53433"
 
-S = "${WORKDIR}/release_${PV}"
+S = "${WORKDIR}/lightmediascanner-release_${PV}"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis"
