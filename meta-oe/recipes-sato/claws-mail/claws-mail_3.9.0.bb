@@ -9,7 +9,7 @@ inherit autotools pkgconfig gettext
 
 # translation patch: http://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=1774
 SRC_URI = "\
-        ${SOURCEFORGE_MIRROR}/sylpheed-claws/claws-mail-${PV}.tar.bz2;name=archive "
+        ${SOURCEFORGE_MIRROR}/project/claws-mail/Claws%20Mail/${PV}/claws-mail-${PV}.tar.bz2;name=archive "
 SRC_URI[archive.md5sum] = "4c5ac7b21f0ed17d0f6404124c2229a4"
 SRC_URI[archive.sha256sum] = "ed70975a5056b3ffc4fe6e977f0d9606febc1499763c090241b029a73ff24e65"
 
