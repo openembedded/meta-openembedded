@@ -17,11 +17,6 @@ ALTERNATIVE_${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
 ALTERNATIVE_PRIORITY_${PN} = "100"
 
-# protect from frightening message that xfce might not work correctly
-pkg_postinst_${PN} () {
-    echo 127.0.0.1    ${MACHINE} >> /etc/hosts
-}
-
 PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
 PACKAGECONFIG[systemd] = "--enable-systemd, --disable-systemd, polkit, systemd"
 PACKAGECONFIG[consolekit] = ",,,consolekit"
