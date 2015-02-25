@@ -44,16 +44,16 @@ PACKAGES =+ "${PN}-withsctp ${PN}-utils"
 
 FILES_${PN} = " \
     ${libdir}/libsctp.so.${SOLIBVERSION} \
+    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
 "
 
 FILES_${PN}-withsctp = " \
     ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
+    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
 "
 
 FILES_${PN}-dev += " \
-    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
     ${libdir}/libsctp.so \
-    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
     ${libdir}/lksctp-tools/libwithsctp.so \
     ${datadir}/lksctp-tools/*.c \
     ${datadir}/lksctp-tools/*.h \
