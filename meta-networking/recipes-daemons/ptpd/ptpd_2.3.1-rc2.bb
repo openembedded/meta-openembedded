@@ -23,6 +23,7 @@ def get_sub(d):
 
 SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
            file://ptpd-add-dpaa-etsec-support.patch \
+           file://ptpd-use-pkgconfig.patch \
            file://ptpd.service \
            file://ptpd.conf \
 "
@@ -34,7 +35,7 @@ S = "${WORKDIR}/ptpd-${PV}"
 
 EXTRA_OEMAKE = ""
 
-EXTRA_OECONF += "--disable-snmp"
+EXTRA_OECONF += "--disable-snmp --with-pcap-config=pkg-config"
 
 do_install() {
     install -d ${D}${bindir} ${D}${mandir}/man8
