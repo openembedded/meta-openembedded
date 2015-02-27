@@ -1,8 +1,9 @@
 # This package builds the NIS ypbind daemon
 # The source package is utils/net/NIS/ypbind-mt
 #
-PR = "r3"
-DESCRIPTION="\
+require nis.inc
+
+DESCRIPTION = " \
 Multithreaded NIS bind service (ypbind-mt).  \
 ypbind-mt is a complete new implementation of a NIS \
 binding daemon for Linux. It has the following \
@@ -11,23 +12,28 @@ Uses threads for better response.  Supports multiple \
 domain bindings.  Supports /var/yp/binding/* file \
 for Linux libc 4/5 and glibc 2.x.  Supports a list \
 of known secure NIS server (/etc/yp.conf) Binds to \
-the server which answered as first."
-HOMEPAGE="http://www.linux-nis.org/nis/ypbind-mt/index.html"
-
-require nis.inc
-
-LIC_FILES_CHKSUM = "file://COPYING;md5=082c9a0886c7c3db1bc862b5b62ffe08"
+the server which answered as first. \
+\
+This is the final IPv4-only version of ypbind-mt. \
+"
+HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
+DEPENDS = "yp-tools"
+# ypbind-mt now provides all the functionality of ypbind
+# and is used in place of it.
+PROVIDES += "ypbind"
 
 SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
            file://ypbind-yocto.init \
            file://ypbind.service \
 "
-SRC_URI[md5sum] = "135834db97d78ff6d79fdee2810b4056"
-SRC_URI[sha256sum] = "0eff76c1849f4b38ea1a60280d8397c4240369c641fe5402ce57edf1a90958c7"
+SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
+SRC_URI[sha256sum] = "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b575199fa915559b7746"
 
-# ypbind-mt now provides all the functionality of ypbind
-# and is used in place of it.
-PROVIDES += "ypbind"
+inherit systemd update-rc.d
+
+SYSTEMD_SERVICE_${PN} = "ypbind.service"
+INITSCRIPT_NAME = "ypbind"
+INITSCRIPT_PARAMS = "start 44 3 5 . stop 70 0 1 2 6 ."
 
 CACHED_CONFIGUREVARS = "ac_cv_prog_STRIP=/bin/true"
 
@@ -37,16 +43,11 @@ do_install_append () {
 
     install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
 
-    # TODO, use update-rc.d
-    ln -s ../init.d/ypbind ${D}${sysconfdir}/rcS.d/S44ypbind
-
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
 }
 
-inherit systemd
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "ypbind.service"
