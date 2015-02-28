@@ -12,17 +12,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 DEPENDS = "libaio"
 
-# rev for v2.0.5
-SRCREV = "02efadeb8b05144bcf2fc7796e1da2e7db211d00"
-SRC_URI = "git://git.kernel.dk/fio.git \
-           file://0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch"
+# rev for v2.2.6
+SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+SRC_URI = "git://git.kernel.dk/fio.git"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS}' LDFLAGS='${LDFLAGS}'"
+EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
 
 do_install() {
-    oe_runmake install DESTDIR=${D} bindir=${bindir} mandir=${mandir}
+    oe_runmake install DESTDIR=${D} prefix=${prefix} mandir=${mandir}
     install -d ${D}/${docdir}/${PN}
     cp -a ${S}/examples ${D}/${docdir}/${PN}/
 }
