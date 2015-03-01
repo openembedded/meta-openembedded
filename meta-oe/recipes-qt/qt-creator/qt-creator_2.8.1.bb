@@ -33,6 +33,11 @@ RRECOMMENDS_${PN} += "packagegroup-core-buildessential \
                       qt4-plugin-sqldriver-sqlite \
 "
 
+# avoid conflicts with meta-qt5's qt-creator and do install nothing to sysroot
+# this does no harm cause nothing depends on qt-creator
+sysroot_stage_all() {
+}
+
 # the regexp in insane.bbclass doesn't allow this valid path:
 # qt-creator-2.8.1: qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/libqbs_cpp_scanner.so
 # qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/libqbs_qt_scanner.so
