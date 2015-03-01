@@ -6,5 +6,5 @@ DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
 
 inherit xfce gtk-doc
 
-SRC_URI[md5sum] = "11eec87e8eda2bc62512c2416cb807a1"
-SRC_URI[sha256sum] = "e82cd1ad715c02a385b3cf6646cb89aa3c4724446dac1d7e424971df12f6cfbb"
+SRC_URI[md5sum] = "4eb012b6c1292ceedb3a83ebfc1ff08d"
+SRC_URI[sha256sum] = "876bdefa2e13cbf68b626b2158892fb93e824e1ef59cf951123a96cefbc8881d"
