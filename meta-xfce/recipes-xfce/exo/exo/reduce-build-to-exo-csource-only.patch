@@ -14,15 +14,17 @@ Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- Makefile.am  |   10 +---------
- configure.ac |   20 --------------------
- 2 files changed, 1 insertions(+), 29 deletions(-)
+ Makefile.am  | 10 +---------
+ configure.ac | 20 --------------------
+ 2 files changed, 1 insertion(+), 29 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index c2e3fff..79b0931 100644
+index ad7c6ce..3acd94a 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -1,13 +1,5 @@
+@@ -1,15 +1,7 @@
+ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+ 
  SUBDIRS =								\
 -	exo								\
 -	exo-csource							\
@@ -35,16 +37,16 @@ index c2e3fff..79b0931 100644
 -	po
 +	exo-csource
  
- AUTOMAKE_OPTIONS =							\
- 	1.9								\
+ distclean-local:
+ 	rm -rf *.cache *~
 diff --git a/configure.ac b/configure.ac
-index efcd62e..aac2495 100644
+index bb9be05..23471d0 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -110,15 +110,6 @@ AC_PROG_CC()
+@@ -116,15 +116,6 @@ AC_PROG_CC()
  AM_PROG_CC_C_O()
  AC_PROG_INSTALL()
- AC_PROG_INTLTOOL([0.31], [no-xml])
+ IT_PROG_INTLTOOL([intltool_minimum_version], [no-xml])
 -AC_CHECK_PROGS([PERL], [perl5 perl])
 -
 -dnl ***************************************
@@ -57,7 +59,7 @@ index efcd62e..aac2495 100644
  
  dnl ***************************************
  dnl *** Check for standard header files ***
-@@ -165,17 +156,6 @@ dnl ***********************************
+@@ -171,17 +162,6 @@ dnl ***********************************
  dnl *** Check for required packages ***
  dnl ***********************************
  XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.30.0])
@@ -76,5 +78,5 @@ index efcd62e..aac2495 100644
  dnl *************************
  dnl *** Check for gtk-doc ***
 -- 
-1.7.4.4
+1.9.3
 

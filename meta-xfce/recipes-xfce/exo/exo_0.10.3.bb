@@ -4,7 +4,6 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
 DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
-PR = "r4"
 
 inherit xfce pythonnative perlnative gtk-doc
 
@@ -18,8 +17,8 @@ SRC_URI_append_class-native = " \
     file://reduce-build-to-exo-csource-only.patch \
 "
 
-SRC_URI[md5sum] = "c70f2a217811bfba2e62f938d4b8f748"
-SRC_URI[sha256sum] = "b385828bf8a38204da3254b57fdfa25a72694495aa189fabd5040f707eec76ce"
+SRC_URI[md5sum] = "d45b7e18e3a73e4a7b2ec6ef7943de17"
+SRC_URI[sha256sum] = "95704b14ef9065268c3aa9a7c0bacbe0ddb490a183a4f5ab13bba4a1722826bd"
 
 PACKAGES =+ "exo-csource"
 
