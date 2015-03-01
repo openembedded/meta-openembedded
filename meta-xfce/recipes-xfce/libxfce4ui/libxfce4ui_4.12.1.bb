@@ -4,18 +4,16 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
 DEPENDS = "perl-native glib-2.0 gtk+ intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
 
-inherit autotools gettext gtk-doc xfce xfce-git
+inherit xfce autotools gettext gtk-doc
 
-SRC_URI = " \
-    git://git.xfce.org/xfce/libxfce4ui;protocol=git \
+SRC_URI += " \
     file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
-    file://0002-configure.ac.in-remove-optional-gtk3-support.patch \
+    file://0002-configure.ac-remove-optional-gtk3-support.patch \
 "
-SRCREV = "530b72f50fcbd8cb4b970fcc97be0321bf78183e"
-PV = "4.10.0+git${SRCPV}"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "ea9fad7d059fe8f531fe8db42dabb5a9"
+SRC_URI[sha256sum] = "3d619811bfbe7478bb984c16543d980cadd08586365a7bc25e59e3ca6384ff43"
 
-EXTRA_OECONF += "--enable-maintainer-mode --disable-debug  --with-vendor-info=${DISTRO}"
+EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gladeui] = "--enable-gladeui,--disable-gladeui,glade3"
