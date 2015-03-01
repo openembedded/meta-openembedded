@@ -9,12 +9,9 @@ inherit autotools pkgconfig
 
 BBCLASSEXTEND = "native"
 
-SRC_URI = " \
-    http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BPN}-${PV}.tar.bz2 \
-    file://xdt-autogen_dependency.patch \
-"
-SRC_URI[md5sum] = "36112d0256092c30bd1b47105c547edf"
-SRC_URI[sha256sum] = "2dccdd4935716a97db28464ba2403572ce03134fd7adf294e1a59eaf297e6555"
+SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BPN}-${PV}.tar.bz2"
+SRC_URI[md5sum] = "559202c4d9650e23696c44aa94cfc5a9"
+SRC_URI[sha256sum] = "e2e3a654fe9110df81f8c2483c9cbfa6d656fed15d5e5e717d6ef10bd0f5b5cb"
 
 do_install_append() {
     install -d ${D}${datadir}/aclocal
