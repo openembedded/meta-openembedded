@@ -1,0 +1,30 @@
+From f6c89c17955223bf8c99a901ca6f901b83fa521f Mon Sep 17 00:00:00 2001
+From: Marc Fournier <marc.fournier@camptocamp.com>
+Date: Wed, 3 Dec 2014 16:15:28 +0100
+Subject: [PATCH] netlink: ensure size_t portability in DEBUG() statement
+
+This prevents the following error when building on 32bit systems with
+gcc 4.7.2:
+
+netlink.c: In function 'ir_read':
+netlink.c:783:7: error: format '%lu' expects argument of type 'long unsigned int', but argument 5 has type 'size_t' [-Werror=format]
+---
+ src/netlink.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/netlink.c b/src/netlink.c
+index 422dc8c..3c4642c 100644
+--- a/src/netlink.c
++++ b/src/netlink.c
+@@ -683,7 +683,7 @@ static int ir_read (void)
+         continue;
+       }
+ 
+-      DEBUG ("netlink plugin: ir_read: querying %s from %s (%lu).",
++      DEBUG ("netlink plugin: ir_read: querying %s from %s (%zu).",
+           type_name[type_index], iflist[ifindex], ifindex);
+ 
+       nlh = mnl_nlmsg_put_header (buf);
+-- 
+2.1.4
+

@@ -9,6 +9,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://no-gcrypt-badpath.patch \
            file://collectd-version.patch \
            file://glibc-2.20-compatiblity.patch \
+           file://0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch \
            file://collectd.init \
            file://collectd.service"
 SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
