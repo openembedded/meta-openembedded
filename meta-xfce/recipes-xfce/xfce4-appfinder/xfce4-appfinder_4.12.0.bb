@@ -6,5 +6,7 @@ DEPENDS="glib-2.0 gtk+ libxfce4util libxfce4ui garcon dbus-glib xfconf"
 
 inherit xfce
 
-SRC_URI[md5sum] = "bea253956638e2df2dd950343b3b1b7b"
-SRC_URI[sha256sum] = "65ee74ffa76334d273e4c9ae501ec7f81f7de028813849f7d1441cbf7788eb77"
+SRC_URI[md5sum] = "0b238b30686388c507c119b12664f1a1"
+SRC_URI[sha256sum] = "2ad4a58019a76a6b64a816050db25f96854917c2f2e89d6a9df6c18e6c84c567"
+
+FILES_${PN} += "${datadir}/appdata"
