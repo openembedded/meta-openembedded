@@ -4,18 +4,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
 DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbus-glib startup-notification exo-native"
 
-inherit xfce xfce-git update-alternatives
+inherit xfce update-alternatives
 
-SRC_URI = " \
-    git://git.xfce.org/xfce/xfwm4;protocol=git \
-    file://0001-don-t-block-display-events-when-time-is-set-backward.patch \
-"
-
-SRCREV = "bce3062d0879ab8504c446f99ad57c9fd76c5097"
-S = "${WORKDIR}/git"
-PV = "4.10.1+git${SRCPV}"
-
-EXTRA_OECONF += "--enable-maintainer-mode"
+SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
+SRC_URI[md5sum] = "3728768dd9ea0de624cd3efc5dcccbca"
+SRC_URI[sha256sum] = "5bb5f72b41060d10bd3823f8b69abcd462bbd8853fdf9c82041450ae68e7d75a"
 
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
