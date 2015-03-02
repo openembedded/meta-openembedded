@@ -1,0 +1,18 @@
+--- a/configure.in.orig	2015-03-01 16:00:35.956432907 +0100
++++ b/configure.in	2015-03-01 16:04:23.269580093 +0100
+@@ -865,11 +865,11 @@
+         AC_ARG_ENABLE(xft, [  --enable-xft            turn on Xft support [default=no]])
+ 
+ 	if test x$enable_xft = xyes; then
+-            AC_PATH_PROG(FTCONFIG,freetype-config)
++            AC_PATH_PROG(PKGCONFIG,pkg-config)
+ 
+-	    if test "x$FTCONFIG" != x; then
+-	        CPPFLAGS="`$FTCONFIG --cflags` $CPPFLAGS"
+-	        CXXFLAGS="`$FTCONFIG --cflags` $CXXFLAGS"
++	    if test "x$PKGCONFIG" != x; then
++	        CPPFLAGS="`$PKGCONFIG --cflags xft` $CPPFLAGS"
++	        CXXFLAGS="`$PKGCONFIG --cflags xft` $CXXFLAGS"
+ 
+ 		AC_CHECK_HEADER(X11/Xft/Xft.h,
+ 		    AC_CHECK_LIB(Xft, XftDrawCreate,

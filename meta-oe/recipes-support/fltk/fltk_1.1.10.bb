@@ -6,19 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c0b73db66884b6a925e727400315130"
 
 DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
 
-PR = "r1"
-
-PNBLACKLIST[fltk] ?= "broken: still uses /usr/bin/freetype-config"
+PR = "r2"
 
 SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
            file://disable_test.patch \
            file://dso-fix.patch \
            file://libpng15.patch \
+           file://fltk-no-freetype-config.patch \
 "
 
 S = "${WORKDIR}/fltk-${PV}"
 
-inherit lib_package autotools-brokensep binconfig
+inherit lib_package autotools-brokensep binconfig pkgconfig
 
 TARGET_CC_ARCH += "${LDFLAGS} -DXFT_MAJOR=2"
 
