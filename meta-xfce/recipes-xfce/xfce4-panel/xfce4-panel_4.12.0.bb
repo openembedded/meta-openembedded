@@ -4,10 +4,10 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
 DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ dbus cairo virtual/libx11 libxml2 libwnck"
 
-inherit xfce
+inherit xfce gtk-doc
 
-SRC_URI[md5sum] = "8a1f8371fc725ba00f4594c5c0f81c59"
-SRC_URI[sha256sum] = "573052ed1b65e247415f92df120c8a78f9e4152c2636d38c923f82e32b8475d6"
+SRC_URI[md5sum] = "5a333af704e386c90ad829b6baf1a758"
+SRC_URI[sha256sum] = "30920fc2e2fc26279a82b5261a155c2cc15ab2aa1ced2275684a6ff8261b97b0"
 
 python populate_packages_prepend() {
     plugin_dir = d.expand('${libdir}/xfce4/panel/plugins/')
@@ -23,7 +23,7 @@ python populate_packages_prepend() {
 PACKAGES_DYNAMIC += "^${PN}-plugin-.*"
 
 FILES_${PN} += "${libdir}/xfce4/panel/migrate \
-                ${libdir}/xfce4/panel/wrapper"
+                ${libdir}/xfce4/panel/wrapper-1.0"
 
 FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
 "
