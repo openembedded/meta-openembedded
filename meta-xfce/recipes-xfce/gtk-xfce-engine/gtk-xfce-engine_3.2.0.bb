@@ -2,12 +2,15 @@ SUMMARY = "XFCE theme for GTK"
 SECTION = "x11/libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "gtk+ gtk+3 xfce4-dev-tools-native"
+DEPENDS = "gtk+ xfce4-dev-tools-native"
 
 inherit xfce
 
-SRC_URI[md5sum] = "174e774d0debb052ec457640275f065d"
-SRC_URI[sha256sum] = "eb03cf81da1a91e426a2141c092ed7a1634cab29ea2f3546480e901290a7a06d"
+SRC_URI[md5sum] = "363d6c16a48a00e26d45c45c2e1fd739"
+SRC_URI[sha256sum] = "875c9c3bda96faf050a2224649cc42129ffb662c4de33add8c0fd1fb860b47ed"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3, gtk+3"
 
 PACKAGES += "${PN}-themes gtk3-xfce-engine"
 FILES_${PN} += "${libdir}/gtk-2.0/*/engines/*.so"
