@@ -6,20 +6,13 @@ DEPENDS = "exo exo-native garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib l
 
 inherit xfce xfce-git
 
-SRC_URI = " git://gitorious.org/xfce/xfce4-settings.git;protocol=git;branch=for-oe \
+SRC_URI = " git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.0 \
             file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
             file://0002-xsettings.xml-Set-default-themes.patch \
-            file://touchscreen/invisible \
-            file://touchscreen/wait \
-            file://touchscreen/0001-add-cursor-theme-xfce-invisible.patch \
-            file://touchscreen/0002-mouse-settings-dialog-add-touchscreen-pointer-option.patch \
-            file://touchscreen/0003-XfcePointersHelper-gets-a-pointer-to-XfceXSettingsHe.patch \
-            file://touchscreen/0004-XfceXSettingsHelper-gets-a-property-touchscreen-poin.patch \
-            file://touchscreen/0005-pointers-detect-a-change-of-pointer-device-used-and-.patch \
 "
-SRCREV = "b7a0e1fd77f5bb5c372223ff62aec7acf252f061"
+SRCREV = "a4540c2350cecf53f7095027edd102c6a24e36af"
 S = "${WORKDIR}/git"
-PV = "4.11.0+git${SRCPV}"
+PV = "4.12.0+git${SRCPV}"
  
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
@@ -35,12 +28,6 @@ FILES_${PN} += " \
     ${libdir}/xfce4 \
     ${datadir}/xfce4 \
 "
-
-do_install_prepend() {
-    # somehow binary files are not patched correctly by oe-patch - so copy them
-    cp ${WORKDIR}/touchscreen/invisible ${S}/cursors
-    cp ${WORKDIR}/touchscreen/wait ${S}/cursors
-}
 
 RRECOMMENDS_${PN} += "gnome-icon-theme"
 RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES','alsa','libcanberra-alsa','',d)}"
