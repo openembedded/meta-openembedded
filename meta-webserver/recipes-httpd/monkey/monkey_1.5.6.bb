@@ -11,8 +11,8 @@ SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
            file://monkey.service \
            file://monkey.init"
 
-SRC_URI[md5sum] = "b794724ac38cfedee2a5d27c175bc87e"
-SRC_URI[sha256sum] = "662bbafc614d32f645059e6e00258fed640665594f5b7f11cf4c4763cf09ddcf"
+SRC_URI[md5sum] = "9699e4c9ea6ce6b989907c252ae80254"
+SRC_URI[sha256sum] = "7c3d845306aa74ee6effd7ab6169d16ac4e6450e564954d0d0baa2d1e9be1a22"
 
 EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
                 --logdir=${localstatedir}/log/monkey/ \
@@ -21,7 +21,7 @@ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
                 --datadir=${localstatedir}/www/monkey/ \
                 --sysconfdir=${sysconfdir}/monkey/ \
                 --enable-plugins=* \
-                --disable-plugins=polarssl \
+                --disable-plugins=mbedtls \
                 --debug \
                 --malloc-libc"
 
