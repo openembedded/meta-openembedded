@@ -5,7 +5,7 @@ LICENSE = "copyleft-next-0.3.0 & ISC"
 LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe \
                     file://${WORKDIR}/wireless-regdb-2014.11.18/LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
 
-DEPENDS = "python-m2crypto-native python-native"
+DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
 
 SRC_URI = "https://www.kernel.org/pub/software/network/crda/${BP}.tar.xz;name=crda \
            https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2014.11.18.tar.xz;name=bin \
@@ -37,7 +37,7 @@ do_install() {
 }
 
 
-RDEPENDS_${PN} = "udev libgcrypt libnl"
+RDEPENDS_${PN} = "udev"
 FILES_${PN} += "${libdir}crda/regulatory.bin \
                 ${base_libdir}/udev/rules.d/85-regulatory.rules \
 "
