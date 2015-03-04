@@ -2,18 +2,15 @@ SUMMARY = "v4l2 and IR applications"
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=48da9957849056017dc568bbc43d8975 \
                     file://COPYING.libv4l;md5=d749e86a105281d7a44c2328acebc4b0"
+PROVIDES = "libv4l media-ctl"
 
 DEPENDS = "jpeg \
            ${@base_contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
 
 inherit autotools gettext pkgconfig
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[mediactl] = "--enable-v4l-utils,--disable-v4l-utils,,"
-# libv4l was absorbed into this, let OE know that
-PROVIDES = "libv4l media-ctl"
-PROVIDES += "${@base_contains('PACKAGECONFIG', 'mediactl', 'media-ctl', '', d)}"
-RPROVIDES_${PN} += "${@base_contains('PACKAGECONFIG', 'mediactl', 'media-ctl', '', d)}"
+PACKAGECONFIG ??= "media-ctl"
+PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
 
 SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
