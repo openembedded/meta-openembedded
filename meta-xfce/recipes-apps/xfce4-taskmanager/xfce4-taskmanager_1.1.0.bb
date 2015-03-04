@@ -6,5 +6,5 @@ inherit xfce-app
 
 DEPENDS = "gtk+ cairo libwnck xfce4-dev-tools-native exo-native"
 
-SRC_URI[md5sum] = "b8a707b25e32c1a296eb50d609aa49b8"
-SRC_URI[sha256sum] = "f5aa2796dd9971f8ae400238bfcdd9fa1322dba1466d1e6fd5bf8ee7e88bee86"
+SRC_URI[md5sum] = "7da465a4798629ebd8650fef62770ab7"
+SRC_URI[sha256sum] = "2e1eb161f966cbfbd68bd029fb59115bc5ab0c0704cb500d20e7d73967e59ecb"
