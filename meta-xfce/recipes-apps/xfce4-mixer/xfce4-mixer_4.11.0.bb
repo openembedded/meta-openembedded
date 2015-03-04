@@ -8,7 +8,7 @@ DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf libunique"
 
 SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
 
-SRC_URI[md5sum] = "e47d5b3e873fdee3fa80d309a5f53e9c"
-SRC_URI[sha256sum] = "a8c589001b438171ea5a6b46ce9895c3ffbc5081ab67805ab9870e540068dade"
+SRC_URI[md5sum] = "1b3753b91224867a3a2dfddda239c28d"
+SRC_URI[sha256sum] = "fb0c1df201ed1130f54f15b914cbe5a59286e994a137acda5609570c57112de2"
 
 RDEPENDS_${PN} = "gst-meta-audio"
