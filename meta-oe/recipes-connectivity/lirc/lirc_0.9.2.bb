@@ -40,10 +40,10 @@ do_install_append() {
 
 PACKAGES =+ "${PN}-contrib ${PN}-exec ${PN}-plugins ${PN}-python"
 
-RDEPENDS_${PN}-exec = "lirc"
+RDEPENDS_${PN}-exec = "${PN}"
 RDEPENDS_${PN}-python = "python"
 
-RRECOMMENDS_lirc = "lirc-exec"
+RRECOMMENDS_lirc = "${PN}-exec ${PN}-plugins"
 
 FILES_${PN}-plugins = "${libdir}/lirc/plugins/*.so ${datadir}/lirc/configs"
 FILES_${PN}-contrib = "${datadir}/lirc/contrib"
