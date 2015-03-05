@@ -11,6 +11,8 @@ ypwhich, yppasswd, domainname, nisdomainname \
 and ypdomainname. \
 "
 
+PNBLACKLIST[yp-tools] ?= "BROKEN: fails to build for qemuarm."
+
 SRC_URI = "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
            file://domainname.service \
            file://yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-mapv4v6addr.patch \
