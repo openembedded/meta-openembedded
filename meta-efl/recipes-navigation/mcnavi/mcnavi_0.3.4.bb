@@ -11,3 +11,9 @@ SRC_URI[sha256sum] = "ee7f65155e91386175875fc4f72f4bc94e4e9cdb8258112632da94520e
 S = "${WORKDIR}/${PN}"
 
 inherit autotools
+
+PNBLACKLIST[mcnavi] ?= "BROKEN: latest version 0.3.4 is 3 years old and now broken with more strict ejde_cc from efl-1.13"
+# | edje_cc: Error. parse error 0.3.4-r0/mcnavi/data/themes/Default/main.edc:126. invalid state name: 'none'. "default" state must always be first.
+# | edje_cc: Error. parse error 0.3.4-r0/mcnavi/data/themes/Default/itinerary.edc:84. invalid state name: 'none'. "default" state must always be first.
+# | edje_cc: Error. parse error 0.3.4-r0/mcnavi/data/themes/Default/text.edc:1129. invalid state name: 'none'. "default" state must always be first.
+# | edje_cc: Error. parse error 0.3.4-r0/mcnavi/data/themes/Default/fileopen.edc:78. invalid state name: 'off'. "default" state must always be first.
