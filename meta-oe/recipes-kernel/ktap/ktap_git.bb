@@ -23,4 +23,4 @@ do_install() {
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-RDEPENDS_${PN} = "kernel-module-ktapvm"
+RRECOMMENDS_${PN} = "kernel-module-ktapvm"
