@@ -5,6 +5,7 @@ require ktap.inc
 SUMMARY = "KTAP is a scripting dynamic tracing tool for Linux"
 DEPENDS = "ktap-module"
 
+PNBLACKLIST[ktap] ?= "Depends on blacklisted kernel-module-ktapvm"
 #Available package configs:
 # libelf - needed to resolve symbols in DSO and for sdt
 # ffi    - only supports x86_64 for now!. Needs to be enabled for ktap-module too.

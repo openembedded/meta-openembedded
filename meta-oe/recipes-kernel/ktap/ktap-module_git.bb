@@ -6,6 +6,9 @@ SUMMARY = "KTAP is a scripting dynamic tracing tool for Linux"
 
 inherit module
 
+# See https://github.com/ktap/ktap/issues/80
+PNBLACKLIST[ktap-module] ?= "Not compatible with 3.19 kernel"
+
 # Available package configs: ffi (only supported on x86_64)
 PACKAGECONFIG ?= ""
 
