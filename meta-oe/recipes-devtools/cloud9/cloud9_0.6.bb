@@ -8,6 +8,7 @@ PR = "r5"
 # Nodejs-native for node-waf, nodejs4-native for the headers
 DEPENDS = "libxml2 nodejs-native nodejs4-native"
 
+PNBLACKLIST[cloud9] ?= "Not comatible with current nodejs 0.12, but upstream is working on it for v3"
 inherit systemd
 
 SRC_URI = "git://github.com/ajaxorg/cloud9.git;name=cloud9ide \

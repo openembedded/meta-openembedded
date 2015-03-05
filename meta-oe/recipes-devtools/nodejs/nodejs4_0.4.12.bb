@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d6237f3a840aef5b7880fb4e49eecfe5"
 
 DEPENDS = "openssl"
 
+PNBLACKLIST[nodejs4] ?= "Used only by currently blacklisted cloud9 and fails to build for qemuarm with thumb: error: #error For thumb inter-working we require an architecture which supports blx"
+
 SRC_URI = " \
     http://nodejs.org/dist/node-v${PV}.tar.gz \
     file://libev-cross-cc_${PV}.patch \
