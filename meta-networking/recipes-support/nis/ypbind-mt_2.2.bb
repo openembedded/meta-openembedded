@@ -18,7 +18,7 @@ HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
 DEPENDS = "yp-tools"
 PROVIDES += "ypbind"
 
-PNBLACKLIST[yp-bind] ?= "BROKEN: Depends on broken yp-tools"
+PNBLACKLIST[ypbind-mt] ?= "BROKEN: Depends on broken yp-tools"
 
 SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
            file://ypbind-yocto.init \
