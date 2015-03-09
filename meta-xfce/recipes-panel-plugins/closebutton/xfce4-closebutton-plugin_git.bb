@@ -9,7 +9,7 @@ DEPENDS += "exo-native libwnck xfconf"
 
 PV = "0.1.0+gitr${SRCPV}"
 
-SRC_URI = "git://gitorious.org/xfce/xfce4-closebutton-plugin.git;branch=master"
+SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git;branch=master"
 SRCREV = "bd76154afe26ba8a5251a1887d88f9d855301850"
 S = "${WORKDIR}/git"
 
