@@ -15,6 +15,8 @@ SRC_URI[sha256sum] = "ceda443fc5e129e67a067e2cd7b73ff037f8b10b50e407baa2b1d9f219
 BBCLASSEXTEND = "native"
 
 inherit qmake2 python-dir pythonnative
+PACKAGES += "python-sip"
+
 
 EXTRA_QMAKEVARS_POST += "CONFIG=console"
 
@@ -45,6 +47,6 @@ do_install() {
     oe_runmake install
 }
 
-FILES_${PN} += "${libdir}/${PYTHON_DIR}/site-packages/"
+FILES_python-${PN} = "${libdir}/${PYTHON_DIR}/site-packages/"
 FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
 
