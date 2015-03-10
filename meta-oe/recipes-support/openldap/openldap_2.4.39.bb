@@ -25,6 +25,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://use-urandom.patch \
     file://initscript \
     file://slapd.service \
+    file://thread_stub.patch \
 "
 SRC_URI[md5sum] = "b0d5ee4b252c841dec6b332d679cf943"
 SRC_URI[sha256sum] = "8267c87347103fef56b783b24877c0feda1063d3cb85d070e503d076584bf8a7"
