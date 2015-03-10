@@ -66,9 +66,6 @@ do_install_append_class-target() {
     sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${libdir}/node_modules/npm/bin/npm-cli.js
 }
 
-RDEPENDS_${PN} = "curl"
-RDEPENDS_${PN}_class-native = ""
-
 PACKAGES =+ "${PN}-npm"
 FILES_${PN}-npm = "${libdir}/node_modules ${bindir}/npm"
 RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils"
