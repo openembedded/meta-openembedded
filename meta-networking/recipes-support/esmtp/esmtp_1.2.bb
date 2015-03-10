@@ -18,23 +18,23 @@ EXTRA_OECONF = "--with-libesmtp=${STAGING_EXECPREFIXDIR}"
 
 inherit autotools update-alternatives
 
-ALTERNATIVE_${PN} = "sbinsendmail libsendmail"
+ALTERNATIVE_${PN} = "sendmail"
 
-ALTERNATIVE_LINK_NAME[sbinsendmail] = "${sbindir}/sendmail"
-ALTERNATIVE_TARGET[sbinsendmail] = "${bindir}/esmtp"
-ALTERNATIVE_LINK_NAME[libsendmail] = "${libdir}/sendmail"
-ALTERNATIVE_TARGET[libsendmail] = "${bindir}/esmtp"
+ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
+ALTERNATIVE_TARGET[sendmail] = "${bindir}/esmtp"
 ALTERNATIVE_PRIORITY = "10"
 
 SRC_URI[md5sum] = "79a9c1f9023d53f35bb82bf446150a72"
 SRC_URI[sha256sum] = "a0d26931bf731f97514da266d079d8bc7d73c65b3499ed080576ab606b21c0ce"
 
-FILES_${PN} += "${libdir}/"
-
-# The sysroot/${libdir}/sendmail conflicts with lsb's, and it's a
-# symlink to ${bindir}/esmtp which is meaningless for sysroot, so
-# remove it.
-SYSROOT_PREPROCESS_FUNCS += "remove_sysroot_sendmail"
-remove_sysroot_sendmail() {
-    rm -r "${SYSROOT_DESTDIR}${libdir}/sendmail"
+do_install_append() {
+    # only one file /usr/lib/sendmail in ${D}${libdir}
+    rm -rf ${D}${libdir}
 }
+
+pkg_postinst_${PN}_linuxstdbase () {
+    # /usr/lib/sendmial is required by LSB core test
+    [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
+}
+
+FILES_${PN} += "${libdir}/"
