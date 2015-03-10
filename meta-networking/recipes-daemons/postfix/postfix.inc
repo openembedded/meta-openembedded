@@ -230,6 +230,11 @@ pkg_postinst_${PN} () {
         newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases
         touch $D/etc/postfix/virtual_alias
         postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+
+        if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES') else 'false'}; then
+            # /usr/lib/sendmial is required by LSB core test
+            [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
+        fi
     fi
 }
 
