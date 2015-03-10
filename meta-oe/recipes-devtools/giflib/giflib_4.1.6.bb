@@ -16,5 +16,7 @@ FILES_${PN}-utils = "${bindir}"
 
 BBCLASSEXTEND = "native"
 
+RDEPENDS_${PN}-utils = "perl"
+
 SRC_URI[md5sum] = "7125644155ae6ad33dbc9fc15a14735f"
 SRC_URI[sha256sum] = "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
