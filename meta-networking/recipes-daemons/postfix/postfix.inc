@@ -155,7 +155,6 @@ do_install () {
 
     install -m 770 -d ${D}${localstatedir}/spool/postfix
     chown postfix:postfix ${D}${localstatedir}/spool/postfix
-    chown postfix:postfix ${D}${localstatedir}/lib/postfix
 
     install -m 2755 -d ${D}${localstatedir}/spool/mail
     chown postfix:nogroup ${D}${localstatedir}/spool/mail
