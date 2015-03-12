@@ -42,6 +42,16 @@ python symbol_file_preprocess() {
     breakpad_sym_file_path = os.path.join(breakpad_syms_dir, sym_file_name)
     socorro_sym_file_path = os.path.join(socorro_syms_dir, sym_file_name)
 
+    create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path)
+
+    arrange_socorro_sym_file(socorro_sym_file_path, socorro_syms_dir)
+
+    return
+}
+
+
+def create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path):
+
     # In the symbol file, all source files are referenced like the following.
     # FILE 123 /path/to/some/File.cpp
     # Go through all references and replace the file paths with repository
@@ -56,7 +66,6 @@ python symbol_file_preprocess() {
                 socorro_sym_file.write(line)
 
     return
-}
 
 
 def socorro_file_reference(line):
@@ -161,4 +170,43 @@ def git_repository_path(source_file_path):
         source_revision)
 
     return socorro_reference
+
+
+def arrange_socorro_sym_file(socorro_sym_file_path, socorro_syms_dir):
+
+    import re
+
+    # Breakpad's minidump_stackwalk needs a certain directory structure in order
+    # to find correct symbols when extracting a stack trace out of a minidump.
+    # The directory structure must look like the following.
+    # YourBinary/<hash>/YourBinary.sym
+    # YourLibrary.so/<hash>/YourLibrary.so.sym
+    # To be able to create such structure we need to extract the hash value that
+    # is found in each symbol file. The header of the symbol file looks
+    # something like this:
+    # MODULE Linux x86 A079E473106CE51C74C1C25AF536CCD30 YourBinary
+    # See
+    # http://code.google.com/p/google-breakpad/wiki/LinuxStarterGuide
+
+    # Create the directory with the same name as the binary.
+    binary_dir = re.sub("\.sym$", "", socorro_sym_file_path)
+    if not os.path.exists(binary_dir):
+        os.makedirs(binary_dir)
+
+    # Get the hash from the header of the symbol file.
+    with open(socorro_sym_file_path, 'r') as socorro_sym_file:
+
+        # The hash is the 4th argument of the first line.
+        sym_file_hash = socorro_sym_file.readline().split()[3]
+
+    # Create the hash directory.
+    hash_dir = os.path.join(binary_dir, sym_file_hash)
+    if not os.path.exists(hash_dir):
+        os.makedirs(hash_dir)
+
+    # Move the symbol file to the hash directory.
+    sym_file_name = os.path.basename(socorro_sym_file_path)
+    os.rename(socorro_sym_file_path, os.path.join(hash_dir, sym_file_name))
+
+    return
 
