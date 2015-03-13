@@ -15,10 +15,13 @@ SRC_URI = "git://gitosis.stanford.edu/openflow.git;protocol=git"
 
 DEPENDS = "virtual/libc"
 
-EXTRA_OECONF += "KARCH=${TARGET_ARCH}"
-
 PACKAGECONFIG ??= "openssl"
 PACKAGECONFIG[openssl] = "--enable-ssl,--disable-ssl, openssl, libssl"
+
+EXTRA_OECONF += " \
+                 KARCH=${TARGET_ARCH} \
+                 ${@base_contains('PACKAGECONFIG', 'openssl', 'SSL_LIBS="-lssl -lcrypto"', '', d)} \
+                "
 
 S = "${WORKDIR}/git"
 
