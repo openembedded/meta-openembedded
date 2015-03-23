@@ -20,3 +20,5 @@ do_configure_prepend() {
     # upstream setup.py overcomplicated, use ours
     install -m 0644 ${WORKDIR}/setup.py ${S}
 }
+
+BBCLASSEXTEND = "native"
