@@ -24,8 +24,8 @@ S = "${WORKDIR}/samba-${PV}/source"
 
 inherit autotools-brokensep update-rc.d systemd
 
-SYSTEMD_PACKAGES = "${PN} winbind"
-SYSTEMD_SERVICE_${PN} = "nmb.service smb.service"
+SYSTEMD_PACKAGES = "${PN}-base winbind"
+SYSTEMD_SERVICE_${PN}-base = "nmb.service smb.service"
 SYSTEMD_SERVICE_winbind = "winbind.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 SYSTEMD_AUTO_ENABLE_winbind = "disable"
@@ -63,14 +63,14 @@ PACKAGECONFIG[talloc] = "--enable-external-libtalloc --with-libtalloc, --disable
 PACKAGECONFIG[valgrind] = "ac_cv_header_valgrind_valgrind_h=yes ac_cv_header_valgrind_memcheck_h=yes, \
                            ac_cv_header_valgrind_valgrind_h=no ac_cv_header_valgrind_memcheck_h=no, valgrind"
 
-INITSCRIPT_PACKAGES = "samba winbind"
-INITSCRIPT_NAME_samba = "samba"
+INITSCRIPT_PACKAGES = "${PN}-base winbind"
+INITSCRIPT_NAME_${PN}-base = "samba"
 INITSCRIPT_NAME_winbind = "winbind"
 # No dependencies, goes in at level 20 (NOTE: take care with the
 # level, later levels put the shutdown later too - see the links
 # in rc6.d, the shutdown must precede network shutdown).
 INITSCRIPT_PARAMS = "defaults"
-CONFFILES_${PN} = "${sysconfdir}/samba/smb.conf"
+CONFFILES_${PN}-base = "${sysconfdir}/samba/smb.conf"
 
 do_configure_prepend () {
     ./script/mkversion.sh
@@ -143,7 +143,7 @@ do_install_append() {
 }
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
-pkg_postinst_${PN} () {
+pkg_postinst_${PN}-base () {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
         if [ -n "$D" ]; then
             OPTS="--root=$D"

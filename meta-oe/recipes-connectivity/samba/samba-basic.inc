@@ -9,7 +9,22 @@ EXTRA_OECONF += "\
         --without-ldap \
         --without-krb5"
 
-PACKAGES =+ "libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg libnetapi libtdb libsmbsharemodes libsmbclient libsmbclient-dev cifs cifs-doc swat"
+PACKAGES =+ "libwbclient libwinbind libwinbind-dbg libnss-winbind winbind winbind-dbg \
+             libnetapi libtdb libtevent libsmbsharemodes libsmbclient libsmbclient-dev \
+             cifs cifs-doc swat ${PN}-base"
+
+RDEPENDS_${PN} += "${PN}-base"
+
+FILES_${PN}-base = "${sbindir}/nmbd \
+                    ${sbindir}/smbd \
+                    ${sysconfdir}/default \
+                    ${sysconfdir}/samba \
+                    ${sysconfdir}/init.d/samba \
+                    ${localstatedir}/lib/samba \
+                    ${localstatedir}/log/samba \
+                    ${localstatedir}/nmbd \
+                    ${localstatedir}/spool/samba \
+"
 
 FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
                      ${libdir}/security/.debug/pam_winbind.so \
@@ -32,6 +47,7 @@ FILES_libwbclient = "${libdir}/libwbclient.so.*"
 FILES_libnetapi = "${libdir}/libnetapi.so.*"
 FILES_libsmbsharemodes = "${libdir}/libsmbsharemodes.so.*"
 FILES_libtdb = "${libdir}/libtdb.so.*"
+FILES_libtevent = "${libdir}/libtevent.so.*"
 FILES_cifs = "${base_sbindir}/mount.cifs ${base_sbindir}/umount.cifs"
 FILES_cifs-doc = "${mandir}/man8/mount.cifs.8 ${mandir}/man8/umount.cifs.8"
 FILES_libsmbclient = "${libdir}/libsmbclient.so.*"
