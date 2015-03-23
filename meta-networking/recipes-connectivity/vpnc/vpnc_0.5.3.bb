@@ -25,7 +25,8 @@ do_install () {
 }
 
 CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
-RDEPENDS_${PN} = "kernel-module-tun perl-module-io-file"
+RDEPENDS_${PN} = "perl-module-io-file"
+RRECOMMENDS_${PN} = "kernel-module-tun"
 
 SRC_URI = "http://www.unix-ag.uni-kl.de/~massar/vpnc/vpnc-${PV}.tar.gz \
            file://makeman.patch \
