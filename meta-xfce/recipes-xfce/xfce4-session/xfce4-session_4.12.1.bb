@@ -7,8 +7,8 @@ RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower"
 
 inherit xfce update-alternatives
 
-SRC_URI[md5sum] = "d75b257bc0954c238d3c82ce498525aa"
-SRC_URI[sha256sum] = "68c85453b097d3ada573dcb7e72acd06e0fc34531996122c10d20096405b7b06"
+SRC_URI[md5sum] = "f4921fb2e606e74643daf1212263076c"
+SRC_URI[sha256sum] = "97d7f2a2d0af7f3623b68d1f04091e02913b28f9555dab8b0d26c8a1299d08fd"
 SRC_URI += " \
     file://0001-configure.in-hard-code-path-to-iceauth.patch \
 "
