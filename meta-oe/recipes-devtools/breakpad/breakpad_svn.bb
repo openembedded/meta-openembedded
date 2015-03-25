@@ -13,7 +13,7 @@ inherit autotools
 
 BBCLASSEXTEND = "native"
 
-SRCREV = "r1318"
+SRCREV = "r1435"
 SRC_URI = "svn://google-breakpad.googlecode.com/svn;module=trunk;protocol=http"
 S = "${WORKDIR}/trunk"
 
