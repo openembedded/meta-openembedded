@@ -20,6 +20,7 @@ EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemds
 PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
 PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
 PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
+PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
 
 do_install_append() {
     install -d ${D}/${localstatedir}/lib/mpd/music
