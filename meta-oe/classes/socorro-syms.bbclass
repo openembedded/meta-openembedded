@@ -108,6 +108,12 @@ def run_command(command, directory):
     return output.rstrip()
 
 
+def is_local_url(url):
+
+    return \
+        url.startswith("file:") or url.startswith("/") or url.startswith("./")
+
+
 def git_repository_path(source_file_path):
 
     import re
@@ -125,11 +131,17 @@ def git_repository_path(source_file_path):
 
     # The URL could be a local download directory. If so, get the URL again
     # using the local directory's config file.
-    if os.path.isdir(source_long_url):
+    if is_local_url(source_long_url):
         git_config_file = os.path.join(source_long_url, "config")
         source_long_url = run_command(
             "git config --file %s --get remote.origin.url" % git_config_file,
             source_file_dir)
+
+        # If also the download directory redirects to a local git directory,
+        # then we're probably using source code from a local debug branch which
+        # won't be accessible by Socorro.
+        if is_local_url(source_long_url):
+            return None
 
     # The URL can have several formats. A full list can be found using
     # git help clone. Extract the server part with a regex.
