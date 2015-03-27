@@ -1,0 +1,19 @@
+diff -Naur pyOpenSSL-0.13.orig/OpenSSL/crypto/crl.c pyOpenSSL-0.13/OpenSSL/crypto/crl.c
+--- pyOpenSSL-0.13.orig/OpenSSL/crypto/crl.c	2011-09-02 17:46:13.000000000 +0200
++++ pyOpenSSL-0.13/OpenSSL/crypto/crl.c	2015-03-26 20:53:08.984999223 +0100
+@@ -3,6 +3,7 @@
+ #include "crypto.h"
+ 
+ 
++#if 0
+ static X509_REVOKED * X509_REVOKED_dup(X509_REVOKED *orig) {
+     X509_REVOKED *dupe = NULL;
+ 
+@@ -32,6 +33,7 @@
+     dupe->sequence = orig->sequence;
+     return dupe;
+ }
++#endif
+ 
+ static char crypto_CRL_get_revoked_doc[] = "\n\
+ Return revoked portion of the CRL structure (by value\n\
