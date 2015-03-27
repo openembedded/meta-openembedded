@@ -40,7 +40,7 @@ CONFFILES_${PN} += "/usr/etc/mplayer/input.conf \
                     /usr/etc/mplayer/codecs.conf \
 "
 
-inherit autotools-brokensep pkgconfig
+inherit autotools-brokensep pkgconfig python3native
 
 EXTRA_OECONF = " \
     --prefix=/usr \
