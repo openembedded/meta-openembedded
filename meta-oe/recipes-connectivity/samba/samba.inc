@@ -27,8 +27,6 @@ inherit autotools-brokensep update-rc.d systemd
 SYSTEMD_PACKAGES = "${PN}-base winbind"
 SYSTEMD_SERVICE_${PN}-base = "nmb.service smb.service"
 SYSTEMD_SERVICE_winbind = "winbind.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-SYSTEMD_AUTO_ENABLE_winbind = "disable"
 
 SAMBAMMAP = "no"
 SAMBAMMAP_libc-glibc = "yes"
