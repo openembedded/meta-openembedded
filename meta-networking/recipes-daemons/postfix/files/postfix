@@ -1,4 +1,12 @@
 #!/bin/sh
+### BEGIN INIT INFO
+# Provides: postfix MTA
+# Default-Start: 2345
+# Default-Stop: 016
+# Short-Description: start and stop postfix
+# Description: Postfix is a Mail Transport Agent, which is the program
+#              that moves mail from one machine to another.
+### END INIT INFO
 
 success() {
         echo " Successful"
