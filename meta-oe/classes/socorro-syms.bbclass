@@ -148,12 +148,10 @@ def git_repository_path(source_file_path):
     url_match = re.search(".*(://|@)([^:/]*).*", source_long_url)
     source_server = url_match.group(2)
 
-    # (2) Get the branch for this file. If it's detached and just shows HEAD
-    # then set it to master and hope we can get the correct revision from there.
-    source_branch = run_command(
-        "git rev-parse --abbrev-ref HEAD", source_file_dir)
-    if source_branch == "HEAD":
-        source_branch = "master"
+    # (2) Get the branch for this file.
+    source_branch_list = run_command("git show-branch --list", source_file_dir)
+    source_branch_match = re.search(".*?\[(.*?)\].*", source_branch_list)
+    source_branch = source_branch_match.group(1)
 
     # (3) Since the repo root directory name can be changed without affecting
     # git, we need to extract the name from something more reliable.
