@@ -8,13 +8,13 @@ DEPENDS = "aufs-util-native"
 DEPENDS_class-native = ""
 
 SRCREV = "f29056fe396d56fc2a06a96312feabaebbe14c59"
-SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.9 \
+SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.0 \
            file://aufs-util-don-t-strip-executables.patch \
            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
            file://aufs_type.h \
 "
 
-PV = "3.9+git${SRCPV}"
+PV = "3.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
