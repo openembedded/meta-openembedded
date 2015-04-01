@@ -17,7 +17,10 @@ the server which answered as first. \
 This is the final IPv4-only version of ypbind-mt. \
 "
 HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
-DEPENDS = "yp-tools"
+DEPENDS = " \
+           yp-tools \
+           ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+          "
 # ypbind-mt now provides all the functionality of ypbind
 # and is used in place of it.
 PROVIDES += "ypbind"
