@@ -12,4 +12,6 @@ SRC_URI[sha256sum] = "5991020192f52cc40fa852fbf6bbf5bd5db5d5d00aa9905c67f6f0eade
 PACKAGECONFIG ??= "expat"
 PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
 
-inherit autotools
+BINCONFIG = "${bindir}/log4c-config"
+
+inherit autotools binconfig-disabled
