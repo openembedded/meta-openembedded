@@ -9,15 +9,13 @@ SECTION = "devel/ruby"
 LICENSE = "Ruby | BSD | GPLv2"
 LIC_FILES_CHKSUM = "\
     file://COPYING;md5=837b32593517ae48b9c3b5c87a5d288c \
-    file://BSDL;md5=3949e007205deef714bd225e1ee4a8ea \
-    file://GPL;md5=393a5ca445f6965873eca0259a17f833 \
-    file://LEGAL;md5=3ce1fae39fe573b818c0af162bce6579 \
+    file://BSDL;md5=19aaf65c88a40b508d17ae4be539c4b5\
+    file://GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263\
+    file://LEGAL;md5=c440adb575ba4e6e2344c2630b6a5584\
 "
 
 DEPENDS = "ruby-native zlib openssl tcl libyaml db gdbm readline"
 DEPENDS_class-native = "libyaml-native"
-
-INC_PR = "r1"
 
 SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
 SRC_URI = "http://cache.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
