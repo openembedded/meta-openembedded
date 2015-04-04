@@ -3,7 +3,7 @@ DESCRIPTION = "collectd is a daemon which collects system performance statistics
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool lvm2 libmnl"
+DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool lvm2"
 
 SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://no-gcrypt-badpath.patch \
@@ -40,6 +40,7 @@ PACKAGECONFIG[amqp] = "--enable-amqp --with-librabbitmq=yes, \
 PACKAGECONFIG[pinba] = "--enable-pinba,--disable-pinba,protobuf-c-native protobuf-c"
 PACKAGECONFIG[libvirt] = "--enable-libvirt,--disable-libvirt,libvirt"
 PACKAGECONFIG[libesmtp] = "--with-libesmtp,--without-libesmtp,libesmtp"
+PACKAGECONFIG[libmnl] = "--with-libmnl,--without-libmnl,libmnl"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \
