@@ -13,14 +13,14 @@ This layer depends on:
 
 URI: git://github.com/openembedded/oe-core.git
 subdirectory: meta
-branch: master
+branch: fido
 revision: HEAD
 
 For some recipes, the meta-oe layer is required:
 
 URI: git://github.com/openembedded/meta-oe.git
 subdirectory: meta-oe
-branch: master
+branch: fido
 revision: HEAD
 
 
@@ -47,12 +47,19 @@ Notes
 
   http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#var-PACKAGECONFIG
 
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-webserver][fido]' in the subject'
+
+When sending single patches, please using something like:
+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-webserver][fido][PATCH'
 
 Maintenance
 -----------
 
 Send patches / pull requests to openembedded-devel@lists.openembedded.org
-with '[meta-webserver]' in the subject.
+with '[meta-webserver][fido]' in the subject.
+
+Branch maintainter: Armin Kuster <akuster808@gmail.com>
+                    Otavio Salvador <otavio@ossystems.com.br>
 
 Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
 

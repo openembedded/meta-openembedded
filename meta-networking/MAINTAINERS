@@ -2,13 +2,17 @@ This file contains a list of maintainers for the meta-networking layer.
 
 Please submit any patches against meta-networking to the OpenEmbedded
 development mailing list (openembedded-devel@lists.openembedded.org) with
-'[meta-networking]' in the subject.
+'[meta-networking][fido]' in the subject.
 
 When sending single patches, please use something like:
 
    git send-email -1 -M \
         --to openembedded-devel@lists.openembedded.org \
-        --subject-prefix=meta-networking][PATCH
+        --subject-prefix=meta-networking][fido][PATCH
+
+Branch maintainer:
+Armin Kuster <akuster808@gmail.com>
+Otavio Salvador <otavio@ossystems.com.br>
 
 You may also contact the maintainers directly.
 
