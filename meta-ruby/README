@@ -13,4 +13,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-ruby
 When sending single patches, please using something like:
 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-ruby][PATCH'
 
-Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
+Layer maintainer: Armin Kuster <akuster808@gmail.com>
