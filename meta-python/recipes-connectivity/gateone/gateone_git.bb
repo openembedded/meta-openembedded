@@ -76,6 +76,7 @@ RDEPENDS_${PN} = "mime-support \
                   python-tornado \
                   python-unixadmin \
                   python-xml \
+                  bash \
 "
 
 SYSTEMD_SERVICE_${PN} = "gateone.service"
