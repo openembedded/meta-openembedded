@@ -17,3 +17,5 @@ SRC_URI = "svn://svn.openmoko.org/trunk/src/host;module=usbpath;protocol=http \
 S = "${WORKDIR}/usbpath"
 
 inherit autotools pkgconfig
+
+RDEPENDS_${PN} += "perl"
