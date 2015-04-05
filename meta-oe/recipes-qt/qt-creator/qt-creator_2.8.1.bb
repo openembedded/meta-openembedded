@@ -45,3 +45,5 @@ sysroot_stage_all() {
 # qt-creator-dbg: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/.debug/libqbs_qt_scanner.so
 INSANE_SKIP_${PN} += "libdir"
 INSANE_SKIP_${PN}-dbg += "libdir"
+
+RDEPENDS_${PN} += "perl"
