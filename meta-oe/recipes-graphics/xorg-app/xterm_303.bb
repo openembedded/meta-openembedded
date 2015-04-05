@@ -4,7 +4,7 @@ DEPENDS = "libxaw xproto xextproto libxext libxau libxpm ncurses"
 
 LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=540cf18ccc16bc3c5fea40d2ab5d8d51"
 
-SRC_URI = "ftp://invisible-island.net/xterm/${BP}.tgz"
+SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
 
 SRC_URI[md5sum] = "48f6d49b2b6b6933d501d767cbed9254"
 SRC_URI[sha256sum] = "8af29987bda9b77205ebf6233aaa5c347e5f2407310b62ac9ba92a658257f058"
