@@ -53,3 +53,5 @@ FILES_libgammu = "${libdir}/libGammu.so.*"
 FILES_libgsmsd = "${libdir}/libgsmsd.so.*"
 FILES_python-${PN} = "${PYTHON_SITEPACKAGES_DIR}/gammu/*.??"
 
+RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN}-dev += "bash"
