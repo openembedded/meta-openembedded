@@ -51,6 +51,7 @@ RDEPENDS_${PN} += " \
         python-terminal \
         python-subprocess\
 "
+RDEPENDS_${PN}-filter += "perl"
 
 # need to snag the debug file or OE will fail on backend package
 FILES_${PN}-dbg += "\
