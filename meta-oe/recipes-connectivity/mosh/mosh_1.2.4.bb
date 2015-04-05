@@ -12,7 +12,7 @@ HOMEPAGE = "http://mosh.mit.edu"
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "protobuf-native protobuf ncurses zlib libio-pty-perl openssl"
+DEPENDS = "protobuf-native protobuf ncurses zlib libio-pty-perl openssl libutempter"
 
 SRC_URI = "http://mosh.mit.edu/mosh-${PV}.tar.gz"
 
