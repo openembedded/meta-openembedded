@@ -43,3 +43,4 @@ FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams
 FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
 
 FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
+RDEPENDS_${PN} += "perl"
