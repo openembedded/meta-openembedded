@@ -47,3 +47,5 @@ inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','',d
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "rarpd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
+
+RDEPENDS_${PN} += "bash"
