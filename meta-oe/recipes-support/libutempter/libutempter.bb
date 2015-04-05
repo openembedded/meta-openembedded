@@ -7,10 +7,13 @@ SECTION = "System Environment/Libraries"
 LICENSE = "GPLv2 & GPLv2+ & LGPLv2 & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-SRC_URI = "ftp://ftp.altlinux.org/pub/people/ldv/utempter/${BP}.tar.bz2 \
-           file://0001-Fix-macro-error.patch"
-SRC_URI[md5sum] = "b43827806923903aba2bc7cd3a2d45b7"
-SRC_URI[sha256sum] = "b898565f31ced7e5c1fa0a2eaa0f6ff0ed862b5fe375d26375b64bfbdfeac397"
+SRCREV = "3ef74fff310f09e2601e241b9f042cd39d591018"
+PV = "1.1.6-alt2+git${SRCPV}"
+
+SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git \
+    file://0001-Fix-macro-error.patch"
+
+S = "${WORKDIR}/git/${BPN}"
 
 CFLAGS += "-DLIBEXECDIR=${libexecdir}"
 
