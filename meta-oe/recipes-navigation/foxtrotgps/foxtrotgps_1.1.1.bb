@@ -20,4 +20,5 @@ do_configure_prepend() {
     fi
 }
 
+RDEPENDS_${PN} += "python perl"
 RRECOMMENDS_${PN} = "gpsd"
