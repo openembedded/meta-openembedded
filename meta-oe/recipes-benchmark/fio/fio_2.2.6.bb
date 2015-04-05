@@ -10,7 +10,10 @@ SECTION = "console/tests"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-DEPENDS = "libaio zlib"
+DEPENDS = "libaio zlib numactl"
+
+# ARM does not currently support NUMA
+COMPATIBLE_HOST = "^((?!arm).*)$"
 
 # rev for v2.2.6
 SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
