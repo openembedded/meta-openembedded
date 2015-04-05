@@ -3,12 +3,12 @@ software package offering a consistent, medium-independent, \
 cross-platform approach to connection establishment, terminal \
 sessions, file transfer, character-set translation, and automation \
 of communication tasks."
-HOMEPAGE = "http://www.columbia.edu/kermit/"
+HOMEPAGE = "www.kermitproject.org/ck90.html"
 SECTION = "console/network"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING.TXT;md5=932ca542d6c6cb8a59a0bcd76ab67cc3"
 
-SRC_URI = "ftp://ftp.kermitproject.org/kermit/archives/cku${PV}.tar.gz;subdir=${BPN}-${PV}"
+SRC_URI = "http://www.kermitproject.org/ftp/kermit/archives/cku${PV}.tar.gz;subdir=${BPN}-${PV}"
 SRC_URI[md5sum] = "eac4dbf18b45775e4cdee5a7c74762b0"
 SRC_URI[sha256sum] = "0d5f2cd12bdab9401b4c836854ebbf241675051875557783c332a6a40dac0711"
 
