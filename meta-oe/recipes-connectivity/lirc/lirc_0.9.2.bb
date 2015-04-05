@@ -40,6 +40,7 @@ do_install_append() {
 
 PACKAGES =+ "${PN}-contrib ${PN}-exec ${PN}-plugins ${PN}-python"
 
+RDEPENDS_${PN} = "bash"
 RDEPENDS_${PN}-exec = "${PN}"
 RDEPENDS_${PN}-python = "python"
 
