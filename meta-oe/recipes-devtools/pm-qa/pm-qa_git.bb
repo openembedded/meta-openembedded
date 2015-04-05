@@ -63,3 +63,4 @@ do_install () {
         install -m 0755 $script ${D}${bindir}/${script_basename}
     done
 }
+RDEPENDS_${PN} +="bash"
