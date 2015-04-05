@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "494ec59c93e7c56c528f335d9353849e2e7c94a6b1b41c89604694e738
 S = "${WORKDIR}/git"
 SRCREV = "e7adf8f35be232a4f04c53b4ac409be52792093e"
 
-DEPENDS = "zlib nettle gnutls gmp openssl"
+DEPENDS = "zlib nettle gnutls gmp openssl nss nspr"
 
 inherit autotools pkgconfig
 
