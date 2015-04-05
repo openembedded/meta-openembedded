@@ -54,6 +54,7 @@ do_install() {
 }
 
 RDEPENDS_${PN} += "python-stringold python-subprocess python-shell \
-    python-datetime python-textutils python-crypt python-netclient python-email"
+    python-datetime python-textutils python-crypt python-netclient python-email \
+    bash"
 
 FILES_${PN} += "${sbindir}/* /etc/init.d/* /etc/target/*"
