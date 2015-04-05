@@ -42,3 +42,5 @@ do_install_ptest() {
 	install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
 	install -m 0755 ${B}/numactl ${D}${PTEST_PATH}/
 }
+
+RDEPENDS_${PN}-ptest = "bash"
