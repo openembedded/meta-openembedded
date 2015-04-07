@@ -7,7 +7,7 @@ to a different one. Indent understands correct C syntax and tries to handle \
 incorrect C syntax. \
 Install the indent package if you are developing applications in C and \
 you want a program to format your code."
-LICENSE = "GPL-2.0"
+LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "virtual/gettext"
 
