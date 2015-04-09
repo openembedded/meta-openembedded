@@ -46,7 +46,7 @@ PACKAGES =+ "${PN}-fancontrol"
 # sensord web cgi support
 PACKAGES =+ "${PN}-cgi"
 RRECOMMENDS_${PN}-cgi = "lighttpd lighttpd-module-cgi"
-RDEPENDS_${PN}-cgi = "${PN}-sensord"
+RDEPENDS_${PN}-cgi = "${PN}-sensord rrdtool"
 FILES_${PN}-cgi = "/www/*" 
 
 # libsensors configuration file
