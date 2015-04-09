@@ -4,11 +4,10 @@ SRC_URI = "\
     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
     file://0001-configure.ac-Don-t-check-for-Xprint-extension.patch \
     file://0002-evas_3d-Add-Eet.h-includes.patch \
-    file://0003-edje_cc-Avoid-segfault-when-strcmp-NULL-items.patch \
 "
 
-SRC_URI[md5sum] = "c73f00e1e25b3b660e15ef754c76541d"
-SRC_URI[sha256sum] = "7ff797d4cd01143edc1258a287be3ddfb11264f0b855878d8f5ad5129dee9357"
+SRC_URI[md5sum] = "dd779050ccc4ad8d7ae71f2dc8c85855"
+SRC_URI[sha256sum] = "98404d8de63eea318f748c25708ec989628f025adf12cd54697e5de2fe48c2a4"
 
 # Temporary disable until error like the one following are fixed
 # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
