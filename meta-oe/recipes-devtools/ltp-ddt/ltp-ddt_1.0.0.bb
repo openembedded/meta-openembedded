@@ -7,18 +7,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 PROVIDES += "ltp"
 DEPENDS += "zip-native virtual/kernel alsa-lib"
 
-RDEPENDS_${PN} += "pm-qa"
+RDEPENDS_${PN} += "pm-qa serialcheck"
 
-inherit autotools-brokensep module-base kernel-module-split
+inherit autotools module-base kernel-module-split
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRCREV = "903f70a11eb77cbad62d7ecbe7dcbaf61be8ff99"
+SRCREV = "f086bed6cc88bf102eaad0e96cb7ebe79944a8ad"
 BRANCH ?= "master"
 
 SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
-           file://0001-wdt_test_suite-Make-sure-to-include-generated-header.patch \
-          "
+    file://ltp-Do-not-link-against-libfl.patch \
+"
 
 S = "${WORKDIR}/git"
 
@@ -58,16 +58,26 @@ FILES_${PN}-dbg += " \
 FILES_${PN}-staticdev += "${LTPROOT}/lib"
 FILES_${PN} += "${LTPROOT}/*"
 
-do_configure() {
-    cp ${S}/include/config.h.default ${S}/include/config.h
-    cp ${S}/include/mk/config.mk.default ${S}/include/mk/config.mk
-    cp ${S}/include/mk/features.mk.default ${S}/include/mk/features.mk
-    echo "${TAG}" > ${S}/ChangeLog
-}
+KERNEL_MODULES_META_PACKAGE = "${PN}"
 
 kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
 
+# ltp doesn't regenerate ffsb-6.0-rc2 configure and hardcode configure call.
+# we explicitly force regeneration of that directory and pass configure options.
+do_configure_append() {
+    (cd utils/ffsb-6.0-rc2; autoreconf -fvi; ./configure ${CONFIGUREOPTS})
+}
+
+# The makefiles make excessive use of make -C and several include testcases.mk
+# which triggers a build of the syscall header. To reproduce, build ltp,
+# then delete the header, then "make -j XX" and watch regen.sh run multiple
+# times. Its easier to generate this once here instead.
+do_compile_prepend () {
+    ( make -C ${B}/testcases/kernel include/linux_syscall_numbers.h )
+}
+
 do_compile_append () {
+    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
     oe_runmake modules
 }
 
@@ -75,8 +85,6 @@ do_install() {
     oe_runmake install
     install -d ${D}${datadir}
     install -d ${D}${kmoddir}
-    cp -a ${D}${LTPROOT}/share/* ${D}${datadir}
-    rm -rf ${D}${LTPROOT}/share/
     mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
 }
 
