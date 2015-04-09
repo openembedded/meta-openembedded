@@ -15,5 +15,5 @@ SRC_URI = "\
     file://applications.menu \
 "
 
-SRC_URI[md5sum] = "001b657528aadafcfae5b89b2c81aee8"
-SRC_URI[sha256sum] = "9d2e3c9e25dd48a8f5948d9c7757863d40f7b5bdbc13fdca5a72fb050e048dec"
+SRC_URI[md5sum] = "f442ae743d7f698aeb78d245dbc57357"
+SRC_URI[sha256sum] = "1bada8285d9125820a71bc8f5ad9d64b1c07776d5ad31dffe7758f4a9e1def06"

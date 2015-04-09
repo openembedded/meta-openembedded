@@ -1,6 +1,6 @@
 require ${BPN}.inc
 
-PV = "0.19.3+git${SRCPV}"
+PV = "0.19.4+git${SRCPV}"
 DEFAULT_PREFERENCE = "-2"
 
 SRC_URI = " \
@@ -11,4 +11,4 @@ SRC_URI = " \
 "
 S = "${WORKDIR}/git"
 
-SRCREV = "19e59b6e8148388e7a17f10d4390176a50e2917f"
+SRCREV = "4545d4a70031e0b2565b8d83d5f756bff1a584d0"
