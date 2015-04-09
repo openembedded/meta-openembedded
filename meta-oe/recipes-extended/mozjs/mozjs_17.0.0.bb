@@ -33,6 +33,9 @@ EXTRA_OECONF = " \
     --enable-threadsafe \
     --disable-static \
 "
+EXTRA_OECONF_append_armv4 += " \
+    --disable-methodjit \
+"
 
 # mozjs requires autoreconf 2.13
 do_configure() {
