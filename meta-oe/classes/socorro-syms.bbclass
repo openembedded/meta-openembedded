@@ -42,7 +42,7 @@ python symbol_file_preprocess() {
     breakpad_sym_file_path = os.path.join(breakpad_syms_dir, sym_file_name)
     socorro_sym_file_path = os.path.join(socorro_syms_dir, sym_file_name)
 
-    create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path)
+    create_socorro_sym_file(d, breakpad_sym_file_path, socorro_sym_file_path)
 
     arrange_socorro_sym_file(socorro_sym_file_path, socorro_syms_dir)
 
@@ -50,7 +50,16 @@ python symbol_file_preprocess() {
 }
 
 
-def create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path):
+def run_command(command, directory):
+
+    (output, error) = bb.process.run(command, cwd=directory)
+    if error:
+        raise bb.process.ExecutionError(command, error)
+
+    return output.rstrip()
+
+
+def create_socorro_sym_file(d, breakpad_sym_file_path, socorro_sym_file_path):
 
     # In the symbol file, all source files are referenced like the following.
     # FILE 123 /path/to/some/File.cpp
@@ -61,18 +70,19 @@ def create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path):
 
         for line in breakpad_sym_file:
             if line.startswith("FILE "):
-                socorro_sym_file.write(socorro_file_reference(line))
+                socorro_sym_file.write(socorro_file_reference(d, line))
             else:
                 socorro_sym_file.write(line)
 
     return
 
 
-def socorro_file_reference(line):
+def socorro_file_reference(d, line):
 
     # The 3rd position is the file path. See example above.
     source_file_path = line.split()[2]
-    source_file_repo_path = repository_path(os.path.normpath(source_file_path))
+    source_file_repo_path = repository_path(
+        d, os.path.normpath(source_file_path))
 
     # If the file could be found in any repository then replace it with the
     # repository's path.
@@ -82,7 +92,7 @@ def socorro_file_reference(line):
     return line
 
 
-def repository_path(source_file_path):
+def repository_path(d, source_file_path):
 
     if not os.path.isfile(source_file_path):
         return None
@@ -91,21 +101,20 @@ def repository_path(source_file_path):
     (output, error) = bb.process.run("git status",
         cwd=os.path.dirname(source_file_path))
     if not error:
+        # Make sure the git repository we just found wasn't the yocto repository
+        # itself, i.e. the root of the repository we're looking for must be a
+        # child of the build directory TOPDIR.
+        git_root_dir = run_command(
+            "git rev-parse --show-toplevel", os.path.dirname(source_file_path))
+        if not git_root_dir.startswith(d.getVar("TOPDIR", True)):
+            return None
+
         return git_repository_path(source_file_path)
 
     # Here we can add support for other VCSs like hg, svn, cvs, etc.
 
     # The source file isn't under any VCS so we leave it be.
     return None
-
-
-def run_command(command, directory):
-
-    (output, error) = bb.process.run(command, cwd=directory)
-    if error:
-        raise bb.process.ExecutionError(command, error)
-
-    return output.rstrip()
 
 
 def is_local_url(url):
