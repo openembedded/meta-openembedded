@@ -11,6 +11,7 @@ SRC_URI = "file://fancontrol \
            file://sensord.conf \
            file://sensors.conf \
 "
+S = "${WORKDIR}"
 
 RDEPENDS_${PN}-dev = ""
 
