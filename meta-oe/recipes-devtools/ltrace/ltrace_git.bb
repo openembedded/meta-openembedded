@@ -18,6 +18,7 @@ RDEPENDS_${PN} = "elfutils"
 SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
            file://ltrace-0.7.2-unused-typedef.patch \
            file://configure-allow-to-disable-selinux-support.patch \
+           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
           "
 S = "${WORKDIR}/git"
 

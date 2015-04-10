@@ -1,0 +1,31 @@
+From efd12cfb10ccd2c612838c0e22069554ce60637c Mon Sep 17 00:00:00 2001
+From: Petr Machata <pmachata@redhat.com>
+Date: Wed, 2 Jan 2013 16:01:43 +0100
+Subject: [PATCH] In Linux backend, initialize linkmap struct
+
+GCC 4.7.2 -m32 -Os gives the following (spurious) warning:
+proc.c: In function 'crawl_linkmap':
+proc.c:544:25: error: 'rlm.l_addr' may be used uninitialized in this
+
+Upstream-Status: Backport
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ sysdeps/linux-gnu/proc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sysdeps/linux-gnu/proc.c b/sysdeps/linux-gnu/proc.c
+index 6e01d28..d69c985 100644
+--- a/sysdeps/linux-gnu/proc.c
++++ b/sysdeps/linux-gnu/proc.c
+@@ -484,7 +484,7 @@ crawl_linkmap(struct process *proc, struct lt_r_debug_64 *dbg)
+ 	arch_addr_t addr = (arch_addr_t)(uintptr_t)dbg->r_map;
+ 
+ 	while (addr != 0) {
+-		struct lt_link_map_64 rlm;
++		struct lt_link_map_64 rlm = {};
+ 		if (lm_fetcher(proc)(proc, addr, &rlm) < 0) {
+ 			debug(2, "Unable to read link map");
+ 			return;
+-- 
+2.3.5
+
