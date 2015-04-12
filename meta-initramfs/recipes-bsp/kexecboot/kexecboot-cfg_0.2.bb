@@ -3,9 +3,10 @@ DESCRIPTION = "Default icon and boot.cfg for kexecboot linux-as-bootloader."
 SECTION = "base"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
-PR = "r14"
 
 SRC_URI = "file://icon.xpm"
+
+S = "${WORKDIR}/${BP}"
 
 do_configure_prepend () {
     install -m 0644 ${WORKDIR}/icon.xpm ${S}
