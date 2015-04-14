@@ -1,0 +1,48 @@
+From b028ae9f43111677056f2661c800096f1994b687 Mon Sep 17 00:00:00 2001
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
+Date: Mon, 13 Apr 2015 14:41:15 -0500
+Subject: [PATCH] libhugetlbfs: x86 avoid host library search in cross-dev
+
+Upstream-Status: Inappropriate [oe-core specific]
+
+The ldscripts for 32-bit ix86 architectures were not corrected by the earlier
+patch from Chunrong Guo <B40290@freescale.com>... presumably they were added
+after that patch was created.  Here we extend the same technique to include
+the 32-bit ix86 linker scripts, so the command line variables can set the
+linker search directories rather than using hard-coded paths in the ldscripts.
+
+Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+---
+ ldscripts/elf_i386.xB   | 2 +-
+ ldscripts/elf_i386.xBDT | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/ldscripts/elf_i386.xB b/ldscripts/elf_i386.xB
+index 43fe51c..b852781 100644
+--- a/ldscripts/elf_i386.xB
++++ b/ldscripts/elf_i386.xB
+@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-i386", "elf32-i386",
+ 	      "elf32-i386")
+ OUTPUT_ARCH(i386)
+ ENTRY(_start)
+-SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
++/*SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
+ INPUT(-lhugetlbfs);
+ /* Do we need any of these for elf?
+    __DYNAMIC = 0;    */
+diff --git a/ldscripts/elf_i386.xBDT b/ldscripts/elf_i386.xBDT
+index d72aebe..b25e225 100644
+--- a/ldscripts/elf_i386.xBDT
++++ b/ldscripts/elf_i386.xBDT
+@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-i386", "elf32-i386",
+ 	      "elf32-i386")
+ OUTPUT_ARCH(i386)
+ ENTRY(_start)
+-SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");
++/*SEARCH_DIR("/usr/i486-linux-gnu/lib"); SEARCH_DIR("/usr/local/lib"); SEARCH_DIR("/lib"); SEARCH_DIR("/usr/lib");*/
+ INPUT(-lhugetlbfs);
+ /* Do we need any of these for elf?
+    __DYNAMIC = 0;    */
+-- 
+1.9.1
+

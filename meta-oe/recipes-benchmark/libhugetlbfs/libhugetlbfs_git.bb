@@ -22,6 +22,7 @@ SRC_URI = " \
     file://0001-replace-lib-lib64-hardcoded-values-by-LIBDIR32-LIBDI.patch \
     file://0001-Extend-arm32-support-to-include-BE-variants.patch \
     file://0001-Makefile-Recognize-all-ix86-arches.patch \
+    file://0001-x86-avoid-host-library-search-in-cross-dev.patch \
 "
 
 S = "${WORKDIR}/git"
