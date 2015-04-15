@@ -21,7 +21,7 @@ RDEPENDS_${PN} = "gcc-symlinks g++-symlinks cpp cpp-symlinks \
                   make \
                   patch diffstat diffutils \
                   libstdc++-dev \
-                  libtool libtool-dev libltdl-dev \
+                  libtool libtool-dev \
                   pkgconfig"
 
 # usefull, but not in oe-core/meta-oe yet: patchutils
