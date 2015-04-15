@@ -1,7 +1,7 @@
 require ruby.inc
 
-SRC_URI[md5sum] = "b49fc67a834e4f77249eb73eecffb1c9"
-SRC_URI[sha256sum] = "5a4de38068eca8919cb087d338c0c2e3d72c9382c804fb27ab746e6c7819ab28"
+SRC_URI[md5sum] = "326e99ddc75381c7b50c85f7089f3260"
+SRC_URI[sha256sum] = "5ffc0f317e429e6b29d4a98ac521c3ce65481bfd22a8cf845fa02a7b113d9b44"
 
 # it's unknown to configure script, but then passed to extconf.rb
 # maybe it's not really needed as we're hardcoding the result with
@@ -9,11 +9,13 @@ SRC_URI[sha256sum] = "5a4de38068eca8919cb087d338c0c2e3d72c9382c804fb27ab746e6c78
 UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
 
 PACKAGECONFIG ??= ""
+PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
+
 PACKAGECONFIG[valgrind] = "--with-valgrind=yes, --with-valgrind=no, valgrind"
 PACKAGECONFIG[gpm] = "--with-gmp=yes, --with-gmp=no, gmp"
+PACKAGECONFIG[ipv6] = ",--enable-wide-getaddrinfo,"
 
 EXTRA_OECONF = "\
-    --enable-wide-getaddrinfo \
     --disable-versioned-paths \
     --disable-rpath \
     --enable-shared \
