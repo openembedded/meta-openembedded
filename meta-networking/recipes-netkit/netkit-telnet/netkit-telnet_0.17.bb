@@ -8,6 +8,7 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
     file://To-aviod-buffer-overflow-in-telnet.patch \
     file://Warning-fix-in-the-step-of-install.patch \
     file://telnet-xinetd \
+    file://cross-compile.patch \
 "
 
 EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
@@ -15,7 +16,10 @@ EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
 
 do_configure () {
     ./configure --prefix=${prefix}
-    echo "LDFLAGS=${LDFLAGS}" > MCONFIG
+    sed -e 's#^CFLAGS=\(.*\)$#CFLAGS= -D_GNU_SOURCE \1#' \
+        -e 's#^CXXFLAGS=\(.*\)$#CXXFLAGS= -D_GNU_SOURCE \1#' \
+        -e 's#^LDFLAGS=.*$#LDFLAGS= ${LDFLAGS}#' \
+        -i MCONFIG
 }
 
 do_compile () {
