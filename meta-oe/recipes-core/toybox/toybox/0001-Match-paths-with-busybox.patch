@@ -1,4 +1,4 @@
-From 27f5ca9f1e212e5ab00cde0bfc91282fc7ff5e16 Mon Sep 17 00:00:00 2001
+From 9b37b45067677563dc8daa73d73a015c20ad6222 Mon Sep 17 00:00:00 2001
 From: Paul Barker <paul@paulbarker.me.uk>
 Date: Mon, 18 Aug 2014 12:18:16 +0000
 Subject: [PATCH] Match paths with busybox
@@ -8,6 +8,9 @@ update-alternatives, the paths of the links installed by toybox should match
 those installed by busybox. This is accomplished by changing the flags of a few
 tools within toybox.
 
+v3:
+    - Forward ported from v0.5.0 to v0.5.2
+
 v2:
     - Forward ported from v0.4.9 to v0.5.0
     - Move new 'mount' command
@@ -16,6 +19,8 @@ Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 
 Upstream-status: Inappropriate
     (specific to update-alternatives use in OpenEmbedded)
+
+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
 ---
  toys/lsb/mount.c        | 2 +-
  toys/lsb/pidof.c        | 2 +-
@@ -45,7 +50,7 @@ Upstream-status: Inappropriate
  25 files changed, 29 insertions(+), 29 deletions(-)
 
 diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
-index 01f5c32..65a5aa2 100644
+index c334681..b076ca1 100644
 --- a/toys/lsb/mount.c
 +++ b/toys/lsb/mount.c
 @@ -6,7 +6,7 @@
@@ -54,7 +59,7 @@ index 01f5c32..65a5aa2 100644
  
 -USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
 +USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STAYROOT))
- USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
+ //USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
  
  config MOUNT
 diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
@@ -84,20 +89,20 @@ index 6544265..a93327f 100644
  config CHVT
    bool "chvt"
 diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
-index f5d4215..5e7c54c 100644
+index 8db3ff0..445799d 100644
 --- a/toys/other/ifconfig.c
 +++ b/toys/other/ifconfig.c
 @@ -6,7 +6,7 @@
   *
   * Not in SUSv4.
  
--USE_IFCONFIG(NEWTOY(ifconfig, "?a", TOYFLAG_BIN))
-+USE_IFCONFIG(NEWTOY(ifconfig, "?a", TOYFLAG_SBIN))
+-USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_BIN))
++USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_SBIN))
  
  config IFCONFIG
    bool "ifconfig"
 diff --git a/toys/other/insmod.c b/toys/other/insmod.c
-index 8aa959a..75fd7cd 100644
+index 81721a3..cb222a5 100644
 --- a/toys/other/insmod.c
 +++ b/toys/other/insmod.c
 @@ -2,7 +2,7 @@
@@ -123,20 +128,20 @@ index b8f5d82..4d16048 100644
  config LSMOD
    bool "lsmod"
 diff --git a/toys/other/netcat.c b/toys/other/netcat.c
-index 3c6f630..188c3d1 100644
+index d27aa88..0fd26f7 100644
 --- a/toys/other/netcat.c
 +++ b/toys/other/netcat.c
 @@ -4,7 +4,7 @@
   *
   * TODO: udp, ipv6, genericize for telnet/microcom/tail-f
  
--USE_NETCAT(OLDTOY(nc, netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG_BIN))
-+USE_NETCAT(OLDTOY(nc, netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG_USR|TOYFLAG_BIN))
- USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG_BIN))
+-USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_BIN))
++USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_USR|TOYFLAG_BIN))
+ USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("^tlL")"w#p#s:q#f:", TOYFLAG_BIN))
  
  config NETCAT
 diff --git a/toys/other/pivot_root.c b/toys/other/pivot_root.c
-index 3e4beac..ce3d3a8 100644
+index 9a1f56c..7748032 100644
 --- a/toys/other/pivot_root.c
 +++ b/toys/other/pivot_root.c
 @@ -2,7 +2,7 @@
@@ -162,7 +167,7 @@ index 1c33362..fecd1ef 100644
  config READLINK
    bool "readlink"
 diff --git a/toys/other/reboot.c b/toys/other/reboot.c
-index 5cbc4f8..f8baafc 100644
+index 8baa4d8..a135888 100644
 --- a/toys/other/reboot.c
 +++ b/toys/other/reboot.c
 @@ -2,9 +2,9 @@
@@ -170,11 +175,11 @@ index 5cbc4f8..f8baafc 100644
   * Copyright 2013 Elie De Brauwer <eliedebrauwer@gmail.com>
  
 -USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--USE_REBOOT(OLDTOY(halt, reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
--USE_REBOOT(OLDTOY(poweroff, reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+-USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+-USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
 +USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+USE_REBOOT(OLDTOY(halt, reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-+USE_REBOOT(OLDTOY(poweroff, reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
++USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
++USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
  
  config REBOOT
    bool "reboot"
@@ -257,15 +262,15 @@ index 7f10c5e..1ab3ce8 100644
  config CUT
    bool "cut"
 diff --git a/toys/posix/df.c b/toys/posix/df.c
-index afb296b..6296dc9 100644
+index 141e8e5..5d37b45 100644
 --- a/toys/posix/df.c
 +++ b/toys/posix/df.c
 @@ -4,7 +4,7 @@
   *
   * See http://opengroup.org/onlinepubs/9699919799/utilities/df.html
  
--USE_DF(NEWTOY(df, "Pkt*a", TOYFLAG_USR|TOYFLAG_SBIN))
-+USE_DF(NEWTOY(df, "Pkt*a", TOYFLAG_BIN))
+-USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_USR|TOYFLAG_SBIN))
++USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_BIN))
  
  config DF
    bool "df"
@@ -283,20 +288,20 @@ index e8517d4..3ac4373 100644
  config HEAD
    bool "head"
 diff --git a/toys/posix/id.c b/toys/posix/id.c
-index b4d9c00..df79419 100644
+index 353aa04..7ab489e 100644
 --- a/toys/posix/id.c
 +++ b/toys/posix/id.c
 @@ -6,10 +6,10 @@
   *
   * See http://opengroup.org/onlinepubs/9699919799/utilities/id.html
  
--USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_BIN))
-+USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
- USE_GROUPS(OLDTOY(groups, id, NULL, TOYFLAG_USR|TOYFLAG_BIN))
--USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_BIN))
--USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_BIN))
-+USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
-+USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
+-USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_BIN))
++USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
+ USE_GROUPS(NEWTOY(groups, NULL, TOYFLAG_USR|TOYFLAG_BIN))
+-USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_BIN))
+-USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_BIN))
++USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_USR|TOYFLAG_BIN))
++USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_USR|TOYFLAG_BIN))
  
  config ID
    bool "id"
@@ -327,7 +332,7 @@ index 8c20644..489eb13 100644
  config RENICE
    bool "renice"
 diff --git a/toys/posix/tail.c b/toys/posix/tail.c
-index e1048be..ba0a55a 100644
+index e92c044..ba1d311 100644
 --- a/toys/posix/tail.c
 +++ b/toys/posix/tail.c
 @@ -4,7 +4,7 @@
@@ -366,7 +371,7 @@ index 3cfdb94..c127cfe 100644
  config UNIQ
    bool "uniq"
 diff --git a/toys/posix/who.c b/toys/posix/who.c
-index 2c8a2e6..d5cd001 100644
+index 876a562..414cdfc 100644
 --- a/toys/posix/who.c
 +++ b/toys/posix/who.c
 @@ -9,7 +9,7 @@
@@ -379,5 +384,5 @@ index 2c8a2e6..d5cd001 100644
  config WHO
    bool "who"
 -- 
-2.1.2
+1.8.1.2
 
