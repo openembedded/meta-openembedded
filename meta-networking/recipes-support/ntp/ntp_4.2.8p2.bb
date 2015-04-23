@@ -6,7 +6,7 @@ or satellite receiver or modem."
 HOMEPAGE = "http://support.ntp.org"
 SECTION = "console/network"
 LICENSE = "NTP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ebe123f74017224947c78d472407c10f"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f41fedb22dffefcbfafecc85b0f79cfa"
 
 DEPENDS = "pps-tools libevent"
 
@@ -21,11 +21,10 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://sntp.service \
            file://sntp \
            file://ntpd.list \
-           file://ntp-4.2.8-ntp-keygen-no-openssl.patch \
 "
 
-SRC_URI[md5sum] = "6972a626be6150db8cfbd0b63d8719e7"
-SRC_URI[sha256sum] = "2e920df8b6a5a410567a73767fa458c00c7f0acec3213e69ed0134414a50d8ee"
+SRC_URI[md5sum] = "fa37049383316322d060ec9061ac23a9"
+SRC_URI[sha256sum] = "0d69bc0e95caad43ea04fdad410e756bae1a71e67b1c2bd799b76b55e04c9b31"
 
 inherit autotools update-rc.d useradd systemd pkgconfig
 
