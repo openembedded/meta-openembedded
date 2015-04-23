@@ -6,11 +6,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 
 SRC_URI = "file://icon.xpm"
 
-S = "${WORKDIR}/${BP}"
+S = "${WORKDIR}"
 
-do_configure_prepend () {
-    install -m 0644 ${WORKDIR}/icon.xpm ${S}
-}
 do_install_prepend () {
 echo '# /boot/boot.cfg - KEXECBOOT configuration file.
 #
