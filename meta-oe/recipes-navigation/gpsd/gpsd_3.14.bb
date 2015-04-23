@@ -10,15 +10,18 @@ EXTRANATIVEPATH += "chrpath-native"
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
     file://0002-SConstruct-remove-rpath.patch \
-    file://0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+    file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
     file://0004-SConstruct-disable-html-and-man-docs-building-becaus.patch \
+    file://0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch \
+    file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
+    file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
     file://gpsd-default \
     file://gpsd \
     file://60-gpsd.rules \
     file://gpsd.service \
 "
-SRC_URI[md5sum] = "fc5b03aae38b9b5b6880b31924d0ace3"
-SRC_URI[sha256sum] = "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320"
+SRC_URI[md5sum] = "bc7467009b99e07ba461377b5da6c039"
+SRC_URI[sha256sum] = "504fc812f3c1525a1a48e04bf4d77f9a8066c201448d98089df89d58ef53a8cb"
 
 inherit scons update-rc.d python-dir pythonnative systemd bluetooth
 
@@ -30,14 +33,15 @@ SYSTEMD_OESCONS = "${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false
 export STAGING_INCDIR
 export STAGING_LIBDIR
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
+PACKAGECONFIG ??= "qt ${@base_contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
 PACKAGECONFIG[bluez4] = "bluez='true',bluez='false',bluez4"
-
+PACKAGECONFIG[qt] = "qt='yes',qt='no',qt4-x11-free"
 EXTRA_OESCONS = " \
     sysroot=${STAGING_DIR_TARGET} \
     libQgpsmm='false' \
     debug='true' \
     strip='false' \
+    chrpath='yes' \
     systemd='${SYSTEMD_OESCONS}' \
     ${EXTRA_OECONF} \
 "
@@ -99,7 +103,8 @@ pkg_postrm_${PN}-conf() {
 
 PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
 
-FILES_${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc"
+FILES_${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc \
+                    ${libdir}/libQgpsmm.prl"
 
 FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
 
