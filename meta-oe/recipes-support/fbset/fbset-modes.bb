@@ -6,6 +6,7 @@ PV = "0.1.0"
 PR = "r6"
 
 SRC_URI = "file://fb.modes"
+S = "${WORKDIR}"
 
 do_install() {
     install -d ${D}${sysconfdir}
