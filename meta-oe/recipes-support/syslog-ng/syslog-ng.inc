@@ -12,7 +12,8 @@ HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e0e8658d9be248f01b7933df24dc1408"
 
-DEPENDS = "flex eventlog glib-2.0"
+# util-linux added to get libuuid
+DEPENDS = "flex eventlog glib-2.0 util-linux"
 
 SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source/${BPN}_${PV}.tar.gz \
            file://syslog-ng.conf \
