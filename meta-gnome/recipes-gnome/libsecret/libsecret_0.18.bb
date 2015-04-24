@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
 
 inherit gnomebase gtk-doc
 
-DEPENDS = "glib-2.0 libgcrypt"
+DEPENDS = "glib-2.0 libgcrypt intltool-native"
 
 GNOME_COMPRESS_TYPE = "xz"
 
