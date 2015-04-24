@@ -11,6 +11,7 @@ SRC_URI = " \
     file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
     file://0005-aarch64-64k-page.patch;patchdir=../../ \
     file://0001-regenerate-configure.patch;patchdir=../../ \ 
+    file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
   "
 
 SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
