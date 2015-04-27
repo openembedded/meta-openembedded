@@ -7,14 +7,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
 DEPENDS = "aufs-util-native"
 DEPENDS_class-native = ""
 
-SRCREV = "f29056fe396d56fc2a06a96312feabaebbe14c59"
-SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.0 \
+SRCREV = "b59a2167a135ceea37581ee33997de278cf8a30a"
+SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.14 \
            file://aufs-util-don-t-strip-executables.patch \
            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
            file://aufs_type.h \
 "
 
-PV = "3.0+git${SRCPV}"
+PV = "3.14+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 

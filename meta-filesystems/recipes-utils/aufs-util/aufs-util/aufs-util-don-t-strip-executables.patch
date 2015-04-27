@@ -27,8 +27,8 @@ index 2f905ad..e0c6dcd 100644
  ver_test: ver
  	./ver
  
--${Bin}: LDFLAGS += -static -s
-+${Bin}: LDFLAGS += -static
+-${Bin}: override LDFLAGS += -static -s
++${Bin}: override LDFLAGS += -static
  ${Bin}: LDLIBS = -L. -lautil
  ${BinObj}: %.o: %.c ${LibUtilHdr} ${LibUtil}
  
