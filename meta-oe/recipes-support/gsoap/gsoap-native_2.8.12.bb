@@ -1,6 +1,6 @@
 require gsoap_${PV}.inc
 
-DEPENDS = ""
+DEPENDS = "flex-native"
 EXTRA_OEMAKE = ""
 
 inherit native
