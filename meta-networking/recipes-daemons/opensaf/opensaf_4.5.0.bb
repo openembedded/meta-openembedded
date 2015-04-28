@@ -39,4 +39,7 @@ do_install_append() {
     rm -fr "${D}${localstatedir}/lock"
     rm -fr "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
+        ${D}${systemd_unitdir}/system
 }
