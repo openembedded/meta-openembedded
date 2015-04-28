@@ -1,0 +1,27 @@
+Upstream-Status: Inappropriate
+
+use legacy pygobject instead of gobject-introspection
+
+Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
+---
+diff -Nurd bluez-4.101.orig/test/simple-agent bluez-4.101/test/simple-agent
+--- bluez-4.101.orig/test/simple-agent	2013-11-13 17:14:08.138118159 +0800
++++ bluez-4.101/test/simple-agent	2013-11-13 17:14:29.034118107 +0800
+@@ -2,7 +2,7 @@
+ 
+ from __future__ import absolute_import, print_function, unicode_literals
+ 
+-from gi.repository import GObject
++import gobject
+ 
+ import sys
+ import dbus
+@@ -122,7 +122,7 @@
+ 	path = "/test/agent"
+ 	agent = Agent(bus, path)
+ 
+-	mainloop = GObject.MainLoop()
++	mainloop = gobject.MainLoop()
+ 
+ 	if len(args) > 1:
+ 		if len(args) > 2:
