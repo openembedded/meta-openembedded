@@ -67,6 +67,8 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam,"
 PACKAGECONFIG[selinux] = "--enable-security-context,--disable-security-context,libselinux,"
 
+SYSTEMD_SERVICE_${PN} = "racoon.service"
+
 do_install_append() {
     install -d ${D}${sysconfdir}/racoon
     install -m 0644 ${WORKDIR}/racoon.conf.sample ${D}${sysconfdir}/racoon/racoon.conf
@@ -82,3 +84,6 @@ do_install_append() {
         install -m 0644 ${WORKDIR}/racoon.conf ${D}${sysconfdir}/default/racoon
     fi
 }
+
+FILES_${PN} += "${sysconfdir}/racoon/racoon.conf \
+                ${sysconfdir}/default/racoon"
