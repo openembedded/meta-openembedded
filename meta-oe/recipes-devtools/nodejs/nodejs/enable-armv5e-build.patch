@@ -1,0 +1,22 @@
+Building for qemuarm without thumb enabled is using -march=armv5e which isn't
+recognized here. Fix it by adding __ARM_ARCH_5E__.
+
+v0.12.2 branch of node doesn't seem to be affected, because it's using
+different version of v8
+
+Upstream-Status: Pending
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+diff -uNr node-v0.12.2/deps/v8/src/base/atomicops_internals_arm_gcc.h node-v0.12.2-fix/deps/v8/src/base/atomicops_internals_arm_gcc.h
+--- node-v0.12.2/deps/v8/src/base/atomicops_internals_arm_gcc.h	2015-04-01 00:13:01.000000000 +0200
++++ node-v0.12.2-fix/deps/v8/src/base/atomicops_internals_arm_gcc.h	2015-04-28 14:30:43.119509207 +0200
+@@ -156,7 +156,7 @@
+ 
+ // This tests against any known ARMv5 variant.
+ #elif defined(__ARM_ARCH_5__) || defined(__ARM_ARCH_5T__) || \
+-      defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_5TEJ__)
++      defined(__ARM_ARCH_5E__) || defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_5TEJ__)
+ 
+ // The kernel also provides a helper function to perform an atomic
+ // compare-and-swap operation at the hard-wired address 0xffff0fc0.
