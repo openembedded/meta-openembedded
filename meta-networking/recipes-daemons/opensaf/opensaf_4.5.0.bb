@@ -33,6 +33,8 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 FILES_${PN} += "${localstatedir}/run"
 
+RDEPENDS_${PN} += "bash python"
+
 INSANE_SKIP_${PN} = "dev-so"
 
 do_install_append() {
