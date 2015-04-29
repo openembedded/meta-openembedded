@@ -29,8 +29,8 @@ SRC_URI += "\
     file://configure-disable-core_pattern-cross-check.patch;patchdir=.. \
     file://configure-libunwind.patch;patchdir=.. \
 "
-SRC_URI[md5sum] = "d98425c0c2b73e08f048d31ffc727fb0"
-SRC_URI[sha256sum] = "11d0bd04b734731970259efc6692b8e749ff671a9b56d8cc5fa98c192ab234a7"
+SRC_URI[md5sum] = "76da2fa64edd94a0188531e7ecb27c4e"
+SRC_URI[sha256sum] = "8f2c8a7f2bd89b0dfd228ed917815852f7c625b2bc0936304ac3ed63aaf83751"
 
 S = "${WORKDIR}/samba-${PV}/source3"
 
