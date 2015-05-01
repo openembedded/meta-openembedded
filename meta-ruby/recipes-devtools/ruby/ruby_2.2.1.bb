@@ -16,6 +16,7 @@ EXTRA_OECONF = "\
     --enable-wide-getaddrinfo \
     --disable-versioned-paths \
     --disable-rpath \
+    --disable-dtrace \
     --enable-shared \
     --enable-load-relative \
 "
