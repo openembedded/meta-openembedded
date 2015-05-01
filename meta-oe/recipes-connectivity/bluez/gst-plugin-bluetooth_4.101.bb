@@ -1,6 +1,8 @@
 require bluez4.inc
 require recipes-multimedia/gstreamer/gst-plugins-package.inc
 
+PNBLACKLIST[gst-plugin-bluetooth] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+
 PR = "r1"
 
 SRC_URI[md5sum] = "fb42cb7038c380eb0e2fa208987c96ad"

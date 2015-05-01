@@ -8,6 +8,8 @@ LICENSE = "GPLv2.0 & LGPLv2.1"
 SECTION = "console/network"
 DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native libxslt"
 
+PNBLACKLIST[gypsy] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+
 inherit autotools pkgconfig gtk-doc
 PACKAGES += "libgypsy"
 

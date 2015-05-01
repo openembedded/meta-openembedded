@@ -1,5 +1,7 @@
 require bluez4.inc
 
+PNBLACKLIST[bluez4] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+
 PR = "r11"
 
 SRC_URI += "file://bluetooth.conf \

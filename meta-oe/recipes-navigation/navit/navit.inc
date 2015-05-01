@@ -15,6 +15,9 @@ RSUGGESTS_${PN} = "flite-alsa espeak ${PN}-speech-dbus ${PN}-gui-gtk ${PN}-gui-q
 PE = "1"
 INC_PR = "r11"
 
+# Depends on gypsy
+PNBLACKLIST[navit] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+
 inherit autotools gettext pkgconfig
 
 PACKAGECONFIG ?= "qt"
