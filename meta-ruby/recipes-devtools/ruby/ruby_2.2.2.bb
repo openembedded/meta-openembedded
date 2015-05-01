@@ -18,6 +18,7 @@ PACKAGECONFIG[ipv6] = ",--enable-wide-getaddrinfo,"
 EXTRA_OECONF = "\
     --disable-versioned-paths \
     --disable-rpath \
+    --disable-dtrace \
     --enable-shared \
     --enable-load-relative \
 "
