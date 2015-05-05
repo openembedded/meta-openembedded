@@ -12,5 +12,7 @@ require vala-dbus-binding-tool.inc
 SRCREV = "742c04c2bb0743891904522ce47e50f9e5c99b12"
 PV = "0.4.0+gitr${SRCPV}"
 
-SRC_URI = "git://github.com/freesmartphone/vala-dbus-binding-tool.git;protocol=https"
+SRC_URI = "git://github.com/freesmartphone/vala-dbus-binding-tool.git;protocol=https \
+    file://0001-configure.ac-don-t-use-dash-in-m4-macro-names.patch \
+"
 S = "${WORKDIR}/git"
