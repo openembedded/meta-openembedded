@@ -45,3 +45,5 @@ do_install_ptest() {
 BBCLASSEXTEND = "native"
 
 FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Net/SSLeay/.debug/"
+
+RDEPENDS_${PN}-ptest = " perl"
