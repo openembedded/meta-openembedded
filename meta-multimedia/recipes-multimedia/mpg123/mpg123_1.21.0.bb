@@ -49,3 +49,10 @@ EXTRA_OECONF = " \
     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
 "
 
+# Fails to build with thumb-1 (qemuarm)
+#| {standard input}: Assembler messages:
+#| {standard input}:47: Error: selected processor does not support Thumb mode `smull r5,r6,r7,r4'
+#| {standard input}:48: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r5,r5,lsr#24'
+#...
+#| make[3]: *** [equalizer.lo] Error 1
+ARM_INSTRUCTION_SET = "arm"

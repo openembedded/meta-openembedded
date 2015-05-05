@@ -76,3 +76,14 @@ breakpad_populate_sysroot() {
         sysroot_stage_dir ${D}/usr/lib ${SYSROOT_DESTDIR}/usr/lib
 }
 
+# Fails to build with thumb-1 (qemuarm)
+#| {standard input}: Assembler messages:
+#| {standard input}:2178: Error: selected processor does not support Thumb mode `it ne'
+#| {standard input}:2179: Error: Thumb does not support conditional execution
+#| {standard input}:2180: Error: selected processor does not support Thumb mode `it eq'
+#| {standard input}:2181: Error: Thumb does not support conditional execution
+#| {standard input}:2183: Error: lo register required -- `str ip,[r1,#-4]!'
+#| {standard input}:2184: Error: Thumb does not support this addressing mode -- `str r6,[r1,#-4]!'
+#| {standard input}:2191: Error: lo register required -- `ldr pc,[sp]'
+#| make: *** [src/client/linux/handler/exception_handler.o] Error 1
+ARM_INSTRUCTION_SET = "arm"

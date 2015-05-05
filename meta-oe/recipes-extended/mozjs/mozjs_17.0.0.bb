@@ -62,3 +62,12 @@ addtask sourceclean before do_patch after do_unpack
 PACKAGES =+ "lib${PN}"
 FILES_lib${PN} += "${libdir}/lib*.so"
 FILES_${PN}-dev += "${bindir}/js17-config"
+
+# Fails to build with thumb-1 (qemuarm)
+#| {standard input}: Assembler messages:
+#| {standard input}:2172: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r2,r1,LSR#20'
+#| {standard input}:2173: Error: unshifted register required -- `bic r2,r2,#(1<<11)'
+#| {standard input}:2174: Error: unshifted register required -- `orr r1,r1,#(1<<20)'
+#| {standard input}:2176: Error: instruction not supported in Thumb16 mode -- `subs r2,r2,#0x300'
+#| {standard input}:2178: Error: instruction not supported in Thumb16 mode -- `subs r5,r2,#52'
+ARM_INSTRUCTION_SET = "arm"

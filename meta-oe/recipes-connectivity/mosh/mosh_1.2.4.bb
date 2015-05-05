@@ -36,3 +36,12 @@ NEEDED_PERL_MODULES = "\
 RDEPENDS_${PN} += "openssh-ssh ${NEEDED_PERL_MODULES}"
 # The server seemed not to work with dropbear either
 RDEPENDS_${PN}-server += "openssh-sshd ${NEEDED_PERL_MODULES}"
+
+# Fails to build with thumb-1 (qemuarm)
+#| {standard input}: Assembler messages:
+#| {standard input}:2100: Error: instruction not supported in Thumb16 mode -- `adds r4,r4,r4'
+#| {standard input}:2101: Error: instruction not supported in Thumb16 mode -- `adcs r5,r5,r5'
+#| {standard input}:2102: Error: instruction not supported in Thumb16 mode -- `adcs r6,r6,r6'
+#| {standard input}:2103: Error: instruction not supported in Thumb16 mode -- `adcs r7,r7,r7'
+#| {standard input}:2104: Error: selected processor does not support Thumb mode `it cs'
+ARM_INSTRUCTION_SET = "arm"

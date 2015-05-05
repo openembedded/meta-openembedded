@@ -19,3 +19,8 @@ SRC_URI[sha256sum] = "df2e6a0d9499afcbc4f9029c18d9d1e0dd5e8710a75e17c9b1d9a6480d
 FILES_${PN} += "${libdir}/gegl-*/*.so"
 FILES_${PN}-dev += "${libdir}/gegl-*/*.la"
 FILES_${PN}-dbg += "${libdir}/gegl-*/.debug"
+
+# Fails to build with thumb-1 (qemuarm)
+# gegl-0.2.0/operations/common/matting-global.c: In function 'matting_process':
+# gegl-0.2.0/operations/common/matting-global.c:463:1: internal compiler error: in patch_jump_insn, at cfgrtl.c:1275
+ARM_INSTRUCTION_SET = "arm"

@@ -18,3 +18,17 @@ inherit autotools pkgconfig
 
 require libopus-fpu.inc
 EXTRA_OECONF = "${@get_libopus_fpu_setting(bb, d)}"
+
+# Fails to build with thumb-1 (qemuarm)
+#| {standard input}: Assembler messages:
+#| {standard input}:389: Error: selected processor does not support Thumb mode `smull r5,r7,r1,r4'
+#| {standard input}:418: Error: selected processor does not support Thumb mode `smull r5,r6,r4,r1'
+#| {standard input}:448: Error: selected processor does not support Thumb mode `smull r4,r5,r1,r0'
+#| {standard input}:474: Error: selected processor does not support Thumb mode `smull r0,r4,r8,r1'
+#| {standard input}:510: Error: selected processor does not support Thumb mode `smull fp,r0,r10,r1'
+#| {standard input}:553: Error: selected processor does not support Thumb mode `smull fp,r1,r10,r3'
+#| {standard input}:741: Error: selected processor does not support Thumb mode `smull r3,r0,r6,r10'
+#| {standard input}:761: Error: selected processor does not support Thumb mode `smull fp,r2,r3,r9'
+#| {standard input}:773: Error: selected processor does not support Thumb mode `smull fp,r3,r5,r8'
+#| make[2]: *** [celt/celt.lo] Error 1
+ARM_INSTRUCTION_SET = "arm"

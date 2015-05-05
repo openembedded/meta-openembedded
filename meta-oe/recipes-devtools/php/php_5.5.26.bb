@@ -263,3 +263,12 @@ php_sstate_postinst() {
         mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
     fi
 }
+
+# Fails to build with thumb-1 (qemuarm)
+# | {standard input}: Assembler messages:
+# | {standard input}:3719: Error: selected processor does not support Thumb mode `smull r0,r2,r9,r3'
+# | {standard input}:3720: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
+# | {standard input}:3796: Error: selected processor does not support Thumb mode `smull r0,r2,r3,r3'
+# | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
+# | make: *** [ext/standard/math.lo] Error 1
+ARM_INSTRUCTION_SET = "arm"
