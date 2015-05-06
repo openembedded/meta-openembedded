@@ -10,8 +10,8 @@ inherit xfce
 DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
            libxrandr virtual/libx11 libxext xfce4-panel"
 
-SRC_URI[md5sum] = "caa17bfd96c0879e7bcc7432896fad52"
-SRC_URI[sha256sum] = "018e11dd315745f582d70108b6071d37fb94854fde70961e17325bc19c4e2011"
+SRC_URI[md5sum] = "e7d00548e58bf19229e727818184c1e0"
+SRC_URI[sha256sum] = "c50ec8aa7e7848c57c0f856dceb8132eb5f37585f0ac1627459ab8c882c73b07"
 
 EXTRA_OECONF = " \
     --enable-network-manager \
