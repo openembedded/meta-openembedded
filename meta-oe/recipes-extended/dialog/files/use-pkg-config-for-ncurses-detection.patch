@@ -8,33 +8,25 @@ file, and autoconf can not work, make a workaround in configure file.
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- configure |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ configure | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/configure b/configure
-index 24e28c1..c78735d 100755
+index 8afe3d7..a54bcc1 100755
 --- a/configure
 +++ b/configure
-@@ -9976,8 +9976,8 @@ fi
+@@ -11567,9 +11567,8 @@ fi
  
  if test "$NCURSES_CONFIG" != none ; then
  
 -CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
--LIBS="`$NCURSES_CONFIG --libs` $LIBS"
+-
+-cf_add_libs="`$NCURSES_CONFIG --libs`"
 +CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>/dev/null`"
-+LIBS="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
- 
- # even with config script, some packages use no-override for curses.h
- 
-@@ -10096,7 +10096,7 @@ cat >>confdefs.h <<EOF
- #define $cf_nculib_ROOT 1
- EOF
- 
--cf_cv_ncurses_version=`$NCURSES_CONFIG --version`
-+cf_cv_ncurses_version=`pkg-config --short-errors --print-errors --modversion "ncurses"`
- 
- else
- 
++cf_add_libs="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
+ # Filter out duplicates - this happens with badly-designed ".pc" files...
+ for cf_add_1lib in $LIBS
+ do
 -- 
 1.7.10.4
 
