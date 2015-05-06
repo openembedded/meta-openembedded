@@ -5,16 +5,17 @@ LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
 
 PR = "r3"
+SRCREV = "0bc2cfa0a47aed2c8a63abd989cb8da4dcceb2ec"
+PV = "0.8.0+git${SRCPV}"
 
-SRC_URI = "http://helm.cs.unibo.it/mml-widget/sources/${BP}.tar.gz \
-           file://mathview-gcc43x.diff \
-           file://mathview-gcc47x.diff \
-           file://qualify-lookup.diff \
-"
-SRC_URI[md5sum] = "b53564e553728d4b69f7d366dfeb5299"
-SRC_URI[sha256sum] = "1dc30175da6a3c560a7d62d1abe1c2f9829d988e6f1a7c5e766544575c558c43"
+SRC_URI = "git://github.com/GNOME/gtkmathview.git \
+           file://use_hostcxx.patch \
+	   file://0001-include-cstdio-to-get-printf-definitions.patch \
+          "
 
-inherit autotools-brokensep pkgconfig
+S = "${WORKDIR}/git"
+
+inherit autotools pkgconfig
 
 do_configure_prepend() {
     sed -i -e s:AM_BINRELOC::g ${S}/configure.ac
