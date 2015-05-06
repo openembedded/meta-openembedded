@@ -7,8 +7,8 @@ DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui xfconf libsm dbu
 inherit xfce gtk-doc
 
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
-SRC_URI[md5sum] = "27a5343174593dd0067906c922e6af96"
-SRC_URI[sha256sum] = "b9a55104b18ae01c5190d7ea02cbd7ba56d7affed9df416bf7fec6dff2d889b2"
+SRC_URI[md5sum] = "d7c6ae92f180c1d8d5b4c3f368142252"
+SRC_URI[sha256sum] = "4079ccffe990cdccee48a0ae200d8a5bc9335c34721d7923b375795940cf79bb"
 
 S = "${WORKDIR}/Thunar-${PV}/"
 
