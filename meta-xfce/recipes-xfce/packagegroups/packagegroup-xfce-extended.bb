@@ -44,6 +44,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-whiskermenu-plugin \
     xfce4-mailwatch-plugin \
     xfce4-kbdleds-plugin \
+    xfce4-smartbookmark-plugin \
     \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
