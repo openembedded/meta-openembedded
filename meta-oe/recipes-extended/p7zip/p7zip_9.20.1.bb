@@ -9,7 +9,7 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
 SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
 SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
 
-S = "${WORKDIR}/${PN}_${PV}"
+S = "${WORKDIR}/${BPN}_${PV}"
 
 do_install() {
     install -d ${D}${bindir}
