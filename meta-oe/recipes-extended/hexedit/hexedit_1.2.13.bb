@@ -14,4 +14,4 @@ SRC_URI[sha256sum] = "6a126da30a77f5c0b08038aa7a881d910e3b65d13767fb54c58c983963
 
 inherit autotools-brokensep
 
-S = "${WORKDIR}/${PN}"
+S = "${WORKDIR}/${BPN}"
