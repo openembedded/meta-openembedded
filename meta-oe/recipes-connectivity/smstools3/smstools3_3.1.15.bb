@@ -12,7 +12,7 @@ SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
 SRC_URI[sha256sum] = "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
 
 
-S = "${WORKDIR}/${PN}"
+S = "${WORKDIR}/${BPN}"
 
 RDEPENDS_${PN} = "bash"
 INITSCRIPT_NAME = "sms3"
