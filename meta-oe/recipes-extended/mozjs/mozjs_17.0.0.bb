@@ -17,7 +17,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
 SRC_URI[sha256sum] = "321e964fe9386785d3bf80870640f2fa1c683e32fe988eeb201b04471c172fba"
 
-S = "${WORKDIR}/${PN}${PV}/js/src"
+S = "${WORKDIR}/${BPN}${PV}/js/src"
 
 inherit autotools pkgconfig perlnative
 
@@ -49,7 +49,7 @@ do_configure() {
 # patch.bbclass will try to apply the patches already present and fail, so clean them out
 do_sourceclean() {
     (
-    cd ${WORKDIR}/${PN}${PV}/patches
+    cd ${WORKDIR}/${BPN}${PV}/patches
     for i in $(cat series | awk '{print $1}') ; do
         rm -f $i
     done
