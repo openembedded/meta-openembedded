@@ -11,7 +11,7 @@ SRC_URI = "http://launchpad.net/takao-fonts/003.02/${PV}/+download/takao-fonts-t
 SRC_URI[md5sum] = "ca480e5edb9f26d871bf6df6cb910306"
 SRC_URI[sha256sum] = "2f526a16c7931958f560697d494d8304949b3ce0aef246fb0c727fbbcc39089e"
 
-S = "${WORKDIR}/${PN}-ttf-${PV}"
+S = "${WORKDIR}/${BPN}-ttf-${PV}"
 
 do_install() {
     install -m 0755 -d ${D}/${datadir}/fonts
