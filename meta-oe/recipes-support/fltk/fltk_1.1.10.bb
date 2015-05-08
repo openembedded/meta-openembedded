@@ -32,7 +32,7 @@ do_configure() {
 
 python populate_packages_prepend () {
     if (d.getVar('DEBIAN_NAMES', 1)):
-        d.setVar('PKG_${PN}', 'libfltk${PV}')
+        d.setVar('PKG_${BPN}', 'libfltk${PV}')
 }
 
 LEAD_SONAME = "libfltk.so"
