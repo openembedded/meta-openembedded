@@ -10,7 +10,7 @@ readers to remote machines via TCP/IP."
 DEPENDS += "libtool pcsc-lite libusb-compat"
 
 SRC_URI = " \
-    ${DEBIAN_MIRROR}/main/o/${PN}/${PN}_${PV}.orig.tar.gz \
+    ${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
     file://etc-openct.udev.in-disablePROGRAM.patch \
     file://etc-openct_usb.in-modify-UDEVINFO.patch \
     file://openct.init \
