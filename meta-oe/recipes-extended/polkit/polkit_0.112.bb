@@ -21,6 +21,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
 SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
            ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
            file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
+           file://0001-do-not-hardcoded-libdir.patch \
 "
 
 SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"

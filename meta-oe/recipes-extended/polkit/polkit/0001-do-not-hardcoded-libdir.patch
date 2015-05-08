@@ -1,0 +1,44 @@
+From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00 2001
+From: Zhenhua Luo <zhenhua.luo@freescale.com>
+Date: Mon, 4 May 2015 04:11:27 -0500
+Subject: [PATCH] do not hardcoded libdir
+
+Upstream-Status: Pending
+
+libdir is hardcoded to ${prefix}/lib, but we want it to support multilib
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
+---
+ polkitagent/Makefile.am   | 2 +-
+ polkitbackend/Makefile.am | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/polkitagent/Makefile.am b/src/polkitagent/Makefile.am
+index 3bc364e..7d1ac0e 100644
+--- a/src/polkitagent/Makefile.am
++++ b/src/polkitagent/Makefile.am
+@@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =                               		\
+ 
+ libpolkit_agent_1_la_LDFLAGS = -export-symbols-regex '(^polkit_.*)'
+ 
+-libprivdir = $(prefix)/lib/polkit-1
++libprivdir = $(libdir)/polkit-1
+ libpriv_PROGRAMS = polkit-agent-helper-1
+ 
+ polkit_agent_helper_1_SOURCES = 					\
+diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.am
+index 9f430d0..1f7610b 100644
+--- a/src/polkitbackend/Makefile.am
++++ b/src/polkitbackend/Makefile.am
+@@ -67,7 +67,7 @@ rules_DATA = 50-default.rules
+ 
+ # ----------------------------------------------------------------------------------------------------
+ 
+-libprivdir = $(prefix)/lib/polkit-1
++libprivdir = $(libdir)/polkit-1
+ libpriv_PROGRAMS = polkitd
+ 
+ polkitd_SOURCES = 							\
+-- 
+2.3.3
+
