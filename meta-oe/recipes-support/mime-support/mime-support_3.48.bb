@@ -8,11 +8,11 @@ RDEPENDS_${PN} = "perl"
 RRECOMMENDS_${PN} = "file"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/m/mime-support/mime-support_${PV}-1.tar.gz"
-S = "${WORKDIR}/${PN}"
+S = "${WORKDIR}/${BPN}"
 
 FILES_${PN} += " ${libdir}/mime"
 
-docdir_append = "/${PN}"
+docdir_append = "/${BPN}"
 
 do_install () {
     install -d ${D}${sysconfdir}
