@@ -60,19 +60,19 @@ SRC_URI += "file://navit.xml \
             file://plugins.xml \
 "
 
-FILES_${PN} += "${libdir}/${PN}/*/*.so ${datadir}/icons"
-FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
+FILES_${PN} += "${libdir}/${BPN}/*/*.so ${datadir}/icons"
+FILES_${PN}-dbg += "${libdir}/${BPN}/*/.debug"
 FILES_${PN}-maptool = " ${bindir}/maptool "
 FILES_${PN}-config = " ${datadir}/navit/*.xml "
-FILES_${PN}-dbus = " ${datadir}/dbus-1/services/ ${libdir}/${PN}/binding/libbinding_dbus.so "
-FILES_${PN}-speech-cmdline = " ${libdir}/${PN}/speech/libspeech_cmdline.so "
-FILES_${PN}-speech-dbus = " ${libdir}/${PN}/speech/libspeech_dbus.so "
-FILES_${PN}-gui-gtk = " ${libdir}/${PN}/gui/libgui_gtk.so "
-FILES_${PN}-gui-qml = " ${libdir}/${PN}/gui/libgui_qml.so ${datadir}/navit/skins/ "
-FILES_${PN}-gui-internal = " ${libdir}/${PN}/gui/libgui_internal.so "
-FILES_${PN}-graphics-sdl = " ${libdir}/${PN}/graphics/libgraphics_sdl.so "
-FILES_${PN}-graphics-qt = " ${libdir}/${PN}/graphics/libgraphics_qt_qpainter.so "
-FILES_${PN}-graphics-gtk = " ${libdir}/${PN}/graphics/libgraphics_gtk_drawing_area.so "
+FILES_${PN}-dbus = " ${datadir}/dbus-1/services/ ${libdir}/${BPN}/binding/libbinding_dbus.so "
+FILES_${PN}-speech-cmdline = " ${libdir}/${BPN}/speech/libspeech_cmdline.so "
+FILES_${PN}-speech-dbus = " ${libdir}/${BPN}/speech/libspeech_dbus.so "
+FILES_${PN}-gui-gtk = " ${libdir}/${BPN}/gui/libgui_gtk.so "
+FILES_${PN}-gui-qml = " ${libdir}/${BPN}/gui/libgui_qml.so ${datadir}/navit/skins/ "
+FILES_${PN}-gui-internal = " ${libdir}/${BPN}/gui/libgui_internal.so "
+FILES_${PN}-graphics-sdl = " ${libdir}/${BPN}/graphics/libgraphics_sdl.so "
+FILES_${PN}-graphics-qt = " ${libdir}/${BPN}/graphics/libgraphics_qt_qpainter.so "
+FILES_${PN}-graphics-gtk = " ${libdir}/${BPN}/graphics/libgraphics_gtk_drawing_area.so "
 FILES_${PN}-icons = "/usr/share/navit/xpm/"
 
 do_configure_prepend() {
@@ -84,7 +84,7 @@ do_install_append() {
     # fix QA issue
     sed -i 's#Categories=GTK;Utility;Geography;#Categories=Graphics;#g' ${D}${datadir}/applications/navit.desktop
 
-    rm ${D}${libdir}/${PN}/*/*.la
+    rm ${D}${libdir}/${BPN}/*/*.la
 
     #Use split config
     mv ${D}${datadir}/navit/navit.xml ${D}${datadir}/navit/navit.default.xml
