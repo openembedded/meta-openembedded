@@ -7,8 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
 
 PR = "r2"
 
-PNBLACKLIST[sylpheed] ?= "BROKEN: Doesn't work with B!=S"
-
 SRC_URI = "http://sylpheed.sraoss.jp/sylpheed/v2.7/sylpheed-${PV}.tar.bz2 \
     file://glib-2.32.patch \
 "
@@ -18,7 +16,7 @@ SRC_URI[sha256sum] = "8bb6457db4e2eea1877b487d9ac8513546372db9a6a2e4271d11229f4a
 FILES_${PN} += "${datadir}/pixmaps ${datadir}/applications"
 FILES_${PN}-doc += "${datadir}"
 
-EXTRA_OECONF = "--disable-ssl --enable-gnutls"
+EXTRA_OECONF = "--disable-ssl"
 
 CFLAGS += "-D_GNU_SOURCE"
 
@@ -31,9 +29,3 @@ do_configure_prepend() {
 
 inherit autotools pkgconfig
 
-do_install_append() {
-    install -d ${D}${datadir}/applications
-    install -m 0644 sylpheed.desktop ${D}${datadir}/applications/
-    install -d ${D}${datadir}/pixmaps
-    install -m 0644 sylpheed.png ${D}${datadir}/pixmaps/
-}
