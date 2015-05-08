@@ -7,7 +7,7 @@ DEPENDS = "gtk+ python-pygobject dbus-glib libcap"
 SRCREV = "109"
 PV = "0.1+svnr${SRCPV}"
 PR = "r2"
-S = "${WORKDIR}/${PN}"
+S = "${WORKDIR}/${BPN}"
 
 do_configure_prepend() {
     sed -i "s#PY_VERSION = 2.6#PY_VERSION = ${PYTHON_BASEVERSION}#g" ${S}/Makefile.am
