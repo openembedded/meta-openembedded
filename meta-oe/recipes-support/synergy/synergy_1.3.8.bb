@@ -11,7 +11,7 @@ SRC_URI = "http://synergy.googlecode.com/files/synergy-${PV}-Source.tar.gz"
 SRC_URI[md5sum] = "3534c65ecfa6e47d7899c57975442f03"
 SRC_URI[sha256sum] = "0afc83e4ed0b46ed497d4229b2b2854e8d3c581a112f4da05110943edbfacc03"
 
-S = "${WORKDIR}/${PN}-${PV}-Source"
+S = "${WORKDIR}/${BP}-Source"
 
 inherit cmake distro_features_check
 # depends on virtual/libx11
