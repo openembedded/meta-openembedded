@@ -15,7 +15,7 @@ SRC_URI = "http://projects.openmoko.org/frs/download.php/923/orrery_2.7_clean.ta
 SRC_URI[md5sum]    = "bd62a33e7554ee1030313dfcdefcda8b"
 SRC_URI[sha256sum] = "645166a5e05b2064ab630534a514697fc47b681951e7fe1d635c259cbdf7a5e6"
 
-S = "${WORKDIR}/${PN}"
+S = "${WORKDIR}/${BPN}"
 
 do_configure_prepend() {
     # fix DSO issue with binutils-2.22
