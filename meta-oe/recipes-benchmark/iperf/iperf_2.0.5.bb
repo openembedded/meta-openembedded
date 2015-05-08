@@ -12,7 +12,7 @@ SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
 SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
 SRC_URI[sha256sum] = "636b4eff0431cea80667ea85a67ce4c68698760a9837e1e9d13096d20362265b"
 
-S = "${WORKDIR}/${PN}-${PV}"
+S = "${WORKDIR}/${BP}"
 
 inherit autotools pkgconfig
 
