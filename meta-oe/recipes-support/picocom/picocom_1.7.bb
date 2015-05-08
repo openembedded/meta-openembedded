@@ -13,6 +13,6 @@ CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DH
 
 do_install () {
     install -d ${D}${bindir}
-    install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
+    install -m 0755 ${BPN} pcasc pcxm pcym pczm ${D}${bindir}/
 }
 
