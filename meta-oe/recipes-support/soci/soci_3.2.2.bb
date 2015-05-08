@@ -9,7 +9,7 @@ SECTION = "libs"
 DEPENDS = "boost"
 
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
            file://soci_libdir.patch \
           "
 SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf"
