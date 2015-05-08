@@ -4,7 +4,7 @@ LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aaa7a370ce4"
 # start-stop-daemon is usually shipped by dpkg
 DEPENDS = "ncurses"
-RCONFLICS_${PN} = "dpkg" 
+RCONFLICTS_${PN} = "dpkg"
 
 PNBLACKLIST[start-stop-daemon] ?= "BROKEN: fails because of gettext, partial fix is available here http://patchwork.openembedded.org/patch/89867/"
 
