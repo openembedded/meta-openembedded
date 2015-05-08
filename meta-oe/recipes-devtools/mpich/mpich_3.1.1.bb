@@ -13,7 +13,7 @@ SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
 SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
 
 RDEPENDS_${PN} += "bash perl libxml2"
-S = "${WORKDIR}/${PN}-${PV}"
+S = "${WORKDIR}/${BP}"
 
 EXTRA_OECONF = "--enable-debuginfo \
                 --enable-fast \
