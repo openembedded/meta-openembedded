@@ -8,7 +8,7 @@ SECTION = "console/network"
 LICENSE = "NTP"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f41fedb22dffefcbfafecc85b0f79cfa"
 
-DEPENDS = "pps-tools libevent"
+DEPENDS = "libevent"
 
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
            file://ntp-4.2.4_p6-nano.patch \
@@ -45,7 +45,7 @@ USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
                        --shell /bin/false --user-group ntp"
 
 # NB: debug is default-enabled by NTP; keep it default-enabled here.
-PACKAGECONFIG ??= "cap debug"
+PACKAGECONFIG ??= "cap debug refclocks"
 PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           --with-openssl-incdir=${STAGING_INCDIR} \
                           --with-crypto, \
@@ -53,6 +53,7 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           openssl"
 PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
 PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
+PACKAGECONFIG[refclocks] = "--enable-all-clocks,--disable-all-clocks,pps-tools"
 PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
 
 do_install_append() {
