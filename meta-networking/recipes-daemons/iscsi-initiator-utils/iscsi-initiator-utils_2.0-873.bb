@@ -6,7 +6,7 @@ programs used to manage it. iSCSI is a protocol for distributed \
 disk access using SCSI commands sent over Internet Protocol networks."
 HOMEPAGE = "http://www.open-iscsi.org/"
 LICENSE = "GPLv2 & LGPLv2.1"
-SECTION = "console/network"
+SECTION = "net"
 DEPENDS = "openssl flex-native bison-native"
 
 LIC_FILES_CHKSUM = \

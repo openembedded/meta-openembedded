@@ -1,6 +1,7 @@
 SUMMARY = "FTP Server with a strong focus on software security"
 DESCRIPTION = "Pure-FTPd is a free (BSD license), secure, production-quality and standard-conformant FTP server."
 HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
+SECTION = "net"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ae9e161311a5a0768c333b537a40e332"
 

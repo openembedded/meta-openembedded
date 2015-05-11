@@ -21,7 +21,7 @@ BUGTRACKER = "https://github.com/polarssl/polarssl/issues"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-SECTION = "net"
+SECTION = "libdevel"
 
 SRC_URI = "https://polarssl.org/download/polarssl-${PV}-gpl.tgz"
 

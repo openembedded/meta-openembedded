@@ -1,5 +1,6 @@
 DESCRIPTION = "snort - a free lightweight network intrusion detection system for UNIX and Windows."
 HOMEPAGE = "http://www.snort.org/"
+SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 

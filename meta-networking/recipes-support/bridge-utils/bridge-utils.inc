@@ -1,6 +1,6 @@
 SUMMARY = "Tools for ethernet bridging"
 HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bridge"
-SECTION = "console/network"
+SECTION = "net"
 LICENSE = "GPLv2"
 
 DEPENDS = "sysfsutils"

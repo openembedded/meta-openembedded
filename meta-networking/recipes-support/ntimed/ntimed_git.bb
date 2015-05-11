@@ -3,7 +3,7 @@ DESCRIPTION = "This is a preview/early-access/alpha/buzzword-of-the-times \
 release of a new FOSS project written to gradually take over the world of \
 networked timekeeping."
 HOMEPAGE = "https://github.com/bsdphk/Ntimed"
-SECTION = "console/network"
+SECTION = "net"
 
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://main.c;startline=2;endline=24;md5=eda11d21005319bb76cbb6f911f0f66d"

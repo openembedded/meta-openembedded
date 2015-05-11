@@ -1,5 +1,6 @@
 DESCRIPTION = "open source C/C++ client library and tools for the memcached server"
 DEPENDS = "libevent util-linux"
+SECTION = "libdevel"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=865490941c91ba790f0ea78dec93bd60"
 

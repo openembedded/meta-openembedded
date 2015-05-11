@@ -3,7 +3,7 @@ DESCRIPTION = "Utility for basic Ethernet frame filtering on a Linux bridge, \
                advanced logging, MAC DNAT/SNAT and brouting."
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
-SECTION = "console/network"
+SECTION = "net"
 PR = "r3"
 
 RDEPENDS_${PN} += "perl"

@@ -1,5 +1,6 @@
 SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast routing daemon."
 HOMEPAGE = "http://troglobit.com/pimd.html"
+SECTION = "net"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
 

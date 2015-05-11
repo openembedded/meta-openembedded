@@ -4,7 +4,7 @@ DESCRIPTION = "LibESMTP is a library to manage posting \
 preconfigured Mail Transport Agent (MTA) such as Exim or PostFix."
 HOMEPAGE = "http://www.stafford.uklinux.net/libesmtp/"
 LICENSE = "LGPLv2+"
-SECTION = "libs/network"
+SECTION = "libs"
 
 DEPENDS = "openssl"
 

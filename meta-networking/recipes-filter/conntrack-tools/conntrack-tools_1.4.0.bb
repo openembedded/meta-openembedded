@@ -1,9 +1,9 @@
 SUMMARY = "Connection tracking userspace tools for Linux"
+SECTION = "net"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 DEPENDS = "libnfnetlink libnetfilter-conntrack libnetfilter-cttimeout \
            libnetfilter-cthelper libnetfilter-queue bison-native"
-
 
 SRC_URI = " \
     http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \

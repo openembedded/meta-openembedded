@@ -6,7 +6,7 @@ Squid offers a rich set of traffic optimization options, most of which are \
 enabled by default for simpler installation and high performance. \
 "
 HOMEPAGE = "http://www.squid-cache.org"
-SECTION = "network"
+SECTION = "web"
 LICENSE = "GPLv2+"
 
 MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"

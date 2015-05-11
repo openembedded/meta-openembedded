@@ -1,5 +1,5 @@
 SUMMARY = "tftp - Trivial file transfer protocol client"
-SECTION = "networking"
+SECTION = "net"
 LICENSE = "BSD-4-Clause"
 DEPENDS = "tcp-wrappers"
 

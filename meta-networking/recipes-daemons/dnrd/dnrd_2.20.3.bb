@@ -5,7 +5,7 @@ nameserver, but can also act as the primary nameserver for a subnet behind \
 a firewall. It also has features such as caching DNS requests, support for \
 DNS servers, cache poisoning prevention, TCP support, etc.."
 HOMEPAGE = "http://dnrd.sourceforge.net/"
-SECTION = "System Environment/Daemons"
+SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0be67017f1c770313ad7b40e18d568f1"
 

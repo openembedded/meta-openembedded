@@ -1,6 +1,6 @@
 SUMMARY = "Xelerance version of the Layer 2 Tunneling Protocol (L2TP) daemon"
 HOMEPAGE = "http://www.xelerance.com/software/xl2tpd/"
-SECTION = "network"
+SECTION = "net"
 DEPENDS = "ppp virtual/kernel"
 
 LICENSE = "GPLv2"

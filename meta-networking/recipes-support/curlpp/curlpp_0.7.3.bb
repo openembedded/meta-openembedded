@@ -1,6 +1,6 @@
 SUMMARY = "C++ library for client-side URL transfers"
 HOMEPAGE = "http://code.google.com/p/curlpp/"
-SECTION = "console/network"
+SECTION = "libdevel"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 

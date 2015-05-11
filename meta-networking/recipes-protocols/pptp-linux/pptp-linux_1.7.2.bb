@@ -5,7 +5,7 @@ DESCRIPTION = "PPTP Client is a Linux, FreeBSD, NetBSD \
     Virtual Private Network (VPN) as used by employers and some \
     cable and ADSL internet service providers."
 HOMEPAGE = "http://pptpclient.sourceforge.net"
-SECTION = "network"
+SECTION = "net"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 

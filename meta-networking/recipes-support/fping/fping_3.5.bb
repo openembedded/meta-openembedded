@@ -7,7 +7,7 @@ targets to ping.  Instead of sending to one target until it times out or \
 replies, fping will send out a ping packet and move on to the next target \
 in a round-robin fashion."
 HOMEPAGE = "http://www.fping.org/"
-SECTION = "console/tools"
+SECTION = "net"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=09d77789fe32be35acde9637a5ee39b1"
 

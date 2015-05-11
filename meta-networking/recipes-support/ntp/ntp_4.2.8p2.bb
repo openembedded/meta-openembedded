@@ -4,7 +4,7 @@ synchronize the time of a computer client or server to \
 another server or reference time source, such as a radio \
 or satellite receiver or modem."
 HOMEPAGE = "http://support.ntp.org"
-SECTION = "console/network"
+SECTION = "net"
 LICENSE = "NTP"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f41fedb22dffefcbfafecc85b0f79cfa"
 

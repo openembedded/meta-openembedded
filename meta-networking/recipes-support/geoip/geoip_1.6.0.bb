@@ -6,7 +6,7 @@ countries as values. This database should be more complete and accurate than \
 using reverse DNS lookups."
 
 HOMEPAGE = "http://dev.maxmind.com/geoip/"
-SECTION = "Development/Libraries"
+SECTION = "libdevel"
 
 SRC_URI = "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz;name=tarball \
            http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=no;name=GeoIP-dat \

@@ -1,6 +1,6 @@
 DESCRIPTION = "netkit-rpc includes rpcinfo and rpcgen."
 HOMEPAGE = "http://ftp.linux.org.uk/pub/linux/Networking/netkit"
-SECTION = "networking"
+SECTION = "net"
 LICENSE = "SPL-1.0"
 LIC_FILES_CHKSUM = "file://rpcinfo/rpcinfo.c;beginline=2;endline=3;md5=3e6339e3ce266e1122c5ba293e04bc89"
 

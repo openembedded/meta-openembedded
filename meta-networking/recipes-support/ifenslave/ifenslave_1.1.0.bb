@@ -1,6 +1,6 @@
 SUMMARY = "Configure network interfaces for parallel routing"
 HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bonding"
-SECTION = "network"
+SECTION = "net"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://ifenslave.c;beginline=8;endline=12;md5=a9f0bd2324cdc1b36d1f44f0e643a62a"

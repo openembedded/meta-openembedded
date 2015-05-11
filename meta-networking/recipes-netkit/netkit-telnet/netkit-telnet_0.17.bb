@@ -1,5 +1,5 @@
 DESCRIPTION = "netkit-telnet includes the telnet daemon and client."
-SECTION = "base"
+SECTION = "net"
 DEPENDS = "ncurses"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://telnet/telnet.cc;beginline=2;endline=3;md5=780868e7b566313e70cb701560ca95ef"

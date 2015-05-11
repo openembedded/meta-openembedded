@@ -2,7 +2,7 @@ DESCRIPTION = "The GNU inetutils are a collection of common \
 networking utilities and servers including ftp, ftpd, rcp, \
 rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
 talkd, telnet, telnetd, tftp, tftpd, and uucpd."
-SECTION = "libs"
+SECTION = "net"
 DEPENDS = "ncurses netbase readline"
 LICENSE = "GPLv3"
 

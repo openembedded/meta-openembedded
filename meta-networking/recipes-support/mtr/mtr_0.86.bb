@@ -1,6 +1,7 @@
 SUMMARY = "Combined traceroute and ping utility"
 DESCRIPTION = "mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool."
 HOMEPAGE = "http://www.bitwizard.nl/mtr/"
+SECTION = "net"
 DEPENDS = "ncurses"
 
 LICENSE = "GPLv2"

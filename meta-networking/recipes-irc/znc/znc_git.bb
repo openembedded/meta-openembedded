@@ -1,4 +1,5 @@
 SUMMARY = "ZNC, an advanced IRC bouncer"
+SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 

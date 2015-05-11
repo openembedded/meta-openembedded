@@ -4,7 +4,7 @@ with a sendmail-compatible syntax, based on libESMTP and \
 supporting the AUTH (including the CRAM-MD5 and NTLM SASL \
 mechanisms) and StartTLS SMTP extensions."
 HOMEPAGE = "http://esmtp.sourceforge.net/"
-SECTION = "console/network"
+SECTION = "net"
 
 DEPENDS = "libesmtp"
 

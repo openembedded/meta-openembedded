@@ -6,7 +6,7 @@ products and is able to support hundreds of sessions, each with \
 different configuration. It is used by several ISPs to provide \
 L2TP services and by corporations to implement L2TP VPNs."
 HOMEPAGE = "http://www.openl2tp.org/"
-SECTION = "console/network"
+SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585"
 DEPENDS = "popt flex readline"

@@ -1,6 +1,6 @@
 SUMMARY = "Wireless Central Regulatory Domain Agent"
 HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
-
+SECTION = "net"
 LICENSE = "copyleft-next-0.3.0 & ISC"
 LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe \
                     file://${WORKDIR}/wireless-regdb-2014.11.18/LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"

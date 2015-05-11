@@ -7,7 +7,7 @@ advertisements hosts can automatically configure their \
 addresses and some other parameters. They also can \
 choose a default router based on these advertisements."
 HOMEPAGE = "http://www.litech.org/radvd/"
-SECTION = "console/network"
+SECTION = "net"
 DEPENDS = "flex-native libdaemon"
 
 # License is BSD-Style (with advertising clause) but also has an additional 0th clause

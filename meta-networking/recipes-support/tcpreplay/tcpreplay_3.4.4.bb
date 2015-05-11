@@ -1,7 +1,7 @@
 SUMMARY = "Use previously captured traffic to test network devices"
 
 HOMEPAGE = "http://tcpreplay.synfin.net/"
-SECTION = "console/network"
+SECTION = "net"
 
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=c33cccf72cc1603e8a72a84811ae3ac8"

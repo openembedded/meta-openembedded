@@ -1,6 +1,6 @@
 SUMMARY = "Dovecot is an open source IMAP and POP3 email server"
 DESCRIPTION = "Dovecot is an open source IMAP and POP3 email server for Linux/UNIX-like systems, written with security primarily in mind. Dovecot is an excellent choice for both small and large installations. It's fast, simple to set up, requires no special administration and it uses very little memory."
-
+SECTION = "mail"
 LICENSE = "LGPLv2.1 & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a981379bd0f1c362f8d1d21515e5b30b"
 

@@ -1,5 +1,5 @@
 DESCRIPTION = "netkit-ft includes the ftp client."
-SECTION = "networking"
+SECTION = "net"
 HOMEPAGE="ftp://ftp.uk.linux.org/pub/linux/Networking/netkit"
 LICENSE = "BSD"
 

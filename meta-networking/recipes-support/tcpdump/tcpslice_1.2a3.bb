@@ -1,7 +1,7 @@
 SUMMARY = "tcpslice"
 DESCRIPTION = "A tool for extracting parts of a tcpdump packet trace."
 HOMEPAGE = "http://www.tcpdump.org/related.html"
-SECTION = "console/network"
+SECTION = "net"
 
 LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://tcpslice.c;endline=20;md5=99519e2e5234d1662a4ce16baa62c64e"

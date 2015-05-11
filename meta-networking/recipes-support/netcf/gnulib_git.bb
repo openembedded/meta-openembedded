@@ -7,7 +7,7 @@ to be copied from gnulib, it is not a library per-se, as much \
 as a collection of portable idioms to be used in other projects."
 
 HOMEPAGE = "http://www.gnu.org/software/gnulib/"
-SECTION = "libs"
+SECTION = "devel"
 LICENSE = "LGPLv2+"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e4cf3810f33a067ea7ccd2cd889fed21"

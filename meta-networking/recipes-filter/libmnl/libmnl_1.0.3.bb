@@ -2,6 +2,7 @@ SUMMARY = "Minimalistic user-space Netlink utility library"
 DESCRIPTION = "Minimalistic user-space library oriented to Netlink developers, providing \
     functions for common tasks in parsing, validating, and constructing both the Netlink header and TLVs."
 HOMEPAGE = "http://www.netfilter.org/projects/libmnl/index.html"
+SECTION = "libs"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 

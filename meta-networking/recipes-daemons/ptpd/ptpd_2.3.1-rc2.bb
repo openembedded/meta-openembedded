@@ -4,7 +4,7 @@ defined by the relevant IEEE 1588 standard. PTP Version 1 implements IEEE-1588-2
 and PTP Version 2 implements IEEE-1588-2008. PTP was developed to provide very precise \
 time coordination of LAN connected computers."
 HOMEPAGE = "http://sourceforge.net/projects/ptpd"
-SECTION = "network"
+SECTION = "net"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
 

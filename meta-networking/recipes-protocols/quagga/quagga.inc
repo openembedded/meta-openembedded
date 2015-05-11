@@ -6,7 +6,7 @@ Quagga is a fork of GNU Zebra which was developed by Kunihiro \
 Ishiguro. The Quagga tree aims to build a more involved community \
 around Quagga than the current centralised model of GNU Zebra."
 HOMEPAGE = "http://www.nongnu.org/quagga/"
-SECTION = "network"
+SECTION = "net"
 LICENSE = "GPL-2.0 & LGPL-2.0"
 DEPENDS = "readline ncurses perl-native"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"

@@ -1,5 +1,6 @@
 SUMMARY = "ACCEL-PPP is a high performance VPN server application for linux"
 HOMEPAGE = "http://sourceforge.net/apps/trac/accel-ppp/wiki"
+SECTION = "net"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"

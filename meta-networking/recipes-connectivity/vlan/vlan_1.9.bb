@@ -1,4 +1,5 @@
 SUMMARY = "VLAN provides vconfig utility"
+SECTION = "misc"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://vconfig.c;md5=293ef69c4e88434d37a5ee577a5288cb"
 

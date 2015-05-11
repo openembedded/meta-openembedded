@@ -3,7 +3,7 @@ DESCRIPTION = "Portable, easy-to-use and standard compliant library suitable \
 for developing free and commercial software that need support for a RADIUS \
 protocol (RFCs 2128 and 2139)."
 HOMEPAGE = "http://sourceforge.net/projects/radiusclient-ng.berlios/"
-SECTION = "Applications/Internet"
+SECTION = "net"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/r/${BPN}/${BPN}_${PV}.orig.tar.gz \
    file://Modify-configure.in-and-etc-Makefile.am.patch \

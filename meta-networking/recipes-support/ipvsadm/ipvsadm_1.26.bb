@@ -9,7 +9,7 @@ methods (NAT, tunneling, and direct routing), and eight load balancing algorithm
 (round robin, weighted round robin,  least-connec-tion, weighted least-connection, \
 locality-based  least-connection, locality-based least-connection with replication, \
 destination-hashing, and source-hashing)."
-SECTION = "console/network"
+SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=a54cba37b64924aa5008881607942892"
 

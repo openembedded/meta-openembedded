@@ -1,6 +1,6 @@
 SUMMARY = "A networking benchmarking tool"
 DESCRIPTION = "Network performance benchmark including tests for TCP, UDP, sockets, ATM and more."
-SECTION = "console/network"
+SECTION = "net"
 HOMEPAGE = "http://www.netperf.org/"
 LICENSE = "netperf"
 LICENSE_FLAGS = "non-commercial"

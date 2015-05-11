@@ -1,6 +1,6 @@
 DESCRIPTION = "A a package of utilities for doing and managing mounts of the Linux CIFS filesystem."
 HOMEPAGE = "http://wiki.samba.org/index.php/LinuxCIFS_utils"
-
+SECTION = "otherosfs"
 LICENSE = "GPLv3 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 

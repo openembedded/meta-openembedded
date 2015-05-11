@@ -3,7 +3,7 @@ DESCRIPTION = "A GNU/Linux utility for viewing/manipulating the MAC address of n
 HOMEPAGE = "http://www.alobbs.com/macchanger"
 LICENSE  = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-
+SECTION = "net"
 
 SRC_URI  = "${GNU_MIRROR}/macchanger/${BPN}-${PV}.tar.gz"
 

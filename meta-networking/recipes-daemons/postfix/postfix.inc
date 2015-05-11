@@ -5,7 +5,7 @@ Postfix attempts to be fast, easy to administer, and secure. The outsidei \
 has a definite Sendmail-ish flavor, but the inside is completely different."
 
 HOMEPAGE= "http://www.postfix.org"
-SECTION = "console/network"
+SECTION = "mail"
 DEPENDS = "virtual/db libpcre openssl postfix-native \
     ${@base_contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \
     ${@base_contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \

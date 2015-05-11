@@ -1,5 +1,6 @@
 SUMMARY = "ssmping is a tool for checking whether one can receive SSM from a given host"
 HOMEPAGE = "http://www.venaas.no/multicast/ssmping/"
+SECTION = "net"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://asmping.c;beginline=2;endline=11;md5=1ca8d1a1ca931e5cfe604ebf20a78b71"
 

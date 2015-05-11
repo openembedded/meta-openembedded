@@ -6,7 +6,7 @@ interface for TFTP, which allows users to transfer files to and from a \
 remote machine.  This program and TFTP provide very little security, \
 and should not be enabled unless it is expressly needed."
 DEPENDS = "tcp-wrappers readline"
-SECTION = "network"
+SECTION = "net"
 LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://MCONFIG.in;beginline=1;endline=9;md5=c28ba5adb43041fae4629db05c83cbdd \
                     file://tftp/tftp.c;beginline=1;endline=32;md5=988c1cba99d70858a26cd877209857f4"

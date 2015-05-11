@@ -5,7 +5,7 @@ infrastructure for in-kernel netfilter subsystems (such as nfnetlink_log, \
 nfnetlink_queue, nfnetlink_conntrack) and their respective users and/or \
 management tools in userspace."
 HOMEPAGE = "http://www.netfilter.org/projects/libnfnetlink/index.html"
-SECTION = "devel/libs"
+SECTION = "libs"
 LICENSE = "GPLv2+"
 
 

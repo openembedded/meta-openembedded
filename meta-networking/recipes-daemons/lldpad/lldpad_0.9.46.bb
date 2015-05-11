@@ -2,7 +2,7 @@ SUMMARY = "Intel LLDP Agent"
 DESCRIPTION = "\
 This package contains the Linux user space daemon and configuration tool for \
 Intel LLDP Agent with Enhanced Ethernet support for the Data Center."
-SECTION = "System Environment/Daemons"
+SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
 DEPENDS = "libconfig libnl"

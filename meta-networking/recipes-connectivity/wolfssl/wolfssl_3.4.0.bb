@@ -5,7 +5,7 @@ DESCRIPTION = "wolfSSL, formerly CyaSSL, is a lightweight SSL library written in
                a full TLS 1.2 client and server."
 HOMEPAGE = "http://www.wolfssl.com/yaSSL/Products-wolfssl.html"
 BUGTRACKER = "http://github.com/wolfssl/wolfssl/issues"
-SECTION = "libs/network"
+SECTION = "libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 

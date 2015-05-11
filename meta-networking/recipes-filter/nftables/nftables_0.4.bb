@@ -1,7 +1,7 @@
 SUMMARY = "Netfilter Tables userspace utillites"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
-SECTION = "console/network"
+SECTION = "net"
 
 DEPENDS = "libmnl libnftnl readline gmp"
 RRECOMMENDS_${PN} += "kernel-module-nf-tables \

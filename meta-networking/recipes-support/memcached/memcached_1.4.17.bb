@@ -6,7 +6,7 @@ DESCRIPTION = "\
  of the specific application. Traditionally this has been used in mod_perl \
  apps to avoid storing large chunks of data in Apache memory, and to share \
  this burden across several machines."
-
+SECTION = "web"
 HOMEPAGE = "http://memcached.org/"
 LICENSE = "BSD-3-Clause"
 

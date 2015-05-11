@@ -1,5 +1,5 @@
 DESCRIPTION = "netkit-rsh includes the rsh daemon and client."
-SECTION = "networking"
+SECTION = "net"
 HOMEPAGE="ftp://ftp.uk.linux.org/pub/linux/Networking/netkit"
 LICENSE = "BSD-4-Clause"
 DEPENDS = "xinetd libgcrypt"

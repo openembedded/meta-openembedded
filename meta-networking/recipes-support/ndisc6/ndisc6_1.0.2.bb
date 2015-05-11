@@ -1,7 +1,6 @@
-SECTION = "console/network"
 DESCRIPTION = "This package includes some useful diagnostics tools for \
 IPv6 networks, including ndisc6, rdisc6, tcptraceroute6 and traceroute6."
-SECTION = "console/network"
+SECTION = "net"
 HOMEPAGE = "http://www.remlab.net/ndisc6/"
 LICENSE = "GPL-2.0"
 

@@ -6,4 +6,4 @@ details for integration with other management models. The schema\
 provides the actual model descriptions."
 
 HOMEPAGE = "http://www.dmtf.org/"
-SECTION = "Development/Libraries"
+SECTION = "libs"

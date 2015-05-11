@@ -6,7 +6,7 @@ control and forwarding planes of a software-defined networking architecture.\
 "
 HOMEPAGE = "http://www.openflow.org"
 
-SECTION = "networking"
+SECTION = "net"
 LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=e870c934e2c3d6ccf085fd7cf0a1e2e2"

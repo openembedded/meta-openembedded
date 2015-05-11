@@ -9,7 +9,7 @@ remote files, passive mode support (with fallback to active mode), \
 SOCKS support, TIS FWTK gate-ftp server support, and transfer rate \
 throttling."
 
-SECTION = "console/network"
+SECTION = "net"
 LICENSE = "BSD-4-Clause"
 
 DEPENDS = "ncurses"

@@ -1,6 +1,6 @@
 DESCRIPTION = "A sophisticated console ftp client"
 HOMEPAGE = "http://ncftp.com/"
-SECTION = "console/network"
+SECTION = "net"
 LICENSE = "ClArtistic"
 LIC_FILES_CHKSUM = "file://ncftp/cmds.c;beginline=3;endline=4;md5=9de76faeaedc4f908082e3f8142715f4"
 DEPENDS = "ncurses"

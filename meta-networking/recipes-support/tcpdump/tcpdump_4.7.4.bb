@@ -2,7 +2,7 @@ SUMMARY = "A sophisticated network protocol analyzer"
 HOMEPAGE = "http://www.tcpdump.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1d4b0366557951c84a94fabe3529f867"
-SECTION = "console/network"
+SECTION = "net"
 DEPENDS = "libpcap"
 
 SRC_URI = " \

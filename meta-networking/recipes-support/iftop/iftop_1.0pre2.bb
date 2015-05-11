@@ -1,6 +1,6 @@
 SUMMARY = "iftop does for network usage what top(1) does for CPU usage"
 HOMEPAGE = "http://www.ex-parrot.com/pdw/iftop/"
-
+SECTION = "net"
 DEPENDS = "libpcap ncurses"
 
 LICENSE = "GPLv2"
