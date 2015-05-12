@@ -2,10 +2,8 @@ DESCRIPTION = "obex-data-server is a D-Bus service providing high-level OBEX cli
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-DEPENDS = "gtk+ bluez4 dbus-glib imagemagick openobex"
-RCONFLICTS_${PN} = "bluez5"
-
-PNBLACKLIST[obex-data-server] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+DEPENDS = "gtk+ dbus-glib imagemagick openobex"
+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
 
 SRC_URI = "http://tadas.dailyda.com/software/obex-data-server-${PV}.tar.gz"
 SRC_URI[md5sum] = "961ca5db6fe9c97024e133cc6203cc4d"
