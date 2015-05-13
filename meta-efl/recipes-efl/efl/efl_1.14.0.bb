@@ -6,8 +6,8 @@ SRC_URI = "\
     file://0002-evas_3d-Add-Eet.h-includes.patch \
 "
 
-SRC_URI[md5sum] = "dd779050ccc4ad8d7ae71f2dc8c85855"
-SRC_URI[sha256sum] = "98404d8de63eea318f748c25708ec989628f025adf12cd54697e5de2fe48c2a4"
+SRC_URI[md5sum] = "b0813fe92cb6eaf861e3c179a19d8e41"
+SRC_URI[sha256sum] = "30a8a239449e0d068a39787b5a4769dd26ddf0476f58f094c85e65b108086269"
 
 # Temporary disable until error like the one following are fixed
 # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated

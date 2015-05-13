@@ -1,0 +1,8 @@
+require ${BPN}.inc
+
+SRC_URI = "\
+    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+"
+
+SRC_URI[md5sum] = "9713c54888c355b5f29d1dc099138b49"
+SRC_URI[sha256sum] = "8345c7d8c3cdf062b5df4500c0d4c557b6109c67667ac2e5431699c8852d2ad8"
