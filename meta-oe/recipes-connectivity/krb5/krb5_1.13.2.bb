@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=450c80c6258ce03387bd09df37638ebc"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
 DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
 inherit autotools-brokensep binconfig perlnative
@@ -22,7 +22,6 @@ inherit autotools-brokensep binconfig perlnative
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
-           file://0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch \
            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
            file://crosscompile_nm.patch \
            file://etc/init.d/krb5-kdc \
@@ -30,8 +29,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar 
            file://etc/default/krb5-kdc \
            file://etc/default/krb5-admin-server \
 "
-SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
-SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
+SRC_URI[md5sum] = "f7ebfa6c99c10b16979ebf9a98343189"
+SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3ff6de1"
 
 S = "${WORKDIR}/${BP}/src/"
 
@@ -77,4 +76,25 @@ do_install_append() {
     mkdir -p ${D}/etc/init.d ${D}/etc/default
     install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/etc/init.d
     install -m 0644 ${WORKDIR}/etc/default/* ${D}/etc/default
+
+    rm -rf ${D}/var/run
+    mkdir -p ${D}/etc/default/volatiles
+    echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
+           > ${D}${sysconfdir}/default/volatiles/87_krb5
+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d /run/krb5kdc - - - -" \
+              > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
+    fi
+
+}
+
+pkg_postinst_${PN} () {
+    if [ -z "$D" ]; then
+        if command -v systemd-tmpfiles >/dev/null; then
+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/krb5.conf
+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+            ${sysconfdir}/init.d/populate-volatile.sh update
+        fi
+    fi
 }
