@@ -17,6 +17,7 @@ SRC_URI = " \
 	file://nginx.conf \
 	file://nginx.init \
 	file://nginx-volatile.conf \
+	file://nginx.service \
 "
 SRC_URI[md5sum] = "5dfaba1cbeae9087f3949860a02caa9f"
 SRC_URI[sha256sum] = "7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9"
@@ -81,6 +82,14 @@ do_install () {
 	install -d ${D}${sysconfdir}/default/volatiles
 	install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
 	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
+
+        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
+            install -d ${D}${systemd_unitdir}/system
+            install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
+            sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+                    -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
+                    ${D}${systemd_unitdir}/system/nginx.service
+        fi
 }
 
 pkg_postinst_${PN} () {
@@ -93,7 +102,9 @@ pkg_postinst_${PN} () {
 	fi
 }
 
-FILES_${PN} += "${localstatedir}/"
+FILES_${PN} += "${localstatedir}/ \
+                ${systemd_unitdir}/system/nginx.service \
+                "
 
 CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
 		${sysconfdir}/nginx/fastcgi.conf\
