@@ -1,0 +1,28 @@
+Upstream-Status:Pending
+
+Index: gst-python-0.10.19/acinclude.m4
+===================================================================
+--- gst-python-0.10.19.orig/acinclude.m4	2010-04-21 15:23:44.000000000 -0700
++++ gst-python-0.10.19/acinclude.m4	2010-11-15 14:43:00.642994001 -0800
+@@ -43,6 +43,13 @@
+ [AC_REQUIRE([AM_PATH_PYTHON])
+ AC_MSG_CHECKING(for headers required to compile python extensions)
+ dnl deduce PYTHON_INCLUDES
++
++AC_ARG_WITH(python-includes,
++	[  --with-python-includes=DIR  path to Python includes], py_exec_prefix=$withval)
++if test x$py_exec_prefix != x; then
++PYTHON_INCLUDES="-I${py_exec_prefix}/include/python${PYTHON_VERSION}"
++py_prefix="${py_exec_prefix}"
++else
+ py_prefix=`$PYTHON -c "import sys; print sys.prefix"`
+ py_exec_prefix=`$PYTHON -c "import sys; print sys.exec_prefix"`
+ if $PYTHON-config --help 2>/dev/null; then
+@@ -53,6 +60,7 @@
+     PYTHON_INCLUDES="$PYTHON_INCLUDES -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
+   fi
+ fi
++fi
+ AC_SUBST(PYTHON_INCLUDES)
+ dnl check if the headers exist:
+ save_CPPFLAGS="$CPPFLAGS"
