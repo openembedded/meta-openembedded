@@ -1,0 +1,28 @@
+From 92e0c611f4969c716616d64df64831387e5b1632 Mon Sep 17 00:00:00 2001
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Date: Fri, 16 Mar 2012 10:24:00 +0000
+Subject: [PATCH] Remove unnecessary rpaths from qml_device example
+
+These can't be valid in any case.
+
+Upstream-Status: Pending
+
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ examples/declarative-systeminfo/device/device.pro |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
+
+diff --git a/examples/declarative-systeminfo/device/device.pro b/examples/declarative-systeminfo/device/device.pro
+index 698e5fb..05be9b7 100644
+--- a/examples/declarative-systeminfo/device/device.pro
++++ b/examples/declarative-systeminfo/device/device.pro
+@@ -17,6 +17,3 @@ symbian {
+ }
+ RESOURCES += device.qrc
+ 
+-QMAKE_LFLAGS_DEBUG += "-Wl,-rpath,/home/user/qt/lib"
+-QMAKE_LFLAGS_RPATH += "-Wl,-rpath,/home/user/qt/lib"
+-QMAKE_LFLAGS_RELEASE += "-Wl,-rpath,/home/user/qt/lib"
+-- 
+1.7.5.4
+

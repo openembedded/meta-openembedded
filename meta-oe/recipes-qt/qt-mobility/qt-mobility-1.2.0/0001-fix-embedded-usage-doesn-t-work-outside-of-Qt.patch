@@ -1,0 +1,73 @@
+From de2b568a4f14f38ae26960f543277bd2ac57c9d6 Mon Sep 17 00:00:00 2001
+From: Alex <qt-info@nokia.com>
+Date: Tue, 10 May 2011 14:54:49 +1000
+Subject: [PATCH] fix !embedded usage (doesn't work outside of Qt)
+
+embedded is part of QT_CONFIG and not CONFIG
+
+Task-number: QTMOBILITY-1586
+---
+Upstream-Status: Backport
+https://qt.gitorious.org/qt-mobility/qt-mobility/commit/de2b568a4f14f38ae26960f543277bd2ac57c9d6
+EB: refreshed the patch for it to apply properly
+
+ plugins/multimedia/gstreamer/gstreamer.pro | 2 +-
+ src/systeminfo/systeminfo.pro              | 6 +++---
+ tests/auto/auto.pro                        | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+Index: qt-mobility-opensource-src-1.2.0/plugins/multimedia/gstreamer/gstreamer.pro
+===================================================================
+--- qt-mobility-opensource-src-1.2.0.orig/plugins/multimedia/gstreamer/gstreamer.pro	2013-09-19 10:34:40.880862884 +0200
++++ qt-mobility-opensource-src-1.2.0/plugins/multimedia/gstreamer/gstreamer.pro	2013-09-19 10:35:22.844862550 +0200
+@@ -85,7 +85,7 @@
+     qgstutils.cpp
+ 
+ 
+-!win32:!embedded:!mac:!symbian:!simulator:!contains(QT_CONFIG, qpa) {
++!win32:!contains(QT_CONFIG,embedded):!mac:!symbian:!simulator:!contains(QT_CONFIG, qpa) {
+     LIBS += -lXv -lX11 -lXext
+ 
+     HEADERS += \
+Index: qt-mobility-opensource-src-1.2.0/src/systeminfo/systeminfo.pro
+===================================================================
+--- qt-mobility-opensource-src-1.2.0.orig/src/systeminfo/systeminfo.pro	2013-09-19 10:34:40.884862884 +0200
++++ qt-mobility-opensource-src-1.2.0/src/systeminfo/systeminfo.pro	2013-09-19 10:36:05.480862210 +0200
+@@ -101,7 +101,7 @@
+             LIBS += -lblkid
+         }
+ 
+-        !embedded:!contains(QT_CONFIG,qpa): {
++        !contains(QT_CONFIG,embedded):!contains(QT_CONFIG,qpa): {
+             LIBS += -lX11 -lXrandr
+         }
+ 
+@@ -154,7 +154,7 @@
+                 #for now... udisks
+             } else {
+                 DEFINES += QT_NO_UDISKS
+-                !embedded:!contains(QT_CONFIG,qpa): LIBS += -lX11 -lXrandr
++                !contains(QT_CONFIG,embedded):!contains(QT_CONFIG,qpa): LIBS += -lX11 -lXrandr
+             }
+ 
+             contains(connman_enabled, yes): {
+@@ -165,7 +165,7 @@
+             }
+         } else {
+             DEFINES += QT_NO_NETWORKMANAGER QT_NO_UDISKS QT_NO_CONNMAN
+-            !embedded:!contains(QT_CONFIG,qpa): LIBS += -lX11 -lXrandr
++            !contains(QT_CONFIG,embedded):!contains(QT_CONFIG,qpa): LIBS += -lX11 -lXrandr
+         }
+      }
+ 
+Index: qt-mobility-opensource-src-1.2.0/tests/auto/auto.pro
+===================================================================
+--- qt-mobility-opensource-src-1.2.0.orig/tests/auto/auto.pro	2013-09-19 10:34:40.884862884 +0200
++++ qt-mobility-opensource-src-1.2.0/tests/auto/auto.pro	2013-09-19 10:35:22.844862550 +0200
+@@ -21,5 +21,5 @@
+ # which require that the autotest is run on the same machine
+ # doing the build - i.e. cross-compilation is not allowed.
+ win32|mac|linux-g++* {
+-    !embedded:!maemo5:!maemo6:SUBDIRS+=host.pro
++    !contains(QT_CONFIG,embedded):!maemo5:!maemo6:SUBDIRS+=host.pro
+ }

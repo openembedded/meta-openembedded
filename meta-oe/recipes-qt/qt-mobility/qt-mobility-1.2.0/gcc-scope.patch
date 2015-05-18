@@ -1,0 +1,48 @@
+
+Fixes issues like below
+
+| qaudiooutput_pulse.cpp: In member function 'bool QPulseAudioOutput::open()':
+| qaudiooutput_pulse.cpp:255:75: error: '::getpid' has not been declared
+| make[3]: *** [../../../build/Debug/qtmedia_pulse/qaudiooutput_pulse.o] Error 1
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Upstream-Status: Pending
+
+Index: qt-mobility-opensource-src-1.2.0/plugins/multimedia/pulseaudio/qaudiooutput_pulse.cpp
+===================================================================
+--- qt-mobility-opensource-src-1.2.0.orig/plugins/multimedia/pulseaudio/qaudiooutput_pulse.cpp	2012-03-31 07:26:24.457018348 -0700
++++ qt-mobility-opensource-src-1.2.0/plugins/multimedia/pulseaudio/qaudiooutput_pulse.cpp	2012-03-31 07:27:53.309022654 -0700
+@@ -46,7 +46,7 @@
+ #include "qaudiodeviceinfo_pulse.h"
+ #include "qpulseaudioengine.h"
+ #include "qpulsehelpers.h"
+-
++#include <unistd.h>
+ QT_BEGIN_NAMESPACE
+ 
+ const int PeriodTimeMs = 20;
+Index: qt-mobility-opensource-src-1.2.0/plugins/multimedia/pulseaudio/qaudioinput_pulse.cpp
+===================================================================
+--- qt-mobility-opensource-src-1.2.0.orig/plugins/multimedia/pulseaudio/qaudioinput_pulse.cpp	2012-03-31 07:29:19.997026831 -0700
++++ qt-mobility-opensource-src-1.2.0/plugins/multimedia/pulseaudio/qaudioinput_pulse.cpp	2012-03-31 07:29:39.541027625 -0700
+@@ -46,6 +46,7 @@
+ #include "qaudiodeviceinfo_pulse.h"
+ #include "qpulseaudioengine.h"
+ #include "qpulsehelpers.h"
++#include <unistd.h>
+ 
+ QT_BEGIN_NAMESPACE
+ 
+Index: qt-mobility-opensource-src-1.2.0/plugins/multimedia/pulseaudio/qpulseaudioengine.cpp
+===================================================================
+--- qt-mobility-opensource-src-1.2.0.orig/plugins/multimedia/pulseaudio/qpulseaudioengine.cpp	2012-03-31 07:33:24.805038719 -0700
++++ qt-mobility-opensource-src-1.2.0/plugins/multimedia/pulseaudio/qpulseaudioengine.cpp	2012-03-31 07:33:46.889039783 -0700
+@@ -46,6 +46,7 @@
+ #include "qaudiodeviceinfo_pulse.h"
+ #include "qaudiooutput_pulse.h"
+ #include "qpulsehelpers.h"
++#include <unistd.h>
+ 
+ QT_BEGIN_NAMESPACE
+ 

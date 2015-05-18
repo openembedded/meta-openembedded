@@ -1,0 +1,38 @@
+Upstream-Status: Inappropriate [configuration]
+
+diff --git a/examples/declarative-camera/declarative-camera.pro b/examples/declarative-camera/declarative-camera.pro
+index 8164fbc..54fd8ad 100644
+--- a/examples/declarative-camera/declarative-camera.pro
++++ b/examples/declarative-camera/declarative-camera.pro
+@@ -5,10 +5,10 @@ TEMPLATE=app
+ 
+ QT += declarative network
+ 
+-!maemo5 {
+-    contains(QT_CONFIG, opengl) {
+-        QT += opengl
+-    }
++contains(QT_CONFIG, opengl): !maemo5 {
++   QT += opengl
++} else {
++   DEFINES += QT_NO_OPENGL
+ }
+ 
+ win32 {
+diff --git a/examples/videographicsitem/videographicsitem.pro b/examples/videographicsitem/videographicsitem.pro
+index 8461beb..eedee2f 100644
+--- a/examples/videographicsitem/videographicsitem.pro
++++ b/examples/videographicsitem/videographicsitem.pro
+@@ -9,7 +9,11 @@ MOBILITY = multimedia
+ 
+ QMAKE_RPATHDIR += $$DESTDIR
+ 
+-!symbian:contains(QT_CONFIG, opengl): QT += opengl
++contains(QT_CONFIG, opengl): !symbian {
++   QT += opengl
++} else {
++   DEFINES += QT_NO_OPENGL
++}
+ 
+ HEADERS   += videoplayer.h \
+              videoitem.h

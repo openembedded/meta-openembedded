@@ -1,0 +1,17 @@
+When building qt-mobility, the qa_configure stage failed because the catalogue /usr/lib
+is used in some Makefiles within configure tests. We manually removed this catalogue.
+
+Upstream-Status: Inappropriate [embedded]
+Signed-off-by: Dmitry Cherukhin <dima_ch@emcraft.com>
+
+--- qt-mobility-opensource-src-1.2.0/configure.orig	2011-05-10 10:06:01.000000000 +0200
++++ qt-mobility-opensource-src-1.2.0/configure	2011-11-08 12:34:56.347645968 +0100
+@@ -583,6 +583,8 @@
+     fi
+ 
+     $QMAKE_EXEC $QMKSPEC "$relpath/config.tests/$2/$2.pro" 2>> "$CONFIG_LOG" >> "$CONFIG_LOG"
++    cp Makefile Makefile.old
++    sed -e 's@-L/usr/lib@@' <Makefile.old >Makefile
+     printf  " ."
+     "$MAKE" clean >> "$CONFIG_LOG"
+     printf "."

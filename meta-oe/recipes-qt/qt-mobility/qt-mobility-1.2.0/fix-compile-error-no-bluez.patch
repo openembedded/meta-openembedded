@@ -1,0 +1,338 @@
+From bb05733bd5a685b00f80ddc73a1b7a9a2ba0eb11 Mon Sep 17 00:00:00 2001
+From: Andrew Stanley-Jones <andrew.stanley-jones@nokia.com>
+Date: Thu, 12 May 2011 13:07:13 +1000
+Subject: [PATCH] Fix compile error if bluez is not installed
+
+Upstream-Status: Backport
+
+Task-number: QTMOBILITY-1576
+---
+ src/connectivity/bluetooth/bluetooth.pri           |    1 +
+ .../bluetooth/qbluetoothdevicediscoveryagent.h     |    2 +-
+ .../bluetooth/qbluetoothdevicediscoveryagent_p.cpp |    2 +-
+ .../bluetooth/qbluetoothdevicediscoveryagent_p.h   |    6 +++---
+ .../bluetooth/qbluetoothlocaldevice_p.h            |    4 ++--
+ .../bluetooth/qbluetoothservicediscoveryagent.h    |    2 +-
+ .../bluetooth/qbluetoothservicediscoveryagent_p.h  |    8 ++++----
+ .../bluetooth/qbluetoothserviceinfo_p.cpp          |    2 +-
+ .../bluetooth/qbluetoothserviceinfo_p.h            |    4 ++--
+ src/connectivity/bluetooth/ql2capserver.h          |    2 +-
+ src/connectivity/bluetooth/ql2capserver_p.cpp      |    2 +-
+ src/connectivity/bluetooth/ql2capserver_p.h        |    6 +++---
+ src/connectivity/bluetooth/qrfcommserver.h         |    2 +-
+ src/connectivity/bluetooth/qrfcommserver_p.cpp     |    2 +-
+ src/connectivity/bluetooth/qrfcommserver_p.h       |    6 +++---
+ tests/tests.pro                                    |    4 +++-
+ 16 files changed, 29 insertions(+), 26 deletions(-)
+
+diff --git a/src/connectivity/bluetooth/bluetooth.pri b/src/connectivity/bluetooth/bluetooth.pri
+index 717a1ad..4fa2c15 100644
+--- a/src/connectivity/bluetooth/bluetooth.pri
++++ b/src/connectivity/bluetooth/bluetooth.pri
+@@ -103,6 +103,7 @@ symbian {
+     }
+ } else:contains(bluez_enabled, yes):contains(QT_CONFIG, dbus) {
+     QT *= dbus
++    DEFINES += QTM_BLUEZ_BLUETOOTH
+ 
+     include(bluez/bluez.pri)
+ 
+diff --git a/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent.h b/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent.h
+index a95c467..00cfd14 100644
+--- a/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent.h
++++ b/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent.h
+@@ -101,7 +101,7 @@ private:
+     Q_DECLARE_PRIVATE(QBluetoothDeviceDiscoveryAgent)
+     QBluetoothDeviceDiscoveryAgentPrivate *d_ptr;
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     Q_PRIVATE_SLOT(d_func(), void _q_deviceFound(const QString &address, const QVariantMap &dict));
+     Q_PRIVATE_SLOT(d_func(), void _q_propertyChanged(const QString &name, const QDBusVariant &value));
+ #endif
+diff --git a/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.cpp b/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.cpp
+index 6edbd16..512002d 100644
+--- a/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.cpp
++++ b/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.cpp
+@@ -69,7 +69,7 @@ void QBluetoothDeviceDiscoveryAgentPrivate::start()
+ void QBluetoothDeviceDiscoveryAgentPrivate::stop()
+ {
+ }
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ void QBluetoothDeviceDiscoveryAgentPrivate::_q_deviceFound(const QString &address,
+                                                            const QVariantMap &dict)
+ {
+diff --git a/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.h b/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.h
+index 0e34e05..700e78d 100644
+--- a/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.h
++++ b/src/connectivity/bluetooth/qbluetoothdevicediscoveryagent_p.h
+@@ -46,7 +46,7 @@
+ 
+ #include <QVariantMap>
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ class OrgBluezManagerInterface;
+ class OrgBluezAdapterInterface;
+ class QDBusVariant;
+@@ -80,7 +80,7 @@ public:
+             QString errorDescription);
+ #endif
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     void _q_deviceFound(const QString &address, const QVariantMap &dict);
+     void _q_propertyChanged(const QString &name, const QDBusVariant &value);
+ #endif
+@@ -100,7 +100,7 @@ private:
+     bool pendingCancel;
+     bool pendingStart;
+ 
+-#if !defined(QT_NO_DBUS)
++#ifdef QTM_BLUEZ_BLUETOOTH
+     OrgBluezManagerInterface *manager;
+     OrgBluezAdapterInterface *adapter;
+ #endif
+diff --git a/src/connectivity/bluetooth/qbluetoothlocaldevice_p.h b/src/connectivity/bluetooth/qbluetoothlocaldevice_p.h
+index 750c286..381d6b5 100644
+--- a/src/connectivity/bluetooth/qbluetoothlocaldevice_p.h
++++ b/src/connectivity/bluetooth/qbluetoothlocaldevice_p.h
+@@ -51,7 +51,7 @@
+ #include <btengsettings.h>
+ #endif
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ #include <QObject>
+ #include <QDBusContext>
+ #include <QDBusObjectPath>
+@@ -68,7 +68,7 @@ QTM_BEGIN_NAMESPACE
+ 
+ class QBluetoothAddress;
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ class QBluetoothLocalDevicePrivate : public QObject,
+                                      protected QDBusContext
+ {
+diff --git a/src/connectivity/bluetooth/qbluetoothservicediscoveryagent.h b/src/connectivity/bluetooth/qbluetoothservicediscoveryagent.h
+index 6279432..7eeccfc 100644
+--- a/src/connectivity/bluetooth/qbluetoothservicediscoveryagent.h
++++ b/src/connectivity/bluetooth/qbluetoothservicediscoveryagent.h
+@@ -105,7 +105,7 @@ private:
+     Q_PRIVATE_SLOT(d_func(), void _q_deviceDiscovered(const QBluetoothDeviceInfo &info))
+     Q_PRIVATE_SLOT(d_func(), void _q_deviceDiscoveryFinished())
+     Q_PRIVATE_SLOT(d_func(), void _q_serviceDiscoveryFinished())
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     Q_PRIVATE_SLOT(d_func(), void _q_discoveredServices(QDBusPendingCallWatcher*))
+     Q_PRIVATE_SLOT(d_func(), void _q_createdDevice(QDBusPendingCallWatcher*))
+ #endif
+diff --git a/src/connectivity/bluetooth/qbluetoothservicediscoveryagent_p.h b/src/connectivity/bluetooth/qbluetoothservicediscoveryagent_p.h
+index 5e7da43..f25c293 100644
+--- a/src/connectivity/bluetooth/qbluetoothservicediscoveryagent_p.h
++++ b/src/connectivity/bluetooth/qbluetoothservicediscoveryagent_p.h
+@@ -53,7 +53,7 @@
+ #include <btsdp.h>
+ #endif
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ class OrgBluezManagerInterface;
+ class OrgBluezAdapterInterface;
+ class OrgBluezDeviceInterface;
+@@ -99,7 +99,7 @@ public:
+     void _q_deviceDiscoveryFinished();
+     void _q_deviceDiscovered(const QBluetoothDeviceInfo &info);
+     void _q_serviceDiscoveryFinished();
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     void _q_discoveredServices(QDBusPendingCallWatcher *watcher);
+     void _q_createdDevice(QDBusPendingCallWatcher *watcher);
+ #endif
+@@ -123,7 +123,7 @@ private:
+ #ifdef QTM_SYMBIAN_BLUETOOTH
+     void startL(const QBluetoothAddress &address);
+     void initL(const QBluetoothAddress &address);
+-#elif !defined(QT_NO_DBUS)
++#elif defined(QTM_BLUEZ_BLUETOOTH)
+     QVariant readAttributeValue(QXmlStreamReader &xml);
+ #endif
+ 
+@@ -153,7 +153,7 @@ private:
+     TSdpAttributeID m_currentAttributeId;
+ 
+     QStack<QVariant> m_stack;
+-#elif !defined(QT_NO_DBUS)
++#elif defined(QTM_BLUEZ_BLUETOOTH)
+     OrgBluezManagerInterface *manager;
+     OrgBluezAdapterInterface *adapter;
+     OrgBluezDeviceInterface *device;
+diff --git a/src/connectivity/bluetooth/qbluetoothserviceinfo_p.cpp b/src/connectivity/bluetooth/qbluetoothserviceinfo_p.cpp
+index 814458c..dd96dcc 100644
+--- a/src/connectivity/bluetooth/qbluetoothserviceinfo_p.cpp
++++ b/src/connectivity/bluetooth/qbluetoothserviceinfo_p.cpp
+@@ -79,7 +79,7 @@ void QBluetoothServiceInfoPrivate::removeRegisteredAttribute(quint16 attributeId
+     Q_UNUSED(attributeId);
+ }
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ bool QBluetoothServiceInfoPrivate::registerService() const
+ {
+     return false;
+diff --git a/src/connectivity/bluetooth/qbluetoothserviceinfo_p.h b/src/connectivity/bluetooth/qbluetoothserviceinfo_p.h
+index 5be7341..8e4254c 100644
+--- a/src/connectivity/bluetooth/qbluetoothserviceinfo_p.h
++++ b/src/connectivity/bluetooth/qbluetoothserviceinfo_p.h
+@@ -72,7 +72,7 @@ public:
+ 
+     bool ensureSdpConnection() const;
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     bool registerService() const;
+ #endif
+ 
+@@ -89,7 +89,7 @@ public:
+     mutable TSdpServRecordHandle serviceRecord;
+ #endif
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     mutable OrgBluezServiceInterface *service;
+     mutable quint32 serviceRecord;
+     mutable bool registered;
+diff --git a/src/connectivity/bluetooth/ql2capserver.h b/src/connectivity/bluetooth/ql2capserver.h
+index 99c20a5..bed65a3 100644
+--- a/src/connectivity/bluetooth/ql2capserver.h
++++ b/src/connectivity/bluetooth/ql2capserver.h
+@@ -97,7 +97,7 @@ private:
+     Q_PRIVATE_SLOT(d_func(), void _q_disconnected())
+ #endif //QTM_SYMBIAN_BLUETOOTH
+     
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     Q_PRIVATE_SLOT(d_func(), void _q_newConnection())
+ #endif
+ 
+diff --git a/src/connectivity/bluetooth/ql2capserver_p.cpp b/src/connectivity/bluetooth/ql2capserver_p.cpp
+index 3a2199f..f19977e 100644
+--- a/src/connectivity/bluetooth/ql2capserver_p.cpp
++++ b/src/connectivity/bluetooth/ql2capserver_p.cpp
+@@ -101,7 +101,7 @@ QBluetooth::SecurityFlags QL2capServer::securityFlags() const
+ 
+ 
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ void QL2capServerPrivate::_q_newConnection()
+ {
+ }
+diff --git a/src/connectivity/bluetooth/ql2capserver_p.h b/src/connectivity/bluetooth/ql2capserver_p.h
+index b5e76d9..2823106 100644
+--- a/src/connectivity/bluetooth/ql2capserver_p.h
++++ b/src/connectivity/bluetooth/ql2capserver_p.h
+@@ -50,7 +50,7 @@
+ #include <bt_sock.h>
+ #endif //QTM_SYMBIAN_BLUETOOTH
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ QT_FORWARD_DECLARE_CLASS(QSocketNotifier)
+ #endif
+ 
+@@ -82,7 +82,7 @@ public:
+     void _q_disconnected();
+ #endif //QTM_SYMBIAN_BLUETOOTH
+     
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     void _q_newConnection();
+ #endif
+ 
+@@ -103,7 +103,7 @@ protected:
+     QL2capServer *q_ptr;
+ 
+ private:
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     QSocketNotifier *socketNotifier;
+ #endif
+ };
+diff --git a/src/connectivity/bluetooth/qrfcommserver.h b/src/connectivity/bluetooth/qrfcommserver.h
+index 3f348dd..7974ba6 100644
+--- a/src/connectivity/bluetooth/qrfcommserver.h
++++ b/src/connectivity/bluetooth/qrfcommserver.h
+@@ -97,7 +97,7 @@ private:
+     Q_PRIVATE_SLOT(d_func(), void _q_disconnected())
+ #endif //QTM_SYMBIAN_BLUETOOTH  
+     
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     Q_PRIVATE_SLOT(d_func(), void _q_newConnection())
+ #endif
+ };
+diff --git a/src/connectivity/bluetooth/qrfcommserver_p.cpp b/src/connectivity/bluetooth/qrfcommserver_p.cpp
+index f8145d9..eb14d64 100644
+--- a/src/connectivity/bluetooth/qrfcommserver_p.cpp
++++ b/src/connectivity/bluetooth/qrfcommserver_p.cpp
+@@ -90,7 +90,7 @@ quint16 QRfcommServer::serverPort() const
+ }
+ 
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ void QRfcommServerPrivate::_q_newConnection()
+ {
+ }
+diff --git a/src/connectivity/bluetooth/qrfcommserver_p.h b/src/connectivity/bluetooth/qrfcommserver_p.h
+index da6e28b..af40df7 100644
+--- a/src/connectivity/bluetooth/qrfcommserver_p.h
++++ b/src/connectivity/bluetooth/qrfcommserver_p.h
+@@ -51,7 +51,7 @@
+ #include <bt_sock.h>
+ #endif
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+ QT_FORWARD_DECLARE_CLASS(QSocketNotifier)
+ #endif
+ 
+@@ -83,7 +83,7 @@ public:
+     void _q_disconnected();
+ #endif //QTM_SYMBIAN_BLUETOOTH
+ 
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     void _q_newConnection();
+ #endif
+ 
+@@ -102,7 +102,7 @@ protected:
+     QRfcommServer *q_ptr;
+ 
+ private:
+-#ifndef QT_NO_DBUS
++#ifdef QTM_BLUEZ_BLUETOOTH
+     QSocketNotifier *socketNotifier;
+ #endif
+ };
+diff --git a/tests/tests.pro b/tests/tests.pro
+index 2f2c355..4800e5e 100644
+--- a/tests/tests.pro
++++ b/tests/tests.pro
+@@ -16,7 +16,9 @@ contains(mobility_modules,systeminfo): SUBDIRS += sysinfo-tester
+ contains(mobility_modules,connectivity) {
+     SUBDIRS += nfctestserver
+ 
+-    linux*:!linux-armcc: SUBDIRS += btclient
++    linux*:!linux-armcc:contains(bluez_enabled, yes):contains(QT_CONFIG, dbus) {
++        SUBDIRS += btclient
++    }
+ }
+ 
+ symbian {
+-- 
+1.7.1
+

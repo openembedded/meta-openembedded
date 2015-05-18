@@ -1,0 +1,34 @@
+Upstream-Status: Submitted [QTMOBILITY-1611]
+
+From b308508b49afa9a129b4e4589c57cd107d1320b8 Mon Sep 17 00:00:00 2001
+From: Dmytro Poplavskiy <dmytro.poplavskiy@nokia.com>
+Date: Fri, 6 May 2011 10:35:11 +1000
+Subject: [PATCH] gstvideoconnector: fixed buffers allocation
+
+It should not be necessary, but at least theora video decoder doesn't
+iniatilize *buf, while gst_pad_alloc_buffer relies on buf being NULL.
+
+Task-number: QTMOBILITY-1611
+Reviewed-by: Michael Goddard
+---
+ plugins/multimedia/gstreamer/gstvideoconnector.c |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/plugins/multimedia/gstreamer/gstvideoconnector.c b/plugins/multimedia/gstreamer/gstvideoconnector.c
+index ddf68e0..9f8ceae 100644
+--- a/plugins/multimedia/gstreamer/gstvideoconnector.c
++++ b/plugins/multimedia/gstreamer/gstvideoconnector.c
+@@ -186,6 +186,10 @@ gst_video_connector_buffer_alloc (GstPad * pad, guint64 offset, guint size,
+     GstFlowReturn res = GST_FLOW_OK;
+     element = GST_VIDEO_CONNECTOR (GST_PAD_PARENT (pad));
+ 
++    if (!buf)
++        return GST_FLOW_ERROR;
++    *buf = NULL;
++
+     GST_OBJECT_LOCK (element);
+     gst_object_ref(element->srcpad);
+     GST_OBJECT_UNLOCK (element);
+-- 
+1.7.4.1
+

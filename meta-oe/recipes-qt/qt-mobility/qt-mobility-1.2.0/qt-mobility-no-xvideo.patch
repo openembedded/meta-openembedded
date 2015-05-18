@@ -1,0 +1,26 @@
+QMake pro files don't explicitly define QT_NO_XVIDEO if the
+configuration lacks xvideo, but plugins code relies on this define.
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Upstream-Status: Inappropriate [configuration]
+---
+ plugins/multimedia/gstreamer/gstreamer.pro | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/plugins/multimedia/gstreamer/gstreamer.pro b/plugins/multimedia/gstreamer/gstreamer.pro
+--- a/plugins/multimedia/gstreamer/gstreamer.pro
++++ b/plugins/multimedia/gstreamer/gstreamer.pro
+@@ -19,6 +19,10 @@ LIBS += \
+     -lasound
+ }
+ 
++unix:!contains(QT_CONFIG, xvideo) {
++    DEFINES += QT_NO_XVIDEO
++}
++
+ CONFIG += link_pkgconfig
+ 
+ PKGCONFIG += \
+-- 
+1.8.1.2
+
