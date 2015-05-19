@@ -8,6 +8,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
 
 SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz \
+           file://libyaml-CVE-2014-9130.patch \
           "
 
 SRC_URI[md5sum] = "5fe00cda18ca5daeb43762b80c38e06e"
