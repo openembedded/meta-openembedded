@@ -8,7 +8,7 @@ SECTION = "network"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
 
-DEPENDS = "libpcap"
+DEPENDS = "linux-libc-headers libpcap"
 
 inherit autotools
 
@@ -30,7 +30,7 @@ S = "${WORKDIR}/ptpd-${PV}"
 
 EXTRA_OEMAKE = ""
 
-EXTRA_OECONF += "--disable-snmp"
+EXTRA_OECONF += "--disable-snmp --with-pcap-config=no"
 
 do_install() {
     install -d ${D}${bindir} ${D}${mandir}/man8
