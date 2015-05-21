@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "694a1747a96385b89e93f43343bf35cee5c8c73353a83814106911c99f
 inherit autotools gettext
 
 EXTRA_OECONF = "--disable-ssl --disable-kerberos --enable-force_localhost"
-FILES_${PN}-dbg += "/usr/lib/lprng/filters/.debug"
+FILES_${PN}-dbg += "${libdir}/lprng/filters/.debug"
 
 do_install_append() {
     mv ${D}/etc/printcap.sample ${D}/etc/printcap
