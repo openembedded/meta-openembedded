@@ -18,7 +18,7 @@ inherit autotools
 
 DEPENDS += "ncurses"
 
-SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/${PV}/${PN}-${PV}.tar.gz"
+SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/${PV}/${BP}.tar.gz"
 
 SRC_URI[md5sum] = "8f9409a238ee313a96f9f87fe0f3b176"
 SRC_URI[sha256sum] = "4889d091f05aa0845384b1e4965aa31d2b20911fb2c001b2cdcffbcb7212d3af"
