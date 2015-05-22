@@ -57,6 +57,16 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.tar.bz2 \
            file://0001-avcodec-smc-fix-off-by-1-error.patch \
            file://0002-avcodec-mjpegdec-check-bits-per-pixel-for-changes-si.patch \
            file://libav-9.patch \
+           file://gst-ffmpeg-fix-CVE-2011-4352.patch \
+           file://gst-ffmpeg-fix-CVE-2014-7933.patch \
+           file://gst-ffmpeg-fix-CVE-2014-8542.patch \
+           file://gst-ffmpeg-fix-CVE-2014-8543.patch \
+           file://gst-ffmpeg-fix-CVE-2014-8544.patch \
+           file://gst-ffmpeg-fix-CVE-2014-8545.patch \
+           file://gst-ffmpeg-fix-CVE-2014-8546.patch \
+           file://gst-ffmpeg-fix-CVE-2014-8547.patch \
+           file://gst-ffmpeg-fix-CVE-2014-9318.patch \
+           file://gst-ffmpeg-fix-CVE-2014-9603.patch \
 "
 
 SRC_URI[md5sum] = "7f5beacaf1312db2db30a026b36888c4"
