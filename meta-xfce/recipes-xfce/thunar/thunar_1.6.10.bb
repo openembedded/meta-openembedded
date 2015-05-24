@@ -4,11 +4,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui xfconf libsm dbus-glib startup-notification libnotify xfce4-panel udev"
 
-inherit xfce gtk-doc
+inherit xfce
 
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
-SRC_URI[md5sum] = "d7c6ae92f180c1d8d5b4c3f368142252"
-SRC_URI[sha256sum] = "4079ccffe990cdccee48a0ae200d8a5bc9335c34721d7923b375795940cf79bb"
+SRC_URI[md5sum] = "3089e1dca6e408641b07cd9c759dea5e"
+SRC_URI[sha256sum] = "7e9d24067268900e5e44d3325e60a1a2b2f8f556ec238ec12574fbea15fdee8a"
 
 S = "${WORKDIR}/Thunar-${PV}/"
 
