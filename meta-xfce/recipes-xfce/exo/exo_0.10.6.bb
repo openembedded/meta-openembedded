@@ -17,8 +17,8 @@ SRC_URI_append_class-native = " \
     file://reduce-build-to-exo-csource-only.patch \
 "
 
-SRC_URI[md5sum] = "fe54dad8b897af36628da46b33844f95"
-SRC_URI[sha256sum] = "cced5fdbc0b61a5d976210ff71ecdd81b89fcd15e5860a44f50da7b83fb2deaa"
+SRC_URI[md5sum] = "895e4f38d2cfe58d69679e2902a335a5"
+SRC_URI[sha256sum] = "1cc0e5a432e050a5e5aa64d126b988f4440da4f27474aaf42a4d8e13651d0752"
 
 PACKAGES =+ "exo-csource"
 
