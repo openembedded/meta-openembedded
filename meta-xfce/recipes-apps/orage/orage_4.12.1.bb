@@ -6,14 +6,14 @@ DEPENDS = "gtk+ xfce4-panel libical popt"
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "b33fa272d92f539a224a7a40b1926dfc"
-SRC_URI[sha256sum] = "6cb854f3437e31bab23abfce97bd10afa1636a9a1480d80e14e26c85d06be7c0"
+SRC_URI[md5sum] = "2b7f5d38cb5c6edbcc65d0f52a742e46"
+SRC_URI[sha256sum] = "3cf9aa441ae83c8688865f82217025cdf3ebaa152cce4571777b8c2aa8dd9062"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
 
 PACKAGES =+ "xfce4-orageclock-plugin"
 FILES_${PN} += "${datadir}/dbus-1"
-FILES_${PN}-dbg += "${libdir}/orage/xfce4/panel-plugins/.debug"
-FILES_xfce4-orageclock-plugin = "${libdir}/orage/xfce4/panel-plugins/xfce4-orageclock-plugin ${datadir}/xfce4/panel-plugins"
+FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug"
+FILES_xfce4-orageclock-plugin = "${libdir}/xfce4/panel/plugins/*.so ${datadir}/xfce4/panel/plugins"
 
