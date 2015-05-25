@@ -6,8 +6,8 @@ DEPENDS = "glib-2.0 gtk+ libxfce4util libxfce4ui libwnck xfconf dbus-glib thunar
 
 inherit xfce
 
-SRC_URI[md5sum] = "d14545baf39678d3b1c7280f71e9d160"
-SRC_URI[sha256sum] = "6e7a8b87317762214b6407576f6e2c1efcc176c136b4c7b869d18a74c87b7fc7"
+SRC_URI[md5sum] = "9a29c8e6b8a931fecd29f1ea736a6a70"
+SRC_URI[sha256sum] = "c9788883163b57bac39d12e5f8310c869d176454879defb78b67f8e9f1ad5225"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
