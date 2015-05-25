@@ -8,8 +8,8 @@ DEPENDS = "openssl"
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
     file://enable-armv5e-build.patch \
 "
-SRC_URI[md5sum] = "955448ae6c50a56da3f8992114563b71"
-SRC_URI[sha256sum] = "e65d83c6f2c874e28f65c5e192ac0acd2bbb52bfcf9d77e33442d6765a3eb9da"
+SRC_URI[md5sum] = "c2b4deea212c0b7c2f86368c65fab312"
+SRC_URI[sha256sum] = "3298d0997613a04ac64343e8316da134d04588132554ae402eb344e3369ec912"
 
 S = "${WORKDIR}/node-v${PV}"
 
