@@ -7,8 +7,8 @@ DEPENDS = "virtual/libx11 libxpm gtk+ libxfce4util libxfce4ui xfconf libwnck dbu
 inherit xfce update-alternatives
 
 SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
-SRC_URI[md5sum] = "3728768dd9ea0de624cd3efc5dcccbca"
-SRC_URI[sha256sum] = "5bb5f72b41060d10bd3823f8b69abcd462bbd8853fdf9c82041450ae68e7d75a"
+SRC_URI[md5sum] = "197ef087ca6a263627f1bea6d5a79d6f"
+SRC_URI[sha256sum] = "f4a988fbc4e0df7e8583c781d271559e56fd28696092f94ae052e9e6edb09eac"
 
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
