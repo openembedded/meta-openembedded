@@ -1,5 +1,5 @@
 SUMMARY = "Lightweight crypto and SSL/TLS library"
-DESCRIPTION = "PolarSSL is a lean open source crypto library         \
+DESCRIPTION = "mbedtls is a lean open source crypto library          \
 for providing SSL and TLS support in your programs. It offers        \
 an intuitive API and documented header files, so you can actually    \
 understand what the code does. It features:                          \
@@ -23,13 +23,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
 SECTION = "libdevel"
 
-SRC_URI = "https://polarssl.org/download/polarssl-${PV}-gpl.tgz"
+SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-gpl.tgz"
 
-SRC_URI[md5sum] = "d1a2b4f21727e888f143414d2e3144e6"
-SRC_URI[sha256sum] = "318171db41335cacbb5b0047c94f1faf91442ab70a223b5223436703c9406ff1"
+SRC_URI[md5sum] = "19ebbc96feceb430ad958dfe89cb633f"
+SRC_URI[sha256sum] = "746fd88e0c6623691fc56c4eed52e40a57b2da0ac80f6dd8995094aa6adb407e"
 
 DEPENDS = "openssl"
 RDEPENDS_${PN} += "libcrypto"
+PROVIDES += "polarssl"
+RPROVIDES_${PN} = "polarssl"
 EXTRA_OECMAKE = "-DUSE_SHARED_POLARSSL_LIBRARY=on -DLIB_INSTALL_DIR=${baselib}"
 
 inherit cmake
