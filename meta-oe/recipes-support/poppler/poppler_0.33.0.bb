@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = " \
     http://poppler.freedesktop.org/${BP}.tar.xz \
+    file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
 "
 SRC_URI[md5sum] = "69927d1614d6704021c0b0dd0ee6a852"
 SRC_URI[sha256sum] = "a5fa6d7f7dc5382b48caca82b147c54bdffda02698611af76db5326ba64995a6"
@@ -18,7 +19,7 @@ PACKAGECONFIG[png] = "--enable-libpng,--disable-libpng,libpng"
 PACKAGECONFIG[tiff] = "--enable-libtiff,--disable-libtiff,tiff"
 PACKAGECONFIG[curl] = "--enable-libcurl,--disable-libcurl,curl"
 PACKAGECONFIG[openjpeg] = "--enable-libopenjpeg=openjpeg2,--disable-libopenjpeg,openjpeg"
-PACKAGECONFIG[qt5] = "--enable-poppler-qt5,--disable-poppler-qt5,qtbase"
+PACKAGECONFIG[qt5] = "--enable-poppler-qt5 --with-moc-qt5=${STAGING_BINDIR_NATIVE}/qt5/moc,--disable-poppler-qt5,qtbase"
 
 EXTRA_OECONF = "\
     --enable-xpdf-headers \
