@@ -1,0 +1,29 @@
+From c46d4a745dc8c5cb4cfc0c94863e555387e9af75 Mon Sep 17 00:00:00 2001
+From: Zdenek Kabelac <zkabelac@redhat.com>
+Date: Mon, 16 Jun 2014 12:41:30 +0200
+Subject: [PATCH] snapshot: check snapshot exists
+
+Return 0 if the LV is not even snapshot.
+
+Upstream-Status: backport
+Adapt the patch for backporting to an older version.
+Signed-off-by: Li Zhou <li.zhou@windriver.com>
+---
+ lib/metadata/snapshot_manip.c |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Index: LVM2.2.02.97/lib/metadata/snapshot_manip.c
+===================================================================
+--- LVM2.2.02.97.orig/lib/metadata/snapshot_manip.c
++++ LVM2.2.02.97/lib/metadata/snapshot_manip.c
+@@ -68,8 +68,9 @@ struct lv_segment *find_merging_cow(cons
+
+ int lv_is_merging_cow(const struct logical_volume *snapshot)
+ {
++	struct lv_segment *snap_seg = find_cow(snapshot);
+	/* checks lv_segment's status to see if cow is merging */
+-	return (find_cow(snapshot)->status & MERGING) ? 1 : 0;
++	return (snap_seg && (snap_seg->status & MERGING)) ? 1 : 0;
+ }
+
+ /* Given a cow LV, return the snapshot lv_segment that uses it */

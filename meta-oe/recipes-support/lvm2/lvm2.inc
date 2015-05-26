@@ -11,7 +11,8 @@ S = "${WORKDIR}/LVM2.${PV}"
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://0001-Replace-CPPFunction-with-rl_completion_func_t.patch \
            file://mlock-ignore-vectors-gate_vma.patch \
-           file://lvm.conf"
+           file://lvm.conf \
+           file://0001-snapshot-check-snapshot-exists.patch"
 
 PACKAGECONFIG ??= "readline"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
