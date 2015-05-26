@@ -19,16 +19,16 @@ LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
 SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-m4-pthread.patch \
     file://kill-icu.patch \
-    file://gnutls-Avoid-use-of-deprecated-function.patch \
     file://openldap-2.4.28-gnutls-gcrypt.patch \
-    file://ITS-7723-fix-reference-counting.patch \
     file://use-urandom.patch \
     file://initscript \
     file://slapd.service \
     file://thread_stub.patch \
+    file://0001-ITS-8027-require-non-empty-AttributeList.patch \
+    file://0001-ITS-8046-fix-vrFilter_free.patch \
 "
-SRC_URI[md5sum] = "b0d5ee4b252c841dec6b332d679cf943"
-SRC_URI[sha256sum] = "8267c87347103fef56b783b24877c0feda1063d3cb85d070e503d076584bf8a7"
+SRC_URI[md5sum] = "423c1f23d2a0cb96b3e9baf7e9d7dda7"
+SRC_URI[sha256sum] = "d12611a5c25b6499293c2bb7b435dc2b174db73e83f5a8cb7e34f2ce5fa6dadb"
 
 DEPENDS = "util-linux groff-native"
 
@@ -53,7 +53,7 @@ EXTRA_OECONF += "--with-yielding-select=yes"
 EXTRA_OECONF += "--enable-dynamic"
 
 PACKAGECONFIG ??= "gnutls modules \
-                   bdb hdb ldap meta monitor null passwd shell proxycache dnssrv \
+                   ldap meta monitor null passwd shell proxycache dnssrv \
 "
 #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
 PACKAGECONFIG[gnutls] = "--with-tls=gnutls,,gnutls libgcrypt"
