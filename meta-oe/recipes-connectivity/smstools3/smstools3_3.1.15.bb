@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
 HOMEPAGE = "http://smstools3.kekekasvi.com"
 
 SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
-           file://sms_binpath_and_psops.patch"
+           file://sms_binpath_and_psops.patch \
+           file://fix-makefile-override.patch"
 
 SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
 SRC_URI[sha256sum] = "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
