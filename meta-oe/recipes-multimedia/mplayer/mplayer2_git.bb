@@ -121,6 +121,7 @@ PACKAGECONFIG[postproc] = ",--disable-libpostproc,libpostproc"
 PACKAGECONFIG[vorbis] = ",--disable-libvorbis,libvorbis"
 PACKAGECONFIG[portaudio] = ",--disable-portaudio,portaudio-v19"
 PACKAGECONFIG[mpg123] = ",--disable-mpg123,mpg123"
+PACKAGECONFIG[directfb] = "--enable-directfb,--disable-directfb,directfb"
 
 FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O4 -ffast-math"
 BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
@@ -134,7 +135,7 @@ do_configure() {
     sed -i 's|/usr/\S*lib[\w/]*||g' ${S}/configure
     sed -i 's|_install_strip="-s"|_install_strip=""|g' ${S}/configure
     sed -i 's|HOST_CC|BUILD_CC|' ${S}/Makefile
-
+    sed -i 's|extra_cflags="-I. $extra_cflags"|extra_cflags="-I. -I${STAGING_INCDIR}/directfb $extra_cflags"|g' ${S}/configure
     export SIMPLE_TARGET_SYS="$(echo ${TARGET_SYS} | sed s:${TARGET_VENDOR}::g)"
     ./configure ${EXTRA_OECONF}
     
