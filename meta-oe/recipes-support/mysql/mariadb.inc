@@ -11,6 +11,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
            file://my.cnf \
            file://mysqld.service \
            file://configure.cmake-fix-valgrind.patch \
+           file://fix-CVE-2015-2305.patch \
           "
 
 SRC_URI[md5sum] = "d2415efc6a6d73d7a58f3c79bb42f2e8"
