@@ -10,6 +10,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
            file://fix-mysqlclient-r-version.patch \
            file://my.cnf \
            file://mysqld.service \
+           file://fix-CVE-2015-2305.patch \
           "
 
 SRC_URI[md5sum] = "917a807d8cf2c8ef9deedd2a89b6decd"
