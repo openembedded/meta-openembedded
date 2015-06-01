@@ -19,8 +19,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://remove-python2.3.patch \
             "
 
-SRC_URI[md5sum] = "e5261114a6a6ed10caf570d3239ed5b7"
-SRC_URI[sha256sum] = "1a6a8aa62c32c04932b902d17fc1864ee8f3fba03012bd25f709aa65e7e9b0f2"
+SRC_URI[md5sum] = "4007c390323d840f26c2e0f43c5c81a3"
+SRC_URI[sha256sum] = "5111f820adc6fbca997a58d4b2fa186dac6cded9cff0e70724f8cae6021123d9"
 
 inherit perlnative update-rc.d
 
