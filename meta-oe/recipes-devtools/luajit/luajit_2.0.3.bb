@@ -25,8 +25,8 @@ EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
                 TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" \
                 TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}"'
 EXTRA_OEMAKE_append_powerpc = ' HOST_CC="${BUILD_CC} -m32"'
+EXTRA_OEMAKE_append_x86 = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_x86-64 = ' HOST_CC="${BUILD_CC}"'
-EXTRA_OEMAKE_append_i586 = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_powerpc64 = ' HOST_CC="${BUILD_CC}"'
 EXTRA_OEMAKE_append_arm = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_mips64 = ' HOST_CC="${BUILD_CC} -m32"'
