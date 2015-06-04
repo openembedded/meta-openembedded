@@ -8,7 +8,7 @@ SRCREV = "b41fd0bc9514ff61bb2a50d957efe4155fa3e6a8"
 
 # webkit-efl isn't available for < armv7a
 COMPATIBLE_MACHINE = "(-)"
-COMPATIBLE_MACHINE_i586 = "(.*)"
+COMPATIBLE_MACHINE_x86 = "(.*)"
 COMPATIBLE_MACHINE_x86-64 = "(.*)"
 COMPATIBLE_MACHINE_armv7a = "(.*)"
 
