@@ -174,7 +174,7 @@ FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
 # Avoid warnings about ha_xtradb.so.0.0.0 and ha_innodb_plugin.so.0.0.0
 # which are intentionally non-PIC on 32-bit x86 (see e.g.
 # storage/xtradb/plug.in in the source)
-INSANE_SKIP_libmysqlclient_append_i586 = " textrel"
+INSANE_SKIP_libmysqlclient_append_x86 = " textrel"
 
 FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
 FILES_libmysqlclient-r-dev = "\
