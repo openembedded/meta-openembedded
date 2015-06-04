@@ -36,9 +36,7 @@ FILES_${PN}-dbg += "${libexecdir}/emacs/*/*/.debug ${datadir}/emacs/*/*/.debug"
 TREEDIR = "${WORKDIR}/qemu-treedir"
 
 QEMUARCH= "${TARGET_ARCH}"
-QEMUARCH_i486 = "i386"
-QEMUARCH_i586 = "i386"
-QEMUARCH_i686 = "i386"
+QEMUARCH_x86 = "i386"
 
 # Large stack is required at least on x86_64 host, otherwise random segfaults appear:
 QEMU = "qemu-${QEMUARCH} ${QEMU_OPTIONS} -s 1048576 -L ${TREEDIR} "
