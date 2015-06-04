@@ -52,7 +52,7 @@ do_configure_prepend_armv5() {
 
 # and disabled LLINT currently isn't supported, so restrict to armv7a and x86*
 COMPATIBLE_MACHINE = "(-)"
-COMPATIBLE_MACHINE_i586 = "(.*)"
+COMPATIBLE_MACHINE_x86 = "(.*)"
 COMPATIBLE_MACHINE_x86-64 = "(.*)"
 COMPATIBLE_MACHINE_armv7a = "(.*)"
 
