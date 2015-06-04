@@ -16,8 +16,8 @@ inherit pkgconfig binconfig
 BBCLASSEXTEND = "native"
 
 do_configure_prepend() {
-    sed -i -e s:/usr/local:${prefix}:g ${S}/Makefile
-    sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
+    sed -i 's:PREFIX= /usr/local:PREFIX= ${prefix}:g' ${S}/Makefile
+    sed -i 's:MULTILIB= lib:MULTILIB= ${base_libdir}:g' ${S}/Makefile
 }
 
 EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
