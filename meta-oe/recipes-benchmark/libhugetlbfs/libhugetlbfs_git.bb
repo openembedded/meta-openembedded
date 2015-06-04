@@ -1,4 +1,5 @@
 SUMMARY = "A library which provides easy access to huge pages of memory"
+HOMEPAGE = "https://github.com/libhugetlbfs/libhugetlbfs"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
@@ -10,7 +11,8 @@ PV = "2.18"
 PE = "1"
 
 SRCREV = "ea3f6b273f535aab38cefae30030774457bbbfe6"
-SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
+SRC_URI = " \
+    git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
     file://tests-Makefile-install-static-4G-edge-testcases.patch \
