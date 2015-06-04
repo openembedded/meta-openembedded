@@ -13,19 +13,21 @@ been installed, so that others can install the exact same gems."
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=196bb963e601609817d7e9ac9a64a867"
 
-PR = "r0"
+SRCREV = "06dc8472b9142fd6aaefff780d6d252c20dc2a04"
 
-PV = "1.6.2"
-SRCREV = "06e3647c117da210ffd15a174624497830addd7b"
+BRANCH = "1-9-stable"
+PV = "1.9.4"
 
 S = "${WORKDIR}/git"
 
 SRC_URI = " \
-    git://github.com/bundler/bundler.git \
+    git://github.com/bundler/bundler.git;branch=${BRANCH} \
     "
 
 inherit ruby
 
 FILES_${PN} += "${libdir}/ruby/gems"
+
+RDEPENDS_${PN} = "git"
 
 BBCLASSEXTEND = "native"
