@@ -60,6 +60,9 @@ do_configure_prepend() {
     sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" ${S}/tools/llvm-config/llvm-config.cpp
     sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
 
+    # Fix the hardcoded libdir in llvm-config
+    sed -i 's:/lib\>:${base_libdir}:g' ${S}/tools/llvm-config/llvm-config.cpp
+
     # Fails to build unless using separate directory from source
     mkdir -p ${LLVM_BUILD_DIR}
     cd ${LLVM_BUILD_DIR}
@@ -67,6 +70,10 @@ do_configure_prepend() {
 
 do_compile() {
     cd ${LLVM_BUILD_DIR}
+
+    # Fix libdir for multilib
+    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)${base_libdir}:g' Makefile.config
+
     oe_runmake \
         AR="${BUILD_AR}" \
         CC="${BUILD_CC}" \
@@ -127,7 +134,7 @@ FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
 
 PACKAGES_DYNAMIC = "^libllvm-.*$"
 
-INSANE_SKIP_libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
+INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
 
 python llvm_populate_packages() {
     libdir = bb.data.expand('${libdir}', d)
