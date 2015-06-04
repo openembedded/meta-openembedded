@@ -61,19 +61,16 @@ do_install_append_class-native() {
     # /usr/bin/npm is symlink to /usr/lib/node_modules/npm/bin/npm-cli.js
     # use sed on npm-cli.js because otherwise symlink is replaced with normal file and
     # npm-cli.js continues to use old shebang
-    sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${libdir}/node_modules/npm/bin/npm-cli.js
+    sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
 }
 
 do_install_append_class-target() {
-    sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${libdir}/node_modules/npm/bin/npm-cli.js
+    sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
 }
 
 PACKAGES =+ "${PN}-npm"
-FILES_${PN}-npm = "${libdir}/node_modules ${bindir}/npm"
+FILES_${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm"
 RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils"
-
-PACKAGES =+ "${PN}-dtrace"
-FILES_${PN}-dtrace = "${libdir}/dtrace"
 
 PACKAGES =+ "${PN}-systemtap"
 FILES_${PN}-systemtap = "${datadir}/systemtap"
