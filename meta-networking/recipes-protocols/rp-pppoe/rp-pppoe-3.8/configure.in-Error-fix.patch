@@ -1,0 +1,57 @@
+From a546942a784a177080d9722dda873bfd7416ad41 Mon Sep 17 00:00:00 2001
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+Date: Fri, 10 Apr 2015 13:13:06 +0900
+Subject: [PATCH] configure.in: Error fix.
+
+the error is: conftest.c:9:28: fatal error: ac_nonexistent.h:
+No such file or directory #include <ac_nonexistent.h>
+
+Upstream-Status: pending
+
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ src/configure.in | 28 ----------------------------
+ 1 file changed, 28 deletions(-)
+
+diff --git a/src/configure.in b/src/configure.in
+index c4f1a8c..74956cc 100644
+--- a/src/configure.in
++++ b/src/configure.in
+@@ -183,34 +183,6 @@ if test "$GCC" = yes; then
+ 	CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -ansi"
+ fi
+ 
+-dnl Figure out packing order of structures
+-AC_CACHE_CHECK([packing order of bit fields],rpppoe_cv_pack_bitfields,[
+-AC_TRY_RUN([
+-union foo {
+-    struct bar {
+-	unsigned int ver:4;
+-	unsigned int type:4;
+-    } bb;
+-    unsigned char baz;
+-};
+-
+-int
+-main(void)
+-{
+-    union foo x;
+-    x.bb.ver = 1;
+-    x.bb.type = 2;
+-    if (x.baz == 0x21) {
+-	return 1;
+-    } else if (x.baz == 0x12) {
+-	return 0;
+-    } else {
+-	return 2;
+-    }
+-}], rpppoe_cv_pack_bitfields=normal, rpppoe_cv_pack_bitfields=rev,
+-$ECHO "no defaults for cross-compiling"; exit 1)
+-])
+-
+ if test "$rpppoe_cv_pack_bitfields" = "rev" ; then
+ 	AC_MSG_RESULT(reversed)
+ 	AC_DEFINE([PACK_BITFIELDS_REVERSED], [], [Reversed bitfields])
+-- 
+1.8.4.2
+

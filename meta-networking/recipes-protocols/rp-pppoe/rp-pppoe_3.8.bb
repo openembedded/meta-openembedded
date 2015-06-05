@@ -16,12 +16,21 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
            file://use-ldflags.patch \
            file://configure.patch \
            file://pppoe-server.default \
-           file://pppoe-server.init"
+           file://pppoe-server.init \
+           file://configure.in-Error-fix.patch \
+           file://pppoe-server.service"
 
 SRC_URI[md5sum] = "0e32760f498f9cde44081ee6aafc823b"
 SRC_URI[sha256sum] = "d916e9cfe1e62395f63a5361936fa855f6d0f0a37dc7227b394cdb725f553479"
 
-inherit autotools-brokensep update-rc.d
+inherit autotools-brokensep update-rc.d systemd
+
+do_install_append() {
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/pppoe-server.service ${D}${systemd_unitdir}/system
+    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/pppoe-server.service
+    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/pppoe-server.service
+}
 
 do_install() {
     # Install init script and default settings
@@ -33,6 +42,9 @@ do_install() {
     chmod 4755 ${D}${sbindir}/pppoe
 }
 
+SYSTEMD_PACKAGES = "${PN}-server"
+SYSTEMD_SERVICE_${PN}-server = "pppoe-server.service"
+SYSTEMD_AUTO_ENABLE = "disable"
 # Insert server package before main package
 PACKAGES = "${PN}-dbg ${PN}-server ${PN}-relay ${PN}-sniff ${PN} ${PN}-doc"
 
