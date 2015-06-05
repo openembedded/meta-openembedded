@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/emagii/cpufrequtils.git \
            file://0001-dont-unset-cflags.patch \
 "
 
-CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' == 'no']} "
+EXTRA_OEMAKE_append = " ${@['', 'NLS=false']['${USE_NLS}' == 'no']} "
 
 PR = "r5"
 
@@ -30,5 +30,8 @@ do_compile() {
 
 do_install() {
     oe_runmake -e install DESTDIR=${D}
+    rm -f ${D}${libdir}/libcpufreq.so.0 ${D}${libdir}/libcpufreq.so
+    ln -s libcpufreq.so.0.0.0 ${D}${libdir}/libcpufreq.so.0
+    ln -s libcpufreq.so.0.0.0 ${D}${libdir}/libcpufreq.so
 }
 
