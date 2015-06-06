@@ -3,9 +3,10 @@ DESCRIPTION = "Redis is an open source, advanced key-value store."
 HOMEPAGE = "http://redis.io"
 SECTION = "libs"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM="file://COPYING;md5=673e0ac66aac758f8f2140c6fc7947d2"
+LIC_FILES_CHKSUM="file://COPYING;md5=3c01b49fed4df1a79843688fa3f7b9d6"
 
-SRC_URI = "http://redis.googlecode.com/files/redis-${PV}.tar.gz \
+DEPENDS = ""
+SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://hiredis-use-default-CC-if-it-is-set.patch \
            file://lua-update-Makefile-to-use-environment-build-setting.patch \
            file://oe-use-libc-malloc.patch \
@@ -13,13 +14,13 @@ SRC_URI = "http://redis.googlecode.com/files/redis-${PV}.tar.gz \
            file://init-redis-server \
 "
 
-inherit update-rc.d
+inherit autotools-brokensep update-rc.d
 
 INITSCRIPT_NAME = "redis-server"
 INITSCRIPT_PARAMS = "defaults 87"
 
-SRC_URI[md5sum] = "5093fb7c5f763e828c857daf260665bc"
-SRC_URI[sha256sum] = "4d967eff2038aebea33875d17e85ed67179df6505df68529a622f7836d1c7489"
+SRC_URI[md5sum] = "87be8867447f62524b584813e5a7bd14"
+SRC_URI[sha256sum] = "93e422c0d584623601f89b956045be158889ebe594478a2c24e1bf218495633f"
 
 do_install() {
     export PREFIX=${D}/${prefix}

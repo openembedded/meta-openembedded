@@ -10,12 +10,16 @@ Note that this of course doesn't allow tcmalloc and jemalloc, however
 jemalloc wasn't building correctly.
 
 Signed-off-by: Venture Research <tech@ventureresearch.com>
+
+Update to work with 3.0.x
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+
 ---
  src/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/src/Makefile b/src/Makefile
-index 204a271..91b307d 100644
+Index: src/Makefile
+===================================================================
 --- a/src/Makefile
 +++ b/src/Makefile
 @@ -13,7 +13,8 @@
@@ -28,6 +32,3 @@ index 204a271..91b307d 100644
  OPTIMIZATION?=-O2
  DEPENDENCY_TARGETS=hiredis linenoise lua
  
--- 
-1.8.1.2
-

@@ -7,16 +7,20 @@ Instead of trying to automagically figure out CC, which breaks with OE
 as CC has spaces in it, just skip it if one was already passed in.
 
 Signed-off-by: Venture Research <tech@ventureresearch.com>
+
+Update to work with 3.0.x
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+
 ---
  deps/hiredis/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/deps/hiredis/Makefile b/deps/hiredis/Makefile
-index 16b8767..0b27c82 100644
+Index: deps/hiredis/Makefile
+===================================================================
 --- a/deps/hiredis/Makefile
 +++ b/deps/hiredis/Makefile
-@@ -11,7 +11,7 @@ HIREDIS_MAJOR=0
- HIREDIS_MINOR=10
+@@ -24,7 +24,7 @@ endef
+ export REDIS_TEST_CONFIG
  
  # Fallback to gcc when $CC is not in $PATH.
 -CC:=$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
@@ -24,6 +28,3 @@ index 16b8767..0b27c82 100644
  OPTIMIZATION?=-O3
  WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings
  DEBUG?= -g -ggdb
--- 
-1.8.1.2
-
