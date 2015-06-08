@@ -1,5 +1,5 @@
 SUMMARY = "GNOME panel"
-LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
+LICENSE = "GPL-2.0 & LGPL-2.0 & GFDL-1.1"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING-DOCS;md5=c9211dab3ae61e580f48432020784324 \
@@ -9,12 +9,17 @@ SECTION = "x11/gnome"
 
 PR = "r7"
 
-DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
+DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ \
+           pango libwnck gnome-menus cairo libgweather dbus-glib \
+	   librsvg libcanberra"
+RDEPENDS_${PN} = "python"
 
 inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf
 
-SRCREV = "6a364b6a4a9beed3da9ca6f5b0dac81eb99dea2a"
-SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32"
+SRCREV = "8292bd2b8a36df7eed3c760899400790cde68590"
+SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32 \
+           file://0001-Fix-build-with-gcc-5.patch \
+	  "
 
 S = "${WORKDIR}/git"
 
