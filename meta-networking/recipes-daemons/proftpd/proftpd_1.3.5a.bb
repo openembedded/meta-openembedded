@@ -14,8 +14,8 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://proftpd.service \
            "
 
-SRC_URI[md5sum] = "aff1bff40e675244d72c4667f203e5bb"
-SRC_URI[sha256sum] = "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2ea2cc4e08ccb87715"
+SRC_URI[md5sum] = "b9d3092411478415b31d435f8e26d173"
+SRC_URI[sha256sum] = "a1f48df8539c414ec56e0cea63dcf4b8e16e606c05f10156f030a4a67fae5696"
 
 inherit autotools-brokensep useradd update-rc.d systemd
 
@@ -64,6 +64,7 @@ PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
 # autotools.bbclass a pain...
 do_configure () {
     oe_runconf
+    cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}/libtool
 }
 
 FTPUSER = "ftp"
