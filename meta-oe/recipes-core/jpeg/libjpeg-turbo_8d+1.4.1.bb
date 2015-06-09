@@ -7,11 +7,13 @@ LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=cad955d15145c3fdceec6855e078e
                     file://djpeg.c;endline=9;md5=e93a8f2061e8a0ac71c7a485c10489e2 \
 "
 
+DEPENDS = "nasm-native"
+
 BASEPV = "${@d.getVar('PV',True).split('+')[1]}"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${BASEPV}.tar.gz"
-SRC_URI[md5sum] = "039153dabe61e1ac8d9323b5522b56b0"
-SRC_URI[sha256sum] = "d93ad8546b510244f863b39b4c0da0fa4c0d53a77b61a8a3880f258c232bbbee"
+SRC_URI[md5sum] = "b1f6b84859a16b8ebdcda951fa07c3f2"
+SRC_URI[sha256sum] = "4bf5bad4ce85625bffbbd9912211e06790e00fb982b77724af7211034efafb08"
 
 S = "${WORKDIR}/${BPN}-${BASEPV}"
 
@@ -34,6 +36,5 @@ FILES_libturbojpeg = "${libdir}/libturbojpeg.so"
 INSANE_SKIP_libturbojpeg = "dev-so"
 
 BBCLASSEXTEND = "native"
-DEPENDS = "nasm-native"
 
 LEAD_SONAME = "libjpeg.so.8"
