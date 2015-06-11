@@ -44,7 +44,7 @@ do_compile_append() {
 }
 
 module_do_install() {
-    MODULE_DIR=${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/misc
+    MODULE_DIR=${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/misc
     install -d $MODULE_DIR
     install -m 644 vboxguest.ko $MODULE_DIR
     install -m 644 vboxsf.ko $MODULE_DIR
