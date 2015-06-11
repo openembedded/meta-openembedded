@@ -26,4 +26,4 @@ do_install() {
     touch ${D}/etc/X11/xorg.conf.d/00-system-setup-keyboard.conf
 }
 
-FILES_${PN} += "${systemd_unitdir}/system/${PN}.service"
+FILES_${PN} += "${systemd_unitdir}/system/${BPN}.service"
