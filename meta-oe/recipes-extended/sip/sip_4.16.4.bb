@@ -49,6 +49,6 @@ do_install() {
     oe_runmake install
 }
 
-FILES_python-${PN} = "${libdir}/${PYTHON_DIR}/site-packages/"
+FILES_python-${BPN} = "${libdir}/${PYTHON_DIR}/site-packages/"
 FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
 
