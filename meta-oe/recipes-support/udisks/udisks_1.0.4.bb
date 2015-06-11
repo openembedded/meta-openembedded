@@ -27,10 +27,10 @@ EXTRA_OECONF = "--disable-man-pages"
 FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
                 ${datadir}/dbus-1/ \
                 ${datadir}/polkit-1 \
-                ${base_libdir}/udev/* \
+                ${nonarch_base_libdir}/udev/* \
 "
 
-FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
+FILES_${PN}-dbg += "${nonarch_base_libdir}/udev/.debug"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"

@@ -52,7 +52,7 @@ RDEPENDS_${PN} = "bash"
 
 FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
 
-FILES_${PN} += "${base_libdir}/udev/* ${datadir}/hal"
+FILES_${PN} += "${nonarch_base_libdir}/udev/* ${datadir}/hal"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 FILES_${PN}-dev += "${libdir}/*/*/*.la"
 
