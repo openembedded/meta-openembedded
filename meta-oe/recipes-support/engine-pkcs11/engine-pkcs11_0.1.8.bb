@@ -25,5 +25,5 @@ do_install_append () {
     rm -f ${D}${libdir}/openssl/engines/engine_pkcs11.la
 }
 
-FILES_${PN} += "/usr/lib/openssl/engines/engine_pkcs11.so*"
-FILES_${PN}-dbg += "/usr/lib/openssl/engines/.debug/*"
+FILES_${PN} += "${libdir}/openssl/engines/engine_pkcs11.so*"
+FILES_${PN}-dbg += "${libdir}/openssl/engines/.debug/*"
