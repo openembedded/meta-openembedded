@@ -28,7 +28,7 @@ do_compile () {
 
 do_install () {
     install -d ${D}${bindir}
-    install -d ${D}${libdir}/${PN}
+    install -d ${D}${libdir}/${BPN}
 
     # Install the compiled binaries that were built in the previous step
     for x in `find . -name "*.c"`
@@ -45,7 +45,7 @@ do_install () {
         sed -i -e 's#..\/utils\/##' ${script}
 
         script_basename=`basename ${script}`
-        install -m 0755 $script ${D}${libdir}/${PN}/${script_basename}
+        install -m 0755 $script ${D}${libdir}/${BPN}/${script_basename}
     done
 
     # Install the shell scripts NOT in the $libdir directory since those
@@ -55,7 +55,7 @@ do_install () {
         # if the script includes any helper scripts from the $libdir
         # directory then change the source path to the absolute path
         # to reflect the install location of the helper scripts.
-        sed -i -e "s#source ../include#source ${libdir}/${PN}#g" ${script}
+        sed -i -e "s#source ../include#source ${libdir}/${BPN}#g" ${script}
         # Remove hardcoded relative paths
         sed -i -e 's#..\/utils\/##' ${script}
 
