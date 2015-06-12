@@ -17,7 +17,7 @@ BBCLASSEXTEND = "native"
 
 do_configure_prepend() {
     sed -i 's:PREFIX= /usr/local:PREFIX= ${prefix}:g' ${S}/Makefile
-    sed -i 's:MULTILIB= lib:MULTILIB= ${base_libdir}:g' ${S}/Makefile
+    sed -i 's:MULTILIB= lib:MULTILIB= ${baselib}:g' ${S}/Makefile
 }
 
 EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
