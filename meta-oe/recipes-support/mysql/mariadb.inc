@@ -43,6 +43,7 @@ PACKAGECONFIG_class-native = ""
 PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
 PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITHOUT_VALGRIND=TRUE,valgrind"
 PACKAGECONFIG[libedit] = "-DLIBEDIT_INTERFACE=TRUE,-DLIBEDIT_INTERFACE=FALSE,libedit"
+PACKAGECONFIG[krb5] = ", ,krb5"
 
 # MariaDB doesn't link properly with gold
 # https://mariadb.atlassian.net/browse/MDEV-5982
@@ -85,6 +86,14 @@ do_compile_prepend_class-target () {
     # and since we're cross-compiling that is disabled
     cp ${STAGING_BINDIR_NATIVE}/comp_err ${S}/extra
     cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
+
+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
+        mkdir ${B}/include/openssl
+        echo "#ifndef KSSL_H" >${B}/include/openssl/kssl.h
+        echo "#define KSSL_H" >>${B}/include/openssl/kssl.h
+        echo "#include <openssl/opensslconf.h>">>${B}/include/openssl/kssl.h
+        echo "#endif" >>${B}/include/openssl/kssl.h
+    fi
 }
 
 SYSROOT_PREPROCESS_FUNCS += "mariadb_sysroot_preprocess"
