@@ -28,7 +28,7 @@ index 3532caa..ca72c96 100644
 +			g_object_unref (*device);
 +		}
 +
- 		if (priv->adhoc_create) {
+ 		if (priv->operation == OP_CREATE_ADHOC) {
  			NMSettingIP4Config *s_ip4;
  
 -			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, "adhoc", NULL);
