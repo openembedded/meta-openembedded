@@ -10,6 +10,8 @@ DEPENDS += "gst-plugins-base"
 
 PR = "r4"
 
+SRC_URI += "file://buffer-overflow-mp4.patch"
+
 inherit gettext gsettings
 
 EXTRA_OECONF += "--disable-experimental \
