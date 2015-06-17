@@ -7,22 +7,24 @@ LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=74579fab173e4c5e12aac0cd83ee98ec \
                     file://src/main.c;beginline=1;endline=20;md5=aba145d1802f2329ba561e3e48ecb795"
 
-SRC_URI = "http://hal.freedesktop.org/releases/polkit-gnome-${PV}.tar.bz2 \
+SRC_URI = "https://download.gnome.org/sources/polkit-gnome/${PV}/polkit-gnome-${PV}.tar.xz \
+           file://gtk-doc-check.patch \
 "
+SRC_URI[md5sum] = "50ecad37c8342fb4a52f590db7530621"
+SRC_URI[sha256sum] = "1784494963b8bf9a00eedc6cd3a2868fb123b8a5e516e66c5eda48df17ab9369"
 
-PNBLACKLIST[polkit-gnome] ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024 exceeded, use -L<N> to change it"
-
-PR = "r2"
+#PNBLACKLIST[polkit-gnome] ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024 exceeded, use -L<N> to change it"
 
 EXTRA_OECONF = "\
     --disable-examples \
     --disable-introspection \
+    --disable-static \
 "
+
+DEPENDS += "gtk+3"
 
 inherit autotools gtk-doc pkgconfig
 
 FILES_${PN} += " ${datadir}/dbus-1 \
                  ${datadir}/PolicyKit \
 "
-SRC_URI[md5sum] = "f6b485ffd7bd605af815fd2747180481"
-SRC_URI[sha256sum] = "81caa6972e651e90ef4ac31d7ed41bc79543d46b850dbd5b14b40f8ef7107d11"
