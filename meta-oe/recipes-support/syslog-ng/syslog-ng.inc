@@ -28,7 +28,7 @@ EXTRA_OECONF = " \
     --enable-dynamic-linking \
     --disable-sub-streams \
     --disable-pacct \
-    --localstatedir=${localstatedir}/run/${BPN} \
+    --localstatedir=${localstatedir}/lib/${BPN} \
     --sysconfdir=${sysconfdir}/${BPN} \
     --with-module-dir=${libdir}/${BPN} \
     --with-sysroot=${STAGING_DIR_HOST} \
@@ -67,7 +67,7 @@ do_install_append() {
     install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${BPN}
     install -d ${D}/${sysconfdir}/default/volatiles/
     install -m 755 ${WORKDIR}/volatiles.03_syslog-ng ${D}/${sysconfdir}/default/volatiles/03_syslog-ng
-
+    install -d ${D}/${localstatedir}/lib/${BPN}
     # Remove /var/run as it is created on startup
     rm -rf ${D}${localstatedir}/run
 }

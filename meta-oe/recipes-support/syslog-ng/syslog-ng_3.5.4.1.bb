@@ -15,6 +15,7 @@ SRC_URI += " \
     file://dbifix.patch \
     file://rewrite-expr-grammar.ym-Free-up-token.patch \
     file://logwriter-dont-allocate-a-new-buffer.patch \
+    file://syslog-ng.service-the-syslog-ng-service.patch \
 "
 
 SRC_URI[md5sum] = "ff3bf223ebafbaa92b69a2d5b729f368"
