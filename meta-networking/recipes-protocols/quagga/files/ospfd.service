@@ -7,7 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ospfd.conf
 [Service]
 Type=forking
 EnvironmentFile=-@SYSCONFDIR@/default/quagga
-ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f /etc/quagga/ospfd.conf
+PIDFile=@localstatedir@/run/quagga/ospfd.pid
+ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f @SYSCONFDIR@/quagga/ospfd.conf
+ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ospfd.pid
 Restart=on-abort
 
 [Install]

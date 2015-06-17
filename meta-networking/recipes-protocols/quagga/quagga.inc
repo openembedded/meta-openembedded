@@ -145,6 +145,8 @@ do_install () {
     sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
         -e 's,@SYSCONFDIR@,${sysconfdir},g' \
         -e 's,@SBINDIR@,${sbindir},g' \
+        -e 's,@base_bindir@,${base_bindir},g' \
+        -e 's,@localstatedir@,${localstatedir},g' \
         -i ${D}${systemd_unitdir}/system/*.service
 }
 
