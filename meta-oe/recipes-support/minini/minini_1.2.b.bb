@@ -22,7 +22,8 @@ SRC_URI[sha256sum] = "b08839af74acb36061fb76e1123bf56711bc5cf7a08b32e189b0ad78a2
 do_configure[noexec] = "1"
 
 do_compile() {
-    ${CC} minIni.c -shared -fPIC -o libminini.so.0.0 -Wl,-soname,libminini.so.0 ${CFLAGS} ${LDFLAGS}
+    ${CC} ${CFLAGS} -fPIC -c minIni.c -o minIni.o
+    ${CC} ${LDFLAGS} -shared -Wl,-soname,libminini.so.0 minIni.o -o libminini.so.0.0
 }
 
 do_install () {
