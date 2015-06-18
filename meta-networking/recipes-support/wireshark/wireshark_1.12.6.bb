@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/wireshark-${PV}.tar.bz2"
 
 PE = "1"
 
-SRC_URI[md5sum] = "9ee199dde4f36a3d71f7b81dd6764e93"
-SRC_URI[sha256sum] = "d0f177b2ef49e4deae4ff7d3299bdd295ba558a3934ce8ae489b2f13927cbd82"
+SRC_URI[md5sum] = "25ad2bc1c2a21396827c238fcff51bf3"
+SRC_URI[sha256sum] = "22ac0cc872f12cef9bb2cacfe0720eed8533dc5cea102d21de511620606cb3b6"
 
 inherit autotools pkgconfig
 
