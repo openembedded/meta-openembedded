@@ -32,10 +32,12 @@ RRECOMMENDS_${PN} = " \
                      kernel-module-ipv6 \
 "
 
+# Certain items are explicitly put under /lib, not base_libdir when installed.
+#
 FILES_${PN} += " \
                 ${sbindir}/* \
                 ${datadir}/ufw/* \
-                ${base_libdir}/ufw/* \
+                /lib/ufw/* \
                 ${sysconfdir}/ufw/* \
                 ${sysconfdir}/default/ufw \
 "

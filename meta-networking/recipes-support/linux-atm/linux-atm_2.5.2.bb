@@ -19,4 +19,7 @@ file://COPYING.LGPL;md5=6e29c688d912da12b66b73e32b03d812"
 
 inherit autotools pkgconfig
 
-FILES_${PN} += "${base_libdir}/firmware"
+# The firmware is explicitly put under /lib when installed.
+#
+
+FILES_${PN} += "/lib/firmware"

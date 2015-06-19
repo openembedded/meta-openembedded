@@ -46,6 +46,8 @@ do_install_append() {
 
 RDEPENDS_${PN} += "bash perl"
 
+# The drbd items are explicitly put under /lib when installed.
+#
 FILES_${PN} += "/run"
-FILES_${PN} += "${base_libdir}/drbd"
-FILES_${PN}-dbg += "${base_libdir}/drbd/.debug"
+FILES_${PN} += "/lib/drbd"
+FILES_${PN}-dbg += "/lib/drbd/.debug"
