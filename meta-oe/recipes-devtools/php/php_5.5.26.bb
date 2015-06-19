@@ -30,8 +30,8 @@ SRC_URI_append_class-target += " \
             file://php-fpm.service \
           "
 
-SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
-SRC_URI[sha256sum] = "801b5cf2e0c01b07314d4ac3c8a7c28d524bdd8263ebdd0e33a99008251316a2"
+SRC_URI[md5sum] = "383a4b35327809afd2822e1e5efc8ee1"
+SRC_URI[sha256sum] = "816afffdb03ff4c542bc172a2f77f9c69b817df82d60cce05c1b4f578c2c926e"
 
 S = "${WORKDIR}/php-${PV}"
 
