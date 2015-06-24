@@ -10,7 +10,8 @@ SECTION = "Applications/System"
 inherit autotools gtk-doc
 
 SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
-           file://gtk-is-required-by-notify.patch"
+           file://gtk-is-required-by-notify.patch \
+           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
 
 SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
 SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
