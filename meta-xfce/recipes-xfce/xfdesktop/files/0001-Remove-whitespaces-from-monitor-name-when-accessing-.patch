@@ -1,0 +1,138 @@
+From f384bfc86322096c62f0b843bacf5e9633e18035 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 25 Jun 2015 13:08:29 +0200
+Subject: [PATCH] Remove whitespaces from monitor name when accessing settings
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Desktop wallpaper could not be set here. Running
+'xfdesktop-settings --enable-debug' lead to:
+
+| Saving to /backdrop/screen0/monitorDISP3 BG - DI1/workspace0/last-image//usr/share/backgrounds/xfce/xfce-blue.jpg
+
+and no change was found tracking with Settings Editor.
+
+Upstream-Status: Submitted [1]
+
+[1] https://bugzilla.xfce.org/show_bug.cgi?id=12015
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ common/xfdesktop-common.c | 26 ++++++++++++++++++++++++++
+ common/xfdesktop-common.h |  1 +
+ settings/main.c           |  4 ++--
+ src/xfce-workspace.c      | 11 +++++------
+ 4 files changed, 34 insertions(+), 8 deletions(-)
+
+diff --git a/common/xfdesktop-common.c b/common/xfdesktop-common.c
+index 5d2c255..1f180df 100644
+--- a/common/xfdesktop-common.c
++++ b/common/xfdesktop-common.c
+@@ -194,6 +194,32 @@ xfdesktop_popup_keyboard_grab_available(GdkWindow *win)
+ }
+ 
+ 
++/*
++ * xfdesktop_remove_whitspaces:
++ * remove all whitespaces from string (not only trailing or leading)
++ */
++gchar*
++xfdesktop_remove_whitspaces(gchar* str)
++{
++    gchar* dest;
++    gint offs, curr;
++
++    g_return_val_if_fail(str, NULL);
++
++    offs = 0;
++    dest = str;
++    for(curr=0; curr<=strlen(str); curr++) {
++        if(*dest == ' ' || *dest == '\t')
++            offs++;
++        else if(0 != offs)
++            *(dest-offs) = *dest;
++        dest++;
++    }
++
++    return str;
++}
++
++
+ #ifdef G_ENABLE_DEBUG
+ /* With --enable-debug=full turn on debugging messages from the start */
+ static gboolean enable_debug = TRUE;
+diff --git a/common/xfdesktop-common.h b/common/xfdesktop-common.h
+index d1a2745..9e76e78 100644
+--- a/common/xfdesktop-common.h
++++ b/common/xfdesktop-common.h
+@@ -100,6 +100,7 @@ gint xfce_translate_image_styles(gint input);
+ 
+ guint32 xfdesktop_popup_keyboard_grab_available(GdkWindow *win);
+ 
++gchar* xfdesktop_remove_whitspaces(gchar* str);
+ 
+ #if defined(G_HAVE_ISO_VARARGS)
+ 
+diff --git a/settings/main.c b/settings/main.c
+index bc68099..b37abad 100644
+--- a/settings/main.c
++++ b/settings/main.c
+@@ -795,9 +795,9 @@ xfdesktop_settings_generate_per_workspace_binding_string(AppearancePanel *panel,
+                               panel->screen, panel->monitor, panel->workspace,
+                               property);
+     } else {
+-        buf = g_strdup_printf("/backdrop/screen%d/monitor%s/workspace%d/%s",
++        buf = xfdesktop_remove_whitspaces(g_strdup_printf("/backdrop/screen%d/monitor%s/workspace%d/%s",
+                               panel->screen, panel->monitor_name, panel->workspace,
+-                              property);
++                              property));
+     }
+ 
+     XF_DEBUG("name %s", buf);
+diff --git a/src/xfce-workspace.c b/src/xfce-workspace.c
+index 6d3b3e6..13e1187 100644
+--- a/src/xfce-workspace.c
++++ b/src/xfce-workspace.c
+@@ -157,7 +157,7 @@ xfce_workspace_set_xfconf_property_string(XfceWorkspace *workspace,
+                    workspace->priv->property_prefix, monitor_num, workspace->priv->workspace_num, property);
+     } else {
+         g_snprintf(buf, sizeof(buf), "%smonitor%s/workspace%d/%s",
+-                   workspace->priv->property_prefix, monitor_name, workspace->priv->workspace_num, property);
++                   workspace->priv->property_prefix, xfdesktop_remove_whitspaces(monitor_name), workspace->priv->workspace_num, property);
+ 
+         g_free(monitor_name);
+     }
+@@ -191,7 +191,7 @@ xfce_workspace_set_xfconf_property_value(XfceWorkspace *workspace,
+                    workspace->priv->property_prefix, monitor_num, workspace->priv->workspace_num, property);
+     } else {
+         g_snprintf(buf, sizeof(buf), "%smonitor%s/workspace%d/%s",
+-                   workspace->priv->property_prefix, monitor_name, workspace->priv->workspace_num, property);
++                   workspace->priv->property_prefix, xfdesktop_remove_whitspaces(monitor_name), workspace->priv->workspace_num, property);
+ 
+         g_free(monitor_name);
+     }
+@@ -609,8 +609,9 @@ xfce_workspace_connect_backdrop_settings(XfceWorkspace *workspace,
+                    workspace->priv->property_prefix, monitor, workspace->priv->workspace_num);
+     } else {
+         g_snprintf(buf, sizeof(buf), "%smonitor%s/workspace%d/",
+-                   workspace->priv->property_prefix, monitor_name, workspace->priv->workspace_num);
+-    }
++                   workspace->priv->property_prefix, xfdesktop_remove_whitspaces(monitor_name), workspace->priv->workspace_num);
++        g_free(monitor_name);
++   }
+     pp_len = strlen(buf);
+ 
+     XF_DEBUG("prefix string: %s", buf);
+@@ -674,8 +675,6 @@ xfce_workspace_connect_backdrop_settings(XfceWorkspace *workspace,
+     xfconf_g_property_bind(channel, buf, G_TYPE_STRING,
+                            G_OBJECT(backdrop), "image-filename");
+ 
+-
+-    g_free(monitor_name);
+ }
+ 
+ static void
+-- 
+1.9.3
+
