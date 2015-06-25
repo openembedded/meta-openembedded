@@ -1,0 +1,13 @@
+[Unit]
+Description=PLMCBOOT Program
+After=network.target
+ConditionPathExists=@SYSCONFDIR@/plmcd.conf
+
+[Service]
+Type=oneshot
+ExecStart=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -s
+ExecStop=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -x
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

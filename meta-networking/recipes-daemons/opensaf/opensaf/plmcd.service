@@ -1,0 +1,15 @@
+[Unit]
+Description=Plmcd Daemon
+Requires=plmcboot.service
+After=network.target plmcboot.service
+ConditionPathExists=@SYSCONFDIR@/plmcd.conf
+
+[Service]
+Type=forking
+ExecStart=@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf
+ExecStartPost=/bin/touch /var/lock/subsys/plmcd
+ExecStopPost=/bin/rm -rf /var/lock/subsys/plmcd
+PIDFile=/var/run/plmcd.pid
+
+[Install]
+WantedBy=multi-user.target

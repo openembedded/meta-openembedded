@@ -14,7 +14,11 @@ HOMEPAGE = "http://www.opensaf.org"
 inherit autotools useradd systemd pkgconfig
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-           file://install-samples-from-srcdir.patch"
+           file://install-samples-from-srcdir.patch \
+           file://plmcd.service \
+           file://plmcboot.service \
+           file://0001-plmcd-error-fix.patch \
+           "
 
 SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
 SRC_URI[sha256sum] = "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035ba354c97b5471b590"
@@ -29,10 +33,23 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-f -r opensaf"
 USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nologin -c \"OpenSAF\" opensaf"
 
-SYSTEMD_SERVICE_${PN} += "opensafd.service"
+SYSTEMD_SERVICE_${PN} += "opensafd.service plmcboot.service plmcd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
+PACKAGECONFIG[systemd] = "--enable-systemd-daemon"
+
+do_configure_prepend () {
+        ( cd ${S}; autoreconf -f -i -s )
+}
+
+EXTRA_OECONF += " --libdir=${libdir}/opensaf "
+EXTRA_OEMAKE += " -Wl,-rpath,${libdir}/opensaf "
+
+PKGLIBDIR="${libdir}/opensaf/opensaf"
+
 FILES_${PN} += "${localstatedir}/run"
+
+FILES_${PN}-staticdev += "${PKGLIBDIR}/*.a"
 
 RDEPENDS_${PN} += "bash python"
 
@@ -45,4 +62,8 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
         ${D}${systemd_unitdir}/system
+    install -m 644 ${WORKDIR}/plmc*.service ${D}/${systemd_unitdir}/system
+    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/plmc*.service
+    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/plmc*.service
+
 }
