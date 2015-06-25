@@ -142,6 +142,8 @@ do_install () {
     mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
     install -d ${D}${sysconfdir}/init.d
     install -m 644 ${WORKDIR}/main.cf_2.0 ${D}${sysconfdir}/postfix/main.cf
+    sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/main.cf
+
     install -m 755 ${WORKDIR}/postfix ${D}${sysconfdir}/init.d/postfix
     install -m 644 ${WORKDIR}/internal_recipient ${D}${sysconfdir}/postfix/internal_recipient
 
