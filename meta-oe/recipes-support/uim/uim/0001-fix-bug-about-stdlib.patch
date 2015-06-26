@@ -1,0 +1,40 @@
+From e0e3f82bd2918fdcc722918c108bc33647a4805f Mon Sep 17 00:00:00 2001
+From: Leimaohui <leimaohui@cn.fujitsu.com>
+Date: Fri, 25 Oct 2013 18:31:22 +0900
+Subject: [PATCH] fix bug about stdlib
+
+Signed-off-by: leimaohui <leimaohui@cn.fujitsu.com>
+---
+ xim/locale.cpp    |    3 ++-
+ xim/ximserver.cpp |    1 +
+ 2 files changed, 3 insertions(+), 1 deletions(-)
+
+diff --git a/xim/locale.cpp b/xim/locale.cpp
+index 380e945..edfaf03 100644
+--- a/xim/locale.cpp
++++ b/xim/locale.cpp
+@@ -35,7 +35,8 @@
+ #ifdef HAVE_CONFIG_H
+ # include <config.h>
+ #endif
+-
++#include <string.h>
++#include <stdlib.h>
+ #include <stdio.h>
+ #include <locale.h>
+ #include <iconv.h>
+diff --git a/xim/ximserver.cpp b/xim/ximserver.cpp
+index 245c5f8..cde9918 100644
+--- a/xim/ximserver.cpp
++++ b/xim/ximserver.cpp
+@@ -34,6 +34,7 @@
+ # include <config.h>
+ #endif
+ 
++#include <stdlib.h>
+ #include <stdio.h>
+ #include <ctype.h>
+ #include <locale.h>
+-- 
+1.7.1
+
