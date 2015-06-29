@@ -9,8 +9,9 @@ LICENSE = "GPLv2+ & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
 
 SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
-SRC_URI[md5sum] = "e532a3d6648c422347f6d84cac469263"
-SRC_URI[sha256sum] = "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5d7c12ce652ba38f1"
+
+SRC_URI[md5sum] = "4a74ed491b0891fc60cd91d2b5d68331"
+SRC_URI[sha256sum] = "44a9ecfd3af018fa9f3586067a8fa5f4874451c3d773d74436d262a7e530ee83"
 
 inherit autotools-brokensep
 
