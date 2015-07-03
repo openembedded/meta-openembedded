@@ -162,3 +162,4 @@ FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
 
 RDEPENDS_${PN} += "openssl libgcc"
 RDEPENDS_${PN}-scripts += "perl ${PN}"
+RDEPENDS_${PN}-dev = "perl"
