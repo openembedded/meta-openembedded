@@ -3,7 +3,7 @@ DESCRIPTION = "collectd is a daemon which collects system performance statistics
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool lvm2"
+DEPENDS = "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
 
 SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://no-gcrypt-badpath.patch \
@@ -29,6 +29,8 @@ PACKAGECONFIG[libmemcached] = "--with-libmemcached,--without-libmemcached,libmem
 PACKAGECONFIG[iptables] = "--enable-iptables,--disable-iptables,iptables"
 PACKAGECONFIG[postgresql] = "--enable-postgresql --with-libpq=yes, \
         --disable-postgresql --with-libpq=no,postgresql"
+PACKAGECONFIG[mysql] = "--enable-mysql --with-libmysql=yes, \
+        --disable-mysql --with-libmysql=no,mysql5"
 PACKAGECONFIG[dbi] = "--enable-dbi,--disable-dbi,libdbi"
 PACKAGECONFIG[modbus] = "--enable-modbus,--disable-modbus,libmodbus"
 PACKAGECONFIG[libowcapi] = "--with-libowcapi,--without-libowcapi,owfs"
