@@ -18,6 +18,7 @@ SRC_URI = " \
     file://defconfig \
     file://init \
     file://hostapd.service \
+    file://add-sysroot-to-gcc.patch;patchdir=.. \
 "
 
 S = "${WORKDIR}/hostapd-${PV}/hostapd"
