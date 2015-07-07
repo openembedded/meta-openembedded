@@ -10,6 +10,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
            file://always-use-libdevmapper.patch \
            file://always-use-libdevmapper-kpartx.patch \
            file://do-not-link-libmpathpersist-to-TMPDIR.patch \
+           file://0001-multipathd.service-Error-fix.patch \
            "
 # 0.5.0
 #
