@@ -79,8 +79,8 @@ GSTREAMER_DEBUG ?= "--disable-debug"
 FFMPEG_EXTRA_CONFIGURE = "--with-ffmpeg-extra-configure"
 # pass --cpu for powerpc. get cpu name by stripping "ppc" or "ppc64"
 # from DEFAULTTUNE
-FFMPEG_CPU_powerpc = "--cpu=${@d.getVar('DEFAULTTUNE')[3:]}"
-FFMPEG_CPU_powerpc64 = "--cpu=${@d.getVar('DEFAULTTUNE')[5:]}"
+FFMPEG_CPU_powerpc = "--cpu=${@d.getVar('DEFAULTTUNE', False)[3:]}"
+FFMPEG_CPU_powerpc64 = "--cpu=${@d.getVar('DEFAULTTUNE', False)[5:]}"
 FFMPEG_EXTRA_CONFIGURE_COMMON_ARG = "--target-os=linux ${FFMPEG_CPU} \
   --cc='${CC}' --as='${CC}' --ld='${CC}' --nm='${NM}' --ar='${AR}' \
   --ranlib='${RANLIB}' \
