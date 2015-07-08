@@ -84,14 +84,14 @@ python populate_packages_prepend() {
         if name is None or name.strip() == "":
             return
 
-        fpack=d.getVar('PACKAGES') or ""
+        fpack=d.getVar('PACKAGES', False) or ""
         fpack="${PN}-" + name + " " + fpack
         if dbg:
             fpack="${PN}-" + name + "-dbg" + " " + fpack
         d.setVar('PACKAGES', fpack)
 
     conf=(d.getVar('PACKAGECONFIG', True) or "").split()
-    pack=d.getVar('PACKAGES') or ""
+    pack=d.getVar('PACKAGES', False) or ""
     bb.debug(1, "PACKAGECONFIG=%s" % conf)
     bb.debug(1, "PACKAGES1=%s" % pack )
 
