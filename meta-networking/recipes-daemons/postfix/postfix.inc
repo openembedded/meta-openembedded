@@ -232,7 +232,7 @@ pkg_postinst_${PN} () {
         touch $D/etc/postfix/virtual_alias
         postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
 
-        if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES') else 'false'}; then
+        if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES', False) else 'false'}; then
             # /usr/lib/sendmial is required by LSB core test
             [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
         fi
