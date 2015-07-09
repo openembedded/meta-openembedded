@@ -6,10 +6,11 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=71d636ba7678baa1573e1b531041386e \
 "
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig pythonnative distro_features_check
 
 DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
 DEPENDS_append_class-target = " libxi"
+REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
 SRC_URI[md5sum] = "0d6f5112c4e5689087339a94aceadf77"
