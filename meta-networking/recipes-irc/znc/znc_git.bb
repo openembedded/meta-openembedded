@@ -1,16 +1,17 @@
 SUMMARY = "ZNC, an advanced IRC bouncer"
 SECTION = "net"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-DEPENDS = "openssl"
+DEPENDS = "openssl zlib icu"
 
-PV = "1.0+git"
+PV = "1.6.0"
 
-SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
-SRC_URI = "git://github.com/znc/znc.git \
-           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
+SRC_URI = "git://github.com/znc/znc.git;name=znc \
+           git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
           "
+SRCREV_znc = "f47e8465efa4e1cd948b9caae93ac401b4355df8"
+SRCREV_Csocket = "07b4437396122650e5b8fb3d014e820a5decf4ee"
 
 S = "${WORKDIR}/git"
 
