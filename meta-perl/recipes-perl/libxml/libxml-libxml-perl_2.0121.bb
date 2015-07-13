@@ -26,8 +26,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
 "
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
 			file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446"
-SRC_URI[libxml.md5sum] = "a53a743bf053a0cb4afb41513fb8a684"
-SRC_URI[libxml.sha256sum] = "b154f2dad3033b30d22ac81b8985b69ad35450b0c552db394cd03bb36845812a"
+SRC_URI[libxml.md5sum] = "1544ab9ac110f5da296015346561ce02"
+SRC_URI[libxml.sha256sum] = "ec431011cb37a04640fd2316f64d0405a274eece2c6f3847f7fbd336eb1c0dc9"
 
 S = "${WORKDIR}/XML-LibXML-${PV}"
 
@@ -39,9 +39,5 @@ BBCLASSEXTEND = "native"
 
 CFLAGS += " -D_GNU_SOURCE "
 BUILD_CFLAGS += " -D_GNU_SOURCE "
-
-do_configure_prepend() {
-	rm -rf ${S}/.pc/*
-}
 
 FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/XML/LibXML/.debug/"
