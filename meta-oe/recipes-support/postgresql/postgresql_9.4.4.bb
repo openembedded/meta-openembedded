@@ -9,5 +9,6 @@ SRC_URI += "\
     file://not-check-libperl.patch \
 "
 
-SRC_URI[md5sum] = "b6369156607a4fd88f21af6fec0f30b9"
-SRC_URI[sha256sum] = "81fda191c165ba1d25d75cd0166ece5abdcb4a7f5eca01b349371e279ebb4d11"
+SRC_URI[md5sum] = "1fe952c44ed26d7e6a335cf991a9c1c6"
+SRC_URI[sha256sum] = "538ed99688d6fdbec6fd166d1779cf4588bf2f16c52304e5ef29f904c43b0013"
+
