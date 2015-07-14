@@ -9,8 +9,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
     file://enable-armv5e-build.patch \
     file://no-registry.patch \
 "
-SRC_URI[md5sum] = "698ebd8ecd5c9c61091875bbd54401f4"
-SRC_URI[sha256sum] = "7a3b5ac351973a9dee8edbf0684bc8d0dea44b231e42274ffb008141ffa19ad2"
+SRC_URI[md5sum] = "5523ec4347d7fe6b0f6dda1d1c7799d5"
+SRC_URI[sha256sum] = "b23d64df051c9c969b0c583f802d5d71de342e53067127a5061415be7e12f39d"
 
 S = "${WORKDIR}/node-v${PV}"
 
