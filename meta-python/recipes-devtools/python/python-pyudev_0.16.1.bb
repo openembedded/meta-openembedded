@@ -22,4 +22,5 @@ RDEPENDS_${PN} = "\
     python-ctypes \
     python-subprocess \
     python-misc \
+    python-contextlib \
 "
