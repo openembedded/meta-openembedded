@@ -11,6 +11,8 @@ SRC_URI[archive.md5sum] = "290ea2a8abc40f78a3a16bdae6f02808"
 SRC_URI[archive.sha256sum] = "ebec3bc54b5652838502b96223152fb1cd8fcb14ace5cb02d718fc3276bbd404"
 
 EXTRA_OECONF = "--with-xkb-bin-base=${bindir}"
+PACKAGECONFIG ??=""
+PACKAGECONFIG[introspection] = "--enable-introspection=yes, --enable-introspection=no, libgirepository"
 
 do_configure_append() {
     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
