@@ -31,13 +31,13 @@ case "$1" in
 	echo -n "Starting ypbind"
 	## If the domainname is not set, skip starting of ypbind
 	## and return with "program not configured"
-        /bin/ypdomainname &> /dev/null
+        /bin/ypdomainname >/dev/null 2>&1
         if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
            if [ -f /etc/defaultdomain ]; then
              XDOMAINNAME=`cat /etc/defaultdomain`
              /bin/ypdomainname "$XDOMAINNAME"
 	   fi
-           /bin/ypdomainname &> /dev/null
+           /bin/ypdomainname >/dev/null 2>&1
            if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
 	     # Tell the user this has skipped
 	     echo -n " . . . . . . . . . . No domainname set"
@@ -66,7 +66,7 @@ case "$1" in
         if [ $? -eq 0 ]; then
             notfound=1
             for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-                ypwhich &>/dev/null && { notfound=0 ; break; };
+                ypwhich >/dev/null 2>&1 && { notfound=0 ; break; };
                 echo -n " ."
                 sleep 1;
             done
