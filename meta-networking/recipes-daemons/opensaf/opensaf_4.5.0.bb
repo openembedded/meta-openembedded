@@ -37,6 +37,7 @@ SYSTEMD_SERVICE_${PN} += "opensafd.service plmcboot.service plmcd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 PACKAGECONFIG[systemd] = "--enable-systemd-daemon"
+PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03 --enable-ais-plm,,openhpi"
 
 do_configure_prepend () {
         ( cd ${S}; autoreconf -f -i -s )
