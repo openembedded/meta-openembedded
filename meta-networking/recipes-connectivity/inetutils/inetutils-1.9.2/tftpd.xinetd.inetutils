@@ -13,7 +13,7 @@ service tftp
         wait            = yes
         user            = root
         group           = root
-        server          = /usr/sbin/in.tftpd
+        server          = @SBINDIR@/in.tftpd
         server_args     = /tftpboot
 }
 

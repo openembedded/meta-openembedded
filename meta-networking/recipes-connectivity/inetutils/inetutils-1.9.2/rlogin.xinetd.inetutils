@@ -14,8 +14,8 @@ service login
 	group		= root
 	log_on_success	+= USERID
 	log_on_failure	+= USERID
-	server		= /usr/bin/tcpd
-	server_args	= /usr/sbin/in.rlogind -a
+	server		= @SBINDIR@/tcpd
+	server_args	= @SBINDIR@/in.rlogind -a
 	disable		= yes
 }
 							
