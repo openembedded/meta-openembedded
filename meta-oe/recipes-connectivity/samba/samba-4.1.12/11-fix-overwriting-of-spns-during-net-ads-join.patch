@@ -1,0 +1,329 @@
+From 1925edc67e223d73d672af48c2ebd3e5865e01d9 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Wed, 24 Sep 2014 09:22:03 +0200
+Subject: [PATCH 1/4] s3-libads: Add a function to retrieve the SPNs of a
+ computer account.
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=9984
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+Reviewed-by: Guenther Deschner <gd@samba.org>
+(cherry picked from commit 4eaa4ccbdf279f1ff6d8218b36d92aeea0114cd8)
+---
+ source3/libads/ads_proto.h |  6 +++++
+ source3/libads/ldap.c      | 60 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 66 insertions(+)
+
+diff --git a/source3/libads/ads_proto.h b/source3/libads/ads_proto.h
+index 17a84d1..6a22807 100644
+--- a/source3/libads/ads_proto.h
++++ b/source3/libads/ads_proto.h
+@@ -87,6 +87,12 @@ ADS_STATUS ads_add_strlist(TALLOC_CTX *ctx, ADS_MODLIST *mods,
+ 				const char *name, const char **vals);
+ uint32 ads_get_kvno(ADS_STRUCT *ads, const char *account_name);
+ uint32_t ads_get_machine_kvno(ADS_STRUCT *ads, const char *machine_name);
++
++ADS_STATUS ads_get_service_principal_names(TALLOC_CTX *mem_ctx,
++					   ADS_STRUCT *ads,
++					   const char *machine_name,
++					   char ***spn_array,
++					   size_t *num_spns);
+ ADS_STATUS ads_clear_service_principal_names(ADS_STRUCT *ads, const char *machine_name);
+ ADS_STATUS ads_add_service_principal_name(ADS_STRUCT *ads, const char *machine_name,
+                                           const char *my_fqdn, const char *spn);
+diff --git a/source3/libads/ldap.c b/source3/libads/ldap.c
+index fb99132..51a0883 100644
+--- a/source3/libads/ldap.c
++++ b/source3/libads/ldap.c
+@@ -1927,6 +1927,66 @@ ADS_STATUS ads_clear_service_principal_names(ADS_STRUCT *ads, const char *machin
+ }
+ 
+ /**
++ * @brief This gets the service principal names of an existing computer account.
++ *
++ * @param[in]  mem_ctx      The memory context to use to allocate the spn array.
++ *
++ * @param[in]  ads          The ADS context to use.
++ *
++ * @param[in]  machine_name The NetBIOS name of the computer, which is used to
++ *                          identify the computer account.
++ *
++ * @param[in]  spn_array    A pointer to store the array for SPNs.
++ *
++ * @param[in]  num_spns     The number of principals stored in the array.
++ *
++ * @return                  0 on success, or a ADS error if a failure occured.
++ */
++ADS_STATUS ads_get_service_principal_names(TALLOC_CTX *mem_ctx,
++					   ADS_STRUCT *ads,
++					   const char *machine_name,
++					   char ***spn_array,
++					   size_t *num_spns)
++{
++	ADS_STATUS status;
++	LDAPMessage *res = NULL;
++	char *dn;
++	int count;
++
++	status = ads_find_machine_acct(ads,
++				       &res,
++				       machine_name);
++	if (!ADS_ERR_OK(status)) {
++		DEBUG(1,("Host Account for %s not found... skipping operation.\n",
++			 machine_name));
++		return status;
++	}
++
++	count = ads_count_replies(ads, res);
++	if (count != 1) {
++		status = ADS_ERROR(LDAP_NO_SUCH_OBJECT);
++		goto done;
++	}
++
++	dn = ads_get_dn(ads, mem_ctx, res);
++	if (dn == NULL) {
++		status = ADS_ERROR_LDAP(LDAP_NO_MEMORY);
++		goto done;
++	}
++
++	*spn_array = ads_pull_strings(ads,
++				      mem_ctx,
++				      res,
++				      "servicePrincipalName",
++				      num_spns);
++
++done:
++	ads_msgfree(ads, res);
++
++	return status;
++}
++
++/**
+  * This adds a service principal name to an existing computer account
+  * (found by hostname) in AD.
+  * @param ads An initialized ADS_STRUCT
+-- 
+2.1.0
+
+
+From ed3b6536e1027a26d7983942f62677aa2bc0e93c Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Wed, 24 Sep 2014 09:23:58 +0200
+Subject: [PATCH 2/4] s3-libads: Add function to search for an element in an
+ array.
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=9984
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+Reviewed-by: Guenther Deschner <gd@samba.org>
+(cherry picked from commit e1ee4c8bc7018db7787dd9a0be6d3aa40a477ee2)
+---
+ source3/libads/ads_proto.h |  2 ++
+ source3/libads/ldap.c      | 31 +++++++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
+
+diff --git a/source3/libads/ads_proto.h b/source3/libads/ads_proto.h
+index 6a22807..1e34247 100644
+--- a/source3/libads/ads_proto.h
++++ b/source3/libads/ads_proto.h
+@@ -88,6 +88,8 @@ ADS_STATUS ads_add_strlist(TALLOC_CTX *ctx, ADS_MODLIST *mods,
+ uint32 ads_get_kvno(ADS_STRUCT *ads, const char *account_name);
+ uint32_t ads_get_machine_kvno(ADS_STRUCT *ads, const char *machine_name);
+ 
++bool ads_element_in_array(const char **el_array, size_t num_el, const char *el);
++
+ ADS_STATUS ads_get_service_principal_names(TALLOC_CTX *mem_ctx,
+ 					   ADS_STRUCT *ads,
+ 					   const char *machine_name,
+diff --git a/source3/libads/ldap.c b/source3/libads/ldap.c
+index 51a0883..8d104c2 100644
+--- a/source3/libads/ldap.c
++++ b/source3/libads/ldap.c
+@@ -1927,6 +1927,37 @@ ADS_STATUS ads_clear_service_principal_names(ADS_STRUCT *ads, const char *machin
+ }
+ 
+ /**
++ * @brief Search for an element in a string array.
++ *
++ * @param[in]  el_array  The string array to search.
++ *
++ * @param[in]  num_el    The number of elements in the string array.
++ *
++ * @param[in]  el        The string to search.
++ *
++ * @return               True if found, false if not.
++ */
++bool ads_element_in_array(const char **el_array, size_t num_el, const char *el)
++{
++	size_t i;
++
++	if (el_array == NULL || num_el == 0 || el == NULL) {
++		return false;
++	}
++
++	for (i = 0; i < num_el && el_array[i] != NULL; i++) {
++		int cmp;
++
++		cmp = strcasecmp_m(el_array[i], el);
++		if (cmp == 0) {
++			return true;
++		}
++	}
++
++	return false;
++}
++
++/**
+  * @brief This gets the service principal names of an existing computer account.
+  *
+  * @param[in]  mem_ctx      The memory context to use to allocate the spn array.
+-- 
+2.1.0
+
+
+From 11700f1398d6197a99c686f1a43b45d6305ceae8 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Fri, 26 Sep 2014 03:09:08 +0200
+Subject: [PATCH 3/4] s3-libnet: Add libnet_join_get_machine_spns().
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=9984
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+Reviewed-by: Guenther Deschner <gd@samba.org>
+(cherry picked from commit 7e0b8fcce5572c88d50993a1dbd90f65638ba90f)
+---
+ source3/libnet/libnet_join.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/source3/libnet/libnet_join.c b/source3/libnet/libnet_join.c
+index 1418385..3611cc7 100644
+--- a/source3/libnet/libnet_join.c
++++ b/source3/libnet/libnet_join.c
+@@ -358,6 +358,26 @@ static ADS_STATUS libnet_join_find_machine_acct(TALLOC_CTX *mem_ctx,
+ 	return status;
+ }
+ 
++static ADS_STATUS libnet_join_get_machine_spns(TALLOC_CTX *mem_ctx,
++					       struct libnet_JoinCtx *r,
++					       char ***spn_array,
++					       size_t *num_spns)
++{
++	ADS_STATUS status;
++
++	if (r->in.machine_name == NULL) {
++		return ADS_ERROR_SYSTEM(EINVAL);
++	}
++
++	status = ads_get_service_principal_names(mem_ctx,
++						 r->in.ads,
++						 r->in.machine_name,
++						 spn_array,
++						 num_spns);
++
++	return status;
++}
++
+ /****************************************************************
+  Set a machines dNSHostName and servicePrincipalName attributes
+ ****************************************************************/
+-- 
+2.1.0
+
+
+From 472256e27ad5cb5e7657efaece71744269ca8d16 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?G=C3=BCnther=20Deschner?= <gd@samba.org>
+Date: Fri, 26 Sep 2014 03:35:43 +0200
+Subject: [PATCH 4/4] s3-libnet: Make sure we do not overwrite precreated SPNs.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=9984
+
+Signed-off-by: Günther Deschner <gd@samba.org>
+Reviewed-by: Andreas Schneider <asn@samba.org>
+
+Autobuild-User(master): Günther Deschner <gd@samba.org>
+Autobuild-Date(master): Fri Sep 26 08:22:45 CEST 2014 on sn-devel-104
+
+(cherry picked from commit 0aacbe78bb40d76b65087c2a197c92b0101e625e)
+---
+ source3/libnet/libnet_join.c | 39 ++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 36 insertions(+), 3 deletions(-)
+
+diff --git a/source3/libnet/libnet_join.c b/source3/libnet/libnet_join.c
+index 3611cc7..aa7b5cb 100644
+--- a/source3/libnet/libnet_join.c
++++ b/source3/libnet/libnet_join.c
+@@ -388,8 +388,10 @@ static ADS_STATUS libnet_join_set_machine_spn(TALLOC_CTX *mem_ctx,
+ 	ADS_STATUS status;
+ 	ADS_MODLIST mods;
+ 	fstring my_fqdn;
+-	const char *spn_array[3] = {NULL, NULL, NULL};
++	const char **spn_array = NULL;
++	size_t num_spns = 0;
+ 	char *spn = NULL;
++	bool ok;
+ 
+ 	/* Find our DN */
+ 
+@@ -398,6 +400,14 @@ static ADS_STATUS libnet_join_set_machine_spn(TALLOC_CTX *mem_ctx,
+ 		return status;
+ 	}
+ 
++	status = libnet_join_get_machine_spns(mem_ctx,
++					      r,
++					      discard_const_p(char **, &spn_array),
++					      &num_spns);
++	if (!ADS_ERR_OK(status)) {
++		DEBUG(5, ("Retrieving the servicePrincipalNames failed.\n"));
++	}
++
+ 	/* Windows only creates HOST/shortname & HOST/fqdn. */
+ 
+ 	spn = talloc_asprintf(mem_ctx, "HOST/%s", r->in.machine_name);
+@@ -407,7 +417,15 @@ static ADS_STATUS libnet_join_set_machine_spn(TALLOC_CTX *mem_ctx,
+ 	if (!strupper_m(spn)) {
+ 		return ADS_ERROR_LDAP(LDAP_NO_MEMORY);
+ 	}
+-	spn_array[0] = spn;
++
++	ok = ads_element_in_array(spn_array, num_spns, spn);
++	if (!ok) {
++		ok = add_string_to_array(spn_array, spn,
++					 &spn_array, (int *)&num_spns);
++		if (!ok) {
++			return ADS_ERROR_LDAP(LDAP_NO_MEMORY);
++		}
++	}
+ 
+ 	if (!name_to_fqdn(my_fqdn, r->in.machine_name)
+ 	    || (strchr(my_fqdn, '.') == NULL)) {
+@@ -424,8 +442,23 @@ static ADS_STATUS libnet_join_set_machine_spn(TALLOC_CTX *mem_ctx,
+ 		if (!spn) {
+ 			return ADS_ERROR_LDAP(LDAP_NO_MEMORY);
+ 		}
+-		spn_array[1] = spn;
++
++		ok = ads_element_in_array(spn_array, num_spns, spn);
++		if (!ok) {
++			ok = add_string_to_array(spn_array, spn,
++						 &spn_array, (int *)&num_spns);
++			if (!ok) {
++				return ADS_ERROR_LDAP(LDAP_NO_MEMORY);
++			}
++		}
++	}
++
++	/* make sure to NULL terminate the array */
++	spn_array = talloc_realloc(mem_ctx, spn_array, const char *, num_spns + 1);
++	if (spn_array == NULL) {
++		return ADS_ERROR_LDAP(LDAP_NO_MEMORY);
+ 	}
++	spn_array[num_spns] = NULL;
+ 
+ 	mods = ads_init_mods(mem_ctx);
+ 	if (!mods) {
+-- 
+2.1.0
+

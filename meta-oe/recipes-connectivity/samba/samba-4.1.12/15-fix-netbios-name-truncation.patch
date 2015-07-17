@@ -1,0 +1,154 @@
+From 170166b8a0076089c6a8505f53a22f5b72c15786 Mon Sep 17 00:00:00 2001
+From: Jeremy Allison <jra@samba.org>
+Date: Tue, 28 Oct 2014 11:55:30 -0700
+Subject: [PATCH] s3-nmbd: Fix netbios name truncation.
+
+Try and cope with truncation more intelligently.
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=10896
+
+Signed-off-by: Jeremy Allison <jra@samba.org>
+Reviewed-by: Andreas Schneider <asn@samba.org>
+(cherry picked from commit 6adcc7bffd5e1474ecba04d2328955c0b208cabc)
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ source3/nmbd/nmbd_nameregister.c | 76 +++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 68 insertions(+), 8 deletions(-)
+
+diff --git a/source3/nmbd/nmbd_nameregister.c b/source3/nmbd/nmbd_nameregister.c
+index 71c4751..8b078e6 100644
+--- a/source3/nmbd/nmbd_nameregister.c
++++ b/source3/nmbd/nmbd_nameregister.c
+@@ -482,17 +482,77 @@ void register_name(struct subnet_record *subrec,
+ {
+ 	struct nmb_name nmbname;
+ 	nstring nname;
++	size_t converted_size;
+ 
+ 	errno = 0;
+-	push_ascii_nstring(nname, name);
+-        if (errno == E2BIG) {
+-		unstring tname;
+-		pull_ascii_nstring(tname, sizeof(tname), nname);
+-		DEBUG(0,("register_name: NetBIOS name %s is too long. Truncating to %s\n",
+-			name, tname));
+-		make_nmb_name(&nmbname, tname, type);
+-	} else {
++	converted_size = push_ascii_nstring(nname, name);
++	if (converted_size != (size_t)-1) {
++		/* Success. */
+ 		make_nmb_name(&nmbname, name, type);
++	} else if (errno == E2BIG) {
++		/*
++		 * Name converted to CH_DOS is too large.
++		 * try to truncate.
++		 */
++		char *converted_str_dos = NULL;
++		char *converted_str_unix = NULL;
++		bool ok;
++
++		converted_size = 0;
++
++		ok = convert_string_talloc(talloc_tos(),
++				CH_UNIX,
++				CH_DOS,
++				name,
++				strlen(name)+1,
++				&converted_str_dos,
++				&converted_size);
++		if (!ok) {
++			DEBUG(0,("register_name: NetBIOS name %s cannot be "
++				"converted. Failing to register name.\n",
++				name));
++			return;
++		}
++
++		/*
++		 * As it's now CH_DOS codepage
++		 * we truncate by writing '\0' at
++		 * MAX_NETBIOSNAME_LEN-1 and then
++		 * convert back to CH_UNIX which we
++		 * need for the make_nmb_name() call.
++		 */
++		if (converted_size >= MAX_NETBIOSNAME_LEN) {
++			converted_str_dos[MAX_NETBIOSNAME_LEN-1] = '\0';
++		}
++
++		ok = convert_string_talloc(talloc_tos(),
++				CH_DOS,
++				CH_UNIX,
++				converted_str_dos,
++				strlen(converted_str_dos)+1,
++				&converted_str_unix,
++				&converted_size);
++		if (!ok) {
++			DEBUG(0,("register_name: NetBIOS name %s cannot be "
++				"converted back to CH_UNIX. "
++				"Failing to register name.\n",
++				converted_str_dos));
++			TALLOC_FREE(converted_str_dos);
++			return;
++		}
++
++		make_nmb_name(&nmbname, converted_str_unix, type);
++
++		TALLOC_FREE(converted_str_dos);
++		TALLOC_FREE(converted_str_unix);
++	} else {
++		/*
++		 * Generic conversion error. Fail to register.
++		 */
++		DEBUG(0,("register_name: NetBIOS name %s cannot be "
++			"converted (%s). Failing to register name.\n",
++			name, strerror(errno)));
++		return;
+ 	}
+ 
+ 	/* Always set the NB_ACTIVE flag on the name we are
+-- 
+2.1.2
+
+From 653a1c312e6b85f1d8113beec52a27e0ba71ef79 Mon Sep 17 00:00:00 2001
+From: Jeremy Allison <jra@samba.org>
+Date: Fri, 31 Oct 2014 11:01:26 -0700
+Subject: [PATCH] s3: nmbd: Ensure NetBIOS names are only 15 characters stored.
+
+This screws up if the name is greater than MAX_NETBIOSNAME_LEN-1 in the
+unix charset, but less than or equal to MAX_NETBIOSNAME_LEN-1 in the DOS
+charset, but this is so old we have to live with that.
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=10920
+
+Signed-off-by: Jeremy Allison <jra@samba.org>
+Reviewed-by: Andreas Schneider <asn@samba.org>
+
+(cherry picked from commit 7467f6e72cba214eeca75c34e9d9fba354c7ef31)
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ source3/lib/util_names.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/source3/lib/util_names.c b/source3/lib/util_names.c
+index cf54a0e..1392b48 100644
+--- a/source3/lib/util_names.c
++++ b/source3/lib/util_names.c
+@@ -60,7 +60,15 @@ static bool set_my_netbios_names(const char *name, int i)
+ {
+ 	SAFE_FREE(smb_my_netbios_names[i]);
+ 
+-	smb_my_netbios_names[i] = SMB_STRDUP(name);
++	/*
++	 * Don't include space for terminating '\0' in strndup,
++	 * it is automatically added. This screws up if the name
++	 * is greater than MAX_NETBIOSNAME_LEN-1 in the unix
++	 * charset, but less than or equal to MAX_NETBIOSNAME_LEN-1
++	 * in the DOS charset, but this is so old we have to live
++	 * with that.
++	 */
++	smb_my_netbios_names[i] = SMB_STRNDUP(name, MAX_NETBIOSNAME_LEN-1);
+ 	if (!smb_my_netbios_names[i])
+ 		return False;
+ 	return strupper_m(smb_my_netbios_names[i]);
+-- 
+2.1.2
+

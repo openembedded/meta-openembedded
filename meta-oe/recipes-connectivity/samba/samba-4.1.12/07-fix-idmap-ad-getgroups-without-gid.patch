@@ -1,0 +1,42 @@
+From 23dfa2e35bec9c0f6c3d579e7dc2e1d0ce636aa2 Mon Sep 17 00:00:00 2001
+From: Andreas Schneider <asn@samba.org>
+Date: Fri, 19 Sep 2014 13:33:10 +0200
+Subject: [PATCH] nsswitch: Skip groups we were not able to map.
+
+If we have configured the idmap_ad backend it is possible that the user
+is in a group without a gid set. This will result in (uid_t)-1 as the
+gid. We return this invalid gid to NSS which is wrong.
+
+BUG: https://bugzilla.samba.org/show_bug.cgi?id=10824
+
+Signed-off-by: Andreas Schneider <asn@samba.org>
+Reviewed-by: David Disseldorp <ddiss@samba.org>
+
+Autobuild-User(master): David Disseldorp <ddiss@samba.org>
+Autobuild-Date(master): Fri Sep 19 17:57:14 CEST 2014 on sn-devel-104
+
+(cherry picked from commit 7f59711f076e98ece099f6b38ff6da8c80fa6d5e)
+Signed-off-by: Andreas Schneider <asn@samba.org>
+---
+ nsswitch/winbind_nss_linux.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/nsswitch/winbind_nss_linux.c b/nsswitch/winbind_nss_linux.c
+index 8d66a74..70ede3e 100644
+--- a/nsswitch/winbind_nss_linux.c
++++ b/nsswitch/winbind_nss_linux.c
+@@ -1101,6 +1101,11 @@ _nss_winbind_initgroups_dyn(char *user, gid_t group, long int *start,
+ 				continue;
+ 			}
+ 
++			/* Skip groups without a mapping */
++			if (gid_list[i] == (uid_t)-1) {
++				continue;
++			}
++
+ 			/* Filled buffer ? If so, resize. */
+ 
+ 			if (*start == *size) {
+-- 
+2.1.0
+

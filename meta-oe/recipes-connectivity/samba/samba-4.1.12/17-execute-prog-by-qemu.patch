@@ -1,0 +1,22 @@
+samba: execute prog on target directly is impossible.
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+
+diff -Nurp samba-4.1.12.orig/lib/ccan/wscript samba-4.1.12/lib/ccan/wscript
+--- samba-4.1.12.orig/lib/ccan/wscript	2013-06-13 18:21:02.000000000 +0900
++++ samba-4.1.12/lib/ccan/wscript	2015-04-27 14:26:25.123000238 +0900
+@@ -127,10 +127,10 @@ def configure(conf):
+     # Only check for FILE_OFFSET_BITS=64 if off_t is normally small:
+     # use raw routines because wrappers include previous _GNU_SOURCE
+     # or _FILE_OFFSET_BITS defines.
+-    conf.check(fragment="""#include <sys/types.h>
+-               int main(void) { return !(sizeof(off_t) < 8); }""",
+-               execute=True, msg='Checking for small off_t',
+-               define_name='SMALL_OFF_T')
++    conf.CHECK_CODE("""#include <sys/types.h>
++	  int main(void) { return !(sizeof(off_t) < 8); }""",
++                    link=True, execute=True, addmain=False, msg='Checking for small off_t',
++                    define='HAVE_SMALL_OFF_T')
+     # Unreliable return value above, hence use define.
+     if conf.CONFIG_SET('SMALL_OFF_T'):
+         conf.check(fragment="""#include <sys/types.h>

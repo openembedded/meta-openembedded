@@ -1,0 +1,42 @@
+systemd-daemon is contained by libsystemd, so we just need link libsystemd to 
+obtain the implementation of systemd-daemon's function.
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+
+diff -Nurp samba-4.1.12.orig/lib/util/wscript_build samba-4.1.12/lib/util/wscript_build
+--- samba-4.1.12.orig/lib/util/wscript_build	2014-09-08 18:26:14.000000000 +0900
++++ samba-4.1.12/lib/util/wscript_build	2015-04-29 16:16:58.303000207 +0900
+@@ -10,7 +10,7 @@ bld.SAMBA_LIBRARY('samba-util',
+                     server_id.c dprintf.c parmlist.c bitmap.c pidfile.c
+                     tevent_debug.c util_process.c memcache.c''',
+                   deps='DYNCONFIG',
+-                  public_deps='talloc tevent execinfo uid_wrapper pthread LIBCRYPTO charset util_setid systemd-daemon',
++                  public_deps='talloc tevent execinfo uid_wrapper pthread LIBCRYPTO charset util_setid systemd',
+                   public_headers='debug.h attr.h byteorder.h data_blob.h memory.h safe_string.h time.h talloc_stack.h xfile.h dlinklist.h samba_util.h string_wrappers.h',
+                   header_path= [ ('dlinklist.h samba_util.h', '.'), ('*', 'util') ],
+                   local_include=False,
+diff -Nurp samba-4.1.12.orig/wscript samba-4.1.12/wscript
+--- samba-4.1.12.orig/wscript	2014-07-28 16:13:45.000000000 +0900
++++ samba-4.1.12/wscript	2015-04-29 16:17:52.338000264 +0900
+@@ -183,16 +183,16 @@ def configure(conf):
+ 		conf.env['ENABLE_PIE'] = True
+ 
+     if Options.options.enable_systemd != False:
+-        conf.check_cfg(package='libsystemd-daemon', args='--cflags --libs',
+-                       msg='Checking for libsystemd-daemon', uselib_store="SYSTEMD-DAEMON")
+-        conf.CHECK_HEADERS('systemd/sd-daemon.h', lib='systemd-daemon')
+-        conf.CHECK_LIB('systemd-daemon', shlib=True)
++        conf.check_cfg(package='libsystemd', args='--cflags --libs',
++                       msg='Checking for libsystemd', uselib_store="SYSTEMD-DAEMON")
++        conf.CHECK_HEADERS('systemd/sd-daemon.h', lib='systemd')
++        conf.CHECK_LIB('systemd', shlib=True)
+ 
+     if conf.CONFIG_SET('HAVE_SYSTEMD_SD_DAEMON_H'):
+         conf.DEFINE('HAVE_SYSTEMD', '1')
+         conf.env['ENABLE_SYSTEMD'] = True
+     else:
+-        conf.SET_TARGET_TYPE('systemd-daemon', 'EMPTY')
++        conf.SET_TARGET_TYPE('systemd', 'EMPTY')
+         conf.undefine('HAVE_SYSTEMD')
+ 
+     conf.SAMBA_CONFIG_H('include/config.h')

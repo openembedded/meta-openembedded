@@ -1,0 +1,57 @@
+Some modules such as dynamic library maybe cann't be imported while cross compile, 
+we just check whether does the module exist.
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+
+--- samba-4.1.12.orig/buildtools/wafsamba/samba_bundled.py	2013-06-13 17:21:02.000000000 +0800
++++ samba-4.1.12/buildtools/wafsamba/samba_bundled.py	2015-07-16 16:57:06.649092158 +0800
+@@ -1,7 +1,7 @@
+ # functions to support bundled libraries
+ 
+ from Configure import conf
+-import sys, Logs
++import sys, Logs, imp
+ from samba_utils import *
+ 
+ def PRIVATE_NAME(bld, name, private_extension, private_library):
+@@ -228,17 +228,32 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, li
+     # versions
+     minversion = minimum_library_version(conf, libname, minversion)
+ 
+-    try:
+-        m = __import__(modulename)
+-    except ImportError:
+-        found = False
+-    else:
++    # Find module in PYTHONPATH
++    stuff = imp.find_module(modulename, [os.environ["PYTHONPATH"]])
++    if stuff:
+         try:
+-            version = m.__version__
+-        except AttributeError:
++            m = imp.load_module(modulename, stuff[0], stuff[1], stuff[2])
++        except ImportError:
+             found = False
++
++            if conf.env.CROSS_COMPILE:
++                # Some modules such as dynamic library maybe cann't be imported
++                # while cross compile, we just check whether the module exist
++                Logs.warn('Cross module[%s] has been found, but can not be loaded.' % (stuff[1]))
++                found = True
+         else:
+-            found = tuplize_version(version) >= tuplize_version(minversion)
++            try:
++                version = m.__version__
++            except AttributeError:
++                found = False
++            else:
++                found = tuplize_version(version) >= tuplize_version(minversion)
++        finally:
++            if stuff[0]:
++                stuff[0].close()
++    else:
++        found = False
++
+     if not found and not conf.LIB_MAY_BE_BUNDLED(libname):
+         Logs.error('ERROR: Python module %s of version %s not found, and bundling disabled' % (libname, minversion))
+         sys.exit(1)

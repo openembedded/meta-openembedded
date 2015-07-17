@@ -1,0 +1,44 @@
+From dc6b86b93c8f059b0cc96c364ffad05c88b7d92e Mon Sep 17 00:00:00 2001
+From: Christof Schmitt <cs@samba.org>
+Date: Fri, 22 Aug 2014 09:15:59 -0700
+Subject: [PATCH] s3-winbindd: Use correct realm for trusted domains in idmap child
+
+When authenticating users in a trusted domain, the idmap_ad module
+always connects to a local DC instead of one in the trusted domain.
+
+Fix this by passing the correct realm to connect to.
+
+Also Comment parameters passed to ads_cached_connection_connect
+
+Signed-off-by: Christof Schmitt <cs@samba.org>
+Reviewed-by: Jeremy Allison <jra@samba.org>
+(cherry picked from commit c203c722e7e22f9146f2ecf6f42452c0e82042e4)
+---
+ source3/winbindd/winbindd_ads.c |   11 +++++++++--
+ 1 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/source3/winbindd/winbindd_ads.c b/source3/winbindd/winbindd_ads.c
+index 4c26389..e47613e 100644
+--- a/source3/winbindd/winbindd_ads.c
++++ b/source3/winbindd/winbindd_ads.c
+@@ -187,8 +187,15 @@ ADS_STATUS ads_idmap_cached_connection(ADS_STRUCT **adsp, const char *dom_name)
+ 		}
+ 	}
+ 
+-	status = ads_cached_connection_connect(adsp, realm, dom_name, ldap_server,
+-					       password, realm, 0);
++	status = ads_cached_connection_connect(
++		adsp,			/* Returns ads struct. */
++		wb_dom->alt_name,	/* realm to connect to. */
++		dom_name,		/* 'workgroup' name for ads_init */
++		ldap_server,		/* DNS name to connect to. */
++		password,		/* password for auth realm. */
++		realm,			/* realm used for krb5 ticket. */
++		0);			/* renewable ticket time. */
++
+ 	SAFE_FREE(realm);
+ 
+ 	return status;
+-- 
+1.7.1
+

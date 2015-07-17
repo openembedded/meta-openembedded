@@ -1,0 +1,51 @@
+From 3bf805a38a1b901a55b08118ec04097d9787497c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?G=C3=BCnther=20Deschner?= <gd@samba.org>
+Date: Mon, 29 Sep 2014 17:16:15 +0200
+Subject: [PATCH] s3-net: Force libkrb5 locator to use the same KDC for join
+ and DNS update.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Guenther
+
+Signed-off-by: Günther Deschner <gd@samba.org>
+---
+ source3/utils/net_ads.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/source3/utils/net_ads.c b/source3/utils/net_ads.c
+index e96377f..efbc3d2 100644
+--- a/source3/utils/net_ads.c
++++ b/source3/utils/net_ads.c
+@@ -1566,6 +1566,27 @@ int net_ads_join(struct net_context *c, int argc, const char **argv)
+ 	 * If the dns update fails, we still consider the join
+ 	 * operation as succeeded if we came this far.
+ 	 */
++
++	if (r->out.dns_domain_name != NULL) {
++
++		/* Avoid potential libkrb5 issues finding a good KDC when we
++		 * already found one during the join. When the locator plugin is
++		 * installed (but winbind is not yet running) make sure we can
++		 * force libkrb5 to reuse that KDC. - gd */
++
++		char *env;
++
++		env = talloc_asprintf_strupper_m(r,
++						 "WINBINDD_LOCATOR_KDC_ADDRESS_%s",
++						 r->out.dns_domain_name);
++		if (env == NULL) {
++			return -1;
++		}
++
++		setenv(env, r->in.ads->auth.kdc_server, 0);
++		setenv("_NO_WINBINDD", "1", 0);
++	}
++
+ 	_net_ads_join_dns_updates(c, ctx, r);
+ 
+ 	TALLOC_FREE(r);
+-- 
+1.9.3
+
