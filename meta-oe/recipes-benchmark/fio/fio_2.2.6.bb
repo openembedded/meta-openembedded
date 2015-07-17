@@ -10,10 +10,14 @@ SECTION = "console/tests"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-DEPENDS = "libaio zlib numactl"
+DEPENDS = "libaio zlib"
 
+PACKAGECONFIG_NUMA = "numa"
 # ARM does not currently support NUMA
-COMPATIBLE_HOST = "^((?!arm).*)$"
+PACKAGECONFIG_NUMA_arm = ""
+
+PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
+PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
 # rev for v2.2.6
 SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
@@ -22,6 +26,10 @@ SRC_URI = "git://git.kernel.dk/fio.git"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+
+do_configure() {
+    ./configure ${EXTRA_OECONF}
+}
 
 do_install() {
     oe_runmake install DESTDIR=${D} prefix=${prefix} mandir=${mandir}
