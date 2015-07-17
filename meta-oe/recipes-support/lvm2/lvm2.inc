@@ -4,15 +4,11 @@ DEPENDS = "udev"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
-INC_PR = "r4"
-
 
 S = "${WORKDIR}/LVM2.${PV}"
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
-           file://0001-Replace-CPPFunction-with-rl_completion_func_t.patch \
-           file://mlock-ignore-vectors-gate_vma.patch \
            file://lvm.conf \
-           file://0001-snapshot-check-snapshot-exists.patch"
+          "
 
 PACKAGECONFIG ??= "readline"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
