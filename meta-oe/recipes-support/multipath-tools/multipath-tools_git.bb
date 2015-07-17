@@ -25,8 +25,11 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
 #
 #    includes important systemd related structure size fix
 #
-SRCREV = "aec68ab217fd2956443b27ceeb97dd6475267789"
+#SRCREV = "aec68ab217fd2956443b27ceeb97dd6475267789"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b06690e7a95c166eefe0199b39118eb1"
+
+# 0.5.0 + commits thru 2/16/2015
+SRCREV = "770e6d0da035deaced82885939161c2b69225e10"
 
 inherit systemd
 
@@ -66,6 +69,7 @@ FILES_${PN} += "${base_libdir}/multipath \
 
 PACKAGES =+ "kpartx"
 FILES_kpartx = "${base_sbindir}/kpartx \
-                /lib/udev/kpartx_id"
+                /usr/lib/udev/kpartx_id \
+               "
 
 RDEPENDS_${PN} += "kpartx"
