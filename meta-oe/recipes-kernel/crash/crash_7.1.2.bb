@@ -17,8 +17,8 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz \
            file://0001-cross_add_configure_option.patch \
            "
 
-SRC_URI[md5sum] = "d70ad2ed0f6d210ed11e88b8e977f5fd"
-SRC_URI[sha256sum] = "c6034c6eb6b52691c60d0b72dbdec58fac4c1b3ed1cd0697c209dc48d13a577e"
+SRC_URI[md5sum] = "04db2dde0d5e1dacbe3b820df3957742"
+SRC_URI[sha256sum] = "630664a00cbf5d7357f8dcdfc45e73ea62a2a517bd349ab73f0d704d10b01c55"
 
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
