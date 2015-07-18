@@ -5,17 +5,13 @@ LIC_FILES_CHKSUM = "\
     file://COPYING.LESSER;md5=6ab17b41640564434dda85c06b7124f7 \
 "
 
-#| configure:17888: checking for native large file support
-#| configure:17891: error: in `/home/jenkins/oe/shr-core-branches/shr-core/tmp-eglibc/work/core2-64-oe-linux/libimobiledevice/1.1.4-r0/libimobiledevice-1.1.4':
-#| configure:17893: error: cannot run test program while cross compiling
-PNBLACKLIST[libimobiledevice] ?= "cannot run test program while cross compiling"
-
 HOMEPAGE ="http://www.libimobiledevice.org/"
 
 DEPENDS = "libplist usbmuxd libtasn1 gnutls libgcrypt"
 
 SRC_URI = " \
     http://www.libimobiledevice.org/downloads/libimobiledevice-${PV}.tar.bz2 \
+    file://configure-fix-largefile.patch \
 "
 
 SRC_URI[md5sum] = "3f28cbc6a2e30d34685049c0abde5183"
