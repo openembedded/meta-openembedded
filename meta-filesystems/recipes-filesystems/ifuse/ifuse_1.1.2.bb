@@ -3,7 +3,6 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6ab17b41640564434dda85c06b7124f7"
 HOMEPAGE ="http://www.libimobiledevice.org/"
 
-PNBLACKLIST[ifuse] ?= "depends on blacklisted libimobiledevice"
 DEPENDS = "fuse libimobiledevice"
 
 SRC_URI = " \
