@@ -7,11 +7,9 @@ SECTION = "base"
 
 inherit autotools pkgconfig systemd
 
-SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
-	   "
-
-SRC_URI[md5sum] = "4b0f36a1dc014527e5b192265dbd7e70"
-SRC_URI[sha256sum] = "3dae93fb1cf5c560295253b0560cbc25421ed053ee373852864f3a60c03247d4"
+SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
+SRC_URI[md5sum] = "8894f00d499e0755467b381e6346f9ff"
+SRC_URI[sha256sum] = "1d48cdfa224b0ceb02e27fe9d56b738fb2a92262b04b15bb3a67e1c4248da8e2"
 
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
@@ -27,10 +25,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd',
 
 PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_unitdir}/system/,--with-systemddir="
 
-EXTRA_OECONF = "--disable-nss \
-                --with-upstartdir=%{_sysconfdir}/init \
-"
-EXTRA_OECONF += " --enable-nss "
+EXTRA_OECONF = "--with-upstartdir=%{_sysconfdir}/init"
 
 do_configure_prepend() {
     ( cd ${S}
