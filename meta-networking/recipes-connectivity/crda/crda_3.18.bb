@@ -9,13 +9,11 @@ DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
 
 SRC_URI = "https://www.kernel.org/pub/software/network/crda/${BP}.tar.xz;name=crda \
            https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2014.11.18.tar.xz;name=bin \
-           file://crda-Fix-the-linking-order-to-avoid-compilation-erro.patch \
-           file://crda-Add-DESTDIR-support-in-install-libreg-rules-in-.patch \
            file://do-not-run-ldconfig-if-destdir-is-set.patch \
            file://fix-linking-of-libraries-used-by-reglib.patch \
 "
-SRC_URI[crda.md5sum] = "66b1b0417c1ad19f0009a5c0c0c1aebc"
-SRC_URI[crda.sha256sum] = "2f85da7ab0170b140d6ed62596c8f268d4a7dedecf84cac7182ada979742ff59"
+SRC_URI[crda.md5sum] = "0431fef3067bf503dfb464069f06163a"
+SRC_URI[crda.sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
 
 SRC_URI[bin.md5sum] = "d750c402c5510add7380edcb1d9b75b2"
 SRC_URI[bin.sha256sum] = "eab6b50f30748a8b0065ba38cf3df05aac161a5861ae0a6c3cfd01d38a71c9dd"
