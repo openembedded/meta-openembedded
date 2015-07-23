@@ -12,8 +12,8 @@ SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2
            file://sensord.init \
            file://sensord.service \
 "
-SRC_URI[md5sum] = "da506dedceb41822e64865f6ba34828a"
-SRC_URI[sha256sum] = "5dae6a665e1150159a93743c4ff1943a7efe02cd9d3bb12c4805e7d7adcf4fcf"
+SRC_URI[md5sum] = "c03675ae9d43d60322110c679416901a"
+SRC_URI[sha256sum] = "e0579016081a262dd23eafe1d22b41ebde78921e73a1dcef71e05e424340061f"
 
 inherit update-rc.d systemd
 
