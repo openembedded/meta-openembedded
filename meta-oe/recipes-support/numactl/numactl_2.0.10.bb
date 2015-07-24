@@ -8,9 +8,7 @@ RDEPENDS_${PN} = "perl"
 
 inherit autotools-brokensep ptest
 
-LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=5644cc3851cb2499f6c48e52fe198bd9"
-SRC_URI[md5sum] = "136685c8eaf9d6569c351fe1d453b30c"
-SRC_URI[sha256sum] = "9ca033e6c14c0f26c20379b0cf9299429fd5a354a79c3c7880fd41ef69f7751c"
+LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=00b9fb4504ff2afcb7fb2a518780f412"
 
 SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
 	   file://fix-null-pointer.patch \
@@ -18,12 +16,14 @@ SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
 	   file://Makefile \
 	   file://run-ptest \
           "
+SRC_URI[md5sum] = "682c38305b2596967881f3d77bc3fc9c"
+SRC_URI[sha256sum] = "dbdac8fe74f13b2e2864bba352f1597ab1d3345c8c485d7805f58d66f414db61"
 
 # ARM does not currently support NUMA
 COMPATIBLE_HOST = "^((?!arm).*)$"
 
 do_install() {
-        oe_runmake DESTDIR=${D} prefix=${D}/usr libdir=${D}/${libdir} install
+        oe_runmake DESTDIR=${D} prefix=${D}/usr install
 	#remove the empty man2 directory
 	rm -r ${D}${mandir}/man2
 }
