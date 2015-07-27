@@ -5,11 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
 # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
 
-PATCHSET = "9"
+# Important note: tarballs for all patchsets within a version are deleted when
+# a new pachset is created. To avoid multiple patches for each patchset, try to
+# update to the last pachset of a version
+PATCHSET = "10"
 SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
 "
-SRC_URI[md5sum] = "5a3a60d1dae65ee7b1cc88498e3a0008"
-SRC_URI[sha256sum] = "83cd785caeb26a171e185b5deba2900c5b73e79c97364caa4c879d26c9f4a91b"
+SRC_URI[md5sum] = "cf5c663a31d0ca2975121d0803db0e61"
+SRC_URI[sha256sum] = "22565464059376513869b6626982e0726a33788ccc7e19a08e55ff1683d4ff92"
 
 S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
 
