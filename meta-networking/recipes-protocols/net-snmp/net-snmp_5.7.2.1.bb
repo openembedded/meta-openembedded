@@ -22,6 +22,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
         file://run-ptest \
         file://0001-Fix-CVE-2014-2285.patch \
         file://dont-return-incompletely-parsed-varbinds.patch \
+        file://net-snmp-5.7.2-fix-mib-timeout-values.patch \
 "
 
 SRC_URI[md5sum] = "a2c83518648b0f2a5d378625e45c0e18"
