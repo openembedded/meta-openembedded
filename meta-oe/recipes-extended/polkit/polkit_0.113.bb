@@ -20,12 +20,10 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
 PAM_SRC_URI = "file://polkit-1_pam.patch"
 SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
            ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-           file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
            file://0001-do-not-hardcoded-libdir.patch \
 "
-
-SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"
-SRC_URI[sha256sum] = "d695f43cba4748a822fbe864dd32c4887c5da1c71694a47693ace5e88fcf6af6"
+SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
+SRC_URI[sha256sum] = "e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81"
 
 EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages --disable-introspection"
 
