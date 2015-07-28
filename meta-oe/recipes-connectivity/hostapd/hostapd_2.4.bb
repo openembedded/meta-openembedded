@@ -11,8 +11,6 @@ INITSCRIPT_NAME = "hostapd"
 SYSTEMD_SERVICE_${PN} = "hostapd.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
-DEFAULT_PREFERENCE = "-1"
-
 SRC_URI = " \
     http://hostap.epitest.fi/releases/hostapd-${PV}.tar.gz \
     file://defconfig \
