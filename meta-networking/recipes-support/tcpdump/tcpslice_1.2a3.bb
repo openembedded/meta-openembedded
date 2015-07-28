@@ -29,7 +29,8 @@ do_configure () {
             ac_cv_target=${HOST_SYS}
 }
 
-do_install_prepend () {
+do_install () {
 	mkdir -p ${D}/usr/sbin
+	install -c -m 555 tcpslice ${D}/usr/sbin
 }
 
