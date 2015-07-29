@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
 DEPENDS = "util-linux"
 
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BP}.tar.gz \
+    file://xfsprogs-generate-crctable-which-is-moved-into-runti.patch \
     file://remove-install-as-user.patch \
     file://drop-configure-check-for-aio.patch \
 "
 
-SRC_URI[md5sum] = "de9f1f45026c2f4e0776058d429ff4b6"
-SRC_URI[sha256sum] = "adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be"
+SRC_URI[md5sum] = "9f383e36682709e62b12c125e5d8b895"
+SRC_URI[sha256sum] = "7a5124a880997939551b519610a2e54bd4cd0b0adfd563ce3f4de30827109ac9"
 
 inherit autotools-brokensep
 
@@ -48,9 +49,4 @@ do_install () {
     oe_runmake install
     # needed for xfsdump
     oe_runmake install-dev
-    rm ${D}${base_libdir}/libhandle.a
-    rm ${D}${base_libdir}/libhandle.la
-    rm ${D}${base_libdir}/libhandle.so
-    rm ${D}${libdir}/libhandle.so
-    ln -s ../..${base_libdir}/libhandle.so.1 ${D}${libdir}/libhandle.so
 }
