@@ -7,21 +7,16 @@ DEPENDS = "sysfsutils perl"
 RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource"
 RDEPENDS_${PN}-tests += "bash"
 
-PV = "2.18"
+PV = "2.19"
 PE = "1"
 
-SRCREV = "ea3f6b273f535aab38cefae30030774457bbbfe6"
+SRCREV = "426c22d65415fcb8927f68fbc5887e075a8dc40a"
 SRC_URI = " \
     git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
     file://tests-Makefile-install-static-4G-edge-testcases.patch \
     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
-    file://0001-aarch64-fix-cross-compilation.patch \
-    file://0001-ld.hugetlbfs-arm-arches-fix-page-size-and-text-offse.patch \
-    file://0001-replace-lib-lib64-hardcoded-values-by-LIBDIR32-LIBDI.patch \
-    file://0001-Extend-arm32-support-to-include-BE-variants.patch \
-    file://0001-Makefile-Recognize-all-ix86-arches.patch \
 "
 
 S = "${WORKDIR}/git"
