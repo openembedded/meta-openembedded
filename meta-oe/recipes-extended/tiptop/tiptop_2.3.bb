@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "ncurses libxml2"
 
 SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
-SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
-SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d"
+SRC_URI[md5sum] = "f1fba1e90465b0e5a3865b19133fa19d"
+SRC_URI[sha256sum] = "3f07e958b40acaeab98e9eb1326c9f91b0be0a782c1cc2bd7a9e18d31fab18ca"
 
 inherit autotools-brokensep
 EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
