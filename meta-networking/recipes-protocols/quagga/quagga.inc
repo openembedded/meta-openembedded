@@ -65,7 +65,6 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 ${@base_contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
                 --enable-ospf-te \
                 --enable-opaque-lsa \
-                --enable-ipv6 \
                 --enable-ospfclient=yes \
                 --enable-multipath=64 \
                 --enable-user=quagga \
