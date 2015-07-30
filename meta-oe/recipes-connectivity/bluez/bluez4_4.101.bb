@@ -49,4 +49,3 @@ FILES_${PN}-dbg += "\
 "
 
 SYSTEMD_SERVICE_${PN} = "bluetooth.service"
-SYSTEMD_AUTO_ENABLE = "disable"
