@@ -12,12 +12,12 @@ by several applications e.g. to determine MIME types for filenames."
 
 SECTION = "System Environment/Base"
 
-SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/r2-1-43.tar.gz"
-SRC_URI[md5sum] = "8fd185ffae710301de3bc297877a404b"
-SRC_URI[sha256sum] = "a630892b5fe59eb9e3bef30c597de1c2b7f35243dea4b0c995fd482aa20c2d6b"
+SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/${PN}-r2-1-44.tar.gz"
+SRC_URI[md5sum] = "e7de2a5dfaa126d5e0a081af7d908906"
+SRC_URI[sha256sum] = "644da071f918a33e11d1f8db8334010dd325108209d302f800816f4a177ee2e6"
 LICENSE = "PD & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=100fcfb84512ccc03ffc7d89ac391305"
-S = "${WORKDIR}/r2-1-43"
+S = "${WORKDIR}/${PN}-r2-1-44"
 do_install() {
     oe_runmake install DESTDIR=${D} sysconfdir=${sysconfdir} mandir=${mandir}
 }
