@@ -11,5 +11,5 @@ DEPENDS += "libxxf86vm"
 
 BBCLASSEXTEND = "native"
 
-SRC_URI[md5sum] = "c06067f572bc4a5298f324f27340da95"
-SRC_URI[sha256sum] = "e322a2fea80d559c09d6bc285ebe1a9e454dbeae2a07116cb7d2207db9d2c310"
+SRC_URI[md5sum] = "90b4305157c2b966d5180e2ee61262be"
+SRC_URI[sha256sum] = "0ef1c35b5c18b1b22317f455c8df13c0a471a8efad63c89c98ae3ce8c2b222d3"
