@@ -15,5 +15,5 @@ RDEPENDS_${PN} = "\
     python-datetime \
 "
 
-SRC_URI[md5sum] = "8940ddae309e44b593c75a9e05dd2a0b"
-SRC_URI[sha256sum] = "bfc2bd00147e5ecf75399f4a94cb84cc00ce9b511a15f9958bb6c85a455f76eb"
+SRC_URI[md5sum] = "417a47b1c432d90333e42084a605d3d8"
+SRC_URI[sha256sum] = "c4ee70cb407f9284517ac368f121cf0796a7134b961e53d9daf1aaae8f44fb90"
