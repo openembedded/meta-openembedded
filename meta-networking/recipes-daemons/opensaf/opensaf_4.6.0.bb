@@ -20,8 +20,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-plmcd-error-fix.patch \
            "
 
-SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
-SRC_URI[sha256sum] = "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035ba354c97b5471b590"
+SRC_URI[md5sum] = "a1ceddb517c0972aa7e899b092d7f464"
+SRC_URI[sha256sum] = "f6ea754a145ae42552f328f96c32f38429ad06478a351b9d0aed812adcecb2b4"
 
 SECTION = "admin"
 LICENSE = "LGPLv2.1"
