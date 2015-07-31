@@ -11,16 +11,16 @@ HOMEPAGE = "http://search.cpan.org/~smueller/ExtUtils-CppGuess/"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/S/SM/SMUELLER/ExtUtils-CppGuess-${PV}.tar.gz"
-SRC_URI[md5sum] = "350dd7c661189ea770d6c9354ebbc6c2"
-SRC_URI[sha256sum] = "1cd83ee8452351219b987c79ddb25cc25ee8c396318ba36c5211a92b5c87e7a8"
+SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETJ/ExtUtils-CppGuess-${PV}.tar.gz"
+SRC_URI[md5sum] = "f8ada38ee4ad86a4f1e20d8525ce0c99"
+SRC_URI[sha256sum] = "48625195a88c0f2ddc37bbd7a06346aa68ffb6948ba78da3aea47c0db2540f65"
 
 S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
 
-inherit cpan_build
+inherit cpan
 
 do_install () {
-        cpan_build_do_install
+        cpan_do_install
 }
 
 RDEPENDS_${PN} = " libcapture-tiny-perl \
@@ -32,7 +32,6 @@ RDEPENDS_${PN} = " libcapture-tiny-perl \
                    perl-module-carp \
                    perl-module-file-temp \
                    perl-module-lib \
-                   perl-module-build \
 "
 
 BBCLASSEXTEND = "native"
