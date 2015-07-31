@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
 DEPENDS = "util-linux lvm2 popt libgcrypt"
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.6/${BP}.tar.xz"
-SRC_URI[md5sum] = "179c0781de59838a4e39f61b2df5ea48"
-SRC_URI[sha256sum] = "2d2ce28e4e1137dd599d87884b62ef6dbf14fd7848b2a2bf7d61cf125fbd8e6f"
+SRC_URI[md5sum] = "918406eb5d2e2f5a7348c432ea9b1473"
+SRC_URI[sha256sum] = "c23c24c8d662032da8650c1c84985221be8bbedf4737c1540bba7e4517dfe820"
 
 inherit autotools gettext pkgconfig
 
