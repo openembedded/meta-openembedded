@@ -10,8 +10,8 @@ SRCNAME = "pyparsing"
 
 SRC_URI = "http://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.zip"
 
-SRC_URI[md5sum] = "dc7036a6f1ab01c3baed3d97af8d77c0"
-SRC_URI[sha256sum] = "7e1766ee747cca79fe172b670fd53ef58fc55d2b1804fd6c66d857abb62d143a"
+SRC_URI[md5sum] = "0a5ec41bb650aed802751a311b5d820d"
+SRC_URI[sha256sum] = "43d7710fdaa194a3bccf3127d06dec8e2de99a7efe6c47f01d4b748a1d04b192"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
