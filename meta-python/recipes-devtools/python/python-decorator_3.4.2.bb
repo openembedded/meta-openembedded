@@ -9,7 +9,7 @@ decorator, just because you can."
 
 SECTION = "devel/python"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://documentation3.py;beginline=848;endline=877;md5=0b56661417fb7b841afc8892e14ba241"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=104961fab4bc3ef8d0640bb37641b473"
 
 SRCNAME = "decorator"
 
@@ -18,5 +18,5 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-SRC_URI[md5sum] = "1e8756f719d746e2fc0dd28b41251356"
-SRC_URI[sha256sum] = "c20b404cbb7ee5cebd506688e0114e3cd76f5ce233805a51f36e1a7988d9d783"
+SRC_URI[md5sum] = "9e0536870d2b83ae27d58dbf22582f4d"
+SRC_URI[sha256sum] = "7320002ce61dea6aa24adc945d9d7831b3669553158905cdd12f5d0027b54b44"
