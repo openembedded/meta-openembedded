@@ -17,13 +17,13 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=322;endline=325;md5=086450ce010f6fda25db0b38fcc41086"
 
 SRCNAME = "Module-Pluggable"
-SRC_URI = "${CPAN_MIRROR}/authors/id/S/SI/SIMONW/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[md5sum] = "1b71ed7a67ad8c048d1499540bc892ba"
-SRC_URI[sha256sum] = "e2dc354043bb16f1f3df8c4bb26070b26e594819f218cf8b8ac19e79c720916f"
+SRC_URI = "https://github.com/moto-timo/${SRCNAME}/archive/${PV}.tar.gz"
+SRC_URI[md5sum] = "e32475d6ff5843f738cedacd3b7a2cdb"
+SRC_URI[sha256sum] = "58c62292eea6d06959eba1b97598650813211265403242d57efb2f605c96059f"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit cpan_build
+inherit cpan
 
 RDEPENDS_${PN} = " perl-module-base \
 		   perl-module-deprecate \
