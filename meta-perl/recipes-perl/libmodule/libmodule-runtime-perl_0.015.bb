@@ -17,19 +17,19 @@ SECTION = "libs"
 HOMEPAGE = "http://search.cpan.org/~zefram/Module-Runtime/"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://README;beginline=43;endline=44;md5=62e24a93342fede7221d66335c716f34"
+LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=62e24a93342fede7221d66335c716f34"
 
-SRC_URI = "${CPAN_MIRROR}/authors/id/Z/ZE/ZEFRAM/Module-Runtime-${PV}.tar.gz"
-SRC_URI[md5sum] = "a6597bc25536a30476f0d75b64d35734"
-SRC_URI[sha256sum] = "4c44fe0ea255a9fd00741ee545063f6692d2a28e7ef2fbaad1b24a92803362a4"
+SRCNAME = "module-runtime"
+SRC_URI = "https://github.com/moto-timo/${SRCNAME}/archive/${PV}.tar.gz"
+SRC_URI[md5sum] = "ad6ca179c978aa02ac8aa29244ef9beb"
+SRC_URI[sha256sum] = "59effa82b3f6986d28de6154a8f2428157691004d951f936a81e851f4dbcb045"
 
-S = "${WORKDIR}/Module-Runtime-${PV}"
+S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit cpan_build
+inherit cpan
 
 RDEPENDS_${PN} = " perl-module-test-more \
                    perl-module-strict \
-                   perl-module-build \
 "
 
 BBCLASSEXTEND = "native"
