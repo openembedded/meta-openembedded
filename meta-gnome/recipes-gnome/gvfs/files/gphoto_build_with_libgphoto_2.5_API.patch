@@ -1,0 +1,78 @@
+Upstream-Status: Backport
+https://git.gnome.org/browse/gvfs/commit/daemon/gvfsbackendgphoto2.c?id=259a09183f7c96b5fb0f6453bb4b0bcf92e3eaa2
+
+Signed-off-by: Max Krummenacher <max.oss.09 at gmail.com>
+
+From 259a09183f7c96b5fb0f6453bb4b0bcf92e3eaa2 Mon Sep 17 00:00:00 2001
+From: Cosimo Cecchi <cosimoc@gnome.org>
+Date: Wed, 8 Aug 2012 13:14:19 +0200
+Subject: gphoto: build with libgphoto 2.5 API
+
+Patch taken from the Fedora package
+Author: Jindrich Novy <jnovy@redhat.com>
+
+http://pkgs.fedoraproject.org/cgit/gvfs.git/commit/?id=cd0c6218df85bf3de101402c1aa9d79aae7c3019
+
+diff --git a/configure.ac b/configure.ac
+index 3215694..3280666 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -436,6 +436,9 @@ if test "x$enable_gphoto2" != "xno" -a \( "x$msg_hal" = "xyes" -o "x$msg_gudev"
+   if test "x$msg_gphoto2" = "xyes"; then
+     if test "x$use_gphoto2" = "xyes"; then
+       AC_DEFINE(HAVE_GPHOTO2, 1, [Define to 1 if gphoto2 is available])
++      PKG_CHECK_MODULES(GPHOTO2, libgphoto2 >= 2.5.0,
++         AC_DEFINE(HAVE_GPHOTO25, 1, [Define to 1 if libgphoto2 2.5 is available])
++      )
+     else
+       if test "x$enable_gphoto2" = "xyes"; then
+         AC_MSG_ERROR([Cannot build with gphoto2 support. Need OS tweaks in hal volume monitor.])
+diff --git a/daemon/gvfsbackendgphoto2.c b/daemon/gvfsbackendgphoto2.c
+index 0d2c594..75b4b02 100644
+--- a/daemon/gvfsbackendgphoto2.c
++++ b/daemon/gvfsbackendgphoto2.c
+@@ -1647,7 +1647,9 @@ do_mount (GVfsBackend *backend,
+       return;
+     }
+ 
++#ifndef HAVE_GPHOTO25
+   DEBUG ("  '%s' '%s' '%s'",  info.name, info.path, info.library_filename);
++#endif
+   
+   /* set port */
+   rc = gp_camera_set_port_info (gphoto2_backend->camera, info);
+@@ -2590,7 +2592,11 @@ do_slow_file_rename_in_same_dir (GVfsBackendGphoto2 *gphoto2_backend,
+         }
+     }
+ 
++#ifdef HAVE_GPHOTO25
++  rc = gp_camera_folder_put_file (gphoto2_backend->camera, dir, new_name, GP_FILE_TYPE_NORMAL, file_dest, gphoto2_backend->context);
++#else
+   rc = gp_camera_folder_put_file (gphoto2_backend->camera, dir, file_dest, gphoto2_backend->context);
++#endif
+   if (rc != 0)
+     goto out;
+ 
+@@ -3222,14 +3228,18 @@ commit_write_handle (GVfsBackendGphoto2 *gphoto2_backend, WriteHandle *write_han
+   if (rc != 0)
+     goto out;
+ 
+-  gp_file_set_type (file, GP_FILE_TYPE_NORMAL);
+   gp_file_set_name (file, write_handle->name);
+   gp_file_set_mtime (file, time (NULL));
+   gp_file_set_data_and_size (file, 
+                              dup_for_gphoto2 (write_handle->data, write_handle->size), 
+                              write_handle->size);
+   
++#ifdef HAVE_GPHOTO25
++  rc = gp_camera_folder_put_file (gphoto2_backend->camera, write_handle->dir, write_handle->name, GP_FILE_TYPE_NORMAL, file, gphoto2_backend->context);
++#else
++  gp_file_set_type (file, GP_FILE_TYPE_NORMAL);
+   rc = gp_camera_folder_put_file (gphoto2_backend->camera, write_handle->dir, file, gphoto2_backend->context);
++#endif
+   if (rc != 0)
+     {
+       gp_file_unref (file);
+-- 
+cgit v0.10.2
+

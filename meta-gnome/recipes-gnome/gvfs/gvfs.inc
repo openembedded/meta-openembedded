@@ -16,6 +16,7 @@ SRC_URI += " \
     file://0003-Adapt-to-glib-mutex-API-changes.patch \
     file://0004-Adapt-to-glib-thread-API-changes.patch \
     file://0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch \
+    file://gphoto_build_with_libgphoto_2.5_API.patch \
 "
 
 EXTRA_OECONF = "--with-archive-includes=${STAGING_INCDIR} \
