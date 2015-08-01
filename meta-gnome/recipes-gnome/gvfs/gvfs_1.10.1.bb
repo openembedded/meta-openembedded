@@ -1,6 +1,6 @@
 require gvfs.inc
 
-DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf libgphoto2 intltool-native"
+DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf intltool-native"
 # optional: obexftp libcdio libimobiledevice 
 
 PR = "${INC_PR}.0"
@@ -22,8 +22,9 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
 RDEPENDS_${PN} = "gvfs-gdu-volume-monitor"
 RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
 
-PACKAGECONFIG ?= "${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'samba', d)}"
+PACKAGECONFIG ?= "libgphoto2 ${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'samba', d)}"
 
+PACKAGECONFIG[libgphoto2] = "--enable-gphoto2, --disable-gphoto2, libgphoto2"
 PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
                         --with-samba-libs=${STAGING_LIBDIR}, --disable-samba, samba"
 # needs meta-filesystems
