@@ -6,9 +6,8 @@ DEPENDS = "glib-2.0 gtk+ libxfce4util libxfce4ui libwnck xfconf dbus-glib thunar
 
 inherit xfce
 
-SRC_URI[md5sum] = "9a29c8e6b8a931fecd29f1ea736a6a70"
-SRC_URI[sha256sum] = "c9788883163b57bac39d12e5f8310c869d176454879defb78b67f8e9f1ad5225"
-SRC_URI += "file://0001-Remove-whitespaces-from-monitor-name-when-accessing-.patch"
+SRC_URI[md5sum] = "cb34f4f333d7d122f1688d2f155202c8"
+SRC_URI[sha256sum] = "a8a8d93744d842ca6ac1f9bd2c8789ee178937bca7e170e5239cbdbef30520ac"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
