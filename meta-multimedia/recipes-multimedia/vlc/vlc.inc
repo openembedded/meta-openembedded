@@ -10,7 +10,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
-   libmtp libopus orc libusb1 schroedinger taglib \
+   libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
    tiff xcb-util-keysyms samba"
 
 SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
@@ -36,7 +36,6 @@ EXTRA_OECONF = "\
     --enable-dbus \
     --without-contrib \
     --without-kde-solid \
-    --disable-glx \
     --enable-realrtsp \
     --disable-libtar \
     ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
@@ -54,6 +53,9 @@ PACKAGECONFIG[mkv] = "--enable-mkv,--disable-mkv,libmatroska libebml"
 PACKAGECONFIG[postproc] = "--enable-postproc,--disable-postproc,libpostproc"
 PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
 PACKAGECONFIG[libva] = "--enable-libva --enable-avcodec,--disable-libva --disable-avcodec,libva libav"
+PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
+PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
 
 do_configure_prepend() {
     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true

@@ -5,11 +5,11 @@
 
 Upstream status: Pending
 
-Index: vlc-2.1.4/configure.ac
+Index: vlc-2.2.1/configure.ac
 ===================================================================
---- vlc-2.1.4.orig/configure.ac
-+++ vlc-2.1.4/configure.ac
-@@ -3940,25 +3940,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
+--- vlc-2.2.1.orig/configure.ac
++++ vlc-2.2.1/configure.ac
+@@ -4017,25 +4017,19 @@ PKG_ENABLE_MODULES_VLC([LIBXML2], [xml],
  dnl
  dnl libgcrypt
  dnl
@@ -26,10 +26,10 @@ Index: vlc-2.1.4/configure.ac
 -      GCRYPT_CFLAGS="`libgcrypt-config --cflags`"
 -      GCRYPT_LIBS="`libgcrypt-config --libs`"
 -    ], [
--      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
+-      AC_MSG_ERROR([libgcrypt not found. Install libgcrypt or pass --disable-libgcrypt.])
 -    ], [`libgcrypt-config --libs`])
 -  ], [
--    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install libgcrypt or use --disable-libgcrypt. Have a nice day.])
+-    AC_MSG_ERROR([libgcrypt version 1.1.94 or higher not found. Install libgcrypt or pass --disable-libgcrypt.])
 -  ], [#include <gcrypt.h>]
 -  )
 +      AM_PATH_LIBGCRYPT($GCRYPT_LIBVER:$GCRYPT_REQ,

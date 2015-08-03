@@ -9,7 +9,9 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
             file://0004-modules-gui-qt4-out-of-tree-build.patch \
             file://0005-libpostproc-header-check.patch \
             file://0006-make-opencv-configurable.patch \
+	    file://0007-use-vorbisidec.patch \
+            file://0008-fix-luaL-checkint.patch \
 "
 
-SRC_URI[md5sum] = "7ed67d22f7425011078772bfc62ac222"
-SRC_URI[sha256sum] = "3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3"
+SRC_URI[md5sum] = "42273945758b521c408fabc7fd6d9946"
+SRC_URI[sha256sum] = "543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb"
