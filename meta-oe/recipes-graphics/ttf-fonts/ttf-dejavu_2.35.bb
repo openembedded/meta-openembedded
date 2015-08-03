@@ -40,5 +40,5 @@ FILES_${PN}-serif           = "${datadir}/fonts/truetype/DejaVuSerif.ttf ${datad
 FILES_${PN}-serif-condensed = "${datadir}/fonts/truetype/DejaVuSerifCondensed*.ttf"
 FILES_${PN}-common          = "${sysconfdir}"
 
-SRC_URI[md5sum] = "ff871dff0b3e8a11cd5c54478f11073f"
-SRC_URI[sha256sum] = "243642a1c3f4b6fd00125f5772ac5c8e4d0bb6586f5abb05829ead4b83ad5233"
+SRC_URI[md5sum] = "59eaca5acf5c7c8212e92778e3e01f32"
+SRC_URI[sha256sum] = "f6d7965586101ff3a8a5c3ec503e082bb6a9604ff53413e10702e5917c194d88"
