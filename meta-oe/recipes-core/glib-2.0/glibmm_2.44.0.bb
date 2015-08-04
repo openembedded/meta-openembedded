@@ -14,8 +14,8 @@ SRC_URI = " \
     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
     file://remove-examples.patch \
 "
-SRC_URI[md5sum] = "5c96d566c22c209d7b9cbf2344c469e9"
-SRC_URI[sha256sum] = "f15b65bf5740257be03c69f2f5ae71436ac3011ebeb02274b2b99b796c6837cf"
+SRC_URI[md5sum] = "32ee4150b436d097fe2506d0b0b13a75"
+SRC_URI[sha256sum] = "1b0ac0425d24895507c0e0e8088a464c7ae2d289c47afa1c11f63278fc672ea8"
 
 do_install_append() {
     install -d ${D}${datadir}/glibmm-2.4
