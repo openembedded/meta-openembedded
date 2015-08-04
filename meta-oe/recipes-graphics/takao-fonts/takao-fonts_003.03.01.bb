@@ -6,13 +6,11 @@ SECTION = "User Interface/X"
 
 LICENSE = "IPA"
 LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979cf9db1fad644e8221276"
+SRC_URI = "https://launchpad.net/${BPN}/trunk/15.03/+download/TakaoFonts_00303.01.tar.xz"
+SRC_URI[md5sum] = "8cd3fe724faa5034a9369e98cf108d2d"
+SRC_URI[sha256sum] = "e9871f72ac69acb3e277aebbee7ca01fbebf54800733e29fafdc46133fc3552f"
 
-SRC_URI = "http://launchpad.net/takao-fonts/003.02/${PV}/+download/takao-fonts-ttf-${PV}.zip"
-SRC_URI[md5sum] = "ca480e5edb9f26d871bf6df6cb910306"
-SRC_URI[sha256sum] = "2f526a16c7931958f560697d494d8304949b3ce0aef246fb0c727fbbcc39089e"
-
-S = "${WORKDIR}/${BPN}-ttf-${PV}"
-
+S = "${WORKDIR}/TakaoFonts_00303.01"
 do_install() {
     install -m 0755 -d ${D}/${datadir}/fonts
     install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
