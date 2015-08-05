@@ -13,11 +13,12 @@ HOMEPAGE = "http://search.cpan.org/~dagolden/Capture-Tiny/"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=37a4918a30ace24395020e5b8c03b83f"
 
-SRC_URI = "http://search.cpan.org/CPAN/authors/id/D/DA/DAGOLDEN/Capture-Tiny-${PV}.tar.gz"
-SRC_URI[md5sum] = "718e9d62c4a27a3207cf8506cb99d846"
-SRC_URI[sha256sum] = "9bcf6f8472f8ea50401536cb070ac0c7770837d155c4d6abe212759863aae065"
+SRCNAME = "Capture-Tiny"
+SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DAGOLDEN/${SRCNAME}-${PV}.tar.gz"
+SRC_URI[md5sum] = "7b0fbdbf4199724df1e53fe0b3e2ef4c"
+SRC_URI[sha256sum] = "a3b4e55278757e77d50df0b1a79f42e6e8354b7d41db806da39bf161bee63aea"
 
-S = "${WORKDIR}/Capture-Tiny-${PV}"
+S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit cpan
 
@@ -30,7 +31,7 @@ RDEPENDS_${PN} = " perl-module-scalar-util \
                    perl-module-test-more \
                    perl-module-file-temp \
                    perl-module-lib \
-                   perl-module-build \
+                   perl-module-overloading \
 "
 
 BBCLASSEXTEND = "native"
