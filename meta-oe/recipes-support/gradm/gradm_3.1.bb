@@ -11,10 +11,10 @@ LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 DEPENDS = "flex-native bison-native ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
-SRC_URI = "http://grsecurity.net/stable/${BP}-201408301734.tar.gz \
+SRC_URI = "http://grsecurity.net/stable/${BP}-201507191652.tar.gz \
            file://0001-Makefile-remove-strip.patch"
-SRC_URI[md5sum] = "79ec912e6544c5e58753f658623763f9"
-SRC_URI[sha256sum] = "b190e5afecdf3ac5020a4e5e4b698645f1c01b20d036129dd8b609c4bd0c319c"
+SRC_URI[md5sum] = "ecec72d3a9b6d84c00eda97957b707b6"
+SRC_URI[sha256sum] = "2f14c357bf0459e502a4e108b76c3f6240aa484762d07bb1687796b9b9297a50"
 
 S = "${WORKDIR}/gradm"
 
