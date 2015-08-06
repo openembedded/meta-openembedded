@@ -12,8 +12,8 @@ SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
 "
-SRC_URI[md5sum] = "5a4899f89edcbdd1ac46d2d947e8d6eb"
-SRC_URI[sha256sum] = "359385707494bedbb48cfe0992ccfbcc4ac147dae1f7a47055c71e96439508ff"
+SRC_URI[md5sum] = "7eabef7bd3bbdd6dc0473dd32aeac924"
+SRC_URI[sha256sum] = "e4099fa2f4f4b8d95d0ad9fdd03ec20960845085fa500bf79aecbf54cee018c9"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
