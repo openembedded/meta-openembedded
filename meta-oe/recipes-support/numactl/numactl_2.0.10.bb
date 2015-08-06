@@ -15,6 +15,7 @@ SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
 	   file://Fix-the-test-output-format.patch \
 	   file://Makefile \
 	   file://run-ptest \
+	   file://0001-define-run-test-target.patch \
           "
 SRC_URI[md5sum] = "682c38305b2596967881f3d77bc3fc9c"
 SRC_URI[sha256sum] = "dbdac8fe74f13b2e2864bba352f1597ab1d3345c8c485d7805f58d66f414db61"
@@ -28,19 +29,29 @@ do_install() {
 	rm -r ${D}${mandir}/man2
 }
 
+do_compile_ptest() {
+	oe_runmake test
+}
+
 do_install_ptest() {
 	#install tests binaries
-        local test_binaries="checkaffinity checktopology distance	\
-		ftok mbind_mig_pages migrate_pages move_pages mynode	\
-		nodemap pagesize prefered printcpu randmap realloc_test	\
-		regress regress2 runltp shmtest tbitmap tshared bind_range"
+        local test_binaries="distance ftok mbind_mig_pages migrate_pages move_pages \
+		mynode	nodemap node-parse pagesize prefered randmap realloc_test \
+		tbitmap tshared"
 
 	[ ! -d ${D}/${PTEST_PATH}/test ] && mkdir -p ${D}/${PTEST_PATH}/test
 	for i in $test_binaries; do
+		install -m 0755 ${B}/test/.libs/$i ${D}${PTEST_PATH}/test
+	done
+
+	local test_scripts="checktopology checkaffinity printcpu regress regress2 \
+			shmtest  runltp bind_range"
+	for i in $test_scripts; do
 		install -m 0755 ${B}/test/$i ${D}${PTEST_PATH}/test
 	done
+
 	install -m 0755 ${WORKDIR}/Makefile ${D}${PTEST_PATH}/
-	install -m 0755 ${B}/numactl ${D}${PTEST_PATH}/
+	install -m 0755 ${B}/.libs/numactl ${D}${PTEST_PATH}/
 }
 
 RDEPENDS_${PN}-ptest = "bash"
