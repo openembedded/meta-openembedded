@@ -12,8 +12,8 @@ SRC_URI += " \
     file://0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \
     file://0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch \
 "
-SRC_URI[archive.md5sum] = "5b2a8baa6b038b3e55e5444ff321e80d"
-SRC_URI[archive.sha256sum] = "760af85b43fa5bcf74b96f899a6d4c1d5e9445e5eb63088c49e5164bbf88d9a9"
+SRC_URI[archive.md5sum] = "7fc2ed3f0c46ed41ddabe99d51513b1c"
+SRC_URI[archive.sha256sum] = "2cc26f03d0011d2a067bd5205dc0c17d5aa0470020a8c36d319ae10e5728af72"
 
 PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth,gnome-bluetooth"
 PACKAGECONFIG[modemmanager] = "--with-modem-manager-1,--without-modem-manager-1,modemmanager"
