@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRCNAME = "pyOpenSSL"
 
-DEPENDS = "openssl"
+DEPENDS = "openssl python-cryptography"
 PE = "1"
 
-SRC_URI = "http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-${PV}.tar.gz \
-           file://x509_revoked_dup.patch"
-SRC_URI[md5sum] = "767bca18a71178ca353dff9e10941929"
-SRC_URI[sha256sum] = "21e12b03abaa0e04ecc8cd9c251598f71bae11c9f385304234e4ea5618c6163b"
+SRC_URI = "http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-${PV}.tar.gz"
+
+SRC_URI[md5sum] = "f447644afcbd5f0a1f47350fec63a4c6"
+SRC_URI[sha256sum] = "f0a26070d6db0881de8bcc7846934b7c3c930d8f9c79d45883ee48984bc0d672"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
