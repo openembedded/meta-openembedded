@@ -1,10 +1,10 @@
 SUMMARY = "JavaScript library for dynamic web applications"
-LICENSE = "GPLv2+ & MIT"
-LIC_FILES_CHKSUM = "file://usr/share/doc/libjs-jquery/copyright;md5=2b490904c50a58472452b6e9e1c81203"
+LICENSE = "MIT | BSD | GPL-2"
+LIC_FILES_CHKSUM = "file://usr/share/doc/libjs-jquery/copyright;md5=5d1ec6f95e0a91d38e2f71de93ddb00e"
 
-SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/main/j/jquery/${BPN}_${PV}-1ubuntu1_all.deb;subdir=${BP}"
-SRC_URI[md5sum] = "1ac8a9e4dfe18de22e65baec3dd53f8b"
-SRC_URI[sha256sum] = "0551e20c88035d80c00b552707573d62ee89e8e5a204d8b427a6020b065e2542"
+SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/main/j/jquery/${BPN}_${PV}+debian-1ubuntu1~ubuntu12.04.1_all.deb;subdir=${BP}"
+SRC_URI[md5sum] = "fa511ab67f6e960c5b6d39a4d665e47f"
+SRC_URI[sha256sum] = "190ca18a71e35c8ab2ba73fe5be3c7cc601fe20b45709d801110818f1b602cc1"
 
 JQUERYDIR = "${datadir}/javascript/jquery"
 JQUERYDOCDIR = "${docdir}/libjs-jquery"
