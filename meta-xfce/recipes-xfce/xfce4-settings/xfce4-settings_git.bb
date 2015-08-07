@@ -6,11 +6,12 @@ DEPENDS = "exo exo-native garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib l
 
 inherit xfce xfce-git
 
-SRC_URI = " git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.0 \
-            file://0001-xsettings.xml-remove-trouble-causing-comment.patch \
-            file://0002-xsettings.xml-Set-default-themes.patch \
-"
-SRCREV = "a4540c2350cecf53f7095027edd102c6a24e36af"
+# schnitzeltony git repo is the mainline repo
+# + datetime-setter - sent to mainline but strange response
+# + minor bugfixes - sent mainline but no response
+# + option to hide mousepointer for a specific (touch) input device - sent mainline but no response
+SRC_URI = "git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.0"
+SRCREV = "30bc3db17e0c634e41d2f099de6f39bb894906cd"
 S = "${WORKDIR}/git"
 PV = "4.12.0+git${SRCPV}"
  
