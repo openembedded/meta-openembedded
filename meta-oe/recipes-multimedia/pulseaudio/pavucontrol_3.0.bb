@@ -7,7 +7,7 @@ DEPENDS = "intltool gtkmm libcanberra pulseaudio"
 inherit gnome
 
 SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz"
-SRC_URI[md5sum] = "0ab6b13542af9b4417438527d2524316"
-SRC_URI[sha256sum] = "3dbe2865b6e3a195a8951967d9234f62cd254c30b08bdea1ecf8997b58f68cde"
+SRC_URI[md5sum] = "176308d2c03f8f3a7b2bd4f4d284fe71"
+SRC_URI[sha256sum] = "b3d2ea5a25fc88dcee80c396014f72df1b4742f8cfbbc5349c39d64a0d338890"
 
 EXTRA_OECONF = " --disable-gtk3 --disable-lynx "
