@@ -31,7 +31,7 @@ EXTRA_OECONF += "--disable-emacs \
                  --without-mana \
                  --without-eb"
 
-CONFIGUREOPTS_class-target := "${@d.getVar('CONFIGUREOPTS', True).replace('--disable-silent-rules', ' ')}"
+CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
 
 PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-fep uim-common uim-anthy libuim0 libuim-dev"
 
