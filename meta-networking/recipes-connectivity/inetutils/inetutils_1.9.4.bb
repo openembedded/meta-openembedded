@@ -2,6 +2,7 @@ DESCRIPTION = "The GNU inetutils are a collection of common \
 networking utilities and servers including ftp, ftpd, rcp, \
 rexec, rlogin, rlogind, rsh, rshd, syslog, syslogd, talk, \
 talkd, telnet, telnetd, tftp, tftpd, and uucpd."
+HOMEPAGE = "http://www.gnu.org/software/inetutils"
 SECTION = "net"
 DEPENDS = "ncurses netbase readline"
 LICENSE = "GPLv3"
@@ -20,8 +21,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
            file://inetutils-1.9-PATH_PROCNET_DEV.patch \
 "
 
-SRC_URI[md5sum] = "aa1a9a132259db83e66c1f3265065ba2"
-SRC_URI[sha256sum] = "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56a0509117a36a89913"
+SRC_URI[md5sum] = "04852c26c47cc8c6b825f2b74f191f52"
+SRC_URI[sha256sum] = "be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec92cc616"
 
 inherit autotools gettext update-alternatives texinfo
 

@@ -11,7 +11,7 @@ Signed-off-by: Chunrong Guo <b40290@freescale.com>
  
 -AC_INIT([GNU inetutils],
 - m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
-+AC_INIT([GNU inetutils],[1.9.2],
++AC_INIT([GNU inetutils],[1.9.4],
   [bug-inetutils@gnu.org])
  
  AC_CONFIG_SRCDIR([src/inetd.c])
