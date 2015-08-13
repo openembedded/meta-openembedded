@@ -10,7 +10,7 @@ DEPENDS = "virtual/db libpcre openssl postfix-native \
     ${@base_contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)} \
     ${@base_contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '', d)} \
 "
-DEPENDS_virtclass-native = "virtual/db-native openssl-native libpcre-native"
+DEPENDS_class-native = "virtual/db-native openssl-native libpcre-native"
 
 LICENSE = "IPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64375f37431336ea1b1b3005fe3fa354"
@@ -54,8 +54,8 @@ export AUXLIBS-ldap = "\
     ${@base_contains('DISTRO_FEATURES', 'ldap', '-lldap -llber', '', d)}"
 
 # no native openldap
-export CCARGS-ldap_virtclass-native = ""
-export AUXLIBS-ldap_virtclass-native = ""
+export CCARGS-ldap_class-native = ""
+export AUXLIBS-ldap_class-native = ""
 
 # SASL support -DUSE_LDAP_SASL -DUSE_SASL_AUTH
 # current openldap didn't enable SASL
@@ -63,8 +63,8 @@ export CCARGS-sasl  = "\
     ${@base_contains('DISTRO_FEATURES', 'sasl', '-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I=/usr/include/sasl', '', d)}"
 export AUXLIBS-sasl = "\
     ${@base_contains('DISTRO_FEATURES', 'sasl', '-lsasl2', '', d)}"
-export CCARGS-sasl_virtclass-native = ""
-export AUXLIBS-sasl_virtclass-native = ""
+export CCARGS-sasl_class-native = ""
+export AUXLIBS-sasl_class-native = ""
 
 # PCRE, TLS support default
 export CCARGS  = "${CFLAGS} -DHAS_PCRE -DUSE_TLS ${CCARGS-ldap} ${CCARGS-sasl}"
@@ -119,7 +119,7 @@ do_compile () {
     oe_runmake
 }
 
-do_install_prepend_virtclass-native() {
+do_install_prepend_class-native() {
     export POSTCONF="bin/postconf"
 }
 

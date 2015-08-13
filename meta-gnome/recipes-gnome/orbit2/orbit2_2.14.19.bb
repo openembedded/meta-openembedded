@@ -17,12 +17,12 @@ SRC_URI[sha256sum] = "55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd
 BBCLASSEXTEND = "native"
 
 IDL_COMPILER_DEPENDS = "orbit2-native"
-IDL_COMPILER_DEPENDS_virtclass-native = " "
+IDL_COMPILER_DEPENDS_class-native = " "
 DEPENDS = "libidl popt ${IDL_COMPILER_DEPENDS}"
 
-# IDL_COMPILER_DEPENDS_virtclass-native for some reason didn't work and orbit2-native
+# IDL_COMPILER_DEPENDS_class-native for some reason didn't work and orbit2-native
 # was still in orbit2-native DEPENDS causing circular dependency
-DEPENDS_virtclass-native = "libidl-native popt-native"
+DEPENDS_class-native = "libidl-native popt-native"
 PARALLEL_MAKE = ""
 
 
@@ -38,4 +38,4 @@ LEAD_SONAME = "libORBit-2.so"
 inherit autotools pkgconfig gtk-doc
 
 EXTRA_OEMAKE = "IDL_COMPILER='${STAGING_BINDIR_NATIVE}/orbit-idl-2'"
-EXTRA_OEMAKE_virtclass-native = " "
+EXTRA_OEMAKE_class-native = " "

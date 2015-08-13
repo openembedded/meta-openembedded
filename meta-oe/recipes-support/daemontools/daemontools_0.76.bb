@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "a55535012b2be7a52dcd9eccabb9a198b13be50d0384143bd3b32b8710
 S = "${WORKDIR}/admin/${BPN}-${PV}"
 
 DEPENDS += "daemontools-native"
-DEPENDS_virtclass-native = ""
+DEPENDS_class-native = ""
 
 do_compile() {
     ./package/compile

@@ -30,5 +30,5 @@ DISTUTILS_INSTALL_ARGS += " \
 BBCLASSEXTEND = "native nativesdk"
 
 RDEPENDS_${PN} += "libxml2 libxslt python-compression"
-RDEPENDS_${PN}_virtclass-native = "libxml2-native libxslt-native"
+RDEPENDS_${PN}_class-native = "libxml2-native libxslt-native"
 

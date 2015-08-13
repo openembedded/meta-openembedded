@@ -19,7 +19,7 @@ inherit autotools-brokensep pkgconfig
 
 EXTRA_OEMAKE = "DESTDIR=${D}"
 
-do_configure_prepend_virtclass-nativesdk() {
+do_configure_prepend_class-nativesdk() {
     sed -i -e 's:@CPP@:\$\{CXX\} \$\{CXXFLAGS\} \-E:g' ${S}/src/nana.in
     sed -i -e 's:@CC@:\$\{CC\} \$\{CFLAGS\} \-E:g' ${S}/src/nana-clg.in
     sed -i -e 's:@CXX@::g' ${S}/src/nana-c++lg.in

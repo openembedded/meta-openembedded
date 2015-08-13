@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 PR = "r3"
 
-DEPENDS_virtclass-native = "freetype-native libpng-native jpeg-native"
+DEPENDS_class-native = "freetype-native libpng-native jpeg-native"
 DEPENDS = "freetype libpng jpeg expat gtk+"
 
 BBCLASSEXTEND = "native"

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=011c0d78eb6054d731c879132d7313f0"
 HOMEPAGE = "http://epydoc.sourceforge.net/" 
 SRCNAME = "epydoc" 
 DEPENDS += "python"
-DEPENDS_virtclass-native += "python-native"
+DEPENDS_class-native += "python-native"
 
 SRC_URI = "http://downloads.sourceforge.net/project/${SRCNAME}/${SRCNAME}/${PV}/${SRCNAME}-${PV}.tar.gz" 
 SRC_URI[md5sum] = "cdd6f6c76dd8bab5e653a343a0544294"
