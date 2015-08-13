@@ -21,6 +21,9 @@
 #	the NIS binding information.
 ### END INIT INFO
 
+# Need to use status function
+. /etc/init.d/functions
+
 YPBIND_BIN=/usr/sbin/ypbind
 pidfile=/var/run/ypbind.pid
 
@@ -91,6 +94,10 @@ case "$1" in
     reload | force-reload)
 	echo -n "Reload service ypbind"
 	start-stop-daemon --stop --quiet --signal 1 --pidfile $pidfile
+	;;
+    status)
+	echo -n "Checking for ypbind: "
+	status $YPBIND_BIN
 	;;
     *)
 	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|probe}"
