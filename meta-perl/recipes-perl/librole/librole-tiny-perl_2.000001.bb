@@ -3,7 +3,7 @@ DESCRIPTION = "\"Role::Tiny\" is a minimalist role composition tool."
 
 SECTION = "libs"
 
-HOMEPAGE = "https://metacpan.org/pod/Role-Tiny"
+HOMEPAGE = "https://metacpan.org/pod/Role::Tiny"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=172;endline=209;md5=26df7e7c20551fb1906e2286624f0b71"
