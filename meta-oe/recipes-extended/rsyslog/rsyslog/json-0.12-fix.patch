@@ -13,9 +13,10 @@ json-c-0.12 unlike 0.11 doesn't install json -> json-c symlink in include
 Upstream-Status: Backport
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-diff -uNr rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c rsyslog-7.4.4/plugins/ommongodb/ommongodb.c
---- rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c	2013-09-03 11:54:20.000000000 +0200
-+++ rsyslog-7.4.4/plugins/ommongodb/ommongodb.c	2015-01-12 16:11:51.542591825 +0100
+diff --git a/plugins/ommongodb/ommongodb.c b/plugins/ommongodb/ommongodb.c
+index 41c0d76..682c40e 100644
+--- a/plugins/ommongodb/ommongodb.c
++++ b/plugins/ommongodb/ommongodb.c
 @@ -33,9 +33,9 @@
  #include <stdint.h>
  #include <time.h>
@@ -23,14 +24,15 @@ diff -uNr rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c rsyslog-7.4.4/plugins
 -#include <json.h>
 +#include <json-c/json.h>
  /* For struct json_object_iter, should not be necessary in future versions */
--#include <json/json_object_private.h>
+-#include <json_object_private.h>
 +#include <json-c/json_object_private.h>
  
  #include "rsyslog.h"
  #include "conf.h"
-diff -uNr rsyslog-7.4.4.orig/runtime/msg.c rsyslog-7.4.4/runtime/msg.c
---- rsyslog-7.4.4.orig/runtime/msg.c	2013-09-03 12:31:42.000000000 +0200
-+++ rsyslog-7.4.4/runtime/msg.c	2015-01-12 16:12:00.403592142 +0100
+diff --git a/runtime/msg.c b/runtime/msg.c
+index d04ce7b..b367e1f 100644
+--- a/runtime/msg.c
++++ b/runtime/msg.c
 @@ -41,9 +41,9 @@
  #endif
  #include <netdb.h>
@@ -38,7 +40,7 @@ diff -uNr rsyslog-7.4.4.orig/runtime/msg.c rsyslog-7.4.4/runtime/msg.c
 -#include <json.h>
 +#include <json-c/json.h>
  /* For struct json_object_iter, should not be necessary in future versions */
--#include <json/json_object_private.h>
+-#include <json_object_private.h>
 +#include <json-c/json_object_private.h>
  #if HAVE_MALLOC_H
  #  include <malloc.h>

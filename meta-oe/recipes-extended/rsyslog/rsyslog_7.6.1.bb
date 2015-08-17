@@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
  encryption protected syslog relay chains while at the same time being\
  very easy to setup for the novice user."
 
-DEPENDS = "zlib libestr json-c bison-native flex-native"
+DEPENDS = "zlib libestr json-c bison-native flex-native liblogging"
 HOMEPAGE = "http://www.rsyslog.com/"
 LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
@@ -17,21 +17,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
                     file://COPYING.ASL20;md5=052f8a09206615ab07326ff8ce2d9d32\
 "
 
-SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
+SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://initscript \
            file://rsyslog.conf \
            file://rsyslog.logrotate \
            file://use-pkgconfig-to-check-libgcrypt.patch \
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
-           file://rsyslog-use-serial-tests-config-needed-by-ptest.patch \
            file://json-0.12-fix.patch \
-           file://0001-bugfix-potential-abort-during-HUP.patch \
-           file://0001-remove-memleak-introduced-by-GenerateLocalHostName-H.patch \
 "
 
-SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
-SRC_URI[sha256sum] = "276d094d1e4c62c770ec8a72723667f119eee038912b79cf3337d439bc2f9087"
+SRC_URI[md5sum] = "093c462a5245012bd9e7b82dd8aedffb"
+SRC_URI[sha256sum] = "357f089d866c351d5fe5b7139fa85b010223d77b3c21f29b2a1baa8688926111"
 
 inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
 
