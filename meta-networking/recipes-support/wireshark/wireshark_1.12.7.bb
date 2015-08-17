@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
 
 DEPENDS = "perl-native pcre expat glib-2.0 sbc"
 
-SRC_URI = "https://2.na.dl.wireshark.org/src/wireshark-${PV}.tar.bz2"
+SRC_URI = "https://2.na.dl.wireshark.org/src/${BP}.tar.bz2"
 
 PE = "1"
 
-SRC_URI[md5sum] = "25ad2bc1c2a21396827c238fcff51bf3"
-SRC_URI[sha256sum] = "22ac0cc872f12cef9bb2cacfe0720eed8533dc5cea102d21de511620606cb3b6"
+SRC_URI[md5sum] = "c8ae53f648b1dcbf6e74495401a0f1ab"
+SRC_URI[sha256sum] = "c74a1c14e72ce0f198a93d832e71742c7f312cbbe719e5def9ecef176860f92c"
 
 inherit autotools pkgconfig
 
@@ -35,10 +35,12 @@ PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
 PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
 PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
 PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
+PACKAGECONFIG[ssl] = "--with-ssl=yes, --with-ssl=no, openssl"
 PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
 PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
 PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
 PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
+PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
 
 # these next two options require addional layers
 PACKAGECONFIG[adns] = "--with-adns=yes, --with-adns=no, adns"
