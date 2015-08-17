@@ -32,12 +32,22 @@ do_configure_prepend() {
 do_install_append() {
     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
        install -d ${D}${systemd_unitdir}/system
-       mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-       rm -rf ${D}${libdir}/systemd/
+       if [ -d "${D}${libdir}/systemd/system" ]; then
+           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+           rm -rf ${D}${libdir}/systemd/
+       else
+           mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+           rm -rf ${D}${nonarch_libdir}/systemd/
+       fi
     else
        mv ${D}${sysconfdir}/rc.d/init.d/ ${D}${sysconfdir}
        rm -rf ${D}${sysconfdir}/rc.d/
     fi
 }
+
+FILES_${PN} += " \
+        ${libdir} \
+        ${nonarch_libdir} \
+        "
 
 SYSTEMD_SERVICE_${PN} = "netcf-transaction.service"
