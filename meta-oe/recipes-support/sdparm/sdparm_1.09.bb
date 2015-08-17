@@ -14,8 +14,8 @@ SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
 PACKAGES =+ "${PN}-scripts"
 RDEPENDS_${PN}-scripts += "bash ${PN}"
 
-SRC_URI[md5sum] = "be5786f37499018ef44f409597c92d42"
-SRC_URI[sha256sum] = "376b78a414b1a9c47f3f13dbeb963e7a3ec7be126f83927d6856b5f7ac425e57"
+SRC_URI[md5sum] = "e51b1fd41c3e4c9d1274a2e4f046eebf"
+SRC_URI[sha256sum] = "7294f44173ac0946f1de8af02b1bdb0bd648079245396589397a2b0d3abc42d3"
 
 inherit autotools
 
