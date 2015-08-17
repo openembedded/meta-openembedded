@@ -1,19 +1,18 @@
 SUMMARY = "Collects and summarises system performance statistics"
 DESCRIPTION = "collectd is a daemon which collects system performance statistics periodically and provides mechanisms to store the values in a variety of ways, for example in RRD files."
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+LICENSE = "GPLv2 & MIT"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1bd21f19f7f0c61a7be8ecacb0e28854"
 
 DEPENDS = "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
 
 SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://no-gcrypt-badpath.patch \
            file://collectd-version.patch \
-           file://glibc-2.20-compatiblity.patch \
-           file://0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch \
+           file://0001-redefine-the-dependence.patch  \
            file://collectd.init \
            file://collectd.service"
-SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
-SRC_URI[sha256sum] = "75452129f271cb0aad28e57f12a49070618bbb7b6a9d64cf869e8766fa2f66e0"
+SRC_URI[md5sum] = "c39305ef5514b44238b0d31f77e29e6a"
+SRC_URI[sha256sum] = "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f1343b1062a4b569e88"
 
 inherit autotools pythonnative update-rc.d pkgconfig systemd
 
@@ -43,6 +42,7 @@ PACKAGECONFIG[pinba] = "--enable-pinba,--disable-pinba,protobuf-c-native protobu
 PACKAGECONFIG[libvirt] = "--enable-libvirt,--disable-libvirt,libvirt"
 PACKAGECONFIG[libesmtp] = "--with-libesmtp,--without-libesmtp,libesmtp"
 PACKAGECONFIG[libmnl] = "--with-libmnl,--without-libmnl,libmnl"
+PACKAGECONFIG[libatasmart] = "--with-libatasmart,--without-libatasmart,libatasmart"
 
 EXTRA_OECONF = " \
                 ${FPLAYOUT} \

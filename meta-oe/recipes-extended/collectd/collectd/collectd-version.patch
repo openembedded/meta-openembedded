@@ -11,21 +11,19 @@ Upstream-Status: Pending
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
 diff --git a/version-gen.sh b/version-gen.sh
-index e344541..d1c0929 100755
+index b09be8e..2671066 100755
 --- a/version-gen.sh
 +++ b/version-gen.sh
-@@ -2,7 +2,10 @@
+@@ -2,8 +2,10 @@
  
- DEFAULT_VERSION="5.2.2.git"
+ DEFAULT_VERSION="5.5.0.git"
  
--VERSION="`git describe 2> /dev/null | sed -e 's/^collectd-//'`"
+-VERSION="`git describe 2> /dev/null | grep collectd | sed -e 's/^collectd-//'`"
+-
 +VERSION=""
 +if test -d .git ; then
-+	VERSION="`git describe 2> /dev/null | sed -e 's/^collectd-//'`"
++	VERSION="`git describe 2> /dev/null | grep collectd | sed -e 's/^collectd-//'`"
 +fi
- 
  if test -z "$VERSION"; then
  	VERSION="$DEFAULT_VERSION"
--- 
-1.7.10.4
-
+ fi
