@@ -13,10 +13,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
 DEPENDS = "freetype libpng jpeg zlib tiff libvpx"
 
 SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
-           file://fix-the-subdir-objects-error.patch \
 "
-SRC_URI[md5sum] = "5a1d5bab3a4a41d9f111bcceee4ad25b"
-SRC_URI[sha256sum] = "f3e1bc472bd81ee976a739436659fe752a14727a964c64530fde68531ddeee91"
+SRC_URI[md5sum] = "d3f1a992ac9c550ebc6da89c147f89af"
+SRC_URI[sha256sum] = "895ea9c6fcab187b0a908ae3e9e6b06423756f8a643d362349b0caab4014bd0d"
 
 S = "${WORKDIR}/libgd-${PV}"
 
