@@ -8,11 +8,11 @@ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
 # Important note: tarballs for all patchsets within a version are deleted when
 # a new pachset is created. To avoid multiple patches for each patchset, try to
 # update to the last pachset of a version
-PATCHSET = "10"
+PATCHSET = "0"
 SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
 "
-SRC_URI[md5sum] = "cf5c663a31d0ca2975121d0803db0e61"
-SRC_URI[sha256sum] = "22565464059376513869b6626982e0726a33788ccc7e19a08e55ff1683d4ff92"
+SRC_URI[md5sum] = "99471c8c3f38c9264faf5c4ca7a31287"
+SRC_URI[sha256sum] = "07a2de28f7f9ab888ef47c02eb7e10cc3e0dd0e9797c5d71d6e71d19f842399e"
 
 S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
 
