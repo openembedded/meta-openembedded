@@ -12,11 +12,10 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz 
            file://mysqld.service \
            file://configure.cmake-fix-valgrind.patch \
            file://fix-a-building-failure.patch \
-           file://fix-CVE-2015-2305.patch \
           "
 
-SRC_URI[md5sum] = "c8760d6b5890fc1de76c07af48092c88"
-SRC_URI[sha256sum] = "a0709997140549154edb87c9dfab564cd4755b238251acbf42369118f9bb4d01"
+SRC_URI[md5sum] = "6ec397f717f6e2e4e9154e76de9ec9fc"
+SRC_URI[sha256sum] = "4dc3aff6941ef1068412002915d795bcf67db0eaa38a5c6f3af57474c4226fb0"
 
 S = "${WORKDIR}/mariadb-${PV}"
 
@@ -88,11 +87,13 @@ do_compile_prepend_class-target () {
     cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
 
     if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
-        mkdir ${B}/include/openssl
-        echo "#ifndef KSSL_H" >${B}/include/openssl/kssl.h
-        echo "#define KSSL_H" >>${B}/include/openssl/kssl.h
-        echo "#include <openssl/opensslconf.h>">>${B}/include/openssl/kssl.h
-        echo "#endif" >>${B}/include/openssl/kssl.h
+        if ! [ -e ${B}/include/openssl/kssl.h ] ; then
+            mkdir -p ${B}/include/openssl
+            echo "#ifndef KSSL_H" >${B}/include/openssl/kssl.h
+            echo "#define KSSL_H" >>${B}/include/openssl/kssl.h
+            echo "#include <openssl/opensslconf.h>">>${B}/include/openssl/kssl.h
+            echo "#endif" >>${B}/include/openssl/kssl.h
+        fi
     fi
 }
 
