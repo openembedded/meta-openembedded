@@ -6,7 +6,7 @@ time coordination of LAN connected computers."
 HOMEPAGE = "http://sourceforge.net/projects/ptpd"
 SECTION = "net"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
+LIC_FILES_CHKSUM = "file://README;md5=0733e1b3788ab2ebbc63bf33a020da1d"
 
 DEPENDS = "libpcap"
 
@@ -22,14 +22,13 @@ def get_sub(d):
         return parts[0]
 
 SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
-           file://ptpd-add-dpaa-etsec-support.patch \
            file://ptpd-use-pkgconfig.patch \
            file://ptpd.service \
            file://ptpd.conf \
 "
 
-SRC_URI[md5sum] = "1ef2f1f2825080a865bbce0eb61246d4"
-SRC_URI[sha256sum] = "2802aab758649bb222859dfcb62a5d282709ccb4d3f1df3f26f739cc091d0c8d"
+SRC_URI[md5sum] = "253bab7ab51d969616ea811be1f132f3"
+SRC_URI[sha256sum] = "0dbf54dd2c178bd9fe62481d2c37513ee36636d8bf137cfdad96891490cdbf93"
 
 S = "${WORKDIR}/ptpd-${PV}"
 
