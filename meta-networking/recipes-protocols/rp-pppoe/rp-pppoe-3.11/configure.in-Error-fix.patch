@@ -1,6 +1,6 @@
-From a546942a784a177080d9722dda873bfd7416ad41 Mon Sep 17 00:00:00 2001
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-Date: Fri, 10 Apr 2015 13:13:06 +0900
+From 71956de46feef962dc0645af4c81ae074ca3b818 Mon Sep 17 00:00:00 2001
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+Date: Wed, 19 Aug 2015 13:52:57 +0900
 Subject: [PATCH] configure.in: Error fix.
 
 the error is: conftest.c:9:28: fatal error: ac_nonexistent.h:
@@ -10,19 +10,20 @@ Upstream-Status: pending
 
 Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- src/configure.in | 28 ----------------------------
- 1 file changed, 28 deletions(-)
+ src/configure.in | 30 ------------------------------
+ 1 file changed, 30 deletions(-)
 
 diff --git a/src/configure.in b/src/configure.in
-index c4f1a8c..74956cc 100644
+index 0b23df5..31c7fbc 100644
 --- a/src/configure.in
 +++ b/src/configure.in
-@@ -183,34 +183,6 @@ if test "$GCC" = yes; then
- 	CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -ansi"
+@@ -193,36 +193,6 @@ if test "$GCC" = yes; then
+ 	CFLAGS="$CFLAGS -fno-strict-aliasing -Wall -Wstrict-prototypes"
  fi
  
 -dnl Figure out packing order of structures
 -AC_CACHE_CHECK([packing order of bit fields],rpppoe_cv_pack_bitfields,[
+-if test "${rpppoe_cv_pack_bitfields+set}" != set ; then
 -AC_TRY_RUN([
 -union foo {
 -    struct bar {
@@ -47,6 +48,7 @@ index c4f1a8c..74956cc 100644
 -    }
 -}], rpppoe_cv_pack_bitfields=normal, rpppoe_cv_pack_bitfields=rev,
 -$ECHO "no defaults for cross-compiling"; exit 1)
+-fi
 -])
 -
  if test "$rpppoe_cv_pack_bitfields" = "rev" ; then

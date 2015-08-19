@@ -13,15 +13,14 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
            file://update-config.patch \
            file://dont-swallow-errors.patch \
            file://discard-use-of-dnl-in-Makefile.am.patch \
-           file://use-ldflags.patch \
            file://configure.patch \
            file://pppoe-server.default \
            file://pppoe-server.init \
            file://configure.in-Error-fix.patch \
            file://pppoe-server.service"
 
-SRC_URI[md5sum] = "0e32760f498f9cde44081ee6aafc823b"
-SRC_URI[sha256sum] = "d916e9cfe1e62395f63a5361936fa855f6d0f0a37dc7227b394cdb725f553479"
+SRC_URI[md5sum] = "13b5900c56bd602df6cc526e5e520722"
+SRC_URI[sha256sum] = "86a1a4d92fcea74fa6dd45516c5975933fa978b36fafe71f76ea70b4b4747720"
 
 inherit autotools-brokensep update-rc.d systemd
 
@@ -38,7 +37,7 @@ do_install() {
     install -m 0644 ${WORKDIR}/pppoe-server.default ${D}${sysconfdir}/default/pppoe-server
     install -m 0755 ${WORKDIR}/pppoe-server.init ${D}${sysconfdir}/init.d/pppoe-server
     # Install
-    oe_runmake -C ${S} RPM_INSTALL_ROOT=${D} docdir=${docdir} install
+    oe_runmake -C ${S} DESTDIR=${D} docdir=${docdir} install
     chmod 4755 ${D}${sbindir}/pppoe
 }
 
