@@ -2,17 +2,15 @@ SUMMARY = "High performance data logging and graphing system for time series dat
 HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
 
 DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native"
 
-SRCREV = "1850e00a17e25e93c39e608f4e2da50f29c5c712"
-PV = "1.4.8"
+SRCREV = "04f70058cc894c0a3ee5d555ea1bb5a8d4bb8a0e"
+PV = "1.5.4"
 
 SRC_URI = "\
-    git://github.com/oetiker/rrdtool-1.x.git;branch=1.4 \
-    file://remove_hardcoded_xml_include.patch \
-    file://0001-removing-testing-leftovers.patch \
+    git://github.com/oetiker/rrdtool-1.x.git;branch=1.5 \
 "
 
 S = "${WORKDIR}/git"
@@ -63,43 +61,43 @@ export PERL_LIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}
 export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
 
 do_configure() {
-	#fix the pkglib problem with newer automake
-	#perl
-	sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
-	    ${S}/bindings/perl-shared/Makefile.PL
+    #fix the pkglib problem with newer automake
+    #perl
+    sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
+        ${S}/bindings/perl-shared/Makefile.PL
 
-	#python
-	sed -i -e '/PYTHON_INCLUDES="-I${/c \
-	PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
-	    ${S}/m4/acinclude.m4
-	#remove the hardcoded $(libdir) rpath
-	sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
+    #python
+    sed -i -e '/PYTHON_INCLUDES="-I${/c \
+    PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
+        ${S}/m4/acinclude.m4
+    #remove the hardcoded $(libdir) rpath
+    sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
 
-	autotools_do_configure
+    autotools_do_configure
 
-	#modify python sitepkg
-	#remove the dependency of perl-shared:Makefile
-	#or perl-shared/Makefile will be regenerated
-	#if any code touch bindings/Makefile after below perl bindings code
-	sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
-	    --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
-	    -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
-	    ${B}/bindings/Makefile
+    #modify python sitepkg
+    #remove the dependency of perl-shared:Makefile
+    #or perl-shared/Makefile will be regenerated
+    #if any code touch bindings/Makefile after below perl bindings code
+    sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
+        --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
+        -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
+        ${B}/bindings/Makefile
 
-	#redo the perl bindings
-	(
-	cd ${S}/bindings/perl-shared;
-	perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
+    #redo the perl bindings
+    (
+    cd ${S}/bindings/perl-shared;
+    perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
 
-	cd ../../bindings/perl-piped;
-	perl Makefile.PL INSTALLDIRS="vendor";
-	)
+    cd ../../bindings/perl-piped;
+    perl Makefile.PL INSTALLDIRS="vendor";
+    )
 
-	#change the interpreter in file
-	sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
-	    ${B}/examples/Makefile
-	sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
-	    ${B}/examples/*.pl
+    #change the interpreter in file
+    sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
+        ${B}/examples/Makefile
+    sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
+        ${B}/examples/*.pl
 }
 
 PACKAGES =+ "${PN}-perl ${PN}-python"
