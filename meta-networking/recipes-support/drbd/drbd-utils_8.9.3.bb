@@ -8,46 +8,33 @@ SECTION = "admin"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
-SRC_URI = "http://oss.linbit.com/${BPN}/8.4/${BPN}-${PV}.tar.gz \
-           file://drbd.service \
+SRC_URI = "http://oss.linbit.com/drbd/${BP}.tar.gz \
+           file://0001-Makefile.in-don-t-compile-documentation.patch \
           "
-SRC_URI[md5sum] = "b51815343c1a9151e2936b3b97520388"
-SRC_URI[sha256sum] = "a056219c5c23b079c3354179f7a1b9f55d47e573a4cd3178f2ef4c15604288f0"
+SRC_URI[md5sum] = "09c9c33c041e1f4f85dd359f9e0b0f24"
+SRC_URI[sha256sum] = "011050578c153bf4fef86e03749304ff9f333b7af3512c5c395e0e870a0445bd"
 
 SYSTEMD_SERVICE_${PN} = "drbd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 inherit autotools-brokensep systemd
 
-EXTRA_OECONF = "--with-utils                  \
-                --without-km                  \
+EXTRA_OECONF = " \
                 --with-initdir=/etc/init.d    \
                 --without-pacemaker           \
                 --without-rgmanager           \
                 --without-bashcompletion      \
                 --with-distro debian          \
+                --with-initscripttype=both    \
+                --with-systemdunitdir=${systemd_unitdir}/system \
                "
-
-do_configure (){
-    oe_runconf
-}
-
-do_install_append() {
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-        install -d ${D}/${systemd_unitdir}/system
-        install -m 644 ${WORKDIR}/drbd.service ${D}/${systemd_unitdir}/system
-        install -d ${D}/${libexecdir}
-        install -m 755 ${D}/${sysconfdir}/init.d/drbd ${D}/${libexecdir}/drbd-helper
-
-        sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
-            ${D}${systemd_unitdir}/system/drbd.service
-    fi
-}
 
 RDEPENDS_${PN} += "bash perl"
 
 # The drbd items are explicitly put under /lib when installed.
 #
 FILES_${PN} += "/run"
-FILES_${PN} += "/lib/drbd"
-FILES_${PN}-dbg += "/lib/drbd/.debug"
+FILES_${PN} += "${base_libdir}/drbd \
+                ${libdir}/drbd \
+                ${libdir}/tmpfiles.d"
+FILES_${PN}-dbg += "${base_libdir}/drbd/.debug"
