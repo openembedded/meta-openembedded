@@ -111,6 +111,10 @@ FILES_${PN}-dbg += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/.debug \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/.debug \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/gems/*/*/*/*/*/.debug \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/.debug \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/.debug \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/*/.debug \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions/*/*/*/*/*/.debug \
         "
 
 FILES_${PN} += " \
@@ -118,6 +122,8 @@ FILES_${PN} += " \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/cache \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/bin \
         ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/specifications \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/build_info \
+        ${libdir}/ruby/gems/${RUBY_GEM_VERSION}/extensions \
         "
 
 FILES_${PN}-doc += " \
