@@ -26,8 +26,6 @@ SRC_URI = " \
 
 inherit ruby
 
-FILES_${PN} += "${libdir}/ruby/gems"
-
 RDEPENDS_${PN} = "git"
 
 BBCLASSEXTEND = "native"
