@@ -8,8 +8,8 @@ DEPENDS = "zeromq"
 SRC_URI = "https://pypi.python.org/packages/source/p/pyzmq/pyzmq-${PV}.tar.gz \
            file://club-rpath-out.patch \
 "
-SRC_URI[md5sum] = "8d3351a8ca2ca2a272a3f96bcb963e41"
-SRC_URI[sha256sum] = "5d6e045634456cf5496f50871fd3e3a5ede2b90433284dbfe985bb67c97f77bd"
+SRC_URI[md5sum] = "87e3abb33af5794db5ae85c667bbf324"
+SRC_URI[sha256sum] = "77994f80360488e7153e64e5959dc5471531d1648e3a4bff14a714d074a38cc2"
 
 S = "${WORKDIR}/pyzmq-${PV}"
 
