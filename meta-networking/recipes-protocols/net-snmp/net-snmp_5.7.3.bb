@@ -8,27 +8,23 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
 DEPENDS = "openssl libnl pciutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-        file://0001-Added-checks-for-printing-variables-with-wrong-types.patch \
         file://init \
         file://snmpd.conf \
         file://snmptrapd.conf \
         file://systemd-support.patch \
         file://snmpd.service \
         file://snmptrapd.service \
-        file://ifmib.patch \
         file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
         file://fix-libtool-finish.patch \
         file://net-snmp-testing-add-the-output-format-for-ptest.patch \
         file://run-ptest \
-        file://0001-Fix-CVE-2014-2285.patch \
         file://dont-return-incompletely-parsed-varbinds.patch \
-        file://net-snmp-5.7.2-fix-mib-timeout-values.patch \
+        file://0001-config_os_headers-Error-Fix.patch \
 "
+SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
+SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
 
-SRC_URI[md5sum] = "a2c83518648b0f2a5d378625e45c0e18"
-SRC_URI[sha256sum] = "ac9105539971f7cfb1456a86d479e18e8a8b3712212595ad40504347ba5843da"
-
-inherit autotools update-rc.d siteinfo systemd
+inherit autotools update-rc.d siteinfo systemd pkgconfig
 
 EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
 

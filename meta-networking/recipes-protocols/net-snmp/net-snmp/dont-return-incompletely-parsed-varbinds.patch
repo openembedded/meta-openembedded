@@ -1,18 +1,24 @@
-the snmp_pdu_parse() function could leave
-incompletely parsed varBind variables in the list of variables in
-case the parsing of the SNMP PDU failed. If later processing tries to
-operate on the stale and incompletely processed varBind (e.g. when
-printing the variables), this can lead to e.g. crashes or, possibly,
-execution of arbitrary code
+From 6b93e686bdb6a908d00595608646a05527a5326b Mon Sep 17 00:00:00 2001
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+Date: Fri, 21 Aug 2015 12:39:12 +0900
+Subject: [PATCH] the snmp_pdu_parse() function could leave incompletely parsed
+ varBind variables in the list of variables in case the parsing of the SNMP
+ PDU failed. If later processing tries to operate on the stale and
+ incompletely processed varBind (e.g. when printing the variables), this can
+ lead to e.g. crashes or, possibly, execution of arbitrary code
 
 Upstream-Status: Backport [net-snmp]
 
 Written-by: Robert Story
+---
+ snmplib/snmp_api.c | 53 ++++++++++++++++++++++++++++-------------------------
+ 1 file changed, 28 insertions(+), 25 deletions(-)
 
-diff -Nur net-snmp-5.7.2.1.orig/snmplib/snmp_api.c net-snmp-5.7.2.1/snmplib/snmp_api.c
---- net-snmp-5.7.2.1.orig/snmplib/snmp_api.c	2015-05-27 11:25:11.563747471 +0800
-+++ net-snmp-5.7.2.1/snmplib/snmp_api.c	2015-05-27 13:27:27.724748201 +0800
-@@ -4345,10 +4345,9 @@
+diff --git a/snmplib/snmp_api.c b/snmplib/snmp_api.c
+index 191debf..15a2d39 100644
+--- a/snmplib/snmp_api.c
++++ b/snmplib/snmp_api.c
+@@ -4350,10 +4350,9 @@ snmp_pdu_parse(netsnmp_pdu *pdu, u_char * data, size_t * length)
      u_char          type;
      u_char          msg_type;
      u_char         *var_val;
@@ -22,9 +28,9 @@ diff -Nur net-snmp-5.7.2.1.orig/snmplib/snmp_api.c net-snmp-5.7.2.1/snmplib/snmp
 -    netsnmp_variable_list *vp = NULL;
 +    netsnmp_variable_list *vp = NULL, *vplast = NULL;
      oid             objid[MAX_OID_LEN];
+     u_char         *p;
  
-     /*
-@@ -4487,38 +4486,24 @@
+@@ -4493,31 +4492,17 @@ snmp_pdu_parse(netsnmp_pdu *pdu, u_char * data, size_t * length)
                                (ASN_SEQUENCE | ASN_CONSTRUCTOR),
                                "varbinds");
      if (data == NULL)
@@ -60,25 +66,16 @@ diff -Nur net-snmp-5.7.2.1.orig/snmplib/snmp_api.c net-snmp-5.7.2.1/snmplib/snmp
          DEBUGDUMPSECTION("recv", "VarBind");
          data = snmp_parse_var_op(data, objid, &vp->name_length, &vp->type,
                                   &vp->val_len, &var_val, length);
-         if (data == NULL)
--            return -1;
-+            goto fail;
-         if (snmp_set_var_objid(vp, objid, vp->name_length))
--            return -1;
-+            goto fail;
- 
-         len = MAX_PACKET_LENGTH;
-         DEBUGDUMPHEADER("recv", "Value");
-@@ -4583,7 +4568,7 @@
+@@ -4604,7 +4589,7 @@ snmp_pdu_parse(netsnmp_pdu *pdu, u_char * data, size_t * length)
                  vp->val.string = (u_char *) malloc(vp->val_len);
              }
              if (vp->val.string == NULL) {
 -                return -1;
 +                goto fail;
              }
-             asn_parse_string(var_val, &len, &vp->type, vp->val.string,
+             p = asn_parse_string(var_val, &len, &vp->type, vp->val.string,
                               &vp->val_len);
-@@ -4594,7 +4579,7 @@
+@@ -4619,7 +4604,7 @@ snmp_pdu_parse(netsnmp_pdu *pdu, u_char * data, size_t * length)
              vp->val_len *= sizeof(oid);
              vp->val.objid = (oid *) malloc(vp->val_len);
              if (vp->val.objid == NULL) {
@@ -87,15 +84,16 @@ diff -Nur net-snmp-5.7.2.1.orig/snmplib/snmp_api.c net-snmp-5.7.2.1/snmplib/snmp
              }
              memmove(vp->val.objid, objid, vp->val_len);
              break;
-@@ -4606,19 +4591,35 @@
+@@ -4631,7 +4616,7 @@ snmp_pdu_parse(netsnmp_pdu *pdu, u_char * data, size_t * length)
          case ASN_BIT_STR:
              vp->val.bitstring = (u_char *) malloc(vp->val_len);
              if (vp->val.bitstring == NULL) {
 -                return -1;
 +                goto fail;
              }
-             asn_parse_bitstring(var_val, &len, &vp->type,
+             p = asn_parse_bitstring(var_val, &len, &vp->type,
                                  vp->val.bitstring, &vp->val_len);
+@@ -4640,12 +4625,30 @@ snmp_pdu_parse(netsnmp_pdu *pdu, u_char * data, size_t * length)
              break;
          default:
              snmp_log(LOG_ERR, "bad type returned (%x)\n", vp->type);
@@ -112,6 +110,7 @@ diff -Nur net-snmp-5.7.2.1.orig/snmplib/snmp_api.c net-snmp-5.7.2.1/snmplib/snmp
 +        }
 +        vplast = vp;
 +        vp = NULL;
++
      }
 -    return badtype;
 +    return 0;
@@ -123,6 +122,10 @@ diff -Nur net-snmp-5.7.2.1.orig/snmplib/snmp_api.c net-snmp-5.7.2.1/snmplib/snmp
 +        snmp_free_var(vp);
 +
 +    return -1;
++
  }
  
  /*
+-- 
+1.8.4.2
+

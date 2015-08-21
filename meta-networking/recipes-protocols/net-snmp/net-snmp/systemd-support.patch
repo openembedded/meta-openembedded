@@ -1,4 +1,8 @@
-Systemd support backported from the master branch as of 23/04/2012 (post 5.7.1, pre 5.8).
+From 0cad0c6c36af2a2d589563804c9ed2b37b7085fb Mon Sep 17 00:00:00 2001
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+Date: Fri, 21 Aug 2015 14:37:02 +0900
+Subject: [PATCH] ystemd support backported from the master branch as of
+ 23/04/2012 (post 5.7.1, pre 5.8).
 
 The following commits have been cherry-picked:
 
@@ -15,15 +19,44 @@ bf108d7f1354f6276fc43c129963f2c49b9fc242
 Upstream-Status: Backport
 
 Signed-off-by: Thomas Fitzsimmons <fitzsim@cisco.com>
+---
+ README.systemd                             |  41 +++
+ agent/snmpd.c                              |  33 +-
+ apps/snmptrapd.c                           |  32 +-
+ configure.d/config_modules_lib             |   8 +
+ configure.d/config_project_with_enable     |   9 +
+ dist/snmpd.servic                          |  18 +
+ dist/snmpd.socket                          |  17 +
+ dist/snmptrapd.service                     |  16 +
+ dist/snmptrapd.socket                      |  14 +
+ include/net-snmp/library/sd-daemon.h       | 290 ++++++++++++++++
+ snmplib/sd-daemon.c                        | 532 +++++++++++++++++++++++++++++
+ snmplib/transports/snmpTCPDomain.c         |  43 ++-
+ snmplib/transports/snmpTCPIPv6Domain.c     |  46 ++-
+ snmplib/transports/snmpUDPIPv4BaseDomain.c |  33 +-
+ snmplib/transports/snmpUDPIPv6Domain.c     |  34 +-
+ snmplib/transports/snmpUnixDomain.c        |  66 ++--
+ win32/libsnmp/Makefile.in                  |   6 +
+ win32/net-snmp/net-snmp-config.h           |   2 +
+ win32/net-snmp/net-snmp-config.h.in        |   2 +
+ 19 files changed, 1176 insertions(+), 66 deletions(-)
+ create mode 100644 README.systemd
+ create mode 100644 dist/snmpd.servic
+ create mode 100644 dist/snmpd.socket
+ create mode 100644 dist/snmptrapd.service
+ create mode 100644 dist/snmptrapd.socket
+ create mode 100644 include/net-snmp/library/sd-daemon.h
+ create mode 100644 snmplib/sd-daemon.c
+
 diff --git a/README.systemd b/README.systemd
 new file mode 100644
-index 0000000..f731851
+index 0000000..dba15d1
 --- /dev/null
 +++ b/README.systemd
 @@ -0,0 +1,41 @@
 +README.systemd
 +--------------
-+Net-SNMP provides two daemons, which support systemd system manager. 
++Net-SNMP provides two daemons, which support systemd system manager.
 +See http://www.freedesktop.org/wiki/Software/systemd to learn how
 +systemd works. Both socket activation and notification is supported by these
 +daemons.
@@ -62,9 +95,8 @@ index 0000000..f731851
 +If integration with SNMP agent using AgentX protocol is enabled, snmptrapd should
 +start during boot and not after first SNMP trap arrives. Same rules as for snmpd
 +applies then.
-\ No newline at end of file
 diff --git a/agent/snmpd.c b/agent/snmpd.c
-index b177d5b..08bdfc7 100644
+index cfc7bce..116ee5c 100644
 --- a/agent/snmpd.c
 +++ b/agent/snmpd.c
 @@ -164,6 +164,10 @@ typedef long    fd_mask;
@@ -78,7 +110,7 @@ index b177d5b..08bdfc7 100644
  netsnmp_feature_want(logging_file)
  netsnmp_feature_want(logging_stdio)
  netsnmp_feature_want(logging_syslog)
-@@ -441,18 +445,28 @@ main(int argc, char *argv[])
+@@ -443,19 +447,29 @@ main(int argc, char *argv[])
      int             agent_mode = -1;
      char           *pid_file = NULL;
      char            option_compatability[] = "-Le";
@@ -102,14 +134,16 @@ index b177d5b..08bdfc7 100644
       */
 -    for (i = getdtablesize() - 1; i > 2; --i) {
 -        (void) close(i);
+-    }
 +    if (!prepared_sockets) {
 +        for (i = getdtablesize() - 1; i > 2; --i) {
 +            (void) close(i);
-+        }
-     }
++        }    
++}
  #endif /* #WIN32 */
      
-@@ -1100,6 +1114,19 @@ main(int argc, char *argv[])
+     /*
+@@ -1107,6 +1121,19 @@ main(int argc, char *argv[])
      netsnmp_addrcache_initialise();
  
      /*
@@ -130,7 +164,7 @@ index b177d5b..08bdfc7 100644
       */
      DEBUGMSGTL(("snmpd/main", "We're up.  Starting to process data.\n"));
 diff --git a/apps/snmptrapd.c b/apps/snmptrapd.c
-index 1a52080..0857ae1 100644
+index bce0d47..c6a74ec 100644
 --- a/apps/snmptrapd.c
 +++ b/apps/snmptrapd.c
 @@ -125,6 +125,10 @@ SOFTWARE.
@@ -144,7 +178,7 @@ index 1a52080..0857ae1 100644
  #ifndef BSD4_3
  #define BSD4_2
  #endif
-@@ -655,15 +659,24 @@ main(int argc, char *argv[])
+@@ -657,16 +661,25 @@ main(int argc, char *argv[])
      int             agentx_subagent = 1;
  #endif
      netsnmp_trapd_handler *traph;
@@ -164,14 +198,16 @@ index 1a52080..0857ae1 100644
       */
 -    for (i = getdtablesize() - 1; i > 2; --i) {
 -        (void) close(i);
+-    }
 +    if (!prepared_sockets) {
 +        for (i = getdtablesize() - 1; i > 2; --i) {
 +            (void) close(i);
-+        }
-     }
++        }    
++}
  #endif /* #WIN32 */
      
-@@ -1311,6 +1324,19 @@ main(int argc, char *argv[])
+ #ifdef SIGTERM
+@@ -1318,6 +1331,19 @@ main(int argc, char *argv[])
  #endif
  #endif
  
@@ -192,7 +228,7 @@ index 1a52080..0857ae1 100644
      trapd_status = SNMPTRAPD_RUNNING;
  #endif
 diff --git a/configure.d/config_modules_lib b/configure.d/config_modules_lib
-index b6609c1..5849072 100644
+index 362ba0a..bb69daa 100644
 --- a/configure.d/config_modules_lib
 +++ b/configure.d/config_modules_lib
 @@ -53,6 +53,14 @@ if test "x$PARTIALTARGETOS" = "xmingw32" -o "x$PARTIALTARGETOS" = "xmingw32msvc"
@@ -211,10 +247,10 @@ index b6609c1..5849072 100644
  AC_SUBST(other_objs_list)
  AC_SUBST(other_lobjs_list)
 diff --git a/configure.d/config_project_with_enable b/configure.d/config_project_with_enable
-index 8b46ad2..59d6d5c 100644
+index 61ba026..d782d12 100644
 --- a/configure.d/config_project_with_enable
 +++ b/configure.d/config_project_with_enable
-@@ -689,6 +689,15 @@ if test "x$with_dummy_values" != "xyes"; then
+@@ -690,6 +690,15 @@ if test "x$with_dummy_values" != "xyes"; then
       data for])
  fi
  
@@ -230,11 +266,11 @@ index 8b46ad2..59d6d5c 100644
  NETSNMP_ARG_ENABLE(set-support,
  [  --disable-set-support           Do not allow SNMP set requests.])
  if test "x$enable_set_support" = "xno"; then
-diff --git a/dist/snmpd.service b/dist/snmpd.service
+diff --git a/dist/snmpd.servic b/dist/snmpd.servic
 new file mode 100644
 index 0000000..31391e5
 --- /dev/null
-+++ b/dist/snmpd.service
++++ b/dist/snmpd.servic
 @@ -0,0 +1,18 @@
 +#
 +# SNMP agent service file for systemd
@@ -301,24 +337,24 @@ index 0000000..e88a5b4
 +WantedBy=multi-user.target
 diff --git a/dist/snmptrapd.socket b/dist/snmptrapd.socket
 new file mode 100644
-index 0000000..0fc8a7c
+index 0000000..2d24fb8
 --- /dev/null
 +++ b/dist/snmptrapd.socket
 @@ -0,0 +1,14 @@
-+[Unit]
-+Description=Socket listening for SNMP trap messages
-+
-+[Socket]
-+ListenDatagram=0.0.0.0:162
-+# Uncomment other listening addresses as needed - TCP, UDP6, TCP6.
-+# It must match listening addresses/ports defined in snmptrapd.service
-+# or snmptrapd.conf.
-+# ListenStream=0.0.0.0:162
-+# ListenDatagram=[::]:162
-+# ListenStream=[::]:162
-+
-+[Install]
-+WantedBy=sockets.target
+++[Unit]
+++Description=Socket listening for SNMP trap messages
+++
+++[Socket]
+++ListenDatagram=0.0.0.0:162
+++# Uncomment other listening addresses as needed - TCP, UDP6, TCP6.
+++# It must match listening addresses/ports defined in snmptrapd.service
+++# or snmptrapd.conf.
+++# ListenStream=0.0.0.0:162
+++# ListenDatagram=[::]:162
+++# ListenStream=[::]:162
+++
+++[Install]
+++WantedBy=sockets.target
 diff --git a/include/net-snmp/library/sd-daemon.h b/include/net-snmp/library/sd-daemon.h
 new file mode 100644
 index 0000000..85274c9
@@ -1154,7 +1190,7 @@ index 0000000..42dba29
 +
 +#endif /* ! NETSNMP_NO_SYSTEMD */
 diff --git a/snmplib/transports/snmpTCPDomain.c b/snmplib/transports/snmpTCPDomain.c
-index b8bdba4..ab7f3a1 100644
+index 7feb028..a41b926 100644
 --- a/snmplib/transports/snmpTCPDomain.c
 +++ b/snmplib/transports/snmpTCPDomain.c
 @@ -43,6 +43,10 @@
@@ -1216,11 +1252,10 @@ index b8bdba4..ab7f3a1 100644
          }
  
          /*
-@@ -235,12 +254,13 @@ netsnmp_tcp_transport(struct sockaddr_in *addr, int local)
-         /*
+@@ -236,11 +255,13 @@ netsnmp_tcp_transport(struct sockaddr_in *addr, int local)
           * Now sit here and wait for connections to arrive.  
           */
--
+ 
 -        rc = listen(t->sock, NETSNMP_STREAM_QUEUE_LEN);
 -        if (rc != 0) {
 -            netsnmp_socketbase_close(t);
@@ -1237,7 +1272,7 @@ index b8bdba4..ab7f3a1 100644
          
          /*
 diff --git a/snmplib/transports/snmpTCPIPv6Domain.c b/snmplib/transports/snmpTCPIPv6Domain.c
-index 3c96856..305a861 100644
+index d2e0a2d..22de6d4 100644
 --- a/snmplib/transports/snmpTCPIPv6Domain.c
 +++ b/snmplib/transports/snmpTCPIPv6Domain.c
 @@ -49,6 +49,10 @@
@@ -1322,7 +1357,7 @@ index 3c96856..305a861 100644
          
          /*
 diff --git a/snmplib/transports/snmpUDPIPv4BaseDomain.c b/snmplib/transports/snmpUDPIPv4BaseDomain.c
-index c67427b..428e6d6 100644
+index 8c0fb05..00e5bbc 100644
 --- a/snmplib/transports/snmpUDPIPv4BaseDomain.c
 +++ b/snmplib/transports/snmpUDPIPv4BaseDomain.c
 @@ -40,6 +40,10 @@
@@ -1333,10 +1368,10 @@ index c67427b..428e6d6 100644
 +#include <net-snmp/library/sd-daemon.h>
 +#endif
 +
- #if (defined(linux) && defined(IP_PKTINFO)) \
-     || defined(IP_RECVDSTADDR) && HAVE_STRUCT_MSGHDR_MSG_CONTROL \
-                                && HAVE_STRUCT_MSGHDR_MSG_FLAGS
-@@ -67,6 +71,7 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
+ #if defined(HAVE_IP_PKTINFO) || defined(HAVE_IP_RECVDSTADDR)
+ int netsnmp_udpipv4_recvfrom(int s, void *buf, int len, struct sockaddr *from,
+                              socklen_t *fromlen, struct sockaddr *dstip,
+@@ -64,6 +68,7 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
      char           *client_socket = NULL;
      netsnmp_indexed_addr_pair addr_pair;
      socklen_t       local_addr_len;
@@ -1344,7 +1379,7 @@ index c67427b..428e6d6 100644
  
  #ifdef NETSNMP_NO_LISTEN_SUPPORT
      if (local)
-@@ -91,7 +96,19 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
+@@ -88,7 +93,19 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
          free(str);
      }
  
@@ -1365,10 +1400,10 @@ index c67427b..428e6d6 100644
      DEBUGMSGTL(("UDPBase", "openned socket %d as local=%d\n", t->sock, local)); 
      if (t->sock < 0) {
          netsnmp_transport_free(t);
-@@ -141,12 +158,14 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
-             DEBUGMSGTL(("netsnmp_udp", "set IP_RECVDSTADDR\n"));
+@@ -151,12 +168,14 @@ netsnmp_udpipv4base_transport(struct sockaddr_in *addr, int local)
+             }
          }
- #endif
+ #endif /* !defined(WIN32) */
 -        rc = bind(t->sock, (struct sockaddr *) addr,
 -                  sizeof(struct sockaddr));
 -        if (rc != 0) {
@@ -1387,7 +1422,7 @@ index c67427b..428e6d6 100644
          t->data = NULL;
          t->data_length = 0;
 diff --git a/snmplib/transports/snmpUDPIPv6Domain.c b/snmplib/transports/snmpUDPIPv6Domain.c
-index b3eaae4..35b617f 100644
+index 18de876..fd2ced4 100644
 --- a/snmplib/transports/snmpUDPIPv6Domain.c
 +++ b/snmplib/transports/snmpUDPIPv6Domain.c
 @@ -67,6 +67,10 @@ static const struct in6_addr in6addr_any = IN6ADDR_ANY_INIT;
@@ -1431,11 +1466,10 @@ index b3eaae4..35b617f 100644
      if (t->sock < 0) {
          netsnmp_transport_free(t);
          return NULL;
-@@ -242,13 +260,14 @@ netsnmp_udp6_transport(struct sockaddr_in6 *addr, int local)
- 	  } 
- 	}
+@@ -243,12 +261,14 @@ netsnmp_udp6_transport(struct sockaddr_in6 *addr, int local)
+         }
  #endif
--
+ 
 -        rc = bind(t->sock, (struct sockaddr *) addr,
 -		  sizeof(struct sockaddr_in6));
 -        if (rc != 0) {
@@ -1454,7 +1488,7 @@ index b3eaae4..35b617f 100644
          t->local = (unsigned char*)malloc(18);
          if (t->local == NULL) {
 diff --git a/snmplib/transports/snmpUnixDomain.c b/snmplib/transports/snmpUnixDomain.c
-index 674dc2b..9f3d3cb 100644
+index 47dffc1..8f34c37 100644
 --- a/snmplib/transports/snmpUnixDomain.c
 +++ b/snmplib/transports/snmpUnixDomain.c
 @@ -37,6 +37,10 @@
@@ -1538,7 +1572,7 @@ index 674dc2b..9f3d3cb 100644
          }
  
          /*
-@@ -391,16 +409,17 @@ netsnmp_unix_transport(struct sockaddr_un *addr, int local)
+@@ -391,14 +409,16 @@ netsnmp_unix_transport(struct sockaddr_un *addr, int local)
           * Now sit here and listen for connections to arrive.
           */
  
@@ -1561,53 +1595,50 @@ index 674dc2b..9f3d3cb 100644
 +                return NULL;
 +            }
          }
--
+ 
      } else {
-         t->remote = (u_char *)malloc(strlen(addr->sun_path));
-         if (t->remote == NULL) {
 diff --git a/win32/libsnmp/Makefile.in b/win32/libsnmp/Makefile.in
-index 98d83c8..dd5689b 100644
+index 98d83c8..b228d20 100644
 --- a/win32/libsnmp/Makefile.in
 +++ b/win32/libsnmp/Makefile.in
 @@ -42,6 +42,7 @@ LIB32_OBJS= \
  	"$(INTDIR)\read_config.obj" \
  	"$(INTDIR)\readdir.obj" \
  	"$(INTDIR)\scapi.obj" \
-+	"$(INTDIR)\sd-daemon.obj" \
++        "$(INTDIR)\sd-daemon.obj" \
  	"$(INTDIR)\snmp-tc.obj" \
  	"$(INTDIR)\snmp.obj" \
  	"$(INTDIR)\snmpCallbackDomain.obj" \
-@@ -307,6 +308,12 @@ SOURCE=..\..\snmplib\scapi.c
+@@ -138,6 +139,11 @@ SOURCE=..\..\snmplib\asn1.c
+ "$(INTDIR)\asn1.obj" : $(SOURCE) "$(INTDIR)"
  	$(CPP) $(CPP_PROJ) $(SOURCE)
- 
  
 +SOURCE=..\..\snmplib\sd-daemon.c
 +
 +"$(INTDIR)\sd-daemon.obj" : $(SOURCE) "$(INTDIR)"
-+	$(CPP) $(CPP_PROJ) $(SOURCE)
++       $(CPP) $(CPP_PROJ) $(SOURCE)
 +
-+
- SOURCE="..\..\snmplib\snmp-tc.c"
  
- "$(INTDIR)\snmp-tc.obj" : $(SOURCE) "$(INTDIR)"
+ SOURCE=..\..\snmplib\callback.c
+ 
 diff --git a/win32/net-snmp/net-snmp-config.h b/win32/net-snmp/net-snmp-config.h
-index 7791ee0..1eccf42 100644
+index 1608563..7aec547 100644
 --- a/win32/net-snmp/net-snmp-config.h
 +++ b/win32/net-snmp/net-snmp-config.h
-@@ -1705,6 +1705,8 @@ enum {
+@@ -1717,6 +1717,8 @@ enum {
  #define DMALLOC_FUNC_CHECK
  #endif
  
-+#define NETSNMP_NO_SYSTEMD
-+
+++#define NETSNMP_NO_SYSTEMD
+++
  /* #undef NETSNMP_ENABLE_LOCAL_SMUX */
  
  /* define if agentx transport is to use domain sockets only */
 diff --git a/win32/net-snmp/net-snmp-config.h.in b/win32/net-snmp/net-snmp-config.h.in
-index 5215865..1607bfa 100644
+index 9693730..96ec3d9 100644
 --- a/win32/net-snmp/net-snmp-config.h.in
 +++ b/win32/net-snmp/net-snmp-config.h.in
-@@ -1705,6 +1705,8 @@ enum {
+@@ -1717,6 +1717,8 @@ enum {
  #define DMALLOC_FUNC_CHECK
  #endif
  
@@ -1616,3 +1647,6 @@ index 5215865..1607bfa 100644
  /* #undef NETSNMP_ENABLE_LOCAL_SMUX */
  
  /* define if agentx transport is to use domain sockets only */
+-- 
+1.8.4.2
+
