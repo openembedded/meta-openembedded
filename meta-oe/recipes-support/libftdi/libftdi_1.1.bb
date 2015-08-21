@@ -24,6 +24,8 @@ PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on,-DFTDI_BUILD_CPP=off,boost"
 
 inherit cmake binconfig pkgconfig
 
+EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib', True).replace('lib', '')}"
+
 FILES_${PN}-dev += "${libdir}/cmake"
 
 BBCLASSEXTEND = "native"
