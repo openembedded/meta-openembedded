@@ -17,6 +17,7 @@ EXTRA_QMAKEVARS_PRE += "CONFIG+=notests TARGET_SUFFIX=${QT_DIR_NAME}"
 do_configure_prepend() {
     # Hack *.pro variables
     find ${S}/plugin/*.pro -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
+    find ${S} -iname '*.pro' -exec sed -i -e 's,$$INSTALL_ROOT$$PREFIX/lib,$$INSTALL_ROOT$$PREFIX/${baselib},g' '{}' ';'
 }
 do_install() {
     oe_runmake install INSTALL_ROOT=${D}
