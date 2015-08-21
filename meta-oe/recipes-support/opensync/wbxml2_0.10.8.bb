@@ -15,6 +15,8 @@ S = "${WORKDIR}/libwbxml-${PV}"
 
 inherit cmake pkgconfig
 
+EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib', True).replace('lib', '')}"
+
 PACKAGES += "${PN}-tools"
 
 FILES_${PN}-tools = "${bindir}"
