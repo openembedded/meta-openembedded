@@ -66,6 +66,7 @@ do_configure_prepend() {
     # Hack *.pro variables
     find . -iname '*.pro' -exec sed -i -e 's,$$\[QT_INSTALL_IMPORTS\],${QT_IMPORTS_DIR},g' '{}' ';'
     find . -iname '*.pro' -exec sed -i -e 's,$$\[QT_INSTALL_PREFIX\],$$INSTALL_ROOT$$PREFIX,g' '{}' ';'
+    find . -iname '*.pro' -exec sed -i -e 's,$$INSTALL_ROOT$$PREFIX/lib,$$INSTALL_ROOT$$PREFIX/${baselib},g' '{}' ';'
 }
 
 do_install() {
