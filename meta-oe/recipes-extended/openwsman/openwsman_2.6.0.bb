@@ -33,7 +33,7 @@ EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
                  -DBUILD_LIBCIM=NO \
                  -DBUILD_PERL=YES \
                  -DCMAKE_INSTALL_PREFIX=${prefix} \
-                 -DLIB=lib \
+                 -DLIB=${baselib} \
                 "
 
 do_configure_prepend() {
