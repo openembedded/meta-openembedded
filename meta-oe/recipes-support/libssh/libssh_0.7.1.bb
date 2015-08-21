@@ -7,17 +7,16 @@ DEPENDS = "zlib openssl libgcrypt"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
 
-SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-6"
-SRCREV = "3880a8ed80a4b1e2c052bd62f328bba2f869d5ae"
+SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-7"
+SRCREV = "053f72c671a83b32238dc01b56a66752fb15b7ec"
 S = "${WORKDIR}/git"
-
-PV = "0.6.4+git${SRCPV}"
 
 EXTRA_OECMAKE = " \
     -DWITH_GCRYPT=1 \
     -DWITH_PCAP=1 \
     -DWITH_SFTP=1 \
     -DWITH_ZLIB=1 \
+    -DLIB_SUFFIX=${@d.getVar('baselib', True).replace('lib', '')} \
     "
 
 PACKAGECONFIG ??=""
