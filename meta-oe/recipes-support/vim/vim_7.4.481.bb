@@ -6,13 +6,13 @@ RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
 LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b779e18be6ed77facc770691c967b8f8"
 
-SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+SRC_URI = "git://github.com/vim/vim.git \
            file://disable_acl_header_check.patch;patchdir=.. \
            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
 "
-SRCREV = "v7-4-481"
+SRCREV = "861d80a671747e6535c83356bcffcf80a72f543b"
 
-S = "${WORKDIR}/vim/src"
+S = "${WORKDIR}/git/src"
 
 VIMDIR = "vim${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
 
