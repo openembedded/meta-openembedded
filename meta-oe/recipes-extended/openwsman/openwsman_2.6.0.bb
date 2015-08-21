@@ -12,12 +12,14 @@ SECTION = "Applications/System"
 
 DEPENDS = "curl libxml2 openssl libpam"
 
-SRC_URI = "https://github.com/Openwsman/openwsman/archive/v${PV}.tar.gz \
+SRCREV = "f523bf1390c7ea23946bb9159978a4d7c198f1ba"
+PV = "2.6.0"
+
+SRC_URI = "git://github.com/Openwsman/openwsman.git \
            file://libssl-is-required-if-eventint-supported.patch \
            file://openwsmand.service"
 
-SRC_URI[md5sum] = "824834a86040b98b03f3fc0f7f62e853"
-SRC_URI[sha256sum] = "449b4972dc7700918f8f674047f0a1a9c19eeee3f4ce82f47890dddfa56e823f"
+S = "${WORKDIR}/git"
 
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
