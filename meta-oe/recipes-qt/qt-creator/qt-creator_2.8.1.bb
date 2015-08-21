@@ -16,6 +16,8 @@ S = "${WORKDIR}/${BP}-src"
 
 inherit qt4x11
 
+EXTRA_QMAKEVARS_PRE += "IDE_LIBRARY_BASENAME=${baselib}"
+
 do_install() {
 	oe_runmake INSTALL_ROOT=${D}${prefix} install
 	oe_runmake INSTALL_ROOT=${D}${prefix} install_docs
