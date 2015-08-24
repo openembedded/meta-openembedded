@@ -10,15 +10,15 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 
 PE = "1"
-PV = "7.2+git${SRCPV}"
-SRCREV = "f44b28421979cec88d6d6a778fc27a8cd514f508"
+PV = "7.3+git${SRCPV}"
+SRCREV = "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
 
 DEPENDS = "elfutils"
 RDEPENDS_${PN} = "elfutils"
-SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
+SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=ltrace-0.7 \
            file://ltrace-0.7.2-unused-typedef.patch \
            file://configure-allow-to-disable-selinux-support.patch \
-           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
+           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
           "
 S = "${WORKDIR}/git"
 
