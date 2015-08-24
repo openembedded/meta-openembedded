@@ -32,6 +32,8 @@ USERADD_PACKAGES = "${PN}d"
 USERADD_PARAM_${PN}d = "--system --no-create-home --shell /bin/false \
                         --user-group nobody"
 
+EXTRA_OEMAKE = "CFLAGS='${CFLAGS} -std=gnu89'"
+
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/atftpd.init ${D}${sysconfdir}/init.d/atftpd
