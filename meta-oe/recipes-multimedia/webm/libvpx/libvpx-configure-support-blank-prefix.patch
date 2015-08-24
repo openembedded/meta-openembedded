@@ -13,31 +13,31 @@ Fix configure to accept "--prefix=" (a blank prefix).
          ;;
          --libdir=*)
          libdir="${optval}"
-@@ -471,13 +473,23 @@
- 
- 
- post_process_common_cmdline() {
--    prefix="${prefix:-/usr/local}"
-+    if [ "$prefixset" != "1" ]
-+    then
-+        prefix=/usr/local
-+    fi
-+
-+    # Strip trailing slash
-     prefix="${prefix%/}"
-+
-     libdir="${libdir:-${prefix}/lib}"
-     libdir="${libdir%/}"
--    if [ "${libdir#${prefix}}" = "${libdir}" ]; then
--        die "Libdir ${libdir} must be a subdirectory of ${prefix}"
--    fi
-+
-+    case "$libdir" in
-+        "${prefix}/"*) ;;
-+        *)
-+            die "Libdir ${libdir} must be a subdirectory of ${prefix}"
-+            ;;
-+    esac
+@@ -587,13 +587,23 @@ process_cmdline() {
  }
  
+ post_process_common_cmdline() {
+-  prefix="${prefix:-/usr/local}"
++  if [ "$prefixset" != "1" ]
++  then
++      prefix=/usr/local
++  fi
++
++  # Strip trailing slash
+   prefix="${prefix%/}"
++
+   libdir="${libdir:-${prefix}/lib}"
+   libdir="${libdir%/}"
+-  if [ "${libdir#${prefix}}" = "${libdir}" ]; then
+-    die "Libdir ${libdir} must be a subdirectory of ${prefix}"
+-  fi
++
++  case "$libdir" in
++      "${prefix}/"*) ;;
++      *)
++          die "Libdir ${libdir} must be a subdirectory of ${prefix}"
++          ;;
++  esac
+ }
  
+ post_process_cmdline() {

@@ -7,13 +7,11 @@ LICENSE = "BSD"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
 
-SRC_URI += "http://webm.googlecode.com/files/libvpx-v${PV}.tar.bz2 \
+SRC_URI += "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/${BP}.tar.bz2 \
             file://libvpx-configure-support-blank-prefix.patch \
-            file://0001-configure.sh-quote-local-variables.patch"
-SRC_URI[md5sum] = "14783a148872f2d08629ff7c694eb31f"
-SRC_URI[sha256sum] = "d3dcc8d84af51c6c382b214397c62402e37a799e8ebcda6f4217aef0010451a9"
-
-S = "${WORKDIR}/libvpx-v${PV}"
+           "
+SRC_URI[md5sum] = "63b1d7f59636a42eeeee9225cc14e7de"
+SRC_URI[sha256sum] = "f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4"
 
 # ffmpeg links with this and fails 
 # sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
