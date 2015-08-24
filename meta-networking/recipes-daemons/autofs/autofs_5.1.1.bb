@@ -23,8 +23,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
 "
 
-SRC_URI[md5sum] = "b7724a9a55923f3c06933a8dfd1e79d3"
-SRC_URI[sha256sum] = "794a28d178d2b21a2380ee71cbdb3b15b4be47c06f3de255b8c5c4351f046b26"
+SRC_URI[md5sum] = "e143df66b614b8cdb1ff533735f8e12d"
+SRC_URI[sha256sum] = "795419383b120d15699ab3b89ea0f3d029f6fb28405a83982d305c4b7b61130f"
 
 inherit update-rc.d pkgconfig
 
