@@ -2,6 +2,8 @@ require cim-schema.inc
 
 LICENSE = "DMTF"
 
+RCONFLICTS_${PN} = "cim-schema-exper"
+
 SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
            file://LICENSE \
           "
