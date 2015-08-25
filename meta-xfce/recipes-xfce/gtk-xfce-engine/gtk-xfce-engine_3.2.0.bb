@@ -9,8 +9,8 @@ inherit xfce
 SRC_URI[md5sum] = "363d6c16a48a00e26d45c45c2e1fd739"
 SRC_URI[sha256sum] = "875c9c3bda96faf050a2224649cc42129ffb662c4de33add8c0fd1fb860b47ed"
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3, gtk+3"
+PACKAGECONFIG ??= "gtk3"
+PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3, gtk+3, gtk3-xfce-engine"
 
 PACKAGES += "${PN}-themes gtk3-xfce-engine"
 FILES_${PN} += "${libdir}/gtk-2.0/*/engines/*.so"
