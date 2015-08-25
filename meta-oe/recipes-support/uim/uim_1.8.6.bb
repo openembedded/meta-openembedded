@@ -1,17 +1,17 @@
 DESCRIPTION = "A multilingual user input method library"
 HOMEPAGE = "http://uim.freedesktop.org/"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause & LGPLv2+"
 SECTION = "inputmethods"
 
 SRC_URI = "http://uim.googlecode.com/files/uim-${PV}.tar.bz2 \
-           file://0001-fix-bug-about-stdlib.patch "
+          "
 
 SRC_URI_append_class-target = "file://uim-module-manager.patch \
                                file://0001-fix-bug-for-cross-compile.patch"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=9c372efbeca58ce22017a29c1ebf8bf0"
-SRC_URI[md5sum] = "2832e23d4778bbacbfa4b49bf642d667"
-SRC_URI[sha256sum] = "ed2cfa15018a4fd2557e875f66fcb3f0b9dabe12fa0700aa2f11cca69c2cb256"
+LIC_FILES_CHKSUM = "file://COPYING;md5=32463fd29aa303fb2360faeeae17256b"
+SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
+SRC_URI[sha256sum] = "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
 
 DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
 DEPENDS_class-target += "gtk+ uim-native takao-fonts"
@@ -32,6 +32,11 @@ EXTRA_OECONF += "--disable-emacs \
                  --without-eb"
 
 CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
+
+#Because m4 file's find maxdepth=2, so copy the m4 files of the deep depth.
+do_configure_prepend () {
+    cp ${S}/sigscheme/m4/* ${S}/m4/
+}
 
 PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-fep uim-common uim-anthy libuim0 libuim-dev"
 
