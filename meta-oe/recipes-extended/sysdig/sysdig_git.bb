@@ -11,13 +11,11 @@ inherit cmake pkgconfig
 DEPENDS = "luajit zlib ncurses"
 RDEPENDS_${PN} = "bash"
 
+SRC_URI = "git://github.com/draios/sysdig.git;branch=master"
+SRCREV = "b7394e29ced4f1a991af03c0381a5828abcbab7a"
+PV = "0.1.102+git${SRCPV}"
 
-SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz \
-           file://01-donot-set-default-value-to-va_list.patch \
-          "
-
-SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
-SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
+S = "${WORKDIR}/git"
 
 DIR_ETC="/etc"
 EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
