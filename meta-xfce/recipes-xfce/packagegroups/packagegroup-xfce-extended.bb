@@ -18,6 +18,8 @@ RRECOMMENDS_${PN} = " \
     xfwm4-theme-kokodi \
     xfwm4-theme-moheli \
     \
+    xfce-dusk-gtk3 \
+    \
     xfce4-cpufreq-plugin \
     xfce4-cpugraph-plugin \
     xfce4-datetime-plugin \
