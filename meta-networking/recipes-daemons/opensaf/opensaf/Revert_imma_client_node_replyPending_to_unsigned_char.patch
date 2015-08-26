@@ -1,0 +1,80 @@
+Upstream-Status: Backport
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+# HG changeset patch
+# User Anders Bjornerstedt <anders.bjornerstedt@ericsson.com>
+# Date 1430120883 -7200
+#      Mon Apr 27 09:48:03 2015 +0200
+# Branch opensaf-4.6.x
+# Node ID 97eb2e7b29bbe0aacee0ad9b13cf84f1a4d5d9b0
+# Parent  60b2136fcadf82f653b43ba1b5790f6dc3be3161
+immsv: Revert imma_client_node->replyPending to unsigned char [#1341]
+
+
+The member imma_client_node->replyPending was in OpenSAF4.1 and earlier
+defined as 'uns8', i.e. a byte. But this member is a counter and not a boolean.
+The uns8 type was often used as a proxy for a boolean type in OpenSAF 4.1 and
+earlier. This was before 'bool' was available as a first class type for gcc.
+At some point in OpenSAF 4.2 the bool C type became available in gcc. There
+was then a general sweep across all services to change the use of uns8 to bool.
+The replyPending member was swept along in this change, but code actually
+still increments and decrements the value, which makes no sense for a boolean
+type.
+
+The intent of the replyPending member is to keep track of outstanding
+replies on requests from imma library to immnd server using the handle.
+This so that a restart of the local IMMND will result in the handle being
+marked as 'exposed' and not resurrected.
+An IMMND restart will mean that any unreplied requests will have lost
+their replies. This violates the interface contract from the imm service
+side towards the client using the handle and so the handle must not be
+allowed to get resurrected. Instead the handle must be marked as exposed.
+The client will then get an ERR_BAD_HANDLE from either saImmOxDispatch
+(failed active resurrect) or from the next syncronous downcall made after
+IMMND went down (failed reactive resurrect).
+
+For syncronous requests, the count will only go from 0 to 1 and back to 0 on
+reply. This ticket does not affect syncronous requests. For asyncronous
+requests it is possible for the client to invoke more than one request,
+before entering poll to receive replies. For asyncronous requests the
+replyPending member must work as a counter and not a boolean. The effect
+of being a boolean is that a handle may get resurrected when there is
+still asyncronous requests unreplied to, i.e. the replies would get silently
+lost.
+
+This changeset restores the type of the repliesPending member to unsigned char.
+
+diff -r 60b2136fcadf -r 97eb2e7b29bb osaf/libs/agents/saf/imma/imma_cb.h
+--- a/osaf/libs/agents/saf/imma/imma_cb.h	Fri Apr 24 14:40:09 2015 +0200
++++ b/osaf/libs/agents/saf/imma/imma_cb.h	Mon Apr 27 09:48:03 2015 +0200
+@@ -50,13 +50,13 @@
+ 	SaUint32T mImplementerId;	/*Only used for OI.*/
+ 	SaImmOiImplementerNameT  mImplementerName; /* needed for active resurrect*/
+ 	SaUint32T syncr_timeout;/* Timeout on syncr downcalls, dflt 10s, or setenv IMMA_SYNCR_TIMEOUT */
++	unsigned char replyPending; /* Syncronous or asyncronous call made towards IMMND */
+ 	bool isOm;		/*If true => then this is an OM client */
+ 	bool stale;		/*Loss of connection with immnd 
+ 					  will set this to true for the 
+ 					  connection. A resurrect can remove it.*/
+ 	bool exposed;    /* Exposed => stale is irreversible */
+ 	bool selObjUsable; /* Active resurrect possible for this client */
+-	bool replyPending; /* Syncronous or asyncronous call made towards IMMND */
+ 	bool isPbe;  /* True => This is the PBE-OI */
+ 	bool isImmA2b;       /* Version A.02.11 */
+ 	bool isImmA2bCbk;    /* Version A.02.11 callback*/
+diff -r 60b2136fcadf -r 97eb2e7b29bb osaf/libs/agents/saf/imma/imma_proc.c
+--- a/osaf/libs/agents/saf/imma/imma_proc.c	Fri Apr 24 14:40:09 2015 +0200
++++ b/osaf/libs/agents/saf/imma/imma_proc.c	Mon Apr 27 09:48:03 2015 +0200
+@@ -3346,7 +3346,10 @@
+ 				cl_node->handle);
+ 		}
+ 	} else {
+-		/* Reaching 255 is sticky. */
++		/* Decrementing from zero implies a bug in the library logic. 
++		   The real count has been lost. Set the value to 255. This does not
++		   disturb current function, but makes the handle not resurrectable in
++		   case of iMMND restart while handle is still open. */
+ 		TRACE_3("Will not decrement zero pending reply count for handle %llx",
+ 			cl_node->handle);
+ 		cl_node->replyPending = 0xff;

@@ -1,0 +1,64 @@
+Upstream-Status: Backport
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+# HG changeset patch
+# User Anders Widell <anders.widell@ericsson.com>
+# Date 1431081180 -7200
+#      Fri May 08 12:33:00 2015 +0200
+# Branch opensaf-4.5.x
+# Node ID ee74d1846cadf5c237f420279610968216e3bbe0
+# Parent  32079e2039d2a31c1adfbe7eef2e6ee8a2e25810
+amf: Fix GCC 5.1.0 compiler warning [#1340]
+
+The following warning was fixed by replacing the case statement with an if
+statement:
+
+susm.cc: In function 'uint32_t avnd_evt_avd_su_pres_evh(AVND_CB*, AVND_EVT*)':
+susm.cc:1237:26: error: switch condition has type bool [-Werror=switch-bool]
+  switch (info->term_state) {
+                          ^
+
+diff -r 32079e2039d2 -r ee74d1846cad osaf/services/saf/amf/amfnd/susm.cc
+--- a/osaf/services/saf/amf/amfnd/susm.cc	Fri May 08 12:10:55 2015 +0530
++++ b/osaf/services/saf/amf/amfnd/susm.cc	Fri May 08 12:33:00 2015 +0200
+@@ -1234,8 +1234,7 @@
+ 		goto done;
+ 	}
+ 
+-	switch (info->term_state) {
+-	case true:		/* => terminate the su */
++	if (info->term_state) { /* => terminate the su */
+ 		/* Stop saAmfSGSuRestartProb timer if started */
+ 		if (su->su_err_esc_level == AVND_ERR_ESC_LEVEL_1) {
+ 			tmr_su_err_esc_stop(cb, su);
+@@ -1269,9 +1268,7 @@
+ 			if (NCSCC_RC_SUCCESS != rc)
+ 				goto done;
+ 		}
+-		break;
+-
+-	case false:		/* => instantiate the su */
++	} else { /* => instantiate the su */
+ 		TRACE("SU term state is set to false");
+ 		/* Reset admn term operation flag */
+ 		m_AVND_SU_ADMN_TERM_RESET(su);
+@@ -1299,7 +1296,7 @@
+ 			/* Will transition to instantiation-failed when instantiated */
+ 			LOG_ER("'%s':FAILED", __FUNCTION__); 
+ 			rc = NCSCC_RC_FAILURE;
+-			break;
++			goto done;
+ 		}
+ 		/* trigger su instantiation for pi su */
+ 		if (m_AVND_SU_IS_PREINSTANTIABLE(su)) {
+@@ -1315,8 +1312,7 @@
+ 			} else
+ 				osafassert(0);
+ 		}
+-		break;
+-	}			/* switch */
++	}
+ 
+ done:
+ 	TRACE_LEAVE2("%u", rc);

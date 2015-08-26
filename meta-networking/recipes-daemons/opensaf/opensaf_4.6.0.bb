@@ -18,6 +18,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://plmcd.service \
            file://plmcboot.service \
            file://0001-plmcd-error-fix.patch \
+           file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
+           file://Fix_GCC_5.1.0_compiler_warning.patch \
            "
 
 SRC_URI[md5sum] = "a1ceddb517c0972aa7e899b092d7f464"
