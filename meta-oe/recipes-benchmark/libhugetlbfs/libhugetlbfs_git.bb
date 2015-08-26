@@ -17,6 +17,7 @@ SRC_URI = " \
     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
     file://tests-Makefile-install-static-4G-edge-testcases.patch \
     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+    file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
 "
 
 S = "${WORKDIR}/git"
