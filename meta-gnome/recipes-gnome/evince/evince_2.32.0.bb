@@ -15,6 +15,7 @@ SRC_URI += " \
 
 SRC_URI[archive.md5sum] = "ebc3ce6df8dcbf29cb9492f8dd031319"
 SRC_URI[archive.sha256sum] = "2a4c91ae38f8b5028cebb91b9da9ddc50ea8ae3f3d429df89ba351da2d787ff7"
+GNOME_COMPRESS_TYPE="bz2"
 
 EXTRA_OECONF = " --enable-thumbnailer \
                  --disable-scrollkeeper \

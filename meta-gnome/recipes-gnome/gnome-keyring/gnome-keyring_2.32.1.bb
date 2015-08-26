@@ -24,6 +24,7 @@ EXTRA_OECONF = "${@base_contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-
 
 SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
 SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
+GNOME_COMPRESS_TYPE="bz2"
 
 FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
                 ${base_libdir}/security/*${SOLIBSDEV} \

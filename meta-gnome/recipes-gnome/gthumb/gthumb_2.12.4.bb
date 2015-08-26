@@ -12,6 +12,7 @@ inherit gnome pkgconfig
 
 SRC_URI[archive.md5sum] = "97fc13221b0c5d80c27a2e25a3a3ac6f"
 SRC_URI[archive.sha256sum] = "cf809695230ab8892a078be454a42ade865754c72ec1da7c3d74d4310de54f1d"
+GNOME_COMPRESS_TYPE="bz2"
 
 SRC_URI += "file://parallel.patch"
 

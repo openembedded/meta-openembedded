@@ -11,6 +11,7 @@ inherit gnome gettext pythonnative
 SRC_URI+= "file://0001-workaround-void-pointer-arithmetic.patch"
 SRC_URI[archive.md5sum] = "e1eecb0a92a1a363b3d375ec5ac0fb3b"
 SRC_URI[archive.sha256sum] = "a561fe3dd1d199baede1bd07c4ee65f06fc7c494dd4d3327117f04149a608e3c"
+GNOME_COMPRESS_TYPE="bz2"
 
 EXTRA_OECONF = "--disable-scrollkeeper \
                 --enable-gvfs-metadata"

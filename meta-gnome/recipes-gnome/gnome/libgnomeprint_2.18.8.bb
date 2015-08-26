@@ -14,6 +14,7 @@ SRC_URI += "file://fix.includes.patch \
            "
 SRC_URI[archive.md5sum] = "63b05ffb5386e131487c6af30f4c56ac"
 SRC_URI[archive.sha256sum] = "1034ec8651051f84d2424e7a1da61c530422cc20ce5b2d9e107e1e46778d9691"
+GNOME_COMPRESS_TYPE="bz2"
 
 FILES_${PN}-dbg += "\
     ${libdir}/${PN}/${PV}/modules/.debug \

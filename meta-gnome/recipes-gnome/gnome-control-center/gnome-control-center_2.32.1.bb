@@ -10,6 +10,7 @@ inherit gnome
 
 SRC_URI[archive.md5sum] = "b4e8ab5c7556ae07addbfcfb4fa2f761"
 SRC_URI[archive.sha256sum] = "7c568b57358e5c08f4d8dd76dbac7df2539135ad081872b60514b7a8ac797e66"
+GNOME_COMPRESS_TYPE="bz2"
 
 LDFLAGS += "-lgthread-2.0 -lxml2"
 

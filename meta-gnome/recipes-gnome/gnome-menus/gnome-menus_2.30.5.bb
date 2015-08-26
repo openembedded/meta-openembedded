@@ -11,6 +11,7 @@ inherit gnomebase pkgconfig python-dir pythonnative
 
 SRC_URI[archive.md5sum] = "caa6772e63ed5870cf43dc3d354e0624"
 SRC_URI[archive.sha256sum] = "6dcc565006d6e8c2025ae83ab1f82edf6bd04d61c804c0dc9bf5ea50629c4caa"
+GNOME_COMPRESS_TYPE="bz2"
 
 PACKAGES += "${PN}-python"
 FILES_${PN} += "${datadir}/desktop-directories/"

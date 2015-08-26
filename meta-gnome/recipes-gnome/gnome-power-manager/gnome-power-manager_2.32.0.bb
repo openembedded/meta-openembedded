@@ -16,6 +16,7 @@ SRC_URI += " \
 
 SRC_URI[archive.md5sum] = "9a08e85dce3ffb90775f15e3bda4adda"
 SRC_URI[archive.sha256sum] = "17fa301bf7e133285c0e054ae3be2b0f690c48f59b09f67e04d6ed339b330476"
+GNOME_COMPRESS_TYPE="bz2"
 
 EXTRA_OECONF = " --disable-scrollkeeper \
                  --disable-applets \

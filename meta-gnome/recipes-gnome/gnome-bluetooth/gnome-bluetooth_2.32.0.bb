@@ -18,6 +18,7 @@ SRC_URI += " \
 "
 SRC_URI[archive.md5sum] = "f129686fe46c4c98eb70a0cc85d59cae"
 SRC_URI[archive.sha256sum] = "57b1f06c96a1b85e1c19ff919d708cc38e95edae658881ed99968c325839a973"
+GNOME_COMPRESS_TYPE="bz2"
 
 # No 'nautilus-sendto' recipe in meta-gnome yet
 EXTRA_OECONF += "--enable-nautilus-sendto=no"

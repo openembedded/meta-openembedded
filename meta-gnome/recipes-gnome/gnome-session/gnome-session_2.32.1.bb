@@ -13,6 +13,7 @@ SRC_URI += "file://use_G_GINT64_FORMAT.patch"
 
 SRC_URI[archive.md5sum] = "222bad6b446cb19a6b9028ea24538002"
 SRC_URI[archive.sha256sum] = "22d93ce433fcf9c7ce6b5f36dd81f64e692ea0e41faaa0f61159ddac28c3686a"
+GNOME_COMPRESS_TYPE="bz2"
 
 EXTRA_OECONF = " --with-gtk=2.0 ac_cv_path_GCONF_SANITY_CHECK=set --disable-docbook-docs"
 
