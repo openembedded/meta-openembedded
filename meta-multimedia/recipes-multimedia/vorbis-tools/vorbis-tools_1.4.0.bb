@@ -17,16 +17,6 @@ SRC_URI[sha256sum] = "a389395baa43f8e5a796c99daf62397e435a7e73531c9f44d9084055a0
 
 inherit autotools pkgconfig gettext
 
-RDEPENDS_${PN} = "libogg libvorbis libcurl libao"
-
 PACKAGECONFIG ??= "flac"
 PACKAGECONFIG[flac] = ",--without-flac,flac,libflac"
 PACKAGECONFIG[speex] = ",--without-speex,speex,speex"
-
-EXTRA_OECONF = "--with-ogg-libraries=${STAGING_LIBDIR} \
-                --with-ogg-includes=${STAGING_INCDIR} \
-                --with-vorbis-libraries=${STAGING_LIBDIR} \
-                --with-vorbis-includes=${STAGING_INCDIR} \
-                --with-curl-libraries=${STAGING_LIBDIR} \
-                --with-curl-libraries=${STAGING_LIBDIR} \
-"
