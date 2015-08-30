@@ -1,9 +1,9 @@
 SUMMARY = "A font editor"
 HOMEPAGE = "http://fontforge.github.io/en-US/"
-LICENSE = "GPLv3"
+LICENSE = "BSD-3-Clause & GPLv3"
 LIC_FILES_CHKSUM = " \
     file://COPYING.gplv3;md5=d32239bcb673463ab874e80d47fae504 \
-    file://LICENSE;md5=71d636ba7678baa1573e1b531041386e \
+    file://LICENSE;md5=3f922b42ed0033fa0fd4cd3268f6429c \
 "
 
 inherit autotools pkgconfig pythonnative distro_features_check
@@ -12,9 +12,10 @@ DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
 DEPENDS_append_class-target = " libxi"
 REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
 
-SRC_URI = "https://github.com/${BPN}/${BPN}/archive/${PV}.tar.gz"
-SRC_URI[md5sum] = "0d6f5112c4e5689087339a94aceadf77"
-SRC_URI[sha256sum] = "9c90c640023463c0b2b97b87575a014fcf44f688c3763f4cd136d3c267092106"
+SRC_URI = "git://github.com/${BPN}/${BPN}.git"
+# tag 20150824
+SRCREV = "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
+S = "${WORKDIR}/git"
 
 EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disable-python-scripting"
 
