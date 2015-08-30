@@ -8,7 +8,6 @@ inherit xfce-app
 
 SRC_URI[md5sum] = "094be6f29206aac8299f27084e284e88"
 SRC_URI[sha256sum] = "8c7ed62f9496816d1391281f77d1b32216f9bf6fd22fbe4f6f3f4e07a6bbced0"
-SRC_URI += "file://0001-Restore-libnotify-version-7.0.0-compatibility.patch"
 
 do_compile_prepend() {
 	mkdir -p xfce4-notifyd
