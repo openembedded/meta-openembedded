@@ -1,0 +1,47 @@
+From 08a5b66d709781c0c596108278979a11b26331d5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 30 Aug 2015 12:14:53 +0200
+Subject: [PATCH] Fix build with libnotify >= 0.7.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Backport [1]
+
+[1] https://github.com/GNOME/gnome-bluetooth/commit/9f256799cc6b8367b2466f35b82f1d07076a950e
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ applet/notify.c | 2 +-
+ configure.ac    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/applet/notify.c b/applet/notify.c
+index d2a4f51..cb01dfc 100644
+--- a/applet/notify.c
++++ b/applet/notify.c
+@@ -71,7 +71,7 @@ void show_notification(const gchar *summary, const gchar *message,
+ 		notify_notification_close(notify, NULL);
+ 	}
+ 
+-	notify = notify_notification_new(summary, message, icon_name, NULL);
++	notify = notify_notification_new(summary, message, icon_name);
+ 
+ 	notify_notification_set_timeout(notify, timeout);
+ 
+diff --git a/configure.ac b/configure.ac
+index 8bbce4e..98ec86e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -71,7 +71,7 @@ AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
+ GTK_REQUIRED=2.19.1
+ GLIB_REQUIRED=2.25.7
+ DBUS_GLIB_REQUIRED=0.74
+-NOTIFY_REQUIRED=0.4.3
++NOTIFY_REQUIRED=0.7.0
+ NAUTILUS_SENDTO_REQUIRED=2.31.7
+ 
+ dnl Requires for the properties window
+-- 
+2.1.0
+
