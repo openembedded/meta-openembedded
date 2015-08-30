@@ -17,6 +17,7 @@ SRC_URI += "\
     file://fix-dbus-interfaces.patch \
     file://sysrooted-pkg-config.patch \
     file://0001-Add-support-for-DeviceAutomountHint.patch \
+    file://0002-Require-libnotify-0.6.1.patch \
 "
 
 EXTRA_OECONF += "--disable-scrollkeeper"
