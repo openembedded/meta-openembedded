@@ -10,7 +10,9 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://collectd-version.patch \
            file://0001-redefine-the-dependence.patch  \
            file://collectd.init \
-           file://collectd.service"
+           file://collectd.service \
+           file://0001-conditionally-check-libvirt.patch \
+"
 SRC_URI[md5sum] = "c39305ef5514b44238b0d31f77e29e6a"
 SRC_URI[sha256sum] = "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f1343b1062a4b569e88"
 
