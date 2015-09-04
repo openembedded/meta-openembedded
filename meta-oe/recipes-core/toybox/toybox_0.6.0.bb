@@ -1,10 +1,11 @@
 SUMMARY = "Toybox combines common utilities together into a single executable."
 HOMEPAGE = "http://www.landley.net/toybox/"
 
-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-    file://0001-Match-paths-with-busybox.patch"
-SRC_URI[md5sum] = "b5d1242767c411b69dcd717da1c218b2"
-SRC_URI[sha256sum] = "dec7f6433ee0e130f224fc63760b347ad0572280c4de32f1aaefbee813a79a00"
+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
+
+SRC_URI[md5sum] = "7f4a6c89e56c48e3350e611f5b36c2cf"
+SRC_URI[sha256sum] = "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec89761430cdff2c9710d"
+
 
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
