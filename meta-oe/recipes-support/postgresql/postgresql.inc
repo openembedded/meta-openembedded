@@ -139,6 +139,7 @@ do_configure() {
 	    -e "/^perl_embed_ldflags/s:${LIBPNA}:${STAGING_LIBDIR}:g" \
 	    -e "/^perl_embed_ldflags/s:${LIBNA}:${STAGING_LIBDIR}:g"  \
 	    -e "/^perl_embed_ldflags/s:${BLIBNA}:${STAGING_BASELIBDIR}:g" \
+	    -e "/^TCLSH/s:=.*:= ${bindir}/tclsh:g" \
 	${B}/src/Makefile.global
 
 	# workaround perl package's libperl.so problem
