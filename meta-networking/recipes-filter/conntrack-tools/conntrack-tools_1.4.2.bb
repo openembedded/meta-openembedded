@@ -9,9 +9,10 @@ SRC_URI = " \
     http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
     file://conntrack-failover \
     file://init \
+    file://0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch \
 "
-SRC_URI[tar.md5sum] = "ee737c774e01349f75e935228a2d851b"
-SRC_URI[tar.sha256sum] = "036b032a5c4d180aad686df21399d74506b9b3d3000794eb13ac313482e24896"
+SRC_URI[tar.md5sum] = "b1f9d006e7bf000a77395ff7cd3fac16"
+SRC_URI[tar.sha256sum] = "e5c423dc077f9ca8767eaa6cf40446943905711c6a8fe27f9cc1977d4d6aa11e"
 
 inherit autotools-brokensep update-rc.d pkgconfig
 
