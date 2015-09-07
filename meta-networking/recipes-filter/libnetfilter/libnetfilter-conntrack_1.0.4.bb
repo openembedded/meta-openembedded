@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 DEPENDS = "libnfnetlink libmnl"
 
 SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar"
-SRC_URI[tar.md5sum] = "447114b5d61bb9a9617ead3217c3d3ff"
-SRC_URI[tar.sha256sum] = "a0bd747dd58ae1513586b43c7125b41e6325f97eb95ac63d53cf5aeb33254d12"
+SRC_URI[tar.md5sum] = "18cf80c4b339a3285e78822dbd4f08d7"
+SRC_URI[tar.sha256sum] = "d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d"
 
 S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
 
