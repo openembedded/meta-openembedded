@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "00441b53cf14c03566c8e82643544ff9"
-SRC_URI[sha256sum] = "6fa90016530b3aa6102e254079461977439398531fb23e7ec076ff2c140fea0a"
-
-PR = "r2"
+SRC_URI[md5sum] = "b72794996c6a3ad94634727b95f9d204"
+SRC_URI[sha256sum] = "8b4ac0760018c77c0044fab06a4f0c510ba87eae934d9983b10878483bde7ef7"
 
 inherit autotools gettext update-alternatives pkgconfig distro_features_check
 # depends on virtual/libx11
@@ -44,6 +42,9 @@ FILES_${PN}-lxde += "${datadir}/lxde/ \
                      ${datadir}/xsessions \
                      ${datadir}/icons"
 
-FILES_${PN}-gnome += "${datadir}/gnome/"
+FILES_${PN}-gnome += " \
+    ${datadir}/gnome \
+    ${datadir}/gnome-session \
+"
 
 FILES_${PN}-config += "${sysconfdir}"
