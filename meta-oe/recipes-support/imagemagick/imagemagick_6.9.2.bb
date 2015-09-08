@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "07a2de28f7f9ab888ef47c02eb7e10cc3e0dd0e9797c5d71d6e71d19f8
 
 S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig update-alternatives
 
 # xml disabled because it's using xml2-config --prefix to determine prefix which returns just /usr with our libxml2
 # if someone needs xml support then fix it first
@@ -43,3 +43,46 @@ FILES_${PN}-dev += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
 FILES_${PN}-dbg += "${libdir}/ImageMagick-${PV}/modules-Q16/*/.debug/*"
 
 BBCLASSEXTEND = "native"
+
+ALTERNATIVE_PRIORITY = "100"
+
+ALTERNATIVE_${PN} = "animate compare composite conjure convert display \
+    identify import mogrify montage stream"
+
+ALTERNATIVE_TARGET[animate] = "${bindir}/animate.im6"
+ALTERNATIVE_TARGET[compare] = "${bindir}/compare.im6"
+ALTERNATIVE_TARGET[composite] = "${bindir}/composite.im6"
+ALTERNATIVE_TARGET[conjure] = "${bindir}/conjure.im6"
+ALTERNATIVE_TARGET[convert] = "${bindir}/convert.im6"
+ALTERNATIVE_TARGET[display] = "${bindir}/display.im6"
+ALTERNATIVE_TARGET[identify] = "${bindir}/identify.im6"
+ALTERNATIVE_TARGET[import] = "${bindir}/import.im6"
+ALTERNATIVE_TARGET[mogrify] = "${bindir}/mogrify.im6"
+ALTERNATIVE_TARGET[montage] = "${bindir}/montage.im6"
+ALTERNATIVE_TARGET[stream] = "${bindir}/stream.im6"
+
+ALTERNATIVE_${PN}-doc = "animate.1 compare.1 composite.1 conjure.1 \
+    convert.1 display.1 identify.1 import.1 mogrify.1 montage.1 stream.1"
+
+ALTERNATIVE_LINK_NAME[animate.1] = "${mandir}/man1/animate.1"
+ALTERNATIVE_TARGET[animate.1] = "${mandir}/man1/animate.im6.1"
+ALTERNATIVE_LINK_NAME[compare.1] = "${mandir}/man1/compare.1"
+ALTERNATIVE_TARGET[compare.1] = "${mandir}/man1/compare.im6.1"
+ALTERNATIVE_LINK_NAME[composite.1] = "${mandir}/man1/composite.1"
+ALTERNATIVE_TARGET[composite.1] = "${mandir}/man1/composite.im6.1"
+ALTERNATIVE_LINK_NAME[conjure.1] = "${mandir}/man1/conjure.1"
+ALTERNATIVE_TARGET[conjure.1] = "${mandir}/man1/conjure.im6.1"
+ALTERNATIVE_LINK_NAME[convert.1] = "${mandir}/man1/convert.1"
+ALTERNATIVE_TARGET[convert.1] = "${mandir}/man1/convert.im6.1"
+ALTERNATIVE_LINK_NAME[display.1] = "${mandir}/man1/display.1"
+ALTERNATIVE_TARGET[display.1] = "${mandir}/man1/display.im6.1"
+ALTERNATIVE_LINK_NAME[identify.1] = "${mandir}/man1/identify.1"
+ALTERNATIVE_TARGET[identify.1] = "${mandir}/man1/identify.im6.1"
+ALTERNATIVE_LINK_NAME[import.1] = "${mandir}/man1/import.1"
+ALTERNATIVE_TARGET[import.1] = "${mandir}/man1/import.im6.1"
+ALTERNATIVE_LINK_NAME[mogrify.1] = "${mandir}/man1/mogrify.1"
+ALTERNATIVE_TARGET[mogrify.1] = "${mandir}/man1/mogrify.im6.1"
+ALTERNATIVE_LINK_NAME[montage.1] = "${mandir}/man1/montage.1"
+ALTERNATIVE_TARGET[montage.1] = "${mandir}/man1/montage.im6.1"
+ALTERNATIVE_LINK_NAME[stream.1] = "${mandir}/man1/stream.1"
+ALTERNATIVE_TARGET[stream.1] = "${mandir}/man1/stream.im6.1"
