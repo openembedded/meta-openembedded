@@ -7,7 +7,7 @@ revision: HEAD
 URI: git://github.com/openembedded/meta-oe.git
 branch: master
 revision: HEAD
-meta-xfce depends on meta-oe and meta-multimedia in this repository.
+meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this repository.
 
 To avoid dependencies on meta-multimedia you need to mask recipes by adding
 this to local.conf:
