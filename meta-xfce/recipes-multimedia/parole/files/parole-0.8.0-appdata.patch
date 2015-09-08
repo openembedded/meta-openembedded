@@ -1,0 +1,30 @@
+Upstream-Status: submitted [1]
+Taken-From: [2]
+
+[1] https://bugzilla.xfce.org/show_bug.cgi?id=11653
+[2] http://pkgs.fedoraproject.org/cgit/parole.git/tree/parole-0.8.0-appdata.patch
+
+diff -Nur parole-0.8.0.orig/data/appdata/parole.appdata.xml.in parole-0.8.0/data/appdata/parole.appdata.xml.in
+--- parole-0.8.0.orig/data/appdata/parole.appdata.xml.in	2015-02-28 07:23:54.000000000 -0700
++++ parole-0.8.0/data/appdata/parole.appdata.xml.in	2015-03-07 08:25:01.940009844 -0700
+@@ -41,7 +41,7 @@
+   </provides>
+ 
+   <releases>
+-    <release version="0.7.0" timestamp="">
++    <release version="0.7.0" timestamp="1396146123">
+       <description>
+         <_p>This unstable development release adds the new clutter backend and cleans up
+         deprecated Gtk3 symbols. It also adds a "go to position" feature and several bugs
+diff -Nur parole-0.8.0.orig/po/es.po parole-0.8.0/po/es.po
+--- parole-0.8.0.orig/po/es.po	2015-02-28 07:23:54.000000000 -0700
++++ parole-0.8.0/po/es.po	2015-03-07 08:25:17.447726837 -0700
+@@ -514,7 +514,7 @@
+ "This unstable development release adds the new clutter backend and cleans up"
+ " deprecated Gtk3 symbols. It also adds a \"go to position\" feature and "
+ "several bugs have been addressed."
+-msgstr "Esta versión de desarrollo añade un nuevo motor de <i>clutter</i> y elimina símbolos GTK3 obsoletos. Además añade la funcionalidad «Ir a la posición» y corrige un sinnúmero de errores."
++msgstr "Esta versión de desarrollo añade un nuevo motor de clutter y elimina símbolos GTK3 obsoletos. Además añade la funcionalidad «Ir a la posición» y corrige un sinnúmero de errores."
+ 
+ #: ../data/appdata/parole.appdata.xml.in.h:4
+ msgid "This release fixes a problem with detecting DVD drive locations."
