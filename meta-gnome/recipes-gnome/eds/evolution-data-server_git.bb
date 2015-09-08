@@ -22,6 +22,7 @@ SRC_URI = " \
     file://0003-Disable-Werror-for-automake.patch \
     file://0004-configure-Fix-libical-pkg-config-trying-to-use-host-.patch \
     file://0005-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
+    file://0006-configure.ac-do-not-overwrite-localedir.patch \
     file://iconv-detect.h \
 "
 
