@@ -8,7 +8,10 @@ DEPENDS = "intltool libxxf86misc libsndfile1 libxtst glib-2.0 polkit gtk+ gconf 
 
 inherit gnome
 
-SRC_URI = "git://git.gnome.org/gnome-settings-daemon;branch=gnome-2-32"
+SRC_URI = " \
+    git://git.gnome.org/gnome-settings-daemon;branch=gnome-2-32 \
+    file://0001-Require-libnotify-0.6.0.patch \
+"
 SRCREV = "0160f6725cfb872e017f3958f108792c3b882872"
 
 S = "${WORKDIR}/git"
