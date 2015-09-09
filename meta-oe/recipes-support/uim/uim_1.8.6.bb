@@ -14,7 +14,7 @@ SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
 SRC_URI[sha256sum] = "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
 
 DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
-DEPENDS_class-target += "gtk+ uim-native takao-fonts"
+DEPENDS_class-target += "gtk+ gtk+3 uim-native takao-fonts"
 
 RDEPENDS_uim = "libuim0 libedit"
 RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0"
@@ -38,7 +38,17 @@ do_configure_prepend () {
     cp ${S}/sigscheme/m4/* ${S}/m4/
 }
 
-PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-fep uim-common uim-anthy libuim0 libuim-dev"
+do_install_append() {
+    rm -rf ${D}/${datadir}/applications
+}
+
+PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-common uim-anthy libuim0 libuim-dev"
+
+FILES_${PN} = "${bindir}/uim-help \
+               ${libdir}/uim/plugin/libuim-* \
+               ${libdir}/libuim-scm* \
+               ${libdir}/libgcroots* \
+               ${libdir}/uim/plugin/libuim-*"
 
 FILES_libuim0 = "${libdir}/uim/plugin/libuim-custom-enabler.* \
                  ${libdir}/libuim-custom.so.* \
@@ -72,11 +82,19 @@ FILES_uim-common = "${datadir}/uim/pixmaps/*.png \
                     ${datadir}/uim"
 
 FILES_uim-fep = "${bindir}/uim-fep*"
+
 FILES_uim-gtk2.0 = "${libdir}/gtk-2.0 \
-                    ${bindir}/uim-toolbar-gtk* \
+                    ${bindir}/uim-toolbar-gtk \
+                    ${bindir}/uim-toolbar-gtk-systray \
                     ${bindir}/uim-*-gtk \
                     ${bindir}/uim-input-pad-ja \
-                    ${datadir}/uim/helperdata/uim-dict-ui.xml"
+                    ${libdir}/uim/uim-*-gtk"
+
+FILES_uim-gtk3 = "${libdir}/gtk-3.0 \
+                   ${bindir}/uim-toolbar-gtk3 \
+                   ${bindir}/uim-toolbar-gtk3-systray \
+                   ${bindir}/uim-*-gtk3 \
+                   ${libdir}/uim/uim-*-gtk3"
 
 FILES_uim-skk = "${libdir}/uim/plugin/libuim-skk.* \
                  ${datadir}/uim/skk*.scm"
