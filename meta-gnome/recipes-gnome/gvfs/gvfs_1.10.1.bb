@@ -1,7 +1,7 @@
 require gvfs.inc
 
 DEPENDS = "libsoup-2.4 gnome-keyring glib-2.0 avahi gconf intltool-native"
-# optional: obexftp libcdio libimobiledevice 
+# optional: obexftp libimobiledevice
 
 PR = "${INC_PR}.0"
 
@@ -31,4 +31,5 @@ PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
 PACKAGECONFIG[fuse] = "--enable-fuse, --disable-fuse, fuse"
 PACKAGECONFIG[archive] = "--enable-archive, --disable-archive, libarchive"
 PACKAGECONFIG[obexftp] = "--enable-obexftp, --disable-obexftp, bluez4 expat"
-PACKAGECONFIG[cdda] = "--enable-cdda, --disable-cdda, libcdio"
+# libcdio-paranoia recipe doesn't exist yet
+PACKAGECONFIG[cdda] = "--enable-cdda, --disable-cdda, libcdio-paranoia"
