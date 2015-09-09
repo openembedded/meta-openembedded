@@ -27,3 +27,4 @@ do_configure_prepend() {
 
 SRC_URI[md5sum] = "1d81c593e22a6cdf0f2b4f57eae93df2"
 SRC_URI[sha256sum] = "1ca90059275c0f5dca71d4d1601a8f429b7852baed0723e820703b977e2c8df0"
+SRC_URI += "file://0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.patch"
