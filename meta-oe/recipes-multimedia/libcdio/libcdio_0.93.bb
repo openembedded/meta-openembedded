@@ -8,13 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "ncurses"
 
 SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
-SRC_URI[md5sum] = "1c29b18e01ab2b966162bc727bf3c360"
-SRC_URI[sha256sum] = "1acb3de8e0927906ade7a34c5853173d3068b87b02dfba80d0bf11e47f0b5d39"
+SRC_URI[md5sum] = "d154476feaac5a7b5f180e83eaf3d689"
+SRC_URI[sha256sum] = "4972cd22fd8d0e8bff922d35c7a645be0db0ab0e7b3dfaecc9cd8272429d6975"
 
 inherit autotools pkgconfig
-
-EXTRA_OECONF = "ac_cv_member_struct_tm_tm_gmtoff=no --disable-rpath"
-DEBUG_OPTIMIZATION_thumb = "-Os -fno-omit-frame-pointer -g"
 
 PACKAGES += "${PN}-utils"
 
