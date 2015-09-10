@@ -8,11 +8,9 @@ DEPENDS = "mysql5"
 
 SRCNAME = "MySQL-python"
 
-SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip \
-           file://remove-distribute.patch"
-
-SRC_URI[md5sum] = "ddf2386daf10a97af115ffad2ed4a9a0"
-SRC_URI[sha256sum] = "e405f9d6be33923d428acaa4db4f4470427f1d15ea0d2d82a933449ace26bbd9"
+SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.zip"
+SRC_URI[md5sum] = "654f75b302db6ed8dc5a898c625e030c"
+SRC_URI[sha256sum] = "811040b647e5d5686f84db415efd697e6250008b112b6909ba77ac059e140c74"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
