@@ -15,6 +15,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch \
     file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
     file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
+    file://0001-Include-stdatomic.h-only-in-C-mode.patch \
     file://gpsd-default \
     file://gpsd \
     file://60-gpsd.rules \
