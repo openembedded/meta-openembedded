@@ -15,6 +15,8 @@ S = "${WORKDIR}/pyzmq-${PV}"
 
 inherit setuptools pkgconfig
 
+RDEPENDS_${PN} += "python-multiprocessing"
+
 FILES_${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
 
 do_compile_prepend() {
