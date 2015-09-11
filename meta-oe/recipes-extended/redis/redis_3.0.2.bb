@@ -35,3 +35,4 @@ do_install() {
     install -d ${D}/var/lib/redis/
 }
 
+CONFFILES_${PN} = "${sysconfdir}/redis/redis.conf"
