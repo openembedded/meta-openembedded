@@ -1,7 +1,7 @@
 # polkit must prepare polkid group
 DEPENDS += "polkit"
 
-inherit allarch useradd
+inherit useradd
 
 do_install_prepend() {
     install -m 700 -d ${D}${sysconfdir}/polkit-1/rules.d
