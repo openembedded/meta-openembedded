@@ -28,3 +28,6 @@ FILES_${PN}-dev += "${libdir}/glade3/modules/*.la \
 PACKAGES += "${PN}-glade"
 FILES_${PN}-glade = "${libdir}/glade3 \
                      ${datadir}/glade3"
+
+RDEPENDS_${PN}-gtk2 = "${PN}"
+RDEPENDS_${PN}-gtk3 = "${PN}"
