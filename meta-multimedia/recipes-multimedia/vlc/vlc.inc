@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native gst-plugins-bad \
-   virtual/libsdl libsdl-image qt4-x11-free dbus dbus-glib libxml2 gnutls \
+   virtual/libsdl libsdl-image dbus dbus-glib libxml2 gnutls \
    tremor faad2 ffmpeg flac libxpm libxinerama fluidsynth alsa-lib \
    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ gnome-vfs \
    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
@@ -56,6 +56,7 @@ PACKAGECONFIG[libva] = "--enable-libva --enable-avcodec,--disable-libva --disabl
 PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
 PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
+PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
 
 do_configure_prepend() {
     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
