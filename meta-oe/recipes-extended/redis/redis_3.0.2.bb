@@ -27,7 +27,7 @@ do_install() {
     oe_runmake install
 
     install -d ${D}/${sysconfdir}/redis
-    install -m 0755 ${WORKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
+    install -m 0644 ${WORKDIR}/redis.conf ${D}/${sysconfdir}/redis/redis.conf
 
     install -d ${D}/${sysconfdir}/init.d 
     install -m 0755 ${WORKDIR}/init-redis-server ${D}/${sysconfdir}/init.d/redis-server
