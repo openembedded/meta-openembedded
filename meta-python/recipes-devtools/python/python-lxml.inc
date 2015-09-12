@@ -16,14 +16,18 @@ SRC_URI[sha256sum] = "b3d362bac471172747cda3513238f115cbd6c5f8b8e6319bf6a97a7892
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 DISTUTILS_BUILD_ARGS += " \
-                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
-                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
+                     --with-xslt-config='pkg-config libxslt' \
+                     --with-xml2-config='pkg-config libxml-2.0' \
 "
 
 DISTUTILS_INSTALL_ARGS += " \
-                     --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
-                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
+                     --with-xslt-config='pkg-config libxslt' \
+                     --with-xml2-config='pkg-config libxml-2.0' \
 "
+
+do_configure_prepend() {
+    sed -i -e 's/--version/--modversion/' ${B}/setupinfo.py
+}
 
 BBCLASSEXTEND = "native nativesdk"
 
