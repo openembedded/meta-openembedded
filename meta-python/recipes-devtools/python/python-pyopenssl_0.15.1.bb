@@ -21,5 +21,5 @@ inherit setuptools
 PACKAGES =+ "${PN}-tests"
 FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
 
-RDEPENDS_${PN} = "python-threading"
+RDEPENDS_${PN} = "python-threading python-six python-cryptography"
 RDEPENDS_${PN}-tests = "${PN}"
