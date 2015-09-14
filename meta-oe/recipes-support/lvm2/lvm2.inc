@@ -39,8 +39,14 @@ do_install_append() {
     # Install machine specific configuration file
     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
     sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
-    oe_runmake 'DESTDIR=${D}' install install_systemd_units
-    sed -i -e 's:/usr/bin/true:${base_bindir}/true:g' ${D}${systemd_unitdir}/system/blk-availability.service
+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        oe_runmake 'DESTDIR=${D}' install install_systemd_units
+        sed -i -e 's:/usr/bin/true:${base_bindir}/true:g' ${D}${systemd_unitdir}/system/blk-availability.service
+    else
+        oe_runmake 'DESTDIR=${D}' install install_initscripts
+        mv ${D}${sysconfdir}/rc.d/init.d ${D}${sysconfdir}/init.d
+        rm -rf ${D}${sysconfdir}/rc.d
+    fi
 }
 
 SYSTEMD_PACKAGES = "${PN}"
