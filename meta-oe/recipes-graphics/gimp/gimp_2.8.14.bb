@@ -9,9 +9,6 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
 
 inherit gnome gtk-doc
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[helpbrowser] = "--with-webkit, --without-webkit, webkit-gtk"
-
 SRC_URI = " \
     http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
     file://0001-configure-ac-do-not-check-for-freetype-config.patch \
@@ -20,6 +17,7 @@ SRC_URI[md5sum] = "233c948203383fa078434cc3f8f925cb"
 SRC_URI[sha256sum] = "d82a958641c9c752d68e35f65840925c08e314cea90222ad845892a40e05b22d"
 
 EXTRA_OECONF = "--disable-python \
+                --without-webkit \
                 --without-wmf"
 
 do_configure_append() {
