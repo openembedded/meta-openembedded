@@ -7,17 +7,17 @@ DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-nat
 
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
-SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
-           file://optional-depends.patch"
+SRC_URI = " \
+    http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
+    file://optional-depends.patch \
+    file://0001-fix-build-with-newer-glibc-versions.patch \
+    file://udisks-1.0.5-fix-service-file.patch \
+"
 
-SRC_URI += "${@base_contains('DISTRO_FEATURES', 'systemd', 'file://add-systemd-support.patch', '', d)}"
+SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
+SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3552b4b31c6f71"
 
-SRC_URI[udisks.md5sum] = "86c63b2b5484f2060499a052b5b6256b"
-SRC_URI[udisks.sha256sum] = "854b89368733b9c3a577101b761ad5397ae75a05110c8698ac5b29de9a8bf8f5"
-
-PR = "r9"
-
-inherit autotools systemd gtk-doc
+inherit autotools-brokensep systemd gtk-doc
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
@@ -35,5 +35,5 @@ FILES_${PN}-dbg += "${nonarch_base_libdir}/udev/.debug"
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "udisks-daemon.service"
+SYSTEMD_SERVICE_${PN} = "udisks.service"
 SYSTEMD_AUTO_ENABLE = "disable"
