@@ -24,7 +24,7 @@ index 65ba1ee..9efb3cd 100644
 -    <property name="ThemeName" type="empty"/>
 -    <property name="IconThemeName" type="empty"/>
 +    <property name="ThemeName" type="string" value="Xfce"/>
-+    <property name="IconThemeName" type="string" value="gnome"/>
++    <property name="IconThemeName" type="string" value="Adwaita"/>
      <property name="DoubleClickTime" type="int" value="400"/>
      <property name="DoubleClickDistance" type="int" value="5"/>
      <property name="DndDragThreshold" type="int" value="8"/>
