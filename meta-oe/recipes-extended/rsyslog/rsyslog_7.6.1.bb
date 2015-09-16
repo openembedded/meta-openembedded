@@ -70,7 +70,7 @@ PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
 
 TESTDIR = "tests"
 do_compile_ptest() {
-    sed -i 's/\(^buildtest-TESTS: \)/\1 $(check_PROGRAMS) /' ${TESTDIR}/Makefile
+    echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
     oe_runmake -C ${TESTDIR} buildtest-TESTS
 }
 
@@ -82,14 +82,18 @@ do_install_ptest() {
     # do NOT need to rebuild Makefile itself
     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 
-    # fix the srcdir
+    # fix the srcdir, top_srcdir
     sed -i 's,^\(srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+    sed -i 's,^\(top_srcdir = \).*,\1${PTEST_PATH}/tests,' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 
     # valgrind is not compatible with arm and mips,
     # so remove related test cases if there is no valgrind.
     if [ x${VALGRIND} = x ]; then
         sed -i '/udp-msgreduc-/d' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
     fi
+
+    # install test-driver
+    install -m 644 ${S}/test-driver ${D}${PTEST_PATH}/${TESTDIR}
 
     # install necessary links
     install -d ${D}${PTEST_PATH}/tools
