@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 inherit xfce
 
 DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
-           libxrandr virtual/libx11 libxext xfce4-panel"
+           libxrandr virtual/libx11 libxext xfce4-panel upower"
 
 SRC_URI[md5sum] = "e7d00548e58bf19229e727818184c1e0"
 SRC_URI[sha256sum] = "c50ec8aa7e7848c57c0f856dceb8132eb5f37585f0ac1627459ab8c882c73b07"
@@ -34,7 +34,7 @@ FILES_xfce4-powermanager-plugin = " \
 "
 
 RDEPENDS_xfce4-powermanager-plugin = "${PN}"
-RDEPENDS_${PN} = "networkmanager udisks upower ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
+RDEPENDS_${PN} = "networkmanager udisks ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
 
 # xfce4-brightness-plugin was replaced by xfce4-powermanager-plugin
 RPROVIDES_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
