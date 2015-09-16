@@ -10,8 +10,11 @@ inherit xfce xfce-git
 # + datetime-setter - sent to mainline but strange response
 # + minor bugfixes - sent mainline but no response
 # + option to hide mousepointer for a specific (touch) input device - sent mainline but no response
-SRC_URI = "git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.0"
-SRCREV = "30bc3db17e0c634e41d2f099de6f39bb894906cd"
+SRC_URI = " \
+    git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.0-1 \
+    file://0001-xsettings.xml-Set-default-themes.patch \
+"
+SRCREV = "c6683cb2cff489c16c2c7b5eab4017bb461f07f1"
 S = "${WORKDIR}/git"
 PV = "4.12.0+git${SRCPV}"
  
