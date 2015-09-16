@@ -1,0 +1,35 @@
+From f4051f27aee7cbe88f206783461784c936d7f5db Mon Sep 17 00:00:00 2001
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Date: Tue, 15 Sep 2015 16:17:50 +0300
+Subject: [PATCH] Remove pkg-config check for gnome-icon-theme
+
+Theme is not required for building and the icons are provided by
+adwaita-icon-theme anyway
+
+Upstream-Status: Inappropriate [Current versions are fixed]
+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+---
+ configure.ac | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index d061c2e..7856410 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -175,13 +175,6 @@ case "$with_platform" in
+           SHELL_PLATFORM_PKGS="hildon-1 hildon-fm-2 libosso"
+           ;;
+   gnome)
+-        # Evince has a rather soft run-time dependency on hicolor-icon-theme.
+-        # If the hicolor theme is not available, Evince fails to display some
+-        # icons. Because we cannot check for it at run-time, we instead
+-        # would like to require the icon theme at compile-time. But, because
+-        # the hicolor-icon-theme does not have a pkgconfig file, on gnome we
+-        # require the gnome icon theme instead.
+-        SHELL_PLATFORM_PKGS="gnome-icon-theme >= $GNOME_ICON_THEME_REQUIRED"
+         # The totem-screensaver and egg_smclient code use x11 directly.
+         SHELL_PLATFORM_PKGS="$SHELL_PLATFORM_PKGS x11"
+         ;;
+-- 
+2.1.4
+
