@@ -30,6 +30,6 @@ FILES_${PN} += " \
     ${datadir}/xfce4 \
 "
 
-RRECOMMENDS_${PN} += "gnome-icon-theme"
+RRECOMMENDS_${PN} += "adwaita-icon-theme"
 RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES','alsa','libcanberra-alsa','',d)}"
 RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES','pulseaudio','libcanberra-pulse','',d)}"
