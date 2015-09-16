@@ -6,7 +6,7 @@ PR = "r3"
 
 SECTION = "x11/gnome"
 DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
-RDEPENDS_${PN} = "gnome-icon-theme"
+RDEPENDS_${PN} = "adwaita-icon-theme"
 
 EXTRA_OECONF += "--enable-all-themes \
     --with-iconmap=${STAGING_LIBDIR_NATIVE}/icon-naming-utils/icon-name-mapping \
