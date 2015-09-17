@@ -14,8 +14,8 @@ DEPENDS = "libusb1"
 
 SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
 
-SRC_URI[md5sum] = "b79a6356978aa8e69f8eecc3a720ff79"
-SRC_URI[sha256sum] = "c0b1af1a13e2c6682a1d8041e5b164a1e0d90267cd378bb51e059bd62f821e21"
+SRC_URI[md5sum] = "89dff802d89c4c0d55d8b4665fd52d0b"
+SRC_URI[sha256sum] = "a6ea795c829219015eb372b03008351cee3fb39f684bff3bf8a4620b558488d6"
 
 S = "${WORKDIR}/${BPN}1-${PV}"
 
