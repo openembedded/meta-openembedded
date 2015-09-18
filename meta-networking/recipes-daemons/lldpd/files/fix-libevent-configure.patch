@@ -1,0 +1,39 @@
+Upstream-Status: Submitted [https://github.com/vincentbernat/lldpd/issues/133]
+
+Subject: [PATCH] fix libevent configure
+
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ m4/libevent.m4 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/m4/libevent.m4 b/m4/libevent.m4
+index 275e5a5..dcd3309 100644
+--- a/m4/libevent.m4
++++ b/m4/libevent.m4
+@@ -45,13 +45,11 @@ AC_DEFUN([lldp_CHECK_LIBEVENT], [
+         AC_MSG_ERROR([*** libevent not found])
+       fi
+     ])
+-  fi
+ 
+   if test x"$LIBEVENT_EMBEDDED" != x; then
+     unset LIBEVENT_LIBS
+     LIBEVENT_CFLAGS="-I\$(top_srcdir)/libevent/include -I\$(top_builddir)/libevent/include"
+     LIBEVENT_LDFLAGS="\$(top_builddir)/libevent/libevent.la"
+-  fi
+ 
+   # Call ./configure in libevent. Need it for make dist...
+   libevent_configure_args="$libevent_configure_args --disable-libevent-regress"
+@@ -64,6 +62,8 @@ AC_DEFUN([lldp_CHECK_LIBEVENT], [
+   libevent_configure_args="$libevent_configure_args --with-pic"
+   libevent_configure_args="$libevent_configure_args --enable-static"
+   lldp_CONFIG_SUBDIRS([libevent], [$libevent_configure_args])
++  fi
++  fi
+ 
+   AM_CONDITIONAL([LIBEVENT_EMBEDDED], [test x"$LIBEVENT_EMBEDDED" != x])
+   AC_SUBST([LIBEVENT_LIBS])
+-- 
+2.1.4
+
