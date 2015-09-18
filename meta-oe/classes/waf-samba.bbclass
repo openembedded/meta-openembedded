@@ -22,7 +22,7 @@ CONFIGUREOPTS = " --prefix=${prefix} \
 
 do_configure() {
     qemu_binary="${@qemu_target_binary(d)}"
-    if [ ${qemu_binary} == "qemu-allarch" ]; then
+    if [ "${qemu_binary}" = "qemu-allarch" ]; then
         qemu_binary="qemuwrapper"
     fi
 
