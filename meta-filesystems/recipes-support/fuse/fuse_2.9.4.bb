@@ -13,18 +13,26 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
            file://gold-unversioned-symbol.patch \
            file://aarch64.patch \
-           file://001-fix_exec_environment_for_mount_and_umount.patch \
+           file://0001-fuse-fix-the-return-value-of-help-option.patch \
+           file://fuse.conf \
 "
-SRC_URI[md5sum] = "33cae22ca50311446400daf8a6255c6a"
-SRC_URI[sha256sum] = "0beb83eaf2c5e50730fc553406ef124d77bc02c64854631bdfc86bfd6437391c"
+SRC_URI[md5sum] = "ecb712b5ffc6dffd54f4a405c9b372d8"
+SRC_URI[sha256sum] = "6be9c0bff6af8c677414935f31699ea5a7f8f5f791cfa5205be02ea186b97ce1"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig update-rc.d systemd
+
+INITSCRIPT_NAME = "fuse"
+
+SYSTEMD_SERVICE_${PN} = ""
 
 DEPENDS = "gettext-native"
 
 PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
 
-RRECOMMENDS_${PN} = "kernel-module-fuse"
+# Fusermount requires features from the util-linux version of mount.
+RDEPENDS_${PN} += "util-linux-mount"
+
+RRECOMMENDS_${PN} = "kernel-module-fuse libulockmgr fuse-utils"
 
 FILES_${PN} += "${libdir}/libfuse.so.*"
 FILES_${PN}-dev += "${libdir}/libfuse*.la"
@@ -41,4 +49,16 @@ DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
 
 do_install_append() {
     rm -rf ${D}${base_prefix}/dev
+
+    # systemd class remove the sysv_initddir only if systemd_system_unitdir
+    # contains anything, but it's not needed if sysvinit is not in DISTRO_FEATURES
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
+        rm -rf ${D}${sysconfdir}/init.d/
+    fi
+
+    # Install systemd related configuration file
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${sysconfdir}/modules-load.d
+        install -m 0644 ${WORKDIR}/fuse.conf ${D}${sysconfdir}/modules-load.d
+    fi
 }
