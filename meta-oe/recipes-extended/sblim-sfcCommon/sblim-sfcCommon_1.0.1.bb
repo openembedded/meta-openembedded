@@ -9,7 +9,7 @@ SECTION = "Development/Libraries"
 
 DEPENDS = "cmpi-bindings"
 
-SRC_URI = "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
+SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
           "
 SRC_URI[md5sum] = "8aa2655d97bdea54c4750f220b40990c"
 SRC_URI[sha256sum] = "b9b1037173d6ae0181c3bd5a316ddab5afd6a342ad0dbdc18e940fc0ad2c3297"
