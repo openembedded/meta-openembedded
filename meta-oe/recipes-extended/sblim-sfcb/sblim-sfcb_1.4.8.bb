@@ -11,7 +11,7 @@ LICENSE = "EPL-1.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
 DEPENDS = "curl libpam openssl sblim-sfcCommon"
 
-SRC_URI = "http://downloads.sourceforge.net/sblim/${PN}-${PV}.tar.bz2 \
+SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
            file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
            file://sblim-sfcb-1.3.15-fix-provider-debugging.patch \
            file://sblim-sfcb-1.3.16-maxMsgLen.patch \
