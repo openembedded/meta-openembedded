@@ -14,7 +14,7 @@ diff --git a/Source/cmake/WebKitHelpers.cmake b/Source/cmake/WebKitHelpers.cmake
 index 227b9ee..ae52ef6 100644
 --- a/Source/cmake/WebKitHelpers.cmake
 +++ b/Source/cmake/WebKitHelpers.cmake
-@@ -40,6 +40,16 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
+@@ -40,6 +40,25 @@ macro(WEBKIT_SET_EXTRA_COMPILER_FLAGS _target)
              # FIXME: When we use -fno-tree-dce to support the jsCStack branch merge, build error occurs due to the uninitialization. Temporarily we set
              # uninitialized as build warning in order to support the jsCStack merge. https://bugs.webkit.org/show_bug.cgi?id=127777.
              set(OLD_COMPILE_FLAGS "-Werror -Wno-error=unused-parameter -Wno-error=uninitialized -Wno-error=literal-suffix ${OLD_COMPILE_FLAGS}")
@@ -27,6 +27,15 @@ index 227b9ee..ae52ef6 100644
 +            # webkit-efl/1_1.11.0-r0/ewebkit/Source/WebKit2/UIProcess/API/efl/EwkView.cpp:832:5: error: missing initializer for member '_Evas_GL_Config::gles_version' [-Werror=missing-field-initializers]
 +            # this one is new with efl-1.12
 +            set(OLD_COMPILE_FLAGS "-Wno-error=missing-field-initializers ${OLD_COMPILE_FLAGS}")
++            # webkit-efl/1_1.11.0-r0/ewebkit/Source/WTF/wtf/dtoa/bignum.cc:105:10: error: assuming signed overflow does not occur when assuming that (X + c) < X is always false [-Werror=strict-overflow]
++            # this one is new with gcc-5.2
++            set(OLD_COMPILE_FLAGS "-Wno-error=strict-overflow ${OLD_COMPILE_FLAGS}")
++            # webkit-efl/1_1.11.0-r0/ewebkit/Source/WTF/wtf/SaturatedArithmetic.h:46:26: error: suggest parentheses around operand of '!' or change '&' to '&&' or '!' to '~' [-Werror=parentheses]
++            # this one is new with gcc-5.2
++            set(OLD_COMPILE_FLAGS "-Wno-error=parentheses ${OLD_COMPILE_FLAGS}")
++            # webkit-efl/1_1.11.0-r0/ewebkit/Source/WebCore/loader/cache/CachedScript.cpp:103:108: error: logical not is only applied to the left hand side of comparison [-Werror=logical-not-parentheses]
++            # this one is new with gcc-5.2
++            set(OLD_COMPILE_FLAGS "-Wno-error=logical-not-parentheses ${OLD_COMPILE_FLAGS}")
 +
          endif ()
  
