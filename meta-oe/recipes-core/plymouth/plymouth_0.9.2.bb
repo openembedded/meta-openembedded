@@ -19,7 +19,7 @@ SRC_URI = "http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.ta
 SRC_URI[md5sum] = "ff420994deb7ea203df678df92e7ab7d"
 SRC_URI[sha256sum] = "2f0ce82042cf9c7eadd2517a1f74c8a85fa8699781d9f294a06eade29fbed57f"
 
-EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk \
+EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-documentation\
 		  --with-logo=${LOGO} \
                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-system-root-install', '', d)} \
                 "
