@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 
 inherit autotools gettext gtk-doc systemd
 
-DEPENDS = "glib-2.0 libmbim libqmi polkit udev dbus-glib"
+DEPENDS = "glib-2.0 libmbim libqmi polkit libgudev dbus-glib"
 
 SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
 SRC_URI[md5sum] = "fe74eaa9a77e51e552b4356b4c7195cb"
