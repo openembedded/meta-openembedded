@@ -5,6 +5,8 @@ SRC_URI[archive.sha256sum] = "a2e77faced0c66d7498403adefcc0707105e03db71a2b2abd6
 
 DEPENDS = "glib-2.0 udev"
 
+RCONFLICTS_${PN} = "systemd (<= 220)"
+
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
