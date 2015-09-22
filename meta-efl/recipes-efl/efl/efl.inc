@@ -51,9 +51,11 @@ EXTRA_OECONF_append_class-native = " \
     --disable-image-loader-dds \
 "
 
-PACKAGECONFIG ?= "opengl-es gstreamer1 pulseaudio luajit"
+PACKAGECONFIG ?= "wayland egl opengl-es gstreamer1 pulseaudio luajit"
 PACKAGECONFIG_class-native = "luajit"
 
+PACKAGECONFIG[wayland] = "--enable-wayland --enable-wayland-ivi-shell,--disable-wayland --disable-wayland-ivi-shell,wayland"
+PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,virtual/egl"
 # sort of tri-state
 PACKAGECONFIG[opengl-full] = "--with-opengl=full,,virtual/libgl"
 PACKAGECONFIG[opengl-es] = "--with-opengl=es,,virtual/libgles2"
