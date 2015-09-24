@@ -34,8 +34,11 @@ inherit autotools useradd ptest
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "${@base_contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
+                   ${@base_contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
+                  "
 PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
 
 BASIC_AUTH = "DB SASL LDAP NIS"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
@@ -43,7 +46,6 @@ BASIC_AUTH += "${@base_contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
 
 EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}'"
 export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
-CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
 
 TESTDIR = "test-suite"
 do_compile_ptest() {
