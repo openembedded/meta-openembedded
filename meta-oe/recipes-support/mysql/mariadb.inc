@@ -169,6 +169,9 @@ RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-modu
     perl-module-constant perl-module-lib perl-module-file-temp perl-module-file-spec-functions \
     perl-module-io-socket-inet perl-module-io-select"
 
+# Allow old code to link to the backward compatible library
+RDEPENDS_libmysqlclient-dev = "libmysqlclient-r-dev"
+
 FILES_libmysqlclient = "\
     ${libdir}/libmysqlclient.so.* \
     ${sysconfdir}/my.cnf.d/client.cnf"
