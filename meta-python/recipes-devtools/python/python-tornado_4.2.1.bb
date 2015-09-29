@@ -5,15 +5,15 @@ polling, WebSockets, and other applications that require a long-lived connection
 HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5208df23820f490f691712a654be256d"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=c7dc99d243c4004087229f84f6b46828"
 
 SRCNAME = "tornado"
 
 SRC_URI = " \
     https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "985c0e704b765c33a6193d49d1935588"
-SRC_URI[sha256sum] = "900c5124ebdb6598ca8e8a0c5888f41a5f14117952d5515258e3d20222b21bfa"
+SRC_URI[md5sum] = "d523204389cfb70121bb69709f551b20"
+SRC_URI[sha256sum] = "a16fcdc4f76b184cb82f4f9eaeeacef6113b524b26a2cb331222e4a7fa6f2969"
 
 inherit setuptools
 
