@@ -97,6 +97,15 @@ do_install_append() {
     sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
 }
 
+do_install_append_class-target() {
+    sed -i -e 's,${STAGING_DIR_HOST},,g' \
+           -e 's,APU_INCLUDEDIR = .*,APU_INCLUDEDIR = ,g' \
+           -e 's,APU_CONFIG = .*,APU_CONFIG = ,g' ${D}${datadir}/apache2/build/config_vars.mk
+
+    sed -i -e 's,${STAGING_DIR_HOST},,g' \
+           -e 's,".*/configure","configure",g' ${D}${datadir}/apache2/build/config.nice
+}
+
 SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
 
 apache_sysroot_preprocess () {
