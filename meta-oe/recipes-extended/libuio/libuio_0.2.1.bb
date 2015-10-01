@@ -15,3 +15,6 @@ PACKAGES += "${PN}-tools"
 
 FILES_${PN} = "${libdir}"
 FILES_${PN}-tools = "${bindir}"
+
+# 0.2.1-r0/git/tools/lsuio.c:85: error: undefined reference to 'uio_mmap'
+PNBLACKLIST[libuio] ?= "BROKEN, fails to build with gcc-5"
