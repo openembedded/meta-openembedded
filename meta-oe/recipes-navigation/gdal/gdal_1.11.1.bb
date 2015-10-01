@@ -107,3 +107,8 @@ do_configure_prepend () {
 }
 
 FILES_${PN} += "${libdir}/gdalplugins"
+
+# | gdalserver.c:124:21: error: storage size of 'sHints' isn't known
+# |      struct addrinfo sHints;
+# |                      ^
+PNBLACKLIST[gdal] ?= "BROKEN: fails to build with gcc-5"
