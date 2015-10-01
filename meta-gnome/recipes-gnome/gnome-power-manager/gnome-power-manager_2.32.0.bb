@@ -50,3 +50,5 @@ FILES_${PN}-doc += "${datadir}/omf \
     ${datadir}/gnome/help \
 "
 
+# gnome-power-manager-2.32.0/src/gpm-manager.c:488:18: error: too many arguments to function 'notify_notification_new'
+PNBLACKLIST[gnome-power-manager] ?= "BROKEN: not compatible with current libnotify"
