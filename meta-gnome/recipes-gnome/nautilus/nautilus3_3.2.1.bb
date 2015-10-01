@@ -24,7 +24,7 @@ EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb --enable-nst-extensi
 export SYSROOT = "${STAGING_DIR_HOST}"
 
 do_configure() {
-    sed -i -e /docs/d Makefile.am
+    sed -i -e /docs/d ${S}/Makefile.am
     autotools_do_configure
 }
 
