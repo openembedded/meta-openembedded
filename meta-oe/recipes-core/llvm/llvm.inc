@@ -132,7 +132,7 @@ FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
                    ${libdir}/${LLVM_DIR}/LLVMHello.so \
 "
 
-PACKAGES_DYNAMIC = "^libllvm-.*$"
+PACKAGES_DYNAMIC = "^libllvm${LLVM_RELEASE}-.*$"
 
 INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
 
