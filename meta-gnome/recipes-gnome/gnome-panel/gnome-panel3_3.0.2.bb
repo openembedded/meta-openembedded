@@ -1,5 +1,5 @@
 SUMMARY = "GNOME panel"
-LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
+LICENSE = "GPLv2 & LGPLv2 & GFDL-1.1"
 
 BPN = "gnome-panel"
 PR = "r1"
