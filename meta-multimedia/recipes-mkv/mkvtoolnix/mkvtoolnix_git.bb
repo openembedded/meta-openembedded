@@ -39,3 +39,9 @@ do_compile() {
 do_install() {
     ${S}/drake install DESTDIR=${D}
 }
+
+# | In file included from src/common/utf8_codecvt_facet.cpp:22:0:
+# | src/common/../../lib/boost/utf8_codecvt_facet/utf8_codecvt_facet.cpp:174:5: error: 'int mtx::utf8_codecvt_facet::do_length' is not a static data member of 'struct mtx::utf8_codecvt_facet'
+# |      BOOST_CODECVT_DO_LENGTH_CONST std::mbstate_t &,
+# |      ^
+PNBLACKLIST[mkvtoolnix] ?= "BROKEN: Failx to build with gcc-5"
