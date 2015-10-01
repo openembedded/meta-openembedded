@@ -23,3 +23,5 @@ EXTRA_OECONF = "\
 # Some upgrade path tweaking, as in evas
 AUTO_LIBNAME_PKGS = ""
 
+# 2_0.1.0+svnr82070-r0/epdf/src/lib/poppler/epdf_poppler_main.cpp:52:24: error: 'class GlobalParams' has no member named 'getAntialias'
+PNBLACKLIST[epdf] ?= "BROKEN: fails to build with newer poppler"
