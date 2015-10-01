@@ -153,3 +153,6 @@ do_install() {
     install ${S}/etc/codecs.conf ${D}/usr/etc/mplayer/
     [ -e ${D}/usr/lib ] && rmdir ${D}/usr/lib
 }
+
+# | libmpdemux/demux_ogg.o:demux_ogg.c:function demux_ogg_read_packet: error: undefined reference to '_ilog'
+PNBLACKLIST[mplayer2] ?= "BROKEN, fails to build with gcc-5"
