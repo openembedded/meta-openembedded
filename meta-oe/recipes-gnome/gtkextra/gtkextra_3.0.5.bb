@@ -14,3 +14,6 @@ SRC_URI[sha256sum] = "9cab6c5d6b792eb828d17cec2b9c1baba2ef57f789a290464afab80b53
 DEPENDS = "gtk+ gobject-introspection-stub"
 
 inherit autotools pkgconfig
+
+# | ./.libs/libgtkextra-x11-3.0.so: error: undefined reference to 'roundint'
+PNBLACKLIST[gtkextra] ?= "BROKEN: Fails to build with gcc-5"
