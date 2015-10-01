@@ -49,3 +49,6 @@ INSANE_SKIP_${PN} += "libdir"
 INSANE_SKIP_${PN}-dbg += "libdir"
 
 RDEPENDS_${PN} += "perl"
+
+# /usr/include/qt4/QtCore/qsharedpointer_impl.h:336:11: error: 'product' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+PNBLACKLIST[qt-creator] ?= "BROKEN: fails to build with gcc-5 and conflicts with qt5-creator"
