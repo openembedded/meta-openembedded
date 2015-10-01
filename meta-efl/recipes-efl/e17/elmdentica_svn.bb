@@ -19,3 +19,5 @@ SRCREV = "${EFL_SRCREV}"
 RDEPENDS_${PN} = "${PN}-themes"
 
 SRC_URI += "file://configure.patch"
+
+PNBLACKLIST[elmdentica] ?= "OLD and depends on broken azy"

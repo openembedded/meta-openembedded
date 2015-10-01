@@ -30,3 +30,8 @@ inherit efl
 SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
+# azy/2_1.0.0+svnr82070-r2/azy/src/lib/extras/pugixml.cpp:33:
+# sysroots/qemuarm/usr/include/c++/5.2.0/bits/basic_string.h:4780:5: error: reference to 'basic_string' is ambiguous
+#     basic_string<_CharT, _Traits, _Alloc>
+#     ^
+PNBLACKLIST[azy] ?= "OLD and doesn't build with gcc-5"
