@@ -12,6 +12,7 @@ DEPENDS = "libplist usbmuxd libtasn1 gnutls libgcrypt"
 SRC_URI = " \
     http://www.libimobiledevice.org/downloads/libimobiledevice-${PV}.tar.bz2 \
     file://configure-fix-largefile.patch \
+    file://inline-without-definition.patch \
 "
 
 SRC_URI[md5sum] = "3f28cbc6a2e30d34685049c0abde5183"
