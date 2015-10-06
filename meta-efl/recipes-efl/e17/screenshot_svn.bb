@@ -13,4 +13,4 @@ do_configure_prepend() {
     sed -i -e 's:AC_MSG_ERROR(emprint not found):echo foo:g' ${S}/configure.ac
 }
 
-
+PNBLACKLIST[screenshot] ?= "depends on blacklisted emprint"
