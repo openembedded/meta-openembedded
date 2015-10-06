@@ -28,3 +28,4 @@ do_install() {
 FILES_${PN} += "${datadir}/qcanobserver/lib"
 FILES_${PN}-dbg += "${datadir}/qcanobserver/lib/.debug"
 
+PNBLACKLIST[qcanobserver-socketcan] ?= "depends on qwt-5 APIs"

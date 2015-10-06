@@ -39,3 +39,5 @@ do_install() {
 }
 
 FILES_${PN}-dbg += "${datadir}/qcanobserver/.debug"
+
+PNBLACKLIST[qcanobserver] ?= "depends on qwt-5 APIs"
