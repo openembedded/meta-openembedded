@@ -13,3 +13,5 @@ SRC_URI[md5sum] = "1e77767c9d6fecee5641f95804f160fe"
 SRC_URI[sha256sum] = "89d1de025eca0466c125dcd6a11b64341bdf98ee4c03c3e5a12321d77cb8b0ce"
 
 inherit autotools
+
+PNBLACKLIST[gst123] ?= "gst123 is still "sometimes" using wrong sysroot"
