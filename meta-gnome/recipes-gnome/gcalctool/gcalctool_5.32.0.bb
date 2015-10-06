@@ -16,3 +16,5 @@ inherit autotools pkgconfig gsettings
 do_configure_prepend() {
     sed -i -e "s: help: :g" ${S}/Makefile.am
 }
+
+PNBLACKLIST[gcalctool] ?= "broken at least since April 2013 http://permalink.gmane.org/gmane.comp.handhelds.openembedded/57920 and nobody complained, it's also replaced by gnome calculator"
