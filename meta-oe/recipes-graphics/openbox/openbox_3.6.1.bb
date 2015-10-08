@@ -4,7 +4,10 @@ DEPENDS = "glib-2.0 pango libxml2 virtual/libx11 libcroco librsvg gdk-pixbuf"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-SRC_URI = "http://icculus.org/openbox/releases/openbox-${PV}.tar.gz"
+SRC_URI = " \
+    http://icculus.org/openbox/releases/openbox-${PV}.tar.gz \
+    file://0001-Makefile.am-avoid-race-when-creating-autostart-direc.patch \
+"
 
 SRC_URI[md5sum] = "b72794996c6a3ad94634727b95f9d204"
 SRC_URI[sha256sum] = "8b4ac0760018c77c0044fab06a4f0c510ba87eae934d9983b10878483bde7ef7"
