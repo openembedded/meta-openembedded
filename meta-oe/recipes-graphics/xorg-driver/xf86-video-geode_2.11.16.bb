@@ -11,3 +11,6 @@ SRC_URI[sha256sum] = "38fc1f55e29fb7985b90c9021a4b7e5295d42888bd669174f42f3b7f68
 COMPATIBLE_HOST = "i.86.*-linux"
 
 RDEPENDS_${PN} += "xserver-xorg-module-exa"
+
+# 2_2.11.16-r21.0/xf86-video-geode-2.11.16/src/gx_driver.c:376:20: error: implicit declaration of function 'xf86MapVidMem' [-Werror=implicit-function-declaration]
+PNBLACKLIST[xf86-video-geode] ?= "BROKEN, fails to build"
