@@ -39,3 +39,5 @@ FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
 FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
                     ${libdir}/${BPN}/devel/.debug/ \
                     ${base_libdir}/security/.debug/"
+
+PNBLACKLIST[gnome-keyring] ?= "This version conflicts with gcr from oe-core"
