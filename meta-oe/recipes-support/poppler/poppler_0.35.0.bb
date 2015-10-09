@@ -20,13 +20,17 @@ PACKAGECONFIG[tiff] = "--enable-libtiff,--disable-libtiff,tiff"
 PACKAGECONFIG[curl] = "--enable-libcurl,--disable-libcurl,curl"
 PACKAGECONFIG[openjpeg] = "--enable-libopenjpeg=openjpeg2,--disable-libopenjpeg,openjpeg"
 PACKAGECONFIG[qt5] = "--enable-poppler-qt5 --with-moc-qt5=${STAGING_BINDIR_NATIVE}/qt5/moc,--disable-poppler-qt5,qtbase"
+PACKAGECONFIG[qt4e] = "--enable-poppler-qt4 --with-moc-qt4=${STAGING_BINDIR_NATIVE}/moc4,--disable-poppler-qt4,qt4-embedded"
 
 EXTRA_OECONF = "\
     --enable-xpdf-headers \
     --disable-gtk-test \
-    --disable-poppler-qt4 \
     --enable-zlib \
 "
+
+# Adjust library names when building for QT4e
+QT4E_PATCHES = "${@bb.utils.contains('PACKAGECONFIG', 'qt4e', 'file://fix-qt4e-library-dependencies.patch', '', d)}"
+SRC_URI_append = "${QT4E_PATCHES}"
 
 # check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points
 def get_poppler_fpu_setting(bb, d):
