@@ -34,7 +34,7 @@ RDEPENDS_${PN} += "bash perl"
 # The drbd items are explicitly put under /lib when installed.
 #
 FILES_${PN} += "/run"
-FILES_${PN} += "${base_libdir}/drbd \
-                ${libdir}/drbd \
-                ${libdir}/tmpfiles.d"
-FILES_${PN}-dbg += "${base_libdir}/drbd/.debug"
+FILES_${PN} += "${nonarch_base_libdir}/drbd \
+                ${nonarch_libdir}/drbd \
+                ${nonarch_libdir}/tmpfiles.d"
+FILES_${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
