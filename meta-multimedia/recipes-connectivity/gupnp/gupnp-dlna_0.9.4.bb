@@ -6,15 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
 DEPENDS = "libxml2 glib-2.0"
 
 SRC_URI = "http://download.gnome.org/sources/${BPN}/0.9/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "d972f9b03f0f3793cb895eb034ea314f"
-SRC_URI[sha256sum] = "c28d5650604c7da4f193e6b85049a4885f3a01f1996df768d55b5cb898a9fc53"
+SRC_URI[md5sum] = "f93665e535a512e4d515a86311435cb6"
+SRC_URI[sha256sum] = "69969713f36c0e815fbbbcfdfb3ad9bd447cfd10d0fd86227d82dfd8edb6c807"
 
 inherit autotools pkgconfig
 
 require no-vala.inc
 
-# The GStreamer metadata backend requires GStreamer 1.0, so skip this until we
-# have that packaged.
-EXTRA_OECONF = "--disable-gstreamer-metadata-backend"
+PACKAGECONFIG ?= "gstreamer"
+PACKAGECONFIG[gstreamer] = "--enable-gstreamer-metadata-backend,--disable-gstreamer-metadata-backend,gstreamer1.0 gstreamer1.0-plugins-base"
 
 FILES_${PN} += "${datadir}/gupnp-dlna-2.0/dlna-profiles"
