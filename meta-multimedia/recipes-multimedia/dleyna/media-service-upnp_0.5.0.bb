@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
 DEPENDS = "dbus glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4"
 
 SRC_URI = "git://github.com/01org/${BPN}.git"
-SRCREV = "1996ecbe4a06c95d22f7d958e32e3d28f7a4a2e9"
+SRCREV = "0dbc74a79aa07a8f8c7d32e1d2de6c4d3a0f95bc"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
