@@ -80,7 +80,10 @@ do_install() {
     install -d ${D}${localstatedir}/webmin
 
     install -d ${D}${libexecdir}/webmin
-    cp -pPR ${S}/* ${D}${libexecdir}/webmin
+    cd ${S} || exit 1
+    tar --no-same-owner --exclude='./patches' --exclude='./.pc' -cpf - . \
+        | tar --no-same-owner -xpf - -C ${D}${libexecdir}/webmin
+
     rm -f ${D}${libexecdir}/webmin/webmin-init
     rm -f ${D}${libexecdir}/webmin/ajaxterm/ajaxterm/configure.initd.gentoo
     rm -rf ${D}${libexecdir}/webmin/patches
