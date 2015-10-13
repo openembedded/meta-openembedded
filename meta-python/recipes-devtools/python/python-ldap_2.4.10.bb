@@ -8,7 +8,6 @@ instead of C API. The module mainly acts as a wrapper for the \
 OpenLDAP 2.x libraries. Errors will appear as exceptions."
 
 SECTION = "devel/python"
-PRIORITY = "optional"
 LICENSE = "PSF"
 HOMEPAGE = "http://www.python-ldap.org/"
 DEPENDS = "python openldap cyrus-sasl"

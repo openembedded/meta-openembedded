@@ -1,5 +1,4 @@
 SUMMARY = "Administration tool for arp packet filtering"
-PRIORITY = "optional"
 LICENSE = "GPL-2.0"
 SECTION = "net"
 

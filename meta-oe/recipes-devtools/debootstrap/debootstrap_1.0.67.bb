@@ -1,7 +1,6 @@
 DESCRIPTION = "Install a Debian system into a subdirectory"
 HOMEPAGE = "https://wiki.debian.org/Debootstrap"
 SECTION = "devel"
-PRIORITY = "optional"
 LICENSE = "debootstrap-custom-license"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
 
