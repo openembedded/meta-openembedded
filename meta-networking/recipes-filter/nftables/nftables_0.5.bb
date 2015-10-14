@@ -11,7 +11,7 @@ SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
            file://fix-to-generate-ntf.8.patch \
           "
 
-SRC_URI[md5sum] = "09b686c489ff10db670ca60dbed7ff43"
-SRC_URI[sha256sum] = "f6ca69b75c68915f9f3a3972274ec68354dfbbcfc0b9fc55c813a0525c351d3c"
+SRC_URI[md5sum] = "94bfe1c54bcb9f6ed974835f2fca8069"
+SRC_URI[sha256sum] = "1fb6dff333d8a4fc347cbbe273bf905a2634b27a8c39df0d3a45d5a3fde10ad6"
 
 inherit autotools pkgconfig
