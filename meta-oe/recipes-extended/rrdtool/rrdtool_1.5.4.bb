@@ -17,6 +17,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep gettext pythonnative perlnative python-dir cpan-base systemd
 
+BBCLASSEXTEND = "native"
+
 SYSTEMD_SERVICE_${PN} = "rrdcached.socket rrdcached.service"
 
 EXTRA_AUTORECONF = "-I m4"
