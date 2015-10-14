@@ -6,7 +6,7 @@ concurrency, performance and low memory usage."
 
 HOMEPAGE = "http://nginx.org/"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=917bfdf005ffb6fd025550414ff05a9f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3845852aedfa8d6d7765f55d06cc3ebd"
 SECTION = "net"
 
 DEPENDS = "libpcre gzip openssl"
@@ -19,8 +19,8 @@ SRC_URI = " \
 	file://nginx-volatile.conf \
 	file://nginx.service \
 "
-SRC_URI[md5sum] = "5dfaba1cbeae9087f3949860a02caa9f"
-SRC_URI[sha256sum] = "7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9"
+SRC_URI[md5sum] = "2562320f1535e3e31d165e337ae94f21"
+SRC_URI[sha256sum] = "48e2787a6b245277e37cb7c5a31b1549a0bbacf288aa4731baacf9eaacdb481b"
 
 inherit update-rc.d useradd
 
