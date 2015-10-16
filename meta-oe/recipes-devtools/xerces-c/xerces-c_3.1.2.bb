@@ -37,3 +37,5 @@ FILES_libxerces-c-dev = "${libdir}/lib*.la \
 FILES_xerces-c-samples = "${bindir}/*"
 FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
 FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
+
+BBCLASSEXTEND = "native"
