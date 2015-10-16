@@ -5,7 +5,7 @@ Intel LLDP Agent with Enhanced Ethernet support for the Data Center."
 SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
-DEPENDS = "libconfig libnl"
+DEPENDS = "libconfig libnl readline"
 SRCREV = "48a5f38778b18d6659a672ccb4640f25c6720827"
 
 SRC_URI = "git://github.com/jrfastab/lldpad.git;protocol=http \
