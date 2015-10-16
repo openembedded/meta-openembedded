@@ -24,6 +24,7 @@ CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
 PACKAGECONFIG ??= "openssl ipv6"
 PACKAGECONFIG[openssl] = "--with-crypto=yes, --without-openssl --without-crypto, openssl"
 PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+PACKAGECONFIG[smi] = "--with-smi, --without-smi,libsmi"
 
 EXTRA_AUTORECONF += " -I m4"
 
