@@ -35,6 +35,7 @@ EXTRA_OECONF += "--with-net-snmp-config=no \
                  ac_cv_header_readline_history_h=no \
                  --with-yielding_select=yes \
                  --with-locfile=redhat \
+                 --without-rpath \
                  "
 CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
 
