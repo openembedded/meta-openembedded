@@ -50,7 +50,7 @@ FILES_${PN}-dbg += "${prefix}/lib/dracut/.debug"
 
 CONFFILES_${PN} += "${sysconfdir}/dracut.conf"
 
-RDEPENDS_${PN} = "findutils cpio util-linux-blkid util-linux-getopt bash ldd"
+RDEPENDS_${PN} = "findutils cpio util-linux-blkid util-linux-getopt util-linux bash ldd"
 RDEPENDS_${PN}-bash-completion = "bash-completion"
 
 # This could be optimized a bit, but let's avoid non-booting systems :)
