@@ -20,6 +20,8 @@ SRC_URI = " \
 SRC_URI[md5sum] = "401ff99d530b177c62afacef0a33efd9"
 SRC_URI[sha256sum] = "4a82f184e55a163d86e0ad69bbe1bba9960bb5094220fe1f01350bceda8c67a1"
 
+PACKAGECONFIG[geoip] = "--enable-geoip-server,--disable-geoip-server,geoip"
+
 EXTRA_OECONF += " \
   --with-dbus-service-user=root \
   --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
