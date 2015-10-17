@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/${BP}.tar.bz2"
 
 PE = "1"
 
-SRC_URI[md5sum] = "c8ae53f648b1dcbf6e74495401a0f1ab"
-SRC_URI[sha256sum] = "c74a1c14e72ce0f198a93d832e71742c7f312cbbe719e5def9ecef176860f92c"
+SRC_URI[md5sum] = "988a4595a4a87dafb3c4870ea40e89b5"
+SRC_URI[sha256sum] = "357e0a4e49525d80cdc740bb16539fcdb526ad38cc2ed6cabedafc9bdee5c7e7"
 
 inherit autotools pkgconfig
 
