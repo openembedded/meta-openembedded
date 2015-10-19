@@ -19,6 +19,8 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[x264] = "--enable-x264,--disable-x264,x264"
 PACKAGECONFIG[cdio] = "--enable-cdio,--disable-cdio,libcdio"
 PACKAGECONFIG[dvdread] = "--enable-dvdread,--disable-dvdread,libdvdread"
+PACKAGECONFIG[amrnb] = "--enable-amrnb,--disable-amrnb,opencore-amr"
+PACKAGECONFIG[amrwb] = "--enable-amrwb,--disable-amrwb,opencore-amr"
 
 do_configure_prepend() {
 	# This m4 file contains nastiness which conflicts with libtool 2.2.2
@@ -27,4 +29,7 @@ do_configure_prepend() {
 
 SRC_URI[md5sum] = "1d81c593e22a6cdf0f2b4f57eae93df2"
 SRC_URI[sha256sum] = "1ca90059275c0f5dca71d4d1601a8f429b7852baed0723e820703b977e2c8df0"
-SRC_URI += "file://0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.patch"
+SRC_URI += "file://0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.patch \
+            file://0002-Fix-opencore-include-paths.patch"
+
+FILES_${PN}-amrnb += "${datadir}/gstreamer-0.10/presets/GstAmrnbEnc.prs"
