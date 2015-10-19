@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
 SRC_URI = "http://oss.linbit.com/drbd/${BP}.tar.gz \
            file://0001-Makefile.in-don-t-compile-documentation.patch \
+           file://0001-Makefile.in-fix-permission-bits-for-drbd.service.patch \
           "
 SRC_URI[md5sum] = "09c9c33c041e1f4f85dd359f9e0b0f24"
 SRC_URI[sha256sum] = "011050578c153bf4fef86e03749304ff9f333b7af3512c5c395e0e870a0445bd"
