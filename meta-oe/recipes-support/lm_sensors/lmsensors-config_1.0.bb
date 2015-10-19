@@ -10,6 +10,7 @@ SRC_URI = "file://fancontrol \
            file://sensord.cgi \
            file://sensord.conf \
            file://sensors.conf \
+           file://sensord \
 "
 S = "${WORKDIR}"
 
@@ -17,9 +18,9 @@ RDEPENDS_${PN}-dev = ""
 
 do_install() {
     # Install fancontrol configuration file
-    install -d ${D}${sysconfdir}
+    install -d ${D}${sysconfdir}/sysconfig
     install -m 0644 ${WORKDIR}/fancontrol ${D}${sysconfdir}
-
+    install -m 0644 ${WORKDIR}/sensord ${D}${sysconfdir}/sysconfig
     # Install libsensors configuration file
     install -d ${D}${sysconfdir}/sensors.d
     install -m 0644 ${WORKDIR}/sensors.conf ${D}${sysconfdir}/sensors.d
