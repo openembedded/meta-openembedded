@@ -9,16 +9,15 @@ SECTION = "console/network"
 BUGTRACKER = "https://github.com/esnet/iperf/issues"
 AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ab59a0c3a4bc3954d1ece68ea19d77a4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=062ab1bc33fae1926387ac1274cb0873"
 
 SRC_URI = "\
-    git://github.com/esnet/iperf.git;branch=3.0-STABLE \
+    git://github.com/esnet/iperf.git \
     file://automake-foreign.patch \
-    file://fix-examples.patch \
 "
 
-PV = "3.0.10+gitr${SRCPV}"
-SRCREV = "de420cc741dd8967ebc57f80b7712556442de81b"
+PV = "3.1+gitr${SRCPV}"
+SRCREV = "e396134952a01199326665d1df7c51ae9e62e945"
 
 S = "${WORKDIR}/git"
 
