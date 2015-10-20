@@ -10,7 +10,6 @@ DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
 SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2 \
            file://fancontrol.init \
            file://sensord.init \
-           file://sensord.service \
 "
 SRC_URI[md5sum] = "c03675ae9d43d60322110c679416901a"
 SRC_URI[sha256sum] = "e0579016081a262dd23eafe1d22b41ebde78921e73a1dcef71e05e424340061f"
@@ -26,7 +25,7 @@ INITSCRIPT_PARAMS_${PN}-fancontrol = "defaults 66"
 INITSCRIPT_PARAMS_${PN}-sensord = "defaults 67"
 
 SYSTEMD_PACKAGES = "${PN}-sensord"
-SYSTEMD_SERVICE_${PN}-sensord = "sensord.service"
+SYSTEMD_SERVICE_${PN}-sensord = "sensord.service lm_sensors.service fancontrol.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 S = "${WORKDIR}/lm_sensors-${PV}"
@@ -58,11 +57,7 @@ do_install() {
     # Insall sensord service script
     if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${WORKDIR}/sensord.service ${D}${systemd_unitdir}/system
-
-        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/sensord.service
-        sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/sensord.service
-        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/sensord.service
+        install -m 0644 ${S}/prog/init/*.service ${D}${systemd_unitdir}/system
     fi
 }
 
