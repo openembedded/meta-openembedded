@@ -70,8 +70,8 @@ do_configure() {
     sed -i -e '/PYTHON_INCLUDES="-I${/c \
     PYTHON_INCLUDES="-I=/usr/include/python${PYTHON_BASEVERSION}"' \
         ${S}/m4/acinclude.m4
-    #remove the hardcoded $(libdir) rpath
-    sed -i -e 's|--rpath=$(libdir)||g' ${S}/bindings/Makefile.am
+    #remove the useless RPATH from the rrdtool.so
+    sed -i -e 's|LD_RUN_PATH=$(libdir)||g' ${S}/bindings/Makefile.am
 
     autotools_do_configure
 
