@@ -37,6 +37,7 @@ CONFIGUREOPTS = " \
     --enable-shared \
     --prefix=${prefix} \
     --libdir=${libdir} \
+    --size-limit=16384x16384 \
 "
 
 do_configure() {
