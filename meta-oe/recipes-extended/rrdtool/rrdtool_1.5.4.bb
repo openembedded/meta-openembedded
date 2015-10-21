@@ -102,11 +102,11 @@ do_configure() {
 
 PACKAGES =+ "${PN}-perl ${PN}-python"
 
-FILES_${PN}-doc += "${datadir}/examples"
+FILES_${PN}-doc += "${datadir}/rrdtool/examples"
 
 DESCRIPTION_${PN}-perl = \
 "The ${PN}-perl package includes RRDtool bindings for perl."
-FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/rrdtool/examples \
+FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm \
     ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*"
 RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-time-hires \
     perl-module-io-file perl-module-ipc-open2 perl-module-io-socket"
