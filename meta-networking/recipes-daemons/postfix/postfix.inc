@@ -36,9 +36,9 @@ INITSCRIPT_PARAMS = "start 58 3 4 5 . stop 13 0 1 6 ."
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = \
 "-d /var/spool/postfix -r -g postfix --shell /bin/false postfix; \
- -d /var/spool/vmail -r -u 5000 -g vmail --shell /bin/false vmail \
+ -d /var/spool/vmail -r -g vmail --shell /bin/false vmail \
 "
-GROUPADD_PARAM_${PN} = "--system postfix;--system postdrop;-g 5000 --system vmail"
+GROUPADD_PARAM_${PN} = "--system postfix;--system postdrop;--system vmail"
 
 export SYSLIBS = "${LDFLAGS}"
 
