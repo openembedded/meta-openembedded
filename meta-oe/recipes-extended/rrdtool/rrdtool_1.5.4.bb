@@ -15,11 +15,13 @@ SRC_URI = "\
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep gettext pythonnative perlnative python-dir cpan-base
+inherit autotools-brokensep gettext pythonnative perlnative python-dir cpan-base systemd
+
+SYSTEMD_SERVICE_${PN} = "rrdcached.socket rrdcached.service"
 
 EXTRA_AUTORECONF = "-I m4"
 
-PACKAGECONFIG ??= "python perl"
+PACKAGECONFIG ??= "python perl ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
 PACKAGECONFIG[python] = "--enable-python=yes \
 am_cv_python_pythondir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages \
@@ -32,6 +34,8 @@ ac_cv_path_PERL_CC='${CC}',  \
 --disable-perl,perl,"
 
 PACKAGECONFIG[dbi] = "--enable-libdbi,--disable-libdbi,libdbi"
+
+PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
 
 EXTRA_OECONF = " \
     --enable-shared \
