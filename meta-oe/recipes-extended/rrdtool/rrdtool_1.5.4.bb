@@ -117,8 +117,8 @@ RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-
 
 DESCRIPTION_${PN}-python = \
 "The ${PN}-python package includes RRDtool bindings for python."
-FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+FILES_${PN}-python = "${nonarch_libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
 RDEPENDS_${PN}-python = "python"
 
 FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
-    ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
+    ${nonarch_libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
