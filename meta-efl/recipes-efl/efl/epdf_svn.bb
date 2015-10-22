@@ -11,7 +11,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6 \
 "
 
-SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
+SRC_URI = " \
+    ${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
+    file://0001-remove-antialias-functions-poppler-has-dropped-them-.patch \
+    file://0002-epdf_poppler_postscript.cpp-fix-build-for-poppler-AP.patch \
 "
 S = "${WORKDIR}/${SRCNAME}"
 
@@ -22,6 +25,3 @@ EXTRA_OECONF = "\
 
 # Some upgrade path tweaking, as in evas
 AUTO_LIBNAME_PKGS = ""
-
-# 2_0.1.0+svnr82070-r0/epdf/src/lib/poppler/epdf_poppler_main.cpp:52:24: error: 'class GlobalParams' has no member named 'getAntialias'
-PNBLACKLIST[epdf] ?= "BROKEN: fails to build with newer poppler"
