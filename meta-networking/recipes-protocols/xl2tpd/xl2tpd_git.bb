@@ -1,5 +1,5 @@
 require xl2tpd.inc
 PR = "${INC_PR}.0"
 
-SRCREV = "df7e30eb199fc5710faa83866381aea18b66e60c"
+SRCREV = "a96b345962622ea58490924130675df6db062d11"
 
