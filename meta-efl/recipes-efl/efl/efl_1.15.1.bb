@@ -23,3 +23,7 @@ PARALLEL_MAKE_class-native = ""
 #Makefile:2163: recipe for target 'all-recursive' failed
 # autotools-brokensep
 B = "${S}"
+
+#ld: error: modules/evas/image_loaders/png/bin_evas_evas_cserve2_slave-evas_image_load_png.o: requires unsupported dynamic reloc R_ARM_MOVW_ABS_NC; recompile with -fPIC
+#ld: error: modules/evas/image_loaders/png/bin_evas_evas_cserve2_slave-evas_image_load_png.o: requires unsupported dynamic reloc R_ARM_MOVW_ABS_NC; recompile with -fPIC
+CFLAGS += "-fPIC"
