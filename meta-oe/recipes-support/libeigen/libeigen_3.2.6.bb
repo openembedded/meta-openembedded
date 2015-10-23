@@ -4,12 +4,11 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
 
-SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2 \
-           file://eigen-disable-tests.patch"
-SRC_URI[md5sum] = "894381be5be65bb7099c6fd91d61b357"
-SRC_URI[sha256sum] = "011f78960d939227f9276173d0c4cc0053bb9e0a7356539a9a6c7c89d984fab6"
+SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2"
+SRC_URI[md5sum] = "87274966745d2d3e7964fcc654d0a24b"
+SRC_URI[sha256sum] = "8a3352f9a5361fe90e451a7305fb1896fc7f771dc16cc0edd8e6b157f52c343e"
 
-S = "${WORKDIR}/eigen-eigen-ffa86ffb5570"
+S = "${WORKDIR}/eigen-eigen-c58038c56923"
 
 inherit cmake
 
