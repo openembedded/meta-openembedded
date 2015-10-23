@@ -1,0 +1,21 @@
+Upstream-Status: Backport
+
+There is an incorrect m4_define() in configure.in which will result in an
+infinite recursion, and it doesn't make sense, since snort 2.9.7 it has been
+commented out. We follow this solution to fix it.
+
+Signed-off-by: Zhiquan Li <zhiquan.li@windriver.com>
+
+--- a/configure.in	2015-10-22 13:58:50.743367251 +0800
++++ b/configure.in	2015-10-22 13:59:13.855366117 +0800
+@@ -1100,8 +1100,8 @@
+ # Define PKG_CHECK_MODULES if it doesnt already exist. 
+ #file_ This prevents './configure' from erroring on machines that dont have
+ # 'pkgconfig' installed.
+-m4_ifdef([PKG_CHECK_MODULES],[], [m4_define([PKG_CHECK_MODULES], 
+-     [echo "PKG_CHECK_MODULES not defined"])])
++#m4_ifdef([PKG_CHECK_MODULES],[], [m4_define([PKG_CHECK_MODULES],
++#     [echo "PKG_CHECK_MODULES not defined"])])
+
+ if test "x$enable_rzb_saac" = "xyes"; then
+     AC_CHECK_PROG(PKG_CONFIG,pkg-config,yes)
