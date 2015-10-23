@@ -11,8 +11,11 @@ inherit cmake pkgconfig
 DEPENDS = "luajit zlib ncurses"
 RDEPENDS_${PN} = "bash"
 
-SRC_URI = "git://github.com/draios/sysdig.git;branch=master"
-SRCREV = "b7394e29ced4f1a991af03c0381a5828abcbab7a"
+SRC_URI = "git://github.com/draios/sysdig.git;branch=master \
+           file://0001-libsinsp-Port-to-build-with-lua-5.2.patch \
+           file://0001-Fix-build-with-musl-backtrace-APIs-are-glibc-specifi.patch \
+          "
+SRCREV = "85d16f33a82a17f87ccdbc088749271c71d87013"
 PV = "0.1.102+git${SRCPV}"
 
 S = "${WORKDIR}/git"
