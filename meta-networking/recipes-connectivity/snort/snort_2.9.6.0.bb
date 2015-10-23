@@ -6,14 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
 DEPENDS = "libpcap libpcre daq libdnet util-linux"
 
-
 SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
-            file://snort.init \
-            file://disable-inaddr-none.patch \
-            file://disable-dap-address-space-id.patch \
-            file://0001-libpcap-search-sysroot-for-headers.patch \
-            file://not-hardcoded-libdir.patch \
-            file://m4-oom-during-configure.patch \
+    file://snort.init \
+    file://disable-inaddr-none.patch \
+    file://disable-dap-address-space-id.patch \
+    file://0001-libpcap-search-sysroot-for-headers.patch \
+    file://not-hardcoded-libdir.patch \
+    file://m4-oom-during-configure.patch \
 "
 
 SRC_URI[tarball.md5sum] = "18111f6de3989ca89add36077a7c2659"
@@ -25,17 +24,17 @@ INITSCRIPT_NAME = "snort"
 INITSCRIPT_PARAMS = "defaults"
 
 EXTRA_OECONF = " \
-	--enable-gre \
-	--enable-linux-smp-stats \
-	--enable-reload \
-	--enable-reload-error-restart \
-	--enable-targetbased \
-	--disable-static-daq \
-	--with-dnet-includes=${STAGING_INCDIR} \
-	--with-dnet-libraries=${STAGING_LIBDIR} \
-	--with-libpcre-includes=${STAGING_INCDIR} \
-	--with-libpcre-libraries=${STAGING_INCDIR} \
-	"
+    --enable-gre \
+    --enable-linux-smp-stats \
+    --enable-reload \
+    --enable-reload-error-restart \
+    --enable-targetbased \
+    --disable-static-daq \
+    --with-dnet-includes=${STAGING_INCDIR} \
+    --with-dnet-libraries=${STAGING_LIBDIR} \
+    --with-libpcre-includes=${STAGING_INCDIR} \
+    --with-libpcre-libraries=${STAGING_INCDIR} \
+"
 
 # if you want to disable it, you need to patch configure.in first
 # AC_CHECK_HEADERS([openssl/sha.h],, SHA_H="no")
@@ -57,28 +56,28 @@ do_install_append() {
 }
 
 FILES_${PN} += " \
-	${libdir}/snort_dynamicengine/*.so.* \
-	${libdir}/snort_dynamicpreprocessor/*.so.* \
-	${libdir}/snort_dynamicrules/*.so.* \
-	"
+    ${libdir}/snort_dynamicengine/*.so.* \
+    ${libdir}/snort_dynamicpreprocessor/*.so.* \
+    ${libdir}/snort_dynamicrules/*.so.* \
+"
 FILES_${PN}-dbg += " \
-	${libdir}/snort_dynamicengine/.debug \
-	${libdir}/snort_dynamicpreprocessor/.debug \
-	${libdir}/snort_dynamicrules/.debug \
-	"
+    ${libdir}/snort_dynamicengine/.debug \
+    ${libdir}/snort_dynamicpreprocessor/.debug \
+    ${libdir}/snort_dynamicrules/.debug \
+"
 FILES_${PN}-staticdev += " \
-	${libdir}/snort_dynamicengine/*.a \
-	${libdir}/snort_dynamicpreprocessor/*.a \
-	${libdir}/snort_dynamicrules/*.a \
-	${libdir}/snort/dynamic_preproc/*.a \
-	${libdir}/snort/dynamic_output/*.a \
-	"
+    ${libdir}/snort_dynamicengine/*.a \
+    ${libdir}/snort_dynamicpreprocessor/*.a \
+    ${libdir}/snort_dynamicrules/*.a \
+    ${libdir}/snort/dynamic_preproc/*.a \
+    ${libdir}/snort/dynamic_output/*.a \
+"
 FILES_${PN}-dev += " \
-	${libdir}/snort_dynamicengine/*.la \
-	${libdir}/snort_dynamicpreprocessor/*.la \
-	${libdir}/snort_dynamicrules/*.la \
-	${libdir}/snort_dynamicengine/*.so \
-	${libdir}/snort_dynamicpreprocessor/*.so \
-	${libdir}/snort_dynamicrules/*.so \
-	${prefix}/src/snort_dynamicsrc \
-	"
+    ${libdir}/snort_dynamicengine/*.la \
+    ${libdir}/snort_dynamicpreprocessor/*.la \
+    ${libdir}/snort_dynamicrules/*.la \
+    ${libdir}/snort_dynamicengine/*.so \
+    ${libdir}/snort_dynamicpreprocessor/*.so \
+    ${libdir}/snort_dynamicrules/*.so \
+    ${prefix}/src/snort_dynamicsrc \
+"
