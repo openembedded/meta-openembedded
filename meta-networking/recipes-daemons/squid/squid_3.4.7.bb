@@ -20,6 +20,10 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://squid-use-serial-tests-config-needed-by-ptest.patch \
            file://run-ptest \
            file://volatiles.03_squid \
+           file://CVE-2014-6270.patch \
+           file://CVE-2014-7141_CVE-2014-7142.patch \
+           file://CVE-2015-3455.patch \
+           file://CVE-2015-5400.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
