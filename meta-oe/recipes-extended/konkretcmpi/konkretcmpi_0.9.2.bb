@@ -6,7 +6,7 @@ implementations for many of the provider operations."
 HOMEPAGE = "https://github.com/rnovacek/konkretcmpi"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
-DEPENDS = "swig sblim-cmpi-devel python cmake-native"
+DEPENDS = "swig-native sblim-cmpi-devel python"
 
 SRC_URI = "git://github.com/rnovacek/konkretcmpi.git \
            file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
