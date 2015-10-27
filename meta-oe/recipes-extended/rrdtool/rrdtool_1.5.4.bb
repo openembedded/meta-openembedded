@@ -15,7 +15,7 @@ SRC_URI = "\
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep gettext pythonnative perlnative python-dir cpan-base systemd
+inherit cpan autotools-brokensep gettext pythonnative python-dir systemd
 
 BBCLASSEXTEND = "native"
 
@@ -50,21 +50,13 @@ EXTRA_OECONF = " \
     --disable-rpath \
 "
 
-# don't use perl.real, this results in break issues with prebuilts since perl.real doesn't
-# know where the PERL5LIB is...
-# use wrapper perl instead
-EXTRA_OEMAKE = "PERL=${STAGING_BINDIR_NATIVE}/perl-native/perl FULLPERL=${STAGING_BINDIR_NATIVE}/perl-native/perl"
-
 export BUILD_SYS
 export HOST_SYS
 export STAGING_LIBDIR
 export STAGING_INCDIR
 
-# Env var which tells perl if it should use host (no) or target (yes) settings
-export PERLCONFIGTARGET = "${@is_target(d)}"
-export PERL_INC = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}/CORE"
-export PERL_LIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
-export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
+# emulate cpan_do_configure
+EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
 
 do_configure() {
     #fix the pkglib problem with newer automake
