@@ -97,6 +97,11 @@ do_install_append() {
 	install -d ${D}${sysconfdir}/tmpfiles.d
 	echo "d ${localstatedir}/log/samba 0755 root root -" \
             > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
+    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+	install -d ${D}${sysconfdir}/init.d
+	install -m 0644 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
+	update-rc.d -r ${D} samba.sh start 20 3 5 .
+	update-rc.d -r ${D} samba.sh start 20 0 1 6 .
     fi
 
     install -d ${D}${sysconfdir}/samba
@@ -118,7 +123,9 @@ FILES_${PN} += "/run \
                "
 
 SMB_SERVICE="${systemd_unitdir}/system/nmb.service ${systemd_unitdir}/system/smb.service"
+SMB_SYSV="${sysconfdir}/init.d ${sysconfdir}/rc?.d"
 FILES_${PN} +="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${SMB_SERVICE}', '', d)}"
+FILES_${PN} +="${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SMB_SYSV}', '', d)}"
 
 FILES_${PN}-dbg += "${libdir}/samba/idmap/.debug/* \
                     ${libdir}/samba/pdb/.debug/* \
