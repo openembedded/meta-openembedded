@@ -23,6 +23,7 @@ PACKAGECONFIG ??= " \
 
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"
+PACKAGECONFIG[lz4] = "--with-lz4,--without-lz4,lz4,"
 
 # From native build in armv7a-hf/eglibc
 CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
