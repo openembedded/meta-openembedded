@@ -43,7 +43,7 @@ do_configure () {
 
 do_compile () {
     export LD="${CXX}"
-    make BUILDTYPE=Release
+    oe_runmake BUILDTYPE=Release
 }
 
 do_install () {
