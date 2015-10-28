@@ -6,7 +6,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b"
 SRCNAME = "lxml"
 
-DEPENDS = "libxml2 libxslt"
+DEPENDS += "libxml2 libxslt"
 
 SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 
