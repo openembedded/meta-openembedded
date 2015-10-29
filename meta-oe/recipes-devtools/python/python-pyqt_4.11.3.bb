@@ -30,6 +30,9 @@ DISABLED_FEATURES = "PyQt_Desktop_OpenGL PyQt_Accessibility PyQt_SessionManager"
 
 DISABLED_FEATURES_append_arm = " PyQt_qreal_double"
 
+PYQT_MODULES = "QtCore QtGui QtDeclarative QtNetwork QtSvg QtWebKit"
+PYQT_MODULES_aarch64 = "QtCore QtGui QtDeclarative QtNetwork QtSvg"
+
 do_configure() {
     echo "py_platform = linux" > pyqt.cfg
     echo "py_inc_dir = %(sysroot)/$includedir/python%(py_major).%(py_minor)" >> pyqt.cfg
@@ -42,7 +45,7 @@ do_configure() {
     echo "pyqt_disabled_features = ${DISABLED_FEATURES}" >> pyqt.cfg
     echo "qt_shared = True" >> pyqt.cfg
     echo "[Qt 4.8]" >> pyqt.cfg
-    echo "pyqt_modules = QtCore QtGui QtDeclarative QtNetwork QtSvg QtWebKit" >> pyqt.cfg
+    echo "pyqt_modules = ${PYQT_MODULES}" >> pyqt.cfg
     echo yes | python configure-ng.py --verbose --qmake  ${STAGING_BINDIR_NATIVE}/qmake2 --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
 }
 do_install() {
