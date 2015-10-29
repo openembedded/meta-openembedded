@@ -14,5 +14,7 @@ SRC_URI[sha256sum] = "5a202943a34a1d82a1c31f74094f2453c207bf9936093867f41414968c
 inherit autotools pkgconfig
 
 EXTRA_OECONF += "--with-openssl \
-                --with-libz \
+                 --with-libz \
+                 --with-libssl-prefix=${STAGING_LIBDIR} \
+                 --with-libz-prefix=${STAGING_LIBDIR} \
                 "
