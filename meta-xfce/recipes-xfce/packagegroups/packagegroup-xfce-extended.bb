@@ -50,6 +50,8 @@ RRECOMMENDS_${PN} = " \
     xfce4-hotcorner-plugin \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'xfce4-pulseaudio-plugin', '', d)} \
     \
+    xfce-polkit \
+    \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
     \
