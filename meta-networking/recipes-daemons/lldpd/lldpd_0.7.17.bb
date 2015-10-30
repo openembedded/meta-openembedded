@@ -24,7 +24,10 @@ GROUPADD_PARAM_${PN} = "--system lldpd"
 EXTRA_OECONF += "--without-embedded-libevent \
                  --disable-oldies \
                  --with-privsep-user=lldpd \
-                 --with-privsep-group=lldpd"
+                 --with-privsep-group=lldpd \
+                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
+                 --without-sysusersdir \
+"
 
 PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
 PACKAGECONFIG[json] = "--with-json,--without-json,jansson"
