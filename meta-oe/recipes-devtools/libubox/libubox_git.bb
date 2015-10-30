@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = "\
 SRC_URI = "\
     git://git.openwrt.org/project/libubox.git \
     file://0001-version-libraries.patch \
+    file://fix-libdir.patch \
 "
 
 SRCREV = "136a5196266d03d537f822c4e67d2fde2ed59505"
