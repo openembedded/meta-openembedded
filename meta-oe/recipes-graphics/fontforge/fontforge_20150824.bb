@@ -6,10 +6,11 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=3f922b42ed0033fa0fd4cd3268f6429c \
 "
 
-inherit autotools pkgconfig pythonnative distro_features_check
-
 DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
 DEPENDS_append_class-target = " libxi"
+
+inherit autotools-bootstrap pkgconfig pythonnative distro_features_check
+
 REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
 
 SRC_URI = "git://github.com/${BPN}/${BPN}.git"
@@ -18,13 +19,6 @@ SRCREV = "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disable-python-scripting"
-
-do_configure_prepend() {
-    currdir=`pwd`
-    cd ${S}
-    ./bootstrap --force
-    cd $currdir
-}
 
 EXTRA_OEMAKE = "CFLAGS='${CFLAGS} -I${B}/uthash/src'"
 
