@@ -12,3 +12,5 @@ do_install () {
     install -dm755 ${D}${includedir}
     install -m 0644 ${S}/src/*.h ${D}${includedir}
 }
+
+BBCLASSEXTEND = "native"
