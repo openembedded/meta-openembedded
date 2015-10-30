@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=3f922b42ed0033fa0fd4cd3268f6429c \
 "
 
-DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool"
+DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash"
 DEPENDS_append_class-target = " libxi"
 
 inherit autotools-bootstrap pkgconfig pythonnative distro_features_check
@@ -20,7 +20,14 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disable-python-scripting"
 
-EXTRA_OEMAKE = "CFLAGS='${CFLAGS} -I${B}/uthash/src'"
+do_configure_prepend() {
+    # uthash sources are expected in uthash/src
+    currdir=`pwd`
+    cd ${S}
+    mkdir -p uthash/src
+    cp ${STAGING_INCDIR}/ut*.h uthash/src
+    cd $currdir
+}
 
 PACKAGES =+ "${PN}-python-dbg ${PN}-python"
 
