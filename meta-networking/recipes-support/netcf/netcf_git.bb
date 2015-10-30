@@ -16,18 +16,12 @@ DEPENDS += "augeas libnl libxslt libxml2 gnulib"
 
 S = "${WORKDIR}/git"
 
-inherit gettext autotools-brokensep pkgconfig systemd
+inherit gettext autotools-bootstrap pkgconfig systemd
 
 EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 
 PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "", d)}"
 PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
-
-do_configure_prepend() {
-	cd ${S}
-	rm -f .gitmodules
-	./bootstrap --gnulib-srcdir=${STAGING_DATADIR}/gnulib
-}
 
 do_install_append() {
     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
