@@ -24,6 +24,16 @@ EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
                 TARGET_CFLAGS="${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}" \
                 TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" \
                 TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}" TARGET_STRIP="/bin/echo"'
+
+# Important note: On the build machine bit compatible glibc-dev and libgcc must
+# be installed. E.g if the target architecture has 32 bit (see '-m32' below),
+# 32 bit versions of glibc-dev/libgcc (e.g glibc-devel.i686 / libgcc.i686 on
+# fedora) are required.
+#
+# Otherwise the following error occurs:
+# | /usr/include/gnu/stubs.h:7:27: fatal error: gnu/stubs-32.h: No such file or directory
+# |  # include <gnu/stubs-32.h>
+
 EXTRA_OEMAKE_append_powerpc = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_x86 = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_x86-64 = ' HOST_CC="${BUILD_CC}"'
