@@ -26,6 +26,7 @@
 
 YPBIND_BIN=/usr/sbin/ypbind
 pidfile=/var/run/ypbind.pid
+YPDOMAINNAME_bin=/usr/bin/ypdomainname
 
 [ -f /etc/default/ypbind ] && . /etc/default/ypbind
 
@@ -34,14 +35,14 @@ case "$1" in
 	echo -n "Starting ypbind"
 	## If the domainname is not set, skip starting of ypbind
 	## and return with "program not configured"
-        /bin/ypdomainname >/dev/null 2>&1
-        if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
+        $YPDOMAINNAME_bin >/dev/null 2>&1
+        if [ $? -ne 0 -o -z "`$YPDOMAINNAME_bin 2>/dev/null`" ]; then
            if [ -f /etc/defaultdomain ]; then
              XDOMAINNAME=`cat /etc/defaultdomain`
-             /bin/ypdomainname "$XDOMAINNAME"
+             $YPDOMAINNAME_bin "$XDOMAINNAME"
 	   fi
-           /bin/ypdomainname >/dev/null 2>&1
-           if [ $? -ne 0 -o -z "`/bin/ypdomainname 2>/dev/null`" ]; then
+           $YPDOMAINNAME_bin >/dev/null 2>&1
+           if [ $? -ne 0 -o -z "`$YPDOMAINNAME_bin 2>/dev/null`" ]; then
 	     # Tell the user this has skipped
 	     echo -n " . . . . . . . . . . No domainname set"
              # service is not configured

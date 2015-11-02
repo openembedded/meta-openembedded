@@ -21,6 +21,8 @@ DEPENDS = " \
            yp-tools \
            ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
           "
+RDEPENDS_${PN} += "yp-tools"
+
 # ypbind-mt now provides all the functionality of ypbind
 # and is used in place of it.
 PROVIDES += "ypbind"
