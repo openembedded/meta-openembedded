@@ -15,8 +15,6 @@ inherit autotools useradd systemd pkgconfig
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://install-samples-from-srcdir.patch \
-           file://plmcd.service \
-           file://plmcboot.service \
            file://0001-plmcd-error-fix.patch \
            file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
            file://Fix_GCC_5.1.0_compiler_warning.patch \
@@ -65,8 +63,6 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
         ${D}${systemd_unitdir}/system
-    install -m 644 ${WORKDIR}/plmc*.service ${D}/${systemd_unitdir}/system
-    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/plmc*.service
-    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/plmc*.service
+    install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
 
 }
