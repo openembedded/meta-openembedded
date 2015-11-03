@@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
 SECTION = "libs"
 LICENSE = "LGPLv3+"
 
-DEPENDS += "talloc"
+DEPENDS += "talloc libcap"
 RDEPENDS_${PN} += "libtalloc"
 RDEPENDS_python-tevent = "python"
 
