@@ -5,10 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 inherit xfce-panel-plugin cmake
 
-SRC_URI = " \
-    git://git.xfce.org/panel-plugins/xfce4-whiskermenu-plugin \
-"
-
-SRCREV = "2d3c03eacd78051d2ef8ee3b6a4e2bff4753680e"
-PV = "1.5.0+gitr${SRCPV}"
-S = "${WORKDIR}/git"
+SRC_URI = "http://gottcode.org/${BPN}/${BPN}-${PV}-src.tar.bz2"
+SRC_URI[md5sum] = "4886fca2b485dae0e6a64c78f9dca94e"
+SRC_URI[sha256sum] = "1c7650562322867513370ab575536b67aa3712329bb60a0c91a0a70e23a8945a"
