@@ -63,7 +63,7 @@ EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=${localstatedir}/run \
                  --with-sockets-dir=${localstatedir}/run/samba \
                  --with-modulesdir=${libdir}/samba \
-                 --with-pammodulesdir=${libdir}/security \
+                 --with-pammodulesdir=${base_libdir}/security \
                  --with-lockdir=${localstatedir}/lib/samba \
                  --with-cachedir=${localstatedir}/lib/samba \
                  --with-perl-lib-install-dir=${PERL_VERNDORLIB} \
@@ -118,7 +118,7 @@ do_install_append() {
 PACKAGES += "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
 
 FILES_${PN} += "/run \
-                ${libdir}/security/pam_smbpass.so \
+                ${base_libdir}/security/pam_smbpass.so \
                 ${libdir}/tmpfiles.d/* \
                "
 
@@ -133,12 +133,12 @@ FILES_${PN}-dbg += "${libdir}/samba/idmap/.debug/* \
                     ${libdir}/samba/nss_info/.debug/* \
                     ${libdir}/samba/ldb/.debug/* \
                     ${libdir}/samba/vfs/.debug/* \
-                    ${libdir}/security/.debug/pam_smbpass.so \
+                    ${base_libdir}/security/.debug/pam_smbpass.so \
                    "
 
-FILES_libwinbind = "${libdir}/security/pam_winbind.so"
+FILES_libwinbind = "${base_libdir}/security/pam_winbind.so"
 FILES_libwinbind += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
-FILES_libwinbind-dbg = "${libdir}/security/.debug/pam_winbind.so"
+FILES_libwinbind-dbg = "${base_libdir}/security/.debug/pam_winbind.so"
 FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
 
 FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
