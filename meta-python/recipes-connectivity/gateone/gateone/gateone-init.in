@@ -11,13 +11,13 @@
 . /etc/init.d/functions
 
 NAME=gateone
-DAEMON=/var/lib/gateone/gateone.py
-PIDFILE=/var/run/gateone.pid
-WORKDIR=/var/lib/gateone
+DAEMON=@bindir@/gateone
+PIDFILE=/run/gateone.pid
+WORKDIR=@localstate@/lib/gateone
 
 do_start() {
     cd $WORKDIR
-    /usr/bin/python $DAEMON > /dev/null 2>&1 &
+    @bindir@/python $DAEMON > /dev/null 2>&1 &
     cd $OLDPWD
 }
 
