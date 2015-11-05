@@ -9,11 +9,10 @@ SRC_URI = "\
     http://media.luffy.cx/files/${PN}/${PN}-${PV}.tar.gz \
     file://lldpd.init.d \
     file://lldpd.default \
-    file://fix-libevent-configure.patch \
     "
 
-SRC_URI[md5sum] = "8cb74065956bc32a575ee5203b0e0fb5"
-SRC_URI[sha256sum] = "6b50b8aa47d1424a93ba3df55af26da41f7d5718db8d25e99291c4a6cd09c20e"
+SRC_URI[md5sum] = "4e924420e00ccd5dc289506f43221820"
+SRC_URI[sha256sum] = "aac11cb1fdc037709517372c70c9bf89c752ab8e5eaab9ce140b84ed5a0507c8"
 
 inherit autotools update-rc.d useradd systemd pkgconfig
 
