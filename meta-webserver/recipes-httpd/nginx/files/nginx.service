@@ -4,7 +4,7 @@ After=network.target
 [Service]
 Type=forking
 PIDFile=@SYSCONFDIR@/nginx/run/nginx.pid
-ExecStartPre=mkdir -p @LOCALSTATEDIR@/log/nginx
+ExecStartPre=@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/log/nginx
 ExecStart=@SYSCONFDIR@/init.d/nginx start
 ExecStop=@SYSCONFDIR@/init.d/nginx stop
 [Install]
