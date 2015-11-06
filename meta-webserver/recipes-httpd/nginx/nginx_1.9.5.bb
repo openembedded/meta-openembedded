@@ -27,6 +27,8 @@ inherit update-rc.d useradd
 CFLAGS_append = " -fPIE -pie"
 CXXFLAGS_append = " -fPIE -pie"
 
+EXTRA_OECONF = ""
+
 do_configure () {
 	if [ "${SITEINFO_BITS}" = "64" ]; then
 		PTRSIZE=8
@@ -55,7 +57,8 @@ do_configure () {
 	--pid-path=/run/nginx/nginx.pid \
 	--prefix=${prefix} \
 	--with-http_ssl_module \
-	--with-http_gzip_static_module
+	--with-http_gzip_static_module \
+	${EXTRA_OECONF}
 }
 
 do_install () {
