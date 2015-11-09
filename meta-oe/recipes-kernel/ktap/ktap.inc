@@ -11,4 +11,16 @@ SRC_URI = "git://github.com/ktap/ktap.git"
 S = "${WORKDIR}/git"
 
 # Package config is abused as a general compile time configuration tool.
+
+# Only supports x86_64 for now!. Needs to be enabled for ktap-module too.
 PACKAGECONFIG[ffi] = ""
+
+# Needed to resolve symbols in DSO and for sdt
+PACKAGECONFIG[libelf] = ",,elfutils"
+
+PACKAGECONFIG ?= "libelf"
+
+EXTRA_OEMAKE = " \
+    ${@base_contains('PACKAGECONFIG', 'libelf', '', 'NO_LIBELF=1', d)} \
+    ${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} \
+"
