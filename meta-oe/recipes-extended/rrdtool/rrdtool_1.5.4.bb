@@ -77,8 +77,8 @@ do_configure() {
     #remove the dependency of perl-shared:Makefile
     #or perl-shared/Makefile will be regenerated
     #if any code touch bindings/Makefile after below perl bindings code
-    sed -i -e "s:\$(PYTHON) setup.py install:\$(PYTHON) setup.py install \
-        --install-lib=${D}${PYTHON_SITEPACKAGES_DIR}:" \
+    sed -i -e "s:python/setup.py install:python/setup.py install \
+        --install-lib=${PYTHON_SITEPACKAGES_DIR}:" \
         -e "s:perl-shared/Makefile.PL Makefile:perl-shared/Makefile.PL:" \
         ${B}/bindings/Makefile
 
@@ -111,8 +111,8 @@ RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-
 
 DESCRIPTION_${PN}-python = \
 "The ${PN}-python package includes RRDtool bindings for python."
-FILES_${PN}-python = "${nonarch_libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
 RDEPENDS_${PN}-python = "python"
 
 FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
-    ${nonarch_libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
+    ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
