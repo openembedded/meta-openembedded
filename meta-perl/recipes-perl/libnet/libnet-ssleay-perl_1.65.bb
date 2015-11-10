@@ -19,6 +19,8 @@ RDEPENDS_${PN} += "perl-module-carp \
                   "
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+           file://0001-libnet-ssleay-perl-Disable-test-that-fails-with-open.patch \
+           file://0002-Recent-1.0.2-betas-have-dropped-the-SSLv3_method-fun.patch \
            file://run-ptest \
           "
 SRC_URI[md5sum] = "19600c036e9e0bbfbf9157f083e40755"
