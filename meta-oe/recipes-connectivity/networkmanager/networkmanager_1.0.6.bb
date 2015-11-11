@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
                     file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b \
 "
 
-DEPENDS = "libnl dbus dbus-glib libgudev wireless-tools util-linux libndp"
+DEPENDS = "libnl dbus dbus-glib libgudev wireless-tools util-linux libndp libnewt"
 
 inherit gnomebase gettext systemd
 
@@ -32,6 +32,7 @@ EXTRA_OECONF = " \
     --with-iptables=${sbindir}/iptables \
     --with-tests \
     --with-dnsmasq=${bindir}/dnsmasq \
+    --with-nmtui=yes \
 "
 
 PACKAGECONFIG ??= "nss \
@@ -51,7 +52,7 @@ PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp"
 PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls libgcrypt"
 
-PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion"
+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion ${PN}-nmtui ${PN}-nmtui-doc"
 
 FILES_libnmutil += "${libdir}/libnm-util.so.*"
 FILES_libnmglib += "${libdir}/libnm-glib.so.*"
@@ -90,6 +91,17 @@ FILES_${PN}-tests = " \
 "
 
 FILES_${PN}-bash-completion = "${datadir}/bash-completion"
+
+FILES_${PN}-nmtui = " \
+    ${bindir}/nmtui \
+    ${bindir}/nmtui-edit \
+    ${bindir}/nmtui-connect \
+    ${bindir}/nmtui-hostname \
+"
+
+FILES_${PN}-nmtui-doc = " \
+    ${mandir}/man1/nmtui* \
+"
 
 SYSTEMD_SERVICE_${PN} = "NetworkManager.service"
 
