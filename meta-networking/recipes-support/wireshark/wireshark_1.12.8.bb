@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
 
 DEPENDS = "perl-native pcre expat glib-2.0 sbc"
 
-SRC_URI = "https://2.na.dl.wireshark.org/src/${BP}.tar.bz2"
+SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
 PE = "1"
 
