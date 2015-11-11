@@ -9,13 +9,24 @@ LIC_FILES_CHKSUM = " \
 
 inherit gnomebase gettext systemd
 
-DEPENDS = "glib-2.0 libmbim libqmi polkit libgudev dbus-glib"
+DEPENDS = "glib-2.0 libgudev dbus-glib"
 
 SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
 SRC_URI[md5sum] = "66cc7266b15525cb366253e6639fc564"
 SRC_URI[sha256sum] = "7ef5035375a953b285a742591df0a65fd442f4641ce4d8f4392a41d6d6bc70b3"
 
 S = "${WORKDIR}/ModemManager-${PV}"
+
+PACKAGECONFIG ??= "mbim qmi polkit \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+"
+
+PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,"
+PACKAGECONFIG[polkit] = "--with-polkit=yes,--with-polkit=no,polkit"
+# Support WWAN modems and devices which speak the Mobile Interface Broadband Model (MBIM) protocol.
+PACKAGECONFIG[mbim] = "--with-mbim,--enable-mbim=no,libmbim"
+# Support WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol.
+PACKAGECONFIG[qmi] = "--with-qmi,--without-qmi,libqmi"
 
 FILES_${PN} += " \
     ${datadir}/icons \
