@@ -2,18 +2,21 @@ SUMMARY = "NetworkManager"
 SECTION = "net/misc"
 
 LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
+                    file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
+                    file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b \
+"
 
 DEPENDS = "libnl dbus dbus-glib libgudev wireless-tools nss util-linux libndp"
 
-inherit gnome gettext systemd
+inherit gnomebase gettext systemd
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
 "
-SRC_URI[md5sum] = "7eabef7bd3bbdd6dc0473dd32aeac924"
-SRC_URI[sha256sum] = "e4099fa2f4f4b8d95d0ad9fdd03ec20960845085fa500bf79aecbf54cee018c9"
+SRC_URI[md5sum] = "00f5f9ec69725a9f9b99366853c6f73e"
+SRC_URI[sha256sum] = "38ea002403e3b884ffa9aae25aea431d2a8420f81f4919761c83fb92648254bd"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
@@ -31,14 +34,14 @@ EXTRA_OECONF = " \
     --with-dnsmasq=${bindir}/dnsmasq \
 "
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
 PACKAGECONFIG[systemd] = " \
     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
     --without-systemdsystemunitdir, \
     polkit \
 "
-# consolekit is not picked by shlibs, so add it to RDEPENDS too
 PACKAGECONFIG[bluez5] = "--enable-bluez5-dun,--disable-bluez5-dun,bluez5"
+# consolekit is not picked by shlibs, so add it to RDEPENDS too
 PACKAGECONFIG[consolekit] = "--with-session-tracking=consolekit,,consolekit,consolekit"
 PACKAGECONFIG[concheck] = "--with-libsoup=yes,--with-libsoup=no,libsoup-2.4"
 PACKAGECONFIG[modemmanager] = "--with-modem-manager-1=yes,--with-modem-manager-1=no,modemmanager"
@@ -73,6 +76,7 @@ FILES_${PN}-dbg += " \
 "
 
 FILES_${PN}-dev += " \
+    ${datadir}/NetworkManager/gdb-cmd \
     ${libdir}/pppd/*/*.la \
     ${libdir}/NetworkManager/*.la \
 "
