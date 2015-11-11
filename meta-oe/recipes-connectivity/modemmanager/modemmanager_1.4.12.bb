@@ -47,5 +47,3 @@ FILES_${PN}-staticdev += " \
 FILES_${PN}-dbg += "${libdir}/ModemManager/.debug"
 
 SYSTEMD_SERVICE_${PN} = "ModemManager.service"
-# no need to start on boot - dbus will start on demand
-SYSTEMD_AUTO_ENABLE = "disable"
