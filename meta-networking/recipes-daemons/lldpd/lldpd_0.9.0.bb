@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e
 DEPENDS = "libbsd libevent"
 
 SRC_URI = "\
-    http://media.luffy.cx/files/${PN}/${PN}-${PV}.tar.gz \
+    http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
     file://lldpd.init.d \
     file://lldpd.default \
     "
