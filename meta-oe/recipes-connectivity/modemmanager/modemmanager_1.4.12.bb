@@ -31,12 +31,12 @@ PACKAGECONFIG[qmi] = "--with-qmi,--without-qmi,libqmi"
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/polkit-1 \
+    ${datadir}/dbus-1 \
     ${libdir}/ModemManager \
     ${systemd_unitdir}/system \
 "
 
 FILES_${PN}-dev += " \
-    ${datadir}/dbus-1 \
     ${libdir}/ModemManager/*.la \
 "
 
