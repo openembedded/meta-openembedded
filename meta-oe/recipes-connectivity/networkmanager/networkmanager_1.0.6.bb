@@ -103,7 +103,7 @@ FILES_${PN}-nmtui-doc = " \
     ${mandir}/man1/nmtui* \
 "
 
-SYSTEMD_SERVICE_${PN} = "NetworkManager.service"
+SYSTEMD_SERVICE_${PN} = "NetworkManager.service NetworkManager-dispatcher.service"
 
 do_install_append() {
     rm -rf ${D}/run ${D}${localstatedir}/run
