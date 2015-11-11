@@ -28,11 +28,10 @@ EXTRA_OECONF = " \
     --disable-more-warnings \
     --with-iptables=${sbindir}/iptables \
     --with-tests \
-    --with-dnsmasq=${bindir}/dnsmasq \
     --with-nmtui=yes \
 "
 
-PACKAGECONFIG ??= "nss ifupdown netconfig dhclient \
+PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
     ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)} \
 "
 PACKAGECONFIG[systemd] = " \
@@ -48,6 +47,7 @@ PACKAGECONFIG[modemmanager] = "--with-modem-manager-1=yes,--with-modem-manager-1
 PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp"
 # Use full featured dhcp client instead of internal one
 PACKAGECONFIG[dhclient] = "--with-dhclient=${base_sbindir}/dhclient,,,dhcp-client"
+PACKAGECONFIG[dnsmasq] = "--with-dnsmasq=${bindir}/dnsmasq"
 PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls libgcrypt"
 PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
@@ -69,7 +69,9 @@ FILES_${PN} += " \
     ${systemd_unitdir}/system \
 "
 
-RRECOMMENDS_${PN} += "iptables dnsmasq"
+RRECOMMENDS_${PN} += "iptables \
+    ${@bb.utils.contains('PACKAGECONFIG','dnsmasq','dnsmasq','',d)} \
+"
 RCONFLICTS_${PN} = "connman"
 RDEPENDS_${PN} = " \
     wpa-supplicant \
