@@ -47,5 +47,7 @@ do_install_append() {
 
 SYSTEMD_SERVICE_${PN} = "ctdb.service"
 
+FILES_${PN} += "/run"
+
 # onnode is a shell script with bashisms and bash #!
 RDEPENDS_${PN} += "bash"
