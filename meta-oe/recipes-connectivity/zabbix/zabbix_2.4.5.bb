@@ -21,6 +21,8 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=300e938ad303147fede2294ed78fe02e"
 DEPENDS  = "openldap virtual/libiconv"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/${PV}/${BPN}-${PV}.tar.gz \
            file://0001-Fix-configure.ac.patch \
            file://zabbix-agent.service"
