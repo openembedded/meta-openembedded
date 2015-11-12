@@ -30,7 +30,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 S = "${WORKDIR}/lm_sensors-${PV}"
 
-EXTRA_OEMAKE = 'LINUX=${STAGING_KERNEL_DIR} EXLDFLAGS="${LDFLAGS}" \
+EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
         MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
         LIBDIR=${libdir} \
         CC="${CC}" AR="${AR}"'
