@@ -5,6 +5,8 @@ LICENSE = "GPL-2.0 & LGPL-2.0"
 
 DEPENDS = "virtual/kernel flex flex-native"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
            file://link-with-ldflags.patch \
            file://install-from-buildir.patch"
