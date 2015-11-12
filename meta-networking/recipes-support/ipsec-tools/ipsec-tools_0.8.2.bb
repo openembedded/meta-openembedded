@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7
 
 DEPENDS = "virtual/kernel openssl readline flex-native bison-native"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
            file://0002-Don-t-link-against-libfl.patch \
            file://configure.patch \
