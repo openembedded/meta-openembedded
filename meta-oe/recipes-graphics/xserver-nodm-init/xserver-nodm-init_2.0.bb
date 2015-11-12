@@ -12,7 +12,7 @@ SRC_URI = "file://xserver-nodm \
 "
 S = "${WORKDIR}"
 
-inherit allarch update-rc.d systemd
+inherit update-rc.d systemd
 
 INITSCRIPT_NAME = "xserver-nodm"
 INITSCRIPT_PARAMS = "start 01 5 . stop 01 0 1 2 3 6 ."
