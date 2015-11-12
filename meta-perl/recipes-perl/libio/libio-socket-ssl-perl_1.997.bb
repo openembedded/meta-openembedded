@@ -24,8 +24,6 @@ S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
 inherit cpan ptest
 
-PACKAGE_ARCH = "all"
-
 do_install_append () {
     mkdir -p ${D}${docdir}/${PN}/
     cp ${S}/BUGS ${D}${docdir}/${PN}/

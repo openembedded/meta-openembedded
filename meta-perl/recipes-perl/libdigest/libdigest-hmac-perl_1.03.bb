@@ -22,5 +22,4 @@ do_install_ptest () {
     cp -r ${B}/t ${D}${PTEST_PATH}
 }
 
-PACKAGE_ARCH = "all"
 BBCLASSEXTEND = "native"
