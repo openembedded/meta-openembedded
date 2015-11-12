@@ -141,14 +141,16 @@ do_configure() {
         -e "/^TCLSH/s:=.*:= ${bindir}/tclsh:g" \
     ${B}/src/Makefile.global
 
-    # workaround perl package's libperl.so problem
-    # we are using perlnative so this perl should have same version
-    perl_version=`perl -v 2>/dev/null | \
-        sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
-    if [ ! -h "${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so" -a \
-         ! -h "${STAGING_LIBDIR}/libperl.so" ]; then
-        ln -sf ../../../libperl.so.5 \
-            ${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so
+    if ${@bb.utils.contains('PACKAGECONFIG', 'perl', 'true', 'false', d)}; then
+        # workaround perl package's libperl.so problem
+        # we are using perlnative so this perl should have same version
+        perl_version=`perl -v 2>/dev/null | \
+            sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
+        if [ ! -h "${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so" -a \
+             ! -h "${STAGING_LIBDIR}/libperl.so" ]; then
+            ln -sf ../../../libperl.so.5 \
+                ${STAGING_LIBDIR}/perl/$perl_version/CORE/libperl.so
+        fi
     fi
 }
 
