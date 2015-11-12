@@ -38,8 +38,6 @@ do_install_append() {
     done
 }
 
-inherit allarch
-
 RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo fbset xinput-calibrator"
 
 RCONFLICTS_${PN} = "xserver-kdrive-common x11-common"
