@@ -2,7 +2,7 @@ SUMMARY = "Devicekit power"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=756cf97871f77233638937da21b025d3"
 
-DEPENDS = "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intltool-native"
+DEPENDS = "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intltool-native libgudev"
 
 SRC_URI = "http://upower.freedesktop.org/releases/DeviceKit-power-${PV}.tar.gz;name=archive"
 SRC_URI[archive.md5sum] = "935d37f1e14b3c8a1d6dabcd9a38d3ca"
