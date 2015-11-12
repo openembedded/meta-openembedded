@@ -38,26 +38,40 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
 SRC_URI[md5sum] = "232016d7581a1ba11e991ec2674553c4"
 SRC_URI[sha256sum] = "033604674936bf5c77d7df299b0626052b84a41505a6a6afe902f6274fc29898"
 
-inherit systemd waf-samba
+inherit systemd waf-samba cpan-base perlnative
 
-DEPENDS += "readline virtual/libiconv zlib popt talloc libtdb libtevent libldb krb5 ctdb cups"
-RDEPENDS_${PN} += "openldap"
+DEPENDS += "readline virtual/libiconv zlib popt talloc libtdb libtevent libldb krb5 ctdb"
 
-PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
-PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+SYSVINITTYPE_linuxstdbase = "lsb"
+SYSVINITTYPE = "sysv"
 
-PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVINITTYPE}', '', d)} \
+                   ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+                   ${@base_contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)} \
+                   acl aio cups ldap \
+"
+
+RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
+
+PACKAGECONFIG[acl] = "--with-acl-support,---without-acl-support,acl"
+PACKAGECONFIG[aio] = "--with-aio-support,---without-aio-support,libaio"
 PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
+PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
+PACKAGECONFIG[lsb] = ",,lsb"
+PACKAGECONFIG[cups] = "--enable-cups,--disable-cups,cups"
+PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
 PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
+PACKAGECONFIG[zeroconf] = "--enable-avahi,--disable-avahi,avahi"
 
 SAMBA4_IDMAP_MODULES="idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2"
-SAMBA4_PDB_MODULES="pdb_tdbsam,pdb_ldap,pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
+SAMBA4_PDB_MODULES="pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', 'ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
 SAMBA4_AUTH_MODULES="auth_unix,auth_wbc,auth_server,auth_netlogond,auth_script,auth_samba4"
 SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODULES}"
 
 SAMBA4_LIBS="heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!tevent,!pytevent,!tdb,!pytdb,!ldb,!pyldb"
 
-PERL_VERNDORLIB="${datadir}/perl5/vendor_perl/"
+PERL_VERNDORLIB="${libdir}/perl5/vendor_perl/${PERLVERSION}"
 
 EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=${localstatedir}/run \
@@ -85,7 +99,7 @@ LDFLAGS += "-Wl,-z,relro,-z,now"
 do_install_append() {
     rmdir --ignore-fail-on-non-empty "${D}/${localstatedir}/run"
 
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_unitdir}/system
         for i in nmb smb winbind; do
             install -m 0644 packaging/systemd/$i.service ${D}${systemd_unitdir}/system
@@ -97,9 +111,14 @@ do_install_append() {
 	install -d ${D}${sysconfdir}/tmpfiles.d
 	echo "d ${localstatedir}/log/samba 0755 root root -" \
             > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
-    elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+    elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
+	update-rc.d -r ${D} samba.sh start 20 3 5 .
+	update-rc.d -r ${D} samba.sh start 20 0 1 6 .
+    elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
+	install -d ${D}${sysconfdir}/init.d
+	install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba.sh
 	update-rc.d -r ${D} samba.sh start 20 3 5 .
 	update-rc.d -r ${D} samba.sh start 20 0 1 6 .
     fi
@@ -160,4 +179,4 @@ FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.d
                           ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/.debug/* \
                          "
 
-FILES_${PN}-pidl = "${datadir}/perl5/vendor_perl/*"
+FILES_${PN}-pidl = "${bindir}/pidl ${PERL_VERNDORLIB}/*"
