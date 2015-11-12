@@ -7,6 +7,8 @@ SRCREV = "292a03e17f889013fca2c7bd0aaeebd600c88f40"
 
 DEPENDS="virtual/kernel"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit autotools
 
 S = "${WORKDIR}/git"
