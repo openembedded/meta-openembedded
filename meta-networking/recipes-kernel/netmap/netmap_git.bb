@@ -1,6 +1,7 @@
 require netmap.inc
 
 DEPENDS = "netmap-modules"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
                 --kernel-sources=${STAGING_KERNEL_DIR} \
@@ -12,8 +13,6 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
                 --ld='${LD}' \
                 "
 SRC_URI += "file://0001-testmmap-fix-compile-issue-with-gcc-5.x.patch"
-
-do_fetch[depends] += "netmap-modules:do_fetch"
 
 do_configure () {
     cd ${S}/LINUX
