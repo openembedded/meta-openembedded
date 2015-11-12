@@ -23,6 +23,7 @@ PACKAGECONFIG[png] = ",,libpng"
 PACKAGECONFIG[tiff] = ",,tiff"
 PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
 PACKAGECONFIG[webp] = ",,libwebp"
+PACKAGECONFIG[lirc] = ",,lirc"
 
 do_compile() {
     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
@@ -47,6 +48,9 @@ do_compile() {
     fi
     if [ -z "${@base_contains('PACKAGECONFIG', 'webp', 'webp', '', d)}" ]; then
         sed -i -e '/^HAVE_LIBWEBP/s/:=.*$/:= no/' ${S}/GNUmakefile
+    fi
+    if [ -z "${@base_contains('PACKAGECONFIG', 'lirc', 'lirc', '', d)}" ]; then
+        sed -i -e '/^HAVE_LIBLIRC/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
 
     oe_runmake
