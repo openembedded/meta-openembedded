@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
 
 SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.tar.xz \
+           file://Port-content-spoofing-fix-CVE-2015-7873.patch \
            file://apache.conf"
 
 SRC_URI[md5sum] = "2d08d2fcc8f70f88a11a14723e3ca275"
