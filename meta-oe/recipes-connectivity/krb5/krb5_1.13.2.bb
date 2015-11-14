@@ -26,6 +26,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar 
            file://Fix-SPNEGO-context-aliasing-bugs-CVE-2015-2695.patch;striplevel=2 \
            file://Fix-IAKERB-context-aliasing-bugs-CVE-2015-2696.patch;striplevel=2 \
            file://Fix-build_principal-memory-bug-CVE-2015-2697.patch;striplevel=2 \
+           file://Fix-IAKERB-context-export-import-CVE-2015-2698.patch;striplevel=2 \
            file://crosscompile_nm.patch \
            file://etc/init.d/krb5-kdc \
            file://etc/init.d/krb5-admin-server \
