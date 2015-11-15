@@ -4,6 +4,7 @@ SECTION = "otherosfs"
 LICENSE = "GPLv3 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
+DEPENDS = "samba"
 PV = "6.4"
 
 SRCREV = "487f46da737291877867cbd3acb40fea087d3863"
