@@ -11,7 +11,7 @@ DEPENDS = "libfribidi libtool libgcrypt libgcrypt-native \
    libdvdcss libdvdread lua-native lua libidn libnotify gtk+ \
    libdc1394 libraw1394 avahi libjpeg-turbo xz libmodplug mpeg2dec \
    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
-   tiff xcb-util-keysyms samba"
+   tiff xcb-util-keysyms"
 
 SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
 
@@ -60,6 +60,16 @@ PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
 PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
 PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
 PACKAGECONFIG[gnome-vfs] = "--enable-gnomevfs,--disable-gnomevfs, gnome-vfs"
+PACKAGECONFIG[samba] = "--enable-smbclient,--disable-smbclient, samba"
+PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
+PACKAGECONFIG[dvdnav] = "--enable-dvdnav,--disable-dvdnav,libdvdnav"
+PACKAGECONFIG[sftp] = "--enable-sftp,--disable-sftp,libssh2"
+PACKAGECONFIG[vorbis] = "--enable-vorbis,--disable-vorbis,libvorbis libogg"
+PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis libogg"
+PACKAGECONFIG[dc1394] = "--enable-dc1394,--disable-dc1394,libdc1394"
+PACKAGECONFIG[dv1394] = "--enable-dv1394,--disable-dv1394,libraw1394 libavc1394"
+PACKAGECONFIG[svg] = "--enable-svg,--disable-svg,librsvg"
+PACKAGECONFIG[svgdec] = "--enable-svgdec,--disable-svgdec,librsvg cairo"
 
 do_configure_prepend() {
     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
