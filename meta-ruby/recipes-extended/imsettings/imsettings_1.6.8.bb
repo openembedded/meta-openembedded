@@ -23,7 +23,7 @@ EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
                 --disable-static \
                "
 
-DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim"
+DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf"
 
 RDEPENDS_${PN} += "bash"
 
