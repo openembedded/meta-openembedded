@@ -22,7 +22,7 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
 RDEPENDS_${PN} = "gvfs-gdu-volume-monitor"
 RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
 
-PACKAGECONFIG ?= "libgphoto2 ${@base_contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'samba', d)}"
+PACKAGECONFIG ?= "libgphoto2"
 
 PACKAGECONFIG[libgphoto2] = "--enable-gphoto2, --disable-gphoto2, libgphoto2"
 PACKAGECONFIG[samba] = "--enable-samba --with-samba-includes=${STAGING_INCDIR} \
