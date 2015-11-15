@@ -1,11 +1,20 @@
 HOMEPAGE = "http://qt-project.org/"
-DEPENDS = "gstreamer util-linux"
+
+# This creates the dependency on meta-multimedia, which is wrong, but hopefully
+# this will be moved to separate meta-qt4 soon
+DEPENDS += "gstreamer util-linux alsa-lib gst-plugins-base"
 
 inherit bluetooth
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
+# This is all wrong, but nobody cares about qt-mobility anymore
+# add bluez5 just to silence:
+# qt-mobility-embedded-1.2.0: qt-mobility-embedded: invalid PACKAGECONFIG: bluez5 [invalid-packageconfig]
+# qt-mobility-x11-1.2.0: qt-mobility-x11: invalid PACKAGECONFIG: bluez5 [invalid-packageconfig]
+# but without --disable options it still autodetects bluez and pulseaudio from sysroot
 PACKAGECONFIG[bluez4] = ",,bluez4"
+PACKAGECONFIG[bluez5] = ",,bluez5"
 PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
 
 LICENSE = "LGPLv2.1"
