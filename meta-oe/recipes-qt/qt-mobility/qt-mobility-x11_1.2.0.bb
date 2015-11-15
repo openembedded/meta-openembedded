@@ -1,5 +1,5 @@
 SUMMARY = "Mobile device API extensions for Qt/X11 4.x"
-DEPENDS = "qt4-x11-free"
+DEPENDS = "libxv libxext"
 SECTION = "x11/libs"
 qtm_embedded := ""
 qtm_dir = "qt4"

@@ -1,5 +1,4 @@
 SUMMARY = "Mobile device API extensions for Qt/Embedded 4.x"
-DEPENDS = "qt4-embedded"
 SECTION = "libs"
 qtm_embedded := "embedded"
 qtm_dir = "qtopia"
