@@ -20,7 +20,7 @@ SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
 EXTRA_OECONF = "--disable-nfq-module --disable-ipq-module --includedir=${includedir} \
 	--with-libpcap-includes=${STAGING_INCDIR} --with-dnet-includes=${STAGING_LIBDIR}"
 
-SRC_URI[md5sum] = "865bf9b750a2a2ca632591a3c70b0ea0"
-SRC_URI[sha256sum] = "d65d1e67c4994e02c3142c49a648642e780b7e3d942b4a51f605309beac269a8"
+SRC_URI[md5sum] = "2cd6da422a72c129c685fc4bb848c24c"
+SRC_URI[sha256sum] = "b40e1d1273e08aaeaa86e69d4f28d535b7e53bdb3898adf539266b63137be7cb"
 
 inherit autotools

@@ -10,13 +10,14 @@ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
     file://snort.init \
     file://disable-inaddr-none.patch \
     file://disable-dap-address-space-id.patch \
+    file://disable-daq-flow-id.patch \
+    file://disable-daq-verdict-retry.patch \
     file://0001-libpcap-search-sysroot-for-headers.patch \
-    file://not-hardcoded-libdir.patch \
-    file://m4-oom-during-configure.patch \
+    file://0001-fix-do_package-failed-since-snort-2.9.7.0.patch \
 "
 
-SRC_URI[tarball.md5sum] = "18111f6de3989ca89add36077a7c2659"
-SRC_URI[tarball.sha256sum] = "3cc6c8a9b52f4c863a5736a73b4012aff340b50b5e002771b04d4877f47cd19e"
+SRC_URI[tarball.md5sum] = "fd271788c0f8876be87a858a9142f202"
+SRC_URI[tarball.sha256sum] = "ad03f11b5301b16642199a86aa90388eaa53f5003f83b0c5595745a490047be1"
 
 inherit autotools gettext update-rc.d pkgconfig
 
@@ -33,7 +34,9 @@ EXTRA_OECONF = " \
     --with-dnet-includes=${STAGING_INCDIR} \
     --with-dnet-libraries=${STAGING_LIBDIR} \
     --with-libpcre-includes=${STAGING_INCDIR} \
-    --with-libpcre-libraries=${STAGING_INCDIR} \
+    --with-libpcre-libraries=${STAGING_LIBDIR} \
+    --with-daq-includes=${STAGING_INCDIR} \
+    --with-daq-libraries=${STAGING_LIBDIR} \
 "
 
 # if you want to disable it, you need to patch configure.in first
@@ -43,15 +46,15 @@ PACKAGECONFIG ?= "openssl"
 PACKAGECONFIG[openssl] = "--with-openssl-includes=${STAGING_INCDIR} --with-openssl-libraries=${STAGING_LIBDIR}, --without-openssl-includes --without-openssl-libraries, openssl,"
 
 do_install_append() {
-    install -d ${D}/${sysconfdir}/snort/rules
-    install -d ${D}/${sysconfdir}/snort/preproc_rules
+    install -d ${D}${sysconfdir}/snort/rules
+    install -d ${D}${sysconfdir}/snort/preproc_rules
     install -d ${D}${sysconfdir}/init.d
     for i in map config conf dtd; do
-        cp ${S}/etc/*.$i ${D}/${sysconfdir}/snort/
+        cp ${S}/etc/*.$i ${D}${sysconfdir}/snort/
     done
-    cp ${S}/preproc_rules/*.rules ${D}/${sysconfdir}/snort/preproc_rules/
-    install -m 755 ${WORKDIR}/snort.init ${D}/${sysconfdir}/init.d/snort
-    mkdir -p ${D}/${localstatedir}/log/snort
+    cp ${S}/preproc_rules/*.rules ${D}${sysconfdir}/snort/preproc_rules/
+    install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
+    mkdir -p ${D}${localstatedir}/log/snort
     install -d ${D}/var/log/snort
 }
 
