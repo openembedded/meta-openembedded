@@ -12,8 +12,8 @@ DEPENDS = "nasm-native"
 BASEPV = "${@d.getVar('PV',True).split('+')[1]}"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${BASEPV}.tar.gz"
-SRC_URI[md5sum] = "b1f6b84859a16b8ebdcda951fa07c3f2"
-SRC_URI[sha256sum] = "4bf5bad4ce85625bffbbd9912211e06790e00fb982b77724af7211034efafb08"
+SRC_URI[md5sum] = "86b0d5f7507c2e6c21c00219162c3c44"
+SRC_URI[sha256sum] = "521bb5d3043e7ac063ce3026d9a59cc2ab2e9636c655a2515af5f4706122233e"
 
 S = "${WORKDIR}/${BPN}-${BASEPV}"
 
