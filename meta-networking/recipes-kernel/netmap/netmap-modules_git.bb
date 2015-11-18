@@ -15,7 +15,31 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
                 --driver-suffix="-netmap" \
                 "
 
-EXTRA_OECONF += "--no-drivers=ixgbe --no-drivers=virtio_net.c"
+# The driver builds are optional, but for deterministic builds,
+# we should be able to explicitly enable/disable the builds
+# for them in a proper place (maybe in BSP).
+# But we can't use PACKAGECONFIG since there is no option for
+# each driver, and the options are:
+#  --no-drivers    do not compile any driver
+#  --no-drivers=   do not compile the given drivers (comma sep.)
+#  --drivers=      only compile the given drivers (comma sep.)
+#
+# So use NETMAP_DRIVERS and the following python code to add proper
+# configs to EXTRA_OECONF.
+#
+# The default is no-drivers, and all supported drivers are listed
+# in NETMAP_ALL_DRIVERS.
+NETMAP_DRIVERS ??= ""
+NETMAP_ALL_DRIVERS = "ixgbe igb e1000e e1000 veth.c forcedeth.c virtio_net.c r8169.c"
+
+python __anonymous () {
+    drivers_list = d.getVar("NETMAP_DRIVERS", True).split()
+    all_drivers_list = d.getVar("NETMAP_ALL_DRIVERS", True).split()
+    config_drivers = "--drivers=" + ",".join(drivers_list)
+
+    extra_oeconf_drivers = bb.utils.contains_any('NETMAP_DRIVERS', all_drivers_list, config_drivers, '--no-drivers', d)
+    d.appendVar("EXTRA_OECONF", extra_oeconf_drivers)
+}
 
 LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
 LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
