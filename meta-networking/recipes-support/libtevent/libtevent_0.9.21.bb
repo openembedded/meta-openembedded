@@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
 SECTION = "libs"
 LICENSE = "LGPLv3+"
 
-DEPENDS += "libtalloc libcap"
+DEPENDS += "libbsd libtalloc"
 RDEPENDS_python-tevent = "python"
 
 SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
@@ -13,6 +13,10 @@ SRC_URI[md5sum] = "3d5a76c0a1b5f724842d785fd055633f"
 SRC_URI[sha256sum] = "f2be7463573dab2d8210cb57fe7e7e2aeb323274cbdc865a6e29ddcfb977f0f4"
 
 inherit waf-samba
+
+PACKAGECONFIG[attr] = ",,attr"
+
+SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr-unless-wanted.patch', d)}"
 
 S = "${WORKDIR}/tevent-${PV}"
 
