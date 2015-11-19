@@ -44,11 +44,8 @@ do_configure() {
     ${S}/configure ${CONFIGUREOPTS}
 }
 
-do_compile() {
-    oe_runmake
-}
-
 do_install() {
     oe_runmake install DESTDIR=${D}
+    chown -R root:root ${D}
 }
 
