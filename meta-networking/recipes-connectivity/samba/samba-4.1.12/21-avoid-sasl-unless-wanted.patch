@@ -1,0 +1,10 @@
+--- ./source4/auth/wscript_configure.orig	2015-11-19 19:53:11.022212181 +0100
++++ ./source4/auth/wscript_configure	2015-11-19 19:53:17.466212205 +0100
+@@ -2,7 +2,3 @@
+ 
+ conf.CHECK_HEADERS('security/pam_appl.h')
+ conf.CHECK_FUNCS_IN('pam_start', 'pam', checklibc=True)
+-
+-if (conf.CHECK_HEADERS('sasl/sasl.h') and
+-    conf.CHECK_FUNCS_IN('sasl_client_init', 'sasl2')):
+-    conf.DEFINE('HAVE_SASL', 1)
