@@ -40,7 +40,7 @@ SRC_URI[sha256sum] = "033604674936bf5c77d7df299b0626052b84a41505a6a6afe902f6274f
 
 inherit systemd waf-samba cpan-base perlnative
 
-DEPENDS += "readline virtual/libiconv zlib popt talloc libtdb libtevent libldb krb5 ctdb libbsd cyrus-sasl"
+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 ctdb libbsd cyrus-sasl"
 
 
 SYSVINITTYPE_linuxstdbase = "lsb"

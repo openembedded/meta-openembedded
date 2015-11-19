@@ -26,7 +26,7 @@ inherit autotools-brokensep pkgconfig systemd
 
 PARALLEL_MAKE = ""
 
-DEPENDS += "popt libtevent talloc"
+DEPENDS += "popt libtevent libtalloc"
 
 do_configure() {
     oe_runconf
