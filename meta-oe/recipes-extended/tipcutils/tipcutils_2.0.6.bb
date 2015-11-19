@@ -34,6 +34,7 @@ do_install_append() {
 
     install -d ${D}${sysconfdir}
     cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
+    chown -R root:root ${D}${sysconfdir}
 }
 
 PACKAGES += "${PN}-demos"
