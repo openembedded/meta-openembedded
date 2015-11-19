@@ -45,6 +45,10 @@ do_configure() {
     ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile --cross-execute="${CROSS_EXEC}"
 }
 
+do_compile () {
+    python ./buildtools/bin/waf ${PARALLEL_MAKE}
+}
+
 do_install() {
     oe_runmake install DESTDIR=${D}
 }
