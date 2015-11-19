@@ -54,7 +54,10 @@ FILES_${PN}-cgi = "/www/*"
 FILES_${PN}-libsensors = "${sysconfdir}/sensors.d/sensors.conf"
 
 # sensord logging daemon configuration files
-FILES_${PN}-sensord = "${sysconfdir}/sensord.conf"
+FILES_${PN}-sensord = "\
+    ${sysconfdir}/sensord.conf \
+    ${sysconfdir}/sysconfig/sensord \
+"
 
 # fancontrol script configuration file
 FILES_${PN}-fancontrol = "${sysconfdir}/fancontrol"
