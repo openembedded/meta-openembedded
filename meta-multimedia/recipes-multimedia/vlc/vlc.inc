@@ -22,7 +22,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
 ARM_INSTRUCTION_SET = "arm"
 
 EXTRA_OECONF = "\
-    --with-contrib \
     --enable-run-as-root \
     --enable-xvideo \ 
     --disable-screen --disable-caca \
