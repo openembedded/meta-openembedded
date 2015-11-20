@@ -95,6 +95,8 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
     sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
     sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
+
+    chown -R root:root ${D}
 }
 
 do_install_append_class-target() {
