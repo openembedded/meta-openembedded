@@ -36,6 +36,9 @@ do_configure() {
 
 do_install() {
     oe_runmake install DESTDIR=${D}
+    # Its Makefile uses cp -arx to install modules.d, so fix the owner
+    # to root:root
+    chown -R root:root ${D}/${prefix}/lib/dracut/modules.d
 }
 
 PACKAGES =+ "${PN}-bash-completion"
