@@ -31,7 +31,7 @@ do_install () {
     install -d ${D}${mandir}/man5
 
     install -m${BINMODE} ${S}/ftp/ftp ${D}${bindir}
-    ln -sf ${D}${bindir}/ftp ${D}${bindir}/pftp
+    ln -sf ftp ${D}${bindir}/pftp
     install -m${MANMODE} ${S}/ftp/ftp.1 ${D}${mandir}/man1
     ln -sf ftp.1 ${D}${mandir}/man1/pftp.1
     install -m${MANMODE} ${S}/ftp/netrc.5 ${D}${mandir}/man5
