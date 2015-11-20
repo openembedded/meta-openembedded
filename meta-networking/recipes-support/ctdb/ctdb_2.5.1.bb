@@ -25,6 +25,9 @@ SRC_URI[sha256sum] = "d5bf3f674cae986bb6178b1db215a703ac94adc5f75fadfdcff63dcbb5
 
 inherit autotools-brokensep pkgconfig systemd
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[libtdb] = "--without-included-tdb,--with-included-tdb,libtdb"
+
 PARALLEL_MAKE = ""
 
 DEPENDS += "popt libtevent libtalloc libldb"
