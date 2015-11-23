@@ -10,8 +10,8 @@ SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}
 "
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-SRC_URI[md5sum] = "70dde78a5515abdbfd7a3d58f15689ab"
-SRC_URI[sha256sum] = "f4e041bc83c1be94d87116a7aa201c378b7c6581be4d83994b2da0a84499f73b"
+SRC_URI[md5sum] = "dd06da41535184f48f2c8e8b74dd570f"
+SRC_URI[sha256sum] = "059bc6428b1d0e2317f505698602642f1d8dda5b120ec573a59a430d8cb7a32d"
 
 inherit pypi
 
@@ -26,6 +26,9 @@ RDEPENDS_${PN} = "\
                   python-threading\
                   python-numbers\
                   python-contextlib\
+                  python-ipaddress\
+                  python-pyasn1\
+                  python-idna\
 "
 
 RDEPENDS_${PN}-ptest = "\
@@ -44,3 +47,7 @@ do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests/hazmat
     cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
 }
+
+FILES_${PN}-dbg += " \
+    ${libdir}/python2.7/site-packages/${SRCNAME}/hazmat/bindings/.debug \
+    "

@@ -8,7 +8,7 @@ SRCNAME = "cryptography_vectors"
 SRC_URI = "https://pypi.python.org/packages/source/c/cryptography-vectors/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-SRC_URI[md5sum] = "04fcfcc61aee62e3b4beb1740cd120ac"
-SRC_URI[sha256sum] = "4a69e66026bfce4b97f75e72fe262f5e8f71daddc081f6608e5b0db89e552504"
+SRC_URI[md5sum] = "0ad422501074929c06b7edd40df41844"
+SRC_URI[sha256sum] = "a929fbb0eac391c93c5745451a4d4157a8bc18eb2e69faf3af1d825ceacbf32c"
 
 inherit setuptools
