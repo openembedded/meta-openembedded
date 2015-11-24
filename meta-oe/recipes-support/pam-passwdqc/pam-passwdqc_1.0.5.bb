@@ -23,12 +23,13 @@ S = "${WORKDIR}/pam_passwdqc-${PV}"
 
 DEPENDS = "libpam"
 
-EXTRA_OEMAKE = "CFLAGS="${CFLAGS} -Wall -fPIC -DHAVE_SHADOW""
+EXTRA_OEMAKE = "CFLAGS="${CFLAGS} -Wall -fPIC -DHAVE_SHADOW" \
+                SECUREDIR=${base_libdir}/security"
 
 do_install() {
 	oe_runmake install DESTDIR=${D}
 }
 
-FILES_${PN} += "/lib/security/pam_passwdqc.so"
-FILES_${PN}-dbg += "/lib/security/.debug"
+FILES_${PN} += "${base_libdir}/security/pam_passwdqc.so"
+FILES_${PN}-dbg += "${base_libdir}/security/.debug"
 
