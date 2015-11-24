@@ -35,6 +35,8 @@ EXTRA_OECONF += "\
         --disable-foomatic-drv-install \
         --enable-foomatic-ppd-install  \
         --enable-foomatic-rip-hplip-install \
+        --with-cupsbackenddir=${libdir}/cups/backend \
+        --with-cupsfilterdir=${libdir}/cups/filter \
 "
 
 PACKAGES += "${PN}-ppd ${PN}-cups ${PN}-backend ${PN}-filter ${PN}-hal"
