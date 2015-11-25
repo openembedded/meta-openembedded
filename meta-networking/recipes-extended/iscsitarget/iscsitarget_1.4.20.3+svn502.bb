@@ -18,19 +18,13 @@ SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${P
 SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
 SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
 
-inherit module-base
-
-# Add make_scripts task to create kernel scripts
-addtask make_scripts after do_patch before do_compile
+inherit module
 
 do_configure[noexec] = "1"
 
 # make_scripts requires kernel source directory to create
 # kernel scripts
 do_make_scripts[depends] += "virtual/kernel:do_shared_workdir"
-
-# Make sure we don't have race condition against "make scripts"
-do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 
 do_compile() {
     oe_runmake KSRC=${STAGING_KERNEL_DIR} CFLAGS='${CFLAGS}' LDFLAGS='' \
@@ -59,7 +53,7 @@ do_install() {
 }
 
 FILES_${PN} += "${sbindir} \
-                /lib \
                 ${sysconfdir}"
 
+RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
 RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
