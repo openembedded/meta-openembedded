@@ -55,3 +55,6 @@ FILES_${PN} += "${sbindir} \
 
 RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
 RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
+
+# Skip the arch test for kernel modules
+INSANE_SKIP_kernel-module-iscsi-trgt = "arch"
