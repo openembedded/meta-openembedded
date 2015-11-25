@@ -20,6 +20,7 @@ do_install() {
     tar -xf emesene-faenza-theme.tar.gz -C ${D}${datadir}
     mv -f ${D}${datadir}/emesene/themes ${D}${datadir}/themes
     rm -rf ${D}${datadir}/emesene
+    chown -R root:root ${D}${datadir}
 }
 
 FILES_${PN} += "${datadir}/icons ${datadir}/themes"
