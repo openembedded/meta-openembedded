@@ -30,6 +30,14 @@ RDEPENDS_${PN} = " \
 
 RRECOMMENDS_${PN} = " \
                      kernel-module-ipv6 \
+                     kernel-module-nf-conntrack-ipv6 \
+                     kernel-module-nf-log-common \
+                     kernel-module-nf-log-ipv4 \
+                     kernel-module-nf-log-ipv6 \
+                     kernel-module-nf-addrtype \
+                     kernel-module-nf-limit \
+                     kernel-module-nf-log \
+                     kernel-module-nf-recent \
 "
 
 # Certain items are explicitly put under /lib, not base_libdir when installed.
