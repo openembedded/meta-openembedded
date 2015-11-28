@@ -8,10 +8,10 @@ DEPENDS = "perl-native pcre expat glib-2.0 sbc"
 
 SRC_URI = "https://2.na.dl.wireshark.org/src/${BP}.tar.bz2"
 
-PE = "1"
+SRC_URI[md5sum] = "5909af2a09a9a3023ba61bc62e787ad2"
+SRC_URI[sha256sum] = "90026c761a85701d7783c7e2eaa4c1de247dfbadbd53221df355f121e42691dd"
 
-SRC_URI[md5sum] = "988a4595a4a87dafb3c4870ea40e89b5"
-SRC_URI[sha256sum] = "357e0a4e49525d80cdc740bb16539fcdb526ad38cc2ed6cabedafc9bdee5c7e7"
+PE = "1"
 
 inherit autotools pkgconfig
 
@@ -55,3 +55,5 @@ do_configure_prepend() {
 
 ALLOW_EMPTY_${PN} = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+
+FILES_${PN} += "${datadir}*"
