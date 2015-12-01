@@ -20,6 +20,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
         file://run-ptest \
         file://dont-return-incompletely-parsed-varbinds.patch \
         file://0001-config_os_headers-Error-Fix.patch \
+        file://0002-config_os_headers-Error-Fix.patch \
         file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
 "
 SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
