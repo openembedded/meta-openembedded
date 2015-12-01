@@ -24,3 +24,4 @@ do_install() {
         install -m 0755 ${S}/smemcap ${D}${bindir}/
         install -m 0644 ${S}/smem.8 ${D}/${mandir}/man8/
 }
+RDEPENDS_${PN} += "python-textutils python-compression python-shell python-codecs"
