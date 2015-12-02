@@ -40,6 +40,7 @@ case "$1" in
           newaliases
         fi
         if ! postfix status >/dev/null 2>&1; then
+          /usr/sbin/check_hostname.sh
           postfix start
           check_return $?
         else
