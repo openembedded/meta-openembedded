@@ -65,7 +65,7 @@ def get_git_pkgv(d, use_tags):
 
     found = False
     for url in ud.values():
-        if url.type == 'git':
+        if url.type == 'git' or url.type == 'gitsm':
             for name, rev in url.revisions.items():
                 if not os.path.exists(url.localpath):
                     return None
