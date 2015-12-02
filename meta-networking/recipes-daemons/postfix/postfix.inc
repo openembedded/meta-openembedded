@@ -28,6 +28,8 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
 
 S = "${WORKDIR}/postfix-${PV}"
 
+CLEANBROKEN = "1"
+
 BBCLASSEXTEND = "native"
 
 inherit update-rc.d useradd update-alternatives systemd
