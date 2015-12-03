@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 PV = "20130209+git${SRCPV}"
 
-SRC_URI = "git://github.com/anyc/pmtools.git;protocol=https"
+SRC_URI = "git://github.com/anyc/pmtools.git \
+    file://pmtools-switch-to-dynamic-buffer-for-huge-ACPI-table.patch \
+"
 SRCREV = "3ebe0e54c54061b4c627236cbe35d820de2e1168"
 
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
