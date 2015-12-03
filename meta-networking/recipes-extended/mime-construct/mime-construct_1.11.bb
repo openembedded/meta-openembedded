@@ -9,21 +9,14 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=5e2e5da619ac8ef8c84767ccc4656e96"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/R/RO/ROSCH/mime-construct-${PV}.tar.gz \
-           file://WaitStat.pm \
-           file://Signal.pm \
-          "
+    file://fix-mime-construct-help-return-value.patch \
+"
+
 SRC_URI[md5sum] = "73834ea780fbea81b89dbd9b2fb54f58"
 SRC_URI[sha256sum] = "4cd7bb61b51d41192d1498c1051aa6a4ccd75aeb09b71d2ec706a7084a4a9303"
 
 inherit cpan
 
-do_install () {
-    oe_runmake install DESTDIR="${D}"
-    install -d ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/Proc \
-               ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/IPC
-    install -m 644 ${WORKDIR}/WaitStat.pm \
-                   ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/Proc
-    install -m 644 ${WORKDIR}/Signal.pm \
-                   ${D}${libdir}/perl/vendor_perl/${@get_perl_version(d)}/IPC
-}
-RDEPENDS_${PN} = "postfix perl"
+RDEPENDS_${PN} = "libmime-types-perl libproc-waitstat-perl msmtp \
+    perl-module-filehandle perl-module-mime-base64 perl-module-mime-quotedprint perl-module-posix \
+"
