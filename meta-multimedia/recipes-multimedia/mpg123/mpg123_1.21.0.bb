@@ -10,7 +10,7 @@ LICENSE = "LGPLv2.1"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1e86753638d3cf2512528b99079bc4f3"
 
-DEPENDS = "tslib audiofile"
+DEPENDS = "audiofile"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
 
