@@ -14,8 +14,8 @@ DEPENDS = "audiofile"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
 
-SRC_URI[md5sum] = "13a9df5d4e7aa110e4ae27cf30128ce9"
-SRC_URI[sha256sum] = "3ad197f77c9ffdf3601e1c3183ae0709ccb3c3de68309527ce9375fcfb15dcba"
+SRC_URI[md5sum] = "2dfafae3bbc532b4c8b04a77c6a6de89"
+SRC_URI[sha256sum] = "5069e02e50138600f10cc5f7674e44e9bf6f1930af81d0e1d2f869b3c0ee40d2"
 
 inherit autotools pkgconfig
 
