@@ -1,4 +1,4 @@
-HOMEPAGE = "http://hostap.epitest.fi"
+HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "GPLv2 | BSD"
 LIC_FILES_CHKSUM = "file://README;md5=4d53178f44d4b38418a4fa8de365e11c"
@@ -12,7 +12,7 @@ SYSTEMD_SERVICE_${PN} = "hostapd.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
 SRC_URI = " \
-    http://hostap.epitest.fi/releases/hostapd-${PV}.tar.gz \
+    http://w1.fi/releases/hostapd-${PV}.tar.gz \
     file://defconfig \
     file://init \
     file://hostapd.service \
@@ -42,5 +42,5 @@ do_install() {
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 
-SRC_URI[md5sum] = "04578f3f2c3eb1bec1adf30473813912"
-SRC_URI[sha256sum] = "6fe0eb6bd1c9cbd24952ece8586b6f7bd14ab358edfda99794e79b9b9dbd657f"
+SRC_URI[md5sum] = "69f9cec3f76d74f402864a43e4f8624f"
+SRC_URI[sha256sum] = "8e272d954dc0d7026c264b79b15389ec2b2c555b32970de39f506b9f463ec74a"
