@@ -5,7 +5,7 @@ SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "libnl python"
+DEPENDS = "flex-native bison-native libnl python"
 
 PV = "0.3.1+git${SRCPV}"
 SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
