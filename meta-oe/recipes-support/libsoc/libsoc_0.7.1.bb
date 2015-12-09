@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5"
 
 inherit autotools
 
-SRCREV = "3643cf161a4b37bfbdfd05437166c4a29ac3ed8d"
+SRCREV = "2919c35e706fe7c311f83f9343865420fa4b37fe"
 SRC_URI = "git://github.com/jackmitch/libsoc.git"
 
 S = "${WORKDIR}/git"
