@@ -15,3 +15,6 @@ SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git \
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
+
+# Busybox ip doesn't support can interface configuration, use the real thing
+RDEPENDS_${PN} += "iproute2"
