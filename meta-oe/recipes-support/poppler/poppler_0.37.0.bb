@@ -44,4 +44,4 @@ PACKAGES =+ "libpoppler libpoppler-glib"
 FILES_libpoppler = "${libdir}/libpoppler.so.*"
 FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
 
-RDEPENDS_${PN} = "poppler-data"
+RDEPENDS_libpoppler = "poppler-data"
