@@ -24,11 +24,10 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://initscript \
     file://slapd.service \
     file://thread_stub.patch \
-    file://openldap-fix-CVE-2015-6908.patch \
 "
 
-SRC_URI[md5sum] = "47c8e2f283647a6105b8b0325257e922"
-SRC_URI[sha256sum] = "eeb7b0e2c5852bfd2650e83909bb6152835c0b862fab10b63954dc1bcbba8e63"
+SRC_URI[md5sum] = "49ca65e27891fcf977d78c10f073c705"
+SRC_URI[sha256sum] = "34d78e5598a2b0360d26a9050fcdbbe198c65493b013bb607839d5598b6978c8"
 
 DEPENDS = "util-linux groff-native"
 
