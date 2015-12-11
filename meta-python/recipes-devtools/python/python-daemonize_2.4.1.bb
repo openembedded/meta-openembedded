@@ -12,5 +12,5 @@ RDEPENDS_${PN} = "\
                python-resource \
 "
 
-SRC_URI[md5sum] = "f0d401a0a501ba9d36e516ea89146eb2"
-SRC_URI[sha256sum] = "6fa43b56c293ff8bb180008fe47ed49f7d006cdeb0eaa84f157249800d3194d4"
+SRC_URI[md5sum] = "f08ad971573a1d83d2d4adab13f59448"
+SRC_URI[sha256sum] = "2fbe8a4af6bafb3f53d64b8c05c073bfff6c8bc829b83563f5774b0052fc656e"
