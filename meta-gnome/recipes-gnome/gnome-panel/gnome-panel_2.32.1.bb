@@ -10,7 +10,7 @@ SECTION = "x11/gnome"
 PR = "r7"
 
 DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ \
-           pango libwnck gnome-menus cairo libgweather dbus-glib \
+           pango libwnck gnome-menus cairo libgweather dbus dbus-glib \
 	   librsvg libcanberra"
 RDEPENDS_${PN} = "python"
 
