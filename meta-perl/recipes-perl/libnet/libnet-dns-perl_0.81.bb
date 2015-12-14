@@ -23,6 +23,3 @@ do_compile() {
 	cpan_do_compile
 }
 BBCLASSEXTEND = "native"
-
-# Bareword "Errno::EINVAL" not allowed while "strict subs" in use at /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/perl/5.22.0/IO/Socket.pm line 135.
-PNBLACKLIST[libnet-dns-perl] ?= "BROKEN: Fails to build since some changes in perl recipe"
