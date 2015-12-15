@@ -33,6 +33,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://18-avoid-get-config-by-native-ncurses.patch \
            file://19-systemd-daemon-is-contained-by-libsystemd.patch \
            file://20-do-not-import-target-module-while-cross-compile.patch \
+           file://21-add-config-option-without-valgrind.patch \
           "
 
 SRC_URI[md5sum] = "232016d7581a1ba11e991ec2674553c4"
@@ -65,6 +66,7 @@ PACKAGECONFIG[sasl] = ",,cyrus-sasl"
 PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd"
 PACKAGECONFIG[dmapi] = "--with-dmapi,--without-dmapi,dmapi"
 PACKAGECONFIG[zeroconf] = "--enable-avahi,--disable-avahi,avahi"
+PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind,"
 
 SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'sasl', '', 'file://21-avoid-sasl-unless-wanted.patch', d)}"
 
