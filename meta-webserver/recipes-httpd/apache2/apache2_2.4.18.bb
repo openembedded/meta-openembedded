@@ -15,7 +15,6 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
            file://replace-lynx-to-curl-in-apachectl-script.patch \
            file://apache-ssl-ltmain-rpath.patch \
            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-           file://npn-patch-2.4.7.patch \
            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
            file://configure-allow-to-disable-selinux-support.patch \
            file://init \
@@ -24,8 +23,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
           "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
-SRC_URI[md5sum] = "2b19cd338fd526dd5a63c57b1e9bfee2"
-SRC_URI[sha256sum] = "ac660b47aaa7887779a6430404dcb40c0b04f90ea69e7bd49a40552e9ff13743"
+SRC_URI[md5sum] = "3690b3cc991b7dfd22aea9e1264a11b9"
+SRC_URI[sha256sum] = "0644b050de41f5c9f67c825285049b144690421acb709b06fe53eddfa8a9fd4c"
 
 S = "${WORKDIR}/httpd-${PV}"
 
