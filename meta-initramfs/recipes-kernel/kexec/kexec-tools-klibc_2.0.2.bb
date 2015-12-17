@@ -8,6 +8,8 @@ inherit klibc
 
 FILESPATH =. "${FILE_DIRNAME}/kexec-tools-${PV}:"
 
+SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/kexec/kexec-tools-${PV}.tar.gz"
+
 SRC_URI += " \
             file://kexec-elf-rel.patch \
             file://kexec-syscall.patch \
