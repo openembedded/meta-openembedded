@@ -14,21 +14,31 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "fab014be1477ef4ebf9a765e10f8802c"
 SRC_URI[sha256sum] = "a4a9bc8c4e42bdc4366a87a05a02bf9f425169a7ab0c6f4482d347e44acbf225"
 
-EXTRA_OECONF = "--enable-gmp \
-        --enable-openssl \
+EXTRA_OECONF = " \
         --without-lib-prefix \
 "
 
 EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
-PACKAGECONFIG ??= "sqlite3 curl \
+
+PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
         ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
 "
-PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,"
-PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,"
+PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
+PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
 PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
-PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
+PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,"
+PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,"
 PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
+PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
+PACKAGECONFIG[scep] = "--enable-scepclient,--disable-scepclient,"
+PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
+PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,"
+PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,"
+PACKAGECONFIG[swanctl] = "--enable-swanctl,--disable-swanctl,,libgcc"
+
+# requires swanctl
+PACKAGECONFIG[systemd-charon] = "--enable-systemd,--disable-systemd,systemd,"
 
 inherit autotools systemd pkgconfig
 
@@ -42,4 +52,4 @@ FILES_${PN}-staticdev += "${libdir}/ipsec/*.a ${libdir}/ipsec/plugins/*.a"
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}-swanctl.service', '${BPN}.service', d)}"
