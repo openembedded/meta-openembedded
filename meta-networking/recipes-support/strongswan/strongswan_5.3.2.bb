@@ -10,6 +10,7 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
         file://fix-funtion-parameter.patch \
         file://support-newer-systemd.patch \
+        file://install-strongswan-swanctl-service.patch \
 "
 
 SRC_URI[md5sum] = "fab014be1477ef4ebf9a765e10f8802c"
