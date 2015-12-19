@@ -49,6 +49,10 @@ EXTRA_OECONF = " \
     ${@bb.utils.contains('TUNE_FEATURES', 'altivec', '--with-cpu=altivec', '', d)} \
 "
 
+# The x86 assembler optimisations contains text relocations and there are no
+# upstream plans to fix them: http://sourceforge.net/p/mpg123/bugs/168/
+INSANE_SKIP_${PN}_append_x86 = " textrel"
+
 # Fails to build with thumb-1 (qemuarm)
 #| {standard input}: Assembler messages:
 #| {standard input}:47: Error: selected processor does not support Thumb mode `smull r5,r6,r7,r4'
