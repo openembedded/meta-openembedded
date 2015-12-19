@@ -1,7 +1,7 @@
 HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "GPLv2 | BSD"
-LIC_FILES_CHKSUM = "file://README;md5=4d53178f44d4b38418a4fa8de365e11c"
+LIC_FILES_CHKSUM = "file://${B}/README;md5=4d53178f44d4b38418a4fa8de365e11c"
 DEPENDS = "libnl openssl"
 SUMMARY = "User space daemon for extended IEEE 802.11 management"
 
@@ -18,11 +18,11 @@ SRC_URI = " \
     file://hostapd.service \
 "
 
-S = "${WORKDIR}/hostapd-${PV}/hostapd"
-
+S = "${WORKDIR}/hostapd-${PV}"
+B = "${WORKDIR}/hostapd-${PV}/hostapd"
 
 do_configure() {
-    install -m 0644 ${WORKDIR}/defconfig ${S}/.config
+    install -m 0644 ${WORKDIR}/defconfig ${B}/.config
 }
 
 do_compile() {
@@ -32,9 +32,9 @@ do_compile() {
 
 do_install() {
     install -d ${D}${sbindir} ${D}${sysconfdir}/init.d ${D}${systemd_unitdir}/system/
-    install -m 0644 ${S}/hostapd.conf ${D}${sysconfdir}
-    install -m 0755 ${S}/hostapd ${D}${sbindir}
-    install -m 0755 ${S}/hostapd_cli ${D}${sbindir}
+    install -m 0644 ${B}/hostapd.conf ${D}${sysconfdir}
+    install -m 0755 ${B}/hostapd ${D}${sbindir}
+    install -m 0755 ${B}/hostapd_cli ${D}${sbindir}
     install -m 755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/hostapd
     install -m 0644 ${WORKDIR}/hostapd.service ${D}${systemd_unitdir}/system/
     sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/hostapd.service
