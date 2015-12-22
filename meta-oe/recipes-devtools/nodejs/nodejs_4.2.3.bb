@@ -1,16 +1,19 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=14115ff11211df04b031ec7d40b6d31b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ee90ba97d933fc8d56e97812b7dd62e9"
 
 DEPENDS = "openssl"
 
+COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
+COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-    file://enable-armv5e-build.patch \
     file://no-registry.patch \
 "
-SRC_URI[md5sum] = "5523ec4347d7fe6b0f6dda1d1c7799d5"
-SRC_URI[sha256sum] = "b23d64df051c9c969b0c583f802d5d71de342e53067127a5061415be7e12f39d"
+SRC_URI[md5sum] = "529a8abd4ca5a2225636767d3f14c382"
+SRC_URI[sha256sum] = "5008ade5feb4b089f59163f66bffddc113f27de5d78edf203e39435c2c5d554f"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -20,10 +23,11 @@ CCACHE = ""
 def map_nodejs_arch(a, d):
     import re
 
-    if   re.match('p(pc|owerpc)(|64)', a): return 'ppc'
-    elif re.match('i.86$', a): return 'ia32'
+    if   re.match('i.86$', a): return 'ia32'
     elif re.match('x86_64$', a): return 'x64'
-    elif re.match('arm64$', a): return 'arm'
+    elif re.match('aarch64$', a): return 'arm64'
+    elif re.match('powerpc64$', a): return 'ppc64'
+    elif re.match('powerpc$', a): return 'ppc'
     return a
 
 ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
