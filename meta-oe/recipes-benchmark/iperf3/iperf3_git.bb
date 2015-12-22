@@ -22,4 +22,7 @@ SRCREV = "e396134952a01199326665d1df7c51ae9e62e945"
 S = "${WORKDIR}/git"
 
 inherit autotools
+
+PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sctp_h=no,lksctp-tools"
+
 BBCLASSEXTEND = "native"
