@@ -311,10 +311,10 @@ def follow_rule(i, line):
         # if the line still does not respect the rule
         if not rules[i][0](line):
             # this is a rule disgression
-            print ("## Disgression: ", rules[i][2], " in:", oldline)
+            print ("## Disgression: ", rules[i][2], " in: '", oldline, "'")
         else:
             # just remind user about his/her errors
-            print ("## Reminder: ", rules[i][2], " in :", oldline)
+            print ("## Reminder: ", rules[i][2], " in : '", oldline, "'")
     return line
 
 
