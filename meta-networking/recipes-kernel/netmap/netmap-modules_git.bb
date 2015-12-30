@@ -61,7 +61,6 @@ do_configure_append () {
 #define NETMAP_LINUX_HAVE_PHYS_ADDR_T
 #define NETMAP_LINUX_HAVE_ACCESS_ONCE
 #define NETMAP_LINUX_HAVE_NETDEV_OPS
-#define NETMAP_LINUX_ALLOC_NETDEV_4ARGS
 #define NETMAP_LINUX_HAVE_INIT_NET
 #define NETMAP_LINUX_HAVE_LIVE_ADDR_CHANGE
 #define NETMAP_LINUX_HAVE_TX_SKB_SHARING
@@ -75,6 +74,13 @@ do_configure_append () {
 #define NETMAP_LINUX_HAVE_E1000E_EXT_RXDESC
 #define NETMAP_LINUX_HAVE_E1000E_DOWN2
 EOF
+
+if ${@ 'false' if (bb.utils.vercmp_string(d.getVar('KERNEL_VERSION', True), '3.17') < 0) else 'true' } ; then
+    echo OK
+    cat >>  ${S}/LINUX/netmap_linux_config.h <<EOF
+#define NETMAP_LINUX_ALLOC_NETDEV_4ARGS
+EOF
+fi
 }
 
 do_compile () {
