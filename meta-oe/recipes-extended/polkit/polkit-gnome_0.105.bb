@@ -13,11 +13,7 @@ SRC_URI = "https://download.gnome.org/sources/polkit-gnome/${PV}/polkit-gnome-${
 SRC_URI[md5sum] = "50ecad37c8342fb4a52f590db7530621"
 SRC_URI[sha256sum] = "1784494963b8bf9a00eedc6cd3a2868fb123b8a5e516e66c5eda48df17ab9369"
 
-#PNBLACKLIST[polkit-gnome] ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024 exceeded, use -L<N> to change it"
-
 EXTRA_OECONF = "\
-    --disable-examples \
-    --disable-introspection \
     --disable-static \
 "
 
