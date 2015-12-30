@@ -18,6 +18,7 @@ PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[cifscreds] = "--enable-cifscreds,--disable-cifscreds,keyutils"
 # when enabled, it creates ${sbindir}/cifs.upcall and --ignore-fail-on-non-empty in do_install_append is needed
 PACKAGECONFIG[cifsupcall] = "--enable-cifsupcall,--disable-cifsupcall,krb5 libtalloc keyutils"
+PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disable-pam,libpam keyutils"
 
 inherit autotools pkgconfig
 
@@ -27,4 +28,6 @@ do_install_append() {
     rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
 }
 
+FILES_${PN} += "${base_libdir}/security"
+FILES_${PN}-dbg += "${base_libdir}/security/.debug"
 RRECOMMENDS_${PN} = "kernel-module-cifs"
