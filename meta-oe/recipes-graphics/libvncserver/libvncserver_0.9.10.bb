@@ -19,6 +19,6 @@ SRC_URI  = "\
 SRC_URI[md5sum] = "e883b6c7bd339a5e1c48645051abe5c4"
 SRC_URI[sha256sum] = "583f28869b82aec57768d7d18cd7ff81bf092ecbbc1209b587c2c2cd68330250"
 
-S = "${WORKDIR}/${PN}-LibVNCServer-${PV}"
+S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
 
 TARGET_LDFLAGS += "-lgcrypt"
