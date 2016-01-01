@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fl
            file://dso-fix.patch \
            file://libpng15.patch \
            file://fltk-no-freetype-config.patch \
+	   file://Fl_JPEG_Image_buildix.patch \
 "
 
 S = "${WORKDIR}/fltk-${PV}"
