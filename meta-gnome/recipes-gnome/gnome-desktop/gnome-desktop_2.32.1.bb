@@ -27,4 +27,4 @@ FILES_${PN} += "${datadir}/gnome-about"
 
 # for gnome-about
 RRECOMMENDS_${PN} += "python-pygtk python-pycairo"
-
+RDEPENDS_${PN} += "python"
