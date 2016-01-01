@@ -49,6 +49,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-smartbookmark-plugin \
     xfce4-hotcorner-plugin \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'xfce4-pulseaudio-plugin', '', d)} \
+    xfce4-sensors-plugin \
     \
     xfce-polkit \
     \
