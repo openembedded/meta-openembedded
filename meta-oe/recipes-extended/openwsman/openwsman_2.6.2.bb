@@ -12,10 +12,10 @@ SECTION = "Applications/System"
 
 DEPENDS = "curl libxml2 openssl libpam"
 
-SRCREV = "f523bf1390c7ea23946bb9159978a4d7c198f1ba"
-PV = "2.6.0"
+SRCREV = "ed7a119e036c53078d70fd85936d94dc9b9b98be"
+PV = "2.6.2"
 
-SRC_URI = "git://github.com/Openwsman/openwsman.git \
+SRC_URI = "git://github.com/Openwsman/openwsman.git;protocol=http \
            file://libssl-is-required-if-eventint-supported.patch \
            file://openwsmand.service"
 
