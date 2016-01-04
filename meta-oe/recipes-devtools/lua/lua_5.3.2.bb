@@ -11,8 +11,8 @@ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
            file://lua.pc \
 "
 
-SRC_URI[md5sum] = "797adacada8d85761c079390ff1d9961"
-SRC_URI[sha256sum] = "072767aad6cc2e62044a66e8562f51770d941e972dc1e4068ba719cd8bffac17"
+SRC_URI[md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
+SRC_URI[sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
 
 inherit pkgconfig binconfig
 
