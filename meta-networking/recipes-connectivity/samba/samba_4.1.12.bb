@@ -53,7 +53,7 @@ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
                    acl aio cups ldap \
 "
 
-RDEPENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
+RDEPENDS_${PN}-base += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
 
 PACKAGECONFIG[acl] = "--with-acl-support,---without-acl-support,acl"
 PACKAGECONFIG[aio] = "--with-aio-support,---without-aio-support,libaio"
@@ -80,8 +80,8 @@ SAMBA4_LIBS="heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!tevent,!pytev
 PERL_VERNDORLIB="${libdir}/perl5/vendor_perl/${PERLVERSION}"
 
 EXTRA_OECONF += "--enable-fhs \
-                 --with-piddir=${localstatedir}/run \
-                 --with-sockets-dir=${localstatedir}/run/samba \
+                 --with-piddir=/run \
+                 --with-sockets-dir=/run/samba \
                  --with-modulesdir=${libdir}/samba \
                  --with-lockdir=${localstatedir}/lib/samba \
                  --with-cachedir=${localstatedir}/lib/samba \
@@ -102,7 +102,8 @@ EXTRA_OECONF += "--enable-fhs \
 LDFLAGS += "-Wl,-z,relro,-z,now"
 
 do_install_append() {
-    rmdir --ignore-fail-on-non-empty "${D}/${localstatedir}/run"
+    rmdir --ignore-fail-on-non-empty "${D}/run/samba"
+    rmdir --ignore-fail-on-non-empty "${D}/run"
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_unitdir}/system
@@ -140,16 +141,151 @@ do_install_append() {
 }
 
 PACKAGES += "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
+PACKAGES =+ "libwbclient libnss-winbind winbind winbind-dbg libnetapi libsmbsharemodes \
+             libsmbclient libsmbclient-dev lib${PN}-base ${PN}-base"
 
-FILES_${PN} += "/run \
-                ${base_libdir}/security/pam_smbpass.so \
+RDEPENDS_${PN} += "${PN}-base"
+
+FILES_${PN}-base = "${sbindir}/nmbd \
+                    ${sbindir}/smbd \
+                    ${sysconfdir}/init.d \
+                    ${localstatedir}/lib/samba \
+                    ${localstatedir}/log/samba \
+                    ${localstatedir}/nmbd \
+                    ${localstatedir}/spool/samba \
+"
+
+# figured out by
+# FILES="tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/sbin/smbd tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/sbin/nmbd"
+#
+# while [ "${FILES}" != "${OLDFILES}" ]
+# do
+#     OLDFILES="${FILES}"
+#     NEEDED=`tmp/sysroots/x86_64-linux/usr/libexec/arm-poky-linux-gnueabi.gcc-cross-initial-arm/gcc/arm-poky-linux-gnueabi/5.2.0/objdump -x ${FILES} | grep NEEDED | egrep -E 'so(.[0-9]|$)' | sort -u | perl -MData::Dumper -le 'while (<>) {chomp; push @lib, (split)[1]}; print "(", join("|", @lib), ")"'`
+#     NF=`find tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/lib -type f | egrep "${NEEDED}" | sort -u`
+#
+#     FILES=`perl -le 'foreach (@ARGV) { $f{$_}++ }; print join(" ", sort keys %f)' ${FILES} ${NF}`
+# done
+#
+# LIBS=`echo ${FILES} | sed -e 's,tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/lib,${libdir},g' -e 's,.so.[0-9]+.*$,.so.*,g'`
+# for l in ${LIBS}
+# do
+#     echo $l
+# done
+
+FILES_lib${PN}-base = "\
+                    ${sysconfdir}/default \
+                    ${sysconfdir}/samba \
+                    ${libdir}/libdcerpc-binding.so.* \
+                    ${libdir}/libgensec.so.* \
+                    ${libdir}/libndr-krb5pac.so.* \
+                    ${libdir}/libndr-nbt.so.* \
+                    ${libdir}/libndr-standard.so.* \
+                    ${libdir}/libndr.so.* \
+                    ${libdir}/libnetapi.so.* \
+                    ${libdir}/libpdb.so.* \
+                    ${libdir}/libsamba-credentials.so.* \
+                    ${libdir}/libsamba-hostconfig.so.* \
+                    ${libdir}/libsamba-util.so.* \
+                    ${libdir}/libsamdb.so.* \
+                    ${libdir}/libsmbconf.so.* \
+                    ${libdir}/libtevent-util.so.* \
+                    ${libdir}/samba/libCHARSET3.so \
+                    ${libdir}/samba/libaddns.so \
+                    ${libdir}/samba/libads.so \
+                    ${libdir}/samba/libasn1util.so \
+                    ${libdir}/samba/libauth.so \
+                    ${libdir}/samba/libauth_sam_reply.so \
+                    ${libdir}/samba/libauthkrb5.so \
+                    ${libdir}/samba/libccan.so \
+                    ${libdir}/samba/libcli-ldap-common.so \
+                    ${libdir}/samba/libcli-nbt.so \
+                    ${libdir}/samba/libcli_cldap.so \
+                    ${libdir}/samba/libcli_smb_common.so \
+                    ${libdir}/samba/libcli_spoolss.so \
+                    ${libdir}/samba/libcliauth.so \
+                    ${libdir}/samba/libdbwrap.so \
+                    ${libdir}/samba/libdcerpc-samba.so \
+                    ${libdir}/samba/liberrors.so \
+                    ${libdir}/samba/libflag_mapping.so \
+                    ${libdir}/samba/libgse.so \
+                    ${libdir}/samba/libinterfaces.so \
+                    ${libdir}/samba/libkrb5samba.so \
+                    ${libdir}/samba/libldbsamba.so \
+                    ${libdir}/samba/liblibcli_lsa3.so \
+                    ${libdir}/samba/liblibcli_netlogon3.so \
+                    ${libdir}/samba/liblibsmb.so \
+                    ${libdir}/samba/libmsrpc3.so \
+                    ${libdir}/samba/libndr-samba.so \
+                    ${libdir}/samba/libndr-samba4.so \
+                    ${libdir}/samba/libnpa_tstream.so \
+                    ${libdir}/samba/libntdb.so.* \
+                    ${libdir}/samba/libpopt_samba3.so \
+                    ${libdir}/samba/libprinting_migrate.so \
+                    ${libdir}/samba/libsamba-modules.so \
+                    ${libdir}/samba/libsamba-security.so \
+                    ${libdir}/samba/libsamba-sockets.so \
+                    ${libdir}/samba/libsamba3-util.so \
+                    ${libdir}/samba/libsamdb-common.so \
+                    ${libdir}/samba/libsecrets3.so \
+                    ${libdir}/samba/libserver-role.so \
+                    ${libdir}/samba/libsmb_transport.so \
+                    ${libdir}/samba/libsmbd_base.so \
+                    ${libdir}/samba/libsmbd_conn.so \
+                    ${libdir}/samba/libsmbd_shim.so \
+                    ${libdir}/samba/libsmbregistry.so \
+                    ${libdir}/samba/libtdb-wrap.so \
+                    ${libdir}/samba/libutil_cmdline.so \
+                    ${libdir}/samba/libutil_ntdb.so \
+                    ${libdir}/samba/libutil_reg.so \
+                    ${libdir}/samba/libutil_setid.so \
+                    ${libdir}/samba/libutil_tdb.so \
+                    ${libdir}/samba/pdb/smbpasswd.so \
+                    ${libdir}/samba/pdb/tdbsam.so \
+                    ${libdir}/samba/pdb/wbc_sam.so \
+"
+
+FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
+                     ${libdir}/security/.debug/pam_winbind.so \
+"
+
+FILES_${PN} += "${libdir}/vfs/*.so \
+                ${libdir}/charset/*.so \
+                ${libdir}/*.dat \
+                ${libdir}/auth/*.so \
+                ${libdir}/security/pam_smbpass.so \
+"
+
+FILES_${PN}-dbg += "${libdir}/vfs/.debug/*.so \
+                    ${libdir}/charset/.debug/*.so \
+                    ${libdir}/auth/.debug/*.so \
+                    ${libdir}/security/.debug/pam_smbpass.so \
+"
+
+FILES_libwbclient = "${libdir}/libwbclient.so.* ${libdir}/samba/libwinbind-client.so"
+FILES_libnetapi = "${libdir}/libnetapi.so.*"
+FILES_libsmbsharemodes = "${libdir}/libsmbsharemodes.so.*"
+FILES_libsmbclient = "${libdir}/libsmbclient.so.*"
+FILES_libsmbclient-dev = "${libdir}/libsmbclient.so ${includedir}"
+FILES_winbind = "${sbindir}/winbindd \
+                 ${bindir}/wbinfo \
+                 ${bindir}/ntlm_auth \
+                 ${sysconfdir}/init.d/winbind \
+                 ${systemd_unitdir}/system/winbind.service \
+"
+
+FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
+                        ${libdir}/nss_info \
+"
+
+FILES_${PN} += "${base_libdir}/security/pam_smbpass.so \
                 ${libdir}/tmpfiles.d/* \
-               "
+"
 
 SMB_SERVICE="${systemd_unitdir}/system/nmb.service ${systemd_unitdir}/system/smb.service"
 SMB_SYSV="${sysconfdir}/init.d ${sysconfdir}/rc?.d"
-FILES_${PN} +="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${SMB_SERVICE}', '', d)}"
-FILES_${PN} +="${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SMB_SYSV}', '', d)}"
+FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${SMB_SERVICE}', '', d)}"
+FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SMB_SYSV}', '', d)}"
 
 FILES_${PN}-dbg += "${libdir}/samba/idmap/.debug/* \
                     ${libdir}/samba/pdb/.debug/* \
@@ -158,7 +294,7 @@ FILES_${PN}-dbg += "${libdir}/samba/idmap/.debug/* \
                     ${libdir}/samba/ldb/.debug/* \
                     ${libdir}/samba/vfs/.debug/* \
                     ${base_libdir}/security/.debug/pam_smbpass.so \
-                   "
+"
 
 FILES_libwinbind = "${base_libdir}/security/pam_winbind.so"
 FILES_libwinbind += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
@@ -177,11 +313,12 @@ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/*.so \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/tests/* \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
-                     "
+"
+
 FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug/* \
                           ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/.debug/* \
                           ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/.debug/* \
                           ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/.debug/* \
-                         "
+"
 
 FILES_${PN}-pidl = "${bindir}/pidl ${PERL_VERNDORLIB}/*"
