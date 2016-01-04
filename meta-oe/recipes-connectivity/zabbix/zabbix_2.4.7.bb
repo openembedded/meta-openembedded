@@ -27,8 +27,8 @@ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stab
            file://0001-Fix-configure.ac.patch \
            file://zabbix-agent.service"
 
-SRC_URI[md5sum] = "a82eb0d55d3ca947e10a4a55238f4388"
-SRC_URI[sha256sum] = "4e2cf1e4893a45d83379a05e2debabddf16beab324c93e84adc0bb57716fb957"
+SRC_URI[md5sum] = "9f8aeb11d8415585f41c3f2f22566b78"
+SRC_URI[sha256sum] = "d2c47b8f5b9b91f18010d54c45de55845d979014a8b3fe4bef64e0b08f8b00da"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
