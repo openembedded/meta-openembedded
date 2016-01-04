@@ -8,6 +8,9 @@ DEPENDS = "gnutls"
 
 PR = "r1"
 
+# http://errors.yoctoproject.org/Errors/Details/25825/
+PNBLACKLIST[iksemel] ?= "Not compatible with gnutls version 3.4 currently in oe-core"
+
 SRC_URI = "http://iksemel.googlecode.com/files/${BP}.tar.gz;name=archive \
            file://r25.diff"
 SRC_URI[archive.md5sum] = "532e77181694f87ad5eb59435d11c1ca"
