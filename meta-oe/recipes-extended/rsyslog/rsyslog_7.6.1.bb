@@ -17,6 +17,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
                     file://COPYING.ASL20;md5=052f8a09206615ab07326ff8ce2d9d32\
 "
 
+# http://errors.yoctoproject.org/Errors/Details/25829/
+PNBLACKLIST[rsyslog] ?= "Not compatible with gnutls version 3.4 currently in oe-core"
+
 SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://initscript \
            file://rsyslog.conf \
