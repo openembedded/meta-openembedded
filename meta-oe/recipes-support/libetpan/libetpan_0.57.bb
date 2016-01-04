@@ -8,6 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f18ebe7e452708c26f83954f81062ba7"
 
 PR = "r1"
 
+# http://errors.yoctoproject.org/Errors/Details/25823/
+PNBLACKLIST[libetpan] ?= "Not compatible with gnutls version 3.4 currently in oe-core"
+
 SRC_URI = "${SOURCEFORGE_MIRROR}/libetpan/libetpan-${PV}.tar.gz \
            file://libetpan-autoreconf.patch \
            file://libetpan-ldflags.patch \

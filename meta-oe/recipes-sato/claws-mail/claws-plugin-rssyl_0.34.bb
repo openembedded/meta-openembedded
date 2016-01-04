@@ -4,6 +4,8 @@ DEPENDS = "claws-mail libxml2 curl glib-2.0 gtk+"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0c2348e0a084e573f0220f5e45d8097e"
 
+PNBLACKLIST[claws-plugin-rssyl] ?= "depends on blacklisted claws-mail"
+
 SRC_URI = "http://www.claws-mail.org/downloads/plugins_obsolete/rssyl-${PV}.tar.gz \
            file://configure.patch"
 SRC_URI[md5sum] = "49b45608e8d160b3625d3d50016ec2ca"
