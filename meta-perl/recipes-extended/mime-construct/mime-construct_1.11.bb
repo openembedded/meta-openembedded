@@ -20,3 +20,9 @@ inherit cpan
 RDEPENDS_${PN} = "libmime-types-perl libproc-waitstat-perl msmtp \
     perl-module-filehandle perl-module-mime-base64 perl-module-mime-quotedprint perl-module-posix \
 "
+
+do_install_append() {
+   #change the interpreter in file
+   sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl -w|${bindir}/env perl|g" \
+      ${D}/${bindir}/mime-construct
+}
