@@ -40,6 +40,8 @@ SRC_URI[md5sum] = "232016d7581a1ba11e991ec2674553c4"
 SRC_URI[sha256sum] = "033604674936bf5c77d7df299b0626052b84a41505a6a6afe902f6274fc29898"
 
 inherit systemd waf-samba cpan-base perlnative
+# remove default added RDEPENDS on perl
+RDEPENDS_${PN}_remove = "perl"
 
 DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 ctdb libbsd"
 
@@ -321,4 +323,5 @@ FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.d
                           ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/.debug/* \
 "
 
+RDEPENDS_${PN}-pidl_append = " perl"
 FILES_${PN}-pidl = "${bindir}/pidl ${PERL_VERNDORLIB}/*"
