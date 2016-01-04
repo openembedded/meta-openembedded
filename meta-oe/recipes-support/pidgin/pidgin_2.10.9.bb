@@ -6,6 +6,9 @@ DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl
 
 inherit autotools gettext pkgconfig gconf perlnative
 
+# http://errors.yoctoproject.org/Errors/Details/25824/
+PNBLACKLIST[pidgin] ?= "Not compatible with gnutls version 3.4 currently in oe-core"
+
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
