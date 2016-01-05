@@ -6,11 +6,11 @@ call by openssl to a PKCS cards and software for using smart cards in PKCS"
 HOMEPAGE = "https://github.com/OpenSC/engine_pkcs11"
 SECTION = "Development/Libraries"
 LICENSE = "LGPLv2.1+"
-LIC_FILES_CHKSUM = "file://doc/README;md5=d2ab6bf8854463fa6bf98f5bb6dfc47c"
+LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
 DEPENDS = "openssl libp11"
 
-SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
-SRCREV = "bb775c32dba8cc4b4381a53da7ab5d7b22b7921d"
+SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git;protocol=http"
+SRCREV = "6909d6761c8820e1750fa0bf4fa8532c82f34e35"
 
 S = "${WORKDIR}/git"
 
@@ -22,8 +22,8 @@ EXTRA_OECONF = "\
 "
 
 do_install_append () {
-    rm -f ${D}${libdir}/openssl/engines/engine_pkcs11.la
+    rm -f ${D}${libdir}/openssl/engines/libpkcs11.la
 }
 
-FILES_${PN} += "${libdir}/openssl/engines/engine_pkcs11.so*"
+FILES_${PN} += "${libdir}/openssl/engines/libpkcs11.so*"
 FILES_${PN}-dbg += "${libdir}/openssl/engines/.debug/*"
