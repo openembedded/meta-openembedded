@@ -12,5 +12,6 @@ RDEPENDS_${PN} += "xserver-xorg-module-exa"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
-SRC_URI[md5sum] = "8b2c0df5de3929597ade8c5ddb489a44"
-SRC_URI[sha256sum] = "b247c800e532fad1c80a5666d8ca0d4e5712064b6d7a3b030b32206a8de04482"
+SRC_URI[md5sum] = "dc79910c7b9e32321cefc7af250c7765"
+SRC_URI[sha256sum] = "0ea057ad7fc31caba2d4e46c7e418fe2b3c762b04fb8d382f53383397fd8391e"
+
