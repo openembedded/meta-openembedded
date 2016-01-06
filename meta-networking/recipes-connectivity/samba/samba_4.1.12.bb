@@ -117,8 +117,9 @@ do_install_append() {
             -i ${D}${systemd_unitdir}/system/*.service
 
 	install -d ${D}${sysconfdir}/tmpfiles.d
-	echo "d ${localstatedir}/log/samba 0755 root root -" \
-            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
+        install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
+        echo "d ${localstatedir}/log/samba 0755 root root -" \
+            >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
     elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
@@ -134,9 +135,6 @@ do_install_append() {
     install -d ${D}${sysconfdir}/samba
     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
     install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
-
-    install -d ${D}${libdir}/tmpfiles.d
-    install -m644 packaging/systemd/samba.conf.tmp ${D}${libdir}/tmpfiles.d/samba.conf
 
     install -d ${D}${sysconfdir}/sysconfig/
     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
@@ -281,7 +279,6 @@ FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
 "
 
 FILES_${PN} += "${base_libdir}/security/pam_smbpass.so \
-                ${libdir}/tmpfiles.d/* \
 "
 
 SMB_SERVICE="${systemd_unitdir}/system/nmb.service ${systemd_unitdir}/system/smb.service"
