@@ -34,6 +34,13 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://19-systemd-daemon-is-contained-by-libsystemd.patch \
            file://20-do-not-import-target-module-while-cross-compile.patch \
            file://21-add-config-option-without-valgrind.patch \
+           file://0001-waf-sanitize-and-fix-added-cross-answer.patch \
+           file://0002-Adds-a-new-mode-to-samba-cross-compiling.patch \
+           file://0003-waf-improve-readability-of-cross-answers-generated-b.patch \
+           file://0004-build-make-wafsamba-CHECK_SIZEOF-cross-compile-frien.patch \
+           file://0005-build-unify-and-fix-endian-tests.patch \
+           file://0006-avoid-using-colon-in-the-checking-msg.patch \
+           file://0007-waf-Fix-parsing-of-cross-answers-file-in-case-answer.patch \
           "
 
 SRC_URI[md5sum] = "232016d7581a1ba11e991ec2674553c4"
