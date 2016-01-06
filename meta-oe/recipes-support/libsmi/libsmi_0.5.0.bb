@@ -8,8 +8,8 @@ SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
            file://smi.conf \
           "
 
-SRC_URI[md5sum] = "760b6b1070738158708649ed2c63425e"
-SRC_URI[sha256sum] = "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaaa87c462f49d74849"
+SRC_URI[md5sum] = "4bf47483c06c9f07d1b10fbc74eddf11"
+SRC_URI[sha256sum] = "f21accdadb1bb328ea3f8a13fc34d715baac6e2db66065898346322c725754d3"
 
 inherit autotools
 
@@ -18,9 +18,10 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
 }
 
-PACKAGES += "${PN}-mibs ${PN}-pibs"
+PACKAGES += "${PN}-mibs ${PN}-pibs ${PN}-yang"
 
 FILES_${PN}-mibs += "${datadir}/mibs"
 FILES_${PN}-pibs += "${datadir}/pibs"
+FILES_${PN}-yang += "${datadir}/yang"
 
 RRECOMMENDS_${PN} = "${BPN}-mibs"
