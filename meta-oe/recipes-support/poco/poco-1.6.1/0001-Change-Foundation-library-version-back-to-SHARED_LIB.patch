@@ -1,0 +1,35 @@
+From cec5a43151a11d8afbb5dd50caf4e22fb89c6340 Mon Sep 17 00:00:00 2001
+From: Mike Gelfand <mikedld@mikedld.com>
+Date: Sun, 20 Sep 2015 03:08:19 +0300
+Subject: [PATCH] Change Foundation library version back to
+ SHARED_LIBRARY_VERSION
+
+Foundation is the only library using PROJECT_VERSION as library version,
+the change accidentally introduced by commit b69fafb84c. This causes
+difference in library being linked to (libPocoFoundation.31.dylib on Mac)
+and library returned by $<TARGET_FILE:Poco::Foundation> for imported
+target (libPocoFoundation.1.6.1.dylib), causing inconvenience. Also, this
+differs from autoconf-based builds where only "31" (soversion) library is
+being created and not "1.6.1" (project version) one.
+
+Upstream-Status: Backport from 1.6.2
+---
+ Foundation/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Foundation/CMakeLists.txt b/Foundation/CMakeLists.txt
+index c1dd25f..25f401c 100644
+--- a/Foundation/CMakeLists.txt
++++ b/Foundation/CMakeLists.txt
+@@ -108,7 +108,7 @@ add_library( "${LIBNAME}" ${LIB_MODE} ${SRCS})
+ add_library( "${POCO_LIBNAME}" ALIAS "${LIBNAME}")
+ set_target_properties( "${LIBNAME}"
+     PROPERTIES
+-    VERSION ${PROJECT_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
++    VERSION ${SHARED_LIBRARY_VERSION} SOVERSION ${SHARED_LIBRARY_VERSION}
+     OUTPUT_NAME ${POCO_LIBNAME}
+     DEFINE_SYMBOL Foundation_EXPORTS
+     )
+-- 
+2.1.4
+
