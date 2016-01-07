@@ -9,8 +9,8 @@ RDEPENDS_${PN} += "perl"
 
 SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "3d0a932ea650c0fa0da1e45547afdbb8"
-SRC_URI[sha256sum] = "2aef568b1955f5e233f6a8e17ebce3d30755f1be44c813f5a48e621f785596e3"
+SRC_URI[md5sum] = "2c39ae0be771f91bf5b0205beafddca6"
+SRC_URI[sha256sum] = "9a25b87b1ef0c08fa3d796edce07b4408e6a8acece23de2eb7ee9285b78852b5"
 
 inherit autotools
 
