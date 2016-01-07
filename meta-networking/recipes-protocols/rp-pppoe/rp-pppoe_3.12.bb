@@ -19,8 +19,8 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
            file://configure.in-Error-fix.patch \
            file://pppoe-server.service"
 
-SRC_URI[md5sum] = "13b5900c56bd602df6cc526e5e520722"
-SRC_URI[sha256sum] = "86a1a4d92fcea74fa6dd45516c5975933fa978b36fafe71f76ea70b4b4747720"
+SRC_URI[md5sum] = "216eb52b69062b92a64ee37fd71f4b66"
+SRC_URI[sha256sum] = "00794e04031546b0e9b8cf286f2a6d1ccfc4a621b2a3abb2d7ef2a7ab7cc86c2"
 
 inherit autotools-brokensep update-rc.d systemd
 
