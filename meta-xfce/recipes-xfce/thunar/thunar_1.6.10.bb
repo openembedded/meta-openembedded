@@ -30,4 +30,4 @@ FILES_${PN}-dbg += "${libdir}/thunarx-2/.debug/ \
                     ${libdir}/xfce4/panel/plugins/.debug/ \
                     ${libdir}/Thunar/.debug/"
 
-RRECOMMENDS_${PN} = "gvfs gvfsd-trash udisks"
+RRECOMMENDS_${PN} = "gvfs gvfsd-trash"
