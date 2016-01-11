@@ -111,8 +111,12 @@ EXTRA_OECONF += "--enable-fhs \
 LDFLAGS += "-Wl,-z,relro,-z,now"
 
 do_install_append() {
-    rmdir --ignore-fail-on-non-empty "${D}/run/samba"
-    rmdir --ignore-fail-on-non-empty "${D}/run"
+    if [ -d "${D}/run" ]; then
+        if [ -d "${D}/run/samba" ]; then
+            rmdir --ignore-fail-on-non-empty "${D}/run/samba"
+        fi
+        rmdir --ignore-fail-on-non-empty "${D}/run"
+    fi
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_unitdir}/system
