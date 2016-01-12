@@ -5,11 +5,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
-PV = "043+git${SRCREV}"
+PV = "044+git${SRCREV}"
 
-# v043 tag
-SRCREV = "eab03540cd695d940062af5b55c02e8829aaa526"
-SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+# v044 tag
+SRCREV = "1bc3e733f96033a508841e97fe08da7a12851782"
+SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http"
 
 S = "${WORKDIR}/git"
 
