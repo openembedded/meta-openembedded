@@ -7,16 +7,17 @@ BUGTRACKER = "https://github.com/stedolan/jq/issues"
 SECTION = "utils"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=244a1fb9cf472474a062d67069dec653"
+LIC_FILES_CHKSUM = "file://COPYING;md5=29dd0c35d7e391bb8d515eacf7592e00"
 
 DEPENDS = "flex-native bison-native"
 
-SRC_URI = "http://stedolan.github.io/${BPN}/download/source/${BP}.tar.gz \
+SRC_URI = "https://github.com/stedolan/${BPN}/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "e3c75a4f805bb5342c9f4b3603fb248f"
-SRC_URI[sha256sum] = "998c41babeb57b4304e65b4eb73094279b3ab1e63801b6b4bddd487ce009b39d"
+
+SRC_URI[md5sum] = "0933532b086bd8b6a41c1b162b1731f9"
+SRC_URI[sha256sum] = "c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c"
 
 inherit autotools
 
 # Don't build documentation (generation requires ruby)
-EXTRA_OECONF = "--disable-docs"
+EXTRA_OECONF = "--disable-docs --disable-maintainer-mode"
