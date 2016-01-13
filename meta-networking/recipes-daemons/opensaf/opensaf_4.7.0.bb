@@ -16,12 +16,10 @@ inherit autotools useradd systemd pkgconfig
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://install-samples-from-srcdir.patch \
            file://0001-plmcd-error-fix.patch \
-           file://Revert_imma_client_node_replyPending_to_unsigned_char.patch \
-           file://Fix_GCC_5.1.0_compiler_warning.patch \
            "
 
-SRC_URI[md5sum] = "a1ceddb517c0972aa7e899b092d7f464"
-SRC_URI[sha256sum] = "f6ea754a145ae42552f328f96c32f38429ad06478a351b9d0aed812adcecb2b4"
+SRC_URI[md5sum] = "82dd2777a672140e22b8205f10aa55d3"
+SRC_URI[sha256sum] = "da9e138650b835728ad51d99268d3a31419b254c4cb4e87c6ec90bc45266d7d2"
 
 SECTION = "admin"
 LICENSE = "LGPLv2.1"
