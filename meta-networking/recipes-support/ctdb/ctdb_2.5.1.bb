@@ -17,6 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
 SRC_URI = "https://ftp.samba.org/pub/${PN}/${BP}.tar.gz \
            file://01-support-cross-compile-for-linux-os.patch \
            file://02-link-rep_snprintf-for-ltdbtool.patch \
+           file://service-ensure-the-PID-directory-is-created.patch \
           "
 
 SRC_URI[md5sum] = "d0cd91726ff4ca2229e1b21859c94717"
@@ -36,11 +37,12 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/config/ctdb.service ${D}${systemd_unitdir}/system
     sed -i -e 's,/usr/sbin/,${sbindir}/,' ${D}${systemd_unitdir}/system/ctdb.service
+    sed -i -e 's,\([=\ ]\)/run/,\1${localstatedir}/run/,' ${D}${systemd_unitdir}/system/ctdb.service
+
+    rm -r ${D}/${localstatedir}/run
 }
 
 SYSTEMD_SERVICE_${PN} = "ctdb.service"
-
-FILES_${PN} += "/run"
 
 # onnode is a shell script with bashisms and bash #!
 RDEPENDS_${PN} += "bash"
