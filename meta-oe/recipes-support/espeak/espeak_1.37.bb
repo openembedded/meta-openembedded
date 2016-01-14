@@ -40,4 +40,5 @@ do_install() {
     fi
 
     cp -prf ${S}/espeak-data/* ${D}${datadir}/espeak-data
+    chown -R root:root ${D}${datadir}/espeak-data
 }
