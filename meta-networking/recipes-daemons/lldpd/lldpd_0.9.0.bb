@@ -14,7 +14,7 @@ SRC_URI = "\
 SRC_URI[md5sum] = "ed0226129b0c90b3a45c273fe1aba8de"
 SRC_URI[sha256sum] = "300e4a590f7bf21c79d5ff94c2d6a69d0b2c34dbc21e17281496462a04ca80bc"
 
-inherit autotools update-rc.d useradd systemd pkgconfig
+inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system -g lldpd --shell /bin/false lldpd"
@@ -55,15 +55,10 @@ do_install_append() {
     touch ${D}${sysconfdir}/lldpd.conf
 }
 
-PACKAGES =+ "${PN}-bash-completion ${PN}-zsh-completion"
+PACKAGES =+ "${PN}-zsh-completion"
 
 FILES_${PN} += "${libdir}/sysusers.d"
 RDEPENDS_${PN} += "os-release"
-
-FILES_${PN}-bash-completion += "${sysconfdir}/bash_completion.d/ \
-                                ${datadir}/bash-completion/ \
-                                "
-RDEPENDS_${PN}-bash-completion += "bash"
 
 FILES_${PN}-zsh-completion += "${datadir}/zsh/"
 # FIXME: zsh is broken in meta-oe so this cannot be enabled for now
