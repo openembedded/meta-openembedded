@@ -23,6 +23,7 @@ do_install() {
     mv conf/ ${D}${datadir}/logwatch/default.conf
     mv scripts/ ${D}${datadir}/logwatch/scripts
     mv lib ${D}${datadir}/logwatch/lib
+    chown -R root:root ${D}${datadir}/logwatch
 
     install -m 0755 -d ${D}${mandir}/man1
     install -m 0755 -d ${D}${mandir}/man5
