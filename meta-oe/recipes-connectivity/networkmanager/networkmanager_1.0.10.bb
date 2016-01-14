@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
 
 DEPENDS = "libnl dbus dbus-glib libgudev util-linux libndp libnewt"
 
-inherit gnomebase gettext systemd bluetooth
+inherit gnomebase gettext systemd bluetooth bash-completion
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
@@ -61,7 +61,7 @@ PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
 PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
 PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
 
-PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion \
+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests \
   ${PN}-nmtui ${PN}-nmtui-doc \
   ${PN}-adsl \
 "
@@ -101,8 +101,6 @@ FILES_${PN}-dev += " \
 FILES_${PN}-tests = " \
     ${bindir}/nm-online \
 "
-
-FILES_${PN}-bash-completion = "${datadir}/bash-completion"
 
 FILES_${PN}-nmtui = " \
     ${bindir}/nmtui \
