@@ -31,4 +31,5 @@ do_compile_prepend() {
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
+    chown -R root:root ${D}${datadir}/debootstrap
 }
