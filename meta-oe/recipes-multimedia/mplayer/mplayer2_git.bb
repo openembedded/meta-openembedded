@@ -21,6 +21,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "git://repo.or.cz/mplayer.git \
     file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
+    file://0001-demux_ogg-partially-port-libtheora-glue-code-to-Theo.patch \
 "
 
 SRCREV = "2c378c71a4d9b1df382db9aa787b646628b4e3f9"
@@ -153,6 +154,3 @@ do_install() {
     install ${S}/etc/codecs.conf ${D}/usr/etc/mplayer/
     [ -e ${D}/usr/lib ] && rmdir ${D}/usr/lib
 }
-
-# | libmpdemux/demux_ogg.o:demux_ogg.c:function demux_ogg_read_packet: error: undefined reference to '_ilog'
-PNBLACKLIST[mplayer2] ?= "BROKEN, fails to build with gcc-5"
