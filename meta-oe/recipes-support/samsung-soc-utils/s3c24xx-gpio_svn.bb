@@ -10,6 +10,8 @@ PR = "r2"
 SRC_URI = "svn://svn.openmoko.org/trunk/src/target;module=gpio;protocol=http"
 S = "${WORKDIR}/gpio"
 
+CLEANBROKEN = "1"
+
 do_compile() {
     ${CC} ${CFLAGS} ${LDFLAGS} -static -o ${PN} gpio.c
 }
