@@ -8,7 +8,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
 S = "${WORKDIR}/LVM2.${PV}"
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://lvm.conf \
-          "
+           file://0001-implement-libc-specific-_reopen_stream.patch \
+           file://0002-use-PTHREAD_MUTEX_RECURSIVE-instead-of-PTHREAD_MUTEX.patch \
+           file://0003-Guard-use-of-mallinfo-with-__GLIBC__.patch \
+           file://0004-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
+           "
 
 PACKAGECONFIG ??= "readline"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
