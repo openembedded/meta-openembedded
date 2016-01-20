@@ -8,7 +8,7 @@ RDEPENDS_${PN} = "perl"
 
 inherit autotools-brokensep ptest
 
-LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=00b9fb4504ff2afcb7fb2a518780f412"
+LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=5644cc3851cb2499f6c48e52fe198bd9"
 
 SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
 	   file://fix-null-pointer.patch \
@@ -17,8 +17,8 @@ SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
 	   file://run-ptest \
 	   file://0001-define-run-test-target.patch \
           "
-SRC_URI[md5sum] = "682c38305b2596967881f3d77bc3fc9c"
-SRC_URI[sha256sum] = "dbdac8fe74f13b2e2864bba352f1597ab1d3345c8c485d7805f58d66f414db61"
+SRC_URI[md5sum] = "d3bc88b7ddb9f06d60898f4816ae9127"
+SRC_URI[sha256sum] = "450c091235f891ee874a8651b179c30f57a1391ca5c4673354740ba65e527861"
 
 # ARM does not currently support NUMA
 COMPATIBLE_HOST = "^((?!arm).*)$"
