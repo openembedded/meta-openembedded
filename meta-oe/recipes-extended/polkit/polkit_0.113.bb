@@ -19,6 +19,7 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
 
 PAM_SRC_URI = "file://polkit-1_pam.patch"
 SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+           file://0001-make-netgroup-support-configurable.patch \
            ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
 "
 SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
