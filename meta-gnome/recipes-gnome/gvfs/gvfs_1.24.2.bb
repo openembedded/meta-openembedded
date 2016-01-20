@@ -15,6 +15,7 @@ SRC_URI += " \
 EXTRA_OECONF = " \
     --disable-gdu \
     --enable-udisks2 \
+    --disable-documentation \
     --with-archive-includes=${STAGING_INCDIR} \
     --with-archive-libs=${STAGING_LIBDIR} \
 "
