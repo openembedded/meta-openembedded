@@ -147,6 +147,8 @@ PACKAGES += "${PN}-overlay-proxycache"
 # it was disabled for cross-compiling.
 CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\'"
 
+LDFLAGS += "-pthread"
+
 do_configure() {
     cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
     rm -f ${S}/libtool
@@ -165,7 +167,7 @@ LEAD_SONAME = "libldap-${LDAP_VER}.so.*"
 PACKAGES += "${PN}-slapd ${PN}-slurpd ${PN}-bin"
 
 # Package contents - shift most standard contents to -bin
-FILES_${PN} = "${libdir}/lib*.so.* ${sysconfdir}/openldap/ldap.* ${localstatedir}/openldap-data"
+FILES_${PN} = "${libdir}/lib*.so.* ${sysconfdir}/openldap/ldap.* ${localstatedir}/${BPN}/data"
 FILES_${PN}-slapd = "${sysconfdir}/init.d ${libexecdir}/slapd ${sbindir} ${localstatedir}/run ${localstatedir}/volatile/run \
     ${sysconfdir}/openldap/slapd.* ${sysconfdir}/openldap/schema \
     ${sysconfdir}/openldap/DB_CONFIG.example ${systemd_unitdir}/system/*"
@@ -194,6 +196,18 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system/
     install -m 0644 ${WORKDIR}/slapd.service ${D}${systemd_unitdir}/system/
     sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/*.service
+
+    # Uses mdm as the database
+    #  and localstatedir as data directory ...
+    sed -e 's/# modulepath/modulepath/' \
+        -e 's/# moduleload\s*back_bdb.*/moduleload    back_mdb/' \
+        -e 's/database\s*bdb/database        mdb/' \
+        -e 's%^directory\s*.*%directory   ${localstatedir}/${BPN}/data/%' \
+        -i ${D}${sysconfdir}/openldap/slapd.conf
+
+    mkdir -p ${D}${localstatedir}/${BPN}/data
+
+
 }
 
 INITSCRIPT_PACKAGES = "${PN}-slapd"
@@ -205,8 +219,20 @@ SYSTEMD_AUTO_ENABLE_${PN}-slapd ?= "disable"
 
 PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
 
+# The modules require their .so to be dynamicaly loaded
+INSANE_SKIP_${PN}-backend-dnssrv  += "dev-so"
+INSANE_SKIP_${PN}-backend-ldap    += "dev-so"
+INSANE_SKIP_${PN}-backend-meta    += "dev-so"
+INSANE_SKIP_${PN}-backend-mdb     += "dev-so"
+INSANE_SKIP_${PN}-backend-monitor += "dev-so"
+INSANE_SKIP_${PN}-backend-null    += "dev-so"
+INSANE_SKIP_${PN}-backend-passwd  += "dev-so"
+INSANE_SKIP_${PN}-backend-shell   += "dev-so"
+
+
 python populate_packages_prepend () {
     backend_dir    = d.expand('${libexecdir}/openldap')
+    do_split_packages(d, backend_dir, 'back_([a-z]*)\.so$', 'openldap-backend-%s', 'OpenLDAP %s backend', prepend=True, extra_depends='', allow_links=True)
     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 
     metapkg = "${PN}-backends"
