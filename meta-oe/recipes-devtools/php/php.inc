@@ -166,7 +166,9 @@ do_install_append_class-target() {
 
     TMP=`dirname ${D}/${TMPDIR}`
     while test ${TMP} != ${D}; do
-        rmdir ${TMP}
+        if [ -d ${TMP} ]; then
+            rmdir ${TMP}
+        fi
         TMP=`dirname ${TMP}`;
     done
 
