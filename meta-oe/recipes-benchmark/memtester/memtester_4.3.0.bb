@@ -5,11 +5,11 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-SRC_URI = "http://pyropus.ca/software/memtester/old-versions/memtester-${PV}.tar.gz"
+SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz"
 SRC_URI += "file://Makefile.patch"
 
-SRC_URI[md5sum] = "e562451620cf5343016950462bc0dc38"
-SRC_URI[sha256sum] = "ac56f0b6d6d6e58bcf2a3fa7f2c9b29894f5177871f21115a1906c535106acf6"
+SRC_URI[md5sum] = "598f41b7308e1f736164bca3ab84ddbe"
+SRC_URI[sha256sum] = "f9dfe2fd737c38fad6535bbab327da9a21f7ce4ea6f18c7b3339adef6bf5fd88"
 
 do_compile () {
     echo '${CC} ${CFLAGS} -DPOSIX -c' > conf-cc
