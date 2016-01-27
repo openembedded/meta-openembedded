@@ -7,14 +7,15 @@ HOMEPAGE = "http://live.gnome.org/Rygel"
 
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-                    file://src/rygel/rygel-main.vala;endline=25;md5=a4cce4d389da1c1638fe68d07ae9d811"
+                    file://src/rygel/rygel-main.vala;endline=27;md5=99324118da4c012d25edae2f779ae9b3"
 
-DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0"
+DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3"
 RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
+RRECOMMENDS_${PN} = "rygel-plugin-media-export"
 
 GNOME_COMPRESS_TYPE = "xz"
-SRC_URI[archive.md5sum] = "f182d54913a528bb5b4fb2f291aca0fc"
-SRC_URI[archive.sha256sum] = "390740609e34399b886ddb9a8f7eca25055ad72048dfdd869edf02999b1e1d8f"
+SRC_URI[archive.md5sum] = "9fbe4fb53b6cfa2f3f3723b7649a2215"
+SRC_URI[archive.sha256sum] = "9ea23df7186caac5f1aad3137edf6d507d339b9a469fc3133df4043fa66b61f5"
 
 inherit gnomebase vala
 
@@ -25,7 +26,7 @@ PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
 PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
 PACKAGECONFIG[mediathek] = "--enable-mediathek-plugin,--disable-mediathek-plugin"
 PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
-PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin,sqlite3"
+PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin"
 PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
 PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
 
