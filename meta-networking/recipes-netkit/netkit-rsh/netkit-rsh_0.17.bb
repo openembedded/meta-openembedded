@@ -4,7 +4,7 @@ HOMEPAGE="ftp://ftp.uk.linux.org/pub/linux/Networking/netkit"
 LICENSE = "BSD-4-Clause"
 DEPENDS = "xinetd libgcrypt"
 
-LIC_FILES_CHKSUM = "file://rsh/rsh.c;beginline=2;endline=3;md5=25737e9d21d9df251dd26b7dcbd8ee29"
+LIC_FILES_CHKSUM = "file://rsh/rsh.c;endline=32;md5=487b3c637bdc181d32b2a8543d41b606"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}.orig.tar.gz;name=archive \
             ${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}-15.diff.gz;name=patch15 \
@@ -13,12 +13,20 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}.orig.tar.gz;name=
             file://rexec.xinetd.netkit \
             file://rlogin.xinetd.netkit \
             file://rsh.xinetd.netkit \
+            file://netkit-rsh-0.17-rexec-ipv6.patch \
+            file://fix-host-variable.patch \
 "
 
 SRC_URI[archive.md5sum] = "65f5f28e2fe22d9ad8b17bb9a10df096"
 SRC_URI[archive.sha256sum] = "edcac7fa18015f0bc04e573f3f54ae3b638d71335df1ad7dae692779914ad669"
 SRC_URI[patch15.md5sum] = "655efc0d541b03ca5de0ae506c805ea3"
 SRC_URI[patch15.sha256sum] = "2bc071c438e8b0ed42a0bd2db2d8b681b27a1e9b1798694d9874733293bc2aa9"
+
+# Other support files
+PAM_SRC_URI = "file://rexec.pam \
+	file://rlogin.pam \
+	file://rsh.pam"
+SRC_URI += "${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)}"
 
 inherit pkgconfig
 
@@ -30,7 +38,7 @@ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam", "", d)}
 PACKAGECONFIG[pam] = " , --without-pam, libpam, libpam"
 
 do_configure () {
-    ./configure --prefix=${prefix}
+    ./configure --prefix=${prefix} --exec-prefix=${exec_prefix}
     echo "INSTALLROOT=${D}" > MCONFIG
 
     if [ "${@base_contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
@@ -58,9 +66,9 @@ do_install () {
     if [ "${@base_contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
         install -d ${D}${sysconfdir}/pam.d
         install -m 0644 debian/hosts.equiv ${D}/${sysconfdir}
-        install -m 0644 debian/pam.d/rexec ${D}/${sysconfdir}/pam.d
-        install -m 0644 debian/pam.d/rlogin ${D}/${sysconfdir}/pam.d
-        install -m 0644 debian/pam.d/rsh ${D}/${sysconfdir}/pam.d
+        install -m 0644 ${WORKDIR}/rexec.pam ${D}/${sysconfdir}/pam.d/rexec
+        install -m 0644 ${WORKDIR}/rlogin.pam ${D}/${sysconfdir}/pam.d/rlogin
+        install -m 0664 ${WORKDIR}/rsh.pam ${D}/${sysconfdir}/pam.d/rsh
     fi
     cp ${WORKDIR}/rexec.xinetd.netkit  ${D}/${sysconfdir}/xinetd.d/rexec
     cp ${WORKDIR}/rlogin.xinetd.netkit  ${D}/${sysconfdir}/xinetd.d/rlogin
@@ -85,7 +93,8 @@ ALTERNATIVE_TARGET[rexecd] = "${sbindir}/in.rexecd"
 ALTERNATIVE_LINK_NAME[rlogind] = "${bindir}/rlogind"
 ALTERNATIVE_TARGET[rlogind] = "${sbindir}/in.rlogind"
 
-RCONFLICTS_${PN}-client += "inetutils-rshd"
-RPROVIDES_${PN}-rshd = "rshd"
+RCONFLICTS_${PN}-server += "inetutils-rshd"
+RPROVIDES_${PN}-server = "rshd"
 
-RDEPENDS_${PN} = "xinetd"
+RDEPENDS_${PN}-server = "xinetd"
+RDEPENDS_${PN}-server += "tcp-wrappers"

@@ -15,7 +15,7 @@ service shell
 	group		= root
 	log_on_success	+= USERID
 	log_on_failure	+= USERID
-	server		= /usr/bin/tcpd
+	server		= /usr/sbin/tcpd
 	server_args	= /usr/sbin/in.rshd -aL
 	disable		= yes
 }
