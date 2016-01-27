@@ -125,9 +125,7 @@ do_install_append() {
         for i in nmb smb winbind; do
             install -m 0644 packaging/systemd/$i.service ${D}${systemd_unitdir}/system
         done
-        sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
-            -e 's,@SBINDIR@,${sbindir},g' \
-            -i ${D}${systemd_unitdir}/system/*.service
+        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_unitdir}/system/*.service
 
 	install -d ${D}${sysconfdir}/tmpfiles.d
         install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
