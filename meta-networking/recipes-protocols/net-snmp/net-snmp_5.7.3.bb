@@ -28,7 +28,7 @@ SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafe
 
 inherit autotools update-rc.d siteinfo systemd pkgconfig
 
-EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
+EXTRA_OEMAKE = "INSTALL_PREFIX=${D} OTHERLDFLAGS='${LDFLAGS}' HOST_CPPFLAGS='${BUILD_CPPFLAGS}'"
 
 PARALLEL_MAKE = ""
 CCACHE = ""
@@ -37,12 +37,13 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
+PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
 
 EXTRA_OECONF = "--disable-embedded-perl \
                 --with-perl-modules=no \
-                --enable-shared \
                 --disable-manuals \
                 --with-defaults \
+                --with-install-prefix=${D} \
                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
 
@@ -52,10 +53,15 @@ EXTRA_OECONF += "--with-mib-modules=smux"
 CACHED_CONFIGUREVARS = " \
     ac_cv_header_valgrind_valgrind_h=no \
     ac_cv_header_valgrind_memcheck_h=no \
+    ac_cv_ETC_MNTTAB=/etc/mtab \
+    lt_cv_shlibpath_overrides_runpath=yes \
 "
 
 do_configure_prepend() {
     export PERLPROG="${bindir}/env perl"
+    sed -i -e "s|I/usr/include|I${STAGING_INCDIR}|g" \
+        "${S}"/configure \
+        "${S}"/configure.d/config_os_libs2
 }
 
 do_install_append() {
