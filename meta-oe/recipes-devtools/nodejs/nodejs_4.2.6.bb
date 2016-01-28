@@ -9,11 +9,11 @@ COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
 COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
 COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 
-SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
     file://no-registry.patch \
 "
-SRC_URI[md5sum] = "86e4d0d8b626f6e60ca7bef02f2543d2"
-SRC_URI[sha256sum] = "4ee244ffede7328d9fa24c3024787e71225b7abaac49fe2b30e68b27460c10ec"
+SRC_URI[md5sum] = "edd0c12a6417a96f04ca735c468e624f"
+SRC_URI[sha256sum] = "dcb935647f9e32fc90db52d393f00c9868ba9d84c5ebe5ddd766e225deb52c40"
 
 S = "${WORKDIR}/node-v${PV}"
 
