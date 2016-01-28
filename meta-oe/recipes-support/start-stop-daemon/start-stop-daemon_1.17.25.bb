@@ -1,27 +1,26 @@
 SUMMARY = "Debian's start-stop-daemon utility extracted from the dpkg \
 package"
 LICENSE = "PD"
-LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aaa7a370ce4"
+LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;endline=21;md5=8fbd0497a7d0b01e99820bffcb58e9ad"
 # start-stop-daemon is usually shipped by dpkg
 DEPENDS = "ncurses"
 RCONFLICTS_${PN} = "dpkg"
 
-PNBLACKLIST[start-stop-daemon] ?= "BROKEN: fails because of gettext, partial fix is available here http://patchwork.openembedded.org/patch/89867/"
+SRC_URI = " \
+    ${DEBIAN_MIRROR}/main/d/dpkg/dpkg_${PV}.tar.xz \
+    file://0001-dpkg-start-stop-daemon-Accept-SIG-prefixed-signal-na.patch \
+"
 
-SRC_URI = "http://sources.openembedded.org/dpkg_${PV}.tar.bz2"
-SRC_URI[md5sum] = "d211a84f38987771a49ad1c0f144334a"
-SRC_URI[sha256sum] = "2a3d4ba83c743b3f004533fdd52372cb7b22f5c1da2042d0a31bbcc2b54c0ea5"
+SRC_URI[md5sum] = "e48fcfdb2162e77d72c2a83432d537ca"
+SRC_URI[sha256sum] = "07019d38ae98fb107c79dbb3690cfadff877f153b8c4970e3a30d2e59aa66baa"
 
 inherit autotools gettext pkgconfig
 
 S = "${WORKDIR}/dpkg-${PV}"
 
 EXTRA_OECONF = " \
-    --with-start-stop-daemon \
     --without-bz2 \
-    --without-install-info \
     --without-selinux \
-    --without-update-alternatives \
 "
 
 do_install_append () {
@@ -29,4 +28,9 @@ do_install_append () {
     # is no explicit rule for only installing ssd
     find ${D} -type f -not -name "*start-stop-daemon*" -exec rm {} \;
     find ${D} -depth -type d -empty -exec rmdir {} \;
+
+    # support for buggy init.d scripts that refer to an alternative
+    # explicit path to start-stop-daemon
+    mkdir -p ${D}/sbin/
+    ln -sf /usr/sbin/start-stop-daemon ${D}/sbin/start-stop-daemon
 }
