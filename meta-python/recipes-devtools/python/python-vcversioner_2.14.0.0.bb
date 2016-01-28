@@ -1,5 +1,5 @@
-DESCRIPTION = "Twisted Web Sockets"
-HOMEPAGE = "https://github.com/MostAwesomeDude/txWS"
+DESCRIPTION = "Python vcversioner"
+HOMEPAGE = "https://github.com/habnabit/vcversioner"
 
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://PKG-INFO;md5=260625d695c5e0c9dd2c2ef898833c7d"
