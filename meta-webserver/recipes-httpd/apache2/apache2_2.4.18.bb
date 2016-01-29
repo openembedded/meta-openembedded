@@ -59,6 +59,7 @@ EXTRA_OECONF = "--enable-ssl \
 
 PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
+PACKAGECONFIG[openldap] = "--enable-ldap --enable-authnz-ldap,--disable-ldap --disable-authnz-ldap,openldap"
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
