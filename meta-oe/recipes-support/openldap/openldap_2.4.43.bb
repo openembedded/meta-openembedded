@@ -248,3 +248,5 @@ python populate_packages_prepend () {
     packages.append(metapkg)
     d.setVar('PACKAGES', ' '.join(packages))
 }
+
+BBCLASSEXTEND = "native"
