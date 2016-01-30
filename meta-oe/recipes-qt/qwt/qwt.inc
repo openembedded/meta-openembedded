@@ -31,6 +31,7 @@ do_install() {
     done
     install -d ${D}${libdir}/${QT_DIR_NAME}
     mv ${D}${prefix}/plugins ${D}${libdir}/${QT_DIR_NAME}
+    chown -R root:root ${D}${bindir}
 }
 
 PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
