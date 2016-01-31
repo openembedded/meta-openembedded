@@ -3,44 +3,54 @@ LICENSE = "AGPL-3.0 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788 \
                     file://APACHE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-DEPENDS = "openssl libpcre boost libpcap"
-# Mongo uses tcmalloc on x86_64, which is provided by gperftools
-DEPENDS_append_x86-64 = " gperftools"
+DEPENDS = "openssl libpcre libpcap zlib"
 
 inherit scons
 
-# Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
-# | Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
-# | scons: *** [build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod] Error 1
-# | scons: building terminated because of errors.
-# | ERROR: scons build execution failed.
-PNBLACKLIST[mongodb] ?= "Fails to build with system boost"
-
-PV = "2.6.0+git${SRCPV}"
-SRCREV = "be1905c24c7e5ea258e537fbf0d2c502c4fc6de2"
-SRC_URI = "git://github.com/mongodb/mongo.git;branch=v2.6 \
-           file://0001-Make-it-possible-to-disable-the-use-of-v8.patch \
-           file://0002-Fix-linking-when-scripting-is-disabled.patch \
-           file://0003-Do-not-build-mongo-binary-when-scripting-is-disabled.patch \
-           file://0004-replace-os.uname-with-os.getenv-OE_TARGET_ARCH.patch \
-           file://0005-GCC-4.7-supports-atomic-ops-for-armv5-and-up-but-onl.patch \
-          "
+PV = "3.3.0+git${SRCPV}"
+SRCREV = "aacd231be0626a204cb40908afdf62c4b67bb0ad"
+SRC_URI = "git://github.com/mongodb/mongo.git;branch=master \
+           file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
+           "
 
 S = "${WORKDIR}/git"
 
-export OE_TARGET_ARCH="${TARGET_ARCH}"
+# Wiredtiger supports only 64-bit platforms
+PACKAGECONFIG_x86-64 ??= "tcmalloc wiredtiger"
+PACKAGECONFIG_aarch64 ??= "tcmalloc wiredtiger"
+PACKAGECONFIG ??= "tcmalloc"
+# gperftools compilation fails for arm below v7 because of missing support of
+# dmb operation. So we use system-allocator instead of tcmalloc
+PACKAGECONFIG_remove_armv6 = "tcmalloc"
+
+#std::current_exception is undefined for arm < v6
+COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
+COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+
+PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
+PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
 
 EXTRA_OESCONS = "--prefix=${D}${prefix} \
-                 --propagate-shell-environment \
-                 --cc-use-shell-environment \
-                 --cxx-use-shell-environment \
-                 --ld='${TARGET_PREFIX}g++' \
+                 LIBPATH=${STAGING_LIBDIR} \
+                 LINKFLAGS='${LDFLAGS}' \
+                 CXXFLAGS='${CXXFLAGS}' \
+                 TARGET_ARCH=${TARGET_ARCH} \
                  --ssl \
-                 --use-system-pcre \ 
-                 --use-system-boost \
-                 --use-system-tcmalloc \
-                 --disable-scripting \
+                 --disable-warnings-as-errors \
+                 --use-system-pcre \
+                 --use-system-zlib \
+                 --js-engine=none \
                  --nostrip \
+                 ${EXTRA_OECONF} \
                  mongod mongos"
 
+scons_do_compile() {
+        ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
+        die "scons build execution failed."
+}
 
+scons_do_install() {
+        ${STAGING_BINDIR_NATIVE}/scons install ${EXTRA_OESCONS}|| \
+        die "scons install execution failed."
+}
