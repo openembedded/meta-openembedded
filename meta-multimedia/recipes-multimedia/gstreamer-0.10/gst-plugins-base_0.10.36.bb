@@ -38,3 +38,6 @@ do_configure_prepend() {
 FILES_${PN} += "${datadir}/${BPN}"
 
 CACHED_CONFIGUREVARS_append_x86 = " ac_cv_header_emmintrin_h=no ac_cv_header_xmmintrin_h=no"
+
+# /usr/bin/gst-visualise-0.10 is a perl script.
+RDEPENDS_${PN}-apps += "perl"
