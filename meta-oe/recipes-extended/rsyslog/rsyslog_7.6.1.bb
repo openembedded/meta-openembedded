@@ -17,9 +17,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
                     file://COPYING.ASL20;md5=052f8a09206615ab07326ff8ce2d9d32\
 "
 
-# http://errors.yoctoproject.org/Errors/Details/25829/
-PNBLACKLIST[rsyslog] ?= "Not compatible with gnutls version 3.4 currently in oe-core"
-
 SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.tar.gz \
            file://initscript \
            file://rsyslog.conf \
@@ -28,6 +25,8 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
            file://json-0.12-fix.patch \
+           file://replace_deprecated_GnuTLS_functions.patch \
+           file://use_gnutls_certificate_type_set_priority_only_if_available.patch \
 "
 
 SRC_URI[md5sum] = "093c462a5245012bd9e7b82dd8aedffb"
