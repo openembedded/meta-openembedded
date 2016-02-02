@@ -10,7 +10,7 @@ SRC_URI[md5sum] = "0d7f0e6390d132ae59876b3870e5783d"
 SRC_URI[sha256sum] = "a60dbb574334c081425fa30f011cd9f571e3be7a91e2a84e252461798bce24a7"
 
 PACKAGECONFIG ?= ""
-PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig"
+PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
 
 EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
                  --x-libraries=${STAGING_LIBDIR} \
