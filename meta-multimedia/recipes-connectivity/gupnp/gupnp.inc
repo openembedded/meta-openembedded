@@ -13,7 +13,7 @@ inherit autotools pkgconfig
 FILES_${PN} = "${libdir}/*.so.*"
 FILES_${PN}-dev += "${bindir}/gupnp-binding-tool"
 
-RRECOMMENDS_${PN}-dev = "python"
+RDEPENDS_${PN}-dev = "python-textutils python-xml"
 
 SYSROOT_PREPROCESS_FUNCS += "gupnp_sysroot_preprocess"
 
