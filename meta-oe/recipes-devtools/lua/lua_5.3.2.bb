@@ -7,14 +7,20 @@ HOMEPAGE = "http://www.lua.org/"
 PR = "r0"
 
 DEPENDS = "readline"
-SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
+SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
            file://lua.pc \
-"
+           "
+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
+           'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
+            file://run-ptest \
+           ', '', d)}"
 
-SRC_URI[md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
-SRC_URI[sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
+SRC_URI[tarballsrc.md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
+SRC_URI[tarballsrc.sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
+SRC_URI[tarballtest.md5sum] = "a2b7ab1b8ff82a0145376e233ef30a4a"
+SRC_URI[tarballtest.sha256sum] = "56909863a3713dee3709b3dbd0c868237e4f5c9ea1744f5bf0ba8bafa6c4ed32"
 
-inherit pkgconfig binconfig
+inherit pkgconfig binconfig ptest
 
 UCLIBC_PATCHES += "file://uclibc-pthread.patch"
 SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
@@ -44,6 +50,10 @@ do_install () {
     install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
     rmdir ${D}${datadir}/lua/5.3
     rmdir ${D}${datadir}/lua
+}
+
+do_install_ptest () {
+        cp -a ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
 }
 
 BBCLASSEXTEND = "native"
