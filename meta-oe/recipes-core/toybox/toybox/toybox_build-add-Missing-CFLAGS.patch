@@ -1,0 +1,28 @@
+From 686492e6b0aa582b42bf95cfc9a31324204d8f79 Mon Sep 17 00:00:00 2001
+From: Alejandro Joya <alejandro.joya.cruz@intel.com>
+Date: Tue, 2 Feb 2016 17:47:50 -0800
+Subject: [PATCH] toybox_build: add Missing CFLAGS
+
+add CFLAGS to multiple builds to forward libraries location in Yocto.
+
+Signed-off-by: Alejandro Joya <alejandro.joya.cruz@intel.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 5422efe..2dca3ae 100644
+--- a/Makefile
++++ b/Makefile
+@@ -37,7 +37,7 @@ bloatcheck: toybox_old toybox_unstripped
+ 
+ generated/instlist: toybox_stuff
+ 	NOBUILD=1 scripts/make.sh
+-	$(HOSTCC) -I . scripts/install.c -o generated/instlist
++	$(HOSTCC) -I . $(CFLAGS) scripts/install.c -o generated/instlist
+ 
+ install_flat: generated/instlist
+ 	scripts/install.sh --symlink --force
+-- 
+1.9.1
+
