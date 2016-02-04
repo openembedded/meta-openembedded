@@ -27,6 +27,9 @@ inherit update-rc.d useradd
 CFLAGS_append = " -fPIE -pie"
 CXXFLAGS_append = " -fPIE -pie"
 
+NGINX_WWWDIR ?= "${localstatedir}/www/localhost"
+NGINX_USER   ?= "www"
+
 EXTRA_OECONF = ""
 
 do_configure () {
@@ -71,9 +74,9 @@ do_install () {
 	fi
 	install -d ${D}${sysconfdir}/${BPN}
 	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-	install -d ${D}${localstatedir}/www/localhost
-	mv ${D}/usr/html ${D}${localstatedir}/www/localhost/
-	chown www:www-data -R ${D}${localstatedir}
+	install -d ${D}${NGINX_WWWDIR}
+	mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
+	chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
 
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
@@ -130,6 +133,6 @@ INITSCRIPT_PARAMS = "defaults 92 20"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = " \
     --system --no-create-home \
-    --home ${localstatedir}/www/localhost \
+    --home ${NGINX_WWWDIR} \
     --groups www-data \
-    --user-group www"
+    --user-group ${NGINX_USER}"
