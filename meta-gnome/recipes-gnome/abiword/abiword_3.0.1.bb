@@ -4,7 +4,8 @@ SECTION = "x11/office"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
 DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
-               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server"
+               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server \
+               ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)}"
 RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 RCONFLICTS_${PN} = "${PN}-embedded"
@@ -24,7 +25,11 @@ SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]
 
 inherit autotools-brokensep pkgconfig
 
-PACKAGECONFIG ??= "collab-backend-xmpp collab-backend-tcp"
+PACKAGECONFIG ??= " \
+    collab-backend-xmpp collab-backend-tcp \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'libical', '', d)} \
+"
+PACKAGECONFIG[libical] = "--with-libical,--without-libical,libical raptor2"
 PACKAGECONFIG[spell] = "--enable-spell,--disable-spell,enchant"
 PACKAGECONFIG[collab-backend-xmpp] = "--enable-collab-backend-xmpp,--disable-collab-backend-xmpp,libgsf libxml2 loudmouth"
 PACKAGECONFIG[collab-backend-tcp] = "--enable-collab-backend-tcp,--disable-collab-backend-tcp,libgsf libxml2"
