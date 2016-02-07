@@ -9,15 +9,15 @@ RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 RCONFLICTS_${PN} = "${PN}-embedded"
 
-SRC_URI = "http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
-           file://debian_patches_boost54.patch \
-           file://autogen-common.sh \
+SRC_URI = " \
+    http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
+    file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
 
-SRC_URI[md5sum] = "8d9c41cff3a8fbef8d0c835c65600e65"
-SRC_URI[sha256sum] = "d17e318c00ff4eb353e0e7994b098b1d4f9ddd8712ac0261a0e38b89081fac01"
+SRC_URI[md5sum] = "f3f8052e7b4979a43b75775a381e6cb8"
+SRC_URI[sha256sum] = "e094f6fbf0afc5c5538b4894888e7c346f8ee8f49c9d24821dd696d0734865c6"
 
 #want 3.x from 3.x.y for the installation directory
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
@@ -40,14 +40,6 @@ EXTRA_OECONF = " --disable-static  \
                  --with-gtk2 \
                  --with-libwmf-config=${STAGING_DIR} \
 "
-
-# AbiWord configure.ac does not play nicely with autoreconf
-# so use the autogen.sh script that comes with AbiWord
-do_configure() {
-    install -m 0755 ${WORKDIR}/autogen-common.sh ${B}/autogen-common.sh
-    ./autogen-common.sh
-    autotools_do_configure
-}
 
 do_compile() {
     cd goffice-bits2
