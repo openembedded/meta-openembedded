@@ -16,6 +16,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
            file://CVE-2015-7803.patch \
            file://CVE-2015-7804.patch \
+           file://CVE-2016-1903.patch \
           "
 
 SRC_URI_append_class-target += " \
