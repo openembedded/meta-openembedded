@@ -11,6 +11,8 @@ SRC_URI[sha256sum] = "3b8f0a1bf0d3642764e5f646e1f3bbc8b1eeec474a77392d9aeb486884
 
 S = "${WORKDIR}/${BPN}"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 # comment out MakeInclude in Makefile which sets build environment
 do_configure_append () {
     sed -i 's/^ include/#^include/' ${S}/Makefile
