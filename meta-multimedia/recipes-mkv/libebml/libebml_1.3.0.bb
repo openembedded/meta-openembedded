@@ -6,6 +6,8 @@ SRC_URI = "http://dl.matroska.org/downloads/libebml/libebml-${PV}.tar.bz2"
 SRC_URI[md5sum] = "efec729bf5a51e649e1d9d1f61c0ae7a"
 SRC_URI[sha256sum] = "83b074d6b62715aa0080406ea84d33df2e44b5d874096640233a4db49b8096de"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_compile() {
     cd ${S}/make/linux
     oe_runmake CROSS="${TARGET_PREFIX}"
