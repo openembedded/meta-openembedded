@@ -18,6 +18,8 @@ export BINDIR = "${bindir}"
 export MANDIR = "${mandir}/man1"
 export INFODIR = "${infodir}"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 # Additional flags. For uclibc we add -DNOARROWKEYS which stops ckermit
 # trying to look inside the stdio headers.
 CKERMIT_ADDITIONAL = ""
