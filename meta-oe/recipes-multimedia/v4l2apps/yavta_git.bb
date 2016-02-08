@@ -10,6 +10,8 @@ PV = "0.0"
 PR = "r2"
 S = "${WORKDIR}/git"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 # The yavta sources include copies of the headers required to build in the
 # include directory.  The Makefile uses CFLAGS to include these, but since
 # we override the CFLAGS then we need to add this include path back in.
