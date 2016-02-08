@@ -27,6 +27,8 @@ LIC_FILES_CHKSUM = "file://rarpd.c;md5=199b20b172ea93121bc613a9c77b6931"
 
 S = "${WORKDIR}/${BPN}"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_install() {
     install -d ${D}${sysconfdir}/init.d
     install -d ${D}${sbindir}
