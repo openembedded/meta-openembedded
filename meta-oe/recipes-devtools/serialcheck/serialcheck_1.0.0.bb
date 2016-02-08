@@ -11,6 +11,8 @@ SRCREV = "63854a2d0c0129efab132ec328a75279e013fb84"
 
 S = "${WORKDIR}/git"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 CFLAGS_prepend = "-Wall -Wextra -Wno-sign-compare -Wno-pointer-sign "
 
 do_install() {
