@@ -8,6 +8,7 @@ DEPENDS = "libgcrypt"
 
 inherit perlnative
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
 CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
 LDFLAGS_append = " -lgcrypt -lgpg-error"
 
