@@ -11,6 +11,8 @@ SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz \
 SRC_URI[md5sum] = "2de35316fa8ebafe6003efaae70b723e"
 SRC_URI[sha256sum] = "1cd37d7e6a3eecc890a5718c38b8f38495057ba93856762a756ccee2f9618229"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_configure () {
     sed -i Makefile.in -e 's,^prefix=.*,prefix=${prefix},'
     ./configure
