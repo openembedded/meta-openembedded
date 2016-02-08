@@ -42,6 +42,8 @@ inherit update-rc.d useradd systemd
 CONFFILES_${PN} = "${sysconfdir}/vsftpd.conf"
 LDFLAGS_append =" -lcrypt -lcap"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_configure() {
     # Fix hardcoded /usr, /etc, /var mess.
     cat tunables.c|sed s:\"/usr:\"${prefix}:g|sed s:\"/var:\"${localstatedir}:g \
