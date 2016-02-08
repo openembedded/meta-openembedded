@@ -9,15 +9,31 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e304cdf74c2a1b0a33a5084c128a23a3"
 
 SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
-SRC_URI[md5sum] = "c5a8cf7c0b066759542bc4ca46817ac6"
-SRC_URI[sha256sum] = "b9727015a58affcf3db527322bf8c4d2fcf39f5f6b8f15dbceca20206cbe1d95"
+SRC_URI[md5sum] = "1f08a661bc72930187893a07f3741a91"
+SRC_URI[sha256sum] = "0e290078e31211baa7b5886bcc8ab6bc048b9fc83882532da4a1a45e58e907fd"
 
 S = "${WORKDIR}/opus-${PV}"
 
 inherit autotools pkgconfig
 
-require libopus-fpu.inc
-EXTRA_OECONF = "${@get_libopus_fpu_setting(bb, d)}"
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[fixed-point] = "--enable-fixed-point,,"
+PACKAGECONFIG[float-approx] = "--enable-float-approx,,"
+
+EXTRA_OECONF = "--with-NE10-includes=${STAGING_DIR_TARGET}${includedir} \
+                --with-NE10-libraries=${STAGING_DIR_TARGET}${libdir} \
+                --enable-asm \
+                --enable-intrinsics \
+               "
+
+python () {
+    if d.getVar('TARGET_FPU', True) in [ 'soft' ]:
+        d.appendVar('PACKAGECONFIG', ' fixed-point')
+
+    # Ne10 is only available for armv7 and aarch64
+    if any((t.startswith('armv7') or t.startswith('aarch64')) for t in d.getVar('TUNE_FEATURES', True).split()):
+        d.appendVar('DEPENDS', ' ne10')
+}
 
 # Fails to build with thumb-1 (qemuarm)
 #| {standard input}: Assembler messages:
