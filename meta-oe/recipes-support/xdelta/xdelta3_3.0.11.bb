@@ -6,13 +6,10 @@ SECTION = "console/utils"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
-
-SRC_URI = "http://xdelta.googlecode.com/files/${BPN}-${PV}.tar.xz \
-           file://compilation-fix.patch \
-           file://with-liblzma-configure-option.patch \
-"
-SRC_URI[md5sum] = "c3ae3286ce4193de8e03d5bcaccf3bc3"
-SRC_URI[sha256sum] = "3a86f29c95664fb44b8a40ff22d9bcc3e87aa8c01f0ff75931a7fa78ed3d2e55"
+SRC_URI = "https://github.com/jmacd/xdelta-devel/releases/download/v${PV}/${BPN}-${PV}.tar.gz  \
+          "
+SRC_URI[md5sum] = "445d8be2ac512113d5ca601ae8359626"
+SRC_URI[sha256sum] = "0ccc9751ceaa4d90d6b06938a4deddb481816f5d9284bd07d2e728609cb300aa"
 
 inherit autotools
 
