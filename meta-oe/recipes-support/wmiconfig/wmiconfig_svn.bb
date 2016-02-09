@@ -11,6 +11,8 @@ S = "${WORKDIR}/AR6kSDK.build_sw.18/host/tools/wmiconfig"
 
 CLEANBROKEN = "1"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install() {
