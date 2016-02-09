@@ -16,6 +16,8 @@ inherit pythonnative
 
 DEPENDS = "glib-2.0 system-config-keyboard-native"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_compile_prepend() {
     ${PYTHON} -v get_layouts.py > keyboards.h
 }
