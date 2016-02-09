@@ -8,6 +8,8 @@ SRC_URI = "http://dl.matroska.org/downloads/${BPN}/${BPN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "f61b2e5086f4bb9d24a43cc8af43a719"
 SRC_URI[sha256sum] = "086f21873e925679babdabf793c3bb85c353d0cd79423543a3355e08e8a4efb7"
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_compile() {
     cd ${S}/make/linux
     oe_runmake CROSS="${TARGET_PREFIX}"
