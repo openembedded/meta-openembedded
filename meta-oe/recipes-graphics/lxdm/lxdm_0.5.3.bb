@@ -3,15 +3,15 @@ HOMEPAGE = "http://blog.lxde.org/?p=531"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SRC_URI = " \
-    git://lxde.git.sourceforge.net/gitroot/lxde/${BPN};branch=master \
+    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}%20${PV}/${BPN}-${PV}.tar.xz \
     file://lxdm.conf \
     ${@base_contains('DISTRO_FEATURES', 'pam', 'file://lxdm-pam file://lxdm-pam-debug', '', d)} \
     ${@base_contains("DISTRO_TYPE", "debug", "", "file://0001-lxdm.conf.in-blacklist-root-for-release-images.patch",d)} \
     file://0002-let-autotools-create-lxdm.conf.patch \
 "
+SRC_URI[md5sum] = "061caae432634e6db38bbdc84bc6ffa0"
+SRC_URI[sha256sum] = "4891efee81c72a400cc6703e40aa76f3f3853833d048b72ec805da0f93567f2f"
 
-SRCREV = "bf90ec7df5ff6745f703500c5792c344fbaef301"
-PV = "0.5.0+git${SRCPV}"
 PE = "1"
 
 DEPENDS = "virtual/libintl intltool-native cairo dbus gdk-pixbuf glib-2.0 gtk+ virtual/libx11 libxcb pango iso-codes"
@@ -23,8 +23,6 @@ DISTRO_TYPE ?= "${@base_contains("IMAGE_FEATURES", "debug-tweaks", "debug", "",d
 inherit autotools pkgconfig gettext systemd distro_features_check
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
-
-S = "${WORKDIR}/git"
 
 CFLAGS_append = " -fno-builtin-fork -fno-builtin-memset -fno-builtin-strstr "
 
