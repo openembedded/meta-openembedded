@@ -8,7 +8,7 @@ PR = "r0"
 
 DEPENDS = "readline"
 SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
-           file://lua.pc \
+           file://lua.pc.in \
            "
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
            'http://www.lua.org/tests/lua-${PV}-tests.tar.gz;name=tarballtest \
@@ -47,6 +47,8 @@ do_install () {
         'INSTALL_CMOD=${D}${libdir}/lua/5.3' \
         install
     install -d ${D}${libdir}/pkgconfig
+
+    sed -e s/@VERSION@/${PV}/ ${WORKDIR}/lua.pc.in > ${WORKDIR}/lua.pc
     install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
     rmdir ${D}${datadir}/lua/5.3
     rmdir ${D}${datadir}/lua
