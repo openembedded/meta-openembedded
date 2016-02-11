@@ -38,6 +38,7 @@ do_configure () {
 
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+INSANE_SKIP_${PN} = "already-stripped"
 INSANE_SKIP_libklibc-dev = "dev-elf"
 KLIBC_ARCH = "${TARGET_ARCH}"
 KLIBC_ARCH_aarch64 = "arm64"
