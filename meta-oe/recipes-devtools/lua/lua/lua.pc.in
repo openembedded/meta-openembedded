@@ -6,6 +6,5 @@ Name: Lua
 Description: Lua language engine
 Version: @VERSION@
 Requires:
-Libs: -L${libdir} -llua
-Libs.private: -lm
+Libs: -L${libdir} -llua -lm -ldl
 Cflags: -I${includedir}
