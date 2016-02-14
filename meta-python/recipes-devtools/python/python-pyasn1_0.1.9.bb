@@ -1,4 +1,4 @@
-DESCRIPTION = "Python library implementing ASN.1 types."
+SUMMARY = "Python library implementing ASN.1 types."
 HOMEPAGE = "http://pyasn1.sourceforge.net/"
 SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"

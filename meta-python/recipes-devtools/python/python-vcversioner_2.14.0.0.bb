@@ -1,4 +1,4 @@
-DESCRIPTION = "Python vcversioner"
+SUMMARY = "Python vcversioner, automagically update the project's version"
 HOMEPAGE = "https://github.com/habnabit/vcversioner"
 
 LICENSE = "ISC"

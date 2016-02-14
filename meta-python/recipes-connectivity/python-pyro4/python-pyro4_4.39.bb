@@ -1,4 +1,4 @@
-DESCRIPTION = "Python Remote Objects"
+SUMMARY = "Python Remote Objects"
 HOMEPAGE = "https://pypi.python.org/pypi/Pyro4/"
 SECTION = "devel/python"
 LICENSE = "MIT"

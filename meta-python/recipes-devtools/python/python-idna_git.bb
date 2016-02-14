@@ -1,4 +1,4 @@
-DESCRIPTION = "Internationalised Domain Names in Applications"
+SUMMARY = "Internationalised Domain Names in Applications"
 HOMEPAGE = "https://github.com/kjd/idna"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause & Python-2.0 & Unicode"

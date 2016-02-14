@@ -1,4 +1,4 @@
-DESCRIPTION = "MessagePack (de)serializer"
+SUMMARY = "MessagePack (de)serializer"
 HOMEPAGE = "https://pypi.python.org/pypi/msgpack-python/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"

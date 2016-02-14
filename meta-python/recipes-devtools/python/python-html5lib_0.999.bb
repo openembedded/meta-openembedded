@@ -1,4 +1,4 @@
-DESCRIPTION = "HTML parser based on the WHATWG HTML specifcation"
+SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
 HOMEPAGE = "https://github.com/html5lib/html5lib-python"
 SECTION = "devel/python"
 LICENSE = "MIT"

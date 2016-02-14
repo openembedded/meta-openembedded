@@ -1,4 +1,4 @@
-DESCRIPTION = "Python 3.3+'s ipaddress for Python 2.6, 2.7, 3.2."
+SUMMARY = "Python 3.3+'s ipaddress for Python 2.6, 2.7, 3.2."
 HOMEPAGE = "https://github.com/phihag/ipaddress"
 SECTION = "devel/python"
 LICENSE = "Python-2.0"

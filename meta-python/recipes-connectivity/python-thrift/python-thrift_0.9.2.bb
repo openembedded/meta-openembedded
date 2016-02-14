@@ -1,4 +1,4 @@
-DESCRIPTION = "Python bindings for the Apache Thrift RPC system"
+SUMMARY = "Python bindings for the Apache Thrift RPC system"
 HOMEPAGE = "https://pypi.python.org/pypi/amqp/"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"

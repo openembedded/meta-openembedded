@@ -1,4 +1,4 @@
-DESCRIPTION = "LDAP client API for Python, C wrapper module around OpenLDAP 2.x with an object-oriented API" 
+SUMMARY = "LDAP client API for Python, C wrapper module around OpenLDAP 2.x with an object-oriented API" 
 SECTION = "devel/python" 
 LICENSE = "Python-style" 
 LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"

@@ -1,4 +1,4 @@
-DESCRIPTION = "Resolve JSON Pointers in Python"
+SUMMARY = "Resolve JSON Pointers in Python"
 HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
 SECTION = "devel/python"
 LICENSE = "BSD"

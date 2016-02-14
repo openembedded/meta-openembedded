@@ -1,4 +1,4 @@
-DESCRIPTION = "A pure Python netlink and Linux network configuration library"
+SUMMARY = "A pure Python netlink and Linux network configuration library"
 LICENSE = "GPLv2 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.Apache.v2;md5=3b83ef96387f14655fc854ddc3c6bd57"

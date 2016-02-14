@@ -1,4 +1,4 @@
-DESCRIPTION = "Twisted Web Sockets"
+SUMMARY = "Twisted Web Sockets"
 HOMEPAGE = "https://github.com/MostAwesomeDude/txWS"
 
 LICENSE = "Apache-2.0"
