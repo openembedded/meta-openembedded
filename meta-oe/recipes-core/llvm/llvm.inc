@@ -116,20 +116,29 @@ llvm_sysroot_preprocess() {
     mv ${LLVM_INSTALL_DIR}/llvm-config-host ${SYSROOT_DESTDIR}${bindir_crossscripts}/llvm-config${PV}
 }
 
+PACKAGES += "${PN}-bugpointpasses ${PN}-llvmhello"
 ALLOW_EMPTY_${PN} = "1"
 ALLOW_EMPTY_${PN}-staticdev = "1"
 FILES_${PN} = ""
 FILES_${PN}-staticdev = ""
-DOTDEBUG-dbg = " ${bindir}/${LLVM_DIR}/.debug \
-                 ${libdir}/${LLVM_DIR}/.debug/BugpointPasses.so \
-                 ${libdir}/${LLVM_DIR}/.debug/LLVMHello.so \
-                 /usr/src/debug \
+DOTDEBUG-dbg = " \
+    ${bindir}/${LLVM_DIR}/.debug \
+    ${libdir}/${LLVM_DIR}/.debug/BugpointPasses.so \
+    ${libdir}/${LLVM_DIR}/.debug/LLVMHello.so \
+    /usr/src/debug \
 "
 
-FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
-                   ${includedir}/${LLVM_DIR} \
-                   ${libdir}/${LLVM_DIR}/BugpointPasses.so \
-                   ${libdir}/${LLVM_DIR}/LLVMHello.so \
+FILES_${PN}-dev = " \
+    ${bindir}/${LLVM_DIR} \
+    ${includedir}/${LLVM_DIR} \
+"
+RRECOMMENDS_${PN}-dev += "${PN}-bugpointpasses ${PN}-llvmhello"
+
+FILES_${PN}-bugpointpasses = "\
+    ${libdir}/${LLVM_DIR}/BugpointPasses.so \
+"
+FILES_${PN}-llvmhello = "\
+    ${libdir}/${LLVM_DIR}/LLVMHello.so \
 "
 
 PACKAGES_DYNAMIC = "^libllvm${LLVM_RELEASE}-.*$"
