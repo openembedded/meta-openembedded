@@ -5,10 +5,8 @@ SECTION = "libs/multimedia"
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=fad9b3332be894bab9bc501572864b29"
 
-DEPENDS = "glib-2.0"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/libmms/libmms/${PV}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "9f63aa363deb4874e072a45850161bff"
-SRC_URI[sha256sum] = "01931b62172d7d7050fc9ef9b1b64162f3b6e9f6cc4415170192a32a0b7ea432"
+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz"
+SRC_URI[md5sum] = "d6b665b335a6360e000976e770da7691"
+SRC_URI[sha256sum] = "3c05e05aebcbfcc044d9e8c2d4646cd8359be39a3f0ba8ce4e72a9094bee704f"
 
 inherit autotools pkgconfig
