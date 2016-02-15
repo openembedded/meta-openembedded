@@ -19,8 +19,8 @@ SRC_URI = " \
 	file://nginx-volatile.conf \
 	file://nginx.service \
 "
-SRC_URI[md5sum] = "64cc970988356a5e0fc4fcd1ab84fe57"
-SRC_URI[sha256sum] = "fb14d76844cab0a5a0880768be28965e74f9956790f618c454ef6098e26631d9"
+SRC_URI[md5sum] = "76eb5853a1190e0cfc691aa21c545de3"
+SRC_URI[sha256sum] = "6a5c72f4afaf57a6db064bba0965d72335f127481c5d4e64ee8714e7b368a51f"
 
 inherit update-rc.d useradd
 
