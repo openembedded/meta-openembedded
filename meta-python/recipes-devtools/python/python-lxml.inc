@@ -15,16 +15,11 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
                     file://src/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/iso_schematron_message.xsl;startline=2;endline=24;md5=96976dcc66249c51e8026b159ca5e755 \
                     file://src/lxml/isoschematron/resources/xsl/RNG2Schtrn.xsl;startline=2;endline=7;md5=5cac4ad4b5e131a10e9af755b10fbbb7 \
                     "
-SRCNAME = "lxml"
 
 DEPENDS += "libxml2 libxslt"
 
-SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-
 SRC_URI[md5sum] = "9f0c5f1eb43ff44d5455dab4b4efbe73"
 SRC_URI[sha256sum] = "349f93e3a4b09cc59418854ab8013d027d246757c51744bf20069bc89016f578"
-
-S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 DISTUTILS_BUILD_ARGS += " \
                      --with-xslt-config='pkg-config libxslt' \
@@ -35,6 +30,8 @@ DISTUTILS_INSTALL_ARGS += " \
                      --with-xslt-config='pkg-config libxslt' \
                      --with-xml2-config='pkg-config libxml-2.0' \
 "
+
+inherit pypi
 
 do_configure_prepend() {
     sed -i -e 's/--version/--modversion/' ${B}/setupinfo.py

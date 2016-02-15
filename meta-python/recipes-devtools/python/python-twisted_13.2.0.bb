@@ -2,19 +2,17 @@ DESCRIPTION = "Twisted is an event-driven networking framework written in Python
 Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of protocols                   \
 (including HTTP, NNTP, IMAP, SSH, IRC, FTP, and others), and much more."
 HOMEPAGE = "http://www.twistedmatrix.com"
-SECTION = "console/network"
 
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5602d7228daf59a16f0f1b2640c46bca"
 
-SRC_URI = "https://pypi.python.org/packages/source/T/Twisted/Twisted-${PV}.tar.bz2"
 SRC_URI[md5sum] = "83fe6c0c911cc1602dbffb036be0ba79"
 SRC_URI[sha256sum] = "095175638c019ac7c0604f4c291724a16ff1acd062e181b01293bf4dcbc62cf3"
 
-S = "${WORKDIR}/Twisted-${PV}"
-
-inherit setuptools
+PYPI_PACKAGE = "Twisted"
+PYPI_PACKAGE_EXT = "tar.bz2"
+inherit pypi setuptools
 
 do_install_append() {
     # remove some useless files before packaging

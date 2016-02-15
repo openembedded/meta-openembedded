@@ -7,14 +7,12 @@ DESCRIPTION = "This module provides access to the LDAP \
 instead of C API. The module mainly acts as a wrapper for the \
 OpenLDAP 2.x libraries. Errors will appear as exceptions."
 
-SECTION = "devel/python"
 LICENSE = "PSF"
 HOMEPAGE = "http://www.python-ldap.org/"
 DEPENDS = "python openldap cyrus-sasl"
 
-SRC_URI = "http://pypi.python.org/packages/source/p/${PN}/${BPN}-${PV}.tar.gz"
-
-inherit setuptools
+PYPI_PACKAGE = "python-ldap"
+inherit pypi setuptools  
 
 LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
 SRC_URI[md5sum] = "a15827ca13c90e9101e5e9405c1d83be"

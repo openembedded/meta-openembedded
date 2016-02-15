@@ -4,14 +4,10 @@ HOMEPAGE = "https://github.com/habnabit/vcversioner"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://PKG-INFO;md5=260625d695c5e0c9dd2c2ef898833c7d"
 
-SRC_URI = "https://pypi.python.org/packages/source/v/vcversioner/vcversioner-${PV}.tar.gz"
 SRC_URI[md5sum] = "7848a365ced9941053bc25d9a9f8f4b4"
 SRC_URI[sha256sum] = "acd43686e92e6c8bbeb4f2eef54408567a7adea9692fa72d591eec5357c03b86"
 
-S = "${WORKDIR}/vcversioner-${PV}"
-
-inherit setuptools
-
+inherit pypi setuptools
 
 do_compile_append() {
     export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS}

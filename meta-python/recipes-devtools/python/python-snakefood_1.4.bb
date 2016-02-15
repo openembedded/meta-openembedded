@@ -35,18 +35,13 @@ given the trade-offs, 99% is good enough for 99% of the uses.\
 "
 AUTHOR = "Martin Blais <blais@furius.ca>"
 HOMEPAGE = "http://furius.ca/snakefood"
-SECTION = "devel/python"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-SRCNAME = "snakefood"
 
-SRC_URI = "https://pypi.python.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 SRC_URI[md5sum] = "56c88667a33d8909b0aabf2ab6903bdf"
 SRC_URI[sha256sum] = "295784668032254e7391ca99ba7060edd3ae4eca1a330ac11627b18ab5923b77"
 
-S = "${WORKDIR}/${SRCNAME}-${PV}"
-
-inherit setuptools
+inherit pypi setuptools
 
 RDEPENDS_${PN} = " python-logging python-compiler python-shell"
 # the above modules do not have a -native counterpart
