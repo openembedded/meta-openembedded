@@ -7,4 +7,4 @@ SRC_URI[sha256sum] = "91dc842785417208d57e5e8dc8bb40f57316c45da24a50c53b49cb8d04
 
 RDEPENDS_${PN} = "python-py"
 
-inherit pypi
+inherit pypi setuptools

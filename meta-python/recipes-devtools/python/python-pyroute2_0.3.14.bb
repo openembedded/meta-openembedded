@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "aed742a7dbe55eb7f02dbb26719f554b9e92198c4b3c7ac501ad03bbb6
 
 SRC_URI += "file://import-simplejson-as-json.patch"
 
-inherit pypi
+inherit pypi setuptools
 
 RDEPENDS_${PN} += "\
   python-distutils \

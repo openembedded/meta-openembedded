@@ -1,2 +1,2 @@
-inherit pypi
+inherit pypi setuptools
 require python-xlrd.inc

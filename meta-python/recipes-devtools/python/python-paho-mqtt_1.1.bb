@@ -3,7 +3,7 @@ LICENSE = "EPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eb48c6ee2cb9f5b8b9fe75e6f817bdfc"
 SRCNAME = "paho-mqtt"
 
-inherit pypi
+inherit pypi setuptools
 
 RDEPENDS_${PN} = "\
                python-math \

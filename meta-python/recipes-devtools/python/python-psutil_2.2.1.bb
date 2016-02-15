@@ -9,4 +9,4 @@ RDEPENDS_${PN} += " \
     python-subprocess \
     "
 
-inherit pypi
+inherit pypi setuptools

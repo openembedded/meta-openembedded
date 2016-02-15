@@ -3,7 +3,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=13e982bf1b7b164b9d6d1665dac83873"
 SRCNAME = "daemonize"
 
-inherit pypi
+inherit pypi setuptools
 
 RDEPENDS_${PN} = "\
                python-fcntl \

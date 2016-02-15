@@ -13,7 +13,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 SRC_URI[md5sum] = "dd06da41535184f48f2c8e8b74dd570f"
 SRC_URI[sha256sum] = "059bc6428b1d0e2317f505698602642f1d8dda5b120ec573a59a430d8cb7a32d"
 
-inherit pypi
+inherit pypi setuptools
 
 RDEPENDS_${PN} = "\
                   python-pyasn1\
