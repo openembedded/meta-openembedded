@@ -2,19 +2,18 @@ SUMMARY = "Simple DirectMedia Layer truetype font library"
 SECTION = "libs"
 DEPENDS = "virtual/libsdl2 freetype"
 LICENSE = "Zlib"
-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=cdd16c6436d6b8fcbdd22a54d68c6dd3"
+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=cb33e7c4df9fbde389f149ad6bc93ce5"
 
 SRC_URI = " \
     http://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-${PV}.tar.gz \
     file://use.pkg-config.for.freetype2.patch \
 "
+SRC_URI[md5sum] = "e53c05e1e7f1382c316afd6c763388b1"
+SRC_URI[sha256sum] = "34db5e20bcf64e7071fe9ae25acaa7d72bdc4f11ab3ce59acc768ab62fe39276"
 
 S = "${WORKDIR}/SDL2_ttf-${PV}"
-#EXTRA_OECONF += "SDL_CONFIG=${STAGING_BINDIR_CROSS}/sdl-config "
 
 inherit autotools
-
-TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_configure_prepend() {
     touch ${S}/NEWS ${S}/README ${S}/AUTHORS ${S}/ChangeLog
@@ -26,6 +25,3 @@ do_configure_prepend() {
         rm -f ${S}/acinclude/$i
     done
 }
-
-SRC_URI[md5sum] = "79787216b56cb4707f39d538f2225e00"
-SRC_URI[sha256sum] = "8728605443ea1cca5cad501dc34dc0cb15135d1e575551da6d151d213d356f6e"
