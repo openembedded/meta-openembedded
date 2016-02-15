@@ -1,2 +1,2 @@
-inherit pypi3
+inherit pypi setuptools3
 require python-whoosh.inc
