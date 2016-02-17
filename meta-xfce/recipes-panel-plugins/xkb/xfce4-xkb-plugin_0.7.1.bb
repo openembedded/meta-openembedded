@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=496f09f084b0f7e6f02f769a84490c6b"
 
 inherit xfce-panel-plugin
 
-SRC_URI[md5sum] = "7fbc3d8c84d6662d819dd1803f0fee34"
-SRC_URI[sha256sum] = "28367c309863581ae4de529b35bdedf5a1c918096a9a2e6e771554cba7bf5a6a"
+SRC_URI[md5sum] = "2f68e0d53baf68ecc1a7165ad33c26a9"
+SRC_URI[sha256sum] = "61fe2e33fe99939d5d06a682e94e40e05ef844c930ad612154090d158b2ce681"
 
 DEPENDS += "libxklavier libwnck librsvg garcon"
 
