@@ -14,5 +14,4 @@ S = "${WORKDIR}/gdata.py-${PV}"
 
 FILES_${PN} += "${datadir}"
 
-RDEPENDS_${PN} = "python-elementtree"
-
+RDEPENDS_${PN} = "python-xml"
