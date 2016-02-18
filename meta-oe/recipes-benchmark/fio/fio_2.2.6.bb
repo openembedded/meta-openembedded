@@ -25,6 +25,9 @@ SRC_URI = "git://git.kernel.dk/fio.git"
 
 S = "${WORKDIR}/git"
 
+# avoids build breaks when using no-static-libs.inc
+DISABLE_STATIC = ""
+
 EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
 
 do_configure() {
