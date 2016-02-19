@@ -17,6 +17,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://net-lib.pl.patch \
            file://media-tomb.patch \
            file://remove-python2.3.patch \
+           file://mysql-config-fix.patch \
             "
 
 SRC_URI[md5sum] = "4007c390323d840f26c2e0f43c5c81a3"
