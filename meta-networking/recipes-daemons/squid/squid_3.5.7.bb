@@ -73,3 +73,6 @@ FILES_${PN}-doc += "${datadir}/*.txt"
 
 RDEPENDS_${PN} += "perl"
 RDEPENDS_${PN}-ptest += "make"
+
+# http://errors.yoctoproject.org/Errors/Details/35128/
+PNBLACKLIST[squid] ?= "BROKEN: sysroots/qemuarm/usr/include/linux/in.h:28:16: error: redeclaration of 'IPPROTO_IP'"
