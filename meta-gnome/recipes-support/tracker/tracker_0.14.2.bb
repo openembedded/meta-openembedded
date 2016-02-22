@@ -54,6 +54,7 @@ PACKAGES =+ "${PN}-tests ${PN}-vala ${PN}-nautilus-extension"
 FILES_${PN} += "${datadir}/dbus-1/ \
                 ${libdir}/tracker-${VER_DIR}/*.so.* \
                 ${libdir}/tracker-${VER_DIR}/extract-modules/*.so \
+                ${libdir}/tracker-${VER_DIR}/writeback-modules/*.so \
                 ${datadir}/icons/hicolor/*/apps/tracker.* \
                 ${libdir}/nautilus/extensions-2.0/*.la \
                 ${datadir}/glib-2.0/schemas/* \
@@ -64,7 +65,6 @@ FILES_${PN} += "${datadir}/dbus-1/ \
 
 FILES_${PN}-dev += "${libdir}/tracker-${VER_DIR}/*.la \
                     ${libdir}/tracker-${VER_DIR}/*.so \
-                    ${libdir}/tracker-${VER_DIR}/*/*.so \
                     ${libdir}/tracker-${VER_DIR}/*/*.la \
                     ${libdir}/tracker-${VER_DIR}/extract-modules/*.la"
 
