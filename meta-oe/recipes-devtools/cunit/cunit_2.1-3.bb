@@ -17,3 +17,6 @@ EXTRA_OECONF = "--enable-memtrace --enable-automated --enable-basic --enable-con
 
 FILES_${PN}-dev += "${datadir}/CUnit"
 FILES_${PN}-doc += "${docdir}"
+
+# http://errors.yoctoproject.org/Errors/Details/35136/
+PNBLACKLIST[cunit] ?= "BROKEN: QA Issue: libcunit.la failed sanity test (workdir)"
