@@ -39,3 +39,6 @@ FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
 FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
 
 BBCLASSEXTEND = "native"
+
+# http://errors.yoctoproject.org/Errors/Details/35144/
+PNBLACKLIST[xerces-c] ?= "BROKEN: QA Issue: xerces-c.pc failed sanity test (tmpdir)"
