@@ -28,7 +28,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
-inherit autotools gtk-doc pkgconfig gettext
+inherit autotools gtk-doc pkgconfig gettext gobject-introspection
 
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread"
@@ -40,6 +40,10 @@ LDFLAGS += "-lpthread"
 
 do_configure_append () {
     cp ${WORKDIR}/iconv-detect.h ${S}
+}
+
+do_compile_prepend() {
+        export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
 }
 
 EXTRA_OECONF = "--without-openldap \
