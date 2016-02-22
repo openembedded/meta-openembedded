@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
 
 PR = "r0"
 
-SRC_URI[md5sum] = "3b82bc542d5599896695512e7c32f42d"
-SRC_URI[sha256sum] = "a07cd6615a6bf38cfa2f010b121c7e77b74a3e7b971ef3e475c3d33308014cbb"
+SRC_URI[md5sum] = "eb2aad1081534ef3a9f32a0ecd350b9b"
+SRC_URI[sha256sum] = "5e001229a54180a02dcdd59db23c9978351af55b1290c27bc549e381f43acd6b"
 
 PYPI_PACKAGE = "msgpack-python"
 inherit pypi setuptools
