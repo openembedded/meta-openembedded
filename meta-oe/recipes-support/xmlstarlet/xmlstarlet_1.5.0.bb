@@ -24,3 +24,10 @@ inherit autotools
 EXTRA_OECONF="--disable-build-docs \
   --with-libxml-prefix=${STAGING_LIBDIR}/.. \
   --with-libxslt-prefix=${STAGING_LIBDIR}/.."
+
+#Makefile:2116: recipe for target 'src/elem-usage.c' failed
+#make[1]: *** [src/elem-usage.c] Error 1
+#/bin/bash: src/escape-usage.c: No such file or directory
+#Makefile:2116: recipe for target 'src/escape-usage.c' failed
+#make[1]: *** [src/escape-usage.c] Error 1
+PARALLEL_MAKE = ""
