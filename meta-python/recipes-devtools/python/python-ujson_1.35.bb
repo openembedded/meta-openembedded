@@ -2,13 +2,12 @@ SUMMARY  = "Ultra fast JSON encoder and decoder for Python"
 DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3."
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5b206f6ba5e41c60df8cdcddf79a3d82"
+LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=4f369b3c3c290b4aede8796a4065e5ab"
 
-SRC_URI[md5sum] = "8148a2493fff78940feab1e11dc0a893"
-SRC_URI[sha256sum] = "68cf825f227c82e1ac61e423cfcad923ff734c27b5bdd7174495d162c42c602b"
+SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
+SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
 
 PYPI_PACKAGE = "ujson"
-PYPI_PACKAGE_EXT = "zip"
 inherit pypi setuptools
 
 RDEPENDS_${PN} += "python-numbers"
