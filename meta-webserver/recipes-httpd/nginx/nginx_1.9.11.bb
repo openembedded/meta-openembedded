@@ -31,6 +31,7 @@ NGINX_WWWDIR ?= "${localstatedir}/www/localhost"
 NGINX_USER   ?= "www"
 
 EXTRA_OECONF = ""
+DISABLE_STATIC = ""
 
 do_configure () {
 	if [ "${SITEINFO_BITS}" = "64" ]; then
