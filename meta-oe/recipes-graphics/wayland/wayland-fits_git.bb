@@ -31,3 +31,6 @@ do_install_append() {
 
 FILES_${PN} += "${bindir}/wfits ${libdir}/weston/*.so"
 FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/weston/.debug ${prefix}/src"
+
+# http://errors.yoctoproject.org/Errors/Details/35141/
+PNBLACKLIST[wayland-fits] ?= "BROKEN: fails since wayland upgrade: weston-wfits.cpp:86:39: error: expected primary-expression before 'struct'"
