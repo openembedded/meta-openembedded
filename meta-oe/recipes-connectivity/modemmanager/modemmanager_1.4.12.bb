@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit gnomebase gettext systemd
+inherit gnomebase gettext systemd vala gobject-introspection
 
 DEPENDS = "glib-2.0 libgudev dbus-glib"
 
