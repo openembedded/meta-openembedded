@@ -79,7 +79,7 @@ do_install_append () {
 
     rm -rf ${D}${libexecdir}/
     # remove usr/lib if empty
-    rmdir ${D}${libdir}
+    rmdir ${D}${libdir} || true
 }
 
 PACKAGES =+ "${PN}-ping ${PN}-ping6 ${PN}-hostname ${PN}-ifconfig \
