@@ -14,7 +14,7 @@ GNOME_COMPRESS_TYPE="bz2"
 
 DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils startup-notification"
 
-EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs"
+EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs --disable-gnome-about"
 
 do_configure_prepend () {
     sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
@@ -23,7 +23,3 @@ do_configure_prepend () {
 PACKAGES =+ "libgnome-desktop"
 FILES_libgnome-desktop = "${libdir}/lib*${SOLIBS} ${datadir}/libgnome-desktop/pnp.ids"
 FILES_${PN} += "${datadir}/gnome-about"
-
-# for gnome-about
-RRECOMMENDS_${PN} += "python-pygtk python-pycairo"
-
