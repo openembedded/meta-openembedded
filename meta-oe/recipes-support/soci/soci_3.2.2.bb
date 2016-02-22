@@ -36,6 +36,7 @@ PACKAGECONFIG ??= "empty"
 
 # Take the flags added by PACKAGECONFIG and pass them to cmake.
 EXTRA_OECMAKE = "${EXTRA_OECONF} -DSOCI_LIBDIR=${libdir}"
+DISABLE_STATIC = ""
 
 inherit cmake
 
