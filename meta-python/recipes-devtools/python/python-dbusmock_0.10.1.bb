@@ -14,7 +14,6 @@ SRC_URI[md5sum] = "7370d325c4a75494dd71885ca65b79e8"
 SRC_URI[sha256sum] = "03aadc93bdc26ea18d4d78fcff7b6cb34f4e18623bc5cc41cf9539d663cee11e"
 
 SRC_URI += " \
-    file://0001-Don-t-use-gobject-introspection-for-bindings.patch \
     file://0001-Add-functionality-to-add-own-objects-to-internal-obj.patch \
     file://0002-Add-possibility-to-import-templates-from-packages.patch \
 "
