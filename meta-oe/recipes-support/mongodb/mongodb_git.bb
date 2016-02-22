@@ -44,6 +44,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
                  --nostrip \
                  ${EXTRA_OECONF} \
                  mongod mongos"
+DISABLE_STATIC = ""
 
 scons_do_compile() {
         ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
