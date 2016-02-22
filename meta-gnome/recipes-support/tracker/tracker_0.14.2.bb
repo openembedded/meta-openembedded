@@ -8,11 +8,10 @@ HOMEPAGE = "http://projects.gnome.org/tracker/"
 
 PR = "r7"
 
-inherit autotools pkgconfig gnomebase gettext gsettings systemd
+inherit autotools pkgconfig gnomebase gettext gsettings systemd gobject-introspection
 
 VER_DIR = "${@gnome_verdir("${PV}")}"
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
-           file://0005-Fix-missing-gobject-introspection-checks.patch \
            file://enable-sqlite-crosscompile.patch \
 	   file://fix-removable-media-detection.patch \
            file://90tracker \
@@ -34,6 +33,10 @@ EXTRA_OECONF += "--disable-miner-thunderbird --disable-miner-firefox \
                  --disable-miner-evolution --disable-miner-flickr"
 
 LEAD_SONAME = "libtrackerclient.so.0"
+
+do_compile_prepend() {
+        export GIR_EXTRA_LIBS_PATH="${B}/src/libtracker-sparql-backend/.libs:${B}/src/libtracker-data/.libs:${B}/src/libtracker-common/.libs"
+}
 
 do_install_append() {
     cp -PpR ${D}${STAGING_DATADIR}/* ${D}${datadir}/ || true
