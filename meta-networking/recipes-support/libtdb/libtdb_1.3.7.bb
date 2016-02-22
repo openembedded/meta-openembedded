@@ -20,6 +20,7 @@ EXTRA_OECONF += "--disable-rpath \
                  --builtin-libraries=replace \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
+DISABLE_STATIC = ""
 
 PACKAGES += "tdb-tools python-tdb python-tdb-dbg"
 
