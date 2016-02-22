@@ -20,3 +20,6 @@ inherit autotools pkgconfig
 do_configure_prepend() {
     sed -i -e s:AM_BINRELOC::g ${S}/configure.ac
 }
+
+# http://errors.yoctoproject.org/Errors/Details/35122/
+PNBLACKLIST[gtkmathview] ?= "BROKEN: ERROR: QA Issue: mathview-frontend-libxml2.pc, mathview-frontend-libxml2-reader.pc failed sanity test (tmpdir)"
