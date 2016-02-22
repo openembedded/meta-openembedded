@@ -24,6 +24,7 @@ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
                 --disable-plugins=mbedtls \
                 --debug \
                 --malloc-libc"
+DISABLE_STATIC = ""
 
 inherit autotools-brokensep pkgconfig update-rc.d systemd
 
