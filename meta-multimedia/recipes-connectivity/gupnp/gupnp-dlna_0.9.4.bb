@@ -9,9 +9,7 @@ SRC_URI = "http://download.gnome.org/sources/${BPN}/0.9/${BPN}-${PV}.tar.xz"
 SRC_URI[md5sum] = "f93665e535a512e4d515a86311435cb6"
 SRC_URI[sha256sum] = "69969713f36c0e815fbbbcfdfb3ad9bd447cfd10d0fd86227d82dfd8edb6c807"
 
-inherit autotools pkgconfig
-
-require no-vala.inc
+inherit autotools pkgconfig gobject-introspection vala
 
 PACKAGECONFIG ?= "gstreamer"
 PACKAGECONFIG[gstreamer] = "--enable-gstreamer-metadata-backend,--disable-gstreamer-metadata-backend,gstreamer1.0 gstreamer1.0-plugins-base"
