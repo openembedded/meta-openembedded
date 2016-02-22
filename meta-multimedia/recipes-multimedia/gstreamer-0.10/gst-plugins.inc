@@ -9,7 +9,7 @@ inherit autotools pkgconfig
 SRC_URI = "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.tar.bz2"
 
 GSTREAMER_DEBUG ?= "--disable-debug"
-EXTRA_OECONF = "--disable-valgrind ${GSTREAMER_DEBUG} --disable-examples "
+EXTRA_OECONF = "--disable-valgrind ${GSTREAMER_DEBUG} --disable-examples --disable-introspection"
 
 acpaths = "-I ${S}/common/m4 -I ${S}/m4"
 

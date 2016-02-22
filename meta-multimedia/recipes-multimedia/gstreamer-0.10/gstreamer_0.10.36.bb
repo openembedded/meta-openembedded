@@ -28,6 +28,7 @@ EXTRA_OECONF = "--disable-docbook --disable-gtk-doc \
             --disable-dependency-tracking --disable-check \
             --disable-examples --disable-tests \
             --disable-valgrind ${GSTREAMER_DEBUG} \
+            --disable-introspection \
             "
 
 CACHED_CONFIGUREVARS += "ac_cv_header_valgrind_valgrind_h=no"

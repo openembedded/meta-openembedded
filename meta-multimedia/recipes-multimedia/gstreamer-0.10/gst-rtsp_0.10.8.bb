@@ -9,6 +9,8 @@ SRC_URI[sha256sum] = "9915887cf8515bda87462c69738646afb715b597613edc7340477ccab6
 
 DEPENDS = "gst-plugins-base gstreamer"
 
+EXTRA_OECONF = "--disable-introspection"
+
 # Configure always checks for Python so inherit pythonnative. Better solution
 # would be to disable the checks entirely.
 inherit autotools pythonnative gettext
