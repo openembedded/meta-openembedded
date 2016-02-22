@@ -7,8 +7,8 @@ DEPENDS = "libsodium"
 SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz \
            file://run-ptest \
            "
-SRC_URI[md5sum] = "d0824317348cfb44b8692e19cc73dc3a"
-SRC_URI[sha256sum] = "61b31c830db377777e417235a24d3660a4bcc3f40d303ee58df082fcd68bf411"
+SRC_URI[md5sum] = "a611ecc93fffeb6d058c0e6edf4ad4fb"
+SRC_URI[sha256sum] = "e99f44fde25c2e4cb84ce440f87ca7d3fe3271c2b8cfbc67d55e4de25e6fe378"
 
 S = "${WORKDIR}/zeromq-${PV}"
 
