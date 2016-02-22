@@ -63,3 +63,5 @@ FILES_${PN}-staticdev += "${libdir}/dovecot/*/*.a"
 FILES_${PN}-dev += "${libdir}/dovecot/*.so"
 FILES_${PN}-dbg += "${libdir}/dovecot/*/.debug"
 
+# http://errors.yoctoproject.org/Errors/Details/35133/
+PNBLACKLIST[dovecot] ?= "BROKEN: QA Issue: -dev package contains non-symlink .so"
