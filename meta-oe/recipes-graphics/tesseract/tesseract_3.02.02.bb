@@ -18,3 +18,6 @@ inherit autotools pkgconfig
 FILES_${PN} += "${datadir}/tessdata"
 
 RRECOMMENDS_${PN} += "tesseract-lang-eng"
+
+# http://errors.yoctoproject.org/Errors/Details/35134/
+PNBLACKLIST[tesseract] ?= "BROKEN: QA Issue: tesseract.pc failed sanity test (tmpdir)"
