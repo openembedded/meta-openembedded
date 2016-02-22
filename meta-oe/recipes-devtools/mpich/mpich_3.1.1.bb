@@ -34,3 +34,6 @@ do_configure_prepend() {
     oe_runconf
     exit
 }
+
+# http://errors.yoctoproject.org/Errors/Details/35146/
+PNBLACKLIST[mpich] ?= "BROKEN: QA Issue: libmpi.la failed sanity test (workdir), QA Issue: mpich.pc failed sanity test (tmpdir)"
