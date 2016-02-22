@@ -28,7 +28,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D} prefix=${prefix} datadir=${datadir}
     install -d ${D}${datadir}/poppler/cMap
     install -m644 ${WORKDIR}/Identity-* ${D}${datadir}/poppler/cMap/
 }
