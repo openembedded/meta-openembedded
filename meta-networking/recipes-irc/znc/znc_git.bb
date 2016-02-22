@@ -25,3 +25,6 @@ inherit autotools-brokensep pkgconfig
 do_configure_prepend() {
     automake --add-missing || true
 }
+
+# http://errors.yoctoproject.org/Errors/Details/35142/
+PNBLACKLIST[znc] ?= "BROKEN: QA Issue: znc.pc failed sanity test"
