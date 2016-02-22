@@ -4,10 +4,10 @@ specific, concise semantics in an easy to read and write syntax. flufl.enum has 
 features needed to make enumerations useful, but without a lot of extra baggage to weigh them down. "
 
 LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
+LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=250adb4c74c359b7049abcd9d6b115e7"
 
-SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
-SRC_URI[sha256sum] = "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
+SRC_URI[md5sum] = "461779384c07ed2b5f554a5d51a000c4"
+SRC_URI[sha256sum] = "94da1413ba085473652f81565847913ea1543d1739972ecbd6afe57d7b1b68b4"
 
 PYPI_PACKAGE = "flufl.enum"
 inherit pypi setuptools
