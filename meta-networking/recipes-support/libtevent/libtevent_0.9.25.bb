@@ -26,6 +26,7 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                  --without-gettext \
                 "
+DISABLE_STATIC = ""
 
 PACKAGES += "python-tevent python-tevent-dbg"
 
