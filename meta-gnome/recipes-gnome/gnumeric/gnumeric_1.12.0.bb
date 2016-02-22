@@ -7,9 +7,10 @@ SUMMARY = "Gnumeric spreadsheet for GNOME"
 
 GNOME_COMPRESS_TYPE = "xz"
 
-inherit gnome
+inherit gnome pythonnative gobject-introspection
 
-SRC_URI += "file://do-not-use-srcdir.patch"
+SRC_URI += "file://do-not-use-srcdir.patch \
+            file://0001-configure.in-drop-introspection-macros-replace-them-.patch"
 
 SRC_URI[archive.md5sum] = "3fd87cca95334b5d8ac922989670fe27"
 SRC_URI[archive.sha256sum] = "037b53d909e5d1454b2afda8c4fb1e7838e260343e36d4e36245f4a5d0e04111"
