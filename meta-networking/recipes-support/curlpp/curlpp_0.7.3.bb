@@ -86,3 +86,6 @@ FILES_lib${BPN}-dev = "${includedir} \
 FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
 
 BBCLASSEXTEND = "native nativesdk"
+
+# http://errors.yoctoproject.org/Errors/Details/35129/
+PNBLACKLIST[curlpp] ?= "BROKEN: QA Issue: curlpp.pc failed sanity test (tmpdir)"
