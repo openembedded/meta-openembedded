@@ -21,4 +21,5 @@ do_install() {
 	install -m 0755 torturer ${D}${bindir}
 }
 
-
+# http://errors.yoctoproject.org/Errors/Details/35132/
+PNBLACKLIST[gtk-theme-torturer] ?= "BROKEN: gmacros.h:182:53: error: size of array '_GStaticAssertCompileTimeAssertion_2' is negative"
