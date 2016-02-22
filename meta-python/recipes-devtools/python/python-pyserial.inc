@@ -1,11 +1,6 @@
 SUMMARY = "Serial Port Support for Python"
-SECTION = "devel/python"
-LICENSE = "PSF"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c557c64905dac5b725980b9505bf8d7b"
-SRCNAME = "pyserial"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-S = "${WORKDIR}/${SRCNAME}-${PV}"
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0051a0dc811ee3fdb17a2fd0be44f3ad"
 
 # FIXME might stop packaging serialwin32 and serialjava files
 
@@ -15,5 +10,7 @@ RDEPENDS_${PN} = "\
     ${PYTHON_PN}-stringold \
 "
 
-SRC_URI[md5sum] = "794506184df83ef2290de0d18803dd11"
-SRC_URI[sha256sum] = "3542ec0838793e61d6224e27ff05e8ce4ba5a5c5cc4ec5c6a3e8d49247985477"
+SRC_URI[md5sum] = "c8521e49f8852196aac39431e0901703"
+SRC_URI[sha256sum] = "969cb6405d1d87f8960cf9c10f597ae58f85da2fb9769dba96f4aeeaade54656"
+
+inherit pypi
