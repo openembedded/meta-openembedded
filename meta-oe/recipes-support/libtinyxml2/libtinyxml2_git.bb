@@ -21,8 +21,7 @@ do_compile() {
             -Wl,-soname,libtinyxml2.so.${PV} \
             -o libtinyxml2.so.${PV} \
             ${LDFLAGS} \
-            tinyxml2.o \
-
+            tinyxml2.o
 }
 
 do_install() {
