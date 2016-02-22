@@ -17,9 +17,9 @@ GNOME_COMPRESS_TYPE = "xz"
 SRC_URI[archive.md5sum] = "9fbe4fb53b6cfa2f3f3723b7649a2215"
 SRC_URI[archive.sha256sum] = "9ea23df7186caac5f1aad3137edf6d507d339b9a469fc3133df4043fa66b61f5"
 
-inherit gnomebase vala
+inherit gnomebase vala gobject-introspection
 
-EXTRA_OECONF = "--disable-introspection --disable-tracker-plugin --with-media-engine=gstreamer"
+EXTRA_OECONF = "--disable-tracker-plugin --with-media-engine=gstreamer"
 
 PACKAGECONFIG ?= "external mpris mediathek ruih media-export gst-launch gtk+3"
 PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
