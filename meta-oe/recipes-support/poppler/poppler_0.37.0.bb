@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "b89f9c5eae3bbb1046b0f767714afd75eca102a0406a3a30856778d42a
 
 DEPENDS = "fontconfig zlib cairo lcms"
 
-inherit autotools pkgconfig gtk-doc
+inherit autotools pkgconfig gtk-doc gobject-introspection
 
 PACKAGECONFIG ??= "jpeg openjpeg png tiff ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)}"
 PACKAGECONFIG[jpeg] = "--enable-libjpeg,--disable-libjpeg,jpeg"
@@ -27,6 +27,10 @@ EXTRA_OECONF = "\
     --disable-gtk-test \
     --enable-zlib \
 "
+
+do_compile_prepend() {
+        export GIR_EXTRA_LIBS_PATH="${B}/poppler/.libs"
+}
 
 # Adjust library names when building for QT4e
 QT4E_PATCHES = "${@bb.utils.contains('PACKAGECONFIG', 'qt4e', 'file://fix-qt4e-library-dependencies.patch', '', d)}"
