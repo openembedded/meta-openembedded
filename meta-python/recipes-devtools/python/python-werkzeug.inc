@@ -14,3 +14,17 @@ SRC_URI[md5sum] = "9479bc7ea6a42c2d0d82929d3926df67"
 SRC_URI[sha256sum] = "eb5f700a9bfc96420b055635af9002d3662e43d80c3ffd31f224c25bc0d5f462"
 
 PYPI_PACKAGE = "Werkzeug"
+
+RDEPENDS_${PN} += " \
+    python-difflib \
+    python-email \
+    python-html \
+    python-json \
+    python-netserver \
+    python-numbers \
+    python-pkgutil \
+    python-subprocess \
+    python-threading \
+    python-unixadmin \
+    python-zlib \
+"
