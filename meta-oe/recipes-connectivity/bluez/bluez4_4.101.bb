@@ -10,7 +10,6 @@ SRC_URI += "file://bluetooth.conf \
             file://obsolete_automake_macros.patch \
             file://network-fix-network-Connect-method-parameters.patch \
             file://install-test-script.patch \
-            file://use-legacy-pygobject-instead-ofgobject-introspection.patch \
             file://fix_encrypt_collision.patch \
 "
 
