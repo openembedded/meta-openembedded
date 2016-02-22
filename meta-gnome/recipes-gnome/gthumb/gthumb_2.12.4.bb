@@ -17,7 +17,7 @@ GNOME_COMPRESS_TYPE="bz2"
 SRC_URI += "file://parallel.patch"
 
 do_install_append () {
-    rm ${D}${libdir}/${BPN}/extensions/*.a
+    rm -f ${D}${libdir}/${BPN}/extensions/*.a
 }
 
 FILES_${PN} += "${datadir}/icons"
