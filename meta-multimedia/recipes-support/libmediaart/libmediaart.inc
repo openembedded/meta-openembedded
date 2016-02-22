@@ -9,6 +9,6 @@ DEPENDS = "glib-2.0 gdk-pixbuf"
 
 GNOME_COMPRESS_TYPE = "xz"
 
-inherit gnomebase gtk-doc
+inherit gnomebase gtk-doc gobject-introspection
 
-EXTRA_OECONF = "--disable-introspection --disable-qt --enable-gdkpixbuf"
+EXTRA_OECONF = "--disable-qt --enable-gdkpixbuf"
