@@ -29,7 +29,7 @@ do_configure () {
     ${S}/configure \
     --prefix=${prefix} \
     --includedir=${includedir} \
-    --libdir=${libdir} \
+    --libdir=${libdir}
 }
 
 do_compile () {
