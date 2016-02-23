@@ -12,6 +12,8 @@ S = "${WORKDIR}/msr-tools-master"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 do_install() {
     install -d ${D}${sbindir}
     install -m 0755 rdmsr ${D}${sbindir}
