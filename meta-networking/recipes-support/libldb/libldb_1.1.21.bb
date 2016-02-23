@@ -32,6 +32,7 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-privatelibdir=${libdir}/ldb \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
+DISABLE_STATIC = ""
 
 PACKAGES += "pyldb pyldb-dbg pyldb-dev"
 
