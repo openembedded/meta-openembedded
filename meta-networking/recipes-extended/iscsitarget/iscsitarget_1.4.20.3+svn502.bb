@@ -8,6 +8,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6e233eda45c807aa29aeaa6d94bc48a2"
 DEPENDS = "openssl virtual/kernel"
 
+PNBLACKLIST[iscsitarget] ?= "BROKEN: kernel/block-io.c:36:19: error: 'BIO_UPTODATE' undeclared (first use in this function)"
+
 SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${PV}.orig.tar.gz \
            file://use-kernel-makefile-to-get-kernel-version.patch \
            file://fix-errors-observed-with-linux-3.19-and-greater.patch \
