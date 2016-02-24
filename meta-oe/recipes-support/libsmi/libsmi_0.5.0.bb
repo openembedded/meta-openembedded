@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
 
 SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
            file://smi.conf \
+           file://libsmi-fix-the-test-dump-files.patch \
           "
 
 SRC_URI[md5sum] = "4bf47483c06c9f07d1b10fbc74eddf11"
