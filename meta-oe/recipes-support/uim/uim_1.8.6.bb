@@ -74,7 +74,8 @@ FILES_uim-utils = "${bindir}/uim-sh \
 		   ${libexecdir}/uim-helper-server"
 
 FILES_uim-xim = "${bindir}/uim-xim \
-                 ${libexecdir}/uim-candwin-gtk \
+                 ${libexecdir}/uim-candwin-*gtk \
+                 ${libexecdir}/uim-candwin-*gtk3 \
                  ${datadir}/man/man1/uim-xim.1 \
                  ${sysconfdir}/X11/xinit/xinput.d/uim*"
 
