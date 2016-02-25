@@ -17,6 +17,7 @@ SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
 S = "${WORKDIR}/git"
 
 CFLAGS_append = " -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES"
+EXTRA_OEMAKE = "-e MAKEFLAGS="
 
 do_compile() {
     cd utils && oe_runmake
