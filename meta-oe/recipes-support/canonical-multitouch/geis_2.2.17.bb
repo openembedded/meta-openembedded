@@ -13,9 +13,11 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GPL;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
 "
 
-inherit autotools pkgconfig python3native lib_package
+inherit autotools pkgconfig python3native lib_package distro_features_check
 
-DEPENDS += "grail dbus-glib python3"
+REQUIRED_DISTRO_FEATURES = "x11"
+
+DEPENDS += "grail dbus-glib python3 virtual/libx11 libxext libxi libxcb dbus frame"
 
 SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BPN}-${PV}.tar.xz"
 SRC_URI[md5sum] = "2ff9d76a3ea5794516bb02c9d1924faf"
