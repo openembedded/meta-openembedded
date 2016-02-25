@@ -25,3 +25,5 @@ do_install () {
 }
 
 inherit pkgconfig
+
+PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"
