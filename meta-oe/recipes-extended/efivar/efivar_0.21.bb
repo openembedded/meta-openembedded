@@ -27,3 +27,13 @@ do_install_class-native() {
 }
 
 BBCLASSEXTEND = "native"
+
+# See
+# http://lists.openembedded.org/pipermail/openembedded-core/2016-February/116564.html
+# http://lists.openembedded.org/pipermail/openembedded-core/2016-February/116571.html
+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105802.html
+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105786.html
+# but it's still broken:
+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105825.html
+# http://lists.openembedded.org/pipermail/openembedded-devel/2016-February/105830.html
+PNBLACKLIST[efivar] ?= "BROKEN: linux.c:27:30: fatal error: linux/nvme_ioctl.h: No such file or directory"
