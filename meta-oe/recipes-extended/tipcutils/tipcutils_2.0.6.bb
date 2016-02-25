@@ -33,7 +33,7 @@ do_install_append() {
     install ${B}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
 
     install -d ${D}${sysconfdir}
-    cp -a ${S}/scripts/etc/* ${D}${sysconfdir}/
+    cp -R --no-dereference --preserve=mode,links -v ${S}/scripts/etc/* ${D}${sysconfdir}/
     chown -R root:root ${D}${sysconfdir}
 }
 

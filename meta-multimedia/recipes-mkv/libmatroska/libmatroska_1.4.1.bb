@@ -21,7 +21,7 @@ do_install() {
     install -d ${D}${libdir}
     install -m 0644 libmatroska.a ${D}${libdir}
     install -m 0755 libmatroska.so.* ${D}${libdir}
-    cp -a libmatroska.so ${D}${libdir}
+    cp -R --no-dereference --preserve=mode,links -v libmatroska.so ${D}${libdir}
 
     install -d ${D}${includedir}/matroska
     for i in ../../matroska/*.h; do

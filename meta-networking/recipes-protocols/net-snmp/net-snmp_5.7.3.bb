@@ -85,7 +85,7 @@ do_install_ptest() {
     for i in ${S}/dist ${S}/include ${B}/include ${S}/mibs ${S}/configure \
         ${B}/net-snmp-config ${S}/testing; do
         if [ -e "$i" ]; then
-            cp -a "$i" ${D}${PTEST_PATH}
+            cp -R --no-dereference --preserve=mode,links -v "$i" ${D}${PTEST_PATH}
         fi
     done
     echo `autoconf -V|awk '/autoconf/{print $NF}'` > ${D}${PTEST_PATH}/dist/autoconf-version

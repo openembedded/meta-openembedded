@@ -19,7 +19,7 @@ do_install() {
     install -d ${D}${libdir}
     install -m 0644 libebml.a ${D}${libdir}
     install -m 0755 libebml.so.* ${D}${libdir}
-    cp -a libebml.so ${D}${libdir}
+    cp -R --no-dereference --preserve=mode,links -v libebml.so ${D}${libdir}
 
     install -d ${D}${includedir}/ebml
     for i in ../../ebml/*.h; do

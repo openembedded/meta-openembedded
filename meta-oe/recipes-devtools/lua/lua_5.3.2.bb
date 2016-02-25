@@ -55,7 +55,7 @@ do_install () {
 }
 
 do_install_ptest () {
-        cp -a ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
+        cp -R --no-dereference --preserve=mode,links -v ${WORKDIR}/lua-${PV}-tests ${D}${PTEST_PATH}/test
 }
 
 BBCLASSEXTEND = "native"

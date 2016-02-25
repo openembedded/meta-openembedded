@@ -34,11 +34,11 @@ do_install() {
     install -d ${D}${includedir}/liveMedia
     install -d ${D}${includedir}/UsageEnvironment
     install -d ${D}${libdir}
-    cp -a ${S}/BasicUsageEnvironment/include/*.hh ${D}${includedir}/BasicUsageEnvironment/
-    cp -a ${S}/groupsock/include/*.h ${D}${includedir}/groupsock/
-    cp -a ${S}/groupsock/include/*.hh ${D}${includedir}/groupsock/
-    cp -a ${S}/liveMedia/include/*.hh ${D}${includedir}/liveMedia/
-    cp -a ${S}/UsageEnvironment/include/*.hh ${D}${includedir}/UsageEnvironment/
+    cp -R --no-dereference --preserve=mode,links -v ${S}/BasicUsageEnvironment/include/*.hh ${D}${includedir}/BasicUsageEnvironment/
+    cp -R --no-dereference --preserve=mode,links -v ${S}/groupsock/include/*.h ${D}${includedir}/groupsock/
+    cp -R --no-dereference --preserve=mode,links -v ${S}/groupsock/include/*.hh ${D}${includedir}/groupsock/
+    cp -R --no-dereference --preserve=mode,links -v ${S}/liveMedia/include/*.hh ${D}${includedir}/liveMedia/
+    cp -R --no-dereference --preserve=mode,links -v ${S}/UsageEnvironment/include/*.hh ${D}${includedir}/UsageEnvironment/
     # Find all the headers
     for i in $(find . -name "*.hh") $(find . -name "*.h") ; do
         install ${i} ${D}${includedir}

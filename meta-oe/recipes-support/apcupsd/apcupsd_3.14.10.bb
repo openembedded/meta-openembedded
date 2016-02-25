@@ -19,10 +19,10 @@ EXTRA_OECONF = "--without-x \
 
 do_configure() {
     export topdir=${S}
-    cp -a ${S}/autoconf/configure.in ${S}
+    cp -R --no-dereference --preserve=mode,links -v ${S}/autoconf/configure.in ${S}
 
     if ! [ -d ${S}/platforms/${DISTRO} ] ; then
-        cp -a ${S}/platforms/unknown ${S}/platforms/${DISTRO} 
+        cp -R --no-dereference --preserve=mode,links -v ${S}/platforms/unknown ${S}/platforms/${DISTRO} 
     fi
 
     gnu-configize --force

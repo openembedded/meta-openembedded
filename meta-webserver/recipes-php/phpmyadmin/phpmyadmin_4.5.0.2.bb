@@ -20,7 +20,7 @@ inherit allarch
 
 do_install() {
     install -d ${D}${datadir}/${BPN}
-    cp -a * ${D}${datadir}/${BPN}
+    cp -R --no-dereference --preserve=mode,links -v * ${D}${datadir}/${BPN}
     chown -R root:root ${D}${datadir}/${BPN}
     # Don't install patches to target
     rm -rf ${D}${datadir}/${BPN}/patches
