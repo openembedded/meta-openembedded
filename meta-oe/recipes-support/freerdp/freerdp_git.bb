@@ -60,8 +60,12 @@ PACKAGES_DYNAMIC += "^libfreerdp-plugin-.*"
 # we will need winpr-makecert to generate TLS certificates
 do_install_append () {
     install -m755 winpr/tools/makecert/cli/winpr-makecert ${D}${bindir}
-    rm -rf ${D}/${libdir}/cmake
-    rm -rf ${D}/${libdir}/freerdp
+    rm -rf ${D}${libdir}/cmake
+    rm -rf ${D}${libdir}/freerdp
+    # without x11, wayland, directfb enabled this directory will be empty
+    # causing QA error: ERROR: freerdp-1.2.5+gitrAUTOINC+62da9d28c6-r0 do_package: QA Issue: freerdp: Files/directories were installed but not shipped in any package:
+    #   /usr/bin
+    rmdir ${D}${bindir} --ignore-fail-on-non-empty
 }
 
 python populate_packages_prepend () {
