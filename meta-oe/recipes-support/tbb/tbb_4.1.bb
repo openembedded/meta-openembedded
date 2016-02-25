@@ -26,7 +26,7 @@ do_compile() {
 do_install() {
     install -d ${D}${includedir} ${D}${libdir}/pkgconfig
     rm ${S}/include/tbb/index.html -f
-    cp -a ${S}/include/tbb ${D}${includedir}
+    cp -R --no-dereference --preserve=mode,links -v ${S}/include/tbb ${D}${includedir}
     install -m 0755 ${B}/build/linux_*_release/lib*.so* ${D}${libdir}
     install -m 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig
 }

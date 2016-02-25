@@ -18,7 +18,7 @@ do_unpack() {
 
 do_install() {
         install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}-docs
-        cp -a ${S}/* ${D}${datadir}/doc/cim-schema-${PV}-docs
+        cp -R --no-dereference --preserve=mode,links -v ${S}/* ${D}${datadir}/doc/cim-schema-${PV}-docs
 }
 
 FILES_${PN} = "${datadir}/doc/*"

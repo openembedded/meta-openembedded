@@ -23,7 +23,7 @@ do_configure_prepend() {
 }
 do_install_append() {
     install -d ${D}${datadir}/orrery
-    cp -a ${S}/data/* ${D}${datadir}/orrery
+    cp -R --no-dereference --preserve=mode,links -v ${S}/data/* ${D}${datadir}/orrery
     chown -R root:root ${D}${datadir}/orrery
     install -d ${D}${datadir}/icons
     install -m 0755 ${WORKDIR}/orrery.png ${D}${datadir}/icons

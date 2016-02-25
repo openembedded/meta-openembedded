@@ -39,7 +39,7 @@ do_install_append() {
         done
         cd ${S}
         install -d ${D}${datadir}/${PN}/
-        cp -a examples ${D}${datadir}/${PN}/
+        cp -R --no-dereference --preserve=mode,links -v examples ${D}${datadir}/${PN}/
         find ${D}${datadir}/${PN}/examples -name ".svn" | xargs rm -rf
     fi
 }
