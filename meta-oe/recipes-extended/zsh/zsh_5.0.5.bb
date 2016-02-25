@@ -30,6 +30,8 @@ EXTRA_OECONF = " \
     zsh_cv_shared_environ=yes \
 "
 
+EXTRA_OEMAKE = "-e MAKEFLAGS="
+
 ALTERNATIVE_${PN} = "sh"
 ALTERNATIVE_LINK_NAME[sh] = "${base_bindir}/sh"
 ALTERNATIVE_TARGET[sh] = "${base_bindir}/${BPN}"
