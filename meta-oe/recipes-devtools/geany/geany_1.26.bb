@@ -10,7 +10,7 @@ SRC_URI = " \
     http://download.geany.org/${BP}.tar.bz2 \
     file://0001-configure.ac-remove-additional-c-test.patch \
 "
-SRC_URI[md5sum] = "888bd82d62759ac47a4a398fb27c8471"
-SRC_URI[sha256sum] = "8ee41da28cead8c94d433e616d7ababa81727c63e9196ca6758ade3af14a49ef"
+SRC_URI[md5sum] = "bd457caba57099cfa23b063e78b6f819"
+SRC_URI[sha256sum] = "e38530e87c577e1e9806be3b40e08fb9ee321eb1abc6361ddacdad89c825f90d"
 
 FILES_${PN} += "${datadir}/icons"
