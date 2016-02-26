@@ -10,14 +10,19 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = "http://apache.lauf-forum.at/xerces/c/3/sources/${BP}.tar.bz2"
-SRC_URI[md5sum] = "d987b8bb576aea456e92454781fe3615"
-SRC_URI[sha256sum] = "95d8655c4c50668ad60d555b59da9f31937b2c53638aa8d5768cb169f192d5e1"
+SRC_URI[md5sum] = "5e333b55cb43e6b025ddf0e5d0f0fb0d"
+SRC_URI[sha256sum] = "fc5e5e0247b108b8d64d75aeb124cabdee9b7fcd725a89fe2242b4637b25c1fa"
 
 inherit autotools
 
 PACKAGECONFIG ??= "curl icu"
 PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR},--with-curl=no,curl"
 PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR},--with-icu=no,icu"
+
+do_install_prepend () {
+        sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
+}
+
 PACKAGES = "libxerces-c \
             libxerces-c-dbg \
             libxerces-c-dev \
@@ -39,6 +44,3 @@ FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
 FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
 
 BBCLASSEXTEND = "native"
-
-# http://errors.yoctoproject.org/Errors/Details/35144/
-PNBLACKLIST[xerces-c] ?= "BROKEN: QA Issue: xerces-c.pc failed sanity test (tmpdir)"
