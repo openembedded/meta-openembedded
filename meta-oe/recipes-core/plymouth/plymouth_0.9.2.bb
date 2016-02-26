@@ -48,7 +48,7 @@ do_install_append() {
 
 PACKAGES =+ "${PN}-initrd ${PN}-set-default-theme"
 
-FILES_${PN}-initrd = "${libdir}/plymouth/plymouth/*"
+FILES_${PN}-initrd = "${libexecdir}/plymouth/*"
 FILES_${PN}-set-default-theme = "${sbindir}/plymouth-set-default-theme"
 
 FILES_${PN} += "${systemd_unitdir}/system/*"
