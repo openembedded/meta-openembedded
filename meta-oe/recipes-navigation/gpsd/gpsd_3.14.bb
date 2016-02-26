@@ -47,6 +47,7 @@ EXTRA_OESCONS = " \
     systemd='${SYSTEMD_OESCONS}' \
     ${EXTRA_OECONF} \
 "
+DISABLE_STATIC = ""
 # this cannot be used, because then chrpath is not found and only static lib is built
 # target=${HOST_SYS}
 
