@@ -23,6 +23,10 @@ do_compile() {
     oe_runmake -C src all  
 }
 
+do_install_append() {
+    rm -r ${D}/${localstatedir}/run
+}
+
 do_install() {
     install -d ${D}${bindir}
     oe_runmake -C src install \
