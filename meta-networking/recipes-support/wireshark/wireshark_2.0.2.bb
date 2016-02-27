@@ -8,8 +8,8 @@ DEPENDS = "perl-native pcre expat glib-2.0 sbc"
 
 SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
-SRC_URI[md5sum] = "c1610ab2238965363b811e5188750fb1"
-SRC_URI[sha256sum] = "c9bd07dd0d0045d6ca7537390a1afbcdf33716d193ea7d7084ae4f6c30b683ab"
+SRC_URI[md5sum] = "204d053e0796c7da09292e0b54bc8503"
+SRC_URI[sha256sum] = "e921fb072085a5654d899949bb561d0687f4819f7b63ba35777bb949a9b6b9c1"
 
 PE = "1"
 
