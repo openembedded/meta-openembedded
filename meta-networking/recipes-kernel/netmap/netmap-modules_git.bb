@@ -39,11 +39,6 @@ python __anonymous () {
 
     extra_oeconf_drivers = bb.utils.contains_any('NETMAP_DRIVERS', all_drivers_list, config_drivers, '--no-drivers', d)
     d.appendVar("EXTRA_OECONF", extra_oeconf_drivers)
-
-    # skip the arch test for kernel modules
-    if drivers_list:
-        for driver in drivers_list:
-            d.setVar("INSANE_SKIP_kernel-module-%s-netmap" % bb.utils.prune_suffix(driver, ['.c'], d), "arch")
 }
 
 LDFLAGS := "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
