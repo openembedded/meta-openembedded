@@ -1,6 +1,8 @@
 require recipes-kernel/linux/linux-yocto-tiny_${PV}.bb
 SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
 
+SRC_URI += "file://revert-check-console.patch"
+
 PACKAGES = ""
 PROVIDES = ""
 
