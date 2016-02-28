@@ -5,8 +5,11 @@ After=network.target
 [Service]
 Type=forking
 PIDFile=/run/dnsmasq.pid
-ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
-ExecReload=/bin/kill -HUP $(/bin/cat /run/dnsmasq.pid)
+ExecStartPre=/usr/sbin/dnsmasq --test
+ExecStart=/etc/init.d/dnsmasq systemd-exec
+ExecStartPost=/etc/init.d/dnsmasq systemd-start-resolvconf
+ExecStopPre=/etc/init.d/dnsmasq systemd-stop-resolvconf
+ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
 WantedBy=multi-user.target

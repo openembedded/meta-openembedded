@@ -23,6 +23,7 @@ PACKAGECONFIG[dbus] = ",,dbus"
 PACKAGECONFIG[idn] = ",,libidn"
 PACKAGECONFIG[conntrack] = ",,libnetfilter-conntrack"
 PACKAGECONFIG[lua] = ",,lua"
+PACKAGECONFIG[resolvconf] = ",,,resolvconf"
 EXTRA_OEMAKE = "\
     'COPTS=${@base_contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', '', d)} \
            ${@base_contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)} \
@@ -31,6 +32,8 @@ EXTRA_OEMAKE = "\
     'CFLAGS=${CFLAGS}' \
     'LDFLAGS=${LDFLAGS}' \
 "
+
+SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'file://dnsmasq.resolvconf file://99_dnsmasq', '', d)}"
 
 do_compile_append() {
     # build dhcp_release
@@ -55,6 +58,13 @@ do_install () {
     if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
         install -d ${D}${sysconfdir}/dbus-1/system.d
         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
+    fi
+    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+	install -d ${D}${sysconfdir}/resolvconf/update.d/
+	install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
+
+	install -d ${D}${sysconfdir}/default/volatiles
+	install -m 0644 ${WORKDIR}/99_dnsmasq ${D}${sysconfdir}/default/volatiles
     fi
 }
 
