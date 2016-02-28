@@ -224,6 +224,11 @@ ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
 ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
 ALTERNATIVE_PRIORITY = "120"
 
+ALTERNATIVE_${PN}-doc += "mailq.1 newaliases.1 sendmail.1"
+ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
+ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
+ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
+
 pkg_postinst_${PN} () {
     if [ "x$D" = "x" ]; then
         touch /etc/aliases
