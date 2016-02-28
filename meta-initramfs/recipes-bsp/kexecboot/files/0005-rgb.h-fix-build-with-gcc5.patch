@@ -20,15 +20,16 @@ diff --git a/rgb.h b/rgb.h
 index 0ba987a..4f64622 100644
 --- a/rgb.h
 +++ b/rgb.h
-@@ -51,7 +51,7 @@ typedef struct {
+@@ -51,8 +51,7 @@ typedef struct {
  } kx_named_color;
  
  /* Convert RGBA uint32 to red/green/blue/alpha components */
 -inline void
-+extern inline void
- rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
+-rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
++void rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
  		kx_ccomp *blue, kx_ccomp *alpha);
  
+ /* Convert hex rgb color to rgba color */
 -- 
 1.9.1
 
