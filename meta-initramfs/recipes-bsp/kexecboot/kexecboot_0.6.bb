@@ -53,7 +53,7 @@ SRC_URI += "\
 
 inherit autotools
 
-EXTRA_OECONF = "--enable-delay=2 --enable-evdev-rate=1000,250"
+EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
 
 do_install () {
     install -d ${D}${bindir}
