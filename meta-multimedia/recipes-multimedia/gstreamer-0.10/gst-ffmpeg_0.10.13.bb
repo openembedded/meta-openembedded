@@ -98,3 +98,6 @@ FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
 FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug"
 FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"
 FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
+
+# http://errors.yoctoproject.org/Errors/Details/40736/
+PNBLACKLIST[gst-ffmpeg] ?= "Not compatible with currently used ffmpeg 3"
