@@ -64,3 +64,6 @@ FILES_${PN}-dev += "${libdir}/cmake"
 FILES_${PN}launcher = "${bindir}/EWebLauncher"
 FILES_${PN}launcher-dbg = "${bindir}/.debug/EWebLauncher"
 FILES_${PN}-inspector += "${datadir}/ewebkit2-1/inspector"
+
+# http://errors.yoctoproject.org/Errors/Details/40659/
+PNBLACKLIST[webkit-efl] ?= "Old and unmaintaned fork with many security issues"

@@ -22,3 +22,5 @@ SRC_URI = " \
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${datadir}/themes"
+
+PNBLACKLIST[elbow] ?= "Depends on blacklisted webkit-efl"
