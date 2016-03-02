@@ -103,3 +103,6 @@ do_install_append() {
         rm -rf ${D}/usr/lib
     fi
 }
+
+# http://errors.yoctoproject.org/Errors/Details/40660/
+PNBLACKLIST[opencv] ?= "Not compatible with currently used ffmpeg 3"

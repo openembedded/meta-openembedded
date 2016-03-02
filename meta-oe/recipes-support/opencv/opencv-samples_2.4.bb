@@ -37,3 +37,5 @@ do_install() {
 
 FILES_${PN}-dev += "${datadir}/opencv/samples/*.c* ${datadir}/opencv/samples/*.vcp* ${datadir}/opencv/samples/build*" 
 FILES_${PN} += "${bindir} ${datadir}/opencv"
+
+PNBLACKLIST[opencv-samples] ?= "Depends on blacklisted opencv"

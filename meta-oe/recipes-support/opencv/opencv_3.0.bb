@@ -131,3 +131,6 @@ do_install_append() {
     install -d ${D}${datadir}/OpenCV/samples/bin/
     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
 }
+
+# http://errors.yoctoproject.org/Errors/Details/40660/
+PNBLACKLIST[opencv] ?= "Not compatible with currently used ffmpeg 3"
