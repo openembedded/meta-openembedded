@@ -154,3 +154,6 @@ do_install() {
     install ${S}/etc/codecs.conf ${D}/usr/etc/mplayer/
     [ -e ${D}/usr/lib ] && rmdir ${D}/usr/lib
 }
+
+# http://errors.yoctoproject.org/Errors/Details/40734/
+PNBLACKLIST[mplayer2] ?= "Not compatible with currently used ffmpeg 3"
