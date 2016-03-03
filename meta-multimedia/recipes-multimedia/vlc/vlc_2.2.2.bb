@@ -11,8 +11,7 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
             file://0006-make-opencv-configurable.patch \
             file://0007-use-vorbisidec.patch \
             file://0008-fix-luaL-checkint.patch \
-            file://0009-fix-rdp-module.patch \
 "
 
-SRC_URI[md5sum] = "42273945758b521c408fabc7fd6d9946"
-SRC_URI[sha256sum] = "543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb"
+SRC_URI[md5sum] = "f98d60f0f59ef72b6e3407f2ff09bda6"
+SRC_URI[sha256sum] = "9ad23128be16f9b40ed772961272cb0748ed8e4aa1bc79c129e589feebea5fb5"
