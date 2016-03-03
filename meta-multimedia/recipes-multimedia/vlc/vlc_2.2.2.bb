@@ -11,6 +11,8 @@ SRC_URI += "file://0001-enable-subdir-objects.patch \
             file://0006-make-opencv-configurable.patch \
             file://0007-use-vorbisidec.patch \
             file://0008-fix-luaL-checkint.patch \
+            file://0009-Avcodec-swscale-use-AV_PIX_FMT-consistently.patch \
+            file://0010-SWSCALE-fix-compilation-with-4.x.patch \
 "
 
 SRC_URI[md5sum] = "f98d60f0f59ef72b6e3407f2ff09bda6"
