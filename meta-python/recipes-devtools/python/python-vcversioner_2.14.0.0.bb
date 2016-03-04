@@ -17,3 +17,5 @@ do_compile_append() {
 do_install_append() {
     install -m 0644 ${S}/vcversioner*.egg ${D}/${PYTHON_SITEPACKAGES_DIR}/
 }
+
+BBCLASSEXTEND = "native"
