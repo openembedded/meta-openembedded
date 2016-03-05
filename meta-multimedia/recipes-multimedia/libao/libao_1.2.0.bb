@@ -8,11 +8,12 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI="http://downloads.xiph.org/releases/ao/${BP}.tar.gz"
-SRC_URI[md5sum] = "2b2508c29bc97e4dc218fa162cf883c8"
-SRC_URI[sha256sum] = "29de5bb9b1726ba890455ef7e562d877df87811febb0d99ee69164b88c171bd4"
+SRC_URI[md5sum] = "9f5dd20d7e95fd0dd72df5353829f097"
+SRC_URI[sha256sum] = "03ad231ad1f9d64b52474392d63c31197b0bc7bd416e58b1c10a329a5ed89caf"
 
 inherit autotools
 
+PACKAGES += "${BPN}-ckport"
 PACKAGES_DYNAMIC += "^${BPN}-plugin-.*"
 
 do_install_append () {
@@ -30,3 +31,4 @@ PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio'
 PACKAGECONFIG[esound] = "--enable-esd,--disable-esd,esound"
 PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
+FILES_${BPN}-ckport = "${libdir}/ckport"
