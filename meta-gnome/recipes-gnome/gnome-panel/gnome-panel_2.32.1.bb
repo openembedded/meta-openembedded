@@ -14,7 +14,7 @@ DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ \
 	   librsvg libcanberra"
 RDEPENDS_${PN} = "python"
 
-inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf
+inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf gobject-introspection
 
 SRCREV = "8292bd2b8a36df7eed3c760899400790cde68590"
 SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32 \
