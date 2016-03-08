@@ -27,4 +27,26 @@ SWIG_FEATURES_x86-64 = "-D__x86_64__"
 SWIG_FEATURES ?= ""
 export SWIG_FEATURES
 
+# Get around a problem with swig, but only if the
+# multilib header file exists.
+#
+do_compile_prepend() {
+    if [ "${SITEINFO_BITS}" = "64" ];then
+        bit="64"
+    else
+        bit="32"
+    fi
+
+    if [ -e ${STAGING_INCDIR}/openssl/opensslconf-${bit}.h ] ;then
+        for i in SWIG/_ec.i SWIG/_evp.i; do
+            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "$i"
+        done
+    elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-n${bit}.h ] ;then
+        for i in SWIG/_ec.i SWIG/_evp.i; do
+            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "$i"
+        done
+    fi
+}
+
+
 BBCLASSEXTEND = "native"
