@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib gconf libgnome-keyring iso-codes nss"
 
-inherit gnomebase gsettings gtk-icon-cache
+inherit gnomebase gsettings gtk-icon-cache gobject-introspection
 
 GNOME_COMPRESS_TYPE = "xz"
 
