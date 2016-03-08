@@ -7,7 +7,7 @@ PR = "r1"
 
 DEPENDS = "python libxml2 gconf popt gtk+"
 
-inherit gnomebase pkgconfig python-dir pythonnative
+inherit gnomebase pkgconfig python-dir pythonnative gobject-introspection
 
 SRC_URI[archive.md5sum] = "caa6772e63ed5870cf43dc3d354e0624"
 SRC_URI[archive.sha256sum] = "6dcc565006d6e8c2025ae83ab1f82edf6bd04d61c804c0dc9bf5ea50629c4caa"

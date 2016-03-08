@@ -9,7 +9,7 @@ PNBLACKLIST[gnome-menus3] ?= "CONFLICT: 24 files are conflicting with gnome-menu
 
 DEPENDS = "python libxml2 gconf popt gtk+3"
 
-inherit gnomebase pkgconfig python-dir pythonnative
+inherit gnomebase pkgconfig python-dir pythonnative gobject-introspection
 
 BPN = "gnome-menus"
 
