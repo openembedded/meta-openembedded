@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
 
 DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
 
-inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala
+inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
 
 do_configure_prepend_class-target () {
     # introspection.m4 pre-packaged with upstream tarballs does not yet
