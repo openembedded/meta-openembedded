@@ -11,7 +11,7 @@ PR = "r6"
 DEPENDS = "gdk-pixbuf gtk+ libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
 # optional: tracker
 
-inherit gnome
+inherit gnome gobject-introspection
 
 SRC_URI[archive.md5sum] = "51565aa10d1625dff56e381228346911"
 SRC_URI[archive.sha256sum] = "2d4ff28c7a7aa5d40eb2468149954a564c257a305183773057584d22d15347a2"
