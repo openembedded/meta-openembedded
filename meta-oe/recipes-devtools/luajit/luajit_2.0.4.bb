@@ -31,6 +31,9 @@ EXTRA_OEMAKE_append_powerpc64 = ' HOST_CC="${BUILD_CC}"'
 EXTRA_OEMAKE_append_arm = ' HOST_CC="${BUILD_CC} -m32"'
 EXTRA_OEMAKE_append_mips64 = ' HOST_CC="${BUILD_CC} -m32"'
 
+DEPENDS_append_class_target = " luajit-native"
+EXTRA_OEMAKE_append_class_target = " HOST_LUA=luajit"
+
 do_compile () {
     oe_runmake
 }
