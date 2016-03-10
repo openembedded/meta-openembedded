@@ -19,9 +19,8 @@ DEPENDS = " \
     taglib \
 "
 
-SRC_URI[md5sum] = "fffdc23d2aa22271f01410a9e27c3404"
-SRC_URI[sha256sum] = "2d966aeb426de81d992829e33b3f66185b19fd031a1891968b3a40d6d50239cc"
-SRC_URI += "file://parole-0.8.0-appdata.patch"
+SRC_URI[md5sum] = "361e3059f1263c76a3711db2c7c1a97b"
+SRC_URI[sha256sum] = "4b216f5200490f8d2a9bf1b3fcd9a8b20834c95249bf13b9170c82e1fcbd80f4"
 
 RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
 
