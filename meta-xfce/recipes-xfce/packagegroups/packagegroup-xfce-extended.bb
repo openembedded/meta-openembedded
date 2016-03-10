@@ -51,6 +51,7 @@ RRECOMMENDS_${PN} = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'xfce4-pulseaudio-plugin', '', d)} \
     xfce4-sensors-plugin \
     xfce4-calculator-plugin \
+    xfce4-verve-plugin \
     \
     xfce-polkit \
     \
