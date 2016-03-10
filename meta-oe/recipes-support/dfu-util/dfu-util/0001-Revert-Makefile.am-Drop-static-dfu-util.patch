@@ -1,7 +1,7 @@
-From 7d613b28c1b48b5cc3a0882d24e0ac938faff4c2 Mon Sep 17 00:00:00 2001
+From c2aab3b9ae1febcb6b4c6561a59df1930a57b394 Mon Sep 17 00:00:00 2001
 From: Martin JaMa Jansa <Martin.Jansa@gmail.com>
 Date: Thu, 11 Aug 2011 11:19:52 +0200
-Subject: [PATCH 2/2] Revert "Makefile.am: Drop static dfu-util"
+Subject: [PATCH] Revert "Makefile.am: Drop static dfu-util"
 
 This reverts commit fe0426ddc04f503d148c5e5f931f16b8f674f071.
 
@@ -12,7 +12,7 @@ Signed-off-by: Martin JaMa Jansa <Martin.Jansa@gmail.com>
  2 files changed, 22 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index a1dcc7a..bb71e02 100644
+index f5a43b8..6a3757e 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -21,7 +21,7 @@ AS_IF([test x$native_libusb = xno], [
