@@ -32,6 +32,8 @@ SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5
 
 inherit gettext
 
+BBCLASSEXTEND = "native"
+
 # crash 7.1.3 and before don't support mips64
 COMPATIBLE_HOST = "^(?!mips64).*"
 
@@ -40,6 +42,7 @@ EXTRA_OEMAKE = 'RPMPKG="${PV}" \
                 GDB_HOST="${BUILD_SYS}" \
                 GDB_MAKE_JOBS="${PARALLEL_MAKE}" \
                 '
+EXTRA_OEMAKE_append_class-native = " LDFLAGS='${BUILD_LDFLAGS}'"
 
 do_configure() {
     :
@@ -65,17 +68,25 @@ do_compile() {
     oe_runmake ${EXTRA_OEMAKE}
 }
 
-do_install () {
+do_install_prepend () {
     install -d ${D}${bindir}
     install -d ${D}/${mandir}/man8
     install -d ${D}${includedir}/crash
 
-    oe_runmake DESTDIR=${D} install
     install -m 0644 ${S}/crash.8 ${D}/${mandir}/man8/
     install -m 0644 ${S}/defs.h ${D}${includedir}/crash
-}   
+}
+
+do_install_class-target () {
+    oe_runmake DESTDIR=${D} install
+}
+
+do_install_class-native () {
+    oe_runmake DESTDIR=${D}${STAGING_DIR_NATIVE} install
+}
 
 RDEPENDS_${PN} += "liblzma"
+RDEPENDS_${PN}_class-native = ""
 
 # Causes gcc to get stuck and eat all available memory in qemuarm builds
 # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
