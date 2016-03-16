@@ -13,6 +13,8 @@ SRC_URI[sha256sum] = "f048a5270f41bc88b0c3b0a8fe70ca4d716a46b531a0ecaaa87c462f49
 
 inherit autotools
 
+EXTRA_OECONF = "ac_cv_path_SH=${base_bindir}/sh"
+
 do_install_append () {
     install -d ${D}${sysconfdir}
     install -m 0644 ${WORKDIR}/smi.conf ${D}${sysconfdir}/smi.conf
