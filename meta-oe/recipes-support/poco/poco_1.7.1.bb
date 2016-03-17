@@ -14,12 +14,11 @@ BBCLASSEXTEND = "native"
 
 SRC_URI = " \
     https://github.com/pocoproject/poco/archive/poco-${PV}-release.tar.gz \
-    file://0001-Change-Foundation-library-version-back-to-SHARED_LIB.patch \
     file://run-ptest \
    "
 
-SRC_URI[md5sum] = "208872b13d282dfb0f0580fc11df96f3"
-SRC_URI[sha256sum] = "08bc0a9bae4fb793eb694ad5ec7742c179bad48a286ae614682483021043658b"
+SRC_URI[md5sum] = "a4b755d47303b20a0e2586f281d05a36"
+SRC_URI[sha256sum] = "6dbbc2018912ad9af6af96f605933ed91354a1e7423e5dbd04d8e9a2b2d15c05"
 
 S = "${WORKDIR}/poco-poco-${PV}-release"
 
