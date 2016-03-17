@@ -20,19 +20,23 @@ do_configure_prepend() {
     sed -i 's:MULTILIB= lib:MULTILIB= ${baselib}:g' ${S}/Makefile
 }
 
-EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
-                TARGET_CFLAGS="${TOOLCHAIN_OPTIONS} ${HOST_CC_ARCH}" \
-                TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" \
-                TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}"'
-EXTRA_OEMAKE_append_powerpc = ' HOST_CC="${BUILD_CC} -m32"'
-EXTRA_OEMAKE_append_x86 = ' HOST_CC="${BUILD_CC} -m32"'
-EXTRA_OEMAKE_append_x86-64 = ' HOST_CC="${BUILD_CC}"'
-EXTRA_OEMAKE_append_powerpc64 = ' HOST_CC="${BUILD_CC}"'
-EXTRA_OEMAKE_append_arm = ' HOST_CC="${BUILD_CC} -m32"'
-EXTRA_OEMAKE_append_mips64 = ' HOST_CC="${BUILD_CC} -m32"'
+# http://luajit.org/install.html#cross
+# Host luajit needs to be compiled with the same pointer size
+# If you want to cross-compile to any 32 bit target on an x64 OS,
+# you need to install the multilib development package (e.g.
+# libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
+# (HOST_CC="gcc -m32").
+BUILD_CC_ARCH_append_powerpc = ' -m32'
+BUILD_CC_ARCH_append_x86 = ' -m32'
+BUILD_CC_ARCH_append_arm = ' -m32'
 
-DEPENDS_append_class_target = " luajit-native"
-EXTRA_OEMAKE_append_class_target = " HOST_LUA=luajit"
+EXTRA_OEMAKE_append_class-target = '\
+    CROSS=${HOST_PREFIX} \
+    HOST_CC="${BUILD_CC} ${BUILD_CC_ARCH}" \
+    TARGET_CFLAGS="${TOOLCHAIN_OPTIONS} ${TARGET_CC_ARCH}" \
+    TARGET_LDFLAGS="${TOOLCHAIN_OPTIONS}" \
+    TARGET_SHLDFLAGS="${TOOLCHAIN_OPTIONS}" \
+'
 
 do_compile () {
     oe_runmake
