@@ -13,5 +13,6 @@ SRC_URI[sha256sum] = "23043f99c3e5257d1f3d68b5ee5125e3469c15620d098e22c625038619
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[unique] = "--enable-unique,--disable-unique,libunique"
+PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
 
 FILES_${PN} += "${datadir}/appdata"
