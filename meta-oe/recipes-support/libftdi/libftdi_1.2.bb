@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "a6ea795c829219015eb372b03008351cee3fb39f684bff3bf8a4620b55
 S = "${WORKDIR}/${BPN}1-${PV}"
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on,-DFTDI_BUILD_CPP=off,boost"
+PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on -DFTDIPP=on,-DFTDI_BUILD_CPP=off -DFTDIPP=off,boost"
 
 inherit cmake binconfig pkgconfig
 
