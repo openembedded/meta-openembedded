@@ -11,11 +11,14 @@ inherit packagegroup allarch
 ETHEME ?= "e-wm-theme-default"
 ECONFIG ?= "e-wm-config-mobile"
 
+RRECOMMENDS_${PN} = "\
+    ${ETHEME} \
+"
+
 RDEPENDS_${PN} = "\
     packagegroup-core-x11-xserver \
     packagegroup-core-x11-utils \
     \
     e-wm \
     ${ECONFIG} \
-    ${ETHEME} \
 "
