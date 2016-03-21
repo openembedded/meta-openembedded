@@ -25,6 +25,9 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--disable-scrollkeeper --disable-eds --enable-bonobo=no --with-in-process-applets=none"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[networkmanager] = "--enable-network-manager,--disable-network-manager,networkmanager"
+
 do_configure_prepend() {
     gnome-doc-prepare --automake
     sed -i -e s:help:: ${S}/Makefile.am
