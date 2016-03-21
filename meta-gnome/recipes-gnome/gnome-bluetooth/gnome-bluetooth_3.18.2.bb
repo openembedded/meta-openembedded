@@ -11,7 +11,7 @@ SECTION = "x11/gnome"
 DEPENDS = "systemd gtk+3 libnotify libcanberra"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
 
-inherit gnomebase gtk-icon-cache distro_features_check
+inherit gnomebase gtk-icon-cache distro_features_check gobject-introspection
 REQUIRED_DISTRO_FEATURES = "systemd"
 
 SRC_URI[archive.md5sum] = "75d09c924468ec0c687f9ab3acf7f113"
