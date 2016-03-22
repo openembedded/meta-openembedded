@@ -92,3 +92,6 @@ do_install() {
 addtask make_scripts before do_compile
 do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 do_make_scripts[deptask] = "do_populate_sysroot"
+
+# http://errors.yoctoproject.org/Errors/Details/56327/
+PNBLACKLIST[ltp-ddt] ?= "BROKEN: fails since last autotools.bbclass changes"
