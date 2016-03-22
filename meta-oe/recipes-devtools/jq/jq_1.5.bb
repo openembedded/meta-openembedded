@@ -9,7 +9,7 @@ SECTION = "utils"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=29dd0c35d7e391bb8d515eacf7592e00"
 
-DEPENDS = "flex-native bison-native"
+DEPENDS = "flex-native bison-native onig"
 
 SRC_URI = "https://github.com/stedolan/${BPN}/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
 "
