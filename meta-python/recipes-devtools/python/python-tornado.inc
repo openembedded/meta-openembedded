@@ -19,6 +19,6 @@ PACKAGES =+ "\
 "
 
 FILES_${PN}-test = " \
-    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/test \
-    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/testing.py* \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/test \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/testing.py* \
 "
