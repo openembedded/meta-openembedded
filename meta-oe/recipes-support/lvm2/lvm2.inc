@@ -5,7 +5,6 @@ LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
 
-S = "${WORKDIR}/LVM2.${PV}"
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://lvm.conf \
            file://0001-implement-libc-specific-_reopen_stream.patch \
@@ -14,8 +13,14 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://0004-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
            "
 
-PACKAGECONFIG ??= "readline"
+S = "${WORKDIR}/LVM2.${PV}"
+
+inherit autotools-brokensep pkgconfig systemd
+
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 
 # Unset user/group to unbreak install.
 EXTRA_OECONF = "--with-user= \
@@ -33,12 +38,6 @@ EXTRA_OECONF = "--with-user= \
                 --with-usrlibdir=${libdir} \
                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
 "
-
-PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
-
-PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
-
-inherit autotools-brokensep pkgconfig systemd
 
 do_install_append() {
     # Install machine specific configuration file
