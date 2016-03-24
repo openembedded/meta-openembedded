@@ -15,7 +15,7 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.bz
            file://check_fix.patch \
            file://gst-inspect-check-error.patch \
            file://0001-baseparse-Fix-self-comparison-always-evaluates-to-tr.patch \
-           file://gstreamer-change-priv_gst_parse_yylex-arguments.patch \
+           file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
 "
 
 SRC_URI[md5sum] = "a0cf7d6877f694a1a2ad2b4d1ecb890b"
