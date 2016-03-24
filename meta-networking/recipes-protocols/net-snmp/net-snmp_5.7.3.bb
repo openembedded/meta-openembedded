@@ -73,6 +73,10 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
+    sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+        -i ${D}${bindir}/net-snmp-create-v3-user
+    sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+        -i ${D}${bindir}/net-snmp-config
 }
 
 do_install_ptest() {
