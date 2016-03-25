@@ -1,10 +1,10 @@
 SUMMARY = "Python style guide checker"
 HOMEPAGE = "https://github.com/dreamhost/cliff"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://README.rst;md5=b0d37793ab91ca25ad5c200e9ea22331"
+LIC_FILES_CHKSUM = "file://README.rst;md5=d8ebbbe831259ce010179d2f310b0f3e"
 
-SRC_URI[md5sum] = "a03bb494859e87b42601b61b1b043a0c"
-SRC_URI[sha256sum] = "603a46e5c358ce20ac4807a0eeafac7505d1125a4c1bd8378757ada06f61bed8"
+SRC_URI[md5sum] = "2b03109b0618afe3b04b3e63b334ac9d"
+SRC_URI[sha256sum] = "a113d5f5ad7a7abacef9df5ec3f2af23a20a28005921577b15dd584d099d5900"
 
 inherit pypi setuptools
 
