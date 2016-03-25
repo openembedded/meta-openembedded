@@ -1,2 +1,2 @@
-inherit setuptools3
+inherit pypi setuptools3
 require python-pymisp.inc
