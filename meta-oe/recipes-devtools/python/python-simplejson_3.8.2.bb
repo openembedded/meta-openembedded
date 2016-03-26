@@ -9,8 +9,8 @@ PR = "r1"
 SRCNAME = "simplejson"
 
 SRC_URI = "http://cheeseshop.python.org/packages/source/s/simplejson/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[md5sum] = "b8441f1053edd9dc335ded8c7f98a974"
-SRC_URI[sha256sum] = "428ac8f3219c78fb04ce05895d5dff9bd813c05a9a7922c53dc879cd32a12493"
+SRC_URI[md5sum] = "53b1371bbf883b129a12d594a97e9a18"
+SRC_URI[sha256sum] = "d58439c548433adcda98e695be53e526ba940a4b9c44fb9a05d92cd495cdd47f"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
