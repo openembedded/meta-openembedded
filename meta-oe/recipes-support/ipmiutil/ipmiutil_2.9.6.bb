@@ -57,4 +57,4 @@ do_install () {
     oe_runmake install DESTDIR=${D}
 }
 
-COMPATABLE_HOST = '(x86_64|i.86).*-linux'
+COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
