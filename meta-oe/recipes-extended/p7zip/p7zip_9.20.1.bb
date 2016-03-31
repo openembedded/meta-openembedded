@@ -15,3 +15,21 @@ do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/bin/* ${D}${bindir}
 }
+
+# all3: to build bin/7za, bin/7z (with its plugins), bin/7zr and bin/7zCon.sfx
+EXTRA_OEMAKE_class-native = "all3"
+
+do_install_class-native() {
+    install -d ${D}${bindir}
+    install -d ${D}${bindir}/Codecs
+    install -m 0755 ${S}/bin/7* ${D}${bindir}
+    install -m 0755 ${S}/bin/Codecs/* ${D}${bindir}/Codecs
+
+    # Create a shell script wrapper to execute next to 7z.so
+    mv ${D}${bindir}/7z ${D}${bindir}/7z.bin
+    echo "#! /bin/sh" > ${D}${bindir}/7z
+    echo "exec ${D}${bindir}/7z.bin \"\$@\"" >> ${D}${bindir}/7z
+    chmod 0755 ${D}${bindir}/7z
+}
+
+BBCLASSEXTEND += "native"
