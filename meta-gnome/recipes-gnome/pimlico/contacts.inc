@@ -7,7 +7,7 @@ SECTION = "x11"
 DEPENDS = "glib-2.0 gtk+ evolution-data-server intltool-native"
 RDEPENDS_${PN} = "libedata-book"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig gconf
 
 EXTRA_OECONF += "--disable-gnome-vfs"
 EXTRA_OEMAKE += "GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1"
