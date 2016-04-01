@@ -4,7 +4,8 @@ BUGTRACKER = "https://bugzilla.gnome.org/enter_bug.cgi?product=Gstreamer"
 SECTION = "multimedia"
 DEPENDS = "gstreamer"
 
-inherit autotools pkgconfig
+# gobject-introspection to get --disable-introspection into UNKNOWN_CONFIGURE_WHITELIST
+inherit autotools pkgconfig gobject-introspection
 
 SRC_URI = "http://gstreamer.freedesktop.org/src/${BPN}/${BPN}-${PV}.tar.bz2"
 
