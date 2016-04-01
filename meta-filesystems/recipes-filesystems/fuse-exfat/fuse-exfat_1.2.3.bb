@@ -12,15 +12,9 @@ SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
 DEPENDS = "fuse virtual/libc"
 RRECOMMENDS_${PN} = "util-linux-mount"
 
-inherit scons
+inherit autotools pkgconfig
 
-SRC_URI[md5sum] = "b2a23c032661cb1c1da4514e7af33916"
-SRC_URI[sha256sum] = "198c520e417e955dc5c08687c278e63eefa56719da4452aa4a605be0327f953e"
+SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
+SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
 
-EXTRA_OESCONS = " \
-    CCFLAGS='${CCFLAGS} -std=c99' DESTDIR=${D}/${base_sbindir} \
-"
-
-do_install_prepend() {
-    install -d ${D}/${base_sbindir}
-}
+S = "${WORKDIR}/${PN}-${PV}"
