@@ -14,19 +14,31 @@ DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libw
 
 SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
 SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
+SRCREV_party3 = "81a676001ca8075ada498583e4166079e5744668"
+IPP_MD5 = "808b791a6eac9ed78d32a7666804320e"
+
 SRCREV_FORMAT = "opencv"
 SRC_URI = "git://github.com/Itseez/opencv.git;name=opencv \
             git://github.com/Itseez/opencv_contrib.git;destsuffix=contrib;name=contrib \
+            git://github.com/Itseez/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=party3;name=party3 \
+            file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
             file://fixpkgconfig.patch"
 
 PV = "3.1+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+do_unpack_extra() {
+    tar xzf ${WORKDIR}/party3/ippicv/ippicv_linux_20151201.tgz -C ${WORKDIR}
+}
+addtask unpack_extra after do_unpack before do_patch
+
 EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
 		 -DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
                  -DWITH_1394=OFF \
                  -DCMAKE_SKIP_RPATH=ON \
+                 -DOPENCV_ICV_PACKAGE_DOWNLOADED=${IPP_MD5} \
+                 -DOPENCV_ICV_PATH=${WORKDIR}/ippicv_lnx \
                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
                  ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
