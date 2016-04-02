@@ -21,8 +21,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=b08db4360eec119e875dddd7cb8a5ddd"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
-SRC_URI[md5sum] = "c1ff25da5dfdf77adea13dc3465638dd"
-SRC_URI[sha256sum] = "ff1900f3b3e61321d3c4b3283298f3106d43d55446605e9cfcf1dcec036acec1"
+SRC_URI[md5sum] = "4c8d9c77e8e06ca96c7383c05c8f3616"
+SRC_URI[sha256sum] = "e7566f13b041d028b56f184b77ec2545ec6f0bb5a0f8f5368f7e4a08b496b63e"
 
 S = "${WORKDIR}/Test-Harness-${PV}"
 
