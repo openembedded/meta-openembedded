@@ -29,8 +29,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=246;endline=262;md5=43be558cf4f19823cdd6af22135cf5f8"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/strictures-${PV}.tar.gz"
-SRC_URI[md5sum] = "fb1350b4af50a2f6ba053c1cfd97e920"
-SRC_URI[sha256sum] = "1e738a8ad63ce8c9b447111c8304ae124a3277c2dc17953b4f647581525e20d3"
+SRC_URI[md5sum] = "fb1fada8260992bc85e126c21ffcc6d5"
+SRC_URI[sha256sum] = "130355dcb3afd8c3c8213c24b924e71deb7e1e1197da8f90c5ae191766aa4100"
 
 S = "${WORKDIR}/strictures-${PV}"
 
