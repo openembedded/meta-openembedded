@@ -24,6 +24,13 @@ do_install () {
     install ${WORKDIR}/default.conf ${D}${sysconfdir}/vpnc/default.conf
 }
 
+SYSROOT_PREPROCESS_FUNCS += "vpnc_sysroot_preprocess"
+
+vpnc_sysroot_preprocess () {
+    install -d ${SYSROOT_DESTDIR}${sysconfdir}/vpnc
+    install -m 755 ${D}${sysconfdir}/vpnc/vpnc-script ${SYSROOT_DESTDIR}${sysconfdir}/vpnc
+}
+
 CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
 RDEPENDS_${PN} = "perl-module-io-file"
 RRECOMMENDS_${PN} = "kernel-module-tun"
