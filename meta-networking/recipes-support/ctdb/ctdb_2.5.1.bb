@@ -32,6 +32,9 @@ PARALLEL_MAKE = ""
 
 DEPENDS += "popt libtevent libtalloc libldb"
 
+# ctdbd_wrapper requires pgrep, hence procps
+RDEPENDS_${PN} += "procps"
+
 do_configure() {
     oe_runconf
 }
