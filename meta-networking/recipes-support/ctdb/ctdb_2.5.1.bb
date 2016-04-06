@@ -45,6 +45,10 @@ do_install_append() {
     rm -r ${D}/${localstatedir}/run
 }
 
+# The systemd service is disabled by default, as the service will fail to
+# start without /etc/ctdb/nodes. If the user supplies this, they can re-enable
+# the service.
+SYSTEMD_AUTO_ENABLE = "disable"
 SYSTEMD_SERVICE_${PN} = "ctdb.service"
 
 # onnode is a shell script with bashisms and bash #!
