@@ -2,10 +2,6 @@ DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
 used by Samba and other projects to store temporary data. If an \
 application is already using TDB for temporary data it is very easy \
 to convert that application to be cluster aware and use CTDB instead."
-DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
-used by Samba and other projects to store temporary data. If an \
-application is already using TDB for temporary data it is very easy \
-to convert that application to be cluster aware and use CTDB instead."
 HOMEPAGE = "https://ctdb.samba.org/"
 LICENSE = "GPL-2.0+ & LGPL-3.0+ & GPL-3.0+"
 
