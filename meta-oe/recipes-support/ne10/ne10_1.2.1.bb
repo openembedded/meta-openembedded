@@ -20,10 +20,10 @@ COMPATIBLE_MACHINE_armv7a = "(.*)"
 python () {
     if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES', True).split()):
         d.setVar('NE10_TARGET_ARCH', 'armv7')
-        bb.note('Building Ne10 for armv7')
+        bb.debug(2, 'Building Ne10 for armv7')
     elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES', True).split()):
         d.setVar('NE10_TARGET_ARCH', 'aarch64')
-        bb.note('Building Ne10 for aarch64')
+        bb.debug(2, 'Building Ne10 for aarch64')
     else:
         raise bb.parse.SkipPackage("Incompatible with archs other than armv7 and aarch64")
 }
