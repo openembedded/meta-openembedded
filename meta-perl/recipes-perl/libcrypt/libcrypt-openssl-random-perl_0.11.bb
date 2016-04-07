@@ -2,11 +2,11 @@ SUMMARY = "Crypt Openssl Random cpan module"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=385c55653886acac3821999a3ccd17b3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=089c18d635ae273e1727ec385e64063b"
 
 SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Random-${PV}.tar.gz "
-SRC_URI[md5sum] = "c56ac5dbdd46122eb9b8da59613b7b0a"
-SRC_URI[sha256sum] = "acf7eb81023cd1f40d8c60b893096d041513df2be2aefe145cc7ae1a3dcc78c7"
+SRC_URI[md5sum] = "5d71337503e0356ce1ce1481504e5885"
+SRC_URI[sha256sum] = "bb8c81c6a39b9b13a22d818ee9a746242f136f0fadceb6b9776ae615e7524c7a"
 
 S = "${WORKDIR}/Crypt-OpenSSL-Random-${PV}"
 
