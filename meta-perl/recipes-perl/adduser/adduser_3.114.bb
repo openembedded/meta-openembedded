@@ -6,14 +6,16 @@ SECTION = "base/utils"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef"
 
-SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.gz \
+SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.xz \
            file://adduser-add-M-option-for-useradd-when-no-create-home.patch \
 "
 
-SRC_URI[md5sum] = "ccb5864bde56683182c89c44474e7182"
-SRC_URI[sha256sum] = "02682be3f51f3e732121f20a3e4922bb8bef15cfacb8767fc250a01d09502122"
+SRC_URI[md5sum] = "3a079dd4e41d5a1fbaccaab03aacd881"
+SRC_URI[sha256sum] = "693b45bb0d27938fff2ecee5442ea2ac1b8804472ff0bb8faffd39616e58211f"
 
 inherit cpan-base update-alternatives
+
+S = "${WORKDIR}/${BPN}-3.113+nmu4"
 
 do_install() {
     install -d ${D}${sbindir}
