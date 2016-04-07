@@ -22,8 +22,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}
            file://sqlite-perl-test.pl \
 "
 
-SRC_URI[md5sum] = "b9876882186499583428b14cf5c0e29c"
-SRC_URI[sha256sum] = "21fb65e740b6265512c82232b4ad8f75c19ac84c216830112656274eb8e375fb"
+SRC_URI[md5sum] = "d56eebfb5f2a14be9413b025e7dca9fe"
+SRC_URI[sha256sum] = "3ac513ab73944fd7d4b672e1fe885dc522b6369d38f46a68e67e0045bf159ce1"
 
 S = "${WORKDIR}/DBD-SQLite-${PV}"
 
