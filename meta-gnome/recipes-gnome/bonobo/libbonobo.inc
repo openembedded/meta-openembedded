@@ -5,10 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
 SECTION = "x11/gnome/libs"
 DEPENDS = "glib-2.0 orbit2 intltool-native libxml2 dbus dbus-glib"
 
-inherit gnomebase gtk-doc
+inherit gnomebase gtk-doc lib_package
 
 ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
 
+RDEPENDS_${PN}-bin = "${PN} perl"
 FILES_${PN} += "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so"
 FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug \
     ${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
