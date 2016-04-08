@@ -58,7 +58,7 @@ FILES_${PN}-doc += "${datadir}/examples"
 FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
 
 # As this recipe doesn't inherit update-rc.d, we need to add this dependency here
-RDEPENDS_${PN} += "initscripts-functions"
+RDEPENDS_${PN}_class-target += "initscripts-functions"
 
 krb5_do_unpack() {
     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
@@ -77,12 +77,12 @@ do_configure() {
 }
 
 do_install_append() {
-    mkdir -p ${D}/etc/init.d ${D}/etc/default
-    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/etc/init.d
-    install -m 0644 ${WORKDIR}/etc/default/* ${D}/etc/default
+    mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
+    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
+    install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
 
-    rm -rf ${D}/var/run
-    mkdir -p ${D}/etc/default/volatiles
+    rm -rf ${D}/${localstatedir}/run
+    mkdir -p ${D}/${sysconfdir}/default/volatiles
     echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
            > ${D}${sysconfdir}/default/volatiles/87_krb5
     if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
@@ -102,3 +102,5 @@ pkg_postinst_${PN} () {
         fi
     fi
 }
+
+BBCLASSEXTEND = "native nativesdk"
