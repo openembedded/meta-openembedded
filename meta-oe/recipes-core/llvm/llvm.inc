@@ -61,7 +61,7 @@ do_configure_prepend() {
     sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
 
     # Fix the hardcoded libdir in llvm-config
-    sed -i 's:/lib\>:${base_libdir}:g' ${S}/tools/llvm-config/llvm-config.cpp
+    sed -i 's:/lib\>:/${baselib}:g' ${S}/tools/llvm-config/llvm-config.cpp
 
     # Fails to build unless using separate directory from source
     mkdir -p ${LLVM_BUILD_DIR}
@@ -72,7 +72,7 @@ do_compile() {
     cd ${LLVM_BUILD_DIR}
 
     # Fix libdir for multilib
-    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)${base_libdir}:g' Makefile.config
+    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)/${baselib}:g' Makefile.config
 
     oe_runmake \
         AR="${BUILD_AR}" \
