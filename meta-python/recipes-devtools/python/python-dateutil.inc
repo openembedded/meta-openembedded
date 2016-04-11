@@ -5,8 +5,8 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=51430b33c900f45f999c459ee29ca493"
 PR = "r0"
 
-SRC_URI[md5sum] = "2769f13c596427558136b34977a95269"
-SRC_URI[sha256sum] = "40d1bc468c7df50aff9e7a12c14687f9180efcff86900ee2963f9f2c13b5d7a9"
+SRC_URI[md5sum] = "eafe168e8f404bf384514f5116eedbb6"
+SRC_URI[sha256sum] = "063907ef47f6e187b8fe0728952e4effb587a34f2dc356888646f9b71fbb2e4b"
 
 PYPI_PACKAGE = "python-dateutil"
 inherit pypi 
