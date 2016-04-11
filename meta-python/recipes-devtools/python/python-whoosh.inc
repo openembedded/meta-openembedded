@@ -7,8 +7,8 @@ Whoosh works can be extended or replaced to meet your needs exactly."
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05303186defc6141143629961c7c8a60"
 
-SRC_URI[md5sum] = "891edeba96cec53604c0cd176284c4cf"
-SRC_URI[sha256sum] = "aa6db447522e208ae652c6ce063bb23cedec47f5ed630121b3debaa011fcb9c4"
+SRC_URI[md5sum] = "893433e9c0525ac043df33e6e04caab2"
+SRC_URI[sha256sum] = "e0857375f63e9041e03fedd5b7541f97cf78917ac1b6b06c1fcc9b45375dda69"
 
 PYPI_PACKAGE = "Whoosh"
 PYPI_PACKAGE_EXT = "zip"
