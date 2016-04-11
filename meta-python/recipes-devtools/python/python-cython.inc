@@ -10,8 +10,8 @@ BBCLASSEXTEND = "native"
 SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-SRC_URI[md5sum] = "157df1f69bcec6b56fd97e0f2e057f6e"
-SRC_URI[sha256sum] = "fec42fecee35d6cc02887f1eef4e4952c97402ed2800bfe41bbd9ed1a0730d8e"
+SRC_URI[md5sum] = "14fbc970f4a856845e633cbc09e61048"
+SRC_URI[sha256sum] = "6de44d8c482128efc12334641347a9c3e5098d807dd3c69e867fa8f84ec2a3f1"
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-netserver \
