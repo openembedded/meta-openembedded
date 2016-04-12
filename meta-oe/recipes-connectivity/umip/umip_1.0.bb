@@ -17,4 +17,4 @@ EXTRA_OE_CONF = "--enable-vt"
 
 inherit autotools-brokensep
 
-PNBLACKLIST[umip] ?= "BROKEN: SRC_URI seems to be down and build from premirror fails to find gram.h, see http://errors.yoctoproject.org/Errors/Details/56158/"
+PARALLEL_MAKE = ""
