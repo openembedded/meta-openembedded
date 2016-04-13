@@ -72,7 +72,6 @@ do_install_append() {
 }
 
 USERADD_PACKAGES = "${PN}-bin"
-GROUPADD_PARAM_${PN}-bin = "--system mail"
 USERADD_PARAM_${PN}-bin = "--system --home=/var/spool/mail -g mail cyrus"
 
 SYSTEMD_PACKAGES = "${PN}"
