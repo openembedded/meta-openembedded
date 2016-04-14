@@ -23,8 +23,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
           "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
-SRC_URI[md5sum] = "3690b3cc991b7dfd22aea9e1264a11b9"
-SRC_URI[sha256sum] = "0644b050de41f5c9f67c825285049b144690421acb709b06fe53eddfa8a9fd4c"
+SRC_URI[md5sum] = "3ff4f00ee051cf5d5304b47b1bc418b8"
+SRC_URI[sha256sum] = "0e76a375ed3dbac636f50ac39de966ece443751fe4d62392f9a360a19d94d0da"
 
 S = "${WORKDIR}/httpd-${PV}"
 
