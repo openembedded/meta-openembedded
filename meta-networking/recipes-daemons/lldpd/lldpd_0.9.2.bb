@@ -11,8 +11,8 @@ SRC_URI = "\
     file://lldpd.default \
     "
 
-SRC_URI[md5sum] = "ed0226129b0c90b3a45c273fe1aba8de"
-SRC_URI[sha256sum] = "300e4a590f7bf21c79d5ff94c2d6a69d0b2c34dbc21e17281496462a04ca80bc"
+SRC_URI[md5sum] = "b809887bc927fb558fd5dd64b6c0a494"
+SRC_URI[sha256sum] = "6054f29d41faf32186a22331853a299c87f4419b4332df4a564f76a139305a32"
 
 inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
 
