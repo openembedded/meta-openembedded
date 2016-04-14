@@ -20,4 +20,4 @@ ALLOW_EMPTY_${PN}-dbg = "1"
 
 RDEPENDS_${PN}-dev += "${PN}-staticdev"
 
-BBCLASSEXTEND = "nativesdk"
+BBCLASSEXTEND = "native nativesdk"
