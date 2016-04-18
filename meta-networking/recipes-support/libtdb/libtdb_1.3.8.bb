@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=b
 SRC_URI = "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://do-not-check-xsltproc-manpages.patch"
 
-SRC_URI[md5sum] = "e3741a19c427255acd1e92c5e09d9df7"
-SRC_URI[sha256sum] = "a64d95ca0cc06a28fed24c6e952aed7660cae04983108735d6bc30b925136412"
+SRC_URI[md5sum] = "fa4c9e2f59fcf41441285bca5f5ab481"
+SRC_URI[sha256sum] = "0605ac0427eac9c23bf61ebfd8206a07d5ece198498eab1769cd0cfb6e7de6b1"
 
 S = "${WORKDIR}/tdb-${PV}"
 
