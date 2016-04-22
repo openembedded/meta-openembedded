@@ -16,7 +16,7 @@ PNBLACKLIST[entrance] ?= "broken: switch to https://git.enlightenment.org/misc/e
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[consolekit] = "--enable-consolekit,--disable-consolekit,consolekit"
 
-EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc ${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-pam', d)}"
+EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '--disable-pam', d)}"
 
 PR = "r7"
 PV = "0.0.4+svnr${SRCPV}"
