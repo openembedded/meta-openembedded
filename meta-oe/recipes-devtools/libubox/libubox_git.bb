@@ -18,7 +18,7 @@ SRC_URI = "\
     file://fix-libdir.patch \
 "
 
-SRCREV = "136a5196266d03d537f822c4e67d2fde2ed59505"
+SRCREV = "155bf39896f126b1ba121b816922a88dc34c31e3"
 
 S = "${WORKDIR}/git"
 
