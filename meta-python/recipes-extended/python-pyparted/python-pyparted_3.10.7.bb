@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "\
 "
 DEPENDS += "parted python-re"
 
-PV = "3.10.5+git${SRCPV}"
+PV = "3.10.7+git${SRCPV}"
 
 # upstream only publishes releases in github archives which are discouraged
-SRCREV = "75bba5a5c8b65b21979d69421f661f7708304191"
+SRCREV = "69c4a478e43d3eff6ae3a0116fa38da06776d5f5"
 SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
            file://0001-fix-version-float-check.patch \
 "
