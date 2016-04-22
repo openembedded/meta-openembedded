@@ -20,11 +20,11 @@ EXTRA_OECONF = " \
         --without-lib-prefix \
 "
 
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
 
 PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
-        ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
 "
 PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
 PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"

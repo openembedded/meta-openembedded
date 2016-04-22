@@ -24,8 +24,8 @@ EXTRA_OECONF += "--with-dblib=berkeley \
                  andrew_cv_runpath_switch=none"
 
 PACKAGECONFIG ??= "ntlm \
-        ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
-        ${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
         "
 PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
@@ -54,7 +54,7 @@ do_compile_prepend () {
 }
 
 do_install_append() {
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/saslauthd.service ${D}${systemd_unitdir}/system
 

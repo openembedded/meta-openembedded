@@ -9,8 +9,8 @@ HOMEPAGE = "http://www.nongnu.org/quagga/"
 SECTION = "net"
 LICENSE = "GPL-2.0 & LGPL-2.0"
 DEPENDS = "readline ncurses perl-native"
-DEPENDS += "${@base_contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
-SNMP_CONF="${@base_contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'snmp', 'net-snmp', '', d)}"
+SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp', '--enable-snmp', '', d)}"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=81bcece21748c91ba9992349a91ec11d \
                     file://COPYING.LIB;md5=01ef24401ded36cd8e5d18bfe947240c"
@@ -41,7 +41,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
            file://zebra.service \
 "
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
 PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
 
@@ -62,7 +62,7 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 --enable-exampledir=${docdir}/quagga/examples/ \
                 --enable-vtysh \
                 --enable-isisd \
-                ${@base_contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
+                ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
                 --enable-ospf-te \
                 --enable-opaque-lsa \
                 --enable-ospfclient=yes \
@@ -125,7 +125,7 @@ do_install () {
         fi
     done
 
-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /var/run/quagga 0755 quagga quagga -" \
         > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
@@ -162,7 +162,7 @@ pkg_postinst_${PN} () {
 # Split into a main package and separate per-protocol packages
 PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-babeld ${PN}-bgpd \
                      ${PN}-ripd ${PN}-ripngd ${PN}-isisd \
-                     ${PN}-ospfclient ${@base_contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
+                     ${PN}-ospfclient ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
 
 RDEPENDS_${PN} += "${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
 

@@ -32,10 +32,10 @@ DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libld
 SYSVINITTYPE_linuxstdbase = "lsb"
 SYSVINITTYPE = "sysv"
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVINITTYPE}', '', d)} \
-                   ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-                   ${@base_contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)} \
                    acl cups ldap \
 "
 
