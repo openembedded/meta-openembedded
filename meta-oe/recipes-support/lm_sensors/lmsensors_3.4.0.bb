@@ -55,7 +55,7 @@ do_install() {
     install -m 0755 ${WORKDIR}/sensord.init ${D}${sysconfdir}/init.d/sensord
 
     # Insall sensord service script
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${S}/prog/init/*.service ${D}${systemd_unitdir}/system
     fi

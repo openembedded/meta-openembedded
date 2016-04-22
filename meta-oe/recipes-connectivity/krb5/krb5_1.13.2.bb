@@ -85,7 +85,7 @@ do_install_append() {
     mkdir -p ${D}/${sysconfdir}/default/volatiles
     echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
            > ${D}${sysconfdir}/default/volatiles/87_krb5
-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/krb5kdc - - - -" \
               > ${D}${sysconfdir}/tmpfiles.d/krb5.conf

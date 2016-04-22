@@ -18,7 +18,7 @@ inherit autotools ptest pkgconfig
 
 DEPENDS += "libestr"
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'ptest', 'testbench', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench', '', d)}"
 
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
 PACKAGECONFIG[testbench] = "--enable-testbench,--disable-testbench,,"

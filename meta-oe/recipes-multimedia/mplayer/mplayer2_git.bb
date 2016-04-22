@@ -14,7 +14,7 @@ RCONFLICTS_${PN} = "mplayer"
 REQUIRED_DISTRO_FEATURES = "x11"
 
 # because it depends on libpostproc/libav which has commercial flag
-LICENSE_FLAGS = "${@base_contains('PACKAGECONFIG', 'postproc', 'commercial', '', d)}"
+LICENSE_FLAGS = "${@bb.utils.contains('PACKAGECONFIG', 'postproc', 'commercial', '', d)}"
 
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"

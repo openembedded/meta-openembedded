@@ -41,7 +41,7 @@ do_install_append() {
     install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/corosync
     install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init.d/corosync-notifyd
 
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unitdir}/system/corosync.service
         install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${systemd_unitdir}/system/corosync-notifyd.service

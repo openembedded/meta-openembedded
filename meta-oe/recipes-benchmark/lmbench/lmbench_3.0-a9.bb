@@ -46,7 +46,7 @@ do_install () {
 
     echo "d root root 0755 ${localstatedir}/run/${BPN} none" \
            > ${D}${sysconfdir}/default/volatiles/99_lmbench
-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/${BPN} - - - -" \
               > ${D}${sysconfdir}/tmpfiles.d/lmbench.conf

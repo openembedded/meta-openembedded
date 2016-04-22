@@ -37,7 +37,7 @@ do_install_append (){
     install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
 
     # install systemd unit files
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${S}/init/dlm.service ${D}${systemd_unitdir}/system
     fi

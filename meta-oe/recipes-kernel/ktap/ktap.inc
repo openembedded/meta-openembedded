@@ -21,6 +21,6 @@ PACKAGECONFIG[libelf] = ",,elfutils"
 PACKAGECONFIG ?= "libelf"
 
 EXTRA_OEMAKE = " \
-    ${@base_contains('PACKAGECONFIG', 'libelf', '', 'NO_LIBELF=1', d)} \
-    ${@base_contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'libelf', '', 'NO_LIBELF=1', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'ffi', 'FFI=1', '', d)} \
 "

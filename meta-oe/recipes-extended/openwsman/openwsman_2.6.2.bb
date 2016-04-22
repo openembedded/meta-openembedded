@@ -29,7 +29,7 @@ inherit systemd cmake pkgconfig pythonnative perlnative
 SYSTEMD_SERVICE_${PN} = "openwsmand.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-ld=bfd ", '', d)}"
+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-ld=bfd ", '', d)}"
 
 EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
                  -DBUILD_LIBCIM=NO \
@@ -50,7 +50,7 @@ do_install_append() {
     install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
     ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
     chmod 755 ${D}/${sysconfdir}/openwsman/owsmangencert.sh
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}/${systemd_unitdir}/system
         install -m 644 ${WORKDIR}/openwsmand.service ${D}/${systemd_unitdir}/system
 

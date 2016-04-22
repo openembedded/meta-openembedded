@@ -17,7 +17,7 @@ SRC_URI[md5sum] = "5904f23cf494946237cfbbdbe644a3cd"
 SRC_URI[sha256sum] = "e2b2fbeaec45a83905d0da3b87da83904d9cd94c1b86312f844587b3fff11f56"
 
 inherit cmake
-LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 EXTRA_OECMAKE = " \
                  -DWITH-DEVASSISTANT=OFF \
                  -DWITH-JOURNALD=OFF \

@@ -9,7 +9,7 @@ HOMEPAGE = "http://grsecurity.net/index.php"
 SECTION = "admin"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
-DEPENDS = "flex-native bison-native ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+DEPENDS = "flex-native bison-native ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SRC_URI = "http://grsecurity.net/stable/${BP}-201507191652.tar.gz \
            file://0001-Makefile-remove-strip.patch"
@@ -26,7 +26,7 @@ do_compile() {
                'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
                'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
                'BISON=${STAGING_BINDIR_NATIVE}/bison'   \
-               ${@base_contains('DISTRO_FEATURES', 'pam', ' ', 'nopam', d)}
+               ${@bb.utils.contains('DISTRO_FEATURES', 'pam', ' ', 'nopam', d)}
 }
 
 do_install() {

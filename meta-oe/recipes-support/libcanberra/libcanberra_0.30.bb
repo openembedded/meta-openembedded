@@ -22,9 +22,9 @@ EXTRA_OECONF = "\
     --disable-lynx \
 "
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','alsa','alsa','',d)} \
-                   ${@base_contains('DISTRO_FEATURES','pulseaudio','pulseaudio','',d)} \
-                   ${@base_contains('DISTRO_FEATURES','x11','gtk gtk3','',d)} \
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','alsa','alsa','',d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES','pulseaudio','pulseaudio','',d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES','x11','gtk gtk3','',d)} \
 "
 PACKAGECONFIG[alsa] = "--enable-alsa, --disable-alsa, alsa-lib"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse, --disable-pulse, pulseaudio"

@@ -16,7 +16,7 @@ SRCREV = "460e6421c16a8216d29ccd1b7490f814dab8b769"
 S = "${WORKDIR}/git"
 
 inherit native cmake
-LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
                  ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \

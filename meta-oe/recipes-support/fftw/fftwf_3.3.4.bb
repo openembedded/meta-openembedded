@@ -4,7 +4,7 @@ require fftw.inc
 EXCLUDE_FROM_WORLD = "1"
 
 EXTRA_OECONF += "--enable-single \
-    ${@base_contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
+    ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
 "
 
 SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
