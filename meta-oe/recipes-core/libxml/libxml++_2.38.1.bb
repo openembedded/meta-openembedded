@@ -11,8 +11,8 @@ SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz \
     file://libxml++_ptest.patch \
     file://run-ptest \
 "
-SRC_URI[md5sum] = "2f9372a6eba6e40206c11f558a8fbc32"
-SRC_URI[sha256sum] = "f3b183600532a92af355719210223f858857092b8b1531c7907155c59a6db39f"
+SRC_URI[md5sum] = "6b16aac575725a9bc0e9d96489e9251f"
+SRC_URI[sha256sum] = "882529189b03db6c69925b3f579ab1941feb4f02b5fe2612504ee7e498a4a05f"
 
 DEPENDS = "libxml2 glibmm"
 
