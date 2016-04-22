@@ -41,9 +41,9 @@ EXTRA_OECONF += "--enable-cached-man-pages"
 PACKAGECONFIG ??= " \
     zlib rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
     imdiag gnutls imfile \
-    ${@base_contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
-    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-    ${@base_contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
 "
 
 # default yes in configure

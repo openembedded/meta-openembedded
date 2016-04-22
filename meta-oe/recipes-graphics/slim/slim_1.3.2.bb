@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
 PR = "r1"
 
-DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+DEPENDS = "virtual/libx11 libxmu libpng jpeg freetype sessreg ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SRC_URI = " \
     http://download.berlios.de/${BPN}/${BP}.tar.gz \
@@ -28,7 +28,7 @@ SRC_URI[sha256sum] = "f1560125005f253b9b88220598fed7a9575ef405716862c6ca3fcc72db
 
 
 EXTRA_OEMAKE += " \
-    USE_PAM=${@base_contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
+    USE_PAM=${@bb.utils.contains('DISTRO_FEATURES', 'pam', '1', '0', d)} \
     PREFIX=${prefix} \
     CFGDIR=${sysconfdir} \
     MANDIR=${mandir} \

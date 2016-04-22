@@ -39,7 +39,7 @@ inherit autotools pkgconfig lib_package
 EXTRA_OECONF += "--disable-rpath"
 
 PACKAGECONFIG ?= "\
-    ${@base_contains('DISTRO_FEATURES', 'largefile$', 'largefile', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'largefile$', 'largefile', '', d)} \
 "
 PACKAGECONFIG[doxygen] = "--enable-doxygen,--disable-doxygen"
 PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile"

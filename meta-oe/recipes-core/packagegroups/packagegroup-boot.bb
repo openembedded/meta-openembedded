@@ -24,7 +24,7 @@ RDEPENDS_${PN} = "\
     base-passwd \
     busybox \
     netbase \
-    ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
+    ${@bb.utils.contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
 "
 

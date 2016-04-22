@@ -16,11 +16,11 @@ SRC_URI[sha256sum] = "f6f4876a4dabe6a37c270c20bb9e141e38fb50e0bba200e1b9d0470e5e
 
 inherit allarch fontcache
 
-PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
 PACKAGECONFIG[x11] = ""
 
 # Don't use font cache mecanism for console packages
-FONT_PACKAGES = "${@base_contains('PACKAGECONFIG', 'x11', '${PN}-pcf', '', d)}"
+FONT_PACKAGES = "${@bb.utils.contains('PACKAGECONFIG', 'x11', '${PN}-pcf', '', d)}"
 
 # Hand made configure script. Don't need oe_runconf
 do_configure() {
@@ -32,11 +32,11 @@ do_configure() {
 }
 
 do_compile() {
-    oe_runmake DESTDIR=${D} psf txt ${@base_contains('PACKAGECONFIG', 'x11', 'pcf', '', d)}
+    oe_runmake DESTDIR=${D} psf txt ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'pcf', '', d)}
 }
 
 do_install() {
-    oe_runmake DESTDIR=${D} install-psf install-acm ${@base_contains('PACKAGECONFIG', 'x11', 'install-pcf', '', d)}
+    oe_runmake DESTDIR=${D} install-psf install-acm ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'install-pcf', '', d)}
 }
 
 PACKAGES += "${PN}-consolefonts ${PN}-consoletrans ${PN}-pcf"
