@@ -12,7 +12,7 @@ do_configure_prepend() {
         cp -f ${S}/m4/vapigen.m4 ${S}/m4/vapigen-custom.m4 || true
 }
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
 PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+"
 
 PACKAGES =+ "gssdp-tools"
