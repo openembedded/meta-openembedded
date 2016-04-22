@@ -20,5 +20,5 @@ do_configure_prepend() {
 
 SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
-SRC_URI[md5sum] = "d30cf203784431b0fdc3216b1acd999c"
-SRC_URI[sha256sum] = "d95f8ea8e78f843c71b1958fa2fb445e4a325e4821ec23d0d5108d8170e564a5"
+SRC_URI[md5sum] = "29ea6125e653d7e60b49a9a9544abc96"
+SRC_URI[sha256sum] = "4ad99ef937d071b4883c061df40bfe233f7649d50c354cf81235f180b4244399"
