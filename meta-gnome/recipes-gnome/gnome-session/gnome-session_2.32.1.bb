@@ -24,6 +24,6 @@ do_configure_append() {
     done    
 }
 
-RRECOMMENDS_${PN} += "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-ck-connector', '', d)}"
+RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-ck-connector', '', d)}"
 FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${datadir}/gnome ${libdir}/gnome-session/helpers"
 FILES_${PN}-dbg += "${libexecdir}/gnome-session/helpers/.debug"

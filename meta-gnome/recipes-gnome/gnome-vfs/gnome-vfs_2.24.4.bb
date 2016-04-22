@@ -31,7 +31,7 @@ SRC_URI[archive.md5sum] = "a05fab03eeef10a47dd156b758982f2e"
 SRC_URI[archive.sha256sum] = "62de64b5b804eb04104ff98fcd6a8b7276d510a49fbd9c0feb568f8996444faa"
 GNOME_COMPRESS_TYPE="bz2"
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)}"
 PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
 PACKAGECONFIG[fam] = "--enable-fam,--disable-fam,gamin"
 
