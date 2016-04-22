@@ -7,9 +7,9 @@ LICENSE = "BSD & Apache-2.0"
 HOMEPAGE = "http://concurrencykit.org"
 SECTION = "base"
 
-PV = "0.4.3+git${SRCPV}"
-SRCREV = "900d203aa9e41288545368ea40da0bee89f7907f"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f12611e65e064515ce264249b2bdea98"
+PV = "0.5.1+git${SRCPV}"
+SRCREV = "f97d3da5c375ac2fc5a9173cdd36cb828915a2e1"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a0b24c1a8f9ad516a297d055b0294231"
 SRC_URI = "git://github.com/concurrencykit/ck.git;protocol=https \
            file://cross.patch \
 "
