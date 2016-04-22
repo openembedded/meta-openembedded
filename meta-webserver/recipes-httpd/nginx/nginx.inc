@@ -66,7 +66,7 @@ do_configure () {
 do_install () {
 	oe_runmake 'DESTDIR=${D}' install
 	rm -fr ${D}${localstatedir}/run ${D}/run
-	if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
 		install -d ${D}${sysconfdir}/tmpfiles.d
 		echo "d /run/${BPN} - - - -" \
 		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
