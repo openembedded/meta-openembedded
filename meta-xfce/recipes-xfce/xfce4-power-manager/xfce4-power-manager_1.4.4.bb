@@ -18,7 +18,7 @@ EXTRA_OECONF = " \
     --enable-panel-plugins \
 "
 
-PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
 PACKAGECONFIG[systemd] = "--enable-polkit, --disable-polkit, polkit"
 
 PACKAGES += "xfce4-powermanager-plugin"
@@ -34,7 +34,7 @@ FILES_xfce4-powermanager-plugin = " \
 "
 
 RDEPENDS_xfce4-powermanager-plugin = "${PN}"
-RDEPENDS_${PN} = "networkmanager ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
+RDEPENDS_${PN} = "networkmanager ${@bb.utils.contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
 
 # xfce4-brightness-plugin was replaced by xfce4-powermanager-plugin
 RPROVIDES_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
