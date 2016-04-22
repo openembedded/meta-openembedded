@@ -1,12 +1,12 @@
 SUMMARY = "Perl module for pseudo tty IO"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://META.yml;beginline=7;endline=8;md5=f86a66cc3d9522a227298d6898b181a2"
+LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=12;md5=b2562f94907eeb42e8ce9d45f628e587"
 
 SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "46baec86a145e57f0ec661fa412b097c"
-SRC_URI[sha256sum] = "31a6e21ad187ec5ea93c2b898d6b3519647c5fce9f394b6d3c05a1f7c3f6f8b1"
+SRC_URI[md5sum] = "11695a1a516b3bd1b90ce75ff0ce3e6d"
+SRC_URI[sha256sum] = "a2ef8770d3309178203f8c8ac25e623e63cf76e97830fd3be280ade1a555290d"
 
 S = "${WORKDIR}/IO-Tty-${PV}"
 
