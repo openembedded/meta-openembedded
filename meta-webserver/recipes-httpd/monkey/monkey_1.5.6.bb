@@ -58,7 +58,7 @@ do_install_append() {
     mkdir -p ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monkey
 
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}/system
     fi

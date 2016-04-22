@@ -46,7 +46,7 @@ do_install() {
     install -m 0644 ${WORKDIR}/nhttpd.conf ${D}${sysconfdir}
     install -m 0755 ${WORKDIR}/nostromo ${D}${sysconfdir}/init.d
     install -D -m 0644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/nostromo
-    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -D -m 0644 ${WORKDIR}/tmpfiles.conf ${D}${sysconfdir}/tmpfiles.d/nostromo.conf
     fi
     install -m 0644 htdocs/index.html ${D}${localstatedir}/nostromo/htdocs/index.html
