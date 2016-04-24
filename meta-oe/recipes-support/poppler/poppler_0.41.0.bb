@@ -6,8 +6,8 @@ SRC_URI = " \
     http://poppler.freedesktop.org/${BP}.tar.xz \
     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
 "
-SRC_URI[md5sum] = "c635e1742202cbbd9182cb0255d95652"
-SRC_URI[sha256sum] = "b89f9c5eae3bbb1046b0f767714afd75eca102a0406a3a30856778d42a685bee"
+SRC_URI[md5sum] = "849a8bd6af5794efb961b70418414e5a"
+SRC_URI[sha256sum] = "420abaab63caed9e1ee28964a0ba216d1979506726164bc99ad5ade289192a1b"
 
 DEPENDS = "fontconfig zlib cairo lcms"
 
