@@ -17,6 +17,7 @@ DEPENDS = "elfutils"
 RDEPENDS_${PN} = "elfutils"
 SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
            file://configure-allow-to-disable-selinux-support.patch \
+           file://0001-replace-readdir_r-with-readdir.patch \
           "
 S = "${WORKDIR}/git"
 
