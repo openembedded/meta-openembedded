@@ -29,6 +29,10 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/pppoe-server.service ${D}${systemd_unitdir}/system
     sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/pppoe-server.service
     sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/pppoe-server.service
+    install -d ${D}${datadir}/doc/${PN}
+    if [ -f ${D}${datadir}/doc/README ]; then
+        mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
+    fi
 }
 
 do_install() {
