@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f8d34cadaf891753c0f00c6cd48f08f5 \
                     file://src/extensions/weston/weston-wfits.cpp;endline=21;md5=848c81e55cf3a30a9f6ed75f0dba7a97"
 
 SRC_URI = "git://github.com/01org/wayland-fits.git"
-SRCREV = "f30dfa9fceb438d3687c5215093fffc21a7852fc"
+SRCREV = "f108335e374772ae2818a30ae37fe6fcda81980f"
 
 S = "${WORKDIR}/git"
 
@@ -31,6 +31,3 @@ do_install_append() {
 
 FILES_${PN} += "${bindir}/wfits ${libdir}/weston/*.so"
 FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/weston/.debug ${prefix}/src"
-
-# http://errors.yoctoproject.org/Errors/Details/35141/
-PNBLACKLIST[wayland-fits] ?= "BROKEN: fails since wayland upgrade: weston-wfits.cpp:86:39: error: expected primary-expression before 'struct'"
