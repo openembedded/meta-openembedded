@@ -22,7 +22,7 @@ SRC_URI[sha256sum] = "321e964fe9386785d3bf80870640f2fa1c683e32fe988eeb201b04471c
 
 S = "${WORKDIR}/${BPN}${PV}/js/src"
 
-inherit autotools pkgconfig perlnative
+inherit autotools pkgconfig perlnative pythonnative
 
 DEPENDS += "nspr zlib"
 
