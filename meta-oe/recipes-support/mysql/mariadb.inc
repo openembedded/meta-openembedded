@@ -145,7 +145,10 @@ do_install() {
     fi
     install -d ${D}${bindir}
     install -m 755 ${WORKDIR}/mysql-systemd-start ${D}${bindir}
-
+    install -d ${D}${datadir}/doc/${PN}
+    if [ -f ${D}${datadir}/doc/README ]; then
+        mv ${D}${datadir}/doc/README ${D}${datadir}/doc/${PN}/
+    fi
 }
 
 PACKAGES = "${PN}-dbg ${PN} \
