@@ -34,7 +34,7 @@ index bc9df9e..2a33d29 100644
  dnl bail out if we can't find it
  if test "$RSYNC" = "no"; then
 -	AC_MSG_ERROR(rsync is required)
-+	RSYNC=/usr/bin/rsync
++	RSYNC=${bindir}/rsync
 +	AC_SUBST(CMD_RSYNC, "cmd_rsync  $RSYNC")
  fi
  
