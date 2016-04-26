@@ -53,17 +53,11 @@ do_configure() {
 }
 
 # patch.bbclass will try to apply the patches already present and fail, so clean them out
-do_sourceclean() {
-    (
-    cd ${WORKDIR}/${BPN}${PV}/patches
-    for i in $(cat series | awk '{print $1}') ; do
-        rm -f $i
-    done
-    rm -f series
-    )
+do_unpack() {
+    tar -xvf ${DL_DIR}/mozjs17.0.0.tar.gz -C ${WORKDIR}/
+    rm -rf ${WORKDIR}/${BPN}${PV}/patches
 }
 
-addtask sourceclean before do_patch after do_unpack
 
 PACKAGES =+ "lib${PN}"
 FILES_lib${PN} += "${libdir}/lib*.so"
