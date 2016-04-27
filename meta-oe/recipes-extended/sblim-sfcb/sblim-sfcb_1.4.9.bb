@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.sblim.org"
 SECTION = "Applications/System"
 LICENSE = "EPL-1.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
-DEPENDS = "curl libpam openssl sblim-sfc-common"
+DEPENDS = "curl libpam openssl sblim-sfc-common unzip-native"
 
 SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
            file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
