@@ -14,7 +14,9 @@ SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
 SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
 SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
 
-EXTRA_OEMAKE = "STRIP="
+B = "${WORKDIR}/build"
+
+EXTRA_OEMAKE = "STRIP= 'srcdir=${S}' -f ${S}/GNUmakefile"
 
 PACKAGECONFIG ??= "gif png curl"
 PACKAGECONFIG[curl] = ",,curl"
@@ -26,6 +28,7 @@ PACKAGECONFIG[webp] = ",,libwebp"
 PACKAGECONFIG[lirc] = ",,lirc"
 
 do_compile() {
+    sed -i -e 's# fbgs# \$(srcdir)/fbgs#; s#-Ijpeg#-I\$(srcdir)/jpeg#; s# jpeg/# \$(srcdir)/jpeg/#' ${S}/GNUmakefile
     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
     sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
 
