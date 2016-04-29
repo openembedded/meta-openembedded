@@ -33,7 +33,7 @@ do_install_append() {
     #set S UID for plugins
     chmod 4755 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
 
-    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         # Install systemd unit files
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/netdata.service ${D}${systemd_unitdir}/system
