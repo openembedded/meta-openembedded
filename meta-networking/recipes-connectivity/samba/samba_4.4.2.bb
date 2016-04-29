@@ -106,6 +106,11 @@ do_install_append() {
     elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba.sh
+        sed -e 's,/opt/samba/bin,${sbindir},g' \
+            -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
+            -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
+            -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \
+            -i ${D}${sysconfdir}/init.d/samba.sh
         update-rc.d -r ${D} samba.sh start 20 3 5 .
         update-rc.d -r ${D} samba.sh start 20 0 1 6 .
     fi
