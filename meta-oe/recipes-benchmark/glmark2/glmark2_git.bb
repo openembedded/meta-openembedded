@@ -13,7 +13,8 @@ DEPENDS = "libpng12 jpeg"
 PV = "2014.03+${SRCPV}"
 
 SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
-           file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch"
+           file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
+           file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch"
 SRCREV = "fa71af2dfab711fac87b9504b6fc9862f44bf72a"
 
 S = "${WORKDIR}/git"
