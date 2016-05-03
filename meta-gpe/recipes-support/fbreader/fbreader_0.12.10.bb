@@ -9,7 +9,8 @@ PR = "r1"
 
 SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
 file://Makefile.patch \
-file://gcc45.patch"
+file://gcc45.patch \
+file://fix-cflags-fribidi.patch"
 
 # Set the defaults
 READER_RESOLUTION ?= "1024x600"
