@@ -1,11 +1,15 @@
 SUMMARY = "Toybox combines common utilities together into a single executable."
 HOMEPAGE = "http://www.landley.net/toybox/"
+DEPENDS = "attr"
 
-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
+SRC_URI = " \
+    http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+    file://0001-Fix-segfault-in-login.patch \
+    file://0002-Add-b-and-F-arguments-to-hostname.patch \
+"
 
-SRC_URI[md5sum] = "7f4a6c89e56c48e3350e611f5b36c2cf"
-SRC_URI[sha256sum] = "b6e2694d19ac08f1c3416d5b2a02a31d445db2ed98dec89761430cdff2c9710d"
-
+SRC_URI[md5sum] = "d86c78624b47625c2f0fc64eda599443"
+SRC_URI[sha256sum] = "65428816f88ad3fe92b67df86dc05427c8078fe03843b8b9715fdfa6d29c0f97"
 
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
