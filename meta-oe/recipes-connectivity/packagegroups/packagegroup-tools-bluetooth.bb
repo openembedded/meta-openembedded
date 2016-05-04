@@ -5,36 +5,33 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-SUMMARY = "Set of Bluetooh related tools for inclusion on images"
-DESCRIPTION = "Add bluetooth tools based on the version of BlueZ in use.\
-The tools that have been tested and work the best are pulled in \
-automatically.  The same packagegroup can be used in a recipe without \
-the need to know which version of BlueZ is in use. \
+SUMMARY = "Set of Bluetooth related tools for inclusion in images"
+DESCRIPTION = "Includes bluetooth specific tools for this version of BlueZ.\
+These tools are used at runtime. \
 Supports BlueZ4 and BlueZ5."
 
 inherit packagegroup
+inherit bluetooth
 
-BLUEZ4_INSTALL = " \
+RDEPENDS_bluez4 = " \
     obexftp \
 "
 
-BLUEZ5_INSTALL = " \
-     bluez5-noinst-tools \
-     bluez5-obex \
-     bluez5-testtools  \
-     libasound-module-bluez \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', "pulseaudio-module-bluetooth-discover \
-                                                            pulseaudio-module-bluetooth-policy \
-                                                            pulseaudio-module-bluez5-discover \
-                                                            pulseaudio-module-bluez5-device \
-                                                            pulseaudio-module-switch-on-connect \
-                                                            pulseaudio-module-loopback", \
-                                             '', d)} \
+RDEPENDS_bluez5 = " \
+    bluez5-noinst-tools \
+    bluez5-obex \
+    bluez5-testtools  \
+    libasound-module-bluez \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', \
+        'pulseaudio-module-bluetooth-discover \
+         pulseaudio-module-bluetooth-policy \
+         pulseaudio-module-bluez5-discover \
+         pulseaudio-module-bluez5-device \
+         pulseaudio-module-switch-on-connect \
+         pulseaudio-module-loopback', \
+        '', d)} \
 "
 
-# Install either bluez4 or bluez5 if they are in distro.  
+# Install bluez4 tools or bluez5 tools depending on what is specified in the distro.
 # Otherwise install nothing.
-RDEPENDS_${PN} = " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', '${BLUEZ5_INSTALL}', "", d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez4', '${BLUEZ4_INSTALL}', "", d)} \
-"
+RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}"
