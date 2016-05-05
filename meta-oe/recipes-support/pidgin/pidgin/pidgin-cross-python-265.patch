@@ -1,16 +1,27 @@
-Index: pidgin-2.6.5/configure.ac
-===================================================================
---- pidgin-2.6.5.orig/configure.ac
-+++ pidgin-2.6.5/configure.ac
-@@ -1470,8 +1470,9 @@ if test "_$pythonpath" != _ ; then
- 		AC_CHECK_LIB(pthread, pthread_create, )
- 		AC_CHECK_LIB(util, openpty, )
- 		AC_CHECK_LIB(db, dbopen, )
--		PY_LIBS="-L$PY_EXEC_PREFIX/lib/python$PY_VERSION/config -lpython$PY_VERSION"
--		PY_CFLAGS="-I$PY_PREFIX/include/python$PY_VERSION"
+From 428836ba7f9048970626ef0d6b805107f7c52d33 Mon Sep 17 00:00:00 2001
+From: Herrie <github.com@herrie.org>
+Date: Thu, 5 May 2016 13:33:29 +0200
+Subject: [PATCH] Updated python patch
+
+---
+ configure.ac | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 94ea8cf..2285adb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1587,9 +1587,9 @@ dnl (Thanks to XChat)
+ if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
+ 	AC_MSG_CHECKING(for Python compile flags)
+ 	if test -f ${PYTHON}-config; then
+-		PY_CFLAGS=`${PYTHON}-config --includes`
+-		PY_LIBS=`${PYTHON}-config --libs`
+-		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
 +		m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
 +		PY_LIBS="-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config -lpython$PY_VERSION"
-+		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"
- 		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
++		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
  		AC_MSG_RESULT(ok)
  	else
+ 		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
+

@@ -2,23 +2,19 @@ DESCRIPTION = "multi-protocol instant messaging client"
 SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus intltool-native farsight2 libidn"
+DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus intltool-native farsight2 libidn libxml2 gconf dbus-glib"
 
 inherit autotools gettext pkgconfig gconf perlnative
-
-# http://errors.yoctoproject.org/Errors/Details/25824/
-PNBLACKLIST[pidgin] ?= "Not compatible with gnutls version 3.4 currently in oe-core and also depends on broken libnice through farsight2"
 
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
-    file://pidgin.desktop-set-icon.patch \
     file://purple-OE-branding-25.patch \
     file://pidgin-cross-python-265.patch \
 "
 
-SRC_URI[md5sum] = "10a4a69d077893f6dd3438cd8af94e81"
-SRC_URI[sha256sum] = "dc362ed8577f623eea4554a79e917073aa726825074fea402f2e515f0f51f319"
+SRC_URI[md5sum] = "14e0f5cfb2ed065e4dc80391a806ac76"
+SRC_URI[sha256sum] = "2c7523f0fefe89749c03b2b738ab9f7bd186da435be4762f1487eee31e77ffdd"
 
 EXTRA_OECONF = " \
     --enable-vv \
