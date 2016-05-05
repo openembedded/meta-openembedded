@@ -4,8 +4,8 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=20cdd3af097ca431b82004c691f406a6"
 
 SRC_URI = "http://leptonica.com/source/leptonica-${PV}.tar.gz"
-SRC_URI[md5sum] = "5ac2a31cf5b4f0e8f5a853a5266c42ef"
-SRC_URI[sha256sum] = "d3d209a1f6d1f7a80119486b5011bc8c6627e582c927ab44ba33c37edb2cfba2"
+SRC_URI[md5sum] = "092cea2e568cada79fff178820397922"
+SRC_URI[sha256sum] = "19e4335c674e7b78af9338d5382cc5266f34a62d4ce533d860af48eaa859afc1"
 
 EXTRA_OECONF += " \
     --without-libwebp \
