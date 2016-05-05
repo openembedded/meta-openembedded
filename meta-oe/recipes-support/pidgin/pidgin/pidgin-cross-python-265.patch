@@ -1,27 +1,34 @@
-From 428836ba7f9048970626ef0d6b805107f7c52d33 Mon Sep 17 00:00:00 2001
-From: Herrie <github.com@herrie.org>
-Date: Thu, 5 May 2016 13:33:29 +0200
-Subject: [PATCH] Updated python patch
+Use pkg-config instead of ${PYTHON}-config to find python
 
----
- configure.ac | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/configure.ac b/configure.ac
-index 94ea8cf..2285adb 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -1587,9 +1587,9 @@ dnl (Thanks to XChat)
+diff -uNr pidgin-2.10.12.orig/configure.ac pidgin-2.10.12/configure.ac
+--- pidgin-2.10.12.orig/configure.ac	2016-01-01 00:19:40.000000000 +0100
++++ pidgin-2.10.12/configure.ac	2016-05-05 16:55:13.258945925 +0200
+@@ -1585,20 +1585,15 @@
+ dnl Check for Python headers (currently useful only for libgnt)
+ dnl (Thanks to XChat)
  if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
- 	AC_MSG_CHECKING(for Python compile flags)
- 	if test -f ${PYTHON}-config; then
+-	AC_MSG_CHECKING(for Python compile flags)
+-	if test -f ${PYTHON}-config; then
 -		PY_CFLAGS=`${PYTHON}-config --includes`
 -		PY_LIBS=`${PYTHON}-config --libs`
 -		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
-+		m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
-+		PY_LIBS="-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config -lpython$PY_VERSION"
-+		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
- 		AC_MSG_RESULT(ok)
- 	else
- 		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
-
+-		AC_MSG_RESULT(ok)
+-	else
+-		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
+-		PY_CFLAGS=""
+-		PY_LIBS=""
+-	fi
++        AC_MSG_CHECKING(for Python compile flags)
++        PKG_CHECK_MODULES(PY, python, [
++                AC_SUBST(PY_CFLAGS)
++                AC_SUBST(PY_LIBS)
++        ], [
++                AC_MSG_RESULT(no)
++                AC_MSG_ERROR([Can't find python])
++        ])
+ fi
+-AC_SUBST(PY_CFLAGS)
+-AC_SUBST(PY_LIBS)
+ 
+ dnl #######################################################################
+ dnl # Check for Mono support

@@ -83,7 +83,7 @@ FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
            ${datadir}/applications"
 RRECOMMENDS_${PN} = "${PN}-data libpurple-plugin-ssl-gnutls libpurple-protocol-irc libpurple-protocol-xmpp"
 
-FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"
+FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons ${datadir}/appdata"
 FILES_${PN}-dev += "${libdir}/${PN}/*.la"
 
 PACKAGES_DYNAMIC += "^libpurple-protocol-.* ^libpurple-plugin-.* ^pidgin-plugin-.* ^finch-plugin-.*"
