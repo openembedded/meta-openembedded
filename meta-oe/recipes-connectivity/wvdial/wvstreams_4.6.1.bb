@@ -20,6 +20,8 @@ inherit autotools-brokensep pkgconfig
 
 PARALLEL_MAKE = ""
 
+TARGET_CFLAGS_append = " -fno-tree-dce -fno-optimize-sibling-calls"
+
 LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
 
 EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
