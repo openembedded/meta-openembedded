@@ -57,6 +57,8 @@ export STAGING_INCDIR
 
 # emulate cpan_do_configure
 EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
+# Avoid do_configure error on some hosts
+export PERLHOSTLIB = ""
 
 do_configure() {
     #fix the pkglib problem with newer automake
