@@ -28,7 +28,7 @@ do_configure_prepend() {
 }
 
 do_compile_append() {
-    for i in $(find ${S} -name "*.pc") ; do
+    for i in $(find ${B} -name "*.pc") ; do
         sed -i -e s:${STAGING_DIR_TARGET}::g \
                -e s:/${TARGET_SYS}::g \
                   $i
@@ -38,5 +38,3 @@ do_compile_append() {
 
 SRC_URI[md5sum] = "e5b9f799a57cb939ea2658ec35253ab9"
 SRC_URI[sha256sum] = "d8dd260c486a470a6052a5323920878a084e44a19df09b15728b85c9e3d6edf0"
-
-PNBLACKLIST[libnice] ?= "BROKEN: QA Issue: nice.pc failed sanity test (tmpdir)"
