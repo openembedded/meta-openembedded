@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit xfce-panel-plugin
 
-DEPENDS = "gtk+ libxfce4ui xfce4-panel xfconf libunique"
+DEPENDS += "gtk+ libxfce4ui xfce4-panel xfconf libunique"
 
 SRC_URI += " \
     file://0001-main-status-icon.c-remove-deprecated-g_type_init.patch \

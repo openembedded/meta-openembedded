@@ -8,6 +8,8 @@ SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@xfce_verdir("${PV}")}/${BP
 
 inherit autotools gettext gtk-icon-cache pkgconfig
 
+DEPENDS += "intltool-native"
+
 FILES_${PN} += "${datadir}/icons/* ${datadir}/applications/* ${libdir}/xfce4/modules/*.so*"
 FILES_${PN}-doc += "${datadir}/xfce4/doc"
 
