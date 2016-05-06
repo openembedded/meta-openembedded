@@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source
            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
 "
 
-inherit autotools systemd pkgconfig update-rc.d update-alternatives
+inherit autotools systemd pkgconfig update-alternatives update-rc.d
 
 EXTRA_OECONF = " \
     --enable-dynamic-linking \
