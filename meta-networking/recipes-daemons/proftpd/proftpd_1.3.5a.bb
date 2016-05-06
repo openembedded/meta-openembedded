@@ -12,6 +12,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://contrib.patch  \
            file://build_fixup.patch \
            file://proftpd.service \
+           file://CVE-2016-3125.patch \
            "
 
 SRC_URI[md5sum] = "b9d3092411478415b31d435f8e26d173"
