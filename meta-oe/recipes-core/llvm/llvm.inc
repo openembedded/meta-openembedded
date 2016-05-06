@@ -121,7 +121,7 @@ ALLOW_EMPTY_${PN} = "1"
 ALLOW_EMPTY_${PN}-staticdev = "1"
 FILES_${PN} = ""
 FILES_${PN}-staticdev = ""
-DOTDEBUG-dbg = " \
+FILES_${PN}-dbg = " \
     ${bindir}/${LLVM_DIR}/.debug \
     ${libdir}/${LLVM_DIR}/.debug/BugpointPasses.so \
     ${libdir}/${LLVM_DIR}/.debug/LLVMHello.so \
@@ -142,6 +142,7 @@ FILES_${PN}-llvmhello = "\
 "
 
 PACKAGES_DYNAMIC = "^libllvm${LLVM_RELEASE}-.*$"
+NOAUTOPACKAGEDEBUG = "1"
 
 INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
 
