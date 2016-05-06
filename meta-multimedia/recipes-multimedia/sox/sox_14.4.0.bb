@@ -4,7 +4,7 @@ and can apply different effects and filters to the audio data."
 HOMEPAGE = "http://sox.sourceforge.net"
 SECTION = "audio"
 
-DEPENDS = "libpng libav libsndfile1 libvorbis"
+DEPENDS = "libpng ffmpeg libsndfile1 libvorbis"
 
 PR = "r2"
 
