@@ -13,7 +13,8 @@ inherit autotools pkgconfig gnomebase gettext gsettings systemd gobject-introspe
 VER_DIR = "${@gnome_verdir("${PV}")}"
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/tracker/${VER_DIR}/tracker-${PV}.tar.xz \
            file://enable-sqlite-crosscompile.patch \
-	   file://fix-removable-media-detection.patch \
+           file://fix-removable-media-detection.patch \
+           file://giflib5-support.patch \
            file://90tracker \
            file://tracker-store.service \
            file://tracker-miner-fs.service \
