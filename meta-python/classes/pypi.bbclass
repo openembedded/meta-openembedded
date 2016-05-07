@@ -12,8 +12,12 @@ PYPI_PACKAGE_EXT ?= "tar.gz"
 def pypi_src_uri(d):
     package = d.getVar('PYPI_PACKAGE', True)
     package_ext = d.getVar('PYPI_PACKAGE_EXT', True)
+    package_hash = d.getVar('PYPI_PACKAGE_HASH', True)
     pv = d.getVar('PV', True)
-    return 'https://pypi.python.org/packages/source/%s/%s/%s-%s.%s' % (package[0], package, package, pv, package_ext)
+    if package_hash:
+        return 'https://pypi.python.org/packages/%s/%s/%s/%s-%s.%s' % ( package_hash[:2], package_hash[2:4], package_hash[4:], package, pv, package_ext)
+    else:
+        return 'https://pypi.python.org/packages/source/%s/%s/%s-%s.%s' % (package[0], package, package, pv, package_ext)
 
 PYPI_SRC_URI ?= "${@pypi_src_uri(d)}"
 
