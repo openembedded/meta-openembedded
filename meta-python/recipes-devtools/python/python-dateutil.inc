@@ -5,10 +5,11 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=51430b33c900f45f999c459ee29ca493"
 PR = "r0"
 
-SRC_URI[md5sum] = "eafe168e8f404bf384514f5116eedbb6"
-SRC_URI[sha256sum] = "063907ef47f6e187b8fe0728952e4effb587a34f2dc356888646f9b71fbb2e4b"
+SRC_URI[md5sum] = "05ffc6d2cc85a7fd93bb245807f715ef"
+SRC_URI[sha256sum] = "1408fdb07c6a1fa9997567ce3fcee6a337b39a503d80699e0f213de4aa4b32ed"
 
 PYPI_PACKAGE = "python-dateutil"
+PYPI_PACKAGE_HASH = "3ef5aad82824b369332a676a90a8c0d1e608b17e740bbb6aeeebca726f17b902"
 inherit pypi 
 
 PACKAGES =+ "${PN}-zoneinfo"
