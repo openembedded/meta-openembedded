@@ -16,12 +16,32 @@ DEPENDS += "augeas libnl libxslt libxml2 gnulib"
 
 S = "${WORKDIR}/git"
 
-inherit gettext autotools-bootstrap pkgconfig systemd
+inherit gettext autotools pkgconfig systemd
 
 EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 
 PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "", d)}"
 PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
+
+do_configure_prepend() {
+    currdir=`pwd`
+    cd ${S}
+
+    # avoid bootstrap cloning gnulib on every configure
+    cat >.gitmodules <<EOF
+[submodule "gnulib"]
+       path = gnulib
+       url = git://git.sv.gnu.org/gnulib
+EOF
+    cp -rf ${STAGING_DATADIR}/gnulib ${S}
+
+    # --force to avoid errors on reconfigure e.g if recipes changed we depend on
+    # | bootstrap: running: libtoolize --quiet
+    # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--force' to overwrite
+    # | ...
+    ./bootstrap --force
+    cd $currdir
+}
 
 do_install_append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
