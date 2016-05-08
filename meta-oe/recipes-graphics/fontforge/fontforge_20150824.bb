@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash"
 DEPENDS_append_class-target = " libxi"
 
-inherit autotools-bootstrap pkgconfig pythonnative distro_features_check
+inherit autotools pkgconfig pythonnative distro_features_check
 
 REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
 
@@ -24,8 +24,24 @@ do_configure_prepend() {
     # uthash sources are expected in uthash/src
     currdir=`pwd`
     cd ${S}
+
     mkdir -p uthash/src
     cp ${STAGING_INCDIR}/ut*.h uthash/src
+
+    # avoid bootstrap cloning gnulib on every configure
+    cat >.gitmodules <<EOF
+[submodule "gnulib"]
+       path = gnulib
+       url = git://git.sv.gnu.org/gnulib
+EOF
+    cp -rf ${STAGING_DATADIR}/gnulib ${S}
+
+    # --force to avoid errors on reconfigure e.g if recipes changed we depend on
+    # | bootstrap: running: libtoolize --quiet
+    # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--force' to overwrite
+    # | ...
+    ./bootstrap --force
+
     cd $currdir
 }
 
