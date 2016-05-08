@@ -28,18 +28,17 @@ do_configure_prepend() {
     cd ${S}
 
     # avoid bootstrap cloning gnulib on every configure
-    cat >.gitmodules <<EOF
-[submodule "gnulib"]
-       path = gnulib
-       url = git://git.sv.gnu.org/gnulib
-EOF
-    cp -rf ${STAGING_DATADIR}/gnulib ${S}
+    # the rmdir acts as a sentinel to let us know if the pkg ever changes
+    # the path for GNUlib or populates the dir making it non-empty.
+    rmdir ${S}/.gnulib
+    cp -rf ${STAGING_DATADIR}/gnulib ${S}/.gnulib
 
     # --force to avoid errors on reconfigure e.g if recipes changed we depend on
     # | bootstrap: running: libtoolize --quiet
     # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--force' to overwrite
     # | ...
-    ./bootstrap --force
+    ./bootstrap --force --no-git --gnulib-srcdir=.gnulib
+
     cd $currdir
 }
 
