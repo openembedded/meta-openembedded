@@ -7,10 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
 
 DEPENDS_class-target = "popt efivar-native"
 
-SRCREV = "01abee43d6d6e755f56a4135ab5aa0bfad609ce2"
+SRCREV = "7367d78281fa3ce390e10c7c9f4608c58e7a6d3d"
 SRC_URI = "git://github.com/rhinstaller/efivar.git"
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
                                 file://0002-disable-static-build.patch \
+                                file://0003-efivar-fix-for-cross-compile.patch \
                               "
 
 S = "${WORKDIR}/git"
