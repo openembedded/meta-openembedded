@@ -26,5 +26,6 @@ do_configure_prepend() {
     automake --add-missing || true
 }
 
-# http://errors.yoctoproject.org/Errors/Details/35142/
-PNBLACKLIST[znc] ?= "BROKEN: QA Issue: znc.pc failed sanity test"
+do_install_append() {
+    sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${D}${libdir}/pkgconfig/*.pc
+}
