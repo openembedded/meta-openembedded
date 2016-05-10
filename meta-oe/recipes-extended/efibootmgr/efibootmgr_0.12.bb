@@ -10,7 +10,7 @@ DEPENDS = "pciutils zlib efivar"
 
 COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
-SRCREV = "eb6e36c9064eae256cd60df24a977e3abd87fd16"
+SRCREV = "75d25807ba81cb724964c989012611272c8f1f5d"
 SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
           "
 
