@@ -1,0 +1,37 @@
+From f1b681a44d28946e6d8fc0080f3efe94228d7dfe Mon Sep 17 00:00:00 2001
+From: Tom Yu <tlyu@mit.edu>
+Date: Wed, 6 Jan 2016 15:24:16 -0500
+Subject: [PATCH] Work around uninitialized warning in cc_kcm.c
+
+Some versions of clang erroneously detect use of an uninitialized
+variable reply_len in kcmio_call() when building on non-Mac platforms.
+Initialize it to work around this warning.
+
+(cherry picked from commit 40b007c0d8e2a12c6f4205ac111dee731c9d970c)
+
+ticket: 8335
+version_fixed: 1.13.4
+tags: -pullup
+status: resolved
+
+Upstream-Status: backport
+---
+ src/lib/krb5/ccache/cc_kcm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/lib/krb5/ccache/cc_kcm.c b/src/lib/krb5/ccache/cc_kcm.c
+index b763ea4..6337b57 100644
+--- a/src/lib/krb5/ccache/cc_kcm.c
++++ b/src/lib/krb5/ccache/cc_kcm.c
+@@ -377,7 +377,7 @@ static krb5_error_code
+ kcmio_call(krb5_context context, struct kcmio *io, struct kcmreq *req)
+ {
+     krb5_error_code ret;
+-    size_t reply_len;
++    size_t reply_len = 0;
+ 
+     if (k5_buf_status(&req->reqbuf) != 0)
+         return ENOMEM;
+-- 
+2.8.2
+
