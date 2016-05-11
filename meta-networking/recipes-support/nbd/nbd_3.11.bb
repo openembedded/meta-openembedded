@@ -2,7 +2,7 @@ DESCRIPTION = "Network Block Device"
 HOMEPAGE = "http://nbd.sourceforge.net"
 SECTION = "net"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://depcomp;beginline=6;endline=26;md5=3a3627e6495e2ff2a3316bcdaad91e9c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "glib-2.0"
 
