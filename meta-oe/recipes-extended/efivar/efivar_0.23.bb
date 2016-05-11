@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/rhinstaller/efivar.git"
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
                                 file://0002-disable-static-build.patch \
                                 file://0003-efivar-fix-for-cross-compile.patch \
+                                file://0004-fix-unknow-option-for-gold-linker.patch \
                               "
 
 S = "${WORKDIR}/git"
