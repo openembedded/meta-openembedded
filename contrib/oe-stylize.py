@@ -32,6 +32,7 @@ OE_vars = [
     'SUMMARY',
     'DESCRIPTION',
     'AUTHOR',
+    'MAINTAINER',
     'HOMEPAGE',
     'SECTION',
     'LICENSE',
