@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
                     file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b \
 "
 
-DEPENDS = "libnl dbus dbus-glib libgudev util-linux libndp libnewt polkit"
+DEPENDS = "intltool-native libnl dbus dbus-glib libgudev util-linux libndp libnewt polkit"
 
 inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
 
