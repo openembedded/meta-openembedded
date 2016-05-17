@@ -24,3 +24,9 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', 
 PACKAGECONFIG[avahi] = "--with-avahi,--without-avahi,avahi"
 PACKAGECONFIG[xinerama] = "--with-xinerama,--without-xinerama,libxinerama"
 PACKAGECONFIG[libvncserver] = "--with-system-libvncserver,--without-system-libvncserver,libvncserver"
+
+do_prepare_sources () {
+    # Remove old libtool macros from acinclude.m4
+    sed -i -e '/^# libtool.m4/q' acinclude.m4
+}
+do_patch[postfuncs] += "do_prepare_sources"
