@@ -28,9 +28,10 @@ do_configure_prepend() {
     cd ${S}
 
     # avoid bootstrap cloning gnulib on every configure
-    # the rmdir acts as a sentinel to let us know if the pkg ever changes
-    # the path for GNUlib or populates the dir making it non-empty.
-    rmdir ${S}/.gnulib
+    # the dir starts out empty from the pkg, but unconditionally blow it
+    # away so if we reconfigure due to gnulib sysroot sig changes, we will
+    # get the newer gnulib content into the build here.
+    rm -rf ${S}/.gnulib
     cp -rf ${STAGING_DATADIR}/gnulib ${S}/.gnulib
 
     # --force to avoid errors on reconfigure e.g if recipes changed we depend on
