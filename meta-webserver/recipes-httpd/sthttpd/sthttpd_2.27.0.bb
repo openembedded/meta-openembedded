@@ -9,8 +9,8 @@ SRC_URI = "http://opensource.dyc.edu/pub/sthttpd/sthttpd-${PV}.tar.gz \
            file://thttpd.conf \
            file://init"
 
-SRC_URI[md5sum] = "e645a85a97d3cb883011a35bc2211815"
-SRC_URI[sha256sum] = "78e87979140cbda123c81b4051552242dbbffb5dec1a17e5f95ec4826b1eaddb"
+SRC_URI[md5sum] = "f7dd2d506dc5fad2ad8794b1800d2634"
+SRC_URI[sha256sum] = "97d660a881331e93818e872ce11536f461105d70a18dfc5de5895851c4b2afdb"
 
 S = "${WORKDIR}/sthttpd-${PV}"
 
@@ -18,7 +18,14 @@ inherit autotools update-rc.d systemd
 
 SRV_DIR ?= "${servicedir}/www"
 
-EXTRA_OEMAKE += "'WEBDIR=${SRV_DIR}'"
+# Note that `${sbindir}/makeweb' is installed setgid to this group,
+# but ${SRV_DIR} is not installed chgrp'd to the group by default.
+WEBGROUP ?= "www-data"
+
+do_configure_prepend () {
+    export WEBDIR=${SRV_DIR}
+    export WEBGROUP=${WEBGROUP}
+}
 
 do_install_append () {
     install -d ${D}${sysconfdir}/init.d
