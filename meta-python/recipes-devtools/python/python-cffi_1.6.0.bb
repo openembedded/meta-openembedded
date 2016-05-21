@@ -3,8 +3,9 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
 DEPENDS = "libffi python-pycparser"
 
-SRC_URI[md5sum] = "fa766133f7299464c8bf857e0c966a82"
-SRC_URI[sha256sum] = "da9bde99872e46f7bb5cff40a9b1cc08406765efafb583c704de108b6cb821dd"
+SRC_URI[md5sum] = "2fae9160991afefb20ff0fbde3b14faf"
+SRC_URI[sha256sum] = "a7f75c4ef2362c0a0e54657add0a6c509fecbfa3b3807bc0925f5cb1c9f927db"
+PYPI_PACKAGE_HASH = "b69811feff87072e2e640fb8320712b781eccdef05d588618915236b32289d5a"
 
 inherit pypi setuptools
 
