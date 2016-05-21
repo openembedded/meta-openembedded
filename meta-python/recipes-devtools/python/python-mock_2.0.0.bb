@@ -2,8 +2,9 @@ SUMMARY = "A Python Mocking and Patching Library for Testing"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=de9dfbf780446b18aab11f00baaf5b7e"
 
-SRC_URI[md5sum] = "73ee8a4afb3ff4da1b4afa287f39fdeb"
-SRC_URI[sha256sum] = "1e247dbecc6ce057299eb7ee019ad68314bb93152e81d9a6110d35f4d5eca0f6"
+SRC_URI[md5sum] = "0febfafd14330c9dcaa40de2d82d40ad"
+SRC_URI[sha256sum] = "b158b6df76edd239b8208d481dc46b6afd45a846b7812ff0ce58971cf5bc8bba"
+PYPI_PACKAGE_HASH = "0c53014354fc93c591ccc4abff12c473ad565a2eb24dcd82490fae33dbf2539f"
 
 inherit pypi setuptools
 
