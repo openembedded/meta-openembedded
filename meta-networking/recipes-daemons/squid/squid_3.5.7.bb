@@ -20,6 +20,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://run-ptest \
            file://volatiles.03_squid \
            file://CVE-2016-3947.patch \
+           file://CVE-2016-4553.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
