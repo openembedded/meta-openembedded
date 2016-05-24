@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
                     file://COPYING.GPL;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
                     file://COPYING.LGPL;md5=252890d9eee26aab7b432e8b8a616475"
-DEPENDS = "gtk+ gnome-doc-utils-native gnome-common libxml2"
+DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2"
 
 inherit autotools pkgconfig pythonnative
 
@@ -17,10 +17,6 @@ EXTRA_OECONF += "--disable-scrollkeeper"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
-
-do_configure_prepend() {
-    sed -i '/^if HAVE_GNOME_DOC_UTILS/,/^endif/d' ${S}/Makefile.am
-}
 
 FILES_${PN} += "${datadir}/icons"
 FILES_${PN}-dbg += "${libdir}/glade3/modules/.debug"

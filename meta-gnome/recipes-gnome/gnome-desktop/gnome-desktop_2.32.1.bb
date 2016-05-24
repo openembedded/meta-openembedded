@@ -18,6 +18,7 @@ EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs --disable-gnome-ab
 
 do_configure_prepend () {
     sed -i -e s:^#!@PYTHON@:#!${bindir}/python: ${S}/gnome-about/gnome-about.in
+    rm -f ${S}/m4/gnome-doc-utils.m4
 }
 
 PACKAGES =+ "libgnome-desktop"

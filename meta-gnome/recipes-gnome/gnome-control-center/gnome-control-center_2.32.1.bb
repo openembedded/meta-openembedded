@@ -16,6 +16,7 @@ LDFLAGS += "-lgthread-2.0 -lxml2"
 
 do_configure_prepend() {
     sed -i s:help::g ${S}/Makefile.am
+    rm -r ${S}/m4/gnome-doc-utils.m4
 }
 do_install_append() {
     rm -rf ${D}${datadir}/mime
