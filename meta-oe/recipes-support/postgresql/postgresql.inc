@@ -113,7 +113,7 @@ python populate_packages_prepend() {
 do_configure() {
     # do_configure_prepend
     # make sure configure finds python includdirs with these envs
-    export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
+    export \
            STAGING_INCDIR=${STAGING_INCDIR} \
            STAGING_LIBDIR=${STAGING_LIBDIR}
 

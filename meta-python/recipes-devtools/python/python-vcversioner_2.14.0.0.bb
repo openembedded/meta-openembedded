@@ -10,7 +10,6 @@ SRC_URI[sha256sum] = "acd43686e92e6c8bbeb4f2eef54408567a7adea9692fa72d591eec5357
 inherit pypi setuptools
 
 do_compile_append() {
-    export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS}
     ${PYTHON} setup.py -q bdist_egg --dist-dir ./
 }
 

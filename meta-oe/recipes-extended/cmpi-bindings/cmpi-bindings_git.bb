@@ -24,8 +24,6 @@ EXTRA_OECMAKE = "-DLIB='${baselib}' \
                  -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/python${PYTHON_BASEVERSION}"
 
 do_configure_prepend() {
-    export HOST_SYS=${HOST_SYS}
-    export BUILD_SYS=${BUILD_SYS}
     export STAGING_LIBDIR=${STAGING_LIBDIR}
     export STAGING_INCDIR=${STAGING_INCDIR}
     export ENV_INSTALL_PATH=${PYTHON_SITEPACKAGES_DIR}

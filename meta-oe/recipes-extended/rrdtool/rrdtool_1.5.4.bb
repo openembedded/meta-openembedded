@@ -50,8 +50,6 @@ EXTRA_OECONF = " \
     --disable-rpath \
 "
 
-export BUILD_SYS
-export HOST_SYS
 export STAGING_LIBDIR
 export STAGING_INCDIR
 

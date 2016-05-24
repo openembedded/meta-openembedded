@@ -39,8 +39,6 @@ EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
                 "
 
 do_configure_prepend() {
-    export HOST_SYS=${HOST_SYS}
-    export BUILD_SYS=${BUILD_SYS}
     export STAGING_INCDIR=${STAGING_INCDIR}
     export STAGING_LIBDIR=${STAGING_LIBDIR}
 }
