@@ -11,7 +11,4 @@ EXTRA_OECONF += " \
     --without-libwebp \
 "
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
-
 inherit autotools pkgconfig
