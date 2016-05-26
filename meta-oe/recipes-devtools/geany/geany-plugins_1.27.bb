@@ -11,6 +11,10 @@ SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "31e4aa4b771a4ff8ccfd74efe7ba7b44"
 SRC_URI[sha256sum] = "03195a0b7a361ddb2ee4138f46fa87b6d9b9801ff00657456ab9c8b8908c0ce0"
 
+do_configure_prepend() {
+    rm -f ${S}/build/cache/glib-gettext.m4
+}
+
 FILES_${PN} += "${datadir}/icons"
 FILES_${PN}-dev += "${libdir}/geany/*.la ${libdir}/${PN}/*/*.la"
 
