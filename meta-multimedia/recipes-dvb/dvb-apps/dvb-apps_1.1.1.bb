@@ -63,6 +63,9 @@ PACKAGES =+ "dvb-evtest dvb-evtest-dbg \
              dvb-femon dvb-femon-dbg \
              dvb-zap-data"
 
+# Expose the packages from the above spitting
+PACKAGES =+ "libdvbapi libdvbcfg libdvben50221 \
+             libesg libucsi libdvbsec"
 
 FILES_${PN} = "${bindir} ${datadir}/dvb"
 FILES_${PN}-doc = ""
@@ -104,3 +107,10 @@ FILES_dvb-femon = "${bindir}/femon"
 FILES_dvb-femon-dbg = "${bindir}/.debug/femon"
 
 FILES_dvb-zap-data = "${docdir}/dvb-apps/szap"
+
+RDEPENDS_dvbdate =+ "libdvbapi libucsi"
+RDEPENDS_dvbtraffic =+ "libdvbapi"
+RDEPENDS_dvb-scan =+ "libdvbapi libdvbcfg libdvbsec"
+RDEPENDS_dvb-apps =+ "libdvbapi libdvbcfg libdvbsec libdvben50221 libucsi"
+RDEPENDS_dvb-femon =+ "libdvbapi"
+RDEPENDS_dvbnet =+ "libdvbapi"
