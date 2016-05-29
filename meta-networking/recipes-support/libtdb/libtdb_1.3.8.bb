@@ -2,6 +2,8 @@ SUMMARY = "The tdb library"
 SECTION = "libs"
 LICENSE = "LGPL-3.0+ & GPL-3.0+"
 
+DEPENDS += "libaio"
+
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
 
