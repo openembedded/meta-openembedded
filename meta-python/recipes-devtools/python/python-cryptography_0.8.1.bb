@@ -8,6 +8,8 @@ SRCNAME = "cryptography"
 SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
            file://run-ptest \
            file://build_fix_openssl_1.0.1g.patch \
+           file://Remove_SSLv2_bindings.patch \
+           file://Comment_lingering_SSLv2_symbol.patch \
 "
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
