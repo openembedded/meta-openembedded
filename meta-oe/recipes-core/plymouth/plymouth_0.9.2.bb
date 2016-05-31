@@ -24,19 +24,18 @@ EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-docum
                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-system-root-install', '', d)} \
                 "
 
-PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
-PACKAGECONFIG[pango] = "--enable-pango,--disable-pango,pango"
-PACKAGECONFIG[gtk] = "--enable-gtk,--disable-gtk,gtk+"
-
-PACKAGECONFIG ??= "pango"
-
-LOGO ??= "${datadir}/plymouth/bizcom.png"
-
+PACKAGECONFIG ??= "pango initrd"
 PACKAGECONFIG_append_x86 = " drm"
 PACKAGECONFIG_append_x86-64 = " drm"
 
-inherit autotools pkgconfig systemd
+PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
+PACKAGECONFIG[pango] = "--enable-pango,--disable-pango,pango"
+PACKAGECONFIG[gtk] = "--enable-gtk,--disable-gtk,gtk+"
+PACKAGECONFIG[initrd] = ",,,"
 
+LOGO ??= "${datadir}/plymouth/bizcom.png"
+
+inherit autotools pkgconfig systemd
 
 do_install_append() {
 	install -d ${D}${systemd_unitdir}/system
@@ -44,9 +43,14 @@ do_install_append() {
 	install -m 644 ${B}/systemd-units/systemd-ask-password-plymouth.path ${D}${systemd_unitdir}/system
 	# Remove /var/run from package as plymouth will populate it on startup
 	rm -fr "${D}${localstatedir}/run"
+
+	if ! ${@bb.utils.contains('PACKAGECONFIG', 'initrd', 'true', 'false', d)}; then
+		rm -rf "${D}${libexecdir}"
+	fi
 }
 
-PACKAGES =+ "${PN}-initrd ${PN}-set-default-theme"
+PACKAGES =. "${@bb.utils.contains('PACKAGECONFIG', 'initrd', '${PN}-initrd ', '', d)}"
+PACKAGES =+ "${PN}-set-default-theme"
 
 FILES_${PN}-initrd = "${libexecdir}/plymouth/*"
 FILES_${PN}-set-default-theme = "${sbindir}/plymouth-set-default-theme"
