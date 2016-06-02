@@ -70,7 +70,7 @@ do_configure_append () {
 #define NETMAP_LINUX_HAVE_E1000E_DOWN2
 EOF
 
-if ${@ 'false' if (bb.utils.vercmp_string(d.getVar('KERNEL_VERSION', True), '3.17') < 0) else 'true' } ; then
+if ${@ 'false' if (bb.utils.vercmp_string(d.getVar('KERNEL_VERSION', True) or "0", '3.17') < 0) else 'true' } ; then
     echo OK
     cat >>  ${S}/LINUX/netmap_linux_config.h <<EOF
 #define NETMAP_LINUX_ALLOC_NETDEV_4ARGS
