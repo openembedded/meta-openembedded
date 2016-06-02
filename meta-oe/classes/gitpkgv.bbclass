@@ -87,11 +87,13 @@ def get_git_pkgv(d, use_tags):
 
                     if commits != "":
                         oe.path.remove(rev_file, recurse=False)
-                        open(rev_file, "w").write("%d\n" % int(commits))
+                        with open(rev_file, "w") as f:
+                            f.write("%d\n" % int(commits))
                     else:
                         commits = "0"
                 else:
-                    commits = open(rev_file, "r").readline(128).strip()
+                    with open(rev_file, "r") as f:
+                        commits = f.readline(128).strip()
 
                 if use_tags:
                     try:
