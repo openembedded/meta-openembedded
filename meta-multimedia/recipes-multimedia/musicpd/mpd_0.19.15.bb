@@ -9,8 +9,8 @@ SRC_URI = " \
     http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
     file://mpd.conf.in \
 "
-SRC_URI[md5sum] = "da4bc3e47afd0faf9e7a67168e012102"
-SRC_URI[sha256sum] = "c386eb3d22f98dc993b5ae3c272f969aa7763713483c6800040ebf1791b15851"
+SRC_URI[md5sum] = "bb855b1689c9e863c2dd214ab1cb9344"
+SRC_URI[sha256sum] = "0cb9a223894b038ce966ce6d651d9b3ea3bdc7d7b9bec8d1e9e7e091cbc29b8b"
 
 inherit autotools useradd systemd
 
