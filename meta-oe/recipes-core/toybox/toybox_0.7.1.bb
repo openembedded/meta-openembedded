@@ -4,30 +4,35 @@ DEPENDS = "attr"
 
 SRC_URI = " \
     http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-    file://0001-Fix-segfault-in-login.patch \
-    file://0002-Add-b-and-F-arguments-to-hostname.patch \
+    file://0001-Fix-TOYBOX_VERSION.patch \
+    file://0002-Fix-trimmed-printf-in-grep.patch \
 "
 
-SRC_URI[md5sum] = "d86c78624b47625c2f0fc64eda599443"
-SRC_URI[sha256sum] = "65428816f88ad3fe92b67df86dc05427c8078fe03843b8b9715fdfa6d29c0f97"
+SRC_URI[md5sum] = "e959e5ff8c6806781eb06e56f302a393"
+SRC_URI[sha256sum] = "5bb3069f58faf12940d5cfde3209ac7f63210bebdd9023979b0c20cede126ea7"
 
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
 
 SECTION = "base"
 
+TOYBOX_BIN = "generated/unstripped/toybox"
+
 do_configure() {
     oe_runmake defconfig
 
     # Disable killall5 as it isn't managed by update-alternatives
     sed -e 's/CONFIG_KILLALL5=y/# CONFIG_KILLALL5 is not set/' -i .config
+
+    # Disable swapon as it doesn't handle the '-a' argument used during boot
+    sed -e 's/CONFIG_SWAPON=y/# CONFIG_SWAPON is not set/' -i .config
 }
 
 do_compile() {
-    oe_runmake toybox_unstripped
+    oe_runmake ${TOYBOX_BIN}
 
     # Create a list of links needed
-    oe_runmake generated/instlist
+    ${BUILD_CC} -I . scripts/install.c -o generated/instlist
     ./generated/instlist long | sed -e 's#^#/#' > toybox.links
 }
 
@@ -35,9 +40,9 @@ do_install() {
     # Install manually instead of using 'make install'
     install -d ${D}${base_bindir}
     if grep -q "CONFIG_TOYBOX_SUID=y" ${B}/.config; then
-        install -m 4755 ${B}/toybox_unstripped ${D}${base_bindir}/toybox
+        install -m 4755 ${B}/${TOYBOX_BIN} ${D}${base_bindir}/toybox
     else
-        install -m 0755 ${B}/toybox_unstripped ${D}${base_bindir}/toybox
+        install -m 0755 ${B}/${TOYBOX_BIN} ${D}${base_bindir}/toybox
     fi
 
     install -d ${D}${sysconfdir}
