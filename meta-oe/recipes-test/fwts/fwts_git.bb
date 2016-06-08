@@ -22,3 +22,6 @@ FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
 FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
 FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
 FILES_${PN}-dbg += "${libdir}/fwts/.debug"
+
+# http://errors.yoctoproject.org/Errors/Details/68633/
+PNBLACKLIST[fwts] ?= "BROKEN: fails to build with gcc-6"

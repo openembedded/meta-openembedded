@@ -45,3 +45,5 @@ do_install() {
 }
 
 RDEPENDS_${PN} += "tcsh"
+
+PNBLACKLIST[dt] ?= "Rdepends on broken tcsh"

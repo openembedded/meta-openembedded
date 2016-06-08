@@ -47,3 +47,6 @@ pkg_postinst_${PN} () {
 #!/bin/sh -e
 echo /usr/bin/tcsh >> $D/etc/shells
 }
+
+# http://errors.yoctoproject.org/Errors/Details/68619/
+PNBLACKLIST[tcsh] ?= "BROKEN: fails to build with glibc-2.24"

@@ -82,3 +82,6 @@ INITSCRIPT_PARAMS = "defaults"
 # threshold.so load.so are also provided by gegl
 # disk.so is also provided by libgphoto2-camlibs
 PRIVATE_LIBS = "threshold.so load.so disk.so"
+
+# http://errors.yoctoproject.org/Errors/Details/68629/
+PNBLACKLIST[collectd] ?= "BROKEN: fails to build with glibc-2.24"

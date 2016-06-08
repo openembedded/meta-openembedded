@@ -146,3 +146,5 @@ do_install_append() {
     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
 }
 
+# http://errors.yoctoproject.org/Errors/Details/68617/
+PNBLACKLIST[opencv] ?= "BROKEN: fails to build with gcc-6"

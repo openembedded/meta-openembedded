@@ -110,3 +110,6 @@ FILES_${PN}-dev = " \
     ${includedir} \
     ${datadir}/aclocal/openwbem.m4 \
 "
+
+# http://errors.yoctoproject.org/Errors/Details/68630/
+PNBLACKLIST[openwbem] ?= "BROKEN: fails to build with gcc-6"

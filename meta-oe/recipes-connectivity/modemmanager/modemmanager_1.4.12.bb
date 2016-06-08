@@ -17,6 +17,8 @@ SRC_URI[sha256sum] = "7ef5035375a953b285a742591df0a65fd442f4641ce4d8f4392a41d6d6
 
 S = "${WORKDIR}/ModemManager-${PV}"
 
+PNBLACKLIST[modemmanager] ?= "Depends on broken libqmi"
+
 PACKAGECONFIG ??= "mbim qmi polkit \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
 "

@@ -29,3 +29,6 @@ do_install() {
 }
 
 FILES_${PN} += "${datadir}/${BPN}"
+
+# http://errors.yoctoproject.org/Errors/Details/68628/
+PNBLACKLIST[tvheadend] ?= "BROKEN: fails to build with gcc-6"

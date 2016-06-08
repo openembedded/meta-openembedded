@@ -33,3 +33,5 @@ do_install_append () {
 	ln -sf thrift ${D}/${bindir}/thrift-compiler
 }
 
+# http://errors.yoctoproject.org/Errors/Details/68622/
+PNBLACKLIST[thrift] ?= "BROKEN: fails to build with gcc-6"

@@ -14,3 +14,6 @@ SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b037
 inherit pkgconfig waf distro_features_check
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
+
+# http://errors.yoctoproject.org/Errors/Details/68631/
+PNBLACKLIST[glcompbench] ?= "BROKEN: fails to build with gcc-6"

@@ -21,3 +21,6 @@ PACKAGECONFIG[x11] = "--with-x11, --without-x11, libxi"
 
 PACKAGE_BEFORE_PN += "${PN}-test"
 FILES_${PN}-test = "${bindir}/grail-test*"
+
+# http://errors.yoctoproject.org/Errors/Details/68611/
+PNBLACKLIST[grail] ?= "BROKEN: fails to build with gcc-6"

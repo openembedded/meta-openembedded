@@ -52,3 +52,5 @@ FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
 FILES_${PN}-dev += "${libdir}/${PYTHON_DIR}/site-packages/_*.la"
 
 FILES_${PN}-staticdev += "${libdir}/${PYTHON_DIR}/site-packages/_*.a"
+
+PNBLACKLIST[geis] ?= "Depends on broken grail"
