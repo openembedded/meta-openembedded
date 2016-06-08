@@ -29,3 +29,6 @@ FILES_lib${BPN}-dev = "${includedir} \
 FILES_lib${BPN}-staticdev = "${libdir}/lib*.a"
 
 BBCLASSEXTEND = "native nativesdk"
+
+# http://errors.yoctoproject.org/Errors/Details/68623/
+PNBLACKLIST[curlpp] ?= "BROKEN: fails to build with gcc-6"

@@ -24,3 +24,6 @@ PACKAGECONFIG[gnutls] = "--with-gnutls, --without-gnutls, gnutls"
 
 FILES_${PN}-dbg += "${libdir}/lftp/${PV}/.debug"
 RDEPENDS_${PN} = "perl bash readline"
+
+# http://errors.yoctoproject.org/Errors/Details/68625/
+PNBLACKLIST[lftp] ?= "BROKEN: fails to build with gcc-6"

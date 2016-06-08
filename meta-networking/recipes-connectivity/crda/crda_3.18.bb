@@ -39,3 +39,6 @@ RDEPENDS_${PN} = "udev"
 FILES_${PN} += "${libdir}crda/regulatory.bin \
                 ${base_libdir}/udev/rules.d/85-regulatory.rules \
 "
+
+# http://errors.yoctoproject.org/Errors/Details/68635/
+PNBLACKLIST[crda] ?= "BROKEN: fails to build with gcc-6"
