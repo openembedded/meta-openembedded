@@ -104,3 +104,5 @@ pkg_postrm_${PN} () {
     delgroup gdm || true
     sed -i /gdm/d ${sysconfdir}/X11/default-display-manager || true
 }
+
+PNBLACKLIST[gdm] ?= "Depends on broken gnome-panel"

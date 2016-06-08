@@ -53,3 +53,6 @@ FILES_libpoppler = "${libdir}/libpoppler.so.*"
 FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
 
 RDEPENDS_libpoppler = "poppler-data"
+
+# http://errors.yoctoproject.org/Errors/Details/68605/
+PNBLACKLIST[poppler] ?= "BROKEN: fails to build with gcc-6"

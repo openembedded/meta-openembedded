@@ -17,3 +17,6 @@ SRC_URI[archive.sha256sum] = "2c7af2250698b9f9f53c6eaa93211c1118cf2c7e29cbbacfd1
 GNOME_COMPRESS_TYPE="bz2"
 
 RRECOMMENDS_${PN} += "gnome-common-schemas"
+
+# http://errors.yoctoproject.org/Errors/Details/68636/
+PNBLACKLIST[gnome-terminal] ?= "BROKEN: fails to build with gcc-6"

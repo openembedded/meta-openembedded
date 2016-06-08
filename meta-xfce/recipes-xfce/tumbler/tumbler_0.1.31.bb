@@ -27,3 +27,5 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
                     ${libdir}/tumbler-1/plugins/.debug \
                     ${libdir}/tumbler-1/plugins/cache/.debug \
 "
+
+PNBLACKLIST[tumbler] ?= "Depends on broken poppler"

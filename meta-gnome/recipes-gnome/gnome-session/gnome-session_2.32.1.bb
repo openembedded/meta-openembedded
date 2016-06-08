@@ -27,3 +27,6 @@ do_configure_append() {
 RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-ck-connector', '', d)}"
 FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${datadir}/gnome ${libdir}/gnome-session/helpers"
 FILES_${PN}-dbg += "${libexecdir}/gnome-session/helpers/.debug"
+
+# http://errors.yoctoproject.org/Errors/Details/68621/
+PNBLACKLIST[gnome-session] ?= "BROKEN: fails to build with gcc-6"

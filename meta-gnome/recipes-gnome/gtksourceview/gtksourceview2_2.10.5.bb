@@ -26,3 +26,6 @@ do_configure_prepend() {
 }
 
 FILES_${PN} += " ${datadir}/gtksourceview-2.0"
+
+# http://errors.yoctoproject.org/Errors/Details/68609/
+PNBLACKLIST[gtksourceview2] ?= "BROKEN: fails to build with gcc-6"

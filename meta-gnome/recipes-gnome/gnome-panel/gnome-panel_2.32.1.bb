@@ -43,3 +43,5 @@ FILES_${PN} =+ "${datadir}/gnome* \
                 ${datadir}/PolicyKit \
                 ${libdir}/bonobo \
 "
+
+PNBLACKLIST[gnome-panel] ?= "Depends on broken libgweather"
