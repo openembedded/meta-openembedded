@@ -17,3 +17,6 @@ S = "${WORKDIR}/${BP}"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "--exec-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
+
+# http://errors.yoctoproject.org/Errors/Details/68671/
+PNBLACKLIST[iperf] ?= "BROKEN: fails to build with gcc-6"

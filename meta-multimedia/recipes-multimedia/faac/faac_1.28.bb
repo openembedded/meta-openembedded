@@ -19,3 +19,5 @@ FILES_lib${PN} = " ${libdir}/libfaac.so.*"
 FILES_lib${PN}-dev = "${includedir}/faac.h ${includedir}/faaccfg.h ${libdir}/libfaac.so ${libdir}/libfaac.la"
 FILES_lib${PN}-staticdev = "${libdir}/libfaac.a"
 
+# http://errors.yoctoproject.org/Errors/Details/68660/
+PNBLACKLIST[faac] ?= "BROKEN: fails to build with gcc-6"
