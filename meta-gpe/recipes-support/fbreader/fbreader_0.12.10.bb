@@ -10,7 +10,8 @@ PR = "r1"
 SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
 file://Makefile.patch \
 file://gcc45.patch \
-file://fix-cflags-fribidi.patch"
+file://fix-cflags-fribidi.patch \
+file://fix-return-code-gcc6.patch"
 
 # Set the defaults
 READER_RESOLUTION ?= "1024x600"
@@ -41,6 +42,3 @@ do_install() {
 
 SRC_URI[md5sum] = "da9ec4721efdb0ec0aaa182bff16ad82"
 SRC_URI[sha256sum] = "328aec454db80e225aa0b5c31adef74bf62a14357482947e87e9731686b3c624"
-
-# http://errors.yoctoproject.org/Errors/Details/68618/
-PNBLACKLIST[fbreader] ?= "BROKEN: fails to build with gcc-6"
