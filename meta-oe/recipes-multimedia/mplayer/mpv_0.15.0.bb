@@ -1,4 +1,5 @@
 SUMMARY = "Open Source multimedia player"
+DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features with the former projects while introducing many more."
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mpv.io/"
 DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
