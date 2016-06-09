@@ -14,6 +14,8 @@ PV = "3.3"
 
 S = "${WORKDIR}/git"
 
+TARGET_CFLAGS += "-Wno-error=misleading-indentation"
+
 do_configure() {
     ./configure --prefix=${prefix} \
                 --libdir=${libdir} \
@@ -29,6 +31,3 @@ do_install() {
 }
 
 FILES_${PN} += "${datadir}/${BPN}"
-
-# http://errors.yoctoproject.org/Errors/Details/68628/
-PNBLACKLIST[tvheadend] ?= "BROKEN: fails to build with gcc-6"
