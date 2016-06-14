@@ -43,3 +43,7 @@ FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
 FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
                      ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
                      ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
+
+# | ../../../v4l-utils-1.6.2/lib/libv4lconvert/jpeg_memsrcdest.h:4:1: error: conflicting types for 'jpeg_mem_src'
+# |  jpeg_mem_src (j_decompress_ptr cinfo, unsigned char * buffer,
+PNBLACKLIST[v4l-utils] ?= "Not compatible with libjpeg-turbo-1.5.0"

@@ -53,3 +53,6 @@ FILES_${PN} += "${nonarch_base_libdir}/udev/* ${datadir}/hal"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 FILES_${PN}-dev += "${libdir}/*/*/*.la"
 
+# | ../../libgphoto2-2.5.8/camlibs/ax203/jpeg_memsrcdest.h:4:1: error: conflicting types for 'jpeg_mem_src'
+# |  jpeg_mem_src (j_decompress_ptr cinfo, unsigned char * buffer,
+PNBLACKLIST[libgphoto2] ?= "Not compatible with libjpeg-turbo-1.5.0"
