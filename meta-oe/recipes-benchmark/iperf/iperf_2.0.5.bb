@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
 SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
             file://iperf-2.0.5_ManPage.patch \
             file://0001-fix-out-of-tree-config.patch \
+            file://0002-fix-bool-size-m4.patch \
           "
 
 SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
@@ -17,6 +18,3 @@ S = "${WORKDIR}/${BP}"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "--exec-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
-
-# http://errors.yoctoproject.org/Errors/Details/68671/
-PNBLACKLIST[iperf] ?= "BROKEN: fails to build with gcc-6"
