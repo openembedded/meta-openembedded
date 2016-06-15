@@ -14,6 +14,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://10-camera-libgphoto2.fdi \
            file://40-libgphoto2.rules \
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
+           file://0002-correct-jpeg-memsrcdest-support.patch \
 "
 
 SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
@@ -52,7 +53,3 @@ FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
 FILES_${PN} += "${nonarch_base_libdir}/udev/* ${datadir}/hal"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 FILES_${PN}-dev += "${libdir}/*/*/*.la"
-
-# | ../../libgphoto2-2.5.8/camlibs/ax203/jpeg_memsrcdest.h:4:1: error: conflicting types for 'jpeg_mem_src'
-# |  jpeg_mem_src (j_decompress_ptr cinfo, unsigned char * buffer,
-PNBLACKLIST[libgphoto2] ?= "Not compatible with libjpeg-turbo-1.5.0"
