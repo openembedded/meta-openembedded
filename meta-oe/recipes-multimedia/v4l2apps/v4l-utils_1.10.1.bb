@@ -17,8 +17,8 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://mediactl-pkgconfig.patch \
            file://export-mediactl-headers.patch \
           "
-SRC_URI[md5sum] = "9cb3c178f937954e65bf30920af433ef"
-SRC_URI[sha256sum] = "d3d6eb1f0204fb11f3d318bfca35d5f73cc077f88fac7665a47856a16496be7d"
+SRC_URI[md5sum] = "936c9c58343840e91294e4dcec7dc05f"
+SRC_URI[sha256sum] = "6147ccc29fe7dd3c5c3994d613c4f2a099bac8b44694a96e5cf4d7caca8336c0"
 
 EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
 
@@ -43,7 +43,3 @@ FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
 FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
                      ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
                      ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
-
-# | ../../../v4l-utils-1.6.2/lib/libv4lconvert/jpeg_memsrcdest.h:4:1: error: conflicting types for 'jpeg_mem_src'
-# |  jpeg_mem_src (j_decompress_ptr cinfo, unsigned char * buffer,
-PNBLACKLIST[v4l-utils] ?= "Not compatible with libjpeg-turbo-1.5.0"
