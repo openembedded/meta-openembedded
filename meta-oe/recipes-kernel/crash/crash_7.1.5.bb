@@ -24,8 +24,8 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
            file://remove-unrecognized-gcc-option-m32-for-mips.patch \
            "
 
-SRC_URI[md5sum] = "155889a233c5230ef1d387858091d294"
-SRC_URI[sha256sum] = "ae98529d42b843f07d795b86b8f8529f64cc607ee3c58affc5a8aa8a506e183d"
+SRC_URI[md5sum] = "7bd06eaec6827d4fac636b2b592d3056"
+SRC_URI[sha256sum] = "c3954412c8557614a0d50092c007aa96b4e3e6e97453dfbb60241ab680caf7b2"
 
 SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
 SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
@@ -110,6 +110,3 @@ RDEPENDS_${PN}_class-cross = ""
 # Causes gcc to get stuck and eat all available memory in qemuarm builds
 # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
 ARM_INSTRUCTION_SET = "arm"
-
-# http://errors.yoctoproject.org/Errors/Details/68624/
-PNBLACKLIST[crash] ?= "BROKEN: fails to build with gcc-6"
