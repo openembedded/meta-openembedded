@@ -40,7 +40,7 @@ do_export_sources() {
 
 # compile and install mount utility
 do_compile_append() {
-    oe_runmake -C ${S}/utils
+    oe_runmake 'LD=${CC}' 'LDFLAGS=${LDFLAGS}' -C ${S}/utils
 }
 
 module_do_install() {
