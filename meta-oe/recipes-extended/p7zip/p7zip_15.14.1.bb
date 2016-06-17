@@ -1,13 +1,14 @@
 SUMMARY = "7-zip is a commandline utility handling 7z archives."
 HOMEPAGE = "http://www.7-zip.org/"
 LICENSE = "LGPL-2.1+ & unRAR"
-LIC_FILES_CHKSUM = "file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
-                    file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
+LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
+                    file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
+                    file://DOC/License.txt;md5=8346bfd0a2fa0987e7a3a512adf84ab9"
 
 SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
           file://do_not_override_compiler_and_do_not_strip.patch"
-SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
-SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
+SRC_URI[md5sum] = "92cca093312b5a71a7be7dc7d1d32509"
+SRC_URI[sha256sum] = "699db4da3621904113e040703220abb1148dfef477b55305e2f14a4f1f8f25d4"
 
 S = "${WORKDIR}/${BPN}_${PV}"
 
