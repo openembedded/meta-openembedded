@@ -30,5 +30,3 @@ CFLAGS += "-fPIC"
 
 FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
 FILES_${PN}  += "${datadir}/appdata"
-
-PNBLACKLIST[gimp] ?= "Depends on broken poppler"

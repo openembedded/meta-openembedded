@@ -25,5 +25,3 @@ EXTRA_OECONF = "\
 
 # Some upgrade path tweaking, as in evas
 AUTO_LIBNAME_PKGS = ""
-
-PNBLACKLIST[epdf] ?= "Depends on broken poppler"
