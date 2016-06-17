@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRC_URI = " \
     http://poppler.freedesktop.org/${BP}.tar.xz \
     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
+    file://0002-fix-gcc-6-math-ambiguous-errors.patch \
 "
 SRC_URI[md5sum] = "1d2b001663119855cdfbc0713dbfb9c6"
 SRC_URI[sha256sum] = "c720e26a26ee10b7ebc9e256d2ee7adcdb536cf85f9f1c4777a38f7f81fb2456"
@@ -53,6 +54,3 @@ FILES_libpoppler = "${libdir}/libpoppler.so.*"
 FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
 
 RDEPENDS_libpoppler = "poppler-data"
-
-# http://errors.yoctoproject.org/Errors/Details/68605/
-PNBLACKLIST[poppler] ?= "BROKEN: fails to build with gcc-6"
