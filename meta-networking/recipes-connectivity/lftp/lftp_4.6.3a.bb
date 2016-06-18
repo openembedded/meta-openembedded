@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "readline"
 
 SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
+           file://fix-gcc-6-conflicts-signbit.patch \
           "
 SRC_URI[md5sum] = "2777dd514d21fe1da764bedd1d0ab36c"
 SRC_URI[sha256sum] = "a8b53e5ca2c1acbecd181c87f21a8673ca9038dc9f2be6ab8c23790bd91fd446"
@@ -24,6 +25,3 @@ PACKAGECONFIG[gnutls] = "--with-gnutls, --without-gnutls, gnutls"
 
 FILES_${PN}-dbg += "${libdir}/lftp/${PV}/.debug"
 RDEPENDS_${PN} = "perl bash readline"
-
-# http://errors.yoctoproject.org/Errors/Details/68625/
-PNBLACKLIST[lftp] ?= "BROKEN: fails to build with gcc-6"
