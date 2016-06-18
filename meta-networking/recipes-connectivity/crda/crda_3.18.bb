@@ -11,6 +11,7 @@ SRC_URI = "https://www.kernel.org/pub/software/network/crda/${BP}.tar.xz;name=cr
            https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2014.11.18.tar.xz;name=bin \
            file://do-not-run-ldconfig-if-destdir-is-set.patch \
            file://fix-linking-of-libraries-used-by-reglib.patch \
+           file://fix-gcc-6-unused-variables.patch \
 "
 SRC_URI[crda.md5sum] = "0431fef3067bf503dfb464069f06163a"
 SRC_URI[crda.sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
@@ -39,6 +40,3 @@ RDEPENDS_${PN} = "udev"
 FILES_${PN} += "${libdir}crda/regulatory.bin \
                 ${base_libdir}/udev/rules.d/85-regulatory.rules \
 "
-
-# http://errors.yoctoproject.org/Errors/Details/68635/
-PNBLACKLIST[crda] ?= "BROKEN: fails to build with gcc-6"
