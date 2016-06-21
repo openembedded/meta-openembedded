@@ -17,7 +17,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
 DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
-inherit autotools-brokensep binconfig perlnative
+inherit autotools-brokensep binconfig perlnative systemd
 
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
@@ -32,6 +32,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar 
            file://etc/init.d/krb5-admin-server \
            file://etc/default/krb5-kdc \
            file://etc/default/krb5-admin-server \
+           file://krb5-kdc.service \
+           file://krb5-admin-server.service \
            file://krb5-CVE-2016-3119.patch;striplevel=2 \
            file://0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch;striplevel=2 \
 "
@@ -39,6 +41,9 @@ SRC_URI[md5sum] = "f7ebfa6c99c10b16979ebf9a98343189"
 SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3ff6de1"
 
 S = "${WORKDIR}/${BP}/src"
+
+SYSTEMD_SERVICE_${PN} = "krb5-admin-server.service krb5-kdc.service"
+SYSTEMD_AUTO_ENABLE = "disable"
 
 PACKAGECONFIG ??= "openssl"
 PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
@@ -79,20 +84,26 @@ do_configure() {
 }
 
 do_install_append() {
-    mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
-    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
-    install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
-
     rm -rf ${D}/${localstatedir}/run
-    mkdir -p ${D}/${sysconfdir}/default/volatiles
-    echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
-           > ${D}${sysconfdir}/default/volatiles/87_krb5
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+        mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
+        install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
+        install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
+
+        mkdir -p ${D}/${sysconfdir}/default/volatiles
+        echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
+              > ${D}${sysconfdir}/default/volatiles/87_krb5
+    fi
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/krb5kdc - - - -" \
               > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
-    fi
 
+        install -d ${D}${systemd_system_unitdir}
+        install -m 0644 ${WORKDIR}/krb5-admin-server.service ${D}${systemd_system_unitdir}
+        install -m 0644 ${WORKDIR}/krb5-kdc.service ${D}${systemd_system_unitdir}
+    fi
 }
 
 pkg_postinst_${PN} () {
