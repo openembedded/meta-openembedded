@@ -27,10 +27,7 @@ do_install_append() {
 }
 
 RDEPENDS_${PN}-dev = "bluez-hcidump"
-RDEPENDS_${PN}-testtools += "python python-dbus"
-
-# http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
-# RDEPENDS_${PN}-testtools += "python-pygobject"
+RDEPENDS_${PN}-testtools += "python python-dbus python-pygobject"
 
 ALLOW_EMPTY_libasound-module-bluez = "1"
 PACKAGES =+ "libasound-module-bluez ${PN}-testtools"

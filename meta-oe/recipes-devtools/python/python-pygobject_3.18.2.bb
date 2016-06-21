@@ -32,5 +32,3 @@ do_install_append() {
     rm ${D}${includedir}/pygobject-3.0/pygobject.h ${D}${libdir}/pkgconfig/pygobject-3.0.pc
 }
 
-# http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
-PNBLACKLIST[python-pygobject] ?= "BROKEN: fails to build since it was moved to meta-oe"
