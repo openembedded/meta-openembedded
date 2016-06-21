@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
 
 inherit autotools pkgconfig gnomebase distutils-base gobject-introspection
 
+PYTHON_BASEVERSION = "2.7"
+PYTHON_PN = "python"
+
 DEPENDS += "python glib-2.0"
 
 SRCNAME="pygobject"
@@ -20,7 +23,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 BBCLASSEXTEND = "native"
 
-EXTRA_OECONF = "--disable-cairo --with-python=python2.7"
+EXTRA_OECONF = "--disable-cairo --with-python=${PYTHON}"
 
 RDEPENDS_${PN} += "python-setuptools python-importlib"
 
