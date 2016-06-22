@@ -35,3 +35,6 @@ FILES_${PN}-libs += "${libdir}/libgdu*.so.*"
 FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
 FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
 FILES_${PN}-dbg += "${libdir}/nautilus/extensions-2.0/.debug"
+
+# http://errors.yoctoproject.org/Errors/Details/69555/
+PNBLACKLIST[gnome-disk-utility] ?= "BROKEN: fails to find avahi-ui even when it's in depends"
