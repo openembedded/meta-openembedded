@@ -1,7 +1,7 @@
-From d4b25ce723812faf78d8ee038b7cbed00cbba682 Mon Sep 17 00:00:00 2001
+From 89639e76d5ee039a55004e5e910d565e6e84ed35 Mon Sep 17 00:00:00 2001
 From: Rodrigo Caimi <caimi@datacom.ind.br>
 Date: Tue, 7 Oct 2014 15:37:10 -0300
-Subject: [PATCH] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
+Subject: [PATCH 2/2] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
  1.7.0
 
 Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
@@ -12,7 +12,7 @@ Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
  create mode 100644 gtest.pc.in
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 281c4c2..e4354a8 100644
+index e969648..0038826 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -29,6 +29,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
@@ -25,19 +25,19 @@ index 281c4c2..e4354a8 100644
  ########################################################################
  #
  # Project-wide settings
-@@ -75,6 +78,9 @@ target_link_libraries(gtest_main gtest)
- 
- install(TARGETS gtest DESTINATION lib)
- install(TARGETS gtest_main DESTINATION lib)
+@@ -78,6 +81,9 @@ install(TARGETS gtest gtest_main
+   DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
+   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 +install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gtest.pc"
-+    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/"
++    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/"
 +)
  
  ########################################################################
  #
 diff --git a/gtest.pc.in b/gtest.pc.in
 new file mode 100644
-index 0000000..57b1049
+index 0000000..52e622b
 --- /dev/null
 +++ b/gtest.pc.in
 @@ -0,0 +1,9 @@
@@ -46,10 +46,10 @@ index 0000000..57b1049
 +Description: Google's framework for writing C++ tests on a variety of platforms
 +
 +prefix=@CMAKE_INSTALL_PREFIX@
-+includedir=${prefix}/include
-+libdir=${prefix}/lib
++includedir=@CMAKE_INSTALL_INCLUDEDIR@
++libdir=@CMAKE_INSTALL_LIBDIR@
 +Cflags:-I${includedir}/gtest
 +Libs: -L${libdir} -lgtest -lgtest_main
 -- 
-1.9.1
+2.5.0
 
