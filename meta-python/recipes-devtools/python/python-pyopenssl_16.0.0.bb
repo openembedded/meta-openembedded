@@ -6,7 +6,6 @@ DEPENDS = "openssl python-cryptography"
 
 SRC_URI[md5sum] = "9587d813dcf656e9f2760e41a3682dc3"
 SRC_URI[sha256sum] = "363d10ee43d062285facf4e465f4f5163f9f702f9134f0a5896f134cbb92d17d"
-PYPI_PACKAGE_HASH = "77f2bccec75ca4280a9fa762a90a1b8b152a22eac5d9c726d7da1fcbfe0a20e6"
 
 PYPI_PACKAGE = "pyOpenSSL"
 inherit pypi setuptools

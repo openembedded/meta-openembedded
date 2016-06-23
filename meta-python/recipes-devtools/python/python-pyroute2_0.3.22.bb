@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SRC_URI[md5sum] = "733adb362b6603c7269c0b3df3045a55"
 SRC_URI[sha256sum] = "5cdf44656cf623369f0cbf183d9d14a1a50ebdffbd50d4e30ffda62c0a05d7b3"
-PYPI_PACKAGE_HASH = "cde6f040ef0926f84ae7cbe89a883b58a04aa9415f91fd9f12496ab793698ec2"
 
 SRC_URI += "file://import-simplejson-as-json.patch"
 
