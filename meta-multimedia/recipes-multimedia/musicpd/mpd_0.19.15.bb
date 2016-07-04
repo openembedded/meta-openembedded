@@ -22,6 +22,10 @@ PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
 PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
 PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
 
+do_configure_prepend() {
+    sed -i -e 's|libsystemd-daemon|libsystemd|' ${S}/configure.ac
+}
+
 do_install_append() {
     install -d ${D}/${localstatedir}/lib/mpd/music
     chmod 775 ${D}/${localstatedir}/lib/mpd/music
