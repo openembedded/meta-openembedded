@@ -143,9 +143,9 @@ FILES_${PN}-dev += "${bindir}/mib2c ${bindir}/mib2c-update"
 CONFFILES_${PN}-server-snmpd = "${sysconfdir}/snmp/snmpd.conf"
 CONFFILES_${PN}-server-snmptrapd = "${sysconfdir}/snmp/snmptrapd.conf"
 
-INITSCRIPT_PACKAGES = "${PN}-server"
-INITSCRIPT_NAME_${PN}-server = "snmpd"
-INITSCRIPT_PARAMS_${PN}-server = "start 90 2 3 4 5 . stop 60 0 1 6 ."
+INITSCRIPT_PACKAGES = "${PN}-server-snmpd"
+INITSCRIPT_NAME_${PN}-server-snmpd = "snmpd"
+INITSCRIPT_PARAMS_${PN}-server-snmpd = "start 90 2 3 4 5 . stop 60 0 1 6 ."
 
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
 
