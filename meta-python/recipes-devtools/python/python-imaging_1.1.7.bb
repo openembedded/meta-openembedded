@@ -9,7 +9,8 @@ PR = "r5"
 SRC_URI = "http://effbot.org/downloads/Imaging-${PV}.tar.gz \
            file://0001-python-imaging-setup.py-force-paths-for-zlib-freetyp.patch \
            file://allow.to.disable.some.features.patch \
-           file://fix-freetype-includes.patch"
+           file://fix-freetype-includes.patch \
+           file://remove-host-libdir.patch"
 
 SRC_URI[md5sum] = "fc14a54e1ce02a0225be8854bfba478e"
 SRC_URI[sha256sum] = "895bc7c2498c8e1f9b99938f1a40dc86b3f149741f105cf7c7bd2e0725405211"
