@@ -8,4 +8,9 @@ SRC_URI[sha256sum] = "63d479478ddfc83bbc11577dc16d47835c5179ac13e550118ca143b62c
 
 inherit pypi setuptools
 
-RDEPENDS_${PN} += "python-netclient"
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-email \
+    ${PYTHON_PN}-netclient \
+    ${PYTHON_PN}-threading \
+    ${PYTHON_PN}-zlib \
+    "
