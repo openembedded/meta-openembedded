@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "15cc17dba1252ecaae29ced1e96c216165d93fd3e9ea05dff1f5e5866f
 PYPI_PACKAGE = "yappi"
 inherit pypi setuptools
 
-RDEPENDS_${PN} = "\
-    ${PYTHON_PN}-core \
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-threading \
     "
