@@ -11,3 +11,8 @@ PYPI_PACKAGE = "WTForms"
 PYPI_PACKAGE_EXT = "zip"
 
 inherit pypi setuptools
+
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-netserver \
+    ${PYTHON_PN}-numbers \
+    "
