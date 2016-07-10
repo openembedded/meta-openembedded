@@ -2,10 +2,10 @@ SUMMARY = "Python vcversioner, automagically update the project's version"
 HOMEPAGE = "https://github.com/habnabit/vcversioner"
 
 LICENSE = "ISC"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=260625d695c5e0c9dd2c2ef898833c7d"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=827a7a91a8d20d3c666b665cd96db8e3"
 
-SRC_URI[md5sum] = "7848a365ced9941053bc25d9a9f8f4b4"
-SRC_URI[sha256sum] = "acd43686e92e6c8bbeb4f2eef54408567a7adea9692fa72d591eec5357c03b86"
+SRC_URI[md5sum] = "aab6ef5e0cf8614a1b1140ed5b7f107d"
+SRC_URI[sha256sum] = "dae60c17a479781f44a4010701833f1829140b1eeccd258762a74974aa06e19b"
 
 inherit pypi setuptools
 
