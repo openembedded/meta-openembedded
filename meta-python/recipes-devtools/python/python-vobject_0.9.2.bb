@@ -8,3 +8,8 @@ SRC_URI[md5sum] = "ccf66aeb1c896d8c34ac62a8b4e7ecfb"
 SRC_URI[sha256sum] = "8b310c21a4d58e13aeb7e60fd846a1748e1c9c3374f3e2acc96f728c3ae5d6e1"
 
 inherit pypi setuptools
+
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-dateutil \
+    ${PYTHON_PN}-numbers \
+    "
