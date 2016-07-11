@@ -9,8 +9,8 @@ SRC_URI[sha256sum] = "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff99
 
 inherit cmake distro_features_check
 
-# depends on virtual/libx11
-REQUIRED_DISTRO_FEATURES = "x11"
+# depends on virtual/libx11, virtual/libgl
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 PROVIDES += "mesa-glut"
 
