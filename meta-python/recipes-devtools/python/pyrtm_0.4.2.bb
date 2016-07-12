@@ -3,7 +3,9 @@ AUTHOR = "Sridhar Ratnakumar / srid"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a53cbc7cb75660694e138ba973c148df"
 
-inherit pypi distutils
+PYPI_PACKAGE_EXT = "tar.bz2"
 
-SRC_URI[md5sum] = "34423f39caf7df8a9db8e243be9cf1a0"
-SRC_URI[sha256sum] = "d9d46d096a38cb692b55f4ee9f364d54348298e9497b11c1ef057539b5de1567"
+SRC_URI[md5sum] = "7c87da94656b620dfe532ca63d642eb8"
+SRC_URI[sha256sum] = "b2d701b25ad3f9a1542057f3eb492c5c1d7dbe2b8d1e8f763043dcc14ee1d933"
+
+inherit pypi setuptools
