@@ -12,4 +12,4 @@ do_install_append() {
     install -m 0644 ${S}/*.egg ${D}/${PYTHON_SITEPACKAGES_DIR}/
 }
 
-RDEPENDS_${PN} += "python-io"
+RDEPENDS_${PN} += "${PYTHON_PN}-io"
