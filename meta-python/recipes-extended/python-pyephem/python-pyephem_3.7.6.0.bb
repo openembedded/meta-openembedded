@@ -11,3 +11,7 @@ PYPI_PACKAGE = "ephem"
 
 inherit pypi setuptools
 
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-math \
+    "
