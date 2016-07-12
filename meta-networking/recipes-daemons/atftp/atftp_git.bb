@@ -17,7 +17,7 @@ SRC_URI = "git://git.code.sf.net/p/atftp/code \
 "
 S = "${WORKDIR}/git"
 
-inherit autotools update-rc.d useradd systemd
+inherit autotools update-rc.d systemd
 
 PACKAGECONFIG ??= "tcp-wrappers"
 PACKAGECONFIG[pcre] = "--enable-libpcre,--disable-libpcre,libpcre"
@@ -28,9 +28,6 @@ INITSCRIPT_PACKAGES = "${PN}d"
 INITSCRIPT_NAME_${PN}d = "atftpd"
 INITSCRIPT_PARAMS_${PN}d = "defaults 80"
 
-USERADD_PACKAGES = "${PN}d"
-USERADD_PARAM_${PN}d = "--system --no-create-home --shell /bin/false \
-                        --user-group nobody"
 
 EXTRA_OEMAKE = "CFLAGS='${CFLAGS} -std=gnu89'"
 
