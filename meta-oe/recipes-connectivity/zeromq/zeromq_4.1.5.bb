@@ -2,13 +2,15 @@ DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like 
 HOMEPAGE = "http://www.zeromq.org"
 LICENSE = "LGPLv3+"
 LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
-DEPENDS = "libsodium"
 
-SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz \
+PACKAGECONFIG ??= "libsodium"
+PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
+
+SRC_URI = "http://github.com/zeromq/zeromq4-1/releases/download/v${PV}/zeromq-${PV}.tar.gz \
            file://run-ptest \
            "
-SRC_URI[md5sum] = "a611ecc93fffeb6d058c0e6edf4ad4fb"
-SRC_URI[sha256sum] = "e99f44fde25c2e4cb84ce440f87ca7d3fe3271c2b8cfbc67d55e4de25e6fe378"
+SRC_URI[md5sum] = "e7adf4b7dbae09b28cfd10d26cd67fac"
+SRC_URI[sha256sum] = "04aac57f081ffa3a2ee5ed04887be9e205df3a7ddade0027460b8042432bdbcf"
 
 S = "${WORKDIR}/zeromq-${PV}"
 
