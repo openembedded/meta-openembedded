@@ -14,3 +14,5 @@ SRC_URI[sha256sum] = "502ad98707319f4a51fa2ca1c677bd659008d27ded9f6380c79e8932e3
 
 PYPI_PACKAGE = "backports.ssl_match_hostname"
 inherit pypi setuptools
+
+RDEPENDS_${PN} += "${PYTHON_PN}-pkgutil"
