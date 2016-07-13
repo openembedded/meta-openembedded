@@ -13,3 +13,7 @@ SRC_URI[md5sum] = "434b57fdc3230c500716c5aff8896100"
 SRC_URI[sha256sum] = "9c6e98edcb33499881b86ede07d9968c81ab7c769e28e9af24075f0a5379f070"
 
 inherit pypi
+
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-stringold \
+    "
