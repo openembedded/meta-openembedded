@@ -4,13 +4,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
 DEPENDS += " python-cffi-native python-cffi python-enum34 python-six python-pyasn1"
 SRCNAME = "cryptography"
 
-SRC_URI = "file://run-ptest \
-           file://build_fix_openssl_1.0.1g.patch \
-           file://Remove_SSLv2_bindings.patch \
-           file://Comment_lingering_SSLv2_symbol.patch"
+SRC_URI = "file://run-ptest"
 
-SRC_URI[md5sum] = "dd06da41535184f48f2c8e8b74dd570f"
-SRC_URI[sha256sum] = "059bc6428b1d0e2317f505698602642f1d8dda5b120ec573a59a430d8cb7a32d"
+SRC_URI[md5sum] = "a9763e3831cc7cdb402c028fac1ceb39"
+SRC_URI[sha256sum] = "bb149540ed90c4b2171bf694fe6991d6331bc149ae623c8ff419324f4222d128"
 
 inherit pypi setuptools
 
