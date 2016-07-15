@@ -12,15 +12,13 @@ inherit cmake ptest
 
 BBCLASSEXTEND = "native"
 
+SRCREV = "abc4742ebe6718530a2503fcc3f2554a6296ef5a"
 SRC_URI = " \
-    https://github.com/pocoproject/poco/archive/poco-${PV}-release.tar.gz \
+    git://github.com/pocoproject/poco.git \
     file://run-ptest \
    "
 
-SRC_URI[md5sum] = "a4b755d47303b20a0e2586f281d05a36"
-SRC_URI[sha256sum] = "6dbbc2018912ad9af6af96f605933ed91354a1e7423e5dbd04d8e9a2b2d15c05"
-
-S = "${WORKDIR}/poco-poco-${PV}-release"
+S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
                  ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
