@@ -8,4 +8,11 @@ SRC_URI[sha256sum] = "ac780d8c31fc107bf6b4edcbcea711de4ff776d59d89bb167f8819d2d8
 
 inherit pypi setuptools
 
-RDEPENDS_${PN} += "python-pyparsing"
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-doctest \
+    ${PYTHON_PN}-pyparsing \
+    ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-stringold \
+    ${PYTHON_PN}-subprocess \
+    ${PYTHON_PN}-textutils \
+    "
