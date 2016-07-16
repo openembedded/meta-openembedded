@@ -9,3 +9,9 @@ PR = "r0"
 SRC_URI = "git://github.com/marianoguerra/feedformatter.git"
 
 S = "${WORKDIR}/git"
+
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-io \
+    ${PYTHON_PN}-xml \
+    "
