@@ -20,6 +20,10 @@ inherit autotools-brokensep pkgconfig binconfig
 # deprecated auto_ptr.  For now, ignore the issue.
 CXXFLAGS += "-Wno-error=deprecated-declarations"
 
+do_install_append () {
+    sed -i 's,${STAGING_DIR_TARGET},,g' ${D}${libdir}/pkgconfig/curlpp.pc
+}
+
 PACKAGES =+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
 
 FILES_lib${BPN} = "${libdir}/lib*.so.* \
