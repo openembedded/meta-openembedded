@@ -4,7 +4,7 @@ SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
-DEPENDS = "libpcap libpcre daq libdnet util-linux"
+DEPENDS = "xz libpcap libpcre daq libdnet util-linux"
 
 SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
     file://snort.init \
@@ -56,6 +56,8 @@ do_install_append() {
     install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
     mkdir -p ${D}${localstatedir}/log/snort
     install -d ${D}/var/log/snort
+
+    sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${D}${libdir}/pkgconfig/*.pc
 }
 
 FILES_${PN} += " \
@@ -84,6 +86,3 @@ FILES_${PN}-dev += " \
     ${libdir}/snort_dynamicrules/*.so \
     ${prefix}/src/snort_dynamicsrc \
 "
-
-# http://errors.yoctoproject.org/Errors/Details/35137/
-PNBLACKLIST[snort] ?= "BROKEN: QA Issue: snort_preproc.pc, snort_output.pc, snort.pc"
