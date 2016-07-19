@@ -19,15 +19,13 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://squid-use-serial-tests-config-needed-by-ptest.patch \
            file://run-ptest \
            file://volatiles.03_squid \
-           file://CVE-2016-3947.patch \
-           file://CVE-2016-4553.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
+                    file://errors/COPYRIGHT;md5=0d98c4448c368d146f31a970bb0ced21 \
                    "
-SRC_URI[md5sum] = "06e43abc67aedcc3903a2780de20a3ed"
-SRC_URI[sha256sum] = "b7dcec8c5cb7f5687aff4256a7522f670c310a350cc9e9c0f29f3fd9cf88d017"
+SRC_URI[md5sum] = "6a29d7dfc544205001f7a75c6996dc60"
+SRC_URI[sha256sum] = "5a114f8f7f44b5ae3c9b77d7b81aef13fe69e7f530855213d551f48b157cb5f1"
 
 DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
@@ -75,6 +73,3 @@ FILES_${PN}-doc += "${datadir}/*.txt"
 
 RDEPENDS_${PN} += "perl"
 RDEPENDS_${PN}-ptest += "make"
-
-# http://errors.yoctoproject.org/Errors/Details/35128/
-PNBLACKLIST[squid] ?= "BROKEN: sysroots/qemuarm/usr/include/linux/in.h:28:16: error: redeclaration of 'IPPROTO_IP'"
