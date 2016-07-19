@@ -4,7 +4,7 @@ SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
 
-DEPENDS = "perl-native pcre expat glib-2.0 sbc"
+DEPENDS = "pcre expat glib-2.0 sbc"
 
 SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "9ea9c82da9942194ebc8fc5c951a02e6d179afa7472cb6d96ca7615451
 
 PE = "1"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig perlnative
 
 ARM_INSTRUCTION_SET = "arm"
 
