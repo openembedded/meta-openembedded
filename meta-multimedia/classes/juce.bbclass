@@ -1,12 +1,23 @@
 inherit pkgconfig
 
-JUCE_X11_DEPS = "libx11 libxext libxinerama libxinerama libxrandr libxcursor freetype"
-JUCE_DEPS = " \
-  ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '${JUCE_X11_DEPS}', '', d)} \
-  alsa-lib \
-  curl \
+JUCE_MODULES ??= " \
+  juce_core \
+  juce_events \
+  ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'juce_audio_devices', '', d)} \
+  ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'juce_graphics juce_gui_basics', '', d)} \
+  ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'juce_opengl', '', d)} \
 "
-DEPENDS_prepend = "projucer-native ${JUCE_DEPS} "
+JUCE_X11_DEPS = "libx11 libxext libxinerama libxrandr libxcursor"
+
+PACKAGECONFIG_prepend= "${JUCE_MODULES} "
+PACKAGECONFIG[juce_core] = ",,curl,"
+PACKAGECONFIG[juce_events] = ",,libx11,"
+PACKAGECONFIG[juce_audio_devices] = ",,alsa-lib,"
+PACKAGECONFIG[juce_graphics] = ",,${JUCE_X11_DEPS} freetype,"
+PACKAGECONFIG[juce_gui_basics] = ",,${JUCE_X11_DEPS},"
+PACKAGECONFIG[juce_opengl] = ",,virtual/libgl,"
+
+DEPENDS_prepend = "projucer-native "
 
 export OE_JUCE_PROJUCER = "${STAGING_BINDIR_NATIVE}/Projucer"
 
