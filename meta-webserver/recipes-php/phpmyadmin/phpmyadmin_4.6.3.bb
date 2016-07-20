@@ -5,14 +5,12 @@ LICENSE = "GPLv2 & LGPLv3 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
 
-SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.tar.xz \
-           file://Port-content-spoofing-fix-CVE-2015-7873.patch \
+SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
            file://apache.conf \
-           file://phpmyadmin-CVE-2015-8669.patch \
 "
 
-SRC_URI[md5sum] = "2d08d2fcc8f70f88a11a14723e3ca275"
-SRC_URI[sha256sum] = "d2e90ea486d90b4ebe5eb02d7ad349ad2916c12a8981f98553395ef78d22a8ec"
+SRC_URI[md5sum] = "53c7a6a577d10de04a5dd21a05018542"
+SRC_URI[sha256sum] = "943bad38a95f21bb015bdb78c9c067e0ea7510c1b35d4b8e757cb89c413e3bac"
 
 S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 
