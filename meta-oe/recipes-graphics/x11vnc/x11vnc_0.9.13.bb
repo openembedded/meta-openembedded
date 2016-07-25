@@ -29,6 +29,6 @@ PACKAGECONFIG[libvncserver] = "--with-system-libvncserver,--without-system-libvn
 
 do_prepare_sources () {
     # Remove old libtool macros from acinclude.m4
-    sed -i -e '/^# libtool.m4/q' acinclude.m4
+    sed -i -e '/^# libtool.m4/q' ${S}/acinclude.m4
 }
 do_patch[postfuncs] += "do_prepare_sources"
