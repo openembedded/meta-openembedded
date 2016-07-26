@@ -17,8 +17,8 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz 
            file://fix-a-building-failure.patch \
           "
 
-SRC_URI[md5sum] = "92f682b00eb137af01e59ea93f7e31f7"
-SRC_URI[sha256sum] = "45b66b7adc87cad32e553df1d5211e5b6426b78a3bc318a5ccde088bf93e6e10"
+SRC_URI[md5sum] = "5cfb169934170a429589e05f0f5aba9c"
+SRC_URI[sha256sum] = "030b60a787333bf20ec0ee02b02da52474772c069954dc914f894a7703989b76"
 
 S = "${WORKDIR}/mariadb-${PV}"
 
@@ -176,6 +176,7 @@ RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-modu
     perl-module-file-spec perl-module-file-find perl-module-file-basename perl-module-file-path \
     perl-module-constant perl-module-lib perl-module-file-temp perl-module-file-spec-functions \
     perl-module-io-socket-inet perl-module-io-select"
+RDEPENDS_${PN}-setupdb = "coreutils"
 
 # Allow old code to link to the backward compatible library
 RDEPENDS_libmysqlclient-dev = "libmysqlclient-r-dev"
