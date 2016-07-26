@@ -12,5 +12,3 @@ SRC_URI += "\
 SRC_URI[md5sum] = "8b2e3472a8dc786649b4d02d02e039a0"
 SRC_URI[sha256sum] = "b87c50c66b6ea42a9712b5f6284794fabad0616e6ae420cf0f10523be6d94a39"
 
-# http://lists.openembedded.org/pipermail/openembedded-core/2016-May/122095.html
-PNBLACKLIST[postgresql] ?= "Depends on broken tcl"
