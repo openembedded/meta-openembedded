@@ -14,7 +14,7 @@ do_unpack[postfuncs] += "dos2unix"
 
 dos2unix () {
     cr="$(printf '\r')"
-    for f in make/*/Makefile; do
+    for f in ${S}/make/*/Makefile; do
         tr -d "$cr" <"$f" >"$f.new" && \
             mv "$f.new" "$f"
     done
