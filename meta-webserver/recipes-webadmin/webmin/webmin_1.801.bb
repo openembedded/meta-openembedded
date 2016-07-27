@@ -20,8 +20,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://mysql-config-fix.patch \
             "
 
-SRC_URI[md5sum] = "4007c390323d840f26c2e0f43c5c81a3"
-SRC_URI[sha256sum] = "5111f820adc6fbca997a58d4b2fa186dac6cded9cff0e70724f8cae6021123d9"
+SRC_URI[md5sum] = "91d05b4e31ad1bd14bab14e0f155c088"
+SRC_URI[sha256sum] = "ad477edb41dc1a900448afc8b5528e136b3778d2d303f23bc564afb975eb5bed"
 
 inherit perlnative update-rc.d
 
