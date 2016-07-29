@@ -18,7 +18,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 DEPENDS = "openssl"
 
-inherit update-rc.d useradd
+inherit update-rc.d
 
 INITSCRIPT_NAME = "nostromo"
 INITSCRIPT_PARAMS = "defaults 70"
@@ -26,11 +26,6 @@ INITSCRIPT_PARAMS = "defaults 70"
 do_compile() {
     oe_runmake
 }
-
-# we need user/group www-data to exist when we install
-#
-USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "--system -g www-data www-data"
 
 do_install() {
     install -d ${D}/${sbindir}
