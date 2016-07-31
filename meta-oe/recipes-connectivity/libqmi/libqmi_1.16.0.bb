@@ -12,5 +12,5 @@ DEPENDS = "glib-2.0"
 inherit autotools pkgconfig bash-completion
 
 SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "6ec55d1a1941bb18802ab8498baca7e0"
-SRC_URI[sha256sum] = "6283b80aea1b2721523e5229087764b4d6a1c9f53488690fa16a11adff4a0040"
+SRC_URI[md5sum] = "4970c110f160b33637a3515004c637b2"
+SRC_URI[sha256sum] = "7ab6bb47fd23bf4d3fa17424e40ea5552d08b19e5ee4f125f21f316c8086ba2a"
