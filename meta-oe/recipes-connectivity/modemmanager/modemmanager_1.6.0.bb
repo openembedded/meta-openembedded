@@ -7,17 +7,15 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit gnomebase gettext systemd vala gobject-introspection
+inherit gnomebase gettext systemd vala gobject-introspection bash-completion
 
-DEPENDS = "glib-2.0 libgudev dbus-glib"
+DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native"
 
 SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
-SRC_URI[md5sum] = "66cc7266b15525cb366253e6639fc564"
-SRC_URI[sha256sum] = "7ef5035375a953b285a742591df0a65fd442f4641ce4d8f4392a41d6d6bc70b3"
+SRC_URI[md5sum] = "d9d93d2961ee35b4cd8a75a6a8631cb4"
+SRC_URI[sha256sum] = "a94f4657a8fa6835e2734fcc6edf20aa8c8d452f62299d7748541021c3eb2445"
 
 S = "${WORKDIR}/ModemManager-${PV}"
-
-PNBLACKLIST[modemmanager] ?= "Depends on broken libqmi"
 
 PACKAGECONFIG ??= "mbim qmi polkit \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
