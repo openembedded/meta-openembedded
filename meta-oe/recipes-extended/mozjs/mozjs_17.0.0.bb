@@ -59,8 +59,8 @@ do_unpack() {
 }
 
 
-PACKAGES =+ "lib${PN}"
-FILES_lib${PN} += "${libdir}/lib*.so"
+PACKAGES =+ "lib${BPN}"
+FILES_lib${BPN} += "${libdir}/lib*.so"
 FILES_${PN}-dev += "${bindir}/js17-config"
 
 # Fails to build with thumb-1 (qemuarm)
