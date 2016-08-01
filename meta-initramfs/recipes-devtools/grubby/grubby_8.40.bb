@@ -25,7 +25,7 @@ RDEPENDS_${PN} += "dracut"
 
 inherit autotools-brokensep ptest
 
-EXTRA_OEMAKE = "'CC=${CC}'"
+EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}'"
 
 do_install_ptest() {
 	install -d ${D}${PTEST_PATH}
