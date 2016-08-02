@@ -10,12 +10,12 @@ SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.x
            file://adduser-add-M-option-for-useradd-when-no-create-home.patch \
 "
 
-SRC_URI[md5sum] = "3a079dd4e41d5a1fbaccaab03aacd881"
-SRC_URI[sha256sum] = "693b45bb0d27938fff2ecee5442ea2ac1b8804472ff0bb8faffd39616e58211f"
+SRC_URI[md5sum] = "6bb6d93922d281f1b56393a53f8ce5fd"
+SRC_URI[sha256sum] = "e7288281d4d1eec2948ba3687452ca33a8224d40c98d321bc3fbaefcf6d4c0db"
 
 inherit cpan-base update-alternatives
 
-S = "${WORKDIR}/${BPN}-3.113+nmu4"
+S = "${WORKDIR}/${BPN}"
 
 do_install() {
     install -d ${D}${sbindir}
