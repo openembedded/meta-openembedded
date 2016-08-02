@@ -1,4 +1,4 @@
-DESCRIPTION = "multi-protocol instant messaging client"
+SUMMARY = "multi-protocol instant messaging client"
 SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
@@ -13,10 +13,10 @@ SRC_URI = "\
     file://pidgin-cross-python-265.patch \
 "
 
-SRC_URI[md5sum] = "14e0f5cfb2ed065e4dc80391a806ac76"
-SRC_URI[sha256sum] = "2c7523f0fefe89749c03b2b738ab9f7bd186da435be4762f1487eee31e77ffdd"
+SRC_URI[md5sum] = "7b167474db669aab2f71fa46835fb83f"
+SRC_URI[sha256sum] = "f72613440586da3bdba6d58e718dce1b2c310adf8946de66d8077823e57b3333"
 
-PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn \
+PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
 "
 PACKAGECONFIG[farsight2] = "--enable-farstream,--disable-farstream,farsight2"
@@ -34,9 +34,10 @@ PACKAGECONFIG[gtk] = "--enable-gtkui,--disable-gtkui,gtk+"
 PACKAGECONFIG[x11] = "--with-x=yes --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--with-x=no,virtual/libx11"
 PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
 PACKAGECONFIG[consoleui] = "--enable-consoleui --with-ncurses-headers=${STAGING_INCDIR},--disable-consoleui,ncurses"
-PACKAGECONFIG[gnutls] = "--enable-gnutls --with-gnutls-includes=${STAGING_INCDIR} --with-gnutls-libs=${STAGING_LIBDIR},--disable-gnutls,gnutls"
+PACKAGECONFIG[gnutls] = "--enable-gnutls --with-gnutls-includes=${STAGING_INCDIR} --with-gnutls-libs=${STAGING_LIBDIR},--disable-gnutls,gnutls,libpurple-plugin-ssl-gnutls"
 PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
 PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
+PACKAGECONFIG[nss] = "--enable-nss,--disable-nss,nss nspr,libpurple-plugin-ssl-nss"
 
 EXTRA_OECONF = " \
     --disable-perl \
@@ -47,7 +48,6 @@ EXTRA_OECONF = " \
     --disable-meanwhile \
     --disable-nm \
     --disable-screensaver \
-    --enable-nss=no \
 "
 
 do_configure_prepend() {
@@ -81,7 +81,7 @@ FILES_finch-dbg      = "${bindir}/.debug/finch \
 
 FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
            ${datadir}/applications"
-RRECOMMENDS_${PN} = "${PN}-data libpurple-plugin-ssl-gnutls libpurple-protocol-irc libpurple-protocol-xmpp"
+RRECOMMENDS_${PN} = "${PN}-data libpurple-protocol-irc libpurple-protocol-xmpp"
 
 FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons ${datadir}/appdata"
 FILES_${PN}-dev += "${libdir}/${PN}/*.la"
