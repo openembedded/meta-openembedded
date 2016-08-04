@@ -99,6 +99,11 @@ do_install () {
         -e 's,@SYSCONFDIR@,${sysconfdir},g' \
         -e 's,@SBINDIR@,${sbindir},g' \
         -i ${D}${systemd_unitdir}/system/*.service
+
+    sed -e 's|--sysroot=${STAGING_DIR_HOST}||g' \
+        -e 's|${STAGING_DIR_NATIVE}||g' \
+        -e 's|-fdebug-prefix-map=[^ ]*||g' \
+        -i ${D}/${bindir}/prxs
 }
 
 INITSCRIPT_NAME = "proftpd"
