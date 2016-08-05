@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/Itseez/opencv.git;name=opencv \
             git://github.com/Itseez/opencv_contrib.git;destsuffix=contrib;name=contrib \
             git://github.com/Itseez/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=party3;name=party3 \
             file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+            file://fixgcc60.patch \
             file://fixpkgconfig.patch"
 
 PV = "3.1+git${SRCPV}"
@@ -145,6 +146,3 @@ do_install_append() {
     install -d ${D}${datadir}/OpenCV/samples/bin/
     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
 }
-
-# http://errors.yoctoproject.org/Errors/Details/68617/
-PNBLACKLIST[opencv] ?= "BROKEN: fails to build with gcc-6"
