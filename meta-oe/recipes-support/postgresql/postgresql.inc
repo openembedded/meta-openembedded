@@ -31,8 +31,6 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
     file://postgresql-setup \
     file://postgresql.service \
     file://0001-Use-pkg-config-for-libxml2-detection.patch \
-    file://postgresql-CVE-2016-0766.patch \
-    file://postgresql-CVE-2016-0773.patch \
 "
 
 LEAD_SONAME = "libpq.so"
