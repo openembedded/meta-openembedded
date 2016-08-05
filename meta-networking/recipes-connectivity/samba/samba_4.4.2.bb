@@ -24,7 +24,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
 SRC_URI[md5sum] = "03a65a3adf08ceb1636ad59d234d7f9d"
 SRC_URI[sha256sum] = "eaecd41a85ebb9507b8db9856ada2a949376e9d53cf75664b5493658f6e5926a"
 
-inherit systemd waf-samba cpan-base perlnative
+inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
 RDEPENDS_${PN}_remove = "perl"
 
@@ -32,6 +32,9 @@ DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libld
 
 SYSVINITTYPE_linuxstdbase = "lsb"
 SYSVINITTYPE = "sysv"
+
+INITSCRIPT_NAME = "samba.sh"
+INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVINITTYPE}', '', d)} \
@@ -102,8 +105,6 @@ do_install_append() {
     elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
-        update-rc.d -r ${D} samba.sh start 20 3 5 .
-        update-rc.d -r ${D} samba.sh start 20 0 1 6 .
     elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba.sh
@@ -112,8 +113,6 @@ do_install_append() {
             -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
             -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \
             -i ${D}${sysconfdir}/init.d/samba.sh
-        update-rc.d -r ${D} samba.sh start 20 3 5 .
-        update-rc.d -r ${D} samba.sh start 20 0 1 6 .
     fi
 
     install -d ${D}${sysconfdir}/samba
