@@ -1,18 +1,18 @@
 SUMMARY = "ImageMagick is an image convertion tools"
 SECTION = "console/utils"
 LICENSE = "ImageMagick"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=22d47a47bf252ca3ed7f71273b53612e"
 # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
 DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
 
 # Important note: tarballs for all patchsets within a version are deleted when
 # a new pachset is created. To avoid multiple patches for each patchset, try to
 # update to the last pachset of a version
-PATCHSET = "0"
+PATCHSET = "7"
 SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
 "
-SRC_URI[md5sum] = "99471c8c3f38c9264faf5c4ca7a31287"
-SRC_URI[sha256sum] = "07a2de28f7f9ab888ef47c02eb7e10cc3e0dd0e9797c5d71d6e71d19f842399e"
+SRC_URI[md5sum] = "bd66b19bd6fc3d320bd8d51869c874f9"
+SRC_URI[sha256sum] = "1168f44cfcd1243acda6bb9663f5d9b3a4bca2acd372e979b97b58ecf5c713e2"
 
 S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
 
@@ -36,8 +36,8 @@ FILES_${PN} += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.so \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/*/*.la \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/filters \
                 ${libdir}/ImageMagick-${PV}/modules-Q16/coders \
-                ${libdir}/ImageMagick-${PV}/config-Q16 \
-                ${datadir}/ImageMagick-6 "
+                ${libdir}/ImageMagick-${PV}/config-Q16* \
+                ${datadir}/ImageMagick-7 "
 
 FILES_${PN}-dev += "${libdir}/ImageMagick-${PV}/modules-Q16/*/*.a"
 
