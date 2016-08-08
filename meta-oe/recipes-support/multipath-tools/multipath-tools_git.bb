@@ -4,7 +4,7 @@ DEPENDS = "lvm2 libaio readline udev"
 
 LICENSE = "LGPLv2"
 
-SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
+SRC_URI = "git://git.opensvc.com/multipath-tools/.git \
            file://multipathd.oe \
            file://makefile_inc.patch \
            file://always-use-libdevmapper.patch \
