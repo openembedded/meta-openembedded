@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git"
 SRCREV = "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF_append_class-native = " with_x=no --disable-python-extension --disable-python-scripting"
+EXTRA_OECONF_append_class-native = " with_x=no"
 
 do_configure_prepend() {
     # uthash sources are expected in uthash/src
