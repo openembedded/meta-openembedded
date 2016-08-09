@@ -5,19 +5,18 @@ and flexibility. Dstat is handy for monitoring systems during performance tuning
 benchmarks or troubleshooting."
 HOMEPAGE = "http://dag.wiee.rs/home-made/dstat"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-SRC_URI = "git://github.com/dagwieers/dstat.git"
-SRC_URI[md5sum] = "798e050e2e024f08a272dd4b0e1eba41"
-SRC_URI[sha256sum] = "96d1e6ea2434e477fa97322d92778f68458d7e57bc55bc4f72e29467a52cffd1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "5251397eb8d3b284a90bfdfaec0c8e1210146e3f"
+DEPENDS += "asciidoc-native"
+
+SRC_URI = "git://github.com/dagwieers/dstat.git"
+
+SRCREV = "ebace6d4177f8748f35cec87f7a49946046b0a20"
 
 S = "${WORKDIR}/git"
 
-do_compile_prepend() {
-    #undo the step "make docs"
-    sed -i -e 's/$(MAKE) -C docs docs/# $(MAKE) -C docs docs/;' ${S}/Makefile
-}
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
 }
+
+RDEPENDS_${PN} += "python-core python-misc python-resource python-shell python-unixadmin"
