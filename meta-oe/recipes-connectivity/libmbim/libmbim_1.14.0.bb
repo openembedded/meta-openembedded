@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "glib-2.0 libgudev"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig bash-completion
 
 SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "921fb5ab3f13f1e00833e009d8f3b4f6"
-SRC_URI[sha256sum] = "949351d3e3d69b81e40a49f1d187944c26149e0647a415f0227ccdc112047b29"
+SRC_URI[md5sum] = "2ed809e65c85353d3ab59e372890e549"
+SRC_URI[sha256sum] = "ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b"
