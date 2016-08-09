@@ -9,7 +9,7 @@ LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
 DEPENDS = "openssl libp11"
 
-SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git;protocol=http"
+SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
 SRCREV = "6909d6761c8820e1750fa0bf4fa8532c82f34e35"
 
 S = "${WORKDIR}/git"
