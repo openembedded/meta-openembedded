@@ -27,6 +27,7 @@ PACKAGECONFIG_remove_armv6 = "tcmalloc"
 COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
 COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
 COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
 
 PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
 PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
