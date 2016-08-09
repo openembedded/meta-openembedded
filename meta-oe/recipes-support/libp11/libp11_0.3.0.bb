@@ -8,7 +8,7 @@ LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
 DEPENDS = "libtool openssl"
 
-SRC_URI = "git://github.com/OpenSC/libp11.git;protocol=http"
+SRC_URI = "git://github.com/OpenSC/libp11.git"
 SRCREV = "6f71240991aa831f6fc2cc5431faf6ebec627ed2"
 
 S = "${WORKDIR}/git"
