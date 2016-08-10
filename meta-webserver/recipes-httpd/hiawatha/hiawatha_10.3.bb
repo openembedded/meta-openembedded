@@ -10,8 +10,8 @@ SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
            file://hiawatha-init \
            file://hiawatha.service "
 
-SRC_URI[md5sum] = "a77f044634884c4cc5d21dab44e822a3"
-SRC_URI[sha256sum] = "5d9cdec51c618bb3efab747030e593d9bd49dfaf3236254c8e0cb60715716dbf"
+SRC_URI[md5sum] = "31567dfc18d435bd419be279f7970019"
+SRC_URI[sha256sum] = "99d185fb16bb1ab706724494d3cac86464f1485ed4b0fff09a192eca6da5ff8e"
 
 INITSCRIPT_NAME = "hiawatha"
 INITSCRIPT_PARAMS = "defaults 70"
@@ -33,10 +33,7 @@ EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
                   -DCMAKE_INSTALL_SBINDIR=${sbindir} \
                   -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
                   -DCMAKE_INSTALL_LIBDIR=${libdir} \
-                  -DLOG_DIR=/var/log/hiawatha \
-                  -DPID_DIR=/var/run \
-                  -DWEBROOT_DIR=/var/www/hiawatha \
-                  -DWORK_DIR=/var/lib/hiawatha "
+                  -DCMAKE_INSTALL_FULL_LOCALSTATEDIR=${localstatedir}"
 
 do_install_append() {
     # Copy over init script and sed in the correct sbin path
@@ -53,7 +50,7 @@ do_install_append() {
         install -m 644 ${WORKDIR}/hiawatha.service ${D}/${systemd_unitdir}/system
     fi
 
-    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}" "${D}${localstatedir}/run"
 }
 
 CONFFILES_${PN} = " \
@@ -63,3 +60,5 @@ CONFFILES_${PN} = " \
     ${sysconfdir}/hiawatha/mimetype.conf \
     ${sysconfdir}/hiawatha/php-fcgi.conf \
 "
+
+FILES_${PN}-dev = "${libdir}/hiawatha/*${SOLIBSDEV}"
