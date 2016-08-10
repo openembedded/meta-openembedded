@@ -42,6 +42,3 @@ do_install() {
     cp -prf ${S}/espeak-data/* ${D}${datadir}/espeak-data
     chown -R root:root ${D}${datadir}/espeak-data
 }
-
-# http://errors.yoctoproject.org/Errors/Details/68663/
-PNBLACKLIST[espeak] ?= "BROKEN: fails to build with gcc-6"
