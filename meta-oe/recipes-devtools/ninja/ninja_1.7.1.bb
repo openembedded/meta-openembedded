@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a81586a64ad4e476c791cda7e2f2c52e"
 
 DEPENDS = "re2c-native ninja-native"
 
-SRCREV = "484c16336f19bd8970bb6e75322d61b92a229899"
+SRCREV = "b49b0fc01bb052b6ac856b1e72be9391e962398e"
 
 SRC_URI = "git://github.com/martine/ninja.git;branch=release"
 
