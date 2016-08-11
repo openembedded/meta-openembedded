@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 SRC_URI = "http://www.gnokii.org/download/gnokii/gnokii-${PV}.tar.bz2"
 
-DEPENDS = "glib-2.0"
+DEPENDS = "glib-2.0 intltool-native"
 X11DEPENDS = " libxpm gtk+"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
