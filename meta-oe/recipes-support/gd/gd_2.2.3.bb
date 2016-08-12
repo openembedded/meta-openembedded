@@ -12,12 +12,12 @@ LICENSE = "GD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
 DEPENDS = "freetype libpng jpeg zlib tiff"
 
-SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
-"
-SRC_URI[md5sum] = "d3f1a992ac9c550ebc6da89c147f89af"
-SRC_URI[sha256sum] = "895ea9c6fcab187b0a908ae3e9e6b06423756f8a643d362349b0caab4014bd0d"
+SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
+           file://fix-gcc-unused-functions.patch"
 
-S = "${WORKDIR}/libgd-${PV}"
+SRCREV = "46ceef5970bf3a847ff61d1bdde7501d66c11d0c"
+
+S = "${WORKDIR}/git"
 
 inherit autotools binconfig gettext pkgconfig
 
@@ -25,9 +25,9 @@ EXTRA_OECONF += " --disable-rpath \
                   --with-jpeg=${STAGING_LIBDIR}/.. \
                   --with-freetype=yes \
                   --without-fontconfig \
+                  --without-webp \
                   --without-xpm \
                   --without-x \
-                  --without-vpx \
                 "
 
 EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
