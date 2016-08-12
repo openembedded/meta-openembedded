@@ -92,6 +92,15 @@ do_install () {
     # create the pub directory
     mkdir -p ${D}/home/${FTPUSER}/pub/
     chown -R ${FTPUSER}:${FTPGROUP} ${D}/home/${FTPUSER}/pub
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
+        # install proftpd pam configuration
+        install -d ${D}${sysconfdir}/pam.d
+        install -m 644 ${S}/contrib/dist/rpm/ftp.pamd ${D}${sysconfdir}/pam.d/proftpd
+        sed -i '/ftpusers/d' ${D}${sysconfdir}/pam.d/proftpd
+        # specify the user Authentication config
+        sed -i '/^MaxInstances/a\AuthPAM                         on\nAuthPAMConfig                   proftpd' \
+            ${D}${sysconfdir}/proftpd.conf
+    fi
 
     install -d ${D}/${systemd_unitdir}/system
     install -m 644 ${WORKDIR}/proftpd.service ${D}/${systemd_unitdir}/system
