@@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
 SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
 GNOME_COMPRESS_TYPE = "xz"
 
-DEPENDS = "glib-2.0 gtk+3 libxml2"
+DEPENDS = "glib-2.0 gtk+3 libxml2 intltool-native"
 
 inherit vala gtk-doc
 
