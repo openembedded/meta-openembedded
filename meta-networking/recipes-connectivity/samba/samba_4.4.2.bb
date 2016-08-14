@@ -123,7 +123,7 @@ do_install_append() {
     install -d ${D}${sysconfdir}/sysconfig/
     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
 
-    rm -rf ${D}/run ${D}${localstatedir}/run
+    rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
 }
 
 PACKAGES += "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
@@ -136,7 +136,6 @@ FILES_${PN}-base = "${sbindir}/nmbd \
                     ${sbindir}/smbd \
                     ${sysconfdir}/init.d \
                     ${localstatedir}/lib/samba \
-                    ${localstatedir}/log/samba \
                     ${localstatedir}/nmbd \
                     ${localstatedir}/spool/samba \
 "
