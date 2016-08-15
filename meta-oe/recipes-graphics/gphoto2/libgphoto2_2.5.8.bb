@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://40-libgphoto2.rules \
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
            file://0002-correct-jpeg-memsrcdest-support.patch \
+           file://avoid_using_sprintf.patch \
 "
 
 SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
