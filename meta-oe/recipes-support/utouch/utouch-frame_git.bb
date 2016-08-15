@@ -9,12 +9,10 @@ DEPENDS += "mtdev utouch-evemu"
 
 inherit autotools pkgconfig
 
-SRC_URI = "git://bitmath.org/git/frame.git;protocol=http"
+SRC_URI = "git://bitmath.org/git/frame.git;protocol=http \
+           file://remove-man-page-creation.patch"
 SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
 
 PV = "1.1.2+git${SRCPV}"
 
 S = "${WORKDIR}/git/"
-
-# http://errors.yoctoproject.org/Errors/Details/74486/
-PNBLACKLIST[utouch-frame] ?= "BROKEN: Fails to execute xmllint"
