@@ -17,8 +17,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=b
                     file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780 \
                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
 
-SRC_URI[md5sum] = "31780b702b638ad32aa5d9853d257839"
-SRC_URI[sha256sum] = "8843c7a72b980d9413ba6c494c039bccd10c524b37fda2917afb147745d8b2e6"
+SRC_URI[md5sum] = "50a194dea128d062cf4b44c59130219b"
+SRC_URI[sha256sum] = "cdb8269cba09006ddf3766eb7721192b52ae3fdc8a6b95f4318b6b740b9d35ac"
 
 inherit waf-samba
 
