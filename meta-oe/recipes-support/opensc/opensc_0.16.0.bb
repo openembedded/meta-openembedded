@@ -11,10 +11,9 @@ SECTION = "System Environment/Libraries"
 
 SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz"
 
-SRC_URI[md5sum] = "f266024e5a9630821ffa0ac14f72e369"
-SRC_URI[sha256sum] = "8f8f8cf52e0252334e4dfdccca829b876a3de6340deb772aa0bfe0c0cc10eaf5"
+SRC_URI[md5sum] = "724d128f23cd7a74b28d04300ce7bcbd"
+SRC_URI[sha256sum] = "3ac8c29542bb48179e7086d35a1b8907a4e86aca3de3323c2f48bd74eaaf5729"
 
-S = "${WORKDIR}/OpenSC-${PV}"
 DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
 
 LICENSE = "LGPLv2+"
