@@ -21,8 +21,8 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://volatiles.03_samba \
           "
 
-SRC_URI[md5sum] = "03a65a3adf08ceb1636ad59d234d7f9d"
-SRC_URI[sha256sum] = "eaecd41a85ebb9507b8db9856ada2a949376e9d53cf75664b5493658f6e5926a"
+SRC_URI[md5sum] = "6950c5e9f7bdeb8a610c2ca957a15be4"
+SRC_URI[sha256sum] = "b876ef2e63f66265490e80a122e66ef2d7616112b839df68f56ac2e1ce17a7bd"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
