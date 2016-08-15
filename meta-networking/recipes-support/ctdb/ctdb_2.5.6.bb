@@ -16,8 +16,8 @@ SRC_URI = "https://ftp.samba.org/pub/${PN}/${BP}.tar.gz \
            file://service-ensure-the-PID-directory-is-created.patch \
           "
 
-SRC_URI[md5sum] = "d0cd91726ff4ca2229e1b21859c94717"
-SRC_URI[sha256sum] = "d5bf3f674cae986bb6178b1db215a703ac94adc5f75fadfdcff63dcbb5e98ab5"
+SRC_URI[md5sum] = "efc50109f90a4c790124c35e4ba234ad"
+SRC_URI[sha256sum] = "fc1cdd7efcc91afc629f21408281bba5da107b9c17e74bdee2f28a532d14f874"
 
 inherit autotools-brokensep pkgconfig systemd
 
