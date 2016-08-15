@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19
 DEPENDS = "openssl libp11"
 
 SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
-SRCREV = "6909d6761c8820e1750fa0bf4fa8532c82f34e35"
+SRCREV = "132fcf2c8b319f9f4b2ebdc8dcb54ff496dc0519"
 
 S = "${WORKDIR}/git"
 
@@ -18,12 +18,14 @@ inherit autotools pkgconfig
 
 EXTRA_OECONF = "\
     --disable-static \
-    --libdir ${libdir}/openssl \
+    --libdir ${libdir}/engines \
 "
 
 do_install_append () {
-    rm -f ${D}${libdir}/openssl/engines/libpkcs11.la
+    rm -f ${D}${libdir}/engines/libpkcs11.la
 }
 
-FILES_${PN} += "${libdir}/openssl/engines/libpkcs11.so*"
-FILES_${PN}-dbg += "${libdir}/openssl/engines/.debug/*"
+FILES_${PN} += "${libdir}/engines/libpkcs11${SOLIBSDEV}"
+FILES_${PN}-dbg += "${libdir}/engines/.debug/"
+
+RDEPENDS_${PN} += "openssl libp11 opensc"
