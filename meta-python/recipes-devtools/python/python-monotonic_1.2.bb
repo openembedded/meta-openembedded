@@ -7,4 +7,4 @@ SRC_URI[sha256sum] = "c0e1ceca563ca6bb30b0fb047ee1002503ae6ad3585fc9c6af37a8f77e
 
 inherit pypi setuptools
 
-RDEPENDS_${PN} += "${PYTHON_PN}-ctypes ${PYTHON_PN}-re"
+RDEPENDS_${PN} += "${PYTHON_PN}-ctypes ${PYTHON_PN}-io ${PYTHON_PN}-re ${PYTHON_PN}-threading"
