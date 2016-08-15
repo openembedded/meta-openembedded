@@ -7,9 +7,11 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
 
 RDEPENDS_${PN} = "acl"
 
-SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2"
-SRC_URI[md5sum] = "73632501002e6de8244f831e38b2b98e"
-SRC_URI[sha256sum] = "2cfcf560447ea44cba2a683342c7062aaaf35e4eb554bed64ac2dd55a70a5fb6"
+SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2 \
+           file://non-gnu-libc.patch \
+"
+SRC_URI[md5sum] = "8bccd36573b75286538bd5bd2c424f45"
+SRC_URI[sha256sum] = "abae2bb3bdc691ca13c1e4c244630b8c881c4f3b35c207299f1b39b7bec83785"
 
 inherit autotools systemd gtk-doc gobject-introspection
 
