@@ -29,8 +29,8 @@ ALTERNATIVE_TARGET_${PN}  = "${bindir}/tnftp"
 FILES_${PN} = "${bindir}/tnftp"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6d6796cb166a9bb050958241dad9479e"
-SRC_URI[md5sum] = "66e218d02ec7d9fc39ab70ba2900305a"
-SRC_URI[sha256sum] = "6f650e25f6fd51538f677b789b49379f367ae9f1dee74c94cfe24d92abc2cffb"
+SRC_URI[md5sum] = "a49fbe752318d5a7893f900046ea00d5"
+SRC_URI[sha256sum] = "c94a8a49d3f4aec1965feea831d4d5bf6f90c65fd8381ee0863d11a5029a43a0"
 
 PACKAGECONFIG ?= "openssl"
 PACKAGECONFIG[openssl] = "--enable-ssl, --disable-ssl --with-ssl=no, openssl"
