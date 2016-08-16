@@ -12,12 +12,10 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://contrib.patch  \
            file://build_fixup.patch \
            file://proftpd.service \
-           file://CVE-2016-3125.patch \
-           file://Fix-build-errors.patch \
            "
 
-SRC_URI[md5sum] = "b9d3092411478415b31d435f8e26d173"
-SRC_URI[sha256sum] = "a1f48df8539c414ec56e0cea63dcf4b8e16e606c05f10156f030a4a67fae5696"
+SRC_URI[md5sum] = "f7b8e3a383b34a894c2502db74ccccde"
+SRC_URI[sha256sum] = "afc1789f2478acf88dfdc7d70da90a4fa2786d628218e9574273295d044b4fc8"
 
 inherit autotools-brokensep useradd update-rc.d systemd
 
