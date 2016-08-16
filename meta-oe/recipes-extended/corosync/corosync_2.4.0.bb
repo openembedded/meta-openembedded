@@ -8,8 +8,8 @@ SECTION = "base"
 inherit autotools pkgconfig systemd
 
 SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
-SRC_URI[md5sum] = "8894f00d499e0755467b381e6346f9ff"
-SRC_URI[sha256sum] = "1d48cdfa224b0ceb02e27fe9d56b738fb2a92262b04b15bb3a67e1c4248da8e2"
+SRC_URI[md5sum] = "11bdd5ee2aed5eb2443dd6d6acd6a1ab"
+SRC_URI[sha256sum] = "6fe9523852a892701c4c28c1cd32e067e44cf0e696d5ecf3790afdef1fc309cb"
 
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
