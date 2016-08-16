@@ -7,7 +7,7 @@ DEPENDS = "libmnl"
 SRC_URI = "http://netfilter.org/projects/libnftnl/files/${BP}.tar.bz2  \
           "
 
-SRC_URI[md5sum] = "af0c62ce6bbd7a7d39def0996c1c17c9"
-SRC_URI[sha256sum] = "f6d4f5a702e38bc7987f2363f9fcd65930e8b702595c221a497e2f3a359be497"
+SRC_URI[md5sum] = "6d7f9f161538ca7efd535dcc70caf964"
+SRC_URI[sha256sum] = "ad3b932a39a1e567308e91b683b32239a5e1aea9b4582dfffe2288c3400ab07e"
 
 inherit autotools pkgconfig
