@@ -4,10 +4,10 @@ SECTION = "System Environment/Libraries"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://../ctapi-common.LICENSE;md5=8744cd52545ecb45befebd0da6f70f0a"
 
-SRC_URI = "http://ftp.riken.jp/Linux/fedora/releases/20/Fedora/source/SRPMS/c/${BPN}-${PV}.fc20.src.rpm;extract=ctapi-common.LICENSE \
-           http://ftp.riken.jp/Linux/fedora/releases/20/Fedora/source/SRPMS/c/${BPN}-${PV}.fc20.src.rpm;extract=ctapi-common.README"
-SRC_URI[md5sum] = "f02e67487c48319376800563a2659502"
-SRC_URI[sha256sum] = "32399819b0a1cac1abb2b8f0f180c572c93809faad36c46825dd536e4844c7cf"
+SRC_URI = "http://ftp.riken.jp/Linux/fedora/releases/23/Everything/source/SRPMS/c/${BPN}-${PV}.fc23.src.rpm;extract=ctapi-common.LICENSE \
+           http://ftp.riken.jp/Linux/fedora/releases/23/Everything/source/SRPMS/c/${BPN}-${PV}.fc23.src.rpm;extract=ctapi-common.README"
+SRC_URI[md5sum] = "5b7259ef1c8cd9ae801fca7a5cb548c1"
+SRC_URI[sha256sum] = "87a74eb0a66055c34ba2c5c919e74f3211c5950ae1c2cbab967fdf4137f5de91"
 
 do_compile() {
     install -pm 644 ${WORKDIR}/ctapi-common.LICENSE LICENSE
