@@ -15,3 +15,5 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-threading \
     "
+
+BBCLASSEXTEND = "native nativesdk"
