@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 SRC_URI = "git://github.com/berke/wipe.git;branch=master \
            file://support-cross-compile-for-linux.patch \
+           file://makefile-add-ldflags.patch \
           "
 SRCREV = "d9c100c9cd0b1cbbe4359e4d6c9a035d11e7597c"
 PV = "0.23+git${SRCPV}"
