@@ -12,8 +12,6 @@ SRC_URI = "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz \
 SRC_URI[md5sum] = "015ff58cd10607db0e0de60aeca2f5f8"
 SRC_URI[sha256sum] = "9c2363ed9542a6784ff08e247182137e71f2ddb79e8e6c1ac4ad50d21ced3715"
 
-PR = "r0"
-
 inherit autotools systemd
 
 EXTRA_OECONF = "\
