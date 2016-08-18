@@ -62,32 +62,29 @@ RDEPENDS_${PN} += "${PN}-database"
 inherit ptest
 
 do_configure_ptest() {
-	sed -i -e "s/noinst_PROGRAMS = /test_PROGRAMS = /g" \
-	    -e 's:SRCDIR=\\"$(top_srcdir)\\":SRCDIR=\\"$(testdir)\\":' \
-	  ${S}/test/Makefile.am
+    sed -i -e "s/noinst_PROGRAMS = /test_PROGRAMS = /g" \
+        -e 's:SRCDIR=\\"$(top_srcdir)\\":SRCDIR=\\"$(testdir)\\":' \
+        ${S}/test/Makefile.am
 
-	if ! grep "^testdir = " ${S}/test/Makefile.am ; then
-	  sed -e '/EXTRA_PROGRAMS = /itestdir = ${PTEST_PATH}/tests' \
-	    -i ${S}/test/Makefile.am
-	fi
+    if ! grep "^testdir = " ${S}/test/Makefile.am ; then
+        sed -e '/EXTRA_PROGRAMS = /itestdir = ${PTEST_PATH}/tests' \
+            -i ${S}/test/Makefile.am
+    fi
 
-	sed -i -e "s:/usr/local/share:/usr/share:g" \
-	  ${S}/test/benchmark.c
+    sed -i -e "s:/usr/local/share:/usr/share:g" \
+        ${S}/test/benchmark.c
 
-	sed -i -e 's:"../data/:"/usr/share/GeoIP/:g' \
-	  ${S}/test/test-geoip-city.c \
-	  ${S}/test/test-geoip-isp.c \
-	  ${S}/test/test-geoip-asnum.c \
-	  ${S}/test/test-geoip-netspeed.c \
-	  ${S}/test/test-geoip-org.c \
-	  ${S}/test/test-geoip-region.c
+    sed -i -e 's:"../data/:"/usr/share/GeoIP/:g' \
+        ${S}/test/test-geoip-city.c \
+        ${S}/test/test-geoip-isp.c \
+        ${S}/test/test-geoip-asnum.c \
+        ${S}/test/test-geoip-netspeed.c \
+        ${S}/test/test-geoip-org.c \
+        ${S}/test/test-geoip-region.c
 }
 
 
 do_install_ptest() {
-	oe_runmake -C test DESTDIR=${D}  install-testPROGRAMS
-	install ${S}/test/*.txt ${D}${PTEST_PATH}/tests
+    oe_runmake -C test DESTDIR=${D}  install-testPROGRAMS
+    install ${S}/test/*.txt ${D}${PTEST_PATH}/tests
 }
-
-
-

@@ -13,14 +13,14 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
-           file://initd.smartd \
-           file://smartmontools.default \
-           file://smartd.service \
-          "
+    file://initd.smartd \
+    file://smartmontools.default \
+    file://smartd.service \
+"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
-                  "
+    ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+"
 PACKAGECONFIG[libcap-ng] = "--with-libcap-ng=yes,--with-libcap-ng=no,libcap-ng"
 PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
 
@@ -33,19 +33,19 @@ SYSTEMD_SERVICE_${PN} = "smartd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install_append () {
-	#install the init.d/smartd
-	install -d ${D}${sysconfdir}/init.d
-	install -p -m 0755 ${WORKDIR}/initd.smartd ${D}${sysconfdir}/init.d/smartd
-	install -d ${D}${sysconfdir}/default
-	install -p -m 0644 ${WORKDIR}/smartmontools.default ${D}${sysconfdir}/default/smartmontools
+    #install the init.d/smartd
+    install -d ${D}${sysconfdir}/init.d
+    install -p -m 0755 ${WORKDIR}/initd.smartd ${D}${sysconfdir}/init.d/smartd
+    install -d ${D}${sysconfdir}/default
+    install -p -m 0644 ${WORKDIR}/smartmontools.default ${D}${sysconfdir}/default/smartmontools
 
-	#install systemd service file
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/smartd.service ${D}${systemd_unitdir}/system
-	sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
-		-e 's,@SYSCONFDIR@,${sysconfdir},g' \
-		-e 's,@SBINDIR@,${sbindir},g' \
-		${D}${systemd_unitdir}/system/smartd.service
+    #install systemd service file
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/smartd.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
+        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+        -e 's,@SBINDIR@,${sbindir},g' \
+        ${D}${systemd_unitdir}/system/smartd.service
 }
 
 INITSCRIPT_NAME = "smartd"

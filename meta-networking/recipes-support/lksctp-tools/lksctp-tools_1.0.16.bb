@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
-           file://run-ptest \
-           file://v4test.sh \
-           file://v6test.sh \
-          "
+    file://run-ptest \
+    file://v4test.sh \
+    file://v6test.sh \
+"
 
 SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
 SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
@@ -30,11 +30,11 @@ BBCLASSEXTEND = "native"
 inherit autotools pkgconfig binconfig ptest
 
 do_install_ptest () {
-	install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
-	install -m 0755 ${WORKDIR}/v6test.sh ${D}${PTEST_PATH}
-	for testcase in `find ${B}/src/apps/.libs ${B}/src/func_tests/.libs -maxdepth 1 -type f -executable`; do
-		install $testcase ${D}${PTEST_PATH}
-	done
+    install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
+    install -m 0755 ${WORKDIR}/v6test.sh ${D}${PTEST_PATH}
+    for testcase in `find ${B}/src/apps/.libs ${B}/src/func_tests/.libs -maxdepth 1 -type f -executable`; do
+        install $testcase ${D}${PTEST_PATH}
+    done
 }
 
 SOLIBVERSION="${PV}"

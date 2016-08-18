@@ -24,8 +24,9 @@ EXTRA_OECONF = "--disable-smsd"
 
 FILES_${PN} = "${bindir} ${sbindir}"
 FILES_libgnokii-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la \
-                ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
-	        /lib/*.a /lib/*.o ${datadir}/aclocal"
+    ${libdir}/*.a ${libdir}/*.o ${libdir}/pkgconfig \
+    /lib/*.a /lib/*.o ${datadir}/aclocal \
+"
 FILES_${PN}-dev = ""
 FILES_libgnokii = "${libdir}/libgnokii.so.*"
 

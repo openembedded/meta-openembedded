@@ -15,8 +15,8 @@ LICENSE = "BSD-4-Clause"
 DEPENDS = "ncurses"
 
 SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
-	   file://tnftp-autotools.patch \
-	  "
+    file://tnftp-autotools.patch \
+"
 
 inherit autotools update-alternatives pkgconfig
 

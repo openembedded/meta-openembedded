@@ -49,23 +49,23 @@ PACKAGECONFIG[libcurl] = "--with-libcurl,--without-libcurl,curl,"
 EXTRA_OECONF = "hw_cv_func_va_copy=yes --with-init-script=${sysconfdir}/init.d --with-tokyocabinet"
 
 do_install_append() {
-	install -d ${D}${localstatedir}/${BPN}/bin
-	for f in `ls ${D}${bindir}`; do
-	    ln -s ${bindir}/`basename $f` ${D}${localstatedir}/${BPN}/bin/
-	done
+    install -d ${D}${localstatedir}/${BPN}/bin
+    for f in `ls ${D}${bindir}`; do
+        ln -s ${bindir}/`basename $f` ${D}${localstatedir}/${BPN}/bin/
+    done
 
-	install -d ${D}${sysconfdir}/default
-	cat << EOF > ${D}${sysconfdir}/default/cfengine3
+    install -d ${D}${sysconfdir}/default
+    cat << EOF > ${D}${sysconfdir}/default/cfengine3
 RUN_CF_SERVERD=1
 RUN_CF_EXECD=1
 RUN_CF_MONITORD=1
 RUN_CF_HUB=0
 EOF
 
-	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-		install -m 0755 -D ${D}${sysconfdir}/init.d/cfengine3 ${D}${datadir}/${BPN}/cfengine3
-		sed -i -e 's#/etc/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
-	fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -m 0755 -D ${D}${sysconfdir}/init.d/cfengine3 ${D}${datadir}/${BPN}/cfengine3
+        sed -i -e 's#/etc/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
+    fi
 }
 
 RDEPENDS_${PN} += "${BPN}-masterfiles"

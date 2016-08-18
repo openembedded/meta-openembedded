@@ -31,8 +31,8 @@ PACKAGECONFIG[x11] = "--enable-x --enable-xvideo,--disable-x --disable-xvideo,vi
 PACKAGECONFIG[cdparanoia] = "--enable-cdparanoia,--disable-cdparanoia,cdparanoia"
 
 do_configure_prepend() {
-	# This m4 file contains nastiness which conflicts with libtool 2.2.2
-	rm -f ${S}/m4/lib-link.m4
+    # This m4 file contains nastiness which conflicts with libtool 2.2.2
+    rm -f ${S}/m4/lib-link.m4
 }
 
 FILES_${PN} += "${datadir}/${BPN}"

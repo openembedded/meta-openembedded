@@ -18,12 +18,12 @@ EXTRA_OECONF += "--disable-man"
 PACKAGES =+ "dconf-editor"
 
 FILES_${PN} += " \
-	${datadir}/dbus-1 \
-	${libdir}/gio/modules/*.so \
+    ${datadir}/dbus-1 \
+    ${libdir}/gio/modules/*.so \
 "
 FILES_dconf-editor = " \
-	${bindir}/dconf-editor \
-	${datadir}/icons \
-	${datadir}/bash-completion \
+    ${bindir}/dconf-editor \
+    ${datadir}/icons \
+    ${datadir}/bash-completion \
 "
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"

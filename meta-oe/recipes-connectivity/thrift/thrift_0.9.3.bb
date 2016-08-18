@@ -30,7 +30,7 @@ EXTRA_OECMAKE_class-nativesdk = "-DWITH_QT4=OFF -DWITH_QT5=OFF \
              -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DWITH_PYTHON=OFF"
 
 do_install_append () {
-	ln -sf thrift ${D}/${bindir}/thrift-compiler
+    ln -sf thrift ${D}/${bindir}/thrift-compiler
 }
 
 # http://errors.yoctoproject.org/Errors/Details/68622/

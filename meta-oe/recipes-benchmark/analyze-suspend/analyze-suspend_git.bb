@@ -22,8 +22,8 @@ SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
 S = "${WORKDIR}/git"
 
 do_install() {
-	install -Dm 0755 analyze_suspend.py ${D}${bindir}/analyze_suspend.py
-	install -Dm 0644 README ${D}${docdir}/analyze-suspend/README
+    install -Dm 0755 analyze_suspend.py ${D}${bindir}/analyze_suspend.py
+    install -Dm 0644 README ${D}${docdir}/analyze-suspend/README
 }
 
 BBCLASSEXTEND = "native"

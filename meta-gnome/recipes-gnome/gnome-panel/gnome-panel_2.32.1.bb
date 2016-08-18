@@ -10,8 +10,9 @@ SECTION = "x11/gnome"
 PR = "r7"
 
 DEPENDS = "gnome-doc-utils gconf glib-2.0 gnome-desktop gtk+ \
-           pango libwnck gnome-menus cairo libgweather dbus dbus-glib \
-	   librsvg libcanberra"
+    pango libwnck gnome-menus cairo libgweather dbus dbus-glib \
+    librsvg libcanberra \
+"
 RDEPENDS_${PN} = "python"
 
 inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf gobject-introspection
@@ -20,7 +21,7 @@ SRCREV = "8292bd2b8a36df7eed3c760899400790cde68590"
 SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32 \
            file://0001-Fix-build-with-gcc-5.patch \
            file://0001-Add-gnome-doc-utils.make.patch \
-	  "
+"
 
 S = "${WORKDIR}/git"
 

@@ -25,8 +25,9 @@ SRC_URI[patch15.sha256sum] = "2bc071c438e8b0ed42a0bd2db2d8b681b27a1e9b1798694d98
 
 # Other support files
 PAM_SRC_URI = "file://rexec.pam \
-	file://rlogin.pam \
-	file://rsh.pam"
+    file://rlogin.pam \
+    file://rsh.pam \
+"
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)}"
 
 inherit pkgconfig

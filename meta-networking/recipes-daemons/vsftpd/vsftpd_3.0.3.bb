@@ -100,10 +100,10 @@ SYSTEMD_SERVICE_${PN} = "vsftpd.service"
 
 pkg_postinst_${PN}() {
     if [ -z "$D" ]; then
-	if type systemd-tmpfiles >/dev/null; then
-	    systemd-tmpfiles --create
-	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-	    ${sysconfdir}/init.d/populate-volatile.sh update
-	fi
+        if type systemd-tmpfiles >/dev/null; then
+            systemd-tmpfiles --create
+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+            ${sysconfdir}/init.d/populate-volatile.sh update
+        fi
     fi
 }

@@ -139,8 +139,8 @@ do_install() {
                                                                    ${D}${systemd_unitdir}/system/install_db.service
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-	install -d ${D}${sysconfdir}/tmpfiles.d
-	echo "f /var/log/mysqld.err 0640 mysql mysql -" \
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "f /var/log/mysqld.err 0640 mysql mysql -" \
             > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
     fi
     install -d ${D}${bindir}

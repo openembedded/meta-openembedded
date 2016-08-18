@@ -9,9 +9,9 @@ SRCREV = "0bc2cfa0a47aed2c8a63abd989cb8da4dcceb2ec"
 PV = "0.8.0+git${SRCPV}"
 
 SRC_URI = "git://github.com/GNOME/gtkmathview.git \
-           file://use_hostcxx.patch \
-	   file://0001-include-cstdio-to-get-printf-definitions.patch \
-          "
+    file://use_hostcxx.patch \
+    file://0001-include-cstdio-to-get-printf-definitions.patch \
+"
 
 S = "${WORKDIR}/git"
 

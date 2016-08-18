@@ -24,7 +24,7 @@ PACKAGECONFIG[enableboardconfig] = "--enable-board=${BOARD},,"
 PACKAGECONFIG[python] = "--enable-python=${PYTHON_PN},,${PYTHON_PN}"
 
 PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'python', \
-	'${PYTHON_PN}-libsoc-staticdev ${PYTHON_PN}-libsoc', '', d)}"
+    '${PYTHON_PN}-libsoc-staticdev ${PYTHON_PN}-libsoc', '', d)}"
 
 RDEPENDS_${PN} = "libgcc"
 

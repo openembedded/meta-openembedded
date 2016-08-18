@@ -26,5 +26,5 @@ RRECOMMENDS_lib${BPN} += "${PN}"
 LEAD_SONAME = "libaugeas.so"
 
 do_install_append() {
-	rm -fr ${D}${datadir}/vim
+    rm -fr ${D}${datadir}/vim
 }

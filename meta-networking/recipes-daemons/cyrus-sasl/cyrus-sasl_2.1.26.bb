@@ -5,14 +5,14 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
 
 SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
-	   file://avoid-to-call-AC_TRY_RUN.patch \
-	   file://Fix-hardcoded-libdir.patch \
-	   file://debian_patches_0009_sasldb_al.diff \
-	   file://debian_patches_0014_avoid_pic_overwrite.diff \
-	   file://sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch \
-	   file://saslauthd.service \
-	   file://saslauthd.conf \
-	   "
+    file://avoid-to-call-AC_TRY_RUN.patch \
+    file://Fix-hardcoded-libdir.patch \
+    file://debian_patches_0009_sasldb_al.diff \
+    file://debian_patches_0014_avoid_pic_overwrite.diff \
+    file://sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch \
+    file://saslauthd.service \
+    file://saslauthd.conf \
+"
 
 inherit autotools-brokensep pkgconfig useradd systemd
 

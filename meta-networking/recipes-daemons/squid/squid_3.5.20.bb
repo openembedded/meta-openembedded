@@ -67,10 +67,10 @@ do_install_ptest() {
 }
 
 do_install_append() {
-	install -d ${D}${sysconfdir}/default/volatiles
-	install -m 0644 ${WORKDIR}/volatiles.03_squid  ${D}${sysconfdir}/default/volatiles/volatiles.03_squid
-	rmdir "${D}${localstatedir}/run/${BPN}"
-	rmdir --ignore-fail-on-non-empty "${D}${localstatedir}/run"
+    install -d ${D}${sysconfdir}/default/volatiles
+    install -m 0644 ${WORKDIR}/volatiles.03_squid  ${D}${sysconfdir}/default/volatiles/volatiles.03_squid
+    rmdir "${D}${localstatedir}/run/${BPN}"
+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}/run"
 }
 
 FILES_${PN} += "${libdir} ${datadir}/errors ${datadir}/icons"

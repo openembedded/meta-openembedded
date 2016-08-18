@@ -28,5 +28,5 @@ PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
 
 do_configure_prepend () {
-	( cd ${S}; ./autogen.sh )
+    ( cd ${S}; ./autogen.sh )
 }

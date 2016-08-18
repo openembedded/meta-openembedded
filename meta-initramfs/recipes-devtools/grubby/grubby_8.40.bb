@@ -28,9 +28,9 @@ inherit autotools-brokensep ptest
 EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}'"
 
 do_install_ptest() {
-	install -d ${D}${PTEST_PATH}
-	cp -r ${S}/test ${S}/test.sh ${D}${PTEST_PATH}
-	sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
+    install -d ${D}${PTEST_PATH}
+    cp -r ${S}/test ${S}/test.sh ${D}${PTEST_PATH}
+    sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
 }
 
 RDEPENDS_${PN}-ptest = "util-linux-getopt"

@@ -19,7 +19,7 @@ inherit autotools python-dir pkgconfig
 CACHED_CONFIGUREVARS += "am_cv_python_pythondir=${PYTHON_SITEPACKAGES_DIR}/lowpan-tools"
 
 do_install_append() {
-	rmdir ${D}${localstatedir}/run
+    rmdir ${D}${localstatedir}/run
 }
 
 FILES_${PN}-dbg += "${libexecdir}/lowpan-tools/.debug/"

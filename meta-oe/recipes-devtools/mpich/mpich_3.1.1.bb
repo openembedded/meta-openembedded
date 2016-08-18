@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=2106f0435056f3dd9349747a766e5816"
 
 SRC_URI = " \
-	http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
+    http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
 "
 
 SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
@@ -18,14 +18,15 @@ RDEPENDS_${PN} += "bash perl libxml2"
 S = "${WORKDIR}/${BP}"
 
 EXTRA_OECONF = "--enable-debuginfo \
-                --enable-fast \
-                --enable-shared  \
-                --with-pm=gforker  \
-		--disable-rpath \
-                --disable-f77 \
-                --disable-fc \
-                --disable-fortran \
-                --disable-cxx"
+    --enable-fast \
+    --enable-shared  \
+    --with-pm=gforker  \
+    --disable-rpath \
+    --disable-f77 \
+    --disable-fc \
+    --disable-fortran \
+    --disable-cxx \
+"
 
 inherit autotools-brokensep gettext
 

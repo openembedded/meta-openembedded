@@ -88,7 +88,7 @@ do_install () {
     done
 
     for f in bgpd vtysh isisd ospfd ripngd zebra ripd ospf6d; do
-	touch ${D}${sysconfdir}/quagga/$f.conf
+        touch ${D}${sysconfdir}/quagga/$f.conf
     done
     chown quagga:quaggavty ${D}${sysconfdir}/quagga
     chown quagga:quagga ${D}${sysconfdir}/quagga/*.conf

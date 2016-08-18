@@ -20,25 +20,26 @@ PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR},--with-curl=no,curl"
 PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR},--with-icu=no,icu"
 
 do_install_prepend () {
-        sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
+    sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
 }
 
 PACKAGES = "libxerces-c \
-            libxerces-c-dbg \
-            libxerces-c-dev \
-            xerces-c-samples \
-            xerces-c-samples-dbg \
-            libxerces-c-staticdev \
-	   " 
+    libxerces-c-dbg \
+    libxerces-c-dev \
+    xerces-c-samples \
+    xerces-c-samples-dbg \
+    libxerces-c-staticdev \
+" 
 
 FILES_libxerces-c = "${libdir}/libxerces-c-3.1.so"
 FILES_libxerces-c-dbg = "${libdir}/.debug \ 
-                         ${prefix}/src/debug "
+    ${prefix}/src/debug \
+"
 FILES_libxerces-c-dev = "${libdir}/lib*.la \
-                         ${libdir}/libxerces-c.so \
-                         ${libdir}/pkgconfig/xerces-c.pc \
-                         ${includedir}/xercesc \
-			 "
+    ${libdir}/libxerces-c.so \
+    ${libdir}/pkgconfig/xerces-c.pc \
+    ${includedir}/xercesc \
+"
 FILES_xerces-c-samples = "${bindir}/*"
 FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
 FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
