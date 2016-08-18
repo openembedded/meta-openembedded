@@ -71,8 +71,8 @@ FILES_libpurple-dev = "${libdir}/libpurple*.la \
                        ${datadir}/aclocal"
 FILES_libpurple-dbg += "${libdir}/.debug/libpurple* \
                         ${libdir}/purple-2/.debug"
-FILES_libgnt         = "${libdir}/libgnt.so.* ${libdir}/gnt/*.so" 
-FILES_libgnt-dev     = "${libdir}/gnt/*.la" 
+FILES_libgnt         = "${libdir}/libgnt.so.* ${libdir}/gnt/*.so"
+FILES_libgnt-dev     = "${libdir}/gnt/*.la"
 FILES_libgnt-dbg     = "${libdir}/gnt/.debug"
 FILES_finch          = "${bindir}/finch"
 FILES_finch-dev      = "${libdir}/finch/*.la"

@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit autotools
 
-# The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from 
+# The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from
 # Launchpad until the next release is available from Github.
 SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz"
 
@@ -22,5 +22,5 @@ PACKAGECONFIG[mysql] = "--with-mysql \
                         --without-mysql,mysql5"
 
 do_configure_prepend() {
-    touch ${S}/NEWS ${S}/AUTHORS 
+    touch ${S}/NEWS ${S}/AUTHORS
 }

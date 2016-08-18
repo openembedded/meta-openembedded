@@ -1,5 +1,5 @@
 SUMMARY = "Perl interface to the libxml2 library"
-DESCRIPTION = "This module is an interface to libxml2, providing XML and HTML parsers \ 
+DESCRIPTION = "This module is an interface to libxml2, providing XML and HTML parsers \
 with DOM, SAX and XMLReader interfaces, a large subset of DOM Layer 3 \
 interface and a XML::XPath-like interface to XPath API of libxml2. \
 The module is split into several packages which are not described in this \

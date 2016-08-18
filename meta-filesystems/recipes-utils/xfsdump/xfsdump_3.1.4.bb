@@ -31,6 +31,6 @@ do_configure () {
 
 do_install () {
     export DIST_ROOT=${D}
-    oe_runmake install 
+    oe_runmake install
     oe_runmake install-dev
 }

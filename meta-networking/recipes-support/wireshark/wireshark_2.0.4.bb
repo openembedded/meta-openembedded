@@ -50,7 +50,7 @@ PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
 EXTRA_OECONF += "--with-qt=no --enable-usr-local=no --enable-tshark --enable-rawshark"
 
 do_configure_prepend() {
-    # force to use fallback 
+    # force to use fallback
     sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
 }
 

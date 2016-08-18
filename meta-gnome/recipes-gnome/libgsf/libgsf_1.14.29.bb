@@ -24,6 +24,6 @@ EXTRA_OECONF = "\
     --with-bz2 \
 "
 
-RDEPENDS_${PN} = "gconf" 
+RDEPENDS_${PN} = "gconf"
 
 FILES_${PN} += "${datadir}/thumbnailers"

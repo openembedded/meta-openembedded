@@ -71,7 +71,7 @@ EXTRA_OECONF += "--enable-crypt"
 # SLAPD BACKEND
 #
 # The backend must be set by the configuration.  This controls the
-# required database. 
+# required database.
 #
 # Backends="bdb dnssrv hdb ldap mdb meta monitor ndb null passwd perl relay shell sock sql"
 #

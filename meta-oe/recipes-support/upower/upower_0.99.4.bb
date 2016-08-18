@@ -18,7 +18,7 @@ EXTRA_OECONF = " --with-backend=linux"
 do_configure_prepend() {
     sed -i -e s:-nonet:\:g ${S}/doc/man/Makefile.am
     sed -i -e 's: doc : :g' ${S}/Makefile.am
-}    
+}
 
 RDEPENDS_${PN} += "dbus"
 RRECOMMENDS_${PN} += "pm-utils"

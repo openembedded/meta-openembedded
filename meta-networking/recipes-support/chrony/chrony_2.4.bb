@@ -88,11 +88,11 @@ do_install() {
     # System V init script
     install -d ${D}${sysconfdir}/init.d
     install -m 755 ${WORKDIR}/chronyd ${D}${sysconfdir}/init.d
-    
+
     # systemd unit configuration file
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/examples/chronyd.service ${D}${systemd_unitdir}/system/
-    
+
     # Variable data (for drift and/or rtc file)
     install -d ${D}${localstatedir}/lib/chrony
 

@@ -8,7 +8,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     xfwm4 \
-    xfce4-session \     
+    xfce4-session \
     xfconf \
     xfdesktop \
     xfce4-panel \
@@ -25,7 +25,7 @@ RDEPENDS_${PN} = " \
     xfce4-panel-plugin-showdesktop \
     xfce4-panel-plugin-systray \
     xfce4-panel-plugin-tasklist \
-    xfce4-panel-plugin-windowmenu \   
+    xfce4-panel-plugin-windowmenu \
     xfce4-settings \
     \
     xfce4-notifyd \

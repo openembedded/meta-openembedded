@@ -21,7 +21,7 @@ do_install() {
     install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
     install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
 
-    cp -R --no-dereference --preserve=mode,links -v ${S}/* ${D}${datadir}/mof/cimv${PV}/	
+    cp -R --no-dereference --preserve=mode,links -v ${S}/* ${D}${datadir}/mof/cimv${PV}/
     chown -R root:root ${D}${datadir}/mof/cimv${PV}/
     for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
         sed -i -e 's/\r//g' $i

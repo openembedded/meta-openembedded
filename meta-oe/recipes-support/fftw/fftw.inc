@@ -16,7 +16,7 @@ inherit autotools pkgconfig
 EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
 
 do_configure_prepend() {
-    echo 'AM_PROG_AS' >> ${S}/configure.ac 
+    echo 'AM_PROG_AS' >> ${S}/configure.ac
 }
 
 PACKAGES =+ "lib${BPN}"

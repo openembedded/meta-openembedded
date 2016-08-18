@@ -17,7 +17,7 @@ SRC_URI = " \
 SRCREV = "c6683cb2cff489c16c2c7b5eab4017bb461f07f1"
 S = "${WORKDIR}/git"
 PV = "4.12.0+git${SRCPV}"
- 
+
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
 PACKAGECONFIG ??= " \

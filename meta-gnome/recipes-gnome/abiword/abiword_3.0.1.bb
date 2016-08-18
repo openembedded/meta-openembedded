@@ -75,7 +75,7 @@ FILES_${PN} += " \
                 ${datadir}/${PN}-${SHRT_VER}/templates/Press-Release.awt \
                 ${datadir}/${PN}-${SHRT_VER}/certs \
                 ${datadir}/${PN}-${SHRT_VER}/ui \
-                ${datadir}/${PN}-${SHRT_VER}/xsl* \ 
+                ${datadir}/${PN}-${SHRT_VER}/xsl* \
                 ${datadir}/${PN}-${SHRT_VER}/mime-info \
                 ${datadir}/${PN}-${SHRT_VER}/Pr*.xml \
 "

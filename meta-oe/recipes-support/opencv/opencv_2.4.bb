@@ -69,7 +69,7 @@ python populate_packages_prepend () {
     metapkg =  pn + '-dev'
     d.setVar('ALLOW_EMPTY_' + metapkg, "1")
     blacklist = [ metapkg ]
-    metapkg_rdepends = [ ] 
+    metapkg_rdepends = [ ]
     packages = d.getVar('PACKAGES', 1).split()
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.endswith('-dev'):

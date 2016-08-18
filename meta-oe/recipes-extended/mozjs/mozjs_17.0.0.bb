@@ -10,7 +10,7 @@ SRC_URI = " \
     file://0003-Add-AArch64-support.patch;patchdir=../../ \
     file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
     file://0005-aarch64-64k-page.patch;patchdir=../../ \
-    file://0001-regenerate-configure.patch;patchdir=../../ \ 
+    file://0001-regenerate-configure.patch;patchdir=../../ \
     file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
     file://fix_milestone_compile_issue.patch \
     file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
@@ -46,7 +46,7 @@ PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${ST
 
 # mozjs requires autoreconf 2.13
 do_configure() {
-    ( cd ${S} 
+    ( cd ${S}
       gnu-configize --force
       mv config.guess config.sub build/autoconf )
     ${S}/configure ${EXTRA_OECONF}

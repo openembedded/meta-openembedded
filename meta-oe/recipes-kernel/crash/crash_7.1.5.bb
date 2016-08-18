@@ -14,7 +14,7 @@ DEPENDS = "zlib readline"
 
 SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
            http://ftp.gnu.org/gnu/gdb/gdb-7.6.tar.gz;name=gdb;subdir=${BP} \
-           file://7001force_define_architecture.patch \ 
+           file://7001force_define_architecture.patch \
            file://7003cross_ranlib.patch \
            file://0001-cross_add_configure_option.patch \
            file://sim-ppc-drop-LIBS-from-psim-dependency.patch \

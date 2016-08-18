@@ -10,7 +10,7 @@ SRCREV = "3fc7dfa68484"
 S = "${WORKDIR}/${BPN}"
 
 do_configure() {
-    sed -i -e s:/usr/include:${STAGING_INCDIR}:g util/av7110_loadkeys/generate-keynames.sh 
+    sed -i -e s:/usr/include:${STAGING_INCDIR}:g util/av7110_loadkeys/generate-keynames.sh
 }
 
 do_install() {

@@ -29,10 +29,10 @@ PACKAGES = "libxerces-c \
     xerces-c-samples \
     xerces-c-samples-dbg \
     libxerces-c-staticdev \
-" 
+"
 
 FILES_libxerces-c = "${libdir}/libxerces-c-3.1.so"
-FILES_libxerces-c-dbg = "${libdir}/.debug \ 
+FILES_libxerces-c-dbg = "${libdir}/.debug \
     ${prefix}/src/debug \
 "
 FILES_libxerces-c-dev = "${libdir}/lib*.la \
