@@ -5,23 +5,24 @@ HOMEPAGE = "http://lftp.yar.ru/"
 SECTION = "console/network"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-DEPENDS = "readline"
 
 SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
            file://fix-gcc-6-conflicts-signbit.patch \
           "
-SRC_URI[md5sum] = "2777dd514d21fe1da764bedd1d0ab36c"
-SRC_URI[sha256sum] = "a8b53e5ca2c1acbecd181c87f21a8673ca9038dc9f2be6ab8c23790bd91fd446"
+SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
+SRC_URI[sha256sum] = "ce6519831603c19c2cf2e3c10b41d6ddc87a16049b99383e7b9b77fbc7707214"
 
 inherit autotools gettext pkgconfig
 
 EXTRA_OECONF += "--with-modules"
 
-PACKAGECONFIG ??= "libidn openssl zlib gnutls"
+PACKAGECONFIG ??= "libidn openssl zlib gnutls readline expat"
 PACKAGECONFIG[libidn] = "--with-libidn, --without-libidn, libidn"
 PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl, openssl"
-PACKAGECONFIG[zlib] = "--with-zlib, --without-zlib, zlib"
+PACKAGECONFIG[zlib] = "--with-zlib=${STAGING_INCDIR}/.., --without-zlib, zlib"
 PACKAGECONFIG[gnutls] = "--with-gnutls, --without-gnutls, gnutls"
+PACKAGECONFIG[readline] = "--with-readline --with-readline-inc=${STAGING_INCDIR} --with-readline-lib=-lreadline, , readline"
+PACKAGECONFIG[expat] = "--with-expat=${STAGING_INCDIR}/.. --with-expat-inc=${STAGING_INCDIR} --with-expat-lib=-lexpat, , expat"
 
 FILES_${PN}-dbg += "${libdir}/lftp/${PV}/.debug"
 RDEPENDS_${PN} = "perl bash readline"
