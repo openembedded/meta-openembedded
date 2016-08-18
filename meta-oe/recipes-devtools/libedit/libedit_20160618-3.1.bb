@@ -16,5 +16,5 @@ SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
-SRC_URI[md5sum] = "43cdb5df3061d78b5e9d59109871b4f6"
-SRC_URI[sha256sum] = "c88a5e4af83c5f40dda8455886ac98923a9c33125699742603a88a0253fcc8c5"
+SRC_URI[md5sum] = "b6e60f326a3fce91bea1a6fe4700af58"
+SRC_URI[sha256sum] = "b6b159c0c6ec8a7f349ea2a75d8b960efa346c462c1ac4921f1ac0de85a9f5d6"
