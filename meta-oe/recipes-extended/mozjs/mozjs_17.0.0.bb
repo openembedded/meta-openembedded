@@ -37,7 +37,7 @@ EXTRA_OECONF = " \
     --enable-threadsafe \
     --disable-static \
 "
-EXTRA_OECONF_append_armv4 += " \
+EXTRA_OECONF_append_armv4 = " \
     --disable-methodjit \
 "
 

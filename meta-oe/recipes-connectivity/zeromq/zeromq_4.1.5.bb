@@ -16,8 +16,8 @@ S = "${WORKDIR}/zeromq-${PV}"
 
 #Uncomment to choose polling system manually. valid values are kqueue, epoll, devpoll, poll or select
 #EXTRA_OECONF += "--with-poller=kqueue"
-#CFLAGS_append += "-O0"
-#CXXFLAGS_append += "-O0"
+#CFLAGS_append = " -O0"
+#CXXFLAGS_append = " -O0"
 
 inherit autotools ptest pkgconfig
 

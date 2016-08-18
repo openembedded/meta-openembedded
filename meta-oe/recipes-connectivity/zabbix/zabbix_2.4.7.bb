@@ -53,7 +53,7 @@ EXTRA_OECONF = '--enable-dependency-tracking \
 	        --with-ssh2 \
 	        --with-sqlite3 \
 	        '
-CFLAGS_append += "-lldap -llber"
+CFLAGS_append = " -lldap -llber"
 
 do_configure_prepend() {
     export KERNEL_VERSION="${KERNEL_VERSION}"

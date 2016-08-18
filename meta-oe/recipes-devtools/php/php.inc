@@ -15,7 +15,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
           "
 
-SRC_URI_append_class-target += " \
+SRC_URI_append_class-target = " \
             file://iconv.patch \
             file://imap-fix-autofoo.patch \
             file://pear-makefile.patch \
