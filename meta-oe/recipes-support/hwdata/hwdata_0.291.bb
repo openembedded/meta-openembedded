@@ -6,8 +6,8 @@ LICENSE = "GPL-2.0+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
 SRC_URI = "https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "f3fa1c5edb66ce5b376d95e772b2d303"
-SRC_URI[sha256sum] = "56fc26275b102e538fcfcf9c1093a09f476a1ea8d4e0c733d3c578442923693d"
+SRC_URI[md5sum] = "90ffce584bbcb1a5e77eac8503949f71"
+SRC_URI[sha256sum] = "e1007a96645cb3390aa9c0ed3f090a69d2302ce4d801914b6af1ab4ec85ede4e"
 
 do_configure() {
     ${S}/configure --datadir=${datadir} --libdir=${libdir}
