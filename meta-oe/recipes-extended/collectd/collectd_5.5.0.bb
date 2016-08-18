@@ -77,6 +77,8 @@ do_install_append() {
         ${D}${systemd_unitdir}/system/collectd.service
 }
 
+CONFFILES_${PN} = "${sysconfdir}/collectd.conf"
+
 INITSCRIPT_NAME = "collectd"
 INITSCRIPT_PARAMS = "defaults"
 
