@@ -75,6 +75,8 @@ do_install () {
 		install -d ${D}${sysconfdir}/tmpfiles.d
 		echo "d /run/${BPN} - - - -" \
 		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+		echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
+			>> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
 	fi
 	install -d ${D}${sysconfdir}/${BPN}
 	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
@@ -90,6 +92,7 @@ do_install () {
 	install -d ${D}${sysconfdir}/nginx
 	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
 	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
+	sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/nginx.conf
 	install -d ${D}${sysconfdir}/nginx/sites-enabled
 
 	install -d ${D}${sysconfdir}/default/volatiles
@@ -101,7 +104,7 @@ do_install () {
             install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
             sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
                     -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
-                    -e 's,@BASEBINDIR@,${base_bindir},g' \
+                    -e 's,@SBINDIR@,${sbindir},g' \
                     ${D}${systemd_unitdir}/system/nginx.service
         fi
 }
