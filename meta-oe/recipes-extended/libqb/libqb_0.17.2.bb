@@ -11,8 +11,8 @@ inherit autotools pkgconfig
 SRC_URI = "https://fedorahosted.org/releases/q/u/quarterback/${BP}.tar.xz \
           "
 
-SRC_URI[md5sum] = "5770b343baa4528f6fec90120ec55048"
-SRC_URI[sha256sum] = "7a2115f83bfe20eaa5f2e4ed235e8f2994235d3b87e3e5ca41ba47b320f12e29"
+SRC_URI[md5sum] = "de1e5d38fa449b4d127940c10d117260"
+SRC_URI[sha256sum] = "9a419c649ed51f275dc780da8a15babb8a5d33633567bd9e0cb6193b6e21f4fe"
 
 LICENSE = "LGPL-2.1"
 
