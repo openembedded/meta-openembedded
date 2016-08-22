@@ -20,8 +20,6 @@ SRC_URI[SoftFloat.sha256sum] = "946fd23180559d60eb6683dda1cf8b142f5426dedfefb97b
 
 S = "${WORKDIR}"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
-
 do_compile(){
     oe_runmake -C SoftFloat-${PV}/build/Linux-Cross-Compile/
     oe_runmake -C TestFloat-${PV}/build/Linux-Cross-Compile/
