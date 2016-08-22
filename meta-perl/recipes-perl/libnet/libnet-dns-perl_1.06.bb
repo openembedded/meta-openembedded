@@ -3,14 +3,14 @@ DESCRIPTION = "This package contains the DNS.pm module with friends."
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 
-LIC_FILES_CHKSUM = "file://README;md5=524da96a3365f2caff73fea0ae67c3a0"
+LIC_FILES_CHKSUM = "file://README;md5=10b1fae0c40a1627bdf0b2a7ac431632"
 
 DEPENDS += "perl"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "26375d4310beb108b0e2b3bf30403ee5"
-SRC_URI[sha256sum] = "b36c8ead6edf68da5d9de2b0a22a47d7216e2d7eb52c8cde96724988f68a6d46"
+SRC_URI[md5sum] = "ed17abd6e7e3ba0a8db42649e34a53ae"
+SRC_URI[sha256sum] = "a3587b780ca36a8255180ac723d4f6e11407504b5b9a18e0ec098a11c218a51e"
 
 S = "${WORKDIR}/Net-DNS-${PV}"
 
