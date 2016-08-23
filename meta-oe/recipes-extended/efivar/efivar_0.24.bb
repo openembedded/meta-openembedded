@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/rhinstaller/efivar.git \
 "
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
                                 file://0003-efivar-fix-for-cross-compile.patch \
-                                file://0004-fix-unknow-option-for-gold-linker.patch \
+                                ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
                               "
 SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
                                 file://allow-multi-definitions-for-native.patch \
