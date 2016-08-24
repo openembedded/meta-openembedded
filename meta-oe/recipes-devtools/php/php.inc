@@ -70,7 +70,9 @@ EXTRA_OECONF_class-native = " \
 "
 
 PACKAGECONFIG ??= "mysql sqlite3 imap \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+"
 PACKAGECONFIG_class-native = ""
 
 PACKAGECONFIG[mysql] = "--with-mysql=${STAGING_DIR_TARGET}${prefix} \
@@ -91,6 +93,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
                        --with-imap-ssl=${STAGING_DIR_HOST} \
                        ,--without-imap --without-imap-ssl \
                        ,uw-imap"
+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
 
 export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
