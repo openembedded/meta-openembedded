@@ -26,6 +26,7 @@ EXTRA_OECONF += "--with-dblib=berkeley \
 PACKAGECONFIG ??= "ntlm \
         ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
         ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
         "
 PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
@@ -33,6 +34,7 @@ PACKAGECONFIG[opie] = "--with-opie,--without-opie,opie,"
 PACKAGECONFIG[des] = "--with-des,--without-des,,"
 PACKAGECONFIG[ldap] = "--with-ldap=${STAGING_LIBDIR} --enable-ldapdb,--without-ldap --disable-ldapdb,openldap,"
 PACKAGECONFIG[ntlm] = "--with-ntlm,--without-ntlm,,"
+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
 CFLAGS += "-fPIC"
 
