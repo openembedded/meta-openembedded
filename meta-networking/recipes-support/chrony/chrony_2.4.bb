@@ -58,12 +58,15 @@ inherit update-rc.d systemd
 #     chrony.conf and init script.
 #   - 'scfilter' enables support for system call filtering, but requires the
 #     kernel to have CONFIG_SECCOMP enabled.
-PACKAGECONFIG ??= "editline scfilter"
+PACKAGECONFIG ??= "editline scfilter \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+"
 PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
 PACKAGECONFIG[editline] = ",--without-editline,libedit"
 PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
 PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
 PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
 # --disable-static isn't supported by chrony's configure script.
 DISABLE_STATIC = ""
