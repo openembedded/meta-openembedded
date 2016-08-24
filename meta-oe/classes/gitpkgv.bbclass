@@ -61,7 +61,14 @@ def get_git_pkgv(d, use_tags):
     #
     format = d.getVar('SRCREV_FORMAT', True)
     if not format:
-        format = 'default'
+        names = []
+        for url in ud.values():
+            if url.type == 'git' or url.type == 'gitsm':
+                names.extend(url.revisions.keys())
+        if len(names) > 0:
+            format = '_'.join(names)
+        else:
+            format = 'default'
 
     found = False
     for url in ud.values():
