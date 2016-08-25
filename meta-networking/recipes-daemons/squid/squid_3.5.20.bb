@@ -20,6 +20,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://run-ptest \
            file://volatiles.03_squid \
            file://set_sysroot_patch.patch \
+           file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
@@ -66,6 +67,11 @@ do_install_ptest() {
 
     # do NOT need to rebuild Makefile itself
     sed -i 's/^Makefile:.*$/Makefile:/' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+
+    # Add squid-conf-tests for runtime tests
+    sed -e 's/^\(runtest-TESTS:\)/\1 squid-conf-tests/' \
+        -e "s/\(list=' \$(TESTS)\)/\1 squid-conf-tests/" \
+        -i ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 }
 
 do_install_append() {
