@@ -17,7 +17,7 @@ inherit autotools systemd gtk-doc gobject-introspection
 
 S = "${WORKDIR}/udisks-${PV}"
 
-EXTRA_OECONF = "--disable-man"
+EXTRA_OECONF = "--disable-man --disable-gtk-doc"
 
 FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
                 ${datadir}/dbus-1/ \

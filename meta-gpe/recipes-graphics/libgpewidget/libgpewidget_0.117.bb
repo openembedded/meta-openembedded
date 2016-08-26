@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "f96d30c09b0395ea4e146730fd52d9ea303b619bb139051d9f12d3f868
 
 GPE_TARBALL_SUFFIX = "bz2"
 
-EXTRA_OECONF = "--enable-cairo"
+EXTRA_OECONF = "--enable-cairo --disable-gtk-doc"
 LDFLAGS += " -L${STAGING_LIBDIR}"
 
 PACKAGES =+ "${PN}-bin"

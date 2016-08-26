@@ -10,4 +10,6 @@ SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.pat
 SRC_URI[md5sum] = "aba62b80787aac295083bf7afd419ffb"
 SRC_URI[sha256sum] = "787dc859713b6518992d760d4b858fb02e8a30705e6f6e871d7a14cc97bca972"
 
+EXTRA_OECONF = "--disable-gtk-doc"
+
 FILES_${PN} += "${datadir}/desktop-directories"
