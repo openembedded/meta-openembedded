@@ -18,7 +18,7 @@ SRC_URI += "file://parallel.patch \
             file://0001-Drop-help-directory-from-build.patch"
 
 do_configure_prepend () {
-    rm -r ${S}/m4/gnome-doc-utils.m4
+    rm -f ${S}/m4/gnome-doc-utils.m4
 }
 
 do_install_append () {
