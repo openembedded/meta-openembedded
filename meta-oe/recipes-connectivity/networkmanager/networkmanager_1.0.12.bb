@@ -15,13 +15,10 @@ SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
     file://0002-add-pkg-config-for-libgcrypt.patch \
-    file://0003-core-fix-failure-to-configure-routes-due-to-wrong-de.patch \
-    file://0004-ppp-manager-clear-ppp_watch_id-upon-pppd-termination.patch \
-    file://0005-device-update-ip_iface-only-if-IP-interface-exists.patch \
     file://0006-Fix-nm-version-macro-includes.patch \
 "
-SRC_URI[md5sum] = "a8f54460a4708efd840358f32d0968fd"
-SRC_URI[sha256sum] = "1bcfce8441dfd9f432a100d06b54f3831a2275cccc3b74b1b4c09a011e179fbc"
+SRC_URI[md5sum] = "ebb273456a81ccf9dfaf2461061b0e96"
+SRC_URI[sha256sum] = "3a470f8c60109b1acb5784ddc2423501706b5fe34c793a6faee87e591eb04a9e"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
