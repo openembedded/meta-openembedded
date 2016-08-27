@@ -5,15 +5,15 @@ and should run on all Linux systems that need error handling."
 HOMEPAGE = "http://mcelog.org/"
 SECTION = "System Environment/Base"
 
-SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git \
+SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; \
     file://mcelog-debash.patch \
     file://run-ptest \
 "
 
-SRCREV = "0fc9f702232cb2d9969916f899c67c3e64deedda"
+SRCREV = "008c73e6de3a4bf969d1627e695d4efc807aed92"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://README;md5=3eb76ca64fa07ad53ebb0ebb5b4c8ede"
+LIC_FILES_CHKSUM = "file://README;md5=3d12dd2a10bdd22379cc4c0fc6949a88"
 
 S = "${WORKDIR}/git"
 
