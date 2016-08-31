@@ -317,3 +317,8 @@ FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.d
 
 RDEPENDS_${PN}-pidl_append = " perl"
 FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
+
+# http://errors.yoctoproject.org/Errors/Details/81004/
+# before this issue it was also failing in do_package and
+# autodetecting libpam dependency
+PNBLACKLIST[samba] ?= "BROKEN: fails to build with new binutils-2.27"
