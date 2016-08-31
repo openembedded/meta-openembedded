@@ -66,6 +66,6 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
 FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS_${PN} = "bash thin-provisioning-tools"
 
 CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
