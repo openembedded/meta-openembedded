@@ -12,7 +12,11 @@ PYPI_PACKAGE = "pyOpenSSL"
 PACKAGES =+ "${PN}-tests"
 FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
 
-RDEPENDS_${PN} = "python-threading python-six python-cryptography"
+RDEPENDS_${PN} = " \
+    ${PYTHON_PN}-cryptography \
+    ${PYTHON_PN}-six \
+    ${PYTHON_PN}-threading \
+"
 RDEPENDS_${PN}-tests = "${PN}"
 
 BBCLASSEXTEND = "native nativesdk"
