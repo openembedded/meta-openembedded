@@ -48,4 +48,4 @@ FILES_${PN} =+ "${datadir}/gnome* \
                 ${libdir}/bonobo \
 "
 
-
+PNBLACKLIST[gnome-panel3] ?= "Depends on broken gnome-menus"

@@ -25,3 +25,6 @@ FILES_${PN}-python-staticdev = "${PYTHON_SITEPACKAGES_DIR}/gmenu.a ${PYTHON_SITE
 FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/gmenu.so ${PYTHON_SITEPACKAGES_DIR}/GMenuSimpleEditor "
 FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug \
                     ${PYTHON_SITEPACKAGES_DIR}/.debug"
+
+# http://errors.yoctoproject.org/Errors/Details/81001/
+PNBLACKLIST[gnome-menus] ?= "BROKEN: fails to build because of python"

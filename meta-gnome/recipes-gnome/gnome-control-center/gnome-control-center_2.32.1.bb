@@ -31,3 +31,5 @@ FILES_${PN} += "${datadir}/icon* \
 FILES_${PN}-dbg += "${libdir}/window-manager-settings/.debug"
 FILES_${PN}-dev += "${libdir}/window-manager-settings/*.la"
 FILES_${PN}-staticdev += "${libdir}/window-manager-settings/*.a"
+
+PNBLACKLIST[gnome-control-center] ?= "Depends on broken gnome-menus"
