@@ -9,7 +9,7 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=dcf3c825659e82539645da41a7908589"
 
 HOMEPAGE = "http://directfb.org"
-DEPENDS = "jpeg libpng freetype zlib tslib sysfsutils"
+DEPENDS = "jpeg libpng freetype zlib sysfsutils"
 
 SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.gz \
            file://configurefix.patch \
@@ -24,7 +24,7 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
 
 S = "${WORKDIR}/DirectFB-${PV}"
 
-LDFLAGS_append =" -lts -lm"
+LDFLAGS_append = " -lm"
 
 # Workaround for linking issues seen with armv7a + gold
 LDFLAGS_append_arm = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
@@ -33,11 +33,14 @@ BINCONFIG = "${bindir}/directfb-config"
 
 inherit autotools binconfig-disabled pkgconfig
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "linuxinput"
 PACKAGECONFIG[jpeg2000] = "--enable-jpeg2000,--disable-jpeg2000,jasper"
 PACKAGECONFIG[drmkms] = "--enable-drmkms,--disable-drmkms,libdrm"
 PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
 PACKAGECONFIG[webp] = "--enable-webp,--disable-webp,libwebp"
+PACKAGECONFIG[tslib] = "--with-inputdrivers=tslib,,tslib"
+PACKAGECONFIG[linuxinput] = "--with-inputdrivers=linuxinput,,"
+PACKAGECONFIG[noinput] = "--with-inputdrivers=none,,"
 
 EXTRA_OECONF = "\
   --with-gfxdrivers=none \
