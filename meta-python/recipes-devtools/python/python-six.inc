@@ -13,3 +13,6 @@ do_install_append() {
 }
 
 RDEPENDS_${PN} += "${PYTHON_PN}-io"
+
+BBCLASSEXTEND = "native nativesdk"
+
