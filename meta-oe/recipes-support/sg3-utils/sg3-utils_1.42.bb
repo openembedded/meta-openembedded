@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
 
 SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
 
-SRC_URI[md5sum] = "86ebe3881535ee5c48f81be5be44b362"
-SRC_URI[sha256sum] = "c4e2893c36df1ee5b07840ab7c22129544f5dc8a55f7cc8815c9cd8e44ec31c0"
+SRC_URI[md5sum] = "28080de5bf2222f8b55a29093bec8aea"
+SRC_URI[sha256sum] = "1dcb7a0309bd0ba3d4a83acb526973b80106ee26cd9f7398186cd3f0633c9ef3"
 
 inherit autotools-brokensep
 
