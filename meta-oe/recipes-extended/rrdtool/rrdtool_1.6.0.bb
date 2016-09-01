@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
 
 DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native"
 
-SRCREV = "04f70058cc894c0a3ee5d555ea1bb5a8d4bb8a0e"
-PV = "1.5.4"
+SRCREV = "61f116744262c4c18922dcf806e496715f199669"
+PV = "1.6.0"
 
 SRC_URI = "\
-    git://github.com/oetiker/rrdtool-1.x.git;branch=1.5 \
+    git://github.com/oetiker/rrdtool-1.x.git;branch=1.6;protocol=http; \
 "
 
 S = "${WORKDIR}/git"
