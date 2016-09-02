@@ -1,16 +1,16 @@
 DESCRIPTION = "OpenJPEG library is an open-source JPEG 2000 codec"
-HOMEPAGE = "http://www.openjpeg.org/index.php?menu=main"
+HOMEPAGE = "http://www.openjpeg.org"
 
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}.mirror/${PV}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "f6419fcc233df84f9a81eb36633c6db6"
-SRC_URI[sha256sum] = "1232bb814fd88d8ed314c94f0bfebb03de8559583a33abbe8c64ef3fc0a8ff03"
+SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz"
+SRC_URI[md5sum] = "0cc4b2aee0a9b6e9e21b7abcd201a3ec"
+SRC_URI[sha256sum] = "82c27f47fc7219e2ed5537ac69545bf15ed8c6ba8e6e1e529f89f7356506dbaa"
 
 inherit cmake
 
-DEPENDS = "libpng tiff lcms"
+DEPENDS = "libpng tiff lcms zlib"
 
 # standard path for *.cmake
 EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_PACKAGE_DIR=${baselib}/cmake \
