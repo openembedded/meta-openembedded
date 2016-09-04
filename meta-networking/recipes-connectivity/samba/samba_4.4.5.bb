@@ -88,7 +88,7 @@ EXTRA_OECONF += "--enable-fhs \
                 "
 DISABLE_STATIC = ""
 
-LDFLAGS += "-Wl,-z,relro,-z,now"
+LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 do_install_append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
