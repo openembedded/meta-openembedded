@@ -2,7 +2,7 @@ DESCRIPTION = "PulseAudio Volume Control (pavucontrol) is a simple GTK based vol
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "intltool gtkmm libcanberra pulseaudio"
+DEPENDS = "intltool-native gtkmm libcanberra pulseaudio"
 
 inherit gnome
 
