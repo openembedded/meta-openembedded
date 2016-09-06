@@ -18,10 +18,13 @@ S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+                   thin-provisioning-tools \
+"
 
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
+PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
 
 # Unset user/group to unbreak install.
 EXTRA_OECONF = "--with-user= \
@@ -38,6 +41,11 @@ EXTRA_OECONF = "--with-user= \
                 --with-udev-prefix= \
                 --with-usrlibdir=${libdir} \
                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
+                --disable-thin_check_needs_check \
+                --with-thin-check=${sbindir}/thin_check \
+                --with-thin-dump=${sbindir}/thin_dump \
+                --with-thin-repair=${sbindir}/thin_repair \
+                --with-thin-restore=${sbindir}/thin_restore \
 "
 
 CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
@@ -66,6 +74,6 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
 FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
 
-RDEPENDS_${PN} = "bash thin-provisioning-tools"
+RDEPENDS_${PN} = "bash"
 
 CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
