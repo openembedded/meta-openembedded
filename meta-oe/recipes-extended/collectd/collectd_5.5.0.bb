@@ -13,6 +13,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://collectd.service \
            file://0001-conditionally-check-libvirt.patch \
            file://0001-collectd-replace-deprecated-readdir_r-with-readdir.patch \
+           file://CVE-2016-6254.patch \
 "
 SRC_URI[md5sum] = "c39305ef5514b44238b0d31f77e29e6a"
 SRC_URI[sha256sum] = "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f1343b1062a4b569e88"
