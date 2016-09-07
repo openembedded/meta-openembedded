@@ -139,6 +139,3 @@ RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${PN}.socket"
-
-# http://errors.yoctoproject.org/Errors/Details/81000/
-PNBLACKLIST[gpsd] ?= "BROKEN: fails to build with new binutils 2.27"
