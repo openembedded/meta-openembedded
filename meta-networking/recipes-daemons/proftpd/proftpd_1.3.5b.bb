@@ -111,6 +111,15 @@ do_install () {
         -e 's|${STAGING_DIR_NATIVE}||g' \
         -e 's|-fdebug-prefix-map=[^ ]*||g' \
         -i ${D}/${bindir}/prxs
+
+    # ftpmail perl script, which reads the proftpd log file and sends
+    # automatic email notifications once an upload finishs,
+    # depends on an old perl Mail::Sendmail
+    # The Mail::Sendmail has not been maintained for almost 10 years
+    # Other distribution not ship with ftpmail, so do the same to
+    # avoid confusion about having it fails to run
+    rm -rf ${D}${bindir}/ftpmail
+    rm -rf ${D}${mandir}/man1/ftpmail.1
 }
 
 INITSCRIPT_NAME = "proftpd"
