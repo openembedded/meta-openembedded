@@ -13,6 +13,7 @@ RCONFLICTS_${PN} = "${PN}-embedded"
 SRC_URI = " \
     http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
     file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
+    file://0002-Bug-13754-Fix-build-on-gcc-6-default-to-C-11.patch \
 "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
@@ -122,5 +123,3 @@ python populate_packages_prepend () {
 }
 
 FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
-
-PNBLACKLIST[abiword] ?= "Depends on broken gtkmathview"
