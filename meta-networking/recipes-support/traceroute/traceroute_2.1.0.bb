@@ -17,8 +17,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/traceroute/traceroute/${BP}/${BP}.tar.gz \
            file://filter-out-the-patches-from-subdirs.patch \
 "
 
-SRC_URI[md5sum] = "79289adabd6f3ebf9160fc0815ab3150"
-SRC_URI[sha256sum] = "f7ac93ef30b13a587292b8d6a7e2538a65bc978a3a576eab238c392b884e96e0"
+SRC_URI[md5sum] = "84d329d67abc3fb83fc8cb12aeaddaba"
+SRC_URI[sha256sum] = "3669d22a34d3f38ed50caba18cd525ba55c5c00d5465f2d20d7472e5d81603b6"
 
 EXTRA_OEMAKE = "VPATH=${STAGING_LIBDIR}"
 
