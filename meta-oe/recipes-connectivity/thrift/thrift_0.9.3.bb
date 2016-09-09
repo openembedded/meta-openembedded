@@ -10,6 +10,8 @@ DEPENDS = "thrift-native boost python libevent flex-native bison-native \
 
 SRC_URI = "git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=https \
            file://0001-Forcibly-disable-check-for-Qt5.patch \
+           file://0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch \
+           file://0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch \
 "
 SRCREV = "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
 S = "${WORKDIR}/git"
@@ -32,6 +34,3 @@ EXTRA_OECMAKE_class-nativesdk = "-DWITH_QT4=OFF -DWITH_QT5=OFF \
 do_install_append () {
     ln -sf thrift ${D}/${bindir}/thrift-compiler
 }
-
-# http://errors.yoctoproject.org/Errors/Details/68622/
-PNBLACKLIST[thrift] ?= "BROKEN: fails to build with gcc-6"
