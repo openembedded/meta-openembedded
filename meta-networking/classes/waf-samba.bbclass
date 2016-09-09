@@ -18,6 +18,7 @@ CONFIGUREOPTS = " --prefix=${prefix} \
                   --oldincludedir=${oldincludedir} \
                   --infodir=${infodir} \
                   --mandir=${mandir} \
+                  ${PACKAGECONFIG_CONFARGS} \
                 "
 
 # Three methods for waf cross compile:
