@@ -8,21 +8,16 @@ DEPENDS = "pcre expat glib-2.0 sbc"
 
 SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
-SRC_URI[md5sum] = "627b5fc6cf0aeca196c75debd5e69b14"
-SRC_URI[sha256sum] = "0ce0241330828973f5b4efee422a3760cab8ce0b41e7721c4b9fd185be1bb10b"
-
-PE = "1"
+SRC_URI[md5sum] = "c7de0997f74934f25b456846cf75cb81"
+SRC_URI[sha256sum] = "a6847e741efcba6cb9d92d464d4219917bee3ad0b8f5b0f80d4388ad2f3f1104"
 
 inherit autotools pkgconfig perlnative
 
 ARM_INSTRUCTION_SET = "arm"
 
-# Works with either gtk+ or gtk3.
-WHICH_GTK = "gtk+"
 
 PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
 PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
-PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
 #PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3", "", d)}"
 
 PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_LIBDIR}, --with-libcap=no --enable-pcap-ng-default , libcap"
@@ -30,10 +25,9 @@ PACKAGECONFIG[libpcap] = "--with-pcap=${STAGING_LIBDIR} --with-pcap-remote, --wi
 PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
 PACKAGECONFIG[libnl] = "--with-libnl=yes, --with-libnl=no, libnl"
 PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
-PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
-PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
-PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
-PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+PACKAGECONFIG[gtk2] = "--with-gtk=2, , gtk+"
+PACKAGECONFIG[gtk3] = "--with-gtk=3, , gtk+3"
+PACKAGECONFIG[graphics] = "--enable-wireshark, --with-gtk=no --disable-wireshark,"
 PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
 PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
 PACKAGECONFIG[ssl] = "--with-ssl=yes, --with-ssl=no, openssl"
@@ -44,15 +38,9 @@ PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
 PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
 
 # these next two options require addional layers
-PACKAGECONFIG[adns] = "--with-adns=yes, --with-adns=no, adns"
 PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
 
-EXTRA_OECONF += "--with-qt=no --enable-usr-local=no --enable-tshark --enable-rawshark"
-
-do_configure_prepend() {
-    # force to use fallback
-    sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
-}
+EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
 
 ALLOW_EMPTY_${PN} = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
