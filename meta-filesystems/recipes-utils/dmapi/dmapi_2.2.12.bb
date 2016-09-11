@@ -29,3 +29,5 @@ do_install () {
     install -d ${D}${libdir}
     oe_runmake install install-dev PKG_DEVLIB_DIR=${libdir}
 }
+
+PNBLACKLIST[dmapi] ?= "Depends on broken xfsprogs"
