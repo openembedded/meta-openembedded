@@ -14,6 +14,7 @@ RDEPENDS_${PN} = " \
     xfce4-panel \
     \
     gtk-xfce-engine \
+    librsvg-gtk \
     \
     xfce4-panel-plugin-actions \
     xfce4-panel-plugin-applicationsmenu \
