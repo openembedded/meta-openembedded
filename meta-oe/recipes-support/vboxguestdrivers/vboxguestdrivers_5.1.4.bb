@@ -63,3 +63,6 @@ FILES_${PN} = "${base_sbindir}"
 
 # autoload if installed
 KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
+
+# http://errors.yoctoproject.org/Errors/Details/83333/
+PNBLACKLIST[vboxguestdrivers] ?= "BROKEN: not compatible with default kernel version 4.8"

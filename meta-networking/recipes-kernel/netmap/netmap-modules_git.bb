@@ -87,3 +87,6 @@ do_install () {
     cd ${S}/LINUX
     oe_runmake install
 }
+
+# http://errors.yoctoproject.org/Errors/Details/83335/
+PNBLACKLIST[netmap-modules] ?= "BROKEN: not compatible with default kernel version 4.8"

@@ -56,3 +56,6 @@ FILES_${PN} += "${sbindir} \
 
 RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
 RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
+
+# http://errors.yoctoproject.org/Errors/Details/83334/
+PNBLACKLIST[iscsitarget] ?= "BROKEN: not compatible with default kernel version 4.8"
