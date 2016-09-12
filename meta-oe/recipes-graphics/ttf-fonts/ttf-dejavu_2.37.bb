@@ -3,7 +3,7 @@ require ttf.inc
 SUMMARY = "DejaVu font - TTF Edition"
 HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
 LICENSE = "BitstreamVera"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=9f867da7a73fad2715291348e80d0763"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=449b2c30bfe5fa897fe87b8b70b16cfa""
 
 # all subpackages except ${PN}-common itself rdepends on ${PN}-common
 RDEPENDS_${PN}-sans = "${PN}-common"
@@ -11,6 +11,7 @@ RDEPENDS_${PN}-sans-mono = "${PN}-common"
 RDEPENDS_${PN}-sans-condensed = "${PN}-common"
 RDEPENDS_${PN}-serif = "${PN}-common"
 RDEPENDS_${PN}-serif-condensed = "${PN}-common"
+RDEPENDS_${PN}-mathtexgyre = "${PN}-common"
 RDEPENDS_${PN}-common = ""
 PR = "r7"
 
@@ -30,15 +31,17 @@ PACKAGES = "\
             ${PN}-sans-condensed \
             ${PN}-serif \
             ${PN}-serif-condensed \
+            ${PN}-mathtexgyre \
             ${PN}-common"
-FONT_PACKAGES = "${PN}-sans ${PN}-sans-mono ${PN}-sans-condensed ${PN}-serif ${PN}-serif-condensed"
+FONT_PACKAGES = "${PN}-sans ${PN}-sans-mono ${PN}-sans-condensed ${PN}-serif ${PN}-serif-condensed ${PN}-mathtexgyre"
 
 FILES_${PN}-sans            = "${datadir}/fonts/truetype/DejaVuSans.ttf ${datadir}/fonts/truetype/DejaVuSans-*.ttf"
 FILES_${PN}-sans-mono       = "${datadir}/fonts/truetype/DejaVuSansMono*.ttf"
 FILES_${PN}-sans-condensed  = "${datadir}/fonts/truetype/DejaVuSansCondensed*.ttf"
 FILES_${PN}-serif           = "${datadir}/fonts/truetype/DejaVuSerif.ttf ${datadir}/fonts/truetype/DejaVuSerif-*.ttf"
 FILES_${PN}-serif-condensed = "${datadir}/fonts/truetype/DejaVuSerifCondensed*.ttf"
+FILES_${PN}-mathtexgyre     = "${datadir}/fonts/truetype/DejaVuMathTeXGyre.ttf"
 FILES_${PN}-common          = "${sysconfdir}"
 
-SRC_URI[md5sum] = "59eaca5acf5c7c8212e92778e3e01f32"
-SRC_URI[sha256sum] = "f6d7965586101ff3a8a5c3ec503e082bb6a9604ff53413e10702e5917c194d88"
+SRC_URI[md5sum] = "d0efec10b9f110a32e9b8f796e21782c"
+SRC_URI[sha256sum] = "fa9ca4d13871dd122f61258a80d01751d603b4d3ee14095d65453b4e846e17d7"
