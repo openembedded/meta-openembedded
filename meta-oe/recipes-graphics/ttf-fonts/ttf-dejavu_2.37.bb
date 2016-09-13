@@ -3,7 +3,7 @@ require ttf.inc
 SUMMARY = "DejaVu font - TTF Edition"
 HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
 LICENSE = "BitstreamVera"
-LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=449b2c30bfe5fa897fe87b8b70b16cfa""
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=449b2c30bfe5fa897fe87b8b70b16cfa"
 
 # all subpackages except ${PN}-common itself rdepends on ${PN}-common
 RDEPENDS_${PN}-sans = "${PN}-common"
