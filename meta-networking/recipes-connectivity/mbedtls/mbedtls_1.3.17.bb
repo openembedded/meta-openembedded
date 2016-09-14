@@ -25,8 +25,8 @@ SECTION = "libdevel"
 
 SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-gpl.tgz"
 
-SRC_URI[md5sum] = "19ebbc96feceb430ad958dfe89cb633f"
-SRC_URI[sha256sum] = "746fd88e0c6623691fc56c4eed52e40a57b2da0ac80f6dd8995094aa6adb407e"
+SRC_URI[md5sum] = "a6ed92fc377ef60f7c24d42b900e0dad"
+SRC_URI[sha256sum] = "f5beb43e850283915e3e0f8d37495eade3bfb5beedfb61e7b8da70d4c68edb82"
 
 DEPENDS = "openssl"
 RDEPENDS_${PN} += "libcrypto"
