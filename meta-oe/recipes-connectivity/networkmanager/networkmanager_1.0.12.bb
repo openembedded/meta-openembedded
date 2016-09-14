@@ -16,6 +16,7 @@ SRC_URI = " \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
     file://0002-add-pkg-config-for-libgcrypt.patch \
     file://0006-Fix-nm-version-macro-includes.patch \
+    file://0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch \
 "
 SRC_URI[md5sum] = "ebb273456a81ccf9dfaf2461061b0e96"
 SRC_URI[sha256sum] = "3a470f8c60109b1acb5784ddc2423501706b5fe34c793a6faee87e591eb04a9e"
@@ -62,7 +63,7 @@ PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
 PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
 PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
 
-PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests \
+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
   ${PN}-nmtui ${PN}-nmtui-doc \
   ${PN}-adsl \
 "
@@ -97,10 +98,6 @@ FILES_${PN}-dev += " \
     ${datadir}/NetworkManager/gdb-cmd \
     ${libdir}/pppd/*/*.la \
     ${libdir}/NetworkManager/*.la \
-"
-
-FILES_${PN}-tests = " \
-    ${bindir}/nm-online \
 "
 
 FILES_${PN}-nmtui = " \
