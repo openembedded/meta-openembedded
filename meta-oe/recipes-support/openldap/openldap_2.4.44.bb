@@ -24,6 +24,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://initscript \
     file://slapd.service \
     file://thread_stub.patch \
+    file://openldap-CVE-2015-3276.patch \
 "
 
 SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
