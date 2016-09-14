@@ -13,8 +13,8 @@ SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2
            file://gtk-is-required-by-notify.patch \
            file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
 
-SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
-SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
+SRC_URI[md5sum] = "ab439e21a7d86fa99fbc04586c755349"
+SRC_URI[sha256sum] = "12c35352386057ba68d69a0b7d9a1d0d01ebbd893aafe0a094c3158c8079ac9a"
 
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
@@ -23,8 +23,8 @@ EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
                 --disable-static \
                "
 
-DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf"
+DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf intltool-native"
 
 RDEPENDS_${PN} += "bash"
 
-FILES_${PN} += "${datadir}/dbus-1/*"
+FILES_${PN} += "${datadir}/dbus-1/* ${datadir}/gir-1.0/* ${libdir}/girepository-1.0/*"

@@ -5,16 +5,14 @@ It will cause configure error as follow.
 
 Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 
-diff -Nurp imsettings-1.6.8.orig/Makefile.am imsettings-1.6.8/Makefile.am
---- imsettings-1.6.8.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
-+++ imsettings-1.6.8/Makefile.am	2015-06-24 14:15:32.070000007 +0900
-@@ -1,9 +1,7 @@
+diff -Nurp imsettings-1.7.1.orig/Makefile.am imsettings-1.7.1/Makefile.am
+--- imsettings-1.7.1.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
++++ imsettings-1.7.1/Makefile.am	2015-06-24 14:15:32.070000007 +0900
+@@ -1,7 +1,7 @@
  NULL =
  SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
  
--ACLOCAL_AMFLAGS =			\
--	-I m4macros			\
--	$(NULL)
+-ACLOCAL_AMFLAGS = -Im4macros
 +ACLOCAL_AMFLAGS = -I m4macros $(NULL)
  
  CONFIGURE_DEPENDENCIES =		\
