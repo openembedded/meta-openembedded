@@ -49,6 +49,7 @@ EXTRA_OECONF = " \
     --disable-lcms2 \
     --disable-vapoursynth \
     --disable-vapoursynth-lazy \
+    ${PACKAGECONFIG_CONFARGS} \
 "
 
 do_configure_prepend () {
