@@ -7,8 +7,7 @@ DEPENDS = "exo libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
 
 inherit xfce-app
 
-# tumbler is currently broken
-# RRECOMMENDS_${PN} += "tumbler"
+RRECOMMENDS_${PN} += "tumbler"
 
 SRC_URI[md5sum] = "94c778850325a4e5a12e3433c8a05432"
 SRC_URI[sha256sum] = "71625324cecda7199acbc95a3ea5132d0dcbf808771e7a209ea2b9503ae4f328"
