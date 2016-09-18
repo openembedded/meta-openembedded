@@ -10,18 +10,16 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
 PE = "1"
 
-SRC_URI[md5sum] = "988a4595a4a87dafb3c4870ea40e89b5"
-SRC_URI[sha256sum] = "357e0a4e49525d80cdc740bb16539fcdb526ad38cc2ed6cabedafc9bdee5c7e7"
+SRC_URI[md5sum] = "15af85adc8ba83e6e996e13a55df4fb0"
+SRC_URI[sha256sum] = "7836cdaabd056ab4c9dd19cf0c791f11d980d0f6037542476034f2b7bdcf5d5b"
 
 inherit autotools pkgconfig
 
 ARM_INSTRUCTION_SET = "arm"
 
-# Works with either gtk+ or gtk3.
-WHICH_GTK = "gtk3"
-
 PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
-PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${WHICH_GTK}  graphics", "", d)}"
+PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2  graphics", "", d)}"
+PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3  graphics", "", d)}"
 PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
 
 PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_LIBDIR}, --with-libcap=no --enable-pcap-ng-default , libcap"
