@@ -41,6 +41,7 @@ EXTRA_OEMAKE = 'RPMPKG="${PV}" \
                 GDB_TARGET="${TARGET_SYS}" \
                 GDB_HOST="${BUILD_SYS}" \
                 GDB_MAKE_JOBS="${PARALLEL_MAKE}" \
+                LDFLAGS="${LDFLAGS}" \
                 '
 
 EXTRA_OEMAKE_class-cross = 'RPMPKG="${PV}" \
