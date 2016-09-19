@@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
            file://Makefile.utils \
 "
-SRC_URI[md5sum] = "e25a6a1f3c113c373dc0433f9c2526f3"
-SRC_URI[sha256sum] = "b9a14a7771059c55c44b97f8d4eef9bea84544f3e215e0caa563bc35e2f16aaf"
+SRC_URI[md5sum] = "8c2331a718cfc038963c1214c2ba9811"
+SRC_URI[sha256sum] = "2e0112b0d85841587b8f212e6ba8f6c35b31e1cce6b6999497dc917cd37e6911"
 
 S = "${WORKDIR}/vbox_module"
 
@@ -63,6 +63,3 @@ FILES_${PN} = "${base_sbindir}"
 
 # autoload if installed
 KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
-
-# http://errors.yoctoproject.org/Errors/Details/83333/
-PNBLACKLIST[vboxguestdrivers] ?= "BROKEN: not compatible with default kernel version 4.8"
