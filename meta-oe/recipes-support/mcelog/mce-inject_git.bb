@@ -9,7 +9,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mce-inject.git"
 SRCREV = "4cbe46321b4a81365ff3aafafe63967264dbfec5"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://README;beginline=30;md5=3d12dd2a10bdd22379cc4c0fc6949a88"
+LIC_FILES_CHKSUM = "file://README;beginline=30;md5=94c18755082a2da9c9cf97cba3ad47d6"
 
 S = "${WORKDIR}/git"
 
