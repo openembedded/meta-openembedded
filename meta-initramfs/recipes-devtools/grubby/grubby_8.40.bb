@@ -13,7 +13,6 @@ DEPENDS = "popt util-linux"
 SRC_URI = "https://github.com/rhinstaller/${BPN}/archive/${PV}-1.tar.gz;downloadfilename=${BPN}-${PV}-1.tar.gz \
            file://grubby-rename-grub2-editenv-to-grub-editenv.patch \
            file://run-ptest \
-           file://grubby-remove-bashisms-in-test.sh.patch \
 "
 
 SRC_URI[md5sum] = "1005907b275d6d93368d045274537d86"
@@ -33,6 +32,6 @@ do_install_ptest() {
     sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
 }
 
-RDEPENDS_${PN}-ptest = "util-linux-getopt"
+RDEPENDS_${PN}-ptest = "util-linux-getopt bash"
 
 COMPATIBLE_HOST = '(x86_64.*|i.86.*)-(linux|freebsd.*)'
