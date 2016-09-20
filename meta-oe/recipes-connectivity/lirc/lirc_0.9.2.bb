@@ -1,6 +1,7 @@
 require lirc.inc
 
 SRC_URI += " \
+    file://0001-lircrcd-Mark-local-inline-funtions-as-static.patch \
     file://lircd.service \
     file://lircd.init \
     file://lircexec.init \
