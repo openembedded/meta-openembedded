@@ -8,22 +8,23 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
 DEPENDS = "openssl libnl pciutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-        file://init \
-        file://snmpd.conf \
-        file://snmptrapd.conf \
-        file://systemd-support.patch \
-        file://snmpd.service \
-        file://snmptrapd.service \
-        file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
-        file://fix-libtool-finish.patch \
-        file://net-snmp-testing-add-the-output-format-for-ptest.patch \
-        file://run-ptest \
-        file://dont-return-incompletely-parsed-varbinds.patch \
-        file://0001-config_os_headers-Error-Fix.patch \
-        file://0001-config_os_libs2-Error-Fix.patch \
-        file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
-        file://net-snmp-agentx-crash.patch \
-"
+           file://init \
+           file://snmpd.conf \
+           file://snmptrapd.conf \
+           file://systemd-support.patch \
+           file://snmpd.service \
+           file://snmptrapd.service \
+           file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
+           file://fix-libtool-finish.patch \
+           file://net-snmp-testing-add-the-output-format-for-ptest.patch \
+           file://run-ptest \
+           file://dont-return-incompletely-parsed-varbinds.patch \
+           file://0001-config_os_headers-Error-Fix.patch \
+           file://0001-config_os_libs2-Error-Fix.patch \
+           file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
+           file://net-snmp-agentx-crash.patch \
+           file://0001-get_pid_from_inode-Include-limit.h.patch \
+           "
 SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
 SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
 
