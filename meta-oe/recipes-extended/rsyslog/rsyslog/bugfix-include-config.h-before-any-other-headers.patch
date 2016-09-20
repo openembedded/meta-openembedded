@@ -1,0 +1,51 @@
+Backport below commit for fixing:
+
+lexer.l:34:14: error: expected identifier or '(' before '__extension__'
+
+From 876bdd1c85353f7e254f4b4c3e228484860cea57 Mon Sep 17 00:00:00 2001
+From: Tomas Heinrich <theinric@redhat.com>
+Date: Mon, 17 Nov 2014 20:53:22 +0100
+Subject: [PATCH] bugfix: include config.h before any other headers
+
+For some reason, flex used to prepend several standard headers before
+config.h. This prevented some conditional extension in these headers
+from being defined.
+
+The explicit prototype for strdup() shouldn't be required anymore as
+it should be provided by string.h.
+
+Upstream-Status: Backport
+---
+ grammar/lexer.l | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/grammar/lexer.l b/grammar/lexer.l
+index 359cf9f..c834ef7 100644
+--- a/grammar/lexer.l
++++ b/grammar/lexer.l
+@@ -28,10 +28,12 @@
+   * limitations under the License.
+   */
+ 
+-%{
++%top{
+ #include "config.h"
++}
++
++%{
+ #include "parserif.h"
+-extern char *strdup(__const char*); /* somehow we may not get this from string.h... */
+ %}
+ 
+ %option noyywrap nodefault case-insensitive yylineno
+@@ -67,6 +69,7 @@ extern char *strdup(__const char*); /* somehow we may not get this from string.h
+ #include <ctype.h>
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
+ #include <strings.h>
+ #include <libestr.h>
+ #include "rainerscript.h"
+-- 
+2.7.4
+

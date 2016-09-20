@@ -27,15 +27,16 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://json-0.12-fix.patch \
            file://replace_deprecated_GnuTLS_functions.patch \
            file://use_gnutls_certificate_type_set_priority_only_if_available.patch \
+           file://bugfix-include-config.h-before-any-other-headers.patch \
            file://enable_tls_ptests.patch \
 "
 
-SRC_URI[md5sum] = "093c462a5245012bd9e7b82dd8aedffb"
-SRC_URI[sha256sum] = "357f089d866c351d5fe5b7139fa85b010223d77b3c21f29b2a1baa8688926111"
+SRC_URI[md5sum] = "fa78a6e675fe78a811edcdf7eb6f1975"
+SRC_URI[sha256sum] = "fc29d2d9cbf3396091dd0bab2eb6f847aed4a44ef73138a97ddf9447446125ee"
 
 inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
 
-EXTRA_OECONF += "--enable-cached-man-pages"
+EXTRA_OECONF += "--disable-generate-man-pages"
 
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
