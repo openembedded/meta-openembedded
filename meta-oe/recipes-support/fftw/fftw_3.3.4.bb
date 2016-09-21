@@ -14,6 +14,9 @@ PROVIDES = "fftwl fftwf"
 
 EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
 
+FFTW_NEON = "${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)}"
+FFTW_NEON_class-native = ""
+
 do_configure() {
     # configure fftw
     rm -rf ${WORKDIR}/build-fftw
@@ -36,7 +39,7 @@ do_configure() {
 	mkdir -p ${B}
     cd ${B}
     # configure only
-    oe_runconf --enable-single ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)}
+    oe_runconf --enable-single ${FFTW_NEON}
     mv ${B} ${WORKDIR}/build-fftwf
 }
 
