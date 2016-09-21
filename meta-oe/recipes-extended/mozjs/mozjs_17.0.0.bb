@@ -15,6 +15,7 @@ SRC_URI = " \
     file://fix_milestone_compile_issue.patch \
     file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
     file://0001-add-support-for-big-endian-32bit-ARM.patch;patchdir=../../ \
+    file://Manually_mmap_heap_memory_esr17.patch;patchdir=../../ \
   "
 
 SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
