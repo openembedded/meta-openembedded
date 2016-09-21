@@ -16,6 +16,7 @@ EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
 
 do_configure() {
     # configure fftw
+    rm -rf ${WORKDIR}/build-fftw
 	mkdir -p ${B}
     cd ${B}
     # full (re)configure
@@ -23,6 +24,7 @@ do_configure() {
     mv ${B} ${WORKDIR}/build-fftw
 
     # configure fftwl
+    rm -rf ${WORKDIR}/build-fftwl
 	mkdir -p ${B}
     cd ${B}
     # configure only
@@ -30,6 +32,7 @@ do_configure() {
     mv ${B} ${WORKDIR}/build-fftwl 
 
     # configure fftwf
+    rm -rf ${WORKDIR}/build-fftwf
 	mkdir -p ${B}
     cd ${B}
     # configure only
