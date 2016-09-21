@@ -3,14 +3,26 @@ HOMEPAGE = "http://ldb.samba.org"
 SECTION = "libs"
 LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
 
-DEPENDS += "libaio libbsd libtdb libtalloc libtevent popt"
+DEPENDS += "libtdb libtalloc libtevent popt"
 RDEPENDS_pyldb += "python"
 
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://do-not-import-target-module-while-cross-compile.patch \
+           file://ldb-Add-configure-options-for-packages.patch \
           "
 
+PACKAGECONFIG ??= "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
+"
+PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
+PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
 PACKAGECONFIG[ldap] = ",,openldap"
+PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
+PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
+PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
+PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
+
 SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://avoid-openldap-unless-wanted.patch', d)}"
 
 LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9adade \
