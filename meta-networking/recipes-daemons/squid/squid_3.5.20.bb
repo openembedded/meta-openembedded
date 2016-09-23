@@ -73,6 +73,9 @@ do_install_ptest() {
     sed -e 's/^\(runtest-TESTS:\)/\1 squid-conf-tests/' \
         -e "s/\(list=' \$(TESTS)\)/\1 squid-conf-tests/" \
         -i ${D}${PTEST_PATH}/${TESTDIR}/Makefile
+
+    # Ensure the path for command true is correct
+    sed -i 's:^TRUE = .*$:TRUE = /bin/true:' ${D}${PTEST_PATH}/${TESTDIR}/Makefile
 }
 
 do_install_append() {
