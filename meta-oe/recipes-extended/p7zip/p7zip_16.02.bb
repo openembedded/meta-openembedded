@@ -29,8 +29,10 @@ do_install_class-native() {
 
     # Create a shell script wrapper to execute next to 7z.so
     mv ${D}${bindir}/7z ${D}${bindir}/7z.bin
-    echo "#! /bin/sh" > ${D}${bindir}/7z
-    echo "exec ${D}${bindir}/7z.bin \"\$@\"" >> ${D}${bindir}/7z
+    cat > ${D}${bindir}/7z << 'EOF'
+#!/bin/sh
+exec "$(dirname "$0")"/7z.bin "$@"
+EOF
     chmod 0755 ${D}${bindir}/7z
 }
 
