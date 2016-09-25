@@ -12,7 +12,8 @@ SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${P
            file://use-kernel-makefile-to-get-kernel-version.patch \
            file://fix-errors-observed-with-linux-3.19-and-greater.patch \
            file://access-sk_v6_daddr-iff-IPV6-defined.patch \
-           file://build_with_updated_bio_struct_of_linux_v4.3_and_above.patch"
+           file://build_with_updated_bio_struct_of_linux_v4.3_and_above.patch \
+           file://build_with_updated_interfaces_of_linux_v4.8_and_above.patch"
 
 SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
 SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
@@ -56,6 +57,3 @@ FILES_${PN} += "${sbindir} \
 
 RDEPENDS_${PN} = "kernel-module-iscsi-trgt"
 RRECOMMENDS_${PN} = "kernel-module-crc32c kernel-module-libcrc32c"
-
-# http://errors.yoctoproject.org/Errors/Details/83334/
-PNBLACKLIST[iscsitarget] ?= "BROKEN: not compatible with default kernel version 4.8"
