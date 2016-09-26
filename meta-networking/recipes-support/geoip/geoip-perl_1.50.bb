@@ -7,7 +7,7 @@ DESCRIPTION = "perl library for country/city/organization to IP address or hostn
 HOMEPAGE = "http://www.maxmind.com/app/ip-location"
 SECTION = "libdevel"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://README;md5=b0fa745303912bd2d64430f7ae69487d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b7a36f55e8ba62aadd74e4f0886a405e"
 
 # Note that we do not want to use the upstream file name locally.
 #
@@ -15,8 +15,8 @@ SRC_URI = "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz;downlo
     file://run-ptest \
 "
 
-SRC_URI[md5sum] = "0ce57140890bf81958e0cea4fe1885b2"
-SRC_URI[sha256sum] = "c56437b1cc8887736cb1e435d0320c1c1ff3754830249516317b99137005fb23"
+SRC_URI[md5sum] = "2d7f8b1b54e6ba6d9e3fefce52675815"
+SRC_URI[sha256sum] = "86da0dd67f417a43dc70f15a49bd3619f668970c117b9e7f737b4ab246c240a6"
 
 S = "${WORKDIR}/geoip-api-perl-${PV}"
 
