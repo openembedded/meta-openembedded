@@ -14,5 +14,6 @@ inherit autotools
 # On mips, we have the following error.
 #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
 #   Segmentation fault (core dumped)
-# On aarch64, system hangs when using libtcmalloc.so.
-COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm).*-linux*"
+COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
+# On aarch64, add this option to avoid system hanging when using libtcmalloc.so.
+EXTRA_OECONF_aarch64 += "--disable-libunwind"
