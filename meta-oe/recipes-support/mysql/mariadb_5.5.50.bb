@@ -4,7 +4,7 @@ EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
 
 DEPENDS += "mariadb-native ncurses zlib readline libaio libevent"
 
-PROVIDES += "mysql5"
+PROVIDES += "mysql5 libmysqlclient"
 
 RPROVIDES_${PN} += "mysql5"
 RREPLACES_${PN} += "mysql5"
