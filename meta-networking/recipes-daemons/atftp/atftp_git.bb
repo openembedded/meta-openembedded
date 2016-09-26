@@ -15,6 +15,10 @@ SRC_URI = "git://git.code.sf.net/p/atftp/code \
            file://atftpd.service \
            file://atftp-0.7-sorcerers_apprentice.patch \
 "
+SRC_URI_append_libc-musl = " file://0001-argz.h-fix-musl-compile-add-missing-defines.patch \
+                             file://0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch \
+                           "
+
 S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d systemd
