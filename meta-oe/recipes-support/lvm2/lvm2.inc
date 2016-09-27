@@ -20,16 +20,17 @@ inherit autotools-brokensep pkgconfig systemd
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
                    thin-provisioning-tools \
+                   odirect \
 "
 
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
+PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
 
 # Unset user/group to unbreak install.
 EXTRA_OECONF = "--with-user= \
                 --with-group= \
-                --disable-o_direct \
                 --enable-realtime \
                 --enable-applib \
                 --enable-cmdlib \
