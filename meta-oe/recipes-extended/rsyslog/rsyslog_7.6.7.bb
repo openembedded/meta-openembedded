@@ -29,6 +29,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://use_gnutls_certificate_type_set_priority_only_if_available.patch \
            file://bugfix-include-config.h-before-any-other-headers.patch \
            file://enable_tls_ptests.patch \
+           file://fix_build_with_musl.patch \
 "
 
 SRC_URI[md5sum] = "fa78a6e675fe78a811edcdf7eb6f1975"

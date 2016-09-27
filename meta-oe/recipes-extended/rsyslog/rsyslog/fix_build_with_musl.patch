@@ -1,0 +1,62 @@
+From b6cc506b6ad0b5dd9aa9831ed42e6759183aaf45 Mon Sep 17 00:00:00 2001
+From: Peter Liu <peter.x.liu@external.atlascopco.com>
+Date: Mon, 26 Sep 2016 17:03:57 +0200
+Subject: [PATCH] fix building with musl libc
+
+- struct timeval is defined in sys/time.h with a musl libc.
+- include fcntl.h without the conditional checking.
+
+Upstream-Status: Pending
+
+Signed-off-by: Peter Liu <peter.x.liu@external.atlascopco.com>
+---
+ tests/msleep.c  | 2 +-
+ tools/omfile.c  | 4 +---
+ tools/pidfile.c | 2 --
+ 3 files changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/tests/msleep.c b/tests/msleep.c
+index 36fa01b..ca818be 100644
+--- a/tests/msleep.c
++++ b/tests/msleep.c
+@@ -26,7 +26,7 @@
+ #include "config.h"
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <time.h>
++#include <sys/time.h>
+ 
+ int main(int argc, char *argv[])
+ {
+diff --git a/tools/omfile.c b/tools/omfile.c
+index 11eab56..765ef91 100644
+--- a/tools/omfile.c
++++ b/tools/omfile.c
+@@ -48,9 +48,7 @@
+ #include <libgen.h>
+ #include <unistd.h>
+ #include <sys/file.h>
+-#ifdef OS_SOLARIS
+-#	include <fcntl.h>
+-#endif
++#include <fcntl.h>
+ #ifdef HAVE_ATOMIC_BUILTINS
+ #	include <pthread.h>
+ #endif
+diff --git a/tools/pidfile.c b/tools/pidfile.c
+index 8298b94..188cca4 100644
+--- a/tools/pidfile.c
++++ b/tools/pidfile.c
+@@ -36,9 +36,7 @@
+ #include <string.h>
+ #include <errno.h>
+ #include <signal.h>
+-#ifdef __sun
+ #include <fcntl.h>
+-#endif
+ 
+ #include "srUtils.h"
+ 
+-- 
+1.9.1
+
