@@ -6,14 +6,15 @@ DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib libnotify"
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "094be6f29206aac8299f27084e284e88"
-SRC_URI[sha256sum] = "8c7ed62f9496816d1391281f77d1b32216f9bf6fd22fbe4f6f3f4e07a6bbced0"
+SRC_URI[md5sum] = "9ee9bd823710c8753cb99f5a8028d528"
+SRC_URI[sha256sum] = "c554db55d9d759c32115e9e5da029bd68b07628438ef2bac7ae4b458567c85a4"
 
 do_compile_prepend() {
     mkdir -p xfce4-notifyd
 }
 
 FILES_${PN} += " \
+    ${systemd_user_unitdir} \
     ${libdir}/xfce4/notifyd \
     ${datadir}/themes \
     ${datadir}/dbus-1 \
