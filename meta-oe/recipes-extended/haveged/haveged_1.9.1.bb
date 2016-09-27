@@ -28,3 +28,5 @@ do_install_append() {
     mkdir -p ${D}${systemd_unitdir}/system
     install -p -m644 ${B}/init.d/haveged.service ${D}${systemd_unitdir}/system
 }
+
+MIPS_INSTRUCTION_SET = "mips"
