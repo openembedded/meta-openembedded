@@ -179,7 +179,7 @@ do_install_append() {
 
     # install COPYRIGHT README HISTORY
     install -d -m 0755 ${D}${docdir}/${BPN}
-    for i in ${B}/{COPYRIGHT,README,HISTORY} ${B}/doc/{KNOWN_BUGS,MISSING_FEATURES,README*,bug.template}; do
+    for i in ${B}/COPYRIGHT ${B}/README ${B}/HISTORY ${B}/doc/KNOWN_BUGS ${B}/doc/MISSING_FEATURES ${B}/doc/README* ${B}/doc/bug.template; do
         [ -f $i ] && install $i ${D}${docdir}/${BPN}
     done
 
