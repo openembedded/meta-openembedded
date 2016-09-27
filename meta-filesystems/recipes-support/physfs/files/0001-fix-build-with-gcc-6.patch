@@ -1,0 +1,52 @@
+From 06fe4c205094e0b65d3e5d1244f52089ed5bdafb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 25 Sep 2016 23:50:22 +0200
+Subject: [PATCH] fix build with gcc-6
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Pending
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ src/archiver_zip.c | 1 -
+ src/physfs_miniz.h | 3 +++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/archiver_zip.c b/src/archiver_zip.c
+index 5c4996d..3b436db 100644
+--- a/src/archiver_zip.c
++++ b/src/archiver_zip.c
+@@ -845,7 +845,6 @@ static ZIPentry *zip_hash_ancestors(ZIPinfo *info, char *name)
+     if (sep)
+     {
+         const size_t namelen = (sep - name) + 1;
+-        ZIPentry *parent;
+ 
+         *sep = '\0';  /* chop off last piece. */
+         retval = zip_find_entry(info, name);
+diff --git a/src/physfs_miniz.h b/src/physfs_miniz.h
+index 619cb71..fd877c0 100644
+--- a/src/physfs_miniz.h
++++ b/src/physfs_miniz.h
+@@ -194,6 +194,8 @@ struct tinfl_decompressor_tag
+     code_len = TINFL_FAST_LOOKUP_BITS; do { temp = (pHuff)->m_tree[~temp + ((bit_buf >> code_len++) & 1)]; } while (temp < 0); \
+   } sym = temp; bit_buf >>= code_len; num_bits -= code_len; } MZ_MACRO_END
+ 
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wmisleading-indentation"
+ static tinfl_status tinfl_decompress(tinfl_decompressor *r, const mz_uint8 *pIn_buf_next, size_t *pIn_buf_size, mz_uint8 *pOut_buf_start, mz_uint8 *pOut_buf_next, size_t *pOut_buf_size, const mz_uint32 decomp_flags)
+ {
+   static const int s_length_base[31] = { 3,4,5,6,7,8,9,10,11,13, 15,17,19,23,27,31,35,43,51,59, 67,83,99,115,131,163,195,227,258,0,0 };
+@@ -465,6 +467,7 @@ common_exit:
+   }
+   return status;
+ }
++#pragma GCC diagnostic pop
+ 
+ /* Flush values. For typical usage you only need MZ_NO_FLUSH and MZ_FINISH. The other stuff is for advanced use. */
+ enum { MZ_NO_FLUSH = 0, MZ_PARTIAL_FLUSH = 1, MZ_SYNC_FLUSH = 2, MZ_FULL_FLUSH = 3, MZ_FINISH = 4, MZ_BLOCK = 5 };
+-- 
+2.5.5
+
