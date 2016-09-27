@@ -27,6 +27,8 @@ EXTRA_OEMAKE = "CFLAGS="${CFLAGS} -Wall -fPIC -DHAVE_SHADOW" \
     SECUREDIR=${base_libdir}/security \
 "
 
+TARGET_CC_ARCH += "${LDFLAGS}"
+
 do_install() {
     oe_runmake install DESTDIR=${D}
 }
