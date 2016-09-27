@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 inherit xfce
 
-DEPENDS += "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
-           libxrandr virtual/libx11 libxext xfce4-panel upower"
+DEPENDS += "gtk+3 glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
+           libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
 
-SRC_URI[md5sum] = "e7d00548e58bf19229e727818184c1e0"
-SRC_URI[sha256sum] = "c50ec8aa7e7848c57c0f856dceb8132eb5f37585f0ac1627459ab8c882c73b07"
+SRC_URI[md5sum] = "2e2e24a1a22912d6a561ba6155887503"
+SRC_URI[sha256sum] = "bde3157e06ab31ff23648d163d53ee5095f7819544a9f48d3a96d57829857f2b"
 
 EXTRA_OECONF = " \
     --enable-network-manager \
