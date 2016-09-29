@@ -109,6 +109,9 @@ do_install() {
     export no_pam=1
     mkdir -p $tempdir
     ${S}/../setup.sh
+
+    # Ensure correct PERLLIB path
+    sed -i -e 's#${D}##g' ${D}${sysconfdir}/webmin/start
 }
 
 INITSCRIPT_NAME = "webmin"
