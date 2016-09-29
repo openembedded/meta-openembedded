@@ -15,6 +15,7 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz 
            file://mysql-systemd-start \
            file://configure.cmake-fix-valgrind.patch \
            file://fix-a-building-failure.patch \
+           file://change-cc-to-cc-version.patch \
           "
 
 SRC_URI[md5sum] = "5cfb169934170a429589e05f0f5aba9c"
