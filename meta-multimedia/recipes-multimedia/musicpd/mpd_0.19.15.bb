@@ -53,7 +53,7 @@ do_install_append() {
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "mpd.service mpd.socket"
+SYSTEMD_SERVICE_${PN} = "mpd.socket"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = " \
