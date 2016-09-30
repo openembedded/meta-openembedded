@@ -9,8 +9,8 @@ SRC_URI = "https://web.archive.org/web/20150807014439/http://www.geocities.jp/ko
            file://do-not-use-system-headers.patch \
            file://configure.patch"
 
-SRC_URI[md5sum] = "0d4eda2066d3c92970842a6790ce897a"
-SRC_URI[sha256sum] = "c3bba66b2a84760e6582c40881db97c839d94f327870009724bb8b4d0c051f2a"
+SRC_URI[md5sum] = "d08f10ea5c94919780e6b7bed1ef9830"
+SRC_URI[sha256sum] = "d5642010336a6f68b7f2e34b1f1cb14be333e4d95c2ac02b38c162caf44e47a7"
 
 BINCONFIG = "${bindir}/onig-config"
 
