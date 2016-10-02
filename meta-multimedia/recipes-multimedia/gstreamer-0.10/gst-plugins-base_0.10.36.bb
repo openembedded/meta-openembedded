@@ -11,6 +11,7 @@ DEPENDS += "alsa-lib libogg libvorbis libtheora util-linux tremor glib-2.0-nativ
 SRC_URI += "file://gst-plugins-base-tremor.patch \
             file://configure.ac-fix-subparse-plugin.patch \
             file://audioresample-Fix-build-on-x86-if-emmintrin.h-is-ava.patch \
+            file://0001-aclocal.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch \
 "
 
 SRC_URI[md5sum] = "776c73883e567f67b9c4a2847d8d041a"
