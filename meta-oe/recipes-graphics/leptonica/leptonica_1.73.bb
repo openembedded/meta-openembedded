@@ -1,5 +1,5 @@
 DESCRIPTION = "A pedagogically-oriented open source site containing software that is broadly useful for image processing and image analysis applications"
-DEPENDS = "jpeg tiff libpng zlib giflib"
+DEPENDS = "jpeg tiff libpng zlib"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=20cdd3af097ca431b82004c691f406a6"
 
@@ -11,7 +11,8 @@ EXTRA_OECONF += " \
     --without-libwebp \
 "
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "giflib"
 PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
+PACKAGECONFIG[giflib] = "--with-giflib,--without-giflib,giflib"
 
 inherit autotools pkgconfig
