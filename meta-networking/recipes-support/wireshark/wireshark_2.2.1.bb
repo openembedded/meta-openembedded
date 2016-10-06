@@ -8,8 +8,9 @@ DEPENDS = "pcre expat glib-2.0 sbc"
 
 SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
-SRC_URI[md5sum] = "c7de0997f74934f25b456846cf75cb81"
-SRC_URI[sha256sum] = "a6847e741efcba6cb9d92d464d4219917bee3ad0b8f5b0f80d4388ad2f3f1104"
+PE = "1"
+SRC_URI[md5sum] = "49a1023a69ac108ca089d750eee50e37"
+SRC_URI[sha256sum] = "900e22af04c8b35e0d02a25a360ab1fb7cfe5ac18fc48a9afd75a7103e569149"
 
 inherit autotools pkgconfig perlnative
 
