@@ -23,7 +23,9 @@ inherit waf pkgconfig
 
 PACKAGECONFIG ??= "alsa"
 PACKAGECONFIG[alsa] = "--alsa=yes,alsa=no,alsa-lib"
-PACKAGECONFIG[portaudio] = "--portaudio=yes,--portaudio=no,portaudio"
+
+# portaudio is for windows builds only
+EXTRA_OECONF = "--portaudio=no"
 
 PACKAGES =+ "libjack jack-server jack-utils"
 
