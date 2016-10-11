@@ -8,9 +8,12 @@ When sending single patches, please use something like:
 
    git send-email -1 -M \
         --to openembedded-devel@lists.openembedded.org \
-        --subject-prefix=meta-networking][PATCH
+        --subject-prefix=meta-networking][morty][PATCH
 
 You may also contact the maintainers directly.
+
+morty branch maintainer(s):
+Armin Kuster <akuster808@gmail.com>
 
 Descriptions of section entries:
 

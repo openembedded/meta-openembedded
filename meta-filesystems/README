@@ -10,15 +10,15 @@ Dependencies
 This layer depends on:
 
   URI: git://git.openembedded.org/bitbake
-  branch: master
+  branch: morty
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: master
+  branch: morty
 
   URI: git://git.openembedded.org/meta-openembedded
   layers: meta-oe
-  branch: master
+  branch: morty
 
 Patches
 =======
@@ -66,8 +66,10 @@ When sending single patches, please use something like:
 
    git send-email -1 -M \
         --to openembedded-devel@lists.openembedded.org \
-        --subject-prefix=meta-filesystems][PATCH
+        --subject-prefix=meta-filesystems][morty][PATCH
 
+morty branch maintainer(s):
+Armin Kuster <akuster808@gmail.com>
 
 Table of Contents
 =================
