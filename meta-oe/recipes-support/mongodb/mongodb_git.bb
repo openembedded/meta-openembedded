@@ -43,9 +43,8 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
                  --use-system-zlib \
                  --js-engine=none \
                  --nostrip \
-                 ${EXTRA_OECONF} \
+                 ${PACKAGECONFIG_CONFARGS} \
                  mongod mongos"
-DISABLE_STATIC = ""
 
 scons_do_compile() {
         ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
