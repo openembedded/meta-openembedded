@@ -1,15 +1,17 @@
 SUMMARY = "Transparent Inter-Process Communication protocol"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://tipc-config/tipc-config.c;endline=32;md5=527a3d5745e1581b15a4fddfb5dfda68"
+LICENSE = "GPLv2"
+LIC_FILES_CHKSUM = "file://tipclog/tipc.h;endline=35;md5=985b6ea8735818511d276c1b466cce98"
 
 SRC_URI = "git://tipc.git.sourceforge.net/gitroot/tipc/tipcutils"
-SRCREV = "292a03e17f889013fca2c7bd0aaeebd600c88f40"
+SRCREV = "dc8c2d324cda2e80a6e07ee1998fca0839d4a721"
 
 DEPENDS="virtual/kernel"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-inherit autotools
+inherit autotools pkgconfig
+
+DEPENDS += "libdaemon"
 
 S = "${WORKDIR}/git"
 
