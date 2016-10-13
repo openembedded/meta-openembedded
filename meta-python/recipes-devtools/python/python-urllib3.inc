@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a067"
 
-SRC_URI[md5sum] = "fcaab1c5385c57deeb7053d3d7d81d59"
-SRC_URI[sha256sum] = "63d479478ddfc83bbc11577dc16d47835c5179ac13e550118ca143b62c4bf9ab"
+SRC_URI[md5sum] = "1eadd93bd5e58d3528d977111f2997ea"
+SRC_URI[sha256sum] = "d30dd4d1cbbc36ebab6e4a2076820cfe0c60f10adf087fecbc5a3edae79fdc81"
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-certifi \
