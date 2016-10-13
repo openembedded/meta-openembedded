@@ -7,8 +7,8 @@ HOMEPAGE = " http://certifi.io/"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
 
-SRC_URI[md5sum] = "b57513f7670482da45bb350b792f659e"
-SRC_URI[sha256sum] = "99864ed602d8a9d212e339b15ffa438895002eda7b7db20dca5309dac9605ae9"
+SRC_URI[md5sum] = "baa81e951a29958563689d868ef1064d"
+SRC_URI[sha256sum] = "8275aef1bbeaf05c53715bfc5d8569bd1e04ca1e8e69608cc52bcaac2604eb19"
 
 BBCLASSEXTEND = "native nativesdk"
 
