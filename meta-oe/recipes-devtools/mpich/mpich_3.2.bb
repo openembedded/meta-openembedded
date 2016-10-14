@@ -9,8 +9,8 @@ SRC_URI = " \
     http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
-SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
+SRC_URI[md5sum] = "f414cfa77099cd1fa1a5ae4e22db508a"
+SRC_URI[sha256sum] = "0778679a6b693d7b7caff37ff9d2856dc2bfc51318bf8373859bfa74253da3dc"
 
 CACHED_CONFIGUREVARS += "BASH_SHELL=${base_bindir}/bash"
 
