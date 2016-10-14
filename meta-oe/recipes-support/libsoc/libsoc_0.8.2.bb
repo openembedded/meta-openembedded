@@ -5,11 +5,11 @@ DESCRIPTION = "libsoc is a C library to interface with common peripherals (gpio,
 HOMEPAGE = "https://github.com/jackmitch/libsoc"
 
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=e0bfebea12a718922225ba987b2126a5"
 
 inherit autotools pkgconfig python-dir
 
-SRCREV = "7fc953f980f4a51f0272ad691d3aa06b6aedbf16"
+SRCREV = "fd1ad6e7823fa76d8db0d3c5884faffa8ffddafb"
 SRC_URI = "git://github.com/jackmitch/libsoc.git"
 
 S = "${WORKDIR}/git"
