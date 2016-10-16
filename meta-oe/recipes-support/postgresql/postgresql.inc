@@ -40,6 +40,8 @@ export LDFLAGS_SL = "${LDFLAGS}"
 
 inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd
 
+CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR}"
+
 SYSTEMD_SERVICE_${PN} = "postgresql.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
@@ -109,12 +111,6 @@ python populate_packages_prepend() {
 }
 
 do_configure() {
-    # do_configure_prepend
-    # make sure configure finds python includdirs with these envs
-    export \
-           STAGING_INCDIR=${STAGING_INCDIR} \
-           STAGING_LIBDIR=${STAGING_LIBDIR}
-
     # do_configure
     autotools_do_configure
 
