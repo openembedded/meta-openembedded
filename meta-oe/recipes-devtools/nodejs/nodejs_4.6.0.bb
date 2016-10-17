@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
     file://no-registry.patch \
 "
-SRC_URI[md5sum] = "ac8e38c83f29e83d496d4bc4283487b0"
-SRC_URI[sha256sum] = "97b99d378c56802444208409568e2e66c46332897f06aead74d1ffbe733bd488"
+SRC_URI[md5sum] = "40f3613f679d252674e000013e75ed8a"
+SRC_URI[sha256sum] = "42910dbd34e49bfc40580e06753947c30d31101455a38e9f0343a23d67c0c694"
 
 S = "${WORKDIR}/node-v${PV}"
 
