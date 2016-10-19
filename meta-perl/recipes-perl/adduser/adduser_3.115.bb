@@ -7,7 +7,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef"
 
 SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.xz \
-           file://adduser-add-M-option-for-useradd-when-no-create-home.patch \
+           file://adduser-add-M-option-for-useradd.patch \
 "
 
 SRC_URI[md5sum] = "6bb6d93922d281f1b56393a53f8ce5fd"
