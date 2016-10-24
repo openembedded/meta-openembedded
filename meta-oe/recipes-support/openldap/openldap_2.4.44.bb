@@ -53,7 +53,7 @@ EXTRA_OECONF += "--with-yielding-select=yes"
 EXTRA_OECONF += "--enable-dynamic"
 
 PACKAGECONFIG ??= "gnutls modules \
-                   ldap meta monitor null passwd shell proxycache dnssrv \
+                   mdb ldap meta monitor null passwd shell proxycache dnssrv \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
 "
 #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
@@ -97,7 +97,7 @@ PACKAGECONFIG[hdb] = "--enable-hdb=yes,--enable-hdb=no,db"
 PACKAGECONFIG[ldap] = "--enable-ldap=mod,--enable-ldap=no,"
 
 #--enable-mdb          enable mdb database backend no|yes|mod [yes]
-PACKAGECONFIG[mdb] = "--enable-mdb=mod,--enable-mdb=no,"
+PACKAGECONFIG[mdb] = "--enable-mdb=yes,--enable-mdb=no,"
 
 #--enable-meta         enable metadirectory backend no|yes|mod no
 PACKAGECONFIG[meta] = "--enable-meta=mod,--enable-meta=no,"
