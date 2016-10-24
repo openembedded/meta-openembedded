@@ -69,4 +69,6 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
 FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
 FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
 
+RDEPENDS_${PN}-dev = ""
+
 BBCLASSEXTEND = "native"
