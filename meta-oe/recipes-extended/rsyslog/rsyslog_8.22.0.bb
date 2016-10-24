@@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
  encryption protected syslog relay chains while at the same time being\
  very easy to setup for the novice user."
 
-DEPENDS = "zlib libestr json-c bison-native flex-native liblogging"
+DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging"
 HOMEPAGE = "http://www.rsyslog.com/"
 LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
@@ -24,16 +24,10 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://use-pkgconfig-to-check-libgcrypt.patch \
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
-           file://json-0.12-fix.patch \
-           file://replace_deprecated_GnuTLS_functions.patch \
-           file://use_gnutls_certificate_type_set_priority_only_if_available.patch \
-           file://bugfix-include-config.h-before-any-other-headers.patch \
-           file://enable_tls_ptests.patch \
-           file://fix_build_with_musl.patch \
 "
 
-SRC_URI[md5sum] = "fa78a6e675fe78a811edcdf7eb6f1975"
-SRC_URI[sha256sum] = "fc29d2d9cbf3396091dd0bab2eb6f847aed4a44ef73138a97ddf9447446125ee"
+SRC_URI[md5sum] = "ad0f25f429aa2daa326732950a5eeb6c"
+SRC_URI[sha256sum] = "06e2884181333dccecceaca82827ae24ca7a258b4fbf7b1e07a80d4caae640ca"
 
 inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
 
@@ -41,15 +35,15 @@ EXTRA_OECONF += "--disable-generate-man-pages"
 
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
-    zlib rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
+    rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
     imdiag gnutls imfile \
     ${@bb.utils.contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench ${VALGRIND}', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench relp ${VALGRIND}', '', d)} \
 "
 
 # default yes in configure
-PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib,"
+PACKAGECONFIG[relp] = "--enable-relp,--disable-relp,librelp,"
 PACKAGECONFIG[rsyslogd] = "--enable-rsyslogd,--disable-rsyslogd,,"
 PACKAGECONFIG[rsyslogrt] = "--enable-rsyslogrt,--disable-rsyslogrt,,"
 PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,,"
@@ -70,7 +64,6 @@ PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
 PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
 PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
 PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
-PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
 PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
 
 TESTDIR = "tests"
@@ -98,7 +91,7 @@ do_install_ptest() {
     fi
 
     # install test-driver
-    install -m 644 ${S}/test-driver ${D}${PTEST_PATH}/${TESTDIR}
+    install -m 644 ${S}/test-driver ${D}${PTEST_PATH}
 
     # install necessary links
     install -d ${D}${PTEST_PATH}/tools
@@ -115,9 +108,8 @@ do_install_ptest() {
     )
 
     # fix the module load path with runtime/.libs
-    find ${D}${PTEST_PATH}/${TESTDIR} -name \*.conf -exec \
-        sed -i -e 's:../plugins/.*/.libs/:../runtime/.libs/:' \
-        '{}' \;
+    find ${D}${PTEST_PATH}/${TESTDIR} -name "*.conf" -o -name "*.sh" -o -name "*.c" | xargs \
+        sed -i -e 's:../plugins/.*/.libs/:../runtime/.libs/:g'
 }
 
 do_install_append() {
@@ -160,7 +152,7 @@ VALGRIND_mips64 = ""
 VALGRIND_mips64n32 = ""
 VALGRIND_arm = ""
 VALGRIND_aarch64 = ""
-RDEPENDS_${PN}-ptest += "make diffutils gzip"
+RDEPENDS_${PN}-ptest += "make diffutils gzip bash gawk coreutils procps"
 RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
 
 # no syslog-init for systemd
