@@ -21,7 +21,7 @@ PACKAGECONFIG[libidn] = "--with-libidn, --without-libidn, libidn"
 PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl, openssl"
 PACKAGECONFIG[zlib] = "--with-zlib=${STAGING_INCDIR}/.., --without-zlib, zlib"
 PACKAGECONFIG[gnutls] = "--with-gnutls, --without-gnutls, gnutls"
-PACKAGECONFIG[readline] = "--with-readline --with-readline-inc=${STAGING_INCDIR} --with-readline-lib=-lreadline, , readline"
+PACKAGECONFIG[readline] = "--with-readline=${STAGING_INCDIR}/.. --with-readline-inc=${STAGING_INCDIR} --with-readline-lib=-lreadline, --with-readline=no, readline"
 PACKAGECONFIG[expat] = "--with-expat=${STAGING_INCDIR}/.. --with-expat-inc=${STAGING_INCDIR} --with-expat-lib=-lexpat, , expat"
 
 FILES_${PN}-dbg += "${libdir}/lftp/${PV}/.debug"
