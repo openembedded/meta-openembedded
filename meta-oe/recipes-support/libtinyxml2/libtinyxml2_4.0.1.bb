@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://tinyxml2.cpp;endline=22;md5=c19221dbd8a66ad3090462af4
 
 SRC_URI = "git://github.com/leethomason/tinyxml2.git"
 
-SRCREV = "1977a7258cc66fd4da7f1e9da05a4933646a7803"
+SRCREV = "74d44acb176f8510abf28ee0a70961eb26631988"
 
 S = "${WORKDIR}/git"
 
