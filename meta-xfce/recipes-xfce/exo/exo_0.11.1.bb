@@ -14,6 +14,7 @@ REQUIRED_DISTRO_FEATURES_class-native = ""
 SRC_URI += " \
     file://exo-no-tests-0.8.patch \
     file://configure.patch \
+    file://0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch \
 "
 
 SRC_URI_append_class-native = " \
