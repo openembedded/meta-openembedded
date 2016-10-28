@@ -2,8 +2,8 @@ SUMMARY = "MessagePack (de)serializer"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
 
-SRC_URI[md5sum] = "eb2aad1081534ef3a9f32a0ecd350b9b"
-SRC_URI[sha256sum] = "5e001229a54180a02dcdd59db23c9978351af55b1290c27bc549e381f43acd6b"
+SRC_URI[md5sum] = "dcd854fb41ee7584ebbf35e049e6be98"
+SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc28955799f886"
 
 PYPI_PACKAGE = "msgpack-python"
 inherit pypi setuptools
