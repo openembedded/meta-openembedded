@@ -6,12 +6,11 @@ DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ gtk+3 dbus cairo virtu
 
 inherit xfce gtk-doc
 
-SRC_URI[md5sum] = "5a333af704e386c90ad829b6baf1a758"
-SRC_URI[sha256sum] = "30920fc2e2fc26279a82b5261a155c2cc15ab2aa1ced2275684a6ff8261b97b0"
+SRC_URI[md5sum] = "0b943f2e72a3693dddb1af559826cb62"
+SRC_URI[sha256sum] = "93d58b80cca9c9eb58adb281bc75404df7cf6cae89f7f98bb9f38690009aa2e8"
 SRC_URI += " \
-    file://0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch \
-    file://0002-clock-time-make-change-of-system-s-timezone-change-t.patch \
-    file://0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
+    file://0001-clock-time-make-change-of-system-s-timezone-change-t.patch \
+    file://0002-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
 "
 
 EXTRA_OECONF += "--enable-gtk3"
