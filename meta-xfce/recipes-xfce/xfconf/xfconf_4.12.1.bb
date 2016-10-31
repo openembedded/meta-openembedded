@@ -8,8 +8,8 @@ inherit xfce gtk-doc
 
 EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
 
-SRC_URI[md5sum] = "8ebfac507b4d6ce3f4bac9d257c2853b"
-SRC_URI[sha256sum] = "9910eaea8405336415d4d7f3056403f8c67bc23ba0dce251eac35205c603b156"
+SRC_URI[md5sum] = "20dc8d2bfd80ba136bf4964021b32757"
+SRC_URI[sha256sum] = "35f48564e5694faa54fdc180cd3268e16fc2352946a89a3c2fc12cbe400ada36"
 
 FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
                 ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
