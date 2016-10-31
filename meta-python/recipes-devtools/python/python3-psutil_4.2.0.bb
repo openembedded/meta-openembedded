@@ -1,6 +1,6 @@
-inherit pypi setuptools
+inherit pypi setuptools3
 require python-psutil.inc
 
 RDEPENDS_${PN} += " \
-    python-subprocess \
+    python3-subprocess \
 "
