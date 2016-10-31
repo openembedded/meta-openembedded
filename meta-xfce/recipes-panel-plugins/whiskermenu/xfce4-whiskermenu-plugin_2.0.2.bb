@@ -7,3 +7,5 @@ inherit xfce-panel-plugin cmake
 
 SRC_URI[md5sum] = "abaae8068fdcca9e72a41f4a6d28c685"
 SRC_URI[sha256sum] = "c8ba09b3cc0b2ec863af310752a9ca69560fc4c27cbd3174a9dceca1af79e412"
+
+RRECOMMENDS_${PN} += "menulibre"
