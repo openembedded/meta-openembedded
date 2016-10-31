@@ -27,4 +27,4 @@ do_configure() {
     oe_runconf
 }
 
-FILES_${PN} += "${libdir}/X11"
+FILES_${PN} += "/usr/lib/X11"
