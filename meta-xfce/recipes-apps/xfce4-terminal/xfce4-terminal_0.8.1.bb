@@ -1,13 +1,12 @@
 SUMMARY = "Terminal emulator for the Xfce desktop environment"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "glib-2.0 gtk+ vte9 libxfce4ui"
-RDEPENDS_${PN} += "vte9-termcap"
+DEPENDS = "glib-2.0 gtk+3 vte libxfce4ui"
 
 inherit xfce-app
 
 FILES_${PN} += "${datadir}/xfce4 \
                 ${datadir}/gnome-control-center"
 
-SRC_URI[md5sum] = "6a2816d8b0933cd707ed456ceb731399"
-SRC_URI[sha256sum] = "912f4716c2395a14a80620ef982b4af1e2a67a8df9a1ef0b802ecae826057e08"
+SRC_URI[md5sum] = "46d347c0ecbb74a7878d48833042371d"
+SRC_URI[sha256sum] = "ddfe53a89d315a4a9170ca6d2cee2d33145bd63630062b2e867fb3a5fcde5fdf"
