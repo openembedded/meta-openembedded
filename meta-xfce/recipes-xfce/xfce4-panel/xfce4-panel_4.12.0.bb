@@ -11,6 +11,7 @@ SRC_URI[sha256sum] = "30920fc2e2fc26279a82b5261a155c2cc15ab2aa1ced2275684a6ff826
 SRC_URI += " \
     file://0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch \
     file://0002-clock-time-make-change-of-system-s-timezone-change-t.patch \
+    file://0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
 "
 
 EXTRA_OECONF += "--enable-gtk3"
