@@ -1,0 +1,35 @@
+From 191cf3f084b4d34846711034a7fe3078f8243c82 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Nov 2016 12:39:20 -0700
+Subject: [PATCH 4/4] Disable DVD support
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ Makefile.in | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 58b3a17..b7c3fce 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -10,8 +10,7 @@ EC_DIRS= \
+ 	tools/EventClients
+ 
+ DVDPCODECS_DIRS= \
+-	lib \
+-	lib/libdvd
++	lib
+ 
+ VideoPlayer_ARCHIVES=xbmc/cores/VideoPlayer/VideoPlayer.a \
+                    xbmc/cores/VideoPlayer/DVDCodecs/DVDCodecs.a \
+@@ -343,7 +342,6 @@ libaddon: exports
+ 	$(MAKE) -C lib/addons/library.xbmc.pvr
+ 	$(MAKE) -C lib/addons/library.kodi.inputstream
+ dvdpcodecs: dllloader
+-	$(MAKE) -C lib/libdvd
+ 
+ dvdpextcodecs:
+ 
+-- 
+2.10.1
+

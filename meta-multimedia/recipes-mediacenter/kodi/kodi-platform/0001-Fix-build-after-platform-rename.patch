@@ -1,0 +1,67 @@
+From 7cf366faa7a24c7146c745c8cd8dc3ae3d1cabea Mon Sep 17 00:00:00 2001
+From: Garrett Brown <themagnificentmrb@gmail.com>
+Date: Thu, 7 Jan 2016 15:55:22 -0800
+Subject: [PATCH] Fix build after platform rename
+
+update source code to use renamed platform pkg
+---
+ CMakeLists.txt      | 6 +++---
+ debian/control      | 2 +-
+ src/util/XMLUtils.h | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2ce8c0d..bf6b659 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,7 +8,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
+ find_package(kodi REQUIRED)
+ find_package(TinyXML REQUIRED)
+ find_package(Threads REQUIRED)
+-find_package(platform REQUIRED)
++find_package(p8-platform REQUIRED)
+ include(UseMultiArch.cmake)
+ include(CheckAtomic.cmake)
+ 
+@@ -36,10 +36,10 @@ endif()
+ 
+ set(SOURCES src/util/XMLUtils.cpp)
+ 
+-include_directories(${TINYXML_INCLUDE_DIR} ${KODI_INCLUDE_DIR} ${platform_INCLUDE_DIRS})
++include_directories(${TINYXML_INCLUDE_DIR} ${KODI_INCLUDE_DIR} ${p8-platform_INCLUDE_DIRS})
+ 
+ add_library(kodiplatform ${SOURCES} ${PLAT_SOURCES})
+-target_link_libraries(kodiplatform ${kodiplatform_LIBRARIES} ${platform_LIBRARIES})
++target_link_libraries(kodiplatform ${kodiplatform_LIBRARIES} ${p8-platform_LIBRARIES})
+ set_target_properties(kodiplatform PROPERTIES VERSION ${kodiplatform_VERSION_MAJOR}.${kodiplatform_VERSION_MINOR}.${kodiplatform_VERSION_PATCH}
+                                               SOVERSION ${kodiplatform_VERSION_MAJOR}.0)
+ 
+diff --git a/debian/control b/debian/control
+index 42cadb2..e40c982 100644
+--- a/debian/control
++++ b/debian/control
+@@ -1,7 +1,7 @@
+ Source: kodiplatform
+ Priority: extra
+ Maintainer: Arne Morten Kvarving <arne.morten.kvarving@sintef.no>
+-Build-Depends: debhelper (>= 8.0.0), cmake, libtinyxml-dev, kodi-addon-dev, libplatform-dev
++Build-Depends: debhelper (>= 8.0.0), cmake, libtinyxml-dev, kodi-addon-dev, libp8-platform-dev
+ Standards-Version: 3.9.2
+ Section: libs
+ 
+diff --git a/src/util/XMLUtils.h b/src/util/XMLUtils.h
+index f22fd07..a10d831 100644
+--- a/src/util/XMLUtils.h
++++ b/src/util/XMLUtils.h
+@@ -21,7 +21,7 @@
+  *
+  */
+ 
+-#include <platform/util/StdString.h>
++#include <p8-platform/util/StdString.h>
+ #include "tinyxml.h"
+ 
+ class XMLUtils
+-- 
+2.0.1
+
