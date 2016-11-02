@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "1ac3b6eafa5ff7e2a0796675316d7569b28aada45a7ab74042ad089d15
 SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch "
 
 PYPI_PACKAGE = "M2Crypto"
-inherit pypi setuptools
+inherit pypi setuptools siteinfo
 
 DEPENDS += "openssl swig-native"
 
