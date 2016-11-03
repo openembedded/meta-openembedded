@@ -63,13 +63,14 @@ DEPENDS = " \
 
 PROVIDES = "xbmc"
 
-SRCREV = "32c7788e7cce711be5b7f3893c82dddd79658268"
+SRCREV = "7f6abd1dd6d1aefcb4303083f34aaa90a8df9fce"
 PV = "17.0+gitr${SRCPV}"
 SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
            file://0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
            file://0002-handle-SIGTERM.patch \
            file://0003-add-support-to-read-frequency-output-if-using-intel-.patch \
            file://0004-Disable-DVD-support.patch \
+           file://0005-Always-compile-libcpluff-as-PIC.patch \
 "
 
 inherit autotools-brokensep gettext pythonnative
