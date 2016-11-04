@@ -44,3 +44,4 @@ do_install_append() {
 }
 
 SYSTEMD_SERVICE_${PN} = "edac.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
