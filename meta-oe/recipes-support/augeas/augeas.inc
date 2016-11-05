@@ -28,3 +28,6 @@ LEAD_SONAME = "libaugeas.so"
 do_install_append() {
     rm -fr ${D}${datadir}/vim
 }
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[libselinux] = "--with-selinux,--without-selinux,libselinux"
