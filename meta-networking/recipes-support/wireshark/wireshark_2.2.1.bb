@@ -4,7 +4,7 @@ SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
 
-DEPENDS = "pcre expat glib-2.0 sbc"
+DEPENDS = "pcre expat glib-2.0"
 
 SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
@@ -16,8 +16,7 @@ inherit autotools pkgconfig perlnative
 
 ARM_INSTRUCTION_SET = "arm"
 
-
-PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
+PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
 PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
 #PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3", "", d)}"
 
@@ -37,13 +36,35 @@ PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
 PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
 PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
 PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
+PACKAGECONFIG[sbc] = "--with-sbc=yes, --with-sbc=no, sbc"
+
+PACKAGECONFIG[libssh] = "--with-ssh=yes, --with-ssh=no, libssh2"
+
 
 # these next two options require addional layers
 PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
 
 EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
 
-ALLOW_EMPTY_${PN} = "1"
-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+# Currently wireshark does not install header files
+do_install_append () {
+
+	install -d ${D}/${includedir}/${BPN}
+	install -d ${D}/${includedir}/${BPN}/epan
+	install -d ${D}/${includedir}/${BPN}/epan/crypt
+	install -d ${D}/${includedir}/${BPN}/epan/dfilter
+	install -d ${D}/${includedir}/${BPN}/epan/dissectors
+	install -d ${D}/${includedir}/${BPN}/epan/ftypes
+	install -d ${D}/${includedir}/${BPN}/epan/wmem
+
+	install config.h ${D}/${includedir}/${BPN}
+	install ${S}/register.h ${D}/${includedir}/${BPN}
+	install -D ${S}/epan/*.h ${D}/${includedir}/${BPN}/epan
+	install -D ${S}/epan/crypt/*.h ${D}/${includedir}/${BPN}/epan/crypt
+	install -D ${S}/epan/dfilter/*.h ${D}/${includedir}/${BPN}/epan/dfilter
+	install -D ${S}/epan/dissectors/*.h ${D}/${includedir}/${BPN}/epan/dissectors
+	install -D ${S}/epan/ftypes/*.h ${D}/${includedir}/${BPN}/epan/ftypes
+	install -D ${S}/epan/wmem/*.h ${D}/${includedir}/${BPN}/epan/wmem
+}
 
 FILES_${PN} += "${datadir}*"
