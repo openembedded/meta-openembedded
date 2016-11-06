@@ -5,7 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit xfce-panel-plugin
 
-SRC_URI += "file://fix-build-on-aarch64.patch"
-
-SRC_URI[md5sum] = "ca2d394e411a20442a519efa0d14f8ec"
-SRC_URI[sha256sum] = "f659b1af40ab72c93448affaa693ab551827a5600ce9b97a799b7c2419bdeb11"
+SRC_URI[md5sum] = "f78d8d0cc13d40753a207a836869b953"
+SRC_URI[sha256sum] = "8c9deec8d95da4cc39d6d9091433e5822b6bbe07d80117045dd4dd3480427ece"
