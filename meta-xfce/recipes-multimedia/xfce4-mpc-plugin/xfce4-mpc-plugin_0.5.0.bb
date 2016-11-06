@@ -11,5 +11,5 @@ DEPENDS += "libmpd"
 # for now we recommend our own mpd-server
 RRECOMMENDS_${PN} = "mpd"
 
-SRC_URI[md5sum] = "718e64748e46908a44cd0b96eacbda28"
-SRC_URI[sha256sum] = "e71f57a28915c57459d6ce0eeeee1d0934f523c0ed083158c3d3b3836fc06fcf"
+SRC_URI[md5sum] = "13d5d95ef0c305bac45fde6231258e5d"
+SRC_URI[sha256sum] = "f1320916ae3112e6825699652a502cebfa78bb006c649b42d3d331dfe57b6cb0"
