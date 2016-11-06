@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 inherit autotools pkgconfig gtk-icon-cache
 
 SRC_URI = " \
-    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.bz2 \
+    ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
     file://org.yoctoproject.pkexec.run-gparted.policy \
     file://gparted_polkit \
 "
-SRC_URI[md5sum] = "b8480274c68876acff5965d4346710e7"
-SRC_URI[sha256sum] = "02398ab33894a59b0bd8707e598c46d8bb56f1413cd54de48eed61e2920ecd60"
+SRC_URI[md5sum] = "726f539f774b442670028af656f270bd"
+SRC_URI[sha256sum] = "208cf60c061b86bee4f658d568a3b5d843dce3ab9847f66b452298268799e7bd"
 
 DEPENDS = "glib-2.0 gtkmm parted gnome-doc-utils intltool-native"
 
