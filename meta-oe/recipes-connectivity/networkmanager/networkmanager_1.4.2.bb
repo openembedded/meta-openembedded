@@ -4,22 +4,32 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
                     file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
-                    file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b \
+                    file://docs/api/html/license.html;md5=6baf214193dfc5d10b297b41fc2d22c9 \
 "
 
-DEPENDS = "intltool-native libnl dbus dbus-glib dbus-glib-native libgudev util-linux libndp libnewt polkit"
+DEPENDS = " \
+    intltool-native \
+    libnl \
+    dbus \
+    dbus-glib \
+    dbus-glib-native \
+    libgudev \
+    util-linux \
+    libndp \
+    libnewt \
+    polkit \
+    jansson \
+"
 
 inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
-    file://0002-add-pkg-config-for-libgcrypt.patch \
-    file://0006-Fix-nm-version-macro-includes.patch \
-    file://0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch \
+    file://0002-Fix-nm-version-macro-includes.patch \
 "
-SRC_URI[md5sum] = "ebb273456a81ccf9dfaf2461061b0e96"
-SRC_URI[sha256sum] = "3a470f8c60109b1acb5784ddc2423501706b5fe34c793a6faee87e591eb04a9e"
+SRC_URI[md5sum] = "59b5b5585467756787c6cb535cbd306e"
+SRC_URI[sha256sum] = "a864e347ddf6da8dabd40e0185b8c10a655d4a94b45cbaa2b3bb4b5e8360d204"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
@@ -57,7 +67,7 @@ PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp,ppp"
 PACKAGECONFIG[dhclient] = "--with-dhclient=${base_sbindir}/dhclient,,,dhcp-client"
 PACKAGECONFIG[dnsmasq] = "--with-dnsmasq=${bindir}/dnsmasq"
 PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
-PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls libgcrypt"
+PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls"
 PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,wireless-tools,wpa-supplicant wireless-tools"
 PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
 PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
@@ -88,11 +98,6 @@ RRECOMMENDS_${PN} += "iptables \
     ${@bb.utils.contains('PACKAGECONFIG','dnsmasq','dnsmasq','',d)} \
 "
 RCONFLICTS_${PN} = "connman"
-
-FILES_${PN}-dbg += " \
-    ${libdir}/NetworkManager/.debug/ \
-    ${libdir}/pppd/*/.debug/ \
-"
 
 FILES_${PN}-dev += " \
     ${datadir}/NetworkManager/gdb-cmd \
