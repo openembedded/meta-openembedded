@@ -11,11 +11,10 @@ inherit gnomebase gsettings gtk-icon-cache gobject-introspection
 
 GNOME_COMPRESS_TYPE = "xz"
 
-SRC_URI[archive.md5sum] = "86b17e1bf1a37c649874883b587c6db6"
-SRC_URI[archive.sha256sum] = "b045ac3eaa68ccbbefe91510ad67b4002a7e09d1e5ce1c4bf9a67619bd2cf0eb"
+SRC_URI[archive.md5sum] = "35684ee788d8d1d6f913c63bb0ada0cf"
+SRC_URI[archive.sha256sum] = "431b7b4876638c6a537c8bf9c91a9250532b3d960b22b056df554695a81e4499"
 
-PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth,gnome-bluetooth"
-PACKAGECONFIG[modemmanager] = "--with-modem-manager-1,--without-modem-manager-1,modemmanager"
+PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
 PACKAGECONFIG ??= ""
 
 do_configure_append() {
@@ -31,9 +30,5 @@ FILES_${PN} += " \
     ${datadir}/appdata \
     ${datadir}/nm-applet/ \
     ${datadir}/libnm-gtk/wifi.ui \
+    ${datadir}/libnma/wifi.ui \
 "
-
-FILES_${PN} += "${libdir}/gnome-bluetooth/plugins/*.so"
-FILES_${PN}-dev += "${libdir}/gnome-bluetooth/plugins/libnma.la"
-FILES_${PN}-staticdev += "${libdir}/gnome-bluetooth/plugins/libnma.a"
-FILES_${PN}-dbg += "${libdir}/gnome-bluetooth/plugins/.debug/"
