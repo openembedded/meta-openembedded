@@ -9,5 +9,5 @@ RRECOMMENDS_${PN} = "mpd"
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "e4e198850c2467c47783969ac9c16ec0"
-SRC_URI[sha256sum] = "ed0cc2940bd5928bb30fab1531c22185a97bd0cc5beacd9e3be4d4cd994a6862"
+SRC_URI[md5sum] = "e2d2faeb7a6f62813e287f3d12522b71"
+SRC_URI[sha256sum] = "4189c0c82b66b758a6d5bc651493b675d3d46329e5f1a76ff26c448125f4fcb0"
