@@ -71,6 +71,12 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
            file://0003-add-support-to-read-frequency-output-if-using-intel-.patch \
            file://0004-Disable-DVD-support.patch \
            file://0005-Always-compile-libcpluff-as-PIC.patch \
+           file://0006-build-Add-support-for-musl-triplets.patch \
+"
+
+SRC_URI_append_libc-musl = " \
+           file://0007-Remove-FILEWRAP.patch \
+           file://0008-Fix-file_Emu-on-musl.patch \
 "
 
 inherit autotools-brokensep gettext pythonnative
