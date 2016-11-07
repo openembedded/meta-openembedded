@@ -20,6 +20,10 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0006-avoid-using-colon-in-the-checking-msg.patch \
            file://volatiles.03_samba \
           "
+SRC_URI_append_libc-musl = " \
+           file://samba-4.2.7-pam.patch \
+           file://samba-4.3.9-remove-getpwent_r.patch \
+          "
 
 SRC_URI[md5sum] = "6950c5e9f7bdeb8a610c2ca957a15be4"
 SRC_URI[sha256sum] = "b876ef2e63f66265490e80a122e66ef2d7616112b839df68f56ac2e1ce17a7bd"
@@ -29,6 +33,9 @@ inherit systemd waf-samba cpan-base perlnative update-rc.d
 RDEPENDS_${PN}_remove = "perl"
 
 DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 libbsd libaio libpam"
+DEPENDS_append_libc-musl = " libtirpc"
+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+LDFLAGS_append_libc-musl = " -ltirpc"
 
 SYSVINITTYPE_linuxstdbase = "lsb"
 SYSVINITTYPE = "sysv"
