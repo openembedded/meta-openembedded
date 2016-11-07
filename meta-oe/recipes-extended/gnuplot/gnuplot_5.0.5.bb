@@ -8,7 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=archive \
     file://gnuplot.png \
 "
 
-SRC_URI[archive.md5sum] = "9a476b21f74bd99c876f1509d731a0f9"
-SRC_URI[archive.sha256sum] = "e550f030c7d04570e89c3d4e3f6e82296816508419c86ab46c4dd73156519a2d"
+SRC_URI[archive.md5sum] = "c5e96fca73afbee4f57cbc1bfce6b3b8"
+SRC_URI[archive.sha256sum] = "25f3e0bf192e01115c580f278c3725d7a569eb848786e12b455a3fda70312053"
 SRC_URI[qtplot.md5sum] = "0a481885a496092c77eb4017540b5cf6"
 SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
