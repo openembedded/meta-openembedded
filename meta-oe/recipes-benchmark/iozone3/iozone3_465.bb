@@ -3,13 +3,14 @@ HOMEPAGE = "http://www.iozone.org/"
 AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.oracle.com>"
 SECTION = "console/tests"
 LICENSE = "iozone3"
-LIC_FILES_CHKSUM = "file://iozone.c;beginline=268;endline=272;md5=ab42a6185fd0443978871f11a007ac0b"
-
+LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
+    file://iozone.c;beginline=260;endline=266;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
+"
 SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
     file://copyright.txt \
 "
-SRC_URI[md5sum] = "3e8f4213581407225065b91774e970ed"
-SRC_URI[sha256sum] = "2c388d9db393a5505b31eca38951883744c69745f687f3c7df5185b4681d462a"
+SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
+SRC_URI[sha256sum] = "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41d811368e55bd4e6a293"
 
 S = "${WORKDIR}/${BPN}_${PV}/src/current/"
 
