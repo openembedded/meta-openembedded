@@ -21,4 +21,4 @@ do_configure_prepend() {
     install -m 0644 ${WORKDIR}/setup.py ${S}
 }
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
