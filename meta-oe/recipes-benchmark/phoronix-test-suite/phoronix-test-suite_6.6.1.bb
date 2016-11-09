@@ -6,8 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SECTION = "console/tests"
 
 SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
-SRC_URI[md5sum] = "c3b26fcc57a3a253e558f759fdc1089f"
-SRC_URI[sha256sum] = "27add54f4ecb464549de580cece84b4a4945b99df3ef7ff7034eb7f23ffb3b39"
+SRC_URI[md5sum] = "5bcac5896a4a34fc6ae4ae94991e1637"
+SRC_URI[sha256sum] = "631ceb808d8bd6cebe69c8b711d55090d6880e906a65837f18fa8200fe7d2c4d"
+
 S = "${WORKDIR}/phoronix-test-suite"
 
 inherit systemd allarch
