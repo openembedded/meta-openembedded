@@ -1,13 +1,16 @@
 DESCRIPTION = "Library containing NEON-optimized implementations for a common set of functions"
 HOMEPAGE = "http://projectne10.github.io/Ne10/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=463ac0a7d64edc2b787c4206635ca2b1"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e7fe20c9be97be5579e3ab5d92d3a218"
 SECTION = "libs"
 
-SRC_URI = "git://github.com/projectNe10/Ne10.git"
-SRCREV = "a08b29d88e3c94d32b5b8f827e7fcf0bc2b34ac2"
+SRC_URI = "git://github.com/projectNe10/Ne10.git \
+           file://0001-CMakeLists.txt-Remove-mthumb-interwork.patch \
+"
+SRCREV = "18c4c982a595dad069cd8df4932aefb1d257591f"
 
 S = "${WORKDIR}/git"
+PV .= "gitr+${SRCPV}"
 
 inherit cmake
 
