@@ -9,13 +9,16 @@ DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native"
 inherit gnomebase useradd gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
-
-SRC_URI[md5sum] = "758a9951ad5e20a37c72cc7326c9c750"
-SRC_URI[sha256sum] = "1b979519d72ba4d78e729d4856c5b53fad914ca7ee3ca91209ce489ba78912ac"
+SRC_URI[md5sum] = "47ed9b6c43ca364976a15e84207687df"
+SRC_URI[sha256sum] = "2373e2bb0a8a876cb2997cd8b0e3d6e10012d9bef3705ea3ac21f6394b3f1fb0"
 
 S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
 
 PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome"
+
+do_install_append () {
+    rm -rf ${D}${libdir}/NetworkManager/*.la
+}
 
 # Create user and group nm-openvpn that are needed since version 1.0.6
 USERADD_PACKAGES = "${PN}"
@@ -23,6 +26,7 @@ USERADD_PARAM_${PN} = "--system nm-openvpn"
 
 FILES_${PN} += " \
     ${libdir}/NetworkManager/*.so \
+    ${libdir}/NetworkManager/VPN/nm-openvpn-service.name \
 "
 
 RDEPENDS_${PN} = " \
