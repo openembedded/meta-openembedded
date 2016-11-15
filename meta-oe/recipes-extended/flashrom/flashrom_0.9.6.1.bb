@@ -9,6 +9,7 @@ SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
            file://0001-Fix-compilation-on-aarch64.patch \
            file://0002-Disable-Wtautological-pointer-compare-when-using-cla.patch \
            file://0003-remove-duplicate-const-qualifiers.patch \
+           file://0001-ichspi.c-Fix-build-with-clang.patch \
            "
 
 SRC_URI[md5sum] = "407e836c0a2b17ec76583cb6809f65e5"
