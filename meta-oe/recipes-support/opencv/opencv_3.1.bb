@@ -138,7 +138,7 @@ do_install_append() {
     sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
 
     # Move Python files into correct library folder (for multilib build)
-    if [ "$libdir" != "/usr/lib" ]; then
+    if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
         mv ${D}/usr/lib/* ${D}/${libdir}/
         rm -rf ${D}/usr/lib
     fi
