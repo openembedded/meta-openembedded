@@ -1,7 +1,7 @@
-From 72866782f83c8cf85b10017df461128af90cae6e Mon Sep 17 00:00:00 2001
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Date: Tue, 30 Aug 2016 22:33:47 -0400
-Subject: [PATCH] tweak MODPROBE_CMD for cross compile
+From 0012ea63f6070a5d41fa380970f9c30b953237d2 Mon Sep 17 00:00:00 2001
+From: Dengke Du <dengke.du@windriver.com>
+Date: Tue, 25 Oct 2016 11:59:40 +0000
+Subject: [PATCH 4/4] tweak MODPROBE_CMD for cross compile
 
 Lvm uses variable MODPROBE_CMD at runtime, so build time detection of modprobe
 is incorrect.
@@ -16,23 +16,23 @@ filter=["r|/loop1$|","r|/loop2$|","r|/loop3$|","r|/loop4$|","r|/loop5$|","r|/loo
 Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- configure.in | 2 --
- 1 file changed, 2 deletions(-)
+ configure.in | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/configure.in b/configure.in
-index 8e04782..77681b0 100644
+index cc77aab..a3579f2 100644
 --- a/configure.in
 +++ b/configure.in
-@@ -1779,8 +1779,6 @@ if test "$UDEV_SYNC" = yes; then
+@@ -1853,7 +1853,6 @@ if test "$UDEV_SYNC" = yes; then
  fi
  
  ################################################################################
 -AC_PATH_TOOL(MODPROBE_CMD, modprobe)
--
+ 
  if test -n "$MODPROBE_CMD"; then
  	AC_DEFINE_UNQUOTED([MODPROBE_CMD], ["$MODPROBE_CMD"], [The path to 'modprobe', if available.])
- fi
 -- 
-2.8.1
+2.9.3
 

@@ -2,18 +2,16 @@ SECTION = "utils"
 DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
 DEPENDS = "udev"
 LICENSE = "GPLv2 & LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
 
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://lvm.conf \
-           file://0001-implement-libc-specific-_reopen_stream.patch \
-           file://0002-use-PTHREAD_MUTEX_RECURSIVE-instead-of-PTHREAD_MUTEX.patch \
-           file://0003-Guard-use-of-mallinfo-with-__GLIBC__.patch \
-           file://0004-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
-           file://0005-tweak-MODPROBE_CMD-for-cross-compile.patch \
+           file://0001-implement-libc-specific-reopen_stream.patch \
+           file://0002-Guard-use-of-mallinfo-with-__GLIBC__.patch \
+           file://0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
+           file://0004-tweak-MODPROBE_CMD-for-cross-compile.patch \
            "
-
 S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd
