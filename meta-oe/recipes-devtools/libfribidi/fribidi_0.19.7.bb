@@ -10,6 +10,7 @@ DEPENDS = "glib-2.0 libpcre"
 inherit autotools lib_package pkgconfig
 
 CFLAGS_append = "  -DPAGE_SIZE=4096 "
+SECURITY_CFLAGS_remove_toolchain-clang = "-D_FORTIFY_SOURCE=2"
 
 SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.bz2"
 
