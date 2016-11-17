@@ -50,7 +50,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVIN
 "
 
 RDEPENDS_${PN}-base += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
-RDEPENDS_${PN}-ctdb-tests += "bash"
+RDEPENDS_${PN}-ctdb-tests += "bash util-linux-getopt"
 
 PACKAGECONFIG[acl] = "--with-acl-support,--without-acl-support,acl"
 PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
@@ -129,6 +129,19 @@ do_install_append() {
     install -d ${D}${sysconfdir}/sysconfig/
     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
 
+    # install ctdb config file and test cases
+    install -D -m 0644 ${S}/ctdb/tests/onnode/nodes ${D}${sysconfdir}/ctdb/nodes
+    # the items are from ctdb/tests/run_tests.sh
+    for d in onnode takeover tool eventscripts cunit simple complex; do
+        testdir=${D}${datadir}/ctdb-tests/$d
+        install -d $testdir
+        cp ${S}/ctdb/tests/$d/*.sh $testdir
+        cp -r ${S}/ctdb/tests/$d/scripts ${S}/ctdb/tests/$d/stubs $testdir || true
+    done
+
+    # fix file-rdeps qa warning
+    sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
+
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
 }
 
@@ -147,6 +160,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
 "
 
 FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
+                          ${bindir}/ctdb_run_cluster_tests \
+                          ${sysconfdir}/ctdb/nodes \
                           ${libdir}/ctdb-tests \
                           ${datadir}/ctdb-tests \
                           /run/ctdb \
