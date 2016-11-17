@@ -2,8 +2,8 @@ SUMMARY = "Interface definitions for Zope products"
 LICENSE = "ZPL-2.1"
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
 
-SRC_URI[md5sum] = "2950a6db7e985e19c7a846cc20f5d82a"
-SRC_URI[sha256sum] = "36762743940a075283e1fb22a2ec9e8231871dace2aa00599511ddc4edf0f8f9"
+SRC_URI[md5sum] = "5f7e15a5bcdfa3c6c0e93ffe45caf87c"
+SRC_URI[sha256sum] = "6a0e224a052e3ce27b3a7b1300a24747513f7a507217fcc2a4cb02eb92945cee"
 
 PYPI_PACKAGE = "zope.interface"
 inherit pypi setuptools
