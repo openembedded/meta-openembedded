@@ -40,6 +40,8 @@ EXTRA_OECONF += "--without-cp \
                  --without-logger \
                  --without-rsync \
                  ac_cv_path_PERL=${bindir}/perl \
+                 ac_cv_path_MOUNT=${base_bindir}/mount \
+                 ac_cv_path_UMOUNT=${base_bindir}/umount \
                 "
 
 # Create 't/include.ac' before starting the autoreconf to fix configure
