@@ -108,7 +108,7 @@ do_compile() {
 }
 
 do_install() {
-    if [ grep -q "ext4_utils" "${TOOLS}" ] ; then
+    if echo ${TOOLS} | grep -q "ext4_utils" ; then
         install -D -p -m0755 ${S}/system/core/libsparse/simg_dump.py ${D}${bindir}/simg_dump
         install -D -p -m0755 ${S}/system/extras/ext4_utils/mkuserimg.sh ${D}${bindir}/mkuserimg
 
@@ -120,22 +120,28 @@ do_install() {
         install -m0755 ${B}/ext4_utils/simg2simg ${D}${bindir}
     fi
 
-    if [ grep -q "adb " "${TOOLS}" ] ; then
-        install -m0755 ${B}/adb/adb ${D}${bindir}i
+    if echo ${TOOLS} | grep -q "adb " ; then
+        install -d ${D}${bindir}
+        install -m0755 ${B}/adb/adb ${D}${bindir}
     fi
 
-    if [ grep -q "adbd" "${TOOLS}" ] ; then
+    if echo ${TOOLS} | grep -q "adbd" ; then
+        install -d ${D}${bindir}
         install -m0755 ${B}/adbd/adbd ${D}${bindir}
-        install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
-          ${D}${systemd_unitdir}/system/android-tools-adbd.service
     fi
 
-    if [ grep -q "fastboot" "${TOOLS}" ] ; then
+    # Outside the if statement to avoid errors during do_package
+    install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
+      ${D}${systemd_unitdir}/system/android-tools-adbd.service
+
+    if echo ${TOOLS} | grep -q "fastboot" ; then
+        install -d ${D}${bindir}
         install -m0755 ${B}/fastboot/fastboot ${D}${bindir}
     fi
 
-    if [ grep -q "mkbootimg" "${TOOLS}" ] ; then
-         install -m0755 ${B}/mkbootimg/mkbootimg ${D}${bindir}
+    if echo ${TOOLS} | grep -q "mkbootimg" ; then
+        install -d ${D}${bindir}
+        install -m0755 ${B}/mkbootimg/mkbootimg ${D}${bindir}
     fi
 }
 
