@@ -7,6 +7,7 @@ SECTION = "System Environment/Base"
 
 SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; \
     file://mcelog-debash.patch \
+    file://0001-Add-Kabylake-client-support.patch \
     file://run-ptest \
 "
 
