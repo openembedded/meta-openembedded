@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "\
     ${PYTHON_PN}-stringold \
 "
 
-SRC_URI[md5sum] = "2f72100de3e410b36d575e12e82e9d27"
-SRC_URI[sha256sum] = "d657051249ce3cbd0446bcfb2be07a435e1029da4d63f53ed9b4cdde7373364c"
+SRC_URI[md5sum] = "7142a421c8b35d2dac6c47c254db023d"
+SRC_URI[sha256sum] = "1eecfe4022240f2eab5af8d414f0504e072ee68377ba63d3b6fe6e66c26f66d1"
 
 inherit pypi
 
