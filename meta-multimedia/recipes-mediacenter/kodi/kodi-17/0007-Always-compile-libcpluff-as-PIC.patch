@@ -1,7 +1,7 @@
-From 603e8925a8b1609d483d866346a35fefbc66cfca Mon Sep 17 00:00:00 2001
+From d989cbdb7686c3b95dc749967f89b93e47f955a6 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 3 Nov 2016 13:10:00 -0700
-Subject: [PATCH 5/5] Always compile libcpluff as PIC
+Subject: [PATCH 07/10] Always compile libcpluff as PIC
 
 Fixes errors e.g.
 
@@ -13,7 +13,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index b210b73..52d5f11 100644
+index 3132dc1..ab4eea3 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -2385,7 +2385,7 @@ XB_CONFIG_MODULE([lib/cpluff], [

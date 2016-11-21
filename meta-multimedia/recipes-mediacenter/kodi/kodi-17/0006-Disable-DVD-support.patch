@@ -1,7 +1,7 @@
-From 191cf3f084b4d34846711034a7fe3078f8243c82 Mon Sep 17 00:00:00 2001
+From 3d3ec391038c6ee73897a7fab753b11b589de1ed Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Wed, 2 Nov 2016 12:39:20 -0700
-Subject: [PATCH 4/4] Disable DVD support
+Subject: [PATCH 06/10] Disable DVD support
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/Makefile.in b/Makefile.in
-index 58b3a17..b7c3fce 100644
+index 0d70e9b..050c7ca 100644
 --- a/Makefile.in
 +++ b/Makefile.in
 @@ -10,8 +10,7 @@ EC_DIRS= \
@@ -22,7 +22,7 @@ index 58b3a17..b7c3fce 100644
  
  VideoPlayer_ARCHIVES=xbmc/cores/VideoPlayer/VideoPlayer.a \
                     xbmc/cores/VideoPlayer/DVDCodecs/DVDCodecs.a \
-@@ -343,7 +342,6 @@ libaddon: exports
+@@ -347,7 +346,6 @@ libaddon: exports
  	$(MAKE) -C lib/addons/library.xbmc.pvr
  	$(MAKE) -C lib/addons/library.kodi.inputstream
  dvdpcodecs: dllloader
@@ -31,5 +31,5 @@ index 58b3a17..b7c3fce 100644
  dvdpextcodecs:
  
 -- 
-2.10.1
+2.10.2
 

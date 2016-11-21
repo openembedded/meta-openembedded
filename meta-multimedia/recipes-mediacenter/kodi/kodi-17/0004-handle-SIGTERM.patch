@@ -1,7 +1,7 @@
-From 1c1484303a055bfde655ffae3829554aaefc2e07 Mon Sep 17 00:00:00 2001
+From 49046c1685465a5486fe9e1c04b99c585aab6862 Mon Sep 17 00:00:00 2001
 From: Stefan Saraev <stefan@saraev.ca>
 Date: Wed, 2 Nov 2016 11:28:34 -0700
-Subject: [PATCH 2/3] handle SIGTERM
+Subject: [PATCH 04/10] handle SIGTERM
 
 0. CApplication::Stop cant be trusted. (deadlocks crashes and boo)
 
@@ -26,10 +26,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  5 files changed, 30 insertions(+), 5 deletions(-)
 
 diff --git a/xbmc/Application.cpp b/xbmc/Application.cpp
-index 4c118e0..58b151a 100644
+index 100a2f2..fda892d 100644
 --- a/xbmc/Application.cpp
 +++ b/xbmc/Application.cpp
-@@ -2428,12 +2428,12 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
+@@ -2426,12 +2426,12 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
    switch (pMsg->dwMessage)
    {
    case TMSG_POWERDOWN:
@@ -44,7 +44,7 @@ index 4c118e0..58b151a 100644
      break;
    
    case TMSG_SHUTDOWN:
-@@ -2454,12 +2454,13 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
+@@ -2452,12 +2452,13 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
  
    case TMSG_RESTART:
    case TMSG_RESET:
@@ -59,7 +59,7 @@ index 4c118e0..58b151a 100644
      Stop(EXITCODE_RESTARTAPP);
  #endif
      break;
-@@ -2883,6 +2884,13 @@ bool CApplication::Cleanup()
+@@ -2881,6 +2882,13 @@ bool CApplication::Cleanup()
    }
  }
  
@@ -73,7 +73,7 @@ index 4c118e0..58b151a 100644
  void CApplication::Stop(int exitCode)
  {
    try
-@@ -2890,7 +2898,7 @@ void CApplication::Stop(int exitCode)
+@@ -2888,7 +2896,7 @@ void CApplication::Stop(int exitCode)
      m_frameMoveGuard.unlock();
  
      CVariant vExitCode(CVariant::VariantTypeObject);
@@ -82,7 +82,7 @@ index 4c118e0..58b151a 100644
      CAnnouncementManager::GetInstance().Announce(System, "xbmc", "OnQuit", vExitCode);
  
      // Abort any active screensaver
-@@ -2924,7 +2932,6 @@ void CApplication::Stop(int exitCode)
+@@ -2922,7 +2930,6 @@ void CApplication::Stop(int exitCode)
  
      m_bStop = true;
      m_AppFocused = false;
@@ -91,10 +91,10 @@ index 4c118e0..58b151a 100644
  
      // cancel any jobs from the jobmanager
 diff --git a/xbmc/Application.h b/xbmc/Application.h
-index 22aca81..9992677 100644
+index a9d9bf5..e536deb 100644
 --- a/xbmc/Application.h
 +++ b/xbmc/Application.h
-@@ -160,6 +160,7 @@ public:
+@@ -159,6 +159,7 @@ public:
    void StopPVRManager();
    void ReinitPVRManager();
    bool IsCurrentThread() const;
@@ -159,5 +159,5 @@ index a8b64e5..3d80032 100644
    XBMC::Context context;
  
 -- 
-2.10.1
+2.10.2
 

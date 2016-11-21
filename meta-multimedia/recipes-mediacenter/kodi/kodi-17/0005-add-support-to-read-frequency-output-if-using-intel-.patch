@@ -1,7 +1,7 @@
-From 4ef1e9dab9193f1a5305d25c8eda97f8f06ea154 Mon Sep 17 00:00:00 2001
+From 4d1368d20f04216aec9551d9845b305f96a21015 Mon Sep 17 00:00:00 2001
 From: Stephan Raue <stephan@openelec.tv>
 Date: Mon, 1 Sep 2014 03:16:37 +0200
-Subject: [PATCH 3/3] add support to read frequency output if using intel's
+Subject: [PATCH 05/10] add support to read frequency output if using intel's
  pstate driver
 
 ---
@@ -22,5 +22,5 @@ index 5e2ebbd..fd04d5a 100644
    {
      m_cpuInfoForFreq = true;
 -- 
-2.10.1
+2.10.2
 

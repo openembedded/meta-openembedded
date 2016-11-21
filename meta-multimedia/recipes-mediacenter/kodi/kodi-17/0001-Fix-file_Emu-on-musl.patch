@@ -1,7 +1,7 @@
-From 3a10d9479e7c9a77c478b8b428e4309ff22e8498 Mon Sep 17 00:00:00 2001
+From 7ae4fcf290ffb0b76374efafeaee575456ac9023 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sun, 6 Nov 2016 23:08:27 -0800
-Subject: [PATCH 8/8] Fix file_Emu on musl
+Subject: [PATCH 01/10] Fix file_Emu on musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---

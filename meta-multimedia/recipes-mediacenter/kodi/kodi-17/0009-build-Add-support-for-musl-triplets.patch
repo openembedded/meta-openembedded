@@ -1,7 +1,7 @@
-From 99769ac5653884e49d1c8c34e65d2e565cd9e314 Mon Sep 17 00:00:00 2001
+From 8b2bad58585af0f829fb06e19c9bd2b6caf30808 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sun, 6 Nov 2016 11:54:41 -0800
-Subject: [PATCH 6/6] build: Add support for musl triplets
+Subject: [PATCH 09/10] build: Add support for musl triplets
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
@@ -11,7 +11,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  3 files changed, 23 insertions(+), 23 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 52d5f11..a772973 100644
+index ab4eea3..925466a 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -526,7 +526,7 @@ case $host in
@@ -131,7 +131,7 @@ index d28f263..ff5dc20 100644
       ;;
    *-*linux-android*)
 diff --git a/tools/depends/configure.ac b/tools/depends/configure.ac
-index a0bc386..b96d20e 100644
+index f438e5d..409f4d7 100644
 --- a/tools/depends/configure.ac
 +++ b/tools/depends/configure.ac
 @@ -120,13 +120,13 @@ platform_cc=gcc
