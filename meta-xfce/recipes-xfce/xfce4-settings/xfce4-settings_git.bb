@@ -4,7 +4,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "exo exo-native garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtual/libx11 xrandr libxcursor libxklavier upower"
 
-inherit xfce xfce-git
+inherit xfce xfce-git distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 # schnitzeltony git repo is the mainline repo
 # + datetime-setter - sent to mainline but strange response
