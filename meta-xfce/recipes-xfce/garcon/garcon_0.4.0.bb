@@ -4,7 +4,9 @@ LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
 DEPENDS = "xfce4-dev-tools-native libxfce4util libxfce4ui intltool-native"
 
-inherit xfce gtk-doc
+inherit xfce gtk-doc distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
 SRC_URI[md5sum] = "aba62b80787aac295083bf7afd419ffb"
