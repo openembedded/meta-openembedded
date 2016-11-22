@@ -20,14 +20,13 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
     "
 
 SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-           file://configure.patch \
+           file://redundant_comparison.patch \
            file://memcached-add-hugetlbfs-check.patch"
+SRC_URI[md5sum] = "2d7f6476283cd36e21e521d901d37a8f"
+SRC_URI[sha256sum] = "83726c8d68258c56712373072abb25a449c257398075a39ec0867fd8ba69771d"
 
 # set the same COMPATIBLE_HOST as libhugetlbfs
 COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
-
-SRC_URI[md5sum] = "46402dfbd7faadf6182283dbbd18b1a6"
-SRC_URI[sha256sum] = "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf9926a89999d8cdc0458"
 
 python __anonymous () {
     endianness = d.getVar('SITEINFO_ENDIANNESS')
