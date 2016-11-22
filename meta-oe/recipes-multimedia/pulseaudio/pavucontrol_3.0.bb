@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "intltool-native gtkmm libcanberra pulseaudio"
 
-inherit gnome
+inherit gnome distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz"
 SRC_URI[md5sum] = "176308d2c03f8f3a7b2bd4f4d284fe71"
