@@ -11,7 +11,9 @@ GNOME_COMPRESS_TYPE = "xz"
 
 DEPENDS = "glib-2.0 gtk+3 libxml2 intltool-native"
 
-inherit vala gtk-doc
+inherit vala gtk-doc distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_OECONF += "--disable-man"
 
