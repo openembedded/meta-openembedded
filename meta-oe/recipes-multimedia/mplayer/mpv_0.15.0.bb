@@ -3,7 +3,7 @@ DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features wi
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mpv.io/"
 DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
-           libxscrnsaver libv4l libxinerama \
+           libxscrnsaver libv4l libxinerama libvdpau \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11"
