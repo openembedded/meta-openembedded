@@ -106,7 +106,7 @@ python populate_packages_prepend () {
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale'):
             metapkg_rdepends.append(pkg)
-    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
+    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
 
 }
 
