@@ -8,7 +8,7 @@ inherit autotools pkgconfig gnomebase distutils-base gobject-introspection
 PYTHON_BASEVERSION = "2.7"
 PYTHON_PN = "python"
 
-DEPENDS += "python glib-2.0"
+DEPENDS += "gnome-common-native python glib-2.0"
 
 SRCNAME="pygobject"
 SRC_URI = " \
@@ -31,4 +31,3 @@ do_install_append() {
     # Remove files that clash with python3-pygobject; their content is same
     rm ${D}${includedir}/pygobject-3.0/pygobject.h ${D}${libdir}/pkgconfig/pygobject-3.0.pc
 }
-
