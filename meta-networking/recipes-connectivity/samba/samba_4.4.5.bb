@@ -118,6 +118,7 @@ do_install_append() {
             -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
             -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
             -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \
+            -e 's,/usr/bin,${base_bindir},g' \
             -i ${D}${sysconfdir}/init.d/samba.sh
     fi
 
