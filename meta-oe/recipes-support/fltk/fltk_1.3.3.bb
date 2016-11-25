@@ -41,7 +41,7 @@ do_install_append_class-target() {
 }
 
 python populate_packages_prepend () {
-    if (d.getVar('DEBIAN_NAMES', 1)):
+    if (d.getVar('DEBIAN_NAMES')):
         d.setVar('PKG_${BPN}', 'libfltk${PV}')
 }
 

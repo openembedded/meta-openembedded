@@ -24,7 +24,7 @@ def get_git_pv(path, d, tagadjust=None):
     import os
     import bb.process
 
-    gitdir = os.path.abspath(os.path.join(d.getVar("S", True), ".git"))
+    gitdir = os.path.abspath(os.path.join(d.getVar("S"), ".git"))
     try:
         ver = gitrev_run("git describe --tags", gitdir)
     except Exception, exc:
@@ -71,5 +71,5 @@ def mark_recipe_dependencies(path, d):
         mark_dependency(d, tagdir)
 
 python () {
-    mark_recipe_dependencies(d.getVar("S", True), d)
+    mark_recipe_dependencies(d.getVar("S"), d)
 }

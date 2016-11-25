@@ -43,7 +43,7 @@ SRC_URI_append = "${QT4E_PATCHES}"
 
 # check for TARGET_FPU=soft and inform configure of the result so it can disable some floating points
 def get_poppler_fpu_setting(bb, d):
-    if d.getVar('TARGET_FPU', 1) in [ 'soft' ]:
+    if d.getVar('TARGET_FPU') in [ 'soft' ]:
         return "--enable-fixedpoint"
     return ""
 

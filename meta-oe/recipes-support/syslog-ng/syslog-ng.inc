@@ -104,17 +104,17 @@ SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 # no syslog-init for systemd
 python () {
     if bb.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False, d):
-        pn = d.getVar('PN', True)
-        sysconfdir = d.getVar('sysconfdir', True)
+        pn = d.getVar('PN')
+        sysconfdir = d.getVar('sysconfdir')
         d.appendVar('ALTERNATIVE_%s' % (pn), ' syslog-init')
         d.setVarFlag('ALTERNATIVE_PRIORITY', 'syslog-init', '200')
         d.setVarFlag('ALTERNATIVE_LINK_NAME', 'syslog-init', '%s/init.d/syslog' % (sysconfdir))
 
     if bb.utils.contains('DISTRO_FEATURES', 'systemd', True, False, d):
-        pn = d.getVar('PN', True)
+        pn = d.getVar('PN')
         d.appendVar('ALTERNATIVE_%s' % (pn), ' syslog-service')
-        d.setVarFlag('ALTERNATIVE_LINK_NAME', 'syslog-service', '%s/systemd/system/syslog.service' % (d.getVar('sysconfdir', True)))
-        d.setVarFlag('ALTERNATIVE_TARGET', 'syslog-service', '%s/system/${BPN}.service' % (d.getVar('systemd_unitdir', True)))
+        d.setVarFlag('ALTERNATIVE_LINK_NAME', 'syslog-service', '%s/systemd/system/syslog.service' % (d.getVar('sysconfdir')))
+        d.setVarFlag('ALTERNATIVE_TARGET', 'syslog-service', '%s/system/${BPN}.service' % (d.getVar('systemd_unitdir')))
 }
 
 INITSCRIPT_NAME = "syslog"

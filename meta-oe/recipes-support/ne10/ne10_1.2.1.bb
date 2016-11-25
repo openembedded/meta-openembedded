@@ -21,10 +21,10 @@ COMPATIBLE_MACHINE_aarch64 = "(.*)"
 COMPATIBLE_MACHINE_armv7a = "(.*)"
 
 python () {
-    if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES', True).split()):
+    if any(t.startswith('armv7') for t in d.getVar('TUNE_FEATURES').split()):
         d.setVar('NE10_TARGET_ARCH', 'armv7')
         bb.debug(2, 'Building Ne10 for armv7')
-    elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES', True).split()):
+    elif any(t.startswith('aarch64') for t in d.getVar('TUNE_FEATURES').split()):
         d.setVar('NE10_TARGET_ARCH', 'aarch64')
         bb.debug(2, 'Building Ne10 for aarch64')
     else:

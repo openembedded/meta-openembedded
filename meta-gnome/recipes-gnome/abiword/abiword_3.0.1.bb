@@ -111,7 +111,7 @@ python populate_packages_prepend () {
     d.setVar('FILES_' + metapkg, "")
     blacklist = [ 'abiword-plugins-dbg', 'abiword-plugins', 'abiword-plugins-doc', 'abiword-plugins-dev', 'abiword-plugins-locale' ]
     metapkg_rdepends = []
-    packages = d.getVar('PACKAGES', 1).split()
+    packages = d.getVar('PACKAGES').split()
     for pkg in packages[1:]:
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
             print("Modifying %s" % pkg)

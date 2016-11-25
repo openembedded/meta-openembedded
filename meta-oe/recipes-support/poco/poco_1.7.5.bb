@@ -62,12 +62,12 @@ PACKAGES = "${PN}-dbg ${POCO_PACKAGES}"
 python __anonymous () {
     packages = []
     testrunners = []
-    components = d.getVar("PACKAGECONFIG", True).split()
+    components = d.getVar("PACKAGECONFIG").split()
     components.append("Foundation")
     for lib in components:
         pkg = ("poco-%s" % lib.lower()).replace("_","")
         packages.append(pkg)
-        if not d.getVar("FILES_%s" % pkg, True):
+        if not d.getVar("FILES_%s" % pkg):
             d.setVar("FILES_%s" % pkg, "${libdir}/libPoco%s.so.*" % lib)
         testrunners.append("%s" % lib)
 

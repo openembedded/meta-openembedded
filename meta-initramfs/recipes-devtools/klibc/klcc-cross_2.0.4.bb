@@ -36,5 +36,5 @@ deltask do_package_write_tar
 
 SSTATE_SCAN_FILES = "*"
 EXTRA_STAGING_FIXMES = "MANGLEDSTAGINGDIRTARGET MANGLEDSTAGINGDIR"
-MANGLEDSTAGINGDIR = "${@d.getVar("STAGING_DIR", True).replace("/", "\\\\/").replace("-", "\\\\-")}"
-MANGLEDSTAGINGDIRTARGET = "${@d.getVar("STAGING_DIR_TARGET", True).replace("/", "\\\\/").replace("-", "\\\\-")}"
+MANGLEDSTAGINGDIR = "${@d.getVar("STAGING_DIR").replace("/", "\\\\/").replace("-", "\\\\-")}"
+MANGLEDSTAGINGDIRTARGET = "${@d.getVar("STAGING_DIR_TARGET").replace("/", "\\\\/").replace("-", "\\\\-")}"

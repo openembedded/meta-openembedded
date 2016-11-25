@@ -57,6 +57,6 @@ python populate_packages_prepend () {
     pkgs = []
 
     pkgs += do_split_packages(d, oe.path.join(lms_libdir, "plugins"), '^(.*)\.so$', d.expand('${PN}-plugin-%s'), 'LightMediaScanner plugin for %s', prepend=True, extra_depends=d.expand('${PN}'))
-    metapkg = d.getVar('PN', True) + '-meta'
+    metapkg = d.getVar('PN') + '-meta'
     d.setVar('RDEPENDS_' + metapkg, ' '.join(pkgs))
 }

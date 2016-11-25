@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 DEPENDS = "ncurses zlib"
 
-ATOP_VER = "${@'-'.join(d.getVar('PV', True).rsplit('.', 1))}"
+ATOP_VER = "${@'-'.join(d.getVar('PV').rsplit('.', 1))}"
 
 SRC_URI = " \
     http://www.atoptool.nl/download/${BPN}-${ATOP_VER}.tar.gz \

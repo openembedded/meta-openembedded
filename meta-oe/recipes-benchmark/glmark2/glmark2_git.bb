@@ -39,7 +39,7 @@ PACKAGECONFIG[wayland-gl] = ",,virtual/libgl wayland"
 PACKAGECONFIG[wayland-gles2] = ",,virtual/libgles2 wayland"
 
 python __anonymous() {
-    packageconfig = (d.getVar("PACKAGECONFIG", True) or "").split()
+    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
     flavors = []
     if "x11-gles2" in packageconfig:
         flavors.append("x11-glesv2")

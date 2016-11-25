@@ -30,8 +30,8 @@ inherit update-rc.d systemd
 python __anonymous () {
     import re
 
-    karch = d.getVar('KARCH', True)
-    multilib = d.getVar('MLPREFIX', True)
+    karch = d.getVar('KARCH')
+    multilib = d.getVar('MLPREFIX')
 
     if multilib and karch == 'powerpc64':
         searchstr = "lib.?32"

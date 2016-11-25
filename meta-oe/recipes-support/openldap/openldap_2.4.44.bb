@@ -242,7 +242,7 @@ python populate_packages_prepend () {
     d.setVar('ALLOW_EMPTY_' + metapkg, "1")
     d.setVar('FILES_' + metapkg, "")
     metapkg_rdepends = []
-    packages = d.getVar('PACKAGES', 1).split()
+    packages = d.getVar('PACKAGES').split()
     for pkg in packages[1:]:
         if pkg.count("openldap-backend-") and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale"):
             metapkg_rdepends.append(pkg)

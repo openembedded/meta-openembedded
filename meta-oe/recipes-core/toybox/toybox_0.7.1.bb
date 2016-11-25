@@ -59,8 +59,8 @@ python do_package_prepend () {
     # Read links from /etc/toybox.links and create appropriate
     # update-alternatives variables
 
-    dvar = d.getVar('D', True)
-    pn = d.getVar('PN', True)
+    dvar = d.getVar('D')
+    pn = d.getVar('PN')
     target = "/bin/toybox"
 
     f = open('%s/etc/toybox.links' % (dvar), 'r')
