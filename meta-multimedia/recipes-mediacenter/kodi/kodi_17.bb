@@ -164,6 +164,7 @@ FILES_${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi
 # OpenGL builds need glxinfo, that's in mesa-demos
 RRECOMMENDS_${PN}_append = " libcec \
                              python \
+                             python-ctypes \
                              python-lang \
                              python-re \
                              python-netclient \
