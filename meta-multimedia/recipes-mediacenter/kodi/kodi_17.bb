@@ -63,7 +63,7 @@ PROVIDES = "xbmc"
 
 SRCREV = "a10c5048f2487bd9b2dc1f35d2fee48a25945a70"
 PV = "17.0+gitr${SRCPV}"
-SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
+SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton \
            file://0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
            file://0004-handle-SIGTERM.patch \
            file://0005-add-support-to-read-frequency-output-if-using-intel-.patch \
@@ -72,6 +72,8 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
            file://0008-kodi-config.cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch \
            file://0009-build-Add-support-for-musl-triplets.patch \
            file://0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch \
+           file://0011-Let-configure-pass-on-unknown-architectures-setting-.patch \
+           file://0012-Revert-droid-fix-builds-with-AML-disabled.patch \
 "
 
 SRC_URI_append_libc-musl = " \
