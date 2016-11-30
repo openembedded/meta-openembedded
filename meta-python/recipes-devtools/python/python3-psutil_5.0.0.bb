@@ -1,6 +1,4 @@
 inherit pypi setuptools3
 require python-psutil.inc
 
-RDEPENDS_${PN} += " \
-    python3-subprocess \
-"
+RDEPENDS_${PN} += "${PYTHON_PN}-netclient"
