@@ -99,11 +99,11 @@ LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-g
 
 do_install_append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
-        install -d ${D}${systemd_unitdir}/system
+        install -d ${D}${systemd_system_unitdir}
         for i in nmb smb winbind; do
-            install -m 0644 packaging/systemd/$i.service ${D}${systemd_unitdir}/system
+            install -m 0644 packaging/systemd/$i.service ${D}${systemd_system_unitdir}
         done
-        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_unitdir}/system/*.service
+        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
 
         install -d ${D}${sysconfdir}/tmpfiles.d
         install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
@@ -160,8 +160,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
                     ${localstatedir}/lib/samba \
                     ${localstatedir}/nmbd \
                     ${localstatedir}/spool/samba \
-                    ${systemd_unitdir}/system/nmb.service \
-                    ${systemd_unitdir}/system/smb.service"
+                    ${systemd_system_unitdir}/nmb.service \
+                    ${systemd_system_unitdir}/smb.service"
 
 FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
                           ${bindir}/ctdb_run_cluster_tests \
@@ -276,8 +276,7 @@ FILES_winbind = "${sbindir}/winbindd \
                  ${bindir}/wbinfo \
                  ${bindir}/ntlm_auth \
                  ${sysconfdir}/init.d/winbind \
-                 ${systemd_unitdir}/system/winbind.service \
-"
+                 ${systemd_system_unitdir}/winbind.service"
 
 FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
                         ${libdir}/nss_info \
@@ -287,7 +286,7 @@ FILES_${PN} += "${base_libdir}/security/pam_smbpass.so \
 "
 
 FILES_libwinbind = "${base_libdir}/security/pam_winbind.so \
-                    ${systemd_unitdir}/system/winbind.service"
+                    ${systemd_system_unitdir}/winbind.service"
 FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
 
 FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
