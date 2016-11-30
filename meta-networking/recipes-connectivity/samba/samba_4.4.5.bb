@@ -109,7 +109,9 @@ do_install_append() {
 
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
-    sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
+    sed -e 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' \
+        -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
+        -i ${D}${systemd_system_unitdir}/*.service
 
     install -d ${D}${sysconfdir}/tmpfiles.d
     install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
@@ -134,8 +136,8 @@ do_install_append() {
     install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
     install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
 
-    install -d ${D}${sysconfdir}/sysconfig/
-    install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
+    install -d ${D}${sysconfdir}/default
+    install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/default/samba
 
     # install ctdb config file and test cases
     install -D -m 0644 ${S}/ctdb/tests/onnode/nodes ${D}${sysconfdir}/ctdb/nodes
@@ -203,6 +205,7 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
 
 FILES_${BPN}-common = "${sysconfdir}/default \
                        ${sysconfdir}/samba \
+                       ${sysconfdir}/tmpfiles.d \
 "
 
 FILES_${PN} += "${libdir}/vfs/*.so \
