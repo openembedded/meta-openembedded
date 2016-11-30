@@ -160,7 +160,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
                     ${localstatedir}/lib/samba \
                     ${localstatedir}/nmbd \
                     ${localstatedir}/spool/samba \
-"
+                    ${systemd_unitdir}/system/nmb.service \
+                    ${systemd_unitdir}/system/smb.service"
 
 FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
                           ${bindir}/ctdb_run_cluster_tests \
@@ -285,13 +286,8 @@ FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
 FILES_${PN} += "${base_libdir}/security/pam_smbpass.so \
 "
 
-SMB_SERVICE="${systemd_unitdir}/system/nmb.service ${systemd_unitdir}/system/smb.service"
-SMB_SYSV="${sysconfdir}/init.d ${sysconfdir}/rc?.d"
-FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${SMB_SERVICE}', '', d)}"
-FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SMB_SYSV}', '', d)}"
-
-FILES_libwinbind = "${base_libdir}/security/pam_winbind.so"
-FILES_libwinbind += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
+FILES_libwinbind = "${base_libdir}/security/pam_winbind.so \
+                    ${systemd_unitdir}/system/winbind.service"
 FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
 
 FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
