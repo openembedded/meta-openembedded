@@ -17,7 +17,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=c6f37efad53b098e420f45e7ab6807dc"
 DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
-inherit autotools-brokensep binconfig perlnative systemd
+inherit autotools-brokensep binconfig perlnative systemd update-rc.d
 
 SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
@@ -36,9 +36,6 @@ SRC_URI[sha256sum] = "9c0a46b8918237a53916370d2e02298c2b294f55f0351f9404e18930bc
 
 S = "${WORKDIR}/${BP}/src"
 
-SYSTEMD_SERVICE_${PN} = "krb5-admin-server.service krb5-kdc.service"
-SYSTEMD_AUTO_ENABLE = "disable"
-
 PACKAGECONFIG ??= "openssl"
 PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
 PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
@@ -54,13 +51,6 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
 CFLAGS_append = " -fPIC -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
 LDFLAGS_append = " -pthread"
 
-FILES_${PN} += "${datadir}/gnats"
-FILES_${PN}-doc += "${datadir}/examples"
-FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
-
-# As this recipe doesn't inherit update-rc.d, we need to add this dependency here
-RDEPENDS_${PN}_class-target += "initscripts-functions"
-
 do_configure() {
     gnu-configize --force
     autoreconf
@@ -69,6 +59,13 @@ do_configure() {
 
 do_install_append() {
     rm -rf ${D}/${localstatedir}/run
+    rm -f ${D}${bindir}/sclient
+    rm -f ${D}${bindir}/sim_client
+    rm -f ${D}${bindir}/uuclient
+    rm -f ${D}${sbindir}/krb5-send-pr
+    rm -f ${D}${sbindir}/sim_server
+    rm -f ${D}${sbindir}/sserver
+    rm -f ${D}${sbindir}/uuserver
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
@@ -90,7 +87,87 @@ do_install_append() {
     fi
 }
 
-pkg_postinst_${PN} () {
+PACKAGES =+ "${PN}-admin-server \
+             ${PN}-gss-samples \
+             ${PN}-k5tls \
+             ${PN}-kdc \
+             ${PN}-kdc-ldap \
+             ${PN}-kpropd \
+             ${PN}-otp \
+             ${PN}-pkinit \
+             ${PN}-user \
+             libgssapi-krb5 \
+             libgssrpc \
+             libk5crypto \
+             libkadm5clnt-mit \
+             libkadm5srv-mit \
+             libkdb5 \
+             libkrad \
+             libkrb5 \
+             libkrb5support \
+             libverto"
+
+FILES_${PN} = ""
+FILES_${PN}-doc += "${datadir}/examples"
+FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
+
+FILES_${PN}-admin-server = "${sbindir}/kadmin.local \
+                            ${sbindir}/kadmind \
+                            ${sbindir}/kprop \
+                            ${sysconfdir}/default/krb5-admin-server \
+                            ${sysconfdir}/init.d/krb5-admin-server \
+                            ${systemd_system_unitdir}/krb5-admin-server.service"
+
+FILES_${PN}-gss-samples = "${bindir}/gss-client \
+                           ${sbindir}/gss-server"
+
+FILES_${PN}-k5tls = "${libdir}/krb5/plugins/tls/k5tls.so"
+
+FILES_${PN}-kdc = "${libdir}/krb5/plugins/kdb/db2.so \
+                   ${localstatedir}/krb5kdc \
+                   ${sbindir}/kdb5_util \
+                   ${sbindir}/kproplog \
+                   ${sbindir}/krb5kdc \
+                   ${sysconfdir}/default/krb5-kdc \
+                   ${sysconfdir}/default/volatiles/87_krb5 \
+                   ${sysconfdir}/init.d/krb5-kdc \
+                   ${sysconfdir}/tmpfiles.d/krb5.conf \
+                   ${systemd_system_unitdir}/krb5-kdc.service"
+
+FILES_${PN}-kdc-ldap = "${libdir}/krb5/libkdb_ldap${SOLIBS} \
+                        ${libdir}/krb5/plugins/kdb/kldap.so \
+                        ${sbindir}/kdb5_ldap_util"
+
+FILES_${PN}-kpropd = "${sbindir}/kpropd"
+FILES_${PN}-otp = "${libdir}/krb5/plugins/preauth/otp.so"
+FILES_${PN}-pkinit = "${libdir}/krb5/plugins/preauth/pkinit.so"
+FILES_${PN}-user = "${bindir}/k*"
+
+FILES_libgssapi-krb5 = "${libdir}/libgssapi_krb5${SOLIBS}"
+FILES_libgssrpc = "${libdir}/libgssrpc${SOLIBS}"
+FILES_libk5crypto = "${libdir}/libk5crypto${SOLIBS}"
+FILES_libkadm5clnt-mit = "${libdir}/libkadm5clnt_mit${SOLIBS}"
+FILES_libkadm5srv-mit = "${libdir}/libkadm5srv_mit${SOLIBS}"
+FILES_libkdb5 = "${libdir}/libkdb5${SOLIBS}"
+FILES_libkrad = "${libdir}/libkrad${SOLIBS}"
+FILES_libkrb5 = "${libdir}/libkrb5${SOLIBS} \
+                 ${libdir}/krb5/plugins/authdata \
+                 ${libdir}/krb5/plugins/libkrb5"
+FILES_libkrb5support = "${libdir}/libkrb5support${SOLIBS}"
+FILES_libverto = "${libdir}/libverto${SOLIBS}"
+
+RDEPENDS_${PN}-kadmin-server = "${PN}-kdc"
+RDEPENDS_${PN}-kpropd = "${PN}-kdc"
+
+INITSCRIPT_PACKAGES = "${PN}-admin-server ${PN}-kdc"
+INITSCRIPT_NAME_${PN}-admin-server = "krb5-admin-server"
+INITSCRIPT_NAME_${PN}-kdc = "krb5-kdc"
+
+SYSTEMD_PACKAGES = "${PN}-admin-server ${PN}-kdc"
+SYSTEMD_SERVICE_${PN}-admin-server = "krb5-admin-server.service"
+SYSTEMD_SERVICE_${PN}-kdc = "krb5-kdc.service"
+
+pkg_postinst_${PN}-kdc () {
     if [ -z "$D" ]; then
         if command -v systemd-tmpfiles >/dev/null; then
             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/krb5.conf
