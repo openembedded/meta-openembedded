@@ -100,9 +100,7 @@ LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-g
 do_install_append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${systemd_system_unitdir}
-        for i in nmb smb winbind; do
-            install -m 0644 packaging/systemd/$i.service ${D}${systemd_system_unitdir}
-        done
+        install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
         sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
 
         install -d ${D}${sysconfdir}/tmpfiles.d
@@ -161,6 +159,7 @@ FILES_${PN}-base = "${sbindir}/nmbd \
                     ${localstatedir}/nmbd \
                     ${localstatedir}/spool/samba \
                     ${systemd_system_unitdir}/nmb.service \
+                    ${systemd_system_unitdir}/samba.service \
                     ${systemd_system_unitdir}/smb.service"
 
 FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
