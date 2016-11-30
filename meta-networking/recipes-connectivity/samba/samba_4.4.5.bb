@@ -293,23 +293,7 @@ FILES_libwinbind = "${base_libdir}/security/pam_winbind.so \
                     ${systemd_system_unitdir}/winbind.service"
 FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
 
-FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/_ldb_text.py \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/*.py \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/*.so \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/*.so \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/*.py \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/external/* \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/kcc/* \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/netcmd/*.py \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/provision/*.py \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/*.py \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/*.so \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/subunit/* \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/tests/* \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/third_party/* \
-                      ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
-"
+FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
 
 FILES_smbclient = "${bindir}/cifsdd \
                    ${bindir}/rpcclient \
