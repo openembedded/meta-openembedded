@@ -98,19 +98,18 @@ DISABLE_STATIC = ""
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 do_install_append() {
-    if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
-        install -d ${D}${systemd_system_unitdir}
-        install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
-        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
+    install -d ${D}${systemd_system_unitdir}
+    install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
+    sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
 
-        install -d ${D}${sysconfdir}/tmpfiles.d
-        install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
-        echo "d ${localstatedir}/log/samba 0755 root root -" \
-            >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
-    elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
+    install -d ${D}${sysconfdir}/tmpfiles.d
+    install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
+    echo "d ${localstatedir}/log/samba 0755 root root -" \
+        >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
+    if ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
-    elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
+    else
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
         sed -e 's,/opt/samba/bin,${sbindir},g' \
