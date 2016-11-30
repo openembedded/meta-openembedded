@@ -17,6 +17,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://16-do-not-check-xsltproc-manpages.patch \
            file://20-do-not-import-target-module-while-cross-compile.patch \
            file://21-add-config-option-without-valgrind.patch \
+           file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
            file://0006-avoid-using-colon-in-the-checking-msg.patch \
            file://volatiles.03_samba \
           "
