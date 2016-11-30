@@ -147,9 +147,10 @@ do_install_append() {
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
 }
 
-PACKAGES =+ "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
-PACKAGES =+ "libwbclient libnss-winbind winbind winbind-dbg libnetapi libsmbsharemodes \
-             libsmbclient libsmbclient-dev lib${BPN}-base ${PN}-base ${PN}-ctdb-tests"
+PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator"
+PACKAGES =+ "libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
+             libsmbclient lib${BPN}-base ${PN}-base ${PN}-ctdb-tests"
+
 
 RDEPENDS_${PN} += "${PN}-base"
 
@@ -259,10 +260,6 @@ FILES_lib${BPN}-base = "\
                     ${libdir}/samba/pdb/wbc_sam.so \
 "
 
-FILES_winbind-dbg = "${libdir}/idmap/.debug/*.so \
-                     ${libdir}/security/.debug/pam_winbind.so \
-"
-
 FILES_${PN} += "${libdir}/vfs/*.so \
                 ${libdir}/charset/*.so \
                 ${libdir}/*.dat \
@@ -270,17 +267,10 @@ FILES_${PN} += "${libdir}/vfs/*.so \
                 ${libdir}/security/pam_smbpass.so \
 "
 
-FILES_${PN}-dbg += "${libdir}/vfs/.debug/*.so \
-                    ${libdir}/charset/.debug/*.so \
-                    ${libdir}/auth/.debug/*.so \
-                    ${libdir}/security/.debug/pam_smbpass.so \
-"
-
 FILES_libwbclient = "${libdir}/libwbclient.so.* ${libdir}/samba/libwinbind-client.so"
 FILES_libnetapi = "${libdir}/libnetapi.so.*"
 FILES_libsmbsharemodes = "${libdir}/libsmbsharemodes.so.*"
 FILES_libsmbclient = "${libdir}/libsmbclient.so.*"
-FILES_libsmbclient-dev = "${libdir}/libsmbclient.so ${includedir}"
 FILES_winbind = "${sbindir}/winbindd \
                  ${bindir}/wbinfo \
                  ${bindir}/ntlm_auth \
@@ -300,18 +290,8 @@ SMB_SYSV="${sysconfdir}/init.d ${sysconfdir}/rc?.d"
 FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${SMB_SERVICE}', '', d)}"
 FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SMB_SYSV}', '', d)}"
 
-FILES_${PN}-dbg += "${libdir}/samba/idmap/.debug/* \
-                    ${libdir}/samba/pdb/.debug/* \
-                    ${libdir}/samba/auth/.debug/* \
-                    ${libdir}/samba/nss_info/.debug/* \
-                    ${libdir}/samba/ldb/.debug/* \
-                    ${libdir}/samba/vfs/.debug/* \
-                    ${base_libdir}/security/.debug/pam_smbpass.so \
-"
-
 FILES_libwinbind = "${base_libdir}/security/pam_winbind.so"
 FILES_libwinbind += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
-FILES_libwinbind-dbg = "${base_libdir}/security/.debug/pam_winbind.so"
 FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
 
 FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
@@ -330,12 +310,6 @@ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/tests/* \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/third_party/* \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
-"
-
-FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug/* \
-                          ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/.debug/* \
-                          ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/samba3/.debug/* \
-                          ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/dcerpc/.debug/* \
 "
 
 RDEPENDS_${PN}-pidl_append = " perl"
