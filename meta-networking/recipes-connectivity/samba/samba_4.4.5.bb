@@ -144,10 +144,10 @@ do_install_append() {
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
 }
 
-PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator"
-PACKAGES =+ "libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
-             libsmbclient lib${BPN}-base ${PN}-base ${PN}-ctdb-tests"
-
+PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator \
+             libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
+             libsmbclient lib${BPN}-base ${PN}-base ${PN}-ctdb-tests \
+             smbclient"
 
 RDEPENDS_${PN} += "${PN}-base"
 
@@ -301,6 +301,17 @@ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/third_party/* \
                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
 "
+
+FILES_smbclient = "${bindir}/cifsdd \
+                   ${bindir}/rpcclient \
+                   ${bindir}/smbcacls \
+                   ${bindir}/smbclient \
+                   ${bindir}/smbcquotas \
+                   ${bindir}/smbget \
+                   ${bindir}/smbspool \
+                   ${bindir}/smbtar \
+                   ${bindir}/smbtree \
+                   ${libdir}/samba/smbspool_krb5_wrapper"
 
 RDEPENDS_${PN}-pidl_append = " perl"
 FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
