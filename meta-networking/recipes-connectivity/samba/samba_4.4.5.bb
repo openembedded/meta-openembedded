@@ -98,6 +98,15 @@ DISABLE_STATIC = ""
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 do_install_append() {
+    for section in 1 5 7; do
+        install -d ${D}${mandir}/man$section
+        install -m 0644 ctdb/doc/*.$section ${D}${mandir}/man$section
+    done
+    for section in 1 5 7 8; do
+        install -d ${D}${mandir}/man$section
+        install -m 0644 docs/manpages/*.$section ${D}${mandir}/man$section
+    done
+
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
     sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
