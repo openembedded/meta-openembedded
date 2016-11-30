@@ -154,6 +154,7 @@ do_install_append() {
 }
 
 PACKAGES =+ "${PN}-python ${PN}-pidl \
+             ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
              winbind \
              ${PN}-common ${PN}-base ${PN}-ctdb-tests \
              smbclient"
@@ -209,6 +210,19 @@ FILES_${PN} += "${libdir}/vfs/*.so \
                 ${libdir}/*.dat \
                 ${libdir}/auth/*.so \
 "
+
+FILES_${PN}-dsdb-modules = "${libdir}/samba/ldb"
+
+FILES_${PN}-testsuite = "${bindir}/gentest \
+                         ${bindir}/locktest \
+                         ${bindir}/masktest \
+                         ${bindir}/ndrdump \
+                         ${bindir}/smbtorture"
+
+FILES_registry-tools = "${bindir}/regdiff \
+                        ${bindir}/regpatch \
+                        ${bindir}/regshell \
+                        ${bindir}/regtree"
 
 FILES_winbind = "${sbindir}/winbindd \
                  ${bindir}/wbinfo \
