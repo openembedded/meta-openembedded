@@ -19,7 +19,12 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
 SRC_URI[md5sum] = "87be8867447f62524b584813e5a7bd14"
 SRC_URI[sha256sum] = "93e422c0d584623601f89b956045be158889ebe594478a2c24e1bf218495633f"
 
-inherit autotools-brokensep update-rc.d systemd
+inherit autotools-brokensep update-rc.d systemd useradd
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN}  = "--system --home-dir /var/lib/redis -g redis --shell /bin/false redis"
+GROUPADD_PARAM_${PN} = "--system redis"
+
 
 REDIS_ON_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 
@@ -31,6 +36,7 @@ do_install() {
     install -d ${D}/${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/init-redis-server ${D}/${sysconfdir}/init.d/redis-server
     install -d ${D}/var/lib/redis/
+    chown redis.redis ${D}/var/lib/redis/
 
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/redis.service ${D}${systemd_system_unitdir}
