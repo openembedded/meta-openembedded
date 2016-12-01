@@ -22,6 +22,23 @@ RDEPENDS_${PN} += "python-codecs \
                    python-stringold \
                    python-subprocess \
                    python-textutils \
-                   python-unittest"
+                   python-unittest \
+                   python-backports-functools-lru-cache \
+                   python-setuptools \
+                   python-astroid \
+                   python-wrapt \
+                   python-isort \
+                   python-lazy-object-proxy \
+                   "
 
 inherit pypi setuptools
+
+do_install_append(){
+    rm ${D}${bindir}/pylint
+    cat >> ${D}${bindir}/pylint <<EOF
+#!/usr/bin/env python
+from pylint import run_pylint
+run_pylint()
+EOF
+    chmod 755 ${D}${bindir}/pylint
+}
