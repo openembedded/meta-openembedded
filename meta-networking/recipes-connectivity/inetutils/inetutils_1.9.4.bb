@@ -28,6 +28,8 @@ SRC_URI[sha256sum] = "be8f75eff936b8e41b112462db51adf689715658a1b09e0d6b05d11ec9
 
 inherit autotools gettext update-alternatives texinfo
 
+acpaths = "-I ./m4"
+
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
 
 PACKAGECONFIG ??= "ftp uucpd \
