@@ -27,6 +27,7 @@ PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
 PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
 PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
 PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
+PACKAGECONFIG[vaapi] = "--enable-vaapi, --disable-vaapi,libva"
 
 SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
 EXTRA_OECONF = " \
