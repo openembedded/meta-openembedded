@@ -18,3 +18,10 @@ SECURITY_CFLAGS_pn-libcdio = "${SECURITY_NO_PIE_CFLAGS}"
 #| /usr/src/debug/glibc/2.24-r0/git/csu/elf-init.c:86: undefined reference to `__init_array_start'
 
 SECURITY_CFLAGS_pn-libvdpau = "${SECURITY_NO_PIE_CFLAGS}"
+
+#| /mnt/a/build/tmp-glibc/sysroots/x86_64-linux/usr/libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/6.2.0/ld: lj_err_dyn.o: relocation R_X86_64_TPOFF32 against `static_uex' can not be used when making a shared object; recompile with -fPIC
+#| /mnt/a/build/tmp-glibc/sysroots/x86_64-linux/usr/libexec/x86_64-oe-linux/gcc/x86_64-oe-linux/6.2.0/ld: final link failed: Nonrepresentable section on output
+#| collect2: error: ld returned 1 exit status
+#| make[1]: *** [Makefile:675: libluajit.so] Error 1
+SECURITY_CFLAGS_pn-luajit = "${SECURITY_NO_PIE_CFLAGS}"
+
