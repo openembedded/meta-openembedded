@@ -46,6 +46,7 @@ EXTRA_OESCONS = " \
     strip='false' \
     chrpath='yes' \
     systemd='${SYSTEMD_OESCONS}' \
+    libdir='${libdir}' \
     ${PACKAGECONFIG_CONFARGS} \
 "
 # this cannot be used, because then chrpath is not found and only static lib is built
