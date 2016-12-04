@@ -4,12 +4,10 @@ DEPENDS = "attr"
 
 SRC_URI = " \
     http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-    file://0001-Fix-TOYBOX_VERSION.patch \
-    file://0002-Fix-trimmed-printf-in-grep.patch \
 "
 
-SRC_URI[md5sum] = "e959e5ff8c6806781eb06e56f302a393"
-SRC_URI[sha256sum] = "5bb3069f58faf12940d5cfde3209ac7f63210bebdd9023979b0c20cede126ea7"
+SRC_URI[md5sum] = "372d8fdf6ea3675edbf1f6a4109b6db6"
+SRC_URI[sha256sum] = "79da71c7c39cef0a5f7b834f0b17d0d436e7994dd33e912f581b4c12d3b1681f"
 
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
