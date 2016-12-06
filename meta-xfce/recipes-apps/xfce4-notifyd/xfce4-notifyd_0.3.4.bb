@@ -6,8 +6,8 @@ DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib libnotify"
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "f918bd3f9f9ad85eace408aecf541198"
-SRC_URI[sha256sum] = "986c4cfeb64c21c6bfb2fe65839490ad0f501fdfc8ed10cc71815da5da110f73"
+SRC_URI[md5sum] = "793490b488c3c4a3f97d644431f048d8"
+SRC_URI[sha256sum] = "038535de79b7056058e8d6dceb457959949831853c2594a686ec68b037ae31bf"
 
 do_compile_prepend() {
     mkdir -p xfce4-notifyd
