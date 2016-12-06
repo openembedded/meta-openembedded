@@ -14,15 +14,14 @@ REQUIRED_DISTRO_FEATURES_class-native = ""
 SRC_URI += " \
     file://exo-no-tests-0.8.patch \
     file://configure.patch \
-    file://0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch \
 "
 
 SRC_URI_append_class-native = " \
     file://reduce-build-to-exo-csource-only.patch \
 "
 
-SRC_URI[md5sum] = "866292556586facb034191aa66431697"
-SRC_URI[sha256sum] = "c70c47f690284a5cb4f507dd89088efbdd8123506f924e33a5f97aab74eb97d4"
+SRC_URI[md5sum] = "0b036c8042a2ed5d3767d1177a4213a2"
+SRC_URI[sha256sum] = "76bd1c4229503ff3c301485de3a41c55dec93e98de1a9eef1be77fe502ca4f77"
 
 PACKAGES =+ "exo-csource"
 
