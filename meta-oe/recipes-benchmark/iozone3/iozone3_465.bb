@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dca
     file://iozone.c;beginline=260;endline=266;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
 "
 SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
+    file://parallelism.patch \
     file://copyright.txt \
 "
 SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
@@ -21,6 +22,7 @@ S = "${WORKDIR}/${BPN}_${PV}/src/current/"
 #
 EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
+EXTRA_OEMAKE_x86-64 = "linux-AMD64 CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE_arm = "linux-arm CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE = "linux CC='${CC}' GCC='${CC}'"
 
