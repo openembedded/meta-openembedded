@@ -100,6 +100,7 @@ ALTERNATIVE_${PN} = "talk whois"
 ALTERNATIVE_LINK_NAME[talkd]  = "${sbindir}/in.talkd"
 ALTERNATIVE_LINK_NAME[uucpd]  = "${sbindir}/in.uucpd"
 
+ALTERNATIVE_PRIORITY_${PN}-logger = "60"
 ALTERNATIVE_${PN}-logger = "logger"
 ALTERNATIVE_${PN}-syslogd = "syslogd"
 ALTERNATIVE_LINK_NAME[syslogd]  = "${base_sbindir}/syslogd"
