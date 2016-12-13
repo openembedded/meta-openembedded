@@ -28,4 +28,6 @@ S = "${WORKDIR}/git"
 
 FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
 
+MIPS_INSTRUCTION_SET = "mips"
+
 BBCLASSEXTEND = "native nativesdk"
