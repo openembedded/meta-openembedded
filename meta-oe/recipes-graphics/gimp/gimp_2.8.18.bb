@@ -20,6 +20,7 @@ DEPENDS = " \
     jasper \
     bzip2 \
     libgudev \
+    libmng \
 "
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
 
