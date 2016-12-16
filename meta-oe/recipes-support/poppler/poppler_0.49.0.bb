@@ -27,6 +27,12 @@ PACKAGECONFIG[nss] = "--enable-libnss,--disable-libnss,nss"
 # Needed for qt5
 CXXFLAGS += "--std=c++11"
 
+#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_end'
+#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_start'
+#| /mnt/a/build/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/6.2.0/ld: .libs/libpoppler.so.65.0.0: hidden symbol `__init_array_end' isn't defined 
+
+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+
 EXTRA_OECONF = "\
     --enable-xpdf-headers \
     --disable-gtk-test \
