@@ -16,8 +16,8 @@ SRC_URI = " \
     file://0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch \
 "
 
-SRC_URI[md5sum] = "4354c6283b135f859563b72457f6a321"
-SRC_URI[sha256sum] = "3d261005d6fed6a92ac4c25f283792552f7dad865d1b7e0c03c2b84c04dbd745"
+SRC_URI[md5sum] = "ed4117ed5d554d25fd7718807fbf819f"
+SRC_URI[sha256sum] = "08b29cfb08efc80f7a8630a2734dec65a99c1b59f1e5771c671d2e4ed8a5cbe7"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
