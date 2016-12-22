@@ -6,12 +6,9 @@ DEPENDS = "gtk+ python3-docutils-native"
 
 inherit autotools pkgconfig perlnative pythonnative
 
-SRC_URI = " \
-    http://download.geany.org/${BP}.tar.bz2 \
-    file://0001-configure.ac-remove-additional-c-test.patch \
-"
-SRC_URI[md5sum] = "39a29deb598e9e3503ee7d9d5fb51a34"
-SRC_URI[sha256sum] = "f73a3708f1a26e9bf72da564d5037d6f7fedca2e0d6175db0681c2b672100a5a"
+SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
+SRC_URI[md5sum] = "9b62a443461cc917b41c94fa7d58fdb1"
+SRC_URI[sha256sum] = "394307596bc908419617e4c33e93eae8b5b733dfc8d01161677b8cbd3a4fb20f"
 
 FILES_${PN} += "${datadir}/icons"
 
