@@ -25,8 +25,8 @@ DEPENDS = " \
 inherit autotools pkgconfig gtk-icon-cache
 
 SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "54ad042b6f91ff8e7a497c22faa2db4b"
-SRC_URI[sha256sum] = "b13471e0a4cb76d04a96bb21c965087b50c16390edee0c6b3bbd920d8ac17745"
+SRC_URI[md5sum] = "2059c63ac0ec29d2da66b6243ae792e1"
+SRC_URI[sha256sum] = "2827e0cf8f58a45759c82b690af5401dbd3ea0ec8dac310e4caea55547637bd7"
 
 do_configure_prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
@@ -106,8 +106,8 @@ FILES_${PN}-geanylatex = "${libdir}/geany/geanylatex.so"
 RDEPENDS_${PN}-geanylatex = "${PN}"
 
 PLUGINS += "${PN}-geanylipsum"
-LIC_FILES_CHKSUM += "file://geanylipsum/COPYING;md5=4325afd396febcb659c36b49533135d4"
-FILES_${PN}-geanylipsum = "${libdir}/geany/geanylipsum.so"
+LIC_FILES_CHKSUM += "file://lipsum/COPYING;md5=4325afd396febcb659c36b49533135d4"
+FILES_${PN}-geanylipsum = "${libdir}/geany/lipsum.so"
 RDEPENDS_${PN}-geanylipsum = "${PN}"
 
 # no lua: max supported version is 5.2
