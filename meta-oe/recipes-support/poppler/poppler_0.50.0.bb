@@ -7,8 +7,8 @@ SRC_URI = " \
     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
 "
-SRC_URI[md5sum] = "9e057ed8eee1f9979fa75d8f044783b8"
-SRC_URI[sha256sum] = "14485f0e1e43dcddf49cfc02c2ccb92910ba3e0e91e06f4bd2642ec00cb3a79f"
+SRC_URI[md5sum] = "1a4c0cd873bddd8f266b85ab8d799962"
+SRC_URI[sha256sum] = "c9c93318b789d3933f6e0bad3bc65110280c28eac3f0666284bb9c9a0ab4bc36"
 
 DEPENDS = "fontconfig zlib cairo lcms"
 
@@ -40,7 +40,7 @@ EXTRA_OECONF = "\
 "
 
 do_compile_prepend() {
-        export GIR_EXTRA_LIBS_PATH="${B}/poppler/.libs"
+    export GIR_EXTRA_LIBS_PATH="${B}/poppler/.libs"
 }
 
 # Adjust library names when building for QT4e
