@@ -151,7 +151,9 @@ do_install_append() {
     done
 
     # fix file-rdeps qa warning
-    sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
+    if [ -f ${D}${bindir}/onnode ]; then
+        sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
+    fi
 
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
 }
