@@ -1,7 +1,7 @@
 # waf is a build system which is used by samba related project.
 # Obtain details from https://wiki.samba.org/index.php/Waf
 # 
-inherit qemu pythonnative
+inherit qemu pythonnative waf
 
 DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python"
 
@@ -86,7 +86,7 @@ do_configure() {
 }
 
 do_compile () {
-    python ./buildtools/bin/waf ${PARALLEL_MAKE}
+    python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
 }
 
 do_install() {

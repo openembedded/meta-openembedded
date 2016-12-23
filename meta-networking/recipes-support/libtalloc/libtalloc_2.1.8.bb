@@ -37,7 +37,6 @@ EXTRA_OECONF += "--disable-rpath \
                  --disable-silent-rules \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
-DISABLE_STATIC = ""
 
 PACKAGES += "pytalloc pytalloc-dbg pytalloc-dev"
 
