@@ -4,8 +4,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 SRC_URI = "http://www.fftw.org/fftw-${PV}.tar.gz"
-SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
-SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
+SRC_URI[md5sum] = "6cc08a3b9c7ee06fdd5b9eb02e06f569"
+SRC_URI[sha256sum] = "8ecfe1b04732ec3f5b7d279fdb8efcad536d555f9d1e8fabd027037d45ea8bcf"
 
 inherit autotools pkgconfig
 
