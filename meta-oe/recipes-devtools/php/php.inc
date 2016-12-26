@@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
             file://configure.patch \
-            file://pthread-check-threads-m4.patch \
             file://70_mod_php5.conf \
             file://php-fpm.service \
           "
