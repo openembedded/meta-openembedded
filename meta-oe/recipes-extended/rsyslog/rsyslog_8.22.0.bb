@@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "06e2884181333dccecceaca82827ae24ca7a258b4fbf7b1e07a80d4caa
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
-EXTRA_OECONF += "--disable-generate-man-pages"
+EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
 
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
