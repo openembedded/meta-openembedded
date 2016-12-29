@@ -12,11 +12,11 @@ DEPENDS = "zlib"
 RDEPENDS_${PN}-compiler = "${PN}"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=af6809583bfde9a31595a58bb4a24514"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
 
-SRCREV = "bba83652e1be610bdb7ee1566ad18346d98b843c"
+SRCREV = "a428e42072765993ff674fda72863c9f1aa2d268"
 
-PV = "2.6.1+git${SRCPV}"
+PV = "3.1.0+git${SRCPV}"
 
 SRC_URI = "git://github.com/google/protobuf.git"
 
