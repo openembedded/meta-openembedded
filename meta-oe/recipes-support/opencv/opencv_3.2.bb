@@ -3,33 +3,40 @@ HOMEPAGE = "http://opencv.org/"
 SECTION = "libs"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0ea90d28b4de883d7af5e6711f14f7bf"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=2b2f8752cc5edf504d283107d033f544"
 
 ARM_INSTRUCTION_SET_armv4 = "arm"
 ARM_INSTRUCTION_SET_armv5 = "arm"
 
-DEPENDS = "libtool swig swig-native python bzip2 zlib glib-2.0 libwebp protobuf protobuf-native"
+DEPENDS = "libtool swig swig-native python bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
-SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
-SRCREV_party3 = "81a676001ca8075ada498583e4166079e5744668"
+SRCREV_opencv = "70bbf17b133496bd7d54d034b0f94bd869e0e810"
+SRCREV_contrib = "86342522b0eb2b16fa851c020cc4e0fef4e010b7"
+SRCREV_ipp = "81a676001ca8075ada498583e4166079e5744668"
+SRCREV_bootdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
 IPP_MD5 = "808b791a6eac9ed78d32a7666804320e"
 
 SRCREV_FORMAT = "opencv"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
-    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=party3;name=party3 \
+    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=ipp;name=ipp \
+    git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=bootdesc;name=bootdesc \
+    git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
-    file://fixgcc60.patch \
     file://fixpkgconfig.patch \
+    file://uselocalxfeatures.patch;patchdir=../contrib/ \
+    file://useoeprotobuf.patch;patchdir=../contrib/ \
 "
 
-PV = "3.1+git${SRCPV}"
+PV = "3.2+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
 do_unpack_extra() {
-    tar xzf ${WORKDIR}/party3/ippicv/ippicv_linux_20151201.tgz -C ${WORKDIR}
+    tar xzf ${WORKDIR}/ipp/ippicv/ippicv_linux_20151201.tgz -C ${WORKDIR}
+    cp ${WORKDIR}/vgg/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
+    cp ${WORKDIR}/bootdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
 }
 addtask unpack_extra after do_unpack before do_patch
 
@@ -52,7 +59,7 @@ PACKAGECONFIG ??= "python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb 
 
 PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
 PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
-PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON,-DBUILD_opencv_dnn=OFF,lapack,"
+PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DUPDATE_PROTO_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,lapack protobuf protobuf-native,"
 PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
 PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
 PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
