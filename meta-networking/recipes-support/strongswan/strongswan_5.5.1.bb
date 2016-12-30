@@ -11,8 +11,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
         file://fix-funtion-parameter.patch \
 "
 
-SRC_URI[md5sum] = "a96fa7eb6c62b40143dadb064b6bd586"
-SRC_URI[sha256sum] = "58463998ac6725eac3687e8a20c1f69803c3772657076d06c43386a24b4c8454"
+SRC_URI[md5sum] = "4eba9474f7dc6c8c8d7037261358e68d"
+SRC_URI[sha256sum] = "720b301991f77bdedd8d551a956f52e2d11686a0ec18e832094f86cf2b842ab7"
 
 EXTRA_OECONF = " \
         --without-lib-prefix \
