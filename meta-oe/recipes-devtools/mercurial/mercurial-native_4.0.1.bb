@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "python-native"
 
 SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
-SRC_URI[md5sum] = "cec2c3db688cb87142809089c6ae13e9"
-SRC_URI[sha256sum] = "4b2e3ef19d34fa1d781cb7425506a05d4b6b1172bab69d6ea78874175fdf3da6"
+SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
+SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
 
 S = "${WORKDIR}/mercurial-${PV}"
 
