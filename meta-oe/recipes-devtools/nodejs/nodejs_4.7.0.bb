@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8e3c01094f0fcb889b13f0354e52f914"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f45e9ffb97e64da46d14f462d34a039f"
 
 DEPENDS = "openssl zlib"
 
@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
     file://no-registry.patch \
 "
-SRC_URI[md5sum] = "4f70295e3eebef1f998fa38456263eaf"
-SRC_URI[sha256sum] = "fe2a85df8758001878abb5bbaf17a6b6cdc12b3e465b1d3bace83b37fdf0345a"
+SRC_URI[md5sum] = "f4a7ca6912d0688b37712bb09b65d2d4"
+SRC_URI[sha256sum] = "b03c777ba8817a8478d57f00797db86dc7e7953d2066c34edbceeba8ad056142"
 
 S = "${WORKDIR}/node-v${PV}"
 
