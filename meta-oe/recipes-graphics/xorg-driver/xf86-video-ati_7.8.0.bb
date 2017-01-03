@@ -11,8 +11,8 @@ DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
-SRC_URI[md5sum] = "ede86cd3d1b1d8882f0aea61d9e924ed"
-SRC_URI[sha256sum] = "2516d9eeb8da8bcd3a01365ed1314919777910fa904ab268af342b5693e1d34c"
+SRC_URI[md5sum] = "f34d04a755e761e03b459155fa3ddcbb"
+SRC_URI[sha256sum] = "401f5de772928f3dc4ce43a885adb0a47a2f61aa4a9e45d2ab3d184136a9d6fa"
 
 EXTRA_OECONF += "--disable-glamor"
 
