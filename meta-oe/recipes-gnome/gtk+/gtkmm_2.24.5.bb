@@ -14,8 +14,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 GNOME_COMPRESS_TYPE = "xz"
 
-SRC_URI[archive.md5sum] = "42fc5a3feeb33ea59b7660200e2a5465"
-SRC_URI[archive.sha256sum] = "c564a438677174b97d69dd70467cb03c933481006398dc9377417aa6abe02a39"
+SRC_URI[archive.md5sum] = "6c59ae8bbff48fad9132f23af347acf1"
+SRC_URI[archive.sha256sum] = "0680a53b7bf90b4e4bf444d1d89e6df41c777e0bacc96e9c09fc4dd2f5fe6b72"
 
 EXTRA_OECONF = " --disable-documentation "
 
