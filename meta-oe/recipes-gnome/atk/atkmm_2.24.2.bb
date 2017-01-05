@@ -9,10 +9,8 @@ DEPENDS = "atk glibmm"
 
 inherit gnome autotools pkgconfig
 
-GNOME_COMPRESS_TYPE = "xz"
-
-SRC_URI[archive.md5sum] = "fec7db3fc47ba2e0c95d130ec865a236"
-SRC_URI[archive.sha256sum] = "bfbf846b409b4c5eb3a52fa32a13d86936021969406b3dcafd4dd05abd70f91b"
+SRC_URI[archive.md5sum] = "d53b60b0f1be597e86070954a49cf0c3"
+SRC_URI[archive.sha256sum] = "ff95385759e2af23828d4056356f25376cfabc41e690ac1df055371537e458bd"
 
 EXTRA_OECONF = " --disable-documentation "
 
