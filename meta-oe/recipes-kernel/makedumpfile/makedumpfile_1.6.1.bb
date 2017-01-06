@@ -20,12 +20,13 @@ FILES_${PN}-tools = "${bindir}/*.pl"
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
+    file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
 "
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 LICENSE = "GPLv2.0"
 
-SRC_URI[md5sum] = "041c5c6de2c3066600e4ca646c2397d6"
-SRC_URI[sha256sum] = "e3147abc52df2ceac1e9affef45bf37e2f2e1d9979bc94a761ee11e4044072ac"
+SRC_URI[md5sum] = "16c0ae9902ae57be4a603a6ab1e86c53"
+SRC_URI[sha256sum] = "0b6e73106998670407887de9e1a505b3a2dbb2fb517a4b968a665eda8fb097ce"
 
 SECTION = "base"
 
