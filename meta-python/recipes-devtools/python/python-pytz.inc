@@ -8,8 +8,10 @@ inherit pypi
 SRC_URI[md5sum] = "8660ba7c3c0abd23e6e4efa493b02966"
 SRC_URI[sha256sum] = "8787de03f35f31699bcaf127e56ad14c00647965ed24d72dbaca87c6e4f843a3"
 
-RDEPENDS_${PN} += "\
+RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-threading \
 "
+
+BBCLASSEXTEND = "native nativesdk"
