@@ -12,7 +12,7 @@ inherit cmake ptest
 
 BBCLASSEXTEND = "native"
 
-SRCREV = "7dfdcfb70d75ccdaaf2b43fa0b23f82599aebec3"
+SRCREV = "e98adba2c298b4179e77237873d3fbc53876c528"
 SRC_URI = " \
     git://github.com/pocoproject/poco.git \
     file://run-ptest \
