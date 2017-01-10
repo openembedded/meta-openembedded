@@ -15,3 +15,5 @@ PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
 BINCONFIG = "${bindir}/log4c-config"
 
 inherit autotools binconfig-disabled
+
+BBCLASSEXTEND = "native"
