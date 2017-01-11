@@ -4,18 +4,18 @@ DESCRIPTION = "Jsoncpp is an implementation of a JSON (http://json.org) reader \
                lightweight data-interchange format. It is easy for humans to \
                read and write. It is easy for machines to parse and generate."
 
-HOMEPAGE = "http://sourceforge.net/projects/jsoncpp/"
+HOMEPAGE = "https://github.com/open-source-parsers/jsoncpp"
 
 SECTION = "libs"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
 
-SRCREV = "d8cd848ede1071a25846cd90b4fddf269d868ff1"
-SRC_URI = "git://github.com/open-source-parsers/jsoncpp \
-"
+SRCREV = "f700fe455940d4d325c088b9174a173e130e0fa8"
+SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
 
 S = "${WORKDIR}/git"
+
 inherit cmake
 
 EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DJSONCPP_WITH_TESTS=OFF"
