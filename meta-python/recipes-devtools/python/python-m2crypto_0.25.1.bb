@@ -2,10 +2,10 @@ SUMMARY = "A Python crypto and SSL toolkit"
 HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=68f7880de949412b2ea248932d97ed54"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95295693f047bb8f76928251a6154a60"
 
-SRC_URI[md5sum] = "89557730e245294a6cab06de8ad4fb42"
-SRC_URI[sha256sum] = "1ac3b6eafa5ff7e2a0796675316d7569b28aada45a7ab74042ad089d15a9567f"
+SRC_URI[md5sum] = "040234289fbef5bed4029f0f7d1dae35"
+SRC_URI[sha256sum] = "ac303a1881307a51c85ee8b1d87844d9866ee823b4fdbc52f7e79187c2d9acef"
 
 SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch "
 
