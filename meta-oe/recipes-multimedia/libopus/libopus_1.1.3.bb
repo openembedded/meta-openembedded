@@ -9,8 +9,8 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e304cdf74c2a1b0a33a5084c128a23a3"
 
 SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
-SRC_URI[md5sum] = "1f08a661bc72930187893a07f3741a91"
-SRC_URI[sha256sum] = "0e290078e31211baa7b5886bcc8ab6bc048b9fc83882532da4a1a45e58e907fd"
+SRC_URI[md5sum] = "32bbb6b557fe1b6066adc0ae1f08b629"
+SRC_URI[sha256sum] = "58b6fe802e7e30182e95d0cde890c0ace40b6f125cffc50635f0ad2eef69b633"
 
 S = "${WORKDIR}/opus-${PV}"
 
