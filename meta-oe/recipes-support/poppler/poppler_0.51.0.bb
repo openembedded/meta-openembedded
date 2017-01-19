@@ -7,8 +7,8 @@ SRC_URI = " \
     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
 "
-SRC_URI[md5sum] = "1a4c0cd873bddd8f266b85ab8d799962"
-SRC_URI[sha256sum] = "c9c93318b789d3933f6e0bad3bc65110280c28eac3f0666284bb9c9a0ab4bc36"
+SRC_URI[md5sum] = "342452b9dfd16f3c9912eb029fe0d4e2"
+SRC_URI[sha256sum] = "e997c9ad81a8372f2dd03a02b00692b8cc479c220340c8881edaca540f402c1f"
 
 DEPENDS = "fontconfig zlib cairo lcms"
 
