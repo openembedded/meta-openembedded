@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
     file://common/jack/jack.h;beginline=1;endline=19;md5=6b736ed6b810592b135480a5e853392e \
 "
 
-DEPENDS = "libsamplerate0 libsndfile1 libopus readline"
+DEPENDS = "libsamplerate0 libsndfile1 readline"
 
 SRC_URI = "git://github.com/jackaudio/jack2.git"
 SRCREV = "0279a2d65a36d1378f5bab56d95bf9e99cc8cefb"
@@ -23,6 +23,7 @@ inherit waf pkgconfig
 
 PACKAGECONFIG ??= "alsa"
 PACKAGECONFIG[alsa] = "--alsa=yes,--alsa=no,alsa-lib"
+PACKAGECONFIG[opus] = "--opus=yes,--opus=no,libopus"
 
 # portaudio is for windows builds only
 EXTRA_OECONF = "--portaudio=no"
