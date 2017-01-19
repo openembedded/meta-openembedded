@@ -20,11 +20,13 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[fixed-point] = "--enable-fixed-point,,"
 PACKAGECONFIG[float-approx] = "--enable-float-approx,,"
 
-EXTRA_OECONF = "--with-NE10-includes=${STAGING_DIR_TARGET}${includedir} \
-                --with-NE10-libraries=${STAGING_DIR_TARGET}${libdir} \
-                --enable-asm \
-                --enable-intrinsics \
-               "
+EXTRA_OECONF = " \
+    --with-NE10-includes=${STAGING_DIR_TARGET}${includedir} \
+    --with-NE10-libraries=${STAGING_DIR_TARGET}${libdir} \
+    --enable-asm \
+    --enable-intrinsics \
+    --enable-custom-modes \
+"
 
 python () {
     if d.getVar('TARGET_FPU') in [ 'soft' ]:
