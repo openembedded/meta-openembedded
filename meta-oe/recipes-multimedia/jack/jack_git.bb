@@ -22,7 +22,7 @@ S = "${WORKDIR}/git"
 inherit waf pkgconfig
 
 PACKAGECONFIG ??= "alsa"
-PACKAGECONFIG[alsa] = "--alsa=yes,alsa=no,alsa-lib"
+PACKAGECONFIG[alsa] = "--alsa=yes,--alsa=no,alsa-lib"
 
 # portaudio is for windows builds only
 EXTRA_OECONF = "--portaudio=no"
