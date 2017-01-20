@@ -5,7 +5,7 @@ HOMEPAGE = "http://klub.com.pl/dhcpv6"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7236695bb6d4461c105d685a8b61c4e3"
 
-SRC_URI = "http://klub.com.pl/dhcpv6/${BPN}/${P}.tar.gz \
+SRC_URI = "http://klub.com.pl/dhcpv6/${BPN}/${BP}.tar.gz \
         file://dibbler_fix_getSize_crash.patch \
         file://types.patch \
 "
