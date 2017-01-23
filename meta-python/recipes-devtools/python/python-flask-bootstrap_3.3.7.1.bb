@@ -1,9 +1,9 @@
 DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3452e378337a5cc2092d32a140178d5a"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
 
-SRC_URI[md5sum] = "b8aedbe51f2bf511af955f2bc288cd8c"
-SRC_URI[sha256sum] = "3a7b71e22596a6d559965e059958960e0bb671adc131537a79edb491a8f31714"
+SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
+SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
 
 PYPI_PACKAGE = "Flask-Bootstrap"
 
