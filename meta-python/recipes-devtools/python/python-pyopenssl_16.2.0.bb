@@ -1,2 +1,2 @@
-inherit pypi setuptools
 require python-pyopenssl.inc
+inherit pypi setuptools
