@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=c933fba6d89fda89f58df1e086e3f2e7 \
 "
 SECTION = "libs"
 
-LDAP_VER = "${@'.'.join(d.getVar('PV',1).split('.')[0:2])}"
+LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
 SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-m4-pthread.patch \

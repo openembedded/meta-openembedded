@@ -14,7 +14,7 @@ SRCREV = "ec68a99464055029c01082762517e97245ddae0c"
 
 S = "${WORKDIR}/git/src"
 
-VIMDIR = "vim${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
+VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
 
 inherit autotools update-alternatives
 inherit autotools-brokensep

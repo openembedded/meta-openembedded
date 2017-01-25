@@ -8,7 +8,7 @@ SECTION = "console/utils"
 DEPENDS = "ncurses file"
 RDEPENDS_${PN} = "ncurses-terminfo"
 
-PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+PV_MAJOR = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
 SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
 

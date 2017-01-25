@@ -15,7 +15,7 @@ inherit autotools systemd
 # return something like '1.2.3' or '1.2.3/rc1'
 #
 def get_sub(d):
-    parts = d.getVar('PV',True).split('-')
+    parts = d.getVar('PV').split('-')
     try:
         return parts[0] + '/' + parts[1]
     except:

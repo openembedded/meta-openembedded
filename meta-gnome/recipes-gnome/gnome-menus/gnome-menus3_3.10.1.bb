@@ -10,7 +10,7 @@ inherit gnomebase pkgconfig python-dir pythonnative gobject-introspection
 
 BPN = "gnome-menus"
 
-SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BPN}-${PV}.tar.xz"
 
 SRC_URI[md5sum] = "6db025e79e2b69f39fc7aa0753f43081"

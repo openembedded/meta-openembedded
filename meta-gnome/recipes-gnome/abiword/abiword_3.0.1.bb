@@ -22,7 +22,7 @@ SRC_URI[md5sum] = "f3f8052e7b4979a43b75775a381e6cb8"
 SRC_URI[sha256sum] = "e094f6fbf0afc5c5538b4894888e7c346f8ee8f49c9d24821dd696d0734865c6"
 
 #want 3.x from 3.x.y for the installation directory
-SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
 inherit autotools-brokensep pkgconfig
 
