@@ -16,6 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
            file://0002-correct-jpeg-memsrcdest-support.patch \
            file://avoid_using_sprintf.patch \
+           file://0001-scripts-remove-bashisms.patch \
 "
 
 SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
@@ -47,7 +48,6 @@ do_install_append() {
 PACKAGES =+ "libgphotoport libgphoto2-camlibs"
 FILES_libgphoto2-camlibs = "${libdir}/libgphoto2*/*/*.so*"
 RRECOMMENDS_${PN} = "libgphoto2-camlibs"
-RDEPENDS_${PN} = "bash"
 
 FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
 
