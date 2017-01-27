@@ -13,3 +13,5 @@ SRC_URI[md5sum] = "176308d2c03f8f3a7b2bd4f4d284fe71"
 SRC_URI[sha256sum] = "b3d2ea5a25fc88dcee80c396014f72df1b4742f8cfbbc5349c39d64a0d338890"
 
 EXTRA_OECONF = " --disable-gtk3 --disable-lynx "
+
+RDEPENDS_${PN} += "pulseaudio-server"
