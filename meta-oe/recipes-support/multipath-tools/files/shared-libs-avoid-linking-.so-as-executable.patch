@@ -14,36 +14,42 @@ Upstream-Status: Inappropriate [OE specific, -pie shouldn't be in CFLAGS?!]
 
 Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
 ---
- libmpathpersist/Makefile | 2 +-
- libmultipath/Makefile    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/libmpathpersist/Makefile b/libmpathpersist/Makefile
-index c4ec1c5..790692a 100644
---- a/libmpathpersist/Makefile
-+++ b/libmpathpersist/Makefile
-@@ -20,7 +20,7 @@ all: $(LIBS)
- 
- $(LIBS): 
- 	$(CC) -Wall -fPIC -c $(CFLAGS) *.c 
--	$(CC)  -shared $(LIBDEPS) -Wl,-soname=$@ $(CFLAGS) -o $@ $(OBJS)
-+	$(CC) $(LIBDEPS) $(CFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ -o $@ $(OBJS)
- 	ln -s $(LIBS) $(DEVLIB)
- 	$(GZIP) mpath_persistent_reserve_in.3 > mpath_persistent_reserve_in.3.gz	
- 	$(GZIP) mpath_persistent_reserve_out.3 > mpath_persistent_reserve_out.3.gz	
-diff --git a/libmultipath/Makefile b/libmultipath/Makefile
-index fc0f3d6..2287d91 100644
---- a/libmultipath/Makefile
-+++ b/libmultipath/Makefile
-@@ -55,7 +55,7 @@ endif
+diff --git a/libmpathcmd/Makefile b/libmpathcmd/Makefile
+index 457c4ca..f68c82c 100644
+--- a/libmpathcmd/Makefile
++++ b/libmpathcmd/Makefile
+@@ -9,7 +9,7 @@ OBJS = mpath_cmd.o
  all: $(LIBS)
  
  $(LIBS): $(OBJS)
 -	$(CC) $(LDFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ $(CFLAGS) -o $@ $(OBJS) $(LIBDEPS)
 +	$(CC) $(LDFLAGS) $(CFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ -o $@ $(OBJS) $(LIBDEPS)
- 	ln -sf $@ $(DEVLIB)
+ 	$(LN) $@ $(DEVLIB)
+ 
+ install: $(LIBS)
+diff --git a/libmpathpersist/Makefile b/libmpathpersist/Makefile
+index 6e43427..2486302 100644
+--- a/libmpathpersist/Makefile
++++ b/libmpathpersist/Makefile
+@@ -15,7 +15,7 @@ all: $(LIBS)
+ 
+ $(LIBS):
+ 	$(CC) -c $(CFLAGS) *.c
+-	$(CC) $(LDFLAGS) $(SHARED_FLAGS) $(LIBDEPS) -Wl,-soname=$@ $(CFLAGS) -o $@ $(OBJS)
++	$(CC) $(LDFLAGS) $(CFLAGS) $(SHARED_FLAGS) $(LIBDEPS) -Wl,-soname=$@ -o $@ $(OBJS)
+ 	$(LN) $(LIBS) $(DEVLIB)
+ 	$(GZIP) mpath_persistent_reserve_in.3 > mpath_persistent_reserve_in.3.gz
+ 	$(GZIP) mpath_persistent_reserve_out.3 > mpath_persistent_reserve_out.3.gz
+diff --git a/libmultipath/Makefile b/libmultipath/Makefile
+index 495cebe..752bcc0 100644
+--- a/libmultipath/Makefile
++++ b/libmultipath/Makefile
+@@ -55,7 +55,7 @@ OBJS = memory.o parser.o vector.o devmapper.o callout.o \
+ all: $(LIBS)
+ 
+ $(LIBS): $(OBJS)
+-	$(CC) $(LDFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ $(CFLAGS) -o $@ $(OBJS) $(LIBDEPS)
++	$(CC) $(LDFLAGS) $(CFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ -o $@ $(OBJS) $(LIBDEPS)
+ 	$(LN) $@ $(DEVLIB)
  
  install:
--- 
-2.11.0
-
