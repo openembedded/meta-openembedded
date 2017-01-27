@@ -6,7 +6,7 @@ LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
 DEPENDS += "libtdb libtalloc libtevent popt"
 RDEPENDS_pyldb += "python"
 
-SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+SRC_URI = "https://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://do-not-import-target-module-while-cross-compile.patch \
            file://ldb-Add-configure-options-for-packages.patch \
           "
