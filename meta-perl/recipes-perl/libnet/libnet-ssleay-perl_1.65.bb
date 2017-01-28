@@ -32,8 +32,7 @@ inherit cpan ptest
 
 EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
                    INC=-I=${STAGING_INCDIR} \
-                   'EXTRALIBS=-lssl -lcrypto -lz' \
-                   'LDLOADLIBS=-lssl -lcrypto -lz' \
+                   '-lssl -lcrypto -lz' \
                   "
 
 do_configure_prepend() {
