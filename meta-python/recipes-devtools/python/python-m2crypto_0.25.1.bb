@@ -12,7 +12,7 @@ SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch "
 PYPI_PACKAGE = "M2Crypto"
 inherit pypi setuptools siteinfo
 
-DEPENDS += "openssl swig-native"
+DEPENDS += "openssl swig-native python-typing"
 
 DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST} -I${STAGING_INCDIR}"
 DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
