@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 inherit xfce-panel-plugin cmake
 
-SRC_URI[md5sum] = "3cbbe6f233089b6923113f47d311f875"
-SRC_URI[sha256sum] = "1b7afb233c74c33f0ee26de6514c4168497f4aa584dc2f6778dff15d8d47b165"
+SRC_URI[md5sum] = "29240011d455d0fc591b4a1e2262b7a7"
+SRC_URI[sha256sum] = "7e25706376e00fd216a9295aca3d0ff9f34bc13d4962bb6217e5f4270b973a80"
 
 RRECOMMENDS_${PN} += "menulibre"
