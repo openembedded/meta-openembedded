@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d9bb3515869c0f426cb8441c899ae7f5"
 
-SRC_URI[md5sum] = "d0d3e5fb81c6b4d87c08ed5cad677337"
-SRC_URI[sha256sum] = "57b6c314a2c5f014dce634a0e1eeeb1707741b2e30bc7fee9c5b01fa216d57a3"
+SRC_URI[md5sum] = "921ec6b48f2ddafc8bb6160957baf444"
+SRC_URI[sha256sum] = "5722cd09762faa01276230270ff16af7acf7c5c45d623868d9ba116f15791ce8"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-email \
