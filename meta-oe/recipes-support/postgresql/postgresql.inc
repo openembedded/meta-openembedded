@@ -20,7 +20,6 @@ DESCRIPTION = "\
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
 DEPENDS = "zlib readline tzcode-native"
-INC_PR = "r0"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -40,7 +39,7 @@ export LDFLAGS_SL = "${LDFLAGS}"
 
 inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd
 
-CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR}"
+CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.6"
 
 SYSTEMD_SERVICE_${PN} = "postgresql.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
