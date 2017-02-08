@@ -1,6 +1,6 @@
 SECTION = "utils"
 DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
-DEPENDS = "udev"
+DEPENDS_append_class-target = " udev"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
@@ -16,8 +16,17 @@ S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+PACKAGECONFIG_class-target ??= " \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
                    thin-provisioning-tools \
+                   odirect \
+"
+
+# odirect is enabled by default also for native compilation because
+# there's currently a bug in lib/device/dev-io.c which prevents
+# compiling without it. It is better to stick to configurations that
+# were actually tested by upstream...
+PACKAGECONFIG ??= " \
                    odirect \
 "
 
@@ -32,12 +41,9 @@ EXTRA_OECONF = "--with-user= \
                 --enable-realtime \
                 --enable-applib \
                 --enable-cmdlib \
-                --enable-udev_sync \
-                --enable-udev_rules \
                 --enable-pkgconfig \
                 --enable-dmeventd \
                 --enable-lvmetad \
-                --with-udev-prefix= \
                 --with-usrlibdir=${libdir} \
                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
                 --disable-thin_check_needs_check \
@@ -45,12 +51,24 @@ EXTRA_OECONF = "--with-user= \
                 --with-thin-dump=${sbindir}/thin_dump \
                 --with-thin-repair=${sbindir}/thin_repair \
                 --with-thin-restore=${sbindir}/thin_restore \
+                ${EXTRA_OECONF_UDEV} \
+"
+
+EXTRA_OECONF_UDEV = " \
+                --disable-udev_sync \
+                --disable-udev_rules \
+"
+EXTRA_OECONF_UDEV_class-target = " \
+                --enable-udev_sync \
+                --enable-udev_rules \
+                --with-udev-prefix= \
 "
 
 CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
 
 do_install_append() {
     # Install machine specific configuration file
+    install -d ${D}${sysconfdir}/lvm
     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
     sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
