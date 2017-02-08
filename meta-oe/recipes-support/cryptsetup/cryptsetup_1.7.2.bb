@@ -32,3 +32,5 @@ RRECOMMENDS_${PN} = "kernel-module-aes-generic \
 "
 
 EXTRA_OECONF = "--enable-static"
+
+BBCLASSEXTEND = "native nativesdk"
