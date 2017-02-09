@@ -14,6 +14,7 @@ SRC_URI = " \
     file://optional-depends.patch \
     file://0001-fix-build-with-newer-glibc-versions.patch \
     file://udisks-1.0.5-fix-service-file.patch \
+    file://0001-Make-udev-rules-directory-configurable.patch \
 "
 
 SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
@@ -24,7 +25,8 @@ inherit autotools-brokensep systemd gtk-doc
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
 
-EXTRA_OECONF = "--disable-man-pages"
+EXTRA_OECONF = "--disable-man-pages --libdir=${base_libdir} --sbindir=${base_sbindir}"
+EXTRA_OEMAKE = "udevrulesdir=${nonarch_base_libdir}/udev/rules.d/"
 
 FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
                 ${datadir}/dbus-1/ \
