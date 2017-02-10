@@ -86,3 +86,5 @@ RDEPENDS_${PN} = "mime-support \
 
 SYSTEMD_SERVICE_${PN} = "gateone.service"
 INITSCRIPT_NAME = "gateone"
+
+PNBLACKLIST[gateone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130642/"

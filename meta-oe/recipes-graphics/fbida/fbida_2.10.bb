@@ -64,3 +64,5 @@ do_install() {
 }
 
 RDEPENDS_${PN} = "ttf-dejavu-sans-mono bash"
+
+PNBLACKLIST[fbida] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130677/"

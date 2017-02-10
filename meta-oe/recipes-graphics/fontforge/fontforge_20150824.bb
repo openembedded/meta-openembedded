@@ -58,3 +58,5 @@ RDEPENDS_${PN}-python = "python"
 
 # for e.g kde's oxygen-fonts
 BBCLASSEXTEND = "native"
+
+PNBLACKLIST[fontforge] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130639/"

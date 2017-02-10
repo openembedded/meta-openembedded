@@ -27,3 +27,5 @@ python populate_packages_prepend () {
 
 PACKAGES_DYNAMIC += "^openzone-.*"
 ALLOW_EMPTY_${PN} = "1"
+
+PNBLACKLIST[openzone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130682/"

@@ -23,3 +23,5 @@ do_configure_append() {
     # avoid host polution inf pkg-config files
     sed -i "s:${STAGING_DIR_HOST}::g" `find -name '*.pc'`
 }
+
+PNBLACKLIST[gtkmathview] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/131636/"

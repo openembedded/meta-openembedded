@@ -60,3 +60,5 @@ do_install () {
 }
 
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+
+PNBLACKLIST[ipmiutil] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130641/"

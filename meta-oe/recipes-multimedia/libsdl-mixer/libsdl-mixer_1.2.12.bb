@@ -38,3 +38,5 @@ do_configure () {
     done
 }
 
+
+PNBLACKLIST[libsdl-mixer] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130592/"

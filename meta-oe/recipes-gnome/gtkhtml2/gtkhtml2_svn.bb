@@ -37,3 +37,5 @@ S = "${WORKDIR}/trunk"
 inherit pkgconfig autotools
 
 EXTRA_OECONF = " --disable-accessibility"
+
+PNBLACKLIST[gtkhtml2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130633/"

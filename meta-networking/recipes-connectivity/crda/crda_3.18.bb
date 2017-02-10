@@ -34,3 +34,5 @@ do_install() {
 }
 
 RDEPENDS_${PN} = "udev wireless-regdb"
+
+PNBLACKLIST[crda] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130675/"

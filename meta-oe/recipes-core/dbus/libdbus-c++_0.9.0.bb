@@ -27,3 +27,5 @@ PACKAGE_BEFORE_PN = "${PN}-tools"
 FILES_${PN}-tools = "${bindir}"
 
 BBCLASSEXTEND = "native"
+
+PNBLACKLIST[libdbus-c++] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130644/"

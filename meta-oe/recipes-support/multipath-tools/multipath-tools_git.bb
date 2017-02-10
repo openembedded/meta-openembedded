@@ -59,3 +59,5 @@ FILES_kpartx = "${base_sbindir}/kpartx \
                "
 
 RDEPENDS_${PN} += "kpartx"
+
+PNBLACKLIST[multipath-tools] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130529/"

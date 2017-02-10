@@ -17,3 +17,5 @@ GNOME_COMPRESS_TYPE="bz2"
 
 DEPENDS += "shared-mime-info intltool-native"
 RDEPENDS_${PN} = "shared-mime-info"
+
+PNBLACKLIST[gnome-mime-data] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130589/"

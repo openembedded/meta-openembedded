@@ -21,3 +21,5 @@ EXTRA_OECONF = "--enable-cairo --disable-gtk-doc"
 LDFLAGS += " -L${STAGING_LIBDIR}"
 
 PACKAGES =+ "${PN}-bin"
+
+PNBLACKLIST[libgpewidget] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130594/"

@@ -22,3 +22,5 @@ inherit autotools pkgconfig pythonnative
 
 FILES_${PN} += "${datadir}/telepathy \
     ${datadir}/dbus-1"
+
+PNBLACKLIST[libtelepathy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130609/"

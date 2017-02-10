@@ -31,3 +31,5 @@ FILES_${PN} += "${datadir}/icons \
 
 FILES_${PN}-doc += "${datadir}/omf \
                     ${datadir}/gnome/help "
+
+PNBLACKLIST[gnome-system-monitor] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/131635/"

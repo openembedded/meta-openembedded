@@ -15,3 +15,5 @@ do_install() {
 }
 
 RDEPENDS_${PN} += "bash"
+
+PNBLACKLIST[unionfs-fuse] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130648/"

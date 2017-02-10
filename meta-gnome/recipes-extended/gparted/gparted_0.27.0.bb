@@ -36,3 +36,5 @@ FILES_${PN} += " \
 "
 
 RDEPENDS_${PN} = "dosfstools mtools e2fsprogs"
+
+PNBLACKLIST[gparted] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/131634/"

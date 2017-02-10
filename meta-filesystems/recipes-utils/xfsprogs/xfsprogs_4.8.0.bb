@@ -54,3 +54,5 @@ do_configure_prepend () {
 do_install_append() {
         oe_runmake 'DESTDIR=${D}' install install-dev
 }
+
+PNBLACKLIST[xfsprogs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130663/"

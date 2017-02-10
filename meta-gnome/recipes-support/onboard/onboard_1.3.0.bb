@@ -23,3 +23,5 @@ RDEPENDS_${PN} += " \
     python3-pycairo \
     python3-pygobject \
 "
+
+PNBLACKLIST[onboard] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130637/"

@@ -34,3 +34,5 @@ RDEPENDS_${PN} += " \
     python3-unixadmin \
     python3-psutil \
 "
+
+PNBLACKLIST[menulibre] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130617/"

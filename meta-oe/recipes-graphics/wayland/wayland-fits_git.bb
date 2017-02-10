@@ -31,3 +31,5 @@ do_install_append() {
 
 FILES_${PN} += "${bindir}/wfits ${libdir}/weston/*.so"
 FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/weston/.debug ${prefix}/src"
+
+PNBLACKLIST[wayland-fits] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130632/"

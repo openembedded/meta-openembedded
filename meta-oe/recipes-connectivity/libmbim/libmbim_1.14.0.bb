@@ -16,3 +16,5 @@ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
 "
 SRC_URI[md5sum] = "2ed809e65c85353d3ab59e372890e549"
 SRC_URI[sha256sum] = "ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b"
+
+PNBLACKLIST[libmbim] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130590/"

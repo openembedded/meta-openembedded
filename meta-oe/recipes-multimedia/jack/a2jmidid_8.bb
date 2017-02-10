@@ -20,3 +20,5 @@ inherit waf
 export LINKFLAGS="${LDFLAGS}"
 
 FILES_${PN} += "${datadir}/dbus-1/services"
+
+PNBLACKLIST[a2jmidid] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130646/"

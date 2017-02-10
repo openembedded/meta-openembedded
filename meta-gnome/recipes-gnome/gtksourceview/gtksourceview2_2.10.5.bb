@@ -29,3 +29,5 @@ do_configure_prepend() {
 }
 
 FILES_${PN} += " ${datadir}/gtksourceview-2.0"
+
+PNBLACKLIST[gtksourceview2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130597/"

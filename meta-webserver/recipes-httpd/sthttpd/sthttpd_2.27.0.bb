@@ -51,4 +51,3 @@ SYSTEMD_SERVICE_${PN} = "thttpd.service"
 
 FILES_${PN} += "${SRV_DIR}"
 FILES_${PN}-dbg += "${SRV_DIR}/cgi-bin/.debug"
-

@@ -45,3 +45,5 @@ RDEPENDS_${PN}-server += "openssh-sshd ${NEEDED_PERL_MODULES}"
 #| {standard input}:2103: Error: instruction not supported in Thumb16 mode -- `adcs r7,r7,r7'
 #| {standard input}:2104: Error: selected processor does not support Thumb mode `it cs'
 ARM_INSTRUCTION_SET = "arm"
+
+PNBLACKLIST[mosh] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130653/"

@@ -44,3 +44,5 @@ RRECOMMENDS_${PN} = "\
     ${PN}-themes \
     ${PN}-plugins \
 "
+
+PNBLACKLIST[libeweather] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130649/"

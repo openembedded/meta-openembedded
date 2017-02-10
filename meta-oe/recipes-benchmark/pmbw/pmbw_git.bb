@@ -26,3 +26,5 @@ PACKAGES =+ "${PN}-stats2gnuplot"
 FILES_${PN}-stats2gnuplot = "${bindir}/stats2gnuplot"
 
 RRECOMMENDS_${PN} = "${PN}-stats2gnuplot"
+
+PNBLACKLIST[pmbw] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130568/"

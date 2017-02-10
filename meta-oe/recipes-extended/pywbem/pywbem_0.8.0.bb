@@ -34,3 +34,6 @@ do_install_append() {
 }
 
 BBCLASSEXTEND = "native"
+
+PNBLACKLIST[pywbem] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130596/"
+PNBLACKLIST[pywbem] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130681/"

@@ -12,3 +12,5 @@ require klibc-utils.inc
 require klibc.inc
 
 DEPENDS = "klibc"
+
+PNBLACKLIST[klibc-utils] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130679/"

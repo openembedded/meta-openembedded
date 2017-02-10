@@ -38,3 +38,5 @@ PACKAGES =+ "kexec-klibc kdump-klibc"
 
 FILES_kexec-klibc = "${sbindir}/kexec"
 FILES_kdump-klibc = "${sbindir}/kdump"
+
+PNBLACKLIST[kexec-tools-klibc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130674/"

@@ -12,3 +12,5 @@ PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
                         ,mysql5"
 
 FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
+
+PNBLACKLIST[php] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130601/"

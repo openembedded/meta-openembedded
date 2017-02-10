@@ -132,3 +132,5 @@ RDEPENDS_${PN}-pwmconfig = "${PN}-fancontrol"
 FILES_${PN}-isatools = "${sbindir}/isa*"
 FILES_${PN}-isatools-dbg = "${sbindir}/.debug/isa*"
 FILES_${PN}-isatools-doc = "${mandir}/man8/isa*"
+
+PNBLACKLIST[lmsensors] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/131629/"

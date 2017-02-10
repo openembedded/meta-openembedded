@@ -33,3 +33,5 @@ RDEPENDS_${PN} = " \
     networkmanager \
     openvpn \
 "
+
+PNBLACKLIST[networkmanager-openvpn] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130667/"

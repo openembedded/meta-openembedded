@@ -20,3 +20,5 @@ CONFFILES_${PN} += " \
     ${sysconfdir}/xdg/user-dirs.conf \
     ${sysconfdir}/xdg/user-dirs.defaults \
 "
+
+PNBLACKLIST[xdg-user-dirs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130635/"

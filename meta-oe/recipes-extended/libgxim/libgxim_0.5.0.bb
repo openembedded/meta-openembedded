@@ -23,3 +23,5 @@ EXTRA_OECONF = " --disable-static --disable-rebuilds --enable-compile-warnings=m
 DEPENDS += "gtk+ glib-2.0 ruby-native intltool-native gnome-common-native"
 
 inherit autotools pkgconfig gettext
+
+PNBLACKLIST[libgxim] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130604/"

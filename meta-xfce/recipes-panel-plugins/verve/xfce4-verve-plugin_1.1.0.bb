@@ -7,3 +7,5 @@ inherit xfce-panel-plugin
 
 SRC_URI[md5sum] = "ddd0190ae56f6117dbcf9ff2bf5a8cbf"
 SRC_URI[sha256sum] = "a3196f818c7ad57d19cd6581e168fd2b9f96de070246aea70c35ce2e5f9d9c84"
+
+PNBLACKLIST[xfce4-verve-plugin] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130622/"

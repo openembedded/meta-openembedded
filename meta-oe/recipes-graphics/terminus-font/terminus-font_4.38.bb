@@ -43,3 +43,5 @@ PACKAGES += "${PN}-consolefonts ${PN}-consoletrans ${PN}-pcf"
 FILES_${PN}-consolefonts = "${datadir}/consolefonts"
 FILES_${PN}-consoletrans = "${datadir}/consoletrans"
 FILES_${PN}-pcf = "${datadir}/fonts/terminus"
+
+PNBLACKLIST[terminus-font] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130638/"

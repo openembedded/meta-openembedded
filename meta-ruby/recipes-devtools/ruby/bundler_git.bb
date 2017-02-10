@@ -29,3 +29,5 @@ inherit ruby
 RDEPENDS_${PN} = "git"
 
 BBCLASSEXTEND = "native"
+
+PNBLACKLIST[bundler] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130640/"

@@ -25,3 +25,5 @@ do_configure_prepend () {
         rm -f acinclude/$i
     done
 }
+
+PNBLACKLIST[libsdl2-mixer] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130659/"

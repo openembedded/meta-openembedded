@@ -28,3 +28,5 @@ do_install() {
     install -d ${D}/${sysconfdir}/xdg/autostart
     install -m 644 ${WORKDIR}/devilspie2.desktop ${D}/${sysconfdir}/xdg/autostart
 }
+
+PNBLACKLIST[devilspie2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130666/"

@@ -48,3 +48,5 @@ FILES_ubirename-klibc = "${sbindir}/ubirename"
 FILES_ubirmvol-klibc = "${sbindir}/ubirmvol"
 FILES_ubirsvol-klibc = "${sbindir}/ubirsvol"
 FILES_ubiupdatevol-klibc = "${sbindir}/ubiupdatevol"
+
+PNBLACKLIST[ubi-utils-klibc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130665/"

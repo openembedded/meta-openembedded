@@ -17,3 +17,5 @@ RRECOMMENDS_${PN} = "usb-modeswitch-data"
 do_install() {
     oe_runmake DESTDIR=${D} install
 }
+
+PNBLACKLIST[usb-modeswitch] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130620/"
