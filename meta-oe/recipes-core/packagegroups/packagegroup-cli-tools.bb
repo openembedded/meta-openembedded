@@ -43,3 +43,7 @@ RDEPENDS_${PN}-debug = "\
 RRECOMMENDS_${PN}-debug = "\
     ltrace \
 "
+
+PNBLACKLIST[packagegroup-cli-tools] ?= "Runtime depends on blacklisted dbus-daemon-proxy"
+
+PNBLACKLIST[packagegroup-cli-tools] ?= "Runtime depends on blacklisted packagegroup-cli-tools"

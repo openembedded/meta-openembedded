@@ -18,3 +18,7 @@ SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "kodi.service"
 
 RDEPENDS_${PN} += "xinit kodi"
+
+PNBLACKLIST[kodi-startup] ?= "Runtime depends on blacklisted kodi"
+
+PNBLACKLIST[kodi-startup] ?= "Runtime depends on blacklisted kodi-startup-dev"

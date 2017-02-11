@@ -13,3 +13,9 @@ SRC_URI[md5sum] = "5332876b627b3237eebb76db66e2fb11"
 SRC_URI[sha256sum] = "0b4c90c585166c958d479075b98da6e28ca500bda6f4d3443f20e0a2172030ee"
 
 FILES_${PN} += "${datadir}/appdata"
+
+PNBLACKLIST[ristretto] ?= "Runtime depends on blacklisted tumbler"
+
+PNBLACKLIST[ristretto] ?= "Runtime depends on blacklisted ristretto-dev"
+
+PNBLACKLIST[ristretto] ?= "Runtime depends on blacklisted ristretto"

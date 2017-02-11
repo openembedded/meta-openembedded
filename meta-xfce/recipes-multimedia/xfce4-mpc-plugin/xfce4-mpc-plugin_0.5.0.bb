@@ -13,3 +13,9 @@ RRECOMMENDS_${PN} = "mpd"
 
 SRC_URI[md5sum] = "13d5d95ef0c305bac45fde6231258e5d"
 SRC_URI[sha256sum] = "f1320916ae3112e6825699652a502cebfa78bb006c649b42d3d331dfe57b6cb0"
+
+PNBLACKLIST[xfce4-mpc-plugin] ?= "Runtime depends on blacklisted mpd"
+
+PNBLACKLIST[xfce4-mpc-plugin] ?= "Runtime depends on blacklisted xfce4-mpc-plugin"
+
+PNBLACKLIST[xfce4-mpc-plugin] ?= "Runtime depends on blacklisted xfce4-mpc-plugin-dev"

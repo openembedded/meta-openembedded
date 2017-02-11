@@ -29,3 +29,9 @@ do_install() {
 }
 
 FILES_${PN} = "${datadir}/enlightenment/data/themes/"
+
+PNBLACKLIST[e-wm-theme-b-and-w] ?= "Runtime depends on blacklisted e-wm"
+
+PNBLACKLIST[e-wm-theme-b-and-w] ?= "Runtime depends on blacklisted e-wm-theme-b-and-w"
+
+PNBLACKLIST[e-wm-theme-b-and-w] ?= "Runtime depends on blacklisted e-wm-theme-b-and-w-dev"

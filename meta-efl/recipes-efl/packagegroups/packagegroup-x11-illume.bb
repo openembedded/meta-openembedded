@@ -22,3 +22,9 @@ RDEPENDS_${PN} = "\
     e-wm \
     ${ECONFIG} \
 "
+
+PNBLACKLIST[packagegroup-x11-illume] ?= "Runtime depends on blacklisted e-wm"
+
+PNBLACKLIST[packagegroup-x11-illume] ?= "Runtime depends on blacklisted e-wm-config-mobile"
+
+PNBLACKLIST[packagegroup-x11-illume] ?= "Runtime depends on blacklisted e-wm-theme-default"

@@ -66,3 +66,9 @@ RRECOMMENDS_${PN} = " \
     xfce4-taskmanager \
     gigolo \
 "
+
+PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted xfce4-mixer"
+
+PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted xfce4-verve-plugin"
+
+PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted ristretto"

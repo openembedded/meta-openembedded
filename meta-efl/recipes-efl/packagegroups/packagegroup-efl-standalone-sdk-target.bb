@@ -15,3 +15,5 @@ RDEPENDS_${PN} = "\
     packagegroup-core-standalone-sdk-target \
     ${SDK-EFL} \
     ${SDK-EXTRAS}"
+
+PNBLACKLIST[packagegroup-efl-standalone-sdk-target] ?= "Runtime depends on blacklisted elementary-dev"

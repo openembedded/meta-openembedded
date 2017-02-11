@@ -11,3 +11,9 @@ inherit xfce-app
 
 SRC_URI[md5sum] = "e2d2faeb7a6f62813e287f3d12522b71"
 SRC_URI[sha256sum] = "4189c0c82b66b758a6d5bc651493b675d3d46329e5f1a76ff26c448125f4fcb0"
+
+PNBLACKLIST[xfmpc] ?= "Runtime depends on blacklisted mpd"
+
+PNBLACKLIST[xfmpc] ?= "Runtime depends on blacklisted xfmpc-dev"
+
+PNBLACKLIST[xfmpc] ?= "Runtime depends on blacklisted xfmpc"
