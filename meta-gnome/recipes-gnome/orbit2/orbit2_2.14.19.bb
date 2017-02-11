@@ -39,3 +39,5 @@ inherit autotools pkgconfig gtk-doc
 
 EXTRA_OEMAKE = "IDL_COMPILER='${STAGING_BINDIR_NATIVE}/orbit-idl-2'"
 EXTRA_OEMAKE_class-native = " "
+
+PNBLACKLIST[orbit2] ?= "Depends on blacklisted libidl-native"

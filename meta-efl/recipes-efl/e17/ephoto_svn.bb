@@ -17,3 +17,5 @@ SRCNAME = "${PN}"
 B = "${S}"
 
 SRC_URI += "file://configure.patch"
+
+PNBLACKLIST[ephoto] ?= "Depends on blacklisted elementary"

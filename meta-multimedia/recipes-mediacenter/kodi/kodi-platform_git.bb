@@ -36,3 +36,4 @@ do_compile_prepend() {
 RPROVIDES_${PN} += "libkodiplatform"
 FILES_${PN}-dev += "${libdir}/*platform"
 
+PNBLACKLIST[kodi-platform] ?= "Depends on blacklisted kodi"

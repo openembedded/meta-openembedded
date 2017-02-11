@@ -24,3 +24,5 @@ LDFLAGS += "-lgmodule-2.0 -lICE"
 
 FILES_${PN} += "${libdir}/gedit-2/plugin* ${datadir}/gedit-2"
 FILES_${PN}-dbg += "${libdir}/gedit-2/plugin-loaders/.debug ${libdir}/gedit-2/plugins/.debug"
+
+PNBLACKLIST[gedit] ?= "Depends on blacklisted gtksourceview2"

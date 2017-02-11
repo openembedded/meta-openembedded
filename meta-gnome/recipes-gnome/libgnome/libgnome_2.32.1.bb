@@ -34,3 +34,5 @@ FILES_gnome-common-schemas = "${datadir}/gnome-background-properties ${datadir}/
 RDEPENDS_${PN} = "gnome-common-schemas"
 
 FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug"
+
+PNBLACKLIST[libgnome] ?= "Depends on blacklisted gnome-vfs"

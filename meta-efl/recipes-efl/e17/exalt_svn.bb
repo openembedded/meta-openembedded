@@ -32,3 +32,5 @@ do_install_append() {
 
 FILES_${PN} += "${datadir}/dbus-1"
 
+
+PNBLACKLIST[exalt] ?= "Depends on blacklisted elementary"

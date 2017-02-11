@@ -53,3 +53,5 @@ RDEPENDS_${PN} = "libkodiplatform"
 INSANE_SKIP_${PN} = "dev-so"
 FILES_${PN} += "${datadir}/kodi"
 FILES_${PN}-dbg += "${datadir}/kodi/addons/*/.debug/"
+
+PNBLACKLIST[kodi-addon-pvr-hts] ?= "Depends on blacklisted kodi"

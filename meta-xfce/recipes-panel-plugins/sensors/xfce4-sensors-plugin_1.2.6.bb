@@ -25,3 +25,5 @@ PACKAGECONFIG[netcat]     = "--enable-netcat,--disable-netcat, netcat"
 PACKAGECONFIG[libnotify]  = "--enable-notification,--disable-notification, libnotify"
 
 FILES_SOLIBSDEV = "${libdir}/xfce4/modules/lib*${SOLIBSDEV}"
+
+PNBLACKLIST[xfce4-sensors-plugin] ?= "Depends on blacklisted lmsensors"

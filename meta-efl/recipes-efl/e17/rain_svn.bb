@@ -14,3 +14,5 @@ do_configure_prepend() {
 }
 
 SRC_URI += "file://configure.patch"
+
+PNBLACKLIST[rain] ?= "Depends on blacklisted e-wm"

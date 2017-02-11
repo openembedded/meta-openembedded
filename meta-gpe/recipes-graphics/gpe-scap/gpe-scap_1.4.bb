@@ -21,3 +21,4 @@ SRC_URI += "file://0001-Fix-the-ordering-of-LDADD-options-to-fix-a-compilati.pat
 
 RREPLACES_${PN} = "gpe-screenshot"
 
+PNBLACKLIST[gpe-scap] ?= "Depends on blacklisted libgpewidget"

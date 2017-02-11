@@ -28,3 +28,5 @@ DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf intltool-native"
 RDEPENDS_${PN} += "bash"
 
 FILES_${PN} += "${datadir}/dbus-1/* ${datadir}/gir-1.0/* ${libdir}/girepository-1.0/*"
+
+PNBLACKLIST[imsettings] ?= "Depends on blacklisted libgxim"

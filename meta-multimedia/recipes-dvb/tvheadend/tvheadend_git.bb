@@ -39,3 +39,5 @@ do_install() {
 FILES_${PN} += "${datadir}/${BPN}"
 
 RDEPENDS_${PN} += "libdvben50221 libucsi libdvbapi"
+
+PNBLACKLIST[tvheadend] ?= "Depends on blacklisted dvb-apps"

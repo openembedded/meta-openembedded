@@ -14,3 +14,5 @@ SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
 S = "${WORKDIR}/${SRCNAME}"
 
 FILES_${PN} += "${datadir}"
+
+PNBLACKLIST[edje-viewer] ?= "Depends on blacklisted elementary"

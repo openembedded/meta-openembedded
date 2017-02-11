@@ -15,5 +15,3 @@ SRC_URI =+ "git://git.gnome.org/${BPN} \
         file://make-382.patch"
 
 S = "${WORKDIR}/git"
-
-

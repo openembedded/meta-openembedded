@@ -16,3 +16,5 @@ EXTRA_OECONF = "--disable-introspection"
 inherit autotools pythonnative gettext
 
 FILES_${PN}-dev += "${datadir}/vala/vapi/"
+
+PNBLACKLIST[gst-rtsp] ?= "Depends on blacklisted gstreamer"

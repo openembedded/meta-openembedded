@@ -36,4 +36,3 @@ PACKAGES =+ "esddsp esd esd-utils"
 FILES_esddsp = "${bindir}/esddsp ${libdir}/libesddsp.so.*"
 FILES_esd = "${bindir}/esd"
 FILES_esd-utils = "${bindir}/*"
-

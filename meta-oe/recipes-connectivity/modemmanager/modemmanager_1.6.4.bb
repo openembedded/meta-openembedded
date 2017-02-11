@@ -49,3 +49,5 @@ FILES_${PN}-staticdev += " \
 FILES_${PN}-dbg += "${libdir}/ModemManager/.debug"
 
 SYSTEMD_SERVICE_${PN} = "ModemManager.service"
+
+PNBLACKLIST[modemmanager] ?= "Depends on blacklisted libmbim"

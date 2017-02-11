@@ -22,3 +22,7 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
 
 FILES_${PN} += "${datadir}/icons"
+
+PNBLACKLIST[glade3] ?= "Depends on blacklisted libbonoboui"
+
+PNBLACKLIST[glade3] ?= "Depends on blacklisted libgnomeui"

@@ -19,3 +19,6 @@ FILES_${PN}-dev += "${libdir}/libglade/2.0/*.la ${datadir}/gnome-2.0/ui \
 FILES_${PN}-staticdev += "${libdir}/libglade/2.0/*.a"
 FILES_${PN}-dbg += "${libdir}/bonobo-2.0/samples/.debug \
                     ${libdir}/libglade/2.0/.debug"
+
+PNBLACKLIST[libbonoboui] ?= "Depends on blacklisted libgnome"
+PNBLACKLIST[libbonoboui] ?= "Depends on blacklisted libbonobo"

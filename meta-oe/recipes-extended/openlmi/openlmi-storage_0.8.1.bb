@@ -30,3 +30,5 @@ do_install_append() {
 }
 
 FILES_${PN} =+ "${sysconfdir}/openlmi/storage/storage.conf ${datadir}/${BPN}/*"
+
+PNBLACKLIST[openlmi-storage] ?= "Depends on blacklisted pywbem"

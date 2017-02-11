@@ -125,3 +125,5 @@ python populate_packages_prepend () {
 }
 
 FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
+
+PNBLACKLIST[abiword] ?= "Depends on blacklisted gtkmathview"

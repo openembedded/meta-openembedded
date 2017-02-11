@@ -23,3 +23,4 @@ FILES_${PN}-dev += "${libdir}/enlightenment/modules/*/*/*.la"
 FILES_${PN}-dbg += "${libdir}/enlightenment/modules/*/*/.debug"
 
 SRC_URI += "file://configure.patch"
+PNBLACKLIST[exalt-client] ?= "Depends on blacklisted elementary"

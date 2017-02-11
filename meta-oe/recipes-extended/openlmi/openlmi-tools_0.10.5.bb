@@ -21,3 +21,5 @@ do_compile_prepend() {
 do_install_prepend() {
     cd cli
 }
+
+PNBLACKLIST[openlmi-tools] ?= "Depends on blacklisted pywbem"

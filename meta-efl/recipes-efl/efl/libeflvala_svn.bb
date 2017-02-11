@@ -19,3 +19,5 @@ S = "${WORKDIR}/${SRCNAME}"
 
 PACKAGES =+ "${PN}-examples"
 FILES_${PN}-examples = "${datadir}/libeflvala ${bindir}/*"
+
+PNBLACKLIST[libeflvala] ?= "Depends on blacklisted elementary"

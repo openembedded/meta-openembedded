@@ -39,3 +39,5 @@ FILES_${PN} += "${datadir}/icons"
 # Don't make nautils3 drag us in
 PRIVATE_LIBS = "libnautilus-extension.so.1"
 
+
+PNBLACKLIST[nautilus] ?= "Depends on blacklisted gnome-desktop"

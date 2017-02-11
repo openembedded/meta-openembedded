@@ -18,3 +18,5 @@ EXTRA_OECONF = "--disable-gtk3"
 
 FILES_${PN} += "${datadir}/glib-2.0/schemas"
 
+
+PNBLACKLIST[mousepad] ?= "Depends on blacklisted gtksourceview2"

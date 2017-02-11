@@ -7,3 +7,5 @@ DEFAULT_PREFERENCE = "-1"
 SRC_URI = "git://git.enlightenment.org/bindings/python/${BPN}.git;branch=python-efl-1.12"
 
 S = "${WORKDIR}/git"
+
+PNBLACKLIST[python-efl] ?= "Depends on blacklisted elementary"

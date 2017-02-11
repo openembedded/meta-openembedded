@@ -51,3 +51,5 @@ FILES_${PN}-dev += " \
     ${datadir}/dbus-1/interfaces \
     ${datadir}/gir-1.0 \
 "
+
+PNBLACKLIST[geoclue] ?= "Depends on blacklisted modemmanager"

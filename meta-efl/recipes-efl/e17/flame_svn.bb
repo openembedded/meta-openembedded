@@ -13,3 +13,5 @@ do_configure_prepend() {
 }
 
 SRC_URI += "file://configure.patch"
+
+PNBLACKLIST[flame] ?= "Depends on blacklisted e-wm"

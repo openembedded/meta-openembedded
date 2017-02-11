@@ -31,3 +31,5 @@ SRC_URI += "file://iconpath-option.patch \
 SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
 SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
 GNOME_COMPRESS_TYPE="bz2"
+
+PNBLACKLIST[gnome-themes] ?= "Depends on blacklisted gtk-engines"

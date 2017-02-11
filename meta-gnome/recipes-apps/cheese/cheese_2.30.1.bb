@@ -20,3 +20,7 @@ EXTRA_OECONF += "--disable-scrollkeeper"
 do_configure_prepend() {
     sed -i -e "s: help : :g" ${S}/Makefile.am
 }
+
+PNBLACKLIST[cheese] ?= "Depends on blacklisted gstreamer"
+
+PNBLACKLIST[cheese] ?= "Depends on blacklisted gnome-desktop"

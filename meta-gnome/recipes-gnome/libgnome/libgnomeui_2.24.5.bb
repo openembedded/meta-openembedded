@@ -29,3 +29,5 @@ do_configure_prepend() {
 }
 
 LDFLAGS += "-lm"
+
+PNBLACKLIST[libgnomeui] ?= "Depends on blacklisted libgnome"

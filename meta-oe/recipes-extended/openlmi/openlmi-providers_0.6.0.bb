@@ -52,3 +52,5 @@ FILES_${PN}-dev =+ "${datadir}/cmake*"
 FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug*"
 
 RDEPENDS_${PN} = "python"
+
+PNBLACKLIST[openlmi-providers] ?= "Depends on blacklisted lmsensors"
