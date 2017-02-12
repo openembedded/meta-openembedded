@@ -27,3 +27,5 @@ EXTRA_OECONF = "--disable-gtk-doc"
 do_configure_prepend() {
     install -m 0644 ${WORKDIR}/gnome-stock-pixbufs.h ${S}/libgnomeui/pixmaps/gnome-stock-pixbufs.h
 }
+
+LDFLAGS += "-lm"
