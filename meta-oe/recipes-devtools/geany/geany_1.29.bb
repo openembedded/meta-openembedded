@@ -2,7 +2,8 @@ SUMMARY = "A fast and lightweight IDE"
 HOMEPAGE = "http://www.geany.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
-DEPENDS = "gtk+ python3-docutils-native"
+
+DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native"
 
 inherit autotools pkgconfig perlnative pythonnative
 
