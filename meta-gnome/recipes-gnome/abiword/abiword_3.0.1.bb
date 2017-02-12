@@ -47,6 +47,8 @@ EXTRA_OECONF = " --disable-static  \
                  --with-libwmf-config=${STAGING_DIR} \
 "
 
+LDFLAGS += "-lgmodule-2.0"
+
 do_compile() {
     cd goffice-bits2
     make goffice-paths.h
