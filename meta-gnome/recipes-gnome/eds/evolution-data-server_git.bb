@@ -31,7 +31,7 @@ S = "${WORKDIR}/git"
 inherit autotools gtk-doc pkgconfig gettext gobject-introspection
 
 # -ldb needs this on some platforms
-LDFLAGS += "-lpthread"
+LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
 
 # Parallel make shows many issues with this source code.
 # Current problems seem to be duplicate execution of the calander/backends
