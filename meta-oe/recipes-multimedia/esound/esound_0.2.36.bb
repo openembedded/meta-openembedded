@@ -24,6 +24,9 @@ EXTRA_OECONF = " \
     --disable-arts \
     --disable-artstest \
 "
+
+CFLAGS += "-lm"
+
 do_configure_prepend() {
     sed -i -e 's:/usr/include/mme:${STAGING_INCDIR}/mme:g' ${S}/configure.ac
 }
