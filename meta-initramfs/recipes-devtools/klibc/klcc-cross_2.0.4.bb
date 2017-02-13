@@ -3,6 +3,10 @@ SUMMARY = "The klcc crosscompiler for klibc"
 require klibc.inc
 DEPENDS = "klibc"
 
+# no packaging for this crossscript
+PACKAGES = ""
+inherit nopackages
+
 FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
 
 SRC_URI += "file://use-env-for-perl.patch"
@@ -31,12 +35,5 @@ SYSROOT_PREPROCESS_FUNCS += "klcc_sysroot_preprocess"
 klcc_sysroot_preprocess () {
        sysroot_stage_dir ${D}${bindir_crossscripts} ${SYSROOT_DESTDIR}${bindir_crossscripts}
 }
-
-deltask do_package
-deltask do_packagedata
-deltask do_package_write_ipk
-deltask do_package_write_rpm
-deltask do_package_write_deb
-deltask do_package_write_tar
 
 SSTATE_SCAN_FILES = "*"
