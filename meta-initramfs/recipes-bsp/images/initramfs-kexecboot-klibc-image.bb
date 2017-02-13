@@ -11,3 +11,4 @@ python () {
         raise bb.parse.SkipPackage("'nios2' not supported arch")
 }
 
+PNBLACKLIST[initramfs-kexecboot-klibc-image] ?= "Runtime depends on blacklisted kexecboot-klibc"

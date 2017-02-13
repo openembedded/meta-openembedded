@@ -27,3 +27,5 @@ do_install () {
 }
 
 
+
+PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"

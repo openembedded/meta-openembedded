@@ -261,3 +261,5 @@ RDEPENDS_${PN}-xmlsnippets = "${PN}"
 PACKAGES =+ "${PLUGINS}"
 RDEPENDS_${PN} = "${PLUGINS}"
 ALLOW_EMPTY_${PN} = "1"
+
+PNBLACKLIST[geany-plugins] ?= "Depends on blacklisted geany"

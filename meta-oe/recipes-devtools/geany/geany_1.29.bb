@@ -14,3 +14,5 @@ SRC_URI[sha256sum] = "394307596bc908419617e4c33e93eae8b5b733dfc8d01161677b8cbd3a
 FILES_${PN} += "${datadir}/icons"
 
 EXTRA_OECONF = "--disable-html-docs"
+
+PNBLACKLIST[geany] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132822/"

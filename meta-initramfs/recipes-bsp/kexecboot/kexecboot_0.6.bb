@@ -73,3 +73,6 @@ pkg_postinst_${PN} () {
 }
 
 BBCLASSEXTEND = "klibc"
+
+PNBLACKLIST[kexecboot] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132823/"
+PNBLACKLIST[kexecboot-klibc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132853/"

@@ -27,3 +27,5 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
                     ${libdir}/tumbler-1/plugins/.debug \
                     ${libdir}/tumbler-1/plugins/cache/.debug \
 "
+
+PNBLACKLIST[tumbler] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132828/"

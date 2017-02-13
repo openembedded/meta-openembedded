@@ -29,3 +29,5 @@ do_install() {
 }
 
 FILES_${PN} += "${systemd_unitdir}/system/${BPN}.service"
+
+PNBLACKLIST[system-setup-keyboard] ?= "Depends on blacklisted system-config-keyboard-native"

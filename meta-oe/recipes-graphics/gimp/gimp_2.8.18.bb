@@ -47,3 +47,5 @@ CFLAGS += "-fPIC"
 
 FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
 FILES_${PN}  += "${datadir}/appdata"
+
+PNBLACKLIST[gimp] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132825/"

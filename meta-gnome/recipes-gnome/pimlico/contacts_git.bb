@@ -15,3 +15,5 @@ SRC_URI =+ "git://git.gnome.org/${BPN} \
         file://make-382.patch"
 
 S = "${WORKDIR}/git"
+
+PNBLACKLIST[contacts] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132826/"

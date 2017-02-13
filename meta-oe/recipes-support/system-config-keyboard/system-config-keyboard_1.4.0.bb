@@ -27,3 +27,6 @@ FILES_${PN} += " \
    ${datadir}/* \
 "
 BBCLASSEXTEND = "native"
+
+PNBLACKLIST[system-config-keyboard] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132829/"
+PNBLACKLIST[system-config-keyboard-native] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132855/"
