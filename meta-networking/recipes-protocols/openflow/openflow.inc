@@ -25,7 +25,7 @@ EXTRA_OECONF += " \
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep
+inherit autotools-brokensep pkgconfig
 
 do_configure() {
     ./boot.sh
