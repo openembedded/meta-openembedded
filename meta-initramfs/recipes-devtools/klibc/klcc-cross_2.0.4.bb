@@ -30,10 +30,5 @@ do_install() {
         ${D}${bindir_crossscripts}/${TARGET_PREFIX}klcc
 }
 
-SYSROOT_PREPROCESS_FUNCS += "klcc_sysroot_preprocess"
-
-klcc_sysroot_preprocess () {
-       sysroot_stage_dir ${D}${bindir_crossscripts} ${SYSROOT_DESTDIR}${bindir_crossscripts}
-}
-
+SYSROOT_DIRS += "${bindir_crossscripts}"
 SSTATE_SCAN_FILES += "*-klcc"
