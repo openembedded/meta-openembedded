@@ -36,4 +36,4 @@ klcc_sysroot_preprocess () {
        sysroot_stage_dir ${D}${bindir_crossscripts} ${SYSROOT_DESTDIR}${bindir_crossscripts}
 }
 
-SSTATE_SCAN_FILES = "*"
+SSTATE_SCAN_FILES += "*-klcc"
