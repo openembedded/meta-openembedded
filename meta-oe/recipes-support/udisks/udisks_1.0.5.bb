@@ -7,7 +7,9 @@ DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-nat
 "
 # optional dependencies: device-mapper parted
 
-DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+    dbus-glib-native \
+"
 
 SRC_URI = " \
     http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
