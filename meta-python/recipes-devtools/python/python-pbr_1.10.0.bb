@@ -14,5 +14,3 @@ RDEPENDS_${PN}_class-target += " \
         "
 
 BBCLASSEXTEND = "native"
-
-PNBLACKLIST[python-pbr] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130650/"
