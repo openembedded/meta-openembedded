@@ -56,5 +56,3 @@ python populate_packages_prepend () {
     plugindir = d.expand('${libdir}/gnome-vfs-2.0/modules/')
     do_split_packages(d, plugindir, '^lib(.*)\.so$', 'gnome-vfs-plugin-%s', 'GNOME VFS plugin for %s')
 }
-
-PNBLACKLIST[gnome-vfs] ?= "Depends on blacklisted gnome-mime-data"
