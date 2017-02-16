@@ -104,7 +104,8 @@ ${PN}-rsh ${PN}-rshd"
 # provided by netkit, so add the corresponding -dbg packages
 # for them to avoid the confliction between the dbg package
 # of inetutils and netkit.
-PACKAGES += "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
+PACKAGES =+ "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
+NOAUTOPACKAGEDEBUG = "1"
 
 ALTERNATIVE_PRIORITY = "80"
 ALTERNATIVE_${PN} = "talk whois"
@@ -156,6 +157,7 @@ ALTERNATIVE_${PN}-ping6 = "${@bb.utils.contains('PACKAGECONFIG', 'ping6', 'ping6
 ALTERNATIVE_LINK_NAME[ping6]  = "${base_bindir}/ping6"
 
 
+FILES_${PN}-dbg += "${base_bindir}/.debug ${base_sbindir}/.debug ${bindir}/.debug ${sbindir}/.debug"
 FILES_${PN}-ping = "${base_bindir}/ping.${BPN}"
 FILES_${PN}-ping6 = "${base_bindir}/ping6.${BPN}"
 FILES_${PN}-hostname = "${base_bindir}/hostname.${BPN}"
