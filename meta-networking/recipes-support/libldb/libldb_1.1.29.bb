@@ -45,16 +45,19 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
 
-PACKAGES += "pyldb pyldb-dbg pyldb-dev"
+PACKAGES =+ "pyldb pyldb-dbg pyldb-dev"
+
+NOAUTOPACKAGEDEBUG = "1"
 
 FILES_${PN} += "${libdir}/ldb/*"
-FILES_${PN}-dbg += "${libdir}/ldb/.debug/* \
+FILES_${PN}-dbg += "${bindir}/.debug/* \
+                    ${libdir}/.debug/* \
+                    ${libdir}/ldb/.debug/* \
                     ${libdir}/ldb/modules/ldb/.debug/*"
 
 FILES_pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
-               ${libdir}/libpyldb-util.so.1 \
-               ${libdir}/libpyldb-util.so.1.1.17 \
+               ${libdir}/libpyldb-util.so.* \
               "
 FILES_pyldb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
-                   ${libdir}/.debug/libpyldb-util.so.1.1.17"
+                   ${libdir}/.debug/libpyldb-util.so.*"
 FILES_pyldb-dev = "${libdir}/libpyldb-util.so"
