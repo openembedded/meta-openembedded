@@ -7,7 +7,7 @@ tasks, from verifying a hash found in /etc/shadow, to providing full-strength pa
 hashing for multi-user applications."
 HOMEPAGE = "https://bitbucket.org/ecollins/passlib"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7ed8269648e55f7d37532503de04d3fe"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=73eed1a5470b969951dac411086c7036"
 
-SRC_URI[md5sum] = "3c3c5733f2ada427060c33b5ece0560f"
-SRC_URI[sha256sum] = "0be4f6053357c4ebba5578a065fbdad75a844501d4c6d91d4a3a0c1594c6abed"
+SRC_URI[md5sum] = "254869dae3fd9f09f0746a3cb29a0b15"
+SRC_URI[sha256sum] = "3d948f64138c25633613f303bcc471126eae67c04d5e3f6b7b8ce6242f8653e0"
