@@ -11,4 +11,4 @@ PYPI_PACKAGE = "pyconnman"
 
 inherit pypi setuptools
 
-RDEPENDS_${PN} = "python-dbus python-pprint"
+RDEPENDS_${PN} = "connman python-dbus python-pprint"
