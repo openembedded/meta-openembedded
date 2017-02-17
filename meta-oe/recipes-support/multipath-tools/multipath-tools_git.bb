@@ -27,6 +27,14 @@ PV = "0.6.4+git${@'${SRCPV}'.split('+')[-1]}"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
+# multipath-tools includes a copy of the valgrind.h header
+# file and uses the macros to suppress some false positives. However,
+# that only works on ARM when thumb is disabled. Otherwise one gets:
+#   Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#3'
+#   ../Makefile.inc:66: recipe for target 'debug.o' failed
+ARM_INSTRUCTION_SET_armv4 = "arm"
+ARM_INSTRUCTION_SET_armv5 = "arm"
+
 # The exact version of SYSTEMD does not matter but should be greater than 209.
 #
 EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
@@ -59,5 +67,3 @@ FILES_kpartx = "${base_sbindir}/kpartx \
                "
 
 RDEPENDS_${PN} += "kpartx"
-
-PNBLACKLIST[multipath-tools] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130529/"
