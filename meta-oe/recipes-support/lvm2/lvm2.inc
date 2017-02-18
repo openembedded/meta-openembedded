@@ -19,21 +19,18 @@ inherit autotools-brokensep pkgconfig systemd
 PACKAGECONFIG_class-target ??= " \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
                    thin-provisioning-tools \
-                   odirect \
 "
 
-# odirect is enabled by default also for native compilation because
-# there's currently a bug in lib/device/dev-io.c which prevents
-# compiling without it. It is better to stick to configurations that
-# were actually tested by upstream...
-PACKAGECONFIG ??= " \
-                   odirect \
-"
+# odirect is always enabled because there currently is a bug in
+# lib/device/dev-io.c which prevents compiling without it. It is
+# better to stick to configurations that were actually tested by
+# upstream...
+PACKAGECONFIG_append = " odirect"
 
+PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
-PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
 
 # Unset user/group to unbreak install.
 EXTRA_OECONF = "--with-user= \
