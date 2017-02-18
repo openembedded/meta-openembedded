@@ -3,7 +3,41 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 HOMEPAGE ="http://www.musicpd.org"
 
-DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug boost icu dbus expat zlib libupnp"
+inherit autotools useradd systemd pkgconfig
+
+DEPENDS += " \
+    alsa-lib \
+    libsamplerate0 \
+    libsndfile1 \
+    libvorbis \
+    libogg \
+    faad2 \
+    ffmpeg \
+    curl \
+    sqlite \
+    bzip2 \
+    pulseaudio \
+    tcp-wrappers \
+    openal-soft \
+    yajl \
+    jack \
+    faad2 \
+    flac \
+    libao \
+    fluidsynth \
+    libcdio \
+    wavpack \
+    libopus \
+    mpg123 \
+    libmms \
+    libmodplug \
+    boost \
+    icu \
+    dbus \
+    expat \
+    zlib \
+    libupnp \
+"
 
 SRC_URI = " \
     http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
@@ -11,8 +45,6 @@ SRC_URI = " \
 "
 SRC_URI[md5sum] = "fc19f76b512bd471b6af5214965ff7c5"
 SRC_URI[sha256sum] = "8305b8bc026f4b6bde28b8dd09bfdddbe5590acf36358eed4d083a396e301730"
-
-inherit autotools useradd systemd
 
 EXTRA_OECONF = "enable_bzip2=yes"
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
@@ -63,5 +95,3 @@ USERADD_PARAM_${PN} = " \
     --home ${localstatedir}/lib/mpd \
     --groups audio \
     --user-group mpd"
-
-PNBLACKLIST[mpd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130612/"
