@@ -73,7 +73,7 @@ do_install_append() {
     fi
 }
 
-PACKAGE_BEFORE_PN = "${PN}-scripts"
+PACKAGE_BEFORE_PN = "${PN}-scripts libdevmapper libdevmapper-dev"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
@@ -90,8 +90,15 @@ FILES_${PN}-scripts = " \
     ${sbindir}/lvmconf \
     ${sbindir}/lvmdump \
 "
+FILES_libdevmapper = "${libdir}/libdevmapper.so.*"
+FILES_libdevmapper-dev = " \
+    ${libdir}/libdevmapper.so \
+    ${libdir}/pkgconfig/devmapper.pc \
+    ${includedir}/libdevmapper.h \
+"
 
 RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
+RDEPENDS_libdevmapper-dev = "libdevmapper (= ${EXTENDPKGV})"
 RRECOMMENDS_${PN} = "${PN}-scripts (= ${EXTENDPKGV})"
 
 CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
