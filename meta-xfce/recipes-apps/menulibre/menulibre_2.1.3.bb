@@ -4,7 +4,7 @@ SECTION = "x11/graphics"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "python3-distutils-extra-native"
+DEPENDS = "python3-distutils-extra-native intltool-native"
 
 inherit distutils3 gtk-icon-cache
 
@@ -34,5 +34,3 @@ RDEPENDS_${PN} += " \
     python3-unixadmin \
     python3-psutil \
 "
-
-PNBLACKLIST[menulibre] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130617/"
