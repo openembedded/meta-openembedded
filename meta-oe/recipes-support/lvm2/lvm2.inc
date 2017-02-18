@@ -17,7 +17,7 @@ S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd
 
-LVM2_PACKAGECONFIG = "dmeventd"
+LVM2_PACKAGECONFIG = "dmeventd lvmetad"
 LVM2_PACKAGECONFIG_append_class-target = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
     thin-provisioning-tools \
@@ -33,6 +33,7 @@ PACKAGECONFIG ??= "${LVM2_PACKAGECONFIG}"
 PACKAGECONFIG_append = " odirect"
 
 PACKAGECONFIG[dmeventd] = "--enable-dmeventd,--disable-dmeventd"
+PACKAGECONFIG[lvmetad] = "--enable-lvmetad,--disable-lvmetad"
 PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
@@ -46,7 +47,6 @@ EXTRA_OECONF = "--with-user= \
                 --enable-applib \
                 --enable-cmdlib \
                 --enable-pkgconfig \
-                --enable-lvmetad \
                 --with-usrlibdir=${libdir} \
                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
                 --disable-thin_check_needs_check \
@@ -75,7 +75,7 @@ do_install_append() {
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
-                         lvm2-lvmetad.socket lvm2-pvscan@.service \
+                         ${@bb.utils.contains('PACKAGECONFIG', 'lvmetad', 'lvm2-lvmetad.socket lvm2-pvscan@.service', '', d)} \
                          blk-availability.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
