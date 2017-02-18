@@ -73,6 +73,8 @@ do_install_append() {
     fi
 }
 
+PACKAGE_BEFORE_PN = "${PN}-scripts"
+
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
                          ${@bb.utils.contains('PACKAGECONFIG', 'lvmetad', 'lvm2-lvmetad.socket lvm2-pvscan@.service', '', d)} \
@@ -82,8 +84,14 @@ SYSTEMD_AUTO_ENABLE = "disable"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
-FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
+FILES_${PN}-scripts = " \
+    ${sbindir}/blkdeactivate \
+    ${sbindir}/fsadm \
+    ${sbindir}/lvmconf \
+    ${sbindir}/lvmdump \
+"
 
-RDEPENDS_${PN} = "bash"
+RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
+RRECOMMENDS_${PN} = "${PN}-scripts (= ${EXTENDPKGV})"
 
 CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
