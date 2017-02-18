@@ -1,9 +1,10 @@
 SECTION = "utils"
 DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
-DEPENDS_append_class-target = " udev"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=12713b4d9386533feeb07d6e4831765a \
                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
+
+DEPENDS += "util-linux"
 
 SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://lvm.conf \
@@ -20,6 +21,7 @@ LVM2_PACKAGECONFIG = ""
 LVM2_PACKAGECONFIG_append_class-target = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
     thin-provisioning-tools \
+    udev \
 "
 
 PACKAGECONFIG ??= "${LVM2_PACKAGECONFIG}"
@@ -34,6 +36,7 @@ PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
 PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
+PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udev-prefix=,--disable-udev_sync --disable-udev_rules,udev"
 
 # Unset user/group to unbreak install.
 EXTRA_OECONF = "--with-user= \
@@ -51,17 +54,6 @@ EXTRA_OECONF = "--with-user= \
                 --with-thin-dump=${sbindir}/thin_dump \
                 --with-thin-repair=${sbindir}/thin_repair \
                 --with-thin-restore=${sbindir}/thin_restore \
-                ${EXTRA_OECONF_UDEV} \
-"
-
-EXTRA_OECONF_UDEV = " \
-                --disable-udev_sync \
-                --disable-udev_rules \
-"
-EXTRA_OECONF_UDEV_class-target = " \
-                --enable-udev_sync \
-                --enable-udev_rules \
-                --with-udev-prefix= \
 "
 
 CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
