@@ -16,10 +16,13 @@ S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd
 
-PACKAGECONFIG_class-target ??= " \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
-                   thin-provisioning-tools \
+LVM2_PACKAGECONFIG = ""
+LVM2_PACKAGECONFIG_append_class-target = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+    thin-provisioning-tools \
 "
+
+PACKAGECONFIG ??= "${LVM2_PACKAGECONFIG}"
 
 # odirect is always enabled because there currently is a bug in
 # lib/device/dev-io.c which prevents compiling without it. It is
