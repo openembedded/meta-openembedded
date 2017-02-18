@@ -20,8 +20,6 @@ LIC_FILES_CHKSUM = "\
 file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
 EXTRA_OECONF = " --disable-static --disable-rebuilds --enable-compile-warnings=minimum"
-DEPENDS += "gtk+ glib-2.0 ruby-native intltool-native gnome-common-native"
+DEPENDS += "gtk+ glib-2.0 glib-2.0-native ruby-native intltool-native gnome-common-native"
 
 inherit autotools pkgconfig gettext
-
-PNBLACKLIST[libgxim] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130604/"
