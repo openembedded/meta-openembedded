@@ -9,9 +9,3 @@ RDEPENDS_${PN} = " \
     xfmpc \
     xfce4-mpc-plugin \
 "
-
-PNBLACKLIST[packagegroup-xfce-multimedia] ?= "Runtime depends on blacklisted xfce4-mpc-plugin"
-
-PNBLACKLIST[packagegroup-xfce-multimedia] ?= "Runtime depends on blacklisted packagegroup-xfce-multimedia"
-
-PNBLACKLIST[packagegroup-xfce-multimedia] ?= "Runtime depends on blacklisted xfmpc"
