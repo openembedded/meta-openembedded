@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-DEPENDS = "glib-2.0 libgudev libmbim"
+DEPENDS = "glib-2.0 libgudev libmbim glib-2.0-native"
 
 inherit autotools pkgconfig bash-completion
 
@@ -16,5 +16,3 @@ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
            "
 SRC_URI[md5sum] = "4970c110f160b33637a3515004c637b2"
 SRC_URI[sha256sum] = "7ab6bb47fd23bf4d3fa17424e40ea5552d08b19e5ee4f125f21f316c8086ba2a"
-
-PNBLACKLIST[libqmi] ?= "Depends on blacklisted libmbim"
