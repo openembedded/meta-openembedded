@@ -15,10 +15,8 @@ SRC_URI = " \
 SRC_URI[md5sum] = "9cf4edbc3ad2ddeeaf6c8c1791ff3ddd"
 SRC_URI[sha256sum] = "2a9635f62aabc59edb54ada07048dd47e896b90caff94bcee710d3582606f55f"
 
-inherit waf
+inherit waf pkgconfig
 
 export LINKFLAGS="${LDFLAGS}"
 
 FILES_${PN} += "${datadir}/dbus-1/services"
-
-PNBLACKLIST[a2jmidid] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130646/"
