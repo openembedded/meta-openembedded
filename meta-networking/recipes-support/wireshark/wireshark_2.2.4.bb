@@ -69,5 +69,3 @@ do_install_append () {
 }
 
 FILES_${PN} += "${datadir}*"
-
-PNBLACKLIST[wireshark] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130671/"
