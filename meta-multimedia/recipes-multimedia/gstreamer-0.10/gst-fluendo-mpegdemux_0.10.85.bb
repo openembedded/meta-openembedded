@@ -10,5 +10,3 @@ acpaths = "-I ${S}/common/m4 -I ${S}/m4"
 
 SRC_URI[md5sum] = "7c4fb993f80b9ae631b11897733f0970"
 SRC_URI[sha256sum] = "df04c91cc8e5d9a892c2492ed989974b4547beaa2a3647649e85113317897424"
-
-PNBLACKLIST[gst-fluendo-mpegdemux] ?= "Depends on blacklisted gstreamer"
