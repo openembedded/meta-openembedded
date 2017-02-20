@@ -110,9 +110,9 @@ def get_git_pkgv(d, use_tags):
                             d, quiet=True).strip()
                         ver = gitpkgv_drop_tag_prefix(output)
                     except Exception:
-                        ver = "0.0-%s-g%s" % (commits, rev[:7])
+                        ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
                 else:
-                    ver = "%s+%s" % (commits, rev[:7])
+                    ver = "%s+%s" % (commits, vars['rev'][:7])
 
                 format = format.replace(name, ver)
 
