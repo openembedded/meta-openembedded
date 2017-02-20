@@ -13,7 +13,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "726f539f774b442670028af656f270bd"
 SRC_URI[sha256sum] = "208cf60c061b86bee4f658d568a3b5d843dce3ab9847f66b452298268799e7bd"
 
-DEPENDS = "glib-2.0 gtkmm parted gnome-doc-utils intltool-native"
+DEPENDS = "glib-2.0 glib-2.0-native gtkmm parted gnome-doc-utils intltool-native"
 
 do_install_append() {
     # Add a script which checks if polkit is installed.
@@ -36,5 +36,3 @@ FILES_${PN} += " \
 "
 
 RDEPENDS_${PN} = "dosfstools mtools e2fsprogs"
-
-PNBLACKLIST[gparted] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/131634/"
