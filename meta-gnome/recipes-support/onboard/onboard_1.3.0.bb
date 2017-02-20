@@ -2,7 +2,7 @@ SUMMARY = "An onscreen keyboard"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e"
 
-DEPENDS += "gtk+3 hunspell libcanberra libxkbfile dconf"
+DEPENDS += "gtk+3 hunspell libcanberra libxkbfile dconf python3-distutils-extra-native intltool-native"
 
 SRC_URI = "https://launchpad.net/onboard/1.3/${PV}/+download/${BPN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "8000df3e789512a90fcb227580fd60ff"
@@ -23,5 +23,3 @@ RDEPENDS_${PN} += " \
     python3-pycairo \
     python3-pygobject \
 "
-
-PNBLACKLIST[onboard] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130637/"
