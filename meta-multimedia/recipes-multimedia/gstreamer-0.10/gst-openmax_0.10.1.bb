@@ -33,5 +33,3 @@ FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug/"
 
 SRC_URI[md5sum] = "4d0370bfe99dea20918c84347abadb4e"
 SRC_URI[sha256sum] = "9074d5a0591995133d19cfb15144f19664f902c1623f996595695cf2c2070e1f"
-
-PNBLACKLIST[gst-openmax] ?= "Depends on blacklisted gstreamer"
