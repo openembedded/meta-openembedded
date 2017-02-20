@@ -12,5 +12,3 @@ SRC_URI[md5sum] = "1b3753b91224867a3a2dfddda239c28d"
 SRC_URI[sha256sum] = "fb0c1df201ed1130f54f15b914cbe5a59286e994a137acda5609570c57112de2"
 
 RDEPENDS_${PN} = "gst-meta-audio"
-
-PNBLACKLIST[xfce4-mixer] ?= "Depends on blacklisted gst-plugins-base"
