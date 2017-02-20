@@ -33,5 +33,3 @@ SRC_URI += "file://0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.pat
             file://0002-Fix-opencore-include-paths.patch"
 
 FILES_${PN}-amrnb += "${datadir}/gstreamer-0.10/presets/GstAmrnbEnc.prs"
-
-PNBLACKLIST[gst-plugins-ugly] ?= "Depends on blacklisted gstreamer"
