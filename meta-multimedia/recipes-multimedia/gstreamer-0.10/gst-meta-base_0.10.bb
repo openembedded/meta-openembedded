@@ -71,5 +71,3 @@ RDEPENDS_gst-meta-video = "\
 
 RRECOMMENDS_gst-meta-video = "\
     gst-meta-audio"
-
-PNBLACKLIST[gst-meta-base] ?= "Depends on blacklisted gstreamer"
