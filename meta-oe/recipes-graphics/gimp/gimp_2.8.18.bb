@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = " \
     gdk-pixbuf-native \
     intltool-native \
+    libxslt-native \
     gtk+ \
     babl \
     gegl \
@@ -47,5 +48,3 @@ CFLAGS += "-fPIC"
 
 FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
 FILES_${PN}  += "${datadir}/appdata"
-
-PNBLACKLIST[gimp] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132825/"
