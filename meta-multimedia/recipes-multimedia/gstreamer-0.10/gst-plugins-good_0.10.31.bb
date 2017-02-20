@@ -46,5 +46,3 @@ SRC_URI[sha256sum] = "7e27840e40a7932ef2dc032d7201f9f41afcaf0b437daf5d1d44dc96d9
 
 FILES_${PN}-gconfelements += "${sysconfdir}/gconf/schemas/gstreamer-0.10.schemas"
 FILES_${PN}-equalizer += "${datadir}/gstreamer-0.10/presets/*.prs"
-
-PNBLACKLIST[gst-plugins-good] ?= "Depends on blacklisted gstreamer"
