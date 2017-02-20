@@ -42,5 +42,3 @@ CACHED_CONFIGUREVARS_append_x86 = " ac_cv_header_emmintrin_h=no ac_cv_header_xmm
 
 # /usr/bin/gst-visualise-0.10 is a perl script.
 RDEPENDS_${PN}-apps += "perl"
-
-PNBLACKLIST[gst-plugins-base] ?= "Depends on blacklisted gstreamer"
