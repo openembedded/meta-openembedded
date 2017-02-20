@@ -23,5 +23,3 @@ EXTRA_OECONF += "ac_cv_header_GL_gl_h=no"
 ALLOW_EMPTY_${PN} = "1"
 ALLOW_EMPTY_${PN}-apps = "1"
 ALLOW_EMPTY_${PN}-glib = "1"
-
-PNBLACKLIST[gst-plugins-gl] ?= "Depends on blacklisted gstreamer"
