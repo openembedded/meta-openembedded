@@ -59,5 +59,3 @@ do_configure_prepend() {
 
 SRC_URI[md5sum] = "fcb09798114461955260e4d940db5987"
 SRC_URI[sha256sum] = "0eae7d1a1357ae8377fded6a1b42e663887beabe0e6cc336e2ef9ada42e11491"
-
-PNBLACKLIST[gst-plugins-bad] ?= "Depends on blacklisted gstreamer"
