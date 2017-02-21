@@ -8,10 +8,8 @@ SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
 
 inherit autotools-brokensep
 
-S = "${WORKDIR}/${BPN}"
-
-SRC_URI[md5sum] = "15b432735d6efd0373722bb96577b945"
-SRC_URI[sha256sum] = "61e0772ad6ea744ee597ae478398ddd0ba6fceee2cf343859bebde2c15bafb91"
+SRC_URI[md5sum] = "7d8c24081c681dfbba21f2934c1ac656"
+SRC_URI[sha256sum] = "5fab478cbf8731fbacefaa76236a8f8b38ccff920c53b3a8253bc35509fba8ed"
 
 do_configure_prepend() {
     sed -i 's|$(DESTDIR)/usr/man/|$(DESTDIR)${mandir}/|g' ${S}/Makefile
