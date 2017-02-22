@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash gnulib"
 DEPENDS_append_class-target = " libxi"
 
-inherit autotools pkgconfig pythonnative distro_features_check
+inherit autotools pkgconfig pythonnative distro_features_check gettext
 
 REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
 
@@ -58,5 +58,3 @@ RDEPENDS_${PN}-python = "python"
 
 # for e.g kde's oxygen-fonts
 BBCLASSEXTEND = "native"
-
-PNBLACKLIST[fontforge] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130639/"
