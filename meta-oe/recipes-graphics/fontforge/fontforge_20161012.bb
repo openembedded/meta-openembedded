@@ -14,8 +14,8 @@ inherit autotools pkgconfig pythonnative distro_features_check gettext
 REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
 
 SRC_URI = "git://github.com/${BPN}/${BPN}.git"
-# tag 20150824
-SRCREV = "07d5ccff2704f8a56f1b3cc6695a4e31f85f88e6"
+# tag 20161012
+SRCREV = "072edb0235cd163d6c3391da9cc3754c3c66f47a"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF_append_class-native = " with_x=no"
