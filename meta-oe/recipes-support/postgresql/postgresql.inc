@@ -19,7 +19,7 @@ DESCRIPTION = "\
 "
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
-DEPENDS = "zlib readline tzcode-native gettext-native"
+DEPENDS = "zlib readline tzcode-native"
 
 ARM_INSTRUCTION_SET = "arm"
 
@@ -37,7 +37,7 @@ LEAD_SONAME = "libpq.so"
 # LDFLAGS for shared libraries
 export LDFLAGS_SL = "${LDFLAGS}"
 
-inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd
+inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd gettext
 
 CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.6"
 
