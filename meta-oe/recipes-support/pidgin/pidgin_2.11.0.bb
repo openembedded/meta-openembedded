@@ -2,7 +2,7 @@ SUMMARY = "multi-protocol instant messaging client"
 SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-DEPENDS = "python virtual/libintl intltool-native libxml2 gconf"
+DEPENDS = "python virtual/libintl intltool-native libxml2 gconf glib-2.0-native"
 
 inherit autotools gettext pkgconfig gconf perlnative
 
@@ -118,5 +118,3 @@ python populate_packages_prepend () {
         description='Finch plugin %s',
         prepend=True, extra_depends='')
 }
-
-PNBLACKLIST[pidgin] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130634/"
