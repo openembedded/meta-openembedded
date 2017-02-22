@@ -11,5 +11,5 @@ RDEPENDS_${PN} = "\
                python-threading \
 "
 
-SRC_URI[md5sum] = "a6407b74eb5e5411e157be1de5c11366"
-SRC_URI[sha256sum] = "0f7a629efe6e3a2c61b59d3550aa9f2c4529b5689a65fde45e6f1ac36b9a261e"
+SRC_URI[md5sum] = "241150b3fcb920ddca4d33181f3238b1"
+SRC_URI[sha256sum] = "9100a6aa706ab699d414ec02705a21eb66f436184691d0bf1f2a85a6213c6c1f"
