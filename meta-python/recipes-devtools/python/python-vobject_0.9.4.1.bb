@@ -4,8 +4,8 @@ HOMEPAGE = "http://vobject.skyhouseconsulting.com/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI[md5sum] = "fe5996008d5e4858d63156b37b43d59c"
-SRC_URI[sha256sum] = "10b150b87ee5fffefd3aa1ea12f31aab45a7b7d010d1ce6816afaff8db726520"
+SRC_URI[md5sum] = "73432a3e6e9a4788f73a9acc4d7b1fa8"
+SRC_URI[sha256sum] = "faea7d4fb3e2bc8ef6367e7f9b4ad0841aa1980fd5dd96d05c7a90e39880811c"
 
 inherit pypi setuptools
 
