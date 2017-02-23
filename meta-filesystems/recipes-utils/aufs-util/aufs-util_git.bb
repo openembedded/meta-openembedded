@@ -18,6 +18,13 @@ PV = "3.14+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+do_configure_prepend() {
+   # Replace sbin,bin paths with bitbake environment
+   sed -i -e 's;install_sbin: Tgt = ${DESTDIR}/sbin;install_sbin: Tgt = ${DESTDIR}/${base_sbindir};' \
+          -e 's;install_ubin: Tgt = ${DESTDIR}/usr/sbin;install_sbin: Tgt = ${DESTDIR}/${bindir};' \
+	  ${S}/Makefile
+}
+
 do_configure_append () {
     install -d ${S}/include/linux/
     cp ${WORKDIR}/aufs_type.h ${S}/include/linux/
