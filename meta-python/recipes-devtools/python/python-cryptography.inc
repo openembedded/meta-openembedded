@@ -1,6 +1,6 @@
 SUMMARY = "Provides cryptographic recipes and primitives to python developers"
 LICENSE = "Apache-2.0 | BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1f375ab4f6b9a7c9eec25377c52d3aa1"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d5ede125ed08d4fd14ec44d334bdb388"
 
 DEPENDS += " \
     ${PYTHON_PN}-cffi \
@@ -9,8 +9,8 @@ DEPENDS += " \
     ${PYTHON_PN}-six \
 "
 
-SRC_URI[md5sum] = "33ed393be75f04cd889a02a11acbab39"
-SRC_URI[sha256sum] = "4d0d86d2c8d3fc89133c3fa0d164a688a458b6663ab6fa965c80d6c2cdaf9b3f"
+SRC_URI[md5sum] = "fade66de437392ed1ba6980768626204"
+SRC_URI[sha256sum] = "878cb68b3da3d493ffd68f36db11c29deee623671d3287c3f8d685117ffda9a9"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-cffi \
