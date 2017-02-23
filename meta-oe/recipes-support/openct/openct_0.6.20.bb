@@ -34,7 +34,7 @@ EXTRA_OECONF=" \
     --enable-pcsc \
     --enable-doc \
     --enable-api-doc \
-    --with-udev=/lib/udev \
+    --with-udev=${nonarch_base_libdir}/udev \
     --with-bundle=${libdir}/pcsc/drivers \
 "
 
@@ -42,7 +42,7 @@ inherit autotools pkgconfig
 
 FILES_${PN} += " \
     ${libdir}/ctapi \
-    /lib/udev \
+    ${nonarch_base_libdir}/udev \
     ${libdir}/openct-ifd.so \
     ${libdir}/pcsc \
     /run/openct/status \
@@ -62,7 +62,7 @@ do_install_append() {
 do_install () {
     rm -rf ${D}
     install -d ${D}/etc
-    install -dm 755 ${D}/lib/udev
+    install -dm 755 ${D}${nonarch_base_libdir}/udev
     # fix up hardcoded paths
     sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
         ${WORKDIR}/openct.service ${WORKDIR}/openct.init
