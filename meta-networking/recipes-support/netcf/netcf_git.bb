@@ -47,9 +47,11 @@ do_install_append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
        install -d ${D}${systemd_unitdir}/system
        if [ -d "${D}${libdir}/systemd/system" ]; then
-           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
-           rm -rf ${D}${libdir}/systemd/
-       else
+           if [ "${systemd_unitdir}" != "${libdir}/systemd" ] ; then 
+               mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+               rm -rf ${D}${libdir}/systemd/
+	   fi
+       elif [ "${systemd_unitdir}" != "${nonarch_libdir}/systemd" ] ; then 
            mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
            rm -rf ${D}${nonarch_libdir}/systemd/
        fi
