@@ -3,9 +3,22 @@ HOMEPAGE = "http://www.abiword.org"
 SECTION = "x11/office"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
-DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
-               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server \
-               ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)}"
+DEPENDS  = " \
+    perl-native \
+    gtk+ \
+    gtkmathview \
+    wv \
+    libglade \
+    libfribidi \
+    jpeg \
+    libpng \
+    librsvg \
+    libwmf-native \
+    asio \
+    evolution-data-server \
+    libxslt \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
+"
 RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
 RCONFLICTS_${PN} = "${PN}-embedded"
@@ -125,5 +138,3 @@ python populate_packages_prepend () {
 }
 
 FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
-
-PNBLACKLIST[abiword] ?= "Depends on blacklisted gtkmathview"
