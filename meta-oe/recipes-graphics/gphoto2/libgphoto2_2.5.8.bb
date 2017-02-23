@@ -24,7 +24,7 @@ SRC_URI[libgphoto2.sha256sum] = "031a262e342fae43f724afe66787947ce1fb483277dfe5a
 
 inherit autotools pkgconfig gettext lib_package
 
-EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
+EXTRA_OECONF = " --with-drivers=all udevscriptdir=${nonarch_base_libdir}/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gd] = ",--without-gdlib,gd"
