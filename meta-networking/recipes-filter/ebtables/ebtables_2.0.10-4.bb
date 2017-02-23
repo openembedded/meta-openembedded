@@ -70,8 +70,10 @@ do_install () {
 
     # The script ebtables-save refernces perl in exec_prefix, so
     # move it to sbindir to avoid QA issue
-    install -d ${D}/${sbindir}
-    mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
+    if ${base_sbindir} != ${sbindir} ; then
+       install -d ${D}/${sbindir}
+       mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
+    fi
 
     # Install systemd service files
     install -d ${D}${systemd_unitdir}/system
