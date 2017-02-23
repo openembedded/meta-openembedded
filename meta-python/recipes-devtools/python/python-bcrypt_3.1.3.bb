@@ -4,12 +4,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
 
 DEPENDS = "python-cffi-native"
 
-SRC_URI[md5sum] = "c5a79004fc4ad589615e96a6fe45b664"
-SRC_URI[sha256sum] = "346e175c820a111c17d4c2def181a96e1826652edb0bb16e565085ed542785aa"
+SRC_URI[md5sum] = "20da8b40790caad99c4086dba533154b"
+SRC_URI[sha256sum] = "6645c8d0ad845308de3eb9be98b6fd22a46ec5412bfc664a423e411cdd8f5488"
 
 inherit pypi setuptools
 
-RDEPENDS_${PN}_class-target = "\
+RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-cffi \
     ${PYTHON_PN}-six \
 "
