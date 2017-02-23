@@ -58,14 +58,16 @@ do_configure_prepend () {
 }
 
 do_install_append () {
-    install -m 0755 -d ${D}${base_bindir}
     install -m 0755 -d ${D}${base_sbindir}
     install -m 0755 -d ${D}${sbindir}
     install -m 0755 -d ${D}${sysconfdir}/xinetd.d
-    mv ${D}${bindir}/ping* ${D}${base_bindir}/
+    if [ "${base_bindir}" != "${bindir}" ] ; then
+         install -m 0755 -d ${D}${base_bindir}
+         mv ${D}${bindir}/ping* ${D}${base_bindir}/
+         mv ${D}${bindir}/hostname ${D}${base_bindir}/
+    fi
     mv ${D}${bindir}/ifconfig ${D}${base_sbindir}/
     mv ${D}${libexecdir}/syslogd ${D}${base_sbindir}/
-    mv ${D}${bindir}/hostname ${D}${base_bindir}/
     mv ${D}${libexecdir}/tftpd ${D}${sbindir}/in.tftpd
     mv ${D}${libexecdir}/telnetd ${D}${sbindir}/in.telnetd
     mv ${D}${libexecdir}/rexecd ${D}${sbindir}/in.rexecd
