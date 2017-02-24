@@ -19,6 +19,8 @@ SRC_URI += "file://netdata.service"
 
 S = "${WORKDIR}/git"
 
+DEPENDS += "zlib"
+
 inherit pkgconfig autotools useradd systemd
 
 #systemd
@@ -51,5 +53,3 @@ do_install_append() {
 
 FILES_${PN}-dbg += "${libexecdir}/netdata/plugins.d/.debug"
 RDEPENDS_${PN} = "bash zlib"
-
-PNBLACKLIST[netdata] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130636/"
