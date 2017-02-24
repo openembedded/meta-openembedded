@@ -20,3 +20,6 @@ do_install_append() {
         chmod 644 "${f}"
     done
 }
+
+UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
+UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"

@@ -14,3 +14,5 @@ DEPENDS += " \
 "
 
 BBCLASSEXTEND = "native nativesdk"
+
+UPSTREAM_CHECK_REGEX = ""
