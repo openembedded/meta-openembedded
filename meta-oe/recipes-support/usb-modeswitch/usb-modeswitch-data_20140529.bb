@@ -15,7 +15,3 @@ do_install() {
 RDEPENDS_${PN} = "usb-modeswitch (>= 2.2.0)"
 FILES_${PN} += "${base_libdir}/udev/rules.d/ \
                 ${datadir}/usb_modeswitch"
-
-PNBLACKLIST[usb-modeswitch-data] ?= "Runtime depends on blacklisted usb-modeswitch"
-
-PNBLACKLIST[usb-modeswitch-data] ?= "Runtime depends on blacklisted usb-modeswitch-data"
