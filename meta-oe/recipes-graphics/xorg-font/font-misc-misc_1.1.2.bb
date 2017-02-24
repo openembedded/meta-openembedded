@@ -6,7 +6,7 @@ SECTION = "x11/font"
 LICENSE = "PD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=200c507f595ee97008c7c5c3e94ab9a8"
 
-DEPENDS = "util-macros-native font-util-native bdftopcf-native"
+DEPENDS = "util-macros-native font-util-native bdftopcf-native font-util"
 RDEPENDS_${PN} = "encodings font-util"
 
 inherit distro_features_check
@@ -15,5 +15,3 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI[md5sum] = "c88eb44b3b903d79fb44b860a213e623"
 SRC_URI[sha256sum] = "b8e77940e4e1769dc47ef1805918d8c9be37c708735832a07204258bacc11794"
-
-PNBLACKLIST[font-misc-misc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130628/"
