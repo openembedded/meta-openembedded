@@ -15,7 +15,7 @@ HOMEPAGE = "http://ipmiutil.sourceforge.net"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f9372493401f309e6149dd2ce0a044b"
 
-DEPENDS = "openssl"
+DEPENDS += "openssl"
 
 PARALLEL_MAKE = ""
 
@@ -60,5 +60,3 @@ do_install () {
 }
 
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
-
-PNBLACKLIST[ipmiutil] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130641/"
