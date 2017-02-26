@@ -29,9 +29,6 @@ DEPENDS = "gettext-native"
 
 PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
 
-# Fusermount requires features from the util-linux version of mount.
-RDEPENDS_${PN}_class-target += "util-linux-mount"
-
 RRECOMMENDS_${PN}_class-target = "kernel-module-fuse libulockmgr fuse-utils"
 
 FILES_${PN} += "${libdir}/libfuse.so.*"
