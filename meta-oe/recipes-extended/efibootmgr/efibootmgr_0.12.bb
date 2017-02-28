@@ -25,7 +25,3 @@ EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cf
 do_install () {
     install -D -p -m0755 src/efibootmgr ${D}/${sbindir}/efibootmgr
 }
-
-
-
-PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"

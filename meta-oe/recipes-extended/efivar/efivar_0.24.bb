@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
 DEPENDS = "popt"
 DEPENDS_append_class-target = " efivar-native"
 
+inherit pkgconfig
+
 COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
 SRCREV = "963cb2e5adc145fe00717f94e382f2973f80e753"
@@ -40,6 +42,3 @@ do_install_append_class-native() {
 }
 
 BBCLASSEXTEND = "native"
-
-
-PNBLACKLIST[efivar] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132821/"
