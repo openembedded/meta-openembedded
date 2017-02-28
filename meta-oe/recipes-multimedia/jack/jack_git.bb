@@ -14,12 +14,8 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "libsamplerate0 libsndfile1 readline"
 
-SRC_URI = " \
-    git://github.com/jackaudio/jack2.git \
-    file://0001-Add-ARM-NEON-acceleration-for-all-non-dithering-samp.patch \
-    file://0002-jack_simdtests-add-application-checking-accurracy-an.patch \
-"
-SRCREV = "0279a2d65a36d1378f5bab56d95bf9e99cc8cefb"
+SRC_URI = "git://github.com/jackaudio/jack2.git"
+SRCREV = "2d1d323505585d406a7e64fb932953baefc5945e"
 PV = "1.9.10+git${SRCPV}"
 S = "${WORKDIR}/git"
 
