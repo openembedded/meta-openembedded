@@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source
            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
 "
 
-inherit autotools systemd pkgconfig update-rc.d
+inherit autotools gettext systemd pkgconfig update-rc.d
 
 EXTRA_OECONF = " \
     --enable-dynamic-linking \
@@ -54,6 +54,15 @@ PACKAGECONFIG[smtp] = "--enable-smtp --with-libesmtp=${STAGING_LIBDIR},--disable
 PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
 PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
 PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
+
+do_configure_prepend() {
+	olddir=$(pwd)
+	cd ${AUTOTOOLS_SCRIPT_PATH}
+
+	ACLOCAL="$ACLOCAL" autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} -I ${S}/m4 ${ACLOCALEXTRAPATH} || die "extra autoreconf execution failed."
+
+	cd $olddir
+}
 
 do_install_prepend() {
     sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
