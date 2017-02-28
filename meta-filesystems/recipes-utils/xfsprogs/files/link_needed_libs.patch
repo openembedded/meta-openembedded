@@ -1,7 +1,7 @@
-Index: xfsprogs-4.8.0/libxcmd/Makefile
+Index: xfsprogs-4.10.0/libxcmd/Makefile
 ===================================================================
---- xfsprogs-4.8.0.orig/libxcmd/Makefile
-+++ xfsprogs-4.8.0/libxcmd/Makefile
+--- xfsprogs-4.10.0.orig/libxcmd/Makefile
++++ xfsprogs-4.10.0/libxcmd/Makefile
 @@ -30,10 +30,21 @@ LCFLAGS += -DENABLE_EDITLINE
  LTLIBS += $(LIBEDITLINE) $(LIBTERMCAP)
  endif
@@ -25,10 +25,10 @@ Index: xfsprogs-4.8.0/libxcmd/Makefile
 +	$(INSTALL_LTLIB_DEV)
  
  -include .ltdep
-Index: xfsprogs-4.8.0/libxfs/Makefile
+Index: xfsprogs-4.10.0/libxfs/Makefile
 ===================================================================
---- xfsprogs-4.8.0.orig/libxfs/Makefile
-+++ xfsprogs-4.8.0/libxfs/Makefile
+--- xfsprogs-4.10.0.orig/libxfs/Makefile
++++ xfsprogs-4.10.0/libxfs/Makefile
 @@ -137,6 +137,7 @@ include $(BUILDRULES)
  
  install: default
@@ -37,10 +37,10 @@ Index: xfsprogs-4.8.0/libxfs/Makefile
  
  install-headers: $(addsuffix -hdrs, $(PKGHFILES))
  
-Index: xfsprogs-4.8.0/libxlog/Makefile
+Index: xfsprogs-4.10.0/libxlog/Makefile
 ===================================================================
---- xfsprogs-4.8.0.orig/libxlog/Makefile
-+++ xfsprogs-4.8.0/libxlog/Makefile
+--- xfsprogs-4.10.0.orig/libxlog/Makefile
++++ xfsprogs-4.10.0/libxlog/Makefile
 @@ -19,6 +19,10 @@ default: ltdepend $(LTLIBRARY)
  
  include $(BUILDRULES)
@@ -53,3 +53,30 @@ Index: xfsprogs-4.8.0/libxlog/Makefile
 +	$(INSTALL_LTLIB_DEV)
  
  -include .ltdep
+Index: xfsprogs-4.10.0/io/Makefile
+===================================================================
+--- xfsprogs-4.10.0.orig/io/Makefile
++++ xfsprogs-4.10.0/io/Makefile
+@@ -13,7 +13,7 @@
+ 	getrusage.c imap.c link.c mmap.c open.c parent.c pread.c prealloc.c \
+ 	pwrite.c reflink.c seek.c shutdown.c sync.c truncate.c utimes.c
+ 
+-LLDLIBS = $(LIBXCMD) $(LIBHANDLE) $(LIBPTHREAD)
++LLDLIBS = $(LIBXCMD) $(LIBHANDLE) $(LIBUUID) $(LIBPTHREAD)
+ LTDEPENDENCIES = $(LIBXCMD) $(LIBHANDLE)
+ LLDFLAGS = -static-libtool-libs
+ 
+Index: xfsprogs-4.10.0/quota/Makefile
+===================================================================
+--- xfsprogs-4.10.0.orig/quota/Makefile
++++ xfsprogs-4.10.0/quotq/Makefile
+@@ -14,7 +14,7 @@
+ PCFILES = darwin.c freebsd.c irix.c linux.c
+ LSRCFILES = $(shell echo $(PCFILES) | sed -e "s/$(PKG_PLATFORM).c//g")
+ 
+-LLDLIBS = $(LIBXCMD)
++LLDLIBS = $(LIBXCMD) $(LIBUUID)
+ LTDEPENDENCIES = $(LIBXCMD)
+ LLDFLAGS = -static
+ 
+
