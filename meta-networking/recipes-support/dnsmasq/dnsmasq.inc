@@ -53,7 +53,7 @@ do_install () {
 
     install -d ${D}${systemd_unitdir}/system
 
-    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'resolvconf', d)}" ]; then
         install -m 0644 ${WORKDIR}/dnsmasq-resolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
     else
         install -m 0644 ${WORKDIR}/dnsmasq-noresolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
@@ -61,11 +61,11 @@ do_install () {
 
     install -m 0755 ${S}/contrib/lease-tools/dhcp_release ${D}${bindir}
 
-    if [ "${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'dbus', d)}" ]; then
         install -d ${D}${sysconfdir}/dbus-1/system.d
         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
     fi
-    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+    if [ "${@bb.utils.filter('PACKAGECONFIG', 'resolvconf', d)}" ]; then
         install -d ${D}${sysconfdir}/resolvconf/update.d/
         install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
 

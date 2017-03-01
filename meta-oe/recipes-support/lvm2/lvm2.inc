@@ -19,7 +19,7 @@ inherit autotools-brokensep pkgconfig systemd
 
 LVM2_PACKAGECONFIG = "dmeventd lvmetad"
 LVM2_PACKAGECONFIG_append_class-target = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
     thin-provisioning-tools \
     udev \
 "

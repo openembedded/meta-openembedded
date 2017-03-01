@@ -59,7 +59,7 @@ inherit update-rc.d systemd
 #   - 'scfilter' enables support for system call filtering, but requires the
 #     kernel to have CONFIG_SECCOMP enabled.
 PACKAGECONFIG ??= "editline scfilter \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
 "
 PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
 PACKAGECONFIG[editline] = ",--without-editline,libedit"

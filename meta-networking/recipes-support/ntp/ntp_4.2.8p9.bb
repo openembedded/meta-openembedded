@@ -47,7 +47,7 @@ USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
 
 # NB: debug is default-enabled by NTP; keep it default-enabled here.
 PACKAGECONFIG ??= "cap debug refclocks openssl \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
 "
 PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
                           --with-openssl-incdir=${STAGING_INCDIR} \

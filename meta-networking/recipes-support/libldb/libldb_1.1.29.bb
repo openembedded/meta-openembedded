@@ -12,7 +12,7 @@ SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
           "
 
 PACKAGECONFIG ??= "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
 "
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"

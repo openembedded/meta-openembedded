@@ -20,7 +20,7 @@ inherit gettext autotools pkgconfig systemd
 
 EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 
-PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "systemd", "systemd", "", d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
 
 do_configure_prepend() {

@@ -32,14 +32,10 @@ EXTRA_OECMAKE += " \
     -DWITH_MANPAGES=OFF \
 "
 
-PACKAGECONFIG ??= "  \
-                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}\
-                ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland', '', d)}\
-                ${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}\
-                ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}\
-                ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}\
-                gstreamer cups \
-                "
+PACKAGECONFIG ??= " \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'directfb pam pulseaudio wayland x11', d)}\
+    gstreamer cups \
+"
 
 X11_DEPS = "virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxfixes libxdamage libxrandr libxkbfile"
 PACKAGECONFIG[x11] = "-DWITH_X11=ON -DWITH_XINERAMA=ON -DWITH_XEXT=ON -DWITH_XCURSOR=ON -DWITH_XV=ON -DWITH_XI=ON -DWITH_XRENDER=ON -DWITH_XFIXES=ON -DWITH_XDAMAGE=ON -DWITH_XRANDR=ON -DWITH_XKBFILE=ON,-DWITH_X11=OFF,${X11_DEPS}"

@@ -34,7 +34,7 @@ acpaths = "-I ./m4"
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '', 'file://fix-disable-ipv6.patch', d)}"
 
 PACKAGECONFIG ??= "ftp uucpd \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
+                   ${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
                    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6 ping6', '', d)} \
                   "
 PACKAGECONFIG[ftp] = "--enable-ftp,--disable-ftp,readline"
@@ -153,7 +153,7 @@ ALTERNATIVE_LINK_NAME[ifconfig]  = "${base_sbindir}/ifconfig"
 ALTERNATIVE_${PN}-ping = "ping"
 ALTERNATIVE_LINK_NAME[ping]   = "${base_bindir}/ping"
 
-ALTERNATIVE_${PN}-ping6 = "${@bb.utils.contains('PACKAGECONFIG', 'ping6', 'ping6', '', d)}"
+ALTERNATIVE_${PN}-ping6 = "${@bb.utils.filter('PACKAGECONFIG', 'ping6', d)}"
 ALTERNATIVE_LINK_NAME[ping6]  = "${base_bindir}/ping6"
 
 

@@ -14,7 +14,7 @@ SRC_URI[md5sum] = "d9627e7aacd535a8251401f914bb6924"
 SRC_URI[sha256sum] = "60134e32253cac8e2efe5e0185d20123c208bcf6ad15edf2f50d80daadf8c348"
 
 PACKAGECONFIG ??= "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
 "
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"

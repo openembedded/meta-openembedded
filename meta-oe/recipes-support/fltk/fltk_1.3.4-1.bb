@@ -27,7 +27,7 @@ EXTRA_OECONF = "--enable-shared \
                 --enable-xft \
 "
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'opengl', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
 
 PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama"

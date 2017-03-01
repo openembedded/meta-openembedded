@@ -22,7 +22,7 @@ SYSTEMD_SERVICE_${PN} = "dnrd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 inherit autotools
-inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
+inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
 
 do_install() {
     oe_runmake install DESTDIR=${D} INSTALL="install -p"

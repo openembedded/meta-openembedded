@@ -16,10 +16,7 @@ DEPENDS = "openssl xz zlib bzip2 libcap icu"
 
 inherit autotools pkgconfig systemd useradd
 
-PACKAGECONFIG ??= " \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
-                  "
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam', d)}"
 
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[ldap] = "--with-ldap=plugin,--without-ldap,openldap,"

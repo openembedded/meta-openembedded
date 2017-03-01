@@ -54,7 +54,7 @@ pkg_postinst_${PN} () {
     fi
 }
 
-enable_pam = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+enable_pam = "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
 PACKAGECONFIG ??= "${enable_pam} openssl python uuid libxml tcl nls libxml perl"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"

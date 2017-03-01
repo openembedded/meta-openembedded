@@ -37,8 +37,7 @@ EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
 PACKAGECONFIG ??= " \
     rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
     imdiag gnutls imfile \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'snmp', 'snmp', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'snmp systemd', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench relp ${VALGRIND}', '', d)} \
 "
 

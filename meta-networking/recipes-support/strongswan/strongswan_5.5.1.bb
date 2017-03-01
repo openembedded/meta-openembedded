@@ -22,7 +22,7 @@ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-syst
 
 
 PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
-        ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
+        ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
 "
 PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
 PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"

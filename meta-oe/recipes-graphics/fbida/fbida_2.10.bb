@@ -34,25 +34,25 @@ do_compile() {
 
     # Be sure to respect preferences (force to "no")
     # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'curl', 'curl', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'curl', d)}" ]; then
         sed -i -e '/^HAVE_LIBCURL/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'gif', d)}" ]; then
         sed -i -e '/^HAVE_LIBGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'png', 'png', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'png', d)}" ]; then
         sed -i -e '/^HAVE_LIBPNG/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'tiff', 'tiff', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'tiff', d)}" ]; then
         sed -i -e '/^HAVE_LIBTIFF/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'motif', 'motif', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'motif', d)}" ]; then
         sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'webp', 'webp', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'webp', d)}" ]; then
         sed -i -e '/^HAVE_LIBWEBP/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
-    if [ -z "${@bb.utils.contains('PACKAGECONFIG', 'lirc', 'lirc', '', d)}" ]; then
+    if [ -z "${@bb.utils.filter('PACKAGECONFIG', 'lirc', d)}" ]; then
         sed -i -e '/^HAVE_LIBLIRC/s/:=.*$/:= no/' ${S}/GNUmakefile
     fi
 

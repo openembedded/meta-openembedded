@@ -38,7 +38,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 #The CUSTOM_LDSCRIPTS doesn't work with the gold linker
 inherit cpan-base
 do_configure() {
-    if [ "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'ld-is-gold', '', d)}" = "ld-is-gold" ] ; then
+    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'ld-is-gold', d)}" ]; then
       sed -i 's/CUSTOM_LDSCRIPTS = yes/CUSTOM_LDSCRIPTS = no/'  Makefile
     fi
 

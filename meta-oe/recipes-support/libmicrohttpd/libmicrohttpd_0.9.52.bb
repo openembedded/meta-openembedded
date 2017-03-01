@@ -15,7 +15,7 @@ EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../"
 
 PACKAGECONFIG ?= "curl"
 PACKAGECONFIG_append_class-target = "\
-        ${@bb.utils.contains('DISTRO_FEATURES', 'largefile', 'largefile', '', d)} \
+        ${@bb.utils.filter('DISTRO_FEATURES', 'largefile', d)} \
 "
 PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
 PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"

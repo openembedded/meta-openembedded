@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "234efb39dbbe5cef4189cc76f37afbe3cfcfb45ae52493bfe8e191318b
 
 inherit autotools pkgconfig
 
-PACKAGECONFIG = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "x11", "", d)}"
+PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 
 PACKAGECONFIG[x11] = "--with-x,-without-x,libxcb libx11 libsm libxau libxext libxv libice libxdmcp"
 

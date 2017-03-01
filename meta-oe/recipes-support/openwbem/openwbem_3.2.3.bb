@@ -93,7 +93,7 @@ do_install() {
     touch ${D}/var/lib/openwbem/{classassociation,instances,instassociation,namespaces,schema}.{dat,ndx,lock}
 }
 
-inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','', d)}
+inherit ${@bb.utils.filter('VIRTUAL-RUNTIME_init_manager', 'systemd', d)}
 SYSTEMD_SERVICE_${PN} = "owcimomd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 FILES_${PN} += " \

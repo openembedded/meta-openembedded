@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "4a13f2256ad804c860e84068258bd0f8be31cf0c79aa8f3019fa32f692
 inherit waf-samba
 
 PACKAGECONFIG ??= "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
 "
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"

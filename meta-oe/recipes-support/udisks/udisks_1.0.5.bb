@@ -7,7 +7,7 @@ DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-nat
 "
 # optional dependencies: device-mapper parted
 
-DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
     dbus-glib-native \
 "
 
