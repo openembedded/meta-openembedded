@@ -27,13 +27,13 @@ def get_git_pv(path, d, tagadjust=None):
     gitdir = os.path.abspath(os.path.join(d.getVar("S"), ".git"))
     try:
         ver = gitrev_run("git describe --tags", gitdir)
-    except Exception, exc:
+    except Exception as exc:
         bb.fatal(str(exc))
 
     if not ver:
         try:
             ver = gitrev_run("git rev-parse --short HEAD", gitdir)
-        except Exception, exc:
+        except Exception as exc:
             bb.fatal(str(exc))
 
         if ver:
