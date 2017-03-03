@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;md5=0733e1b3788ab2ebbc63bf33a020da1d"
 
 DEPENDS = "libpcap"
 
-inherit autotools systemd
+inherit autotools pkgconfig systemd
 
 # return something like '1.2.3' or '1.2.3/rc1'
 #
