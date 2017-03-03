@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "e5c8041cef8e33c55732f06a292381cb345db946cf792a4ae18aa5c66c
 
 PR = "r7"
 
-DEPENDS = "glib-2.0 gtk+"
+DEPENDS = "dbus-glib-native glib-2.0 gtk+"
 
 PACKAGECONFIG ??= "dbus"
 PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
