@@ -75,6 +75,7 @@ meson_do_configure() {
     fi
 }
 
+do_compile[progress] = "outof:^\[(\d+)/(\d+)\]\s+"
 meson_do_compile() {
     ninja ${PARALLEL_MAKE}
 }
