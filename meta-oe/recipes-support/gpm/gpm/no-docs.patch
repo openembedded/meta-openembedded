@@ -11,7 +11,7 @@ Index: gpm-1.99.7/Makefile.in
  # user-overridable flags, but it's also all the implicit rule looks at.
  # missing ?
  
--SUBDIRS = src doc contrib gpm2
+-SUBDIRS = src doc contrib
 +SUBDIRS = src
  
  
