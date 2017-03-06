@@ -15,6 +15,8 @@ SRC_URI[sha256sum] = "455d7798ac263266dbd38d4841f7534dd35ca9c3da4a8df303f8488f38
 
 PYPI_PACKAGE = "Werkzeug"
 
+CLEANBROKEN = "1"
+
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-difflib \
