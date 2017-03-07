@@ -10,14 +10,16 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
 
 PE = "1"
-PV = "7.3+git${SRCPV}"
-SRCREV = "01b10e191e99d8cb147e5a2b7da8196e0ec6fb94"
+PV = "7.91+git${SRCPV}"
+SRCREV = "c22d359433b333937ee3d803450dc41998115685"
 
 DEPENDS = "elfutils"
 RDEPENDS_${PN} = "elfutils"
 SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
            file://configure-allow-to-disable-selinux-support.patch \
            file://0001-replace-readdir_r-with-readdir.patch \
+           file://0001-Use-correct-enum-type.patch \
+           file://0002-Fix-const-qualifier-error.patch \
           "
 S = "${WORKDIR}/git"
 
