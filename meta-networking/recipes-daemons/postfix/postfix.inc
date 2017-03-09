@@ -214,7 +214,7 @@ do_install_append_class-native() {
 
 do_install_append_class-target() {
     # Remove references to buildmachine paths in target makedefs.out
-    sed -i -e 's:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
+    sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
 }
 
 NATIVE_INSTALL_WORKS = "1"
