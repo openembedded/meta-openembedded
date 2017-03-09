@@ -9,4 +9,6 @@ BBCLASSEXTEND = "native nativesdk"
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-subprocess \
+    cpp \
+    cpp-symlinks \
     "
