@@ -98,6 +98,7 @@ FILES_libdevmapper-dev = " \
 "
 
 RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
+RDEPENDS_${PN} = " bash"
 RDEPENDS_libdevmapper-dev = "libdevmapper (= ${EXTENDPKGV})"
 RRECOMMENDS_${PN} = "${PN}-scripts (= ${EXTENDPKGV})"
 
