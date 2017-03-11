@@ -7,11 +7,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
 RDEPENDS_${PN} = "\
     ${PYTHON_PN}-fcntl \
     ${PYTHON_PN}-io \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-netclient \
     ${PYTHON_PN}-stringold \
+    ${PYTHON_PN}-threading \
 "
 
-SRC_URI[md5sum] = "7142a421c8b35d2dac6c47c254db023d"
-SRC_URI[sha256sum] = "1eecfe4022240f2eab5af8d414f0504e072ee68377ba63d3b6fe6e66c26f66d1"
+RSRC_URI[md5sum] = "6afe4c2e47bcec6eb7051b8c1ce19d52"
+SRC_URI[sha256sum] = "2949cddffc2b05683065a3cd2345114b1a49b08df8cb843d69ba99dc3e19edc2"
 
 inherit pypi
 
