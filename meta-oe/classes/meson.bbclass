@@ -72,6 +72,8 @@ endian = '${MESON_TARGET_ENDIAN}'
 EOF
 }
 
+CONFIGURE_FILES = "meson.build"
+
 meson_do_configure() {
     if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" --cross-file ${WORKDIR}/meson.cross ${EXTRA_OEMESON}; then
         cat ${B}/meson-logs/meson-log.txt
