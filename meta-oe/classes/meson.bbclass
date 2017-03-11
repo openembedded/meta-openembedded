@@ -9,9 +9,11 @@ do_configure[cleandirs] = "${B}"
 # Where the meson.build build configuration is
 MESON_SOURCEPATH = "${S}"
 
-# These variables in the environment override the *native* tools not the cross,
-# so they need to be unexported.
-CC[unexport] = "1"
+# These variables in the environment override the *native* tools, not the cross.
+export CC = "${BUILD_CC}"
+export CXX = "${BUILD_CXX}"
+export LD = "${BUILD_LD}"
+export AR = "${BUILD_AR}"
 
 def noprefix(var, d):
     return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
@@ -36,6 +38,9 @@ MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'l
 MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
 
 EXTRA_OEMESON += "${PACKAGECONFIG_CONFARGS}"
+
+MESON_CROSS_FILE = ""
+MESON_CROSS_FILE_class-target = "--cross-file ${WORKDIR}/meson.cross"
 
 def meson_array(var, d):
     return "', '".join(d.getVar(var, True).split()).join(("'", "'"))
@@ -75,7 +80,7 @@ EOF
 CONFIGURE_FILES = "meson.build"
 
 meson_do_configure() {
-    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" --cross-file ${WORKDIR}/meson.cross ${EXTRA_OEMESON}; then
+    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" ${MESON_CROSS_FILE} ${EXTRA_OEMESON}; then
         cat ${B}/meson-logs/meson-log.txt
         bbfatal_log meson failed
     fi
