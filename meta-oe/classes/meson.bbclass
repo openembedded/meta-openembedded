@@ -18,13 +18,17 @@ def noprefix(var, d):
 
 MESONOPTS = " --prefix ${prefix} \
               --bindir ${@noprefix('bindir', d)} \
+              --sbindir ${@noprefix('sbindir', d)} \
               --datadir ${@noprefix('datadir', d)} \
               --libdir ${@noprefix('libdir', d)} \
               --libexecdir ${@noprefix('libexecdir', d)} \
               --includedir ${@noprefix('includedir', d)} \
               --mandir ${@noprefix('mandir', d)} \
+              --infodir ${@noprefix('infodir', d)} \
               --localedir ${@noprefix('localedir', d)} \
-              --sysconfdir ${sysconfdir}"
+              --sysconfdir ${sysconfdir} \
+              --localstatedir ${localstatedir} \
+              --sharedstatedir ${sharedstatedir}"
 
 MESON_C_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
 
