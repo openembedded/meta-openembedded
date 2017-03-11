@@ -52,7 +52,7 @@ do_write_config() {
     cat >${WORKDIR}/meson.cross <<EOF
 [binaries]
 c = '${HOST_PREFIX}gcc'
-cpp = '${HOST_PREFIX}gcc'
+cpp = '${HOST_PREFIX}g++'
 ar = '${HOST_PREFIX}ar'
 ld = '${HOST_PREFIX}ld'
 strip = '${HOST_PREFIX}strip'
