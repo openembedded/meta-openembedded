@@ -6,8 +6,8 @@ SRC_URI = " \
     http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "372d8fdf6ea3675edbf1f6a4109b6db6"
-SRC_URI[sha256sum] = "79da71c7c39cef0a5f7b834f0b17d0d436e7994dd33e912f581b4c12d3b1681f"
+SRC_URI[md5sum] = "6fa2a001402cb067ba541e0d8948da50"
+SRC_URI[sha256sum] = "e6469b508224e0d2e4564dda05c4bb47aef5c28bf29d6c983bcdc6e3a0cd29d6"
 
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
