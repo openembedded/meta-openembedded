@@ -16,6 +16,8 @@ SECTION = "base"
 
 TOYBOX_BIN = "generated/unstripped/toybox"
 
+EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
+
 do_configure() {
     oe_runmake defconfig
 
