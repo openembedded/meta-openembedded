@@ -165,4 +165,4 @@ FILES_${PN}-fstools = "\
     ${bindir}/mkuserimg \
 "
 
-BBCLASSEXTEND += "native"
+BBCLASSEXTEND = "native"

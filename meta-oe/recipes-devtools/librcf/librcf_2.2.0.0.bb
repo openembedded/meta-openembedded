@@ -45,4 +45,4 @@ PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'demos', '${PN}-demos', '', d
 FILES_${PN}-demos = "${bindir}/*"
 FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibRcf.cmake"
 
-BBCLASSEXTEND += "nativesdk"
+BBCLASSEXTEND = "nativesdk"
