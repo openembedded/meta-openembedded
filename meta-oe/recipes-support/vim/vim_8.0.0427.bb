@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/vim/vim.git \
            file://disable_acl_header_check.patch;patchdir=.. \
            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
 "
-SRCREV = "ec68a99464055029c01082762517e97245ddae0c"
+SRCREV = "ad4187e6fc9c8e1083a172852d958a70a689a75c"
 
 S = "${WORKDIR}/git/src"
 
