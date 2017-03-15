@@ -7,8 +7,8 @@ so you can write servers or clients for more complicated applications."
 HOMEPAGE = "http://search.cpan.org/dist/Net-SSLeay/"
 SECTION = "libs"
 
-LICENSE = "OpenSSL"
-LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=49f415984b387be999ee2ad0e5c692fe"
+LICENSE = "Artistic-1.0 | GPL-1.0+"
+LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
 
 DEPENDS = "openssl zlib"
 RDEPENDS_${PN} += "perl-module-carp \
@@ -19,12 +19,10 @@ RDEPENDS_${PN} += "perl-module-carp \
                   "
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
-           file://0001-libnet-ssleay-perl-Disable-test-that-fails-with-open.patch \
-           file://0002-Recent-1.0.2-betas-have-dropped-the-SSLv3_method-fun.patch \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "19600c036e9e0bbfbf9157f083e40755"
-SRC_URI[sha256sum] = "2fb1371120b85f018944d95736c107163f04ba56b6029c0709a2c3d6247b9c06"
+SRC_URI[md5sum] = "b1e0fd96d7f3be57580377226ca5f089"
+SRC_URI[sha256sum] = "a541a66d59fc5f9bb7af09d3a0b68305e4c43ba9488b12915728fd282ea01b93"
 
 S = "${WORKDIR}/Net-SSLeay-${PV}"
 
@@ -34,10 +32,6 @@ EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
                    INC=-I=${STAGING_INCDIR} \
                    '-lssl -lcrypto -lz' \
                   "
-
-do_configure_prepend() {
-    export OPENSSL_PREFIX=${STAGING_DIR_NATIVE}${prefix_native}
-}
 
 do_install_ptest() {
     cp -r ${B}/t ${D}${PTEST_PATH}
