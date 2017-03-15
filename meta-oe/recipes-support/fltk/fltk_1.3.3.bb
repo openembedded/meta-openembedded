@@ -10,6 +10,7 @@ SRC_URI = "http://fltk.org/pub/fltk/${PV}/${BP}-source.tar.gz \
            file://disable_test.patch \
            file://fltk-no-freetype-config.patch \
            file://fix-boolean-issue-with-jpeg9.patch \
+           file://fix-undefined-Fl-XFont-On-Demand.patch \
 "
 
 SRC_URI[md5sum] = "9ccdb0d19dc104b87179bd9fd10822e3"
