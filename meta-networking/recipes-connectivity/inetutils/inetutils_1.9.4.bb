@@ -109,7 +109,7 @@ ${PN}-rsh ${PN}-rshd"
 PACKAGES =+ "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
 NOAUTOPACKAGEDEBUG = "1"
 
-ALTERNATIVE_PRIORITY = "80"
+ALTERNATIVE_PRIORITY = "79"
 ALTERNATIVE_${PN} = "talk whois"
 ALTERNATIVE_LINK_NAME[talkd]  = "${sbindir}/in.talkd"
 ALTERNATIVE_LINK_NAME[uucpd]  = "${sbindir}/in.uucpd"
