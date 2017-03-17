@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 DEPENDS = "libunwind"
 
 SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz \
-           file://0001-Support-Atomic-ops-on-clang.patch\
+           file://0001-Support-Atomic-ops-on-clang.patch \
+           file://0001-Fix-build-failure-for-ppc.patch \
           "
 
 SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
