@@ -12,6 +12,7 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://0002-Guard-use-of-mallinfo-with-__GLIBC__.patch \
            file://0003-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
            file://0004-tweak-MODPROBE_CMD-for-cross-compile.patch \
+           file://0001-Avoid-bashisms-in-init-scripts.patch \
            "
 S = "${WORKDIR}/LVM2.${PV}"
 
@@ -98,7 +99,6 @@ FILES_libdevmapper-dev = " \
 "
 
 RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
-RDEPENDS_${PN} = " bash"
 RDEPENDS_libdevmapper-dev = "libdevmapper (= ${EXTENDPKGV})"
 RRECOMMENDS_${PN} = "${PN}-scripts (= ${EXTENDPKGV})"
 
