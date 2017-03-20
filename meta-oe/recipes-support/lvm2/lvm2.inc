@@ -103,6 +103,6 @@ FILES_libdevmapper-dev = " \
 
 RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
 RDEPENDS_libdevmapper-dev = "libdevmapper (= ${EXTENDPKGV})"
-RRECOMMENDS_${PN} = "${PN}-scripts (= ${EXTENDPKGV})"
+RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"
 
 CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
