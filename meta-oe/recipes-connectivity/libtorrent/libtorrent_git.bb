@@ -4,14 +4,21 @@ HOMEPAGE = "http://libtorrent.rakshasa.no/"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-DEPENDS = "libsigc++-2.0 openssl cppunit"
+DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
 
-SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
+SRC_URI = "git://github.com/rakshasa/libtorrent \
     file://don-t-run-code-while-configuring-package.patch \
 "
+SRCREV = "c167c5a9e0bcf0df23ae5efd91396aae0e37eb87"
 
-SRC_URI[md5sum] = "e94f6c590bb02aaf4d58618f738a85f2"
-SRC_URI[sha256sum] = "34317d6783b7f8d0805274c9467475b5432a246c0de8e28fc16e3b0b43f35677"
+PV = "0.13.6+git${SRCPV}"
+
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
+EXTRA_OECONF = "--with-zlib=${STAGING_EXECPREFIXDIR}"
+
+do_configure_prepend() {
+    (cd ${S}; ./autogen.sh; cd -)
+}

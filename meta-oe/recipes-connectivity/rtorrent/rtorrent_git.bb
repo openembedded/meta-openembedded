@@ -5,11 +5,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
 
-SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
+SRC_URI = "git://github.com/rakshasa/rtorrent \
     file://don-t-run-code-while-configuring-package.patch \
 "
+SRCREV = "226e670decf92e7adaa845a6982aca4f164ea740"
 
-SRC_URI[md5sum] = "0bf2f262faa8c8c8d3b11ce286ea2bf2"
-SRC_URI[sha256sum] = "9e93ca41beb1afe74ad7ad8013e0d53ae3586c9b0e97263d722f721535cc7310"
+PV = "0.9.6+git${SRCPV}"
+
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
+
+do_configure_prepend() {
+    (cd ${S}; ./autogen.sh; cd -)
+}
