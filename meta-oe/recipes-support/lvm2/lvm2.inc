@@ -84,14 +84,17 @@ SYSTEMD_AUTO_ENABLE = "disable"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-FILES_${PN} += "${libdir}/device-mapper/*.so ${nonarch_base_libdir}/udev"
+FILES_${PN} += "${libdir}/device-mapper/*.so"
 FILES_${PN}-scripts = " \
     ${sbindir}/blkdeactivate \
     ${sbindir}/fsadm \
     ${sbindir}/lvmconf \
     ${sbindir}/lvmdump \
 "
-FILES_libdevmapper = "${libdir}/libdevmapper.so.*"
+# Specified explicitly for the udev rules, just in case that it does not get picked
+# up automatically:
+RDEPENDS_${PN}_append_class-target = " libdevmapper"
+FILES_libdevmapper = "${sbindir}/dmsetup ${libdir}/libdevmapper.so.* ${nonarch_base_libdir}/udev/rules.d"
 FILES_libdevmapper-dev = " \
     ${libdir}/libdevmapper.so \
     ${libdir}/pkgconfig/devmapper.pc \
