@@ -16,11 +16,9 @@ DEPENDS += "openssl"
 CFLAGS  += "-DSCTP_USE_OPENSSL_SHA1 -fPIC"
 LDFLAGS += "-lssl -lcrypto"
 
-PACKAGECONFIG ?= "disablewarnings"
+PACKAGECONFIG ?= "disablewarnings inet inet6"
 PACKAGECONFIG[disablewarnings] = "--disable-warnings-as-errors,,"
+PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
+PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
 
-EXTRA_OECONF += "--disable-inet \
-                 --disable-inet6 \
-                 --disable-shared \
-                 --disable-debug \
-               "
+EXTRA_OECONF += "--disable-debug"
