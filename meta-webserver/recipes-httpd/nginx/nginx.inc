@@ -63,6 +63,11 @@ do_configure () {
     --conf-path=${sysconfdir}/nginx/nginx.conf \
     --http-log-path=${localstatedir}/log/nginx/access.log \
     --error-log-path=${localstatedir}/log/nginx/error.log \
+    --http-client-body-temp-path=/run/nginx/client_body_temp \
+    --http-proxy-temp-path=/run/nginx/proxy_temp \
+    --http-fastcgi-temp-path=/run/nginx/fastcgi_temp \
+    --http-uwsgi-temp-path=/run/nginx/uwsgi_temp \
+    --http-scgi-temp-path=/run/nginx/scgi_temp \
     --pid-path=/run/nginx/nginx.pid \
     --prefix=${prefix} \
     --with-http_ssl_module \
