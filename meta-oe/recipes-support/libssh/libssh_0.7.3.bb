@@ -31,3 +31,4 @@ do_configure_prepend () {
 }
 
 FILES_${PN}-dev += "${libdir}/cmake"
+TOOLCHAIN = "gcc"
