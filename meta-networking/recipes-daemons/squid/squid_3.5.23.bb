@@ -22,13 +22,12 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://set_sysroot_patch.patch \
            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
 "
+SRC_URI[md5sum] = "b9e5603f00b0c40109610667d8693b22"
+SRC_URI[sha256sum] = "4384564e6227fbb4c18626d663e1b47912d3507b596ed997f2149f10dd8d70bd"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
                     file://errors/COPYRIGHT;md5=0d98c4448c368d146f31a970bb0ced21 \
                    "
-SRC_URI[md5sum] = "6a29d7dfc544205001f7a75c6996dc60"
-SRC_URI[sha256sum] = "5a114f8f7f44b5ae3c9b77d7b81aef13fe69e7f530855213d551f48b157cb5f1"
-
 DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
 inherit autotools useradd ptest
@@ -45,7 +44,9 @@ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir
 PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
-BASIC_AUTH = "DB SASL LDAP NIS"
+BASIC_AUTH = "DB SASL LDAP"
+BASIC_AUTH_append_libc-glibc = " NIS"
+
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 BASIC_AUTH += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
 
