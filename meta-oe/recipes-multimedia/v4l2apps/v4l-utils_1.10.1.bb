@@ -6,6 +6,7 @@ PROVIDES = "libv4l media-ctl"
 
 DEPENDS = "jpeg \
            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
+DEPENDS_append_libc-musl = " argp-standalone"
 
 inherit autotools gettext pkgconfig
 
