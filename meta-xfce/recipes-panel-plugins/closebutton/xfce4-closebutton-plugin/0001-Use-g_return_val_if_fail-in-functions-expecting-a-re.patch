@@ -1,0 +1,62 @@
+From b0bda2dfc2d8d7bb244e59897b5bf0776f4fe44c Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Mar 2017 15:07:26 -0700
+Subject: [PATCH] Use g_return_val_if_fail() in functions expecting a return
+ value
+
+Clang detects that we are not returning any value when function
+expects it.
+
+Fixes
+
+| ../../git/panel-plugin/closebutton.c:170:3: error: non-void function 'closebutton_plugin_set_icon' should return a value [-Wreturn-type]
+|   g_return_if_fail (XFCE_IS_PANEL_IMAGE (icon));
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+Upstream-Status: Pending
+
+ panel-plugin/closebutton-settings.c | 2 +-
+ panel-plugin/closebutton.c          | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/panel-plugin/closebutton-settings.c b/panel-plugin/closebutton-settings.c
+index f2fa370..d4e6b0c 100644
+--- a/panel-plugin/closebutton-settings.c
++++ b/panel-plugin/closebutton-settings.c
+@@ -60,7 +60,7 @@ closebutton_builder_new (XfcePanelPlugin  *panel_plugin,
+   GtkBuilder  *builder;
+   GObject     *dialog, *button;
+ 
+-  g_return_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin));
++  g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (panel_plugin), 0);
+ 
+   builder = gtk_builder_new ();
+   if (gtk_builder_add_from_string (builder, buffer, length, &error))
+diff --git a/panel-plugin/closebutton.c b/panel-plugin/closebutton.c
+index fd0a7b5..2120728 100644
+--- a/panel-plugin/closebutton.c
++++ b/panel-plugin/closebutton.c
+@@ -167,8 +167,8 @@ closebutton_plugin_set_icon (CloseButtonPlugin *plugin, gboolean force_reload)
+   XfcePanelPlugin   *panel_plugin = XFCE_PANEL_PLUGIN (plugin);
+   XfcePanelImage    *icon = XFCE_PANEL_IMAGE (plugin->icon);
+ 
+-  g_return_if_fail (XFCE_IS_PANEL_IMAGE (icon));
+-  g_return_if_fail (XFCE_IS_CLOSEBUTTON_PLUGIN (plugin));
++  g_return_val_if_fail (XFCE_IS_PANEL_IMAGE (icon), 0);
++  g_return_val_if_fail (XFCE_IS_CLOSEBUTTON_PLUGIN (plugin), 0);
+ 
+   window = closebutton_plugin_get_effective_window (plugin);
+   if (window != NULL)
+@@ -404,7 +404,7 @@ closebutton_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                                  gint             size)
+ {
+   CloseButtonPlugin *plugin = XFCE_CLOSEBUTTON_PLUGIN (panel_plugin);
+-  g_return_if_fail (XFCE_IS_CLOSEBUTTON_PLUGIN (plugin));
++  g_return_val_if_fail (XFCE_IS_CLOSEBUTTON_PLUGIN (plugin), 0);
+ 
+ #if LIBXFCE4PANEL_CHECK_VERSION(4,9,0)
+   size /= xfce_panel_plugin_get_nrows (panel_plugin);
+-- 
+2.12.0
+
