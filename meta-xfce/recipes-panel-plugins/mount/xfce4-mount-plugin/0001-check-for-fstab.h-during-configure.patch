@@ -1,0 +1,85 @@
+From 09e325f8296eb9e63dc57ed137f4a9940f164563 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Mar 2017 17:11:46 -0700
+Subject: [PATCH] check for fstab.h during configure
+
+fstab.h is not universally available, checking it during
+configure creates a knob to disable fstab reads in the
+plugin
+
+Makes it compile/build with musl
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ configure.ac           |  1 +
+ panel-plugin/devices.c | 22 ++++++++++++++++++----
+ 2 files changed, 19 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 34d6f7f..52ecc4a 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -67,6 +67,7 @@ AC_CHECK_HEADERS([sys/socket.h])
+ AC_CHECK_HEADERS([sys/time.h])
+ AC_CHECK_HEADERS([unistd.h])
+ AC_CHECK_HEADERS([sys/sockio.h])
++AC_CHECK_HEADERS([fstab.h])
+ AC_HEADER_SYS_WAIT
+ AC_PROG_GCC_TRADITIONAL
+ AC_TYPE_SIZE_T
+diff --git a/panel-plugin/devices.c b/panel-plugin/devices.c
+index afa954e..345b603 100644
+--- a/panel-plugin/devices.c
++++ b/panel-plugin/devices.c
+@@ -24,8 +24,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ #ifdef HAVE_CONFIG_H
+ #include <config.h>
+ #endif
+-
++#if HAVE_FSTAB_H
+ #include <fstab.h>
++#endif
+ #include <glib.h>
+ #include <stdio.h>
+ #include <string.h>
+@@ -370,14 +371,15 @@ out:
+ GPtrArray *
+ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
+ {
+-    GPtrArray * pdisks; /* to be returned */
++    GtkWidget *dialog;
+     t_disk * pdisk;
+-    struct fstab *pfstab;
++    GPtrArray * pdisks; /* to be returned */
+     gboolean has_valid_mount_device;
+-    GtkWidget *dialog;
+ 
+     pdisks = g_ptr_array_new();
++#if HAVE_FSTAB_H
+ 
++    struct fstab *pfstab;
+     /* open fstab */
+     if (setfsent()!=1)
+     {
+@@ -422,6 +424,18 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
+ 
+     endfsent(); /* close file */
+ 
++#else
++        if (! (*showed_fstab_dialog) ) {
++            dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
++                                                GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
++    "Your /etc/fstab could not be read because fstab is not supported. This will severely degrade the plugin's abilities.");
++            /* gtk_dialog_run (GTK_DIALOG (dialog)); */
++            g_signal_connect (dialog, "response",
++                    G_CALLBACK (gtk_widget_destroy), dialog);
++             gtk_widget_show (dialog);
++             *showed_fstab_dialog = TRUE;
++         }
++#endif
+     return pdisks;
+ }
+ 
+-- 
+2.12.0
+
