@@ -12,9 +12,10 @@ inherit autotools
 
 # upstream site does not allow wget's User-Agent
 FETCHCMD_wget += "-U bitbake"
-SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz"
+SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz \
+           file://stdc-predef.patch \
+          "
+SRC_URI[md5sum] = "0467d27684c453a351fbcefebbcb16a3"
+SRC_URI[sha256sum] = "0ccbd2e7d46097f136fcb1aaa0d5bc24e23bb73f57d25bee5a852a683eaa7567"
 
 S = "${WORKDIR}/${BPN}-${PV}"
-
-SRC_URI[md5sum] = "b6e60f326a3fce91bea1a6fe4700af58"
-SRC_URI[sha256sum] = "b6b159c0c6ec8a7f349ea2a75d8b960efa346c462c1ac4921f1ac0de85a9f5d6"
