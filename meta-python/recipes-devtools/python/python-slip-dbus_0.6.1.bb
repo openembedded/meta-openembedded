@@ -14,7 +14,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 SRCNAME = "python-slip"
 
-SRC_URI = "https://fedorahosted.org/released/${SRCNAME}/${SRCNAME}-${PV}.tar.bz2"
+SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
