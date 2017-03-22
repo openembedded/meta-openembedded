@@ -19,8 +19,10 @@ DEPENDS  = " \
     libxslt \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
 "
-RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
-               glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
+RDEPENDS_${PN}_append_libc-glibc = " \
+    glibc-gconv-ibm850 glibc-gconv-cp1252 \
+    glibc-gconv-iso8859-15 glibc-gconv-iso8859-1 \
+"
 RCONFLICTS_${PN} = "${PN}-embedded"
 
 SRC_URI = " \
