@@ -1,0 +1,25 @@
+From 33150de2d77ffb645da1a043933b12ddc0143cea Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Mar 2017 18:59:03 -0700
+Subject: [PATCH] include sys/select.h for fd_* definitions
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ utils/ndptool.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/utils/ndptool.c b/utils/ndptool.c
+index 1d96f4c..0fd4c4d 100644
+--- a/utils/ndptool.c
++++ b/utils/ndptool.c
+@@ -23,6 +23,7 @@
+ #include <string.h>
+ #include <signal.h>
+ #include <getopt.h>
++#include <sys/select.h>
+ #include <net/if.h>
+ #include <netinet/in.h>
+ #include <arpa/inet.h>
+-- 
+2.12.0
+
