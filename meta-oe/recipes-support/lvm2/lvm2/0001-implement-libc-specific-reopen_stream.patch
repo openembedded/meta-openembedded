@@ -1,7 +1,7 @@
-From ede7976da9431573b0104dbcfe91a32c02dbea13 Mon Sep 17 00:00:00 2001
+From e3103459416616d3b8508e7176e897b0ae6c90f2 Mon Sep 17 00:00:00 2001
 From: Dengke Du <dengke.du@windriver.com>
 Date: Tue, 25 Oct 2016 11:49:40 +0000
-Subject: [PATCH 1/4] implement libc specific reopen_stream
+Subject: [PATCH] implement libc specific reopen_stream
 
 musl defines stdin/stdio/stderr as constant types which means
 we can not assign to them as we are doing here but works ok with glibc
@@ -13,15 +13,14 @@ http://git.alpinelinux.org/cgit/aports/tree/main/lvm2/fix-stdio-usage.patch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Dengke Du <dengke.du@windriver.com>
----
-Upstream-Status: Pending
+
 ---
  lib/log/log.c      | 6 ++++++
  tools/lvmcmdline.c | 6 +++---
  2 files changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/lib/log/log.c b/lib/log/log.c
-index c933154..638839d 100644
+index c933154..3581084 100644
 --- a/lib/log/log.c
 +++ b/lib/log/log.c
 @@ -161,6 +161,7 @@ static void _check_and_replace_standard_log_streams(FILE *old_stream, FILE *new_
@@ -38,7 +37,7 @@ index c933154..638839d 100644
  }
 +#else
 +{
-+	return (freopen(NULL, mode, *stream) != NULL)
++	return (freopen(NULL, mode, *stream) != NULL);
 +}
 +#endif
  
@@ -76,5 +75,5 @@ index 9a4deb7..f1f18e6 100644
  		       strerror(errno));
  		return 0;
 -- 
-2.9.3
+2.12.0
 
