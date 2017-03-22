@@ -20,6 +20,7 @@ ATOP_VER = "${@'-'.join(d.getVar('PV').rsplit('.', 1))}"
 SRC_URI = " \
     http://www.atoptool.nl/download/${BPN}-${ATOP_VER}.tar.gz \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
+    file://0001-include-missing-header-files.patch \
     file://remove-bashisms.patch \
     file://fix-permissions.patch \
     file://sysvinit-implement-status.patch \
