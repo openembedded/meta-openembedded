@@ -8,9 +8,8 @@ inherit xfce update-alternatives distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
-SRC_URI[md5sum] = "197ef087ca6a263627f1bea6d5a79d6f"
-SRC_URI[sha256sum] = "f4a988fbc4e0df7e8583c781d271559e56fd28696092f94ae052e9e6edb09eac"
+SRC_URI[md5sum] = "3ec136efc5387fd3b53cd66b684f52d7"
+SRC_URI[sha256sum] = "fa74048a75649a6e92df763a3cfb706d3fed1e1a6adf567f6693325a5a6efb36"
 
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
