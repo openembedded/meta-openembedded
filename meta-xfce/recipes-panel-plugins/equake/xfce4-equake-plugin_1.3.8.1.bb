@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 inherit xfce-panel-plugin
 
-SRC_URI[md5sum] = "c8f6cb2aec62513c343281eacc4fc395"
-SRC_URI[sha256sum] = "431575da3d49fea3afa60f02e83c8d74e20e9a229c9c4ec82c21d45e2c986925"
+DEPENDS += "curl"
+
+SRC_URI[md5sum] = "07d42b8a3d440d6f1861048a6cc3a15a"
+SRC_URI[sha256sum] = "eff9cfd604d1bd998c5208176fbe2c6da705c250dce572f5e30b2c77f4ec741c"
 
 FILES_${PN} += "${libdir}/xfce4/panel-plugins/xfce4-equake-plugin"
