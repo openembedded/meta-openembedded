@@ -5,9 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=68ad62c64cc6c620126241fd429e68fe"
 
 inherit xfce-panel-plugin
 
-SRC_URI += "file://0001-Allow-timer-period-to-be-set-at-250ms-resolution.-Pa.patch"
-
-SRC_URI[md5sum] = "24108b339bb040ed360266f53a245224"
-SRC_URI[sha256sum] = "b0a5337b49c85623dc89f3c9e47c7374b1d466af2418033d2d6dfc57a9790387"
-
-S = "${WORKDIR}/xfce4-genmon-plugin-3.4"
+SRC_URI[md5sum] = "f28cfbf9c82e758a236c1f5fcbcb8a35"
+SRC_URI[sha256sum] = "a7db4f786166643076323dcde99ad12e92383cc29b4b806862d5483ec468c3e3"
