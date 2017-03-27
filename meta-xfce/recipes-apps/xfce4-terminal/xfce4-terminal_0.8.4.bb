@@ -8,5 +8,5 @@ inherit xfce-app
 FILES_${PN} += "${datadir}/xfce4 \
                 ${datadir}/gnome-control-center"
 
-SRC_URI[md5sum] = "d4a3211c23aa3f588e86cb21d34c0e91"
-SRC_URI[sha256sum] = "40e6e4b3b8e887a326d9491a47388bbdc379f971a8d622509c0a006e53dc12f1"
+SRC_URI[md5sum] = "7d9ea57301d6a770e5db8e7ecd6e4cda"
+SRC_URI[sha256sum] = "c5c1163b30e7a43d56ff92a25193bf9f29ce60e6cf43e5988530df79c84cfdc8"
