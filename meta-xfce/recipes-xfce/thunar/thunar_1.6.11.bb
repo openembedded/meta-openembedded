@@ -9,8 +9,8 @@ inherit xfce distro_features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
-SRC_URI[md5sum] = "3089e1dca6e408641b07cd9c759dea5e"
-SRC_URI[sha256sum] = "7e9d24067268900e5e44d3325e60a1a2b2f8f556ec238ec12574fbea15fdee8a"
+SRC_URI[md5sum] = "9749be8247cb19ed0fd36e4118c6236a"
+SRC_URI[sha256sum] = "b1c7c3121827f59610900ef1cc19aa10a50ab2cc3ae38eee15181b64256e8b42"
 
 S = "${WORKDIR}/Thunar-${PV}/"
 
