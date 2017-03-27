@@ -25,8 +25,8 @@ DEPENDS = " \
 inherit autotools pkgconfig gtk-icon-cache
 
 SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "2059c63ac0ec29d2da66b6243ae792e1"
-SRC_URI[sha256sum] = "2827e0cf8f58a45759c82b690af5401dbd3ea0ec8dac310e4caea55547637bd7"
+SRC_URI[md5sum] = "13f8e5d900b4911059385649b8dde887"
+SRC_URI[sha256sum] = "8adb90645d273d9549e1fa99b69ea87dc1fd612f7467eb18eee11a6b30c9ba5b"
 
 do_configure_prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
