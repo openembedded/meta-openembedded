@@ -8,8 +8,8 @@ DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native intltool-nativ
 inherit autotools pkgconfig perlnative pythonnative gettext
 
 SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
-SRC_URI[md5sum] = "9b62a443461cc917b41c94fa7d58fdb1"
-SRC_URI[sha256sum] = "394307596bc908419617e4c33e93eae8b5b733dfc8d01161677b8cbd3a4fb20f"
+SRC_URI[md5sum] = "75081b600560c5c8366eda0e1b8cc531"
+SRC_URI[sha256sum] = "0ac360f1f3d6c28790a81d570252a7d40421f6e1d8e5a8d653756bd041d88491"
 
 FILES_${PN} += "${datadir}/icons"
 
