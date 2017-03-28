@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
 
 SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
 S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
-
-SRC_URI[md5sum] = "2d6fb47ddf62b51733227126fe9227fe"
-SRC_URI[sha256sum] = "4b383f0074a3ab7683339d1f18222b107aaeb4983db119292c43c2b275cefb27"
+SRC_URI[md5sum] = "d97474ae1954f772c6d2fa386a6f462c"
+SRC_URI[sha256sum] = "3e5a021d7b761261836dcb305370af299793eedbded731df3d6943802e1262d5"
 
 inherit autotools pkgconfig
 
@@ -33,6 +32,7 @@ do_install_append() {
     # Standard mount will execute the program /sbin/mount.TYPE
     # when called. Add the symbolic to let mount could find ntfs.
     ln -sf mount.ntfs-3g ${D}/${base_sbindir}/mount.ntfs
+    rmdir ${D}${libdir}/ntfs-3g
 }
 
 # Satisfy the -dev runtime dependency
