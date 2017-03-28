@@ -18,6 +18,8 @@ PV = "3.14+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+export HOSTCC = "${BUILD_CC}"
+
 do_configure_prepend() {
    # Replace sbin,bin paths with bitbake environment
    sed -i -e 's;install_sbin: Tgt = ${DESTDIR}/sbin;install_sbin: Tgt = ${DESTDIR}/${base_sbindir};' \
