@@ -41,6 +41,10 @@ do_export_sources() {
 # compile and install mount utility
 do_compile_append() {
     oe_runmake 'LD=${CC}' 'LDFLAGS=${LDFLAGS}' -C ${S}/utils
+    if ! [ -e vboxguest.ko -a -e vboxsf.ko -a -e vboxvideo.ko ] ; then
+        echo "ERROR: One of vbox*.ko modules wasn't built"
+        exit 1
+    fi
 }
 
 module_do_install() {
