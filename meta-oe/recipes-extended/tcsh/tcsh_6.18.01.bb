@@ -51,3 +51,5 @@ pkg_postinst_${PN} () {
 #!/bin/sh -e
 echo /usr/bin/tcsh >> $D/etc/shells
 }
+
+PNBLACKLIST[tcsh] ?= "Doesn't respect CC variable and fails with HOSTTOOLS http://errors.yoctoproject.org/Errors/Details/138244/"
