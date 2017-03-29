@@ -4,22 +4,20 @@ It provides high performance logging, tracing, ipc, and poll."
 
 HOMEPAGE = "https://github.com/clusterlabs/libqb/wiki"
 SECTION = "libs"
-
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools pkgconfig
 
-PV = "0.17.2+git${SRCPV}"
+PV .= "+git${SRCPV}"
 
-SRCREV = "bd2c587f6ccacd8a5644b275d99324d200c2b378"
-SRC_URI = "git://github.com/ClusterLabs/${BPN}.git"
-
+SRCREV = "0a329683a76bc6aeb36f20f2bf6b43ba0440c4dc"
+SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
+           file://0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch \
+          "
 S = "${WORKDIR}/git"
 
 do_configure_prepend() {
     ( cd ${S}
     ${S}/autogen.sh )
 }
-
-
