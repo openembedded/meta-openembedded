@@ -1,17 +1,24 @@
 SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
 to allow minimal and customized crash dumps"
-LICENSE = " LGPLv2.1 & BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=45445387350de96a0e70410470ee5cab"
-DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux"
+LICENSE = " LGPLv2.1 & BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://COPYING;md5=709087c2ed0acda54a4d91497a889e42 \
+                    file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
+                    file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
+                   "
+DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
 
 inherit autotools pkgconfig systemd update-rc.d
 
-SRC_URI = "https://linutronix.de/${BPN}/files/${BPN}-${PV}.tar.gz \
+SRCREV = "248019446ccf6079926efb54f8b6dd7be769bbae"
+
+PR .= "+git${SRCPV}"
+
+SRC_URI = "git://github.com/Linutronix/minicoredumper-debian;branch=unstable \
            file://minicoredumper.service \
            file://minicoredumper.init \
 "
-SRC_URI[md5sum] = "5ba9d116b52a8e2fb93456260644e753"
-SRC_URI[sha256sum] = "1b0eeb3d70dbd2ad6f2f673e4e3446e5dd784e132730e21d8f9dc0977e47dd9a"
+
+S = "${WORKDIR}/git"
 
 SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
 SYSTEMD_AUTO_ENABLE = "enable"
@@ -21,6 +28,7 @@ INITSCRIPT_NAME_${PN} = "minicoredumper"
 INITSCRIPT_PARAMS_${PN} = "defaults 89"
 
 do_install_append() {
+    rmdir ${D}${localstatedir}/run
     install -d ${D}/${sysconfdir}/minicoredumper
     cp -rf ${S}/etc/* ${D}/${sysconfdir}/
 
