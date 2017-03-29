@@ -33,3 +33,9 @@ do_install() {
 
 CONFFILES_${PN} = "${sysconfdir}/exquisite/config-illume"
 FILES_${PN} = "${sysconfdir}/exquisite ${datadir}/exquisite/data/themes"
+
+PNBLACKLIST[exquisite-theme-illume] ?= "Depends on blacklisted edje-native"
+
+PNBLACKLIST[exquisite-theme-illume] ?= "Runtime depends on blacklisted exquisite-theme-illume"
+
+PNBLACKLIST[exquisite-theme-illume] ?= "Runtime depends on blacklisted exquisite-theme-illume-dev"

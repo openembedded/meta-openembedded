@@ -285,3 +285,6 @@ FILES_${PN}-dev += " \
     ${datadir}/eo/gdb \
     ${bindir}/eldbus-codegen \
 "
+
+PNBLACKLIST[efl] ?= "Depends on broken efl-native"
+PNBLACKLIST[efl-native] ?= "Broken: fails to build with http://errors.yoctoproject.org/Errors/Details/138240/"

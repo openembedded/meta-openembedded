@@ -36,3 +36,9 @@ do_install() {
 }
 
 FILES_${PN} = "${datadir}/elementary/themes/"
+
+PNBLACKLIST[elementary-theme-efenniht] ?= "Depends on blacklisted edje-native"
+
+PNBLACKLIST[elementary-theme-efenniht] ?= "Runtime depends on blacklisted elementary-theme-efenniht"
+
+PNBLACKLIST[elementary-theme-efenniht] ?= "Runtime depends on blacklisted elementary-theme-efenniht-dev"

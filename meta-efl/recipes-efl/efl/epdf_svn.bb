@@ -25,3 +25,11 @@ EXTRA_OECONF = "\
 
 # Some upgrade path tweaking, as in evas
 AUTO_LIBNAME_PKGS = ""
+
+PNBLACKLIST[epdf] ?= "Depends on blacklisted ecore"
+
+PNBLACKLIST[epdf] ?= "Depends on blacklisted evas"
+
+PNBLACKLIST[epdf] ?= "Runtime depends on blacklisted epdf-dev"
+
+PNBLACKLIST[epdf] ?= "Runtime depends on blacklisted epdf"
