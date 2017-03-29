@@ -1,32 +1,8 @@
-diff --git a/ClntMessages/ClntMsg.cpp b/ClntMessages/ClntMsg.cpp
-index eeaadd0..0cf5dce 100644
---- a/ClntMessages/ClntMsg.cpp
-+++ b/ClntMessages/ClntMsg.cpp
-@@ -346,7 +346,9 @@ unsigned long TClntMsg::getTimeout()
- 
- void TClntMsg::send()
- {
--    char* pkt = new char[getSize()];
-+    size_t size = getSize();
-+    char* pkt = new char[size];
-+    memset(pkt, 0, size);
- 
-     srand((uint32_t)time(NULL));
-     if (!RC)
-@@ -364,7 +366,7 @@ void TClntMsg::send()
- 
-     RC++;
- 
--    this->storeSelf(pkt);
-+    storeSelf(pkt);
- 
-     SPtr<TIfaceIface> ptrIface = ClntIfaceMgr().getIfaceByID(Iface);
-     if (!ptrIface) {
-diff --git a/ClntMessages/ClntMsgRequest.cpp b/ClntMessages/ClntMsgRequest.cpp
-index 4a7b5da..f3e40fd 100644
---- a/ClntMessages/ClntMsgRequest.cpp
-+++ b/ClntMessages/ClntMsgRequest.cpp
-@@ -143,7 +143,10 @@ TClntMsgRequest::TClntMsgRequest(List(TAddrIA) IAs,
+Index: git/ClntMessages/ClntMsgRequest.cpp
+===================================================================
+--- git.orig/ClntMessages/ClntMsgRequest.cpp
++++ git/ClntMessages/ClntMsgRequest.cpp
+@@ -142,7 +142,10 @@ TClntMsgRequest::TClntMsgRequest(List(TA
      IsDone=false;
      SPtr<TOpt> ptr;
      ptr = new TOptDUID(OPTION_CLIENTID, ClntCfgMgr().getDUID(), this );
@@ -38,8 +14,8 @@ index 4a7b5da..f3e40fd 100644
  
      if (!srvDUID) {
  	Log(Error) << "Unable to send REQUEST: ServerId not specified.\n" << LogEnd;
-@@ -154,7 +157,9 @@ TClntMsgRequest::TClntMsgRequest(List(TAddrIA) IAs,
-     ptr = (Ptr*) new TOptDUID(OPTION_SERVERID, srvDUID,this);
+@@ -153,7 +156,9 @@ TClntMsgRequest::TClntMsgRequest(List(TA
+     ptr = new TOptDUID(OPTION_SERVERID, srvDUID,this);
      // all IAs provided by checkSolicit
      SPtr<TAddrIA> ClntAddrIA;
 -    Options.push_back( ptr );
@@ -49,21 +25,21 @@ index 4a7b5da..f3e40fd 100644
  	
      IAs.first();
      while (ClntAddrIA = IAs.get()) 
-diff --git a/Messages/Msg.cpp b/Messages/Msg.cpp
-index baa6c86..6eef6c7 100644
---- a/Messages/Msg.cpp
-+++ b/Messages/Msg.cpp
-@@ -66,10 +66,15 @@ int TMsg::getSize()
+Index: git/Messages/Msg.cpp
+===================================================================
+--- git.orig/Messages/Msg.cpp
++++ git/Messages/Msg.cpp
+@@ -69,10 +69,15 @@ int TMsg::getSize()
  {
      int pktsize=0;
      TOptList::iterator opt;
-+    int optionCount = 0;  
++    int optionCount = 0;
      for (opt = Options.begin(); opt!=Options.end(); ++opt)
      {
 -	pktsize += (*opt)->getSize();
-+        Log(Info) << "### CPE Debug - Option with index  " << optionCount++ << LogEnd ;
-+        Log(Info) << "### CPE Debug - Option with type " << (*opt)->getOptType() << LogEnd ;
-+        pktsize += (*opt)->getSize();
++       Log(Info) << "### CPE Debug - Option with index  " << optionCount++ << LogEnd ;
++       Log(Info) << "### CPE Debug - Option with type " << (*opt)->getOptType() << LogEnd ;
++       pktsize += (*opt)->getSize();
      }
 +    Log(Info) << "### CPE Debug - Packet size of option (Add 4) " << pktsize << LogEnd ;
 +

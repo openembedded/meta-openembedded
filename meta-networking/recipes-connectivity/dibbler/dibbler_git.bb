@@ -5,12 +5,14 @@ HOMEPAGE = "http://klub.com.pl/dhcpv6"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7236695bb6d4461c105d685a8b61c4e3"
 
-SRC_URI = "http://klub.com.pl/dhcpv6/${BPN}/${BP}.tar.gz \
-        file://dibbler_fix_getSize_crash.patch \
-        file://types.patch \
-"
-SRC_URI[md5sum] = "93357bea3ec35b0c1d11242055361409"
-SRC_URI[sha256sum] = "27869877e060c039cbc24a5f6a9dd69006bf67de0ffdf29a645a80aef6e476a1"
+SRCREV = "c4b0ed52e751da7823dd9a36e91f93a6310e5525"
+
+SRC_URI = "git://github.com/tomaszmrugalski/dibbler \
+           file://dibbler_fix_getSize_crash.patch \
+          "
+PV = "1.0.1+1.0.2RC1+git${SRCREV}"
+
+S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "debug bind-reuse resolvconf dns-update"
 
@@ -26,8 +28,6 @@ PACKAGECONFIG[gtest] = "--enable-gtest-static,,,"
 inherit autotools
 
 DEPENDS += "flex-native"
-
-CFLAGS += "-D_GNU_SOURCE"
 
 PACKAGES =+ "${PN}-requestor ${PN}-client ${PN}-relay ${PN}-server"
 
