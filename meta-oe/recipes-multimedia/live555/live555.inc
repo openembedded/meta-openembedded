@@ -18,9 +18,12 @@ MIRRORS += "http://www.live555.com/liveMedia/public/ http://distcache.FreeBSD.or
 S = "${WORKDIR}/live"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
+XLOCALE_libc-musl = " -DXLOCALE_NOT_USED"
+XLOCALE ?= ""
+
 do_configure() {
     cp ${WORKDIR}/config.linux-cross .
-    echo "COMPILE_OPTS+=" -fPIC "" >> config.linux-cross
+    echo "COMPILE_OPTS+=" -fPIC ${XLOCALE}"" >> config.linux-cross
     ./genMakefiles linux-cross
 }
 
