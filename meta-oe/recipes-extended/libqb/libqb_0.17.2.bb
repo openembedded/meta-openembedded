@@ -8,7 +8,7 @@ SECTION = "libs"
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
 
-inherit autotools pkgconfig
+inherit autotools-brokensep pkgconfig
 
 PV = "0.17.2+git${SRCPV}"
 
