@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native intltool-native"
 
-SRC_URI = "git://github.com/schnitzeltony/xarchiver.git;branch=master"
+SRC_URI = "git://github.com/schnitzeltony/xarchiver.git;branch=master \
+           file://0001-Add-proper-formatting-string-to-printf-like-function.patch \
+           "
 SRCREV = "e80e90528c9aab2fe36d9078b945b44c05cc20d3"
 PV = "0.5.3"
 S = "${WORKDIR}/git"

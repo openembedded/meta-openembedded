@@ -1,0 +1,40 @@
+From baf93ea9acf845c5455d577ac19a6f680dac3d2d Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 30 Mar 2017 11:22:42 -0700
+Subject: [PATCH] Add proper formatting string to printf-like functions
+
+Avoids potential security holes and makes compiler happy
+
+| ../../../../../../../workspace/sources/xarchiver/src/window.c:236:72: error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
+|         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),message2);
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/window.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+Index: git/src/window.c
+===================================================================
+--- git.orig/src/window.c
++++ git/src/window.c
+@@ -231,9 +231,9 @@ int xa_show_message_dialog (GtkWindow *w
+ {
+ 	int response;
+ 
+-	dialog = gtk_message_dialog_new (window,mode,type,button,message1);
++	dialog = gtk_message_dialog_new (window,mode,type,button,"%s",message1);
+ 	gtk_dialog_set_default_response (GTK_DIALOG (dialog),GTK_RESPONSE_NO);
+-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),message2);
++	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),"%s",message2);
+ 	response = gtk_dialog_run (GTK_DIALOG (dialog));
+ 	gtk_widget_destroy (GTK_WIDGET (dialog));
+ 	return response;
+@@ -511,7 +511,7 @@ void xa_list_archive (GtkMenuItem *menui
+ 			g_fprintf (stream,_("Comment:\n"));
+ 			if (bp)
+ 				g_fprintf(stream,"</b><pre>");
+-			g_fprintf (stream,archive[idx]->comment->str);
++			g_fprintf (stream,"%s",archive[idx]->comment->str);
+ 			if (bp)
+ 				g_fprintf(stream,"</pre>");
+ 			g_fprintf (stream,"\n");
