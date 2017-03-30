@@ -1,6 +1,17 @@
---- a/Makefile~	2009-01-20 18:44:30.000000000 +0100
-+++ b/Makefile	2009-01-20 18:44:30.000000000 +0100
-@@ -119,21 +119,21 @@
+From d565b4a5e0045f1e40e0e462920ed5b8faca9eec Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sun, 2 Dec 2012 02:16:54 +0100
+Subject: [PATCH 2/8] Fix vpnc install for cross compile
+
+---
+ Makefile | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 69f5aca..a15782e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -133,21 +133,21 @@ install-common: all
  	else \
  		install vpnc-script $(DESTDIR)$(ETCDIR); \
  	fi
@@ -33,3 +44,6 @@
  
  uninstall :
  	rm -f $(DESTDIR)$(SBINDIR)/vpnc \
+-- 
+2.12.1
+
