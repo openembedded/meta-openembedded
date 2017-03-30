@@ -9,7 +9,9 @@ PARALLEL_MAKE = ""
 DEPENDS = "libpcap libpcre libdnet"
 
 SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
-            file://disable-run-test-program-while-cross-compiling.patch "
+           file://disable-run-test-program-while-cross-compiling.patch \
+           file://0001-correct-the-location-of-unistd.h.patch \
+           "
 
 # these 2 create undeclared dependency on libdnet and libnetfilter-queue from meta-networking
 # this error from test-dependencies script:
