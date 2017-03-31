@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2b2f8752cc5edf504d283107d033f544"
 ARM_INSTRUCTION_SET_armv4 = "arm"
 ARM_INSTRUCTION_SET_armv5 = "arm"
 
-DEPENDS = "libtool swig swig-native python bzip2 zlib glib-2.0 libwebp"
+DEPENDS = "libtool swig swig-native bzip2 zlib glib-2.0 libwebp"
 
 SRCREV_opencv = "70bbf17b133496bd7d54d034b0f94bd869e0e810"
 SRCREV_contrib = "86342522b0eb2b16fa851c020cc4e0fef4e010b7"
