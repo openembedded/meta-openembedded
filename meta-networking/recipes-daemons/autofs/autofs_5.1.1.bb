@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 DEPENDS += "libtirpc flex-native bison-native"
 
+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+
 inherit autotools-brokensep systemd
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
@@ -21,7 +23,9 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://force-STRIP-to-emtpy.patch \
            file://remove-bashism.patch \
            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
-"
+           file://0001-Define-__SWORD_TYPE-and-_PATH_NSSWITCH_CONF.patch \
+           file://0002-Replace-__S_IEXEC-with-S_IEXEC.patch \
+           "
 
 SRC_URI[md5sum] = "e143df66b614b8cdb1ff533735f8e12d"
 SRC_URI[sha256sum] = "795419383b120d15699ab3b89ea0f3d029f6fb28405a83982d305c4b7b61130f"
