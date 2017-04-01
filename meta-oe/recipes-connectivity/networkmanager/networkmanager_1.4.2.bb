@@ -23,11 +23,16 @@ DEPENDS = " \
 
 inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
 
-SRC_URI = " \
-    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-    file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
-    file://0002-Fix-nm-version-macro-includes.patch \
-"
+SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+           file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
+           file://0002-Fix-nm-version-macro-includes.patch \
+           file://0001-adjust-net-headers-for-musl-compatibility.patch \
+           file://0002-socket-util.h-Include-linux-sockios.h-on-musl.patch \
+           file://0003-Define-ETH_ALEN.patch \
+           file://0004-Define-missing-features-to-cater-for-musl.patch \
+           file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+           file://0001-check-for-strndupa-before-using-it.patch \
+           "
 SRC_URI[md5sum] = "59b5b5585467756787c6cb535cbd306e"
 SRC_URI[sha256sum] = "a864e347ddf6da8dabd40e0185b8c10a655d4a94b45cbaa2b3bb4b5e8360d204"
 
