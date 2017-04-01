@@ -13,7 +13,9 @@ SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp \
            file://0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch \
            file://0001-filedescriptorclient-Typecast-min-arguments-correctl.patch \
            file://0001-filedescriptorserver-Include-sys-select.h-before-oth.patch \
-"
+           file://0001-memset-and-family-needs-to-include-string.h.patch \
+           file://0002-Fix-build-problem-on-Mac.patch \
+           "
 SRCREV = "ccbdb41388bdd929828941652da816bf52a0580e"
 
 SECTION = "libs"
