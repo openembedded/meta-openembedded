@@ -15,11 +15,12 @@ PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
 
 SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
+           file://0001-buildsystem-do-not-assume-building-in-source-tree.patch \
            file://mediactl-pkgconfig.patch \
            file://export-mediactl-headers.patch \
           "
-SRC_URI[md5sum] = "936c9c58343840e91294e4dcec7dc05f"
-SRC_URI[sha256sum] = "6147ccc29fe7dd3c5c3994d613c4f2a099bac8b44694a96e5cf4d7caca8336c0"
+SRC_URI[md5sum] = "89e1ed6c69c94e0489dc0a638c7841aa"
+SRC_URI[sha256sum] = "5a47dd6f0e7dfe902d94605c01d385a4a4e87583ff5856d6f181900ea81cf46e"
 
 EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
 
