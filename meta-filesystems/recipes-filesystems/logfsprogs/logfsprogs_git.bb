@@ -11,7 +11,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://fsck.c;md5=3859dc73da97909ff1d0125e88a27e02"
 DEPENDS = "zlib"
 
-SRC_URI = "git://github.com/prasad-joshi/logfsprogs.git"
+SRC_URI = "git://github.com/prasad-joshi/logfsprogs.git \
+           file://0001-Add-LDFLAGS-to-linker-cmdline.patch \
+"
 SRCREV = "45b72c81ce3c6fa17ca19bafc207ea93e76312f4"
 
 S = "${WORKDIR}/git"
@@ -24,6 +26,3 @@ do_install () {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
-# logfsprogs-git: No GNU_HASH in the elf binary: '/tmp/work/armv5te-oe-linux-gnueabi/logfsprogs/git-r0/packages-split/logfsprogs/usr/bin/mklogfs' [ldflags]
-PNBLACKLIST[logfsprogs] ?= "Doesn't have proper PV, doesn't respect LDFLAGS - the recipe will be removed on 2017-09-01 unless the issue is fixed"
