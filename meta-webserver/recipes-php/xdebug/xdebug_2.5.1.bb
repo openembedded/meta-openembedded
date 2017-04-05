@@ -32,4 +32,4 @@ do_install() {
 FILES_${PN} += "${libdir}/php5/extensions/*/*.so"
 FILES_${PN}-dbg += "${libdir}/php5/extensions/*/.debug"
 
-PNBLACKLIST[xdebug] ?= "Depends on blacklisted php"
+PNBLACKLIST[xdebug] ?= "Depends on blacklisted php - the recipe will be removed on 2017-09-01 unless the issue is fixed"

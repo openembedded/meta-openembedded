@@ -65,4 +65,4 @@ do_install() {
 
 RDEPENDS_${PN} = "ttf-dejavu-sans-mono bash"
 
-PNBLACKLIST[fbida] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130677/"
+PNBLACKLIST[fbida] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130677/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

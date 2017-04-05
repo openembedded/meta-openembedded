@@ -14,4 +14,4 @@ do_configure_prepend() {
 
 SRC_URI += "file://configure.patch"
 
-PNBLACKLIST[flame] ?= "Depends on blacklisted e-wm"
+PNBLACKLIST[flame] ?= "Depends on blacklisted e-wm - the recipe will be removed on 2017-09-01 unless the issue is fixed"

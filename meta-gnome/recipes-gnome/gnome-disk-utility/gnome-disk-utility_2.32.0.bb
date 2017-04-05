@@ -42,4 +42,4 @@ FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
 FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
 FILES_${PN}-dbg += "${libdir}/nautilus/extensions-2.0/.debug"
 
-PNBLACKLIST[gnome-disk-utility] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132824/"
+PNBLACKLIST[gnome-disk-utility] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132824/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

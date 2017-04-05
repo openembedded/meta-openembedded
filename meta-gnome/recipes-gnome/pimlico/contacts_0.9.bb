@@ -17,4 +17,4 @@ do_configure_prepend () {
     sed -i 's/^        $(MAKE) dist distdir=/\t$(MAKE) dist distdir/' Makefile.am
 }
 
-PNBLACKLIST[contacts] ?= "Fails to fetch, pimlico-project.org is gone http://errors.yoctoproject.org/Errors/Details/132854/"
+PNBLACKLIST[contacts] ?= "Fails to fetch, pimlico-project.org is gone http://errors.yoctoproject.org/Errors/Details/132854/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

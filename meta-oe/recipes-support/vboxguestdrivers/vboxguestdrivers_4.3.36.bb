@@ -69,4 +69,4 @@ FILES_${PN} = "${base_sbindir}"
 KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
 
 # http://errors.yoctoproject.org/Errors/Details/83333/
-PNBLACKLIST[vboxguestdrivers] ?= "BROKEN: not compatible with default kernel version 4.8"
+PNBLACKLIST[vboxguestdrivers] ?= "BROKEN: not compatible with default kernel version 4.8 - the recipe will be removed on 2017-09-01 unless the issue is fixed"

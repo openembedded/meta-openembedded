@@ -54,4 +54,4 @@ INSANE_SKIP_${PN} = "dev-so"
 FILES_${PN} += "${datadir}/kodi"
 FILES_${PN}-dbg += "${datadir}/kodi/addons/*/.debug/"
 
-PNBLACKLIST[kodi-addon-pvr-hts] ?= "Depends on blacklisted kodi"
+PNBLACKLIST[kodi-addon-pvr-hts] ?= "Depends on blacklisted kodi - the recipe will be removed on 2017-09-01 unless the issue is fixed"

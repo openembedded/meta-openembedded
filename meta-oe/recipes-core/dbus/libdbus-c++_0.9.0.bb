@@ -28,4 +28,4 @@ FILES_${PN}-tools = "${bindir}"
 
 BBCLASSEXTEND = "native"
 
-PNBLACKLIST[libdbus-c++] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130644/"
+PNBLACKLIST[libdbus-c++] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130644/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

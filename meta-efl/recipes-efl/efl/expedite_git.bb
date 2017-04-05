@@ -10,22 +10,22 @@ SRC_URI = "\
 "
 S = "${WORKDIR}/${SRCNAME}"
 
-PNBLACKLIST[expedite] ?= "Depends on blacklisted eet"
+PNBLACKLIST[expedite] ?= "Depends on blacklisted eet - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Depends on blacklisted evas"
+PNBLACKLIST[expedite] ?= "Depends on blacklisted evas - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-loader-png"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-loader-png - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-generic"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-generic - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-fb"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-fb - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-x11"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-x11 - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-gl-x11"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-gl-x11 - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-dev"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-dev - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-themes"
+PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-themes - the recipe will be removed on 2017-09-01 unless the issue is fixed"

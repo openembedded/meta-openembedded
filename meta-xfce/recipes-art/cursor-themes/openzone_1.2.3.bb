@@ -28,4 +28,4 @@ python populate_packages_prepend () {
 PACKAGES_DYNAMIC += "^openzone-.*"
 ALLOW_EMPTY_${PN} = "1"
 
-PNBLACKLIST[openzone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130682/"
+PNBLACKLIST[openzone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130682/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

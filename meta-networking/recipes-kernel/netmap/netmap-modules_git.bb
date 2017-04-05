@@ -89,4 +89,4 @@ do_install () {
 }
 
 # http://errors.yoctoproject.org/Errors/Details/83335/
-PNBLACKLIST[netmap-modules] ?= "BROKEN: not compatible with default kernel version 4.8"
+PNBLACKLIST[netmap-modules] ?= "BROKEN: not compatible with default kernel version 4.8 - the recipe will be removed on 2017-09-01 unless the issue is fixed"

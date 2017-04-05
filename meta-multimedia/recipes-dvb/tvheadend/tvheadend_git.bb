@@ -40,4 +40,4 @@ FILES_${PN} += "${datadir}/${BPN}"
 
 RDEPENDS_${PN} += "libdvben50221 libucsi libdvbapi"
 
-PNBLACKLIST[tvheadend] ?= "Depends on blacklisted dvb-apps"
+PNBLACKLIST[tvheadend] ?= "Depends on blacklisted dvb-apps - the recipe will be removed on 2017-09-01 unless the issue is fixed"

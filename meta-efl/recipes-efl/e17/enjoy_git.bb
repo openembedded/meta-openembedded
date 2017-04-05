@@ -47,4 +47,4 @@ pkg_postinst_${PN} () {
     echo "enjoy:    Use test-lms -P to see available formats that can be scanned"
 }
 
-PNBLACKLIST[enjoy] ?= "Depends on blacklisted elementary"
+PNBLACKLIST[enjoy] ?= "Depends on blacklisted elementary - the recipe will be removed on 2017-09-01 unless the issue is fixed"

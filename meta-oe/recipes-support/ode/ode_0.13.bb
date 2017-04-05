@@ -27,5 +27,5 @@ PACKAGECONFIG ?= ""
 # series of AC_TRY_RUN which won't work for cross-compilation and configure fails
 PACKAGECONFIG[double-precision] = "--enable-double-precision,--disable-double-precision"
 
-PNBLACKLIST[ode] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130599/"
-PNBLACKLIST[ode] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130620/"
+PNBLACKLIST[ode] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130599/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+PNBLACKLIST[ode] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130620/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

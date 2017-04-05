@@ -36,4 +36,4 @@ do_compile_prepend() {
 RPROVIDES_${PN} += "libkodiplatform"
 FILES_${PN}-dev += "${libdir}/*platform"
 
-PNBLACKLIST[kodi-platform] ?= "Depends on blacklisted kodi"
+PNBLACKLIST[kodi-platform] ?= "Depends on blacklisted kodi - the recipe will be removed on 2017-09-01 unless the issue is fixed"

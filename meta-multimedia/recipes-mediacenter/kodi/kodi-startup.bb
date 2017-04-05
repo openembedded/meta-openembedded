@@ -19,6 +19,6 @@ SYSTEMD_SERVICE_${PN} = "kodi.service"
 
 RDEPENDS_${PN} += "xinit kodi"
 
-PNBLACKLIST[kodi-startup] ?= "Runtime depends on blacklisted kodi"
+PNBLACKLIST[kodi-startup] ?= "Runtime depends on blacklisted kodi - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 
-PNBLACKLIST[kodi-startup] ?= "Runtime depends on blacklisted kodi-startup-dev"
+PNBLACKLIST[kodi-startup] ?= "Runtime depends on blacklisted kodi-startup-dev - the recipe will be removed on 2017-09-01 unless the issue is fixed"

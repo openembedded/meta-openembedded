@@ -193,4 +193,4 @@ RPROVIDES_${PN} += "xbmc"
 TOOLCHAIN = "gcc"
 
 
-PNBLACKLIST[kodi] ?= "Depends on blacklisted libsdl-mixer"
+PNBLACKLIST[kodi] ?= "Depends on blacklisted libsdl-mixer - the recipe will be removed on 2017-09-01 unless the issue is fixed"

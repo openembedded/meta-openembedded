@@ -15,4 +15,4 @@ SRC_URI[sha256sum] = "ae5540c2103fcdc69fd7469277ce25a8a00a0f701fc2c20771dc010840
 # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
 B = "${S}"
 
-PNBLACKLIST[elementary] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130584/"
+PNBLACKLIST[elementary] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130584/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

@@ -14,4 +14,4 @@ BBCLASSEXTEND = "native"
 SRC_URI[md5sum] = "eb5473acaef15a5db9b50df29c6a7f90"
 SRC_URI[sha256sum] = "f648e2b0cf16aa29856de998e2c7204be39dc1f8daeda9464d32288e0b580fc1"
 
-PNBLACKLIST[xstdcmap] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130660/"
+PNBLACKLIST[xstdcmap] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130660/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

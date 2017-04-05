@@ -53,4 +53,4 @@ FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug*"
 
 RDEPENDS_${PN} = "python"
 
-PNBLACKLIST[openlmi-providers] ?= "Depends on blacklisted lmsensors"
+PNBLACKLIST[openlmi-providers] ?= "Depends on blacklisted lmsensors - the recipe will be removed on 2017-09-01 unless the issue is fixed"

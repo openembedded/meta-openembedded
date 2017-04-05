@@ -40,4 +40,4 @@ FILES_${PN} += "${datadir}/icons"
 PRIVATE_LIBS = "libnautilus-extension.so.1"
 
 
-PNBLACKLIST[nautilus] ?= "Depends on blacklisted gnome-desktop"
+PNBLACKLIST[nautilus] ?= "Depends on blacklisted gnome-desktop - the recipe will be removed on 2017-09-01 unless the issue is fixed"

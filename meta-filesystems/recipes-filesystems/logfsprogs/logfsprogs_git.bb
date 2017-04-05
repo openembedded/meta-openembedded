@@ -26,4 +26,4 @@ do_install () {
 BBCLASSEXTEND = "native nativesdk"
 
 # logfsprogs-git: No GNU_HASH in the elf binary: '/tmp/work/armv5te-oe-linux-gnueabi/logfsprogs/git-r0/packages-split/logfsprogs/usr/bin/mklogfs' [ldflags]
-PNBLACKLIST[logfsprogs] ?= "Doesn't have proper PV, doesn't respect LDFLAGS"
+PNBLACKLIST[logfsprogs] ?= "Doesn't have proper PV, doesn't respect LDFLAGS - the recipe will be removed on 2017-09-01 unless the issue is fixed"

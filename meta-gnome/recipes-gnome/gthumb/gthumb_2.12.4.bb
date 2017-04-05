@@ -32,4 +32,4 @@ FILES_${PN}-dev += "${libdir}/${BPN}/extensions/*.la"
 FILES_${PN}-dbg += "${libdir}/${BPN}/extensions/.debug/"
 
 
-PNBLACKLIST[gthumb] ?= "Depends on blacklisted gstreamer"
+PNBLACKLIST[gthumb] ?= "Depends on blacklisted gstreamer - the recipe will be removed on 2017-09-01 unless the issue is fixed"

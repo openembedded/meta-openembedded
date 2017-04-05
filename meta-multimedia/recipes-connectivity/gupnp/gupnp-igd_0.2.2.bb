@@ -13,4 +13,4 @@ inherit autotools pkgconfig gtk-doc gobject-introspection
 
 EXTRA_OECONF = "--disable-python"
 
-PNBLACKLIST[gupnp-igd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130645/"
+PNBLACKLIST[gupnp-igd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130645/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"

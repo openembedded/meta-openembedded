@@ -8,4 +8,4 @@ SRC_URI = "git://git.enlightenment.org/bindings/python/${BPN}.git;branch=python-
 
 S = "${WORKDIR}/git"
 
-PNBLACKLIST[python-efl] ?= "Depends on blacklisted elementary"
+PNBLACKLIST[python-efl] ?= "Depends on blacklisted elementary - the recipe will be removed on 2017-09-01 unless the issue is fixed"

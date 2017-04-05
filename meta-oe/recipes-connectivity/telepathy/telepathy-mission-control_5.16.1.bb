@@ -50,4 +50,4 @@ FILES_libmissioncontrol-dbg = "${libdir}/.debug/libmissioncontrol.so.*"
 FILES_libmissioncontrol-config-dbg = "${libdir}/.debug/libmissioncontrol-config.so.*"
 FILES_libmissioncontrol-server-dbg = "${libdir}/.debug/libmissioncontrol-server.so.*"
 
-PNBLACKLIST[telepathy-mission-control] ?= "Depends on blacklisted libtelepathy"
+PNBLACKLIST[telepathy-mission-control] ?= "Depends on blacklisted libtelepathy - the recipe will be removed on 2017-09-01 unless the issue is fixed"

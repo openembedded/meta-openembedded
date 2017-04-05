@@ -15,4 +15,4 @@ EXTRA_OECONF = "--disable-gconf --with-gio --with-alsa --enable-keystore"
 
 inherit gettext pkgconfig autotools gconf
 
-PNBLACKLIST[gmtk] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130661/"
+PNBLACKLIST[gmtk] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130661/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
