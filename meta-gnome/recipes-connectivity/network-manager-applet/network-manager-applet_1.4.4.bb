@@ -11,8 +11,8 @@ inherit gnomebase gsettings gtk-icon-cache gobject-introspection
 
 GNOME_COMPRESS_TYPE = "xz"
 
-SRC_URI[archive.md5sum] = "35684ee788d8d1d6f913c63bb0ada0cf"
-SRC_URI[archive.sha256sum] = "431b7b4876638c6a537c8bf9c91a9250532b3d960b22b056df554695a81e4499"
+SRC_URI[archive.md5sum] = "3f82cedc4703df0277c76d9feb5bf2c8"
+SRC_URI[archive.sha256sum] = "693846eeae0986e79eb1cedfbc499f132f27a9976ef189a0f16938ac59ec3226"
 
 PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
 PACKAGECONFIG ??= ""
