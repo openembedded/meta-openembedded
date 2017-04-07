@@ -1,2 +1,2 @@
 require python-pyalsaaudio.inc
-inherit pypi setuptools
+inherit pypi setuptools3
