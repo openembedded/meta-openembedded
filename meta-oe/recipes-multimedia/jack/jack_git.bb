@@ -34,6 +34,8 @@ EXTRA_OECONF = "--portaudio=no"
 
 PACKAGES =+ "libjack jack-server jack-utils"
 
+RDEPENDS_jack-dev_remove = "${PN} (= ${EXTENDPKGV})"
+
 FILES_libjack = "${libdir}/*.so.* ${libdir}/jack/*.so"
 FILES_jack-server = "${bindir}/jackd"
 FILES_jack-utils = "${bindir}/*"
