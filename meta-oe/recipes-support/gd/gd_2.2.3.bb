@@ -14,7 +14,9 @@ DEPENDS = "freetype libpng jpeg zlib tiff"
 
 SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
            file://fix-gcc-unused-functions.patch \
-           file://CVE-2016-10166.patch"
+           file://CVE-2016-10166.patch \
+           file://CVE-2016-10167.patch \
+           file://CVE-2016-10168.patch"
 
 SRCREV = "46ceef5970bf3a847ff61d1bdde7501d66c11d0c"
 
