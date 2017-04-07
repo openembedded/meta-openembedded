@@ -10,8 +10,8 @@ Signed-off-by: Peter Liu <peter.x.liu@external.atlascopco.com>
  CMakeLists.txt     | 147 +++++++++++++++++++++++++++++++++++++++++++++++++++++
  FindLibRcf.cmake   |  63 +++++++++++++++++++++++
  VERSION.cmake      |  21 ++++++++
- src/CMakeLists.txt |  24 +++++++++
- 4 files changed, 255 insertions(+)
+ src/CMakeLists.txt |  25 +++++++++
+ 4 files changed, 256 insertions(+)
  create mode 100644 CMakeLists.txt
  create mode 100644 FindLibRcf.cmake
  create mode 100644 VERSION.cmake
@@ -271,7 +271,7 @@ new file mode 100755
 index 0000000..c227901
 --- /dev/null
 +++ b/src/CMakeLists.txt
-@@ -0,0 +1,24 @@
+@@ -0,0 +1,25 @@
 +IF (NOT LIBRCF_BUILD_SHARED_LIBS)
 +  ADD_LIBRARY (rcf STATIC RCF/RCF.cpp)
 +ELSE (NOT LIBRCF_BUILD_SHARED_LIBS)
@@ -287,6 +287,7 @@ index 0000000..c227901
 +SET_TARGET_PROPERTIES (rcf PROPERTIES INSTALL_NAME_DIR ${CMAKE_INSTALL_LIBDIR})
 +
 +INSTALL (DIRECTORY "${CMAKE_SOURCE_DIR}/include/RCF" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
++INSTALL (DIRECTORY "${CMAKE_SOURCE_DIR}/include/SF" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 +INSTALL (TARGETS rcf LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 +
 +IF (LIBRCF_BUILD_STATIC_LIBS AND LIBRCF_BUILD_SHARED_LIBS)
