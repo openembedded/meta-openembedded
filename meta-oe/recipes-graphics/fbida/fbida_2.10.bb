@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
 DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
 
-SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
+SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
+	   file://0001-Avoid-using-host-path.patch \
+	   "
 SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
 SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
 
