@@ -7,8 +7,8 @@ SRC_URI = " \
     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
 "
-SRC_URI[md5sum] = "342452b9dfd16f3c9912eb029fe0d4e2"
-SRC_URI[sha256sum] = "e997c9ad81a8372f2dd03a02b00692b8cc479c220340c8881edaca540f402c1f"
+SRC_URI[md5sum] = "943679f1030b9bc19a989f24121a282a"
+SRC_URI[sha256sum] = "592bf72960c6b5948b67657594b05e72d9a278daf7613c9f3cdff9a5b73096a8"
 
 DEPENDS = "fontconfig zlib cairo lcms"
 
@@ -23,13 +23,6 @@ PACKAGECONFIG[openjpeg] = "--enable-libopenjpeg=openjpeg2,--disable-libopenjpeg,
 PACKAGECONFIG[qt5] = "--enable-poppler-qt5 --with-moc-qt5=${STAGING_BINDIR_NATIVE}/qt5/moc,--disable-poppler-qt5,qtbase qttools-native"
 PACKAGECONFIG[qt4e] = "--enable-poppler-qt4 --with-moc-qt4=${STAGING_BINDIR_NATIVE}/moc4,--disable-poppler-qt4,qt4-embedded"
 PACKAGECONFIG[nss] = "--enable-libnss,--disable-libnss,nss"
-
-# Needed for qt5
-CXXFLAGS += "--std=c++11"
-
-#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_end'
-#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_start'
-#| /mnt/a/build/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/6.2.0/ld: .libs/libpoppler.so.65.0.0: hidden symbol `__init_array_end' isn't defined 
 
 SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 
