@@ -5,16 +5,16 @@ SECTION = "x11/office"
 DEPENDS = "gtk+3 libsecret gnome-desktop3 poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
 PR = "r5"
 
-inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check
+inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "c39af6b8b1c44d4393ef8ac9dab99c0b"
-SRC_URI[archive.sha256sum] = "42ad6c7354d881a9ecab136ea84ff867acb942605bcfac48b6c12e1c2d8ecb17"
-
-SRC_URI += "file://0001-help-remove-YELP-macro.patch \
-            file://0002-fix-gcc6-errors.patch \
-"
+SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
+           file://0001-help-remove-YELP-macro.patch \
+           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
+           "
+SRC_URI[archive.md5sum] = "3fb65ff46de191dc49c481f1fc66201c"
+SRC_URI[archive.sha256sum] = "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
 
 EXTRA_OECONF = " --enable-thumbnailer \
 "
@@ -25,22 +25,35 @@ do_compile_prepend() {
 
 
 do_install_append() {
-    install -d install -d ${D}${datadir}/pixmaps
+    install -d ${D}${datadir}/pixmaps
     install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}
+    then
+        install -d ${D}${systemd_unitdir}/system
+        mv ${D}${libdir}/systemd/user/evince.service ${D}${systemd_unitdir}/system/evince.service
+    else
+        rm -rf ${D}${libdir}/systemd/user/evince.service
+    fi
+    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd/user
+    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd
 }
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
 PACKAGECONFIG[browser-plugin] = "--enable-browser-plugin,--disable-browser-plugin,"
 
+SYSTEMD_SERVICE_${PN} = "evince.service"
+
 RDEPENDS_${PN} += "glib-2.0-utils"
 RRECOMMMENDS_${PN} = "adwaita-icon-theme"
 
 PACKAGES =+ "${PN}-nautilus-extension"
 PACKAGES =+ "${PN}-browser-plugin"
+
 FILES_${PN} += "${datadir}/dbus-1 \
                 ${datadir}/appdata \
                 ${datadir}/thumbnailers \
+                ${systemd_unitdir}/systemd/user/evince.service \
                "
 FILES_${PN}-dbg += "${libdir}/*/*/.debug \
                     ${libdir}/*/*/*/.debug"
