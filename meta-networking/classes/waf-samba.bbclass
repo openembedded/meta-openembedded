@@ -45,6 +45,7 @@ CROSS_METHOD ?= "answer"
 do_configure() {
 
     # Prepare the cross-answers file
+    WAF_CROSS_ANSWERS_PATH="${THISDIR}/../../files/waf-cross-answers"
     CROSS_ANSWERS="${B}/cross-answers-${TARGET_ARCH}.txt"
     if [ -e ${CROSS_ANSWERS} ]; then
         rm -f ${CROSS_ANSWERS}
