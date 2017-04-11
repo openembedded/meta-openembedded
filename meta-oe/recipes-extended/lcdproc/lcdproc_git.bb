@@ -7,20 +7,32 @@ LICENSE = "GPLv2+"
 DEPENDS = "ncurses lirc"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
-                    file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
+                    file://README.md;beginline=107;md5=5c927ce1742d6d5cddc45b7ad6230f75"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${BP}.tar.gz"
+BASEPV = "0.5.8"
+PV = "${BASEPV}+git${SRCPV}"
+SRCREV = "f5156e2e41bb418f14761afea22eee8efb49fb85"
+SRC_URI = "git://github.com/lcdproc/lcdproc;branch=lcdproc-${BASEPV} \
+           file://0001-include-asm-ioctl.h-explicitly.patch \
+           "
 
-inherit autotools update-rc.d
+S = "${WORKDIR}/git"
 
-LCD_DRIVERS ?= "all"
+inherit autotools pkgconfig update-rc.d
+
+LCD_DRIVERS ?= "all,!irman,!svga"
 LCD_DEFAULT_DRIVER ?= "curses"
 
 PACKAGECONFIG ??= "usb"
 PACKAGECONFIG[usb] = "--enable-libusb,--disable-libusb,virtual/libusb0"
 PACKAGECONFIG[ftdi] = "--enable-libftdi,--disable-libftdi,libftdi"
+PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
+PACKAGECONFIG[hid] = "--enable-libhid,--disable-libhid,libhid"
+PACKAGECONFIG[png] = "--enable-libpng,--disable-libpng,libpng"
 
-EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS}"
+LCD_DRIVERS_append = "${@bb.utils.contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
+
+EXTRA_OECONF = "--enable-drivers='${LCD_DRIVERS}'"
 
 do_install () {
     # binaries
@@ -46,9 +58,14 @@ do_install () {
     for i in server/drivers/*.so; do
         install -m 0644 $i ${D}${libdir}/lcdproc/
     done
+    # binaries
+    install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
+
+    # configuration files
+    install -D -m 0644 ${S}/clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
 }
 
-PACKAGES =+ "lcdd"
+PACKAGES =+ "lcdd lcdvc"
 
 RRECOMMENDS_${PN} = "lcdd"
 
@@ -58,6 +75,8 @@ FILES_lcdd = "${sysconfdir}/LCDd.conf \
 
 CONFFILES_lcdd = "${sysconfdir}/LCDd.conf"
 CONFFILES_${PN} = "${sysconfdir}/lcdproc.conf"
+CONFFILES_lcdvc = "${sysconfdir}/lcdvc.conf"
+FILES_lcdvc = "${sysconfdir}/lcdvc.conf ${sbindir}/lcdvc"
 
 # Driver packages
 
@@ -78,4 +97,3 @@ python populate_packages_prepend() {
 }
 
 PACKAGES_DYNAMIC += "^lcdd-driver-.*"
-
