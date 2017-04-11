@@ -2,8 +2,12 @@ SUMMARY = "Transparent Inter-Process Communication protocol"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://tipclog/tipc.h;endline=35;md5=985b6ea8735818511d276c1b466cce98"
 
-SRC_URI = "git://tipc.git.sourceforge.net/gitroot/tipc/tipcutils"
-SRCREV = "dc8c2d324cda2e80a6e07ee1998fca0839d4a721"
+SRC_URI = "git://git.code.sf.net/p/tipc/tipcutils \
+           file://0001-include-sys-select.h-for-FD_-definitions.patch \
+           file://0002-replace-non-standard-uint-with-unsigned-int.patch \
+           "
+SRCREV = "7ab2211b87414ba240b0b2e4af219c1057c9cf9a"
+PV = "2.2.0+git${SRCPV}"
 
 DEPENDS="virtual/kernel"
 
