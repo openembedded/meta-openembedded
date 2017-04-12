@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit xfce-panel-plugin
 
-SRC_URI += "file://0001-check-for-fstab.h-during-configure.patch \
-           "
-SRC_URI[md5sum] = "f5917e9aa2a06bc6a872cc10d2ee4f6f"
-SRC_URI[sha256sum] = "541d7af84d7d0b00ae547aa1f438e2fac51ee4195c4d0a17173c4f72accb227d"
+SRC_URI += "file://0001-check-for-fstab.h-during-configure.patch"
+SRC_URI[md5sum] = "7eba9696d82433a5577741214d34b588"
+SRC_URI[sha256sum] = "54578447abaf9da630a750d64acdc37d4fd20dda6460208d6d1ffaa9e43ee1a6"
