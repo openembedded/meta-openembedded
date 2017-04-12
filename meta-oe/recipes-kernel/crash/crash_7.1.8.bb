@@ -22,10 +22,13 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
            file://donnot-extract-gdb-during-do-compile.patch \
            file://gdb_build_jobs_and_not_write_crash_target.patch \
            file://remove-unrecognized-gcc-option-m32-for-mips.patch \
+           file://0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch \
+           file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
+           file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
            "
 
-SRC_URI[md5sum] = "7bd06eaec6827d4fac636b2b592d3056"
-SRC_URI[sha256sum] = "c3954412c8557614a0d50092c007aa96b4e3e6e97453dfbb60241ab680caf7b2"
+SRC_URI[md5sum] = "31787074f267a3536eebff008a0652ec"
+SRC_URI[sha256sum] = "9965dee9199d7e39764fbee7f21c7c45b1f7b6d17c8e92ad62f468f062876478"
 
 SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
 SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
@@ -80,7 +83,7 @@ do_compile_prepend() {
 }
 
 do_compile() {
-    oe_runmake ${EXTRA_OEMAKE}
+    oe_runmake ${EXTRA_OEMAKE} RECIPE_SYSROOT=${RECIPE_SYSROOT}
 }
 
 do_install_prepend () {
@@ -111,5 +114,3 @@ RDEPENDS_${PN}_class-cross = ""
 # Causes gcc to get stuck and eat all available memory in qemuarm builds
 # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
 ARM_INSTRUCTION_SET = "arm"
-
-PNBLACKLIST[crash] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130678/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
