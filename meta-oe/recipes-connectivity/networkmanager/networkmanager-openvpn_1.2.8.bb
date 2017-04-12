@@ -9,8 +9,8 @@ DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native glib-2.0-native
 inherit gnomebase useradd gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
-SRC_URI[md5sum] = "47ed9b6c43ca364976a15e84207687df"
-SRC_URI[sha256sum] = "2373e2bb0a8a876cb2997cd8b0e3d6e10012d9bef3705ea3ac21f6394b3f1fb0"
+SRC_URI[md5sum] = "9f325be386aa906ff9b0b7c0bdf2a59a"
+SRC_URI[sha256sum] = "3e0b4007f248d96df4b8eb5d0f937536044af7053debbbf525e67c9bc5d30654"
 
 S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
 
