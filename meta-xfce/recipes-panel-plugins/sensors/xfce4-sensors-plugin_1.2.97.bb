@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b94789bed9aec03b9656a9cc5398c706"
 
 inherit xfce-panel-plugin
 
-SRC_URI[md5sum] = "33c2e343c1224d9c4ae757a70cbe08eb"
-SRC_URI[sha256sum] = "235ef842bd45e701bceebb21a384ab09f21afceea8ed95f91bb4c6cf3abe1bc0"
+SRC_URI[md5sum] = "0c74c3112c5e6e07647c116cd43ff5a7"
+SRC_URI[sha256sum] = "7524ec4534de9ef7f676de2895a41bf70b73b94da5a27fd4a022b16eda56d0f4"
 
 EXTRA_OECONF = " \
     --disable-procacpi \
