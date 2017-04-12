@@ -61,6 +61,7 @@ RRECOMMENDS_${PN} = "kernel-module-tun"
 
 FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
 FILES_${PN} += "${systemd_unitdir}/system/openvpn@.service \
+                ${sysconfdir}/tmpfiles.d \
                 /run"
 FILES_${PN}-sample += "${systemd_unitdir}/system/openvpn@loopback-server.service \
                        ${systemd_unitdir}/system/openvpn@loopback-client.service \
