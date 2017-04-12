@@ -9,10 +9,8 @@ DEPENDS += "exo-native libwnck xfconf"
 
 PV = "0.1.0+gitr${SRCPV}"
 
-SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git;branch=master \
-           file://0001-Use-g_return_val_if_fail-in-functions-expecting-a-re.patch \
-          "
-SRCREV = "bd76154afe26ba8a5251a1887d88f9d855301850"
+SRC_URI = "git://github.com/schnitzeltony/xfce4-closebutton-plugin.git;branch=master"
+SRCREV = "02b74f13ad6f639234c8db1854963038b2780a2c"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--enable-maintainer-mode"
