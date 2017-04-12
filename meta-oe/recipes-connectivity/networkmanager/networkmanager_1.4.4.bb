@@ -4,7 +4,7 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
                     file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
-                    file://docs/api/html/license.html;md5=6baf214193dfc5d10b297b41fc2d22c9 \
+                    file://docs/api/html/license.html;md5=8eb8e72bab097b9d11763002cb003697 \
 "
 
 DEPENDS = " \
@@ -33,8 +33,8 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManag
            file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
            file://0001-check-for-strndupa-before-using-it.patch \
            "
-SRC_URI[md5sum] = "59b5b5585467756787c6cb535cbd306e"
-SRC_URI[sha256sum] = "a864e347ddf6da8dabd40e0185b8c10a655d4a94b45cbaa2b3bb4b5e8360d204"
+SRC_URI[md5sum] = "63f1e0d6d7e9099499d062c84c927a75"
+SRC_URI[sha256sum] = "829378f318cc008d138a23ca6a9191928ce75344e7e47a2f2c35f4ac82133309"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
