@@ -29,6 +29,10 @@ FILES_${PN} += " \
     ${libdir}/NetworkManager/VPN/nm-openvpn-service.name \
 "
 
+FILES_${PN}-staticdev += " \
+    ${libdir}/NetworkManager/*.a \
+"
+
 RDEPENDS_${PN} = " \
     networkmanager \
     openvpn \
