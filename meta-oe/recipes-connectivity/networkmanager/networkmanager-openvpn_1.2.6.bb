@@ -4,7 +4,7 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=100d5a599bead70ddcd70dcd73f2e29c"
 
-DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native"
+DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native glib-2.0-native"
 
 inherit gnomebase useradd gettext systemd
 
@@ -33,5 +33,3 @@ RDEPENDS_${PN} = " \
     networkmanager \
     openvpn \
 "
-
-PNBLACKLIST[networkmanager-openvpn] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130667/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
