@@ -10,7 +10,7 @@ SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
 
-DEPENDS = "openssl zlib"
+DEPENDS = "openssl zlib openssl-native"
 RDEPENDS_${PN} += "perl-module-carp \
                    perl-module-errno \
                    perl-module-extutils-makemaker \
