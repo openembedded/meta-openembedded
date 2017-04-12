@@ -70,6 +70,8 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 ap_cv_cc_pie=no \
                 ${SNMP_CONF}"
 
+CACHED_CONFIGUREVARS += "ac_cv_path_PERL='/usr/bin/env perl'"
+
 do_install () {
     # Install init script and default settings
     install -m 0755 -d ${D}${sysconfdir}/default ${D}${sysconfdir}/init.d \
