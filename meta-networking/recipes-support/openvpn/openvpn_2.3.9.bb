@@ -47,8 +47,6 @@ do_install_append() {
         install -d ${D}/${localstatedir}
         install -d ${D}/${localstatedir}/lib
         install -d -m 710 ${D}/${localstatedir}/lib/openvpn
-        install -d -m 755 ${D}/${localstatedir}/run/
-        install -d -m 755 ${D}/${localstatedir}/run/openvpn
 
         install -d ${D}${sysconfdir}/tmpfiles.d
         install -m 0644 ${WORKDIR}/openvpn-volatile.conf ${D}${sysconfdir}/tmpfiles.d/openvpn.conf
