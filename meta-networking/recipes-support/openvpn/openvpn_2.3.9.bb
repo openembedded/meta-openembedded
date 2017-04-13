@@ -25,7 +25,7 @@ EXTRA_OECONF += "--enable-iproute2"
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
 
 # Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
-EXTRA_OECONF += "IPROUTE=/sbin/ip"
+EXTRA_OECONF += "IPROUTE=${base_sbindir}/ip"
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
