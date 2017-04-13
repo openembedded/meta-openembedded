@@ -14,7 +14,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "99c88f702e134d2b2f2f8caad4b1ef03"
 SRC_URI[sha256sum] = "01a2ebcece14065c9a2e47decd81341e2a6f63e3bf43ff446103686718748356"
 
-inherit pkgconfig
+inherit pkgconfig gettext
 
 do_compile() {
     export GTK2=1
@@ -28,5 +28,3 @@ do_install() {
     install -d ${D}/${sysconfdir}/xdg/autostart
     install -m 644 ${WORKDIR}/devilspie2.desktop ${D}/${sysconfdir}/xdg/autostart
 }
-
-PNBLACKLIST[devilspie2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130666/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
