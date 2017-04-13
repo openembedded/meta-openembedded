@@ -18,7 +18,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI = "${GNOME_MIRROR}/${PNAME}/${@gnome_verdir("${PV}")}/${PNAME}-${PV}.tar.bz2;name=archive \
            file://gtk-doc.make \
            file://suppress-string-format-literal-warning.patch \
-"
+           file://0001-test-widget.c-fix-non-literal-format-string-issues.patch \
+           "
 SRC_URI[archive.md5sum] = "1219ad1694df136f126507466aeb41aa"
 SRC_URI[archive.sha256sum] = "c585773743b1df8a04b1be7f7d90eecdf22681490d6810be54c81a7ae152191e"
 
