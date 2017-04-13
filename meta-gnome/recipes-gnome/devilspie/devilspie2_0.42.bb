@@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
 DEPENDS = "gtk+ glib-2.0 libwnck lua virtual/libx11"
 
 SRC_URI = " \
-    http://www.gusnan.se/devilspie2/download/devilspie2_${PV}-src.tar.gz \
+    http://download.savannah.gnu.org/releases/${BPN}/${BPN}_${PV}-src.tar.gz \
     file://default.lua \
     file://devilspie2.desktop \
 "
-SRC_URI[md5sum] = "99c88f702e134d2b2f2f8caad4b1ef03"
-SRC_URI[sha256sum] = "01a2ebcece14065c9a2e47decd81341e2a6f63e3bf43ff446103686718748356"
+SRC_URI[md5sum] = "f205409e921aa2d86481f1b8d518da45"
+SRC_URI[sha256sum] = "11f5bc310fba4df404c057461ffb3fadac8ef51d211008c665c48f587a5a3f85"
 
 inherit pkgconfig gettext
 
