@@ -6,15 +6,13 @@ HOMEPAGE = "http://mcelog.org/"
 SECTION = "System Environment/Base"
 
 SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; \
-    file://mcelog-debash.patch \
-    file://0001-Add-Kabylake-client-support.patch \
     file://run-ptest \
 "
 
-SRCREV = "008c73e6de3a4bf969d1627e695d4efc807aed92"
+SRCREV = "2cfdf29b2ef98ccd5ed42cdde8bbe437e0d6412f"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://README;md5=3d12dd2a10bdd22379cc4c0fc6949a88"
+LIC_FILES_CHKSUM = "file://README.md;md5=279840fabb191e6cd9150492d31b0e20"
 
 S = "${WORKDIR}/git"
 
