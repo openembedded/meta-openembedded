@@ -32,8 +32,8 @@ SRC_URI = " \
     file://0001-configure-ac-do-not-check-for-freetype-config.patch \
     file://bump_Babl-GEGL_versions.patch \
 "
-SRC_URI[md5sum] = "5adaa11a68bc8a42bb2c778fee4d389c"
-SRC_URI[sha256sum] = "39dd2247c678deaf5cc664397d3c6bd4fb910d3472290fd54b52b441b5815441"
+SRC_URI[md5sum] = "d405640c426b234d6efc36fb4f5bae57"
+SRC_URI[sha256sum] = "939ca1df70be865c672ffd654f4e20f188121d01601c5c90237214101533c805"
 
 EXTRA_OECONF = "--disable-python \
                 --without-webkit \
