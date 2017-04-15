@@ -21,6 +21,7 @@ SRC_URI += "file://klibc-linux-libc-dev.patch \
 
 S = "${WORKDIR}/git"
 
+PARALLEL_MAKE = ""
 EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'CROSS_COMPILE=${TARGET_PREFIX}' \
                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
