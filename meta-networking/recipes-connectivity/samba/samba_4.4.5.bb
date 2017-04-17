@@ -154,6 +154,7 @@ do_install_append() {
         sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
     fi
 
+    chmod 0750 ${D}${sysconfdir}/sudoers.d
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
 }
 
