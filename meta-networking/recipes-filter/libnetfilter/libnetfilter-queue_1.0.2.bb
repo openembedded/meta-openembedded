@@ -11,6 +11,7 @@ SRCREV = "981025e103d887fb6a9c9bb49c74ec323108d098"
 
 SRC_URI = "git://git.netfilter.org/libnetfilter_queue \
            file://0001-Correct-typo-in-the-location-of-internal.h-in-includ.patch \
+           file://0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch \
            "
 
 S = "${WORKDIR}/git"
