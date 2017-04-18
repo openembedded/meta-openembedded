@@ -10,7 +10,9 @@ RRECOMMENDS_${PN} += "kernel-module-nf-tables \
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
            file://fix-to-generate-ntf.8.patch \
           "
-SRC_URI[md5sum] = "fd320e35fdf14b7be795492189b13dae"
-SRC_URI[sha256sum] = "dede62655f1c56f2bc9f9be12d103d930dcef6d5f9e0855854ad9c6f93cd6c2d"
+SRC_URI[md5sum] = "4c005e76a15a029afaba71d7db21d065"
+SRC_URI[sha256sum] = "fe639239d801ce5890397f6f4391c58a934bfc27d8b7d5ef922692de5ec4ed43"
+
+ASNEEDED = ""
 
 inherit autotools pkgconfig
