@@ -6,7 +6,8 @@ SECTION = "libs"
 
 SRC_URI = "git://github.com/projectNe10/Ne10.git \
            file://0001-CMakeLists.txt-Remove-mthumb-interwork.patch \
-"
+           file://0001-Dont-specify-march-explicitly.patch \
+           "
 SRCREV = "18c4c982a595dad069cd8df4932aefb1d257591f"
 
 S = "${WORKDIR}/git"
