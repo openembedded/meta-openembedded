@@ -39,6 +39,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 #
 EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
                 OPTFLAGS="${CFLAGS}" \
+                bindir=${base_sbindir} \
                 LIB=${base_libdir} libdir=${base_libdir}/multipath \
                 unitdir=${systemd_system_unitdir} \
                 ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "SYSTEMD=216", "", d)} \
