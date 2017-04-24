@@ -16,6 +16,8 @@ SRCREV = "963cb2e5adc145fe00717f94e382f2973f80e753"
 SRC_URI = "git://github.com/rhinstaller/efivar.git \
            file://0002-disable-static-build.patch \
            file://allow-multi-definitions-for-native.patch \
+           file://0001-Remove-some-extra-const-that-gcc-complains-about.patch \
+           file://0002-New-gcc-version-new-way-symbol-versioning-breaks.patch \
 "
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
                                 file://0003-efivar-fix-for-cross-compile.patch \
