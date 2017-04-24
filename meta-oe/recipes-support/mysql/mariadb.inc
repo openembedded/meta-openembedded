@@ -17,9 +17,10 @@ SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
            file://fix-a-building-failure.patch \
            file://change-cc-to-cc-version.patch \
            file://0001-disable-ucontext-on-musl.patch \
+           file://gcc7.patch \
           "
-SRC_URI[md5sum] = "fca86f1eaed2163b4bdce4f98f472324"
-SRC_URI[sha256sum] = "e142f9459507b97c5848042863b313ce70750118446bb4e35e5c07fe66007293"
+SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
+SRC_URI[sha256sum] = "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
 
 S = "${WORKDIR}/mariadb-${PV}"
 
