@@ -1,6 +1,6 @@
 SUMMARY = "The upstream project used to drive the Device Mapper multipathing driver"
 
-DEPENDS = "lvm2 libaio liburcu readline udev"
+DEPENDS = "libdevmapper libaio liburcu readline udev"
 
 LICENSE = "LGPLv2"
 
