@@ -14,8 +14,8 @@ SRC_URI = " \
     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
     file://remove-examples.patch \
 "
-SRC_URI[md5sum] = "e7416beff6cba1f38c2bccd0dc8c3278"
-SRC_URI[sha256sum] = "df726e3c6ef42b7621474b03b644a2e40ec4eef94a1c5a932c1e740a78f95e94"
+SRC_URI[md5sum] = "a5b915dc42fc62983fa78ca8486f4391"
+SRC_URI[sha256sum] = "1fd85051da9cb402cc8348cec72dfe4d79f9345df4a1dbf68703a4ded45846a4"
 
 do_install_append() {
     install -d ${D}${datadir}/glibmm-2.4
@@ -29,3 +29,4 @@ FILES_${PN} = "${libdir}/lib*.so.*"
 FILES_${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
 
 RDEPENDS_${PN}-dev = "perl"
+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
