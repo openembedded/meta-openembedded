@@ -15,13 +15,13 @@ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 SRCREV = "963cb2e5adc145fe00717f94e382f2973f80e753"
 SRC_URI = "git://github.com/rhinstaller/efivar.git \
            file://0002-disable-static-build.patch \
+           file://allow-multi-definitions-for-native.patch \
 "
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
                                 file://0003-efivar-fix-for-cross-compile.patch \
                                 ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
                               "
 SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
-                                file://allow-multi-definitions-for-native.patch \
                               "
 
 S = "${WORKDIR}/git"
