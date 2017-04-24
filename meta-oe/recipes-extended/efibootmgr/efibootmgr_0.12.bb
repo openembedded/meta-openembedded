@@ -12,6 +12,7 @@ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
 SRCREV = "75d25807ba81cb724964c989012611272c8f1f5d"
 SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
+           file://0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch \
           "
 
 S = "${WORKDIR}/git"
