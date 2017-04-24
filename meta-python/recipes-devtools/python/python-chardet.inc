@@ -4,5 +4,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a6f89e2100d9b6cdffcea4f398e37343"
 
 inherit pypi
 
-SRC_URI[md5sum] = "25274d664ccb5130adae08047416e1a8"
-SRC_URI[sha256sum] = "e53e38b3a4afe6d1132de62b7400a4ac363452dc5dfcf8d88e8e0cce663c68aa"
+SRC_URI[md5sum] = "96e364abdbde20b5f6dbbe2ad9d54d04"
+SRC_URI[sha256sum] = "4f7832e7c583348a9eddd927ee8514b3bf717c061f57b21dbe7697211454d9bb"
