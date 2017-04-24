@@ -26,6 +26,11 @@ inherit autotools pkgconfig perlnative pythonnative
 
 DEPENDS += "nspr zlib"
 
+# Host specific flags need to be defined, otherwise target flags will be passed to the host
+export HOST_CFLAGS = "${BUILD_CFLAGS}"
+export HOST_CXXFLAGS = "${BUILD_CXXFLAGS}"
+export HOST_LDFLAGS = "${BUILD_LDFLAGS}"
+
 # nspr's package-config is ignored so set libs manually
 EXTRA_OECONF = " \
     --target=${TARGET_SYS} \
