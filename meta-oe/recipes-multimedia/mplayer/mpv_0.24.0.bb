@@ -37,7 +37,7 @@ PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive
 PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
 PACKAGECONFIG[vaapi] = "--enable-vaapi, --disable-vaapi,libva"
 PACKAGECONFIG[vdpau] = "--enable-vdpau, --disable-vdpau,libvdpau"
-PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland"
+PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland libxkbcommon"
 
 SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
 
