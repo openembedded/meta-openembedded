@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
                     file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
                     file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 "
 
-SAMBA_MIRROR = "http://samba.org/samba/ftp"
+SAMBA_MIRROR = "https://samba.org/samba/ftp"
 MIRRORS += "\
 ${SAMBA_MIRROR}    http://mirror.internode.on.net/pub/samba \n \
 ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
