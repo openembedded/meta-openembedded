@@ -2,16 +2,15 @@ SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
 HOMEPAGE = "http://talloc.samba.org"
 SECTION = "libs"
 LICENSE = "LGPL-3.0+ & GPL-3.0+"
+LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
+                    file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
+
 
 SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
            file://talloc-Add-configure-options-for-packages.patch \
 "
-LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
-                    file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
-
-SRC_URI[md5sum] = "6fb70af4174330e4cc139ea63b07c9e9"
-SRC_URI[sha256sum] = "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996877130"
-
+SRC_URI[md5sum] = "19ba14eba97d79a169fa92ea824d2b9e"
+SRC_URI[sha256sum] = "f0aad4cb88a3322207c82136ddc07bed48a37c2c21f82962d6c5ccb422711062"
 
 inherit waf-samba
 
