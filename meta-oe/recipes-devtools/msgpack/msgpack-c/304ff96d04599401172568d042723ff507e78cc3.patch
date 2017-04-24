@@ -1,0 +1,40 @@
+From 304ff96d04599401172568d042723ff507e78cc3 Mon Sep 17 00:00:00 2001
+From: James McCoy <jamessan@debian.org>
+Date: Thu, 13 Apr 2017 11:38:45 -0400
+Subject: [PATCH] Comment the intentional fallthrough to default from
+ _fixed_trail_again
+
+GCC 7 added a new diagnostic, -Wimplicit-fallthrough, which is enabled
+with -Wextra that warns about implicitly falling through a case
+statement.
+
+    [  4%] Building C object CMakeFiles/msgpackc-static.dir/src/unpack.c.o
+    /usr/lib/gcc-snapshot/bin/gcc   -I/home/jamessan/src/msgpack-c/. -I/home/jamessan/src/msgpack-c/include -I/home/jamessan/src/msgpack-c/build/include  -g -O2 -fdebug-prefix-map=/home/jamessan/src/msgpack-c=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -Wall -Wextra -Werror -g -O3 -o CMakeFiles/msgpackc-static.dir/src/unpack.c.o   -c /home/jamessan/src/msgpack-c/src/unpack.c
+    In file included from /home/jamessan/src/msgpack-c/src/unpack.c:283:0:
+    /home/jamessan/src/msgpack-c/include/msgpack/unpack_template.h: In function 'template_execute':
+    /home/jamessan/src/msgpack-c/include/msgpack/unpack_template.h:238:17: error: this statement may fall through [-Werror=implicit-fallthrough=]
+                     ++p;
+                     ^~~
+    /home/jamessan/src/msgpack-c/include/msgpack/unpack_template.h:240:13: note: here
+                 default:
+                 ^~~~~~~
+    cc1: all warnings being treated as errors
+
+Adding the comment makes it explicit that the fallthrough is
+intentional, so gcc doesn't complain.
+---
+ include/msgpack/unpack_template.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/msgpack/unpack_template.h b/include/msgpack/unpack_template.h
+index 8450442..e557bb6 100644
+--- a/include/msgpack/unpack_template.h
++++ b/include/msgpack/unpack_template.h
+@@ -236,6 +236,7 @@ msgpack_unpack_func(int, _execute)(msgpack_unpack_struct(_context)* ctx, const c
+ 
+             _fixed_trail_again:
+                 ++p;
++                // fallthrough
+ 
+             default:
+                 if((size_t)(pe - p) < trail) { goto _out; }

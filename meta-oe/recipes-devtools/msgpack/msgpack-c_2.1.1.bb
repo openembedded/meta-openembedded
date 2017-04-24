@@ -6,10 +6,17 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
                     file://COPYING;md5=0639c4209b6f2abf1437c813b208f2d3 \
                     file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
                    "
-SRC_URI = "https://github.com/msgpack/msgpack-c/releases/download/cpp-${PV}/msgpack-${PV}.tar.gz"
-SRC_URI[md5sum] = "55148cd856c72f954a6eb9cc889a7d2a"
-SRC_URI[sha256sum] = "41de0989a3385061ab7307a1005655e780def6fc9c89af0ec942616aa787e136"
+
+PV .= "+git${SRCPV}"
+
+SRCREV = "20ef1f925b007f170ab1c257e4aa61fdd0927773"
+
+SRC_URI = "git://github.com/msgpack/msgpack-c \
+           file://0001-Comment-intentional-fallthrough-in-case-statements.patch \
+           "
 
 inherit cmake pkgconfig
 
-S = "${WORKDIR}/msgpack-${PV}"
+S = "${WORKDIR}/git"
+
+FILES_${PN}-dev += "${libdir}/cmake/msgpack/*.cmake"
