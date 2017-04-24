@@ -20,7 +20,8 @@ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
            file://0001-replace-readdir_r-with-readdir.patch \
            file://0001-Use-correct-enum-type.patch \
            file://0002-Fix-const-qualifier-error.patch \
-          "
+           file://0001-ARM-code-has-unreachable-code-after-switch-statement.patch \
+           "
 S = "${WORKDIR}/git"
 
 inherit autotools
