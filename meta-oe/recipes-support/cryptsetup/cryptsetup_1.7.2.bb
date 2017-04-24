@@ -9,7 +9,7 @@ SECTION = "console"
 LICENSE = "GPL-2.0-with-OpenSSL-exception"
 LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
 
-DEPENDS = "util-linux lvm2 popt libgcrypt"
+DEPENDS = "util-linux libdevmapper popt libgcrypt"
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
 SRC_URI[md5sum] = "a11a140cea496961222170944db01fc1"
