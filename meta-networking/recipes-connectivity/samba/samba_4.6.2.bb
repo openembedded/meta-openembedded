@@ -13,22 +13,19 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 
 SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://00-fix-typos-in-man-pages.patch \
-           file://10-use-only-libsystemd.patch \
            file://16-do-not-check-xsltproc-manpages.patch \
            file://20-do-not-import-target-module-while-cross-compile.patch \
            file://21-add-config-option-without-valgrind.patch \
            file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
            file://0006-avoid-using-colon-in-the-checking-msg.patch \
-           file://internal_tevent_to_0.9.31.patch \
            file://volatiles.03_samba \
           "
 SRC_URI_append_libc-musl = " \
            file://samba-4.2.7-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
           "
-
-SRC_URI[md5sum] = "6950c5e9f7bdeb8a610c2ca957a15be4"
-SRC_URI[sha256sum] = "b876ef2e63f66265490e80a122e66ef2d7616112b839df68f56ac2e1ce17a7bd"
+SRC_URI[md5sum] = "461def8190ffc651fd8458b24ca2a622"
+SRC_URI[sha256sum] = "927afcc16e444718985e3952de92d34e7b776b9ca0238179d866da18a6441c35"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
@@ -201,9 +198,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
 FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
                           ${bindir}/ctdb_run_cluster_tests \
                           ${sysconfdir}/ctdb/nodes \
-                          ${libdir}/ctdb-tests \
                           ${datadir}/ctdb-tests \
-                          /run/ctdb \
+                          ${datadir}/ctdb/tests \
                          "
 
 FILES_${BPN}-common = "${sysconfdir}/default \
