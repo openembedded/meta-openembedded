@@ -13,6 +13,7 @@ SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
            file://0001-Fix-build-errors-with-clang.patch \
            file://0001-addrdb-coord-config-parse.y-add-missing-time.h-inclu.patch \
            file://0001-src-iz.c-Undef-dprintf-before-redefining.patch \
+           file://0001-Remove-newline-from-format-line.patch \
            "
 SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
 
