@@ -6,18 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1bd21f19f7f0c61a7be8ecacb0e28854"
 DEPENDS = "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
 
 SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-           file://no-gcrypt-badpath.patch \
-           file://collectd-version.patch \
-           file://0001-redefine-the-dependence.patch  \
            file://collectd.init \
            file://collectd.service \
+           file://no-gcrypt-badpath.patch \
            file://0001-conditionally-check-libvirt.patch \
-           file://0001-collectd-replace-deprecated-readdir_r-with-readdir.patch \
-           file://CVE-2016-6254.patch \
            file://0001-fix-to-build-with-glibc-2.25.patch \
+           file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
 "
-SRC_URI[md5sum] = "c39305ef5514b44238b0d31f77e29e6a"
-SRC_URI[sha256sum] = "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f1343b1062a4b569e88"
+SRC_URI[md5sum] = "dc36141ed3058c4919bbd54b87c07873"
+SRC_URI[sha256sum] = "7edd3643c0842215553b2421d5456f4e9a8a58b07e216b40a7e8e91026d8e501"
 
 inherit autotools pythonnative update-rc.d pkgconfig systemd
 
