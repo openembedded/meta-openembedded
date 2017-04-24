@@ -20,3 +20,5 @@ PACKAGECONFIG[x11] = "--enable-x11, --disable-x11, libxi xext virtual/xserver"
 
 PACKAGE_BEFORE_PN += "${PN}-test"
 FILES_${PN}-test = "${bindir}/frame-test*"
+
+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"

@@ -21,3 +21,4 @@ PACKAGECONFIG[x11] = "--with-x11, --without-x11, libxi"
 
 PACKAGE_BEFORE_PN += "${PN}-test"
 FILES_${PN}-test = "${bindir}/grail-test*"
+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
