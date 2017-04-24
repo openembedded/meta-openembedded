@@ -21,12 +21,13 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://volatiles.03_squid \
            file://set_sysroot_patch.patch \
            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
-"
-SRC_URI[md5sum] = "b9e5603f00b0c40109610667d8693b22"
-SRC_URI[sha256sum] = "4384564e6227fbb4c18626d663e1b47912d3507b596ed997f2149f10dd8d70bd"
+           file://0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch \
+           "
+SRC_URI[md5sum] = "c34b228129a755f363367c45c46287ba"
+SRC_URI[sha256sum] = "0bfd6182154b7f29574d71c659f1cfd1b7d9be9356895dac70dc0f3696a0639b"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-                    file://errors/COPYRIGHT;md5=0d98c4448c368d146f31a970bb0ced21 \
+                    file://errors/COPYRIGHT;md5=8861130fae91400bcf99b66f133172b3 \
                    "
 DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
