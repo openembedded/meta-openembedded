@@ -9,8 +9,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
            file://dovecot.service \
            file://dovecot.socket"
 
-SRC_URI[md5sum] = "8f62ea76489c47c369cbbe0b19818448"
-SRC_URI[sha256sum] = "d8d9f32c846397f7c22749a84c5cf6f59c55ff7ded3dc9f07749a255182f9667"
+SRC_URI[md5sum] = "ff95486a5c43025a2c3f5a712e7962b9"
+SRC_URI[sha256sum] = "d939ea99126eb8a8c6955390b422b6e27ec0fa43a3b59b2b3218cb5ad67139a6"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu"
 
