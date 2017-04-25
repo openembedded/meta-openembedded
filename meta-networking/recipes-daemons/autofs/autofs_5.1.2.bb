@@ -3,18 +3,17 @@ SECTION = "utils"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
-DEPENDS += "libtirpc flex-native bison-native"
+DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl libxml2 util-linux cyrus-sasl"
 
-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 
-inherit autotools-brokensep systemd
+inherit autotools-brokensep systemd update-rc.d pkgconfig
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
            file://no-bash.patch \
            file://cross.patch \
            file://libtirpc.patch \
-           file://libtirpc-name-clash-backout.patch \
            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
            file://fix_disable_ldap.patch \
            file://autofs-5.0.7-fix-lib-deps.patch \
@@ -25,18 +24,17 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
            file://0001-Define-__SWORD_TYPE-and-_PATH_NSSWITCH_CONF.patch \
            file://0002-Replace-__S_IEXEC-with-S_IEXEC.patch \
+           file://autofs-5.1.2-libtirpc-as-need.patch \
+           file://pkgconfig-libnsl.patch \
            "
-
-SRC_URI[md5sum] = "e143df66b614b8cdb1ff533735f8e12d"
-SRC_URI[sha256sum] = "795419383b120d15699ab3b89ea0f3d029f6fb28405a83982d305c4b7b61130f"
-
-inherit update-rc.d pkgconfig
+SRC_URI[md5sum] = "28cf88f99eff553a8500659ba5d45a76"
+SRC_URI[sha256sum] = "0d57e4138c2ec8058ca92164d035546f68ce4af93acb893369993d67c7056a10"
 
 INITSCRIPT_NAME = "autofs"
 INITSCRIPT_PARAMS = "defaults"
 
 # FIXME: modules/Makefile has crappy rules that don't obey LDFLAGS
-CFLAGS += "${LDFLAGS}"
+#CFLAGS += "${LDFLAGS}"
 
 PACKAGECONFIG[systemd] = "--with-systemd=${systemd_unitdir}/system,--without-systemd,systemd"
 
@@ -45,7 +43,7 @@ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 EXTRA_OEMAKE = "DONTSTRIP=1"
 EXTRA_OECONF += "--disable-mount-locking \
                 --enable-ignore-busy --with-openldap=no \
-                --with-sasl=no --with-libtirpc=yes \
+                --with-sasl=no --with-libtirpc \
                 --with-path=${STAGING_BINDIR_NATIVE} \
 "
 CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
@@ -53,9 +51,9 @@ CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
 "
 
 do_configure_prepend () {
-    sed -e "s:filagdir:flagdir:" -i configure.in
-    if [ ! -e acinclude.m4 ]; then
-        cp aclocal.m4 acinclude.m4
+    sed -e "s:filagdir:flagdir:" -i ${S}/configure.in
+    if [ ! -e ${S}/acinclude.m4 ]; then
+        cp ${S}/aclocal.m4 ${S}/acinclude.m4
     fi
 }
 
@@ -67,6 +65,7 @@ do_install_append () {
         rmdir ${D}${localstatedir}/run
     fi
 }
+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 
 INSANE_SKIP_${PN} = "dev-so"
 
@@ -74,3 +73,4 @@ RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "autofs.service"
+
