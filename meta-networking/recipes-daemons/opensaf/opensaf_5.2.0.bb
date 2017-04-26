@@ -15,14 +15,17 @@ LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
 
 DEPENDS = "libxml2 python"
+TOOLCHAIN = "gcc"
+
+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-           file://install-samples-from-srcdir.patch \
-           file://0001-plmcd-error-fix.patch \
-           "
-
-SRC_URI[md5sum] = "94cd1a4c0406e6a45bb04c003f8690e7"
-SRC_URI[sha256sum] = "4b4188a0f3d0ed1ed0e3d77de27c45e2c96b437401de08e7df2ed9ecd54bb999"
+           file://0001-configure-Pass-linker-specific-options-with-Wl.patch \
+           file://0001-configure-Disable-format-overflow-if-supported-by-gc.patch \
+           file://0001-Remove-unused-variables.patch \
+"
+SRC_URI[md5sum] = "08991fd467ae9dcea3c8747be8e3981e"
+SRC_URI[sha256sum] = "903478244afe37e329be93050f1d48fa18c84ea17862134c4217b920e267a04a"
 
 inherit autotools useradd systemd pkgconfig
 
@@ -30,37 +33,29 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-f -r opensaf"
 USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nologin -c \"OpenSAF\" opensaf"
 
-SYSTEMD_SERVICE_${PN} += "opensafd.service plmcboot.service plmcd.service"
+SYSTEMD_SERVICE_${PN} += "opensafd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-PACKAGECONFIG[systemd] = "--enable-systemd-daemon"
+PACKAGECONFIG[systemd] = ",,systemd"
 PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03 --enable-ais-plm,,openhpi"
 
-EXTRA_OECONF += " --libdir=${libdir}/opensaf "
-EXTRA_OEMAKE += " -Wl,-rpath,${libdir}/opensaf "
+PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
 
-PKGLIBDIR="${libdir}/opensaf/opensaf"
-
-do_configure_prepend () {
-        ( cd ${S}; autoreconf -f -i -s )
-}
+PKGLIBDIR="${libdir}"
 
 do_install_append() {
+    cp -av --no-preserve=ownership ${B}/lib/.libs/*.so* ${D}${libdir}
     rm -fr "${D}${localstatedir}/lock"
     rm -fr "${D}${localstatedir}/run"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
-    install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
-        ${D}${systemd_unitdir}/system
-    install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
-
+    rmdir --ignore-fail-on-non-empty "${D}${datadir}/java"
     if [ ! -d "${D}${sysconfdir}/init.d" ]; then
         install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${B}/osaf/services/infrastructure/nid/scripts/opensafd ${D}${sysconfdir}/init.d/
     fi
 }
 
-FILES_${PN} += "${localstatedir}/run ${systemd_unitdir}/system/*.service"
+FILES_${PN} += "${systemd_unitdir}/system/*.service"
 FILES_${PN}-staticdev += "${PKGLIBDIR}/*.a"
 
 INSANE_SKIP_${PN} = "dev-so"
