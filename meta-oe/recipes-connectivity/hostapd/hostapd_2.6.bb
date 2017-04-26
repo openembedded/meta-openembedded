@@ -1,7 +1,7 @@
 HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "GPLv2 | BSD"
-LIC_FILES_CHKSUM = "file://${B}/README;md5=4d53178f44d4b38418a4fa8de365e11c"
+LIC_FILES_CHKSUM = "file://${B}/README;md5=8aa4e8c78b59b12016c4cb2d0a8db350"
 DEPENDS = "libnl openssl"
 SUMMARY = "User space daemon for extended IEEE 802.11 management"
 
@@ -16,7 +16,6 @@ SRC_URI = " \
     file://defconfig \
     file://init \
     file://hostapd.service \
-    file://0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch \
 "
 
 S = "${WORKDIR}/hostapd-${PV}"
@@ -43,5 +42,6 @@ do_install() {
 
 CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
 
-SRC_URI[md5sum] = "69f9cec3f76d74f402864a43e4f8624f"
-SRC_URI[sha256sum] = "8e272d954dc0d7026c264b79b15389ec2b2c555b32970de39f506b9f463ec74a"
+SRC_URI[md5sum] = "eaa56dce9bd8f1d195eb62596eab34c7"
+SRC_URI[sha256sum] = "01526b90c1d23bec4b0f052039cc4456c2fd19347b4d830d1d58a0a6aea7117d"
+
