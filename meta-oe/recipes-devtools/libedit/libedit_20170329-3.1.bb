@@ -15,7 +15,7 @@ FETCHCMD_wget += "-U bitbake"
 SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz \
            file://stdc-predef.patch \
           "
-SRC_URI[md5sum] = "0467d27684c453a351fbcefebbcb16a3"
-SRC_URI[sha256sum] = "0ccbd2e7d46097f136fcb1aaa0d5bc24e23bb73f57d25bee5a852a683eaa7567"
+SRC_URI[md5sum] = "c57a0690e62ef523c083598730272cfd"
+SRC_URI[sha256sum] = "91f2d90fbd2a048ff6dad7131d9a39e690fd8a8fd982a353f1333dd4017dd4be"
 
 S = "${WORKDIR}/${BPN}-${PV}"
