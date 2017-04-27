@@ -30,12 +30,13 @@ do_install_append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}
     then
         install -d ${D}${systemd_unitdir}/system
-        mv ${D}${libdir}/systemd/user/evince.service ${D}${systemd_unitdir}/system/evince.service
+        mv ${D}${systemd_user_unitdir}/evince.service ${D}${systemd_system_unitdir}/evince.service
     else
         rm -rf ${D}${libdir}/systemd/user/evince.service
     fi
-    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd/user
-    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd
+    rmdir --ignore-fail-on-non-empty ${D}${systemd_user_unitdir}
+    rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd
+    rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}
 }
 
 PACKAGECONFIG ??= ""
