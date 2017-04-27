@@ -1,16 +1,17 @@
 This layer depends on:
 
 URI: git://github.com/openembedded/oe-core.git
-branch: master
+branch: pyro
 revision: HEAD
 
 URI: git://github.com/openembedded/meta-oe.git
-branch: master
+branch: pyro
 revision: HEAD
 
-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-ruby]' in the subject'
+Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-ruby][pyro]' in the subject'
 
 When sending single patches, please using something like:
-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-ruby][PATCH'
+'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-ruby][pyro][PATCH'
 
-Layer maintainer: Armin Kuster <akuster808@gmail.com>
+pyro Branch Maintainer:
+Armin Kuster <akuster808@gmail.com>
