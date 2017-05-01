@@ -1,6 +1,6 @@
 require wireguard.inc
 
-inherit module-base kernel-module-split
+inherit module kernel-module-split
 
 DEPENDS = "virtual/kernel libmnl"
 
@@ -10,14 +10,22 @@ DEPENDS = "virtual/kernel libmnl"
 
 EXTRA_OEMAKE_append = " \
     KERNELDIR=${STAGING_KERNEL_DIR} \
-    CC='${CC}' \
-    KERNEL_CC='${KERNEL_CC}' \
     "
-KERNEL_MODULES_META_PACKAGE = "${PN}"
 
 MAKE_TARGETS = "module"
-MODULES_INSTALL_TARGET = "module-install"
 
 RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+MODULE_NAME = "wireguard"
 
-PNBLACKLIST[wireguard-module] ?= "BROKEN: Kernel configuration invalid (http://errors.yoctoproject.org/Errors/Details/141421/) - the recipe will be removed on 2017-07-01 unless the issue is fixed"
+# Kernel module packages MUST begin with 'kernel-module-', otherwise
+# multilib image generation can fail.
+#
+# The following line is only necessary if the recipe name does not begin
+# with kernel-module-.
+PKG_${PN} = "kernel-module-${MODULE_NAME}"
+
+module_do_install() {
+    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}
+    install -m 0644 ${MODULE_NAME}.ko \
+    ${D}/lib/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}/${MODULE_NAME}.ko
+}
