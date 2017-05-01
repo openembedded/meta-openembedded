@@ -27,4 +27,4 @@ do_install() {
     install -m 0755 ${S}/ninja ${D}${bindir}/
 }
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
