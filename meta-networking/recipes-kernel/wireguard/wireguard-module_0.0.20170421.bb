@@ -19,3 +19,5 @@ MAKE_TARGETS = "module"
 MODULES_INSTALL_TARGET = "module-install"
 
 RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+
+PNBLACKLIST[wireguard-module] ?= "BROKEN: Kernel configuration invalid (http://errors.yoctoproject.org/Errors/Details/141421/) - the recipe will be removed on 2017-07-01 unless the issue is fixed"
