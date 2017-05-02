@@ -35,6 +35,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://openhpi-invalide-session.patch \
            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
            file://openhpi-fix-alignment-issue.patch \
+           file://0001-Fix-build-failures-with-gcc7.patch \
            \
            file://openhpi.init \
            file://openhpid.service \
