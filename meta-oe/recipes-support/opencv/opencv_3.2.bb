@@ -27,8 +27,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
     file://useoeprotobuf.patch;patchdir=../contrib/ \
-    file://0001-Revert-cuda-fix-fp16-compilation.patch \
-    file://0002-Revert-check-FP16-build-condition-correctly.patch \
 "
 
 PV = "3.2+git${SRCPV}"
