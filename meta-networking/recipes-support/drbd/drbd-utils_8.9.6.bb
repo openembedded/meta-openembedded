@@ -30,7 +30,7 @@ EXTRA_OECONF = " \
                 --without-manual\
                "
 
-RDEPENDS_${PN} += "bash perl"
+RDEPENDS_${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
 
 # The drbd items are explicitly put under /lib when installed.
 #
