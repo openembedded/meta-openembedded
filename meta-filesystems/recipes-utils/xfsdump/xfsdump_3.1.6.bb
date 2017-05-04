@@ -13,8 +13,8 @@ DEPENDS = "xfsprogs attr"
 SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BPN}-${PV}.tar.gz \
     file://remove-install-as-user.patch \
 "
-SRC_URI[md5sum] = "a8b1761be5feb363131e7b506639ad4c"
-SRC_URI[sha256sum] = "570eafd0721515bdd79cb0e295b701d49cdf81e71a0a0ff0df6d4c5cc1960943"
+SRC_URI[md5sum] = "50353cd4f4b435685955363e6044f4d1"
+SRC_URI[sha256sum] = "7f78c11ca527477d90e5e62b0778f3ad96f2b71c19173044e9aca9515fff42d0"
 
 inherit autotools-brokensep
 
