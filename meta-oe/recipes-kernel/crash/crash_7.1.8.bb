@@ -25,6 +25,7 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
            file://0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch \
            file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
            file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
+           file://0004-crash-fix-build-failure-with-mips.patch \
            "
 
 SRC_URI[md5sum] = "31787074f267a3536eebff008a0652ec"
