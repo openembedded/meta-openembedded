@@ -22,6 +22,8 @@ PARALLEL_MAKE = ""
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[gettext] = "--enable-gettext=yes,--enable-gettext=no,gettext"
 
+CFLAGS += "-D_FILE_OFFSET_BITS=64"
+
 EXTRA_OEMAKE += "'LIBTOOL=${HOST_SYS}-libtool' V=1"
 
 do_configure () {
@@ -34,5 +36,3 @@ do_install () {
     oe_runmake install
     oe_runmake install-dev
 }
-
-PNBLACKLIST[xfsdump] ?= "Depends on broken xfsprogs - the recipe will be removed on 2017-09-01 unless the issue is fixed"
