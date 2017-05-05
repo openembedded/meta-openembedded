@@ -9,6 +9,9 @@ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "5a425e993a0f5295aecb5d6607a1c242"
 SRC_URI[sha256sum] = "9b15ec2d381f44936323adfd4f989fa35add517cccbbfa581896b02a393c2cc4"
 
+FILESEXTRAPATHS_append := ":${THISDIR}/${PN}"
+SRC_URI += " file://Check-response-existence-on-upgrade.patch"
+
 inherit autotools lib_package pkgconfig gettext
 
 EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../"
