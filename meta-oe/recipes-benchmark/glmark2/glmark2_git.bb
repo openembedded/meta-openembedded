@@ -12,13 +12,14 @@ DEPENDS = "libpng jpeg"
 
 PV = "2014.03+${SRCPV}"
 
-SRC_URI = " \
-    git://github.com/glmark2/glmark2.git;protocol=https \
+COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
+
+SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
     file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
     file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch \
     file://Fix-configure-for-sqrt-check.patch \
 "
-SRCREV = "f413c5b423250b4fde8f95639ad368d5b02c5b9b"
+SRCREV = "7215c0f337dae0b232535549c37fca441747a891"
 
 S = "${WORKDIR}/git"
 
