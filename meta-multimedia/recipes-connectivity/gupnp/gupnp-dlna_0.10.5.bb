@@ -5,9 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
 
 DEPENDS = "libxml2 glib-2.0"
 
-SRC_URI = "http://download.gnome.org/sources/${BPN}/0.9/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "f93665e535a512e4d515a86311435cb6"
-SRC_URI[sha256sum] = "69969713f36c0e815fbbbcfdfb3ad9bd447cfd10d0fd86227d82dfd8edb6c807"
+SRC_URI = "http://download.gnome.org/sources/${BPN}/0.10/${BPN}-${PV}.tar.xz \
+           file://move_vapigen.patch \
+"
+SRC_URI[md5sum] = "2d0dc1e4189d0243ac3838ece1e8fea0"
+SRC_URI[sha256sum] = "123e368227c11d5c17fc1aa76cbdaffa345355eb51d172cd39fc74a5b468ff6a"
 
 inherit autotools pkgconfig gobject-introspection vala
 
