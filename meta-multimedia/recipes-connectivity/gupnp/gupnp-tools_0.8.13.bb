@@ -6,9 +6,6 @@ DEPENDS = "gupnp gupnp-av gtk+3 intltool-native"
 RRECOMMENDS_${PN} = "adwaita-icon-theme"
 
 SRC_URI = "http://download.gnome.org/sources/${BPN}/0.8/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "ad8423d036e98bc6f877528d6b846f6a"
-SRC_URI[sha256sum] = "592c53289ff1cd70e676405c56ca87b28d2da37a385d34a3bb9b944ba9108d17"
-
-inherit autotools pkgconfig
-
-PNBLACKLIST[gupnp-tools] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130670/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+SRC_URI[md5sum] = "212d85ebce89b32468b59e1164050d40"
+SRC_URI[sha256sum] = "aa3decb9d532c0e2e505adc592f431fd81c0231ded2981129e87da13712479ed"
+inherit autotools pkgconfig gettext
