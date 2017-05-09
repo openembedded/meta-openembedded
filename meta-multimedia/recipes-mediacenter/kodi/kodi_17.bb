@@ -77,6 +77,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton \
            file://0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch \
            file://0011-Let-configure-pass-on-unknown-architectures-setting-.patch \
            file://0012-Revert-droid-fix-builds-with-AML-disabled.patch \
+           file://0001-change-order-of-detecting-libegl-and-libgles2.patch \
 "
 
 SRC_URI_append_libc-musl = " \
@@ -86,7 +87,9 @@ SRC_URI_append_libc-musl = " \
 SRC_URI[addons.md5sum] = "719614fa764011a18665d08af5c8c92f"
 SRC_URI[addons.sha256sum] = "350da57408c27473eaf40e7f544bc94841bf101dc4346085260c5c4af0adac97"
 
-inherit autotools-brokensep gettext pythonnative
+inherit autotools-brokensep gettext pythonnative distro_features_check
+
+REQUIRED_DISTRO_FEATURES += "opengl"
 
 S = "${WORKDIR}/git"
 
@@ -97,9 +100,8 @@ ACCEL ?= ""
 ACCEL_x86 = "vaapi vdpau"
 ACCEL_x86-64 = "vaapi vdpau"
 
-PACKAGECONFIG ??= "${ACCEL}"
-PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)}"
-PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' opengl', ' openglesv2', d)}"
+PACKAGECONFIG ??= "${ACCEL} opengl"
+PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', ' openglesv2', d)}"
 
 PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,"
 PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,virtual/egl"
