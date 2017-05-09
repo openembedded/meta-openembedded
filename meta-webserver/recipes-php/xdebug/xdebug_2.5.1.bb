@@ -29,5 +29,5 @@ do_install() {
     oe_runmake install INSTALL_ROOT=${D}
 }
 
-FILES_${PN} += "${libdir}/php5/extensions/*/*.so"
-FILES_${PN}-dbg += "${libdir}/php5/extensions/*/.debug"
+FILES_${PN} += "${libdir}/php*/extensions/*/*.so"
+FILES_${PN}-dbg += "${libdir}/php*/extensions/*/.debug"
