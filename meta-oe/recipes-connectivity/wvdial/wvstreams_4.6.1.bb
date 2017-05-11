@@ -11,6 +11,7 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
            file://05_gcc.diff \
            file://06_gcc-4.7.diff \
            file://07_buildflags.diff \
+           file://gcc-6.patch \
           "
 
 SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
@@ -46,6 +47,3 @@ FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debu
 
 FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
 RDEPENDS_${PN} += "perl"
-
-# http://errors.yoctoproject.org/Errors/Details/68614/
-PNBLACKLIST[wvstreams] ?= "BROKEN: fails to build with gcc-6 - the recipe will be removed on 2017-09-01 unless the issue is fixed"
