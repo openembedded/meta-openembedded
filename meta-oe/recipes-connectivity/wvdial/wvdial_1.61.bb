@@ -28,5 +28,3 @@ do_configure() {
 do_install() {
     oe_runmake prefix=${D}/usr PPPDIR=${D}/etc/ppp/peers install
 }
-
-PNBLACKLIST[wvdial] ?= "Depends on broken wvstreams - the recipe will be removed on 2017-09-01 unless the issue is fixed"
