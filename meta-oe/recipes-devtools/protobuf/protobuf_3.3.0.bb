@@ -14,15 +14,15 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
 
-SRCREV = "a428e42072765993ff674fda72863c9f1aa2d268"
+SRCREV = "a6189acd18b00611c1dc7042299ad75486f08a1a"
 
-PV = "3.1.0+git${SRCPV}"
+PV = "3.3.0+git${SRCPV}"
 
 SRC_URI = "git://github.com/google/protobuf.git"
 
 EXTRA_OECONF += " --with-protoc=echo"
 
-inherit autotools
+inherit autotools-brokensep
 
 S = "${WORKDIR}/git"
 
