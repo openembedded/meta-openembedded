@@ -1,7 +1,7 @@
 DESCRIPTION = "Lua is a powerful light-weight programming language designed \
 for extending applications."
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=10ffd57d574c60d5b4d6189544e205a9"
+LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
 HOMEPAGE = "http://www.lua.org/"
 
 DEPENDS = "readline"
@@ -13,10 +13,10 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
             file://run-ptest \
            ', '', d)}"
 
-SRC_URI[tarballsrc.md5sum] = "703f75caa4fdf4a911c1a72e67a27498"
-SRC_URI[tarballsrc.sha256sum] = "5113c06884f7de453ce57702abaac1d618307f33f6789fa870e87a59d772aca2"
-SRC_URI[tarballtest.md5sum] = "76f4fb07f2a4970d554645ac26df86df"
-SRC_URI[tarballtest.sha256sum] = "13154abc20976196119db531b4169ce1ce511755879d40b4192e4173291287e5"
+SRC_URI[tarballsrc.md5sum] = "53a9c68bcc0eda58bdc2095ad5cdfc63"
+SRC_URI[tarballsrc.sha256sum] = "f681aa518233bc407e23acf0f5887c884f17436f000d453b2491a9f11a52400c"
+SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
+SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
 
 inherit pkgconfig binconfig ptest
 
