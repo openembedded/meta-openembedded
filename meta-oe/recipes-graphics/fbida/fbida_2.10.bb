@@ -18,6 +18,8 @@ SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d
 
 B = "${WORKDIR}/build"
 
+inherit pkgconfig
+
 EXTRA_OEMAKE = "STRIP= 'srcdir=${S}' -f ${S}/GNUmakefile"
 
 PACKAGECONFIG ??= "gif png curl"
@@ -66,5 +68,3 @@ do_install() {
 }
 
 RDEPENDS_${PN} = "ttf-dejavu-sans-mono bash"
-
-PNBLACKLIST[fbida] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130677/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
