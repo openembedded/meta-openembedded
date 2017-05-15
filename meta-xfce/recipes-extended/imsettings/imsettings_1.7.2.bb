@@ -13,8 +13,8 @@ SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2
            file://gtk-is-required-by-notify.patch \
            file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
 
-SRC_URI[md5sum] = "ab439e21a7d86fa99fbc04586c755349"
-SRC_URI[sha256sum] = "12c35352386057ba68d69a0b7d9a1d0d01ebbd893aafe0a094c3158c8079ac9a"
+SRC_URI[md5sum] = "8153b0583a9f47d8a62af1f92fb9d3bf"
+SRC_URI[sha256sum] = "41addf0458f760212b6b6100835066e16deb3a8a50eb005a0fc17fbac0a2ae66"
 
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
