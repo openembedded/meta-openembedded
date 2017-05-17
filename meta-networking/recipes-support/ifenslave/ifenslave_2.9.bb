@@ -3,9 +3,10 @@ HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bon
 SECTION = "net"
 
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://debian/copyright;md5=6807ba81c0744ab50d735c94628c3f64"
+LIC_FILES_CHKSUM = "file://debian/copyright;md5=acc89812938cf9ad6b1debc37cea0253"
 
-SRCREV = "400c490d52acb31f1064e1bf4fc9fcaf3791888f"
+
+SRCREV = "42bfbb9beb924672ca86b86e9679ac3d6b87d992"
 SRC_URI = "git://anonscm.debian.org/collab-maint/ifenslave.git"
 
 S = "${WORKDIR}/git"
