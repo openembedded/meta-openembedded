@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2e9769f0a2613a98bc7fce15dee0c533"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "15e63942c02354426b25f056f2a4467c"
-SRC_URI[sha256sum] = "0b34cdc59f596632b0620939286f6e18e7e81d043b6b57b974a8e07d18b5fc1d"
+SRC_URI[md5sum] = "48566d81f430a7f755bb4d8f426ce35d"
+SRC_URI[sha256sum] = "fefe84d4f2461e867f9be80f3f988e17bcbbcb4e306952cf2fd1dea7e4515490"
 
 S = "${WORKDIR}/CGI-${PV}"
 
