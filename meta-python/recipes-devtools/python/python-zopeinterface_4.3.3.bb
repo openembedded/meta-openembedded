@@ -8,11 +8,16 @@ SRC_URI[sha256sum] = "8780ef68ca8c3fe1abb30c058a59015129d6e04a6b02c2e56b9c7de607
 PYPI_PACKAGE = "zope.interface"
 inherit pypi setuptools
 
+PACKAGES =. "${PN}-test "
+
 RPROVIDES_${PN} += "zope-interfaces"
+
+RDEPENDS_${PN}-test += "python-unittest python-doctest"
+
 FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
 FILES_${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.c"
 FILES_${PN}-doc += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.txt"
-FILES_${PN}-tests = " \
+FILES_${PN}-test += " \
         ${PYTHON_SITEPACKAGES_DIR}/zope/interface/tests \
         ${PYTHON_SITEPACKAGES_DIR}/zope/interface/common/tests \
 "
