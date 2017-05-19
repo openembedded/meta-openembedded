@@ -2,8 +2,8 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
 
-SRC_URI[md5sum] = "c9aa2599dcd9e5b59d71b6660d396062"
-SRC_URI[sha256sum] = "2fc91d068faa5613c093335f0e758673ef8c722ad4bfa4aded64c13ae69089eb"
+SRC_URI[md5sum] = "bb98d48796cd76d9ccee871aad720f9c"
+SRC_URI[sha256sum] = "44746540c0fab5b95401520d29eb9ffe84b3b4a235bd1d1971cbe36e1f38dd13"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-shell \
