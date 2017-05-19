@@ -9,8 +9,8 @@ DEPENDS += " \
     ${PYTHON_PN}-six \
 "
 
-SRC_URI[md5sum] = "fade66de437392ed1ba6980768626204"
-SRC_URI[sha256sum] = "878cb68b3da3d493ffd68f36db11c29deee623671d3287c3f8d685117ffda9a9"
+SRC_URI[md5sum] = "9f28a9c141995cd2300d0976b4fac3fb"
+SRC_URI[sha256sum] = "323524312bb467565ebca7e50c8ae5e9674e544951d28a2904a50012a8828190"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-cffi \
