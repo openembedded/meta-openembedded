@@ -11,13 +11,13 @@ SECTION = "libs"
 HOMEPAGE = "https://metacpan.org/pod/Sub-Exporter-Progressive/"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://README;beginline=51;endline=53;md5=a171d2e9f8688a44e5f1b6dcc62029e6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=003fa970662359a43ac2c2961108b0f1"
 
 DEPENDS_${PN} = " perl-module-test-more"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/F/FR/FREW/Sub-Exporter-Progressive-${PV}.tar.gz"
-SRC_URI[md5sum] = "bb50b3ba1538902b197c04818a84230a"
-SRC_URI[sha256sum] = "0618c6e69c6c0540c41e7560d51981407a6a0768f1330bef6d6ac3c6f1fa7c06"
+SRC_URI[md5sum] = "72cf6acdd2a0a8b105821a4db98e4ebe"
+SRC_URI[sha256sum] = "d535b7954d64da1ac1305b1fadf98202769e3599376854b2ced90c382beac056"
 
 S = "${WORKDIR}/Sub-Exporter-Progressive-${PV}"
 
