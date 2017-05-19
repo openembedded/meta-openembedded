@@ -10,8 +10,8 @@ DEPENDS += "perl ncurses "
 
 SRC_URI = "http://www.cpan.org/authors/id/G/GI/GIRAFFED/Curses-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "874c2103cc53552a0faa371c4d9119f6"
-SRC_URI[sha256sum] = "808e44d5946be265af5ff0b90f3d0802108e7d1b39b0fe68a4a446fe284d322b"
+SRC_URI[md5sum] = "389c70ee5530b887f8e5dc1303cb5294"
+SRC_URI[sha256sum] = "a414795ba031c5918c70279fe534fee594a96ec4b0c78f44ce453090796add64"
 
 S = "${WORKDIR}/Curses-${PV}"
 
