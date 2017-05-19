@@ -29,6 +29,8 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://useoeprotobuf.patch;patchdir=../contrib/ \
     file://0001-Revert-cuda-fix-fp16-compilation.patch \
     file://0002-Revert-check-FP16-build-condition-correctly.patch \
+    file://0001-Make-opencv-ts-create-share-library-intead-of-static.patch \
+    file://0001-To-fix-errors-as-following.patch \
 "
 
 PV = "3.2+git${SRCPV}"
