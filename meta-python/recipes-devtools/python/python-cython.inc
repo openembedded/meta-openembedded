@@ -17,3 +17,10 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-shell \
 "
+
+do_install_append() {
+	# Make sure we use /usr/bin/env python
+	for PYTHSCRIPT in `grep -rIl '^#!.*python' ${D}`; do
+		sed -i -e '1s|^#!.*|#!/usr/bin/env ${PYTHON_PN}|' $PYTHSCRIPT
+	done
+}
