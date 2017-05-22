@@ -43,6 +43,8 @@ PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' sys
 
 PKGLIBDIR="${libdir}"
 
+LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
+
 do_install_append() {
     cp -av --no-preserve=ownership ${B}/lib/.libs/*.so* ${D}${libdir}
     rm -fr "${D}${localstatedir}/lock"
