@@ -5,11 +5,11 @@ SECTION = "libs"
 HOMEPAGE = "http://search.cpan.org/~leont/ExtUtils-Helpers/"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=307057ce232899f5caa8858560c7274b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=223c04045664f72c3a6556462612bddd"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/ExtUtils-Helpers-${PV}.tar.gz"
-SRC_URI[md5sum] = "cf4fd6f8caa6daac33b1111c9e93162b"
-SRC_URI[sha256sum] = "d3f8cf700fb3414ca1260089755cbf64041455e4b744110677b1ba5bb9a3aa95"
+SRC_URI[md5sum] = "83b00c1e401321c425ae5db6b2b2fd12"
+SRC_URI[sha256sum] = "de901b6790a4557cf4ec908149e035783b125bf115eb9640feb1bc1c24c33416"
 
 S = "${WORKDIR}/ExtUtils-Helpers-${PV}"
 
