@@ -32,7 +32,7 @@ REQUIRED_DISTRO_FEATURES = "pam"
 EXTRA_AUTORECONF = "-I ${S}"
 
 PACKAGECONFIG[libwrap] = ",--disable-libwrap,tcp-wrappers,libwrap"
-PACKAGECONFIG[krb5] = ",--disable-krb5,krb5"
+PACKAGECONFIG[krb5] = ",--without-krb5,krb5"
 
 PACKAGECONFIG ??= ""
 
