@@ -24,11 +24,11 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
     file://fix-CATALOG-conditional-compile.patch \
     file://using-DOCB-conditional.patch \
 "
-LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
+LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1 \
     file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446 \
 "
-SRC_URI[libxml.md5sum] = "1544ab9ac110f5da296015346561ce02"
-SRC_URI[libxml.sha256sum] = "ec431011cb37a04640fd2316f64d0405a274eece2c6f3847f7fbd336eb1c0dc9"
+SRC_URI[libxml.md5sum] = "5806b69d54a2d7884b8d22b395888436"
+SRC_URI[libxml.sha256sum] = "5ca0269ba06800c84061a7f3333c85fab5584d69cd7b4e0641963da7fd36b366"
 
 S = "${WORKDIR}/XML-LibXML-${PV}"
 
