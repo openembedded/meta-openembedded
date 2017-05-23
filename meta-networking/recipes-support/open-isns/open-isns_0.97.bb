@@ -26,10 +26,11 @@ inherit systemd autotools-brokensep distro_features_check
 REQUIRED_DISTRO_FEATURES = "systemd"
 
 EXTRA_OECONF = " --prefix=${prefix} --enable-shared"
+EXTRA_OEMAKE += "SYSTEMDDIR=${D}${systemd_unitdir}/system"
 
 do_install_append () {
     oe_runmake INCDIR=${D}${includedir}/libisns/ install_hdrs
     oe_runmake LIBDIR=${D}${libdir} install_lib
 }
 
-FILES_${PN} += "${libdir}"
+FILES_${PN} += "${libdir} ${systemd_unitdir}"
