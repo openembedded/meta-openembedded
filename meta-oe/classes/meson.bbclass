@@ -61,7 +61,9 @@ pkgconfig = 'pkg-config'
 
 [properties]
 c_args = [${@meson_array('MESON_C_ARGS', d)}]
+cpp_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
 c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
 
 [host_machine]
 system = '${HOST_OS}'
