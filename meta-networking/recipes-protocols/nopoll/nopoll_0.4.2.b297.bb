@@ -18,4 +18,6 @@ SRC_URI[sha256sum] = "f5fbf8aaa16a77b0f265d8c847eb06cb3e68f2b1a50737466dae811816
 
 inherit autotools pkgconfig
 
+EXTRA_OECONF += "--disable-nopoll-doc"
+
 LDFLAGS += "-lpthread"
