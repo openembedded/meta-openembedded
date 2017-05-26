@@ -5,27 +5,10 @@ SRC_URI[sha256sum] = "e120b066b85b224552efda40204488c5123de068725676fd6e5c8bc655
 
 DEPENDS += "autoconf-archive-native"
 
-PACKAGECONFIG = ""
-
-# Unset user/group to unbreak install.
-EXTRA_OECONF = "--with-user= \
-                --with-group= \
-                --enable-pkgconfig \
-                --with-usrlibdir=${libdir} \
-"
-
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-do_install_append() {
-    # Remove things unrelated to libdevmapper
-    rm -rf ${D}${sysconfdir}
-    for i in `ls ${D}${sbindir}/*`; do
-	if [ $i != ${D}${sbindir}/dmsetup ]; then
-	    rm $i
-	fi
-    done
-    # Remove docs
-    rm -rf ${D}${datadir}
+do_install() {
+    oe_runmake 'DESTDIR=${D}' -C libdm install
 }
 
 RRECOMMENDS_${PN}_append_class-target = " lvm2-udevrules"

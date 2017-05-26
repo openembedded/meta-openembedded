@@ -18,11 +18,18 @@ S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd
 
+LVM2_PACKAGECONFIG = "dmeventd lvmetad"
+LVM2_PACKAGECONFIG_append_class-target = " \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
+    thin-provisioning-tools \
+    udev \
+"
+
 # odirect is always enabled because there currently is a bug in
 # lib/device/dev-io.c which prevents compiling without it. It is
 # better to stick to configurations that were actually tested by
 # upstream...
-PACKAGECONFIG_append = " odirect"
+PACKAGECONFIG ??= "odirect ${LVM2_PACKAGECONFIG}"
 
 PACKAGECONFIG[dmeventd] = "--enable-dmeventd,--disable-dmeventd"
 PACKAGECONFIG[lvmetad] = "--enable-lvmetad,--disable-lvmetad"
@@ -31,3 +38,20 @@ PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
 PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
 PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
 PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
+
+# Unset user/group to unbreak install.
+EXTRA_OECONF = "--with-user= \
+                --with-group= \
+                --enable-realtime \
+                --enable-applib \
+                --enable-cmdlib \
+                --enable-pkgconfig \
+                --with-usrlibdir=${libdir} \
+                --with-systemdsystemunitdir=${systemd_system_unitdir} \
+                --disable-thin_check_needs_check \
+                --with-thin-check=${sbindir}/thin_check \
+                --with-thin-dump=${sbindir}/thin_dump \
+                --with-thin-repair=${sbindir}/thin_repair \
+                --with-thin-restore=${sbindir}/thin_restore \
+"
+
