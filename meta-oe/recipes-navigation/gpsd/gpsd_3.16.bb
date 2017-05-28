@@ -8,23 +8,16 @@ PROVIDES = "virtual/gpsd"
 EXTRANATIVEPATH += "chrpath-native"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-    file://0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
-    file://0002-SConstruct-remove-rpath.patch \
     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
     file://0004-SConstruct-disable-html-and-man-docs-building-becaus.patch \
-    file://0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch \
-    file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
-    file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
-    file://0001-Include-stdatomic.h-only-in-C-mode.patch \
-    file://0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch \
     file://0001-include-sys-ttydefaults.h.patch \
     file://gpsd-default \
     file://gpsd \
     file://60-gpsd.rules \
     file://gpsd.service \
 "
-SRC_URI[md5sum] = "bc7467009b99e07ba461377b5da6c039"
-SRC_URI[sha256sum] = "504fc812f3c1525a1a48e04bf4d77f9a8066c201448d98089df89d58ef53a8cb"
+SRC_URI[md5sum] = "68691b5de4c94f82ec4062b042b5eb63"
+SRC_URI[sha256sum] = "03579af13a4d3fe0c5b79fa44b5f75c9f3cac6749357f1d99ce5d38c09bc2029"
 
 inherit scons update-rc.d python-dir pythonnative systemd bluetooth
 
@@ -35,8 +28,6 @@ SYSTEMD_OESCONS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'f
 
 export STAGING_INCDIR
 export STAGING_LIBDIR
-
-LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
 PACKAGECONFIG[bluez] = "bluez='true',bluez='false',${BLUEZ}"
