@@ -9,7 +9,7 @@ LICENSE = "BSD-2-Clause"
 
 SECTION = "net"
 
-DEPENDS = "libpcre gzip openssl"
+DEPENDS = "libpcre zlib openssl"
 
 SRC_URI = " \
     http://nginx.org/download/nginx-${PV}.tar.gz \
