@@ -9,12 +9,10 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/pupnp/${BP}.tar.bz2 \
-           file://avoid-redefining-strnlen-and-strndup.patch \
            file://sepbuildfix.patch \
-           file://CVE-2016-8863.patch \
 "
 
-SRC_URI[md5sum] = "ee16e5d33a3ea7506f38d71facc057dd"
-SRC_URI[sha256sum] = "b3142b39601243b50532eec90f4a27dba85eb86f58d4b849ac94edeb29d9b22a"
+SRC_URI[md5sum] = "513adadb07fa039a8aeb0ceb7b7b0f6e"
+SRC_URI[sha256sum] = "af3f3c0846a1d75baeadae4aa5a2bda427567e2a1fb4559bf73ccff0a4f9a39b"
 
 inherit autotools
