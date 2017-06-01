@@ -1,2 +1,2 @@
 require python-msgpack.inc
-inherit setuptools
+inherit setuptools3
