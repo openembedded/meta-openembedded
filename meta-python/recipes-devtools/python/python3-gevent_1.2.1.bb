@@ -1,3 +1,3 @@
 require python-gevent.inc
-inherit setuptools
+inherit setuptools3
 
