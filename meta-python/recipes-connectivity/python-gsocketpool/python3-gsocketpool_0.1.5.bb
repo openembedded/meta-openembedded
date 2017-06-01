@@ -1,2 +1,2 @@
 require python-gsocketpool.inc
-inherit setuptools
+inherit setuptools3
