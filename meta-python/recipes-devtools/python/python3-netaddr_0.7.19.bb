@@ -1,2 +1,2 @@
 require python-netaddr.inc
-inherit setuptools
+inherit setuptools3
