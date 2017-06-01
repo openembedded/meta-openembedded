@@ -1,2 +1,2 @@
 require python-mprpc.inc
-inherit setuptools
+inherit setuptools3
