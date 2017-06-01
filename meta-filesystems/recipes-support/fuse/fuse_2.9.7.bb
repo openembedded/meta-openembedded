@@ -4,20 +4,20 @@ DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspac
                also aims to provide a secure method for non privileged users to \
                create and mount their own filesystem implementations. \
               "
-HOMEPAGE = "http://fuse.sf.net"
+HOMEPAGE = "https://github.com/libfuse/libfuse"
 SECTION = "libs"
 LICENSE = "GPLv2 & LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
+SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz \
            file://gold-unversioned-symbol.patch \
            file://aarch64.patch \
            file://0001-fuse-fix-the-return-value-of-help-option.patch \
            file://fuse.conf \
 "
-SRC_URI[md5sum] = "ecb712b5ffc6dffd54f4a405c9b372d8"
-SRC_URI[sha256sum] = "6be9c0bff6af8c677414935f31699ea5a7f8f5f791cfa5205be02ea186b97ce1"
+SRC_URI[md5sum] = "9bd4ce8184745fd3d000ca2692adacdb"
+SRC_URI[sha256sum] = "832432d1ad4f833c20e13b57cf40ce5277a9d33e483205fc63c78111b3358874"
 
 inherit autotools pkgconfig update-rc.d systemd
 
