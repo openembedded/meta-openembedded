@@ -17,7 +17,7 @@ SRC_URI = " \
 SRC_URI[md5sum] = "235dde14742317328f0109e9866a8008"
 SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
 
-inherit autotools lib_package binconfig
+inherit autotools lib_package pkgconfig
 
 DEPENDS = " \
     asciidoc-native \
