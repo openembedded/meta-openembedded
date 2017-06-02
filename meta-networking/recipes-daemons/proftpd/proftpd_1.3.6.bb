@@ -13,9 +13,8 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://build_fixup.patch \
            file://proftpd.service \
            "
-
-SRC_URI[md5sum] = "f7b8e3a383b34a894c2502db74ccccde"
-SRC_URI[sha256sum] = "afc1789f2478acf88dfdc7d70da90a4fa2786d628218e9574273295d044b4fc8"
+iSRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
+SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
 
 inherit autotools-brokensep useradd update-rc.d systemd
 
@@ -63,6 +62,8 @@ PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
 # proftpd uses libltdl which currently makes configuring using
 # autotools.bbclass a pain...
 do_configure () {
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
     oe_runconf
     cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}/libtool
 }
