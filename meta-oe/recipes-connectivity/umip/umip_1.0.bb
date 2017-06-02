@@ -17,7 +17,8 @@ SRC_URI = "git://git.umip.org/umip.git \
 SRCREV = "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
 
 S = "${WORKDIR}/git"
-EXTRA_OE_CONF = "--enable-vt"
+
+EXTRA_OECONF = "--enable-vt"
 
 inherit autotools-brokensep systemd update-rc.d
 
@@ -34,3 +35,5 @@ do_install_append() {
 	    -e 's,@SBINDIR@,${sbindir},g' \
 	    ${D}${systemd_system_unitdir}/mip6d.service
 }
+
+RRECOMMENDS_${PN} = "kernel-module-mip6 kernel-module-ipv6"
