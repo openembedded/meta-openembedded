@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
 DEPENDS = "swig-native sblim-cmpi-devel python"
 
 SRC_URI = "git://github.com/rnovacek/konkretcmpi.git \
-           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
            file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch \
+           file://0001-drop-including-rpath-cmake-module.patch \
            "
 
-SRCREV = "460e6421c16a8216d29ccd1b7490f814dab8b769"
+SRCREV = "ad28225e6eceff88417a60c1ba8896c8e40f21a7"
 S = "${WORKDIR}/git"
 
 inherit cmake
