@@ -30,6 +30,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://ipmi-init-fix-the-arguments.patch \
            file://makefile-add-ldflags.patch \
            file://do-not-install-pyc-and-pyo.patch \
+           file://include_sys_types.patch \
            file://openipmi-helper \
            file://ipmi.service \
            "
