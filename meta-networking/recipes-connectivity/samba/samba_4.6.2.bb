@@ -18,6 +18,8 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://21-add-config-option-without-valgrind.patch \
            file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
            file://0006-avoid-using-colon-in-the-checking-msg.patch \
+           file://netdb_defines.patch \
+           file://glibc_only.patch \
            file://volatiles.03_samba \
           "
 SRC_URI_append_libc-musl = " \
