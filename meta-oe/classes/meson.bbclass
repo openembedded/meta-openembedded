@@ -66,9 +66,9 @@ c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
 cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
 
 [host_machine]
-system = '${HOST_OS}'
-cpu_family = '${HOST_ARCH}'
-cpu = '${HOST_ARCH}'
+system = '${BUILD_OS}'
+cpu_family = '${BUILD_ARCH}'
+cpu = '${BUILD_ARCH}'
 endian = '${MESON_HOST_ENDIAN}'
 
 [target_machine]
