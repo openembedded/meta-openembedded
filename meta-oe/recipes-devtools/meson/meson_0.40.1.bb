@@ -9,7 +9,7 @@ SRC_URI = " \
     file://native_bindir.patch \
 "
 
-SRCREV = "3d4bfdcb22314ea7db45a5b075f8b2a9c1498aab"
+SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
 
 S = "${WORKDIR}/git"
 
