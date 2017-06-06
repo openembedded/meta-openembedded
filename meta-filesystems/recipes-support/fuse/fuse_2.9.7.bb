@@ -44,6 +44,11 @@ FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
 DEBIAN_NOAUTONAME_fuse-utils = "1"
 DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
 
+do_configure_prepend() {
+    # Make this explicit so overriding base_sbindir propagates properly.
+    export MOUNT_FUSE_PATH="${base_sbindir}"
+}
+
 do_install_append() {
     rm -rf ${D}${base_prefix}/dev
 
