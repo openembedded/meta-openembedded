@@ -34,6 +34,7 @@ PR = "r13"
 PARALLEL_MAKE = ""
 
 S = "${WORKDIR}/git"
+B = "${S}"
 
 FILES_${PN} = "${bindir}/mplayer ${libdir} /usr/etc/mplayer/"
 CONFFILES_${PN} += "/usr/etc/mplayer/input.conf \
