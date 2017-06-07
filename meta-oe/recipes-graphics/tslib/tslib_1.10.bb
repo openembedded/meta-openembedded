@@ -3,20 +3,20 @@ DESCRIPTION = "Tslib is an abstraction layer for touchscreen panel \
 events, as well as a filter stack for the manipulation of those events. \
 Tslib is generally used on embedded devices to provide a common user \
 space interface to touchscreen functionality."
-HOMEPAGE = "http://tslib.berlios.de/"
+HOMEPAGE = "http://tslib.org/"
 
 AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
 SECTION = "base"
 LICENSE = "LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=43d8c912b273b3dc220596d5a5e79ea2"
 
 SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.xz;downloadfilename=tslib-${PV}.tar.xz \
            file://ts.conf \
            file://tslib.sh \
 "
 
-SRC_URI[md5sum] = "14771f8607b341bb4b297819d37e837d"
-SRC_URI[sha256sum] = "fe35e5f710ea933b118f710e2ce4403ac076fe69926b570333867d4de082a51c"
+SRC_URI[md5sum] = "7ec66da49679ce3eb9bf16f346eaa63d"
+SRC_URI[sha256sum] = "26ce1df4647dc8d16f6247062f30a8a03c34165dd19e042d0b2df8860da265b2"
 
 UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
 
