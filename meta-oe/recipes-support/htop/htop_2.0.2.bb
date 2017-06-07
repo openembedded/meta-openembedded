@@ -10,13 +10,16 @@ RDEPENDS_${PN} = "ncurses-terminfo"
 
 SRC_URI = "http://hisham.hm/htop/releases/${PV}/htop-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "e768b9b55c033d9c1dffda72db3a6ac7"
-SRC_URI[sha256sum] = "055c57927f75847fdc222b5258b079a9542811a9dcf5421c615c7e17f55d1829"
+SRC_URI[md5sum] = "7d354d904bad591a931ad57e99fea84a"
+SRC_URI[sha256sum] = "179be9dccb80cee0c5e1a1f58c8f72ce7b2328ede30fb71dcdf336539be2f487"
 
 LDFLAGS_append_libc-uclibc = " -lubacktrace"
 
 do_configure_prepend () {
     rm -rf ${S}/config.h
+    # OE does not provide working ncruses config script. Fortunately it's
+    # usage in htop configure script is compatible with pkg-config.
+    sed -i 's@ncurses[w56]\{1,2\}-config@pkg-config@' ${S}/configure.ac
 }
 
 inherit autotools
