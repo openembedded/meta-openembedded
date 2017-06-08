@@ -32,7 +32,8 @@ MESONOPTS = " --prefix ${prefix} \
               --localstatedir ${localstatedir} \
               --sharedstatedir ${sharedstatedir}"
 
-MESON_C_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
+MESON_C_ARGS = "${TARGET_CC_ARCH}${TOOLCHAIN_OPTIONS}"
+MESON_LINK_ARGS = "${MESON_C_ARGS} ${LDFLAGS}"
 
 MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'little', d)}"
 MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
@@ -61,9 +62,9 @@ pkgconfig = 'pkg-config'
 
 [properties]
 c_args = [${@meson_array('MESON_C_ARGS', d)}]
-cpp_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
-c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
-cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+c_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
+cpp_args = [${@meson_array('MESON_C_ARGS', d)}]
+cpp_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
 
 [host_machine]
 system = '${BUILD_OS}'
@@ -74,7 +75,7 @@ endian = '${MESON_HOST_ENDIAN}'
 [target_machine]
 system = '${TARGET_OS}'
 cpu_family = '${TARGET_ARCH}'
-cpu = '${TARGET_ARCH}'
+cpu = '${TUNE_PKGARCH}'
 endian = '${MESON_TARGET_ENDIAN}'
 EOF
 }
