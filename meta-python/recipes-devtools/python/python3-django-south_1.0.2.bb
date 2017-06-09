@@ -1,2 +1,2 @@
 require python-django-south.inc
-inherit setuptools
+inherit setuptools3
