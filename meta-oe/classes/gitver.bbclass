@@ -13,16 +13,15 @@ def git_drop_tag_prefix(version):
         return version
 
 GIT_TAGADJUST = "git_drop_tag_prefix(version)"
-GITVER = "${@get_git_pv('${S}', d, tagadjust=lambda version:${GIT_TAGADJUST})}"
-GITSHA = "${@get_git_hash('${S}', d)}"
+GITVER = "${@get_git_pv(d, tagadjust=lambda version:${GIT_TAGADJUST})}"
+GITSHA = "${@get_git_hash(d)}"
 
 def gitrev_run(cmd, path):
     (output, error) = bb.process.run(cmd, cwd=path)
     return output.rstrip()
 
-def get_git_pv(path, d, tagadjust=None):
+def get_git_pv(d, tagadjust=None):
     import os
-    import bb.process
 
     srcdir = d.getVar("EXTERNALSRC") or d.getVar("S")
     gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
@@ -45,6 +44,17 @@ def get_git_pv(path, d, tagadjust=None):
         if tagadjust:
             ver = tagadjust(ver)
         return ver
+
+def get_git_hash(d):
+    import os
+
+    srcdir = d.getVar("EXTERNALSRC") or d.getVar("S")
+    gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
+    try:
+        rev = gitrev_run("git rev-list HEAD -1")
+        return rev[:7]
+    except Exception as exc:
+        bb.fatal(str(exc))
 
 def mark_recipe_dependencies(path, d):
     from bb.parse import mark_dependency
