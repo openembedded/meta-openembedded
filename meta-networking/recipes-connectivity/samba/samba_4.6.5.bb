@@ -12,7 +12,6 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 "
 
 SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-           file://00-fix-typos-in-man-pages.patch \
            file://16-do-not-check-xsltproc-manpages.patch \
            file://20-do-not-import-target-module-while-cross-compile.patch \
            file://21-add-config-option-without-valgrind.patch \
@@ -26,8 +25,8 @@ SRC_URI_append_libc-musl = " \
            file://samba-4.2.7-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
           "
-SRC_URI[md5sum] = "461def8190ffc651fd8458b24ca2a622"
-SRC_URI[sha256sum] = "927afcc16e444718985e3952de92d34e7b776b9ca0238179d866da18a6441c35"
+SRC_URI[md5sum] = "2ae8ce2862d8bfa95e4681371ebb1623"
+SRC_URI[sha256sum] = "c06901e1d318b425b8c3ecea3ef23a91e7371312a9ea7adbf34fb8eb42ca3b84"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
