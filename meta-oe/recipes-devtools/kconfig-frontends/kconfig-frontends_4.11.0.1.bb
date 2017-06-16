@@ -13,12 +13,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9b8cf60ff39767ff04b671fca8302408"
 SECTION = "devel"
 DEPENDS += "ncurses flex bison gperf-native"
 RDEPENDS_${PN} += "python3 bash"
-SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.10.x \
-           file://0001-Fix-installation-of-.pc-files.patch \
-           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch \
-           file://missing-mkdir.patch"
+SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.11.x \
+	   file://0001-Makefile-ensure-frontends-exits-before-writing-into-.patch \
+           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch"
 
-SRCREV = "f8ffe5e1c6f183cb7d5d515aa9381b7557de654e"
+SRCREV = "f22fce3a308be1c7790ebefc6bbedb33c5f7c86a"
 
 S = "${WORKDIR}/git"
 
