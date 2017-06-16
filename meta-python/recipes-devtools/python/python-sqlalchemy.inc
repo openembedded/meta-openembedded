@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=452f4b8adb0feba42e5be5f1fbfbf538"
 PYPI_PACKAGE = "SQLAlchemy"
 inherit pypi
 
-SRC_URI[md5sum] = "938b1e5ca2372c3ec9a586996a3b5653"
-SRC_URI[sha256sum] = "b65cdc73cd348448ef0164f6c77d45a9f27ca575d3c5d71ccc33adf684bc6ef0"
+SRC_URI[md5sum] = "64b9a3bf34e17944f844cbf460bd14e6"
+SRC_URI[sha256sum] = "dbd92b8af2306d600efa98ed36262d73aad227440a758c8dc3a067ca30096bd3"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-json \
