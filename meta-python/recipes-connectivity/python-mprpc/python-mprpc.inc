@@ -7,11 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
 DEPENDS += "${PYTHON_PN}-gevent"
 RDEPENDS_${PN} += "${PYTHON_PN}-gevent ${PYTHON_PN}-msgpack ${PYTHON_PN}-gsocketpool"
 
-SRC_URI_append = " \
-    file://0001-fix_setup_py.patch;patch=1;pnum=1 \
-"
-
-SRC_URI[md5sum] = "449e6239eb5ff07b9cceb86e1ab0c2ee"
-SRC_URI[sha256sum] = "5881cc7fbb8de814e2b4aa5958bfe147c5c301e46749190f0e6abf373cf56d82"
+SRC_URI[md5sum] = "66e6cf367ea71cfed8938a27e9c183c3"
+SRC_URI[sha256sum] = "5ccada6526d48ac4d95a7bbdc093586663841560337032a503f57ccfae69d7bf"
 
 inherit pypi
