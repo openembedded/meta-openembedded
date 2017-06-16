@@ -6,11 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
 DEPENDS += "${PYTHON_PN}-gevent"
 RDEPENDS_${PN} += "${PYTHON_PN}-gevent"
 
-SRC_URI_append = " \
-    file://0001-fix_setup_py.patch;patch=1;pnum=1 \
-"
-
-SRC_URI[md5sum] = "04f618864b18d6b06f774994f172ef49"
-SRC_URI[sha256sum] = "b6b73deab9bcbc428d4813697eebe5c3b9c40a971f62e13607b881aa749af9d0"
+SRC_URI[md5sum] = "49f5f292ef1b60944ae92ca426a5e550"
+SRC_URI[sha256sum] = "f2e2749aceadce6b27ca52e2b0a64af99797746a8681e1a2963f72007c14cb14"
 
 inherit pypi
