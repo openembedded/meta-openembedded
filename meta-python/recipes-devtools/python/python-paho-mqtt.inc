@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eb48c6ee2cb9f5b8b9fe75e6f817bdfc"
 SRCNAME = "paho-mqtt"
 
 inherit pypi
-SRC_URI[md5sum] = "241150b3fcb920ddca4d33181f3238b1"
-SRC_URI[sha256sum] = "9100a6aa706ab699d414ec02705a21eb66f436184691d0bf1f2a85a6213c6c1f"
+SRC_URI[md5sum] = "4bd192ea24e7aa347f6d240101ef82f6"
+SRC_URI[sha256sum] = "0fd746d8650563290f1bd0fec01e74cb57c3ab7406bdb58e5d9252bb5fa5ca44"
 
 RDEPENDS_${PN} = "\
                ${PYTHON_PN}-math \
