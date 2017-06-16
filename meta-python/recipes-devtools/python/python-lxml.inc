@@ -7,7 +7,7 @@ C14N and much more."
 HOMEPAGE = "http://codespeak.net/lxml"
 SECTION = "devel/python"
 LICENSE = "BSD & GPLv2 & MIT & PSF"
-LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
+LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
                     file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
                     file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
                     file://doc/licenses/GPL.txt;md5=94d55d512a9ba36caa9b7df079bae19f \
@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
 
 DEPENDS += "libxml2 libxslt"
 
-SRC_URI[md5sum] = "075692ce442e69bbd604d44e21c02753"
-SRC_URI[sha256sum] = "aa502d78a51ee7d127b4824ff96500f0181d3c7826e6ee7b800d068be79361c7"
+SRC_URI[md5sum] = "e54e2fae44d684d6b9c636fe189e93ff"
+SRC_URI[sha256sum] = "736f72be15caad8116891eb6aa4a078b590d231fdc63818c40c21624ac71db96"
 
 DISTUTILS_BUILD_ARGS += " \
                      --with-xslt-config='pkg-config libxslt' \
