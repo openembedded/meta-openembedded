@@ -2,8 +2,8 @@ SUMMARY = "Library for building powerful interactive command lines in Python"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
 
-SRC_URI[md5sum] = "427b496d2c147bd3819bc3a7f6e0d493"
-SRC_URI[sha256sum] = "33d68ca09f76cd73287fde7df5748ffacf26a8238dd61ee81ac50860ea7c6776"
+SRC_URI[md5sum] = "f24061ae133ed32c6b764e92bd48c496"
+SRC_URI[sha256sum] = "cc66413b1b4b17021675d9f2d15d57e640b06ddfd99bb724c73484126d22622f"
 
 PYPI_PACKAGE = "prompt_toolkit"
 
