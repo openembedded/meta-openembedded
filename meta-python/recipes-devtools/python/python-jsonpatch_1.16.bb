@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
 
 inherit pypi setuptools
 
-SRC_URI[md5sum] = "818d36e05d68ba90ca2b26597bd82975"
-SRC_URI[sha256sum] = "ae23cd08b2f7246f8f2475363501e740c4ef93f08f2a3b7b9bcfac0cc37fceb1"
+SRC_URI[md5sum] = "8ef1ceb00dcf992c9e43611f698f9279"
+SRC_URI[sha256sum] = "f025c28a08ce747429ee746bb21796c3b6417ec82288f8fe6514db7398f2af8a"
 
 RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-re ${PYTHON_PN}-stringold"
 
