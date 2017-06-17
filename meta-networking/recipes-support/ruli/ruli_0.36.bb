@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 DEPENDS = "liboop"
 
-SRC_URI += "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz \
-            file://Makefile.patch"
+SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz \
+           file://Makefile.patch \
+           file://0001-Fix-build-with-format-string-checks.patch \
+           "
 
 SRC_URI[md5sum] = "e73fbfdeadddb68a703a70cea5271468"
 SRC_URI[sha256sum] = "11d32def5b514748fbd9ea8c88049ae99e1bb358efc74eb91a4d268a3999dbfa"
