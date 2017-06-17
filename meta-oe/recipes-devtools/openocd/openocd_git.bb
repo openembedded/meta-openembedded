@@ -5,8 +5,13 @@ DEPENDS = "libusb-compat libftdi"
 RDEPENDS_${PN} = "libusb1"
 
 SRC_URI = "git://repo.or.cz/openocd.git \
-	"
-SRCREV = "cb317eabf2d162365467aeb89b564828e5e6d6f3"
+           file://0001-Add-fallthrough-comments.patch \
+           file://0002-Workaround-new-warnings-generated-by-GCC-7.patch \
+           file://0003-armv7a-Add-missing-break-to-fix-fallthrough-warning.patch \
+           file://0004-Fix-overflow-warning.patch \
+           file://0005-command-Move-the-fall-through-comment-to-right-scope.patch \
+"
+SRCREV = "1025be363e2bf42f1613083223a2322cc3a9bd4c"
 
 PV = "0.10+gitr${SRCPV}"
 S = "${WORKDIR}/git"
