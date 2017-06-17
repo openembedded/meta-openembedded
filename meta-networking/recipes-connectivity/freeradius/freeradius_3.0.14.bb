@@ -10,7 +10,8 @@ SUMMARY = "High-performance and highly configurable RADIUS server"
 HOMEPAGE = "http://www.freeradius.org/"
 SECTION = "System/Servers"
 LICENSE = "GPLv2 & LGPLv2+"
-DEPENDS = "openssl-native openssl libtool libpcap libtalloc"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
+DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
 
 SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.bz2 \
     file://freeradius \
@@ -25,13 +26,12 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
     file://freeradius-libtool-do-not-use-jlibtool.patch \
     file://freeradius-fix-quoting-for-BUILT_WITH.patch \
     file://freeradius-fix-error-for-expansion-of-macro.patch \
+    file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
     file://radiusd.service \
     file://radiusd-volatiles.conf \
 "
-
-LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
-SRC_URI[md5sum] = "7f99df26a6ac71b1f7cce5c213e52790"
-SRC_URI[sha256sum] = "b3be0d8849878c31af0a5375d20b7b20c9d1c1572e89dc3f22992824cefffb84"
+SRC_URI[md5sum] = "7d98dfafffac81f19cadccea5af89cea"
+SRC_URI[sha256sum] = "2771f6ecd6c816ac4d52b66bb8ae6781ca20e1e4984c5804fc4e67de3a807c59"
 
 PARALLEL_MAKE = ""
 
