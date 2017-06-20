@@ -7,6 +7,9 @@ DESCRIPTION = "\
 "
 HOMEPAGE = "http://makedumpfile.sourceforge.net"
 
+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+LICENSE = "GPLv2.0"
+
 DEPENDS = "bzip2 zlib elfutils"
 RDEPENDS_${PN}-tools = "perl ${PN}"
 
@@ -21,10 +24,8 @@ SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
+    file://0001-makedumpfile-Add-proper-format-string-to-print-a-str.patch \
 "
-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-LICENSE = "GPLv2.0"
-
 SRC_URI[md5sum] = "16c0ae9902ae57be4a603a6ab1e86c53"
 SRC_URI[sha256sum] = "0b6e73106998670407887de9e1a505b3a2dbb2fb517a4b968a665eda8fb097ce"
 
