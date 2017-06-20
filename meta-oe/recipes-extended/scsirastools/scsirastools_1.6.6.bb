@@ -10,15 +10,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=687ea108478d26152ae46eb29d9d1545"
 
 DEPENDS += "groff-native"
 
-SRC_URI = "http://prdownloads.sourceforge.net/scsirastools/scsirastools-${PV}.tar.gz"
-SRC_URI[md5sum] = "2d775111b62e2dfc1960a722f5fda211"
-SRC_URI[sha256sum] = "38d2c6c9b04a2c594e528927b950754f94c0522718d17c78e6589ba778339bf8"
+SRC_URI = "http://prdownloads.sourceforge.net/scsirastools/scsirastools-${PV}.tar.gz \
+           file://mdadm.patch;apply=no \
+           file://print-format.patch \
+"
+SRC_URI[md5sum] = "6271a61b2ce40aaf33ef61775148cda1"
+SRC_URI[sha256sum] = "e7b997e75decb06a650c42c35cd63d0c94c34e39cf133c723337b0eeabbfdf6a"
 
 inherit autotools update-rc.d
 
 # mdadm Makefile has CC set to gcc, hence override CC to ${CC}
 EXTRA_OEMAKE += "CC='${CC}'"
 
+
+do_configure_append() {
+	oe_runmake -C mdadm.d mdadm-1.3.0
+	patch -p0 < ${WORKDIR}/mdadm.patch
+}
 INITSCRIPT_PACKAGES = "${PN}-diskmon ${PN}-raidmon"
 INITSCRIPT_NAME_${PN}-diskmon = "sgdisk"
 INITSCRIPT_PARAMS_${PN}-diskmon = "defaults 80 20"
