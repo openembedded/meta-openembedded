@@ -1,0 +1,58 @@
+From 2b4714123cdecb558babb76074d0ab945bf5b177 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 16 Jun 2017 18:59:10 -0700
+Subject: [PATCH] define __ prefixed version of intXY_t types
+
+This is required since musl does not define them
+unlike glibc
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ include/linux.h | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/include/linux.h b/include/linux.h
+index 6a676ca..6976d83 100644
+--- a/include/linux.h
++++ b/include/linux.h
+@@ -40,6 +40,35 @@
+ # undef fsxattr
+ #endif
+ 
++#ifndef loff_t
++#define loff_t off_t
++#endif
++#ifndef __uint8_t
++#define __uint8_t uint8_t
++#endif
++#ifndef __uint16_t
++#define __uint16_t uint16_t
++#endif
++#ifndef __uint32_t
++#define __uint32_t uint32_t
++#endif
++#ifndef __uint64_t
++#define __uint64_t uint64_t
++#endif
++
++#ifndef __int8_t
++#define __int8_t int8_t
++#endif
++#ifndef __int16_t
++#define __int16_t int16_t
++#endif
++#ifndef __int32_t
++#define __int32_t int32_t
++#endif
++#ifndef __int64_t
++#define __int64_t int64_t
++#endif
++
+ static __inline__ int xfsctl(const char *path, int fd, int cmd, void *p)
+ {
+ 	return ioctl(fd, cmd, p);
+-- 
+2.13.1
+

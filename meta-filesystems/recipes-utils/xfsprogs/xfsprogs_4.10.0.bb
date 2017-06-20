@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
 DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://link_needed_libs.patch \
-"
+           file://0001-define-__-prefixed-version-of-intXY_t-types.patch \
+           "
 SRC_URI[md5sum] = "ddbb04493addf014db07a7e2b96b2804"
 SRC_URI[sha256sum] = "d8cb9ab2c686699d37914354ce3992b4aff3677093cbce06ad18bf798da8a8a7"
 
@@ -54,4 +55,6 @@ do_configure_prepend () {
 
 do_install_append() {
         oe_runmake 'DESTDIR=${D}' install install-dev
+        rm ${D}${libdir}/*.la
+        rmdir --ignore-fail-on-non-empty ${D}${libdir}
 }
