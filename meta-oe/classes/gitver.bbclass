@@ -27,23 +27,20 @@ def get_git_pv(d, tagadjust=None):
     gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
     try:
         ver = gitrev_run("git describe --tags", gitdir)
-    except Exception as exc:
-        bb.fatal(str(exc))
-
-    if not ver:
+    except:
         try:
             ver = gitrev_run("git rev-parse --short HEAD", gitdir)
-        except Exception as exc:
-            bb.fatal(str(exc))
+            if ver:
+                return "0.0+%s" % ver
+            else:
+                return "0.0"
 
-        if ver:
-            return "0.0+%s" % ver
-        else:
-            return "0.0"
-    else:
-        if tagadjust:
-            ver = tagadjust(ver)
-        return ver
+        except Exception as exc:
+            raise bb.parse.SkipPackage(str(exc))
+
+    if ver and tagadjust:
+        ver = tagadjust(ver)
+    return ver
 
 def get_git_hash(d):
     import os
