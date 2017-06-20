@@ -22,9 +22,11 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://set_sysroot_patch.patch \
            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
            file://0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch \
+           file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
+           file://gcc7-fixes.patch \
            "
-SRC_URI[md5sum] = "c34b228129a755f363367c45c46287ba"
-SRC_URI[sha256sum] = "0bfd6182154b7f29574d71c659f1cfd1b7d9be9356895dac70dc0f3696a0639b"
+SRC_URI[md5sum] = "dc1830cd361e077814aa39bcc3691d8b"
+SRC_URI[sha256sum] = "41d8845863dcd026c856508cd1599d417c8947ffd96e86e24085f9893cb8b8c2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
                     file://errors/COPYRIGHT;md5=8861130fae91400bcf99b66f133172b3 \
