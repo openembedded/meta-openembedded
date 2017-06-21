@@ -28,8 +28,8 @@ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stab
     file://zabbix-agent.service \
 "
 
-SRC_URI[md5sum] = "f7f41850397d2078ccae4b7389f9a005"
-SRC_URI[sha256sum] = "1df3e106427ed21547b8119049a161092f597d04507f9eb535951a9ee887a476"
+SRC_URI[md5sum] = "489d21b464277c0d412155c7e5611a8f"
+SRC_URI[sha256sum] = "4445f26c025009681c29c9b350aa6c4ee7b124ddcaf1609ae36c55997bcb8cf2"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
