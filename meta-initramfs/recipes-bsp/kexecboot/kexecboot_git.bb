@@ -36,21 +36,10 @@ DESCRIPTION = "kexecboot is a graphical linux-as-bootloader implementation based
 HOMEPAGE = "http://kexecboot.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-
-S = "${WORKDIR}/kexecboot-${PV}"
-SRC_URI = "https://github.com/kexecboot/kexecboot/archive/v${PV}.tar.gz"
-SRC_URI[md5sum] = "46b7c1a6f20531be56445ebb8669a2b8"
-SRC_URI[sha256sum] = "6b360b8aa59bc5d68a96705349a0dd416f8ed704e931fa0ac7849298258f0f15"
-
-SRC_URI += "\
-            file://0001-kexecboot-fix-build-when-S-B.patch \
-            file://0002-kexecboot-fix-configure-warnings.patch \
-            file://0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch \
-            file://0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch \
-            \
-            file://0005-rgb.h-fix-build-with-gcc5.patch \
-            "
-
+PV = "0.6+git${SRCPV}"
+S = "${WORKDIR}/git"
+SRC_URI = "git://github.com/kexecboot/kexecboot.git"
+SRCREV = "4c4f127e79ac5b8d6b6e2fbb938ccbf12b04c531"
 inherit autotools
 
 EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
