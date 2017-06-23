@@ -47,6 +47,9 @@ NO_X11_FLAGS = "--without-x --without-gtk2 --without-gtk3"
 X11_DEPENDS = "libxext libxi libxrender libxrandr libxtst gtk+ gdk-pixbuf"
 PACKAGECONFIG[x11] = ",${NO_X11_FLAGS},${X11_DEPENDS}"
 
+# fuse gets implicitly detected; there is no --without-fuse option.
+PACKAGECONFIG[fuse] = ",,fuse"
+
 CFLAGS += '-Wno-error=deprecated-declarations'
 
 FILES_${PN} += "/usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
