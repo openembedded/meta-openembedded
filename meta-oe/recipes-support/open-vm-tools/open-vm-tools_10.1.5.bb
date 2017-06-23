@@ -9,7 +9,8 @@
 # in meta-openembedded by agreement of the author (Diego Dompe).
 #
 
-DECRIPTION = "open-vm-tools"
+SUMMARY = "Tools to enhance VMWare guest integration and performance"
+HOMEPAGE = "https://github.com/vmware/open-vm-tools"
 SECTION = "vmware-tools"
 
 LICENSE = "LGPLv2.1 & GPLv2 & BSD & CDDLv1"
@@ -32,7 +33,6 @@ SRCREV = "854c0bb374612f7e633b448ca273f970f154458b"
 S = "${WORKDIR}/git/open-vm-tools"
 
 DEPENDS = "glib-2.0 glib-2.0-native util-linux libdnet procps"
-RDEPENDS_${PN} = "util-linux libdnet"
 
 # open-vm-tools is supported only on x86.
 COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
@@ -53,17 +53,23 @@ PACKAGECONFIG[x11] = ",${NO_X11_FLAGS},${X11_DEPENDS}"
 # fuse gets implicitly detected; there is no --without-fuse option.
 PACKAGECONFIG[fuse] = ",,fuse"
 
-CFLAGS += '-Wno-error=deprecated-declarations'
+CFLAGS += "-Wno-error=deprecated-declarations"
 
-FILES_${PN} += "/usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
-		/usr/lib/open-vm-tools/plugins/common/lib*.so \
-    ${sysconfdir}/vmware-tools/tools.conf"
+FILES_${PN} += "\
+    /usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
+    /usr/lib/open-vm-tools/plugins/common/lib*.so \
+    ${sysconfdir}/vmware-tools/tools.conf \
+    "
 FILES_${PN}-locale += "/usr/share/open-vm-tools/messages"
 FILES_${PN}-dev += "/usr/lib/open-vm-tools/plugins/common/lib*.la"
-FILES_${PN}-dbg += "/usr/lib/open-vm-tools/plugins/common/.debug \
-		    /usr/lib/open-vm-tools/plugins/vmsvc/.debug"
+FILES_${PN}-dbg += "\
+    /usr/lib/open-vm-tools/plugins/common/.debug \
+    /usr/lib/open-vm-tools/plugins/vmsvc/.debug \
+    "
 
 CONFFILES_${PN} += "${sysconfdir}/vmware-tools/tools.conf"
+
+RDEPENDS_${PN} = "util-linux libdnet fuse"
 
 do_install_append() {
     ln -sf /usr/sbin/mount.vmhgfs ${D}/sbin/mount.vmhgfs
