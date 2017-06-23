@@ -1,0 +1,35 @@
+From 5d8814f4b4f016a633984822a6dfbc9426fef333 Mon Sep 17 00:00:00 2001
+From: Diego Dompe <dompe@hpe.com>
+Date: Thu, 7 Jan 2016 15:06:16 -0600
+Subject: [PATCH] Fix-kernel-detection
+
+Signed-off-by: Diego Dompe <dompe@hpe.com>
+---
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 04e3bac..1ab3f29 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -151,7 +151,7 @@ if test "$with_kernel_modules" = "yes"; then
+          if test ! -d "$LINUXDIR/kernel/"; then
+              AC_MSG_ERROR([$LINUXDIR/kernel does not exist])
+          fi
+-         LINUXINCLUDE="$LINUXDIR/build/include"
++         LINUXINCLUDE="$LINUXDIR/include"
+          if test ! -d "$LINUXINCLUDE"; then
+             AC_MSG_ERROR([Can't find include dir under $LINUXDIR])
+          fi
+@@ -1034,7 +1034,7 @@ MODULES_DIR=""
+ buildHgfsmounter=no
+ 
+ if test "$os" = "linux"; then
+-   MODULES_DIR="$LINUXDIR/kernel/"
++   MODULES_DIR="/lib/modules/$KERNEL_RELEASE"
+ 
+    CPPFLAGS="$CPPFLAGS -D_FILE_OFFSET_BITS=64"
+    CPPFLAGS="$CPPFLAGS -D_LARGEFILE64_SOURCE"
+-- 
+1.9.1
+
