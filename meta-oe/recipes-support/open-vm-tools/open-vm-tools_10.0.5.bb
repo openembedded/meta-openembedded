@@ -11,8 +11,14 @@
 
 DECRIPTION = "open-vm-tools"
 SECTION = "vmware-tools"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5804fe91d3294da4ac47c02b454bbc8a"
+
+LICENSE = "LGPLv2.1 & GPLv2 & BSD & CDDLv1"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=0eac46f0b7886425d7faed6aae5aef66"
+LICENSE_modules/freebsd/vmblock = "BSD"
+LICENSE_modules/freebsd/vmmemctl = "GPLv2"
+LICENSE_modules/freebsd/vmxnet = "GPLv2"
+LICENSE_modules/linux = "GPLv2"
+LICENSE_modules/solaris = "CDDLv1"
 
 PR = "r5"
 
