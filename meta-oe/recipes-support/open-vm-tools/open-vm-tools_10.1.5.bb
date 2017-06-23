@@ -38,10 +38,10 @@ inherit autotools pkgconfig systemd
 
 SYSTEMD_SERVICE_${PN} = "vmtoolsd.service"
 
-EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs --disable-tests \
-		--without-gtkmm --without-xerces --without-pam \
+EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs \
+                --disable-tests --without-gtkmm --without-xerces --without-pam \
                 --disable-grabbitmqproxy --disable-vgauth --disable-deploypkg \
-		--without-root-privileges --without-kernel-modules"
+                --without-root-privileges --without-kernel-modules"
 
 NO_X11_FLAGS = "--without-x --without-gtk2 --without-gtk3"
 X11_DEPENDS = "libxext libxi libxrender libxrandr libxtst gtk+ gdk-pixbuf"
