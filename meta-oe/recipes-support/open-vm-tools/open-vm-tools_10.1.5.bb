@@ -56,15 +56,15 @@ PACKAGECONFIG[fuse] = ",,fuse"
 CFLAGS += "-Wno-error=deprecated-declarations"
 
 FILES_${PN} += "\
-    /usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
-    /usr/lib/open-vm-tools/plugins/common/lib*.so \
+    ${libdir}/open-vm-tools/plugins/vmsvc/lib*.so \
+    ${libdir}/open-vm-tools/plugins/common/lib*.so \
     ${sysconfdir}/vmware-tools/tools.conf \
     "
-FILES_${PN}-locale += "/usr/share/open-vm-tools/messages"
-FILES_${PN}-dev += "/usr/lib/open-vm-tools/plugins/common/lib*.la"
+FILES_${PN}-locale += "${datadir}/open-vm-tools/messages"
+FILES_${PN}-dev += "${libdir}/open-vm-tools/plugins/common/lib*.la"
 FILES_${PN}-dbg += "\
-    /usr/lib/open-vm-tools/plugins/common/.debug \
-    /usr/lib/open-vm-tools/plugins/vmsvc/.debug \
+    ${libdir}/open-vm-tools/plugins/common/.debug \
+    ${libdir}/open-vm-tools/plugins/vmsvc/.debug \
     "
 
 CONFFILES_${PN} += "${sysconfdir}/vmware-tools/tools.conf"
@@ -72,7 +72,7 @@ CONFFILES_${PN} += "${sysconfdir}/vmware-tools/tools.conf"
 RDEPENDS_${PN} = "util-linux libdnet fuse"
 
 do_install_append() {
-    ln -sf /usr/sbin/mount.vmhgfs ${D}/sbin/mount.vmhgfs
+    ln -sf ${sbindir}/mount.vmhgfs ${D}/sbin/mount.vmhgfs
     install -d ${D}${systemd_unitdir}/system ${D}${sysconfdir}/vmware-tools
     install -m 644 ${WORKDIR}/*.service ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/tools.conf ${D}${sysconfdir}/vmware-tools/tools.conf
