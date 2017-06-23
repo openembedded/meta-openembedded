@@ -51,7 +51,7 @@ EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs --disable-tests 
                 --disable-grabbitmqproxy --disable-vgauth --disable-deploypkg \
 		--with-linuxdir=${STAGING_KERNEL_DIR} --with-kernel-release=${KERNEL_VERSION} --without-root-privileges"
 
-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'x11', '', '--without-x', d)}"
+EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '--without-x', d)}"
 
 EXTRA_OEMAKE = "KERNEL_RELEASE=${KERNEL_VERSION}"
 
