@@ -30,7 +30,7 @@ SRCREV = "854c0bb374612f7e633b448ca273f970f154458b"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
-DEPENDS = "virtual/kernel glib-2.0 glib-2.0-native util-linux libdnet procps libmspack"
+DEPENDS = "virtual/kernel glib-2.0 glib-2.0-native util-linux libdnet procps"
 RDEPENDS_${PN} = "util-linux libdnet kernel-module-vmhgfs"
 
 inherit module-base kernel-module-split autotools pkgconfig systemd
