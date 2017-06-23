@@ -29,7 +29,7 @@ S = "${WORKDIR}/git/open-vm-tools"
 DEPENDS = "virtual/kernel glib-2.0 util-linux libdnet procps libmspack"
 RDEPENDS_${PN} = "util-linux libdnet kernel-module-vmhgfs"
 
-inherit module-base kernel-module-split autotools systemd
+inherit module-base kernel-module-split autotools pkgconfig systemd
 
 # from module.bbclass...
 addtask make_scripts after do_patch before do_compile
