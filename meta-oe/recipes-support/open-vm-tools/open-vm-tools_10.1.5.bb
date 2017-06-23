@@ -25,6 +25,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
            file://vmtoolsd.service \
            file://0001-Fix-kernel-detection.patch \
            file://0002-configure.ac-don-t-use-dnet-config.patch \
+           file://0003-add-include-sys-sysmacros.h.patch \
            "
 
 SRCREV = "854c0bb374612f7e633b448ca273f970f154458b"
