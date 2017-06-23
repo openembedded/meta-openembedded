@@ -47,11 +47,13 @@ KERNEL_MODULES_META_PACKAGE = "${PN}"
 SYSTEMD_SERVICE_${PN} = "vmtoolsd.service"
 
 EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs --disable-tests \
-		--without-gtk2 --without-gtkmm --without-xerces --without-pam \
+		--without-gtkmm --without-xerces --without-pam \
                 --disable-grabbitmqproxy --disable-vgauth --disable-deploypkg \
 		--with-linuxdir=${STAGING_KERNEL_DIR} --with-kernel-release=${KERNEL_VERSION} --without-root-privileges"
 
-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', '--without-x', d)}"
+NO_X11_FLAGS = "--without-x --without-gtk2 --without-gtk3"
+X11_DEPENDS = "libxext libxi libxrender libxrandr libxtst gtk+ gdk-pixbuf"
+PACKAGECONFIG[x11] = ",${NO_X11_FLAGS},${X11_DEPENDS}"
 
 EXTRA_OEMAKE = "KERNEL_RELEASE=${KERNEL_VERSION}"
 
