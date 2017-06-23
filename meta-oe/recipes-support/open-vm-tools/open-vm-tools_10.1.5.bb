@@ -23,40 +23,29 @@ LICENSE_modules/solaris = "CDDLv1"
 SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
            file://tools.conf \
            file://vmtoolsd.service \
-           file://0001-Fix-kernel-detection.patch \
-           file://0002-configure.ac-don-t-use-dnet-config.patch \
-           file://0003-add-include-sys-sysmacros.h.patch \
+           file://0001-configure.ac-don-t-use-dnet-config.patch \
+           file://0002-add-include-sys-sysmacros.h.patch \
            "
 
 SRCREV = "854c0bb374612f7e633b448ca273f970f154458b"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
-DEPENDS = "virtual/kernel glib-2.0 glib-2.0-native util-linux libdnet procps"
-RDEPENDS_${PN} = "util-linux libdnet kernel-module-vmhgfs"
+DEPENDS = "glib-2.0 glib-2.0-native util-linux libdnet procps"
+RDEPENDS_${PN} = "util-linux libdnet"
 
-inherit module-base kernel-module-split autotools pkgconfig systemd
-
-# from module.bbclass...
-addtask make_scripts after do_patch before do_compile
-do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
-do_make_scripts[depends] = "virtual/kernel:do_shared_workdir"
-# add all splitted modules to PN RDEPENDS, PN can be empty now
-KERNEL_MODULES_META_PACKAGE = "${PN}"
+inherit autotools pkgconfig systemd
 
 SYSTEMD_SERVICE_${PN} = "vmtoolsd.service"
 
 EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs --disable-tests \
 		--without-gtkmm --without-xerces --without-pam \
                 --disable-grabbitmqproxy --disable-vgauth --disable-deploypkg \
-		--with-linuxdir=${STAGING_KERNEL_DIR} --with-kernel-release=${KERNEL_VERSION} --without-root-privileges"
+		--without-root-privileges --without-kernel-modules"
 
 NO_X11_FLAGS = "--without-x --without-gtk2 --without-gtk3"
 X11_DEPENDS = "libxext libxi libxrender libxrandr libxtst gtk+ gdk-pixbuf"
 PACKAGECONFIG[x11] = ",${NO_X11_FLAGS},${X11_DEPENDS}"
-
-EXTRA_OEMAKE = "KERNEL_RELEASE=${KERNEL_VERSION}"
-
 
 CFLAGS += '-Wno-error=deprecated-declarations'
 
