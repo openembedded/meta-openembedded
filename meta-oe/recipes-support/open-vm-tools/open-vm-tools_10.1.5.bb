@@ -34,6 +34,9 @@ S = "${WORKDIR}/git/open-vm-tools"
 DEPENDS = "glib-2.0 glib-2.0-native util-linux libdnet procps"
 RDEPENDS_${PN} = "util-linux libdnet"
 
+# open-vm-tools is supported only on x86.
+COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+
 inherit autotools pkgconfig systemd
 
 SYSTEMD_SERVICE_${PN} = "vmtoolsd.service"
