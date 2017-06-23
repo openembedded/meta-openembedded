@@ -13,14 +13,12 @@ DECRIPTION = "open-vm-tools"
 SECTION = "vmware-tools"
 
 LICENSE = "LGPLv2.1 & GPLv2 & BSD & CDDLv1"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0eac46f0b7886425d7faed6aae5aef66"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b66ba4cb4fc017682c95efc300410e79"
 LICENSE_modules/freebsd/vmblock = "BSD"
 LICENSE_modules/freebsd/vmmemctl = "GPLv2"
 LICENSE_modules/freebsd/vmxnet = "GPLv2"
 LICENSE_modules/linux = "GPLv2"
 LICENSE_modules/solaris = "CDDLv1"
-
-PR = "r5"
 
 SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
            file://tools.conf \
@@ -28,7 +26,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
            file://0001-Fix-kernel-detection.patch \
            "
 
-SRCREV = "538ea037a1549b6fd4e57529f7448a3fd2aa47af"
+SRCREV = "854c0bb374612f7e633b448ca273f970f154458b"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
