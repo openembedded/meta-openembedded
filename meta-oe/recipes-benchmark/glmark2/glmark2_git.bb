@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
     file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch \
     file://Fix-configure-for-sqrt-check.patch \
 "
-SRCREV = "7215c0f337dae0b232535549c37fca441747a891"
+SRCREV = "9b1070fe9c5cf908f323909d3c8cbed08022abe8"
 
 S = "${WORKDIR}/git"
 
