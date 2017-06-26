@@ -57,6 +57,17 @@ do_install_append() {
     for i in map config conf dtd; do
         cp ${S}/etc/*.$i ${D}${sysconfdir}/snort/
     done
+
+    # fix the hardcoded path and lib name
+    # comment out the rules that are not provided
+    sed -i -e 's#/usr/local/lib#${libdir}#' \
+           -e 's#\.\./\(.*rules\)#${sysconfdir}/snort/\1#' \
+           -e 's#\(libsf_engine.so\)#\1.0#' \
+           -e 's/^\(include $RULE_PATH\)/#\1/' \
+           -e 's/^\(dynamicdetection\)/#\1/' \
+           -e '/preprocessor reputation/,/blacklist/ s/^/#/' \
+           ${D}${sysconfdir}/snort/snort.conf
+
     cp ${S}/preproc_rules/*.rules ${D}${sysconfdir}/snort/preproc_rules/
     install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
     mkdir -p ${D}${localstatedir}/log/snort
