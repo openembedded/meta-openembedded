@@ -11,7 +11,7 @@ SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2
 SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
 SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24"
 
-inherit autotools
+inherit autotools pkgconfig
 
 DEPENDS += "ncurses udev zlib"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
