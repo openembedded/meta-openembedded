@@ -10,7 +10,7 @@ SECTION = "devel"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "zlib readline"
+DEPENDS = "zlib readline coreutils-native"
 
 SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
            http://ftp.gnu.org/gnu/gdb/gdb-7.6.tar.gz;name=gdb;subdir=${BP} \
@@ -22,14 +22,12 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
            file://donnot-extract-gdb-during-do-compile.patch \
            file://gdb_build_jobs_and_not_write_crash_target.patch \
            file://remove-unrecognized-gcc-option-m32-for-mips.patch \
-           file://0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch \
            file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
            file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
            file://0004-crash-fix-build-failure-with-mips.patch \
            "
-
-SRC_URI[md5sum] = "31787074f267a3536eebff008a0652ec"
-SRC_URI[sha256sum] = "9965dee9199d7e39764fbee7f21c7c45b1f7b6d17c8e92ad62f468f062876478"
+SRC_URI[md5sum] = "f3b44a151dbe7046462b9caaa9847ca6"
+SRC_URI[sha256sum] = "c48e1269443a6a8e8337e328b21b03e4e50248f607eed83fbb27eb0d833d6aa4"
 
 SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
 SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
