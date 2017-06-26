@@ -17,6 +17,7 @@ SRC_URI = "http://sourceforge.net/projects/irstessi/files/${BPN}.${PV}.tgz \
            file://0004-engine-Fix-indentation-and-missing-semi-colon.patch \
            file://0005-engine-Define-SENTINEL.patch \
            file://0006-tools-Add-missing-includes-and-use-realpath-instead-.patch \
+           file://configure-cflags.patch \
 "
 SRC_URI[md5sum] = "02f16d7cbd30d28034093212906591f5"
 SRC_URI[sha256sum] = "e10d283b0f211afb8ebd0bde87c097769613d30a052cdf164753e35e803264c7"
@@ -24,6 +25,7 @@ SRC_URI[sha256sum] = "e10d283b0f211afb8ebd0bde87c097769613d30a052cdf164753e35e80
 S ="${WORKDIR}/${BPN}.${PV}"
 
 inherit autotools-brokensep
+CXXFLAGS="-std=gnu++98 -D_GNU_SOURCE"
 
 do_configure_prepend(){
     ./autogen.sh
