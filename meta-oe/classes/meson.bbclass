@@ -67,9 +67,9 @@ cpp_args = [${@meson_array('MESON_C_ARGS', d)}]
 cpp_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
 
 [host_machine]
-system = '${BUILD_OS}'
-cpu_family = '${BUILD_ARCH}'
-cpu = '${BUILD_ARCH}'
+system = '${HOST_OS}'
+cpu_family = '${HOST_ARCH}'
+cpu = '${HOST_ARCH}'
 endian = '${MESON_HOST_ENDIAN}'
 
 [target_machine]
