@@ -10,9 +10,13 @@ do_configure[cleandirs] = "${B}"
 MESON_SOURCEPATH = "${S}"
 
 # These variables in the environment override the *native* tools, not the cross.
+export CPPFLAGS = "${BUILD_CPPFLAGS}"
 export CC = "${BUILD_CC}"
+export CFLAGS = "${BUILD_CFLAGS}"
 export CXX = "${BUILD_CXX}"
+export CXXFLAGS = "${BUILD_CXXFLAGS}"
 export LD = "${BUILD_LD}"
+export LDFLAGS = "${BUILD_LDFLAGS}"
 export AR = "${BUILD_AR}"
 export PKG_CONFIG = "pkg-config-native"
 
