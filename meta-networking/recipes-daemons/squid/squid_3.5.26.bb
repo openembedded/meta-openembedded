@@ -24,6 +24,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://gcc7-fixes.patch \
+           file://0001-tools.cc-fixed-unused-result-warning.patch \
            "
 SRC_URI[md5sum] = "dc1830cd361e077814aa39bcc3691d8b"
 SRC_URI[sha256sum] = "41d8845863dcd026c856508cd1599d417c8947ffd96e86e24085f9893cb8b8c2"
