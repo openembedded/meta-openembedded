@@ -14,6 +14,6 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-RDEPENDS_${PN}_class-target = "ninja python3-core python3-modules"
+RDEPENDS_${PN} = "ninja python3-core python3-modules"
 
 BBCLASSEXTEND = "native"
