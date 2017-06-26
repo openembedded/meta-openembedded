@@ -41,6 +41,7 @@ PACKAGECONFIG[readline] = "--enable-readline=yes,--enable-readline=no,readline"
 PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
 
 export DEBUG="-DNDEBUG"
+export BUILD_VERBOSE="1"
 
 EXTRA_OEMAKE = "DIST_ROOT='${D}'"
 
@@ -54,7 +55,7 @@ do_configure_prepend () {
 }
 
 do_install_append() {
-        oe_runmake 'DESTDIR=${D}' install install-dev
+        oe_runmake 'DESTDIR=${D}' install-dev
         rm ${D}${libdir}/*.la
         rmdir --ignore-fail-on-non-empty ${D}${libdir}
 }
