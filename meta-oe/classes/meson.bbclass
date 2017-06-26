@@ -27,7 +27,6 @@ MESONOPTS = " --prefix ${prefix} \
               --includedir ${@noprefix('includedir', d)} \
               --mandir ${@noprefix('mandir', d)} \
               --infodir ${@noprefix('infodir', d)} \
-              --localedir ${@noprefix('localedir', d)} \
               --sysconfdir ${sysconfdir} \
               --localstatedir ${localstatedir} \
               --sharedstatedir ${sharedstatedir}"
