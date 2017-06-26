@@ -75,7 +75,7 @@ endian = '${MESON_HOST_ENDIAN}'
 [target_machine]
 system = '${TARGET_OS}'
 cpu_family = '${TARGET_ARCH}'
-cpu = '${TUNE_PKGARCH}'
+cpu = '${TARGET_ARCH}'
 endian = '${MESON_TARGET_ENDIAN}'
 EOF
 }
