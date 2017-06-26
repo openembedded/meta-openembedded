@@ -6,20 +6,23 @@ SECTION = "net"
 
 DEPENDS = "zlib curl"
 
-SRC_URI = "https://github.com/maxmind/geoipupdate/releases/download/v2.2.2/geoipupdate-2.2.2.tar.gz \
+SRC_URI = "https://github.com/maxmind/geoipupdate/releases/download/v2.4.0/geoipupdate-2.4.0.tar.gz \
            file://GeoIP.conf \
            file://geoipupdate.cron \
           "
-
-SRC_URI[md5sum] = "06284bd7bcb298d078d794eb630dae55"
-SRC_URI[sha256sum] = "156ab7604255a9c62c4a442c76d48d024ac813c6542639bffa93b28e2a781621"
+SRC_URI[md5sum] = "02f9712fb80e8e979d3d54cda7f7704f"
+SRC_URI[sha256sum] = "8b4e88ce8d84e9c75bc681704d19ec5c63c54f01e945f7669f97fb0df7e13952"
 
 LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "\
-file://ChangeLog.md;md5=8ebf6f27a39125c3d600c90914b4034a \
+file://ChangeLog.md;md5=334337b6ecbb65093bae66b3ae21c8c2 \
 "
-
+FILES_${PN} = "/usr/share/GeoIP \
+              /etc/GeoIP.conf \
+             /etc/cron.d/geoipupdate.cron \
+             /usr/bin/geoipupdate \
+"
 inherit autotools
 
 do_install_append() {
