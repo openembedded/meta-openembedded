@@ -14,6 +14,7 @@ export CC = "${BUILD_CC}"
 export CXX = "${BUILD_CXX}"
 export LD = "${BUILD_LD}"
 export AR = "${BUILD_AR}"
+export PKG_CONFIG = "pkg-config-native"
 
 def noprefix(var, d):
     return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
