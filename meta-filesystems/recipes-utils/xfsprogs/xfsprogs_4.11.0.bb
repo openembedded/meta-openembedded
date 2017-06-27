@@ -9,8 +9,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://link_needed_libs.patch \
            file://0001-define-__-prefixed-version-of-intXY_t-types.patch \
            "
-SRC_URI[md5sum] = "ddbb04493addf014db07a7e2b96b2804"
-SRC_URI[sha256sum] = "d8cb9ab2c686699d37914354ce3992b4aff3677093cbce06ad18bf798da8a8a7"
+SRC_URI[md5sum] = "f1f9b8c752347eefdb56483dafa0cefb"
+SRC_URI[sha256sum] = "c3a6d87b564d7738243c507df82276bed982265e345363a95f2c764e8a5f5bb2"
 
 inherit autotools-brokensep
 
