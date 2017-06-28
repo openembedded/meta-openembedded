@@ -37,6 +37,7 @@ SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5
 inherit gettext
 
 BBCLASSEXTEND = "native cross"
+TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
 
 # crash 7.1.3 and before don't support mips64
 COMPATIBLE_HOST = "^(?!mips64).*"
