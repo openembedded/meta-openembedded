@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
 DEPENDS = "aufs-util-native"
 DEPENDS_class-native = ""
 
-SRCREV = "b59a2167a135ceea37581ee33997de278cf8a30a"
-SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.14 \
+SRCREV = "bdfcc0dcfc6113146e928f85145dbd2cf9b0e080"
+SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.18 \
            file://aufs-util-don-t-strip-executables.patch \
            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
            file://aufs_type.h \
@@ -34,7 +34,7 @@ do_configure_append () {
 
 do_configure_append_class-target () {
     for i in ver c2sh c2tmac; do
-        cp ${STAGING_BINDIR_NATIVE}/aufs-util-${PV}/$i ./
+        cp ${STAGING_BINDIR_NATIVE}/aufs-util-*/$i ${B}
     done
 }
 
