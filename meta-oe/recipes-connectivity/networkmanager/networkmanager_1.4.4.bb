@@ -34,6 +34,8 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManag
            file://0001-check-for-strndupa-before-using-it.patch \
            file://0001-dns-resolved-add-systemd-resolved-backend.patch \
            file://0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.patch \
+           file://0001-systemd-xlocale.h-is-dropped-by-newer-glibc.patch \
+           file://0002-user-format-string-in-g_dbus_message_new_method_erro.patch \
            "
 SRC_URI[md5sum] = "63f1e0d6d7e9099499d062c84c927a75"
 SRC_URI[sha256sum] = "829378f318cc008d138a23ca6a9191928ce75344e7e47a2f2c35f4ac82133309"
