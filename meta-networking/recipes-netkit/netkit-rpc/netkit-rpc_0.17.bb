@@ -5,7 +5,9 @@ LICENSE = "SPL-1.0"
 LIC_FILES_CHKSUM = "file://rpcinfo/rpcinfo.c;beginline=2;endline=3;md5=3e6339e3ce266e1122c5ba293e04bc89"
 
 SRC_URI = "http://sources.openembedded.org/${BPN}-${PV}.tar.gz \
-           file://gcc4.patch"
+           file://gcc4.patch \
+           file://0001-rpcgen-Fix-printf-formats.patch \
+           "
 SRC_URI[md5sum] = "67212720482ea1aea9182a98653a9642"
 SRC_URI[sha256sum] = "421d63b414162237a72867061f1bd3e3752a0d962cd5d30b5e933ddad8a14d3b"
 
