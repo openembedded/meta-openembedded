@@ -8,8 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "gmp openssl flex-native flex bison-native"
 
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-        file://fix-funtion-parameter.patch \
-"
+           file://fix-funtion-parameter.patch \
+           file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
+           "
 
 SRC_URI[md5sum] = "4afffe3c219bb2e04f09510905af836b"
 SRC_URI[sha256sum] = "c5ea54b199174708de11af9b8f4ecf28b5b0743d4bc0e380e741f25b28c0f8d4"
