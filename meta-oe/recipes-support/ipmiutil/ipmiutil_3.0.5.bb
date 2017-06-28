@@ -13,17 +13,17 @@ is detected."
 
 HOMEPAGE = "http://ipmiutil.sourceforge.net"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=5f9372493401f309e6149dd2ce0a044b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=626a5970304daa1fcb87f757fb42b795"
 
 DEPENDS += "openssl"
 
 PARALLEL_MAKE = ""
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
-    file://fix_systemd_path.patch "
-
-SRC_URI[md5sum] = "462087995f05fa9e692ed7f55c840f71"
-SRC_URI[sha256sum] = "884c1f3d8bfb0b33c303973d286c3166f5a537976451a0312e3524af54771519"
+           file://fix_systemd_path.patch \
+          "
+SRC_URI[md5sum] = "5feaf6a827205792e057bb4ff5c4e842"
+SRC_URI[sha256sum] = "b2d7f72535131c7832ba4be13dc33c81513fc3ee43fe797b4b52014600ecee5e"
 
 inherit autotools-brokensep pkgconfig systemd
 
@@ -42,21 +42,5 @@ PACKAGECONFIG[standalone] = "--enable-standalone, --enable-standalone=no"
 
 CFLAGS += "-I${STAGING_INCDIR}"
 LDFLAGS += "-L${STAGING_LIBDIR}"
-
-do_configure () {
-    aclocal
-    libtoolize --automake --copy --force
-    autoheader
-    automake --foreign --add-missing --copy
-
-    aclocal
-    autoconf
-    automake --foreign
-    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
-}
-
-do_install () {
-    oe_runmake install DESTDIR=${D}
-}
 
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
