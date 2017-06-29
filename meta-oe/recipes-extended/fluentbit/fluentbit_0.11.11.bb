@@ -3,11 +3,10 @@ HOMEPAGE = "http://fluentbit.io"
 BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
 
 SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
-           file://0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch \
            file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
            "
-SRC_URI[md5sum] = "9383262339412782b80cc49e7ad15609"
-SRC_URI[sha256sum] = "eb8a85c656fa60682b0bf8dd1ad58d848cd251dab4f35a6777acd552c65b0511"
+SRC_URI[md5sum] = "7bce8091c41fb6412b7fe0185b3cb8d6"
+SRC_URI[sha256sum] = "93b1bdd14db20f2823cd31c6f1a2f3fcb7c94ec3e0c8daefabf130310b7fc4ed"
 
 S = "${WORKDIR}/fluent-bit-${PV}"
 
@@ -19,6 +18,6 @@ INSANE_SKIP_${PN}-dev += "dev-elf"
 
 inherit cmake systemd
 
-EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS}"
+EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
 
 SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
