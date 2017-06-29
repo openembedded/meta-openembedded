@@ -13,9 +13,15 @@ SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14d
 
 inherit autotools
 
-DEPENDS += "cairo ncurses udev libxml2 zlib libpciaccess"
-DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
+DEPENDS += "ncurses udev zlib"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
+
+PACKAGECONFIG ?= "pci libxml2 ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+
+PACKAGECONFIG[numactl] = "--enable-libnuma,--disable-libnuma,numactl,numactl"
+PACKAGECONFIG[libxml2] = "--enable-libxml2,--disable-libxml2,libxml2,libxml2"
+PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 cairo,cairo"
+PACKAGECONFIG[pci] = "--enable-pci,--disable-pci,libpciaccess,libpciaccess"
 
 # Split hwloc library into separate subpackage
 PACKAGES_prepend = " lib${PN} "
