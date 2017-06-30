@@ -17,6 +17,7 @@ SRCREV = "62da9d28c674814c81c245c1c7882eb0da7be76b"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git \
     file://winpr-makecert-Build-with-install-RPATH.patch \
     file://0001-FindGStreamer_1_0-fix-build-failure-for-new-gstreame.patch \
+    file://0003-add-missing-define.patch \
 "
 
 S = "${WORKDIR}/git"
