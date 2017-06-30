@@ -3,6 +3,7 @@ HOMEPAGE = "http://fluentbit.io"
 BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
 
 SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
+           file://0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch \
            file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
            "
 SRC_URI[md5sum] = "7bce8091c41fb6412b7fe0185b3cb8d6"
@@ -21,3 +22,5 @@ inherit cmake systemd
 EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
 
 SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
+
+TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"

@@ -1,0 +1,24 @@
+From 84d70b6bc744cd348e66a0bc6c7958cdfa9ce670 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 29 Jun 2017 12:56:21 -0700
+Subject: [PATCH] flb-plugin-proxy-go: Add missing dependency on jemalloc
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/proxy/go/CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/proxy/go/CMakeLists.txt b/src/proxy/go/CMakeLists.txt
+index 3273346..02a54c2 100644
+--- a/src/proxy/go/CMakeLists.txt
++++ b/src/proxy/go/CMakeLists.txt
+@@ -2,3 +2,6 @@ set(src
+   go.c)
+ 
+ add_library(flb-plugin-proxy-go STATIC ${src})
++if(FLB_JEMALLOC)
++  target_link_libraries(flb-plugin-proxy-go libjemalloc)
++endif()
+-- 
+2.13.2
+
