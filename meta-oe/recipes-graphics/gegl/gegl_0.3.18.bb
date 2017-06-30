@@ -16,8 +16,8 @@ PACKAGECONFIG[webp] = "--with-webp,--without-webp,webp"
 
 SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.3/${BP}.tar.bz2 \
            file://pkgconfig.patch "
-SRC_URI[md5sum] = "c19478321594d715a4cb324a0decda6f"
-SRC_URI[sha256sum] = "846290a790854d1e6b7c17a2d6f82ad7cb14c72e240bd3b81b98cc0ceddbc3ec"
+SRC_URI[md5sum] = "6e5c6f229261478dc436a38c84405b2a"
+SRC_URI[sha256sum] = "d7858ef26ede136d14e3de188a9e9c0de7707061a9fb96d7d615fab4958491fb"
 
 LDFLAGS += "-lm"
 
