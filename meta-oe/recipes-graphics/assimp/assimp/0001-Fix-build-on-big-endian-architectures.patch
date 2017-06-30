@@ -1,0 +1,29 @@
+From 614475dcac1cee4d63b764282c578672bc060321 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 29 Jun 2017 14:23:00 -0700
+Subject: [PATCH] Fix build on big-endian architectures
+
+see
+https://github.com/assimp/assimp/pull/986
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ code/glTFAsset.inl | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/code/glTFAsset.inl b/code/glTFAsset.inl
+index d52c825c..470246c9 100644
+--- a/code/glTFAsset.inl
++++ b/code/glTFAsset.inl
+@@ -40,6 +40,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ #include "StringUtils.h"
+ 
++using namespace Assimp;
++
+ namespace glTF {
+ 
+ namespace {
+-- 
+2.13.2
+
