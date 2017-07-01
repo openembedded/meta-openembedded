@@ -22,6 +22,7 @@ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
            file://0002-Fix-const-qualifier-error.patch \
            file://0001-ARM-code-has-unreachable-code-after-switch-statement.patch \
            file://0001-Fix-tautological-compare-warning.patch \
+           file://0001-Add-support-for-mips64-n32-n64.patch \
            "
 S = "${WORKDIR}/git"
 
