@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SRC_URI = " \
     git://github.com/mesonbuild/meson.git \
+    file://native_bindir.patch \
 "
 
 SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
