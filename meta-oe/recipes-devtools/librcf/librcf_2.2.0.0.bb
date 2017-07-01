@@ -15,7 +15,8 @@ SRC_URI = "http://www.deltavsoft.com/downloads/RCF-${PV}.tar.gz \
            file://aarch64-support.patch \
            file://0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch \
            file://mips-support.patch \
-          "
+           file://0001-Check-for-__powerpc__-define.patch \
+           "
 
 SRC_URI[md5sum] = "7ecb3c73f7eb66dba8790b659374f690"
 SRC_URI[sha256sum] = "bbfcc88de502c39604878c395f516b03fff4eac63eb4f7f44c07d433839712dd"
