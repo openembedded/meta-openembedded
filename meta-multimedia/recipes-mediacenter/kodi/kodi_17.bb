@@ -18,6 +18,7 @@ DEPENDS = " \
             avahi \
             boost \
             bzip2 \
+            crossguid \
             curl \
             dcadec \
             enca \
@@ -150,13 +151,12 @@ def enable_glew(bb, d):
 do_configure() {
     tar xf ${WORKDIR}/${BPN}-${ADDONSPV}-generated-addons.tar.xz -C ${S}/
 
-    ( for i in $(find ${S} -name "configure.*" ) ; do
+    ( for i in $(find ${S} -name configure.ac -or -name configure.in|grep -v ".pc") ; do
        cd $(dirname $i) && gnu-configize --force || true
     done )
     ( for f in ${S}/xbmc/interfaces/python/generated/*.cpp; do
        touch `echo $f|sed -e 's/.cpp$/.xml/g'`
     done )
-    make -C tools/depends/target/crossguid PREFIX=${STAGING_DIR_HOST}${prefix}
 
     BOOTSTRAP_STANDALONE=1 make -f bootstrap.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
     BOOTSTRAP_STANDALONE=1 make JAVA=/bin/true -f codegenerator.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
