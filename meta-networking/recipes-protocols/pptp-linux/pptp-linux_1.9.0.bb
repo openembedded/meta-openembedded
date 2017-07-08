@@ -9,14 +9,13 @@ SECTION = "net"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r1"
-
 SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
            file://options.pptp \
-"
+           file://0001-include-missing-sys-types.h.patch \
+           "
 
-SRC_URI[md5sum] = "4efce9f263e2c3f38d79d9df222476de"
-SRC_URI[sha256sum] = "e39c42d933242a8a6dd8600a0fa7f0a5ec8f066d10c4149d8e81a5c68fe4bbda"
+SRC_URI[md5sum] = "b2117b377f65294a9786f80f0235d308"
+SRC_URI[sha256sum] = "0b1e8cbfc578d3f5ab12ee87c5c2c60419abfe9cc445690a8a19c320b11c9201"
 
 S = "${WORKDIR}/pptp-${PV}"
 
