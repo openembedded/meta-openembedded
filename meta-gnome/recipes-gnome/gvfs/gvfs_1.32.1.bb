@@ -2,14 +2,14 @@ DESCRIPTION = "gvfs is a userspace virtual filesystem"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 
-inherit gnome bash-completion
+inherit gnome bash-completion gettext
 
 DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "d2399a1a217dd5030e8830c7e7c813c2"
-SRC_URI[archive.sha256sum] = "458c4cb68570f6ef4a9e152995c62d0057c3e0a07ed64d84c7200cdd22f0bd17"
+SRC_URI[archive.md5sum] = "cbe766b46f324e17d7abcfb4a89a1684"
+SRC_URI[archive.sha256sum] = "d0b6c9edab09d52472355657a2f0a14831b2e6c58caba395f721ab683f836ade"
 
 EXTRA_OECONF = " \
     --disable-gdu \
