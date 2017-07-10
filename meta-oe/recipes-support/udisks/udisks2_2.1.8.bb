@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "acl"
 SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2 \
            file://non-gnu-libc.patch \
 "
-SRC_URI[md5sum] = "8bccd36573b75286538bd5bd2c424f45"
-SRC_URI[sha256sum] = "abae2bb3bdc691ca13c1e4c244630b8c881c4f3b35c207299f1b39b7bec83785"
+SRC_URI[md5sum] = "501d11c243bd8c6c00650474cd2afaab"
+SRC_URI[sha256sum] = "da416914812a77e5f4d82b81deb8c25799fd3228d27d52f7bf89a501b1857dda"
 
 inherit autotools systemd gtk-doc gobject-introspection
 
