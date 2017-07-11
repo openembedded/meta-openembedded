@@ -134,6 +134,7 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
 LDFLAGS_append_mips = " -latomic"
 LDFLAGS_append_mipsel = " -latomic"
 LDFLAGS_append_powerpc = " -latomic"
+LDFLAGS_append_arm = " -latomic"
 
 EXTRA_OECONF_append = " LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
 
