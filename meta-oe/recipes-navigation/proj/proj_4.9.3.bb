@@ -6,8 +6,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
 
 SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
-SRC_URI[md5sum] = "d815838c92a29179298c126effbb1537"
-SRC_URI[sha256sum] = "2db2dbf0fece8d9880679154e0d6d1ce7c694dd8e08b4d091028093d87a9d1b5"
+SRC_URI[md5sum] = "d598336ca834742735137c5674b214a1"
+SRC_URI[sha256sum] = "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7"
 
 inherit autotools pkgconfig lib_package
 
