@@ -7,17 +7,23 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=d75181f10e998c21eb147f6d2e43ce8
 DEPENDS = "linux-libc-headers perl-native"
 SRCREV = "4d19974d7020488f63651244e1f9f51727c3f66c"
 
-SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
-SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
-                                 file://armv4-fix-v4bx.patch \
-                                 "
-SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
-                                    file://armv4-fix-v4bx.patch \
-                                    "
-SRC_URI += "file://klibc-linux-libc-dev.patch \
-            file://staging.patch \
-            file://klcc-consider-sysroot.patch \
-            "
+SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
+           ${ARMPATCHES} \
+           file://klibc-linux-libc-dev.patch \
+           file://staging.patch \
+           file://klcc-consider-sysroot.patch \
+           file://0001-dash-Specify-format-string-in-fmtstr.patch \
+           file://0001-Define-in_-structs-for-non-glibc-system-libs.patch \
+           file://0001-include-linux-sysinfo.h-directly.patch \
+           file://0001-mkfifo-Implement-mkfifo.patch \
+"
+
+ARMPATCHES ?= ""
+
+ARMPATCHES_arm = "file://klibc-config-eabi.patch \
+                  file://armv4-fix-v4bx.patch \
+                 "
+
 
 S = "${WORKDIR}/git"
 
@@ -30,9 +36,12 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'INSTALLROOT=${D}' \
                 'INSTALLDIR=${libdir}/klibc' \
                 'SHLIBDIR=${libdir}' \
+                '${KLIBCTHUMB}' \
+                'KLIBCOPTFLAGS=${TUNE_CCARGS}' \
                 "
 
 export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
+KLIBCTHUMB = "${@['', 'CONFIG_KLIBC_THUMB=y'][(d.getVar('ARM_INSTRUCTION_SET') == 'thumb')]}"
 
 do_configure () {
     ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
@@ -51,3 +60,6 @@ KLIBC_ARCH_x86-64 = "x86_64"
 KLIBC_ARCH_powerpc = "ppc"
 KLIBC_ARCH_powerpc64 = "ppc64"
 THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
+
+SECURITY_CFLAGS = "-fno-PIE -no-pie"
+SECURITY_LDFLAGS = "-no-pie"
