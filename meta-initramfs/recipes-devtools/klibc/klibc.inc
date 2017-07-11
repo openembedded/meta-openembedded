@@ -16,6 +16,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
            file://0001-Define-in_-structs-for-non-glibc-system-libs.patch \
            file://0001-include-linux-sysinfo.h-directly.patch \
            file://0001-mkfifo-Implement-mkfifo.patch \
+           file://0001-always-use-bfd-linker.patch \
 "
 
 ARMPATCHES ?= ""
