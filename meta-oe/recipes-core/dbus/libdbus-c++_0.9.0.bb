@@ -21,6 +21,7 @@ SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "--disable-ecore --disable-examples --disable-tests"
+LDFLAGS += "-pthread"
 
 PACKAGE_BEFORE_PN = "${PN}-tools"
 
