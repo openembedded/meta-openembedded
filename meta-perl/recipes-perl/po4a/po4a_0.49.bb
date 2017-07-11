@@ -13,8 +13,21 @@ SRCREV = "79ed87a577a543538fe39c7b60079981f5997072"
 
 S = "${WORKDIR}/git"
 
-inherit cpan_build
+DEPENDS = " \
+    libmodule-build-perl-native \
+    libtext-wrapi18n-perl \
+    libterm-readkey-perl \
+    liblocale-gettext-perl \
+    libunicode-linebreak-perl \
+"
 
-DEPENDS += "libmodule-build-perl-native"
+RRECOMMENDS_${PN} = " \
+    libtext-wrapi18n-perl \
+    libterm-readkey-perl \
+    liblocale-gettext-perl \
+    libunicode-linebreak-perl \
+"
+
+inherit cpan_build
 
 BBCLASSEXTEND = "native"
