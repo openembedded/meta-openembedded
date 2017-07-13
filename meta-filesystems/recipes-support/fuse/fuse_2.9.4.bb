@@ -22,6 +22,7 @@ SRC_URI[sha256sum] = "6be9c0bff6af8c677414935f31699ea5a7f8f5f791cfa5205be02ea186
 inherit autotools pkgconfig update-rc.d systemd
 
 INITSCRIPT_NAME = "fuse"
+INITSCRIPT_PARAMS = "start 3 S . stop 20 0 6 ."
 
 SYSTEMD_SERVICE_${PN} = ""
 
