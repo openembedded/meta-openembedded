@@ -1,0 +1,31 @@
+From ec794945475d5792f2ae85afe461e64266613640 Mon Sep 17 00:00:00 2001
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Thu, 13 Jul 2017 16:44:52 +0900
+Subject: [PATCH 1/2] Makefile: Add LDFLAGS in export
+
+To use build with musl, need to argp library.
+So need to add LDFLAGS from outside.
+
+Upstream-Status: Accepted
+
+Signed-off-by: <Changhyeok Bae changhyeok.bae@gmail.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 67be2da..0ca649a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -48,7 +48,7 @@ endif
+ RM = rm -f
+ INSTALL = install
+ 
+-export ARCH CC AR LD RM srcdir objdir
++export ARCH CC AR LD RM srcdir objdir LDFLAGS
+ 
+ COMMON_CFLAGS := -O2 -g -D_GNU_SOURCE $(CFLAGS) $(CPPFLAGS)
+ COMMON_CFLAGS +=  -iquote $(srcdir) -iquote $(objdir) -iquote $(srcdir)/arch/$(ARCH)
+-- 
+1.9.1
+

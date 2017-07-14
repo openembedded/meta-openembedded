@@ -1,0 +1,31 @@
+From 3bda554766150705160fe2191d8761c7881e2433 Mon Sep 17 00:00:00 2001
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Thu, 13 Jul 2017 16:46:20 +0900
+Subject: [PATCH 2/2] utils: Add limits header to fix build error
+
+[Error]
+error: 'PATH_MAX' undeclared (first use in this function); did you mean
+'INT8_MAX'?
+
+Upstream-Status: Accepted
+
+Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+---
+ utils/utils.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/utils/utils.c b/utils/utils.c
+index 03522c9..30f9e81 100644
+--- a/utils/utils.c
++++ b/utils/utils.c
+@@ -6,6 +6,7 @@
+ #include <errno.h>
+ #include <sys/uio.h>
+ #include <sys/stat.h>
++#include <limits.h>
+ 
+ #include "utils/utils.h"
+ 
+-- 
+1.9.1
+
