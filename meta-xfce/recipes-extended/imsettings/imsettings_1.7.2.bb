@@ -11,7 +11,9 @@ inherit autotools gtk-doc gobject-introspection
 
 SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
            file://gtk-is-required-by-notify.patch \
-           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
+           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch \
+           file://0001-Rename-use-of-stdout-and-stderr.patch \
+           "
 
 SRC_URI[md5sum] = "8153b0583a9f47d8a62af1f92fb9d3bf"
 SRC_URI[sha256sum] = "41addf0458f760212b6b6100835066e16deb3a8a50eb005a0fc17fbac0a2ae66"
