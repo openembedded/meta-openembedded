@@ -5,13 +5,18 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
-PV = "044+git${SRCREV}"
+PV = "045+git${SRCREV}"
 
-# v044 tag
-SRCREV = "1bc3e733f96033a508841e97fe08da7a12851782"
-SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http"
+# v045 tag
+SRCREV = "39c9b67f86145953aa30def9d77c68597a4ccfe8"
+SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
+           file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+           "
 
-inherit bash-completion
+DEPENDS += "kmod"
+DEPENDS_append_libc-musl = " fts"
+
+inherit bash-completion pkgconfig
 
 S = "${WORKDIR}/git"
 
@@ -30,7 +35,9 @@ EXTRA_OECONF = "--prefix=${prefix} \
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,,systemd"
 
-EXTRA_OEMAKE += 'libdir=${prefix}/lib'
+EXTRA_OEMAKE += 'libdir=${prefix}/lib LDLIBS="${LDLIBS}"'
+
+LDLIBS_append_libc-musl = " -lfts"
 
 do_configure() {
     ./configure ${EXTRA_OECONF}
