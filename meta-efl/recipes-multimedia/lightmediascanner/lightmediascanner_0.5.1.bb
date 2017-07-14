@@ -12,6 +12,7 @@ PV = "0.5.1+git${SRCPV}"
 SRCREV = "adfddb3486276a5ed2f5008c9e43a811e1271cc9"
 SRC_URI = "git://github.com/profusion/lightmediascanner.git \
            file://id3-plugin-support-out-of-tree-build.patch \
+           file://0001-Define-comparison_fn_t-for-non-glibc-systems.patch \
           "
 
 S = "${WORKDIR}/git"
