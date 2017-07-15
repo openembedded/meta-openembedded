@@ -18,7 +18,10 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://0001-buildsystem-do-not-assume-building-in-source-tree.patch \
            file://mediactl-pkgconfig.patch \
            file://export-mediactl-headers.patch \
-          "
+           file://0001-ir-ctl-Define-TEMP_FAILURE_RETRY-if-undefined.patch \
+           file://0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch \
+           file://0003-v4l2-ctl-Do-not-use-getsubopt.patch \
+           "
 SRC_URI[md5sum] = "89e1ed6c69c94e0489dc0a638c7841aa"
 SRC_URI[sha256sum] = "5a47dd6f0e7dfe902d94605c01d385a4a4e87583ff5856d6f181900ea81cf46e"
 
