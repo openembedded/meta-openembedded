@@ -77,8 +77,6 @@ do_install_append() {
 }
 
 do_configure_prepend() {
-    export CUSTOM_PROCPS_NAME=procps
-    export CUSTOM_PROCPS_LIBS=-L${STAGING_LIBDIR}/libprocps.so
     export CUSTOM_DNET_NAME=dnet
     export CUSTOM_DNET_LIBS=-L${STAGING_LIBDIR}/libdnet.so
 }
