@@ -12,8 +12,5 @@ RDEPENDS_${PN} += "xserver-xorg-module-exa"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
-SRC_URI[md5sum] = "dc79910c7b9e32321cefc7af250c7765"
-SRC_URI[sha256sum] = "0ea057ad7fc31caba2d4e46c7e418fe2b3c762b04fb8d382f53383397fd8391e"
-
-
-PNBLACKLIST[xf86-video-nouveau] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130657/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+SRC_URI[md5sum] = "717203cb87029cddcbccf7398f9ad8c3"
+SRC_URI[sha256sum] = "aede10fd395610a328697adca3434fb14e9afbd79911d6c8545cfa2c0e541d4c"
