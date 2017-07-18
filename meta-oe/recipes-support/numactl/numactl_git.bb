@@ -10,15 +10,18 @@ inherit autotools-brokensep ptest
 
 LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=5644cc3851cb2499f6c48e52fe198bd9"
 
-SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
+SRCREV = "ea3a70681c2f523fe58e1d44527f478ca76db74e"
+PV = "2.0.11+git${SRCPV}"
+
+SRC_URI = "git://github.com/numactl/numactl \
     file://fix-null-pointer.patch \
     file://Fix-the-test-output-format.patch \
     file://Makefile \
     file://run-ptest \
     file://0001-define-run-test-target.patch \
 "
-SRC_URI[md5sum] = "d3bc88b7ddb9f06d60898f4816ae9127"
-SRC_URI[sha256sum] = "450c091235f891ee874a8651b179c30f57a1391ca5c4673354740ba65e527861"
+
+S = "${WORKDIR}/git"
 
 # ARM does not currently support NUMA
 COMPATIBLE_HOST = "^((?!arm).*)$"
