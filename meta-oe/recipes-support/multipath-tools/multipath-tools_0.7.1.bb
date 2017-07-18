@@ -45,6 +45,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
            file://0012-multipath-tools-modify-Makefile.inc-for-cross-compil.patch \
            file://0013-Always-use-devmapper.patch \
            file://0014-Always-use-devmapper-for-kpartx.patch \
+           file://0001-kpartx-include-limits.h-for-PATH_MAX.patch \
            "
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
