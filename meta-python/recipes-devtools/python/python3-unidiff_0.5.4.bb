@@ -1,2 +1,2 @@
 require python-unidiff.inc
-inherit setuptools
+inherit setuptools3
