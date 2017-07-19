@@ -1,4 +1,4 @@
-inherit pypi setuptools3
+inherit setuptools3
 require python-requests.inc
 
 # Add the runtime depends for selectors.py
