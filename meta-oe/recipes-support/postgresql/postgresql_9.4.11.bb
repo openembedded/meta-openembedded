@@ -7,5 +7,9 @@ SRC_URI += "\
     file://not-check-libperl.patch \
 "
 
+do_compile_prepend_libc-musl() {
+    sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
+}
+
 SRC_URI[md5sum] = "2fee03f2034034dbfcb3321a0bb0f829"
 SRC_URI[sha256sum] = "e3eb51d045c180b03d2de1f0c3af9356e10be49448e966ca01dfc2c6d1cc9d23"
