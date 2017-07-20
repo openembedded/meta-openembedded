@@ -11,16 +11,21 @@ HOMEPAGE = "http://www.openl2tp.org/"
 SECTION = "console/network"
 LICENSE = "GPLv2+"
 
-SRC_URI = "\
-        https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-        file://ippool_usl_timer.patch \
-        file://ippool_parallel_make_and_pic.patch \
-        file://ippool_init.d.patch \
-        file://always_syslog.patch \
-        file://makefile-add-ldflags.patch \
-        file://runtest.sh \
-        file://ippool.service \
-        "
+SRC_URI = "https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+           file://runtest.sh \
+           file://ippool.service \
+           file://ippool_usl_timer.patch \
+           file://ippool_parallel_make_and_pic.patch \
+           file://ippool_init.d.patch \
+           file://always_syslog.patch \
+           file://makefile-add-ldflags.patch \
+           file://0001-usl_timer-Check-for-return-value-of-write-API.patch \
+           file://0001-Respect-flags-from-env.patch \
+"
+SRC_URI_append_libc-musl = "\
+           file://0002-link-with-libtirpc.patch \
+           file://0003-musl-fixes.patch \
+           "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
 SRC_URI[md5sum] = "e2401e65db26a3764585b97212888fae"
@@ -29,6 +34,7 @@ SRC_URI[sha256sum] = "d3eab7d6cad5da8ccc9d1e31d5303e27a39622c07bdb8fa3618eea3144
 inherit systemd
 
 DEPENDS = "readline ppp ncurses gzip-native"
+DEPENDS_append_libc-musl = " libtirpc"
 RDEPENDS_${PN} = "rpcbind"
 
 EXTRA_OEMAKE = "CC='${CC}' AS='${AS}' LD='${LD}' AR='${AR}' NM='${NM}' STRIP='${STRIP}'"
@@ -36,6 +42,8 @@ EXTRA_OEMAKE += "PPPD_VERSION=${PPPD_VERSION} SYS_LIBDIR=${libdir}"
 # enable self tests
 EXTRA_OEMAKE += "IPPOOL_TEST=y"
 
+CPPFLAGS += "${SELECTED_OPTIMIZATION}"
+CPPFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
 
 SYSTEMD_SERVICE_${PN} = "ippool.service"
 SYSTEMD_AUTO_ENABLE = "disable"
@@ -48,9 +56,6 @@ do_compile_prepend() {
 
     sed -i -e "s:-I/usr/include/pppd:-I=/usr/include/pppd:" ${S}/pppd/Makefile
 
-    # ignore the OPT_CFLAGS?= in Makefile,
-    # it should be in CFLAGS from env
-    export OPT_CFLAGS=
 }
 
 
