@@ -1,0 +1,44 @@
+From 6e7689bced8ef56cfb5969560d23706f8e039807 Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Mon, 11 Apr 2016 23:01:19 -0400
+Subject: [PATCH] tweak native language support
+
+- Only support en_GB only.
+
+Upstream-Status: Inappropriate [oe specific]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ Makefile | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index d0a9784..db152c4 100644
+--- a/Makefile
++++ b/Makefile
+@@ -24,7 +24,7 @@ test:
+ 	PYTHONPATH=. python $(TESTSUITE) -v
+ 
+ install:
+-	python setup.py install --root=$(DESTDIR)
++	python setup.py install --root=$(DESTDIR) --install-lib=${PYTHON_SITEPACKAGES_DIR} --prefix=${prefix}
+ 	$(MAKE) -C po install
+ 
+ ChangeLog:
+@@ -61,6 +61,13 @@ rpmlog:
+ 	@git log --pretty="format:- %s (%ae)" $(TAG).. |sed -e 's/@.*)/)/'
+ 	@echo
+ 
++po-empty:
++	for lingua in "en_GB" ; do \
++		[ -f po/$$lingua.po ] || \
++		msginit -i po/$(PKGNAME).pot -o po/$$lingua.po -l $$lingua --no-translator || \
++		exit 1 ; \
++	done
++
+ potfile:
+ 	$(MAKE) -C po potfile
+ 
+-- 
+1.9.1
+
