@@ -11,7 +11,6 @@ DEPENDS = " \
     gtk+ \
     babl \
     gegl \
-    libart-lgpl \
     jpeg \
     libpng \
     libexif \
