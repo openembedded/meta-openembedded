@@ -13,6 +13,8 @@ SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "501d11c243bd8c6c00650474cd2afaab"
 SRC_URI[sha256sum] = "da416914812a77e5f4d82b81deb8c25799fd3228d27d52f7bf89a501b1857dda"
 
+CVE_PRODUCT = "udisks"
+
 inherit autotools systemd gtk-doc gobject-introspection
 
 S = "${WORKDIR}/udisks-${PV}"
