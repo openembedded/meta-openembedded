@@ -65,6 +65,7 @@ readelf = '${HOST_PREFIX}readelf'
 pkgconfig = 'pkg-config'
 
 [properties]
+needs_exe_wrapper = true
 c_args = [${@meson_array('MESON_C_ARGS', d)}]
 c_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
 cpp_args = [${@meson_array('MESON_C_ARGS', d)}]
