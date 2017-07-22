@@ -27,9 +27,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 
-do_configure() {
+do_configure_prepend() {
     ./boot.sh
-    oe_runconf
 }
 
 do_install_append() {
