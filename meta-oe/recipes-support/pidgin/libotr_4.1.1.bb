@@ -9,7 +9,7 @@ SRC_URI = "http://www.cypherpunks.ca/otr/${BP}.tar.gz \
            file://sepbuild.patch \
 "
 
-SRC_URI[md5sum] = "00979dca82d70383fcd1b01f3974363c"
-SRC_URI[sha256sum] = "3f911994409898e74527730745ef35ed75c352c695a1822a677a34b2cf0293b4"
+SRC_URI[md5sum] = "dac5a8778a35f674c046ddf5d97e4d81"
+SRC_URI[sha256sum] = "8b3b182424251067a952fb4e6c7b95a21e644fbb27fbd5f8af2b2ed87ca419f5"
 
 inherit autotools pkgconfig
