@@ -15,8 +15,8 @@ PYPI_PACKAGE = "python-ldap"
 inherit pypi setuptools
 
 LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
-SRC_URI[md5sum] = "7c46c8a04acc227a778c7900c87cdfc7"
-SRC_URI[sha256sum] = "5810f1b5a9ae9255df99fb9c2dcab7352fed325687efda56c0faae1a82c5e3cb"
+SRC_URI[md5sum] = "18db2d009150ec1864710fea3ed76173"
+SRC_URI[sha256sum] = "6d430ecf040f2fc704ee316d3390cb1f5419c191371e1e131baef54a0e42cef0"
 
 do_configure_prepend() {
     sed -i -e 's:^library_dirs =.*::' setup.cfg
