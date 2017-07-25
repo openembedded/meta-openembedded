@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 
 inherit gnome bash-completion gettext
 
-DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2"
+DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit shadow-native"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
@@ -58,3 +58,9 @@ PACKAGECONFIG[fuse] = "--enable-fuse, --disable-fuse, fuse"
 
 # libcdio-paranoia recipe doesn't exist yet
 PACKAGECONFIG[cdda] = "--enable-cdda, --disable-cdda, libcdio-paranoia"
+
+# Fix up permissions on polkit rules.d to work with rpm4 constraints
+do_install_append() {
+	chmod 700 ${D}/${datadir}/polkit-1/rules.d
+	chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+}
