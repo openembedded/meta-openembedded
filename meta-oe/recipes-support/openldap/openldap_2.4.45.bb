@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # basically BSD.  opensource.org does not record this license
 # at present (so it is apparently not OSI certified).
 LICENSE = "OpenLDAP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=c933fba6d89fda89f58df1e086e3f2e7 \
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25fd3721960f39128cd15a749fd21139 \
                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
 "
 SECTION = "libs"
@@ -25,11 +25,10 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://slapd.service \
     file://thread_stub.patch \
     file://openldap-CVE-2015-3276.patch \
-    file://openldap-CVE-2017-9287.patch \
 "
 
-SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
-SRC_URI[sha256sum] = "d7de6bf3c67009c95525dde3a0212cc110d0a70b92af2af8e3ee800e81b88400"
+SRC_URI[md5sum] = "00ff8301277cdfd0af728a6927042a13"
+SRC_URI[sha256sum] = "cdd6cffdebcd95161a73305ec13fc7a78e9707b46ca9f84fb897cd5626df3824"
 
 DEPENDS = "util-linux groff-native"
 
