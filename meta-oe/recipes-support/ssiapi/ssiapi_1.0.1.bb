@@ -18,7 +18,8 @@ SRC_URI = "http://sourceforge.net/projects/irstessi/files/${BPN}.${PV}.tgz \
            file://0005-engine-Define-SENTINEL.patch \
            file://0006-tools-Add-missing-includes-and-use-realpath-instead-.patch \
            file://configure-cflags.patch \
-"
+           file://0001-ssieventmonitor-ordered-comparison-between-pointers-.patch \
+           "
 SRC_URI[md5sum] = "02f16d7cbd30d28034093212906591f5"
 SRC_URI[sha256sum] = "e10d283b0f211afb8ebd0bde87c097769613d30a052cdf164753e35e803264c7"
 
