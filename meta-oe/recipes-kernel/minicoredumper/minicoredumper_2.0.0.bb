@@ -16,7 +16,8 @@ PR .= "+git${SRCPV}"
 SRC_URI = "git://github.com/Linutronix/minicoredumper-debian;branch=unstable \
            file://minicoredumper.service \
            file://minicoredumper.init \
-"
+           file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
+           "
 
 S = "${WORKDIR}/git"
 
