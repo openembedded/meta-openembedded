@@ -5,19 +5,21 @@ SECTION = "network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r9"
+DEPENDS = "unzip-native libpcre openssl mysql5 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
-DEPENDS = "libpcre openssl mysql5 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-
-SRC_URI = "http://mirror.aarnet.edu.au/pub/${BPN}/1.2/${PV}/${BP}.tar.gz \
+SRCREV = "75f041e2255e6dd0692db2f14611c2647dbe8425"
+PV = "1.2.104+git${SRCPV}"
+SRC_URI = "git://github.com/cherokee/webserver \
            file://cherokee.init \
            file://cherokee.service \
            file://cherokee-install-configured.py-once.patch \
+           file://0001-configure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch \
+           file://0001-make-Do-not-build-po-files.patch \
 "
-SRC_URI[md5sum] = "21b01e7d45c0e82ecc0c4257a9c27feb"
-SRC_URI[sha256sum] = "042b5687b1a3db3ca818167548ce5d32c35e227c6640732dcb622a6f4a078b7d"
 
-inherit autotools pkgconfig binconfig update-rc.d systemd
+S = "${WORKDIR}/git"
+
+inherit autotools-brokensep pkgconfig binconfig update-rc.d systemd pythonnative
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 PACKAGECONFIG[ffmpeg] = "--with-ffmpeg,--without-ffmpeg,libav"
