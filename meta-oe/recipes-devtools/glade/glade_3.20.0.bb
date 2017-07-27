@@ -9,7 +9,7 @@ DEPENDS = "gtk+ gtk+3 glib-2.0 libxml2 intltool-native \
 "
 
 
-inherit autotools pkgconfig pythonnative gnomebase gobject-introspection
+inherit autotools pkgconfig gnomebase gobject-introspection
 
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
            file://remove-yelp-help-rules-var.patch \
@@ -22,6 +22,4 @@ EXTRA_OECONF += "--disable-man-pages"
 FILES_${PN} += "${datadir}/* ${libdir}/glade/modules/libgladegtk.so"
 FILES_${PN}-dev += "${libdir}/glade/modules/libgladegtk.la"
 FILES_${PN}-dbg += "${libdir}/glade/modules/.debug/libgladegtk.so"
-
-PYTHON_PN = "python"
 
