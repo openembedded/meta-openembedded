@@ -7,8 +7,15 @@ different configuration. It is used by several ISPs to provide \
 L2TP services and by corporations to implement L2TP VPNs."
 HOMEPAGE = "http://www.openl2tp.org/"
 SECTION = "net"
-LICENSE = "GPL-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585"
+
+# cli and usl use license LGPL-2.1
+LICENSE = "GPL-2.0 & LGPL-2.1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
+                    file://LICENSE;md5=f8970abd5ea9be701a0deedf5afd77a5 \
+                    file://cli/LICENSE;md5=9c1387a3c5213aa40671438af3e00793 \
+                    file://usl/LICENSE;md5=9c1387a3c5213aa40671438af3e00793 \
+                    "
+
 DEPENDS = "popt flex readline"
 
 SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
