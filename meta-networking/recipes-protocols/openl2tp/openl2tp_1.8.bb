@@ -27,6 +27,10 @@ SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
            file://0002-cli-include-fcntl.h-for-O_CREAT-define.patch \
            file://0003-cli-Define-_GNU_SOURCE-for-getting-sighandler_t.patch \
            file://0001-l2tp_api-Included-needed-headers.patch \
+           file://openl2tpd-initscript-fix.patch \
+           file://openl2tpd-initscript-fix-sysconfig.patch \
+           file://openl2tpd-initscript-fix-warning.patch \
+           file://openl2tpd.service \
            "
 
 SRC_URI_append_libc-musl = "\
@@ -36,7 +40,10 @@ SRC_URI_append_libc-musl = "\
 SRC_URI[md5sum] = "e3d08dedfb9e6a9a1e24f6766f6dadd0"
 SRC_URI[sha256sum] = "1c97704d4b963a87fbc0e741668d4530933991515ae9ab0dffd11b5444f4860f"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools-brokensep pkgconfig systemd
+
+SYSTEMD_SERVICE_${PN} = "openl2tpd.service"
+SYSTEMD_AUTO_ENABLE = "disable"
 
 DEPENDS_append_libc-musl = " libtirpc"
 CPPFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
@@ -58,3 +65,23 @@ do_compile_prepend() {
         -e 's:CPPFLAGS-y:CPPFLAGS:g' \
         ${S}/Makefile
 }
+
+do_install_append () {
+    install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/default
+    install -m 0755 ${S}/etc/rc.d/init.d/openl2tpd ${D}${sysconfdir}/init.d/openl2tpd
+    install -m 0755 ${S}/etc/sysconfig/openl2tpd ${D}${sysconfdir}/default/openl2tpd
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -D -m 0644 ${WORKDIR}/openl2tpd.service ${D}${systemd_system_unitdir}/openl2tpd.service
+        sed -i -e 's,@STATEDIR@,${localstatedir},g' \
+               -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+               -e 's,@SBINDIR@,${sbindir},g' \
+               -e 's,@BINDIR@,${bindir},g' \
+               -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
+               -e 's,@BASE_BINDIR@,${base_bindir},g' \
+               ${D}${systemd_system_unitdir}/openl2tpd.service
+    fi
+}
+
+RDEPENDS_${PN} = "ppp ppp-l2tp"
