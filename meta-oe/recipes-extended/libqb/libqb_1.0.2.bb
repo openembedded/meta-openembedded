@@ -11,7 +11,7 @@ inherit autotools pkgconfig
 
 PV .= "+git${SRCPV}"
 
-SRCREV = "0a329683a76bc6aeb36f20f2bf6b43ba0440c4dc"
+SRCREV = "608de6d59a3de0eef0fbcbd8f284acbc018daa9a"
 SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
            file://0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch \
           "
