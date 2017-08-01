@@ -8,18 +8,17 @@ LICENSE = "GPLv3+ & SGIv1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
                     file://COPYING.SGI;beginline=5;md5=269cdab4af6748677acce51d9aa13552"
 
-DEPENDS = "libpng jpeg"
+DEPENDS = "libpng jpeg udev"
 
-PV = "2014.03+${SRCPV}"
+PV = "2017.07+${SRCPV}"
 
 COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
 
 SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
     file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
-    file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch \
     file://Fix-configure-for-sqrt-check.patch \
 "
-SRCREV = "9b1070fe9c5cf908f323909d3c8cbed08022abe8"
+SRCREV = "182dcbffe5c8483eadff025b429ee1aacc69c6c2"
 
 S = "${WORKDIR}/git"
 
