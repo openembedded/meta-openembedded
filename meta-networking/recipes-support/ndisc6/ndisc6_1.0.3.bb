@@ -12,8 +12,8 @@ RDEPENDS_${PN}-misc += "perl"
 
 SRC_URI = "http://www.remlab.net/files/ndisc6/ndisc6-${PV}.tar.bz2 \
 "
-SRC_URI[md5sum] = "50cb4c19606cf6ff2b7388e71832f579"
-SRC_URI[sha256sum] = "6acec8a0cb9efa3ac98456f46c3016aeec0598b0c7557c95242b5228ad62ca7a"
+SRC_URI[md5sum] = "21afdaa3a5a5c1ce50eb7f2b7d795989"
+SRC_URI[sha256sum] = "0f41d6caf5f2edc1a12924956ae8b1d372e3b426bd7b11eed7d38bc974eec821"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
