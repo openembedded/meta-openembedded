@@ -137,19 +137,4 @@ pkg_postrm_uim-skk() {
     fi
 }
 
-pkg_postinst_uim-common() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --path /etc/uim --register \
-            tutcode tcode hangul viqr \
-            ipa-x-sampa latin byeoru
-    fi
-}
-
-pkg_prerm_uim-common() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --path /etc/uim --register \
-        tutcode tcode hangul viqr ipa-x-sampa latin byeoru
-    fi
-}
-
 BBCLASSEXTEND = "native"
