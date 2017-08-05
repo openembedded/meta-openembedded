@@ -18,6 +18,7 @@ SRC_URI[sha256sum] = "d256f075f018b4a3cb0d165ed6151fda4ba7db1621727e0eb54569b6e2
 
 DEPENDS_class-target = "anthy-native"
 RDEPENDS_${PN}_class-target = "libanthy0"
+PROVIDES_class-target = "libanthy-dev"
 
 inherit autotools pkgconfig
 
