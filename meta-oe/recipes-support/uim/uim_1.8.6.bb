@@ -21,7 +21,8 @@ RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0 glibc-utils glibc-gconv-euc-jp
 
 LEAD_SONAME = "libuim.so.1"
 
-inherit autotools pkgconfig gettext qemu
+inherit autotools pkgconfig gettext qemu gtk-immodules-cache
+GTKIMMODULES_PACKAGES = "uim-gtk2.0 uim-gtk3"
 
 EXTRA_OECONF += "--disable-emacs \
     --without-scim \
@@ -118,10 +119,6 @@ pkg_prerm_uim-anthy() {
     else
 		uim-module-manager --path ${datadir}/uim --unregister anthy
     fi
-}
-
-pkg_postinst_uim-gtk2.0() {
-    gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
 }
 
 pkg_postinst_uim-skk() {
