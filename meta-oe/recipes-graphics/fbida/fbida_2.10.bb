@@ -12,6 +12,9 @@ DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
 
 SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
 	   file://0001-Avoid-using-host-path.patch \
+	   file://fix-preprocessor.patch \
+           file://support-jpeg-turbo.patch \
+           file://use-jpeg-turbo.patch \
 	   "
 SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
 SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
@@ -34,7 +37,7 @@ PACKAGECONFIG[lirc] = ",,lirc"
 do_compile() {
     sed -i -e 's# fbgs# \$(srcdir)/fbgs#; s#-Ijpeg#-I\$(srcdir)/jpeg#; s# jpeg/# \$(srcdir)/jpeg/#' ${S}/GNUmakefile
     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
-    sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
+    sed -i -e 's: cpp: ${CPP}:' ${S}/GNUmakefile
 
     # Be sure to respect preferences (force to "no")
     # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
