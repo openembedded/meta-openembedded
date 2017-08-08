@@ -1,6 +1,9 @@
 inherit pypi setuptools3
 require python-twisted.inc
 
+SRC_URI += "file://0001-initsendmsg-Return-NULL-on-error.patch \
+           "
+
 RDEPENDS_${PN}-core = "python3-core python3-zopeinterface python3-lang"
 
 FILES_${PN}-core_append += " \
