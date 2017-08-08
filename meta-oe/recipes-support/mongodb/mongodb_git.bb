@@ -1,16 +1,18 @@
 SUMMARY = "mongodb"
-LICENSE = "AGPL-3.0 & Apache-2.0"
+LICENSE = "AGPL-3.0 & Apache-2.0 & Zlib"
 LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788 \
                     file://APACHE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-DEPENDS = "openssl libpcre libpcap zlib"
+DEPENDS = "openssl libpcre libpcap zlib python boost"
 
 inherit scons
 
-PV = "3.3.0+git${SRCPV}"
-SRCREV = "aacd231be0626a204cb40908afdf62c4b67bb0ad"
-SRC_URI = "git://github.com/mongodb/mongo.git;branch=master \
+PV = "3.4.6+git${SRCPV}"
+SRCREV = "c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5"
+SRC_URI = "git://github.com/mongodb/mongo.git;branch=v3.4 \
            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
+           file://0001-mongo-Add-using-std-string.patch \
+           file://0002-d_state.cpp-Add-missing-dependenncy-on-local_shardin.patch \
            "
 
 S = "${WORKDIR}/git"
