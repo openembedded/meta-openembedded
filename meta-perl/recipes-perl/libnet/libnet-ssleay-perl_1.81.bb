@@ -21,8 +21,8 @@ RDEPENDS_${PN} += "perl-module-carp \
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "b1e0fd96d7f3be57580377226ca5f089"
-SRC_URI[sha256sum] = "a541a66d59fc5f9bb7af09d3a0b68305e4c43ba9488b12915728fd282ea01b93"
+SRC_URI[md5sum] = "71932ce34d4db44de8d00399c3405792"
+SRC_URI[sha256sum] = "00cbb6174e628b42178e1445c9fd5a3c5ae2cfd6a5a43e03610ba14786f21b7d"
 
 S = "${WORKDIR}/Net-SSLeay-${PV}"
 
