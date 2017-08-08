@@ -10,12 +10,12 @@ SECTION = "libs"
 HOMEPAGE = "http://metapan.org/release/ExtUtils-ParseXS/"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://README;beginline=121;endline=130;md5=10ddb3a673b4c732022ac899968ea9cc"
+LIC_FILES_CHKSUM = "file://README;beginline=120;endline=129;md5=eb858f0e3b1b0bee0c05b86a474ae2b6"
 
 SRCNAME = "ExtUtils-ParseXS"
 SRC_URI = "${CPAN_MIRROR}/authors/id/S/SM/SMUELLER/${SRCNAME}-${PV}.tar.gz"
-SRC_URI[md5sum] = "e6be3f1d493e04ed805576104cf4328b"
-SRC_URI[sha256sum] = "30b60b8208fc9b7746ed934b678bb9618a8f28994dae8774548353a7b550371e"
+SRC_URI[md5sum] = "2ae41036d85e98e1369645724962dd16"
+SRC_URI[sha256sum] = "41def0511278a2a8ba9afa25ccab45b0453f75e7fd774e8644b5f9a57cc4ee1c"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
