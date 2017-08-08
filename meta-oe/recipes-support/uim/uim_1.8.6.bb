@@ -21,7 +21,7 @@ RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0 glibc-utils glibc-gconv-euc-jp
 
 LEAD_SONAME = "libuim.so.1"
 
-inherit autotools pkgconfig gettext
+inherit autotools pkgconfig gettext qemu
 
 EXTRA_OECONF += "--disable-emacs \
     --without-scim \
@@ -103,21 +103,20 @@ FILES_uim-skk = "${libdir}/uim/plugin/libuim-skk.* \
     ${datadir}/uim/skk*.scm \
 "
 
+PACKAGE_WRITE_DEPS += "qemu-native"
 pkg_postinst_uim-anthy() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --register anthy --path /etc/uim
-    fi
-}
-
-pkg_postrm_uim-anthy() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --path /etc/uim --unregister anthy
+    if test -n "$D"; then
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register anthy --path $D${datadir}/uim
+    else
+		uim-module-manager --register anthy --path ${datadir}/uim
     fi
 }
 
 pkg_prerm_uim-anthy() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --register anthy --path /etc/uim
+    if test -n "$D"; then
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister anthy
+    else
+		uim-module-manager --path ${datadir}/uim --unregister anthy
     fi
 }
 
@@ -126,14 +125,18 @@ pkg_postinst_uim-gtk2.0() {
 }
 
 pkg_postinst_uim-skk() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --register skk --path /etc/uim
+    if test -n "$D"; then
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register skk --path $D${datadir}/uim
+    else
+		uim-module-manager --register skk --path ${datadir}/uim
     fi
 }
 
 pkg_postrm_uim-skk() {
-    if [ -f /usr/bin/uim-module-manager ]; then
-        /usr/bin/uim-module-manager --path /etc/uim --unregister skk
+    if test -n "$D"; then
+        ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --path $D${datadir}/uim --unregister skk
+    else
+		uim-module-manager --path ${datadir}/uim --unregister skk
     fi
 }
 
