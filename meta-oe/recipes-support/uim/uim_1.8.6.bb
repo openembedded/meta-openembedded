@@ -43,7 +43,7 @@ do_install_append() {
     rm -rf ${D}/${datadir}/applications
 }
 
-PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-common uim-anthy libuim0 libuim-dev"
+PACKAGES =+ "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-anthy uim-common libuim0 libuim-dev"
 
 FILES_${PN} = "${bindir}/uim-help \
     ${libdir}/uim/plugin/libuim-* \
