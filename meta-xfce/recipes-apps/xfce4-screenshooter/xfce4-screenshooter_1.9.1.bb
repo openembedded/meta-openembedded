@@ -7,10 +7,8 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.0 libsoup-
 
 inherit xfce-app
 
-SRC_URI += "file://0001-Makefile.am-create-ouput-directory-for-desktop-file.patch"
-
-SRC_URI[md5sum] = "3a32ecc5566453a58f6a4ddd70649444"
-SRC_URI[sha256sum] = "9dce2ddfaa87f703e870e29bae13f3fc82a1b3f06b44f8386640e45a135f5f69"
+SRC_URI[md5sum] = "75e1501418f904769e4fd25eff6a3946"
+SRC_URI[sha256sum] = "e62b31d9cf06a7414a26400c2ebe7a2ae7c2b22aa60f997f25145ea9ebe6e0db"
 
 do_compile_prepend() {
     mkdir -p lib
