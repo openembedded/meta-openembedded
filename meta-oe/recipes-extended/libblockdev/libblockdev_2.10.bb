@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/rhinstaller/libblockdev;branch=master \
            file://0001-fix-configure-and-compile-failures.patch \
            file://0002-remove-python2-support.patch \
            file://0003-remove-dmraid-while-compiling-with-with-dm.patch \
+           file://0005-fix-a-clang-compiling-issue.patch \
 "
 SRC_URI_append_libc-musl = " \
            file://0004-fix-compile-failure-against-musl-C-library.patch \
