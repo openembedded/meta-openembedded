@@ -10,38 +10,52 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "70bbf17b133496bd7d54d034b0f94bd869e0e810"
-SRCREV_contrib = "86342522b0eb2b16fa851c020cc4e0fef4e010b7"
-SRCREV_ipp = "81a676001ca8075ada498583e4166079e5744668"
-SRCREV_bootdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+SRCREV_opencv = "87c27a074db9f6d9d60513f351daa903606ca370"
+SRCREV_contrib = "2a9d1b22ed76eb22fad1a5edf6faf4d05f207b13"
+SRCREV_ipp = "a62e20676a60ee0ad6581e217fe7e4bada3b95db"
+SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
-IPP_MD5 = "808b791a6eac9ed78d32a7666804320e"
 
-SRCREV_FORMAT = "opencv"
+def ipp_filename(d):
+    import re
+    arch = d.getVar('TARGET_ARCH', True)
+    if re.match("i.86$", arch):
+        return "ippicv_2017u2_lnx_ia32_20170418.tgz"
+    else:
+        return "ippicv_2017u2_lnx_intel64_20170418.tgz"
+
+def ipp_md5sum(d):
+    import re
+    arch = d.getVar('TARGET_ARCH', True)
+    if re.match("i.86$", arch):
+        return "f2cece00d802d4dea86df52ed095257e"
+    else:
+        return "808b791a6eac9ed78d32a7666804320e"
+
+IPP_FILENAME = "${@ipp_filename(d)}"
+IPP_MD5 = "${@ipp_md5sum(d)}"
+
+SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
-    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=ipp;name=ipp \
-    git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=bootdesc;name=bootdesc \
+    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20170418;destsuffix=ipp;name=ipp \
+    git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
-    file://useoeprotobuf.patch;patchdir=../contrib/ \
-    file://0001-Revert-cuda-fix-fp16-compilation.patch \
-    file://0002-Revert-check-FP16-build-condition-correctly.patch \
-    file://0001-Make-opencv-ts-create-share-library-intead-of-static.patch \
-    file://0001-To-fix-errors-as-following.patch \
-    file://0001-tracking-make-opencv_dnn-dependancy-optional.patch;patchdir=../contrib/ \
+    file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
+    file://0003-To-fix-errors-as-following.patch \
 "
 
-PV = "3.2+git${SRCPV}"
+PV = "3.3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
 do_unpack_extra() {
-    tar xzf ${WORKDIR}/ipp/ippicv/ippicv_linux_20151201.tgz -C ${WORKDIR}
+    tar xzf ${WORKDIR}/ipp/ippicv/${IPP_FILENAME} -C ${WORKDIR}
     cp ${WORKDIR}/vgg/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
-    cp ${WORKDIR}/bootdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
+    cp ${WORKDIR}/boostdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
 }
 addtask unpack_extra after do_unpack before do_patch
 
@@ -64,7 +78,7 @@ PACKAGECONFIG ??= "python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb 
 
 PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
 PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
-PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DUPDATE_PROTO_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,protobuf protobuf-native,"
+PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DPROTOBUF_UPDATE_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,protobuf protobuf-native,"
 PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
 PACKAGECONFIG[freetype] = "-DBUILD_opencv_freetype=ON,-DBUILD_opencv_freetype=OFF,freetype,"
 PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
@@ -132,7 +146,6 @@ python populate_packages_prepend () {
         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale') and not pkg.endswith('-staticdev'):
             metapkg_rdepends.append(pkg)
     d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
-
 }
 
 PACKAGES_DYNAMIC += "^libopencv-.*"
