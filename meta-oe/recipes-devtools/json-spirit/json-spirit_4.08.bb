@@ -17,6 +17,8 @@ S = "${WORKDIR}/json_spirit_v${PV}"
 
 DEPENDS = "boost"
 
+LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
+
 inherit cmake
 
 FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibJsonSpirit.cmake"
