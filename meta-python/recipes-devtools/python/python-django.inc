@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.djangoproject.com/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
 
-SRC_URI[md5sum] = "f089f1f86d25f2b78f6cf36478d4edd1"
-SRC_URI[sha256sum] = "3c5b070482df4f9e5750539dc1824d353729ee423fd410c579b8cd3dea5b0617"
+SRC_URI[md5sum] = "c851d892cd5ad3a90808703c4f36e3fe"
+SRC_URI[sha256sum] = "abe86e67dda9897a1536a727ed57dbefb5a42b41943be3b116fe3edab4c07bb2"
 
 PYPI_PACKAGE = "Django"
 inherit pypi
