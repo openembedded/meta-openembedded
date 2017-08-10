@@ -12,9 +12,5 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cc572ccc4b18a4b7d13be5d01bc8213e"
 
-SRC_URI[md5sum] = "a182c1ef47e1c6c965771aa3029da16f"
-SRC_URI[sha256sum] = "e69220d4f6cbb02130f43f929350a80cf51033fde47dcb056fbda71e2dff2d5a"
-
-do_install_append() {
-	rm -r ${D}/${datadir}
-}
+SRC_URI[md5sum] = "749ddca1c70be1697fecc443fb1fdb16"
+SRC_URI[sha256sum] = "73977fc746b36cc41184dd43c3fe81323e7b8b06c2bb0826c4f59a20c56bb9f1"
