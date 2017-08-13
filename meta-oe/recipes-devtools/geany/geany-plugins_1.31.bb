@@ -25,8 +25,8 @@ DEPENDS = " \
 inherit autotools pkgconfig gtk-icon-cache
 
 SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "13f8e5d900b4911059385649b8dde887"
-SRC_URI[sha256sum] = "8adb90645d273d9549e1fa99b69ea87dc1fd612f7467eb18eee11a6b30c9ba5b"
+SRC_URI[md5sum] = "808f9048b77fd9704569ed2ba12a56e9"
+SRC_URI[sha256sum] = "76bd9e803db5a626b86669f08330cf95b8cc35057a1cdf65759bc00aef120e25"
 
 do_configure_prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
@@ -165,6 +165,11 @@ LIC_FILES_CHKSUM += "file://git-changebar/COPYING;md5=d32239bcb673463ab874e80d47
 LICENSE_${PN}-git-changebar = "GPLv3"
 FILES_${PN}-git-changebar = "${libdir}/geany/git-changebar.so"
 RDEPENDS_${PN}-git-changebar = "${PN}"
+
+PLUGINS += "${PN}-keyrecord"
+LIC_FILES_CHKSUM += "file://keyrecord/COPYING;md5=751419260aa954499f7abaabaa882bbe"
+FILES_${PN}-keyrecord = "${libdir}/geany/keyrecord.so"
+RDEPENDS_${PN}-keyrecord = "${PN}"
 
 PLUGINS += "${PN}-lineoperations"
 LIC_FILES_CHKSUM += "file://lineoperations/COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
