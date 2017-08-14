@@ -21,6 +21,3 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=py
 SRCREV = "b2787a818540e678c2f9c5dca0c6bbd65b8b55e5"
 
 inherit setuptools3
-
-PROVIDES = "pykickstart"
-RPROVIDES_${PN} = "pykickstart"
