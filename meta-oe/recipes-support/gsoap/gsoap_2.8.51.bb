@@ -1,18 +1,19 @@
 DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
 for the development of SOAP Web Services and clients."
 SECTION = "devel"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
+LICENSE = "GPL-2.0-with-OpenSSL-exception"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
+                    file://GPLv2_license.txt;md5=a33672dbe491b6517750a0389063508b"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip"
-SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
-SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
+           file://0001-Fix-out-of-tree-builds.patch \
+"
+SRC_URI[md5sum] = "212951d6e1435bb51fa4320f458809ea"
+SRC_URI[sha256sum] = "3e7bb24a9e492f5cb86daca34054c9787152f1d7b70add36b789d03816d5ffa1"
 
 inherit autotools
 
 BBCLASSEXTEND = "native"
-
-PR = "r1"
 
 S = "${WORKDIR}/${BPN}-2.8"
 
