@@ -30,8 +30,8 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
     file://radiusd.service \
     file://radiusd-volatiles.conf \
 "
-SRC_URI[md5sum] = "7d98dfafffac81f19cadccea5af89cea"
-SRC_URI[sha256sum] = "2771f6ecd6c816ac4d52b66bb8ae6781ca20e1e4984c5804fc4e67de3a807c59"
+SRC_URI[md5sum] = "0c81a4464ccf1d04f7ef1218a029d37a"
+SRC_URI[sha256sum] = "23267d8505e7b2909f5bdbf3938ca077c1fe122290dc969304d4f3b594f7e3ba"
 
 PARALLEL_MAKE = ""
 
@@ -58,7 +58,6 @@ EXTRA_OECONF = " --enable-strict-dependencies \
         --without-rlm_sql_oracle \
         --without-rlm_sql_sybase \
         --without-rlm_sqlhpwippool \
-        --without-dhcp \
         ac_cv_path_PERL=${bindir}/perl \
         ax_cv_cc_builtin_choose_expr=no \
         ax_cv_cc_builtin_types_compatible_p=no \
