@@ -119,9 +119,10 @@ do_install_ptest() {
 
 do_install_append() {
     install -d "${D}${sysconfdir}/init.d"
+    install -d "${D}${sysconfdir}/logrotate.d"
     install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
     install -m 644 ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-    install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.rsyslog
+    install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.d/logrotate.rsyslog
 }
 
 FILES_${PN} += "${bindir}"
