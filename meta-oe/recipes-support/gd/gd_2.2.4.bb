@@ -9,20 +9,14 @@ HOMEPAGE = "http://libgd.bitbucket.org/"
 
 SECTION = "libs"
 LICENSE = "GD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
+LIC_FILES_CHKSUM = "file://COPYING;md5=07384b3aa2e0d39afca0d6c40286f545"
+
 DEPENDS = "freetype libpng jpeg zlib tiff"
 
 SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
-           file://fix-gcc-unused-functions.patch \
-           file://CVE-2016-10166.patch \
-           file://CVE-2016-10167.patch \
-           file://CVE-2016-10168.patch \
-           file://.gitignore-the-new-test-case.patch \
-           file://Fix-290-TGA-RLE-decoding-is-broken.patch;apply=no \
-           file://CVE-2016-6906-1.patch;apply=no \
-           file://CVE-2016-6906-2.patch;apply=no"
+          "
 
-SRCREV = "46ceef5970bf3a847ff61d1bdde7501d66c11d0c"
+SRCREV = "de09874b15a4c88772db35ced842330f5de23e76"
 
 S = "${WORKDIR}/git"
 
@@ -38,19 +32,6 @@ EXTRA_OECONF += " --disable-rpath \
                 "
 
 EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
-
-do_git_apply () {
-       cd ${S}
-       if [ ! -f tests/tga/tga_read_rgb.png ]; then
-               git apply ${S}/../Fix-290-TGA-RLE-decoding-is-broken.patch
-               git apply ${S}/../CVE-2016-6906-1.patch
-               git apply ${S}/../CVE-2016-6906-2.patch
-       fi
-}
-
-do_patch_append() {
-    bb.build.exec_func('do_git_apply', d)
-}
 
 do_install_append() {
     # cleanup buildpaths from gdlib.pc
