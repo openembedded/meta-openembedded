@@ -97,7 +97,7 @@ FILES_${PN}-dbg += "${base_libdir}/multipath/.debug"
 PACKAGES =+ "${PN}-libs"
 FILES_${PN}-libs = "${base_libdir}/lib*.so.* \
                     ${base_libdir}/multipath/lib*.so*"
-RDEPENDS_${PN} += "${PN}-libs"
+RDEPENDS_${PN} += "${PN}-libs bash"
 
 PROVIDES += "device-mapper-multipath"
 RPROVIDES_${PN} += "device-mapper-multipath"
