@@ -13,7 +13,7 @@ SRCREV = "81443a9dc234cc275449dbc17867ad77ae189124"
 S = "${WORKDIR}/git"
 
 DEPENDS = "curl libxml2"
-RDEPENDS_${PN} = "curl"
+RDEPENDS_${PN} = "curl perl"
 
 inherit cmake
 
