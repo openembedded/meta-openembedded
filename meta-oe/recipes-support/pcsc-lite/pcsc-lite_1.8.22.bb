@@ -8,12 +8,12 @@ LICENSE_${PN}-dev = "BSD"
 LICENSE_${PN}-dbg = "BSD & GPLv3+"
 LICENSE_${PN}-spy = "GPLv3+"
 LICENSE_${PN}-spy-dev = "GPLv3+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
 DEPENDS = "udev"
 
-SRC_URI = "https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-${PV}.tar.bz2"
-SRC_URI[md5sum] = "4dcd22d20a6df8810fac5480cc320b6d"
-SRC_URI[sha256sum] = "f315047e808d63a3262c4a040f77548af2e04d1fd707e0c2759369b926fbbc3b"
+SRC_URI = "https://alioth.debian.org/frs/download.php/file/4225/pcsc-lite-${PV}.tar.bz2"
+SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
+SRC_URI[sha256sum] = "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
 
 
 inherit autotools systemd pkgconfig
