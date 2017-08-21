@@ -1,16 +1,18 @@
 SUMMARY = "Web-based MySQL administration interface"
 HOMEPAGE = "http://www.phpmyadmin.net"
-# Main code is GPLv2, libraries/tcpdf is under LGPLv3, js/jquery is under MIT
+# Main code is GPLv2, vendor/tecnickcom/tcpdf is under LGPLv3, js/jquery is under MIT
 LICENSE = "GPLv2 & LGPLv3 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
+                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c \
+                    file://js/jquery/MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9 \
+"
 
 SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
            file://apache.conf \
 "
 
-SRC_URI[md5sum] = "53c7a6a577d10de04a5dd21a05018542"
-SRC_URI[sha256sum] = "943bad38a95f21bb015bdb78c9c067e0ea7510c1b35d4b8e757cb89c413e3bac"
+SRC_URI[md5sum] = "4b0c5dbaf871eb86671613da3c31e6b3"
+SRC_URI[sha256sum] = "ed51669043f62494dc3bc21a87423373164ff63865a6c6bceaee535ef785f33e"
 
 S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 
