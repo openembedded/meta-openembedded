@@ -18,12 +18,13 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
            file://media-tomb.patch \
            file://remove-python2.3.patch \
            file://mysql-config-fix.patch \
+           file://webmin.service \
             "
 
 SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
 SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
 
-inherit perlnative update-rc.d
+inherit perlnative update-rc.d systemd
 
 do_configure() {
     # Remove binaries and plugins for other platforms
@@ -77,6 +78,11 @@ do_install() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 webmin-init ${D}${sysconfdir}/init.d/webmin
 
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/webmin.service ${D}${systemd_unitdir}/system
+    sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+           ${D}${systemd_unitdir}/system/webmin.service
+
     install -d ${D}${localstatedir}
     install -d ${D}${localstatedir}/webmin
 
@@ -116,6 +122,9 @@ do_install() {
 
 INITSCRIPT_NAME = "webmin"
 INITSCRIPT_PARAMS = "start 99 5 3 2 . stop 10 0 1 6 ."
+
+SYSTEMD_SERVICE_${PN} = "webmin.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
 # FIXME: some of this should be figured out automatically
 RDEPENDS_${PN} += "perl perl-module-socket perl-module-exporter perl-module-exporter-heavy perl-module-carp perl-module-strict"
