@@ -51,6 +51,9 @@ PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${ST
 
 # mozjs requires autoreconf 2.13
 do_configure() {
+    export HOST_CFLAGS="${BUILD_CFLAGS}"
+    export HOST_CXXFLAGS="${BUILD_CPPFLAGS}"
+    export HOST_LDFLAGS="${BUILD_LDFLAGS}"
     ( cd ${S}
       gnu-configize --force
       mv config.guess config.sub build/autoconf )
