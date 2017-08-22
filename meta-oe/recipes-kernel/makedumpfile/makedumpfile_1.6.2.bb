@@ -24,10 +24,9 @@ SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
-    file://0001-makedumpfile-Add-proper-format-string-to-print-a-str.patch \
 "
-SRC_URI[md5sum] = "16c0ae9902ae57be4a603a6ab1e86c53"
-SRC_URI[sha256sum] = "0b6e73106998670407887de9e1a505b3a2dbb2fb517a4b968a665eda8fb097ce"
+SRC_URI[md5sum] = "72be5bf973eed898c5127e3abc466583"
+SRC_URI[sha256sum] = "ee3d21cb4032a60bd2c802d1d8b21b9f399710e1574f8de8ead5ab50cd821a6d"
 
 SECTION = "base"
 
