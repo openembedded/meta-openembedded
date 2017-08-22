@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://src/thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dc
 
 DEPENDS += "base-passwd"
 
-SRC_URI = "http://opensource.dyc.edu/pub/sthttpd/sthttpd-${PV}.tar.gz \
+SRC_URI = "https://github.com/blueness/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
            file://thttpd.service \
            file://thttpd.conf \
            file://init"
 
-SRC_URI[md5sum] = "f7dd2d506dc5fad2ad8794b1800d2634"
-SRC_URI[sha256sum] = "97d660a881331e93818e872ce11536f461105d70a18dfc5de5895851c4b2afdb"
+SRC_URI[md5sum] = "3cda1b6c8c8542b1510eadb8e540d8b6"
+SRC_URI[sha256sum] = "a1ee2806432eaf5b5dd267a0523701f9f1fa00fefd499d5bec42165a41e05846"
 
 S = "${WORKDIR}/sthttpd-${PV}"
 
