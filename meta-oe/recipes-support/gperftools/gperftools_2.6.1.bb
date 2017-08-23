@@ -1,5 +1,5 @@
 SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
-HOMEPAGE = "http://code.google.com/p/gperftools/"
+HOMEPAGE = "https://github.com/gperftools/gperftools"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 DEPENDS += "libunwind"
