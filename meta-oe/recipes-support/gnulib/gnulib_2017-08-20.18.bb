@@ -10,9 +10,8 @@ HOMEPAGE = "http://www.gnu.org/software/gnulib/"
 SECTION = "devel"
 LICENSE = "LGPLv2+"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=e4cf3810f33a067ea7ccd2cd889fed21"
-SRCREV = "b6b3ed1fa4c6de12908a9f01d1689f156c3cd441"
-PV = "0.1.496+git${SRCPV}"
+LIC_FILES_CHKSUM = "file://COPYING;md5=56a22a6e5bcce45e2c8ac184f81412b5"
+SRCREV = "b23000de1e47c7d580e0e220966dd1ee42a5e5bc"
 
 SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
 "
