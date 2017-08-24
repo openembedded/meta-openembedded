@@ -150,7 +150,7 @@ PACKAGES += "${PN}-overlay-proxycache"
 # it was disabled for cross-compiling.
 CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\' -fPIC"
 
-LDFLAGS += "-pthread"
+LDFLAGS_append = " -pthread"
 
 do_configure() {
     cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
