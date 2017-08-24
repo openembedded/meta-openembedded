@@ -7,6 +7,7 @@ DEPENDS = "gnome-common-native glib-2.0 orbit2-native orbit2 intltool-native lib
 
 inherit gnomebase gtk-doc lib_package
 
+EXTRA_OECONF += "'PERL_PATH=${USRBINPATH}/env perl'"
 ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
 
 RDEPENDS_${PN}-bin = "${PN} perl"
