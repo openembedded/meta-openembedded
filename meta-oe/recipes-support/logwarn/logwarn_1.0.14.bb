@@ -22,6 +22,12 @@ lcl_default_state_dir = "${localstatedir}/lib/logwarn"
 
 CFLAGS += '-DDEFAULT_STATE_DIR=\""${lcl_default_state_dir}\""'
 
+CACHED_CONFIGUREVARS += " \
+    ac_cv_path_BASH_SHELL=${base_bindir}/bash \
+    ac_cv_path_CAT=${base_bindir}/cat \
+    ac_cv_path_RM=${base_bindir}/rm \
+    ac_cv_path_SED=${base_bindir}/sed \
+"
 
 # Make sure some files exist for autoreconf.
 #
@@ -43,4 +49,4 @@ PACKAGES += "${PN}-nagios"
 
 FILES_${PN}-nagios = "${nonarch_libdir}/nagios"
 
-RDEPENDS_${PN}-nagios += "bash"
+RDEPENDS_${PN}-nagios += "bash coreutils sed"
