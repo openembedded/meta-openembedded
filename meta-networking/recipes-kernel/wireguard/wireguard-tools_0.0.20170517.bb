@@ -24,4 +24,4 @@ FILES_${PN} = " \
     ${bindir} \
 "
 
-RDEPENDS_${PN} = "wireguard-module"
+RDEPENDS_${PN} = "wireguard-module bash"
