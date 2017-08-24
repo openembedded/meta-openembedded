@@ -3,8 +3,8 @@ HOMEPAGE= "http://www.pylint.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 
-SRC_URI[md5sum] = "31da2185bf59142479e4fa16d8a9e347"
-SRC_URI[sha256sum] = "a673984a8dd78e4a8b8cfdee5359a1309d833cf38405008f4a249994a8456719"
+SRC_URI[md5sum] = "27ee752cdcfacb05bf4940947e6b35c6"
+SRC_URI[sha256sum] = "ea6afb93a9ed810cf52ff3838eb3a15e2bf6a81b80de0eaede1ce442caa5ca69"
 
 inherit pypi
 
@@ -28,4 +28,5 @@ from pylint import run_pylint
 run_pylint()
 EOF
     chmod 755 ${D}${bindir}/pylint
+    sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
 }
