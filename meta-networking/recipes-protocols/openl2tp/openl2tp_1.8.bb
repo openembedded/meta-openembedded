@@ -84,4 +84,4 @@ do_install_append () {
     fi
 }
 
-RDEPENDS_${PN} = "ppp ppp-l2tp"
+RDEPENDS_${PN} = "ppp ppp-l2tp bash"
