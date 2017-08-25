@@ -10,6 +10,8 @@ inherit pypi
 SRC_URI[md5sum] = "b9338236e2836e8579ef140956189cc4"
 SRC_URI[sha256sum] = "2c9ef5494cfc1e41a9fff6544c5a2cd59ea5d401d9119a06ecf7fad6a2ffeb93"
 
+DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+
 RDEPENDS_${PN} = "\
                ${PYTHON_PN}-math \
                ${PYTHON_PN}-io \
