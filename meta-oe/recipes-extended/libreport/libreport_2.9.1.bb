@@ -11,7 +11,7 @@ DEPENDS = "xmlrpc-c xmlrpc-c-native intltool-native \
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 
-SRC_URI = "https://github.com/abrt/${BPN}/archive/${PV}/${BPN}}-%{PV}.tar.gz"
+SRC_URI = "https://github.com/abrt/${BPN}/archive/${PV}/${BPN}-${PV}.tar.gz"
 SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch \
             file://0003-without-build-plugins.patch \
