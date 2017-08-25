@@ -56,7 +56,10 @@ BASIC_AUTH = "DB SASL LDAP"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 BASIC_AUTH += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'PAM', '', d)}"
 
-EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}' --sysconfdir=${sysconfdir}/${BPN} --with-logdir=${localstatedir}/log/${BPN}"
+EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}' \
+                 --sysconfdir=${sysconfdir}/${BPN} \
+                 --with-logdir=${localstatedir}/log/${BPN} \
+                 'PERL=${USRBINPATH}/env perl'"
 
 export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
 
