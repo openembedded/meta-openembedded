@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/rhinstaller/efivar.git \
            file://allow-multi-definitions-for-native.patch \
            file://0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch \
            file://musl-strndupa.patch \
+           file://0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch \
            "
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
                                 file://0003-efivar-fix-for-cross-compile.patch \
