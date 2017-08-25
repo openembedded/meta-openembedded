@@ -10,19 +10,18 @@ DEPENDS = "pciutils zlib efivar"
 
 COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
-SRCREV = "75d25807ba81cb724964c989012611272c8f1f5d"
+SRCREV = "5c14da22802576a99ebb854f7aa174f796f7b031"
 SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
-           file://0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch \
           "
-
 S = "${WORKDIR}/git"
-
 
 inherit pkgconfig
 
-EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar` \
-                 -DEFIBOOTMGR_VERSION=\"$(RELEASE_MAJOR).$(RELEASE_MINOR)\" '"
+EXTRA_OEMAKE = "'EFIDIR=/' 'CC=${CC}' 'CFLAGS=${CFLAGS} -I${S}/src/include `pkg-config --cflags efivar`'"
 
+CFLAGS_append_toolchain-clang = " -Wno-error"
 do_install () {
-    install -D -p -m0755 src/efibootmgr ${D}/${sbindir}/efibootmgr
+    install -D -p -m0755 ${B}/src/efibootmgr ${D}/${sbindir}/efibootmgr
 }
+
+CLEANBROKEN = "1"
