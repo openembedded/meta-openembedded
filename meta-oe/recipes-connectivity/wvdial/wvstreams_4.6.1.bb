@@ -19,14 +19,14 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
            file://0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch \
            file://0004-wvcrash-Replace-use-of-basename-API.patch \
            file://0005-check-for-libexecinfo-during-configure.patch \
+           file://0001-build-fix-parallel-make.patch \
+           file://0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch \
            "
 
 SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
 SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
 
 inherit autotools-brokensep pkgconfig
-
-PARALLEL_MAKE = ""
 
 TARGET_CFLAGS_append = " -fno-tree-dce -fno-optimize-sibling-calls"
 
