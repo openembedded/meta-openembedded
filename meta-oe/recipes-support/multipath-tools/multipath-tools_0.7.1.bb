@@ -110,4 +110,4 @@ FILES_kpartx = "${base_sbindir}/kpartx \
                 ${nonarch_libdir}/udev/kpartx_id \
                "
 
-RDEPENDS_${PN} += "kpartx"
+RDEPENDS_${PN} += "bash kpartx"
