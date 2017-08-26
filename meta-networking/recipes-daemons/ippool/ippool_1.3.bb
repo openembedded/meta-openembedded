@@ -21,7 +21,10 @@ SRC_URI = "https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-$
            file://makefile-add-ldflags.patch \
            file://0001-usl_timer-Check-for-return-value-of-write-API.patch \
            file://0001-Respect-flags-from-env.patch \
-"
+           file://0001-read-returns-ssize_t.patch \
+           file://0002-Mark-first-element-of-a-string-as-null.patch \
+           file://0003-cli-Mark-return-of-strtol-as-long-int.patch \
+           "
 SRC_URI_append_libc-musl = "\
            file://0002-link-with-libtirpc.patch \
            file://0003-musl-fixes.patch \
