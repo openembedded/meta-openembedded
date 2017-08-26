@@ -15,10 +15,11 @@ PV = "2017.07+${SRCPV}"
 COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
 
 SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
-    file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
-    file://Fix-configure-for-sqrt-check.patch \
-"
-SRCREV = "182dcbffe5c8483eadff025b429ee1aacc69c6c2"
+           file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
+           file://Fix-configure-for-sqrt-check.patch \
+           file://0001-Fix-clang-warnings.patch \
+           "
+SRCREV = "ed20c633f1926d1dd78e3e89043c85a81302cbe6"
 
 S = "${WORKDIR}/git"
 
