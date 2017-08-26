@@ -26,19 +26,16 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://fix-symlink-install-error-in-cmdlang.patch \
            file://openipmi-no-openipmigui-man.patch \
            file://openipmi-remove-host-path-from-la_LDFLAGS.patch \
-           file://openipmi-don-t-rm-.libs.patch \
            file://ipmi-init-fix-the-arguments.patch \
-           file://makefile-add-ldflags.patch \
            file://do-not-install-pyc-and-pyo.patch \
            file://include_sys_types.patch \
            file://openipmi-helper \
            file://ipmi.service \
            "
 
-SRC_URI[md5sum] = "9a4e1f6bb073379c494839201ea10aee"
-SRC_URI[sha256sum] = "4988900043c35fcfa9b2bf275d6593904f6429221befb770ba6ecb5502108e55"
-
 S = "${WORKDIR}/OpenIPMI-${PV}"
+SRC_URI[md5sum] = "58f9542cbfcb5fe250b77cf88345e1ec"
+SRC_URI[sha256sum] = "bca39a27071278a8b74610181ede8df51e155e5e9031bc8eaa3699d1720292b4"
 
 inherit autotools-brokensep pkgconfig pythonnative perlnative update-rc.d systemd
 
@@ -46,7 +43,7 @@ EXTRA_OECONF = "--disable-static \
                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
                 --with-python='${STAGING_BINDIR_NATIVE}/python-native/python' \
                 --with-pythoninstall='${PYTHON_SITEPACKAGES_DIR}' \
-                --with-glibver=2.0 --with-glib12=no"
+                --with-glibver=2.0"
 
 PACKAGECONFIG ??= "gdbm"
 PACKAGECONFIG[gdbm] = "ac_cv_header_gdbm_h=yes,ac_cv_header_gdbm_h=no,gdbm,"
