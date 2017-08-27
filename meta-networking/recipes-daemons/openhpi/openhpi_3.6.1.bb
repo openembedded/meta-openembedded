@@ -20,7 +20,7 @@ SECTION = "net"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e3c772a32386888ccb5ae1c0ba95f1a4"
 
-DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs"
+DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs autoconf-archive-native"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://openhpi-netsnmp-cross-compile.patch \
@@ -36,6 +36,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
            file://openhpi-fix-alignment-issue.patch \
            file://0001-Fix-build-failures-with-gcc7.patch \
+           file://c++11.patch \
+           file://clang-c++11.patch \
            \
            file://openhpi.init \
            file://openhpid.service \
