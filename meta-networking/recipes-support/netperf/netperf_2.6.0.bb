@@ -6,18 +6,17 @@ LICENSE = "netperf"
 LICENSE_FLAGS = "non-commercial"
 
 
-SRC_URI="ftp://ftp.netperf.org/netperf/archive/netperf-${PV}.tar.bz2 \
+SRC_URI="https://github.com/HewlettPackard/netperf/archive/${PN}-${PV}.tar.gz \
          file://cpu_set.patch \
          file://vfork.patch \
          file://init"
-SRC_URI[md5sum] = "9654ffdfd4c4f2c93ce3733cd9ed9236"
-SRC_URI[sha256sum] = "cd8dac710d4273d29f70e8dbd09353a6362ac58a11926e0822233c0cb230323a"
-
+SRC_URI[md5sum] = "2d098d42825bad1723b3f6de750d0563"
+SRC_URI[sha256sum] = "560b9c0ef0eed826941f74708b3ac53d91ec13b0b8c565fb107a1b5e6d99ded4"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
 
 inherit update-rc.d autotools
 
-S = "${WORKDIR}/netperf-${PV}"
+S = "${WORKDIR}/${PN}-${PN}-${PV}"
 
 # cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
 CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
