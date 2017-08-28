@@ -38,6 +38,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://0001-Fix-build-failures-with-gcc7.patch \
            file://c++11.patch \
            file://clang-c++11.patch \
+           file://fix-narrowing-warning.patch \
            \
            file://openhpi.init \
            file://openhpid.service \
