@@ -11,16 +11,15 @@ DEPENDS = "xmlrpc-c xmlrpc-c-native intltool-native \
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 
-SRC_URI = "https://github.com/abrt/${BPN}/archive/${PV}/${BPN}-${PV}.tar.gz"
+SRC_URI = "git://github.com/abrt/libreport.git;protocol=https"
 SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch \
             file://0003-without-build-plugins.patch \
             file://0004-configure.ac-remove-prog-test-of-augparse.patch \
             file://0005-remove-python2-support.patch \
 "
-
-SRC_URI[md5sum] = "f732a63dcc68cf96f0df02bcfc5fccc7"
-SRC_URI[sha256sum] = "484e15759a079730608b708ea9ae74a045ebe74f35dbfe9c9c16834c4462bcd4"
+SRCREV = "cfff49f06d9d17e269d463ee71b3d94c8bfb0c58"
+S = "${WORKDIR}/git"
 
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "systemd"
