@@ -6,10 +6,10 @@ SECTION = "net"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=890b830b22fd632e9ffd996df20338f8"
 
-SRC_URI = "http://prdownloads.sourceforge.net/tcpreplay/${PV}/tcpreplay-${PV}.tar.gz"
+SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "3105b10b07dbc0b07ce2da07a2368359"
-SRC_URI[sha256sum] = "da483347e83a9b5df0e0dbb0f822a2d37236e79dda35f4bc4e6684fa827f25ea"
+SRC_URI[md5sum] = "3e65d5b872e441c6a0038191a3dc7ce9"
+SRC_URI[sha256sum] = "043756c532dab93e2be33a517ef46b1341f7239278a1045ae670041dd8a4531d"
 
 DEPENDS = "libpcap"
 
