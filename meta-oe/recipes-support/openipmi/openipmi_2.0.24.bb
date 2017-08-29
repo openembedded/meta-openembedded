@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://include_sys_types.patch \
            file://openipmi-helper \
            file://ipmi.service \
+           file://0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch \
            "
 
 S = "${WORKDIR}/OpenIPMI-${PV}"
