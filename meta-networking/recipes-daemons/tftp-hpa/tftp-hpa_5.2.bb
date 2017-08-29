@@ -26,6 +26,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
            file://add-error-check-for-disk-filled-up.patch \
            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
            file://fix-writing-emtpy-file.patch \
+           file://0001-__progname-is-provided-by-libc.patch \
            file://tftpd-hpa.socket \
            file://tftpd-hpa.service \
 "
