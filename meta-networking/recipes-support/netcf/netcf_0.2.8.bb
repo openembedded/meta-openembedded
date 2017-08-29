@@ -1,15 +1,15 @@
 SUMMARY = "netcf"
 DESCRIPTION = "netcf is a cross-platform network configuration library."
-HOMEPAGE = "https://fedorahosted.org/netcf/"
+HOMEPAGE = "https://pagure.io/netcf"
 SECTION = "libs"
 LICENSE = "LGPLv2.1"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fb919cc88dbe06ec0b0bd50e001ccf1f"
 
-SRCREV = "9158278ad35b46ce9a49b2e887483c6d8c287994"
-PV = "0.2.8+git${SRCPV}"
+SRCREV = "2c5d4255857531bc09d91dcd02e86545f29004d4"
+PV .= "+git${SRCPV}"
 
-SRC_URI = "git://git.fedorahosted.org/netcf.git;protocol=git \
+SRC_URI = "git://pagure.io/netcf.git;protocol=https \
 "
 
 DEPENDS += "augeas libnl libxslt libxml2 gnulib"
@@ -22,6 +22,8 @@ EXTRA_OECONF_append_class-target = " --with-driver=redhat"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
+
+EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
 
 do_configure_prepend() {
     currdir=`pwd`
