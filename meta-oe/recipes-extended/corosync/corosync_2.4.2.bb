@@ -23,9 +23,10 @@ INITSCRIPT_NAME = "corosync-daemon"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
-PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_unitdir}/system/,--with-systemddir="
+PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
 
-EXTRA_OECONF = "--with-upstartdir=%{_sysconfdir}/init"
+EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash"
+EXTRA_OEMAKE = "tmpfilesdir_DATA="
 
 do_configure_prepend() {
     ( cd ${S}
@@ -34,20 +35,17 @@ do_configure_prepend() {
 
 do_install_append() {
     install -d ${D}${sysconfdir}/sysconfig/
-    install -d ${D}/${sysconfdir}/init.d
     install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
-    install -m 0644 ${S}/init/corosync-notifyd.conf.in ${D}${sysconfdir}/sysconfig/corosync-notifyd.conf
-    install -m 0644 ${S}/init/corosync.conf.in ${D}${sysconfdir}/sysconfig/corosync.conf
-    install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/corosync
-    install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init.d/corosync-notifyd
+    install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
+
+    rm -rf "${D}${localstatedir}/run"
+
+    install -d ${D}${sysconfdir}/default/volatiles
+    echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-        install -d ${D}${systemd_unitdir}/system
-        install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unitdir}/system/corosync.service
-        install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${systemd_unitdir}/system/corosync-notifyd.service
-        sed -i -e 's,@INITWRAPPERSDIR@,${sysconfdir}/init.d,g' ${D}${systemd_unitdir}/system/corosync.service
-        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/corosync-notifyd.service
-        sed -i -e 's,@SBINDIR@,${base_sbindir},g' ${D}${systemd_unitdir}/system/corosync-notifyd.service
+        install -d ${D}${sysconfdir}/tmpfiles.d
+        echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
     fi
 }
 
