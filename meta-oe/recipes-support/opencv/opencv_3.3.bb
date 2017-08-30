@@ -46,6 +46,9 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
     file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
     file://0003-To-fix-errors-as-following.patch \
+    file://0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch \
+    file://0002-imgcodecs-refactoring-improve-code-quality.patch \
+    file://0003-imgproc-test-add-checks-for-remove-call.patch \
 "
 
 PV = "3.3+git${SRCPV}"
