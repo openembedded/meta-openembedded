@@ -23,8 +23,6 @@ SRC_URI[sha256sum] = "bbfcc88de502c39604878c395f516b03fff4eac63eb4f7f44c07d43383
 
 S = "${WORKDIR}/RCF-${PV}"
 
-LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
-
 inherit cmake dos2unix
 
 PACKAGECONFIG ?= "zlib openssl sf-serialization boost-filesystem boost-asio protobuf json dll static shared demos"
