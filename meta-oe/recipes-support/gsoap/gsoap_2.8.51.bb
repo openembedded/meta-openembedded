@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
            file://0001-Fix-out-of-tree-builds.patch \
-"
+           file://0001-stdgsoap2-Fix-build-with-musl.patch \
+           "
 SRC_URI[md5sum] = "212951d6e1435bb51fa4320f458809ea"
 SRC_URI[sha256sum] = "3e7bb24a9e492f5cb86daca34054c9787152f1d7b70add36b789d03816d5ffa1"
 
