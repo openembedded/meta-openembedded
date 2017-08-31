@@ -7,7 +7,9 @@ SECTION = "base"
 
 inherit autotools pkgconfig systemd
 
-SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
+SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
+           file://0001-Include-fcntl.h-for-F_-and-O_-defines.patch \
+          "
 SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
 SRC_URI[sha256sum] = "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
 
