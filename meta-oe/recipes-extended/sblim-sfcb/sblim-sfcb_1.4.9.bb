@@ -21,6 +21,7 @@ SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
            file://sblim-sfcb-1.4.8-default-ecdh-curve-name.patch \
            file://sblim-sfcb-1.4.9-fix-ftbfs.patch \
            file://0001-include-stdint.h-system-header-for-UINT16_MAX.patch \
+           file://0001-Replace-need-for-error.h-when-it-does-not-exist.patch \
 "
 
 SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
