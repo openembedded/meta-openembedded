@@ -30,6 +30,8 @@ inherit autotools-brokensep
 # these functions do not exist.
 #
 do_configure () {
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
     oe_runconf --without-openssl-header-check  --libexecdir=${base_libdir}/security \
                ac_cv_func_malloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes
 }
