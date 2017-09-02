@@ -13,8 +13,15 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v3.4 \
            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
            file://0001-mongo-Add-using-std-string.patch \
            file://0002-d_state.cpp-Add-missing-dependenncy-on-local_shardin.patch \
+           file://0001-Use-long-long-instead-of-int64_t.patch \
+           file://0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch \
+           file://0001-Use-strerror_r-only-on-glibc-systems.patch \
+           file://0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch \
+           file://0003-Conditionalize-glibc-specific-strerror_r.patch \
            "
-
+SRC_URI_append_libc-musl ="\
+           file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
+           "
 S = "${WORKDIR}/git"
 
 # Wiredtiger supports only 64-bit platforms
@@ -24,10 +31,13 @@ PACKAGECONFIG ??= "tcmalloc"
 # gperftools compilation fails for arm below v7 because of missing support of
 # dmb operation. So we use system-allocator instead of tcmalloc
 PACKAGECONFIG_remove_armv6 = "tcmalloc"
+PACKAGECONFIG_remove_libc-musl = "tcmalloc"
 
 #std::current_exception is undefined for arm < v6
 COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
 COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
+COMPATIBLE_MACHINE_armv7a = "(!.*armv7a).*"
+COMPATIBLE_MACHINE_armv7ve = "(!.*armv7ve).*"
 COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
 
@@ -48,6 +58,10 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
                  ${PACKAGECONFIG_CONFARGS} \
                  mongod mongos"
 
+do_configure_prepend() {
+        # tests use hex floats, not supported in plain C++
+        sed -e 's|-std=c++11|-std=gnu++11|g' -i ${S}/SConstruct
+}
 scons_do_compile() {
         ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
         die "scons build execution failed."
