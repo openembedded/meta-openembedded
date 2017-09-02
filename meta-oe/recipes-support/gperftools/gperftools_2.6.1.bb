@@ -10,6 +10,8 @@ SRC_URI = "git://github.com/gperftools/gperftools \
            file://0001-Use-ucontext_t-instead-of-struct-ucontext.patch \
            file://0001-fix-build-with-musl-libc.patch \
            file://0001-include-fcntl.h-for-loff_t-definition.patch \
+           file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
+           file://disable_libunwind_aarch64.patch \
            "
 
 inherit autotools
@@ -20,8 +22,6 @@ S = "${WORKDIR}/git"
 #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
 #   Segmentation fault (core dumped)
 COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
-# On aarch64, add this option to avoid system hanging when using libtcmalloc.so.
-EXTRA_OECONF_aarch64 += "--disable-libunwind"
 # Disable thumb1
 # {standard input}: Assembler messages:
 # {standard input}:434: Error: lo register required -- `ldr pc,[sp]'
