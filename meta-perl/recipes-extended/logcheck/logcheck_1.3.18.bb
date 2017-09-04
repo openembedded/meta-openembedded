@@ -7,6 +7,7 @@ filtering out "normal" entries. \
 Normal entries are entries which match one of the many included regular \
 expression files contain in the database."
 SECTION = "Applications/System"
+HOMEPAGE = "http://logcheck.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
