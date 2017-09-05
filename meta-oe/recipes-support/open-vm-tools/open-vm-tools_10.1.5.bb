@@ -94,3 +94,10 @@ do_configure_prepend() {
     export CUSTOM_DNET_NAME=dnet
     export CUSTOM_DNET_LIBS=-L${STAGING_LIBDIR}/libdnet.so
 }
+
+python() {
+    if 'networking-layer' not in d.getVar('BBFILE_COLLECTIONS').split() or \
+	'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
+        raise bb.parse.SkipRecipe('Requires meta-networking and meta-filesystems to be present.')
+}
+
