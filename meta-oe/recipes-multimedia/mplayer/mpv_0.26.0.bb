@@ -11,6 +11,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
 
+# While this item does not require it, it depends on ffmpeg which does
+LICENSE_FLAGS = "commercial"
+
 SRC_URI = " \
     https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
     http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf;subdir=${BPN}-${PV} \
