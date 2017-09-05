@@ -23,7 +23,9 @@ SRCREV = "ed20c633f1926d1dd78e3e89043c85a81302cbe6"
 
 S = "${WORKDIR}/git"
 
-inherit waf pkgconfig
+inherit waf pkgconfig distro_features_check
+
+REQUIRED_DISTRO_FEATURES += "opengl"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gl x11-gles2', '', d)} \
                   ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gl wayland-gles2', '', d)} \
