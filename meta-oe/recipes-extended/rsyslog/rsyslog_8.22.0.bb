@@ -25,6 +25,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
            file://CVE-2017-12588.patch \
+           file://0001-core-bugfix-segfault-after-configuration-errors.patch \
 "
 
 SRC_URI_append_libc-musl = " \
