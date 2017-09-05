@@ -16,10 +16,13 @@ RDEPENDS_${PN}-compiler = "protobuf-compiler"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=235c3195a3968524dc1524b4ebea0c0e"
-SRC_URI = "https://github.com/protobuf-c/protobuf-c/archive/v${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b884aeba4283309445a8e3b6e7322dd6"
-SRC_URI[sha256sum] = "2d708fb3c024b9e6e86df141faff802194f5db90a4b79e6d4aa6bd61dd983dd6"
+PV .= "+git${SRCPV}"
+SRCREV = "006d69bd8481738323c58af5cd4c8477d09eb9f5"
+
+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
+
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
