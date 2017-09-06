@@ -4,6 +4,10 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 
 inherit packagegroup
 
+# While this item does not require it, it depends on xfmpc and xfc4-mpc-plugin
+# that wants mpd which does
+LICENSE_FLAGS = "commercial"
+
 RDEPENDS_${PN} = " \
     parole \
     xfmpc \
