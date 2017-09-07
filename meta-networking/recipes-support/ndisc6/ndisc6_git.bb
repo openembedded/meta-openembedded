@@ -70,10 +70,3 @@ RDEPENDS_${PN}-tcptraceroute6 = "${PN}-rltraceroute6"
 RDEPENDS_${PN}-tracert6 = "${PN}-rltraceroute6"
 RDEPENDS_${PN}-misc += "perl"
 
-do_install_append () {
-    rm -rf ${D}${localstatedir}
-    # Enable SUID bit for applications that need it
-    chmod 4555 ${D}${bindir}/rltraceroute6
-    chmod 4555 ${D}${bindir}/ndisc6
-    chmod 4555 ${D}${bindir}/rdisc6
-}
