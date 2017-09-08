@@ -13,14 +13,13 @@ and ypdomainname. \
 
 SRC_URI = "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
            file://domainname.service \
-           file://yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-mapv4v6addr.patch \
-           file://alignment-cheat.patch \
-           file://0001-lib-yp_all_host.c-Fix-build-with-gcc-7.patch \
+           file://0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch \
+           file://0002-yp_dump_bindings.c-Include-string.h-for-memset.patch \
            "
-SRC_URI[md5sum] = "acebeecc11a73fb8097503670344834c"
-SRC_URI[sha256sum] = "812be817df3d4c25813552be336c6c6ad5aedaf65611b81af3ad9f98fb3c2e50"
+SRC_URI[md5sum] = "fb4a8bffb44ae5d3390351d67f320ef3"
+SRC_URI[sha256sum] = "137f19a986382b275bf4a2b1a69eb26689d6f4ac056ddaa21784d6b80eb98faa"
 
-DEPENDS = "libtirpc"
+DEPENDS = "libtirpc libnsl2"
 
 inherit autotools systemd
 SYSTEMD_SERVICE_${PN} = "domainname.service"
@@ -32,10 +31,9 @@ RCONFLICTS_${PN} += "${PN}-systemd"
 CACHED_CONFIGUREVARS += "ac_cv_prog_STRIP=/bin/true"
 
 EXTRA_OECONF = " \
-                --disable-rpath \
-                --libdir=${libdir}/yp-nis/ \
-                --includedir=${includedir}/yp-nis/ \
+                --disable-rpath --disable-domainname \
                "
+CFLAGS_append_libc-musl = " -Wno-error=\#warnings"
 
 FILES_${PN} += " ${libdir}/yp-nis/*.so.*.* ${libdir}/yp-nis/pkgconfig/"
 FILES_${PN}-dbg += " ${libdir}/yp-nis/.debug"
