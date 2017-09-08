@@ -35,11 +35,15 @@ do_compile_prepend() {
     sed -i -e s:-Werror::g ${S}/gcc.specs
 }
 
+do_compile_class-native() {
+    oe_runmake -C src makeguids
+}
+
 do_install() {
     oe_runmake install DESTDIR=${D}
 }
 
-do_install_append_class-native() {
+do_install_class-native() {
     install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
 }
 
