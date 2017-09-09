@@ -6,11 +6,13 @@ LICENSE_libhandle = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
 DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-           file://link_needed_libs.patch \
-           file://0001-define-__-prefixed-version-of-intXY_t-types.patch \
+           file://0001-xfsprogs-remove-double-underscore-integer-types.patch \
+           file://0001-xfs-remove-double-underscore-integer-types.patch \
+           file://remove_flags_from_build_flags.patch \
+           file://xfsprogs-4.12.0-fix_musl.patch \
            "
-SRC_URI[md5sum] = "f1f9b8c752347eefdb56483dafa0cefb"
-SRC_URI[sha256sum] = "c3a6d87b564d7738243c507df82276bed982265e345363a95f2c764e8a5f5bb2"
+SRC_URI[md5sum] = "e348b0e1d7bd1cd82d64b91ff37e727e"
+SRC_URI[sha256sum] = "b330ad8d737f4152ae511580102e2fc49212bb51dfb4b614084344abae46d0df"
 
 inherit autotools-brokensep
 
@@ -33,6 +35,7 @@ EXTRA_OECONF = "--enable-gettext=no \
                 ac_cv_lib_rt_lio_listio=yes \
 "
 
+DISABLE_STATIC = ""
 EXTRA_AUTORECONF += "-I ${S}/m4 --exclude=autoheader"
 
 PACKAGECONFIG ??= "readline blkid"
@@ -42,6 +45,7 @@ PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
 
 export DEBUG="-DNDEBUG"
 export BUILD_VERBOSE="1"
+export tagname="CC"
 
 EXTRA_OEMAKE = "DIST_ROOT='${D}'"
 
