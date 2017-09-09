@@ -18,6 +18,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
            file://0001-mkfifo-Implement-mkfifo.patch \
            file://0001-always-use-bfd-linker.patch \
            file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
+           file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
 "
 
 ARMPATCHES ?= ""
