@@ -2,12 +2,12 @@ SUMMARY = "Fast data collector for Embedded Linux"
 HOMEPAGE = "http://fluentbit.io"
 BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
 
-SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
-           file://0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch \
-           file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
+SRC_URI = "http://fluentbit.io/releases/0.12/fluent-bit-${PV}.tar.gz \
+           file://jemalloc.patch \
+           file://0001-fluent-bit-shared-Link-with-lpthread.patch \
            "
-SRC_URI[md5sum] = "7bce8091c41fb6412b7fe0185b3cb8d6"
-SRC_URI[sha256sum] = "93b1bdd14db20f2823cd31c6f1a2f3fcb7c94ec3e0c8daefabf130310b7fc4ed"
+SRC_URI[md5sum] = "6b4472cb7e7213a01425af9121576827"
+SRC_URI[sha256sum] = "8ec05365baea723033165687611b3bba3e67a77dce72e282e9f000f7acf9e37b"
 
 S = "${WORKDIR}/fluent-bit-${PV}"
 
