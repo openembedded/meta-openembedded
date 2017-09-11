@@ -50,7 +50,7 @@ do_configure () {
     ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
 }
 
-do_configure_prepend_toolchain-clang() {
+do_compile_prepend_toolchain-clang() {
     sed -i -e 's#$(KLIBCROSS)gcc#$(KLIBCROSS)clang#g' ${S}/Makefile
 }
 
