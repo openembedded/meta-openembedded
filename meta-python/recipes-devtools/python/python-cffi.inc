@@ -1,4 +1,5 @@
 SUMMARY = "Foreign Function Interface for Python calling C code"
+HOMEPAGE = "http://cffi.readthedocs.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
 DEPENDS += "libffi ${PYTHON_PN}-pycparser"
