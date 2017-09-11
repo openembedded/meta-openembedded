@@ -1,4 +1,5 @@
 SUMMARY = "Simple powerful teting with python"
+HOMEPAGE = "http://pytest.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
 
