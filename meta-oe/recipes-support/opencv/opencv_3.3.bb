@@ -49,8 +49,8 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch \
     file://0002-imgcodecs-refactoring-improve-code-quality.patch \
     file://0003-imgproc-test-add-checks-for-remove-call.patch \
+    file://0001-Dont-use-isystem.patch \
 "
-
 PV = "3.3+git${SRCPV}"
 
 S = "${WORKDIR}/git"
