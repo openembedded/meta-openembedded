@@ -1,4 +1,5 @@
 SUMMARY = "Library with cross-python path, ini-parsing, io, code, log facilities"
+HOMEPAGE = "http://py.readthedocs.io/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b506f3df287708b2f99588b5cc351091"
 
