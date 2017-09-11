@@ -1,4 +1,5 @@
 SUMMARY = "Parser of the C language, written in pure Python"
+HOMEPAGE = "https://github.com/eliben/pycparser"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
 
