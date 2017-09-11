@@ -1,4 +1,5 @@
 SUMMARY = "Simple module to parse ISO 8601 dates"
+HOMEPAGE = "http://pyiso8601.readthedocs.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
 
