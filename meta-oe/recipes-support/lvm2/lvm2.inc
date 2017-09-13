@@ -1,3 +1,4 @@
+HOMEPAGE = "https://www.sourceware.org/lvm2/"
 SECTION = "utils"
 DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
 LICENSE = "GPLv2 & LGPLv2"
