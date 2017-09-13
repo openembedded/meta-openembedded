@@ -1,3 +1,4 @@
+HOMEPAGE = "https://www.samba.org/"
 SECTION = "console/network"
 
 LICENSE = "GPL-3.0+ & LGPL-3.0+ & GPL-2.0+"
