@@ -18,6 +18,8 @@ SRC_URI[sha256sum] = "aa61896f93a6bbfe0161c21dcd67529ae8e1ec8c3ccf244523c52c4ad8
 # so we check the latest upstream from a directory that does get updated
 UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/"
 
+inherit perlnative gettext
+
 do_install() {
         install -d ${D}/${sysconfdir}/cron.daily ${D}/${sysconfdir}/cron.weekly
         install -d ${D}/${sysconfdir}/cron.monthly ${D}${sbindir} ${D}${bindir}
