@@ -1,4 +1,5 @@
 SUMMARY = "NetworkManager"
+HOMEPAGE = "https://wiki.gnome.org/Projects/NetworkManager"
 SECTION = "net/misc"
 
 LICENSE = "GPLv2+"
