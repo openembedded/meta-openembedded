@@ -15,10 +15,10 @@ PACKAGE_BEFORE_PN = "${PN}-compiler"
 RDEPENDS_${PN}-compiler = "protobuf-compiler"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=235c3195a3968524dc1524b4ebea0c0e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
 
 PV .= "+git${SRCPV}"
-SRCREV = "006d69bd8481738323c58af5cd4c8477d09eb9f5"
+SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
 
 SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
 
