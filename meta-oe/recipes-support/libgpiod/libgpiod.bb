@@ -1,21 +1,14 @@
 SUMMARY = "C library and tools for interacting with the linux GPIO character device"
-HOMEPAGE = "https://github.com/brgl/libgpiod"
 
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
-UPSTREAM_CHECK_URI = "git://github.com/brgl/libgpiod/releases"
+SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
 
-SRC_URI = "git://github.com/brgl/libgpiod.git"
+SRC_URI[md5sum] = "5f9d855352b1a5272cf6f1c2e20689d2"
+SRC_URI[sha256sum] = "6dfd6aeb544e8b7baf484a05c9ae0e67022c109362a41d87005393046b6beacf"
 
-SRCREV = "7ab5e53b69cce313ba87033a442cabd417f5d895"
-
-PV = "0.2+git${SRCPV}"
-
-S = "${WORKDIR}/git"
-
-SRC_URI[md5sum] = "68f039487e940c15bbfc50a10ab4715b"
-SRC_URI[sha256sum] = "7d7085d4e9cb811742ca8c5fe03458067efaeaa8abc23968d2e3c56bcc2d2ef8"
+PV = "0.3.1"
 
 inherit autotools pkgconfig
 
