@@ -6,13 +6,15 @@ supporting the Document Object Model (DOM) Level 2 API and an optional, \
 integrated mini web server for serving UPnP related documents."
 HOMEPAGE = "http://pupnp.sourceforge.net/"
 LICENSE = "BSD"
+
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/pupnp/${BP}.tar.bz2 \
-           file://sepbuildfix.patch \
-"
+PV = "1.8.2+git${SRCPV}"
+SRCREV = "56d6042abae861e8838a4e6b6b5b575b99e38f34"
+SRC_URI = "git://github.com/mrjimenez/pupnp.git;protocol=https"
 
-SRC_URI[md5sum] = "513adadb07fa039a8aeb0ceb7b7b0f6e"
-SRC_URI[sha256sum] = "af3f3c0846a1d75baeadae4aa5a2bda427567e2a1fb4559bf73ccff0a4f9a39b"
+S="${WORKDIR}/git"
 
 inherit autotools
+
+EXTRA_OECONF += "--enable-reuseaddr"
