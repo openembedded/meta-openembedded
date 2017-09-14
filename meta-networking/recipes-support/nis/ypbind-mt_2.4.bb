@@ -21,6 +21,7 @@ DEPENDS = " \
            yp-tools \
            ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
           "
+DEPENDS_append_libc-musl = " bsd-headers nss"
 RDEPENDS_${PN} += "yp-tools"
 
 # ypbind-mt now provides all the functionality of ypbind
@@ -30,9 +31,10 @@ PROVIDES += "ypbind"
 SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
            file://ypbind.init \
            file://ypbind.service \
-"
-SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
-SRC_URI[sha256sum] = "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b575199fa915559b7746"
+           file://0001-dns_hosts-Fix-build-with-musl.patch \
+           "
+SRC_URI[md5sum] = "1aeccd0d11c064d5d59c56941bca682b"
+SRC_URI[sha256sum] = "a2e1fa8fc992a12b289c229e00e38c20d59070c3bcf08babf40c692515c340e0"
 
 inherit systemd update-rc.d
 
@@ -41,6 +43,8 @@ INITSCRIPT_NAME = "ypbind"
 INITSCRIPT_PARAMS = "start 44 3 5 . stop 70 0 1 2 6 ."
 
 CACHED_CONFIGUREVARS = "ac_cv_prog_STRIP=/bin/true"
+
+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/nss3"
 
 do_install_append () {
     install -d ${D}${sysconfdir}/init.d
