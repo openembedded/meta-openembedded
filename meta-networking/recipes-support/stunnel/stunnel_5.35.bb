@@ -1,4 +1,5 @@
 SUMMARY = "Program for providing universal TLS/SSL tunneling service"
+HOMEPAGE = "http://www.stunnel.org/"
 DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
 SECTION = "net"
 LICENSE = "GPLv2"
