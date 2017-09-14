@@ -1,4 +1,5 @@
 SUMMARY = "The tdb library"
+HOMEPAGE = "http://tdb.samba.org/"
 SECTION = "libs"
 LICENSE = "LGPL-3.0+ & GPL-3.0+"
 
