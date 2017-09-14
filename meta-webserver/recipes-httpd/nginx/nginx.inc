@@ -72,7 +72,7 @@ do_configure () {
     --prefix=${prefix} \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
-    ${EXTRA_OECONF}
+    ${EXTRA_OECONF} ${PACKAGECONFIG_CONFARGS}
 }
 
 do_install () {
