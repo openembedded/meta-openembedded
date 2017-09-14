@@ -1,4 +1,5 @@
 SUMMARY = "Development package for building Applications that use numa"
+HOMEPAGE = "http://oss.sgi.com/projects/libnuma/" 
 DESCRIPTION = "Simple NUMA policy support. It consists of a numactl program \
 to run other programs with a specific NUMA policy and a libnuma to do \
 allocations with NUMA policy in applications."
