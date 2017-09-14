@@ -1,4 +1,5 @@
 SUMMARY = "Helper application and MIME type associations for file types"
+HOMEPAGE = "https://pagure.io/mailcap"
 DESCRIPTION = "The mailcap file is used by the metamail program. Metamail reads the \
 mailcap file to determine how it should display non-text or multimedia \
 material. Basically, mailcap associates a particular type of file \
