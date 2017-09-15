@@ -32,6 +32,8 @@ SRC_URI = " \
     file://define-shell-command.patch \
     file://implicit-declaration-function-strlcat-strlcopy.patch \
     file://fix-big-endian-build.patch \
+    file://0001-add-base64-implementation.patch \
+    file://0002-adb-Musl-fixes.patch \
     file://android-tools-adbd.service \
     file://.gitignore;subdir=git \
     file://adb.mk;subdir=${BPN} \
