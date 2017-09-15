@@ -22,10 +22,11 @@ SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-configure-Pass-linker-specific-options-with-Wl.patch \
            file://0001-configure-Disable-format-overflow-if-supported-by-gc.patch \
-           file://0001-Remove-unused-variables.patch \
+           file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
+           file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
 "
-SRC_URI[md5sum] = "08991fd467ae9dcea3c8747be8e3981e"
-SRC_URI[sha256sum] = "903478244afe37e329be93050f1d48fa18c84ea17862134c4217b920e267a04a"
+SRC_URI[md5sum] = "125bcd9aabd7412aedcbfbf73f4e6196"
+SRC_URI[sha256sum] = "3fb2239bb2c9328c8b45368ff8d8de979ea286a27edc9871d218200e88bb91cc"
 
 inherit autotools useradd systemd pkgconfig
 
