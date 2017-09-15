@@ -8,7 +8,7 @@ DEPENDS = "gmp nettle libidn zlib gnutls"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https"
 
-SRCREV = "02c3be4f5c39fec59d05cd8b75b08dbba04098ad"
+SRCREV = "fc512e337bfc7c92770246dbff5f482b879498b9"
 
 S = "${WORKDIR}/git"
 
