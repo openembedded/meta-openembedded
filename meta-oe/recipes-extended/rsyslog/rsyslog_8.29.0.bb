@@ -24,8 +24,6 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://use-pkgconfig-to-check-libgcrypt.patch \
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
-           file://CVE-2017-12588.patch \
-           file://0001-core-bugfix-segfault-after-configuration-errors.patch \
 "
 
 SRC_URI_append_libc-musl = " \
@@ -33,8 +31,8 @@ SRC_URI_append_libc-musl = " \
     file://0001-Include-sys-time-h.patch \
 "
 
-SRC_URI[md5sum] = "ad0f25f429aa2daa326732950a5eeb6c"
-SRC_URI[sha256sum] = "06e2884181333dccecceaca82827ae24ca7a258b4fbf7b1e07a80d4caae640ca"
+SRC_URI[md5sum] = "3805617f65a4b4bea34606487a5255a0"
+SRC_URI[sha256sum] = "220ba30b5afb0f3ddb328613fea7aa3966b01e4d0c52d6de9ab27b0858f19738"
 
 inherit autotools pkgconfig systemd update-rc.d ptest
 
@@ -57,7 +55,7 @@ PACKAGECONFIG[klog] = "--enable-klog,--disable-klog,,"
 PACKAGECONFIG[regexp] = "--enable-regexp,--disable-regexp,,"
 PACKAGECONFIG[uuid] = "--enable-uuid,--disable-uuid,util-linux,"
 PACKAGECONFIG[libgcrypt] = "--enable-libgcrypt,--disable-libgcrypt,libgcrypt,"
-PACKAGECONFIG[testbench] = "--enable-testbench,--disable-testbench,,"
+PACKAGECONFIG[testbench] = "--enable-testbench --enable-omstdout,--disable-testbench --disable-omstdout,,"
 
 # default no in configure
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug,,"
