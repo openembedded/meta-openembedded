@@ -15,7 +15,9 @@ PR = "r12"
 
 inherit autotools gnome gtk-doc pkgconfig gsettings
 
-SRC_URI += "file://egg-asn1x.patch"
+SRC_URI += "file://egg-asn1x.patch \
+            file://musl.patch \
+"
 
 DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native"
 RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
