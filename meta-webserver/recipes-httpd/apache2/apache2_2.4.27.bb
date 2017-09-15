@@ -59,8 +59,12 @@ EXTRA_OECONF = "--enable-ssl \
     ac_cv_have_threadsafe_pollset=no"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
-PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
+PACKAGECONFIG[selinux] = "--enable-selinux --enable-layout=Debian --prefix=${base_prefix}/,--disable-selinux,libselinux,libselinux"
 PACKAGECONFIG[openldap] = "--enable-ldap --enable-authnz-ldap,--disable-ldap --disable-authnz-ldap,openldap"
+
+do_configure_prepend() {
+        sed -i -e 's:$''{prefix}/usr/lib/cgi-bin:$''{libdir}/cgi-bin:g' ${S}/config.layout
+}
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
@@ -111,6 +115,7 @@ do_install_append_class-target() {
 
     sed -i -e 's,${STAGING_DIR_HOST},,g' \
            -e 's,".*/configure","configure",g' ${D}${datadir}/apache2/build/config.nice
+    rm -rf ${D}${localstatedir}/run
 }
 
 SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
@@ -184,3 +189,6 @@ FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
 RDEPENDS_${PN} += "openssl libgcc"
 RDEPENDS_${PN}-scripts += "perl ${PN}"
 RDEPENDS_${PN}-dev = "perl"
+
+FILES_${PN} += "${libdir}/cgi-bin"
+FILES_${PN} += "${datadir}/${BPN}/"
