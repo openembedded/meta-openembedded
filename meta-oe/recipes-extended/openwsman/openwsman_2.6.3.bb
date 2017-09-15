@@ -17,7 +17,9 @@ PV = "2.6.3"
 
 SRC_URI = "git://github.com/Openwsman/openwsman.git \
            file://libssl-is-required-if-eventint-supported.patch \
-           file://openwsmand.service"
+           file://openwsmand.service \
+           file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
+           "
 
 S = "${WORKDIR}/git"
 
