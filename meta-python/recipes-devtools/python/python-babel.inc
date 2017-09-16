@@ -3,8 +3,8 @@ HOMEPAGE = "http://babel.edgewall.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e6eeaabc92cfc2d03f53e789324d7292"
 
-SRC_URI[md5sum] = "90e7a0add19b2036a9b415630a0d9388"
-SRC_URI[sha256sum] = "8c98f5e5f8f5f088571f2c6bd88d530e331cbbcb95a7311a0db69d3dca7ec563"
+SRC_URI[md5sum] = "03da8249c2684abcbd208a8d0f979939"
+SRC_URI[sha256sum] = "754177ee7481b6fac1bf84edeeb6338ab51640984e97e4083657d384b1c8830d"
 
 PYPI_PACKAGE = "Babel"
 
