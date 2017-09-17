@@ -37,3 +37,4 @@ do_install() {
 # ...
 # | make[1]: *** [concurrent_queue.o] Error 1
 ARM_INSTRUCTION_SET = "arm"
+SECURITY_CFLAGS_append = " -fPIC"
