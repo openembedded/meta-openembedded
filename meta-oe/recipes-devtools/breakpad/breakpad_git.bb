@@ -17,22 +17,30 @@ PE = "1"
 
 PV = "1.0+git${SRCPV}"
 
-SRCREV_FORMAT = "breakpad_glog_gtest_protobuf_lss_gyp"
+SRCREV_FORMAT = "breakpad_gtest_protobuf_lss_gyp"
 
-SRCREV_breakpad = "66856d617b6658ce09ef2bc1b15d457ab7b152b0"
-SRCREV_glog = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
+SRCREV_breakpad = "dea867e76f24e4a68395684b9d1cf24bcef82f20"
 SRCREV_gtest = "ec44c6c1675c25b9827aacd08c02433cccde7780"
 SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
 SRCREV_lss = "a91633d172407f6c83dd69af11510b37afebb7f9"
-SRCREV_gyp = "e8ab0833a42691cd2184bd4c45d779e43821d3e0"
+SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
 
 SRC_URI = "git://github.com/google/breakpad;name=breakpad \
-           git://github.com/google/glog.git;destsuffix=git/src/third_party/glog;name=glog \
            git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest \
            git://github.com/google/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf \
            git://chromium.googlesource.com/linux-syscall-support;protocol=https;destsuffix=git/src/third_party/lss;name=lss \
            git://chromium.googlesource.com/external/gyp;protocol=https;destsuffix=git/src/tools/gyp;name=gyp \
            file://0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch \
+           file://0001-include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch \
+           file://0002-Avoid-using-basename.patch \
+           file://0003-Fix-conflict-between-musl-libc-dirent.h-and-lss.patch \
+           file://0001-Turn-off-sign-compare-for-musl-libc.patch \
+           file://0002-sys-signal.h-is-a-nonportable-alias-for-signal.h.patch \
+           file://0003-Dont-include-stab.h.patch \
+           file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch \
+           file://0005-md2core-Replace-basename.patch \
+           file://0002-Use-_fpstate-instead-of-_libc_fpstate-on-linux.patch \
+           file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
 "
 S = "${WORKDIR}/git"
 
