@@ -1,5 +1,5 @@
 DESCRIPTION = "This package contains the DNS.pm module with friends."
-
+HOMEPAGE = "http://www.net-dns.org/"
 SECTION = "libs"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
 
