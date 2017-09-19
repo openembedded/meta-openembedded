@@ -3,8 +3,8 @@ HOMEPAGE = "http://packages.python.org/cmd2/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://setup.py;beginline=49;endline=49;md5=0f13c9cfc75288223cf7edd2f3b985a2"
 
-SRC_URI[md5sum] = "71f862cb2817b207c9cecec7382324d6"
-SRC_URI[sha256sum] = "fcf116b44a46188bbae2ba852a5c2354c069b798feda314a452cb927054d2f86"
+SRC_URI[md5sum] = "576b78add6d652b48dcf9362cece88ef"
+SRC_URI[sha256sum] = "b4e2fb9fc656adccc4d01dfd55ab5a9b05890e961950543f692e7885725c2d72"
 
 inherit pypi setuptools
 
