@@ -5,10 +5,10 @@ HOMEPAGE = "http://www.twistedmatrix.com"
 
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5602d7228daf59a16f0f1b2640c46bca"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8a9c2fbfcba7d70504e3ba545e1820ed"
 
-SRC_URI[md5sum] = "83fe6c0c911cc1602dbffb036be0ba79"
-SRC_URI[sha256sum] = "095175638c019ac7c0604f4c291724a16ff1acd062e181b01293bf4dcbc62cf3"
+SRC_URI[md5sum] = "cd5c287802dcbaf7be15cf937c922b71"
+SRC_URI[sha256sum] = "f198a494f0df2482f7c5f99d7f3eef33d22763ffc76641b36fec476b878002ea"
 
 PYPI_PACKAGE = "Twisted"
 PYPI_PACKAGE_EXT = "tar.bz2"
@@ -72,12 +72,14 @@ FILES_${PN} = ""
 FILES_${PN}-test = " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/haproxy/test/ \
 "
 
 FILES_${PN}-protocols = " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/haproxy \
 "
 
 FILES_${PN}-zsh = " \
@@ -180,6 +182,9 @@ ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/*.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/topfiles \
 ${libdir}/${PYTHON_DIR}/site-packages/Twisted*egg-info \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/logger/ \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/_threads/ \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/positioning/ \
 "
 
 FILES_${PN}-lore = " \
@@ -234,6 +239,10 @@ ${libdir}/${PYTHON_DIR}/site-packages/twisted/pair \
 FILES_${PN}-dbg += " \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
+"
+
+FILES_${PN}-doc += " \
+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_pydoctortemplates/ \
 "
 
 RDEPENDS_{PN}-src = "${PN}"
