@@ -5,6 +5,7 @@ HOMEPAGE = "http://luajit.org"
 
 SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+           file://clang.patch \
 "
 SRC_URI[md5sum] = "48353202cbcacab84ee41a5a70ea0a2c"
 SRC_URI[sha256sum] = "874b1f8297c697821f561f9b73b57ffd419ed8f4278c82e05b48806d30c1e979"
