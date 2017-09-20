@@ -24,6 +24,8 @@ DEPENDS = " \
 
 inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
 
+GI_DATA_ENABLED_libc-musl = "False"
+
 SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
            file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
            file://0002-Fix-nm-version-macro-includes.patch \
