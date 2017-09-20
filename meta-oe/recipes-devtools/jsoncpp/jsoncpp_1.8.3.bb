@@ -9,9 +9,9 @@ HOMEPAGE = "https://github.com/open-source-parsers/jsoncpp"
 SECTION = "libs"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
 
-SRCREV = "f700fe455940d4d325c088b9174a173e130e0fa8"
+SRCREV = "2de18021fcb11370e9b5a1fbe7dcfd673533a134"
 SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
 
 S = "${WORKDIR}/git"
