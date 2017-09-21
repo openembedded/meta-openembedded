@@ -52,6 +52,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://0001-Dont-use-isystem.patch \
     file://0001-carotene-don-t-use-__asm__-with-aarch64.patch \
     file://0002-Do-not-enable-asm-with-clang.patch \
+    file://CVE-2017-14136.patch \
 "
 PV = "3.3+git${SRCPV}"
 
