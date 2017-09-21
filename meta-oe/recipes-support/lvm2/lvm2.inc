@@ -15,6 +15,7 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://0004-tweak-MODPROBE_CMD-for-cross-compile.patch \
            file://0001-Avoid-bashisms-in-init-scripts.patch \
            file://0005-do-not-build-manual.patch \
+           file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
            "
 S = "${WORKDIR}/LVM2.${PV}"
 
