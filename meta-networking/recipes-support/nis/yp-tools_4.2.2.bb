@@ -33,7 +33,7 @@ CACHED_CONFIGUREVARS += "ac_cv_prog_STRIP=/bin/true"
 EXTRA_OECONF = " \
                 --disable-rpath --disable-domainname \
                "
-CFLAGS_append_libc-musl = " -Wno-error=\#warnings"
+CFLAGS_append_libc-musl = " -Wno-error=cpp"
 
 FILES_${PN} += " ${libdir}/yp-nis/*.so.*.* ${libdir}/yp-nis/pkgconfig/"
 FILES_${PN}-dbg += " ${libdir}/yp-nis/.debug"
