@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788
 
 DEPENDS = "openssl libpcre libpcap zlib python boost"
 
-inherit scons
+inherit scons dos2unix
 
 PV = "3.4.6+git${SRCPV}"
 SRCREV = "c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5"
@@ -18,6 +18,9 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v3.4 \
            file://0001-Use-strerror_r-only-on-glibc-systems.patch \
            file://0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch \
            file://0003-Conditionalize-glibc-specific-strerror_r.patch \
+           file://arm64-support.patch \
+           file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
+           file://disable-hw-crc32-on-arm64-s390x.patch \
            "
 SRC_URI_append_libc-musl ="\
            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
