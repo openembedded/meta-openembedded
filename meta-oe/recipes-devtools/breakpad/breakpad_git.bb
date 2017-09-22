@@ -40,10 +40,13 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad \
            file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch \
            file://0005-md2core-Replace-basename.patch \
            file://0002-Use-_fpstate-instead-of-_libc_fpstate-on-linux.patch \
+           file://mcontext.patch \
            file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
            file://mips_asm_sgidefs.patch;patchdir=src/third_party/lss \
 "
 S = "${WORKDIR}/git"
+
+CXXFLAGS += "-D_GNU_SOURCE"
 
 COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
 
