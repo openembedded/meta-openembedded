@@ -17,6 +17,8 @@ SRC_URI[archive.sha256sum] = "693846eeae0986e79eb1cedfbc499f132f27a9976ef189a0f1
 PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
 PACKAGECONFIG ??= ""
 
+GI_DATA_ENABLED_libc-musl = "False"
+
 do_configure_append() {
     # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
     for i in $(find ${B} -name "Makefile") ; do
