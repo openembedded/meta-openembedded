@@ -36,6 +36,7 @@ SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
 SRC_URI_append_libc-musl = "\
            file://0004-Adjust-for-linux-kernel-headers-assumptions-on-glibc.patch \
            file://0002-user-ipv6-structures.patch \
+           file://0001-l2tp_api.c-include-rpc-clnt.h-for-resultproc_t.patch \
            "
 SRC_URI[md5sum] = "e3d08dedfb9e6a9a1e24f6766f6dadd0"
 SRC_URI[sha256sum] = "1c97704d4b963a87fbc0e741668d4530933991515ae9ab0dffd11b5444f4860f"
