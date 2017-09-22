@@ -2,12 +2,10 @@ SUMMARY = "Toybox combines common utilities together into a single executable."
 HOMEPAGE = "http://www.landley.net/toybox/"
 DEPENDS = "attr"
 
-SRC_URI = " \
-    http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
 "
-
-SRC_URI[md5sum] = "6fa2a001402cb067ba541e0d8948da50"
-SRC_URI[sha256sum] = "e6469b508224e0d2e4564dda05c4bb47aef5c28bf29d6c983bcdc6e3a0cd29d6"
+SRC_URI[md5sum] = "55ea59a31c7da9510c8fabe70f4bc561"
+SRC_URI[sha256sum] = "49d74ca897501e5c981516719870fe08581726f5c018abe35ef52c6f0de113e7"
 
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
@@ -16,7 +14,7 @@ SECTION = "base"
 
 TOYBOX_BIN = "generated/unstripped/toybox"
 
-EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
+EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC}" CPUS=${@oe.utils.cpu_count()}'
 
 do_configure() {
     oe_runmake defconfig
