@@ -20,3 +20,5 @@ PACKAGES =+ "${PN}-utils"
 
 FILES_${PN}-dev += "${libdir}/cmake"
 FILES_${PN}-utils = "${bindir}"
+
+BBCLASSEXTEND = "native"
