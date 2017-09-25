@@ -14,9 +14,9 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
 
-SRCREV = "80a37e0782d2d702d52234b62dd4b9ec74fd2c95"
+SRCREV = "b04e5cba356212e4e8c66c61bbe0c3a20537c5b9"
 
-PV = "3.4.0+git${SRCPV}"
+PV = "3.4.1+git${SRCPV}"
 
 SRC_URI = "git://github.com/google/protobuf.git;branch=3.4.x"
 
