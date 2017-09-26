@@ -1,4 +1,5 @@
 SUMMARY = "Filtering tool for a Linux-based bridging firewall"
+HOMEPAGE = "http://sourceforge.net/projects/ebtables/"
 DESCRIPTION = "Utility for basic Ethernet frame filtering on a Linux bridge, \
                advanced logging, MAC DNAT/SNAT and brouting."
 LICENSE = "GPLv2"
