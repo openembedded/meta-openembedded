@@ -10,12 +10,8 @@ DEPENDS_append_libc-musl = " argp-standalone"
 
 inherit autotools
 
-SRCREV = "712ad01fdde57893936d7e254451eec67ab41ca6"
-SRC_URI = "\
-    git://github.com/namhyung/${BPN} \
-    file://0001-Makefile-Add-LDFLAGS-in-export.patch \
-    file://0002-utils-Add-limits-header-to-fix-build-error.patch \
-"
+SRCREV = "5af9ff9fa89c340617e52c8ed05798b352a7145c"
+SRC_URI = "git://github.com/namhyung/${BPN}"
 S = "${WORKDIR}/git"
 
 LDFLAGS_append_libc-musl = " -largp"
