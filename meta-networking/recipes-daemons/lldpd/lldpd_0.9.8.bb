@@ -9,10 +9,11 @@ SRC_URI = "\
     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
     file://lldpd.init.d \
     file://lldpd.default \
+    file://src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch \
     "
 
-SRC_URI[md5sum] = "0dcdee7c1b3c62362d73f6508c11edae"
-SRC_URI[sha256sum] = "e74e2dd7e2a233ca1ff385c925ddae2a916d302819d1433741407d2f8fb0ddd8"
+SRC_URI[md5sum] = "8809600492f6b73149eb19158e819c1f"
+SRC_URI[sha256sum] = "9ee494e91bc33938575b2c09b26188c486ef8eac6e2155d250c189cc4e988c4f"
 
 inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
 
@@ -29,7 +30,6 @@ EXTRA_OECONF += "--without-embedded-libevent \
 "
 
 PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
-PACKAGECONFIG[json] = "--with-json,--without-json,jansson"
 PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxm2"
 PACKAGECONFIG[snmp] = "--with-snmp,--without-snmp,net-snmp"
 PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
