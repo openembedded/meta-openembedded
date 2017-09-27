@@ -24,6 +24,8 @@ BBCLASSEXTEND = "native"
 BUILD_CC_ARCH_append_powerpc = ' -m32'
 BUILD_CC_ARCH_append_x86 = ' -m32'
 BUILD_CC_ARCH_append_arm = ' -m32'
+BUILD_CC_ARCH_append_mips = ' -m32'
+BUILD_CC_ARCH_append_mipsel = ' -m32'
 
 # The lua makefiles expect the TARGET_SYS to be from uname -s
 # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
