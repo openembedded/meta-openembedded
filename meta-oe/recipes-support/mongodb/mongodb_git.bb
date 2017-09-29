@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788
 
 DEPENDS = "openssl libpcre libpcap zlib python boost"
 
-inherit scons dos2unix
+inherit scons dos2unix siteinfo
 
 PV = "3.4.6+git${SRCPV}"
 SRCREV = "c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5"
@@ -58,6 +58,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
                  --use-system-zlib \
                  --js-engine=none \
                  --nostrip \
+                 --endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
                  ${PACKAGECONFIG_CONFARGS} \
                  mongod mongos"
 
