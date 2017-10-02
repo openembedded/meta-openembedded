@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
 
 SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
             file://cross-compile-platform.patch \
+            file://m2crypto-0.26.4-gcc_macros.patch \
            "
-SRC_URI[md5sum] = "9f02f0b88fbe225cc6ea8680945cafa0"
-SRC_URI[sha256sum] = "05d94fd9b2dae2fb8e072819a795f0e05d3611b09ea185f68e1630530ec09ae8"
+SRC_URI[md5sum] = "5c74c25ba8b45122318a165a3a2059ad"
+SRC_URI[sha256sum] = "5cae7acc0b34821f8c0ddf6665e482893fe1f198ad6379e61ffa9d8e65f5c199"
 
 PYPI_PACKAGE = "M2Crypto"
 inherit pypi setuptools siteinfo
@@ -45,6 +46,5 @@ do_compile_prepend() {
         done
     fi
 }
-
 
 BBCLASSEXTEND = "native"
