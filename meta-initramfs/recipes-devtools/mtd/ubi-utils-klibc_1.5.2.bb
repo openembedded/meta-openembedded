@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
 
 inherit klibc
 
-SRC_URI = "git://git.infradead.org/mtd-utils.git;tag=b7455d847ab4f9eeeb6a729efc306bfda7bddc99 \
+SRCREV = "aea36417067dade75192bafa03af70b6eb2677b1"
+SRC_URI = "git://git.infradead.org/mtd-utils.git \
              file://0001-Makefile-only-build-ubi-utils.patch \
              file://0002-common.mk-for-klibc-CC-is-klcc.patch \
              file://0003-libubi.c-add-klibc-specific-fixes.patch \
@@ -23,10 +24,7 @@ S = "${WORKDIR}/git/"
 EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
 
 do_install () {
-
-    install -d ${D}${sbindir}
-    oe_runmake DESTDIR="${D}" install
-
+	oe_runmake install DESTDIR=${D} SBINDIR=${sbindir} MANDIR=${mandir} INCLUDEDIR=${includedir}
 }
 
 PACKAGES = "ubi-utils-klibc-dbg"
