@@ -11,6 +11,6 @@ CC_append_armv7a = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_
 CPP_forcevariable = "${CC} -E"
 
 # klcc uses own optimizations by default. See klcc(1) man file.
-export CFLAGS=""
-export CPPFLAGS=""
-export LDFLAGS=""
+export CFLAGS="${TUNE_CCARGS}"
+export CPPFLAGS="${TUNE_CCARGS}"
+export LDFLAGS="${TUNE_CCARGS}"
