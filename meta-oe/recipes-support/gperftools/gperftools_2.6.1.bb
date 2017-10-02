@@ -18,10 +18,6 @@ inherit autotools
 
 S = "${WORKDIR}/git"
 
-# On mips, we have the following error.
-#   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
-#   Segmentation fault (core dumped)
-COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
 # Disable thumb1
 # {standard input}: Assembler messages:
 # {standard input}:434: Error: lo register required -- `ldr pc,[sp]'
