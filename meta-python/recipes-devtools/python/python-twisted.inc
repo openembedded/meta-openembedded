@@ -7,8 +7,8 @@ HOMEPAGE = "http://www.twistedmatrix.com"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8a9c2fbfcba7d70504e3ba545e1820ed"
 
-SRC_URI[md5sum] = "cd5c287802dcbaf7be15cf937c922b71"
-SRC_URI[sha256sum] = "f198a494f0df2482f7c5f99d7f3eef33d22763ffc76641b36fec476b878002ea"
+SRC_URI[md5sum] = "6dbedb918f0c7288a4c670f59393ecf8"
+SRC_URI[sha256sum] = "0da1a7e35d5fcae37bc9c7978970b5feb3bc82822155b8654ec63925c05af75c"
 
 PYPI_PACKAGE = "Twisted"
 PYPI_PACKAGE_EXT = "tar.bz2"
