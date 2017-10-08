@@ -19,8 +19,9 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
 SRC_URI[md5sum] = "68691b5de4c94f82ec4062b042b5eb63"
 SRC_URI[sha256sum] = "03579af13a4d3fe0c5b79fa44b5f75c9f3cac6749357f1d99ce5d38c09bc2029"
 
-inherit scons update-rc.d python-dir pythonnative systemd bluetooth
+inherit scons update-rc.d python-dir pythonnative systemd bluetooth update-alternatives
 
+INITSCRIPT_PACKAGES = "gpsd-conf"
 INITSCRIPT_NAME = "gpsd"
 INITSCRIPT_PARAMS = "defaults 35"
 
@@ -86,14 +87,6 @@ do_install_append() {
     install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/system/${BPN}.socket
 }
 
-pkg_postinst_${PN}-conf() {
-    update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 10
-}
-
-pkg_postrm_${PN}-conf() {
-    update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
-}
-
 PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
 
 FILES_${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc \
@@ -133,3 +126,9 @@ RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "${PN}.socket"
+
+
+ALTERNATIVE_${PN} = "gpsd-defaults"
+ALTERNATIVE_PATH = "${sysconfdir}/default/gpsd.default"
+ALTERNATIVE_LINK = "${sysconfdir}/default/gpsd"
+ALTERNATIVE_TARGET = "${sysconfdir}/default/gpsd.default"
