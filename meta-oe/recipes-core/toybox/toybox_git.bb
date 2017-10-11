@@ -2,13 +2,16 @@ SUMMARY = "Toybox combines common utilities together into a single executable."
 HOMEPAGE = "http://www.landley.net/toybox/"
 DEPENDS = "attr"
 
-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-"
-SRC_URI[md5sum] = "55ea59a31c7da9510c8fabe70f4bc561"
-SRC_URI[sha256sum] = "49d74ca897501e5c981516719870fe08581726f5c018abe35ef52c6f0de113e7"
-
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+
+PV = "0.7.4+git${SRCPV}"
+
+SRCREV = "78289203031afc23585035c362beec10db54958d"
+SRC_URI = "git://github.com/landley/toybox;protocol=https \
+"
+
+S = "${WORKDIR}/git"
 
 SECTION = "base"
 
