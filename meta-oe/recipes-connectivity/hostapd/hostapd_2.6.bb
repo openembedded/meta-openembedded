@@ -16,6 +16,7 @@ SRC_URI = " \
     file://defconfig \
     file://init \
     file://hostapd.service \
+    file://key-replay-cve-multiple.patch \
 "
 
 S = "${WORKDIR}/hostapd-${PV}"
