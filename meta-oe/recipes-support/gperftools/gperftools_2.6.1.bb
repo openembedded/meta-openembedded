@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/gperftools/gperftools \
            file://0001-include-fcntl.h-for-loff_t-definition.patch \
            file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
            file://disable_libunwind_aarch64.patch \
+           file://sgidef.patch \
            "
 
 inherit autotools
