@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e4d35c6120f175e1fbe5ff908b1cf2d6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=23bbe20ee15d74b4c56e57f73e9c039b"
 
 DEPENDS = "openssl10 zlib"
 
@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
 "
-SRC_URI[md5sum] = "e6c85c83001340b30671e9432e1bd337"
-SRC_URI[sha256sum] = "5d5aa2a101dcc617231a475812eb8ed87cac21491f1dcc7997b9dd463563f361"
+SRC_URI[md5sum] = "78c297b4a23f7f9c0c031baa77702402"
+SRC_URI[sha256sum] = "5a17d08c68ee7c1e748fd32534edda766cb57c13ed98e693f3075bc9d9a0b59a"
 
 S = "${WORKDIR}/node-v${PV}"
 
