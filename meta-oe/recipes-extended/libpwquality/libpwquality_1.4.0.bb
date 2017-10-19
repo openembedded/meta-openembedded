@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "1de6ff046cf2172d265a2cb6f8da439d894f3e4e8157b056c515515232
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 DEPENDS = "cracklib virtual/gettext python3"
-RDEPENDS_python3-${PN} = "${PN}"
+RDEPENDS_python3-libpwquality = "${PN}"
 
 inherit autotools python3native gettext
 
@@ -36,7 +36,7 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
 
-PACKAGES += "python3-${PN} python3-${PN}-dbg"
+PACKAGES += "python3-libpwquality python3-libpwquality-dbg"
 FILES_${PN} += "${libdir}/security/pam_pwquality.so"
 FILES_${PN}-dbg += "${libdir}/security/.debug"
 FILES_${PN}-staticdev += "${libdir}/security/pam_pwquality.a"
