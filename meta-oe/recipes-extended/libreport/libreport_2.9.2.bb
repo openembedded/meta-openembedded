@@ -26,7 +26,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 
 inherit gettext autotools python3native pkgconfig
 
-RDEPENDS_${PN}-python3 += "${PN}"
+RDEPENDS_python3-libreport += "${PN}"
 
 do_patch[prefuncs] += "do_gen_version"
 do_gen_version() {
@@ -34,9 +34,9 @@ do_gen_version() {
     ./gen-version
 }
 
-PACKAGES += "python3-${PN}"
+PACKAGES += "python3-libreport"
 
 FILES_${PN} += "${datadir}/*"
 FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug"
-FILES_python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
+FILES_python3-libreport = "${PYTHON_SITEPACKAGES_DIR}/*"
 
