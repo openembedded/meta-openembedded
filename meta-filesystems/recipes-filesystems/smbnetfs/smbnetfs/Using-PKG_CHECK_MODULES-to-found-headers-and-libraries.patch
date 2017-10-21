@@ -10,10 +10,10 @@ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
  src/Makefile.am | 3 +++
  2 files changed, 8 insertions(+)
 
-diff --git a/configure.in b/configure.in
+diff --git a/configure.ac b/configure.ac
 index ce21aef..ecd7119 100644
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
      )]
  )
