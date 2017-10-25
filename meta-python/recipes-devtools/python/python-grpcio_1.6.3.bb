@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
 
 inherit pypi setuptools
 
-SRC_URI[md5sum] = "c91b8c105ff4163b41790f3b63db92e1"
-SRC_URI[sha256sum] = "6cd793d515ec53587a8968f2a53647f1449763ad06be0d287e3c1e47418e1e50"
+SRC_URI[md5sum] = "6637c4dfee8166f69be7571591b6c57c"
+SRC_URI[sha256sum] = "e9662782c58bc21be26163b78136eaed091dfd45fac699cb711ee9eeeb7e2f9b"
 
 # For usage in other recipes when compiling protobuf files (e.g. by grpcio-tools)
 BBCLASSEXTEND = "native"
