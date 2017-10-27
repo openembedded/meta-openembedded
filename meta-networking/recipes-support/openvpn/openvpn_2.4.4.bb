@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
            file://openvpn@.service \
            file://openvpn-volatile.conf"
 
-SRC_URI[md5sum] = "e1929f82aff40f3d105e5f72aacff9c1"
-SRC_URI[sha256sum] = "cee3d3ca462960a50a67c0ebd186e01b6d13db70275205663695152c9aca8579"
+SRC_URI[md5sum] = "705a79d005558d94fa1e2b74e4413e97"
+SRC_URI[sha256sum] = "1ae883d9522c9fa6d189e5e4aaa058a93edd3d0b897e3c2664107c4785099fc3"
 
 SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
 SYSTEMD_AUTO_ENABLE = "disable"
