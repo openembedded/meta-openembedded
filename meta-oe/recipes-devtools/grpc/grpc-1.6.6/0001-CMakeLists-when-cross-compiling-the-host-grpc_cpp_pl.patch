@@ -1,0 +1,68 @@
+From 43ae4e81056888623a73069c11da28a80c39a297 Mon Sep 17 00:00:00 2001
+From: Alexey Firago <alexey_firago@mentor.com>
+Date: Thu, 19 Oct 2017 00:20:36 +0300
+Subject: [PATCH] CMakeLists: when cross-compiling, the host grpc_cpp_plugin
+ should be used
+
+Signed-off-by: Alexey Firago <alexey_firago@mentor.com>
+---
+ CMakeLists.txt                    | 9 ++++++++-
+ templates/CMakeLists.txt.template | 9 ++++++++-
+ 2 files changed, 16 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2f66066..af2046c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -333,6 +333,13 @@ function(protobuf_generate_grpc_cpp)
+     get_filename_component(REL_DIR ${REL_FIL} DIRECTORY)
+     set(RELFIL_WE "${REL_DIR}/${FIL_WE}")
+
++    #if cross-compiling, find host plugin
++    if(CMAKE_CROSSCOMPILING)
++        find_program(gRPC_CPP_PLUGIN grpc_cpp_plugin)
++    else()
++        set(gRPC_CPP_PLUGIN $<TARGET_FILE:grpc_cpp_plugin>)
++    endif()
++
+     add_custom_command(
+       OUTPUT "${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.grpc.pb.cc"
+              "${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.grpc.pb.h"
+@@ -342,7 +349,7 @@ function(protobuf_generate_grpc_cpp)
+       COMMAND ${_gRPC_PROTOBUF_PROTOC}
+       ARGS --grpc_out=generate_mock_code=true:${_gRPC_PROTO_GENS_DIR}
+            --cpp_out=${_gRPC_PROTO_GENS_DIR}
+-           --plugin=protoc-gen-grpc=$<TARGET_FILE:grpc_cpp_plugin>
++           --plugin=protoc-gen-grpc=${gRPC_CPP_PLUGIN}
+            ${_protobuf_include_path}
+            ${REL_FIL}
+       DEPENDS ${ABS_FIL} ${_gRPC_PROTOBUF_PROTOC} grpc_cpp_plugin
+diff --git a/templates/CMakeLists.txt.template b/templates/CMakeLists.txt.template
+index 850404b..09c1388 100644
+--- a/templates/CMakeLists.txt.template
++++ b/templates/CMakeLists.txt.template
+@@ -378,6 +378,13 @@
+       get_filename_component(REL_DIR <%text>${REL_FIL}</%text> DIRECTORY)
+       set(RELFIL_WE "<%text>${REL_DIR}/${FIL_WE}</%text>")
+
++      #if cross-compiling, find host plugin
++      if(CMAKE_CROSSCOMPILING)
++          find_program(gRPC_CPP_PLUGIN grpc_cpp_plugin)
++      else()
++          set(gRPC_CPP_PLUGIN $<TARGET_FILE:grpc_cpp_plugin>)
++      endif()
++
+       add_custom_command(
+         OUTPUT <%text>"${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.grpc.pb.cc"</%text>
+                <%text>"${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.grpc.pb.h"</%text>
+@@ -387,7 +394,7 @@
+         COMMAND <%text>$<TARGET_FILE:${_gRPC_PROTOBUF_PROTOC}></%text>
+         ARGS --grpc_out=<%text>generate_mock_code=true:${_gRPC_PROTO_GENS_DIR}</%text>
+              --cpp_out=<%text>${_gRPC_PROTO_GENS_DIR}</%text>
+-             --plugin=protoc-gen-grpc=$<TARGET_FILE:grpc_cpp_plugin>
++             --plugin=protoc-gen-grpc=${gRPC_CPP_PLUGIN}
+              <%text>${_protobuf_include_path}</%text>
+              <%text>${REL_FIL}</%text>
+         DEPENDS <%text>${ABS_FIL}</%text> <%text>${_gRPC_PROTOBUF_PROTOC}</%text> grpc_cpp_plugin
+--
+2.7.4

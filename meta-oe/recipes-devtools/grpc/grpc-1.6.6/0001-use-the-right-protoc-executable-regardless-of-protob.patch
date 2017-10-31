@@ -1,0 +1,77 @@
+From f640fcc81c76953b2e84fc3087f905141b6643b9 Mon Sep 17 00:00:00 2001
+From: Jan Tattermusch <jtattermusch@google.com>
+Date: Thu, 24 Aug 2017 17:51:47 +0200
+Subject: [PATCH] use the right protoc executable regardless of protobuf
+ provider
+
+---
+ CMakeLists.txt                    | 5 ++++-
+ templates/CMakeLists.txt.template | 5 ++++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bde8946..f9cd630 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -190,6 +190,7 @@ if("${gRPC_PROTOBUF_PROVIDER}" STREQUAL "module")
+     endif()
+     if(TARGET protoc)
+       set(_gRPC_PROTOBUF_PROTOC protoc)
++      set(_gRPC_PROTOBUF_PROTOC_EXECUTABLE $<TARGET_FILE:protoc>)
+     endif()
+   else()
+       message(WARNING "gRPC_PROTOBUF_PROVIDER is \"module\" but PROTOBUF_ROOT_DIR is wrong")
+@@ -213,8 +214,10 @@ elseif("${gRPC_PROTOBUF_PROVIDER}" STREQUAL "package")
+     endif()
+     if(TARGET protobuf::protoc)
+       set(_gRPC_PROTOBUF_PROTOC protobuf::protoc)
++      set(_gRPC_PROTOBUF_PROTOC_EXECUTABLE $<TARGET_FILE:protobuf::protoc>)
+     else()
+       set(_gRPC_PROTOBUF_PROTOC ${PROTOBUF_PROTOC_EXECUTABLE})
++      set(_gRPC_PROTOBUF_PROTOC_EXECUTABLE ${PROTOBUF_PROTOC_EXECUTABLE})
+     endif()
+     set(_gRPC_FIND_PROTOBUF "if(NOT Protobuf_FOUND AND NOT PROTOBUF_FOUND)\n  find_package(Protobuf ${gRPC_PROTOBUF_PACKAGE_TYPE})\nendif()")
+   endif()
+@@ -339,7 +342,7 @@ function(protobuf_generate_grpc_cpp)
+              "${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}_mock.grpc.pb.h"
+              "${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.pb.cc"
+              "${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.pb.h"
+-      COMMAND $<TARGET_FILE:${_gRPC_PROTOBUF_PROTOC}>
++      COMMAND ${_gRPC_PROTOBUF_PROTOC_EXECUTABLE}
+       ARGS --grpc_out=generate_mock_code=true:${_gRPC_PROTO_GENS_DIR}
+            --cpp_out=${_gRPC_PROTO_GENS_DIR}
+            --plugin=protoc-gen-grpc=$<TARGET_FILE:grpc_cpp_plugin>
+diff --git a/templates/CMakeLists.txt.template b/templates/CMakeLists.txt.template
+index 850404b..64daf04 100644
+--- a/templates/CMakeLists.txt.template
++++ b/templates/CMakeLists.txt.template
+@@ -235,6 +235,7 @@
+       endif()
+       if(TARGET protoc)
+         set(_gRPC_PROTOBUF_PROTOC protoc)
++        set(_gRPC_PROTOBUF_PROTOC_EXECUTABLE $<TARGET_FILE:protoc>)
+       endif()
+     else()
+         message(WARNING "gRPC_PROTOBUF_PROVIDER is \"module\" but PROTOBUF_ROOT_DIR is wrong")
+@@ -258,8 +259,10 @@
+       endif()
+       if(TARGET protobuf::protoc)
+         set(_gRPC_PROTOBUF_PROTOC protobuf::protoc)
++        set(_gRPC_PROTOBUF_PROTOC_EXECUTABLE $<TARGET_FILE:protobuf::protoc>)
+       else()
+         set(_gRPC_PROTOBUF_PROTOC <%text>${PROTOBUF_PROTOC_EXECUTABLE}</%text>)
++        set(_gRPC_PROTOBUF_PROTOC_EXECUTABLE <%text>${PROTOBUF_PROTOC_EXECUTABLE}</%text>)
+       endif()
+       set(_gRPC_FIND_PROTOBUF "if(NOT Protobuf_FOUND AND NOT PROTOBUF_FOUND)\n  find_package(Protobuf <%text>${gRPC_PROTOBUF_PACKAGE_TYPE}</%text>)\nendif()")
+     endif()
+@@ -384,7 +387,7 @@
+                <%text>"${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}_mock.grpc.pb.h"</%text>
+                <%text>"${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.pb.cc"</%text>
+                <%text>"${_gRPC_PROTO_GENS_DIR}/${RELFIL_WE}.pb.h"</%text>
+-        COMMAND <%text>$<TARGET_FILE:${_gRPC_PROTOBUF_PROTOC}></%text>
++        COMMAND <%text>${_gRPC_PROTOBUF_PROTOC_EXECUTABLE}</%text>
+         ARGS --grpc_out=<%text>generate_mock_code=true:${_gRPC_PROTO_GENS_DIR}</%text>
+              --cpp_out=<%text>${_gRPC_PROTO_GENS_DIR}</%text>
+              --plugin=protoc-gen-grpc=$<TARGET_FILE:grpc_cpp_plugin>
+--
+2.7.4
