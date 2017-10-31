@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
 SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
 
-SRC_URI[md5sum] = "5f9d855352b1a5272cf6f1c2e20689d2"
-SRC_URI[sha256sum] = "6dfd6aeb544e8b7baf484a05c9ae0e67022c109362a41d87005393046b6beacf"
+SRC_URI[md5sum] = "9c1966bea7dffd59bd099a8b2930e2ea"
+SRC_URI[sha256sum] = "50c7862428ca90b58672e2475aea66d33a6fc86c6bab1928c0660f3aedf44a37"
 
-PV = "0.3.1"
+PV = "0.3.2"
 
 inherit autotools pkgconfig
 
