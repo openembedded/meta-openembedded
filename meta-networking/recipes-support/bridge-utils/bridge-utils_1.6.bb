@@ -3,13 +3,20 @@ HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bri
 SECTION = "net"
 LICENSE = "GPLv2"
 
-DEPENDS = "sysfsutils"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f9d20a453221a1b7e32ae84694da2c37"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/bridge/bridge-utils-${PV}.tar.gz \
-          file://bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch \
-          file://bridge-utils-1.5-fix-error-message-for-incorrect-command.patch \
-          file://bridge-utils-1.5-fix-incorrect-command-in-manual.patch \
+SRCREV = "42c1aefc303fdf891fbb099ea51f00dca83ab606"
+
+SRC_URI = "\
+    git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/bridge-utils.git \
+    file://kernel-headers.patch \
+    file://0005-build-don-t-ignore-CFLAGS-from-environment.patch \
+    file://0006-libbridge-Modifying-the-AR-to-cross-toolchain.patch \
 "
+
+S = "${WORKDIR}/git"
+
+DEPENDS = "sysfsutils"
 
 inherit autotools-brokensep update-alternatives
 
