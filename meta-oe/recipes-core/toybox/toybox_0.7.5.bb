@@ -5,13 +5,9 @@ DEPENDS = "attr"
 LICENSE = "BSD-0-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
 
-PV = "0.7.4+git${SRCPV}"
-
-SRCREV = "78289203031afc23585035c362beec10db54958d"
-SRC_URI = "git://github.com/landley/toybox;protocol=https \
-"
-
-S = "${WORKDIR}/git"
+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz"
+SRC_URI[md5sum] = "a8bb502a1be941f06dd2644fff25f547"
+SRC_URI[sha256sum] = "3ada450ac1eab1dfc352fee915ea6129b9a4349c1885f1394b61bd2d89a46c04"
 
 SECTION = "base"
 
