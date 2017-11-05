@@ -54,24 +54,6 @@ inherit systemd
 
 SYSTEMD_SERVICE_${PN} = "android-tools-adbd.service"
 
-# Get rid of files uneeded to build Android tools
-do_unpack_extra() {
-    cd ${S}
-    rm -rf \
-      system/core/.git \
-      system/extras/.git \
-      hardware/libhardware/.git \
-      external/libselinux/.git \
-      build/.git
-    git init
-    git add .
-    git commit -m \
-      "Initial import - committed ${ANDROID_TAG}"
-    git clean -fdx
-}
-
-addtask unpack_extra after do_unpack before do_patch
-
 # Find libbsd headers during native builds
 CC_append_class-native = " -I${STAGING_INCDIR}"
 CC_append_class-nativesdk = " -I${STAGING_INCDIR}"
