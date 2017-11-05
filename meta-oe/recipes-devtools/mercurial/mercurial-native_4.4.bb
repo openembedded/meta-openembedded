@@ -5,11 +5,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "python-native"
 
-SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
-           file://mercurial-CVE-2017-9462.patch \
-"
-SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
-SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
+SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+SRC_URI[md5sum] = "c1d9fad1b7ed7077b0d4ae82e71154db"
+SRC_URI[sha256sum] = "234af4a67565c85923b0a1910c704ab44bcf12f69b85532687208776563d87de"
 
 S = "${WORKDIR}/mercurial-${PV}"
 
