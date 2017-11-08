@@ -7,12 +7,12 @@ DEPENDS += "libtalloc"
 RDEPENDS_python-tevent = "python"
 
 SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
-           file://tevent-Add-configure-options-for-packages.patch \
+           file://options-0.9.33.patch \
 "
 LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b85a"
 
-SRC_URI[md5sum] = "5453847664ae6bc4ec0153e59ac635b9"
-SRC_URI[sha256sum] = "4a13f2256ad804c860e84068258bd0f8be31cf0c79aa8f3019fa32f6928c2bfc"
+SRC_URI[md5sum] = "527a43f35b4251e46f28921342895223"
+SRC_URI[sha256sum] = "22712ee981fd4298fcd5f3afb27d87a72257cebad37812cfbd3da5d968ed1bdc"
 
 inherit waf-samba
 

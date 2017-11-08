@@ -14,6 +14,10 @@ Add configure options for the following packages:
 Upstream-Status: Inappropriate [oe deterministic build specific]
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+
+Modified to apply to version 0.9.33.
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
  lib/replace/system/wscript_configure |  6 ++-
  lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
@@ -155,23 +159,19 @@ index fc43e1a..12d2a70 100644
  
      conf.CHECK_CODE('''
                  struct ucred cred;
-diff --git a/wscript b/wscript
-old mode 100755
-new mode 100644
-index 71b9475..50793db
 --- a/wscript
 +++ b/wscript
-@@ -26,7 +26,12 @@ def set_options(opt):
-         opt.add_option('--disable-python',
-                        help=("disable the pytevent module"),
-                        action="store_true", dest='disable_python', default=False)
+@@ -22,7 +22,12 @@ def set_options(opt):
+     opt.PRIVATE_EXTENSION_DEFAULT('tevent', noextension='tevent')
+     opt.RECURSE('lib/replace')
+     opt.RECURSE('lib/talloc')
 -
-+        opt.add_option('--with-valgrind',
-+                       help=("enable use of valgrind"),
-+                       action="store_true", dest='enable_valgrind')
-+        opt.add_option('--without-valgrind',
-+                       help=("disable use of valgrind"),
-+                       action="store_false", dest='enable_valgrind', default=False)
++    opt.add_option('--with-valgrind',
++                   help=("enable use of valgrind"),
++                   action="store_true", dest='enable_valgrind')
++    opt.add_option('--without-valgrind',
++                   help=("disable use of valgrind"),
++                   action="store_false", dest='enable_valgrind', default=False)
  
  def configure(conf):
      conf.RECURSE('lib/replace')
