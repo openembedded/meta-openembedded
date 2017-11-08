@@ -68,8 +68,8 @@ addtask unpack_extra after do_unpack before do_patch
 EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
     -DWITH_1394=OFF \
     -DCMAKE_SKIP_RPATH=ON \
-    -DOPENCV_ICV_PACKAGE_DOWNLOADED=${IPP_MD5} \
-    -DOPENCV_ICV_PATH=${WORKDIR}/ippicv_lnx \
+    -DOPENCV_ICV_HASH=${IPP_MD5} \
+    -DIPPROOT=${WORKDIR}/ippicv_lnx \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
