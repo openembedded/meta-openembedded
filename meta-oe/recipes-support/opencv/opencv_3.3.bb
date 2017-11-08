@@ -15,6 +15,8 @@ SRCREV_contrib = "2a9d1b22ed76eb22fad1a5edf6faf4d05f207b13"
 SRCREV_ipp = "a62e20676a60ee0ad6581e217fe7e4bada3b95db"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
+SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 
 def ipp_filename(d):
     import re
@@ -41,9 +43,11 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20170418;destsuffix=ipp;name=ipp \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
     git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
+    https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
     file://fixpkgconfig.patch \
     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+    file://tinydnn.patch;patchdir=../contrib/ \
     file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
     file://0003-To-fix-errors-as-following.patch \
     file://0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch \
@@ -60,6 +64,8 @@ PV = "3.3+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 do_unpack_extra() {
+    mkdir -p ${S}/3rdparty/tinydnn/
+    tar xzf ${WORKDIR}/v1.0.0a3.tar.gz -C ${S}/3rdparty/tinydnn/
     tar xzf ${WORKDIR}/ipp/ippicv/${IPP_FILENAME} -C ${WORKDIR}
     cp ${WORKDIR}/vgg/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
     cp ${WORKDIR}/boostdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
