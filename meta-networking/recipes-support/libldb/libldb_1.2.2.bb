@@ -29,8 +29,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[md5sum] = "9c90abfb94c1e2a693399392cf4cddb9"
-SRC_URI[sha256sum] = "59d84f9a5b799f519ba7b2685bb46f5a26f1bbf05b7a144b2f5e017d01d80f97"
+SRC_URI[md5sum] = "91284a12423def99a6592e393e3b7fbb"
+SRC_URI[sha256sum] = "0cedeadb75de401c9735127f654dbc1a391c4327a2b83be54078be286fed1113"
 
 inherit waf-samba
 
@@ -38,7 +38,7 @@ S = "${WORKDIR}/ldb-${PV}"
 
 EXTRA_OECONF += "--disable-rpath \
                  --disable-rpath-install \
-                 --bundled-libraries=NONE \
+                 --bundled-libraries=cmocka \
                  --builtin-libraries=replace \
                  --with-modulesdir=${libdir}/ldb/modules \
                  --with-privatelibdir=${libdir}/ldb \
