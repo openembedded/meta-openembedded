@@ -59,7 +59,9 @@ do_configure () {
 
 do_compile () {
     # Make sure we DO NOT regenerate prom_lex.c.
-    mv ${S}/utils/fwparam_ibft/prom_lex.l ${S}/utils/fwparam_ibft/prom_lex.l.unused
+    if [ -f ${S}/utils/fwparam_ibft/prom_lex.l ]; then
+        mv ${S}/utils/fwparam_ibft/prom_lex.l ${S}/utils/fwparam_ibft/prom_lex.l.unused
+    fi
     oe_runmake -C ${S} ${EXTRA_OEMAKE} user
 }
 
