@@ -27,9 +27,7 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
-inherit update-rc.d systemd autotools distro_features_check
-# open-isns depends on systemd
-REQUIRED_DISTRO_FEATURES = "systemd"
+inherit update-rc.d systemd autotools
 
 EXTRA_OECONF = " \
     --target=${TARGET_SYS} \
