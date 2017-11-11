@@ -6,8 +6,8 @@ DEPENDS = "dbus-glib dbus-glib-native freetype gdk-pixbuf poppler curl xfce4-dev
 
 inherit xfce gtk-doc
 
-SRC_URI[md5sum] = "0067054e6f1f90a13f90faadfca1e89e"
-SRC_URI[sha256sum] = "d0fd329273ff6ac98885eade4c3d8c87a4dd0816f713646130808bfa90b87173"
+SRC_URI[md5sum] = "dd5f9bae6a2470eb5fff0dc9edd3ea09"
+SRC_URI[sha256sum] = "4e27a59694b0a5cc69ebccbdb00c724e670b5b7c30bc4dc0b461aac93f234fac"
 SRC_URI += "file://0001-configure-use-pkg-config-for-freetype2.patch"
 
 INSANE_SKIP_${PN} = "dev-so"
