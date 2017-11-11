@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
 
 DEPENDS += "libsoup-2.4 dbus-glib upower"
 
-SRC_URI[md5sum] = "0c56c057e1c354b30409b7871ab6f314"
-SRC_URI[sha256sum] = "0e15d14b3e18c3da46ad23ee3158a25220f1474a48b611de96edb56221aecee5"
+SRC_URI[md5sum] = "bba7f750b97c8fc3656715268edad792"
+SRC_URI[sha256sum] = "ee6d43c444904631c240470e15e96215c2ce451158bfdbf234bce892bf60eab8"
 
 FILES_${PN} += "${datadir}/xfce4/weather"
