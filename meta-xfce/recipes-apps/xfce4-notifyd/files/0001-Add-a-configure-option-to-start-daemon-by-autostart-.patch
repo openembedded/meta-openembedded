@@ -1,0 +1,105 @@
+From 751ca1687edae351db7477b00b67a72b7fc55dee Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 10 Nov 2017 10:29:28 +0100
+Subject: [PATCH] Add a configure option to start daemon by autostart instead
+ of dbus
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+On sytems with multiple desktops installed, dbus service
+'org.freedesktop.Notifications' may be defined by multiple instances. In my
+case it is KDE-Plasma causing unpredictable results: On some environments
+xfce4-notifyd is started on others not.
+
+To help distros/packagers a new configure option '--enable-dbus-start-daemon'
+is introduced. It is desabled by default so no unexpected impact is to expect.
+
+It should be noted that the simplicity of this change is possible since recent
+change: Daemon does not kill itself after being idle for certain time - see
+commit d87a4a93b2ec4ab094f5a35ae818395f750f2891.
+
+Upstream-Status: Submitted [1]
+
+[1] https://bugzilla.xfce.org/show_bug.cgi?id=13989
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ Makefile.am                            | 13 +++++++++++++
+ configure.ac                           |  8 ++++++++
+ xfce4-notifyd/xfce4-notifyd.desktop.in |  6 ++++++
+ 3 files changed, 27 insertions(+)
+ create mode 100644 xfce4-notifyd/xfce4-notifyd.desktop.in
+
+diff --git a/Makefile.am b/Makefile.am
+index c81bdaa..3bd2d46 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -83,6 +83,7 @@ xfce4_notifyd_config_xfce4_notifyd_config_LDADD = \
+ 	$(common_ldadd) \
+ 	$(LIBNOTIFY_LIBS)
+ 
++if USE_DBUS_START_DAEMON
+ servicedir = $(datadir)/dbus-1/services
+ service_in_files = xfce4-notifyd/org.xfce.xfce4-notifyd.Notifications.service.in
+ service_DATA = $(service_in_files:.service.in=.service)
+@@ -97,6 +98,15 @@ dist_service = \
+ 	xfce4-notifyd/notify-dbus.xml \
+ 	xfce4-notifyd/xfce-notify-marshal.list
+ distclean_service = $(service_DATA) $(systemd_user_DATA)
++else
++autostartdir = $(sysconfdir)/xdg/autostart
++autostart_in_files = xfce4-notifyd/xfce4-notifyd.desktop.in
++autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
++
++dist_autostart = \
++	$(autostart_in_files)
++distclean_autostart = $(autostart_DATA)
++endif
+ 
+ dist_man1_MANS = \
+ 	xfce4-notifyd-config/xfce4-notifyd-config.1
+@@ -273,6 +283,9 @@ install-data-hook:
+ xfce4-notifyd/%.service: $(srcdir)/xfce4-notifyd/%.service.in Makefile
+ 	sed -e "s,\@notifydir\@,$(xfce4_notifyddir),g" < $< > $@
+ 
++xfce4-notifyd/%.desktop: $(srcdir)/xfce4-notifyd/%.desktop.in Makefile
++	sed -e "s,\@notifydir\@,$(xfce4_notifyddir),g" < $< > $@
++
+ distclean-local:
+ 	-rm -rf *.cache *~
+ 
+diff --git a/configure.ac b/configure.ac
+index 46a132c..a37da8c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -124,6 +124,14 @@ AS_IF([test "x$use_old_gsi_sig" = "xyes"],
+ AM_CONDITIONAL([USE_OLD_GET_SERVER_INFORMATION_SIGNATURE],
+                [test "x$use_old_gsi_sig" = "xyes"])
+ 
++dnl dbus start daemon
++AC_ARG_ENABLE([dbus-start-daemon],
++              [AS_HELP_STRING([--enable-dbus-start-daemon],
++                              [Start daemon by dbus - if not set by autostart. (default=yes)])],
++              [use_dbus_start_daemon=$enableval], [use_dbus_start_daemon=yes])
++AM_CONDITIONAL([USE_DBUS_START_DAEMON],
++               [test "x$use_dbus_start_daemon" = "xyes"])
++
+ dnl create #define for spec version
+ AC_DEFINE_UNQUOTED([NOTIFICATIONS_SPEC_VERSION], ["notifications_spec_version"],
+                    [Set to the version of the freedesktop.org notifications spec we support])
+diff --git a/xfce4-notifyd/xfce4-notifyd.desktop.in b/xfce4-notifyd/xfce4-notifyd.desktop.in
+new file mode 100644
+index 0000000..d1f76f9
+--- /dev/null
++++ b/xfce4-notifyd/xfce4-notifyd.desktop.in
+@@ -0,0 +1,6 @@
++[Desktop Entry]
++Type=Application
++Name=Xfce Notification Daemon
++Exec=@notifydir@/xfce4-notifyd
++Icon=xfce4-notifyd
++OnlyShowIn=XFCE;
+-- 
+2.9.5
+
