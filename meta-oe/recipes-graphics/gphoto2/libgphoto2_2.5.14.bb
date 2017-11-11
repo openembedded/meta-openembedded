@@ -14,13 +14,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://10-camera-libgphoto2.fdi \
            file://40-libgphoto2.rules \
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-           file://0002-correct-jpeg-memsrcdest-support.patch \
-           file://avoid_using_sprintf.patch \
-           file://0001-scripts-remove-bashisms.patch \
 "
 
-SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
-SRC_URI[libgphoto2.sha256sum] = "031a262e342fae43f724afe66787947ce1fb483277dfe5a8cf1fbe92c58e27b6"
+SRC_URI[libgphoto2.md5sum] = "65acb6cbd2b4f3f46829599f5dabd89c"
+SRC_URI[libgphoto2.sha256sum] = "d3ce70686fb87d6791b9adcbb6e5693bfbe1cfef9661c23c75eb8a699ec4e274"
 
 inherit autotools pkgconfig gettext lib_package
 
@@ -54,3 +51,4 @@ FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
 FILES_${PN} += "${nonarch_base_libdir}/udev/* ${datadir}/hal"
 FILES_${PN}-dbg += "${libdir}/*/*/.debug"
 FILES_${PN}-dev += "${libdir}/*/*/*.la"
+FILES_${PN}-doc += "${datadir}/libgphoto2_port/0.12.0/vcamera/README.txt"
