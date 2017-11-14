@@ -258,6 +258,7 @@ FILES_${PN}-server = "\
     ${bindir}/mysqlbinlog \
     ${bindir}/mysqld_multi \
     ${bindir}/mysqld_safe \
+    ${bindir}/mysqld_safe_helper \
     ${bindir}/mysqlhotcopy \
     ${bindir}/mysqltest \
     ${bindir}/ndb_delete_all \
