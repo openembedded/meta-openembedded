@@ -136,6 +136,5 @@ SYSTEMD_SERVICE_${PN} = "${PN}.socket"
 
 
 ALTERNATIVE_${PN} = "gpsd-defaults"
-ALTERNATIVE_PATH = "${sysconfdir}/default/gpsd.default"
-ALTERNATIVE_LINK = "${sysconfdir}/default/gpsd"
-ALTERNATIVE_TARGET = "${sysconfdir}/default/gpsd.default"
+ALTERNATIVE_LINK_NAME[gpsd-defaults] = "${sysconfdir}/default/gpsd"
+ALTERNATIVE_TARGET[gpsd-defaults] = "${sysconfdir}/default/gpsd.default"
