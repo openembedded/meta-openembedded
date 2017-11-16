@@ -12,10 +12,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 
+EXTRA_OEMAKE = "PREFIX=${prefix}"
+
 # By default INSTALL variable in Makefile is equal to 'cp -a', which preserves
 # ownership and causes host-user-contamination QA issue.
 # And PREFIX defaults to /usr/local.
 do_install_prepend() {
-  export PREFIX=${prefix}
   export INSTALL='cp -r'
 }
