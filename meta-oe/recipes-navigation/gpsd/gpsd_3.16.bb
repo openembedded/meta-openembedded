@@ -80,6 +80,7 @@ do_install_append() {
     #support for systemd
     install -d ${D}${systemd_unitdir}/system/
     install -m 0644 ${S}/systemd/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
+    install -m 0644 ${S}/systemd/${BPN}ctl@.service ${D}${systemd_unitdir}/system/${BPN}ctl@.service
     install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/system/${BPN}.socket
 }
 
@@ -128,7 +129,7 @@ RDEPENDS_python-pygps = " \
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "${PN}.socket"
+SYSTEMD_SERVICE_${PN} = "${BPN}.socket ${BPN}ctl@.service"
 
 
 ALTERNATIVE_${PN} = "gpsd-defaults"
