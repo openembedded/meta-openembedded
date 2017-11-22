@@ -59,6 +59,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://CVE-2017-14136.patch \
     file://javagen.patch \
     file://protobuf.patch \
+    file://already-exists.patch \
 "
 PV = "3.3+git${SRCPV}"
 
