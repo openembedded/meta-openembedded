@@ -1,7 +1,5 @@
 require python-pyparted.inc
 
-DEPENDS += "python-re"
-
 PV = "3.10.7+git${SRCPV}"
 
 inherit distutils
