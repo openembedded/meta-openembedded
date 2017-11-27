@@ -55,4 +55,6 @@ FILES_${PN}-dbg += " \
     ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/bindings/.debug \
 "
 
+LDFLAGS_append = " -pthread"
+
 BBCLASSEXTEND = "native nativesdk"
