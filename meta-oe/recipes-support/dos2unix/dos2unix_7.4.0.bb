@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=1b78fca784db24f4a40e30b300787f3f"
 
 SRC_URI = "git://git.code.sf.net/p/dos2unix/dos2unix"
 
-# Release 7.3.4
-SRCREV = "8381ba4e1c4cd5ce98ebd9c24726d51cb203cde0"
+# Release 7.4.0
+SRCREV = "1182533bde3c1fe65be2ead465e87671faa2c027"
 
 S = "${WORKDIR}/git/dos2unix"
 
