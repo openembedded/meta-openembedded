@@ -16,7 +16,7 @@ DEPENDS = "freetype libpng jpeg zlib tiff"
 SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
           "
 
-SRCREV = "de09874b15a4c88772db35ced842330f5de23e76"
+SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
 
 S = "${WORKDIR}/git"
 
