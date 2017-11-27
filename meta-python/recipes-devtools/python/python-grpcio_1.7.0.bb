@@ -4,8 +4,8 @@ SECTION = "devel/python"
 
 DEPENDS = "python-protobuf"
 
-SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
-           "
+SRC_URI_append_class-target = " file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch "
+
 RDEPENDS_${PN} = "python-enum34 \
                   python-futures \
                   python-protobuf \
