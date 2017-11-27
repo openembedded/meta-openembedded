@@ -11,7 +11,7 @@ inherit pypi
 
 FILES_${PN} += "${datadir}/django"
 
-BBCLASSEXTEND = "nativesdk"
+BBCLASSEXTEND = "native nativesdk"
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-datetime \
