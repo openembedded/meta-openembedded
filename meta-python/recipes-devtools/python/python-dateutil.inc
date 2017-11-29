@@ -14,7 +14,8 @@ PACKAGES =+ "${PN}-zoneinfo"
 FILES_${PN}-zoneinfo = "${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"
 
 RDEPENDS_${PN}_class-target = "\
-    ${PYTHON_PN}-core \
     ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-six \
-    "
+    ${PYTHON_PN}-stringold \
+"
