@@ -15,5 +15,7 @@ DEPENDS += "${PYTHON_PN}-pytest-runner-native"
 RDEPENDS_${PN} = "\
                ${PYTHON_PN}-math \
                ${PYTHON_PN}-io \
+               ${PYTHON_PN}-netclient \
                ${PYTHON_PN}-threading \
+               ${PYTHON_PN}-subprocess \
 "
