@@ -13,8 +13,14 @@ inherit pypi
 CLEANBROKEN = "1"
 
 RDEPENDS_${PN} += " \
+    ${PYTHON_PN}-codecs \
+    ${PYTHON_PN}-difflib \
+    ${PYTHON_PN}-distutils \
+    ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-pytz \
+    ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-threading \
 "
