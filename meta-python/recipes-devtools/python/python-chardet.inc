@@ -17,3 +17,8 @@ RDEPENDS_${PN}-cli = "${PN} "
 FILES_${PN}-cli += " \
     ${PYTHON_SITEPACKAGES_DIR}/chardet/cli \
 "
+
+RDEPENDS_${PN}_class-target += " \
+    ${PYTHON_PN}-argparse \
+    ${PYTHON_PN}-logging \
+"
