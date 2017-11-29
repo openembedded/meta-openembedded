@@ -8,7 +8,10 @@ SRC_URI[md5sum] = "a731487324b501c8295221b629d3f5f3"
 SRC_URI[sha256sum] = "ab87dd91c0c4073758d07334c1e5f712ce8fe48f007b86f8238773963ee700a6"
 
 RDEPENDS_${PN}_class-target = " \
+    ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-io \
+    ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-subprocess \
 "
 
 BBCLASSEXTEND = "native nativesdk"
