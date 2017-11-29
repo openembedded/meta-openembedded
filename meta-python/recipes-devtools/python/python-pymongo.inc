@@ -17,6 +17,7 @@ FILES_${PYTHON_PN}-bson = "${PYTHON_SITEPACKAGES_DIR}/bson/*"
 
 RDEPENDS_${PYTHON_PN}-bson += " \
      ${PYTHON_PN}-datetime \
+     ${PYTHON_PN}-json \
      ${PYTHON_PN}-netclient \
      ${PYTHON_PN}-numbers \
      ${PYTHON_PN}-threading \
@@ -24,4 +25,5 @@ RDEPENDS_${PYTHON_PN}-bson += " \
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-bson \
+    ${PYTHON_PN}-pprint \
 "
