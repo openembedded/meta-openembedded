@@ -15,3 +15,10 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-numbers \
 "
+
+PACKAGES =+ "${PN}-tests"
+RDEPENDS_${PN}-tests = "${PN} ${PYTHON_PN}-unittest"
+FILES_${PN}-tests+= " \
+    ${PYTHON_SITEPACKAGES_DIR}/simplejson/tests \
+    ${PYTHON_SITEPACKAGES_DIR}/simplejson/tool.py* \
+"
