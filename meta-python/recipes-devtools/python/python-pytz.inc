@@ -11,7 +11,9 @@ SRC_URI[sha256sum] = "fae4cffc040921b8a2d60c6cf0b5d662c1190fe54d718271db4eb17d44
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-doctest \
     ${PYTHON_PN}-io \
+    ${PYTHON_PN}-pprint \
     ${PYTHON_PN}-threading \
 "
 
