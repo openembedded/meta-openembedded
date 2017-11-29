@@ -7,3 +7,8 @@ SRC_URI[md5sum] = "4314f784ca3174d91956da9828248960"
 SRC_URI[sha256sum] = "c78f53e32d7cf36d8597c8a2c7e3c0ad210f97b9509e152e4c37fa80869f823c"
 
 inherit pypi
+
+RDEPENDS_${PN}_class-target += " \
+    ${PYTHON_PN}-ctypes \
+    ${PYTHON_PN}-subprocess \
+"    
