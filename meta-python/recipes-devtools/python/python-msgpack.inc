@@ -7,3 +7,7 @@ SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc289557
 
 PYPI_PACKAGE = "msgpack-python"
 inherit pypi
+
+RDEPENDS_${PN}_class-target += "\
+    ${PYTHON_PN}-io \
+"
