@@ -20,3 +20,13 @@ DISTUTILS_INSTALL_ARGS = "--prefix=${D}/${prefix} \
     --install-data=${D}/${datadir}/langtable"
 
 FILES_${PN} += "${datadir}/*"
+
+RDEPENDS_${PN} += " \
+    ${PYTHON_PN}-argparse \
+    ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-doctest \
+    ${PYTHON_PN}-enum \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-signal \
+    ${PYTHON_PN}-xml \
+"
