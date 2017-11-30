@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "5f657129e1b9b952379ffbc009357d0dcdb58c50f3bfe88ffbb992e4b2
 inherit pypi setuptools
 
 RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-threading \
     "
