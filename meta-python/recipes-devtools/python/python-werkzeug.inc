@@ -17,6 +17,14 @@ PYPI_PACKAGE = "Werkzeug"
 
 CLEANBROKEN = "1"
 
+PACKAGES =+ "${PN}-tests"
+FILES_${PN}-tests+= " \
+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/test* \
+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/__pycache__/test* \
+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/test* \
+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/__pycache__/test* \
+"
+
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-difflib \
@@ -31,4 +39,9 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-unixadmin \
+"
+
+RDEPENDS_${PN}-tests = " \
+    ${PN} \
+    ${PYTHON_PN}-unittest \
 "
