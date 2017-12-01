@@ -1,0 +1,32 @@
+From a13cb63103aa56b5e8bad816c7d13d6e01c0cd9f Mon Sep 17 00:00:00 2001
+From: derselbst <tom.mbrt@googlemail.com>
+Date: Sun, 26 Nov 2017 22:12:12 +0100
+Subject: [PATCH 1/2] avoid buffer overrun in fluid_synth_nwrite_float()
+
+Upstream-Status: Backport [1]
+
+[1] https://github.com/FluidSynth/fluidsynth/commit/a13cb63103aa56b5e8bad816c7d13d6e01c0cd9f
+---
+ src/synth/fluid_synth.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/synth/fluid_synth.c b/src/synth/fluid_synth.c
+index 266d759..14f6b21 100644
+--- a/src/synth/fluid_synth.c
++++ b/src/synth/fluid_synth.c
+@@ -2752,10 +2752,10 @@ fluid_synth_nwrite_float(fluid_synth_t* synth, int len,
+     {
+ #ifdef WITH_FLOAT
+       if(fx_left != NULL)
+-        FLUID_MEMCPY(fx_left[i + count], fx_left_in[i], bytes);
++        FLUID_MEMCPY(fx_left[i] + count, fx_left_in[i], bytes);
+       
+       if(fx_right != NULL)
+-        FLUID_MEMCPY(fx_right[i + count], fx_right_in[i], bytes);
++        FLUID_MEMCPY(fx_right[i] + count, fx_right_in[i], bytes);
+ #else //WITH_FLOAT
+       int j;
+       if(fx_left != NULL) {
+-- 
+2.9.5
+
