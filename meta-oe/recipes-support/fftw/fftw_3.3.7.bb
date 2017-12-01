@@ -4,13 +4,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 
 SRC_URI = " \
-    http://www.fftw.org/fftw-${PV}-pl1.tar.gz \
+    http://www.fftw.org/fftw-${PV}.tar.gz \
     file://0001-NEON-autodetection-segfaults-assume-neon-present.patch \
 "
-SRC_URI[md5sum] = "682a0e78d6966ca37c7446d4ab4cc2a1"
-SRC_URI[sha256sum] = "1ef4aa8427d9785839bc767f3eb6a84fcb5e9a37c31ed77a04e7e047519a183d"
-
-S = "${WORKDIR}/fftw-${PV}-pl1"
+SRC_URI[md5sum] = "0d5915d7d39b3253c1cc05030d79ac47"
+SRC_URI[sha256sum] = "3b609b7feba5230e8f6dd8d245ddbefac324c5a6ae4186947670d9ac2cd25573"
 
 inherit autotools pkgconfig
 
@@ -76,6 +74,7 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
 FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
 FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
 
+FILES_${PN}-dev += "${libdir}/cmake"
 RDEPENDS_${PN}-dev = ""
 
 BBCLASSEXTEND = "native"
