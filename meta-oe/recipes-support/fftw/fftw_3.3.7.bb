@@ -75,6 +75,6 @@ FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
 FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
 
 FILES_${PN}-dev += "${libdir}/cmake"
-RDEPENDS_${PN}-dev = ""
+RDEPENDS_${PN}-dev = "libfftw libfftwl libfftwf"
 
 BBCLASSEXTEND = "native"
