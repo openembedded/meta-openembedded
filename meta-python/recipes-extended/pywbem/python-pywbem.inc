@@ -12,25 +12,37 @@ at http://www.dmtf.org/standards/wbem. \
 \
 It also provides a Python provider interface, and is the fastest and easiest \
 way to write providers on the planet."
-HOMEPAGE = "http://pywbem.sf.net/"
-LICENSE = "LGPLv2"
+HOMEPAGE = "http://pywbem.github.io"
+LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
-SECTION = "Development/Libraries"
-DEPENDS = "python-m2crypto-native python-typing-native"
-SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
-SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
-SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
+SRC_URI[md5sum] = "1465dfa92e4cbe558c773838b9b00711"
+SRC_URI[sha256sum] = "2a05f2c1a6ab4b08560a6da55fdaabd0f52f4d1e6df6e288b9ed927bf5c289ed"
 
-S = "${WORKDIR}/${BP}-dev"
+inherit pypi 
 
-inherit setuptools python-dir
+DEPENDS += " \
+    ${PYTHON_PN}-ply-native \
+    ${PYTHON_PN}-pyyaml-native \
+    ${PYTHON_PN}-six-native \
+"
 
 do_install_append() {
     mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
-    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
 
-    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
-    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
+    rm -f ${D}${bindir}/*.bat
 }
+
+RDEPENDS_${PN}_class-target += "\
+    ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-io \
+    ${PYTHON_PN}-netclient \
+    ${PYTHON_PN}-ply \
+    ${PYTHON_PN}-pyyaml \
+    ${PYTHON_PN}-six \
+    ${PYTHON_PN}-stringold \
+    ${PYTHON_PN}-threading \
+    ${PYTHON_PN}-unixadmin \
+    ${PYTHON_PN}-xml \
+"
 
 BBCLASSEXTEND = "native"

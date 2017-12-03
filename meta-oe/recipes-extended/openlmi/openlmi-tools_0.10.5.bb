@@ -7,7 +7,7 @@ SECTION = "System/Management"
 
 inherit setuptools
 
-DEPENDS = "python-native pywbem-native python-m2crypto pywbem"
+DEPENDS = "python-native python-pywbem-native python-m2crypto python-pywbem"
 
 SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
           "
