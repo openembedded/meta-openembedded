@@ -188,6 +188,7 @@ do_install_append() {
 
     # Installing slapd under ${sbin} is more FHS and LSB compliance
     mv ${D}${libexecdir}/slapd ${D}/${sbindir}/slapd
+    rmdir --ignore-fail-on-non-empty ${D}${libexecdir}
     SLAPTOOLS="slapadd slapcat slapdn slapindex slappasswd slaptest slapauth slapacl slapschema"
     cd ${D}/${sbindir}/
     rm -f ${SLAPTOOLS}
