@@ -59,5 +59,5 @@ FILES_lib${BPN} = "${base_libdir}/libpasswdqc.so.0"
 FILES_pam-${BPN} = "${base_libdir}/security/pam_passwdqc.so"
 FILES_${PN}-dbg += "${base_libdir}/security/.debug"
 
-RDEPENDS_${PN} = "lib${BPN}"
+RDEPENDS_${PN} = "lib${BPN} pam-${BPN}"
 RDEPENDS_pam-${BPN} = "lib${BPN}"
