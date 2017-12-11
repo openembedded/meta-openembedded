@@ -14,8 +14,8 @@ inherit autotools pkgconfig gnomebase gobject-introspection
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
            file://remove-yelp-help-rules-var.patch \
           "
-SRC_URI[md5sum] = "9964a2da14c5f845eae363889586ca43"
-SRC_URI[sha256sum] = "82d96dca5dec40ee34e2f41d49c13b4ea50da8f32a3a49ca2da802ff14dc18fe"
+SRC_URI[md5sum] = "d3dd9ba33c7d7c854ab207e1ba844dda"
+SRC_URI[sha256sum] = "07d1545570951aeded20e9fdc6d3d8a56aeefe2538734568c5335be336c6abed"
 
 EXTRA_OECONF += "--disable-man-pages"
 
