@@ -118,6 +118,10 @@ do_install_append() {
     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
         -i ${D}${bindir}/net-snmp-create-v3-user
     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+           -e "s@${STAGING_DIR_NATIVE}[=]*@@g" \
+           -e "s@${STAGING_DIR_HOST}[=]*@@g" \
+           -e "s@${WORKDIR}[=]*@@g" \
+           -e "s@${D}@@g" \
         -i ${D}${bindir}/net-snmp-config
 
     if [ "${HAS_PERL}" = "1" ]; then
