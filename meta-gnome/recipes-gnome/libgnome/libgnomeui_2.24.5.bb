@@ -17,6 +17,7 @@ SRC_URI += " \
     file://0001-suppress-string-format-literal-warning-to-fix-build-.patch \
     file://gnome-stock-pixbufs.h \
     file://no-pixbuf-csource.patch \
+    file://05_fix_invalid_utf8.patch \
 "
 SRC_URI[archive.md5sum] = "d4bb506b1916015323928faab5aa708b"
 SRC_URI[archive.sha256sum] = "ae352f2495889e65524c979932c909f4629a58e64290fb0c95333373225d3c0f"
