@@ -15,13 +15,13 @@ inherit bluetooth
 
 RDEPENDS_bluez4 = " \
     obexftp \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'libasound-module-bluez', '', d)} \
 "
 
 RDEPENDS_bluez5 = " \
     bluez5-noinst-tools \
     bluez5-obex \
     bluez5-testtools  \
-    libasound-module-bluez \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', \
         'pulseaudio-module-bluetooth-discover \
          pulseaudio-module-bluetooth-policy \
