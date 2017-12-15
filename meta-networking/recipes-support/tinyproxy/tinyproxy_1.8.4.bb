@@ -23,7 +23,7 @@ inherit autotools systemd useradd
 
 #User specific
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "nobody"
+USERADD_PARAM_${PN} = "nobody -g nogroup"
 GROUPADD_PARAM_${PN} = "--system tinyproxy"
 
 SYSTEMD_PACKAGES += "${BPN}"
