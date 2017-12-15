@@ -41,16 +41,16 @@ PACKAGES =+ "\
 
 RDEPENDS_${PN} = "\
     ${PN}-bin \
+    ${PN}-core \
     ${PN}-conch \
     ${PN}-mail \
     ${PN}-names \
-    ${PN}-news \
     ${PN}-runner \
     ${PN}-web \
     ${PN}-words \
 "
 
-RDEPENDS_${PN}-core = "python-core python-zopeinterface python-contextlib"
+RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat"
 RDEPENDS_${PN}-test = "${PN}"
 RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
 RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
