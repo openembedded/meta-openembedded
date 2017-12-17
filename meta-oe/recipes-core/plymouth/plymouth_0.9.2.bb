@@ -42,9 +42,6 @@ LOGO ??= "${datadir}/plymouth/bizcom.png"
 inherit autotools pkgconfig systemd
 
 do_install_append() {
-    install -d ${D}${systemd_unitdir}/system
-    install -m 644 ${B}/systemd-units/*.service ${D}${systemd_unitdir}/system
-    install -m 644 ${B}/systemd-units/systemd-ask-password-plymouth.path ${D}${systemd_unitdir}/system
     # Remove /var/run from package as plymouth will populate it on startup
     rm -fr "${D}${localstatedir}/run"
 
