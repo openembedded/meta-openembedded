@@ -8,15 +8,13 @@ DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit sha
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "cbe766b46f324e17d7abcfb4a89a1684"
-SRC_URI[archive.sha256sum] = "d0b6c9edab09d52472355657a2f0a14831b2e6c58caba395f721ab683f836ade"
+SRC_URI[archive.md5sum] = "44012824aa75797a7d272cd60f07b488"
+SRC_URI[archive.sha256sum] = "7ef9b2aec234004271a575118a0e35b3c36ce3309e5f9da109635651843372b4"
 
 EXTRA_OECONF = " \
     --disable-gdu \
     --enable-udisks2 \
     --disable-documentation \
-    --with-archive-includes=${STAGING_INCDIR} \
-    --with-archive-libs=${STAGING_LIBDIR} \
 "
 
 PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
@@ -46,7 +44,6 @@ PACKAGECONFIG[afc] = "--enable-afc, --disable-afc, libimobiledevice libplist"
 PACKAGECONFIG[archive] = "--enable-archive, --disable-archive, libarchive"
 PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
 PACKAGECONFIG[gcr] = "--enable-gcr, --disable-gcr, gcr"
-PACKAGECONFIG[gtk] = "--enable-gtk, --disable-gtk, gtk+3"
 PACKAGECONFIG[http] = "--enable-http, --disable-http, libsoup-2.4"
 PACKAGECONFIG[libmtp] = "--enable-libmtp, --disable-libmtp, libmtp"
 PACKAGECONFIG[libgphoto2] = "--enable-gphoto2, --disable-gphoto2, libgphoto2"
