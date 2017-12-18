@@ -6,10 +6,10 @@ format for Python. The pymongo package is a native Python driver for \
 MongoDB. The gridfs package is a gridfs implementation on top of pymongo."
 HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2a944942e1496af1886903d274dedb13"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRC_URI[md5sum] = "35ae53073a25603591e085b18bc5a0ec"
-SRC_URI[sha256sum] = "e820d93414f3bec1fa456c84afbd4af1b43ff41366321619db74e6bc065d6924"
+SRC_URI[md5sum] = "2f64fa7691c77535b72050704cc12afb"
+SRC_URI[sha256sum] = "c6de26d1e171cdc449745b82f1addbc873d105b8e7335097da991c0fc664a4a8"
 
 PACKAGES =+ "${PYTHON_PN}-bson"
 
