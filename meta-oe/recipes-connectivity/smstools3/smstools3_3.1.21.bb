@@ -6,18 +6,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
 HOMEPAGE = "http://smstools3.kekekasvi.com"
 
 SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
-           file://sms_binpath_and_psops.patch \
-           file://fix-makefile-override.patch"
+           file://sms_binpath.patch"
 
-SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
-SRC_URI[sha256sum] = "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
+SRC_URI[md5sum] = "6a9f038fb38a49cc3a4f8f14a88fb8af"
+SRC_URI[sha256sum] = "a26ba4c02b16f6cf13177bffca6c9230dc5fefaeba8e3030cd4e4905f6a92084"
 
 
 S = "${WORKDIR}/${BPN}"
 
 EXTRA_OEMAKE += "LFLAGS='${LDFLAGS}'"
 
-RDEPENDS_${PN} = "bash"
 INITSCRIPT_NAME = "sms3"
 INITSCRIPT_PARAMS = "defaults"
 

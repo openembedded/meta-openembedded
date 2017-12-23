@@ -12,8 +12,5 @@ Index: smstools3/scripts/sms3
 -RESETMODEMS=/usr/local/bin/smsd_resetmodems
 +RESETMODEMS=/usr/bin/smsd_resetmodems
  NAME=smsd
--PSOPT="-e"
-+PSOPT=""
+ PSOPT="-e"
  ECHO=echo
- case `uname` in
-   *BSD|Darwin)
