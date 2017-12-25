@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
            file://0001-Fix-sesman.ini-and-xrdp.ini.patch \
            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
            file://0001-Fix-the-compile-error.patch \
+           file://0001-Fix-of-CVE-2017-16927.patch \
            "
 
 SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
