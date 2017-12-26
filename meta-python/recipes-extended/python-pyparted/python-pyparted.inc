@@ -11,11 +11,13 @@ LIC_FILES_CHKSUM = "\
 DEPENDS += "parted"
 
 # upstream only publishes releases in github archives which are discouraged
-SRCREV = "69c4a478e43d3eff6ae3a0116fa38da06776d5f5"
-SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
-           file://0001-fix-version-float-check.patch \
-"
+SRCREV = "1fdb15120f35f5da1dc7ec116522f0c796a8376a"
+SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
+
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} += "parted (>= 2.3)"
+RDEPENDS_${PN}_class-target += " \
+    parted (>= 2.3) \
+    ${PYTHON_PN}-subprocess \
+"
 RDEPENDS_${PN}_class-native = ""
