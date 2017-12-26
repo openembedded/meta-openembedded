@@ -24,9 +24,6 @@ PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 cairo,cairo"
 PACKAGECONFIG[pci] = "--enable-pci,--disable-pci,libpciaccess,libpciaccess"
 
 # Split hwloc library into separate subpackage
-PACKAGES_prepend = " lib${PN} "
-FILES_lib${PN} += "${libdir}/lib${PN}.so*"
-RDEPENDS_${PN} += "lib${PN} (= ${EXTENDPKGV})"
-
-# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
-INSANE_SKIP_lib${PN} += "dev-so"
+PACKAGES_prepend = " libhwloc "
+FILES_libhwloc += "${libdir}/libhwloc.so.*"
+RDEPENDS_${PN} += "libhwloc (= ${EXTENDPKGV})"
