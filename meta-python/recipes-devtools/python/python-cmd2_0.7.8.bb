@@ -11,6 +11,7 @@ inherit pypi setuptools
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-doctest \
     ${PYTHON_PN}-pyparsing \
+    ${PYTHON_PN}-pyperclip \
     ${PYTHON_PN}-shell \
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-stringold \
