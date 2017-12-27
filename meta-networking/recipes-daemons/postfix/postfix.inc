@@ -225,8 +225,6 @@ do_install_append_class-target() {
 
 }
 
-NATIVE_INSTALL_WORKS = "1"
-
 ALTERNATIVE_${PN} = "sendmail"
 ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
 ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
