@@ -11,5 +11,15 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyroute2:"
 inherit pypi
 
 RDEPENDS_${PN} += " \
+    ${PYTHON_PN}-ctypes \
+    ${PYTHON_PN}-distutils \
+    ${PYTHON_PN}-importlib \
     ${PYTHON_PN}-json \
-    "
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-multiprocessing \
+    ${PYTHON_PN}-pkgutil \
+    ${PYTHON_PN}-pprint \
+    ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-subprocess \
+    ${PYTHON_PN}-unixadmin \
+"
