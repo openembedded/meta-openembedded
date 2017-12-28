@@ -16,6 +16,7 @@ DEPENDS += " \
 "
 
 RDEPENDS_${PN} += " \
+    ${PYTHON_PN}-json \
     ${PYTHON_PN}-numpy \
     ${PYTHON_PN}-dateutil \
     ${PYTHON_PN}-pytz \
