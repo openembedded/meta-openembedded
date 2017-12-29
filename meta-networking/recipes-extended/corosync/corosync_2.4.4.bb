@@ -7,7 +7,9 @@ SECTION = "base"
 
 inherit autotools pkgconfig systemd useradd
 
-SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
+SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
+           file://corosync.conf \
+          "
 
 SRC_URI[md5sum] = "69db29ff4bc035936946be44fc8be5cd"
 SRC_URI[sha256sum] = "9bd4707bb271df16f8d543ec782eb4c35ec0330b7be696b797da4bd8f058a25d"
@@ -47,6 +49,7 @@ do_configure_prepend() {
 }
 
 do_install_append() {
+    install -D -m 0644 ${WORKDIR}/corosync.conf ${D}/${sysconfdir}/corosync/corosync.conf.example
     install -d ${D}${sysconfdir}/sysconfig/
     install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
     install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
