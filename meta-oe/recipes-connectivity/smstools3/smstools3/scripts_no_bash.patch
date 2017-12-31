@@ -1,0 +1,32 @@
+--- smstools3.orig/scripts/sendsms	2006-02-04 11:52:06.000000000 -0800
++++ smstools3/scripts/sendsms	2017-12-30 15:40:28.009169106 -0800
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ # This script send a text sms at the command line by creating
+ # a sms file in the outgoing queue.
+ 
+--- smstools3.orig/scripts/sms2html	2006-02-04 11:52:06.000000000 -0800
++++ smstools3/scripts/sms2html	2017-12-30 15:39:17.496694390 -0800
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ 
+ # This script converts a received sms file into a html file. 
+ 
+--- smstools3.orig/scripts/sms2unicode	2006-02-04 11:52:06.000000000 -0800
++++ smstools3/scripts/sms2unicode	2017-12-30 15:33:14.477250179 -0800
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ 
+ # This script converts a received sms file into a pure unicode text file.
+ 
+--- smstools3/scripts/unicode2sms	2006-02-04 11:52:06.000000000 -0800
++++ smstools3/scripts/unicode2sms.new	2017-12-30 15:33:56.918536044 -0800
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ 
+ # This script converts a pure unicode text file into an sms file for sending.
+ 
