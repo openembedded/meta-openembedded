@@ -16,11 +16,11 @@ RDEPENDS_${PN}-ptest = "bash python-protobuf"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
 
-SRCREV = "b04e5cba356212e4e8c66c61bbe0c3a20537c5b9"
+SRCREV = "106ffc04be1abf3ff3399f54ccf149815b287dd9"
 
-PV = "3.4.1+git${SRCPV}"
+PV = "3.5.1+git${SRCPV}"
 
-SRC_URI = "git://github.com/google/protobuf.git;branch=3.4.x \
+SRC_URI = "git://github.com/google/protobuf.git;branch=3.5.x \
 	   file://run-ptest \
           "
 
