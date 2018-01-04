@@ -8,7 +8,7 @@ PR = "r0"
 
 BPV = "0.8.1"
 PV = "${BPV}"
-SRCREV = "03405ab45884e4264dfa0371c032b2baaeeaaa98"
+SRCREV = "318bcae5249722873bf58b27afdd20473c7047cc"
 
 S = "${WORKDIR}/git"
 
