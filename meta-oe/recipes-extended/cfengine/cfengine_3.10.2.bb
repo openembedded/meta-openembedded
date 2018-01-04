@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 - 2016 Wind River Systems, Inc.
+# Copyright (C) 2014 - 2017 Wind River Systems, Inc.
 #
 SUMMARY = "CFEngine is an IT infrastructure automation framework"
 
@@ -11,7 +11,7 @@ its lifecycle. CFEngine takes systems from Build to Deploy, Manage and Audit."
 HOMEPAGE = "http://cfengine.com"
 
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cd59c3650c8b7ff36bab1cc6587b097a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
 
 DEPENDS = "attr tokyocabinet"
 
@@ -20,14 +20,17 @@ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz
            file://set-path-of-default-config-file.patch \
 "
 
-SRC_URI[md5sum] = "63da39655cfca30ca885fcc4a1bf8aa4"
-SRC_URI[sha256sum] = "32a38aedf1199c2361e1335e0d4a1d98f9efa7cd591bcb647f35c7395bb66f2d"
+SRC_URI[md5sum] = "c16baf08189a1af6fcf2e2ff61102992"
+SRC_URI[sha256sum] = "d4fa9ac7276dba7b85d6757aab2f0929ab8d3b115cb0e7b0cf984760347429d7"
 
 inherit autotools systemd
 
 export EXPLICIT_VERSION="${PV}"
 
-SYSTEMD_SERVICE_${PN} = "cfengine3.service cfengine3-web.service"
+SYSTEMD_SERVICE_${PN} = "cfengine3.service cf-apache.service cf-hub.service cf-postgres.service \
+                         cf-runalerts.service cf-consumer.service cf-execd.service \
+                         cf-monitord.service  cf-redis-server.service  cf-serverd.service \
+"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
 PACKAGECONFIG ??= "libpcre openssl \
