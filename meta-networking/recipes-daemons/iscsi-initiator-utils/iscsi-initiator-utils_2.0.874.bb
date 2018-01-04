@@ -22,6 +22,13 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
     file://iscsi-initiator.service \
     file://iscsi-initiator-targets.service \
     file://set_initiatorname \
+    file://0001-Check-for-root-peer-user-for-iscsiuio-IPC.patch \
+    file://0002-iscsiuio-should-ignore-bogus-iscsid-broadcast-packet.patch \
+    file://0003-Ensure-all-fields-in-iscsiuio-IPC-response-are-set.patch \
+    file://0004-Do-not-double-close-IPC-file-stream-to-iscsid.patch \
+    file://0005-Ensure-strings-from-peer-are-copied-correctly.patch \
+    file://0006-Skip-useless-strcopy-and-validate-CIDR-length.patch \
+    file://0007-Check-iscsiuio-ping-data-length-for-validity.patch \
 "
 
 S = "${WORKDIR}/git"
