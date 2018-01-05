@@ -17,8 +17,9 @@ S = "${WORKDIR}/git/src"
 
 VIMDIR = "vim${@d.getVar('PV').split('.')[0]}${@d.getVar('PV').split('.')[1]}"
 
-inherit autotools update-alternatives
-inherit autotools-brokensep
+inherit autotools-brokensep update-alternatives
+
+CLEANBROKEN = "1"
 
 # vim configure.in contains functions which got 'dropped' by autotools.bbclass
 do_configure () {
