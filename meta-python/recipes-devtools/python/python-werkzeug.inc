@@ -10,8 +10,8 @@ HOMEPAGE = "http://werkzeug.pocoo.org/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ed9a0b7c0254616d72dadb98b293ef1b"
 
-SRC_URI[md5sum] = "533da0a836a7923704f35918da3bdc1e"
-SRC_URI[sha256sum] = "4aea27a9513b056346e9c8b49107f4ee7927f7bcf0be63024ecee39d5b87e9ef"
+SRC_URI[md5sum] = "6d20b5be2d245be4ac7706cc390d130c"
+SRC_URI[sha256sum] = "c3fd7a7d41976d9f44db327260e263132466836cef6f91512889ed60ad26557c"
 
 PYPI_PACKAGE = "Werkzeug"
 
