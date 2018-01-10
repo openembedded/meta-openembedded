@@ -1,0 +1,27 @@
+From 7be4680930e2867cefd5c8fe27a4ae81a4ae2628 Mon Sep 17 00:00:00 2001
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+Date: Tue, 9 Jan 2018 18:38:45 -0800
+Subject: [PATCH] stress-fcntl: fix build for musl
+
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+
+Upstream-status: Pending
+---
+ stress-fcntl.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/stress-fcntl.c b/stress-fcntl.c
+index b7eade2..9fa5c38 100644
+--- a/stress-fcntl.c
++++ b/stress-fcntl.c
+@@ -413,6 +413,7 @@ ofd_lock_abort:	{ /* Nowt */ }
+ 
+ #if defined(F_GET_FILE_RW_HINT) && defined(F_SET_FILE_RW_HINT)
+ 	{
++		int ret;
+ 		size_t i;
+ 		unsigned long hint;
+ 		static const unsigned long hints[] = {
+-- 
+2.14.3
+

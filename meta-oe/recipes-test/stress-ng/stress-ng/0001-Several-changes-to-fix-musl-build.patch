@@ -11,7 +11,6 @@ swapcontext, musl provide the definition but not the implementation due
   to that functions are pre-POSIX and set to be deprecated.
   stress-{resources, pty}.c: Doesn't include termio.h and remove stress
   operations that uses struct termio, musl doesn't provide that struct.
-stress-pthread.c: Change pthread_yield to sched_yield to be more compatible.
 stress-malloc.c: Check for definition of M_MMAP_THRESHOLD musl doesn't
   ptovide that constant.
 stress-madvise.c: Add static poision_count integer, definition of
@@ -19,13 +18,13 @@ stress-madvise.c: Add static poision_count integer, definition of
 cache.c: Define GLOB_ONLYDIR not available on MUSL.
 
 Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+
 Upstream-status: Pending
 ---
  cache.c            |  4 ++++
- stress-context.c   |  2 +-
  stress-madvise.c   |  1 +
  stress-malloc.c    |  2 +-
- stress-pthread.c   |  2 +-
  stress-pty.c       | 18 ------------------
  stress-resources.c |  1 -
  stress-stackmmap.c |  2 +-
@@ -46,19 +45,6 @@ index e01fad0..27870ee 100644
  #if defined(__linux__)
  #define SYS_CPU_PREFIX               "/sys/devices/system/cpu"
  #define GLOB_PATTERN SYS_CPU_PREFIX  "/cpu[0-9]*"
-diff --git a/stress-context.c b/stress-context.c
-index c5f50ed..67209e5 100644
---- a/stress-context.c
-+++ b/stress-context.c
-@@ -24,7 +24,7 @@
-  */
- #include "stress-ng.h"
- 
--#if !defined(__OpenBSD__)
-+#if !defined(__OpenBSD__) && False
- 
- #include <ucontext.h>
- 
 diff --git a/stress-madvise.c b/stress-madvise.c
 index 43ea454..2e1f8ee 100644
 --- a/stress-madvise.c
@@ -84,19 +70,6 @@ index 8dbe5cc..f505f32 100644
  	if (get_setting("malloc-threshold", &malloc_threshold))
  		(void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
  #endif
-diff --git a/stress-pthread.c b/stress-pthread.c
-index 323a1d4..8269f4c 100644
---- a/stress-pthread.c
-+++ b/stress-pthread.c
-@@ -139,7 +139,7 @@ static void *stress_pthread_func(void *parg)
- 			break;
- 		}
- #if !defined(__NetBSD__) && !defined(__sun__)
--		(void)pthread_yield();
-+		(void)sched_yield();
- #endif
- 	}
- 	ret = pthread_mutex_unlock(&mutex);
 diff --git a/stress-pty.c b/stress-pty.c
 index 8c3edf8..518f118 100644
 --- a/stress-pty.c
