@@ -123,6 +123,7 @@ RDEPENDS_${PN} += "\
     ${PN}-plugin-x509 \
     ${PN}-plugin-xauth-generic \
     ${PN}-plugin-xcbc \
+    ${PN}-plugin-curve25519 \
     "
 
 RPROVIDES_${PN} += "${PN}-systemd"
