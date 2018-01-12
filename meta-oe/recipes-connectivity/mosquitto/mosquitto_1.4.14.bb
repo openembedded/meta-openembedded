@@ -8,9 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62ddc846179e908dc0c8efec4a42ef20 \
                     file://epl-v10;md5=8d383c379e91d20ba18a52c3e7d3a979 \
                     file://notice.html;md5=a00d6f9ab542be7babc2d8b80d5d2a4c \
 "
+DEPENDS = "uthash"
 
 SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
            file://build.patch \
+           file://0002-uthash-remove-in-tree-version.patch \
            file://mosquitto.service \
            file://mosquitto.init \
 "
