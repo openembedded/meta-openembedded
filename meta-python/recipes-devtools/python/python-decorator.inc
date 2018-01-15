@@ -9,8 +9,8 @@ decorator, just because you can."
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=893f896413826096ce5270c700a498fd"
 
-SRC_URI[md5sum] = "a0f7f4fe00ae2dde93494d90c192cf8c"
-SRC_URI[sha256sum] = "7cb64d38cb8002971710c8899fbdfb859a23a364b7c99dab19d1f719c2ba16b5"
+SRC_URI[md5sum] = "e886337e9f70e70d45d67266b8e66044"
+SRC_URI[sha256sum] = "7d46dd9f3ea1cf5f06ee0e4e1277ae618cf48dfb10ada7c8427cd46c42702a0e"
 
 inherit pypi
 
