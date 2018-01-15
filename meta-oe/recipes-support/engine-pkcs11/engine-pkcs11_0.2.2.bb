@@ -6,7 +6,7 @@ call by openssl to a PKCS cards and software for using smart cards in PKCS"
 HOMEPAGE = "https://github.com/OpenSC/engine_pkcs11"
 SECTION = "Development/Libraries"
 LICENSE = "LGPLv2.1+"
-LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
+LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;beginline=1;endline=26;md5=973a19f8a6105de047f2adfbbfc04c33"
 DEPENDS = "openssl libp11"
 
 SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git"
