@@ -22,6 +22,8 @@ EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
 LDFLAGS += "-fuse-ld=gold"
 TOOLCHAIN = "gcc"
 
+USE_NLS = "yes"
+
 do_configure_prepend() {
     cp ${STAGING_DATADIR_NATIVE}/gettext/gettext.h ${S}/include
     ${S}/autogen.sh
