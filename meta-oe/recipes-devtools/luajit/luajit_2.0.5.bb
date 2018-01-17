@@ -53,6 +53,7 @@ EXTRA_OEMAKE = "\
     \
     'PREFIX=${prefix}' \
     'MULTILIB=${baselib}' \
+    'LDCONFIG=:' \
 "
 
 do_compile () {
