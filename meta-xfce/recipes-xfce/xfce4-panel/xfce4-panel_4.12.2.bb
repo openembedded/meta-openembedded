@@ -8,8 +8,8 @@ inherit xfce gtk-doc distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "0b943f2e72a3693dddb1af559826cb62"
-SRC_URI[sha256sum] = "93d58b80cca9c9eb58adb281bc75404df7cf6cae89f7f98bb9f38690009aa2e8"
+SRC_URI[md5sum] = "803c9aabc2925dc97f96de125c52ba2e"
+SRC_URI[sha256sum] = "42058abb81b8f87691d3999627447de71c3285bcf055f308aab5cefab2de0ce9"
 SRC_URI += " \
     file://0001-clock-time-make-change-of-system-s-timezone-change-t.patch \
     file://0002-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
