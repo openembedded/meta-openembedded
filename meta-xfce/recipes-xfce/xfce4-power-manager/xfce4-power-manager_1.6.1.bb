@@ -12,8 +12,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS += "gtk+3 glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
            libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
 
-SRC_URI[md5sum] = "2e2e24a1a22912d6a561ba6155887503"
-SRC_URI[sha256sum] = "bde3157e06ab31ff23648d163d53ee5095f7819544a9f48d3a96d57829857f2b"
+SRC_URI[md5sum] = "17f0e6464ad6b3bc6a657f595bf91430"
+SRC_URI[sha256sum] = "1ea825452343b895566068018b6d5078608f8f46ce8075ba6bbb4b848f48656b"
 
 EXTRA_OECONF = " \
     --enable-network-manager \
