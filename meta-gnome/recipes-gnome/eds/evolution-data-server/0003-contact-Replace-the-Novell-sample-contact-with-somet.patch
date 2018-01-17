@@ -7,26 +7,13 @@ Subject: [PATCH 1/5] contact: Replace the Novell sample contact with something
 Upstream-Status: Inappropriate [configuration]
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- addressbook/backends/file/Makefile.am    |   1 +
- addressbook/libedata-book/ximian-vcard.h | 179 ++++++++++++++++++-------------
+ src/addressbook/libedata-book/ximian-vcard.h | 179 ++++++++++++++++++-------------
  2 files changed, 103 insertions(+), 77 deletions(-)
 
-diff --git a/addressbook/backends/file/Makefile.am b/addressbook/backends/file/Makefile.am
-index 08cf58f..17e7149 100644
---- a/addressbook/backends/file/Makefile.am
-+++ b/addressbook/backends/file/Makefile.am
-@@ -2,6 +2,7 @@ ebook_backend_LTLIBRARIES = libebookbackendfile.la
- 
- libebookbackendfile_la_CPPFLAGS = \
- 	$(AM_CPPFLAGS)					\
-+	-DCREATE_DEFAULT_VCARD \
- 	-DG_LOG_DOMAIN=\"libebookbackend\"		\
- 	-I$(top_srcdir)					\
- 	-I$(top_builddir)				\
-diff --git a/addressbook/libedata-book/ximian-vcard.h b/addressbook/libedata-book/ximian-vcard.h
+diff --git a/src/addressbook/libedata-book/ximian-vcard.h b/src/addressbook/libedata-book/ximian-vcard.h
 index 782d37b..5b0b250 100644
---- a/addressbook/libedata-book/ximian-vcard.h
-+++ b/addressbook/libedata-book/ximian-vcard.h
+--- a/src/addressbook/libedata-book/ximian-vcard.h
++++ b/src/addressbook/libedata-book/ximian-vcard.h
 @@ -1,80 +1,105 @@
  #define XIMIAN_VCARD \
  "BEGIN:VCARD\n" \

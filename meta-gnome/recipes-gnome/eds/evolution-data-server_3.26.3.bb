@@ -4,58 +4,70 @@ BUGTRACKER = "https://bugzilla.gnome.org/"
 
 LICENSE = "LGPLv2 & LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
-                    file://camel/camel.h;endline=24;md5=b02175c88f821224746b347a89731a2b \
-                    file://libedataserver/e-data-server-util.h;endline=20;md5=934502f03c84523aa059d4825887b380 \
-                    file://calendar/libecal/e-cal.h;endline=24;md5=5d496b9b6fd2a4fdbbfc31ef9455c9d0"
+                    file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
+                    file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543 \
+                    file://src/calendar/libecal/e-cal.h;endline=24;md5=e699ec3866f73f129f7a4ffffdcfc196"
 
-DEPENDS = "intltool-native glib-2.0 gtk+3 gconf dbus db virtual/libiconv zlib libsoup-2.4 libglade libical libgnome-keyring gperf-native libgdata nss"
+DEPENDS = " \
+    intltool-native gperf-native \
+    glib-2.0 gtk+3 gconf libgnome-keyring libgdata \
+    dbus db virtual/libiconv zlib libsoup-2.4 libglade libical nss libsecret \
+"
 
-SRCREV = "a9e4e74ec4473a4fd09e56b690bd4fa72f686687"
+inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
 
-# 3.4 series needs libgdata-0.10*, 3.8 series needs also libsecret instead of gnome-keyring
-PV = "3.2.3+git${SRCPV}"
+SRC_URI += " \
+    file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
+    file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
+    file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+    file://iconv-detect.h \
+"
+SRC_URI[archive.md5sum] = "568a21a4df4e0ec985c849b38fc66908"
+SRC_URI[archive.sha256sum] = "63b1ae5f76be818862f455bf841b5ebb1ec3e1f4df6d3a16dc2be348b7e0a1c5"
 
-SRC_URI = "git://git.gnome.org/evolution-data-server;branch=gnome-3-2 \
-           file://0001-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-           file://0002-Fix-for-automake-1.12.x.patch \
-           file://0003-Disable-Werror-for-automake.patch \
-           file://0004-configure-Fix-libical-pkg-config-trying-to-use-host-.patch \
-           file://0005-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
-           file://0006-configure.ac-do-not-overwrite-localedir.patch \
-           file://iconv-detect.h \
-           file://0001-imapx-Fix-signature-for-imapx_tokenise_struct.patch \
-           "
+LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
+LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
 
-S = "${WORKDIR}/git"
+EXTRA_OECMAKE = " \
+    -DWITH_KRB5=OFF \
+    -DENABLE_GOA=OFF \
+    -DENABLE_UOA=OFF \
+    -DENABLE_GOOGLE_AUTH=OFF \
+    -DENABLE_WEATHER=OFF \
+    -D${LKSTRFTIME} \
+"
 
-inherit autotools gtk-doc pkgconfig gettext gobject-introspection
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
+
+EXTRA_OECONF = "--with-libdb=${STAGING_DIR_HOST}${prefix} \
+                --disable-nntp --disable-gtk-doc"
 
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
 
-# Parallel make shows many issues with this source code.
-# Current problems seem to be duplicate execution of the calander/backends
-# directories by make resulting in truncated/corrupt .la files
-#PARALLEL_MAKE = ""
-
 do_configure_append () {
-    cp ${WORKDIR}/iconv-detect.h ${S}
+    cp ${WORKDIR}/iconv-detect.h ${S}/src
+
+    # fix native perl shebang
+    sed -i 's:${STAGING_BINDIR_NATIVE}/perl-native:${bindir}:' ${B}/src/tools/addressbook-export/csv2vcard
 }
 
 do_compile_prepend() {
-        export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
+    export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
 }
 
-EXTRA_OECONF = "--without-openldap \
-                --with-libdb=${STAGING_DIR_HOST}${prefix} \
-                --disable-nntp --disable-goa --disable-weather --disable-gtk-doc"
 
 PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
              libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
              libedataserver libedataserver-dev \
              libedataserverui libedataserverui-dev"
 
-FILES_${PN} =+ "${datadir}/evolution-data-server-*/ui/"
+FILES_${PN} =+ "${systemd_user_unitdir} \
+                ${datadir}/dbus-1 \
+                ${datadir}/evolution-data-server-*/ui/"
+RDEPENDS_${PN} += "perl"
+
 FILES_${PN}-dev =+ "${libdir}/pkgconfig/evolution-data-server-*.pc"
 FILES_${PN}-dbg =+ "${libdir}/evolution-data-server*/camel-providers/.debug \
                     ${libdir}/evolution-data-server*/calendar-backends/.debug \
