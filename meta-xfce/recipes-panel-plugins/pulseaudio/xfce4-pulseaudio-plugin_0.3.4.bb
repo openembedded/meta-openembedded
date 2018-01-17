@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
 
 DEPENDS += "pulseaudio"
 
-SRC_URI[md5sum] = "d3d3e012369af6d2302d4b70a7720a17"
-SRC_URI[sha256sum] = "d6aae9409714c5ddea975c350b4d517e078a5550190165b17ca062d0eb69f9a6"
+SRC_URI[md5sum] = "05633b8776dd3dcd4cda8580613644c3"
+SRC_URI[sha256sum] = "43fa39400eccab1f3980064f42dde76f5cf4546a6ea0a5dc5c4c5b9ed2a01220"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
