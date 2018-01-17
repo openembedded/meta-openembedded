@@ -8,10 +8,9 @@ DEPENDS = "alsa-lib ncurses glib-2.0"
 
 SRC_URI = " \
     git://github.com/FluidSynth/fluidsynth.git;branch=1.1.x \
-    file://0001-avoid-buffer-overrun-in-fluid_synth_nwrite_float.patch \
-    file://0002-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
+    file://0001-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
 "
-SRCREV = "12e7afe3a806a6b397f28e0ca4bc6bab9ebe7047"
+SRCREV = "fe37923393d6a76f42ed044aa56dadc66ec909ce"
 S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig lib_package
