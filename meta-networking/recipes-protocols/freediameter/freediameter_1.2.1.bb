@@ -7,7 +7,9 @@ Accounting needs."
 
 HOMEPAGE = "http://www.freediameter.net"
 
-DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn lksctp-tools"
+DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn lksctp-tools virtual/kernel"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 fd_pkgname = "freeDiameter"
 
@@ -121,8 +123,8 @@ FILES_${PN} += "${libdir}/${fd_pkgname}/*"
 
 RDEPENDS_${PN}  = "glib-2.0 gnutls libidn"
 RDEPENDS_${PN} += "openssl openssl-conf openssl-engines"
-RDEPENDS_${PN} += "kernel-module-tipc kernel-module-sctp" 
-RDEPENDS_${PN} += "kernel-module-udp-tunnel kernel-module-ipip"
+RRECOMMENDS_${PN} += "kernel-module-tipc kernel-module-sctp" 
+RRECOMMENDS_${PN} += "kernel-module-udp-tunnel kernel-module-ipip"
 RDEPENDS_${PN}-ptest = "cmake"
 
 INITSCRIPT_PACKAGES = "${PN}"
