@@ -1,13 +1,15 @@
 DESCRIPTION = "A database migration tool for SQLAlchemy"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d07407716fd24408b5747b0fa2262775"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
 
-SRC_URI[md5sum] = "fcb096bccc87c8770bd07a04606cb989"
-SRC_URI[sha256sum] = "042851ebe9efa07be6dc1395b1793b6c1d8964a39b73a0ce1649e2bcd41ea732"
+SRC_URI[md5sum] = "3e82bbe325464fd542ab4cc44929c813"
+SRC_URI[sha256sum] = "46f4849c6dce69f54dd5001b3215b6a983dee6b17512efee10e237fa11f20cfa"
 
 PYPI_PACKAGE = "alembic"
 
 RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-dateutil \
     ${PYTHON_PN}-editor \
+    ${PYTHON_PN}-mako \
     ${PYTHON_PN}-sqlalchemy \
-    "
+"
