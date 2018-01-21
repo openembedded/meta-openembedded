@@ -11,4 +11,4 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools3 python3native pypi
 
-RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-selectors ${PYTHON_PN}-enum"
+RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-selectors"
