@@ -9,6 +9,5 @@ inherit pypi
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-pprint \
-    ${PYTHON_PN}-textutils \
     ${PYTHON_PN}-xml \
 "

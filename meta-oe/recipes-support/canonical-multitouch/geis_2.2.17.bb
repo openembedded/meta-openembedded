@@ -40,7 +40,6 @@ RDEPENDS_${PN}-bin = " \
     python3-shell \
     python3-stringold \
     python3-subprocess \
-    python3-textutils \
     python3-threading \
 "
 

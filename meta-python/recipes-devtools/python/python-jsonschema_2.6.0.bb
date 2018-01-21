@@ -7,4 +7,5 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-functools32 \
     ${PYTHON_PN}-lang \
     ${PYTHON_PN}-re \
+    ${PYTHON_PN}-textutils \ 
 "

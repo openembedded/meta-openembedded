@@ -4,5 +4,4 @@ require python-prompt-toolkit.inc
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-shell \
-    ${PYTHON_PN}-textutils \
 "
