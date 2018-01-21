@@ -13,10 +13,13 @@ DEPENDS += "libxml2 \
         libxml-sax-perl-native \
         zlib \
 "
-RDEPENDS_${PN} += "libxml2 \
-        libxml-sax-perl \
-        libxml-sax-base-perl \
-        zlib \
+RDEPENDS_${PN} += "\
+    libxml2 \
+    libxml-sax-perl \
+    libxml-sax-base-perl \
+    perl-module-encode \
+    perl-module-data-dumper \
+    zlib \
 "
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
@@ -27,8 +30,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1 \
     file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446 \
 "
-SRC_URI[libxml.md5sum] = "4dd1efcda5159c9e73139a4546190665"
-SRC_URI[libxml.sha256sum] = "b04c77dea55f9f270e1040e3a1d4f79b81dcdcd4da3e648f92dcf6c80bbe19df"
+SRC_URI[libxml.md5sum] = "43546fd9a3974f19323f9fb04861ece9"
+SRC_URI[libxml.sha256sum] = "721452e3103ca188f5968ab06d5ba29fe8e00e49f4767790882095050312d476"
 
 S = "${WORKDIR}/XML-LibXML-${PV}"
 
