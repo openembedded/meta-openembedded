@@ -27,6 +27,5 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-doctest \
     ${PYTHON_PN}-enum \
     ${PYTHON_PN}-logging \
-    ${PYTHON_PN}-signal \
     ${PYTHON_PN}-xml \
 "
