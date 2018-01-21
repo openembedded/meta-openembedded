@@ -19,6 +19,5 @@ FILES_${PN}-cli += " \
 "
 
 RDEPENDS_${PN}_class-target += " \
-    ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-logging \
 "

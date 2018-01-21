@@ -30,7 +30,6 @@ EXTRA_OECONF = "--disable-integration-tests"
 
 FILES_${PN}-bin = "${bindir}"
 RDEPENDS_${PN}-bin = " \
-    python3-argparse \
     python3-compression \
     python3-core \
     python3-crypt \

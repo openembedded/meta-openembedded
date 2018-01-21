@@ -9,7 +9,6 @@ SRC_URI[sha256sum] = "da89e94fa234d4ebe7f43a26d4b06a5d14ea767fbd2c4767732e4d9644
 PYPI_PACKAGE="python-can"
 
 RDEPENDS_${PN}_class-target += "\
-    ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-importlib \
     ${PYTHON_PN}-logging \

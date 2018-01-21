@@ -31,7 +31,6 @@ FILES_${PN}-win32 = " \
 "
 
 RDEPENDS_${PN} = "\
-    ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-fcntl \
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-logging \

@@ -22,7 +22,6 @@ DISTUTILS_INSTALL_ARGS = "--prefix=${D}/${prefix} \
 FILES_${PN} += "${datadir}/*"
 
 RDEPENDS_${PN} += " \
-    ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-compression \
     ${PYTHON_PN}-doctest \
     ${PYTHON_PN}-logging \

@@ -14,7 +14,6 @@ FILES_${PN} += "${datadir}/django"
 BBCLASSEXTEND = "native nativesdk"
 
 RDEPENDS_${PN} += "\
-    ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-compression \
     ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-datetime \

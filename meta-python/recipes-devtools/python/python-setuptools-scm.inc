@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "e163e8a12d2121f77575773cfc2b5988275dc1f1d2541fdf780127c29d
 PYPI_PACKAGE = "setuptools_scm"
 inherit pypi
 
-RDEPENDS_${PN}_class-target = "${PYTHON_PN}-py ${PYTHON_PN}-setuptools ${PYTHON_PN}-argparse ${PYTHON_PN}-debugger ${PYTHON_PN}-json"
+RDEPENDS_${PN}_class-target = "${PYTHON_PN}-py ${PYTHON_PN}-setuptools ${PYTHON_PN}-debugger ${PYTHON_PN}-json"
 RDEPENDS_${PN}_class-native = "${PYTHON_PN}-setuptools-native"
 
 BBCLASSEXTEND = "native"

@@ -10,7 +10,6 @@ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools
                    file://pytest_version_fix.patch "
 
 RDEPENDS_${PN}_class-target += " \
-    ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-attrs \
     ${PYTHON_PN}-debugger \
     ${PYTHON_PN}-json \
