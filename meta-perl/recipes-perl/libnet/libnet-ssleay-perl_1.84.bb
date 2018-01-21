@@ -11,27 +11,30 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
 
 DEPENDS = "openssl zlib openssl-native"
-RDEPENDS_${PN} += "perl-module-carp \
-                   perl-module-errno \
-                   perl-module-extutils-makemaker \
-                   perl-module-mime-base64 \
-                   perl-module-socket \
-                  "
+RDEPENDS_${PN} += "\
+    libssl \
+    libcrypto \
+    perl-module-carp \
+    perl-module-errno \
+    perl-module-extutils-makemaker \
+    perl-module-mime-base64 \
+    perl-module-socket \
+    zlib \
+"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "71932ce34d4db44de8d00399c3405792"
-SRC_URI[sha256sum] = "00cbb6174e628b42178e1445c9fd5a3c5ae2cfd6a5a43e03610ba14786f21b7d"
+SRC_URI[md5sum] = "cfbe968487149626978f427cc9fb8c77"
+SRC_URI[sha256sum] = "823ec3cbb428309d6a9e56f362a9300693ce3215b7fede109adb7be361fff177"
 
 S = "${WORKDIR}/Net-SSLeay-${PV}"
 
 inherit cpan ptest
 
-EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
-                   INC=-I=${STAGING_INCDIR} \
-                   '-lssl -lcrypto -lz' \
-                  "
+export OPENSSL_PREFIX="${STAGING_LIBDIR}"
+
+EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
 
 do_install_ptest() {
     cp -r ${B}/t ${D}${PTEST_PATH}
