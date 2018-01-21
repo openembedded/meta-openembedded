@@ -82,6 +82,10 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DCAT_EXECUTABLE=`which cat` \
                  -DCMAKE_AR:FILEPATH=${AR}"
 
+# With Ninja it fails with:
+# make: *** No rule to make target `install'.  Stop.
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 ARM_INSTRUCTION_SET_armv4 = "arm"
 ARM_INSTRUCTION_SET_armv5 = "arm"
 
