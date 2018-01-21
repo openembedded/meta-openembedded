@@ -10,5 +10,4 @@ SRC_URI[sha256sum] = "c681af823545c731b7b38aedd5d4eee4c5eff87bc0f25e0ff25444a418
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-json \
-    ${PYTHON_PN}-re \
 "

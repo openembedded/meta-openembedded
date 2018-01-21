@@ -10,7 +10,6 @@ SRC_URI[sha256sum] = "4c4ecf20e054716cc1e5a81cadc44d3f4027108d8dd0861d8b1e3bd7a3
 inherit pypi
 
 RDEPENDS_${PN} += "\
-    ${PYTHON_PN}-re \
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-numbers \

@@ -16,7 +16,6 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-pkgutil \
     ${PYTHON_PN}-pprint \
-    ${PYTHON_PN}-re \
     ${PYTHON_PN}-rfc3987 \
     ${PYTHON_PN}-shell \
     ${PYTHON_PN}-strict-rfc3339 \

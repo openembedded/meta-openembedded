@@ -22,7 +22,6 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-wrapt \
-    ${PYTHON_PN}-re \
     ${PYTHON_PN}-setuptools \
 "
 
