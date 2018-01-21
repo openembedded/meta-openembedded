@@ -3,5 +3,4 @@ require python-pysocks.inc
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-netclient \
-    ${PYTHON_PN}-selectors \
 "
