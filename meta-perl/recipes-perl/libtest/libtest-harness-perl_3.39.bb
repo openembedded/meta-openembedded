@@ -1,3 +1,8 @@
+# NOTE:
+#     You should use perl-module-test-harness instead of this package,
+#     unless you specifically need a newer version than what is provided
+#     by perl in oe-core.
+
 SUMMARY = "Test::Harness - Run Perl standard test scripts with statistics"
 DESCRIPTION = "Although, for historical reasons, the Test::Harness \
 distribution takes its name from this module it now exists only to provide \
@@ -21,12 +26,18 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=b08db4360eec119e875dddd7cb8a5ddd"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
-SRC_URI[md5sum] = "4c8d9c77e8e06ca96c7383c05c8f3616"
-SRC_URI[sha256sum] = "e7566f13b041d028b56f184b77ec2545ec6f0bb5a0f8f5368f7e4a08b496b63e"
+SRC_URI[md5sum] = "7877298e3b717734095ecb8e918b043e"
+SRC_URI[sha256sum] = "69bd44c81c6e1d2db18e298ecf631852608893ddfddb332a7d55285bbfc51132"
+
+UPSTREAM_CHECK_REGEX = "Test\-Harness\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
 S = "${WORKDIR}/Test-Harness-${PV}"
 
 inherit cpan
+
+RDEPENDS_${PN} += "\
+    perl-module-benchmark \
+"
 
 RPROVIDES_${PN} += "libapp-prove-perl \
                     libapp-prove-state-perl \
