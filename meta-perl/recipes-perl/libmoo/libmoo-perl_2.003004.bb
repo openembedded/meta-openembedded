@@ -10,8 +10,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=731;endline=776;md5=27efedd175eeaddbd18f4e3572bd72a8"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Moo-${PV}.tar.gz"
-SRC_URI[md5sum] = "e9f1f3159555ecebcd062e998f297a94"
-SRC_URI[sha256sum] = "f3e9741e79baa63e89f5a08706cd80d18c0a5a37e3d898847e002310e06582f1"
+SRC_URI[md5sum] = "d4fcd0f240033198571fcc81ce7c5f15"
+SRC_URI[sha256sum] = "f8bbb625f8e963eabe05cff9048fdd72bdd26777404ff2c40bc690f558be91e1"
 
 S = "${WORKDIR}/Moo-${PV}"
 
