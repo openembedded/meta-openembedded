@@ -17,8 +17,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MICHIELB/DBD-mysql-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "fdee1d8dc4ae54bc6cb7cd5a3f3d3342"
-SRC_URI[sha256sum] = "5c48a823f86b8110ccb6504c6176ca248b52f56829dd4548bc39c3509f4154cf"
+SRC_URI[md5sum] = "4a00dd7f1c057931147c65dfc4901c36"
+SRC_URI[sha256sum] = "629f865e8317f52602b2f2efd2b688002903d2e4bbcba5427cb6188b043d6f99"
 
 S = "${WORKDIR}/DBD-mysql-${PV}"
 
