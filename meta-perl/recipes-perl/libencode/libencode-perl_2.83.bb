@@ -1,3 +1,8 @@
+# NOTE:
+#    You should use perl-module-encode rather than this package
+#    unless you specifically need a version newer than what is
+#    provided by perl.
+
 SUMMARY = "Encode - character encodings"
 DESCRIPTION = "The \"Encode\" module provides the interfaces between \
 Perl's strings and the rest of the system.  Perl strings are sequences \
@@ -12,6 +17,8 @@ LIC_FILES_CHKSUM = "file://META.json;md5=fdbebc82e925d8acbce42cfad131c4d1"
 SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
 SRC_URI[md5sum] = "0d3f59e8ea704497647eded665919053"
 SRC_URI[sha256sum] = "5d3a90e30aabe78dfcf5e816ffb1da1e33475892dbd0075320315cdce5682988"
+
+UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
 S = "${WORKDIR}/Encode-${PV}"
 
