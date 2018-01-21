@@ -12,13 +12,18 @@ SECTION = "libs"
 LICENSE = "Artistic-1.0|GPLv1+"
 LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
 
-RDEPENDS_${PN} += "perl-module-scalar-util libnet-ssleay-perl"
+RDEPENDS_${PN} += "\
+    libnet-ssleay-perl \
+    perl-module-autoloader \
+    perl-module-scalar-util \
+    perl-module-io-socket \
+"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "2a6268bb42da81e69d1c1feb2fcb0eea"
-SRC_URI[sha256sum] = "acdb67b5b63aea5b7e70c3e4c70a16128810329592b63753a38c794aff76a1dd"
+SRC_URI[md5sum] = "26c9bcdfb4ba8763ef89264f21326a48"
+SRC_URI[sha256sum] = "e4897a9b17cb18a3c44aa683980d52cef534cdfcb8063d6877c879bfa2f26673"
 
 S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
@@ -32,7 +37,6 @@ do_install_append () {
     cp -pRP ${S}/docs ${D}${docdir}/${PN}/
     cp -pRP ${S}/certs ${D}${docdir}/${PN}/
     cp -pRP ${S}/example ${D}${docdir}/${PN}/
-    cp -pRP ${S}/util ${D}${docdir}/${PN}/
 }
 
 do_install_ptest () {
