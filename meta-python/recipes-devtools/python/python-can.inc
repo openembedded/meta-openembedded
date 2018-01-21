@@ -10,7 +10,6 @@ PYPI_PACKAGE="python-can"
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-ctypes \
-    ${PYTHON_PN}-importlib \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-netserver \

@@ -26,7 +26,7 @@ BBCLASSEXTEND = "native"
 
 EXTRA_OECONF = "--disable-cairo --with-python=${PYTHON}"
 
-RDEPENDS_${PN} += "python-setuptools python-importlib"
+RDEPENDS_${PN} += "python-setuptools"
 RDEPENDS_${PN}_class-native = ""
 
 do_install_append() {

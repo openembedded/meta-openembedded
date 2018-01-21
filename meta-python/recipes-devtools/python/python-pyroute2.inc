@@ -13,7 +13,6 @@ inherit pypi
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-distutils \
-    ${PYTHON_PN}-importlib \
     ${PYTHON_PN}-json \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-multiprocessing \

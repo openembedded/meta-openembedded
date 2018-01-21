@@ -19,7 +19,6 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-email \
     ${PYTHON_PN}-html \
-    ${PYTHON_PN}-importlib \
     ${PYTHON_PN}-json \
     ${PYTHON_PN}-multiprocessing \
     ${PYTHON_PN}-netserver \
