@@ -13,11 +13,11 @@ RDEPENDS_${PN} = " perl-module-carp \
                    perl-module-dynaloader \
 "
 
-LIC_FILES_CHKSUM = "file://DBI.pm;beginline=8147;endline=8151;md5=2e5f6cf47e5ad7b77dcb6172edc29292"
+LIC_FILES_CHKSUM = "file://DBI.pm;md5=62a0479400fd3c7f793568af2e1f08ee;beginline=8147;endline=8151"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
-SRC_URI[md5sum] = "60f291e5f015550dde71d1858dfe93ba"
-SRC_URI[sha256sum] = "8f7ddce97c04b4b7a000e65e5d05f679c964d62c8b02c94c1a7d815bb2dd676c"
+SRC_URI[md5sum] = "f9bf9775b3dbaabc4630b2b29941aa89"
+SRC_URI[sha256sum] = "8e2cb3d6a8425bd68702aebbeee01e754ee11ad00e7f4f9a61b75483de104e8c"
 
 S = "${WORKDIR}/DBI-${PV}"
 
