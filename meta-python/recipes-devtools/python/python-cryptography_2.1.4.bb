@@ -18,4 +18,5 @@ RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-enum34 \
     ${PYTHON_PN}-ipaddress \
     ${PYTHON_PN}-contextlib \
+    ${PYTHON_PN}-subprocess \
 "

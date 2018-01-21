@@ -5,5 +5,6 @@ UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/Cython/"
 UPSTREAM_CHECK_REGEX = "/Cython/(?P<pver>(\d+[\.\-_]*)+)"
 
 RDEPENDS_${PN} += "\
-    python-distribute \
+    ${PYTHON_PN}-distribute \
+    ${PYTHON_PN}-subprocess \
 "

@@ -6,4 +6,5 @@ RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-backports-functools-lru-cache \
     ${PYTHON_PN}-re \
     ${PYTHON_PN}-singledispatch \
+    ${PYTHON_PN}-subprocess \
 "

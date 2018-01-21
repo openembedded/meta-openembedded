@@ -18,6 +18,5 @@ S = "${WORKDIR}/git"
 
 RDEPENDS_${PN}_class-target += " \
     parted (>= 2.3) \
-    ${PYTHON_PN}-subprocess \
 "
 RDEPENDS_${PN}_class-native = ""

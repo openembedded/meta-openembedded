@@ -14,5 +14,4 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-shell \
     ${PYTHON_PN}-six \
-    ${PYTHON_PN}-subprocess \
 "

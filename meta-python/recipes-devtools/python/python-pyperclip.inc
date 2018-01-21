@@ -9,5 +9,4 @@ inherit pypi
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-ctypes \
-    ${PYTHON_PN}-subprocess \
 "

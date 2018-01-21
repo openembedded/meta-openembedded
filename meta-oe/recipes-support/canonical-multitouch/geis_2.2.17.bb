@@ -39,7 +39,6 @@ RDEPENDS_${PN}-bin = " \
     python3-pickle \
     python3-shell \
     python3-stringold \
-    python3-subprocess \
     python3-threading \
 "
 

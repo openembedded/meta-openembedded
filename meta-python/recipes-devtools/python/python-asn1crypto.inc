@@ -18,7 +18,6 @@ RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-netclient \
-    ${PYTHON_PN}-subprocess \
 "
 
 BBCLASSEXTEND = "native"

@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-io \
-    ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-shell \
 "

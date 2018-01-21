@@ -21,6 +21,5 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-pytz \
     ${PYTHON_PN}-shell \
-    ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-threading \
 "

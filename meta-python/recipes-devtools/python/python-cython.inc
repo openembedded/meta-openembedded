@@ -14,7 +14,6 @@ inherit pypi
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-netserver \
-    ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-shell \
 "
 

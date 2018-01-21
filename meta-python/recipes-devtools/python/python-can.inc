@@ -13,6 +13,5 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-netserver \
-    ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-sqlite3 \
 "

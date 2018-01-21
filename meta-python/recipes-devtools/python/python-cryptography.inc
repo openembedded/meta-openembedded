@@ -28,7 +28,6 @@ RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-asn1crypto \
     ${PYTHON_PN}-pycparser \
-    ${PYTHON_PN}-subprocess \
     ${PYTHON_PN}-setuptools \
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-threading \

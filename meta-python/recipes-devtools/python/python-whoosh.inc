@@ -21,5 +21,4 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-shell \
     ${PYTHON_PN}-stringold \
-    ${PYTHON_PN}-subprocess \
 "
