@@ -8,7 +8,6 @@ SRC_URI[sha256sum] = "d258b0a71994f7770599835249cece1caef3c70def868c4915e6e5ca49
 
 RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-codecs \
-    ${PYTHON_PN}-lang \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-math \
     ${PYTHON_PN}-shell \

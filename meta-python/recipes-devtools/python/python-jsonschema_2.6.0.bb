@@ -5,5 +5,6 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-argparse \
     ${PYTHON_PN}-contextlib \
     ${PYTHON_PN}-functools32 \
+    ${PYTHON_PN}-lang \
     ${PYTHON_PN}-re \
 "
