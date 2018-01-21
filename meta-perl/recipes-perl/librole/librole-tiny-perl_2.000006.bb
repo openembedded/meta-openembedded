@@ -9,8 +9,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=177;endline=214;md5=26df7e7c20551fb1906e2286624f0b71"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Role-Tiny-${PV}.tar.gz"
-SRC_URI[md5sum] = "c8c5cf1e02d2e0a1ed22530b55b67d66"
-SRC_URI[sha256sum] = "593a29b621e029bf0218d0154d5dfdf6ec502afc49adeeadae6afd0c70063115"
+SRC_URI[md5sum] = "7c277728a7e090f64b495857cadfed08"
+SRC_URI[sha256sum] = "cc73418c904a0286ecd8915eac11f5be2a8d1e17ea9cb54c9116b0340cd3e382"
 
 S = "${WORKDIR}/Role-Tiny-${PV}"
 
