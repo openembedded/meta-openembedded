@@ -12,8 +12,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETJ/ExtUtils-CppGuess-${PV}.tar.gz"
-SRC_URI[md5sum] = "f8ada38ee4ad86a4f1e20d8525ce0c99"
-SRC_URI[sha256sum] = "48625195a88c0f2ddc37bbd7a06346aa68ffb6948ba78da3aea47c0db2540f65"
+SRC_URI[md5sum] = "28be49072585b25df87e54180f741a4d"
+SRC_URI[sha256sum] = "31c47b5b15e3e9fd5ae7b35881a0fffd26a2983b241e7e3a1bc340d6d446186b"
 
 S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
 
