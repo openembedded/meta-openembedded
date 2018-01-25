@@ -15,14 +15,14 @@ inherit autotools gitpkgv pkgconfig
 
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "21c63ed60202e5540613d4c822a57a0b81764499"
+SRCREV = "bc6b94b015fdaf7c4dab56ccb996eecea8bc4373"
 
 SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
            file://configure.patch \
            file://Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch"
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
+PACKAGECONFIG[libsecret] = "--with-libsecret=yes,--with-libsecret=no,libsecret"
 
 S = "${WORKDIR}/git"
 
