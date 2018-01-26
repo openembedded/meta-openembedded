@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/manatools/dnfdragora.git \
            file://0001-Run-python-scripts-using-env.patch \
            "
 
-PV = "1.0.1+git"
+PV = "1.0.1+git${SRCPV}"
 SRCREV = "4fef4ce889b8e4fa03191d414f63bfd50796152a"
 
 S = "${WORKDIR}/git"
