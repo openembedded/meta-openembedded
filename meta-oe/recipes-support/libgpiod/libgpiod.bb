@@ -18,6 +18,9 @@ PACKAGECONFIG ?= "tools"
 PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
 PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
 
-PACKAGES += " ${PN}-tools"
+PACKAGES =+ " ${PN}-tools"
 
 FILES_${PN}-tools = "${bindir}/*"
+
+RRECOMMENDS_TOOLS = "${@bb.utils.contains('PACKAGECONFIG', 'tools', '${PN}-tools', '',d)}"
+RRECOMMENDS_${PN} += "${RRECOMMENDS_TOOLS}"
