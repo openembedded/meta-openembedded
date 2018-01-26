@@ -198,7 +198,7 @@ PACKAGES =+ "${PN}-python ${PN}-pidl \
              ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
              winbind \
              ${PN}-common ${PN}-base ${PN}-ad-dc ${PN}-ctdb-tests \
-             smbclient"
+             smbclient ${PN}-client ${PN}-server ${PN}-test"
 
 python samba_populate_packages() {
     def module_hook(file, pkg, pattern, format, basename):
@@ -295,3 +295,27 @@ FILES_smbclient = "${bindir}/cifsdd \
 
 RDEPENDS_${PN}-pidl_append = " perl"
 FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
+
+RDEPENDS_${PN}-client = "\
+    smbclient \
+    winbind \
+    registry-tools \
+    ${PN}-pidl \
+    " 
+
+ALLOW_EMPTY_${PN}-client = "1"
+
+RDEPENDS_${PN}-server = "\
+    ${PN} \
+    winbind \
+    registry-tools \
+    " 
+
+ALLOW_EMPTY_${PN}-server = "1"
+
+RDEPENDS_${PN}-test = "\
+    ${PN}-ctdb-tests \
+    ${PN}-testsuite \
+    "
+
+ALLOW_EMPTY_${PN}-test = "1"
