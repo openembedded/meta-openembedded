@@ -10,6 +10,8 @@ PV = "1.7.0-git${SRCPV}"
 
 SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http"
 
+SRC_URI_append_libc-musl = " file://0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch"
+
 S = "${WORKDIR}/git"
 
 # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
