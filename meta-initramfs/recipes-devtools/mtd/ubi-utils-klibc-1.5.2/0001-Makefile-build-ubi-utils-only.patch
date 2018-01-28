@@ -1,7 +1,7 @@
-From c4e6bd9378645d577e9d9f85da85f1438afe7c50 Mon Sep 17 00:00:00 2001
+From 1c989e4c36d0bf76ab444f984bc73b98eeacd03f Mon Sep 17 00:00:00 2001
 From: Andrea Adami <andrea.adami@gmail.com>
 Date: Sun, 29 Jun 2014 00:32:29 +0200
-Subject: [PATCH 1/6] Makefile: build ubi-utils only
+Subject: [PATCH 1/9] Makefile: build ubi-utils only
 
 We build all the static ubi-utils but actually only ubiattach is needed in
 a minimalistic initramfs for the mount of ubi volumes.
@@ -22,13 +22,13 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- Makefile | 24 ++----------------------
- 1 file changed, 2 insertions(+), 22 deletions(-)
+ Makefile | 26 ++------------------------
+ 1 file changed, 2 insertions(+), 24 deletions(-)
 
-Index: git/Makefile
-===================================================================
---- git.orig/Makefile
-+++ git/Makefile
+diff --git a/Makefile b/Makefile
+index 3ce8587..8b79f71 100644
+--- a/Makefile
++++ b/Makefile
 @@ -16,28 +16,11 @@ endif
  
  TESTS = tests
@@ -82,3 +82,6 @@ Index: git/Makefile
  #
  # Common libmtd
  #
+-- 
+2.7.4
+

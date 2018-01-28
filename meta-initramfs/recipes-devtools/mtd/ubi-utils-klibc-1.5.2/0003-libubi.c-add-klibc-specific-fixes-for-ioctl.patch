@@ -1,7 +1,7 @@
-From 72a39bb3290a79e76b0dbf59eef83ea2d9b577a1 Mon Sep 17 00:00:00 2001
+From fecbb7056d621a30f7106e67f5fe209763571b70 Mon Sep 17 00:00:00 2001
 From: Andrea Adami <andrea.adami@gmail.com>
 Date: Sun, 29 Jun 2014 00:40:15 +0200
-Subject: [PATCH 3/6] libubi.c: add klibc specific fixes for ioctl
+Subject: [PATCH 3/9] libubi.c: add klibc specific fixes for ioctl
 
 First issue is that ioctl() in klibc doesn't expect a constant as arg3.
 Second issue is that arg3 in klibc ioctl() implementation is not optional.
@@ -36,7 +36,7 @@ Fixes:
 |  __extern int ioctl(int, int, void *);
 |               ^
 
-Upstream-Status: Inappropriate [klibc specific]
+Upstream-Status: Accepted
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
@@ -44,7 +44,7 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/ubi-utils/libubi.c b/ubi-utils/libubi.c
-index 1e08b7d..491e525 100644
+index 97c0434..2b49833 100644
 --- a/ubi-utils/libubi.c
 +++ b/ubi-utils/libubi.c
 @@ -687,7 +687,7 @@ void libubi_close(libubi_t desc)
@@ -72,5 +72,5 @@ index 1e08b7d..491e525 100644
  
  int ubi_update_start(libubi_t desc, int fd, long long bytes)
 -- 
-1.9.1
+2.7.4
 

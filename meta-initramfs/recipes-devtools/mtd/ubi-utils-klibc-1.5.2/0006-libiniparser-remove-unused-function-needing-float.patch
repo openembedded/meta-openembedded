@@ -1,7 +1,7 @@
-From 72a04a9b9ed33c889d2e2b86f306c5be9f6cde35 Mon Sep 17 00:00:00 2001
+From 2af30e9b2988111e45ed6ea6af55e49ec7cb1cb1 Mon Sep 17 00:00:00 2001
 From: Andrea Adami <andrea.adami@gmail.com>
 Date: Sun, 29 Jun 2014 00:44:57 +0200
-Subject: [PATCH 6/6] libiniparser: remove unused function needing float
+Subject: [PATCH 6/9] libiniparser: remove unused function needing float
 
 Fixes:
 |   LD      ubi-utils/ubiformat
@@ -13,7 +13,7 @@ Fixes:
 Grep doesn't reveal any occurrence of iniparser_getdouble(), using atof() so
 remove it: floating-point is not supported in klibc
 
-Upstream-Status: Pending
+Upstream-Status: Accepted
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
@@ -81,5 +81,5 @@ index 898f57f..ba70c08 100644
    @param    d Dictionary to search
    @param    key Key string to look for
 -- 
-1.9.1
+2.7.4
 
