@@ -1,2 +1,2 @@
 require python-yappi.inc
-inherit setuptools
+inherit setuptools3
