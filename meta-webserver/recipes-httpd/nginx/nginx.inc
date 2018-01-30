@@ -51,7 +51,7 @@ do_configure () {
 
     ./configure \
     --crossbuild=Linux:${TUNE_ARCH} \
-    --with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+    --with-endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
     --with-int=4 \
     --with-long=${PTRSIZE} \
     --with-long-long=8 \
