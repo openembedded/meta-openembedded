@@ -11,6 +11,10 @@ HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"
 DEPENDS = "fuse samba"
 DEPENDS_append_libc-musl = " libexecinfo"
 
+# samba depends on libpam
+inherit distro_features_check
+REQUIRED_DISTRO_FEATURES = "pam"
+
 inherit autotools gitpkgv pkgconfig
 
 PKGV = "${GITPKGVTAG}"
