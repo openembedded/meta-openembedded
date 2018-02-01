@@ -6,13 +6,11 @@ LICENSE_libhandle = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
 DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-           file://0001-xfsprogs-remove-double-underscore-integer-types.patch \
-           file://0001-xfs-remove-double-underscore-integer-types.patch \
            file://remove_flags_from_build_flags.patch \
-           file://xfsprogs-4.12.0-fix_musl.patch \
+           file://0001-build-Check-for-sync_file_range-libc-function.patch \
            "
-SRC_URI[md5sum] = "e348b0e1d7bd1cd82d64b91ff37e727e"
-SRC_URI[sha256sum] = "b330ad8d737f4152ae511580102e2fc49212bb51dfb4b614084344abae46d0df"
+SRC_URI[md5sum] = "2d50e3751cc98e6c9364bc3d2297b9fd"
+SRC_URI[sha256sum] = "b1b710b268bc95d6f45eca06e1262c29eb38865a19cd4404e48ba446e043b7ec"
 
 inherit autotools-brokensep
 
