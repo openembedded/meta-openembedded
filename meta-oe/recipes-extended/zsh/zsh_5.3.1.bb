@@ -30,6 +30,9 @@ EXTRA_OECONF = " \
     zsh_cv_shared_environ=yes \
 "
 
+# Configure respects --bindir from EXTRA_OECONF, but then Src/Makefile will read bindir from environment
+export bindir="${base_bindir}"
+
 EXTRA_OEMAKE = "-e MAKEFLAGS="
 
 ALTERNATIVE_${PN} = "sh"
