@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 inherit cmake pkgconfig
 
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 DEPENDS = "luajit zlib ncurses"
 RDEPENDS_${PN} = "bash"
 
