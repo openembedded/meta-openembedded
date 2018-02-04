@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git \
 
 SRCREV = "c122544f184d4031bbae1ad80fbab554c34a9427"
 
-PV = "0.2.5+git${SRCPV}"
+PV = "0.2.5"
 
 S = "${WORKDIR}/git"
 
