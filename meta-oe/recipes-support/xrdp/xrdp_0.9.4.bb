@@ -37,7 +37,7 @@ FILES_${PN}-dev += "${libdir}/xrdp/libcommon.so \
                     ${libdir}/xrdp/libscp.so \
                     ${libdir}/xrdp/libxrdpapi.so "
 
-#EXTRA_OECONF = "--disable-rfxcodec --disable-painter"
+EXTRA_OECONF = "--enable-pam-config=suse"
 
 do_configure_prepend() {
     cd ${S}
@@ -65,7 +65,6 @@ do_install_append() {
 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
 
 	install -m 0644 ${S}/instfiles/*.ini ${D}${sysconfdir}/xrdp/
-	install -m 0644 ${S}/instfiles/pam.d/xrdp-sesman.debian ${D}${sysconfdir}/xrdp/pam.d/xrdp-sesman
 	install -m 0644 ${S}/sesman/sesman.ini ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${S}/xrdp/xrdp.ini ${D}${sysconfdir}/xrdp/
