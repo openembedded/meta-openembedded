@@ -8,13 +8,14 @@ SECTION = "admin"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
-SRC_URI = "http://www.linbit.com/downloads/drbd/utils/archive/${BP}.tar.gz \
-           file://0001-Makefile.in-fix-permission-bits-for-drbd.service.patch \
+SRC_URI = "git://github.com/LINBIT/drbd-utils \
           "
-SRC_URI[md5sum] = "76ed6d3190cd77b00890f3365353124b"
-SRC_URI[sha256sum] = "297b77c9b3f88de2e7dae459234f2753ea4fc2805282b2d276e35cf51e292913"
+# v9.4.0
+SRCREV = "eff6423ee72931aa0f8d0eb51742acee7c7cd3e1"
 
-UPSTREAM_CHECK_URI = "http://www.linbit.com/downloads/drbd/utils/"
+S = "${WORKDIR}/git"
+
+UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
 
 SYSTEMD_SERVICE_${PN} = "drbd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
