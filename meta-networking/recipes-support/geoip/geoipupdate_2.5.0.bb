@@ -6,17 +6,17 @@ SECTION = "net"
 
 DEPENDS = "zlib curl"
 
-SRC_URI = "https://github.com/maxmind/geoipupdate/releases/download/v2.4.0/geoipupdate-2.4.0.tar.gz \
+SRC_URI = "https://github.com/maxmind/geoipupdate/releases/download/v2.5.0/geoipupdate-2.5.0.tar.gz \
            file://GeoIP.conf \
            file://geoipupdate.cron \
           "
-SRC_URI[md5sum] = "02f9712fb80e8e979d3d54cda7f7704f"
-SRC_URI[sha256sum] = "8b4e88ce8d84e9c75bc681704d19ec5c63c54f01e945f7669f97fb0df7e13952"
+SRC_URI[md5sum] = "28f633c49ec87ab01ad3c0fb0228a696"
+SRC_URI[sha256sum] = "5119fd0e338cd083e886228b26679c64bcbaade8a815be092aecf865a610ab26"
 
 LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "\
-file://ChangeLog.md;md5=334337b6ecbb65093bae66b3ae21c8c2 \
+file://ChangeLog.md;md5=11d2e31df0de2be3ccc3e2286c4dafcb \
 "
 FILES_${PN} = "/usr/share/GeoIP \
               /etc/GeoIP.conf \
