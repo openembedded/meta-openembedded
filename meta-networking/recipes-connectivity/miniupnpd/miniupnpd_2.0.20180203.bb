@@ -5,16 +5,17 @@ the network."
 
 SECTION = "networking"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=aa71c78c373ccfe0ff207af0cd966d91"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=91ac00c6b9f5c106e89291e196fe0234"
 
-inherit autotools gettext pkgconfig
+inherit autotools gettext pkgconfig systemd
 
 DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack"
 
 SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${P}.tar.gz;downloadfilename=${P}.tar.gz \
-"
-SRC_URI[md5sum] = "1c07a215dd9b362e75a9efc05e2fb3b4"
-SRC_URI[sha256sum] = "d96aa3a00e0f5490826bba3cb97e68cd27479e5839adac4b9bcb66eae786bfb7"
+           file://miniupnpd.service"
+
+SRC_URI[md5sum] = "b4c7c938915edeee6ca4c65dd021f212"
+SRC_URI[sha256sum] = "860c15f2f8340fd69546b01cffe4c7fcff3e63a7bdfe5a2af6b2346f0e074bb6"
 
 IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
 
@@ -34,4 +35,9 @@ do_install() {
     install -m 0644 -b ${S}/miniupnpd.conf ${D}/${sysconfdir}/${BPN}
     install -d ${D}/${sysconfdir}/init.d
     install ${S}/linux/miniupnpd.init.d.script ${D}/${sysconfdir}/init.d/miniupnpd
+
+    install -d ${D}${systemd_unitdir}/system
+    install -m 0644 ${WORKDIR}/miniupnpd.service ${D}${systemd_unitdir}/system/
 }
+
+SYSTEMD_SERVICE_${PN} = "miniupnpd.service"
