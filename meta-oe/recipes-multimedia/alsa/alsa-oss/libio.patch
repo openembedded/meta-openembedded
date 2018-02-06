@@ -1,7 +1,7 @@
-Index: alsa-oss-1.0.15/alsa/stdioemu.c
+Index: alsa-oss-1.0.28/alsa/stdioemu.c
 ===================================================================
---- alsa-oss-1.0.15.orig/alsa/stdioemu.c	2007-10-15 10:50:40.000000000 +0200
-+++ alsa-oss-1.0.15/alsa/stdioemu.c	2008-07-21 22:17:06.303161438 +0200
+--- alsa-oss-1.0.28.orig/alsa/stdioemu.c
++++ alsa-oss-1.0.28/alsa/stdioemu.c
 @@ -37,7 +37,9 @@
  #endif
  
@@ -12,7 +12,7 @@ Index: alsa-oss-1.0.15/alsa/stdioemu.c
  
  struct fd_cookie {
  	int fd;
-@@ -99,7 +101,11 @@
+@@ -99,7 +101,11 @@ static FILE *fake_fopen(const char *path
  
  	if (open_mode && fdc->fd > 0) {
  		result = fopencookie (fdc,"w", fns);
@@ -24,11 +24,11 @@ Index: alsa-oss-1.0.15/alsa/stdioemu.c
  	}
  	return result;
  }
-Index: alsa-oss-1.0.15/configure.in
+Index: alsa-oss-1.0.28/configure.ac
 ===================================================================
---- alsa-oss-1.0.15.orig/configure.in	2007-10-15 10:50:40.000000000 +0200
-+++ alsa-oss-1.0.15/configure.in	2008-07-21 22:16:11.719837298 +0200
-@@ -33,6 +33,12 @@
+--- alsa-oss-1.0.28.orig/configure.ac
++++ alsa-oss-1.0.28/configure.ac
+@@ -35,6 +35,12 @@ if test "$with_aoss" = "yes"; then
    LIBS="$OLD_LIBS"
  fi
  
