@@ -11,26 +11,22 @@ DEPENDS = "openssl flex-native bison-native open-isns util-linux"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-SRCREV ?= "8db9717e73d32d2c5131da4f9ad86dfd9065f74b"
+SRCREV ?= "24580adc4c174bbc5dde3ae7594a46d57635e906"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi \
-    file://iscsi-initiator-utils-Do-not-clean-kernel-source.patch \
-    file://iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch \
     file://initd.debian \
     file://99_iscsi-initiator-utils \
     file://iscsi-initiator \
     file://iscsi-initiator.service \
     file://iscsi-initiator-targets.service \
     file://set_initiatorname \
-    file://0001-Check-for-root-peer-user-for-iscsiuio-IPC.patch \
-    file://0002-iscsiuio-should-ignore-bogus-iscsid-broadcast-packet.patch \
-    file://0003-Ensure-all-fields-in-iscsiuio-IPC-response-are-set.patch \
-    file://0004-Do-not-double-close-IPC-file-stream-to-iscsid.patch \
-    file://0005-Ensure-strings-from-peer-are-copied-correctly.patch \
-    file://0006-Skip-useless-strcopy-and-validate-CIDR-length.patch \
-    file://0007-Check-iscsiuio-ping-data-length-for-validity.patch \
+    file://0001-libopeniscsiusr-Include-limit.h-for-PATH_MAX.patch \
+    file://0002-libopeniscsiusr-Add-CFLAGS-to-linker-cmdline.patch \
+    file://0001-qedi.c-Removed-unused-linux-ethtool.h.patch \
+    file://0002-idbm.c-Include-fcnl.h-for-O_RDWR-and-O_CREAT-definit.patch \
+    file://0003-bnx2x.c-Reorder-the-includes-to-avoid-duplicate-defi.patch \
+    file://0004-fwparam_ppc.c-Do-not-use-__compar_fn_t.patch \
 "
-
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
@@ -39,24 +35,14 @@ inherit update-rc.d systemd autotools
 EXTRA_OECONF = " \
     --target=${TARGET_SYS} \
     --host=${BUILD_SYS} \
-    --prefix=${prefix} \
-    --libdir=${libdir} \
 "
 
 EXTRA_OEMAKE = ' \
-    CC="${CC}" \
-    AR="${AR}" \
-    RANLIB="${RANLIB}" \
-    CFLAGS="${CFLAGS} ${CPPFLAGS} -D_GNU_SOURCE -I. -I../include -I../../include -I../usr -I../../usr" \
-    LDFLAGS="${LDFLAGS}" \
-    LD="${LD}" \
     OS="${TARGET_SYS}" \
     TARGET="${TARGET_OS}" \
     BASE="${prefix}" \
     MANDIR="${mandir}" \
 '
-
-TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_configure () {
     cd ${S}/iscsiuio ; autoreconf --install; ./configure ${EXTRA_OECONF}
@@ -81,12 +67,14 @@ do_install () {
         ${D}${localstatedir}/lib/iscsi/isns \
         ${D}${localstatedir}/lib/iscsi/slp \
         ${D}${localstatedir}/lib/iscsi/ifaces \
-        ${D}/${mandir}/man8
+        ${D}${libdir} \
+        ${D}${mandir}/man8
 
     install -p -m 755 ${S}/usr/iscsid ${S}/usr/iscsiadm \
         ${S}/utils/iscsi-iname \
         ${S}/usr/iscsistart ${D}/${sbindir}
 
+    cp -dR ${S}/libopeniscsiusr/libopeniscsiusr.so* ${D}${libdir}
     install -p -m 644 ${S}/doc/iscsiadm.8 ${S}/doc/iscsid.8 ${D}/${mandir}/man8
     install -p -m 644 ${S}/etc/iscsid.conf ${D}${sysconfdir}/iscsi
     install -p -m 755 ${WORKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
