@@ -26,7 +26,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://volatiles.03_samba \
           "
 SRC_URI_append_libc-musl = " \
-           file://samba-4.2.7-pam.patch \
+           file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
           "
 
