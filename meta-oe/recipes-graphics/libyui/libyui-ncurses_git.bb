@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
     file://COPYING.lgpl-2.1;md5=4fbd65380cdd255951079008b364516c \
 "
 
-SRC_URI = "git://github.com/libyui/libyui-ncurses.git"
+SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
+           file://0001-src-Replace-using-sys-errno.h-with-errno.h.patch \
+           "
 
 SRC_URI_append_class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
 
