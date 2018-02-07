@@ -141,7 +141,6 @@ do_install_append_class-target() {
     if [ -d ${RECIPE_SYSROOT_NATIVE}${sysconfdir} ];then
          install -m 0644 ${RECIPE_SYSROOT_NATIVE}${sysconfdir}/pear.conf ${D}${sysconfdir}/
     fi
-    rm -rf ${D}/${TMPDIR}
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
     rm -rf ${D}/.[a-z]*
@@ -165,14 +164,6 @@ do_install_append_class-target() {
             -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
             ${D}${systemd_unitdir}/system/php-fpm.service
     fi
-
-    TMP=`dirname ${D}/${TMPDIR}`
-    while test ${TMP} != ${D}; do
-        if [ -d ${TMP} ]; then
-            rmdir ${TMP}
-        fi
-        TMP=`dirname ${TMP}`;
-    done
 
     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
         install -d ${D}${libdir}/apache2/modules
