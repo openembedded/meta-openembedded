@@ -25,8 +25,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
 "
-SRC_URI[md5sum] = "125bcd9aabd7412aedcbfbf73f4e6196"
-SRC_URI[sha256sum] = "3fb2239bb2c9328c8b45368ff8d8de979ea286a27edc9871d218200e88bb91cc"
+SRC_URI[md5sum] = "42064f5ddbc7f560bfc5ff93ea9eecc7"
+SRC_URI[sha256sum] = "f9e24897f9cfd63bb3115f6275c706de1702d3d9bae2fc423227db72b23c37f0"
 
 inherit autotools useradd systemd pkgconfig
 
