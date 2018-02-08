@@ -15,6 +15,10 @@ do_configure_prepend_class-target () {
     # introspection.m4 pre-packaged with upstream tarballs does not yet
     # have our fixes
     rm -f ${S}/introspection.m4
+    
+    # remove the pre-built gtk-doc files, as they're installed (or attempted to be installed)
+    # even if gtk-doc is explicitly disabled
+    rm -rf ${S}/docs/reference/html
 }
 
 do_compile_prepend() {
