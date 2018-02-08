@@ -239,15 +239,20 @@ pkg_postinst_${PN} () {
         touch /etc/postfix/virtual_alias
         postmap /etc/postfix/virtual_alias
     else
-        touch $D/etc/aliases
-        newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases
-        touch $D/etc/postfix/virtual_alias
-        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
-
         if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES', False) else 'false'}; then
             # /usr/lib/sendmail is required by LSB core test
             [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
         fi
+
+        touch $D/etc/aliases
+        # This can fail depending on host setup
+        if ! newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases; then
+            $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}
+            exit 0
+        fi
+        touch $D/etc/postfix/virtual_alias
+        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+
     fi
 }
 
