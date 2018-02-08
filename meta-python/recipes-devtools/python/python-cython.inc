@@ -13,8 +13,13 @@ SRC_URI[sha256sum] = "6a00512de1f2e3ce66ba35c5420babaef1fe2d9c43a8faab4080b0dbcc
 inherit pypi
 
 RDEPENDS_${PN}_class-target += "\
+    ${PYTHON_PN}-misc \
     ${PYTHON_PN}-netserver \
+    ${PYTHON_PN}-pkgutil \
+    ${PYTHON_PN}-pyparsing \
+    ${PYTHON_PN}-setuptools \
     ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-xml \
 "
 
 do_install_append() {
