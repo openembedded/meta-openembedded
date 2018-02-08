@@ -9,9 +9,8 @@ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6
 SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
            file://options-2.1.10.patch \
 "
-
-SRC_URI[md5sum] = "48b8822a76797bb143e3e38ed738c320"
-SRC_URI[sha256sum] = "c985e94bebd6ec2f6af3d95dcc3fcb192a2ddb7781a021d70ee899e26221f619"
+SRC_URI[md5sum] = "452596f904ca2b10322bdaabf147a721"
+SRC_URI[sha256sum] = "639eb35556a0af999123c4d883e79be05ff9f00ab4f9e4ac2e5775f9c5eeeed3"
 
 inherit waf-samba
 
