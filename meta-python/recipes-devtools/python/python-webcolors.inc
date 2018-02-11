@@ -1,9 +1,9 @@
 SUMMARY = "Simple Python module for working with HTML/CSS color definitions."
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=358df7e9eb65e1843dbb36abd476c5c0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=197add016087e6884a012b0f185d44ad"
 
-SRC_URI[md5sum] = "4733fa1077f680bbdd918cdef1e32c11"
-SRC_URI[sha256sum] = "e47e68644d41c0b1f1e4d939cfe4039bdf1ab31234df63c7a4f59d4766487206"
+SRC_URI[md5sum] = "d7a17135f8b8374a75c2f1d08253c026"
+SRC_URI[sha256sum] = "da3cb551060f46f417341b041b36d329d699c125a13a4412dde5c2e310d63344"
 
 RDEPENDS_${PN}_class-target = "\
     ${PYTHON_PN}-stringold \
