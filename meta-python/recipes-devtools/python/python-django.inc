@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.djangoproject.com/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
 
-SRC_URI[md5sum] = "08ad028fc50ee961dea35e1e1f657b65"
-SRC_URI[sha256sum] = "353d129f22e1d24980d6061666f435781141c2dfd852f14ffc8a670175821034"
+SRC_URI[md5sum] = "f306015e16a8d5024dbac923ac34fffb"
+SRC_URI[sha256sum] = "22383567385a9c406d8a5ce080a2694c82c6b733e157922197e8b393bb3aacd9"
 
 PYPI_PACKAGE = "Django"
 inherit pypi
@@ -20,6 +20,7 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-email \
     ${PYTHON_PN}-html \
     ${PYTHON_PN}-json \
+    ${PYTHON_PN}-logging \
     ${PYTHON_PN}-multiprocessing \
     ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-numbers \
