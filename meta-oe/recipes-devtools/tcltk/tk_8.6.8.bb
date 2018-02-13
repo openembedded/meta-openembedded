@@ -26,8 +26,8 @@ SRC_URI = "\
     file://fix-xft.diff \
     file://configure.use.fontconfig.with.xft.patch \
 "
-SRC_URI[md5sum] = "dd7dbb3a6523c42d05f6ab6e86096e99"
-SRC_URI[sha256sum] = "d62c371a71b4744ed830e3c21d27968c31dba74dd2c45f36b9b071e6d88eb19d"
+SRC_URI[md5sum] = "5e0faecba458ee1386078fb228d008ba"
+SRC_URI[sha256sum] = "49e7bca08dde95195a27f594f7c850b088be357a7c7096e44e1158c7a5fd7b33"
 
 S = "${WORKDIR}/${BPN}${PV}/unix"
 
