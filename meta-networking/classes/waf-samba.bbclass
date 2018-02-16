@@ -87,7 +87,7 @@ do_configure() {
 }
 
 do_compile () {
-    python ./buildtools/bin/waf ${@get_waf_parallel_make(d)}
+    python ./buildtools/bin/waf ${@oe.utils.parallel_make_argument(d, '-j%d', limit=64)}
 }
 
 do_install() {
