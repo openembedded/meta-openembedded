@@ -3,14 +3,12 @@ HOMEPAGE = "https://github.com/intel-iot-devkit/mraa"
 SECTION = "libs"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=66493d54e65bfc12c7983ff2e884f37f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4b92a3b497d7943042a6db40c088c3f2"
 
-SRCREV = "8ddbcde84e2d146bc0f9e38504d6c89c14291480"
-PV = "1.7.0-git${SRCPV}"
+SRCREV = "fbb7d9232067eac3f4508a37a8f7ea0c4fcebacb"
+PV = "1.9.0-git${SRCPV}"
 
 SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http"
-
-SRC_URI_append_libc-musl = " file://0001-examples-iio_driver.c-include-endian.h-to-fix-musl-b.patch"
 
 S = "${WORKDIR}/git"
 
