@@ -7,12 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
 
 DEPENDS = "libjpeg-turbo mraa"
 
-SRCREV = "106b6c706268522ab0168a4ddb19e89ce832e084"
-PV = "1.3.0-git${SRCPV}"
+SRCREV = "cc7fec9ae0228add9011bf1c2cd5e0ca2ba0d4f0"
+PV = "1.6.0-git${SRCPV}"
 
 SRC_URI = " \
     git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
-    file://ads1x15-fixed-case-logic-in-getThresh-function.patch \
 "
 
 S = "${WORKDIR}/git"
