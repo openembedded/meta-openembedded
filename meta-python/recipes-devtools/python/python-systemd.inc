@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
 
 PYPI_PACKAGE = "systemd-python"
 DEPENDS += "systemd (<=234)"
-RDEPENDS_${PN} += "systemd"
+RDEPENDS_${PN} += "systemd ${PYTHON_PN}-syslog ${PYTHON_PN}-logging"
 REQUIRED_DISTRO_FEATURES = "systemd"
 inherit pypi distro_features_check
 
