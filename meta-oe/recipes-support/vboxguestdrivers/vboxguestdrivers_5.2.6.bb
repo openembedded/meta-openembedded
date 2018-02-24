@@ -12,22 +12,27 @@ COMPATIBLE_MACHINE = "(qemux86|qemux86-64)"
 VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-           file://Makefile.utils \
+    file://Makefile.utils \
 "
-SRC_URI[md5sum] = "d3aec8190c649d7e0d92ba374779dfe3"
-SRC_URI[sha256sum] = "b5715035e681a11ef1475f83f9503d34a00f0276b89c572eebec363dda80c8a9"
+
+# For default linux-yocto 4.15
+SRC_URI += "file://linux-4.15.0-rc8-VBoxGuestAdditions-amd64.diff"
+
+SRC_URI[md5sum] = "4490d6929dfae41cdf05e34f583318c8"
+SRC_URI[sha256sum] = "fe705288ee50efcce10ff4c80e461a1c7091e461a7b55f98842fa1c9772ca4e7"
 
 S = "${WORKDIR}/vbox_module"
 
 export BUILD_TARGET_ARCH="${ARCH}"
 export BUILD_TARGET_ARCH_x86-64="amd64"
-export KERN_DIR="${STAGING_KERNEL_DIR}"
+
+EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build'"
 
 addtask export_sources before do_patch after do_unpack
 
 do_export_sources() {
     mkdir -p "${S}"
-    ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/export_modules ${T}/vbox_modules.tar.gz
+    ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/export_modules.sh ${T}/vbox_modules.tar.gz
     tar -C "${S}" -xzf ${T}/vbox_modules.tar.gz
 
     # add a mount utility to use shared folder from VBox Addition Source Code
@@ -36,6 +41,13 @@ do_export_sources() {
     install ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/sharedfolders/vbsfmount.c ${S}/utils
     install ${S}/../Makefile.utils ${S}/utils/Makefile
 
+}
+
+do_configure_prepend() {
+    # vboxguestdrivers/5.2.6-r0/vbox_module/vboxguest/Makefile.include.header:99: *** The variable KERN_DIR must be a kernel build folder and end with /build without a trailing slash, or KERN_VER must be set.  Stop.
+    # vboxguestdrivers/5.2.6-r0/vbox_module/vboxguest/Makefile.include.header:108: *** The kernel build folder path must end in <version>/build, or the variable KERN_VER must be set.  Stop.
+    mkdir -p ${WORKDIR}/${KERNEL_VERSION}
+    ln -snf ${STAGING_KERNEL_DIR} ${WORKDIR}/${KERNEL_VERSION}/build
 }
 
 # compile and install mount utility
