@@ -4,10 +4,9 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=39ea92752a35cf67d8a885d8e3af3c69"
 
 inherit pypi
-PYPI_PACKAGE_EXT = "zip"
 
-SRC_URI[md5sum] = "7006b56c0d68a162d9fe57d4249c3171"
-SRC_URI[sha256sum] = "fae4cffc040921b8a2d60c6cf0b5d662c1190fe54d718271db4eb17d44a185b7"
+SRC_URI[md5sum] = "abb07c09c79f78d7c04f222a550c99ef"
+SRC_URI[sha256sum] = "410bcd1d6409026fbaa65d9ed33bf6dd8b1e94a499e32168acfc7b332e4095c0"
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-datetime \
