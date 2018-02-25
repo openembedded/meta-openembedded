@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c5f1361296835ff94bda73db7dd312a6"
 
-SRC_URI[md5sum] = "3e82bbe325464fd542ab4cc44929c813"
-SRC_URI[sha256sum] = "46f4849c6dce69f54dd5001b3215b6a983dee6b17512efee10e237fa11f20cfa"
+SRC_URI[md5sum] = "5cfef58641c9a94d4a5d547e951a7dda"
+SRC_URI[sha256sum] = "13b8611788acf0d7b617775db5c2ae26554a6d4263c590ef628d448fd05aef56"
 
 PYPI_PACKAGE = "alembic"
 
