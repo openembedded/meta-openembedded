@@ -33,6 +33,7 @@ SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
            file://openl2tpd.service \
            file://openl2tpd-enable-tests.patch \
            file://run-ptest \
+           file://fix_linux_4.15_compile.patch \
            "
 
 SRC_URI_append_libc-musl = "\
