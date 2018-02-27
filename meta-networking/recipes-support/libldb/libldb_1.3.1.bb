@@ -8,7 +8,7 @@ RDEPENDS_pyldb += "python"
 
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://do-not-import-target-module-while-cross-compile.patch \
-           file://ldb-Add-configure-options-for-packages.patch \
+           file://options-1.3.1.patch \
           "
 
 PACKAGECONFIG ??= "\
@@ -29,8 +29,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[md5sum] = "91284a12423def99a6592e393e3b7fbb"
-SRC_URI[sha256sum] = "0cedeadb75de401c9735127f654dbc1a391c4327a2b83be54078be286fed1113"
+SRC_URI[md5sum] = "e5233f202bca27f6ce8474fb8ae65983"
+SRC_URI[sha256sum] = "b19f2c9f55ae0f46aa5ebaea0bf1a47ec1ac135e1d78af0f6318cf50bf62cbd2"
 
 inherit waf-samba
 
