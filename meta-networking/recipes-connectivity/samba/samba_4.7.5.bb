@@ -30,11 +30,8 @@ SRC_URI_append_libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
           "
 
-SRC_URI[md5sum] = "cf5eaf34f510e3d5643c0dcfd49fcc40"
-SRC_URI[sha256sum] = "bd16d169988eb513e685a87e9964a5210482498fa9b3a22aaa8287a061e3c936"
-
-#SRC_URI[md5sum] = "c6ee5c766016d59908c8fb672fbbd445"
-#SRC_URI[sha256sum] = "9ef24393de08390f236cabccd6a420b5cea304e959cbf1a99ff317325db3ddfa"
+SRC_URI[md5sum] = "3629a134253d6a4a16ebd23a508b0d5b"
+SRC_URI[sha256sum] = "316d04fa9fbabad6f2739fe68e1928778af4866265409119aba6ef3435c8fe8d"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
