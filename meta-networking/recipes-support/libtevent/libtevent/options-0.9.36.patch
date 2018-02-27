@@ -1,7 +1,7 @@
-From c00f6d35bdc06dffb54daa815e57b44210a5de04 Mon Sep 17 00:00:00 2001
+From c3e2e4f89cf37b27609fd02ad67eb02d0015cc1e Mon Sep 17 00:00:00 2001
 From: Jackie Huang <jackie.huang@windriver.com>
 Date: Wed, 21 Sep 2016 09:57:49 +0800
-Subject: [PATCH] tevent: Add configure options for packages
+Subject: [PATCH 1/1] tevent: Add configure options for packages
 
 Add configure options for the following packages:
  - acl
@@ -19,30 +19,12 @@ Modified to apply to version 0.9.33.
 
 Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- lib/replace/system/wscript_configure |  6 ++-
- lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
- wscript                              |  7 ++-
- 3 files changed, 79 insertions(+), 19 deletions(-)
- mode change 100755 => 100644 wscript
+ lib/replace/wscript | 89 ++++++++++++++++++++++++++++++++++++++++-------------
+ wscript             |  7 ++++-
+ 2 files changed, 73 insertions(+), 23 deletions(-)
 
-diff --git a/lib/replace/system/wscript_configure b/lib/replace/system/wscript_configure
-index 2035474..10f9ae7 100644
---- a/lib/replace/system/wscript_configure
-+++ b/lib/replace/system/wscript_configure
-@@ -1,6 +1,10 @@
- #!/usr/bin/env python
- 
--conf.CHECK_HEADERS('sys/capability.h')
-+import Options
-+
-+if Options.options.enable_libcap:
-+    conf.CHECK_HEADERS('sys/capability.h')
-+
- conf.CHECK_FUNCS('getpwnam_r getpwuid_r getpwent_r')
- 
- # solaris varients of getXXent_r
 diff --git a/lib/replace/wscript b/lib/replace/wscript
-index fc43e1a..12d2a70 100644
+index 2c638b7..079761d 100644
 --- a/lib/replace/wscript
 +++ b/lib/replace/wscript
 @@ -23,6 +23,41 @@ def set_options(opt):
@@ -118,32 +100,33 @@ index fc43e1a..12d2a70 100644
      conf.CHECK_HEADERS('port.h')
      conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h sys/fs/vx/quota.h')
      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
-@@ -73,7 +121,9 @@ def configure(conf):
- 
-     conf.CHECK_CODE('', headers='rpc/rpc.h rpcsvc/yp_prot.h', define='HAVE_RPCSVC_YP_PROT_H')
+@@ -101,7 +149,8 @@ def configure(conf):
+     conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
+     conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
  
 -    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
 +    if Options.options.enable_valgrind:
 +        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
-+
      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
-@@ -248,17 +298,18 @@ def configure(conf):
+@@ -294,22 +343,18 @@ def configure(conf):
  
      conf.CHECK_FUNCS('prctl dirname basename')
  
+-    strlcpy_in_bsd = False
+-
 -    # libbsd on some platforms provides strlcpy and strlcat
 -    if not conf.CHECK_FUNCS('strlcpy strlcat'):
--        conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
--                checklibc=True)
+-        if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+-                               checklibc=True):
+-            strlcpy_in_bsd = True
 -    if not conf.CHECK_FUNCS('getpeereid'):
 -        conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
 -    if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
 -        conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
--
--    if not conf.CHECK_FUNCS('closefrom'):
--        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
+-    if not conf.CHECK_FUNCS('setproctitle_init'):
+-        conf.CHECK_FUNCS_IN('setproctitle_init', 'bsd', headers='sys/types.h bsd/unistd.h')
 +    if Options.options.enable_libbsd:
 +        # libbsd on some platforms provides strlcpy and strlcat
 +        if not conf.CHECK_FUNCS('strlcpy strlcat'):
@@ -153,12 +136,25 @@ index fc43e1a..12d2a70 100644
 +            conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
 +        if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
 +            conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
-+
+ 
+-    if not conf.CHECK_FUNCS('closefrom'):
+-        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
 +        if not conf.CHECK_FUNCS('closefrom'):
 +            conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
  
      conf.CHECK_CODE('''
                  struct ucred cred;
+@@ -660,7 +705,7 @@ removeea setea
+     # look for a method of finding the list of network interfaces
+     for method in ['HAVE_IFACE_GETIFADDRS', 'HAVE_IFACE_AIX', 'HAVE_IFACE_IFCONF', 'HAVE_IFACE_IFREQ']:
+         bsd_for_strlcpy = ''
+-        if strlcpy_in_bsd:
++        if Options.options.enable_libbsd:
+             bsd_for_strlcpy = ' bsd'
+         if conf.CHECK_CODE('''
+                            #define %s 1
+diff --git a/wscript b/wscript
+index 94d190f..742f779 100644
 --- a/wscript
 +++ b/wscript
 @@ -22,7 +22,12 @@ def set_options(opt):
@@ -176,5 +172,5 @@ index fc43e1a..12d2a70 100644
  def configure(conf):
      conf.RECURSE('lib/replace')
 -- 
-2.8.3
+2.16.2
 
