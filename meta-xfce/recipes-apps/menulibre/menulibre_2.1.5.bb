@@ -4,21 +4,23 @@ SECTION = "x11/graphics"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "python3-distutils-extra-native intltool-native"
+DEPENDS = " \
+    python3-distutils-extra-native \
+    intltool-native \
+"
 
 inherit distutils3 gtk-icon-cache
 
-SRC_URI = " \
-    https://launchpad.net/menulibre/2.1/${PV}/+download/${PN}-${PV}.tar.gz \
-    file://0001-add_launcher-Exit-early-if-no-row-is-selected.patch \
-    file://0002-setup.py-avoid-usr-share-share-paths.patch \
-    file://0003-MenulibreXdg.py-fix-loading-of-desktop-files.patch \
-"
-SRC_URI[md5sum] = "19d9d3337322eb5513454bb8cdfb739b"
-SRC_URI[sha256sum] = "bdd69740119902f1b1f8c7831155f4428403792a0a6c4287bcbb395c4e71fb31"
+SRC_URI = "https://launchpad.net/menulibre/2.1/${PV}/+download/${PN}-${PV}.tar.gz"
+SRC_URI[md5sum] = "efc7edb49bb0e5fea49e158b40573334"
+SRC_URI[sha256sum] = "ef05b2722bab2acb7070d6c8ed0e7bd58bd4a4540bf498af9e889944f9da08b5"
+
+do_compile() {
+}
 
 do_install_append() {
     sed -i 's:${D}::g' ${D}${datadir}/applications/menulibre.desktop
+    sed -i 's:share/share:share:g' ${D}${PYTHON_SITEPACKAGES_DIR}/menulibre_lib/menulibreconfig.py
 }
 
 FILES_${PN} += " \
@@ -29,6 +31,7 @@ FILES_${PN} += " \
 
 RDEPENDS_${PN} += " \
     gtk+3 \
+    gtksourceview3 \
     python3-pygobject \
     gnome-menus3 \
     python3-unixadmin \
