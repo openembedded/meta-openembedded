@@ -11,8 +11,8 @@ SRC_URI = " \
     file://default.lua \
     file://devilspie2.desktop \
 "
-SRC_URI[md5sum] = "f205409e921aa2d86481f1b8d518da45"
-SRC_URI[sha256sum] = "11f5bc310fba4df404c057461ffb3fadac8ef51d211008c665c48f587a5a3f85"
+SRC_URI[md5sum] = "26eed0b5b4af5c7e13c551eceaeab832"
+SRC_URI[sha256sum] = "ecffc17c62b41e196b72340192a90c4223329df041f135e74c0990860595f828"
 
 inherit distro_features_check pkgconfig gettext
 
