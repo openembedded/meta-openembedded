@@ -35,4 +35,12 @@ python populate_packages_prepend () {
 
 LEAD_SONAME = "libfltk.so"
 
-FILES_${PN} += "${datadir}/mime"
+# .desktop / icons / mime only necessary for fluid app
+FILES_${PN}-bin += " \
+    ${datadir}/applications \
+    ${datadir}/icons \
+    ${datadir}/mime \
+"
+
+# cmake files
+FILES_${PN}-dev += "${datadir}/fltk"
