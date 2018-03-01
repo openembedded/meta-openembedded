@@ -42,10 +42,10 @@ inherit update-rc.d systemd
 python __anonymous () {
     import re
 
-    karch = d.getVar('KARCH')
+    karch = d.getVar('TARGET_ARCH')
     multilib = d.getVar('MLPREFIX')
 
-    if multilib and karch == 'powerpc64':
+    if multilib and ( karch == 'powerpc64' or karch == 'arm' ):
         searchstr = "lib.?32"
         reg = re.compile(searchstr)
         if reg.search(multilib):
