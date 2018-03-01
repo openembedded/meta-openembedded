@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=26a8bd75d8f8498bdbbe64a27791d4ee"
 DEPENDS = "libxfce4util garcon libxfce4ui xfconf exo gtk+ gtk+3 dbus cairo virtual/libx11 libxml2 libwnck"
 
-inherit xfce gtk-doc distro_features_check
+inherit xfce gtk-doc distro_features_check gtk-icon-cache
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
@@ -39,5 +39,6 @@ FILES_${PN}-gtk3 = " \
     ${libdir}/libxfce4panel-2.0${SOLIBS} \
     ${libdir}/xfce4/panel/wrapper-2.0 \
 "
-FILES_${PN}-dbg += "${libdir}/xfce4/panel/plugins/.debug \
+FILES_${PN}-dbg += " \
+    ${libdir}/xfce4/panel/plugins/.debug \
 "
