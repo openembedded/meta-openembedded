@@ -50,7 +50,6 @@ DEPENDS = " \
             lzo \
             mpeg2dec \
             python \
-            samba \
             sqlite3 \
             taglib \
             virtual/egl \
@@ -102,8 +101,10 @@ ACCEL ?= ""
 ACCEL_x86 = "vaapi vdpau"
 ACCEL_x86-64 = "vaapi vdpau"
 
-PACKAGECONFIG ??= "${ACCEL} opengl"
-PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', ' openglesv2', d)}"
+PACKAGECONFIG ??= "${ACCEL} opengl \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', 'openglesv2', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'samba', '', d)} \
+"
 
 PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,"
 PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,virtual/egl"
@@ -113,6 +114,7 @@ PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5"
 PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,libxinerama libxmu libxrandr libxtst"
 PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
 PACKAGECONFIG[lcms] = "--enable-lcms2,--disable-lcms2,lcms"
+PACKAGECONFIG[samba] = "--enable-samba,--disable-samba,samba"
 
 EXTRA_OECONF = " \
     --disable-debug \
