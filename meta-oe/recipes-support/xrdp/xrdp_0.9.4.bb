@@ -8,7 +8,7 @@ inherit distro_features_check autotools pkgconfig useradd systemd
 
 DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native fuse"
 
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 pam"
 
 SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
            file://xrdp.sysconfig \
