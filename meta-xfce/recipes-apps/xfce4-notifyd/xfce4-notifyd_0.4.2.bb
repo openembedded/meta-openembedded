@@ -15,9 +15,8 @@ DEPENDS = " \
 
 inherit xfce-app
 
-SRC_URI += "file://0001-Add-a-configure-option-to-start-daemon-by-autostart-.patch"
-SRC_URI[md5sum] = "c2de09c30b06eaf2d3faaf3e509d656a"
-SRC_URI[sha256sum] = "2771871f67effc0bb80f656cf4aa3cd71fe0ea0f4c04b5d8e97bb1752faf36c9"
+SRC_URI[md5sum] = "ecb930ef6ae6e1f310a5afe5f638eff8"
+SRC_URI[sha256sum] = "f6f28af47fdfb41db84bd003f0d76f5f4abf2137d1e27e9d378f063bb8f82356"
 
 # Avoid trouble with other desktops e.g KDE which also ships dbus service named
 # org.freedesktop.Notifications
