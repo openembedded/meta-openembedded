@@ -17,7 +17,8 @@ DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
 DEPENDS_append_class-target = " intltool-native gtk+ gtk+3 uim-native takao-fonts"
 
 RDEPENDS_uim = "libuim0 libedit"
-RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0 glibc-utils glibc-gconv-euc-jp"
+RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0"
+RDEPENDS_uim-anthy_append_libc-glibc = " glibc-utils glibc-gconv-euc-jp"
 
 LEAD_SONAME = "libuim.so.1"
 
