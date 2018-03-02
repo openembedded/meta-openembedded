@@ -12,6 +12,7 @@ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools
 RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-attrs \
     ${PYTHON_PN}-debugger \
+    ${PYTHON_PN}-doctest \
     ${PYTHON_PN}-json \
     ${PYTHON_PN}-pluggy \
     ${PYTHON_PN}-py \
