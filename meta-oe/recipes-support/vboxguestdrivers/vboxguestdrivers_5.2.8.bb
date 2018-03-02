@@ -15,11 +15,8 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 
     file://Makefile.utils \
 "
 
-# For default linux-yocto 4.15
-SRC_URI += "file://linux-4.15.0-rc8-VBoxGuestAdditions-amd64.diff"
-
-SRC_URI[md5sum] = "4490d6929dfae41cdf05e34f583318c8"
-SRC_URI[sha256sum] = "fe705288ee50efcce10ff4c80e461a1c7091e461a7b55f98842fa1c9772ca4e7"
+SRC_URI[md5sum] = "e731ea9c5c31096ec4c2a3bfba26665c"
+SRC_URI[sha256sum] = "ee2759d47b0b4ac81b8b671c9485c87fb2db12c097b3e7e69b94c1291a8084e8"
 
 S = "${WORKDIR}/vbox_module"
 
