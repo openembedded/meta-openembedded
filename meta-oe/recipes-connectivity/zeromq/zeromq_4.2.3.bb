@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
 PACKAGECONFIG ??= "libsodium"
 PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
 
-SRC_URI = "http://github.com/zeromq/zeromq4-1/releases/download/v${PV}/zeromq-${PV}.tar.gz \
+SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
     file://run-ptest \
 "
-SRC_URI[md5sum] = "c89db4dbc0b90c34c9f4983cbff6d321"
-SRC_URI[sha256sum] = "02ebf60a43011e770799336365bcbce2eb85569e9b5f52aa0d8cc04672438a0a"
+SRC_URI[md5sum] = "c4e18bd0584ccd34213f152c11f54d6c"
+SRC_URI[sha256sum] = "8f1e2b2aade4dbfde98d82366d61baef2f62e812530160d2e6d0a5bb24e40bc0"
 
 S = "${WORKDIR}/zeromq-${PV}"
 
