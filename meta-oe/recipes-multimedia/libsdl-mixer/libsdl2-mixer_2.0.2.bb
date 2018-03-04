@@ -2,12 +2,12 @@ SUMMARY = "Simple DirectMedia Layer mixer library V2"
 SECTION = "libs"
 DEPENDS = "virtual/libsdl2 flac libmikmod libvorbis"
 LICENSE = "Zlib"
-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=29d8bc7c38aa44b1cf3a633a46589917"
+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=95e0c3cf63f71b950911e698a54b7fc5"
 
 SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "c6c4f556d4415871f526248f5c9a627d"
-SRC_URI[sha256sum] = "5a24f62a610249d744cbd8d28ee399d8905db7222bf3bdbc8a8b4a76e597695f"
+SRC_URI[md5sum] = "aaa0551393993c14a13f72b339c0ed6c"
+SRC_URI[sha256sum] = "4e615e27efca4f439df9af6aa2c6de84150d17cbfd12174b54868c12f19c83bb"
 
 S = "${WORKDIR}/SDL2_mixer-${PV}"
 
