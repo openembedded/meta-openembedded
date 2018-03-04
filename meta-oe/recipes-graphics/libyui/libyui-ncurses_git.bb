@@ -5,13 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
 SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
-           file://0001-src-Replace-using-sys-errno.h-with-errno.h.patch \
-           "
+          "
 
 SRC_URI_append_class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
 
 PV = "2.48.3+git${SRCPV}"
-SRCREV = "7b251c2ff541df6139f3d210d0a0a27d042926bd"
+SRCREV = "79b804b45ffc6a0d92e28e793ff389a20b63b54b"
 
 S = "${WORKDIR}/git"
 

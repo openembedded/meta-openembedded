@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/libyui/libyui.git \
            "
 
 PV = "3.3.3+git"
-SRCREV = "f4ccea39f6b6f37eabd0a4df49db5f9bcb3c013a"
+SRCREV = "2b634cb7821e2e79dd4b7a73caf8e67c50189376"
 
 S = "${WORKDIR}/git"
 
