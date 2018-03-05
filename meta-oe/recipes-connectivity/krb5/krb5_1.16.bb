@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=3e12b8a065cca25dfdcac734fb3ec0b9"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=59b8da652f07186b44782a8454574f30"
 DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
 
 inherit autotools-brokensep binconfig perlnative systemd update-rc.d
@@ -30,11 +30,9 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://etc/default/krb5-admin-server \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
-           file://fix-CVE-2017-11368.patch;striplevel=2 \
-           file://CVE-2017-11462.patch;striplevel=2 \
 "
-SRC_URI[md5sum] = "8022f3a1cde8463e44fd35ef42731f85"
-SRC_URI[sha256sum] = "437c8831ddd5fde2a993fef425dedb48468109bb3d3261ef838295045a89eb45"
+SRC_URI[md5sum] = "23c5e9f07642db4a67f7a5b6168b1319"
+SRC_URI[sha256sum] = "faeb125f83b0fb4cdb2f99f088140631bb47d975982de0956d18c85842969e08"
 
 CVE_PRODUCT = "kerberos"
 
