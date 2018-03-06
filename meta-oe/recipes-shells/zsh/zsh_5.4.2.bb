@@ -6,13 +6,13 @@ HOMEPAGE = "http://www.zsh.org"
 SECTION = "base/shell"
 
 LICENSE = "zsh"
-LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
 
 DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
-SRC_URI[md5sum] = "d583fbca0c2410bf9542ce8a651c26ca"
-SRC_URI[sha256sum] = "3d94a590ff3c562ecf387da78ac356d6bea79b050a9ef81e3ecb9f8ee513040e"
+SRC_URI[md5sum] = "dfe156fd69b0d8d1745ecf6d6e02e047"
+SRC_URI[sha256sum] = "957bcdb2c57f64c02f673693ea5a7518ef24b6557aeb3a4ce222cefa6d74acc9"
 
 inherit autotools gettext update-alternatives
 
