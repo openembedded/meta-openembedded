@@ -7,8 +7,8 @@ DEPENDS = "openssl libpcre libpcap zlib python boost"
 
 inherit scons dos2unix siteinfo
 
-PV = "3.4.6+git${SRCPV}"
-SRCREV = "c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5"
+PV = "3.4.13+git${SRCPV}"
+SRCREV = "fbdef2ccc53e0fcc9afb570063633d992b2aae42"
 SRC_URI = "git://github.com/mongodb/mongo.git;branch=v3.4 \
            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
            file://0001-mongo-Add-using-std-string.patch \
