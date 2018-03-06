@@ -12,8 +12,8 @@ DEPENDS = "boost"
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
            file://soci_libdir.patch \
           "
-SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf"
-SRC_URI[sha256sum] = "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743582de2ff443ccb1c"
+SRC_URI[md5sum] = "acfbccf176cd20e06833a8037a2d3699"
+SRC_URI[sha256sum] = "2c659db0f4f7b424bbcffe195c03c293a1dbf676189a27b077fb2aab4d53a610"
 
 TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
               -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \
@@ -38,7 +38,7 @@ PACKAGECONFIG ??= "empty"
 EXTRA_OECMAKE = "${EXTRA_OECONF} -DSOCI_LIBDIR=${libdir}"
 DISABLE_STATIC = ""
 
-inherit cmake
+inherit dos2unix cmake
 
 PACKAGES += "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${PN}-oracle"
 
