@@ -15,7 +15,9 @@ EXTRA_OECONF += "--enable-all-themes \
     --with-iconmap=${STAGING_LIBEXECDIR_NATIVE}/icon-name-mapping \
 "
 
-inherit gnomebase perlnative
+inherit distro_features_check gnomebase perlnative
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 PACKAGES =+ " gnome-theme-crux gnome-theme-highcontrast gnome-theme-highcontrastinverse gnome-theme-highcontrastlargeprint gnome-theme-highcontrastlargeprintinverse gnome-theme-largeprint gnome-theme-mist"
 FILES_gnome-theme-crux = "${datadir}/themes/Crux ${datadir}/icons/Crux"
