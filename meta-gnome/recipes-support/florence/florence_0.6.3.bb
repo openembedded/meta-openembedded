@@ -12,7 +12,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${PN}/${PN}/${PV}/${PN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "8775051d7352f75dec5a86dc9964e8e0"
 SRC_URI[sha256sum] = "422992fd07d285be73cce721a203e22cee21320d69b0fda1579ce62944c5091e"
 
-inherit gettext autotools gconf pkgconfig
+inherit distro_features_check gettext autotools gconf pkgconfig
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet --without-xrecord"
 
