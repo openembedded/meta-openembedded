@@ -14,7 +14,9 @@ SRC_URI = " \
 SRC_URI[md5sum] = "f205409e921aa2d86481f1b8d518da45"
 SRC_URI[sha256sum] = "11f5bc310fba4df404c057461ffb3fadac8ef51d211008c665c48f587a5a3f85"
 
-inherit pkgconfig gettext
+inherit distro_features_check pkgconfig gettext
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 do_compile() {
     export GTK2=1
