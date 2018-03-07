@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
 
 inherit distro_features_check autotools pkgconfig useradd systemd
 
-DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native fuse"
+DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native"
 
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
@@ -24,6 +24,9 @@ PV = "0.9.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse"
+
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system xrdp"
 USERADD_PARAM_${PN}  = "--system --home /var/run/xrdp -g xrdp \
@@ -37,7 +40,7 @@ FILES_${PN}-dev += "${libdir}/xrdp/libcommon.so \
                     ${libdir}/xrdp/libscp.so \
                     ${libdir}/xrdp/libxrdpapi.so "
 
-EXTRA_OECONF = "--enable-pam-config=suse --enable-fuse"
+EXTRA_OECONF = "--enable-pam-config=suse"
 
 do_configure_prepend() {
     cd ${S}
