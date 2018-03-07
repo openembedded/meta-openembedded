@@ -19,7 +19,9 @@ EXTRA_OECONF = "\
 
 DEPENDS += "gtk+3"
 
-inherit autotools gtk-doc pkgconfig
+inherit distro_features_check autotools gtk-doc pkgconfig
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 FILES_${PN} += " ${datadir}/dbus-1 \
                  ${datadir}/PolicyKit \
