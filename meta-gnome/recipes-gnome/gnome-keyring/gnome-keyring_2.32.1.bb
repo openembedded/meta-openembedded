@@ -13,7 +13,9 @@ SECTION = "x11/gnome"
 
 PR = "r12"
 
-inherit autotools gnome gtk-doc pkgconfig gsettings
+inherit distro_features_check autotools gnome gtk-doc pkgconfig gsettings
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://egg-asn1x.patch \
             file://musl.patch \
