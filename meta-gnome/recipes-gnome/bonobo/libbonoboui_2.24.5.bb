@@ -3,7 +3,9 @@ LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
 
-inherit gnomebase pkgconfig gtk-doc
+inherit distro_features_check gnomebase pkgconfig gtk-doc
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://gcc5.patch \
             file://0001-bonobo-ui-node-qualify-functions-with-G_GNUC_PRINTF.patch \
