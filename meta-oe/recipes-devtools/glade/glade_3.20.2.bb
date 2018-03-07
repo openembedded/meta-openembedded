@@ -9,7 +9,9 @@ DEPENDS = "gtk+ gtk+3 glib-2.0 libxml2 intltool-native \
 "
 
 
-inherit autotools pkgconfig gnomebase gobject-introspection
+inherit distro_features_check autotools pkgconfig gnomebase gobject-introspection
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
            file://remove-yelp-help-rules-var.patch \
