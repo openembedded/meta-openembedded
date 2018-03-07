@@ -3,7 +3,9 @@ LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
 SECTION = "x11/gnome/libs"
 
-inherit gnomebase gtk-doc
+inherit distro_features_check gnomebase gtk-doc
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 # intltool to provide IT_PROG_INTLTOOL
 # configure: line 12654: syntax error near unexpected token `0.35.0'
