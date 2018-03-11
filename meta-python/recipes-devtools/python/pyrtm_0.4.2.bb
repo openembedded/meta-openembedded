@@ -22,6 +22,7 @@ FILES_${PN}-tests += " \
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-json \
+    ${PYTHON_PN}-logging \
     ${PYTHON_PN}-netclient \
 "
 
