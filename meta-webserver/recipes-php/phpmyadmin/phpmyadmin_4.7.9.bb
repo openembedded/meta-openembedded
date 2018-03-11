@@ -14,6 +14,9 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
 SRC_URI[md5sum] = "0a862e3fa52c8b9078e0441ee82be831"
 SRC_URI[sha256sum] = "f19b503f0afb0dd3389d4bb11dab3f438d36e85eef11a5c400c592fd5f539398"
 
+UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
+
 S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
 
 inherit allarch
