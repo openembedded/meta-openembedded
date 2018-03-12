@@ -3,8 +3,12 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378"
 HOMEPAGE="https://bitbucket.org/mhallin/py-scrypt/overview"
 
-SRC_URI[md5sum] = "0704e59cc3afb3845c27bb3827baeea9"
-SRC_URI[sha256sum] = "d4a5a4f53450b8ef629bbf1ee4be6105c69936e49b3d8bc621ac2287f0c86020"
+FILESEXTRAPATHS_prepend := "${THISDIR}/python-scrypt:"
+
+SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
+
+SRC_URI[md5sum] = "ae8e3263aa31b040c1f9c7f1e1843a56"
+SRC_URI[sha256sum] = "f8239b2d47fa1d40bc27efd231dc7083695d10c1c2ac51a99380360741e0362d"
 
 inherit pypi
 
