@@ -35,3 +35,7 @@ FILES_${PN} += " \
     ${datadir}/zsh/* \
     ${prefix}/src/*  \
 "
+
+# luajit not supported on Aarch64
+COMPATIBLE_HOST = "^(?!aarch64).*"
+
