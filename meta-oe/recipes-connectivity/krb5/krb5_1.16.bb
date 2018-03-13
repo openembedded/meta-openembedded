@@ -15,7 +15,7 @@ HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=59b8da652f07186b44782a8454574f30"
-DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native openssl"
 
 inherit autotools-brokensep binconfig perlnative systemd update-rc.d
 
@@ -38,9 +38,8 @@ CVE_PRODUCT = "kerberos"
 
 S = "${WORKDIR}/${BP}/src"
 
-PACKAGECONFIG ??= "openssl"
+PACKAGECONFIG ??= ""
 PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
-PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
 PACKAGECONFIG[keyutils] = "--enable-keyutils,--disable-keyutils,keyutils"
 PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
 PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
