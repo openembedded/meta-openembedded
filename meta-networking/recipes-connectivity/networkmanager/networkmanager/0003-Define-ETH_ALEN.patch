@@ -1,7 +1,7 @@
-From 16c3dc7a407101243d2056d2c93e61dce1a05350 Mon Sep 17 00:00:00 2001
+From d0951fe7da63d8296a305781d7322ce4d3249415 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 31 Mar 2017 16:08:45 -0700
-Subject: [PATCH 3/5] Define ETH_ALEN
+Subject: [PATCH 3/7] Define ETH_ALEN
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
@@ -10,7 +10,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  2 files changed, 3 insertions(+)
 
 diff --git a/libnm-core/nm-utils.h b/libnm-core/nm-utils.h
-index 156ccae..68e222b 100644
+index 02e24ea..5ff279c 100644
 --- a/libnm-core/nm-utils.h
 +++ b/libnm-core/nm-utils.h
 @@ -29,6 +29,7 @@
@@ -22,7 +22,7 @@ index 156ccae..68e222b 100644
  #include <netinet/in.h>
  
 diff --git a/src/platform/wifi/wifi-utils.h b/src/platform/wifi/wifi-utils.h
-index 84f5ce9..33a838d 100644
+index 939080f..2274408 100644
 --- a/src/platform/wifi/wifi-utils.h
 +++ b/src/platform/wifi/wifi-utils.h
 @@ -24,6 +24,8 @@
@@ -35,5 +35,5 @@ index 84f5ce9..33a838d 100644
  
  typedef struct WifiData WifiData;
 -- 
-2.12.1
+2.14.1
 
