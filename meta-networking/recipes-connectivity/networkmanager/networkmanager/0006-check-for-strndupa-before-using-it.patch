@@ -1,7 +1,7 @@
-From 05e8bd664d0244cb8ab4376b962830b97860f6bf Mon Sep 17 00:00:00 2001
+From f24d958fc85f9a43ac13abc85f74c4ae233dc8a4 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 31 Mar 2017 18:37:19 -0700
-Subject: [PATCH] check for strndupa before using it
+Subject: [PATCH 6/7] check for strndupa before using it
 
 musl does not have strndupa
 
@@ -13,10 +13,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  3 files changed, 17 insertions(+)
 
 diff --git a/config.h.in b/config.h.in
-index db8c135..c4229ed 100644
+index edec211..0799030 100644
 --- a/config.h.in
 +++ b/config.h.in
-@@ -41,6 +41,10 @@
+@@ -34,6 +34,10 @@
     */
  #undef HAVE_DCGETTEXT
  
@@ -24,14 +24,14 @@ index db8c135..c4229ed 100644
 +   don't. */
 +#undef HAVE_DECL_STRNDUPA
 +
- /* Define to 1 if you have the <dlfcn.h> header file. */
- #undef HAVE_DLFCN_H
- 
+ /* Define to 1 if you have the declaration of `explicit_bzero', and to 0 if
+    you don't. */
+ #undef HAVE_DECL_EXPLICIT_BZERO
 diff --git a/configure.ac b/configure.ac
-index 2630f8d..d0a57fd 100644
+index 8a066ad..51e5eb6 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -54,6 +54,7 @@ AC_SUBST(NM_VERSION)
+@@ -56,6 +56,7 @@ AC_SUBST(NM_VERSION)
  
  GIT_SHA_RECORD(NM_GIT_SHA)
  
@@ -40,7 +40,7 @@ index 2630f8d..d0a57fd 100644
  dnl Checks for typedefs, structures, and compiler characteristics.
  dnl
 diff --git a/src/systemd/src/basic/alloc-util.h b/src/systemd/src/basic/alloc-util.h
-index ceeee51..924b59c 100644
+index 0a89691..1e95260 100644
 --- a/src/systemd/src/basic/alloc-util.h
 +++ b/src/systemd/src/basic/alloc-util.h
 @@ -25,6 +25,18 @@
@@ -63,5 +63,5 @@ index ceeee51..924b59c 100644
  #define new(t, n) ((t*) malloc_multiply(sizeof(t), (n)))
  
 -- 
-2.12.1
+2.14.1
 
