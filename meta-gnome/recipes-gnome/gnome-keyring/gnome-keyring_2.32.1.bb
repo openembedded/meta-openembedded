@@ -21,7 +21,7 @@ SRC_URI += "file://egg-asn1x.patch \
             file://musl.patch \
 "
 
-DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native"
+DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native glib-2.0-native"
 RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
 
 LDFLAGS += "-lgmodule-2.0"
