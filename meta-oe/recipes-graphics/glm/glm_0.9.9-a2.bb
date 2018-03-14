@@ -8,10 +8,10 @@ BUGTRACKER = "https://github.com/g-truc/glm/issues"
 SECTION = "libs"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://copying.txt;md5=4431606d144252143c9c3df384a74cad"
+LIC_FILES_CHKSUM = "file://readme.md;beginline=21;endline=22;md5=3075b5727d36f29edccf97b93e72b790"
 
-SRC_URI = "git://github.com/g-truc/glm;branch=0.9.8"
-SRCREV = "6fa203eeb7fbcbb6f620501fad40359c8a456049"
+SRC_URI = "git://github.com/g-truc/glm;branch=master"
+SRCREV = "fcbedf5058ef8613dd02aac62ef00d55dcfeadd7"
 S = "${WORKDIR}/git"
 
 inherit cmake
