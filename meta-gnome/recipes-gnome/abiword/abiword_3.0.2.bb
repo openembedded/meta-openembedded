@@ -8,7 +8,6 @@ DEPENDS  = " \
     gtk+ \
     gtkmathview \
     wv \
-    libglade \
     libfribidi \
     jpeg \
     libpng \
