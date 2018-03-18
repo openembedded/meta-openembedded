@@ -1,0 +1,36 @@
+From b6fc6c36d359a50503138cd87d7147faf6dff893 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 17 Mar 2018 20:52:10 +0100
+Subject: [PATCH] Do not overwrite all our build flags
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ cmake/modules/PopplerMacros.cmake | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/cmake/modules/PopplerMacros.cmake b/cmake/modules/PopplerMacros.cmake
+index ccb2790..f29481e 100644
+--- a/cmake/modules/PopplerMacros.cmake
++++ b/cmake/modules/PopplerMacros.cmake
+@@ -98,6 +98,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+   set(CMAKE_BUILD_TYPE RelWithDebInfo)
+ endif(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+ 
++if(false)
+ if(CMAKE_COMPILER_IS_GNUCXX)
+   # set the default compile warnings
+   set(_warn "-Wall -Wextra -Wpedantic")
+@@ -159,4 +160,5 @@ if(CMAKE_C_COMPILER MATCHES "icc")
+   set(CMAKE_C_FLAGS_DEBUG            "-O2 -g -Ob0 -noalign ${_save_cflags}")
+   set(CMAKE_C_FLAGS_DEBUGFULL        "-g -Ob0 -noalign ${_save_cflags}")
+ endif(CMAKE_C_COMPILER MATCHES "icc")
++endif(false)
+ 
+-- 
+2.14.3
+
