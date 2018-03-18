@@ -1,11 +1,11 @@
 SUMMARY = "Extensions to the standard Python datetime module"
 DESCRIPTION = "The dateutil module provides powerful extensions to the datetime module available in the Python standard library."
 HOMEPAGE = "https://dateutil.readthedocs.org"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=31f72d4cad3675fb091537b9b2f32de0"
+LICENSE = "BSD-3-Clause & Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e3155c7bdc71f66e02678411d2abf996"
 
-SRC_URI[md5sum] = "db38f6b4511cefd76014745bb0cc45a4"
-SRC_URI[sha256sum] = "891c38b2a02f5bb1be3e4793866c8df49c7d19baabf9c1bad62547e0b4866aca"
+SRC_URI[md5sum] = "ba7d27d7788cc9dd04a07bd77203ffab"
+SRC_URI[sha256sum] = "8f95bb7e6edbb2456a51a1fb58c8dca942024b4f5844cae62c90aa88afe6e300"
 
 PYPI_PACKAGE = "python-dateutil"
 inherit pypi
