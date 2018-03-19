@@ -20,7 +20,4 @@ SRC_URI[sha256sum] = "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e29304f778b
 
 EXTRA_OECONF += "--disable-scrollkeeper"
 
-PACKAGECONFIG ?= "gnome"
-PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
-
 FILES_${PN} += "${datadir}/icons"
