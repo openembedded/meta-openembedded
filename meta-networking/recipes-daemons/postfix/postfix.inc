@@ -217,6 +217,7 @@ do_install_append_class-native() {
 do_install_append_class-target() {
     # Remove references to buildmachine paths in target makedefs.out
     sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
+    sed -i 's:-I${STAGING_DIR_TARGET}:-I:g' ${D}/etc/postfix/makedefs.out
 }
 
 ALTERNATIVE_${PN} = "sendmail"
