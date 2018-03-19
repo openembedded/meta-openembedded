@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
 DEPENDS = " \
     intltool-native gperf-native \
     glib-2.0 gtk+3 gconf libgnome-keyring libgdata \
-    dbus db virtual/libiconv zlib libsoup-2.4 libglade libical nss libsecret \
+    dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
 "
 
 inherit distro_features_check gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
