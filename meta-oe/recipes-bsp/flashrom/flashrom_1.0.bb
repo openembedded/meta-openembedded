@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "pciutils libusb libusb-compat"
 
 SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
-           file://0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch \
            file://sst26.patch \
-           file://0001-Remove-undefined-behavior.patch \
+           file://0001-platform-Add-riscv-to-known-platforms.patch \
            "
-SRC_URI[md5sum] = "aab9c98925d9cfb5ffb28b67a6112530"
-SRC_URI[sha256sum] = "cb3156b0f63eb192024b76c0814135930297aac41f80761a5d293de769783c45"
+SRC_URI[md5sum] = "42d999990c735d88653627cefcc13b9a"
+SRC_URI[sha256sum] = "3702fa215ba5fb5af8e54c852d239899cfa1389194c1e51cb2a170c4dc9dee64"
 
 inherit pkgconfig
 
