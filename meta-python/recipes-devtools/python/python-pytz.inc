@@ -12,6 +12,7 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-doctest \
     ${PYTHON_PN}-io \
+    ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-pprint \
     ${PYTHON_PN}-threading \
 "
