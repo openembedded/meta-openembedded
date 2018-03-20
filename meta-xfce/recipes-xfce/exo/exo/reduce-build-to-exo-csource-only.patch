@@ -10,9 +10,10 @@ exo-csource creates c-header files from glade resource output files. When
 building xfce-packages from git instead of tarball this exo-csource-native is
 required.
 
-Upstream-Status: Inappropriate [configuration]
+Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+
 ---
  Makefile.am  | 10 +---------
  configure.ac | 22 ----------------------
