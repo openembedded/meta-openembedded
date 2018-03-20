@@ -8,3 +8,8 @@ SRC_URI[md5sum] = "fb554e9c8f9aa76e333a03d470a5cf52"
 SRC_URI[sha256sum] = "b9c40e9750f3d77e6e4d441d8b0266cf555e7cdabdcff33c4fd06366ca761ef8"
 
 inherit pypi
+
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-shell \
+"
