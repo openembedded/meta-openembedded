@@ -50,6 +50,7 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
                   ac_cv_file__etc_TIMEZONE=no"
 
 CFLAGS_append = " -fPIC -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+CFLAGS_append_riscv64 = " -D_REENTRANT -pthread"
 LDFLAGS_append = " -pthread"
 
 do_configure() {
