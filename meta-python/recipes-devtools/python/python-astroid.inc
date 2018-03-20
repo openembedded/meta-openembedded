@@ -19,6 +19,7 @@ FILES_${PN}-tests += " \
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-distutils \
     ${PYTHON_PN}-lazy-object-proxy \
+    ${PYTHON_PN}-logging \
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-wrapt \
     ${PYTHON_PN}-setuptools \
