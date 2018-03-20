@@ -13,8 +13,9 @@ SRC_URI[sha256sum] = "31911f6031de306c27ed79dc77b690d7c55b0dcb0f0434ca34ec6361d0
 DEPENDS += "${PYTHON_PN}-pytest-runner-native"
 
 RDEPENDS_${PN} = "\
-    ${PYTHON_PN}-math \
     ${PYTHON_PN}-io \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-math \
     ${PYTHON_PN}-netclient \
     ${PYTHON_PN}-threading \
 "
