@@ -25,9 +25,8 @@ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
 ---
  cmake/install_macros.cmake | 25 +++++++++++++++----------
- cmake/mysql_version.cmake  |  3 ++-
- libmysql/CMakeLists.txt    | 36 ++++++++++++++++++++++++++++--------
- 3 files changed, 45 insertions(+), 19 deletions(-)
+ libmysql/CMakeLists.txt    | 34 +++++++++++++++++++++++++++-------
+ 2 files changed, 42 insertions(+), 17 deletions(-)
 
 diff --git a/cmake/install_macros.cmake b/cmake/install_macros.cmake
 index b8efdf8..a0d0e68 100644
@@ -39,8 +38,8 @@ index b8efdf8..a0d0e68 100644
  # 
  # This program is free software; you can redistribute it and/or modify
  # it under the terms of the GNU General Public License as published by
-@@ -111,28 +111,33 @@ FUNCTION(INSTALL_SCRIPT)
- ENDFUNCTION()
+@@ -167,28 +167,33 @@ ENDFUNCTION()
+ 
  
  # Install symbolic link to CMake target. 
 -# the link is created in the same directory as target
@@ -86,8 +85,8 @@ diff --git a/libmysql/CMakeLists.txt b/libmysql/CMakeLists.txt
 index be5760f..96286ff 100644
 --- a/libmysql/CMakeLists.txt
 +++ b/libmysql/CMakeLists.txt
-@@ -180,6 +180,12 @@ IF(MSVC)
-  INSTALL_DEBUG_TARGET(mysqlclient DESTINATION ${INSTALL_LIBDIR}/debug)
+@@ -433,6 +433,12 @@ IF(MSVC)
+  INSTALL_DEBUG_TARGET(clientlib DESTINATION ${INSTALL_LIBDIR}/debug)
  ENDIF()
  
 +MACRO(GET_TARGET_NAME target out_name)
@@ -99,7 +98,7 @@ index be5760f..96286ff 100644
  IF(UNIX)
    MACRO(GET_VERSIONED_LIBNAME LIBNAME EXTENSION VERSION OUTNAME)
      SET(DOT_VERSION ".${VERSION}")
-@@ -192,7 +198,13 @@ IF(UNIX)
+@@ -445,7 +451,13 @@ IF(UNIX)
        SET(${OUTNAME} ${LIBNAME}${EXTENSION}${DOT_VERSION})
      ENDIF() 
    ENDMACRO()
@@ -114,7 +113,7 @@ index be5760f..96286ff 100644
  ENDIF()
  
  IF(NOT DISABLE_SHARED)
-@@ -205,10 +217,9 @@ IF(NOT DISABLE_SHARED)
+@@ -456,10 +468,9 @@ IF(NOT DISABLE_SHARED)
      # libtool compatability
      IF(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR APPLE)
        SET(OS_SHARED_LIB_VERSION "${SHARED_LIB_MAJOR_VERSION}")
@@ -127,7 +126,7 @@ index be5760f..96286ff 100644
      ENDIF()
      # Name of shared library is mysqlclient on Unix
      SET_TARGET_PROPERTIES(libmysql PROPERTIES 
-@@ -239,8 +250,13 @@ IF(NOT DISABLE_SHARED)
+@@ -482,8 +493,13 @@ IF(NOT DISABLE_SHARED)
        "${CMAKE_SHARED_LIBRARY_SUFFIX}"
        ""
        linkname)
@@ -143,7 +142,7 @@ index be5760f..96286ff 100644
      LIST(REMOVE_DUPLICATES OS_SHARED_LIB_SYMLINKS)
      FOREACH(ver ${OS_SHARED_LIB_SYMLINKS})
        GET_VERSIONED_LIBNAME(
-@@ -248,7 +264,11 @@ IF(NOT DISABLE_SHARED)
+@@ -491,7 +507,11 @@ IF(NOT DISABLE_SHARED)
          "${CMAKE_SHARED_LIBRARY_SUFFIX}"
          "${ver}"
          linkname)
