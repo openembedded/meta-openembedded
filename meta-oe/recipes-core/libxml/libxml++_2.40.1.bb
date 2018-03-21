@@ -18,8 +18,6 @@ DEPENDS = "libxml2 glibmm"
 
 inherit distro_features_check autotools pkgconfig ptest
 
-REQUIRED_DISTRO_FEATURES = "x11"
-
 do_compile_ptest() {
   oe_runmake -C examples buildtest
 }
