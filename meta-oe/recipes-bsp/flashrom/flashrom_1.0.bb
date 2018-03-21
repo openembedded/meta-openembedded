@@ -5,7 +5,7 @@ HOMEPAGE = "http://flashrom.org"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "pciutils libusb libusb-compat"
 
-SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
+SRC_URI = "https://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
            file://sst26.patch \
            file://0001-platform-Add-riscv-to-known-platforms.patch \
            "
