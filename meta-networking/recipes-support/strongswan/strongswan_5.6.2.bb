@@ -12,8 +12,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
            "
 
-SRC_URI[md5sum] = "4afffe3c219bb2e04f09510905af836b"
-SRC_URI[sha256sum] = "c5ea54b199174708de11af9b8f4ecf28b5b0743d4bc0e380e741f25b28c0f8d4"
+SRC_URI[md5sum] = "46aa3aa18fbc4bd528f9a0345ce79913"
+SRC_URI[sha256sum] = "e0a60a30ebf3c534c223559e1686497a21ded709a5d605c5123c2f52bcc22e92"
 
 EXTRA_OECONF = " \
         --without-lib-prefix \
