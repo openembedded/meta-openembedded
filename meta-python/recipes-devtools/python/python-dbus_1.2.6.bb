@@ -1,15 +1,16 @@
 SUMMARY = "Python bindings for the DBus inter-process communication system"
 SECTION = "devel/python"
 HOMEPAGE = "http://www.freedesktop.org/Software/dbus"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0b83047ce9e948b67c0facc5f233476a"
+LICENSE = "MIT & AFL-2.1 | GPLv2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b03240518994df6d8c974675675e5ca4 \
+		    file://dbus-gmain/COPYING;md5=05c3eacd50f69bb1d58afec460baad57 "
 DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
 
 SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "7372a588c83a7232b4e08159bfd48fe5"
-SRC_URI[sha256sum] = "e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc"
+SRC_URI[md5sum] = "1ce1ddf2582060f8f971652ea54cc17e"
+SRC_URI[sha256sum] = "32f29c17172cdb9cb61c68b1f1a71dfe7351506fc830869029c47449bd04faeb"
 S = "${WORKDIR}/dbus-python-${PV}"
 
 inherit distutils-base autotools pkgconfig
