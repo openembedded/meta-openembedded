@@ -11,12 +11,12 @@ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
  2 files changed, 8 insertions(+)
 
 diff --git a/configure.ac b/configure.ac
-index ce21aef..ecd7119 100644
+index 4c03409..8d22e71 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
-     )]
- )
+@@ -119,6 +119,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUseCCache, [], [
+ LIBS="$LIBS $SMBCLIENT_LIBS"
+ CFLAGS="$CFLAGS $SMBCLIENT_CFLAGS"
  
 +dnl *****************************************************************
 +dnl *** Check libsmbclient by pkgconfig to get cflags and ldflags ***
@@ -27,10 +27,10 @@ index ce21aef..ecd7119 100644
  dnl *** Final step ***
  dnl ******************
 diff --git a/src/Makefile.am b/src/Makefile.am
-index 41519d8..9fc97e9 100644
+index ccaa8c3..6598317 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
-@@ -16,3 +16,6 @@ smbnetfs_SOURCES = \
+@@ -17,3 +17,6 @@ smbnetfs_SOURCES = \
  	event.c			event.h			\
  	reconfigure.c		reconfigure.h		\
  	main.c
