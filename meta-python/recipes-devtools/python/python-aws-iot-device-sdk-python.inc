@@ -11,8 +11,15 @@ inherit pypi
 PYPI_PACKAGE = "AWSIoTPythonSDK"
 
 RDEPENDS_${PN} += " \
-    ${PYTHON_PN}-pyopenssl \
+    ${PYTHON_PN}-crypt \
+    ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-io \
     ${PYTHON_PN}-json \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-math \
+    ${PYTHON_PN}-netclient \
+    ${PYTHON_PN}-numbers \
+    ${PYTHON_PN}-threading \
 "
 
 BBCLASSEXTEND = "native nativesdk"
