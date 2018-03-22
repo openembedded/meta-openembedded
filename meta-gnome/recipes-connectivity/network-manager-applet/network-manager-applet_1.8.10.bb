@@ -11,21 +11,28 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-GNOME_COMPRESS_TYPE = "xz"
-
-SRC_URI[archive.md5sum] = "3f82cedc4703df0277c76d9feb5bf2c8"
-SRC_URI[archive.sha256sum] = "693846eeae0986e79eb1cedfbc499f132f27a9976ef189a0f16938ac59ec3226"
+SRC_URI[archive.md5sum] = "eae3be75e77ff1a7ea3174be25e62d03"
+SRC_URI[archive.sha256sum] = "0adc4bfae8b49f7a1d929c22ef20933bd41fb4a8b458280f44c65f9e45b4c9c3"
 
 PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
 PACKAGECONFIG ??= ""
 
-GI_DATA_ENABLED_libc-musl = "False"
+EXTRA_OECONF = " \
+    --without-selinux \
+"
 
 do_configure_append() {
     # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
     for i in $(find ${B} -name "Makefile") ; do
         sed -i -e s%-Werror[^[:space:]]*%%g $i
     done
+}
+
+# gobject-introspection related
+GI_DATA_ENABLED_libc-musl = "False"
+
+do_compile_prepend() {
+    export GIR_EXTRA_LIBS_PATH="${B}/src/libnma/.libs:${B}/src/libnm-gtk/.libs"
 }
 
 RDEPENDS_${PN} =+ "networkmanager"
