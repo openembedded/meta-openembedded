@@ -1,0 +1,72 @@
+From d800c6017962e358c8b2ada6803acb0f4011a763 Mon Sep 17 00:00:00 2001
+From: Mingli Yu <Mingli.Yu@windriver.com>
+Date: Fri, 16 Mar 2018 08:03:20 +0000
+Subject: [PATCH] Makefile.am: fix compile error about kea-msg-compiler
+
+fix compile error about kea-msg-compiler
+
+Upstream-Status: Inappropriate[oe specific]
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ src/bin/agent/Makefile.am             | 2 +-
+ src/hooks/dhcp/lease_cmds/Makefile.am | 2 +-
+ src/lib/http/Makefile.am              | 2 +-
+ src/lib/process/Makefile.am           | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/bin/agent/Makefile.am b/src/bin/agent/Makefile.am
+index e67c572..b646325 100644
+--- a/src/bin/agent/Makefile.am
++++ b/src/bin/agent/Makefile.am
+@@ -33,7 +33,7 @@ endif
+ ca_messages.h ca_messages.cc: s-messages
+ 
+ s-messages: ca_messages.mes
+-	$(top_builddir)/src/lib/log/compiler/kea-msg-compiler $(top_srcdir)/src/bin/agent/ca_messages.mes
++	@KEA_MSG_COMPILER@ $(top_srcdir)/src/bin/agent/ca_messages.mes
+ 	touch $@
+ 
+ BUILT_SOURCES = ca_messages.h ca_messages.cc
+diff --git a/src/hooks/dhcp/lease_cmds/Makefile.am b/src/hooks/dhcp/lease_cmds/Makefile.am
+index 90abfda..cfd6779 100644
+--- a/src/hooks/dhcp/lease_cmds/Makefile.am
++++ b/src/hooks/dhcp/lease_cmds/Makefile.am
+@@ -7,7 +7,7 @@ AM_CXXFLAGS  = $(KEA_CXXFLAGS)
+ # Define rule to build logging source files from message file
+ lease_cmds_messages.h lease_cmds_messages.cc: s-messages
+ s-messages: lease_cmds_messages.mes
+-	$(top_builddir)/src/lib/log/compiler/kea-msg-compiler $(top_srcdir)/src/hooks/dhcp/lease_cmds/lease_cmds_messages.mes
++	@KEA_MSG_COMPILER@ $(top_srcdir)/src/hooks/dhcp/lease_cmds/lease_cmds_messages.mes
+ 	touch $@
+ 
+ # Tell automake that the message files are built as part of the build process
+diff --git a/src/lib/http/Makefile.am b/src/lib/http/Makefile.am
+index 2b0eed5..db3bb0e 100644
+--- a/src/lib/http/Makefile.am
++++ b/src/lib/http/Makefile.am
+@@ -8,7 +8,7 @@ AM_CXXFLAGS  = $(KEA_CXXFLAGS)
+ http_messages.h http_messages.cc: s-messages
+ 
+ s-messages: http_messages.mes
+-	$(top_builddir)/src/lib/log/compiler/kea-msg-compiler $(top_srcdir)/src/lib/http/http_messages.mes
++	@KEA_MSG_COMPILER@ $(top_srcdir)/src/lib/http/http_messages.mes
+ 	touch $@
+ 
+ # Tell automake that the message files are built as part of the build process
+diff --git a/src/lib/process/Makefile.am b/src/lib/process/Makefile.am
+index c7746c6..71998ed 100644
+--- a/src/lib/process/Makefile.am
++++ b/src/lib/process/Makefile.am
+@@ -19,7 +19,7 @@ AM_CXXFLAGS  = $(KEA_CXXFLAGS)
+ process_messages.h process_messages.cc: s-messages
+ 
+ s-messages: process_messages.mes
+-	$(top_builddir)/src/lib/log/compiler/kea-msg-compiler $(top_srcdir)/src/lib/process/process_messages.mes
++	@KEA_MSG_COMPILER@ $(top_srcdir)/src/lib/process/process_messages.mes
+ 	touch $@
+ 
+ spec_config.h: spec_config.h.pre
+-- 
+2.13.3
+
