@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
 
 DEPENDS = " \
     intltool-native \
+    libxslt-native \
     libnl \
     dbus \
     dbus-glib \
@@ -23,18 +24,18 @@ DEPENDS = " \
     curl \
 "
 
-inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
+inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection gtk-doc
 
-GI_DATA_ENABLED_libc-musl = "False"
-
-SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-           file://0001-adjust-net-headers-for-musl-compatibility.patch \
-           file://0002-socket-util.h-Include-linux-sockios.h-on-musl.patch \
-           file://0003-Define-ETH_ALEN.patch \
-           file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
-           file://0006-check-for-strndupa-before-using-it.patch \
-           file://0007-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
-           "
+SRC_URI = " \
+    ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+    file://0001-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+    file://0002-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
+    file://0003-Do-not-create-settings-settings-property-documentati.patch \
+    file://musl/0001-musl-basic.patch \
+    file://musl/0002-musl-dlopen-configure-ac.patch \
+    file://musl/0003-musl-network-support.patch \
+    file://musl/0004-musl-process-util.patch \
+"
 SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
 SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
 
@@ -44,20 +45,22 @@ EXTRA_OECONF = " \
     --disable-ifcfg-rh \
     --disable-ifnet \
     --disable-ifcfg-suse \
-    --disable-introspection \
     --disable-more-warnings \
     --with-iptables=${sbindir}/iptables \
     --with-tests \
     --with-nmtui=yes \
 "
 
+# gobject-introspection related
+GI_DATA_ENABLED_libc-musl = "False"
+
 do_compile_prepend() {
-        export GIR_EXTRA_LIBS_PATH="${B}/libnm-util/.libs"
+    export GIR_EXTRA_LIBS_PATH="${B}/libnm/.libs:${B}/libnm-glib/.libs:${B}/libnm-util/.libs"
 }
 
 PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
-       bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'wifi', d)} \
 "
