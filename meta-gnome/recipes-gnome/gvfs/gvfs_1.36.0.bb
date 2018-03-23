@@ -8,8 +8,13 @@ DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit sha
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "44012824aa75797a7d272cd60f07b488"
-SRC_URI[archive.sha256sum] = "7ef9b2aec234004271a575118a0e35b3c36ce3309e5f9da109635651843372b4"
+SRC_URI[archive.md5sum] = "216d461c5e96e2cea74253be407af6dc"
+SRC_URI[archive.sha256sum] = "9ec388afeb373a213f2cc489184f76a17ae273a000e8a4ec720c1995943256bb"
+
+do_configure_prepend() {
+    # make automake happy..
+    touch ${S}/ABOUT-NLS
+}
 
 EXTRA_OECONF = " \
     --disable-gdu \
