@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
 DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib polkit"
 
 SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "ec57b4b7bf0af568f9a7a5603c921d97"
-SRC_URI[sha256sum] = "78605664d027c788f6ab63c50950be6e86c6ba5d030c4cf35a6664337d87f3b2"
+SRC_URI[md5sum] = "236bb439d9ff1151450b3d8582399532"
+SRC_URI[sha256sum] = "24bcc2f6ab25a2533bac70b587bcb019e591293076920f5b5e04bdedc140a401"
 
 inherit autotools pkgconfig gettext gobject-introspection systemd
 
@@ -32,8 +32,3 @@ FILES_${PN} += "${datadir}/dbus-1/ \
                 ${datadir}/polkit-1/ \
                 ${base_libdir}/udev/* \
 "
-
-FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
-
-
-
