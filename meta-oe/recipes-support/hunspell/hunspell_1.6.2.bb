@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
-SRC_URI[md5sum] = "0df1c18c1284f8625af5ae5a8d5c4cef"
-SRC_URI[sha256sum] = "30f593733c50b794016bb03d31fd2a2071e4610c6fa4708e33edad2335102c49"
+SRC_URI[md5sum] = "1a54504cb470aafa6530bb372a10dc04"
+SRC_URI[sha256sum] = "3cd9ceb062fe5814f668e4f22b2fa6e3ba0b339b921739541ce180cac4d6f4c4"
 
 inherit autotools pkgconfig gettext
 
