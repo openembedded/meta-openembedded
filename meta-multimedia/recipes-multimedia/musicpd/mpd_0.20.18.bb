@@ -16,7 +16,7 @@ DEPENDS += " \
     curl \
     sqlite \
     bzip2 \
-    pulseaudio \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
     tcp-wrappers \
     openal-soft \
     yajl \
@@ -36,18 +36,18 @@ DEPENDS += " \
     dbus \
     expat \
     zlib \
-    libupnp1.6 \
+    libupnp \
 "
 
 # While this item does not require it, it depends on mpg123 which does
 LICENSE_FLAGS = "commercial"
 
 SRC_URI = " \
-    http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
+    http://www.musicpd.org/download/${BPN}/0.20/${BP}.tar.xz \
     file://mpd.conf.in \
 "
-SRC_URI[md5sum] = "fc19f76b512bd471b6af5214965ff7c5"
-SRC_URI[sha256sum] = "8305b8bc026f4b6bde28b8dd09bfdddbe5590acf36358eed4d083a396e301730"
+SRC_URI[md5sum] = "8dc87ba95473fd738f2aff9bd69cc212"
+SRC_URI[sha256sum] = "6a582dc2ae90b94ff3853f9ffd7d80b2c2b5fe2e2c35cb1da0b36f3f3dfad434"
 
 EXTRA_OECONF = "enable_bzip2=yes"
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
