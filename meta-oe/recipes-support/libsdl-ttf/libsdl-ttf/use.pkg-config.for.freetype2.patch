@@ -1,16 +1,21 @@
-freetype-config was removed from oe-core in
+From 8cf318197eea91bec6057308befbb29426d69014 Mon Sep 17 00:00:00 2001
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+Date: Thu, 22 May 2014 10:59:33 +0100
+Subject: [PATCH] freetype-config was removed from oe-core in
 
 commit 5870bd272b0b077d0826fb900b251884c1c05061
-Author: Richard Purdie <richard.purdie@linuxfoundation.org>
-Date:   Thu May 22 10:59:33 2014 +0100
 
     binconfig-disabled: Add class and use
 
+---
+ configure.in | 38 +++++---------------------------------
+ 1 file changed, 5 insertions(+), 33 deletions(-)
+
 diff --git a/configure.in b/configure.in
-index 408e8d6..5f9e730 100644
+index 865075e..d7a5a81 100644
 --- a/configure.in
 +++ b/configure.in
-@@ -86,39 +86,11 @@ case "$host" in
+@@ -90,39 +90,11 @@ case "$host" in
  esac
  AM_CONDITIONAL(USE_VERSION_RC, test x$use_version_rc = xtrue)
  
@@ -54,4 +59,4 @@ index 408e8d6..5f9e730 100644
 +)
  
  dnl Check for SDL
- SDL_VERSION=2.0.0
+ SDL_VERSION=1.2.4
