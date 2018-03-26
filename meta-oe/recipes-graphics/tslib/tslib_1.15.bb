@@ -8,15 +8,14 @@ HOMEPAGE = "http://tslib.org/"
 AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
 SECTION = "base"
 LICENSE = "LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
+LIC_FILES_CHKSUM = "file://COPYING;md5=fc178bcd425090939a8b634d1d6a9594"
 
 SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.xz;downloadfilename=tslib-${PV}.tar.xz \
            file://ts.conf \
            file://tslib.sh \
 "
-
-SRC_URI[md5sum] = "14771f8607b341bb4b297819d37e837d"
-SRC_URI[sha256sum] = "fe35e5f710ea933b118f710e2ce4403ac076fe69926b570333867d4de082a51c"
+SRC_URI[md5sum] = "9ff36788c9ab76a10b58422227b9629e"
+SRC_URI[sha256sum] = "7ce48807cab655076d71a1ceef3ed0ab8a25df98074981d4a8fd1477ee5f710c"
 
 UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
 
@@ -38,10 +37,11 @@ do_install_append() {
 #RDEPENDS_tslib-conf_weird-machine = "detect-stylus"
 RPROVIDES_tslib-conf = "libts-0.0-conf"
 
-PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate"
+PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate tslib-uinput"
 DEBIAN_NOAUTONAME_tslib-conf = "1"
 DEBIAN_NOAUTONAME_tslib-tests = "1"
 DEBIAN_NOAUTONAME_tslib-calibrate = "1"
+DEBIAN_NOAUTONAME_tslib-uinput = "1"
 
 RDEPENDS_${PN} = "tslib-conf"
 RRECOMMENDS_${PN} = "pointercal"
@@ -50,4 +50,7 @@ FILES_${PN}-dev += "${libdir}/ts/*.la"
 FILES_tslib-conf = "${sysconfdir}/ts.conf ${sysconfdir}/profile.d/tslib.sh ${datadir}/tslib"
 FILES_${PN} = "${libdir}/*.so.* ${libdir}/ts/*.so*"
 FILES_tslib-calibrate += "${bindir}/ts_calibrate"
-FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_test"
+FILES_tslib-uinput += "${bindir}/ts_uinput"
+
+FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_print_mt \
+                     ${bindir}/ts_test ${bindir}/ts_test_mt ${bindir}/ts_verify ${bindir}/ts_finddev"
