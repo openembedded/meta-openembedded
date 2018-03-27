@@ -6,21 +6,22 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz \
-    file://remove-systemd-unit-503.patch \
-    file://haveged.sysvinit \
+           file://haveged-init.d-Makefile.am-add-missing-dependency.patch \
 "
 
-SRC_URI[md5sum] = "015ff58cd10607db0e0de60aeca2f5f8"
-SRC_URI[sha256sum] = "9c2363ed9542a6784ff08e247182137e71f2ddb79e8e6c1ac4ad50d21ced3715"
+SRC_URI[md5sum] = "fb1d8b3dcbb9d06b30eccd8aa500fd31"
+SRC_URI[sha256sum] = "f77d9adbdf421b61601fa29faa9ce3b479d910f73c66b9e364ba8642ccbfbe70"
 
 inherit autotools update-rc.d systemd
 
 EXTRA_OECONF = "\
-    --enable-init=service.redhat \
     --enable-nistest=yes \
     --enable-olt=yes \
     --enable-threads=no \
 "
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG[systemd] = "--enable-init=service.redhat --enable-initdir=${systemd_system_unitdir}, --enable-init=sysv.redhat, systemd"
 
 INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME = "haveged"
@@ -30,10 +31,10 @@ SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "haveged.service"
 
 do_install_append() {
-    install -D -m 755 ${WORKDIR}/haveged.sysvinit ${D}${sysconfdir}/init.d/haveged
-
-    mkdir -p ${D}${systemd_unitdir}/system
-    install -p -m644 ${B}/init.d/haveged.service ${D}${systemd_unitdir}/system
+    # The exit status is 143 when the service is stopped
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        sed -i '/ExecStart/a SuccessExitStatus=143' ${D}${systemd_system_unitdir}/haveged.service
+    fi
 }
 
 MIPS_INSTRUCTION_SET = "mips"
