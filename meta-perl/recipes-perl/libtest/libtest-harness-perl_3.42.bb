@@ -26,14 +26,14 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=b08db4360eec119e875dddd7cb8a5ddd"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
-SRC_URI[md5sum] = "7877298e3b717734095ecb8e918b043e"
-SRC_URI[sha256sum] = "69bd44c81c6e1d2db18e298ecf631852608893ddfddb332a7d55285bbfc51132"
+SRC_URI[md5sum] = "c794906473f88d6b74194e2d56f16bd6"
+SRC_URI[sha256sum] = "0fd90d4efea82d6e262e6933759e85d27cbcfa4091b14bf4042ae20bab528e53"
 
 UPSTREAM_CHECK_REGEX = "Test\-Harness\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
 S = "${WORKDIR}/Test-Harness-${PV}"
 
-inherit cpan
+inherit cpan ptest-perl
 
 RDEPENDS_${PN} += "\
     perl-module-benchmark \
@@ -87,5 +87,34 @@ RPROVIDES_${PN} += "libapp-prove-perl \
                     libtap-parser-yamlish-reader-perl \
                     libtap-parser-yamlish-writer-perl \
                     "
+
+do_install_prepend() {
+	# these tests are inappropriate on target
+	rm -rf ${B}/t/000-load.t
+	rm -rf ${B}/t/state.t
+	# these tests require "-T" (taint) option on command line
+	rm -rf ${B}/t/aggregator.t
+	rm -rf ${B}/t/bailout.t
+	rm -rf ${B}/t/base.t
+	rm -rf ${B}/t/callbacks.t
+	rm -rf ${B}/t/errors.t
+	rm -rf ${B}/t/nested.t
+	rm -rf ${B}/t/object.t
+	rm -rf ${B}/t/premature-bailout.t
+	rm -rf ${B}/t/results.t
+	rm -rf ${B}/t/streams.t
+	rm -rf ${B}/t/yamlish-output.t
+	rm -rf ${B}/t/compat/version.t
+}
+
+do_install_append() {
+	install -d ${D}/usr/local/bin
+	# do not clobber perl-misc /usr/bin/prove
+	install -m 0755 ${B}/bin/prove ${D}/usr/local/bin/
+	rm -rf ${D}${bindir}/prove
+	rm -rf ${D}${bindir}
+}
+
+FILES_${PN} += "/usr/local/bin/prove"
 
 BBCLASSEXTEND = "native"
