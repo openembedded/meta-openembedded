@@ -9,6 +9,6 @@ SRC_URI[sha256sum] = "1c7960ccfd6a005cd9f7ba884e6316b5e430a3f1a6c37c5f87d8b43f83
 inherit pypi
 
 RDEPENDS_${PN}_class-target += " \
-    ${PYTHON_PN}-crypto \
+    ${PYTHON_PN}-cryptography \
     ${PYTHON_PN}-ctypes \
 "    
