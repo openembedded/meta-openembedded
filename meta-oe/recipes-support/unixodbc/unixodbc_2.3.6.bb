@@ -11,8 +11,8 @@ DEPENDS = "libtool mysql5"
 SRC_URI = "ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-${PV}.tar.gz \
            file://do-not-use-libltdl-source-directory.patch \
 "
-SRC_URI[md5sum] = "bd25d261ca1808c947cb687e2034be81"
-SRC_URI[sha256sum] = "2e1509a96bb18d248bf08ead0d74804957304ff7c6f8b2e5965309c632421e39"
+SRC_URI[md5sum] = "a8629fd2953b04b4639d0a9d8a5cf9d1"
+SRC_URI[sha256sum] = "88b637f647c052ecc3861a3baa275c3b503b193b6a49ff8c28b2568656d14d69"
 
 inherit autotools-brokensep
 
