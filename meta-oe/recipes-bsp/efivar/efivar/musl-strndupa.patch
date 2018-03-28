@@ -1,9 +1,17 @@
-Taken from void linux
+From 8000b9afc858472912aace985004b44f8eb467e0 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 18 Aug 2017 09:49:49 -0700
+Subject: [PATCH] support musl
 
-Index: git/src/linux.c
-===================================================================
---- git.orig/src/linux.c
-+++ git/src/linux.c
+Upstream-Status: Pending
+---
+ src/linux.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/linux.c b/src/linux.c
+index 34ed479..1304f2b 100644
+--- a/src/linux.c
++++ b/src/linux.c
 @@ -40,6 +40,10 @@
  #include <efivar.h>
  #include <efiboot.h>

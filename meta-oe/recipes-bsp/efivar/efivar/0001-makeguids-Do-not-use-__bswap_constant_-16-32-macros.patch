@@ -1,4 +1,4 @@
-From 98b33d4193998687aa3a78c097f7bd4c393e0c85 Mon Sep 17 00:00:00 2001
+From dd4291265b7b3d7d7ffa1d8adf32781ae25dbfeb Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sat, 15 Jul 2017 00:29:42 -0700
 Subject: [PATCH] makeguids: Do not use __bswap_constant_{16|32} macros
@@ -6,6 +6,7 @@ Subject: [PATCH] makeguids: Do not use __bswap_constant_{16|32} macros
 not available on musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  src/makeguids.c | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
@@ -32,6 +33,3 @@ index da2f5f7..daf821a 100644
  #endif\n\
  """);
  
--- 
-2.13.3
-

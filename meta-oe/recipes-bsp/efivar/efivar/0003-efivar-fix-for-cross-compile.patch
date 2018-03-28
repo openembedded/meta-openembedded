@@ -1,4 +1,4 @@
-From 7ead29ca6bb5e280ae07551cc3521281ecf73682 Mon Sep 17 00:00:00 2001
+From dea4a55714249b2734a36701120fd22c91c64ec2 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Sat, 7 May 2016 02:06:47 -0400
 Subject: [PATCH] Makefile: fix efivar.pc not found
@@ -20,17 +20,18 @@ It fixes efivar.pc not found:
 Upstream-Status: Pending
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
 ---
  src/Makefile | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/src/Makefile b/src/Makefile
-index c7a0ca3..ad9c427 100644
+index dcc7fc8..691aa8a 100644
 --- a/src/Makefile
 +++ b/src/Makefile
-@@ -78,7 +78,9 @@ install : all
- 		ln -fs $(x).$(VERSION) $(DESTDIR)$(libdir)/$(x).$(MAJOR_VERSION);\
- 		ln -fs $(x).$(VERSION) $(DESTDIR)$(libdir)/$(x); )
+@@ -94,7 +94,9 @@ install : all
+ 		ln -fs $(x).1.$(VERSION) $(DESTDIR)$(libdir)/$(x) ;\
+ 		)
  	$(INSTALL) -d -m 755 $(DESTDIR)$(PCDIR)
 -	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(x) $(DESTDIR)$(PCDIR) ;)
 +	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(TOPDIR)/src/$(x).in $(DESTDIR)$(PCDIR)/$(x) ;\
@@ -39,6 +40,3 @@ index c7a0ca3..ad9c427 100644
  	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/efivar
  	$(foreach x, $(wildcard $(TOPDIR)/src/include/efivar/*.h), $(INSTALL) -m 644 $(x) $(DESTDIR)$(includedir)/efivar/$(notdir $(x));)
  	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
--- 
-2.8.1
-

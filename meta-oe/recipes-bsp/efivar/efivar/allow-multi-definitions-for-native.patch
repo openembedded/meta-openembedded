@@ -1,3 +1,8 @@
+From c801dcb03d42eb533a9bead0b397d7ce4fc5a6fe Mon Sep 17 00:00:00 2001
+From: Kai Kang <kai.kang@windriver.com>
+Date: Wed, 10 Aug 2016 17:49:50 +0800
+Subject: [PATCH] allow multi definitions for native
+
 Upstream-Status: Pending
 
 It fails to create .so file when build efivar-native:
@@ -8,16 +13,20 @@ It fails to create .so file when build efivar-native:
 Add link option '-z muldefs' to fix it.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 ---
+ Make.rules | 1 +
+ 1 file changed, 1 insertion(+)
+
 diff --git a/Make.rules b/Make.rules
-index d9c0609..874bce0 100644
+index 88b9aa7..799332f 100644
 --- a/Make.rules
 +++ b/Make.rules
 @@ -20,6 +20,7 @@ include $(TOPDIR)/Make.version
  	$(CCLD) $(ccldflags) $(CPPFLAGS) $(SOFLAGS) \
- 	  -Wl,-soname,$@.$(MAJOR_VERSION) \
+ 	  -Wl,-soname,$@.1 \
  	  -Wl,--version-script=$(MAP) \
 +	  -Wl,-z,muldefs \
  	  -o $@ $^ $(LDLIBS)
  
- %.o : %.c
+ %.abixml : %.so
