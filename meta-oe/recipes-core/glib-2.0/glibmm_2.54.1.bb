@@ -13,6 +13,7 @@ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 SRC_URI = " \
     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
     file://remove-examples.patch \
+    file://0001-Glib-Threads-Private-Fix-gobj.patch \
 "
 SRC_URI[md5sum] = "dee5ebe309f5976c3dacfcf5c43a062b"
 SRC_URI[sha256sum] = "7cc28c732b04d70ed34f0c923543129083cfb90580ea4a2b4be5b38802bf6a4a"
