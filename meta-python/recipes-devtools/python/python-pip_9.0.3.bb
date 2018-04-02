@@ -9,6 +9,6 @@ SRC_URI[sha256sum] = "7bf48f9a693be1d58f49f7af7e0ae9fe29fd671cde8a55e6edca3581c4
 inherit pypi setuptools
 
 # Since PIP is like CPAN for PERL we need to drag in all python modules to ensure everything works
-RDEPENDS_${PN}_class-target = "python-modules python-distribute"
+RDEPENDS_${PN}_class-target = "python-modules python-distribute python-misc"
 
 BBCLASSEXTEND = "native nativesdk"
