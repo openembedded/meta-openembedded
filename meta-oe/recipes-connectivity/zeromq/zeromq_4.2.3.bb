@@ -28,5 +28,5 @@ do_compile_ptest () {
 
 do_install_ptest () {
     install -d ${D}${PTEST_PATH}/tests
-    install -m 0755 ${B}/.libs/test_* ${D}${PTEST_PATH}/tests
+    install -m 0755 ${B}/tests/.libs/test_* ${D}${PTEST_PATH}/tests
 }
