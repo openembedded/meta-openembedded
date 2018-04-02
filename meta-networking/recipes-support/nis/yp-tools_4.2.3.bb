@@ -11,13 +11,14 @@ ypwhich, yppasswd, domainname, nisdomainname \
 and ypdomainname. \
 "
 
-SRC_URI = "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
+# v4.2.3
+SRCREV = "1bfda29c342a81b97cb1995ffd9e8da5de63e7ab"
+
+SRC_URI = "git://github.com/thkukuk/yp-tools \
            file://domainname.service \
-           file://0001-ypbind3_binding_dup.c-Include-string.h-for-strdup-de.patch \
-           file://0002-yp_dump_bindings.c-Include-string.h-for-memset.patch \
            "
-SRC_URI[md5sum] = "fb4a8bffb44ae5d3390351d67f320ef3"
-SRC_URI[sha256sum] = "137f19a986382b275bf4a2b1a69eb26689d6f4ac056ddaa21784d6b80eb98faa"
+
+S = "${WORKDIR}/git"
 
 DEPENDS = "libtirpc libnsl2"
 
