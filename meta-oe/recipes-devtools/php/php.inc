@@ -18,8 +18,6 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
 SRC_URI_append_class-target = " \
             file://iconv.patch \
             file://imap-fix-autofoo.patch \
-            file://pear-makefile.patch \
-            file://phar-makefile.patch \
             file://php_exec_native.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
