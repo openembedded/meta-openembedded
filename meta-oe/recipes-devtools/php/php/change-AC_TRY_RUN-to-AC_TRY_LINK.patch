@@ -1,20 +1,25 @@
-[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
+From 3bfcc7fdd22261eaed10949714de0a90d31e10ab Mon Sep 17 00:00:00 2001
+From: Roy Li <rongqing.li@windriver.com>
+Date: Thu, 20 Aug 2015 16:29:35 +0800
+Subject: [PATCH] [PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
 
 Upstream-Status: Pending
 
 AC_TRY_RUN is not suitable for cross-compile
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
+
+%% original patch: change-AC_TRY_RUN-to-AC_TRY_LINK.patch
 ---
  ext/fileinfo/config.m4 | 31 ++++++-------------------------
  1 file changed, 6 insertions(+), 25 deletions(-)
 
 diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
-index 7e98d62..8a8ea0e 100644
+index 523b4fd..0aaa4c8 100644
 --- a/ext/fileinfo/config.m4
 +++ b/ext/fileinfo/config.m4
 @@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
-     libmagic/readcdf.c libmagic/softmagic.c"
+     libmagic/readcdf.c libmagic/softmagic.c libmagic/der.c"
  
    AC_MSG_CHECKING([for strcasestr])
 -  AC_TRY_RUN([
@@ -52,5 +57,5 @@ index 7e98d62..8a8ea0e 100644
      dnl using the platform implementation
      AC_MSG_RESULT(yes)
 -- 
-1.9.1
+2.7.4
 

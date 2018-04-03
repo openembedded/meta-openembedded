@@ -1,14 +1,14 @@
 require php.inc
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c0af599f66d0461c5837c695fcbc5c1e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=67e369bc8d1f2e641236b8002039a6a2"
 
 SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-            file://0001-Specify-tag-with-libtool.patch \
-            file://CVE-2017-16642.patch \
-            file://CVE-2018-5711.patch \
+            file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
+            file://0001-main-php_ini.c-build-empty-php_load_zend_extension_c.patch \
            "
-SRC_URI[md5sum] = "2397be54f3281cdf30c7ef076b28f7d0"
-SRC_URI[sha256sum] = "314dcc10dfdd7c4443edb4fe1e133a44f2b2a8351be8c9eb6ab9222d45fd9bae"
+
+SRC_URI[md5sum] = "864c64ffd2f1686b035ef8ce6a6d8478"
+SRC_URI[sha256sum] = "11658a0d764dc94023b9fb60d4b5eb75d438ad17981efe70abb0d0d09a447ef3"
 
 PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
