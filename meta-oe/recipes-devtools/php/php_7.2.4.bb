@@ -9,6 +9,7 @@ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
 SRC_URI_append_class-target = " \
                                 file://pear-makefile.patch \
                                 file://phar-makefile.patch \
+                                file://0001-opcache-config.m4-enable-opcache.patch \
                                 "
 
 SRC_URI[md5sum] = "864c64ffd2f1686b035ef8ce6a6d8478"

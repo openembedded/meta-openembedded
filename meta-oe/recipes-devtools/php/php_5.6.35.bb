@@ -12,6 +12,7 @@ SRC_URI += "file://php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
 SRC_URI_append_class-target = " \
                                 file://php5-pear-makefile.patch \
                                 file://php5-phar-makefile.patch \
+                                file://php5-0001-opcache-config.m4-enable-opcache.patch \
                                 "
 
 SRC_URI[md5sum] = "905ae5f586351f3ca29d044c9484d475"
