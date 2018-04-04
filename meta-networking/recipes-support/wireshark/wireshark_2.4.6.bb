@@ -9,12 +9,14 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error"
 SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz"
 SRC_URI += "file://libgcrypt.patch"
 
-SRC_URI[md5sum] = "2b6f1f37c72fa15a0a1863016a0abcc0"
-SRC_URI[sha256sum] = "b3b2ec29fba0f4a3a590438abe4054e56f19108d440fc2d61492db9d8ff16fd7"
+UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+
+SRC_URI[md5sum] = "8cfb73e286dd6427ca4405e6e802d13e"
+SRC_URI[sha256sum] = "8e965fd282bc0c09e7c4eba5f08a555d0ccf40a7d1544b939e01b90bc893d5fe"
 
 PE = "1"
 
-inherit autotools pkgconfig perlnative
+inherit autotools pkgconfig perlnative upstream-version-is-even
 
 ARM_INSTRUCTION_SET = "arm"
 
