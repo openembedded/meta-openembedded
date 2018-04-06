@@ -7,8 +7,10 @@ SECTION = "libs"
 inherit autotools pkgconfig
 
 S = "${WORKDIR}/git"
-SRCREV = "8192131685be0f27d6f51b14b78ef93fa7f3c692"
-SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
+SRCREV = "b4aea06fabb2af1af01f861f8f394c75950b6d47"
+SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git \
+           file://0001-ell-fix-build-with-musl-libc.patch \
+          "
 
 do_configure_prepend () {
     mkdir ${S}/build-aux
