@@ -3,7 +3,7 @@ From: Ting Liu <b28495@freescale.com>
 Date: Fri, 22 Nov 2013 15:20:08 +0800
 Subject: [PATCH] use base_libdir instead of hardcoded /lib
 
-Upsteam Status: Inappropriate [configuration]
+Upstream Status: Inappropriate [configuration]
 
 Signed-off-by: Ting Liu <b28495@freescale.com>
 
