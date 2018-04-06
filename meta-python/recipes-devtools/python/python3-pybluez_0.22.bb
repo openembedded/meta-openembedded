@@ -1,2 +1,2 @@
 require python-pybluez.inc
-inherit setuptools
+inherit setuptools3
