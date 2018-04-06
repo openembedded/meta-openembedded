@@ -15,23 +15,28 @@ understand what the code does. It features:                          \
    platform abstraction and threading                                \
 "
 
-HOMEPAGE = "https://polarssl.org"
-BUGTRACKER = "https://github.com/polarssl/polarssl/issues"
+HOMEPAGE = "https://tls.mbed.org/"
 
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
 
 SECTION = "libdevel"
 
-SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-gpl.tgz"
+SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
 
-SRC_URI[md5sum] = "a6ed92fc377ef60f7c24d42b900e0dad"
-SRC_URI[sha256sum] = "f5beb43e850283915e3e0f8d37495eade3bfb5beedfb61e7b8da70d4c68edb82"
-
-DEPENDS = "openssl"
-RDEPENDS_${PN} += "libcrypto"
-PROVIDES += "polarssl"
-RPROVIDES_${PN} = "polarssl"
-EXTRA_OECMAKE = "-DUSE_SHARED_POLARSSL_LIBRARY=on -DLIB_INSTALL_DIR=${baselib}"
+SRC_URI[md5sum] = "2d4b0e2cb844efde1e73d3bcd9731fef"
+SRC_URI[sha256sum] = "ab8b62b995781bcf22e87a265ed06267f87c3041198e996b44441223d19fa9c3"
 
 inherit cmake
+
+PACKAGECONFIG ??= "shared-libs programs"
+PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-USE_SHARED_MBEDTLS_LIBRARY=OFF"
+PACKAGECONFIG[programs] = "-DENABLE_PROGRAMS=ON,-DENABLE_PROGRAMS=OFF"
+
+EXTRA_OECMAKE = "-DENABLE_TESTING=OFF -DLIB_INSTALL_DIR:STRING=${libdir}"
+
+PROVIDES += "polarssl"
+RPROVIDES_${PN} = "polarssl"
+
+PACKAGES =+ "${PN}-programs"
+FILES_${PN}-programs = "${bindir}/"
