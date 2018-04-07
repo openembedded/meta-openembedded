@@ -1,4 +1,4 @@
-From d50203b233cb8820bf83b6651c2a8487e0db1fcf Mon Sep 17 00:00:00 2001
+From 784dcd09d3f266e271d007f4fd257e85036872ca Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
 Date: Tue, 17 Oct 2017 10:13:20 -0500
 Subject: [PATCH] Several changes to fix musl build
@@ -21,6 +21,7 @@ Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 
 Upstream-status: Pending
+
 ---
  cache.c            |  4 ++++
  stress-madvise.c   |  1 +
@@ -28,13 +29,13 @@ Upstream-status: Pending
  stress-pty.c       | 18 ------------------
  stress-resources.c |  1 -
  stress-stackmmap.c |  2 +-
- 8 files changed, 9 insertions(+), 23 deletions(-)
+ 6 files changed, 7 insertions(+), 21 deletions(-)
 
 diff --git a/cache.c b/cache.c
-index e01fad0..27870ee 100644
+index fbf7674..936c1ff 100644
 --- a/cache.c
 +++ b/cache.c
-@@ -27,6 +27,10 @@ typedef struct {
+@@ -28,6 +28,10 @@ typedef struct {
  
  #include <glob.h>
  
@@ -46,10 +47,10 @@ index e01fad0..27870ee 100644
  #define SYS_CPU_PREFIX               "/sys/devices/system/cpu"
  #define GLOB_PATTERN SYS_CPU_PREFIX  "/cpu[0-9]*"
 diff --git a/stress-madvise.c b/stress-madvise.c
-index 43ea454..2e1f8ee 100644
+index 9e71e11..ddf8d2d 100644
 --- a/stress-madvise.c
 +++ b/stress-madvise.c
-@@ -141,6 +141,7 @@ static int stress_random_advise(const args_t *args)
+@@ -147,6 +147,7 @@ static int stress_random_advise(const args_t *args)
  #if defined(MADV_SOFT_OFFLINE)
  	if (advise == MADV_SOFT_OFFLINE) {
  		static int soft_offline_count;
@@ -58,7 +59,7 @@ index 43ea454..2e1f8ee 100644
  		/* ..and minimize number of soft offline pages */
  		if ((soft_offline_count >= NUM_SOFT_OFFLINE_MAX) ||
 diff --git a/stress-malloc.c b/stress-malloc.c
-index 8dbe5cc..f505f32 100644
+index a46b8c6..427827a 100644
 --- a/stress-malloc.c
 +++ b/stress-malloc.c
 @@ -99,7 +99,7 @@ int stress_malloc(const args_t *args)
@@ -71,7 +72,7 @@ index 8dbe5cc..f505f32 100644
  		(void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
  #endif
 diff --git a/stress-pty.c b/stress-pty.c
-index 8c3edf8..518f118 100644
+index 1bd1fbd..b1fe573 100644
 --- a/stress-pty.c
 +++ b/stress-pty.c
 @@ -26,7 +26,6 @@
@@ -114,7 +115,7 @@ index 8c3edf8..518f118 100644
  			if (ioctl(ptys[i].slave, TIOCGLCKTRMIOS, &ios) < 0)
  				pr_fail_err("ioctl TIOCGLCKTRMIOS on slave pty");
 diff --git a/stress-resources.c b/stress-resources.c
-index 182e176..880433d 100644
+index 958c99a..af79abd 100644
 --- a/stress-resources.c
 +++ b/stress-resources.c
 @@ -31,7 +31,6 @@
@@ -126,7 +127,7 @@ index 182e176..880433d 100644
  #endif
  #if defined(HAVE_LIB_PTHREAD) && defined(__linux__)
 diff --git a/stress-stackmmap.c b/stress-stackmmap.c
-index e1378e2..00d1268 100644
+index 9c83a69..2984f09 100644
 --- a/stress-stackmmap.c
 +++ b/stress-stackmmap.c
 @@ -24,7 +24,7 @@
@@ -138,6 +139,3 @@ index e1378e2..00d1268 100644
  
  #include <ucontext.h>
  
--- 
-2.11.0
-
