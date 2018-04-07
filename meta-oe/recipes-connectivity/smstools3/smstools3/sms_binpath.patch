@@ -1,8 +1,16 @@
-Index: smstools3/scripts/sms3
-===================================================================
---- smstools3.orig/scripts/sms3	2010-05-04 11:21:44.000000000 +0200
-+++ smstools3/scripts/sms3	2015-02-22 20:05:51.615074469 +0100
-@@ -24,11 +24,11 @@
+From 9a4a872dca78ca9cb6bdc228be61f5a4c2d68b1f Mon Sep 17 00:00:00 2001
+From: Kai Ulrich <kaiu@gmx.de>
+Date: Wed, 18 Mar 2015 11:20:53 +0100
+
+---
+ scripts/sms3 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/scripts/sms3 b/scripts/sms3
+index 6b990bf..09c063b 100755
+--- a/scripts/sms3
++++ b/scripts/sms3
+@@ -24,9 +24,9 @@ INFOFILE="/var/run/smsd.working"
  # Logfile can also be defined in here:
  LOGFILE="/var/log/smsd.log"
  
