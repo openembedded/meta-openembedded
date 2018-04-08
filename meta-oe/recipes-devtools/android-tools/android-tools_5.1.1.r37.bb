@@ -26,7 +26,7 @@ SRC_URI = " \
     file://remove-selinux-android.patch \
     file://use-capability.patch \
     file://use-local-socket.patch \
-    file://preserve-ownership.patch \
+    file://preserve-ownership.patch;patchdir=system/extras \
     file://mkbootimg-Add-dt-parameter-to-specify-DT-image.patch \
     file://remove-bionic-android.patch \
     file://define-shell-command.patch \
