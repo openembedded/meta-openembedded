@@ -12,10 +12,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  src/mongo/s/SConscript | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/src/mongo/s/SConscript b/src/mongo/s/SConscript
-index 71720be517..51bd199127 100644
---- a/src/mongo/s/SConscript
-+++ b/src/mongo/s/SConscript
+Index: git/src/mongo/s/SConscript
+===================================================================
+--- git.orig/src/mongo/s/SConscript
++++ git/src/mongo/s/SConscript
 @@ -317,5 +317,6 @@ env.Library(
          "$BUILD_DIR/mongo/db/s/sharding",
          "$BUILD_DIR/mongo/executor/network_interface_factory",
@@ -23,6 +23,3 @@ index 71720be517..51bd199127 100644
 +        "$BUILD_DIR/mongo/s/local_sharding_info",
      ],
  )
--- 
-2.13.3
-
