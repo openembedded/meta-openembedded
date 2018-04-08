@@ -13,11 +13,11 @@ Signed-off-by: Roy Li <rongqing.li@windriver.com>
  configure.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configure.in b/configure.in
-index ae1a5a0..9a0970d 100644
---- a/configure.in
-+++ b/configure.in
-@@ -1877,7 +1877,7 @@ if test "$with_tcl" = yes; then
+Index: postgresql-9.4.15/configure.in
+===================================================================
+--- postgresql-9.4.15.orig/configure.in
++++ postgresql-9.4.15/configure.in
+@@ -1879,7 +1879,7 @@ if test "$with_tcl" = yes; then
  fi
  
  # check for <perl.h>
@@ -26,6 +26,3 @@ index ae1a5a0..9a0970d 100644
    ac_save_CPPFLAGS=$CPPFLAGS
    CPPFLAGS="$CPPFLAGS -I$perl_archlibexp/CORE"
    AC_CHECK_HEADER(perl.h, [], [AC_MSG_ERROR([header file <perl.h> is required for Perl])],
--- 
-1.9.1
-
