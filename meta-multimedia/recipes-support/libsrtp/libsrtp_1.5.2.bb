@@ -18,3 +18,5 @@ do_install[postfuncs] += " rm_unused_bindir "
 rm_unused_bindir() {
     rmdir ${D}/${bindir}
 }
+
+ALLOW_EMPTY_${PN} = "1"
