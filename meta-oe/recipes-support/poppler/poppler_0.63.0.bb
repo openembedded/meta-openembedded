@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRC_URI = " \
     http://poppler.freedesktop.org/${BP}.tar.xz \
     file://0001-Do-not-overwrite-all-our-build-flags.patch \
+    file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
 "
 SRC_URI[md5sum] = "66a54da4896b1408611699feda5c1821"
 SRC_URI[sha256sum] = "27cc8addafc791e1a26ce6acc2b490926ea73a4f89196dd8a7742cff7cf8a111"
