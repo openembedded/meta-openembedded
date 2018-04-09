@@ -9,7 +9,9 @@ DEPENDS = " \
     intltool-native \
 "
 
-inherit distutils3 gtk-icon-cache
+inherit distutils3 gtk-icon-cache distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "https://launchpad.net/menulibre/2.1/${PV}/+download/${PN}-${PV}.tar.gz"
 SRC_URI[md5sum] = "efc7edb49bb0e5fea49e158b40573334"
