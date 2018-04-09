@@ -12,7 +12,9 @@ DEPENDS = " \
     libwnck3 \
 "
 
-inherit gnomebase
+inherit gnomebase distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI[archive.md5sum] = "fcd59867c07f8c4853b1e28d60cbc037"
 SRC_URI[archive.sha256sum] = "f848a8c2ca5e164cf09d3a205dd49e4e4bf4b60d43b0969c10443eb519d0e6b3"
