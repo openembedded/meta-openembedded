@@ -27,4 +27,4 @@ inherit distro_features_check autotools gettext pkgconfig
 
 EXTRA_OEMAKE += "INSTALL='install -p'"
 
-REQUIRED_DISTRO_FEATURES = "pam"
+REQUIRED_DISTRO_FEATURES = "x11 pam"
