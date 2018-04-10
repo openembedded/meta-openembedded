@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntpd.list \
 "
 
-SRC_URI[md5sum] = "745384ed0dedb3f66b33fe84d66466f9"
-SRC_URI[sha256sum] = "ddd2366e64219b9efa0f7438e06800d0db394ac5c88e13c17b70d0dcdf99b99f"
+SRC_URI[md5sum] = "00950ca2855579541896513e78295361"
+SRC_URI[sha256sum] = "f14a39f753688252d683ff907035ffff106ba8d3db21309b742e09b5c3cd278e"
 
 inherit autotools update-rc.d useradd systemd pkgconfig
 
