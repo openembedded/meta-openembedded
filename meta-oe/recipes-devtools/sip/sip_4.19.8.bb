@@ -9,8 +9,8 @@ inherit python-dir
 DEPENDS = "python"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
-SRC_URI[md5sum] = "4f48e212890ebe584e8d804cfbcfc61e"
-SRC_URI[sha256sum] = "432b4aad25254e6997913e33b1ca3cf5fd21d5729a50a3ce2edccbea82c80533"
+SRC_URI[md5sum] = "0625fb20347d4ff1b5da551539be0727"
+SRC_URI[sha256sum] = "7eaf7a2ea7d4d38a56dd6d2506574464bddf7cf284c960801679942377c297bc"
 
 BBCLASSEXTEND = "native"
 
