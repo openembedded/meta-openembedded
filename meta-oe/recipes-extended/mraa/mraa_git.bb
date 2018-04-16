@@ -9,7 +9,6 @@ SRCREV = "fbb7d9232067eac3f4508a37a8f7ea0c4fcebacb"
 PV = "1.9.0-git${SRCPV}"
 
 SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
-           file://0001-include-endian.h-for-be16toh-and-le16toh-declaration.patch \
            "
 
 S = "${WORKDIR}/git"
