@@ -2,7 +2,7 @@ SUMMARY = "Debugging and profiling extension for PHP"
 LICENSE = "Xdebug"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
 
-DEPENDS = "php"
+DEPENDS = "php re2c-native"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
