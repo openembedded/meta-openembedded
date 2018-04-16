@@ -35,6 +35,7 @@ LDFLAGS_append_libc-musl = " -ltirpc"
 RDEPENDS_${PN} += "procps"
 
 do_configure() {
+    gnu-configize --force ${S}
     oe_runconf
 }
 
