@@ -1,0 +1,27 @@
+From 2c85decc3b93bfe7322309d2ca7d6377e746c18f Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 5 Feb 2018 09:51:08 -0800
+Subject: [PATCH] include endian.h for be16toh and le16toh declarations
+
+Upstream-Status: Submitted [https://github.com/intel-iot-devkit/mraa/pull/863]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ examples/iio_driver.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/examples/iio_driver.c b/examples/iio_driver.c
+index c5a0181..568011c 100644
+--- a/examples/iio_driver.c
++++ b/examples/iio_driver.c
+@@ -22,6 +22,7 @@
+  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
+ 
++#include <endian.h>
+ #include <unistd.h>
+ #include "mraa/iio.h"
+ 
+-- 
+2.16.1
+
