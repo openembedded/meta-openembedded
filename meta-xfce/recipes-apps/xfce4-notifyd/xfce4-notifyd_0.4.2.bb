@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "f6f28af47fdfb41db84bd003f0d76f5f4abf2137d1e27e9d378f063bb8
 EXTRA_OECONF = "--disable-dbus-start-daemon"
 
 do_compile_prepend() {
-    mkdir -p xfce4-notifyd
+    mkdir -p xfce4-notifyd xfce4-notifyd-config
 }
 
 FILES_${PN} += " \
