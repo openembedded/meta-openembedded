@@ -24,7 +24,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-configure-Disable-format-overflow-if-supported-by-gc.patch \
            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
-"
+           file://0001-Catch-std-ifstream-failure-by-reference.patch \
+           file://0002-Fix-format-truncation-errors.patch \
+           file://0001-Fix-string-overflow-in-snprintf.patch \
+           "
 SRC_URI[md5sum] = "42064f5ddbc7f560bfc5ff93ea9eecc7"
 SRC_URI[sha256sum] = "f9e24897f9cfd63bb3115f6275c706de1702d3d9bae2fc423227db72b23c37f0"
 
