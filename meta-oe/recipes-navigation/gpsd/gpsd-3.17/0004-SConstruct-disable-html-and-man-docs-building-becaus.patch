@@ -29,23 +29,22 @@ Signed-off-by: Peter A. Bigot <pab@pabigot.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/SConstruct b/SConstruct
-index 0e518e7..c01a71b 100644
+index 3318bb48..a5bb756d 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -704,12 +704,12 @@ size_t strlcpy(/*@out@*/char *dst, /*@in@*/const char *src, size_t size);
+@@ -889,11 +889,11 @@ else:
  
-     manbuilder = mangenerator = htmlbuilder = None
+     manbuilder = htmlbuilder = None
      if env['manbuild']:
 -        if config.CheckXsltproc():
 +        if False and config.CheckXsltproc():
-             mangenerator = 'xsltproc'
              build = "xsltproc --nonet %s $SOURCE >$TARGET"
              htmlbuilder = build % docbook_html_uri
              manbuilder = build % docbook_man_uri
 -        elif WhereIs("xmlto"):
 +        elif False and WhereIs("xmlto"):
-             mangenerator = 'xmlto'
-             xmlto = "xmlto %s $SOURCE || mv `basename $TARGET` `dirname $TARGET`"
+             xmlto = "xmlto %s $SOURCE || mv `basename $TARGET` " \
+                     "`dirname $TARGET`"
              htmlbuilder = xmlto % "html-nochunks"
 -- 
 1.8.5.5

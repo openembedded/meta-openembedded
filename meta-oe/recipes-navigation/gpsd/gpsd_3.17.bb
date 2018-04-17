@@ -12,8 +12,8 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0004-SConstruct-disable-html-and-man-docs-building-becaus.patch \
     file://0001-include-sys-ttydefaults.h.patch \
 "
-SRC_URI[md5sum] = "68691b5de4c94f82ec4062b042b5eb63"
-SRC_URI[sha256sum] = "03579af13a4d3fe0c5b79fa44b5f75c9f3cac6749357f1d99ce5d38c09bc2029"
+SRC_URI[md5sum] = "e0cfadcf4a65dfbdd2afb11c58f4e4a1"
+SRC_URI[sha256sum] = "68e0dbecfb5831997f8b3d6ba48aed812eb465d8c0089420ab68f9ce4d85e77a"
 
 inherit scons update-rc.d python-dir pythonnative systemd bluetooth update-alternatives
 

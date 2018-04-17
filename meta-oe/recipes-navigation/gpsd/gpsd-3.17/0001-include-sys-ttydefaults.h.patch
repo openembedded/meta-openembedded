@@ -19,10 +19,10 @@ Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/gpsmon.c b/gpsmon.c
-index ead84d0..f205cb1 100644
+index 89c43ee2..5cc0dabd 100644
 --- a/gpsmon.c
 +++ b/gpsmon.c
-@@ -20,6 +20,7 @@
+@@ -24,6 +24,7 @@
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <sys/select.h>
