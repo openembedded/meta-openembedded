@@ -106,8 +106,8 @@ FILES_${PN} += " \
     ${libexecdir} \
     ${libdir}/pppd/*/nm-pppd-plugin.so \
     ${libdir}/NetworkManager/*.so \
-    ${libdir}/NetworkManager/VPN \
-    ${libdir}/NetworkManager/conf.d \
+    ${nonarch_libdir}/NetworkManager/VPN \
+    ${nonarch_libdir}/NetworkManager/conf.d \
     ${datadir}/polkit-1 \
     ${datadir}/dbus-1 \
     ${base_libdir}/udev/* \
