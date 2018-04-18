@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "904f3a61417ace55a3b144187565335f8ad5e530ca23b397ce90ed6170
 
 do_compile_prepend() {
     mkdir -p lib
-    mkdir -p src
+    mkdir -p src panel-plugin
 }
 
 FILES_${PN} += " \
