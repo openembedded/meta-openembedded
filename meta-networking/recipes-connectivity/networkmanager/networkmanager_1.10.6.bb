@@ -35,6 +35,8 @@ SRC_URI = " \
     file://musl/0002-musl-dlopen-configure-ac.patch \
     file://musl/0003-musl-network-support.patch \
     file://musl/0004-musl-process-util.patch \
+    file://musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch \
+    file://musl/0006-Add-a-strndupa-replacement-for-musl.patch \
 "
 SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
 SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
@@ -54,17 +56,21 @@ EXTRA_OECONF = " \
 # gobject-introspection related
 GI_DATA_ENABLED_libc-musl = "False"
 
+# stolen from https://github.com/voidlinux/void-packages/blob/master/srcpkgs/NetworkManager/template
+CFLAGS_libc-musl_append = " \
+    -DHAVE_SECURE_GETENV -Dsecure_getenv=getenv \
+    -D__USE_POSIX199309 -DRTLD_DEEPBIND=0 \
+"
+
 do_compile_prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/libnm/.libs:${B}/libnm-glib/.libs:${B}/libnm-util/.libs"
 }
 
 PACKAGECONFIG ??= "nss ifupdown netconfig dhclient dnsmasq \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'wifi', 'wifi', '', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'wifi', d)} \
 "
-
 PACKAGECONFIG[systemd] = " \
     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
     --without-systemdsystemunitdir, \
