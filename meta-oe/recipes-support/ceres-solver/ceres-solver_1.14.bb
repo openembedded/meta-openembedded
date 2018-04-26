@@ -6,7 +6,7 @@ LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
 
 SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
-SRCREV = "19333b0f55c8462381038e70d42af43b52941128"
+SRCREV = "facb199f3eda902360f9e1d5271372b7e54febe1"
 
 S = "${WORKDIR}/git"
 
