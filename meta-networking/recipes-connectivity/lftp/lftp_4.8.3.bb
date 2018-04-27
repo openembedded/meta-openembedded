@@ -16,7 +16,7 @@ inherit autotools gettext pkgconfig
 
 acpaths = "-I ./m4"
 
-EXTRA_OECONF += "--with-modules"
+EXTRA_OECONF += "--with-modules --disable-rpath"
 
 PACKAGECONFIG ??= "openssl zlib gnutls readline expat"
 PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl, openssl"
