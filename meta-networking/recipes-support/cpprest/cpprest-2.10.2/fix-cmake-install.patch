@@ -1,0 +1,59 @@
+Description: install cmake files into /usr/lib/cmake/cpprestsdk
+Author: Gianfranco Costamagna <locutusofborg@debian.org>
+Upstream-Status: https://github.com/Microsoft/cpprestsdk/pull/737
+Forwarded: https://github.com/Microsoft/cpprestsdk/pull/737
+Last-Update: 2018-04-19
+
+Index: cpprest/CMakeLists.txt
+===================================================================
+--- cpprest.orig/CMakeLists.txt
++++ cpprest/CMakeLists.txt
+@@ -18,7 +18,6 @@
+ set(WERROR ON CACHE BOOL "Treat Warnings as Errors.")
+ set(CPPREST_EXCLUDE_WEBSOCKETS OFF CACHE BOOL "Exclude websockets functionality.")
+ set(CPPREST_EXCLUDE_COMPRESSION OFF CACHE BOOL "Exclude compression functionality.")
+-set(CPPREST_EXPORT_DIR lib/cpprestsdk CACHE STRING "Directory to install CMake config files.")
+ set(CPPREST_INSTALL_HEADERS ON CACHE BOOL "Install header files.")
+ set(CPPREST_INSTALL ON CACHE BOOL "Add install commands.")
+ 
+@@ -63,6 +62,9 @@
+ include(cmake/cpprest_find_openssl.cmake)
+ include(cmake/cpprest_find_websocketpp.cmake)
+ include(CheckIncludeFiles)
++if(UNIX)
++include(GNUInstallDirs)
++endif(UNIX)
+ 
+ find_package(Threads REQUIRED)
+ if(THREADS_HAVE_PTHREAD_ARG)
+Index: cpprest/src/CMakeLists.txt
+===================================================================
+--- cpprest.orig/src/CMakeLists.txt
++++ cpprest/src/CMakeLists.txt
+@@ -250,21 +250,21 @@
+   install(
+     TARGETS ${CPPREST_TARGETS}
+     EXPORT cpprestsdk-targets
+-    RUNTIME DESTINATION bin
+-    LIBRARY DESTINATION lib
+-    ARCHIVE DESTINATION lib
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+   )
+ 
+   configure_file(../cmake/cpprestsdk-config.in.cmake "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake" @ONLY)
+ 
+   install(
+     FILES "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake"
+-    DESTINATION ${CPPREST_EXPORT_DIR}
++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake
+   )
+   install(
+     EXPORT cpprestsdk-targets
+     FILE cpprestsdk-targets.cmake
+     NAMESPACE cpprestsdk::
+-    DESTINATION ${CPPREST_EXPORT_DIR}
++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake
+   )
+ endif()
