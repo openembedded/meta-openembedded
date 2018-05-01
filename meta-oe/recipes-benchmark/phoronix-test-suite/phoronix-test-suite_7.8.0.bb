@@ -23,7 +23,12 @@ do_install() {
     fi
 }
 
+# It is not advisable to enable these services by default since they can cause
+# continual target reboots if they encounter network problems.
+#
+SYSTEMD_AUTO_ENABLE = "disable"
 SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
+
 RDEPENDS_${PN} += "bash python php-cli"
 
 FILES_${PN} += " \
