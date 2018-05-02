@@ -78,11 +78,16 @@ do_install_append() {
         mkdir -p ${D}/${sysconfdir}/default/volatiles
         echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
               > ${D}${sysconfdir}/default/volatiles/87_krb5
+
+        echo "RUN_KADMIND=true" >> ${D}/${sysconfdir}/default/krb5-admin-server
     fi
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/krb5kdc - - - -" \
               > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
+
+        mkdir -p ${D}/${sysconfdir}/default
+        install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
 
         install -d ${D}${systemd_system_unitdir}
         install -m 0644 ${WORKDIR}/krb5-admin-server.service ${D}${systemd_system_unitdir}
