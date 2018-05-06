@@ -11,6 +11,7 @@ python () {
 }
 
 DEPENDS = " \
+    fribidi \
     geany \
     libxml2 \
     libsoup-2.4 \
