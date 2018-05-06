@@ -18,14 +18,15 @@ inherit distro_features_check gnomebase cmake gtk-doc gettext gobject-introspect
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += " \
-    file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-    file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-    file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-    file://iconv-detect.h \
-"
-SRC_URI[archive.md5sum] = "568a21a4df4e0ec985c849b38fc66908"
-SRC_URI[archive.sha256sum] = "63b1ae5f76be818862f455bf841b5ebb1ec3e1f4df6d3a16dc2be348b7e0a1c5"
+SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
+           file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
+           file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
+           file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+           file://iconv-detect.h \
+           file://0004-Use-recommended-way-to-handle-the-icu-namespace.patch \
+           "
+SRC_URI[archive.md5sum] = "ae7bbf543b2c3ff79af27e0edea5d472"
+SRC_URI[archive.sha256sum] = "e43aa1847ddc02965f560261ef88d18fb8704eddaa55555bf96b884a33e510ec"
 
 LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
 LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
