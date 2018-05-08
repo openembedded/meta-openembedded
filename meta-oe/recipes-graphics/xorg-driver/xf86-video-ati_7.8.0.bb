@@ -6,8 +6,8 @@ SUMMARY = "X.Org X server -- ATI Radeon video driver"
 
 DESCRIPTION = "Open-source X.org graphics driver for ATI Radeon graphics"
 
-DEPENDS += "virtual/libx11 libxvmc drm xf86driproto glproto \
-            virtual/libgl xineramaproto libpciaccess"
+DEPENDS += "virtual/libx11 libxvmc drm \
+            virtual/libgl xorgproto libpciaccess"
 
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES += "opengl"
