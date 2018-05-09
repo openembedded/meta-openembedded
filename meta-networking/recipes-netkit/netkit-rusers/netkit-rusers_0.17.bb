@@ -18,6 +18,9 @@ SRC_URI[patch8.sha256sum] = "14882dbdda4e37baa84d55b54b46c7e063a20fc9e04d1be1a28
 
 inherit autotools-brokensep
 
+CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+LIBS += "-ltirpc"
+
 do_configure () {
     ./configure --prefix=${prefix}
     echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
