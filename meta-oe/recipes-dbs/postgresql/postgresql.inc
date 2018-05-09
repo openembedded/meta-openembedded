@@ -19,7 +19,7 @@ DESCRIPTION = "\
 "
 HOMEPAGE = "http://www.postgresql.com"
 LICENSE = "BSD"
-DEPENDS = "zlib readline tzcode-native"
+DEPENDS = "libnsl2 zlib readline tzcode-native"
 
 ARM_INSTRUCTION_SET = "arm"
 
