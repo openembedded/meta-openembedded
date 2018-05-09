@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e6a600fd5e1d9cbde2d983680233ad02"
 DEPENDS = "gstreamer1.0"
 
 S = "${WORKDIR}/git"
-SRCREV = "4ce8092636ee6572148b5fa044080734cf5a6b8d"
+SRCREV = "3b862e52e5c53ad1023dc6808effa4cb75572c4b"
 SRC_URI = "git://github.com/kirushyk/gst-instruments.git;protocol=https;"
 
 FILES_${PN}-staticdev += "${libdir}/gstreamer-1.0/*a"
