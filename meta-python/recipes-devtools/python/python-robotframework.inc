@@ -13,3 +13,14 @@ inherit pypi
 
 SRC_URI[md5sum] = "ea49a54b9d7e38302712194e85c37eaa"
 SRC_URI[sha256sum] = "2018f233568227f9af8c366f93e243a157b742f3baf5b649ecc9750ac0ee1ff7"
+
+RDEPENDS_${PN} += " \
+    ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-pprint \
+    ${PYTHON_PN}-xml \
+    ${PYTHON_PN}-difflib \
+    ${PYTHON_PN}-threading \
+    ${PYTHON_PN}-html \
+    ${PYTHON_PN}-docutils \
+    ${PYTHON_PN}-ctypes \
+"
