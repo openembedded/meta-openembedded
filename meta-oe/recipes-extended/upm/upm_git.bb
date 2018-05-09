@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
 
 DEPENDS = "libjpeg-turbo mraa"
 
-SRCREV = "cc7fec9ae0228add9011bf1c2cd5e0ca2ba0d4f0"
+SRCREV = "37642f3b0194f6ddd63f1e6b5d49b8cb689d5c81"
 PV = "1.6.0-git${SRCPV}"
 
 SRC_URI = " \
     git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
+    file://0001-Replace-strncpy-with-memcpy.patch \
 "
 
 S = "${WORKDIR}/git"
