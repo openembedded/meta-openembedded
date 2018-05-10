@@ -12,9 +12,10 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://0001-conditionally-check-libvirt.patch \
            file://0001-fix-to-build-with-glibc-2.25.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
-"
-SRC_URI[md5sum] = "5da2b69c286a064db35c6cc1e758b039"
-SRC_URI[sha256sum] = "9d20a0221569a8d6b80bbc52b86e5e84965f5bafdbf5dfc3790e0fed0763e592"
+           file://0005-Disable-new-gcc8-warnings.patch \
+           "
+SRC_URI[md5sum] = "a841159323624f18bf03198e9f5aa364"
+SRC_URI[sha256sum] = "b06ff476bbf05533cb97ae6749262cc3c76c9969f032bd8496690084ddeb15c9"
 
 inherit autotools pythonnative update-rc.d pkgconfig systemd
 
@@ -62,7 +63,7 @@ do_install_append() {
     sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/collectd
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/collectd
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/collectd
-
+    install -Dm 0640 ${B}/src/collectd.conf ${D}${sysconfdir}/collectd.conf
     # Fix configuration file to allow collectd to start up
     sed -i 's!^#FQDNLookup[ \t]*true!FQDNLookup   false!g' ${D}${sysconfdir}/collectd.conf
 
