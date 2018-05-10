@@ -7,10 +7,10 @@ DESCRIPTION = "perl library for country/city/organization to IP address or hostn
 HOMEPAGE = "http://www.maxmind.com/app/ip-location"
 SECTION = "libdevel"
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b7a36f55e8ba62aadd74e4f0886a405e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e4f3ea6e9b28af88dc0321190a1f8250"
 
 S = "${WORKDIR}/git"
-SRCREV = "47f7d49bd15cfc2e5f8c0f5c4068dc8bb0e10e96"
+SRCREV = "4cdfdc38eca237c19c22a8b90490446ce6d970fa"
 SRC_URI = "git://github.com/maxmind/geoip-api-perl.git;protocol=https; \
     file://run-ptest \
 "
