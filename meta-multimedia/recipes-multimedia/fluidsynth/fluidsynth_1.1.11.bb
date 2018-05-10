@@ -10,7 +10,7 @@ SRC_URI = " \
     git://github.com/FluidSynth/fluidsynth.git;branch=1.1.x \
     file://0001-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch \
 "
-SRCREV = "f5a0fee6f7f2b2ab4c866df1acb649333464b3fd"
+SRCREV = "f65c6ba25fb2c7e37c89fc6a4afc5aa645e208c2"
 S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig lib_package
