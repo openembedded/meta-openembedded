@@ -13,7 +13,7 @@ PROVIDES += "cyassl"
 RPROVIDES_${PN} = "cyassl"
 
 S = "${WORKDIR}/git"
-SRCREV = "d195009dcb62d8712195661bd1d50f8dd6831044"
+SRCREV = "1196a3b64d9fabffc8273b87f6f69ac0e75d2eb7"
 SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https; \
            file://0001-fix-no-rule-to-make-cyassl-options.h.patch \
           "
