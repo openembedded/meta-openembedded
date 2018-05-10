@@ -6,9 +6,9 @@ SECTION = "libs/multimedia"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://NOTICE;md5=dbdefe400d894b510a9de14813181d0b"
 
-SRC_URI = "https://github.com/tinyalsa/tinyalsa/archive/${PV}.tar.gz"
-SRC_URI[md5sum] = "ec5c1cc175fcb8c9d3d0adcececf10a9"
-SRC_URI[sha256sum] = "d92b438cea348ae316c4b2cbf367b4f01ed821a947e6a34d813624e9e3c936c1"
+S = "${WORKDIR}/git"
+SRCREV = "df11091086b56e5fb71887f2fa320e1d2ffeff58"
+SRC_URI = "git://github.com/tinyalsa/tinyalsa.git;protocol=https;"
 
 do_configure() {
     :
