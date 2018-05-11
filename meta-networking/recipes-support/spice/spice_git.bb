@@ -13,8 +13,7 @@ architectures."
 LICENSE = "BSD & LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-PR = "r0"
-PV = "0.12.4"
+PV = "0.12.4+git${SRCPV}"
 
 # Actual versions based on the checkouts below
 # spice = "0.12.4"
@@ -44,11 +43,14 @@ S = "${WORKDIR}/git"
 
 inherit autotools gettext pythonnative python-dir pkgconfig
 
-DEPENDS += "python-native celt051 python-pyparsing jpeg pixman alsa-lib glib-2.0"
+DEPENDS += "celt051 jpeg pixman alsa-lib glib-2.0 python-pyparsing-native"
+DEPENDS_append_class-nativesdk = "nativesdk-openssl"
 
 export PYTHON="${STAGING_BINDIR_NATIVE}/python-native/python"
 export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
 
+PACKAGECONFIG_class-native = ""
+PACKAGECONFIG_class-nativesdk = ""
 PACKAGECONFIG ?= "sasl"
 
 PACKAGECONFIG[smartcard] = "--enable-smartcard,--disable-smartcard,libcacard,"
@@ -74,3 +76,5 @@ do_install_append() {
 }
 
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+
+BBCLASSEXTEND = "native nativesdk"
