@@ -1,0 +1,29 @@
+From 85838d4c9f2322aedb99b38fffd7da95a494d8ed Mon Sep 17 00:00:00 2001
+From: He Zhe <zhe.he@windriver.com>
+Date: Thu, 29 Jun 2017 08:26:35 +0000
+Subject: [PATCH] red_parse_qxl: Fix BITMAP_FMT_IS_RGB defined but not used
+
+| ../../git/server/red_parse_qxl.c:367:18: error: 'BITMAP_FMT_IS_RGB'
+defined but not used [-Werror=unused-const-variable=]
+|  static const int BITMAP_FMT_IS_RGB[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+
+Signed-off-by: He Zhe <zhe.he@windriver.com>
+---
+ server/red_parse_qxl.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/server/red_parse_qxl.c b/server/red_parse_qxl.c
+index 6c0b0658..cfc2da95 100644
+--- a/server/red_parse_qxl.c
++++ b/server/red_parse_qxl.c
+@@ -364,7 +364,6 @@ static int bitmap_consistent(SpiceBitmap *bitmap)
+ 
+ // This is based on SPICE_BITMAP_FMT_*, copied from server/red_worker.c
+ // to avoid a possible unoptimization from making it non static.
+-static const int BITMAP_FMT_IS_RGB[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1};
+ 
+ static SpiceImage *red_get_image(RedMemSlotInfo *slots, int group_id,
+                                  QXLPHYSICAL addr, uint32_t flags, int is_mask)
+-- 
+2.11.0
+

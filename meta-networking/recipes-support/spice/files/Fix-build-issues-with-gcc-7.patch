@@ -1,0 +1,59 @@
+From 9f001b6818ac4baa1df010ccf4200ca56bfb11b2 Mon Sep 17 00:00:00 2001
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Wed, 23 Aug 2017 13:47:29 -0400
+Subject: [PATCH] Fix build issues with gcc 7
+
+gcc 7 checks for when a switch statement doesn't break between
+cases. When a break is not found you will see
+
+| ../../git/server/reds.c: In function 'vdi_port_read_one_msg_from_device':
+| ../../git/server/reds.c:797:31: error: this statement may fall through [-Werror=implicit-fallthrough=]
+|              state->read_state = VDI_PORT_READ_STATE_GET_BUFF;
+|              ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| ../../git/server/reds.c:798:9: note: here
+|          case VDI_PORT_READ_STATE_GET_BUFF: {
+|          ^~~~
+
+The 'fallthrough' comment will let gcc know this is done on purpose.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ server/inputs_channel.c | 1 +
+ server/reds.c           | 2 ++
+ 2 files changed, 3 insertions(+)
+
+diff --git a/server/inputs_channel.c b/server/inputs_channel.c
+index 931dac1..534ab66 100644
+--- a/server/inputs_channel.c
++++ b/server/inputs_channel.c
+@@ -321,6 +321,7 @@ static int inputs_channel_handle_parsed(RedChannelClient *rcc, uint32_t size, ui
+             activate_modifiers_watch();
+         }
+     }
++        /* fallthrough */
+     case SPICE_MSGC_INPUTS_KEY_UP: {
+         SpiceMsgcKeyDown *key_down = (SpiceMsgcKeyDown *)buf;
+         for (i = 0; i < 4; i++) {
+diff --git a/server/reds.c b/server/reds.c
+index 30d0652..8c80eb6 100644
+--- a/server/reds.c
++++ b/server/reds.c
+@@ -795,6 +795,7 @@ static SpiceCharDeviceMsgToClient *vdi_port_read_one_msg_from_device(SpiceCharDe
+             }
+             state->message_recive_len = state->vdi_chunk_header.size;
+             state->read_state = VDI_PORT_READ_STATE_GET_BUFF;
++            /* fallthrough */
+         case VDI_PORT_READ_STATE_GET_BUFF: {
+             if (!(state->current_read_buf = vdi_port_read_buf_get())) {
+                 return NULL;
+@@ -806,6 +807,7 @@ static SpiceCharDeviceMsgToClient *vdi_port_read_one_msg_from_device(SpiceCharDe
+             state->message_recive_len -= state->recive_len;
+             state->read_state = VDI_PORT_READ_STATE_READ_DATA;
+         }
++            /* fallthrough */
+         case VDI_PORT_READ_STATE_READ_DATA:
+             n = sif->read(vdagent, state->recive_pos, state->recive_len);
+             if (!n) {
+-- 
+2.7.4
+

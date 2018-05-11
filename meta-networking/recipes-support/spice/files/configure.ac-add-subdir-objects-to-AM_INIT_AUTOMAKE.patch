@@ -1,0 +1,29 @@
+From 36efb79076420975f7fa7aa0b03a1fc282291b05 Mon Sep 17 00:00:00 2001
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Tue, 25 Mar 2014 15:23:25 -0400
+Subject: [PATCH] configure.ac: add subdir-objects to AM_INIT_AUTOMAKE
+
+Without this you will get subdir-objects error which will cause
+autoreconf to complete successfully.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ spice-common/configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/spice-common/configure.ac b/spice-common/configure.ac
+index b5cb960..78f1360 100644
+--- a/spice-common/configure.ac
++++ b/spice-common/configure.ac
+@@ -13,7 +13,7 @@ AC_CONFIG_AUX_DIR([build-aux])
+ m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
+ 
+ # Checks for programs
+-AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign -Wall -Werror])
++AM_INIT_AUTOMAKE([1.11 dist-xz no-dist-gzip tar-ustar foreign subdir-objects -Wall -Werror])
+ AM_MAINTAINER_MODE
+ AM_SILENT_RULES([yes])
+ LT_INIT
+-- 
+1.8.3.2
+

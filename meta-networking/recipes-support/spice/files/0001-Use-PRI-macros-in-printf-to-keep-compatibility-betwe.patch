@@ -1,0 +1,72 @@
+From 3cb746329ea4846bd9c65e0198e69423379b6f62 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=EC=86=8C=EB=B3=91=EC=B2=A0?= <byungchul.so@samsung.com>
+Date: Thu, 24 Apr 2014 12:26:32 +0000
+Subject: [PATCH] Use PRI macros in printf to keep compatibility between
+ 32/64bit system
+
+gcc's some integer type definitions are different between 32/64bit system.
+This causes platform dependency problem with printf function. However,
+we can avoid this problem by using PRI macros that supports platform
+independent printf.
+---
+ server/mjpeg_encoder.c | 7 ++++---
+ server/red_worker.c    | 4 ++--
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/server/mjpeg_encoder.c b/server/mjpeg_encoder.c
+index aea4964..f465d88 100644
+--- a/server/mjpeg_encoder.c
++++ b/server/mjpeg_encoder.c
+@@ -23,6 +23,7 @@
+ #include "mjpeg_encoder.h"
+ #include <jerror.h>
+ #include <jpeglib.h>
++#include <inttypes.h>
+ 
+ #define MJPEG_MAX_FPS 25
+ #define MJPEG_MIN_FPS 1
+@@ -66,7 +67,7 @@ static const int mjpeg_quality_samples[MJPEG_QUALITY_SAMPLE_NUM] = {20, 30, 40,
+  * are not necessarily related to mis-estimation of the bit rate, and we would
+  * like to wait till the stream stabilizes.
+  */
+-#define MJPEG_WARMUP_TIME 3000L // 3 sec
++#define MJPEG_WARMUP_TIME 3000LL // 3 sec
+ 
+ enum {
+     MJPEG_QUALITY_EVAL_TYPE_SET,
+@@ -638,7 +639,7 @@ static void mjpeg_encoder_adjust_params_to_bit_rate(MJpegEncoder *encoder)
+ 
+     spice_debug("cur-fps=%u new-fps=%u (new/old=%.2f) |"
+                 "bit-rate=%.2f (Mbps) latency=%u (ms) quality=%d |"
+-                " new-size-avg %lu , base-size %lu, (new/old=%.2f) ",
++                " new-size-avg %"PRIu64" , base-size %"PRIu64", (new/old=%.2f) ",
+                 rate_control->fps, new_fps, ((double)new_fps)/rate_control->fps,
+                 ((double)rate_control->byte_rate*8)/1024/1024,
+                 latency,
+@@ -703,7 +704,7 @@ static void mjpeg_encoder_adjust_fps(MJpegEncoder *encoder, uint64_t now)
+ 
+         avg_fps = ((double)rate_control->adjusted_fps_num_frames*1000) /
+                   adjusted_fps_time_passed;
+-        spice_debug("#frames-adjust=%lu #adjust-time=%lu avg-fps=%.2f",
++        spice_debug("#frames-adjust=%"PRIu64" #adjust-time=%"PRIu64" avg-fps=%.2f",
+                     rate_control->adjusted_fps_num_frames, adjusted_fps_time_passed, avg_fps);
+         spice_debug("defined=%u old-adjusted=%.2f", rate_control->fps, rate_control->adjusted_fps);
+         fps_ratio = avg_fps / rate_control->fps;
+diff --git a/server/red_worker.c b/server/red_worker.c
+index 619f7bc..1871e13 100644
+--- a/server/red_worker.c
++++ b/server/red_worker.c
+@@ -2594,8 +2594,8 @@ static void red_print_stream_stats(DisplayChannelClient *dcc, StreamAgent *agent
+         mjpeg_encoder_get_stats(agent->mjpeg_encoder, &encoder_stats);
+     }
+ 
+-    spice_debug("stream=%ld dim=(%dx%d) #in-frames=%lu #in-avg-fps=%.2f #out-frames=%lu "
+-                "out/in=%.2f #drops=%lu (#pipe=%lu #fps=%lu) out-avg-fps=%.2f "
++    spice_debug("stream=%"PRIdPTR" dim=(%dx%d) #in-frames=%"PRIu64" #in-avg-fps=%.2f #out-frames=%"PRIu64" "
++                "out/in=%.2f #drops=%"PRIu64" (#pipe=%"PRIu64" #fps=%"PRIu64") out-avg-fps=%.2f "
+                 "passed-mm-time(sec)=%.2f size-total(MB)=%.2f size-per-sec(Mbps)=%.2f "
+                 "size-per-frame(KBpf)=%.2f avg-quality=%.2f "
+                 "start-bit-rate(Mbps)=%.2f end-bit-rate(Mbps)=%.2f",
+-- 
+2.10.2
+

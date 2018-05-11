@@ -1,0 +1,62 @@
+From 7d0d0ff080b159e647ebb26c337cb75314d64b52 Mon Sep 17 00:00:00 2001
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Thu, 1 May 2014 12:09:16 -0400
+Subject: [PATCH] build: allow separated src and build dirs
+
+We need to expland the list of include dirs to include the build dir since
+generated files will be created there instead of in the src dir.
+
+We also don't want to force using $srcdir for generated files as this will
+allow them to be created in the build dir. We account for the slight
+deviation in the generated files with expanded include paths.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ configure.ac | 2 +-
+ spice-common/common/Makefile.am | 14 +++++++-------
+ 2 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index edda8e9..9151fcb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -165,7 +165,7 @@ dnl =========================================================================
+ dnl Check deps
+ 
+ AC_CONFIG_SUBDIRS([spice-common])
+-COMMON_CFLAGS='-I ${top_srcdir}/spice-common/ -I ${top_srcdir}/spice-common/spice-protocol/'
++COMMON_CFLAGS='-I ${top_srcdir}/spice-common/ -I ${top_srcdir}/spice-common/common/ -I ${top_srcdir}/spice-common/spice-protocol/ -I ${top_builddir}/spice-common/'
+ AC_SUBST(COMMON_CFLAGS)
+ 
+ AC_CHECK_LIBM
+diff --git a/spice-common/common/Makefile.am b/spice-common/common/Makefile.am
+index 45568c6..4c65ac4 100644
+--- a/spice-common/common/Makefile.am
++++ b/spice-common/common/Makefile.am
+@@ -2,16 +2,16 @@ NULL =
+ 
+ # Avoid need for python(pyparsing) by end users
+ CLIENT_MARSHALLERS =					\
+-	$(srcdir)/generated_client_demarshallers.c	\
+-	$(srcdir)/generated_client_demarshallers1.c	\
+-	$(srcdir)/generated_client_marshallers.c	\
+-	$(srcdir)/generated_client_marshallers1.c	\
++	generated_client_demarshallers.c	\
++	generated_client_demarshallers1.c	\
++	generated_client_marshallers.c	\
++	generated_client_marshallers1.c	\
+ 	$(NULL)
+ 
+ SERVER_MARSHALLERS =					\
+-	$(srcdir)/generated_server_demarshallers.c	\
+-	$(srcdir)/generated_server_marshallers.c	\
+-	$(srcdir)/generated_server_marshallers.h	\
++	generated_server_demarshallers.c	\
++	generated_server_marshallers.c	\
++	generated_server_marshallers.h	\
+ 	$(NULL)
+ 
+ BUILT_SOURCES = $(CLIENT_MARSHALLERS) $(SERVER_MARSHALLERS) $(top_srcdir)/spice-protocol/spice/enums.h
+-- 
+1.8.3.2
+
