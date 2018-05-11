@@ -13,14 +13,13 @@ SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}
            file://0001-help-remove-YELP-macro.patch \
            file://0001-Add-format-attribute-to-_synctex_malloc.patch \
            "
-SRC_URI[archive.md5sum] = "3fb65ff46de191dc49c481f1fc66201c"
-SRC_URI[archive.sha256sum] = "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
+SRC_URI[archive.md5sum] = "27107b60ecc78b698e7902906f16ce82"
+SRC_URI[archive.sha256sum] = "caaa3100548b704068efb33f592b53accaf2154090ca68933d841f318d3c4d9e"
 
-EXTRA_OECONF = " --enable-thumbnailer \
-"
+EXTRA_OECONF = "--enable-thumbnailer"
 
 do_compile_prepend() {
-        export GIR_EXTRA_LIBS_PATH="${B}/libdocument/.libs"
+    export GIR_EXTRA_LIBS_PATH="${B}/libdocument/.libs"
 }
 
 
@@ -52,7 +51,7 @@ PACKAGES =+ "${PN}-nautilus-extension"
 PACKAGES =+ "${PN}-browser-plugin"
 
 FILES_${PN} += "${datadir}/dbus-1 \
-                ${datadir}/appdata \
+                ${datadir}/metainfo \
                 ${datadir}/thumbnailers \
                 ${systemd_unitdir}/systemd/user/evince.service \
                "
