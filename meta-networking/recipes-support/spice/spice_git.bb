@@ -13,10 +13,10 @@ architectures."
 LICENSE = "BSD & LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-PV = "0.13.90+git${SRCPV}"
+PV = "0.14.0+git${SRCPV}"
 
-SRCREV_spice = "2c1037f47c37899842b1696bbab0d3a4ed6c7b09"
-SRCREV_spice-common = "70d4739ce2f90f904fa96e22e438e9b424a3dd42"
+SRCREV_spice = "2a3d5624382ba49c4eb906e69697b92f79d06cf4"
+SRCREV_spice-common = "4c2d0e977272c5540634d24f485dd64c424f6748"
 
 SRCREV_FORMAT = "spice_spice-common"
 
