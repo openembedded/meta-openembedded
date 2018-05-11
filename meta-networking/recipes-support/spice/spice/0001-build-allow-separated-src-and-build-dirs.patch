@@ -1,0 +1,33 @@
+From 812a1a099cc48edcf1280fc329bf5330237f3cc2 Mon Sep 17 00:00:00 2001
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Thu, 1 May 2014 12:09:16 -0400
+Subject: [PATCH] build: allow separated src and build dirs
+
+We need to expland the list of include dirs to include the build dir since
+generated files will be created there instead of in the src dir.
+
+We also don't want to force using $srcdir for generated files as this will
+allow them to be created in the build dir. We account for the slight
+deviation in the generated files with expanded include paths.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 483dbfdf..7d990aaa 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -138,7 +138,7 @@ dnl =========================================================================
+ dnl Check deps
+ 
+ AC_CONFIG_SUBDIRS([spice-common])
+-COMMON_CFLAGS='-I ${top_srcdir}/spice-common/ -I ${top_builddir}/spice-common/'
++COMMON_CFLAGS='-I ${top_srcdir}/spice-common/ -I ${top_srcdir}/spice-common/common/ -I ${top_srcdir}/spice-common/spice-protocol/ -I ${top_builddir}/spice-common/'
+ COMMON_CFLAGS="$COMMON_CFLAGS -DG_LOG_DOMAIN=\\\"Spice\\\""
+ AC_SUBST(COMMON_CFLAGS)
+ 
+-- 
+2.14.1
+
