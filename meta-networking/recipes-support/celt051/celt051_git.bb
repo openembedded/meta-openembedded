@@ -12,19 +12,21 @@ like Speex, GSM, or G.729."
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=375f60ab360d17f0172737036ff155b2"
 
-PV = "0.5.1.3"
-PR = "r0"
+PV = "0.5.1.3+git${SRCPV}"
 
 SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
 
-SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https"
+SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
+    file://0001-configure.ac-make-tools-support-optional.patch \
+"
 
 S = "${WORKDIR}/git"
 
-DEPENDS += "libogg"
-
 inherit pkgconfig autotools-brokensep
 
-PACKAGECONFIG = ""
+PACKAGECONFIG_class-native = ""
+PACKAGECONFIG ??= ""
 
-PACKAGECONFIG[ogg] = "--with-ogg --enable-oggtest,--without-ogg --disable-oggtest,,"
+PACKAGECONFIG[ogg] = "--enable-tools,--disable-tools,libogg,"
+
+BBCLASSEXTEND = "native nativesdk"
