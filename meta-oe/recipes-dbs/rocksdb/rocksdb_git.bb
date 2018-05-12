@@ -10,7 +10,9 @@ SRCREV = "8969445642039566214d650cc6614849e7dd5e17"
 SRCBRANCH = "5.12.fb"
 PV = "5.12.2"
 
-SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH}"
+SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+           file://0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch \
+          "
 
 S = "${WORKDIR}/git"
 
