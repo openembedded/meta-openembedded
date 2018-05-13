@@ -35,8 +35,8 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
     file://chronyd \
     file://arm_eabi.patch \
 "
-SRC_URI[md5sum] = "f4c4eb0dc92f35ee4bb7d3dcd8029ecb"
-SRC_URI[sha256sum] = "329f6718dd8c3ece3eee78be1f4821cbbeb62608e7d23f25da293cfa433c4116"
+SRC_URI[md5sum] = "81ab62cf5d60b4b3fa8cd2c1b267ffd9"
+SRC_URI[sha256sum] = "0d1fb2d5875032f2d5a86f3770374c87ee4c941916f64171e81f7684f2a73128"
 
 DEPENDS = "pps-tools"
 
