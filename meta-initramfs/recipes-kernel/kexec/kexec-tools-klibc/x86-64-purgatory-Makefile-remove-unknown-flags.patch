@@ -1,0 +1,33 @@
+From 9453599fd833794fb5d87cab2622de286144ed54 Mon Sep 17 00:00:00 2001
+From: Andrea Adami <andrea.adami@gmail.com>
+Date: Wed, 18 Apr 2018 22:30:17 +0200
+Subject: [PATCH 6/6] purgatory: Makefile: remove unknown flags
+
+Fix
+
+ x86_64-oe-linux-musl-ld: unrecognised emulation mode: cmodel=large
+ Supported emulations: elf_x86_64 elf32_x86_64 elf_i386 elf_iamcu
+                       i386linux elf_l1om elf_k1om
+ ../kexec-tools-2.0.17-rc1/purgatory/Makefile:67:
+ recipe for target 'purgatory/purgatory.ro' failed
+
+Upstream-Status: Inappropriate [embedded specific]
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+---
+ purgatory/arch/x86_64/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/purgatory/arch/x86_64/Makefile b/purgatory/arch/x86_64/Makefile
+index 7300937..38f0bf3 100644
+--- a/purgatory/arch/x86_64/Makefile
++++ b/purgatory/arch/x86_64/Makefile
+@@ -23,4 +23,4 @@ x86_64_PURGATORY_SRCS += purgatory/arch/i386/console-x86.c
+ x86_64_PURGATORY_SRCS += purgatory/arch/i386/vga.c
+ x86_64_PURGATORY_SRCS += purgatory/arch/i386/pic.c
+ 
+-x86_64_PURGATORY_EXTRA_CFLAGS = -mcmodel=large
++#x86_64_PURGATORY_EXTRA_CFLAGS = -mcmodel=large
+-- 
+2.7.4
+

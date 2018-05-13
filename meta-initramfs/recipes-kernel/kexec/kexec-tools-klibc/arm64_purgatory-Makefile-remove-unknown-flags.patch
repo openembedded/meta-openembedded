@@ -1,0 +1,51 @@
+From 1ceca8645dbe2780e1b8993c80de772993fe3053 Mon Sep 17 00:00:00 2001
+From: Andrea Adami <andrea.adami@gmail.com>
+Date: Thu, 19 Apr 2018 10:43:34 +0200
+Subject: [PATCH 1/2] purgatory/arm64: Makefile: remove unknown flags for arm64
+
+Fix
+
+ | aarch64-oe-linux-musl-ld: unrecognised emulation mode: cmodel=large
+ | Supported emulations: aarch64linux aarch64elf aarch64elf32
+   aarch64elf32b aarch64elfb armelf armelfb aarch64linuxb aarch64linux32
+  aarch64linux32b armelfb_linux_eabi armelf_linux_eabi
+
+Upstream-Status: Inappropriate [klibc specific]
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+---
+ purgatory/arch/arm64/Makefile | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/purgatory/arch/arm64/Makefile b/purgatory/arch/arm64/Makefile
+index 636abea..ddc9461 100644
+--- a/purgatory/arch/arm64/Makefile
++++ b/purgatory/arch/arm64/Makefile
+@@ -1,13 +1,13 @@
+ 
+-arm64_PURGATORY_EXTRA_CFLAGS = \
+-	-mcmodel=large \
+-	-fno-PIC \
+-	-fno-stack-protector \
+-	-fno-asynchronous-unwind-tables \
+-	-Wundef \
+-	-Werror-implicit-function-declaration \
+-	-Wdeclaration-after-statement \
+-	-Werror=implicit-int \
+-	-Werror=strict-prototypes
++#arm64_PURGATORY_EXTRA_CFLAGS = \
++#	-mcmodel=large \
++#	-fno-PIC \
++#	-fno-stack-protector \
++#	-fno-asynchronous-unwind-tables \
++#	-Wundef \
++#	-Werror-implicit-function-declaration \
++#	-Wdeclaration-after-statement \
++#	-Werror=implicit-int \
++#	-Werror=strict-prototypes
+ 
+ arm64_PURGATORY_SRCS += \
+ 	purgatory/arch/arm64/entry.S \
+-- 
+2.7.4
+

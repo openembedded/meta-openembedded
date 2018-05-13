@@ -1,0 +1,49 @@
+From e6aa1f18dc44dc71be3ceada2a96383d22454399 Mon Sep 17 00:00:00 2001
+From: Andrea Adami <andrea.adami@gmail.com>
+Date: Thu, 19 Apr 2018 00:25:01 +0200
+Subject: [PATCH] kexec-syscall.h: work around missing syscall() wrapper
+
+Fix
+
+ kexec-syscall.h: In function 'kexec_load':
+ kexec-syscall.h:80:16: warning: implicit declaration of function 'syscall'
+
+Upstream-Status: Inappropriate [klibc specific]
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+
+---
+ kexec/kexec-syscall.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/kexec/kexec-syscall.h b/kexec/kexec-syscall.h
+index 33638c2..6b633e4 100644
+--- a/kexec/kexec-syscall.h
++++ b/kexec/kexec-syscall.h
+@@ -77,7 +77,11 @@ struct kexec_segment;
+ static inline long kexec_load(void *entry, unsigned long nr_segments,
+ 			struct kexec_segment *segments, unsigned long flags)
+ {
++#ifndef __KLIBC__
+ 	return (long) syscall(__NR_kexec_load, entry, nr_segments, segments, flags);
++#else
++	return (long) kexec_load(entry, nr_segments, segments, flags);
++#endif
+ }
+ 
+ static inline int is_kexec_file_load_implemented(void) {
+@@ -90,8 +94,12 @@ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
+ 			unsigned long cmdline_len, const char *cmdline_ptr,
+ 			unsigned long flags)
+ {
++#ifndef __KLIBC__
+ 	return (long) syscall(__NR_kexec_file_load, kernel_fd, initrd_fd,
+ 				cmdline_len, cmdline_ptr, flags);
++#else
++	return -1;
++#endif
+ }
+ 
+ #define KEXEC_ON_CRASH		0x00000001
+-- 
+2.7.4
+
