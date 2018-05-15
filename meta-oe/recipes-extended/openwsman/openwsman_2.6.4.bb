@@ -15,8 +15,8 @@ DEPENDS = "curl libxml2 openssl libpam"
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "feb7ec9b004fcaea0dbe65ce8a1a79cc29dd994c"
-PV = "2.6.3"
+SRCREV = "4aff7eaf5df948b6ed74cf4f8dd721a397bfb759"
+PV = "2.6.4"
 
 SRC_URI = "git://github.com/Openwsman/openwsman.git \
            file://libssl-is-required-if-eventint-supported.patch \
