@@ -1,7 +1,7 @@
 require lvm2.inc
 
-SRC_URI[md5sum] = "153b7bb643eb26073274968e9026fa8f"
-SRC_URI[sha256sum] = "b815a711a2fabaa5c3dc1a4a284df0268bf0f325f0fc0f5c9530c9bbb54b9964"
+SRC_URI[md5sum] = "ee6cfbc5a0c5696ffae79dac04ee7a2b"
+SRC_URI[sha256sum] = "4025a23ec9b15c2cb7486d151c29dc953b75efc4d452cfe9dbbc7c0fac8e80f2"
 
 DEPENDS += "autoconf-archive-native"
 
