@@ -10,13 +10,13 @@ DEPENDS_append_class-target = " gtest grpc-native "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRC_URI = "https://github.com/grpc/grpc/archive/v${PV}.tar.gz \
+S = "${WORKDIR}/git"
+SRCREV = "db68cb3652cc7697647e9934b5316d98a6ba04d1"
+BRANCH = "v1.8.x"
+SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH} \
            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
            file://0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch \
            "
-SRC_URI[md5sum] = "b565fa6787e42f4969395870c2ad436e"
-SRC_URI[sha256sum] = "df9168da760fd2ee970c74c9d1b63377e0024be248deaa844e784d0df47599de"
-
 SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
 
 inherit cmake
