@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
 "
 
-inherit distro_features_check gnomebase
+inherit distro_features_check gnomebase remove-libtool
 
 DEPENDS = " \
     intltool-native \
