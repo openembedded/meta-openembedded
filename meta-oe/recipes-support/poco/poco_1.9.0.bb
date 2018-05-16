@@ -12,7 +12,7 @@ inherit cmake ptest
 
 BBCLASSEXTEND = "native"
 
-SRCREV = "af527ab21fca5ab2659285408aec9920ed7c7b17"
+SRCREV = "94966785a8f9ad0191dffd075ebd67826e6e4b6d"
 SRC_URI = " \
     git://github.com/pocoproject/poco.git \
     file://run-ptest \
@@ -33,7 +33,7 @@ EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
 # By default the most commonly used poco components are built
 # Foundation is built anyway and doesn't need to be listed explicitly
 # these don't have dependencies outside oe-core
-PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip"
+PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip Encodings Redis"
 
 PACKAGECONFIG[XML] = "-DENABLE_XML=ON -DEXPAT_LIBRARY:STRING=expat,-DENABLE_XML=OFF,expat"
 PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
@@ -46,6 +46,8 @@ PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DO
 PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
 PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON -DSQLITE3_LIBRARY:STRING=sqlite3,-DENABLE_DATA_SQLITE=OFF,sqlite3"
 PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
+PACKAGECONFIG[Encodings] = "-DENABLE_ENCODINGS=ON,-DENABLE_ENCODINGS=OFF"
+PACKAGECONFIG[Redis] = "-DENABLE_REDIS=ON,-DENABLE_REDIS=OFF"
 
 # Additional components not build by default,
 # they might have dependencies not included in oe-core
@@ -58,40 +60,30 @@ PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-DENABLE_PAGECOMPILER=OF
 PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
 PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
 
-# Make a package for each library
-PACKAGES = "${PN}-dbg ${POCO_PACKAGES}"
-python __anonymous () {
+python populate_packages_prepend () {
+    poco_libdir = d.expand('${libdir}')
+    pn = d.getVar("PN")
     packages = []
     testrunners = []
-    components = d.getVar("PACKAGECONFIG").split()
-    components.append("Foundation")
-    for lib in components:
-        pkg = ("poco-%s" % lib.lower()).replace("_","")
-        packages.append(pkg)
-        if not d.getVar("FILES_%s" % pkg):
-            d.setVar("FILES_%s" % pkg, "${libdir}/libPoco%s.so.*" % lib)
-        testrunners.append("%s" % lib)
 
-    d.setVar("POCO_PACKAGES", " ".join(packages))
+    def hook(f, pkg, file_regex, output_pattern, modulename):
+        packages.append(pkg)
+        testrunners.append(modulename)
+
+    do_split_packages(d, poco_libdir, '^libPoco(.*)\.so\..*$',
+                    'poco-%s', 'Poco %s component', extra_depends='', prepend=True, hook=hook)
+
+    d.setVar("RRECOMMENDS_%s" % pn, " ".join(packages))
     d.setVar("POCO_TESTRUNNERS", "\n".join(testrunners))
 }
 
+PACKAGES_DYNAMIC = "poco-.*"
+
 # "poco" is a metapackage which pulls in all Poco components
-PACKAGES += "${PN}"
-RRECOMMENDS_${PN} += "${POCO_PACKAGES}"
-RRECOMMENDS_${PN}_class-native = ""
 ALLOW_EMPTY_${PN} = "1"
 
-# -dev last to pick up the remaining stuff
-PACKAGES += "${PN}-dev ${PN}-staticdev"
-FILES_${PN}-dev = "${includedir} ${libdir}/libPoco*.so ${libdir}/cmake"
-FILES_${PN}-staticdev = "${libdir}/libPoco*.a"
-
-# ptest support
-FILES_${PN}-dbg += "${PTEST_PATH}/bin/.debug"
-
 # cppunit is only built if tests are enabled
-PACKAGES += "${PN}-cppunit"
+PACKAGES =+ "${PN}-cppunit"
 FILES_${PN}-cppunit += "${libdir}/libCppUnit.so*"
 ALLOW_EMPTY_${PN}-cppunit = "1"
 
