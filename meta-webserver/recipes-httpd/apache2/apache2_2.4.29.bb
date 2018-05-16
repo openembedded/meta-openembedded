@@ -29,7 +29,10 @@ SRC_URI[sha256sum] = "777753a5a25568a2a27428b2214980564bc1c38c1abf9ccc7630b63999
 
 S = "${WORKDIR}/httpd-${PV}"
 
-inherit autotools update-rc.d pkgconfig systemd
+inherit autotools update-rc.d pkgconfig systemd update-alternatives
+
+ALTERNATIVE_${PN}-doc = "htpasswd.1"
+ALTERNATIVE_LINK_NAME[htpasswd.1] = "${mandir}/man1/htpasswd.1"
 
 SYSTEMD_SERVICE_${PN} = "apache2.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"

@@ -19,7 +19,11 @@ UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
 
 S = "${WORKDIR}/sthttpd-${PV}"
 
-inherit autotools update-rc.d systemd
+inherit autotools update-rc.d systemd update-alternatives
+
+ALTERNATIVE_PRIORITY = "100"
+ALTERNATIVE_${PN}-doc = "htpasswd.1"
+ALTERNATIVE_LINK_NAME[htpasswd.1] = "${mandir}/man1/htpasswd.1"
 
 SRV_DIR ?= "${servicedir}/www"
 
