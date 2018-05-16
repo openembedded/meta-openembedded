@@ -10,9 +10,10 @@ LICENSE = "BSD-2-Clause"
 LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
 
-SRC_URI = "https://github.com/cisco/openh264/archive/v${PV}.tar.gz"
-SRC_URI[md5sum] = "93da4e76cfda7ede8fd2df51b0021efd"
-SRC_URI[sha256sum] = "9c07c38d7de00046c9c52b12c76a2af7648b70d05bd5460c8b67f6895738653f"
+S = "${WORKDIR}/git"
+SRCREV = "a180c9d4d6f1a4830ca9eed9d159d54996bd63cb"
+BRANCH = "openh264v1.7"
+SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH};"
 
 COMPATIBLE_MACHINE_armv7a = "(.*)"
 COMPATIBLE_MACHINE_aarch64 = "(.*)"
