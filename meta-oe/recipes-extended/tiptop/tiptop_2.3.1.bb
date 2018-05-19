@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "51c4449c95bba34f16b429729c2f58431490665d8093efaa8643b2e1d1
 
 inherit autotools-brokensep
 EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
-COMPATIBLE_HOST = "(i.86|x86_64|arm|powerpc).*-linux"
+COMPATIBLE_HOST = "(i.86|x86_64|arm|powerpc|aarch64).*-linux"
 
 do_configure_prepend () {
     # Two bugs in configure.ac when cross-compiling.
