@@ -21,11 +21,11 @@ Signed-off-by: Dengke Du <dengke.du@windriver.com>
  configure.in | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/configure.in b/configure.in
-index cc77aab..a3579f2 100644
---- a/configure.in
-+++ b/configure.in
-@@ -1853,7 +1853,6 @@ if test "$UDEV_SYNC" = yes; then
+Index: LVM2.2.02.177/configure.in
+===================================================================
+--- LVM2.2.02.177.orig/configure.in
++++ LVM2.2.02.177/configure.in
+@@ -1870,7 +1870,6 @@ if test "$BUILD_DMFILEMAPD" = yes; then
  fi
  
  ################################################################################
@@ -33,6 +33,3 @@ index cc77aab..a3579f2 100644
  
  if test -n "$MODPROBE_CMD"; then
  	AC_DEFINE_UNQUOTED([MODPROBE_CMD], ["$MODPROBE_CMD"], [The path to 'modprobe', if available.])
--- 
-2.9.3
-

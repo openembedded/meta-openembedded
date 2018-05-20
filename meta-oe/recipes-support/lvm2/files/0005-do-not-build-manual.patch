@@ -19,10 +19,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  configure.in | 1 -
  2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/Makefile.in b/Makefile.in
-index 31d428d..24f89a2 100644
---- a/Makefile.in
-+++ b/Makefile.in
+Index: LVM2.2.02.177/Makefile.in
+===================================================================
+--- LVM2.2.02.177.orig/Makefile.in
++++ LVM2.2.02.177/Makefile.in
 @@ -18,7 +18,7 @@ top_builddir = @top_builddir@
  abs_top_builddir = @abs_top_builddir@
  abs_top_srcdir = @abs_top_srcdir@
@@ -32,7 +32,7 @@ index 31d428d..24f89a2 100644
  
  ifeq ("@UDEV_RULES@", "yes")
    SUBDIRS += udev
-@@ -69,7 +69,7 @@ liblvm.device-mapper: include.device-mapper
+@@ -69,7 +69,7 @@ liblvm.device-mapper: include.device-map
  daemons.device-mapper: libdm.device-mapper
  tools.device-mapper: libdm.device-mapper
  scripts.device-mapper: include.device-mapper
@@ -41,11 +41,11 @@ index 31d428d..24f89a2 100644
  
  ifeq ("@INTL@", "yes")
  lib.pofile: include.pofile
-diff --git a/configure.in b/configure.in
-index 1dc8819..108ace4 100644
---- a/configure.in
-+++ b/configure.in
-@@ -2213,7 +2213,6 @@ libdm/Makefile
+Index: LVM2.2.02.177/configure.in
+===================================================================
+--- LVM2.2.02.177.orig/configure.in
++++ LVM2.2.02.177/configure.in
+@@ -2216,7 +2216,6 @@ libdm/Makefile
  libdm/libdevmapper.pc
  liblvm/Makefile
  liblvm/liblvm2app.pc
@@ -53,6 +53,3 @@ index 1dc8819..108ace4 100644
  po/Makefile
  python/Makefile
  python/setup.py
--- 
-2.8.1
-
