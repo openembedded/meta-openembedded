@@ -6,6 +6,7 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-Do-not-overwrite-all-our-build-flags.patch \
            file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
            file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
+           file://basename-include.patch \
            "
 SRC_URI[md5sum] = "f7f687ebb60004f8ad61994575018044"
 SRC_URI[sha256sum] = "b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1"
