@@ -18,9 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
            file://change-cc-to-cc-version.patch \
            file://0001-disable-ucontext-on-musl.patch \
           "
-
-SRC_URI[md5sum] = "3cec4afc06b468687ef576c90148d10d"
-SRC_URI[sha256sum] = "c3269ce20b45b177239fd1e3d6d9428a94131711f12758ebf5f65222278bb110"
+SRC_URI[md5sum] = "afbadcf2980ad5aa205084dd401f1b7f"
+SRC_URI[sha256sum] = "4d3d444555416028ce39d3fb4cdc9cf6a658fcd4b0d2d0c45a73f9bf01d07929"
 
 S = "${WORKDIR}/mariadb-${PV}"
 
