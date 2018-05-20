@@ -43,3 +43,8 @@ FILES_${PN} += " \
     ${datadir}/libnm-gtk/wifi.ui \
     ${datadir}/libnma/wifi.ui \
 "
+
+# musl builds generate gir files which otherwise go un-packaged
+FILES_${PN}-dev += " \
+    ${datadir}/gir-1.0 \
+"
