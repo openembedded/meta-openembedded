@@ -4,13 +4,13 @@ HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
 
-DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native"
+DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
 
-SRCREV = "61f116744262c4c18922dcf806e496715f199669"
-PV = "1.6.0"
+SRCREV = "bfc82d5242855628b826018479df00e0ec4e8360"
+PV = "1.7.0"
 
 SRC_URI = "\
-    git://github.com/oetiker/rrdtool-1.x.git;branch=1.6;protocol=http; \
+    git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
 "
 
 S = "${WORKDIR}/git"
