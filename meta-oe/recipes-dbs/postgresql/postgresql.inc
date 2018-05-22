@@ -202,6 +202,7 @@ do_install_append() {
 }
 
 SSTATE_SCAN_FILES += "Makefile.global"
+SSTATE_SCAN_FILES_remove = "*_config"
 
 PACKAGES =+ "${PN}-client ${PN}-server-dev ${PN}-timezone \
     libecpg-compat-dbg libecpg-compat libecpg-compat-dev \
