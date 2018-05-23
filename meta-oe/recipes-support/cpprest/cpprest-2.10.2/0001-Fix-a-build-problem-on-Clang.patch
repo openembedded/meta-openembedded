@@ -1,0 +1,28 @@
+From 0c07931f77aa9df2da065b633ae66faad5a570ec Mon Sep 17 00:00:00 2001
+From: Wu Yongwei <wuyongwei@gmail.com>
+Date: Tue, 10 Apr 2018 11:29:12 +0800
+Subject: [PATCH] Fix a build problem on Clang.
+
+AND_CAPTURE_MEMBER_FUNCTION_POINTERS workaround had a check for GCC,
+but did not exclude Clang.  Clang has a fake GCC version of 4.2, thus
+caused problems.
+
+Upstream-Status: Backport [https://github.com/Microsoft/cpprestsdk/pull/732]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ Release/src/http/client/http_client_asio.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Release/src/http/client/http_client_asio.cpp b/Release/src/http/client/http_client_asio.cpp
+index 4ba3e085..fca4bb5b 100644
+--- a/Release/src/http/client/http_client_asio.cpp
++++ b/Release/src/http/client/http_client_asio.cpp
+@@ -47,7 +47,7 @@
+ #include <unordered_set>
+ #include <memory>
+ 
+-#if defined(__GNUC__)
++#if defined(__GNUC__) && !defined(__clang__)
+ 
+ #if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
+ #define AND_CAPTURE_MEMBER_FUNCTION_POINTERS

@@ -1,0 +1,28 @@
+From 816d183eb0fe9ab4607cb049b4b792f8df84d5fe Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 May 2018 22:17:43 -0700
+Subject: [PATCH] Define virtual destructor
+
+Fixes
+error: destructor called on non-final 'pplx::details::linux_scheduler' that has virtual functions but non-virtual destructor [-Werror,-Wdelete-non-virtual-dtor]
+    __data_.second().~_Tp();
+
+Upstream-Status: Pending [https://github.com/Microsoft/cpprestsdk/issues/747]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ Release/include/pplx/pplxlinux.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Release/include/pplx/pplxlinux.h b/Release/include/pplx/pplxlinux.h
+index 6aa1ba35..f3f8d70d 100644
+--- a/Release/include/pplx/pplxlinux.h
++++ b/Release/include/pplx/pplxlinux.h
+@@ -240,6 +240,7 @@ namespace platform
+     {
+     public:
+         _PPLXIMP virtual void schedule( TaskProc_t proc, _In_ void* param);
++    virtual ~linux_scheduler() {}
+     };
+ 
+ } // namespace details

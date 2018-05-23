@@ -5,9 +5,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${S}/../license.txt;md5=a2e15b954769218ff912468eecd6a02f"
 DEPENDS = "openssl websocketpp zlib boost"
 
-SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master"
-
-SRC_URI += "file://fix-cmake-install.patch"
+SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
+           file://fix-cmake-install.patch \
+           file://0001-Fix-a-build-problem-on-Clang.patch;patchdir=.. \
+           file://0002-Define-virtual-destructor.patch;patchdir=.. \
+           "
 
 # tag 2.10.2
 SRCREV= "fea848e2a77563cf2a6f28f8eab396fd6e787fbf"
