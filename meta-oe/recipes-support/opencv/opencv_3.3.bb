@@ -60,6 +60,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
     file://javagen.patch \
     file://protobuf.patch \
     file://already-exists.patch \
+    file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
 "
 PV = "3.3+git${SRCPV}"
 
