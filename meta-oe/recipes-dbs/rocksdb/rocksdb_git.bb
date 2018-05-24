@@ -30,5 +30,3 @@ EXTRA_OECMAKE = "\
     -DWITH_TESTS=OFF \
     -DWITH_TOOLS=OFF \
 "
-
-FILES_${PN}-dev += "${libdir}/cmake"
