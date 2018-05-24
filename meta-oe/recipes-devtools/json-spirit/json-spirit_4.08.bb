@@ -20,6 +20,4 @@ DEPENDS = "boost"
 
 inherit cmake
 
-FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibJsonSpirit.cmake"
-
 BBCLASSEXTEND = "nativesdk"
