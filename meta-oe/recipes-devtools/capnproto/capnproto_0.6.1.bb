@@ -20,7 +20,6 @@ S = "${WORKDIR}/git/c++"
 PACKAGE_BEFORE_PN = "${PN}-compiler"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
 
-FILES_${PN}-dev += "${libdir}/cmake"
 FILES_${PN}-compiler = "${bindir}"
 
 BBCLASSEXTEND = "native nativesdk"
