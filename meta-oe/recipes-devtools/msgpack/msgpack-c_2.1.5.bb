@@ -18,5 +18,3 @@ SRC_URI = "git://github.com/msgpack/msgpack-c \
 inherit cmake pkgconfig
 
 S = "${WORKDIR}/git"
-
-FILES_${PN}-dev += "${libdir}/cmake/msgpack/*.cmake"
