@@ -16,5 +16,3 @@ inherit cmake
 
 # Only a static library and headers are created
 ALLOW_EMPTY_${PN} = "1"
-
-FILES_${PN}-dev += "${libdir}/cmake/*"
