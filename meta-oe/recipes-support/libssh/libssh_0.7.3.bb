@@ -30,5 +30,4 @@ do_configure_prepend () {
         || bbfatal "Failed to disable examples"
 }
 
-FILES_${PN}-dev += "${libdir}/cmake"
 TOOLCHAIN = "gcc"
