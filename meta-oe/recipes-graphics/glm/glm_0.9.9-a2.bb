@@ -22,7 +22,6 @@ inherit cmake
 
 EXTRA_OECMAKE = "-DGLM_ENABLE_EXPERIMENTAL=ON"
 
-FILES_${PN}-dev += "${libdir}/cmake"
 RDEPENDS_${PN}-dev = ""
 
 BBCLASSEXTEND = "native"
