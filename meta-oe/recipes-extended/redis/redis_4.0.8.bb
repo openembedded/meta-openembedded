@@ -13,11 +13,12 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://redis.conf \
            file://init-redis-server \
            file://redis.service \
-           file://hiredis-update-Makefile-to-add-symbols-to-staticlib.patch \
 "
 
-SRC_URI[md5sum] = "87be8867447f62524b584813e5a7bd14"
-SRC_URI[sha256sum] = "93e422c0d584623601f89b956045be158889ebe594478a2c24e1bf218495633f"
+SRC_URI_append_mips = " file://remove-atomics.patch"
+
+SRC_URI[md5sum] = "c75b11e4177e153e4dc1d8dd3a6174e4"
+SRC_URI[sha256sum] = "ff0c38b8c156319249fec61e5018cf5b5fe63a65b61690bec798f4c998c232ad"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
