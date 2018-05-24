@@ -4,6 +4,8 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b4cce53560b8e619ffa7c830fb8761aa \
                     file://src/include/main.h;endline=24;md5=72148ede07a6dadd01de6a882d20a9ad"
 
+PE = "1"
+
 DEPENDS = "gsettings-desktop-schemas startup-notification \
            gnome-doc-utils gdk-pixbuf-native \
            gtk+3 glib-2.0 libcanberra libgtop intltool-native"
