@@ -1,34 +1,22 @@
 SUMMARY = "Modern, powerful open source cross-platform C++ class libraries"
 DESCRIPTION = "Modern, powerful open source C++ class libraries and frameworks for building network- and internet-based applications that run on desktop, server, mobile and embedded systems."
-SECTION = "libs"
 HOMEPAGE = "http://pocoproject.org/"
+SECTION = "libs"
 LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 
 # These dependencies are required by Foundation
 DEPENDS = "libpcre zlib"
 
-inherit cmake ptest
-
-BBCLASSEXTEND = "native"
-
-SRCREV = "94966785a8f9ad0191dffd075ebd67826e6e4b6d"
 SRC_URI = " \
     git://github.com/pocoproject/poco.git \
     file://run-ptest \
    "
+SRCREV = "94966785a8f9ad0191dffd075ebd67826e6e4b6d"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
-                  -DZLIB_LIBRARY_RELEASE:STRING=z -DPCRE_LIBRARY:STRING=pcre \
-                 ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
-
-# For the native build we want to use the bundled version
-EXTRA_OECMAKE_append_class-native = " -DPOCO_UNBUNDLED=OFF"
-
-# do not use rpath
-EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
+inherit cmake ptest
 
 # By default the most commonly used poco components are built
 # Foundation is built anyway and doesn't need to be listed explicitly
@@ -60,6 +48,16 @@ PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-DENABLE_PAGECOMPILER=OF
 PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
 PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
 
+EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
+                  -DZLIB_LIBRARY_RELEASE:STRING=z -DPCRE_LIBRARY:STRING=pcre \
+                 ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
+
+# For the native build we want to use the bundled version
+EXTRA_OECMAKE_append_class-native = " -DPOCO_UNBUNDLED=OFF"
+
+# do not use rpath
+EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
+
 python populate_packages_prepend () {
     poco_libdir = d.expand('${libdir}')
     pn = d.getVar("PN")
@@ -77,6 +75,14 @@ python populate_packages_prepend () {
     d.setVar("POCO_TESTRUNNERS", "\n".join(testrunners))
 }
 
+do_install_ptest () {
+       cp -rf ${B}/bin/ ${D}${PTEST_PATH}
+       cp -f ${B}/lib/libCppUnit.so* ${D}${libdir}
+       cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
+       find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
+       echo "${POCO_TESTRUNNERS}" > "${D}${PTEST_PATH}/testrunners"
+}
+
 PACKAGES_DYNAMIC = "poco-.*"
 
 # "poco" is a metapackage which pulls in all Poco components
@@ -89,10 +95,4 @@ ALLOW_EMPTY_${PN}-cppunit = "1"
 
 RDEPENDS_${PN}-ptest += "${PN}-cppunit"
 
-do_install_ptest () {
-       cp -rf ${B}/bin/ ${D}${PTEST_PATH}
-       cp -f ${B}/lib/libCppUnit.so* ${D}${libdir}
-       cp -rf ${B}/*/testsuite/data ${D}${PTEST_PATH}/bin/
-       find "${D}${PTEST_PATH}" -executable -exec chrpath -d {} \;
-       echo "${POCO_TESTRUNNERS}" > "${D}${PTEST_PATH}/testrunners"
-}
+BBCLASSEXTEND = "native"
