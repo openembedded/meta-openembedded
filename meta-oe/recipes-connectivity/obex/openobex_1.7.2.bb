@@ -34,7 +34,7 @@ do_install_append () {
 PACKAGES =+ "openobex-apps"
 FILES_${PN}-apps = "${bindir}/*"
 FILES_${PN} += "${libdir}/lib*.so.*"
-FILES_${PN}-dev += "${bindir}/openobex-config ${libdir}/cmake"
+FILES_${PN}-dev += "${bindir}/openobex-config"
 DEBIAN_NOAUTONAME_${PN}-apps = "1"
 
 BBCLASSEXTEND = "native"
