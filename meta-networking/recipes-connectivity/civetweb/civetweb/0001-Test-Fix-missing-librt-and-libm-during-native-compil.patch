@@ -1,0 +1,42 @@
+From cd93e2c538cecb3192fd24c0fbd6e834d0c47eec Mon Sep 17 00:00:00 2001
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Wed, 18 Apr 2018 14:11:52 +0200
+Subject: [PATCH] Unittest: Fix missing librt and libm during native compilation
+
+civetweb looks for librt and libm in weird places and for native build
+this fails:
+
+    | ../third_party/lib/libcheck.a(check.c.o): In function `tcase_create':
+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:145: undefined reference to `floor'
+    | build/tmp/work/x86_64-linux/civetweb-native/1.10-r0/build/third_party/src/check-unit-test-framework/src/check.c:148: undefined reference to `floor'
+
+These are needed dependencies so try regular system linkage in such
+case.
+
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+---
+ unittest/CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/unittest/CMakeLists.txt b/unittest/CMakeLists.txt
+index f34b2e0e4ce4..05d25702178c 100644
+--- a/unittest/CMakeLists.txt
++++ b/unittest/CMakeLists.txt
+@@ -60,10 +60,14 @@ endif()
+ find_package(LibM)
+ if (LIBM_FOUND)
+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBM::LIBM")
++else()
++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lm")
+ endif()
+ find_package(LibRt)
+ if (LIBRT_FOUND)
+   set(CHECK_LIBRARIES "${CHECK_LIBRARIES};LIBRT::LIBRT")
++else()
++  set(CHECK_LIBRARIES "${CHECK_LIBRARIES};-lrt")
+ endif()
+ 
+ # Build the C unit tests
+-- 
+2.7.4
+
