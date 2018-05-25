@@ -12,6 +12,9 @@ SRC_URI = "https://git.fedorahosted.org/cgit/dlm.git/snapshot/${BP}.tar.xz \
 SRC_URI[md5sum] = "efc2ee6093aa6aa0a88aaad83e998a3f"
 SRC_URI[sha256sum] = "b89bc557aaffbab0ac005398025f247718a5589cff6574d902eaffe2b20e683e"
 
+UPSTREAM_CHECK_URI = "https://pagure.io/dlm/releases"
+UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)"
+
 LICENSE = "LGPLv2+ & GPLv2 & GPLv2+"
 LIC_FILES_CHKSUM = "file://README.license;md5=8f0bbcdd678df1bce9863492b6c8832d"
 
