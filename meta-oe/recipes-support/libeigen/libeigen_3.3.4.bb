@@ -12,8 +12,8 @@ S = "${WORKDIR}/eigen-eigen-5a0156e40feb"
 
 inherit cmake
 
-FILES_${PN} = "${includedir} ${libdir}"
-FILES_${PN}-dev = "${datadir}/eigen3/cmake ${datadir}/cmake/Modules ${datadir}/pkgconfig"
+FILES_${PN} = "${libdir}"
+FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Modules ${datadir}/pkgconfig"
 
 # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
 RDEPENDS_${PN}-dev = ""
