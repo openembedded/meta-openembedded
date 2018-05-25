@@ -31,6 +31,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
 SRC_URI[md5sum] = "28cf88f99eff553a8500659ba5d45a76"
 SRC_URI[sha256sum] = "0d57e4138c2ec8058ca92164d035546f68ce4af93acb893369993d67c7056a10"
 
+UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
+
 INITSCRIPT_NAME = "autofs"
 INITSCRIPT_PARAMS = "defaults"
 
