@@ -41,9 +41,10 @@ SYSTEMD_SERVICE_${PN} += "opensafd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 PACKAGECONFIG[systemd] = ",,systemd"
-PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03 --enable-ais-plm,,openhpi"
+PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03,,openhpi"
+PACKAGECONFIG[plm] = "--enable-ais-plm,--disable-ais-plm,libvirt openhpi"
 
-PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
 
 PKGLIBDIR="${libdir}"
 
