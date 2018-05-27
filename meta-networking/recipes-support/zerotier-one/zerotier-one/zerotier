@@ -1,0 +1,54 @@
+#!/bin/sh
+
+DAEMON="/usr/sbin/zerotier-one"
+prog=`basename $DAEMON`
+MODULE="tun"
+PIDFILE="/var/lib/zerotier-one/zerotier-one.pid"
+
+test -e $DAEMON || exit 0
+
+case "$1" in
+  start)
+    if [ -d /var/lib/samba/msg.lock ]; then
+        rm -rf /var/lib/samba/msg.lock
+    fi
+    echo -n "Starting $prog"
+
+    # Make sure kernel module is loaded
+    if ! grep -q $MODULE /proc/filesystems
+    then
+        # Try load the kernel module fail if we can't
+        modprobe $MODULE >/dev/null 2>&1
+        if [ $? -eq 1 ]
+        then
+            echo "Error: failed to load $MODULE module."
+            return 1
+        fi
+    fi
+
+    start-stop-daemon --start --quiet --background --exec $DAEMON
+    echo "."
+    ;;
+  stop)
+    echo -n "Stopping $prog"
+    start-stop-daemon --stop --quiet --pidfile $PIDFILE
+    echo "."
+    ;;
+  reload|force-reload)
+    start-stop-daemon --stop --quiet --signal 1 --exec $DAEMON
+    ;;
+  restart)
+    $0 stop
+    echo -n "Waiting for processes to die off"
+    for i in 1 2 3 ;
+    do
+        sleep 1
+        echo -n "."
+    done
+    echo ""
+    $0 start
+    ;;
+  *)
+    echo "Usage: /etc/init.d/$0 {start|stop|reload|restart|force-reload}"
+    exit 1
+esac
