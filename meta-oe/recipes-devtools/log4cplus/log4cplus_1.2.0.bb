@@ -10,6 +10,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-stable/${PV}/${BP}.tar.gz
 SRC_URI[md5sum] = "e250f0f431c0723f8b625323e7b6465d"
 SRC_URI[sha256sum] = "ad5ec3b62f2f0bdc7f06fa398bde61091fd2493e91059e17315b5197420dcf04"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/"
+UPSTREAM_CHECK_REGEX = "log4cplus-stable/(?P<pver>\d+(\.\d+)+)/"
+
 inherit autotools pkgconfig
 
 BBCLASSEXTEND = "native"
