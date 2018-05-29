@@ -16,6 +16,14 @@ SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz \
 SRC_URI[md5sum] = "1e9f117cbfa11be1955adc96df71eadb"
 SRC_URI[sha256sum] = "e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e"
 
+# It is using '-' but not '.' as delimiter for the version in the releases page,
+# which causes the version comparison unmatched.
+#UPSTREAM_CHECK_URI = "https://github.com/groeck/lm-sensors/releases"
+
+RECIPE_UPSTREAM_VERSION = "3.4.0"
+RECIPE_UPSTREAM_DATE = "Jun 25, 2015"
+CHECK_DATE = "May 28, 2018"
+
 inherit update-rc.d systemd
 
 RDEPENDS_${PN}-dev = ""
