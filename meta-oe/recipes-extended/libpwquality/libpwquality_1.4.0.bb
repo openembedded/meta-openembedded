@@ -12,6 +12,8 @@ SRC_URI = "https://github.com/${SRCNAME}/${SRCNAME}/releases/download/${SRCNAME}
 SRC_URI[md5sum] = "b8defcc7280a90e9400d6689c93a279c"
 SRC_URI[sha256sum] = "1de6ff046cf2172d265a2cb6f8da439d894f3e4e8157b056c515515232fade6b"
 
+UPSTREAM_CHECK_URI = "https://github.com/libpwquality/libpwquality/releases"
+
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 DEPENDS = "cracklib virtual/gettext python3"
