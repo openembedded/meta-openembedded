@@ -19,6 +19,9 @@ SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0005-remove-python2-support.patch \
 "
 SRCREV = "cfff49f06d9d17e269d463ee71b3d94c8bfb0c58"
+
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+
 S = "${WORKDIR}/git"
 
 inherit distro_features_check
