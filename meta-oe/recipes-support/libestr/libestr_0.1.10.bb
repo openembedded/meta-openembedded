@@ -8,4 +8,6 @@ SRC_URI = "http://libestr.adiscon.com/files/download/${BP}.tar.gz"
 SRC_URI[md5sum] = "f4c9165a23587e77f7efe65d676d5e8e"
 SRC_URI[sha256sum] = "bd655e126e750edd18544b88eb1568d200a424a0c23f665eb14bbece07ac703c"
 
+UPSTREAM_CHECK_URI = "http://libestr.adiscon.com/download/"
+
 inherit autotools
