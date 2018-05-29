@@ -22,6 +22,8 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
 "
 
+UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
+
 inherit autotools gettext systemd pkgconfig update-rc.d
 
 EXTRA_OECONF = " \
