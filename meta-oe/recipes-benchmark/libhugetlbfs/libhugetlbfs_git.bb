@@ -21,6 +21,8 @@ SRC_URI = " \
     file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
 "
 
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+
 S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
