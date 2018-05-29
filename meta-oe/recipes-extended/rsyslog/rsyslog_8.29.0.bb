@@ -33,6 +33,9 @@ SRC_URI_append_libc-musl = " \
 SRC_URI[md5sum] = "3805617f65a4b4bea34606487a5255a0"
 SRC_URI[sha256sum] = "220ba30b5afb0f3ddb328613fea7aa3966b01e4d0c52d6de9ab27b0858f19738"
 
+UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
 inherit autotools pkgconfig systemd update-rc.d ptest
 
 EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
