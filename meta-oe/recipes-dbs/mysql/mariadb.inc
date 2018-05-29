@@ -21,6 +21,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
 SRC_URI[md5sum] = "afbadcf2980ad5aa205084dd401f1b7f"
 SRC_URI[sha256sum] = "4d3d444555416028ce39d3fb4cdc9cf6a658fcd4b0d2d0c45a73f9bf01d07929"
 
+UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+
 S = "${WORKDIR}/mariadb-${PV}"
 
 BINCONFIG_GLOB = "mysql_config"
