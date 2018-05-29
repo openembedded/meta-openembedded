@@ -13,6 +13,8 @@ SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
 SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
 SRC_URI[sha256sum] = "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41d811368e55bd4e6a293"
 
+UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
+
 S = "${WORKDIR}/${BPN}_${PV}/src/current/"
 
 #
