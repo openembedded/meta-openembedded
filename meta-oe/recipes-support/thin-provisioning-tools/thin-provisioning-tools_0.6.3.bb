@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/jthornber/thin-provisioning-tools \
 
 SRCREV = "49bfc12e9c7956c1ac134b24afbe1a6a602ce7d5"
 
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+
 DEPENDS += "expat libaio boost"
 
 inherit autotools-brokensep
