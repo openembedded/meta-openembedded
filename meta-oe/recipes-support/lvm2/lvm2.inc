@@ -17,6 +17,10 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
            file://0005-do-not-build-manual.patch \
            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
            "
+
+UPSTREAM_CHECK_URI = "ftp://sources.redhat.com/pub/lvm2/"
+UPSTREAM_CHECK_REGEX = "LVM2\.(?P<pver>\d+(\.\d+)+)"
+
 S = "${WORKDIR}/LVM2.${PV}"
 
 inherit autotools-brokensep pkgconfig systemd license
