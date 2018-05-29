@@ -31,6 +31,8 @@ SRC_URI[sha256sum] = "5d076e1fefb41aa178ad3e1cef6511670efc47de5cb04d4af9bdd4e8f2
 SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
 SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
 
+UPSTREAM_CHECK_URI = "https://github.com/crash-utility/crash/releases"
+
 inherit gettext
 
 BBCLASSEXTEND = "native cross"
