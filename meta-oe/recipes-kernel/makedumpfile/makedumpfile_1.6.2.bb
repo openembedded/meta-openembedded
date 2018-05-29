@@ -28,6 +28,9 @@ SRC_URI = "\
 SRC_URI[md5sum] = "72be5bf973eed898c5127e3abc466583"
 SRC_URI[sha256sum] = "ee3d21cb4032a60bd2c802d1d8b21b9f399710e1574f8de8ead5ab50cd821a6d"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/makedumpfile/files/makedumpfile/"
+UPSTREAM_CHECK_REGEX = "makedumpfile/(?P<pver>\d+(\.\d+)+)/"
+
 SECTION = "base"
 
 # If we do not specify TARGET, makedumpfile will build for the host but use the
