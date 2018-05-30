@@ -10,6 +10,8 @@ inherit pypi
 SRC_URI[md5sum] = "393a53483224cb338df5c643646c0300"
 SRC_URI[sha256sum] = "09879a295fd7234e523b62066223b128c5a8a88f682e3aff62fb115e4a0d8be0"
 
+UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
+
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-json \
