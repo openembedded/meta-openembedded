@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f3
 
 DEPENDS = "libxml2 glibmm"
 
-inherit distro_features_check autotools pkgconfig ptest
+inherit autotools pkgconfig ptest
 
 do_compile_ptest() {
   oe_runmake -C examples buildtest
