@@ -12,7 +12,7 @@ Fix build error:
 | ../git/include/libmissing.h:7:10: fatal error: execinfo.h: 
  No such file or directory
 
-Status: Inappropriate [klibc specific]
+Upstream-Status: Inappropriate [klibc specific]
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---

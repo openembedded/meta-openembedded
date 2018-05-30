@@ -1,7 +1,7 @@
 From ae1cf6d0eb1833e46549328a4473222c259723d7 Mon Sep 17 00:00:00 2001
 From: Andrea Adami <andrea.adami@gmail.com>
 Date: Thu, 1 Feb 2018 00:25:00 +0100
-Subject: [PATCH 4/4] mtd-utils: common.h: no features.h for klibc builds
+Subject: [PATCH] mtd-utils: common.h: no features.h for klibc builds
 
 Add guard around features.h to fix missing include (here first error):
 

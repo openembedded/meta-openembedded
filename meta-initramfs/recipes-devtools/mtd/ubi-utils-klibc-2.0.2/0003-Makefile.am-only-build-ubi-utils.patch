@@ -1,7 +1,7 @@
 From 139d93bc405272a3261d57be26da842e737fe4d0 Mon Sep 17 00:00:00 2001
 From: Andrea Adami <andrea.adami@gmail.com>
 Date: Sun, 28 Jan 2018 23:10:34 +0100
-Subject: [PATCH 3/4] Makefile.am: only build ubi-utils
+Subject: [PATCH] Makefile.am: only build ubi-utils
 
 We only target the ubi-utils, static, small.
 

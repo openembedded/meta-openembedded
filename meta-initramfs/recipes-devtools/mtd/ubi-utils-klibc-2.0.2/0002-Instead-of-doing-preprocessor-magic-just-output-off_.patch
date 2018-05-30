@@ -1,7 +1,7 @@
 From 01c98d5d5d044d9a125abcdbb2f3d771966365b0 Mon Sep 17 00:00:00 2001
 From: mirabilos <m@mirbsd.org>
 Date: Thu, 1 Feb 2018 15:34:07 +0100
-Subject: [PATCH 2/4] Instead of doing preprocessor magic, just output off_t as
+Subject: [PATCH] Instead of doing preprocessor magic, just output off_t as
  long long
 
 Fix warnings abot PRIdoff_t in libmtd.c, in mtd_read (and mtd_write):

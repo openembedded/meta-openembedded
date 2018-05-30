@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
 
 inherit autotools pkgconfig klibc
 
-SRCREV = "bc63d36e39f389c8c17f6a8e9db47f2acc884659"
+SRCREV = "64f61a9dc71b158c7084006cbce4ea23886f0b47"
 SRC_URI = "git://git.infradead.org/mtd-utils.git \
              file://0001-libmissing.h-fix-klibc-build-when-using-glibc-toolch.patch \
              file://0002-Instead-of-doing-preprocessor-magic-just-output-off_.patch \

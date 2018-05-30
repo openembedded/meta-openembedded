@@ -1,7 +1,7 @@
 From 2137eb1a6cd0326510bd3b9faf8037d9bf34ca3d Mon Sep 17 00:00:00 2001
 From: Andrea Adami <andrea.adami@gmail.com>
 Date: Wed, 23 May 2018 15:52:34 +0200
-Subject: [PATCH 5/5] common.h: replace getline() with fgets
+Subject: [PATCH] common.h: replace getline() with fgets
 
 There is an unofficial upstream patch adding a simple getline()
 to libmissing.h. Unfortunately the patch creates issues if the
@@ -13,7 +13,7 @@ Fix:
 | ubi-utils/ubiformat.o: In function `prompt.constprop.4':
 | ubiformat.c:(.text+0x70): undefined reference to `getline'
 
-Upstrea-Status: Inappropriate [klibc specific]
+Upstream-Status: Inappropriate [klibc specific]
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
