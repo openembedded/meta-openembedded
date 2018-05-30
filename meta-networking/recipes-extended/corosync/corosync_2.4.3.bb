@@ -12,6 +12,8 @@ SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
 SRC_URI[md5sum] = "bf0ede13018aadc8a046183bc593b0e0"
 SRC_URI[sha256sum] = "b1e7e422e8d2f7af8e5315fa329b1dbd1175fff32efaa55e8054584c80a2c597"
 
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.(?!99)\d+(\.\d+)+)"
+
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
 
