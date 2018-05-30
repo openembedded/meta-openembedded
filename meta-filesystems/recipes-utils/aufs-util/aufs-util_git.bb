@@ -17,6 +17,8 @@ SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs4.4 \
 SRC_URI[aufs_type.md5sum] = "f7b4a255dcb55fe7b0967f5f59b44f19"
 SRC_URI[aufs_type.sha256sum] = "85bc8e4c1a94a7d526c382e4b047b4256cab8c4a65fc0396291707ad9a327a18"
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 PV = "4.4+git${SRCPV}"
 
 S = "${WORKDIR}/git"
