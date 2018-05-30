@@ -21,4 +21,6 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=py
            "
 SRCREV = "b2787a818540e678c2f9c5dca0c6bbd65b8b55e5"
 
+UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
+
 inherit setuptools3
