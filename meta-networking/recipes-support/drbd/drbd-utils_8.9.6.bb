@@ -14,6 +14,8 @@ SRC_URI = "http://www.linbit.com/downloads/drbd/utils/archive/${BP}.tar.gz \
 SRC_URI[md5sum] = "76ed6d3190cd77b00890f3365353124b"
 SRC_URI[sha256sum] = "297b77c9b3f88de2e7dae459234f2753ea4fc2805282b2d276e35cf51e292913"
 
+UPSTREAM_CHECK_URI = "http://www.linbit.com/downloads/drbd/utils/"
+
 SYSTEMD_SERVICE_${PN} = "drbd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
