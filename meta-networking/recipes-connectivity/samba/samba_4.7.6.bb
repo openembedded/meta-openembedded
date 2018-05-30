@@ -150,19 +150,14 @@ do_install_append() {
     install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
     echo "d ${localstatedir}/log/samba 0755 root root -" \
         >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
-    if [ "${LSB}" = "lsb" ]; then
-        install -d ${D}${sysconfdir}/init.d
-        install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
-    else
-        install -d ${D}${sysconfdir}/init.d
-        install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
-        sed -e 's,/opt/samba/bin,${sbindir},g' \
-            -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
-            -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
-            -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
-            -e 's,/usr/bin,${base_bindir},g' \
-            -i ${D}${sysconfdir}/init.d/samba
-    fi
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
+    sed -e 's,/opt/samba/bin,${sbindir},g' \
+        -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
+        -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
+        -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
+        -e 's,/usr/bin,${base_bindir},g' \
+        -i ${D}${sysconfdir}/init.d/samba
 
     install -d ${D}${sysconfdir}/samba
     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
