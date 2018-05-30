@@ -15,6 +15,8 @@ SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
     file://saslauthd.conf \
 "
 
+UPSTREAM_CHECK_REGEX = "cyrus-sasl-(?P<pver>(\d+(\.\d+)+))\.tar"
+
 inherit autotools-brokensep pkgconfig useradd systemd
 
 EXTRA_OECONF += "--with-dblib=berkeley \
