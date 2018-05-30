@@ -26,6 +26,8 @@ SRC_URI = "git://github.com/rhinstaller/blivet;branch=2.2-devel \
            file://0014-invoking-dd-with-infinite-timeout.patch \
 "
 
+UPSTREAM_CHECK_GITTAGREGEX = "blivet-(?P<pver>\d+(\.\d+)+)$"
+
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "systemd"
 
