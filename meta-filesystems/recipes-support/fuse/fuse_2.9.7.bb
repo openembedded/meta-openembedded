@@ -19,6 +19,8 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
 SRC_URI[md5sum] = "9bd4ce8184745fd3d000ca2692adacdb"
 SRC_URI[sha256sum] = "832432d1ad4f833c20e13b57cf40ce5277a9d33e483205fc63c78111b3358874"
 
+UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+
 inherit autotools pkgconfig update-rc.d systemd
 
 INITSCRIPT_NAME = "fuse"
