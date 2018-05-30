@@ -13,6 +13,8 @@ SRC_URI = "\
 "
 SRCREV = "3be1924221e1326df520f8498d704a5c4c8d0cce"
 
+UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
+
 S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
