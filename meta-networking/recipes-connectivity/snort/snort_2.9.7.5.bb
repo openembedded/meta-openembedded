@@ -20,6 +20,9 @@ SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
 SRC_URI[tarball.md5sum] = "fd271788c0f8876be87a858a9142f202"
 SRC_URI[tarball.sha256sum] = "ad03f11b5301b16642199a86aa90388eaa53f5003f83b0c5595745a490047be1"
 
+UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
+UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
+
 inherit autotools gettext update-rc.d pkgconfig
 
 INITSCRIPT_NAME = "snort"
