@@ -5,8 +5,9 @@ DEPENDS = "libusb-compat libftdi"
 RDEPENDS_${PN} = "libusb1"
 
 SRC_URI = "git://repo.or.cz/openocd.git \
-"
-SRCREV = "3737dd69e73816d186ba418d7b833462a8041079"
+           file://0001-Fix-libusb-1.0.22-deprecated-libusb_set_debug-with-l.patch \
+          "
+SRCREV = "cdf1e826eb23c29de1019ce64125f644f01b0afe"
 
 PV = "0.10+gitr${SRCPV}"
 S = "${WORKDIR}/git"
