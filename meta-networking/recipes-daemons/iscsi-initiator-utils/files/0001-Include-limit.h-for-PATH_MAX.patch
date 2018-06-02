@@ -1,0 +1,22 @@
+From 782730a74dd453a3c9bd2b47b79b1797586871fa Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Jun 2018 18:11:34 -0700
+Subject: [PATCH] Include limit.h for PATH_MAX
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ libopeniscsiusr/node.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libopeniscsiusr/node.c b/libopeniscsiusr/node.c
+index e82bb0d..3438a8f 100644
+--- a/libopeniscsiusr/node.c
++++ b/libopeniscsiusr/node.c
+@@ -29,6 +29,7 @@
+ #include <unistd.h>
+ #include <errno.h>
+ #include <string.h>
++#include <limits.h>
+ 
+ #include "libopeniscsiusr/libopeniscsiusr.h"
+ #include "misc.h"
