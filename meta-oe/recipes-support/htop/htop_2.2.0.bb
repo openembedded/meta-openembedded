@@ -8,8 +8,8 @@ DEPENDS = "ncurses"
 
 SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
            file://0001-Use-pkg-config.patch"
-SRC_URI[md5sum] = "f262b66ad6c194782f4d3a80627e84c8"
-SRC_URI[sha256sum] = "3260be990d26e25b6b49fc9d96dbc935ad46e61083c0b7f6df413e513bf80748"
+SRC_URI[md5sum] = "0d816b6beed31edc75babcfbf863ffa8"
+SRC_URI[sha256sum] = "d9d6826f10ce3887950d709b53ee1d8c1849a70fa38e91d5896ad8cbc6ba3c57"
 
 inherit autotools pkgconfig
 
