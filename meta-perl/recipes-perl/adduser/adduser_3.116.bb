@@ -1,6 +1,6 @@
 SUMMARY = "a utility to add users/groups to the system"
 DESCRIPTION = "adduser, addgroup - add a user or group to the system"
-HOMEPAGE = "http://alioth.debian.org/projects/adduser/"
+HOMEPAGE = "https://salsa.debian.org/debian/adduser"
 SECTION = "base/utils"
 
 LICENSE = "GPLv2"
