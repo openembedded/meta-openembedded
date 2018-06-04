@@ -1,0 +1,27 @@
+From 5e415d207465f41ae821235eb64c94916b515260 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Gon=C3=A9ri=20Le=20Bouder?= <goneri@rulezlan.org>
+Date: Fri, 1 Jun 2018 14:20:10 +0200
+Subject: [PATCH 2/7] link libmxml with pthread
+
+This patch was taken from Debian's libmxml 2.11-1 source:
+	02_link_with_pthread.diff
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index eef14fe..70c322c 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -271,7 +271,7 @@ mxml1.dll:	$(LIBOBJS)
+ 
+ libmxml.so.1.6:	$(LIBOBJS)
+ 	echo Creating $@...
+-	$(DSO) $(DSOFLAGS) -o libmxml.so.1.6 $(LIBOBJS)
++	$(DSO) $(DSOFLAGS) -o libmxml.so.1.6 $(LIBOBJS) $(LIBS)
+ 	$(RM) libmxml.so libmxml.so.1
+ 	$(LN) libmxml.so.1.6 libmxml.so
+ 	$(LN) libmxml.so.1.6 libmxml.so.1
+-- 
+2.11.0
+

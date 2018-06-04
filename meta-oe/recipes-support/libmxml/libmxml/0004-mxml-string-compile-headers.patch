@@ -1,0 +1,28 @@
+From e0c02526840d26758e4bcfd84dd5f7cda3cfbe1a Mon Sep 17 00:00:00 2001
+From: Richard Leitner <richard.leitner@skidata.com>
+Date: Fri, 1 Jun 2018 14:23:40 +0200
+Subject: [PATCH 4/7] mxml-string: compile headers
+
+This patch was taken from Debian's libmxml 2.11-1 source:
+	04_compile_headers.diff
+---
+ mxml-string.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/mxml-string.c b/mxml-string.c
+index 2495753..9bdb4c3 100644
+--- a/mxml-string.c
++++ b/mxml-string.c
+@@ -17,7 +17,8 @@
+  */
+ 
+ #include "config.h"
+-
++#include <stdlib.h>
++#include <stdarg.h>
+ 
+ /*
+  * The va_copy macro is part of C99, but many compilers don't implement it.
+-- 
+2.11.0
+

@@ -1,0 +1,27 @@
+From 249c34c57ecd9bb49f8e3b420bde651c4bcad36d Mon Sep 17 00:00:00 2001
+From: Luis Uribe <acme@eviled.org>
+Date: Fri, 1 Jun 2018 14:21:49 +0200
+Subject: [PATCH 3/7] add missing $(LDFLAGS) to Makefile
+
+This patch was taken from Debian's libmxml 2.11-1 source:
+	03_link_ldflags.diff
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 70c322c..fd48565 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -271,7 +271,7 @@ mxml1.dll:	$(LIBOBJS)
+ 
+ libmxml.so.1.6:	$(LIBOBJS)
+ 	echo Creating $@...
+-	$(DSO) $(DSOFLAGS) -o libmxml.so.1.6 $(LIBOBJS) $(LIBS)
++	$(DSO) $(DSOFLAGS) -o libmxml.so.1.6 $(LIBOBJS) $(LIBS) $(LDFLAGS)
+ 	$(RM) libmxml.so libmxml.so.1
+ 	$(LN) libmxml.so.1.6 libmxml.so
+ 	$(LN) libmxml.so.1.6 libmxml.so.1
+-- 
+2.11.0
+

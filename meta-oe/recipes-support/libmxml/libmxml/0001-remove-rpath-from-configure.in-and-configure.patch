@@ -1,0 +1,55 @@
+From bcf5391c0c7edd85ee0c956be65cf4eeeea0a82a Mon Sep 17 00:00:00 2001
+From: Fathi Boudra <fboudra@free.fr>
+Date: Fri, 1 Jun 2018 14:16:52 +0200
+Subject: [PATCH 1/7] remove rpath from configure.in and configure
+
+This patch was taken from Debian's libmxml 2.11-1 source:
+	01_remove_rpath.diff
+---
+ configure.ac | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 47a0d41..6b3bbfa 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -184,8 +184,7 @@ if test x$enable_shared != xno; then
+ 			AC_MSG_RESULT(yes)
+ 			LIBMXML="libmxml.so.1.6"
+ 			DSO="\$(CC)"
+-			DSOFLAGS="$DSOFLAGS -Wl,-h,libmxml.so.1 -G -R\$(libdir) \$(OPTIM)"
+-			LDFLAGS="$LDFLAGS -R\$(libdir)"
++			DSOFLAGS="$DSOFLAGS -Wl,-h,libmxml.so.1 -G \$(OPTIM)"
+                 	;;
+ 
+ 		hp-ux)
+@@ -200,23 +199,21 @@ if test x$enable_shared != xno; then
+ 			AC_MSG_RESULT(yes)
+ 			LIBMXML="libmxml.so.1.6"
+ 			DSO="\$(CC)"
+-			DSOFLAGS="$DSOFLAGS -Wl,-rpath,\$(libdir),-set_version,sgi1.0,-soname,libmxml.so.1 -shared \$(OPTIM)"
++			DSOFLAGS="$DSOFLAGS -Wl,-set_version,sgi1.0,-soname,libmxml.so.1 -shared \$(OPTIM)"
+ 			;;
+ 
+ 		osf | linux* | gnu)
+ 			AC_MSG_RESULT(yes)
+ 			LIBMXML="libmxml.so.1.6"
+ 			DSO="\$(CC)"
+-			DSOFLAGS="$DSOFLAGS -Wl,-soname,libmxml.so.1,-rpath,\$(libdir) -shared \$(OPTIM)"
+-                        LDFLAGS="$LDFLAGS -Wl,-rpath,\$(libdir)"
++			DSOFLAGS="$DSOFLAGS -Wl,-soname,libmxml.so.1 -shared \$(OPTIM)"
+ 			;;
+ 
+ 		*bsd)
+ 			AC_MSG_RESULT(yes)
+ 			LIBMXML="libmxml.so.1.6"
+ 			DSO="\$(CC)"
+-			DSOFLAGS="$DSOFLAGS -Wl,-soname,libmxml.so.1,-R\$(libdir) -shared \$(OPTIM)"
+-			LDFLAGS="$LDFLAGS -Wl,-R\$(libdir)"
++			DSOFLAGS="$DSOFLAGS -Wl,-soname,libmxml.so.1  -shared \$(OPTIM)"
+                         ;;
+ 
+ 		darwin)
+-- 
+2.11.0
+

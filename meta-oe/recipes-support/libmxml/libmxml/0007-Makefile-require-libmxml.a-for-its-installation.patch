@@ -1,0 +1,26 @@
+From 5d58c984e1a1173def37a99267afd78757998642 Mon Sep 17 00:00:00 2001
+From: Richard Leitner <richard.leitner@skidata.com>
+Date: Mon, 4 Jun 2018 11:23:36 +0200
+Subject: [PATCH 7/7] Makefile: require libmxml.a for its installation
+
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index fd48565..155a17a 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -162,7 +162,7 @@ install:	$(TARGETS) install-$(LIBMXML) install-libmxml.a
+ 	$(INSTALL_DIR) $(BUILDROOT)$(mandir)/man3
+ 	$(INSTALL_MAN) doc/mxml.man $(BUILDROOT)$(mandir)/man3/mxml.3
+ 
+-install-libmxml.a:
++install-libmxml.a: libmxml.a
+ 	echo Installing libmxml.a to $(BUILDROOT)$(libdir)...
+ 	$(INSTALL_DIR) $(BUILDROOT)$(libdir)
+ 	$(INSTALL_LIB) libmxml.a $(BUILDROOT)$(libdir)
+-- 
+2.11.0
+
