@@ -1,0 +1,40 @@
+From 2b137b0364c57505a95cb498660e3b97b557540d Mon Sep 17 00:00:00 2001
+From: Richard Leitner <richard.leitner@skidata.com>
+Date: Fri, 1 Jun 2018 13:24:15 +0200
+Subject: [PATCH 3/3] Set EXTENSION_SO for all linux* targets
+
+As EXTENSION_SO gets already set for linux and linux-gnu targets we
+should set it for all linux* targets. This is done by introducing a new
+"LINUX" value for the "TARGET_OS" helper variable.
+
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ configure.in | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/configure.in b/configure.in
+index 0dbdf79..3829d9f 100644
+--- a/configure.in
++++ b/configure.in
+@@ -35,7 +35,8 @@ hpux*) pam_ccreds_so_LD="/bin/ld"
+   TARGET_OS="HPUX" ;;
+ solaris*) pam_ccreds_so_LD="/usr/ccs/bin/ld"
+   pam_ccreds_so_LDFLAGS="-B dynamic -M \$(srcdir)/exports.solaris -G -B group -lc" ;;
+-linux*) pam_ccreds_so_LDFLAGS="-shared -Wl,-Bdynamic -Wl,--version-script,\$(srcdir)/exports.linux" ;;
++linux*) pam_ccreds_so_LDFLAGS="-shared -Wl,-Bdynamic -Wl,--version-script,\$(srcdir)/exports.linux"
++  TARGET_OS="LINUX" ;;
+ *) pam_ccreds_so_LDFLAGS="-shared" ;;
+ esac
+ 
+@@ -43,7 +44,7 @@ AC_SUBST(pam_ccreds_so_LD)
+ AC_SUBST(pam_ccreds_so_LDFLAGS)
+ 
+ AM_CONDITIONAL(USE_NATIVE_LINKER, test -n "$pam_ccreds_so_LD")
+-AM_CONDITIONAL(EXTENSION_SO, test "$target_os" = "linux" -o "$target_os" = "linux-gnu")
++AM_CONDITIONAL(EXTENSION_SO, test "$TARGET_OS" = "LINUX")
+ AM_CONDITIONAL(EXTENSION_1, test "$TARGET_OS" = "HPUX")
+ 
+ if test -z "$use_gcrypt"; then
+-- 
+2.11.0
+
