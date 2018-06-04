@@ -39,6 +39,7 @@ RDEPENDS_${PN}-ptest += " \
     ${PYTHON_PN}-iso8601 \
     ${PYTHON_PN}-pretend \
     ${PYTHON_PN}-pytest \
+    ${PYTHON_PN}-pytz \
 "
 
 inherit ptest
