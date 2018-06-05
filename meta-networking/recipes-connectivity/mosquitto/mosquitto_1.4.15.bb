@@ -47,6 +47,10 @@ do_install() {
     install -d ${D}${systemd_unitdir}/system/
     install -m 0644 ${WORKDIR}/mosquitto.service ${D}${systemd_unitdir}/system/
 
+    install -d ${D}${sysconfdir}/mosquitto
+    install -m 0644 ${D}${sysconfdir}/mosquitto/mosquitto.conf.example \
+                    ${D}${sysconfdir}/mosquitto/mosquitto.conf
+
     install -d ${D}${sysconfdir}/init.d/
     install -m 0755 ${WORKDIR}/mosquitto.init ${D}${sysconfdir}/init.d/mosquitto
     sed -i -e 's,@SBINDIR@,${sbindir},g' \
@@ -66,6 +70,8 @@ FILES_${PN} = "${sbindir}/mosquitto \
                ${sysconfdir}/init.d \
                ${systemd_unitdir}/system/mosquitto.service \
 "
+
+CONFFILES_${PN} += "${sysconfdir}/mosquitto/mosquitto.conf"
 
 FILES_libmosquitto1 = "${libdir}/libmosquitto.so.1"
 
