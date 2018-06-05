@@ -58,6 +58,8 @@ do_install() {
 
 PACKAGES += "libmosquitto1 libmosquittopp1 ${PN}-clients"
 
+PACKAGE_BEFORE_PN = "${PN}-examples"
+
 FILES_${PN} = "${sbindir}/mosquitto \
                ${bindir}/mosquitto_passwd \
                ${sysconfdir}/mosquitto \
@@ -72,6 +74,8 @@ FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.1"
 FILES_${PN}-clients = "${bindir}/mosquitto_pub \
                        ${bindir}/mosquitto_sub \
 "
+
+FILES_${PN}-examples = "${sysconfdir}/mosquitto/*.example"
 
 SYSTEMD_SERVICE_${PN} = "mosquitto.service"
 
