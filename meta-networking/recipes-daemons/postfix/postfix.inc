@@ -205,17 +205,13 @@ do_install () {
     chown :postdrop ${D}${sbindir}/postdrop
     chmod g+s ${D}${sbindir}/postqueue
     chmod g+s ${D}${sbindir}/postdrop
+
+    rm -rf ${D}/etc/postfix/makedefs.out
 }
 
 do_install_append_class-native() {
     ln -sf ../sbin/sendmail.postfix ${D}${bindir}/newaliases
     ln -sf ../sbin/sendmail.postfix ${D}${bindir}/mailq
-}
-
-do_install_append_class-target() {
-    # Remove references to buildmachine paths in target makedefs.out
-    sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
-    sed -i 's:-I${STAGING_DIR_TARGET}:-I:g' ${D}/etc/postfix/makedefs.out
 }
 
 ALTERNATIVE_${PN} = "sendmail"
