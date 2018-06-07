@@ -1,0 +1,45 @@
+From 53dc6e255bec2e4cd8bae85d14bec1cf28310d3f Mon Sep 17 00:00:00 2001
+From: Nobuaki Sukegawa <nsuke@apache.org>
+Date: Sun, 13 Mar 2016 08:55:38 +0900
+Subject: [PATCH] THRIFT-3736 C++ library build fails if OpenSSL does not
+ surrpot SSLv3
+
+---
+ lib/cpp/src/thrift/transport/TSSLSocket.cpp | 2 ++
+ lib/cpp/test/SecurityTest.cpp               | 8 ++++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/lib/cpp/src/thrift/transport/TSSLSocket.cpp b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
+index bd13160260..517151f714 100644
+--- a/lib/cpp/src/thrift/transport/TSSLSocket.cpp
++++ b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
+@@ -151,8 +151,10 @@ static char uppercase(char c);
+ SSLContext::SSLContext(const SSLProtocol& protocol) {
+   if (protocol == SSLTLS) {
+     ctx_ = SSL_CTX_new(SSLv23_method());
++#ifndef OPENSSL_NO_SSL3
+   } else if (protocol == SSLv3) {
+     ctx_ = SSL_CTX_new(SSLv3_method());
++#endif
+   } else if (protocol == TLSv1_0) {
+     ctx_ = SSL_CTX_new(TLSv1_method());
+   } else if (protocol == TLSv1_1) {
+diff --git a/lib/cpp/test/SecurityTest.cpp b/lib/cpp/test/SecurityTest.cpp
+index 9968e2c478..23650d6280 100644
+--- a/lib/cpp/test/SecurityTest.cpp
++++ b/lib/cpp/test/SecurityTest.cpp
+@@ -240,6 +240,14 @@ BOOST_AUTO_TEST_CASE(ssl_security_matrix)
+                     continue;
+                 }
+ 
++#ifdef OPENSSL_NO_SSL3
++                if (si == 2 || ci == 2)
++                {
++                    // Skip all SSLv3 cases - protocol not supported
++                    continue;
++                }
++#endif
++
+                 boost::mutex::scoped_lock lock(mMutex);
+ 
+                 BOOST_TEST_MESSAGE(boost::format("TEST: Server = %1%, Client = %2%")
