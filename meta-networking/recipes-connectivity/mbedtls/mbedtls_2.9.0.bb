@@ -24,8 +24,8 @@ SECTION = "libdevel"
 
 SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
 
-SRC_URI[md5sum] = "2d4b0e2cb844efde1e73d3bcd9731fef"
-SRC_URI[sha256sum] = "ab8b62b995781bcf22e87a265ed06267f87c3041198e996b44441223d19fa9c3"
+SRC_URI[md5sum] = "31dcf56cb92da5d7ec2dbb7a3cc5dff3"
+SRC_URI[sha256sum] = "a06a9b43e583b7e6707becfeeb13d88ed00f25fee31a5386cb3a3014c454bad8"
 
 inherit cmake
 
