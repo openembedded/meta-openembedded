@@ -5,8 +5,14 @@ SECTION = "libs"
 DEPENDS = "libnl"
 RDEPENDS_${PN} = "bash perl"
 
-SRC_URI = "git://github.com/linux-rdma/rdma-core.git;protocol=http"
-SRCREV ="5ce12bd51ebb0a4db35dea382b1ebdc701bab224"
+SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=stable-v18 \
+           file://0001-S_IFSOCK-is-defined-in-both-glibc-musl.patch \
+           file://0002-neigh.c-Do-not-include-net-if_packet.h.patch \
+           file://0001-include-endian.h-for-htole32-and-friends.patch \
+           file://0002-Remove-unused-include-for-execinfo.h.patch \
+           file://0001-Remove-man-files-which-cant-be-built.patch \
+           "
+SRCREV = "7844b3fbe5120623d63b29ecb43eb83a61129658"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
