@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=maste
            file://fix-cmake-install.patch \
            file://0001-Fix-a-build-problem-on-Clang.patch;patchdir=.. \
            file://0002-Define-virtual-destructor.patch;patchdir=.. \
+           file://0001-disable-more-Werror-warnings.patch;patchdir=.. \
            "
 
 # tag 2.10.2
