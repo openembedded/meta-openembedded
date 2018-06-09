@@ -9,9 +9,9 @@ DEPENDS = "ncurses lirc"
 LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
                     file://README.md;beginline=107;md5=5c927ce1742d6d5cddc45b7ad6230f75"
 
-BASEPV = "0.5.8"
+BASEPV = "0.5.9"
 PV = "${BASEPV}+git${SRCPV}"
-SRCREV = "f5156e2e41bb418f14761afea22eee8efb49fb85"
+SRCREV = "79fa538647c3e09a87ecc86aae1abbb82e0a25c5"
 SRC_URI = "git://github.com/lcdproc/lcdproc;branch=lcdproc-${BASEPV} \
            file://0001-include-asm-ioctl.h-explicitly.patch \
            "
