@@ -17,8 +17,9 @@ PV = "0.5.1.3+git${SRCPV}"
 SRCREV = "5555aae843f57241d005e330b9cb65602d56db0f"
 
 SRC_URI = "git://git.xiph.org/celt.git;branch=compat-v0.5.1;protocol=https \
-    file://0001-configure.ac-make-tools-support-optional.patch \
-"
+           file://0001-configure.ac-make-tools-support-optional.patch \
+           file://0001-tests-Include-entcode.c-into-test-sources-to-provide.patch \
+           "
 
 S = "${WORKDIR}/git"
 
