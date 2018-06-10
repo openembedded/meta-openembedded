@@ -31,9 +31,6 @@ FILES_${PN} += "${datadir}/xfce4/ \
                 ${libdir}/xfce4/exo-1 \
 "
 
-FILES_${PN}-dbg += "${libdir}/gio/modules/.debug \
-"
-
 FILES_exo-csource += "${bindir}/exo-csource"
 
 BBCLASSEXTEND = "native"

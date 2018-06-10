@@ -36,6 +36,3 @@ FILES_${PN}-gtk3 = " \
     ${libdir}/libxfce4panel-2.0${SOLIBS} \
     ${libdir}/xfce4/panel/wrapper-2.0 \
 "
-FILES_${PN}-dbg += " \
-    ${libdir}/xfce4/panel/plugins/.debug \
-"

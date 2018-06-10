@@ -34,5 +34,3 @@ FILES_${PN} += " \
     ${datadir}/appdata \
     ${libdir}/parole-0/*.so \
 "
-FILES_${PN}-dbg += "${libdir}/parole-0/.debug"
-FILES_${PN}-dev += "${libdir}/parole-0/*.la"

@@ -24,9 +24,6 @@ PACKAGES =+ "${PN}-gtk2 ${PN}-gtk3"
 FILES_${PN}-gtk2 += "${libdir}/libxfce4ui-1.so.* ${libdir}/libxfce4kbd-private-2.so.*"
 FILES_${PN}-gtk3 += "${libdir}/libxfce4ui-2.so.* ${libdir}/libxfce4kbd-private-3.so.*"
 
-FILES_${PN}-dbg += "${libdir}/glade3/modules/.debug"
-FILES_${PN}-dev += "${libdir}/glade3/modules/*.la \
-                   ${datadir}/glade3/catalogs/*.in"
 PACKAGES += "${PN}-glade"
 FILES_${PN}-glade = "${libdir}/glade3 \
                      ${datadir}/glade3"

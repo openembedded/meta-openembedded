@@ -27,6 +27,4 @@ FILES_${PN} += " \
     ${datadir}/polkit-1 \
 "
 
-FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
-
 RDEPENDS_${PN} += "machine-host"
