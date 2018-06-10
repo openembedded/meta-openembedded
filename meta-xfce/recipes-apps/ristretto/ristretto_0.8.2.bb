@@ -11,5 +11,6 @@ RRECOMMENDS_${PN} += "tumbler"
 
 SRC_URI[md5sum] = "a8d8bb6b8fa7f868cfa3ae778630946e"
 SRC_URI[sha256sum] = "f8f3b77ca6fc77ddf8cff1bb52e5c5802c462663f72f324393b3a0360f6901b8"
+SRC_URI += "file://0001-Fix-build-after-update-of-xfconf.patch"
 
 FILES_${PN} += "${datadir}/appdata"
