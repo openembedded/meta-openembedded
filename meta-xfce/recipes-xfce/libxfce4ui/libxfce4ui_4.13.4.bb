@@ -4,15 +4,15 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
 DEPENDS = "perl-native glib-2.0 gtk+ gtk+3 intltool-native libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
 
-inherit xfce autotools gettext gtk-doc distro_features_check
+inherit xfce autotools gettext gtk-doc gobject-introspection distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += " \
     file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
 "
-SRC_URI[md5sum] = "ea9fad7d059fe8f531fe8db42dabb5a9"
-SRC_URI[sha256sum] = "3d619811bfbe7478bb984c16543d980cadd08586365a7bc25e59e3ca6384ff43"
+SRC_URI[md5sum] = "b407cdab73ebd5c33c90db6bdb3ec5ff"
+SRC_URI[sha256sum] = "d63fcdb8e5acb6f0d26075ea17d320dbfbec2058567cd67cb99824c7402a1f79"
 
 EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
 
