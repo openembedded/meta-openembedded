@@ -67,4 +67,5 @@ RRECOMMENDS_${PN} = " \
     ristretto \
     xfce4-taskmanager \
     gigolo \
+    mousepad \
 "
