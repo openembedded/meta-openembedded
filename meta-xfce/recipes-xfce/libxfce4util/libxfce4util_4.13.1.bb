@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
 DEPENDS = "intltool-native xfce4-dev-tools-native glib-2.0"
 
-inherit xfce gtk-doc
+inherit xfce gtk-doc gobject-introspection
 
-SRC_URI[md5sum] = "4eb012b6c1292ceedb3a83ebfc1ff08d"
-SRC_URI[sha256sum] = "876bdefa2e13cbf68b626b2158892fb93e824e1ef59cf951123a96cefbc8881d"
+SRC_URI[md5sum] = "d1d81519accfd09b5bbdc6ec0f531366"
+SRC_URI[sha256sum] = "278013dca14bfd50c9efd3898a28e3f3c5053b506de257267947fbb852d2ed2c"
