@@ -10,8 +10,8 @@ DEPENDS = "gtk+ dbus dbus-glib gtksourceview2 intltool-native xfce4-dev-tools-na
 
 inherit xfce-app gsettings
 
-SRC_URI[md5sum] = "f55314c5dda6323883241e6cf01550a7"
-SRC_URI[sha256sum] = "60114431eac8db6bb6ce18bd38f1630cccb684375b97a445a1b6fd619848d132"
+SRC_URI[md5sum] = "fb85c23bcb096a46aee9ec22b4e4fdf5"
+SRC_URI[sha256sum] = "39a7379b929d964665299c385b2cf705e32e8760698ccc34f91c990bb733518b"
 
 # we have no gtksourceview 3.x around
 EXTRA_OECONF = "--disable-gtk3"
