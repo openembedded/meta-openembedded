@@ -15,6 +15,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI = " \
     git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.3 \
     file://0001-xsettings.xml-Set-default-themes.patch \
+    file://0002-Fix-linking-to-dbus-glib-bug-13633.patch \
 "
 SRCREV = "b701ac8b66b83c17469dd5009da51eeb59eba442"
 S = "${WORKDIR}/git"
