@@ -218,6 +218,7 @@ python samba_populate_packages() {
 }
 
 PACKAGESPLITFUNCS_prepend = "samba_populate_packages "
+PACKAGES_DYNAMIC = "samba-auth-.* samba-pdb-.*"
 
 RDEPENDS_${PN} += "${PN}-base ${PN}-python ${PN}-dsdb-modules"
 RDEPENDS_${PN}-python += "pytalloc python-tdb"
