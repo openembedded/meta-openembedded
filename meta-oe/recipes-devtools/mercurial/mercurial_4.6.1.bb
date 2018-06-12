@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "python python-modules"
 inherit python-dir
 
 SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
-SRC_URI[md5sum] = "c1d9fad1b7ed7077b0d4ae82e71154db"
-SRC_URI[sha256sum] = "234af4a67565c85923b0a1910c704ab44bcf12f69b85532687208776563d87de"
+SRC_URI[md5sum] = "f9b2e4a3b5901ef744fa3abe4196e97e"
+SRC_URI[sha256sum] = "89fa8ecbc8aa6e48e98f9803a1683ba91367124295dba2407b28c34ca621108d"
 
 S = "${WORKDIR}/mercurial-${PV}"
 
