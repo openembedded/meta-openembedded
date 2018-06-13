@@ -50,15 +50,11 @@ do_install () {
     install -p -m644 ${WORKDIR}/telnet-xinetd ${D}/etc/xinetd.d/telnet
 }
 
-pkg_postinst_${PN} () {
-#!/bin/sh
-    update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
-}
+inherit update-alternatives
 
-pkg_prerm_${PN} () {
-#!/bin/sh
-    update-alternatives --remove telnet telnet.${PN} 100
-}
+ALTERNATIVE_PRIORITY = "100"
+ALTERNATIVE_${PN} = "telnet"
+ALTERNATIVE_LINK_NAME[telnet] = "${bindir}/telnet"
 
 SRC_URI[md5sum] = "d6beabaaf53fe6e382c42ce3faa05a36"
 SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2bb88e00"
