@@ -1,0 +1,481 @@
+Index: open-vm-tools/configure.ac
+===================================================================
+--- open-vm-tools.orig/configure.ac
++++ open-vm-tools/configure.ac
+@@ -586,6 +586,11 @@ AC_ARG_WITH([xml2],
+    [enable_vgauth=no],
+    [with_xml2=yes])
+ 
++AC_ARG_WITH([tirpc],
++   [AS_HELP_STRING([--without-tirpc],
++     [compiles without tirpc support.])],
++   [with_tirpc="$withval"],
++   [with_tirpc="auto"])
+ 
+ # Make sure we are building with openssl 1.0.1 and above so that
+ # we use only TLSv1_2.
+@@ -1067,10 +1072,45 @@ if test "$enable_caf" = "yes"; then
+ 
+ fi
+ 
++have_tirpc="no"
++if test "x$with_tirpc" != "xno"; then
++    AC_VMW_CHECK_LIB([libtirpc],
++                     [TIRPC],
++                     [libtirpc],
++                     [],
++                     [],
++                     [],
++                     [],
++                     [have_tirpc="yes"],
++                     [have_tirpc="no"])
++fi
++
++if test "$with_tirpc" = "no"; then
++   use_tirpc="no"
++elif test "$with_tirpc" = "auto"; then
++   use_tirpc=$have_tirpc
++elif test "$with_tirpc" = "yes"; then
++   if test "$have_tirpc" = "no"; then
++      AC_MSG_ERROR([libtirpc is required, but not found.])
++   else
++      use_tirpc="yes"
++   fi
++fi 
++
++if test "$use_tirpc" = "yes"; then
++   AC_MSG_NOTICE([Building with libtirpc])
++else
++   AC_MSG_NOTICE([Building without libtirpc])
++fi
++
+ AC_PATH_PROG(
+    [RPCGEN],
+    [rpcgen],
+-   [ AC_MSG_ERROR([rpcgen not found. Please install the libc devel package.]) ])
++   [not_found])
++
++if test "$RPCGEN" = "not_found"; then
++   AC_MSG_ERROR([rpcgen not found. Please install libc-devel or libc-rpcgen package.])
++fi
+ 
+ ###
+ ### Headers
+@@ -1411,6 +1451,7 @@ AM_CONDITIONAL(HAVE_MKDTEMP, test "$have
+ AM_CONDITIONAL(HAVE_UDEV, test "$have_udev" = "yes")
+ AM_CONDITIONAL(ENABLE_RESOLUTIONKMS, test "x$enable_resolutionkms" = "xyes")
+ AM_CONDITIONAL(VGAUTH_USE_CXX, test "$with_icu" = "yes" -o "$use_xmlsec1" != "yes")
++AM_CONDITIONAL(HAVE_TIRPC, test "$use_tirpc" = "yes")
+ 
+ if test "$have_xsm" != "yes"; then
+ AC_DEFINE([NO_XSM], 1, [])
+@@ -1459,6 +1500,13 @@ if test "$os" = "solaris"; then
+    XDR_LIBS="-lnsl -lrpcsvc"
+ fi
+ 
++# In newer Linux distros Sun RPC has been removed from libc
++XDR_CPPFLAGS=
++if test "$os" = "linux" -a "$use_tirpc" = "yes"; then
++   XDR_CPPFLAGS="-DUSE_TIRPC $TIRPC_CPPFLAGS"
++   XDR_LIBS="$TIRPC_LIBS"
++fi
++
+ # Installation directories for core services plugins.
+ TEST_PLUGIN_INSTALLDIR=$datadir/open-vm-tools/tests
+ COMMON_PLUGIN_INSTALLDIR=$libdir/open-vm-tools/plugins/common
+@@ -1497,6 +1545,7 @@ AC_SUBST([PLUGIN_LDFLAGS])
+ AC_SUBST([VMTOOLS_CPPFLAGS])
+ AC_SUBST([VMTOOLS_LIBS])
+ AC_SUBST([RPCGENFLAGS])
++AC_SUBST([XDR_CPPFLAGS])
+ AC_SUBST([XDR_LIBS])
+ AC_SUBST([TEST_PLUGIN_INSTALLDIR])
+ AC_SUBST([COMMON_PLUGIN_INSTALLDIR])
+Index: open-vm-tools/lib/dynxdr/dynxdr.c
+===================================================================
+--- open-vm-tools.orig/lib/dynxdr/dynxdr.c
++++ open-vm-tools/lib/dynxdr/dynxdr.c
+@@ -1,5 +1,5 @@
+ /*********************************************************
+- * Copyright (C) 2008-2017 VMware, Inc. All rights reserved.
++ * Copyright (C) 2008-2018 VMware, Inc. All rights reserved.
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU Lesser General Public License as published
+@@ -55,7 +55,7 @@ typedef struct DynXdrData {
+  * Mac OS X, FreeBSD and Solaris don't take a const parameter to the
+  * "x_getpostn" function.
+  */
+-#if defined(__APPLE__) || defined(__FreeBSD__) || defined(sun)
++#if defined(__APPLE__) || defined(__FreeBSD__) || defined(sun) || defined(USE_TIRPC)
+ #  define DYNXDR_GETPOS_CONST
+ #else
+ #  define DYNXDR_GETPOS_CONST const
+@@ -172,7 +172,11 @@ DynXdrSetPos(XDR *xdrs, // IN
+ }
+ 
+ 
+-#if defined(__GLIBC__) || (defined(sun) && (defined(_LP64) || defined(_KERNEL)))
++#if !defined(USE_TIRPC) &&    \
++     defined(__GLIBC__) ||    \
++     (defined(sun) &&         \
++        (defined(_LP64) ||    \
++           defined(_KERNEL)))
+ /*
+  *-----------------------------------------------------------------------------
+  *
+@@ -322,11 +326,11 @@ DynXdr_Create(XDR *in)  // IN
+       DynXdrSetPos,     /* x_setpostn */
+       DynXdrInline,     /* x_inline */
+       NULL,             /* x_destroy */
+-#if defined(__GLIBC__)
++#if defined(__APPLE__) || defined (USE_TIRPC)
++      NULL,             /* x_control */
++#elif defined(__GLIBC__)
+       NULL,             /* x_getint32 */
+       DynXdrPutInt32,   /* x_putint32 */
+-#elif defined(__APPLE__)
+-      NULL,             /* x_control */
+ #elif defined(sun) && (defined(_LP64) || defined(_KERNEL))
+       NULL,             /* x_control */
+       NULL,             /* x_getint32 */
+Index: open-vm-tools/lib/dynxdr/Makefile.am
+===================================================================
+--- open-vm-tools.orig/lib/dynxdr/Makefile.am
++++ open-vm-tools/lib/dynxdr/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2008-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2008-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -20,4 +20,7 @@ noinst_LTLIBRARIES = libDynxdr.la
+ libDynxdr_la_SOURCES = 
+ libDynxdr_la_SOURCES += dynxdr.c
+ libDynxdr_la_SOURCES += xdrutil.c
+-libDynxdr_la_CPPFLAGS = -Wno-incompatible-pointer-types
++
++libDynxdr_la_CPPFLAGS = @XDR_CPPFLAGS@ -Wno-incompatible-pointer-types
++libDynxdr_la_LIBADD = @XDR_LIBS@
++
+Index: open-vm-tools/lib/guestRpc/Makefile.am
+===================================================================
+--- open-vm-tools.orig/lib/guestRpc/Makefile.am
++++ open-vm-tools/lib/guestRpc/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2008-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2008-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -20,6 +20,10 @@ noinst_LTLIBRARIES = libGuestRpc.la
+ libGuestRpc_la_SOURCES =
+ libGuestRpc_la_SOURCES += nicinfo_xdr.c
+ 
++libGuestRpc_la_CPPFLAGS = @XDR_CPPFLAGS@
++
++libGuestRpc_la_LIBADD = @XDR_LIBS@
++
+ # XXX: Autoreconf complains about this and recommends using AM_CFLAGS instead.
+ # Problem is, $(CFLAGS) is appended to the compiler command line after AM_CFLAGS
+ # and after libGuestRpc_la_CFLAGS, so "-Wall -Werror" will override this flag.
+Index: open-vm-tools/lib/netUtil/Makefile.am
+===================================================================
+--- open-vm-tools.orig/lib/netUtil/Makefile.am
++++ open-vm-tools/lib/netUtil/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2007-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2007-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -20,3 +20,6 @@ noinst_LTLIBRARIES = libNetUtil.la
+ libNetUtil_la_SOURCES =
+ libNetUtil_la_SOURCES += netUtilLinux.c
+ 
++libNetUtil_la_CPPFLAGS = @XDR_CPPFLAGS@
++
++libNetUtil_la_LIBADD = @XDR_LIBS@
+Index: open-vm-tools/lib/nicInfo/Makefile.am
+===================================================================
+--- open-vm-tools.orig/lib/nicInfo/Makefile.am
++++ open-vm-tools/lib/nicInfo/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2014-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2014-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -25,6 +25,9 @@ libNicInfo_la_SOURCES += nicInfoPosix.c
+ 
+ libNicInfo_la_CPPFLAGS =
+ libNicInfo_la_CPPFLAGS += @GLIB2_CPPFLAGS@
++libNicInfo_la_CPPFLAGS += @XDR_CPPFLAGS@
++
++libNicInfo_la_LIBADD = @XDR_LIBS@
+ 
+ AM_CFLAGS = $(DNET_CPPFLAGS)
+ if USE_SLASH_PROC
+Index: open-vm-tools/lib/rpcChannel/Makefile.am
+===================================================================
+--- open-vm-tools.orig/lib/rpcChannel/Makefile.am
++++ open-vm-tools/lib/rpcChannel/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2009-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2009-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -27,3 +27,6 @@ endif
+ 
+ libRpcChannel_la_CPPFLAGS =
+ libRpcChannel_la_CPPFLAGS += @VMTOOLS_CPPFLAGS@
++libRpcChannel_la_CPPFLAGS += @XDR_CPPFLAGS@
++
++libRpcChannel_la_LIBADD = @XDR_LIBS@
+Index: open-vm-tools/lib/slashProc/net.c
+===================================================================
+--- open-vm-tools.orig/lib/slashProc/net.c
++++ open-vm-tools/lib/slashProc/net.c
+@@ -1,5 +1,5 @@
+ /*********************************************************
+- * Copyright (C) 2009-2016 VMware, Inc. All rights reserved.
++ * Copyright (C) 2009-2018 VMware, Inc. All rights reserved.
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU Lesser General Public License as published
+@@ -36,7 +36,6 @@
+ #include "panic.h"
+ #include "slashProc.h"
+ #include "slashProcNetInt.h"
+-#include "netutil.h"
+ 
+ 
+ /*
+Index: open-vm-tools/libguestlib/Makefile.am
+===================================================================
+--- open-vm-tools.orig/libguestlib/Makefile.am
++++ open-vm-tools/libguestlib/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2007-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2007-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -22,6 +22,7 @@ AM_CFLAGS += -I$(top_srcdir)/include
+ 
+ libguestlib_la_LIBADD =
+ libguestlib_la_LIBADD += @VMTOOLS_LIBS@
++libguestlib_la_LIBADD += @XDR_LIBS@
+ 
+ libguestlib_la_SOURCES =
+ libguestlib_la_SOURCES += guestlibV3_xdr.c
+@@ -56,6 +57,7 @@ CFLAGS += -Wno-unused
+ libguestlib_la_CPPFLAGS =
+ libguestlib_la_CPPFLAGS += -DVMTOOLS_USE_GLIB
+ libguestlib_la_CPPFLAGS += @GLIB2_CPPFLAGS@
++libguestlib_la_CPPFLAGS += @XDR_CPPFLAGS@
+ 
+ EXTRA_DIST = vmguestlib.pc.in
+ 
+Index: open-vm-tools/services/plugins/dndcp/Makefile.am
+===================================================================
+--- open-vm-tools.orig/services/plugins/dndcp/Makefile.am
++++ open-vm-tools/services/plugins/dndcp/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2009-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2009-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -28,6 +28,7 @@ libdndcp_la_CPPFLAGS += -I$(top_srcdir)/
+ libdndcp_la_CPPFLAGS += -I$(top_srcdir)/services/plugins/dndcp/stringxx
+ libdndcp_la_CPPFLAGS += -I$(top_srcdir)/services/plugins/dndcp/xutils
+ libdndcp_la_CPPFLAGS += -I$(top_srcdir)/include
++libdndcp_la_CPPFLAGS += @XDR_CPPFLAGS@
+ 
+ # Passing C++ related flags to CPPFLAGS generates error.
+ # So, we need to pass these to C++ compilation only.
+@@ -45,6 +46,7 @@ libdndcp_la_LIBADD += @GTKMM_LIBS@
+ libdndcp_la_LIBADD += @VMTOOLS_LIBS@
+ libdndcp_la_LIBADD += @HGFS_LIBS@
+ libdndcp_la_LIBADD += $(top_builddir)/lib/hgfsUri/hgfsUriPosix.lo
++libdndcp_la_LIBADD += @XDR_LIBS@
+ 
+ libdndcp_la_SOURCES =
+ 
+Index: open-vm-tools/services/plugins/guestInfo/Makefile.am
+===================================================================
+--- open-vm-tools.orig/services/plugins/guestInfo/Makefile.am
++++ open-vm-tools/services/plugins/guestInfo/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2009-2017 VMware, Inc.  All rights reserved.
++### Copyright (C) 2009-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -22,6 +22,7 @@ plugin_LTLIBRARIES = libguestInfo.la
+ 
+ libguestInfo_la_CPPFLAGS =
+ libguestInfo_la_CPPFLAGS += @PLUGIN_CPPFLAGS@
++libguestInfo_la_CPPFLAGS += @XDR_CPPFLAGS@
+ 
+ libguestInfo_la_LDFLAGS =
+ libguestInfo_la_LDFLAGS += @PLUGIN_LDFLAGS@
+Index: open-vm-tools/services/plugins/resolutionKMS/resolutionKMS.c
+===================================================================
+--- open-vm-tools.orig/services/plugins/resolutionKMS/resolutionKMS.c
++++ open-vm-tools/services/plugins/resolutionKMS/resolutionKMS.c
+@@ -1,5 +1,5 @@
+ /*********************************************************
+- * Copyright (C) 2008-2017 VMware, Inc. All rights reserved.
++ * Copyright (C) 2008-2018 VMware, Inc. All rights reserved.
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU Lesser General Public License as published
+@@ -29,16 +29,13 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ 
++#include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+ #include "vmware.h"
+-#include "debug.h"
+-#include "rpcout.h"
+-#include "str.h"
+ #include "strutil.h"
+ 
+-#include "xdrutil.h"
+ #include "vmware/guestrpc/tclodefs.h"
+ #include "vmware/tools/plugin.h"
+ #include "vmware/tools/utils.h"
+Index: open-vm-tools/services/plugins/resolutionSet/resolutionSet.c
+===================================================================
+--- open-vm-tools.orig/services/plugins/resolutionSet/resolutionSet.c
++++ open-vm-tools/services/plugins/resolutionSet/resolutionSet.c
+@@ -1,5 +1,5 @@
+ /*********************************************************
+- * Copyright (C) 2008-2017 VMware, Inc. All rights reserved.
++ * Copyright (C) 2008-2018 VMware, Inc. All rights reserved.
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms of the GNU Lesser General Public License as published
+@@ -34,7 +34,6 @@
+ 
+ #include "resolutionInt.h"
+ 
+-#include "xdrutil.h"
+ #include "vmware/guestrpc/tclodefs.h"
+ #include "vmware/tools/plugin.h"
+ #include "vmware/tools/utils.h"
+Index: open-vm-tools/services/plugins/vix/Makefile.am
+===================================================================
+--- open-vm-tools.orig/services/plugins/vix/Makefile.am
++++ open-vm-tools/services/plugins/vix/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2009-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2009-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -20,6 +20,7 @@ plugin_LTLIBRARIES = libvix.la
+ 
+ libvix_la_CPPFLAGS =
+ libvix_la_CPPFLAGS += @PLUGIN_CPPFLAGS@
++libvix_la_CPPFLAGS += @XDR_CPPFLAGS@
+ libvix_la_CPPFLAGS += -I$(top_srcdir)/vgauth/public
+ 
+ libvix_la_LDFLAGS =
+@@ -32,6 +33,7 @@ libvix_la_LIBADD += @HGFS_LIBS@
+ libvix_la_LIBADD += $(top_builddir)/lib/auth/libAuth.la
+ libvix_la_LIBADD += $(top_builddir)/lib/foundryMsg/libFoundryMsg.la
+ libvix_la_LIBADD += $(top_builddir)/lib/impersonate/libImpersonate.la
++libvix_la_LIBADD += @XDR_LIBS@
+ if ENABLE_VGAUTH
+    libvix_la_LIBADD += $(top_builddir)/vgauth/lib/libvgauth.la
+ endif
+Index: open-vm-tools/services/plugins/vix/vixTools.c
+===================================================================
+--- open-vm-tools.orig/services/plugins/vix/vixTools.c
++++ open-vm-tools/services/plugins/vix/vixTools.c
+@@ -91,7 +91,6 @@
+ #include "str.h"
+ #include "file.h"
+ #include "err.h"
+-#include "guestInfo.h"  // MAX_VALUE_LEN
+ #include "hostinfo.h"
+ #include "guest_os.h"
+ #include "guest_msg_def.h"
+Index: open-vm-tools/services/plugins/vmbackup/Makefile.am
+===================================================================
+--- open-vm-tools.orig/services/plugins/vmbackup/Makefile.am
++++ open-vm-tools/services/plugins/vmbackup/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2009-2017 VMware, Inc.  All rights reserved.
++### Copyright (C) 2009-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -20,6 +20,7 @@ plugin_LTLIBRARIES = libvmbackup.la
+ 
+ libvmbackup_la_CPPFLAGS =
+ libvmbackup_la_CPPFLAGS += @PLUGIN_CPPFLAGS@
++libvmbackup_la_CPPFLAGS += @XDR_CPPFLAGS@
+ 
+ libvmbackup_la_LDFLAGS =
+ libvmbackup_la_LDFLAGS += @PLUGIN_LDFLAGS@
+@@ -27,6 +28,7 @@ libvmbackup_la_LDFLAGS += @PLUGIN_LDFLAG
+ libvmbackup_la_LIBADD =
+ libvmbackup_la_LIBADD += @GOBJECT_LIBS@
+ libvmbackup_la_LIBADD += @VMTOOLS_LIBS@
++libvmbackup_la_LIBADD += @XDR_LIBS@
+ 
+ libvmbackup_la_SOURCES =
+ libvmbackup_la_SOURCES += nullProvider.c
+Index: open-vm-tools/services/plugins/vmbackup/stateMachine.c
+===================================================================
+--- open-vm-tools.orig/services/plugins/vmbackup/stateMachine.c
++++ open-vm-tools/services/plugins/vmbackup/stateMachine.c
+@@ -35,7 +35,6 @@
+ 
+ #include "vmBackupInt.h"
+ 
+-#include "dynxdr.h"
+ #include <glib-object.h>
+ #include <gmodule.h>
+ #include "guestApp.h"
+Index: open-vm-tools/toolbox/Makefile.am
+===================================================================
+--- open-vm-tools.orig/toolbox/Makefile.am
++++ open-vm-tools/toolbox/Makefile.am
+@@ -1,5 +1,5 @@
+ ################################################################################
+-### Copyright (C) 2007-2016 VMware, Inc.  All rights reserved.
++### Copyright (C) 2007-2018 VMware, Inc.  All rights reserved.
+ ###
+ ### This program is free software; you can redistribute it and/or modify
+ ### it under the terms of version 2 of the GNU General Public License as
+@@ -20,9 +20,11 @@ bin_PROGRAMS = vmware-toolbox-cmd
+ vmware_toolbox_cmd_LDADD =
+ vmware_toolbox_cmd_LDADD += ../libguestlib/libguestlib.la
+ vmware_toolbox_cmd_LDADD += @VMTOOLS_LIBS@
++vmware_toolbox_cmd_LDADD += @XDR_LIBS@
+ 
+ vmware_toolbox_cmd_CPPFLAGS =
+ vmware_toolbox_cmd_CPPFLAGS += @VMTOOLS_CPPFLAGS@
++vmware_toolbox_cmd_CPPFLAGS += @XDR_CPPFLAGS@
+ 
+ vmware_toolbox_cmd_SOURCES =
+ vmware_toolbox_cmd_SOURCES += toolbox-cmd.c
