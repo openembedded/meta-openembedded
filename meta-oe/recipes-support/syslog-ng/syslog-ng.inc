@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
 
 # util-linux added to get libuuid
-DEPENDS = "libpcre flex eventlog glib-2.0 openssl util-linux"
+DEPENDS = "libpcre flex glib-2.0 openssl util-linux"
 
 SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
            file://syslog-ng.conf \
@@ -69,12 +69,6 @@ do_configure_prepend() {
 	cd $olddir
 }
 
-do_install_prepend() {
-    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
-}
-
 do_install_append() {
     install -d ${D}/${sysconfdir}/${BPN}
     install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
@@ -85,6 +79,17 @@ do_install_append() {
     install -d ${D}/${localstatedir}/lib/${BPN}
     # Remove /var/run as it is created on startup
     rm -rf ${D}${localstatedir}/run
+
+    # support for systemd
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d ${D}${systemd_unitdir}/system/
+        install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
+        install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${systemd_unitdir}/system/${BPN}@default
+
+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
+        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
+        sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@default
+    fi
 }
 
 FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
@@ -110,7 +115,7 @@ RCONFLICTS_${PN} = "busybox-syslog sysklogd rsyslog"
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+SYSTEMD_SERVICE_${PN} = "${BPN}@default ${BPN}@.service"
 
 INITSCRIPT_NAME = "syslog"
 INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."
