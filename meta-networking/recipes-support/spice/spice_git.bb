@@ -23,6 +23,7 @@ SRCREV_FORMAT = "spice_spice-common"
 SRC_URI = " \
     git://anongit.freedesktop.org/spice/spice;name=spice \
     git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common \
+    file://0001-Convert-pthread_t-to-be-numeric.patch \
 "
 FOO = "\
     file://0001-build-allow-separated-src-and-build-dirs.patch \
