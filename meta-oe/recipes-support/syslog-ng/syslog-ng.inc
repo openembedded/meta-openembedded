@@ -93,10 +93,19 @@ do_install_append() {
 }
 
 FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
-RDEPENDS_${PN} += "gawk"
+RDEPENDS_${PN} += "gawk ${@bb.utils.contains('PACKAGECONFIG','json','${PN}-jconf','',d)}"
+
+FILES_${PN}-jconf += " \
+${datadir}/${BPN}/include/scl/cim \
+${datadir}/${BPN}/include/scl/elasticsearch \
+${datadir}/${BPN}/include/scl/ewmm \
+${datadir}/${BPN}/include/scl/graylog2 \
+${datadir}/${BPN}/include/scl/loggly \
+${datadir}/${BPN}/include/scl/logmatic \
+"
 
 # This overcomes the syslog-ng rdepends on syslog-ng-dev QA Error
-PACKAGES =+ "${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
+PACKAGES =+ "${PN}-jconf ${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
 FILES_${PN}-libs = "${libdir}/${BPN}/*.so ${libdir}/libsyslog-ng-*.so*"
 FILES_${PN}-libs-dev = "${libdir}/${BPN}/lib*.la"
 FILES_${PN}-libs-dbg = "${libdir}/${BPN}/.debug"
