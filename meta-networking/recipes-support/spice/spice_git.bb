@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 PV = "0.14.0+git${SRCPV}"
 
-SRCREV_spice = "33d9c38554b41dab1390914ef79594b57218b06b"
-SRCREV_spice-common = "4c2d0e977272c5540634d24f485dd64c424f6748"
+SRCREV_spice = "f1050bfc76c9c4146257e087baf74e0b62d7d218"
+SRCREV_spice-common = "95743f40a2da39e0a19859c305e69e2c99d39e42"
 
 SRCREV_FORMAT = "spice_spice-common"
 
@@ -48,6 +48,7 @@ PACKAGECONFIG[smartcard] = "--enable-smartcard,--disable-smartcard,libcacard,"
 PACKAGECONFIG[sasl] = "--with-sasl,--without-sasl,cyrus-sasl,"
 PACKAGECONFIG[client] = "--enable-client,--disable-client,,"
 PACKAGECONFIG[gui] = "--enable-gui,--disable-gui,,"
+PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus,"
 PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,,"
 PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
 
