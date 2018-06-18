@@ -11,3 +11,4 @@ FILES_${PN} += "${datadir}/xfce4/panel/plugins/"
 FILES_${PN} += "${libdir}/xfce4/panel-plugins/*.so"
 FILES_${PN} += "${libdir}/xfce4/panel/plugins/*.so"
 
+FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.la"

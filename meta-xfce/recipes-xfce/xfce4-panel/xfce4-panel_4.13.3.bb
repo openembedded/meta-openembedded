@@ -32,6 +32,8 @@ PACKAGES =+ "${PN}-gtk3"
 FILES_${PN} += "${libdir}/xfce4/panel/migrate \
                 ${libdir}/xfce4/panel/wrapper-1.0"
 
+FILES_${PN}-dev += "${libdir}/xfce4/panel/plugins/*.la"
+
 FILES_${PN}-gtk3 = " \
     ${libdir}/libxfce4panel-2.0${SOLIBS} \
     ${libdir}/xfce4/panel/wrapper-2.0 \

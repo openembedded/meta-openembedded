@@ -27,4 +27,8 @@ FILES_${PN} += " \
     ${datadir}/polkit-1 \
 "
 
+FILES_${PN} += " \
+    ${libdir}/xfce4/session/splash-engines/*.la \
+"
+
 RDEPENDS_${PN} += "machine-host"
