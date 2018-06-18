@@ -11,7 +11,7 @@ DEPENDS = "openssl flex-native bison-native open-isns util-linux"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
-SRCREV ?= "0cfebb10d29382ac1058c950a60a946c28b01e53"
+SRCREV ?= "bd79e4ed1004a6035d2538a308c5930890421a22"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi \
            file://initd.debian \
@@ -20,8 +20,6 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
            file://iscsi-initiator.service \
            file://iscsi-initiator-targets.service \
            file://set_initiatorname \
-           file://0001-Include-limit.h-for-PATH_MAX.patch \
-           file://0002-libopeniscsiusr-iface-Set-strncpy-bounds-to-not-over.patch \
            "
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
