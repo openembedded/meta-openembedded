@@ -21,7 +21,7 @@ FILES_${PN} += " \
     ${libdir}/thunarx-3/* \
     ${libdir}/xfce4/panel/plugins/* \
     ${libdir}/Thunar/[Tt]hunar* \
-    ${libdir}/systemd \
+    ${systemd_user_unitdir} \
     ${datadir}/dbus-1 \
     ${datadir}/metainfo \
     ${datadir}/polkit-1 \
