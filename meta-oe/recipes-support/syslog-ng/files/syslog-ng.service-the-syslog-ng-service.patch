@@ -32,10 +32,11 @@ index 02da288..3a8215d 100644
 --- a/contrib/systemd/syslog-ng@default
 +++ b/contrib/systemd/syslog-ng@default
 @@ -1,5 +1,5 @@
- CONFIG_FILE=/etc/syslog-ng.conf
+-CONFIG_FILE=/etc/syslog-ng.conf
 -PERSIST_FILE=/var/lib/syslog-ng/syslog-ng.persist
 -CONTROL_FILE=/var/lib/syslog-ng/syslog-ng.ctl
 -PID_FILE=/var/run/syslog-ng.pid
++CONFIG_FILE=/etc/syslog-ng/syslog-ng.conf
 +PERSIST_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.persist
 +CONTROL_FILE=@LOCALSTATEDIR@/lib/syslog-ng/syslog-ng.ctl
 +PID_FILE=@LOCALSTATEDIR@/run/syslog-ng.pid
