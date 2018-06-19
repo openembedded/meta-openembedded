@@ -2,7 +2,7 @@ SUMMARY = "Hardware performance monitoring counters"
 HOMEPAGE = "http://tiptop.gforge.inria.fr/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "ncurses libxml2"
+DEPENDS = "ncurses libxml2 bison-native flex-native"
 
 SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
 SRC_URI[md5sum] = "46ca0fdf0236f02dd2b96d347626d2a2"
