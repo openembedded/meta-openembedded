@@ -7,7 +7,6 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
            file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch \
            file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
            file://0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch;patchdir=../../ \
-           file://0003-Add-AArch64-support.patch;patchdir=../../ \
            file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
            file://0005-aarch64-64k-page.patch;patchdir=../../ \
            file://0001-regenerate-configure.patch;patchdir=../../ \
@@ -16,6 +15,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
            file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
            file://Manually_mmap_heap_memory_esr17.patch;patchdir=../../ \
            file://0001-compare-the-first-character-of-string-to-be-null-or-.patch;patchdir=../../ \
+           file://Update-the-double-conversion-update-script.patch;patchdir=../../ \
+           file://Update-Double-Conversion.patch;patchdir=../../ \
            "
 
 SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
