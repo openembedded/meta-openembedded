@@ -11,9 +11,9 @@ LICENSE_${PN}-spy-dev = "GPLv3+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
 DEPENDS = "udev"
 
-SRC_URI = "https://alioth.debian.org/frs/download.php/file/4126/pcsc-lite-${PV}.tar.bz2"
-SRC_URI[md5sum] = "4dcd22d20a6df8810fac5480cc320b6d"
-SRC_URI[sha256sum] = "f315047e808d63a3262c4a040f77548af2e04d1fd707e0c2759369b926fbbc3b"
+SRC_URI = "https://salsa.debian.org/rousseau/PCSC/-/archive/pcsc-${PV}/PCSC-pcsc-${PV}.tar.bz2"
+SRC_URI[md5sum] = "6a4d3b0a74aa67f24dc5a9e10e6deb9f"
+SRC_URI[sha256sum] = "a0fb25747f6ad5448255da0578bb12236facc43acb8e0b5e378e20a731df37db"
 
 
 inherit autotools systemd pkgconfig
