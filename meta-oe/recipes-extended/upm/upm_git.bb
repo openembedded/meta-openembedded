@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=66493d54e65bfc12c7983ff2e884f37f"
 
 DEPENDS = "libjpeg-turbo mraa"
 
-SRCREV = "37642f3b0194f6ddd63f1e6b5d49b8cb689d5c81"
+SRCREV = "dc45cd78595c7c24c8a8574c63bb48b5bb99c5aa"
 PV = "1.6.0-git${SRCPV}"
 
-SRC_URI = " \
-    git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
-    file://0001-Replace-strncpy-with-memcpy.patch \
-"
+SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
+           file://0001-Replace-strncpy-with-memcpy.patch \
+           file://0001-include-sys-types.h-for-uint-definition.patch \
+           "
 
 S = "${WORKDIR}/git"
 
@@ -21,7 +21,6 @@ S = "${WORKDIR}/git"
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
 
 inherit distutils3-base cmake
-
 
 # override this in local.conf to get needed bindings.
 # BINDINGS_pn-upm="python"
