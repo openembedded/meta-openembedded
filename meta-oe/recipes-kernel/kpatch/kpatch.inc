@@ -38,6 +38,7 @@ FILES_${PN} = " \
 	${sbindir}/kpatch \
 	${systemd_system_unitdir}/kpatch.service \
 	${mandir}/man1/kpatch.1.gz \
+	${sysconfdir}/init/kpatch.conf \
 	"
 FILES_kpatch-build = " \
 	${bindir}/kpatch-build \
