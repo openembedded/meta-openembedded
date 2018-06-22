@@ -19,6 +19,12 @@ SRC_URI = " \
     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
     file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
     file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
+    file://0001-include-stddef.h-for-ptrdiff_t.patch \
+    file://0002-Mark-glibc-specific-code-so.patch \
+    file://0003-alloc.c-Avoid-sysconf-_SC_LEVEL2_CACHE_LINESIZE-on-l.patch \
+    file://0004-shm.c-Mark-glibc-specific-changes-so.patch \
+    file://0005-Include-dirent.h-for-ino_t.patch \
+    file://0006-include-limits.h-for-PATH_MAX.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"

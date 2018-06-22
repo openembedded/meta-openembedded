@@ -1,0 +1,39 @@
+From b72bf6a81fa879f32a074fe53776fc8291c83b6f Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 21 Jun 2018 19:32:59 -0700
+Subject: [PATCH 2/6] Mark glibc specific code so
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ morecore.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/morecore.c b/morecore.c
+index c5981d2..ec9fafa 100644
+--- a/morecore.c
++++ b/morecore.c
+@@ -347,6 +347,7 @@ void hugetlbfs_setup_morecore(void)
+ 
+ 	INFO("setup_morecore(): heapaddr = 0x%lx\n", heapaddr);
+ 
++#ifdef __GLIBC__
+ 	heaptop = heapbase = (void *)heapaddr;
+ 	if (__hugetlb_opts.thp_morecore)
+ 		__morecore = &thp_morecore;
+@@ -354,7 +355,6 @@ void hugetlbfs_setup_morecore(void)
+ 		__morecore = &hugetlbfs_morecore;
+ 
+ 	/* Set some allocator options more appropriate for hugepages */
+-
+ 	if (__hugetlb_opts.shrink_ok)
+ 		mallopt(M_TRIM_THRESHOLD, hpage_size / 2);
+ 	else
+@@ -364,4 +364,5 @@ void hugetlbfs_setup_morecore(void)
+ 	 * This doesn't appear to prohibit malloc() from falling back
+ 	 * to mmap() if we run out of hugepages. */
+ 	mallopt(M_MMAP_MAX, 0);
++#endif
+ }
+-- 
+2.17.1
+
