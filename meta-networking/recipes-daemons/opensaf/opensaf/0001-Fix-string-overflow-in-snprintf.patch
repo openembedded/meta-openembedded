@@ -1,4 +1,4 @@
-From 8cf323a2d8e02ca0bd36deb38e613c6edac546ad Mon Sep 17 00:00:00 2001
+From ae7178a78aba2e5766b70191617113487fd7ad0b Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 16 Apr 2018 18:29:17 -0700
 Subject: [PATCH] Fix string overflow in snprintf
@@ -13,6 +13,7 @@ t-truncation=]
             ~~~~~~~~
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  src/log/logd/lgs_util.cc           | 4 ++--
  src/rde/rded/rde_amf.cc            | 2 +-

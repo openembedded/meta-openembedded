@@ -27,9 +27,10 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-Catch-std-ifstream-failure-by-reference.patch \
            file://0002-Fix-format-truncation-errors.patch \
            file://0001-Fix-string-overflow-in-snprintf.patch \
+           file://0008-check-for-size-before-using-strncpy.patch \
            "
-SRC_URI[md5sum] = "42064f5ddbc7f560bfc5ff93ea9eecc7"
-SRC_URI[sha256sum] = "f9e24897f9cfd63bb3115f6275c706de1702d3d9bae2fc423227db72b23c37f0"
+SRC_URI[md5sum] = "21836e43b13ad33bed9bd0ed391e5a6e"
+SRC_URI[sha256sum] = "e55dc2645487fb22938e8386b99eef6eb7aff43a246ce3e92488daf6ee46247a"
 
 inherit autotools useradd systemd pkgconfig
 

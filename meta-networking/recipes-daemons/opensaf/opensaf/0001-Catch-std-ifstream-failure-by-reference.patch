@@ -1,7 +1,7 @@
-From 77d50b8d92ef1903cbc50d8f39e05fc828696bb9 Mon Sep 17 00:00:00 2001
+From 38c5343f84799fc5041575f3ec808f7476b6eea3 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 16 Apr 2018 14:33:35 -0700
-Subject: [PATCH 1/2] Catch std::ifstream::failure by reference
+Subject: [PATCH] Catch std::ifstream::failure by reference
 
 Fixes
 error: catching polymorphic type 'class std::ios_base::failure' by value
@@ -10,6 +10,7 @@ error: catching polymorphic type 'class std::ios_base::failure' by value
                            ^~~~~~~
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  src/base/conf.cc           | 4 ++--
  src/dtm/dtmnd/dtm_main.cc  | 2 +-
@@ -39,10 +40,10 @@ index d5755a1..4820357 100644
    }
    str.close();
 diff --git a/src/dtm/dtmnd/dtm_main.cc b/src/dtm/dtmnd/dtm_main.cc
-index 3260a81..a55afac 100644
+index 585e11e..5cf6ad7 100644
 --- a/src/dtm/dtmnd/dtm_main.cc
 +++ b/src/dtm/dtmnd/dtm_main.cc
-@@ -359,7 +359,7 @@ void UpdateNodeIdFile(DTM_INTERNODE_CB *cb) {
+@@ -367,7 +367,7 @@ void UpdateNodeIdFile(DTM_INTERNODE_CB *cb) {
        try {
          str.open(PKGLOCALSTATEDIR "/node_id", std::ofstream::out);
          str << std::hex << node_id << std::endl;
@@ -52,10 +53,10 @@ index 3260a81..a55afac 100644
        str.close();
      }
 diff --git a/src/dtm/dtmnd/multicast.cc b/src/dtm/dtmnd/multicast.cc
-index bf67b9c..7232066 100644
+index cadc002..7c25fea 100644
 --- a/src/dtm/dtmnd/multicast.cc
 +++ b/src/dtm/dtmnd/multicast.cc
-@@ -198,7 +198,7 @@ bool Multicast::GetPeersFromFile(const std::string &path_name) {
+@@ -199,7 +199,7 @@ bool Multicast::GetPeersFromFile(const std::string &path_name) {
          }
        }
      }
@@ -64,6 +65,3 @@ index bf67b9c..7232066 100644
      LOG_ER("Caught std::ifstream::failure when reading file '%s', peers=%zu",
             path_name.c_str(), static_cast<size_t>(peers_.size()));
      peers_.clear();
--- 
-2.17.0
-

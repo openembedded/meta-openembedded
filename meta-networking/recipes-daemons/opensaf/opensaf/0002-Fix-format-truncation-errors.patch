@@ -1,12 +1,13 @@
-From 4d58d26cbd3622183afc2e8f85c9c81edaf135df Mon Sep 17 00:00:00 2001
+From c5034fe42df8923bcefc10e163151997d70b6241 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 16 Apr 2018 14:56:47 -0700
-Subject: [PATCH 2/2] Fix format-truncation errors
+Subject: [PATCH] Fix format-truncation errors
 
 Fixes errors with gcc8 eg.
 error: '%u' directive output may be truncated writing between 1 and 10 bytes into a region of size between 0 and 254 [-Werror=format-truncation=]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  src/base/daemon.c  | 4 ++--
  src/mds/mds_c_db.c | 8 ++++----
@@ -15,10 +16,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  4 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/src/base/daemon.c b/src/base/daemon.c
-index 27170d7..da97700 100644
+index 361dd8d..4001b73 100644
 --- a/src/base/daemon.c
 +++ b/src/base/daemon.c
-@@ -92,11 +92,11 @@ static int __create_pidfile(const char *pidfile)
+@@ -95,11 +95,11 @@ static int __create_pidfile(const char *pidfile)
  {
  	FILE *file = NULL;
  	int fd, rc = 0;
@@ -97,6 +98,3 @@ index 012999c..006b722 100644
    MDS_SEND_PRIORITY_TYPE pri;
    MDS_CLIENT_MSG_FORMAT_VER
        msg_fmt_ver; /* message format version specification */
--- 
-2.17.0
-
