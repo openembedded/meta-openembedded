@@ -23,6 +23,11 @@ SRCREV = "c0d4b2fc0fcd6f2d3c37da935923f9e9ed5eb99f"
 
 EXTRA_OECONF += "--disable-xinerama"
 
+PACKAGECONFIG ?= ""
+
+# enable as neccessary until new warnings are dealt with
+PACKAGECONFIG[werror] = "--enable-Werror,--disable-Werror,,"
+
 do_configure_prepend() {
     cd ${S}
     aclocal --install || exit 1
