@@ -4,12 +4,12 @@ HOMEPAGE = "https://github.com/civetweb/civetweb"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=6f28fdcba0dda735eed62bac6a397562"
 
-SRCREV = "b8148afe8fa44c64f75e69655c4fdc9095565568"
+SRCREV = "19f31ba8dd8443e86c7028a4b4c37f4b299aa68c"
 PV = "1.10+git${SRCPV}"
-SRC_URI = "git://github.com/civetweb/civetweb.git"
-SRC_URI_append_class-native = " \
-    file://0001-Test-Fix-missing-librt-and-libm-during-native-compil.patch \
-"
+SRC_URI = "git://github.com/civetweb/civetweb.git \
+           file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
+          "
+
 S = "${WORKDIR}/git"
 
 # civetweb supports building with make or cmake (although cmake lacks few features)
