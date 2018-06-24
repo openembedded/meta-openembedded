@@ -5,8 +5,10 @@ OpenSSL 1.0.x and 1.1.x.
 
 Author: Sharmila Podury <sharmila.podury@brocade.com>
 
---- a/apps/snmpusm.c
-+++ b/apps/snmpusm.c
+Index: net-snmp-5.7.3/apps/snmpusm.c
+===================================================================
+--- net-snmp-5.7.3.orig/apps/snmpusm.c
++++ net-snmp-5.7.3/apps/snmpusm.c
 @@ -125,6 +125,32 @@ char           *usmUserPublic_val = NULL
  int             docreateandwait = 0;
  
@@ -85,10 +87,12 @@ Author: Sharmila Podury <sharmila.podury@brocade.com>
  
      key_len = DH_size(dh);
      if (!key_len) {
---- a/configure.d/config_os_libs2
-+++ b/configure.d/config_os_libs2
-@@ -327,10 +327,16 @@ if test "x$tryopenssl" != "xno" -a "x$tr
-              [[#include <openssl/evp.h>]])
+Index: net-snmp-5.7.3/configure.d/config_os_libs2
+===================================================================
+--- net-snmp-5.7.3.orig/configure.d/config_os_libs2
++++ net-snmp-5.7.3/configure.d/config_os_libs2
+@@ -293,10 +293,16 @@ if test "x$tryopenssl" != "xno" -a "x$tr
+                     [Define to 1 if you have the `AES_cfb128_encrypt' function.]))
  
              AC_CHECK_LIB(${CRYPTO}, EVP_MD_CTX_create,
 -                AC_DEFINE([HAVE_EVP_MD_CTX_CREATE], [],
@@ -106,9 +110,11 @@ Author: Sharmila Podury <sharmila.podury@brocade.com>
          fi
          if echo " $transport_result_list " | $GREP "DTLS" > /dev/null; then
  	    AC_CHECK_LIB(ssl, DTLSv1_method,
---- a/include/net-snmp/net-snmp-config.h.in
-+++ b/include/net-snmp/net-snmp-config.h.in
-@@ -164,6 +164,12 @@
+Index: net-snmp-5.7.3/include/net-snmp/net-snmp-config.h.in
+===================================================================
+--- net-snmp-5.7.3.orig/include/net-snmp/net-snmp-config.h.in
++++ net-snmp-5.7.3/include/net-snmp/net-snmp-config.h.in
+@@ -155,6 +155,12 @@
  /* Define to 1 if you have the `EVP_MD_CTX_destroy' function. */
  #undef HAVE_EVP_MD_CTX_DESTROY
  
@@ -121,11 +127,13 @@ Author: Sharmila Podury <sharmila.podury@brocade.com>
  /* Define if you have EVP_sha224/256 in openssl */
  #undef HAVE_EVP_SHA224
  
---- a/snmplib/keytools.c
-+++ b/snmplib/keytools.c
-@@ -176,7 +176,9 @@ generate_Ku(const oid * hashtype, u_int
-         QUITFUN(SNMPERR_GENERR, generate_Ku_quit);
-     }
+Index: net-snmp-5.7.3/snmplib/keytools.c
+===================================================================
+--- net-snmp-5.7.3.orig/snmplib/keytools.c
++++ net-snmp-5.7.3/snmplib/keytools.c
+@@ -149,7 +149,9 @@ generate_Ku(const oid * hashtype, u_int
+      */
+ #ifdef NETSNMP_USE_OPENSSL
  
 -#ifdef HAVE_EVP_MD_CTX_CREATE
 +#ifdef HAVE_EVP_MD_CTX_NEW
@@ -134,7 +142,7 @@ Author: Sharmila Podury <sharmila.podury@brocade.com>
      ctx = EVP_MD_CTX_create();
  #else
      ctx = malloc(sizeof(*ctx));
-@@ -278,7 +280,9 @@ generate_Ku(const oid * hashtype, u_int
+@@ -258,7 +260,9 @@ generate_Ku(const oid * hashtype, u_int
      memset(buf, 0, sizeof(buf));
  #ifdef NETSNMP_USE_OPENSSL
      if (ctx) {
@@ -145,10 +153,12 @@ Author: Sharmila Podury <sharmila.podury@brocade.com>
          EVP_MD_CTX_destroy(ctx);
  #else
          EVP_MD_CTX_cleanup(ctx);
---- a/snmplib/scapi.c
-+++ b/snmplib/scapi.c
-@@ -627,7 +627,9 @@ sc_hash(const oid * hashtype, size_t has
-         return SNMPERR_GENERR;
+Index: net-snmp-5.7.3/snmplib/scapi.c
+===================================================================
+--- net-snmp-5.7.3.orig/snmplib/scapi.c
++++ net-snmp-5.7.3/snmplib/scapi.c
+@@ -488,7 +488,9 @@ sc_hash(const oid * hashtype, size_t has
+     }
  
  /** initialize the pointer */
 -#ifdef HAVE_EVP_MD_CTX_CREATE
@@ -158,7 +168,7 @@ Author: Sharmila Podury <sharmila.podury@brocade.com>
      cptr = EVP_MD_CTX_create();
  #else
      cptr = malloc(sizeof(*cptr));
-@@ -648,7 +650,9 @@ sc_hash(const oid * hashtype, size_t has
+@@ -509,7 +511,9 @@ sc_hash(const oid * hashtype, size_t has
  /** do the final pass */
      EVP_DigestFinal(cptr, MAC, &tmp_len);
      *MAC_len = tmp_len;
