@@ -67,10 +67,6 @@ do_install_append() {
     if [ ${@bb.utils.filter('DISTRO_FEATURES','systemd',d)} ]; then
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
-
-        if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd', d)} ]; then
-            install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D}${sysconfdir}/tmpfiles.d
-        fi
     fi
 }
 
