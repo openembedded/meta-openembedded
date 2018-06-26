@@ -9,15 +9,15 @@ DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
 SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz \
 "
 
-SRC_URI[md5sum] = "1ce1ddf2582060f8f971652ea54cc17e"
-SRC_URI[sha256sum] = "32f29c17172cdb9cb61c68b1f1a71dfe7351506fc830869029c47449bd04faeb"
+SRC_URI[md5sum] = "7379db774c10904f27e7e2743d90fb43"
+SRC_URI[sha256sum] = "abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f"
 S = "${WORKDIR}/dbus-python-${PV}"
 
 inherit distutils-base autotools pkgconfig
 
-PACKAGECONFIG ?= ""
-PACKAGECONFIG[docs] = "--enable-html-docs,--disable-html-docs,python3-docutils-native"
-PACKAGECONFIG[api-docs] = "--enable-api-docs,--disable-api-docs,python3-docutils-native python3-epydoc-native"
+# documentation needs python-sphinx, which is not in oe-core or meta-python for now
+# change to use PACKAGECONFIG when python-sphinx is added to oe-core or meta-python
+EXTRA_OECONF += "--disable-documentation"
 
 export STAGING_LIBDIR
 export STAGING_INCDIR
