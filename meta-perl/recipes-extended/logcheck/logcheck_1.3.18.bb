@@ -11,7 +11,7 @@ HOMEPAGE = "http://logcheck.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
-SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git \
+SRC_URI = "git://salsa.debian.org/debian/logcheck.git;protocol=https \
            file://99_logcheck \
 "
 SRCREV = "0a5865d80fa34c55387a1917a3e6f885bcff7f1d"
