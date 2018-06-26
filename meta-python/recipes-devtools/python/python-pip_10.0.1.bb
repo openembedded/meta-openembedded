@@ -1,10 +1,10 @@
 SUMMARY = "PIP is a tool for installing and managing Python packages"
 HOMEPAGE = "https://pip.pypa.io/"
 LICENSE = "MIT & LGPL-2.1"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=25fba45109565f87de20bae85bc39452"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f8d33acaac5c5dac8c613904bd56a6f"
 
-SRC_URI[md5sum] = "b15b33f9aad61f88d0f8c866d16c55d8"
-SRC_URI[sha256sum] = "7bf48f9a693be1d58f49f7af7e0ae9fe29fd671cde8a55e6edca3581c4ef5796"
+SRC_URI[md5sum] = "83a177756e2c801d0b3a6f7b0d4f3f7e"
+SRC_URI[sha256sum] = "f2bd08e0cd1b06e10218feaf6fef299f473ba706582eb3bd9d52203fdbd7ee68"
 
 inherit pypi setuptools
 
