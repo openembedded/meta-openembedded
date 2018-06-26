@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
 
 inherit pypi
 
-SRC_URI[md5sum] = "393a53483224cb338df5c643646c0300"
-SRC_URI[sha256sum] = "09879a295fd7234e523b62066223b128c5a8a88f682e3aff62fb115e4a0d8be0"
+SRC_URI[md5sum] = "074abcceee0d795ba34ad6430f71d0e8"
+SRC_URI[sha256sum] = "a37836aa47d1b81c2db1a6b7a5e79926062b5d76bd962115a0e615551be2b48d"
 
 UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
 
