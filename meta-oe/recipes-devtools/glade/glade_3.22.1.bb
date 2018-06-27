@@ -13,11 +13,11 @@ inherit distro_features_check autotools pkgconfig gnomebase gobject-introspectio
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.22/glade-${PV}.tar.xz \
            file://remove-yelp-help-rules-var.patch \
           "
-SRC_URI[md5sum] = "d3dd9ba33c7d7c854ab207e1ba844dda"
-SRC_URI[sha256sum] = "07d1545570951aeded20e9fdc6d3d8a56aeefe2538734568c5335be336c6abed"
+SRC_URI[md5sum] = "226802cf3b06861240524805aa6fe6ff"
+SRC_URI[sha256sum] = "dff89a2ef2eaf000ff2a46979978d03cb9202cb04668e01d0ea5c5bb5547e39a"
 
 EXTRA_OECONF += "--disable-man-pages"
 
