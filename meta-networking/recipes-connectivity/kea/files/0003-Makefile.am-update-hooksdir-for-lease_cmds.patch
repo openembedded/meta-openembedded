@@ -1,13 +1,14 @@
-From 77ab10015512e9cc0c7a160bd6b534bf4174bc95 Mon Sep 17 00:00:00 2001
+From cd902b8b588681a27d5321f1ee078a1c8f6e6935 Mon Sep 17 00:00:00 2001
 From: Mingli Yu <Mingli.Yu@windriver.com>
 Date: Wed, 21 Mar 2018 06:01:38 +0000
-Subject: [PATCH] Makefile.am: update hooksdir for lease_cmds
+Subject: [PATCH 3/3] Makefile.am: update hooksdir for lease_cmds
 
 update hooksdir for lease_cmds
 
 Upstream-Status: Pending
 
 Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+
 ---
  src/hooks/dhcp/lease_cmds/Makefile.am | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -26,5 +27,5 @@ index cfd6779..22cc4a9 100644
  
  libdhcp_lease_cmds_la_SOURCES  =
 -- 
-2.13.3
+2.18.0
 
