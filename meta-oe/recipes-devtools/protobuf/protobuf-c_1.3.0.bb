@@ -8,14 +8,9 @@ has been split out into the protobuf-c-rpc project."
 HOMEPAGE = "https://github.com/protobuf-c/protobuf-c"
 SECTION = "console/tools"
 LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
 
 DEPENDS = "protobuf-native protobuf"
-
-PACKAGE_BEFORE_PN = "${PN}-compiler"
-RDEPENDS_${PN}-compiler = "protobuf-compiler"
-RDEPENDS_${PN}-dev += "${PN}-compiler"
-
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
 
 PV .= "+git${SRCPV}"
 SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
@@ -26,6 +21,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
+PACKAGE_BEFORE_PN = "${PN}-compiler"
+
 FILES_${PN}-compiler = "${bindir}"
+
+RDEPENDS_${PN}-compiler = "protobuf-compiler"
+RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 BBCLASSEXTEND = "native nativesdk"
