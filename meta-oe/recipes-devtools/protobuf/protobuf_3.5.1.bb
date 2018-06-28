@@ -5,32 +5,26 @@ all of its internal RPC protocols and file formats."
 HOMEPAGE = "https://github.com/google/protobuf"
 SECTION = "console/tools"
 LICENSE = "BSD-3-Clause"
-
-PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
-
-DEPENDS = "zlib"
-DEPENDS_append_class-target  = " protobuf-native"
-RDEPENDS_${PN}-compiler = "${PN}"
-RDEPENDS_${PN}-dev += "${PN}-compiler"
-RDEPENDS_${PN}-ptest = "bash python-protobuf"
-
 LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
 
+DEPENDS = "zlib"
+DEPENDS_append_class-target = " protobuf-native"
+
+PV .= "+git${SRCPV}"
 SRCREV = "106ffc04be1abf3ff3399f54ccf149815b287dd9"
 
-PV = "3.5.1+git${SRCPV}"
-
 SRC_URI = "git://github.com/google/protobuf.git;branch=3.5.x \
-	   file://run-ptest \
-          "
+           file://run-ptest \
+"
 
-EXTRA_OECONF += " --with-protoc=echo"
+S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig ptest
 
-S = "${WORKDIR}/git"
-TEST_SRC_DIR="examples"
-LANG_SUPPORT="cpp python"
+EXTRA_OECONF += "--with-protoc=echo"
+
+TEST_SRC_DIR = "examples"
+LANG_SUPPORT = "cpp python"
 
 do_compile_ptest() {
 	# Modify makefile to use the cross-compiler
@@ -76,8 +70,14 @@ do_install_ptest() {
 	cd "$olddir"
 }
 
+PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
+
 FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
-FILES_${PN}-lite = "${bindir} ${libdir}/libprotobuf-lite${SOLIBS}"
+FILES_${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
+
+RDEPENDS_${PN}-compiler = "${PN}"
+RDEPENDS_${PN}-dev += "${PN}-compiler"
+RDEPENDS_${PN}-ptest = "bash python-protobuf"
 
 MIPS_INSTRUCTION_SET = "mips"
 
