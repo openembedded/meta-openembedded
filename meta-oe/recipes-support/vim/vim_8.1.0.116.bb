@@ -4,14 +4,13 @@ DEPENDS = "ncurses gettext-native"
 # vimdiff doesn't like busybox diff
 RSUGGESTS_${PN} = "diffutils"
 LICENSE = "vim"
-LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=eea32ac1424bba14096736a494ae9045"
+LIC_FILES_CHKSUM = "file://../runtime/doc/uganda.txt;md5=b6eb9d541de3933cc8f48125ae0335fe"
 
 SRC_URI = "git://github.com/vim/vim.git \
            file://disable_acl_header_check.patch;patchdir=.. \
            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
-           file://CVE-2017-17087.patch;patchdir=.. \
 "
-SRCREV = "3f9a1ff141412e9e85f7dff47d02946cb9be9228"
+SRCREV = "a87b72cc316e065d66dcbcf7ec1cde330adef3a3"
 
 S = "${WORKDIR}/git/src"
 
@@ -54,7 +53,7 @@ EXTRA_OECONF = " \
     vim_cv_memmove_handles_overlap=yes \
     vim_cv_stat_ignores_slash=no \
     vim_cv_terminfo=yes \
-    vim_cv_tgent=non-zero \
+    vim_cv_tgetent=non-zero \
     vim_cv_toupper_broken=no \
     vim_cv_tty_group=world \
     STRIP=/bin/true \
