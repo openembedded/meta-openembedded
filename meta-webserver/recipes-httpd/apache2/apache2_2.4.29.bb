@@ -64,6 +64,7 @@ EXTRA_OECONF = "--enable-ssl \
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)}"
 PACKAGECONFIG[selinux] = "--enable-selinux --enable-layout=Debian --prefix=${base_prefix}/,--disable-selinux,libselinux,libselinux"
 PACKAGECONFIG[openldap] = "--enable-ldap --enable-authnz-ldap,--disable-ldap --disable-authnz-ldap,openldap"
+PACKAGECONFIG[zlib] = "--enable-deflate --with-z=${STAGING_LIBDIR},,zlib,zlib"
 
 do_configure_prepend() {
         sed -i -e 's:$''{prefix}/usr/lib/cgi-bin:$''{libdir}/cgi-bin:g' ${S}/config.layout
