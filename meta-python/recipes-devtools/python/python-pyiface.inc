@@ -3,9 +3,9 @@ SECTION = "devel/python"
 HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
 LICENSE = "GPLv3+"
 
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fe06497acaf4f45999925d348c2605f9"
 
-SRC_URI[md5sum] = "06c3c71fe51df740dae6a88a13afb5e0"
-SRC_URI[sha256sum] = "4bb79100cbcf7344a1ccaddc578cd6455da47d8eac6eb1bf903ec32e043af924"
+SRC_URI[md5sum] = "2379d8d4506e6c4d83cf3d4824abce8b"
+SRC_URI[sha256sum] = "774ea47bb1387e493f6d5d0937b68fa28202c948eccddbd6e4cf2d708dcd86f2"
 
 inherit pypi
