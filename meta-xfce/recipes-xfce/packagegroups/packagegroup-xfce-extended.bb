@@ -56,6 +56,7 @@ RRECOMMENDS_${PN} = " \
     xfce4-verve-plugin \
     \
     xfce-polkit \
+    ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth", "blueman", "", d)} \
     \
     thunar-media-tags-plugin \
     thunar-archive-plugin \
