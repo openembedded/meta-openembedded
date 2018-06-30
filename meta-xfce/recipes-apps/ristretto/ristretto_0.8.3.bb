@@ -9,8 +9,8 @@ inherit xfce-app
 
 RRECOMMENDS_${PN} += "tumbler"
 
-SRC_URI[md5sum] = "a8d8bb6b8fa7f868cfa3ae778630946e"
-SRC_URI[sha256sum] = "f8f3b77ca6fc77ddf8cff1bb52e5c5802c462663f72f324393b3a0360f6901b8"
+SRC_URI[md5sum] = "5866b4e11c32a38f72bc737239102544"
+SRC_URI[sha256sum] = "8c9c11760816dfd9ed57fb8b9df86c6a98a2604ab551be3133996a1c32ca2665"
 SRC_URI += "file://0001-Fix-build-after-update-of-xfconf.patch"
 
 FILES_${PN} += "${datadir}/appdata"
