@@ -1,5 +1,3 @@
-# OpenLDAP, a license free (see http://www.OpenLDAP.org/license.html)
-#
 SUMMARY = "OpenLDAP Directory Service"
 DESCRIPTION = "OpenLDAP Software is an open source implementation of the Lightweight Directory Access Protocol."
 HOMEPAGE = "http://www.OpenLDAP.org/license.html"
@@ -9,9 +7,9 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # basically BSD.  opensource.org does not record this license
 # at present (so it is apparently not OSI certified).
 LICENSE = "OpenLDAP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25fd3721960f39128cd15a749fd21139 \
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25b4ead0e45182e7c2914e59ff57009f \
                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
-"
+                    "
 SECTION = "libs"
 
 LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
@@ -27,8 +25,8 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-CVE-2015-3276.patch \
 "
 
-SRC_URI[md5sum] = "00ff8301277cdfd0af728a6927042a13"
-SRC_URI[sha256sum] = "cdd6cffdebcd95161a73305ec13fc7a78e9707b46ca9f84fb897cd5626df3824"
+SRC_URI[md5sum] = "829016c5a9f45c51adc50073ac6f9fd7"
+SRC_URI[sha256sum] = "9a90dcb86b99ae790ccab93b7585a31fbcbeec8c94bf0f7ab0ca0a87ea0c4b2d"
 
 DEPENDS = "util-linux groff-native"
 
