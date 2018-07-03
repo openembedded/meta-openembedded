@@ -31,12 +31,11 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://include_sys_types.patch \
            file://openipmi-helper \
            file://ipmi.service \
-           file://0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch \
            "
 
 S = "${WORKDIR}/OpenIPMI-${PV}"
-SRC_URI[md5sum] = "58f9542cbfcb5fe250b77cf88345e1ec"
-SRC_URI[sha256sum] = "bca39a27071278a8b74610181ede8df51e155e5e9031bc8eaa3699d1720292b4"
+SRC_URI[md5sum] = "1461ac4d78fc516646fd0a6e605a8b05"
+SRC_URI[sha256sum] = "f0f1a0ec732409930b7a31a6daa6cf39b585f52059b62a5f092b7ece21aa75a5"
 
 inherit autotools-brokensep pkgconfig pythonnative perlnative update-rc.d systemd
 
