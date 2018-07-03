@@ -5,7 +5,7 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
                     file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
-                    file://docs/api/html/license.html;md5=77b9e362690c149da196aefe7712db30 \
+                    file://docs/api/html/license.html;md5=ac20f1edc24f72480a1106871e9fbe9a \
 "
 
 DEPENDS = " \
@@ -38,8 +38,11 @@ SRC_URI = " \
     file://musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch \
     file://musl/0006-Add-a-strndupa-replacement-for-musl.patch \
 "
-SRC_URI[md5sum] = "de3c7147a693da6f80eb22f126086a14"
-SRC_URI[sha256sum] = "6af0b1e856a3725f88791f55c4fbb04105dc0b20dbf182aaec8aad16481fac76"
+SRC_URI[md5sum] = "8c67fc286150ed357b6c833b9e015330"
+SRC_URI[sha256sum] = "244e29c0d1a57492df9aaf2d8c31e4a1b76bdfa8e862ae106239862e1c78c3ca"
+
+UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/NetworkManager/1.10/"
+UPSTREAM_CHECK_REGEX = "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar.xz"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
