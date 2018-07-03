@@ -14,9 +14,9 @@ DEPENDS = "python openldap cyrus-sasl"
 PYPI_PACKAGE = "python-ldap"
 inherit pypi setuptools
 
-LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
-SRC_URI[md5sum] = "18db2d009150ec1864710fea3ed76173"
-SRC_URI[sha256sum] = "6d430ecf040f2fc704ee316d3390cb1f5419c191371e1e131baef54a0e42cef0"
+LIC_FILES_CHKSUM = "file://LICENCE;md5=36ce9d726d0321b73c1521704d07db1b"
+SRC_URI[md5sum] = "6108e189a44eea8bc7d1cc281c222978"
+SRC_URI[sha256sum] = "824fde180a53772e23edc031c4dd64ac1af4a3eade78f00d9d510937d562f64e"
 
 do_configure_prepend() {
     sed -i -e 's:^library_dirs =.*::' setup.cfg
