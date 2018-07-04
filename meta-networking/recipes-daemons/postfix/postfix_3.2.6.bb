@@ -5,5 +5,7 @@ SRC_URI += "file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.pat
             file://postfix-install.patch \
             file://icu-config.patch \
            "
-SRC_URI[md5sum] = "aea073a9b0bea5bdb590460a270a4aa0"
-SRC_URI[sha256sum] = "d06849418d119d09366997b2b481bb23f737629769b4e4a52da42fb3ad8b0576"
+SRC_URI[md5sum] = "d10f1fb551be86f6e48c2908dd8a12ff"
+SRC_URI[sha256sum] = "1df036380bae7c356bfa8989a87de58033b6aaa09b3bafcfa36c3694dd449039"
+
+UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.2(\.\d+)+).tar.gz"
