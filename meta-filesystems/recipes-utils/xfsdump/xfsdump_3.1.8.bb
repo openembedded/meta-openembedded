@@ -12,15 +12,9 @@ DEPENDS = "xfsprogs attr"
 
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsdump/${BP}.tar.xz \
            file://remove-install-as-user.patch \
-           file://0001-Include-fcntl.h-for-O_EXCL.patch \
-           file://0002-Replace-__uint32_t-with-uint32_t.patch \
-           file://0003-replace-use-of-SIGCLD-with-SIGCHLD.patch \
-           file://0004-include-limit.h-for-PATH_MAX.patch \
-           file://0005-include-sys-types.h-for-u_int32_t-in-attr-attributes.patch \
-           file://0001-xfsdump-Use-c99-defined-int64_t-instead-of-__int64_t.patch \
            "
-SRC_URI[md5sum] = "c6e91f2ac8b76c796db2d236f5ca5947"
-SRC_URI[sha256sum] = "99e6d4df257ebc6d29ca9e970ca20672c2ea03481ad949bc68f98de3e4d56dce"
+SRC_URI[md5sum] = "84d3bc287b4a2bb5d16b2320a47049a7"
+SRC_URI[sha256sum] = "ed14e67ae5b273c2698e767b43a46f033d361e540fe13feaaf9b110ee0edc585"
 
 inherit autotools-brokensep
 
