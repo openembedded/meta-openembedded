@@ -9,10 +9,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "369127c0edbba7d1a4e2e02486375dd9d379524f"
-PV = "0.10+git${SRCPV}"
+SRCREV = "b0dcf6f457d700127b43c0e0a198253c266b78ae"
+PV = "1.3+git${SRCPV}"
 SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master \
-           file://0001-remove-python2-support.patch \
 "
 
 inherit gettext autotools python3native
@@ -27,6 +26,7 @@ FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/bytesize"
 
 PACKAGECONFIG ??= "python3"
 PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
+PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
 PACKAGECONFIG[doc] = "--with-gtk-doc, --without-gtk-doc, gtk-doc-native"
 
 EXTRA_OEMAKE = "py3libdir=${PYTHON_SITEPACKAGES_DIR}"
