@@ -15,6 +15,19 @@ do_install() {
     install -d -m0755 ${D}${sysconfdir}/wireless-regdb/pubkeys
     install -m 0644 regulatory.bin ${D}${libdir}/crda/regulatory.bin
     install -m 0644 sforshee.key.pub.pem ${D}${sysconfdir}/wireless-regdb/pubkeys/sforshee.key.pub.pem
+
+    install -m 0644 -D regulatory.db ${D}${nonarch_base_libdir}/firmware/regulatory.db
+    install -m 0644 regulatory.db.p7s ${D}${nonarch_base_libdir}/firmware/regulatory.db.p7s
 }
+
+# Install static regulatory DB in /lib/firmware for kernel to load.
+# This requires Linux kernel >= v4.15.
+PACKAGES =+ "${PN}-static"
+RCONFLICTS_${PN} = "${PN}-static"
+
+FILES_${PN}-static = " \
+    ${nonarch_base_libdir}/firmware/regulatory.db \
+    ${nonarch_base_libdir}/firmware/regulatory.db.p7s \
+"
 
 RSUGGESTS_${PN} = "crda"
