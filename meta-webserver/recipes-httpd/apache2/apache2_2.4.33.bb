@@ -13,7 +13,6 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://httpd-2.4.1-selinux.patch \
            file://apache-configure_perlbin.patch \
            file://replace-lynx-to-curl-in-apachectl-script.patch \
-           file://apache-ssl-ltmain-rpath.patch \
            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
            file://configure-allow-to-disable-selinux-support.patch \
@@ -23,9 +22,9 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://volatiles.04_apache2 \
           "
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a62b0c7623826ff99766ff13fb9007f8"
-SRC_URI[md5sum] = "0c599404ef6b69eee95bcd9fcd094407"
-SRC_URI[sha256sum] = "777753a5a25568a2a27428b2214980564bc1c38c1abf9ccc7630b639991f7f00"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
+SRC_URI[md5sum] = "6ef469d3f16fffeb688bc6e0346823e5"
+SRC_URI[sha256sum] = "de02511859b00d17845b9abdd1f975d5ccb5d0b280c567da5bf2ad4b70846f05"
 
 S = "${WORKDIR}/httpd-${PV}"
 
