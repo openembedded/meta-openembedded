@@ -30,6 +30,7 @@ PACKAGES =+ "kpatch-build"
 PROVIDES += "kpatch-build"
 
 COMPATIBLE_HOST = "(x86_64).*-linux"
+COMPATIBLE_HOST_libc-musl = "null"
 
 RDEPENDS_${PN} = "bash binutils"
 RDEPENDS_kpatch-build = "bash glibc-utils"
