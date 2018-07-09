@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "50b52af2af2e15f4aeb2fe196da073a8c131fa02e433e105d95ce40016
 inherit pypi
 
 DEPENDS += " \
-    ${PYTHON_PN}-numpy-native \
+    ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
 "
 
 RDEPENDS_${PN} += " \
