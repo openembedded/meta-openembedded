@@ -71,6 +71,7 @@ do_configure () {
     --http-scgi-temp-path=/run/nginx/scgi_temp \
     --pid-path=/run/nginx/nginx.pid \
     --prefix=${prefix} \
+    --with-threads \
     --with-http_ssl_module \
     --with-http_gzip_static_module \
     ${EXTRA_OECONF} ${PACKAGECONFIG_CONFARGS}
