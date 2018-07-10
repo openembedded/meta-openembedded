@@ -23,7 +23,7 @@ inherit cmake update-rc.d systemd
 EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
                   -DENABLE_CACHE=OFF \
                   -DENABLE_DEBUG=OFF \
-                  -DENABLE_SSL=OFF \
+                  -DENABLE_TLS=OFF \
                   -DENABLE_TOOLKIT=OFF \
                   -DENABLE_CHROOT=OFF \
                   -DENABLE_XSLT=ON \
