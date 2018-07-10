@@ -6,8 +6,8 @@ HOMEPAGE = "http://pandas.pydata.org/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ee0470f2de336c370a71c2f8d5e81c11"
 
-SRC_URI[md5sum] = "95554bdc5991831030055dc26393554f"
-SRC_URI[sha256sum] = "50b52af2af2e15f4aeb2fe196da073a8c131fa02e433e105d95ce40016df5690"
+SRC_URI[md5sum] = "ed532e0cdc2aebe190f01e2ae84162f6"
+SRC_URI[sha256sum] = "9cd3614b4e31a0889388ff1bd19ae857ad52658b33f776065793c293a29cf612"
 
 inherit pypi
 
