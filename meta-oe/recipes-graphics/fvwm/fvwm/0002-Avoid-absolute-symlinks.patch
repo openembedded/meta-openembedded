@@ -5,7 +5,7 @@ Subject: [PATCH] Avoid absolute symlinks
 Avoid usage of absolute symlinks, which breaks yocto builds
 since pyro.
 
-Upstream-Status: Pending
+Upstream-Status: Accepted de6f19e [2.6.8]
 Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.co.uk>
 
 diff --git a/default-config/Makefile.am b/default-config/Makefile.am
