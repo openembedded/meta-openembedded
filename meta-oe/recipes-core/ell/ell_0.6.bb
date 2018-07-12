@@ -7,10 +7,11 @@ SECTION = "libs"
 inherit autotools pkgconfig
 
 S = "${WORKDIR}/git"
-SRCREV = "b4aea06fabb2af1af01f861f8f394c75950b6d47"
-SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git \
-           file://0001-ell-fix-build-with-musl-libc.patch \
-          "
+SRCREV = "59ff3160fe55a841e662f8776f0520f2038235f4"
+SRC_URI = " \
+    git://git.kernel.org/pub/scm/libs/ell/ell.git \
+    file://0001-dhcp-include-if_arp.h-from-libc-instead-of-linux-hea.patch \
+"
 
 do_configure_prepend () {
     mkdir ${S}/build-aux
