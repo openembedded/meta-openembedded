@@ -15,7 +15,7 @@ The only symbols used from if_arp.h is ARPHRD_ETHER, so it should be
 safe to avoid the compile error by including the if_arp.h header from
 the c-library instead.
 
-Upstream-Status: Submitted [https://lists.01.org/pipermail/ell/2018-July/001242.html]
+Upstream-Status: Backport [https://lists.01.org/pipermail/ell/2018-July/001244.html]
 Signed-off-by: Martin Hundebøll <martin@geanix.com>
 ---
  ell/dhcp.c | 2 +-
