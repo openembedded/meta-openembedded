@@ -44,6 +44,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://fix-narrowing-warning.patch \
            file://0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch \
            file://0001-ipmidirect-Replace-__STRING.patch \
+           file://0001-session-close-socket.patch \
            "
 
 SRC_URI[md5sum] = "4718b16e0f749b5ad214a9b04f45dd23"
