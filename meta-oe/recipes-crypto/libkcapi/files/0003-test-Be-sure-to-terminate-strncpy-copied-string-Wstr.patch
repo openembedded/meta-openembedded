@@ -1,0 +1,37 @@
+From 505d949dcb6b756f6db6588d3425d9cd6108c77f Mon Sep 17 00:00:00 2001
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Thu, 12 Jul 2018 18:13:32 +0200
+Subject: [PATCH 3/3] test: Be sure to terminate strncpy() copied string
+ (-Wstringop-truncation)
+
+strncpy() might not NULL-terminate the buffer.  This fixes GCC v8.1.0 warning:
+
+    test/kcapi-main.c: In function 'main':
+    test/kcapi-main.c:3123:5: error: 'strncpy' specified bound 63 equals destination size [-Werror=stringop-truncation]
+         strncpy(cavs_test.cipher, optarg,
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          CIPHERMAXNAME);
+          ~~~~~~~~~~~~~~
+
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+Upstream-Status: Submitted
+---
+ test/kcapi-main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/kcapi-main.c b/test/kcapi-main.c
+index 835249987aa5..c167b7f61809 100644
+--- a/test/kcapi-main.c
++++ b/test/kcapi-main.c
+@@ -3121,7 +3121,7 @@ int main(int argc, char *argv[])
+ 				break;
+ 			case 'c':
+ 				strncpy(cavs_test.cipher, optarg,
+-					CIPHERMAXNAME);
++					CIPHERMAXNAME - 1);
+ 				break;
+ 			case 'p':
+ 				len = strlen(optarg);
+-- 
+2.7.4
+

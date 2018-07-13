@@ -1,0 +1,67 @@
+From 88f1a8fe4697b0921f39fcd9c7efc4a0486cf91b Mon Sep 17 00:00:00 2001
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Thu, 12 Jul 2018 18:13:24 +0200
+Subject: [PATCH 2/3] apps: Disable -Wstringop-truncation warning on false
+ positives
+
+The GCC v8.1.0 warns:
+
+    In function 'paste',
+        inlined from 'get_hmac_file' at apps/kcapi-hasher.c:395:11:
+    apps/kcapi-hasher.c:346:2: error: 'strncpy' destination unchanged after copying no bytes [-Werror=stringop-truncation]
+      strncpy(dst, src, size);
+      ^~~~~~~~~~~~~~~~~~~~~~~
+
+These are false positives because at the end of paste() calls, the buffer is
+NULL terminated.
+
+Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+Upstream-Status: Submitted
+---
+ apps/kcapi-hasher.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/apps/kcapi-hasher.c b/apps/kcapi-hasher.c
+index ae88211ff4dd..4052260bf871 100644
+--- a/apps/kcapi-hasher.c
++++ b/apps/kcapi-hasher.c
+@@ -61,6 +61,10 @@
+ 
+ #include "app-internal.h"
+ 
++#define GCC_VERSION (__GNUC__ * 10000 \
++			+ __GNUC_MINOR__ * 100 \
++			+ __GNUC_PATCHLEVEL__)
++
+ struct hash_name {
+ 	const char *kcapiname;
+ 	const char *bsdname;
+@@ -341,6 +345,17 @@ out:
+ 	return ret;
+ }
+ 
++/*
++ * GCC v8.1.0 introduced -Wstringop-truncation but it is not smart enough to
++ * find that cursor string will be NULL-terminated after all paste() calls and
++ * warns with:
++ * error: 'strncpy' destination unchanged after copying no bytes [-Werror=stringop-truncation]
++ * error: 'strncpy' output truncated before terminating nul copying 5 bytes from a string of the same length [-Werror=stringop-truncation]
++ */
++#pragma GCC diagnostic push
++#if GCC_VERSION >= 80100
++#pragma GCC diagnostic ignored "-Wstringop-truncation"
++#endif
+ static char *paste(char *dst, const char *src, size_t size)
+ {
+ 	strncpy(dst, src, size);
+@@ -398,6 +413,7 @@ static char *get_hmac_file(const char *filename, const char *subdir)
+ 	strncpy(cursor, "\0", 1);
+ 	return checkfile;
+ }
++#pragma GCC diagnostic pop /* -Wstringop-truncation */
+ 
+ static int hash_files(const struct hash_params *params,
+ 		      char *filenames[], uint32_t files,
+-- 
+2.7.4
+
