@@ -13,10 +13,9 @@ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 SRC_URI = " \
     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
     file://remove-examples.patch \
-    file://0001-Glib-Threads-Private-Fix-gobj.patch \
 "
-SRC_URI[md5sum] = "dee5ebe309f5976c3dacfcf5c43a062b"
-SRC_URI[sha256sum] = "7cc28c732b04d70ed34f0c923543129083cfb90580ea4a2b4be5b38802bf6a4a"
+SRC_URI[md5sum] = "5aa7a60084fe3e01d746c96f4a115302"
+SRC_URI[sha256sum] = "6e74fcba0d245451c58fc8a196e9d103789bc510e1eee1a9b1e816c5209e79a9"
 
 do_install_append() {
     install -d ${D}${datadir}/glibmm-2.4
