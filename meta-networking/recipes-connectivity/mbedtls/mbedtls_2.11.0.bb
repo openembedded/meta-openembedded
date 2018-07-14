@@ -20,12 +20,12 @@ HOMEPAGE = "https://tls.mbed.org/"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
 
-SECTION = "libdevel"
+SECTION = "libs"
 
 SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
 
-SRC_URI[md5sum] = "31dcf56cb92da5d7ec2dbb7a3cc5dff3"
-SRC_URI[sha256sum] = "a06a9b43e583b7e6707becfeeb13d88ed00f25fee31a5386cb3a3014c454bad8"
+SRC_URI[md5sum] = "3b133b9b4cf0ccf3ac1c91436771bfa5"
+SRC_URI[sha256sum] = "2a87061ad770e6d019b3b9cd27ea42a58bd0affccc4c6bfe4f5f0eee9ebf8aa8"
 
 inherit cmake
 
