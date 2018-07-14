@@ -34,6 +34,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/Thunar \
     ${systemd_user_unitdir} \
+    ${exec_prefix}${systemd_system_unitdir} \
     ${PYTHON_SITEPACKAGES_DIR} \
 "
 
