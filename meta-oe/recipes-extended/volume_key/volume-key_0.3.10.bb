@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
            file://0001-explicitly-support-python3-by-pkg-config.patch \
 "
-SRC_URI[md5sum] = "a2d14931177c660e1f3ebbcf5f47d8e2"
-SRC_URI[sha256sum] = "450a54fe9bf56acec6850c1e71371d3e4913c9ca1ef0cdc3a517b4b6910412a6"
+SRC_URI[md5sum] = "605fd99a6e42916728020562a6edee78"
+SRC_URI[sha256sum] = "c5729de7e33e39c8674e9aae2337d2719f9298d6499f1656d0d25a065a7e98a7"
 
 SRCNAME = "volume_key"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
@@ -25,6 +25,7 @@ DEPENDS += " \
     cryptsetup \
     nss \
     gpgme \
+    swig-native \
 "
 
 RDEPENDS_python3-${PN} += "${PN}"
