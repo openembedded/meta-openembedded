@@ -24,10 +24,13 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
     file://0001-make-netgroup-support-configurable.patch \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
 "
-SRC_URI[md5sum] = "4b77776c9e4f897dcfe03b2c34198edf"
-SRC_URI[sha256sum] = "e1c095093c654951f78f8618d427faf91cf62abdefed98de40ff65eca6413c81"
+SRC_URI[md5sum] = "f03b055d6ae5fc8eac76838c7d83d082"
+SRC_URI[sha256sum] = "2f87ecdabfbd415c6306673ceadc59846f059b18ef2fce42bac63fe283f12131"
 
-EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages"
+EXTRA_OECONF = "--with-os-type=moblin \
+                --disable-man-pages \
+                --disable-libelogind \
+               "
 
 do_compile_prepend () {
     export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
@@ -40,6 +43,7 @@ FILES_${PN}_append = " \
     ${nonarch_libdir}/${BPN}-1 \
     ${datadir}/dbus-1 \
     ${datadir}/${BPN}-1 \
+    ${datadir}/gettext \
 "
 
 FILES_${PN}-examples = "${bindir}/*example*"
