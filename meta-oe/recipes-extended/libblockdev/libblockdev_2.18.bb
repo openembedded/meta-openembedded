@@ -18,16 +18,10 @@ DEPENDS += " \
     btrfs-tools \
 "
 
-SRCREV = "e2e0899efe8dd3f111ff955fb6c1dc10b0bd2075"
+SRCREV = "0debeb45562ac3d8f6f43f6f942b238abab55be9"
 SRC_URI = " \
     git://github.com/rhinstaller/libblockdev;branch=master \
     file://0001-fix-configure-and-compile-failures.patch \
-    file://0002-remove-python2-support.patch \
-    file://0003-remove-dmraid-while-compiling-with-with-dm.patch \
-    file://0005-fix-a-clang-compiling-issue.patch \
-"
-SRC_URI_append_libc-musl = " \
-    file://0004-fix-compile-failure-against-musl-C-library.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -40,12 +34,16 @@ FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
 PACKAGECONFIG ??= "python3 lvm dm kmod parted fs"
 PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
+PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
 PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools"
 PACKAGECONFIG[dm] = "--with-dm, --without-dm"
+PACKAGECONFIG[dmraid] = "--with-dmraid, --without-dmraid"
 PACKAGECONFIG[kmod] = "--with-kbd, --without-kbd, kmod"
 PACKAGECONFIG[parted] = "--with-part, --without-part, parted"
 PACKAGECONFIG[fs] = "--with-fs, --without-fs, util-linux"
 PACKAGECONFIG[doc] = "--with-gtk-doc, --without-gtk-doc, gtk-doc-native"
+PACKAGECONFIG[nvdimm] = "--with-nvdimm, --without-nvdimm"
+PACKAGECONFIG[vdo] = "--with-vdo, --without-vdo"
 
 export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
 
