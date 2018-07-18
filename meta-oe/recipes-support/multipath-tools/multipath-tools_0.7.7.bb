@@ -31,25 +31,42 @@ LICENSE = "GPLv2"
 SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
            file://multipathd.oe \
            file://multipath.conf.example \
-           file://0001-multipath-attempt-at-common-multipath.rules.patch \
-           file://0002-RH-fixup-udev-rules-for-redhat.patch \
-           file://0003-RH-Remove-the-property-blacklist-exception-builtin.patch \
-           file://0004-RH-don-t-start-without-a-config-file.patch \
-           file://0005-RH-add-mpathconf.patch \
-           file://0006-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch \
-           file://0007-RH-trigger-change-uevent-on-new-device-creation.patch \
-           file://0008-libmultipath-change-how-RADOS-checker-is-enabled.patch \
-           file://0009-multipath-set-verbosity-to-default-during-config.patch \
-           file://0010-mpath-skip-device-configs-without-vendor-product.patch \
-           file://0011-multipathd-fix-show-maps-json-crash.patch \
-           file://0012-multipath-tools-modify-Makefile.inc-for-cross-compil.patch \
-           file://0013-Always-use-devmapper.patch \
-           file://0014-Always-use-devmapper-for-kpartx.patch \
-           file://0001-kpartx-include-limits.h-for-PATH_MAX.patch \
+           file://0001-multipath-tools-add-RDAC-SUN-ArrayStorage-to-hwtable.patch \
+           file://0002-multipath-tools-remove-c-from-__cpluscplus-misspelle.patch \
+           file://0003-multipath-tools-remove-emacs-autoconfig-of-kpartx-gp.patch \
+           file://0004-multipath-tools-replace-FSF-address-with-a-www-point.patch \
+           file://0005-multipath-tools-Remove-trailing-leading-whitespaces-.patch \
+           file://0006-multipath-tools-fix-compilation-with-musl-libc.patch \
+           file://0007-multipath-tools-add-x-to-doc-preclean.pl-and-split-m.patch \
+           file://0008-multipath-tools-refresh-kernel-doc-from-kernel-sourc.patch \
+           file://0009-multipath-tools-configure-hitachi-ams2000-and-hus100.patch \
+           file://0010-libmultipath-don-t-reject-maps-with-undefined-prio.patch \
+           file://0011-multipathd-handle-errors-in-uxlsnr-as-fatal.patch \
+           file://0012-libmultipath-fix-error-parsing-find_multipaths-stric.patch \
+           file://0013-libmultipath-print-correct-default-for-delay_-_check.patch \
+           file://0014-multipath.conf.5-clarify-property-whitelist-handling.patch \
+           file://0015-mpathpersist-add-all_tg_pt-option.patch \
+           file://0016-libmultipath-remove-rbd-code.patch \
+           file://0017-mpathpersist-fix-aptpl-support.patch \
+           file://0018-multipath-don-t-check-timestamps-without-a-path.patch \
+           file://0019-libmultipath-fix-detect-alua-corner-case.patch \
+           file://0020-multipath-fix-setting-conf-version.patch \
+           file://0021-RH-fixup-udev-rules-for-redhat.patch \
+           file://0022-RH-Remove-the-property-blacklist-exception-builtin.patch \
+           file://0023-RH-don-t-start-without-a-config-file.patch \
+           file://0024-RH-use-rpm-optflags-if-present.patch \
+           file://0025-RH-add-mpathconf.patch \
+           file://0026-RH-add-wwids-from-kernel-cmdline-mpath.wwids-with-A.patch \
+           file://0027-RH-warn-on-invalid-regex-instead-of-failing.patch \
+           file://0028-RH-reset-default-find_mutipaths-value-to-off.patch \
+           file://0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch \
+           file://0030-Always-use-devmapper.patch \
+           file://0031-Always-use-devmapper-for-kpartx.patch \
            "
+          
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-SRCREV = "f21166a812a2cfb50ecf9550d32947c83103f83a"
+SRCREV = "386d288b5595fc2c01dffe698b6eb306c6674908"
 
 S = "${WORKDIR}/git"
 

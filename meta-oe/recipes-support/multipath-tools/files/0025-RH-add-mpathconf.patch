@@ -1,7 +1,7 @@
-From de44504fe7f7802cd474efd92ac15b5a8857db1f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Benjamin Marzinski <bmarzins@redhat.com>
 Date: Thu, 16 Oct 2014 15:49:01 -0500
-Subject: [PATCH 05/14] RH: add mpathconf
+Subject: [PATCH] RH: add mpathconf
 
 mpathconf is a program (largely based on lvmcomf) to help users
 configure /etc/multipath.conf and enable or disable multipathing.  It
@@ -21,22 +21,22 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
  create mode 100644 multipath/mpathconf.8
 
 diff --git a/libmultipath/config.c b/libmultipath/config.c
-index aae69b8..c485748 100644
+index 0607403..5c98e48 100644
 --- a/libmultipath/config.c
 +++ b/libmultipath/config.c
-@@ -672,6 +672,7 @@ load_config (char * file)
+@@ -661,6 +661,7 @@ load_config (char * file)
+ 
+ 	} else {
  		condlog(0, "/etc/multipath.conf does not exist, blacklisting all devices.");
- 		condlog(0, "A default multipath.conf file is located at");
- 		condlog(0, "/usr/share/doc/device-mapper-multipath-%d.%d.%d/multipath.conf", MULTIPATH_VERSION(VERSION_CODE));
 +		condlog(0, "You can run /sbin/mpathconf to create or modify /etc/multipath.conf");
  		if (conf->blist_devnode == NULL) {
  			conf->blist_devnode = vector_alloc();
  			if (!conf->blist_devnode) {
 diff --git a/multipath/Makefile b/multipath/Makefile
-index 1e9ee4b..3d4d459 100644
+index b9bbb3c..e720c7f 100644
 --- a/multipath/Makefile
 +++ b/multipath/Makefile
-@@ -18,10 +18,12 @@ $(EXEC): $(OBJS)
+@@ -18,10 +18,12 @@ $(EXEC): $(OBJS) $(multipathdir)/libmultipath.so $(mpathcmddir)/libmpathcmd.so
  	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC) $(LDFLAGS) $(LIBDEPS)
  	$(GZIP) $(EXEC).8 > $(EXEC).8.gz
  	$(GZIP) $(EXEC).conf.5 > $(EXEC).conf.5.gz
@@ -64,7 +64,7 @@ index 1e9ee4b..3d4d459 100644
  	$(RM) $(DESTDIR)$(man5dir)/$(EXEC).conf.5.gz
 +	$(RM) $(DESTDIR)$(man8dir)/mpathconf.8.gz
  
- clean:
+ clean: dep_clean
  	$(RM) core *.o $(EXEC) *.gz
 diff --git a/multipath/mpathconf b/multipath/mpathconf
 new file mode 100644
@@ -644,5 +644,5 @@ index 0000000..4cd3267
 +.SH AUTHOR
 +Benjamin Marzinski <bmarzins@redhat.com>
 -- 
-2.8.1
+2.7.4
 

@@ -1,7 +1,7 @@
-From 7f5869cd32a7b3f717d9544b35562d9d01ca6510 Mon Sep 17 00:00:00 2001
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Date: Wed, 5 Jul 2017 03:03:16 -0400
-Subject: [PATCH 14/14] Always use devmapper for kpartx
+From 145f2b829e5362cda975bebafd7fe4d00ff56d1c Mon Sep 17 00:00:00 2001
+From: Changqing Li <changqing.li@windriver.com>
+Date: Mon, 16 Jul 2018 16:02:07 +0800
+Subject: [PATCH] Always use devmapper for kpartx
 
 Do not try to compute the LIBDM_API_COOKIE make variable
 from host information when cross-compiling.
@@ -13,12 +13,15 @@ Signed-off-by: Joe Slater <joe.slater@windriver.com>
 
 Rebase to 0.7.1
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+Rebase to 0.7.7
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
  kpartx/Makefile | 4 +---
  1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/kpartx/Makefile b/kpartx/Makefile
-index bfa6fe8..be87124 100644
+index 7eb467e..c143321 100644
 --- a/kpartx/Makefile
 +++ b/kpartx/Makefile
 @@ -8,9 +8,7 @@ LDFLAGS += $(BIN_LDFLAGS)
@@ -33,5 +36,5 @@ index bfa6fe8..be87124 100644
  OBJS = bsd.o dos.o kpartx.o solaris.o unixware.o dasd.o sun.o \
  	gpt.o mac.o ps3.o crc32.o lopart.o xstrncpy.o devmapper.o
 -- 
-2.8.1
+2.7.4
 

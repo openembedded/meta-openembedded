@@ -1,7 +1,7 @@
-From 69a67c2ed09ae51b53de402966a9f7a4cc737715 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Benjamin Marzinski <bmarzins@redhat.com>
 Date: Wed, 2 Jul 2014 12:49:53 -0500
-Subject: [PATCH 03/14] RH: Remove the property blacklist exception builtin
+Subject: [PATCH] RH: Remove the property blacklist exception builtin
 
 Multipath set the default property blacklist exceptions to
 (ID_SCSI_VPD|ID_WWN).  This has the effect of blacklisting some internal
@@ -14,8 +14,8 @@ it.
 Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
 ---
  libmultipath/blacklist.c   | 15 ++++++---------
- multipath/multipath.conf.5 |  4 ----
- 2 files changed, 6 insertions(+), 13 deletions(-)
+ multipath/multipath.conf.5 | 14 ++++++++------
+ 2 files changed, 14 insertions(+), 15 deletions(-)
 
 diff --git a/libmultipath/blacklist.c b/libmultipath/blacklist.c
 index ee396e2..19d4697 100644
@@ -51,10 +51,10 @@ index ee396e2..19d4697 100644
  
  void
 diff --git a/multipath/multipath.conf.5 b/multipath/multipath.conf.5
-index f04ff19..fbbbb27 100644
+index 30d8598..c45da9f 100644
 --- a/multipath/multipath.conf.5
 +++ b/multipath/multipath.conf.5
-@@ -1014,10 +1014,6 @@ The \fIWorld Wide Identification\fR of a device.
+@@ -1179,10 +1179,6 @@ The \fIWorld Wide Identification\fR of a device.
  .TP
  .B property
  Regular expression of the udev property to be whitelisted.
@@ -65,6 +65,23 @@ index f04ff19..fbbbb27 100644
  .TP
  .B device
  Subsection for the device description. This subsection recognizes the
+@@ -1193,8 +1189,14 @@ keywords. For a full description of these keywords please see the \fIdevices\fR
+ section description.
+ .LP
+ The \fIproperty\fR whitelist handling is different from the usual
+-handling in the sense that the device \fIhas\fR to have a udev property that
+-matches the whitelist, otherwise the device will be blacklisted. In these cases the message \fIblacklisted, udev property missing\fR will be displayed.
++handling in the sense that if the propery whitelist is set, the device
++\fIhas\fR to have a udev property that matches the whitelist, otherwise the
++device will be blacklisted. In these cases the message \fIblacklisted, udev
++property missing\fR will be displayed. For example settting the
++property blacklist_exception to \fB(SCSI_IDENT_|ID_WWN)\fR will blacklist
++all devices that have no udev property whose name regex matches either
++\fBSCSI_IDENT_\fR or \fBID_WWN\fR. This works to exclude most
++non-multipathable devices.
+ .
+ .
+ .\" ----------------------------------------------------------------------------
 -- 
-2.8.1
+2.7.4
 

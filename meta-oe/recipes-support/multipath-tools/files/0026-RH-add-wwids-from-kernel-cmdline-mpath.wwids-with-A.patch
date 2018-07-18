@@ -1,7 +1,7 @@
-From 15179c830521d8f37f9254ebc6bbf150a409f956 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Benjamin Marzinski <bmarzins@redhat.com>
 Date: Fri, 17 Oct 2014 11:20:34 -0500
-Subject: [PATCH 06/14] RH: add wwids from kernel cmdline mpath.wwids with -A
+Subject: [PATCH] RH: add wwids from kernel cmdline mpath.wwids with -A
 
 This patch adds another option to multipath, "-A", which reads
 /proc/cmdline for mpath.wwid=<WWID> options, and adds any wwids it finds
@@ -22,13 +22,13 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
  5 files changed, 58 insertions(+), 3 deletions(-)
 
 diff --git a/libmultipath/wwids.c b/libmultipath/wwids.c
-index bc70a27..88bb72b 100644
+index 53e7951..39e08cd 100644
 --- a/libmultipath/wwids.c
 +++ b/libmultipath/wwids.c
-@@ -321,3 +321,47 @@ remember_wwid(char *wwid)
- 		condlog(4, "wwid %s already in wwids file", wwid);
- 	return 0;
- }
+@@ -443,3 +443,47 @@ int op ## _wwid(const char *wwid) \
+ declare_failed_wwid_op(is_failed, false)
+ declare_failed_wwid_op(mark_failed, true)
+ declare_failed_wwid_op(unmark_failed, true)
 +
 +int remember_cmdline_wwid(void)
 +{
@@ -74,21 +74,22 @@ index bc70a27..88bb72b 100644
 +	return ret;
 +}
 diff --git a/libmultipath/wwids.h b/libmultipath/wwids.h
-index 9527012..b665232 100644
+index 0c6ee54..e32a0b0 100644
 --- a/libmultipath/wwids.h
 +++ b/libmultipath/wwids.h
-@@ -17,5 +17,6 @@ int remember_wwid(char *wwid);
+@@ -17,6 +17,7 @@ int remember_wwid(char *wwid);
  int check_wwids_file(char *wwid, int write_wwid);
  int remove_wwid(char *wwid);
  int replace_wwids(vector mp);
 +int remember_cmdline_wwid(void);
  
- #endif /* _WWIDS_H */
+ enum {
+ 	WWID_IS_NOT_FAILED = 0,
 diff --git a/multipath/main.c b/multipath/main.c
-index 4174d43..72585b0 100644
+index 6fdde03..7bac232 100644
 --- a/multipath/main.c
 +++ b/multipath/main.c
-@@ -102,7 +102,7 @@ usage (char * progname)
+@@ -109,7 +109,7 @@ usage (char * progname)
  {
  	fprintf (stderr, VERSION_STRING);
  	fprintf (stderr, "Usage:\n");
@@ -97,25 +98,25 @@ index 4174d43..72585b0 100644
  	fprintf (stderr, "  %s -l|-ll|-f [-v lvl] [-b fil] [-R num] [dev]\n", progname);
  	fprintf (stderr, "  %s -F [-v lvl] [-R num]\n", progname);
  	fprintf (stderr, "  %s -t\n", progname);
-@@ -116,6 +116,8 @@ usage (char * progname)
+@@ -123,6 +123,8 @@ usage (char * progname)
  		"  -f      flush a multipath device map\n"
  		"  -F      flush all multipath device maps\n"
  		"  -a      add a device wwid to the wwids file\n"
 +		"  -A      add devices from kernel command line mpath.wwids\n"
 +		"          parameters to wwids file\n"
  		"  -c      check if a device should be a path in a multipath device\n"
+ 		"  -C      check if a multipath device has usable paths\n"
  		"  -q      allow queue_if_no_path when multipathd is not running\n"
- 		"  -d      dry run, do not create or update devmaps\n"
-@@ -522,7 +524,7 @@ main (int argc, char *argv[])
+@@ -907,7 +909,7 @@ main (int argc, char *argv[])
  		exit(1);
  	multipath_conf = conf;
  	conf->retrigger_tries = 0;
--	while ((arg = getopt(argc, argv, ":adchl::FfM:v:p:b:BrR:itquwW")) != EOF ) {
-+	while ((arg = getopt(argc, argv, ":aAdchl::FfM:v:p:b:BrR:itquwW")) != EOF ) {
+-	while ((arg = getopt(argc, argv, ":adcChl::FfM:v:p:b:BrR:itquUwW")) != EOF ) {
++	while ((arg = getopt(argc, argv, ":aAdcChl::FfM:v:p:b:BrR:itquUwW")) != EOF ) {
  		switch(arg) {
  		case 1: printf("optarg : %s\n",optarg);
  			break;
-@@ -586,6 +588,10 @@ main (int argc, char *argv[])
+@@ -974,6 +976,10 @@ main (int argc, char *argv[])
  		case 't':
  			r = dump_config(conf);
  			goto out_free_config;
@@ -127,19 +128,19 @@ index 4174d43..72585b0 100644
  			usage(argv[0]);
  			exit(0);
 diff --git a/multipath/multipath.8 b/multipath/multipath.8
-index b9436e5..b9ad6b1 100644
+index 914a8cb..8c6a4c1 100644
 --- a/multipath/multipath.8
 +++ b/multipath/multipath.8
 @@ -25,7 +25,7 @@ multipath \- Device mapper target autoconfig.
  .RB [\| \-b\ \c
  .IR bindings_file \|]
  .RB [\| \-d \|]
--.RB [\| \-h | \-l | \-ll | \-f | \-t | \-F | \-B | \-c | \-q | \|-r | \|-i | \-a | \|-u | \-w | \-W \|]
-+.RB [\| \-h | \-l | \-ll | \-f | \-t | \-F | \-B | \-c | \-q | \|-r | \|-i | \-a | \-A | \-u | \-w | \-W \|]
+-.RB [\| \-h | \-l | \-ll | \-f | \-t | \-F | \-B | \-c | \-C | \-q | \-r | \-i | \-a | \-u | \-U | \-w | \-W \|]
++.RB [\| \-h | \-l | \-ll | \-f | \-t | \-F | \-B | \-c | \-C | \-q | \-r | \-i | \-a | \-A | \-u | \-U | \-w | \-W \|]
  .RB [\| \-p\ \c
  .IR failover | multibus | group_by_serial | group_by_prio | group_by_node_name \|]
  .RB [\| \-R\ \c
-@@ -122,6 +122,9 @@ Add the WWID for the specified device to the WWIDs file.
+@@ -135,6 +135,9 @@ Add the WWID for the specified device to the WWIDs file.
  Check if the device specified in the program environment should be
  a path in a multipath device.
  .
@@ -147,10 +148,10 @@ index b9436e5..b9ad6b1 100644
 +add wwids from any kernel command line mpath.wwid parameters to the wwids file
 +.
  .TP
- .B \-w
- Remove the WWID for the specified device from the WWIDs file.
+ .B \-U
+ Check if the device specified in the program environment is a multipath device
 diff --git a/multipathd/multipathd.service b/multipathd/multipathd.service
-index fafd088..a623a3f 100644
+index 17434ce..0fbcc46 100644
 --- a/multipathd/multipathd.service
 +++ b/multipathd/multipathd.service
 @@ -15,6 +15,7 @@ Type=notify
@@ -160,7 +161,7 @@ index fafd088..a623a3f 100644
 +ExecStartPre=-/sbin/multipath -A
  ExecStart=/sbin/multipathd -d -s
  ExecReload=/sbin/multipathd reconfigure
- 
+ TasksMax=infinity
 -- 
-2.8.1
+2.7.4
 
