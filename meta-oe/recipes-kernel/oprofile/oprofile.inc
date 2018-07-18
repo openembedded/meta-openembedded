@@ -25,12 +25,13 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
            file://run-ptest \
            file://root-home-dir.patch \
            file://0001-Add-rmb-definition-for-NIOS2-architecture.patch \
-           file://0001-Fix-FTBFS-problem-with-GCC-6.patch \
 "
 UPSTREAM_CHECK_REGEX = "oprofile-(?P<pver>\d+(\.\d+)+)/"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/oprofile/files/oprofile/"
 
-SRC_URI_append_libc-musl = " file://musl.patch"
+SRC_URI_append_libc-musl = " file://musl.patch \
+                             file://0001-fix-musl-libc-compile-error.patch \
+"
 
 inherit autotools pkgconfig ptest
 
