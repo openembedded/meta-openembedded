@@ -4,11 +4,12 @@ HOMEPAGE = "http://linuxpps.org"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-PV = "0.0.0+git${SRCPV}"
-SRCREV = "0deb9c7e135e9380a6d09e9d2e938a146bb698c8"
+SRCREV = "cb48b7ecf7079ceba7081c78d4e61e507b0e8d2d"
 SRC_URI = "git://github.com/ago/pps-tools.git"
 
 S = "${WORKDIR}/git"
+
+RDEPENDS_pps-tools = "bash"
 
 do_install() {
         install -d ${D}${bindir} ${D}${includedir} \
