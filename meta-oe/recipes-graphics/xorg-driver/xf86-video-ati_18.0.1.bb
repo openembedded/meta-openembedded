@@ -14,10 +14,12 @@ REQUIRED_DISTRO_FEATURES += "opengl"
 
 COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
 
-SRC_URI[md5sum] = "f34d04a755e761e03b459155fa3ddcbb"
-SRC_URI[sha256sum] = "401f5de772928f3dc4ce43a885adb0a47a2f61aa4a9e45d2ab3d184136a9d6fa"
+SRC_URI[md5sum] = "40e7c0a5a69aba3d84e0958f58705ea7"
+SRC_URI[sha256sum] = "72ea3b8127d4550b64f797457f5a7851a541fa4ee2cc3f345b6c1886b81714a0"
 
 EXTRA_OECONF += "--disable-glamor"
 
 RDEPENDS_${PN} += "xserver-xorg-module-exa"
 RRECOMMENDS_${PN} += "linux-firmware-radeon"
+
+FILES_${PN} += "${datadir}/X11"
