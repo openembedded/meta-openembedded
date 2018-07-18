@@ -20,10 +20,9 @@ RDEPENDS_${PN} = "acl"
 
 SRC_URI = " \
     git://github.com/storaged-project/udisks.git \
-    file://0001-data-fix-out-of-tree-build.patch \
     file://non-gnu-libc.patch \
 "
-SRCREV = "b6471f2e99f6aa1133af0de658f1fa05c748932c"
+SRCREV = "fcf888ca00980f75ce0c47041629b3d77e9f352e"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
