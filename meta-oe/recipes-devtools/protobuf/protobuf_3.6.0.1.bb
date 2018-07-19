@@ -5,18 +5,19 @@ all of its internal RPC protocols and file formats."
 HOMEPAGE = "https://github.com/google/protobuf"
 SECTION = "console/tools"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 
 DEPENDS = "zlib"
 DEPENDS_append_class-target = " protobuf-native"
 
 PV .= "+git${SRCPV}"
-SRCREV = "106ffc04be1abf3ff3399f54ccf149815b287dd9"
 
-SRC_URI = "git://github.com/google/protobuf.git;branch=3.5.x \
+SRCREV = "ce044817c7ba0aea27c3fd8e496635d94d20a755"
+
+SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
            file://run-ptest \
+           file://0001-protobuf-fix-configure-error.patch \
 "
-
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig ptest
@@ -82,3 +83,8 @@ RDEPENDS_${PN}-ptest = "bash python-protobuf"
 MIPS_INSTRUCTION_SET = "mips"
 
 BBCLASSEXTEND = "native nativesdk"
+
+LDFLAGS_append_arm = " -latomic"
+LDFLAGS_append_mips = " -latomic"
+LDFLAGS_append_powerpc = " -latomic"
+LDFLAGS_append_mipsel = " -latomic"
