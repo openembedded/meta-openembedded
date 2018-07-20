@@ -8,9 +8,10 @@ files are included. fio displays all sorts of I/O performance information."
 HOMEPAGE = "http://freecode.com/projects/fio"
 SECTION = "console/tests"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "libaio zlib"
+RDEPENDS_${PN} = "python bash"
 
 PACKAGECONFIG_NUMA = "numa"
 # ARM does not currently support NUMA
@@ -19,9 +20,11 @@ PACKAGECONFIG_NUMA_arm = ""
 PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
 PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
-# rev for v2.9
-SRCREV = "fe8d0f4c54f0c308c9a02a4e3c2f5084e8bf5461"
-SRC_URI = "git://git.kernel.dk/fio.git"
+# rev for v3.7
+SRCREV = "c397ab3aac3d4ed1660d9cd4d820f31a4375306e"
+SRC_URI = "git://git.kernel.dk/fio.git \
+          file://0001-update-the-interpreter-paths.patch \
+"
 
 S = "${WORKDIR}/git"
 
