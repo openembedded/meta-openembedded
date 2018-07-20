@@ -15,11 +15,17 @@ SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.8.1.o
 SRC_URI_append_libc-musl = " \
            file://0006-support-musl.patch \
            "
+SRC_URI_append_mipsarchn32 = " \
+           file://0001-fix-compiling-failure-on-mips64-n32-bsp.patch \
+           "
 
 SRC_URI[md5sum] = "3a44c2fd3d7b5a370ed9184163c74bc4"
 SRC_URI[sha256sum] = "fb5e11b7f31a33be820d5c947c5fa114751b0d5033778c1cd8e0cf2dad91e8fa"
 
 inherit autotools pkgconfig perlnative pythonnative
+
+inherit distro_features_check
+CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
 
 DEPENDS += "nspr zlib"
 
@@ -31,6 +37,7 @@ EXTRA_OECONF = " \
     --libdir=${libdir} \
     --disable-tests \
     --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
 "
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
