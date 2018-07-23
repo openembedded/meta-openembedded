@@ -6,10 +6,13 @@ LIC_FILES_CHKSUM = "file://${S}/../license.txt;md5=a2e15b954769218ff912468eecd6a
 DEPENDS = "openssl websocketpp zlib boost"
 
 SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
-           file://fix-cmake-install.patch \
-           file://0001-Fix-a-build-problem-on-Clang.patch;patchdir=.. \
-           file://0002-Define-virtual-destructor.patch;patchdir=.. \
-           file://0001-disable-more-Werror-warnings.patch;patchdir=.. \
+           file://disable-outside-tests.patch;patchdir=.. \
+           file://disable-test-timeouts.patch;patchdir=.. \
+           file://disable-float-tests.patch;patchdir=.. \
+           file://fix-cmake-install.patch;patchdir=.. \
+           file://747.patch;patchdir=.. \
+           file://732.patch;patchdir=.. \
+           file://787.patch;patchdir=.. \
            "
 
 # tag 2.10.2
