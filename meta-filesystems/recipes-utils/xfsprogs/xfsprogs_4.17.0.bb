@@ -8,9 +8,10 @@ DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://remove_flags_from_build_flags.patch \
            file://0001-build-Check-for-sync_file_range-libc-function.patch \
+           file://disable-xfs_scrub-build.patch \
            "
-SRC_URI[md5sum] = "2d50e3751cc98e6c9364bc3d2297b9fd"
-SRC_URI[sha256sum] = "b1b710b268bc95d6f45eca06e1262c29eb38865a19cd4404e48ba446e043b7ec"
+SRC_URI[md5sum] = "b935b693dfac0264e232c3c4e52d5569"
+SRC_URI[sha256sum] = "f53f5169cb98cfca471ddea30092738c427ba284c5356e01b45dd1ae3b297e0d"
 
 inherit autotools-brokensep
 
