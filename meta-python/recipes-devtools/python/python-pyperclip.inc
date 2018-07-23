@@ -10,3 +10,5 @@ inherit pypi
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-ctypes \
 "
+
+BBCLASSEXTEND = "native nativesdk"
