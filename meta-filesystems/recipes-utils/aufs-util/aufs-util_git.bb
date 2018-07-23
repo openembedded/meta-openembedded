@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
 DEPENDS = "coreutils-native aufs-util-native"
 DEPENDS_class-native = ""
 
-SRCREV = "568636e5c45006b1e6e0c4b704401610a02c0089"
+SRCREV = "8f35db59ef83078f87879ec2828e0bb45719e0ef"
 SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs4.9 \
            https://raw.githubusercontent.com/sfjro/aufs4-linux/aufs4.9/include/uapi/linux/aufs_type.h;name=aufs_type \
            file://aufs-util-don-t-strip-executables.patch \
