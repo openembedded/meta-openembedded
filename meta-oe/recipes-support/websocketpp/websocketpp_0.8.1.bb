@@ -7,14 +7,8 @@ DEPENDS = "openssl boost zlib"
 
 SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https;branch=master"
 
-# tag 0.7.0
-SRCREV= "378437aecdcb1dfe62096ffd5d944bf1f640ccc3"
-
-SRC_URI += "file://0001-Fix-issue-599.patch \
-            file://9ddb300d874a30db35e3ad58f188944bef0bf31b.patch \
-            file://4cab5e5c0c5f19fcee7d37b4a38b156d63a150d4.patch \
-            file://disable-tests.patch \
- "
+# tag 0.8.1
+SRCREV= "c6d7e295bf5a0ab9b5f896720cc1a0e0fdc397a7"
 
 S = "${WORKDIR}/git"
 
