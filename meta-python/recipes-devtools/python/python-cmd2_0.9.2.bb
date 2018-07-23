@@ -19,3 +19,5 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-textutils \
     "
+
+BBCLASSEXTEND = "native nativesdk"
