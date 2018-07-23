@@ -112,4 +112,4 @@ ALTERNATIVE_PRIORITY = "100"
 
 BBCLASSEXTEND = "native"
 
-PROVIDES += "xxd"
+PROVIDES += "${PN}-xxd"
