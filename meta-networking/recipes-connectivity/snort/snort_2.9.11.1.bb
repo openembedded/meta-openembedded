@@ -6,19 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
 DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc"
 
-SRC_URI = " ${GENTOO_MIRROR}/${BP}.tar.gz;name=tarball \
+SRC_URI = "https://www.snort.org/downloads/snort/${BP}.tar.gz \
     file://snort.init \
-    file://disable-inaddr-none.patch \
-    file://disable-dap-address-space-id.patch \
-    file://disable-daq-flow-id.patch \
-    file://disable-daq-verdict-retry.patch \
     file://0001-libpcap-search-sysroot-for-headers.patch \
-    file://0001-fix-do_package-failed-since-snort-2.9.7.0.patch \
     file://fix-host-contamination-when-enable-static-daq.patch \
+    file://disable-run-test-program-while-cross-compiling.patch \
 "
 
-SRC_URI[tarball.md5sum] = "fd271788c0f8876be87a858a9142f202"
-SRC_URI[tarball.sha256sum] = "ad03f11b5301b16642199a86aa90388eaa53f5003f83b0c5595745a490047be1"
+SRC_URI[md5sum] = "378e3938b2b5c8e358f942d0ffce18cc"
+SRC_URI[sha256sum] = "9f6b3aeac5a109f55504bd370564ac431cb1773507929dc461626898f33f46cd"
 
 UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
 UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
