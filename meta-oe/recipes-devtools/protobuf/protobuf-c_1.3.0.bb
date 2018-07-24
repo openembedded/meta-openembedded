@@ -15,9 +15,15 @@ DEPENDS = "protobuf-native protobuf"
 PV .= "+git${SRCPV}"
 SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
 
-SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
+           file://0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch \
+"
 
 S = "${WORKDIR}/git"
+
+#make sure c++11 is used
+CXXFLAGS += "-std=c++11"
+BUILD_CXXFLAGS += "-std=c++11"
 
 inherit autotools pkgconfig
 
