@@ -12,9 +12,9 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
            file://0001-drbd-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch \
           "
-# v9.4.0
-SRCREV_drbd-utils = "eff6423ee72931aa0f8d0eb51742acee7c7cd3e1"
-SRCREV_drbd-headers = "d9ef0576d0f29992e0539ed7ca14d4f12658cd25"
+# v9.5.0
+SRCREV_drbd-utils = "ee126652638328b55dc6bff47d07d6161ab768db"
+SRCREV_drbd-headers = "b47cc11bcabe1a65c40ad23f71dcaf2da6419630"
 
 S = "${WORKDIR}/git"
 
