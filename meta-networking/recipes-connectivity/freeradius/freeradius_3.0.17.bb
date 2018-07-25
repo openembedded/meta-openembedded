@@ -30,8 +30,8 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
     file://radiusd.service \
     file://radiusd-volatiles.conf \
 "
-SRC_URI[md5sum] = "0c81a4464ccf1d04f7ef1218a029d37a"
-SRC_URI[sha256sum] = "23267d8505e7b2909f5bdbf3938ca077c1fe122290dc969304d4f3b594f7e3ba"
+SRC_URI[md5sum] = "1f4ad38f32101a7d50d818afa6f17339"
+SRC_URI[sha256sum] = "3f03404b6e4a4f410e1f15ea2ababfec7f8a7ae8a49836d8a0c137436d913b96"
 
 PARALLEL_MAKE = ""
 
