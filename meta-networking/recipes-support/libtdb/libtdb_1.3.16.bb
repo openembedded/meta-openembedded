@@ -11,8 +11,8 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://tdb-Add-configure-options-for-packages.patch \
 "
 
-SRC_URI[md5sum] = "60ece3996acc8d85b6f713199da971a6"
-SRC_URI[sha256sum] = "b4a1bf3833601bd9f10aff363cb750860aef9ce5b4617989239923192f946728"
+SRC_URI[md5sum] = "7d06d8709188e07df853d9e91db88927"
+SRC_URI[sha256sum] = "6a3fc2616567f23993984ada3cea97d953a27669ffd1bfbbe961f26e0cf96cc5"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
