@@ -8,7 +8,10 @@ RDEPENDS_pyldb += "python"
 
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://do-not-import-target-module-while-cross-compile.patch \
-           file://options-1.3.1.patch \
+           file://options-1.4.1.patch \
+           file://0001-libldb-fix-config-error.patch \
+           file://libldb-fix-musl-libc-unkown-type-error.patch \
+           file://libldb-fix-musl-libc-conflict-type-error.patch \
           "
 
 PACKAGECONFIG ??= "\
@@ -29,8 +32,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[md5sum] = "e5233f202bca27f6ce8474fb8ae65983"
-SRC_URI[sha256sum] = "b19f2c9f55ae0f46aa5ebaea0bf1a47ec1ac135e1d78af0f6318cf50bf62cbd2"
+SRC_URI[md5sum] = "159a1b1a56dcccf410d1bba911be6076"
+SRC_URI[sha256sum] = "2df13aa25b376b314ce24182c37691959019523de3cc5356c40c1a333b0890a2"
 
 inherit waf-samba
 
@@ -43,6 +46,7 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-modulesdir=${libdir}/ldb/modules \
                  --with-privatelibdir=${libdir}/ldb \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
+                 --without-ldb-lmdb \
                 "
 
 PACKAGES =+ "pyldb pyldb-dbg pyldb-dev"
