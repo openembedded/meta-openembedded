@@ -13,7 +13,6 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
            file://no-bash.patch \
            file://cross.patch \
-           file://libtirpc.patch \
            file://autofs-5.0.7-do-not-check-for-modprobe.patch \
            file://fix_disable_ldap.patch \
            file://autofs-5.0.7-fix-lib-deps.patch \
@@ -24,12 +23,11 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://fix-the-YACC-rule-to-fix-a-building-failure.patch \
            file://0001-Define-__SWORD_TYPE-and-_PATH_NSSWITCH_CONF.patch \
            file://0002-Replace-__S_IEXEC-with-S_IEXEC.patch \
-           file://autofs-5.1.2-libtirpc-as-need.patch \
            file://pkgconfig-libnsl.patch \
            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
            "
-SRC_URI[md5sum] = "28cf88f99eff553a8500659ba5d45a76"
-SRC_URI[sha256sum] = "0d57e4138c2ec8058ca92164d035546f68ce4af93acb893369993d67c7056a10"
+SRC_URI[md5sum] = "17bc9d371cf39d99f400ebadfc2289bb"
+SRC_URI[sha256sum] = "8d1c9964c8286ccb08262ad47c60bb6343492902def5399fd36d79a0ccb0e718"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
 
