@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
 
 PE = "1"
 
-SRC_URI[md5sum] = "ebf3d4230d7a13408758cdf037c42d66"
-SRC_URI[sha256sum] = "3274458d1bb1658a5001465ecb07c7cbfc709571ef36bd062897570d4bab3ebc"
+SRC_URI[md5sum] = "22128e617f3abdf87f7b5d7864d6d79e"
+SRC_URI[sha256sum] = "7dcc4e9f29ad8dd75849aa3b6f70b6ec82ab6899cb168096572775a6d97ced8a"
 
 inherit autotools pkgconfig perlnative
 
