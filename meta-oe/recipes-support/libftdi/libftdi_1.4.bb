@@ -24,4 +24,4 @@ PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on -DFTDIPP=on,-DFTDI_BUILD_CPP=o
 
 EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
