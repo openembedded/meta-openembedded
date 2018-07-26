@@ -12,19 +12,18 @@ locality-based  least-connection, locality-based least-connection with replicati
 destination-hashing, and source-hashing)."
 SECTION = "net"
 LICENSE = "GPL-2.0"
-LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=a54cba37b64924aa5008881607942892"
+LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=b4e40069f15598d0e3fe2aa177e5ec77"
 
 DEPENDS += "libnl popt"
 
-SRC_URI = "http://www.linuxvirtualserver.org/software/kernel-2.6/${BP}.tar.gz \
+SRC_URI = "https://mirrors.edge.kernel.org/pub/linux/utils/kernel/ipvsadm/${BP}.tar.gz \
         file://0001-Modify-the-Makefile-for-cross-compile.patch \
-        file://0002-Replace-nl_handle-to-nl_sock.patch \
         file://0003-ipvsadm-remove-dependency-on-bash.patch \
         file://makefile-add-ldflags.patch \
 "
 
-SRC_URI[md5sum] = "eac3ba3f62cd4dea2da353aeddd353a8"
-SRC_URI[sha256sum] = "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f60269fd9cbee0eb2d"
+SRC_URI[md5sum] = "88b35030b4766b3e44ad15aacdef65c4"
+SRC_URI[sha256sum] = "297f5cd459c3eef81ed0ca32e53bf320ed6b132fe7ed6ea5e44aa6b1fbd2a7de"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/ipvsadm"
 
@@ -37,3 +36,5 @@ do_compile() {
 do_install() {
     oe_runmake 'BUILD_ROOT=${D}' install
 }
+
+inherit pkgconfig
