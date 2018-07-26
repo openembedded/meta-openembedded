@@ -10,4 +10,9 @@ RDEPENDS_${PN}_class-target = "\
     ${PYTHON_PN}-codecs \
 "
 
+# Remove bundled egg-info
+do_compile_prepend() {
+    rm -rf ${S}/idna.egg-info
+}
+
 BBCLASSEXTEND = "native nativesdk"
