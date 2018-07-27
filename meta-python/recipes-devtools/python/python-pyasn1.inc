@@ -3,9 +3,8 @@ HOMEPAGE = "http://pyasn1.sourceforge.net/"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=815ac3f9ca693006349094b358ab3155"
 
-
-SRC_URI[sha256sum] = "fb81622d8f3509f0026b0683fe90fea27be7284d3826a5f2edf97f69151ab0fc"
-SRC_URI[md5sum] = "311fff5b2a1303a8cdc334c8867a06f4"
+SRC_URI[md5sum] = "0d182b71e1f72fe147d7957bc90be7f2"
+SRC_URI[sha256sum] = "f58f2a3d12fd754aa123e9fa74fb7345333000a035f3921dbdaa08597aa53137"
 
 RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-codecs \
