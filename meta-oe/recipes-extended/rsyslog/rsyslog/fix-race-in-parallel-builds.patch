@@ -1,0 +1,41 @@
+From 7f003e3a7d4d6dda1cbca1694b62754878c58df0 Mon Sep 17 00:00:00 2001
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Date: Fri, 27 Jul 2018 10:19:29 +0800
+Subject: [PATCH] fix race in parallel builds
+
+If libgcry.la is built later than lmcry_gcry.la, there is a failure:
+[snip]
+|../aarch64-wrs-linux-libtool  --tag=CC   --mode=link aarch64-wrs-linux-gcc
+-o lmcry_gcry.la lmcry_gcry_la-lmcry_gcry.lo libgcry.la -lgcrypt
+|aarch64-wrs-linux-libtool:   error: cannot find the library 'libgcry.la'
+or unhandled argument 'libgcry.la'
+|Makefile:1049: recipe for target 'lmcry_gcry.la' failed
+|make[2]: *** [lmcry_gcry.la] Error 1
+[snip]
+
+The LIBADD of lmcry_gcry.la contains libgcry.la, we should also add libgcry.la
+to lmcry_gcry.la's DEPENDENCIES.
+
+Upstream-Status: Submitted [https://github.com/rsyslog/rsyslog/pull/2882]
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ runtime/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/runtime/Makefile.am b/runtime/Makefile.am
+index 56bc08e..5ada0c4 100644
+--- a/runtime/Makefile.am
++++ b/runtime/Makefile.am
+@@ -202,7 +202,7 @@ if ENABLE_LIBGCRYPT
+    libgcry_la_SOURCES = libgcry.c libgcry_common.c libgcry.h
+    libgcry_la_CPPFLAGS = $(RSRT_CFLAGS) $(LIBGCRYPT_CFLAGS)
+    pkglib_LTLIBRARIES += lmcry_gcry.la
+-   lmcry_gcry_la_DEPENDENCIES = librsyslog.la
++   lmcry_gcry_la_DEPENDENCIES = librsyslog.la libgcry.la
+    lmcry_gcry_la_SOURCES = lmcry_gcry.c lmcry_gcry.h
+    lmcry_gcry_la_CPPFLAGS = $(RSRT_CFLAGS) $(LIBGCRYPT_CFLAGS)
+    lmcry_gcry_la_LDFLAGS = -module -avoid-version \
+-- 
+2.7.4
+
