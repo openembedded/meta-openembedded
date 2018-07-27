@@ -13,33 +13,33 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 "
 
 SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+           file://smb.conf \
            file://16-do-not-check-xsltproc-manpages.patch \
            file://20-do-not-import-target-module-while-cross-compile.patch \
            file://21-add-config-option-without-valgrind.patch \
-           file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
-           file://0006-avoid-using-colon-in-the-checking-msg.patch \
            file://netdb_defines.patch \
            file://glibc_only.patch \
            file://iconv-4.7.0.patch \
            file://dnsserver-4.7.0.patch \
            file://smb_conf-4.7.0.patch \
            file://volatiles.03_samba \
-          "
+           file://0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch \
+           "
 SRC_URI_append_libc-musl = " \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
           "
 
-SRC_URI[md5sum] = "16b70fda54cf84521ed976a0856430cc"
-SRC_URI[sha256sum] = "ca6fca9d7e248bcaa55c54bdcc115eeed10660074da5c54a2b78dd3cccc604de"
+SRC_URI[md5sum] = "67f271ed6b793c2acfe014b5b8f0cca8"
+SRC_URI[sha256sum] = "e0569a8a605d5dfb49f1fdd11db796f4d36fe0351c4a7f21387ef253010b82ed"
 
-UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.7(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
 RDEPENDS_${PN}_remove = "perl"
 
-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libbsd libaio libpam"
+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libbsd libaio libpam"
 
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
@@ -104,7 +104,7 @@ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODU
 # .so files so there will not be a conflict.  This is not done consistantly, so be very careful
 # when adding to this list.
 #
-SAMBA4_LIBS="heimdal,cmocka,NONE"
+SAMBA4_LIBS="heimdal,cmocka,ldb,pyldb-util,NONE"
 
 EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=/run \
@@ -135,7 +135,7 @@ do_install_append() {
     done
 
     install -d ${D}${systemd_system_unitdir}
-    install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
+    install -m 0644 ${S}/bin/default/packaging/systemd/*.service ${D}${systemd_system_unitdir}/
     sed -e 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' \
         -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
         -i ${D}${systemd_system_unitdir}/*.service
@@ -159,7 +159,7 @@ do_install_append() {
 
     install -d ${D}${sysconfdir}/samba
     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
-    install -m644 packaging/RHEL/setup/smb.conf ${D}${sysconfdir}/samba/smb.conf
+    install -m644 ${WORKDIR}/smb.conf ${D}${sysconfdir}/samba/smb.conf
     install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
 
     install -d ${D}${sysconfdir}/default
@@ -268,6 +268,7 @@ FILES_winbind = "${sbindir}/winbindd \
                  ${libdir}/samba/idmap \
                  ${libdir}/samba/nss_info \
                  ${libdir}/winbind_krb5_locator.so \
+                 ${libdir}/winbind-krb5-localauth.so \
                  ${sysconfdir}/init.d/winbind \
                  ${systemd_system_unitdir}/winbind.service"
 
