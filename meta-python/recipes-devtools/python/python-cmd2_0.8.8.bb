@@ -1,10 +1,10 @@
 SUMMARY = "Extra features for standard library's cmd module"
 HOMEPAGE = "http://packages.python.org/cmd2/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://setup.py;beginline=52;endline=52;md5=0f13c9cfc75288223cf7edd2f3b985a2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=60bc6842001870a418935bd84570b676"
 
-SRC_URI[md5sum] = "bfe0900a2288283a40f0ee7533486a2f"
-SRC_URI[sha256sum] = "e7b6b4b76272a051c943c3c709cd760142af16fbc9218e0ed3c22b28ea38d0a8"
+SRC_URI[md5sum] = "1f555bb656d361d9b0212b07e232752f"
+SRC_URI[sha256sum] = "b08bc5088fdd131d659354e6b4f8cf7c01a70566f68aed146e00d296a24b687b"
 
 inherit pypi setuptools
 
