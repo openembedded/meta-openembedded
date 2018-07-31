@@ -9,7 +9,7 @@ SECTION = "console/network"
 BUGTRACKER = "https://github.com/esnet/iperf/issues"
 AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d098223e44bdd19585315ee75cd9d2d7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a9a036136b748453e839c0eb8906ef2e"
 
 DEPENDS = "openssl"
 
@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/esnet/iperf.git \
            file://0002-Remove-pg-from-profile_CFLAGS.patch \
            "
 
-SRCREV = "88d907f7fb58bfab5d086c5da60c922e1c582c92"
+SRCREV = "88f3ad87f38762081a6d7127890ff5c3a052b06a"
 
 S = "${WORKDIR}/git"
 
@@ -28,6 +28,6 @@ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sc
 
 CFLAGS += "-D_GNU_SOURCE"
 
-EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}"
+EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}${prefix}"
 
 BBCLASSEXTEND = "native"
