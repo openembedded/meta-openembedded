@@ -1,5 +1,7 @@
 SUMMARY = "Vi IMproved - enhanced vi editor"
 SECTION = "console/utils"
+
+PROVIDES = "xxd"
 DEPENDS = "ncurses gettext-native"
 # vimdiff doesn't like busybox diff
 RSUGGESTS_${PN} = "diffutils"
@@ -111,5 +113,3 @@ ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
 ALTERNATIVE_PRIORITY = "100"
 
 BBCLASSEXTEND = "native"
-
-PROVIDES += "${PN}-xxd"

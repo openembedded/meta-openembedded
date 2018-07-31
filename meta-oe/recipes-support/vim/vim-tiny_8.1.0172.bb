@@ -2,6 +2,8 @@ require vim_${PV}.bb
 
 SUMMARY += " (with tiny features)"
 
+PROVIDES_remove = "xxd"
+
 PACKAGECONFIG += "tiny"
 
 do_install() {
