@@ -48,3 +48,7 @@ do_compile_prepend() {
 }
 
 BBCLASSEXTEND = "native"
+
+# http://errors.yoctoproject.org/Errors/Details/184714/
+# SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
+CLEANBROKEN = "1"
