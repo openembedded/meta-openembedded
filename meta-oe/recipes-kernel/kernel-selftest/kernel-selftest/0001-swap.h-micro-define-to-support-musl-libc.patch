@@ -1,0 +1,26 @@
+From c21dfb0dfdfec281479e267ad7fe9a8d4ba15a70 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Tue, 17 Jul 2018 23:47:48 -0700
+Subject: [PATCH] add micro define to support musl libc
+
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+---
+ recipe-sysroot/usr/include/linux/swab.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/recipe-sysroot/usr/include/linux/swab.h b/recipe-sysroot/usr/include/linux/swab.h
+index afb7eb7..33efa10 100644
+--- a/recipe-sysroot/usr/include/linux/swab.h
++++ b/recipe-sysroot/usr/include/linux/swab.h
+@@ -6,6 +6,8 @@
+ 
+ #include <asm/swab.h>
+ 
++#define __always_inline __inline __attribute__ ((__always_inline__))
++
+ /*
+  * casts are necessary for constants, because we never know how for sure
+  * how U/UL/ULL map to __u16, __u32, __u64. At least not in a portable way.
+-- 
+2.11.0
+

@@ -1,0 +1,25 @@
+From a2e6b8fde28b743b69990a4e16c296e099631ed4 Mon Sep 17 00:00:00 2001
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
+Date: Mon, 23 Jul 2018 00:56:19 -0700
+Subject: [PATCH] bpf: test_progs.c add support for musllibc
+
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
+---
+ tools/testing/selftests/bpf/test_progs.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/testing/selftests/bpf/test_progs.c b/tools/testing/selftests/bpf/test_progs.c
+index 11ee25c..21b27b7 100644
+--- a/tools/testing/selftests/bpf/test_progs.c
++++ b/tools/testing/selftests/bpf/test_progs.c
+@@ -4,6 +4,7 @@
+  * modify it under the terms of version 2 of the GNU General Public
+  * License as published by the Free Software Foundation.
+  */
++#define __always_inline __inline __attribute__ ((__always_inline__))
+ #include <stdio.h>
+ #include <unistd.h>
+ #include <errno.h>
+-- 
+2.11.0
+
