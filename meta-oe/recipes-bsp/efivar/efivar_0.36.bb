@@ -12,15 +12,11 @@ inherit pkgconfig
 
 COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
-SRCREV = "11324799c68193116e1dd5f94b416591bd324f90"
+SRCREV = "ef3449223ecd1e7b1098c523d66b2f960fe839ea"
 SRC_URI = "git://github.com/rhinstaller/efivar.git \
            file://allow-multi-definitions-for-native.patch \
-           file://0001-makeguids-Do-not-use-__bswap_constant_-16-32-macros.patch \
-           file://musl-strndupa.patch \
-           file://0001-efivar-dp.h-Add-Wunknown-attributes-when-using-clang.patch \
            "
 SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
-                                file://0003-efivar-fix-for-cross-compile.patch \
                                 ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
                               "
 SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
@@ -28,15 +24,12 @@ SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.pat
 
 S = "${WORKDIR}/git"
 
-# Setting CROSS_COMPILE breaks pkgconfig, so just set AR
-EXTRA_OEMAKE = "AR=${TARGET_PREFIX}gcc-ar"
-
 do_compile_prepend() {
     sed -i -e s:-Werror::g ${S}/gcc.specs
 }
 
 do_compile_class-native() {
-    oe_runmake -C src makeguids
+    oe_runmake -C src makeguids CC_FOR_BUILD=${BUILD_CC}
 }
 
 do_install() {
