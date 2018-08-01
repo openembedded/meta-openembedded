@@ -25,8 +25,8 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
            file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
            file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
            "
-SRC_URI[md5sum] = "48899de3118e04cfa40a2364f5618193"
-SRC_URI[sha256sum] = "5d076e1fefb41aa178ad3e1cef6511670efc47de5cb04d4af9bdd4e8f2f18cbc"
+SRC_URI[md5sum] = "4026bc71c8c8c49477f4f551e25ee9fb"
+SRC_URI[sha256sum] = "4c861b6fc05ab5048e8d3552445c1a08860d238e83f17ff6b51493cc17bcaa75"
 
 SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
 SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
