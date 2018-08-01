@@ -15,23 +15,22 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit autotools cmake
 B = "${S}"
 
-SRCREV = "4d6e1b8306a8cca8ad5e15ff8201f6ea24459cfd"
+SRCREV = "6f2301d08e64a965ad36b401ec8dc2b24bc47075"
 
-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.8-branch \
+SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.9-branch \
            file://0001-tigervnc-remove-includedir.patch \
            file://0002-do-not-build-tests-sub-directory.patch \
            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
-           file://0005-Remove-INITARGS-from-xserver119.patch.patch \
 "
 
 # Keep sync with xorg-server in oe-core
 XORG_PN ?= "xorg-server"
-XORG_PV ?= "1.19.3"
+XORG_PV ?= "1.19.6"
 SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.bz2;name=xorg"
 XORG_S = "${WORKDIR}/${XORG_PN}-${XORG_PV}"
-SRC_URI[xorg.md5sum] = "015d2fc4b9f2bfe7a626edb63a62c65e"
-SRC_URI[xorg.sha256sum] = "677a8166e03474719238dfe396ce673c4234735464d6dadf2959b600d20e5a98"
+SRC_URI[xorg.md5sum] = "3e47777ff034a331aed2322b078694a8"
+SRC_URI[xorg.sha256sum] = "a732502f1db000cf36a376cd0c010ffdbf32ecdd7f1fa08ba7f5bdf9601cc197"
 
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
