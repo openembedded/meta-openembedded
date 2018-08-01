@@ -1,7 +1,7 @@
-From 9f5a048181cf29d241d96814e736b8235b3d42b1 Mon Sep 17 00:00:00 2001
+From 42d8e57c748951098534bf7f52c4ebc790ef66e9 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Fri, 16 Jun 2017 15:43:00 +0800
-Subject: [PATCH 12/13] invoking mkfs with infinite timeout
+Subject: [PATCH 10/11] invoking mkfs with infinite timeout
 
 This large timeout is needed when running on machines with
 lots of disks, or with slow disks.
