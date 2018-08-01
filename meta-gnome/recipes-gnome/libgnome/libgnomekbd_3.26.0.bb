@@ -12,8 +12,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 GNOME_COMPRESS_TYPE = "xz"
 
-SRC_URI[archive.md5sum] = "7b1ebf99f4254c99922163c262c7ff04"
-SRC_URI[archive.sha256sum] = "340b30dabfebbd4e0e6c0fe34a378966dd5640b5d44595ab8a19b0be255d77df"
+SRC_URI[archive.md5sum] = "8b9d13d46255cde910b3db5a6ebb4727"
+SRC_URI[archive.sha256sum] = "ea3b418c57c30615f7ee5b6f718def7c9d09ce34637324361150744258968875"
 
 EXTRA_OECONF_remove = "--disable-schemas-install"
 
