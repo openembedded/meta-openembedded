@@ -9,10 +9,9 @@ HOMEPAGE = "https://pagure.io/volume_key"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
-           file://0001-explicitly-support-python3-by-pkg-config.patch \
 "
-SRC_URI[md5sum] = "605fd99a6e42916728020562a6edee78"
-SRC_URI[sha256sum] = "c5729de7e33e39c8674e9aae2337d2719f9298d6499f1656d0d25a065a7e98a7"
+SRC_URI[md5sum] = "30df56c7743eb7c965293b3d61194232"
+SRC_URI[sha256sum] = "e6b279c25ae477b555f938db2e41818f90c8cde942b0eec92f70b6c772095f6d"
 
 SRCNAME = "volume_key"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
