@@ -5,7 +5,6 @@ to run other programs with a specific NUMA policy and a libnuma to do \
 allocations with NUMA policy in applications."
 LICENSE = "GPL-2.0 & LGPL-2.1"
 SECTION = "apps"
-RDEPENDS_${PN} = "perl"
 
 inherit autotools-brokensep ptest
 
