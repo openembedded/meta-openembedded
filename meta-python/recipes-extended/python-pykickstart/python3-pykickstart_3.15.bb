@@ -12,14 +12,13 @@ RDEPENDS_${PN} = "python3 \
 "
 
 S = "${WORKDIR}/git"
-SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=pykickstart-2 \
+SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=master \
            file://0001-support-authentication-for-kickstart.patch \
            file://0002-pykickstart-parser.py-add-lock-for-readKickstart-and.patch \
            file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
-           file://0005-tweak-shebang-to-python3.patch \
            "
-SRCREV = "b2787a818540e678c2f9c5dca0c6bbd65b8b55e5"
+SRCREV = "07c4d89129fa6b460acc86daf58eb5ff64cdc832"
 
 UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
 
