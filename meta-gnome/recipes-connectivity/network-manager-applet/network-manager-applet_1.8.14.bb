@@ -11,8 +11,8 @@ inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introsp
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "eae3be75e77ff1a7ea3174be25e62d03"
-SRC_URI[archive.sha256sum] = "0adc4bfae8b49f7a1d929c22ef20933bd41fb4a8b458280f44c65f9e45b4c9c3"
+SRC_URI[archive.md5sum] = "bcdd92645d36fc5778f27aeb2773509b"
+SRC_URI[archive.sha256sum] = "ca9b1233721f700a7190b98eea69ce6d0ccf74fbfde173ac868a4ec7a78840cb"
 
 PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
 PACKAGECONFIG ??= ""
@@ -38,10 +38,10 @@ do_compile_prepend() {
 RDEPENDS_${PN} =+ "networkmanager"
 
 FILES_${PN} += " \
-    ${datadir}/appdata \
     ${datadir}/nm-applet/ \
     ${datadir}/libnm-gtk/wifi.ui \
     ${datadir}/libnma/wifi.ui \
+    ${datadir}/metainfo \
 "
 
 # musl builds generate gir files which otherwise go un-packaged
