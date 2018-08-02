@@ -9,14 +9,9 @@ DEPENDS = "libpam openssl db"
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "376bb189ceb3a113954f1012c45be7ff09e148ba"
+SRCREV = "e2145df09469bf84878e4729b4ecd814efb797d1"
 
-SRC_URI = " \
-    git://github.com/PADL/pam_ccreds \
-    file://0001-make-sure-we-don-t-overflow-the-data-buffer.patch \
-    file://0002-add-minimum_uid-option.patch \
-    file://0003-Set-EXTENSION_SO-for-all-linux-targets.patch \
-"
+SRC_URI = "git://github.com/PADL/pam_ccreds"
 
 S = "${WORKDIR}/git"
 
