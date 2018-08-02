@@ -13,6 +13,7 @@ SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.8.1.o
            file://0005-fix-do_compile-failed-on-mips.patch \
            file://disable-mozglue-in-stand-alone-builds.patch \
            file://add-riscv-support.patch \
+           file://0001-mozjs-fix-coredump-caused-by-getenv.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://0006-support-musl.patch \
