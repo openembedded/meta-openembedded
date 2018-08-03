@@ -51,6 +51,7 @@ EXTRA_OEMAKE_task-install += "STATIC_LIBRARY_NAME=js_static"
 
 do_configure() {
     export SHELL="/bin/sh"
+    export TMP="${B}"
     ${S}/js/src/configure ${EXTRA_OECONF}
 }
 
