@@ -1,2 +1,3 @@
 inherit setuptools
-require python-pbr.inc
+# The inc file is in oe-core
+require recipes-devtools/python/python-pbr.inc
