@@ -10,12 +10,10 @@ SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.x
            file://adduser-add-M-option-for-useradd.patch \
 "
 
-SRC_URI[md5sum] = "e042a5842b8f24312d6f5a99a1af8f2c"
-SRC_URI[sha256sum] = "72d811ad3ba17d2794b14d19acd1d6b57f9dd31d9250d51e786895dee2daeac0"
+SRC_URI[md5sum] = "9f36d69585e74c022aa8e22a0337507d"
+SRC_URI[sha256sum] = "be01881356e40c4d7dd2ce209fb4a94c0589056ac3ebe7debbbf09a6383c1411"
 
 inherit cpan-base update-alternatives
-
-S = "${WORKDIR}/${BPN}"
 
 do_install() {
     install -d ${D}${sbindir}
