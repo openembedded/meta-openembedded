@@ -30,7 +30,7 @@ Index: cpprest/Release/src/CMakeLists.txt
 ===================================================================
 --- cpprest.orig/Release/src/CMakeLists.txt
 +++ cpprest/Release/src/CMakeLists.txt
-@@ -250,21 +250,21 @@
+@@ -253,21 +253,21 @@
    install(
      TARGETS ${CPPREST_TARGETS}
      EXPORT cpprestsdk-targets
