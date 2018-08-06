@@ -11,12 +11,11 @@ HOMEPAGE = "http://logcheck.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
 
-SRC_URI = "git://salsa.debian.org/debian/logcheck.git;protocol=https \
+SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
            file://99_logcheck \
 "
-SRCREV = "0a5865d80fa34c55387a1917a3e6f885bcff7f1d"
-
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "7b50d10da6f185228627c55fdd51f624"
+SRC_URI[sha256sum] = "06294c092b2115eca3d054c57778718c91dd2e0fd1c46650b7343c2a92672ca9"
 
 inherit useradd
 
