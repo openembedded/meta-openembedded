@@ -10,9 +10,10 @@ DEPENDS = "intltool-native gnome-common-native gtk+3 gdk-pixbuf-native libxres"
 PACKAGECONFIG ??= "startup-notification"
 PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
 
-inherit gnomebase gobject-introspection gtk-doc
-SRC_URI[archive.md5sum] = "487938d65d4bfae1f2501052b1bd7492"
-SRC_URI[archive.sha256sum] = "1cb03716bc477058dfdf3ebfa4f534de3b13b1aa067fcd064d0b7813291cba72"
+inherit gnomebase gobject-introspection gtk-doc gettext
+
+SRC_URI[archive.md5sum] = "23df51ec0a1169014fe3a102d572b244"
+SRC_URI[archive.sha256sum] = "afa6dc283582ffec15c3374790bcbcb5fb422bd38356d72deeef35bf7f9a1f04"
 
 inherit distro_features_check
 # libxres means x11 only
