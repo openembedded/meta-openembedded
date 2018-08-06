@@ -1,16 +1,16 @@
 DESCRIPTION = "This package contains the DNS.pm module with friends."
 HOMEPAGE = "http://www.net-dns.org/"
 SECTION = "libs"
-LICENSE = "Artistic-1.0 | GPL-1.0+"
+LICENSE = "MIT"
 
-LIC_FILES_CHKSUM = "file://README;md5=92d93d8c5bf22de77578531e283dd219"
+LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=27db37b42cd1a5173a53922d67072bcb"
 
 DEPENDS += "perl"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "0da1099c0a3548d36ea9e31d5bb9e122"
-SRC_URI[sha256sum] = "83c38a594eeb2c85d66e60047a0f5b403f34bd92a5d13606f02e828d450299fc"
+SRC_URI[md5sum] = "28fcbcbf4483a9f23f75be4b9e3e45c8"
+SRC_URI[sha256sum] = "9a79fd8fea1a708726c18d193ae4437479206ccb20ffa7f0971371e172e2c2e0"
 
 S = "${WORKDIR}/Net-DNS-${PV}"
 
