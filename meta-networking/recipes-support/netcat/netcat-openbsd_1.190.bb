@@ -30,7 +30,7 @@ netcat_do_patch() {
             rm -rf ${S}/.pc
             mv ${S}/.pc-netcat ${S}/.pc
             QUILT_PATCHES=${S}/debian/patches quilt pop -a
-            rm -rf ${S}/.pc ${S}/debian
+            rm -rf ${S}/.pc
     fi
     QUILT_PATCHES=${S}/debian/patches quilt push -a
     mv ${S}/.pc ${S}/.pc-netcat
