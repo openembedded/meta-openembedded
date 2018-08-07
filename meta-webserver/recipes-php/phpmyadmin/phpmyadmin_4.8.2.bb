@@ -38,4 +38,4 @@ do_install() {
 FILES_${PN} = "${datadir}/${BPN} \
                ${sysconfdir}/apache2/conf.d"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN} += "bash php-cli"
