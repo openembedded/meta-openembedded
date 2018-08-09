@@ -10,6 +10,7 @@ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
 
 SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
            file://0001-Add-libm-to-link-for-fmod-API.patch \
+           file://fix-fatal-no-names-found-git-error.patch \
           "
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"

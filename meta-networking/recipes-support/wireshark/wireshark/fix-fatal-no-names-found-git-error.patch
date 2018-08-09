@@ -1,0 +1,23 @@
+fixes
+
+| fatal: No names found, cannot describe anything.
+| CMake Error at CMakeLists.txt:3086 (string):
+|   string begin index: 1 is out of range 0 - 0
+
+Use always to circumvent the issue if git tag is not present
+
+Upstream-status: Pending
+
+Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
+---
+--- wireshark-2.6.1/CMakeLists.txt	2018-08-08 18:18:05.388318652 -0700
++++ wireshark-2.6.1/CMakeLists-fix.txt	2018-08-08 18:22:27.829670496 -0700
+@@ -3078,7 +3078,7 @@
+ 	endif()
+ 
+ 	execute_process(
+-		COMMAND git describe --abbrev=8 --match v[1-9]*
++		COMMAND git describe --always --abbrev=8 --match v[1-9]*
+ 		OUTPUT_VARIABLE _git_description
+ 		OUTPUT_STRIP_TRAILING_WHITESPACE
+ 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
