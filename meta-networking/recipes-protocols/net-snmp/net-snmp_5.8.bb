@@ -11,32 +11,22 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
            file://init \
            file://snmpd.conf \
            file://snmptrapd.conf \
-           file://systemd-support.patch \
            file://snmpd.service \
            file://snmptrapd.service \
            file://net-snmp-add-knob-whether-nlist.h-are-checked.patch \
            file://fix-libtool-finish.patch \
            file://net-snmp-testing-add-the-output-format-for-ptest.patch \
            file://run-ptest \
-           file://dont-return-incompletely-parsed-varbinds.patch \
            file://0001-config_os_headers-Error-Fix.patch \
-           file://0001-config_os_libs2-Error-Fix.patch \
            file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
-           file://net-snmp-agentx-crash.patch \
            file://0001-get_pid_from_inode-Include-limit.h.patch \
-           file://0001-BUG-a2584-Fix-snmptrap-to-use-clientaddr-from-snmp.c.patch \
-           file://0001-snmplib-UDPIPv6-transport-Add-a-missing-return-state.patch \
-           file://0001-configure-fix-check-for-enable-perl-cc-checks.patch \
            file://0002-configure-fix-a-cc-check-issue.patch \
-           file://0003-CHANGES-BUG-2712-Fix-Perl-module-compilation.patch \
            file://0004-configure-fix-incorrect-variable.patch \
            file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
            file://net-snmp-fix-for-disable-des.patch \
-           file://0001-Remove-U64-typedef.patch \
-           file://fix-openssl-build-errors.patch \
            "
-SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
-SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
+SRC_URI[md5sum] = "6aae5948df7efde626613d6a4b3cd9d4"
+SRC_URI[sha256sum] = "c6291385b8ed84f05890fe4197005daf7e7ee7b082c2e390fa114a9477a56042"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
 UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
