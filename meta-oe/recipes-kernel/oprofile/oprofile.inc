@@ -30,7 +30,6 @@ UPSTREAM_CHECK_REGEX = "oprofile-(?P<pver>\d+(\.\d+)+)/"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/oprofile/files/oprofile/"
 
 SRC_URI_append_libc-musl = " file://musl.patch \
-                             file://0001-fix-musl-libc-compile-error.patch \
 "
 
 inherit autotools pkgconfig ptest
