@@ -8,7 +8,9 @@ SECTION = "console/admin"
 LICENSE = "GPLv2+ & BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
 
-SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
+SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz \
+    file://glibc-2.28.patch \
+"
 MIRRORS += "http://sg.danny.cz/sg/p https://fossies.org/linux/misc"
 
 UPSTREAM_CHECK_REGEX = "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
