@@ -15,21 +15,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 DEPENDS = "ncurses zlib"
 
-ATOP_VER = "${@'-'.join(d.getVar('PV').rsplit('.', 1))}"
-
-SRC_URI = " \
-    http://www.atoptool.nl/download/${BPN}-${ATOP_VER}.tar.gz \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
-    file://0001-include-missing-header-files.patch \
-    file://remove-bashisms.patch \
-    file://fix-permissions.patch \
-    file://sysvinit-implement-status.patch \
-"
-
-SRC_URI[md5sum] = "034dc1544f2ec4e4d2c739d320dc326d"
-SRC_URI[sha256sum] = "c785b8a2355be28b3de6b58a8ea4c4fcab8fadeaa57a99afeb03c66fac8e055d"
-
-S = "${WORKDIR}/${BPN}-${ATOP_VER}"
+SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
+           ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
+           file://remove-bashisms.patch \
+           file://fix-permissions.patch \
+           file://sysvinit-implement-status.patch \
+           file://0001-add-sys-sysmacros.h-for-major-minor-macros.patch \
+           "
+SRC_URI[md5sum] = "48e1dbef8c7d826e68829a8d5fc920fc"
+SRC_URI[sha256sum] = "73e4725de0bafac8c63b032e8479e2305e3962afbe977ec1abd45f9e104eb264"
 
 do_compile() {
     oe_runmake all
@@ -37,13 +31,13 @@ do_compile() {
 
 do_install() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        make DESTDIR=${D} VERS=${ATOP_VER} SYSDPATH=${systemd_system_unitdir} \
+        make DESTDIR=${D} VERS=${PV} SYSDPATH=${systemd_system_unitdir} \
             PMPATHD=${systemd_unitdir}/system-sleep systemdinstall
         install -d ${D}${sysconfdir}/tmpfiles.d
         install -m 644 ${WORKDIR}/volatiles.atop.conf ${D}${sysconfdir}/tmpfiles.d/atop.conf
         rm -f ${D}${systemd_system_unitdir}/atopacct.service
     else
-        make DESTDIR=${D} VERS=${ATOP_VER} sysvinstall
+        make DESTDIR=${D} VERS=${PV} sysvinstall
         install -d ${D}${sysconfdir}/default/volatiles
         install -m 644 ${WORKDIR}/volatiles.99_atop ${D}${sysconfdir}/default/volatiles/99_atop
         rm -f ${D}${sysconfdir}/init.d/atopacct
