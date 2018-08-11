@@ -38,15 +38,17 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 PV = "0.6+git${SRCPV}"
 S = "${WORKDIR}/git"
-SRC_URI = "git://github.com/kexecboot/kexecboot.git"
-SRCREV = "4c4f127e79ac5b8d6b6e2fbb938ccbf12b04c531"
+SRC_URI = "git://github.com/kexecboot/kexecboot.git \
+           file://0001-Add-top_srcdir-to-compiler-include-paths.patch \
+           file://0002-include-sys-sysmacros.h.patch \
+           "
+SRCREV = "d5ffd81bf6a1a2087cdc6c606cae98099229131c"
 inherit autotools
 
 EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
 
 do_install () {
-    install -d ${D}${bindir}
-    install -m 0755 kexecboot ${D}${bindir}
+    install -D -m 0755 ${B}/src/kexecboot ${D}${bindir}/kexecboot
     install -d ${D}/proc
     install -d ${D}/mnt
     install -d ${D}/dev

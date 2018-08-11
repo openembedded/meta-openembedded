@@ -1,0 +1,30 @@
+From c587012cbe448c9295f50497812ca3530cabbb51 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 11 Aug 2018 14:39:01 -0700
+Subject: [PATCH 2/2] include sys/sysmacros.h
+
+glibc 2.28+ does not include this header implicitly via other system
+headers anymore
+
+src/devicescan.c:373: undefined reference to `makedev'
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/devicescan.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/devicescan.c b/src/devicescan.c
+index 4f2f497..0b2b253 100644
+--- a/src/devicescan.c
++++ b/src/devicescan.c
+@@ -20,6 +20,7 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+-- 
+2.18.0
+
