@@ -4,18 +4,21 @@ HOMEPAGE = "http://www.owfs.org/"
 SECTION = "console/network"
 
 LICENSE = "GPLv2 & LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a0bc427f423a41220ab79a0b392218bd \
-                    file://COPYING.LIB;md5=865c4bd642d9e04f43925ad7e929ae87"
+LIC_FILES_CHKSUM = "file://COPYING;md5=12a64df1cc87275e940cab05ee75c37d \
+                    file://COPYING.LIB;md5=16ff3ffebed582e19ea7a4f48ec77b42"
 
 DEPENDS = "fuse virtual/libusb0"
-
-SRC_URI = "${SOURCEFORGE_MIRROR}/owfs/owfs-${PV}.tar.gz \
+# v3.2p2
+SRCREV = "93c1f36d9ac481075287da331d5184f590f8c0fa"
+SRC_URI = "git://github.com/owfs/owfs \
            file://owhttpd \
-           file://owserver "
-SRC_URI[md5sum] = "56ba145be208002e58775a7203369851"
-SRC_URI[sha256sum] = "9d22dbff72d235476688c02669f7171b23e21dffadf40bbdd3b8263908218424"
+           file://owserver \
+           file://0001-include-sys-sysmacros.h-for-major.patch \
+           "
 
-inherit autotools-brokensep update-rc.d
+S = "${WORKDIR}/git"
+
+inherit autotools-brokensep update-rc.d pkgconfig
 
 EXTRA_OECONF = " \
                  --with-fuseinclude=${STAGING_INCDIR} \
