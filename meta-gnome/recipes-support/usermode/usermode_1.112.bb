@@ -17,6 +17,7 @@ SRC_URI = "https://releases.pagure.org/${BPN}/${BPN}-${PV}.tar.xz \
            file://0001-fix-compile-failure-against-musl-C-library.patch \
            file://0001-Makefile.am-Link-with-libm-for-powl-API.patch \
            file://0001-Missing-n-in-translated-string.patch \
+           file://0001-Include-sys-sysmacros.h-for-major-minor.patch \
            "
 SRC_URI[md5sum] = "a766a9f7600f573fb6de4655d4162196"
 SRC_URI[sha256sum] = "37c4d667209da14082c08df6e48fe955d1532efebd5322f13f94683c6cc10370"
