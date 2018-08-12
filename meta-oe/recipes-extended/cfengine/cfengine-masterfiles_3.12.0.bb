@@ -22,8 +22,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
 
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "1247ef4e8f3cee5efa98da50c326e5a4"
-SRC_URI[sha256sum] = "5d18a8d71f451d0b5dd1f5e579452b29b99b664f2bb0827dbba9a615f2764df6"
+SRC_URI[md5sum] = "d59bd8c95620da816c382f749d425860"
+SRC_URI[sha256sum] = "1c50e3d8c702097e13a21258626d936d6ff2e6492e893dfe286ff0d6204d7a65"
 
 inherit autotools
 

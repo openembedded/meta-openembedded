@@ -16,12 +16,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
 DEPENDS = "attr tokyocabinet"
 
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
-           file://change-hard-coded-lib-path.patch \
            file://set-path-of-default-config-file.patch \
-"
+           "
 
-SRC_URI[md5sum] = "c16baf08189a1af6fcf2e2ff61102992"
-SRC_URI[sha256sum] = "d4fa9ac7276dba7b85d6757aab2f0929ab8d3b115cb0e7b0cf984760347429d7"
+SRC_URI[md5sum] = "33ef12260db4b430352229f37f7cb0e5"
+SRC_URI[sha256sum] = "d71ba98a272390c6fa8bc20e8ea27f0050a0a72a3e6b206a4762b4646be332ec"
 
 inherit autotools systemd
 
