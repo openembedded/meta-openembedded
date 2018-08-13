@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/rhinstaller/blivet;branch=3.1-release \
            file://0010-invoking-mkfs-with-infinite-timeout.patch \
            file://0011-invoking-dd-with-infinite-timeout.patch \
            file://0012-remove-dmraid-dependency-check.patch \
+           file://0013-add-Z-y-and-y-to-lvm.pvcreate.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "blivet-(?P<pver>\d+(\.\d+)+)$"
