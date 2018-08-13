@@ -1,0 +1,28 @@
+From 7c97710bfc44d895b7111bef9c55866f00a3589c Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 13 Aug 2018 11:54:27 -0700
+Subject: [PATCH] Revert "Makefile: force sync after build in case reboot loses
+ executable"
+
+This reverts commit ae6322b1baea56a589207c96e358daae8edd0a8f.
+
+Not needed for cross-builds
+
+Upstream-Status: Inappropriate [Cross compile specific]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ Makefile | 1 -
+ 1 file changed, 1 deletion(-)
+
+Index: stress-ng-0.09.37/Makefile
+===================================================================
+--- stress-ng-0.09.37.orig/Makefile
++++ stress-ng-0.09.37/Makefile
+@@ -344,7 +344,6 @@ OBJS += $(CONFIG_OBJS)
+ stress-ng: info $(OBJS)
+ 	@echo "LD $@"
+ 	@$(CC) $(CPPFLAGS) $(CFLAGS) $(OBJS) -lm $(LDFLAGS) -lc -o $@
+-	@sync
+ 
+ .PHONY: info
+ info:

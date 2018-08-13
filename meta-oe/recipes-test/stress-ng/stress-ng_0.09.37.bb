@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "zlib libaio"
 
 SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.xz \
-           file://0002-stress-fcntl-fix-build-for-musl.patch \
-          "
+           file://0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch \
+           "
 SRC_URI_append_libc-musl = " \
     file://0001-Several-changes-to-fix-musl-build.patch \
     "
-SRC_URI[md5sum] = "1f8b6c2c2830704d2a2814c16082d48e"
-SRC_URI[sha256sum] = "02cac34a5cb041197af60c1867844c6cbb089a6d10a38cdcf7b8f27bfaa6ef8f"
+SRC_URI[md5sum] = "81d73313ea7778f749470b6f950553af"
+SRC_URI[sha256sum] = "8494afb2f2e2cf7e79ec9c6c3129308b098e530141ba2b07d6547708fd63af3d"
 
 UPSTREAM_CHECK_URI ?= "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/"
 UPSTREAM_CHECK_REGEX ?= "(?P<pver>\d+(\.\d+)+)\.tar"

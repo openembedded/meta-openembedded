@@ -1,4 +1,4 @@
-From 784dcd09d3f266e271d007f4fd257e85036872ca Mon Sep 17 00:00:00 2001
+From d499375fe267be8819ecb985123d89a21edc0e59 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
 Date: Tue, 17 Oct 2017 10:13:20 -0500
 Subject: [PATCH] Several changes to fix musl build
