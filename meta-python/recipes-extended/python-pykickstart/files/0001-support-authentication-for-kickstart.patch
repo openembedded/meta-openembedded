@@ -1,4 +1,4 @@
-From b7070a79432b790dffa82401364e4fd8d906eb2b Mon Sep 17 00:00:00 2001
+From f05f5fc363e2510f6943532f3e14a6423f6a2cf1 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Tue, 31 Jul 2018 17:24:47 +0800
 Subject: [PATCH 1/4] support authentication for kickstart
@@ -51,7 +51,7 @@ index bf08ac5..aada7aa 100644
 +    def __str__(self):
 +        return self.value
 diff --git a/pykickstart/load.py b/pykickstart/load.py
-index fb935f2..c6f013f 100644
+index fb935f2..41a2e9e 100644
 --- a/pykickstart/load.py
 +++ b/pykickstart/load.py
 @@ -18,10 +18,13 @@
@@ -101,7 +101,7 @@ index fb935f2..c6f013f 100644
 +        if user is None or passwd is None:
 +            log.info("Require Authentication")
 +            raise KickstartAuthError("Require Authentication.\nAppend 'ksuser=<username> kspasswd=<password>' to boot command")
-+
+ 
 +        reasons = request.headers.get("WWW-Authenticate", "").split()
 +        if reasons:
 +            auth_type = reasons[0]
@@ -111,9 +111,9 @@ index fb935f2..c6f013f 100644
 +            auth=HTTPDigestAuth(user, passwd)
 +
 +    return auth
- 
++
 +def _load_url(location, user=None, passwd=None):
-+     '''Load a location (URL or filename) and return contents as string'''
++    '''Load a location (URL or filename) and return contents as string'''
 +    auth = _get_auth(location, user=user, passwd=passwd)
      try:
 -        request = requests.get(location, verify=SSL_VERIFY)
