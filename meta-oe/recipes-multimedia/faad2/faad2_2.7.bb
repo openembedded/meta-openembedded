@@ -1,4 +1,5 @@
-SUMMARY = "Library for reading some sort of media format"
+SUMMARY = "An open source MPEG-4 and MPEG-2 AAC decoding library"
+HOMEPAGE = "http://www.audiocoding.com/faad2.html"
 SECTION = "libs"
 LICENSE = "GPLv2"
 
