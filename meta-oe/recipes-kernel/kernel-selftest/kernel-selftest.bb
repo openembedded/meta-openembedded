@@ -79,7 +79,7 @@ do_configure() {
     :
 }
 
-do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_clang_related"
+do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
 python copy_kselftest_source_from_kernel() {
     sources = (d.getVar("KERNEL_SELFTEST_SRC") or "").split()
     src_dir = d.getVar("STAGING_KERNEL_DIR")
@@ -94,10 +94,10 @@ python copy_kselftest_source_from_kernel() {
             bb.utils.copyfile(src, dest)
 }
 
-remove_clang_related() {
+remove_unrelated() {
     if ${@bb.utils.contains('PACKAGECONFIG','bpf','true','false',d)} ; then
         test -f ${S}/tools/testing/selftests/bpf/Makefile && \
-            sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile || \
+            sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile || \
             bberror "Your kernel is probably older than 4.10 and doesn't have tools/testing/selftests/bpf/Makefile file from https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d, disable bpf PACKAGECONFIG"
     fi
 }
