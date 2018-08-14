@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
 
 DEPENDS += "libxml2 libxslt"
 
-SRC_URI[md5sum] = "40331e46f6aa49fd0e7043d82e58a879"
-SRC_URI[sha256sum] = "622f7e40faef13d232fb52003661f2764ce6cdef3edb0a59af7c1559e4cc36d1"
+SRC_URI[md5sum] = "31239400ca4e130b69993bb3c14204b3"
+SRC_URI[sha256sum] = "e2afbe403090f5893e254958d02875e0732975e73c4c0cdd33c1f009a61963ca"
 
 DISTUTILS_BUILD_ARGS += " \
                      --with-xslt-config='pkg-config libxslt' \
