@@ -21,6 +21,7 @@ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
 
 inherit distutils3-base cmake
 
+EXTRA_OECMAKE_append = " -DPYTHON3_PACKAGES_PATH:PATH=${baselib}/python${PYTHON_BASEVERSION}/site-packages "
 
 # override this in local.conf to get needed bindings.
 # BINDINGS_pn-upm="python"
