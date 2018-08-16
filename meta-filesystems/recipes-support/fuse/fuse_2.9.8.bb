@@ -16,10 +16,11 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
            file://0001-fuse-fix-the-return-value-of-help-option.patch \
            file://fuse.conf \
 "
-SRC_URI[md5sum] = "9bd4ce8184745fd3d000ca2692adacdb"
-SRC_URI[sha256sum] = "832432d1ad4f833c20e13b57cf40ce5277a9d33e483205fc63c78111b3358874"
+SRC_URI[md5sum] = "f365e848a82504edb0b7a33df790ca78"
+SRC_URI[sha256sum] = "5e84f81d8dd527ea74f39b6bc001c874c02bad6871d7a9b0c14efb57430eafe3"
 
 UPSTREAM_CHECK_URI = "https://github.com/libfuse/libfuse/releases"
+UPSTREAM_CHECK_REGEX = "fuse\-(?P<pver>2(\.\d+)+).tar.gz"
 
 inherit autotools pkgconfig update-rc.d systemd
 
