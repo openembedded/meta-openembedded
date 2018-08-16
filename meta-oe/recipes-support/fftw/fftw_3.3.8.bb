@@ -19,7 +19,10 @@ EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
 
 CFLAGS += "-D_GNU_SOURCE"
 
+# neon is optional for arm version < 8 -> check tune features
 FFTW_NEON = "${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)}"
+# neon is suppored for arm version = 8 -> enable
+FFTW_NEON_aarch64 = "--enable-neon"
 FFTW_NEON_class-native = ""
 
 do_configure() {
