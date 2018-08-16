@@ -8,8 +8,8 @@ DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit sha
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "216d461c5e96e2cea74253be407af6dc"
-SRC_URI[archive.sha256sum] = "9ec388afeb373a213f2cc489184f76a17ae273a000e8a4ec720c1995943256bb"
+SRC_URI[archive.md5sum] = "10b84073fe5f3d540abd9d36ed342b37"
+SRC_URI[archive.sha256sum] = "c4e279a33dd9cd208135e8bfc4788ceaf264c61a24a85255f6696a934a0101f7"
 
 do_configure_prepend() {
     # make automake happy..
