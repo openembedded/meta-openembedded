@@ -27,8 +27,8 @@ inherit autotools systemd
 export EXPLICIT_VERSION="${PV}"
 
 SYSTEMD_SERVICE_${PN} = "cfengine3.service cf-apache.service cf-hub.service cf-postgres.service \
-                         cf-runalerts.service cf-consumer.service cf-execd.service \
-                         cf-monitord.service  cf-redis-server.service  cf-serverd.service \
+                         cf-runalerts.service cf-execd.service \
+                         cf-monitord.service  cf-serverd.service \
 "
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
