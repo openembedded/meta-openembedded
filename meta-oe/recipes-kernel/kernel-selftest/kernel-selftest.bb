@@ -2,14 +2,19 @@ SUMMARY = "Kernel selftest for Linux"
 DESCRIPTION = "Kernel selftest for Linux"
 LICENSE = "GPLv2"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7 \
-"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+
+DEPENDS = "rsync-native"
 
 # for musl libc
 SRC_URI_libc-musl += "file://userfaultfd.patch \
                       file://0001-bpf-test_progs.c-add-support-for-musllibc.patch \
 "
 
+# now we just test bpf and vm
+# we will append other kernel selftest in the future
+# bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
+# if you have older kernel than that you need to remove it from PACKAGECONFIG
 PACKAGECONFIG ??= "bpf vm"
 
 PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
@@ -23,10 +28,8 @@ do_populate_lic[depends] += "virtual/kernel:do_patch"
 
 S = "${WORKDIR}/${BP}"
 
-# now we just test bpf and vm
-# we will append other kernel selftest in the future
-TEST_LIST = "bpf \
-             vm \
+TEST_LIST = " \
+    ${@bb.utils.filter('PACKAGECONFIG', 'bpf vm', d)} \
 "
 
 EXTRA_OEMAKE = '\
@@ -35,11 +38,8 @@ EXTRA_OEMAKE = '\
     CC="${CC}" \
     AR="${AR}" \
     LD="${LD}" \
+    DESTDIR="${D}" \
 '
-
-EXTRA_OEMAKE += "\
-    'DESTDIR=${D}' \
-"
 
 KERNEL_SELFTEST_SRC ?= "Makefile \
                         include \
@@ -95,10 +95,17 @@ python copy_kselftest_source_from_kernel() {
 }
 
 remove_clang_related() {
-	sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile
+    if ${@bb.utils.contains('PACKAGECONFIG','bpf','true','false',d)} ; then
+        test -f ${S}/tools/testing/selftests/bpf/Makefile && \
+            sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' ${S}/tools/testing/selftests/bpf/Makefile || \
+            bberror "Your kernel is probably older than 4.10 and doesn't have tools/testing/selftests/bpf/Makefile file from https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d, disable bpf PACKAGECONFIG"
+    fi
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 INHIBIT_PACKAGE_DEBUG_SPLIT="1"
 FILES_${PN} += "/usr/kernel-selftest"
+
+# tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
+INSANE_SKIP_${PN} += "ldflags"
