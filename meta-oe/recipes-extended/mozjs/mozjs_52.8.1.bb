@@ -32,6 +32,11 @@ CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
 
 DEPENDS += "nspr zlib"
 
+# Disable null pointer optimization in gcc >= 6
+# https://bugzilla.redhat.com/show_bug.cgi?id=1328045
+CFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
+CXXFLAGS += "-fno-tree-vrp -fno-strict-aliasing -fno-delete-null-pointer-checks"
+
 # nspr's package-config is ignored so set libs manually
 EXTRA_OECONF = " \
     --target=${TARGET_SYS} \
