@@ -7,8 +7,8 @@ DEPENDS = "xfce4-panel libxfce4util libxfce4ui gdk-pixbuf gtk+ glib-2.0 libsoup-
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "901b2c1fb1dd30940c94aaea3e35c540"
-SRC_URI[sha256sum] = "904f3a61417ace55a3b144187565335f8ad5e530ca23b397ce90ed61708c6091"
+SRC_URI[md5sum] = "f783eb575e2015f39e1c1aae499b113f"
+SRC_URI[sha256sum] = "364ebddc4c9971b4023aa8019d4e3bd08f091b65dc98b218beb55851f69ceda2"
 
 do_compile_prepend() {
     mkdir -p lib
