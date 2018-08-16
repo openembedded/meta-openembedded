@@ -97,7 +97,7 @@ python copy_kselftest_source_from_kernel() {
 remove_unrelated() {
     if ${@bb.utils.contains('PACKAGECONFIG','bpf','true','false',d)} ; then
         test -f ${S}/tools/testing/selftests/bpf/Makefile && \
-            sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' ${S}/tools/testing/selftests/bpf/Makefile || \
+            sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' -e '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile || \
             bberror "Your kernel is probably older than 4.10 and doesn't have tools/testing/selftests/bpf/Makefile file from https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d, disable bpf PACKAGECONFIG"
     fi
 }
