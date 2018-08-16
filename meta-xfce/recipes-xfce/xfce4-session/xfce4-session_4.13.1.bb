@@ -12,8 +12,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI += " \
     file://0001-configure.in-hard-code-path-to-iceauth.patch \
 "
-SRC_URI[md5sum] = "0de0afd0c8dfe66f846c6c1c5ff3164a"
-SRC_URI[sha256sum] = "3e02b124c6a282d9b1af0b30696d5256b1c2e56618992b49062314ed3ea5d3a1"
+SRC_URI[md5sum] = "a47988a2c871a411c19e3af1eefe591e"
+SRC_URI[sha256sum] = "c789f0f8234e06f5266f0c6ccdbdcc3c085e8d9eea06a0eafe8f7cfc4fe23af4"
 
 ALTERNATIVE_${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
