@@ -8,8 +8,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
            file://basename-include.patch \
            "
-SRC_URI[md5sum] = "6602813e52f02f85f11ba1590e0ef749"
-SRC_URI[sha256sum] = "2c096431adfb74bc2f53be466889b7646e1b599f28fa036094f3f7235cc9eae7"
+SRC_URI[md5sum] = "bcfbdcaca2a1f72435e4aaa3c06664ca"
+SRC_URI[sha256sum] = "a34a4f1a0f5b610c584c65824e92e3ba3e08a89d8ab4622aee11b8ceea5366f9"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
 
