@@ -1,0 +1,24 @@
+From 2693a499d4eec4504962e85a9713fa6431d3025f Mon Sep 17 00:00:00 2001
+From: Avinash Reddy Palleti <avinash.reddy.palleti@intel.com>
+Date: Thu, 16 Aug 2018 22:36:31 +0530
+Subject: [PATCH] Fix: Add sys/sysmacros.h to fix build issue
+
+---
+ cpuid.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cpuid.c b/cpuid.c
+index 3c94837..0a98616 100644
+--- a/cpuid.c
++++ b/cpuid.c
+@@ -31,6 +31,7 @@
+ #include <stdio.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include <fcntl.h>
+ #include <errno.h>
+ #include <unistd.h>
+-- 
+2.7.4
+
