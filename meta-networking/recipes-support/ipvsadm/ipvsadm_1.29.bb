@@ -34,6 +34,7 @@ do_compile() {
 }
 
 do_install() {
+    sed -i -e "s;SBIN\t\t= \$(BUILD_ROOT)/sbin;SBIN\t\t= \$(BUILD_ROOT)/$base_sbindir;" ${S}/Makefile
     oe_runmake 'BUILD_ROOT=${D}' install
 }
 
