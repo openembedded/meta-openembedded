@@ -1,0 +1,42 @@
+From c4a09f3d29a57022e03e2849f04c111a57a6a388 Mon Sep 17 00:00:00 2001
+From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Date: Sat, 18 Aug 2018 14:59:38 +0200
+Subject: [PATCH] Fix default installation path
+
+---
+ Release/CMakeLists.txt     | 2 +-
+ Release/src/CMakeLists.txt | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Release/CMakeLists.txt b/Release/CMakeLists.txt
+index c93d3cc49..d20b4b070 100644
+--- a/Release/CMakeLists.txt
++++ b/Release/CMakeLists.txt
+@@ -18,7 +18,7 @@ enable_testing()
+ set(WERROR ON CACHE BOOL "Treat Warnings as Errors.")
+ set(CPPREST_EXCLUDE_WEBSOCKETS OFF CACHE BOOL "Exclude websockets functionality.")
+ set(CPPREST_EXCLUDE_COMPRESSION OFF CACHE BOOL "Exclude compression functionality.")
+-set(CPPREST_EXPORT_DIR lib/cpprestsdk CACHE STRING "Directory to install CMake config files.")
++set(CPPREST_EXPORT_DIR cmake CACHE STRING "Directory to install CMake config files.")
+ set(CPPREST_INSTALL_HEADERS ON CACHE BOOL "Install header files.")
+ set(CPPREST_INSTALL ON CACHE BOOL "Add install commands.")
+ 
+diff --git a/Release/src/CMakeLists.txt b/Release/src/CMakeLists.txt
+index a34605bda..050ff71fc 100644
+--- a/Release/src/CMakeLists.txt
++++ b/Release/src/CMakeLists.txt
+@@ -262,12 +262,12 @@ if(CPPREST_INSTALL)
+ 
+   install(
+     FILES "${CMAKE_CURRENT_BINARY_DIR}/cpprestsdk-config.cmake"
+-    DESTINATION ${CPPREST_EXPORT_DIR}
++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/${CPPREST_EXPORT_DIR}
+   )
+   install(
+     EXPORT cpprestsdk-targets
+     FILE cpprestsdk-targets.cmake
+     NAMESPACE cpprestsdk::
+-    DESTINATION ${CPPREST_EXPORT_DIR}
++    DESTINATION ${CMAKE_INSTALL_LIBDIR}/${CPPREST_EXPORT_DIR}
+   )
+ endif()
