@@ -21,4 +21,4 @@ EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON "
 OECMAKE_GENERATOR = "Unix Makefiles"
 
 inherit cmake pkgconfig
-
+EXCLUDE_FROM_WORLD = "1"
