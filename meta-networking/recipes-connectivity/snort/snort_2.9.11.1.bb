@@ -4,7 +4,7 @@ SECTION = "net"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
-DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc"
+DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc bison-native"
 
 SRC_URI = "https://www.snort.org/downloads/snort/${BP}.tar.gz \
     file://snort.init \
