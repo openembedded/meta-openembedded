@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
 SECTION = "net"
 
-DEPENDS = "libmnl libnftnl readline gmp"
+DEPENDS = "libmnl libnftnl readline gmp bison-native"
 RRECOMMENDS_${PN} += "kernel-module-nf-tables \
     "
 
