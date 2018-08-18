@@ -22,7 +22,7 @@ S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
 
-DEPENDS = "libpcre json-c glib-2.0 dtc"
+DEPENDS = "libpcre json-c glib-2.0 dtc bison-native"
 DEPENDS_append_libc-musl = " libexecinfo"
 
 inherit autotools bash-completion pkgconfig
