@@ -20,7 +20,7 @@ SRC_URI += "file://run-ptest \
 PACKAGECONFIG ??= "bpf vm"
 
 PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
-PACKAGECONFIG[vm] = ",,,libgcc bash"
+PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
 
 do_patch[depends] += "virtual/kernel:do_shared_workdir"
 
