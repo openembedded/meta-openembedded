@@ -10,6 +10,8 @@ DEPENDS = "rsync-native"
 SRC_URI_libc-musl += "file://userfaultfd.patch \
                       file://0001-bpf-test_progs.c-add-support-for-musllibc.patch \
 "
+SRC_URI += "file://run-ptest \
+"
 
 # now we just test bpf and vm
 # we will append other kernel selftest in the future
@@ -22,7 +24,7 @@ PACKAGECONFIG[vm] = ",,,libgcc bash"
 
 do_patch[depends] += "virtual/kernel:do_shared_workdir"
 
-inherit linux-kernel-base kernel-arch
+inherit linux-kernel-base kernel-arch ptest
 
 do_populate_lic[depends] += "virtual/kernel:do_patch"
 
