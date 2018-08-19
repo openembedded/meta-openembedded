@@ -20,17 +20,24 @@ UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)"
 LICENSE = "LGPLv2+ & GPLv2 & GPLv2+"
 LIC_FILES_CHKSUM = "file://README.license;md5=8f0bbcdd678df1bce9863492b6c8832d"
 
-DEPENDS = "corosync systemd pacemaker"
+DEPENDS = "corosync systemd"
 
 inherit pkgconfig systemd distro_features_check
+
+PACKAGECONFIG ??= ""
+
+PACKAGECONFIG[pacemaker] = ",,pacemaker"
 
 SYSTEMD_SERVICE_${PN} = "dlm.service"
 SYSTEMD_AUTO_ENABLE = "enable"
 
 export EXTRA_OEMAKE = ""
 
+DONTBUILD = "${@bb.utils.contains('PACKAGECONFIG', 'pacemaker', '', 'fence', d)}"
+
 do_compile_prepend() {
     sed -i "s/libsystemd-daemon/libsystemd/g" ${S}/dlm_controld/Makefile
+    sed -i -e "s/ ${DONTBUILD}//g" ${S}/Makefile
 }
 
 do_compile () {
