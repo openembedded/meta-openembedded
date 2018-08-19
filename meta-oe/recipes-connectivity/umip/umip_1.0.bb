@@ -7,7 +7,7 @@ HOMEPAGE = "http://umip.org/"
 SECTION = "System Environment/Base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
-DEPENDS = "rpm indent-native"
+DEPENDS = "rpm indent-native bison-native"
 
 SRC_URI = "git://github.com/jlanza/umip \
            file://add-dependency-to-support-parallel-compilation.patch \
