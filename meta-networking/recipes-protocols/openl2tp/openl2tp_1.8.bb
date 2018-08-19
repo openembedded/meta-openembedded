@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
                     file://usl/LICENSE;md5=9c1387a3c5213aa40671438af3e00793 \
                     "
 
-DEPENDS = "popt flex readline rpcsvc-proto-native"
+DEPENDS = "popt flex readline rpcsvc-proto-native bison-native"
 
 SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
            file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
