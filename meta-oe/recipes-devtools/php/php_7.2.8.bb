@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=67e369bc8d1f2e641236b8002039a6a2"
 SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
             file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
             file://0001-fix-error-caused-by-a-new-variable-is-declared-after.patch \
+            file://CVE-2017-9120.patch \
            "
 SRC_URI_append_class-target = " \
                                 file://pear-makefile.patch \
