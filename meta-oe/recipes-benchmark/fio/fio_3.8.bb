@@ -32,6 +32,7 @@ S = "${WORKDIR}/git"
 DISABLE_STATIC = ""
 
 EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+EXTRA_OECONF = "--disable-optimizations"
 
 do_configure() {
     ./configure ${EXTRA_OECONF}
