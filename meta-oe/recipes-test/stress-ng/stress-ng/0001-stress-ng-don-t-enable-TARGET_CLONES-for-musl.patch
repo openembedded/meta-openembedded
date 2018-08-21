@@ -1,0 +1,30 @@
+From 59f5ff72768f228cd530bb18a5fc3e8c4772857a Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 Aug 2018 21:43:14 -0700
+Subject: [PATCH] stress-ng: don't enable TARGET_CLONES for musl
+
+musl does not support gnu ifuncs
+
+Upstream-Status: Submitted [https://github.com/ColinIanKing/stress-ng/pull/27]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ stress-ng.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/stress-ng.h b/stress-ng.h
+index b9359a4..f228808 100644
+--- a/stress-ng.h
++++ b/stress-ng.h
+@@ -1090,7 +1090,7 @@ extern void pr_fail_dbg__(const args_t *args, const char *msg);
+ #endif
+ 
+ /* GCC5.0+ target_clones attribute */
+-#if defined(__GNUC__) && NEED_GNUC(5,5,0) && STRESS_X86 && \
++#if defined(__GNUC__) && defined(__GLIBC__) && NEED_GNUC(5,5,0) && STRESS_X86 && \
+     !defined(__gnu_hurd__) && !defined(__FreeBSD_Kernel__)
+ #define TARGET_CLONES	__attribute__((target_clones("sse","sse2","ssse3", "sse4.1", "sse4a", "avx","avx2","default")))
+ #else
+-- 
+2.18.0
+

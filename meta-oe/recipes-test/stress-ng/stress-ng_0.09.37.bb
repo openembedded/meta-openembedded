@@ -7,6 +7,7 @@ DEPENDS = "zlib libaio"
 
 SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.xz \
            file://0001-Revert-Makefile-force-sync-after-build-in-case-reboo.patch \
+           file://0001-stress-ng-don-t-enable-TARGET_CLONES-for-musl.patch \
            "
 SRC_URI_append_libc-musl = " \
     file://0001-Several-changes-to-fix-musl-build.patch \
