@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
            file://ntpd.list \
 "
 
-SRC_URI[md5sum] = "00950ca2855579541896513e78295361"
-SRC_URI[sha256sum] = "f14a39f753688252d683ff907035ffff106ba8d3db21309b742e09b5c3cd278e"
+SRC_URI[md5sum] = "1522d66574bae14abb2622746dad2bdc"
+SRC_URI[sha256sum] = "709b222b5013d77d26bfff532b5ea470a8039497ef29d09363931c036cb30454"
 
 inherit autotools update-rc.d useradd systemd pkgconfig
 
@@ -120,6 +120,7 @@ SYSTEMD_PACKAGES = "${PN} ntpdate sntp"
 SYSTEMD_SERVICE_${PN} = "ntpd.service"
 SYSTEMD_SERVICE_ntpdate = "ntpdate.service"
 SYSTEMD_SERVICE_sntp = "sntp.service"
+SYSTEMD_AUTO_ENABLE_sntp = "disable"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
