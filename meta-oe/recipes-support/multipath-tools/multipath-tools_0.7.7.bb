@@ -63,7 +63,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
            file://0030-Always-use-devmapper.patch \
            file://0031-Always-use-devmapper-for-kpartx.patch \
            "
-          
+
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
 SRCREV = "386d288b5595fc2c01dffe698b6eb306c6674908"
@@ -73,6 +73,7 @@ S = "${WORKDIR}/git"
 inherit systemd pkgconfig
 
 SYSTEMD_SERVICE_${PN} = "multipathd.service"
+SYSTEMD_AUTO_ENABLE = "disable"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
