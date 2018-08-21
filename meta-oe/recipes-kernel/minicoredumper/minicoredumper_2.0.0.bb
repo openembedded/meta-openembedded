@@ -42,3 +42,6 @@ do_install_append() {
     sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
     sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${systemd_system_unitdir}/minicoredumper.service
 }
+
+# http://errors.yoctoproject.org/Errors/Details/186966/
+EXCLUDE_FROM_WORLD_libc-musl = "1"

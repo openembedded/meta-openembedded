@@ -41,3 +41,6 @@ do_configure_prepend () {
     touch NEWS README AUTHORS ChangeLog
     sed -i "s/libaoss.so/${LEAD_SONAME}/" ${S}/alsa/aoss.in
 }
+
+# http://errors.yoctoproject.org/Errors/Details/186961/
+EXCLUDE_FROM_WORLD_libc-musl = "1"

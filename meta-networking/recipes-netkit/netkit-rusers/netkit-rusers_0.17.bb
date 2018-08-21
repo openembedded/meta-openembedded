@@ -73,3 +73,6 @@ FILES_${PN}-dbg = "${prefix}/src/debug \
             ${bindir}/.debug ${sbindir}/.debug"
 
 RDEPENDS_${PN}-server = "tcp-wrappers xinetd rpcbind"
+
+# http://errors.yoctoproject.org/Errors/Details/186962/
+EXCLUDE_FROM_WORLD_libc-musl = "1"

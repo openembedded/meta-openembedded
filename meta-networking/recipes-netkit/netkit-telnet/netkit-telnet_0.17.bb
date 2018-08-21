@@ -59,3 +59,6 @@ ALTERNATIVE_LINK_NAME[telnet] = "${bindir}/telnet"
 SRC_URI[md5sum] = "d6beabaaf53fe6e382c42ce3faa05a36"
 SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2bb88e00"
 FILES_${PN} += "${sbindir}/in.* ${libdir}/* ${sysconfdir}/xinetd.d/*"
+
+# http://errors.yoctoproject.org/Errors/Details/186954/
+EXCLUDE_FROM_WORLD_libc-musl = "1"
