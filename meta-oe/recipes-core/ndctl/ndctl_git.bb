@@ -8,14 +8,15 @@ HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/nvdimm/nvdimm.git/tree/
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
 
-inherit autotools-brokensep pkgconfig module-base
+inherit autotools-brokensep pkgconfig module-base bash-completion systemd
 
-SRCREV = "0d6aeeabec9d271e08c12e4cf679b59946e20156"
+# v62
+SRCREV = "11f560f4048c1d38b7011a49566871a1e8a07c94"
 SRC_URI = "git://github.com/pmem/ndctl.git"
 
 DEPENDS = "virtual/kernel kmod udev json-c"
 
-PV = "v61+git${SRCPV}"
+PV = "v62+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
@@ -24,6 +25,6 @@ do_configure_prepend() {
     ${S}/autogen.sh
 }
 
-COMPATIBLE_HOST='(x86_64).*'
+SYSTEMD_SERVICE_${PN} = "ndctl-monitor.service"
 
-FILES_${PN} += "/usr/share/bash-completion/completions/ndctl"
+COMPATIBLE_HOST='(x86_64).*'
