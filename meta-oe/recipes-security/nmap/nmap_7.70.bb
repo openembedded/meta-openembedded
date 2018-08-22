@@ -13,7 +13,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
 SRC_URI[md5sum] = "84eb6fbe788e0d4918c2b1e39421bf79"
 SRC_URI[sha256sum] = "847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
 
-inherit autotools-brokensep pkgconfig python3native
+inherit autotools-brokensep pkgconfig pythonnative
 
 PACKAGECONFIG ?= "ncat nping ndiff pcap"
 
@@ -35,6 +35,8 @@ EXTRA_OECONF = "--with-libdnet=included --with-liblinear=included --without-subv
 # it also only works with python2
 # disable for now until py3 is supported
 EXTRA_OECONF += "--without-zenmap"
+
+export PYTHON_SITEPACKAGES_DIR
 
 do_configure() {
     autoconf
