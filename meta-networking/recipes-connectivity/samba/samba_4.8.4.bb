@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
           "
 
-SRC_URI[md5sum] = "67f271ed6b793c2acfe014b5b8f0cca8"
-SRC_URI[sha256sum] = "e0569a8a605d5dfb49f1fdd11db796f4d36fe0351c4a7f21387ef253010b82ed"
+SRC_URI[md5sum] = "ca5bfbebd8d9eb95506e16594b2bbee2"
+SRC_URI[sha256sum] = "f5044d149e01894a08b1d114b8b69aed78171a7bb19608bd1fd771453b9a5406"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
 
