@@ -9,6 +9,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://remove_flags_from_build_flags.patch \
            file://0001-build-Check-for-sync_file_range-libc-function.patch \
            file://disable-xfs_scrub-build.patch \
+           file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
+           file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
            "
 SRC_URI[md5sum] = "b935b693dfac0264e232c3c4e52d5569"
 SRC_URI[sha256sum] = "f53f5169cb98cfca471ddea30092738c427ba284c5356e01b45dd1ae3b297e0d"
@@ -48,13 +50,14 @@ export tagname="CC"
 
 EXTRA_OEMAKE = "DIST_ROOT='${D}'"
 
-do_configure_prepend () {
+do_configure () {
     export BUILD_CC="${BUILD_CC} ${BUILD_CFLAGS}"
     # Prevent Makefile from calling configure without arguments,
     # when do_configure gets called for a second time.
     rm -f ${B}/include/builddefs ${B}/include/platform_defs.h ${B}/configure
     # Recreate configure script.
     oe_runmake configure
+    oe_runconf
 }
 
 do_install_append() {
