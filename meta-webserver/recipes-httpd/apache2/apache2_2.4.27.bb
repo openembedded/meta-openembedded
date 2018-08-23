@@ -21,6 +21,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://apache2-volatile.conf \
            file://apache2.service \
            file://volatiles.04_apache2 \
+           file://CVE-2018-1333.patch \
           "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
