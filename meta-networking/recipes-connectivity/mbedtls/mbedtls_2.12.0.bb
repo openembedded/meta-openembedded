@@ -24,8 +24,8 @@ SECTION = "libs"
 
 SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
 
-SRC_URI[md5sum] = "3b133b9b4cf0ccf3ac1c91436771bfa5"
-SRC_URI[sha256sum] = "2a87061ad770e6d019b3b9cd27ea42a58bd0affccc4c6bfe4f5f0eee9ebf8aa8"
+SRC_URI[md5sum] = "90b55ca8c726f6612de8a31a2a090e94"
+SRC_URI[sha256sum] = "a2bed048f41a19ec7b4dd2e96649145bbd68a6955c3b51aeb7ccbf8908c3ce97"
 
 inherit cmake
 
