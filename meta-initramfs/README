@@ -25,7 +25,7 @@ with '[meta-initramfs]' in the subject.
 When sending single patches, please using something like:
 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
 
-Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
+Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
 
 
 License
