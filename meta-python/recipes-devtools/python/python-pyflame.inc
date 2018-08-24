@@ -10,3 +10,4 @@ S = "${WORKDIR}/git"
 
 inherit pkgconfig autotools
 
+COMPATIBLE_HOST_libc-musl_class-target = "null"
