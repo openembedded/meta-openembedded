@@ -25,6 +25,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://0002-Replace-__S_IEXEC-with-S_IEXEC.patch \
            file://pkgconfig-libnsl.patch \
            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
+           file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
            "
 SRC_URI[md5sum] = "17bc9d371cf39d99f400ebadfc2289bb"
 SRC_URI[sha256sum] = "8d1c9964c8286ccb08262ad47c60bb6343492902def5399fd36d79a0ccb0e718"
@@ -57,6 +58,7 @@ do_configure_prepend () {
     if [ ! -e ${S}/acinclude.m4 ]; then
         cp ${S}/aclocal.m4 ${S}/acinclude.m4
     fi
+    cp ${STAGING_DATADIR_NATIVE}/aclocal/pkg.m4 .
 }
 
 do_install_append () {
