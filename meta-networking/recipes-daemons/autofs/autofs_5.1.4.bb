@@ -46,13 +46,14 @@ EXTRA_OECONF += "--disable-mount-locking \
                 --enable-ignore-busy --with-openldap=no \
                 --with-sasl=no --with-libtirpc \
                 --with-path=${STAGING_BINDIR_NATIVE} \
+                --with-fifodir=${localstatedir}/run \
+                --with-flagdir=${localstatedir}/run \
 "
 CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
                         ac_cv_path_RPCGEN=rpcgen \
 "
 
 do_configure_prepend () {
-    sed -e "s:filagdir:flagdir:" -i ${S}/configure.in
     if [ ! -e ${S}/acinclude.m4 ]; then
         cp ${S}/aclocal.m4 ${S}/acinclude.m4
     fi
