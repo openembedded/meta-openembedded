@@ -10,6 +10,10 @@ inherit pypi
 SRC_URI[md5sum] = "074abcceee0d795ba34ad6430f71d0e8"
 SRC_URI[sha256sum] = "a37836aa47d1b81c2db1a6b7a5e79926062b5d76bd962115a0e615551be2b48d"
 
+# http://errors.yoctoproject.org/Errors/Details/184715/
+# Can't find required file: ../src/google/protobuf/descriptor.proto
+CLEANBROKEN = "1"
+
 UPSTREAM_CHECK_REGEX = "protobuf/(?P<pver>\d+(\.\d+)+)/"
 
 RDEPENDS_${PN} += " \
