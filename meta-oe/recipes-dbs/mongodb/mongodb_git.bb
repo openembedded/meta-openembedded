@@ -43,8 +43,9 @@ COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
 COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
 COMPATIBLE_MACHINE_armv7a = "(!.*armv7a).*"
 COMPATIBLE_MACHINE_armv7ve = "(!.*armv7ve).*"
-COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
+# https://jira.mongodb.org/browse/SERVER-16898
+COMPATIBLE_HOST_mipsarch = "null"
 
 PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
 PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
