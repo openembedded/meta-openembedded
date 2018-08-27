@@ -1,18 +1,20 @@
 SUMMARY = "A Python crypto and SSL toolkit"
 HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
 
-LICENSE = "BSD"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/python-m2crypto:"
 
 SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
             file://cross-compile-platform.patch \
             file://m2crypto-0.26.4-gcc_macros.patch \
            "
-SRC_URI[md5sum] = "5c74c25ba8b45122318a165a3a2059ad"
-SRC_URI[sha256sum] = "5cae7acc0b34821f8c0ddf6665e482893fe1f198ad6379e61ffa9d8e65f5c199"
+SRC_URI[md5sum] = "7fce3cbf85eb84a669682892b935746b"
+SRC_URI[sha256sum] = "a1b2751cdadc6afac3df8a5799676b7b7c67a6ad144bb62d38563062e7cd3fc6"
 
 PYPI_PACKAGE = "M2Crypto"
-inherit pypi setuptools siteinfo
+inherit pypi siteinfo
 
 DEPENDS += "openssl swig-native"
 RDEPENDS_${PN} += "python-typing"
