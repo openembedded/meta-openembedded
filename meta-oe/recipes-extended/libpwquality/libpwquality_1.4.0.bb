@@ -19,7 +19,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 DEPENDS = "cracklib virtual/gettext python3"
 RDEPENDS_python3-libpwquality = "${PN}"
 
-inherit autotools python3native gettext
+inherit autotools distutils3-base gettext
 
 B = "${S}"
 
