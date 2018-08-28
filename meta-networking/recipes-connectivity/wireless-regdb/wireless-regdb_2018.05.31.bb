@@ -8,12 +8,12 @@ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
 SRC_URI[md5sum] = "0cbbdc21186c76cf58aba01b03f3dc5b"
 SRC_URI[sha256sum] = "e1dfbc3b97771373077f430c3c05082fae883145b37db5b2cfd12c56676fbe7b"
 
-inherit bin_package
+inherit bin_package allarch
 
 do_install() {
-    install -d -m0755 ${D}${libdir}/crda
+    install -d -m0755 ${D}${nonarch_libdir}/crda
     install -d -m0755 ${D}${sysconfdir}/wireless-regdb/pubkeys
-    install -m 0644 regulatory.bin ${D}${libdir}/crda/regulatory.bin
+    install -m 0644 regulatory.bin ${D}${nonarch_libdir}/crda/regulatory.bin
     install -m 0644 sforshee.key.pub.pem ${D}${sysconfdir}/wireless-regdb/pubkeys/sforshee.key.pub.pem
 
     install -m 0644 -D regulatory.db ${D}${nonarch_base_libdir}/firmware/regulatory.db
