@@ -14,7 +14,7 @@ HOMEPAGE = "https://github.com/vmware/open-vm-tools"
 SECTION = "vmware-tools"
 
 LICENSE = "LGPL-2.0 & GPL-2.0 & BSD & CDDL-1.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e5000bc3c5a39b6e66579d72cc32b45a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=559317809c5444fb39ceaf6ac45c43ac"
 LICENSE_modules/freebsd/vmblock = "BSD"
 LICENSE_modules/freebsd/vmmemctl = "GPL-2.0"
 LICENSE_modules/freebsd/vmxnet = "GPL-2.0"
@@ -27,20 +27,18 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
            file://vmtoolsd.init \
            file://0001-configure.ac-don-t-use-dnet-config.patch \
            file://0002-add-include-sys-sysmacros.h.patch \
-           file://0001-Remove-assumptions-about-glibc-being-only-libc-imple.patch \
-           file://0004-Add-Wno-incompatible-pointer-types-and-Wno-error-add.patch \
            file://0005-Use-configure-test-for-struct-timespec.patch \
            file://0006-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch \
            file://0007-Use-configure-to-test-for-feature-instead-of-platfor.patch \
            file://0011-Use-configure-test-for-sys-stat.h-include.patch \
-           file://use-tirpc.patch \
            file://fix-subdir-objects-configure-error.patch \
            file://0001-include-poll.h-instead-of-sys-poll.h.patch \
            file://0002-Rename-poll.h-to-vm_poll.h.patch \
            file://0003-use-posix-strerror_r-unless-on-gnu-libc-system.patch \
            file://0004-Use-uintmax_t-for-handling-rlim_t.patch \
+           file://0001-Use-off64_t-instead-of-__off64_t.patch \
            "
-SRCREV = "380a3d9747999e8bcbcbcd03b1402b702770db79"
+SRCREV = "2147df6aabe639fc5ff423ed791a8e7f02bf8d0a"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
