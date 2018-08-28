@@ -10,11 +10,10 @@ DEPENDS = "gflags c-ares protobuf protobuf-native protobuf-c protobuf-c-native o
 DEPENDS_append_class-target = " gtest grpc-native "
 
 S = "${WORKDIR}/git"
-SRCREV = "db68cb3652cc7697647e9934b5316d98a6ba04d1"
-BRANCH = "v1.8.x"
+SRCREV = "d8020cb6daa87f1a3bb3b0c299bc081c4a3de1e8"
+BRANCH = "v1.14.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH} \
            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
-           file://0004-CMakeLists.txt-Find-c-ares-in-target-sysroot-alone.patch \
            "
 SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
 
@@ -26,8 +25,13 @@ EXTRA_OECMAKE = " \
     -DgRPC_SSL_PROVIDER=package \
     -DgRPC_PROTOBUF_PROVIDER=package \
     -DgRPC_GFLAGS_PROVIDER=package \
-    -DgRPC_INSTALL=1 \
+    -DgRPC_INSTALL=ON \
+    -DCMAKE_CROSSCOMPILING=ON \
     -DBUILD_SHARED_LIBS=ON \
     "
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
+
+SYSROOT_DIRS_BLACKLIST_append_class-target = "${libdir}/cmake/grpc"
+
+FILES_${PN}-dev += "${bindir}"

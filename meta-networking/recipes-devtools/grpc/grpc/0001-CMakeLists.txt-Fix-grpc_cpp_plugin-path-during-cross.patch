@@ -14,7 +14,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index f9cd630..9663934 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -328,6 +328,13 @@ function(protobuf_generate_grpc_cpp)
+@@ -170,6 +170,13 @@ function(protobuf_generate_grpc_cpp)
      return()
    endif()
 
@@ -25,7 +25,7 @@ index f9cd630..9663934 100644
 +      set(gRPC_CPP_PLUGIN $<TARGET_FILE:grpc_cpp_plugin>)
 +  endif()
 +
-   set(_protobuf_include_path -I . -I ${PROTOBUF_WELLKNOWN_IMPORT_DIR})
+   set(_protobuf_include_path -I . -I ${_gRPC_PROTOBUF_WELLKNOWN_INCLUDE_DIR})
    foreach(FIL ${ARGN})
      get_filename_component(ABS_FIL ${FIL} ABSOLUTE)
 @@ -345,7 +352,7 @@ function(protobuf_generate_grpc_cpp)
@@ -41,7 +41,7 @@ diff --git a/templates/CMakeLists.txt.template b/templates/CMakeLists.txt.templa
 index 64daf04..a7e8629 100644
 --- a/templates/CMakeLists.txt.template
 +++ b/templates/CMakeLists.txt.template
-@@ -373,6 +373,13 @@
+@@ -209,6 +209,13 @@
        return()
      endif()
 
@@ -52,7 +52,7 @@ index 64daf04..a7e8629 100644
 +        set(gRPC_CPP_PLUGIN $<TARGET_FILE:grpc_cpp_plugin>)
 +    endif()
 +
-     set(_protobuf_include_path -I . -I <%text>${PROTOBUF_WELLKNOWN_IMPORT_DIR}</%text>)
+     set(_protobuf_include_path -I . -I <%text>${_gRPC_PROTOBUF_WELLKNOWN_INCLUDE_DIR}</%text>)
      foreach(FIL <%text>${ARGN}</%text>)
        get_filename_component(ABS_FIL <%text>${FIL}</%text> ABSOLUTE)
 @@ -390,7 +397,7 @@
