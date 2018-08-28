@@ -13,11 +13,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
 DEPENDS = "protobuf-native protobuf"
 
 PV .= "+git${SRCPV}"
-SRCREV = "dac1a65feac4ad72f612aab99f487056fbcf5c1a"
+SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
 
-SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-           file://0001-protobuf-c-fix-compile-error-with-protobuf-3.6.0.1.patch \
-"
+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
 
 S = "${WORKDIR}/git"
 
