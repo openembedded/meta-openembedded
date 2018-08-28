@@ -33,9 +33,20 @@ EXTRA_OECONF = " \
                 --with-distro debian          \
                 --with-initscripttype=both    \
                 --with-systemdunitdir=${systemd_unitdir}/system \
-                --without-manual\
+                --without-manual \
                "
 
+do_configure_prepend() {
+    # move the the file under folder /lib/drbd/ to /usr/lib/drbd when usrmerge enabled
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
+        for m_file in `find ${S} -name 'Makefile.in'`; do
+            sed -i -e "s;\$(DESTDIR)\/lib\/drbd;\$(DESTDIR)\${nonarch_libdir}\/drbd;g" $m_file
+        done
+        # move the the file under folder /lib/udev/ to /usr/lib/udev when usrmerge enabled
+        sed -i -e "s;default_udevdir=/lib/udev;default_udevdir=\${prefix}/lib/udev;g" ${S}/configure.ac
+    fi
+
+}
 do_install_append() {
     # don't install empty /var/lock to avoid conflict with base-files
     rm -rf ${D}${localstatedir}/lock
