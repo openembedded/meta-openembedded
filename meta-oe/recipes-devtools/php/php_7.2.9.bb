@@ -13,8 +13,8 @@ SRC_URI_append_class-target = " \
                                 file://0001-opcache-config.m4-enable-opcache.patch \
                                 "
 
-SRC_URI[md5sum] = "4c5e420b85d12306d84c7e1fa9b085c5"
-SRC_URI[sha256sum] = "1f8068f520a60fff3db19be1b849f0c02a33a0fd8b34b7ae05556ef682187ee6"
+SRC_URI[md5sum] = "175023bc43fd8f883e60849a02a03b93"
+SRC_URI[sha256sum] = "e9e3aaa6c317b7fea78246a758b017544366049d2789ad5a44fe9398464c53a8"
 
 PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
