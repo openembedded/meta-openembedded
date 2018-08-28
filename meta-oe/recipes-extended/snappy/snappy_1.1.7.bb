@@ -19,3 +19,4 @@ inherit cmake pkgconfig
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[lzo] = "-DHAVE_LIBLZO2=1,-DHAVE_LIBLZO2=0,lzo,"
+TARGET_CFLAGS += "-fPIC"
