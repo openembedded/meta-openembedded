@@ -23,6 +23,7 @@ RDEPENDS_${PN} += "\
 "
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MIKEM/Net-SSLeay-${PV}.tar.gz \
+           file://no-exec-on-configure.patch \
            file://run-ptest \
           "
 SRC_URI[md5sum] = "d602bdce4e0531c6efc276e3e429ca69"
@@ -32,9 +33,10 @@ S = "${WORKDIR}/Net-SSLeay-${PV}"
 
 inherit cpan ptest
 
-export OPENSSL_PREFIX="${STAGING_LIBDIR}"
-
-EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR} LIBS='-L${STAGING_LIBDIR} -lcrypto -lssl -L${STAGING_BASELIBDIR} -lz'"
+do_configure() {
+    export OPENSSL_PREFIX="${STAGING_EXECPREFIXDIR}"
+    cpan_do_configure
+}
 
 do_install_ptest() {
     cp -r ${B}/t ${D}${PTEST_PATH}
