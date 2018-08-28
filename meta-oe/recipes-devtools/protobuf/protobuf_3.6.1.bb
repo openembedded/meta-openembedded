@@ -12,7 +12,7 @@ DEPENDS_append_class-target = " protobuf-native"
 
 PV .= "+git${SRCPV}"
 
-SRCREV = "ce044817c7ba0aea27c3fd8e496635d94d20a755"
+SRCREV = "48cb18e5c419ddd23d9badcfe4e9df7bde1979b2"
 
 SRC_URI = "git://github.com/google/protobuf.git;branch=3.6.x \
            file://run-ptest \
