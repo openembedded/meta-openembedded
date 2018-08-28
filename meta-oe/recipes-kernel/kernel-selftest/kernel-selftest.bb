@@ -2,16 +2,18 @@ SUMMARY = "Kernel selftest for Linux"
 DESCRIPTION = "Kernel selftest for Linux"
 LICENSE = "GPLv2"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://../COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS = "rsync-native"
 
 # for musl libc
-SRC_URI_libc-musl += "file://userfaultfd.patch \
+SRC_URI_append_libc-musl = "\
+                      file://userfaultfd.patch \
                       file://0001-bpf-test_progs.c-add-support-for-musllibc.patch \
-"
+                      "
 SRC_URI += "file://run-ptest \
-"
+            file://COPYING \
+            "
 
 # now we just test bpf and vm
 # we will append other kernel selftest in the future
@@ -26,11 +28,9 @@ do_patch[depends] += "virtual/kernel:do_shared_workdir"
 
 inherit linux-kernel-base kernel-arch ptest
 
-do_populate_lic[depends] += "virtual/kernel:do_patch"
-
 S = "${WORKDIR}/${BP}"
 
-TEST_LIST = " \
+TEST_LIST = "\
     ${@bb.utils.filter('PACKAGECONFIG', 'bpf vm', d)} \
 "
 
@@ -48,7 +48,7 @@ KERNEL_SELFTEST_SRC ?= "Makefile \
                         tools \
                         scripts \
                         arch \
-			COPYING \
+                        LICENSES \
 "
 
 python __anonymous () {
@@ -62,6 +62,9 @@ python __anonymous () {
 }
 
 do_compile() {
+    bbwarn "clang with bpf support is needed with kernel 4.18+ so \
+either install it and add it to HOSTTOOLS, or add \
+clang-native from meta-clang to dependency"
     for i in ${TEST_LIST}
     do
         oe_runmake -C ${S}/tools/testing/selftests/${i}
@@ -78,7 +81,7 @@ do_install() {
 }
 
 do_configure() {
-    :
+    install -D -m 0644 ${WORKDIR}/COPYING ${S}/COPYING
 }
 
 do_patch[prefuncs] += "copy_kselftest_source_from_kernel remove_unrelated"
@@ -99,7 +102,10 @@ python copy_kselftest_source_from_kernel() {
 remove_unrelated() {
     if ${@bb.utils.contains('PACKAGECONFIG','bpf','true','false',d)} ; then
         test -f ${S}/tools/testing/selftests/bpf/Makefile && \
-            sed -i -e '/test_pkt_access/d' -e '/test_pkt_md_access/d' -e '/sockmap_verdict_prog/d' -e '/llc/d' ${S}/tools/testing/selftests/bpf/Makefile || \
+            sed -i -e 's/test_pkt_access.*$/\\/' \
+                   -e 's/test_pkt_md_access.*$/\\/' \
+                   -e 's/sockmap_verdict_prog.*$/\\/' \
+                   ${S}/tools/testing/selftests/bpf/Makefile || \
             bberror "Your kernel is probably older than 4.10 and doesn't have tools/testing/selftests/bpf/Makefile file from https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d, disable bpf PACKAGECONFIG"
     fi
 }
