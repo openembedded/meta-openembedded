@@ -1,7 +1,7 @@
 require python-pytest-helpers-namespace.inc
 
-inherit setuptools
+inherit setuptools3
 
 RDEPENDS_${PN} += " \
-    python-pytest \
+    python3-pytest \
     "
