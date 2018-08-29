@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
 DEPENDS = "util-linux libdevmapper popt libgcrypt json-c"
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v2.0/${BP}.tar.xz"
-SRC_URI[md5sum] = "ea1c722f8d4c4e36427628b679b1f819"
-SRC_URI[sha256sum] = "4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4"
+SRC_URI[md5sum] = "ed42b31f67d05b05e392d1943d467b8d"
+SRC_URI[sha256sum] = "9d3a3c7033293e0c97f0ad0501fd5b4d4913ae497cbf70cca06633ccc54b5734"
 
 inherit autotools gettext pkgconfig
 
