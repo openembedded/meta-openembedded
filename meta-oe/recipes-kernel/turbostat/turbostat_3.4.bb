@@ -12,16 +12,15 @@ processor frequency and idle power saving state residency on supported \
 processors."
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
-
+LIC_FILES_CHKSUM = "file://../COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
 COMPATIBLE_HOST_libc-musl = "null"
 
-DEPENDS = "virtual/kernel"
+SRC_URI += "\
+            file://COPYING \
+            "
 
-do_fetch[noexec] = "1"
-do_unpack[noexec] = "1"
-do_patch[noexec] = "1"
+DEPENDS = "virtual/kernel"
 
 # This looks in S, so we better make sure there's
 # something in the directory.
@@ -43,7 +42,7 @@ do_configure_prepend() {
 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
-	cp -r ${STAGING_KERNEL_DIR}/COPYING ${S}
+	cp -r ${WORKDIR}/COPYING ${S}
 }
 
 do_compile() {
