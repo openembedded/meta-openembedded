@@ -8,7 +8,8 @@ SRCREV = "19f31ba8dd8443e86c7028a4b4c37f4b299aa68c"
 PV = "1.10+git${SRCPV}"
 SRC_URI = "git://github.com/civetweb/civetweb.git \
            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
-          "
+           file://0001-undefine-macro-before-redefining.patch \
+           "
 
 S = "${WORKDIR}/git"
 
