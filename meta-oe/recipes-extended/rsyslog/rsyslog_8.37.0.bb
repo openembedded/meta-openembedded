@@ -24,15 +24,14 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://use-pkgconfig-to-check-libgcrypt.patch \
            file://run-ptest \
            file://rsyslog-fix-ptest-not-finish.patch \
-           file://fix-race-in-parallel-builds.patch \
 "
 
 SRC_URI_append_libc-musl = " \
     file://0001-Include-sys-time-h.patch \
 "
 
-SRC_URI[md5sum] = "6846bb6d37af3ce067988dd2460d3a5d"
-SRC_URI[sha256sum] = "8a4b5beb92c6b308c3d14de2364c2788f62ef5d37ca0448144619edfe508ee70"
+SRC_URI[md5sum] = "e0942b4b88a13602a6b6352bf9f05091"
+SRC_URI[sha256sum] = "295c289b4c8abd8f8f3fe35a83249b739cedabe82721702b910255f9faf147e7"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
