@@ -84,9 +84,10 @@ do_compile_prepend() {
     done
 }
 
-PACKAGES =+ "kexec-klibc"
+PACKAGES =+ "kexec-klibc vmcore-dmesg-klibc"
 
 FILES_kexec-klibc = "${sbindir}/kexec"
+FILES_vmcore-dmesg-klibc = "${sbindir}/vmcore-dmesg"
 
 INSANE_SKIP_${PN} = "arch"
 
