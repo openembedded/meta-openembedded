@@ -29,7 +29,7 @@ do_install() {
 SYSTEMD_AUTO_ENABLE = "disable"
 SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
 
-RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release"
+RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release lsb"
 
 FILES_${PN} += " \
     ${datadir}/phoronix-test-suite \
