@@ -34,8 +34,10 @@ KLIBC_PATCHES += " \
             file://0015-vmcore-dmesg-fix-warning.patch"
 
 WARNING_FIXES = ""
+FROM_OE_CORE = "file://arm_crashdump-fix-buffer-align.patch \
+                file://powerpc_change-the-memory-size-limit.patch"
 
-SRC_URI += "${BUILD_PATCHES} ${KLIBC_PATCHES} ${WARNING_FIXES}"
+SRC_URI += "${BUILD_PATCHES} ${KLIBC_PATCHES} ${WARNING_FIXES} ${FROM_OE_CORE}"
 
 SRC_URI_append_arm = " file://arm_crashdump.patch"
 

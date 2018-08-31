@@ -28,7 +28,7 @@ index 49ce80a..72eefaa 100644
  $(PURGATORY): LDFLAGS=$($(ARCH)_PURGATORY_EXTRA_CFLAGS)\
 -			-Wl,--no-undefined -nostartfiles -nostdlib \
 -			-nodefaultlibs -e purgatory_start -r \
-+			-Wl,--no-undefined -Wl,-nostartfiles -Wl,-nostdlib \
++			-Wl,--no-undefined -Wl,-no-pie -Wl,-nostartfiles -Wl,-nostdlib \
 +			-Wl,-nodefaultlibs -Wl,--entry=purgatory_start -Wl,-r \
  			-Wl,-Map=$(PURGATORY_MAP)
  
