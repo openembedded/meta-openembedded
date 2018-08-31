@@ -13,7 +13,7 @@ DEPENDS = "zlib xz"
 inherit klibc autotools
 
 SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git"
-SRCREV = "0481e9ed61ef80b3d851bb96b0c70a3d4a112c8b"
+SRCREV = "b9de21ef51a7ceab7122a707c188602eae22c4ee"
 
 BUILD_PATCHES = "file://0001-force-static-build.patch \
                  file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch"
@@ -82,10 +82,9 @@ do_compile_prepend() {
     done
 }
 
-PACKAGES =+ "kexec-klibc kdump-klibc"
+PACKAGES =+ "kexec-klibc"
 
 FILES_kexec-klibc = "${sbindir}/kexec"
-FILES_kdump-klibc = "${sbindir}/kdump"
 
 INSANE_SKIP_${PN} = "arch"
 
