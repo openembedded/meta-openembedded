@@ -8,9 +8,9 @@
 # Required-Stop:    $remote_fs $syslog
 # Default-Start:    2 3 4 5
 # Default-Stop:     0 1 6
-# Short-Description:    mosquitto MQTT v3.1 message broker
+# Short-Description:    mosquitto MQTT message broker
 # Description: 
-#  This is a message broker that supports version 3.1 of the MQ Telemetry
+#  This is a message broker that supports version 3.1/3.1.1 of the MQ Telemetry
 #  Transport (MQTT) protocol.
 #  
 #  MQTT provides a method of carrying out messaging using a publish/subscribe
