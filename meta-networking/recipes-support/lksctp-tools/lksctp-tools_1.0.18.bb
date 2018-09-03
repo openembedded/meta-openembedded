@@ -8,13 +8,19 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
 "
 
-SRCREV = "736b91d340e3f2519714f2930ed63b164d363511"
+SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
 
 PV .= "+git${SRCPV}"
-LK_REL = "1.0.17"
+LK_REL = "1.0.18"
 
 SRC_URI = " \
     git://github.com/sctp/lksctp-tools.git \
+    file://0001-withsctp-use-PACKAGE_VERSION-in-withsctp.h.patch \
+    file://0001-configure.ac-add-CURRENT-REVISION-and-AGE-for-libsct.patch \
+    file://0001-build-fix-netinet-sctp.h-not-to-be-installed.patch \
+    file://0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch \
+    file://0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch \
+    file://0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch \
     file://run-ptest \
     file://v4test.sh \
     file://v6test.sh \
@@ -24,7 +30,7 @@ S = "${WORKDIR}/git"
 
 BBCLASSEXTEND = "native"
 
-inherit autotools pkgconfig binconfig ptest
+inherit autotools-brokensep pkgconfig binconfig ptest
 
 do_install_ptest () {
     install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
