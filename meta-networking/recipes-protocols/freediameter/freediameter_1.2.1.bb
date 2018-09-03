@@ -20,6 +20,7 @@ SRC_URI = "\
     file://freediameter.init \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'file://install_test.patch file://run-ptest file://pass-ptest-env.patch', '', d)} \
     file://freeDiameter.conf \
+    file://0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch \
     "
 
 SRC_URI[md5sum] = "61b1062aa144b5f12eed514611e6d697"
