@@ -7,6 +7,10 @@ SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch"
 
 DEPENDS += "autoconf-archive-native"
 
+inherit multilib_script
+
+MULTILIB_SCRIPTS = "${PN}:${sysconfdir}/lvm/lvm.conf"
+
 CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
 
 do_install_append() {
