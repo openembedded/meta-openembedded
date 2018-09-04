@@ -1,12 +1,13 @@
 SUMMARY = "the Git linkable library"
 HOMEPAGE = "http://libgit2.github.com/"
-LICENSE = "GPL-2.0-with-GCC-exception"
-LIC_FILES_CHKSUM = "file://COPYING;md5=34197a479f637beb9e09e56893f48bc2"
+LICENSE = "GPL-2.0-with-GCC-exception & MIT"
+LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
 
 DEPENDS = "curl openssl zlib libssh2"
 
-SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.24"
-SRCREV = "4cf1ec7cff28da8838a2f0a9fb330e312ea3f963"
+SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
+#v0.27.4
+SRCREV = "8b89f362a34fcccdf1c6c5f3445895b71d9c6d56"
 
 S = "${WORKDIR}/git"
 
