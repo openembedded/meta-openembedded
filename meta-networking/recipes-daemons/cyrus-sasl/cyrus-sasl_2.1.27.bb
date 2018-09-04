@@ -1,59 +1,55 @@
 SUMMARY = "Generic client/server library for SASL authentication"
 SECTION = "libs"
 HOMEPAGE = "http://asg.web.cmu.edu/sasl/"
-DEPENDS = "openssl db"
+DEPENDS = "openssl db groff-native"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
 
-SRC_URI = "ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${PV}.tar.gz \
-    file://avoid-to-call-AC_TRY_RUN.patch \
-    file://Fix-hardcoded-libdir.patch \
-    file://debian_patches_0009_sasldb_al.diff \
-    file://debian_patches_0014_avoid_pic_overwrite.diff \
-    file://sasl.h-include-stddef.h-for-size_t-on-NetBSD.patch \
-    file://saslauthd.service \
-    file://saslauthd.conf \
-"
+SRCREV = "e41cfb986c1b1935770de554872247453fdbb079"
 
-UPSTREAM_CHECK_REGEX = "cyrus-sasl-(?P<pver>(\d+(\.\d+)+))\.tar"
+SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https \
+           file://avoid-to-call-AC_TRY_RUN.patch \
+           file://Fix-hardcoded-libdir.patch \
+           file://debian_patches_0014_avoid_pic_overwrite.diff \
+           file://saslauthd.service \
+           file://saslauthd.conf \
+           file://0004-configure.ac-fix-condition-for-suppliment-snprintf-i.patch \
+           "
 
-inherit autotools-brokensep pkgconfig useradd systemd
+UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
+
+S = "${WORKDIR}/git"
 
 CLEANBROKEN = "1"
+inherit autotools pkgconfig useradd systemd
 
 EXTRA_OECONF += "--with-dblib=berkeley \
-                 --with-bdb-libdir=${STAGING_LIBDIR} \
-                 --with-bdb-incdir=${STAGING_INCDIR} \
-                 --with-bdb=db-5.3 \
-                 --with-plugindir="${libdir}/sasl2" \
+                 --with-plugindir='${libdir}/sasl2' \
                  andrew_cv_runpath_switch=none"
 
 PACKAGECONFIG ??= "ntlm \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 ldap pam', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'ldap pam', d)} \
 "
 PACKAGECONFIG[gssapi] = "--enable-gssapi=yes,--enable-gssapi=no,krb5,"
 PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
 PACKAGECONFIG[opie] = "--with-opie,--without-opie,opie,"
 PACKAGECONFIG[des] = "--with-des,--without-des,,"
 PACKAGECONFIG[ldap] = "--with-ldap=${STAGING_LIBDIR} --enable-ldapdb,--without-ldap --disable-ldapdb,openldap,"
-PACKAGECONFIG[ntlm] = "--with-ntlm,--without-ntlm,,"
-PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+PACKAGECONFIG[ntlm] = "--enable-ntlm=yes,--enable-ntlm=no,,"
 
 CFLAGS += "-fPIC"
 
 do_configure_prepend () {
-    rm -f acinclude.m4 config/libtool.m4
-
     # make it be able to work with db 5.0 version
     local sed_files="sasldb/db_berkeley.c utils/dbconverter-2.c"
     for sed_file in $sed_files; do
-        sed -i 's#DB_VERSION_MAJOR == 4.*#(&) || DB_VERSION_MAJOR == 5#' $sed_file
+        sed -i 's#DB_VERSION_MAJOR == 4.*#(&) || DB_VERSION_MAJOR == 5#' ${S}/$sed_file
     done
 }
 
 do_compile_prepend () {
     cd include
-    ${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS} makemd5.c -o makemd5
+    ${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS} ${S}/include/makemd5.c -o makemd5
     touch makemd5.o makemd5.lo makemd5
     cd ..
 }
