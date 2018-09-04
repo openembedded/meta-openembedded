@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f0504124678c1b3158146e0630229298 \
 DEPENDS = "openssl"
 SRC_URI = "http://www.aspl.es/nopoll/downloads/nopoll-${PV}.tar.gz \
           "
-SRC_URI[md5sum] = "8c411cd0f3c0479aed28c4cf7b114fbb"
-SRC_URI[sha256sum] = "f5fbf8aaa16a77b0f265d8c847eb06cb3e68f2b1a50737466dae81181618654c"
+SRC_URI[md5sum] = "8d333f158b5d5a8975a6149e6ef8db63"
+SRC_URI[sha256sum] = "7f1b20f1d0525f30cdd2a4fc386d328b4cf98c6d11cef51fe62cd9491ba19ad9"
 
 inherit autotools pkgconfig
 
