@@ -14,17 +14,17 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Makefile.in b/Makefile.in
-index 79188d8..953c141 100644
+index fb01134..440730d 100644
 --- a/Makefile.in
 +++ b/Makefile.in
-@@ -178,8 +178,8 @@ PSRCS:=$(foreach s, $(SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
+@@ -173,8 +173,8 @@ PSRCS:=$(foreach s, $(SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
  PGSRCS:=$(foreach s, $(GENERATED_SRCS), $(PACKAGE_NAME)-$(PACKAGE_VERSION)/$(s))
  
- MAN_PAGES:=$(KEXEC_MANPAGE) $(KDUMP_MANPAGE) $(VMCORE_DMESG_MANPAGE)
+ MAN_PAGES:=$(KEXEC_MANPAGE) $(VMCORE_DMESG_MANPAGE)
 -BINARIES_i386:=$(KEXEC_TEST)
 -BINARIES_x86_64:=$(KEXEC_TEST)
-+BINARIES_i386:=$(SBINDIR)/kexec
-+BINARIES_x86_64:=$(SBINDIR)/kexec
- BINARIES:=$(KEXEC) $(KDUMP) $(VMCORE_DMESG) $(BINARIES_$(ARCH))
++#BINARIES_i386:=$(KEXEC_TEST)
++#BINARIES_x86_64:=$(KEXEC_TEST)
+ BINARIES:=$(KEXEC) $(VMCORE_DMESG) $(BINARIES_$(ARCH))
  
- TARGETS:=$(BINARIES) $(MAN_PAGES)
+ UNINSTALL_KDUMP = $(sbindir)/kdump
