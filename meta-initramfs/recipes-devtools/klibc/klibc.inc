@@ -20,6 +20,8 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
            file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
            file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
            file://0001-arm-Do-not-set-a-fallback-march-and-mtune.patch \
+           file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch  \
+           file://0001-klibc-add-getrandom-syscall.patch \
 "
 
 ARMPATCHES ?= ""
