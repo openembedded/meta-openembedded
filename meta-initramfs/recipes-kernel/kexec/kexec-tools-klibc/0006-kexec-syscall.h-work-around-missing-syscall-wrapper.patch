@@ -12,11 +12,11 @@ Upstream-Status: Inappropriate [klibc specific]
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
 ---
- kexec/kexec-syscall.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ kexec/kexec-syscall.h | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
 diff --git a/kexec/kexec-syscall.h b/kexec/kexec-syscall.h
-index 33638c2..b4bd63c 100644
+index 33638c2..204007d 100644
 --- a/kexec/kexec-syscall.h
 +++ b/kexec/kexec-syscall.h
 @@ -74,11 +74,16 @@
@@ -36,19 +36,36 @@ index 33638c2..b4bd63c 100644
  
  static inline int is_kexec_file_load_implemented(void) {
  	if (__NR_kexec_file_load != 0xffffffff)
-@@ -90,8 +95,12 @@ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
- 			unsigned long cmdline_len, const char *cmdline_ptr,
- 			unsigned long flags)
- {
-+#ifndef __KLIBC__
- 	return (long) syscall(__NR_kexec_file_load, kernel_fd, initrd_fd,
- 				cmdline_len, cmdline_ptr, flags);
-+#else
-+	return -1;
-+#endif
+@@ -86,6 +91,21 @@ static inline int is_kexec_file_load_implemented(void) {
+ 	return 0;
  }
  
++#ifdef __KLIBC__
++/* Stub provided by klibc only for the following archs */
++#if defined (__x86_64__) || defined (__powerpc_64__) || defined (__s390x__)
++extern long kexec_file_load(int kernel_fd, int initrd_fd,
++			unsigned long cmdline_len, const char *cmdline_ptr,
++			unsigned long flags);
++#else
++static inline long kexec_file_load(int kernel_fd, int initrd_fd,
++			unsigned long cmdline_len, const char *cmdline_ptr,
++			unsigned long flags)
++{
++	return -1;
++}
++#endif
++#else
+ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
+ 			unsigned long cmdline_len, const char *cmdline_ptr,
+ 			unsigned long flags)
+@@ -93,6 +113,7 @@ static inline long kexec_file_load(int kernel_fd, int initrd_fd,
+ 	return (long) syscall(__NR_kexec_file_load, kernel_fd, initrd_fd,
+ 				cmdline_len, cmdline_ptr, flags);
+ }
++#endif
+ 
  #define KEXEC_ON_CRASH		0x00000001
+ #define KEXEC_PRESERVE_CONTEXT	0x00000002
 -- 
 2.7.4
 
