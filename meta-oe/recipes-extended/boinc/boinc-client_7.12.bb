@@ -29,21 +29,19 @@ DEPENDS = "curl \
            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
            nettle \
 "
-
-SRC_URI = "https://github.com/BOINC/boinc/archive/client_release/7.6/${PV}.tar.gz \
+SRCREV = "bd12338dbd29083daa5a4b022592ca31ff68cd98"
+BRANCH = "client_release/7/${PV}"
+SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
            file://boinc-AM_CONDITIONAL.patch \
            file://opengl_m4_check.patch \
-           file://cross-compile.patch \
            file://gtk-configure.patch \
 "
-SRC_URI[md5sum] = "437b4b98e384b4bda4ef7056e68166ac"
-SRC_URI[sha256sum] = "c4b1c29b9655013e0ac61dddf47ad7f30f38c46159f02a9d9dc8ab854e99aa6d"
 
-inherit gettext autotools-brokensep pkgconfig distro_features_check
+inherit gettext autotools pkgconfig distro_features_check systemd
 
 REQUIRED_DISTRO_FEATURES += "opengl"
 
-S = "${WORKDIR}/${BPN}_release-7.6-${PV}"
+S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "\
     --enable-libraries \
@@ -75,5 +73,15 @@ do_compile_prepend () {
 	sed -i -e 's|^sys_lib_dlsearch_path_spec=.*|sys_lib_dlsearch_path_spec=""|g' ${B}/${TARGET_SYS}-libtool
 	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/${TARGET_SYS}-libtool
 }
+do_install_append() {
+	if [ -e ${D}${libdir}/systemd/system/boinc-client.service ]; then
+		install -D -m 0644 \
+		${D}${libdir}/systemd/system/boinc-client.service \
+		${D}${systemd_system_unitdir}/boinc-client.service
+		rm -rf ${D}${libdir}/systemd
+	fi
+}
 
-SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+SYSTEMD_SERVICE_${PN} = "boinc-client.service"
+
+FILES_${PN} += "${libdir}/systemd"
