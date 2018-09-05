@@ -9,10 +9,12 @@ eID cards have also been confirmed to work."
 HOMEPAGE = "http://www.opensc-project.org/opensc/"
 SECTION = "System Environment/Libraries"
 
-SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz"
+SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
+           file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
+          "
 
-SRC_URI[md5sum] = "724d128f23cd7a74b28d04300ce7bcbd"
-SRC_URI[sha256sum] = "3ac8c29542bb48179e7086d35a1b8907a4e86aca3de3323c2f48bd74eaaf5729"
+SRC_URI[md5sum] = "bce516f752e0db5327aa06cc0136fe27"
+SRC_URI[sha256sum] = "6ef62b00e8fdbe3e386c3ee25c2cadb56c1931ea42f1a11dce8c947f51b45033"
 
 DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
 
@@ -21,6 +23,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 
 inherit autotools pkgconfig
 
+S = "${WORKDIR}/OpenSC-${PV}"
 EXTRA_OECONF = " \
     --disable-static \
     --enable-openct \
