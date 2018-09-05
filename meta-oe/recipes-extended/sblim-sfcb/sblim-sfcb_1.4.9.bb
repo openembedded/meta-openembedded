@@ -68,14 +68,8 @@ do_install() {
 }
 
 pkg_postinst_${PN} () {
-    OPTS=""
-
     if [ x"$D" != "x" ]; then
-        OPTS="--root=$D"
-        if type systemctl >/dev/null 2>/dev/null; then
-                systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
-        fi
-        exit 1
+        $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}
     fi
 
     ${datadir}/sfcb/genSslCert.sh ${sysconfdir}/sfcb
