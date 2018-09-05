@@ -51,7 +51,8 @@ SRC_URI_append_x86-64 = " file://x86_sys_io.patch file://x86_basename.patch \
 
 SRC_URI_append_aarch64 = " file://arm64_purgatory-Makefile-remove-unknown-flags.patch \
                            file://arm64_kexec-image-header.h-add-missing-le64toh.patch \
-                           file://arm64-crashdump-arm64.c-fix-warning.patch"
+                           file://arm64-crashdump-arm64.c-fix-warning.patch \
+                           file://arm64_kexec-arm64.c-workaround-for-getrandom-syscall.patch"
 
 SRC_URI_append_powerpc = " file://powerpc-purgatory-Makefile-remove-unknown-flags.patch"
 
