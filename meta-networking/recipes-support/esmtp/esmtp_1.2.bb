@@ -18,9 +18,11 @@ EXTRA_OECONF = "--with-libesmtp=${STAGING_EXECPREFIXDIR}"
 
 inherit autotools update-alternatives
 
-ALTERNATIVE_${PN} += "mailq newaliases"
+ALTERNATIVE_${PN} += "sendmail mailq newaliases"
 ALTERNATIVE_TARGET[mailq] = "${bindir}/mailq"
 ALTERNATIVE_TARGET[newaliases] = "${bindir}/newaliases"
+ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
+ALTERNATIVE_TARGET[sendmail] = "${bindir}/esmtp"
 
 ALTERNATIVE_PRIORITY = "10"
 
