@@ -15,13 +15,15 @@ DEPENDS = "curl libxml2 openssl libpam"
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "4aff7eaf5df948b6ed74cf4f8dd721a397bfb759"
-PV = "2.6.4"
+SRCREV = "e90e5c96e3006c372bf45e0185e33c9250e67df6"
+PV = "2.6.5"
 
 SRC_URI = "git://github.com/Openwsman/openwsman.git \
            file://libssl-is-required-if-eventint-supported.patch \
            file://openwsmand.service \
            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
+           file://0001-Port-to-OpenSSL-1.1.0.patch \
+           file://0002-Check-OpenSSL-version-number-to-allow-builds-with-ol.patch \
            "
 
 S = "${WORKDIR}/git"
@@ -68,3 +70,4 @@ FILES_${PN}-dbg += "${libdir}/openwsman/plugins/.debug/ \
                    "
 
 INSANE_SKIP_${PN} = "dev-so"
+RDEPENDS_${PN} = "ruby"
