@@ -13,18 +13,19 @@ architectures."
 LICENSE = "BSD & LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-PV = "0.14.0+git${SRCPV}"
+PV = "0.14.1+git${SRCPV}"
 
-SRCREV_spice = "f1050bfc76c9c4146257e087baf74e0b62d7d218"
-SRCREV_spice-common = "95743f40a2da39e0a19859c305e69e2c99d39e42"
+SRCREV_spice = "eaa07ef15cfc3bf57a69da2576af66f028787774"
+SRCREV_spice-common = "6b93b3fce8909b836ef1d1434d191900d8aa00be"
 
 SRCREV_FORMAT = "spice_spice-common"
 
 SRC_URI = " \
     git://anongit.freedesktop.org/spice/spice;name=spice \
-    git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/spice-common;name=spice-common \
+    git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
     file://0001-Convert-pthread_t-to-be-numeric.patch \
 "
+
 FOO = "\
     file://0001-build-allow-separated-src-and-build-dirs.patch \
 "
@@ -55,3 +56,5 @@ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
 
 BBCLASSEXTEND = "native nativesdk"
+
+EXTRA_OECONF_toolchain-clang += "--disable-werror"
