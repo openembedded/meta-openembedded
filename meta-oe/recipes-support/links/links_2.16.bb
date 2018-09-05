@@ -9,5 +9,7 @@ EXTRA_OECONF = "--enable-graphics \
                 --without-directfb --without-pmshell --without-atheos \
                 --without-x"
 
-SRC_URI[md5sum] = "d06aa6e14b2172d73188871a5357185a"
-SRC_URI[sha256sum] = "0c182b1cbcdfd5cdcd2f75a6032d1a4b660d07c1225c1e07757cec81d3302130"
+SRC_URI[md5sum] = "645fb0c0294e4c3268f94d307d394ffb"
+SRC_URI[sha256sum] = "82f03038d5e050a65681b9888762af41c40fd42dec7e59a8d630bfb0ee134a3f"
+SRC_URI[icon.md5sum] = "477e8787927c634614bac01b44355a33"
+SRC_URI[icon.sha256sum] = "eddcd8b8c8698aa621d1a453943892d77b72ed492e0d14e0dbac5c6a57e52f47"
