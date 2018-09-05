@@ -214,9 +214,11 @@ do_install_append_class-native() {
     ln -sf ../sbin/sendmail.postfix ${D}${bindir}/mailq
 }
 
-ALTERNATIVE_${PN} += "mailq newaliases"
+ALTERNATIVE_${PN} += "sendmail mailq newaliases"
 ALTERNATIVE_TARGET[mailq] = "${bindir}/mailq"
 ALTERNATIVE_TARGET[newaliases] = "${bindir}/newaliases"
+ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
+ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
 
 ALTERNATIVE_PRIORITY = "120"
 
