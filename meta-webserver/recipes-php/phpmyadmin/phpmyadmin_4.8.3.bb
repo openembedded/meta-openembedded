@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
            file://apache.conf \
 "
 
-SRC_URI[md5sum] = "047b340a038b89e9e34f426084101f03"
-SRC_URI[sha256sum] = "2b42e75274ab078a0c2ca3aff767f45d1d81849f9f762a2ed0674819f061ba1d"
+SRC_URI[md5sum] = "c8a603f4b78d1dbcefc191b8ae598c79"
+SRC_URI[sha256sum] = "95f2692094d31c2c323d4767023583ab112ad54fff9e3af372710fcb676151af"
 
 UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
 UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
