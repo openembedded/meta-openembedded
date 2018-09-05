@@ -7,17 +7,16 @@ LIC_FILES_CHKSUM = "\
 
 HOMEPAGE ="http://www.libimobiledevice.org/"
 
-DEPENDS = "libplist usbmuxd libtasn1 gnutls libgcrypt"
+DEPENDS = "libplist usbmuxd libusbmuxd libtasn1 gnutls libgcrypt"
 
-SRC_URI = " \
-    http://www.libimobiledevice.org/downloads/libimobiledevice-${PV}.tar.bz2 \
+SRCREV = "fb71aeef10488ed7b0e60a1c8a553193301428c0"
+PV = "1.2.0+git${SRCPV}"
+SRC_URI = "\
+    git://github.com/libimobiledevice/libimobiledevice;protocol=https \
     file://configure-fix-largefile.patch \
-    file://inline-without-definition.patch \
 "
 
-SRC_URI[md5sum] = "3f28cbc6a2e30d34685049c0abde5183"
-SRC_URI[sha256sum] = "67499cfaa6172f566ee6b0783605acffe484fb7ddc3b09881ab7ac58667ee5b8"
-
+S = "${WORKDIR}/git"
 inherit autotools pkgconfig
 
 EXTRA_OECONF = " --without-cython "

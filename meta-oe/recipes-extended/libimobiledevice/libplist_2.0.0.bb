@@ -6,15 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \
 
 DEPENDS = "libxml2 glib-2.0 swig python"
 
-inherit cmake pkgconfig
+inherit autotools pkgconfig pythonnative
 
-SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
-           file://fix-parallel-make.patch \
-           file://0001-Fix-warnings-found-with-clang.patch \
+SRCREV = "62ec804736435fa34e37e66e228e17e2aacee1d7"
+SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https \
            "
 
-SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
-SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
+S = "${WORKDIR}/git"
 
 do_install_append () {
     if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
