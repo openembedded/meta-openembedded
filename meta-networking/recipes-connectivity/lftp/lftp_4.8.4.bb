@@ -8,10 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
            file://fix-gcc-6-conflicts-signbit.patch \
-           file://CVE-2018-10916.patch \
           "
-SRC_URI[md5sum] = "12b1fcbf13f41e9cdb0903fc670fa1f1"
-SRC_URI[sha256sum] = "c4159f056afee41866a6c2d639655bc351e6d3486bbe7758eaedb24f6a4239d5"
+SRC_URI[md5sum] = "a56b5047dbfda052df4c1dfd197aa092"
+SRC_URI[sha256sum] = "a853edbd075b008c315679c7882b6dcc6821ed2365d2ed843a412acd3d40da0e"
 
 inherit autotools gettext pkgconfig
 
