@@ -19,10 +19,11 @@ inherit pypi siteinfo
 DEPENDS += "openssl swig-native"
 RDEPENDS_${PN} += "python-typing"
 
-DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST} -I${STAGING_INCDIR}"
-DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
+DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
+DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
 
 SWIG_FEATURES_x86 = "-D__i386__"
+SWIG_FEATURES_x32 = "-D__ILP32__"
 SWIG_FEATURES ?= "-D__${HOST_ARCH}__"
 export SWIG_FEATURES
 
@@ -51,7 +52,3 @@ do_configure_prepend() {
 }
 
 BBCLASSEXTEND = "native"
-
-# http://errors.yoctoproject.org/Errors/Details/184714/
-# SWIG/_m2crypto.i:10: Error: Unable to find 'gcc_macros.h'
-CLEANBROKEN = "1"
