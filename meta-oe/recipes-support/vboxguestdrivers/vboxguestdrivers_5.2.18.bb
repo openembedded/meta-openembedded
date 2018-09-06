@@ -13,10 +13,10 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
+    file://kernel-4.18.patch \
 "
-
-SRC_URI[md5sum] = "e731ea9c5c31096ec4c2a3bfba26665c"
-SRC_URI[sha256sum] = "ee2759d47b0b4ac81b8b671c9485c87fb2db12c097b3e7e69b94c1291a8084e8"
+SRC_URI[md5sum] = "d8e291525b84569356773eef507c49ce"
+SRC_URI[sha256sum] = "ed0a7efd56c7f39fae79c7ec3321473da412ef0d7914457b66f42679d513efcf"
 
 S = "${WORKDIR}/vbox_module"
 
