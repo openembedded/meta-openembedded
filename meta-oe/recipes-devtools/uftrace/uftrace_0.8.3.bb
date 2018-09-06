@@ -10,15 +10,19 @@ DEPENDS_append_libc-musl = " argp-standalone"
 
 inherit autotools
 
-SRCREV = "5af9ff9fa89c340617e52c8ed05798b352a7145c"
-SRC_URI = "git://github.com/namhyung/${BPN}"
+# v0.8.3
+SRCREV = "8b723a6fae2ef30495cd6279774fba9c95cd9c88"
+SRC_URI = "git://github.com/namhyung/${BPN} \
+           file://0001-include-dlfcn.h-for-RTLD_DEFAULT.patch \
+           "
 S = "${WORKDIR}/git"
 
 LDFLAGS_append_libc-musl = " -largp"
-EXTRA_OECONF = "ARCH=${TARGET_ARCH}"
+EXTRA_UFTRACE_OECONF = "ARCH=${TARGET_ARCH} \
+                        with_elfutils=/use/libelf/from/sysroot"
 
 do_configure() {
-    ${S}/configure ${EXTRA_OECONF}
+    ${S}/configure ${EXTRA_UFTRACE_OECONF}
 }
 
 FILES_SOLIBSDEV = ""
