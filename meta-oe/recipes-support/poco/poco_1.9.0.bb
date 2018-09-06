@@ -9,10 +9,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 DEPENDS = "libpcre zlib"
 
 SRC_URI = " \
-    git://github.com/pocoproject/poco.git \
+    git://github.com/pocoproject/poco.git;branch=poco-${PV} \
+    file://0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch \
     file://run-ptest \
    "
-SRCREV = "94966785a8f9ad0191dffd075ebd67826e6e4b6d"
+SRCREV = "daf00da73ab917e4d4581e3aa00c0ee61e0cc58b"
 
 S = "${WORKDIR}/git"
 
