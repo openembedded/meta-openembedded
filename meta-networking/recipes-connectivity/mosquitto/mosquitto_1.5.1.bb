@@ -20,11 +20,14 @@ SRC_URI[sha256sum] = "8557bc7ae34dfaf32a0fb56d2491b7a7f731269c88337227233013502d
 
 inherit systemd update-rc.d useradd
 
-PACKAGECONFIG ??= "ssl uuid"
+PACKAGECONFIG ??= "ssl uuid \
+                  ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
+                  "
 
 PACKAGECONFIG[dns-srv] = ",,c-ares"
 PACKAGECONFIG[ssl] = ",,openssl"
 PACKAGECONFIG[uuid] = ",,util-linux"
+PACKAGECONFIG[systemd] = "WITH_SYSTEMD=yes,WITH_SYSTEMD=no,systemd"
 
 EXTRA_OEMAKE = " \
     prefix=${prefix} \
@@ -33,7 +36,6 @@ EXTRA_OEMAKE = " \
     ${@bb.utils.contains('PACKAGECONFIG', 'dns-srv', 'WITH_SRV=yes', 'WITH_SRV=no', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'ssl', 'WITH_TLS=yes WITH_TLS_PSK=yes', 'WITH_TLS=no WITH_TLS_PSK=no', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'uuid', 'WITH_UUID=yes', 'WITH_UUID=no', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'WITH_SYSTEMD=yes', 'WITH_SYSTEMD=no', d)} \
     STRIP=/bin/true \
     WITH_DOCS=no \
 "
