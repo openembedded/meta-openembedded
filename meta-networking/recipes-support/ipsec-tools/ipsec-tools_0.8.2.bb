@@ -5,7 +5,7 @@ SECTION = "net"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://src/libipsec/pfkey.c;beginline=6;endline=31;md5=bc9b7ff40beff19fe6bc6aef26bd2b24"
 
-DEPENDS = "virtual/kernel openssl readline flex-native bison-native"
+DEPENDS = "virtual/kernel openssl10 readline flex-native bison-native"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
