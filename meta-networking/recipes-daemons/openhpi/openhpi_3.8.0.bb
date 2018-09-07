@@ -20,7 +20,8 @@ SECTION = "net"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e3c772a32386888ccb5ae1c0ba95f1a4"
 
-DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs autoconf-archive-native"
+DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs \
+           autoconf-archive-native os-release"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://openhpi.init \
@@ -32,23 +33,23 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://openhpi-glib-cross-compile.patch \
            file://openhpi-linkfix.patch \
            file://openhpi-fix-host-gcc.patch \
-           file://openhpi-hpi-shell-thread-fix.patch \
            file://openhpi-fix-testfail-errors.patch \
            file://openhpi-add-libnetsnmp-when-link.patch \
            file://openhpi-invalide-session.patch \
            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
            file://openhpi-fix-alignment-issue.patch \
-           file://0001-Fix-build-failures-with-gcc7.patch \
            file://c++11.patch \
            file://clang-c++11.patch \
            file://fix-narrowing-warning.patch \
-           file://0001-plugins-Check-for-PTHREAD_RECURSIVE_MUTEX_INITIALIZE.patch \
-           file://0001-ipmidirect-Replace-__STRING.patch \
            file://0001-session-close-socket.patch \
+           file://openhpi-3.6.1-ssl.patch \
+           file://0001-Do-not-poke-at-build-host-s-etc-os-release.patch \
+           file://cross_899198.patch \
+           file://no-md2.patch \
+           file://0001-include-iostream-for-cout.patch \
            "
-
-SRC_URI[md5sum] = "4718b16e0f749b5ad214a9b04f45dd23"
-SRC_URI[sha256sum] = "e0a810cb401c4bdcfc9551f2e6afd5a8ca4b411f5ee3bc60c19f82fd6e84a3dc"
+SRC_URI[md5sum] = "fffda3deea8a0d3671a72eea9d13a4df"
+SRC_URI[sha256sum] = "c94332a29160dd75cb799c027e614690c00263b0fabed87417707bec04c38723"
 
 inherit autotools pkgconfig ptest update-rc.d systemd
 
@@ -63,6 +64,8 @@ PACKAGECONFIG ??= "libgcrypt non32bit"
 PACKAGECONFIG[sysfs] = "--enable-sysfs,--disable-sysfs,sysfsutils,"
 PACKAGECONFIG[libgcrypt] = "--enable-encryption,--disable-encryption,libgcrypt,"
 PACKAGECONFIG[non32bit] = "--enable-non32bit-int,--disable-non32bit-int,,"
+
+export DISTRO
 
 do_install_append () {
     install -m 0755 -d ${D}${sysconfdir}/${BPN}
