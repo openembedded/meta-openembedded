@@ -10,6 +10,7 @@ DEPENDS += "kea-native"
 SRC_URI = "\
     http://ftp.isc.org/isc/kea/${PV}/${BP}.tar.gz \
     file://0003-Makefile.am-update-hooksdir-for-lease_cmds.patch \
+    file://0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch \
     file://kea-dhcp4.service \
     file://kea-dhcp6.service \
     file://kea-dhcp-ddns.service \
