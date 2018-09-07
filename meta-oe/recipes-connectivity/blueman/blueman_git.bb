@@ -25,7 +25,7 @@ SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 RRECOMENDS_${PN} += "adwaita-icon-theme"
 RDEPENDS_${PN} += " \
     python3-dbus \
-    bluez5-obex \
+    packagegroup-tools-bluetooth \
 "
 
 PACKAGECONFIG[thunar] = "--enable-thunar-sendto,--disable-thunar-sendto,,thunar"
