@@ -20,19 +20,11 @@ Upstream-Status: Pending
  src/main.c | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/src/main.c b/src/main.c
-index 3cf4072..cd34196 100644
---- a/src/main.c
-+++ b/src/main.c
-@@ -31,6 +31,7 @@
- #include <sys/ioctl.h>
- #include <sys/wait.h>
- #include <sys/param.h>
-+#include <sys/types.h>
- #include <pthread.h>
- #include <fcntl.h>
- #include <unistd.h>
-@@ -126,9 +127,9 @@ static void daemon_start(int ignsigcld)
+Index: git/src/main.c
+===================================================================
+--- git.orig/src/main.c
++++ git/src/main.c
+@@ -133,9 +133,9 @@ static void daemon_start(int ignsigcld)
  
  	if (ignsigcld) {
  #ifdef SIGTSTP
@@ -44,6 +36,3 @@ index 3cf4072..cd34196 100644
  #endif
  	}
  }
--- 
-2.16.2
-

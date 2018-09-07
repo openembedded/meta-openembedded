@@ -7,9 +7,9 @@ HOMEPAGE = "http://umip.org/"
 SECTION = "System Environment/Base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
-DEPENDS = "rpm indent-native bison-native"
+DEPENDS = "openssl10 ipsec-tools radvd indent-native bison-native"
 
-SRC_URI = "git://github.com/jlanza/umip \
+SRC_URI = "git://git.umip.org/umip/umip.git \
            file://add-dependency-to-support-parallel-compilation.patch \
            file://mip6d \
            file://mip6d.service \
@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/jlanza/umip \
            file://0001-replace-SIGCLD-with-SIGCHLD-and-include-sys-types.h.patch \
            file://0002-replace-PTHREAD_MUTEX_FAST_NP-with-PTHREAD_MUTEX_NOR.patch \
            "
-SRCREV = "7d67209cd1bba2dd0e183a0fa07eeef07964dd14"
+SRCREV = "cbd441c5db719db554ff2b4fcb02fef88ae2f791"
 
 S = "${WORKDIR}/git"
 
