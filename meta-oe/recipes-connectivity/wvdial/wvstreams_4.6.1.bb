@@ -21,6 +21,8 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
            file://0005-check-for-libexecinfo-during-configure.patch \
            file://0001-build-fix-parallel-make.patch \
            file://0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch \
+           file://openssl-buildfix.patch \
+           file://0001-Forward-port-to-OpenSSL-1.1.x.patch \
            "
 
 SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
