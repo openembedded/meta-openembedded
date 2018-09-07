@@ -4,13 +4,15 @@ AUTHOR = "Jesse Kornblum, Simson L. Garfinkel"
 HOMEPAGE = "http://md5deep.sourceforge.net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9190f660105b9a56cdb272309bfd5491"
-# Release 4.4
-SRCREV = "cd2ed7416685a5e83eb10bb659d6e9bec01244ae"
+
+PV = "4.4+git${SRCPV}"
+
+SRCREV = "877613493ff44807888ce1928129574be393cbb0"
 
 SRC_URI = "git://github.com/jessek/hashdeep.git \
-        file://wrong-variable-expansion.patch \
-        file://0001-Fix-errors-found-by-clang.patch \
-        "
+           file://wrong-variable-expansion.patch \
+           file://0001-Fix-literal-and-identifier-spacing-as-dictated-by-C-.patch \
+           "
 
 S = "${WORKDIR}/git"
 
