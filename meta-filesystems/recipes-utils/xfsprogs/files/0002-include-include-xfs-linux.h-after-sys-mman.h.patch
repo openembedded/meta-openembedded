@@ -1,4 +1,4 @@
-From 18298d7c028cd5fbd2c68fa428dc2384344aeb91 Mon Sep 17 00:00:00 2001
+From 11a42df394de3dc520e72a016296dcc6dea02a7a Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 23 Aug 2018 05:33:57 +0000
 Subject: [PATCH] include include/xfs/linux.h after <sys/mman.h>
@@ -14,11 +14,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/io/mmap.c b/io/mmap.c
-index 106be49..34fadf4 100644
+index dbfcca5..ca00df1 100644
 --- a/io/mmap.c
 +++ b/io/mmap.c
-@@ -16,10 +16,11 @@
-  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+@@ -4,10 +4,11 @@
+  * All Rights Reserved.
   */
  
 -#include "command.h"

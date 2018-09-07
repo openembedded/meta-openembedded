@@ -3,7 +3,8 @@ HOMEPAGE = "http://oss.sgi.com/projects/xfs"
 SECTION = "base"
 LICENSE = "GPLv2 & LGPLv2.1"
 LICENSE_libhandle = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
+LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038 \
+                    file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
 DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://remove_flags_from_build_flags.patch \
@@ -12,8 +13,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
            "
-SRC_URI[md5sum] = "b935b693dfac0264e232c3c4e52d5569"
-SRC_URI[sha256sum] = "f53f5169cb98cfca471ddea30092738c427ba284c5356e01b45dd1ae3b297e0d"
+SRC_URI[md5sum] = "5f80b631b68df89a8b9283307e96d2e8"
+SRC_URI[sha256sum] = "397dc96f51aeeff73d021d3418d3172377b2685f2740ca60525096c070aa3df1"
 
 inherit autotools-brokensep
 
