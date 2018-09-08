@@ -1,0 +1,16 @@
+diff -Nurd ./sip-4.19.12.orig/configure.py sip-4.19.12/configure.py
+--- ./sip-4.19.12.orig/configure.py	2018-07-05 05:55:19.000000000 -0400
++++ sip-4.19.12/configure.py	2018-09-07 16:41:18.102569271 -0400
+@@ -949,10 +949,10 @@
+ 
+     if len(module_path) > 1:
+         del module_path[-1]
+-        module_path.insert(0, sip_root_dir)
++        module_path.insert(0, sip_module_dir)
+         sip_module_dir = os.path.join(*module_path)
+     else:
+-        sip_module_dir = sip_root_dir
++        sip_module_dir = sip_module_dir
+ 
+     # Override from the command line.
+     if opts.platform is not None:
