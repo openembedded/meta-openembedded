@@ -24,3 +24,5 @@ do_install_append() {
     # when no binaries are installed (empty bin_PROGRAMS in Makefile.am),
     rmdir --ignore-fail-on-non-empty ${D}${bindir}
 }
+
+CPPFLAGS_append_libc-musl_toolchain-clang = " -Wno-error=sign-compare"
