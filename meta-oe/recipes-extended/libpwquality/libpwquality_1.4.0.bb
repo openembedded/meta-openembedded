@@ -16,8 +16,7 @@ UPSTREAM_CHECK_URI = "https://github.com/libpwquality/libpwquality/releases"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-DEPENDS = "cracklib virtual/gettext python3"
-RDEPENDS_python3-libpwquality = "${PN}"
+DEPENDS = "cracklib virtual/gettext"
 
 inherit autotools distutils3-base gettext
 
@@ -26,8 +25,6 @@ B = "${S}"
 export PYTHON_DIR
 export BUILD_SYS
 export HOST_SYS
-export STAGING_LIBDIR
-export STAGING_INCDIR
 
 EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
                  --with-python-binary=${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} \
@@ -38,10 +35,7 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
 
-PACKAGES += "python3-libpwquality python3-libpwquality-dbg"
 FILES_${PN} += "${libdir}/security/pam_pwquality.so"
 FILES_${PN}-dbg += "${libdir}/security/.debug"
 FILES_${PN}-staticdev += "${libdir}/security/pam_pwquality.a"
 FILES_${PN}-dev += "${libdir}/security/pam_pwquality.la"
-FILES_python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
-FILES_python3-${PN}-dbg = "${PYTHON_SITEPACKAGES_DIR}/.debug"
