@@ -9,12 +9,11 @@ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=maste
            file://disable-outside-tests.patch \
            file://disable-test-timeouts.patch \
            file://disable-float-tests.patch \
-           file://747.patch \
            file://845.patch \
            "
 
-# tag 2.10.5
-SRCREV= "25d6b26f7038eeec3b51e2e0a70960a8e34fcd68"
+# tag 2.10.6
+SRCREV= "66e50f02dde92f802bbd3a8d79c6352954665b9b"
 
 S = "${WORKDIR}/git"
 
