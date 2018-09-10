@@ -12,6 +12,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
            file://klibc-linux-libc-dev.patch \
            file://staging.patch \
            file://klcc-consider-sysroot.patch \
+           file://klcc-cross-accept-clang-options.patch \
            file://0001-dash-Specify-format-string-in-fmtstr.patch \
            file://0001-Define-in_-structs-for-non-glibc-system-libs.patch \
            file://0001-include-linux-sysinfo.h-directly.patch \
