@@ -20,7 +20,6 @@ UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
 
 S = "${WORKDIR}/git"
 
-CLEANBROKEN = "1"
 inherit autotools pkgconfig useradd systemd
 
 EXTRA_OECONF += "--with-dblib=berkeley \
