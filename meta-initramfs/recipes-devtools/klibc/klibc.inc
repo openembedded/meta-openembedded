@@ -21,16 +21,16 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
            file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
            file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
            file://0001-arm-Do-not-set-a-fallback-march-and-mtune.patch \
-           file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch  \
+           file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch \
            file://0001-klibc-add-getrandom-syscall.patch \
-"
+           file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
+           "
 
 ARMPATCHES ?= ""
 
 ARMPATCHES_arm = "file://klibc-config-eabi.patch \
                   file://armv4-fix-v4bx.patch \
                  "
-
 
 S = "${WORKDIR}/git"
 
@@ -44,9 +44,10 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
                 'INSTALLDIR=${libdir}/klibc' \
                 'SHLIBDIR=${libdir}' \
                 '${KLIBCTHUMB}' \
-                'KLIBCOPTFLAGS=${TUNE_CCARGS} -Os' \
+                'KLIBCOPTFLAGS=${TUNE_CCARGS}' \
                  V=1 \
                 "
+EXTRA_OEMAKE += 'EXTRA_KLIBCAFLAGS="-Wa,--noexecstack" EXTRA_KLIBCLDFLAGS="-z noexecstack"'
 
 export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
 KLIBCTHUMB = "${@['CONFIG_KLIBC_THUMB=n', 'CONFIG_KLIBC_THUMB=y'][(d.getVar('ARM_INSTRUCTION_SET') == 'thumb')]}"
