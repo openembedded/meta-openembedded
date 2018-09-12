@@ -11,14 +11,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
 
 BASEPV = "0.5.9"
 PV = "${BASEPV}+git${SRCPV}"
-SRCREV = "79fa538647c3e09a87ecc86aae1abbb82e0a25c5"
-SRC_URI = "git://github.com/lcdproc/lcdproc;branch=lcdproc-${BASEPV} \
-           file://0001-include-asm-ioctl.h-explicitly.patch \
+SRCREV = "a4b5a7e058fdd0d914a61138748b589c0128b45b"
+SRC_URI = "git://github.com/lcdproc/lcdproc \
            "
 
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig update-rc.d
+
+COMPATIBLE_HOST_arm_libc-musl = "null"
 
 LCD_DRIVERS ?= "all,!irman,!svga"
 LCD_DEFAULT_DRIVER ?= "curses"
