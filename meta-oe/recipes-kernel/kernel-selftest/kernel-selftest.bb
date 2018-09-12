@@ -9,7 +9,6 @@ DEPENDS = "rsync-native"
 # for musl libc
 SRC_URI_append_libc-musl = "\
                       file://userfaultfd.patch \
-                      file://0001-bpf-test_progs.c-add-support-for-musllibc.patch \
                       "
 SRC_URI += "file://run-ptest \
             file://COPYING \
@@ -62,7 +61,7 @@ python __anonymous () {
 }
 
 do_compile() {
-    bbwarn "clang with bpf support is needed with kernel 4.18+ so \
+    bbwarn "clang >= 6.0  with bpf support is needed with kernel 4.18+ so \
 either install it and add it to HOSTTOOLS, or add \
 clang-native from meta-clang to dependency"
     for i in ${TEST_LIST}
@@ -76,7 +75,9 @@ do_install() {
     do
         oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/usr/kernel-selftest/${i} install
     done
-
+    if [ -e ${D}/usr/kernel-selftest/bpf/test_offload.py ]; then
+	sed -i -e '1s,#!.*python3,#! /usr/bin/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
+    fi
     chown root:root  -R ${D}/usr/kernel-selftest
 }
 
@@ -115,5 +116,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 INHIBIT_PACKAGE_DEBUG_SPLIT="1"
 FILES_${PN} += "/usr/kernel-selftest"
 
+RDEPENDS_${PN} += "python3"
 # tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
 INSANE_SKIP_${PN} += "ldflags"
