@@ -246,10 +246,10 @@ pkg_postinst_${PN} () {
         # This can fail depending on host setup
         if ! newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases; then
             $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}
-            exit 0
+        else
+            touch $D/etc/postfix/virtual_alias
+            postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
         fi
-        touch $D/etc/postfix/virtual_alias
-        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
 
     fi
 }
