@@ -27,10 +27,6 @@ SRC_URI = " \
     file://0001-spice-fix-compile-fail-problem.patch \
 "
 
-FOO = "\
-    file://0001-build-allow-separated-src-and-build-dirs.patch \
-"
-
 S = "${WORKDIR}/git"
 
 inherit autotools gettext pythonnative python-dir pkgconfig
