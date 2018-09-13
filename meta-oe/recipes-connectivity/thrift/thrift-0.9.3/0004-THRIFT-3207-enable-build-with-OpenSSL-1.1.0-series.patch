@@ -1,5 +1,15 @@
+From 5f2c7e50b99d72177250c44236c41b99bfc161b5 Mon Sep 17 00:00:00 2001
+From: Andrej Valek <andrej.valek@siemens.com>
+Date: Thu, 7 Jun 2018 15:21:06 +0200
+Subject: [PATCH 4/6] %% original patch:
+ 0004-THRIFT-3207-enable-build-with-OpenSSL-1.1.0-series.patch
+
+---
+ lib/cpp/src/thrift/transport/TSSLSocket.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
 diff --git a/lib/cpp/src/thrift/transport/TSSLSocket.cpp b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
-index 68e475d..19132ff 100644
+index 98c5326..3da9e45 100644
 --- a/lib/cpp/src/thrift/transport/TSSLSocket.cpp
 +++ b/lib/cpp/src/thrift/transport/TSSLSocket.cpp
 @@ -39,6 +39,7 @@
@@ -10,7 +20,7 @@ index 68e475d..19132ff 100644
  
  using namespace std;
  using namespace apache::thrift::concurrency;
-@@ -148,10 +149,15 @@ SSLContext::SSLContext(const SSLProtocol& protocol) {
+@@ -143,10 +144,15 @@ SSLContext::SSLContext(const SSLProtocol& protocol) {
      ctx_ = SSL_CTX_new(SSLv3_method());
    } else if (protocol == TLSv1_0) {
      ctx_ = SSL_CTX_new(TLSv1_method());
@@ -26,3 +36,6 @@ index 68e475d..19132ff 100644
    } else {
      /// UNKNOWN PROTOCOL!
      throw TSSLException("SSL_CTX_new: Unknown protocol");
+-- 
+2.19.0
+
