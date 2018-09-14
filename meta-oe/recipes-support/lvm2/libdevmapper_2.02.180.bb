@@ -9,6 +9,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' -C libdm install
+    oe_runmake 'DESTDIR=${D}' -C tools install_device-mapper
 }
 
 RRECOMMENDS_${PN}_append_class-target = " lvm2-udevrules"
