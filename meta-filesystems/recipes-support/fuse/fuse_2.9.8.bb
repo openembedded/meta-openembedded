@@ -31,7 +31,9 @@ SYSTEMD_SERVICE_${PN} = ""
 
 DEPENDS = "gettext-native"
 
-PACKAGES =+ "fuse-utils-dbg fuse-utils libulockmgr libulockmgr-dev libulockmgr-dbg"
+PACKAGES =+ "fuse-utils libulockmgr libulockmgr-dev"
+
+RPROVIDES_${PN}-dbg += "fuse-utils-dbg libulockmgr-dbg"
 
 RRECOMMENDS_${PN}_class-target = "kernel-module-fuse libulockmgr fuse-utils"
 
@@ -40,13 +42,11 @@ FILES_${PN}-dev += "${libdir}/libfuse*.la"
 
 FILES_libulockmgr = "${libdir}/libulockmgr.so.*"
 FILES_libulockmgr-dev += "${libdir}/libulock*.la"
-FILES_libulockmgr-dbg += "${libdir}/.debug/libulock*"
 
 # Forbid auto-renaming to libfuse-utils
 FILES_fuse-utils = "${bindir} ${base_sbindir}"
-FILES_fuse-utils-dbg = "${bindir}/.debug ${base_sbindir}/.debug"
 DEBIAN_NOAUTONAME_fuse-utils = "1"
-DEBIAN_NOAUTONAME_fuse-utils-dbg = "1"
+DEBIAN_NOAUTONAME_${PN}-dbg = "1"
 
 do_configure_prepend() {
     # Make this explicit so overriding base_sbindir propagates properly.
