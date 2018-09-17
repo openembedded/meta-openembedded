@@ -162,12 +162,14 @@ do_install() {
 }
 
 PACKAGES = "${PN}-dbg ${PN} \
-    libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev libmysqlclient-r-dbg \
-    libmysqlclient libmysqlclient-dev libmysqlclient-staticdev libmysqlclient-dbg \
+    libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev \
+    libmysqlclient libmysqlclient-dev libmysqlclient-staticdev \
     libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-setupdb ${PN}-leftovers"
 CONFFILES_${PN}-server += "${sysconfdir}/my.cnf ${sysconfdir}/my.cnf.d/server.cnf"
 CONFFILES_${PN}-client += "${sysconfdir}/my.cnf.d/mysql-clients.cnf"
 CONFFILES_libmysqlclient += "${sysconfdir}/my.cnf.d/client.cnf"
+
+RPROVIDES_${PN}-dbg += "libmysqlclient-r-dbg libmysqlclient-dbg"
 
 FILES_${PN} = " "
 RDEPENDS_${PN} = "${PN}-client ${PN}-server"
@@ -201,8 +203,6 @@ FILES_libmysqlclient-dev = " \
     ${bindir}/mysql_config"
 FILES_libmysqlclient-staticdev = "\
     ${libdir}/*.a"
-FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
-    ${datadir}/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
 
 # Avoid warnings about ha_xtradb.so.0.0.0 and ha_innodb_plugin.so.0.0.0
 # which are intentionally non-PIC on 32-bit x86 (see e.g.
@@ -213,7 +213,6 @@ FILES_libmysqlclient-r = "${libdir}/libmysqlclient_r.so.*"
 FILES_libmysqlclient-r-dev = "\
     ${libdir}/libmysqlclient_r.so"
 FILES_libmysqlclient-r-staticdev = "${libdir}/libmysqlclient_r.a"
-FILES_libmysqlclient-r-dbg = "${libdir}/plugin/.debuglibmysqlclient_r.so.*"
 
 FILES_libmysqld = "\
     ${libdir}/libmysqld.so.*"
