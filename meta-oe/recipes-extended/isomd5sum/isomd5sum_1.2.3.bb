@@ -25,10 +25,11 @@ do_install () {
     oe_runmake install
 }
 
-PACKAGES += "${PYTHON_PN}-${PN} ${PYTHON_PN}-${PN}-dbg"
+PACKAGES += "${PYTHON_PN}-${PN}"
+
+RPROVIDES_${PN}-dbg += "${PYTHON_PN}-${PN}-dbg"
 
 FILES_${PYTHON_PN}-${PN} = "${PYTHON_SITEPACKAGES_DIR}/pyisomd5sum.so"
-FILES_${PYTHON_PN}-${PN}-dbg = "${PYTHON_SITEPACKAGES_DIR}/.debug/pyisomd5sum.so"
 
 SRCREV = "7860901f726f5d92689cb67243cc7f981f21f74b"
 
