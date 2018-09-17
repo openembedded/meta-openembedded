@@ -9,6 +9,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://fix-config-libnet.patch \
            file://fix-invalid-ownership.patch \
            file://syslog-ng.service-the-syslog-ng-service.patch \
+           file://0001-syslog-ng-fix-segment-fault-during-service-start.patch \
            "
 
 SRC_URI[md5sum] = "72d44ad02c2e9ba0748b3ecd3f15a7ff"
