@@ -112,10 +112,10 @@ ${datadir}/${BPN}/include/scl/logmatic \
 "
 
 # This overcomes the syslog-ng rdepends on syslog-ng-dev QA Error
-PACKAGES =+ "${PN}-jconf ${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
+PACKAGES =+ "${PN}-jconf ${PN}-libs ${PN}-libs-dev"
+RPROVIDES_${PN}-dbg += "${PN}-libs-dbg"
 FILES_${PN}-libs = "${libdir}/${BPN}/*.so ${libdir}/libsyslog-ng-*.so*"
 FILES_${PN}-libs-dev = "${libdir}/${BPN}/lib*.la"
-FILES_${PN}-libs-dbg = "${libdir}/${BPN}/.debug"
 FILES_${PN}-staticdev += "${libdir}/${BPN}/libtest/*.a"
 INSANE_SKIP_${PN}-libs = "dev-so"
 RDEPENDS_${PN} += "${PN}-libs"
