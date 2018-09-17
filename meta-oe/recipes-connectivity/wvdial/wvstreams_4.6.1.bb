@@ -36,23 +36,21 @@ LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
 
 EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
 
-PACKAGES_prepend = "libuniconf libuniconf-dbg "
-PACKAGES_prepend = "uniconfd uniconfd-dbg "
-PACKAGES_prepend = "libwvstreams-base libwvstreams-base-dbg "
-PACKAGES_prepend = "libwvstreams-extras libwvstreams-extras-dbg "
+PACKAGES_prepend = "libuniconf "
+PACKAGES_prepend = "uniconfd "
+PACKAGES_prepend = "libwvstreams-base "
+PACKAGES_prepend = "libwvstreams-extras "
 PACKAGES_prepend = "${PN}-valgrind "
 
+RPROVIDES_${PN}-dbg += "libuniconf-dbg uniconfd-dbg libwvstreams-base-dbg libwvstreams-extras-dbg"
+
 FILES_libuniconf     = "${libdir}/libuniconf.so.*"
-FILES_libuniconf-dbg = "${libdir}/.debug/libuniconf.so.*"
 
 FILES_uniconfd     = "${sbindir}/uniconfd ${sysconfdir}/uniconf.conf ${localstatedir}/uniconf"
-FILES_uniconfd-dbg = "${sbindir}/.debug/uniconfd"
 
 FILES_libwvstreams-base     = "${libdir}/libwvutils.so.*"
-FILES_libwvstreams-base-dbg = "${libdir}/.debug/libwvutils.so.*"
 
 FILES_libwvstreams-extras     = "${libdir}/libwvbase.so.* ${libdir}/libwvstreams.so.*"
-FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debug/libwvstreams.so.*"
 
 FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
 RDEPENDS_${PN} += "perl"
