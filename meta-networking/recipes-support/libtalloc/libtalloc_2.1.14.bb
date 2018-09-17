@@ -37,13 +37,13 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
 
-PACKAGES += "pytalloc pytalloc-dbg pytalloc-dev"
+PACKAGES += "pytalloc pytalloc-dev"
+
+RPROVIDES_${PN}-dbg += "pytalloc-dbg"
 
 FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
                   ${libdir}/libpytalloc-util.so.2 \
                   ${libdir}/libpytalloc-util.so.2.1.1 \
                  "
-FILES_pytalloc-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
-                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
 FILES_pytalloc-dev = "${libdir}/libpytalloc-util.so"
 RDEPENDS_pytalloc = "python"
