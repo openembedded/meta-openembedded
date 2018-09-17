@@ -35,10 +35,11 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
 
-PACKAGES += "tdb-tools python-tdb python-tdb-dbg"
+PACKAGES += "tdb-tools python-tdb"
+
+RPROVIDES_${PN}-dbg += "python-tdb-dbg"
 
 FILES_${PN} = "${libdir}/*.so.*"
 FILES_tdb-tools = "${bindir}/*"
 FILES_python-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
-FILES_python-tdb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug/*"
 RDEPENDS_python-tdb = "python"
