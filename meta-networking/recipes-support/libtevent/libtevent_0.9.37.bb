@@ -39,7 +39,8 @@ EXTRA_OECONF += "--disable-rpath \
                  --without-gettext \
                 "
 
-PACKAGES += "python-tevent python-tevent-dbg"
+PACKAGES += "python-tevent"
+
+RPROVIDES_${PN}-dbg += "python-tevent-dbg"
 
 FILES_python-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
-FILES_python-tevent-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
