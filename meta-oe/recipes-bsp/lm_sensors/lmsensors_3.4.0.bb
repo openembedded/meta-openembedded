@@ -76,14 +76,16 @@ do_install() {
     fi
 }
 
+RPROVIDES_${PN}-dbg += "${PN}-libsensors-dbg ${PN}-sensors-dbg ${PN}-sensord-dbg ${PN}-isatools-dbg"
+
 # libsensors packages
-PACKAGES =+ "${PN}-libsensors ${PN}-libsensors-dbg ${PN}-libsensors-dev ${PN}-libsensors-staticdev ${PN}-libsensors-doc"
+PACKAGES =+ "${PN}-libsensors ${PN}-libsensors-dev ${PN}-libsensors-staticdev ${PN}-libsensors-doc"
 
 # sensors command packages
-PACKAGES =+ "${PN}-sensors ${PN}-sensors-dbg ${PN}-sensors-doc"
+PACKAGES =+ "${PN}-sensors ${PN}-sensors-doc"
 
 # sensord logging daemon
-PACKAGES =+ "${PN}-sensord ${PN}-sensord-dbg ${PN}-sensord-doc"
+PACKAGES =+ "${PN}-sensord ${PN}-sensord-doc"
 
 # fancontrol script
 PACKAGES =+ "${PN}-fancontrol ${PN}-fancontrol-doc"
@@ -98,11 +100,11 @@ PACKAGES =+ "${PN}-sensorsconfconvert ${PN}-sensorsconfconvert-doc"
 PACKAGES =+ "${PN}-pwmconfig ${PN}-pwmconfig-doc"
 
 # isadump and isaset helper program
-PACKAGES =+ "${PN}-isatools ${PN}-isatools-dbg ${PN}-isatools-doc"
+PACKAGES =+ "${PN}-isatools ${PN}-isatools-doc"
+
 
 # libsensors files
 FILES_${PN}-libsensors = "${libdir}/libsensors.so.* ${sysconfdir}/sensors3.conf ${sysconfdir}/sensors.d"
-FILES_${PN}-libsensors-dbg = "${libdir}/.debug ${prefix}/src/debug"
 FILES_${PN}-libsensors-dev = "${libdir}/libsensors.so ${includedir}"
 FILES_${PN}-libsensors-staticdev = "${libdir}/libsensors.a"
 FILES_${PN}-libsensors-doc = "${mandir}/man3"
@@ -110,13 +112,11 @@ RRECOMMENDS_${PN}-libsensors = "lmsensors-config-libsensors"
 
 # sensors command files
 FILES_${PN}-sensors = "${bindir}/sensors"
-FILES_${PN}-sensors-dbg = "${bindir}/.debug/sensors"
 FILES_${PN}-sensors-doc = "${mandir}/man1 ${mandir}/man5"
 RDEPENDS_${PN}-sensors = "${PN}-libsensors"
 
 # sensord logging daemon
 FILES_${PN}-sensord = "${sbindir}/sensord ${sysconfdir}/init.d/sensord ${systemd_unitdir}/system/sensord.service"
-FILES_${PN}-sensord-dbg = "${bindir}/.debug/sensord"
 FILES_${PN}-sensord-doc = "${mandir}/man8/sensord.8"
 RDEPENDS_${PN}-sensord = "${PN}-sensors rrdtool"
 RRECOMMENDS_${PN}-sensord = "lmsensors-config-sensord"
@@ -144,5 +144,4 @@ RDEPENDS_${PN}-pwmconfig = "${PN}-fancontrol"
 
 # isadump and isaset helper program files
 FILES_${PN}-isatools = "${sbindir}/isa*"
-FILES_${PN}-isatools-dbg = "${sbindir}/.debug/isa*"
 FILES_${PN}-isatools-doc = "${mandir}/man8/isa*"
