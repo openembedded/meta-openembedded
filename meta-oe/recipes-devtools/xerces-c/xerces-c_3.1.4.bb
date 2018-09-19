@@ -24,24 +24,21 @@ do_install_prepend () {
 }
 
 PACKAGES = "libxerces-c \
-    libxerces-c-dbg \
     libxerces-c-dev \
     xerces-c-samples \
-    xerces-c-samples-dbg \
     libxerces-c-staticdev \
+    ${PN}-dbg \
 "
 
+RPROVIDES_${PN}-dbg += "libxerces-c-dbg xerces-c-samples-dbg"
+
 FILES_libxerces-c = "${libdir}/libxerces-c-3.1.so"
-FILES_libxerces-c-dbg = "${libdir}/.debug \
-    ${prefix}/src/debug \
-"
 FILES_libxerces-c-dev = "${libdir}/lib*.la \
     ${libdir}/libxerces-c.so \
     ${libdir}/pkgconfig/xerces-c.pc \
     ${includedir}/xercesc \
 "
 FILES_xerces-c-samples = "${bindir}/*"
-FILES_xerces-c-samples-dbg = "${bindir}/.debug/"
 FILES_libxerces-c-staticdev = "${libdir}/lib*.a"
 
 BBCLASSEXTEND = "native"
