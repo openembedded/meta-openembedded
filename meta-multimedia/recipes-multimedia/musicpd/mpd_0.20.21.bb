@@ -17,9 +17,6 @@ DEPENDS += " \
     expat \
 "
 
-# While this item does not require it, it depends on mpg123 which does
-LICENSE_FLAGS = "commercial"
-
 SRC_URI = " \
     http://www.musicpd.org/download/${BPN}/0.20/${BP}.tar.xz \
     file://mpd.conf.in \
