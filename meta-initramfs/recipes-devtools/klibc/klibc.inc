@@ -75,6 +75,7 @@ KLIBC_ARCH_powerpc = "ppc"
 KLIBC_ARCH_powerpc64 = "ppc64"
 THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
 
+GCCPIE ?= ""
 SECURITY_LDFLAGS = "${@'-z relro -z now -pie' if '${GCCPIE}' else ''}"
 SECURITY_LDFLAGS_mips = ""
 SECURITY_LDFLAGS_mips64 = ""
