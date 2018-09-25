@@ -21,6 +21,7 @@ SRC_URI = " \
     file://0001-build-remove-v4.12-secondary-defines-in-favor-of-HAV.patch \
     file://0001-build-fix-probing-for-HAVE_SCTP_SENDV.patch \
     file://0001-build-0b0dce7a36fb-actually-belongs-to-v4.19.patch \
+    file://0001-test_1_to_1_events.c-initialize-event-properly.patch \
     file://run-ptest \
     file://v4test.sh \
     file://v6test.sh \
