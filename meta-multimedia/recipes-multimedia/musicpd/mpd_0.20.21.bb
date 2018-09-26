@@ -18,11 +18,11 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    http://www.musicpd.org/download/${BPN}/0.20/${BP}.tar.xz \
+    git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
     file://mpd.conf.in \
 "
-SRC_URI[md5sum] = "d93c3c86f5e0fc56cc2e1020f80f8b66"
-SRC_URI[sha256sum] = "8322764dc265c20f05c8c8fdfdd578b0722e74626bef56fcd8eebfb01acc58dc"
+SRCREV = "98afae2520fbe5a322f803335b3142612fda4762"
+S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "enable_bzip2=yes"
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
