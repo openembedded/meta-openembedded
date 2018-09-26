@@ -22,10 +22,13 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig ptest
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[python] = ",,"
+
 EXTRA_OECONF += "--with-protoc=echo"
 
 TEST_SRC_DIR = "examples"
-LANG_SUPPORT = "cpp python"
+LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', '', d)}"
 
 do_compile_ptest() {
 	# Modify makefile to use the cross-compiler
@@ -78,7 +81,7 @@ FILES_${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 
 RDEPENDS_${PN}-compiler = "${PN}"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
-RDEPENDS_${PN}-ptest = "bash python-protobuf"
+RDEPENDS_${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python-protobuf', '', d)}"
 
 MIPS_INSTRUCTION_SET = "mips"
 
