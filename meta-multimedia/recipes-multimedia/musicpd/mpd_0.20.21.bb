@@ -7,7 +7,7 @@ inherit autotools useradd systemd pkgconfig
 
 DEPENDS += " \
     curl \
-    sqlite \
+    sqlite3 \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
     tcp-wrappers \
     yajl \
