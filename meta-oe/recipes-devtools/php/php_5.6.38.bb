@@ -7,6 +7,7 @@ SRC_URI += "file://php5-change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
             file://0001-Add-lpthread-to-link.patch \
             file://acinclude-xml2-config.patch \
             file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
+            file://0001-PHP-5.6-LibSSL-1.1-compatibility.patch \
             "
 
 SRC_URI_append_class-target = " \
@@ -15,8 +16,8 @@ SRC_URI_append_class-target = " \
                                 file://php5-0001-opcache-config.m4-enable-opcache.patch \
                                 "
 
-SRC_URI[md5sum] = "6ca12a0e52dcd99cf4d5b2d74c6cde6f"
-SRC_URI[sha256sum] = "626a0e3f5d8a0e686a2b930f0dd3a0601fe3dcb5e43dd0e8c3fab631e64e172a"
+SRC_URI[md5sum] = "5b98aa066567eca8e5738b8ef4a3545c"
+SRC_URI[sha256sum] = "d65b231bbdd63be4439ef5ced965cfd63e62983429dbd4dfcfb49981593ebc03"
 
 DEPENDS += "libmcrypt"
 EXTRA_OECONF += "--with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
