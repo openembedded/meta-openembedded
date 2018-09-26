@@ -9,7 +9,6 @@ DEPENDS += " \
     curl \
     sqlite3 \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
-    tcp-wrappers \
     yajl \
     boost \
     icu \
@@ -27,7 +26,7 @@ S = "${WORKDIR}/git"
 EXTRA_OECONF = "enable_bzip2=yes"
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
-PACKAGECONFIG ??= "aac alsa ao bzip2 ffmpeg flac fluidsynth iso9660 jack libsamplerate mms mpg123 modplug sndfile upnp openal opus vorbis wavpack zlib"
+PACKAGECONFIG ??= "aac alsa ao bzip2 daemon ffmpeg fifo flac fluidsynth iso9660 jack libsamplerate libwrap httpd mms mpg123 modplug sndfile upnp openal opus oss recorder vorbis wavpack zlib"
 
 PACKAGECONFIG[aac] = "--enable-aac,--disable-aac,faad2"
 PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
@@ -35,20 +34,26 @@ PACKAGECONFIG[ao] = "--enable-ao,--disable-ao,libao"
 PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
 PACKAGECONFIG[bzip2] = "--enable-bzip2,--disable-bzip2,bzip2"
 PACKAGECONFIG[cdioparanoia] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio-paranoia"
+PACKAGECONFIG[daemon] = "--enable-daemon,--disable-daemon"
 PACKAGECONFIG[ffmpeg] = "--enable-ffmpeg,--disable-ffmpeg,ffmpeg"
+PACKAGECONFIG[fifo] = "--enable-fifo,--disable-fifo"
 PACKAGECONFIG[flac] = "--enable-flac,--disable-flac,flac"
 PACKAGECONFIG[fluidsynth] = "--enable-fluidsynth,--disable-fluidsynth,fluidsynth"
+PACKAGECONFIG[httpd] = "--enable-httpd-output,--disable-httpd-output"
 PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
 PACKAGECONFIG[iso9660] = "--enable-iso9660,--disable-iso9660,libcdio"
 PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
 PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
 PACKAGECONFIG[libsamplerate] = "--enable-lsr,--disable-lsr,libsamplerate0"
+PACKAGECONFIG[libwrap] = "--enable-libwrap,--disable-libwrap,tcp-wrappers"
 PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
 PACKAGECONFIG[mms] = "--enable-mms,--disable-mms,libmms"
 PACKAGECONFIG[modplug] = "--enable-modplug,--disable-modplug,libmodplug"
 PACKAGECONFIG[mpg123] = "--enable-mpg123,--disable-mpg123,mpg123"
 PACKAGECONFIG[openal] = "--enable-openal,--disable-openal,openal-soft"
 PACKAGECONFIG[opus] = "--enable-opus,--disable-opus,libopus libogg"
+PACKAGECONFIG[oss] = "--enable-oss,--disable-oss,"
+PACKAGECONFIG[recorder] = "--enable-recorder-output,--disable-recorder-output"
 PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba"
 PACKAGECONFIG[sndfile] = "--enable-sndfile,--disable-sndfile,libsndfile1"
 PACKAGECONFIG[upnp] = "--enable-upnp,--disable-upnp,libupnp"
