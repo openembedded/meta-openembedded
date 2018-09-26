@@ -3,7 +3,7 @@ HOMEPAGE = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonk
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
 
-SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.8.1.orig.tar.bz2 \
+SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.9.1.orig.tar.xz \
            file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
            file://0010-fix-cross-compilation-on-i586-targets.patch \
            file://0001-do-not-create-python-environment.patch \
@@ -22,8 +22,8 @@ SRC_URI_append_mipsarchn32 = " \
            file://0001-fix-compiling-failure-on-mips64-n32-bsp.patch \
            "
 
-SRC_URI[md5sum] = "3a44c2fd3d7b5a370ed9184163c74bc4"
-SRC_URI[sha256sum] = "fb5e11b7f31a33be820d5c947c5fa114751b0d5033778c1cd8e0cf2dad91e8fa"
+SRC_URI[md5sum] = "c9473c625ee0a9edaaac8b742ff24c5f"
+SRC_URI[sha256sum] = "f9324a6724233ab15f10381fe13e635e89d725ef1e78025a0a7d36c58a84a0f9"
 
 inherit autotools pkgconfig perlnative pythonnative
 
