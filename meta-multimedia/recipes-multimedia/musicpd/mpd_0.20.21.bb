@@ -66,11 +66,11 @@ do_configure_prepend() {
 }
 
 do_install_append() {
-    install -d ${D}/${localstatedir}/lib/mpd/music
-    chmod 775 ${D}/${localstatedir}/lib/mpd/music
-    install -d ${D}/${localstatedir}/lib/mpd/playlists
-    chown -R mpd ${D}/${localstatedir}/lib/mpd
-    chown mpd:mpd ${D}/${localstatedir}/lib/mpd/music
+    install -o mpd -d \
+        ${D}/${localstatedir}/lib/mpd \
+        ${D}/${localstatedir}/lib/mpd/playlists
+    install -m775 -o mpd -g mpd -d \
+        ${D}/${localstatedir}/lib/mpd/music
 
     install -d ${D}/${sysconfdir}
     install -m 644 ${WORKDIR}/mpd.conf.in ${D}/${sysconfdir}/mpd.conf
