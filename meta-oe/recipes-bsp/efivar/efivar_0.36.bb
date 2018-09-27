@@ -29,7 +29,7 @@ do_compile_prepend() {
 }
 
 do_compile_class-native() {
-    oe_runmake -C src makeguids CC_FOR_BUILD=${BUILD_CC}
+    oe_runmake -C src makeguids CC_FOR_BUILD="${BUILD_CC}"
 }
 
 do_install() {
