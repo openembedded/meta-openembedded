@@ -35,7 +35,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
 SRC_URI[md5sum] = "159a1b1a56dcccf410d1bba911be6076"
 SRC_URI[sha256sum] = "2df13aa25b376b314ce24182c37691959019523de3cc5356c40c1a333b0890a2"
 
-inherit waf-samba
+inherit waf-samba distro_features_check
+REQUIRED_DISTRO_FEATURES = "pam"
 
 S = "${WORKDIR}/ldb-${PV}"
 
