@@ -29,26 +29,18 @@ SRC_URI_append_libc-musl ="\
            "
 S = "${WORKDIR}/git"
 
-# Wiredtiger supports only 64-bit platforms
-PACKAGECONFIG_x86-64 ??= "tcmalloc wiredtiger"
-PACKAGECONFIG_aarch64 ??= "tcmalloc wiredtiger"
+COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
+
+COMPATIBLE_HOST_arm = "null"
+COMPATIBLE_HOST_libc-musl_x86 = "null"
+
 PACKAGECONFIG ??= "tcmalloc"
 # gperftools compilation fails for arm below v7 because of missing support of
 # dmb operation. So we use system-allocator instead of tcmalloc
 PACKAGECONFIG_remove_armv6 = "tcmalloc"
 PACKAGECONFIG_remove_libc-musl = "tcmalloc"
 
-#std::current_exception is undefined for arm < v6
-COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
-COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
-COMPATIBLE_MACHINE_armv7a = "(!.*armv7a).*"
-COMPATIBLE_MACHINE_armv7ve = "(!.*armv7ve).*"
-COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
-# https://jira.mongodb.org/browse/SERVER-16898
-COMPATIBLE_HOST_mipsarch = "null"
-
 PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
-PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
 
 EXTRA_OESCONS = "--prefix=${D}${prefix} \
                  LIBPATH=${STAGING_LIBDIR} \
@@ -62,6 +54,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
                  --js-engine=none \
                  --nostrip \
                  --endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+                 --wiredtiger=${@['off','on'][d.getVar('SITEINFO_BITS') != '32']} \
                  ${PACKAGECONFIG_CONFARGS} \
                  mongod mongos"
 
