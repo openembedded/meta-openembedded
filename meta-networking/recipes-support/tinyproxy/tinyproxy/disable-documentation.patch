@@ -1,5 +1,14 @@
+From b71eb384522b5ce4629dee6e8be257fb4880fef3 Mon Sep 17 00:00:00 2001
+From: Benjamin Gaignard <benjamin.gaignard@linaro.org>
+Date: Thu, 20 Apr 2017 14:25:18 +0200
+
+---
+ Makefile.am  | 1 -
+ configure.ac | 9 ---------
+ 2 files changed, 10 deletions(-)
+
 diff --git a/Makefile.am b/Makefile.am
-index 4a3ead6..a12cb98 100644
+index e9113c2..2fe3d54 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -2,7 +2,6 @@ SUBDIRS = \
@@ -8,13 +17,13 @@ index 4a3ead6..a12cb98 100644
  	etc \
 -	docs \
  	m4macros \
- 	tests \
- 	scripts
+ 	tests
+ 
 diff --git a/configure.ac b/configure.ac
-index 6ddbcc0..f993711 100644
+index 48ee0b2..a1a5fa1 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -177,10 +177,6 @@ AC_SUBST(ADDITIONAL_OBJECTS)
+@@ -194,10 +194,6 @@ AC_SUBST(ADDITIONAL_OBJECTS)
  AC_PATH_PROG(XSLTPROC, xsltproc, no)
  AM_CONDITIONAL(HAVE_XSLTPROC, test "x$XSLTPROC" != "xno")
  
@@ -25,7 +34,7 @@ index 6ddbcc0..f993711 100644
  # checking xmllint
  AC_PATH_PROG(XMLLINT, xmllint, no)
  if test "x$XMLLINT" != "xno"; then
-@@ -202,11 +198,6 @@ src/Makefile
+@@ -219,11 +215,6 @@ src/Makefile
  data/Makefile
  data/templates/Makefile
  etc/Makefile
