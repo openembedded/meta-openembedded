@@ -17,6 +17,9 @@ SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH} \
            "
 SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
 
+# Fixes build with older compilers 4.8 especially on ubuntu 14.04
+CXXFLAGS_append_class-native = " -Wl,--no-as-needed"
+
 inherit cmake
 
 EXTRA_OECMAKE = " \
