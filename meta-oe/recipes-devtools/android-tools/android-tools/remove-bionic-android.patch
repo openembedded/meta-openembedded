@@ -3,13 +3,13 @@ Author: Fathi Boudra <fabo@debian.org>
 
 Upstream-Status: Inappropriate
 ---
- system/core/include/cutils/properties.h |    1 -
- system/core/libcutils/properties.c      |    2 +-
- system/core/liblog/logd_write.c         |    5 +++++
+ include/cutils/properties.h |    1 -
+ libcutils/properties.c      |    2 +-
+ liblog/logd_write.c         |    5 +++++
  3 files changed, 6 insertions(+), 2 deletions(-)
 
---- a/system/core/include/cutils/properties.h
-+++ b/system/core/include/cutils/properties.h
+--- a/include/cutils/properties.h
++++ b/include/cutils/properties.h
 @@ -19,7 +19,6 @@
  
  #include <sys/cdefs.h>
@@ -18,8 +18,8 @@ Upstream-Status: Inappropriate
  #include <stdint.h>
  
  #ifdef __cplusplus
---- a/system/core/liblog/logd_write.c
-+++ b/system/core/liblog/logd_write.c
+--- a/liblog/logd_write.c
++++ b/liblog/logd_write.c
 @@ -23,6 +23,7 @@
  #include <stdlib.h>
  #include <string.h>
@@ -40,8 +40,8 @@ Upstream-Status: Inappropriate
  
      newVec[0].iov_base   = (unsigned char *) &log_id_buf;
      newVec[0].iov_len    = sizeof_log_id_t;
---- a/system/core/libcutils/properties.c
-+++ b/system/core/libcutils/properties.c
+--- a/libcutils/properties.c
++++ b/libcutils/properties.c
 @@ -104,10 +104,10 @@ int32_t property_get_int32(const char *k
      return (int32_t)property_get_imax(key, INT32_MIN, INT32_MAX, default_value);
  }
@@ -54,14 +54,3 @@ Upstream-Status: Inappropriate
  
  int property_set(const char *key, const char *value)
  {
---- a/external/libselinux/src/procattr.c
-+++ b/external/libselinux/src/procattr.c
-@@ -8,7 +8,7 @@
- #include "selinux_internal.h"
- #include "policy.h"
- 
--#ifdef HOST
-+#ifndef __BIONIC__
- static pid_t gettid(void)
- {
- 	return syscall(__NR_gettid);

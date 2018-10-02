@@ -4,11 +4,11 @@ Author: Fathi Boudra <fabo@debian.org>
 
 Upstream-Status: Inappropriate
 ---
- system/core/adb/services.c |    4 ----
+ adb/services.c |    4 ----
  1 file changed, 4 deletions(-)
 
---- a/system/core/adb/services.c
-+++ b/system/core/adb/services.c
+--- a/adb/services.c
++++ b/adb/services.c
 @@ -299,11 +299,7 @@ static int create_subproc_raw(const char
  }
  #endif  /* !ABD_HOST */

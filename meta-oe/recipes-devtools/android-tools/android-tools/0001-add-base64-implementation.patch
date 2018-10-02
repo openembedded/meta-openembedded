@@ -7,15 +7,15 @@ musl needs it
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- system/core/adb/adb_auth_client.c |   2 +-
- system/core/adb/base64.c          | 315 ++++++++++++++++++++++++++++++++++++++
+ adb/adb_auth_client.c |   2 +-
+ adb/base64.c          | 315 ++++++++++++++++++++++++++++++++++++++
  2 files changed, 316 insertions(+), 1 deletion(-)
- create mode 100644 system/core/adb/base64.c
+ create mode 100644 adb/base64.c
 
-diff --git a/system/core/adb/adb_auth_client.c b/system/core/adb/adb_auth_client.c
+diff --git a/adb/adb_auth_client.c b/adb/adb_auth_client.c
 index 55e9dca..104b413 100644
---- a/system/core/adb/adb_auth_client.c
-+++ b/system/core/adb/adb_auth_client.c
+--- a/adb/adb_auth_client.c
++++ b/adb/adb_auth_client.c
 @@ -75,7 +75,7 @@ static void read_keys(const char *file, struct listnode *list)
          if (sep)
              *sep = '\0';
@@ -25,11 +25,11 @@ index 55e9dca..104b413 100644
          if (ret != sizeof(key->key)) {
              D("%s: Invalid base64 data ret=%d\n", file, ret);
              free(key);
-diff --git a/system/core/adb/base64.c b/system/core/adb/base64.c
+diff --git a/adb/base64.c b/adb/base64.c
 new file mode 100644
 index 0000000..95da284
 --- /dev/null
-+++ b/system/core/adb/base64.c
++++ b/adb/base64.c
 @@ -0,0 +1,315 @@
 +/*
 + * Copyright (c) 1996-1999 by Internet Software Consortium.

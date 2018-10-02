@@ -3,13 +3,13 @@ Author: Fathi Boudra <fabo@debian.org>
 
 Upstream-Status: Inappropriate
 ---
- system/core/adb/adb.c                |    1 +
- system/core/fs_mgr/fs_mgr_fstab.c    |    2 +-
- system/core/include/cutils/sockets.h |    2 +-
+ adb/adb.c                |    1 +
+ fs_mgr/fs_mgr_fstab.c    |    2 +-
+ include/cutils/sockets.h |    2 +-
  3 files changed, 3 insertions(+), 2 deletions(-)
 
---- a/system/core/fs_mgr/fs_mgr_fstab.c
-+++ b/system/core/fs_mgr/fs_mgr_fstab.c
+--- a/fs_mgr/fs_mgr_fstab.c
++++ b/fs_mgr/fs_mgr_fstab.c
 @@ -17,7 +17,7 @@
  #include <ctype.h>
  #include <stdio.h>
@@ -19,8 +19,8 @@ Upstream-Status: Inappropriate
  #include <sys/mount.h>
  
  #include "fs_mgr_priv.h"
---- a/system/core/include/cutils/sockets.h
-+++ b/system/core/include/cutils/sockets.h
+--- a/include/cutils/sockets.h
++++ b/include/cutils/sockets.h
 @@ -19,7 +19,7 @@
  
  #include <errno.h>
@@ -30,8 +30,8 @@ Upstream-Status: Inappropriate
  #include <stdbool.h>
  
  #ifdef HAVE_WINSOCK
---- a/system/core/adb/adb.c
-+++ b/system/core/adb/adb.c
+--- a/adb/adb.c
++++ b/adb/adb.c
 @@ -41,6 +41,7 @@
  #include <sys/prctl.h>
  #include <getopt.h>

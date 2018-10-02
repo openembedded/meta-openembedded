@@ -10,12 +10,12 @@ Change-Id: Ie29a11cbf4138426bfd19ae486d69a5fcbd8f442
 
 Upstream-Status: Inappropriate
 ---
- system/core/mkbootimg/bootimg.h   |    7 +++++--
- system/core/mkbootimg/mkbootimg.c |   21 +++++++++++++++++++++
+ mkbootimg/bootimg.h   |    7 +++++--
+ mkbootimg/mkbootimg.c |   21 +++++++++++++++++++++
  2 files changed, 26 insertions(+), 2 deletions(-)
 
---- a/system/core/mkbootimg/bootimg.h
-+++ b/system/core/mkbootimg/bootimg.h
+--- a/mkbootimg/bootimg.h
++++ b/mkbootimg/bootimg.h
 @@ -41,8 +41,8 @@ struct boot_img_hdr
  
      unsigned tags_addr;    /* physical addr for kernel tags */
@@ -41,8 +41,8 @@ Upstream-Status: Inappropriate
  **
  ** 0. all entities are page_size aligned in flash
  ** 1. kernel and ramdisk are required (size != 0)
---- a/system/core/mkbootimg/mkbootimg.c
-+++ b/system/core/mkbootimg/mkbootimg.c
+--- a/mkbootimg/mkbootimg.c
++++ b/mkbootimg/mkbootimg.c
 @@ -65,6 +65,7 @@ int usage(void)
              "       [ --board <boardname> ]\n"
              "       [ --base <address> ]\n"

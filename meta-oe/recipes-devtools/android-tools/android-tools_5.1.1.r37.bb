@@ -30,17 +30,21 @@ SRC_URI = " \
     git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware \
     git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux \
     git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build \
-    file://remove-selinux-android.patch \
-    file://use-capability.patch \
-    file://use-local-socket.patch \
+    file://remove-selinux-android.patch;patchdir=system/core \
+    file://use-capability.patch;patchdir=system/core \
+    file://use-local-socket.patch;patchdir=system/core \
+    file://mkbootimg-Add-dt-parameter-to-specify-DT-image.patch;patchdir=system/core \
+    file://remove-bionic-android.patch;patchdir=system/core \
+    file://define-shell-command.patch;patchdir=system/core \
+    file://implicit-declaration-function-strlcat-strlcopy.patch;patchdir=system/core \
+    file://fix-big-endian-build.patch;patchdir=system/core \
+    file://0001-add-base64-implementation.patch;patchdir=system/core \
+    file://0002-adb-Musl-fixes.patch;patchdir=system/core \
+    file://0001-usb_linux.c-fix-build-with-glibc-2.28.patch;patchdir=system/core \
+    file://0001-Allow-adbd-to-be-ran-as-root.patch;patchdir=system/core \
+    file://remove-selinux-android-extras.patch;patchdir=system/extras \
     file://preserve-ownership.patch;patchdir=system/extras \
-    file://mkbootimg-Add-dt-parameter-to-specify-DT-image.patch \
-    file://remove-bionic-android.patch \
-    file://define-shell-command.patch \
-    file://implicit-declaration-function-strlcat-strlcopy.patch \
-    file://fix-big-endian-build.patch \
-    file://0001-add-base64-implementation.patch \
-    file://0002-adb-Musl-fixes.patch \
+    file://remove-bionic-android-libselinux.patch;patchdir=external/libselinux \
     file://android-tools-adbd.service \
     file://.gitignore;subdir=git \
     file://adb.mk;subdir=${BPN} \
@@ -48,8 +52,6 @@ SRC_URI = " \
     file://ext4_utils.mk;subdir=${BPN} \
     file://fastboot.mk;subdir=${BPN} \
     file://mkbootimg.mk;subdir=${BPN} \
-    file://0001-usb_linux.c-fix-build-with-glibc-2.28.patch;patchdir=system/core \
-    file://0001-Allow-adbd-to-be-ran-as-root.patch;patchdir=system/core \
 "
 
 S = "${WORKDIR}/git"

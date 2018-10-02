@@ -15,10 +15,10 @@ them to be used when initializing structures.
 
 Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
 
-Index: b/system/core/adb/usb_linux_client.c
+Index: b/adb/usb_linux_client.c
 ===================================================================
---- a/system/core/adb/usb_linux_client.c
-+++ b/system/core/adb/usb_linux_client.c
+--- a/adb/usb_linux_client.c
++++ b/adb/usb_linux_client.c
 @@ -34,8 +34,15 @@
  #define MAX_PACKET_SIZE_FS	64
  #define MAX_PACKET_SIZE_HS	512
