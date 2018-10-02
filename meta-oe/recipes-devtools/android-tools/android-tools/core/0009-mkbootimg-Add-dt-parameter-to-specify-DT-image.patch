@@ -1,19 +1,19 @@
-From cc5e7b02a3be57709a1aed6e34be100b82a71620 Mon Sep 17 00:00:00 2001
+From dd195778a9930b7967b21a3b8eb390b70253dbad Mon Sep 17 00:00:00 2001
 From: David Ng <dave@codeaurora.org>
 Date: Fri, 27 Jul 2012 17:15:03 -0700
-Subject: [PATCH 1/2] mkbootimg: Add --dt parameter to specify DT image
+Subject: [PATCH] mkbootimg: Add --dt parameter to specify DT image
 
 New optional --dt parameter to specify a kernel device
 tree image.
 
-Change-Id: Ie29a11cbf4138426bfd19ae486d69a5fcbd8f442
-
 Upstream-Status: Inappropriate
 ---
- mkbootimg/bootimg.h   |    7 +++++--
- mkbootimg/mkbootimg.c |   21 +++++++++++++++++++++
+ mkbootimg/bootimg.h   |  7 +++++--
+ mkbootimg/mkbootimg.c | 21 +++++++++++++++++++++
  2 files changed, 26 insertions(+), 2 deletions(-)
 
+diff --git a/mkbootimg/bootimg.h b/mkbootimg/bootimg.h
+index 9171d85a7b..308c537d6b 100644
 --- a/mkbootimg/bootimg.h
 +++ b/mkbootimg/bootimg.h
 @@ -41,8 +41,8 @@ struct boot_img_hdr
@@ -41,6 +41,8 @@ Upstream-Status: Inappropriate
  **
  ** 0. all entities are page_size aligned in flash
  ** 1. kernel and ramdisk are required (size != 0)
+diff --git a/mkbootimg/mkbootimg.c b/mkbootimg/mkbootimg.c
+index fc92b4dc30..658052cdf2 100644
 --- a/mkbootimg/mkbootimg.c
 +++ b/mkbootimg/mkbootimg.c
 @@ -65,6 +65,7 @@ int usage(void)

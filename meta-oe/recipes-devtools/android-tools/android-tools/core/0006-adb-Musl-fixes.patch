@@ -1,7 +1,7 @@
-From f8653ed0ede4aa781ab758fcd44fdc05ffbe0b0a Mon Sep 17 00:00:00 2001
+From 62d957a1271c88ec08d67984fbe31601f0bd41a9 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 15 Sep 2017 15:50:57 -0700
-Subject: [PATCH 2/2] adb: Musl fixes
+Subject: [PATCH] adb: Musl fixes
 
 __nonnull is gcc specific
 include sys/types.h for size_t
@@ -16,7 +16,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  4 files changed, 20 insertions(+), 14 deletions(-)
 
 diff --git a/adb/adb.h b/adb/adb.h
-index 44e5981..bcdc49f 100644
+index 44e5981bdc..bcdc49f63c 100644
 --- a/adb/adb.h
 +++ b/adb/adb.h
 @@ -18,7 +18,9 @@
@@ -30,7 +30,7 @@ index 44e5981..bcdc49f 100644
  #include "transport.h"  /* readx(), writex() */
  
 diff --git a/adb/disable_verity_service.c b/adb/disable_verity_service.c
-index ed3da52..29fa3d6 100644
+index ed3da52108..29fa3d65a9 100644
 --- a/adb/disable_verity_service.c
 +++ b/adb/disable_verity_service.c
 @@ -14,25 +14,28 @@
@@ -68,7 +68,7 @@ index ed3da52..29fa3d6 100644
  {
      char buffer[256];
 diff --git a/adb/framebuffer_service.c b/adb/framebuffer_service.c
-index 8cbe840..8f0ccfb 100644
+index 8cbe8403cc..8f0ccfb7aa 100644
 --- a/adb/framebuffer_service.c
 +++ b/adb/framebuffer_service.c
 @@ -14,6 +14,10 @@
@@ -93,7 +93,7 @@ index 8cbe840..8f0ccfb 100644
  #include <sys/ioctl.h>
  #include <sys/mman.h>
 diff --git a/adb/sysdeps.h b/adb/sysdeps.h
-index cc1f839..ea39ac3 100644
+index cc1f839e9f..ea39ac39cc 100644
 --- a/adb/sysdeps.h
 +++ b/adb/sysdeps.h
 @@ -123,8 +123,8 @@ static __inline__ int  unix_close(int fd)
@@ -129,6 +129,3 @@ index cc1f839..ea39ac3 100644
  
  static __inline__  int    adb_unlink(const char*  path)
  {
--- 
-2.14.1
-

@@ -1,24 +1,21 @@
-From aa669312a380611d280d126cb509fa282080707e Mon Sep 17 00:00:00 2001
+From b9254539811ce912bfd16dd1d185eba7a10cceff Mon Sep 17 00:00:00 2001
 From: Markus Mayer <mmayer@mmayer.net>
 Date: Wed, 7 Sep 2016 12:58:47 +0300
-Subject: [PATCH] android-tools: add recipe from AOSP tag android-5.1.1_r37
-
-Description: add -o argument to preserve ownership
+Subject: [PATCH] ext4_utils: add -o argument to preserve ownership
 
 See also https://android-review.googlesource.com/#/c/100312/
 
 Upstream-Status: Inappropriate
-
 ---
  ext4_utils/make_ext4fs.c      |  6 ++++++
  ext4_utils/make_ext4fs_main.c | 10 ++++++++--
  2 files changed, 14 insertions(+), 2 deletions(-)
 
 diff --git a/ext4_utils/make_ext4fs.c b/ext4_utils/make_ext4fs.c
-index 2f89ae8a..cc41d623 100644
+index 732afbed7..2cbf04399 100644
 --- a/ext4_utils/make_ext4fs.c
 +++ b/ext4_utils/make_ext4fs.c
-@@ -68,6 +68,8 @@
+@@ -67,6 +67,8 @@
  
  #endif
  
@@ -27,7 +24,7 @@ index 2f89ae8a..cc41d623 100644
  /* TODO: Not implemented:
     Allocating blocks in the same block group as the file inode
     Hash or binary tree directories
-@@ -186,6 +188,10 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
+@@ -185,6 +187,10 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
  		} else {
  			dentries[i].mtime = fixed_time;
  		}
@@ -39,10 +36,10 @@ index 2f89ae8a..cc41d623 100644
  		if (fs_config_func != NULL) {
  #ifdef ANDROID
 diff --git a/ext4_utils/make_ext4fs_main.c b/ext4_utils/make_ext4fs_main.c
-index a6c5f616..7af0dddf 100644
+index f8e7b9da9..e82d43277 100644
 --- a/ext4_utils/make_ext4fs_main.c
 +++ b/ext4_utils/make_ext4fs_main.c
-@@ -48,13 +48,15 @@ struct selabel_handle;
+@@ -47,13 +47,15 @@ struct selabel_handle;
  extern struct fs_info info;
  
  
@@ -59,7 +56,7 @@ index a6c5f616..7af0dddf 100644
  	fprintf(stderr, "    <filename> [<directory>]\n");
  }
  
-@@ -80,7 +82,7 @@ int main(int argc, char **argv)
+@@ -79,7 +81,7 @@ int main(int argc, char **argv)
  	struct selinux_opt seopts[] = { { SELABEL_OPT_PATH, "" } };
  #endif
  
@@ -68,7 +65,7 @@ index a6c5f616..7af0dddf 100644
  		switch (opt) {
  		case 'l':
  			info.len = parse_num(optarg);
-@@ -143,6 +145,10 @@ int main(int argc, char **argv)
+@@ -142,6 +144,10 @@ int main(int argc, char **argv)
  			}
  #endif
  			break;

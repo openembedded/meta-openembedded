@@ -1,4 +1,7 @@
-Fix build on big endian systems
+From 548b8ca62c64a16305929e2eaf3d546d48de9c25 Mon Sep 17 00:00:00 2001
+From: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+Date: Tue, 21 Feb 2017 19:46:24 +0100
+Subject: [PATCH] adb: Fix build on big endian systems
 
 The usb_linux_client.c file defines cpu_to_le16/32 by using the C
 library htole16/32 function calls. However, cpu_to_le16/32 are used
@@ -14,9 +17,12 @@ To solve this, we simply open-code cpu_to_le16/32 in a way that allows
 them to be used when initializing structures.
 
 Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+---
+ adb/usb_linux_client.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-Index: b/adb/usb_linux_client.c
-===================================================================
+diff --git a/adb/usb_linux_client.c b/adb/usb_linux_client.c
+index 8426e0ea14..6e8b5bbbd2 100644
 --- a/adb/usb_linux_client.c
 +++ b/adb/usb_linux_client.c
 @@ -34,8 +34,15 @@

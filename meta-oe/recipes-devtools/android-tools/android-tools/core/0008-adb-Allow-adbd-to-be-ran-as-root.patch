@@ -1,17 +1,17 @@
-From 3237f335c5b559c68749173f4343e6475f9eb8c7 Mon Sep 17 00:00:00 2001
+From 3a788e9168c9b9eac66c4fa479413f4a95c61be4 Mon Sep 17 00:00:00 2001
 From: Florent Revest <revestflo@gmail.com>
 Date: Mon, 30 Oct 2017 21:05:46 +0100
-Subject: [PATCH] Allow adbd to be ran as root
+Subject: [PATCH] adb: Allow adbd to be ran as root
 
 ---
  adb/adb.c | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/adb/adb.c b/adb/adb.c
-index 10a1e0d..a88641f 100644
+index 027edd9359..e0f7ecde45 100644
 --- a/adb/adb.c
 +++ b/adb/adb.c
-@@ -1267,6 +1267,7 @@ static int should_drop_privileges() {
+@@ -1271,6 +1271,7 @@ static int should_drop_privileges() {
      int secure = 0;
      char value[PROPERTY_VALUE_MAX];
  
@@ -19,6 +19,3 @@ index 10a1e0d..a88641f 100644
     /* run adbd in secure mode if ro.secure is set and
      ** we are not in the emulator
      */
--- 
-2.14.3
-

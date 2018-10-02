@@ -1,19 +1,19 @@
-From bbeb72f11c64f190b23abbed5f44311bd021bdc9 Mon Sep 17 00:00:00 2001
+From 753bcb5971401b82fb2e6197d31c9e386f6d0392 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Fri, 15 Sep 2017 15:46:38 -0700
-Subject: [PATCH 1/2] add base64 implementation
+Subject: [PATCH] adb: add base64 implementation
 
 musl needs it
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  adb/adb_auth_client.c |   2 +-
- adb/base64.c          | 315 ++++++++++++++++++++++++++++++++++++++
+ adb/base64.c          | 315 ++++++++++++++++++++++++++++++++++++++++++
  2 files changed, 316 insertions(+), 1 deletion(-)
  create mode 100644 adb/base64.c
 
 diff --git a/adb/adb_auth_client.c b/adb/adb_auth_client.c
-index 55e9dca..104b413 100644
+index 55e9dcad19..104b413b8b 100644
 --- a/adb/adb_auth_client.c
 +++ b/adb/adb_auth_client.c
 @@ -75,7 +75,7 @@ static void read_keys(const char *file, struct listnode *list)
@@ -27,7 +27,7 @@ index 55e9dca..104b413 100644
              free(key);
 diff --git a/adb/base64.c b/adb/base64.c
 new file mode 100644
-index 0000000..95da284
+index 0000000000..95da284d0d
 --- /dev/null
 +++ b/adb/base64.c
 @@ -0,0 +1,315 @@
@@ -346,6 +346,3 @@ index 0000000..95da284
 +	return (tarindex);
 +}
 +
--- 
-2.14.1
-
