@@ -4,14 +4,19 @@ HOMEPAGE = "http://www.tortall.net/projects/yasm/"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a12d8903508fb6bfd49d8d82c6170dd9"
 
+DEPENDS += "flex-native bison-native xmlto-native"
+
 PV = "1.3.0+git${SRCPV}"
-SRCREV = "35af9720e36df19382a57be26643b0d6bb48a363"
+# v1.3.0
+SRCREV = "ba463d3c26c0ece2e797b8d6381b161633b5971a"
 SRC_URI = "git://github.com/yasm/yasm.git"
 
 S = "${WORKDIR}/git"
 
-inherit autotools gettext
+inherit autotools gettext pythonnative
 
-export CCLD_FOR_BUILD = "${CC_FOR_BUILD}"
+CACHED_CONFIGUREVARS = "CCLD_FOR_BUILD='${CC_FOR_BUILD}'"
 
 BBCLASSEXTEND = "native"
+
+PARALLEL_MAKE = ""
