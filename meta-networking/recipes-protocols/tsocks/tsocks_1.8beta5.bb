@@ -19,6 +19,7 @@ SRC_URI[sha256sum] = "849d7ef5af80d03e76cc05ed9fb8fa2bcc2b724b51ebfd1b6be11c7863
 inherit autotools-brokensep
 
 LIBS_append_libc-musl = " -lssp_nonshared"
+LIBS_append_libc-glibc = " -lc_nonshared"
 
 S = "${WORKDIR}/tsocks-1.8"
 
