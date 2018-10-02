@@ -49,6 +49,7 @@ SRC_URI = " \
     file://fastboot.mk;subdir=${BPN} \
     file://mkbootimg.mk;subdir=${BPN} \
     file://0001-usb_linux.c-fix-build-with-glibc-2.28.patch;patchdir=system/core \
+    file://0001-Allow-adbd-to-be-ran-as-root.patch;patchdir=system/core \
 "
 
 S = "${WORKDIR}/git"
