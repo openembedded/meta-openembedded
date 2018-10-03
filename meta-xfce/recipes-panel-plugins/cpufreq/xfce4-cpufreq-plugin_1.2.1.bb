@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1f6f1c0be32491a0c8d2915607a28f36"
 
 inherit xfce-panel-plugin
 
-SRC_URI[md5sum] = "152c4c5d9fd926081753d289c18a04c3"
-SRC_URI[sha256sum] = "fec60f14ab02b7079798809c11a79b4930abaeb0e4217068a336cb63cb47970a"
+SRC_URI[md5sum] = "ccd8f0f7aef51bc4caf1049986d9614f"
+SRC_URI[sha256sum] = "c5e044c0dc401d2066f208a3df82a588b3e51ff01425f155d0a1d0f8fce8f5b5"
