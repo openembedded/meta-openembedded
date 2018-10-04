@@ -9,10 +9,9 @@ DEPENDS = "python"
 inherit python-dir pythonnative
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz \
-           file://sip.patch \
           "
-SRC_URI[md5sum] = "e28b0790dfe4962ce6bbd7c4772f40c9"                            
-SRC_URI[sha256sum] = "24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822" 
+SRC_URI[md5sum] = "9124cb8978742685747a5415179a9890"                           
+SRC_URI[sha256sum] = "e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e"
 
 BBCLASSEXTEND = "native"
 
