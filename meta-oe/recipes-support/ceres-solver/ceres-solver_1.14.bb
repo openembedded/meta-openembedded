@@ -14,4 +14,6 @@ S = "${WORKDIR}/git"
 inherit cmake
 
 # Only a static library and headers are created
-ALLOW_EMPTY_${PN} = "1"
+RDEPENDS_${PN}-dev = ""
+RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
+RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
