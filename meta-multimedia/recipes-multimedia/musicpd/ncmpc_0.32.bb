@@ -7,17 +7,14 @@ inherit meson
 
 DEPENDS += " \
     gettext-native \
-    glib-2.0 \
+    boost \
+    pcre \
     ncurses \
     libmpdclient \
 "
 
-# We're using a 0.32 pre-release commit which contains a fix for a
-# build failure.
-PV = "0.32~git${SRCPV}"
-
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/ncmpc \
 "
-SRCREV = "1150f7931de7588643437069dd798724dc1ceb47"
+SRCREV = "b03703653d3f4a418c4a8b6a9e32834dd882a185"
 S = "${WORKDIR}/git"
