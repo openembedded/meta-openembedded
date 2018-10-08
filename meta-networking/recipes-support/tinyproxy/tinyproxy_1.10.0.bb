@@ -25,7 +25,7 @@ inherit autotools systemd useradd
 #User specific
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home /dev/null \
-                       --no-user-group --gid nogroup tinypoxy"
+                       --no-user-group --gid nogroup tinyproxy"
 
 SYSTEMD_PACKAGES += "${BPN}"
 SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
