@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz \
 		   file://disable-documentation.patch \
-		   file://tinyproxy.service"
+		   file://tinyproxy.service \
+       file://tinyproxy.conf"
 
 SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
 SRC_URI[sha256sum] = "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a216940872aa70faf"
@@ -35,4 +36,6 @@ do_install_append() {
 		install -d ${D}${systemd_system_unitdir}
 		install -m 0644 ${WORKDIR}/tinyproxy.service ${D}${systemd_system_unitdir}
 	fi
+
+	install -m 0644 ${WORKDIR}/tinyproxy.conf ${D}${sysconfdir}/tinyproxy.conf
 }
