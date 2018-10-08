@@ -9,15 +9,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
 DEPENDS = "libunwind"
 
 SRC_URI = " \
-    git://github.com/google/glog.git \
-    file://0001-configure.ac-Allow-user-to-disable-gflags.patch \
+    git://github.com/google/glog.git;branch=v035 \
+    file://0001-find-libunwind-during-configure.patch \
 "
 
-SRCREV = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
+SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
 
 S = "${WORKDIR}/git"
 
-PACKAGECONFIG ??= ""
-PACKAGECONFIG[gflags] = ",--without-gflags,gflags,"
+inherit cmake
 
-inherit autotools pkgconfig
+RDEPENDS_${PN}-dev = ""
+RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
+RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"

@@ -1,0 +1,30 @@
+diff -ur git/CMakeLists.txt ../0.3.5-r0.unwind/git/CMakeLists.txt
+--- git/CMakeLists.txt	2018-10-08 08:54:15.118989400 +0200
++++ ../0.3.5-r0.unwind/git/CMakeLists.txt	2018-10-05 16:26:59.745922318 +0200
+@@ -384,7 +384,9 @@
+ set_target_properties (glog PROPERTIES POSITION_INDEPENDENT_CODE ON)
+ 
+ if (UNWIND_LIBRARY)
+-  target_link_libraries (glog PUBLIC ${UNWIND_LIBRARY})
++  add_library(unwind SHARED IMPORTED)
++  set_target_properties(unwind PROPERTIES IMPORTED_LOCATION ${UNWIND_LIBRARY})
++  target_link_libraries (glog PUBLIC unwind)
+ endif (UNWIND_LIBRARY)
+ 
+ if (HAVE_PTHREAD)
+diff -ur git/glog-config.cmake.in ../0.3.5-r0.unwind/git/glog-config.cmake.in
+--- git/glog-config.cmake.in	2018-10-08 08:54:15.122989699 +0200
++++ ../0.3.5-r0.unwind/git/glog-config.cmake.in	2018-10-08 08:14:48.550745810 +0200
+@@ -4,4 +4,12 @@
+ 
+ @gflags_DEPENDENCY@
+ 
++find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
++mark_as_advanced (UNWIND_LIBRARY)
++
++if (UNWIND_LIBRARY)
++  add_library(unwind SHARED IMPORTED)
++  set_target_properties(unwind PROPERTIES IMPORTED_LOCATION ${UNWIND_LIBRARY})
++endif (UNWIND_LIBRARY)
++
+ include ("${CMAKE_CURRENT_LIST_DIR}/glog-targets.cmake")
