@@ -8,7 +8,7 @@ inherit meson
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/libmpdclient \
 "
-SRCREV = "7754ffdfb9371cd398371cb2670a54e9e1e623e2"
+SRCREV = "4e8d990eb5239566ee948f1cd79b7248e008620a"
 S = "${WORKDIR}/git"
 
 do_install_append() {
