@@ -11,6 +11,9 @@ SRC_URI = " \
 SRCREV = "4e8d990eb5239566ee948f1cd79b7248e008620a"
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG ??= "tcp"
+PACKAGECONFIG[tcp] = "-Dtcp=true,-Dtcp=false"
+
 do_install_append() {
     # libmpdclient's Vala bindings are outdated and unmaintained; it
     # is likely that nobody will ever use them, so let's not install
