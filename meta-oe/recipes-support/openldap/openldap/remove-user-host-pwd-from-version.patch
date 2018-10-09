@@ -1,0 +1,12 @@
+diff -ru openldap-2.4.46.original/build/mkversion openldap-2.4.46/build/mkversion
+--- openldap-2.4.46.original/build/mkversion	2018-03-23 04:44:27.000000000 +1300
++++ openldap-2.4.46/build/mkversion	2018-10-09 14:34:51.152684040 +1300
+@@ -50,7 +50,7 @@
+ fi
+ 
+ APPLICATION=$1
+-WHOWHERE="$USER@`uname -n`:`pwd`"
++WHOWHERE="${SOURCE_DATE_EPOCH:-$USER@`uname -n`:`pwd`}"
+ 
+ cat << __EOF__
+ /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
