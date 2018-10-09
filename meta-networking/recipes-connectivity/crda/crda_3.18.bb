@@ -27,7 +27,8 @@ inherit python-dir pythonnative siteinfo
 DEFAULT_CRYPT ??= "gcrypt"
 
 # Recursive make problem
-EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg'"
+EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg' \
+                UDEV_RULE_DIR=${nonarch_libdir}/udev/rules.d/"
 EXTRA_OEMAKE_append = " ${@oe.utils.conditional("DEFAULT_CRYPT", "openssl", "USE_OPENSSL=1", "", d)}"
 TARGET_BITS = "${SITEINFO_BITS}"
 export TARGET_BITS
