@@ -23,4 +23,4 @@ PACKAGES =+ "${PN}-utils"
 
 FILES_${PN}-utils = "${bindir}"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
