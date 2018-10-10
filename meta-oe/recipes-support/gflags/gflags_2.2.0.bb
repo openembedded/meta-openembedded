@@ -17,4 +17,4 @@ FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
 
 RDEPENDS_${PN}-bash-completion = "bash bash-completion"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
