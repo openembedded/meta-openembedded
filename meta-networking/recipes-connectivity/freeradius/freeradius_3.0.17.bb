@@ -29,6 +29,7 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
     file://radiusd.service \
     file://radiusd-volatiles.conf \
+    file://0001-freeradius-correct-version-number-of-libssl-defect.patch \
 "
 SRC_URI[md5sum] = "1f4ad38f32101a7d50d818afa6f17339"
 SRC_URI[sha256sum] = "3f03404b6e4a4f410e1f15ea2ababfec7f8a7ae8a49836d8a0c137436d913b96"
