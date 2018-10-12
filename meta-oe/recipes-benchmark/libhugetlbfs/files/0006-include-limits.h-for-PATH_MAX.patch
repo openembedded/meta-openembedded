@@ -1,13 +1,14 @@
-From 96c012ea31a2d124528f3b6f3b9857b71b059db3 Mon Sep 17 00:00:00 2001
+From 5f64aa8c47c2d3a155a97e262f89cc47394a69eb Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 21 Jun 2018 19:58:53 -0700
-Subject: [PATCH 6/6] include limits.h for PATH_MAX
+Subject: [PATCH] include limits.h for PATH_MAX
 
 Fixes
 
 error: 'PATH_MAX' undeclared
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  hugeadm.c                | 1 +
  tests/gethugepagesizes.c | 1 +
@@ -37,6 +38,3 @@ index 9551b38..2645e3f 100644
  
  #include "hugetests.h"
  
--- 
-2.17.1
-

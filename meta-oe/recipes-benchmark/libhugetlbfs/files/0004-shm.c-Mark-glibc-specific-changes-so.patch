@@ -1,9 +1,10 @@
-From 7002dec46dae375e8aa1aa8577a5b274c02fc697 Mon Sep 17 00:00:00 2001
+From 9ce323432a7f4d99f617970c7e35b607b9bbf843 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Thu, 21 Jun 2018 19:48:04 -0700
-Subject: [PATCH 4/6] shm.c: Mark glibc specific changes so
+Subject: [PATCH] shm.c: Mark glibc specific changes so
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  shm.c | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
@@ -25,6 +26,3 @@ index 1f82cab..9447b63 100644
  
  /* call syscall shmget through the generic syscall mechanism */
  static int syscall_shmget(key_t key, size_t size, int shmflg)
--- 
-2.17.1
-
