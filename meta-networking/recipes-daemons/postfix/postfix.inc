@@ -97,27 +97,9 @@ do_compile () {
             "s:\$(SHELL) makedefs):\$(SHELL) makedefs $SYSTEM $RELEASE):" \
             ${S}/Makefile.in
         export BUILD_SYSROOT="${STAGING_DIR_HOST}"
-        export BUILD_SYSROOT_NSL_PATH="${STAGING_BASELIBDIR} \
-                                       ${STAGING_LIBDIR}"
     else
         # native build
         export BUILD_SYSROOT="${STAGING_DIR_NATIVE}"
-
-        # ubuntu x86 host: /lib/x86_64-linux-gnu(64) /lib/i386-linux-gnu (32)
-        #             on 64 bits, 32 libs in i386-linux-gnu
-        # let makedefs finds nsl and resolv libs, host CC will link
-        # the correct libraries
-        BUILD_SYSROOT_NSL_PATH="$(${CC} -print-search-dirs 2>/dev/null | \
-                      sed -n '/^libraries: =/s/libraries: =//p' | \
-                      sed -e 's/:/\n/g' | xargs -n1 readlink -f | \
-                      grep -v 'gcc\|/[0-9.]\+$' | sort -u)"
-        if [ -z "$BUILD_SYSROOT_NSL_PATH" ]; then
-            BUILD_SYSROOT_NSL_PATH="/usr/lib64 /lib64 \
-                                    /lib/x86_64-linux-gnu \
-                                    /usr/lib   /lib \
-                                    /lib/i386-linux-gnu"
-        fi
-        export BUILD_SYSROOT_NSL_PATH
     fi
 
     oe_runmake makefiles
