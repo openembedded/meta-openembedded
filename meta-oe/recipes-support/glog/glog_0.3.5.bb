@@ -11,6 +11,7 @@ DEPENDS = "libunwind"
 SRC_URI = " \
     git://github.com/google/glog.git;branch=v035 \
     file://0001-find-libunwind-during-configure.patch \
+    file://0001-Rework-CMake-glog-VERSION-management.patch \
 "
 
 SRCREV = "a6a166db069520dbbd653c97c2e5b12e08a8bb26"
@@ -22,3 +23,5 @@ inherit cmake
 RDEPENDS_${PN}-dev = ""
 RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
 RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+
+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
