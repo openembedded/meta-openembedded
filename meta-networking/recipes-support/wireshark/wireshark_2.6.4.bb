@@ -8,15 +8,14 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
 
 DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
 
-SRC_URI = "https://1.as.dl.wireshark.org/src/${BP}.tar.xz \
+SRC_URI = "https://1.as.dl.wireshark.org/src/all-versions/${BP}.tar.xz \
            file://0001-Add-libm-to-link-for-fmod-API.patch \
-           file://fix-fatal-no-names-found-git-error.patch \
           "
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
-SRC_URI[md5sum] = "086d235509717190d06554b2ab870209"
-SRC_URI[sha256sum] = "49b2895ee3ba17ef9ef0aebfdc4d32a778e0f36ccadde184516557d5f3357094"
+SRC_URI[md5sum] = "8aa7b8c8ce0b6ce4256a081493819d6f"
+SRC_URI[sha256sum] = "a06b007e6343f148b8b93443b2fcfc9bb3204311cd268565d54d1b71660bc861"
 
 PE = "1"
 
