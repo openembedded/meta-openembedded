@@ -5,10 +5,10 @@ LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
 
 SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2;downloadfilename=${BP}.tar.bz2"
-SRC_URI[md5sum] = "a7aab9f758249b86c93221ad417fbe18"
-SRC_URI[sha256sum] = "dd254beb0bafc695d0f62ae1a222ff85b52dbaa3a16f76e781dce22d0d20a4a6"
+SRC_URI[md5sum] = "e83549a79d1b721da0f8899ab34edf95"
+SRC_URI[sha256sum] = "7352bff3ea299e4c7d7fbe31c504f8eb9149d7e685dec5a12fbaa26379f603e2"
 
-S = "${WORKDIR}/eigen-eigen-5a0156e40feb"
+S = "${WORKDIR}/eigen-eigen-b3f3d4950030"
 
 inherit cmake
 
