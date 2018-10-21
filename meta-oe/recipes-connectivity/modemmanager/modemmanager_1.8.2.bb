@@ -12,11 +12,10 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
 DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native"
 
 SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
-           file://0001-Add-configure-check-for-canonicalize_file_name-befor.patch \
            "
 
-SRC_URI[md5sum] = "4efe6a240cef212bf8855c95424e7c7f"
-SRC_URI[sha256sum] = "4e366243bd4983f2e6efe35cb901cf5da51939307b5d6299fe622a9fcf411745"
+SRC_URI[md5sum] = "a49c9f73e46c7b89e5efedda250d22c0"
+SRC_URI[sha256sum] = "96f2a5f0ed15532b4c4c185b756fdc0326e7c2027cea26a1264f91e098260f80"
 
 S = "${WORKDIR}/ModemManager-${PV}"
 
