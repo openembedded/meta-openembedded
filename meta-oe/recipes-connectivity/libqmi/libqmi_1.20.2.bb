@@ -12,6 +12,7 @@ DEPENDS = "glib-2.0 libgudev libmbim glib-2.0-native"
 inherit autotools pkgconfig bash-completion
 
 SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+           file://0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch \
            file://0001-Detect-clang.patch \
            "
 SRC_URI[md5sum] = "584214476ab75c394160cb85fbccaa1d"
