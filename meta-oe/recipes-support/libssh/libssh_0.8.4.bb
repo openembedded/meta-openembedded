@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
 
 DEPENDS = "zlib openssl libgcrypt"
 
-SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-7"
-SRCREV = "cdf7690e038230623cbbf6b024ece62f41efa98d"
+SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
+SRCREV = "789df0b7d0c7abd6b85db9fc5247e146e3d4ddba"
 
 S = "${WORKDIR}/git"
 
