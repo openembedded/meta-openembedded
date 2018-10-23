@@ -4,11 +4,9 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
 
-SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
-           file://remove-march-native-from-CMAKE_CXX_FLAGS.patch \
-"
+SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1"
 
-SRCREV = "e5635fb27feab7f6e8d7b916aa20ad799045a641"
+SRCREV = "6a905f9311f82d306da77bd963ec5aa5da07da9c"
 
 PV = "1.1.0+git${SRCPV}"
 
