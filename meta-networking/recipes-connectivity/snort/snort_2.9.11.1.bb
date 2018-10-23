@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
 
 DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc bison-native"
 
-SRC_URI = "https://www.snort.org/downloads/snort/${BP}.tar.gz \
+SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://snort.init \
     file://0001-libpcap-search-sysroot-for-headers.patch \
     file://fix-host-contamination-when-enable-static-daq.patch \
