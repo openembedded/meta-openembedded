@@ -15,11 +15,11 @@ DEPENDS += " \
 PACKAGECONFIG ??= "colors locale mouse nls help_screen artist_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
 
 PACKAGECONFIG[colors] = "-Dcolors=true,-Dcolors=false"
-PACKAGECONFIG[lirc] = "-Dlirc=true,-Dlirc=false,lirc"
-PACKAGECONFIG[locale] = "-Dlocale=true,-Dlocale=false"
+PACKAGECONFIG[lirc] = "-Dlirc=enabled,-Dlirc=disabled,lirc"
+PACKAGECONFIG[locale] = "-Dlocale=enabled,-Dlocale=disabled"
 PACKAGECONFIG[mini] = "-Dmini=true,-Dmini=false"
-PACKAGECONFIG[mouse] = "-Dmouse=true,-Dmouse=false"
-PACKAGECONFIG[nls] = "-Dnls=true,-Dnls=false,gettext-native"
+PACKAGECONFIG[mouse] = "-Dmouse=enabled,-Dmouse=disabled"
+PACKAGECONFIG[nls] = "-Dnls=enabled,-Dnls=disabled,gettext-native"
 
 PACKAGECONFIG[help_screen] = "-Dhelp_screen=true,-Dhelp_screen=false"
 PACKAGECONFIG[artist_screen] = "-Dartist_screen=true,-Dartist_screen=false"
@@ -33,5 +33,5 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/ncmpc \
 "
-SRCREV = "b03703653d3f4a418c4a8b6a9e32834dd882a185"
+SRCREV = "8e98f89ff07b140e6357dab2a9a9f6432ae0e521"
 S = "${WORKDIR}/git"
