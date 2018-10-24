@@ -12,5 +12,5 @@ DEPENDS += " \
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/mpc \
 "
-SRCREV = "6fc4e639152daeebb19e0fdfb277252acc734fc5"
+SRCREV = "59875acdf34e5f0eac0c11453c49daef54f78413"
 S = "${WORKDIR}/git"
