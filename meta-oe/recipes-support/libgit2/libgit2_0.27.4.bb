@@ -3,11 +3,11 @@ HOMEPAGE = "http://libgit2.github.com/"
 LICENSE = "GPL-2.0-with-GCC-exception & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3f2cd5d3cccd71d62066ba619614592b"
 
-DEPENDS = "curl openssl zlib libssh2"
+DEPENDS = "curl openssl zlib libssh2 libgcrypt"
 
 SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.27"
-#v0.27.4
-SRCREV = "8b89f362a34fcccdf1c6c5f3445895b71d9c6d56"
+#v0.27.5
+SRCREV = "8e0b172981a046d19f1d9efa5acd6186bccbd3ce"
 
 S = "${WORKDIR}/git"
 
