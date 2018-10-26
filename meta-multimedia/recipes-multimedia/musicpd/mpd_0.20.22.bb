@@ -82,12 +82,6 @@ do_install_append() {
         -e 's|%state_file%|${localstatedir}/lib/mpd/state|' \
         ${D}/${sysconfdir}/mpd.conf
 
-    if [ -e ${D}/${systemd_unitdir}/system/mpd.service ] ; then
-        sed -i \
-            's|^ExecStart=.*|ExecStart=${bindir}/mpd --no-daemon|' \
-            ${D}/${systemd_unitdir}/system/mpd.service
-    fi
-
     # we don't need the icon
     rm -rf ${D}${datadir}/icons
 }
