@@ -69,4 +69,6 @@ RRECOMMENDS_${PN} = " \
     xfce4-taskmanager \
     gigolo \
     mousepad \
+    catfish \
+    xfce4-panel-profiles \
 "
