@@ -20,7 +20,7 @@ SRC_URI = " \
     git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
     file://mpd.conf.in \
 "
-SRCREV = "98afae2520fbe5a322f803335b3142612fda4762"
+SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "enable_bzip2=yes"
@@ -88,6 +88,9 @@ do_install_append() {
             's|^ExecStart=.*|ExecStart=${bindir}/mpd --no-daemon|' \
             ${D}/${systemd_unitdir}/system/mpd.service
     fi
+
+    # we don't need the icon
+    rm -rf ${D}${datadir}/icons
 }
 
 RPROVIDES_${PN} += "${PN}-systemd"
