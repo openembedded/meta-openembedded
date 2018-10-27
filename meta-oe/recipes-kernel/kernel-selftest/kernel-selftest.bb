@@ -20,6 +20,7 @@ SRC_URI += "file://run-ptest \
 # if you have older kernel than that you need to remove it from PACKAGECONFIG
 PACKAGECONFIG ??= "bpf vm"
 PACKAGECONFIG_remove_x86 = "bpf"
+PACKAGECONFIG_remove_arm = "bpf"
 
 PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
 PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
