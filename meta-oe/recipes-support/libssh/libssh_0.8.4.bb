@@ -16,6 +16,8 @@ inherit cmake
 PACKAGECONFIG ??=""
 PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
 
+ARM_INSTRUCTION_SET_armv5 = "arm"
+
 EXTRA_OECMAKE = " \
     -DWITH_GCRYPT=1 \
     -DWITH_PCAP=1 \
