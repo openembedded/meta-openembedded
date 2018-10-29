@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
 
 SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
            file://remove-march-native-from-CMAKE_CXX_FLAGS.patch \
+           file://0001-Fix-SIGBUS-due-to-unaligned-access.patch \
 "
 
 SRCREV = "e5635fb27feab7f6e8d7b916aa20ad799045a641"
