@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
 SRC_URI = "git://github.com/libyui/libyui.git \
            file://0001-Fix-build-with-clang.patch \
            file://0001-Use-curly-braces-for-MAKE-variable.patch \
+           file://0001-Use-relative-install-paths-for-CMake.patch \
            "
 
 PV = "3.3.3+git"
