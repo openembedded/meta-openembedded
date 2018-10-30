@@ -12,8 +12,8 @@ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-s
 
 inherit gnomebase gobject-introspection gtk-doc gettext
 
-SRC_URI[archive.md5sum] = "23df51ec0a1169014fe3a102d572b244"
-SRC_URI[archive.sha256sum] = "afa6dc283582ffec15c3374790bcbcb5fb422bd38356d72deeef35bf7f9a1f04"
+SRC_URI[archive.md5sum] = "60109c2ab0b07da1099ee57980054de1"
+SRC_URI[archive.sha256sum] = "ac6d0d2646aa80676d3066651e73abb7bff7ed79be238c9b21a0083e2adc3439"
 
 inherit distro_features_check
 # libxres means x11 only
