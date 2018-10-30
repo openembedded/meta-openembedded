@@ -24,12 +24,6 @@ EXTRA_OECMAKE = " \
     -DCIVETWEB_ENABLE_LUA=OFF \
     -DCIVETWEB_ENABLE_ASAN=OFF \
 "
-EXTRA_OECMAKE_class-native = " \
-    -DBUILD_SHARED_LIBS=ON \
-    -DCIVETWEB_ENABLE_DUKTAPE=OFF \
-    -DCIVETWEB_ENABLE_LUA=OFF \
-    -DCIVETWEB_ENABLE_ASAN=OFF \
-"
 
 # Building with ninja fails on missing third_party/lib/libcheck.a (which
 # should come from external CMake project)
