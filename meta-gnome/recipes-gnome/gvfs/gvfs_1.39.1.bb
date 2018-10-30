@@ -2,24 +2,25 @@ DESCRIPTION = "gvfs is a userspace virtual filesystem"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 
+GNOMEBASEBUILDCLASS = "meson"
 inherit gnome bash-completion gettext
 
 DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit shadow-native"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "10b84073fe5f3d540abd9d36ed342b37"
-SRC_URI[archive.sha256sum] = "c4e279a33dd9cd208135e8bfc4788ceaf264c61a24a85255f6696a934a0101f7"
+SRC_URI[archive.md5sum] = "4c68899cfd80d57a153771534193bb9a"
+SRC_URI[archive.sha256sum] = "6e7213570389b17b67433695f515f3b17705ba976168a4c8828fc177cce50223"
 
-do_configure_prepend() {
-    # make automake happy..
-    touch ${S}/ABOUT-NLS
-}
 
-EXTRA_OECONF = " \
-    --disable-gdu \
-    --enable-udisks2 \
-    --disable-documentation \
+EXTRA_OEMESON = " \
+    -Dbluray=false \
+    -Dgdu=false \
+    -Dgoa=false \
+    -Dgoogle=false \
+    -Dnfs=false \
+    -Dudisks2=true \
+    -Ddocumentation=false \
 "
 
 PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
@@ -45,21 +46,22 @@ RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
 
 PACKAGECONFIG ?= "libgphoto2 ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
-PACKAGECONFIG[afc] = "--enable-afc, --disable-afc, libimobiledevice libplist"
-PACKAGECONFIG[archive] = "--enable-archive, --disable-archive, libarchive"
-PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
-PACKAGECONFIG[gcr] = "--enable-gcr, --disable-gcr, gcr"
-PACKAGECONFIG[http] = "--enable-http, --disable-http, libsoup-2.4"
-PACKAGECONFIG[libmtp] = "--enable-libmtp, --disable-libmtp, libmtp"
-PACKAGECONFIG[libgphoto2] = "--enable-gphoto2, --disable-gphoto2, libgphoto2"
-PACKAGECONFIG[samba] = "--enable-samba, --disable-samba, samba"
-PACKAGECONFIG[systemd] = "--with-systemduserunitdir=${systemd_user_unitdir},--without-systemduserunitdir,systemd"
+PACKAGECONFIG[afc] = "-Dafc=true, -Dafc=false, libimobiledevice libplist"
+PACKAGECONFIG[archive] = "-Darchive=true, -Darchive=false, libarchive"
+PACKAGECONFIG[dnssd] = "-Ddnssd=true, -Ddnssd=false, avahi"
+PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr"
+PACKAGECONFIG[http] = "-Dhttp=true, -Dhttp=false, libsoup-2.4"
+PACKAGECONFIG[libmtp] = "-Dmtp=true, -Dmtp=false, libmtp"
+PACKAGECONFIG[logind] = "-Dlogind=true, -Dlogind=false, systemd"
+PACKAGECONFIG[libgphoto2] = "-Dgphoto2=true, -Dgphoto2=false, libgphoto2"
+PACKAGECONFIG[samba] = "-Dsmb=true, -Dsmb=false, samba"
+PACKAGECONFIG[systemd] = "-Dsystemduserunitdir=${systemd_user_unitdir} -Dtmpfilesdir=${libdir}/tmpfiles.d, -Dsystemduserunitdir=no -Dtmpfilesdir=no, systemd"
 
 # needs meta-filesystems
-PACKAGECONFIG[fuse] = "--enable-fuse, --disable-fuse, fuse"
+PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
 
 # libcdio-paranoia recipe doesn't exist yet
-PACKAGECONFIG[cdda] = "--enable-cdda, --disable-cdda, libcdio-paranoia"
+PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
 
 # Fix up permissions on polkit rules.d to work with rpm4 constraints
 do_install_append() {
