@@ -49,9 +49,12 @@ RDEPENDS_${PN} = "\
     ${PN}-conch \
     ${PN}-mail \
     ${PN}-names \
+    ${PN}-pair \
+    ${PN}-protocols \
     ${PN}-runner \
     ${PN}-web \
     ${PN}-words \
+    ${PN}-zsh \
 "
 
 RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat"
