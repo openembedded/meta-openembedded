@@ -10,8 +10,10 @@ SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${
            file://adduser-add-M-option-for-useradd.patch \
 "
 
-SRC_URI[md5sum] = "9f36d69585e74c022aa8e22a0337507d"
-SRC_URI[sha256sum] = "be01881356e40c4d7dd2ce209fb4a94c0589056ac3ebe7debbbf09a6383c1411"
+SRC_URI[md5sum] = "44ba2475ebdaafc9613236bdda321c97"
+SRC_URI[sha256sum] = "3e9eea661c9aac6b2c791bfcc1de3a9c6a422d45c8f3d38ed417737ed3166ffc"
+
+S = "${WORKDIR}/${BPN}"
 
 inherit cpan-base update-alternatives
 
