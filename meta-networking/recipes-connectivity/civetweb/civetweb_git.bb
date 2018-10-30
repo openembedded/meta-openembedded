@@ -23,6 +23,7 @@ EXTRA_OECMAKE = " \
     -DCIVETWEB_ENABLE_DUKTAPE=OFF \
     -DCIVETWEB_ENABLE_LUA=OFF \
     -DCIVETWEB_ENABLE_ASAN=OFF \
+    -DCIVETWEB_BUILD_TESTING=OFF \
 "
 
 # Building with ninja fails on missing third_party/lib/libcheck.a (which
