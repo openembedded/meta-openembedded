@@ -4,7 +4,7 @@ SECTION = "misc"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://vconfig.c;beginline=1;endline=19;md5=094ca47de36c20c598b15b32c270ce0a"
 
-SRC_URI = "http://${BPN}.sourcearchive.com/downloads/${PV}-3ubuntu9/${BPN}_${PV}.orig.tar.gz \
+SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/vlan/1.9-3ubuntu10.6/${BPN}_${PV}.orig.tar.gz \
            file://no-HOME-includes.patch \
            file://0001-Add-printf-format-and-silence-format-security-warnin.patch \
 "
