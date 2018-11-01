@@ -18,7 +18,16 @@ SRC_URI = "git://github.com/namhyung/${BPN} \
 S = "${WORKDIR}/git"
 
 LDFLAGS_append_libc-musl = " -largp"
-EXTRA_UFTRACE_OECONF = "ARCH=${TARGET_ARCH} \
+
+def set_target_arch(d):
+    import re
+    arch = d.getVar('TARGET_ARCH', True)
+    if re.match(r'i.86', arch, re.I):
+        return 'i386'
+    else:
+        return arch
+
+EXTRA_UFTRACE_OECONF = "ARCH=${@set_target_arch(d)} \
                         with_elfutils=/use/libelf/from/sysroot"
 
 do_configure() {
@@ -28,7 +37,7 @@ do_configure() {
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/*.so"
 
-COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
+COMPATIBLE_HOST = "(i.86|x86_64|aarch64|arm)"
 
 # uftrace supports armv6 and above
 COMPATIBLE_HOST_armv4 = 'null'
