@@ -5,7 +5,7 @@ DEPENDS = "ncurses"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://telnet/telnet.cc;beginline=2;endline=3;md5=780868e7b566313e70cb701560ca95ef"
 
-SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
+SRC_URI = "http://ftp.linux.org.uk/pub/linux/Networking/netkit/${BP}.tar.gz \
            file://To-aviod-buffer-overflow-in-telnet.patch \
            file://Warning-fix-in-the-step-of-install.patch \
            file://telnet-xinetd \
