@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=f39e60ae4ea9fdb559c833be2e59de99
 DEPENDS += "glib-2.0 libbsd"
 do_patch[depends] = "quilt-native:do_populate_sysroot"
 
-SRC_URI = "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
-           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-2.debian.tar.xz;name=netcat-patch;subdir=${BP} \
+SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/netcat-openbsd/1.190-2/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
+           https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/netcat-openbsd/1.190-2/netcat-openbsd_${PV}-2.debian.tar.xz;name=netcat-patch;subdir=${BP} \
            file://0001-bundle-own-base64-encode-decode-functions.patch \
            "
 
