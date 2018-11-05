@@ -30,6 +30,10 @@ PACKAGECONFIG[mbim] = "--with-mbim,--with-mbim=no,libmbim"
 # Support WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol.
 PACKAGECONFIG[qmi] = "--with-qmi,--without-qmi,libqmi"
 
+EXTRA_OECONF = " \
+    --with-udev-base-dir=${nonarch_base_libdir}/udev \
+"
+
 FILES_${PN} += " \
     ${datadir}/icons \
     ${datadir}/polkit-1 \
