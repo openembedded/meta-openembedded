@@ -1,16 +1,16 @@
 Description: Debian forbids calls to external websites.
 
-Author: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Author: Gianfranco Costamagna <locutus@debian.org>
 Origin: Debian
 Forwarded: not-needed
-Reviewed-By: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Reviewed-By: Gianfranco Costamagna <locutusofborg@debian.org>
 Last-Update: 2015-11-25
 
 Index: casablanca/Release/tests/functional/http/client/CMakeLists.txt
 ===================================================================
 --- casablanca.orig/Release/tests/functional/http/client/CMakeLists.txt
 +++ casablanca/Release/tests/functional/http/client/CMakeLists.txt
-@@ -9,7 +9,6 @@
+@@ -12,7 +12,6 @@
    multiple_requests.cpp
    oauth1_tests.cpp
    oauth2_tests.cpp
