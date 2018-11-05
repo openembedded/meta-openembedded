@@ -3,6 +3,7 @@ require vim_${PV}.bb
 SUMMARY += " (with tiny features)"
 
 PROVIDES_remove = "xxd"
+ALTERNATIVE_${PN}_remove = "xxd"
 
 PACKAGECONFIG += "tiny"
 
