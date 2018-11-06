@@ -7,11 +7,10 @@ DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
            intltool-native \
 "
 
+GNOMEBASEBUILDCLASS = "autotools-brokensep"
 inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introspection
 
 REQUIRED_DISTRO_FEATURES = "x11"
-
-GNOMEBASEBUILDCLASS = "autotools-brokensep"
 
 SRC_URI[archive.md5sum] = "34923579b39360db64649342ee6735d8"
 SRC_URI[archive.sha256sum] = "23dc1404f1e0622b7c4718b6d978b101d5e4d9be0b92133b3863a4dc29786178"
