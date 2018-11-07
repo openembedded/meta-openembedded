@@ -28,6 +28,7 @@ SRC_URI = " \
     file://0001-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
     file://0002-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
     file://0003-Do-not-create-settings-settings-property-documentati.patch \
+    file://0001-Do-not-include-net-ethernet.h-and-linux-if_ether.h.patch \
     file://musl/0001-musl-basic.patch \
     file://musl/0002-musl-dlopen-configure-ac.patch \
     file://musl/0003-musl-network-support.patch \
