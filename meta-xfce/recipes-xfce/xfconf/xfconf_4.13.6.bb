@@ -14,3 +14,5 @@ SRC_URI[sha256sum] = "d1a3d442dae188b5a7380b5815377e5488578cdafb03ae363e9426e3b0
 FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
                 ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+
+FILES_${PN}-dev += "${libdir}/gio/modules/libxfconfgsettingsbackend.la"
