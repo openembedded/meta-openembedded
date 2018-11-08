@@ -73,7 +73,7 @@ FILES_${PN} += "${libdir}/tk*"
 RDEPENDS_${PN} += "tk-lib"
 RDEPENDS_${PN}_class-native = ""
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
 
 # Fix the path in sstate
 SSTATE_SCAN_FILES += "*Config.sh"
