@@ -14,15 +14,18 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  Makefile | 1 -
  1 file changed, 1 deletion(-)
 
-Index: stress-ng-0.09.37/Makefile
-===================================================================
---- stress-ng-0.09.37.orig/Makefile
-+++ stress-ng-0.09.37/Makefile
-@@ -344,7 +344,6 @@ OBJS += $(CONFIG_OBJS)
- stress-ng: info $(OBJS)
+diff --git a/Makefile b/Makefile
+index c0db72c0..5781dda6 100644
+--- a/Makefile
++++ b/Makefile
+@@ -348,7 +348,6 @@ endif
+ stress-ng: $(OBJS)
  	@echo "LD $@"
- 	@$(CC) $(CPPFLAGS) $(CFLAGS) $(OBJS) -lm $(LDFLAGS) -lc -o $@
+ 	@$(CC) $(CPPFLAGS) $(CFLAGS) $(OBJS) -lm $(LDFLAGS) -o $@
 -	@sync
  
- .PHONY: info
- info:
+ makeconfig:
+ 	@if [ ! -s config ]; then \
+-- 
+2.17.0
+
