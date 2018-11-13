@@ -12,6 +12,7 @@ DEPENDS = "libevent"
 
 SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
            file://ntp-4.2.4_p6-nano.patch \
+           file://reproducibility-fixed-path-to-posix-shell.patch \
            file://reproducibility-respect-source-date-epoch.patch \
            file://ntpd \
            file://ntp.conf \
