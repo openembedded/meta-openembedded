@@ -121,6 +121,7 @@ FILES_${PN}-dev += " \
     ${datadir}/NetworkManager/gdb-cmd \
     ${libdir}/pppd/*/*.la \
     ${libdir}/NetworkManager/*.la \
+    ${libdir}/NetworkManager/${PV}/*.la \
 "
 
 FILES_${PN}-nmtui = " \
