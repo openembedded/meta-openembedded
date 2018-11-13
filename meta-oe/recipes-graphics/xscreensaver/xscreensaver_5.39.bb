@@ -17,7 +17,9 @@ DEPENDS = "intltool-native libx11 libxext libxt libxft glib-2.0-native bc-native
 # These are only needed as part of the stopgap screensaver implementation:
 RDEPENDS_${PN} += "xserver-nodm-init liberation-fonts"
 
-inherit systemd perlnative pkgconfig gettext autotools-brokensep
+inherit systemd perlnative pkgconfig gettext autotools-brokensep distro_features_check
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 do_install_append() {
     install -D ${WORKDIR}/xscreensaver.service ${D}${systemd_unitdir}/system/xscreensaver.service
