@@ -42,7 +42,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 EXTRA_OECONF = "\
     --enable-threads \
     --with-x \
-    --with-tcl=${STAGING_BINDIR_CROSS} \
+    --with-tcl=${STAGING_BINDIR}/crossscripts \
     --libdir=${libdir} \
 "
 
