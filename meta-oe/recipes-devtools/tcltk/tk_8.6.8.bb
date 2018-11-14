@@ -45,19 +45,11 @@ EXTRA_OECONF = "\
     --with-tcl=${STAGING_BINDIR}/crossscripts \
     --libdir=${libdir} \
 "
-
+export TK_LIBRARY='${libdir}/tk${VER}'
 do_install_append() {
     ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
     oe_libinstall -so libtk${VER} ${D}${libdir}
     ln -sf wish${VER} ${D}${bindir}/wish
-
-    # Even after passing libdir=${libdir} at config, some incorrect dirs are still generated for the multilib build
-    if [ "$libdir" != "/usr/lib" ]; then
-        # Move files to correct library directory
-        mv ${D}/usr/lib/tk${VER}/* ${D}/${libdir}/tk${VER}/
-        # Remove unneeded/incorrect dir ('usr/lib/')
-        rm -rf ${D}/usr/lib
-    fi
 }
 
 PACKAGECONFIG ??= "xft"
