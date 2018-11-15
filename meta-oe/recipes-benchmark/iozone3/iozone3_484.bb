@@ -10,8 +10,8 @@ SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
     file://parallelism.patch \
     file://copyright.txt \
 "
-SRC_URI[md5sum] = "31ca1d3d28bc375c20a2808217cf212c"
-SRC_URI[sha256sum] = "2733feb63c96f77177c68f3d938f2294d5394d8554b2767c45cbe138b2f3ae30"
+SRC_URI[md5sum] = "aa6b88ab83793cb6809ca06949a6ab01"
+SRC_URI[sha256sum] = "e816e6ae2f02003f2a6d19d47fcd9a50fdd8078da4f35fe3d4b9caf91c3d7216"
 
 UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
 
