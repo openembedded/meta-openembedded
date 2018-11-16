@@ -21,7 +21,7 @@ PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
 PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
 # rev for v3.8
-SRCREV = "bfd986752ad053175423ffe3bbbeb07803f8ad4a"
+SRCREV = "16500b5a0b03ee0142d592bb74a46943a223b06e"
 SRC_URI = "git://git.kernel.dk/fio.git \
           file://0001-update-the-interpreter-paths.patch \
 "
