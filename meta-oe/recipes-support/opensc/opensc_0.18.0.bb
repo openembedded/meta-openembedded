@@ -9,7 +9,7 @@ eID cards have also been confirmed to work."
 HOMEPAGE = "http://www.opensc-project.org/opensc/"
 SECTION = "System Environment/Libraries"
 
-SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
+SRC_URI = "https://snapshot.debian.org/archive/debian/20180521T101428Z/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz \
            file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
           "
 
