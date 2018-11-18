@@ -21,6 +21,9 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[systemd] = "--with-systemd-unit-dir=${systemd_system_unitdir}, --without-systemd-unit-dir,"
+
 do_configure_prepend() {
     ${S}/autogen.sh
 }
