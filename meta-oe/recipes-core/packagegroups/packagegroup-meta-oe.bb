@@ -138,9 +138,9 @@ RDEPENDS_packagegroup-meta-oe-gnome ="\
 
 RDEPENDS_packagegroup-meta-oe-graphics ="\
     babl cairomm dietsplash directfb directfb-examples dnfdragora \
-    fbgrab fbida fontforge freeglut fvwm gegl gimp glm gphoto2 libgphoto2 \
+    fbgrab fbida fontforge fvwm gegl gimp glm gphoto2 libgphoto2 \
     gtkperf jasper leptonica libmng libsdl2-image libsdl2-mixer libsdl2-net \
-    libsdl2-ttf libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
+    libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
     libvncserver libyui libyui-ncurses lxdm numlockx openbox openjpeg \
     packagegroup-fonts-truetype pangomm qrencode takao-fonts terminus-font \
     tesseract tesseract-lang tigervnc tslib source-han-sans-cn-fonts \
@@ -152,6 +152,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     font-adobe-100dpi font-adobe-utopia-100dpi \
     font-bh-100dpi font-bh-lucidatypewriter-100dpi font-bitstream-100dpi font-cursor-misc \
     font-misc-misc xorg-fonts-100dpi liblbxutil libxaw libxkbui libxpresent xserver-common \
+    ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "freeglut libsdl2-ttf", "", d)} \
     "
 
 RDEPENDS_packagegroup-meta-oe-kernel ="\
@@ -160,13 +161,14 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
     "
 
 RDEPENDS_packagegroup-meta-oe-multimedia ="\
-    alsa-oss audiofile cdrkit esound faad2 id3lib \
+    alsa-oss audiofile cdrkit esound id3lib \
     a2jmidid jack libass libburn libcdio libcdio-paranoia \
-    libdvdread libmad libmms libmodplug libopus live555 \
+    libdvdread libmms libmodplug libopus live555 \
     mplayer-common opus-tools \
     sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol mpv xsp", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol xsp", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseadio bluez4", "libmikmod", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad faad2 mpv", "", d)} \
     "
 
 RDEPENDS_packagegroup-meta-oe-navigation ="\
