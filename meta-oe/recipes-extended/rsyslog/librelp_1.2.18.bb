@@ -1,5 +1,5 @@
 SUMMARY = "A reliable logging library"
-HOMEPAGE = "https://github.com/rsyslog/libfastjson"
+HOMEPAGE = "https://github.com/rsyslog/librelp"
 
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
@@ -7,11 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
 DEPENDS = "gmp nettle libidn zlib gnutls"
 
 SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https \
-           file://0001-src-tcp.c-fix-jump-misses-init-error.patch \
-           file://0001-src-tcp.c-increase-the-size-of-szHname.patch \
+           file://0001-testbench-improvements.patch \
 "
 
-SRCREV = "5e849ff060be0c7dce972e194c54fdacfee0adc2"
+SRCREV = "4b6a81061bccf68cba6fddd27f99fb5dc0d0c3a3"
 
 S = "${WORKDIR}/git"
 
