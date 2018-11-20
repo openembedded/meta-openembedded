@@ -31,8 +31,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
 "
-SRC_URI[md5sum] = "848e9b80d6aaaa798e3f3df24b83c407"
-SRC_URI[sha256sum] = "214ffe394e3ad0c730564074ec44f1da119159d94281bbec541dc29168d21117"
+SRC_URI[md5sum] = "ffd52595e969fb700d37313606e4dc3d"
+SRC_URI[sha256sum] = "9f721e1fe593c219174740c71de514c7228a97d23eb7be7597b2ae14e487f027"
 
 CVE_PRODUCT = "kerberos"
 
