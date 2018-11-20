@@ -15,15 +15,15 @@ DEPENDS = "curl libxml2 openssl libpam"
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "e90e5c96e3006c372bf45e0185e33c9250e67df6"
-PV = "2.6.5"
+# v2.6.8
+SRCREV = "b9cd0b72534854abb6dd834c8c11e02111b4c8d7"
 
 SRC_URI = "git://github.com/Openwsman/openwsman.git \
            file://libssl-is-required-if-eventint-supported.patch \
            file://openwsmand.service \
            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
-           file://0001-Port-to-OpenSSL-1.1.0.patch \
-           file://0002-Check-OpenSSL-version-number-to-allow-builds-with-ol.patch \
+           file://0001-openSSL-1.1.0-API-fixes.patch \
+           file://0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch \
            "
 
 S = "${WORKDIR}/git"
@@ -31,7 +31,7 @@ S = "${WORKDIR}/git"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
 
-inherit systemd cmake pkgconfig pythonnative perlnative
+inherit systemd cmake pkgconfig python3native perlnative
 
 SYSTEMD_SERVICE_${PN} = "openwsmand.service"
 SYSTEMD_AUTO_ENABLE = "disable"
@@ -41,6 +41,8 @@ LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-
 EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
                  -DBUILD_LIBCIM=NO \
                  -DBUILD_PERL=YES \
+                 -DBUILD_PYTHON3=YES \
+                 -DBUILD_PYTHON=NO \
                  -DCMAKE_INSTALL_PREFIX=${prefix} \
                  -DLIB=${baselib} \
                 "
