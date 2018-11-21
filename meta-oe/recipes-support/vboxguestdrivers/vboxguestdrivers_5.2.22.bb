@@ -13,10 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://kernel-4.18.patch \
 "
-SRC_URI[md5sum] = "d8e291525b84569356773eef507c49ce"
-SRC_URI[sha256sum] = "ed0a7efd56c7f39fae79c7ec3321473da412ef0d7914457b66f42679d513efcf"
+SRC_URI[md5sum] = "c9c2f162ac5f99d28d8c0ca43b19ed01"
+SRC_URI[sha256sum] = "5580e875349341a1aabc6d5d2f697d242f277487316faaf1fbe68d9014f788d4"
 
 S = "${WORKDIR}/vbox_module"
 
@@ -24,6 +23,9 @@ export BUILD_TARGET_ARCH="${ARCH}"
 export BUILD_TARGET_ARCH_x86-64="amd64"
 
 EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build'"
+
+# otherwise 5.2.22 builds just vboxguest
+MAKE_TARGETS = "all"
 
 addtask export_sources before do_patch after do_unpack
 
