@@ -114,11 +114,13 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
     sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
         -i ${D}${bindir}/net-snmp-create-v3-user
-    sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
-           -e "s@\([^ ]*-fdebug-prefix-map=[^ ]*\)\1*@@g" \
-           -e "s@\([^ ]*--sysroot=[^ ]*\)\1*@@g" \
-           -e "s@\([^ ]*--with-libtool-sysroot=[^ ]*\)\1*@@g" \
-           -e "s@\([^ ]*--with-install-prefix=[^ ]*\)\1*@@g" \
+    sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
+        -e 's@\([^ ]*-fdebug-prefix-map=[^ "]*\)\1*@@g' \
+        -e 's@\([^ ]*--sysroot=[^ "]*\)\1*@@g' \
+        -e 's@\([^ ]*--with-libtool-sysroot=[^ "]*\)\1*@@g' \
+        -e 's@\([^ ]*--with-install-prefix=[^ "]*\)\1*@@g' \
+        -e 's@\([^ ]*PKG_CONFIG_PATH=[^ "]*\)\1*@@g' \
+        -e 's@\([^ ]*PKG_CONFIG_LIBDIR=[^ "]*\)\1*@@g' \
         -i ${D}${bindir}/net-snmp-config
 
     if [ "${HAS_PERL}" = "1" ]; then
