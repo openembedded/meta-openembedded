@@ -67,6 +67,7 @@ CACHED_CONFIGUREVARS = " \
     ac_cv_header_valgrind_memcheck_h=no \
     ac_cv_ETC_MNTTAB=/etc/mtab \
     lt_cv_shlibpath_overrides_runpath=yes \
+    ac_cv_path_UNAMEPROG=${base_bindir}/uname \
 "
 export PERLPROG="${bindir}/env perl"
 PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}', '', d)}"
