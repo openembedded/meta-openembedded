@@ -11,12 +11,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62ddc846179e908dc0c8efec4a42ef20 \
 DEPENDS = "uthash"
 
 SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-           file://0002-uthash-remove-in-tree-version.patch \
            file://mosquitto.init \
 "
 
-SRC_URI[md5sum] = "f98c99998a36a234f3a9d9b402b991db"
-SRC_URI[sha256sum] = "8557bc7ae34dfaf32a0fb56d2491b7a7f731269c88337227233013502df4d5b0"
+SRC_URI[md5sum] = "4fe8eb707777eb4bfcb5cd432c30a467"
+SRC_URI[sha256sum] = "5fd7f3454fd6d286645d032bc07f44a1c8583cec02ef2422c9eb32e0a89a9b2f"
 
 inherit systemd update-rc.d useradd
 
@@ -40,6 +39,7 @@ EXTRA_OEMAKE = " \
     ${@bb.utils.contains('PACKAGECONFIG', 'websockets', 'WITH_WEBSOCKETS=yes', 'WITH_WEBSOCKETS=no', d)} \
     STRIP=/bin/true \
     WITH_DOCS=no \
+    WITH_BUNDLED_DEPS=no \
 "
 
 export LIB_SUFFIX = "${@d.getVar('baselib', True).replace('lib', '')}"
