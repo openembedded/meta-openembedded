@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "a4fd427ee2acc5a8f5fb030bf7816917cee63bd8"
+SRCREV = "393c139c09dc44167b64f47771650ce9aa9d469f"
 SRC_URI = "git://github.com/rhinstaller/blivet-gui;branch=master \
 "
 
