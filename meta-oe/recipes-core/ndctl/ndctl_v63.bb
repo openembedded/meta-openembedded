@@ -10,21 +10,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
 
 inherit autotools-brokensep pkgconfig module-base bash-completion systemd
 
-# v62
-SRCREV = "11f560f4048c1d38b7011a49566871a1e8a07c94"
+SRCREV = "cb2d678dd6d286dd96d31548c32449a8b883ae32"
 SRC_URI = "git://github.com/pmem/ndctl.git"
 
 DEPENDS = "virtual/kernel kmod udev json-c"
 
-PV = "v62+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF += "--enable-test --enable-destructive --disable-docs"
+
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+PACKAGECONFIG[systemd] = "--with-systemd, --without-systemd, systemd"
 
 do_configure_prepend() {
     ${S}/autogen.sh
 }
 
 SYSTEMD_SERVICE_${PN} = "ndctl-monitor.service"
-
-COMPATIBLE_HOST='(x86_64).*'
