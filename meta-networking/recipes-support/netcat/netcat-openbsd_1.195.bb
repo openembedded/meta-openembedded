@@ -7,15 +7,15 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=f39e60ae4ea9fdb559c833be2e59de99
 DEPENDS += "glib-2.0 libbsd"
 do_patch[depends] = "quilt-native:do_populate_sysroot"
 
-SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/netcat-openbsd/1.190-2/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
-           https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/netcat-openbsd/1.190-2/netcat-openbsd_${PV}-2.debian.tar.xz;name=netcat-patch;subdir=${BP} \
+SRC_URI = "http://snapshot.debian.org/archive/debian/20181022T085404Z/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat \
+           http://snapshot.debian.org/archive/debian/20181022T085404Z/pool/main/n/netcat-openbsd/netcat-openbsd_${PV}-1.debian.tar.xz;name=netcat-patch;subdir=${BP} \
            file://0001-bundle-own-base64-encode-decode-functions.patch \
            "
 
-SRC_URI[netcat.md5sum] = "dd32fd1d7903b541ad8709794539b959"
-SRC_URI[netcat.sha256sum] = "68ccc448392c05ec51baed0167a72b8c650454f990b895d6e6877d416a38e536"
-SRC_URI[netcat-patch.md5sum] = "78058b7af0170654b877b02c37716cdf"
-SRC_URI[netcat-patch.sha256sum] = "88088af3f520c7825e59bc133d65e70fc4a30139d451c6faabbd9f240bc78374"
+SRC_URI[netcat.md5sum] = "219d5e49c45658e229a3bda63063a986"
+SRC_URI[netcat.sha256sum] = "0e283b2a214313c69447cd962c528ac19afb3ddfe606b25de6d179f187cde4c3"
+SRC_URI[netcat-patch.md5sum] = "7eba241989dbef6caa78ec4bc8e35151"
+SRC_URI[netcat-patch.sha256sum] = "c6736fcbab5254cbbc52278993a951da1126e42800a297c27db297e332e2017e"
 
 inherit pkgconfig
 
