@@ -9,8 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "b0dcf6f457d700127b43c0e0a198253c266b78ae"
-PV = "1.3+git${SRCPV}"
+SRCREV = "ebbda2217d177d2a17f917d7a3e3d132a26db791"
 SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master \
 "
 
