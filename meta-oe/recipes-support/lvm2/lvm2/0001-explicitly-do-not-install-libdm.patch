@@ -1,6 +1,6 @@
-From 5a3e13ae94318c2bed60f875bb3852c45ce0113c Mon Sep 17 00:00:00 2001
+From 3c16d9aaa46602e7594d717d86e7f02066d21134 Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
-Date: Thu, 25 May 2017 05:27:11 -0400
+Date: Mon, 26 Nov 2018 17:20:20 +0800
 Subject: [PATCH] explicitly do not install libdm
 
 Already have package libdevmapper which split from lvm2,
@@ -9,17 +9,16 @@ explicitly do not do the installation here.
 Upstream-Status: Inappropriate [meta-oe specific]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-Signed-off-by: Andrew Bresticker <abrestic@waymo.com>
 ---
- libdm/Makefile.in | 6 ++++--
- tools/Makefile.in | 3 ++-
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ libdm/Makefile.in          | 6 ++++--
+ libdm/dm-tools/Makefile.in | 6 ++++--
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/libdm/Makefile.in b/libdm/Makefile.in
-index 66ec39513..c779c9d86 100644
+index 8c8334a..effcf25 100644
 --- a/libdm/Makefile.in
 +++ b/libdm/Makefile.in
-@@ -77,9 +77,11 @@ ifeq ("@PKGCONFIG@", "yes")
+@@ -81,9 +81,11 @@ ifeq ("@PKGCONFIG@", "yes")
    INSTALL_TYPE += install_pkgconfig
  endif
  
@@ -33,11 +32,11 @@ index 66ec39513..c779c9d86 100644
  
  install_include: $(srcdir)/libdevmapper.h
  	$(INSTALL_DATA) -D $< $(includedir)/$(<F)
-diff --git a/tools/Makefile.in b/tools/Makefile.in
-index 103b76732..63ba7fc04 100644
---- a/tools/Makefile.in
-+++ b/tools/Makefile.in
-@@ -267,7 +267,8 @@ install_dmsetup_static: dmsetup.static
+diff --git a/libdm/dm-tools/Makefile.in b/libdm/dm-tools/Makefile.in
+index 39d411d..4a0f61a 100644
+--- a/libdm/dm-tools/Makefile.in
++++ b/libdm/dm-tools/Makefile.in
+@@ -60,9 +60,11 @@ install_dmsetup_static: dmsetup.static
  	$(Q) $(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
  	$(Q) $(LN_S) -f $(<F) $(staticdir)/dmstats
  
@@ -45,8 +44,12 @@ index 103b76732..63ba7fc04 100644
 +install_device-mapper:
 +	echo "Do not install device mapper in lvm2"
  
- install_lvm2: $(INSTALL_LVM_TARGETS)
+-install: install_device-mapper
++install:
++	echo "Do not install device mapper in lvm2"
  
+ # dmfilemapd support
+ ifeq ("@BUILD_DMFILEMAPD@", "yes")
 -- 
-2.19.0.397.gdd90340f6a-goog
+2.7.4
 

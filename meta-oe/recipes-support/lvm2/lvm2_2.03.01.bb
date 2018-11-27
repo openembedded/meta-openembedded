@@ -1,7 +1,6 @@
 require lvm2.inc
 
-SRC_URI[md5sum] = "bc26da66e96727babbd288bb0f050339"
-SRC_URI[sha256sum] = "24997e26dfc916151707c9da504d38d0473bec3481a8230b676bc079041bead6"
+SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
 
 SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch"
 
@@ -32,7 +31,6 @@ PACKAGE_BEFORE_PN = "${PN}-scripts ${PN}-udevrules"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
-                         ${@bb.utils.contains('PACKAGECONFIG', 'lvmetad', 'lvm2-lvmetad.socket lvm2-pvscan@.service', '', d)} \
                          blk-availability.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
