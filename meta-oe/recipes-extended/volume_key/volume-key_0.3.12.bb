@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
 "
-SRC_URI[md5sum] = "30df56c7743eb7c965293b3d61194232"
-SRC_URI[sha256sum] = "e6b279c25ae477b555f938db2e41818f90c8cde942b0eec92f70b6c772095f6d"
+SRC_URI[md5sum] = "200591290173c3ea71528411838f9080"
+SRC_URI[sha256sum] = "6ca3748fc1dad22c450bbf6601d4e706cb11c5e662d11bb4aeb473a9cd77309b"
 
 SRCNAME = "volume_key"
 S = "${WORKDIR}/${SRCNAME}-${PV}"
@@ -26,6 +26,10 @@ DEPENDS += " \
     gpgme \
     swig-native \
 "
+
+PACKAGECONFIG ??= "python3"
+PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
+PACKAGECONFIG[python3] = "--with-python3,--without-python3,python3,python3"
 
 RDEPENDS_python3-${PN} += "${PN}"
 
