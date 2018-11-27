@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "ddc24c71bad10208b11ea0c45853898fadd7030b"
+SRCREV = "0a1f8374197f5a5fb368de90a7f1c1258b7cd2b9"
 SRC_URI = "git://github.com/rhinstaller/blivet;branch=3.1-release \
            file://0001-comment-out-selinux.patch \
            file://0002-run_program-support-timeout.patch \
@@ -21,8 +21,6 @@ SRC_URI = "git://github.com/rhinstaller/blivet;branch=3.1-release \
            file://0009-invoking-fsck-with-infinite-timeout.patch \
            file://0010-invoking-mkfs-with-infinite-timeout.patch \
            file://0011-invoking-dd-with-infinite-timeout.patch \
-           file://0012-remove-dmraid-dependency-check.patch \
-           file://0013-add-Z-y-and-y-to-lvm.pvcreate.patch \
 "
 
 UPSTREAM_CHECK_GITTAGREGEX = "blivet-(?P<pver>\d+(\.\d+)+)$"
