@@ -5,13 +5,13 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
 
-PV = "1.14.0+gitr${SRCPV}"
+PV = "1.15.0+gitr${SRCPV}"
 
 SRC_URI = "\
     git://github.com/c-ares/c-ares.git \
     file://cmake-install-libcares.pc.patch \
 "
-SRCREV = "17dc1b3102e0dfc3e7e31369989013154ee17893"
+SRCREV = "e982924acee7f7313b4baa4ee5ec000c5e373c30"
 
 UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
 
