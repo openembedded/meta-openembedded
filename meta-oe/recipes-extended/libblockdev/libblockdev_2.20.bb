@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
 inherit autotools python3native gobject-introspection
 
-SRCREV = "0debeb45562ac3d8f6f43f6f942b238abab55be9"
+SRCREV = "cb308566c3c5222b8422f78997a1742713b265a9"
 SRC_URI = " \
     git://github.com/rhinstaller/libblockdev;branch=master \
 "
@@ -19,7 +19,7 @@ S = "${WORKDIR}/git"
 
 FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 
-PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath"
+PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath nvdimm"
 PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
 PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
 PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools, lvm2"
@@ -30,7 +30,7 @@ PACKAGECONFIG[kmod] = "--with-kbd, --without-kbd, kmod"
 PACKAGECONFIG[parted] = "--with-part, --without-part, parted"
 PACKAGECONFIG[fs] = "--with-fs, --without-fs, util-linux"
 PACKAGECONFIG[doc] = "--with-gtk-doc, --without-gtk-doc, gtk-doc-native"
-PACKAGECONFIG[nvdimm] = "--with-nvdimm, --without-nvdimm"
+PACKAGECONFIG[nvdimm] = "--with-nvdimm, --without-nvdimm, ndctl util-linux"
 PACKAGECONFIG[vdo] = "--with-vdo, --without-vdo"
 PACKAGECONFIG[escrow] = "--with-escrow, --without-escrow, nss volume-key"
 PACKAGECONFIG[btrfs] = "--with-btrfs,--without-btrfs,libbytesize btrfs-tools"
