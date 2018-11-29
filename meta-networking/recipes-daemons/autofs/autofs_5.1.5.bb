@@ -13,7 +13,6 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
            file://no-bash.patch \
            file://cross.patch \
-           file://autofs-5.0.7-do-not-check-for-modprobe.patch \
            file://fix_disable_ldap.patch \
            file://autofs-5.0.7-fix-lib-deps.patch \
            file://add-the-needed-stdarg.h.patch \
@@ -27,8 +26,10 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
            "
-SRC_URI[md5sum] = "17bc9d371cf39d99f400ebadfc2289bb"
-SRC_URI[sha256sum] = "8d1c9964c8286ccb08262ad47c60bb6343492902def5399fd36d79a0ccb0e718"
+
+
+SRC_URI[md5sum] = "03b13168ec7bd66a6f2d5f6fea705eee"
+SRC_URI[sha256sum] = "86a8e56ea9d72bb53ff8cdfeefb5cafe983592c6b0178fb99c4a731e59879181"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
 
@@ -62,6 +63,9 @@ do_configure_prepend () {
 }
 
 do_install_append () {
+    # samples have been removed from SUBDIRS from 5.1.5, need to install separately
+    oe_runmake 'DESTDIR=${D}' install_samples
+
     if [ -d ${D}/run ]; then
         rmdir ${D}/run
     fi
