@@ -13,9 +13,8 @@ DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack"
 
 SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${P}.tar.gz;downloadfilename=${P}.tar.gz \
            file://miniupnpd.service"
-
-SRC_URI[md5sum] = "b4c7c938915edeee6ca4c65dd021f212"
-SRC_URI[sha256sum] = "860c15f2f8340fd69546b01cffe4c7fcff3e63a7bdfe5a2af6b2346f0e074bb6"
+SRC_URI[md5sum] = "a84b3647c871802abeccfc2771e8db21"
+SRC_URI[sha256sum] = "fc2d2fd044d8c3f8d02b63d70489bb35ece836a4fc1b6386865ac8fbe8d8b006"
 
 IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
 
