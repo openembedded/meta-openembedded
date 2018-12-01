@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
 
 inherit autotools pkgconfig gnomebase gobject-introspection distutils-base
 
-DEPENDS += "gnome-common-native python glib-2.0"
+DEPENDS += "python glib-2.0"
 
 SRCNAME="pygobject"
 SRC_URI = " \
     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
-    file://0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch \
 "
 
 SRC_URI[md5sum] = "3bac63c86bb963aa401f97859464aa90"
