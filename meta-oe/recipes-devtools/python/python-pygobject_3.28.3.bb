@@ -27,5 +27,5 @@ RDEPENDS_${PN}_class-native = ""
 
 do_install_append() {
     # Remove files that clash with python3-pygobject; their content is same
-    rm -rf ${D}${includedir}/pygobject-3.0//pygobject.h ${D}${libdir}/pkgconfig
+    rm -r ${D}${includedir}/pygobject-3.0/pygobject.h ${D}${libdir}/pkgconfig
 }
