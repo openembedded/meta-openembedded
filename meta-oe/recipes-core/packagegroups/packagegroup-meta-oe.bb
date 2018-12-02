@@ -234,19 +234,15 @@ RDEPENDS_packagegroup-meta-oe-test ="\
 
 RDEPENDS_packagegroup-meta-oe-ptest = "\
     zeromq-ptest \
-    libxml-ptest \
-    soci-ptest \
     leveldb-ptest \
     psqlodbc-ptest \
     lua-ptest \
     protobuf-ptest \
-    libdbi-ptest \
     rsyslog-ptest \
     oprofile-ptest \
     libteam-ptest \
     uthash-ptest \
     mcelog-ptest \
-    openldap-ptest \
     libee-ptest \
     numactl-ptest \
     poco-ptest \
