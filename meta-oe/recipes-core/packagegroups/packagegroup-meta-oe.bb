@@ -21,7 +21,7 @@ PACKAGES = ' \
     packagegroup-meta-oe-test \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-gnome", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-graphics", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "ptest", "packagegroup-meta-oe-ptest", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "ptest", "packagegroup-meta-oe-ptest-packages", "", d)} \
 '
 
 RDEPENDS_packagegroup-meta-oe = "\
@@ -41,7 +41,7 @@ RDEPENDS_packagegroup-meta-oe = "\
     packagegroup-meta-oe-test \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-gnome", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "packagegroup-meta-oe-graphics", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "ptest", "packagegroup-meta-oe-ptest", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "ptest", "packagegroup-meta-oe-ptest-packages", "", d)} \
 "
 
 RDEPENDS_packagegroup-meta-oe-benchmarks = "\
@@ -232,7 +232,7 @@ RDEPENDS_packagegroup-meta-oe-test ="\
     fwts gtest pm-qa stress-ng testfloat \
     "
 
-RDEPENDS_packagegroup-meta-oe-ptest = "\
+RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
     zeromq-ptest \
     leveldb-ptest \
     psqlodbc-ptest \
