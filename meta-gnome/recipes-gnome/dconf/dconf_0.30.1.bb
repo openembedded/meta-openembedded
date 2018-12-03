@@ -10,7 +10,7 @@ DEPENDS = "dbus glib-2.0 intltool-native"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings bash-completion vala
+inherit gnomebase bash-completion vala
 
 SRC_URI += "file://0001-meson.build-do-not-compile-docs.patch \
            "
