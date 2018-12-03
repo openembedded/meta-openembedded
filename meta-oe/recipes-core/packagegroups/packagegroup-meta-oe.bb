@@ -1,5 +1,6 @@
 SUMMARY = "Meta-oe ptest packagegroups"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 PROVIDES = "${PACKAGES}"
@@ -52,6 +53,8 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "glmark2", "", d)} \
 "
 
+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mipsarch = "libhugetlbfs"
+
 RDEPENDS_packagegroup-meta-oe-connectivity ="\
     gammu hostapd irssi krb5 libev libimobiledevice \
     libmbim libmtp libndp libqmi libtorrent \
@@ -83,6 +86,9 @@ RDEPENDS_packagegroup-meta-oe-bsp ="\
     efivar flashrom lmsensors lmsensors-config \
     lsscsi nvme-cli pcmciautils pointercal \
     "
+RDEPENDS_packagegroup-meta-oe-bsp_remove_mipsarch = "efivar efibootmgr"
+RDEPENDS_packagegroup-meta-oe-bsp_remove_powerpc = "efivar efibootmgr"
+
 RDEPENDS_packagegroup-meta-oe-dbs ="\
     leveldb libdbi mariadb mariadb-native \
     mysql-python postgresql psqlodbc rocksdb soci \
@@ -105,6 +111,10 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     xmlrpc-c yajl yasm \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
     "
+
+RDEPENDS_packagegroup-meta-oe-devtools_remove_armv5 = "uftrace nodejs"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_mipsarch = "uftrace lshw"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "uftrace lshw"
 
 RDEPENDS_packagegroup-meta-oe-extended ="\
     byacc cfengine cfengine-masterfiles cmpi-bindings \
@@ -130,6 +140,8 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-ssh-agent-auth openwsman sblim-sfcb ", "", d)} \
     ${@bb.utils.contains("BBPATH", "meta-python", "openlmi-tools", "", d)} \
     "
+RDEPENDS_packagegroup-meta-oe-extended_remove_mipsarch = "upm mraa tiptop"
+RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc = "upm mraa"
 
 RDEPENDS_packagegroup-meta-oe-gnome ="\
     atkmm gnome-common gnome-doc-utils-stub gtkmm \
@@ -223,6 +235,9 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     ${NE10} \
     "
 
+RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
+RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch_libc-glibc = "gperftools"
+
 RDEPENDS_packagegroup-meta-oe-support-egl ="\
     freerdp libnice opencv \
     "
@@ -231,6 +246,10 @@ RDEPENDS_packagegroup-meta-oe-test ="\
     catch2 cppunit cunit cxxtest evtest fb-test \
     fwts gtest pm-qa stress-ng testfloat \
     "
+
+RDEPENDS_packagegroup-meta-oe-test_remove_arm = "fwts"
+RDEPENDS_packagegroup-meta-oe-test_remove_mipsarch = "fwts"
+RDEPENDS_packagegroup-meta-oe-test_remove_powerpc = "fwts"
 
 RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
     zeromq-ptest \
@@ -242,8 +261,13 @@ RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
     oprofile-ptest \
     libteam-ptest \
     uthash-ptest \
-    mcelog-ptest \
     libee-ptest \
-    numactl-ptest \
     poco-ptest \
     "
+RDEPENDS_packagegroup-meta-oe-ptest-packages_append_x86 = "\
+    mcelog-ptest \
+"
+RDEPENDS_packagegroup-meta-oe-ptest-packages_append_x86-64 = "\
+    mcelog-ptest \
+"
+RDEPENDS_packagegroup-meta-oe-ptest-packages_remove_arm = "numactl-ptest"
