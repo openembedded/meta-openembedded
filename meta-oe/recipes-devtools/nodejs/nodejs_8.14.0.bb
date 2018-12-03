@@ -14,8 +14,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
 "
-SRC_URI[md5sum] = "8b3abd033dae96b6fadcb6a872a44d3c"
-SRC_URI[sha256sum] = "5a9dff58016c18fb4bf902d963b124ff058a550ebcd9840c677757387bce419a"
+SRC_URI[md5sum] = "07b05463e479a69750e7f9e33745ddd7"
+SRC_URI[sha256sum] = "8ce252913c9f6aaa9871f2d9661b6e54858dae2f0064bd3c624676edb09083c4"
 
 S = "${WORKDIR}/node-v${PV}"
 
