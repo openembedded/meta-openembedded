@@ -142,6 +142,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     "
 RDEPENDS_packagegroup-meta-oe-extended_remove_mipsarch = "upm mraa tiptop"
 RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc = "upm mraa"
+RDEPENDS_packagegroup-meta-oe-extended_remove_libc-musl = "lcdproc"
 
 RDEPENDS_packagegroup-meta-oe-gnome ="\
     atkmm gnome-common gnome-doc-utils-stub gtkmm \
@@ -171,6 +172,7 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
     agent-proxy bpftool broadcom-bt-firmware cpupower \
     crash ipmitool minicoredumper oprofile \
     "
+RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash minicoredumper"
 
 RDEPENDS_packagegroup-meta-oe-multimedia ="\
     alsa-oss audiofile cdrkit esound id3lib \
@@ -182,6 +184,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseadio bluez4", "libmikmod", "", d)} \
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad faad2 mpv", "", d)} \
     "
+RDEPENDS_packagegroup-meta-oe-multimedia_remove_libc-musl = "alsa-oss"
 
 RDEPENDS_packagegroup-meta-oe-navigation ="\
     geoclue geos libspatialite proj \
@@ -246,7 +249,7 @@ RDEPENDS_packagegroup-meta-oe-test ="\
     catch2 cppunit cunit cxxtest evtest fb-test \
     fwts gtest pm-qa stress-ng testfloat \
     "
-
+RDEPENDS_packagegroup-meta-oe-test_remove_libc-musl = "pm-qa"
 RDEPENDS_packagegroup-meta-oe-test_remove_arm = "fwts"
 RDEPENDS_packagegroup-meta-oe-test_remove_mipsarch = "fwts"
 RDEPENDS_packagegroup-meta-oe-test_remove_powerpc = "fwts"
