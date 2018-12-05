@@ -21,6 +21,11 @@ do_configure_prepend () {
     mkdir -p ${S}/build-aux
 }
 
+do_install_append() {
+    mkdir --parents ${D}${docdir}/${BPN}
+    install -m644 ${S}/doc/*.txt ${D}${docdir}/${BPN}
+}
+
 FILES_${PN} += "${datadir}/dbus-1"
 
 SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
