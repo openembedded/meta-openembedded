@@ -9,7 +9,7 @@ Rsyslog is an enhanced syslogd supporting, among others, MySQL,\
  encryption protected syslog relay chains while at the same time being\
  very easy to setup for the novice user."
 
-DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging curl"
+DEPENDS = "zlib libestr libfastjson bison-native flex-native liblogging"
 HOMEPAGE = "http://www.rsyslog.com/"
 LICENSE = "GPLv3 & LGPLv3 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=51d9635e646fb75e1b74c074f788e973 \
@@ -43,7 +43,7 @@ EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
 # first line is default yes in configure
 PACKAGECONFIG ??= " \
     rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
-    imdiag gnutls imfile \
+    fmhttp imdiag gnutls imfile \
     ${@bb.utils.filter('DISTRO_FEATURES', 'snmp systemd', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench relp ${VALGRIND}', '', d)} \
 "
@@ -52,6 +52,7 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[relp] = "--enable-relp,--disable-relp,librelp,"
 PACKAGECONFIG[rsyslogd] = "--enable-rsyslogd,--disable-rsyslogd,,"
 PACKAGECONFIG[rsyslogrt] = "--enable-rsyslogrt,--disable-rsyslogrt,,"
+PACKAGECONFIG[fmhttp] = "--enable-fmhttp,--disable-fmhttp,curl,"
 PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,,"
 PACKAGECONFIG[klog] = "--enable-klog,--disable-klog,,"
 PACKAGECONFIG[regexp] = "--enable-regexp,--disable-regexp,,"
