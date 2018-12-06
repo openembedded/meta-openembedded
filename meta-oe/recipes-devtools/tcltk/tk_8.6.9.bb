@@ -4,15 +4,15 @@ SECTION = "devel/tcltk"
 
 # http://www.tcl.tk/software/tcltk/license.html
 LICENSE = "tcl"
-LIC_FILES_CHKSUM = "file://../license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../compat/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../doc/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../library/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../macosx/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../tests/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../unix/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../win/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
-    file://../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+LIC_FILES_CHKSUM = "file://${S}/../license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../compat/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../doc/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../library/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../macosx/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../tests/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../unix/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../win/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
+    file://${S}/../xlib/license.terms;md5=c88f99decec11afa967ad33d314f87fe \
 "
 
 DEPENDS = "tcl virtual/libx11 libxt"
@@ -26,8 +26,8 @@ SRC_URI = "\
     file://fix-xft.diff \
     file://configure.use.fontconfig.with.xft.patch \
 "
-SRC_URI[md5sum] = "5e0faecba458ee1386078fb228d008ba"
-SRC_URI[sha256sum] = "49e7bca08dde95195a27f594f7c850b088be357a7c7096e44e1158c7a5fd7b33"
+SRC_URI[md5sum] = "e3cf6290999ee30651d75864eccfec63"
+SRC_URI[sha256sum] = "d3f9161e8ba0f107fe8d4df1f6d3a14c30cc3512dfc12a795daa367a27660dac"
 
 S = "${WORKDIR}/${BPN}${PV}/unix"
 
