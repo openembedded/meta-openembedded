@@ -8,7 +8,7 @@ inherit cmake python3native
 
 DEPENDS = "flex-native bison-native"
 
-SRC_URI = "ftp://ftp.stack.nl/pub/users/dimitri/doxygen-${PV}.src.tar.gz \
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
            file://0001-build-don-t-look-for-Iconv.patch"
 
 SRC_URI[md5sum] = "41d8821133e8d8104280030553e2b42b"
