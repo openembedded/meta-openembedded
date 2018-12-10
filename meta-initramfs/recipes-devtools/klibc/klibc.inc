@@ -24,6 +24,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
            file://0001-klibc_2.0.4-add-kexec_file_load-syscall.patch \
            file://0001-klibc-add-getrandom-syscall.patch \
            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
+           file://0001-Define-ulocked_-fgets-fread-fwrite-aliases.patch \
            "
 
 ARMPATCHES ?= ""
