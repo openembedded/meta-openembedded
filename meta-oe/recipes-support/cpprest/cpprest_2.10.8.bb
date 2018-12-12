@@ -18,4 +18,4 @@ SRCREV= "204a52610234ac5180e80a6883b62c0ad085f51e"
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake pkgconfig
