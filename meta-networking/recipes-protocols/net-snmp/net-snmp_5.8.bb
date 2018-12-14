@@ -78,6 +78,8 @@ PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}'
 
 HAS_PERL = "${@bb.utils.contains('PACKAGECONFIG', 'perl', '1', '0', d)}"
 
+PTEST_BUILD_HOST_FILES += "net-snmp-config gen-variables"
+
 do_configure_prepend() {
     sed -i -e "s|I/usr/include|I${STAGING_INCDIR}|g" \
         "${S}"/configure \
