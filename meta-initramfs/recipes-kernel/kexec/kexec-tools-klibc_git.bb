@@ -42,6 +42,9 @@ SRC_URI += "${BUILD_PATCHES} ${KLIBC_PATCHES} ${WARNING_FIXES} ${FROM_OE_CORE}"
 
 SRC_URI_append_arm = " file://arm_crashdump.patch"
 
+SRC_URI_append_mips = " file://140-mips_disable_devicetree_support.patch"
+SRC_URI_append_mipsel = " file://140-mips_disable_devicetree_support.patch"
+
 SRC_URI_append_x86 = " file://x86_sys_io.patch file://x86_basename.patch \
                        file://x86_vfscanf.patch file://x86_kexec_test.patch"
 
