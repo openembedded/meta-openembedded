@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "c60df9d9e7629fe208a9b848293a5599f83d5e77"
-SRCBRANCH = "5.13.fb"
-PV = "5.13.1"
+SRCREV = "f438b98e552010613cff8684a7d84191ed785148"
+SRCBRANCH = "5.17.fb"
+PV = "5.17.2"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-           file://0001-Fix-GitHub-issue-3716-gcc-8-warnings.patch \
           "
 
 S = "${WORKDIR}/git"
