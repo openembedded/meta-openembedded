@@ -12,7 +12,7 @@ inherit pkgconfig
 
 COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
-SRCREV = "ef3449223ecd1e7b1098c523d66b2f960fe839ea"
+SRCREV = "c1d6b10e1ed4ba2be07f385eae5bceb694478a10"
 SRC_URI = "git://github.com/rhinstaller/efivar.git \
            file://allow-multi-definitions-for-native.patch \
            "
