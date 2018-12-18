@@ -8,22 +8,19 @@ eID cards have also been confirmed to work."
 
 HOMEPAGE = "http://www.opensc-project.org/opensc/"
 SECTION = "System Environment/Libraries"
-
-SRC_URI = "https://snapshot.debian.org/archive/debian/20180521T101428Z/pool/main/o/opensc/opensc_0.18.0.orig.tar.gz \
-           file://0001-Fixed-gcc-8-compilation-errors-1353.patch \
-          "
-
-SRC_URI[md5sum] = "bce516f752e0db5327aa06cc0136fe27"
-SRC_URI[sha256sum] = "6ef62b00e8fdbe3e386c3ee25c2cadb56c1931ea42f1a11dce8c947f51b45033"
-
-DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
-
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 
-inherit autotools pkgconfig
+#v0.19.0
+SRCREV = "f1691fc91fc113191c3a8aaf5facd6983334ec47"
+SRC_URI = "git://github.com/OpenSC/OpenSC \
+           file://0001-Remove-redundant-logging.patch \
+          "
+DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
 
-S = "${WORKDIR}/OpenSC-${PV}"
+S = "${WORKDIR}/git"
+inherit autotools pkgconfig bash-completion
+
 EXTRA_OECONF = " \
     --disable-static \
     --enable-openct \
