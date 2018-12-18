@@ -13,9 +13,10 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://0001-fix-to-build-with-glibc-2.25.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://0005-Disable-new-gcc8-warnings.patch \
+           file://0006-libcollectdclient-Fix-string-overflow-errors.patch \
            "
-SRC_URI[md5sum] = "a841159323624f18bf03198e9f5aa364"
-SRC_URI[sha256sum] = "b06ff476bbf05533cb97ae6749262cc3c76c9969f032bd8496690084ddeb15c9"
+SRC_URI[md5sum] = "bfce96c42cede5243028510bcc57c1e6"
+SRC_URI[sha256sum] = "e796fda27ce06377f491ad91aa286962a68c2b54076aa77a29673d53204453da"
 
 inherit autotools pythonnative update-rc.d pkgconfig systemd
 
