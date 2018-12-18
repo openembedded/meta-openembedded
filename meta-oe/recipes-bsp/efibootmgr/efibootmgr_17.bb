@@ -12,6 +12,7 @@ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
 
 SRCREV = "e067160ecef8208e1944002e5d50b275733211fb"
 SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
+           file://0001-remove-extra-decl.patch \
           "
 S = "${WORKDIR}/git"
 
