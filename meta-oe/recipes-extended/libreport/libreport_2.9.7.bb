@@ -17,7 +17,7 @@ SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
             file://0003-without-build-plugins.patch \
             file://0004-configure.ac-remove-prog-test-of-augparse.patch \
 "
-SRCREV = "e43eb0b747f58ef9be7e2d8fc9f3fafc93fa63c6"
+SRCREV = "1d5cc00e44af4800fcae9761625dd4230681e82a"
 
 UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
