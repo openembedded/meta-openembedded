@@ -6,19 +6,21 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI = "git://github.com/catchorg/Catch2.git \
-           file://0001-Fix-convert-from-char-on-ARM-build.patch"
-SRCREV = "9e1bdca4667295fcb16265eae00efa8423f07007"
+           file://0001-Remove-redundant-move.patch \
+          "
+# v2.5.0
+SRCREV = "6ccd467094973824d89efb16cbc553e279f79823"
 
 S = "${WORKDIR}/git"
 
 inherit cmake python3native
 
+do_install_append() {
+    rm ${D}${datadir}/Catch2/lldbinit
+    rm ${D}${datadir}/Catch2/gdbinit
+    rmdir ${D}${datadir}/Catch2/
+}
 # Header-only library
 RDEPENDS_${PN}-dev = ""
 RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
 
-do_install_append() {
-    rm ${D}/${datadir}/Catch2/lldbinit
-    rm ${D}/${datadir}/Catch2/gdbinit
-    rmdir ${D}/${datadir}/Catch2/
-}

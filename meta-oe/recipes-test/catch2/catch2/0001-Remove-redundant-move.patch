@@ -1,0 +1,36 @@
+From b2bd82a0c0d3d5dda588d12cc1672a03a9630784 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 17 Dec 2018 17:27:43 -0800
+Subject: [PATCH] Remove redundant move
+
+fixes errors like below
+
+/mnt/a/yoe/build/tmp/work/aarch64-yoe-linux-musl/catch2/2.5.0-r0/git/include/internal/catch_session.cpp:52:29:
+error: redundant move in return statement [-Werror=redundant-move]
+   52 |             return std::move(multi);
+      |                    ~~~~~~~~~^~~~~~~
+/mnt/a/yoe/build/tmp/work/aarch64-yoe-linux-musl/catch2/2.5.0-r0/git/include/internal/catch_session.cpp:52:29:
+note: remove 'std::move' call
+
+Upstream-Status: Submitted [https://github.com/catchorg/Catch2/pull/1474]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ include/internal/catch_session.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/internal/catch_session.cpp b/include/internal/catch_session.cpp
+index 0920521c..b66d57ac 100644
+--- a/include/internal/catch_session.cpp
++++ b/include/internal/catch_session.cpp
+@@ -49,7 +49,7 @@ namespace Catch {
+                 multi->addListener(listener->create(Catch::ReporterConfig(config)));
+             }
+             multi->addReporter(createReporter(config->getReporterName(), config));
+-            return std::move(multi);
++            return multi;
+         }
+ 
+ 
+-- 
+2.20.1
+
