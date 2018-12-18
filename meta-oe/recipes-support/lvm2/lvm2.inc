@@ -18,9 +18,6 @@ SRC_URI = "git://github.com/lvmteam/lvm2.git;protocol=https;branch=master \
            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
            "
 
-UPSTREAM_CHECK_URI = "ftp://sources.redhat.com/pub/lvm2/"
-UPSTREAM_CHECK_REGEX = "LVM2\.(?P<pver>\d+(\.\d+)+)"
-
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig systemd license
