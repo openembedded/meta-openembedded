@@ -11,20 +11,20 @@ SECTION = "devel"
 LICENSE = "LGPLv2+"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=56a22a6e5bcce45e2c8ac184f81412b5"
-SRCREV = "b23000de1e47c7d580e0e220966dd1ee42a5e5bc"
+SRCREV = "0d6e3307bbdb8df4d56043d5f373eeeffe4cbef3"
 
-SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
-           file://CVE-2018-17942.patch \
+SRC_URI = "git://git.sv.gnu.org/gnulib.git \
 "
 
 S = "${WORKDIR}/git"
 
+inherit utils
+
 do_install () {
     cd ${S}
+    check_git_config
     git checkout master
     git clone ${S} ${D}/${datadir}/gnulib
-    cd ${D}/${datadir}/gnulib
-    git am ${WORKDIR}/CVE-2018-17942.patch
 }
 
 do_patch[noexec] = "1"
