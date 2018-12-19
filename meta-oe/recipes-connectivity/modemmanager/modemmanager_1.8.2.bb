@@ -13,6 +13,7 @@ DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native"
 
 SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
            file://0001-Do-not-set-Wno-unused-but-set-variable.patch \
+           file://0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch \
            "
 
 SRC_URI[md5sum] = "a49c9f73e46c7b89e5efedda250d22c0"
