@@ -29,8 +29,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-Fix-string-overflow-in-snprintf.patch \
            file://0008-check-for-size-before-using-strncpy.patch \
            "
-SRC_URI[md5sum] = "21836e43b13ad33bed9bd0ed391e5a6e"
-SRC_URI[sha256sum] = "e55dc2645487fb22938e8386b99eef6eb7aff43a246ce3e92488daf6ee46247a"
+SRC_URI[md5sum] = "45044fde0b35eac057a5fa05c27b8040"
+SRC_URI[sha256sum] = "230a0ea628ba278170a913746c39b2c8cd529d7dc25326b2e17b5c095cf94025"
 
 inherit autotools useradd systemd pkgconfig
 
@@ -48,7 +48,8 @@ PACKAGECONFIG[plm] = "--enable-ais-plm,--disable-ais-plm,libvirt openhpi"
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
 
 PKGLIBDIR="${libdir}"
-
+CPPFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation"
+CXXFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation -Wno-error=format-truncation="
 LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
 
 do_install_append() {
