@@ -17,9 +17,10 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
 
 SRC_URI_append_mips = " file://remove-atomics.patch"
 SRC_URI_append_arm = " file://remove-atomics.patch"
+SRC_URI_append_powerpc = " file://remove-atomics.patch"
 
-SRC_URI[md5sum] = "c75b11e4177e153e4dc1d8dd3a6174e4"
-SRC_URI[sha256sum] = "ff0c38b8c156319249fec61e5018cf5b5fe63a65b61690bec798f4c998c232ad"
+SRC_URI[md5sum] = "48f240fd2d96b1b579300b866398edbc"
+SRC_URI[sha256sum] = "6447259d2eed426a949c9c13f8fdb2d91fb66d9dc915dd50db13b87f46d93162"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
