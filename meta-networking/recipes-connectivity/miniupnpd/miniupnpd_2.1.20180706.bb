@@ -12,11 +12,17 @@ inherit autotools gettext pkgconfig systemd
 DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack"
 
 SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${P}.tar.gz;downloadfilename=${P}.tar.gz \
-           file://miniupnpd.service"
+           file://miniupnpd.service \
+           file://0001-Add-OpenEmbedded-cross-compile-case.patch \
+           "
 SRC_URI[md5sum] = "a84b3647c871802abeccfc2771e8db21"
 SRC_URI[sha256sum] = "fc2d2fd044d8c3f8d02b63d70489bb35ece836a4fc1b6386865ac8fbe8d8b006"
 
 IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
+
+do_configure_prepend() {
+   echo "${@d.getVar('DISTRO_VERSION')}" > ${S}/os.openembedded
+}
 
 do_compile() {
     cd ${S}
