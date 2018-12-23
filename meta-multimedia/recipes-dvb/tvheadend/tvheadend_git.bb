@@ -3,7 +3,7 @@ HOMEPAGE = "https://tvheadend.org/"
 
 inherit autotools-brokensep gettext gitpkgv pkgconfig
 
-DEPENDS = "avahi cmake-native libdvbcsa libpcre2 openssl uriparser zlib"
+DEPENDS = "avahi cmake-native dvb-apps libdvbcsa libpcre2 openssl uriparser zlib"
 
 LICENSE = "GPLv3+"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
