@@ -56,6 +56,8 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
 RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mipsarch = "libhugetlbfs"
 RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mips64 = "tinymembench"
 RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mips64el = "tinymembench"
+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_riscv64 = "libhugetlbfs"
+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_riscv32 = "libhugetlbfs"
 
 RDEPENDS_packagegroup-meta-oe-connectivity ="\
     gammu hostapd irssi krb5 libev libimobiledevice \
@@ -90,6 +92,8 @@ RDEPENDS_packagegroup-meta-oe-bsp ="\
     "
 RDEPENDS_packagegroup-meta-oe-bsp_remove_mipsarch = "efivar efibootmgr"
 RDEPENDS_packagegroup-meta-oe-bsp_remove_powerpc = "efivar efibootmgr"
+RDEPENDS_packagegroup-meta-oe-bsp_remove_riscv64 = "efivar efibootmgr"
+RDEPENDS_packagegroup-meta-oe-bsp_remove_riscv32 = "efivar efibootmgr"
 
 RDEPENDS_packagegroup-meta-oe-dbs ="\
     leveldb libdbi mariadb mariadb-native \
@@ -119,6 +123,8 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_mipsarch = "uftrace lshw"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64 = "nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "android-tools breakpad uftrace lshw"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "uftrace lshw"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "uftrace lshw"
 
 RDEPENDS_packagegroup-meta-oe-extended ="\
     byacc cfengine cfengine-masterfiles cmpi-bindings \
@@ -146,6 +152,8 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     "
 RDEPENDS_packagegroup-meta-oe-extended_remove_mipsarch = "upm mraa tiptop"
 RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc = "upm mraa"
+RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm mraa tiptop"
+RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm mraa tiptop"
 RDEPENDS_packagegroup-meta-oe-extended_remove_libc-musl = "lcdproc"
 
 RDEPENDS_packagegroup-meta-oe-gnome ="\
@@ -260,6 +268,8 @@ RDEPENDS_packagegroup-meta-oe-test_remove_libc-musl = "pm-qa"
 RDEPENDS_packagegroup-meta-oe-test_remove_arm = "fwts"
 RDEPENDS_packagegroup-meta-oe-test_remove_mipsarch = "fwts"
 RDEPENDS_packagegroup-meta-oe-test_remove_powerpc = "fwts"
+RDEPENDS_packagegroup-meta-oe-test_remove_riscv64 = "fwts"
+RDEPENDS_packagegroup-meta-oe-test_remove_riscv32 = "fwts"
 
 RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
     zeromq-ptest \
