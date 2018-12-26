@@ -54,6 +54,8 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
 "
 
 RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mipsarch = "libhugetlbfs"
+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mips64 = "tinymembench"
+RDEPENDS_packagegroup-meta-oe-benchmarks_remove_mips64el = "tinymembench"
 
 RDEPENDS_packagegroup-meta-oe-connectivity ="\
     gammu hostapd irssi krb5 libev libimobiledevice \
@@ -114,6 +116,8 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
 
 RDEPENDS_packagegroup-meta-oe-devtools_remove_armv5 = "uftrace nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_mipsarch = "uftrace lshw"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64 = "nodejs"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "uftrace lshw"
 
 RDEPENDS_packagegroup-meta-oe-extended ="\
@@ -173,6 +177,9 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
     crash ipmitool minicoredumper oprofile \
     "
 RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash minicoredumper"
+
+RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
+RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64el = "crash"
 
 RDEPENDS_packagegroup-meta-oe-multimedia ="\
     alsa-oss audiofile cdrkit esound id3lib \
