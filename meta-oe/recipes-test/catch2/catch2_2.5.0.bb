@@ -9,7 +9,8 @@ SRC_URI = "git://github.com/catchorg/Catch2.git \
            file://0001-Remove-redundant-move.patch \
           "
 # v2.5.0
-SRCREV = "6ccd467094973824d89efb16cbc553e279f79823"
+#SRCREV = "6ccd467094973824d89efb16cbc553e279f79823"
+SRCREV = "461843b1f02a4bf5c59db88ff201d2c56fabf3a4"
 
 S = "${WORKDIR}/git"
 
@@ -23,4 +24,3 @@ do_install_append() {
 # Header-only library
 RDEPENDS_${PN}-dev = ""
 RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
-
