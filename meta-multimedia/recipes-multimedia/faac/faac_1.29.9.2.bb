@@ -11,19 +11,16 @@ inherit autotools
 
 SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
-    file://0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch \
 "
 
-SRC_URI[md5sum] = "78603720f655180059d6970c582a3005"
-SRC_URI[sha256sum] = "8cc7b03ceb2722223a6457e95d4c994731d80214a03ba33d1af76ba53f4b3197"
-
-EXTRA_OECONF += "--without-mp4v2"
+SRC_URI[md5sum] = "2b58d621fad8fda879f07b7cad8bfe10"
+SRC_URI[sha256sum] = "d45f209d837c49dae6deebcdd87b8cc3b04ea290880358faecf5e7737740c771"
 
 PACKAGES =+ "lib${BPN} lib${BPN}-dev"
 
 FILES_${PN} = " ${bindir}/faac "
-FILES_lib${PN} = " ${libdir}/*.so.*"
-FILES_lib${PN}-dev = " \
+FILES_lib${BPN} = " ${libdir}/*.so.*"
+FILES_lib${BPN}-dev = " \
     ${includedir} \
     ${libdir}/*.so \
     ${libdir}/*.la \
