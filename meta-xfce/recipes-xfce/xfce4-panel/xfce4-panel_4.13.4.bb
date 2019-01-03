@@ -8,8 +8,8 @@ inherit xfce gtk-doc gobject-introspection distro_features_check gtk-icon-cache 
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "0ccb448e3792949eb0ae9db8dc22789b"
-SRC_URI[sha256sum] = "b467feb7ee9797ad12f56a152570e42a96b94ad63580d45536aabee282440ce8"
+SRC_URI[md5sum] = "c0f132fed2110d37f351aadc9e80a034"
+SRC_URI[sha256sum] = "36ffd26ef7f5867c01ba310475b4358ff0e588cfd5599a266f0037a6c20052a1"
 SRC_URI += " \
     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
 "
