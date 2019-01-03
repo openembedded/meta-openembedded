@@ -9,8 +9,8 @@ inherit xfce gtk-doc distro_features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
-SRC_URI[md5sum] = "174690ad19243f7ef9529cb0c24b9080"
-SRC_URI[sha256sum] = "41c31ba0498c2cc39de4a8e0c2367510adbf4bc2104c17feee358e51e6acf603"
+SRC_URI[md5sum] = "a4b6332ff6f090575d534d6a9d2761d8"
+SRC_URI[sha256sum] = "a87f09648ff10d45c524b3bfe618f18622bdd8b205589d35fed2f12d9c79c47c"
 
 EXTRA_OECONF = "--disable-gtk-doc"
 
