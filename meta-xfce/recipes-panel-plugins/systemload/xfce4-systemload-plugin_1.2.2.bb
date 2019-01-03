@@ -7,5 +7,5 @@ inherit xfce-panel-plugin
 
 DEPENDS += "upower"
 
-SRC_URI[md5sum] = "550277af9886c47005117110f6e7ec0d"
-SRC_URI[sha256sum] = "2bf7d0802534a1eb2e9f251af2bb97abc3f58608c1f01511d302c06111d34812"
+SRC_URI[md5sum] = "c7b9237ec4a421de5dac76449b4b5a78"
+SRC_URI[sha256sum] = "3c67dfeb042eaea5aca440de9c6b3ecf99be0fbaa1cf7fdf9e6528233b46c99e"
