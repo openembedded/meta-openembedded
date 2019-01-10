@@ -1,7 +1,7 @@
 SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
 to allow minimal and customized crash dumps"
 LICENSE = " LGPLv2.1 & BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=aa846ae365f71b69e9fa0d21a56391ec \
+LIC_FILES_CHKSUM = "file://COPYING;md5=71827c617ec7b45a0dd23658347cc1e9 \
                     file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
                     file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
                    "
@@ -9,14 +9,13 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
 
 inherit autotools pkgconfig systemd update-rc.d
 
-SRCREV = "1c0d5960b0bb4bac7566e6afe8bc9705399cc76b"
+SRCREV = "16a0d44f1725eaa93096eaa0e086f42ef4c2712c"
 
 PR .= "+git${SRCPV}"
 
 SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
            file://minicoredumper.service \
            file://minicoredumper.init \
-           file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
            "
 
 S = "${WORKDIR}/git"
