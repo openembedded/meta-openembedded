@@ -16,8 +16,8 @@ RDEPENDS_${PN} = " perl-module-carp \
 LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
-SRC_URI[md5sum] = "e77fd37fcf77fc88fde029c1b75ded54"
-SRC_URI[sha256sum] = "5509e532cdd0e3d91eda550578deaac29e2f008a12b64576e8c261bb92e8c2c1"
+SRC_URI[md5sum] = "f2ba18b5cea1c8cb322a62be0a847f3d"
+SRC_URI[sha256sum] = "3f2025023a56286cebd15cb495e36ccd9b456c3cc229bf2ce1f69e9ebfc27f5d"
 
 S = "${WORKDIR}/DBI-${PV}"
 
