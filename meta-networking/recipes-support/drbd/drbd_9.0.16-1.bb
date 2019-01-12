@@ -11,8 +11,9 @@ DEPENDS = "virtual/kernel"
 SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
            file://check_existence_of_modules_before_installing.patch"
 
-SRC_URI[md5sum] = "c1dd58043f46e9926b579aa65d4ea980"
-SRC_URI[sha256sum] = "87f72d46db9bad926415b3ab9f5f1397de8c581d2e2ec1addbdd5ce2604e6123"
+SRC_URI[md5sum] = "6414a9eef2807c8210b6403e36ce3ea4"
+SRC_URI[sha256sum] = "6074b0d643f4bbae4641d3b4bc30f4840e74f2a212dd9c6555b8141e530e5789"
+
 inherit module
 
 EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
@@ -20,5 +21,3 @@ EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
 do_install () {
     oe_runmake install DESTDIR="${D}"
 }
-
-PNBLACKLIST[drbd] = "implicit declaration of function 'setup_timer'; 4.15 head file issue?" 
