@@ -39,7 +39,7 @@ EXTRA_OEMAKE = " \
     WITH_BUNDLED_DEPS=no \
 "
 
-export LIB_SUFFIX = "${@d.getVar('baselib', True).replace('lib', '')}"
+export LIB_SUFFIX = "${@d.getVar('baselib').replace('lib', '')}"
 
 do_install() {
     oe_runmake 'DESTDIR=${D}' install
