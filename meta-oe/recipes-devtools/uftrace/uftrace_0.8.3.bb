@@ -21,7 +21,7 @@ LDFLAGS_append_libc-musl = " -largp"
 
 def set_target_arch(d):
     import re
-    arch = d.getVar('TARGET_ARCH', True)
+    arch = d.getVar('TARGET_ARCH')
     if re.match(r'i.86', arch, re.I):
         return 'i386'
     else:

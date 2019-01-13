@@ -8,7 +8,7 @@ BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
 DEPENDS_class-native = "zlib-native libxml2-native"
 
-PHP_MAJOR_VERSION = "${@d.getVar('PV', True).split('.')[0]}"
+PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
