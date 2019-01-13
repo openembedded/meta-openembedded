@@ -20,7 +20,7 @@ SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5
 
 def ipp_filename(d):
     import re
-    arch = d.getVar('TARGET_ARCH', True)
+    arch = d.getVar('TARGET_ARCH')
     if re.match("i.86$", arch):
         return "ippicv_2017u3_lnx_ia32_general_20180518.tgz"
     else:
@@ -28,7 +28,7 @@ def ipp_filename(d):
 
 def ipp_md5sum(d):
     import re
-    arch = d.getVar('TARGET_ARCH', True)
+    arch = d.getVar('TARGET_ARCH')
     if re.match("i.86$", arch):
         return "ea72de74dae3c604eb6348395366e78e"
     else:
