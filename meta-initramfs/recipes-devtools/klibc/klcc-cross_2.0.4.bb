@@ -25,8 +25,8 @@ do_install() {
     # magic by removing all the crazy escaping.
     sed -i -e "2i \$TARGETSYSROOT = '${STAGING_DIR_TARGET}';" \
            -e "2i \$NATIVESYSROOT = '${STAGING_DIR_NATIVE}';" \
-           -e 's#${@d.getVar("STAGING_DIR_NATIVE", True).replace("/", "\\\\/").replace("-", "\\\\-").replace(".", "\\\\.")}#${NATIVESYSROOT}#g;' \
-           -e 's#${@d.getVar("STAGING_DIR_TARGET", True).replace("/", "\\\\/").replace("-", "\\\\-").replace(".", "\\\\.")}#${TARGETSYSROOT}#g' \
+           -e 's#${@d.getVar("STAGING_DIR_NATIVE").replace("/", "\\\\/").replace("-", "\\\\-").replace(".", "\\\\.")}#${NATIVESYSROOT}#g;' \
+           -e 's#${@d.getVar("STAGING_DIR_TARGET").replace("/", "\\\\/").replace("-", "\\\\-").replace(".", "\\\\.")}#${TARGETSYSROOT}#g' \
         ${D}${bindir_crossscripts}/${TARGET_PREFIX}klcc
 }
 
