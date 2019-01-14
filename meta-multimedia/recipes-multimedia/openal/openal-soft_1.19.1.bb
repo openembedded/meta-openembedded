@@ -1,13 +1,18 @@
 SUMMARY = "OpenAL is a cross-platform 3D audio API"
 HOMEPAGE = "http://kcat.strangesoft.net/openal.html"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=facc3a8f452930083bbb95d82b989c35"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e"
 
-inherit cmake
+inherit cmake pkgconfig
 
-SRC_URI = "http://kcat.strangesoft.net/openal-releases/${BP}.tar.bz2"
-SRC_URI[md5sum] = "ea83dec3b9655a27d28e7bc7cae9cd71"
-SRC_URI[sha256sum] = "0e29a162f0841ccb4135ce76e92e8a704589b680a85eddf76f898de5236eb056"
+# openal-soft-1.19.1
+SRCREV = "6761218e51699f46bf25c377e65b3e9ea5e434b9"
+SRC_URI = "git://github.com/kcat/openal-soft \
+           file://0001-Use-BUILD_CC-to-compile-native-tools.patch \
+           file://0002-makehrtf-Disable-Wstringop-truncation.patch \
+           "
+
+S = "${WORKDIR}/git"
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'alsa pulseaudio', d)}"
 PACKAGECONFIG[alsa] = "-DALSA=TRUE, -DALSA=FALSE, alsa-lib"
