@@ -5,14 +5,14 @@ HOMEPAGE = "http://www.issihosts.com/haveged/index.html"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI = "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz \
+# v1.9.4
+SRCREV = "faa40ff345af194d3253f5fb030403e3c9831c36"
+SRC_URI = "git://github.com/jirka-h/haveged.git \
            file://haveged-init.d-Makefile.am-add-missing-dependency.patch \
 "
+S = "${WORKDIR}/git"
 
-SRC_URI[md5sum] = "fb1d8b3dcbb9d06b30eccd8aa500fd31"
-SRC_URI[sha256sum] = "f77d9adbdf421b61601fa29faa9ce3b479d910f73c66b9e364ba8642ccbfbe70"
-
-UPSTREAM_CHECK_URI = "http://www.issihosts.com/haveged/downloads.html"
+UPSTREAM_CHECK_URI = "https://github.com/jirka-h/haveged/releases"
 
 inherit autotools update-rc.d systemd
 
