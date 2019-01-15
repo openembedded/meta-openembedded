@@ -17,7 +17,6 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-cffi \
     ${PYTHON_PN}-idna \
     ${PYTHON_PN}-asn1crypto \
-    ${PYTHON_PN}-pycparser \
     ${PYTHON_PN}-setuptools \
     ${PYTHON_PN}-six \
 "
@@ -27,7 +26,6 @@ RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-idna \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-asn1crypto \
-    ${PYTHON_PN}-pycparser \
     ${PYTHON_PN}-setuptools \
     ${PYTHON_PN}-six \
     ${PYTHON_PN}-threading \
