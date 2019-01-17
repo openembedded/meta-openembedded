@@ -136,8 +136,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     libpwquality libqb libuio \
     lockfile-progs logwatch lprng mailx md5deep \
     mozjs mraa nana nicstat \
-    p7zip p8platform libfile-fnmatch-perl polkit \
-    polkit-group-rule-datetime polkit-group-rule-network \
+    p7zip p8platform libfile-fnmatch-perl \
     rarpd redis rrdtool libfastjson librelp rsyslog sanlock \
     sblim-cmpi-devel sblim-sfc-common sblim-sfcc \
     scsirastools sgpio smartmontools snappy can-isotp \
@@ -148,6 +147,8 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "bluez", "collectd", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-ssh-agent-auth openwsman sblim-sfcb ", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit polkit-group-rule-datetime ", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "polkit-group-rule-network ", "", d)} \
     ${@bb.utils.contains("BBPATH", "meta-python", "openlmi-tools", "", d)} \
     "
 RDEPENDS_packagegroup-meta-oe-extended_remove_mipsarch = "upm mraa tiptop"
