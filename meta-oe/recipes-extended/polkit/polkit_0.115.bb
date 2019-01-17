@@ -9,6 +9,8 @@ DEPENDS = "expat glib-2.0 intltool-native mozjs"
 
 inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection
 
+REQUIRED_DISTRO_FEATURES = "polkit"
+
 PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
                  ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
                     bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
