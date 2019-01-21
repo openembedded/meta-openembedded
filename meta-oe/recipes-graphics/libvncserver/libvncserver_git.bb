@@ -17,7 +17,7 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
-PACKAGECONFIG[openssl] = ",,openssl"
+PACKAGECONFIG[openssl] = ",-DWITH_OPENSSL=OFF,openssl"
 PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
 PACKAGECONFIG[systemd] = ",,systemd"
 PACKAGECONFIG[sdl] = ",,libsdl2"
