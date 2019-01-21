@@ -5,7 +5,15 @@ PRIORITY = "optional"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
 
-PACKAGECONFIG ??= "gcrypt gnutls jpeg png ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} sdl zlib"
+PACKAGECONFIG ??= " \
+    gcrypt \
+    gnutls \
+    jpeg \
+    png \
+    ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} \
+    sdl \
+    zlib \
+"
 PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
