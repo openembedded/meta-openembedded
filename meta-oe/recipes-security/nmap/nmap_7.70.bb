@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;beginline=7;endline=12;md5=1489288f46af415fad
 SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
            file://nmap-redefine-the-python-library-dir.patch \
            file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
-"
+           file://0001-include-time.h-for-time-structure-definition.patch \
+           file://0002-Fix-building-with-libc.patch \
+           "
 
 SRC_URI[md5sum] = "84eb6fbe788e0d4918c2b1e39421bf79"
 SRC_URI[sha256sum] = "847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
