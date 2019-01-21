@@ -7,8 +7,8 @@ inherit allarch
 DEPENDS += "tcl-native"
 
 SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
-SRC_URI[md5sum] = "0cc107cd0c4c83df0d9400c999e21dfd"
-SRC_URI[sha256sum] = "e2dcfd9d28928d8d8f03381571a23442b3c50d48d343bc40a1a07d01662738d1"
+SRC_URI[md5sum] = "fb50d15b52e909d742dd16f0a9882316"
+SRC_URI[sha256sum] = "ce413ef2a50e648e9c81bc3ea6110e7324a8bf981034fc9ec4467d3562563c2c"
 
 do_install() {
     oe_runmake install DESTDIR=${D}
