@@ -11,7 +11,7 @@ diff -ru openldap-2.4.46.orig/build/mkversion openldap-2.4.46/build/mkversion
 +   DATE=$(date -d@$SOURCE_DATE_EPOCH +' %b %d %Y ')
 +   TIME=$(date -d@$SOURCE_DATE_EPOCH +' %H:%M:%S ')
 +else
-+   WHOWHERE="$USER@$(uname -n):$(pwd)"
++   WHOWHERE="openldap"
 +   DATE='" __DATE__ "'
 +   TIME='" __TIME__ "'
 +fi
