@@ -1,4 +1,4 @@
-SUMMARY = "Character encoding aliases for legacy web content"
+SUMMARY = "RDFLib is a pure Python package for working with RDF"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=68c1a3bb687bd63b8e5552f3ea249840"
 
