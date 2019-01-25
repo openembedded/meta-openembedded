@@ -12,12 +12,12 @@ DEPENDS = "glib-2.0 glib-2.0-native"
 inherit autotools pkgconfig bash-completion
 
 SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-           file://0001-qmi-network-Don-t-create-invalid-wds-start-network-w.patch \
            file://0001-Detect-clang.patch \
            "
-SRC_URI[md5sum] = "584214476ab75c394160cb85fbccaa1d"
-SRC_URI[sha256sum] = "c73459ca8bfe1213f8047858d4946fc1f58e164d4f488a7a6904edee25e2ca44"
+SRC_URI[md5sum] = "35f7e1b03f9b6218a30c78422f72c6ac"
+SRC_URI[sha256sum] = "21c198b481f1617bb7edb1960d823569de3e38b269dbf513af1b56048cafaa17"
 
 PACKAGECONFIG ??= "udev mbim"
 PACKAGECONFIG[udev] = ",--without-udev,libgudev"
 PACKAGECONFIG[mbim] = "--enable-mbim-qmux,--disable-mbim-qmux,libmbim"
+
