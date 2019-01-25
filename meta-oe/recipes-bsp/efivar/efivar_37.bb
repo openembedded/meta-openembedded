@@ -41,3 +41,5 @@ do_install_class-native() {
 }
 
 BBCLASSEXTEND = "native"
+
+RRECOMMENDS_${PN} = "kernel-module-efivarfs"
