@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd
 DEPENDS = "ell readline dbus"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-SRCREV = "d7609915db4b57229f7dd4c04b4eabcce637872a"
+SRCREV = "f87159964cf8fd9f85b0699d50e4a051d4f7c948"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
