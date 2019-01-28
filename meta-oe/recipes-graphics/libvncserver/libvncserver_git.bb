@@ -15,15 +15,15 @@ PACKAGECONFIG ??= " \
     sdl \
     zlib \
 "
-PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
-PACKAGECONFIG[gnutls] = ",,gnutls"
-PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
-PACKAGECONFIG[lzo] = ",-DWITH_LZO=OFF,lzo"
-PACKAGECONFIG[openssl] = ",-DWITH_OPENSSL=OFF,openssl"
-PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
-PACKAGECONFIG[systemd] = ",,systemd"
-PACKAGECONFIG[sdl] = ",,libsdl2"
-PACKAGECONFIG[zlib] = ",,zlib"
+PACKAGECONFIG[gcrypt] = "-DWITH_GCRYPT=ON,-DWITH_GCRYPT=OFF,libgcrypt,libgcrypt"
+PACKAGECONFIG[gnutls] = "-DWITH_GNUTLS=ON,-DWITH_GNUTLS=OFF,gnutls"
+PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg"
+PACKAGECONFIG[lzo] = "-DWITH_LZO=ON,-DWITH_LZO=OFF,lzo"
+PACKAGECONFIG[openssl] = "-DWITH_OPENSSL=ON,-DWITH_OPENSSL=OFF,openssl"
+PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,libpng"
+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
+PACKAGECONFIG[sdl] = "-DWITH_SDL=ON,-DWITH_SDL=OFF,libsdl2"
+PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
 
 inherit cmake
 
