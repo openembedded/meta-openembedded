@@ -9,6 +9,7 @@ PACKAGECONFIG ??= " \
     gcrypt \
     gnutls \
     jpeg \
+    lzo \
     png \
     ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} \
     sdl \
@@ -17,6 +18,7 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[gcrypt] = ",,libgcrypt,libgcrypt"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[jpeg] = ",-DWITH_JPEG=OFF,jpeg"
+PACKAGECONFIG[lzo] = ",-DWITH_LZO=OFF,lzo"
 PACKAGECONFIG[openssl] = ",-DWITH_OPENSSL=OFF,openssl"
 PACKAGECONFIG[png] = ",-DWITH_PNG=OFF,libpng,libpng"
 PACKAGECONFIG[systemd] = ",,systemd"
@@ -26,6 +28,7 @@ PACKAGECONFIG[zlib] = ",,zlib"
 inherit cmake
 
 SRC_URI = "git://github.com/LibVNC/libvncserver"
-SRCREV = "f997b5a75fa171d79c5e568b7157fba83c8d8355"
+SRCREV = "c0a23857a5c42b45b6d22ccf7218becd1fa69402"
+
 
 S = "${WORKDIR}/git"
