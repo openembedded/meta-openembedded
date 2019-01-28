@@ -9,15 +9,18 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://do-not-check-xsltproc-manpages.patch \
            file://tdb-Add-configure-options-for-packages.patch \
+           file://0001-waf-add-support-of-cross_compile.patch \
+           file://0001-Makefile-fix-problem-that-waf-cannot-found.patch \
 "
 
-SRC_URI[md5sum] = "7d06d8709188e07df853d9e91db88927"
-SRC_URI[sha256sum] = "6a3fc2616567f23993984ada3cea97d953a27669ffd1bfbbe961f26e0cf96cc5"
+SRC_URI[md5sum] = "519d373ac72a66b0a2739dbb495de127"
+SRC_URI[sha256sum] = "1cb4399394c60a773430ca54848359adcf54fb6f136afdcfcbbe62b5f4245614"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
 "
+
 PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
 PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
 PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
@@ -28,6 +31,10 @@ PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
 S = "${WORKDIR}/tdb-${PV}"
 
 inherit waf-samba
+
+#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+#to cross Popen
+export WAF_NO_PREFORK="yes"
 
 EXTRA_OECONF += "--disable-rpath \
                  --bundled-libraries=NONE \
