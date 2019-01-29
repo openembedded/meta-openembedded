@@ -6,16 +6,15 @@ HOMEPAGE = "https://stedolan.github.io/jq/"
 BUGTRACKER = "https://github.com/stedolan/jq/issues"
 SECTION = "utils"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=29dd0c35d7e391bb8d515eacf7592e00"
+LIC_FILES_CHKSUM = "file://COPYING;md5=15d03e360fa7399f76d5a4359fc72cbf"
 
 SRC_URI = "https://github.com/stedolan/${BPN}/releases/download/${BP}/${BP}.tar.gz \
-           file://Support-without-oniguruma.patch \
 "
 
-SRC_URI[md5sum] = "0933532b086bd8b6a41c1b162b1731f9"
-SRC_URI[sha256sum] = "c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c"
+SRC_URI[md5sum] = "e68fbd6a992e36f1ac48c99bbf825d6b"
+SRC_URI[sha256sum] = "5de8c8e29aaa3fb9cc6b47bb27299f271354ebb72514e3accadc7d38b5bbaa72"
 
-inherit autotools
+inherit autotools-brokensep
 
 PACKAGECONFIG ?= "oniguruma"
 
