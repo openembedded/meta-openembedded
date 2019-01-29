@@ -5,22 +5,16 @@ DESCRIPTION = "JsonRpc-Cpp is an OpenSource implementation of JSON-RPC \
 HOMEPAGE = "https://github.com/cinemast/libjson-rpc-cpp"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee72d601854d5d2a065cf642883c489b"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4e728c5b36018f6c383b4b9efd9c8840"
+SECTION = "libs"
+DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
 
-PV = "0.7.0+git${SRCPV}"
+PV = "1.1.1+git${SRCPV}"
+# v1.1.1
+SRCREV = "319783c635cf8cabcc1a980495c99a88f9ebbd97"
 
 SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp \
-           file://0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch \
-           file://0001-filedescriptorclient-Typecast-min-arguments-correctl.patch \
-           file://0001-filedescriptorserver-Include-sys-select.h-before-oth.patch \
-           file://0001-memset-and-family-needs-to-include-string.h.patch \
-           file://0002-Fix-build-problem-on-Mac.patch \
            "
-SRCREV = "ccbdb41388bdd929828941652da816bf52a0580e"
-
-SECTION = "libs"
-
-DEPENDS = "curl jsoncpp libmicrohttpd"
 
 S = "${WORKDIR}/git"
 
@@ -30,3 +24,5 @@ EXTRA_OECMAKE += "-DCOMPILE_TESTS=NO -DCOMPILE_STUBGEN=NO -DCOMPILE_EXAMPLES=NO 
                   -DBUILD_SHARED_LIBS=YES -DBUILD_STATIC_LIBS=YES \
                   -DCMAKE_LIBRARY_PATH=${libdir} \
 "
+
+FILES_${PN}-dev += "${libdir}/libjson-rpc-cpp/cmake"
