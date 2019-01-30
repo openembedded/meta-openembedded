@@ -1,5 +1,5 @@
 SUMMARY = "Convenience functions for dbus services in Python 2.x"
-HOMEPAGE = "http://nphilipp.fedorapeople.org/python-slip/"
+HOMEPAGE = "https://github.com/nphilipp/python-slip"
 DESCRIPTION = "\
 The Simple Library for Python 2.x packages contain miscellaneous code for \
 convenience, extension and workaround purposes. \
@@ -19,8 +19,8 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 inherit setuptools
 
-SRC_URI[md5sum] = "a6d8ee96245fc21785d4c1c062c85f2f"
-SRC_URI[sha256sum] = "bc897f1ab6f5b4989f85548799aaeb84fde67bbba18e40341bfe1d7885c2fd9a"
+SRC_URI[md5sum] = "28ae5f93853466c44ec96706ba2a1eb4"
+SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
 
 do_compile_prepend() {
     sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
