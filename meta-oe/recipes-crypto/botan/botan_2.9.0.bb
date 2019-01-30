@@ -4,15 +4,14 @@
 DESCRIPTION = "Crypto and TLS for C++11"
 HOMEPAGE = "https://botan.randombit.net"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://license.txt;md5=bf361fc63df3fa25652ee82c43b7601a"
+LIC_FILES_CHKSUM = "file://license.txt;md5=f4c145d4d70a3244a053c9f90d4841fc"
 SECTION = "libs"
 
+SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tgz"
+SRC_URI[md5sum] = "db8403d6a2f10c20fde3f3c76be9a045"
+SRC_URI[sha256sum] = "305564352334dd63ae63db039077d96ae52dfa57a3248871081719b6a9f2d119"
 
-#v2.7.0
-SRCREV = "5874000d42c338ec95a7ff24cdc0c64e70f967b5"
-SRC_URI = "git://github.com/randombit/botan.git"
-
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/Botan-${PV}"
 
 inherit python3native siteinfo lib_package
 
@@ -52,4 +51,3 @@ PACKAGES += "${PN}-python3"
 FILES_${PN}-python3 = "${libdir}/python3"
 
 RDEPENDS_${PN}-python3 += "python3"
-
