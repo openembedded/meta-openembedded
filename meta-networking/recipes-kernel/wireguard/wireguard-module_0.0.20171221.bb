@@ -25,7 +25,7 @@ MODULE_NAME = "wireguard"
 PKG_${PN} = "kernel-module-${MODULE_NAME}"
 
 module_do_install() {
-    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}
+    install -d ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}
     install -m 0644 ${MODULE_NAME}.ko \
-    ${D}/lib/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}/${MODULE_NAME}.ko
+    ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}/${MODULE_NAME}.ko
 }
