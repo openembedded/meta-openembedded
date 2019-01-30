@@ -15,6 +15,7 @@ SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.9.1.o
            file://add-riscv-support.patch \
            file://0001-mozjs-fix-coredump-caused-by-getenv.patch \
            file://format-overflow.patch \
+           file://JS_PUBLIC_API.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://0006-support-musl.patch \
