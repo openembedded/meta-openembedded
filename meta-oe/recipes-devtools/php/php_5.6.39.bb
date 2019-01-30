@@ -16,8 +16,8 @@ SRC_URI_append_class-target = " \
                                 file://php5-0001-opcache-config.m4-enable-opcache.patch \
                                 "
 
-SRC_URI[md5sum] = "5b98aa066567eca8e5738b8ef4a3545c"
-SRC_URI[sha256sum] = "d65b231bbdd63be4439ef5ced965cfd63e62983429dbd4dfcfb49981593ebc03"
+SRC_URI[md5sum] = "6951d66bf07ce35beda3be0a66bd8e7c"
+SRC_URI[sha256sum] = "b3db2345f50c010b01fe041b4e0f66c5aa28eb325135136f153e18da01583ad5"
 
 DEPENDS += "libmcrypt"
 EXTRA_OECONF += "--with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
