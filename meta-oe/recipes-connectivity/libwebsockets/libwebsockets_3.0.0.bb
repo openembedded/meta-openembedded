@@ -21,6 +21,10 @@ PACKAGECONFIG[server] = "-DLWS_WITHOUT_SERVER=OFF,-DLWS_WITHOUT_SERVER=ON,"
 PACKAGECONFIG[ssl] = "-DLWS_WITH_SSL=ON,-DLWS_WITH_SSL=OFF,openssl"
 PACKAGECONFIG[testapps] = "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,"
 
+EXTRA_OECMAKE += " \
+    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
+"
+
 PACKAGES =+ "${PN}-testapps"
 
 FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
