@@ -24,6 +24,8 @@ def set_target_arch(d):
     arch = d.getVar('TARGET_ARCH')
     if re.match(r'i.86', arch, re.I):
         return 'i386'
+    elif re.match('armeb', arch, re.I):
+        return 'arm'
     else:
         return arch
 
