@@ -45,6 +45,6 @@ do_configure() {
     oe_runconf
 }
 
-FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
+FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR} ${datadir}/ncat"
 
 RDEPENDS_${PN} = "python"
