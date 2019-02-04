@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http 
            file://0001-configure-Recognise-linux-musl-as-a-host-OS.patch \
            file://0001-mips-plt.c-Delete-include-error.h.patch \
            file://0001-move-fprintf-into-same-block-where-modname-and-symna.patch \
+           file://0001-hook-Do-not-append-int-to-std-string.patch \
            "
 S = "${WORKDIR}/git"
 
