@@ -13,9 +13,9 @@ inherit autotools
 
 BBCLASSEXTEND = "native"
 
-PE = "1"
+PE = "2"
 
-PV = "1.0+git${SRCPV}"
+PV = "1.0"
 
 SRCREV_FORMAT = "breakpad_gtest_protobuf_lss_gyp"
 
