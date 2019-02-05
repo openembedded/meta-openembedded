@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
 
-SRCREV = "f438b98e552010613cff8684a7d84191ed785148"
-SRCBRANCH = "5.17.fb"
-PV = "5.17.2"
+SRCREV = "a1774dde9a5bd51bc6ece5988781c6f28cc69d48"
+SRCBRANCH = "5.18.fb"
+PV = "5.18.2"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
           "
