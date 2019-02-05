@@ -6,11 +6,9 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI = "git://github.com/catchorg/Catch2.git \
-           file://0001-Remove-redundant-move.patch \
           "
-# v2.5.0
-#SRCREV = "6ccd467094973824d89efb16cbc553e279f79823"
-SRCREV = "461843b1f02a4bf5c59db88ff201d2c56fabf3a4"
+# v2.6.0
+SRCREV = "d75e9b3c0f24fe42553131873459611ed155e297"
 
 S = "${WORKDIR}/git"
 
