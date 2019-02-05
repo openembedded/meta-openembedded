@@ -17,7 +17,7 @@ DEPENDS = " \
 "
 DEPENDS_append_class-target = " ${BPN}-native"
 
-inherit autotools-brokensep pkgconfig gtk-doc gettext
+inherit autotools-brokensep pkgconfig gettext
 
 # The source tarball suggested at
 # https://graphviz.gitlab.io/_pages/Download/Download_source.html has no
@@ -25,14 +25,24 @@ inherit autotools-brokensep pkgconfig gtk-doc gettext
 # get checksum errors. Fedora people seem to expect same so they use a versioned
 # source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
 
-SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz"
-SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
-SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
+SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz \
+"
 # Use native mkdefs
 SRC_URI_append_class-target = " file://0001-Use-native-mkdefs.patch"
+SRC_URI[md5sum] = "2acf30ca8e6cc8b001b0334db65fd072"
+SRC_URI[sha256sum] = "e6c3f8dbfde1c4523055403927bef29f97f9fc12715c1042b5dcf648a2c1c62a"
 
 S = "${WORKDIR}/${BPN}-stable_release_${PV}"
 
+EXTRA_OECONF_class-target = "\
+                --with-expatincludedir=${STAGING_INCDIR} \
+                --with-expatlibdir=${STAGING_LIBDIR} \
+                --without-included-ltdl \
+                --disable-java \
+                --disable-r \
+                --disable-sharp \
+                "
+CFLAGS_append_class-target = " -D_typ_ssize_t=1 -D_long_double=1"
 do_configure_prepend() {
     cd ${S}
     # create version.m4 and ignore libtoolize errors
