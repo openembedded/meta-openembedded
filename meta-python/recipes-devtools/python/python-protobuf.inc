@@ -28,4 +28,4 @@ RDEPENDS_${PN} += " \
 "
 
 # For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
