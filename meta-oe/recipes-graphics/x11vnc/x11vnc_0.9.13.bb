@@ -32,3 +32,7 @@ do_prepare_sources () {
     sed -i -e '/^# libtool.m4/q' ${S}/acinclude.m4
 }
 do_patch[postfuncs] += "do_prepare_sources"
+
+do_install_append() {
+    rm -rf ${D}/usr/include/rfb
+}
