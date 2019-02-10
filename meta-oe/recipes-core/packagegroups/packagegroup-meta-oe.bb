@@ -226,7 +226,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     anthy asio atop augeas avro-c bdwgc frame grail \
     ccid ceres-solver ckermit cpprest ctapi-common daemonize \
     daemontools debsums devmem2 dfu-util dfu-util-native digitemp \
-    dstat eject enca epeg espeak espeak-data fbset fbset-modes \
+    dstat eject enca epeg espeak fbset fbset-modes \
     fftw fltk-native gd gflags glog gnulib gperftools \
     gpm gradm gsl gsoap hddtemp hidapi htop hunspell hwdata iksemel \
     libinih inotify-tools joe lcms lcov libatasmart libbytesize \
