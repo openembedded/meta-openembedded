@@ -19,3 +19,7 @@ S="${WORKDIR}/git"
 inherit autotools
 
 EXTRA_OECONF += "--enable-reuseaddr"
+
+# Enable LFS support ( for samples )
+CFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+CXXFLAGS += "-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
