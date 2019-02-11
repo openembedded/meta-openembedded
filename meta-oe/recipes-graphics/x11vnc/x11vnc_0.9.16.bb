@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SRC_URI = "https://github.com/LibVNC/x11vnc/archive/${PV}.tar.gz;downloadfilename=x11vnc-${PV}.tar.gz\
            file://starting-fix.patch \
+	   file://0001-misc-Makefile.am-don-t-install-Xdummy-when-configure.patch \
 "
 
 SRC_URI[md5sum] = "64172e8f896389ec963fff93415f0d93"
