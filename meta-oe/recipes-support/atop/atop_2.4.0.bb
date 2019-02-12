@@ -17,13 +17,12 @@ DEPENDS = "ncurses zlib"
 
 SRC_URI = "http://www.atoptool.nl/download/${BP}.tar.gz \
            ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
-           file://remove-bashisms.patch \
            file://fix-permissions.patch \
            file://sysvinit-implement-status.patch \
-           file://0001-add-sys-sysmacros.h-for-major-minor-macros.patch \
+           file://0001-atop.daily-atop.init-atop-pm.sh-Avoid-using-bash.patch \
            "
-SRC_URI[md5sum] = "48e1dbef8c7d826e68829a8d5fc920fc"
-SRC_URI[sha256sum] = "73e4725de0bafac8c63b032e8479e2305e3962afbe977ec1abd45f9e104eb264"
+SRC_URI[md5sum] = "1077da884ed94f2bc3c81ac3ab970436"
+SRC_URI[sha256sum] = "be1c010a77086b7d98376fce96514afcd73c3f20a8d1fe01520899ff69a73d69"
 
 do_compile() {
     oe_runmake all
@@ -49,7 +48,7 @@ do_install() {
 
 inherit systemd
 
-SYSTEMD_SERVICE_${PN} = "atop.service"
+SYSTEMD_SERVICE_${PN} = "atop.service atopgpu.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 FILES_${PN} += "${systemd_unitdir}/system-sleep"
