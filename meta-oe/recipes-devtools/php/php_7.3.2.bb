@@ -1,11 +1,11 @@
 require php.inc
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=67e369bc8d1f2e641236b8002039a6a2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=fb07bfc51f6d5e0c30b65d9701233b2e"
 
-SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-            file://0001-acinclude.m4-skip-binconfig-check-for-libxml.patch \
-            file://0001-fix-error-caused-by-a-new-variable-is-declared-after.patch \
-            file://CVE-2017-9120.patch \
+SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
+            file://0048-Use-pkg-config-for-FreeType2-detection.patch \
+            file://0049-ext-intl-Use-pkg-config-to-detect-icu.patch \
+            file://0001-Use-pkg-config-for-libxml2-detection.patch \
            "
 SRC_URI_append_class-target = " \
                                 file://pear-makefile.patch \
@@ -13,8 +13,8 @@ SRC_URI_append_class-target = " \
                                 file://0001-opcache-config.m4-enable-opcache.patch \
                                 "
 
-SRC_URI[md5sum] = "0ce8ff615bfb9de7a89bab8d742c11c0"
-SRC_URI[sha256sum] = "01b6129a0921a1636b07da9bc598a876669e45a462cef4b5844fc26862dbda9d"
+SRC_URI[md5sum] = "c893ff828945c274d90e026528142439"
+SRC_URI[sha256sum] = "946f50dacbd2f61e643bb737021cbe8b1816e780ee7ad3e0cd999a1892ab0add"
 
 PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
