@@ -5,10 +5,13 @@ RDEPENDS_${PN} = "python-six"
 
 LIC_FILES_CHKSUM = "file://docs/license.txt;md5=1798f29d55080c60365e6283cb49779c"
 
-SRC_URI[md5sum] = "1231e14eae62fa7ed76e9130b04bc61e"
-SRC_URI[sha256sum] = "2346a347824c32641bf020c17967b49ae74d3310ec1bc9b958d4b84e2d985218"
+SRC_URI[md5sum] = "4e93762f24fc728ecb4ddcff2693df39"
+SRC_URI[sha256sum] = "06aacf7a40685be0a0db8b26516e7d559d7fe5ccf7a47c5cd34f15ab558a8b92"
 
 PYPI_PACKAGE = "Paste"
 inherit pypi setuptools
 
 FILES_${PN} += "/usr/lib/*"
+
+DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+
