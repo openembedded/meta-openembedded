@@ -26,6 +26,8 @@ inherit waf pkgconfig
 
 PACKAGECONFIG ??= "alsa"
 PACKAGECONFIG[alsa] = "--alsa=yes,--alsa=no,alsa-lib"
+# --dbus only stops building jackd -> add --classic
+PACKAGECONFIG[dbus] = "--dbus --classic,,dbus"
 PACKAGECONFIG[opus] = "--opus=yes,--opus=no,libopus"
 
 # portaudio is for windows builds only
@@ -36,6 +38,11 @@ PACKAGES =+ "libjack jack-server jack-utils"
 RDEPENDS_jack-dev_remove = "${PN} (= ${EXTENDPKGV})"
 
 FILES_libjack = "${libdir}/*.so.* ${libdir}/jack/*.so"
-FILES_jack-server = "${bindir}/jackd"
+FILES_jack-server = " \
+    ${datadir}/dbus-1/services \
+    ${bindir}/jackdbus \
+    ${bindir}/jackd \
+"
 FILES_jack-utils = "${bindir}/*"
+
 FILES_${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/* "
