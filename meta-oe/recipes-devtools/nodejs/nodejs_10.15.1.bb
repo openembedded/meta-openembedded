@@ -1,9 +1,10 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=fde91d5c5bbd1e0389623e1ac018d9e8"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9ceeba79eb2ea1067b7b3ed16fff8bab"
 
 DEPENDS = "openssl zlib icu"
+DEPENDS_append_class-target = " nodejs-native"
 
 inherit pkgconfig
 
@@ -13,9 +14,16 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
-"
-SRC_URI[md5sum] = "bfc5da493c72ded3a7f43b5662bfc53c"
-SRC_URI[sha256sum] = "968523333947cc3f769d73dedc6c9c60580826d8714bc0e62ca4589de6a7c633"
+           file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
+           file://0004-Make-compatibility-with-gcc-4.8.patch \
+           file://0005-Link-atomic-library.patch \
+           "
+SRC_URI_append_class-target = " \
+           file://0002-Using-native-torque.patch \
+           "
+
+SRC_URI[md5sum] = "1cad7963255de53509bfa560221bdc88"
+SRC_URI[sha256sum] = "1a55f7b9fb80442182d9e1eba4fca4dac3c781cdcb25d6be37b24d253f61c858"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -74,6 +82,10 @@ do_install_append_class-native() {
     # use sed on npm-cli.js because otherwise symlink is replaced with normal file and
     # npm-cli.js continues to use old shebang
     sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
+
+    # Install the native torque to provide it within sysroot for the target compilation
+    install -d ${D}${bindir}
+    install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
 }
 
 do_install_append_class-target() {
