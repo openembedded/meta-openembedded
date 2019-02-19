@@ -27,3 +27,4 @@ do_configure_prepend() {
 }
 
 SYSTEMD_SERVICE_${PN} = "ndctl-monitor.service"
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
