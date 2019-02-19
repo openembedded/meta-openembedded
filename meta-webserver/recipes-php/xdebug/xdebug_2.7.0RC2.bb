@@ -1,13 +1,13 @@
 SUMMARY = "Debugging and profiling extension for PHP"
 LICENSE = "Xdebug"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=92d94a330d34ee6edc2638450736f119"
 
 DEPENDS = "php re2c-native"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
-SRC_URI[md5sum] = "35cc0f2e8b7d40556a9ad9afd9c49aee"
-SRC_URI[sha256sum] = "dae691d6c052073b886e0c6e1306a707bca9fd18a1e3485384ef6c4aacf1bd77"
+SRC_URI[md5sum] = "e8cabe003d6990b157d0d8caee374844"
+SRC_URI[sha256sum] = "5aa6d1772937e9f11b91ad8ced586aa0e16281dc178c405ac380d45d4731f8b0"
 
 UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
 
