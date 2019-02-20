@@ -1,10 +1,7 @@
-From 1fede9514566a21cdf3da99e22ddf5a7b2c856c6 Mon Sep 17 00:00:00 2001
-From: Changqing Li <changqing.li@windriver.com>
-Date: Fri, 23 Nov 2018 16:47:31 +0800
-Subject: [PATCH] From 0000000000000000000000000000000000000000 Mon Sep 17
- 00:00:00 2001 From: Benjamin Marzinski <bmarzins@redhat.com> Date: Wed, 2 Jul
- 2014 12:49:53 -0500 Subject: [PATCH] RH: Remove the property blacklist
- exception builtin
+From 0000000000000000000000000000000000000000 Mon Sep 17  00:00:00 2001
+From:Benjamin Marzinski <bmarzins@redhat.com> 
+Date: Wed, 2 Jul  2014 12:49:53 -0500 
+Subject: [PATCH] RH: Remove the property blacklist  exception builtin
 
 Multipath set the default property blacklist exceptions to
 (ID_SCSI_VPD|ID_WWN).  This has the effect of blacklisting some internal
@@ -18,21 +15,21 @@ Signed-off-by: Benjamin Marzinski <bmarzins@redhat.com>
 
 Upsteam-Status: Pending
 
-update this patch to new version
+Update patch to 0.8.0
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
  libmultipath/blacklist.c | 13 +++++--------
  1 file changed, 5 insertions(+), 8 deletions(-)
 
 diff --git a/libmultipath/blacklist.c b/libmultipath/blacklist.c
-index 318ec03..145fed3 100644
+index e0d0279..9f58313 100644
 --- a/libmultipath/blacklist.c
 +++ b/libmultipath/blacklist.c
 @@ -192,12 +192,6 @@ setup_default_blist (struct config * conf)
  	char * str;
  	int i;
  
--	str = STRDUP("^(ram|raw|loop|fd|md|dm-|sr|scd|st|dcssblk)[0-9]");
+-	str = STRDUP("^(ram|zram|raw|loop|fd|md|dm-|sr|scd|st|dcssblk)[0-9]");
 -	if (!str)
 -		return 1;
 -	if (store_ble(conf->blist_devnode, str, ORIGIN_DEFAULT))
@@ -41,17 +38,17 @@ index 318ec03..145fed3 100644
  	str = STRDUP("^(td|hd|vd)[a-z]");
  	if (!str)
  		return 1;
-@@ -415,8 +409,11 @@ filter_property(struct config * conf, struct udev_device * udev)
+@@ -415,8 +409,11 @@ filter_property(struct config *conf, struct udev_device *udev, int lvl)
  		}
  	}
  
--	log_filter(devname, NULL, NULL, NULL, env, NULL, r);
+-	log_filter(devname, NULL, NULL, NULL, env, NULL, r, lvl);
 -	return r;
-+	if (VECTOR_SIZE(conf->elist_property)) {
-+		log_filter(devname, NULL, NULL, NULL, env, NULL, r);
-+		return r;
-+	}
-+	return 0;
++       if (VECTOR_SIZE(conf->elist_property)) {
++               log_filter(devname, NULL, NULL, NULL, env, NULL, r, lvl);
++               return r;
++       }
++       return 0;
  }
  
  static void free_ble(struct blentry *ble)
