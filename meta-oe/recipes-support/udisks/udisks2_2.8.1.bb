@@ -19,10 +19,10 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 RDEPENDS_${PN} = "acl"
 
 SRC_URI = " \
-    git://github.com/storaged-project/udisks.git;branch=2.7.x-branch \
+    git://github.com/storaged-project/udisks.git;branch=master \
     file://non-gnu-libc.patch \
 "
-SRCREV = "47bc0141cb84624ba1e2242d596a89a30df1f5ea"
+SRCREV = "05ae471be3c2adf2255b3a01edb00bba06e02afb"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
