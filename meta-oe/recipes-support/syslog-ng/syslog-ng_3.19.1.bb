@@ -12,5 +12,5 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://0001-syslog-ng-fix-segment-fault-during-service-start.patch \
            "
 
-SRC_URI[md5sum] = "72d44ad02c2e9ba0748b3ecd3f15a7ff"
-SRC_URI[sha256sum] = "c7ee6f1d5e98d86f191964e580111bfa71081ecbb3275cea035bbba177b73a29"
+SRC_URI[md5sum] = "aa79bc13d9fd925aa5fb9516e87aacd3"
+SRC_URI[sha256sum] = "5cf931a9d7bead0e6d9a2c65eee8f6005a005878f59aa280f3c4294257ed5178"
