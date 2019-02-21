@@ -14,7 +14,7 @@ SECTION = "libs"
 
 LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
-SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
+SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-m4-pthread.patch \
     file://kill-icu.patch \
     file://openldap-2.4.28-gnutls-gcrypt.patch \
@@ -26,8 +26,8 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
     file://remove-user-host-pwd-from-version.patch \
 "
 
-SRC_URI[md5sum] = "829016c5a9f45c51adc50073ac6f9fd7"
-SRC_URI[sha256sum] = "9a90dcb86b99ae790ccab93b7585a31fbcbeec8c94bf0f7ab0ca0a87ea0c4b2d"
+SRC_URI[md5sum] = "e508f97bfd778fec7799f286e5c07176"
+SRC_URI[sha256sum] = "f54c5877865233d9ada77c60c0f69b3e0bfd8b1b55889504c650047cc305520b"
 
 DEPENDS = "util-linux groff-native"
 
