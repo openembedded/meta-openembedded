@@ -12,8 +12,8 @@ DEPENDS += "virtual/libx11 libpciaccess"
 
 COMPATIBLE_HOST = '(i.86.*-linux|x86_64.*-linux)'
 
-SRC_URI[md5sum] = "3ee2549247e01de3e7bce52c27483118"
-SRC_URI[sha256sum] = "b663cd8e6364f7c4e2637b9fcab9861d0e3971518c73b00d213f6545a1289422"
+SRC_URI[md5sum] = "b8fc99b4adea8bfe80156b13df4b6c9c"
+SRC_URI[sha256sum] = "268946e1a13e9d80e4f724a0740df9e6e8c8bad37697fcbf456924e9fdbb5d79"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'dri', '', d)}"
 PACKAGECONFIG[dri] = "--enable-dri,--disable-dri,drm xorgproto,xserver-xorg-extension-dri"
