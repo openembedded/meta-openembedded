@@ -8,7 +8,7 @@ DESCRIPTION = " uthash-dev provides a hash table implementation using C preproce
 HOMEPAGE = "https://troydhanson.github.io/uthash/"
 SECTION = "base"
 LICENSE = "BSD-1-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5cc1f1e4c71f19f580458586756c02b4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a2513f7d2291df840527b76b2a8f9718"
 
 SRC_URI = "\
     https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
@@ -16,8 +16,8 @@ SRC_URI = "\
 "
 UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
 
-SRC_URI[md5sum] = "d08632a58674274c9cd87e2930f5696a"
-SRC_URI[sha256sum] = "34a31d51dd7a839819cecd6f46049b4ffe031d7f3147d9a042f5504fdb1348d1"
+SRC_URI[md5sum] = "4d0a33f6393260926032f1fad4bad39a"
+SRC_URI[sha256sum] = "152ccd8e64d0f495377232e3964d06c7ec8bb8c3fbd3217f8a5702614f9a669e"
 
 inherit ptest
 
