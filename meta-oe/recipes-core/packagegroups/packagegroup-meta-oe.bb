@@ -243,7 +243,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     sjf2410-linux-native satyr sdparm pty-forward-native serial-forward \
     sg3-utils sharutils smem spitools srecord ssiapi start-stop-daemon stm32flash \
     syslog-ng system-config-keyboard tbb thin-provisioning-tools tokyocabinet \
-    tree udisks udisks2 uhubctl unixodbc upower uriparser usb-modeswitch \
+    tree uhubctl unixodbc uriparser usb-modeswitch \
     usb-modeswitch-data usbpath uthash utouch-evemu utouch-frame \
     vim vim-tiny websocketpp wmiconfig xdelta3 xdg-user-dirs xmlstarlet \
     zbar zile \
@@ -251,6 +251,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "pulseadio bluez4", "libcanberra", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xorgxrdp xrdp", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "bluez4", "procmail", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "udisks udisks2 upower", "", d)} \
     ${NE10} \
     "
 
