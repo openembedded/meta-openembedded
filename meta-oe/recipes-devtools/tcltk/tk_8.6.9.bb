@@ -50,6 +50,11 @@ do_install_append() {
     ln -sf libtk${VER}.so ${D}${libdir}/libtk${VER}.so.0
     oe_libinstall -so libtk${VER} ${D}${libdir}
     ln -sf wish${VER} ${D}${bindir}/wish
+
+    sed -i "s;-L${B};-L${STAGING_LIBDIR};g" tkConfig.sh
+    sed -i "s;'${WORKDIR};'${STAGING_INCDIR};g" tkConfig.sh
+    install -d ${D}${bindir_crossscripts}
+    install -m 0755 tkConfig.sh ${D}${bindir_crossscripts}
 }
 
 PACKAGECONFIG ??= "xft"
@@ -69,3 +74,23 @@ BBCLASSEXTEND = "native nativesdk"
 
 # Fix the path in sstate
 SSTATE_SCAN_FILES += "*Config.sh"
+
+inherit binconfig
+
+SYSROOT_DIRS += "${bindir_crossscripts}"
+
+# Fix some paths that might be used by Tcl extensions
+BINCONFIG_GLOB = "*Config.sh"
+
+# Cleanup host path from ${libdir}/tclConfig.sh and remove the
+# ${bindir_crossscripts}/tclConfig.sh from target
+PACKAGE_PREPROCESS_FUNCS += "tcl_package_preprocess"
+tcl_package_preprocess() {
+        sed -i -e "s;${DEBUG_PREFIX_MAP};;g" \
+               -e "s;-L${STAGING_LIBDIR};-L${libdir};g" \
+               -e "s;${STAGING_INCDIR};${includedir};g" \
+               -e "s;--sysroot=${RECIPE_SYSROOT};;g" \
+               ${PKGD}${libdir}/tkConfig.sh
+
+        rm -f ${PKGD}${bindir_crossscripts}/tkConfig.sh
+}
