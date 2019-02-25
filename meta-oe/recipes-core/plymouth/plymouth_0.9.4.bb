@@ -17,12 +17,12 @@ PROVIDES = "virtual/psplash"
 RPROVIDES_${PN} = "virtual-psplash virtual-psplash-support"
 
 SRC_URI = " \
-    http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.bz2 \
+    http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.xz \
     file://0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch \
-    file://0002-Fix-build-with-glibc-2.28.patch \
-"
-SRC_URI[md5sum] = "ff420994deb7ea203df678df92e7ab7d"
-SRC_URI[sha256sum] = "2f0ce82042cf9c7eadd2517a1f74c8a85fa8699781d9f294a06eade29fbed57f"
+        "
+
+SRC_URI[md5sum] = "4efa5551d230165981b105e7c6a50aa7"
+SRC_URI[sha256sum] = "4a197a4f1a05785d7453dd829b231352fb2d09171bd86c5ffaafbb2dd6791351"
 
 EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-documentation \
     --with-logo=${LOGO} \
