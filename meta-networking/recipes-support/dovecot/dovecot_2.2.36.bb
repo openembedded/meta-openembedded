@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
            file://0001-doveadm-Fix-parallel-build.patch \
            "
 
-SRC_URI[md5sum] = "d61d1e923a22f9062cc9f47696882666"
-SRC_URI[sha256sum] = "e9483d68a7698d701bc06124fcf6e1b1f16380c2986c7ec0cf4e1475b9d0c218"
+SRC_URI[md5sum] = "a8d6492584025b2413e82ea48de3cd5f"
+SRC_URI[sha256sum] = "e9aba89bb1ac1e9581b84e4a7a50f53142539614eaf7cc4c80007ebea4988be5"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
