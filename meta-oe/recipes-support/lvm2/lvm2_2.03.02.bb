@@ -3,8 +3,7 @@ require lvm2.inc
 SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
 
 SRC_URI += "file://0001-explicitly-do-not-install-libdm.patch \
-            file://0001-lvm2-monitoring-service-shouldn-t-refer-to-lvmetad.patch \
-	    file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
+            file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
            "
 
 DEPENDS += "autoconf-archive-native"
