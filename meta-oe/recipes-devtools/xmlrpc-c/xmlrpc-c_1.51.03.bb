@@ -17,7 +17,7 @@ S = "${WORKDIR}/git/stable"
 DEPENDS = "libxml2"
 RDEPENDS_${PN} = "perl"
 
-inherit autotools-brokensep pkgconfig
+inherit autotools-brokensep binconfig pkgconfig
 
 TARGET_CFLAGS += "-Wno-narrowing"
 
