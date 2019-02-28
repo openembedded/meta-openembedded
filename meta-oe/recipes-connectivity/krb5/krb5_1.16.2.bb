@@ -30,6 +30,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://etc/default/krb5-admin-server \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
+           file://0001-Ignore-password-attributes-for-S4U2Self-requests.patch;striplevel=2 \
 "
 SRC_URI[md5sum] = "ffd52595e969fb700d37313606e4dc3d"
 SRC_URI[sha256sum] = "9f721e1fe593c219174740c71de514c7228a97d23eb7be7597b2ae14e487f027"
