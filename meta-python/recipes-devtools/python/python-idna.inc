@@ -16,7 +16,3 @@ do_compile_prepend() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
-do_install_append() {
-    chmod 664 -R ${D}${PYTHON_SITEPACKAGES_DIR}/*.egg-info/
-}
