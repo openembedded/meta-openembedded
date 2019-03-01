@@ -10,8 +10,8 @@ inherit autotools update-alternatives
 SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz \
            file://0001-Fix-printf-format-errors-with-clang.patch \
            "
-SRC_URI[md5sum] = "6472702a8d9760d166ef8333dcb527a6"
-SRC_URI[sha256sum] = "5ecd5bea72a93ed10eb15a1be9951dd51b52e5da1d4a7ae020efd9826b49e659"
+SRC_URI[md5sum] = "8f485f126c05d0ab800e85abfe1987aa"
+SRC_URI[sha256sum] = "3c663919dc5c66ec991da14c7cf7e0be8ad00f3db73986a987c118862b5f6071"
 
 EXTRA_OECONF += "--bindir=${base_bindir}"
 
