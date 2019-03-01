@@ -10,16 +10,14 @@ LIC_FILES_CHKSUM = "file://readme.md;beginline=21;endline=22;md5=3075b5727d36f29
 
 SRC_URI = " \
     git://github.com/g-truc/glm;branch=master \
-    file://0001-Make-GLM_ENABLE_EXPERIMENTAL-a-configurable-option.patch \
-    file://0002-glm-install-headers-only.patch \
+    file://0001-glm-Remove-redundant-double-semi-colons.patch \
 "
-SRCREV = "fcbedf5058ef8613dd02aac62ef00d55dcfeadd7"
+# v0.9.9.3
+SRCREV = "9749727c2db4742369219e1d452f43e918734b4e"
 
 S = "${WORKDIR}/git"
 
 inherit cmake
-
-EXTRA_OECMAKE = "-DGLM_ENABLE_EXPERIMENTAL=ON"
 
 RDEPENDS_${PN}-dev = ""
 
