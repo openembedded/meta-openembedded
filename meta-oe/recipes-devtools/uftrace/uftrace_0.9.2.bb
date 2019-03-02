@@ -10,10 +10,9 @@ DEPENDS_append_libc-musl = " argp-standalone"
 
 inherit autotools
 
-# v0.8.3
-SRCREV = "8b723a6fae2ef30495cd6279774fba9c95cd9c88"
+# v0.9.2
+SRCREV = "66fc1fb973f4a44aecd216541405ffe05196f11e"
 SRC_URI = "git://github.com/namhyung/${BPN} \
-           file://0001-include-dlfcn.h-for-RTLD_DEFAULT.patch \
            "
 S = "${WORKDIR}/git"
 
