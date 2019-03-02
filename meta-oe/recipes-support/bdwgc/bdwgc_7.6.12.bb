@@ -21,7 +21,7 @@ SECTION = "devel"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://README.QUICK;md5=728501f233050290314d33fb07d883eb"
 
-SRCREV = "cef9cbed83f2b5101d4e65ca0f158600d26cbd34"
+SRCREV = "a46546f40d18e60c31077c2e7c8bb4e44bf1bef1"
 SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-7_6 \
           "
 
