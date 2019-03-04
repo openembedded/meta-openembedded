@@ -3,15 +3,19 @@ DESCRIPTION = "libc-bench is a set of time- and memory-efficiency tests to compa
 implementations of various C/POSIX standard library functions."
 HOMEPAGE = "http://www.etalabs.net/libc-bench.html"
 SECTION = "console/utils"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://Makefile;md5=e12f113da27dfe9cfb6c2c537da8d8df"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=9a825c63897c53f487ef900598c31527"
 
-SRC_URI = "http://www.etalabs.net/releases/${BPN}-${PV}.tar.gz"
+SRCREV = "b6b2ce5f9f87a09b14499cb00c600c601f022634"
+PV = "20110206+git${SRCPV}"
 
-SRC_URI[md5sum] = "f763de90f95fe68e4e03e5b6f49698ac"
-SRC_URI[sha256sum] = "6825260aa5f15f4fbc7957ec578e9c859cbbe210e025ec74c4a0d05677523794"
+SRC_URI = "git://git.musl-libc.org/libc-bench \
+           "
+
+S = "${WORKDIR}/git"
 
 do_install () {
     install -d ${D}${bindir}
     install -m 0755 ${B}/libc-bench ${D}${bindir}
 }
+
