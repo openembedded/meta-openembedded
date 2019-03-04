@@ -37,3 +37,4 @@ FILES_liboctave-dbg = "${libdir}/${PN}/${PV}/.debug"
 
 FILES_${PN}-dbg = "${bindir}/.debug ${libdir}/${PN}/${PV}/oct/${TARGET_SYS}/.debug"
 
+EXCLUDE_FROM_WORLD = "1"
