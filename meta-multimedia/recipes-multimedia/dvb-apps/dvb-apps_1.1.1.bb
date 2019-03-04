@@ -19,6 +19,8 @@ S = "${WORKDIR}/${BPN}"
 
 inherit perlnative
 
+export enable_static="no"
+
 do_configure() {
     sed -i -e s:/usr/include:${STAGING_INCDIR}:g util/av7110_loadkeys/generate-keynames.sh
 }
