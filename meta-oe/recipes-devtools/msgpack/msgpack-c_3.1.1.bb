@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
 PV .= "+git${SRCPV}"
 
 SRC_URI = "git://github.com/msgpack/msgpack-c \
-           file://0001-Fix-Werror-class-memaccess.patch \
            "
-SRCREV = "208595b2620cf6260ce3d6d4cf8543f13b206449"
+# cpp-3.1.1
+SRCREV = "83a82e3eb512b18d4149cabb7eb43c7e8bc081af"
 
 S = "${WORKDIR}/git"
 
