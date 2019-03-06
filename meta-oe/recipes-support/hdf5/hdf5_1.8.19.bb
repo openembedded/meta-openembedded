@@ -6,12 +6,13 @@ SECTION = "libs"
 LICENSE = "HDF5"
 LIC_FILES_CHKSUM = "file://COPYING;md5=57e5351b17591e659eedae107265c606"
 
-inherit cmake
+inherit cmake siteinfo
 
 SRC_URI = " \
     https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-${PV}/src/${BPN}-${PV}.tar.bz2 \
     file://H5lib_settings.c \
-    file://H5Tinit.c \
+    file://H5Tinit-64.c \
+    file://H5Tinit-32.c \
     file://0001-cross-compiling-support.patch \
     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
 "
@@ -42,7 +43,7 @@ EXTRA_OECMAKE = " \
 do_unpack[postfuncs] += "gen_hd5file"
 gen_hd5file() {
     install -m 544 ${WORKDIR}/H5lib_settings.c ${S}
-    install -m 544 ${WORKDIR}/H5Tinit.c ${S}
+    install -m 544 ${WORKDIR}/H5Tinit-${SITEINFO_BITS}.c ${S}/H5Tinit.c
 }
 
 do_install_append() {
