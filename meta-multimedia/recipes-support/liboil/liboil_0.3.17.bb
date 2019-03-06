@@ -18,6 +18,7 @@ SRC_URI = "http://liboil.freedesktop.org/download/${BPN}-${PV}.tar.gz \
            file://0001-Fix-enable-vfp-flag.patch \
            file://liboil_fix_for_x32.patch \
            file://0001-math_vfp_asm.S-Convert-fldmia-fstmia-instructions-to.patch \
+           file://fix_riscv_unaligned_access.patch \
            "
 
 SRC_URI[md5sum] = "47dc734f82faeb2964d97771cfd2e701"
