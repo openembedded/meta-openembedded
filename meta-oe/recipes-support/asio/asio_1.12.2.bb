@@ -6,7 +6,7 @@ HOMEPAGE = "http://think-async.com/Asio"
 SECTION = "libs"
 LICENSE = "BSL-1.0"
 
-DEPENDS = "boost openssl"
+DEPENDS = "openssl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
 
@@ -20,3 +20,7 @@ SRC_URI[md5sum] = "312e53385e2daad10f08d57f91ad3431"
 SRC_URI[sha256sum] = "4e27dcb37456ba707570334b91f4798721111ed67b69915685eac141895779aa"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
+
+PACKAGECONFIG ??= "boost"
+
+PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
