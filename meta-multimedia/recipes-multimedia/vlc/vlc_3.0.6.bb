@@ -3,6 +3,8 @@ require ${BPN}.inc
 # work around build failure
 EXTRA_OECONF += " --enable-libxml2=no"
 
+LDFLAGS_append_riscv64 = " -pthread"
+
 SRC_URI += " \
             file://0002-glibc-does-not-provide-strlcpy.patch \
             file://0005-libpostproc-header-check.patch \
