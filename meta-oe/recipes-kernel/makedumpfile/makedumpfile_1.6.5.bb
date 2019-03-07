@@ -25,8 +25,8 @@ SRC_URI = "\
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
 "
-SRC_URI[md5sum] = "7dfbca19f487604c271e2892ba07f4bd"
-SRC_URI[sha256sum] = "7e06f72d5f291fcab9e92975f405a76e37d4f7fc8fa4172f199636398ae812b1"
+SRC_URI[md5sum] = "1737f8e8904d565629f0c9e702f92d02"
+SRC_URI[sha256sum] = "5d4f1d6ded8dca6951eeabcf4bb1ebf6575288fee947529397103c040eb5c760"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/makedumpfile/files/makedumpfile/"
 UPSTREAM_CHECK_REGEX = "makedumpfile/(?P<pver>\d+(\.\d+)+)/"
