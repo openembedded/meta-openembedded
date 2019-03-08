@@ -10,7 +10,7 @@ HOMEPAGE = "http://search.cpan.org/dist/IO-Socket-SSL/"
 SECTION = "libs"
 
 LICENSE = "Artistic-1.0|GPLv1+"
-LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=11;md5=963ce28228347875ace682de56eef8e8"
+LIC_FILES_CHKSUM = "file://META.yml;beginline=12;endline=12;md5=963ce28228347875ace682de56eef8e8"
 
 RDEPENDS_${PN} += "\
     libnet-ssleay-perl \
@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "\
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "97fa6cd64f15db60f810cd8ab02d57fc"
-SRC_URI[sha256sum] = "fb5b2877ac5b686a5d7b8dd71cf5464ffe75d10c32047b5570674870e46b1b8c"
+SRC_URI[md5sum] = "ecf96ce2ff9e04a03a2d101c76ce1020"
+SRC_URI[sha256sum] = "0d47064781a545304d5dcea5dfcee3acc2e95a32e1b4884d80505cde8ee6ebcd"
 
 S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
