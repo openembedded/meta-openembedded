@@ -30,8 +30,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
 LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1 \
     file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446 \
 "
-SRC_URI[libxml.md5sum] = "43546fd9a3974f19323f9fb04861ece9"
-SRC_URI[libxml.sha256sum] = "721452e3103ca188f5968ab06d5ba29fe8e00e49f4767790882095050312d476"
+SRC_URI[libxml.md5sum] = "dce687dd8b7e82d1c359fd74b1852f64"
+SRC_URI[libxml.sha256sum] = "f0bca4d0c2da35d879fee4cd13f352014186cedab27ab5e191f39b5d7d4f46cf"
 
 S = "${WORKDIR}/XML-LibXML-${PV}"
 
