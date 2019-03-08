@@ -9,8 +9,8 @@ DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit sha
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "4c68899cfd80d57a153771534193bb9a"
-SRC_URI[archive.sha256sum] = "6e7213570389b17b67433695f515f3b17705ba976168a4c8828fc177cce50223"
+SRC_URI[archive.md5sum] = "5b60e70ea5a6421bc72eb339059b1175"
+SRC_URI[archive.sha256sum] = "ae44307c127268b6c8cbe5a93bb4a248fb8a6df430d29726e8aeb2ba40bd5513"
 
 
 EXTRA_OEMESON = " \
