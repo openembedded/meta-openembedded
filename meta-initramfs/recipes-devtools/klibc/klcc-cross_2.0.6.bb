@@ -7,8 +7,6 @@ DEPENDS = "klibc"
 PACKAGES = ""
 inherit nopackages
 
-FILESPATH =. "${FILE_DIRNAME}/klibc-${PV}:"
-
 SRC_URI += "file://use-env-for-perl.patch"
 
 # disable task already run in klibc recipe
