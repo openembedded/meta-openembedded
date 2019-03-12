@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
 HOMEPAGE = "http://web.mit.edu/Kerberos/"
 SECTION = "console/network"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=7f95bc3d8d0351aa481d56d5e9de20c3"
+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=aff541e7261f1926ac6a2a9a7bbab839"
 DEPENDS = "bison-native ncurses util-linux e2fsprogs e2fsprogs-native openssl"
 
 inherit autotools-brokensep binconfig perlnative systemd update-rc.d
@@ -30,10 +30,9 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://etc/default/krb5-admin-server \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
-           file://0001-Ignore-password-attributes-for-S4U2Self-requests.patch;striplevel=2 \
 "
-SRC_URI[md5sum] = "ffd52595e969fb700d37313606e4dc3d"
-SRC_URI[sha256sum] = "9f721e1fe593c219174740c71de514c7228a97d23eb7be7597b2ae14e487f027"
+SRC_URI[md5sum] = "3b729d89eb441150e146780c4138481b"
+SRC_URI[sha256sum] = "5a6e2284a53de5702d3dc2be3b9339c963f9b5397d3fbbc53beb249380a781f5"
 
 CVE_PRODUCT = "kerberos"
 
@@ -105,6 +104,7 @@ PACKAGES =+ "${PN}-admin-server \
              ${PN}-kpropd \
              ${PN}-otp \
              ${PN}-pkinit \
+             ${PN}-spake \
              ${PN}-user \
              libgssapi-krb5 \
              libgssrpc \
@@ -151,6 +151,7 @@ FILES_${PN}-kdc-ldap = "${libdir}/krb5/libkdb_ldap${SOLIBS} \
 FILES_${PN}-kpropd = "${sbindir}/kpropd"
 FILES_${PN}-otp = "${libdir}/krb5/plugins/preauth/otp.so"
 FILES_${PN}-pkinit = "${libdir}/krb5/plugins/preauth/pkinit.so"
+FILES_${PN}-spake = "${libdir}/krb5/plugins/preauth/spake.so"
 FILES_${PN}-user = "${bindir}/k*"
 
 FILES_libgssapi-krb5 = "${libdir}/libgssapi_krb5${SOLIBS}"
