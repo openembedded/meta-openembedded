@@ -10,6 +10,8 @@ do_install() {
     install -d ${D}${libdir}
     install -m 755 usr/klibc/klibc-*.so ${D}${libdir}
     (cd  ${D}${libdir}; ln -s klibc-*.so klibc.so)
+    rm -rf ${D}${exec_prefix}/man
+    rm -rf ${D}${libdir}/klibc/bin
 }
 
 PACKAGES = "libklibc libklibc-staticdev libklibc-dev"
