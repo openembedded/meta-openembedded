@@ -38,6 +38,7 @@ EXTRA_OECMAKE = " \
     -DH5_NO_ALIGNMENT_RESTRICTIONS_RUN=0 \
     -DH5_NO_ALIGNMENT_RESTRICTIONS_RUN__TRYRUN_OUTPUT= \
     -DCMAKE_INSTALL_PREFIX='${prefix}' \
+    -DHDF5_INSTALL_LIB_DIR='${baselib}' \
 "
 
 do_unpack[postfuncs] += "gen_hd5file"
