@@ -17,6 +17,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BPN}-${PV}/source/${BPN}
            file://0001-disable-ucontext-on-musl.patch \
            file://c11_atomics.patch \
            file://clang_version_header_conflict.patch \
+           file://fix-arm-atomic.patch \
           "
 SRC_URI[md5sum] = "603ce42e35b9a688f2cca05275acb5cb"
 SRC_URI[sha256sum] = "b2aa857ef5b84f85a7ea60a1eac7b34c0ca5151c71a0d44ce2d7fb028d71459a"
@@ -63,7 +64,6 @@ PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
 # https://mariadb.atlassian.net/browse/MDEV-5982
 TARGET_CFLAGS += "-fuse-ld=bfd"
 LDFLAGS += " -pthread"
-LDFLAGS_append_armv5 = " -latomic"
 BUILD_CFLAGS += "-fuse-ld=bfd"
 BUILD_CXXFLAGS += "-fuse-ld=bfd"
 
