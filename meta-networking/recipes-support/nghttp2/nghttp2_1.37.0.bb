@@ -5,8 +5,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
 
 SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
-SRC_URI[md5sum] = "f2ef3dd1e9fc6dc29fcdd4a465ebc020"
-SRC_URI[sha256sum] = "e9bb86157b88eda5a6844a232e039febbb52c1aa44b640acbbfabe729b8287fc"
+SRC_URI[md5sum] = "dc7536d02aa7d4883c20eaf637747381"
+SRC_URI[sha256sum] = "aa090b164b17f4b91fe32310a1c0edf3e97e02cd9d1524eef42d60dd1e8d47b7"
 
 DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
 
