@@ -23,9 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
 SECTION = "libs"
 
 SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
-
-SRC_URI[md5sum] = "659d96bb03012ca6db414a9137fcdbd6"
-SRC_URI[sha256sum] = "593b4e4d2e1629fc407ab4750d69fa309a0ddb66565dc3deb5b60eddbdeb06da"
+SRC_URI[md5sum] = "eae9cf16114f4491dbbc0fe36bb7e6c3"
+SRC_URI[sha256sum] = "e3dab56e9093c790b7d5e0f7eb19451010fe680649d25cf1dcca9d5441669ae2"
 
 inherit cmake
 
