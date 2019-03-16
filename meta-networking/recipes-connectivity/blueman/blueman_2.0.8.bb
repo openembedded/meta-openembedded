@@ -7,12 +7,11 @@ DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-nat
 inherit autotools systemd gsettings python3native gtk-icon-cache
 
 SRC_URI = " \
-    git://github.com/blueman-project/blueman.git \
+    https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
     file://0001-Search-for-cython3.patch \
 "
-SRCREV = "c4a03417e81e21543d4568e8e7f7de307582eb50"
-PV = "2.0.5+git${SRCPV}"
-S = "${WORKDIR}/git"
+SRC_URI[md5sum] = "51dc07d48125ee9600e7f6168d6e67f6"
+SRC_URI[sha256sum] = "04afd07b4c900a401f39e711dedbf8b9cf12000ddeda0d8ef3c3327caf34704e"
 
 EXTRA_OECONF = " \
     --disable-runtime-deps-check \
