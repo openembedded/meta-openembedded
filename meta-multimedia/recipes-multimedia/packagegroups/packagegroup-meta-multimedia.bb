@@ -23,8 +23,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
     libdvbpsi libdc1394 gstd gst-shark \
     bigbuckbunny-720p tearsofsteel-1080p bigbuckbunny-1080p bigbuckbunny-480p \
     openal-soft dleyna-core dleyna-renderer dleyna-server dleyna-connector-dbus \
-    gst-meta-base gstreamer gst-plugins-base gst-plugins-good \
-    gst-rtsp gst-plugins-bad alsa-equal libdvdnav libmusicbrainz tinyalsa \
+    alsa-equal libdvdnav libmusicbrainz tinyalsa \
     fluidsynth cdparanoia vorbis-tools tremor caps libao libavc1394 \
     opusfile gerbera libdvdcss webrtc-audio-processing \
     rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
