@@ -8,7 +8,9 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "bb0ce7de6b28694b40405eedac8a31b5"
-SRC_URI[archive.sha256sum] = "4f6c0e62bb438abfd16b4559cd2eca0251de19e291c888cdc4dc88e5ffebb612"
+SRC_URI[archive.md5sum] = "c6d67325cd97b2208b41e07e6cc7b947"
+SRC_URI[archive.sha256sum] = "78f3274c0c79c434c03655c1b35edf7b95ec0421430897fb1345a98a265ed2d4"
 
 DEPENDS = "glib-2.0 libxau"
+
+EXTRA_OEMAKE += "LIBGTOP_LIBS="
