@@ -1,0 +1,56 @@
+From ff03542e1ff24646ef16754157a6eb6437172153 Mon Sep 17 00:00:00 2001
+From: Kylie McClain <somasis@exherbo.org>
+Date: Sun, 13 Dec 2015 21:32:05 -0500
+Subject: [PATCH] Fix building on musl libc
+
+The addition of sys/time.h to libblueman.c is needed for `tv`'s usage,
+which is defined by musl's time.h.
+
+In addition, XCASE must be defined since it is normally provided by
+glibc's termios.h.
+---
+ blueman/main/PPPConnection.py | 2 +-
+ module/libblueman.c           | 1 +
+ module/modem-prober.c         | 4 ++++
+ 3 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/blueman/main/PPPConnection.py b/blueman/main/PPPConnection.py
+index 0aab1d98..1a3a9925 100644
+--- a/blueman/main/PPPConnection.py
++++ b/blueman/main/PPPConnection.py
+@@ -131,7 +131,7 @@ def Connect(self):
+         attrs[0] &= ~(termios.IGNCR | termios.ICRNL | termios.IUCLC | termios.INPCK | termios.IXON | termios.IXANY |
+                       termios.IGNPAR)
+         attrs[1] &= ~(termios.OPOST | termios.OLCUC | termios.OCRNL | termios.ONLCR | termios.ONLRET)
+-        attrs[3] &= ~(termios.ICANON | termios.XCASE | termios.ECHO | termios.ECHOE | termios.ECHONL)
++        attrs[3] &= ~(termios.ICANON | getattr(termios, 'XCASE', 4) | termios.ECHO | termios.ECHOE | termios.ECHONL)
+         attrs[3] &= ~(termios.ECHO | termios.ECHOE)
+         attrs[6][termios.VMIN] = 1
+         attrs[6][termios.VTIME] = 0
+diff --git a/module/libblueman.c b/module/libblueman.c
+index 7f1626bc..a86fad59 100644
+--- a/module/libblueman.c
++++ b/module/libblueman.c
+@@ -28,6 +28,7 @@
+ #include <string.h>
+ #include <sys/ioctl.h>
+ #include <sys/socket.h>
++#include <sys/time.h>
+ #include <unistd.h>
+ #include <linux/sockios.h>
+ #include <linux/if.h>
+diff --git a/module/modem-prober.c b/module/modem-prober.c
+index daffaa4e..972ec146 100644
+--- a/module/modem-prober.c
++++ b/module/modem-prober.c
+@@ -34,6 +34,10 @@
+ 
+ #include "modem-prober.h"
+ 
++#ifndef XCASE
++#define XCASE 0000004
++#endif
++
+ #if PY_MAJOR_VERSION >= 3
+ #define PyString_FromString PyUnicode_FromString
+ #endif
