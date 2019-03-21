@@ -9,7 +9,7 @@ inherit cmake
 PE = "1"
 
 SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
-SRC_URI[md5sum] = "359f102bcbd62accf84ef32f4863255d"
-SRC_URI[sha256sum] = "b77b9f853168d9636a44f75fca372b363106f52d789d18a2f776397bf117f2f1"
+SRC_URI[md5sum] = "dc751294aaf59d1359bbe34e693d1d87"
+SRC_URI[sha256sum] = "304df76206d633df5360e738b138c94e82ccf086e50ba84f456d3f8432f9f863"
 
 EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
