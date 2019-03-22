@@ -35,3 +35,4 @@ do_install() {
 
 COMPATIBLE_MACHINE ?= "(^$)"
 COMPATIBLE_MACHINE_armv7a = "(.*)"
+COMPATIBLE_MACHINE_armv7ve = "(.*)"
