@@ -5,7 +5,7 @@ SECTION = "net/misc"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
                     file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
-                    file://docs/api/html/license.html;md5=2d56a1b0c42e388aa86aef59b154e8c3 \
+                    file://docs/api/html/license.html;md5=233931303ef80eded167add1f60a50c1 \
 "
 
 DEPENDS = " \
@@ -24,19 +24,19 @@ inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introsp
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-    file://0001-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
-    file://0002-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
-    file://0003-Do-not-create-settings-settings-property-documentati.patch \
-    file://0001-Do-not-include-net-ethernet.h-and-linux-if_ether.h.patch \
-    file://musl/0001-musl-basic.patch \
-    file://musl/0002-musl-dlopen-configure-ac.patch \
-    file://musl/0003-musl-network-support.patch \
-    file://musl/0004-musl-process-util.patch \
-    file://musl/0005-musl-avoid-further-conflicts-by-including-net-ethern.patch \
-    file://musl/0006-Add-a-strndupa-replacement-for-musl.patch \
+    file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
+    file://0002-Do-not-create-settings-settings-property-documentati.patch \
+    file://musl/0001-Do-not-include-net-ethernet.h-and-linux-if_ether.h.patch \
+    file://musl/0002-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+    file://musl/0003-musl-basic.patch \
+    file://musl/0004-musl-dlopen-configure-ac.patch \
+    file://musl/0005-musl-network-support.patch \
+    file://musl/0006-musl-process-util.patch \
+    file://musl/0007-musl-avoid-further-conflicts-by-including-net-ethern.patch \
+    file://musl/0008-Add-a-strndupa-replacement-for-musl.patch \
 "
-SRC_URI[md5sum] = "54ce62f0aa18ef6c5e754eaac47494ac"
-SRC_URI[sha256sum] = "35a3ede4c7d12d6212033c9e44cb82b7692f38063b53a067567f02f5937c8c18"
+SRC_URI[md5sum] = "10abacaafb162a67d2942adf03e7e9e4"
+SRC_URI[sha256sum] = "8e962833b6ca03edda1bc57ed6614a7b8c2339531b44acef098d05f2324c5d2c"
 
 UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/NetworkManager/1.10/"
 UPSTREAM_CHECK_REGEX = "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar.xz"
@@ -136,7 +136,7 @@ FILES_${PN}-nmtui-doc = " \
     ${mandir}/man1/nmtui* \
 "
 
-SYSTEMD_SERVICE_${PN} = "NetworkManager.service NetworkManager-dispatcher.service"
+SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
 
 do_install_append() {
     rm -rf ${D}/run ${D}${localstatedir}/run
