@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=909430f63fddd63f120ba29e8979f65c"
 
 inherit xfce-panel-plugin gtk-icon-cache
 
-SRC_URI[md5sum] = "1b956a89693d039a61b4725cefb23a4d"
-SRC_URI[sha256sum] = "eb51765580ea4650f9cf062382a820fb6483ee5dbe003aeb6f063929e299f9c2"
+SRC_URI[md5sum] = "1ae192a69834ee2f51f34a0a981181f4"
+SRC_URI[sha256sum] = "7b50ab947ab058e1c079113e7f0f8b38ef242fec36ec9f31bb4e3c19cb3f9de9"
