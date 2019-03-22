@@ -1,7 +1,7 @@
 SUMMARY = "PhysicsFS is a library to provide abstract access to various archives"
 HOMEAPAGE = "http://icculus.org/physfs"
 LICENSE = "Zlib"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2668e2fb051c3e564198e146a9a2d9f0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=96801882d1120239dcafbf888e821a6e"
 DEPENDS = "readline zlib"
 
 inherit cmake
