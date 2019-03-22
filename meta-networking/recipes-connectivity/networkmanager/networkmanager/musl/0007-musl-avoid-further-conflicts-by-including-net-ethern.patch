@@ -1,4 +1,4 @@
-From b3b4fe35018c98ad176719b2d9ffb867974fc7c3 Mon Sep 17 00:00:00 2001
+From 4232a34064e33b52f07cca51b902b93699800f72 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 Date: Mon, 16 Apr 2018 14:45:44 +0200
 Subject: [PATCH] musl: avoid further conflicts by including net/ethernet.h
@@ -9,6 +9,7 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+
 ---
  src/systemd/src/systemd/sd-dhcp-client.h  | 2 ++
  src/systemd/src/systemd/sd-dhcp-lease.h   | 2 ++
@@ -17,7 +18,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  4 files changed, 8 insertions(+)
 
 diff --git a/src/systemd/src/systemd/sd-dhcp-client.h b/src/systemd/src/systemd/sd-dhcp-client.h
-index e388552..9c4dde8 100644
+index bd0d429..c935fe1 100644
 --- a/src/systemd/src/systemd/sd-dhcp-client.h
 +++ b/src/systemd/src/systemd/sd-dhcp-client.h
 @@ -20,7 +20,9 @@
@@ -29,9 +30,9 @@ index e388552..9c4dde8 100644
 +#endif
  #include <netinet/in.h>
  #include <sys/types.h>
- 
+ #include <stdbool.h>
 diff --git a/src/systemd/src/systemd/sd-dhcp-lease.h b/src/systemd/src/systemd/sd-dhcp-lease.h
-index 2a60145..19d1814 100644
+index d299c79..991e67e 100644
 --- a/src/systemd/src/systemd/sd-dhcp-lease.h
 +++ b/src/systemd/src/systemd/sd-dhcp-lease.h
 @@ -19,7 +19,9 @@
@@ -45,7 +46,7 @@ index 2a60145..19d1814 100644
  #include <sys/types.h>
  
 diff --git a/src/systemd/src/systemd/sd-dhcp6-client.h b/src/systemd/src/systemd/sd-dhcp6-client.h
-index fa36dca..2d25010 100644
+index 43d38f5..57ab487 100644
 --- a/src/systemd/src/systemd/sd-dhcp6-client.h
 +++ b/src/systemd/src/systemd/sd-dhcp6-client.h
 @@ -20,7 +20,9 @@
@@ -55,9 +56,9 @@ index fa36dca..2d25010 100644
 +#if defined(__GLIBC__)
  #include <net/ethernet.h>
 +#endif
- #include <stdbool.h>
  #include <sys/types.h>
  
+ #include "sd-dhcp6-lease.h"
 diff --git a/src/systemd/src/systemd/sd-ipv4ll.h b/src/systemd/src/systemd/sd-ipv4ll.h
 index 71bd4cf..1c667ba 100644
 --- a/src/systemd/src/systemd/sd-ipv4ll.h
@@ -72,6 +73,3 @@ index 71bd4cf..1c667ba 100644
  #include <netinet/in.h>
  
  #include "sd-event.h"
--- 
-2.14.5
-
