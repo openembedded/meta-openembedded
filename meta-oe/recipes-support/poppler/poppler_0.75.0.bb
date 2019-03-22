@@ -8,8 +8,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
            file://basename-include.patch \
            "
-SRC_URI[md5sum] = "b505011e49e922c83f3ffb57ab40bc28"
-SRC_URI[sha256sum] = "badbecd2dddf63352fd85ec08a9c2ed122fdadacf2a34fcb4cc227c4d01f2cf9"
+SRC_URI[md5sum] = "3fb4ca803d989742695ca586c5cc489e"
+SRC_URI[sha256sum] = "3bbaedb0fa2797cac933a0659d144303e4d09eec6892c65600da987d8707199a"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
 
@@ -40,7 +40,7 @@ EXTRA_OECMAKE += " \
 do_configure_append() {
     # poppler macro uses pkg-config to check for g-ir runtimes. Something
     # makes them point to /usr/bin. Align them to sysroot - that's where the
-    # git-wrappers are:
+    # gir-wrappers are:
     sed -i 's: ${bindir}/g-ir: ${STAGING_BINDIR}/g-ir:' ${B}/build.ninja
 }
 
