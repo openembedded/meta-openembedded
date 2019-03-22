@@ -1,4 +1,4 @@
-SUMMARY = "ImageMagick is an image convertion toolkit"
+SUMMARY = "ImageMagick is an image conversion toolkit"
 SECTION = "console/utils"
 HOMEPAGE = "https://www.imagemagick.org/"
 DESCRIPTION = "ImageMagick is a collection of tools for displaying, converting, and \
