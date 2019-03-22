@@ -23,15 +23,15 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
            file://rsyslog.logrotate \
            file://use-pkgconfig-to-check-libgcrypt.patch \
            file://run-ptest \
-           file://rsyslog-fix-ptest-not-finish.patch \
 "
 
 SRC_URI_append_libc-musl = " \
     file://0001-Include-sys-time-h.patch \
 "
 
-SRC_URI[md5sum] = "e0942b4b88a13602a6b6352bf9f05091"
-SRC_URI[sha256sum] = "295c289b4c8abd8f8f3fe35a83249b739cedabe82721702b910255f9faf147e7"
+SRC_URI[md5sum] = "f0d454c79d4040e3f25fcd12f8f33fe2"
+SRC_URI[sha256sum] = "d0d23a493dcec64c7b6807a1bb8ee864ed0f3760c2ff3088008bb661d304056f"
+
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -162,5 +162,8 @@ VALGRIND_mips64n32 = ""
 VALGRIND_arm = ""
 VALGRIND_aarch64 = ""
 VALGRIND_riscv64 = ""
-RDEPENDS_${PN}-ptest += "make diffutils gzip bash gawk coreutils procps"
+RDEPENDS_${PN}-ptest += "\
+  make diffutils gzip bash gawk coreutils procps \
+  libgcc python-core python-io \
+  "
 RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
