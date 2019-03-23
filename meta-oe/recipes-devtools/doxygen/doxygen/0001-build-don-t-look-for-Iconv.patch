@@ -1,4 +1,4 @@
-From f3a6c05e3a8afdac547c6c8176fa6b57636db65c Mon Sep 17 00:00:00 2001
+From 24650b0c7db6b213a2eaa5061b75b9f1b43f1ce9 Mon Sep 17 00:00:00 2001
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 Date: Fri, 23 Nov 2018 11:44:56 +0100
 Subject: [PATCH] build: don't look for Iconv
@@ -17,11 +17,11 @@ Upstream-status: Inappropriate
  1 file changed, 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ba105b89..16252247 100644
+index 45c2f2c1..22cf0144 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -89,10 +89,6 @@ if (sqlite3)
-     find_package(SQLite3 REQUIRED)
+@@ -92,10 +92,6 @@ if (sqlite3)
+   endif()
  endif()
  
 -find_package(Iconv REQUIRED)
@@ -32,5 +32,5 @@ index ba105b89..16252247 100644
  set(DOXYDOCS ${PROJECT_BINARY_DIR}/doc)
  set(ENV{DOXYGEN_DOCDIR} ${DOXYDOCS})
 -- 
-2.19.1
+2.17.1
 
