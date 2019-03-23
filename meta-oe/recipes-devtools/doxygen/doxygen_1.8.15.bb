@@ -10,8 +10,7 @@ DEPENDS = "flex-native bison-native"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
            file://0001-build-don-t-look-for-Iconv.patch"
-
-SRC_URI[md5sum] = "41d8821133e8d8104280030553e2b42b"
-SRC_URI[sha256sum] = "d1757e02755ef6f56fd45f1f4398598b920381948d6fcfa58f5ca6aa56f59d4d"
+SRC_URI[md5sum] = "2c98c73eba392d334f5bbaf15e09bae3"
+SRC_URI[sha256sum] = "bd9c0ec462b6a9b5b41ede97bede5458e0d7bb40d4cfa27f6f622eb33c59245d"
 
 BBCLASSEXTEND = "native"
