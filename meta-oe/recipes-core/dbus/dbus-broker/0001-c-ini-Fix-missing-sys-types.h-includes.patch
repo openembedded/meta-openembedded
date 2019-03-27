@@ -1,0 +1,42 @@
+From 0bb101ab41334588e366639e7bd41836e86f83be Mon Sep 17 00:00:00 2001
+From: "William A. Kennington III" <wak@google.com>
+Date: Sun, 24 Feb 2019 07:54:31 -0800
+Subject: [PATCH] c-ini: Fix missing sys/types.h includes
+
+Otherwise we see failures for a build against the musl libc which
+doesn't include ssize_t definitions in c standard headers.
+
+Upstream-Status: dbus-broker@a145943ec5d1723647d3ba01ef5d0ef8f9f4a565
+Signed-off-by: William A. Kennington III <wak@google.com>
+---
+ subprojects/c-ini/src/c-ini-reader.c | 1 +
+ subprojects/c-ini/src/c-ini.h        | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/subprojects/c-ini/src/c-ini-reader.c b/subprojects/c-ini/src/c-ini-reader.c
+index 1a25d5a..10de80e 100644
+--- a/subprojects/c-ini/src/c-ini-reader.c
++++ b/subprojects/c-ini/src/c-ini-reader.c
+@@ -7,6 +7,7 @@
+ #include <inttypes.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <sys/types.h>
+ #include "c-ini.h"
+ #include "c-ini-private.h"
+ 
+diff --git a/subprojects/c-ini/src/c-ini.h b/subprojects/c-ini/src/c-ini.h
+index 847e4d5..9c107b2 100644
+--- a/subprojects/c-ini/src/c-ini.h
++++ b/subprojects/c-ini/src/c-ini.h
+@@ -66,6 +66,7 @@ extern "C" {
+ 
+ #include <inttypes.h>
+ #include <stdlib.h>
++#include <sys/types.h>
+ 
+ typedef struct CIniDomain CIniDomain;
+ typedef struct CIniEntry CIniEntry;
+-- 
+2.21.0.392.gf8f6787159e-goog
+
