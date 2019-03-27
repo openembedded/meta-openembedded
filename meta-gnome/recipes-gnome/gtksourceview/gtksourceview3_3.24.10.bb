@@ -15,7 +15,7 @@ inherit gnomebase lib_package gettext distro_features_check gtk-doc gobject-intr
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/${PNAME}-${PV}.tar.xz"
-SRC_URI[md5sum] = "52f8c83ad21ad75e9ee6cca03ce2e63f"
-SRC_URI[sha256sum] = "1e9bb8ff190db705deb916dd23ff681f0e8803aec407bf0fd64c7e615ac436fe"
+SRC_URI[md5sum] = "e43337d17c40eae440a76630db76c54e"
+SRC_URI[sha256sum] = "ab5406cdd0bdcf66afcd52b1e048a2f43c0f3ab391644ee30d9ac419b93cd59b"
 
 FILES_${PN} += " ${datadir}/gtksourceview-3.0"
