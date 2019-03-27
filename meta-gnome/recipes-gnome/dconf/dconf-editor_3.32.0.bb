@@ -8,8 +8,8 @@ DEPENDS = "dconf gtk+3"
 
 inherit gnomebase vala gettext gsettings bash-completion
 
-SRC_URI[archive.md5sum] = "cc9eb8020cc848812972d8519c3d05cf"
-SRC_URI[archive.sha256sum] = "455b53d827820efd28a176ee52e13eda5cda8cdf4e31e0145cfdd69931bf0c5a"
+SRC_URI[archive.md5sum] = "331a3603c0f8a9913e3a3c0f178b5310"
+SRC_URI[archive.sha256sum] = "f19d1332ac27e23ef3dc2ed07ba4e4646d9d7f05e2e78748aa525a1320adbaba"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
