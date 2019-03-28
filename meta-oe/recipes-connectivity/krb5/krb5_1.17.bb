@@ -35,6 +35,7 @@ SRC_URI[md5sum] = "3b729d89eb441150e146780c4138481b"
 SRC_URI[sha256sum] = "5a6e2284a53de5702d3dc2be3b9339c963f9b5397d3fbbc53beb249380a781f5"
 
 CVE_PRODUCT = "kerberos"
+CVE_VERSION = "5-${PV}"
 
 S = "${WORKDIR}/${BP}/src"
 
