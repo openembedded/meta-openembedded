@@ -10,8 +10,8 @@ EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
 SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
            "
 
-# tag 2.10.11
-SRCREV= "a325079f7e1976e0485a212d8921ce9b837c1f2f"
+# tag 2.10.12
+SRCREV= "d4fb1cf7f7d22c12e2e442ba5a5e98d09b0a28ab"
 
 S = "${WORKDIR}/git"
 
