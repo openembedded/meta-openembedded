@@ -1,5 +1,8 @@
 #!/bin/sh
 
+[ ! -e /dev/pts ] && mkdir -p /dev/pts
+[ ! -e /dev/pts/0 ] && mount devpts /dev/pts -t devpts
+
 # TODO enable the lines below once we have support for getprop
 # retrieve the product info from Android
 # manufacturer=$(getprop ro.product.manufacturer Android)
