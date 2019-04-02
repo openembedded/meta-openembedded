@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 GNOMEBASEBUILDCLASS = "meson"
 inherit gnome bash-completion gettext upstream-version-is-even
 
-DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit shadow-native"
+DEPENDS += "libsecret glib-2.0 gconf libgudev udisks2 polkit shadow-native"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
@@ -15,12 +15,10 @@ SRC_URI[archive.sha256sum] = "3739d64b79c95a9f0f9faf2c5f9e5298b4b2ebdd6431435ce6
 
 EXTRA_OEMESON = " \
     -Dbluray=false \
-    -Dgdu=false \
     -Dgoa=false \
     -Dgoogle=false \
     -Dnfs=false \
     -Dudisks2=true \
-    -Ddocumentation=false \
 "
 
 PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
