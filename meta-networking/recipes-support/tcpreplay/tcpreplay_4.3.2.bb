@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=890b830b22fd632e9ffd996df20338f8"
 
 SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "3e65d5b872e441c6a0038191a3dc7ce9"
-SRC_URI[sha256sum] = "043756c532dab93e2be33a517ef46b1341f7239278a1045ae670041dd8a4531d"
+SRC_URI[md5sum] = "dfa0d1b3dfd2cd316291a7a20563b649"
+SRC_URI[sha256sum] = "4f479bd9196cafde70c58ab072ca4959ecc5278555cf1aa7cf42f7f210daa951"
 
 DEPENDS = "libpcap"
 
