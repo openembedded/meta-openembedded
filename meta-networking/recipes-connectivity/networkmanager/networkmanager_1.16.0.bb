@@ -26,6 +26,7 @@ SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
     file://0002-Do-not-create-settings-settings-property-documentati.patch \
+    file://0003-dlopen-failure.patch \
 "
 SRC_URI_append_libc-musl = " file://musl/0001-Fix-build-with-musl.patch"
 
