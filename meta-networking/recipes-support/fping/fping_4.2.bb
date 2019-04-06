@@ -9,11 +9,11 @@ in a round-robin fashion."
 HOMEPAGE = "http://www.fping.org/"
 SECTION = "net"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=09d77789fe32be35acde9637a5ee39b1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
 
 SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
-SRC_URI[md5sum] = "2e17cb655aa4eb59b5a4a38a89e746ed"
-SRC_URI[sha256sum] = "09b8960e235341bae6000085d38106357eae656a79e0119bd27e816c9003656a"
+SRC_URI[md5sum] = "218e71764177a8ce25564a7810f8e729"
+SRC_URI[sha256sum] = "7d339674b6a95aae1d8ad487ff5056fd95b474c3650938268f6a905c3771b64a"
 
 S = "${WORKDIR}/fping-${PV}"
 
