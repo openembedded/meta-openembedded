@@ -12,9 +12,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 PROVIDES += "cyassl"
 RPROVIDES_${PN} = "cyassl"
 
-SRC_URI = "https://www.wolfssl.com/wolfssl-${PV}.zip"
-SRC_URI[md5sum] = "6ec08c09e3f51cccbb1686b4fd45f92f"
-SRC_URI[sha256sum] = "4cc318c49580d3b9c361fe258fac6106624aa744f1d34e03977b587766a753ee"
+SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https"
+SRCREV = "e87433e2b6682aa7162fcb4aafefb08e2fbd932b"
+S = "${WORKDIR}/git"
 
 inherit autotools
 
