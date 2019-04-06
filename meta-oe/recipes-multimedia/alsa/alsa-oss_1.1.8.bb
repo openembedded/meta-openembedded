@@ -30,8 +30,8 @@ DEPENDS = "alsa-lib"
 SRC_URI = "ftp://ftp.alsa-project.org/pub/oss-lib/alsa-oss-${PV}.tar.bz2 \
     file://libio.patch \
 "
-SRC_URI[md5sum] = "fc845cafc4444193510ab1865c7350b8"
-SRC_URI[sha256sum] = "c3d3f743e61f05ff95c5cba3b06bc9c91ff86c37495f1d19dab844e6b90845ea"
+SRC_URI[md5sum] = "9ec4bb783fdce19032aace086d65d874"
+SRC_URI[sha256sum] = "64adcef5927e848d2e024e64c4bf85b6f395964d9974ec61905ae4cb8d35d68e"
 
 inherit autotools
 
