@@ -13,11 +13,9 @@ SECTION = "net"
 
 DEPENDS = "openssl"
 
-SRC_URI = "git://github.com/open-iscsi/open-isns \
-           file://0001-util.h-endian.h-is-available-on-musl-on-linux.patch \
-           "
+SRC_URI = "git://github.com/open-iscsi/open-isns"
 
-SRCREV = "e84374ce7d1f5fc58a4c0fc751e075b2cc752c34"
+SRCREV = "cfdbcff867ee580a71bc9c18c3a38a6057df0150"
 
 S = "${WORKDIR}/git"
 
