@@ -13,7 +13,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
 
 SRC_URI = "git://github.com/jech/babeld.git;protocol=git"
-SRCREV = "535184173fcde5ddc43020cd197d01d1ea0e9a8b"
+SRCREV = "8627b6fcd4992f2e7992ecec97a4a4aa2d7ff099"
 
 S = "${WORKDIR}/git"
 
