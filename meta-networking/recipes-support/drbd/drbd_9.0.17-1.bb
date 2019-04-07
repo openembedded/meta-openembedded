@@ -11,8 +11,8 @@ DEPENDS = "virtual/kernel"
 SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
            file://check_existence_of_modules_before_installing.patch"
 
-SRC_URI[md5sum] = "6414a9eef2807c8210b6403e36ce3ea4"
-SRC_URI[sha256sum] = "6074b0d643f4bbae4641d3b4bc30f4840e74f2a212dd9c6555b8141e530e5789"
+SRC_URI[md5sum] = "ae8d5030760b2820a4b3e250447890a0"
+SRC_URI[sha256sum] = "86dd6cc0fdc8123056a3bb67a634cd7ba62a7b05b23caab9995cce7730891da8"
 
 inherit module
 
