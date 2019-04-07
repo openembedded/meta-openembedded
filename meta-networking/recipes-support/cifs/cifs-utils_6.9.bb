@@ -4,12 +4,10 @@ SECTION = "otherosfs"
 LICENSE = "GPLv3 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-PV = "6.7"
+PV = "6.9"
 
-SRCREV = "8101a07871f185c7044fa2ca221b282ab4607c8b"
-SRC_URI = "git://git.samba.org/cifs-utils.git \
-           file://0001-mount.cifs-Remove-data_blob.h-include.patch \
-          "
+SRCREV = "9a8c21ad9e4510a83a3a41f7a04f763a4fe9ec09"
+SRC_URI = "git://git.samba.org/cifs-utils.git"
 
 S = "${WORKDIR}/git"
 DEPENDS += "libtalloc"
