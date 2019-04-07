@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 DEPENDS = "libusb1"
 
-SRCREV = "39aa3c69f61bba28856a3eef3fe4ab37a3968e88"
-PV = "0.7.1+git${SRCPV}"
+SRCREV = "07b98b8e71f620dfdd57e92ddef6b677b259a092"
 
 SRC_URI = " \
     git://anongit.freedesktop.org/spice/usbredir \
