@@ -11,8 +11,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
-SRC_URI[md5sum] = "610af6e04071f02d3469191de7499f4e"
-SRC_URI[sha256sum] = "4e2d7cc01a6ee29a3955f5c622d47704ba7d9dd758189f15e9def016a2d1faa3"
+SRC_URI[md5sum] = "68413d76fc23191ddd66246d498e19b5"
+SRC_URI[sha256sum] = "933ee01bc6346aa573453b998f87510d3cce4aba4537c9642b24e6dbfba5c6f4"
 
 DEPENDS = "libnfnetlink openssl"
 
