@@ -7,9 +7,8 @@ inherit autotools-brokensep
 
 SRC_URI = "http://www.cipherdyne.org/${BPN}/download/${BPN}-${PV}.tar.bz2 \
           "
-
-SRC_URI[md5sum] = "e2c49e9674888a028bd443a55c3aaa22"
-SRC_URI[sha256sum] = "5bf47fe1fd30e862d29464f762c0b8bf89b5e298665c37624d6707826da956d4"
+SRC_URI[md5sum] = "47a9c7c214c40dceb5dc2aa8832e4f32"
+SRC_URI[sha256sum] = "f6c09bec97ed8e474a98ae14f9f53e1bcdda33393f20667b6af3fb6bb894ca77"
 
 DEPENDS = "libpcap gpgme"
 
