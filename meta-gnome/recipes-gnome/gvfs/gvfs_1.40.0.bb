@@ -73,4 +73,12 @@ do_install_append() {
     for exe in `find ${D}/${libexec}`; do
        chmod +x $exe
     done
+
+    # Something sets user services executable - looks a bit as if meson
+    # transition has room for enhancements...
+    # Systemd warns with messages as:
+    # Apr 07 01:00:33 raspberrypi3 systemd[348]: Configuration file /usr/lib/systemd/user/gvfs-mtp-volume-monitor.service is marked executable. Please remove executable permissio>
+    for service in `find ${D}/${systemd_user_unitdir}`; do
+       chmod -x $service
+    done
 }
