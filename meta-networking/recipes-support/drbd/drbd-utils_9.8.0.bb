@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
 SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
-           file://0001-drbd-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch \
           "
-# v9.5.0
-SRCREV_drbd-utils = "ee126652638328b55dc6bff47d07d6161ab768db"
-SRCREV_drbd-headers = "b47cc11bcabe1a65c40ad23f71dcaf2da6419630"
+# v9.8.0
+SRCREV_drbd-utils = "c30216b49330216bf8a567b7727da6e24f099f08"
+SRCREV_drbd-headers = "2357a11fb49bcbadf6b490e6d4cfe982a3d24813"
 
 S = "${WORKDIR}/git"
 
