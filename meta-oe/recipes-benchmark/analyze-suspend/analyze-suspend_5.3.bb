@@ -16,9 +16,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
 RDEPENDS_${PN} += "python-core python-datetime python-stringold"
 
-PV = "3.2+gitr${SRCPV}"
-SRCREV = "c669e002a2e7504f21e277ad248fa81033926391"
 SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
+SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
+
 S = "${WORKDIR}/git"
 
 do_install() {
