@@ -10,8 +10,6 @@ DEPENDS = " \
     dbus-glib \
     glib-2.0 \
     libblockdev \
-    intltool-native \
-    gnome-common-native \
     libxslt-native \
 "
 DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
@@ -22,16 +20,23 @@ SRC_URI = " \
     git://github.com/storaged-project/udisks.git;branch=master \
     file://non-gnu-libc.patch \
 "
-SRCREV = "05ae471be3c2adf2255b3a01edb00bba06e02afb"
+PV = "2.8.2"
+SRCREV = "7a787aa3b340fc7f1ca72d748635d6c5445edc58"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
 
-inherit autotools systemd gtk-doc gobject-introspection distro_features_check
+inherit autotools systemd gtk-doc gobject-introspection gettext distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
 EXTRA_OECONF = "--disable-man --disable-gtk-doc"
+
+do_configure_prepend() {
+    # | configure.ac:656: error: required file 'build-aux/config.rpath' not found
+    mkdir -p ${S}/build-aux
+    touch ${S}/build-aux/config.rpath
+}
 
 FILES_${PN} += " \
     ${datadir}/dbus-1/ \
