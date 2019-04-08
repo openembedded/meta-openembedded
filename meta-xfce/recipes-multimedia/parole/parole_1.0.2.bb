@@ -19,8 +19,8 @@ DEPENDS += " \
     taglib \
 "
 
-SRC_URI[md5sum] = "46fe86bbe0c4aa02c53244d66e62e90c"
-SRC_URI[sha256sum] = "8ad2931fdb35415cc3d7551b5f2207bfaa1aba15545accbacbb4984cdabd7099"
+SRC_URI[md5sum] = "cd22ab579470c5728db0aa6c0b9d4c7d"
+SRC_URI[sha256sum] = "bff0fc846d0d7b8f435ac5514976f1cd1d82b62dbf1b7d470e253a5b439407da"
 
 RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
 
@@ -34,5 +34,3 @@ FILES_${PN} += " \
     ${datadir}/appdata \
     ${libdir}/parole-0/*.so \
 "
-
-FILES_${PN}-dev += "${libdir}/parole-0/*.la"
