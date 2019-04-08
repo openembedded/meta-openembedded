@@ -13,7 +13,7 @@ PROVIDES += "cyassl"
 RPROVIDES_${PN} = "cyassl"
 
 SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https"
-SRCREV = "e87433e2b6682aa7162fcb4aafefb08e2fbd932b"
+SRCREV = "21f2beca9f320199fcea4a96df3e19967804144b"
 S = "${WORKDIR}/git"
 
 inherit autotools
