@@ -12,7 +12,7 @@ LICENSE = "GPLv2+"
 MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"
 MIN_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 
-SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${PV}.tar.bz2 \
+SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 \
            file://Set-up-for-cross-compilation.patch \
            file://Skip-AC_RUN_IFELSE-tests.patch \
            file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
@@ -23,19 +23,18 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://0001-tools.cc-fixed-unused-result-warning.patch \
-           file://0001-Bug-4843-pt1-ext_edirectory_userip_acl-refactoring-f.patch \
-           file://0002-smblib-fix-buffer-over-read.patch \
+           file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
            "
 
 SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 
-SRC_URI[md5sum] = "4ae3f6277b3aa6386cb5ad2d954179c2"
-SRC_URI[sha256sum] = "11971bfe3c13f438e42569ea551206caf68ecaa968305c30f7b422b556ebc7ac"
+SRC_URI[md5sum] = "6fb9f2be772b9bcaf2b3322d9e16ee1e"
+SRC_URI[sha256sum] = "73c1970467618db194057f6c43c80019a4dc47847579fc404796ff2dcd215f05"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-                    file://errors/COPYRIGHT;md5=1c0781e2ecd3051c765d525572defbc7 \
-                   "
-DEPENDS = "libtool krb5 openldap db cyrus-sasl openssl expat libxml2"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://errors/COPYRIGHT;md5=19cc4dd146f397e72f3ff6f9f58fbfbe \
+                    "
+DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
 inherit autotools pkgconfig useradd ptest perlnative
 
@@ -51,6 +50,8 @@ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir
 PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-checking,"
+PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
+PACKAGECONFIG[ssl] = "--with-openssl=yes,--with-openssl=no,openssl"
 
 BASIC_AUTH = "DB SASL LDAP"
 
