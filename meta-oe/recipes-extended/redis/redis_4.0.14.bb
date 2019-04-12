@@ -4,7 +4,7 @@ HOMEPAGE = "http://redis.io"
 SECTION = "libs"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3c01b49fed4df1a79843688fa3f7b9d6"
-DEPENDS = ""
+DEPENDS = "readline lua ncurses"
 
 SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://hiredis-use-default-CC-if-it-is-set.patch \
@@ -19,8 +19,8 @@ SRC_URI_append_mips = " file://remove-atomics.patch"
 SRC_URI_append_arm = " file://remove-atomics.patch"
 SRC_URI_append_powerpc = " file://remove-atomics.patch"
 
-SRC_URI[md5sum] = "48f240fd2d96b1b579300b866398edbc"
-SRC_URI[sha256sum] = "6447259d2eed426a949c9c13f8fdb2d91fb66d9dc915dd50db13b87f46d93162"
+SRC_URI[md5sum] = "96ae20ffd68b9daee24b702b754d89f3"
+SRC_URI[sha256sum] = "1e1e18420a86cfb285933123b04a82e1ebda20bfb0a289472745a087587e93a7"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
@@ -32,7 +32,7 @@ GROUPADD_PARAM_${PN} = "--system redis"
 REDIS_ON_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 
 do_compile_prepend() {
-    (cd deps && oe_runmake hiredis lua jemalloc linenoise)
+    (cd deps && oe_runmake hiredis lua linenoise)
 }
 
 do_install() {
