@@ -6,7 +6,7 @@ SECTION = "multimedia"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=79aa497b11564d1d419ee889e7b498f6"
 
-SRCREV = "6706c377820912f83c1838d9eb32950ca9e39ec7"
+SRCREV = "4b45db34ecd95b62ef2b66a8e5180c66ca791a21"
 SRC_URI = "git://github.com/MycroftAI/mycroft-core.git;branch=master \
            file://0001-Remove-python-venv.patch \
            file://0002-pip-requirements-Remove-ones-installed-by-OE.patch \
@@ -63,9 +63,10 @@ RDEPENDS_${PN} += "python3-pip \
                    python3-xxhash \
                  "
 
-# Mycroft uses Alsa and PulseAudio
+# Mycroft uses Alsa, PulseAudio and Flac
 RDEPENDS_${PN} += "alsa-oss alsa-utils alsa-plugins alsa-tools"
 RDEPENDS_${PN} += "pulseaudio pulseaudio-misc pulseaudio-server"
+RDEPENDS_${PN} += "flac"
 
 # Mycroft can do this itself on the target, but it's quicker to do it here
 RDEPENDS_${PN} += "mimic"
