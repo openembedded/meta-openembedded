@@ -1,6 +1,7 @@
-From aa02bbfd8f16871db5563a95fa94dd170964949f Mon Sep 17 00:00:00 2001
+From b62c4cd2295c98b2ebe12641e5f01590bd96ae94 Mon Sep 17 00:00:00 2001
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 Date: Tue, 17 Jul 2012 11:27:39 +0100
+Subject: [PATCH] apache2: do not use relative path for gen_test_char
 
 Upstream-Status: Inappropriate [embedded specific]
 
@@ -9,7 +10,7 @@ Upstream-Status: Inappropriate [embedded specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/server/Makefile.in b/server/Makefile.in
-index 1fa3344..cb11684 100644
+index f635d76..0d48924 100644
 --- a/server/Makefile.in
 +++ b/server/Makefile.in
 @@ -29,7 +29,7 @@ gen_test_char: $(gen_test_char_OBJECTS)
@@ -21,3 +22,6 @@ index 1fa3344..cb11684 100644
  
  util.lo: test_char.h
  
+-- 
+2.7.4
+
