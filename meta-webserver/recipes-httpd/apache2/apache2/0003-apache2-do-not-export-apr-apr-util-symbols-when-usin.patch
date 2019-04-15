@@ -1,7 +1,8 @@
-From a5627edbcc88cd50caaa42ca051ac7ed3d870172 Mon Sep 17 00:00:00 2001
+From ddd560024a6d526187fd126f306b59533ca3f7e2 Mon Sep 17 00:00:00 2001
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 Date: Tue, 17 Jul 2012 11:27:39 +0100
-Subject: [PATCH] apache2: add from OE-Classic, update to version 2.4.2 and fix
+Subject: [PATCH] apache2: do not export apr/apr-util symbols when using
+ shared libapr
 
 There is no need to "suck in" the apr/apr-util symbols when using
 a shared libapr{,util}, it just bloats the symbol table; so don't.
@@ -15,7 +16,7 @@ Note: EXPORT_DIRS change is conditional on using shared apr
  1 file changed, 3 deletions(-)
 
 diff --git a/server/Makefile.in b/server/Makefile.in
-index cb11684..0d48924 100644
+index 1fa3344..f635d76 100644
 --- a/server/Makefile.in
 +++ b/server/Makefile.in
 @@ -60,9 +60,6 @@ export_files:
@@ -28,3 +29,6 @@ index cb11684..0d48924 100644
  	) | sed -e s,//,/,g | sort -u > $@
  
  exports.c: export_files
+-- 
+2.7.4
+

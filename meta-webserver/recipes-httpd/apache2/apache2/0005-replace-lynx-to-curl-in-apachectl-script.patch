@@ -1,4 +1,4 @@
-From 94a9e2241ea27e75babbfdeb38043b13049e23b0 Mon Sep 17 00:00:00 2001
+From 7db1b650bb4b01a5194a34cd7573f915656a595b Mon Sep 17 00:00:00 2001
 From: Yulong Pei <Yulong.pei@windriver.com>
 Date: Thu, 1 Sep 2011 01:03:14 +0800
 Subject: [PATCH] replace lynx to curl in apachectl script
@@ -6,7 +6,6 @@ Subject: [PATCH] replace lynx to curl in apachectl script
 Upstream-Status: Inappropriate [configuration]
 
 Signed-off-by: Yulong Pei <Yulong.pei@windriver.com>
-
 ---
  support/apachectl.in | 14 ++++++++++----
  1 file changed, 10 insertions(+), 4 deletions(-)
@@ -48,3 +47,6 @@ index 3281c2e..6ab4ba5 100644
      ;;
  *)
      $HTTPD "$@"
+-- 
+2.7.4
+
