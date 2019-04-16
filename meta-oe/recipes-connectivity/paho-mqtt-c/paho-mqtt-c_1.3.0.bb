@@ -13,23 +13,16 @@ LIC_FILES_CHKSUM = " \
 
 SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http"
 
-SRCREV = "09fe0744e02f317b907e96dd5afcc02224ddbb85"
+SRCREV = "9f715d0862a8e16099b5837c4e53a1bf6a6a0675"
 
 DEPENDS = "openssl"
 
 S = "${WORKDIR}/git"
 
-TARGET_CC_ARCH += "${LDFLAGS}"
+inherit cmake
 
-do_install() {
-    install -d ${D}${libdir}
-    oe_libinstall -C build/output -so libpaho-mqtt3a ${D}${libdir}
-    oe_libinstall -C build/output -so libpaho-mqtt3as ${D}${libdir}
-    oe_libinstall -C build/output -so libpaho-mqtt3c  ${D}${libdir}
-    oe_libinstall -C build/output -so libpaho-mqtt3cs ${D}${libdir}
-    install -d ${D}${includedir}
-    install -m 644 src/MQTTAsync.h ${D}${includedir}
-    install -m 644 src/MQTTClient.h ${D}${includedir}
-    install -m 644 src/MQTTClientPersistence.h ${D}${includedir}
+do_install_append() {
+    # paho-mqtt installes some thing that we don't want.
+    rm -rf ${D}${prefix}/samples
+    find ${D}${prefix} -maxdepth 1 -type f -delete
 }
-
