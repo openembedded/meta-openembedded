@@ -3,9 +3,7 @@ HOMEPAGE = "http://linux-atm.sourceforge.net/"
 SECTION = "libs"
 LICENSE = "GPL-2.0 & LGPL-2.0"
 
-DEPENDS = "virtual/kernel flex flex-native"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+DEPENDS = "flex flex-native"
 
 SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
            file://link-with-ldflags.patch \
