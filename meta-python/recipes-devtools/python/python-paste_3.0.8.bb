@@ -5,8 +5,8 @@ RDEPENDS_${PN} = "python-six"
 
 LIC_FILES_CHKSUM = "file://docs/license.txt;md5=1798f29d55080c60365e6283cb49779c"
 
-SRC_URI[md5sum] = "4e93762f24fc728ecb4ddcff2693df39"
-SRC_URI[sha256sum] = "06aacf7a40685be0a0db8b26516e7d559d7fe5ccf7a47c5cd34f15ab558a8b92"
+SRC_URI[md5sum] = "0119f4e82b930781e3bcb59c77f7a353"
+SRC_URI[sha256sum] = "c4f13993e6ab4a38602cef298d876552083e8215685bb45abda7113f0dd48117"
 
 PYPI_PACKAGE = "Paste"
 inherit pypi setuptools
