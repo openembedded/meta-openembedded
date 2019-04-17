@@ -47,8 +47,9 @@ do_configure_prepend() {
 
 }
 do_install_append() {
-    # don't install empty /var/lock to avoid conflict with base-files
+    # don't install empty /var/lock and /var/run to avoid conflict with base-files
     rm -rf ${D}${localstatedir}/lock
+    rm -rf ${D}${localstatedir}/run
 }
 
 RDEPENDS_${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
