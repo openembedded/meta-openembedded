@@ -230,16 +230,13 @@ RDEPENDS_${PN}-python += "pytalloc python-tdb"
 FILES_${PN}-base = "${sbindir}/nmbd \
                     ${sbindir}/smbd \
                     ${sysconfdir}/init.d \
-                    ${localstatedir}/lib/samba \
-                    ${localstatedir}/nmbd \
-                    ${localstatedir}/spool/samba \
                     ${systemd_system_unitdir}/nmb.service \
                     ${systemd_system_unitdir}/smb.service"
 
 FILES_${PN}-ad-dc = "${sbindir}/samba \
                      ${systemd_system_unitdir}/samba.service \
                      ${libdir}/krb5/plugins/kdb/samba.so \
-                    "
+"
 RDEPENDS_${PN}-ad-dc = "krb5-kdc"
 
 FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
@@ -247,11 +244,14 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
                           ${sysconfdir}/ctdb/nodes \
                           ${datadir}/ctdb-tests \
                           ${datadir}/ctdb/tests \
+                          ${localstatedir}/lib/ctdb \
                          "
 
 FILES_${BPN}-common = "${sysconfdir}/default \
                        ${sysconfdir}/samba \
                        ${sysconfdir}/tmpfiles.d \
+                       ${localstatedir}/lib/samba \
+                       ${localstatedir}/spool/samba \
 "
 
 FILES_${PN} += "${libdir}/vfs/*.so \
