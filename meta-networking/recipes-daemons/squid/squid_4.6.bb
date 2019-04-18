@@ -38,16 +38,15 @@ DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
 inherit autotools pkgconfig useradd ptest perlnative
 
+LDFLAGS_append_mipsarch = " -latomic"
+LDFLAGS_append_powerpc = " -latomic"
+
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
 
-PACKAGECONFIG ??= "${@bb.utils.contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
-                   ${@bb.utils.contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
-                   ${@bb.utils.contains('TARGET_ARCH', 'mipsel', 'noatomics', '', d)} \
-                   ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
                   "
 PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
-PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[werror] = "--enable-strict-error-checking,--disable-strict-error-checking,"
 PACKAGECONFIG[esi] = "--enable-esi,--disable-esi,expat libxml2"
