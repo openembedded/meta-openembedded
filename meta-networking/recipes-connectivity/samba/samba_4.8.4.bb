@@ -107,6 +107,16 @@ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODU
 #
 SAMBA4_LIBS="heimdal,cmocka,ldb,pyldb-util,NONE"
 
+# interim packages: As long as ldb/pyldb-util are in SAMBA4_LIBS we need to pack
+# bundled libraries in seperate packages. Otherwise they are auto-packed in
+# package 'samba' which RDEPENDS on lots of packages not wanted e.g autostarting
+# nmbd/smbd daemons
+# Once 'ldb,pyldb-util' are removed from SAMBA4_LIBS the bundled packages can
+# be removed again.
+PACKAGES =+ "${PN}-bundled-ldb ${PN}-bundled-pyldb-util"
+FILES_${PN}-bundled-ldb = "${libdir}/samba/libldb${SOLIBS}"
+FILES_${PN}-bundled-pyldb-util = "${libdir}/samba/libpyldb-util${SOLIBS}"
+
 EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=/run \
                  --with-sockets-dir=/run/samba \
