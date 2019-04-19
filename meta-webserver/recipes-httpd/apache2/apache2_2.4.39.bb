@@ -184,11 +184,16 @@ CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
 
 # We override here rather than append so that .so links are
 # included in the runtime package rather than here (-dev)
-# and to get icons, error into the -dev package
-FILES_${PN}-dev = "${datadir}/${BPN}/icons \
+# and to get build, icons, error into the -dev package
+FILES_${PN}-dev = "${datadir}/${BPN}/build \
+                   ${datadir}/${BPN}/icons \
                    ${datadir}/${BPN}/error \
                    ${includedir}/${BPN} \
+                   ${bindir}/apxs \
                   "
+
+# Add the manual to -doc
+FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
 
 FILES_${PN}-scripts += "${bindir}/dbmmanage"
 
