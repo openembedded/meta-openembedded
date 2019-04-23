@@ -2,7 +2,7 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
 HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://hostapd/README;md5=8aa4e8c78b59b12016c4cb2d0a8db350"
+LIC_FILES_CHKSUM = "file://hostapd/README;md5=1ec986bec88070e2a59c68c95d763f89"
 
 DEPENDS = "libnl openssl"
 
@@ -11,18 +11,10 @@ SRC_URI = " \
     file://defconfig \
     file://init \
     file://hostapd.service \
-    file://0001-hostapd-Avoid-key-reinstallation-in-FT-handshake.patch \
-    file://0002-Prevent-reinstallation-of-an-already-in-use-group-ke.patch \
-    file://0003-Extend-protection-of-GTK-IGTK-reinstallation-of-WNM-.patch \
-    file://0004-Prevent-installation-of-an-all-zero-TK.patch \
-    file://0005-Fix-PTK-rekeying-to-generate-a-new-ANonce.patch \
-    file://0006-TDLS-Reject-TPK-TK-reconfiguration.patch \
-    file://0007-FT-Do-not-allow-multiple-Reassociation-Response-fram.patch \
-    file://hostapd-CVE-2018-14526.patch \
 "
 
-SRC_URI[md5sum] = "eaa56dce9bd8f1d195eb62596eab34c7"
-SRC_URI[sha256sum] = "01526b90c1d23bec4b0f052039cc4456c2fd19347b4d830d1d58a0a6aea7117d"
+SRC_URI[md5sum] = "ed2c254e5f400838cb9d8e7b6e43b86c"
+SRC_URI[sha256sum] = "929f522be6eeec38c53147e7bc084df028f65f148a3f7e4fa6c4c3f955cee4b0"
 
 S = "${WORKDIR}/hostapd-${PV}"
 B = "${WORKDIR}/hostapd-${PV}/hostapd"
