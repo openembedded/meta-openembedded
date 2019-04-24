@@ -8,11 +8,13 @@ number of bytes."
 HOMEPAGE = "http://www.nuttcp.net/Welcome%20Page.html"
 LICENSE = "GPL-2.0"
 SECTION = "net"
-LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=c55daba5a5a869a123c3565de07d15a6"
+LIC_FILES_CHKSUM = "file://${BP}.c;beginline=4;endline=30;md5=496a7c0bb83c07ff528d226bf85e05c5"
+
+UPSTREAM_CHECK_URI = "https://www.nuttcp.net/nuttcp/beta/"
 
 SRC_URI = "http://nuttcp.net/${BPN}/beta/${BP}.c"
-SRC_URI[md5sum] = "dfbff3c38fb0cbdc474ca6d13539d425"
-SRC_URI[sha256sum] = "d68e291a72375d76f301d54aa945727c95e78090aa6783a4844764e632e98a4a"
+SRC_URI[md5sum] = "d3c92c4d2f261221193c3726c1b9a42f"
+SRC_URI[sha256sum] = "8c5595bcd27c2fd66831be74c390df078cfb1870aa427f2511ac2586d236c8a1"
 
 S = "${WORKDIR}"
 
