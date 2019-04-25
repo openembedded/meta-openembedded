@@ -6,11 +6,14 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
 
 DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
 
-SRCREV = "bfc82d5242855628b826018479df00e0ec4e8360"
-PV = "1.7.0"
+SRCREV = "34e6ff6218bb0372eb545f886dec96dd3d20be47"
+PV = "1.7.1"
 
 SRC_URI = "\
     git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
+    file://0001-add-missing-etc-rrdcached-default-lsb.in-to-tarball-.patch \
+    file://0002-properly-add-etc-files-via-EXTRA_DIST-fixes-956-some.patch \
+    file://0003-Fixed-No-rule-to-make-target-etc-rrdcached.socket.patch \
 "
 
 S = "${WORKDIR}/git"
