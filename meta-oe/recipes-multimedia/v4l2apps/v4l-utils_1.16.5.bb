@@ -22,8 +22,8 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch \
            file://0003-v4l2-ctl-Do-not-use-getsubopt.patch \
            "
-SRC_URI[md5sum] = "21a6ec3605a1c3114c8ccb70a963c871"
-SRC_URI[sha256sum] = "f1b425584284bac378b76331c0671dc890bd7af49c03e8a6cc0c70e57eea0bad"
+SRC_URI[md5sum] = "de272817133c0dca000a78a5c8c8ec8b"
+SRC_URI[sha256sum] = "ed80242510385017a1dc566e17a285a77222bb301f5bc19386badfcc2c19df1b"
 
 EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
 
