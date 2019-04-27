@@ -8,10 +8,11 @@ DEPENDS = "openssl websocketpp zlib boost brotli"
 EXTRA_OECMAKE = "-DCPPREST_EXPORT_DIR=cmake -DCPPREST_EXCLUDE_BROTLI=OFF"
 
 SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=master \
-           file://1094.patch "
+           file://disable-float-tests.patch \
+           file://disable-outside-tests.patch "
 
-# tag 2.10.12
-SRCREV= "d4fb1cf7f7d22c12e2e442ba5a5e98d09b0a28ab"
+# tag 2.10.13
+SRCREV= "9d8f544001cb74544de6dc8c565592f7e2626d6e"
 
 S = "${WORKDIR}/git"
 
