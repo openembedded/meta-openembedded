@@ -81,6 +81,7 @@ PACKAGECONFIG[zeroconf] = "--enable-avahi,--disable-avahi,avahi"
 PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind,"
 PACKAGECONFIG[lttng] = "--with-lttng, --without-lttng,lttng-ust"
 PACKAGECONFIG[archive] = "--with-libarchive, --without-libarchive, libarchive"
+PACKAGECONFIG[libunwind] = ", , libunwind"
 
 # Building the AD (Active Directory) DC (Domain Controller) requires GnuTLS,
 # And ad-dc doesn't work with mitkrb5 for versions prior to 4.7.0 according to:
