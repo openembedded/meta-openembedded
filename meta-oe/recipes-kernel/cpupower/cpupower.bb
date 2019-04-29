@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
 DEPENDS = "pciutils gettext-native"
 PROVIDES = "virtual/cpupower"
 
-inherit kernelsrc kernel-arch
+inherit kernelsrc kernel-arch bash-completion
 
 do_populate_lic[depends] += "virtual/kernel:do_patch"
 
