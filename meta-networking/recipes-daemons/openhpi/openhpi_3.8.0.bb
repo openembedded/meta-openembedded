@@ -33,7 +33,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://openhpi-glib-cross-compile.patch \
            file://openhpi-linkfix.patch \
            file://openhpi-fix-host-gcc.patch \
-           file://openhpi-fix-testfail-errors.patch \
+           file://openhpi-fix-function-saHpiSensorThresholds.patch \
            file://openhpi-add-libnetsnmp-when-link.patch \
            file://openhpi-invalide-session.patch \
            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
