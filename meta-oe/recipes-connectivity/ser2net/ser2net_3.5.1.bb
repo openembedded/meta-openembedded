@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "e10e7c8c97e5bade5e85ce6e89bdf1f4"
-SRC_URI[sha256sum] = "ba9e1d60a89fd7ed075553b4a2074352902203f7fbd9b65b15048c05f0e3f3be"
+SRC_URI[md5sum] = "569267b37b8f507d8874f28f5334b5d2"
+SRC_URI[sha256sum] = "02f5dd0abbef5a17b80836b0de1ef0588e257106fb5e269b86822bfd001dc862"
 
 inherit autotools pkgconfig
 
