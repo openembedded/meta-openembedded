@@ -4,12 +4,11 @@ HOMEPAGE = "http://rocky.eld.leidenuniv.nl/joomla/index.php?option=com_content&v
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
 
-SRC_URI = "http://rocky.eld.leidenuniv.nl/arno-iptables-firewall/${BPN}_${PV}.tar.gz \
-          "
-SRC_URI[md5sum] = "77eba7f148bf2840a3e35a6f50c9c353"
-SRC_URI[sha256sum] = "0bafd85ddc235752250eaec0c7fdb21e530912483f6807a97f86158ed2d301f7"
+SRC_URI = "https://github.com/arno-iptables-firewall/aif/archive/${PV}.tar.gz"
+SRC_URI[md5sum] = "71271c08299aacd45ceb9c9400082d03"
+SRC_URI[sha256sum] = "e2c4fb88a25f0cae8308a3b2bb922b5e2f52f24d8309b24e15a527a6b326e703"
 
-S = "${WORKDIR}/${BPN}_${PV}"
+S = "${WORKDIR}/aif-${PV}"
 
 inherit systemd
 
