@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = " \
     dbus \
     dbus-glib \
-    dbus-glib-native \
     libnotify \
     libxfce4util \
     libxfce4ui \
@@ -15,8 +14,8 @@ DEPENDS = " \
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "4887c62dfcb4c3e4f45c9acfb3def515"
-SRC_URI[sha256sum] = "293dda084cfca4887ae740e2725fdfc64412bc10eac7a55a924eb14482dceac0"
+SRC_URI[md5sum] = "9614d4f7c0790e8ab24e55896a44a8ac"
+SRC_URI[sha256sum] = "090571acf94c423003426cb779fb23e8545c68bab6485563b589c7def8a21b55"
 
 # Avoid trouble with other desktops e.g KDE which also ships dbus service named
 # org.freedesktop.Notifications
