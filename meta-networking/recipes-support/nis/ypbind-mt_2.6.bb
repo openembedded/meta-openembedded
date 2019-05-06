@@ -16,7 +16,7 @@ the server which answered as first. \
 \
 This is the final IPv4-only version of ypbind-mt. \
 "
-HOMEPAGE = "http://www.linux-nis.org/nis/ypbind-mt/index.html"
+HOMEPAGE = "https://github.com/thkukuk/ypbind-mt/"
 DEPENDS = " \
            yp-tools \
            ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
@@ -28,13 +28,13 @@ RDEPENDS_${PN} += "yp-tools"
 # and is used in place of it.
 PROVIDES += "ypbind"
 
-SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+SRC_URI = "https://github.com/thkukuk/ypbind-mt/releases/download/v${PV}/${BPN}-${PV}.tar.xz \
            file://ypbind.init \
            file://ypbind.service \
            file://0001-dns_hosts-Fix-build-with-musl.patch \
            "
-SRC_URI[md5sum] = "1aeccd0d11c064d5d59c56941bca682b"
-SRC_URI[sha256sum] = "a2e1fa8fc992a12b289c229e00e38c20d59070c3bcf08babf40c692515c340e0"
+SRC_URI[md5sum] = "7cf89641fdc128d0919207e4b7caaf1d"
+SRC_URI[sha256sum] = "0696c0263c4fd48a4ff2ce6c109f05f37aab0f71646d81cb22c7c28591bf80eb"
 
 inherit systemd update-rc.d
 
