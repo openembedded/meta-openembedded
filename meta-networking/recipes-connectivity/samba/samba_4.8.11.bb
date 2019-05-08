@@ -23,7 +23,6 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://dnsserver-4.7.0.patch \
            file://smb_conf-4.7.0.patch \
            file://volatiles.03_samba \
-           file://0001-ldb-Refuse-to-build-Samba-against-a-newer-minor-vers.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://samba-pam.patch \
@@ -31,8 +30,8 @@ SRC_URI_append_libc-musl = " \
            file://cmocka-uintptr_t.patch \
           "
 
-SRC_URI[md5sum] = "ca5bfbebd8d9eb95506e16594b2bbee2"
-SRC_URI[sha256sum] = "f5044d149e01894a08b1d114b8b69aed78171a7bb19608bd1fd771453b9a5406"
+SRC_URI[md5sum] = "de61611075e97ea98140a42d9189d9a5"
+SRC_URI[sha256sum] = "d294a8d7455d7d252d7bafc9c474855ea6e0ebe559c3babcd303a5c24e58710a"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
 
@@ -93,7 +92,7 @@ PACKAGECONFIG[libunwind] = ", , libunwind"
 # We are now at 4.7.0, so take the above with a grain of salt. We do not need to know where
 # krb5kdc is unless ad-dc is enabled, but we tell configure anyhow.
 #
-PACKAGECONFIG[ad-dc] = ",--without-ad-dc,,"
+PACKAGECONFIG[ad-dc] = "--with-experimental-mit-ad-dc,--without-ad-dc,,"
 PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
 PACKAGECONFIG[mitkrb5] = "--with-system-mitkrb5 --with-system-mitkdc=/usr/sbin/krb5kdc,,krb5,"
 
