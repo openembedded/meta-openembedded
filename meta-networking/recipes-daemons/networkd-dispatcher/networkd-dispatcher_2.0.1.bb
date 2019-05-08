@@ -15,11 +15,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
 RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
 
-SRC_URI = "git://gitlab.com/craftyguy/networkd-dispatcher.git;protocol=https"
-SRCREV = "c7e25623a161b64618ea778541c064d2a1df086b"
-PV = "1.7+git${SRCPV}"
-
-S = "${WORKDIR}/git"
+SRC_URI = "https://gitlab.com/craftyguy/networkd-dispatcher/-/archive/${PV}/networkd-dispatcher-${PV}.tar.bz2"
+SRC_URI[md5sum] = "304d7dcc21331ea295e207f8493cb8d8"
+SRC_URI[sha256sum] = "21f84c3646a043329dc64787e4e58dfce592b2559b0e3069af82c469805660c2"
 
 # Nothing to build, just a python script to install
 do_configure[noexec] = "1"
