@@ -29,8 +29,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-Fix-string-overflow-in-snprintf.patch \
            file://0008-check-for-size-before-using-strncpy.patch \
            "
-SRC_URI[md5sum] = "45044fde0b35eac057a5fa05c27b8040"
-SRC_URI[sha256sum] = "230a0ea628ba278170a913746c39b2c8cd529d7dc25326b2e17b5c095cf94025"
+SRC_URI[md5sum] = "d9f44f778e23cf739085f74c5ff793b1"
+SRC_URI[sha256sum] = "5713fbe21c557c9a992af6805bc44521f2cf6cf950ae873036d9a81c73364b60"
 
 inherit autotools useradd systemd pkgconfig
 
