@@ -30,5 +30,3 @@ FILES_${PN} += " \
 FILES_${PN} += " \
     ${libdir}/xfce4/session/splash-engines/*.la \
 "
-
-RDEPENDS_${PN} += "machine-host"
