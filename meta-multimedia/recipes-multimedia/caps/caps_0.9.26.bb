@@ -4,14 +4,12 @@ LICENSE = "GPL-3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "http://quitte.de/dsp/${BPN}_${PV}.tar.bz2 \
-           file://Avoid-ambiguity-in-div-invocation.patch \
            file://0001-basic.h-Use-c99-supported-stdint-types.patch \
            file://append_ldflags.patch \
-           file://0001-Do-not-use-obsolete-pow10f-function.patch \
            "
 
-SRC_URI[md5sum] = "c1d634038dcb54702306c0e30cb1c626"
-SRC_URI[sha256sum] = "f746feba57af316b159f0169de5d78b4fd1064c2c0c8017cb5856b2f22e83f20"
+SRC_URI[md5sum] = "36b30c7c7db2d2bc5f4f54077e97b5ee"
+SRC_URI[sha256sum] = "e7496c5bce05abebe3dcb635926153bbb58a9337a6e423f048d3b61d8a4f98c9"
 
 EXTRA_OEMAKE = " \
     CC='${CXX}' \
