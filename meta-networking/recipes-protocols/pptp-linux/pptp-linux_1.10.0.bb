@@ -11,11 +11,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/sourceforge/pptpclient/pptp-${PV}.tar.gz \
            file://options.pptp \
-           file://0001-include-missing-sys-types.h.patch \
            "
 
-SRC_URI[md5sum] = "b2117b377f65294a9786f80f0235d308"
-SRC_URI[sha256sum] = "0b1e8cbfc578d3f5ab12ee87c5c2c60419abfe9cc445690a8a19c320b11c9201"
+SRC_URI[md5sum] = "8d25341352fdae5ad5b36b9f18254908"
+SRC_URI[sha256sum] = "82492db8e487ce73b182ee7f444251d20c44f5c26d6e96c553ec7093aefb5af4"
 
 S = "${WORKDIR}/pptp-${PV}"
 
