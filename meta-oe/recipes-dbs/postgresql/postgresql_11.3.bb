@@ -7,5 +7,5 @@ SRC_URI += "\
    file://0001-Add-support-for-RISC-V.patch \
 "
 
-SRC_URI[md5sum] = "19d43be679cb0d55363feb8926af3a0f"
-SRC_URI[sha256sum] = "2676b9ce09c21978032070b6794696e0aa5a476e3d21d60afc036dc0a9c09405"
+SRC_URI[md5sum] = "c2a729b754b8de86a969c86ec25db076"
+SRC_URI[sha256sum] = "2a85e082fc225944821dfd23990e32dfcd2284c19060864b0ad4ca537d30522d"
