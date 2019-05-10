@@ -4,10 +4,9 @@ BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
 
 SRC_URI = "http://fluentbit.io/releases/0.12/fluent-bit-${PV}.tar.gz \
            file://jemalloc.patch \
-           file://0001-fluent-bit-shared-Link-with-lpthread.patch \
            "
-SRC_URI[md5sum] = "6b4472cb7e7213a01425af9121576827"
-SRC_URI[sha256sum] = "8ec05365baea723033165687611b3bba3e67a77dce72e282e9f000f7acf9e37b"
+SRC_URI[md5sum] = "7c8708312ac9122faacf9e2a4751eb34"
+SRC_URI[sha256sum] = "23a81087edf0e2c6f2d49411c6a82308afc5224f67bbaa45729c057af62e9241"
 
 S = "${WORKDIR}/fluent-bit-${PV}"
 
