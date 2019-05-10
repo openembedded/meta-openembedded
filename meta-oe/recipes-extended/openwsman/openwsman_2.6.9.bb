@@ -15,15 +15,13 @@ DEPENDS = "curl libxml2 openssl libpam"
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-# v2.6.8
-SRCREV = "b9cd0b72534854abb6dd834c8c11e02111b4c8d7"
+# v2.6.9
+SRCREV = "5efb1545dbac7e6d1e0a992f3e84ca12cea1c18e"
 
 SRC_URI = "git://github.com/Openwsman/openwsman.git \
            file://libssl-is-required-if-eventint-supported.patch \
            file://openwsmand.service \
            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
-           file://0001-openSSL-1.1.0-API-fixes.patch \
-           file://0001-Adjust-for-CURLE_SSL_CACERT-deprecation-in-curl-7.62.patch \
            "
 
 S = "${WORKDIR}/git"
