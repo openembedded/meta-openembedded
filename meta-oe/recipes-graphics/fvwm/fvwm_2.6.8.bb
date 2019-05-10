@@ -2,7 +2,7 @@ SUMMARY = "F Virtual Window Manager "
 HOMEPAGE = "http://www.fvwm.org/"
 SECTION = "x11/wm"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=363fbcfb59124689af72c914560eaf6e"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f8204787357db6ea518dcc9b6cf08388"
 
 DEPENDS = " \
     bison-native \
@@ -31,15 +31,14 @@ DEPENDS = " \
     zlib \
 "
 
-PV = "2.6.7+git${SRCPV}"
+PV = "2.6.8"
 
 SRC_URI = " \
     git://github.com/fvwmorg/fvwm.git;protocol=https \
     file://0001-Fix-compilation-for-disabled-gnome.patch \
-    file://0002-Avoid-absolute-symlinks.patch \
 "
 
-SRCREV = "597a4e296da4f21e71a17facab297e016a3a80a8"
+SRCREV = "dc6a396bfe5cd6c53eb1df103c3af505d0899f90"
 
 S = "${WORKDIR}/git"
 
@@ -54,7 +53,6 @@ ALTERNATIVE_PRIORITY[x-window-manager] = "20"
 EXTRA_OECONF = " \
     --disable-bidi \
     --disable-fontconfigtest \
-    --disable-freetypetest \
     --disable-htmldoc \
     --disable-imlibtest \
     --disable-mandoc \
