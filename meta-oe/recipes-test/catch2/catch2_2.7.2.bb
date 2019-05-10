@@ -6,10 +6,9 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI = "git://github.com/catchorg/Catch2.git \
-           file://0001-Fix-Wdefaulted-function-deleted-warning.patch \
           "
-# v2.6.1
-SRCREV = "dbbab8727c342733f75045483048cdcb52421e32"
+# v2.7.2
+SRCREV = "7c37501b070c0e9ea9cdedbeac2059f0a6b0a8ab"
 
 S = "${WORKDIR}/git"
 
