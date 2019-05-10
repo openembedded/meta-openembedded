@@ -10,10 +10,9 @@ LIC_FILES_CHKSUM = "file://readme.md;beginline=21;endline=22;md5=3075b5727d36f29
 
 SRC_URI = " \
     git://github.com/g-truc/glm;branch=master \
-    file://0001-glm-Remove-redundant-double-semi-colons.patch \
 "
-# v0.9.9.3
-SRCREV = "9749727c2db4742369219e1d452f43e918734b4e"
+# v0.9.9.5
+SRCREV = "d162eee1e6f7c317a09229fe6ceab8ec6ab9a4b4"
 
 S = "${WORKDIR}/git"
 
