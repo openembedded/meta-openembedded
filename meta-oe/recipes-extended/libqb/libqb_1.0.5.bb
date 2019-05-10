@@ -9,11 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
 
 inherit autotools pkgconfig
 
-PV .= "+git${SRCPV}"
-
-# v1.0.3
-SRCREV = "28dff090c74b6ba8609c4797294a5afe3fe73987"
-SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
+# v1.0.5
+SRCREV = "d08dbcf08b0da418bce9b5427dfd89522916322a"
+SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=version_1 \
            file://0001-build-fix-configure-script-neglecting-re-enable-out-.patch \
           "
 S = "${WORKDIR}/git"
