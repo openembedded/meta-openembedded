@@ -1,5 +1,5 @@
 SUMMARY = "A full-featured SSL VPN solution via tun device."
-HOMEPAGE = "http://openvpn.sourceforge.net"
+HOMEPAGE = "https://openvpn.net/"
 SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7aee596ed2deefe3e8a861e24292abba"
@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
            file://openvpn@.service \
            file://openvpn-volatile.conf"
 
-SRC_URI[md5sum] = "971d57e29b78b4b902eb2f4aae2f05a7"
-SRC_URI[sha256sum] = "738dbd37fcf8eb9382c53628db22258c41ba9550165519d9200e8bebaef4cbe2"
+SRC_URI[md5sum] = "9d67cabc9b0441062ebd4e12bb7dfedb"
+SRC_URI[sha256sum] = "73dce542ed3d6f0553674f49025dfbdff18348eb8a25e6215135d686b165423c"
 
 SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
 SYSTEMD_AUTO_ENABLE = "disable"
