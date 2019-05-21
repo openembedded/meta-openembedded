@@ -7,7 +7,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 S = "${WORKDIR}/git"
-SRCREV = "8348808a7869ca8f25a5b5deeaa418c2f6d52758"
+SRCREV = "c3ee70c878b9c5833a77a1f339f1ca4dc6f225c5"
 SRC_URI = "\
     git://github.com/nmav/ipcalc.git;protocol=https; \
     file://0001-Makefile-pass-extra-linker-flags.patch \
