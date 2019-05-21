@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=a194eaefae2be54ee3221339b10d0581"
 
 PR = "r10"
 
-SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
+SRC_URI = "https://dianne.skoll.ca/projects/rp-pppoe/download/rp-pppoe-${PV}.tar.gz \
            file://top-autoconf.patch \
            file://configure_in_cross.patch \
-           file://pppoe-src-restrictions.patch \
            file://update-config.patch \
            file://dont-swallow-errors.patch \
            file://discard-use-of-dnl-in-Makefile.am.patch \
@@ -22,8 +21,8 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
            file://0002-Enable-support-for-the-kernel-module.patch \
            "
 
-SRC_URI[md5sum] = "216eb52b69062b92a64ee37fd71f4b66"
-SRC_URI[sha256sum] = "00794e04031546b0e9b8cf286f2a6d1ccfc4a621b2a3abb2d7ef2a7ab7cc86c2"
+SRC_URI[md5sum] = "ec9dccd9a367a1f71f2dc81069796dd8"
+SRC_URI[sha256sum] = "8cd6bc71ba46bd5f6eb4daf60220ccdcd991a8525111dee466501b1b9717e676"
 
 inherit autotools-brokensep update-rc.d systemd
 
