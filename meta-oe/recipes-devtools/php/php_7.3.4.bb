@@ -11,6 +11,7 @@ SRC_URI_append_class-target = " \
                                 file://pear-makefile.patch \
                                 file://phar-makefile.patch \
                                 file://0001-opcache-config.m4-enable-opcache.patch \
+                                file://xfail_two_bug_tests.patch \
                                 "
 
 SRC_URI[md5sum] = "efb58aea95a66738d871f83ec55fec6f"
