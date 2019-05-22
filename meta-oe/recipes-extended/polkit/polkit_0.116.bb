@@ -23,12 +23,11 @@ PACKAGECONFIG[consolekit] = ",,,consolekit"
 
 PAM_SRC_URI = "file://polkit-1_pam.patch"
 SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
-           file://0001-make-netgroup-support-configurable.patch \
            ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
-           file://0001-backend-Compare-PolkitUnixProcess-uids-for-temporary.patch \
+           file://0003-make-netgroup-support-optional.patch \
            "
-SRC_URI[md5sum] = "f03b055d6ae5fc8eac76838c7d83d082"
-SRC_URI[sha256sum] = "2f87ecdabfbd415c6306673ceadc59846f059b18ef2fce42bac63fe283f12131"
+SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
+SRC_URI[sha256sum] = "88170c9e711e8db305a12fdb8234fac5706c61969b94e084d0f117d8ec5d34b1"
 
 EXTRA_OECONF = "--with-os-type=moblin \
                 --disable-man-pages \
