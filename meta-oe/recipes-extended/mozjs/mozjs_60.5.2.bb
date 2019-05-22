@@ -1,9 +1,9 @@
 SUMMARY = "SpiderMonkey is Mozilla's JavaScript engine written in C/C++"
 HOMEPAGE = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey"
 LICENSE = "MPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=dc9b6ecd19a14a54a628edaaf23733bf"
 
-SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.9.1.orig.tar.xz \
+SRC_URI = "https://dev.gentoo.org/~axs/distfiles/mozjs-60.5.2.tar.bz2 \
            file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
            file://0010-fix-cross-compilation-on-i586-targets.patch \
            file://0001-do-not-create-python-environment.patch \
@@ -11,29 +11,31 @@ SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/m/mozjs52/mozjs52_52.9.1.o
            file://0003-workaround-autoconf-2.13-detection-failed.patch \
            file://0004-do-not-use-autoconf-2.13-to-refresh-old.configure.patch \
            file://0005-fix-do_compile-failed-on-mips.patch \
-           file://disable-mozglue-in-stand-alone-builds.patch \
            file://add-riscv-support.patch \
            file://0001-mozjs-fix-coredump-caused-by-getenv.patch \
            file://format-overflow.patch \
-           file://JS_PUBLIC_API.patch \
            file://0001-To-fix-build-error-on-arm32BE.patch \
+           file://JS_PUBLIC_API.patch \
+           file://0001-riscv-Disable-atomic-operations.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://0006-support-musl.patch \
+           file://0001-js-Fix-build-with-musl.patch \
            "
 SRC_URI_append_mipsarchn32 = " \
            file://0001-fix-compiling-failure-on-mips64-n32-bsp.patch \
            "
-
-SRC_URI[md5sum] = "c9473c625ee0a9edaaac8b742ff24c5f"
-SRC_URI[sha256sum] = "f9324a6724233ab15f10381fe13e635e89d725ef1e78025a0a7d36c58a84a0f9"
+SRC_URI[md5sum] = "023ed014e9e93d01620d121bc06a3589"
+SRC_URI[sha256sum] = "f51039c997415fd0f13f8e01966b4a8ff80cbf90deb8b14c18827104a369cc0d"
 
 inherit autotools pkgconfig perlnative pythonnative
 
 inherit distro_features_check
 CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
 
-DEPENDS += "nspr zlib"
+DEPENDS += "nspr zlib python-six-native python-pytoml-native \
+            python-jsmin-native python-futures-native \
+            python-which-native"
 
 # Disable null pointer optimization in gcc >= 6
 # https://bugzilla.redhat.com/show_bug.cgi?id=1328045
@@ -47,9 +49,14 @@ EXTRA_OECONF = " \
     --prefix=${prefix} \
     --libdir=${libdir} \
     --disable-tests --disable-strip --disable-optimize \
+    --disable-jemalloc \
     --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
 "
+
+EXTRA_OECONF_append_mipsarch = " --disable-ion"
+EXTRA_OECONF_append_riscv64 = " --disable-ion"
+EXTRA_OECONF_append_riscv32 = " --disable-ion"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
 PACKAGECONFIG[x11] = "--x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--x-includes=no --x-libraries=no,virtual/libx11"
@@ -105,7 +112,7 @@ do_install_prepend() {
 
 PACKAGES =+ "lib${BPN}"
 FILES_lib${BPN} += "${libdir}/lib*.so"
-FILES_${PN}-dev += "${bindir}/js52-config"
+FILES_${PN}-dev += "${bindir}/js60-config"
 
 # Fails to build with thumb-1 (qemuarm)
 #| {standard input}: Assembler messages:
