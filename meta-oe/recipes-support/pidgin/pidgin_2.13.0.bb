@@ -13,8 +13,8 @@ SRC_URI = "\
     file://pidgin-cross-python-265.patch \
 "
 
-SRC_URI[md5sum] = "8287400c4e5663e0e7844e868d5152af"
-SRC_URI[sha256sum] = "8c3d3536d6d3c971bd433ff9946678af70a0f6aa4e6969cc2a83bb357015b7f8"
+SRC_URI[md5sum] = "423403494fe1951e47cc75231f743bb0"
+SRC_URI[sha256sum] = "2747150c6f711146bddd333c496870bfd55058bab22ffb7e4eb784018ec46d8f"
 
 PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
