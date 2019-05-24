@@ -3,20 +3,20 @@ DESCRIPTION = "Kea is the next generation of DHCP software developed by ISC. It 
 HOMEPAGE = "http://kea.isc.org"
 SECTION = "connectivity"
 LICENSE = "MPL-2.0 & Apache-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=1666a9c4bb55adbc8939d85643096bd3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=2ed44ce4e0bbfdc1abfa6bf949b7ba3a"
 
 DEPENDS += "kea-native"
 
 SRC_URI = "\
     http://ftp.isc.org/isc/kea/${PV}/${BP}.tar.gz \
     file://0003-Makefile.am-update-hooksdir-for-lease_cmds.patch \
-    file://0001-Fix-error-call-of-overloaded-distance-is-ambiguous.patch \
+    file://0001-remove-AC_TRY_RUN.patch \
     file://kea-dhcp4.service \
     file://kea-dhcp6.service \
     file://kea-dhcp-ddns.service \
 "
-SRC_URI[md5sum] = "26eedd749101642757d788431605aaa5"
-SRC_URI[sha256sum] = "c0f8ecb93657adfc5ab970c91706754e601084828493f053f159661d21b31128"
+SRC_URI[md5sum] = "591d38e5fcc0251a8812e8bb1337578a"
+SRC_URI[sha256sum] = "edce4fab68ca7af607cf7f5bc86596e04fe0ef4b8e88906e339cdefcf21daaec"
 
 inherit autotools systemd
 
