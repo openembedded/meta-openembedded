@@ -18,6 +18,7 @@ SRC_URI = "http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
            file://0001-Make-udev-rules-directory-configurable.patch \
            file://0001-include-sys-sysmacros.h.patch \
            file://0001-tools-Install-bash_completion-script-in-etc-bash_com.patch \
+           file://0001-udisks-helper-Use-sh-interpreter-instead-of-bash.patch \
            "
 
 SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
