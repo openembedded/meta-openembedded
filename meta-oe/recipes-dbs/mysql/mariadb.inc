@@ -18,8 +18,8 @@ SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
            file://change-cc-to-cc-version.patch \
            file://0001-disable-ucontext-on-musl.patch \
           "
-SRC_URI[md5sum] = "6375d577e9539b839f44d857e70f82b9"
-SRC_URI[sha256sum] = "56a365af71b8a9ec8bfee0801e2dec95011da8ee7507986ca329be11296411db"
+SRC_URI[md5sum] = "03968ae08cff3038e2420921ef257550"
+SRC_URI[sha256sum] = "c103f3c54741b296980d6be48b221340eebaa97c6bd95a02fd8d530a5df5c343"
 
 UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
 
