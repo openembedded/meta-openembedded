@@ -2,14 +2,15 @@ SUMMARY = "Library for using PKCS"
 DESCRIPTION = "\
 Libp11 is a library implementing a small layer on top of PKCS \
 make using PKCS"
-HOMEPAGE = "http://www.opensc-project.org/libp11"
+HOMEPAGE = "https://github.com/OpenSC/libp11"
+BUGTRACKER = "https://github.com/OpenSC/libp11/issues"
 SECTION = "Development/Libraries"
 LICENSE = "LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
 DEPENDS = "libtool openssl"
 
 SRC_URI = "git://github.com/OpenSC/libp11.git"
-SRCREV = "64569a391897bd29c5060b19fa4613e619e59277"
+SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
 
 S = "${WORKDIR}/git"
 
