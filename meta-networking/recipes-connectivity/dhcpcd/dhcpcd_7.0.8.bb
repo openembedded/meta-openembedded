@@ -21,6 +21,9 @@ PACKAGECONFIG ?= "udev ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 PACKAGECONFIG[udev] = "--with-udev,--without-udev,udev,udev"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6"
 
-EXTRA_OECONF = "--enable-ipv4"
+EXTRA_OECONF = " \
+	--enable-ipv4 \
+	--sbindir=${base_sbindir} \
+"
 
 FILES_${PN}-dbg += "${libdir}/dhcpcd/dev/.debug"
