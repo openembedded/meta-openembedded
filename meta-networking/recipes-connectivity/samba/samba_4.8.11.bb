@@ -41,6 +41,9 @@ RDEPENDS_${PN}_remove = "perl"
 
 DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libbsd libaio libpam"
 
+RCONFLICTS_${PN} = "libldb"
+RCONFLICTS_${PN}-python = "pyldb"
+
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
