@@ -30,8 +30,8 @@ SRC_URI_append_libc-musl = " \
            file://cmocka-uintptr_t.patch \
           "
 
-SRC_URI[md5sum] = "de61611075e97ea98140a42d9189d9a5"
-SRC_URI[sha256sum] = "d294a8d7455d7d252d7bafc9c474855ea6e0ebe559c3babcd303a5c24e58710a"
+SRC_URI[md5sum] = "25de700c8f1148fd13973a49a51c059e"
+SRC_URI[sha256sum] = "c162d519101e15d1a1d76df063bfefe8d1656f57fb74e1ef19fe05d341a65d8f"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
 
