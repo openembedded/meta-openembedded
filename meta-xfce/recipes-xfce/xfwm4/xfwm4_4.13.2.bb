@@ -8,8 +8,8 @@ inherit xfce update-alternatives distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "1a78bcc2100c03f6fea0dbce0ca813cf"
-SRC_URI[sha256sum] = "75ebc20d313cff4905e76fc320254c30461dbfa985461b8e75dca04770cedf12"
+SRC_URI[md5sum] = "aee4a8375beeae09715e77479610ff02"
+SRC_URI[sha256sum] = "7be8a63e92077e42e6cc064a1dfdae608ab99fdc730adbd5200802dbdd86d5a9"
 
 PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
