@@ -12,8 +12,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS += "gtk+3 glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
            libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
 
-SRC_URI[md5sum] = "17f0e6464ad6b3bc6a657f595bf91430"
-SRC_URI[sha256sum] = "1ea825452343b895566068018b6d5078608f8f46ce8075ba6bbb4b848f48656b"
+SRC_URI[md5sum] = "2a49be4eca78fb519984db5aae38e4ab"
+SRC_URI[sha256sum] = "66ac34b33a2021b5af04c0181dfab6e6ee2bfab0ae07ed4527ca4552a66e1c01"
 
 EXTRA_OECONF = " \
     --enable-network-manager \
@@ -27,7 +27,7 @@ PACKAGES += "xfce4-powermanager-plugin"
 
 FILES_${PN} += " \
     ${datadir}/polkit-1 \
-    ${datadir}/appdata \
+    ${datadir}/metainfo \
 "
 
 FILES_xfce4-powermanager-plugin = " \
