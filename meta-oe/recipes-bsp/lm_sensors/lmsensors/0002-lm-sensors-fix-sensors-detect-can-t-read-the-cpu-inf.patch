@@ -1,8 +1,8 @@
-From dd9b40c54f160a44f1d78e5946d4cd00a8852802 Mon Sep 17 00:00:00 2001
+From 26742544bc9f136093b6be78259f4a891870aa3c Mon Sep 17 00:00:00 2001
 From: Dengke Du <dengke.du@windriver.com>
 Date: Wed, 21 Sep 2016 03:17:32 -0400
-Subject: [PATCH] lm-sensors: fix sensors-detect can't read the cpu information
- on fsl-t4xxx
+Subject: [PATCH 2/2] lm-sensors: fix sensors-detect can't read the cpu
+ information on fsl-t4xxx
 
 This is because two reasons:
 
@@ -28,10 +28,10 @@ Signed-off-by: Dengke Du <dengke.du@windriver.com>
  1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/prog/detect/sensors-detect b/prog/detect/sensors-detect
-index 5f62405..ae4def1 100755
+index 68594cd7..efe2c1af 100755
 --- a/prog/detect/sensors-detect
 +++ b/prog/detect/sensors-detect
-@@ -2833,6 +2833,7 @@ sub kernel_version_at_least
+@@ -3088,6 +3088,7 @@ sub kernel_version_at_least
  # model name and stepping, directly taken from /proc/cpuinfo.
  use vars qw(@cpu);
  
@@ -39,7 +39,7 @@ index 5f62405..ae4def1 100755
  sub initialize_cpu_list
  {
  	local $_;
-@@ -2848,7 +2849,7 @@ sub initialize_cpu_list
+@@ -3103,7 +3104,7 @@ sub initialize_cpu_list
  			};
  			next;
  		}
@@ -48,7 +48,7 @@ index 5f62405..ae4def1 100755
  			my $k = $1;
  			my $v = $2;
  			$v =~ s/\s+/ /g;	# Merge multiple spaces
-@@ -2861,12 +2862,20 @@ sub initialize_cpu_list
+@@ -3116,12 +3117,20 @@ sub initialize_cpu_list
  	push @cpu, $entry if scalar keys(%{$entry}); # Last entry
  }
  
@@ -70,5 +70,5 @@ index 5f62405..ae4def1 100755
  		print "# Processor: There isn't enough cpu info for this arch!!!\n";
  	}
 -- 
-2.8.1
+2.21.0
 
