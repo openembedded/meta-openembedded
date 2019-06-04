@@ -26,4 +26,6 @@ do_configure_prepend() {
 RDEPENDS_${PN} = " \
     ${PYTHON_PN}-pprint \
     ${PYTHON_PN}-threading \
+    ${PYTHON_PN}-pyasn1 \
+    ${PYTHON_PN}-pyasn1-modules \
 "
