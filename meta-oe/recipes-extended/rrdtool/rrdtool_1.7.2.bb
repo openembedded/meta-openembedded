@@ -2,18 +2,15 @@ SUMMARY = "High performance data logging and graphing system for time series dat
 HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39df84cfd8a5e18bf988f277f7946676"
 
 DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
 
-SRCREV = "34e6ff6218bb0372eb545f886dec96dd3d20be47"
-PV = "1.7.1"
+SRCREV = "56a83f4f52e6745cd4352f9ee008be3183a6dedf"
+PV = "1.7.2"
 
 SRC_URI = "\
     git://github.com/oetiker/rrdtool-1.x.git;branch=master;protocol=http; \
-    file://0001-add-missing-etc-rrdcached-default-lsb.in-to-tarball-.patch \
-    file://0002-properly-add-etc-files-via-EXTRA_DIST-fixes-956-some.patch \
-    file://0003-Fixed-No-rule-to-make-target-etc-rrdcached.socket.patch \
 "
 
 S = "${WORKDIR}/git"
