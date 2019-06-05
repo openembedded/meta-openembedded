@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 SECTION = "console/tests"
 
 SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
-SRC_URI[md5sum] = "a3d9e81f5abc1921d3aaf710ac4f4046"
-SRC_URI[sha256sum] = "acb9dfcf4a3452aaf82cce59ccc04fa4cf51a43617a6cca9d1f9c5c670a5655d"
+SRC_URI[md5sum] = "08fc81d25a1c24c7b091ac78ef145da6"
+SRC_URI[sha256sum] = "d6feeeafb6d636667480b6fbfd2a6537e3b354b2c7c72305784d14d38ab4bcd0"
 
 S = "${WORKDIR}/phoronix-test-suite"
 
