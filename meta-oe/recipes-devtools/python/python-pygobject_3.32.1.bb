@@ -4,6 +4,7 @@ SECTION = "devel/python"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
 
+GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gobject-introspection distutils-base upstream-version-is-even
 
 DEPENDS += "python glib-2.0"
@@ -13,16 +14,19 @@ SRC_URI = " \
     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
 "
 
-SRC_URI[md5sum] = "3bac63c86bb963aa401f97859464aa90"
-SRC_URI[sha256sum] = "3dd3e21015d06e00482ea665fc1733b77e754a6ab656a5db5d7f7bfaf31ad0b0"
+SRC_URI[md5sum] = "9d5dbca10162dd9b0d03fed0c6cf865d"
+SRC_URI[sha256sum] = "32c99def94b8dea5ce9e4bc99576ef87591ea779b4db77cfdca7af81b76d04d8"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
+UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+
+PACKAGECONFIG[cairo] = "-Dpycairo=true,-Dpycairo=false, cairo python-pycairo, python-pycairo"
+PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
+
+
 BBCLASSEXTEND = "native"
-
-EXTRA_OECONF = "--disable-cairo"
-
-RDEPENDS_${PN} += "python-setuptools"
+RDEPENDS_${PN} = "python-setuptools"
 RDEPENDS_${PN}_class-native = ""
 
 do_install_append() {
