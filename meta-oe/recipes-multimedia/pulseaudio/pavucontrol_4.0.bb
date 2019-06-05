@@ -2,19 +2,17 @@ DESCRIPTION = "PulseAudio Volume Control (pavucontrol) is a simple GTK based vol
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "intltool-native gtkmm libcanberra pulseaudio"
+DEPENDS = "intltool-native gtkmm3 libcanberra pulseaudio"
 
 inherit gnome distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz \
-           file://0001-build-sys-Use-C-11-for-building.patch \
-           file://0002-build-sys-Add-m4-file-for-AX_CXX_COMPILE_STDCXX_11.patch \
           "
-SRC_URI[md5sum] = "176308d2c03f8f3a7b2bd4f4d284fe71"
-SRC_URI[sha256sum] = "b3d2ea5a25fc88dcee80c396014f72df1b4742f8cfbbc5349c39d64a0d338890"
+SRC_URI[md5sum] = "9dcc2c76292e7e5e075d51b8dcb20202"
+SRC_URI[sha256sum] = "8fc45bac9722aefa6f022999cbb76242d143c31b314e2dbb38f034f4069d14e2"
 
-EXTRA_OECONF = " --disable-gtk3 --disable-lynx "
+EXTRA_OECONF = "--disable-lynx "
 
 RDEPENDS_${PN} += "pulseaudio-server"
