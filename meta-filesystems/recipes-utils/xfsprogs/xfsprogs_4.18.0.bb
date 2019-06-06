@@ -67,4 +67,7 @@ do_install_append() {
         oe_runmake 'DESTDIR=${D}' install-dev
         rm ${D}${libdir}/*.la
         rmdir --ignore-fail-on-non-empty ${D}${libdir}
+
+        ln -sf -r ${D}${libdir}/libhandle.a ${D}${base_libdir}/libhandle.a
+        ln -sf -r ${D}${base_libdir}/libhandle.so ${D}${libdir}/libhandle.so
 }
