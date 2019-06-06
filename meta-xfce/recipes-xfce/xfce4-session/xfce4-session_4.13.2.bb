@@ -2,8 +2,19 @@ SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
 SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
-DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck3 dbus dbus-glib xfconf polkit"
-RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower xrdb"
+
+DEPENDS = " \
+    dbus \
+    dbus-glib \
+    gtk+ \
+    libwnck3 \
+    libsm \
+    libxfce4ui \
+    libxfce4util \
+    polkit \
+    virtual/libx11 \
+    xfconf \
+"
 
 inherit xfce update-alternatives distro_features_check
 
@@ -25,4 +36,13 @@ FILES_${PN} += " \
     ${datadir}/xsessions \
     ${datadir}/themes/Default/balou/* \
     ${datadir}/polkit-1 \
+"
+
+RDEPENDS_${PN} = " \
+    dbus-x11 \
+    iceauth \
+    netbase \
+    upower \
+    xinit \
+    xrdb \
 "
