@@ -3,7 +3,7 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck3 dbus dbus-glib xfconf polkit"
-RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower"
+RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower xrdb"
 
 inherit xfce update-alternatives distro_features_check
 
