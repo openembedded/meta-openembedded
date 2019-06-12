@@ -12,8 +12,8 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
 PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
-SRC_URI[md5sum] = "235eaf7d27db3c3679b2054361ff6181"
-SRC_URI[sha256sum] = "86bde596a038d6fde619b49d785c0ebf0b3eaa7001a39dbe9316bd5392d221d0"
+SRC_URI[md5sum] = "9ef42650960fa71671dc5318841a27a9"
+SRC_URI[sha256sum] = "1143defce62e391b241252ffdb6e5c1ded56cfe26d46ee81b796abe0ccc45df9"
 
 inherit autotools gettext pkgconfig
 
