@@ -24,6 +24,7 @@ SRC_URI = " \
     git://anongit.freedesktop.org/spice/spice;name=spice \
     git://anongit.freedesktop.org/spice/spice-common;destsuffix=git/subprojects/spice-common;name=spice-common \
     file://0001-Convert-pthread_t-to-be-numeric.patch \
+    file://0001-Fix-compile-errors-on-Linux-32bit-system.patch \
 "
 
 S = "${WORKDIR}/git"
