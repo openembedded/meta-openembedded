@@ -38,6 +38,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
+    file://0014-Fix-new-warnings-from-gcc9.patch;patchdir=.. \
 "
 # stable-10.3.5
 SRCREV = "f2ff192717375b95a6b7e278fb47dbb3d3bc56d1"
