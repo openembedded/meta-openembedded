@@ -9,12 +9,11 @@ DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://remove_flags_from_build_flags.patch \
            file://0001-build-Check-for-sync_file_range-libc-function.patch \
-           file://disable-xfs_scrub-build.patch \
            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
            "
-SRC_URI[md5sum] = "5f80b631b68df89a8b9283307e96d2e8"
-SRC_URI[sha256sum] = "397dc96f51aeeff73d021d3418d3172377b2685f2740ca60525096c070aa3df1"
+SRC_URI[md5sum] = "b6acc4aa93a952595fc8f2e7447be6f2"
+SRC_URI[sha256sum] = "fcc2e6478aed55408a341567c0459f514e575296d8827d9004cae8aa0367dc4a"
 
 inherit autotools-brokensep
 
@@ -31,6 +30,7 @@ FILES_${PN}-repair = "${base_sbindir}/xfs_repair"
 FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
 
 EXTRA_OECONF = "--enable-gettext=no \
+                --enable-scrub=no \
                 INSTALL_USER=root \
                 INSTALL_GROUP=root \
                 ac_cv_header_aio_h=yes \
