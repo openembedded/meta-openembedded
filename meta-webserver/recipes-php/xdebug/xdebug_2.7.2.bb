@@ -6,8 +6,8 @@ DEPENDS = "php re2c-native"
 
 SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
 
-SRC_URI[md5sum] = "e8cabe003d6990b157d0d8caee374844"
-SRC_URI[sha256sum] = "5aa6d1772937e9f11b91ad8ced586aa0e16281dc178c405ac380d45d4731f8b0"
+SRC_URI[md5sum] = "5d1a8ca3101df93938d283933f256493"
+SRC_URI[sha256sum] = "b0f3283aa185c23fcd0137c3aaa58554d330995ef7a3421e983e8d018b05a4a6"
 
 UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
 
