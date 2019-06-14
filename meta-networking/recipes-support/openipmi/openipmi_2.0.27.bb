@@ -13,6 +13,7 @@ DEPENDS = " \
     popt \
     python \
     swig-native \
+    readline \
     "
 
 LICENSE = "GPLv2 & LGPLv2.1 & BSD"
@@ -27,16 +28,16 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://openipmi-no-openipmigui-man.patch \
            file://openipmi-remove-host-path-from-la_LDFLAGS.patch \
            file://ipmi-init-fix-the-arguments.patch \
-           file://do-not-install-pyc-and-pyo.patch \
            file://include_sys_types.patch \
-           file://openipmigui-not-compile-pyc-pyo.patch \
+           file://ipmi_serial_bmc_emu.c-include-readline.h-from-readli.patch \
            file://openipmi-helper \
            file://ipmi.service \
            "
 
 S = "${WORKDIR}/OpenIPMI-${PV}"
-SRC_URI[md5sum] = "1461ac4d78fc516646fd0a6e605a8b05"
-SRC_URI[sha256sum] = "f0f1a0ec732409930b7a31a6daa6cf39b585f52059b62a5f092b7ece21aa75a5"
+
+SRC_URI[md5sum] = "d525ceaa07df5440674e7e68a6772fe7"
+SRC_URI[sha256sum] = "f3b1fafaaec2e2bac32fec5a86941ad8b8cb64543470bd6d819d7b166713d20b"
 
 inherit autotools-brokensep pkgconfig pythonnative perlnative update-rc.d systemd cpan-base
 
