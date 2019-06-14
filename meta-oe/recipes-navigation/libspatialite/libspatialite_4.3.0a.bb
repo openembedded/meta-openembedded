@@ -6,7 +6,10 @@ DEPENDS = "proj geos sqlite3 libxml2 zlib"
 LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
 
-SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz"
+SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz \
+           file://geos-config.patch"
+SRC_URI[md5sum] = "6b380b332c00da6f76f432b10a1a338c"
+SRC_URI[sha256sum] = "88900030a4762904a7880273f292e5e8ca6b15b7c6c3fb88ffa9e67ee8a5a499"
 
 inherit autotools pkgconfig
 
@@ -16,8 +19,3 @@ EXTRA_OECONF = "--enable-freexl=no"
 PACKAGES += "${PN}-plugin"
 INSANE_SKIP_${PN}-plugin = "dev-so"
 FILES_${PN}-plugin += "${libdir}/mod_*"
-
-SRC_URI[md5sum] = "83305ed694a77152120d1f74c5151779"
-SRC_URI[sha256sum] = "9f138a6854740c7827fdee53845eb1485fce3e805a7aa9fc9151f8046ebd312d"
-
-SRC_URI += "file://geos-config.patch"
