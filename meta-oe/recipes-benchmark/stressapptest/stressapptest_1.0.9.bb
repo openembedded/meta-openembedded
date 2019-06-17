@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
 
 SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz \
            file://libcplusplus-compat.patch \
+           file://read_sysfs_for_cachesize.patch \
           "
 
 SRC_URI[md5sum] = "d3a526c174c049dd7a1068dc74a62be2"
