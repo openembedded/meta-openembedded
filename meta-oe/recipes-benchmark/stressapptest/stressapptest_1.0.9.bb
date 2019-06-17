@@ -9,7 +9,9 @@ SECTION = "benchmark"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=55ea9d559f985fb4834317d8ed6b9e58"
 
-SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
+SRC_URI = "https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz \
+           file://libcplusplus-compat.patch \
+          "
 
 SRC_URI[md5sum] = "d3a526c174c049dd7a1068dc74a62be2"
 SRC_URI[sha256sum] = "2ba470587ad4f6ae92057d427c3a2a2756e5f10bd25cd91e62eaef55a40b30a1"
