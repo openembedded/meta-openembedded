@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
           "
-# v9.8.0
-SRCREV_drbd-utils = "c30216b49330216bf8a567b7727da6e24f099f08"
-SRCREV_drbd-headers = "2357a11fb49bcbadf6b490e6d4cfe982a3d24813"
+# v9.10.0
+SRCREV_drbd-utils = "147860216bf307433e2d0d7cfd6fad3642027b8d"
+SRCREV_drbd-headers = "0955b3423f08f8e11ff05092bc1b766609fd804b"
 
 S = "${WORKDIR}/git"
 
