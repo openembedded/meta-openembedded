@@ -74,7 +74,7 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
 
 # dracut needs dracut
 RDEPENDS_packagegroup-meta-oe-core ="\
-    dbus-daemon-proxy libdbus-c++ eggdbus \
+    dbus-daemon-proxy libdbus-c++ \
     ell glibmm libsigc++-2.0 libxml++ distro-feed-configs \
     mm-common opencl-headers opencl-icd-loader \
     proxy-libintl usleep \
