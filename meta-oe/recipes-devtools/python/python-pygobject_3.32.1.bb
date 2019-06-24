@@ -12,6 +12,7 @@ DEPENDS += "python glib-2.0"
 SRCNAME = "pygobject"
 SRC_URI = " \
     http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
+    file://0001-python-pyobject-fix-install-dir.patch \
 "
 
 SRC_URI[md5sum] = "9d5dbca10162dd9b0d03fed0c6cf865d"
@@ -21,9 +22,12 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
 
 UNKNOWN_CONFIGURE_WHITELIST = "introspection"
 
+PACKAGECONFIG ??= "stagedir"
+
 PACKAGECONFIG[cairo] = "-Dpycairo=true,-Dpycairo=false, cairo python-pycairo, python-pycairo"
 PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
-
+PACKAGECONFIG[python] = "-Dpython=python3, -Dpython=python2, , "
+PACKAGECONFIG[stagedir] = "-Dstagedir=${PYTHON_SITEPACKAGES_DIR}, -Dstagedir="", , "
 
 BBCLASSEXTEND = "native"
 RDEPENDS_${PN} = "python-setuptools"
