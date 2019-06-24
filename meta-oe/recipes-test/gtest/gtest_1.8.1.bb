@@ -1,5 +1,5 @@
 DESCRIPTION = "Google's framework for writing C++ tests"
-HOMEPAGE = "https://github.com/abseil/googletest"
+HOMEPAGE = "https://github.com/google/googletest"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://googlemock/LICENSE;md5=cbbd27594afd089daa160d3a16dd515a \
@@ -9,9 +9,7 @@ PROVIDES += "gmock"
 
 S = "${WORKDIR}/git"
 SRCREV = "2fe3bd994b3189899d93f1d5a881e725e046fdc2"
-SRC_URI = "\
-    git://github.com/abseil/googletest.git;protocol=https; \
-"
+SRC_URI = "git://github.com/google/googletest.git"
 
 inherit cmake
 
