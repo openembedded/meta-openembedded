@@ -1,4 +1,4 @@
-From 1e2cea8945bc2183fbe1a012dcd633a352125952 Mon Sep 17 00:00:00 2001
+From 5464d9e1bfd1a1c54338ec7c4148cad1b222ef93 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Tue, 24 Apr 2012 18:45:14 +0200
 Subject: [PATCH] SConstruct: prefix includepy with sysroot and drop sysroot
@@ -34,15 +34,16 @@ Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+
 ---
- SConstruct | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ SConstruct | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/SConstruct b/SConstruct
-index 3318bb48..e1c4f963 100644
+index b8f3fb1..883e06d 100644
 --- a/SConstruct
 +++ b/SConstruct
-@@ -934,7 +934,7 @@ else:
+@@ -980,7 +980,7 @@ else:
  
  # Set up configuration for target Python
  
@@ -51,7 +52,7 @@ index 3318bb48..e1c4f963 100644
  
  PYTHON_CONFIG_NAMES = ['CC', 'CXX', 'OPT', 'BASECFLAGS',
                         'CCSHARED', 'LDSHARED', 'SO', 'INCLUDEPY', 'LDFLAGS']
-@@ -1364,7 +1364,7 @@ else:
+@@ -1506,7 +1506,7 @@ else:
                         LINK=ldshared,
                         SHLIBPREFIX="",
                         SHLIBSUFFIX=python_config['SO'],
@@ -60,22 +61,19 @@ index 3318bb48..e1c4f963 100644
                         CPPFLAGS=python_config['OPT'],
                         CFLAGS=python_config['BASECFLAGS'],
                         CXXFLAGS=python_config['BASECFLAGS'])
-@@ -1662,12 +1662,15 @@ if ((not env['debug'] and not env['profiling'] and not env['nostrip']
- if not env['python']:
-     python_install = []
- else:
-+    python_libdir = python_libdir.replace(env['sysroot'], '')
-     python_module_dir = python_libdir + os.sep + 'gps'
+@@ -1808,12 +1808,14 @@ if ((not env['debug'] and not env['profiling'] and not env['nostrip'] and
+     env.AddPostAction(binaryinstall, '$STRIP $TARGET')
+ 
+ if env['python']:
+-    python_module_dir = str(python_libdir) + os.sep + 'gps'
++    python_module_dir = python_libdir.replace(env['sysroot'], '') + os.sep + 'gps'
      python_extensions_install = python_env.Install(DESTDIR + python_module_dir,
                                                     python_built_extensions)
-     if ((not env['debug'] and not env['profiling']
-          and not env['nostrip'] and not sys.platform.startswith('darwin'))):
+     if ((not env['debug'] and not env['profiling'] and
+          not env['nostrip'] and not sys.platform.startswith('darwin'))):
          python_env.AddPostAction(python_extensions_install, '$STRIP $TARGET')
 +    env.AddPostAction(python_extensions_install, '$CHRPATH -r "%s" "$TARGET"' \
 +                     % (python_libdir, ))
  
      python_modules_install = python_env.Install(DESTDIR + python_module_dir,
                                                  python_modules)
--- 
-2.1.0
-
