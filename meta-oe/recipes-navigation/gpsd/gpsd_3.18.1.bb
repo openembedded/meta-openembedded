@@ -13,11 +13,11 @@ EXTRANATIVEPATH += "chrpath-native"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-    file://0004-SConstruct-disable-html-and-man-docs-building-becaus.patch \
-    file://0001-include-sys-ttydefaults.h.patch \
+    file://0002-include-sys-ttydefaults.h.patch \
+    file://0003-SConstruct-disable-html-and-man-docs-building-becaus.patch \
 "
-SRC_URI[md5sum] = "e0cfadcf4a65dfbdd2afb11c58f4e4a1"
-SRC_URI[sha256sum] = "68e0dbecfb5831997f8b3d6ba48aed812eb465d8c0089420ab68f9ce4d85e77a"
+SRC_URI[md5sum] = "3b11f26b295010666b1767b308f90bc5"
+SRC_URI[sha256sum] = "5cb1e6d880ec9a52c62492dd0e3d77451b7c7ad625895bd652f6354215aec23e"
 
 inherit scons update-rc.d python-dir pythonnative systemd bluetooth update-alternatives
 
@@ -61,7 +61,7 @@ do_install() {
 
     export DESTDIR="${D}"
     # prefix is used for RPATH and DESTDIR/prefix for instalation
-    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix} install ${EXTRA_OESCONS}|| \
+    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix} python_libdir=${libdir} install ${EXTRA_OESCONS} || \
       bbfatal "scons install execution failed."
 }
 
@@ -116,11 +116,12 @@ SUMMARY_gpsd-gpsctl = "Tool for tweaking GPS modes"
 FILES_gpsd-gpsctl = "${bindir}/gpsctl"
 
 SUMMARY_gps-utils = "Utils used for simulating, monitoring,... a GPS"
-FILES_gps-utils = "${bindir}/*"
+# Python files are required for gps/fake, required for gpsfake.
+FILES_gps-utils = "${bindir}/* ${libdir}/gps/*.py ${libdir}/gps/*.so"
 RDEPENDS_gps-utils = "python-pygps"
 
 SUMMARY_python-pygps = "Python bindings to gpsd"
-FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/*"
+FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
 RDEPENDS_python-pygps = " \
     python-core \
     python-io \
