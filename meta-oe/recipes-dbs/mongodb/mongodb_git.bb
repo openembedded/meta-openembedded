@@ -75,3 +75,5 @@ scons_do_install() {
         ${STAGING_BINDIR_NATIVE}/scons install ${EXTRA_OESCONS}|| \
         die "scons install execution failed."
 }
+
+PNBLACKLIST[mongodb] = "Since bbclass scons convert to python3, build mongodb failed"
