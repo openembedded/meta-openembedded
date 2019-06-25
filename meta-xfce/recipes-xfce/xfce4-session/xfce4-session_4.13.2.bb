@@ -11,7 +11,6 @@ DEPENDS = " \
     libsm \
     libxfce4ui \
     libxfce4util \
-    polkit \
     virtual/libx11 \
     xfconf \
 "
@@ -19,6 +18,9 @@ DEPENDS = " \
 inherit xfce update-alternatives distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'polkit', d)}"
+PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
 
 SRC_URI += " \
     file://0001-configure.in-hard-code-path-to-iceauth.patch \
