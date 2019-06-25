@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 GNOMEBASEBUILDCLASS = "meson"
 inherit gnome bash-completion gettext upstream-version-is-even
 
-DEPENDS += "libsecret glib-2.0 gconf libgudev udisks2 polkit shadow-native"
+DEPENDS += "libsecret glib-2.0 gconf libgudev shadow-native"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
@@ -18,7 +18,6 @@ EXTRA_OEMESON = " \
     -Dgoa=false \
     -Dgoogle=false \
     -Dnfs=false \
-    -Dudisks2=true \
 "
 
 PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
@@ -31,7 +30,6 @@ FILES_${PN} += " \
     ${libdir}/tmpfiles.d \
     ${systemd_user_unitdir} \
 "
-RDEPENDS_${PN} = "udisks2"
 
 FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/*"
 FILES_${PN}-dev += "${libdir}/gio/modules/*.la"
@@ -42,8 +40,14 @@ FILES_gvfsd-trash = "${libexecdir}/gvfsd-trash ${datadir}/gvfs/mounts/trash.moun
 
 RRECOMMENDS_gvfsd-ftp += "openssh-sftp openssh-ssh"
 
-PACKAGECONFIG ?= "libgphoto2 ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG ?= "libgphoto2 \
+                  ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES','polkit','udisks2','',d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES','polkit','admin','',d)} \
+                 "
 
+PACKAGECONFIG[udisks2] = "-Dudisks2=true, -Dudisks2=false, udisks2, udisks2"
+PACKAGECONFIG[admin] = "-Dadmin=true, -Dadmin=false, libcap polkit"
 PACKAGECONFIG[afc] = "-Dafc=true, -Dafc=false, libimobiledevice libplist"
 PACKAGECONFIG[archive] = "-Darchive=true, -Darchive=false, libarchive"
 PACKAGECONFIG[dnssd] = "-Ddnssd=true, -Ddnssd=false, avahi"
@@ -62,9 +66,11 @@ PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
 PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
 
 do_install_append() {
-    # Fix up permissions on polkit rules.d to work with rpm4 constraints
-    chmod 700 ${D}/${datadir}/polkit-1/rules.d
-    chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'true', 'false', d)}; then
+        # Fix up permissions on polkit rules.d to work with rpm4 constraints
+        chmod 700 ${D}/${datadir}/polkit-1/rules.d
+        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+    fi
 
     # After rebuilds (not from scracth) it can happen that the executables in
     # libexec ar missing executable permission flag. Not sure but it came up
