@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59c57b95fd7d0e9e238ebbc7ad47c5a5"
 
 inherit autotools python3native
 
-DEPENDS = "python3-lxml-native"
+DEPENDS = "libxml2-native"
 
 SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
 SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
@@ -18,5 +18,5 @@ do_install_append() {
 
 BBCLASSEXTEND = "native"
 
-RDEPENDS_${PN} += "python3-lxml"
+RDEPENDS_${PN} += "libxml2-python"
 
