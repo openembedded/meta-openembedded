@@ -17,6 +17,7 @@ SRC_URI = "https://dev.gentoo.org/~axs/distfiles/mozjs-60.5.2.tar.bz2 \
            file://0001-To-fix-build-error-on-arm32BE.patch \
            file://JS_PUBLIC_API.patch \
            file://0001-riscv-Disable-atomic-operations.patch \
+           file://fallback-to-2011-C++-standard.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://0006-support-musl.patch \
