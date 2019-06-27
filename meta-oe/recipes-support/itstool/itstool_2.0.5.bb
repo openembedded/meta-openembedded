@@ -19,4 +19,4 @@ do_install_append() {
 BBCLASSEXTEND = "native"
 
 RDEPENDS_${PN} += "libxml2-python"
-
+RDEPENDS_${PN}_class-native = ""
