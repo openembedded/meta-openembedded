@@ -3,20 +3,18 @@ HOMEPAGE = "http://opencv.org/"
 SECTION = "libs"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=62d89c5dcb0583609ea919c56be0ee76"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6450921bb12a3133c8f5cb2a80343710"
 
 ARM_INSTRUCTION_SET_armv4 = "arm"
 ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "8f1356c3c5b16721349582db461a2051653059e8"
-SRCREV_contrib = "7292df62624ded8af8035231435dfd17c93e1a80"
+SRCREV_opencv = "371bba8f54560b374fbcd47e7e02f015ac4969ad"
+SRCREV_contrib = "2c32791a9c500343568a21ea34bf2daeac2adae7"
 SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
-SRC_URI[tinydnn.md5sum] = "adb1c512e09ca2c7a6faef36f9c53e59"
-SRC_URI[tinydnn.sha256sum] = "e2c61ce8c5debaa644121179e9dbdcf83f497f39de853f8dd5175846505aa18b"
 
 def ipp_filename(d):
     import re
@@ -39,26 +37,21 @@ IPP_MD5 = "${@ipp_md5sum(d)}"
 
 SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
 SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-    git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
-    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
-    git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
-    git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
-    https://github.com/tiny-dnn/tiny-dnn/archive/v1.0.0a3.tar.gz;destsuffix=git/3rdparty/tinydnn/tiny-dnn-1.0.0a3;name=tinydnn;unpack=false \
-    file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
-    file://uselocalxfeatures.patch;patchdir=../contrib/ \
-    file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
-    file://0003-To-fix-errors-as-following.patch \
-    file://fixpkgconfig.patch \
-    file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
-    file://0001-Dont-use-isystem.patch \
-"
-PV = "3.4.5"
+           git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
+           git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
+           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
+           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
+           file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+           file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
+           file://0003-To-fix-errors-as-following.patch \
+           file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
+           file://0001-Dont-use-isystem.patch \
+           "
+PV = "4.1.0"
 
 S = "${WORKDIR}/git"
 
 do_unpack_extra() {
-    mkdir -p ${S}/3rdparty/tinydnn/
-    tar xzf ${WORKDIR}/v1.0.0a3.tar.gz -C ${S}/3rdparty/tinydnn/
     tar xzf ${WORKDIR}/ipp/ippicv/${IPP_FILENAME} -C ${WORKDIR}
     cp ${WORKDIR}/vgg/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
     cp ${WORKDIR}/boostdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
@@ -157,11 +150,11 @@ PACKAGES_DYNAMIC += "^libopencv-.*"
 
 FILES_${PN} = ""
 FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
-FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake"
-FILES_${PN}-staticdev += "${datadir}/OpenCV/3rdparty/lib/*.a"
-FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig  ${libdir}/cmake/opencv4/*.cmake"
+FILES_${PN}-staticdev += "${libdir}/opencv4/3rdparty/*.a"
+FILES_${PN}-apps = "${bindir}/* ${datadir}/opencv4 ${datadir}/licenses"
 FILES_${PN}-java = "${datadir}/OpenCV/java"
-FILES_${PN}-samples = "${datadir}/OpenCV/samples/"
+FILES_${PN}-samples = "${datadir}/opencv4/samples/"
 
 INSANE_SKIP_${PN}-java = "libdir"
 INSANE_SKIP_${PN}-dbg = "libdir"
@@ -179,9 +172,6 @@ RDEPENDS_python3-opencv = "python3-core python3-numpy"
 RDEPENDS_${PN}-apps  = "bash"
 
 do_install_append() {
-    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
-    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
-
     # Move Python files into correct library folder (for multilib build)
     if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
         mv ${D}/usr/lib/* ${D}/${libdir}/
