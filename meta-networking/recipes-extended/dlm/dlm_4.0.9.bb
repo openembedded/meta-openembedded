@@ -5,21 +5,21 @@ HOMEPAGE = "https://fedorahosted.org/cluster/wiki/HomePage"
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
-SRC_URI = "https://releases.pagure.org/dlm/${BP}.tar.gz \
-           file://respect-ldflags-also-from-bin_ldflags.patch \
+SRC_URI = "https://pagure.io/dlm/archive/dlm-${PV}/dlm-dlm-${PV}.tar.gz \
            file://0001-dlm-fix-compile-error-since-xml2-config-should-not-b.patch \
-           file://0001-dlm-fix-package-qa-error.patch \
            file://0001-Include-sys-sysmacros.h-for-major-minor-macros-in-gl.patch \
            "
 
-SRC_URI[md5sum] = "aa604a10d5ac2d3414eb89ec6984cd12"
-SRC_URI[sha256sum] = "639ddfc82369272a68d56816689736c00b8f1b6b2869a6b66b7dbf6dad86469a"
+SRC_URI[md5sum] = "4c57a941a15547859cd38fd55f66388e"
+SRC_URI[sha256sum] = "d59142e067cbd603aaf66151a04e9fa34330219680b8827c953d20821b951991"
 
 UPSTREAM_CHECK_URI = "https://pagure.io/dlm/releases"
 UPSTREAM_CHECK_REGEX = "dlm-(?P<pver>\d+(\.\d+)+)"
 
 LICENSE = "LGPLv2+ & GPLv2 & GPLv2+"
 LIC_FILES_CHKSUM = "file://README.license;md5=8f0bbcdd678df1bce9863492b6c8832d"
+
+S = "${WORKDIR}/dlm-dlm-${PV}"
 
 DEPENDS = "corosync systemd"
 
