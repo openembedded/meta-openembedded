@@ -23,13 +23,13 @@ SRC_URI = "\
     file://0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch \
     "
 
-SRC_URI[md5sum] = "61b1062aa144b5f12eed514611e6d697"
-SRC_URI[sha256sum] = "bd7f105542e9903e776aa006c6931c1f5d3d477cb59af33a9162422efa477097"
+SRC_URI[md5sum] = "73ce230b4789f9f28fff77cbc83c65af"
+SRC_URI[sha256sum] = "ce05b4bf2a04cd2f472e77ba4b86fbfca690bfc83e51da8ce0e575804b763eda"
 
 S = "${WORKDIR}/${fd_pkgname}-${PV}"
 
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=892b2ed6ae815488a08416ff7ee74a35"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=69bdc1d97648a2d35914563fcbbb361a"
 
 PTEST_PATH = "${libdir}/${fd_pkgname}/ptest"
 
