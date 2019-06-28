@@ -12,6 +12,7 @@ SRC_URI[md5sum] = "376e360fb87095edaea7df8ca34fe6a7"
 SRC_URI[sha256sum] = "0d05b6dd8c91c154a364a3e31583c5f423c33e26d44d43cc409165f7d578ca15"
 SRC_URI += " \
     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
+    file://0001-use-lxdm-to-replace-dm-tool.patch \
 "
 
 python populate_packages_prepend() {
