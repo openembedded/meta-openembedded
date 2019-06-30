@@ -265,7 +265,7 @@ RDEPENDS_packagegroup-meta-oe-support-egl ="\
 
 RDEPENDS_packagegroup-meta-oe-test ="\
     catch2 cppunit cunit cxxtest evtest fb-test \
-    fwts gtest pm-qa stress-ng testfloat \
+    fwts googletest pm-qa stress-ng testfloat \
     "
 RDEPENDS_packagegroup-meta-oe-test_remove_libc-musl = "pm-qa"
 RDEPENDS_packagegroup-meta-oe-test_remove_arm = "fwts"
