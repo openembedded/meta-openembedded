@@ -28,7 +28,8 @@ RDEPENDS_${PN} += " \
     packagegroup-tools-bluetooth \
 "
 
-PACKAGECONFIG[thunar] = "--enable-thunar-sendto,--disable-thunar-sendto,,thunar"
+PACKAGECONFIG ??= "thunar"
+PACKAGECONFIG[thunar] = "--enable-thunar-sendto,--disable-thunar-sendto"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
