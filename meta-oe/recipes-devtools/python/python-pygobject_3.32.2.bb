@@ -15,8 +15,8 @@ SRC_URI = " \
     file://0001-python-pyobject-fix-install-dir.patch \
 "
 
-SRC_URI[md5sum] = "9d5dbca10162dd9b0d03fed0c6cf865d"
-SRC_URI[sha256sum] = "32c99def94b8dea5ce9e4bc99576ef87591ea779b4db77cfdca7af81b76d04d8"
+SRC_URI[md5sum] = "92ffa25351782feb96362f0dace2089f"
+SRC_URI[sha256sum] = "c39ca2a28364b57fa00549c6e836346031e6b886c3ceabfd8ab4b4fed0a83611"
 
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
