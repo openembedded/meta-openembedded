@@ -23,26 +23,25 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://dnsserver-4.7.0.patch \
            file://smb_conf-4.7.0.patch \
            file://volatiles.03_samba \
+           file://0001-waf-add-support-of-cross_compile.patch \
            "
 SRC_URI_append_libc-musl = " \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
            file://cmocka-uintptr_t.patch \
+           file://0001-samba-fix-musl-lib-without-innetgr.patch \
           "
 
-SRC_URI[md5sum] = "25de700c8f1148fd13973a49a51c059e"
-SRC_URI[sha256sum] = "c162d519101e15d1a1d76df063bfefe8d1656f57fb74e1ef19fe05d341a65d8f"
+SRC_URI[md5sum] = "7d20c01ae35b08bc850442a0c303bca5"
+SRC_URI[sha256sum] = "6c10266d5e8c44ce1ea17dc993ace67a83607b4d9a830959c75e3188c6af6375"
 
-UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.8(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
 RDEPENDS_${PN}_remove = "perl"
 
-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libbsd libaio libpam"
-
-RCONFLICTS_${PN} = "libldb"
-RCONFLICTS_${PN}-python = "pyldb"
+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libbsd libaio libpam libtasn1 jansson"
 
 inherit distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
@@ -64,10 +63,14 @@ SYSTEMD_SERVICE_winbind = "winbind.service"
 # https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
 SYSTEMD_AUTO_ENABLE_${PN}-ad-dc = "disable"
 
+#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+#to cross Popen
+export WAF_NO_PREFORK="yes"
+
 # Use krb5.  Build active domain controller.
 #
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd zeroconf', d)} \
-                   acl ad-dc cups gnutls ldap mitkrb5 \
+                   acl cups ad-dc gnutls ldap mitkrb5 \
 "
 
 RDEPENDS_${PN}-ctdb-tests += "bash util-linux-getopt"
@@ -84,6 +87,8 @@ PACKAGECONFIG[valgrind] = ",--without-valgrind,valgrind,"
 PACKAGECONFIG[lttng] = "--with-lttng, --without-lttng,lttng-ust"
 PACKAGECONFIG[archive] = "--with-libarchive, --without-libarchive, libarchive"
 PACKAGECONFIG[libunwind] = ", , libunwind"
+PACKAGECONFIG[gpgme] = ",--without-gpgme,,"
+PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
 
 # Building the AD (Active Directory) DC (Domain Controller) requires GnuTLS,
 # And ad-dc doesn't work with mitkrb5 for versions prior to 4.7.0 according to:
@@ -108,17 +113,7 @@ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODU
 # .so files so there will not be a conflict.  This is not done consistantly, so be very careful
 # when adding to this list.
 #
-SAMBA4_LIBS="heimdal,cmocka,ldb,pyldb-util,NONE"
-
-# interim packages: As long as ldb/pyldb-util are in SAMBA4_LIBS we need to pack
-# bundled libraries in seperate packages. Otherwise they are auto-packed in
-# package 'samba' which RDEPENDS on lots of packages not wanted e.g autostarting
-# nmbd/smbd daemons
-# Once 'ldb,pyldb-util' are removed from SAMBA4_LIBS the bundled packages can
-# be removed again.
-PACKAGES =+ "${PN}-bundled-ldb ${PN}-bundled-pyldb-util"
-FILES_${PN}-bundled-ldb = "${libdir}/samba/libldb${SOLIBS}"
-FILES_${PN}-bundled-pyldb-util = "${libdir}/samba/libpyldb-util${SOLIBS}"
+SAMBA4_LIBS="heimdal,cmocka,NONE"
 
 EXTRA_OECONF += "--enable-fhs \
                  --with-piddir=/run \
@@ -179,8 +174,6 @@ do_install_append() {
     install -d ${D}${sysconfdir}/default
     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/default/samba
 
-    # install ctdb config file and test cases
-    install -D -m 0644 ${S}/ctdb/tests/onnode/nodes ${D}${sysconfdir}/ctdb/nodes
     # the items are from ctdb/tests/run_tests.sh
     for d in onnode takeover tool eventscripts cunit simple complex; do
         testdir=${D}${datadir}/ctdb-tests/$d
@@ -196,9 +189,17 @@ do_install_append() {
 
     chmod 0750 ${D}${sysconfdir}/sudoers.d
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+    
+    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba-gpupdate
+    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_upgradedns 
+    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_spnupdate
+    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_kcc
+    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_dnsupdate
+    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-tool
+    
 }
 
-PACKAGES =+ "${PN}-python ${PN}-pidl \
+PACKAGES =+ "${PN}-python3 ${PN}-pidl \
              ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
              winbind \
              ${PN}-common ${PN}-base ${PN}-ad-dc ${PN}-ctdb-tests \
@@ -227,8 +228,8 @@ python samba_populate_packages() {
 PACKAGESPLITFUNCS_prepend = "samba_populate_packages "
 PACKAGES_DYNAMIC = "samba-auth-.* samba-pdb-.*"
 
-RDEPENDS_${PN} += "${PN}-base ${PN}-python ${PN}-dsdb-modules"
-RDEPENDS_${PN}-python += "pytalloc python-tdb"
+RDEPENDS_${PN} += "${PN}-base ${PN}-python3 ${PN}-dsdb-modules python3"
+RDEPENDS_${PN}-python3 += "pytalloc python3-tdb"
 
 FILES_${PN}-base = "${sbindir}/nmbd \
                     ${sbindir}/smbd \
@@ -261,6 +262,7 @@ FILES_${PN} += "${libdir}/vfs/*.so \
                 ${libdir}/charset/*.so \
                 ${libdir}/*.dat \
                 ${libdir}/auth/*.so \
+                ${datadir}/ctdb/events/* \
 "
 
 FILES_${PN}-dsdb-modules = "${libdir}/samba/ldb"
@@ -286,7 +288,7 @@ FILES_winbind = "${sbindir}/winbindd \
                  ${sysconfdir}/init.d/winbind \
                  ${systemd_system_unitdir}/winbind.service"
 
-FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
+FILES_${PN}-python3 = "${PYTHON_SITEPACKAGES_DIR}"
 
 FILES_smbclient = "${bindir}/cifsdd \
                    ${bindir}/rpcclient \
