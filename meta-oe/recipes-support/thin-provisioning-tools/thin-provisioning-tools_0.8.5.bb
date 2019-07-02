@@ -9,11 +9,10 @@ S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/jthornber/thin-provisioning-tools \
            file://0001-do-not-strip-pdata_tools-at-do_install.patch \
-           file://0001-fix-compile-failed-with-libc-musl.patch \
            file://use-sh-on-path.patch \
 "
 
-SRCREV = "6f936992b8e6208a7838fcf1ec87c5bd3a694a77"
+SRCREV = "5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
