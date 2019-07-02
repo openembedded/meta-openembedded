@@ -8,12 +8,12 @@ DEPENDS = "gtk+3 libnotify libsecret networkmanager \
 "
 
 GNOMEBASEBUILDCLASS = "autotools-brokensep"
-inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introspection
+inherit distro_features_check gnomebase gsettings gtk-icon-cache gobject-introspection gettext
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "06aafa851762146034351aa72ebb23d4"
-SRC_URI[archive.sha256sum] = "050dbb155566c715239dc0378844d8beed10954e64e71014ecef8ca912df34ec"
+SRC_URI[archive.md5sum] = "e0373f4c0d0637716e6e385799a9080f"
+SRC_URI[archive.sha256sum] = "ebef1c1050ff6d94cad060e8d259f2a88ae159cf83ca75cb71d9f76867877eed"
 
 PACKAGECONFIG[modemmanager] = "--with-wwan,--without-wwan,modemmanager"
 PACKAGECONFIG[mobile-provider-info] = "--enable-mobile-broadband-provider-info,--disable-mobile-broadband-provider-info,mobile-broadband-provider-info,mobile-broadband-provider-info"
