@@ -1,9 +1,9 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=9ceeba79eb2ea1067b7b3ed16fff8bab"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=be980eb7ccafe287cb438076a65e888c"
 
-DEPENDS = "openssl zlib icu"
+DEPENDS = "openssl"
 DEPENDS_append_class-target = " nodejs-native"
 
 inherit pkgconfig
@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
            file://0002-Using-native-torque.patch \
            "
 
-SRC_URI[md5sum] = "d76210a6ae1ea73d10254947684836fb"
-SRC_URI[sha256sum] = "4e22d926f054150002055474e452ed6cbb85860aa7dc5422213a2002ed9791d5"
+SRC_URI[md5sum] = "c9a7ab43f8b50c8a4d5545de307b7540"
+SRC_URI[sha256sum] = "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -49,16 +49,21 @@ ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
 GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
 ARCHFLAGS ?= ""
 
+PACKAGECONFIG ??= "zlib icu"
+PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
+PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
+
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
     rm -rf ${S}/deps/openssl
     export LD="${CXX}"
     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
     # $TARGET_ARCH settings don't match --dest-cpu settings
-   ./configure --prefix=${prefix} --with-intl=system-icu --without-snapshot --shared-openssl --shared-zlib \
+   ./configure --prefix=${prefix} --without-snapshot --shared-openssl \
                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
                --dest-os=linux \
-               ${ARCHFLAGS}
+               ${ARCHFLAGS} \
+               ${PACKAGECONFIG_CONFARGS}
 }
 
 do_compile () {
