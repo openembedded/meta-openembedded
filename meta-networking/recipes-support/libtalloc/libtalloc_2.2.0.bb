@@ -7,10 +7,11 @@ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6
 
 
 SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
-           file://options-2.1.14.patch \
+           file://options-2.2.0.patch \
+           file://0001-waf-add-support-of-cross_compile.patch \
 "
-SRC_URI[md5sum] = "7478da02e309316231a497a9f17a980d"
-SRC_URI[sha256sum] = "b185602756a628bac507fa8af8b9df92ace69d27c0add5dab93190ad7c3367ce"
+SRC_URI[md5sum] = "b60781acc2fb42d7a1e08751e508d3df"
+SRC_URI[sha256sum] = "5c6f6a45ef96b3fd0b28942673a68d0c6af5dcca9d676a2e4d57ce7e86c22ebc"
 
 inherit waf-samba
 
@@ -29,6 +30,10 @@ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr
 
 S = "${WORKDIR}/talloc-${PV}"
 
+#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+#to cross Popen
+export WAF_NO_PREFORK="yes"
+
 EXTRA_OECONF += "--disable-rpath \
                  --disable-rpath-install \
                  --bundled-libraries=NONE \
@@ -46,4 +51,4 @@ FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
                   ${libdir}/libpytalloc-util.so.2.1.1 \
                  "
 FILES_pytalloc-dev = "${libdir}/libpytalloc-util.so"
-RDEPENDS_pytalloc = "python"
+RDEPENDS_pytalloc = "python3"
