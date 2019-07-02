@@ -16,6 +16,8 @@ SRC_URI = "git://github.com/google/protobuf.git;branch=3.8.x \
            file://run-ptest \
            file://0001-protobuf-fix-configure-error.patch \
            file://0001-Added-stubs-map_util.h-to-list-of-installed-headers.patch \
+           file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
+           file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
 "
 S = "${WORKDIR}/git"
 
@@ -30,9 +32,6 @@ TEST_SRC_DIR = "examples"
 LANG_SUPPORT = "cpp ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python', '', d)}"
 
 do_compile_ptest() {
-	# Modify makefile to use the cross-compiler
-	sed -e "s|c++|${CXX} \$(LDFLAGS)|g" -i "${S}/${TEST_SRC_DIR}/Makefile"
-
 	mkdir -p "${B}/${TEST_SRC_DIR}"
 
 	# Add the location of the cross-compiled header and library files
