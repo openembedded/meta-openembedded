@@ -18,6 +18,4 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
-# Temporary until https://github.com/Microsoft/cpprestsdk/issues/1099
-# is fixed properly
-CXXFLAGS += "-Wno-error=deprecated-copy -Wno-error=redundant-move"
+CXXFLAGS += "-Wno-error"
