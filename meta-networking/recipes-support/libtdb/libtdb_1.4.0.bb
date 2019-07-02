@@ -7,14 +7,12 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
 
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-           file://do-not-check-xsltproc-manpages.patch \
            file://tdb-Add-configure-options-for-packages.patch \
            file://0001-waf-add-support-of-cross_compile.patch \
-           file://0001-Makefile-fix-problem-that-waf-cannot-found.patch \
 "
 
-SRC_URI[md5sum] = "519d373ac72a66b0a2739dbb495de127"
-SRC_URI[sha256sum] = "1cb4399394c60a773430ca54848359adcf54fb6f136afdcfcbbe62b5f4245614"
+SRC_URI[md5sum] = "c4c2f8cf9e691244a7f2ecfa3baadecc"
+SRC_URI[sha256sum] = "c1a0729c5400fb495465fa4bd953ae290db43c28dacd0506aef50dc482132d35"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
@@ -42,11 +40,18 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
 
-PACKAGES += "tdb-tools python-tdb"
+do_install_append() {
+     # add this link for cross check python module existence. eg: on x86-64 host, check python module
+     # under recipe-sysroot which is mips64.
+     cd ${D}${PYTHON_SITEPACKAGES_DIR}; ln -s tdb.*.so tdb.so
+}
 
-RPROVIDES_${PN}-dbg += "python-tdb-dbg"
+PACKAGES += "tdb-tools python3-tdb"
+
+RPROVIDES_${PN}-dbg += "python3-tdb-dbg"
 
 FILES_${PN} = "${libdir}/*.so.*"
 FILES_tdb-tools = "${bindir}/*"
-FILES_python-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
-RDEPENDS_python-tdb = "python"
+FILES_python3-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+RDEPENDS_python3-tdb = "python3"
+INSANE_SKIP_python3-tdb = "dev-so"
