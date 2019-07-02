@@ -9,14 +9,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "ebbda2217d177d2a17f917d7a3e3d132a26db791"
+SRCREV = "92c00638a6f846df5c40dbb690f9fcf998ad6df2"
 SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master \
+           file://0001-fix-out-of-tree-build-failure.patch \
 "
 
 inherit gettext autotools python3native
 
 DEPENDS += " \
-    libpcre \
+    libpcre2 \
     gmp \
     mpfr \
 "
@@ -24,8 +25,7 @@ DEPENDS += " \
 FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}/bytesize"
 
 PACKAGECONFIG ??= "python3"
-PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
-PACKAGECONFIG[python2] = "--with-python2, --without-python2,,python2"
+PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3-core"
 PACKAGECONFIG[doc] = "--with-gtk-doc, --without-gtk-doc, gtk-doc-native"
 
 EXTRA_OEMAKE = "py3libdir=${PYTHON_SITEPACKAGES_DIR}"
