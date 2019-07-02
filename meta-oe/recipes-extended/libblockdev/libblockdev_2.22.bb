@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
 inherit autotools python3native gobject-introspection
 
-SRCREV = "cb308566c3c5222b8422f78997a1742713b265a9"
+SRCREV = "f6e4538485d0442b3674e182c01ffe5a0f258ad4"
 SRC_URI = " \
     git://github.com/rhinstaller/libblockdev;branch=master \
 "
