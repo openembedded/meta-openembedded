@@ -4,16 +4,17 @@ SECTION = "libs"
 LICENSE = "LGPLv3+"
 
 DEPENDS += "libtalloc libtirpc"
-RDEPENDS_python-tevent = "python"
+RDEPENDS_python3-tevent = "python3"
 
 SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
-           file://options-0.9.36.patch \
+           file://options-0.10.0.patch \
            file://0001-libtevent-fix-musl-libc-compile-error.patch \
+           file://0001-waf-add-support-of-cross_compile.patch \
 "
 LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b85a"
 
-SRC_URI[md5sum] = "6859cd4081fdb2a76b1cb4bf1c803a59"
-SRC_URI[sha256sum] = "168345ed65eac03785cf77b95238e7dc66cbb473a42811693a6b0916e5dae7e0"
+SRC_URI[md5sum] = "97ea9861252e52c24adf6c45ab676a60"
+SRC_URI[sha256sum] = "33f39612cd6d1ae6a737245784581494846f5bb07827983d2f41f942446aa4e6"
 
 inherit waf-samba
 
@@ -32,15 +33,26 @@ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr
 
 S = "${WORKDIR}/tevent-${PV}"
 
+#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+#to cross Popen
+export WAF_NO_PREFORK="yes"
+
 EXTRA_OECONF += "--disable-rpath \
                  --bundled-libraries=NONE \
                  --builtin-libraries=replace \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                  --without-gettext \
                 "
+do_install_append() {
+     # add this link for cross check python module existence. eg: on x86-64 host, check python module
+     # under recipe-sysroot which is mips64. 
+     cd ${D}${PYTHON_SITEPACKAGES_DIR}; ln -s _tevent.*.so _tevent.so
+}
 
-PACKAGES += "python-tevent"
+PACKAGES += "python3-tevent"
 
-RPROVIDES_${PN}-dbg += "python-tevent-dbg"
+RPROVIDES_${PN}-dbg += "python3-tevent-dbg"
 
-FILES_python-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+FILES_python3-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+
+INSANE_SKIP_python3-tevent = "dev-so"

@@ -1,7 +1,7 @@
-From c3e2e4f89cf37b27609fd02ad67eb02d0015cc1e Mon Sep 17 00:00:00 2001
-From: Jackie Huang <jackie.huang@windriver.com>
-Date: Wed, 21 Sep 2016 09:57:49 +0800
-Subject: [PATCH 1/1] tevent: Add configure options for packages
+From b2b19aa9968258b22cf31db0b9dba6bcf96046cf Mon Sep 17 00:00:00 2001
+From: Changqing Li <changqing.li@windriver.com>
+Date: Thu, 20 Jun 2019 13:55:44 +0800
+Subject: [PATCH] Add configure options for packages
 
 Add configure options for the following packages:
  - acl
@@ -18,16 +18,19 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 Modified to apply to version 0.9.33.
 
 Signed-off-by: Joe Slater <joe.slater@windriver.com>
+
+Update patch to version 0.10.0
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
  lib/replace/wscript | 89 ++++++++++++++++++++++++++++++++++++++++-------------
- wscript             |  7 ++++-
- 2 files changed, 73 insertions(+), 23 deletions(-)
+ wscript             |  6 ++++
+ 2 files changed, 74 insertions(+), 21 deletions(-)
 
 diff --git a/lib/replace/wscript b/lib/replace/wscript
-index 2c638b7..079761d 100644
+index 1d01e1e..5cf444a 100644
 --- a/lib/replace/wscript
 +++ b/lib/replace/wscript
-@@ -23,6 +23,41 @@ def set_options(opt):
+@@ -25,6 +25,41 @@ def options(opt):
      opt.PRIVATE_EXTENSION_DEFAULT('')
      opt.RECURSE('buildtools/wafsamba')
  
@@ -69,7 +72,7 @@ index 2c638b7..079761d 100644
  @Utils.run_once
  def configure(conf):
      conf.RECURSE('buildtools/wafsamba')
-@@ -32,12 +67,25 @@ def configure(conf):
+@@ -34,12 +69,25 @@ def configure(conf):
      conf.DEFINE('HAVE_LIBREPLACE', 1)
      conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
  
@@ -98,24 +101,24 @@ index 2c638b7..079761d 100644
 +        conf.CHECK_HEADERS('sys/capability.h')
 +
      conf.CHECK_HEADERS('port.h')
-     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h sys/fs/vx/quota.h')
+     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
-@@ -101,7 +149,8 @@ def configure(conf):
+@@ -110,8 +158,9 @@ def configure(conf):
      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
  
--    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
+-    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
+-    conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
 +    if Options.options.enable_valgrind:
-+        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
++        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
++        conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
-@@ -294,22 +343,18 @@ def configure(conf):
+@@ -380,20 +429,18 @@ def configure(conf):
  
-     conf.CHECK_FUNCS('prctl dirname basename')
+     strlcpy_in_bsd = False
  
--    strlcpy_in_bsd = False
--
 -    # libbsd on some platforms provides strlcpy and strlcat
 -    if not conf.CHECK_FUNCS('strlcpy strlcat'):
 -        if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
@@ -127,6 +130,9 @@ index 2c638b7..079761d 100644
 -        conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
 -    if not conf.CHECK_FUNCS('setproctitle_init'):
 -        conf.CHECK_FUNCS_IN('setproctitle_init', 'bsd', headers='sys/types.h bsd/unistd.h')
+-
+-    if not conf.CHECK_FUNCS('closefrom'):
+-        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
 +    if Options.options.enable_libbsd:
 +        # libbsd on some platforms provides strlcpy and strlcat
 +        if not conf.CHECK_FUNCS('strlcpy strlcat'):
@@ -136,32 +142,20 @@ index 2c638b7..079761d 100644
 +            conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
 +        if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
 +            conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
- 
--    if not conf.CHECK_FUNCS('closefrom'):
--        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
++
 +        if not conf.CHECK_FUNCS('closefrom'):
 +            conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
  
      conf.CHECK_CODE('''
                  struct ucred cred;
-@@ -660,7 +705,7 @@ removeea setea
-     # look for a method of finding the list of network interfaces
-     for method in ['HAVE_IFACE_GETIFADDRS', 'HAVE_IFACE_AIX', 'HAVE_IFACE_IFCONF', 'HAVE_IFACE_IFREQ']:
-         bsd_for_strlcpy = ''
--        if strlcpy_in_bsd:
-+        if Options.options.enable_libbsd:
-             bsd_for_strlcpy = ' bsd'
-         if conf.CHECK_CODE('''
-                            #define %s 1
 diff --git a/wscript b/wscript
-index 94d190f..742f779 100644
+index ded182a..824a6dd 100644
 --- a/wscript
 +++ b/wscript
-@@ -22,7 +22,12 @@ def set_options(opt):
-     opt.PRIVATE_EXTENSION_DEFAULT('tevent', noextension='tevent')
+@@ -25,6 +25,12 @@ def options(opt):
      opt.RECURSE('lib/replace')
      opt.RECURSE('lib/talloc')
--
+ 
 +    opt.add_option('--with-valgrind',
 +                   help=("enable use of valgrind"),
 +                   action="store_true", dest='enable_valgrind')
@@ -172,5 +166,5 @@ index 94d190f..742f779 100644
  def configure(conf):
      conf.RECURSE('lib/replace')
 -- 
-2.16.2
+2.7.4
 
