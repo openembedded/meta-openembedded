@@ -12,11 +12,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cb901168715f4782a2b06c3ddaefa558"
 
 DEPENDS = "protobuf-native protobuf"
 
-PV .= "+git${SRCPV}"
-SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
+SRCREV = "1390409f4ee4e26d0635310995b516eb702c3f9e"
 
 SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-           file://protobuf3-compatibility.patch \
           "
 
 S = "${WORKDIR}/git"
