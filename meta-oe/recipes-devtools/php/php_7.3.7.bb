@@ -14,8 +14,8 @@ SRC_URI_append_class-target = " \
                                 file://xfail_two_bug_tests.patch \
                                 "
 
-SRC_URI[md5sum] = "bde9a912fb311182cd460dad1abbc247"
-SRC_URI[sha256sum] = "1e5ac8700154835c0910e3a814517da9b87bb4a82cc7011fea1a82096b6f6f77"
+SRC_URI[md5sum] = "6c260fa5615d2737d819c1ed9655f694"
+SRC_URI[sha256sum] = "c3608fa7114642725854119ccffe722f42fc7c31e5e4c00d5cb4cb1a0d16bf18"
 
 PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
                         --with-pdo-mysql=mysqlnd \
