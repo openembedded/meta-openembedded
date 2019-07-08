@@ -35,6 +35,7 @@ EXTRA_OEMAKE = "'CFLAGS=${CFLAGS} -Wall' \
     "
 
 do_install () {
+    install -d ${D}/${nonarch_base_libdir}/pkgconfig
     oe_runmake DESTDIR=${D} install
 }
 
@@ -42,5 +43,7 @@ do_install_ptest () {
     cp -r ${S}/tests ${D}${PTEST_PATH}/
     sed -i -e 's/OSDIST=Unknown/OSDIST=${DISTRO}/' ${D}${PTEST_PATH}/tests/prepare.inc.sh
 }
+
+FILES_${PN}-dev += "${nonarch_base_libdir}/pkgconfig/libkeyutils.pc"
 
 RDEPENDS_${PN}-ptest += "glibc-utils lsb"
