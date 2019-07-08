@@ -43,4 +43,4 @@ do_install_ptest () {
     sed -i -e 's/OSDIST=Unknown/OSDIST=${DISTRO}/' ${D}${PTEST_PATH}/tests/prepare.inc.sh
 }
 
-RDEPENDS_${PN}-ptest += "glibc-utils"
+RDEPENDS_${PN}-ptest += "glibc-utils lsb"
