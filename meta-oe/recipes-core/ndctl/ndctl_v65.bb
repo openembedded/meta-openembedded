@@ -10,10 +10,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
 
 inherit autotools-brokensep pkgconfig bash-completion systemd
 
-SRCREV = "cb2d678dd6d286dd96d31548c32449a8b883ae32"
+SRCREV = "ed17fd14608d8de072c8c090ffc5fcf78c4f48ff"
 SRC_URI = "git://github.com/pmem/ndctl.git"
 
-DEPENDS = "kmod udev json-c"
+DEPENDS = "kmod udev json-c keyutils"
 
 S = "${WORKDIR}/git"
 
@@ -28,3 +28,5 @@ do_configure_prepend() {
 
 SYSTEMD_SERVICE_${PN} = "ndctl-monitor.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+
+FILES_${PN} += "${datadir}/daxctl/daxctl.conf"
