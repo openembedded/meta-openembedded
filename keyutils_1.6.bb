@@ -46,4 +46,6 @@ do_install_ptest () {
 
 FILES_${PN}-dev += "${nonarch_base_libdir}/pkgconfig/libkeyutils.pc"
 
-RDEPENDS_${PN}-ptest += "glibc-utils lsb"
+RDEPENDS_${PN}-ptest += "lsb"
+RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils"
+RDEPENDS_${PN}-ptest_append_libc-musl = " musl-utils"
