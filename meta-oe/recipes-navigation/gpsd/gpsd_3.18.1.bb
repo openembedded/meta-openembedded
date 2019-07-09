@@ -35,8 +35,8 @@ PACKAGECONFIG[qt] = "qt='yes' qt_versioned=5,qt='no',qtbase"
 EXTRA_OESCONS = " \
     sysroot=${STAGING_DIR_TARGET} \
     libQgpsmm='false' \
-    debug='true' \
-    strip='false' \
+    debug='false' \
+    nostrip='true' \
     chrpath='yes' \
     systemd='${SYSTEMD_OESCONS}' \
     libdir='${libdir}' \
