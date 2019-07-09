@@ -13,7 +13,6 @@ EXTRANATIVEPATH += "chrpath-native"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-    file://0002-include-sys-ttydefaults.h.patch \
     file://0003-SConstruct-disable-html-and-man-docs-building-becaus.patch \
 "
 SRC_URI[md5sum] = "3b11f26b295010666b1767b308f90bc5"
