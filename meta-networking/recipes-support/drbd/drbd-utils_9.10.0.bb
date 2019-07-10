@@ -35,6 +35,9 @@ EXTRA_OECONF = " \
                 --without-manual \
                "
 
+# If we have inherited reproducible_build, we want to use it.
+export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
+
 do_configure_prepend() {
     # move the the file under folder /lib/drbd/ to /usr/lib/drbd when usrmerge enabled
     if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
