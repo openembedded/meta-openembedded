@@ -65,6 +65,7 @@ PACKAGECONFIG[gcrypt] = "--with-crypto_backend=gcrypt,,libgcrypt"
 PACKAGECONFIG[nss] = "--with-crypto_backend=nss,,nss"
 PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
 PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
+PACKAGECONFIG[luks2] = "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
 
 RRECOMMENDS_${PN} = "kernel-module-aes-generic \
                      kernel-module-dm-crypt \
