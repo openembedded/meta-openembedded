@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd
 DEPENDS = "ell readline dbus"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-SRCREV = "f87159964cf8fd9f85b0699d50e4a051d4f7c948"
+SRCREV = "c923448bacf8a855b40017fe53ba2edcd062eec1"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
@@ -26,6 +26,12 @@ do_install_append() {
     install -m644 ${S}/doc/*.txt ${D}${docdir}/${BPN}
 }
 
-FILES_${PN} += "${datadir}/dbus-1"
+FILES_${PN} += "${datadir}/dbus-1 ${libdir}/modules-load.d"
 
 SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
+
+RRECOMMENDS_${PN} = "\
+    kernel-module-pkcs7-message \
+    kernel-module-pkcs8-key-parser \
+    kernel-module-x509-key-parser \
+"
