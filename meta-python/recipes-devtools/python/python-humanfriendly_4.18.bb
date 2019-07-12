@@ -1,2 +1,2 @@
-inherit setuptools3
+inherit setuptools
 require python-humanfriendly.inc
