@@ -12,7 +12,7 @@ SRC_URI += "file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
 SRC_URI[md5sum] = "2f17034432ea10415ee84a97ef131128"
 SRC_URI[sha256sum] = "3db7ff18cba9274da1d2176fb3c7cbe23926a8e58d5c8e244ad55c62d38ba09e"
 
-inherit autotools-brokensep
+inherit pkgconfig autotools-brokensep
 
 PACKAGECONFIG ?= "udev ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 
