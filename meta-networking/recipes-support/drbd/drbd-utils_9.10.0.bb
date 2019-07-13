@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
           "
 # v9.10.0
-SRCREV_drbd-utils = "147860216bf307433e2d0d7cfd6fad3642027b8d"
+SRCREV_drbd-utils = "859151b228d3b3aacefb09d06d515a2589c22e35"
 SRCREV_drbd-headers = "0955b3423f08f8e11ff05092bc1b766609fd804b"
 
 S = "${WORKDIR}/git"
