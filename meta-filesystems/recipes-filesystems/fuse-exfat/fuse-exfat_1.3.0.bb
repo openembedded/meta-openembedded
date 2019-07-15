@@ -14,7 +14,7 @@ RRECOMMENDS_${PN} = "util-linux-mount"
 
 inherit autotools pkgconfig
 
-SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
-SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
+SRC_URI[md5sum] = "846b8c36bfa4684719f9e08e9d3a6bff"
+SRC_URI[sha256sum] = "07652136064da5e4d32df5555f88c138ffa4835a23b88a5bae2015f21006e0d3"
 
 EXTRA_OECONF += "sbindir=${base_sbindir}"
