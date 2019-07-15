@@ -23,6 +23,12 @@ DEPENDS += " \
     openjpeg \
 "
 
+RDEPENDS_${PN} += " \
+    ${PYTHON_PN}-misc \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-numbers \
+"
+
 CVE_PRODUCT = "pillow"
 
 S = "${WORKDIR}/git"
