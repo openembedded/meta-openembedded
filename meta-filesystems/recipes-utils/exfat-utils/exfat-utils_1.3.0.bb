@@ -18,5 +18,5 @@ DEPENDS = "virtual/libc"
 
 inherit pkgconfig autotools
 
-SRC_URI[md5sum] = "f4e564450aa8159e26dde2869563d242"
-SRC_URI[sha256sum] = "80d3b3f21242d60d36a38a4ddb05cb7cc3a7d4eef5793e8314814937b938fcea"
+SRC_URI[md5sum] = "f8928571b152455e828ca0bd42af8b73"
+SRC_URI[sha256sum] = "dfebd07a7b907e2d603d3a9626e6440bd43ec6c4e8c07ccfc57ce9502b724835"
