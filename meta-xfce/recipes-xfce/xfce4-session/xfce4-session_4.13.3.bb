@@ -3,17 +3,7 @@ SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
 
-DEPENDS = " \
-    dbus \
-    dbus-glib \
-    gtk+ \
-    libwnck3 \
-    libsm \
-    libxfce4ui \
-    libxfce4util \
-    virtual/libx11 \
-    xfconf \
-"
+DEPENDS = "dbus libwnck3 libsm libxfce4ui virtual/libx11"
 
 inherit xfce update-alternatives distro_features_check
 
@@ -25,8 +15,8 @@ PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
 SRC_URI += " \
     file://0001-configure.in-hard-code-path-to-iceauth.patch \
 "
-SRC_URI[md5sum] = "1306b6166f47cdf6e0c61259abbb621f"
-SRC_URI[sha256sum] = "c0be0c7e602c962d0e8fca63bd86165e60313d07bfb72cf2c3f99ab53e2a22a1"
+SRC_URI[md5sum] = "94eca4dd2280910292abf9692304ce2c"
+SRC_URI[sha256sum] = "eaed34f29aa044d878d60dcb7293a542f48248919e3dcd8df98215121cb6d362"
 
 ALTERNATIVE_${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
