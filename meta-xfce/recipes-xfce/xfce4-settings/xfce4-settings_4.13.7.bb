@@ -2,32 +2,23 @@ SUMMARY = "Xfce4 settings"
 SECTION = "x11/wm"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-DEPENDS = "exo exo-native garcon gtk+ libxfce4util libxfce4ui xfconf dbus-glib libxi virtual/libx11 xrandr libxcursor libxklavier upower"
+DEPENDS = "exo exo-native garcon libxi virtual/libx11 xrandr libxcursor libxklavier upower"
 
-inherit xfce xfce-git distro_features_check
+inherit xfce distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-# schnitzeltony git repo is the mainline repo
-# + datetime-setter - sent to mainline but strange response
-# + minor bugfixes - sent mainline but no response
-# + option to hide mousepointer for a specific (touch) input device - sent mainline but no response
-SRC_URI = " \
-    git://github.com/schnitzeltony/xfce4-settings.git;protocol=git;branch=for-oe-4.12.4 \
+SRC_URI += " \
     file://0001-xsettings.xml-Set-default-themes.patch \
-    file://0002-Fix-linking-to-dbus-glib-bug-13633.patch \
 "
-SRCREV = "75d7c9b15e5ccce12b0864d3659ae9b6de96e245"
-S = "${WORKDIR}/git"
-PV = "4.12.4+git${SRCPV}"
+SRC_URI[md5sum] = "ec0a3daa810bce57cf140317243eeb1d"
+SRC_URI[sha256sum] = "ac11391eee22cb5fbffe3342916bcf9805f29c722aca825c2f57d98dc167a065"
 
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
 PACKAGECONFIG ??= " \
-    ${@bb.utils.contains('DISTRO_FEATURES','systemd','datetime-setter','',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','alsa','sound-setter', bb.utils.contains('DISTRO_FEATURES','pulseaudio','sound-setter','',d),d)} \
 "
-PACKAGECONFIG[datetime-setter] = "--enable-datetime-settings, --disable-datetime-settings,, tzdata"
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
 PACKAGECONFIG[sound-setter] = "--enable-sound-settings, --disable-sound-settings, libcanberra, libcanberra-gtk2 sound-theme-freedesktop"
 
