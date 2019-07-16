@@ -9,11 +9,10 @@ inherit xfce distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-DEPENDS += "gtk+3 glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
-           libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
+DEPENDS += "libnotify libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
 
-SRC_URI[md5sum] = "2a49be4eca78fb519984db5aae38e4ab"
-SRC_URI[sha256sum] = "66ac34b33a2021b5af04c0181dfab6e6ee2bfab0ae07ed4527ca4552a66e1c01"
+SRC_URI[md5sum] = "b5ed83dd7f30a54f95d1fae1c84fa33c"
+SRC_URI[sha256sum] = "debd8ac2409b5ac230593894b8bb668298f78bd12891623edbfc32ac87c64011"
 
 EXTRA_OECONF = " \
     --enable-network-manager \
