@@ -10,8 +10,8 @@ inherit autotools pkgconfig
 BBCLASSEXTEND = "native"
 
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "559202c4d9650e23696c44aa94cfc5a9"
-SRC_URI[sha256sum] = "e2e3a654fe9110df81f8c2483c9cbfa6d656fed15d5e5e717d6ef10bd0f5b5cb"
+SRC_URI[md5sum] = "dc7ce082ed0fb9a8f2c0953a939b8d42"
+SRC_URI[sha256sum] = "d24d4db2151a35324c672d4596a6a256f7d92727fe6a9d23648ab53f5207ba3b"
 
 do_install_append() {
     install -d ${D}${datadir}/aclocal
