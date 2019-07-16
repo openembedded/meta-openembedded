@@ -1,7 +1,7 @@
 SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
 SECTION = "console/network"
-LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d217a23f408e91c94359447735bc1800"
+LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
 DEPENDS = "dbus ncurses python libusb1 chrpath-replacement-native pps-tools"
 PROVIDES = "virtual/gpsd"
 
@@ -14,8 +14,8 @@ EXTRANATIVEPATH += "chrpath-native"
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
 "
-SRC_URI[md5sum] = "3b11f26b295010666b1767b308f90bc5"
-SRC_URI[sha256sum] = "5cb1e6d880ec9a52c62492dd0e3d77451b7c7ad625895bd652f6354215aec23e"
+SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
+SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
 
 inherit scons update-rc.d python-dir pythonnative systemd update-alternatives
 
