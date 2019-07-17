@@ -55,4 +55,4 @@ RPROVIDES_${PN}-dbg += "python3-tevent-dbg"
 
 FILES_python3-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
 
-INSANE_SKIP_python3-tevent = "dev-so"
+INSANE_SKIP_${MLPREFIX}python3-tevent = "dev-so"
