@@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[md5sum] = "24d9f18b085ba27f96d4dec643abea39"
-SRC_URI[sha256sum] = "db5beea64e305ef002a28fc6b6ca8e42b5fbee268bd713ff41e76c56a0a071d3"
+SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
+SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
 
 inherit waf-samba distro_features_check
 REQUIRED_DISTRO_FEATURES = "pam"
