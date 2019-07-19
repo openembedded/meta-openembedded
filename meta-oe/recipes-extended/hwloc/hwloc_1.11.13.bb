@@ -8,8 +8,8 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
 
 SRC_URI = "https://www.open-mpi.org/software/${BPN}/v1.11/downloads/${BP}.tar.bz2"
-SRC_URI[md5sum] = "c2a2e4e23eeb719ed31a755684697cf9"
-SRC_URI[sha256sum] = "ddfb7b9b4571551165b0fd824a340e58814c8c2b4af64c818579d4bc695a417d"
+SRC_URI[md5sum] = "3c792e23c209e9e1bafe9bdbc613d401"
+SRC_URI[sha256sum] = "a4494b7765f517c0990d1c7f09d98cb87755bb6b841e4e2cbfebca1b14bac9c8"
 
 UPSTREAM_CHECK_URI = "https://www.open-mpi.org/software/hwloc/v1.11/"
 
