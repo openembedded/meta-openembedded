@@ -9,16 +9,15 @@ SECTION = "console/network"
 BUGTRACKER = "https://github.com/esnet/iperf/issues"
 AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a9a036136b748453e839c0eb8906ef2e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f9088fe7ffdccd042f7645f1012d7f70"
 
 DEPENDS = "openssl"
 
 SRC_URI = "git://github.com/esnet/iperf.git \
-           file://automake-foreign.patch \
            file://0002-Remove-pg-from-profile_CFLAGS.patch \
            "
 
-SRCREV = "88f3ad87f38762081a6d7127890ff5c3a052b06a"
+SRCREV = "dfcea9f6a09ead01089a3c9d20c7032f2c0af2c1"
 
 S = "${WORKDIR}/git"
 
