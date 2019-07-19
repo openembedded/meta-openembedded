@@ -32,8 +32,8 @@ SRC_URI_append_libc-musl = " \
            file://0001-samba-fix-musl-lib-without-innetgr.patch \
           "
 
-SRC_URI[md5sum] = "7d20c01ae35b08bc850442a0c303bca5"
-SRC_URI[sha256sum] = "6c10266d5e8c44ce1ea17dc993ace67a83607b4d9a830959c75e3188c6af6375"
+SRC_URI[md5sum] = "9782cac8ef06049942be5f5c93b954be"
+SRC_URI[sha256sum] = "9efbeb52db1203dc779b118f1c48c161e569f7a6af5101e745497ee6296eef42"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
 
@@ -309,7 +309,7 @@ RDEPENDS_${PN}-client = "\
     winbind \
     registry-tools \
     ${PN}-pidl \
-    " 
+    "
 
 ALLOW_EMPTY_${PN}-client = "1"
 
@@ -317,7 +317,7 @@ RDEPENDS_${PN}-server = "\
     ${PN} \
     winbind \
     registry-tools \
-    " 
+    "
 
 ALLOW_EMPTY_${PN}-server = "1"
 
