@@ -4,12 +4,12 @@ BUGTRACKER = "https://github.com/firewalld/firewalld/issues"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "https://github.com/firewalld/firewalld/archive/v${PV}.tar.gz \
-           file://firewalld.init \
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
            file://0001-fix-building-in-a-separate-directory-outside-the-sou.patch \
+           file://firewalld.init \
 "
-SRC_URI[md5sum] = "5ef954d9b6b244ffeabcd226be1867a0"
-SRC_URI[sha256sum] = "039ad56ea6d6553aadf33243ea5b39802d73519e46a89c80c648b2bd1ec78aeb"
+SRC_URI[md5sum] = "e63bdd65a4d2f6338f60b31e91bb5525"
+SRC_URI[sha256sum] = "5a82a72fd9ad4cbbfb805bae615faa9b91a27855245de0fef3bcb06439394852"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 # xmlto-native is needed to populate /etc/xml/catalog.xml in the sysroot so that xsltproc finds the docbook xslt
