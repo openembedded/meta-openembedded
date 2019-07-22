@@ -22,8 +22,8 @@ SRC_URI = "http://www.vervest.org/htp/archive/c/htpdate-${PV}.tar.xz \
            file://0001-Make-environment-variables-assignments-to-be-weak.patch \
            file://0001-Replace-ntp_adjtime-with-adjtimex.patch \
            "
-SRC_URI[md5sum] = "9d5ca69be06edf5d535b52b5f790da4e"
-SRC_URI[sha256sum] = "22b2cf3ec45b0eedecddd3ad2a3d754ac57942ae7dcbac410d254935f0bdbc03"
+SRC_URI[md5sum] = "cab01ddcb62bd84154670a37a7a0c31c"
+SRC_URI[sha256sum] = "186c69509ba68178e2894cb8900e240bb688870ec25de2ac4676724e1e1d1cbf"
 
 do_configure () {
 	:
