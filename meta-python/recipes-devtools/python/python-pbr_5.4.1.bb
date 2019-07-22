@@ -2,8 +2,8 @@ inherit setuptools
 # The inc file is in oe-core
 require recipes-devtools/python/python-pbr.inc
 
-SRC_URI[md5sum] = "fcf120102d3e4859d41425638122058c"
-SRC_URI[sha256sum] = "36ebd78196e8c9588c972f5571230a059ff83783fabbbbedecc07be263ccd7e6"
+SRC_URI[md5sum] = "ab6e26026ab306989a636ec2d50a435a"
+SRC_URI[sha256sum] = "0ca44dc9fd3b04a22297c2a91082d8df2894862e8f4c86a49dac69eae9e85ca0"
 
 do_install_append() {
         if [ -f ${D}${bindir}/pbr ]; then
