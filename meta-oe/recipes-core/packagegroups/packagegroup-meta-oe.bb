@@ -251,7 +251,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     libcanberra \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xorgxrdp xrdp", "", d)} \
     procmail \
-    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "udisks udisks2 upower", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "udisks2 upower", "", d)} \
     ${NE10} \
     "
 
