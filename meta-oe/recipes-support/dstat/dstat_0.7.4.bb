@@ -11,7 +11,7 @@ DEPENDS += "asciidoc-native xmlto-native"
 
 SRC_URI = "git://github.com/dagwieers/dstat.git"
 
-SRCREV = "ebace6d4177f8748f35cec87f7a49946046b0a20"
+SRCREV = "6f5db0aed26bf8cf2700d4ffe90a9bd3436ac728"
 
 S = "${WORKDIR}/git"
 
