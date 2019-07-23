@@ -14,8 +14,8 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://configure.in-disable-tirpc-checking-for-fedora.patch \
 "
 
-SRC_URI[md5sum] = "b61ae846af022018b05511076baad60c"
-SRC_URI[sha256sum] = "31447393d15286b848810dd78ab2cb3ad231fcd1f1663f959587690eeea75413"
+SRC_URI[md5sum] = "d1689c7ccaaa7bfcfa83b5bff6b8f9b8"
+SRC_URI[sha256sum] = "c0306db9ce64f45cc7c64c9afc70abe9689daa860020345ec3ba099928b7464b"
 
 UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
 UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
