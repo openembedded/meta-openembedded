@@ -2,12 +2,8 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
 SECTION = "console/network"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
-DEPENDS = "dbus ncurses python libusb1 chrpath-replacement-native pps-tools"
+DEPENDS = "dbus ncurses python python3 libusb1 chrpath-replacement-native pps-tools"
 PROVIDES = "virtual/gpsd"
-
-# SConstruct in gpsd does not yet support Python 3
-DEPENDS += "python-scons-native"
-DEPENDS_remove = "python3-scons-native"
 
 EXTRANATIVEPATH += "chrpath-native"
 
