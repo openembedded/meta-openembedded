@@ -12,8 +12,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://0001-Check-for-MAP_SYNC-in-sys-mman.h.patch \
            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
            "
-SRC_URI[md5sum] = "b6acc4aa93a952595fc8f2e7447be6f2"
-SRC_URI[sha256sum] = "fcc2e6478aed55408a341567c0459f514e575296d8827d9004cae8aa0367dc4a"
+SRC_URI[md5sum] = "7199b7aaf088d82fc8a1660ffeb63626"
+SRC_URI[sha256sum] = "ca8b4e73dfc5b6227bb6d4e73d019035a1975b83ea41e218cdff15058a9f6c45"
 
 inherit autotools-brokensep
 
