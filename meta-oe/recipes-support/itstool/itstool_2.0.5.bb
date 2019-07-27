@@ -7,14 +7,10 @@ inherit autotools python3native
 
 DEPENDS = "libxml2-native"
 
-SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2"
+SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2 \
+           file://0001-Don-t-use-build-time-hardcoded-python-binary-path.patch"
 SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
 SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
-
-do_install_append() {
-    # fix shebang of main script
-    sed -i 's:^#!${WORKDIR}.*${PYTHON_PN} -s:#!${bindir_native}/${PYTHON_PN} -s:' ${D}${bindir}/itstool
-}
 
 BBCLASSEXTEND = "native"
 
