@@ -12,6 +12,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://fix-host-contamination-when-enable-static-daq.patch \
     file://disable-run-test-program-while-cross-compiling.patch \
     file://configure.in-disable-tirpc-checking-for-fedora.patch \
+    file://0001-chdeck-for-gettid-API-during-configure.patch \
 "
 
 SRC_URI[md5sum] = "d1689c7ccaaa7bfcfa83b5bff6b8f9b8"
