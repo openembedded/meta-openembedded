@@ -11,12 +11,14 @@ DEPENDS_append_class-target = " googletest grpc-native "
 DEPENDS_append_class-nativesdk = " grpc-native "
 
 S = "${WORKDIR}/git"
-SRCREV = "d8020cb6daa87f1a3bb3b0c299bc081c4a3de1e8"
-BRANCH = "v1.14.x"
+SRCREV = "08fd59f039c7cf62614ab7741b3f34527af103c7"
+BRANCH = "v1.22.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;branch=${BRANCH} \
            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
            "
-SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
+SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch \
+                                file://0001-Define-gettid-only-for-glibc-2.30.patch \
+                               "
 SRC_URI_append_class-nativesdk = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
 
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
