@@ -14,17 +14,6 @@ DEPENDS = "db icu libpcre libnsl2 openssl postfix-native \
 LICENSE = "IPL-1.0 | EPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b181651ad99a7dc4cc8c4ce2f491ed1a"
 
-SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
-    file://makedefs.patch \
-    file://install.patch \
-    file://main.cf \
-    file://postfix \
-    file://internal_recipient \
-    file://postfix.service \
-    file://aliasesdb \
-    file://check_hostname.sh \
-"
-
 S = "${WORKDIR}/postfix-${PV}"
 
 CLEANBROKEN = "1"
