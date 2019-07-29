@@ -7,7 +7,7 @@ SECTION = "libs"
 
 DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native gnome-common-native"
 
-inherit autotools pkgconfig gnomebase gconf gobject-introspection
+inherit autotools pkgconfig gnomebase gobject-introspection
 
 SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
 
