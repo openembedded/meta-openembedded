@@ -5,11 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-Do-not-overwrite-all-our-build-flags.patch \
            file://0002-CairoOutputDev.cc-fix-build-error-when-using-fixedpo.patch \
-           file://0001-glib-CMakeLists.txt-Add-libpoppler-to-link-along-wit.patch \
            file://basename-include.patch \
            "
-SRC_URI[md5sum] = "3fb4ca803d989742695ca586c5cc489e"
-SRC_URI[sha256sum] = "3bbaedb0fa2797cac933a0659d144303e4d09eec6892c65600da987d8707199a"
+SRC_URI[md5sum] = "0aac1fcb6466f8b7bdf51871264c7e83"
+SRC_URI[sha256sum] = "f985a4608fe592d2546d9d37d4182e502ff6b4c42f8db4be0a021a1c369528c8"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
 
