@@ -27,7 +27,7 @@ do_install_prepend() {
 	rm -rf ${B}/t/z*.t
 }
 
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN}_class-target = " \
     perl-module-carp \
     perl-module-exporter \
     perl-module-exporter-heavy \
