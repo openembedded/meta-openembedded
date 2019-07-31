@@ -18,5 +18,3 @@ UPSTREAM_CHECK_REGEX = "log4cplus-stable/(?P<pver>\d+(\.\d+)+)/"
 inherit autotools pkgconfig
 
 BBCLASSEXTEND = "native"
-
-CXXFLAGS += "-fuse-ld=gold"
