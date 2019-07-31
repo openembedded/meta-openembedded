@@ -29,9 +29,8 @@ SRC_URI_append_libc-musl = " \
     file://0001-Include-sys-time-h.patch \
 "
 
-SRC_URI[md5sum] = "f0d454c79d4040e3f25fcd12f8f33fe2"
-SRC_URI[sha256sum] = "d0d23a493dcec64c7b6807a1bb8ee864ed0f3760c2ff3088008bb661d304056f"
-
+SRC_URI[md5sum] = "97682af2b1d87f903458cfb41725fba6"
+SRC_URI[sha256sum] = "eb27535ece93174ef6b551c88467d2c9cd826b62479625bb881a53d50b079fb5"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
