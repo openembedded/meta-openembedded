@@ -11,40 +11,25 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
 
 SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
 
-SRCREV = "83b51e9f886be7c2a4d477b6e7bc6db831791d8d"
+SRCREV = "ff304e9e65e7cde17a637eea190a874c26c48634"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[lz4] = "HAVE_LZ4=1,HAVE_LZ4=0,lz4"
+PACKAGECONFIG[lzma] = "HAVE_LZMA=1,HAVE_LZMA=0,xz"
+PACKAGECONFIG[zlib] = "HAVE_ZLIB=1,HAVE_ZLIB=0,zlib"
+
+# See programs/README.md for how to use this
+ZSTD_LEGACY_SUPPORT ??= "4"
+
 do_compile () {
-    oe_runmake
-    oe_runmake -C programs zstd-compress zstd-decompress zstd-frugal
+    oe_runmake ${PACKAGECONFIG_CONFARGS} ZSTD_LEGACY_SUPPORT=${ZSTD_LEGACY_SUPPORT}
 }
 
 do_install () {
     oe_runmake install 'DESTDIR=${D}'
-    install -d -m 0755 ${D}${bindir}
-    install -m 0755 ${S}/programs/zstd-compress ${D}${bindir}
-    install -m 0755 ${S}/programs/zstd-decompress ${D}${bindir}
-    install -m 0755 ${S}/programs/zstd-frugal ${D}${bindir}
 }
-
-PACKAGE_BEFORE_PN += " \
-    ${PN}-compress \
-    ${PN}-decompress \
-    ${PN}-frugal \
-"
-
-FILES_${PN}-compress = " \
-    ${bindir}/zstd-compress \
-"
-
-FILES_${PN}-decompress = " \
-    ${bindir}/zstd-decompress \
-"
-
-FILES_${PN}-frugal = " \
-    ${bindir}/zstd-frugal \
-"
 
 BBCLASSEXTEND = "native nativesdk"
