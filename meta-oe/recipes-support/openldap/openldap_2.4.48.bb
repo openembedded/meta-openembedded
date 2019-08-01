@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # basically BSD.  opensource.org does not record this license
 # at present (so it is apparently not OSI certified).
 LICENSE = "OpenLDAP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25b4ead0e45182e7c2914e59ff57009f \
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ad914c35f97b468f421f8ac0f3d821f4 \
                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
                     "
 SECTION = "libs"
@@ -26,8 +26,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://remove-user-host-pwd-from-version.patch \
 "
 
-SRC_URI[md5sum] = "e508f97bfd778fec7799f286e5c07176"
-SRC_URI[sha256sum] = "f54c5877865233d9ada77c60c0f69b3e0bfd8b1b55889504c650047cc305520b"
+SRC_URI[md5sum] = "0729a0711fe096831dedc159e0bbe73f"
+SRC_URI[sha256sum] = "d9523ffcab5cd14b709fcf3cb4d04e8bc76bb8970113255f372bc74954c6074d"
 
 DEPENDS = "util-linux groff-native"
 
