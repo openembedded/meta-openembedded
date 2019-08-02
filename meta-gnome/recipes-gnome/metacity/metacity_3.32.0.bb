@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/GNOME/metacity.git;branch=master \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "d69fba052cdd0aa8348dc1bbbbb1ecbadfbebbd8"
+SRCREV = "bf1bfbadf47eff97703df17e95b15168e2034222"
 
 EXTRA_OECONF += "--disable-xinerama"
 
