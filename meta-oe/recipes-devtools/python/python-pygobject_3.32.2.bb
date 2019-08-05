@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
 GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gobject-introspection distutils-base upstream-version-is-even
 
-DEPENDS += "python glib-2.0"
+DEPENDS += "python python-setuptools glib-2.0"
 
 SRCNAME = "pygobject"
 SRC_URI = " \
@@ -30,7 +30,6 @@ PACKAGECONFIG[python] = "-Dpython=python3, -Dpython=python2, , "
 PACKAGECONFIG[stagedir] = "-Dstagedir=${PYTHON_SITEPACKAGES_DIR}, -Dstagedir="", , "
 
 BBCLASSEXTEND = "native"
-RDEPENDS_${PN} = "python-setuptools"
 RDEPENDS_${PN}_class-native = ""
 
 do_install_append() {
