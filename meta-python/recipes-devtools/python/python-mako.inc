@@ -8,8 +8,8 @@ PYPI_PACKAGE = "Mako"
 
 inherit pypi
 
-SRC_URI[md5sum] = "e162578170331f0cc6a4adb063c7c0f6"
-SRC_URI[sha256sum] = "f5a642d8c5699269ab62a68b296ff990767eb120f51e2e8f3d6afb16bdb57f4b"
+SRC_URI[md5sum] = "6c3f2da0b74af529a4c4a537d0848bf2"
+SRC_URI[sha256sum] = "a36919599a9b7dc5d86a7a8988f23a9a3a3d083070023bab23d64f7f1d1e0a4b"
 
 RDEPENDS_${PN} = " \
     ${PYTHON_PN}-html \
