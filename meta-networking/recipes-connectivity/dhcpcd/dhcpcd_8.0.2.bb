@@ -11,8 +11,8 @@ UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
 
 SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
            file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
-SRC_URI[md5sum] = "b9c3b3a116f1abafc346f80cb511f8c1"
-SRC_URI[sha256sum] = "031f4fbef5ad41b44714fec343ff5be898e3e3cd5e7c53d6ef3aaec43cdba931"
+SRC_URI[md5sum] = "c0375a1f725f1c191b43af60e4f7175b"
+SRC_URI[sha256sum] = "33a26ad561546cd2cfe1e6de6352a85df72b41c37def8c7eb00e90e57c627a5c"
 
 inherit pkgconfig autotools-brokensep
 
