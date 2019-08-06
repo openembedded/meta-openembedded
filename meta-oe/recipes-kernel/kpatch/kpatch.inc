@@ -17,6 +17,7 @@ EXTRA_OEMAKE = " \
 	SYSTEMDDIR=${D}${systemd_system_unitdir} \
 	UPSTARTDIR=${D}${sysconfdir}/init \
 	DESTDIR=${D} \
+	ARCH=${TARGET_ARCH} \
 	BUILDMOD=no \
 	CC='${CC}' \
 	"
