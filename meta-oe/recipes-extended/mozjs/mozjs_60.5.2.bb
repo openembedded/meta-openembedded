@@ -55,6 +55,9 @@ EXTRA_OECONF = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
 "
 
+# Without this, JS_Init() will fail for mips64.
+EXTRA_OECONF_append_mips64 = " --with-intl-api=build"
+
 EXTRA_OECONF_append_mipsarch = " --disable-ion"
 EXTRA_OECONF_append_riscv64 = " --disable-ion"
 EXTRA_OECONF_append_riscv32 = " --disable-ion"
