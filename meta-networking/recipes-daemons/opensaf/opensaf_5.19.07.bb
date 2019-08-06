@@ -26,8 +26,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
            file://0001-Add-configure-time-check-for-gettid-API.patch \
            "
-SRC_URI[md5sum] = "4dd1497ccd82d275735853bf0db5c510"
-SRC_URI[sha256sum] = "de42c8dd850990716ca494ca598165cc7a23b5b7f2bc21af5d71a3d971ddd595"
+SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
+SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
 
 inherit autotools useradd systemd pkgconfig
 
