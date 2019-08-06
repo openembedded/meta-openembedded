@@ -26,6 +26,7 @@ inherit autotools-brokensep pkgconfig gettext
 # source - see https://src.fedoraproject.org/cgit/rpms/graphviz.git/tree/graphviz.spec
 
 SRC_URI = "https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${PV}/graphviz-stable_release_${PV}.tar.gz \
+           file://0001-plugin-pango-Include-freetype-headers-explicitly.patch \
 "
 # Use native mkdefs
 SRC_URI_append_class-target = " file://0001-Use-native-mkdefs.patch"
