@@ -23,13 +23,6 @@ EXTRA_OECONF = " \
     --without-selinux \
 "
 
-do_configure_append() {
-    # Sigh... --enable-compile-warnings=no doesn't actually turn off -Werror
-    for i in $(find ${B} -name "Makefile") ; do
-        sed -i -e s%-Werror[^[:space:]]*%%g $i
-    done
-}
-
 # gobject-introspection related
 GI_DATA_ENABLED_libc-musl = "False"
 
