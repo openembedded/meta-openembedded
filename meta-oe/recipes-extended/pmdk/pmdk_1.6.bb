@@ -35,14 +35,14 @@ do_install() {
 	oe_runmake prefix=${prefix} DESTDIR=${D} install
 
 	# Remove uneeded files
-	rm -rf ${D}/usr/lib64/pmdk_debug
+	rm -rf ${D}/usr/${baselib}/pmdk_debug
 }
 
 # Include these by default otherwise the SDK is not very useful
 FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
 FILES_${PN} += "${libdir}/*so*"
 FILES_${PN} += "${libdir}/pkgconfig/*.pc"
-FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/*"
+FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/* /usr/*/include/"
 FILES_${PN} += "/usr/etc"
 FILES_${PN} += "/usr/share"
 
