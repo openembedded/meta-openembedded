@@ -9,8 +9,8 @@ DEPENDS = "libxml2-native"
 
 SRC_URI = "http://files.itstool.org/${BPN}/${BPN}-${PV}.tar.bz2 \
            file://0001-Don-t-use-build-time-hardcoded-python-binary-path.patch"
-SRC_URI[md5sum] = "655c6f78fc64faee45adcc45ccc5a57e"
-SRC_URI[sha256sum] = "100506f8df62cca6225ec3e631a8237e9c04650c77495af4919ac6a100d4b308"
+SRC_URI[md5sum] = "4306eeba4f4aee6b393d14f9c3c57ca1"
+SRC_URI[sha256sum] = "6233cc22726a9a5a83664bf67d1af79549a298c23185d926c3677afa917b92a9"
 
 BBCLASSEXTEND = "native"
 
