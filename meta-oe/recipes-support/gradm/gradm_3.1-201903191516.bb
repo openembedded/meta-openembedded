@@ -11,12 +11,12 @@ LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
 DEPENDS = "flex-native bison-native ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
-SRC_URI = "http://grsecurity.net/stable/${BP}-201507191652.tar.gz \
+SRC_URI = "http://grsecurity.net/stable/${BP}.tar.gz \
            file://0001-Makefile-remove-strip.patch \
            file://0001-Makefile-Append-instead-of-overriding-LDFLAGS.patch \
            "
-SRC_URI[md5sum] = "ecec72d3a9b6d84c00eda97957b707b6"
-SRC_URI[sha256sum] = "2f14c357bf0459e502a4e108b76c3f6240aa484762d07bb1687796b9b9297a50"
+SRC_URI[md5sum] = "5099c715433981d5a3eed8ded7c5bbc0"
+SRC_URI[sha256sum] = "d3a0b6383ff97a2054941d71133c737efae66afdd8eef59346c031ae15c75ff3"
 
 S = "${WORKDIR}/gradm"
 
@@ -24,6 +24,7 @@ inherit autotools-brokensep
 
 do_compile() {
     oe_runmake 'CC=${CC}'                               \
+               'LIBS='                                  \
                'OPT_FLAGS=${CFLAGS}'                    \
                'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
                'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
@@ -34,6 +35,7 @@ do_compile() {
 do_install() {
     oe_runmake 'CC=${CC}'                               \
                'DESTDIR=${D}'                           \
+               'LIBS='                                  \
                'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
                'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
                'BISON=${STAGING_BINDIR_NATIVE}/bison'   \
