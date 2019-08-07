@@ -15,6 +15,7 @@ EXTRA_OEMAKE = " \
 	LIBDIR=${D}${libdir} \
 	MANDIR=${D}${mandir}/man1 \
 	SYSTEMDDIR=${D}${systemd_system_unitdir} \
+	UPSTARTDIR=${D}${sysconfdir}/init \
 	DESTDIR=${D} \
 	BUILDMOD=no \
 	CC='${CC}' \
