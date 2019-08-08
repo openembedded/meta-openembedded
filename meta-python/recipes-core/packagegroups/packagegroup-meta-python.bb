@@ -57,7 +57,7 @@ RDEPENDS_packagegroup-meta-python = "\
     python-markupsafe python-pytest-runner python-grpcio python-mccabe python-pytz python-selectors34 \
     python-cython python-chardet python-editor python-flask-bootstrap python-html5lib \
     python-singledispatch python-redis python-flask-mail python-funcsigs python-snimpy python-pyasn1 \
-    python-decorator python-urllib3 python-feedformatter python-matplotlib python-iso8601 \
+    python-decorator python-urllib3 python-feedformatter python-iso8601 \
     python-numeric python-robotframework python-django python-simplejson python-wcwidth \
     python-configparser python-epydoc python-intervals python-speaklater \
     python-aws-iot-device-sdk-python python-constantly python-bitarray python-flask-wtf \
