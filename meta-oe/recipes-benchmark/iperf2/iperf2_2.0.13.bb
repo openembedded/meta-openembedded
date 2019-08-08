@@ -4,10 +4,10 @@ SECTION = "console/network"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e136a7b2560d80bcbf0d9b3e1356ecff"
 
-SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf2/iperf-${PV}.tar.gz"
+SRC_URI = " ${SOURCEFORGE_MIRROR}/${BPN}/iperf-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "097cf0754bc1afa165975c06a91e6906"
-SRC_URI[sha256sum] = "7fe4348dcca313b74e0aa9c34a8ccd713b84a5615b8578f4aa94cedce9891ef2"
+SRC_URI[md5sum] = "31ea1c6d5cbf80b16ff3abe4288dad5e"
+SRC_URI[sha256sum] = "c88adec966096a81136dda91b4bd19c27aae06df4d45a7f547a8e50d723778ad"
 
 S = "${WORKDIR}/iperf-${PV}"
 
