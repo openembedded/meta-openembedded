@@ -33,7 +33,7 @@ RDEPENDS_packagegroup-meta-python = "\
     python-robotframework-seriallibrary python-pyalsaaudio python-pytest-helpers-namespace \
     python-alembic python-flask-pymongo python-slip-dbus python-pydbus python-automat python-rfc3987 \
     python-tzlocal python-backports-ssl python-subprocess32 python-asn1crypto python-pybind11 \
-    python-ptyprocess python-babel python-passlib python-oauthlib python-sdnotify \
+    python-ptyprocess python-babel python-passlib python-sdnotify \
     python-lazy-object-proxy python-cryptography-vectors python-crcmod python-pyusb python-vobject \
     python-webcolors python-pyparsing python-beautifulsoup4 python-cffi python-tornado-redis \
     python-itsdangerous python-pyasn1-modules python-netaddr python-vcversioner \
