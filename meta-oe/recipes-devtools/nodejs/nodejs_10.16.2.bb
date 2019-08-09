@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
            file://0002-Using-native-torque.patch \
            "
 
-SRC_URI[md5sum] = "c9a7ab43f8b50c8a4d5545de307b7540"
-SRC_URI[sha256sum] = "18e37f891d10ea7fbc8f6410c444c2b1d9cc3cbbb1d35aa9c41f761816956608"
+SRC_URI[md5sum] = "fa70b942c5e3379ce96219fe90f50c8f"
+SRC_URI[sha256sum] = "6cbc17795e9259dce7a8f5fd5a2e46f9e6920fb48b7d9539c5b2faa5bb5db4d8"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -100,7 +100,7 @@ do_install_append_class-target() {
 
 PACKAGES =+ "${PN}-npm"
 FILES_${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm ${bindir}/npx"
-RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils \
+RDEPENDS_${PN}-npm = "bash python python-shell python-datetime python-subprocess python-textutils \
     python-compiler python-misc python-multiprocessing"
 
 PACKAGES =+ "${PN}-systemtap"
