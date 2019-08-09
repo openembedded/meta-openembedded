@@ -8,6 +8,7 @@ DEPENDS = "xz libpcap libpcre daq libdnet util-linux daq-native libtirpc bison-n
 
 SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://snort.init \
+    file://volatiles.99_snort \
     file://0001-libpcap-search-sysroot-for-headers.patch \
     file://fix-host-contamination-when-enable-static-daq.patch \
     file://disable-run-test-program-while-cross-compiling.patch \
@@ -15,8 +16,8 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://0001-chdeck-for-gettid-API-during-configure.patch \
 "
 
-SRC_URI[md5sum] = "d1689c7ccaaa7bfcfa83b5bff6b8f9b8"
-SRC_URI[sha256sum] = "c0306db9ce64f45cc7c64c9afc70abe9689daa860020345ec3ba099928b7464b"
+SRC_URI[md5sum] = "009254a9797ec93321c5936b99dcd6c8"
+SRC_URI[sha256sum] = "2472989da3aace000d1ea5931ece68f8e5cc0c511e272d65182113a2481e822d"
 
 UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
 UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
@@ -72,10 +73,17 @@ do_install_append() {
 
     cp ${S}/preproc_rules/*.rules ${D}${sysconfdir}/snort/preproc_rules/
     install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
-    mkdir -p ${D}${localstatedir}/log/snort
-    install -d ${D}/var/log/snort
+
+    install -d ${D}${sysconfdir}/default/volatiles
+    install -m 0644 ${WORKDIR}/volatiles.99_snort ${D}${sysconfdir}/default/volatiles/99_snort
 
     sed -i -e 's|-fdebug-prefix-map[^ ]*||g; s|-fmacro-prefix-map[^ ]*||g; s|${STAGING_DIR_TARGET}||g' ${D}${libdir}/pkgconfig/*.pc
+}
+
+pkg_postinst_${PN}() {
+    if [ -z "$D" ] && [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+        ${sysconfdir}/init.d/populate-volatile.sh update
+    fi
 }
 
 FILES_${PN} += " \
