@@ -13,8 +13,8 @@ SRC_URI = " \
     file://hostapd.service \
 "
 
-SRC_URI[md5sum] = "ed2c254e5f400838cb9d8e7b6e43b86c"
-SRC_URI[sha256sum] = "929f522be6eeec38c53147e7bc084df028f65f148a3f7e4fa6c4c3f955cee4b0"
+SRC_URI[md5sum] = "f188fc53a495fe7af3b6d77d3c31dee8"
+SRC_URI[sha256sum] = "881d7d6a90b2428479288d64233151448f8990ab4958e0ecaca7eeb3c9db2bd7"
 
 S = "${WORKDIR}/hostapd-${PV}"
 B = "${WORKDIR}/hostapd-${PV}/hostapd"
