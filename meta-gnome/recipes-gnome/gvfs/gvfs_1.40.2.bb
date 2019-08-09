@@ -9,8 +9,8 @@ DEPENDS += "libsecret glib-2.0 glib-2.0-native gconf libgudev shadow-native"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 
-SRC_URI[archive.md5sum] = "96ef53ed613e4d223e0db3a7acea44f0"
-SRC_URI[archive.sha256sum] = "3739d64b79c95a9f0f9faf2c5f9e5298b4b2ebdd6431435ce656ecd19b31e2f2"
+SRC_URI[archive.md5sum] = "47db9bec616e089513b7f1386e5c7d5f"
+SRC_URI[archive.sha256sum] = "bdefe8fec6a1097f0c126fa2a4533667c98a86e237ac640518000e16b363971e"
 
 
 EXTRA_OEMESON = " \
