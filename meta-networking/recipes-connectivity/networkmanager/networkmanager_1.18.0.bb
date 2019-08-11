@@ -111,7 +111,7 @@ FILES_${PN} += " \
     ${nonarch_libdir}/NetworkManager/conf.d \
     ${datadir}/polkit-1 \
     ${datadir}/dbus-1 \
-    ${noarch_base_libdir}/udev/* \
+    ${nonarch_base_libdir}/udev/* \
     ${systemd_unitdir}/system \
     ${libdir}/pppd \
 "
