@@ -12,6 +12,17 @@ PYPI_PACKAGE = "python-socketio"
 SRC_URI[md5sum] = "86cd47dddea1785ce7a6c72f55c93fe7"
 SRC_URI[sha256sum] = "506b2cf7a520b40ea0b3f25e1272eff8de134dce6f471c1f6bc0de8c90fe8c57"
 
+PACKAGECONFIG ?= "asyncio_client client"
+PACKAGECONFIG[asyncio_client] = ",,,python3-aiohttp python3-websockets"
+PACKAGECONFIG[client] = ",,,python3-requests python3-websocket-client"
+
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-engineio \
+    ${PYTHON_PN}-logging \
+    ${PYTHON_PN}-math \
+    ${PYTHON_PN}-pickle \
+    ${PYTHON_PN}-json \
+    ${PYTHON_PN}-threading \
+    ${PYTHON_PN}-six \
+    ${PYTHON_PN}-attrs \
     "
