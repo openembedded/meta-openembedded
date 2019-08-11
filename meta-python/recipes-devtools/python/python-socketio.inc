@@ -9,8 +9,8 @@ inherit pypi
 
 PYPI_PACKAGE = "python-socketio"
 
-SRC_URI[md5sum] = "0b57da61a9464d2e0dc9a8d0164d86d2"
-SRC_URI[sha256sum] = "64feb0817f1bf7e3e7fc05f6f65e28d76146d8061cb7de25b63502717f80e908"
+SRC_URI[md5sum] = "86cd47dddea1785ce7a6c72f55c93fe7"
+SRC_URI[sha256sum] = "506b2cf7a520b40ea0b3f25e1272eff8de134dce6f471c1f6bc0de8c90fe8c57"
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-engineio \
