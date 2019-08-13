@@ -11,8 +11,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI += " \
     file://0001-libxfce4kbd-private-xfce4-keyboard-shortcuts.xml-fix.patch \
 "
-SRC_URI[md5sum] = "9e5a805d2d557df79e571468978a2766"
-SRC_URI[sha256sum] = "3c5e505ce56a5993db473efed9962705dd255ffaee17009ed1b3e9f40b543969"
+SRC_URI[md5sum] = "50eae4bab5eeced186bce16fb5f802ac"
+SRC_URI[sha256sum] = "c449075eaeae4d1138d22eeed3d2ad7032b87fb8878eada9b770325bed87f2da"
 
 EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
 
