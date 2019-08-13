@@ -8,8 +8,8 @@ inherit xfce distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "699a0534a0899e31366018a9e9e2aeb0"
-SRC_URI[sha256sum] = "29309091db8b0f08c5a727625cc470673134977d7966cae0392f131300f9d5e9"
+SRC_URI[md5sum] = "f9ef39ed4bbff05eb74058dfff24dd84"
+SRC_URI[sha256sum] = "7ea7c6693334f2248cf399586af8974dfb7db9aad685ee31ac100e62e19a1837"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
