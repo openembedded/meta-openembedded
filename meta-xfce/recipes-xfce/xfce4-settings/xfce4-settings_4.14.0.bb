@@ -11,8 +11,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI += " \
     file://0001-xsettings.xml-Set-default-themes.patch \
 "
-SRC_URI[md5sum] = "ec0a3daa810bce57cf140317243eeb1d"
-SRC_URI[sha256sum] = "ac11391eee22cb5fbffe3342916bcf9805f29c722aca825c2f57d98dc167a065"
+SRC_URI[md5sum] = "dcbc673448e1a816b2c47a7ce0ca13aa"
+SRC_URI[sha256sum] = "e03040d623abda0222ad04f226582277a1936507ddfa927ec8e87927debc113c"
 
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
