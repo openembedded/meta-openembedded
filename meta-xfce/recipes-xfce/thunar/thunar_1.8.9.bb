@@ -9,8 +9,8 @@ inherit xfce gobject-introspection distro_features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
-SRC_URI[md5sum] = "9abdbc78cbf9957f9727c327476a08c2"
-SRC_URI[sha256sum] = "3e033af06751beee23e73cf16cbd97513d3c0adf358d8a42158af38a44b9d329"
+SRC_URI[md5sum] = "fd1166e879294e4490d5fa9dccfdd9da"
+SRC_URI[sha256sum] = "7a758e7ac03501c520c304f8845353315c954d429b17d591b8eea8b14f1350b9"
 
 S = "${WORKDIR}/Thunar-${PV}/"
 
