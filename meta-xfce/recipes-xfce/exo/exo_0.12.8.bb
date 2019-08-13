@@ -1,8 +1,8 @@
-DESCRIPTION="Application library for the Xfce desktop environment"
+DESCRIPTION = "Application library for the Xfce desktop environment"
 SECTION = "x11"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "gtk+ libxfce4ui virtual/libx11 liburi-perl-native cairo"
+DEPENDS = "gtk+3 libxfce4ui virtual/libx11 liburi-perl-native cairo"
 DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
 
 inherit xfce pythonnative perlnative gtk-doc distro_features_check
@@ -20,8 +20,12 @@ SRC_URI_append_class-native = " \
     file://reduce-build-to-exo-csource-only.patch \
 "
 
-SRC_URI[md5sum] = "e97267e5d5a41bf5b95e9bfdaa62e47a"
-SRC_URI[sha256sum] = "1417fffc593225d61ba57b050ae2ce66ef37615c9ec66944db32019761441003"
+SRC_URI[md5sum] = "e618ce760a12ac7427a48a44c69f3d31"
+SRC_URI[sha256sum] = "3400a2e64aa41ede25bedaca4909bde7ea4f8698d9598d1b80f02a40ac89fcde"
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG_class-target ??= "gtk"
+PACKAGECONFIG[gtk] = "--enable-gtk2,--disable-gtk2,gtk+"
 
 PACKAGES =+ "exo-csource"
 
