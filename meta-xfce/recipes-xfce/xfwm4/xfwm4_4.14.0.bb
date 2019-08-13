@@ -1,4 +1,4 @@
-DESCRIPTION="Xfce4 Window Manager"
+DESCRIPTION = "Xfce4 Window Manager"
 SECTION = "x11/wm"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d791728a073bc009b4ffaf00b7599855"
@@ -9,8 +9,8 @@ inherit xfce update-alternatives distro_features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
-SRC_URI[md5sum] = "e53081e5928d401604d158429716e699"
-SRC_URI[sha256sum] = "12ad274f6662c8afee35fd9b9310e73bd462c423578d448b2d7353e3c8eda6c1"
+SRC_URI[md5sum] = "c33847836958d540e3ecd0a27f131c0f"
+SRC_URI[sha256sum] = "b4182bf8dc63d092f120a51fcae0eb54b9bd4aa4f8486f47e5a65a108322b615"
 
 PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
