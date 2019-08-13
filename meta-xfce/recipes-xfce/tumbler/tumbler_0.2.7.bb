@@ -1,14 +1,13 @@
-DESCRIPTION="Thumbnail service implementing the thumbnail management D-Bus specification"
+DESCRIPTION = "Thumbnail service implementing the thumbnail management D-Bus specification"
 SECTION = "x11/libs"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-DEPENDS = "dbus-glib dbus-glib-native freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgsf"
+DEPENDS = "freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgsf"
 
 inherit xfce gtk-doc
 
-SRC_URI[md5sum] = "dd5f9bae6a2470eb5fff0dc9edd3ea09"
-SRC_URI[sha256sum] = "4e27a59694b0a5cc69ebccbdb00c724e670b5b7c30bc4dc0b461aac93f234fac"
-SRC_URI += "file://0001-configure-use-pkg-config-for-freetype2.patch"
+SRC_URI[md5sum] = "a59b2a545c9c128dbd2b960a7779dec0"
+SRC_URI[sha256sum] = "f704c35f16716cbee3c94883cee2a8d865e9cf2535d0e84f57e1c8cce00314e4"
 
 INSANE_SKIP_${PN} = "dev-so"
 
