@@ -16,15 +16,14 @@ DEPENDS = " \
 
 inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative upstream-version-is-even vala
 
-SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-           file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
-           file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
-           file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-           file://0004-Add-native-suffix-to-exacutables-produced-and-run-du.patch \
-           file://0005-Use-LC_MESSAGES-for-address-localization-when-LC_ADD.patch \
-           file://0006-Dont-add-usr-lib-to-LDFLAGS-when-linking-libphonenum.patch \
-           file://0007-Modify-gobject-intrispection-support-to-work-with-OE.patch \
-           file://iconv-detect.h \
+SRC_URI += "file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
+            file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
+            file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+            file://0004-Add-native-suffix-to-exacutables-produced-and-run-du.patch \
+            file://0005-Use-LC_MESSAGES-for-address-localization-when-LC_ADD.patch \
+            file://0006-Dont-add-usr-lib-to-LDFLAGS-when-linking-libphonenum.patch \
+            file://0007-Modify-gobject-intrispection-support-to-work-with-OE.patch \
+            file://iconv-detect.h \
            "
 SRC_URI[archive.md5sum] = "57820f3f88fc554e1a58665a52e12c05"
 SRC_URI[archive.sha256sum] = "83f67cb4b680e892b22b51bcde64c788b7ac63e92a99de401fb347e3794f4c7f"
