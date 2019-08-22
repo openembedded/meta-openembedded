@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
                     file://src/calendar/libecal/e-cal.h;endline=24;md5=e699ec3866f73f129f7a4ffffdcfc196"
 
 DEPENDS = " \
-    intltool-native gperf-native \
-    glib-2.0 gtk+3 gconf libgnome-keyring libgdata \
+    intltool-native gperf-native glib-2.0-native \
+    glib-2.0 gtk+3 gconf libgnome-keyring libgdata libcanberra icu \
     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
 "
 
@@ -22,11 +22,11 @@ SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}
            file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
            file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
            file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
+           file://0004-Add-native-suffix-to-exacutables-produced-and-run-du.patch \
            file://iconv-detect.h \
-           file://0004-Use-recommended-way-to-handle-the-icu-namespace.patch \
            "
-SRC_URI[archive.md5sum] = "ae7bbf543b2c3ff79af27e0edea5d472"
-SRC_URI[archive.sha256sum] = "e43aa1847ddc02965f560261ef88d18fb8704eddaa55555bf96b884a33e510ec"
+SRC_URI[archive.md5sum] = "57820f3f88fc554e1a58665a52e12c05"
+SRC_URI[archive.sha256sum] = "83f67cb4b680e892b22b51bcde64c788b7ac63e92a99de401fb347e3794f4c7f"
 
 LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
 LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
@@ -59,6 +59,16 @@ do_configure_append () {
 
 do_compile_prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
+    # CMake does not support building native binaries when cross compiling. As result
+    # it always cross compiles them for the target and then aborts when they fail to run.
+    # To work around this manually build required tools and patch cmake targets to use
+    # those native binaries we built here.
+    ${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -I${B} ${S}/src/camel/camel-gen-tables.c \
+        -o ${B}/src/camel/camel-gen-tables-native
+    ${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -I${B} $(pkg-config-native --cflags glib-2.0) \
+        ${S}/src/addressbook/libebook-contacts/gen-western-table.c \
+        -o ${B}/src/addressbook/libebook-contacts/gen-western-table-native \
+        $(pkg-config-native --libs glib-2.0)
 }
 
 
