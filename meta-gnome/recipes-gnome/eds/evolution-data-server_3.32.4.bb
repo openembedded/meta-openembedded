@@ -36,6 +36,7 @@ EXTRA_OECMAKE = " \
     -DENABLE_GOOGLE_AUTH=OFF \
     -DENABLE_WEATHER=OFF \
     -D${LKSTRFTIME} \
+    -DSYSCONF_INSTALL_DIR=${sysconfdir} \
     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
 
