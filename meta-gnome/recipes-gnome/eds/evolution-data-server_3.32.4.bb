@@ -43,9 +43,6 @@ EXTRA_OECMAKE = " \
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
 
-EXTRA_OECONF = "--with-libdb=${STAGING_DIR_HOST}${prefix} \
-                --disable-nntp --disable-gtk-doc"
-
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
 
@@ -96,7 +93,6 @@ FILES_libcamel = "${libdir}/libcamel-*.so.* \
                   ${libdir}/evolution-data-server*/camel-providers/*.urls"
 FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
                       ${libdir}/pkgconfig/camel*pc \
-                      ${libdir}/evolution-data-server*/camel-providers/*.la \
                       ${includedir}/evolution-data-server*/camel"
 
 FILES_libebook = "${libdir}/libebook-*.so.*"
@@ -124,7 +120,6 @@ FILES_libedata-book = "${libexecdir}/e-addressbook-factory \
                        ${datadir}/evolution-data-server-1.4/weather/Locations.xml"
 FILES_libedata-book-dev = "${libdir}/libedata-book-*.so \
                            ${libdir}/pkgconfig/libedata-book-*.pc \
-                           ${libdir}/evolution-data-server-*/extensions/libebook*.la \
                            ${includedir}/evolution-data-server-*/libedata-book"
 
 FILES_libedata-cal = "${libexecdir}/e-calendar-factory \
@@ -133,8 +128,7 @@ FILES_libedata-cal = "${libexecdir}/e-calendar-factory \
                       ${libdir}/evolution-data-server-*/extensions/libecal*.so"
 FILES_libedata-cal-dev = "${libdir}/libedata-cal-*.so \
                           ${libdir}/pkgconfig/libedata-cal-*.pc \
-                          ${includedir}/evolution-data-server-*/libedata-cal \
-                          ${libdir}/evolution-data-server-*/extensions/libecal*.la"
+                          ${includedir}/evolution-data-server-*/libedata-cal"
 
 FILES_libedataserver = "${libdir}/libedataserver-*.so.*"
 FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
