@@ -118,8 +118,7 @@ FILES_libebook-contacts-dev = "${libdir}/libebook-contacts-*.so \
                                ${datadir}/vala/vapi/libebook-contacts-* \
                                ${includedir}/evolution-data-server*/libebook-contacts/*.h"
 
-FILES_libecal = "${libdir}/libecal-*.so.* \
-                 ${datadir}/evolution-data-server-1.4/zoneinfo"
+FILES_libecal = "${libdir}/libecal-*.so.*"
 FILES_libecal-dev = "${libdir}/libecal-*.so ${libdir}/pkgconfig/libecal-*.pc \
                      ${includedir}/evolution-data-server*/libecal/*.h \
                      ${includedir}/evolution-data-server*/libical/*.h"
@@ -128,8 +127,7 @@ RRECOMMENDS_libecal = "libedata-cal tzdata"
 FILES_libedata-book = "${libexecdir}/e-addressbook-factory \
                        ${datadir}/dbus-1/services/*.AddressBook.service \
                        ${libdir}/libedata-book-*.so.* \
-                       ${libdir}/evolution-data-server-*/extensions/libebook*.so \
-                       ${datadir}/evolution-data-server-1.4/weather/Locations.xml"
+                       ${libdir}/evolution-data-server-*/extensions/libebook*.so"
 FILES_libedata-book-dev = "${libdir}/libedata-book-*.so \
                            ${libdir}/pkgconfig/libedata-book-*.pc \
                            ${includedir}/evolution-data-server-*/libedata-book"
