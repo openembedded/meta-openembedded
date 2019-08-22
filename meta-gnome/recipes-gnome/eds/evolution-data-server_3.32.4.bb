@@ -14,7 +14,7 @@ DEPENDS = " \
     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
 "
 
-inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative upstream-version-is-even
+inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative upstream-version-is-even vala
 
 SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
            file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
@@ -43,6 +43,7 @@ PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
 PACKAGECONFIG[oauth2] = "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,json-glib webkitgtk"
 PACKAGECONFIG[mitkrb5] = "-DWITH_KRB5=ON,-DWITH_KRB5=OFF,krb5"
 PACKAGECONFIG[introspection] = "-DENABLE_INTROSPECTION=ON,-DENABLE_INTROSPECTION=OFF"
+PACKAGECONFIG[vala] = "-DENABLE_VALA_BINDINGS=ON -DVAPIGEN=${STAGING_BINDIR_NATIVE}/vapigen,-DENABLE_VALA_BINDINGS=OFF"
 
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
@@ -95,6 +96,7 @@ FILES_libcamel = "${libdir}/libcamel-*.so.* \
 FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
                       ${libdir}/pkgconfig/camel*pc \
                       ${includedir}/evolution-data-server*/camel \
+                      ${datadir}/vala/vapi/camel-* \
                       ${datadir}/gir-*/Camel-*.gir"
 
 FILES_libebook = "${libdir}/libebook-*.so.* \
@@ -102,6 +104,7 @@ FILES_libebook = "${libdir}/libebook-*.so.* \
 FILES_libebook-dev = "${libdir}/libebook-1.2.so \
                       ${libdir}/pkgconfig/libebook-*.pc \
                       ${datadir}/gir-*/EBook-*.gir \
+                      ${datadir}/vala/vapi/libebook-*.* \
                       ${includedir}/evolution-data-server*/libebook/*.h"
 RRECOMMENDS_libebook = "libedata-book"
 
@@ -110,6 +113,7 @@ FILES_libebook-contacts = "${libdir}/libebook-contacts-*.so.* \
 FILES_libebook-contacts-dev = "${libdir}/libebook-contacts-*.so \
                                ${libdir}/pkgconfig/libebook-contacts-*.pc \
                                ${datadir}/gir-*/EBookContacts-*.gir \
+                               ${datadir}/vala/vapi/libebook-contacts-* \
                                ${includedir}/evolution-data-server*/libebook-contacts/*.h"
 
 FILES_libecal = "${libdir}/libecal-*.so.* \
@@ -140,10 +144,12 @@ FILES_libedataserver = "${libdir}/libedataserver-*.so.* \
                         ${libdir}/girepository-*/EDataServer-*.typelib"
 FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
                             ${libdir}/pkgconfig/libedataserver-*.pc \
+                            ${datadir}/vala/vapi/libedataserver-* \
                             ${includedir}/evolution-data-server-*/libedataserver/*.h"
 
 FILES_libedataserverui = "${libdir}/libedataserverui-*.so.*"
 FILES_libedataserverui-dev = "${libdir}/libedataserverui-*.so \
                               ${libdir}/pkgconfig/libedataserverui-*.pc \
                               ${datadir}/gir-*/EDataServerUI-*.gir \
+                              ${datadir}/vala/vapi/libedataserverui-* \
                               ${includedir}/evolution-data-server-*/libedataserverui/*.h"
