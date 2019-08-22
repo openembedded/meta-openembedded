@@ -30,10 +30,8 @@ LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
 LKSTRFTIME_libc-musl = "HAVE_LKSTRFTIME=OFF"
 
 EXTRA_OECMAKE = " \
-    -DWITH_KRB5=OFF \
     -DENABLE_GOA=OFF \
     -DENABLE_UOA=OFF \
-    -DENABLE_GOOGLE_AUTH=OFF \
     -DENABLE_WEATHER=OFF \
     -D${LKSTRFTIME} \
     -DSYSCONF_INSTALL_DIR=${sysconfdir} \
@@ -42,6 +40,8 @@ EXTRA_OECMAKE = " \
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
+PACKAGECONFIG[oauth2] = "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,json-glib webkitgtk"
+PACKAGECONFIG[mitkrb5] = "-DWITH_KRB5=ON,-DWITH_KRB5=OFF,krb5"
 
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
