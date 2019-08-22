@@ -14,9 +14,7 @@ DEPENDS = " \
     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
 "
 
-inherit distro_features_check gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
-
-REQUIRED_DISTRO_FEATURES = "x11"
+inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
 
 SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
            file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
