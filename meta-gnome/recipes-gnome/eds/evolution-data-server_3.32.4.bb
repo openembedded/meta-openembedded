@@ -103,7 +103,7 @@ FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
 
 FILES_libebook = "${libdir}/libebook-*.so.* \
                   ${libdir}/girepository-*/EBook-*.typelib"
-FILES_libebook-dev = "${libdir}/libebook-1.2.so \
+FILES_libebook-dev = "${libdir}/libebook-*.so \
                       ${libdir}/pkgconfig/libebook-*.pc \
                       ${datadir}/gir-*/EBook-*.gir \
                       ${datadir}/vala/vapi/libebook-*.* \
