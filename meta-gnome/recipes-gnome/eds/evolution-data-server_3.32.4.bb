@@ -21,6 +21,7 @@ SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}
            file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
            file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
            file://0004-Add-native-suffix-to-exacutables-produced-and-run-du.patch \
+           file://0007-Modify-gobject-intrispection-support-to-work-with-OE.patch \
            file://iconv-detect.h \
            "
 SRC_URI[archive.md5sum] = "57820f3f88fc554e1a58665a52e12c05"
@@ -37,10 +38,11 @@ EXTRA_OECMAKE = " \
     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
 "
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'introspection', '', d)}"
 PACKAGECONFIG[openldap] = "-DWITH_OPENLDAP=ON,-DWITH_OPENLDAP=OFF,openldap"
 PACKAGECONFIG[oauth2] = "-DENABLE_OAUTH2=ON,-DENABLE_OAUTH2=OFF,json-glib webkitgtk"
 PACKAGECONFIG[mitkrb5] = "-DWITH_KRB5=ON,-DWITH_KRB5=OFF,krb5"
+PACKAGECONFIG[introspection] = "-DENABLE_INTROSPECTION=ON,-DENABLE_INTROSPECTION=OFF"
 
 # -ldb needs this on some platforms
 LDFLAGS += "-lpthread -lgmodule-2.0 -lgthread-2.0"
@@ -53,7 +55,6 @@ do_configure_append () {
 }
 
 do_compile_prepend() {
-    export GIR_EXTRA_LIBS_PATH="${B}/camel/.libs:${B}/libedataserver/.libs"
     # CMake does not support building native binaries when cross compiling. As result
     # it always cross compiles them for the target and then aborts when they fail to run.
     # To work around this manually build required tools and patch cmake targets to use
@@ -88,21 +89,27 @@ RRECOMMENDS_${PN}-dev += "libecal-dev libebook-dev"
 
 FILES_libcamel = "${libdir}/libcamel-*.so.* \
                   ${libdir}/libcamel-provider-*.so.* \
+                  ${libdir}/girepository-*/Camel-*.typelib \
                   ${libdir}/evolution-data-server*/camel-providers/*.so \
                   ${libdir}/evolution-data-server*/camel-providers/*.urls"
 FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
                       ${libdir}/pkgconfig/camel*pc \
-                      ${includedir}/evolution-data-server*/camel"
+                      ${includedir}/evolution-data-server*/camel \
+                      ${datadir}/gir-*/Camel-*.gir"
 
-FILES_libebook = "${libdir}/libebook-*.so.*"
+FILES_libebook = "${libdir}/libebook-*.so.* \
+                  ${libdir}/girepository-*/EBook-*.typelib"
 FILES_libebook-dev = "${libdir}/libebook-1.2.so \
                       ${libdir}/pkgconfig/libebook-*.pc \
+                      ${datadir}/gir-*/EBook-*.gir \
                       ${includedir}/evolution-data-server*/libebook/*.h"
 RRECOMMENDS_libebook = "libedata-book"
 
-FILES_libebook-contacts = "${libdir}/libebook-contacts-*.so.*"
+FILES_libebook-contacts = "${libdir}/libebook-contacts-*.so.* \
+                           ${libdir}/girepository-*/EBookContacts-*.typelib"
 FILES_libebook-contacts-dev = "${libdir}/libebook-contacts-*.so \
                                ${libdir}/pkgconfig/libebook-contacts-*.pc \
+                               ${datadir}/gir-*/EBookContacts-*.gir \
                                ${includedir}/evolution-data-server*/libebook-contacts/*.h"
 
 FILES_libecal = "${libdir}/libecal-*.so.* \
@@ -129,7 +136,8 @@ FILES_libedata-cal-dev = "${libdir}/libedata-cal-*.so \
                           ${libdir}/pkgconfig/libedata-cal-*.pc \
                           ${includedir}/evolution-data-server-*/libedata-cal"
 
-FILES_libedataserver = "${libdir}/libedataserver-*.so.*"
+FILES_libedataserver = "${libdir}/libedataserver-*.so.* \
+                        ${libdir}/girepository-*/EDataServer-*.typelib"
 FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
                             ${libdir}/pkgconfig/libedataserver-*.pc \
                             ${includedir}/evolution-data-server-*/libedataserver/*.h"
@@ -137,4 +145,5 @@ FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
 FILES_libedataserverui = "${libdir}/libedataserverui-*.so.*"
 FILES_libedataserverui-dev = "${libdir}/libedataserverui-*.so \
                               ${libdir}/pkgconfig/libedataserverui-*.pc \
+                              ${datadir}/gir-*/EDataServerUI-*.gir \
                               ${includedir}/evolution-data-server-*/libedataserverui/*.h"
