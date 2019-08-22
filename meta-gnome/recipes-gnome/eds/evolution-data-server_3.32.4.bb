@@ -14,7 +14,7 @@ DEPENDS = " \
     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
 "
 
-inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative
+inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative upstream-version-is-even
 
 SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
            file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
