@@ -70,7 +70,8 @@ do_compile_prepend() {
 }
 
 
-PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
+PACKAGES =+ "libebook-contacts libebook-contacts-dev \
+             libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
              libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
              libedataserver libedataserver-dev \
              libedataserverui libedataserverui-dev"
@@ -102,6 +103,11 @@ FILES_libebook-dev = "${libdir}/libebook-1.2.so \
                       ${libdir}/pkgconfig/libebook-*.pc \
                       ${includedir}/evolution-data-server*/libebook/*.h"
 RRECOMMENDS_libebook = "libedata-book"
+
+FILES_libebook-contacts = "${libdir}/libebook-contacts-*.so.*"
+FILES_libebook-contacts-dev = "${libdir}/libebook-contacts-*.so \
+                               ${libdir}/pkgconfig/libebook-contacts-*.pc \
+                               ${includedir}/evolution-data-server*/libebook-contacts/*.h"
 
 FILES_libecal = "${libdir}/libecal-*.so.* \
                  ${datadir}/evolution-data-server-1.4/zoneinfo"
