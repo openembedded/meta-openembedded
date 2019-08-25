@@ -8,8 +8,8 @@ DEPENDS = "libmnl libnftnl readline gmp bison-native"
 UPSTREAM_CHECK_URI = "https://www.netfilter.org/projects/nftables/files/"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
-SRC_URI[md5sum] = "e2facbcad6c5d9bd87a0bf5081a31522"
-SRC_URI[sha256sum] = "ead3bb68ed540bfbb87a96f2b69c3d65ab0c2a0c3f6e739a395c09377d1b4fce"
+SRC_URI[md5sum] = "dfe130724d7c998eb26b56447e932899"
+SRC_URI[sha256sum] = "5cb66180143e6bfc774f4eb316206d40ac1cb6df269a90882404cbf7165513f5"
 
 inherit autotools manpages pkgconfig
 
