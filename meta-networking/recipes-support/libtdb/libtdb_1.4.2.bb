@@ -11,8 +11,8 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://0001-waf-add-support-of-cross_compile.patch \
 "
 
-SRC_URI[md5sum] = "d1d0a5d43614add17d1e41bbdb209446"
-SRC_URI[sha256sum] = "dd4ecd9678e8d3ea772623bd81fe49b43363a2f970a76fb5468322753787aa4b"
+SRC_URI[md5sum] = "b2c05ad68334368d3258a63db709f254"
+SRC_URI[sha256sum] = "9040b2cce4028e392f063f91bbe76b8b28fecc2b7c0c6071c67b5eb3168e004a"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
