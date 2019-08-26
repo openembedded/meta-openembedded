@@ -78,17 +78,17 @@ EXTRA_OECONF_class-native = "\
     "
 
 do_configure_prepend() {
-    sed -i -e 's:$''{prefix}/usr/lib/cgi-bin:$''{libdir}/cgi-bin:g' ${S}/config.layout
+    sed -i -e 's:$''{prefix}${libdir}/cgi-bin:$''{libdir}/cgi-bin:g' ${S}/config.layout
 }
 
 do_install_append_class-target() {
     install -d ${D}/${sysconfdir}/init.d
 
     cat ${WORKDIR}/init | \
-        sed -e 's,/usr/sbin/,${sbindir}/,g' \
-            -e 's,/usr/bin/,${bindir}/,g' \
-            -e 's,/usr/lib/,${libdir}/,g' \
-            -e 's,/etc/,${sysconfdir}/,g' \
+        sed -e 's,${sbindir}/,${sbindir}/,g' \
+            -e 's,${bindir}/,${bindir}/,g' \
+            -e 's,${libdir}/,${libdir}/,g' \
+            -e 's,${sysconfdir}/,${sysconfdir}/,g' \
             -e 's,/usr/,${prefix}/,g' > ${D}/${sysconfdir}/init.d/${BPN}
 
     chmod 755 ${D}/${sysconfdir}/init.d/${BPN}

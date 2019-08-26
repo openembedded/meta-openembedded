@@ -40,11 +40,11 @@ do_install_append () {
     install -c -m 755 ${WORKDIR}/thttpd.conf ${D}${sysconfdir}
     sed -i -e 's,@@CONFFILE,${sysconfdir}/thttpd.conf,g' ${D}${sysconfdir}/init.d/thttpd
     sed -i -e 's,@@SRVDIR,${SRV_DIR},g' ${D}${sysconfdir}/thttpd.conf
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/thttpd
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/thttpd
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/thttpd.service ${D}${systemd_unitdir}/system
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
     sed -i 's!/var/!${localstatedir}/!g' ${D}${systemd_unitdir}/system/thttpd.service
     sed -i -e 's,@@CONFFILE,${sysconfdir}/thttpd.conf,g' ${D}${systemd_unitdir}/system/thttpd.service
 }

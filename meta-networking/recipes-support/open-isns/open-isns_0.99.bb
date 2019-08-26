@@ -28,7 +28,7 @@ do_install_append () {
     oe_runmake INCDIR=${D}${includedir}/libisns/ install_hdrs
     oe_runmake LIBDIR=${D}${libdir} install_lib
 
-    install -D -m 755 ${S}/etc/openisns.init ${D}${sysconfdir}/init.d/openisns
+    install -D -m 755 ${S}${sysconfdir}/openisns.init ${D}${sysconfdir}/init.d/openisns
     sed -i 's|daemon isnsd|start-stop-daemon --start --quiet --oknodo --exec ${sbindir}/isnsd --|' \
         ${D}${sysconfdir}/init.d/openisns
 }

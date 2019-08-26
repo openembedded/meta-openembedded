@@ -53,7 +53,7 @@ PACKAGECONFIG[galax] = "--enable-galax,--disable-galax"
 PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
 
 do_install_prepend() {
-    install -m 0644 ${WORKDIR}/ts.conf ${S}/etc/ts.conf
+    install -m 0644 ${WORKDIR}/ts.conf ${S}${sysconfdir}/ts.conf
 }
 
 do_install_append() {

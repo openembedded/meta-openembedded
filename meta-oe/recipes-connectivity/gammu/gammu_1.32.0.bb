@@ -17,7 +17,7 @@ inherit distutils cmake gettext
 
 do_install_append() {
     # these files seem to only be used by symbian and trigger QA warnings
-    rm -rf ${D}/usr/share/gammu
+    rm -rf ${D}${datadir}/gammu
     #install default configuration files
     install -d ${D}${sysconfdir}
     install -m 0644 ${WORKDIR}/gammurc ${D}${sysconfdir}/gammurc

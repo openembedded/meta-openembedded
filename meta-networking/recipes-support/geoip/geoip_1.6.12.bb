@@ -73,10 +73,10 @@ do_configure_ptest() {
             -i ${S}/test/Makefile.am
     fi
 
-    sed -i -e "s:/usr/local/share:/usr/share:g" \
+    sed -i -e "s:/usr/local/share:${datadir}:g" \
         ${S}/test/benchmark.c
 
-    sed -i -e 's:"../data/:"/usr/share/GeoIP/:g' \
+    sed -i -e 's:"../data/:"${datadir}/GeoIP/:g' \
         ${S}/test/test-geoip-city.c \
         ${S}/test/test-geoip-isp.c \
         ${S}/test/test-geoip-asnum.c \

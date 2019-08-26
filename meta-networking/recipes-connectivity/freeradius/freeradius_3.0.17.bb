@@ -136,7 +136,7 @@ do_install() {
     # remove scripts that required Perl(DBI)
     rm -rf ${D}/${bindir}/radsqlrelay
 
-    cp -f ${WORKDIR}/freeradius ${D}/etc/init.d/radiusd
+    cp -f ${WORKDIR}/freeradius ${D}${sysconfdir}/init.d/radiusd
     rm -f ${D}/${sbindir}/rc.radiusd
     chmod +x ${D}/${sysconfdir}/init.d/radiusd
     rm -rf ${D}/${localstatedir}/run/
@@ -171,7 +171,7 @@ pkg_postinst_${PN} () {
             ${sysconfdir}/init.d/populate-volatile.sh update
         fi
 
-        # Fix ownership for /etc/raddb/*, /var/lib/radiusd
+        # Fix ownership for ${sysconfdir}/raddb/*, /var/lib/radiusd
         chown -R radiusd:radiusd ${sysconfdir}/raddb
         chown -R radiusd:radiusd ${localstatedir}/lib/radiusd
     fi

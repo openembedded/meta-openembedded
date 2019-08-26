@@ -105,8 +105,8 @@ FILES_${PN}-sym-upload = "${bindir}/sym_upload"
 SYSROOT_PREPROCESS_FUNCS += "breakpad_populate_sysroot"
 breakpad_populate_sysroot() {
         sysroot_stage_dir ${D}/usr/include ${SYSROOT_DESTDIR}/usr/include
-        sysroot_stage_dir ${D}/usr/lib ${SYSROOT_DESTDIR}/usr/lib
-        sysroot_stage_dir ${D}/usr/lib ${SYSROOT_DESTDIR}/usr/lib
+        sysroot_stage_dir ${D}${libdir} ${SYSROOT_DESTDIR}${libdir}
+        sysroot_stage_dir ${D}${libdir} ${SYSROOT_DESTDIR}${libdir}
 }
 
 # Fails to build with thumb-1 (qemuarm)

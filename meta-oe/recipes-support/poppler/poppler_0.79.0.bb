@@ -38,7 +38,7 @@ EXTRA_OECMAKE += " \
 
 do_configure_append() {
     # poppler macro uses pkg-config to check for g-ir runtimes. Something
-    # makes them point to /usr/bin. Align them to sysroot - that's where the
+    # makes them point to ${bindir}. Align them to sysroot - that's where the
     # gir-wrappers are:
     sed -i 's: ${bindir}/g-ir: ${STAGING_BINDIR}/g-ir:' ${B}/build.ninja
 }

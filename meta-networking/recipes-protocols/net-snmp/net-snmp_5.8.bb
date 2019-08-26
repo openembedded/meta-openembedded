@@ -68,7 +68,7 @@ EXTRA_OECONF += "--with-mib-modules=smux"
 CACHED_CONFIGUREVARS = " \
     ac_cv_header_valgrind_valgrind_h=no \
     ac_cv_header_valgrind_memcheck_h=no \
-    ac_cv_ETC_MNTTAB=/etc/mtab \
+    ac_cv_ETC_MNTTAB=${sysconfdir}/mtab \
     lt_cv_shlibpath_overrides_runpath=yes \
     ac_cv_path_UNAMEPROG=${base_bindir}/uname \
     ac_cv_file__etc_printcap=no \
@@ -88,9 +88,9 @@ do_configure_prepend() {
 
     if [ "${HAS_PERL}" = "1" ]; then
         # this may need to be changed when package perl has any change.
-        cp -f ${STAGING_DIR_TARGET}/usr/lib*/perl/*/Config.pm ${WORKDIR}/
-        cp -f ${STAGING_DIR_TARGET}/usr/lib*/perl/*/Config_heavy.pl ${WORKDIR}/
-        sed -e "s@libpth => '/usr/lib.*@libpth => '${STAGING_DIR_TARGET}/${libdir} ${STAGING_DIR_TARGET}/${base_libdir}',@g" \
+        cp -f ${STAGING_DIR_TARGET}${libdir}*/perl/*/Config.pm ${WORKDIR}/
+        cp -f ${STAGING_DIR_TARGET}${libdir}*/perl/*/Config_heavy.pl ${WORKDIR}/
+        sed -e "s@libpth => '${libdir}.*@libpth => '${STAGING_DIR_TARGET}/${libdir} ${STAGING_DIR_TARGET}/${base_libdir}',@g" \
             -e "s@privlibexp => '/usr@privlibexp => '${STAGING_DIR_TARGET}/usr@g" \
             -e "s@scriptdir => '/usr@scriptdir => '${STAGING_DIR_TARGET}/usr@g" \
             -e "s@sitearchexp => '/usr@sitearchexp => '${STAGING_DIR_TARGET}/usr@g" \

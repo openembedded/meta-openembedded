@@ -110,8 +110,8 @@ do_install() {
     install -d ${D}${localstatedir}/log/chrony
 
     # Fix hard-coded paths in config files and init scripts
-    sed -i -e 's!/var/!${localstatedir}/!g' -e 's!/etc/!${sysconfdir}/!g' \
-           -e 's!/usr/sbin/!${sbindir}/!g' -e 's!/usr/bin/!${bindir}/!g' \
+    sed -i -e 's!/var/!${localstatedir}/!g' -e 's!${sysconfdir}/!${sysconfdir}/!g' \
+           -e 's!${sbindir}/!${sbindir}/!g' -e 's!${bindir}/!${bindir}/!g' \
            ${D}${sysconfdir}/chrony.conf \
            ${D}${sysconfdir}/init.d/chronyd \
            ${D}${systemd_unitdir}/system/chronyd.service

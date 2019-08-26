@@ -31,8 +31,8 @@ do_install_append () {
                        ${D}${docdir}/radvd
     # Install init script and volatiles
     install -m 0755 ${WORKDIR}/radvd.init ${D}${sysconfdir}/init.d/radvd
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/radvd
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/radvd
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/radvd
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/radvd
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/radvd
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/radvd
 
@@ -58,7 +58,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/radvd/ -M -g nogroup radvd"
 
 pkg_postinst_${PN} () {
-    if [ -z "$D" -a -x /etc/init.d/populate-volatile.sh ]; then
-        /etc/init.d/populate-volatile.sh update
+    if [ -z "$D" -a -x ${sysconfdir}/init.d/populate-volatile.sh ]; then
+        ${sysconfdir}/init.d/populate-volatile.sh update
     fi
 }

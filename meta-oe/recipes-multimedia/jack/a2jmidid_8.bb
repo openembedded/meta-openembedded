@@ -24,7 +24,7 @@ LDFLAGS_append_libc-musl = " -lexecinfo"
 export LINKFLAGS="${LDFLAGS}"
 
 do_configure() {
-    sed -i 's|/usr/bin/.*python$|/usr/bin/env python2|' ${S}/a2j_control ${S}/waf ${S}/wscript
+    sed -i 's|${bindir}/.*python$|${bindir}/env python2|' ${S}/a2j_control ${S}/waf ${S}/wscript
     (cd ${B} && ${S}/waf configure --prefix=${prefix} ${WAF_EXTRA_CONF} ${EXTRA_OECONF})
 }
 

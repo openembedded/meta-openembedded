@@ -103,7 +103,7 @@ do_install_append() {
 
     # change ntop dir in ntop.conf
     # don't use the -P as the ntop.init didn't support it
-    sed -i -e "s:^--db-file-path /usr/share/ntop:--db-file-path /var/lib/ntop:" \
+    sed -i -e "s:^--db-file-path ${datadir}/ntop:--db-file-path /var/lib/ntop:" \
         -e "s:^#? -P /var/ntop:#? -P /var/lib/ntop:" \
         ${D}${sysconfdir}/ntop.conf
 
@@ -125,7 +125,7 @@ do_install_append() {
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "-M -g ntop -r -d ${localstatedir}/lib/ntop \
--s /usr/sbin/nologin -c 'ntop' ntop"
+-s ${sbindir}/nologin -c 'ntop' ntop"
 GROUPADD_PARAM_${PN} = "-r ntop"
 
 SYSTEMD_SERVICE_${PN} = "ntop.service"

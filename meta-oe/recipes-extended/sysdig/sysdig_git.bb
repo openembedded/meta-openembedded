@@ -22,7 +22,7 @@ PV = "0.1.102+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-DIR_ETC="/etc"
+DIR_ETC="${sysconfdir}"
 EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
                   -DUSE_BUNDLED_ZLIB="OFF" \
                   -DBUILD_DRIVER="OFF" \

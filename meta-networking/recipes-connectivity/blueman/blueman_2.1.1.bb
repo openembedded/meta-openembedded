@@ -42,8 +42,8 @@ FILES_${PN} += " \
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/_blueman.a"
 
 # In code, path to python is a variable that is replaced with path to native version of it
-# during the configure stage, e.g ../recipe-sysroot-native/usr/bin/python3-native/python3.
-# Replace it with #!/usr/bin/env python3
+# during the configure stage, e.g ../recipe-sysroot-native${bindir}/python3-native/python3.
+# Replace it with #!${bindir}/env python3
 do_install_append() {
     sed -i "1s/.*/#!\/usr\/bin\/env python3/" ${D}${prefix}/libexec/blueman-rfcomm-watcher \
                                               ${D}${prefix}/libexec/blueman-mechanism \

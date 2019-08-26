@@ -48,18 +48,18 @@ do_install() {
         oe_runmake -C ${S}/tools install
     fi
 
-    install -d ${D}/etc/target/
-    install -d ${D}/etc/init.d/
-    install -m 755 ${S}/scripts/rc.target ${D}/etc/init.d/
-    install -m 755 ${S}/conf/tcm_start.default ${D}/etc/target/tcm_start.sh
-    install -m 755 ${S}/conf/lio_start.default ${D}/etc/target/lio_start.sh
+    install -d ${D}${sysconfdir}/target/
+    install -d ${D}${sysconfdir}/init.d/
+    install -m 755 ${S}/scripts/rc.target ${D}${sysconfdir}/init.d/
+    install -m 755 ${S}/conf/tcm_start.default ${D}${sysconfdir}/target/tcm_start.sh
+    install -m 755 ${S}/conf/lio_start.default ${D}${sysconfdir}/target/lio_start.sh
 }
 
 RDEPENDS_${PN} += "python-stringold python-subprocess python-shell \
     python-datetime python-textutils python-crypt python-netclient python-email \
     bash"
 
-FILES_${PN} += "${sbindir}/* /etc/init.d/* /etc/target/*"
+FILES_${PN} += "${sbindir}/* ${sysconfdir}/init.d/* ${sysconfdir}/target/*"
 
 # http://errors.yoctoproject.org/Errors/Details/184712/
 # python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory

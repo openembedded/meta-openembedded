@@ -11,7 +11,7 @@ features.  Supports ypbind protocol V1 and V2.  \
 Uses threads for better response.  Supports multiple \
 domain bindings.  Supports /var/yp/binding/* file \
 for Linux libc 4/5 and glibc 2.x.  Supports a list \
-of known secure NIS server (/etc/yp.conf) Binds to \
+of known secure NIS server (${sysconfdir}/yp.conf) Binds to \
 the server which answered as first. \
 \
 This is the final IPv4-only version of ypbind-mt. \

@@ -16,7 +16,7 @@ FILES_${PN}-dbg += "${libdir}/lprng/filters/.debug"
 export CLEAR = "no"
 
 do_install_append() {
-    mv ${D}/etc/printcap.sample ${D}/etc/printcap
-    mv ${D}/etc/lpd/lpd.conf.sample ${D}/etc/lpd/lpd.conf
-    mv ${D}/etc/lpd/lpd.perms.sample ${D}/etc/lpd/lpd.perms
+    mv ${D}${sysconfdir}/printcap.sample ${D}${sysconfdir}/printcap
+    mv ${D}${sysconfdir}/lpd/lpd.conf.sample ${D}${sysconfdir}/lpd/lpd.conf
+    mv ${D}${sysconfdir}/lpd/lpd.perms.sample ${D}${sysconfdir}/lpd/lpd.perms
 }

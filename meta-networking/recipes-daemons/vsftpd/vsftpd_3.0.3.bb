@@ -51,9 +51,9 @@ CFLAGS_append_libc-musl = " -D_GNU_SOURCE -include fcntl.h"
 EXTRA_OEMAKE = "-e MAKEFLAGS="
 
 do_configure() {
-    # Fix hardcoded /usr, /etc, /var mess.
+    # Fix hardcoded /usr, ${sysconfdir}, /var mess.
     cat tunables.c|sed s:\"/usr:\"${prefix}:g|sed s:\"/var:\"${localstatedir}:g \
-    |sed s:\"/etc:\"${sysconfdir}:g > tunables.c.new
+    |sed s:\"${sysconfdir}:\"${sysconfdir}:g > tunables.c.new
     mv tunables.c.new tunables.c
 }
 

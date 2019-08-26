@@ -12,7 +12,7 @@ SRC_URI[md5sum] = "e63bdd65a4d2f6338f60b31e91bb5525"
 SRC_URI[sha256sum] = "5a82a72fd9ad4cbbfb805bae615faa9b91a27855245de0fef3bcb06439394852"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
-# xmlto-native is needed to populate /etc/xml/catalog.xml in the sysroot so that xsltproc finds the docbook xslt
+# xmlto-native is needed to populate ${sysconfdir}/xml/catalog.xml in the sysroot so that xsltproc finds the docbook xslt
 DEPENDS = "intltool-native glib-2.0-native libxslt-native docbook-xsl-stylesheets-native xmlto-native"
 
 inherit gettext autotools bash-completion python3native gsettings systemd update-rc.d
@@ -24,7 +24,7 @@ PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_unitdir}/system/,--di
 # when the nftables backend is available, because nftables supersedes all of them.
 # However we still need iptables and ip6tables to be available otherwise any
 # application relying on "direct passthrough" rules (such as docker) will break.
-# /etc/sysconfig/firewalld is a Red Hat-ism, only referenced by
+# ${sysconfdir}/sysconfig/firewalld is a Red Hat-ism, only referenced by
 # the Red Hat-specific init script which we aren't using, so we disable that.
 EXTRA_OECONF = "\
     --with-nft=${sbindir}/nft \

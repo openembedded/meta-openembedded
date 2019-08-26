@@ -29,8 +29,8 @@ do_configure_prepend () {
 }
 
 do_install_append () {
-        if [ "${libdir}" = "${base_prefix}/usr/lib" ] && [ -d ${D}/usr/lib64 ]; then
-            mv ${D}/usr/lib64 ${D}/usr/lib
+        if [ "${libdir}" = "${base_prefix}${libdir}" ] && [ -d ${D}${libdir}64 ]; then
+            mv ${D}${libdir}64 ${D}${libdir}
         fi
 }
 

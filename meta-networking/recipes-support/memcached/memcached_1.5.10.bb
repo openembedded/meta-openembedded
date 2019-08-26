@@ -46,7 +46,7 @@ INITSCRIPT_PARAMS = "defaults"
 
 do_install_append() {
     install -D -m 755 ${S}/scripts/memcached-init ${D}${sysconfdir}/init.d/memcached
-    mkdir -p ${D}/usr/share/memcached/scripts
-    install -m 755 ${S}/scripts/memcached-tool ${D}/usr/share/memcached/scripts
-    install -m 755 ${S}/scripts/start-memcached ${D}/usr/share/memcached/scripts
+    mkdir -p ${D}${datadir}/memcached/scripts
+    install -m 755 ${S}/scripts/memcached-tool ${D}${datadir}/memcached/scripts
+    install -m 755 ${S}/scripts/start-memcached ${D}${datadir}/memcached/scripts
 }

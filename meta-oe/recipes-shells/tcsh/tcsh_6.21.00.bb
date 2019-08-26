@@ -27,8 +27,8 @@ do_install_append () {
     oe_runmake install.man DESTDIR=${D}
 
     install -d ${D}${base_bindir}
-    ln -s /usr/bin/tcsh ${D}${base_bindir}/tcsh
-    ln -s /usr/bin/tcsh ${D}${base_bindir}/csh
+    ln -s ${bindir}/tcsh ${D}${base_bindir}/tcsh
+    ln -s ${bindir}/tcsh ${D}${base_bindir}/csh
     install -d ${D}${sysconfdir}/csh/login.d
     install -m 0644 ${S}/csh.cshrc ${S}/csh.login ${S}/csh.logout ${S}/complete.tcsh ${D}${sysconfdir}
     install -D -m 0644 ${S}/csh-mode.el ${D}${datadir}/emacs/site-lisp/csh-mode.el
@@ -39,6 +39,6 @@ FILES_${PN} += "${datadir}/emacs/site-lisp/csh-mode.el"
 
 pkg_postinst_${PN} () {
 #!/bin/sh -e
-echo /usr/bin/tcsh >> $D/etc/shells
-echo /usr/bin/csh >> $D/etc/shells
+echo ${bindir}/tcsh >> $D${sysconfdir}/shells
+echo ${bindir}/csh >> $D${sysconfdir}/shells
 }

@@ -30,7 +30,7 @@ do_configure () {
 }
 
 do_install () {
-    mkdir -p ${D}/usr/sbin
-    install -c -m 555 tcpslice ${D}/usr/sbin
+    mkdir -p ${D}${sbindir}
+    install -c -m 555 tcpslice ${D}${sbindir}
 }
 

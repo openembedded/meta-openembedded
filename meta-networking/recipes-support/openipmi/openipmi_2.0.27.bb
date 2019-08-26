@@ -90,8 +90,8 @@ do_install_append () {
     install -m 0755 -d ${D}${sysconfdir}/sysconfig ${D}${sysconfdir}/init.d
     install -m 0755 ${S}/ipmi.init ${D}${sysconfdir}/init.d/ipmi
     install -m 0644 ${S}/ipmi.sysconf ${D}${sysconfdir}/sysconfig/ipmi
-    # SAL: mv: cannot stat `/localdisk/loadbuild/slittle1/workspace/cgts_test_build/bitbake_build/tmp/work/x86_64-wrs-linux/openipmi-2.0.19-r4/image/usr/lib64/perl5': No such file or directory
-    # SAL: real path to perl is /localdisk/loadbuild/slittle1/workspace/cgts_test_build/bitbake_build/tmp/work/x86_64-wrs-linux/perl-5.14.2-r8.3/package/usr/lib64/perl5 and it is a symlink to perl so no need to mv.
+    # SAL: mv: cannot stat `/localdisk/loadbuild/slittle1/workspace/cgts_test_build/bitbake_build/tmp/work/x86_64-wrs-linux/openipmi-2.0.19-r4/image${libdir}64/perl5': No such file or directory
+    # SAL: real path to perl is /localdisk/loadbuild/slittle1/workspace/cgts_test_build/bitbake_build/tmp/work/x86_64-wrs-linux/perl-5.14.2-r8.3/package${libdir}64/perl5 and it is a symlink to perl so no need to mv.
     if [ -d ${D}${libdir}/perl5 ]
     then
         mv ${D}${libdir}/perl5 ${D}${libdir}/perl

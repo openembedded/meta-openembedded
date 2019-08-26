@@ -82,7 +82,7 @@ do_install () {
     install -m 0755 ${WORKDIR}/ebtables.common ${D}${sbindir}/ebtables.common
     # Fix hardcoded paths in scripts
     sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${sbindir}/ebtables.common
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sbindir}/ebtables.common
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sbindir}/ebtables.common
 
     install -d ${D}${sysconfdir}/init.d
     install -d ${D}${sysconfdir}/default
@@ -90,7 +90,7 @@ do_install () {
     oe_runmake DESTDIR='${D}' install
     install -m 0755 ${WORKDIR}/ebtables.init ${D}/${sysconfdir}/init.d/ebtables
     mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ebtables
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ebtables
 
     # Replace upstream ebtables-save perl script with Fedora bash based rewrite
     # http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save

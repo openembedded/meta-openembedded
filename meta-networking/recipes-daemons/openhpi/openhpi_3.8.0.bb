@@ -55,7 +55,7 @@ inherit autotools pkgconfig ptest update-rc.d systemd
 
 PACKAGES =+ "${PN}-libs"
 
-FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
+FILES_${PN}-libs = "${libdir}/${BPN}/*.so ${libdir}/${BPN}/*.so"
 
 INSANE_SKIP_${PN}-libs = "dev-so"
 RDEPENDS_${PN} += "${PN}-libs"

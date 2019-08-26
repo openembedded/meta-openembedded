@@ -13,12 +13,12 @@ DEPENDS += "${PYTHON_PN}-pytest-runner-native"
 do_install_append(){
     rm ${D}${bindir}/pylint
     cat >> ${D}${bindir}/pylint <<EOF
-#!/usr/bin/env ${PYTHON_PN}
+#!${bindir}/env ${PYTHON_PN}
 from pylint import run_pylint
 run_pylint()
 EOF
     chmod 755 ${D}${bindir}/pylint
-    sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
+    sed -i -e 's:^#!${bindir}/python:#!${bindir}/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
 }
 
 PACKAGES =+ "${PN}-tests"

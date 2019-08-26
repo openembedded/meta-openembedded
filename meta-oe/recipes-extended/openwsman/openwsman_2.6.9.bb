@@ -52,7 +52,7 @@ do_configure_prepend() {
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
-    install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
+    install -m 755 ${B}${sysconfdir}/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
     ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
     chmod 755 ${D}/${sysconfdir}/openwsman/owsmangencert.sh
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then

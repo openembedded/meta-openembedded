@@ -52,5 +52,5 @@ FILES_${PN} += " \
 
 REQUIRED_DISTRO_FEATURES = "ipv6"
 
-DISTUTILS_BUILD_ARGS_append = " --iptables-dir /usr/sbin"
-DISTUTILS_INSTALL_ARGS_append = " --iptables-dir /usr/sbin"
+DISTUTILS_BUILD_ARGS_append = " --iptables-dir ${sbindir}"
+DISTUTILS_INSTALL_ARGS_append = " --iptables-dir ${sbindir}"

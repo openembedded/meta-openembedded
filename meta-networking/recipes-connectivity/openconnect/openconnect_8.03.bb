@@ -26,6 +26,6 @@ EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-sc
                  --disable-static"
 
 do_configure_append() {
-    # script has /usr/bin/python2 path hardcoded
+    # script has ${bindir}/python2 path hardcoded
     sed -i -e 's=python2\.*=python=g' ${S}/trojans/tncc-wrapper.py
 }

@@ -36,6 +36,6 @@ do_install() {
     cp -d ${B}/modules/libNE10.so ${D}${libdir}/
 }
 
-# ERROR: QA Issue: ELF binary 'ne10/1.2.1-r0/packages-split/ne10/usr/lib/libNE10.so.10' has relocations in .text [textrel]
-# ERROR: QA Issue: ELF binary 'ne10/1.2.1-r0/packages-split/ne10/usr/lib/libNE10.so.10' has relocations in .text [textrel]
+# ERROR: QA Issue: ELF binary 'ne10/1.2.1-r0/packages-split/ne10${libdir}/libNE10.so.10' has relocations in .text [textrel]
+# ERROR: QA Issue: ELF binary 'ne10/1.2.1-r0/packages-split/ne10${libdir}/libNE10.so.10' has relocations in .text [textrel]
 INSANE_SKIP_${PN} += "textrel"

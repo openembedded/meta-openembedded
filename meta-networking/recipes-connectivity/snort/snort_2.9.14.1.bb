@@ -58,7 +58,7 @@ do_install_append() {
     install -d ${D}${sysconfdir}/snort/preproc_rules
     install -d ${D}${sysconfdir}/init.d
     for i in map config conf dtd; do
-        cp ${S}/etc/*.$i ${D}${sysconfdir}/snort/
+        cp ${S}${sysconfdir}/*.$i ${D}${sysconfdir}/snort/
     done
 
     # fix the hardcoded path and lib name

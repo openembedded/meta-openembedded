@@ -62,9 +62,9 @@ do_install() {
 
 do_install_append() {
     install -d ${D}/${sysconfdir}/init.d
-    install -m 0755 ${S}/packaging/deb/etc_init.d_gpsd ${D}/${sysconfdir}/init.d/gpsd
+    install -m 0755 ${S}/packaging/deb${sysconfdir}_init.d_gpsd ${D}/${sysconfdir}/init.d/gpsd
     install -d ${D}/${sysconfdir}/default
-    install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}/${sysconfdir}/default/gpsd.default
+    install -m 0644 ${S}/packaging/deb${sysconfdir}_default_gpsd ${D}/${sysconfdir}/default/gpsd.default
 
     #support for udev
     install -d ${D}/${sysconfdir}/udev/rules.d

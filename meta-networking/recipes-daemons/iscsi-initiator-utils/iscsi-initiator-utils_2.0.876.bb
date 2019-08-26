@@ -73,7 +73,7 @@ do_install () {
 
     cp -dR ${S}/libopeniscsiusr/libopeniscsiusr.so* ${D}${libdir}
     install -p -m 644 ${S}/doc/iscsiadm.8 ${S}/doc/iscsid.8 ${D}/${mandir}/man8
-    install -p -m 644 ${S}/etc/iscsid.conf ${D}${sysconfdir}/iscsi
+    install -p -m 644 ${S}${sysconfdir}/iscsid.conf ${D}${sysconfdir}/iscsi
     install -p -m 755 ${WORKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
 
     sed -i -e "s:= /sbin/iscsid:= ${sbindir}/iscsid:" ${D}${sysconfdir}/iscsi/iscsid.conf
@@ -82,7 +82,7 @@ do_install () {
         install -d ${D}${sysconfdir}/tmpfiles.d
         echo "d /run/${BPN}/lock - - - -" \
                      > ${D}${sysconfdir}/tmpfiles.d/iscsi.conf
-        install -d ${D}/etc/default/
+        install -d ${D}${sysconfdir}/default/
         install -p -m 755 ${WORKDIR}/iscsi-initiator ${D}${sysconfdir}/default/
 
         install -d ${D}${systemd_unitdir}/system/
@@ -92,15 +92,15 @@ do_install () {
         install -d ${D}${nonarch_libdir}/iscsi
         install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
     else
-        install -d ${D}/etc/default/volatiles
-        install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
+        install -d ${D}${sysconfdir}/default/volatiles
+        install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}${sysconfdir}/default/volatiles
     fi
 }
 
 pkg_postinst_${PN}() {
     if [ "x$D" = "x" ]; then
-        if [ -e /etc/init.d/populate-volatile.sh ]; then
-            /etc/init.d/populate-volatile.sh update
+        if [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+            ${sysconfdir}/init.d/populate-volatile.sh update
         elif command -v systemd-tmpfiles >/dev/null; then
             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
         fi

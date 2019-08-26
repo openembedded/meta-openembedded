@@ -16,7 +16,7 @@ SRC_URI = "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
 SRC_URI[md5sum] = "68c2ce12119e12cea11a90c7a80efa8f"
 SRC_URI[sha256sum] = "b6d232bd6fefc87d14bf97e447e4fcdeef4b28b16b048d804b50b48f261c4f53"
 
-# without --without-gssapi, config.log will contain reference to /usr/lib
+# without --without-gssapi, config.log will contain reference to ${libdir}
 # as a consequence of GSSAPI path being set to /usr by default.
 # --with-gssapi-path=PATH specify gssapi path
 # --without-gssapi        disable gssapi support

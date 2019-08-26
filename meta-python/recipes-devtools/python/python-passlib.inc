@@ -3,7 +3,7 @@ DESCRIPTION = "\
 Passlib is a password hashing library for Python 2 & 3, which provides cross-platform \
 implementations of over 30 password hashing algorithms, as well as a framework for \
 managing existing password hashes. It’s designed to be useful for a wide range of \
-tasks, from verifying a hash found in /etc/shadow, to providing full-strength password \
+tasks, from verifying a hash found in ${sysconfdir}/shadow, to providing full-strength password \
 hashing for multi-user applications."
 HOMEPAGE = "https://bitbucket.org/ecollins/passlib"
 LICENSE = "BSD"

@@ -79,8 +79,8 @@ do_install () {
     sed -i '/ *Group[ \t]*/s/ftp/${FTPGROUP}/' ${D}${sysconfdir}/proftpd.conf
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/proftpd-basic.init ${D}${sysconfdir}/init.d/proftpd
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/proftpd
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/proftpd
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/proftpd
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/proftpd
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/proftpd
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/proftpd
 

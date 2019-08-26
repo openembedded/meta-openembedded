@@ -26,5 +26,5 @@ do_configure() {
 }
 
 do_install() {
-    oe_runmake prefix=${D}/usr PPPDIR=${D}/etc/ppp/peers install
+    oe_runmake prefix=${D}/usr PPPDIR=${D}${sysconfdir}/ppp/peers install
 }

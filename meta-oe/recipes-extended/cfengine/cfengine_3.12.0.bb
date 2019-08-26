@@ -65,7 +65,7 @@ EOF
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -m 0755 -D ${D}${sysconfdir}/init.d/cfengine3 ${D}${datadir}/${BPN}/cfengine3
-        sed -i -e 's#/etc/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
+        sed -i -e 's#${sysconfdir}/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
     fi
 }
 

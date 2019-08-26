@@ -177,7 +177,7 @@ do_install () {
     chmod g+s ${D}${sbindir}/postqueue
     chmod g+s ${D}${sbindir}/postdrop
 
-    rm -rf ${D}/etc/postfix/makedefs.out
+    rm -rf ${D}${sysconfdir}/postfix/makedefs.out
 }
 
 do_install_append_class-native() {
@@ -186,14 +186,14 @@ do_install_append_class-native() {
 }
 
 ALTERNATIVE_${PN} = "sendmail mailq newaliases"
-# /usr/lib/sendmial is required by LSB core test
+# ${libdir}/sendmial is required by LSB core test
 ALTERNATIVE_${PN}_linuxstdbase = "sendmail mailq newaliases usr-lib-sendmail"
 ALTERNATIVE_TARGET[mailq] = "${bindir}/mailq"
 ALTERNATIVE_TARGET[newaliases] = "${bindir}/newaliases"
 ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
 ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
 ALTERNATIVE_TARGET[usr-lib-sendmail] = "${sbindir}/sendmail.postfix"
-ALTERNATIVE_LINK_NAME[usr-lib-sendmail] = "/usr/lib/sendmail"
+ALTERNATIVE_LINK_NAME[usr-lib-sendmail] = "${libdir}/sendmail"
 
 ALTERNATIVE_PRIORITY = "120"
 
@@ -205,20 +205,20 @@ ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
 PACKAGE_WRITE_DEPS += "postfix-native"
 pkg_postinst_${PN} () {
     if [ "x$D" = "x" ]; then
-        touch /etc/aliases
+        touch ${sysconfdir}/aliases
         newaliases
 
         # generate virtual_alias, default is hash
-        touch /etc/postfix/virtual_alias
-        postmap /etc/postfix/virtual_alias
+        touch ${sysconfdir}/postfix/virtual_alias
+        postmap ${sysconfdir}/postfix/virtual_alias
     else
-        touch $D/etc/aliases
+        touch $D${sysconfdir}/aliases
         # This can fail depending on host setup
-        if ! newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases; then
+        if ! newaliases -C $D${sysconfdir}/postfix/main.cf -oA$D${sysconfdir}/aliases; then
             $INTERCEPT_DIR/postinst_intercept delay_to_first_boot ${PKG} mlprefix=${MLPREFIX}
         else
-            touch $D/etc/postfix/virtual_alias
-            postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+            touch $D${sysconfdir}/postfix/virtual_alias
+            postmap -c $D${sysconfdir}/postfix $D${sysconfdir}/postfix/virtual_alias
         fi
 
     fi

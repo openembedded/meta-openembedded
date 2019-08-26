@@ -21,7 +21,7 @@ do_install_append() {
     sed -i -e 's:@libdir@:${libdir}:g' ${D}${sysconfdir}/lvm/lvm.conf
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         oe_runmake 'DESTDIR=${D}' install install_systemd_units
-        sed -i -e 's:/usr/bin/true:${base_bindir}/true:g' ${D}${systemd_system_unitdir}/blk-availability.service
+        sed -i -e 's:${bindir}/true:${base_bindir}/true:g' ${D}${systemd_system_unitdir}/blk-availability.service
     else
         oe_runmake 'DESTDIR=${D}' install install_initscripts
         mv ${D}${sysconfdir}/rc.d/init.d ${D}${sysconfdir}/init.d

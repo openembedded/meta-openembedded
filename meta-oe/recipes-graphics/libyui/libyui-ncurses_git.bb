@@ -28,16 +28,16 @@ do_configure_prepend () {
     git checkout bootstrap.sh
     sed -i "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#" bootstrap.sh
     ./bootstrap.sh
-    mkdir -p ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
-    cp ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib/libyui.so* ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
+    mkdir -p ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}${libdir}64/
+    cp ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}${libdir}/libyui.so* ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}${libdir}64/
     cd -
     sed -i -e "s#\${YPREFIX}#\${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#" ${S}/CMakeLists.txt
     sed -i -e "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#" ${PKG_CONFIG_SYSROOT_DIR}${libdir}/cmake/libyui/LibyuiLibraryDepends-release.cmake
 }
 
 do_install_append () {
-    if [ "${libdir}" = "${base_prefix}/usr/lib" ] && [ -d ${D}/usr/lib64 ]; then
-        mv ${D}/usr/lib64 ${D}/usr/lib
+    if [ "${libdir}" = "${base_prefix}${libdir}" ] && [ -d ${D}${libdir}64 ]; then
+        mv ${D}${libdir}64 ${D}${libdir}
     fi
 }
 

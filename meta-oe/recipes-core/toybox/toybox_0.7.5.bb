@@ -55,14 +55,14 @@ do_install() {
 ALTERNATIVE_PRIORITY = "60"
 
 python do_package_prepend () {
-    # Read links from /etc/toybox.links and create appropriate
+    # Read links from ${sysconfdir}/toybox.links and create appropriate
     # update-alternatives variables
 
     dvar = d.getVar('D')
     pn = d.getVar('PN')
     target = d.expand("${base_bindir}/toybox")
 
-    f = open('%s/etc/toybox.links' % (dvar), 'r')
+    f = open('%s${sysconfdir}/toybox.links' % (dvar), 'r')
     for alt_link_name in f:
         alt_link_name = alt_link_name.strip()
         alt_name = os.path.basename(alt_link_name)

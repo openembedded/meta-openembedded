@@ -109,7 +109,7 @@ do_install_prepend() {
 
 do_install_append() {
 	install -d ${D}/usr/local/bin
-	# do not clobber perl-misc /usr/bin/prove
+	# do not clobber perl-misc ${bindir}/prove
 	install -m 0755 ${B}/bin/prove ${D}/usr/local/bin/
 	rm -rf ${D}${bindir}/prove
 	rm -rf ${D}${bindir}

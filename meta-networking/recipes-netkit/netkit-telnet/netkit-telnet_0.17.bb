@@ -45,9 +45,9 @@ do_install () {
     rm -rf ${D}${mandir}/man1
     install -D -m 4750 ${B}/telnetlogin/telnetlogin ${D}/${libdir}/telnetlogin
     # fix up hardcoded paths
-    sed -i -e 's,/usr/sbin/,${sbindir}/,' ${WORKDIR}/telnet-xinetd
-    install -d  ${D}/etc/xinetd.d/
-    install -p -m644 ${WORKDIR}/telnet-xinetd ${D}/etc/xinetd.d/telnet
+    sed -i -e 's,${sbindir}/,${sbindir}/,' ${WORKDIR}/telnet-xinetd
+    install -d  ${D}${sysconfdir}/xinetd.d/
+    install -p -m644 ${WORKDIR}/telnet-xinetd ${D}${sysconfdir}/xinetd.d/telnet
 }
 
 inherit update-alternatives

@@ -95,9 +95,9 @@ do_configure() {
     )
 
     #change the interpreter in file
-    sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = /usr/bin/perl|g" \
+    sed -i -e "s|^PERL = ${STAGING_BINDIR_NATIVE}/.*|PERL = ${bindir}/perl|g" \
         ${B}/examples/Makefile
-    sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|/usr/bin/perl|g" \
+    sed -i -e "s|${STAGING_BINDIR_NATIVE}/perl-native/perl|${bindir}/perl|g" \
         ${B}/examples/*.pl
 }
 

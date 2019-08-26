@@ -16,7 +16,7 @@ SRC_URI[ttf.sha256sum] = "aa9cd68969b6f704df3e5b1a2e11204c47f118c8ab052f04c111bd
 do_install_append () {
     install -d ${D}${sysconfdir}/fonts/conf.d
 
-    for x in ${S}/etc/fonts/conf.avail/*.conf; do
+    for x in ${S}${sysconfdir}/fonts/conf.avail/*.conf; do
         install -m 0644 $x ${D}${sysconfdir}/fonts/conf.d/
     done
 }

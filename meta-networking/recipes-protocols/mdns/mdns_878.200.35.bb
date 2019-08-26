@@ -60,13 +60,13 @@ do_install () {
 pkg_postinst_${PN} () {
     sed -e '/^hosts:/s/\s*\<mdns\>//' \
         -e 's/\(^hosts:.*\)\(\<files\>\)\(.*\)\(\<dns\>\)\(.*\)/\1\2 mdns\3\4\5/' \
-        -i $D/etc/nsswitch.conf
+        -i $D${sysconfdir}/nsswitch.conf
 }
 
 pkg_prerm_${PN} () {
     sed -e '/^hosts:/s/\s*\<mdns\>//' \
         -e '/^hosts:/s/\s*mdns//' \
-        -i $D/etc/nsswitch.conf
+        -i $D${sysconfdir}/nsswitch.conf
 }
 
 inherit systemd

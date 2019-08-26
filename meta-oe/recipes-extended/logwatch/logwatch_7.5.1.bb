@@ -39,7 +39,7 @@ do_install() {
     install -m 0755 -d ${D}${sbindir}
     ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
     cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
-    DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
+    DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" ${datadir}/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
     if [ "\$DailyReport" != "No" ] && [ "\$DailyReport" != "no" ]
     then
             logwatch
@@ -52,7 +52,7 @@ EOF
     touch ${D}${sysconfdir}/logwatch/conf/logwatch.conf
     touch ${D}${sysconfdir}/logwatch/conf/ignore.conf
     touch ${D}${sysconfdir}/logwatch/conf/override.conf
-    echo "# Local configuration options go here (defaults are in /usr/share/logwatch/default.conf/logwatch.conf)" > ${D}${sysconfdir}/logwatch/conf/logwatch.conf
+    echo "# Local configuration options go here (defaults are in ${datadir}/logwatch/default.conf/logwatch.conf)" > ${D}${sysconfdir}/logwatch/conf/logwatch.conf
     echo "###### REGULAR EXPRESSIONS IN THIS FILE WILL BE TRIMMED FROM REPORT OUTPUT #####" > ${D}${sysconfdir}/logwatch/conf/ignore.conf
     echo "# Configuration overrides for specific logfiles/services may be placed here." > ${D}${sysconfdir}/logwatch/conf/override.conf
 }

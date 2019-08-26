@@ -30,7 +30,7 @@ INITSCRIPT_PARAMS_${PN} = "defaults 89"
 do_install_append() {
     rmdir ${D}${localstatedir}/run
     install -d ${D}/${sysconfdir}/minicoredumper
-    cp -rf ${S}/etc/* ${D}/${sysconfdir}/
+    cp -rf ${S}${sysconfdir}/* ${D}/${sysconfdir}/
 
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
@@ -38,8 +38,8 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
 
     # correct path of minicoredumper
-    sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
-    sed -i -e s:/usr/bin/minicoredumper:${sbindir}/minicoredumper:g ${D}${systemd_system_unitdir}/minicoredumper.service
+    sed -i -e s:${bindir}/minicoredumper:${sbindir}/minicoredumper:g ${D}${sysconfdir}/init.d/minicoredumper
+    sed -i -e s:${bindir}/minicoredumper:${sbindir}/minicoredumper:g ${D}${systemd_system_unitdir}/minicoredumper.service
 }
 
 # http://errors.yoctoproject.org/Errors/Details/186966/

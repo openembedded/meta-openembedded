@@ -39,7 +39,7 @@ do_configure_prepend() {
 }
 
 do_install() {
-    sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${WORKDIR}/init
+    sed -e 's#${sbindir}/#${sbindir}/#g' -i ${WORKDIR}/init
 
     install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
     install -m 4755 src/netperf ${D}${bindir}

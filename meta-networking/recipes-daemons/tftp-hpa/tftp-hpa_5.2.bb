@@ -57,8 +57,8 @@ do_install() {
     install -m 755 -d ${D}${localstatedir}/lib/tftpboot/
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/tftpd-hpa
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/tftpd-hpa
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/tftpd-hpa
 

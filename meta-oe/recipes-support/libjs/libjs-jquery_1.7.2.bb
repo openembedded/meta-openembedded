@@ -1,7 +1,7 @@
 SUMMARY = "JavaScript library for dynamic web applications"
 HOMEPAGE = "https://jquery.com/"
 LICENSE = "MIT | BSD | GPL-2"
-LIC_FILES_CHKSUM = "file://usr/share/doc/libjs-jquery/copyright;md5=5d1ec6f95e0a91d38e2f71de93ddb00e"
+LIC_FILES_CHKSUM = "file:/${datadir}/doc/libjs-jquery/copyright;md5=5d1ec6f95e0a91d38e2f71de93ddb00e"
 
 SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/main/j/jquery/${BPN}_${PV}+debian-1ubuntu1~ubuntu12.04.1_all.deb;subdir=${BP}"
 SRC_URI[md5sum] = "fa511ab67f6e960c5b6d39a4d665e47f"
@@ -22,4 +22,4 @@ do_install() {
     install -m 0644 ${S}${JQUERYDOCDIR}/copyright ${D}${JQUERYDOCDIR}/
 }
 
-FILES_${PN} = "/usr/share/javascript/jquery"
+FILES_${PN} = "${datadir}/javascript/jquery"

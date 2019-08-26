@@ -99,13 +99,13 @@ Identity = "${FD_HOSTNAME}.${FD_REALM}";
 Realm = "${FD_REALM}";
 Port = 30868;
 SecPort = 30869;
-TLS_Cred = "/etc/freeDiameter/${FD_PEM}" , "/etc/freeDiameter/${FD_KEY}";
-TLS_CA = "/etc/freeDiameter/${FD_CA}";
-TLS_DH_File = "/etc/freeDiameter/${FD_DH_PEM}";
+TLS_Cred = "${sysconfdir}/freeDiameter/${FD_PEM}" , "${sysconfdir}/freeDiameter/${FD_KEY}";
+TLS_CA = "${sysconfdir}/freeDiameter/${FD_CA}";
+TLS_DH_File = "${sysconfdir}/freeDiameter/${FD_DH_PEM}";
 EOF
 
     # create self cert
-    openssl req -x509 -config ${STAGING_DIR_NATIVE}/etc/ssl/openssl.cnf -newkey rsa:4096 -sha256 -nodes -out ${D}${sysconfdir}/freeDiameter/${FD_PEM} -keyout ${D}${sysconfdir}/freeDiameter/${FD_KEY} -days 3650 -subj '/CN=${FD_HOSTNAME}.${FD_REALM}'
+    openssl req -x509 -config ${STAGING_DIR_NATIVE}${sysconfdir}/ssl/openssl.cnf -newkey rsa:4096 -sha256 -nodes -out ${D}${sysconfdir}/freeDiameter/${FD_PEM} -keyout ${D}${sysconfdir}/freeDiameter/${FD_KEY} -days 3650 -subj '/CN=${FD_HOSTNAME}.${FD_REALM}'
     openssl dhparam -out ${D}${sysconfdir}/freeDiameter/${FD_DH_PEM} 1024
 
 }

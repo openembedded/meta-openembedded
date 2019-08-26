@@ -18,10 +18,10 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "\
 file://ChangeLog.md;md5=11d2e31df0de2be3ccc3e2286c4dafcb \
 "
-FILES_${PN} = "/usr/share/GeoIP \
-              /etc/GeoIP.conf \
-             /etc/cron.d/geoipupdate.cron \
-             /usr/bin/geoipupdate \
+FILES_${PN} = "${datadir}/GeoIP \
+              ${sysconfdir}/GeoIP.conf \
+             ${sysconfdir}/cron.d/geoipupdate.cron \
+             ${bindir}/geoipupdate \
 "
 inherit autotools
 

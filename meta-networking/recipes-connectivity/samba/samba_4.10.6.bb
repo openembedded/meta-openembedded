@@ -102,7 +102,7 @@ PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
 #
 PACKAGECONFIG[ad-dc] = "--with-experimental-mit-ad-dc,--without-ad-dc,,"
 PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
-PACKAGECONFIG[mitkrb5] = "--with-system-mitkrb5 --with-system-mitkdc=/usr/sbin/krb5kdc,,krb5,"
+PACKAGECONFIG[mitkrb5] = "--with-system-mitkrb5 --with-system-mitkdc=${sbindir}/krb5kdc,,krb5,"
 
 SAMBA4_IDMAP_MODULES="idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2"
 SAMBA4_PDB_MODULES="pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', 'ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
@@ -146,7 +146,7 @@ do_install_append() {
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${S}/bin/default/packaging/systemd/*.service ${D}${systemd_system_unitdir}/
     sed -e 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' \
-        -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
+        -e 's,${sysconfdir}/sysconfig/samba,${sysconfdir}/default/samba,' \
         -i ${D}${systemd_system_unitdir}/*.service
 
     if [ "${@bb.utils.contains('PACKAGECONFIG', 'ad-dc', 'yes', 'no', d)}" = "no" ]; then
@@ -162,8 +162,8 @@ do_install_append() {
     sed -e 's,/opt/samba/bin,${sbindir},g' \
         -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
         -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
-        -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
-        -e 's,/usr/bin,${base_bindir},g' \
+        -e 's,${sysconfdir}/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
+        -e 's,${bindir},${base_bindir},g' \
         -i ${D}${sysconfdir}/init.d/samba
 
     install -d ${D}${sysconfdir}/samba
@@ -190,12 +190,12 @@ do_install_append() {
     chmod 0750 ${D}${sysconfdir}/sudoers.d
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
     
-    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba-gpupdate
-    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_upgradedns 
-    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_spnupdate
-    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_kcc
-    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_dnsupdate
-    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-tool
+    sed -i -e 's,${PYTHON},${bindir}/env python3/,g' ${D}${sbindir}/samba-gpupdate
+    sed -i -e 's,${PYTHON},${bindir}/env python3/,g' ${D}${sbindir}/samba_upgradedns 
+    sed -i -e 's,${PYTHON},${bindir}/env python3/,g' ${D}${sbindir}/samba_spnupdate
+    sed -i -e 's,${PYTHON},${bindir}/env python3/,g' ${D}${sbindir}/samba_kcc
+    sed -i -e 's,${PYTHON},${bindir}/env python3/,g' ${D}${sbindir}/samba_dnsupdate
+    sed -i -e 's,${PYTHON},${bindir}/env python3/,g' ${D}${bindir}/samba-tool
     
 }
 

@@ -20,7 +20,7 @@ do_compile_prepend() {
 
 do_install() {
     oe_runmake install \
-        INSTALL="/usr/bin/install -p" \
+        INSTALL="${bindir}/install -p" \
         DESTDIR=${D} \
         SBIN_DIR=${D}/${sbindir} \
         MANDIR=${D}/${mandir}

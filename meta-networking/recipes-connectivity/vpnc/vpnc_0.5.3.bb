@@ -36,7 +36,7 @@ inherit perlnative pkgconfig
 
 do_configure_append () {
     # Make sure we use our nativeperl wrapper
-    sed -i "1s:#!.*:#!/usr/bin/env nativeperl:" ${S}/*.pl
+    sed -i "1s:#!.*:#!${bindir}/env nativeperl:" ${S}/*.pl
     cp ${WORKDIR}/long-help ${S}
 }
 

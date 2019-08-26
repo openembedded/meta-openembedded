@@ -11,7 +11,7 @@ PR = "r1"
 
 SRC_URI = "file://mplayer.conf"
 
-# Yes, really /usr/etc!!!
+# Yes, really /usr${sysconfdir}!!!
 do_install() {
     install -d "${D}/usr${sysconfdir}/mplayer"
 

@@ -100,12 +100,12 @@ do_install () {
 
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
-    sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
-    sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
+    sed -i 's,${sbindir}/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
+    sed -i 's,${sysconfdir}/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
 
     install -d ${D}${sysconfdir}/nginx
     install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
-    sed -i 's,/etc/,${sysconfdir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
+    sed -i 's,${sysconfdir}/,${sysconfdir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
     sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
     sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/nginx.conf
     install -Dm 0644 ${WORKDIR}/default_server.site ${D}${sysconfdir}/nginx/sites-available/default_server

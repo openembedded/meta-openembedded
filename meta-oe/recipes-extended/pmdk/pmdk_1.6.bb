@@ -43,7 +43,7 @@ FILES_${PN} += "${bindir}/pmempool ${bindir}/daxio"
 FILES_${PN} += "${libdir}/*so*"
 FILES_${PN} += "${libdir}/pkgconfig/*.pc"
 FILES_${PN} += "${includedir}/libpmemobj++/* ${includedir}/libpmemobj/* /usr/*/include/"
-FILES_${PN} += "/usr/etc"
-FILES_${PN} += "/usr/share"
+FILES_${PN} += "/usr${sysconfdir}"
+FILES_${PN} += "${datadir}"
 
 COMPATIBLE_HOST='(x86_64).*'

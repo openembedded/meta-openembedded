@@ -49,8 +49,8 @@ SYSTEMD_SERVICE_${PN} = "dovecot.service dovecot.socket"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 do_install_append () {
-    install -d 755 ${D}/etc/dovecot
-    touch 644 ${D}/etc/dovecot/dovecot.conf
+    install -d 755 ${D}${sysconfdir}/dovecot
+    touch 644 ${D}${sysconfdir}/dovecot/dovecot.conf
     install -m 0644 ${WORKDIR}/dovecot.service ${D}${systemd_unitdir}/system
     sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/dovecot.service
     sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/dovecot.service

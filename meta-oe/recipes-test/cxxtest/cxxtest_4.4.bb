@@ -16,7 +16,7 @@ do_install_append() {
     install -d ${D}${includedir}
     cp -a ../cxxtest ${D}${includedir}
     sed '1c\
-#!/usr/bin/env python' -i ${D}${bindir}/cxxtestgen
+#!${bindir}/env python' -i ${D}${bindir}/cxxtestgen
 }
 
 BBCLASSEXTEND = "native nativesdk"

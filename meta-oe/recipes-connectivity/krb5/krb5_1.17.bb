@@ -24,10 +24,10 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
            file://crosscompile_nm.patch \
-           file://etc/init.d/krb5-kdc \
-           file://etc/init.d/krb5-admin-server \
-           file://etc/default/krb5-kdc \
-           file://etc/default/krb5-admin-server \
+           file:/${sysconfdir}/init.d/krb5-kdc \
+           file:/${sysconfdir}/init.d/krb5-admin-server \
+           file:/${sysconfdir}/default/krb5-kdc \
+           file:/${sysconfdir}/default/krb5-admin-server \
            file://krb5-kdc.service \
            file://krb5-admin-server.service \
 "
@@ -74,8 +74,8 @@ do_install_append() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
-        install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
-        install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
+        install -m 0755 ${WORKDIR}${sysconfdir}/init.d/* ${D}/${sysconfdir}/init.d
+        install -m 0644 ${WORKDIR}${sysconfdir}/default/* ${D}/${sysconfdir}/default
 
         mkdir -p ${D}/${sysconfdir}/default/volatiles
         echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
@@ -89,7 +89,7 @@ do_install_append() {
               > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
 
         mkdir -p ${D}/${sysconfdir}/default
-        install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
+        install -m 0644 ${WORKDIR}${sysconfdir}/default/* ${D}/${sysconfdir}/default
 
         install -d ${D}${systemd_system_unitdir}
         install -m 0644 ${WORKDIR}/krb5-admin-server.service ${D}${systemd_system_unitdir}

@@ -33,8 +33,8 @@ RDEPENDS_${PN}_class-nativesdk += "\
 "
 
 do_install_append() {
-	# Make sure we use /usr/bin/env python
+	# Make sure we use ${bindir}/env python
 	for PYTHSCRIPT in `grep -rIl '^#!.*python' ${D}`; do
-		sed -i -e '1s|^#!.*|#!/usr/bin/env ${PYTHON_PN}|' $PYTHSCRIPT
+		sed -i -e '1s|^#!.*|#!${bindir}/env ${PYTHON_PN}|' $PYTHSCRIPT
 	done
 }

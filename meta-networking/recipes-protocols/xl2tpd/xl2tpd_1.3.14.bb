@@ -25,8 +25,8 @@ do_install () {
     install -d ${D}${sysconfdir}/init.d
     touch ${D}${sysconfdir}/xl2tpd.conf
     install -m 0755 debian/xl2tpd.init ${D}${sysconfdir}/init.d/xl2tpd
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/xl2tpd
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/xl2tpd
 

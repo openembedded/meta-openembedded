@@ -28,11 +28,11 @@ FILES_${PN} += "${datadir}"
 
 pkg_postinst_${PN} () {
     set -x
-    for fontdir in `find $D/usr/lib/X11/fonts -type d`; do
+    for fontdir in `find $D${libdir}/X11/fonts -type d`; do
         mkfontdir $fontdir
         mkfontscale $fontdir
     done
-    for fontdir in `find $D/usr/share/fonts/X11 -type d`; do
+    for fontdir in `find $D${datadir}/fonts/X11 -type d`; do
         mkfontdir $fontdir
         mkfontscale $fontdir
     done

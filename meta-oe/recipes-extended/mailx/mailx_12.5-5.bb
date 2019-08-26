@@ -40,7 +40,7 @@ CFLAGS_append = " -D_BSD_SOURCE -DDEBIAN -I${S}/EXT"
 
 # "STRIP=true" means that 'true' command will be used to 'strip' files which will achieve the effect of not stripping them
 # mailx's Makefile doesn't allow a more straightforward way to avoid stripping
-EXTRA_OEMAKE = "SENDMAIL=${sbindir}/sendmail IPv6=-DHAVE_IPv6_FUNCS PREFIX=/usr UCBINSTALL=/usr/bin/install STRIP=true"
+EXTRA_OEMAKE = "SENDMAIL=${sbindir}/sendmail IPv6=-DHAVE_IPv6_FUNCS PREFIX=/usr UCBINSTALL=${bindir}/install STRIP=true"
 
 # The makeconfig can't run parallelly, otherwise the checking results
 # might be incorrect and lead to errors:

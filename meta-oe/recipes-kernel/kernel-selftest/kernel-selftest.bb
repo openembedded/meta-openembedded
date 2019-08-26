@@ -78,7 +78,7 @@ do_install() {
         oe_runmake -C ${S}/tools/testing/selftests/${i} INSTALL_PATH=${D}/usr/kernel-selftest/${i} install
     done
     if [ -e ${D}/usr/kernel-selftest/bpf/test_offload.py ]; then
-	sed -i -e '1s,#!.*python3,#! /usr/bin/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
+	sed -i -e '1s,#!.*python3,#! ${bindir}/env python3,' ${D}/usr/kernel-selftest/bpf/test_offload.py
     fi
     chown root:root  -R ${D}/usr/kernel-selftest
 }

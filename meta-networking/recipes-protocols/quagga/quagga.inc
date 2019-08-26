@@ -69,7 +69,7 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
                 ap_cv_cc_pie=no \
                 ${SNMP_CONF}"
 
-CACHED_CONFIGUREVARS += "ac_cv_path_PERL='/usr/bin/env perl'"
+CACHED_CONFIGUREVARS += "ac_cv_path_PERL='${bindir}/env perl'"
 
 do_install () {
     # Install init script and default settings
@@ -101,9 +101,9 @@ do_install () {
             localstatedir=${localstatedir}/run/quagga
 
     # Fix hardcoded paths
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/*
-    sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/quagga
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/watchquagga
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/*
+    sed -i 's!${bindir}/!${bindir}/!g' ${D}${sysconfdir}/init.d/quagga
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/watchquagga
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/* ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!' ${D}${sysconfdir}/init.d/*
 
@@ -197,7 +197,7 @@ GROUPADD_PARAM_${PN} = "--system quagga ; --system quaggavty"
 USERADD_PARAM_${PN} = "--system --home ${localstatedir}/run/quagga/ -M -g quagga -G quaggavty --shell /bin/false quagga"
 
 pkg_postinst_${PN} () {
-    if [ -z "$D" ] && [ -e /etc/init.d/populate-volatile.sh ] ; then
+    if [ -z "$D" ] && [ -e ${sysconfdir}/init.d/populate-volatile.sh ] ; then
         ${sysconfdir}/init.d/populate-volatile.sh update
     fi
 }

@@ -105,9 +105,9 @@ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python2', 'distutils-base', '', d
 
 export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
 export PYTHON="${STAGING_BINDIR_NATIVE}/${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3', 'python', d)}"
-export ORACLE_JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
-export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/lib/jvm/openjdk-8-native"
-export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
+export ORACLE_JAVA_HOME="${STAGING_DIR_NATIVE}${bindir}/java"
+export JAVA_HOME="${STAGING_DIR_NATIVE}${libdir}/jvm/openjdk-8-native"
+export ANT_DIR="${STAGING_DIR_NATIVE}${datadir}/ant/"
 
 TARGET_CC_ARCH += "-I${S}/include "
 
@@ -173,8 +173,8 @@ RDEPENDS_${PN}-apps  = "bash"
 
 do_install_append() {
     # Move Python files into correct library folder (for multilib build)
-    if [ "$libdir" != "/usr/lib" -a -d ${D}/usr/lib ]; then
-        mv ${D}/usr/lib/* ${D}/${libdir}/
-        rm -rf ${D}/usr/lib
+    if [ "$libdir" != "${libdir}" -a -d ${D}${libdir} ]; then
+        mv ${D}${libdir}/* ${D}/${libdir}/
+        rm -rf ${D}${libdir}
     fi
 }

@@ -182,7 +182,7 @@ do_install_append() {
     install -d ${D}${sysconfdir}/init.d
     cat ${WORKDIR}/initscript > ${D}${sysconfdir}/init.d/openldap
     chmod 755 ${D}${sysconfdir}/init.d/openldap
-    # This is duplicated in /etc/openldap and is for slapd
+    # This is duplicated in ${sysconfdir}/openldap and is for slapd
     rm -f ${D}${localstatedir}/openldap-data/DB_CONFIG.example
 
     # Installing slapd under ${sbin} is more FHS and LSB compliance

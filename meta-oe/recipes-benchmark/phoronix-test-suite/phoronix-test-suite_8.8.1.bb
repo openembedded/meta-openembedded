@@ -16,10 +16,10 @@ inherit systemd allarch
 do_install() {
     DESTDIR=${D} ./install-sh ${exec_prefix}
 
-    if [ "${systemd_unitdir}" != "/usr/lib/systemd" ]; then
+    if [ "${systemd_unitdir}" != "${libdir}/systemd" ]; then
         install -d ${D}/${systemd_unitdir}/system/
-        mv ${D}/usr/lib/systemd/system/* ${D}/${systemd_unitdir}/system/
-        rm -rf ${D}/usr/lib/
+        mv ${D}${libdir}/systemd/system/* ${D}/${systemd_unitdir}/system/
+        rm -rf ${D}${libdir}/
     fi
 }
 

@@ -68,8 +68,8 @@ do_compile_prepend() {
 do_install_append () {
     install -d ${D}${sysconfdir}/init.d
     install -d ${D}${sysconfdir}/default
-    install -m 0755 ${S}/etc/rc.d/init.d/openl2tpd ${D}${sysconfdir}/init.d/openl2tpd
-    install -m 0755 ${S}/etc/sysconfig/openl2tpd ${D}${sysconfdir}/default/openl2tpd
+    install -m 0755 ${S}${sysconfdir}/rc.d/init.d/openl2tpd ${D}${sysconfdir}/init.d/openl2tpd
+    install -m 0755 ${S}${sysconfdir}/sysconfig/openl2tpd ${D}${sysconfdir}/default/openl2tpd
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -D -m 0644 ${WORKDIR}/openl2tpd.service ${D}${systemd_system_unitdir}/openl2tpd.service

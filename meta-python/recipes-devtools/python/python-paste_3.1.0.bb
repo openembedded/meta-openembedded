@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "18323f22df5ab6998fdf4c5aa5a9f41d33ff949a87ad7b2ca48e72fbf5
 PYPI_PACKAGE = "Paste"
 inherit pypi setuptools
 
-FILES_${PN} += "/usr/lib/*"
+FILES_${PN} += "${libdir}/*"
 
 DEPENDS += "${PYTHON_PN}-pytest-runner-native"
 

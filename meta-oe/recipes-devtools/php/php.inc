@@ -149,8 +149,8 @@ do_install_append_class-target() {
     install -d ${D}/${sysconfdir}/apache2/conf.d
     install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
     install -d ${D}${sysconfdir}/init.d
-    sed -i 's:=/usr/sbin:=${sbindir}:g' ${B}/sapi/fpm/init.d.php-fpm
-    sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
+    sed -i 's:=${sbindir}:=${sbindir}:g' ${B}/sapi/fpm/init.d.php-fpm
+    sed -i 's:=${sysconfdir}:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
     sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
     install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
@@ -179,7 +179,7 @@ do_install_append_class-target() {
         install -m 644  ${WORKDIR}/70_mod_php${PHP_MAJOR_VERSION}.conf ${D}${sysconfdir}/apache2/modules.d
         sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php${PHP_MAJOR_VERSION}.conf
         cat ${S}/php.ini-production | \
-            sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
+            sed -e 's,extension_dir = \"\./\",extension_dir = \"${libdir}/extensions\",' \
             > ${D}${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}/php.ini
         rm -f ${D}${sysconfdir}/apache2/httpd.conf*
     fi

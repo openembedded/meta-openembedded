@@ -48,7 +48,7 @@ do_install() {
 
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/redis.service ${D}${systemd_system_unitdir}
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${systemd_system_unitdir}/redis.service
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${systemd_system_unitdir}/redis.service
 
     if [ "${REDIS_ON_SYSTEMD}" = true ]; then
         sed -i 's!daemonize yes!# daemonize yes!' ${D}/${sysconfdir}/redis/redis.conf

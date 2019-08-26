@@ -34,6 +34,6 @@ do_configure () {
 
     rm config.log
     for i in $(find -name "Makefile") ; do
-        sed -i -e 's:-L/usr/lib:-L${STAGING_LIBDIR}:g' $i
+        sed -i -e 's:-L${libdir}:-L${STAGING_LIBDIR}:g' $i
     done
 }

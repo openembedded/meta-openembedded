@@ -26,7 +26,7 @@ TASK_BASIC_SSHDAEMON ?= "dropbear openssh-sftp openssh-sftp-server"
 # It also avoids the choice between connman/networkmanager/ifupdown since that is an image feature, not a
 # distro feature.
 #
-# Util-linux (u)mount is included because the busybox one can't handle /etc/mtab being symlinked to /proc/mounts
+# Util-linux (u)mount is included because the busybox one can't handle ${sysconfdir}/mtab being symlinked to /proc/mounts
 #
 RDEPENDS_${PN} = "\
     ${TASK_BASIC_SSHDAEMON} \

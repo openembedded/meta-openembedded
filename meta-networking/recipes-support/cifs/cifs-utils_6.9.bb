@@ -25,7 +25,7 @@ PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disab
 inherit autotools pkgconfig
 
 do_install_append() {
-    # Remove empty /usr/bin and /usr/sbin directories since the mount helper
+    # Remove empty ${bindir} and ${sbindir} directories since the mount helper
     # is installed to /sbin
     rmdir --ignore-fail-on-non-empty ${D}${bindir} ${D}${sbindir}
 }

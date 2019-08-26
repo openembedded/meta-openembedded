@@ -42,16 +42,16 @@ EXTRA_OEMAKE = "\
 "
 
 do_install () {
-    mkdir -p ${D}/usr/bin
-    install -m 755 ${S}/makedumpfile ${D}/usr/bin
-    install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
+    mkdir -p ${D}${bindir}
+    install -m 755 ${S}/makedumpfile ${D}${bindir}
+    install -m 755 ${S}/makedumpfile-R.pl ${D}${bindir}
 
-    mkdir -p ${D}/usr/share/man/man8
-    install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
+    mkdir -p ${D}${datadir}/man/man8
+    install -m 644 ${S}/makedumpfile.8.gz ${D}${datadir}/man/man8
 
-    mkdir -p ${D}/usr/share/man/man5
-    install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
+    mkdir -p ${D}${datadir}/man/man5
+    install -m 644 ${S}/makedumpfile.conf.5.gz ${D}${datadir}/man/man5
 
-    mkdir -p ${D}/etc/
-    install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
+    mkdir -p ${D}${sysconfdir}/
+    install -m 644 ${S}/makedumpfile.conf ${D}${sysconfdir}/makedumpfile.conf.sample
 }

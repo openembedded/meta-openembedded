@@ -48,7 +48,7 @@ do_configure () {
 }
 
 do_install_append () {
-    rm -fr ${D}/usr/share
+    rm -fr ${D}${datadir}
     rmdir --ignore-fail-on-non-empty ${D}/usr
 }
 

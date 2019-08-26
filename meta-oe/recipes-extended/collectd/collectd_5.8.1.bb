@@ -61,8 +61,8 @@ EXTRA_OECONF = " \
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/collectd.init ${D}${sysconfdir}/init.d/collectd
-    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/collectd
-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/collectd
+    sed -i 's!${sbindir}/!${sbindir}/!g' ${D}${sysconfdir}/init.d/collectd
+    sed -i 's!${sysconfdir}/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/collectd
     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/collectd
     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${sysconfdir}/init.d/collectd
     install -Dm 0640 ${B}/src/collectd.conf ${D}${sysconfdir}/collectd.conf
