@@ -13,8 +13,8 @@ SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 SRC_URI += " \
     file://remove-examples.patch \
 "
-SRC_URI[archive.md5sum] = "77f1016cbb27e15d4e04a2b7bfdb4cae"
-SRC_URI[archive.sha256sum] = "6e5fe03bdf1e220eeffd543e017fd2fb15bcec9235f0ffd50674aff9362a85f0"
+SRC_URI[archive.md5sum] = "0f6180d185c067bdb2aa30d035f9b867"
+SRC_URI[archive.sha256sum] = "a3a1b1c9805479a16c0018acd84b3bfff23a122aee9e3c5013bb81231aeef2bc"
 
 do_install_append() {
     install -d ${D}${datadir}/glibmm-2.4
