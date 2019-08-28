@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
 
 DEPENDS = " \
     intltool-native gperf-native glib-2.0-native \
-    glib-2.0 gtk+3 gconf libgnome-keyring libgdata libcanberra icu \
+    glib-2.0 gtk+3 libgnome-keyring libgdata libcanberra icu \
     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
 "
 
-inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative pythonnative upstream-version-is-even vala
+inherit gnomebase cmake gtk-doc gettext gobject-introspection perlnative upstream-version-is-even vala
 
 SRC_URI += "file://0001-CMakeLists.txt-Remove-TRY_RUN-for-iconv.patch \
             file://0002-CMakeLists.txt-remove-CHECK_C_SOURCE_RUNS-check.patch \
