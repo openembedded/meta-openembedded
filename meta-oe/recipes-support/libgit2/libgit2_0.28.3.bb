@@ -13,12 +13,8 @@ S = "${WORKDIR}/git"
 inherit cmake
 
 EXTRA_OECMAKE = "\
-    -DTHREADSAFE=ON \
     -DBUILD_CLAR=OFF \
-    -DSHA1_TYPE="builtin" \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-    -DBUILD_EXAMPLES=OFF \
-    -DLIB_INSTALL_DIR=${libdir} \
 "
 
 BBCLASSEXTEND = "native"
