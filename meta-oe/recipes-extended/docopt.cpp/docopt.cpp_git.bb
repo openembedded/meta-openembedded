@@ -18,12 +18,10 @@ SRCREV = "3dd23e3280f213bacefdf5fcb04857bf52e90917"
 PV = "0.6.2+git${SRCPV}"
 
 SRC_URI = "\
-    git://git@github.com/docopt/docopt.cpp.git;protocol=ssh \
+    git://github.com/docopt/docopt.cpp.git;protocol=https \
     file://0001-Set-library-VERSION-and-SOVERSION.patch \
 "
 
 S = "${WORKDIR}/git"
 
-inherit cmake gitpkgv
-
-PKGV = "0.6.2+git${GITPKGV}"
+inherit cmake
