@@ -39,6 +39,7 @@ EXTRA_OEMAKE = '\
     CROSS_COMPILE=${TARGET_PREFIX} \
     ARCH=${ARCH} \
     CC="${CC}" \
+    CLANG="clang -fno-stack-protector" \
     AR="${AR}" \
     LD="${LD}" \
     DESTDIR="${D}" \
@@ -51,16 +52,6 @@ KERNEL_SELFTEST_SRC ?= "Makefile \
                         arch \
                         LICENSES \
 "
-
-python __anonymous () {
-    import re
-
-    var = d.getVar('TARGET_CC_ARCH')
-    pattern = '_FORTIFY_SOURCE=[^0]'
-
-    if re.search(pattern, var):
-        d.appendVar('TARGET_CC_ARCH', " -O")
-}
 
 do_compile() {
     if [ ${@bb.utils.contains('DEPENDS', 'clang-native', 'True', 'False', d)} = 'False' ]; then
@@ -123,13 +114,4 @@ RDEPENDS_${PN} += "python3"
 # tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
 INSANE_SKIP_${PN} += "ldflags"
 
-# userfaultfd.c:126:2: error: format not a string literal and no format arguments [-Werror=format-security]
-#  fprintf(stderr, examples);
-#  ^~~~~~~
-SECURITY_STRINGFORMAT = ""
-
-# https://errors.yoctoproject.org/Errors/Details/261657/
-# kernel-selftest/1.0-r0/recipe-sysroot/usr/include/bits/fcntl2.h:50:4: error: call to '__open_missing_mode' declared with attribute error: open with O_CREAT or O_TMPFILE in second argument needs 3 arguments
-#     __open_missing_mode ();
-#     ^~~~~~~~~~~~~~~~~~~~~~
-lcl_maybe_fortify = ""
+SECURITY_CFLAGS = ""
