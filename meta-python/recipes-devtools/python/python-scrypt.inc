@@ -1,6 +1,6 @@
 DESCRIPTION = "Bindings for the scrypt key derivation function library"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=cb641bc04cda31daea161b1bc15da69f"
 HOMEPAGE="https://bitbucket.org/mhallin/py-scrypt/overview"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/python-scrypt:"
