@@ -89,6 +89,4 @@ EXTRA_OECONF += "--disable-libargon2"
 
 FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
 
-INSANE_SKIP_${PN} += "build-deps file-rdeps"
-
 BBCLASSEXTEND = "native nativesdk"
