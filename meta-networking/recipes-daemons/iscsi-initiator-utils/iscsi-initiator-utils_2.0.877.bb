@@ -29,7 +29,7 @@ B = "${WORKDIR}/build"
 
 PV .= "+git${SRCPV}"
 
-inherit update-rc.d systemd autotools
+inherit update-rc.d systemd autotools pkgconfig
 
 EXTRA_OECONF = " \
     --target=${TARGET_SYS} \
@@ -42,6 +42,7 @@ EXTRA_OEMAKE = ' \
     BASE="${prefix}" \
     MANDIR="${mandir}" \
     OPTFLAGS="-DNO_SYSTEMD ${CFLAGS}" \
+    PKG_CONFIG="${STAGING_BINDIR_NATIVE}/pkg-config" \
     NO_SYSTEMD=1 \
 '
 
