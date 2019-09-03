@@ -23,8 +23,8 @@ SRC_URI_append_class-target = " \
            file://0002-Using-native-torque.patch \
            "
 
-SRC_URI[md5sum] = "fa70b942c5e3379ce96219fe90f50c8f"
-SRC_URI[sha256sum] = "6cbc17795e9259dce7a8f5fd5a2e46f9e6920fb48b7d9539c5b2faa5bb5db4d8"
+SRC_URI[md5sum] = "b41275a018e670947c1950b12f050a2f"
+SRC_URI[sha256sum] = "7bf1123d7415964775b8f81fe6ec6dd5c3c08abb42bb71dfe4409dbeeba26bbd"
 
 S = "${WORKDIR}/node-v${PV}"
 
