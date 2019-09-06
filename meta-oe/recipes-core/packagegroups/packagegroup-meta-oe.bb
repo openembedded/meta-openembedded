@@ -104,7 +104,7 @@ RDEPENDS_packagegroup-meta-oe-dbs ="\
 RDEPENDS_packagegroup-meta-oe-devtools ="\
     android-tools android-tools-conf bootchart breakpad \
     capnproto cgdb cscope ctags \
-    debootstrap dejagnu dmalloc flatbuffers \
+    debootstrap dmalloc flatbuffers \
     giflib icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
     kconfig-frontends lemon libedit libgee libsombok3 \
     libubox log4cplus lshw ltrace lua mcpp memstat mercurial \
