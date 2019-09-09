@@ -8,7 +8,7 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium li
 DEPENDS_append_x86 = " spice spice-protocol"
 DEPENDS_append_x86-64 = " spice spice-protocol"
 
-DEPENDS_append_libc-musl = "libexecinfo"
+DEPENDS_append_libc-musl = " libexecinfo"
 LDFLAGS_append_libc-musl = " -lexecinfo"
 
 SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
