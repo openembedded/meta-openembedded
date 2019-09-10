@@ -56,6 +56,9 @@ EXTRA_OECONF = "--enable-mbstring \
                 ${COMMON_EXTRA_OECONF} \
 "
 
+EXTRA_OECONF_append_riscv64 = " --with-pcre-jit=no"
+EXTRA_OECONF_append_riscv32 = " --with-pcre-jit=no"
+
 CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
 
 EXTRA_OECONF_class-native = " \
