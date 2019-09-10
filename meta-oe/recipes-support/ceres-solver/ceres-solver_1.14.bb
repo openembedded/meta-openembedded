@@ -21,6 +21,13 @@ inherit cmake
 # ceres-solver/1.14-r0/packages-split/ceres-solver-dev/usr/lib/cmake/Ceres/CeresConfig.cmake:    set(glog_DIR ceres-solver/1.14-r0/recipe-sysroot/usr/lib/cmake/glog)
 SSTATE_SCAN_FILES += "*.cmake"
 
+PACKAGECONFIG ??= ""
+
+# suitesparse* recipes will be in meta-ros layer
+PACKAGECONFIG[suitesparse] = "-DSUITESPARSE=ON,-DSUITESPARSE=OFF,suitesparse-config suitesparse-amd suitesparse-camd suitesparse-colamd suitesparse-ccolamd suitesparse-cholmod suitesparse-metis suitesparse-spqr"
+PACKAGECONFIG[cxsparse] = "-DCXSPARSE=ON,-DCXSPARSE=OFF,suitesparse-cxsparse"
+PACKAGECONFIG[lapack] = "-DLAPACK=ON,-DLAPACK=OFF,lapack"
+
 # Only a static library and headers are created
 RDEPENDS_${PN}-dev = ""
 RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
