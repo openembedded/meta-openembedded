@@ -99,7 +99,6 @@ PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
 export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
 export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
 CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
-CFLAGS_append_aarch64 = " -O2"
 
 EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
 
