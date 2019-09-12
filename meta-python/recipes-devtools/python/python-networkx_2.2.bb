@@ -2,8 +2,8 @@ DESCRIPTION = "Python package for creating and manipulating graphs and networks"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3376ff7c9c58048c62d91431f7f08cde"
 
-SRC_URI[md5sum] = "4a2c2a62dfc46ba7d594daca7c834995"
-SRC_URI[sha256sum] = "64272ca418972b70a196cb15d9c85a5a6041f09a2f32e0d30c0255f25d458bb1"
+SRC_URI[md5sum] = "82608a3686fb3e61f20cf13bfd3c1b4a"
+SRC_URI[sha256sum] = "45e56f7ab6fe81652fb4bc9f44faddb0e9025f469f602df14e3b2551c2ea5c8b"
 
 PYPI_PACKAGE_EXT = "zip"
 
