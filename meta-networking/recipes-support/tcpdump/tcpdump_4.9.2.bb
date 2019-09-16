@@ -10,6 +10,7 @@ SRC_URI = " \
     file://unnecessary-to-check-libpcap.patch \
     file://add-ptest.patch \
     file://run-ptest \
+    file://0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch \
 "
 
 SRC_URI[md5sum] = "9bbc1ee33dab61302411b02dd0515576"
