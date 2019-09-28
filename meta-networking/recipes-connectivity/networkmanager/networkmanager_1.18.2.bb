@@ -19,10 +19,11 @@ DEPENDS = " \
     curl \
 "
 
-inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
+inherit gnomebase gettext update-rc.d systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+    file://${BPN}.initd \
     file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
     file://0002-Do-not-create-settings-settings-property-documentati.patch \
 "
@@ -130,6 +131,7 @@ FILES_${PN}-nmtui-doc = " \
     ${mandir}/man1/nmtui* \
 "
 
+INITSCRIPT_NAME = "network-manager"
 SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
 
 ALTERNATIVE_PRIORITY = "100"
@@ -138,6 +140,8 @@ ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','syste
 ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
 
 do_install_append() {
+    install -Dm 0755 ${WORKDIR}/${BPN}.initd ${D}${sysconfdir}/init.d/network-manager
+
     rm -rf ${D}/run ${D}${localstatedir}/run
 
     # For read-only filesystem, do not create links during bootup
