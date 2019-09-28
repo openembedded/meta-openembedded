@@ -92,7 +92,7 @@ FILES_libnmutil += "${libdir}/libnm-util.so.*"
 FILES_libnmglib += "${libdir}/libnm-glib.so.*"
 FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
 
-FILES_${PN}-adsl = "${libdir}/NetworkManager/libnm-device-plugin-adsl.so"
+FILES_${PN}-adsl = "${libdir}/NetworkManager/${PV}/libnm-device-plugin-adsl.so"
 
 FILES_${PN} += " \
     ${libexecdir} \
