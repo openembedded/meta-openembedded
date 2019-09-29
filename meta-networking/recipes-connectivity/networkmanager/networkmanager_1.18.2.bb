@@ -19,7 +19,7 @@ DEPENDS = " \
     curl \
 "
 
-inherit gnomebase gettext update-rc.d systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
+inherit gnomebase gettext update-rc.d systemd bash-completion vala gobject-introspection gtk-doc update-alternatives upstream-version-is-even
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
@@ -33,9 +33,6 @@ SRC_URI_append_libc-musl = " \
 "
 SRC_URI[md5sum] = "ca1e6175c6ba97ca1adf65a67861ccd9"
 SRC_URI[sha256sum] = "4dd97ca974cd1f97990746527258f551f4257cbf011fecd01d10b7d74a6fa5c3"
-
-UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/NetworkManager/1.16/"
-UPSTREAM_CHECK_REGEX = "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar.xz"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
