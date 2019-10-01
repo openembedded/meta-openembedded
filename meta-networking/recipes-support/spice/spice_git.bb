@@ -39,6 +39,7 @@ export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
 
 CFLAGS_append = " -Wno-error"
 
+PACKAGECONFIG_class-native = ""
 PACKAGECONFIG_class-nativesdk = ""
 PACKAGECONFIG ?= "sasl"
 
@@ -53,6 +54,6 @@ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
 
 COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
 
-BBCLASSEXTEND = "nativesdk"
+BBCLASSEXTEND = "native nativesdk"
 
 EXTRA_OECONF_append_toolchain-clang = " --disable-werror"
