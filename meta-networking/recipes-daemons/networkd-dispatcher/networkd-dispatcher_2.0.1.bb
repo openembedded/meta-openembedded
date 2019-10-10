@@ -1,9 +1,3 @@
-python __anonymous() {
-    features = d.getVar('DISTRO_FEATURES')
-    if not features or 'systemd' not in features:
-        raise bb.parse.SkipPackage('networkd-dispatcher needs systemd in DISTRO_FEATURES')
-}
-
 SUMMARY = "Dispatcher service for systemd-networkd connection status changes"
 DESCRIPTION = "This daemon is similar to NetworkManager-dispatcher, but is much \
 more limited in the types of events it supports due to the limited nature of \
@@ -13,7 +7,10 @@ AUTHOR = "Clayton Craft and others"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
 
+inherit distro_features_check
+
 RDEPENDS_${PN} = "systemd python3 python3-pygobject python3-dbus"
+REQUIRED_DISTRO_FEATURES = "systemd"
 
 SRC_URI = "https://gitlab.com/craftyguy/networkd-dispatcher/-/archive/${PV}/networkd-dispatcher-${PV}.tar.bz2"
 SRC_URI[md5sum] = "304d7dcc21331ea295e207f8493cb8d8"
