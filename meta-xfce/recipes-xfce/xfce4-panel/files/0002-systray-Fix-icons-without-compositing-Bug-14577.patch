@@ -1,0 +1,80 @@
+From f6f70cce417fd2982c2ce6f01016ed01deb6a9ae Mon Sep 17 00:00:00 2001
+From: "Ivan A. Melnikov" <iv@altlinux.org>
+Date: Mon, 23 Sep 2019 16:18:10 +0400
+Subject: [PATCH] systray: Fix icons without compositing (Bug #14577)
+
+Wrapper window uses RGBA visual when it's available;
+systray manager should try to do the same for
+the transparent or parent-relative background to work.
+
+That means that the manager and icons will work with
+RGBA visual even if the screen is not compositing; so
+we should always force-redraw the icons.
+
+Upstream-Status: Accepted [1]
+
+[1] https://git.xfce.org/xfce/xfce4-panel/commit?id=f6f70cce417fd2982c2ce6f01016ed01deb6a9ae
+
+Refs: https://bugzilla.xfce.org/show_bug.cgi?id=14577
+Signed-off-by: Ivan A. Melnikov <iv@altlinux.org>
+---
+ plugins/systray/systray-manager.c | 10 ++++++----
+ plugins/systray/systray.c         | 10 ----------
+ 2 files changed, 6 insertions(+), 14 deletions(-)
+
+diff --git a/plugins/systray/systray-manager.c b/plugins/systray/systray-manager.c
+index 68836554..4915649c 100644
+--- a/plugins/systray/systray-manager.c
++++ b/plugins/systray/systray-manager.c
+@@ -751,6 +751,7 @@ static void
+ systray_manager_set_visual (SystrayManager *manager)
+ {
+   GdkDisplay  *display;
++  GdkVisual   *visual;
+   Visual      *xvisual;
+   Atom         visual_atom;
+   gulong       data[1];
+@@ -768,11 +769,12 @@ systray_manager_set_visual (SystrayManager *manager)
+   visual_atom = gdk_x11_get_xatom_by_name_for_display (display,
+       "_NET_SYSTEM_TRAY_VISUAL");
+ 
+-  if (gdk_screen_is_composited (gtk_widget_get_screen (manager->invisible))
+-      && (gdk_screen_get_rgba_visual (screen) != NULL))
++  visual = gdk_screen_get_rgba_visual (screen);
++  panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
++  if (visual != NULL)
+     {
+-      /* get the rgba visual */
+-      xvisual = GDK_VISUAL_XVISUAL (gdk_screen_get_rgba_visual (screen));
++      /* use the rgba visual */
++      xvisual = GDK_VISUAL_XVISUAL (visual);
+     }
+   else
+     {
+diff --git a/plugins/systray/systray.c b/plugins/systray/systray.c
+index 3fb9520c..beae1973 100644
+--- a/plugins/systray/systray.c
++++ b/plugins/systray/systray.c
+@@ -728,19 +728,9 @@ systray_plugin_box_draw (GtkWidget *box,
+                          gpointer   user_data)
+ {
+   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
+-  GdkScreen      *screen;
+-
+   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
+   panel_return_if_fail (cr != NULL);
+ 
+-  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+-
+-  if (G_LIKELY (screen != NULL))
+-    {
+-      if (!gdk_screen_is_composited (screen))
+-        return;
+-    }
+-
+   /* separately draw all the composed tray icons after gtk
+    * handled the draw event */
+   gtk_container_foreach (GTK_CONTAINER (box),
+-- 
+2.21.0
+

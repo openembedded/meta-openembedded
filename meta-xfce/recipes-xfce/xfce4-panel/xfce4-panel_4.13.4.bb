@@ -12,6 +12,7 @@ SRC_URI[md5sum] = "c0f132fed2110d37f351aadc9e80a034"
 SRC_URI[sha256sum] = "36ffd26ef7f5867c01ba310475b4358ff0e588cfd5599a266f0037a6c20052a1"
 SRC_URI += " \
     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
+    file://0002-systray-Fix-icons-without-compositing-Bug-14577.patch \
 "
 
 python populate_packages_prepend() {
