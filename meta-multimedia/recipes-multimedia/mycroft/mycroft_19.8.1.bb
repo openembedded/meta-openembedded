@@ -24,6 +24,7 @@ inherit systemd
 
 # Mycroft installs itself on the host
 # Just copy the setup files to the rootfs
+# The mycroft-setup service will copy the files to /var/ where we run them from
 do_install() {
     install -d ${D}${libdir}/
     cp -r ${B} ${D}${libdir}/mycroft
