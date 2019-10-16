@@ -4,8 +4,9 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
 
-SRCREV = "6ecff5d46e1b12c2859f0b63a73282940e3402bb"
-PV = "0.15+git${SRCPV}"
+# v0.18 + a single commit fixing the build
+SRCREV = "5090603d01779bb1717fb0c50953330e8770550f"
+PV = "0.18+git${SRCPV}"
 
 SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
 
