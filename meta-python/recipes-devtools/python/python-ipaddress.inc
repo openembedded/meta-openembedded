@@ -3,11 +3,11 @@ HOMEPAGE = "https://github.com/phihag/ipaddress"
 LICENSE = "Python-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7f538584cc3407bf76042def7168548a"
 
-DEPENDS += "python-pip"
+DEPENDS += "${PYTHON_PN}-pip"
 
-SRC_URI[md5sum] = "74c1ce3109f30eaa1ab3dd342e7b76d4"
-SRC_URI[sha256sum] = "b146c751ea45cad6188dd6cf2d9b757f6f4f8d6ffb96a023e6f2e26eea02a72c"
+SRC_URI[md5sum] = "aaee67a8026782af1831148beb0d9060"
+SRC_URI[sha256sum] = "b7f8e0369580bb4a24d5ba1d7cc29660a4a6987763faf1d8a8046830e020e7e2"
 
-inherit pypi setuptools
+inherit pypi
 
 BBCLASSEXTEND = "native nativesdk"
