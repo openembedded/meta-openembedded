@@ -203,7 +203,7 @@ ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
 ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
 
 PACKAGE_WRITE_DEPS += "postfix-native"
-pkg_postinst_${PN} () {
+pkg_postinst_${PN}-cfg () {
     if [ "x$D" = "x" ]; then
         touch /etc/aliases
         newaliases
@@ -224,7 +224,10 @@ pkg_postinst_${PN} () {
     fi
 }
 
+PACKAGES =+ "${PN}-cfg"
+RDEPENDS_${PN}_class-target += "${PN}-cfg"
 # Exclude .debug directories from the main package
-FILES_${PN} = "${sysconfdir} ${localstatedir} ${bindir}/* ${sbindir}/* \
+FILES_${PN} = "${localstatedir} ${bindir}/* ${sbindir}/* \
                ${libexecdir}/* ${systemd_unitdir}/*"
+FILES_${PN}-cfg = "${sysconfdir}"
 FILES_${PN}-dbg += "${libexecdir}/postfix/.debug"
