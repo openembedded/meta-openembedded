@@ -38,10 +38,8 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
-    file://0014-Fix-new-warnings-from-gcc9.patch;patchdir=.. \
 "
-# stable-10.3.5
-SRCREV = "f2ff192717375b95a6b7e278fb47dbb3d3bc56d1"
+SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
@@ -56,7 +54,7 @@ SYSTEMD_SERVICE_${PN} = "vmtoolsd.service"
 
 EXTRA_OECONF = "--without-icu --disable-multimon --disable-docs \
          --disable-tests --without-gtkmm --without-xerces --without-pam \
-         --disable-grabbitmqproxy --disable-vgauth --disable-deploypkg \
+         --disable-vgauth --disable-deploypkg \
          --without-root-privileges --without-kernel-modules"
 
 NO_X11_FLAGS = "--without-x --without-gtk2 --without-gtk3"
