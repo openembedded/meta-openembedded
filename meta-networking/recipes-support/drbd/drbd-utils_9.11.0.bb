@@ -12,9 +12,9 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
           "
-# v9.10.0
-SRCREV_drbd-utils = "859151b228d3b3aacefb09d06d515a2589c22e35"
-SRCREV_drbd-headers = "0955b3423f08f8e11ff05092bc1b766609fd804b"
+# v9.11.0
+SRCREV_drbd-utils = "63092751e76e1fba397e53df4be5c1161b83a223"
+SRCREV_drbd-headers = "d100ee01bf5aa8d5220767e4e35c4224faa8d865"
 
 S = "${WORKDIR}/git"
 
