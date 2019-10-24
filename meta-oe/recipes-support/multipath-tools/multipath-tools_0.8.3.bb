@@ -47,7 +47,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-SRCREV = "8a7e9b6648898f2c2d2bbd2d22871f79612e716e"
+SRCREV = "6c3bd369b23e959700527e0e2e6d5b2a1bd36294"
 
 S = "${WORKDIR}/git"
 
