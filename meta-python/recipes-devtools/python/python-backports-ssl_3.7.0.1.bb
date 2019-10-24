@@ -7,10 +7,10 @@ match_hostname() function for performing this check instead of requiring every a
 implement the check separately. This backport brings match_hostname() to users of earlier versions of Python"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95a5ee8fd779fbeca8b4cbca64433c87"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b2adbe8bfdeb625c9a01afd9aaa66619"
 
-SRC_URI[md5sum] = "c03fc5e2c7b3da46b81acf5cbacfe1e6"
-SRC_URI[sha256sum] = "502ad98707319f4a51fa2ca1c677bd659008d27ded9f6380c79e8932e38dcdf2"
+SRC_URI[md5sum] = "32d2f593af01a046bec3d2f5181a420a"
+SRC_URI[sha256sum] = "bb82e60f9fbf4c080eabd957c39f0641f0fc247d9a16e31e26d594d8f42b9fd2"
 
 PYPI_PACKAGE = "backports.ssl_match_hostname"
 inherit pypi setuptools
