@@ -29,11 +29,11 @@ inherit distro_features_check autotools pkgconfig gtk-icon-cache
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = " \
-    http://plugins.geany.org/${BPN}/${BP}.tar.bz2 \
+    https://plugins.geany.org/${BPN}/${BP}.tar.bz2 \
     file://0001-Use-pkg-config-to-find-gpgme.patch \
 "
-SRC_URI[md5sum] = "bf5fdd50727ad8bbbfe00027ccf2dac5"
-SRC_URI[sha256sum] = "244417c681636e82a63cf6f9901b5b7f3889168f7d9b5ba9b45601767a589c3b"
+SRC_URI[md5sum] = "91fb4634953702f914d9105da7048a33"
+SRC_URI[sha256sum] = "ebe18dd699292174622e8cb8745b020ada8a5be3b604ab980af36e8518df7ce6"
 
 do_configure_prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
