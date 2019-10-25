@@ -1,7 +1,7 @@
-From ac749f2512e8d121e8a64a8d5e6f226f16735dda Mon Sep 17 00:00:00 2001
+From 04b14c4569309f1a433d955773aeb8a3607a1360 Mon Sep 17 00:00:00 2001
 From: Alistair Francis <alistair.francis@wdc.com>
 Date: Tue, 19 Mar 2019 13:32:54 -0700
-Subject: [PATCH 4/5] pip requirements: Don't install requirements with pip
+Subject: [PATCH 5/7] pip requirements: Don't install requirements with pip
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Upstream-Status: Inappropriate [embedded specific]
@@ -14,10 +14,10 @@ Upstream-Status: Inappropriate [embedded specific]
  delete mode 100644 test-requirements.txt
 
 diff --git a/dev_setup.sh b/dev_setup.sh
-index 72f734f36bf..b5ca6851631 100755
+index 0c8e11b8170..be4a19de0c3 100755
 --- a/dev_setup.sh
 +++ b/dev_setup.sh
-@@ -357,19 +357,6 @@ fi
+@@ -351,19 +351,6 @@ fi
  
  PYTHON=$(python -c "import sys;print('python{}.{}'.format(sys.version_info[0], sys.version_info[1]))")
  
@@ -37,7 +37,7 @@ index 72f734f36bf..b5ca6851631 100755
  SYSMEM=$(free | awk '/^Mem:/ { print $2 }')
  MAXCORES=$(($SYSMEM / 512000))
  MINCORES=1
-@@ -426,4 +413,4 @@ if [[ ! -w /var/log/mycroft/ ]] ; then
+@@ -420,4 +407,4 @@ if [[ ! -w /var/log/mycroft/ ]] ; then
  fi
  
  #Store a fingerprint of setup
