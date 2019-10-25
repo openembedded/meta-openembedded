@@ -16,8 +16,8 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://0001-chdeck-for-gettid-API-during-configure.patch \
 "
 
-SRC_URI[md5sum] = "009254a9797ec93321c5936b99dcd6c8"
-SRC_URI[sha256sum] = "2472989da3aace000d1ea5931ece68f8e5cc0c511e272d65182113a2481e822d"
+SRC_URI[md5sum] = "b56cadfa840f706ff67d4df0256c03eb"
+SRC_URI[sha256sum] = "bfb437746446ef72a03c501db13cd6da5edd2b41f55c80c437ba288be6da7dba"
 
 UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
 UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
