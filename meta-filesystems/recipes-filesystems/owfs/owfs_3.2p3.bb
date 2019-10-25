@@ -4,16 +4,16 @@ HOMEPAGE = "http://www.owfs.org/"
 SECTION = "console/network"
 
 LICENSE = "GPLv2 & LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=12a64df1cc87275e940cab05ee75c37d \
-                    file://COPYING.LIB;md5=16ff3ffebed582e19ea7a4f48ec77b42"
+LIC_FILES_CHKSUM = "file://COPYING;md5=628b867016631792781a8735a04760e5 \
+                    file://COPYING.LIB;md5=9021b7435efdd9fb22beef8291134099"
 
 DEPENDS = "fuse virtual/libusb0"
-# v3.2p2
-SRCREV = "93c1f36d9ac481075287da331d5184f590f8c0fa"
+# v3.2p3
+SRCREV = "3744375dfaa350e31c9b360eb1e1a517bbeb5c47"
 SRC_URI = "git://github.com/owfs/owfs \
+           file://0001-Add-build-rule-for-README.patch \
            file://owhttpd \
            file://owserver \
-           file://0001-include-sys-sysmacros.h-for-major.patch \
            "
 
 S = "${WORKDIR}/git"
