@@ -14,8 +14,8 @@ inherit gnomebase distro_features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "9524ed4e5c821d13eeda49ba2a78f024"
-SRC_URI[archive.sha256sum] = "ddfe42ed2458a20a34de252854bcf4b52d3f0c671c045f56b42aa27c7542d2fd"
+SRC_URI[archive.md5sum] = "e311db484ca9c53f1689d35f5f58a06b"
+SRC_URI[archive.sha256sum] = "6d71091bcd1863133460d4188d04102810e9123de19706fb656b7bb915b4adc3"
 SRC_URI += "file://0001-do-not-build-demos.patch"
 
 EXTRA_OECONF = " --disable-documentation "
