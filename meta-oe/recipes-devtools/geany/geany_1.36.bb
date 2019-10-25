@@ -9,9 +9,9 @@ inherit distro_features_check autotools pkgconfig perlnative pythonnative gettex
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
-SRC_URI[md5sum] = "87220f4a0e03623ab9d86820f6be7b5d"
-SRC_URI[sha256sum] = "e765efd89e759defe3fd797d8a2052afbb4b23522efbcc72e3a72b7f1093ec11"
+SRC_URI = "https://download.geany.org/${BP}.tar.bz2"
+SRC_URI[md5sum] = "53216a43345e2b6dbefa02ac24885753"
+SRC_URI[sha256sum] = "9184dd3dd40b7b84fca70083284bb9dbf2ee8022bf2be066bdc36592d909d53e"
 
 FILES_${PN} += "${datadir}/icons"
 
