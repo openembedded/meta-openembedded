@@ -1,7 +1,7 @@
-From 9a0bd09706da3949db17ea7272d6647a487bb6ad Mon Sep 17 00:00:00 2001
+From 86a1d18d96f827baa0c1029c85a53fc89d436e17 Mon Sep 17 00:00:00 2001
 From: Alistair Francis <alistair.francis@wdc.com>
 Date: Tue, 19 Mar 2019 13:38:44 -0700
-Subject: [PATCH 5/5] Use python3 and pip3 instead of python and pip
+Subject: [PATCH 6/7] Use python3 and pip3 instead of python and pip
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Upstream-Status: Inappropriate [embedded specific]
@@ -73,7 +73,7 @@ index d80f0e75b13..9448ea3400f 100755
 -output=$(python -m mycroft.messagebus.send "speak"  "{\"utterance\": \"$data\"}")
 +output=$(python3 -m mycroft.messagebus.send "speak"  "{\"utterance\": \"$data\"}")
 diff --git a/dev_setup.sh b/dev_setup.sh
-index b5ca6851631..fcd0834669f 100755
+index be4a19de0c3..2d9e17ddfd6 100755
 --- a/dev_setup.sh
 +++ b/dev_setup.sh
 @@ -48,7 +48,7 @@ param=''
@@ -94,7 +94,7 @@ index b5ca6851631..fcd0834669f 100755
      fi
  done
  
-@@ -355,7 +355,7 @@ else
+@@ -349,7 +349,7 @@ else
      fi
  fi
  
