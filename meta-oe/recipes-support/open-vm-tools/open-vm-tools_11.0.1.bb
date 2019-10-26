@@ -38,6 +38,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
+    file://0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch;patchdir=.. \
 "
 SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
 
