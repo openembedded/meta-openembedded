@@ -5,11 +5,11 @@ HOMEPAGE = "https://pillow.readthedocs.io"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=55c0f320370091249c1755c0d2b48e89"
 
-SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.1.x \
+SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.2.x \
            file://0001-support-cross-compiling.patch \
            file://0001-explicitly-set-compile-options.patch \
 "
-SRCREV ?= "aaca672173413883fbcefd659f04d74fe44fb5d5"
+SRCREV ?= "6e0f07bbe38def22d36ee176b2efd9ea74b453a6"
 
 
 inherit setuptools3
