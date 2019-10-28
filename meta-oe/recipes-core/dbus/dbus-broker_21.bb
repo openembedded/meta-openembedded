@@ -16,6 +16,7 @@ SRC_URI[sha256sum] = "6fff9a831a514659e2c7d704e76867ce31ebcf43e8d7a62e080c6656f6
 inherit meson pkgconfig systemd distro_features_check
 
 DEPENDS = "expat systemd"
+DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
@@ -24,3 +25,5 @@ SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 FILES_${PN} += "${systemd_system_unitdir}"
 FILES_${PN} += "${systemd_user_unitdir}"
 FILES_${PN} += "${libdir}/systemd/catalog"
+
+EXTRA_OEMESON += " -Dselinux=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
