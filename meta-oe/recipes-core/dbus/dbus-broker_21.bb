@@ -7,6 +7,9 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
 
 SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
+SRC_URI += " file://0001-launch-improve-error-handling-for-opendir.patch"
+SRC_URI += " file://0002-metrics-change-the-constant-used-for-invalid-timesta.patch"
+SRC_URI += " file://0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch"
 SRC_URI[md5sum] = "a17886a92ab1e0bc2e4b1a274339e388"
 SRC_URI[sha256sum] = "6fff9a831a514659e2c7d704e76867ce31ebcf43e8d7a62e080c6656f64cd39e"
 
