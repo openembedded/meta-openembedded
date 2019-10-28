@@ -9,7 +9,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
 
 SRC_URI = " \
     git://github.com/ncopa/${BPN}.git \
-    file://0001-fix-Name-Comment-fields.patch \
 "
-SRCREV = "6ad1ee833c9e22e4dd72a8f7d54562d046965283"
+SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
 S = "${WORKDIR}/git"
