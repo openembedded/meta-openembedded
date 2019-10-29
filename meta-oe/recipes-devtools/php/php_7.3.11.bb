@@ -3,6 +3,7 @@ HOMEPAGE = "http://www.php.net"
 SECTION = "console/network"
 
 LICENSE = "PHP-3.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=fb07bfc51f6d5e0c30b65d9701233b2e"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
@@ -12,6 +13,11 @@ PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+           file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
+           file://0048-Use-pkg-config-for-FreeType2-detection.patch \
+           file://0001-Use-pkg-config-for-libxml2-detection.patch \
+           file://debian-php-fixheader.patch \
+           file://CVE-2019-6978.patch \
           "
 
 SRC_URI_append_class-target = " \
@@ -22,8 +28,14 @@ SRC_URI_append_class-target = " \
             file://php-fpm-apache.conf \
             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
             file://php-fpm.service \
+            file://pear-makefile.patch \
+            file://phar-makefile.patch \
+            file://0001-opcache-config.m4-enable-opcache.patch \
+            file://xfail_two_bug_tests.patch \
           "
 S = "${WORKDIR}/php-${PV}"
+SRC_URI[md5sum] = "21b710b4126d4d54714de9693a6c7b0d"
+SRC_URI[sha256sum] = "92d1ff4b13c7093635f1ec338a5e6891ca99b10e65fbcadd527e5bb84d11b5e7"
 
 inherit autotools pkgconfig pythonnative gettext
 
