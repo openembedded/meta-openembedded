@@ -9,8 +9,8 @@ inherit gnomebase autotools gobject-introspection
 SRC_URI += "file://iconv-detect.h \
             file://nodolt.patch"
 
-SRC_URI[archive.md5sum] = "69ae21a0b1df966a7d39a9431856ac81"
-SRC_URI[archive.sha256sum] = "6a0875eeb552ab447dd54853a68ced62217d863631048737dd97eaa2713e7311"
+SRC_URI[archive.md5sum] = "b6b4e9fdc8f3336551d23872c83b539a"
+SRC_URI[archive.sha256sum] = "249ea7c0e080b067aa9669162c36b181b402f6cf6cebc4999d838c6f1e81d024"
 
 EXTRA_OECONF_remove = "--disable-schemas-install"
 
