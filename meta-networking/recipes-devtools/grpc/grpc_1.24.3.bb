@@ -11,7 +11,7 @@ DEPENDS_append_class-target = " googletest grpc-native "
 DEPENDS_append_class-nativesdk = " grpc-native "
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "fe494ff4104b6f6a78117ab2da71d29c93053267"
+SRCREV_grpc = "2de2e8dd8921e1f7d043e01faf7fe8a291fbb072"
 SRCREV_upb = "9effcbcb27f0a665f9f345030188c0b291e32482"
 BRANCH = "v1.24.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
