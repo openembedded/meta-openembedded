@@ -52,9 +52,10 @@ ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
 GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
 ARCHFLAGS ?= ""
 
-PACKAGECONFIG ??= "zlib icu"
-PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
+PACKAGECONFIG ??= "ares icu zlib"
+PACKAGECONFIG[ares] = "--shared-cares,,c-ares"
 PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
+PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
 
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
