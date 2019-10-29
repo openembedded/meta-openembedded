@@ -11,8 +11,8 @@ SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
            file://corosync.conf \
           "
 
-SRC_URI[md5sum] = "69db29ff4bc035936946be44fc8be5cd"
-SRC_URI[sha256sum] = "9bd4707bb271df16f8d543ec782eb4c35ec0330b7be696b797da4bd8f058a25d"
+SRC_URI[md5sum] = "e36a056b893c313c4ec1fe0d7e6cdebd"
+SRC_URI[sha256sum] = "ab6eafdb8f43a23794fc15d4c5198bbd6759060cb13c8d2d1e78a6c8360aba5f"
 
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.(?!99)\d+(\.\d+)+)"
 
