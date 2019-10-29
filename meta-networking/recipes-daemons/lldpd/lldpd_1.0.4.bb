@@ -9,11 +9,10 @@ SRC_URI = "\
     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
     file://lldpd.init.d \
     file://lldpd.default \
-    file://0001-priv-include-limits.h-for-PATH_MAX.patch \
     "
 
-SRC_URI[md5sum] = "04844328f053ee343344d892efb8a00c"
-SRC_URI[sha256sum] = "39fced395168015416bfe78b95414facf066f841f349024433aa20ab54e4c360"
+SRC_URI[md5sum] = "33e8d58623f99184e4e709cbbfe45db3"
+SRC_URI[sha256sum] = "5319bc032fabf1008d5d91e280276aa7f1bbfbb70129d8526cd4526d7c22724f"
 
 inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
 
