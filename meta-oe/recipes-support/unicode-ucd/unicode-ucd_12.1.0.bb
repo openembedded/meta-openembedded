@@ -1,5 +1,5 @@
-SUMMARY = "C++11 command line parser"
-HOMEPAGE = "https://github.com/CLIUtils/CLI11"
+SUMMARY = "Unicode Character Database"
+HOMEPAGE = "https://unicode.org/ucd/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://unicode.org.license.html;beginline=42;endline=85;md5=67619d0c52706853c0256514e7fd04cd"
 
