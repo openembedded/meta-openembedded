@@ -25,11 +25,12 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://pkgconfig-libnsl.patch \
            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
+           file://0001-Bug-fix-for-pid_t-not-found-on-musl.patch \
            "
 
 
-SRC_URI[md5sum] = "03b13168ec7bd66a6f2d5f6fea705eee"
-SRC_URI[sha256sum] = "86a8e56ea9d72bb53ff8cdfeefb5cafe983592c6b0178fb99c4a731e59879181"
+SRC_URI[md5sum] = "e6800e0afd6009ecdff148088c564050"
+SRC_URI[sha256sum] = "82094cad44f4e5c4f93eff2789cd66b57d7ab3fa646b7722d97608571001e694"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
 
