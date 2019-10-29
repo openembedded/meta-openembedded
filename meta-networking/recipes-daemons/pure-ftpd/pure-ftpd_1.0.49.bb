@@ -3,7 +3,7 @@ DESCRIPTION = "Pure-FTPd is a free (BSD license), secure, production-quality and
 HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
 SECTION = "net"
 LICENSE = "BSD-0-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0595b4261a04bc2d27f30b9c90796c1f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e25e28bc568d70eb26c3a91387c86ccb"
 
 DEPENDS = "libcap virtual/crypt"
 
@@ -11,11 +11,10 @@ SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.t
            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
            file://nostrip.patch \
 "
-SRC_URI[md5sum] = "f000e519918682ee6b65090352177d4a"
-SRC_URI[sha256sum] = "4740c316f5df879a2d68464489fb9b8b90113fe7dce58e2cdd2054a4768f27ad"
+SRC_URI[md5sum] = "451879495ba61c1d7dcfca8dd231119f"
+SRC_URI[sha256sum] = "767bf458c70b24f80c0bb7a1bbc89823399e75a0a7da141d30051a2b8cc892a5"
 
 inherit autotools
 
-EXTRA_OECONF = "--with-minimal"
 PACKAGECONFIG[libsodium] ="ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=yes, \
                            ac_cv_lib_sodium_crypto_pwhash_scryptsalsa208sha256_str=no, libsodium"
