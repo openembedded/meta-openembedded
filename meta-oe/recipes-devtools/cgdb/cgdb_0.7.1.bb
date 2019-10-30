@@ -10,11 +10,12 @@ DEPENDS = "flex-native readline ncurses"
 inherit autotools
 
 SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
-    file://remove-help2man.patch"
-SRC_URI[md5sum] = "7bd38c79bf4d794d239928fef401fca3"
-SRC_URI[sha256sum] = "be203e29be295097439ab67efe3dc8261f742c55ff3647718d67d52891f4cf41"
+           file://0001-Avoid-use-of-mips-which-is-reserved-on-mips.patch \
+"
+SRC_URI[md5sum] = "a104862ffd3145b076303992e9a3af26"
+SRC_URI[sha256sum] = "bb723be58ec68cb59a598b8e24a31d10ef31e0e9c277a4de07b2f457fe7de198"
 
-CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2"
+CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2 ac_cv_file__proc_self_status=yes"
 EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR} \
     --with-ncurses=${STAGING_LIBDIR}"
 
