@@ -6,11 +6,9 @@ DEPENDS = "ncurses"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://ui/mtr.c;beginline=5;endline=16;md5=af1fafbbfa1bfd48af839f4bb3221106"
+                    file://ui/mtr.c;beginline=5;endline=16;md5=00a894a39d53726a27386534d1c4e468"
 
-PV .= "+git${SRCPV}"
-
-SRCREV = "6cddfc6e8f0e20af4af218b545f83d43b3f9a387"
+SRCREV = "304349bad86229aedbc62c07d5e98a8292967991"
 SRC_URI = "git://github.com/traviscross/mtr"
 
 S = "${WORKDIR}/git"
