@@ -8,21 +8,19 @@ HOMEPAGE = "http://www.open-iscsi.com/"
 LICENSE = "GPLv2 & LGPLv2.1"
 SECTION = "net"
 DEPENDS = "openssl flex-native bison-native open-isns util-linux kmod"
+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV ?= "120ac127654c4644d46a74799fffe527ab1f4f42"
+SRCREV ?= "288add22d6b61cc68ede358faeec9affb15019cd"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi \
-           file://0001-Fix-i586-build-issues-with-string-length-overflow.patch \
            file://initd.debian \
            file://99_iscsi-initiator-utils \
            file://iscsi-initiator \
            file://iscsi-initiator.service \
            file://iscsi-initiator-targets.service \
            file://set_initiatorname \
-           file://0001-Use-pkg-config-in-Makefiles-for-newer-libraries.patch \
-           file://0001-Make-iscsid-systemd-usage-optional.patch \
            "
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
@@ -36,6 +34,8 @@ EXTRA_OECONF = " \
     --host=${BUILD_SYS} \
 "
 
+EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', '--without-systemd',     d)}"
+
 EXTRA_OEMAKE = ' \
     OS="${TARGET_SYS}" \
     TARGET="${TARGET_OS}" \
@@ -45,6 +45,7 @@ EXTRA_OEMAKE = ' \
     PKG_CONFIG="${STAGING_BINDIR_NATIVE}/pkg-config" \
     NO_SYSTEMD=1 \
 '
+
 
 do_configure () {
     cd ${S}/iscsiuio ; autoreconf --install; ./configure ${EXTRA_OECONF}
