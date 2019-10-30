@@ -7,10 +7,9 @@ SECTION = "net"
 DEPENDS = "file"
 
 SRC_URI = "${GNU_MIRROR}/libmicrohttpd/${BPN}-${PV}.tar.gz \
-    file://fix-build-with-older-gnutls.patch \
 "
-SRC_URI[md5sum] = "ce4050e75cc40d68506e2b403e1a76f9"
-SRC_URI[sha256sum] = "4e66d4db1574f4912fbd2690d10d227cc9cc56df6a10aa8f4fc2da75cea7ab1b"
+SRC_URI[md5sum] = "e28e04e3d3eca62f5754efb844d17812"
+SRC_URI[sha256sum] = "7e1f852723d099d4827d7ebde4d02dd00fd8da62149526fdb9fae058c5a60495"
 
 inherit autotools lib_package pkgconfig gettext
 
