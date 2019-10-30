@@ -11,10 +11,9 @@ DEPENDS = "libpcre zlib"
 SRC_URI = " \
     git://github.com/pocoproject/poco.git;branch=poco-${PV} \
     file://0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch \
-    file://0001-Support-of-arch-riscv64-by-Manuel-A.-Fernandez-Monte.patch \
     file://run-ptest \
    "
-SRCREV = "daf00da73ab917e4d4581e3aa00c0ee61e0cc58b"
+SRCREV = "b95393dcc3640807838e8323b4e600e54d2e8116"
 
 S = "${WORKDIR}/git"
 
