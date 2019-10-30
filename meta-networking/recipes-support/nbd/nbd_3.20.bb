@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "glib-2.0"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "162da84302abb5b9be06143c7943a642"
-SRC_URI[sha256sum] = "b4466412f13e057659f25d35e1e8e181afd62c7179bff22a6add81445ecb8690"
+SRC_URI[md5sum] = "910fe6c152f8c30ad8608388e6a4ce89"
+SRC_URI[sha256sum] = "e0e1b3538ab7ae5accf56180afd1a9887d415b98d21223b8ad42592b4af7d6cd"
 
 inherit autotools pkgconfig
 
