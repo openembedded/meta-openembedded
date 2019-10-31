@@ -14,10 +14,8 @@ DEPENDS = " \
 SRC_URI = "git://github.com/lm-sensors/lm-sensors.git;protocol=https \
            file://fancontrol.init \
            file://sensord.init \
-           file://0001-lmsensors-sensors-detect-print-a-special-message-whe.patch \
-           file://0002-lm-sensors-fix-sensors-detect-can-t-read-the-cpu-inf.patch \
 "
-SRCREV = "e8afbda10fba571c816abddcb5c8180afc435bba"
+SRCREV = "1667b850a1ce38151dae17156276f981be6fb557"
 
 inherit update-rc.d systemd
 
