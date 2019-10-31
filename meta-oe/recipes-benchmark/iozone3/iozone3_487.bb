@@ -4,14 +4,14 @@ AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.or
 SECTION = "console/tests"
 LICENSE = "iozone3"
 LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
-    file://iozone.c;beginline=269;endline=275;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
+    file://iozone.c;beginline=276;endline=282;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
 "
 SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
     file://parallelism.patch \
     file://copyright.txt \
 "
-SRC_URI[md5sum] = "aa6b88ab83793cb6809ca06949a6ab01"
-SRC_URI[sha256sum] = "e816e6ae2f02003f2a6d19d47fcd9a50fdd8078da4f35fe3d4b9caf91c3d7216"
+SRC_URI[md5sum] = "2dbe035caf99c5367625352e158bb866"
+SRC_URI[sha256sum] = "2c488a7ccddd624fd557af16e71442c367b131d6178e1b4023bbd532bacdda59"
 
 UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
 
