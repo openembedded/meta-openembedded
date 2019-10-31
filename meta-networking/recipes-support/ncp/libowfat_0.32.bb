@@ -7,8 +7,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
 SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
-SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
-SRC_URI[sha256sum] = "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
+SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
+SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
 
 EXTRA_OEMAKE = "\
     DIET= \
@@ -19,7 +19,7 @@ EXTRA_OEMAKE = "\
 do_install() {
     make install \
         DESTDIR=${D} \
-        INCLUDEDIR=${includedir}/${BPN} \
+        INCLUDEDIR=${includedir} \
         LIBDIR=${libdir} \
         MAN3DIR=${mandir}/man3
 }
