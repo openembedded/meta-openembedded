@@ -26,6 +26,7 @@ do_configure_prepend() {
 
 do_compile() {
     cd ${S}
+    CONFIG_OPTIONS="${IPV6} --leasefile --vendorcfg" oe_runmake -f Makefile.linux config.h
     CONFIG_OPTIONS="${IPV6} --leasefile --vendorcfg" oe_runmake -f Makefile.linux
 }
 
