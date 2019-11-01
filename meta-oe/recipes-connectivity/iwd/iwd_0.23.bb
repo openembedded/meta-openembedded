@@ -2,12 +2,12 @@ DESCRIPTION = "Wireless daemon for Linux"
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
-inherit autotools pkgconfig systemd
+inherit autotools pkgconfig systemd pythonnative
 
-DEPENDS = "ell readline dbus"
+DEPENDS = "ell readline dbus python-docutils-native"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-SRCREV = "00f0039232cc73bbcf7a1875f8f9aae464d90a8f"
+SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
