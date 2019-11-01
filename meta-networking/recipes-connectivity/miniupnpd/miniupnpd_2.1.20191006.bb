@@ -15,8 +15,8 @@ SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${BP}.tar.gz;do
            file://miniupnpd.service \
            file://0001-Add-OpenEmbedded-cross-compile-case.patch \
            "
-SRC_URI[md5sum] = "394e676f555d8047be69730d9c4d23a5"
-SRC_URI[sha256sum] = "29f49fe6868597d041ee29f511fa7b65781b9e4e85ef2569a2381c2079e1743e"
+SRC_URI[md5sum] = "340789edd49c113afe37834cc901a1e8"
+SRC_URI[sha256sum] = "218fad7af31f3c22fb4c9db28a55a2a8b5067d41f5b38f52008a057a00d2206d"
 
 IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
 
