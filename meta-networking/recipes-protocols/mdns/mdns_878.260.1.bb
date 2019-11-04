@@ -12,8 +12,8 @@ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${P
            file://build.patch;patchdir=.. \
            file://mdns.service \
            "
-SRC_URI[md5sum] = "e773f290a7d29f1072247985d6add2ff"
-SRC_URI[sha256sum] = "e777b4d7dbf5eb1552cb80090ad1ede319067ab6e45e3990d68aabf6e8b3f5a0"
+SRC_URI[md5sum] = "aeb92d838a4aa2402ef128ed501484eb"
+SRC_URI[sha256sum] = "3cc71582e8eee469c2de8ecae1d769e7f32b3468dfb7f2ca77f1dee1f30a7d1e"
 
 PARALLEL_MAKE = ""
 
