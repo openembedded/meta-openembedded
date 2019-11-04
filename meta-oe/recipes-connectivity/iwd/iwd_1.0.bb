@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd python3native
 DEPENDS = "ell readline dbus python3-docutils-native"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
+SRCREV = "971e1d2038a203ad43bd2278a811a9e5ec8d52db"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
