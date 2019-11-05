@@ -26,7 +26,7 @@ do_install_append() {
     install -m644 ${S}/doc/*.txt ${D}${docdir}/${BPN}
 }
 
-FILES_${PN} += "${datadir}/dbus-1 ${libdir}/modules-load.d"
+FILES_${PN} += "${datadir}/dbus-1 ${libdir}/modules-load.d ${systemd_unitdir}/network/"
 
 SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
 
