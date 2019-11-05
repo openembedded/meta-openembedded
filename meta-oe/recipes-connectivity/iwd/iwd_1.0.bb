@@ -6,7 +6,9 @@ inherit autotools pkgconfig systemd python3native
 
 DEPENDS = "ell readline dbus python3-docutils-native"
 
-SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+           file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
+          "
 SRCREV = "971e1d2038a203ad43bd2278a811a9e5ec8d52db"
 S = "${WORKDIR}/git"
 
