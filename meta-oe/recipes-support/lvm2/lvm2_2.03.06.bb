@@ -3,10 +3,6 @@ require lvm2.inc
 SRC_URI += " \
             file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
             file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
-            file://0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch \
-            file://0001-activation-add-synchronization-point.patch \
-            file://0002-activation-extend-handling-of-pending_delete.patch \
-            file://0003-snapshot-always-activate.patch \
            "
 
 DEPENDS += "autoconf-archive-native"
