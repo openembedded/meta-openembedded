@@ -25,8 +25,12 @@ PREMIRRORS = ""
 SRC_URI = " \
     gitsm://github.com/ostreedev/ostree \
     file://0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch \
-    file://0001-Always-enable-trivial-httpd-for-tests.patch \
-    file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
+    file://run-ptest \
+    file://0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch \
+    file://0001-tests-Handle-EPIPE-failures-when-head-terminates.patch \
+    file://0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch \
+    file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
+    file://0001-build-create-tests-directory-for-split-builds.patch \
 "
 SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
 
@@ -34,9 +38,9 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
 S = "${WORKDIR}/git"
 
-inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig systemd
+inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig ptest-gnome systemd
 
-# package configuration - match ostree defaults, but without rofiles-fuse
+# Package configuration - match ostree defaults, but without rofiles-fuse
 # otherwise we introduce a dependendency on meta-filesystems
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
@@ -107,6 +111,7 @@ PACKAGES += " \
     ${PN}-grub \
     ${PN}-mkinitcpio \
     ${PN}-switchroot \
+    ${PN}-trivial-httpd \
 "
 
 FILES_${PN} = " \
@@ -118,7 +123,6 @@ FILES_${PN} = " \
     ${libdir}/girepository-1.0 \
     ${libdir}/lib*${SOLIBS} \
     ${libdir}/tmpfiles.d/ostree-tmpfiles.conf \
-    ${libexecdir}/libostree/ostree-trivial-httpd \
     ${sysconfdir}/ostree/remotes.d \
     ${systemd_unitdir}/system-generators/ostree-system-generator \
     ${systemd_unitdir}/system/ostree-finalize-staged.path \
@@ -141,17 +145,48 @@ FILES_${PN}-switchroot = " \
     ${libdir}/ostree/ostree-prepare-root \
     ${systemd_unitdir}/system/ostree-prepare-root.service \
 "
+FILES_${PN}-trivial-httpd = " \
+    ${libexecdir}/libostree/ostree-trivial-httpd \
+"
 
+RDEPENDS_${PN} = " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'trivial-httpd-cmdline', '${PN}-trivial-httpd', '', d)} \
+"
 RDEPENDS_${PN}-dracut = "bash"
 RDEPENDS_${PN}-mkinitcpio = "bash"
 RDEPENDS_${PN}_class-target = " \
     gnupg \
     ${PN}-switchroot \
 "
+RDEPENDS_${PN}-ptest += " \
+    attr \
+    bash \
+    coreutils \
+    cpio \
+    diffutils \
+    findutils \
+    grep \
+    python3-core \
+    python3-multiprocessing \
+    python3-pyyaml \
+    ${PN}-trivial-httpd \
+"
+RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
 
 RRECOMMENDS_${PN} += "kernel-module-overlay"
+RRECOMMENDS_${PN}-ptest += "strace"
 
 SYSTEMD_SERVICE_${PN} = "ostree-remount.service ostree-finalize-staged.path"
 SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
 
 BBCLASSEXTEND = "native"
+
+python __anonymous() {
+    if bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
+        if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
+            raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
+        elif 'soup' not in d.getVar('PACKAGECONFIG').split():
+            raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
+        elif not oe.utils.any_distro_features(d, "xattr"):
+            raise bb.parse.SkipRecipe('ptest requires xattr enabled in DISTRO_FEATURES.')
+}
