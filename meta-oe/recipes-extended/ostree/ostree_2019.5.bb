@@ -32,7 +32,7 @@ SRC_URI = " \
     file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
     file://0001-build-create-tests-directory-for-split-builds.patch \
 "
-SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
+SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
