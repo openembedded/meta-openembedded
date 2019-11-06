@@ -8,10 +8,11 @@ RDEPENDS_${PN} = "pcsc-lite"
 
 SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
     file://no-dep-on-libfl.patch \
+    file://0001-Add-build-rule-for-README.patch \
 "
 
-SRC_URI[md5sum] = "817abceef715e02cb47617621fe192e0"
-SRC_URI[sha256sum] = "ac17087be08880a0cdf99a8a2799a4ef004dc6ffa08b4d9b0ad995f39a53ff7c"
+SRC_URI[md5sum] = "e4690f3362f95adb2332fd47a2b08212"
+SRC_URI[sha256sum] = "6b48d7b6e4390e038d25630f8664fe81618ab00f232d6efbe0e3cc6df28ce8f7"
 
 inherit autotools pkgconfig
 
