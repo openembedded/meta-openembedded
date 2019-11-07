@@ -4,7 +4,7 @@ SECTION = "libs"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
 
-+UPSTREAM_CHECK_URI = "https://github.com/nghttp2/nghttp2/releases"
+UPSTREAM_CHECK_URI = "https://github.com/nghttp2/nghttp2/releases"
 
 SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
 SRC_URI[md5sum] = "02b015cb178c46f27dd87228e33db35f"
