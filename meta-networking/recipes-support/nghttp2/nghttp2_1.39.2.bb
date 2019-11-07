@@ -28,6 +28,7 @@ do_install_append() {
 PACKAGES =+ "lib${PN} ${PN}-client ${PN}-proxy ${PN}-server"
 
 RDEPENDS_${PN} = "${PN}-client (>= ${PV}) ${PN}-proxy (>= ${PV}) ${PN}-server (>= ${PV})"
+RDEPENDS_${PN}_class-native = ""
 RDEPENDS_${PN}-proxy = "openssl python3-core python3-io python3-shell"
 
 ALLOW_EMPTY_${PN} = "1"
@@ -36,3 +37,5 @@ FILES_lib${PN} = "${libdir}/*${SOLIBS}"
 FILES_${PN}-client = "${bindir}/h2load ${bindir}/nghttp"
 FILES_${PN}-proxy = "${bindir}/nghttpx ${datadir}/${BPN}/fetch-ocsp-response"
 FILES_${PN}-server = "${bindir}/nghttpd"
+
+BBCLASSEXTEND = "native"
