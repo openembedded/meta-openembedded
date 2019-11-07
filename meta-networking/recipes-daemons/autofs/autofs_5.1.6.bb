@@ -47,13 +47,19 @@ PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 EXTRA_OEMAKE = "DONTSTRIP=1"
 EXTRA_OECONF += "--disable-mount-locking \
                 --enable-ignore-busy --with-openldap=no \
+                --with-confdir=${sysconfdir}/default \
+                --with-fifodir=/run \
+                --with-flagdir=/run \
                 --with-sasl=no --with-libtirpc \
+                --with-mapdir=${sysconfdir} \
                 --with-path=${STAGING_BINDIR_NATIVE} \
                 --with-fifodir=${localstatedir}/run \
                 --with-flagdir=${localstatedir}/run \
 "
 CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
                         ac_cv_path_RPCGEN=rpcgen \
+                        initdir=${INIT_D_DIR} \
+                        piddir=/run \
 "
 
 do_configure_prepend () {
