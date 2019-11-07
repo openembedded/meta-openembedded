@@ -182,10 +182,10 @@ SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
 BBCLASSEXTEND = "native"
 
 python __anonymous() {
-    if bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
-        if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
+    if not bb.data.inherits_class('native', d) and bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
+        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', 'False', d):
             raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
-        elif 'soup' not in d.getVar('PACKAGECONFIG').split():
+        elif not bb.utils.contains_any('PACKAGECONFIG', 'soup curl', 'True', 'False', d):
             raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
         elif not oe.utils.any_distro_features(d, "xattr"):
             raise bb.parse.SkipRecipe('ptest requires xattr enabled in DISTRO_FEATURES.')
