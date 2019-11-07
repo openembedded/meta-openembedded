@@ -79,6 +79,11 @@ do_install_append () {
     if [ -d ${D}${localstatedir}/run ]; then
         rmdir ${D}${localstatedir}/run
     fi
+    # On hybrid systemd/sysvinit builds, we need to install the sysvinit script by hand.
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -d -m 755 ${D}${INIT_D_DIR}
+        install -m 755 ${S}/samples/rc.autofs ${D}${INIT_D_DIR}/autofs
+    fi
 }
 SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 
