@@ -10,5 +10,5 @@ SRC_URI += " \
            file://syslog-ng-tmp.conf \
            "
 
-SRC_URI[md5sum] = "aa79bc13d9fd925aa5fb9516e87aacd3"
-SRC_URI[sha256sum] = "5cf931a9d7bead0e6d9a2c65eee8f6005a005878f59aa280f3c4294257ed5178"
+SRC_URI[md5sum] = "ef9de066793f7358af7312b964ac0450"
+SRC_URI[sha256sum] = "d4d0a0357b452be96b69d6f741129275530d8f0451e35adc408ad5635059fa3d"
