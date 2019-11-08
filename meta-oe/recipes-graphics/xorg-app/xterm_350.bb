@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=c7faceb872d90115e7
 
 SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
 
-SRC_URI[md5sum] = "194012229738f74bc44e7c0f5f6bf0c8"
-SRC_URI[sha256sum] = "39a6a3d3724f9a0a068f8cc353ab0c82831f0a43abb24470d933af299658475f"
+SRC_URI[md5sum] = "189b593841189da66bc1cea92df602a5"
+SRC_URI[sha256sum] = "aefb59eefd310268080d1a90a447368fb97a9a6737bfecfc3800bf6cc304104d"
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
 
