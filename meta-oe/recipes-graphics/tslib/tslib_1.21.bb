@@ -17,8 +17,8 @@ SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.
            file://ts.conf \
            file://tslib.sh \
 "
-SRC_URI[md5sum] = "254a022fc8aa89d164840fe8869c2441"
-SRC_URI[sha256sum] = "c9a54651337a701a66b074c603c313225579995a7910e519bbc7b1dcdab9a755"
+SRC_URI[md5sum] = "b2b20d3ed520128513f8d3135b42e142"
+SRC_URI[sha256sum] = "d2a57b823ea59e53a3b130eef05dfed1190b857854f886eec764e1ca1957cf56"
 
 UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
 
@@ -79,4 +79,4 @@ FILES_tslib-calibrate += "${bindir}/ts_calibrate"
 FILES_tslib-uinput += "${bindir}/ts_uinput"
 
 FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_print_mt \
-                     ${bindir}/ts_test ${bindir}/ts_test_mt ${bindir}/ts_verify ${bindir}/ts_finddev"
+                     ${bindir}/ts_test ${bindir}/ts_test_mt ${bindir}/ts_verify ${bindir}/ts_finddev ${bindir}/ts_conf"
