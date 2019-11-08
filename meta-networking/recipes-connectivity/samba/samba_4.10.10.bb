@@ -34,8 +34,8 @@ SRC_URI_append_libc-musl = " \
            file://0001-samba-fix-musl-lib-without-innetgr.patch \
           "
 
-SRC_URI[md5sum] = "f3c722bbcd903479008fa1b529f56365"
-SRC_URI[sha256sum] = "c41f05fb567f7359998b451543501c7690a2bf6551d658a76bd6916316a410f4"
+SRC_URI[md5sum] = "dde27447f39d124efe18f719ccf956dd"
+SRC_URI[sha256sum] = "700c734b51610e2feaa0d6744f9bec0c0d8917bca8cc78d5b63a4591f32866a5"
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
 
