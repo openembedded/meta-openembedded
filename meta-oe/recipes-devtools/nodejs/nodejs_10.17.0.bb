@@ -69,6 +69,8 @@ EXTRA_OEMAKE = "\
     CXXFLAGS.host='${CPPFLAGS} ${CXXFLAGS}' \
     LDFLAGS.host='${LDFLAGS}' \
     AR.host='${AR}' \
+    \
+    builddir_name=./ \
 "
 
 python do_unpack() {
