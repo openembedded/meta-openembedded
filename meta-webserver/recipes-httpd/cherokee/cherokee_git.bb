@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/cherokee/webserver \
            file://cherokee-install-configured.py-once.patch \
            file://0001-configure.ac-Add-foreign-to-AM_INIT_AUTOMAKE.patch \
            file://0001-make-Do-not-build-po-files.patch \
+           file://0001-common-internal.h-Define-LLONG_MAX-if-undefined.patch \
 "
 
 S = "${WORKDIR}/git"
