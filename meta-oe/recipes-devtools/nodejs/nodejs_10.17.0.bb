@@ -19,7 +19,6 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
            file://0004-Make-compatibility-with-gcc-4.8.patch \
            file://0005-Link-atomic-library.patch \
-           file://0006-Use-target-ldflags.patch \
            "
 SRC_URI_append_class-target = " \
            file://0002-Using-native-torque.patch \
@@ -57,6 +56,18 @@ PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
 PACKAGECONFIG[libuv] = "--shared-libuv,,libuv"
 PACKAGECONFIG[nghttp2] = "--shared-nghttp2,,nghttp2"
 PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
+
+# We don't want to cross-compile during target compile,
+# and we need to use the right flags during host compile,
+# too.
+EXTRA_OEMAKE = "\
+    CC.host='${CC}' \
+    CFLAGS.host='${CPPFLAGS} ${CFLAGS}' \
+    CXX.host='${CXX}' \
+    CXXFLAGS.host='${CPPFLAGS} ${CXXFLAGS}' \
+    LDFLAGS.host='${LDFLAGS}' \
+    AR.host='${AR}' \
+"
 
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
