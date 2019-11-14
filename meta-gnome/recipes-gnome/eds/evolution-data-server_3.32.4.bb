@@ -82,74 +82,32 @@ FILES_${PN} =+ "${systemd_user_unitdir} \
                 ${datadir}/evolution-data-server-*/ui/"
 RDEPENDS_${PN} += "perl"
 
-FILES_${PN}-dev =+ "${libdir}/pkgconfig/evolution-data-server-*.pc"
-FILES_${PN}-dbg =+ "${libdir}/evolution-data-server*/camel-providers/.debug \
-                    ${libdir}/evolution-data-server*/calendar-backends/.debug \
-                    ${libdir}/evolution-data-server*/addressbook-backends/.debug \
-                    ${libdir}/evolution-data-server*/extensions/.debug/"
-
-RRECOMMENDS_${PN}-dev += "libecal-dev libebook-dev"
-
 FILES_libcamel = "${libdir}/libcamel-*.so.* \
                   ${libdir}/libcamel-provider-*.so.* \
                   ${libdir}/girepository-*/Camel-*.typelib \
                   ${libdir}/evolution-data-server*/camel-providers/*.so \
                   ${libdir}/evolution-data-server*/camel-providers/*.urls"
-FILES_libcamel-dev = "${libdir}/libcamel-*.so ${libdir}/libcamel-provider-*.so \
-                      ${libdir}/pkgconfig/camel*pc \
-                      ${includedir}/evolution-data-server*/camel \
-                      ${datadir}/vala/vapi/camel-* \
-                      ${datadir}/gir-*/Camel-*.gir"
-
 FILES_libebook = "${libdir}/libebook-*.so.* \
                   ${libdir}/girepository-*/EBook-*.typelib"
-FILES_libebook-dev = "${libdir}/libebook-*.so \
-                      ${libdir}/pkgconfig/libebook-*.pc \
-                      ${datadir}/gir-*/EBook-*.gir \
-                      ${datadir}/vala/vapi/libebook-*.* \
-                      ${includedir}/evolution-data-server*/libebook/*.h"
 RRECOMMENDS_libebook = "libedata-book"
 
 FILES_libebook-contacts = "${libdir}/libebook-contacts-*.so.* \
                            ${libdir}/girepository-*/EBookContacts-*.typelib"
-FILES_libebook-contacts-dev = "${libdir}/libebook-contacts-*.so \
-                               ${libdir}/pkgconfig/libebook-contacts-*.pc \
-                               ${datadir}/gir-*/EBookContacts-*.gir \
-                               ${datadir}/vala/vapi/libebook-contacts-* \
-                               ${includedir}/evolution-data-server*/libebook-contacts/*.h"
 
 FILES_libecal = "${libdir}/libecal-*.so.*"
-FILES_libecal-dev = "${libdir}/libecal-*.so ${libdir}/pkgconfig/libecal-*.pc \
-                     ${includedir}/evolution-data-server*/libecal/*.h \
-                     ${includedir}/evolution-data-server*/libical/*.h"
 RRECOMMENDS_libecal = "libedata-cal tzdata"
 
 FILES_libedata-book = "${libexecdir}/e-addressbook-factory \
                        ${datadir}/dbus-1/services/*.AddressBook.service \
                        ${libdir}/libedata-book-*.so.* \
                        ${libdir}/evolution-data-server-*/extensions/libebook*.so"
-FILES_libedata-book-dev = "${libdir}/libedata-book-*.so \
-                           ${libdir}/pkgconfig/libedata-book-*.pc \
-                           ${includedir}/evolution-data-server-*/libedata-book"
 
 FILES_libedata-cal = "${libexecdir}/e-calendar-factory \
                       ${datadir}/dbus-1/services/*.Calendar.service \
                       ${libdir}/libedata-cal-*.so.* \
                       ${libdir}/evolution-data-server-*/extensions/libecal*.so"
-FILES_libedata-cal-dev = "${libdir}/libedata-cal-*.so \
-                          ${libdir}/pkgconfig/libedata-cal-*.pc \
-                          ${includedir}/evolution-data-server-*/libedata-cal"
 
 FILES_libedataserver = "${libdir}/libedataserver-*.so.* \
                         ${libdir}/girepository-*/EDataServer-*.typelib"
-FILES_libedataserver-dev = "${libdir}/libedataserver-*.so \
-                            ${libdir}/pkgconfig/libedataserver-*.pc \
-                            ${datadir}/vala/vapi/libedataserver-* \
-                            ${includedir}/evolution-data-server-*/libedataserver/*.h"
 
 FILES_libedataserverui = "${libdir}/libedataserverui-*.so.*"
-FILES_libedataserverui-dev = "${libdir}/libedataserverui-*.so \
-                              ${libdir}/pkgconfig/libedataserverui-*.pc \
-                              ${datadir}/gir-*/EDataServerUI-*.gir \
-                              ${datadir}/vala/vapi/libedataserverui-* \
-                              ${includedir}/evolution-data-server-*/libedataserverui/*.h"
