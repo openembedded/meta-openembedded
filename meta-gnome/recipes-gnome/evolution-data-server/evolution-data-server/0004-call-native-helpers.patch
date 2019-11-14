@@ -1,26 +1,21 @@
-From 30bd4ae3badb152c9f81c6d34014c586fa0cc825 Mon Sep 17 00:00:00 2001
-From: Piotr Tworek <tworaz@tworaz.net>
-Date: Mon, 12 Aug 2019 14:13:52 +0200
-Subject: [PATCH 4/7] Add native suffix to exacutables produced and run during
- build process.
+From 9c375e3fcf8ff778a5010a07a7da4b6a58adec7c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sun, 31 Mar 2019 19:11:31 +0200
+Subject: [PATCH] call native helpers
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-CMake can't build tools for the host system when cross compiling. As
-result eds currently fails to build in OE due to some programs being
-cross compiled for the target and run on the host. To work around this
-limitation modify existing targets using build time generated binaries
-to invoke binaries suffixed with -native. We can inject such binaries
-into expected locations prior to invoking ninja in do_compile.
+Upstream-Status: Inappropriate[oe-specific]
 
-Upstream-Status: Inappropriate [OE specific]
-
-Signed-off-by: Piotr Tworek <tworaz@tworaz.net>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  src/addressbook/libebook-contacts/CMakeLists.txt | 2 +-
  src/camel/CMakeLists.txt                         | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/addressbook/libebook-contacts/CMakeLists.txt b/src/addressbook/libebook-contacts/CMakeLists.txt
-index e9e3259..2ae72a8 100644
+index e9e3259..e749d1b 100644
 --- a/src/addressbook/libebook-contacts/CMakeLists.txt
 +++ b/src/addressbook/libebook-contacts/CMakeLists.txt
 @@ -25,7 +25,7 @@ target_link_libraries(gen-western-table
@@ -28,12 +23,12 @@ index e9e3259..2ae72a8 100644
  add_custom_command(
  	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
 -	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/gen-western-table "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
-+	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/gen-western-table-native "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
++	COMMAND gen-western-table "${CMAKE_CURRENT_SOURCE_DIR}/e-name-western-tables.h.in" >${CMAKE_CURRENT_BINARY_DIR}/e-name-western-tables.h
  	DEPENDS gen-western-table e-name-western-tables.h.in
  )
  
 diff --git a/src/camel/CMakeLists.txt b/src/camel/CMakeLists.txt
-index be626a8..9226b2b 100644
+index be626a8..14ac8b8 100644
 --- a/src/camel/CMakeLists.txt
 +++ b/src/camel/CMakeLists.txt
 @@ -10,7 +10,7 @@ target_include_directories(camel-gen-tables PUBLIC
@@ -41,10 +36,10 @@ index be626a8..9226b2b 100644
  add_custom_command(
  	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
 -	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/camel-gen-tables >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
-+	COMMAND ${CMAKE_CURRENT_BINARY_DIR}/camel-gen-tables-native >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
++	COMMAND camel-gen-tables >${CMAKE_CURRENT_BINARY_DIR}/camel-mime-tables.c
  	DEPENDS camel-gen-tables
  )
  
 -- 
-2.21.0
+2.20.1
 
