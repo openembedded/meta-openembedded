@@ -21,6 +21,7 @@ DEPENDS = " \
 
 SRC_URI[archive.md5sum] = "13fa9f5f459481c7f05b6964c470ef16"
 SRC_URI[archive.sha256sum] = "3bd723f4058ec014da4715db4181b7d73eccc797b85ad5e6236996951c01803d"
+SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
 
 EXTRA_OECONF += " \
     --disable-search-provider \
