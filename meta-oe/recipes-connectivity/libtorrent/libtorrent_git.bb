@@ -15,6 +15,13 @@ PV = "0.13.8"
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG ??= "instrumentation"
+
+PACKAGECONFIG_remove_mipsarch = "instrumentation"
+PACKAGECONFIG_remove_powerpc = "instrumentation"
+
+PACKAGECONFIG[instrumentation] = "--enable-instrumentation,--disable-instrumentation,"
+
 inherit autotools pkgconfig
 
 EXTRA_OECONF = "--with-zlib=${STAGING_EXECPREFIXDIR}"
