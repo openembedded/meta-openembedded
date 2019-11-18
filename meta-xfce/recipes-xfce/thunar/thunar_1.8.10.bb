@@ -8,11 +8,8 @@ inherit xfce gobject-introspection features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
-SRC_URI[md5sum] = "fd1166e879294e4490d5fa9dccfdd9da"
-SRC_URI[sha256sum] = "7a758e7ac03501c520c304f8845353315c954d429b17d591b8eea8b14f1350b9"
-
-S = "${WORKDIR}/Thunar-${PV}/"
+SRC_URI[md5sum] = "85c7394d82542d5a023f1f5baef109d8"
+SRC_URI[sha256sum] = "3d448d81c0e49efbaa5ae6bf34ac3c88a614178a1127afaee6b3a1b5ee12e709"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
