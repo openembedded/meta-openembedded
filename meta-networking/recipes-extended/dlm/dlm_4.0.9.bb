@@ -36,6 +36,10 @@ export EXTRA_OEMAKE = ""
 
 DONTBUILD = "${@bb.utils.contains('PACKAGECONFIG', 'pacemaker', '', 'fence', d)}"
 
+do_compile_prepend_toolchain-clang() {
+    sed -i -e "s/-fstack-clash-protection//g" ${S}/*/Makefile
+}
+
 do_compile_prepend() {
     sed -i "s/libsystemd-daemon/libsystemd/g" ${S}/dlm_controld/Makefile
     sed -i -e "s/ ${DONTBUILD}//g" ${S}/Makefile
