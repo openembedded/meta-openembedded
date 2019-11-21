@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 DEPENDS = "libaio util-linux"
 
-inherit distutils
+inherit distutils3 useradd
 
 do_configure[noexec] = "1"
 
@@ -32,3 +32,11 @@ do_install_prepend () {
     oe_runmake -C src DESTDIR=${D} LIBDIR=${libdir} install
     cd ${S}/python
 }
+
+SANLOCKGROUP ?= "sanlock"
+SANLOCKUSER ?= "sanlock"
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "--system ${SANLOCKGROUP}"
+USERADD_PARAM_${PN} = "--system -g ${SANLOCKGROUP} -G disk \
+                       --home-dir /run/${SANLOCKUSER} --no-create-home \
+                       --shell /sbin/nologin ${SANLOCKUSER}"
