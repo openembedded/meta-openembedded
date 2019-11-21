@@ -45,3 +45,5 @@ FILES_${PN}-dev += "\
     ${libdir}/pkcs11/onepin-opensc-pkcs11.so \
     ${libdir}/pkcs11/pkcs11-spy.so \
 "
+
+BBCLASSEXTEND = "native"
