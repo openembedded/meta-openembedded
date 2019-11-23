@@ -87,10 +87,8 @@ def get_git_pkgv(d, use_tags):
 
                 if not os.path.exists(rev_file) or os.path.getsize(rev_file)==0:
                     commits = bb.fetch2.runfetchcmd(
-                        "cd %(repodir)s && "
-                        "git rev-list %(rev)s -- 2> /dev/null "
-                        "| wc -l" % vars,
-                        d, quiet=True).strip().lstrip('0')
+                        "git --git-dir=%(repodir)s rev-list %(rev)s -- 2>/dev/null | wc -l"
+                        % vars, d, quiet=True).strip().lstrip('0')
 
                     if commits != "":
                         oe.path.remove(rev_file, recurse=False)
@@ -105,9 +103,8 @@ def get_git_pkgv(d, use_tags):
                 if use_tags:
                     try:
                         output = bb.fetch2.runfetchcmd(
-                            "cd %(repodir)s && "
-                            "git describe %(rev)s 2>/dev/null" % vars,
-                            d, quiet=True).strip()
+                            "git --git-dir=%(repodir)s describe %(rev)s 2>/dev/null"
+                            % vars, d, quiet=True).strip()
                         ver = gitpkgv_drop_tag_prefix(output)
                     except Exception:
                         ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
