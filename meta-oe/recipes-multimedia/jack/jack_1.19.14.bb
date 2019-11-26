@@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "libsamplerate0 libsndfile1 readline"
 
 SRC_URI = "git://github.com/jackaudio/jack2.git"
-SRCREV = "37250ff470277f9947fbf3ba738f943053e30525"
-PV = "1.9.13"
+SRCREV = "b54a09bf7ef760d81fdb8544ad10e45575394624"
+
 S = "${WORKDIR}/git"
 
 inherit waf pkgconfig
@@ -30,6 +30,12 @@ PACKAGECONFIG[opus] = "--opus=yes,--opus=no,libopus"
 # portaudio is for windows builds only
 EXTRA_OECONF = "--portaudio=no"
 
+do_install_append() {
+	if ! ${@bb.utils.contains('PACKAGECONFIG', 'dbus', True, False, d)}; then
+		rm -f ${D}${bindir}/jack_control
+	fi
+}
+
 PACKAGES =+ "libjack jack-server jack-utils"
 
 RDEPENDS_jack-dev_remove = "${PN} (= ${EXTENDPKGV})"
@@ -42,4 +48,4 @@ FILES_jack-server = " \
 "
 FILES_jack-utils = "${bindir}/*"
 
-FILES_${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/* "
+FILES_${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/*"
