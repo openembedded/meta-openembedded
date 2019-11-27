@@ -11,6 +11,7 @@ SRC_URI = "\
     file://sanitize-configure.ac.patch \
     file://purple-OE-branding-25.patch \
     file://pidgin-cross-python-265.patch \
+    file://use_py3.patch \
 "
 
 SRC_URI[md5sum] = "423403494fe1951e47cc75231f743bb0"
