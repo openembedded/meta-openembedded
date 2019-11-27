@@ -9,8 +9,8 @@ PR = "r2"
 SRC_URI = "${SOURCEFORGE_MIRROR}/p910nd/p910nd-${PV}.tar.bz2 \
            file://fix-var-lock.patch"
 
-SRC_URI[md5sum] = "c7ac6afdf7730ac8387a8e87198d4491"
-SRC_URI[sha256sum] = "7d78642c86dc247fbdef1ff85c56629dcdc6b2a457c786420299e284fffcb029"
+SRC_URI[md5sum] = "69461a6c54dca0b13ecad5b83864b43e"
+SRC_URI[sha256sum] = "4ac980a3ae24babae6f70f0a692625ece03a4a92c357fbb10d2e368386c3c26f"
 
 do_compile () {
     ${CC} ${LDFLAGS} -o p910nd p910nd.c
