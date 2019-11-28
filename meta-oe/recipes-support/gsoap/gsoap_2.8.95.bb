@@ -6,11 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
                     file://GPLv2_license.txt;md5=a33672dbe491b6517750a0389063508b"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
-           file://0001-Fix-out-of-tree-builds.patch \
-           file://0001-stdgsoap2-Fix-build-with-musl.patch \
            "
-SRC_URI[md5sum] = "212951d6e1435bb51fa4320f458809ea"
-SRC_URI[sha256sum] = "3e7bb24a9e492f5cb86daca34054c9787152f1d7b70add36b789d03816d5ffa1"
+SRC_URI[md5sum] = "88031646018d60857f21246962d10011"
+SRC_URI[sha256sum] = "fe07aa152cd946ef8ebd3f87653f14c1d38efe7c6e6fce8c6f773c4814f79baf"
 
 inherit autotools
 
