@@ -20,10 +20,12 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://mediactl-pkgconfig.patch \
            file://export-mediactl-headers.patch \
            file://0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch \
-           file://0003-v4l2-ctl-Do-not-use-getsubopt.patch \
+           file://0005-Define-error_t-and-include-sys-types.h.patch \
+           file://0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
+           file://0007-Do-not-use-getsubopt.patch \
            "
-SRC_URI[md5sum] = "de272817133c0dca000a78a5c8c8ec8b"
-SRC_URI[sha256sum] = "ed80242510385017a1dc566e17a285a77222bb301f5bc19386badfcc2c19df1b"
+SRC_URI[md5sum] = "18996bd5e9d83d47055c05de376708cd"
+SRC_URI[sha256sum] = "6cb60d822eeed20486a03cc23e0fc65956fbc1e85e0c1a7477f68bbd9802880d"
 
 EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
 
