@@ -31,6 +31,9 @@ SRC_URI = " \
     file://0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch \
     file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
     file://0001-build-create-tests-directory-for-split-builds.patch \
+    file://0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch \
+    file://0001-Avoid-race-condition-when-building-outside-of-source.patch \
+    file://0001-tests-repo-finder-Run-realpath-on-tmp.patch \
 "
 SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
 

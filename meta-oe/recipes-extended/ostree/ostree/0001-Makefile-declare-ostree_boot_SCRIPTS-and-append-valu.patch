@@ -1,0 +1,60 @@
+From de8e0765a4a54f0367999f682ce4cc53bfaa60b0 Mon Sep 17 00:00:00 2001
+From: Ricardo Salveti <ricardo@foundries.io>
+Date: Tue, 5 Nov 2019 21:16:07 -0300
+Subject: [PATCH] Makefile: declare ostree_boot_SCRIPTS and append values
+
+ostree_boot_SCRIPTS was being set on both Makefile-boot.am and
+Makefile-switchroot.am, causing the first one to be replaced by the
+other at the final Makefile, so declare as empty and append on both
+places instead.
+
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Upstream-Status: Backport
+---
+ Makefile-boot.am       | 2 +-
+ Makefile-decls.am      | 1 +
+ Makefile-switchroot.am | 2 +-
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile-boot.am b/Makefile-boot.am
+index b4d4a1af670e..b51928f08d7c 100644
+--- a/Makefile-boot.am
++++ b/Makefile-boot.am
+@@ -60,7 +60,7 @@ grub2configdir = $(sysconfdir)/grub.d
+ INSTALL_DATA_HOOKS += install-grub2-config-hook
+ else
+ # We're using our internal generator
+-ostree_boot_SCRIPTS = src/boot/grub2/ostree-grub-generator
++ostree_boot_SCRIPTS += src/boot/grub2/ostree-grub-generator
+ endif
+ 
+ EXTRA_DIST += src/boot/dracut/module-setup.sh \
+diff --git a/Makefile-decls.am b/Makefile-decls.am
+index 115c19fb663f..086ee1384a0b 100644
+--- a/Makefile-decls.am
++++ b/Makefile-decls.am
+@@ -47,6 +47,7 @@ typelibdir = $(libdir)/girepository-1.0
+ typelib_DATA =
+ gsettings_SCHEMAS =
+ ostree_bootdir = $(prefix)/lib/ostree
++ostree_boot_SCRIPTS =
+ ostree_boot_PROGRAMS =
+ 
+ # This initializes some more variables
+diff --git a/Makefile-switchroot.am b/Makefile-switchroot.am
+index ff44d4bc3981..b81b843febbc 100644
+--- a/Makefile-switchroot.am
++++ b/Makefile-switchroot.am
+@@ -42,7 +42,7 @@ if BUILDOPT_USE_STATIC_COMPILER
+ # to get autotools to install this as an executable but without generating rules
+ # to make it itself which we have specified manually.  See
+ # https://lists.gnu.org/archive/html/help-gnu-utils/2007-01/msg00007.html
+-ostree_boot_SCRIPTS = ostree-prepare-root
++ostree_boot_SCRIPTS += ostree-prepare-root
+ 
+ ostree-prepare-root : $(ostree_prepare_root_SOURCES)
+ 	$(STATIC_COMPILER) -o $@ -static $(top_srcdir)/src/switchroot/ostree-prepare-root.c $(ostree_prepare_root_CPPFLAGS) $(AM_CFLAGS) $(DEFAULT_INCLUDES) -DOSTREE_PREPARE_ROOT_STATIC=1
+-- 
+2.17.1
+
