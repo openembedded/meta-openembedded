@@ -54,10 +54,12 @@ PACKAGECONFIG ??= " \
 # soup or curl - https://github.com/ostreedev/ostree/issues/1897
 PACKAGECONFIG_class-native ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+    builtin-grub2-mkconfig \
     soup \
 "
 
 PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
+PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
 PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls"
@@ -86,7 +88,6 @@ EXTRA_OEMAKE = " \
 "
 
 EXTRA_OECONF_class-native = " \
-    --with-builtin-grub2-mkconfig \
     --enable-wrpseudo-compat \
     --disable-otmpfile \
 "
@@ -124,6 +125,7 @@ FILES_${PN} = " \
     ${libdir}/${BPN}/ostree-remount \
     ${libdir}/girepository-1.0 \
     ${libdir}/lib*${SOLIBS} \
+    ${libdir}/ostree/ostree-grub-generator \
     ${libdir}/tmpfiles.d/ostree-tmpfiles.conf \
     ${sysconfdir}/ostree/remotes.d \
     ${systemd_unitdir}/system-generators/ostree-system-generator \
