@@ -42,6 +42,8 @@ inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig ptest-
 
 # Package configuration - match ostree defaults, but without rofiles-fuse
 # otherwise we introduce a dependendency on meta-filesystems
+#
+# If running with ptest, both soup (for trivial-httpd) and xattr are required
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
@@ -185,8 +187,4 @@ python __anonymous() {
     if bb.utils.contains('PTEST_ENABLED', '1', 'True', '', d):
         if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', '', d):
             raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
-        elif not bb.utils.contains_any('PACKAGECONFIG', 'soup curl', 'True', 'False', d):
-            raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
-        elif not oe.utils.any_distro_features(d, "xattr"):
-            raise bb.parse.SkipRecipe('ptest requires xattr enabled in DISTRO_FEATURES.')
 }
