@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "5cb66180143e6bfc774f4eb316206d40ac1cb6df269a90882404cbf716
 inherit autotools manpages pkgconfig
 
 PACKAGECONFIG ?= "python"
-PACKAGECONFIG[man] = "--enable--man-doc, --disable-man-doc"
+PACKAGECONFIG[manpages] = ", --disable-man-doc, asciidoc-native"
 PACKAGECONFIG[python] = "--with-python-bin=${PYTHON}, --with-python-bin="", python3"
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)}
