@@ -38,7 +38,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
 S = "${WORKDIR}/git"
 
-inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig ptest-gnome systemd
+inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
 
 # Package configuration - match ostree defaults, but without rofiles-fuse
 # otherwise we introduce a dependendency on meta-filesystems
@@ -63,7 +63,7 @@ PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls"
 PACKAGECONFIG[libarchive] = "--with-libarchive, --without-libarchive, libarchive"
 PACKAGECONFIG[libmount] = "--with-libmount, --without-libmount, util-linux"
-PACKAGECONFIG[man] = "--enable-man, --disable-man, libxslt-native docbook-xsl-stylesheets-native"
+PACKAGECONFIG[manpages] = "--enable-man, --disable-man, libxslt-native docbook-xsl-stylesheets-native"
 PACKAGECONFIG[mkinitcpio] = "--with-mkinitcpio, --without-mkinitcpio"
 PACKAGECONFIG[no-http2] = "--disable-http2, --enable-http2"
 PACKAGECONFIG[openssl] = "--with-crypto=openssl, , openssl"
