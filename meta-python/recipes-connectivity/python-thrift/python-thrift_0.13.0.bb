@@ -1,9 +1,9 @@
 SUMMARY = "Python bindings for the Apache Thrift RPC system"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=e3641ae1a26cf5c12a3a71bd3030ab0e"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=e95cd2f17c70d3180a2b361332319fe0"
 
-SRC_URI[md5sum] = "36165d5c80e6b101dbe9fcf7ef524d51"
-SRC_URI[sha256sum] = "7d59ac4fdcb2c58037ebd4a9da5f9a49e3e034bf75b3f26d9fe48ba3d8806e6b"
+SRC_URI[md5sum] = "c3bc8d9a910d2c9ce26f2ad1f7c96762"
+SRC_URI[sha256sum] = "9af1c86bf73433afc6010ed376a6c6aca2b54099cc0d61895f640870a9ae7d89"
 
 inherit pypi setuptools
 
