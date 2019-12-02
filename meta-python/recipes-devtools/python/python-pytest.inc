@@ -3,8 +3,8 @@ HOMEPAGE = "http://pytest.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=640061b8cee64b308a4d2f9f556c12f2"
 
-SRC_URI[md5sum] = "889344299c9182aff67d6e461cb7af29"
-SRC_URI[sha256sum] = "27abc3fef618a01bebb1f0d6d303d2816a99aa87a5968ebc32fe971be91eb1e6"
+SRC_URI[md5sum] = "06cdb939a1f45f6b82b304abb87c3e30"
+SRC_URI[sha256sum] = "f67403f33b2b1d25a6756184077394167fe5e2f9d8bdaab30707d19ccec35427"
 
 SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
                    "
