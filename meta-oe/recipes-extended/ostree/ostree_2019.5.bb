@@ -182,8 +182,8 @@ SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
 BBCLASSEXTEND = "native"
 
 python __anonymous() {
-    if not bb.data.inherits_class('native', d) and bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
-        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', 'False', d):
+    if bb.utils.contains('PTEST_ENABLED', '1', 'True', '', d):
+        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', '', d):
             raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
         elif not bb.utils.contains_any('PACKAGECONFIG', 'soup curl', 'True', 'False', d):
             raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
