@@ -8,5 +8,5 @@ SRC_URI += "\
    file://0001-Improve-reproducibility.patch \
 "
 
-SRC_URI[md5sum] = "87545416ef021eee8621d31a93fcc899"
-SRC_URI[sha256sum] = "cda2397215f758b793f741c86be05468257b0e6bcb1a6113882ab5d0df0855c6"
+SRC_URI[md5sum] = "2ee1bd4ec5f49363a3f456f07e599b41"
+SRC_URI[sha256sum] = "a09bf3abbaf6763980d0f8acbb943b7629a8b20073de18d867aecdb7988483ed"
