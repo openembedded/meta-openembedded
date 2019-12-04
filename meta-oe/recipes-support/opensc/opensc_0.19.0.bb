@@ -31,7 +31,7 @@ EXTRA_OEMAKE = "DESTDIR=${D}"
 PACKAGECONFIG ??= "pcsc"
 
 PACKAGECONFIG[openct] = "--enable-openct,--disable-openct,openct"
-PACKAGECONFIG[pcsc] = "--enable-pcsc,--disable-pcsc,pcsc-lite"
+PACKAGECONFIG[pcsc] = "--enable-pcsc,--disable-pcsc,pcsc-lite,pcsc-lite pcsc-lite-lib"
 
 RDEPENDS_${PN} = "readline"
 
