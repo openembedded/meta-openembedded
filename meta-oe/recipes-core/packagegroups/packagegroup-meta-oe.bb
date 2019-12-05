@@ -123,8 +123,8 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_mipsarch = "uftrace lshw"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64 = "nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "android-tools breakpad uftrace lshw"
-RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "uftrace lshw"
-RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "uftrace lshw"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "nodejs uftrace lshw"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "nodejs uftrace lshw"
 
 RDEPENDS_packagegroup-meta-oe-extended ="\
     byacc cfengine cfengine-masterfiles cmpi-bindings \
@@ -258,6 +258,8 @@ RDEPENDS_packagegroup-meta-oe-support ="\
 
 RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
 RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch = "gperftools"
+RDEPENDS_packagegroup-meta-oe-support_remove_riscv64 = "uim"
+RDEPENDS_packagegroup-meta-oe-support_remove_riscv32 = "uim"
 
 RDEPENDS_packagegroup-meta-oe-support-egl ="\
     freerdp libnice opencv \
