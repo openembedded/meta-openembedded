@@ -3,15 +3,16 @@ LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 
 GNOMEBASEBUILDCLASS = "meson"
-inherit gnomebase bash-completion gettext upstream-version-is-even
+inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check
 
-DEPENDS += "libsecret glib-2.0 glib-2.0-native gconf libgudev shadow-native"
+DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native gsettings-desktop-schemas"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+SRC_URI[archive.md5sum] = "93592535508322548d44fa036b635a0a"
+SRC_URI[archive.sha256sum] = "9d06071b4a1d83671f76d0e3c32b66631671669d330fe21702f60a8611c37730"
 
-SRC_URI[archive.md5sum] = "9a9a97a63bb9e87258d48086a6bdacaa"
-SRC_URI[archive.sha256sum] = "f311b7c5f855ebe259960c00c7d03c812e040928ecb0ec093b50a4f16b3bcf26"
-
+# depends on gsettings-desktop-schemas->gcr->gtk+3-> x11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 EXTRA_OEMESON = " \
     -Dbluray=false \
