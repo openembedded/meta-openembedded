@@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
     file://reduce-build-to-exo-csource-only.patch \
 "
 
-SRC_URI[md5sum] = "9730f9d270b4968a8bbebe73e6de934f"
-SRC_URI[sha256sum] = "9ba0bf0fd59aeb1cd32ae3863e7a78222655eb15eb675ba08f3b3fb933b6fbfe"
+SRC_URI[md5sum] = "ef1db71eb24cf24f6870444ccfc2345d"
+SRC_URI[sha256sum] = "848fd65175118786e994fcf8b28f8c804f58d21cc9d961e00897cd97dc257cac"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG_class-target ??= "gtk"
