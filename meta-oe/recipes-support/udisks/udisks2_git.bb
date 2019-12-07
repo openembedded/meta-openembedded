@@ -20,8 +20,8 @@ SRC_URI = " \
     git://github.com/storaged-project/udisks.git;branch=master \
     file://non-gnu-libc.patch \
 "
-PV = "2.8.2"
-SRCREV = "7a787aa3b340fc7f1ca72d748635d6c5445edc58"
+PV = "2.8.4"
+SRCREV = "f333e13de8d32f2b82237ccd180c3458d71e78b8"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
@@ -50,6 +50,7 @@ FILES_${PN} += " \
 
 PACKAGES =+ "${PN}-libs"
 FILES_${PN}-libs = "${libdir}/lib*${SOLIBS}"
+FILES_${PN} += "${nonarch_libdir}/tmpfiles.d"
 
 SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 SYSTEMD_AUTO_ENABLE = "disable"
