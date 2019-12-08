@@ -11,16 +11,11 @@ DEPENDS += "libusb1 libraw1394 libsdl \
             ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'libglu', '', d)} \
 "
 
-PV = "2.2.5+gitr${SRCPV}"
-
-SRCREV = "5e78f51936fd09db0c0f742c7d2c0e5bdbbeed56"
-
-SRC_URI = "git://git.code.sf.net/p/libdc1394/code;branch=master;protocol=git \
+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
            file://install_examples.patch \
           "
-
-S = "${WORKDIR}/git/${BPN}"
-
-inherit autotools-brokensep pkgconfig
+SRC_URI[md5sum] = "9fad67bbff08fe2818d5ec81802ec89f"
+SRC_URI[sha256sum] = "2b905fc9aa4eec6bdcf6a2ae5f5ba021232739f5be047dec8fe8dd6049c10fed"
+inherit autotools pkgconfig
 
 EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
