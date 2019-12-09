@@ -8,7 +8,7 @@ LICENSE  = "Zlib"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=98d93d1ddc537f9b9ea6def64e046b5f"
 SECTION = "lib"
 
-inherit pkgconfig cmake
+inherit pkgconfig cmake features_check
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/glfw/glfw.git"
