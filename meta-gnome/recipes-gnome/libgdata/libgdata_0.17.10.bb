@@ -12,7 +12,10 @@ DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
 GTKDOC_MESON_OPTION = "gtk_doc"
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase pkgconfig gettext gtk-doc vala gobject-introspection manpages
+inherit gnomebase pkgconfig gettext gtk-doc vala gobject-introspection manpages features_check
+
+# gcr
+REQUIRED_DISTRO_FEATURES = "x11"
 
 do_compile_prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/gdata/.libs"
