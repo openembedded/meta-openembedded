@@ -7,7 +7,6 @@ GNOMEBASEBUILDCLASS = "meson"
 DEPENDS = " \
     glib-2.0-native \
     gtk+3 \
-    nautilus \
     libarchive \
     libnotify \
 "
