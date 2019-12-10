@@ -24,18 +24,9 @@ PREMIRRORS = ""
 
 SRC_URI = " \
     gitsm://github.com/ostreedev/ostree \
-    file://0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch \
     file://run-ptest \
-    file://0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch \
-    file://0001-tests-Handle-EPIPE-failures-when-head-terminates.patch \
-    file://0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch \
-    file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
-    file://0001-build-create-tests-directory-for-split-builds.patch \
-    file://0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch \
-    file://0001-Avoid-race-condition-when-building-outside-of-source.patch \
-    file://0001-tests-repo-finder-Run-realpath-on-tmp.patch \
 "
-SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
+SRCREV = "43706202f7de2ce0c829a46caab350ae1656f6ad"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
@@ -176,6 +167,7 @@ RDEPENDS_${PN}-ptest += " \
     python3-core \
     python3-multiprocessing \
     python3-pyyaml \
+    tar \
     ${PN}-trivial-httpd \
 "
 RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
