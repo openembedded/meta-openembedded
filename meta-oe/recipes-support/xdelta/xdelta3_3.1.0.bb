@@ -16,3 +16,5 @@ inherit autotools
 # Optional secondary compression
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[lzma] = "--with-liblzma,--without-liblzma,xz"
+
+BBCLASSEXTEND = "native nativesdk"
