@@ -1,6 +1,6 @@
-From 373e13e28e34b4d415fc096e1c7175f4ecfbf0da Mon Sep 17 00:00:00 2001
-From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
-Date: Wed, 21 Aug 2019 11:18:56 +0900
+From e03b003610a176d608da9a02e433e7ded7e4b75f Mon Sep 17 00:00:00 2001
+From: Todd Cunningham <tcunningham07@gmail.com>
+Date: Wed, 11 Dec 2019 10:18:56 +1000
 Subject: [PATCH] avoid naming local function as one of printf family
 
 Fixes build issues with clang
@@ -10,6 +10,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 
 Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+Signed-off-by: Todd Cunningham <tcunningham07@gmail.com>
 ---
  include/expr_ops.h      | 2 +-
  include/obj.h           | 2 +-
@@ -58,6 +59,7 @@ Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
  src/obj/limit.c         | 2 +-
  src/obj/quota.c         | 2 +-
  src/obj/secmark.c       | 2 +-
+ src/obj/synproxy.c      | 2 +-
  src/obj/tunnel.c        | 2 +-
  src/object.c            | 2 +-
  49 files changed, 50 insertions(+), 50 deletions(-)
@@ -613,6 +615,17 @@ index d8c87ee..5307d7e 100644
  					 obj);
  		SNPRINTF_BUFFER_SIZE(ret, remain, offset);
  	}
+diff --git a/src/obj/synproxy.c b/src/obj/synproxy.c
+index 56ebc85..6b5380f 100644
+--- a/src/obj/synproxy.c
++++ b/src/obj/synproxy.c
+@@ -157,5 +157,5 @@ struct obj_ops obj_ops_synproxy = {
+ 	.get		= nftnl_obj_synproxy_get,
+ 	.parse		= nftnl_obj_synproxy_parse,
+ 	.build		= nftnl_obj_synproxy_build,
+-	.snprintf	= nftnl_obj_synproxy_snprintf,
++	.snprintf_	= nftnl_obj_synproxy_snprintf,
+ };
 -- 
 2.17.1
 
