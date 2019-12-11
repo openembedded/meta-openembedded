@@ -23,7 +23,7 @@ SRC_URI[sha256sum] = "ff2b2419a7e06bd9cb335ffe391c7409b49a0f0130b890bd54692a3986
 GTKDOC_MESON_OPTION = "gtk_doc"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
+PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false -Dsystemdsystemunitdir='no', systemd"
 
 SYSTEMD_SERVICE_${PN} = "accounts-daemon.service"
 
