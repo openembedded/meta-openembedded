@@ -16,9 +16,8 @@ SRC_URI = " \
     file://0001-cross-compiling-support.patch \
     file://0002-Remove-suffix-shared-from-shared-library-name.patch \
 "
-
-SRC_URI[md5sum] = "6f0353ee33e99089c110a1c8d2dd1b22"
-SRC_URI[sha256sum] = "59c03816105d57990329537ad1049ba22c2b8afe1890085f0c022b75f1727238"
+SRC_URI[md5sum] = "2d2408f2a9dfb5c7b79998002e9a90e9"
+SRC_URI[sha256sum] = "e5b1b1dee44a64b795a91c3321ab7196d9e0871fe50d42969761794e3899f40d"
 
 FILES_${PN} += "${libdir}/libhdf5.settings ${datadir}/*"
 
