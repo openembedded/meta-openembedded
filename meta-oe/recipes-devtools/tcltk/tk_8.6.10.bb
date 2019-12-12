@@ -20,14 +20,11 @@ DEPENDS = "tcl virtual/libx11 libxt"
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
     file://confsearch.diff;striplevel=2 \
-    file://non-linux.diff;striplevel=2 \
-    file://tklibrary.diff;striplevel=2 \
     file://tkprivate.diff;striplevel=2 \
     file://fix-xft.diff \
-    file://configure.use.fontconfig.with.xft.patch \
 "
-SRC_URI[md5sum] = "e3cf6290999ee30651d75864eccfec63"
-SRC_URI[sha256sum] = "d3f9161e8ba0f107fe8d4df1f6d3a14c30cc3512dfc12a795daa367a27660dac"
+SRC_URI[md5sum] = "602a47ad9ecac7bf655ada729d140a94"
+SRC_URI[sha256sum] = "63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30f3e386"
 
 S = "${WORKDIR}/${BPN}${PV}/unix"
 
