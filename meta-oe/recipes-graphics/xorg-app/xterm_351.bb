@@ -4,7 +4,9 @@ DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
 
 LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=c7faceb872d90115e7c0ad90e90c390d"
 
-SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+           file://0001-Add-configure-time-check-for-setsid.patch \
+          "
 
 SRC_URI[md5sum] = "a07edfbee2e2f4c6a9ddbf834fa4bbec"
 SRC_URI[sha256sum] = "760a8a10221c9c9744afd86db87c7ad95bbf9be4f5f525fecf39125f0d2a6e16"
