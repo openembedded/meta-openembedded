@@ -194,11 +194,11 @@ do_install_append() {
     
     for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc samba_dnsupdate; do
         if [ -f "${D}${sbindir}/$f" ]; then
-            sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/$f
+            sed -i -e 's,${PYTHON},/usr/bin/env python3,g' ${D}${sbindir}/$f
         fi
     done
     if [ -f "${D}${bindir}/samba-tool" ]; then
-        sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-tool
+        sed -i -e 's,${PYTHON},/usr/bin/env python3,g' ${D}${bindir}/samba-tool
     fi
     
 }
