@@ -162,12 +162,26 @@ RDEPENDS_${PN} += "logrotate"
 
 # for rsyslog-ptest
 VALGRIND = "valgrind"
-VALGRIND_mips = ""
-VALGRIND_mips64 = ""
-VALGRIND_mips64n32 = ""
-VALGRIND_arm = ""
-VALGRIND_aarch64 = ""
+
+# valgrind supports armv7 and above
+VALGRIND_armv4 = ''
+VALGRIND_armv5 = ''
+VALGRIND_armv6 = ''
+
+# X32 isn't supported by valgrind at this time
+VALGRIND_linux-gnux32 = ''
+VALGRIND_linux-muslx32 = ''
+
+# Disable for some MIPS variants
+VALGRIND_mipsarchr6 = ''
+VALGRIND_linux-gnun32 = ''
+
+# Disable for powerpc64 with musl
+VALGRIND_libc-musl_powerpc64 = ''
+
+# RISC-V support for valgrind is not there yet
 VALGRIND_riscv64 = ""
+
 RDEPENDS_${PN}-ptest += "\
   make diffutils gzip bash gawk coreutils procps \
   libgcc python-core python-io \
