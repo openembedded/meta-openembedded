@@ -21,6 +21,7 @@ RDEPENDS_${PN} = " \
     gnome-settings-daemon \
     gnome-shell \
     gnome-shell-extensions \
+    gnome-tweaks \
     gmime \
     gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash \
 "
