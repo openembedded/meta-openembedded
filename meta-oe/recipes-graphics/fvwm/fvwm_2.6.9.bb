@@ -31,14 +31,12 @@ DEPENDS = " \
     zlib \
 "
 
-PV = "2.6.8"
-
 SRC_URI = " \
     git://github.com/fvwmorg/fvwm.git;protocol=https \
     file://0001-Fix-compilation-for-disabled-gnome.patch \
 "
 
-SRCREV = "dc6a396bfe5cd6c53eb1df103c3af505d0899f90"
+SRCREV = "88eab6dc16da6e5dd25fe97fbb56b96ef0d58657"
 
 S = "${WORKDIR}/git"
 
@@ -55,7 +53,6 @@ EXTRA_OECONF = " \
     --disable-fontconfigtest \
     --disable-htmldoc \
     --disable-imlibtest \
-    --disable-mandoc \
     --disable-nls \
     --disable-perllib \
     --disable-rsvg \
