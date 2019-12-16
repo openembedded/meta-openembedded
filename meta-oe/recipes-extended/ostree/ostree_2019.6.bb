@@ -56,6 +56,7 @@ PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
 PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
 PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
+PACKAGECONFIG[gjs] = "ac_cv_path_GJS=${bindir}/gjs"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls"
 PACKAGECONFIG[libarchive] = "--with-libarchive, --without-libarchive, libarchive"
 PACKAGECONFIG[libmount] = "--with-libmount, --without-libmount, util-linux"
@@ -166,9 +167,10 @@ RDEPENDS_${PN}-ptest += " \
     grep \
     python3-core \
     python3-multiprocessing \
-    python3-pyyaml \
     tar \
     ${PN}-trivial-httpd \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-python', 'python3-pyyaml', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
 "
 RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
 
@@ -179,9 +181,3 @@ SYSTEMD_SERVICE_${PN} = "ostree-remount.service ostree-finalize-staged.path"
 SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
 
 BBCLASSEXTEND = "native"
-
-python __anonymous() {
-    if bb.utils.contains('PTEST_ENABLED', '1', 'True', '', d):
-        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', '', d):
-            raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
-}
