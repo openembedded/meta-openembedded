@@ -3,9 +3,11 @@ SECTION = "net"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
 
-DEPENDS = "libmnl libnftnl readline gmp bison-native"
+DEPENDS = "libmnl libnftnl bison-native \
+           ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
 
-UPSTREAM_CHECK_URI = "https://www.netfilter.org/projects/nftables/files/"
+# Ensure we reject the 0.099 version by matching at least two dots
+UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
            file://0001-update-python3-nftables-reference.patch"
@@ -14,16 +16,18 @@ SRC_URI[sha256sum] = "956b915ce2a7aeaff123e49006be7a0690a0964e96c062703181a36e2e
 
 inherit autotools manpages pkgconfig
 
-PACKAGECONFIG ?= "python"
-PACKAGECONFIG[manpages] = ", --disable-man-doc, asciidoc-native"
-PACKAGECONFIG[python] = "--with-python-bin=${PYTHON}, --with-python-bin="", python3"
+PACKAGECONFIG ??= "python readline"
+PACKAGECONFIG[json] = "--with-json, --without-json, jansson"
+PACKAGECONFIG[manpages] = "--enable-man-doc, --disable-man-doc, asciidoc-native"
+PACKAGECONFIG[mini-gmp] = "--with-mini-gmp, --without-mini-gmp"
+PACKAGECONFIG[python] = "--enable-python --with-python-bin=${PYTHON}, --with-python-bin="", python3"
+PACKAGECONFIG[readline] = "--with-cli=readline, --without-cli, readline"
+PACKAGECONFIG[xtables] = "--with-xtables, --without-xtables, iptables"
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)}
-
-ASNEEDED = ""
 
 RRECOMMENDS_${PN} += "kernel-module-nf-tables"
 
 PACKAGES =+ "${PN}-python"
-FILES_${PN}-python = "${libdir_native}/${PYTHON_DIR}"
+FILES_${PN}-python = "${libdir}/${PYTHON_DIR}"
 RDEPENDS_${PN}-python = "python3-core python3-json"
