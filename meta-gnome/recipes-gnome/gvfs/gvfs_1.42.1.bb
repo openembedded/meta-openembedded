@@ -3,9 +3,10 @@ LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
 
 GNOMEBASEBUILDCLASS = "meson"
-inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check
+inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check useradd
 
-DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native gsettings-desktop-schemas"
+DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native \
+            gsettings-desktop-schemas dbus"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
 SRC_URI[archive.md5sum] = "93592535508322548d44fa036b635a0a"
@@ -65,6 +66,9 @@ PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
 
 # libcdio-paranoia recipe doesn't exist yet
 PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
 
 do_install_append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'true', 'false', d)}; then
