@@ -8,6 +8,7 @@ DEPENDS = "openssl boost zlib"
 SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https \
            file://0001-Replace-make_shared-with-new-in-some-cases.patch \
            file://0002-Fix-missed-entries-fix-testing.patch \
+           file://0001-cmake-Use-GNUInstallDirs.patch \
           "
 
 # tag 0.8.1
