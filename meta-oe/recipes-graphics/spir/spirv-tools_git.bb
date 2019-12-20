@@ -9,11 +9,12 @@ SECTION = "graphics"
 S = "${WORKDIR}/git"
 DEST_DIR = "${S}/external" 
 SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
-	file://0001-tools-lesspipe-Allow-generic-shell.patch \
 	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
 	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
 	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
 	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
+	file://0001-tools-lesspipe-Allow-generic-shell.patch \
+        file://0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch \
 "
 SRCREV_spirv-tools = "167f1270a9ee641b17c016a545741e4aadfabe86"
 SRCREV_spirv-headers = "4618b86e9e4b027a22040732dfee35e399cd2c47"
