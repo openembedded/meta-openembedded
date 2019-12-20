@@ -4,18 +4,19 @@ HOMEPAGE = "https://thrift.apache.org/"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=394465e125cffc0f133695ed43f14047 \
-                    file://NOTICE;md5=42748ae4646b45fbfa5182807321fb6c"
+                    file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
 
 DEPENDS = "thrift-native boost flex-native bison-native openssl"
 
-SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz"
-
-SRC_URI[md5sum] = "3deebbb4d1ca77dd9c9e009a1ea02183"
-SRC_URI[sha256sum] = "c336099532b765a6815173f62df0ed897528a9d551837d627c1f87fadad90428"
+SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz \
+           file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
+          "
+SRC_URI[md5sum] = "38a27d391a2b03214b444cb13d5664f1"
+SRC_URI[sha256sum] = "7ad348b88033af46ce49148097afe354d513c1fca7c607b59c33ebb6064b5179"
 
 BBCLASSEXTEND = "native nativesdk"
 
-inherit pkgconfig cmake pythonnative
+inherit pkgconfig cmake python3native
 
 export STAGING_INCDIR
 export STAGING_LIBDIR
