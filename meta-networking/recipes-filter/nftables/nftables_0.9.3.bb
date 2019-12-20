@@ -29,5 +29,5 @@ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)}
 RRECOMMENDS_${PN} += "kernel-module-nf-tables"
 
 PACKAGES =+ "${PN}-python"
-FILES_${PN}-python = "${libdir}/${PYTHON_DIR}"
+FILES_${PN}-python = "${nonarch_libdir}/${PYTHON_DIR}"
 RDEPENDS_${PN}-python = "python3-core python3-json"
