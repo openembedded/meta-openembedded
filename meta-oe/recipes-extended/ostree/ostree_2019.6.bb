@@ -117,7 +117,7 @@ FILES_${PN} = " \
     ${bindir}/rofiles-fuse \
     ${datadir}/${BPN} \
     ${datadir}/gir-1.0 \
-    ${libdir}/${BPN}/ostree-remount \
+    ${nonarch_libdir}/${BPN}/ostree-remount \
     ${libdir}/girepository-1.0 \
     ${libdir}/lib*${SOLIBS} \
     ${libdir}/ostree/ostree-grub-generator \
@@ -127,6 +127,7 @@ FILES_${PN} = " \
     ${systemd_unitdir}/system/ostree-finalize-staged.path \
     ${systemd_unitdir}/system/ostree-finalize-staged.service \
     ${systemd_unitdir}/system/ostree-remount.service \
+    ${nonarch_libdir}/tmpfiles.d \
 "
 FILES_${PN}-dracut = " \
     ${sysconfdir}/dracut.conf.d \
@@ -141,7 +142,7 @@ FILES_${PN}-mkinitcpio = " \
     ${libdir}/initcpio \
 "
 FILES_${PN}-switchroot = " \
-    ${libdir}/ostree/ostree-prepare-root \
+    ${nonarch_libdir}/ostree/ostree-prepare-root \
     ${systemd_unitdir}/system/ostree-prepare-root.service \
 "
 FILES_${PN}-trivial-httpd = " \
