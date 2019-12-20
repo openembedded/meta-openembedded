@@ -4,6 +4,7 @@ BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
 
 SRC_URI = "http://fluentbit.io/releases/0.12/fluent-bit-${PV}.tar.gz \
            file://jemalloc.patch \
+           file://cmake_multilib.patch \
            "
 SRC_URI[md5sum] = "7c8708312ac9122faacf9e2a4751eb34"
 SRC_URI[sha256sum] = "23a81087edf0e2c6f2d49411c6a82308afc5224f67bbaa45729c057af62e9241"
