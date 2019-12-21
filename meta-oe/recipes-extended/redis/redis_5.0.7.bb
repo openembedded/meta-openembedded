@@ -7,26 +7,27 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3c01b49fed4df1a79843688fa3f7b9d6"
 DEPENDS = "readline lua ncurses"
 
 SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
-           file://hiredis-use-default-CC-if-it-is-set.patch \
-           file://lua-update-Makefile-to-use-environment-build-setting.patch \
-           file://oe-use-libc-malloc.patch \
-           file://Fixed-stack-trace-generation-on-aarch64.patch \
-           file://0001-src-Do-not-reset-FINAL_LIBS.patch \
            file://redis.conf \
            file://init-redis-server \
            file://redis.service \
-"
+           file://hiredis-use-default-CC-if-it-is-set.patch \
+           file://lua-update-Makefile-to-use-environment-build-setting.patch \
+           file://oe-use-libc-malloc.patch \
+           file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+           file://0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch \
+           file://GNU_SOURCE.patch \
+           "
 
-SRC_URI_append_mips = " file://remove-atomics.patch"
-SRC_URI_append_arm = " file://remove-atomics.patch"
-SRC_URI_append_powerpc = " file://remove-atomics.patch"
-
-SRC_URI[md5sum] = "96ae20ffd68b9daee24b702b754d89f3"
-SRC_URI[sha256sum] = "1e1e18420a86cfb285933123b04a82e1ebda20bfb0a289472745a087587e93a7"
+SRC_URI[md5sum] = "612ec43075a888bc8b8a7dd8ccb2e0f7"
+SRC_URI[sha256sum] = "61db74eabf6801f057fd24b590232f2f337d422280fd19486eca03be87d3a82b"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
 FINAL_LIBS_x86_toolchain-clang = "-latomic"
+FINAL_LIBS_mips = "-latomic"
+FINAL_LIBS_arm = "-latomic"
+FINAL_LIBS_powerpc = "-latomic"
+
 export FINAL_LIBS
 
 USERADD_PACKAGES = "${PN}"
