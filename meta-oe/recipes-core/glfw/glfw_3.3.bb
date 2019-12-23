@@ -17,6 +17,6 @@ SRCREV = "d25248343e248337284dfbe5ecd1eddbd37ae66d"
 EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
 
 DEPENDS = "libpng libglu zlib libxrandr libxinerama libxi libxcursor"
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 opengl"
 
 COMPATIBLE_HOST_libc-musl = "null"
