@@ -8,8 +8,8 @@ inherit gnomebase gettext gsettings features_check upstream-version-is-even
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.md5sum] = "09e64640bbf0e978171d581e2086a0c6"
-SRC_URI[archive.sha256sum] = "b0ad51143b1bf40def4a10f8fd0ab0ffb47218304800794e62cadd29d0acc75b"
+SRC_URI[archive.md5sum] = "d3a69cde0c3e3dc0b0c243af026c4b7a"
+SRC_URI[archive.sha256sum] = "a1e16e75a06ea511435a6f7478de92aff21d02d4e1d59ec8ce7fb6396819b4b8"
 
 DEPENDS += " \
     sassc-native \
