@@ -13,8 +13,8 @@ DEPENDS = " \
 
 inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even
 
-SRC_URI[archive.md5sum] = "e79715bb2400df83c0f67cc0cce2b655"
-SRC_URI[archive.sha256sum] = "c60a79e0baf74cb1c09a1c8f5ffe0d6e311227ca14ecc5b1156beb3715341a71"
+SRC_URI[archive.md5sum] = "5e098bb254d34f48a9b5761b468f4240"
+SRC_URI[archive.sha256sum] = "be111fb877dc1eb487ec5d6e2b72ba5defe1ab8033a6a6b9b9044a2a7787e22a"
 
 PACKAGECONFIG[nautilus] = "-Dnautilus-actions=true,-Dnautilus-actions=false,nautilus"
 
