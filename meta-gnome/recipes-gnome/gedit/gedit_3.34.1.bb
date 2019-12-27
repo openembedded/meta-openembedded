@@ -23,8 +23,8 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc val
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "ec6632fa73d9ea6c817e74a98d16eab6"
-SRC_URI[archive.sha256sum] = "3e95e51d3ccb495a9ac95aa3ed7fe8fe37ccde7c678f37fa3cea684bc71d507e"
+SRC_URI[archive.md5sum] = "4bca1d0a13db186cd84619b4bff42238"
+SRC_URI[archive.sha256sum] = "ebf9ef4e19831699d26bb93ce029edfed65416d7c11147835fc370d73428d5c6"
 
 GTKDOC_MESON_OPTION = "documentation"
 
