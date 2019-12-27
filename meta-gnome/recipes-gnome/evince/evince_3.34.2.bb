@@ -18,8 +18,8 @@ DEPENDS = " \
 
 inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection upstream-version-is-even gettext features_check
 
-SRC_URI[archive.md5sum] = "77b38b625008f5940e9bd4b3d38e8cf8"
-SRC_URI[archive.sha256sum] = "85e407cde396147b249120d816c7715fb6df191ca561cf65ff3554a5d67626df"
+SRC_URI[archive.md5sum] = "9e9e82fa8f6045ad7817157d9335d185"
+SRC_URI[archive.sha256sum] = "3cc0955f11204e3a2db1c7ab99b866692749592257485b87304134ad69da0617"
 SRC_URI += " \
     file://0001-Add-format-attribute-to-_synctex_malloc.patch \
     file://0002-add-a-formatting-attribute-check.patch \
