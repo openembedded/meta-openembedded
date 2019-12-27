@@ -9,8 +9,8 @@ DEPENDS += "python3-distutils-extra-native"
 
 B = "${S}"
 
-SRC_URI[md5sum] = "1b8e7bfd955364b7912fb0a248329b3a"
-SRC_URI[sha256sum] = "2573a004105031f871c92fed22a0c4b15bb96f2dff6e36c4f2959f56b62e343d"
+SRC_URI[md5sum] = "67e23d45fded026ef3445bc7fe1d1653"
+SRC_URI[sha256sum] = "617baf9309e3cdfb20c8357ac786eb26f30e6fd4280d4534d3cdd742c7ffcd85"
 
 FILES_${PN} += "${datadir}/metainfo"
 
