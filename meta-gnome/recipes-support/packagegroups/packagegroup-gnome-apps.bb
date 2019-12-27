@@ -11,6 +11,7 @@ RDEPENDS_${PN} = " \
     evince \
     file-roller \
     gedit \
+    gnome-calculator \
     gnome-font-viewer \
     gnome-terminal \
     libwnck3 \
