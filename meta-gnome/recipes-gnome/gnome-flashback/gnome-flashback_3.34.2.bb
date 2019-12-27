@@ -16,8 +16,8 @@ DEPENDS += " \
     gnome-bluetooth \
 "
 
-SRC_URI[archive.md5sum] = "e328a51b69d97e291709458dfd8c0a1a"
-SRC_URI[archive.sha256sum] = "ddba0c9661ad93b58ccbde267f6ecbc02da2c15f9d38d87d5504f4670c2fbc77"
+SRC_URI[archive.md5sum] = "251b51bad322c41d34d06fdb8f1799d4"
+SRC_URI[archive.sha256sum] = "3be65388cd2c8f39741bcc05da87ef40035183a9a39502d67696242c2aeb469c"
 
 do_install_append() {
     # no oe-layer has compiz -> remove dead session
