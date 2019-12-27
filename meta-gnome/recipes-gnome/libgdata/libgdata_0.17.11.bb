@@ -29,5 +29,5 @@ PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
 
 EXTRA_OEMESON = "-Dalways_build_tests=false"
 
-SRC_URI[archive.md5sum] = "d858d411ad394c275643b14993dfeed4"
-SRC_URI[archive.sha256sum] = "c1d3d1f303f6a0416a0dac355a195276c31157a74bb1d040772d46d1cb15b012"
+SRC_URI[archive.md5sum] = "7b98e9059255d8a2fb147c4e727230a8"
+SRC_URI[archive.sha256sum] = "6b9917122e4def6e6f78bcb660e49e146540832e296abcb5cde99829a04ea986"
