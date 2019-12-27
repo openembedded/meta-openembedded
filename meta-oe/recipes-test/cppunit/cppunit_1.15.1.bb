@@ -8,7 +8,7 @@ SRC_URI = " \
     http://dev-www.libreoffice.org/src/cppunit-${PV}.tar.gz \
     file://0001-doc-Makefile.am-do-not-preserve-file-flags-when-copy.patch \
 "
-SRC_URI[md5sum] = "7ad93022171710a541bfe4bfd8b4a381"
-SRC_URI[sha256sum] = "3d569869d27b48860210c758c4f313082103a5e58219a7669b52bfd29d674780"
+SRC_URI[md5sum] = "9dc669e6145cadd9674873e24943e6dd"
+SRC_URI[sha256sum] = "89c5c6665337f56fd2db36bc3805a5619709d51fb136e51937072f63fcc717a7"
 
 inherit autotools
