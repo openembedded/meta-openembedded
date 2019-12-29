@@ -104,7 +104,7 @@ do_install_append_class-native() {
     create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="${STAGING_LIBDIR_NATIVE}/ostree/ostree-grub-generator"
 }
 
-PACKAGES += " \
+PACKAGE_BEFORE_PN = " \
     ${PN}-dracut \
     ${PN}-grub \
     ${PN}-mkinitcpio \
@@ -112,22 +112,11 @@ PACKAGES += " \
     ${PN}-trivial-httpd \
 "
 
-FILES_${PN} = " \
-    ${bindir}/ostree \
-    ${bindir}/rofiles-fuse \
-    ${datadir}/${BPN} \
-    ${datadir}/gir-1.0 \
-    ${nonarch_libdir}/${BPN}/ostree-remount \
-    ${libdir}/girepository-1.0 \
-    ${libdir}/lib*${SOLIBS} \
-    ${libdir}/ostree/ostree-grub-generator \
-    ${libdir}/tmpfiles.d/ostree-tmpfiles.conf \
-    ${sysconfdir}/ostree/remotes.d \
-    ${systemd_unitdir}/system-generators/ostree-system-generator \
-    ${systemd_unitdir}/system/ostree-finalize-staged.path \
-    ${systemd_unitdir}/system/ostree-finalize-staged.service \
-    ${systemd_unitdir}/system/ostree-remount.service \
+FILES_${PN} += " \
+    ${nonarch_libdir}/${BPN} \
     ${nonarch_libdir}/tmpfiles.d \
+    ${systemd_unitdir}/system \
+    ${systemd_unitdir}/system-generators \
 "
 FILES_${PN}-dracut = " \
     ${sysconfdir}/dracut.conf.d \
@@ -142,7 +131,7 @@ FILES_${PN}-mkinitcpio = " \
     ${libdir}/initcpio \
 "
 FILES_${PN}-switchroot = " \
-    ${nonarch_libdir}/ostree/ostree-prepare-root \
+    ${nonarch_libdir}/${BPN}/ostree-prepare-root \
     ${systemd_unitdir}/system/ostree-prepare-root.service \
 "
 FILES_${PN}-trivial-httpd = " \
