@@ -11,6 +11,7 @@ inherit pypi
 RDEPENDS_${PN} = "\
     ${PYTHON_PN}-html5lib \
     ${PYTHON_PN}-lxml \
+    ${PYTHON_PN}-soupsieve \
 "
 
 BBCLASSEXTEND = "native nativesdk"
