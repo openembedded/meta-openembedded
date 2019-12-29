@@ -12,6 +12,7 @@ SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz
            file://0001-src-ruli_addr.c-Add-missing-format-string.patch \
            file://0001-ruli_srv-Mark-prev_addr_list_size-as-unused.patch \
            file://0001-Make-space-for-flags-from-environment.patch \
+           file://float-conversion.patch \
            "
 
 SRC_URI[md5sum] = "e73fbfdeadddb68a703a70cea5271468"
