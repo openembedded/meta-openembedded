@@ -8,8 +8,7 @@ SRC_URI[sha256sum] = "6135db2ba678168c07950f9a16c4031822c6f4aec75a65e0a97bc5ca09
 
 inherit pypi
 
-RDEPENDS_${PN}_class-target = "\
-    ${PYTHON_PN}-core \
+RDEPENDS_${PN} = "\
     ${PYTHON_PN}-html5lib \
     ${PYTHON_PN}-lxml \
 "
