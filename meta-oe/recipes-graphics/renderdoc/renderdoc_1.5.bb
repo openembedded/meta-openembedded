@@ -4,9 +4,10 @@ HOMEPAGE = "https://github.com/baldurk/renderdoc"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9753b1b4fba3261c27d1ce5c1acef667"
 
-SRCREV = "214d85228538e71cc63a0d7fa11dd75b1d56cc81"
+SRCREV = "a94f238e37cfe2f142093eb8e5da7775abaa88c6"
 SRC_URI = "git://github.com/baldurk/${BPN}.git;protocol=http;branch=v1.x \
 	   file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch \
+	   file://0001-Remove-glslang-pool_allocator-setAllocator.patch \
 "
 S = "${WORKDIR}/git"
 
