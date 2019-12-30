@@ -10,11 +10,15 @@ SECTION = "lib"
 
 inherit pkgconfig cmake features_check
 
-S = "${WORKDIR}/git"
+PV .= "+git${SRCPV}"
+SRCREV = "781fbbadb0bccc749058177b1385c82da9ace880"
 SRC_URI = "git://github.com/glfw/glfw.git"
-SRCREV = "d25248343e248337284dfbe5ecd1eddbd37ae66d"
 
-EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
+S = "${WORKDIR}/git"
+
+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_DOCS=OFF"
+
+CFLAGS += "-fPIC"
 
 DEPENDS = "libpng libglu zlib libxrandr libxinerama libxi libxcursor"
 REQUIRED_DISTRO_FEATURES = "x11 opengl"
