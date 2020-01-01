@@ -18,10 +18,9 @@ RDEPENDS_${PN} = "acl"
 
 SRC_URI = " \
     git://github.com/storaged-project/udisks.git;branch=master \
-    file://non-gnu-libc.patch \
 "
-PV = "2.8.4"
-SRCREV = "f333e13de8d32f2b82237ccd180c3458d71e78b8"
+PV = "2.8.4+git${SRCREV}"
+SRCREV = "db5f487345da2eaa87976450ea51c2c465d9b82e"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
