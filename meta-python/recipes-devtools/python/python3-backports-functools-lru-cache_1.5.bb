@@ -1,2 +1,2 @@
 require python-backports-functools-lru-cache.inc
-inherit setuptools
+inherit setuptools3
