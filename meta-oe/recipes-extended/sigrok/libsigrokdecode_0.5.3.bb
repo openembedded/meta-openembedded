@@ -10,5 +10,5 @@ inherit autotools pkgconfig
 
 SRC_URI = "http://sigrok.org/download/source/libsigrokdecode/libsigrokdecode-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "b9033bc7e68bc17fffffd4fdd793f5a1"
-SRC_URI[sha256sum] = "e08d9e797c54eccf3144da631b6e5f1498ac531e51520428df537a1da82583f0"
+SRC_URI[md5sum] = "7ba4ed4ef1f06ae96979751e096c2821"
+SRC_URI[sha256sum] = "c50814aa6743cd8c4e88c84a0cdd8889d883c3be122289be90c63d7d67883fc0"
