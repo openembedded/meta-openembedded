@@ -3,8 +3,8 @@ HOMEPAGE = "http://packages.python.org/cmd2/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
 
-SRC_URI[md5sum] = "0e1ce6a2fd8846c2a9e0de2ceb1fa461"
-SRC_URI[sha256sum] = "8880fea501bb45a42e8ddde18023d336ccf72f187c4b03e9ee9f13d719ecbd5f"
+SRC_URI[md5sum] = "90dccab3a20106c543ef85d2bee720bb"
+SRC_URI[sha256sum] = "ba244b07c0b465ff54a6838dc61919599141dc92de1bf00bb0a70875189155e6"
 
 inherit pypi
 
