@@ -7,6 +7,11 @@ HOMEPAGE = "http://www.twistedmatrix.com"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1743f12d8b8f5aec625c0569a058f0a6"
 
+# allow for common patches for python- and python3-twisted
+FILESEXTRAPATHS_prepend := "${THISDIR}/python-twisted:"
+
+SRC_URI += "file://0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch"
+
 SRC_URI[sha256sum] = "7394ba7f272ae722a74f3d969dcf599bc4ef093bc392038748a490f1724a515d"
 SRC_URI[md5sum] = "f2d70f7a66ecdf54152310164cceadfe"
 
