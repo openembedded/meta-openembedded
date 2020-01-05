@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.tigervnc.com/"
 LICENSE = "GPLv2+"
 SECTION = "x11/utils"
 DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk"
-RDEPENDS_${PN} = "chkconfig coreutils hicolor-icon-theme"
+RDEPENDS_${PN} = "chkconfig coreutils hicolor-icon-theme perl"
 
 LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
 
@@ -15,10 +15,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 inherit autotools cmake
 B = "${S}"
 
-SRCREV = "6f2301d08e64a965ad36b401ec8dc2b24bc47075"
+SRCREV = "4739493b635372bd40a34640a719f79fa90e4dba"
 
-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.9-branch \
-           file://0001-tigervnc-remove-includedir.patch \
+SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.10-branch \
            file://0002-do-not-build-tests-sub-directory.patch \
            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
@@ -26,11 +25,11 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.9-branch \
 
 # Keep sync with xorg-server in oe-core
 XORG_PN ?= "xorg-server"
-XORG_PV ?= "1.19.6"
+XORG_PV ?= "1.20.6"
 SRC_URI += "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${XORG_PV}.tar.bz2;name=xorg"
 XORG_S = "${WORKDIR}/${XORG_PN}-${XORG_PV}"
-SRC_URI[xorg.md5sum] = "3e47777ff034a331aed2322b078694a8"
-SRC_URI[xorg.sha256sum] = "a732502f1db000cf36a376cd0c010ffdbf32ecdd7f1fa08ba7f5bdf9601cc197"
+SRC_URI[xorg.md5sum] = "a98170084f2c8fed480d2ff601f8a14b"
+SRC_URI[xorg.sha256sum] = "6316146304e6e8a36d5904987ae2917b5d5b195dc9fc63d67f7aca137e5a51d1"
 
 # It is the directory containing the Xorg source for the
 # machine on which you are building TigerVNC.
@@ -58,7 +57,7 @@ do_patch_xserver () {
     xargs tar cf - | (cd ${XSERVER_SOURCE_DIR} && tar xf -)
 
     cd ${XSERVER_SOURCE_DIR}
-    xserverpatch="${S}/unix/xserver119.patch"
+    xserverpatch="${S}/unix/xserver120.patch"
     echo "Apply $xserverpatch"
     patch -p1 -b --suffix .vnc < $xserverpatch
 }
