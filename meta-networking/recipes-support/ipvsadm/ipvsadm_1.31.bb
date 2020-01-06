@@ -22,8 +22,8 @@ SRC_URI = "https://mirrors.edge.kernel.org/pub/linux/utils/kernel/ipvsadm/${BP}.
         file://makefile-add-ldflags.patch \
 "
 
-SRC_URI[md5sum] = "97f11b6af1920fde5a9d9eac0d7f9e50"
-SRC_URI[sha256sum] = "95573d70df473c9f63fc4ac496c044c69e3a6de7ccac119922210c0b44cd7a0c"
+SRC_URI[md5sum] = "f6d1707c5baf684b58fd33682d67871f"
+SRC_URI[sha256sum] = "1a0a5e25b5a1226435d2fb76341656f83a710183aebb0d204db39c0ec3bedfdb"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/ipvsadm"
 
