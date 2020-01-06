@@ -9,8 +9,10 @@ DEPENDS = "glib-2.0"
 inherit autotools pkgconfig
 
 SRC_URI = "https://github.com/AbiWord/enchant/releases/download/v${PV}/enchant-${PV}.tar.gz"
-SRC_URI[md5sum] = "4b8abb58e00e93363591b3f5ea4f52d5"
-SRC_URI[sha256sum] = "abd8e915675cff54c0d4da5029d95c528362266557c61c7149d53fa069b8076d"
+SRC_URI[md5sum] = "8a6ea1bb143c64e0edf5e49c7e7cb984"
+SRC_URI[sha256sum] = "1b22976135812b35cb5b8d21a53ad11d5e7c1426c93f51e7a314a2a42cab3a09"
+
+UPSTREAM_CHECK_URI = "https://github.com/AbiWord/enchant/releases"
 
 S = "${WORKDIR}/enchant-${PV}"
 
