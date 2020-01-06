@@ -27,8 +27,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-Add-configure-time-check-for-gettid-API.patch \
            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
            "
-SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
-SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
+SRC_URI[md5sum] = "9b61df01d1a092101c4a626692edae19"
+SRC_URI[sha256sum] = "6da9af96e8ee58d11031d305bf4804a00deb6108e12e422722882a2091bd34bd"
 
 inherit autotools useradd systemd pkgconfig
 
