@@ -10,6 +10,7 @@ PACKAGECONFIG[serialport] = "--with-libserialport,--without-libserialport,libser
 PACKAGECONFIG[ftdi] = "--with-libftdi,--without-libftdi,libftdi"
 PACKAGECONFIG[usb] = "--with-libusb,--without-libusb,libusb"
 PACKAGECONFIG[cxx] = "--enable-cxx,--disable-cxx,glibmm doxygen-native"
+PACKAGECONFIG[bluez5] = "--with-libbluez,--without-libbluez,bluez5"
 
 PACKAGECONFIG ??= "serialport ftdi usb"
 
