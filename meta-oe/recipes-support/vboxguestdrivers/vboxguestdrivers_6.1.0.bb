@@ -13,21 +13,22 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
+    file://export.patch;patchdir=${WORKDIR}/${VBOX_NAME} \
 "
-SRC_URI[md5sum] = "c9c2f162ac5f99d28d8c0ca43b19ed01"
-SRC_URI[sha256sum] = "5580e875349341a1aabc6d5d2f697d242f277487316faaf1fbe68d9014f788d4"
+SRC_URI[md5sum] = "484b550f4692c9d61896b08bb0a1be7f"
+SRC_URI[sha256sum] = "49005ed94454f893fc3955e1e2b9607e85c300235cb983b39d1df2cfcf29f039"
 
 S = "${WORKDIR}/vbox_module"
 
 export BUILD_TARGET_ARCH="${ARCH}"
 export BUILD_TARGET_ARCH_x86-64="amd64"
 
-EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build'"
+EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1"
 
 # otherwise 5.2.22 builds just vboxguest
 MAKE_TARGETS = "all"
 
-addtask export_sources before do_patch after do_unpack
+addtask export_sources after do_patch before do_configure
 
 do_export_sources() {
     mkdir -p "${S}"
@@ -50,7 +51,8 @@ do_configure_prepend() {
 }
 
 # compile and install mount utility
-do_compile_append() {
+do_compile() {
+    oe_runmake all
     oe_runmake 'LD=${CC}' 'LDFLAGS=${LDFLAGS}' -C ${S}/utils
     if ! [ -e vboxguest.ko -a -e vboxsf.ko -a -e vboxvideo.ko ] ; then
         echo "ERROR: One of vbox*.ko modules wasn't built"
@@ -78,6 +80,3 @@ FILES_${PN} = "${base_sbindir}"
 
 # autoload if installed
 KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
-
-PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
-
