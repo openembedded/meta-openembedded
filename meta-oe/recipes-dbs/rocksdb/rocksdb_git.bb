@@ -12,6 +12,7 @@ PV = "6.5.2"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
            file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
+           file://0001-db-write_thread.cc-Initialize-state.patch \
           "
 
 S = "${WORKDIR}/git"
