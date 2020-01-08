@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ee043784bdce7503e619b2d1a85798b"
 SRC_URI = "\
     https://github.com/kkos/oniguruma/releases/download/v${PV}/${BP}.tar.gz \
     file://0001-build-don-t-link-against-host-system-libraries.patch \
+    file://0001-build-enable-serial-tests-automake-option-for-ptest.patch \
+    file://run-ptest \
 "
 
 SRC_URI[md5sum] = "a12d2fe997b789bd87cf63799c091879"
@@ -17,6 +19,14 @@ SRC_URI[sha256sum] = "4669d22ff7e0992a7e93e116161cac9c0949cd8960d1c562982026726f
 
 BINCONFIG = "${bindir}/onig-config"
 
-inherit autotools binconfig-disabled
+inherit autotools binconfig-disabled ptest
 
 BBCLASSEXTEND = "native"
+
+do_compile_ptest() {
+    oe_runmake -C test buildtest-TESTS
+}
+
+do_install_ptest() {
+    install -Dm0755 -t ${D}${PTEST_PATH}/tests/ ${B}/test/.libs/*
+}
