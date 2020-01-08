@@ -11,8 +11,8 @@ PV .= "+git${SRCPV}"
 
 SRC_URI = "git://github.com/msgpack/msgpack-c \
            "
-# cpp-3.1.1
-SRCREV = "83a82e3eb512b18d4149cabb7eb43c7e8bc081af"
+# cpp-3.2.1
+SRCREV = "8085ab8721090a447cf98bb802d1406ad7afe420"
 
 S = "${WORKDIR}/git"
 
