@@ -22,8 +22,8 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-even features_check
 
-SRC_URI[archive.md5sum] = "4515ccdb762a243d65757f5ab073d206"
-SRC_URI[archive.sha256sum] = "2d6f7763193766d4652d43d0d0de2e49e60ca571eca0a7f1e6341fbd67f90b2d"
+SRC_URI[archive.md5sum] = "c3ee46ae7b84d9d0e8dd3f9e04a61ab1"
+SRC_URI[archive.sha256sum] = "cdf57ddd0bc35db952b732b77c796760e65d1ce2f7df31273e5c8d4759ed4a89"
 SRC_URI += "file://0001-cogl-Fix-GLES2-fallback.patch"
 
 # x11 is still manadatory - see meson.build
