@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "4b77676de1e74774ec456bcc6ac6f04a2791a12cc1fe07f8305d4c3c86
 
 S = "${WORKDIR}/libsigc++-${PV}"
 
-inherit autotools
+inherit setuptools3 meson
 
 FILES_${PN}-dev += "${libdir}/sigc++-*/"
 FILES_${PN}-doc += "${datadir}/devhelp"
