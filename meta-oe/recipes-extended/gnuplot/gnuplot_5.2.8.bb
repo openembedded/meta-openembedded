@@ -22,8 +22,8 @@ SRC_URI_append_class-target = " \
     file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
 "
 
-SRC_URI[archive.md5sum] = "60aedd08998160593199459dea8467fe"
-SRC_URI[archive.sha256sum] = "a416d22f02bdf3873ef82c5eb7f8e94146795811ef808e12b035ada88ef7b1a1"
+SRC_URI[archive.md5sum] = "2df8767c7399bee57a96296d46b4d5fb"
+SRC_URI[archive.sha256sum] = "60a6764ccf404a1668c140f11cc1f699290ab70daa1151bb58fed6139a28ac37"
 SRC_URI[qtplot.md5sum] = "0a481885a496092c77eb4017540b5cf6"
 SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
 
