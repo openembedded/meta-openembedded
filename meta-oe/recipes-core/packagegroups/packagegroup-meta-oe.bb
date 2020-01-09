@@ -239,7 +239,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     libinih inotify-tools joe lcms lcov libatasmart libbytesize \
     libcereal libcyusbserial libee libeigen libestr libftdi libgit2 \
     libgpiod libiio libjs-jquery libjs-sizzle liblinebreak libmicrohttpd \
-    libmxml libnih liboauth libol liboop libp11 libraw1394 libsmi libsoc libssh2 \
+    libmxml liboauth libol liboop libp11 libraw1394 libsmi libsoc libssh2 \
     libssh libtar libteam libtinyxml2 libtinyxml libusbg libusb-compat libutempter \
     links lio-utils lockdev log4c log4cpp logwarn libdevmapper lvm2 \
     mailcap mbuffer mg minini \
