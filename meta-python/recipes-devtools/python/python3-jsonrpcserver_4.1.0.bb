@@ -23,5 +23,5 @@ RDEPENDS_${PN} += "\
 BBCLASSEXTEND = "native nativesdk"
 
 do_install_append() {
-    chmod 0644 ${D}${PYTHON_SITEPACKAGES_DIR}/jsonrpcserver-4.1.0-py3.7.egg-info/*
+    chmod 0644 ${D}${PYTHON_SITEPACKAGES_DIR}/jsonrpcserver-4.1.0-py${PYTHON_BASEVERSION}.egg-info/*
 }
