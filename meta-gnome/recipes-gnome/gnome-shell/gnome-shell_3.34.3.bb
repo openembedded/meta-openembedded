@@ -30,8 +30,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 
-SRC_URI[archive.md5sum] = "b01d6772917148c81d472584f6b36c83"
-SRC_URI[archive.sha256sum] = "703264db2fafe02d1db53d701cb99a4a757c46e7569e7b9d690dda009fc03b4d"
+SRC_URI[archive.md5sum] = "a0f7d78f57616076890f0e3b7f12196a"
+SRC_URI[archive.sha256sum] = "2474bef386c5a47d7be285aa22e24125c46ba5f860a25a1a36a90de4e456bd8a"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
