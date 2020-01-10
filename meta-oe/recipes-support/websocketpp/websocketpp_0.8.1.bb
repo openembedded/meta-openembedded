@@ -30,3 +30,12 @@ SRCREV= "c6d7e295bf5a0ab9b5f896720cc1a0e0fdc397a7"
 S = "${WORKDIR}/git"
 
 inherit cmake
+
+PACKAGES =+ "${PN}-examples"
+
+FILES_${PN}-examples = "${docdir}"
+
+do_install_append() {
+	install -d ${D}${docdir}/${BPN}
+	cp -R ${S}/examples ${D}${docdir}/${BPN}
+}
