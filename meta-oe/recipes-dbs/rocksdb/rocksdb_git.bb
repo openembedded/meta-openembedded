@@ -32,6 +32,7 @@ EXTRA_OECMAKE = "\
     -DPORTABLE=ON \
     -DWITH_TESTS=OFF \
     -DWITH_TOOLS=OFF \
+    -DFAIL_ON_WARNINGS=OFF \
 "
 
 do_install_append() {
