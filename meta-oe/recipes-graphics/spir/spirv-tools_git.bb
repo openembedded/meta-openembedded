@@ -24,6 +24,8 @@ SRCREV_googletest = "f2fb48c3b3d79a75a88a99fba6576b25d42ec528"
 
 inherit cmake python3native
 
+EXTRA_OECMAKE += "-DSPIRV_WERROR=OFF"
+
 do_install_append() {
 	install -d ${D}/${includedir}/spirv
 	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
