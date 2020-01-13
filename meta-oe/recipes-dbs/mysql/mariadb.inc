@@ -19,6 +19,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz 
            file://clang_version_header_conflict.patch \
            file://fix-arm-atomic.patch \
            file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
+           file://0001-Fix-library-LZ4-lookup.patch \
           "
 SRC_URI[md5sum] = "d0de881ab8ead46928cafb7d558535c1"
 SRC_URI[sha256sum] = "4c076232b99433b09eb3c6d62f607192b3474d022703699b8f6aef4e79de3fb9"
