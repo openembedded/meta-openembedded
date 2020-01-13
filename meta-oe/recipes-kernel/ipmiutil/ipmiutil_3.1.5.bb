@@ -22,8 +22,8 @@ PARALLEL_MAKE = ""
 SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
            file://fix_systemd_path.patch \
           "
-SRC_URI[md5sum] = "5feaf6a827205792e057bb4ff5c4e842"
-SRC_URI[sha256sum] = "b2d7f72535131c7832ba4be13dc33c81513fc3ee43fe797b4b52014600ecee5e"
+SRC_URI[md5sum] = "292d6df25cad678bb27e5c8cdc6748f9"
+SRC_URI[sha256sum] = "58ccdbd5755d7dd72478756715af09e9c73330dfad2b91dbf03d2ac504b301a3"
 
 inherit autotools-brokensep pkgconfig systemd
 
