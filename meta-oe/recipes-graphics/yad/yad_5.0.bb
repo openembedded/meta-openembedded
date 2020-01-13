@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "git://github.com/v1cont/yad.git"
-SRCREV = "3857a0a8822fc0a7206e804f15cc17b85a5f8ce2"
+SRCREV = "c8eac89cc20d915cb5ed185f423091a291c8af24"
 
 inherit autotools gsettings
 
