@@ -1,4 +1,5 @@
 SUMMARY = "Poppler is a PDF rendering library based on the xpdf-3.0 code base"
+HOMEPAGE = "https://poppler.freedesktop.org/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
