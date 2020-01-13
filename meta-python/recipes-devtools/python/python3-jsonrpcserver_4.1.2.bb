@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
 
-SRC_URI[md5sum] = "c1cc652bdeb04b8ce3ad962fbab34daf"
-SRC_URI[sha256sum] = "3a35c0ef21174ca98f995f99688cebadda97053785833fbb31ec862d6b157f6d"
+SRC_URI[md5sum] = "fd4091bc19eb18579c15b97af70714eb"
+SRC_URI[sha256sum] = "73db55d1cf245ebdfb96ca05c4cce01c51b61be845a2a981f539ea1e6a4e0c4a"
 
 inherit pypi setuptools3
 
@@ -22,6 +22,3 @@ RDEPENDS_${PN} += "\
 
 BBCLASSEXTEND = "native nativesdk"
 
-do_install_append() {
-    chmod 0644 ${D}${PYTHON_SITEPACKAGES_DIR}/jsonrpcserver-4.1.0-py${PYTHON_BASEVERSION}.egg-info/*
-}
