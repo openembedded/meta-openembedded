@@ -11,8 +11,8 @@ DEPENDS = "glib-2.0 libxml2-native glib-2.0-native"
 
 SRC_URI[archive.md5sum] = "cc32455277b31afb1965d627ae3e3629"
 SRC_URI[archive.sha256sum] = "844bbb8d8b65071b3bca96f8e921319ceef81f2d2c51fcc9da63a4b355c893d0"
-SRC_URI += " \
-           file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
+SRC_URI += "file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
+           file://0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch \
            "
 
 PACKAGECONFIG ?= "sysprofd libsysprof ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
