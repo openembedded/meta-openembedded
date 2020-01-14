@@ -10,12 +10,14 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
 
 SRCBRANCH ?= "master"
 
-SRCREV_base = "a60b3996fe3376d42334fc89014e9d6f6af62899"
-SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
+PV = "0.6.1"
+
+SRCREV_base = "c41a05cc9e2310c2f73eda4b4f0b4477bf4479c5"
+SRCREV_common = "88e512ca7197a45c4114f7fa993108f23245bf50"
 
 SRC_URI = " \
     git://github.com/RidgeRun/gst-shark.git;protocol=https;branch=${SRCBRANCH};name=base \
-    git://anongit.freedesktop.org/git/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common; \
+    git://gitlab.freedesktop.org/gstreamer/common.git;protocol=https;destsuffix=git/common;name=common; \
     "
 
 S = "${WORKDIR}/git"
