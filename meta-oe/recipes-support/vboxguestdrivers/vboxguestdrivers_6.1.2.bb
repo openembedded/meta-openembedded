@@ -13,10 +13,9 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://export.patch;patchdir=${WORKDIR}/${VBOX_NAME} \
 "
-SRC_URI[md5sum] = "484b550f4692c9d61896b08bb0a1be7f"
-SRC_URI[sha256sum] = "49005ed94454f893fc3955e1e2b9607e85c300235cb983b39d1df2cfcf29f039"
+SRC_URI[md5sum] = "f4f42fd09857556b04b803fb99cc6905"
+SRC_URI[sha256sum] = "4326576e8428ea3626194fc82646347576e94c61f11d412a669fc8a10c2a1e67"
 
 S = "${WORKDIR}/vbox_module"
 
