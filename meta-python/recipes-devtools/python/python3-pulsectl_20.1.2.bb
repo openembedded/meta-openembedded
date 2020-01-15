@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/mk-fg/python-pulse-control"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f1d10048469ff90123263eb5e214061d"
 
-SRC_URI[md5sum] = "8e79ef002856c1858058ca0b08bf1a01"
-SRC_URI[sha256sum] = "41db4dd19e7cd28e2609baf2b551f34991f1890024be119b6075a286abfb65d3"
+SRC_URI[md5sum] = "90d02204d65f684af2fd77a77d50ec01"
+SRC_URI[sha256sum] = "4a97a4f7fcd8dbe56380980e8c9519ff4e26552604776cbc7555e6a14ff0202f"
 
 RDEPENDS_${PN} += "pulseaudio"
 
