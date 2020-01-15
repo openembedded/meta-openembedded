@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=366e2fd3c9714f162d3663b6f97cfe41"
 
 SRC_URI = "git://github.com/keras-team/keras-applications.git"
-SRCREV ?= "61de21815728aa66377ebb2a7b4c2f5492a34dd2"
+SRCREV ?= "3b180cb10eda683dda7913ecee2e6487288d292d"
 
 
 inherit setuptools3
