@@ -21,8 +21,8 @@ SRC_URI = "http://people.redhat.com/dhowells/keyutils/${BP}.tar.bz2 \
            file://fix_library_install_path.patch \
            "
 
-SRC_URI[md5sum] = "191987b0ab46bb5b50efd70a6e6ce808"
-SRC_URI[sha256sum] = "d3aef20cec0005c0fa6b4be40079885567473185b1a57b629b030e67942c7115"
+SRC_URI[md5sum] = "919af7f33576816b423d537f8a8692e8"
+SRC_URI[sha256sum] = "c8b15722ae51d95b9ad76cc6d49a4c2cc19b0c60f72f61fb9bf43eea7cbd64ce"
 
 EXTRA_OEMAKE = "'CFLAGS=${CFLAGS} -Wall' \
     NO_ARLIB=1 \
