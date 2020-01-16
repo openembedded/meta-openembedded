@@ -10,11 +10,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0531457992a97ecebc6975914a874a9d"
 UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
 
 SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
-           file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch \
-           file://0001-dhcpcd-Fix-build-error-with-musl.patch"
+           file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
 
-SRC_URI[md5sum] = "dc4f29a62afc53cdac311e925cfd1bc7"
-SRC_URI[sha256sum] = "485d308fe10febd36b6f936e4260e4ab34a146e4f00a9f7a5509c4377ad5ea82"
+SRC_URI[md5sum] = "57fd5dd4ff9722773ec67239db34d3b5"
+SRC_URI[sha256sum] = "c5cbe15069cef347e72d0bf7a19b0255571ee0c184c6705859a09588a50a8ebd"
 
 inherit pkgconfig autotools-brokensep
 
