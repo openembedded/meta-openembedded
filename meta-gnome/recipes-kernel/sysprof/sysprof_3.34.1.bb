@@ -22,12 +22,12 @@ PACKAGECONFIG[sysprofd] = "-Dwith_sysprofd=bundled,-Dwith_sysprofd=none,polkit"
 PACKAGECONFIG[libsysprof] = "-Dlibsysprof=true,-Dlibsysprof=false,polkit"
 
 # Enablig this requries yelp
-EXTRA_OEMESON += "-Dhelp=false -Dsystemdunitdir=${systemd_unitdir}"
+EXTRA_OEMESON += "-Dhelp=false -Dsystemdunitdir=${systemd_unitdir}/system"
 
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'sysprofd', 'sysprof2.service', '', d)}"
+SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'sysprofd', 'sysprof2.service sysprof3.service', '', d)}"
 
 FILES_${PN} += " \
                ${datadir}/dbus-1/system-services \
