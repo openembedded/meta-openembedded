@@ -21,10 +21,9 @@ PACKAGECONFIG_NUMA_armeb = ""
 PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
 PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
-SRCREV = "92f75708b530989fdb13b50be6604f44b80d038d"
+SRCREV = "08ce9dc20b8a4e55db7af6d869ddfa49b4a02d03"
 SRC_URI = "git://git.kernel.dk/fio.git \
           file://0001-update-the-interpreter-paths.patch \
-          file://0001-arch-arm-Consider-armv7ve-arch-as-well.patch \
 "
 
 S = "${WORKDIR}/git"
