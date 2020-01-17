@@ -8,8 +8,8 @@ inherit xfce gtk-doc gobject-introspection features_check remove-libtool
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "3323588f1c18f04891e013243da1e355"
-SRC_URI[sha256sum] = "9c3c78b49ddfac7d42a804e6a6ad9d22ad64ec60bbe17d8724bc52d3e3f6d114"
+SRC_URI[md5sum] = "177818d4a84633c1d489f703fffe905d"
+SRC_URI[sha256sum] = "ef22324d26e5af735134bb10f85b6e16525ac9f48be8d2f6b634142fbfcabbc9"
 SRC_URI += " \
     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
     file://0002-use-lxdm-to-replace-dm-tool.patch \
