@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ad5c6d36b3d0098b2f33a5ab69a9e750"
 
 inherit pypi setuptools3
 
-SRC_URI[md5sum] = "a37f0e22c3aa5f1cf12a6a3ae22b36ca"
-SRC_URI[sha256sum] = "882a7266fa867a2ebb2c0baaa0f9159cabf131cf18c1b4270d79ad42f9208dc5"
+SRC_URI[md5sum] = "f12d7f31fe8d0b3e65c12f845bcd0ad8"
+SRC_URI[sha256sum] = "5c65d2da8c6bce0fca2528f69f44b2f977e06954c8512a952222cea50dad430f"
 
 BBCLASSEXTEND = "native nativesdk"
 
