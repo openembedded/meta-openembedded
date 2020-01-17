@@ -10,8 +10,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS += "intltool-native"
 
 SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2"
-SRC_URI[md5sum] = "bee3e251e45ade0ea349366461d6e200"
-SRC_URI[sha256sum] = "a8c00af838e85d00600dbf442c8741aa21a332fbceba849e0820560630a6e0ce"
+SRC_URI[md5sum] = "6190678bc701c197babcb2389ba46182"
+SRC_URI[sha256sum] = "a84d5e748d53bc5da269954cc3ad7f5ac0c4f5813acfd3892ea6f9064f17fb68"
 
 do_configure() {
     # special configure - no autotools...
