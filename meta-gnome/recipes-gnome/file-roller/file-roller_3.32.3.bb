@@ -11,7 +11,7 @@ DEPENDS = " \
     libnotify \
 "
 
-inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even
+inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even mime-xdg
 
 SRC_URI[archive.md5sum] = "5e098bb254d34f48a9b5761b468f4240"
 SRC_URI[archive.sha256sum] = "be111fb877dc1eb487ec5d6e2b72ba5defe1ab8033a6a6b9b9044a2a7787e22a"
