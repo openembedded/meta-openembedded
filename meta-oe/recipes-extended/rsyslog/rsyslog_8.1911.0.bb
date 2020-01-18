@@ -179,6 +179,7 @@ VALGRIND_linux-gnun32 = ''
 
 # Disable for powerpc64 with musl
 VALGRIND_libc-musl_powerpc64 = ''
+VALGRIND_libc-musl_powerpc64le = ''
 
 # RISC-V support for valgrind is not there yet
 VALGRIND_riscv64 = ""

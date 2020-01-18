@@ -61,6 +61,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 COMPATIBLE_HOST_powerpc = "(null)"
 COMPATIBLE_HOST_powerpc64 = "(null)"
+COMPATIBLE_HOST_powerpc64le = "(null)"
 
 inherit systemd
 

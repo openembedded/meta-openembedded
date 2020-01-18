@@ -25,6 +25,7 @@ S = "${WORKDIR}/${BPN}_${PV}/src/current/"
 #
 EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
+EXTRA_OEMAKE_powerpc64le = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE_x86-64 = "linux-AMD64 CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE_arm = "linux-arm CC='${CC}' GCC='${CC}'"
 EXTRA_OEMAKE = "linux CC='${CC}' GCC='${CC}'"
