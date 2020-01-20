@@ -36,7 +36,7 @@ RDEPENDS_packagegroup-meta-networking-connectivity = "\
     libdnet ufw civetweb freeradius kea daq \
     mbedtls relayd snort dhcpcd rdate vlan vpnc \
     inetutils wolfssl lftp miniupnpd networkmanager \
-    networkmanager-openvpn rdist nanomsg python-networkmanager \
+    networkmanager-openvpn rdist nanomsg python3-networkmanager \
     ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth x11", "blueman", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "samba", "", d)} \
@@ -55,7 +55,7 @@ RDEPENDS_packagegroup-meta-networking-daemons = "\
 RDEPENDS_packagegroup-meta-networking-daemons_remove_libc-musl = "opensaf"
 
 RDEPENDS_packagegroup-meta-networking-devtools = "\
-    python-ldap grpc \
+    python3-ldap grpc \
     "
 
 RDEPENDS_packagegroup-meta-networking-extended = "\

@@ -29,7 +29,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}/git"
 
-inherit autotools gettext pythonnative python-dir pkgconfig
+inherit autotools gettext python3native python3-dir pkgconfig
 
 DEPENDS += "spice-protocol jpeg pixman alsa-lib glib-2.0 python-pyparsing-native python-six-native glib-2.0-native"
 DEPENDS_append_class-nativesdk = "nativesdk-openssl"

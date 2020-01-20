@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "7e8e84cb14d2173beaca4d4cb991a14d84a4bef84ec37b2276bc363f45
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/ntop/files/ntop/Stable"
 
-inherit autotools-brokensep useradd pythonnative pkgconfig systemd
+inherit autotools-brokensep useradd python3native pkgconfig systemd
 
 DEPENDS = "geoip rrdtool python zlib libpcap gdbm"
 

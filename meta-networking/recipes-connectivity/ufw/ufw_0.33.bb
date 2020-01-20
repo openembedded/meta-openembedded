@@ -20,12 +20,12 @@ SRC_URI = " \
 SRC_URI[md5sum] = "3747b453d76709e5a99da209fc0bb5f5"
 SRC_URI[sha256sum] = "5f85a8084ad3539b547bec097286948233188c971f498890316dec170bdd1da8"
 
-inherit setuptools features_check
+inherit setuptools3 features_check
 
 RDEPENDS_${PN} = " \
                   iptables \
-                  python \
-                  python-modules \
+                  python3 \
+                  python3-modules \
                  "
 
 RRECOMMENDS_${PN} = " \

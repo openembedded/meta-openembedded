@@ -96,9 +96,9 @@ PACKAGECONFIG[rlm-eap-pwd] = "--with-rlm_eap_pwd, --without-rlm_eap_pwd"
 inherit useradd autotools-brokensep update-rc.d systemd
 
 # This is not a cpan or python based package, but it needs some definitions
-# from cpan-base and python-dir bbclasses for building rlm_perl and rlm_python
+# from cpan-base and python3-dir bbclasses for building rlm_perl and rlm_python
 # correctly.
-inherit cpan-base python-dir
+inherit cpan-base python3-dir
 
 # The modules subdirs also need to be processed by autoreconf. Use autogen.sh
 # in order to handle the subdirs correctly.
