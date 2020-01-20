@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=be980eb7ccafe287cb438076a65e888c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=be4d5107c64dc3d7c57e3797e1a0674b"
 
 DEPENDS = "openssl"
 DEPENDS_append_class-target = " nodejs-native"
@@ -18,16 +18,14 @@ COMPATIBLE_HOST_riscv32 = "null"
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
            file://0003-Install-both-binaries-and-use-libdir.patch \
-           file://0004-Make-compatibility-with-gcc-4.8.patch \
-           file://0007-v8-don-t-override-ARM-CFLAGS.patch \
+           file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            "
 SRC_URI_append_class-target = " \
-           file://0002-Using-native-torque.patch \
-           file://0005-Link-atomic-library.patch \
+           file://0002-Using-native-binaries.patch \
            "
 
-SRC_URI[md5sum] = "d5a56d0abf764a91f627f0690cd4b9f3"
-SRC_URI[sha256sum] = "412667d76bd5273c07cb69c215998109fd5bb35c874654f93e6a0132d666c58e"
+SRC_URI[md5sum] = "6762f5629f6f68fb9bdf83a741cba038"
+SRC_URI[sha256sum] = "088a217ba2af641b8cc15be29f6e2956b8a33e6badb85596bbc2cdea9df9be71"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -129,9 +127,13 @@ do_install_append_class-native() {
     # npm-cli.js continues to use old shebang
     sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${exec_prefix}/lib/node_modules/npm/bin/npm-cli.js
 
-    # Install the native torque to provide it within sysroot for the target compilation
+    # Install the native binaries to provide it within sysroot for the target compilation
     install -d ${D}${bindir}
     install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
+    install -m 0755 ${S}/out/Release/bytecode_builtins_list_generator ${D}${bindir}/bytecode_builtins_list_generator
+    install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${bindir}/gen-regexp-special-case
+    install -m 0755 ${S}/out/Release/mkcodecache ${D}${bindir}/mkcodecache
+    install -m 0755 ${S}/out/Release/node_mksnapshot ${D}${bindir}/node_mksnapshot
 }
 
 do_install_append_class-target() {
