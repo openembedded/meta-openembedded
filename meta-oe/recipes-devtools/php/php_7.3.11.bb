@@ -37,7 +37,7 @@ S = "${WORKDIR}/php-${PV}"
 SRC_URI[md5sum] = "21b710b4126d4d54714de9693a6c7b0d"
 SRC_URI[sha256sum] = "92d1ff4b13c7093635f1ec338a5e6891ca99b10e65fbcadd527e5bb84d11b5e7"
 
-inherit autotools pkgconfig pythonnative gettext
+inherit autotools pkgconfig python3native gettext
 
 # phpize is not scanned for absolute paths by default (but php-config is).
 #

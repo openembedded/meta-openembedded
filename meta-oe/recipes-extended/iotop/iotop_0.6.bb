@@ -15,13 +15,13 @@ SRC_URI[sha256sum] = "3adea2a24eda49bbbaeb4e6ed2042355b441dbd7161e883067a02bfc8d
 UPSTREAM_CHECK_URI = "http://repo.or.cz/iotop.git/tags"
 UPSTREAM_CHECK_REGEX = "iotop-(?P<pver>\d+(\.\d+)+)"
 
-inherit distutils
+inherit distutils3
 
 do_install_append() {
     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.pyo || true
     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
 }
 
-RDEPENDS_${PN} = "python-curses python-textutils \
-                  python-codecs python-ctypes python-pprint \
-                  python-shell python-subprocess python-core"
+RDEPENDS_${PN} = "python3-curses python3-textutils \
+                  python3-codecs python3-ctypes python3-pprint \
+                  python3-shell python3-subprocess python3-core"

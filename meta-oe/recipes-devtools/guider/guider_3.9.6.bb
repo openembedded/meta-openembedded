@@ -16,7 +16,7 @@ SRCREV = "fef25c41efb9bde0614ea477d0b90bd9565ae0b4"
 S = "${WORKDIR}/git"
 R = "${RECIPE_SYSROOT}"
 
-inherit distutils
+inherit distutils3
 
 GUIDER_OBJ = "guider.pyc"
 GUIDER_SCRIPT = "guider"
@@ -31,5 +31,5 @@ do_install() {
     install -v -m 0755 ${STAGING_LIBDIR_NATIVE}/python${PYTHON_BASEVERSION}/site-packages/${BPN}/${GUIDER_OBJ} ${D}${datadir}/${BPN}/${GUIDER_OBJ}
 }
 
-RDEPENDS_${PN} = "python-ctypes python-shell \
-                  python-json python-subprocess"
+RDEPENDS_${PN} = "python3-ctypes python3-shell \
+                  python3-json python3-subprocess"

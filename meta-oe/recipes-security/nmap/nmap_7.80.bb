@@ -15,7 +15,7 @@ SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
 SRC_URI[md5sum] = "d37b75b06d1d40f27b76d60db420a1f5"
 SRC_URI[sha256sum] = "fcfa5a0e42099e12e4bf7a68ebe6fde05553383a682e816a7ec9256ab4773faa"
 
-inherit autotools-brokensep pkgconfig pythonnative
+inherit autotools-brokensep pkgconfig python3native
 
 PACKAGECONFIG ?= "ncat nping ndiff pcap"
 

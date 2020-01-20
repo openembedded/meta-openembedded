@@ -5,9 +5,9 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=75859989545e37968a99b631ef42722e"
 SECTION = "System/Management"
 
-inherit setuptools
+inherit setuptools3
 
-DEPENDS = "python-native python-pywbem-native python-m2crypto python-pywbem"
+DEPENDS = "python3-native python3-pywbem-native python3-m2crypto python-pywbem"
 
 SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
           "

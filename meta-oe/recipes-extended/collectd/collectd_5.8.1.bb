@@ -19,7 +19,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
 SRC_URI[md5sum] = "bfce96c42cede5243028510bcc57c1e6"
 SRC_URI[sha256sum] = "e796fda27ce06377f491ad91aa286962a68c2b54076aa77a29673d53204453da"
 
-inherit autotools pythonnative update-rc.d pkgconfig systemd
+inherit autotools python3native update-rc.d pkgconfig systemd
 
 SYSTEMD_SERVICE_${PN} = "collectd.service"
 

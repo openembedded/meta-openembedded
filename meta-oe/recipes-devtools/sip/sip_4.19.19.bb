@@ -2,7 +2,7 @@ require sip.inc
 
 DEPENDS = "python"
 
-inherit python-dir pythonnative
+inherit python3-dir python3native
 
 PACKAGES += "python-sip"
 
