@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
 RDEPENDS_${PN}_class-native = ""
 DEPENDS_append_class-native = " python-native "
 
-inherit setuptools
+inherit setuptools3
 
 BBCLASSEXTEND = "native"
 

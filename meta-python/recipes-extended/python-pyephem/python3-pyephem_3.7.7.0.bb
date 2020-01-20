@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "607148429f85412915e32265779c0cf6d09f73aa97cf1ff0d101ac22c6
 
 PYPI_PACKAGE = "ephem"
 
-inherit pypi setuptools
+inherit pypi setuptools3
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-datetime \

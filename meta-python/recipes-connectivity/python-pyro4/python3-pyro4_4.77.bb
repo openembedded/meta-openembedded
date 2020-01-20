@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "2bfe12a22f396474b0e57c898c7e2c561a8f850bf2055d8cf0f7119f0c
 
 PYPI_PACKAGE = "Pyro4"
 
-inherit pypi setuptools
+inherit pypi setuptools3
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-logging \
