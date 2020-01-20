@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/cherokee/webserver \
 
 S = "${WORKDIR}/git"
 
-inherit autotools-brokensep pkgconfig binconfig update-rc.d systemd pythonnative
+inherit autotools-brokensep pkgconfig binconfig update-rc.d systemd python3native
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 PACKAGECONFIG[ffmpeg] = "--with-ffmpeg,--without-ffmpeg,libav"
