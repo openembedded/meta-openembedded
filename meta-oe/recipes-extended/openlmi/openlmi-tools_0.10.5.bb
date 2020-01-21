@@ -7,7 +7,7 @@ SECTION = "System/Management"
 
 inherit setuptools3
 
-DEPENDS = "python3-native python3-pywbem-native python3-m2crypto python-pywbem"
+DEPENDS = "python-native python-pywbem-native python-m2crypto python-pywbem"
 
 SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
           "
@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "292b8f5f2250655a4add8183c529b73358bc980bd4f23cfa484a940953
 S = "${WORKDIR}/${BP}/cli"
 
 do_configure_prepend() {
-    sed 's/@@VERSION@@/$(VERSION)/g' setup.py.skel >setup.py
+    sed 's/@@VERSION@@/$(VERSION)/g' ${S}/setup.py.skel > ${S}/setup.py
 }
 
 python() {
