@@ -7,12 +7,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 DEPENDS = "libxslt-native"
 RDEPENDS_${PN} += "python-dbus"
 
-SRC_URI = "http://telepathy.freedesktop.org/releases/${BPN}/${BPN}-${PV}.tar.gz \
+SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-python/telepathy-python-${PV}.tar.gz \
            file://parallel_make.patch \
            file://remove_duplicate_install.patch \
            file://telepathy-python_fix_for_automake_1.12.patch"
 
 PR = "r6"
+
+S = "${WORKDIR}/telepathy-python-${PV}"
 
 inherit autotools python3native
 
@@ -25,8 +27,8 @@ FILES_${PN} += "\
 "
 
 do_install_append () {
-    rm -f ${D}${libdir}/python*/site-packages/telepathy/*.pyc
-    rm -f ${D}${libdir}/python*/site-packages/telepathy/*.pyo
-    rm -f ${D}${libdir}/python*/site-packages/telepathy/*/*.pyc
-    rm -f ${D}${libdir}/python*/site-packages/telepathy/*/*.pyo
+    rm -fr ${D}${libdir}/python*/site-packages/telepathy/__pycache__
+    rm -fr ${D}${libdir}/python*/site-packages/telepathy/__pycache__
+    rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
+    rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
 }
