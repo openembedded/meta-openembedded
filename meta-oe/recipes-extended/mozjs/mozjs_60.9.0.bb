@@ -3,13 +3,12 @@ HOMEPAGE = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonk
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dc9b6ecd19a14a54a628edaaf23733bf"
 
-SRC_URI = "https://dev.gentoo.org/~axs/distfiles/mozjs-60.5.2.tar.bz2 \
+SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz \
            file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
            file://0010-fix-cross-compilation-on-i586-targets.patch \
            file://0001-do-not-create-python-environment.patch \
            file://0002-fix-cannot-find-link.patch \
            file://0003-workaround-autoconf-2.13-detection-failed.patch \
-           file://0004-do-not-use-autoconf-2.13-to-refresh-old.configure.patch \
            file://0005-fix-do_compile-failed-on-mips.patch \
            file://add-riscv-support.patch \
            file://0001-mozjs-fix-coredump-caused-by-getenv.patch \
@@ -26,15 +25,18 @@ SRC_URI_append_libc-musl = " \
 SRC_URI_append_mipsarchn32 = " \
            file://0001-fix-compiling-failure-on-mips64-n32-bsp.patch \
            "
-SRC_URI[md5sum] = "023ed014e9e93d01620d121bc06a3589"
-SRC_URI[sha256sum] = "f51039c997415fd0f13f8e01966b4a8ff80cbf90deb8b14c18827104a369cc0d"
+SRC_URI[md5sum] = "69a0be9ce695e5dc4941ed0c78ef00c2"
+SRC_URI[sha256sum] = "9f453c8cc5669e46e38f977764d49a36295bf0d023619d9aac782e6bb3e8c53f"
+
+S = "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
 
 inherit autotools pkgconfig perlnative pythonnative
 
 inherit features_check
 CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"
 
-DEPENDS += "nspr zlib python-six-native python-pytoml-native \
+DEPENDS += "nspr zlib autoconf-2.13-native \
+            python-six-native python-pytoml-native \
             python-jsmin-native python-futures-native \
             python-which-native"
 
@@ -77,42 +79,40 @@ export HOST_CXXFLAGS = "${BUILD_CXXFLAGS}"
 
 do_configure() {
     export SHELL="/bin/sh"
-    export TMP="${B}"
+    cd ${S}
+    # Add mozjs python-modules necessary
+    PYTHONPATH="$PYTHONPATH:${S}/config:${S}/build"
+    for sub_dir in python testing/mozbase; do
+        for module_dir in `ls $sub_dir -1`;do
+            [ $module_dir = "virtualenv" ] && continue
+            if [ -d "${S}/$sub_dir/$module_dir" ];then
+                PYTHONPATH="$PYTHONPATH:${S}/$sub_dir/$module_dir"
+            fi
+        done
+    done
+    echo "$PYTHONPATH" > ${B}/PYTHONPATH
+    export PYTHONPATH=`cat ${B}/PYTHONPATH`
+
+    cd ${S}/js/src
+    autoconf213 --macrodir=${STAGING_DATADIR_NATIVE}/autoconf213 old-configure.in > old-configure
+    sed -i 's:refresh = True:refresh = False:g' ${S}/build/moz.configure/old.configure
+
+    cd ${B}
     ${S}/js/src/configure ${EXTRA_OECONF}
+
+    # Make standard Makefile checks pass
+    touch ${S}/js/src/configure
+    touch ${B}/config.status
 }
 
 do_compile_prepend() {
     export SHELL="/bin/sh"
-    export S
-    export PYTHONPATH
-    cd ${S}
-    for sub_dir in python testing/mozbase; do
-        for module_dir in `ls $sub_dir -1`;do
-            [ $module_dir = "virtualenv" ] && continue
-            if [ -d "${S}/$sub_dir/$module_dir" ];then
-                PYTHONPATH="$PYTHONPATH:${S}/$sub_dir/$module_dir"
-            fi
-        done
-    done
-    PYTHONPATH="$PYTHONPATH:${S}/config:${S}/build"
-    cd -
+    export PYTHONPATH=`cat ${B}/PYTHONPATH`
 }
 
 do_install_prepend() {
     export SHELL="/bin/sh"
-    export S
-    export PYTHONPATH
-    cd ${S}
-    for sub_dir in python testing/mozbase; do
-        for module_dir in `ls $sub_dir -1`;do
-            [ $module_dir = "virtualenv" ] && continue
-            if [ -d "${S}/$sub_dir/$module_dir" ];then
-                PYTHONPATH="$PYTHONPATH:${S}/$sub_dir/$module_dir"
-            fi
-        done
-    done
-    PYTHONPATH="$PYTHONPATH:${S}/config:${S}/build"
-    cd -
+    export PYTHONPATH=`cat ${B}/PYTHONPATH`
 }
 
 PACKAGES =+ "lib${BPN}"

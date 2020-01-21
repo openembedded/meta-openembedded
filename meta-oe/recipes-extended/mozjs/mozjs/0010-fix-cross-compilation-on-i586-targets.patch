@@ -13,18 +13,26 @@ Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
 
 Rebase to 52.8.1
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+Rebase to 60.9.0 (firefox-esr sources)
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- js/src/old-configure | 2 +-
+ js/src/old-configure.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
---- a/js/src/old-configure
-+++ b/js/src/old-configure
-@@ -3833,7 +3833,7 @@ AS='$(CC)'
+diff --git a/js/src/old-configure.in b/js/src/old-configure.in
+index 3d53ee1..11c3d5a 100644
+--- a/js/src/old-configure.in
++++ b/js/src/old-configure.in
+@@ -405,7 +405,7 @@ AS='$(CC)'
  AS_DASH_C_FLAG='-c'
  MOZ_USER_DIR=".mozilla"
  
 -MOZ_FIX_LINK_PATHS="-Wl,-rpath-link,${DIST}/bin -Wl,-rpath-link,${prefix}/lib"
 +MOZ_FIX_LINK_PATHS="-Wl,-rpath-link,${DIST}/bin"
  
- 
- 
+ dnl Configure platform-specific CPU architecture compiler options.
+ dnl ==============================================================
+-- 
+2.21.0
+

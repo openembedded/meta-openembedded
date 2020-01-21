@@ -8,10 +8,12 @@ Use oe's python environment rather than create one of host
 Upstream-Status: Inappropriate [oe specific]
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+Rebase to 60.9.0 (firefox-esr sources)
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
  build/moz.configure/init.configure | 18 ------------------
  configure.py                       | 10 +++++++++-
- js/src/old-configure               |  4 ++--
  3 files changed, 11 insertions(+), 21 deletions(-)
 
 --- a/build/moz.configure/init.configure
@@ -60,14 +62,3 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
  from mozbuild.configure import ConfigureSandbox
  from mozbuild.makeutil import Makefile
  from mozbuild.pythonutil import iter_modules_in_path
---- a/js/src/old-configure
-+++ b/js/src/old-configure
-@@ -9974,7 +9974,7 @@ if test "$JS_STANDALONE"; then
-   
- if test "$no_recursion" != yes; then
-   trap '' EXIT
--  if ! $PYTHON $_topsrcdir/build/subconfigure.py --list subconfigures --skip skip_subconfigures; then
-+  if ! PYTHONPATH=$_topsrcdir/python/mozbuild/ $PYTHON $_topsrcdir/build/subconfigure.py --list subconfigures --skip skip_subconfigures; then
-       exit 1
-   fi
- fi
