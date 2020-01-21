@@ -23,6 +23,8 @@ UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
 SYSTEMD_SERVICE_${PN} = "drbd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
+DEPENDS = "flex-native"
+
 inherit autotools-brokensep systemd
 
 EXTRA_OECONF = " \
