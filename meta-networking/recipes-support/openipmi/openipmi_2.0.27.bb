@@ -11,7 +11,7 @@ DEPENDS = " \
     net-snmp \
     openssl \
     popt \
-    python \
+    python3 \
     swig-native \
     readline \
     "
