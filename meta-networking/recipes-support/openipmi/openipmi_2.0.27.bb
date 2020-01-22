@@ -43,7 +43,7 @@ inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d syste
 
 EXTRA_OECONF = "--disable-static \
                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
-                --with-python='${STAGING_BINDIR_NATIVE}/python-native/python' \
+                --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
                 --with-pythoninstall='${PYTHON_SITEPACKAGES_DIR}' \
                 --with-glibver=2.0"
 
