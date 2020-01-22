@@ -27,7 +27,7 @@ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/ntop/files/ntop/Stable"
 
 inherit autotools-brokensep useradd python3native pkgconfig systemd
 
-DEPENDS = "geoip rrdtool python zlib libpcap gdbm"
+DEPENDS = "geoip rrdtool python3 zlib libpcap gdbm"
 
 PACKAGECONFIG ??= "openssl snmp plugins"
 PACKAGECONFIG[openssl] = "--with-ssl, --without-ssl, openssl, openssl"
