@@ -29,5 +29,5 @@ PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
 EXTRA_OEMESON_append = " -Dpython=python3"
 
 BBCLASSEXTEND = "native"
-RDEPENDS_${PN} = "python-pkgutil"
+RDEPENDS_${PN} = "python3-pkgutil"
 RDEPENDS_${PN}_class-native = ""
