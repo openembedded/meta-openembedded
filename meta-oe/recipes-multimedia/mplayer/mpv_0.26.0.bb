@@ -81,3 +81,5 @@ adjust_waf_perms() {
 do_patch[postfuncs] += "adjust_waf_perms"
 
 FILES_${PN} += "${datadir}/icons"
+
+PNBLACKLIST[mpv] = "Needs forward porting to use python3"
