@@ -113,13 +113,14 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     giflib icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
     kconfig-frontends lemon libedit libgee libsombok3 \
     libubox log4cplus lshw ltrace lua mcpp memstat mercurial \
-    mpich msgpack-c nlohmann-json nodejs openocd pax-utils \
+    mpich msgpack-c nlohmann-json openocd pax-utils \
     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
     protobuf protobuf-c python3-distutils-extra \
     python-cpuset python-distutils-extra python-futures python-pygobject \
     rapidjson serialcheck sip3 sip tclap uftrace uw-imap valijson \
     xmlrpc-c yajl yasm \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
+    ${@bb.utils.contains("BBPATH", "meta-python2", "nodejs", "", d)} \
     "
 
 RDEPENDS_packagegroup-meta-oe-devtools_remove_armv5 = "uftrace nodejs"
