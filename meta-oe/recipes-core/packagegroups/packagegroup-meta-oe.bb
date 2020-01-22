@@ -241,7 +241,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     libgpiod libiio libjs-jquery libjs-sizzle liblinebreak libmicrohttpd \
     libmxml liboauth libol liboop libp11 libraw1394 libsmi libsoc libssh2 \
     libssh libtar libteam libtinyxml2 libtinyxml libusbg libusb-compat libutempter \
-    links lio-utils lockdev log4c log4cpp logwarn libdevmapper lvm2 \
+    links lockdev log4c log4cpp logwarn libdevmapper lvm2 \
     mailcap mbuffer mg minini \
     multipath-tools nano neon nmon numactl onig openct openldap \
     opensc wbxml2 p910nd pcsc-lite picocom libotr pidgin \
@@ -260,6 +260,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     procmail \
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit", "udisks2 upower", "", d)} \
     ${NE10} \
+    ${@bb.utils.contains("BBPATH", "meta-python2", "lio-utils", "", d)} \
     "
 
 RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
