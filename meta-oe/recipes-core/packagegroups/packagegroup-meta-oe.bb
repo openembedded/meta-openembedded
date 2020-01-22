@@ -65,11 +65,12 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
     libuv libwebsockets linuxptp lirc loudmouth \
     modemmanager mosh  \
     paho-mqtt-c phonet-utils rabbitmq-c rfkill rtorrent \
-    ser2net smstools3 telepathy-glib telepathy-idle thrift \
+    ser2net smstools3 telepathy-glib thrift \
     usbmuxd zabbix zeromq \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obex-data-server", "", d)} \
     libmikmod \
     obexftp openobex libnet \
+    ${@bb.utils.contains("BBPATH", "meta-python2", "telepathy-idle", "", d)} \
     "
 RDEPENDS_packagegroup-meta-oe-connectivity_append_libc-glibc = " wvstreams wvdial"
 
