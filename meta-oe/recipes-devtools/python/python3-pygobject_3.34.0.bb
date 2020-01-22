@@ -31,8 +31,3 @@ EXTRA_OEMESON_append = " -Dpython=python3"
 BBCLASSEXTEND = "native"
 RDEPENDS_${PN} = "python-pkgutil"
 RDEPENDS_${PN}_class-native = ""
-
-do_install_append() {
-    # Remove files that clash with python3-pygobject; their content is same
-    rm -r ${D}${includedir}/pygobject-3.0/pygobject.h ${D}${libdir}/pkgconfig
-}
