@@ -11,8 +11,6 @@ inherit pypi setuptools3
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-logging \
-    ${PYTHON_PN}-selectors34 \
     ${PYTHON_PN}-serpent \
     ${PYTHON_PN}-threading \
-    ${PYTHON_PN}-zlib \
     "
