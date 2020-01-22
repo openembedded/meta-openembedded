@@ -101,8 +101,9 @@ RDEPENDS_packagegroup-meta-oe-bsp_remove_riscv32 = "efivar efibootmgr"
 
 RDEPENDS_packagegroup-meta-oe-dbs ="\
     leveldb libdbi mariadb mariadb-native \
-    mysql-python postgresql psqlodbc rocksdb soci \
+    postgresql psqlodbc rocksdb soci \
     sqlite \
+    ${@bb.utils.contains("BBPATH", "meta-python2", "mysql-python", "", d)} \
     "
 
 RDEPENDS_packagegroup-meta-oe-devtools ="\
