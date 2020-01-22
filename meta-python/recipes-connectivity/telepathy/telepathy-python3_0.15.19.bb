@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
                     file://src/utils.py;beginline=1;endline=17;md5=9a07d1a9791a7429a14e7b25c6c86822"
 
 DEPENDS = "libxslt-native"
-RDEPENDS_${PN} += "python-dbus"
 
 SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-python/telepathy-python-${PV}.tar.gz \
            file://parallel_make.patch \
@@ -32,3 +31,4 @@ do_install_append () {
     rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
     rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
 }
+RDEPENDS_${PN} += "python3-dbus"
