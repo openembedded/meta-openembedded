@@ -30,7 +30,7 @@ SRC_URI[sha256sum] = "9f453c8cc5669e46e38f977764d49a36295bf0d023619d9aac782e6bb3
 
 S = "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
 
-inherit autotools pkgconfig perlnative pythonnative
+inherit autotools pkgconfig perlnative ${@bb.utils.contains("BBPATH", "meta-python2", "pythonnative", "", d)}
 
 inherit features_check
 CONFLICT_DISTRO_FEATURES_mipsarchn32 = "ld-is-gold"

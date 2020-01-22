@@ -5,7 +5,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=75859989545e37968a99b631ef42722e"
 SECTION = "System/Management"
 
-inherit setuptools
+inherit ${@bb.utils.contains("BBPATH", "meta-python2", "setuptools", "", d)}
 
 DEPENDS = "python-native python-pywbem-native python-m2crypto python-pywbem"
 

@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/Datera/lio-utils.git \
 SRCREV = "0ac9091c1ff7a52d5435a4f4449e82637142e06e"
 S = "${WORKDIR}/git"
 
-inherit distutils
+inherit ${@bb.utils.contains("BBPATH", "meta-python2", "distutils", "", d)}
 
 EXTRA_OEMAKE += "DESTDIR=${D}"
 
@@ -69,4 +69,5 @@ python() {
     if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
         raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
 }
+
 

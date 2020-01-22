@@ -16,7 +16,7 @@ SRCREV = "fef25c41efb9bde0614ea477d0b90bd9565ae0b4"
 S = "${WORKDIR}/git"
 R = "${RECIPE_SYSROOT}"
 
-inherit distutils
+inherit ${@bb.utils.contains("BBPATH", "meta-python2", "distutils", "", d)}
 
 GUIDER_OBJ = "guider.pyc"
 GUIDER_SCRIPT = "guider"
