@@ -117,7 +117,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
     protobuf protobuf-c python3-distutils-extra \
     python-cpuset python-distutils-extra python-futures python-pygobject \
-    rapidjson serialcheck sip3 sip tclap uftrace uw-imap valijson \
+    rapidjson serialcheck sip3 tclap uftrace uw-imap valijson \
     xmlrpc-c yajl yasm \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
     ${@bb.utils.contains("BBPATH", "meta-python2", "nodejs", "", d)} \
