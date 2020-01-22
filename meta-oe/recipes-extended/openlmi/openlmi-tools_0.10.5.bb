@@ -5,7 +5,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=75859989545e37968a99b631ef42722e"
 SECTION = "System/Management"
 
-inherit setuptools3
+inherit setuptools
 
 DEPENDS = "python-native python-pywbem-native python-m2crypto python-pywbem"
 
@@ -21,6 +21,6 @@ do_configure_prepend() {
 }
 
 python() {
-    if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
-        raise bb.parse.SkipRecipe('Requires meta-python to be present.')
+    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
+        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
 }
