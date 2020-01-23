@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/Datera/lio-utils.git \
 SRCREV = "0ac9091c1ff7a52d5435a4f4449e82637142e06e"
 S = "${WORKDIR}/git"
 
-inherit ${@bb.utils.contains("BBPATH", "meta-python2", "distutils", "", d)}
+inherit ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "distutils", "", d)}
 
 EXTRA_OEMAKE += "DESTDIR=${D}"
 
