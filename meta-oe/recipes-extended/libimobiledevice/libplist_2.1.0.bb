@@ -4,7 +4,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07 \
                     file://COPYING.LESSER;md5=6ab17b41640564434dda85c06b7124f7"
 
-DEPENDS = "libxml2 glib-2.0 swig python"
+DEPENDS = "libxml2 glib-2.0 swig python3"
 
 inherit autotools pkgconfig python3native
 
