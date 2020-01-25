@@ -16,44 +16,35 @@ DEPENDS = "uthash"
 
 SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
            file://mosquitto.init \
+           file://1568.patch \
+           file://1569.patch \
+           file://1570.patch \
+           file://1571.patch \
 "
 
 SRC_URI[md5sum] = "24a0e567c845b3e41b75e237d200edf8"
 SRC_URI[sha256sum] = "7df23c81ca37f0e070574fe74414403cf25183016433d07add6134366fb45df6"
 
-inherit systemd update-rc.d useradd
+inherit systemd update-rc.d useradd cmake
 
-PACKAGECONFIG ??= "ssl uuid \
+PACKAGECONFIG ??= "ssl dlt websockets dns-srv\
                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
                   "
 
-PACKAGECONFIG[dns-srv] = "WITH_SRV=yes,WITH_SRV=no,c-ares"
-PACKAGECONFIG[ssl] = "WITH_TLS=yes WITH_TLS_PSK=yes,WITH_TLS=no WITH_TLS_PSK=no,openssl"
-PACKAGECONFIG[uuid] = "WITH_UUID=yes,WITH_UUID=no,util-linux"
-PACKAGECONFIG[systemd] = "WITH_SYSTEMD=yes,WITH_SYSTEMD=no,systemd"
-PACKAGECONFIG[websockets] = "WITH_WEBSOCKETS=yes,WITH_WEBSOCKETS=no,libwebsockets"
+PACKAGECONFIG[dns-srv] = "-DWITH_SRV=ON,-DWITH_SRV=OFF,c-ares"
+PACKAGECONFIG[ssl] = "-DWITH_TLS=ON -DWITH_TLS_PSK=ON -DWITH_EC=ON,-DWITH_TLS=OFF -DWITH_TLS_PSK=OFF -DWITH_EC_OFF,openssl"
+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
+PACKAGECONFIG[websockets] = "-DWITH_WEBSOCKETS=ON,-DWITH_WEBSOCKETS=OFF,libwebsockets"
+PACKAGECONFIG[dlt] = "-DWITH_DLT=ON,-DWITH_DLT=OFF,dlt-daemon"
 
-EXTRA_OEMAKE = " \
-    prefix=${prefix} \
-    mandir=${mandir} \
-    localedir=${localedir} \
-    ${PACKAGECONFIG_CONFARGS} \
-    STRIP=/bin/true \
-    WITH_DOCS=no \
-    WITH_BUNDLED_DEPS=no \
+EXTRA_OECMAKE = " \
+    -DWITH_BUNDLED_DEPS=OFF \
+    -DWITH_ADNS=ON \
 "
 
-export LIB_SUFFIX = "${@d.getVar('baselib').replace('lib', '')}"
-
-do_install() {
-    oe_runmake 'DESTDIR=${D}' install
-
+do_install_append() {
     install -d ${D}${systemd_unitdir}/system/
     install -m 0644 ${S}/service/systemd/mosquitto.service.notify ${D}${systemd_unitdir}/system/mosquitto.service
-
-    install -d ${D}${sysconfdir}/mosquitto
-    install -m 0644 ${D}${sysconfdir}/mosquitto/mosquitto.conf.example \
-                    ${D}${sysconfdir}/mosquitto/mosquitto.conf
 
     install -d ${D}${sysconfdir}/init.d/
     install -m 0755 ${WORKDIR}/mosquitto.init ${D}${sysconfdir}/init.d/mosquitto
@@ -77,9 +68,9 @@ FILES_${PN} = "${sbindir}/mosquitto \
 
 CONFFILES_${PN} += "${sysconfdir}/mosquitto/mosquitto.conf"
 
-FILES_libmosquitto1 = "${libdir}/libmosquitto.so.1"
+FILES_libmosquitto1 = "${libdir}/libmosquitto.so.*"
 
-FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.1"
+FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.*"
 
 FILES_${PN}-clients = "${bindir}/mosquitto_pub \
                        ${bindir}/mosquitto_sub \
