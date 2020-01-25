@@ -73,15 +73,16 @@ do_compile_prepend () {
 	sed -i -e 's|^sys_lib_dlsearch_path_spec=.*|sys_lib_dlsearch_path_spec=""|g' ${B}/${TARGET_SYS}-libtool
 	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/${TARGET_SYS}-libtool
 }
+
 do_install_append() {
 	if [ -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service ]; then
-                install -d ${D}${systemd_system_unitdir}
+		install -d ${D}${systemd_system_unitdir}
 		mv \
 		${D}${nonarch_libdir}/systemd/system/boinc-client.service \
 		${D}${systemd_system_unitdir}/boinc-client.service
 		rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd/system \
-                ${D}${nonarch_libdir}/systemd \
-                ${D}${nonarch_libdir}
+		${D}${nonarch_libdir}/systemd \
+		${D}${nonarch_libdir}
 	fi
 }
 
