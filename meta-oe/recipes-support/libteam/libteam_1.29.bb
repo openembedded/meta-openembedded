@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/jpirko/libteam \
            file://0001-include-sys-select.h-for-fd_set-definition.patch \
            file://0002-teamd-Re-adjust-include-header-order.patch \
            file://0001-team_basic_test.py-disable-RedHat-specific-test.patch \
+           file://0001-team_basic_test.py-use-python3-interpreter.patch \
            file://run-ptest \
            "
 SRCREV = "e897f02bf2403d4859a99e090e34ea768b4c0540"
@@ -32,7 +33,7 @@ FILES_${PN}-utils = "${bindir}/bond2team \
 "
 
 RDEPENDS_${PN}-utils = "bash"
-RDEPENDS_${PN}-ptest = "python"
+RDEPENDS_${PN}-ptest = "python3-core"
 
 do_install_ptest() {
 	install ${S}/scripts/team_basic_test.py ${D}${PTEST_PATH}/
