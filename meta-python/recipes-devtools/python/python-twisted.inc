@@ -56,7 +56,23 @@ RDEPENDS_${PN} = "\
     ${PN}-zsh \
 "
 
-RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat"
+RDEPENDS_${PN}-core = "${PYTHON_PN}-core \ 
+                       ${PYTHON_PN}-zopeinterface \
+                       ${PYTHON_PN}-incremental \
+                       ${PYTHON_PN}-constantly \
+                       ${PYTHON_PN}-hyperlink \
+                       ${PYTHON_PN}-automat \
+                       ${PYTHON_PN}-pyserial \
+                       ${PYTHON_PN}-pyhamcrest \
+                       ${PYTHON_PN}-debugger \
+                       ${PYTHON_PN}-unixadmin \
+                       ${PYTHON_PN}-pkg-resources \
+                       ${PYTHON_PN}-misc \
+                       ${PYTHON_PN}-pkgutil \
+                       ${PYTHON_PN}-plistlib \
+                       ${PYTHON_PN}-setuptools \
+"
+
 RDEPENDS_${PN}-test = "${PN}"
 RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
 RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
