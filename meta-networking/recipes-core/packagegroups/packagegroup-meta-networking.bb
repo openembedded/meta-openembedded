@@ -112,7 +112,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
     iftop aoetools tcpslice tcpdump libtalloc memcached nuttcp netcat \
     netcat-openbsd fetchmail yp-tools ypbind-mt yp-tools \
     arptables macchanger nghttp2 strongswan fping \
-    dnssec-conf libesmtp cifs-utils open-isns \
+    libesmtp cifs-utils open-isns \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "libldb", "", d)} \
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "non-commercial", "netperf", "", d)} \
     ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "spice", "", d)} \
