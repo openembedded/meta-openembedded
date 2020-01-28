@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = " \
 SRC_URI = "git://github.com/OpenSC/${BPN}.git"
 
 S = "${WORKDIR}/git"
-# v1.25.1
-SRCREV = "2713cb09dcd90104cb7bceb5f14cd6f90834f7b1"
+# v1.26
+SRCREV = "c7a0cfa08ddc75d963a835d3588170af0e5f1115"
 
 DEPENDS = "zlib nettle gnutls gmp openssl nss nspr"
 
