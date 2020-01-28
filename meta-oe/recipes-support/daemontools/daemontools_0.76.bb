@@ -33,6 +33,7 @@ DEPENDS += "daemontools-native"
 DEPENDS_class-native = ""
 
 do_compile() {
+    echo "int main() { return 0; }" >${S}/src/chkshsgr.c
     ./package/compile
 }
 
