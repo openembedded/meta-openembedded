@@ -53,6 +53,7 @@ EXTRA_OECONF = " \
     --libdir=${libdir} \
     --disable-tests --disable-strip --disable-optimize \
     --disable-jemalloc \
+    --with-nspr-cflags='-I${STAGING_INCDIR}/nspr -I${STAGING_INCDIR}/nss3' \
     --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
 "
