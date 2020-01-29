@@ -2,8 +2,8 @@ require libgpiod.inc
 
 DEPENDS += "autoconf-archive-native"
 
-SRC_URI[md5sum] = "585b4bb431f99c4ba9b3ee58b9d494c1"
-SRC_URI[sha256sum] = "21ae8fd1f8dafc2eb2ba50e652390cf533d21351419a7426255895cb52e21b1c"
+SRC_URI[md5sum] = "b552bfa87685dfd728a1485e914bfae2"
+SRC_URI[sha256sum] = "b289b70e3d63a8e06205f7445d5342f4742277c267ce24a7c4d0017fff339e41"
 
 # enable cxx bindings
 PACKAGECONFIG ?= "cxx"
