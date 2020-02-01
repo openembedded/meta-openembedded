@@ -21,6 +21,10 @@ SRC_URI += "file://run-ptest \
 PACKAGECONFIG ??= "bpf vm"
 PACKAGECONFIG_remove_x86 = "bpf"
 PACKAGECONFIG_remove_arm = "bpf"
+# host ptrace.h is used to compile BPF target but mips ptrace.h is needed
+# progs/loop1.c:21:9: error: incomplete definition of type 'struct user_pt_regs'
+# m = PT_REGS_RC(ctx);
+PACKAGECONFIG_remove_qemumips = "bpf"
 
 PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
 PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
@@ -40,7 +44,7 @@ EXTRA_OEMAKE = '\
     CROSS_COMPILE=${TARGET_PREFIX} \
     ARCH=${ARCH} \
     CC="${CC}" \
-    CLANG="clang -fno-stack-protector" \
+    CLANG="clang -fno-stack-protector -arch ${ARCH} ${TOOLCHAIN_OPTIONS}" \
     AR="${AR}" \
     LD="${LD}" \
     DESTDIR="${D}" \
