@@ -13,6 +13,8 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
    tiff"
 
+LDFLAGS_append_riscv64 = " -latomic"
+
 # While this item does not require it, it depends on ffmpeg which does
 LICENSE_FLAGS = "commercial"
 
