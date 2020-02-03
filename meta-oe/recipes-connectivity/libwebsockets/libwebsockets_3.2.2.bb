@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ce87f3facb6f911c142c8bef9bfb380"
 DEPENDS = "zlib"
 
 S = "${WORKDIR}/git"
-SRCREV = "94931cad003faf9d316e698b557bbb6d245f1f91"
+SRCREV = "d880fe233020b74e058cbca95b5fb67823bbf258"
 SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v3.2-stable"
 
 inherit cmake pkgconfig
