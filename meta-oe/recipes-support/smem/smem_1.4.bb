@@ -29,3 +29,5 @@ RDEPENDS_${PN} += "python-textutils python-compression python-shell python-codec
 PACKAGES =+ "smemcap"
 
 FILES_smemcap = "${bindir}/smemcap"
+
+BBCLASSEXTEND = "native"
