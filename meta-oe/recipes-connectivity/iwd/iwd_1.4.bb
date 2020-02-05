@@ -1,17 +1,19 @@
-DESCRIPTION = "Wireless daemon for Linux"
+SUMMARY = "Wireless daemon for Linux"
+HOMEPAGE = "https://iwd.wiki.kernel.org/"
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
-inherit autotools manpages pkgconfig systemd python3native
-
 DEPENDS = "ell"
 
-SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
-           file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
-           file://0001-build-Support-missing-rawmemchr.patch \
-          "
+SRC_URI = " \
+    git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+    file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
+    file://0001-build-Support-missing-rawmemchr.patch \
+"
 SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
 S = "${WORKDIR}/git"
+
+inherit autotools manpages pkgconfig python3native systemd
 
 PACKAGECONFIG ??= " \
     client \
@@ -25,10 +27,15 @@ PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
 PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
 PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
 
-EXTRA_OECONF += "--enable-external-ell"
+EXTRA_OECONF = "--enable-external-ell"
 
-do_configure_prepend () {
-    mkdir -p ${S}/build-aux
+SYSTEMD_SERVICE_${PN} = " \
+    iwd.service \
+    ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)} \
+"
+
+do_configure_prepend() {
+    install -d ${S}/build-aux
 }
 
 do_install_append() {
@@ -36,9 +43,11 @@ do_install_append() {
     rmdir --ignore-fail-on-non-empty ${D}/${bindir}
 }
 
-FILES_${PN} += "${datadir}/dbus-1 ${nonarch_libdir}/modules-load.d ${systemd_unitdir}/network/"
-
-SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
+FILES_${PN} += " \
+    ${datadir}/dbus-1 \
+    ${nonarch_libdir}/modules-load.d \
+    ${systemd_unitdir}/network \
+"
 
 RDEPENDS_${PN} = "dbus"
 
