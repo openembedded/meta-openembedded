@@ -17,6 +17,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
     file://change-finding-path-of-nss.patch \
     file://makefile-ptest.patch \
     file://xmlsec1-examples-allow-build-in-separate-dir.patch \
+    file://0001-nss-nspr-fix-for-multilib.patch \
     file://run-ptest \
     "
 
@@ -31,7 +32,7 @@ inherit autotools-brokensep ptest pkgconfig
 PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
 PACKAGECONFIG[gnutls] = ",,gnutls"
 PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
-PACKAGECONFIG[nss] = "--with-nss=${STAGING_LIBDIR}/.. --with-nspr=${STAGING_LIBDIR}/..,,nss nspr"
+PACKAGECONFIG[nss] = "--with-nss=${STAGING_DIR_HOST} --with-nspr=${STAGING_DIR_HOST},,nss nspr"
 PACKAGECONFIG[openssl] = ",,openssl"
 PACKAGECONFIG[des] = ",--disable-des,,"
 
