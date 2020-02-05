@@ -9,9 +9,16 @@ SECTION = "Applications/System"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "http://www.selenic.com/${BPN}/download/${BP}.tar.gz"
-SRC_URI[md5sum] = "fe79435c3930389bfdb560255c802162"
-SRC_URI[sha256sum] = "2ea9f878f4cf3c276774c3f7e2a41977a1f2d64f98d2dcb6a15f1f3d84df61ec"
+HG_CHANGESET = "98273ce331bb"
+SRC_URI = "https://selenic.com/repo/${BPN}/archive/${HG_CHANGESET}.tar.bz2;downloadfilename=${BP}.tar.bz2 \
+           file://0001-smem-fix-support-for-source-option-python3.patch"
+SRC_URI[md5sum] = "51c3989779360f42b42ef46b2831be3a"
+SRC_URI[sha256sum] = "161131c686a6d9962a0e96912526dd46308e022d62e3f8acaed5a56fda8e08ce"
+
+UPSTREAM_CHECK_URI = "https://selenic.com/repo/smem/tags"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+
+S = "${WORKDIR}/${BPN}-${HG_CHANGESET}"
 
 do_compile() {
         ${CC} ${CFLAGS} ${LDFLAGS} smemcap.c -o smemcap
@@ -21,12 +28,15 @@ do_install() {
         install -d ${D}/${bindir}/
         install -d ${D}/${mandir}/man8
         install -m 0755 ${S}/smem ${D}${bindir}/
+        sed -i -e '1s,#!.*python.*,#!${USRBINPATH}/env python3,' ${D}${bindir}/smem
         install -m 0755 ${S}/smemcap ${D}${bindir}/
         install -m 0644 ${S}/smem.8 ${D}/${mandir}/man8/
 }
-RDEPENDS_${PN} += "python-textutils python-compression python-shell python-codecs"
 
-PACKAGES =+ "smemcap"
+RDEPENDS_${PN} = "python3-core python3-compression"
+RRECOMMENDS_${PN} = "python3-matplotlib python3-numpy"
+
+PACKAGE_BEFORE_PN = "smemcap"
 
 FILES_smemcap = "${bindir}/smemcap"
 
