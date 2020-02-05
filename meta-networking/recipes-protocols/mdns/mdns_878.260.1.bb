@@ -11,6 +11,17 @@ RPROVIDES_${PN} += "libdns_sd.so"
 SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${PV}.tar.gz \
            file://build.patch;patchdir=.. \
            file://mdns.service \
+           file://0001-Create-subroutine-for-cleaning-recent-interfaces.patch;patchdir=.. \
+           file://0002-Create-subroutine-for-tearing-down-an-interface.patch;patchdir=.. \
+           file://0003-Track-interface-socket-family.patch;patchdir=.. \
+           file://0004-Use-list-for-changed-interfaces.patch;patchdir=.. \
+           file://0005-Handle-noisy-netlink-sockets.patch;patchdir=.. \
+           file://0006-Remove-unneeded-function.patch;patchdir=.. \
+           file://0007-Indicate-loopback-interface-to-mDNS-core.patch;patchdir=.. \
+           file://0008-Mark-deleted-interfaces-as-being-changed.patch;patchdir=.. \
+           file://0009-Fix-possible-NULL-dereference.patch;patchdir=.. \
+           file://0010-Handle-errors-from-socket-calls.patch;patchdir=.. \
+           file://0011-Change-a-dynamic-allocation-to-file-scope-variable.patch;patchdir=.. \
            "
 SRC_URI[md5sum] = "aeb92d838a4aa2402ef128ed501484eb"
 SRC_URI[sha256sum] = "3cc71582e8eee469c2de8ecae1d769e7f32b3468dfb7f2ca77f1dee1f30a7d1e"
