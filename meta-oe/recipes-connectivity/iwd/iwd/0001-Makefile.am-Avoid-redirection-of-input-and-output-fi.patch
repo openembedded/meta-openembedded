@@ -1,4 +1,4 @@
-From f2a2b9f445ab1e31fbb27a74744e9a2ededfce17 Mon Sep 17 00:00:00 2001
+From 46fc0e197598579dc05e42f137e84f86a9b926e9 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Mon, 4 Nov 2019 16:38:04 -0800
 Subject: [PATCH] Makefile.am: Avoid redirection of input and output files
@@ -15,26 +15,24 @@ make[1]: *** [Makefile:3544: monitor/iwmon.1] Error 1
 Upstream-Status: Pending
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  Makefile.am | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 823b7d02..1bd0005c 100644
+index 8c69d9f4..35a25fc0 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -626,8 +626,9 @@ SED_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(SED) \
+@@ -629,8 +629,9 @@ SED_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(SED) \
  		< $< > $@
  
  if RUN_RST2MAN
 -RST2MAN_PROCESS = $(AM_V_GEN)$(RST2MAN) --strict --no-raw --no-generator \
--			--no-datestamp < $< > $@
+-			--no-datestamp $< $@
 +RST2MAN_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && \
 +			$(AM_V_GEN)$(RST2MAN) --strict --no-raw \
 +			--no-generator --no-datestamp $< $@
  else
  RST2MAN_PROCESS = $(AM_V_GEN)test -f $@ || \
  		{ echo "Generated manual page $@ does not exist"; false; }
--- 
-2.24.0
-

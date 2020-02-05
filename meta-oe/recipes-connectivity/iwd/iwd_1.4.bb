@@ -4,12 +4,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 inherit autotools pkgconfig systemd python3native
 
-DEPENDS = "ell readline dbus python3-docutils-native"
+DEPENDS = "ell readline python3-docutils-native"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
            file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
+           file://0001-build-Support-missing-rawmemchr.patch \
           "
-SRCREV = "971e1d2038a203ad43bd2278a811a9e5ec8d52db"
+SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
@@ -31,6 +32,8 @@ do_install_append() {
 FILES_${PN} += "${datadir}/dbus-1 ${nonarch_libdir}/modules-load.d ${systemd_unitdir}/network/"
 
 SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
+
+RDEPENDS_${PN} = "dbus"
 
 RRECOMMENDS_${PN} = "\
     kernel-module-pkcs7-message \
