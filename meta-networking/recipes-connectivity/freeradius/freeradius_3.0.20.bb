@@ -26,12 +26,12 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x; \
     file://freeradius-fix-quoting-for-BUILT_WITH.patch \
     file://freeradius-fix-error-for-expansion-of-macro.patch \
     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-    file://0001-su-to-radiusd-user-group-when-rotating-logs.patch \
+    file://0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch \
     file://radiusd.service \
     file://radiusd-volatiles.conf \
 "
 
-SRCREV = "ab4c767099f263a7cd4109bcdca80ee74210a769"
+SRCREV = "d94c953ab9602a238433ba18533111b845fd8e9e"
 
 PARALLEL_MAKE = ""
 
@@ -61,9 +61,11 @@ EXTRA_OECONF = " --enable-strict-dependencies \
         --without-rlm_sql_iodbc \
         --without-rlm_sql_oracle \
         --without-rlm_sql_sybase \
+        --without-rlm_sql_mongo \
         --without-rlm_sqlhpwippool \
         --without-rlm_securid \
         --without-rlm_unbound \
+        --without-rlm_python \
         ac_cv_path_PERL=${bindir}/perl \
         ax_cv_cc_builtin_choose_expr=no \
         ax_cv_cc_builtin_types_compatible_p=no \
@@ -86,7 +88,7 @@ PACKAGECONFIG[unixodbc] = "--with-rlm_sql_unixodbc,--without-rlm_sql_unixodbc,un
 PACKAGECONFIG[postgresql] = "--with-rlm_sql_postgresql,--without-rlm_sql_postgresql,postgresql"
 PACKAGECONFIG[pcre] = "--with-pcre,--without-pcre,libpcre"
 PACKAGECONFIG[perl] = "--with-perl=${STAGING_BINDIR_NATIVE}/perl-native/perl --with-rlm_perl,--without-rlm_perl,perl-native perl,perl"
-PACKAGECONFIG[python] = "--with-rlm_python --with-rlm-python-bin=${STAGING_BINDIR_NATIVE}/python-native/python --with-rlm-python-include-dir=${STAGING_INCDIR}/${PYTHON_DIR},--without-rlm_python,python-native python"
+PACKAGECONFIG[python3] = "--with-rlm_python3 --with-rlm-python3-bin=${STAGING_BINDIR_NATIVE}/python3-native/python3 --with-rlm-python3-include-dir=${STAGING_INCDIR}/${PYTHON_DIR},--without-rlm_python3,python3-native python3"
 PACKAGECONFIG[rest] = "--with-rlm_rest,--without-rlm_rest,curl json-c"
 PACKAGECONFIG[ruby] = "--with-rlm_ruby,--without-rlm_ruby,ruby"
 PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl"
@@ -145,23 +147,24 @@ do_install() {
     rm -f ${D}/${sbindir}/rc.radiusd
     chmod +x ${D}/${sysconfdir}/init.d/radiusd
     rm -rf ${D}/${localstatedir}/run/
+    rm -rf ${D}/${localstatedir}/log/
     install -m 0644 ${WORKDIR}/volatiles.58_radiusd  ${D}${sysconfdir}/default/volatiles/58_radiusd
 
     chown -R radiusd:radiusd ${D}/${sysconfdir}/raddb/
     chown -R radiusd:radiusd ${D}/${localstatedir}/lib/radiusd
 
     # For systemd
-    install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/radiusd.service ${D}${systemd_unitdir}/system
-    sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
-           -e 's,@SBINDIR@,${sbindir},g' \
-           -e 's,@STATEDIR@,${localstatedir},g' \
-           -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-           ${D}${systemd_unitdir}/system/radiusd.service
-
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/radiusd.service ${D}${systemd_unitdir}/system
+        sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
+            -e 's,@SBINDIR@,${sbindir},g' \
+            -e 's,@STATEDIR@,${localstatedir},g' \
+            -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+            ${D}${systemd_unitdir}/system/radiusd.service
+
         install -d ${D}${sysconfdir}/tmpfiles.d/
-        install -m 0644 ${WORKDIR}/radiusd-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/
+        install -m 0644 ${WORKDIR}/radiusd-volatiles.conf ${D}${sysconfdir}/tmpfiles.d/radiusd.conf
     fi
 }
 
@@ -171,7 +174,7 @@ pkg_postinst_${PN} () {
     if [ -z "$D" ]; then
         if command -v systemd-tmpfiles >/dev/null; then
             # create /var/log/radius, /var/run/radiusd
-            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/radiusd-volatiles.conf
+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/radiusd.conf
         elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
             ${sysconfdir}/init.d/populate-volatile.sh update
         fi
@@ -210,9 +213,9 @@ FILES_${PN}-perl = "${libdir}/rlm_perl.so* \
     ${sysconfdir}/raddb/mods-available/perl \
 "
 
-FILES_${PN}-python = "${libdir}/rlm_python.so* \
-    ${sysconfdir}/raddb/mods-config/python \
-    ${sysconfdir}/raddb/mods-available/python \
+FILES_${PN}-python = "${libdir}/rlm_python3.so* \
+    ${sysconfdir}/raddb/mods-config/python3 \
+    ${sysconfdir}/raddb/mods-available/python3 \
 "
 
 FILES_${PN}-mysql = "${libdir}/rlm_sql_mysql.so* \
