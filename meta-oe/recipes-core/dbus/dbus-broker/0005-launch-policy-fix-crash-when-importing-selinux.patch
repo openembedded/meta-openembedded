@@ -1,0 +1,50 @@
+From d28e59c451375e8b08fa431b1d64cb3ce9f078ee Mon Sep 17 00:00:00 2001
+From: Luca Boccassi <luca.boccassi@microsoft.com>
+Date: Fri, 25 Oct 2019 21:04:36 +0100
+Subject: [PATCH 1/2] launch/policy: fix crash when importing <selinux>
+
+If a policy contains a <selinux> element, dbus-broker-launch crashes:
+
+Oct 22 12:02:51 localhost dbus-broker-launch[885]: dbus-broker-launch: ../dbus-broker-19/src/launch/policy.c:232: policy_import_verdict: Assertion `cnode->parent->type == CONFIG_NODE_POLICY' failed.
+
+Minimal config to reproduce:
+
+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+  <selinux>
+    <associate own="com.example1" context="system_u:object_r:example1_t" />
+    <associate own="com.example2" context="system_u:object_r:example2_t" />
+  </selinux>
+</busconfig>
+
+policy_import_verdict is being called on an associate element,
+but not only it cannot work as that function checks that the
+parent is a policy node (but it's a selinux node in this case),
+it is also not necessary as the selinux node only defines ownership,
+it does not have allow/deny.
+
+Fixes #212
+
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+Upstream-Status: merged https://github.com/bus1/dbus-broker/pull/213
+---
+ src/launch/policy.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/launch/policy.c b/src/launch/policy.c
+index a8ba8e7..466e4bd 100644
+--- a/src/launch/policy.c
++++ b/src/launch/policy.c
+@@ -613,8 +613,6 @@ static int policy_import_selinux(Policy *policy, ConfigNode *cnode) {
+         if (r)
+                 return error_trace(r);
+ 
+-        policy_import_verdict(policy, record, cnode);
+-
+         record->selinux.name = cnode->associate.own;
+         record->selinux.context = cnode->associate.context;
+ 
+-- 
+2.20.1
+

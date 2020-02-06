@@ -11,6 +11,8 @@ SRC_URI += " file://0001-launch-improve-error-handling-for-opendir.patch"
 SRC_URI += " file://0002-metrics-change-the-constant-used-for-invalid-timesta.patch"
 SRC_URI += " file://0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch"
 SRC_URI += " file://0004-launcher-fix-build-with-musl-libc.patch"
+SRC_URI += " file://0005-launch-policy-fix-crash-when-importing-selinux.patch"
+SRC_URI += " file://0006-launch-policy-fix-crash-when-exporting-selinux.patch"
 SRC_URI[md5sum] = "a17886a92ab1e0bc2e4b1a274339e388"
 SRC_URI[sha256sum] = "6fff9a831a514659e2c7d704e76867ce31ebcf43e8d7a62e080c6656f64cd39e"
 

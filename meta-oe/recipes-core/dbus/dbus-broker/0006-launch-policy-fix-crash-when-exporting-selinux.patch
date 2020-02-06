@@ -1,0 +1,59 @@
+From f1cdef4d98ddbfeeb4a688712d54b3adc89bfe26 Mon Sep 17 00:00:00 2001
+From: Luca Boccassi <luca.boccassi@microsoft.com>
+Date: Fri, 25 Oct 2019 21:05:43 +0100
+Subject: [PATCH 2/2] launch/policy: fix crash when exporting <selinux>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+If a policy contains a <selinux> element, dbus-broker-launch crashes:
+
+[   30.048705] dbus-broker-launch[221]: ERROR policy_export @ ../dbus-broker-21/src/launch/policy.c +1142: Return code 1
+[   30.050963] dbus-broker-launch[221]:       launcher_add_listener @ ../dbus-broker-21/src/launch/launcher.c +1130
+[   30.079620] dbus-broker[228]: Dispatched 0 messages @ 0(±0)μs / message.
+[   30.082613] dbus-broker-launch[221]:       launcher_run @ ../dbus-broker-21/src/launch/launcher.c +1389
+[   30.084426] dbus-broker-launch[221]:       run @ ../dbus-broker-21/src/launch/main.c +153
+[   30.085797] dbus-broker-launch[221]:       main @ ../dbus-broker-21/src/launch/main.c +181
+[   30.087208] dbus-broker-launch[221]: Exiting due to fatal error: -131
+
+Minimal config to reproduce:
+
+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+  <selinux>
+    <associate own="com.example1" context="system_u:object_r:example1_t" />
+    <associate own="com.example2" context="system_u:object_r:example2_t" />
+  </selinux>
+</busconfig>
+
+As per the libsystemd API, sd_bus_message_append can return an int
+greater than 0 on success, which for example happens when processing
+vectors.
+The export function is treating every non-zero result as an error,
+which causes dbus-broker-launch to terminate.
+
+Fixes #212
+
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+Upstream-Status: merged https://github.com/bus1/dbus-broker/pull/213
+---
+ src/launch/policy.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/launch/policy.c b/src/launch/policy.c
+index 466e4bd..f91f11b 100644
+--- a/src/launch/policy.c
++++ b/src/launch/policy.c
+@@ -1138,7 +1138,7 @@ int policy_export(Policy *policy, sd_bus_message *m, uint32_t *at_console_uids,
+                 r = sd_bus_message_append(m, "(ss)",
+                                           i_record->selinux.name,
+                                           i_record->selinux.context);
+-                if (r)
++                if (r < 0)
+                         return error_origin(r);
+         }
+ 
+-- 
+2.20.1
+
