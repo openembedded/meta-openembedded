@@ -23,6 +23,7 @@ PACKAGECONFIG ??= "mbim qmi \
     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} \
 "
 
+PACKAGECONFIG[at] = "--with-at-command-via-dbus"
 PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,"
 PACKAGECONFIG[polkit] = "--with-polkit=yes,--with-polkit=no,polkit"
 # Support WWAN modems and devices which speak the Mobile Interface Broadband Model (MBIM) protocol.
