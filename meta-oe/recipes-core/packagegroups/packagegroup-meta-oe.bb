@@ -172,8 +172,8 @@ RDEPENDS_packagegroup-meta-oe-gnome ="\
     "
 
 RDEPENDS_packagegroup-meta-oe-graphics ="\
-    babl cairomm dietsplash directfb directfb-examples dnfdragora \
-    fbgrab fbida fontforge fvwm gegl gimp glm gphoto2 libgphoto2 \
+    cairomm dietsplash directfb directfb-examples dnfdragora \
+    fbgrab fbida fontforge fvwm glm gphoto2 libgphoto2 \
     gtkperf jasper leptonica libmng libsdl2-image libsdl2-mixer libsdl2-net \
     libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
     libvncserver libyui libyui-ncurses lxdm numlockx openbox openjpeg \
