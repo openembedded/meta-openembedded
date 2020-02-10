@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "zlib"
 DEPENDS_append_class-target = " protobuf-native"
 
-SRCREV = "d09d649aea36f02c03f8396ba39a8d4db8a607e4"
+SRCREV = "498de9f761bef56a032815ee44b6e6dbe0892cc4"
 
-SRC_URI = "git://github.com/google/protobuf.git;branch=3.10.x \
+SRC_URI = "git://github.com/google/protobuf.git;branch=3.11.x \
            file://run-ptest \
            file://0001-protobuf-fix-configure-error.patch \
            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
