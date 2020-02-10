@@ -35,7 +35,7 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
  build/moz.configure/init.configure            |  31 +-
  build/moz.configure/keyfiles.configure        |   4 +-
  build/moz.configure/old.configure             |  32 +-
- build/moz.configure/toolchain.configure       |  16 +-
+ build/moz.configure/toolchain.configure       |  18 +-
  build/moz.configure/util.configure            |   9 +-
  build/moz.configure/windows.configure         |  10 +-
  build/templates.mozbuild                      |   2 +-
@@ -451,6 +451,15 @@ index fc640c75e..c5508dfb7 100755
  def pgo_flags(compiler):
      if compiler.type in ('gcc', 'clang'):
          return namespace(
+@@ -1517,6 +1517,8 @@ def enable_gnu_linker(enable_gold_option, c_compiler, developer_options, build_e
+         gold = check_cmd_output(*detection_cmd).strip()
+         if not gold:
+             return
++        if isinstance(gold, bytes):
++            gold = gold.decode('utf-8')
+ 
+         goldFullPath = find_program(gold)
+         if goldFullPath is None:
 diff --git a/build/moz.configure/util.configure b/build/moz.configure/util.configure
 index 3284fd8b5..218813e2d 100644
 --- a/build/moz.configure/util.configure
