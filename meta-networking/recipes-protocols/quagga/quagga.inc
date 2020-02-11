@@ -117,7 +117,7 @@ do_install () {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d
-        echo "d /var/run/quagga 0755 quagga quagga -" \
+        echo "d /run/quagga 0755 quagga quagga -" \
         > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
     fi
 
