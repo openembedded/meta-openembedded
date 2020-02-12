@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/jpirko/libteam \
            file://0001-team_basic_test.py-use-python3-interpreter.patch \
            file://run-ptest \
            "
-SRCREV = "e897f02bf2403d4859a99e090e34ea768b4c0540"
+SRCREV = "471fb50d206e5a3f2eef9e4247329b51edc5c493"
 
 S = "${WORKDIR}/git"
 
