@@ -1,10 +1,10 @@
 SUMMARY = "Simple powerful teting with python"
 HOMEPAGE = "http://pytest.org"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=640061b8cee64b308a4d2f9f556c12f2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
 
-SRC_URI[md5sum] = "71a8eb2ab5efb76512d9a69bd6477034"
-SRC_URI[sha256sum] = "6b571215b5a790f9b41f19f3531c53a45cf6bb8ef2988bc1ff9afb38270b25fa"
+SRC_URI[md5sum] = "d5ef453f723be46d93e0795f3be86c88"
+SRC_URI[sha256sum] = "0d5fe9189a148acc3c3eb2ac8e1ac0742cb7618c084f3d228baaec0c254b318d"
 
 SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
                    "
