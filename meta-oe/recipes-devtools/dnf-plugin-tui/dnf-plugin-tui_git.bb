@@ -37,3 +37,4 @@ RDEPENDS_${PN} += " \
 "
 
 BBCLASSEXTEND = "nativesdk"
+PNBLACKLIST[dnf-plugin-tui] ?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not build correctly without package_rpm in PACKAGE_CLASSES', d)}"

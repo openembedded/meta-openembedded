@@ -172,7 +172,8 @@ RDEPENDS_packagegroup-meta-oe-gnome ="\
     "
 
 RDEPENDS_packagegroup-meta-oe-graphics ="\
-    cairomm dietsplash directfb directfb-examples dnfdragora \
+    cairomm dietsplash directfb directfb-examples \
+    ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnfdragora dnf-plugin-tui", "", d)} \
     fbgrab fbida fontforge fvwm glm gphoto2 libgphoto2 \
     gtkperf jasper leptonica libmng libsdl2-image libsdl2-mixer libsdl2-net \
     libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
@@ -189,6 +190,8 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     font-misc-misc xorg-fonts-100dpi liblbxutil libxaw libxkbui libxpresent xserver-common \
     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "freeglut libsdl2-ttf", "", d)} \
     "
+
+
 
 RDEPENDS_packagegroup-meta-oe-kernel ="\
     agent-proxy broadcom-bt-firmware cpupower \
