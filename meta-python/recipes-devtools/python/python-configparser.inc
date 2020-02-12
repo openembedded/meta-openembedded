@@ -5,9 +5,10 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
 
-SRC_URI[md5sum] = "bc1558ed941cb1acb80ff650726d5af8"
-SRC_URI[sha256sum] = "bc37850f0cc42a1725a796ef7d92690651bf1af37d744cc63161dac62cabee17"
+SRC_URI[md5sum] = "35926cc4b9133f1f9ca70a1fd2fdf237"
+SRC_URI[sha256sum] = "c7d282687a5308319bf3d2e7706e575c635b0a470342641c93bea0ea3b5331df"
 
+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 inherit pypi
 
 BBCLASSEXTEND = "native nativesdk"
