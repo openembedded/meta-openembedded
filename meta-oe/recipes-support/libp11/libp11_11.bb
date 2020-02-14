@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
 DEPENDS = "libtool openssl"
 
 SRC_URI = "git://github.com/OpenSC/libp11.git"
-SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
+SRCREV = "e1210903291b1de9eabcad26e740a4b2fbcca692"
 
 S = "${WORKDIR}/git"
 
