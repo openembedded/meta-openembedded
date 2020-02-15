@@ -10,9 +10,9 @@ SRC_URI = "http://gtkwave.sourceforge.net/${BP}.tar.gz"
 SRC_URI[md5sum] = "5a9a5913f9a02a333b2b23626f153fd7"
 SRC_URI[sha256sum] = "c325abf7cf26c53309a67c0ecaaf196774fa982a717a102c599ac8a516eeeaf7"
 
-inherit pkgconfig autotools gettext texinfo
-DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
-RDEPENDS_${PN} = "tk-lib"
+inherit pkgconfig autotools gettext texinfo mime mime-xdg
+DEPENDS += "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
+RDEPENDS_${PN} += "tk-lib"
 
 # depends on gtk+ which has this restriction
 inherit features_check
