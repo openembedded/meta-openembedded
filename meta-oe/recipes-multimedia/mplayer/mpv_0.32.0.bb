@@ -17,11 +17,7 @@ LICENSE_FLAGS = "commercial"
 SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
 SRC_URI = " \
     git://github.com/mpv-player/mpv;name=mpv \
-    https://www.freehackers.org/~tnagy/release/waf-2.0.19;name=waf;downloadfilename=waf;subdir=git \
-    file://python3.patch \
 "
-SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
-SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
 
 S = "${WORKDIR}/git"
 
@@ -102,11 +98,14 @@ EXTRA_OECONF = " \
     ${PACKAGECONFIG_CONFARGS} \
 "
 
-adjust_waf_perms() {
-    chmod +x ${S}/waf
-}
+do_patch[postfuncs] += "get_waf"
 
-do_patch[postfuncs] += "adjust_waf_perms"
+get_waf() {
+    cd ${S}
+    ./bootstrap.py
+    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/waf
+    cd -
+}
 
 FILES_${PN} += " \
     ${datadir}/icons \
