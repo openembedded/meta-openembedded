@@ -29,6 +29,7 @@ DEPENDS = " \
     libmng \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)} \
 "
+DEPENDS_append_libc-musl = " libexecinfo"
 
 inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
 
