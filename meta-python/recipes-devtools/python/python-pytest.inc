@@ -1,4 +1,4 @@
-SUMMARY = "Simple powerful teting with python"
+SUMMARY = "Simple powerful testing with python"
 HOMEPAGE = "http://pytest.org"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
