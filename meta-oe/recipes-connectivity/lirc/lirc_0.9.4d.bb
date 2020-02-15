@@ -6,8 +6,7 @@ DESCRIPTION_append_lirc-nslu2example = " This package contains a working config 
 HOMEPAGE = "http://www.lirc.org"
 SECTION = "console/network"
 LICENSE = "GPLv2"
-DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19"
-
+DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 python3-pyyaml"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
@@ -61,9 +60,9 @@ PACKAGES =+ "${PN}-contrib ${PN}-exec ${PN}-plugins ${PN}-python"
 
 RDEPENDS_${PN} = "bash"
 RDEPENDS_${PN}-exec = "${PN}"
-RDEPENDS_${PN}-python = "python"
+RDEPENDS_${PN}-python = "python3-shell python3-pyyaml python3-datetime python3-netclient python3-stringold"
 
-RRECOMMENDS_lirc = "${PN}-exec ${PN}-plugins"
+RRECOMMENDS_${PN} = "${PN}-exec ${PN}-plugins"
 
 FILES_${PN}-plugins = "${libdir}/lirc/plugins/*.so ${datadir}/lirc/configs"
 FILES_${PN}-contrib = "${datadir}/lirc/contrib"
@@ -73,8 +72,7 @@ FILES_${PN} += "${systemd_unitdir}/system/lircd.service"
 FILES_${PN} += "${systemd_unitdir}/system/lircd.socket"
 FILES_${PN} += "${libdir}/tmpfiles.d/lirc.conf"
 FILES_${PN}-dbg += "${libdir}/lirc/plugins/.debug"
-FILES_${PN}-python += "${libdir}/python*/site-packages"
-
+FILES_${PN}-python += "${bindir}/irdb-get ${bindir}/irtext2udp ${bindir}/lircd-setup ${bindir}/pronto2lirc ${libdir}/python*/site-packages"
 
 INITSCRIPT_PACKAGES = "lirc lirc-exec"
 INITSCRIPT_NAME_lirc-exec = "lircexec"
