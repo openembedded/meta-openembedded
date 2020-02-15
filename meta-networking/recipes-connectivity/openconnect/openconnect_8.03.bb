@@ -9,7 +9,7 @@ SRC_URI = " \
 SRCREV = "ea73851969ae7a6ea54fdd2d2b8c94776af24b2a"
 
 DEPENDS = "vpnc libxml2 krb5 gettext-native"
-RDEPENDS_${PN} = "bash python3-core"
+RDEPENDS_${PN} = "bash python3-core vpnc-script"
 
 PACKAGECONFIG ??= "gnutls lz4 libproxy"
 
@@ -25,5 +25,5 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
+EXTRA_OECONF += "--with-vpnc-script=${sysconfdir}/vpnc/vpnc-script \
                  --disable-static"
