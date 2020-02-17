@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}                \
            file://0001-Remove-maes-option-from-cross-compilation.patch        \
            file://0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch \
            file://0003-Add-fPIC-option.patch                                  \
+           file://0001-Add-RISCV-support-to-GetProgramCounter.patch \
           "
 
 S = "${WORKDIR}/git"
