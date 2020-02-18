@@ -15,5 +15,5 @@ inherit cmake
 
 SRC_URI = "https://libzip.org/download/libzip-${PV}.tar.xz"
 
-SRC_URI[md5sum] = "c0245c3e68e472d75d9f8572e24eb5d0"
-SRC_URI[sha256sum] = "a6cd804b4b3cffd997bd563fec693eb7eb052c225909a98a620689c2befb699b"
+SRC_URI[md5sum] = "f9a228619aab2446addc9c9e0e2de149"
+SRC_URI[sha256sum] = "705dac7a671b3f440181481e607b0908129a9cf1ddfcba75d66436c0e7d33641"
