@@ -9,8 +9,8 @@ DEPENDS = "openssl"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz \
            "
-SRC_URI[md5sum] = "c2b836a919cdd4ec53b06b70e0aa3e63"
-SRC_URI[sha256sum] = "3f33f11dd08c3e8cc3e9d18eec686b1626d4818f4d5a72791507bbc4dce6a9a0"
+SRC_URI[md5sum] = "039b49a4f41f8544a51d82d2f4599dfc"
+SRC_URI[sha256sum] = "e21f6b3326f29fdb0c4786b5602aa4b9e668805424d0708eb42be6395c1ca630"
 
 inherit autotools gettext python3-dir python3native
 
