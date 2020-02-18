@@ -20,10 +20,11 @@ HOMEPAGE = "http://cfengine.com"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
 
-SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
-
-SRC_URI[md5sum] = "d59bd8c95620da816c382f749d425860"
-SRC_URI[sha256sum] = "1c50e3d8c702097e13a21258626d936d6ff2e6492e893dfe286ff0d6204d7a65"
+SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
+           file://python3.patch \
+           "
+SRC_URI[md5sum] = "6d456fdd9bd24ff6617eeaa05efae602"
+SRC_URI[sha256sum] = "4a071c0c4ba7df9bad93144cff5fbc0566e5172afd66201072e3193b76c55a38"
 
 inherit autotools
 
@@ -31,6 +32,10 @@ export EXPLICIT_VERSION="${PV}"
 
 EXTRA_OECONF = "--prefix=${datadir}/cfengine"
 
+do_install_append() {
+    rm -rf ${D}${datadir}/cfengine/modules/packages/{zypper,yum}
+}
+
 FILES_${PN} = "${datadir}/cfengine"
 
-RDEPENDS_${PN} += "python-core"
+RDEPENDS_${PN} += "python3-core"

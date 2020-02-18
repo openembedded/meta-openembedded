@@ -11,18 +11,17 @@ its lifecycle. CFEngine takes systems from Build to Deploy, Manage and Audit."
 HOMEPAGE = "http://cfengine.com"
 
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
 
 DEPENDS = "attr tokyocabinet"
 
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
            file://set-path-of-default-config-file.patch \
            "
+SRC_URI[md5sum] = "d4dabfa46d8afa151be5610f184354e7"
+SRC_URI[sha256sum] = "fa53e137f850eb268a8e7ae4578b5db5dc383656341f5053dc1a353ed0288265"
 
-SRC_URI[md5sum] = "33ef12260db4b430352229f37f7cb0e5"
-SRC_URI[sha256sum] = "d71ba98a272390c6fa8bc20e8ea27f0050a0a72a3e6b206a4762b4646be332ec"
-
-inherit autotools systemd
+inherit autotools-brokensep systemd
 
 export EXPLICIT_VERSION="${PV}"
 
@@ -67,6 +66,7 @@ EOF
         install -m 0755 -D ${D}${sysconfdir}/init.d/cfengine3 ${D}${datadir}/${BPN}/cfengine3
         sed -i -e 's#/etc/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
     fi
+    rm -rf ${D}${datadir}/cfengine/modules/packages/zypper
 }
 
 RDEPENDS_${PN} += "${BPN}-masterfiles"
