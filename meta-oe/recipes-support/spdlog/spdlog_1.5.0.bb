@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRCREV = "a7148b718ea2fabb8387cb90aee9bf448da63e65"
-SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x;"
+SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x;tag=v1.5.0;"
 
 S = "${WORKDIR}/git"
 
@@ -17,3 +16,4 @@ inherit cmake
 # Header-only library
 RDEPENDS_${PN}-dev = ""
 RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+
