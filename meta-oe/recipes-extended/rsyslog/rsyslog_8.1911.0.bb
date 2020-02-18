@@ -77,6 +77,12 @@ PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
 PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
 PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
 
+do_configure_prepend() {
+    sed -i -e 's|python |python3 |g' ${S}/tests/*.sh
+    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/*.py
+    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/testsuites/*.py
+}
+
 TESTDIR = "tests"
 do_compile_ptest() {
     echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
@@ -186,6 +192,6 @@ VALGRIND_riscv64 = ""
 
 RDEPENDS_${PN}-ptest += "\
   make diffutils gzip bash gawk coreutils procps \
-  libgcc python-core python-io \
+  libgcc python3-core python3-io \
   "
 RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
