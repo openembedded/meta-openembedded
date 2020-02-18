@@ -46,7 +46,7 @@ RDEPENDS_packagegroup-meta-oe = "\
 "
 
 RDEPENDS_packagegroup-meta-oe-benchmarks = "\
-    analyze-suspend dhrystone iperf2 linpack phoronix-test-suite \
+    dhrystone iperf2 linpack phoronix-test-suite \
     tiobench bonnie++ fio iperf2 iperf3 lmbench s-suite whetstone \
     libc-bench memtester sysbench dbench iozone3 libhugetlbfs \
     nbench-byte tinymembench \
@@ -196,6 +196,9 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
     agent-proxy broadcom-bt-firmware cpupower \
     crash ipmitool minicoredumper oprofile \
     "
+RDEPENDS_packagegroup-meta-oe-kernel_append_x86 = " pm-graph "
+RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " pm-graph "
+
 RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash minicoredumper"
 
 RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
