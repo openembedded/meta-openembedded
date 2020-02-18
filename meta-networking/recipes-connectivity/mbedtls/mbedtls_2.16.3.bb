@@ -39,3 +39,5 @@ RPROVIDES_${PN} = "polarssl"
 
 PACKAGES =+ "${PN}-programs"
 FILES_${PN}-programs = "${bindir}/"
+
+BBCLASSEXTEND = "native nativesdk"
