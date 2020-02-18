@@ -299,6 +299,7 @@ FILES_${PN}-server = "\
     ${sbindir}/ndbd \
     ${sbindir}/ndb_mgmd \
     ${libdir}/plugin/*.so \
+    ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
     ${datadir}/mysql/ \
     ${localstatedir}/mysql/ \
     ${sysconfdir}/init.d/mysqld \
