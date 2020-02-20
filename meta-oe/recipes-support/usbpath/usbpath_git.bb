@@ -8,12 +8,12 @@ DEPENDS_class-native = "virtual/libusb0-native"
 
 BBCLASSEXTEND = "native"
 
-SRCREV = "3172"
-PV = "0.0+svnr${SRCPV}"
+PV = "1.0+git${SRCPV}"
 
-SRC_URI = "svn://svn.openmoko.org/trunk/src/host;module=usbpath;protocol=http \
-           file://configure.patch"
-
+SRCREV = "0bde889e6fc09a330d0e0b9eb9808b20b2bf13d1"
+SRC_URI = "git://github.com/openmoko/openmoko-svn.git;protocol=https;subpath=src/host/usbpath \
+    file://configure.patch \
+"
 S = "${WORKDIR}/usbpath"
 
 inherit autotools pkgconfig
