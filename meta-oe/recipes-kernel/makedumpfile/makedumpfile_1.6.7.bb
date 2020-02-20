@@ -24,10 +24,9 @@ SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
-    file://0003-build-Delete-libebl-from-required-libraries-during-l.patch \
 "
-SRC_URI[md5sum] = "6fd632b97ad78d9a0a3b0f0989094064"
-SRC_URI[sha256sum] = "d007eec05cb14f0155f2d06a0d4dc70d321dbb2aec65fccdce953145c8230324"
+SRC_URI[md5sum] = "808ef840ca49ca6bfde77c097cf429f5"
+SRC_URI[sha256sum] = "e702fbdf62b4cd829a76e46f3e24eb3fc7501918b85ebdcd8baef4f53d6ee2c8"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/makedumpfile/files/makedumpfile/"
 UPSTREAM_CHECK_REGEX = "makedumpfile/(?P<pver>\d+(\.\d+)+)/"
