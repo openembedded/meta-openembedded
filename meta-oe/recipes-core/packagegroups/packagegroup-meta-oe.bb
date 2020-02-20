@@ -254,13 +254,13 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     multipath-tools nano neon nmon numactl onig openct openldap \
     opensc wbxml2 p910nd pcsc-lite picocom libotr pidgin \
     pngcheck poco poppler poppler-data portaudio-v19 pps-tools \
-    pv pxaregs raptor2 rdfind read-edid rsnapshot s3c24xx-gpio s3c64xx-gpio \
-    sjf2410-linux-native satyr sdparm pty-forward-native serial-forward \
+    pv pxaregs raptor2 rdfind read-edid rsnapshot \
+    satyr sdparm pty-forward-native serial-forward \
     sg3-utils sharutils smem spitools srecord ssiapi stm32flash \
     syslog-ng system-config-keyboard tbb thin-provisioning-tools tokyocabinet \
     tree uhubctl unixodbc uriparser usb-modeswitch \
-    usb-modeswitch-data usbpath uthash utouch-evemu utouch-frame \
-    vim vim-tiny websocketpp wmiconfig xdelta3 xdg-user-dirs xmlstarlet \
+    usb-modeswitch-data uthash utouch-evemu utouch-frame \
+    vim vim-tiny websocketpp xdelta3 xdg-user-dirs xmlstarlet \
     zbar zile \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis toscoterm uim synergy utouch-mtview links-x11 fltk pidgin-otr", "", d)} \
     libcanberra \
