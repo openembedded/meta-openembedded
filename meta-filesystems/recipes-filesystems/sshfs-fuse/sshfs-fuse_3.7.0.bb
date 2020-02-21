@@ -7,7 +7,7 @@ DEPENDS = "glib-2.0 fuse3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/libfuse/sshfs"
-SRCREV = "a1e5f12c530ccf59434a7d59a34a049f160b3559"
+SRCREV = "a7e1038203c856cc7e052d439d1da49fe131339f"
 S = "${WORKDIR}/git"
 
 inherit meson
