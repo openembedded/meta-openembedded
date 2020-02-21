@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # basically BSD.  opensource.org does not record this license
 # at present (so it is apparently not OSI certified).
 LICENSE = "OpenLDAP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ad914c35f97b468f421f8ac0f3d821f4 \
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5391b559d23a2237bdb21e7a62dae7c3 \
                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
                     "
 SECTION = "libs"
@@ -16,7 +16,6 @@ LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
 SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/${BP}.tgz \
     file://openldap-m4-pthread.patch \
-    file://kill-icu.patch \
     file://openldap-2.4.28-gnutls-gcrypt.patch \
     file://use-urandom.patch \
     file://initscript \
@@ -26,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://remove-user-host-pwd-from-version.patch \
 "
 
-SRC_URI[md5sum] = "0729a0711fe096831dedc159e0bbe73f"
-SRC_URI[sha256sum] = "d9523ffcab5cd14b709fcf3cb4d04e8bc76bb8970113255f372bc74954c6074d"
+SRC_URI[md5sum] = "2a47a6bb4319357ea7b032c45283e79e"
+SRC_URI[sha256sum] = "e3b117944b4180f23befe87d0dcf47f29de775befbc469dcf4ac3dab3311e56e"
 
 DEPENDS = "util-linux groff-native"
 
