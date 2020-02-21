@@ -18,6 +18,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-Use-pkg-config-for-libxml2-detection.patch \
            file://debian-php-fixheader.patch \
            file://CVE-2019-6978.patch \
+           file://CVE-2020-7059.patch \
           "
 
 SRC_URI_append_class-target = " \
