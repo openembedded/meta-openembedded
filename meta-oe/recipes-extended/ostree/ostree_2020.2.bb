@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
 DEPENDS = " \
     glib-2.0 \
-    gpgme \
     e2fsprogs \
     libcap \
     zlib \
@@ -26,7 +25,7 @@ SRC_URI = " \
     gitsm://github.com/ostreedev/ostree \
     file://run-ptest \
 "
-SRCREV = "43706202f7de2ce0c829a46caab350ae1656f6ad"
+SRCREV = "c6085ebd5e27da35f43165eb614190665468f13a"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
@@ -36,11 +35,11 @@ inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconf
 
 # Package configuration - match ostree defaults, but without rofiles-fuse
 # otherwise we introduce a dependendency on meta-filesystems
-#
-# If running with ptest, both soup (for trivial-httpd) and xattr are required
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
+    glib \
+    gpgme \
     soup \
 "
 
@@ -49,6 +48,7 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG_class-native ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
     builtin-grub2-mkconfig \
+    gpgme \
     soup \
 "
 
@@ -56,8 +56,10 @@ PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
 PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
 PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
+PACKAGECONFIG[glib] = "--with-crypto=glib"
 PACKAGECONFIG[gjs] = "ac_cv_path_GJS=${bindir}/gjs"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls"
+PACKAGECONFIG[gpgme] = "--with-gpgme, --without-gpgme, gpgme"
 PACKAGECONFIG[libarchive] = "--with-libarchive, --without-libarchive, libarchive"
 PACKAGECONFIG[libmount] = "--with-libmount, --without-libmount, util-linux"
 PACKAGECONFIG[manpages] = "--enable-man, --disable-man, libxslt-native docbook-xsl-stylesheets-native"
@@ -144,9 +146,21 @@ RDEPENDS_${PN} = " \
 RDEPENDS_${PN}-dracut = "bash"
 RDEPENDS_${PN}-mkinitcpio = "bash"
 RDEPENDS_${PN}_class-target = " \
-    gnupg \
+    ${@bb.utils.contains('PACKAGECONFIG', 'gpgme', 'gnupg', '', d)} \
     ${PN}-switchroot \
 "
+
+#
+# Note that to get ptest to pass you also need:
+#
+#   xattr in DISTRO_FEATURES
+#   static ostree-prepare-root (PACKAGECONFIG_append_pn-ostree = " static")
+#   meta-python in your layers
+#   overlayfs in your kernel (KERNEL_EXTRA_FEATURES += "features/overlayfs/overlayfs.scc")
+#   busybox built statically
+#   /var/tmp as a real filesystem (not a tmpfs)
+#   Sufficient disk space (IMAGE_ROOTFS_SIZE = "524288") and RAM (QB_MEM = "-m 1024")
+#
 RDEPENDS_${PN}-ptest += " \
     attr \
     bash \
@@ -157,7 +171,10 @@ RDEPENDS_${PN}-ptest += " \
     grep \
     python3-core \
     python3-multiprocessing \
+    strace \
     tar \
+    util-linux \
+    xz \
     ${PN}-trivial-httpd \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-python', 'python3-pyyaml', '', d)} \
     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
@@ -165,7 +182,6 @@ RDEPENDS_${PN}-ptest += " \
 RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
 
 RRECOMMENDS_${PN} += "kernel-module-overlay"
-RRECOMMENDS_${PN}-ptest += "strace"
 
 SYSTEMD_SERVICE_${PN} = "ostree-remount.service ostree-finalize-staged.path"
 SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
