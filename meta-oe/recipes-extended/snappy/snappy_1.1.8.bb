@@ -10,10 +10,10 @@ compression ratio."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
 
-SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.7.tar.gz/sha512/32046f532606ba545a4e4825c0c66a19be449f2ca2ff760a6fa170a3603731479a7deadb683546e5f8b5033414c50f4a9a29f6d23b7a41f047e566e69eca7caf/snappy-1.1.7.tar.gz"
+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.8.tar.gz/sha512/efe18ff1b3edda1b4b6cefcbc6da8119c05d63afdbf7a784f3490353c74dced76baed7b5f1aa34b99899729192b9d657c33c76de4b507a51553fa8001ae75c1c/snappy-1.1.8.tar.gz"
 
-SRC_URI[md5sum] = "ee9086291c9ae8deb4dac5e0b85bf54a"
-SRC_URI[sha256sum] = "3dfa02e873ff51a11ee02b9ca391807f0c8ea0529a4924afa645fbf97163f9d4"
+SRC_URI[md5sum] = "70e48cba7fecf289153d009791c9977f"
+SRC_URI[sha256sum] = "16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f"
 
 inherit cmake pkgconfig
 
