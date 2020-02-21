@@ -8,8 +8,8 @@ DEPENDS = "file"
 
 SRC_URI = "${GNU_MIRROR}/libmicrohttpd/${BPN}-${PV}.tar.gz \
 "
-SRC_URI[md5sum] = "3ce03db1f10007517cecf05e040069af"
-SRC_URI[sha256sum] = "fb9b6b148b787493e637d3083588711e65cbcb726fa02cee2cd543c5de27e37e"
+SRC_URI[md5sum] = "dcd6045ecb4ea18c120afedccbd1da74"
+SRC_URI[sha256sum] = "90d0a3d396f96f9bc41eb0f7e8187796049285fabef82604acd4879590977307"
 
 inherit autotools lib_package pkgconfig gettext
 
