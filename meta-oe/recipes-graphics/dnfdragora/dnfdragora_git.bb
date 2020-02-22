@@ -15,7 +15,7 @@ SRCREV = "4fef4ce889b8e4fa03191d414f63bfd50796152a"
 
 S = "${WORKDIR}/git"
 
-inherit cmake gettext pkgconfig python3-dir python3native distutils3-base
+inherit cmake gettext pkgconfig python3-dir python3native distutils3-base mime-xdg
 
 DEPENDS += "dnf python3 "
 #DEPENDS_class-nativesdk += "nativesdk-python3"
