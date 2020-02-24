@@ -3,7 +3,7 @@ DESCRIPTION = "Kea is the next generation of DHCP software developed by ISC. It 
 HOMEPAGE = "http://kea.isc.org"
 SECTION = "connectivity"
 LICENSE = "MPL-2.0 & Apache-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0e5b01c848c7736a0c9e68f9c9cd0281"
+LIC_FILES_CHKSUM = "file://COPYING;md5=68d95543d2096459290a4e6b9ceccffa"
 
 DEPENDS += "kea-native"
 
@@ -14,8 +14,8 @@ SRC_URI = "\
     file://kea-dhcp6.service \
     file://kea-dhcp-ddns.service \
 "
-SRC_URI[md5sum] = "fda03bf465818009b70dffc226da777d"
-SRC_URI[sha256sum] = "30f82c548b844c12ed46c4eb3880d63b45ec04cecfcf2e4ab1d7bada7fff4f2a"
+SRC_URI[md5sum] = "d2d0e3ad8064a5e6f3ba1e970d39f9cc"
+SRC_URI[sha256sum] = "2b7f8d8cafdb9ad2be8df9aceb2de58c8f37c1544e47c28f05e84555d0015ef5"
 
 inherit autotools systemd
 
