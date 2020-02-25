@@ -33,7 +33,7 @@ export EXPLICIT_VERSION="${PV}"
 EXTRA_OECONF = "--prefix=${datadir}/cfengine"
 
 do_install_append() {
-    rm -rf ${D}${datadir}/cfengine/modules/packages/{zypper,yum}
+    rm -rf ${D}${datadir}/cfengine/modules/packages/zypper ${D}${datadir}/cfengine/modules/packages/yum
 }
 
 FILES_${PN} = "${datadir}/cfengine"
