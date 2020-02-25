@@ -238,7 +238,7 @@ NE10_armv7a = "ne10"
 NE10_armv7ve = "ne10"
 
 RDEPENDS_packagegroup-meta-oe-support ="\
-    anthy asio atop augeas avro-c bdwgc frame grail \
+    anthy asio atop augeas avro-c bdwgc frame grail c-ares \
     ccid ceres-solver ckermit cpprest ctapi-common daemonize \
     daemontools debsums devmem2 dfu-util dfu-util-native digitemp \
     dstat eject enca epeg espeak fbset fbset-modes \

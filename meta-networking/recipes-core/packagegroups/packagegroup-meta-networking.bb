@@ -107,7 +107,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
     tunctl dovecot ipvsadm stunnel chrony spice-protocol \
     usbredir ntop wireshark tnftp lksctp-tools \
     cim-schema-docs cim-schema-final cim-schema-exper \
-    libmemcached smcroute libtevent ipcalc c-ares uftp \
+    libmemcached smcroute libtevent ipcalc uftp \
     ntimed linux-atm ssmtp openvpn rdma-core \
     iftop aoetools tcpslice tcpdump libtalloc memcached nuttcp netcat \
     netcat-openbsd fetchmail yp-tools ypbind-mt yp-tools \
