@@ -1,14 +1,14 @@
 SUMMARY = "Just-In-Time Compiler for Lua"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
 HOMEPAGE = "http://luajit.org"
 
-PV .= "+git${SRCPV}"
-SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
-SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
+PV = "2.1.0~beta3"
+SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
+SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
            file://clang.patch \
-"
+           "
 
 S = "${WORKDIR}/git"
 
@@ -90,8 +90,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
 "
 FILES_luajit-common = "${datadir}/${BPN}-${PV}"
 
-# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
-COMPATIBLE_HOST_aarch64 = "null"
+# mips64/ppc/ppc64/riscv64 is not supported in this release
 COMPATIBLE_HOST_mipsarchn32 = "null"
 COMPATIBLE_HOST_mipsarchn64 = "null"
 COMPATIBLE_HOST_powerpc = "null"
