@@ -9,8 +9,8 @@ inherit gnomebase gobject-introspection
 SRC_URI += "file://iconv-detect.h \
             file://nodolt.patch"
 
-SRC_URI[archive.md5sum] = "98970e3995e67ac3f23827ff52308f9e"
-SRC_URI[archive.sha256sum] = "fb7556501f85c3bf3e65fdd82697cbc4fa4b55dccd33ad14239ce0197e78ba59"
+SRC_URI[archive.md5sum] = "656548dc431004d1ebf95e5d0bb4b9c8"
+SRC_URI[archive.sha256sum] = "abff194c7c4802fba2e233890d09dde8bf7170c3ad5e13000601c8d5b3c44717"
 
 export ac_cv_have_iconv_detect_h="yes"
 do_configure_append = "cp ${WORKDIR}/iconv-detect.h ${S}"
