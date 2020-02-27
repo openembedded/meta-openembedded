@@ -11,8 +11,7 @@ DEPENDS = "glib-2.0 glib-2.0-native libgudev"
 
 inherit autotools pkgconfig bash-completion
 
-SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-           file://clang.patch \
-"
-SRC_URI[md5sum] = "d38d637e33cde8a91484f53a9f6c4d49"
-SRC_URI[sha256sum] = "ac2708a409b09f1f6f1786a8a9e39c36619aa8d6f285ea943daa7a48ea36d3e8"
+SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
+
+SRC_URI[md5sum] = "87060e8957013177e4140edc6f64f5bd"
+SRC_URI[sha256sum] = "5c0778eb1cd12c3604523134e55183f5147b0cae71150e875b583768f7aa1f38"
