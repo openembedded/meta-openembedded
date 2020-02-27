@@ -12,7 +12,7 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV ?= "288add22d6b61cc68ede358faeec9affb15019cd"
+SRCREV ?= "549f8987be49583bb06b117a364bea3a8fc5250c"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi \
            file://initd.debian \
