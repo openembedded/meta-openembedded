@@ -15,8 +15,6 @@ DEPENDS = "virtual/libiconv autoconf-archive"
 inherit pkgconfig autotools gettext texinfo gtk-doc
 
 SRC_URI = "${GNU_MIRROR}/libidn/${BPN}-${PV}.tar.gz \
-           file://libidn_fix_for_automake-1.12.patch \
-           file://avoid_AM_PROG_MKDIR_P_warning_error_with_automake_1.12.patch \
            file://dont-depend-on-help2man.patch \
            file://0001-idn-format-security-warnings.patch \
            "
