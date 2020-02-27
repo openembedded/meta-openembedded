@@ -5,8 +5,8 @@ LICENSE = "BSD-2-Clause | GPL-2.0+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
 
 SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
-SRC_URI[md5sum] = "d38925fbc030153fe674c4e0e864a69a"
-SRC_URI[sha256sum] = "2d5526fc8da4f072dd5c73e18fbb1666f5ef8ed78b73bba12e195cfdd810344e"
+SRC_URI[md5sum] = "20111fda0df0a289c152faa2aac91b08"
+SRC_URI[sha256sum] = "ed855d2b52118e32c0c1a6a32bd18c97f9e6711ca511f5ee12de3b9eccc66e5a"
 
 inherit autotools
 
