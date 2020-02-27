@@ -29,15 +29,14 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
            file://openipmi-remove-host-path-from-la_LDFLAGS.patch \
            file://ipmi-init-fix-the-arguments.patch \
            file://include_sys_types.patch \
-           file://ipmi_serial_bmc_emu.c-include-readline.h-from-readli.patch \
            file://openipmi-helper \
            file://ipmi.service \
            "
 
 S = "${WORKDIR}/OpenIPMI-${PV}"
 
-SRC_URI[md5sum] = "d525ceaa07df5440674e7e68a6772fe7"
-SRC_URI[sha256sum] = "f3b1fafaaec2e2bac32fec5a86941ad8b8cb64543470bd6d819d7b166713d20b"
+SRC_URI[md5sum] = "ba37f08e306062ec73c7ed2a2bd4d5f4"
+SRC_URI[sha256sum] = "8e8b1de2a9a041b419133ecb21f956e999841cf2e759e973eeba9a36f8b40996"
 
 inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d systemd cpan-base
 
