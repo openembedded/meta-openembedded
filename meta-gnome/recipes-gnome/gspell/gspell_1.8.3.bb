@@ -7,5 +7,5 @@ DEPENDS = "gtk+3 iso-codes enchant2"
 
 inherit gnomebase gettext gobject-introspection
 
-SRC_URI[archive.md5sum] = "4f857382bc9d8d4afe1e67e5b5b9dbff"
-SRC_URI[archive.sha256sum] = "bb9195c3a95bacf556d0203e9691f7489e0d3bc5ae1e5a440c89b2f2435d3ed6"
+SRC_URI[archive.md5sum] = "d0892000d944e87fd74e8611ef400cdb"
+SRC_URI[archive.sha256sum] = "5ae514dd0216be069176accf6d0049d6a01cfa6a50df4bc06be85f7080b62de8"
