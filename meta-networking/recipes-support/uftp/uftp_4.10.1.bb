@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d32239bcb673463ab874e80d47fae504"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/uftp-multicast/files/source-tar/"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/uftp-multicast/source-tar/uftp-${PV}.tar.gz"
-SRC_URI[md5sum] = "df6407af3a0067b881431b3dad149ef3"
-SRC_URI[sha256sum] = "91ba8aae80c7c9ccaf04600b628cbeca4699ed48268fe43d2bf539a41083f292"
+SRC_URI[md5sum] = "a5c79c8e5a20d0646c9579fe1f339493"
+SRC_URI[sha256sum] = "903353febf1b88f701198d956a60cec3d2be3cc251561a678061761aec6622f6"
 
 DEPENDS = "openssl"
 
