@@ -8,9 +8,8 @@ RDEPENDS_${PN} = "bash perl"
 BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
            file://0001-Remove-man-files-which-cant-be-built.patch \
-           file://0001-librdmacm-Use-sched_yield-instead-of-pthread_yield.patch \
            "
-SRCREV = "84caf035ae6123e2296b72006cd2cf698c65eb46"
+SRCREV = "f12c953f0864691eacc9fcc4cda489b92ffd5a85"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
