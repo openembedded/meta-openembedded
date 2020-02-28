@@ -21,8 +21,8 @@ DEPENDS_append_class-target = " ${BPN}-native"
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
 SRC_URI_append_class-target = " file://0001-Use-native-mtp-hotplug.patch"
 
-SRC_URI[md5sum] = "7796179af46e90938dde1d0c4d1d1d4c"
-SRC_URI[sha256sum] = "5b68f9dd1ed38de558de687f40e255a39e4d5e32ef3de601f0ac19dd5682bba0"
+SRC_URI[md5sum] = "81aea5d3139e5189c2e055ed2c98cd91"
+SRC_URI[sha256sum] = "f8a34cf52d9f9b9cb8c7f26b12da347d4af7eb904c13189602e4c6b62d1a79dc"
 
 inherit autotools pkgconfig lib_package
 
