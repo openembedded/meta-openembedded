@@ -17,3 +17,5 @@ inherit cmake
 # Header-only library
 RDEPENDS_${PN}-dev = ""
 RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+
+ALLOW_EMPTY_${PN} = "1"
