@@ -9,15 +9,14 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://collectd.init \
            file://collectd.service \
            file://no-gcrypt-badpath.patch \
-           file://0001-conditionally-check-libvirt.patch \
            file://0001-fix-to-build-with-glibc-2.25.patch \
            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
            file://0005-Disable-new-gcc8-warnings.patch \
            file://0006-libcollectdclient-Fix-string-overflow-errors.patch \
            file://0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch \
            "
-SRC_URI[md5sum] = "bfce96c42cede5243028510bcc57c1e6"
-SRC_URI[sha256sum] = "e796fda27ce06377f491ad91aa286962a68c2b54076aa77a29673d53204453da"
+SRC_URI[md5sum] = "a8344a199b124711bdbec57f1c0b624f"
+SRC_URI[sha256sum] = "a03359f563023e744c2dc743008a00a848f4cd506e072621d86b6d8313c0375b"
 
 inherit autotools python3native update-rc.d pkgconfig systemd
 
