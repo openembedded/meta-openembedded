@@ -110,7 +110,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     android-tools android-tools-conf bootchart breakpad \
     capnproto cgdb cscope ctags \
     debootstrap dmalloc flatbuffers \
-    giflib icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
+    giflib grpc icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
     kconfig-frontends lemon libedit libgee libsombok3 \
     libubox log4cplus lshw ltrace lua mcpp memstat mercurial \
     mpich msgpack-c nlohmann-json openocd pax-utils \

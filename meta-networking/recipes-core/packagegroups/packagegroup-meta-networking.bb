@@ -55,7 +55,7 @@ RDEPENDS_packagegroup-meta-networking-daemons = "\
 RDEPENDS_packagegroup-meta-networking-daemons_remove_libc-musl = "opensaf"
 
 RDEPENDS_packagegroup-meta-networking-devtools = "\
-    python3-ldap grpc \
+    python3-ldap \
     "
 
 RDEPENDS_packagegroup-meta-networking-extended = "\
