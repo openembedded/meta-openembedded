@@ -9,8 +9,8 @@ SRC_URI = "https://github.com/${SRCNAME}/${SRCNAME}/releases/download/${SRCNAME}
            file://add-missing-python-include-dir-for-cross.patch \
 "
 
-SRC_URI[md5sum] = "b8defcc7280a90e9400d6689c93a279c"
-SRC_URI[sha256sum] = "1de6ff046cf2172d265a2cb6f8da439d894f3e4e8157b056c515515232fade6b"
+SRC_URI[md5sum] = "ae6e61fc33f5dac0de5e847eb7520d71"
+SRC_URI[sha256sum] = "5263e09ee62269c092f790ac159112aed3e66826a795e3afec85fdeac4281c8e"
 
 UPSTREAM_CHECK_URI = "https://github.com/libpwquality/libpwquality/releases"
 
