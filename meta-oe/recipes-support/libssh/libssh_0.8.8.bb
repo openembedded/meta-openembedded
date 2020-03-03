@@ -2,12 +2,12 @@ SUMMARY = "Multiplatform C library implementing the SSHv2 and SSHv1 protocol"
 HOMEPAGE = "http://www.libssh.org"
 SECTION = "libs"
 LICENSE = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
+LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
 
 DEPENDS = "zlib openssl libgcrypt"
 
 SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=stable-0.8"
-SRCREV = "789df0b7d0c7abd6b85db9fc5247e146e3d4ddba"
+SRCREV = "7850307210590a9a1b03ab0273d29b3926a974c5"
 
 S = "${WORKDIR}/git"
 
