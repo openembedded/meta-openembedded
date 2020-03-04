@@ -1,0 +1,70 @@
+From edb62d2518d87536290d00a11c78c311e3680914 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Mar 2020 09:14:57 -0800
+Subject: [PATCH] codec: Disable asm for mips
+
+It needs loongson support which qemumips is not targettin
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ codec/common/targets.mk     | 2 +-
+ codec/decoder/targets.mk    | 2 +-
+ codec/encoder/targets.mk    | 2 +-
+ codec/processing/targets.mk | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/codec/common/targets.mk b/codec/common/targets.mk
+index 96843cd9..e76cb2cb 100644
+--- a/codec/common/targets.mk
++++ b/codec/common/targets.mk
+@@ -74,7 +74,7 @@ COMMON_ASM_MIPS_SRCS=\
+ 	$(COMMON_SRCDIR)/mips/satd_sad_mmi.c\
+ 
+ COMMON_OBJSMIPS += $(COMMON_ASM_MIPS_SRCS:.c=.$(OBJ))
+-ifeq ($(ASM_ARCH), mips)
++ifeq ($(ASM_ARCH), mips64)
+ COMMON_OBJS += $(COMMON_OBJSMIPS)
+ endif
+ OBJS += $(COMMON_OBJSMIPS)
+diff --git a/codec/decoder/targets.mk b/codec/decoder/targets.mk
+index eaf5d3c0..615d9216 100644
+--- a/codec/decoder/targets.mk
++++ b/codec/decoder/targets.mk
+@@ -60,7 +60,7 @@ DECODER_ASM_MIPS_SRCS=\
+ 	$(DECODER_SRCDIR)/core/mips/dct_mmi.c\
+ 
+ DECODER_OBJSMIPS += $(DECODER_ASM_MIPS_SRCS:.c=.$(OBJ))
+-ifeq ($(ASM_ARCH), mips)
++ifeq ($(ASM_ARCH), mips64)
+ DECODER_OBJS += $(DECODER_OBJSMIPS)
+ endif
+ OBJS += $(DECODER_OBJSMIPS)
+diff --git a/codec/encoder/targets.mk b/codec/encoder/targets.mk
+index 1f053280..fd49c1fd 100644
+--- a/codec/encoder/targets.mk
++++ b/codec/encoder/targets.mk
+@@ -88,7 +88,7 @@ ENCODER_ASM_MIPS_SRCS=\
+ 	$(ENCODER_SRCDIR)/core/mips/score_mmi.c\
+ 
+ ENCODER_OBJSMIPS += $(ENCODER_ASM_MIPS_SRCS:.c=.$(OBJ))
+-ifeq ($(ASM_ARCH), mips)
++ifeq ($(ASM_ARCH), mips64)
+ ENCODER_OBJS += $(ENCODER_OBJSMIPS)
+ endif
+ OBJS += $(ENCODER_OBJSMIPS)
+diff --git a/codec/processing/targets.mk b/codec/processing/targets.mk
+index 300de2d8..8451d66e 100644
+--- a/codec/processing/targets.mk
++++ b/codec/processing/targets.mk
+@@ -62,7 +62,7 @@ PROCESSING_ASM_MIPS_SRCS=\
+ 	$(PROCESSING_SRCDIR)/src/mips/vaa_mmi.c\
+ 
+ PROCESSING_OBJSMIPS += $(PROCESSING_ASM_MIPS_SRCS:.c=.$(OBJ))
+-ifeq ($(ASM_ARCH), mips)
++ifeq ($(ASM_ARCH), mips64)
+ PROCESSING_OBJS += $(PROCESSING_OBJSMIPS)
+ endif
+ OBJS += $(PROCESSING_OBJSMIPS)
+-- 
+2.25.1
+

@@ -1,0 +1,25 @@
+From af9bd9201c755e0b01251021f4e7642d3fec9c1c Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Mar 2020 08:38:46 -0800
+Subject: [PATCH] Makefile: Do not poke at host gcc for target options
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ build/arch.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/build/arch.mk b/build/arch.mk
+index 8ac3e70a..b80cee8c 100644
+--- a/build/arch.mk
++++ b/build/arch.mk
+@@ -35,7 +35,6 @@ ifneq ($(filter mips mips64, $(ARCH)),)
+ ifeq ($(USE_ASM), Yes)
+ ASM_ARCH = mips
+ ASMFLAGS += -I$(SRC_PATH)codec/common/mips/
+-LOONGSON3A = $(shell g++ -dM -E - < /dev/null | grep '_MIPS_TUNE ' | cut -f 3 -d " ")
+ ifeq ($(LOONGSON3A), "loongson3a")
+ CFLAGS += -DHAVE_MMI
+ endif
+-- 
+2.25.1
+
