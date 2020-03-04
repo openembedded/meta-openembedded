@@ -9,8 +9,8 @@ inherit pypi
 
 PYPI_PACKAGE = "python-socketio"
 
-SRC_URI[md5sum] = "86cd47dddea1785ce7a6c72f55c93fe7"
-SRC_URI[sha256sum] = "506b2cf7a520b40ea0b3f25e1272eff8de134dce6f471c1f6bc0de8c90fe8c57"
+SRC_URI[md5sum] = "6631497753977b70d2b5ceb12af2775f"
+SRC_URI[sha256sum] = "48cba5b827ac665dbf923a4f5ec590812aed5299a831fc43576a9af346272534"
 
 PACKAGECONFIG ?= ""
 PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
