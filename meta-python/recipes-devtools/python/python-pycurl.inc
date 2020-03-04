@@ -8,13 +8,12 @@ SECTION = "devel/python"
 HOMEPAGE = "http://pycurl.io/"
 
 LICENSE = "LGPLv2 | MIT"
-LIC_FILES_CHKSUM = " \
-    file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-    file://COPYING-MIT;md5=2df767ed35d8ea83de4a93feb55e7815 \
-"
+LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
+                    file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
+                    "
 
-SRC_URI[md5sum] = "f0ed4c805e8bec734990e2e0ee78568e"
-SRC_URI[sha256sum] = "6f08330c5cf79fa8ef68b9912b9901db7ffd34b63e225dce74db56bb21deda8e"
+SRC_URI[md5sum] = "0b387d4609ed20c88baede8579a4d425"
+SRC_URI[sha256sum] = "ec7dd291545842295b7b56c12c90ffad2976cc7070c98d7b1517b7b6cd5994b3"
 
 inherit pypi
 
