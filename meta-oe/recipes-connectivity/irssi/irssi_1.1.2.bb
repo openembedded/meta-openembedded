@@ -9,6 +9,8 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz
 SRC_URI[md5sum] = "271d2fd875cddd34526234d8a766d82c"
 SRC_URI[sha256sum] = "5ccc2b89a394e91bea0aa83a951c3b1d471c76da87b4169ec435530a31bf9732"
 
+UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
+
 inherit autotools pkgconfig
 
 EXTRA_OECONF += "--with-textui \
