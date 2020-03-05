@@ -21,6 +21,8 @@ S = "${WORKDIR}/git"
 # v1.26
 SRCREV = "c7a0cfa08ddc75d963a835d3588170af0e5f1115"
 
+UPSTREAM_CHECK_GITTAGREGEX = "pkcs11-helper-(?P<pver>\d+(\.\d+)+)"
+
 DEPENDS = "zlib nettle gnutls gmp openssl nss nspr"
 
 inherit autotools pkgconfig
