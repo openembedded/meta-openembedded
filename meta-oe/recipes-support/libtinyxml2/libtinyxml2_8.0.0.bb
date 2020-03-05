@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=135624eef03e1f1101b9ba9ac9b5fffd"
 
 SRC_URI = "git://github.com/leethomason/tinyxml2.git"
 
-SRCREV = "9c740e8d2341bd46dbe8e87053cdb4d931971967"
+SRCREV = "bf15233ad88390461f6ab0dbcf046cce643c5fcb"
 
 S = "${WORKDIR}/git"
 
