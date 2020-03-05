@@ -35,7 +35,7 @@ SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
 UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
 
-inherit autotools-brokensep update-rc.d siteinfo systemd pkgconfig perlnative ptest
+inherit autotools-brokensep update-rc.d siteinfo systemd pkgconfig perlnative ptest multilib_script multilib_header
 
 EXTRA_OEMAKE = "INSTALL_PREFIX=${D} OTHERLDFLAGS='${LDFLAGS}' HOST_CPPFLAGS='${BUILD_CPPFLAGS}'"
 
@@ -136,6 +136,8 @@ do_install_append() {
             -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
             -i ${D}${bindir}/net-snmp-config
     fi
+
+    oe_multilib_header net-snmp/net-snmp-config.h
 }
 
 do_install_ptest() {
@@ -268,3 +270,5 @@ RREPLACES_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
 RCONFLICTS_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
 
 LEAD_SONAME = "libnetsnmp.so"
+
+MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/net-snmp-config"
