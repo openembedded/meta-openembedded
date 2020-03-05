@@ -7,6 +7,7 @@ SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
 
+PV = "20190808+git${SRCPV}"
 SRCREV = "aa844899c937bde5d2b24f276b59997e5b668bde"
 BRANCH = "lts_2019_08_08"
 SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}                \
