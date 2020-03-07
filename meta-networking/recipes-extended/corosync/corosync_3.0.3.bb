@@ -7,20 +7,16 @@ SECTION = "base"
 
 inherit autotools pkgconfig systemd useradd
 
-SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
            file://corosync.conf \
-           file://0001-configure.ac-fix-pkgconfig-issue-of-rdma.patch \
           "
-
-SRC_URI[md5sum] = "e36a056b893c313c4ec1fe0d7e6cdebd"
-SRC_URI[sha256sum] = "ab6eafdb8f43a23794fc15d4c5198bbd6759060cb13c8d2d1e78a6c8360aba5f"
-
+SRC_URI[sha256sum] = "20eb903eb984f6a728282c199825e442e8bba869acefd22390076ef3a33a4ded"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.(?!99)\d+(\.\d+)+)"
 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
 
-DEPENDS = "groff-native nss libqb"
+DEPENDS = "groff-native nss libqb kronosnet"
 
 SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service \
                          ${@bb.utils.contains('PACKAGECONFIG', 'qdevice', 'corosync-qdevice.service', '', d)} \
@@ -31,23 +27,20 @@ SYSTEMD_AUTO_ENABLE = "disable"
 INITSCRIPT_NAME = "corosync-daemon"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-                   dbus qdevice qnetd snmp \
+                   dbus snmp \
 "
 
 PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus"
-PACKAGECONFIG[qdevice] = "--enable-qdevices,--disable-qdevices"
-PACKAGECONFIG[qnetd] = "--enable-qnetd,--disable-qnetd"
-PACKAGECONFIG[rdma] = "--enable-rdma,--disable-rdma,rdma-core"
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
 PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
 
 EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash ap_cv_cc_pie=no"
 EXTRA_OEMAKE = "tmpfilesdir_DATA="
 
-do_configure_prepend() {
-    ( cd ${S}
-    ${S}/autogen.sh )
-}
+#do_configure_prepend() {
+#    ( cd ${S}
+#    ${S}/autogen.sh )
+#}
 
 do_install_append() {
     install -D -m 0644 ${WORKDIR}/corosync.conf ${D}/${sysconfdir}/corosync/corosync.conf.example
