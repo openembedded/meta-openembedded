@@ -2,9 +2,9 @@ SUMMARY = "NetworkManager"
 HOMEPAGE = "https://wiki.gnome.org/Projects/NetworkManager"
 SECTION = "net/misc"
 
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
-                    file://libnm-util/COPYING;md5=1c4fa765d6eb3cd2fbd84344a1b816cd \
+LICENSE = "GPLv2+ & LGPLv2.1+"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                    file://COPYING.LGPL;md5=4fbd65380cdd255951079008b364516c \
 "
 
 DEPENDS = " \
@@ -30,9 +30,11 @@ SRC_URI = " \
 SRC_URI_append_libc-musl = " \
     file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
     file://musl/0002-Fix-build-with-musl.patch \
+    file://musl/0003-Fix-build-with-musl-for-n-dhcp4.patch \
+    file://musl/0004-Fix-build-with-musl-systemd-specific.patch \
 "
-SRC_URI[md5sum] = "fc86588a3ae54e0d406b560a312d5a5d"
-SRC_URI[sha256sum] = "a3bd07f695b6d3529ec6adbd9a1d6385b967e9c8ae90946f51d8852b320fd05e"
+SRC_URI[md5sum] = "b512b4985fe3b7e0b37fdac7ab5b8284"
+SRC_URI[sha256sum] = "9511b92c72c6b5b4f063de9590ef6560696657bb6ba7d360676151742c7dab4f"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
@@ -65,7 +67,7 @@ PACKAGECONFIG[systemd] = " \
     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd, \
     --without-systemdsystemunitdir, \
 "
-PACKAGECONFIG[polkit] = "--enable-polkit --enable-polkit-agent,--disable-polkit --disable-polkit-agent,polkit"
+PACKAGECONFIG[polkit] = "--enable-polkit,--disable-polkit,polkit"
 PACKAGECONFIG[bluez5] = "--enable-bluez5-dun,--disable-bluez5-dun,bluez5"
 # consolekit is not picked by shlibs, so add it to RDEPENDS too
 PACKAGECONFIG[consolekit] = "--with-session-tracking=consolekit,,consolekit,consolekit"
@@ -75,33 +77,47 @@ PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp,ppp"
 PACKAGECONFIG[dhclient] = "--with-dhclient=${base_sbindir}/dhclient,,,dhcp-client"
 PACKAGECONFIG[dnsmasq] = "--with-dnsmasq=${bindir}/dnsmasq"
 PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
-PACKAGECONFIG[glib] = "--with-libnm-glib,,dbus-glib-native dbus-glib"
 PACKAGECONFIG[resolvconf] = "--with-resolvconf=${base_sbindir}/resolvconf,,,resolvconf"
 PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls"
 PACKAGECONFIG[wifi] = "--enable-wifi=yes,--enable-wifi=no,,wpa-supplicant"
 PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
 PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+PACKAGECONFIG[cloud-setup] = "--with-nm-cloud-setup=yes,--with-nm-cloud-setup=no"
 
-PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
+PACKAGES =+ " \
   ${PN}-nmtui ${PN}-nmtui-doc \
-  ${PN}-adsl \
+  ${PN}-adsl ${PN}-cloud-setup \
 "
 
-FILES_libnmutil += "${libdir}/libnm-util.so.*"
-FILES_libnmglib += "${libdir}/libnm-glib.so.*"
-FILES_libnmglib-vpn += "${libdir}/libnm-glib-vpn.so.*"
+SYSTEMD_PACKAGES = "${PN} ${PN}-cloud-setup"
 
 FILES_${PN}-adsl = "${libdir}/NetworkManager/${PV}/libnm-device-plugin-adsl.so"
+
+FILES_${PN}-cloud-setup = " \
+    ${libexecdir}/nm-cloud-setup \
+    ${systemd_system_unitdir}/nm-cloud-setup.service \
+    ${systemd_system_unitdir}/nm-cloud-setup.timer \
+    ${libdir}/NetworkManager/dispatcher.d/90-nm-cloud-setup.sh \
+    ${libdir}/NetworkManager/dispatcher.d/no-wait.d/90-nm-cloud-setup.sh \
+"
+ALLOW_EMPTY_${PN}-cloud-setup = "1"
+SYSTEMD_SERVICE_${PN}-cloud-setup = "${@bb.utils.contains('PACKAGECONFIG', 'cloud-setup', 'nm-cloud-setup.service nm-cloud-setup.timer', '', d)}"
 
 FILES_${PN} += " \
     ${libexecdir} \
     ${libdir}/NetworkManager/${PV}/*.so \
-    ${nonarch_libdir}/NetworkManager/VPN \
+    ${libdir}/NetworkManager \
     ${nonarch_libdir}/NetworkManager/conf.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-down.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-up.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/no-wait.d \
+    ${nonarch_libdir}/NetworkManager/VPN \
+    ${nonarch_libdir}/NetworkManager/system-connections \
     ${datadir}/polkit-1 \
     ${datadir}/dbus-1 \
     ${nonarch_base_libdir}/udev/* \
-    ${systemd_unitdir}/system \
+    ${systemd_system_unitdir} \
     ${libdir}/pppd \
 "
 
