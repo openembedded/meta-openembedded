@@ -17,6 +17,7 @@ DEPENDS = "uthash"
 SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
            file://mosquitto.init \
            file://1571.patch \
+           file://install-protocol.patch \
 "
 
 SRC_URI[md5sum] = "52f5078ec18aaf623b14dfb121fd534b"

@@ -9,11 +9,9 @@ Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
  lib/CMakeLists.txt | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
-index e1521f12a..14ba12739 100644
 --- a/lib/CMakeLists.txt
 +++ b/lib/CMakeLists.txt
-@@ -88,6 +88,8 @@ set_target_properties(libmosquitto PROPERTIES
+@@ -89,6 +89,8 @@
  	OUTPUT_NAME mosquitto
  	VERSION ${VERSION}
  	SOVERSION 1
