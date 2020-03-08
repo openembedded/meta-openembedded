@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "412979b2db0a0020bd02fa64f0a0de9e7000b84462586e32b67f29bb1f
 
 inherit systemd update-rc.d useradd cmake
 
-PACKAGECONFIG ??= "ssl dlt websockets dns-srv\
+PACKAGECONFIG ??= "ssl dlt websockets \
                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
                   "
 
