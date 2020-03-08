@@ -24,6 +24,7 @@ inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-ev
 
 SRC_URI[archive.md5sum] = "de19a6de98a2250dd7efdfca14359e39"
 SRC_URI[archive.sha256sum] = "0134513515f605dd0858154d0b54d2e23c5779d52590533e266d407251e20ba2"
+SRC_URI += "file://0001-EGL-Include-EGL-eglmesaext.h.patch"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "x11"
