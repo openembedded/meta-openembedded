@@ -4,8 +4,8 @@ LICENSE = "BSD-2-Clause"
 SECTION = "devel/python"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fdfc019b57affbe1d7a32e3d34e83db4"
 
-SRC_URI[md5sum] = "cc15c001b129f81eb2f79b15eb99ffe5"
-SRC_URI[sha256sum] = "565a021fd19419476b9362b05eeaa094178de64f8361e44468f9e9d7843901e1"
+SRC_URI[md5sum] = "6d56ed0de4336462a73350341462f45e"
+SRC_URI[sha256sum] = "b62ffa81fb85f4332a4f609cab4ac40709470da05643a082ec1eb88e6d9b97d7"
 
 inherit pypi
 
