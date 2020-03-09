@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "5f5923ef4c3fee370ed0ca1bb324f37c246015eba4a7e74ab95d9208fe
 
 PE = "1"
 
-inherit cmake pkgconfig python3native perlnative upstream-version-is-even
+inherit cmake pkgconfig python3native perlnative upstream-version-is-even mime mime-xdg
 
 PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5 plugins', '', d)}"
 
