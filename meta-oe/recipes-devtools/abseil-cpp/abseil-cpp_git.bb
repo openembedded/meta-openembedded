@@ -19,6 +19,8 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}                \
 
 S = "${WORKDIR}/git"
 
+DEPENDS_append_libc-musl = " libexecinfo "
+
 ASNEEDED_class-native = ""
 ASNEEDED_class-nativesdk = ""
 
