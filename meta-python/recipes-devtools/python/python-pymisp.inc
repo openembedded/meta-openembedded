@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
-SRC_URI[md5sum] = "57184785340e25469e4a80ff9ddce09e"
-SRC_URI[sha256sum] = "594ea0a9e150052232425009eac6dd104a80f494d0e273cc48dd114d7ea8482b"
+SRC_URI[md5sum] = "ef41185d4c2753dc2c1a9ab937e3614a"
+SRC_URI[sha256sum] = "ecdc362b4bb5dd500a5f0b9e795b35ed75037de64f8dcf39c24d029e7657ad7f"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-dateutil \
@@ -13,3 +13,7 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-requests \
     ${PYTHON_PN}-six \
 "
+
+# Fixes: python3-pymisp requires /bin/bash, but no
+# providers found in RDEPENDS_python3-pymisp? [file-rdep
+RDEPENDS_${PN} += "bash"
