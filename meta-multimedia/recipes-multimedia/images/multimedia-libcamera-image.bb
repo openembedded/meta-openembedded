@@ -4,7 +4,7 @@
 DESCRIPTION = "libcamera image"
 LICENSE = "MIT"
 
-require  meta-multimedia-image-base.bb
+require  meta-multimedia-image.bb
 
 IMAGE_INSTALL += " \
         kernel-modules \
