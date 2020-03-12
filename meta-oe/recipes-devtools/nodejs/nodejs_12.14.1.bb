@@ -138,7 +138,9 @@ do_install_append_class-native() {
     install -d ${D}${bindir}
     install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
     install -m 0755 ${S}/out/Release/bytecode_builtins_list_generator ${D}${bindir}/bytecode_builtins_list_generator
-    install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${bindir}/gen-regexp-special-case
+    if ${@bb.utils.contains('PACKAGECONFIG','icu','true','false',d)}; then
+        install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${bindir}/gen-regexp-special-case
+    fi
     install -m 0755 ${S}/out/Release/mkcodecache ${D}${bindir}/mkcodecache
     install -m 0755 ${S}/out/Release/node_mksnapshot ${D}${bindir}/node_mksnapshot
 }
