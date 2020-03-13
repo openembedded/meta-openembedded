@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
 SRCREV = "f1691fc91fc113191c3a8aaf5facd6983334ec47"
 SRC_URI = "git://github.com/OpenSC/OpenSC \
            file://0001-Remove-redundant-logging.patch \
+           file://CVE-2019-19479.patch \
+           file://CVE-2019-19480.patch \
           "
 DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
 
