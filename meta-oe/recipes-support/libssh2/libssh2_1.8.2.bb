@@ -17,6 +17,7 @@ inherit autotools pkgconfig
 EXTRA_OECONF += "\
                  --with-libz \
                  --with-libz-prefix=${STAGING_LIBDIR} \
+                 file://CVE-2019-17498.patch \
                 "
 
 # only one of openssl and gcrypt could be set
