@@ -5,12 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = "ell"
 
-SRC_URI = " \
-    git://git.kernel.org/pub/scm/network/wireless/iwd.git \
-    file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
-    file://0001-build-Support-missing-rawmemchr.patch \
-"
-SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+           file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
+           "
+SRCREV = "1ee7b985aaa294447d073bfe1242744784278a8e"
 S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig python3native systemd
