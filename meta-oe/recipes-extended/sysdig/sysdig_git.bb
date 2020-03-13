@@ -12,7 +12,6 @@ inherit cmake pkgconfig
 JIT ?= "jit"
 JIT_mipsarchn32 = ""
 JIT_mipsarchn64 = ""
-JIT_aarch64 = ""
 
 DEPENDS += "lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
 RDEPENDS_${PN} = "bash"
@@ -21,8 +20,8 @@ SRC_URI = "git://github.com/draios/sysdig.git;branch=dev \
            file://0001-fix-build-with-LuaJIT-2.1-betas.patch \
            file://0001-Fix-build-with-musl-backtrace-APIs-are-glibc-specifi.patch \
            file://fix-uint64-const.patch \
+           file://aarch64.patch \
           "
-# v0.26.4
 SRCREV = "9fa0d129668fdabf256446be4be35838888052d9"
 PV = "0.26.5"
 
