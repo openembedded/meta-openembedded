@@ -7,8 +7,8 @@ DEPENDS = "pciutils libusb libusb-compat"
 
 SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
            "
-SRC_URI[md5sum] = "91bab6c072e38a493bb4eb673e4fe0d6"
-SRC_URI[sha256sum] = "aeada9c70c22421217c669356180c0deddd0b60876e63d2224e3260b90c14e19"
+SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
+SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
 
 S = "${WORKDIR}/flashrom-v${PV}"
 
