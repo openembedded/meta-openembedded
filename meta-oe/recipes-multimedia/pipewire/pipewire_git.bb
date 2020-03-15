@@ -31,6 +31,9 @@ PACKAGECONFIG[pulseaudio] = "-Dpipewire-pulseaudio=true,-Dpipewire-pulseaudio=fa
 PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
 PACKAGECONFIG[vulkan] = "-Dvulkan=true,-Dvulkan=false,vulkan-loader"
 
+LDFLAGS_append_mipsarch = " -latomic"
+LDFLAGS_append_x86 = " -latomic"
+
 PACKAGES =+ "\
     ${PN}-spa-plugins \
     ${PN}-alsa \
