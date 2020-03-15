@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
                     file://main_common.cc;beginline=5;endline=16;md5=3ec288b2676528cd2b069364e313016f"
 
 SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
-SRC_URI[md5sum] = "8ac89f833c0df221723e33b447e230fe"
-SRC_URI[sha256sum] = "4b5d3feede70e3657ca6b3c7844f23131851cbb6af0cecc9721500f7d7021087"
+SRC_URI[md5sum] = "99fd7a28bf9953d88534c7ee9ab5bd2a"
+SRC_URI[sha256sum] = "ce538ebd26a09f45da67d3ad3f7431932428231ceec7a2d255f716fa231a1063"
 
 # This isn't already added by base.bbclass
 do_unpack[depends] += "lzip-native:do_populate_sysroot"
