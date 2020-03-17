@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4f40a941379143186f9602242c3fb729 \
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip \
            "
-SRC_URI[md5sum] = "88031646018d60857f21246962d10011"
-SRC_URI[sha256sum] = "fe07aa152cd946ef8ebd3f87653f14c1d38efe7c6e6fce8c6f773c4814f79baf"
+SRC_URI[md5sum] = "9bba04cf88211762ee4cf35e03c65662"
+SRC_URI[sha256sum] = "c1c99a64eecf96cfd781a611171b58a39326f5811eb98c619aa7c54ec7bcc84b"
 
 inherit autotools
 
