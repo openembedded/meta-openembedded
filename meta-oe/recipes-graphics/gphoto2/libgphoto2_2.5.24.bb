@@ -14,8 +14,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
 "
 
-SRC_URI[libgphoto2.md5sum] = "bf052ce815e607dc781c5b0f3c5ca5c0"
-SRC_URI[libgphoto2.sha256sum] = "d8af23364aa40fd8607f7e073df74e7ace05582f4ba13f1724d12d3c97e8852d"
+SRC_URI[libgphoto2.md5sum] = "063632d839b71698e99da0ccd19bc9f6"
+SRC_URI[libgphoto2.sha256sum] = "fd3c578769f0fa389c1e68120f224bd98477aa3d82d16b82746c1266c0d4fb31"
 
 inherit autotools pkgconfig gettext lib_package
 
