@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
 
 SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
            file://tdb-Add-configure-options-for-packages.patch \
-           file://0001-waf-add-support-of-cross_compile.patch \
 "
 
-SRC_URI[md5sum] = "b2c05ad68334368d3258a63db709f254"
-SRC_URI[sha256sum] = "9040b2cce4028e392f063f91bbe76b8b28fecc2b7c0c6071c67b5eb3168e004a"
+SRC_URI[md5sum] = "e638e8890f743624a754304b3f994f4d"
+SRC_URI[sha256sum] = "c8058393dfa15f47e11ebd2f1d132693f0b3b3b8bf22d0201bfb305026f88a1b"
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
