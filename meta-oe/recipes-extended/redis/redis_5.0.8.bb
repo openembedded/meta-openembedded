@@ -14,12 +14,11 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://lua-update-Makefile-to-use-environment-build-setting.patch \
            file://oe-use-libc-malloc.patch \
            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
-           file://0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch \
            file://GNU_SOURCE.patch \
            "
 
-SRC_URI[md5sum] = "612ec43075a888bc8b8a7dd8ccb2e0f7"
-SRC_URI[sha256sum] = "61db74eabf6801f057fd24b590232f2f337d422280fd19486eca03be87d3a82b"
+SRC_URI[md5sum] = "1885f1c67281d566a1fd126e19cfb25d"
+SRC_URI[sha256sum] = "f3c7eac42f433326a8d981b50dba0169fdfaf46abb23fcda2f933a7552ee4ed7"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
