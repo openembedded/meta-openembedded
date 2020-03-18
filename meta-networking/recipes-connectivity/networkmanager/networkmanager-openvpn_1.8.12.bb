@@ -15,7 +15,18 @@ SRC_URI[sha256sum] = "0efda8878aaf0e6eb5071a053aea5d7f9d42aac097b3ff89e7cbc9233f
 
 S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
 
-PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome"
+# meta-gnome in layers is required using gnome:
+PACKAGECONFIG[gnome] = "--with-gnome,--without-gnome,gtk+3 libnma libsecret"
+
+do_configure_append() {
+    # network-manager-openvpn.metainfo.xml is created in source folder but
+    # compile expects it in build folder. As long as nobody comes up with a
+    # better solution just support build:
+    if [ -e ${S}/appdata/network-manager-openvpn.metainfo.xml ]; then
+        mkdir -p ${B}/appdata
+        cp -f ${S}/appdata/network-manager-openvpn.metainfo.xml ${B}/appdata/
+    fi
+}
 
 do_install_append () {
     rm -rf ${D}${libdir}/NetworkManager/*.la
