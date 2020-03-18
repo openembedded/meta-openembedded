@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
            file://CVE-2018-1000222.patch \
            file://CVE-2019-6978.patch \
            file://CVE-2017-6363.patch \
+           file://CVE-2018-14553.patch \
           "
 
 SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
