@@ -9,8 +9,8 @@ DEPENDS = "gensio libyaml"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "1a42e9605342fd3d6fa41b48be7f564a"
-SRC_URI[sha256sum] = "9bdc33476834bbbdcbfbb77ff8f1b1952fe2e7e19dde7e6f7932cea0cec958c7"
+SRC_URI[md5sum] = "52c5e56d2d54ced0cdeb764a7e8fec92"
+SRC_URI[sha256sum] = "df904d271eb161c265c956f0cb938dd0a375dda4a919a344f73b08bc50b9f308"
 
 inherit autotools pkgconfig
 
