@@ -24,6 +24,4 @@ inherit autotools gettext texinfo
 
 CFLAGS_append_class-native = " -Wno-error=unused-value"
 
-FILES_${PN}-doc += "/usr/doc/indent/indent.html"
-
 BBCLASSEXTEND = "native"
