@@ -10,8 +10,8 @@ inherit gnomebase useradd gettext systemd
 
 SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
 
-SRC_URI[md5sum] = "4dbbc103761facc7a61a1c00dfd55231"
-SRC_URI[sha256sum] = "af3cc86ba848d21b4ac807a09d575de11335ba4df8ce6fdb089212e77c2231ef"
+SRC_URI[md5sum] = "e8b1210011ece18d0278310fbff45af5"
+SRC_URI[sha256sum] = "0efda8878aaf0e6eb5071a053aea5d7f9d42aac097b3ff89e7cbc9233f815318"
 
 S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
 
@@ -26,6 +26,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system nm-openvpn"
 
 FILES_${PN} += " \
+    ${datadir}/dbus-1 \
     ${libdir}/NetworkManager/*.so \
     ${nonarch_libdir}/NetworkManager/VPN/nm-openvpn-service.name \
 "
