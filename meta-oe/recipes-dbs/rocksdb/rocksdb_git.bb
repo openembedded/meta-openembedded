@@ -12,6 +12,7 @@ PV = "6.6.4"
 
 SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
            file://0001-db-write_thread.cc-Initialize-state.patch \
+           file://0001-cmake-Add-check-for-atomic-support.patch \
           "
 
 S = "${WORKDIR}/git"
