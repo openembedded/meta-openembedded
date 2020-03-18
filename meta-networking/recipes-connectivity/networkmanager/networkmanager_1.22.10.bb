@@ -33,8 +33,7 @@ SRC_URI_append_libc-musl = " \
     file://musl/0003-Fix-build-with-musl-for-n-dhcp4.patch \
     file://musl/0004-Fix-build-with-musl-systemd-specific.patch \
 "
-SRC_URI[md5sum] = "b512b4985fe3b7e0b37fdac7ab5b8284"
-SRC_URI[sha256sum] = "9511b92c72c6b5b4f063de9590ef6560696657bb6ba7d360676151742c7dab4f"
+SRC_URI[sha256sum] = "2b29ccc1531ba7ebba95a97f40c22b963838e8b6833745efe8e6fb71fd8fca77"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
