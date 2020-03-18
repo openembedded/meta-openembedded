@@ -20,7 +20,7 @@ DEPENDS = " \
     gnome-settings-daemon \
     gnome-desktop3 \
     gnome-online-accounts \
-    network-manager-applet \
+    libnma \
     gnome-bluetooth \
     grilo \
     libgtop \
