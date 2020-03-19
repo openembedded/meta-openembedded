@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
 DEPENDS = "util-linux"
 PV .= "+git${SRCPV}"
 
-SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
-SRCREV = "977e7d4cf59c3c7f89e9c093c91f991b07292e45"
+SRC_URI = "git://github.com/linux-nvme/nvme-cli.git \
+           file://0001-fix-musl-compilation.patch \
+"
+SRCREV = "1d84d6ae0c7d7ceff5a73fe174dde8b0005f6108"
 
 S = "${WORKDIR}/git"
 
