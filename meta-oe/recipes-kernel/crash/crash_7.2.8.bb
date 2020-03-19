@@ -10,7 +10,7 @@ SECTION = "devel"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
 
-DEPENDS = "zlib readline coreutils-native"
+DEPENDS = "zlib readline coreutils-native ncurses-native"
 
 S = "${WORKDIR}/git"
 SRC_URI = "git://github.com/crash-utility/${BPN}.git \
@@ -49,19 +49,13 @@ EXTRA_OEMAKE = 'RPMPKG="${PV}" \
                 '
 
 EXTRA_OEMAKE_class-cross = 'RPMPKG="${PV}" \
-                            GDB_TARGET="${BUILD_SYS} \
-                                        \${GDB_CONF_FLAGS} \
-                                        --target=${TARGET_SYS}" \
+                            GDB_TARGET="${BUILD_SYS} --target=${TARGET_SYS}" \
                             GDB_HOST="${BUILD_SYS}" \
                             GDB_MAKE_JOBS="${PARALLEL_MAKE}" \
                             '
 
 EXTRA_OEMAKE_append_class-native = " LDFLAGS='${BUILD_LDFLAGS}'"
 EXTRA_OEMAKE_append_class-cross = " LDFLAGS='${BUILD_LDFLAGS}'"
-
-REMOVE_M32 = "sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c"
-
-REMOVE_M32_class-cross = ""
 
 do_configure() {
     :
@@ -79,7 +73,7 @@ do_compile_prepend() {
     esac
 
     sed -i s/FORCE_DEFINE_ARCH/"${ARCH}"/g ${S}/configure.c
-    ${REMOVE_M32}
+    sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
     sed -i 's/&gt;/>/g' ${S}/Makefile
 }
 
