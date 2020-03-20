@@ -16,4 +16,8 @@ CPPFLAGS_append_libc-musl = " -D_GNU_SOURCE"
 
 COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm).*-linux'
 
-RDEPENDS_${PN} = "perl"
+PACKAGES =+ "${PN}-check"
+
+FILES_${PN}-check += "${bindir}/check_for_unsafe_apis"
+
+RDEPENDS_${PN}-check += "perl"
