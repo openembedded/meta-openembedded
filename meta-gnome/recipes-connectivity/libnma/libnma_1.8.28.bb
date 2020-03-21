@@ -2,10 +2,13 @@ SUMMARY = "NetworkManager GUI library"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "glib-2.0 networkmanager"
+DEPENDS = "glib-2.0 gtk+3 networkmanager"
 
 GNOMEBASEBUILDCLASS = "meson"
-inherit gnomebase gobject-introspection gtk-doc gettext vala
+inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
+
+REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG','gcr','x11','',d)}"
+ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.md5sum] = "094c45d7694b153612cbdc3c713edcb5"
 SRC_URI[archive.sha256sum] = "4af69552d131a3b2b8b6a2df584044258bf588448dcdb4bddfa12a07c134b726"
