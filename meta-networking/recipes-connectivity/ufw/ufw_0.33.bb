@@ -17,6 +17,9 @@ SRC_URI = " \
            file://0004-lp1039729.patch \
            file://0005-lp1191197.patch \
 "
+
+UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
+
 SRC_URI[md5sum] = "3747b453d76709e5a99da209fc0bb5f5"
 SRC_URI[sha256sum] = "5f85a8084ad3539b547bec097286948233188c971f498890316dec170bdd1da8"
 
