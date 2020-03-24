@@ -20,3 +20,5 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-sqlite3 \
     ${PYTHON_PN}-wrapt \
 "
+
+BBCLASSEXTEND = "native nativesdk"
