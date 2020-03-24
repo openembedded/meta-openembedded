@@ -11,9 +11,11 @@ PYPI_PACKAGE="python-can"
 inherit pypi setuptools3
 
 RDEPENDS_${PN}_class-target += "\
+    ${PYTHON_PN}-aenum \
     ${PYTHON_PN}-ctypes \
     ${PYTHON_PN}-codecs \
     ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-fcntl \
     ${PYTHON_PN}-logging \
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-netserver \
