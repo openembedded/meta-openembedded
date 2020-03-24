@@ -11,3 +11,5 @@ SRC_URI[sha256sum] = "ea3c2f859346fcd55fc46e96885301d9c2f7a36d453f5d8f2967840efa
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-io \
 "
+
+BBCLASSEXTEND = "native nativesdk"
