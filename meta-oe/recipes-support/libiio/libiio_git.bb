@@ -8,6 +8,7 @@ SRCREV = "5f5af2e417129ad8f4e05fc5c1b730f0694dca12"
 PV = "0.19+git${SRCPV}"
 
 SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
 S = "${WORKDIR}/git"
 
