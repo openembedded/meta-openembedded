@@ -9,6 +9,9 @@ S = "${WORKDIR}/git"
 SRCREV = "d880fe233020b74e058cbca95b5fb67823bbf258"
 SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v3.2-stable"
 
+UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+
 inherit cmake pkgconfig
 
 PACKAGECONFIG ?= "libuv client server http2 ssl"
