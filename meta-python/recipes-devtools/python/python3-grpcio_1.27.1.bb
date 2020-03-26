@@ -23,6 +23,10 @@ inherit pypi
 
 export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
 
+do_compile_prepend_toolchain-clang() {
+    export GRPC_PYTHON_CFLAGS='-fvisibility=hidden -fno-wrapv -fno-exceptions'
+}
+
 CLEANBROKEN = "1"
 
 BBCLASSEXTEND = "native nativesdk"
