@@ -5,23 +5,18 @@ images, and flood fills, and to write out the result as a PNG or JPEG file. \
 This is particularly useful in Web applications, where PNG and JPEG are two \
 of the formats accepted for inline images by most browsers. Note that gd is not \
 a paint program."
-HOMEPAGE = "http://libgd.bitbucket.org/"
+HOMEPAGE = "http://libgd.github.io/"
 
 SECTION = "libs"
 LICENSE = "GD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=07384b3aa2e0d39afca0d6c40286f545"
+LIC_FILES_CHKSUM = "file://COPYING;md5=8e5bc8627b9494741c905d65238c66b7"
 
 DEPENDS = "freetype libpng jpeg zlib tiff"
 
-SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
-           file://0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch \
-           file://CVE-2018-1000222.patch \
-           file://CVE-2019-6978.patch \
-           file://CVE-2017-6363.patch \
-           file://CVE-2018-14553.patch \
+SRC_URI = "git://github.com/libgd/libgd.git;branch=master \
           "
 
-SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
+SRCREV = "b079fa06223c3ab862c8f0eea58a968727971988"
 
 S = "${WORKDIR}/git"
 
