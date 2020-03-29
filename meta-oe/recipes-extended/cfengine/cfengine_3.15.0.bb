@@ -13,7 +13,7 @@ HOMEPAGE = "http://cfengine.com"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
 
-DEPENDS = "attr tokyocabinet"
+DEPENDS = "attr tokyocabinet bison-native"
 
 SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
            file://set-path-of-default-config-file.patch \
