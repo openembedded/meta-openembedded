@@ -20,6 +20,8 @@ UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/"
 
 inherit perlnative gettext
 
+DEPENDS += "po4a-native"
+
 do_install() {
         install -d ${D}/${sysconfdir}/cron.daily ${D}/${sysconfdir}/cron.weekly
         install -d ${D}/${sysconfdir}/cron.monthly ${D}${sbindir} ${D}${bindir}
