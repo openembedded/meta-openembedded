@@ -27,11 +27,14 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}${includedir} ${D}${libdir}/pkgconfig
+    install -d ${D}${includedir} ${D}${libdir}
     rm ${S}/include/tbb/index.html -f
     cp -R --no-dereference --preserve=mode,links -v ${S}/include/tbb ${D}${includedir}
-    install -m 0755 ${B}/build/linux_*_release/lib*.so* ${D}${libdir}
-    install -m 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig
+    for f in ${B}/build/linux_*_release/lib*.so*
+    do
+        install -Dm 0755 $f ${D}${libdir}/
+    done
+    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
 }
 
 # fails with thumb enabled:
