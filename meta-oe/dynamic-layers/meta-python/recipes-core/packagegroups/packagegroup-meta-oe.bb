@@ -240,7 +240,7 @@ NE10_armv7ve = "ne10"
 RDEPENDS_packagegroup-meta-oe-support ="\
     anthy asio atop augeas avro-c bdwgc frame grail c-ares \
     ccid ceres-solver ckermit cpprest ctapi-common daemonize \
-    daemontools debsums devmem2 dfu-util dfu-util-native digitemp \
+    daemontools devmem2 dfu-util dfu-util-native digitemp \
     dstat eject enca epeg espeak fbset fbset-modes \
     fftw fltk-native gd gflags glog gnulib gperftools \
     gpm gradm gsl gsoap hddtemp hidapi htop hunspell hwdata iksemel \
