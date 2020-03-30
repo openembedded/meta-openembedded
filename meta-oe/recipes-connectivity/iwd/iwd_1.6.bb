@@ -5,10 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = "ell"
 
-SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
-           file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
-           "
-SRCREV = "1ee7b985aaa294447d073bfe1242744784278a8e"
+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+SRCREV = "ad97f4f945b828425ff288e905523e11b330d41d"
 S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig python3native systemd
