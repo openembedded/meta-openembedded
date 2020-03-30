@@ -62,7 +62,7 @@ RDEPENDS_packagegroup-meta-oe-benchmarks_remove_riscv32 = "libhugetlbfs"
 RDEPENDS_packagegroup-meta-oe-connectivity ="\
     gammu hostapd irssi krb5 libev libimobiledevice \
     libmbim libmtp libndp libqmi libtorrent \
-    libuv libwebsockets linuxptp lirc loudmouth \
+    libuv libwebsockets linuxptp loudmouth \
     modemmanager mosh  \
     paho-mqtt-c phonet-utils rabbitmq-c rfkill rtorrent \
     ser2net smstools3 telepathy-glib thrift \
@@ -115,7 +115,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     libubox log4cplus lshw ltrace lua mcpp memstat mercurial \
     mpich msgpack-c nlohmann-json openocd pax-utils \
     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
-    protobuf protobuf-c python3-distutils-extra \
+    protobuf protobuf-c \
     rapidjson serialcheck sip3 tclap uftrace uw-imap valijson \
     xmlrpc-c yajl yasm \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
@@ -136,12 +136,12 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     byacc cfengine cfengine-masterfiles cmpi-bindings \
     ddrescue dialog dumb-init enscript fluentbit \
     haveged hexedit hiredis hplip hwloc indent iotop isomd5sum \
-    jansson konkretcmpi lcdproc libblockdev libcec libconfig \
+    jansson konkretcmpi libblockdev libcec libconfig \
     libdivecomputer libplist libusbmuxd \
     liblockfile liblogging liblognorm libmodbus libmodbus \
     libpwquality libqb libuio \
     lockfile-progs logwatch lprng mailx md5deep \
-    mozjs mraa nana nicstat \
+    mraa nana nicstat \
     p7zip p8platform libfile-fnmatch-perl \
     rarpd redis rrdtool libfastjson librelp rsyslog sanlock \
     sblim-cmpi-devel sblim-sfc-common sblim-sfcc \
@@ -163,7 +163,6 @@ RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc64 = "upm mraa"
 RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc64le = "upm mraa"
 RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm mraa tiptop"
 RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm mraa tiptop"
-RDEPENDS_packagegroup-meta-oe-extended_remove_libc-musl = "lcdproc"
 
 RDEPENDS_packagegroup-meta-oe-gnome ="\
     atkmm gnome-common gnome-doc-utils-stub gtkmm \
@@ -256,7 +255,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     pngcheck poco poppler poppler-data portaudio-v19 pps-tools \
     pv pxaregs raptor2 rdfind read-edid rsnapshot \
     satyr sdparm pty-forward-native serial-forward \
-    sg3-utils sharutils smem spitools srecord ssiapi stm32flash \
+    sg3-utils sharutils spitools srecord ssiapi stm32flash \
     syslog-ng system-config-keyboard tbb thin-provisioning-tools tokyocabinet \
     tree uhubctl unixodbc uriparser usb-modeswitch \
     usb-modeswitch-data uthash utouch-evemu utouch-frame \
