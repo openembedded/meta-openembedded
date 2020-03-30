@@ -15,8 +15,8 @@ PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
 SRC_URI += " \
     file://0001-configure.in-hard-code-path-to-iceauth.patch \
 "
-SRC_URI[md5sum] = "36593207ac0c67c81907a4846f4b604c"
-SRC_URI[sha256sum] = "dc1c90da56b2d8df18fec6c0c30d6bed4e7646d8c8214fc931c952ba86c3b77b"
+SRC_URI[md5sum] = "5ad23062fd08ef5f5ad9b4389c7b54c6"
+SRC_URI[sha256sum] = "fbe3a4a60c91589a2024ce12b2d2667625a8fedcbc90ef031831f56319f597af"
 
 ALTERNATIVE_${PN} = "x-session-manager"
 ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
