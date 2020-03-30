@@ -16,8 +16,8 @@ SRC_URI_append = " \
     file://fix-cross-compile.patch \
     file://fix-pam-config.patch \
 "
-SRC_URI[md5sum] = "0fea7b676e6e533a3f305c6f642fe0cd"
-SRC_URI[sha256sum] = "4056045ea5fd3eccfe328b86ae245ee4949b9e3044e42ca29c492c0f4ac860d7"
+SRC_URI[md5sum] = "1f093cde5af09e9fd9be017774e032ef"
+SRC_URI[sha256sum] = "586f1c78dd6745a20e9ce9f12d0117189d597ba7ad0c8ffcfcd25c9bb05f1d57"
 
 do_install_append() {
     install -D -m 0644 ${S}/data/xfce4-screensaver.common-auth ${D}${sysconfdir}/pam.d/xfce4-screensaver
