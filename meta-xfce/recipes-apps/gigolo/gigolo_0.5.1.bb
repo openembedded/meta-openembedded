@@ -7,5 +7,5 @@ DEPENDS = "gtk+3 intltool-native xfce4-dev-tools-native"
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "273111f5d7c26898e5ddea7b97d5dfe1"
-SRC_URI[sha256sum] = "97a301aff012a143d0b99e7ecbb27084d3872aa203a74745e8357aab3a1880dc"
+SRC_URI[md5sum] = "94e89ad3fabba7167760004b64062f4a"
+SRC_URI[sha256sum] = "ca87badb5871e4844579704704ea9e5ede444f710a3b264c12b60b2a0e48e14e"
