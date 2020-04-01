@@ -60,10 +60,13 @@ KERNEL_SELFTEST_SRC ?= "Makefile \
 "
 
 do_compile() {
+    if [ ${@bb.utils.contains('PACKAGECONFIG', 'bpf', 'True', 'False', d)} = 'True' ]; then
     if [ ${@bb.utils.contains('DEPENDS', 'clang-native', 'True', 'False', d)} = 'False' ]; then
         bbwarn "clang >= 6.0 with bpf support is needed with kernel 4.18+ so
 either install it and add it to HOSTTOOLS, or add clang-native from meta-clang to dependency"
     fi
+    fi
+
     for i in ${TEST_LIST}
     do
         oe_runmake -C ${S}/tools/testing/selftests/${i}
