@@ -1,12 +1,12 @@
 SUMMARY = "A mode switching tool for controlling 'flip flop' (multiple device) USB gear"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=091556bd6d0154cd4c2d17a1bfc7380a"
 
 DEPENDS = "libusb1"
 
 SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
-SRC_URI[md5sum] = "16b9a8efa1bf8fbd7d5612757eae4f26"
-SRC_URI[sha256sum] = "abffac09c87eacd78e101545967dc25af7e989745b4276756d45dbf4008a2ea6"
+SRC_URI[md5sum] = "be73dcc84025794081a1d4d4e5a75e4c"
+SRC_URI[sha256sum] = "c215236e6bada6e659fc195a31d611ea298a4bdb4d57a0d68c553b56585f8ba3"
 
 inherit pkgconfig systemd
 
