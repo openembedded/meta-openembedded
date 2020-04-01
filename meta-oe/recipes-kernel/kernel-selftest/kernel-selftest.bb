@@ -18,7 +18,7 @@ SRC_URI += "file://run-ptest \
 # we will append other kernel selftest in the future
 # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
 # if you have older kernel than that you need to remove it from PACKAGECONFIG
-PACKAGECONFIG ??= "bpf vm"
+PACKAGECONFIG ??= "bpf firmware vm"
 PACKAGECONFIG_remove_x86 = "bpf"
 PACKAGECONFIG_remove_arm = "bpf"
 # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
@@ -27,6 +27,7 @@ PACKAGECONFIG_remove_arm = "bpf"
 PACKAGECONFIG_remove_qemumips = "bpf"
 
 PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
+PACKAGECONFIG[firmware] = ",,libcap, bash"
 PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
 
 do_patch[depends] += "virtual/kernel:do_shared_workdir"
@@ -36,7 +37,7 @@ inherit linux-kernel-base kernel-arch ptest
 S = "${WORKDIR}/${BP}"
 
 TEST_LIST = "\
-    ${@bb.utils.filter('PACKAGECONFIG', 'bpf vm', d)} \
+    ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
     rtc \
 "
 
