@@ -23,11 +23,11 @@ SECTION = "libs"
 HOMEPAGE = "http://github.com/rjbs/Test-Deep/"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://lib/Test/Deep.pm;beginline=1817;endline=1826;md5=aebc793c87a3d8771fe98d5d369898e7"
+LIC_FILES_CHKSUM = "file://lib/Test/Deep.pm;beginline=1817;endline=1826;md5=a897a42bafc3422cab17c2eb94f87a7c"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/R/RJ/RJBS/Test-Deep-${PV}.tar.gz"
-SRC_URI[md5sum] = "9bc47147ea720fc01bc6b214afb884ff"
-SRC_URI[sha256sum] = "852d7e836fba8269b0b755082051a24a1a309d015a8b76838790af9e3760092f"
+SRC_URI[md5sum] = "d466e471108f7f7a5df3802cb13761ac"
+SRC_URI[sha256sum] = "4064f494f5f62587d0ae501ca439105821ee5846c687dc6503233f55300a7c56"
 
 UPSTREAM_CHECK_REGEX = "Test\-Deep\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
