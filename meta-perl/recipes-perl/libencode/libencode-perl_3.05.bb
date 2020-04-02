@@ -15,8 +15,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
 LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
-SRC_URI[md5sum] = "4eb07ba6db02d5b982316e1dd05f68bd"
-SRC_URI[sha256sum] = "5865be4951870f62f43722818d076d7724306c75c8f268346b282351cbc820a8"
+SRC_URI[md5sum] = "137aef00bfc3d5cb97096ad985d3153a"
+SRC_URI[sha256sum] = "e0f51e03cd787a3e26026503e806afdc03f3823ae3551c711a9b04ad901a8794"
 
 UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
