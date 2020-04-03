@@ -30,3 +30,5 @@ do_compile_prepend_toolchain-clang() {
 CLEANBROKEN = "1"
 
 BBCLASSEXTEND = "native nativesdk"
+
+CCACHE_DISABLE = "1"
