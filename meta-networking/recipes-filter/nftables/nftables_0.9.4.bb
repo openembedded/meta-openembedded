@@ -9,10 +9,9 @@ DEPENDS = "libmnl libnftnl bison-native \
 # Ensure we reject the 0.099 version by matching at least two dots
 UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
 
-SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
-           file://0001-update-python3-nftables-reference.patch"
-SRC_URI[md5sum] = "9913b2b46864394d41916b74638e0875"
-SRC_URI[sha256sum] = "956b915ce2a7aeaff123e49006be7a0690a0964e96c062703181a36e2e5edb78"
+SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
+SRC_URI[md5sum] = "fdfd51a1083fb054a487b5159b1ed5cd"
+SRC_URI[sha256sum] = "08b8683a9db5fba980bc092b75288af98d218bbe8ab446daf2338570d0730f9a"
 
 inherit autotools manpages pkgconfig
 
