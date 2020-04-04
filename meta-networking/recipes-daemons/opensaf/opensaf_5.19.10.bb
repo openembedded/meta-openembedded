@@ -31,6 +31,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
 SRC_URI[md5sum] = "9b61df01d1a092101c4a626692edae19"
 SRC_URI[sha256sum] = "6da9af96e8ee58d11031d305bf4804a00deb6108e12e422722882a2091bd34bd"
 
+UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
+
 inherit autotools useradd systemd pkgconfig
 
 USERADD_PACKAGES = "${PN}"
