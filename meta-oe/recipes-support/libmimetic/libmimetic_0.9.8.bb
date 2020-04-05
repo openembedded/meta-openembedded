@@ -15,6 +15,8 @@ SRC_URI += "git://github.com/LadislavSopko/mimetic/ \
             file://0001-mimetic-Check-for-MMAP_FAILED-return-from-mmap.patch \
            "
 
+UPSTREAM_CHECK_COMMITS = "1"
+
 S = "${WORKDIR}/git"
 
 CXXFLAGS += "-Wno-narrowing"
