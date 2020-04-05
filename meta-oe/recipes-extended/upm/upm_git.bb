@@ -27,7 +27,7 @@ COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
 
 inherit distutils3-base cmake pkgconfig
 
-EXTRA_OECMAKE += "-UPYTHON_EXECUTABLE"
+EXTRA_OECMAKE += "-UPYTHON_EXECUTABLE -DWERROR=off"
 
 # override this in local.conf to get needed bindings.
 # BINDINGS_pn-upm="python"
