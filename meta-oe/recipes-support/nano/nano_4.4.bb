@@ -15,6 +15,8 @@ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
 SRC_URI[md5sum] = "9650dd3eb0adbab6aaa748a6f1398ccb"
 SRC_URI[sha256sum] = "2af222e0354848ffaa3af31b5cd0a77917e9cb7742cd073d762f3c32f0f582c7"
 
+UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
+
 inherit autotools gettext pkgconfig
 
 PACKAGECONFIG[tiny] = "--enable-tiny,"
