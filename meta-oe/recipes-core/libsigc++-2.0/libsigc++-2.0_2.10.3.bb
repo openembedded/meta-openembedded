@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
 DEPENDS = "mm-common"
 
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.10/libsigc++-${PV}.tar.xz"
-SRC_URI[md5sum] = "1b067bfae0b502e6a5127336cb09d2dd"
-SRC_URI[sha256sum] = "b1ca0253379596f9c19f070c83d362b12dfd39c0a3ea1dd813e8e21c1a097a98"
+SRC_URI[md5sum] = "ea68c7afc23a4b89a2dfa78344460785"
+SRC_URI[sha256sum] = "0b68dfc6313c6cc90ac989c6d722a1bf0585ad13846e79746aa87cb265904786"
 
 S = "${WORKDIR}/libsigc++-${PV}"
 
