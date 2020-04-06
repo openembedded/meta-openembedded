@@ -9,8 +9,8 @@ DEPENDS = "mm-common cairomm glibmm pango"
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
 SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/pangomm/${SHRT_VER}/pangomm-${PV}.tar.xz"
-SRC_URI[md5sum] = "6cffedf2225c4e72645a7d757fb5b832"
-SRC_URI[sha256sum] = "ca6da067ff93a6445780c0b4b226eb84f484ab104b8391fb744a45cbc7edbf56"
+SRC_URI[md5sum] = "339c48dd92ebd3a9911b231708f7a819"
+SRC_URI[sha256sum] = "14bf04939930870d5cfa96860ed953ad2ce07c3fd8713add4a1bfe585589f40f"
 
 inherit features_check autotools pkgconfig
 
