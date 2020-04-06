@@ -22,8 +22,8 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check
 
-SRC_URI[archive.md5sum] = "5e75b611b190c4cebf53e3de15266429"
-SRC_URI[archive.sha256sum] = "b6748726e465ad2f4d991560634b1fd0df8841f3d981b3b837c4162abedf08a1"
+SRC_URI[archive.md5sum] = "9937cf4812ca85078907324c7cdf7dd8"
+SRC_URI[archive.sha256sum] = "577952244ab977c78b0b88e2f63c4197eaba16e4d66bff692b7f58993e06516d"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
