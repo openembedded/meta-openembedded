@@ -11,8 +11,8 @@ DEPENDS = "mozjs gtk+3"
 
 inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even
 
-SRC_URI[archive.md5sum] = "4e74456ccb16d4cc5004a441f6abbec1"
-SRC_URI[archive.sha256sum] = "e76d99c09f887438b9883e328710b26b3717f6dcdb4097dc7a9bab06ebd7a13a"
+SRC_URI[archive.md5sum] = "7f671b3fc3b149adce263495540e7f50"
+SRC_URI[archive.sha256sum] = "1864bf22f4f5e4107832b4c54127cce8509d37ccc14abd25a6878c7ffed96640"
 SRC_URI += "file://0001-Disable-tests-on-host.patch"
 
 # gobject-introspection is mandatory and cannot be configured
