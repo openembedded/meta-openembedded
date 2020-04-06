@@ -15,8 +15,8 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check
 
-SRC_URI[archive.md5sum] = "0321d8f4ad27e3fccdbc8384e5b3cb83"
-SRC_URI[archive.sha256sum] = "7b1de06a7a79ea1c7813c8a21f8cd1c55f2b95f799cf9f47f0204f3be8a590e0"
+SRC_URI[archive.md5sum] = "a317bc50c5e63dd0746a48af478fb92b"
+SRC_URI[archive.sha256sum] = "7472aa28d7862620d3ca2bbec3b103df547d7319c12e95a7f7aa9f9f6dee4b19"
 SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch"
 
 # gobject-introspection is mandatory and cannot be configured
