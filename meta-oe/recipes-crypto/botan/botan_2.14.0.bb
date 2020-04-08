@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://license.txt;md5=a02e03c8fa2c5e7b9b3fcc1b9811fd3b"
 SECTION = "libs"
 
 SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
-SRC_URI[md5sum] = "9f90c7d523778be5f23f3ce79046ba35"
-SRC_URI[sha256sum] = "f57ae42a41e1091bca58f44f41addebd9a390b651603952c881ec89d50187e90"
+SRC_URI[md5sum] = "ebc68c08b99bbc4b4fc9bdbfad398b02"
+SRC_URI[sha256sum] = "0c10f12b424a40ee19bde00292098e201d7498535c062d8d5b586d07861a54b5"
 
 S = "${WORKDIR}/Botan-${PV}"
 
