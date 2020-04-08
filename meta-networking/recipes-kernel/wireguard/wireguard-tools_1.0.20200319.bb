@@ -1,12 +1,11 @@
 require wireguard.inc
 
-LIC_FILES_CHKSUM = "file://../../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+SRCREV = "a8063adc8ae9b4fc9848500e93f94bee8ad2e585"
+SRC_URI = "git://git.zx2c4.com/wireguard-tools"
 
 inherit bash-completion systemd pkgconfig
 
 DEPENDS += "wireguard-module libmnl"
-
-S = "${WORKDIR}/WireGuard-${PV}/src/tools"
 
 do_install () {
     oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \

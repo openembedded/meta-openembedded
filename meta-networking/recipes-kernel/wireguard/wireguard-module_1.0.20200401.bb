@@ -1,5 +1,9 @@
 require wireguard.inc
 
+SRCREV = "43f57dac7b8305024f83addc533c9eede6509129"
+
+SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
+
 inherit module kernel-module-split
 
 DEPENDS = "virtual/kernel libmnl"
