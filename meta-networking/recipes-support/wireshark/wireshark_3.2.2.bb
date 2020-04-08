@@ -19,7 +19,7 @@ PE = "1"
 
 inherit cmake pkgconfig python3native perlnative upstream-version-is-even mime mime-xdg
 
-PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5 plugins', '', d)}"
+PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
 
 PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
 
