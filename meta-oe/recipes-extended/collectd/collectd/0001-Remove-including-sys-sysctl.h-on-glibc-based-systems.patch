@@ -17,40 +17,10 @@ Upstream-Status: Submitted
 [https://github.com/collectd/collectd/pull/3234]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- src/cpu.c       | 2 +-
- src/memory.c    | 2 +-
  src/processes.c | 2 +-
- src/swap.c      | 2 +-
  src/uptime.c    | 2 +-
- src/uuid.c      | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/src/cpu.c b/src/cpu.c
-index 09d60fe..9d12623 100644
---- a/src/cpu.c
-+++ b/src/cpu.c
-@@ -60,7 +60,7 @@
- 
- #if (defined(HAVE_SYSCTL) && HAVE_SYSCTL) ||                                   \
-     (defined(HAVE_SYSCTLBYNAME) && HAVE_SYSCTLBYNAME)
--#ifdef HAVE_SYS_SYSCTL_H
-+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
- #include <sys/sysctl.h>
- #endif
- 
-diff --git a/src/memory.c b/src/memory.c
-index 10bccde..50a8086 100644
---- a/src/memory.c
-+++ b/src/memory.c
-@@ -28,7 +28,7 @@
- #include "plugin.h"
- #include "utils/common/common.h"
- 
--#ifdef HAVE_SYS_SYSCTL_H
-+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
- #include <sys/sysctl.h>
- #endif
- #ifdef HAVE_SYS_VMMETER_H
 diff --git a/src/processes.c b/src/processes.c
 index f83913a..9f71511 100644
 --- a/src/processes.c
@@ -64,19 +34,6 @@ index f83913a..9f71511 100644
  #include <sys/sysctl.h>
  #endif
  /* #endif HAVE_THREAD_INFO */
-diff --git a/src/swap.c b/src/swap.c
-index 61c9e28..5a475e4 100644
---- a/src/swap.c
-+++ b/src/swap.c
-@@ -49,7 +49,7 @@
- #if HAVE_SYS_PARAM_H
- #include <sys/param.h>
- #endif
--#if HAVE_SYS_SYSCTL_H
-+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
- #include <sys/sysctl.h>
- #endif
- #if HAVE_SYS_DKSTAT_H
 diff --git a/src/uptime.c b/src/uptime.c
 index 0892bda..4b15150 100644
 --- a/src/uptime.c
@@ -90,18 +47,6 @@ index 0892bda..4b15150 100644
  #include <sys/sysctl.h>
  /* Using sysctl interface to retrieve the boot time on *BSD / Darwin / OS X
   * systems */
-diff --git a/src/uuid.c b/src/uuid.c
-index 60d09b5..17e4dd8 100644
---- a/src/uuid.c
-+++ b/src/uuid.c
-@@ -29,7 +29,7 @@
- #include "plugin.h"
- #include "utils/common/common.h"
- 
--#if HAVE_SYS_SYSCTL_H
-+#if defined(HAVE_SYS_SYSCTL_H) && !defined(__GLIBC__)
- #include <sys/sysctl.h>
- #endif
  
 -- 
 2.17.1
