@@ -12,8 +12,8 @@ SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-too
     file://conntrack-failover \
     file://init \
 "
-SRC_URI[tar.md5sum] = "9356a0cd4df81a597ac26d87ccfebac4"
-SRC_URI[tar.sha256sum] = "36c6d99c7684851d4d72e75bd07ff3f0ff1baaf4b6f069eb7244990cd1a9a462"
+SRC_URI[tar.md5sum] = "a9dc7567921213007def78ad72313109"
+SRC_URI[tar.sha256sum] = "590859cc848245dbfd9c6487761dd303b3a1771e007f4f42213063ca56205d5f"
 
 inherit autotools update-rc.d pkgconfig
 
