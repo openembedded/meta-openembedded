@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "\
     file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9 \
 "
 
-SRC_URI[md5sum] = "2b3df629827d8bc18ca4d927b4885a17"
-SRC_URI[sha256sum] = "7e67c8cfeee8a1c8fd251bcc418de9d4dca697753565c9a9e614525179d9555d"
+SRC_URI[md5sum] = "d05596f02774ea39517765c5dced874a"
+SRC_URI[sha256sum] = "bcd68cb7fdb044dbd5e5d3a02c311b25717c0376168e7c992982130f19c51b03"
 
 inherit pypi setuptools3
 
