@@ -6,11 +6,14 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
 
 SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-SRC_URI[md5sum] = "5cde556545828beaffbe50b1bb038480"
-SRC_URI[sha256sum] = "b300c0f872f632ad7f8eb60725edbf14f0f8f52db740a3ab23e7b94f1cd22a50"
+SRC_URI[sha256sum] = "ee0e14c1bd2f9429b1a28999240304c0342ed739ebaea3d4ff44c585b1097be8"
 
-DEPENDS = "sqlite3 sqlite3-native"
+DEPENDS = "sqlite3 sqlite3-native tiff"
 
 inherit autotools pkgconfig lib_package
+
+PACKAGECONFIG ?= "curl"
+
+PACKAGECONFIG[curl] = ",--without-curl,curl"
 
 FILES_${PN} += "${datadir}/proj"
