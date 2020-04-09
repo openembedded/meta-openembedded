@@ -23,6 +23,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.2 \
            file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
            file://0001-Support-deprecated-resolver-functions.patch \
            file://0003-Fix-unknown-prefix-env.patch \
+           file://1296.patch \
            "
 SRC_URI_append_libc-musl ="\
            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
@@ -36,7 +37,7 @@ SRC_URI_append_toolchain-clang = "\
 
 S = "${WORKDIR}/git"
 
-COMPATIBLE_HOST ?= '(x86_64|powerpc64|aarch64).*-linux'
+COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
 
 PACKAGECONFIG ??= "tcmalloc system-pcre"
 # gperftools compilation fails for arm below v7 because of missing support of
