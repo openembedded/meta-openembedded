@@ -13,8 +13,6 @@ Upstream-Status: Pending
  pr/include/md/_linux.cfg | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/pr/include/md/_linux.cfg b/pr/include/md/_linux.cfg
-index 640b19c..31296a8 100644
 --- a/pr/include/md/_linux.cfg
 +++ b/pr/include/md/_linux.cfg
 @@ -499,7 +499,7 @@
@@ -26,6 +24,12 @@ index 640b19c..31296a8 100644
  
  #ifdef __MIPSEB__
  #define IS_BIG_ENDIAN 1
--- 
-2.14.1
-
+@@ -511,7 +511,7 @@
+ #error "Unknown MIPS endianness."
+ #endif
+ 
+-#if _MIPS_SIM == _ABI64
++#if _MIPS_SIM == _MIPS_SIM_ABI64
+ 
+ #define IS_64
+ 
