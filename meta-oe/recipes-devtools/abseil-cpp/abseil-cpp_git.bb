@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}                \
            file://0002-Add-forgotten-ABSL_HAVE_VDSO_SUPPORT-conditional.patch \
            file://0003-Add-fPIC-option.patch                                  \
            file://0001-Add-RISCV-support-to-GetProgramCounter.patch \
+           file://0001-absl-always-use-asm-sgidefs.h.patch \
           "
 
 S = "${WORKDIR}/git"
