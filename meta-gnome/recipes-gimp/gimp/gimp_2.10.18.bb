@@ -45,6 +45,9 @@ EXTRA_OECONF = "--disable-python \
                 --without-webkit \
                 --without-wmf"
 
+EXTRA_OECONF_append_libc-musl_mipsarch = " --disable-vector-icons"
+EXTRA_OECONF_append_libc-musl_arm = " --disable-vector-icons"
+
 do_configure_append() {
     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
     find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
