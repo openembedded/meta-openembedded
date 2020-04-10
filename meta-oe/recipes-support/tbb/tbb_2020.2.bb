@@ -3,27 +3,26 @@ DESCRIPTION = "Parallelism library for C++ - runtime files \
     performance without having to be a threading expert. It represents a \
     higher-level, task-based parallelism that abstracts platform details \
     and threading mechanism for performance and scalability."
-HOMEPAGE = "http://threadingbuildingblocks.org/"
+HOMEPAGE = "https://software.intel.com/en-us/tbb"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-PRDATE = "20170412"
-BRANCH = "tbb_2017"
-SRCREV = "a2cfdfe946933cbe38bffe1d8086ae36f06691a3"
-PV = "${PRDATE}+${SRCPV}"
-SRC_URI = "git://github.com/01org/tbb;branch=${BRANCH} \
+BRANCH = "tbb_2020"
+SRCREV = "60b7d0a78f8910976678ba63a19fdaee22c0ef65"
+SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
            file://cross-compile.patch \
            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
-           file://0002-linux-Fix-gcc-version-check.patch \
+           file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
            file://tbb.pc \
 "
 
 S = "${WORKDIR}/git"
+PE = "1"
 
 COMPILER ?= "gcc"
 COMPILER_toolchain-clang = "clang"
 
 do_compile() {
-    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH} runtime=cc4
+    oe_runmake compiler=${COMPILER} arch=${HOST_ARCH}
 }
 
 do_install() {
@@ -44,5 +43,3 @@ do_install() {
 # ...
 # | make[1]: *** [concurrent_queue.o] Error 1
 ARM_INSTRUCTION_SET = "arm"
-SECURITY_CFLAGS_append = " -fPIC"
-
