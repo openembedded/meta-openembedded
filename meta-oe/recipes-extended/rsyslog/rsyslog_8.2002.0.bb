@@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
     file://0001-Include-sys-time-h.patch \
 "
 
-SRC_URI[md5sum] = "154e33feb587216f2955050a8301104c"
-SRC_URI[sha256sum] = "e1f4776b1c62ad7220f4d624a89a96b0c3d4738006899356eaaef0f1f91ee104"
+SRC_URI[md5sum] = "fbe6d18205170e22bad470954d0dc874"
+SRC_URI[sha256sum] = "fe86c14d860da1202c76616feac0539ea5a40a4ad182d74b7d6d2419cc2381f8"
 
 UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
@@ -131,6 +131,8 @@ do_install_ptest() {
     # fix the module load path with runtime/.libs
     find ${D}${PTEST_PATH}/${TESTDIR} -name "*.conf" -o -name "*.sh" -o -name "*.c" | xargs \
         sed -i -e 's:../plugins/.*/.libs/:../runtime/.libs/:g'
+    # fix the python3 path for tests/set-envar
+    sed -i -e s:${HOSTTOOLS_DIR}:${bindir}:g ${D}${PTEST_PATH}/tests/set-envvars
 }
 
 do_install_append() {
