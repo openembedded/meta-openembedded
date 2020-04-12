@@ -22,8 +22,8 @@ SRC_URI = "git://github.com/draios/sysdig.git;branch=dev \
            file://fix-uint64-const.patch \
            file://aarch64.patch \
           "
-SRCREV = "9fa0d129668fdabf256446be4be35838888052d9"
-PV = "0.26.5"
+SRCREV = "8daeef8da752c5f07f439391bc20c5948eb11470"
+PV = "0.26.6"
 
 S = "${WORKDIR}/git"
 
