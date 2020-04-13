@@ -25,7 +25,9 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
 "
 SRC_URI[sha256sum] = "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff19e00021e071e47601"
 
-inherit autotools gettext pkgconfig features_check mime-xdg
+inherit autotools features_check gettext pkgconfig features_check mime-xdg
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 ARM_INSTRUCTION_SET = "arm"
 export BUILDCC = "${BUILD_CC}"
