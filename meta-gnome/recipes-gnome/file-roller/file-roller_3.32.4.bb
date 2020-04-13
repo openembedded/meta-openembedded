@@ -16,7 +16,10 @@ inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even 
 SRC_URI[archive.md5sum] = "21982b8d298cb2994a99494399dcb2d5"
 SRC_URI[archive.sha256sum] = "1b3b2cbfcb444e0d150bfd063add9d5181c8ab24f0593e5a8894399297214017"
 
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagekit', '', d)}"
+
 PACKAGECONFIG[nautilus] = "-Dnautilus-actions=true,-Dnautilus-actions=false,nautilus"
+PACKAGECONFIG[packagekit] = "-Dpackagekit=true,-Dpackagekit=false,"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
