@@ -11,7 +11,9 @@ DEPENDS = "udev gtk+3 libnotify libcanberra bluez5"
 GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION = "gtk_doc"
 
-inherit gnomebase gtk-icon-cache gtk-doc gobject-introspection upstream-version-is-even
+inherit features_check gnomebase gtk-icon-cache gtk-doc gobject-introspection upstream-version-is-even
+
+REQUIRED_DISTRO_FEATURES = "x11"
 
 # gtk-icon-cache bbclass will take care of this for us.
 EXTRA_OEMESON = "-Dicon_update=false"
