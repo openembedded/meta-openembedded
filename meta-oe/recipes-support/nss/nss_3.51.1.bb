@@ -34,8 +34,8 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
            "
 
-SRC_URI[md5sum] = "e59dc16965ef7713669c628d2640ebd1"
-SRC_URI[sha256sum] = "75348b3b3229362486c57a880db917da1f96ef4eb639dc9cc2ff17d72268459c"
+SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
+SRC_URI[sha256sum] = "085c5eaceef040eddea639e2e068e70f0e368f840327a678ef74ae3d6c15ca78"
 
 UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
 UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
