@@ -9,8 +9,8 @@ inherit xfce update-alternatives features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += "file://0001-Revert-compositor-Revert-to-GLX-as-default-vblank-me.patch"
-SRC_URI[md5sum] = "c33847836958d540e3ecd0a27f131c0f"
-SRC_URI[sha256sum] = "b4182bf8dc63d092f120a51fcae0eb54b9bd4aa4f8486f47e5a65a108322b615"
+SRC_URI[md5sum] = "b20bd22bdbe1b17f76a139fd74e072a9"
+SRC_URI[sha256sum] = "100781a18070762e8f34c1d450e767586576753d567f76a8c32818284f511428"
 
 PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'epoxy', '', d)} \
