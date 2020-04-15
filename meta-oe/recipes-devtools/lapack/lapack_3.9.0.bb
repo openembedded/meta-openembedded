@@ -13,9 +13,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=930f8aa500a47c7dab0f8efb5a1c9a40"
 
 DEPENDS = "libgfortran"
 
-SRC_URI = "https://github.com/Reference-LAPACK/lapack/archive/v${PV}.tar.gz"
-SRC_URI[md5sum] = "0b251e2a8d5f949f99b50dd5e2200ee2"
-SRC_URI[sha256sum] = "106087f1bb5f46afdfba7f569d0cbe23dacb9a07cd24733765a0e89dbe1ad573"
+SRCREV = "6acc99d5f39130be7cec00fb835606042101a970"
+SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https"
+S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = " -DBUILD_SHARED_LIBS=ON "
 OECMAKE_GENERATOR = "Unix Makefiles"
