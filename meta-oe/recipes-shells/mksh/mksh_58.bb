@@ -7,10 +7,10 @@ LIC_FILES_CHKSUM = "file://main.c;beginline=6;endline=26;md5=0651e575e39d1a3e884
                     file://strlcpy.c;beginline=1;endline=17;md5=d953f28f0c43ee29e238ec9bc15df2a0 \
                    "
 
-SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R57.tgz"
+SRC_URI = "http://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-R58.tgz"
 
-SRC_URI[md5sum] = "4d2686535252ea6a57bdec531498239a"
-SRC_URI[sha256sum] = "3d101154182d52ae54ef26e1360c95bc89c929d28859d378cc1c84f3439dbe75"
+SRC_URI[md5sum] = "6922a3e2228de2f0e78ff25398ccf8df"
+SRC_URI[sha256sum] = "608beb7b71870b23309ba1da8ca828da0e4540f2b9bd981eb39e04f8b7fc678c"
 
 inherit update-alternatives
 
