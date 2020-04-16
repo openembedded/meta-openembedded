@@ -170,6 +170,7 @@ do_install() {
     fi
     if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
         mv ${D}/lib/security ${D}/${libdir}
+        rmdir --ignore-fail-on-non-empty ${D}/lib
     fi
 }
 
