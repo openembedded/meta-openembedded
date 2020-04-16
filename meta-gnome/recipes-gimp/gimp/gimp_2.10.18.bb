@@ -46,7 +46,7 @@ EXTRA_OECONF = "--disable-python \
                 --without-wmf"
 
 EXTRA_OECONF_append_libc-musl_mipsarch = " --disable-vector-icons"
-EXTRA_OECONF_append_libc-musl_arm = " --disable-vector-icons"
+EXTRA_OECONF_append_toolchain-clang_arm = " --disable-vector-icons"
 
 do_configure_append() {
     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
