@@ -10,6 +10,9 @@ inherit setuptools3 gnomebase gobject-introspection
 
 DEPENDS += "lcms"
 
+# https://bugs.llvm.org/show_bug.cgi?id=45555
+CFLAGS_append_toolchain-clang_mipsarch = " -ffp-exception-behavior=ignore "
+
 SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
 SRC_URI[md5sum] = "d032853f2678bc95054c39d4f02045c1"
 SRC_URI[sha256sum] = "9a710b6950da37ada94cd9e2046cbce26de12473da32a7b79b7d1432fc66ce0e"
