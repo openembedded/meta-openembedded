@@ -30,7 +30,6 @@ inherit autotools features_check gettext pkgconfig mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-ARM_INSTRUCTION_SET = "arm"
 export BUILDCC = "${BUILD_CC}"
 EXTRA_OECONF = "\
     --enable-run-as-root \
