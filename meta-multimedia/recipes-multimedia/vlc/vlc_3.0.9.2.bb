@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
    dbus libxml2 gnutls \
-   tremor faad2 ffmpeg flac fluidsynth alsa-lib \
+   tremor faad2 ffmpeg flac alsa-lib \
    lua-native lua libidn \
    avahi jpeg xz libmodplug mpeg2dec \
    libmtp libopus orc libsamplerate0 libusb1 schroedinger taglib \
@@ -22,6 +22,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
            file://0006-make-opencv-configurable.patch \
            file://0007-use-vorbisidec.patch \
            file://0008-fix-luaL-checkint.patch \
+           file://0001-Use-packageconfig-to-detect-mmal-support.patch \
 "
 SRC_URI[sha256sum] = "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff19e00021e071e47601"
 
@@ -51,12 +52,16 @@ EXTRA_OECONF = "\
 "
 
 PACKAGECONFIG ?= " \
-    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
+    live555 dc1394 dv1394 notify fontconfig fluidsynth freetype dvdread png \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
+    x264 \
 "
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'qmake5_paths', '', d)}
 
+PACKAGECONFIG[mmal] = "--enable-omxil --enable-omxil-vout --enable-rpi-omxil --enable-mmal,,userland"
+PACKAGECONFIG[x264] = "--enable-x264,--disable-x264,x264"
+PACKAGECONFIG[fluidsynth] = ",,fluidsynth"
 PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
 PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
 PACKAGECONFIG[jack] = "--enable-jack,--disable-jack,jack"
