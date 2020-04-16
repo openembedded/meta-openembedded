@@ -18,11 +18,6 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-Use-pkg-config-for-libxml2-detection.patch \
            file://debian-php-fixheader.patch \
            file://CVE-2019-6978.patch \
-           file://CVE-2020-7059.patch \
-           file://CVE-2019-11045.patch \
-           file://CVE-2019-11046.patch \
-           file://CVE-2019-11047.patch \
-           file://CVE-2019-11050.patch \
           "
 
 SRC_URI_append_class-target = " \
@@ -39,8 +34,8 @@ SRC_URI_append_class-target = " \
             file://xfail_two_bug_tests.patch \
           "
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[md5sum] = "21b710b4126d4d54714de9693a6c7b0d"
-SRC_URI[sha256sum] = "92d1ff4b13c7093635f1ec338a5e6891ca99b10e65fbcadd527e5bb84d11b5e7"
+SRC_URI[md5sum] = "fc72fa1c2a6da38a5a7f8797eaa08c58"
+SRC_URI[sha256sum] = "b8072d526a283182963b03960b7982392daa43cb31131eca4cf0b996764a042e"
 
 inherit autotools pkgconfig python3native gettext
 
