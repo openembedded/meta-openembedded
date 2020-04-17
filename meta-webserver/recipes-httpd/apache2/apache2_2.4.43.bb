@@ -14,6 +14,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://0006-apache2-fix-the-race-issue-of-parallel-installation.patch \
            file://0007-apache2-allow-to-disable-selinux-support.patch \
            file://apache-configure_perlbin.patch \
+           file://0001-support-apxs.in-force-destdir-to-be-empty-string.patch \
           "
 
 SRC_URI_append_class-target = " \
