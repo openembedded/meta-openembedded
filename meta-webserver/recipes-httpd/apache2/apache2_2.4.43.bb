@@ -24,9 +24,9 @@ SRC_URI_append_class-target = " \
            file://volatiles.04_apache2 \
            "
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d52d0fd0bc788f068e647116c01ddfcd"
-SRC_URI[md5sum] = "dfc674f8f454e3bc2d4ccd73ad3b5f1e"
-SRC_URI[sha256sum] = "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
+SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
+SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
 
 S = "${WORKDIR}/httpd-${PV}"
 
