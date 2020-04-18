@@ -12,6 +12,8 @@ inherit cmake pkgconfig
 JIT ?= "jit"
 JIT_mipsarchn32 = ""
 JIT_mipsarchn64 = ""
+JIT_riscv64 = ""
+JIT_riscv32 = ""
 
 DEPENDS += "lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
 RDEPENDS_${PN} = "bash"
@@ -48,3 +50,5 @@ FILES_${PN} += " \
 # Something like this https://code.videolan.org/ePirat/vlc/-/commit/01fd9fe4c7f6c5558f7345f38abf0152e17853ab  is needed to fix it
 COMPATIBLE_HOST_libc-musl = "null"
 COMPATIBLE_HOST_mips = "null"
+COMPATIBLE_HOST_riscv64 = "null"
+COMPATIBLE_HOST_riscv32 = "null"
