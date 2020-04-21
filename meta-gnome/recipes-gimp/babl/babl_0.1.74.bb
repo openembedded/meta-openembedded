@@ -12,6 +12,7 @@ DEPENDS += "lcms"
 
 # https://bugs.llvm.org/show_bug.cgi?id=45555
 CFLAGS_append_toolchain-clang_mipsarch = " -ffp-exception-behavior=ignore "
+CFLAGS_append_toolchain-clang_riscv64 = " -ffp-exception-behavior=ignore "
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
 SRC_URI[md5sum] = "d032853f2678bc95054c39d4f02045c1"
