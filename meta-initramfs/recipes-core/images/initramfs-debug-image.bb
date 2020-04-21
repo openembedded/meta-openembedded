@@ -11,8 +11,6 @@ IMAGE_FEATURES = ""
 export IMAGE_BASENAME = "initramfs-debug-image"
 IMAGE_LINGUAS = ""
 
-LICENSE = "MIT"
-
 IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
 inherit core-image
 
