@@ -38,8 +38,12 @@ inherit gettext
 BBCLASSEXTEND = "native cross"
 TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
 
-# crash 7.1.3 and before don't support mips64
-COMPATIBLE_HOST = "^(?!mips64).*"
+# crash 7.1.3 and before don't support mips64/riscv64
+COMPATIBLE_HOST_riscv64 = "null"
+COMPATIBLE_HOST_riscv32 = "null"
+COMPATIBLE_HOST_mipsarchn64 = "null"
+COMPATIBLE_HOST_mipsarchn32 = "null"
+
 
 EXTRA_OEMAKE = 'RPMPKG="${PV}" \
                 GDB_TARGET="${TARGET_SYS}" \
