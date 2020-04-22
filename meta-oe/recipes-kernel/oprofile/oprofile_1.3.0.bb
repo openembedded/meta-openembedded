@@ -1,5 +1,8 @@
 require oprofile.inc
 
+COMPATIBLE_HOST_riscv64 = "null"
+COMPATIBLE_HOST_riscv32 = "null"
+
 DEPENDS_append_powerpc64 = " libpfm4"
 DEPENDS_append_powerpc64le = " libpfm4"
 
