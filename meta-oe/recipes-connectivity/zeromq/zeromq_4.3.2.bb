@@ -7,6 +7,7 @@ PACKAGECONFIG ??= "libsodium"
 PACKAGECONFIG[libsodium] = "-DWITH_LIBSODIUM=ON,-DWITH_LIBSODIUM=OFF, libsodium"
 
 SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}.tar.gz \
+    file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch \
     file://run-ptest \
 "
 SRC_URI[md5sum] = "2047e917c2cc93505e2579bcba67a573"
