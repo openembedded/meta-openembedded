@@ -39,3 +39,5 @@ do_install_append() {
     # fix for qa check buildpaths
     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/rocksdb/RocksDBTargets.cmake
 }
+
+LDFLAGS_append_riscv64 = " -pthread"
