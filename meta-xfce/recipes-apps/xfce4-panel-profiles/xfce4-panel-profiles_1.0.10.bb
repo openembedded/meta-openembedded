@@ -9,7 +9,9 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS += "intltool-native"
 
-SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2"
+SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2 \
+           file://not-create-link-to-locale.patch \
+           "
 SRC_URI[md5sum] = "6190678bc701c197babcb2389ba46182"
 SRC_URI[sha256sum] = "a84d5e748d53bc5da269954cc3ad7f5ac0c4f5813acfd3892ea6f9064f17fb68"
 
