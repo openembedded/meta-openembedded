@@ -191,6 +191,7 @@ VALGRIND_libc-musl_powerpc64le = ''
 
 # RISC-V support for valgrind is not there yet
 VALGRIND_riscv64 = ""
+VALGRIND_riscv32 = ""
 
 RDEPENDS_${PN}-ptest += "\
   make diffutils gzip bash gawk coreutils procps \
