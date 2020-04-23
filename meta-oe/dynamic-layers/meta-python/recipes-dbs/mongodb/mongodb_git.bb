@@ -44,6 +44,8 @@ PACKAGECONFIG ??= "tcmalloc system-pcre"
 # dmb operation. So we use system-allocator instead of tcmalloc
 PACKAGECONFIG_remove_armv6 = "tcmalloc"
 PACKAGECONFIG_remove_libc-musl = "tcmalloc"
+PACKAGECONFIG_remove_riscv64 = "tcmalloc"
+PACKAGECONFIG_remove_riscv32 = "tcmalloc"
 
 PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
 PACKAGECONFIG[shell] = ",--js-engine=none,,"
