@@ -20,6 +20,7 @@ S = "${WORKDIR}/git"
 #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
 #   Segmentation fault (core dumped)
 COMPATIBLE_HOST_mipsarch = "null"
+
 # Disable thumb1
 # {standard input}: Assembler messages:
 # {standard input}:434: Error: lo register required -- `ldr pc,[sp]'
@@ -29,6 +30,8 @@ ARM_INSTRUCTION_SET_toolchain-clang_arm = "arm"
 
 PACKAGECONFIG ?= "libunwind static"
 PACKAGECONFIG_remove_arm_libc-musl = "libunwind"
+PACKAGECONFIG_remove_riscv64 = "libunwind"
+PACKAGECONFIG_remove_riscv32 = "libunwind"
 
 PACKAGECONFIG[libunwind] = "--enable-libunwind,--disable-libunwind,libunwind"
 PACKAGECONFIG[static] = "--enable-static,--disable-static,"
