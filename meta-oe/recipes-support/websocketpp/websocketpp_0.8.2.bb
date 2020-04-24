@@ -7,11 +7,7 @@ LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=4d168d763c111f4ffc62249870e4e0ea"
 DEPENDS = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'openssl boost zlib', '', d)} "
 
 SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https \
-           file://0001-Replace-make_shared-with-new-in-some-cases.patch \
-           file://0002-Fix-missed-entries-fix-testing.patch \
            file://0001-cmake-Use-GNUInstallDirs.patch \
-           file://842.patch \
-           file://771.patch \
            file://855.patch \
            file://857.patch \
            file://0001-Correct-clang-compiler-flags.patch \
@@ -25,8 +21,8 @@ RDEPENDS_${PN}-dev = ""
 # to add this package to an SDK, since it isn't a reverse-dependency of anything, just use something like this:
 # TOOLCHAIN_TARGET_TASK_append = " websocketpp-dev"
 
-# tag 0.8.1
-SRCREV= "c6d7e295bf5a0ab9b5f896720cc1a0e0fdc397a7"
+# tag 0.8.2
+SRCREV= "56123c87598f8b1dd471be83ca841ceae07f95ba"
 
 S = "${WORKDIR}/git"
 
