@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.php.net"
 SECTION = "console/network"
 
 LICENSE = "PHP-3.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=fb07bfc51f6d5e0c30b65d9701233b2e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7e571b888d585b31f9ef5edcc647fa30"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
@@ -13,11 +13,9 @@ PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
-           file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
-           file://0048-Use-pkg-config-for-FreeType2-detection.patch \
-           file://0001-Use-pkg-config-for-libxml2-detection.patch \
            file://debian-php-fixheader.patch \
-           file://CVE-2019-6978.patch \
+           file://0001-configure.ac-don-t-include-build-libtool.m4.patch \
+           file://0001-php.m4-don-t-unset-cache-variables.patch \
           "
 
 SRC_URI_append_class-target = " \
@@ -34,8 +32,8 @@ SRC_URI_append_class-target = " \
             file://xfail_two_bug_tests.patch \
           "
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[md5sum] = "fc72fa1c2a6da38a5a7f8797eaa08c58"
-SRC_URI[sha256sum] = "b8072d526a283182963b03960b7982392daa43cb31131eca4cf0b996764a042e"
+SRC_URI[md5sum] = "262c258a3b8b5699fcca89a64e58758c"
+SRC_URI[sha256sum] = "308e8f4182ec8a2767b0b1b8e1e7c69fb149b37cfb98ee4a37475e082fa9829f"
 
 inherit autotools pkgconfig python3native gettext
 
@@ -55,7 +53,6 @@ COMMON_EXTRA_OECONF = "--enable-sockets \
                        --libdir=${PHP_LIBDIR} \
 "
 EXTRA_OECONF = "--enable-mbstring \
-                --enable-wddx \
                 --enable-fpm \
                 --with-libdir=${baselib} \
                 --with-gettext=${STAGING_LIBDIR}/.. \
@@ -107,6 +104,7 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
 PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
 PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
+PACKAGECONFIG[mbregex] = "--enable-mbregex, --disable-mbregex, oniguruma"
 
 export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
 export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
@@ -149,16 +147,12 @@ do_install_prepend_class-target() {
 # fixme
 do_install_append_class-target() {
     install -d ${D}${sysconfdir}/
-    if [ -d ${RECIPE_SYSROOT_NATIVE}${sysconfdir} ];then
-         install -m 0644 ${RECIPE_SYSROOT_NATIVE}${sysconfdir}/pear.conf ${D}${sysconfdir}/
-    fi
     rm -rf ${D}/${TMPDIR}
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
     rm -rf ${D}/.[a-z]*
     rm -rf ${D}/var
     rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
-    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}${sysconfdir}/pear.conf
     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
     install -d ${D}/${sysconfdir}/apache2/conf.d
     install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf

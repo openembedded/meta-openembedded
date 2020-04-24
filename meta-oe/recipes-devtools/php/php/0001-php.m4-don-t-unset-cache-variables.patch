@@ -1,7 +1,4 @@
-From d2679c89c0b15b90e5360b4863258a7955e5f4e5 Mon Sep 17 00:00:00 2001
-From: Changqing Li <changqing.li@windriver.com>
-Date: Tue, 12 Feb 2019 15:59:19 +0800
-Subject: [PATCH] acinclude.m4: don't unset cache variables
+php.m4: don't unset cache variables
 
 Unsetting prevents cache variable from being passed to configure.
 
@@ -9,17 +6,17 @@ Upstream-Status: Inappropriate [OE-specific]
 
 Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
 
-update patch to version 7.3.2
+update this patch to 7.4.4, acinclude.m4 move to build/php.m4
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- acinclude.m4 | 4 ----
+ build/php.m4 | 4 ----
  1 file changed, 4 deletions(-)
 
-diff --git a/acinclude.m4 b/acinclude.m4
-index 25f900d..2641969 100644
---- a/acinclude.m4
-+++ b/acinclude.m4
-@@ -1921,8 +1921,6 @@ define([phpshift],[ifelse(index([$@],[,]),-1,,[substr([$@],incr(index([$@],[,]))
+diff --git a/build/php.m4 b/build/php.m4
+index 5c45d13..218ec47 100644
+--- a/build/php.m4
++++ b/build/php.m4
+@@ -1587,8 +1587,6 @@ dnl PHP_CHECK_FUNC_LIB
  dnl
  AC_DEFUN([PHP_CHECK_FUNC_LIB],[
    ifelse($2,,:,[
@@ -28,8 +25,8 @@ index 25f900d..2641969 100644
    unset found
    AC_CHECK_LIB($2, $1, [found=yes], [
      AC_CHECK_LIB($2, __$1, [found=yes], [found=no])
-@@ -1954,8 +1952,6 @@ dnl in the default libraries and as a fall back in the specified library.
- dnl Defines HAVE_func and HAVE_library if found and adds the library to LIBS.
+@@ -1620,8 +1618,6 @@ dnl and as a fall back in the specified library. Defines HAVE_func and
+ dnl HAVE_library if found and adds the library to LIBS.
  dnl
  AC_DEFUN([PHP_CHECK_FUNC],[
 -  unset ac_cv_func_$1
