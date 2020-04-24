@@ -12,6 +12,7 @@ SRC_URI = "http://ftp.linux.org.uk/pub/linux/Networking/netkit/${BP}.tar.gz \
            file://cross-compile.patch \
            file://0001-telnet-telnetd-Fix-print-format-strings.patch \
            file://0001-telnet-telnetd-Fix-deadlock-on-cleanup.patch \
+           file://CVE-2020-10188.patch \
            "
 
 UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
