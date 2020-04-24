@@ -21,8 +21,8 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
     file://run-ptest \
     "
 
-SRC_URI[md5sum] = "4755621ff2a7150e208de6bd7decca10"
-SRC_URI[sha256sum] = "b1d1deba966019930f608d1f2b95c40ca3450f1393bcd3a3c001a8ba1d2839ab"
+SRC_URI[md5sum] = "b66ec21e0a0ac331afb4b1bc5c9ef966"
+SRC_URI[sha256sum] = "2d84360b03042178def1d9ff538acacaed2b3a27411db7b2874f1612ed71abc8"
 
 inherit autotools-brokensep ptest pkgconfig
 
