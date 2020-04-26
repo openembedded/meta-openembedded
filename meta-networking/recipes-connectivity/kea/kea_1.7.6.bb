@@ -35,6 +35,10 @@ BUILD_OPTIMIZATION_append_mipsel = " -O"
 do_configure_prepend_class-target() {
     mkdir -p ${B}/src/lib/log/compiler/
     ln -sf ${STAGING_BINDIR_NATIVE}/kea-msg-compiler ${B}/src/lib/log/compiler/kea-msg-compiler
+    # replace abs_top_builddir to avoid introducing the build path
+    # don't expand the abs_top_builddir on the target as the abs_top_builddir is meanlingless on the target
+    find ${S} -type f -name *.sh.in | xargs sed -i  "s:@abs_top_builddir@:@abs_top_builddir_placeholder@:g"
+    sed -i "s:@abs_top_srcdir@:@abs_top_srcdir_placeholder@:g" ${S}/src/bin/admin/kea-admin.in
 }
 
 do_install_append_class-target() {
