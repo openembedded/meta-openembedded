@@ -6,14 +6,15 @@ LICENSE = "EPL-1.0 | EDL-1.0"
 
 LIC_FILES_CHKSUM = " \
         file://edl-v10;md5=3adfcc70f5aeb7a44f3f9b495aa1fbf3 \
-        file://epl-v10;md5=659c8e92a40b6df1d9e3dccf5ae45a08 \
-        file://notice.html;md5=a00d6f9ab542be7babc2d8b80d5d2a4c \
-        file://about.html;md5=dcde438d73cf42393da9d40fabc0c9bc \
+        file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
+        file://notice.html;md5=943f861069889acecebf51dfa24478e2 \
+        file://about.html;md5=e5662cbb5f8fd5c9faac526e4077898e \
 "
 
-SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http"
+SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http \
+           file://0001-Fix-bug-of-free-with-musl.patch"
 
-SRCREV = "d34c51214f4172f2e12bb17532c9f44f72a57dd4"
+SRCREV = "fbe39064c4416f879308a8a5390b19d544970789"
 
 DEPENDS = "openssl"
 
@@ -28,3 +29,7 @@ do_install_append() {
 }
 
 EXTRA_OECMAKE = "-DPAHO_WITH_SSL=ON"
+
+do_configure_prepend_libc-musl() {
+    sed -i -e "s/SET(LIBS_SYSTEM c dl pthread anl rt)/SET(LIBS_SYSTEM c dl pthread rt)/g" ${S}/src/CMakeLists.txt 
+}
