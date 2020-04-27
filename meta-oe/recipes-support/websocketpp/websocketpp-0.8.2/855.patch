@@ -12,7 +12,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 2d13117b..9a46bc10 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -213,7 +213,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
+@@ -217,7 +217,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
      set (Boost_USE_MULTITHREADED TRUE)
      set (Boost_ADDITIONAL_VERSIONS "1.39.0" "1.40.0" "1.41.0" "1.42.0" "1.43.0" "1.44.0" "1.46.1") # todo: someone who knows better spesify these!
  
