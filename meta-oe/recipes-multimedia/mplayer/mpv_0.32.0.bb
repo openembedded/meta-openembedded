@@ -2,11 +2,12 @@ SUMMARY = "Open Source multimedia player"
 DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features with the former projects while introducing many more."
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mpv.io/"
-DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
-           libxscrnsaver libv4l libxinerama \
-"
 
-REQUIRED_DISTRO_FEATURES = "x11"
+DEPENDS = "zlib ffmpeg jpeg libv4l"
+
+DEPENDS += " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' virtual/libx11 xsp libxv libxscrnsaver libxinerama', '', d)} \
+"
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
