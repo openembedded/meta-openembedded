@@ -81,7 +81,7 @@ PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
 "
 PACKAGECONFIG_class-native = ""
 
-PACKAGECONFIG[zip] = "--enable-zip --with-libzip=${STAGING_EXECPREFIXDIR},,libzip"
+PACKAGECONFIG[zip] = "--with-zip --with-zlib-dir=${STAGING_EXECPREFIXDIR},,libzip"
 
 PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
                         --with-pdo-mysql=mysqlnd \
