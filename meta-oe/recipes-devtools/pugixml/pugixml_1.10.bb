@@ -21,3 +21,5 @@ EXTRA_OECMAKE += "-DBUILD_PKGCONFIG=ON \
                   -DBUILD_SHARED_LIBS=ON \
                   -DCMAKE_BUILD_TYPE=Release \
                   "
+
+BBCLASSEXTEND = "native nativesdk"
