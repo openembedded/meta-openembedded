@@ -3,7 +3,7 @@ HOMEPAGE = "https://remmina.org"
 SECTION = "Support"
 LICENSE = "GPLv2 & openssl"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
-DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret libxkbfile"
+DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi libsodium libssh vte json-glib libsoup-2.4 libvncserver libsecret libxkbfile"
 
 
 DEPENDS_append_libc-musl = " libexecinfo"
