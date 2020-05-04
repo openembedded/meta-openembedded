@@ -8,6 +8,7 @@ SRC_URI += " \
     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
     file://0001-remove-tests-dep-on-gobject-intro.patch \
     file://0002-fix-makefile-use-copy-rule-for-unmodified-files.patch \
+    file://0003-install-fix-metainfo.xml-ownership-on-install.patch \
     file://cockpit.pam \
     "
 SRC_URI[md5sum] = "e69b0b8a75a5d55ddfd9817d857c71af"
@@ -164,9 +165,6 @@ RDEPENDS_${PN} += "${PN}-bridge"
 
 do_install_append() {
     pkgdatadir=${datadir}/cockpit
-
-    # avoid host contamination
-    find ${D}${datadir}/cockpit -name manifest.json -exec chown root:root {} \;
 
     chmod 4750 ${D}${libexecdir}/cockpit-session
 
