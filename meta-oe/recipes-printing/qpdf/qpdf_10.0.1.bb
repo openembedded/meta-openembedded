@@ -20,6 +20,8 @@ EXTRA_OECONF = "--without-random \
 
 EXTRA_OEMAKE_class-target = "LIBTOOL=${HOST_SYS}-libtool"
 
+LDFLAGS_append_mipsarch = " -latomic"
+
 S="${WORKDIR}/${BPN}-${PV}"
 
 # avoid Makefile returning error on 'make clean' before configure was run
