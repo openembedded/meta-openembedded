@@ -3,21 +3,35 @@ HOMEPAGE = "http://www.landley.net/toybox/"
 DEPENDS = "attr virtual/crypt"
 
 LICENSE = "BSD-0-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
 
 inherit cml1 update-alternatives
 
 SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-           file://OE-path-changes.patch \
+           file://mips-no-STKFLT.patch \
+           file://0001-Tackle-SIGEMT-and-SIGSTKFLT-is-not-glibc-specific.patch \
            "
-SRC_URI[md5sum] = "a8bb502a1be941f06dd2644fff25f547"
-SRC_URI[sha256sum] = "3ada450ac1eab1dfc352fee915ea6129b9a4349c1885f1394b61bd2d89a46c04"
+SRC_URI[sha256sum] = "eab28fd29d19d4e61ef09704e5871940e6f35fd35a3bb1285e41f204504b5c01"
 
 SECTION = "base"
 
 TOYBOX_BIN = "generated/unstripped/toybox"
 
-EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC}" CPUS=${@oe.utils.cpu_count()}'
+# Toybox is strict on what CC, CFLAGS and CROSS_COMPILE variables should contain.
+# Fix CC, CFLAGS, CROSS_COMPILE to match expectations.
+# CC = compiler name
+# CFLAGS = only compiler flags
+# CROSS_COMPILE = compiler prefix
+CFLAGS += "${TOOLCHAIN_OPTIONS} ${TUNE_CCARGS}"
+
+COMPILER_toolchain-clang = "clang"
+COMPILER  ?= "gcc"
+
+EXTRA_OEMAKE = 'CROSS_COMPILE="${HOST_PREFIX}" \
+                CC="${COMPILER}" \
+                STRIP="strip" \
+                CFLAGS="${CFLAGS}" \
+                HOSTCC="${BUILD_CC}" CPUS=${@oe.utils.cpu_count()} V=1'
 
 do_configure() {
     # allow user to define their own defconfig in bbappend, taken from kernel.bbclass
