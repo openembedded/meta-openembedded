@@ -85,6 +85,8 @@ FILES_${PN}-storaged = " \
     ${datadir}/cockpit/storaged \
     ${datadir}/metainfo/org.cockpit-project.cockpit-storaged.metainfo.xml \
 "
+RDEPENDS_${PN}-storaged = "udisks2"
+
 FILES_${PN}-networkmanager = "${datadir}/cockpit/networkmanager"
 RDEPENDS_${PN}-networkmanager = "networkmanager"
 
