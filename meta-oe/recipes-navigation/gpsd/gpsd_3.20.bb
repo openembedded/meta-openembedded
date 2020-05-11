@@ -7,10 +7,10 @@ PROVIDES = "virtual/gpsd"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-    file://0001-gps_shm_close-Free-privdata.patch \
+    file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch \
 "
-SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
-SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
+SRC_URI[md5sum] = "cf7fdec7ce7221d20bee1a7246362b05"
+SRC_URI[sha256sum] = "172a7805068eacb815a3c5225436fcb0be46e7e49a5001a94034eac43df85e50"
 
 inherit scons update-rc.d python3-dir python3native systemd update-alternatives
 
