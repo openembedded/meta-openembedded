@@ -3,7 +3,7 @@ DESCRIPTION = "Persistent Memory Development Kit"
 HOMEPAGE = "http://pmem.io"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7db1106255a1baa80391fd2e21eebab7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1b8430f251523f1bff0c9fb95da7e0ca"
 DEPENDS = "ndctl"
 
 # Required to have the fts.h header for musl
@@ -12,12 +12,11 @@ DEPENDS_append_libc-musl = " fts"
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/pmem/pmdk.git \
-           file://0001-jemalloc-jemalloc.cfg-Specify-the-host-when-building.patch \
+           file://0001-examples-Initialize-child_idx.patch \
            file://0002-Makefile-Don-t-install-the-docs.patch \
-           file://0001-os_posix-Use-__FreeBSD__-to-control-secure_getenv-de.patch \
           "
 
-SRCREV = "bc5e309485df61c452d08367e4b13ba9dfed5071"
+SRCREV = "0245d75eaf0f6106c86a7926a45fdf2149e37eaa"
 
 inherit autotools-brokensep pkgconfig
 
@@ -30,6 +29,10 @@ EXTRA_OEMAKE = "BUILD_EXAMPLES='n' HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECT
 
 # Fix the missing fts libs when using musl
 EXTRA_OEMAKE_append_libc-musl = " EXTRA_LIBS='-lfts'"
+
+do_configure_prepend() {
+	touch .skip-doc
+}
 
 do_install() {
 	oe_runmake prefix=${prefix} DESTDIR=${D} install
