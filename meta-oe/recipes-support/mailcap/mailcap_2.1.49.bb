@@ -14,12 +14,12 @@ by several applications e.g. to determine MIME types for filenames."
 SECTION = "System Environment/Base"
 
 LICENSE = "PD & MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=100fcfb84512ccc03ffc7d89ac391305"
+LIC_FILES_CHKSUM = "file://COPYING;md5=8dce08227d135cfda1f19d4c0c6689de"
 
 SRC_URI = "https://releases.pagure.org/${BPN}/${BP}.tar.xz"
 
-SRC_URI[md5sum] = "2c26e18e912a5cf00318fcf7f8f2d747"
-SRC_URI[sha256sum] = "d7b023b237d6053bf05ff6786e0663c55c614efcc99cdf856120be13b5c29157"
+SRC_URI[md5sum] = "d5701a1a541383c0eda328f4a6518751"
+SRC_URI[sha256sum] = "f7381516bc1a937348efd1d0e14618e0a2afc5d59fe821dd248632d5601b59b5"
 
 do_install() {
     oe_runmake install DESTDIR=${D} sysconfdir=${sysconfdir} mandir=${mandir}
