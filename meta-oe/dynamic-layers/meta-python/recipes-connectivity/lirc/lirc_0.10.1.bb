@@ -6,13 +6,13 @@ DESCRIPTION_append_lirc-nslu2example = " This package contains a working config 
 HOMEPAGE = "http://www.lirc.org"
 SECTION = "console/network"
 LICENSE = "GPLv2"
-DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 python3-pyyaml"
+DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 python3-pyyaml python3-setuptools-native"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2 \
-    file://pollfd.patch \
     file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
+    file://fix_build_errors.patch \
     file://lircd.service \
     file://lircd.init \
     file://lircexec.init \
@@ -20,8 +20,8 @@ SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2 \
     file://lirc_options.conf \
     file://lirc.tmpfiles \
 "
-SRC_URI[md5sum] = "0d11679cbdd94a5a6da00a8e7231b4bf"
-SRC_URI[sha256sum] = "c68f18c35b489b865c0a741d119b136e8702191538cd3551b977a7af6c4e41ab"
+SRC_URI[md5sum] = "86c3f8e4efaba10571addb8313d1e040"
+SRC_URI[sha256sum] = "8b753c60df2a7f5dcda2db72c38e448ca300c3b4f6000c1501fcb0bd5df414f2"
 
 SYSTEMD_PACKAGES = "lirc lirc-exec"
 SYSTEMD_SERVICE_${PN} = "lircd.service lircmd.service lircd-setup.service lircd-uinput.service"
@@ -41,7 +41,31 @@ PACKAGECONFIG ?= " \
 CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes"
 
 #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
+
+# Ensure python-pkg/VERSION exists
+do_configure_append() {
+    cp ${S}/VERSION ${S}/python-pkg/
+}
+
+# Create PYTHON_TARBALL which LIRC needs for install-nodist_pkgdataDATA
+do_install_prepend() {
+    rm -rf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
+    mkdir ${WORKDIR}/${PN}-${PV}/python-pkg/dist/
+    tar --exclude='${WORKDIR}/${PN}-${PV}/python-pkg/*' -czf ${WORKDIR}/${PN}-${PV}/python-pkg/dist/${PN}-${PV}.tar.gz ${S}
+}
+
+# In code, path to python is a variable that is replaced with path to native version of it
+# during the configure stage, e.g ../recipe-sysroot-native/usr/bin/python3-native/python3.
+# Replace it with #!/usr/bin/env python3
 do_install_append() {
+    sed -i '1c#!/usr/bin/env python3' ${D}${bindir}/lirc-setup \
+                                      ${D}${PYTHON_SITEPACKAGES_DIR}/lirc-setup/lirc-setup \
+                                      ${D}${bindir}/irtext2udp \
+                                      ${D}${bindir}/lirc-init-db \
+                                      ${D}${bindir}/irdb-get \
+                                      ${D}${bindir}/pronto2lirc \
+                                      ${D}${sbindir}/lircd-setup
+
     install -m 0755 -d ${D}${sysconfdir}
     install -m 0755 -d ${D}${sysconfdir}/lirc
     install -m 0755 -d ${D}${systemd_unitdir}/system
