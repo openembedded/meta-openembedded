@@ -24,8 +24,8 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
            file://0006-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
            file://0007-Do-not-use-getsubopt.patch \
            "
-SRC_URI[md5sum] = "18996bd5e9d83d47055c05de376708cd"
-SRC_URI[sha256sum] = "6cb60d822eeed20486a03cc23e0fc65956fbc1e85e0c1a7477f68bbd9802880d"
+SRC_URI[md5sum] = "ff2dd75970683be9a301ed949b3372b3"
+SRC_URI[sha256sum] = "25fc42253722401f8742f04dc50a444dfa9b75378e7d09b55035bcbb44c5f342"
 
 EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
 
