@@ -43,11 +43,12 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
            file://0029-multipath-tools-modify-Makefile.inc-for-cross-compil.patch \
            file://0030-Always-use-devmapper.patch \
            file://0031-Always-use-devmapper-for-kpartx.patch \
+           file://0001-fix-bug-of-do_compile-and-do_install.patch \
            "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 
-SRCREV = "6c3bd369b23e959700527e0e2e6d5b2a1bd36294"
+SRCREV = "d4915917655b3d205aa0e339ca13080ed8182d0d"
 
 S = "${WORKDIR}/git"
 
