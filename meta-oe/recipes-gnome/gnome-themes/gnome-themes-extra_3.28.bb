@@ -6,9 +6,6 @@ SECTION = "x11/gnome"
 LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-# Upstream renamed this package to gnome-themes-extra at some point
-BPN = "gnome-themes-extra"
-
 inherit gnomebase gettext gtk-icon-cache upstream-version-is-even features_check
 
 ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
