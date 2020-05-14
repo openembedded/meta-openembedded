@@ -18,15 +18,14 @@ BBCLASSEXTEND = "native nativesdk"
 
 PE = "1"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/libusb/libusb-compat-${PV}.tar.bz2 \
-           file://0001-usb.h-Include-sys-types.h.patch \
-          "
+SRC_URI = " \
+    git://github.com/libusb/libusb-compat-0.1.git;protocol=https \
+    file://0001-usb.h-Include-sys-types.h.patch \
+"
+SRCREV = "4a27760ec5954ec8605e052a3207afbe0979eeef"
+S = "${WORKDIR}/git"
 
-SRC_URI[md5sum] = "2780b6a758a1e2c2943bdbf7faf740e4"
-SRC_URI[sha256sum] = "404ef4b6b324be79ac1bfb3d839eac860fbc929e6acb1ef88793a6ea328bc55a"
-
-UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/libusb/files/libusb-compat-0.1/"
-UPSTREAM_CHECK_REGEX = "/libusb-compat-(?P<pver>(\d+[\.\-_]*)+)/$"
+UPSTREAM_CHECK_URI = "https://github.com/libusb/libusb-compat-0.1/releases"
 
 BINCONFIG = "${bindir}/libusb-config"
 
