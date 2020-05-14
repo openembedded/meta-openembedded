@@ -8,11 +8,10 @@ SRC_URI += " \
     https://github.com/cockpit-project/cockpit/releases/download/${PV}/cockpit-${PV}.tar.xz \
     file://0001-remove-tests-dep-on-gobject-intro.patch \
     file://0002-fix-makefile-use-copy-rule-for-unmodified-files.patch \
-    file://0003-install-fix-metainfo.xml-ownership-on-install.patch \
     file://cockpit.pam \
     "
-SRC_URI[md5sum] = "e69b0b8a75a5d55ddfd9817d857c71af"
-SRC_URI[sha256sum] = "5f242cefccd7f1120c9e0310581aa51dbe941d9c4a6d8375c45057dcbb6f2fbb"
+SRC_URI[md5sum] = "285383b8744dab93ac8814e5a23e2c3e"
+SRC_URI[sha256sum] = "111d477e54737f15467c365fa670f9ac1919be30ad0c93661692467ecd7f12fb"
 
 inherit gettext pkgconfig autotools systemd features_check
 
