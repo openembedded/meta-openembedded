@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 DEPENDS = "ell"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-SRCREV = "ad97f4f945b828425ff288e905523e11b330d41d"
+SRCREV = "ef6084dcb4fe2e00327bb9c7b113ece204042c22"
 S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig python3native systemd
