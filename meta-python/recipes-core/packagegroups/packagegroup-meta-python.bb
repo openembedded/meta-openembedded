@@ -18,7 +18,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-javaobj-py3 python3-sh python3-pycrypto python3-pyasn1 python3-pydbus python3-wtforms \
     python3-pybluez python3-babel python3-parse-type python3-bitarray python3-django-south \
     python3-pyusb python3-prctl python3-jinja2 python3-werkzeug python3-pyjks python3-requests-ftp \
-    python3-behave python3-pyparsing python3-pyyaml python3-tzlocal python3-pretend python3-stevedore \
+    python3-behave python3-pyyaml python3-tzlocal python3-pretend python3-stevedore \
     python3-sijax python3-langtable python3-requests-file python3-crcmod python3-robotframework \
     python3-pint python3-coverage python3-iso8601 python3-ndg-httpsclient python3-yappi python3-twofish \
     python3-speaklater python3-smbus python3-djangorestframework python3-msgpack python3-jsonpointer \
