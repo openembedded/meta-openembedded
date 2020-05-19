@@ -8,8 +8,8 @@ inherit xfce gobject-introspection features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "bebd2d83ad2ed111b906c99b65fb32ed"
-SRC_URI[sha256sum] = "29295bee0b1f5bfd525e37405e5d32b497ae539b15183dd14e6ca49e252225f8"
+SRC_URI[md5sum] = "24218474191ac4c7e907d5b6fd6f1831"
+SRC_URI[sha256sum] = "8ac57b1f5842d5bd348bbb6dac4714f5ad1f22de651d8ec6a7099ceb19fa219f"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
