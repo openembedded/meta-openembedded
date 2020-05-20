@@ -38,6 +38,7 @@ EXTRA_OECONF = " \
 
 PACKAGECONFIG[pcp] = "--enable-pcp,--disable-pcp,pcp"
 PACKAGECONFIG[dashboard] = "--enable-ssh,--disable-ssh,libssh"
+PACKAGECONFIG[storaged] = ",,,udisks2"
 
 PACKAGES =+ " \
     ${PN}-pcp \
@@ -84,7 +85,6 @@ FILES_${PN}-storaged = " \
     ${datadir}/cockpit/storaged \
     ${datadir}/metainfo/org.cockpit-project.cockpit-storaged.metainfo.xml \
 "
-RDEPENDS_${PN}-storaged = "udisks2"
 
 FILES_${PN}-networkmanager = "${datadir}/cockpit/networkmanager"
 RDEPENDS_${PN}-networkmanager = "networkmanager"
@@ -174,4 +174,11 @@ do_install_append() {
 
     # provided by firewalld
     rm -rf ${D}${libdir}/firewalld
+
+    if ! ${@bb.utils.contains('PACKAGECONFIG', 'storaged', 'true', 'false', d)}; then
+        for filename in ${FILES_${PN}-storaged}
+        do
+            rm -rf ${D}$filename
+        done
+    fi
 }
