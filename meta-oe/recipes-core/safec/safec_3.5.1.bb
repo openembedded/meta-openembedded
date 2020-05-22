@@ -7,14 +7,12 @@ SECTION = "lib"
 inherit autotools pkgconfig
 
 S = "${WORKDIR}/git"
-SRCREV = "a99a052a56da409638c9fe7e096a5ae6661ca7cb"
+# v08112019
+SRCREV = "ad76c7b1dbd0403b0c9decf54164fcce271c590f"
 SRC_URI = "git://github.com/rurban/safeclib.git \
-           file://0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch \
 "
 
-CPPFLAGS_append_libc-musl = " -D_GNU_SOURCE"
-
-COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64).*-linux'
+COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm|aarch64|mips).*-linux'
 
 PACKAGES =+ "${PN}-check"
 
