@@ -14,8 +14,8 @@ SRC_URI = "\
     file://kea-dhcp6.service \
     file://kea-dhcp-ddns.service \
 "
-SRC_URI[md5sum] = "26f48997a37a670a406d5020ce64a7fb"
-SRC_URI[sha256sum] = "1da3d50e0c8e92e1aa6d66100b5afd7b93ba2c50b0a4ea114fd9dcb8be982ca9"
+SRC_URI[md5sum] = "4f8d1251fd41ef2e822a4eb3f0797d46"
+SRC_URI[sha256sum] = "0bba8b045672884a928ff4b2a8575ac5ba420eb6ba47a9338f1932bc38dcf866"
 
 inherit autotools systemd
 
