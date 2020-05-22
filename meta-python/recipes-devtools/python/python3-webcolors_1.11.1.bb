@@ -1,9 +1,9 @@
 SUMMARY = "Simple Python module for working with HTML/CSS color definitions."
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=197add016087e6884a012b0f185d44ad"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=25b90379a52351261c51272e7923d240"
 
-SRC_URI[md5sum] = "40890db38b2a856e526a568864025fe6"
-SRC_URI[sha256sum] = "030562f624467a9901f0b455fef05486a88cfb5daa1e356bd4aacea043850b59"
+SRC_URI[md5sum] = "54d28a7c80b3e4d974ec2fee86768be9"
+SRC_URI[sha256sum] = "76f360636957d1c976db7466bc71dcb713bb95ac8911944dffc55c01cb516de6"
 
 inherit pypi setuptools3 ptest
 
