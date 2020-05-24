@@ -9,8 +9,8 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 
 inherit gnomebase gobject-introspection gtk-doc
 
-SRC_URI[archive.md5sum] = "0a618c5b053106d1801d89cc77385419"
-SRC_URI[archive.sha256sum] = "58f539b0386f36300b76f3afea3a508de4914b27e78f58ee4d142486a42f926a"
+SRC_URI[archive.md5sum] = "44a3cfeab1afd83a71e852835d24e656"
+SRC_URI[archive.sha256sum] = "8aeafd59653ea88f6b78cb03780ee9fd61a2f993070c5f0d0976bed93ac2bd77"
 
 EXTRA_OEMESON = " \
     -Dvapi=false \
