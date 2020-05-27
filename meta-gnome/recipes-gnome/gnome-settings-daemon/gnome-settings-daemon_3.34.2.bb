@@ -56,4 +56,4 @@ FILES_${PN} += " \
     ${libdir}/gnome-settings-daemon-3.0/libgsd.so \
 "
 
-RDEPEND_${PN} += "gdbus"
+RDEPENDS_${PN} += "gdbus"
