@@ -4,13 +4,9 @@ AUTHOR = "Jonathan Dieter"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cd6e590282010ce90a94ef25dd31410f"
 
-SRC_URI = " \
-	git://github.com/zchunk/zchunk.git;protocol=https \
-	file://0001-zck.h-fix-build-on-musl.patch \
-	file://0002-unzck-fix-build-with-musl-libc.patch \
-	"
+SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https"
 
-SRCREV = "c01bf12feede792982f165f52f4a6c573e3a8c17"
+SRCREV = "f5593aa11584faa691c81b4898f0aaded47f8bf7"
 S = "${WORKDIR}/git"
 
 DEPENDS = "\
