@@ -12,7 +12,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 BPN = "gnome-menus"
 
-SRC_URI[archive.md5sum] = "4262208c13f266d9ada7d356aada9e1b"
-SRC_URI[archive.sha256sum] = "c850c64b2074265fe59e099a340b8689cf3dd4658dc9feddd2ab5e95f1a74b74"
+SRC_URI[archive.md5sum] = "a8fd71fcf31a87fc799d80396a526829"
+SRC_URI[archive.sha256sum] = "d9348f38bde956fc32753b28c1cde19c175bfdbf1f4d5b06003b3aa09153bb1f"
 
 FILES_${PN} += "${datadir}/desktop-directories/"
