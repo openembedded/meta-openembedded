@@ -8,8 +8,8 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase allarch gettext upstream-version-is-even allarch
 
-SRC_URI[archive.md5sum] = "f350804df16cdc9ef5306087157cf31b"
-SRC_URI[archive.sha256sum] = "c2b7fb6db98c05e205053daaa7f58c7f06ff91b45c4006052af17c578ae7b47f"
+SRC_URI[archive.md5sum] = "1330dd3895b0cf054668a7c0db1c8487"
+SRC_URI[archive.sha256sum] = "b8cb81e4cf9d085fbb23540635b492d5c124a1f8611c2aa9ac6384111d77bb0b"
 
 FILES_${PN} += " \
     ${datadir}/backgrounds \
