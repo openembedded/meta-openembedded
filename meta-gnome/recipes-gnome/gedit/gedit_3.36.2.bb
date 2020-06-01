@@ -6,30 +6,24 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 GNOMEBASEBUILDCLASS = "meson"
 
 DEPENDS = " \
-    yelp-tools-native \
-    libxml2-native \
     gdk-pixbuf-native \
-    iso-codes \
     gtk+3 \
     gsettings-desktop-schemas \
-    gtksourceview4 \
     libpeas \
     libsoup-2.4 \
     gspell \
     gtksourceview4 \
+    tepl \
 "
 
 inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc vala gettext features_check upstream-version-is-even mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "4bca1d0a13db186cd84619b4bff42238"
-SRC_URI[archive.sha256sum] = "ebf9ef4e19831699d26bb93ce029edfed65416d7c11147835fc370d73428d5c6"
+SRC_URI[archive.md5sum] = "438217bbbcf92a17c4f259b4a5426b03"
+SRC_URI[archive.sha256sum] = "6887554643c5b1b3862ac364d97b7b50224bff95e6758aeaa08f4a482b554197"
 
-GTKDOC_MESON_OPTION = "documentation"
-
-PACKAGECONFIG ??= "gvfs"
-PACKAGECONFIG[gvfs] = "-Denable-gvfs-metadata=yes,-Denable-gvfs-metadata=no,,gvfs"
+GTKDOC_MESON_OPTION = "gtk_doc"
 
 PACKAGES += "${PN}-python"
 
