@@ -23,8 +23,8 @@ inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext f
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "9157b93a3f41fdad80df26c062b95c7b"
-SRC_URI[archive.sha256sum] = "4d5348c2fbf01d040a2cb5e84de812c503911e1ea498a83e7eefff52c4417051"
+SRC_URI[archive.md5sum] = "71854fb58671b4a88ac990e2f2439e4f"
+SRC_URI[archive.sha256sum] = "a2e830f9c9856fad65dad1d6c0ae6abad0f0b496c9984ac005315c5cc4220db3"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
