@@ -14,8 +14,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 
-SRC_URI[archive.md5sum] = "1cbcb9d9a5159447b9a45079c6157ca5"
-SRC_URI[archive.sha256sum] = "ef13203bed721d271227d9928d91937733c312ef79b6f5c00b6c02e8e0b2fa21"
+SRC_URI[archive.md5sum] = "9fa17a6e2eacde3f9dd0df6be10091b2"
+SRC_URI[archive.sha256sum] = "38f994dcb1e1ae093d1c929c7acc4f88e39111e43b5fdc13125b0f6e2311c789"
 
 SRC_URI += " \
     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
