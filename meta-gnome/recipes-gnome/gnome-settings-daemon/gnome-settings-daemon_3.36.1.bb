@@ -28,8 +28,8 @@ DEPENDS = " \
 REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
 UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 
-SRC_URI[archive.md5sum] = "493332fa0f36645188468fed41c0060b"
-SRC_URI[archive.sha256sum] = "9fbae67e217e53b99e4f9e7d392c91ffbe31253941c9b136ef09c2d9db7ad7ed"
+SRC_URI[archive.md5sum] = "102dc488a6a726e4050cf5ab7e967e8d"
+SRC_URI[archive.sha256sum] = "3e33dbd319b562a5ab602dcab6de3ca81b85f8346672e90ec632b36bbf15ee4b"
 
 # allow cross build mixed with build of native tools
 do_write_config_append() {
