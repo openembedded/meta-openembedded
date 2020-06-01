@@ -9,8 +9,8 @@ DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native \
             gsettings-desktop-schemas dbus"
 
 SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
-SRC_URI[archive.md5sum] = "8dea2f6a3f327a814a347758d4350e4b"
-SRC_URI[archive.sha256sum] = "b57af97573bd295aa50037eed29c6ba7a36188230c515e007c3018855a5cf949"
+SRC_URI[archive.md5sum] = "72383474f52d05c21ef2be96d0b91974"
+SRC_URI[archive.sha256sum] = "50ef3245d1b03666a40455109169a2a1bd51419fd2d51f9fa6cfd4f89f04fb46"
 
 # depends on gsettings-desktop-schemas->gcr->gtk+3-> x11
 REQUIRED_DISTRO_FEATURES = "x11"
