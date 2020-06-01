@@ -6,15 +6,10 @@ SECTION = "devel/python"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-S = "${WORKDIR}/git"
-B = "${S}"
+SRC_URI[md5sum] = "5d28198fa933dac5c037108d8f5cf3bb"
+SRC_URI[sha256sum] = "8d4615cc0bb0fa49faa05b55ff49b1f41122b8092ca18a5d10f1e1699d6d7b3c"
 
-SRCREV = "35687ca957b746f153a6872139462b1443f8cad1"
-PV = "0.0.38+git${SRCPV}"
-SRC_URI = "git://github.com/mike-fabian/langtable.git;branch=master \
-"
-
-inherit setuptools3 python3native
+inherit pypi setuptools3 python3native
 
 DISTUTILS_INSTALL_ARGS += " \
     --install-data=${datadir}/langtable"
