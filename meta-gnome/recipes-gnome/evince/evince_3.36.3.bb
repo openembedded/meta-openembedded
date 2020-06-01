@@ -16,18 +16,21 @@ DEPENDS = " \
     ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} \
 "
 
-inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection upstream-version-is-even gettext features_check mime-xdg
+GNOMEBASEBUILDCLASS = "meson"
 
-SRC_URI[archive.md5sum] = "9e9e82fa8f6045ad7817157d9335d185"
-SRC_URI[archive.sha256sum] = "3cc0955f11204e3a2db1c7ab99b866692749592257485b87304134ad69da0617"
+inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection upstream-version-is-even gettext features_check mime-xdg gtk-doc
+
+SRC_URI[archive.md5sum] = "9762dabdde37a804072bccbfd311d357"
+SRC_URI[archive.sha256sum] = "af2ebdf7f74e6580c4f1a12bdfe26b9ff90374d7acae061de0666d64012a9db2"
 SRC_URI += " \
     file://0001-Add-format-attribute-to-_synctex_malloc.patch \
     file://0002-add-a-formatting-attribute-check.patch \
 "
 
-EXTRA_OECONF = " \
-    --enable-thumbnailer \
-    --without-systemduserunitdir \
+GTKDOC_MESON_OPTION = "gtk_doc"
+
+EXTRA_OEMESON = " \
+    -Dsystemduserunitdir=no \
 "
 
 do_compile_prepend() {
@@ -35,8 +38,8 @@ do_compile_prepend() {
 }
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
-PACKAGECONFIG[browser-plugin] = "--enable-browser-plugin,--disable-browser-plugin,"
+PACKAGECONFIG[nautilus] = "-Dnautilus=true,-Dnautilus=false,nautilus"
+PACKAGECONFIG[browser-plugin] = "-Dbrowser_plugin=true,-Dbrowser_plugin=false"
 
 RDEPENDS_${PN} += "glib-2.0-utils"
 RRECOMMMENDS_${PN} = "adwaita-icon-theme"
