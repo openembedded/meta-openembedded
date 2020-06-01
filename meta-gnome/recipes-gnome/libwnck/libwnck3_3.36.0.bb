@@ -17,8 +17,8 @@ GIR_MESON_DISABLE_FLAG = 'disabled'
 
 inherit gnomebase gobject-introspection gtk-doc gettext features_check
 
-SRC_URI[archive.md5sum] = "89dbe5a1843fd3745b8b64b34a2ef55d"
-SRC_URI[archive.sha256sum] = "9595835cf28d0fc6af5526a18f77f2fcf3ca8c09e36741bb33915b6e69b8e3ca"
+SRC_URI[archive.md5sum] = "00bb40dc6fab76af0da33e88a34b6378"
+SRC_URI[archive.sha256sum] = "bc508150b3ed5d22354b0e6774ad4eee465381ebc0ace45eb0e2d3a4186c925f"
 
 # libxres means x11 only
 REQUIRED_DISTRO_FEATURES = "x11"
