@@ -12,12 +12,14 @@ DEPENDS += " \
     libxkbfile \
     polkit \
     metacity \
+    gdm \
     gnome-desktop3 \
     gnome-bluetooth \
+    gnome-panel \
 "
 
-SRC_URI[archive.md5sum] = "251b51bad322c41d34d06fdb8f1799d4"
-SRC_URI[archive.sha256sum] = "3be65388cd2c8f39741bcc05da87ef40035183a9a39502d67696242c2aeb469c"
+SRC_URI[archive.md5sum] = "690b0d78c7d9265183ef18387b12fa50"
+SRC_URI[archive.sha256sum] = "2dba9ea40f2da81c22954a8ccc29f8f1fa4ca8395a6bb552506635832751c1a7"
 
 do_install_append() {
     # no oe-layer has compiz -> remove dead session
@@ -25,10 +27,12 @@ do_install_append() {
 }
 
 FILES_${PN} += " \
-    ${datadir}/xsessions \
     ${datadir}/desktop-directories \
+    ${datadir}/gnome-panel \
     ${datadir}/gnome-session \
+    ${datadir}/xsessions \
+    ${libdir}/gnome-panel \
     ${systemd_user_unitdir} \
 "
 
-RDEPENDS_${PN} += "metacity gnome-panel"
+RDEPENDS_${PN} += "metacity"
