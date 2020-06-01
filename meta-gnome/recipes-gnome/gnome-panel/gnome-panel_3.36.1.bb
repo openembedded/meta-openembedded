@@ -17,11 +17,8 @@ DEPENDS += " \
     gdm \
 "
 
-SRC_URI[archive.md5sum] = "cfd5d3fd548a2afdd8bd3bbdf9646bbd"
-SRC_URI[archive.sha256sum] = "a6bc0255252eeb4b964bcbe55fd7908b69f914c062c5ec8dff5ac0262d29b90d"
-SRC_URI += " \
-    file://0001-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch \
-"
+SRC_URI[archive.md5sum] = "b6bb185ce1724f4b19699042d90282a6"
+SRC_URI[archive.sha256sum] = "1e21b726dd397523ae79d29eb538bcae09e3427e23ccd63f28eb25ef3552abd3"
 
 PACKAGECONFIG[eds] = "--enable-eds,--disable-eds,evolution-data-server"
 
