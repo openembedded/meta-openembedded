@@ -21,8 +21,8 @@ inherit gnomebase gsettings features_check remove-libtool gettext upstream-versi
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "7c8fd85e46ed4ba1add0288b2ead9aec"
-SRC_URI[archive.sha256sum] = "e9cda9542a3e37c61636145e7e9e2513c569092ea8020752a834e1f40ad41943"
+SRC_URI[archive.md5sum] = "38f0732845a510a8dff4f154c3406f65"
+SRC_URI[archive.sha256sum] = "a264b57a8d1a71fdf0d66e8cd6033d013fb828be279c35766545eb9bb3734f87"
 SRC_URI += " \
     file://0001-Set-paths-to-ssh-agent-and-ssh-add-by-configure-opti.patch \
     file://musl.patch \
@@ -39,6 +39,7 @@ EXTRA_OECONF = " \
 FILES_${PN} += " \
     ${datadir}/dbus-1/services \
     ${datadir}/p11-kit \
+    ${datadir}/xdg-desktop-portal \
     ${base_libdir}/security/*${SOLIBSDEV} \
     ${libdir}/pkcs11/gnome-keyring-pkcs11.so \
 "
