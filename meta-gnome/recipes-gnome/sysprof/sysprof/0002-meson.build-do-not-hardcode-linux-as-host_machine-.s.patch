@@ -19,7 +19,7 @@ index 3449961..3c2d186 100644
 --- a/src/libsysprof/meson.build
 +++ b/src/libsysprof/meson.build
 @@ -84,7 +84,7 @@ libsysprof_deps = [
-   polkit_dep,
+   librax_dep,
  ]
  
 -if host_machine.system() == 'linux'
