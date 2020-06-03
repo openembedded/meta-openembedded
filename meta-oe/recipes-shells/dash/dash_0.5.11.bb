@@ -7,11 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
 
 inherit autotools update-alternatives
 
-SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz \
-           file://0001-Fix-printf-format-errors-with-clang.patch \
-           "
-SRC_URI[md5sum] = "8f485f126c05d0ab800e85abfe1987aa"
-SRC_URI[sha256sum] = "3c663919dc5c66ec991da14c7cf7e0be8ad00f3db73986a987c118862b5f6071"
+SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
+SRC_URI[md5sum] = "027236e48b9202607b1418fee42c473e"
+SRC_URI[sha256sum] = "4dd9a6ed5fe7546095157918fe5d784bb0b7887ae13de50e1e2d11e1b5a391cb"
 
 EXTRA_OECONF += "--bindir=${base_bindir}"
 
