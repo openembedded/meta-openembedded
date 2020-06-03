@@ -28,8 +28,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
            file://0001-immom_python-convert-to-python3.patch \
            "
-SRC_URI[md5sum] = "9b61df01d1a092101c4a626692edae19"
-SRC_URI[sha256sum] = "6da9af96e8ee58d11031d305bf4804a00deb6108e12e422722882a2091bd34bd"
+SRC_URI[md5sum] = "d56bacf4c234c134e60e9b25f6f26671"
+SRC_URI[sha256sum] = "2478e298c0bce3b2cfdeb20875022cc11d7d3b53ecd3255422d22eb64c04953b"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
 
