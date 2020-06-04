@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/ross/requests-futures"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5"
 
-SRC_URI[md5sum] = "e20dc6f063c70888a7f8225e349b6682"
-SRC_URI[sha256sum] = "33aa8a3b7892850701707d7e094b1e1ce7c4f7a36ff2a1dcc2da4e01a1a00f7e"
+SRC_URI[md5sum] = "601b5e90413bb00e06148752d31f0cc7"
+SRC_URI[sha256sum] = "35547502bf1958044716a03a2f47092a89efe8f9789ab0c4c528d9c9c30bc148"
 
 inherit pypi setuptools3
 
