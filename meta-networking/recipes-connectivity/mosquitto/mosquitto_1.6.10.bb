@@ -85,3 +85,5 @@ INITSCRIPT_PARAMS = "defaults 30"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --shell /bin/false \
                        --user-group mosquitto"
+
+BBCLASSEXTEND += "native nativesdk"
