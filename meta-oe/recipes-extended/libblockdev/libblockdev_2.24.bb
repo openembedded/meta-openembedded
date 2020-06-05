@@ -10,11 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
 inherit autotools gobject-introspection
 
-SRCREV = "f5d2458e9e52d8c55b609ae8cf46ef0673b4a02a"
-SRC_URI = " \
-    git://github.com/rhinstaller/libblockdev;branch=master \
-"
-
+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch"
+SRCREV = "f5a4ba8bb298f8cbc435707d0b19b4b2ff836a8e"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
