@@ -10,8 +10,7 @@ DEPENDS = "libmnl libnftnl bison-native \
 UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
-SRC_URI[md5sum] = "fdfd51a1083fb054a487b5159b1ed5cd"
-SRC_URI[sha256sum] = "08b8683a9db5fba980bc092b75288af98d218bbe8ab446daf2338570d0730f9a"
+SRC_URI[sha256sum] = "f2c1957eabc370057c4576b8f33a71d91a6ad019b8b335abafe61c9c42cc7e16"
 
 inherit autotools manpages pkgconfig
 
