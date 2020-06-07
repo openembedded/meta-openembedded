@@ -19,10 +19,11 @@ LDFLAGS_append_riscv64 = " -latomic"
 LICENSE_FLAGS = "commercial"
 
 SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
-           file://0006-make-opencv-configurable.patch \
-           file://0007-use-vorbisidec.patch \
-           file://0008-fix-luaL-checkint.patch \
-           file://0001-Use-packageconfig-to-detect-mmal-support.patch \
+           file://0001-make-opencv-configurable.patch \
+           file://0002-use-vorbisidec.patch \
+           file://0003-fix-luaL-checkint.patch \
+           file://0004-Use-packageconfig-to-detect-mmal-support.patch \
+           file://0005-Fix-build-with-Qt-5.15.patch \
 "
 SRC_URI[sha256sum] = "a9bdad293d81cd48516abad8d490d8ab4012964ae541ff19e00021e071e47601"
 
