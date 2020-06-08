@@ -2,14 +2,14 @@ DESCRIPTION = "Human friendly output for text interfaces using Python"
 HOMEPAGE = "https://humanfriendly.readthedocs.io/"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=764e737b117a38d773609885e8d04f0b"
 
 PYPI_PACKAGE = "humanfriendly"
 
-SRC_URI[md5sum] = "9573f9f37a5454d8205cfd1b9b8db9d2"
-SRC_URI[sha256sum] = "33ee8ceb63f1db61cce8b5c800c531e1a61023ac5488ccde2ba574a85be00a85"
+SRC_URI[md5sum] = "e6064a6fe099c4231c3e969ca5fea335"
+SRC_URI[sha256sum] = "bf52ec91244819c780341a3438d5d7b09f431d3f113a475147ac9b7b167a3d12"
 
-inherit pypi
+inherit pypi setuptools3
 
 RDEPENDS_${PN}_class-target += " \
     ${PYTHON_PN}-datetime \
