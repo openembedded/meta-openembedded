@@ -5,8 +5,8 @@ HOMEPAGE = "http://www.issihosts.com/haveged/index.html"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-# v1.9.8
-SRCREV = "8cd0266472aff59821718c4410e80f28978310f9"
+# v1.9.9
+SRCREV = "6da706c8026b629d9bb7ebebc32239305a03da8e"
 SRC_URI = "git://github.com/jirka-h/haveged.git \
 "
 S = "${WORKDIR}/git"
