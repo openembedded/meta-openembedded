@@ -2,10 +2,10 @@ SUMMARY = "A generic, spec-compliant, thorough implementation of the OAuth reque
 HOMEPAGE = "https://github.com/idan/oauthlib"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=5ba9ce41463615e082609806255bce1b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=abd2675e944a2011aed7e505290ba482"
 
-SRC_URI[md5sum] = "277a9a966cc8c72e492b4eeb41332445"
-SRC_URI[sha256sum] = "ce57b501e906ff4f614e71c36a3ab9eacbb96d35c24d1970d2539bbc3ec70ce1"
+SRC_URI[md5sum] = "43cb2b5bac983712ee55076b61181cc2"
+SRC_URI[sha256sum] = "bee41cc35fcca6e988463cacc3bcb8a96224f470ca547e697b604cc697b2f889"
 
 inherit pypi setuptools3
 
