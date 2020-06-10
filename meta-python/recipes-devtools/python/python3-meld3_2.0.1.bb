@@ -8,7 +8,7 @@ HOMEPAGE = "https://github.com/supervisor/meld3"
 LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9e7581cef5645475fcefebdc15ed7abf"
 
-SRC_URI[md5sum] = "3ccc78cd79cffd63a751ad7684c02c91"
-SRC_URI[sha256sum] = "f7b754a0fde7a4429b2ebe49409db240b5699385a572501bb0d5627d299f9558"
+SRC_URI[md5sum] = "1add16caefc9e6b82ef4f40532cb4918"
+SRC_URI[sha256sum] = "3ea266994f1aa83507679a67b493b852c232a7905e29440a6b868558cad5e775"
 
 inherit pypi setuptools3
