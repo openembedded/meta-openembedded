@@ -18,18 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
 
 DEPENDS += "libxml2 libxslt"
 
-SRC_URI[md5sum] = "f088e452ed45b030b6f84269f1e84d11"
-SRC_URI[sha256sum] = "8620ce80f50d023d414183bf90cc2576c2837b88e00bea3f33ad2630133bbb60"
-
-DISTUTILS_BUILD_ARGS += " \
-                     --with-xslt-config='pkg-config libxslt' \
-                     --with-xml2-config='pkg-config libxml-2.0' \
-"
-
-DISTUTILS_INSTALL_ARGS += " \
-                     --with-xslt-config='pkg-config libxslt' \
-                     --with-xml2-config='pkg-config libxml-2.0' \
-"
+SRC_URI[md5sum] = "4d3cca9c0018dd98f39e0ac54fcc3d14"
+SRC_URI[sha256sum] = "27ee0faf8077c7c1a589573b1450743011117f1aa1a91d5ae776bbc5ca6070f2"
 
 inherit pypi setuptools3
 
