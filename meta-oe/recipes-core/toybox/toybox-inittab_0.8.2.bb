@@ -26,8 +26,8 @@ do_patch[noexec] = "1"
 
 do_configure() {
 	# copy over files now to have a fresh start on each config
-	for file in ${SRC_URI}; do
-		cp ${WORKDIR}/${file/file:\/\//} ${S}
+	for f in inittab rcK rcS; do
+		cp ${WORKDIR}/$f ${S}
 	done
 
 	for config in ${PACKAGECONFIG_CONFARGS}; do
