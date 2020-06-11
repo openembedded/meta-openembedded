@@ -1,5 +1,6 @@
-DESCRIPTION = "Interval arithmetic for Python"
-HOMEPAGE = "https://github.com/AlexandreDecan/python-intervals"
+SUMMARY = "Physical quantities module"
+DESCRIPTION = "Physical quantities Python module"
+HOMEPAGE = "https://github.com/hgrecco/pint"
 SECTION = "devel/python"
 
 LICENSE = "BSD-3-Clause"
@@ -9,8 +10,8 @@ PYPI_PACKAGE := "Pint"
 
 inherit pypi ptest setuptools3
 
-SRC_URI[md5sum] = "3a8f29c2a30efd35af4b5c5a224ef965"
-SRC_URI[sha256sum] = "308f1070500e102f83b6adfca6db53debfce2ffc5d3cbe3f6c367da359b5cf4d"
+SRC_URI[md5sum] = "0af699bc0ccdff56228b4a81216b4f7d"
+SRC_URI[sha256sum] = "dc899061f9dc478e0aac3b0d872ca33d120efd32c382984818adab3522b6c793"
 
 DEPENDS += "python3-setuptools-scm-native"
 
