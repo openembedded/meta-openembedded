@@ -30,3 +30,5 @@ RDEPENDS_${PN} += "\
     ${PYTHON_PN}-xml \
     ${PYTHON_PN}-distutils \
 "
+
+CVE_PRODUCT = "django"
