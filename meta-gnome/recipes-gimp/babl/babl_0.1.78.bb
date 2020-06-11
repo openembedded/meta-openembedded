@@ -6,7 +6,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 GIR_MESON_OPTION = "enable-gir"
 
-inherit setuptools3 gnomebase gobject-introspection
+inherit setuptools3 gnomebase gobject-introspection vala
 
 DEPENDS += "lcms"
 
@@ -15,7 +15,7 @@ CFLAGS_append_toolchain-clang_mipsarch = " -ffp-exception-behavior=ignore "
 CFLAGS_append_toolchain-clang_riscv64 = " -ffp-exception-behavior=ignore "
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
-SRC_URI[md5sum] = "d032853f2678bc95054c39d4f02045c1"
-SRC_URI[sha256sum] = "9a710b6950da37ada94cd9e2046cbce26de12473da32a7b79b7d1432fc66ce0e"
+SRC_URI[md5sum] = "b1a85d1f3d710407164848708f1f49f1"
+SRC_URI[sha256sum] = "17d5493633bff5585d9f375bc4df5925157cd1c70ccd7c22a635be75c172523a"
 
 BBCLASSEXTEND = "native"
