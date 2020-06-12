@@ -17,10 +17,16 @@ PYPI_PACKAGE = "M2Crypto"
 inherit pypi siteinfo
 
 DEPENDS += "openssl swig-native"
-RDEPENDS_${PN} += "${PYTHON_PN}-typing \
-                   ${PYTHON_PN}-distutils \
-                   ${PYTHON_PN}-smtpd \
-                   ${PYTHON_PN}-xmlrpc \
+RDEPENDS_${PN} += "\
+  ${PYTHON_PN}-datetime \
+  ${PYTHON_PN}-distutils \
+  ${PYTHON_PN}-logging \
+  ${PYTHON_PN}-netclient \
+  ${PYTHON_PN}-netserver \
+  ${PYTHON_PN}-numbers \
+  ${PYTHON_PN}-smtpd \
+  ${PYTHON_PN}-typing \
+  ${PYTHON_PN}-xmlrpc \
 "
 
 DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
