@@ -3,8 +3,8 @@ HOMEPAGE = "https://pypi.org/project/typeguard/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0e423eea5c91e7aa21bdb70184b3e53"
 
-SRC_URI[md5sum] = "ef743359de59f8fe17e7c5e3af70e2c5"
-SRC_URI[sha256sum] = "2d545c71e9439c21bcd7c28f5f55b3606e6106f7031ab58375656a1aed483ef2"
+SRC_URI[md5sum] = "411df8eefd76ffa014328a46342bdf38"
+SRC_URI[sha256sum] = "529ef3d88189cc457f4340388028412f71be8091c2c943465146d4170fb67288"
 
 inherit pypi setuptools3
 
