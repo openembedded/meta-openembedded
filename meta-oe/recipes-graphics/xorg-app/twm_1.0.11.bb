@@ -5,8 +5,9 @@ DEPENDS += " libxext libxt libxmu bison-native"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
 
-SRC_URI[md5sum] = "e322c08eeb635f924ede5b8eba3db54e"
-SRC_URI[sha256sum] = "6449eadca16ce0f0d900605b0cc020b95f40619261b7beccfb46bcc1836445d7"
+SRC_URI = "${XORG_MIRROR}/individual/app/${BPN}-${PV}.tar.gz"
+SRC_URI[md5sum] = "48e83210b39a7bfb492604ba0bcfb19e"
+SRC_URI[sha256sum] = "410ecabac54e6db7afd5c20a78d89c0134f3c74b149bee71b1fec775e6e060cc"
 
 FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
 ALTERNATIVE_NAME = "x-window-manager"
