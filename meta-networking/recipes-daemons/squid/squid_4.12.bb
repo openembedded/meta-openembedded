@@ -28,11 +28,11 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2 
 
 SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 
-SRC_URI[md5sum] = "b315d0dce37627dfe61eec7f5304baaf"
-SRC_URI[sha256sum] = "0f5829d878002147e7c4d9b8901c2c3c051693465e82e45cef9ab0e226e3e729"
+SRC_URI[md5sum] = "5d058f7f8f1db9fa4ce3db910a008b0e"
+SRC_URI[sha256sum] = "eae0ad993921e472ce36cce34674c47a224fc2868b65ef0c4b41b2f5f18378a0"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://errors/COPYRIGHT;md5=19cc4dd146f397e72f3ff6f9f58fbfbe \
+                    file://errors/COPYRIGHT;md5=4c3268f394af77fbbf541875cef96a6c \
                     "
 DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 
