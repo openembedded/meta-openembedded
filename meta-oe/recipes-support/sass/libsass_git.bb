@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8f34396ca205f5e119ee77aae91fa27d"
 inherit autotools
 
 SRC_URI = "git://github.com/sass/libsass.git;branch=master"
-SRCREV = "e1c16e09b4a953757a15149deaaf28a3fd81dc97"
+SRCREV = "8d312a1c91bb7dd22883ebdfc829003f75a82396"
+PV = "3.6.4"
 
 S = "${WORKDIR}/git"
 
