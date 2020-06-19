@@ -2,10 +2,10 @@ SUMMARY = "Define boolean algebras, create and parse boolean expressions and cre
 HOMEPAGE = "https://github.com/bastikr/boolean.py"
 
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9b58494d4f385978ca5a7ef4f6abca53"
 
-SRC_URI[md5sum] = "1189d115a38f84f5df743014926a9159"
-SRC_URI[sha256sum] = "bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e"
+SRC_URI[md5sum] = "83ccc145ba74a585637124c8bc648333"
+SRC_URI[sha256sum] = "cc24e20f985d60cd4a3a5a1c0956dd12611159d32a75081dabd0c9ab981acaa4"
 
 PYPI_PACKAGE = "boolean.py"
 
