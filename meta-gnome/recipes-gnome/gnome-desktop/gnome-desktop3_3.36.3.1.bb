@@ -1,8 +1,10 @@
 SUMMARY = "GNOME library for reading .desktop files"
 SECTION = "x11/gnome"
 LICENSE = "GPLv2 & LGPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                    file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+LIC_FILES_CHKSUM = " \
+    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+    file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+"
 
 BPN = "gnome-desktop"
 
@@ -14,8 +16,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 
-SRC_URI[archive.md5sum] = "9fa17a6e2eacde3f9dd0df6be10091b2"
-SRC_URI[archive.sha256sum] = "38f994dcb1e1ae093d1c929c7acc4f88e39111e43b5fdc13125b0f6e2311c789"
+SRC_URI[archive.md5sum] = "75e828342e51c88c866dcdd46c021d26"
+SRC_URI[archive.sha256sum] = "4bed119fa25ea0ff7880928142365c3c8726585fc072bc147157e66b63e96b7e"
 
 SRC_URI += " \
     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
