@@ -25,7 +25,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
            file://0005-Fix-build-with-Qt-5.15.patch \
 "
-SRC_URI[sha256sum] = "a966abfc7f3b2ff3adaa130306ecaf5d6ad3b6dc73385fc9ab0c1204029d4c31"
+SRC_URI[sha256sum] = "3e94a1acf33445e9da15d528aa48657aa26b912eaa2656b403d43860a8834919"
 
 inherit autotools features_check gettext pkgconfig mime-xdg
 
