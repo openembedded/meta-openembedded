@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
 PYPI_PACKAGE = "msgpack"
 inherit pypi setuptools3 ptest
 
-SRC_URI[md5sum] = "ba46fdee995565f40e332bd7eea882f1"
-SRC_URI[sha256sum] = "ea3c2f859346fcd55fc46e96885301d9c2f7a36d453f5d8f2967840efa1e1830"
+SRC_URI[md5sum] = "c35ee8f991dad3969884e9585e56ebba"
+SRC_URI[sha256sum] = "9534d5cc480d4aff720233411a1f765be90885750b07df772380b34c10ecb5c0"
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-io \
