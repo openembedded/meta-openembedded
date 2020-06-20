@@ -11,8 +11,8 @@ LICENSE_FLAGS = "commercial"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bb6d3771da6a07d33fd50d4d9aa73bcf"
 
 S = "${WORKDIR}/git"
-SRCREV = "a60e28efe227ea8ea760b1e29a8943e371ebe4b3"
-BRANCH = "openh264v2.1.0"
+SRCREV = "50a1fcf70fafe962c526749991cb4646406933ba"
+BRANCH = "openh264v2.1.1"
 SRC_URI = "git://github.com/cisco/openh264.git;protocol=https;branch=${BRANCH} \
            file://0001-Makefile-Use-cp-options-to-preserve-file-mode.patch \
            "
