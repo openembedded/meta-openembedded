@@ -1,3 +1,4 @@
+SUMMARY = "Asio is C++ library for network and low-level I/O programming"
 DESCRIPTION = "Asio is a cross-platform C++ library for network and low-level \
         I/O programming that provides developers with a consistent asynchronous \
         model using a modern C++ approach."
@@ -14,10 +15,10 @@ inherit autotools
 
 ALLOW_EMPTY_${PN} = "1"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=3e73f311a3af69e6df275e8c3b1c09b5"
+LIC_FILES_CHKSUM = "file://COPYING;md5=de86c8210a433f72bd3cc98e797a6084"
 
-SRC_URI[md5sum] = "312e53385e2daad10f08d57f91ad3431"
-SRC_URI[sha256sum] = "4e27dcb37456ba707570334b91f4798721111ed67b69915685eac141895779aa"
+SRC_URI[md5sum] = "569f4b082c652ae8a8ad94fb470016f9"
+SRC_URI[sha256sum] = "e271db76dbbcda9835ed1c9c94deb2ba3f4589c3ebcaa71d99ac694b8d62638c"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
 
