@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/tobgu/pyrsistent"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE.mit;md5=ca574f2891cf528b3e7a2ee570337e7c"
 
-SRC_URI[md5sum] = "da9486d00ef5b213f40d5cf3c5bca82d"
-SRC_URI[sha256sum] = "cdc7b5e3ed77bed61270a47d35434a30617b9becdf2478af76ad2c6ade307280"
+SRC_URI[md5sum] = "4ba30da6f0a63554e70ac6c4c1904929"
+SRC_URI[sha256sum] = "28669905fe725965daa16184933676547c5bb40a5153055a8dee2a4bd7933ad3"
 
 inherit pypi setuptools3
 
