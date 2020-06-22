@@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e"
 
-SRC_URI[md5sum] = "6e12312c8dc4c90fe840e86e8a352644"
-SRC_URI[sha256sum] = "a7bfa858748c73b096e43db14eb23e2bc714a503f990c89fac8fab9b0ee79724"
+SRC_URI[md5sum] = "5d88f3870c32d4868b28c8fe833f7e74"
+SRC_URI[sha256sum] = "ba93b2df055bca202116ec44b9bead3df33ea63a7d5827ff8e16738b97f33a95"
 
 inherit pypi setuptools3 ptest
 
