@@ -23,8 +23,7 @@ SRC_URI = "\
     file://0001-libfdcore-sctp.c-update-the-old-sctp-api-check.patch \
     "
 
-SRC_URI[md5sum] = "73ce230b4789f9f28fff77cbc83c65af"
-SRC_URI[sha256sum] = "ce05b4bf2a04cd2f472e77ba4b86fbfca690bfc83e51da8ce0e575804b763eda"
+SRC_URI[sha256sum] = "7a537401bd110c606594b7c6be71b993f0ccc73ae151ad68040979286ba4e50e"
 
 S = "${WORKDIR}/${fd_pkgname}-${PV}"
 
