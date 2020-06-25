@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "\
-    file://setup.py;beginline=250;endline=250;md5=2a114620e4e6843aa7568d5902501753 \
+    file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753 \
     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
 "
 DEPENDS = "\
@@ -18,8 +18,8 @@ DEPENDS = "\
     python3-pytz-native \
 "
 
-SRC_URI[md5sum] = "6c018a644a88120886cc7211f7c826f0"
-SRC_URI[sha256sum] = "ffe2f9cdcea1086fc414e82f42271ecf1976700b8edd16ca9d376189c6d93aee"
+SRC_URI[md5sum] = "b60cd68f792a30173d825e16482aedd8"
+SRC_URI[sha256sum] = "3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d"
 
 inherit pypi setuptools3 pkgconfig
 
