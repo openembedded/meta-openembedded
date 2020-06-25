@@ -2,10 +2,10 @@ DESCRIPTION = "Colored terminal output for Python's logging module"
 HOMEPAGE = "https://coloredlogs.readthedocs.io"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=764e737b117a38d773609885e8d04f0b"
 
-SRC_URI[md5sum] = "0a186966a1955fff8cf9489373e691d9"
-SRC_URI[sha256sum] = "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
+SRC_URI[md5sum] = "34cd8ef3f758b10c6f1482b2614a81f2"
+SRC_URI[sha256sum] = "a1fab193d2053aa6c0a97608c4342d031f1f93a3d1218432c59322441d31a505"
 
 inherit pypi setuptools3
 
