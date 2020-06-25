@@ -6,8 +6,8 @@ HOMEPAGE = "http://github.com/kurtbrose/pyjks"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9694d6cc724caf7f7386be88a4a81958"
 
-SRC_URI[md5sum] = "b6e8f3b91be355d15e3ba99de2cccf9b"
-SRC_URI[sha256sum] = "9ce5b40289bcdffcd6a8e7118b333ba8ba2ec4c9ebc5e324885cc8a69767011a"
+SRC_URI[md5sum] = "1a6bce95484f1f62f8ff59755972c632"
+SRC_URI[sha256sum] = "0378cec15fb11b2ed27ba54dad9fd987d48e6f62f49fcff138f5f7a8b312b044"
 
 inherit pypi setuptools3
 
