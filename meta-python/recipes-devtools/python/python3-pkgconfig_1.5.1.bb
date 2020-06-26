@@ -4,16 +4,14 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=faa7f82be8f220bff6156be4790344fc"
 
-SRC_URI = "git://github.com/matze/pkgconfig.git"
-SRCREV ?= "8af0102346847e8873af8e76ab3f34ba9da806e2"
+SRC_URI[md5sum] = "9f9cdb224ec0a1e59efcc7cac4b91972"
+SRC_URI[sha256sum] = "97bfe3d981bab675d5ea3ef259045d7919c93897db7d3b59d4e8593cba8d354f"
 
 RDEPENDS_${PN} = "pkgconfig \
                  ${PYTHON_PN}-shell \
                  "
 
-inherit setuptools3
-
-S = "${WORKDIR}/git"
+inherit pypi setuptools3
 
 BBCLASSEXTEND = "native"
 
