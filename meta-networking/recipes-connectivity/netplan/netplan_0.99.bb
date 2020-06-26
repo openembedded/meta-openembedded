@@ -11,8 +11,8 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 S = "${WORKDIR}/git"
-SRCREV = "5d22e9d22c4a3724d27b80b0cd9b898ae8f59d2b"
-PV = "0.98+git${SRCPV}"
+SRCREV = "1ccf7e0e3a7a91edbbe3f9f0669c8bbab8248cd1"
+PV = "0.99+git${SRCPV}"
 
 SRC_URI = " \
         git://github.com/CanonicalLtd/netplan.git \
@@ -20,17 +20,17 @@ SRC_URI = " \
 
 DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
-RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python3-pyflakes util-linux-libuuid"
+RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python3-pyflakes util-linux-libuuid libnetplan"
 
 inherit pkgconfig systemd
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-EXTRA_OEMAKE = "generate"
+EXTRA_OEMAKE = "generate netplan/_features.py"
 EXTRA_OEMAKE =+ "${@bb.utils.contains('DISTRO_FEATURES','systemd','netplan-dbus dbus/io.netplan.Netplan.service','',d)}"
 
 do_install() {
-	install -d ${D}${sbindir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
+	install -d ${D}${sbindir} ${D}${libdir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
 	install -m 755 ${S}/generate ${D}${base_libdir}/netplan/
 	install -m 644 ${S}/netplan/*.py ${D}${datadir}/netplan/netplan
 	install -m 644 ${S}/netplan/cli/*.py ${D}${datadir}/netplan/netplan/cli
@@ -39,7 +39,6 @@ do_install() {
 	ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
 
 	install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
-	install -m 644 ${S}/src/netplan-wpa@.service ${D}${systemd_unitdir}/system/
 	ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
 
 	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
@@ -48,12 +47,13 @@ do_install() {
 		install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
 		install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
 	fi
+
+	install -m 755 ${S}/libnetplan.so.0.0 ${D}${libdir}
+        ln -rfs ${D}${libdir}/libnetplan.so.0.0 ${D}${libdir}/libnetplan.so
 }
 
-SYSTEMD_SERVICE_${PN} = "netplan-wpa@.service"
-SYSTEMD_AUTO_ENABLE = "disable"
+PACKAGES += "${PN}-dbus libnetplan"
 
-PACKAGES += "${PN}-dbus"
-
+FILES_libnetplan = "${libdir}/libnetplan.so.0.0"
 FILES_${PN} = "${sbindir} ${base_libdir}/netplan/generate ${datadir}/netplan ${sysconfdir}/netplan ${systemd_unitdir}"
 FILES_${PN}-dbus = "${base_libdir}/netplan/netplan-dbus ${datadir}/dbus-1"
