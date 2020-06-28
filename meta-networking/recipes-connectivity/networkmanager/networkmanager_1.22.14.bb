@@ -33,7 +33,7 @@ SRC_URI_append_libc-musl = " \
     file://musl/0003-Fix-build-with-musl-for-n-dhcp4.patch \
     file://musl/0004-Fix-build-with-musl-systemd-specific.patch \
 "
-SRC_URI[sha256sum] = "2b29ccc1531ba7ebba95a97f40c22b963838e8b6833745efe8e6fb71fd8fca77"
+SRC_URI[sha256sum] = "c6893971936a1ce252ba4fdff830c972d2ae93fec6751b57dcfd3ad9f0c949dd"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
@@ -106,6 +106,7 @@ FILES_${PN} += " \
     ${libexecdir} \
     ${libdir}/NetworkManager/${PV}/*.so \
     ${libdir}/NetworkManager \
+    ${libdir}/firewalld/zones \
     ${nonarch_libdir}/NetworkManager/conf.d \
     ${nonarch_libdir}/NetworkManager/dispatcher.d \
     ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-down.d \
