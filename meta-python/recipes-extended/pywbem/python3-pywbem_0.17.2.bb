@@ -16,12 +16,10 @@ HOMEPAGE = "http://pywbem.github.io"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
+SRC_URI[md5sum] = "6100157c720ba272895b3f79a05c8dc3"
+SRC_URI[sha256sum] = "84dac33f77d5ff2c3d8eb42fc7de2ffb6d33f5e4954ef89db0dbf3fe646a2809"
+
 inherit pypi setuptools3 update-alternatives
-
-SRCREV = "b3386b3bee8876d15f0745147c0b08937d8ab18e"
-PYPI_SRC_URI = "git://github.com/pywbem/pywbem;protocol=https;branch=stable_0.15"
-
-S = "${WORKDIR}/git"
 
 DEPENDS += " \
     ${PYTHON_PN}-ply-native \
