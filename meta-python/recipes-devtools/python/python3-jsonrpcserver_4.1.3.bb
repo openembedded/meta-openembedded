@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
 
-SRC_URI[md5sum] = "fd4091bc19eb18579c15b97af70714eb"
-SRC_URI[sha256sum] = "73db55d1cf245ebdfb96ca05c4cce01c51b61be845a2a981f539ea1e6a4e0c4a"
+SRC_URI[md5sum] = "e73b0bd90e99115d3f9e0ac42882c5b7"
+SRC_URI[sha256sum] = "649680c293facb6ae7c3f5c8028e4623c55195db5216847e9f25f85cba2d443a"
 
 inherit pypi setuptools3
 
