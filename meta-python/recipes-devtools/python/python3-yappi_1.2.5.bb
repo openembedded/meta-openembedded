@@ -1,11 +1,11 @@
 SUMMARY  = "Yet Another Python Profiler"
-HOMEPAGE = "http://yappi.googlecode.com/"
+HOMEPAGE = "https://github.com/sumerc/yappi"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9a193c13f346884e597acdcac7fe9ac8"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=71c208c9a4fd864385eb69ad4caa3bee"
 
-SRC_URI[md5sum] = "a545101aa8a435b0780f06f4723f58c8"
-SRC_URI[sha256sum] = "7f814131515d51db62b1a3468bcb84de30499124752806a5a6e11caf0b4344bf"
+SRC_URI[md5sum] = "83237494e7d22df2a31935a1e6650fa6"
+SRC_URI[sha256sum] = "ad5fa4caf2859e480ffc4ec3e85615a6f7dea852c8f035f2db723f824ed4ba11"
 
 SRC_URI += " \
     file://run-ptest \
@@ -28,5 +28,5 @@ RDEPENDS_${PN}-ptest += " \
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-    cp -f ${S}/yappi.py ${D}/${PTEST_PATH}/
+    cp -f ${S}/yappi/yappi.py ${D}/${PTEST_PATH}/
 }
