@@ -7,7 +7,9 @@ DEPENDS += " \
     ${PYTHON_PN}-setuptools-scm-native \
     ${PYTHON_PN}-pkgconfig-native \
 "
-SRC_URI[sha256sum] = "9c9f6a8b71c18c24bd83537a4d616f0301623a5e98db7c7ca956d608e1bcd4c7"
+
+SRC_URI[md5sum] = "1bf913acec3cb63893f522c222c8e3b1"
+SRC_URI[sha256sum] = "debe75513db3eb9e5cdcd82a329ff38374b6316ab65b848b571e0404746c1e05"
 
 inherit pypi setuptools3
 
