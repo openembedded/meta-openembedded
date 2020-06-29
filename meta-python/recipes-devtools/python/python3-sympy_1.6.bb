@@ -4,10 +4,10 @@
 SUMMARY = "Computer algebra system (CAS) in Python"
 HOMEPAGE = "https://pypi.org/project/sympy/"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=611b41534dbf5aa01d7c827bf667ef66"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ebb06e9df8f57522b72d0edb0fcf83d4"
 
-SRC_URI[md5sum] = "b11b310c3e1642bf66e51038cb3c0021"
-SRC_URI[sha256sum] = "d77901d748287d15281f5ffe5b0fef62dd38f357c2b827c44ff07f35695f4e7e"
+SRC_URI[md5sum] = "dbb7b21d2972c41f37d48f744b6189a3"
+SRC_URI[sha256sum] = "9769e3d2952e211b1245f1d0dfdbfbdde1f7779a3953832b7dd2b88a21ca6cc6"
 
 inherit pypi setuptools3
 
