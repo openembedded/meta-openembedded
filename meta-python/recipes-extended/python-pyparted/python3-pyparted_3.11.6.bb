@@ -8,15 +8,13 @@ LIC_FILES_CHKSUM = "\
     file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
     file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
 "
+
+SRC_URI[md5sum] = "b85dcaecc3106eb6e9a117270b09615e"
+SRC_URI[sha256sum] = "727ccdf308c194069aa9797f7a6a973bc95b2e407cdf5d58d6c8bc4c9dec92dc"
+
+inherit pypi distutils3
+
 DEPENDS += "parted"
-
-# upstream only publishes releases in github archives which are discouraged
-SRCREV = "481510c10866851844b19f3d2ffcdaa37efc0cf8"
-SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
-
-inherit distutils3
-
-S = "${WORKDIR}/git"
 
 RDEPENDS_${PN}_class-target += " \
     parted (>= 2.3) \
