@@ -23,7 +23,7 @@ do_install_ptest() {
 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 }
 
-SRC_URI[md5sum] = "4468da43443115a00c02c126cf601ae0"
-SRC_URI[sha256sum] = "1d057645db16ca7fe1f3bd953558897603d6f0b9c51ed9d11eb4d071ec4e2aab"
+SRC_URI[md5sum] = "ae41b69896f49727e1621d279cb72522"
+SRC_URI[sha256sum] = "bbaa39c3dede00175df2dc2b03d0cf18dd2d32a7de7beb68072d13043c9edb20"
 
 BBCLASSEXTEND = "native nativesdk"
