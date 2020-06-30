@@ -4,8 +4,8 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
 
-SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
-SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
+SRC_URI[md5sum] = "197a99c09f344a0dd987fab9801dc8d0"
+SRC_URI[sha256sum] = "875f41ebd6f2c44781259005b157faed1a5031df3ae5aa7bcb4628a6c0782f14"
 
 inherit pypi setuptools3
 
