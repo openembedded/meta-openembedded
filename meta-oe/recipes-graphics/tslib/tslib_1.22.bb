@@ -14,13 +14,10 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.xz;downloadfilename=tslib-${PV}.tar.xz \
-           file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
-           file://0001-Fix-build-error-with-input_event_sec-for-old-kernel.patch \
            file://ts.conf \
            file://tslib.sh \
-"
-SRC_URI[md5sum] = "b2b20d3ed520128513f8d3135b42e142"
-SRC_URI[sha256sum] = "d2a57b823ea59e53a3b130eef05dfed1190b857854f886eec764e1ca1957cf56"
+           "
+SRC_URI[sha256sum] = "aaf0aed410a268d7b51385d07fe4d9d64312038e87c447ec8a24c8db0a15617a"
 
 UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
 
