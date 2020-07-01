@@ -8,16 +8,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
            file://firewalld.init \
 "
-SRC_URI[md5sum] = "05ec772cbdc0a2b3df081e4beca5599d"
-SRC_URI[sha256sum] = "414c46202c12334cd5c986214e5e2575d18e743c5531a97ace1c0cd94341c60d"
+SRC_URI[md5sum] = "b1aeede85a72adcf4f79d98019811244"
+SRC_URI[sha256sum] = "45a8a7dbc084ef56ce306154d3834922e7f1fc2bf11b6c821f579cad51313226"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
-DEPENDS = "intltool-native glib-2.0-native libxslt-native docbook-xsl-stylesheets-native"
+DEPENDS = "intltool-native glib-2.0-native"
 
 inherit gettext autotools bash-completion python3native gsettings systemd update-rc.d
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd"
+PACKAGECONFIG[docs] = "--with-xml-catalog=${STAGING_ETCDIR_NATIVE}/xml/catalog,--disable-docs,libxslt-native docbook-xsl-stylesheets-native"
 
 PACKAGES += "${PN}-zsh-completion"
 
@@ -37,7 +38,6 @@ EXTRA_OECONF = "\
     --without-ebtables \
     --without-ebtables-restore \
     --disable-sysconfig \
-    --with-xml-catalog=${STAGING_ETCDIR_NATIVE}/xml/catalog \
 "
 
 INITSCRIPT_NAME = "firewalld"
@@ -62,6 +62,9 @@ do_install_append() {
     fi
     sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g \
         ${D}${bindir}/* ${D}${sbindir}/* ${D}${sysconfdir}/firewalld/*.xml
+
+    # This file contains Red Hat-isms. Modules get loaded without it.
+    rm -f ${D}${sysconfdir}/modprobe.d/firewalld-sysctls.conf
 }
 
 FILES_${PN} += "\
