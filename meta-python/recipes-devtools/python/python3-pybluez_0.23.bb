@@ -1,5 +1,5 @@
 DESCRIPTION = "Bluetooth Python extension module"
-HOMEPAGE = "http://karulis.github.io/pybluez/"
+HOMEPAGE = "https://pybluez.github.io/"
 SECTION = "devel/python"
 
 DEPENDS = "bluez5"
@@ -7,11 +7,10 @@ DEPENDS = "bluez5"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8a71d0475d08eee76d8b6d0c6dbec543"
 
-SRC_URI[md5sum] = "49dab9d5a8f0b798c8125c7f649be3cd"
-SRC_URI[sha256sum] = "4ce006716a54d9d18e8186a3f1c8b12a8e6befecffe8fd5828a291fb694ce49d"
+SRC_URI[md5sum] = "afbe8429bb82d2c46a3d0f5f4f898f9d"
+SRC_URI[sha256sum] = "c8f04d2e78951eaa9de486b4d49381704e8943d0a6e6e58f55fcd7b8582e90de"
 
 PYPI_PACKAGE = "PyBluez"
-PYPI_PACKAGE_EXT = "zip"
 inherit pypi setuptools3
 
 RDEPENDS_${PN} += "\
