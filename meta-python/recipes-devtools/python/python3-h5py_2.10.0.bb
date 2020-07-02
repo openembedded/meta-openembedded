@@ -1,17 +1,17 @@
-SUMMARY = "Provides both a high- and low-level interface to the HDF5 library from Python. "
+SUMMARY = "Provides both a high- and low-level interface to the HDF5 library from Python."
 HOMEPAGE = "https://www.h5py.org/"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://setup.py;beginline=107;endline=107;md5=795ecad0d261c998cc526c84a822dff6"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
 
-SRC_URI = "git://github.com/h5py/h5py.git \
+SRC_URI[md5sum] = "504b595237409ab766fbbe568e60a080"
+SRC_URI[sha256sum] = "84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d"
+
+SRC_URI_append = " \
            file://0001-cross-compiling-support.patch \
           "
-SRCREV ?= "8d96a14c3508de1bde77aec5db302e478dc5dbc4"
 
-inherit setuptools3
-
-S = "${WORKDIR}/git"
+inherit pypi setuptools3
 
 BBCLASSEXTEND = "native"
 
@@ -27,4 +27,4 @@ RDEPENDS_${PN} = "python3-numpy \
                   python3-six \
                  "
 
-export HDF5_VERSION="1.8.19"
+export HDF5_VERSION="1.8.21"
