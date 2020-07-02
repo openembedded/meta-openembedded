@@ -1,10 +1,10 @@
 SUMMARY = "A zero-dependency DBus library for Python with asyncio support"
 HOMEPAGE = "https://github.com/acrisci/python-dbus-next"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b32e18a71bcdd072bce21f204629a104"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=94e750c96e56788499b56c81de91431c"
 
-SRC_URI[md5sum] = "df838d695284dd1775860f9691a8663f"
-SRC_URI[sha256sum] = "a567d845ceed5feac48dda7faeb9ff2571f9a434a3c32b9b363f763e82368762"
+SRC_URI[md5sum] = "a823270b11c8dd7932c12adc6b2fadbb"
+SRC_URI[sha256sum] = "4dd9097778224c69228f7f2a0f52e9b13ec2c75e87974ad312525c927835e8fb"
 
 PYPI_PACKAGE = "dbus_next"
 
