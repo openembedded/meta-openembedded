@@ -10,8 +10,8 @@ PYPI_PACKAGE := "Pint"
 
 inherit pypi ptest setuptools3
 
-SRC_URI[md5sum] = "6e60d42736f8175a57119aecc383fe4b"
-SRC_URI[sha256sum] = "13fa35ffa3ddf53161b4304917085687950e0de461bcdd4d65cdee11a43d7fb2"
+SRC_URI[md5sum] = "e5e409806bc82f518230117b30ae23ed"
+SRC_URI[sha256sum] = "9aa450ebb9d722ed03fa9a450104cfd16c479b49f862d547c6f77320de597f72"
 
 DEPENDS += "python3-setuptools-scm-native"
 
