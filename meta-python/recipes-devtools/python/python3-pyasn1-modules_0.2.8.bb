@@ -6,8 +6,8 @@ HOMEPAGE = "https://github.com/etingof/pyasn1-modules"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a14482d15c2249de3b6f0e8a47e021fd"
 
-SRC_URI[md5sum] = "18c77d56abeef631d94f95ff2d652859"
-SRC_URI[sha256sum] = "0c35a52e00b672f832e5846826f1fb7507907f7d52fba6faa9e3c4cbe874fe4b"
+SRC_URI[md5sum] = "107e1ece7d0a41d782f69f8a95a4d9bc"
+SRC_URI[sha256sum] = "905f84c712230b2c592c19470d3ca8d552de726050d1d1716282a1f6146be65e"
 
 inherit pypi ptest setuptools3
 
