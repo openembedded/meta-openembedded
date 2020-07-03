@@ -7,8 +7,8 @@ HOMEPAGE = "https://github.com/websocket-client/websocket-client"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c4c4a98fbc4836b81c8c64d6ecb01fc1"
 
-SRC_URI[md5sum] = "89484bd5dac71123ae6a09b2f90fe62c"
-SRC_URI[sha256sum] = "1fd5520878b68b84b5748bb30e592b10d0a91529d5383f74f4964e72b297fd3a"
+SRC_URI[md5sum] = "8061820da5e1de26a6a1a6996d4eebd5"
+SRC_URI[sha256sum] = "d735b91d6d1692a6a181f2a8c9e0238e5f6373356f561bb9dc4c7af36f452010"
 
 PYPI_PACKAGE = "websocket_client"
 inherit pypi setuptools3
