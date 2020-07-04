@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 # v1.9.9
-SRCREV = "6da706c8026b629d9bb7ebebc32239305a03da8e"
+SRCREV = "1283a65c541c4a83e152024a63faf7b267b9b1cd"
 SRC_URI = "git://github.com/jirka-h/haveged.git \
 "
 S = "${WORKDIR}/git"
