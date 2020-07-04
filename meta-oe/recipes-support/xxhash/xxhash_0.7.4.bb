@@ -3,12 +3,12 @@ DESCRIPTION = "xxHash is an extremely fast non-cryptographic hash algorithm, \
 working at speeds close to RAM limits."
 HOMEPAGE = "http://www.xxhash.com/"
 LICENSE = "BSD-2-Clause & GPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=01a7eba4212ef1e882777a38585e7a9b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b335320506abb0505437e39295e799cb"
 
 SRC_URI = "git://github.com/Cyan4973/xxHash.git"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
-SRCREV = "d408e9b0606d07b1ddc5452ffc0ec8512211b174"
+SRCREV = "173e50be0509c6fb6c1bb74d95049ef61d7fdced"
 
 S = "${WORKDIR}/git"
 
