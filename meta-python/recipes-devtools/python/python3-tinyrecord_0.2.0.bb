@@ -6,10 +6,10 @@ then execute architecture which allows us to minimize the time \
 that we are within a thread lock."
 HOMEPAGE = "https://github.com/eugene-eeo/tinyrecord"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README;md5=31c1dc11b4ae83546538de4c16bceabc"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ee157eec4b228c8d5b7a6e0feab2864a"
 
-SRC_URI[md5sum] = "e47dcfe299686cd3fa7ffaa7cb2ee8b1"
-SRC_URI[sha256sum] = "bc7e6a8e78600df234d7a85c2f5d584130f2c6ffd7cd310f9d3a1d976d3373c8"
+SRC_URI[md5sum] = "cbaae3f4599b12e3bea67ca4a75eca99"
+SRC_URI[sha256sum] = "eb6dc23601be359ee00f5a3d31a46adf3bad0a16f8d60af216cd67982ca75cf4"
 
 PYPI_PACKAGE = "tinyrecord"
 inherit pypi setuptools3
