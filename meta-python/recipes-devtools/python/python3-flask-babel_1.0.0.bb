@@ -2,12 +2,11 @@ DESCRIPTION = "i18n and l10n support for Flask based on babel and pytz"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=51917f3e8e858f5ae295a7d0e2eb3cc9"
 
-SRC_URI[md5sum] = "fcf2f360ff279d3133e40974804efd72"
-SRC_URI[sha256sum] = "316ad183e42003f3922957fa643d0a1e8e34a0f0301a88c3a8f605bc37ba5c86"
+SRC_URI[sha256sum] = "d6a70468f9a8919d59fba2a291a003da3a05ff884275dddbd965f3b98b09ab3e"
 
 PYPI_PACKAGE = "Flask-Babel"
 
-inherit pypi
+inherit pypi setuptools3
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-speaklater \
