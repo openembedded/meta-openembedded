@@ -32,12 +32,9 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
            file://system-pkcs11.txt \
            file://nss-fix-nsinstall-build.patch \
            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
-           file://riscv.patch \
-           file://0001-Enable-uint128-on-mips64.patch \
            "
 
-SRC_URI[md5sum] = "6acaf1ddff69306ae30a908881c6f233"
-SRC_URI[sha256sum] = "085c5eaceef040eddea639e2e068e70f0e368f840327a678ef74ae3d6c15ca78"
+SRC_URI[sha256sum] = "dab18bbfcf5e347934cda664df75ce9fd912a5772686c40d3c805e53c08d6e43"
 
 UPSTREAM_CHECK_URI = "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Releases"
 UPSTREAM_CHECK_REGEX = "NSS_(?P<pver>.+)_release_notes"
@@ -127,7 +124,8 @@ do_compile() {
     export CC="${CC} ${CFLAGS}"
     make -C ./nss CCC="${CXX} -g" \
         OS_TEST=${OS_TEST} \
-        RPATH="${RPATH}"
+        RPATH="${RPATH}" \
+        autobuild
 }
 
 do_compile[vardepsexclude] += "SITEINFO_BITS"
