@@ -11,7 +11,7 @@ LDFLAGS_append_libc-musl = " -lexecinfo"
 
 SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
 "
-SRC_URI[sha256sum] = "3ed23be326be0bf3c98428c1b4f4c948c1ded2048bd27f107380e12574797930"
+SRC_URI[sha256sum] = "7614d447dc588403aff2ff97b253f46c5f03a6347d024618e84490b8ab4cd87b"
 
 S = "${WORKDIR}/Remmina-v${PV}"
 
