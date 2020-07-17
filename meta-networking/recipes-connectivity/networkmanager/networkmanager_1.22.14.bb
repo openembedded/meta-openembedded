@@ -11,7 +11,7 @@ DEPENDS = " \
     intltool-native \
     libxslt-native \
     libnl \
-    libgudev \
+    udev \
     util-linux \
     libndp \
     libnewt \
