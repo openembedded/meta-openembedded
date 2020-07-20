@@ -1,0 +1,62 @@
+diff -urN orig/cmake/LibreSSL.cmake patched/cmake/LibreSSL.cmake
+--- orig/cmake/LibreSSL.cmake	2020-01-07 22:55:55.000000000 +0900
++++ patched/cmake/LibreSSL.cmake	2020-07-14 12:01:28.321088730 +0900
+@@ -27,6 +27,17 @@
+ 		set(BYPRODUCT_PREFIX "" CACHE STRING "" FORCE)
+ 	set(BUILD_ARGS " -GVisual Studio 15 2017")
+ 	endif(WIN32)
++
++	set(BYPRODUCTS
++		"lib/${BYPRODUCT_PREFIX}crypto${BYPRODUCT_SUFFIX}"
++		"lib/${BYPRODUCT_PREFIX}ssl${BYPRODUCT_SUFFIX}"
++		"lib/${BYPRODUCT_PREFIX}tls${BYPRODUCT_SUFFIX}"
++	)
++	set(LIBRESSL_INSTALL_DIR "${BINARY_DIR}/thirdparty/libressl-install" CACHE STRING "" FORCE)
++	FOREACH(BYPRODUCT ${BYPRODUCTS})
++		LIST(APPEND LIBRESSL_LIBRARIES_LIST "${LIBRESSL_INSTALL_DIR}/${BYPRODUCT}")
++	ENDFOREACH(BYPRODUCT)
++
+ 	ExternalProject_Add(
+ 	libressl-portable
+ 	URL https://cdn.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz https://gentoo.osuosl.org/distfiles/libressl-2.8.3.tar.gz
+@@ -37,6 +48,7 @@
+ 				"-DLIBRESSL_APPS=OFF"
+ 				"-DLIBRESSL_TESTS=OFF"
+ 				"${BUILD_ARGS}"
++	BUILD_BYPRODUCTS ${LIBRESSL_LIBRARIES_LIST}
+ 	)
+ 
+ 	add_library(crypto STATIC IMPORTED)
+diff -urN orig/CMakeLists.txt patched/CMakeLists.txt
+--- orig/CMakeLists.txt	2020-01-07 22:55:55.000000000 +0900
++++ patched/CMakeLists.txt	2020-07-14 16:25:51.581055220 +0900
+@@ -120,12 +120,12 @@
+ endif()
+ 
+ # Use ccache if present
+-find_program(CCACHE_FOUND ccache)
+-if(CCACHE_FOUND)
+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+-    message("-- Found ccache: ${CCACHE_FOUND}")
+-endif(CCACHE_FOUND)
++#find_program(CCACHE_FOUND ccache)
++#if(CCACHE_FOUND)
++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
++#    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
++#    message("-- Found ccache: ${CCACHE_FOUND}")
++#endif(CCACHE_FOUND)
+ 
+ if (UNIX AND USE_GOLD_LINKER AND NOT APPLE )
+   execute_process(COMMAND ${CMAKE_C_COMPILER} -fuse-ld=gold -Wl,--version ERROR_QUIET OUTPUT_VARIABLE ld_version)
+@@ -303,8 +303,10 @@
+     GIT_TAG "f3294d9d86e6a7915a967efff2842089b8b0d071"  # Version 7.64.0
+     SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-src"
+     LIST_SEPARATOR % # This is needed for passing semicolon-separated lists
++    TLS_VERIFY OFF
+     CMAKE_ARGS ${PASSTHROUGH_CMAKE_ARGS}
+                "-DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/thirdparty/curl-install"
++               "-DCMAKE_INSTALL_LIBDIR=lib${LIBSUFFIX}"
+                 -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+                 -DBUILD_CURL_EXE=OFF
+                 -DBUILD_TESTING=OFF

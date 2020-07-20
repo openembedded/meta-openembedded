@@ -1,0 +1,13 @@
+[Unit]
+Description=MiNiFi Service
+After=network.target
+RequiresMountsFor=/var
+
+[Service]
+Type=simple
+Environment=MINIFI_HOME=/etc/minifi
+ExecStartPre=@BASE_BINDIR@/mkdir -p /var/lib/minifi /var/log/minifi
+ExecStart=@BINDIR@/minifi
+
+[Install]
+WantedBy=multi-user.target
