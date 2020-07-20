@@ -1,6 +1,6 @@
 require wireguard.inc
 
-SRCREV = "43f57dac7b8305024f83addc533c9eede6509129"
+SRCREV = "d553aa7c52ac78c1963886afb74ba861b0b7b0fc"
 
 SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
 
