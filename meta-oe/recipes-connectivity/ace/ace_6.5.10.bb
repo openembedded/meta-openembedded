@@ -3,16 +3,16 @@ DESCRIPTION = "C++ network programming framework that implements many core \
 patterns for concurrent communication software"
 LICENSE = "ACE-TAO-CIAO"
 HOMEPAGE = "http://www.dre.vanderbilt.edu/~schmidt/ACE.html"
-LIC_FILES_CHKSUM = "file://COPYING;md5=96ef88a5529594698e8ceabdd47df92c"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d2c090e9c730fd91677782d8e2091d77"
 
 DEPENDS += "openssl gperf-native"
 
-SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-6_5_8/ACE-${PV}.tar.bz2 \
+SRC_URI = "https://github.com/DOCGroup/ACE_TAO/releases/download/ACE%2BTAO-6_5_10/ACE-${PV}.tar.bz2 \
            file://ace_config.patch \
+           file://no_sysctl.patch \
           "
 
-SRC_URI[md5sum] = "a6ba6a944612fe0696c90cbb5c3078ee"
-SRC_URI[sha256sum] = "cda2a960dbb9970a907663627711b2e2b14b3484a2859ae936370bcad0b16923"
+SRC_URI[sha256sum] = "90de437926928e98e9fd9132c7c3e886ca79f25567adeccbc24a5996f230d8e2"
 
 COMPATIBLE_HOST_libc-musl = "null"
 
