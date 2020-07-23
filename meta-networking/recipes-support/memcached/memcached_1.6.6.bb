@@ -21,9 +21,9 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
 
 SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
            file://memcached-add-hugetlbfs-check.patch \
+           file://0001-Replace-sigignore-with-signal-API.patch \
            "
-SRC_URI[md5sum] = "4b64296ea0eeccdee9168c035e0488ab"
-SRC_URI[sha256sum] = "cfd7b023a9cefe7ae8a67184f51d841dbbf97994ed0e8a55e31ee092320ea1e4"
+SRC_URI[sha256sum] = "908f0eecfa559129c9e44edc46f02e73afe8faca355b4efc5c86d902fc3e32f7"
 
 # set the same COMPATIBLE_HOST as libhugetlbfs
 COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
