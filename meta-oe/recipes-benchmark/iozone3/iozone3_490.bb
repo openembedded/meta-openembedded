@@ -11,8 +11,8 @@ SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
     file://0001-let-system-headers-provide-pread64.patch \
     file://copyright.txt \
 "
-SRC_URI[md5sum] = "e863281987689cd6d9729e535637b77d"
-SRC_URI[sha256sum] = "6155850d1019f2450dc926bbdb5a24abf423ee3bb928ab1e68569cf60a908584"
+SRC_URI[md5sum] = "95cb73dfdd58a0dfa42804f016dbb83c"
+SRC_URI[sha256sum] = "5eadb4235ae2a956911204c50ebf2d8d8d59ddcd4a2841a1baf42f3145ad4fed"
 
 UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
 
