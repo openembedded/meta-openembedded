@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "\
-    file://setup.py;beginline=253;endline=253;md5=2a114620e4e6843aa7568d5902501753 \
+    file://setup.py;beginline=251;endline=251;md5=e0ef37de7122ce842bcd1fb54482b353 \
     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
 "
 DEPENDS = "\
@@ -18,8 +18,8 @@ DEPENDS = "\
     python3-pytz-native \
 "
 
-SRC_URI[md5sum] = "b60cd68f792a30173d825e16482aedd8"
-SRC_URI[sha256sum] = "3d77a6630d093d74cbbfebaa0571d00790966be1ed204e4a8239f5cbd6835c5d"
+SRC_URI[md5sum] = "b1de7185687c6f5c092689e3431a69b3"
+SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82"
 
 inherit pypi setuptools3 pkgconfig
 
@@ -33,5 +33,10 @@ RDEPENDS_${PN} = "\
     python3-kiwisolver \
     python3-pytz \
 "
+
+do_compile_prepend() {
+    echo [libs] > ${S}/setup.cfg
+    echo system_freetype = true >> ${S}/setup.cfg
+}
 
 BBCLASSEXTEND = "native"
