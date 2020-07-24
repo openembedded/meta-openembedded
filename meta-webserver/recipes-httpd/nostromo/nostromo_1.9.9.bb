@@ -11,8 +11,8 @@ SRC_URI = "http://www.nazgul.ch/dev/${BPN}-${PV}.tar.gz \
            file://nostromo \
 "
 
-SRC_URI[md5sum] = "6189714845b3ad5d0fc490f8cf48dacf"
-SRC_URI[sha256sum] = "33c635f317fb441e10d5297bb4218ae0ea62c48f2fc3029c08f5d2167c6cdfca"
+SRC_URI[md5sum] = "a054eb8e09560082793aaad676e33bd3"
+SRC_URI[sha256sum] = "1fad0a28d934835b582cedc98857e12e5adb991b14b87b52b39e6a501f4a9486"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
