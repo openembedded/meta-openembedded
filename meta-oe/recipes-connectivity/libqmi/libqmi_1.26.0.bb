@@ -1,5 +1,6 @@
 SUMMARY = "libqmi is a library for talking to WWAN devices by QMI protocol"
-DESCRIPTION = "libqmi is a glib-based library for talking to WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol"
+DESCRIPTION = "libqmi is a glib-based library for talking to WWAN modems and \
+               devices which speak the Qualcomm MSM Interface (QMI) protocol"
 HOMEPAGE = "http://www.freedesktop.org/wiki/Software/libqmi"
 LICENSE = "GPLv2 & LGPLv2.1"
 LIC_FILES_CHKSUM = " \
@@ -9,13 +10,12 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "glib-2.0 glib-2.0-native"
 
-inherit autotools pkgconfig bash-completion
+inherit autotools pkgconfig bash-completion gobject-introspection
 
-SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-           "
+SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
 
-SRC_URI[md5sum] = "7e6e49fddb9ae2b6fcde14619d6cfe49"
-SRC_URI[sha256sum] = "2d3b91a2b8a882b17b16403c9ef7bdce522db4f0ceaa3e4dff76033885428b69"
+SRC_URI[md5sum] = "8da95a97e893311878f8ce12dcf8fad0"
+SRC_URI[sha256sum] = "7f0429e0ae58792e21512d09ca2412537840ea42696762795af1284a65fd6e40"
 
 PACKAGECONFIG ??= "udev mbim"
 PACKAGECONFIG[udev] = ",--without-udev,libgudev"
