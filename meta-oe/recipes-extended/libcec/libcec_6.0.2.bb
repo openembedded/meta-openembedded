@@ -9,9 +9,7 @@ DEPENDS = "p8platform udev ncurses swig-native python3"
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
 DEPENDS_append_rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
 
-PV = "5.0.0"
-
-SRCREV = "43bc27fe7be491149e6f57d14110e02abdac2f24"
+SRCREV = "29d82c80bcc62be2878a9ac080de7eb286c4beb9"
 SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release \
            file://0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch \
            file://0001-Enhance-reproducibility.patch \
