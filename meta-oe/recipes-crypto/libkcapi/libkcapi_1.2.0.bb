@@ -1,18 +1,13 @@
 SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
 HOMEPAGE = "http://www.chronox.de/libkcapi.html"
 LICENSE = "BSD | GPL-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=14d5a68b28755c04ebdba226e888b157"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c78be93ed8d1637f2a3f4a83ff9d5f54"
 
 DEPENDS = "libtool"
 
 S = "${WORKDIR}/git"
-SRCREV = "5649050d201856bf06c8738b5d2aa1710c86ac2f"
-PV = "1.1.5"
-SRC_URI = " \
-    git://github.com/smuellerDD/libkcapi.git \
-    file://0001-kcapi-kdf-Move-code-to-fix.patch \
-    file://0001-Use-__builtin_bswap32-on-Clang-if-supported.patch \
-"
+SRCREV = "8397f0f7c45264a3b9aff5a1f9119df25eeb4c60"
+SRC_URI = "git://github.com/smuellerDD/libkcapi.git"
 
 inherit autotools
 
