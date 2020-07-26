@@ -10,8 +10,8 @@ inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG','gcr','x11','',d)}"
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.md5sum] = "094c45d7694b153612cbdc3c713edcb5"
-SRC_URI[archive.sha256sum] = "4af69552d131a3b2b8b6a2df584044258bf588448dcdb4bddfa12a07c134b726"
+SRC_URI[archive.md5sum] = "e1ccac96405861ecab195be5524baae6"
+SRC_URI[archive.sha256sum] = "da33e72a49e07d855d97a52aa9a8962a4c96f52b9168c4e0027117ad8ffdafb4"
 
 PACKAGECONFIG ?= "gcr iso_codes mobile_broadband_provider_info"
 PACKAGECONFIG[gcr] = "-Dgcr=true,-Dgcr=false,gcr"
