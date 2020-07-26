@@ -11,8 +11,10 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
-SRC_URI[md5sum] = "a5966e8433b60998709c4a922a407bac"
-SRC_URI[sha256sum] = "9670fbc5eb3dc113828be8b702549dc68ec9578cf83287520d935be76fc8f193"
+SRC_URI[md5sum] = "27e1cfff5b8dd95062ad415957e663e5"
+SRC_URI[sha256sum] = "d94d7ccbc5c95ab39c95a0e5ae89a25a224f39b6811f2930d3a1885a69732259"
+
+UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
 
 DEPENDS = "libnfnetlink openssl"
 
@@ -25,7 +27,6 @@ PACKAGECONFIG[libnl] = "--enable-libnl,--disable-libnl,libnl"
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
 PACKAGECONFIG[systemd] = "--with-init=systemd --with-systemdsystemunitdir=${systemd_system_unitdir},--with-init=SYSV,systemd"
 
-EXTRA_OECONF = "--disable-libiptc"
 EXTRA_OEMAKE = "initdir=${sysconfdir}/init.d"
 
 do_install_append() {
