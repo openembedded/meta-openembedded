@@ -6,13 +6,13 @@ AUTHOR = "Dimitar Zhekov"
 SECTION = "fonts"
 
 LICENSE = "OFL-1.1"
-LIC_FILES_CHKSUM = "file://OFL.TXT;md5=9cadb26f4c5c005618c5ae74f041ec54"
+LIC_FILES_CHKSUM = "file://OFL.TXT;md5=9b226721636fde0db38ea656c2aae4bf"
 
 DEPENDS = "hostperl-runtime-native gzip-native bdftopcf-native"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "a8e792fe6e84c86ed2b6ed3e2a12ba66"
-SRC_URI[sha256sum] = "f6f4876a4dabe6a37c270c20bb9e141e38fb50e0bba200e1b9d0470e5eed97b7"
+SRC_URI[md5sum] = "a2cb88f6cf174f3d07de93b91e115a8d"
+SRC_URI[sha256sum] = "34799c8dd5cec7db8016b4a615820dfb43b395575afbb24fc17ee19c869c94af"
 
 inherit allarch fontcache
 
@@ -32,11 +32,11 @@ do_configure() {
 }
 
 do_compile() {
-    oe_runmake DESTDIR=${D} psf txt ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'pcf', '', d)}
+    oe_runmake DESTDIR=${D} psf ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'pcf', '', d)}
 }
 
 do_install() {
-    oe_runmake DESTDIR=${D} install-psf install-acm ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'install-pcf', '', d)}
+    oe_runmake DESTDIR=${D} install-psf ${@bb.utils.contains('PACKAGECONFIG', 'x11', 'install-pcf', '', d)}
 }
 
 PACKAGES += "${PN}-consolefonts ${PN}-consoletrans ${PN}-pcf"
