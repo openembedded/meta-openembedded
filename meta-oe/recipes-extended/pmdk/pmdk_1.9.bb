@@ -3,7 +3,7 @@ DESCRIPTION = "Persistent Memory Development Kit"
 HOMEPAGE = "http://pmem.io"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1b8430f251523f1bff0c9fb95da7e0ca"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b44ee63f162f9cdb18fff1224877aafd"
 DEPENDS = "ndctl"
 
 # Required to have the fts.h header for musl
@@ -11,12 +11,9 @@ DEPENDS_append_libc-musl = " fts"
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/pmem/pmdk.git \
-           file://0001-examples-Initialize-child_idx.patch \
-           file://0002-Makefile-Don-t-install-the-docs.patch \
-          "
+SRC_URI = "git://github.com/pmem/pmdk.git"
 
-SRCREV = "0245d75eaf0f6106c86a7926a45fdf2149e37eaa"
+SRCREV = "1926ffb8f3f5f0617b3b3ed32029d437c272f187"
 
 inherit autotools-brokensep pkgconfig
 
@@ -25,7 +22,7 @@ inherit autotools-brokensep pkgconfig
 # | If you meant to cross compile, use `--host'.
 #
 # Also fix #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Werror=cpp]
-EXTRA_OEMAKE = "BUILD_EXAMPLES='n' HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECTED_OPTIMIZATION}' LIB_PREFIX=${baselib}"
+EXTRA_OEMAKE = "BUILD_EXAMPLES='n' DOC='n' HOST_SYS='${HOST_SYS}' EXTRA_CFLAGS='${SELECTED_OPTIMIZATION}' LIB_PREFIX=${baselib}"
 
 # Fix the missing fts libs when using musl
 EXTRA_OEMAKE_append_libc-musl = " EXTRA_LIBS='-lfts'"
