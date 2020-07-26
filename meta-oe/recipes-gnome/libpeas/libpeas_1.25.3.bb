@@ -8,7 +8,9 @@ DEPENDS = "gtk+3"
 GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION = "gtk_doc"
 
-inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
+inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache features_check
+
+ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
 SRC_URI[archive.md5sum] = "08bfff8f9688cf630dcb0f950617661f"
 SRC_URI[archive.sha256sum] = "1c9bbb29740c29cd6e1dd0c9964722ff08cd5e6f68f1b5c135bc391a6ce97639"
