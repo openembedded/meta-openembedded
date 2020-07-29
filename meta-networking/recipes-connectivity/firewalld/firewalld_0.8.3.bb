@@ -8,8 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
            file://firewalld.init \
 "
-SRC_URI[md5sum] = "b1aeede85a72adcf4f79d98019811244"
-SRC_URI[sha256sum] = "45a8a7dbc084ef56ce306154d3834922e7f1fc2bf11b6c821f579cad51313226"
+SRC_URI[sha256sum] = "4ecb16d82c2825ccfb8f109e543c0492cf6ea8c43e2d0f59901bddcead037dc6"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 DEPENDS = "intltool-native glib-2.0-native"
@@ -29,7 +28,6 @@ PACKAGES += "${PN}-zsh-completion"
 # /etc/sysconfig/firewalld is a Red Hat-ism, only referenced by
 # the Red Hat-specific init script which we aren't using, so we disable that.
 EXTRA_OECONF = "\
-    --with-nft=${sbindir}/nft \
     --without-ipset \
     --with-iptables=${sbindir}/iptables \
     --with-iptables-restore=${sbindir}/iptables-restore \
