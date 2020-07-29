@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
 
 SRC_URI_append_class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
 
-SRCREV = "d5b64b6291b6f292871ad5c6df25c4f6896f7d50"
+SRCREV = "e89fcc53c27c3a3bf559d43190289c3ce4f335b1"
 
 S = "${WORKDIR}/git"
 
