@@ -5,12 +5,9 @@ HOMEPAGE = "https://www.musicpd.org/clients/mpc/"
 
 inherit meson
 
-DEPENDS += " \
-    libmpdclient \
-"
+DEPENDS += "libmpdclient"
 
-SRC_URI = " \
-    git://github.com/MusicPlayerDaemon/mpc \
-"
-SRCREV = "59875acdf34e5f0eac0c11453c49daef54f78413"
+SRC_URI = "git://github.com/MusicPlayerDaemon/mpc"
+SRCREV = "ef16b280052ef0320cb80f79d74c8ce0324005ed"
+
 S = "${WORKDIR}/git"
