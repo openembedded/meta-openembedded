@@ -12,6 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.broadcom_bcm20702;md5=c0d5ea0502b00df74173d0f
 SRC_URI = "git://github.com/winterheart/broadcom-bt-firmware.git"
 SRCREV = "1af1116f73782951bd7bbe2139928e497c3a634b"
 
+PE = "1"
+
 S = "${WORKDIR}/git"
 
 inherit allarch
