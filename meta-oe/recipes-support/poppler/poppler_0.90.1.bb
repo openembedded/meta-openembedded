@@ -7,8 +7,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-Do-not-overwrite-all-our-build-flags.patch \
            file://basename-include.patch \
            "
-SRC_URI[md5sum] = "92ac57f60ae8c3a1f8bfe01c9530b7b5"
-SRC_URI[sha256sum] = "fba230364537782cc5d43b08d693ef69c36586286349683c7b127156a8ef9b5c"
+SRC_URI[md5sum] = "b80a82f14459d31d929db421b0e8cf05"
+SRC_URI[sha256sum] = "984d82e72e91418d280885298c8bdc855a2fd92665fd52a1345b27235e0c71c4"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
 
