@@ -11,6 +11,7 @@ SRC_URI[sha256sum] = "3cda1f0ed8747339bbdf71b9f38ca74c7b592f24f65cdb3ab3765e4b02
 
 SRC_URI += " \
     file://run-ptest \
+    file://h-test.patch \
 "
 
 inherit pypi setuptools3
