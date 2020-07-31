@@ -16,8 +16,8 @@ HOMEPAGE = "http://pywbem.github.io"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI[md5sum] = "9fbee6b4327f035eb212017b6cd84309"
-SRC_URI[sha256sum] = "1de9963adda97d89d191d027ddc64167699a11ac42ecc3ea35dddf7679ac2441"
+SRC_URI[md5sum] = "b65c03026bf2174e58e3e47a5e7e4825"
+SRC_URI[sha256sum] = "5b54b65a5434bb16432415743c0d154feee0c6d7a8a2fee208719c67d6d24c97"
 
 inherit pypi setuptools3 update-alternatives
 
