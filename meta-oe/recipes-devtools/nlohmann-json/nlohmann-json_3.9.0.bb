@@ -2,14 +2,12 @@ SUMMARY = "JSON for modern C++"
 HOMEPAGE = "https://nlohmann.github.io/json/"
 SECTION = "libs"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=f5f7c71504da070bcf4f090205ce1080"
+LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=dd0607f896f392c8b7d0290a676efc24"
 
 SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1 \
-           file://0001-Templatize-basic_json-ctor-from-json_ref.patch \
-           file://0001-typo-fix.patch \
            "
 
-SRCREV = "e7b3b40b5a95bc74b9a7f662830a27c49ffc01b4"
+SRCREV = "d34771cafc87b358ba421faca28facc7f8080174"
 
 S = "${WORKDIR}/git"
 
