@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
 inherit autotools update-alternatives
 
 SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
-SRC_URI[md5sum] = "027236e48b9202607b1418fee42c473e"
-SRC_URI[sha256sum] = "4dd9a6ed5fe7546095157918fe5d784bb0b7887ae13de50e1e2d11e1b5a391cb"
+SRC_URI[md5sum] = "df978fd0324f60a6ff45f686fe269fdc"
+SRC_URI[sha256sum] = "73c881f146e329ac54962766760fd62cb8bdff376cd6c2f5772eecc1570e1611"
 
 EXTRA_OECONF += "--bindir=${base_bindir}"
 
