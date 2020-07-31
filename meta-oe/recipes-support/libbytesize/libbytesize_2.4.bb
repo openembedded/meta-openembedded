@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "96aba1e99aa40a21df980bac4f2ed3bd1e25dbde"
+SRCREV = "732ee8d28492e4bc9b52c29bcb81a5c19388d002"
 SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master"
 
 inherit gettext autotools python3native
