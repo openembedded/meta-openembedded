@@ -7,13 +7,16 @@ HOMEPAGE = "http://live.com/"
 LICENSE = "LGPLv3"
 SECTION = "devel"
 
+DEPENDS = "openssl"
+
 URLV = "${@d.getVar('PV')[0:4]}.${@d.getVar('PV')[4:6]}.${@d.getVar('PV')[6:8]}"
 SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz \
            file://config.linux-cross"
+
 # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
 MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
 
-SRC_URI[sha256sum] = "a3dcd157865186cf883c3a80b4bb09637e91fff96b234b2c780a7f7dcc7a35dc"
+SRC_URI[sha256sum] = "89b2d99589de2ce9b4007ea6625dfce28317421604cf5131f4e1bf5bf7040b63"
 
 S = "${WORKDIR}/live"
 
