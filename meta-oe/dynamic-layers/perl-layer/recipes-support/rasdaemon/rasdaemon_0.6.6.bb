@@ -3,12 +3,12 @@ HOMEPAGE = "http://git.infradead.org/users/mchehab/rasdaemon.git"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3070efe0afa3dc41608bd82c00bb0dc"
 
-SRC_URI = "git://git.infradead.org/users/mchehab/rasdaemon.git;branch=master \
-        file://0001-Fix-system-header-includes.patch \
-	file://rasdaemon.service \
-	file://init"
+SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master \
+           file://0001-Fix-system-header-includes.patch \
+           file://rasdaemon.service \
+           file://init"
 
-SRCREV = "25533c0c55426eeb2ad25dcbdb2b5e4ba4e83d80"
+SRCREV = "32b978fcf73215c90ce7383580224e4295930ae7"
 
 S = "${WORKDIR}/git"
 
