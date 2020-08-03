@@ -3,8 +3,8 @@ DESCRIPTION = "WebSocket client & server library, WAMP real-time framework"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
 
-SRC_URI[md5sum] = "bcafb42ea58232308777a265d41c1c98"
-SRC_URI[sha256sum] = "6ac6b6653b8d20d632b034adccf6a566154d4efbeaa23abf7c3995fd601e9a01"
+SRC_URI[md5sum] = "1ea21f5e751517a71f605eaaff7f0c38"
+SRC_URI[sha256sum] = "86bbce30cdd407137c57670993a8f9bfdfe3f8e994b889181d85e844d5aa8dfb"
 
 inherit pypi setuptools3
 
