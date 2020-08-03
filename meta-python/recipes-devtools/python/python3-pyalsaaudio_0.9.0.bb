@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
 
 inherit pypi setuptools3
 
-SRC_URI[md5sum] = "b46f69561bc85fc52e698b2440ca251e"
-SRC_URI[sha256sum] = "84e8f8da544d7f4bd96479ce4a237600077984d9be1d7f16c1d9a492ecf50085"
+SRC_URI[md5sum] = "48c40424a79c2568676a41643d93f1f7"
+SRC_URI[sha256sum] = "3ca069c736c8ad2a3047b5033468d983a2480f94fad4feb0169c056060e01e69"
 
 DEPENDS += "alsa-lib"
 
