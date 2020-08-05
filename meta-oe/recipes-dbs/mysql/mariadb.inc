@@ -77,6 +77,7 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DNROFF=FALSE \
                  -DENABLE_DTRACE=FALSE \
                  -DWITH_PIC=ON \
+                 -DWITH_PCRE=system \
                  -DINSTALL_LAYOUT=RPM \
                  -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
                  -DINSTALL_LIBDIR:PATH=${baselib} \
