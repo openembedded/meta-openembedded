@@ -18,6 +18,7 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-wcwidth \
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-shell \
+    ${PYTHON_PN}-image \
 "
 
 BBCLASSEXTEND = "native nativesdk"
