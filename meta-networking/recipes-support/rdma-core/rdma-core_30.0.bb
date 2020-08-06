@@ -9,7 +9,7 @@ BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
            file://0001-Remove-man-files-which-cant-be-built.patch \
            "
-SRCREV = "f12c953f0864691eacc9fcc4cda489b92ffd5a85"
+SRCREV = "0f4dd71d38a0f1b005635a3ff344e15791d2afa7"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
