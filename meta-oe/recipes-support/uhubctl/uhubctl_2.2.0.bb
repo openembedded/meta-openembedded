@@ -6,7 +6,7 @@ DEPENDS = "libusb1"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV = "c9fa3c68a1b2c9790c731602b8bae2b513e80605"
+SRCREV = "5ee8260c71647f687b5e71af11f45244814835d7"
 SRC_URI = "git://github.com/mvp/${BPN}"
 S = "${WORKDIR}/git"
 
