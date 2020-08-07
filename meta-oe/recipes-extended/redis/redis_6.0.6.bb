@@ -3,7 +3,7 @@ DESCRIPTION = "Redis is an open source, advanced key-value store."
 HOMEPAGE = "http://redis.io"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3c01b49fed4df1a79843688fa3f7b9d6"
+LIC_FILES_CHKSUM = "file://COPYING;md5=8ffdd6c926faaece928cf9d9640132d2"
 DEPENDS = "readline lua ncurses"
 
 SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
@@ -17,8 +17,8 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://GNU_SOURCE.patch \
            "
 
-SRC_URI[md5sum] = "617d680fc0944c217e2350a365686eb0"
-SRC_URI[sha256sum] = "42cf86a114d2a451b898fcda96acd4d01062a7dbaaad2801d9164a36f898f596"
+SRC_URI[md5sum] = "2f65e1f5610d98dd48e10eef49c79b02"
+SRC_URI[sha256sum] = "12ad49b163af5ef39466e8d2f7d212a58172116e5b441eebecb4e6ca22363d94"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
