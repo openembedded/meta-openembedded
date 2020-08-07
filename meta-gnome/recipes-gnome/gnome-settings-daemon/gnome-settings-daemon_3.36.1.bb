@@ -30,6 +30,8 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-
 SRC_URI[archive.md5sum] = "102dc488a6a726e4050cf5ab7e967e8d"
 SRC_URI[archive.sha256sum] = "3e33dbd319b562a5ab602dcab6de3ca81b85f8346672e90ec632b36bbf15ee4b"
 
+UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+
 # allow cross build mixed with build of native tools
 do_write_config_append() {
     cat >${WORKDIR}/meson.native <<EOF
