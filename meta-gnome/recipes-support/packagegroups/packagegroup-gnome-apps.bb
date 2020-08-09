@@ -13,6 +13,7 @@ RDEPENDS_${PN} = " \
     gedit \
     ghex \
     gnome-calculator \
+    gnome-calendar \
     gnome-font-viewer \
     gnome-photos \
     gnome-terminal \
