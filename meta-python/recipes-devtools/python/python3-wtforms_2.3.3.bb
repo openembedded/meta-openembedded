@@ -2,10 +2,10 @@ DESCRIPTION = "A flexible forms validation and rendering library for python web 
 HOMEPAGE = "https://pypi.python.org/pypi/WTForms"
 SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=208ce1c159f911ecf389806650582021"
+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=53dbfa56f61b90215a9f8f0d527c043d"
 
-SRC_URI[md5sum] = "bff06943e59671581af07f80d14bda5f"
-SRC_URI[sha256sum] = "861a13b3ae521d6700dac3b2771970bd354a63ba7043ecc3a82b5288596a1972"
+SRC_URI[md5sum] = "2b6ea167a71c6becf20f0934417fd06c"
+SRC_URI[sha256sum] = "81195de0ac94fbc8368abbaf9197b88c4f3ffd6c2719b5bf5fc9da744f3d829c"
 
 PYPI_PACKAGE = "WTForms"
 
