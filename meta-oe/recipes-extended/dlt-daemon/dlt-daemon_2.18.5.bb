@@ -17,10 +17,10 @@ DEPENDS = "zlib gzip-native"
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
     file://0004-Modify-systemd-config-directory.patch \
-    file://204.patch \
     file://275.patch \
+    file://238.patch \
 "
-SRCREV = "14ea971be7e808b9c5099c7f404ed3cf341873c4"
+SRCREV = "f1ac087c766827b1d0ed9c3a814b3cc052e948f2"
 
 S = "${WORKDIR}/git"
 
