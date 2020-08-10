@@ -22,10 +22,8 @@ PACKAGECONFIG_NUMA_armeb = ""
 PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
 PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
-SRCREV = "08ce9dc20b8a4e55db7af6d869ddfa49b4a02d03"
+SRCREV = "d13596b225baf61425a9ca92b0583fc3fa97765d"
 SRC_URI = "git://git.kernel.dk/fio.git \
-          file://0001-update-the-interpreter-paths.patch \
-          file://python3_shebangs.patch \
 "
 
 S = "${WORKDIR}/git"
