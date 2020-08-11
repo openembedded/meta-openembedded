@@ -100,7 +100,9 @@ do_configure() {
     autoconf213 --macrodir=${STAGING_DATADIR_NATIVE}/autoconf213 old-configure.in > old-configure
 
     cd ${B}
-    ${S}/js/src/configure ${EXTRA_OECONF}
+    # use of /tmp can causes problems on heavily loaded hosts
+    mkdir -p "${B}/lcl_tmp"
+    TMPDIR="${B}/lcl_tmp"  ${S}/js/src/configure ${EXTRA_OECONF}
 
     # Make standard Makefile checks pass
     touch ${S}/js/src/configure
