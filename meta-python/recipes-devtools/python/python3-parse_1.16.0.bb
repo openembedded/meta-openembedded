@@ -1,10 +1,10 @@
 SUMMARY = "Parse strings using a specification based on the Python format() syntax"
 HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://parse.py;beginline=1325;endline=1345;md5=3d987b2e73881bbce768a80f9cdd23d9"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05"
 
-SRC_URI[md5sum] = "a5aa82b2b8b4d733d227e3c99d7d01b4"
-SRC_URI[sha256sum] = "a6d4e2c2f1fbde6717d28084a191a052950f758c0cbd83805357e6575c2b95c0"
+SRC_URI[md5sum] = "ba263b3143e9528ae960bbba4d56bf25"
+SRC_URI[sha256sum] = "cd89e57aed38dcf3e0ff8253f53121a3b23e6181758993323658bffc048a5c19"
 
 inherit pypi setuptools3 ptest
 
