@@ -6,8 +6,8 @@ HOMEPAGE = "https://pypi.org/project/sympy/"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ebb06e9df8f57522b72d0edb0fcf83d4"
 
-SRC_URI[md5sum] = "8bdf8473751722fd1714aa7125b1478b"
-SRC_URI[sha256sum] = "7386dba4f7e162e90766b5ea7cab5938c2fe3c620b310518c8ff504b283cb15b"
+SRC_URI[md5sum] = "50d6b69b1de36b757484b9ff833a9e0a"
+SRC_URI[sha256sum] = "1cfadcc80506e4b793f5b088558ca1fcbeaec24cd6fc86f1fdccaa3ee1d48708"
 
 inherit pypi setuptools3
 
