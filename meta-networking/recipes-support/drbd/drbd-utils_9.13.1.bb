@@ -8,13 +8,15 @@ SECTION = "admin"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
-SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
+SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV} \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
+           file://0001-v84-Make-setup_options-definitions-as-extern.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
           "
-# v9.12.0
-SRCREV_drbd-utils = "91629a4cce49ca0d4f917fe0bffa25cfe8db3052"
-SRCREV_drbd-headers = "233006b4d26cf319638be0ef6d16ec7dee287b66"
+SRCREV_drbd-utils = "b24b0f7e42d500d3538d7eeffa017ec78d08f918"
+SRCREV_drbd-headers = "c757cf357edef67751b8f45a6ea894d287180087"
+
+SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
 S = "${WORKDIR}/git"
 
