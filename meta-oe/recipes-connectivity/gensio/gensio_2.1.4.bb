@@ -5,11 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a0fd36908af843bcee10cb6dfc47fa67 \
                     file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f \
                     "
 
-SRCREV = "95ec1ab31ee97411fc37156d12061adcf0331598"
-PV = "1.5.3+git${SRCPV}"
+SRCREV = "998a017076a86179696a3ad811e2bae9155e46cb"
 
 SRC_URI = "git://github.com/cminyard/gensio;protocol=https \
-           file://0001-filter-Rename-some-variables-to-tr_stdxxx.patch \
            "
 
 S = "${WORKDIR}/git"
