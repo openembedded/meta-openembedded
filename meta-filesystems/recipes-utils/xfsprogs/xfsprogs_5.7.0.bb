@@ -3,7 +3,7 @@ HOMEPAGE = "http://oss.sgi.com/projects/xfs"
 SECTION = "base"
 LICENSE = "GPLv2 & LGPLv2.1"
 LICENSE_libhandle = "LGPLv2.1"
-LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038 \
+LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97 \
                     file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
 DEPENDS = "util-linux util-linux-native"
 SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
@@ -12,9 +12,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
            file://0001-support-usrmerge.patch \
            "
-SRC_URI[md5sum] = "5ca3f79e76e3fb984a03d1b42a2e60ba"
-SRC_URI[sha256sum] = "7b500e148cebd08f99e37cf744c7843817b37e7be2a32c4dc57d6ea16e3019ae"
-
+SRC_URI[sha256sum] = "8f2348a68a686a3f4491dda5d62dd32d885fbc52d32875edd41e2c296e7b4f35"
 inherit autotools-brokensep
 
 PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
@@ -41,9 +39,8 @@ EXTRA_OECONF = "--enable-gettext=no \
 DISABLE_STATIC = ""
 EXTRA_AUTORECONF += "-I ${S}/m4 --exclude=autoheader"
 
-PACKAGECONFIG ??= "readline blkid"
+PACKAGECONFIG ??= "blkid"
 
-PACKAGECONFIG[readline] = "--enable-readline=yes,--enable-readline=no,readline"
 PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
 
 export DEBUG="-DNDEBUG"
