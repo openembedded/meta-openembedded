@@ -14,9 +14,7 @@ SRC_URI = "https://www.snort.org/downloads/archive/snort/${BP}.tar.gz \
     file://disable-run-test-program-while-cross-compiling.patch \
     file://configure.in-disable-tirpc-checking-for-fedora.patch \
 "
-
-SRC_URI[md5sum] = "1cec58babaea3420014d61a93e6e1545"
-SRC_URI[sha256sum] = "9688d8edf1da09dec6574000fb3c0e62f99c56428587616e17c60103c0bcbad7"
+SRC_URI[sha256sum] = "e3ac45a1a3cc2c997d52d19cd92f1adf5641c3a919387adab47a4d13a9dc9f8e"
 
 UPSTREAM_CHECK_URI = "https://www.snort.org/downloads"
 UPSTREAM_CHECK_REGEX = "snort-(?P<pver>\d+(\.\d+)+)\.tar"
