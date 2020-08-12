@@ -14,8 +14,7 @@ REQUIRED_DISTRO_FEATURES = "x11 systemd pam"
 
 inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
 
-SRC_URI[archive.md5sum] = "18384eb8345dbee5a8219916debf7e43"
-SRC_URI[archive.sha256sum] = "3f561c10ae2e5942b03026f02c0aa7d8712e382708b17a0970874df8175b83a8"
+SRC_URI[archive.sha256sum] = "3bfbb620cbc0d1cbd70b4c4376cf4b705db4dc36a37124e5be386ccc25fa7e81"
 SRC_URI += "file://0001-Ensure-pam-file-installation.patch"
 
 EXTRA_OECONF = " \
