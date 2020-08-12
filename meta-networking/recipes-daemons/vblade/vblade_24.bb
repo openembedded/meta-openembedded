@@ -6,19 +6,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BP}.tar.gz \
+SRCREV = "a7f48bda5bf1646f6450601049bf4b74053adbb3"
+SRC_URI = "git://github.com/OpenAoE/vblade \
            file://cross.patch \
            file://makefile-add-ldflags.patch \
+           file://gcc-10.patch \
            file://${BPN}.conf \
            file://${BPN}.init \
            file://${BPN}.service \
            file://volatiles.99_vblade \
           "
 
-SRC_URI[md5sum] = "510d98ba0f231284a5fbe2da11cb2d6e"
-SRC_URI[sha256sum] = "a990378f273f10eb431e42954a871aed52714035bbab28c54cef600c458356bb"
+S = "${WORKDIR}/git"
 
-UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/aoetools/files/vblade/"
+UPSTREAM_CHECK_URI = "https://github.com/OpenAoE/vblade/archive/"
 
 inherit autotools-brokensep update-rc.d systemd
 
