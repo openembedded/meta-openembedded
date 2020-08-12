@@ -15,12 +15,15 @@ LICENSE = "MIT-X & \
            BellBird & \
            Apache-2.0 \
            "
-LIC_FILES_CHKSUM = "file://COPYING;md5=416ef1ca5167707fe381d7be33664a33"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a2c2c7371b58b9cdeae0dc68846fe9f1"
 
-DEPENDS = "curl-native icu"
+DEPENDS = "curl-native libpcre2"
 
-SRCREV = "67e43bf0fa56008276b878ec3790aa5f32eb2a16"
-SRC_URI = "git://github.com/MycroftAI/mimic.git"
+SRCREV = "adf655da0399530ac1b586590257847eb61be232"
+SRC_URI = "git://github.com/MycroftAI/mimic1.git \
+           file://0001-Fix-musl-compatibility.patch \
+           file://0001-cmu_indic_lang-Make-cst_rx_not_indic-as-extern-decla.patch \
+          "
 
 inherit autotools
 
