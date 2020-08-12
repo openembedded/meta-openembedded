@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e"
 
 inherit cmake pkgconfig
 
-# openal-soft-1.19.1
-SRCREV = "6761218e51699f46bf25c377e65b3e9ea5e434b9"
+SRCREV = "f5e0eef34db3a3ab94b61a2f99f84f078ba947e7"
 SRC_URI = "git://github.com/kcat/openal-soft \
            file://0001-Use-BUILD_CC-to-compile-native-tools.patch \
            file://0002-makehrtf-Disable-Wstringop-truncation.patch \
