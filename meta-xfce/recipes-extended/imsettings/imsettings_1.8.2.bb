@@ -16,9 +16,10 @@ DEPENDS = "gtk+3 libnotify"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "c04341a008d8c60e1532f033f4020f44"
-SRC_URI[sha256sum] = "ebf578299a10c6a1fea9047be6577df6d2b6470d3cc9d40f8a6589a3c13c4c8b"
+SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
+           file://imsettings-gcc10.patch \
+          "
+SRC_URI[sha256sum] = "412abf3165dbee3cbe03db0c296bab103569a49029429d038569c586ebe9efa9"
 
 EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
                 --disable-static \
