@@ -23,6 +23,9 @@ SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1
 
 inherit pypi setuptools3 pkgconfig
 
+# LTO with clang needs lld
+LDFLAGS_append_toolchain-clang = " -fuse-ld=lld"
+
 RDEPENDS_${PN} = "\
     freetype \
     libpng \
