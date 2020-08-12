@@ -12,9 +12,10 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV ?= "549f8987be49583bb06b117a364bea3a8fc5250c"
+SRCREV ?= "802688debcd88c48edabe86deb7e7ed47ebadc26"
 
 SRC_URI = "git://github.com/open-iscsi/open-iscsi \
+           file://0001-Makefile-Do-not-set-Werror.patch \
            file://initd.debian \
            file://99_iscsi-initiator-utils \
            file://iscsi-initiator \
@@ -23,9 +24,6 @@ SRC_URI = "git://github.com/open-iscsi/open-iscsi \
            file://set_initiatorname \
            "
 S = "${WORKDIR}/git"
-B = "${WORKDIR}/build"
-
-PV .= "+git${SRCPV}"
 
 inherit update-rc.d systemd autotools pkgconfig
 
@@ -34,7 +32,7 @@ EXTRA_OECONF = " \
     --host=${BUILD_SYS} \
 "
 
-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', '--without-systemd',     d)}"
+EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '', '--without-systemd NO_SYSTEMD=1',     d)}"
 
 EXTRA_OEMAKE = ' \
     OS="${TARGET_SYS}" \
@@ -43,7 +41,6 @@ EXTRA_OEMAKE = ' \
     MANDIR="${mandir}" \
     OPTFLAGS="-DNO_SYSTEMD ${CFLAGS}" \
     PKG_CONFIG="${STAGING_BINDIR_NATIVE}/pkg-config" \
-    NO_SYSTEMD=1 \
 '
 
 
