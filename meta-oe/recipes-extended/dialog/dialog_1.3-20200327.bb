@@ -18,6 +18,10 @@ S = "${WORKDIR}/dialog-${PV}"
 
 inherit autotools-brokensep pkgconfig
 
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+
+PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--without-x,virtual/libx11"
+
 EXTRA_OECONF = "--with-ncurses \
                 --disable-rpath-hack"
 
