@@ -6,20 +6,18 @@ AUTHOR = "Gerd Hoffmann"
 SECTION = "utils"
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e8feb78a32950a909621bbb51f634b39"
 
-DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
+DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman poppler libepoxy cairo"
 
 SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
 	   file://0001-Avoid-using-host-path.patch \
 	   file://fix-preprocessor.patch \
            file://support-jpeg-turbo.patch \
-           file://use-jpeg-turbo.patch \
+           file://cairo-weak-detect.patch \
+           file://fbida-gcc10.patch \
 	   "
-SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
-SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
-
-B = "${WORKDIR}/build"
+SRC_URI[sha256sum] = "95b7c01556cb6ef9819f358b314ddfeb8a4cbe862b521a3ed62f03d163154438"
 
 inherit pkgconfig
 
@@ -33,6 +31,10 @@ PACKAGECONFIG[tiff] = ",,tiff"
 PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
 PACKAGECONFIG[webp] = ",,libwebp"
 PACKAGECONFIG[lirc] = ",,lirc"
+# This can only be enabled when cairo has egl enabled in its packageconfig support too
+PACKAGECONFIG[egl] = ",,"
+
+EXTRA_OEMAKE += ""${@bb.utils.contains('PACKAGECONFIG', 'egl', 'HAVE_CAIRO_GL=yes', 'HAVE_CAIRO_GL=no', d)}""
 
 do_compile() {
     sed -i -e 's# fbgs# \$(srcdir)/fbgs#; s#-Ijpeg#-I\$(srcdir)/jpeg#; s# jpeg/# \$(srcdir)/jpeg/#' ${S}/GNUmakefile
