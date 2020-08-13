@@ -7,45 +7,56 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 
 SECTION = "net"
 
-DEPENDS_append_libc-musl = " libexecinfo"
-
-SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
-           file://0001-configure-Respect-LIBS-variable-from-env.patch \
+SRC_URI = "http://monkey-project.com/releases/1.6/monkey-${PV}.tar.gz \
            file://monkey.service \
            file://monkey.init"
 
-SRC_URI[md5sum] = "9699e4c9ea6ce6b989907c252ae80254"
-SRC_URI[sha256sum] = "7c3d845306aa74ee6effd7ab6169d16ac4e6450e564954d0d0baa2d1e9be1a22"
+SRC_URI[sha256sum] = "f1122e89cda627123286542b0a18fcaa131cbe9d4f5dd897d9455157289148fb"
 
 UPSTREAM_CHECK_URI = "https://github.com/monkey/monkey/releases"
 UPSTREAM_CHECK_REGEX = "v(?P<pver>\d+(\.\d+)+).tar.gz"
 
-EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
-                --logdir=${localstatedir}/log/monkey/ \
-                --pidfile=${localstatedir}/run/monkey.pid \
-                --default-user=www-data \
-                --datadir=${localstatedir}/www/monkey/ \
-                --sysconfdir=${sysconfdir}/monkey/ \
-                --enable-plugins=* \
-                --disable-plugins=mbedtls \
-                --debug \
-                --malloc-libc"
+EXTRA_OECMAKE = "-DINSTALL_LOGDIR=${localstatedir}/log/monkey/ \
+                 -DPID_FILE=${localstatedir}/run/monkey.pid \
+                 -DINSTALL_SYSCONFDIR=${sysconfdir}/monkey/ \
+                 -DWITH_PLUGINS=* \
+                 -DWITHOUT_PLUGINS=mbedtls \
+                 -DWITH_DEBUG=1 \
+                 -DDEFAULT_USER='www-data' \
+                 -DWITH_SYSTEM_MALLOC=1 \
+                "
 
-do_configure_prepend_libc-musl() {
-	export LIBS="-lexecinfo"
-}
+EXTRA_OECMAKE_append_libc-musl = " -DWITH_MUSL=1 "
+
+# GCC-10+ defaults to -fno-common
+CFLAGS += "-fcommon"
 
 DISABLE_STATIC = ""
-CLEANBROKEN = "1"
 
-inherit autotools-brokensep pkgconfig update-rc.d systemd
+inherit cmake pkgconfig update-rc.d systemd
+
+OECMAKE_GENERATOR = "Unix Makefiles"
+
+do_install_append() {
+    rm -rf ${D}/run
+    install -Dm 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monkey
+
+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+        install -Dm 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}/system/monkey.service
+    fi
+}
 
 INITSCRIPT_NAME = "monkey"
 INITSCRIPT_PARAMS = "defaults 70"
 
 SYSTEMD_SERVICE_${PN} = "monkey.service"
 
-FILES_${PN} += "${localstatedir}/www/monkey/"
+PACKAGES += "${PN}-plugins"
+
+FILES_${PN}-plugins = "${libdir}/monkey-*.so"
+
+FILES_${PN} += "${localstatedir}/www/monkey/ /run"
+
 
 CONFFILES_${PN} = "${sysconfdir}/monkey/monkey.conf \
                    ${sysconfdir}/monkey/sites/default \
@@ -65,13 +76,3 @@ CONFFILES_${PN} = "${sysconfdir}/monkey/monkey.conf \
                    ${sysconfdir}/monkey/plugins/auth/monkey.users \
                    "
 
-do_install_append() {
-
-    mkdir -p ${D}${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/monkey.init ${D}${sysconfdir}/init.d/monkey
-
-    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-        install -d ${D}${systemd_unitdir}/system
-        install -m 644 ${WORKDIR}/monkey.service ${D}/${systemd_unitdir}/system
-    fi
-}
