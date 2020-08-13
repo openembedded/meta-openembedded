@@ -44,12 +44,14 @@ EXTRA_OEMESON = "--native-file ${WORKDIR}/meson.native"
 PACKAGECONFIG ??= " \
     cups nm \
     alsa gudev \
+    smartcard \
     ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
 "
 PACKAGECONFIG[alsa] = "-Dalsa=true,-Dalsa=false,alsa-lib"
 PACKAGECONFIG[cups] = "-Dcups=true,-Dcups=false,cups"
 PACKAGECONFIG[gudev] = "-Dgudev=true,-Dgudev=false,libgudev"
 PACKAGECONFIG[nm] = "-Dnetwork_manager=true,-Dnetwork_manager=false,networkmanager"
+PACKAGECONFIG[smartcard] = "-Dsmartcard=true,-Dsmartcard=false,nss"
 PACKAGECONFIG[wayland] = "-Dwayland=true,-Dwayland=false,wayland"
 
 FILES_${PN} += " \
