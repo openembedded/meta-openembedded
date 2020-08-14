@@ -119,6 +119,14 @@ do_install_prepend() {
     export PYTHONPATH=`cat ${B}/PYTHONPATH`
 }
 
+inherit multilib_script multilib_header
+
+MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js60-config"
+
+do_install_append() {
+       oe_multilib_header mozjs-60/js-config.h
+}
+
 PACKAGES =+ "lib${BPN}"
 FILES_lib${BPN} += "${libdir}/lib*.so"
 FILES_${PN}-dev += "${bindir}/js60-config"
