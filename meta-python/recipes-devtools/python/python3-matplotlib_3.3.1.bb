@@ -16,10 +16,11 @@ DEPENDS = "\
     python3-numpy-native \
     python3-dateutil-native \
     python3-pytz-native \
+    python3-certifi-native \
 "
 
-SRC_URI[md5sum] = "b1de7185687c6f5c092689e3431a69b3"
-SRC_URI[sha256sum] = "24e8db94948019d531ce0bcd637ac24b1c8f6744ac86d2aa0eb6dbaeb1386f82"
+SRC_URI[md5sum] = "f3a405f340be5b151cb2042c4d8d16f7"
+SRC_URI[sha256sum] = "87f53bcce90772f942c2db56736788b39332d552461a5cb13f05ff45c1680f0e"
 
 inherit pypi setuptools3 pkgconfig
 
