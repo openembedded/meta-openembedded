@@ -9,8 +9,9 @@ SRC_URI = "git://github.com/mirror/xmlrpc-c.git \
            file://0001-test-cpp-server_abyss-Fix-build-with-clang-libc.patch \
            file://0002-fix-formatting-issues.patch \
            "
-#Release 1.51.03
-SRCREV = "343a3b98e54999d67edb644bcd395aa9784fb16e"
+
+#Release 1.54.02
+SRCREV = "86405c7e1bd4f70287204a28d242a1054daab520"
 
 S = "${WORKDIR}/git/stable"
 
