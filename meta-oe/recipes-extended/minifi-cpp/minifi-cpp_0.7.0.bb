@@ -19,6 +19,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
             file://fix-osspuuid-cross-compile.patch \
             file://fix-osspuuid-musl-compile.patch \
             file://fix-rocksdb-cross-compile.patch \
+            file://remove_const_due_to_std_lock_guard.patch \
             file://minifi.service \
             file://systemd-volatile.conf \
             file://sysvinit-volatile.conf \
@@ -37,6 +38,8 @@ EXTRA_OECMAKE += " \
     -DHOST_SYS=${HOST_SYS} -DBUILD_SYS=${BUILD_SYS} \
     -DSKIP_TESTS=ON \
     "
+EXTRA_OECMAKE_append_toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
+LDFLAGS_append_toolchain-clang = " -fuse-ld=lld"
 
 # There are endian issues when communicating with the x86 nifi on the the mips and the ppc machines.
 COMPATIBLE_MACHINE_mips = "(!.*mips).*"
