@@ -24,3 +24,5 @@ do_install() {
 	rm -r ${D}/${CTSDIR}/*/*.a ${D}/${CTSDIR}/*/cmake_install.cmake ${D}/${CTSDIR}/*/CMakeFiles
 	rm -r ${D}/${CTSDIR}/common/subgroups/*.a ${D}/${CTSDIR}/common/subgroups/cmake_install.cmake ${D}/${CTSDIR}/common/subgroups/CMakeFiles
 }
+
+SECURITY_CFLAGS_riscv64 = "${SECURITY_NOPIE_CFLAGS}"
