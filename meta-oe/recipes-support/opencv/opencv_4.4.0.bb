@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "01b2c5a77ca6dbef3baef24ebc0a5984579231d9"
-SRCREV_contrib = "e6f32c6a69043456a806a4e802ee3ce7b7059c93"
+SRCREV_opencv = "c3bb57afeaf030f10939204d48d7c2a3842f4293"
+SRCREV_contrib = "5fae4082cc493efa5cb7a7486f9e009618a5198b"
 SRCREV_ipp = "a56b6ac6f030c312b2dce17430eef13aed9af274"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
 SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
@@ -50,7 +50,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
            "
-PV = "4.3.0"
+SRC_URI_append_riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=../contrib"
 
 S = "${WORKDIR}/git"
 
@@ -79,6 +79,8 @@ do_unpack_extra() {
     cache data ${WORKDIR}/face/*.dat
 }
 addtask unpack_extra after do_unpack before do_patch
+
+CMAKE_VERBOSE = "VERBOSE=1"
 
 EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
     -DWITH_1394=OFF \
@@ -204,3 +206,5 @@ do_install_append() {
         rm -rf ${D}/usr/lib
     fi
 }
+
+TOOLCHAIN = "gcc"
