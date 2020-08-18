@@ -26,3 +26,5 @@ do_install_append() {
 }
 
 FILES_${PN} += "/root/.config/"
+
+SECURITY_CFLAGS_riscv64 = "${SECURITY_NOPIE_CFLAGS}"
