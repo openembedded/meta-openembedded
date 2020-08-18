@@ -7,7 +7,7 @@ SECTION = "console/network"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f9534eb5f4ab800b573a37bffc62f3a7"
 
-DEPENDS = "virtual/crypt expat flex python3 bison-native"
+DEPENDS = "virtual/crypt expat flex python3 bison-native libxml2"
 RDEPENDS_${PN} = "python3-core"
 
 SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
@@ -20,6 +20,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
             file://fix-osspuuid-musl-compile.patch \
             file://fix-rocksdb-cross-compile.patch \
             file://remove_const_due_to_std_lock_guard.patch \
+            file://0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch \
             file://minifi.service \
             file://systemd-volatile.conf \
             file://sysvinit-volatile.conf \
