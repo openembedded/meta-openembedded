@@ -12,12 +12,17 @@ COMPATIBLE_MACHINE = "(qemux86|qemux86-64)"
 VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+    file://0001-fixes_for_mm_struct.patch \
+    file://0002-fixes_for_module_memory.patch \
+    file://0003-fixes_for_changes_in_cpu_tlbstate.patch \
+    file://kernel-5.8-4.patch \
     file://Makefile.utils \
 "
 SRC_URI[md5sum] = "3c351f7fd6376e0bb3c8489505a9450c"
 SRC_URI[sha256sum] = "05eff0321daa72f6d00fb121a6b4211f39964778823806fa0b7b751667dec362"
 
-S = "${WORKDIR}/vbox_module"
+S ?= "${WORKDIR}/vbox_module"
+S_task-patch = "${WORKDIR}/${VBOX_NAME}"
 
 export BUILD_TARGET_ARCH="${ARCH}"
 export BUILD_TARGET_ARCH_x86-64="amd64"
