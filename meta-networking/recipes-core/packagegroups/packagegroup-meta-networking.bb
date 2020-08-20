@@ -76,7 +76,7 @@ RDEPENDS_packagegroup-meta-networking-irc = "\
     "
 
 RDEPENDS_packagegroup-meta-networking-kernel = "\
-    wireguard-module wireguard-tools \
+    wireguard-tools \
     "
 
 RDEPENDS_packagegroup-meta-networking-netkit = "\
