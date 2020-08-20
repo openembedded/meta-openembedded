@@ -116,7 +116,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     mpich msgpack-c nlohmann-json openocd pax-utils \
     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
     protobuf protobuf-c \
-    rapidjson serialcheck sip3 tclap uftrace uw-imap valijson \
+    rapidjson serialcheck sip3 tclap uftrace uw-imap \
     xmlrpc-c yajl yasm \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "nodejs", "", d)} \
