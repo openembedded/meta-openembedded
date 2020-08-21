@@ -16,8 +16,8 @@ HOMEPAGE = "http://pywbem.github.io"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI[md5sum] = "b65c03026bf2174e58e3e47a5e7e4825"
-SRC_URI[sha256sum] = "5b54b65a5434bb16432415743c0d154feee0c6d7a8a2fee208719c67d6d24c97"
+SRC_URI[md5sum] = "0f171e365e294554f8e7624ccf511067"
+SRC_URI[sha256sum] = "66d8ec82d30f2b95d8b4bd51659429066c2879d3f46292561f5fdbc7fed10f3d"
 
 inherit pypi setuptools3 update-alternatives
 
@@ -26,12 +26,6 @@ DEPENDS += " \
     ${PYTHON_PN}-pyyaml-native \
     ${PYTHON_PN}-six-native \
 "
-
-do_install_append() {
-    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
-
-    rm -f ${D}${bindir}/*.bat
-}
 
 RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-datetime \
@@ -46,10 +40,8 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-xml \
 "
 
-ALTERNATIVE_${PN} = "mof_compiler pywbemcli wbemcli"
+ALTERNATIVE_${PN} = "mof_compiler"
 ALTERNATIVE_TARGET[mof_compiler] = "${bindir}/mof_compiler"
-ALTERNATIVE_TARGET[pywbemcli] = "${bindir}/pywbemcli"
-ALTERNATIVE_TARGET[wbemcli] = "${bindir}/wbemcli"
 
 ALTERNATIVE_PRIORITY = "60"
 
