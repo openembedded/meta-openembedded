@@ -18,6 +18,8 @@ HOMEPAGE = "https://bearssl.org"
 
 SECTION = "libs"
 
+inherit lib_package
+
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1fc37e1037ae673975fbcb96a98f7191"
 
@@ -33,3 +35,11 @@ CFLAGS += "-fPIC"
 
 S = "${WORKDIR}/git"
 B = "${S}"
+
+do_install() {
+    mkdir -p ${D}/${bindir} ${D}/${libdir}
+    install -m 0644 ${B}/build/brssl ${D}/${bindir}
+    install -m 0644 ${B}/build/libbearssl.so ${D}/${libdir}/libbearssl.so.6.0.0
+    ln -s libbearssl.so.6.0.0 ${D}/${libdir}/libbearssl.so.6
+    ln -s libbearssl.so.6.0.0 ${D}/${libdir}/libbearssl.so
+}
