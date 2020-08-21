@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=dd0607f896f392c8b7d0290a676efc24"
 SRC_URI = "git://github.com/nlohmann/json.git;nobranch=1 \
            "
 
-SRCREV = "d34771cafc87b358ba421faca28facc7f8080174"
+SRCREV = "db78ac1d7716f56fc9f1b030b715f872f93964e4"
 
 S = "${WORKDIR}/git"
 
