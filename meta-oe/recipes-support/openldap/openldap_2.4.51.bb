@@ -25,8 +25,8 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://remove-user-host-pwd-from-version.patch \
 "
 
-SRC_URI[md5sum] = "f9ed44ef373abed04c9e4c8586260f9e"
-SRC_URI[sha256sum] = "5cb57d958bf5c55a678c6a0f06821e0e5504d5a92e6a33240841fbca1db586b8"
+SRC_URI[md5sum] = "0d2025896cf1c17af7304ecc57ec9531"
+SRC_URI[sha256sum] = "f490775ea4c6506b7210ee55a102c8f4aacfe9d1c8eaa633c7316d33a714be62"
 
 DEPENDS = "util-linux groff-native"
 
