@@ -41,7 +41,7 @@ do_install_append() {
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
-    ${nonarch_base_libdir}/modules-load.d \
+    ${nonarch_libdir}/modules-load.d \
     ${systemd_unitdir}/network \
 "
 
