@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "python3 python3-modules"
 inherit python3native
 
 SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
-SRC_URI[md5sum] = "0859029d0bb54bcf7c583c55680573cb"
-SRC_URI[sha256sum] = "1df8d1978aefcbb65dc51e3666a452583f47aeaf3c5682e4c00a3b23cd805d6a"
+SRC_URI[md5sum] = "17b21729cbc61dda80b2e3dfc046319f"
+SRC_URI[sha256sum] = "c1ed28e1534304a7a4981ed59905286d1c56acd5b75755eedd184171a4a782b4"
 
 S = "${WORKDIR}/mercurial-${PV}"
 
