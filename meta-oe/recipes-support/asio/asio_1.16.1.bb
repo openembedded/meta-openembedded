@@ -24,4 +24,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/asio/${BP}.tar.bz2"
 
 PACKAGECONFIG ??= "boost"
 
-PACKAGECONFIG[boost] = "--with-boost,--without-boost,boost"
+PACKAGECONFIG[boost] = "--with-boost=${STAGING_LIBDIR},--without-boost,boost"
+
+BBCLASSEXTEND = "native nativesdk"
