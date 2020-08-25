@@ -1,7 +1,8 @@
 DESCRIPTION = "Vulkan CTS"
 
 require khronos-cts.inc
-
+# vulkan-cts-1.2.3.2
+SRCREV_vk-gl-cts = "5cd2240b60825fbbf6bd9ddda6af176ee3100c70"
 SRCREV_amber = "a40bef4dba98d2d80b48e5a940d8574fbfceb197"
 SRCREV_glslang = "b5f003d7a3ece37db45578a8a3140b370036fc64"
 SRCREV_spirv-headers = "f8bf11a0253a32375c32cad92c841237b96696c0"
