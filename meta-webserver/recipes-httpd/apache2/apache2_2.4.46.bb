@@ -26,8 +26,8 @@ SRC_URI_append_class-target = " \
            "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-SRC_URI[md5sum] = "791c986b1e70fe61eb44060aacc89a64"
-SRC_URI[sha256sum] = "a497652ab3fc81318cdc2a203090a999150d86461acff97c1065dc910fe10f43"
+SRC_URI[md5sum] = "7d661ea5e736dac5e2761d9f49fe8361"
+SRC_URI[sha256sum] = "740eddf6e1c641992b22359cabc66e6325868c3c5e2e3f98faf349b61ecf41ea"
 
 S = "${WORKDIR}/httpd-${PV}"
 
