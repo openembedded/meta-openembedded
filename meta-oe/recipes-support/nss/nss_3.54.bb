@@ -244,13 +244,13 @@ pkg_postinst_${PN} () {
             DN=`dirname $I`
             BN=`basename $I .chk`
             FN=$DN/$BN.so
-            shlibsign -i $FN
+            ${bindir}/shlibsign -i $FN
             if [ $? -ne 0 ]; then
                 exit 1
             fi
         done
     else
-        signlibs.sh
+        ${bindir}/signlibs.sh
     fi
 }
 
