@@ -9,8 +9,8 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "Flask-SocketIO"
 
-SRC_URI[md5sum] = "b23222fb7dd2f0676d78bbe24153fd80"
-SRC_URI[sha256sum] = "2172dff1e42415ba480cee02c30c2fc833671ff326f1598ee3d69aa02cf768ec"
+SRC_URI[md5sum] = "d7992b0b4aaf473b7eff21fc14e8d1b2"
+SRC_URI[sha256sum] = "36c1d5765010d1f4e4f05b4cc9c20c289d9dc70698c88d1addd0afcfedc5b062"
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-flask \
