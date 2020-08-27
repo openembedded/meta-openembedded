@@ -58,7 +58,6 @@ do_configure_prepend_libc-musl () {
 do_compile_prepend_class-native() {
     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}/nspr
     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
-    export NSS_ENABLE_WERROR=0
 }
 
 do_compile_prepend_class-nativesdk() {
@@ -72,6 +71,7 @@ do_compile_prepend_class-native() {
 
 do_compile() {
     export NSPR_INCLUDE_DIR=${STAGING_INCDIR}/nspr
+    export NSS_ENABLE_WERROR=0
 
     export CROSS_COMPILE=1
     export NATIVE_CC="${BUILD_CC}"
