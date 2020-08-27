@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=df4be47940a91ee69556f5f71eed4aec \
                     file://COPYING.LESSERv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
                     file://COPYINGv2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://COPYINGv3;md5=d32239bcb673463ab874e80d47fae504 \
-                    file://lib/idna.h;endline=21;md5=37cffad24807f446a24de3e7371f20b9 \
-                    file://src/idn.c;endline=20;md5=09e97034a8877b3451cb65065fc2c06e"
+                    file://lib/idna.h;endline=21;md5=c381d797e2d7fbdace7c147b1285d076 \
+                    file://src/idn.c;endline=20;md5=7d88aa87b0494d690bdf7748fe08d536"
 DEPENDS = "virtual/libiconv autoconf-archive"
 
 inherit pkgconfig autotools gettext texinfo gtk-doc
@@ -19,8 +19,8 @@ SRC_URI = "${GNU_MIRROR}/libidn/${BPN}-${PV}.tar.gz \
            file://0001-idn-format-security-warnings.patch \
            "
 
-SRC_URI[md5sum] = "bef634141fe39326cb354b75e891fead"
-SRC_URI[sha256sum] = "f11af1005b46b7b15d057d7f107315a1ad46935c7fcdf243c16e46ec14f0fe1e"
+SRC_URI[md5sum] = "813c7b268d1051ca02c3610986126f38"
+SRC_URI[sha256sum] = "14b67108344d81ba844631640df77c9071d9fb0659b080326ff5424e86b14038"
 
 # command tool is under GPLv3+, while libidn itself is under LGPLv2.1+ or LGPLv3
 # so package command into a separate package
