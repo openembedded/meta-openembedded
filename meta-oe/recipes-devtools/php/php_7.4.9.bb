@@ -31,9 +31,10 @@ SRC_URI_append_class-target = " \
             file://0001-opcache-config.m4-enable-opcache.patch \
             file://xfail_two_bug_tests.patch \
           "
+
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[md5sum] = "262c258a3b8b5699fcca89a64e58758c"
-SRC_URI[sha256sum] = "308e8f4182ec8a2767b0b1b8e1e7c69fb149b37cfb98ee4a37475e082fa9829f"
+SRC_URI[md5sum] = "e68a66c54b080d108831f6dc2e1e403d"
+SRC_URI[sha256sum] = "2e270958a4216480da7886743438ccc92b6acf32ea96fefda88d07e0a5095deb"
 
 inherit autotools pkgconfig python3native gettext
 
