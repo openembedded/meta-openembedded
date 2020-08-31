@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8ab458ad281b60e6f1b39b3feafbfc05"
 
-SRC_URI[md5sum] = "ba263b3143e9528ae960bbba4d56bf25"
-SRC_URI[sha256sum] = "cd89e57aed38dcf3e0ff8253f53121a3b23e6181758993323658bffc048a5c19"
+SRC_URI[md5sum] = "5b753ffb1470ffa4b3e6e16956048316"
+SRC_URI[sha256sum] = "c7806139a481ec8c8336a54418894c8b201314f8ecc63e55f438f4b72bdc4485"
 
 inherit pypi setuptools3 ptest
 
