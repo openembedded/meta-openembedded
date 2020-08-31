@@ -25,13 +25,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
            file://net-snmp-fix-for-disable-des.patch \
            file://reproducibility-have-printcap.patch \
-           file://reproducibility-accept-configure-options-from-env.patch \
-           file://0001-net-snmp-fix-compile-error-disable-des.patch \
-           file://0001-Add-pkg-config-support-for-building-applications-and.patch \
-           file://CVE-2019-20892.patch \
            "
-SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
-SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
+SRC_URI[sha256sum] = "04303a66f85d6d8b16d3cc53bde50428877c82ab524e17591dfceaeb94df6071"
 
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
 UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
