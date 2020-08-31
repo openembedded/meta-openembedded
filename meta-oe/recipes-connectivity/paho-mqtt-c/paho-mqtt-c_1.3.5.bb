@@ -11,10 +11,9 @@ LIC_FILES_CHKSUM = " \
     file://about.html;md5=e5662cbb5f8fd5c9faac526e4077898e \
 "
 
-SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http \
-           file://0001-Fix-bug-of-free-with-musl.patch"
+SRC_URI = "git://github.com/eclipse/paho.mqtt.c;protocol=http"
 
-SRCREV = "2d3d0941a9233889d4d5cc37f5182bbefea261ad"
+SRCREV = "153dfd3a4a1d510697c5d55e169fa158db16e04a"
 
 DEPENDS = "openssl"
 
