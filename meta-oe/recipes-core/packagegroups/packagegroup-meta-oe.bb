@@ -936,3 +936,6 @@ RDEPENDS_packagegroup-meta-oe-fortran-packages = "\
 # spdlog span-lite uthash websocketpp catch2 properties-cpp
 
 # rsyslog conflicts with syslog-ng so its not included here
+
+EXCLUDE_FROM_WORLD = "1"
+
