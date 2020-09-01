@@ -21,7 +21,6 @@ VERSION_DIR = "${@d.getVar('BP').upper().replace('-', '_').replace('.', '_') + '
 
 SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSION_DIR}/src/${BP}.tar.gz \
            file://nss.pc.in \
-           file://signlibs.sh \
            file://0001-nss-fix-support-cross-compiling.patch \
            file://nss-no-rpath-for-cross-compiling.patch \
            file://nss-fix-incorrect-shebang-of-perl.patch \
@@ -214,7 +213,6 @@ do_install_append() {
         touch ${D}/${libdir}/$file
         chmod 755 ${D}/${libdir}/$file
     done
-    install -D -m 755 ${WORKDIR}/signlibs.sh ${D}/${bindir}/signlibs.sh
 
     install -d ${D}${libdir}/pkgconfig/
     sed 's/%NSS_VERSION%/${PV}/' ${WORKDIR}/nss.pc.in | sed 's/%NSPR_VERSION%/4.9.2/' > ${D}${libdir}/pkgconfig/nss.pc
@@ -249,10 +247,6 @@ pkg_postinst_${PN} () {
             echo "shlibsign -i $FN failed"
         fi
     done
-}
-
-pkg_postinst_ontarget_${PN} () {
-    ${bindir}/signlibs.sh
 }
 
 PACKAGES =+ "${PN}-smime"
