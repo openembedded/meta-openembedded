@@ -27,6 +27,7 @@ SRCREV = "8ef7680081c61b486622f2d983c0d3d21e83caad"
 SRC_URI = "git://www.bearssl.org/git/BearSSL;protocol=https;nobranch=1 \
 	   file://0001-conf-Unix.mk-remove-fixed-command-definitions.patch \
 	   file://0002-test-test_x509.c-fix-potential-overflow-issue.patch \
+           file://0001-make-Pass-LDFLAGS-when-building-shared-objects.patch \
 	   "
 
 # without compile errors like 
