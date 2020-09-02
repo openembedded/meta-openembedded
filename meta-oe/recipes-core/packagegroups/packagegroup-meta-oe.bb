@@ -250,7 +250,6 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     ldns \
     libgee \
     libsombok3 \
-    log4cplus \
     lshw \
     luaposix \
     capnproto-compiler \
