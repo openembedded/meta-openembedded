@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 inherit pypi setuptools3
 
 PYPI_PACKAGE_EXT = "zip"
-SRC_URI[md5sum] = "ac8aaad885e48c6b6cd5461be5b8149f"
-SRC_URI[sha256sum] = "d693e6d06b17f48669e2a8c4cb6c1f0d56e5f1a74835d18b8ea2118da7bf2d79"
+SRC_URI[md5sum] = "ac6b77c223821856e8ac077acf5a7c1d"
+SRC_URI[sha256sum] = "a0786a916d0572bd9d6afe26e95c6021e3df5dcafa0ece6b302e36366e58c24e"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-shell \
