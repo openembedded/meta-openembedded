@@ -12,7 +12,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
 
 SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
-SRC_URI[sha256sum] = "9f854b65a52dc7b1749d6743e35d0a6268179d1a724267339fc9a066b2b72d11"
+SRC_URI[sha256sum] = "ed38c0b9b64686a05d1b3bc1d66066114a492e04e44eef1821d43b1263cd57b8"
 
 S = "${WORKDIR}/fping-${PV}"
 
