@@ -18,11 +18,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-gevent:"
 
 SRC_URI_append = " \
     file://libev-conf.patch;patch=1;pnum=1 \
-    file://0002-setup.py-do-not-query-for-include-dir.patch \
 "
 
-SRC_URI[md5sum] = "6b9dd98917061803d9158e5258b8f412"
-SRC_URI[sha256sum] = "1eb7fa3b9bd9174dfe9c3b59b7a09b768ecd496debfc4976a9530a3e15c990d1"
+SRC_URI[md5sum] = "27b07fe9fdfff2d75e3d140e890489b1"
+SRC_URI[sha256sum] = "a23c2abf08e851c988723f6a2996d495f513a2c0dc70f9956af03af8debdb5d1"
 
 # The python-gevent has no autoreconf ability
 # and the logic for detecting a cross compile is flawed
