@@ -37,12 +37,10 @@ RDEPENDS_packagegroup-meta-networking-connectivity = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "bluetooth x11", "blueman", "", d)} \
     cannelloni \
     civetweb \
-    dhcpcd \
     libdnet \
     dibbler-client \
     dibbler-relay \
     dibbler-server \
-    kea \
     relayd \
     lftp \
     sethdlc \
