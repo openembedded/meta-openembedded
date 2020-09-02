@@ -8,8 +8,8 @@ DEPENDS += "${PYTHON_PN}-wheel-native"
 
 PYPI_PACKAGE = "python3-nmap"
 
-SRC_URI[md5sum] = "4dce15e7889b1e9bfa8e1e2e0904795c"
-SRC_URI[sha256sum] = "127b7ad604a3fd34578a6ad848a603ccf1608c607577eb3bba097a1e2fc8f48a"
+SRC_URI[md5sum] = "e7904b39b64a8a44f275388862659a0d"
+SRC_URI[sha256sum] = "8d7da78142bee665289a243f71c5f48407d8ab7e5a02ee672ded05f339044759"
 
 inherit pypi setuptools3
 
