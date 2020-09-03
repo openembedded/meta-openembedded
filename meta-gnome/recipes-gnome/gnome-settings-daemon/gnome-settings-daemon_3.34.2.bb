@@ -31,6 +31,8 @@ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 SRC_URI[archive.md5sum] = "493332fa0f36645188468fed41c0060b"
 SRC_URI[archive.sha256sum] = "9fbae67e217e53b99e4f9e7d392c91ffbe31253941c9b136ef09c2d9db7ad7ed"
 
+SRC_URI += "file://0001-plugins-wacom-Fix-build-without-WAYLAND.patch"
+
 # allow cross build mixed with build of native tools
 do_write_config_append() {
     cat >${WORKDIR}/meson.native <<EOF
