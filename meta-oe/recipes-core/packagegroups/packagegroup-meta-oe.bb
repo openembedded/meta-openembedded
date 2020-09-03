@@ -454,6 +454,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     openbox \
     packagegroup-fonts-truetype \
     qrencode \
+    st \
     takao-fonts \
     leptonica \
     libvncserver \
