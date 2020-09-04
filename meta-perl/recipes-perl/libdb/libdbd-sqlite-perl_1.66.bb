@@ -14,8 +14,8 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}.tar.gz \
            file://sqlite-perl-test.pl \
 "
 
-SRC_URI[md5sum] = "10796495b52927eb2e1df34c86924027"
-SRC_URI[sha256sum] = "f4ae8f7b50842305566aadd90f7bfd12a9e32b6c603a9b1c1529e73eb82aff01"
+SRC_URI[md5sum] = "38581209de5c981f0e79840c8937fa16"
+SRC_URI[sha256sum] = "89e75dff9f66c273e0e459d51f151f88960eb7d82e2821e6902f18688ba592fe"
 
 UPSTREAM_CHECK_REGEX = "DBD\-SQLite\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
