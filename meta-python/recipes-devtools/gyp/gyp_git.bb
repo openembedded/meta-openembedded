@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab828cb8ce4c62ee82945a11247b6bbd"
 SECTION = "devel"
 
 SRC_URI = "git://chromium.googlesource.com/external/gyp;protocol=https"
-SRCREV = "fcd686f1880fa52a1ee78d3e98af1b88cb334528"
+SRCREV = "caa60026e223fc501e8b337fd5086ece4028b1c6"
 
 S = "${WORKDIR}/git"
 PV = "0.1+git${SRCPV}"
