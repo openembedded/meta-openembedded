@@ -5,7 +5,6 @@ inherit packagegroup
 PROVIDES = "${PACKAGES}"
 PACKAGES = ' \
     packagegroup-meta-python3 \
-    packagegroup-meta-python3-ptest \
 '
 
 RDEPENDS_packagegroup-meta-python3 = "\
@@ -454,7 +453,7 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
 "
 
 RDEPENDS_packagegroup-meta-python3-ptest = "\
-    python3-cryptography \
+    python3-cryptography-ptest \
     "
 
 EXCLUDE_FROM_WORLD = "1"
