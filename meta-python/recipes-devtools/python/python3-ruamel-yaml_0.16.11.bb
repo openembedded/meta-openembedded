@@ -8,8 +8,8 @@ PYPI_PACKAGE = "ruamel.yaml"
 
 inherit pypi setuptools3
 
-SRC_URI[md5sum] = "02774e7ed3273b3d8eee6c08326b91c4"
-SRC_URI[sha256sum] = "099c644a778bf72ffa00524f78dd0b6476bca94a1da344130f4bf3381ce5b954"
+SRC_URI[md5sum] = "020a0140d06b2e32f53944d4335f9877"
+SRC_URI[sha256sum] = "43bf19037937f78845775d84582dd6f3ac966bc1b7748de898fad35638c74771"
 
 do_install_prepend() {
     export RUAMEL_NO_PIP_INSTALL_CHECK=1
