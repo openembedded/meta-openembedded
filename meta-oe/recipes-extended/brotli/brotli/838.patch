@@ -1,3 +1,4 @@
+Upstream-Status: Backport [https://github.com/google/brotli/pull/838]
 From 092446fafb4bfb81738853b7c7f76b293cd92a80 Mon Sep 17 00:00:00 2001
 From: Evgenii Kliuchnikov <eustas.ru@gmail.com>
 Date: Wed, 2 Sep 2020 10:49:49 +0200
