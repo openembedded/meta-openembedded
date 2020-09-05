@@ -1,7 +1,7 @@
 SUMMARY = "Publishes & browses available services on a link according to the Zeroconf / Bonjour protocol"
 DESCRIPTION = "Bonjour, also known as zero-configuration networking, enables automatic discovery of computers, devices, and services on IP networks."
 HOMEPAGE = "http://developer.apple.com/networking/bonjour/"
-LICENSE = "Apache-2.0"
+LICENSE = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
 
 COMPATIBLE_HOST_libc-musl = 'null'
