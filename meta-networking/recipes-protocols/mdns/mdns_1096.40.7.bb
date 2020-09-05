@@ -25,6 +25,8 @@ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${P
 SRC_URI[md5sum] = "ac766013bbcb323e9db4c80805b2552a"
 SRC_URI[sha256sum] = "b86f4816b4145915198e7c5bf0bc56dbbfd960e9a4518bb6486baa40cdcca7e6"
 
+CVE_PRODUCT = "apple:mdnsresponder"
+
 PARALLEL_MAKE = ""
 
 S = "${WORKDIR}/mDNSResponder-${PV}/mDNSPosix"
