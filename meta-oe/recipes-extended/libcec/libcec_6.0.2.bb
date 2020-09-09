@@ -24,10 +24,10 @@ inherit cmake pkgconfig
 PLATFORM_CMAKE_FLAGS ?= "-DHAVE_LINUX_API=1 -DHAVE_RPI_API=0"
 EXTRA_OECMAKE += "${PLATFORM_CMAKE_FLAGS}"
 
-# Put client tools into a separate package
-PACKAGE_BEFORE_PN += "${PN}-tools"
-FILES_${PN}-tools = "${bindir}"
-RDEPENDS_${PN}-tools = "python3-${BPN} python3-core"
+# Put client examples into a separate package
+PACKAGE_BEFORE_PN += "${PN}-examples"
+FILES_${PN}-examples = "${bindir}"
+RDEPENDS_${PN}-examples = "python3-${BPN} python3-core"
 
 # Create the wrapper for python3
 PACKAGES += "python3-${BPN}"
