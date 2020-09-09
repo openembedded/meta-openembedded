@@ -20,6 +20,10 @@ S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
+# default config is for RaspberryPi API, use the Linux 4.10+ API by default
+PLATFORM_CMAKE_FLAGS ?= "-DHAVE_LINUX_API=1 -DHAVE_RPI_API=0"
+EXTRA_OECMAKE += "${PLATFORM_CMAKE_FLAGS}"
+
 # Put client tools into a separate package
 PACKAGE_BEFORE_PN += "${PN}-tools"
 FILES_${PN}-tools = "${bindir}"
