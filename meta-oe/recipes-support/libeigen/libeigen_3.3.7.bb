@@ -4,11 +4,11 @@ HOMEPAGE = "http://eigen.tuxfamily.org/"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
 
-SRC_URI = "https://gitlab.com/libeigen/eigen/-/archive/${PV}/eigen-${PV}.tar.bz2"
-SRC_URI[md5sum] = "b9e98a200d2455f06db9c661c5610496"
-SRC_URI[sha256sum] = "685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11"
+SRC_URI = "git://gitlab.com/libeigen/eigen.git;protocol=http;nobranch=1"
 
-S = "${WORKDIR}/eigen-${PV}"
+SRCREV = "21ae2afd4edaa1b69782c67a54182d34efe43f9c"
+
+S = "${WORKDIR}/git"
 
 inherit cmake
 
