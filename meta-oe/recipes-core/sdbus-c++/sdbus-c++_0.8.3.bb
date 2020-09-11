@@ -16,7 +16,7 @@ PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DTESTS_INSTALL_PATH=${libdir}/${B
 
 DEPENDS += "expat"
 
-SRCREV = "3a4f343fb924650e7639660efa5f143961162044"
+SRCREV = "6e8e5aadb674cccea5bdd55141db5dad887fbacd"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
 SRC_URI += "file://run-ptest"
 
