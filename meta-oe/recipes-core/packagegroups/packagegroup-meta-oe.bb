@@ -885,6 +885,7 @@ RDEPENDS_packagegroup-meta-oe-support_remove_powerpc = "ssiapi"
 RDEPENDS_packagegroup-meta-oe-test ="\
     bats \
     cppunit \
+    cukinia \
     cunit \
     cxxtest \
     evtest \
