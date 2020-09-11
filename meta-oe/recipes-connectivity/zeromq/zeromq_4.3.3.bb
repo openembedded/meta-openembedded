@@ -10,8 +10,8 @@ SRC_URI = "http://github.com/zeromq/libzmq/releases/download/v${PV}/zeromq-${PV}
     file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch \
     file://run-ptest \
 "
-SRC_URI[md5sum] = "2047e917c2cc93505e2579bcba67a573"
-SRC_URI[sha256sum] = "ebd7b5c830d6428956b67a0454a7f8cbed1de74b3b01e5c33c5378e22740f763"
+SRC_URI[md5sum] = "78acc277d95e10812d71b2b3c3c3c9a9"
+SRC_URI[sha256sum] = "9d9285db37ae942ed0780c016da87060497877af45094ff9e1a1ca736e3875a2"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/libzmq/releases"
 
