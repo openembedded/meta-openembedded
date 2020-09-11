@@ -15,8 +15,8 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
            file://0006-libcollectdclient-Fix-string-overflow-errors.patch \
            file://0001-Remove-including-sys-sysctl.h-on-glibc-based-systems.patch \
            "
-SRC_URI[md5sum] = "13b1c946f6684abe453e24b5cd80ec45"
-SRC_URI[sha256sum] = "37b10a806e34aa8570c1cafa6006c604796fae13cc2e1b3e630d33dcba9e5db2"
+SRC_URI[md5sum] = "2b23a65960bc323d065234776a542e04"
+SRC_URI[sha256sum] = "5bae043042c19c31f77eb8464e56a01a5454e0b39fa07cf7ad0f1bfc9c3a09d6"
 
 inherit autotools python3native update-rc.d pkgconfig systemd
 
