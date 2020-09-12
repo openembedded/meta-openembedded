@@ -454,7 +454,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     openbox \
     packagegroup-fonts-truetype \
     qrencode \
-    st \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "st", "", d)} \
     takao-fonts \
     leptonica \
     libvncserver \
@@ -476,6 +476,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     source-han-sans-jp-fonts \
     source-han-sans-kr-fonts \
     source-han-sans-tw-fonts \
+    source-code-pro-fonts \
     ttf-dejavu-sans \
     ttf-dejavu-sans-condensed \
     ttf-dejavu-sans-mono \
