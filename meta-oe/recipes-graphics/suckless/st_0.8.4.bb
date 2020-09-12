@@ -1,9 +1,7 @@
 SECTION = "shadow"
 LICENSE = "MIT-X"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=04c3ca13a702147c62db90f556c5b3ca"
-SRC_URI = " \
- http://dl.suckless.org/${BPN}/${BPN}-${PV}.tar.gz \
-"
+SRC_URI = "http://dl.suckless.org/${BPN}/${BP}.tar.gz"
 
 inherit pkgconfig features_check
 
@@ -23,5 +21,5 @@ do_install() {
 }
 
 FILES_${PN} += " \
-  ${datadir}/terminfo \
+    ${datadir}/terminfo \
 "
