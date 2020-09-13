@@ -686,6 +686,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     c-ares \
     cmark \
     ${@bb.utils.contains("DISTRO_FEATURES", "polkit gobject-introspection-data", "colord", "", d)} \
+    consolation \
     cpprest \
     ctapi-common \
     dfu-util \
