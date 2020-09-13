@@ -1,28 +1,25 @@
 SUMMARY = "Interactive process viewer"
-HOMEPAGE = "http://hisham.hm/htop"
+HOMEPAGE = "https://htop.dev"
 SECTION = "console/utils"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4099d367cd5e59b6d4fc1ee33accb891"
 
 DEPENDS = "ncurses"
 
-SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
+SRC_URI = "git://github.com/htop-dev/htop.git \
            file://0001-Use-pkg-config.patch \
-           file://0001-Ask-for-python3-specifically.patch \
-           file://htop-gcc10.patch \
            "
-SRC_URI[md5sum] = "0d816b6beed31edc75babcfbf863ffa8"
-SRC_URI[sha256sum] = "d9d6826f10ce3887950d709b53ee1d8c1849a70fa38e91d5896ad8cbc6ba3c57"
+SRCREV = "dace850fa6e27b5626115b366059258cfe4d60c9"
+
+S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-PACKAGECONFIG ??= "proc \
-                   cgroup \
+PACKAGECONFIG ??= "cgroup \
                    taskstats \
                    unicode \
                    linux-affinity \
                    delayacct"
-PACKAGECONFIG[proc] = "--enable-proc,--disable-proc"
 PACKAGECONFIG[openvz] = "--enable-openvz,--disable-openvz"
 PACKAGECONFIG[cgroup] = "--enable-cgroup,--disable-cgroup"
 PACKAGECONFIG[vserver] = "--enable-vserver,--disable-vserver"
@@ -32,7 +29,3 @@ PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinit
 PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc"
 PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
 PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
-
-do_configure_prepend () {
-    rm -rf ${S}/config.h
-}
