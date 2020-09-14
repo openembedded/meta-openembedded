@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyiso8601.readthedocs.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
 
-SRC_URI[md5sum] = "4de940f691c5ea759fb254384c8ddcf6"
-SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82"
+SRC_URI[md5sum] = "df6e924305fd799d90be63336b2ab8b3"
+SRC_URI[sha256sum] = "f7dec22af52025d4526be94cc1303c7d8f5379b746a3f54a8c8446384392eeb1"
 
 inherit pypi setuptools3
 
