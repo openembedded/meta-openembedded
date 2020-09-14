@@ -8,8 +8,8 @@ HOMEPAGE = "https://pymysql.readthedocs.io"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=528175c84163bb800d23ad835c7fa0fc"
 
-SRC_URI[md5sum] = "d08058b1592724d5808c43f56050f245"
-SRC_URI[sha256sum] = "e14070bc84e050e0f80bf6063e31d276f03a0bb4d46b9eca2854566c4ae19837"
+SRC_URI[md5sum] = "4a1fe973afbbdd78928650118ce8ff68"
+SRC_URI[sha256sum] = "263040d2779a3b84930f7ac9da5132be0fefcd6f453a885756656103f8ee1fdd"
 
 PYPI_PACKAGE = "PyMySQL"
 inherit pypi setuptools3
