@@ -1,5 +1,5 @@
 SUMMARY = "Jpeg 2000 implementation"
-HOMEPAGE = "https://github.com/jasper-software/jasper"
+HOMEPAGE = "https://jasper-software.github.io/jasper/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
 
