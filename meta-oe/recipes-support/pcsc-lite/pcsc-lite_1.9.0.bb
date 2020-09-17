@@ -14,8 +14,8 @@ SRC_URI = "\
 	https://pcsclite.apdu.fr/files/${BP}.tar.bz2 \
 	file://0001-pcsc-spy-use-python3-only.patch \
 "
-SRC_URI[md5sum] = "9d36882998449daceec267c68a21ff0d"
-SRC_URI[sha256sum] = "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
+SRC_URI[md5sum] = "eb595f2d398ff229207a6ec09fbc4e98"
+SRC_URI[sha256sum] = "0148d403137124552c5d0f10f8cdab2cbb8dfc7c6ce75e018faf667be34f2ef9"
 
 inherit autotools systemd pkgconfig perlnative
 
