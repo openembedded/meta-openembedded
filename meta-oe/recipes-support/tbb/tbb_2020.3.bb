@@ -7,7 +7,7 @@ HOMEPAGE = "https://software.intel.com/en-us/tbb"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 BRANCH = "tbb_2020"
-SRCREV = "60b7d0a78f8910976678ba63a19fdaee22c0ef65"
+SRCREV = "eca91f16d7490a8abfdee652dadf457ec820cc37"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
            file://cross-compile.patch \
            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
