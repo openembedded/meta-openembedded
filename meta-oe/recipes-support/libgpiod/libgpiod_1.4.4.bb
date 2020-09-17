@@ -9,8 +9,6 @@ SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314
 PACKAGECONFIG ?= "cxx"
 
 PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
-PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
-
 PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
 
 inherit python3native
