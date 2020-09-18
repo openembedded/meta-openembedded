@@ -42,6 +42,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-alembic \
     python3-ansi2html \
     python3-ansicolors \
+    python3-argcomplete \
     python3-argexec \
     python3-appdirs \
     python3-apply-defaults \
