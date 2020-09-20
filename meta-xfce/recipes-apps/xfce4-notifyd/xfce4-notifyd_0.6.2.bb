@@ -14,8 +14,7 @@ DEPENDS = " \
 
 inherit xfce-app
 
-SRC_URI[md5sum] = "58e70621d6b9e0e66399ed41ab402a47"
-SRC_URI[sha256sum] = "9b5274999c89bf296a7de03b375e8233eef37940b7444502130b92dfb6a089b4"
+SRC_URI[sha256sum] = "19ab84c6665c7819998f2269322d53f462c30963ce26042df23ae525e7d16545"
 
 # Avoid trouble with other desktops e.g KDE which also ships dbus service named
 # org.freedesktop.Notifications
