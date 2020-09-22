@@ -228,7 +228,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-mccabe \
     python3-kconfiglib \
     python3-grpcio-tools \
-    python3-jinja2 \
     python3-jsmin \
     python3-greenlet \
     python3-idna \
@@ -455,6 +454,8 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
 
 RDEPENDS_packagegroup-meta-python3-ptest = "\
     python3-cryptography-ptest \
-    "
+    python3-jinja2-ptest \
+    python3-markupsafe-ptest \
+"
 
 EXCLUDE_FROM_WORLD = "1"
