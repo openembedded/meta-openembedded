@@ -8,7 +8,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "XlsxWriter"
 
-SRC_URI[md5sum] = "7ea11261cbd5c763d106eea64471cf2f"
-SRC_URI[sha256sum] = "d804881beb944c4fd73deed0ef2666b84437f30d72bdc1b3a6f0230458facbfd"
+SRC_URI[md5sum] = "0b65976905bf3841bc6cae3f8c47295b"
+SRC_URI[sha256sum] = "de54547f3aa1a611453e32a8ae46380edb5556e823c6803f8673b4b770e50b3b"
 
 BBCLASSEXTEND = "native nativesdk"
