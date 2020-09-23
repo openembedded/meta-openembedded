@@ -3,7 +3,7 @@ LICENSE = "MIT & PSF"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
 
-SRC_URI[md5sum] = "9aebea08f7beb6b87143d0588578c984"
-SRC_URI[sha256sum] = "6e06eac722676797e8fce4adb8ad3dc57a1bb3adfb0dd3fdf8306c055a38456c"
+SRC_URI[md5sum] = "d964c95c2d2f0f02f36c75e158d8e3dc"
+SRC_URI[sha256sum] = "41d8835c69a78de718e466dd0e6bfd4b46125f21a67c3ff6d76d8d8059868d6b"
 
 inherit pypi distutils3
