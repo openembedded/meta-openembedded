@@ -14,6 +14,7 @@ inherit setuptools3 pypi
 unset _PYTHON_SYSCONFIGDATA_NAME
 
 RDEPENDS_${PN} = "\
+    ${PYTHON_PN}-docopt \
     ${PYTHON_PN}-dateutil \
     ${PYTHON_PN}-pyyaml \
 "

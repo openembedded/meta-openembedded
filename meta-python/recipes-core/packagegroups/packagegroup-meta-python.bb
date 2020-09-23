@@ -261,6 +261,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pyiface \
     python3-pyjwt \
     python3-pykwalify \
+    python3-docopt \
     python3-pylint \
     python3-pynetlinux \
     python3-pickleshare \
