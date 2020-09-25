@@ -87,4 +87,5 @@ RDEPENDS_${PN} = "\
     python3-slip-dbus \
     python3-decorator \
     python3-pygobject \
+    nftables-python \
 "
