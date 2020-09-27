@@ -302,6 +302,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-sdnotify \
     python3-pycodestyle \
     python3-pytest \
+    python3-iniconfig \
     python3-speaklater \
     python3-wtforms \
     python3-speedtest-cli \
