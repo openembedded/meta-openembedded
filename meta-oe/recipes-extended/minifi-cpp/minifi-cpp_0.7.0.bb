@@ -70,13 +70,14 @@ TARGET_CXXFLAGS_append_riscv64 += "-fpic"
 do_install() {
     DESTDIR='${B}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
 
-    MINIFI_BIN=${base_prefix}${bindir}
-    MINIFI_HOME=${base_prefix}${sysconfdir}/minifi
-    MINIFI_RUN=${base_prefix}${localstatedir}/run/minifi
-    MINIFI_LOG=${base_prefix}${localstatedir}/log/minifi
+    MINIFI_BIN=${bindir}
+    MINIFI_HOME=${sysconfdir}/minifi
+    MINIFI_RUN=${localstatedir}/lib/minifi
+    MINIFI_LOG=${localstatedir}/log/minifi
 
     install -d ${D}${MINIFI_BIN}
     install -d ${D}${MINIFI_HOME}/conf
+    install -m 755 -d ${D}${localstatedir}/lib/minifi
     cp -a ${B}/minifi-install/usr/bin/*   ${D}${MINIFI_BIN}/
     cp -a ${B}/minifi-install/usr/conf/*  ${D}${MINIFI_HOME}/conf/
 
@@ -93,11 +94,11 @@ do_install() {
 
     sed -i 's|export MINIFI_HOME=.*|export MINIFI_HOME='${MINIFI_HOME}'|g' ${D}${MINIFI_BIN}/minifi.sh
     sed -i 's|bin_dir=${MINIFI_HOME}/bin|bin_dir='${MINIFI_BIN}'|g' ${D}${MINIFI_BIN}/minifi.sh
-    sed -i 's|pid_file=${bin_dir}|pid_file='${MINIFI_RUN}'|g' ${D}${MINIFI_BIN}/minifi.sh
+    sed -i 's|pid_file=${bin_dir}/.|pid_file='${localstatedir}/run/'|g' ${D}${MINIFI_BIN}/minifi.sh
 
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${sysconfdir}/tmpfiles.d/
-        install -m 0644 ${WORKDIR}/systemd-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
+        install -m 0644 ${WORKDIR}/systemd-volatile.conf ${D}${sysconfdir}/tmpfiles.d/minifi.conf
         install -m 0755 -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/minifi.service ${D}${systemd_unitdir}/system/
 
@@ -105,14 +106,12 @@ do_install() {
         sed -i 's|@SYSCONFDIR@|${sysconfdir}|g' ${D}${systemd_unitdir}/system/minifi.service
         sed -i 's|@BINDIR@|${bindir}|g' ${D}${systemd_unitdir}/system/minifi.service
 
-        sed -i 's|@MINIFI_RUN@|'${MINIFI_RUN}'|g' ${D}${sysconfdir}/tmpfiles.d/systemd-volatile.conf
-        sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/tmpfiles.d/systemd-volatile.conf
+        sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/tmpfiles.d/minifi.conf
 
     elif ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/default/volatiles
         install -m 0644 ${WORKDIR}/sysvinit-volatile.conf ${D}${sysconfdir}/default/volatiles/99_minifi
 
-        sed -i 's|@MINIFI_RUN@|'${MINIFI_RUN}'|g' ${D}${sysconfdir}/default/volatiles/99_minifi
         sed -i 's|@MINIFI_LOG@|'${MINIFI_LOG}'|g' ${D}${sysconfdir}/default/volatiles/99_minifi
     fi
 }
@@ -126,9 +125,3 @@ pkg_postinst_${PN}() {
         fi
     fi
 }
-
-FILES_${PN} = " \
-        ${bindir} \
-        ${sysconfdir} \
-        ${systemd_unitdir} \
-        "
