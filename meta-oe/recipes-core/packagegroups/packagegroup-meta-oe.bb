@@ -886,6 +886,7 @@ RDEPENDS_packagegroup-meta-oe-support_remove_powerpc = "ssiapi"
 
 RDEPENDS_packagegroup-meta-oe-test ="\
     bats \
+    cmocka \
     cppunit \
     cukinia \
     cunit \
@@ -916,6 +917,7 @@ RDEPENDS_packagegroup-meta-oe-ptest-packages = "\
     uthash-ptest \
     libee-ptest \
     poco-ptest \
+    cmocka-ptest \
 "
 RDEPENDS_packagegroup-meta-oe-ptest-packages_append_x86 = " mcelog-ptest"
 RDEPENDS_packagegroup-meta-oe-ptest-packages_append_x86-64 = " mcelog-ptest"
