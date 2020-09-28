@@ -12,6 +12,9 @@ RDEPENDS_${PN} = "python3-core"
 
 SRCREV = "aa42957a2e227df41510047cece3cd606dc1cb6a"
 SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
+            https://curl.haxx.se/download/curl-7.64.0.tar.bz2;name=curl;subdir=git/thirdparty \
+            https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.8.3.tar.gz;name=libressl;subdir=git/thirdparty \
+            ${DEBIAN_MIRROR}/main/o/ossp-uuid/ossp-uuid_1.6.2.orig.tar.gz;name=ossp-uuid;subdir=git/thirdparty \
             file://fix-minifi-compile.patch \
             file://fix-libressl-compile.patch \
             file://fix-libressl-avoid-BSWAP-assembly-for-ARM-v6.patch \
@@ -21,10 +24,21 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
             file://fix-rocksdb-cross-compile.patch \
             file://remove_const_due_to_std_lock_guard.patch \
             file://0001-Add-lxml2-to-linker-cmdline-of-xml-is-found.patch \
+            file://0001-CMakeLists.txt-use-curl-local-source-tarball.patch \
+            file://0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch \
+            file://0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch \
             file://minifi.service \
             file://systemd-volatile.conf \
             file://sysvinit-volatile.conf \
             "
+
+SRC_URI[curl.md5sum] = "d0bcc586873cfef08b4b9594e5395a33"
+SRC_URI[curl.sha256sum] = "d573ba1c2d1cf9d8533fadcce480d778417964e8d04ccddcc76e591d544cf2eb"
+SRC_URI[libressl.md5sum] = "0f1127bd21b4aa8495a910379c2ad936"
+SRC_URI[libressl.sha256sum] = "9b640b13047182761a99ce3e4f000be9687566e0828b4a72709e9e6a3ef98477"
+SRC_URI[ossp-uuid.md5sum] = "5db0d43a9022a6ebbbc25337ae28942f"
+SRC_URI[ossp-uuid.sha256sum] = "11a615225baa5f8bb686824423f50e4427acd3f70d394765bdff32801f0fd5b0"
+
 S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake systemd
