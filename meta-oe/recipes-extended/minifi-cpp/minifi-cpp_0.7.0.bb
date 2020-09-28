@@ -66,10 +66,10 @@ TARGET_CXXFLAGS_append_riscv32 += "-fpic"
 TARGET_CFLAGS_append_riscv64 += "-fpic"
 TARGET_CXXFLAGS_append_riscv64 += "-fpic"
 
+do_install[cleandirs] += "${WORKDIR}/minifi-install"
 
 do_install() {
-    DESTDIR='${B}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
-
+    DESTDIR='${WORKDIR}/minifi-install' cmake_runcmake_build --target ${OECMAKE_TARGET_INSTALL}
     MINIFI_BIN=${bindir}
     MINIFI_HOME=${sysconfdir}/minifi
     MINIFI_RUN=${localstatedir}/lib/minifi
@@ -78,8 +78,8 @@ do_install() {
     install -d ${D}${MINIFI_BIN}
     install -d ${D}${MINIFI_HOME}/conf
     install -m 755 -d ${D}${localstatedir}/lib/minifi
-    cp -a ${B}/minifi-install/usr/bin/*   ${D}${MINIFI_BIN}/
-    cp -a ${B}/minifi-install/usr/conf/*  ${D}${MINIFI_HOME}/conf/
+    cp -a ${WORKDIR}/minifi-install/usr/bin/*   ${D}${MINIFI_BIN}/
+    cp -a ${WORKDIR}/minifi-install/usr/conf/*  ${D}${MINIFI_HOME}/conf/
 
     sed -i 's|#appender.rolling.directory=.*|appender.rolling.directory='${MINIFI_LOG}'|g' \
         ${D}${MINIFI_HOME}/conf/minifi-log.properties
