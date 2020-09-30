@@ -13,6 +13,7 @@ SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH
            file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
            file://tbb.pc \
+           file://improve-reproducibility.patch \
 "
 
 S = "${WORKDIR}/git"
