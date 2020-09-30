@@ -25,6 +25,9 @@ S = "${WORKDIR}/git"
 # ARM does not currently support NUMA
 COMPATIBLE_HOST = "^((?!arm).*)$"
 
+LDFLAGS_append_riscv64 = " -latomic"
+LDFLAGS_append_riscv32 = " -latomic"
+
 do_install() {
     oe_runmake DESTDIR=${D} prefix=${D}/usr install
     #remove the empty man2 directory
