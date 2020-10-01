@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
 
-SRC_URI[md5sum] = "17ad6e414d77026e264152bd4cc11400"
-SRC_URI[sha256sum] = "e159f7c919d19ae86e5a4ff370fccc45149fab461fbeb93fb5a735a0b33a9cb1"
+SRC_URI[md5sum] = "d6a85d958aea9277c1728c77dcf063a1"
+SRC_URI[sha256sum] = "1d91a0059d2d8bb980bec169578035c2f2d4b93cd8a4fb5b85c81904d33e221a"
 
 PYPI_PACKAGE = "sentry-sdk"
 inherit pypi setuptools3
