@@ -60,6 +60,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
     vorbis-tools \
     libdvbcsa \
     libopenmpt \
+    libuvc \
     mimic \
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna", "", d)} \
     mycroft \
