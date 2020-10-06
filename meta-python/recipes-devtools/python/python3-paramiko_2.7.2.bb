@@ -12,3 +12,8 @@ inherit pypi setuptools3
 
 CLEANBROKEN = "1"
 
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-bcrypt \
+    ${PYTHON_PN}-cryptography \
+    ${PYTHON_PN}-pynacl \
+"
