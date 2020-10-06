@@ -12,8 +12,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 PROVIDES += "cyassl"
 RPROVIDES_${PN} = "cyassl"
 
-SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https"
-SRCREV = "e116c89a58af750421d82ece13f80516d2bde02e"
+SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https \
+           file://0001-Make-ByteReverseWords-available-for-big-and-little-e.patch \
+"
+SRCREV = "0fa5af9929ce2ee99e8789996a3048f41a99830e"
 S = "${WORKDIR}/git"
 
 inherit autotools
