@@ -1,10 +1,10 @@
 SUMMARY = "Python library for displaying tabular data in a ASCII table format"
 HOMEPAGE = "http://code.google.com/p/prettytable"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
+LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
 
-SRC_URI[md5sum] = "a6b80afeef286ce66733d54a0296b13b"
-SRC_URI[sha256sum] = "2d5460dc9db74a32bcc8f9f67de68b2c4f4d2f01fa3bd518764c69156d9cacd9"
+SRC_URI[md5sum] = "fb31d4c94fef42f2caf9784c44d8ea82"
+SRC_URI[sha256sum] = "98a3b74b1980e6a9392498e3a2a5406f6bd836f412843c2be23d9c88671747ac"
 
 do_install_append() {
     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
@@ -22,6 +22,8 @@ inherit pypi ptest setuptools3
 SRC_URI += " \
 	file://run-ptest \
 "
+
+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 
 RDEPENDS_${PN} += " \
 	${PYTHON_PN}-math \
