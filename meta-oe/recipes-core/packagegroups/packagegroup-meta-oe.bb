@@ -284,6 +284,7 @@ RDEPENDS_packagegroup-meta-oe-devtools_append_x86 = " cpuid msr-tools pmtools"
 RDEPENDS_packagegroup-meta-oe-devtools_append_x86-64 = " cpuid msr-tools pcimem pmtools"
 RDEPENDS_packagegroup-meta-oe-devtools_append_arm = " pcimem"
 RDEPENDS_packagegroup-meta-oe-devtools_append_aarch64 = " pcimem"
+RDEPENDS_packagegroup-meta-oe-devtools_append_libc-musl = " musl-nscd"
 
 RDEPENDS_packagegroup-meta-oe-devtools_remove_arm = "concurrencykit"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_armv5 = "uftrace nodejs"
