@@ -26,8 +26,7 @@ SRC_URI = " \
     https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz \
     file://0001-meson.build-Give-note-if-sdl2-was-found.patch \
 "
-SRC_URI[md5sum] = "3a8062add20effb6f92b4b614facbbd5"
-SRC_URI[sha256sum] = "7765499f27341b0d16032e665319cbc12876483ff6a944fcdf24a9c58e3e254a"
+SRC_URI[sha256sum] = "0f371e2ed2b92162fefd3dde743e648ca08a6a1b2b05004867fbddc7e211e424"
 
 PACKAGECONFIG ??= "gexiv2 jpeg libpng librsvg sdl2"
 PACKAGECONFIG_class-native = "libpng librsvg"
