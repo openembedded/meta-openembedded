@@ -13,5 +13,5 @@ inherit autotools pkgconfig bash-completion gobject-introspection
 
 SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
 
-SRC_URI[md5sum] = "6c2b490af87773c8446f37536e7411ac"
-SRC_URI[sha256sum] = "32198c099987849c5f442d1cbf4b6e43e645cbdbe9cfdc197b19ddd63c6981e4"
+SRC_URI[md5sum] = "4b4b12ab7153d7c999289b5dfc2d25db"
+SRC_URI[sha256sum] = "dd488ee6176243a6adb27a5872897336272ea7bea33a3ad501ba268e5a58b285"
