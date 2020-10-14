@@ -3,8 +3,8 @@ HOMEPAGE = "https://graphviz.readthedocs.io/en/stable/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f7831c564aeff14e68aa4ff7a93dc89f"
 
-SRC_URI[md5sum] = "436cb0f41f6a949f916357ca037e205a"
-SRC_URI[sha256sum] = "f5aad52a652c06825dcc5ee018d920fca26aef339386866094597fb3f2f222ce"
+SRC_URI[md5sum] = "7123efabb68270f579525df74bf8b0c9"
+SRC_URI[sha256sum] = "92b7637ece63c77e3d39221ae1f4df98e9256cb449e9860c598335b34496d195"
 
 inherit pypi setuptools3
 
