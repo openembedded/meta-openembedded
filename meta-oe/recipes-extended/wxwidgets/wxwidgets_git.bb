@@ -25,8 +25,8 @@ SRC_URI = " \
     git://github.com/wxWidgets/wxWidgets.git \
     file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
 "
-PV = "3.1.3"
-SRCREV= "8a40d23b27ed1c80b5a2ca9f7e8461df4fbc1a31"
+PV = "3.1.4"
+SRCREV= "6cdaedd42ba59331b3dc4ead50e0bac76ae14c19"
 S = "${WORKDIR}/git"
 
 # These can be either 'builtin' or 'sys' and builtin means cloned soures are
