@@ -7,8 +7,8 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.
            file://Use-cross-cpp-in-incdefs.patch \
            "
 
-SRC_URI[md5sum] = "1318805702eb6d59f9f247e1dd5ce12a"
-SRC_URI[sha256sum] = "d74ceca722c75bfff53c633425f926dd48eb04f4a089451b855155c016d15785"
+SRC_URI[md5sum] = "2264cb69c9af947028835c12c89a7572"
+SRC_URI[sha256sum] = "f58f5b11cf14dc7c4f7c9efdfb27190e43d02cf20c3525f6639edac10528ce7d"
 
 EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
 
