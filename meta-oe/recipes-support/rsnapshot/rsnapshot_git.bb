@@ -13,11 +13,13 @@ RDEPENDS_${PN} = "rsync \
                   perl-module-getopt-std \
                   perl-module-file-path \
                   perl-module-file-stat \
+                  perl-module-file-spec \
                   perl-module-posix \
                   perl-module-fcntl \
                   perl-module-io-file \
                   perl-module-constant \
                   perl-module-overloading \
+                  perl-module-ipc-open3 \
                  "
 
 SRCREV = "27209563f924a22f510698ea225f53ea52f07cb4"
