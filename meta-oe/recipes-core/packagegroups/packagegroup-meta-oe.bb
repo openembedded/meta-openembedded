@@ -206,6 +206,7 @@ RDEPENDS_packagegroup-meta-oe-dbs ="\
 
 RDEPENDS_packagegroup-meta-oe-devtools ="\
     abseil-cpp \
+    apitrace \
     breakpad \
     bootchart \
     android-tools-conf \

@@ -26,3 +26,5 @@ EXTRA_OECMAKE += "\
 EXTRA_OECMAKE += "\
     -DENABLE_STATIC_SNAPPY=ON \
 "
+
+SECURITY_CFLAGS_toolchain-clang = ""
