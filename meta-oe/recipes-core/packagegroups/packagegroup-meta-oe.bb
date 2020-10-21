@@ -186,6 +186,7 @@ RDEPENDS_packagegroup-meta-oe-core_remove_riscv32 = "safec"
 RDEPENDS_packagegroup-meta-oe-crypto ="\
     botan \
     cryptsetup \
+    fsverity-utils \
     libkcapi \
     libmcrypt \
     libsodium \
