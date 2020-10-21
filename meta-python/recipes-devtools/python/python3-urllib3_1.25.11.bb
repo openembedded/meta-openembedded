@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
 
-SRC_URI[md5sum] = "94e3d4d472a14e788d4bd1a903fd102b"
-SRC_URI[sha256sum] = "91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a"
+SRC_URI[md5sum] = "d47dd21a6e66a03c3633cac468ffd010"
+SRC_URI[sha256sum] = "8d7eaa5a82a1cac232164990f04874c594c9453ec55eef02eab885aa02fc17a2"
 
 inherit pypi setuptools3
 
