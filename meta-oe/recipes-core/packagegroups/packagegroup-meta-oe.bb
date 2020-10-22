@@ -841,6 +841,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     tbb \
     satyr \
     pcsc-lite \
+    pcsc-tools \
     sharutils \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "toscoterm", "", d)} \
     sg3-utils \
