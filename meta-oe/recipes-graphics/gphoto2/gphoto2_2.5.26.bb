@@ -11,8 +11,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/gphoto2-${PV}.tar.bz2;name=gphoto2 \
            file://0002-Look-for-popt-with-GP_CHECK_LIBRARY-function.patch \
 "
 
-SRC_URI[gphoto2.md5sum] = "0abd5ae8315109ae66bf06ac37902678"
-SRC_URI[gphoto2.sha256sum] = "df87092100e7766c9d0a4323217c91908a9c891c0d3670ebf40b76903be458d1"
+SRC_URI[gphoto2.md5sum] = "f663b10bca639290fdb150b6ffe23e93"
+SRC_URI[gphoto2.sha256sum] = "7653213b05329c1dc2779efea3eff00504e12011436587aedc9aaa1e8665ab2f"
 
 inherit autotools pkgconfig gettext
 
