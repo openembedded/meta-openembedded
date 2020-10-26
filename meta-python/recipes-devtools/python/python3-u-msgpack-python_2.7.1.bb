@@ -3,8 +3,8 @@ DESCRIPTION = "A portable, lightweight MessagePack serializer and deserializer w
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9eb4691bcb66360acee473a8cf75f594"
 
-SRC_URI[md5sum] = "231609d87aa58459a1491c8f5df4e4cd"
-SRC_URI[sha256sum] = "996e4c4454771f0ff0fd2a7566b1a159d305d3611cd755addf444e3533e2bc54"
+SRC_URI[md5sum] = "8691cea6bc7b44bce6e2115260a54323"
+SRC_URI[sha256sum] = "b7e7d433cab77171a4c752875d91836f3040306bab5063fb6dbe11f64ea69551"
 
 inherit pypi setuptools3 ptest
 
