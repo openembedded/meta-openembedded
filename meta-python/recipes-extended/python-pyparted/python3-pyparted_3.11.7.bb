@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "\
     file://src/_pedmodule.c;beginline=10;endline=22;md5=9e53304db812b80d0939e11bb69dcab2 \
 "
 
-SRC_URI[md5sum] = "b85dcaecc3106eb6e9a117270b09615e"
-SRC_URI[sha256sum] = "727ccdf308c194069aa9797f7a6a973bc95b2e407cdf5d58d6c8bc4c9dec92dc"
+SRC_URI[md5sum] = "69284f943982f54ded76960c92098a02"
+SRC_URI[sha256sum] = "61cde7b096bccd69ddc75c85b17f8baed45c3687d404706d91403a319453b903"
 
 inherit pypi distutils3
 
