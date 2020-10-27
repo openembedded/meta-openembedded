@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/amoffat/sh"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6"
 
-SRC_URI[md5sum] = "4cbbcb85c081d78f4b0f00d634db9bb9"
-SRC_URI[sha256sum] = "05c7e520cdf70f70a7228a03b589da9f96c6e0d06fc487ab21fc62b26a592e59"
+SRC_URI[md5sum] = "50fc0a2953930ed8d0f6570835e88abf"
+SRC_URI[sha256sum] = "39aa9af22f6558a0c5d132881cf43e34828ca03e4ae11114852ca6a55c7c1d8e"
 
 PYPI_PACKAGE = "sh"
 
