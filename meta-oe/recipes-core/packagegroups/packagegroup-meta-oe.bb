@@ -275,6 +275,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     python3-distutils-extra \
     rapidjson \
     sip3 \
+    squashfs-tools-ng \
     uftrace \
     libxerces-c \
     xerces-c-samples \
