@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = "file://README.md;md5=a6aa1e7097aca5955f9a2e1c8b0ce158"
 
 inherit pypi setuptools3
 
-SRC_URI[md5sum] = "7ebc843f015b54d849ac7632eda74e9b"
-SRC_URI[sha256sum] = "acaaa6f96de315dc99cac3da810156bf3829d1eb5c49180f00a4fdde82eabc76"
+SRC_URI[md5sum] = "c661939158d6a1acbcc2191bedc47751"
+SRC_URI[sha256sum] = "96e900d6af928a94c2a75b4935ddda44872c218121d0467c549ae19e7608a9a2"
