@@ -27,6 +27,7 @@ SRC_URI = "git://github.com/apache/nifi-minifi-cpp.git \
             file://0001-CMakeLists.txt-use-curl-local-source-tarball.patch \
             file://0002-cmake-LibreSSL.cmake-use-libressl-local-source-tarba.patch \
             file://0003-cmake-BundledOSSPUUID.cmake-use-ossp-uuid-local-sour.patch \
+            file://0001-civetweb-CMakeLists.txt-do-not-search-gcc-ar-and-gcc.patch \
             file://minifi.service \
             file://systemd-volatile.conf \
             file://sysvinit-volatile.conf \
@@ -52,6 +53,8 @@ OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
 EXTRA_OECMAKE += " \
     -DHOST_SYS=${HOST_SYS} -DBUILD_SYS=${BUILD_SYS} \
     -DSKIP_TESTS=ON \
+    -DGCC_AR=${STAGING_BINDIR_TOOLCHAIN}/${AR} \
+    -DGCC_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${RANLIB} \
     "
 EXTRA_OECMAKE_append_toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
 LDFLAGS_append_toolchain-clang = " -fuse-ld=lld"
