@@ -444,7 +444,6 @@ RDEPENDS_packagegroup-meta-python3-connectivity = "\
     python3-h2 \
     python3-hpack \
     python3-hyperframe \
-    python3-mprpc \
     python3-priority \
     python3-pyconnman \
     python3-pyro4 \
