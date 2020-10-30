@@ -8,10 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=78659a599b9325da368f2f1eb88f19c7"
 inherit cml1 update-alternatives
 
 SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-           file://mips-no-STKFLT.patch \
-           file://0001-Tackle-SIGEMT-and-SIGSTKFLT-is-not-glibc-specific.patch \
            "
-SRC_URI[sha256sum] = "eab28fd29d19d4e61ef09704e5871940e6f35fd35a3bb1285e41f204504b5c01"
+SRC_URI[sha256sum] = "cb2a565a8d30015d08d73628795dca51a85b99b149aeabbbecd9e8dbdbd8fddc"
 
 SECTION = "base"
 
