@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c78be93ed8d1637f2a3f4a83ff9d5f54"
 DEPENDS = "libtool"
 
 S = "${WORKDIR}/git"
-SRCREV = "8397f0f7c45264a3b9aff5a1f9119df25eeb4c60"
+SRCREV = "d41284525ec8960e9a828979cfe269012b7df8db"
 SRC_URI = "git://github.com/smuellerDD/libkcapi.git"
 
 inherit autotools
