@@ -21,6 +21,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            file://big-endian.patch \
            file://mips-warnings.patch \
+           file://0001-Remove-use-of-register-r7-because-llvm-now-issues-an.patch \
            "
 SRC_URI_append_class-target = " \
            file://0002-Using-native-binaries.patch \
