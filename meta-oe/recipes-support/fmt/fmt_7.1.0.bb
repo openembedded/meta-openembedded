@@ -5,7 +5,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
 
 SRC_URI += "git://github.com/fmtlib/fmt"
-SRCREV = "cd4af11efc9c622896a3e4cb599fa28668ca3d05"
+SRCREV = "4fe0b11195b7cd71f39253c44db2c9dddf6b82d4"
 
 S = "${WORKDIR}/git"
 
