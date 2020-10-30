@@ -8,7 +8,7 @@ DEPENDS = "util-linux"
 PV .= "+git${SRCPV}"
 
 SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
-SRCREV = "949d0aea730136d04af1fb9e0efd4427c20dee6d"
+SRCREV = "f0e9569df9289d6ee55ba2c23615cc7c73a9b088"
 
 S = "${WORKDIR}/git"
 
