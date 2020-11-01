@@ -58,7 +58,11 @@ EXTRA_OECMAKE += " \
     "
 EXTRA_OECMAKE_append_toolchain-clang = " -DCMAKE_RANLIB=${STAGING_BINDIR_TOOLCHAIN}/${TARGET_PREFIX}llvm-ranlib"
 LDFLAGS_append_toolchain-clang = " -fuse-ld=lld"
+
+# RV lld errors out:
+# riscv64-yoe-linux-ld.lld: error: init.c:(.text+0x0): relocation R_RISCV_ALIGN requires unimplemented linker relaxation; recompile with -mno-relax
 LDFLAGS_remove_riscv32 = "-fuse-ld=lld"
+LDFLAGS_remove_riscv64 = "-fuse-ld=lld"
 
 # There are endian issues when communicating with the x86 nifi on the the mips and the ppc machines.
 COMPATIBLE_MACHINE_mips = "(!.*mips).*"
