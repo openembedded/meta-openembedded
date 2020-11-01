@@ -5,8 +5,8 @@ LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
 SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz"
-SRC_URI[md5sum] = "064c2627397e6641c52de09a26951112"
-SRC_URI[sha256sum] = "f1cda2789e6a13a92aefc012a76e5a7cc57a1b402d66f71df8719ee314b67699"
+SRC_URI[md5sum] = "0da9e11dcb0ac0149967b0c4d3ed9cfd"
+SRC_URI[sha256sum] = "a041b06907c956dd1c77836cccf4d392af29b9fe09c8ad18449a6da707b5ba2d"
 
 inherit autotools pkgconfig python3native
 
