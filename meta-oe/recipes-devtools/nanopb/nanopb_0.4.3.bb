@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9db4b73a55a3994384112efcdb37c01f"
 DEPENDS = "protobuf-native"
 
 SRC_URI = "git://github.com/nanopb/nanopb.git"
-SRCREV = "70f0de9877b1ce12abc0229d5df84db6349fcbfc"
+SRCREV = "1466e6f953835b191a7f5acf0c06c941d4cd33d9"
 
 S = "${WORKDIR}/git"
 
@@ -27,4 +27,3 @@ RDEPENDS_${PN} += "\
 
 BBCLASSEXTEND = "native nativesdk"
 
-PNBLACKLIST[nanopb] ?= "Needs forward porting to use python3"
