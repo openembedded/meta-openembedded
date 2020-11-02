@@ -11,7 +11,7 @@ PV = "1.0.2"
 
 CFLAGS += "-fcommon"
 
-SRCREV = "8f278675e1b6a3a02c8ee1b8ca000f80570dc5d6"
+SRCREV = "af581482a3e1059458f3c8b20a56f82807ca3bd4"
 SRC_URI = "git://github.com/pikhq/musl-nscd"
 
 UPSTREAM_CHECK_COMMITS = "1"
