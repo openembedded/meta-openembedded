@@ -9,11 +9,11 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi libsodium libss
 DEPENDS_append_libc-musl = " libexecinfo"
 LDFLAGS_append_libc-musl = " -lexecinfo"
 
-SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
+SRCREV = "7ebc497062de66881b71bbe7f54dabfda0129ac2"
+SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
 "
-SRC_URI[sha256sum] = "7614d447dc588403aff2ff97b253f46c5f03a6347d024618e84490b8ab4cd87b"
 
-S = "${WORKDIR}/Remmina-v${PV}"
+S = "${WORKDIR}/git"
 
 inherit cmake features_check mime-xdg
 REQUIRED_DISTRO_FEATURES = "x11"
