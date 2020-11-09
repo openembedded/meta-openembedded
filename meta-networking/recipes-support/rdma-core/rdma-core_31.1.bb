@@ -7,9 +7,8 @@ RDEPENDS_${PN} = "bash perl"
 
 BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
-           file://0001-Remove-man-files-which-cant-be-built.patch \
            "
-SRCREV = "0f4dd71d38a0f1b005635a3ff344e15791d2afa7"
+SRCREV = "a4013e3d94cb5819f0e4cd93b298f775d5542a66"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
@@ -20,7 +19,10 @@ LIC_FILES_CHKSUM = "file://COPYING.BSD_FB;md5=0ec18bae1a9df92c8d6ae01f94a289ae \
 EXTRA_OECMAKE = " \
     -DCMAKE_INSTALL_SYSTEMD_SERVICEDIR=${systemd_system_unitdir} \
     -DCMAKE_INSTALL_PERLDIR=${libdir}/perl5/${@get_perl_version(d)} \
+    -DNO_MAN_PAGES=1 \
 "
+
+LTO = ""
 
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/*"
