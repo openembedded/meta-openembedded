@@ -425,6 +425,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pycurl \
     gyp \
     python3-jsonref \
+    python3-transitions \
 "
 
 RDEPENDS_packagegroup-meta-python3-extended = "\
