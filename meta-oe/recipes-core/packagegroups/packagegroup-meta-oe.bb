@@ -276,6 +276,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     rapidjson \
     sip3 \
     squashfs-tools-ng \
+    suitesparse \
     uftrace \
     libxerces-c \
     xerces-c-samples \
