@@ -427,6 +427,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-jsonref \
     python3-transitions \
     python3-dill \
+    python3-cerberus \
 "
 
 RDEPENDS_packagegroup-meta-python3-extended = "\
