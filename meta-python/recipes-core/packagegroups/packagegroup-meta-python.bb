@@ -426,6 +426,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     gyp \
     python3-jsonref \
     python3-transitions \
+    python3-dill \
 "
 
 RDEPENDS_packagegroup-meta-python3-extended = "\
