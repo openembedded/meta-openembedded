@@ -26,6 +26,8 @@ DEPENDS_append_libc-musl = " fts "
 
 INSANE_SKIP_${PN}-dev += "dev-elf"
 
+LTO = ""
+
 # Use CMake 'Unix Makefiles' generator
 OECMAKE_GENERATOR ?= "Unix Makefiles"
 
