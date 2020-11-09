@@ -24,13 +24,12 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-configure-Disable-format-overflow-if-supported-by-gc.patch \
            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
-           file://0001-Add-configure-time-check-for-gettid-API.patch \
            file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
            file://0001-immom_python-convert-to-python3.patch \
            file://0001-Fix-build-with-fno-common.patch \
            "
-SRC_URI[md5sum] = "d56bacf4c234c134e60e9b25f6f26671"
-SRC_URI[sha256sum] = "2478e298c0bce3b2cfdeb20875022cc11d7d3b53ecd3255422d22eb64c04953b"
+SRC_URI[md5sum] = "02cfe732d194339237da6adce8e54384"
+SRC_URI[sha256sum] = "84268b90dc48a6675e5a77e2b20390a04bb59deb48a829102a9dbc4b9ac27483"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
 
