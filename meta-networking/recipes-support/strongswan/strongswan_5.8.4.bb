@@ -25,7 +25,8 @@ EXTRA_OECONF = " \
 
 EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
 
-PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
+PACKAGECONFIG ??= "curl gmp openssl sqlite3 swanctl \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
         ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
 "
 PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
@@ -135,4 +136,11 @@ RDEPENDS_${PN} += "\
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
-SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} ${BPN}-starter.service"
+
+# The deprecated legacy 'strongswan-starter' service should only be used when charon and
+# stroke are enabled. When swanctl is in use, 'strongswan.service' is needed.
+# See: https://wiki.strongswan.org/projects/strongswan/wiki/Charon-systemd
+SYSTEMD_SERVICE_${PN} = " \
+    ${@bb.utils.contains('PACKAGECONFIG', 'swanctl', '${BPN}.service', '', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG', 'charon', '${BPN}-starter.service', '', d)} \
+"
