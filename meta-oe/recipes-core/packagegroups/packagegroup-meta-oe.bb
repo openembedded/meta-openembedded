@@ -276,7 +276,6 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     rapidjson \
     sip3 \
     squashfs-tools-ng \
-    suitesparse \
     uftrace \
     libxerces-c \
     xerces-c-samples \
@@ -936,6 +935,7 @@ RDEPENDS_packagegroup-meta-oe-ptest-packages_remove_arm = "numactl-ptest"
 RDEPENDS_packagegroup-meta-oe-fortran-packages = "\
     lapack \
     octave \
+    suitesparse \
 "
 # library-only or headers-only packages
 # They wont be built as part of images but might be interesting to include

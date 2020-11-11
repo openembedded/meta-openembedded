@@ -75,3 +75,6 @@ FILES_${PN} += " \
 
 FILES_${PN}-staticdev += "${libdir}/libmongoose.a"
 FILES_${PN}-dev += "${includedir} ${libdir}/*.so"
+
+EXCLUDE_FROM_WORLD = "1"
+
