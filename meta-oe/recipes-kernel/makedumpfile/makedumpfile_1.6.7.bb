@@ -40,7 +40,12 @@ SECTION = "base"
 EXTRA_OEMAKE = "\
     LINKTYPE=static \
     TARGET=${TARGET_ARCH} \
+    ${PACKAGECONFIG_CONFARGS} \
 "
+
+PACKAGECONFIG ??= ""
+PACKAGECONFIG[lzo] = "USELZO=on,USELZO=off,lzo"
+PACKAGECONFIG[snappy] = "USESNAPPY=on,USESNAPPY=off,snappy"
 
 do_install () {
     mkdir -p ${D}/usr/bin
