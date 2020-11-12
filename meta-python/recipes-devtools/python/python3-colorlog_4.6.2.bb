@@ -7,5 +7,5 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "colorlog"
 
-SRC_URI[md5sum] = "0997566a87c6fdec0baa88055adc06c3"
-SRC_URI[sha256sum] = "0272c537469ab1e63b9915535874d15b671963c9325db0c4891a2aeff97ce3d1"
+SRC_URI[md5sum] = "72441753be8ec437af9e5bb89db344e7"
+SRC_URI[sha256sum] = "54e5f153419c22afc283c130c4201db19a3dbd83221a0f4657d5ee66234a2ea4"
