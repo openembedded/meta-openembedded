@@ -428,6 +428,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-transitions \
     python3-dill \
     python3-cerberus \
+    python3-cvxopt \
 "
 
 RDEPENDS_packagegroup-meta-python3-extended = "\
