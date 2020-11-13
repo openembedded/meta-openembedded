@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://META.yml;beginline=11;endline=12;md5=b2562f94907eeb42
 
 SRC_URI = "http://www.cpan.org/modules/by-module/IO/IO-Tty-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "70bcec4b1b19838ed209fb96a13f3e89"
-SRC_URI[sha256sum] = "51f3e4e311128bdb2c6a15f02c51376cb852ccf9df9bebe8dfbb5f9561eb95b5"
+SRC_URI[md5sum] = "060103c6d6e4d9833fa7715860f2923b"
+SRC_URI[sha256sum] = "43f9cc0f87620bbb159e0890e196b23a8e6419cbd04224c10f3dcee948f6b51a"
 
 S = "${WORKDIR}/IO-Tty-${PV}"
 
