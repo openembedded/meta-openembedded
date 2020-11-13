@@ -12,3 +12,7 @@ SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
+
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
+PACKAGECONFIG[no-error-log] = "--disable-error-log,--enable-error-log"
