@@ -192,6 +192,7 @@ RDEPENDS_packagegroup-meta-oe-crypto ="\
     libsodium \
     pkcs11-helper \
 "
+RDEPENDS_packagegroup-meta-oe-crypto_remove_riscv32 = "botan"
 
 RDEPENDS_packagegroup-meta-oe-dbs ="\
     leveldb \
