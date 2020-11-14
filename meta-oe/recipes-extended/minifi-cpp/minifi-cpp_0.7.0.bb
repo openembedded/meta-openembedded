@@ -69,10 +69,10 @@ COMPATIBLE_MACHINE_mips = "(!.*mips).*"
 COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
 COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
 
-TARGET_CFLAGS_append_riscv32 += "-fpic"
-TARGET_CXXFLAGS_append_riscv32 += "-fpic"
-TARGET_CFLAGS_append_riscv64 += "-fpic"
-TARGET_CXXFLAGS_append_riscv64 += "-fpic"
+TARGET_CFLAGS_append_riscv32 = " -fpic"
+TARGET_CXXFLAGS_append_riscv32 = " -fpic"
+TARGET_CFLAGS_append_riscv64 = " -fpic"
+TARGET_CXXFLAGS_append_riscv64 = " -fpic"
 
 do_install[cleandirs] += "${WORKDIR}/minifi-install"
 
