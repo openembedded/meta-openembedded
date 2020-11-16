@@ -16,8 +16,9 @@ DEPENDS = "libsamplerate0 libsndfile1 readline"
 
 SRC_URI = "git://github.com/jackaudio/jack2.git \
            file://0001-example-clients-Use-c-compiler-for-jack_simdtests.patch \
+           file://0001-Use-SYS_futex-instead-of-__NR_futex.patch \
           "
-SRCREV = "b54a09bf7ef760d81fdb8544ad10e45575394624"
+SRCREV = "5b78c2ef158c2d9ffe09818a7dd80209ed251c5f"
 
 S = "${WORKDIR}/git"
 
