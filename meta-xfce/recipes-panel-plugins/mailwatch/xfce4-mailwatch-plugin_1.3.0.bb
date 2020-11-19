@@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 inherit xfce-panel-plugin
 
-DEPENDS += "gnutls libgcrypt"
+DEPENDS += "gnutls"
 
-SRC_URI[md5sum] = "7263114ec0f2987a3aff15afeeb45577"
-SRC_URI[sha256sum] = "624acc8229a8593c0dfeb28f883f4958119a715cc81cecdbaf29efc8ab1edcad"
+SRC_URI[sha256sum] = "20f91ebefd2880b27f421f773115b3740f67de2bf60feace3841bfd1a09cbe2e"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
