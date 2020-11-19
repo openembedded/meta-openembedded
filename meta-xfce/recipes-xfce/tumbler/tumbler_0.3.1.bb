@@ -6,7 +6,7 @@ DEPENDS = "freetype gdk-pixbuf poppler curl xfce4-dev-tools-native libxml2 libgs
 
 inherit xfce gtk-doc
 
-SRC_URI[sha256sum] = "6508906f03e5a6ae3f6503b71b056df47d336d5504f39df6ce0bb9c5248007b6"
+SRC_URI[sha256sum] = "e4a30f3c0656b5b29fcd4a2450293f20f283a95b7fb0754a947c55427784c454"
 
 INSANE_SKIP_${PN} = "dev-so"
 
