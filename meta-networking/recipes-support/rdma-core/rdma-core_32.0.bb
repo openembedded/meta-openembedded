@@ -8,7 +8,7 @@ RDEPENDS_${PN} = "bash perl"
 BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
            "
-SRCREV = "a4013e3d94cb5819f0e4cd93b298f775d5542a66"
+SRCREV = "7a4f9ad9a1d906c5f2bbb18b588309c3d12460ac"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
