@@ -5,12 +5,15 @@ DESCRIPTION = "\
     images without extra uneeded information (zero pages, userspace programs, \
     etc). \
 "
-HOMEPAGE = "http://makedumpfile.sourceforge.net"
+HOMEPAGE = "https://github.com/makedumpfile/makedumpfile"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 LICENSE = "GPLv2.0"
 
-DEPENDS = "bzip2 zlib elfutils"
+SRCBRANCH ?= "master"
+SRCREV = "18e0cdba48feeccea2429b3b0b2691f4314d1062"
+
+DEPENDS = "bzip2 zlib elfutils xz"
 RDEPENDS_${PN}-tools = "perl ${PN}"
 
 # arm and aarch64 would compile but has never been tested upstream.  mips would not compile.
@@ -21,16 +24,14 @@ PACKAGES =+ "${PN}-tools"
 FILES_${PN}-tools = "${bindir}/*.pl"
 
 SRC_URI = "\
-    ${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
+    git://github.com/makedumpfile/makedumpfile;branch=${SRCBRANCH} \
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
     file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
-    file://0001-PATCH-Remove-duplicated-variable-definitions.patch \
 "
-SRC_URI[md5sum] = "808ef840ca49ca6bfde77c097cf429f5"
-SRC_URI[sha256sum] = "e702fbdf62b4cd829a76e46f3e24eb3fc7501918b85ebdcd8baef4f53d6ee2c8"
 
-UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/makedumpfile/files/makedumpfile/"
-UPSTREAM_CHECK_REGEX = "makedumpfile/(?P<pver>\d+(\.\d+)+)/"
+S = "${WORKDIR}/git"
+
+UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
 
 SECTION = "base"
 
