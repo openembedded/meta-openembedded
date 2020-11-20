@@ -10,11 +10,10 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
 SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
            file://fix-funtion-parameter.patch \
            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
-           file://0001-Remove-obsolete-setting-regarding-the-Standard-Outpu.patch \
            "
 
-SRC_URI[md5sum] = "0634e7f40591bd3f6770e583c3f27d29"
-SRC_URI[sha256sum] = "2d9a57e33813b62d58cba07531c4d5a35c6b823dfe9b8ff7c623b6571f02553c"
+SRC_URI[md5sum] = "1f4db969d072e120dc12d1c116a0f658"
+SRC_URI[sha256sum] = "a337c9fb63d973b8440827755c784031648bf423b7114a04918b0b00fd42cafb"
 
 UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
 
