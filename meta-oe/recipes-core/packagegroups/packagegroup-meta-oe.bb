@@ -946,7 +946,7 @@ RDEPENDS_packagegroup-meta-oe-fortran-packages = "\
 # opencl-headers sdbus-c++-libsystemd boost-url nlohmann-fifo sqlite-orm
 # nlohmann-json exprtk liblightmodbus p8platform gnome-doc-utils-stub
 # glm ttf-mplus xbitmaps ceres-solver cli11 fftw gnulib libeigen ade
-# spdlog span-lite uthash websocketpp catch2 properties-cpp
+# spdlog span-lite uthash websocketpp catch2 properties-cpp cpp-netlib
 
 # rsyslog conflicts with syslog-ng so its not included here
 
