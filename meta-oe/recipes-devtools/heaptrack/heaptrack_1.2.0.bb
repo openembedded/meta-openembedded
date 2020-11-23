@@ -24,4 +24,8 @@ inherit cmake
 
 EXTRA_OECMAKE += "-DHEAPTRACK_BUILD_GUI=OFF"
 
+# libunwind is not yet ported to RISCV
+COMPATIBLE_HOST_riscv32 = "null"
+COMPATIBLE_HOST_riscv64 = "null"
+
 BBCLASSEXTEND = "native nativesdk"
