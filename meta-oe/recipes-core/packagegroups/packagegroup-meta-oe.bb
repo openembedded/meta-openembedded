@@ -227,6 +227,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany-plugins geany", "", d)} \
     lemon \
     flatbuffers \
+    heaptrack \
     libubox \
     ltrace \
     lua \
