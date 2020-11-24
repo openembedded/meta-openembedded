@@ -23,3 +23,5 @@ RDEPENDS_${PN} = "perl"
 do_install_append() {
     ln -sf ${bindir}/genisoimage ${D}${bindir}/mkisofs
 }
+
+BBCLASSEXTEND = "native"
