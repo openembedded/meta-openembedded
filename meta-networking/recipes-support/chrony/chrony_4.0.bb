@@ -34,14 +34,12 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
     file://chrony.conf \
     file://chronyd \
     file://arm_eabi.patch \
-    file://CVE-2020-14367.patch \
 "
 
 SRC_URI_append_libc-musl = " \
     file://0001-Fix-compilation-with-musl.patch \
 "
-SRC_URI[md5sum] = "5f66338bc940a9b51eede8f391e7bed3"
-SRC_URI[sha256sum] = "4e02795b1260a4ec51e6ace84149036305cc9fc340e65edb9f8452aa611339b5"
+SRC_URI[sha256sum] = "be27ea14c55e7a4434b2fa51d53018c7051c42fa6a3198c9aa6a1658bae0c625"
 
 DEPENDS = "pps-tools"
 
@@ -82,6 +80,10 @@ DISABLE_STATIC = ""
 do_configure() {
     ./configure --sysconfdir=${sysconfdir} --bindir=${bindir} --sbindir=${sbindir} \
                 --localstatedir=${localstatedir} --datarootdir=${datadir} \
+                --with-ntp-era=$(shell date -d '1970-01-01 00:00:00+00:00' +'%s') \
+                --with-pidfile=/run/chrony/chronyd.pid \
+                --chronyrundir=/run/chrony \
+                --host-system=Linux \
                 ${PACKAGECONFIG_CONFARGS}
 }
 
@@ -107,9 +109,6 @@ do_install() {
     # Variable data (for drift and/or rtc file)
     install -d ${D}${localstatedir}/lib/chrony
 
-    # Log files
-    install -d ${D}${localstatedir}/log/chrony
-
     # Fix hard-coded paths in config files and init scripts
     sed -i -e 's!/var/!${localstatedir}/!g' -e 's!/etc/!${sysconfdir}/!g' \
            -e 's!/usr/sbin/!${sbindir}/!g' -e 's!/usr/bin/!${bindir}/!g' \
@@ -120,7 +119,7 @@ do_install() {
     sed -i 's!^EnvironmentFile=.*!EnvironmentFile=-${sysconfdir}/default/chronyd!' ${D}${systemd_unitdir}/system/chronyd.service
 }
 
-FILES_${PN} = "${sbindir}/chronyd ${sysconfdir} ${localstatedir}"
+FILES_${PN} = "${sbindir}/chronyd ${sysconfdir} ${localstatedir}/lib/chrony ${localstatedir}"
 CONFFILES_${PN} = "${sysconfdir}/chrony.conf"
 INITSCRIPT_NAME = "chronyd"
 INITSCRIPT_PARAMS = "defaults"
