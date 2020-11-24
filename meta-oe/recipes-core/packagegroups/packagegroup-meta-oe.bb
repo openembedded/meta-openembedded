@@ -283,7 +283,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     xerces-c-samples \
     xmlrpc-c \
     yasm \
-    json-schema-validator \    
+    json-schema-validator \
 "
 RDEPENDS_packagegroup-meta-oe-devtools_append_x86 = " cpuid msr-tools pmtools"
 RDEPENDS_packagegroup-meta-oe-devtools_append_x86-64 = " cpuid msr-tools pcimem pmtools"
@@ -299,8 +299,8 @@ RDEPENDS_packagegroup-meta-oe-devtools_remove_mips64el = "luajit nodejs"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc = "android-tools breakpad lshw luajit uftrace"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64 = "android-tools lshw luajit uftrace"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_powerpc64le = "android-tools lshw luajit uftrace"
-RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "breakpad concurrencykit lshw ltrace luajit nodejs ply uftrace"
-RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "breakpad concurrencykit lshw ltrace luajit nodejs ply uftrace"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv64 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
+RDEPENDS_packagegroup-meta-oe-devtools_remove_riscv32 = "breakpad concurrencykit heaptrack lshw ltrace luajit nodejs ply uftrace"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_aarch64 = "${@bb.utils.contains("TUNE_FEATURES", "crypto", "", "abseil-cpp", d)} concurrencykit"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_x86-64 = "${@bb.utils.contains("TUNE_FEATURES", "corei7", "", "abseil-cpp", d)}"
 RDEPENDS_packagegroup-meta-oe-devtools_remove_x86 = "ply"
@@ -951,4 +951,3 @@ RDEPENDS_packagegroup-meta-oe-fortran-packages = "\
 # rsyslog conflicts with syslog-ng so its not included here
 
 EXCLUDE_FROM_WORLD = "1"
-
