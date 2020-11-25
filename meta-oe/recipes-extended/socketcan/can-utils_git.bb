@@ -14,6 +14,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig update-alternatives
 
-ALTERNATIVE_${PN} = "candump cansend"
+ALTERNATIVE_${PN} = "candump cansend cansequence"
 ALTERNATIVE_LINK_NAME[candump] = "${bindir}/candump"
 ALTERNATIVE_LINK_NAME[cansend] = "${bindir}/cansend"
+ALTERNATIVE_LINK_NAME[cansequence] = "${bindir}/cansequence"
