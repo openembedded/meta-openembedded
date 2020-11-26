@@ -3,8 +3,7 @@ HOMEPAGE = "http://code.google.com/p/prettytable"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
 
-SRC_URI[md5sum] = "b5bd0acec56ae7ccf5ac22d3f671c3a7"
-SRC_URI[sha256sum] = "6bb7f539903cb031fecb855b615cbcac8cd245ebc6fa51c6e23ab3386db89771"
+SRC_URI[sha256sum] = "e37acd91976fe6119172771520e58d1742c8479703489321dc1d9c85e7259922"
 
 do_install_append() {
     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
@@ -36,5 +35,5 @@ RDEPENDS_${PN}-ptest += " \
 "
 
 do_install_ptest() {
-	cp -f ${S}/prettytable_test.py ${D}${PTEST_PATH}/
+	cp -f ${S}/tests/test_prettytable.py ${D}${PTEST_PATH}/
 }
