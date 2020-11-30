@@ -5,12 +5,12 @@ LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
 SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz"
-SRC_URI[md5sum] = "0da9e11dcb0ac0149967b0c4d3ed9cfd"
-SRC_URI[sha256sum] = "a041b06907c956dd1c77836cccf4d392af29b9fe09c8ad18449a6da707b5ba2d"
+SRC_URI[md5sum] = "4765470becb619fead3cdaeac61b9a77"
+SRC_URI[sha256sum] = "c601e71846f5ab140c83bc757fdd62a4fda24a9cee39cc5e99c96ec2bf1b06a9"
 
 inherit autotools pkgconfig python3native
 
-PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev glib-2.0 catch2"
 PACKAGECONFIG[cxx] = "--enable-bindings-cxx,--disable-bindings-cxx"
 PACKAGECONFIG[python3] = "--enable-bindings-python,--disable-bindings-python,python3"
 
