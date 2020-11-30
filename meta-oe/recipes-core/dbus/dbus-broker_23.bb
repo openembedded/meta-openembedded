@@ -17,6 +17,8 @@ DEPENDS = "expat systemd"
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'audit', '', d)}"
 
+RDEPENDS_${PN} += "dbus-common"
+
 REQUIRED_DISTRO_FEATURES = "systemd"
 
 SYSTEMD_SERVICE_${PN} = "${BPN}.service"
