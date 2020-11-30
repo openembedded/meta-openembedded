@@ -596,6 +596,7 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
     minicoredumper \
     oprofile \
     spidev-test \
+    trace-cmd \
 "
 RDEPENDS_packagegroup-meta-oe-kernel_append_x86 = " intel-speed-select ipmiutil pm-graph turbostat"
 RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat"
