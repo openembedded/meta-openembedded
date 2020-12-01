@@ -12,10 +12,9 @@ SRC_URI = " \
     https://astron.com/pub/${BPN}/${BP}.tar.gz \
     file://0001-Enable-system-malloc-on-all-linux.patch \
     file://0002-Add-debian-csh-scripts.patch \
-    file://0001-Remove-defining-handle_interrupt-twice.patch \
 "
-SRC_URI[md5sum] = "f34909eab33733aecc05d27adc82277b"
-SRC_URI[sha256sum] = "ed287158ca1b00ba477e8ea57bac53609838ebcfd05fcb05ca95021b7ebe885b"
+SRC_URI[md5sum] = "c9387b7c8cf958956e75b1fa4e59b612"
+SRC_URI[sha256sum] = "be2cfd653d2a0c7f506d2dd14c12324ba749bd484037be6df44a3973f52262b7"
 
 EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}'"
 inherit autotools
