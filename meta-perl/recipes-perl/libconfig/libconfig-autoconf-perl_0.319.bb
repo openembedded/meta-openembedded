@@ -16,8 +16,8 @@ file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=e9e36a9de734199567a4d769498f743d"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "0bea721ad3996e20324b84b3b924ec71"
-SRC_URI[sha256sum] = "33c930feec3003de251ca222abe8bbeb74610ad07f65fc16f27d74d195eeab34"
+SRC_URI[md5sum] = "eeeab8cc93eef7dd2e2c343ecdf247b7"
+SRC_URI[sha256sum] = "304f66cc2653264c0fe127d21669e86d3d18cd72f2574d8f5131beec31a0a33e"
 RDEPENDS_${PN} += "libcapture-tiny-perl"
 RDEPENDS_${PN} += "perl-module-base"
 RDEPENDS_${PN} += "perl-module-carp"
