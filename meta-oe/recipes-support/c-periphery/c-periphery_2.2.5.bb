@@ -9,7 +9,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4097ec544cf01e9c7cfc4bdf8e4ed887"
 
 SRC_URI = "git://github.com/vsergeev/c-periphery;protocol=https"
-SRCREV = "d34077d7ee45fa7d1947cc0174919452fac31597"
+SRCREV = "513f5edbcf2f2ec5c0cd711d1cc312eb2d753f1b"
 
 S = "${WORKDIR}/git"
 
