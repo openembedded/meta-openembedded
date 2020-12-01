@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cd6e590282010ce90a94ef25dd31410f"
 
 SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https"
 
-SRCREV = "f5593aa11584faa691c81b4898f0aaded47f8bf7"
+SRCREV = "45720028e69f09d1bec3c6a2af802ae2b06feb6e"
 S = "${WORKDIR}/git"
 
 DEPENDS = "\
