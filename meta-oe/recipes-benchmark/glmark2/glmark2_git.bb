@@ -1,8 +1,8 @@
 SUMMARY = "OpenGL (ES) 2.0 benchmark"
 DESCRIPTION = "glmark2 is a benchmark for OpenGL (ES) 2.0. \
 It uses only the subset of the OpenGL 2.0 API that is compatible with OpenGL ES 2.0."
-HOMEPAGE = "https://launchpad.net/glmark2"
-BUGTRACKER = "https://bugs.launchpad.net/glmark2"
+HOMEPAGE = "https://github.com/glmark2/glmark2"
+BUGTRACKER = "https://github.com/glmark2/glmark2/issues"
 
 LICENSE = "GPLv3+ & SGIv1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
