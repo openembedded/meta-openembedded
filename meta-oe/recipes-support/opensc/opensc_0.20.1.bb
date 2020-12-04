@@ -9,10 +9,10 @@ eID cards have also been confirmed to work."
 HOMEPAGE = "http://www.opensc-project.org/opensc/"
 SECTION = "System Environment/Libraries"
 LICENSE = "LGPLv2+"
-LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 
-#v0.19.0
-SRCREV = "45e29056ccde422e70ed3585084a7f150c632515"
+#v0.21.0
+SRCREV = "30180986a08cf71fe4af4b50251a8bb5b1ab95af"
 SRC_URI = "git://github.com/OpenSC/OpenSC \
           "
 DEPENDS = "virtual/libiconv openssl"
