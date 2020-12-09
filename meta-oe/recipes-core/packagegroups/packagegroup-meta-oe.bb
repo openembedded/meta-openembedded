@@ -87,6 +87,7 @@ RDEPENDS_packagegroup-meta-oe-bsp ="\
     acpitool \
     cpufrequtils \
     edac-utils \
+    firmwared \
     flashrom \
     irda-utils \
     lmsensors-config-cgi \
