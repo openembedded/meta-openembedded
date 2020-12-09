@@ -18,13 +18,15 @@ understand what the code does. It features:                          \
 HOMEPAGE = "https://tls.mbed.org/"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 SECTION = "libs"
 
-SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
-SRC_URI[md5sum] = "1f629a43c166de2eca808f3e30aa961d"
-SRC_URI[sha256sum] = "66455e23a6190a30142cdc1113f7418158839331a9d8e6b0778631d077281770"
+S = "${WORKDIR}/git"
+SRCREV = "523f0554b6cdc7ace5d360885c3f5bbcc73ec0e8"
+SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development \
+           file://fix-incorrect-EOF-check-in-ssl_context_info.patch \
+"
 
 inherit cmake
 
