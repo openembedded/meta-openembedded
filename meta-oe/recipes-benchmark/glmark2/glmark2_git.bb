@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
 DEPENDS = "libpng jpeg udev"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-native', '', d)}"
 
-PV = "2020.11+${SRCPV}"
+PV = "20201114+${SRCPV}"
 
 SRC_URI = " \
     git://github.com/glmark2/glmark2.git;protocol=https \
@@ -26,9 +26,10 @@ inherit waf pkgconfig features_check
 
 ANY_OF_DISTRO_FEATURES = "opengl dispmanx"
 
-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gles2 drm-gles2', '', d)} \
-                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2 drm-gles2', '', d)} \
+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gles2', '', d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gles2', '', d)} \
                   ${@bb.utils.contains('DISTRO_FEATURES', 'dispmanx', 'dispmanx', '', d)} \
+                  drm-gles2 \
                  "
 
 PACKAGECONFIG[x11-gl] = ",,virtual/libgl virtual/libx11"
