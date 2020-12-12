@@ -79,3 +79,5 @@ do_install () {
     sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
     install -Dpm 644 etc/reader.conf ${D}${sysconfdir}/reader.conf.d/openct.conf
 }
+
+BBCLASSEXTEND = "native"
