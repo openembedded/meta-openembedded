@@ -46,7 +46,6 @@ FILES_${PN} += " \
     ${nonarch_base_libdir}/udev \
     ${libdir}/openct-ifd.so \
     ${libdir}/pcsc \
-    /run/openct/status \
 "
 
 FILES_${PN}-dbg += " \
@@ -79,10 +78,4 @@ do_install () {
     so=$(find ${D} -name \*.so | sed "s|^${D}||")
     sed -i -e 's|\\(LIBPATH\\s*\\).*|\\1$so|' etc/reader.conf
     install -Dpm 644 etc/reader.conf ${D}/etc/reader.conf.d/openct.conf
-
-    install -dm 755 ${D}${localstatedir}/run/openct
-    touch ${D}${localstatedir}/run/openct/status
-    chmod 644 ${D}${localstatedir}/run/openct/status
-
-    rm -r ${D}/${localstatedir}/run
 }
