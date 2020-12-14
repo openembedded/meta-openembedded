@@ -18,9 +18,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://riscv32.patch \
            file://ilp32.patch \
            "
-
-SRC_URI[md5sum] = "70113b4b8ea7ee4c7e148be62b5d1e0b"
-SRC_URI[sha256sum] = "04fa1fddc39bd1aecb6739dd5dd73858a3515b427acd1e2947a66dadce868d68"
+SRC_URI[sha256sum] = "dc2bdcf81c620e9f09cfd12e85d3bc631c897b2db7a55218fd8a65eaa37f86dd"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
