@@ -179,6 +179,7 @@ RDEPENDS_packagegroup-meta-oe-core = "\
     sdbus-c++ \
     toybox \
     usleep \
+    dbus-cxx \
 "
 RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " glfw"
 RDEPENDS_packagegroup-meta-oe-core_remove_riscv64 = "safec"
