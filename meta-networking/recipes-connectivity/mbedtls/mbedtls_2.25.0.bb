@@ -23,10 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "523f0554b6cdc7ace5d360885c3f5bbcc73ec0e8"
-SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development \
-           file://fix-incorrect-EOF-check-in-ssl_context_info.patch \
-"
+SRCREV = "1c54b5410fd48d6bcada97e30cac417c5c7eea67"
+SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development"
 
 inherit cmake
 
