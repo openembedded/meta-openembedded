@@ -8,8 +8,8 @@ DEPENDS += "pixman-native xorgproto-native libxrandr-native"
 XORG_PN = "xorg-server"
 
 SRC_URI = "${XORG_MIRROR}/individual/xserver/${XORG_PN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "afcae2f46d47c33863cab7fd9db7279a"
-SRC_URI[sha256sum] = "e219f2e0dfe455467939149d7cd2ee53b79b512cc1d2094ae4f5c9ed9ccd3571"
+SRC_URI[md5sum] = "8cf8bd1f33e3736bc8dd279b20a32399"
+SRC_URI[sha256sum] = "977420c082450dc808de301ef56af4856d653eea71519a973c3490a780cb7c99"
 
 S = "${WORKDIR}/${XORG_PN}-${PV}"
 B = "${WORKDIR}/build"
