@@ -10,8 +10,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=d5ee91fb74cbb64223b3693fd64eb169"
 
 SRC_URI = "https://github.com/zeux/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
-SRC_URI[md5sum] = "93540f4644fd4e4b02049554ef37fb90"
-SRC_URI[sha256sum] = "26913d3e63b9c07431401cf826df17ed832a20d19333d043991e611d23beaa2c"
+SRC_URI[md5sum] = "2d0be30b843eb9d1893c1ba9ad334946"
+SRC_URI[sha256sum] = "599eabdf8976aad86ac092a198920d8c127623d1376842bc6d683b12a37fb74f"
 
 UPSTREAM_CHECK_URI = "https://github.com/zeux/${BPN}/releases"
 
