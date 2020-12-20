@@ -157,9 +157,10 @@ do_install() {
     fi
 }
 
-PACKAGES += "${PN}-fstools"
+PACKAGES =+ "${PN}-fstools"
 
-RDEPENDS_${BPN} = "${BPN}-conf bash"
+RDEPENDS_${BPN} = "${BPN}-conf"
+RDEPENDS_${BPN}-fstools = "bash"
 
 FILES_${PN}-fstools = "\
     ${bindir}/ext2simg \
