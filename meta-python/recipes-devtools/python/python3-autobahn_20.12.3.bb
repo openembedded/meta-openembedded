@@ -1,10 +1,10 @@
 DESCRIPTION = "WebSocket client & server library, WAMP real-time framework"
-
+HOMEPAGE = "http://crossbar.io/autobahn"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
 
-SRC_URI[md5sum] = "1ea21f5e751517a71f605eaaff7f0c38"
-SRC_URI[sha256sum] = "86bbce30cdd407137c57670993a8f9bfdfe3f8e994b889181d85e844d5aa8dfb"
+SRC_URI[md5sum] = "0a465e218d904f63537092b155489468"
+SRC_URI[sha256sum] = "410a93e0e29882c8b5d5ab05d220b07609b886ef5f23c0b8d39153254ffd6895"
 
 inherit pypi setuptools3
 
