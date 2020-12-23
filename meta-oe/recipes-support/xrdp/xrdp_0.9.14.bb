@@ -10,15 +10,15 @@ DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native"
 
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
-SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
+SRC_URI = "git://github.com/neutrinolabs/xrdp.git;branch=devel \
            file://xrdp.sysconfig \
            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
            file://0001-Fix-the-compile-error.patch \
+           file://0001-riscv-doesn-t-require-pointers-to-be-aligned.patch \
+           file://0001-correct-the-location-of-errno.h.patch \
+           file://0001-Fixed-compiler-warnings-about-snprintf-truncations.patch \
            "
-
-SRCREV = "1e4b03eb3c9aa7173de251a328c93c073dcc0fca"
-
-PV = "0.9.11"
+SRCREV = "1469d659dbccd6d042ac44f0afc4e1309788dc9d"
 
 S = "${WORKDIR}/git"
 
@@ -52,15 +52,15 @@ do_compile_prepend() {
 
 
 do_install_append() {
-	install -d ${D}${sysconfdir} 
+	install -d ${D}${sysconfdir}
 	install -d ${D}${sysconfdir}/xrdp
 	install -d ${D}${sysconfdir}/xrdp/pam.d
 	install -d ${D}${sysconfdir}/sysconfig/xrdp
-   
+
 	# deal with systemd unit files
 	install -d ${D}${systemd_unitdir}/system
 	install -m 0644 ${S}/instfiles/xrdp.service.in ${D}${systemd_unitdir}/system/xrdp.service
-	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service 
+	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service
 	sed -i -e 's,@localstatedir@,${localstatedir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
 	sed -i -e 's,@sysconfdir@,${sysconfdir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
@@ -70,7 +70,6 @@ do_install_append() {
 	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${S}/xrdp/xrdp.ini.in ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${S}/xrdp/xrdp_keyboard.ini ${D}${sysconfdir}/xrdp/
-	install -m 0644 ${S}/instfiles/xrdp.sh ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${S}/keygen/openssl.conf ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${WORKDIR}/xrdp.sysconfig ${D}${sysconfdir}/sysconfig/xrdp/
 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
@@ -92,6 +91,6 @@ pkg_postinst_${PN}() {
 			-out ${sysconfdir}/xrdp/cert.pem \
 			-config ${sysconfdir}/xrdp/openssl.conf >/dev/null 2>&1
 			chmod 400 ${sysconfdir}/xrdp/key.pem
-		fi			
+		fi
         fi
 }
