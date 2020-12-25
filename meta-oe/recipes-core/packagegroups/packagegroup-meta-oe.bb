@@ -886,6 +886,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     liburing \
     zbar \
     libmicrohttpd \
+    yaml-cpp \
 "
 RDEPENDS_packagegroup-meta-oe-support_append_armv7a = " ne10"
 RDEPENDS_packagegroup-meta-oe-support_append_armv7ve = " ne10"
