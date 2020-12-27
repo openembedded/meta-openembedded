@@ -367,6 +367,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
      canutils \
      libsocketcan \
      libconfig \
+     linuxconsole \
      uml-utilities \
      libidn \
      libqb \
