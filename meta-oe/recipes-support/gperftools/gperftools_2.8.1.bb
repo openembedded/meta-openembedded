@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gperftools/gperftools"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
-SRCREV = "180bfa10d7cb38e8b3784d60943d50e8fcef0dcb"
+SRCREV = "d8eb315fb18f6fb0d6efa923401f166343727bc6"
 SRC_URI = "git://github.com/gperftools/gperftools \
            file://0001-Support-Atomic-ops-on-clang.patch \
            file://0001-fix-build-with-musl-libc.patch \
