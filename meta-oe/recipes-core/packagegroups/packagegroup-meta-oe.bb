@@ -449,6 +449,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnfdragora", "", d)} \
     fontforge \
     fbida \
+    feh \
     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "freeglut", "", d)} \
     ftgl \
     fvwm \
