@@ -454,6 +454,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     fvwm \
     gtkperf \
     gphoto2 \
+    imlib2 \
     libgphoto2 \
     graphviz \
     gtkwave \
