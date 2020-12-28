@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=f9d20a453221a1b7e32ae84694da2c37"
 
-SRCREV = "42c1aefc303fdf891fbb099ea51f00dca83ab606"
+SRCREV = "ab8a2cc330253321be7bc69dea88bfaa3d48415e"
 
 SRC_URI = "\
     git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/bridge-utils.git \
