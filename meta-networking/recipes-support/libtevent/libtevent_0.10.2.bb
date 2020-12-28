@@ -9,12 +9,11 @@ RDEPENDS_python3-tevent = "python3"
 SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
            file://options-0.10.0.patch \
            file://0001-libtevent-fix-musl-libc-compile-error.patch \
-           file://0001-waf-add-support-of-cross_compile.patch \
 "
 LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b85a"
 
-SRC_URI[md5sum] = "1060eb69d6994a847eecb73c4d391ced"
-SRC_URI[sha256sum] = "79a4da68b38b86ac71d8ac824ee3605ab22a6a91cfa83033a7db73f3dd6910b6"
+SRC_URI[md5sum] = "105c7a4dbb96f1751eb27dfd05e7fa84"
+SRC_URI[sha256sum] = "f8427822e5b2878fb8b28d6f50d96848734f3f3130612fb574fdd2d2148a6696"
 
 inherit waf-samba
 
