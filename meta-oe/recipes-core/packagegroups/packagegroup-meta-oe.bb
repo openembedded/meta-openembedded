@@ -463,6 +463,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     libforms \
     lxdm \
     numlockx \
+    obconf \
     openbox \
     packagegroup-fonts-truetype \
     qrencode \
