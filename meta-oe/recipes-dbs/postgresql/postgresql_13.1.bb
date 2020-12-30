@@ -8,4 +8,4 @@ SRC_URI += "\
    file://0001-Improve-reproducibility.patch \
 "
 
-SRC_URI[sha256sum] = "bee93fbe2c32f59419cb162bcc0145c58da9a8644ee154a30b9a5ce47de606cc"
+SRC_URI[sha256sum] = "12345c83b89aa29808568977f5200d6da00f88a035517f925293355432ffe61f"
