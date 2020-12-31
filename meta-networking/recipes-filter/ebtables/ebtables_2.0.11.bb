@@ -12,6 +12,7 @@ RRECOMMENDS_${PN} += "kernel-module-ebtables \
     "
 
 SRC_URI = "http://ftp.netfilter.org/pub/ebtables/ebtables-${PV}.tar.gz \
+           file://0001-Makefile.am-do-not-install-etc-ethertypes.patch \
            file://ebtables-legacy-save \
            file://ebtables.common \
            file://ebtables.service \
@@ -25,9 +26,6 @@ SRC_URI[sha256sum] = "b71f654784a726329f88b412ef7b96b4e5d786ed2bd28193ed7b4c0d67
 inherit systemd autotools
 
 do_install_append () {
-	#This file has been provided by netbase
-	rm -f ${D}${sysconfdir}/ethertypes
-
 	# Replace upstream ebtables-save perl script with Fedora bash based rewrite
 	# http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
 	rm -f ${D}${sbindir}/ebtables-legacy-save
