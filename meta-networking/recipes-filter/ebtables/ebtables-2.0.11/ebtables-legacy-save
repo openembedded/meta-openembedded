@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EBTABLES="/sbin/ebtables"
+EBTABLES="/usr/sbin/ebtables-legacy"
 
 [ -x "$EBTABLES" ] || exit 1
 

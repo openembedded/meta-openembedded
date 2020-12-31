@@ -28,11 +28,11 @@ do_install_append () {
 	#This file has been provided by netbase
 	rm -f ${D}${sysconfdir}/ethertypes
 
-	install -d ${D}${base_sbindir}
 	# Replace upstream ebtables-save perl script with Fedora bash based rewrite
 	# http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
-	install -m 0755 ${WORKDIR}/ebtables-legacy-save ${D}${base_sbindir}/ebtables-legacy-save
-	sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${base_sbindir}/ebtables-legacy-save
+	rm -f ${D}${sbindir}/ebtables-legacy-save
+	install -m 0755 ${WORKDIR}/ebtables-legacy-save ${D}${sbindir}/ebtables-legacy-save
+
 	# Install systemd service files
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
 		install -d ${D}${systemd_unitdir}/system
