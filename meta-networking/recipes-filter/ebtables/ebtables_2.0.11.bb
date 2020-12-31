@@ -13,6 +13,7 @@ RRECOMMENDS_${PN} += "kernel-module-ebtables \
 
 SRC_URI = "http://ftp.netfilter.org/pub/ebtables/ebtables-${PV}.tar.gz \
            file://ebtables-legacy-save \
+           file://ebtables.common \
            file://ebtables.service \
            "
 
@@ -33,9 +34,12 @@ do_install_append () {
 	install -m 0755 ${WORKDIR}/ebtables-legacy-save ${D}${base_sbindir}/ebtables-legacy-save
 	sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${base_sbindir}/ebtables-legacy-save
 	# Install systemd service files
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/ebtables.service ${D}${systemd_unitdir}/system
-	sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/ebtables.service
+	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+		install -d ${D}${systemd_unitdir}/system
+		install -m 0644 ${WORKDIR}/ebtables.service ${D}${systemd_unitdir}/system
+		sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/ebtables.service
+		install -m 0755 ${WORKDIR}/ebtables.common ${D}${sbindir}/ebtables.common
+	fi
 }
 
 do_configure_prepend () {
