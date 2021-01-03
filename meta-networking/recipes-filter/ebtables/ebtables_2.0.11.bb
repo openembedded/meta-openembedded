@@ -38,6 +38,9 @@ do_install_append () {
 		sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/ebtables.service
 		install -m 0755 ${WORKDIR}/ebtables.common ${D}${sbindir}/ebtables.common
 	fi
+
+	install -d ${D}${base_sbindir}
+	ln -sf ${sbindir}/ebtables-legacy ${D}${base_sbindir}/ebtables
 }
 
 do_configure_prepend () {
