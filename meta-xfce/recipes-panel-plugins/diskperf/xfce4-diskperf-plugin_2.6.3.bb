@@ -6,5 +6,4 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
 inherit xfce-panel-plugin
 
 SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2"
-SRC_URI[md5sum] = "538119ea97a217695b297e2d165b305f"
-SRC_URI[sha256sum] = "fd2e9843da5822de96a7829e50ba496c34a50fb8492d5b5f792558c6b7ce9644"
+SRC_URI[sha256sum] = "73b1ea2deb2403287337e8521d21345fb2f88445f9030732fa28f1bfa5d51c59"
