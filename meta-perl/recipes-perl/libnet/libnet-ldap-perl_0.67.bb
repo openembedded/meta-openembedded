@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=5;md5=4d6588c2fa0d38ae162f
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/M/MA/MARSCHAP/perl-ldap-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "c4c1ae9299cd488e75c1b82904458bef"
-SRC_URI[sha256sum] = "09263ce6166e80c98d689d41d09995b813389fd069b784601f6dc57f8e2b4102"
+SRC_URI[md5sum] = "a949a2bab07b44cc043b965485fe493a"
+SRC_URI[sha256sum] = "19a2f7f7959fe23d16367475772c325109f8604d2949e34b96dddb2dfa031170"
 
 S = "${WORKDIR}/perl-ldap-${PV}"
 
