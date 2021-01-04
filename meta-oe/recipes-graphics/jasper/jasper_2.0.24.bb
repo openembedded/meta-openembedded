@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
 
 SRC_URI = "git://github.com/jasper-software/jasper.git;protocol=https"
-SRCREV = "cc02d63dde901e06d1f866984fd0e80601deaa13"
+SRCREV = "9a2835a81ce9c41a48f36dadce79f110da8d6c75"
 
 S = "${WORKDIR}/git"
 
