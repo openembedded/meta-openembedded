@@ -12,7 +12,7 @@ DEPENDS = "glib-2.0 dbus json-glib libsoup-2.4 intltool-native"
 
 inherit meson pkgconfig gtk-doc gobject-introspection vala
 
-SRCREV = "555d676a91494b98ad0d52639590608a9594a8d3"
+SRCREV = "3bb60dd600a8b247fd6049e7e5b1c73c2c5fc0e8"
 SRC_URI = "git://gitlab.freedesktop.org/geoclue/geoclue.git;protocol=https;nobranch=1"
 
 S = "${WORKDIR}/git"
