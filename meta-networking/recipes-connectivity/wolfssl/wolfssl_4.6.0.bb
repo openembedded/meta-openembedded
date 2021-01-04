@@ -13,9 +13,8 @@ PROVIDES += "cyassl"
 RPROVIDES_${PN} = "cyassl"
 
 SRC_URI = "git://github.com/wolfSSL/wolfssl.git;protocol=https \
-           file://0001-Make-ByteReverseWords-available-for-big-and-little-e.patch \
 "
-SRCREV = "0fa5af9929ce2ee99e8789996a3048f41a99830e"
+SRCREV = "9c87f979a7f1d3a6d786b260653d566c1d31a1c4"
 S = "${WORKDIR}/git"
 
 inherit autotools
