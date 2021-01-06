@@ -34,7 +34,6 @@ RRECOMMENDS_${PN} = " \
     xfce4-systemload-plugin \
     xfce4-time-out-plugin \
     xfce4-timer-plugin \
-    xfce4-embed-plugin \
     xfce4-weather-plugin \
     xfce4-fsguard-plugin \
     xfce4-battery-plugin \
