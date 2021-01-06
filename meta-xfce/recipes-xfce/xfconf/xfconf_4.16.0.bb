@@ -4,12 +4,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 DEPENDS = "libxfce4util perl intltool-native xfce4-dev-tools-native"
 
-inherit xfce gtk-doc gobject-introspection
+inherit xfce gtk-doc gobject-introspection bash-completion
 
 EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
 
-SRC_URI[md5sum] = "25c32ed08a43e81f7900c03601dffc02"
-SRC_URI[sha256sum] = "589052a0efc6151c5fb5f438da463502a4fd91848cae7b9376d417be4c5a0c02"
+SRC_URI[sha256sum] = "652a119007c67d9ba6c0bc7a740c923d33f32d03dc76dfc7ba682584e72a5425"
 
 FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
                 ${libdir}/gio/modules/libxfconfgsettingsbackend.so \
