@@ -8,7 +8,6 @@ inherit xfce features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[md5sum] = "03b226a2ee20f95243e74d1868e94e0e"
-SRC_URI[sha256sum] = "7ec175d4954fceb2e76cbfbca76ac4a4f53fe799d097a14117e7de68e88a4d98"
+SRC_URI[sha256sum] = "37b92aaaeeec8220ed23163cf89321168d3b49e0c48b4c10f12dc4a21fdf0954"
 
 FILES_${PN} += "${datadir}/metainfo"
