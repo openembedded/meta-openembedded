@@ -2,17 +2,14 @@ SUMMARY = "Xfce4 settings"
 SECTION = "x11/wm"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-DEPENDS = "exo exo-native garcon libxi virtual/libx11 xrandr libxcursor libxklavier upower"
+DEPENDS = "exo garcon libxi virtual/libx11 xrandr libxcursor libxklavier upower"
 
-inherit xfce features_check
+inherit xfce features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += " \
-    file://0001-xsettings.xml-Set-default-themes.patch \
-"
-SRC_URI[md5sum] = "fe8f7d4221be1467b85c8539344c3f07"
-SRC_URI[sha256sum] = "cab1a4d5351f9871533700523570f86f92bbe6e4055f44e5df950eb4b4f48bb3"
+SRC_URI += "file://0001-xsettings.xml-Set-default-themes.patch"
+SRC_URI[sha256sum] = "67a1404fc754c675c6431e22a8fe0e5d79644fdfadbfe25a4523d68e1442ddc2"
 
 EXTRA_OECONF += "--enable-maintainer-mode --disable-debug"
 
