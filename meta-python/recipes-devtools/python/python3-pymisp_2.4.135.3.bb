@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
-SRC_URI[md5sum] = "00e258da18f59845687f58389a2e8e12"
-SRC_URI[sha256sum] = "4a2a8a4da78c6321550522d5cf1575c095773d0867c0a4f5157a658f6e1994d5"
+SRC_URI[sha256sum] = "f0bbdd77358223ba75c9cc40f192c7a2a7a5838bdd08b28381f71d220151ea8a"
 
 inherit pypi setuptools3
 
