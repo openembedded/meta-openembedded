@@ -8,11 +8,9 @@ DEPENDS = "libpng tiff lcms zlib"
 SRC_URI = " \
     git://github.com/uclouvain/openjpeg.git \
     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-    file://CVE-2020-6851.patch \
-    file://CVE-2020-8112.patch \
-    file://CVE-2020-15389.patch \
+    file://0001-This-patch-fixed-include-dir-to-usr-include-.-Obviou.patch \
 "
-SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
+SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
 S = "${WORKDIR}/git"
 
 inherit cmake
