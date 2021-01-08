@@ -5,10 +5,8 @@ SECTION = "libs"
 DEPENDS = "libnl"
 RDEPENDS_${PN} = "bash perl"
 
-BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
-SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
-           "
-SRCREV = "7a4f9ad9a1d906c5f2bbb18b588309c3d12460ac"
+SRC_URI = "git://github.com/linux-rdma/rdma-core.git"
+SRCREV = "e66ca0832e58dafac7af7ad9e6799eaef438061a"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
