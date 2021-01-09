@@ -9,23 +9,25 @@ DEPENDS = "ncurses"
 SRC_URI = "git://github.com/htop-dev/htop.git \
            file://0001-Use-pkg-config.patch \
            "
-SRCREV = "dace850fa6e27b5626115b366059258cfe4d60c9"
+SRCREV = "0b989ee38ce37eb4a50265faa11df2bd7ed8e5c3"
 
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-PACKAGECONFIG ??= "cgroup \
-                   taskstats \
-                   unicode \
-                   linux-affinity \
-                   delayacct"
+PACKAGECONFIG ??= " \
+    unicode \
+    linux-affinity \
+    delayacct \
+"
 PACKAGECONFIG[openvz] = "--enable-openvz,--disable-openvz"
-PACKAGECONFIG[cgroup] = "--enable-cgroup,--disable-cgroup"
 PACKAGECONFIG[vserver] = "--enable-vserver,--disable-vserver"
-PACKAGECONFIG[taskstats] = "--enable-taskstats,--disable-taskstats"
+PACKAGECONFIG[ancient-vserver] = "--enable-ancient-vserver,--disable-ancient-vserver"
 PACKAGECONFIG[unicode] = "--enable-unicode,--disable-unicode"
-PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinity"
 PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc"
+PACKAGECONFIG[linux-affinity] = "--enable-linux-affinity,--disable-linux-affinity"
 PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
 PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
+PACKAGECONFIG[sensors] = "--with-sensors,--without-sensors,lmsensors,lmsensors-libsensors"
+
+FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/htop.svg"
