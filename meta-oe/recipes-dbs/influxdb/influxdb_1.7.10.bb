@@ -22,6 +22,8 @@ SRC_URI = "\
     file://influxdb.conf \
 "
 
+SRC_URI_append_mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
+
 SRCREV = "c958f436b2e538a88a7815aad721c7774a0b8f63"
 
 inherit go-mod systemd update-rc.d useradd
