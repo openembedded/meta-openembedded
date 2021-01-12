@@ -20,12 +20,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection upstream-version-is-even gettext mime-xdg gtk-doc
 
-SRC_URI[archive.md5sum] = "a7ebf1f76552579be71fc63947a15297"
-SRC_URI[archive.sha256sum] = "65d61a423e3fbbe07001f65e87422dfb7d2e42b9edf0ca6a1d427af9a04b8f32"
-SRC_URI += " \
-    file://0001-Add-format-attribute-to-_synctex_malloc.patch \
-    file://0002-add-a-formatting-attribute-check.patch \
-"
+SRC_URI[archive.sha256sum] = "26df897a417545b476d2606b14731122e84278ae994bd64ea535449c3cf01948"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
