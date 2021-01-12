@@ -11,5 +11,4 @@ inherit gnomebase gettext features_check gobject-introspection
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.md5sum] = "f11c2e0cde10d5224a942b1e13d598b2"
-SRC_URI[archive.sha256sum] = "f9656bdd4278aabfb8554f029049b9ffaf51b53faa463483a840365463355df1"
+SRC_URI[archive.sha256sum] = "820545bb4cf87ecebc2c3638d6b6e58b8dbd60a419a9b43cf020124e5dad7078"
