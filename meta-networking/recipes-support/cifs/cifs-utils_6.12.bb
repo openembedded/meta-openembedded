@@ -4,7 +4,7 @@ SECTION = "otherosfs"
 LICENSE = "GPLv3 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "ded4e81796a18cde73329e838357f084aa05720f"
+SRCREV = "73008e3292e4d46fde3eab5d5f618886210ec4a1"
 SRC_URI = "git://git.samba.org/cifs-utils.git"
 
 S = "${WORKDIR}/git"
@@ -19,10 +19,6 @@ PACKAGECONFIG[cifsupcall] = "--enable-cifsupcall,--disable-cifsupcall,krb5 libta
 PACKAGECONFIG[cifsidmap] = "--enable-cifsidmap,--disable-cifsidmap,keyutils samba"
 PACKAGECONFIG[cifsacl] = "--enable-cifsacl,--disable-cifsacl,samba"
 PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disable-pam,libpam keyutils"
-
-SRC_URI += " \
-            file://0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch \
-            "
 
 inherit autotools pkgconfig
 
