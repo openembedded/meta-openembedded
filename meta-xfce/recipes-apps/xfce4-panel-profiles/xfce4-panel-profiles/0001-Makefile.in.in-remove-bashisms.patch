@@ -1,0 +1,36 @@
+Makefile.in.in: remove bashisms
+
+The brace expansion is bash specific and fails with dash.
+
+Upstream-Status: Pending [No permission to folk repo and create pull request]
+
+https://gitlab.xfce.org/apps/xfce4-panel-profiles
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ Makefile.in.in | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/Makefile.in.in b/Makefile.in.in
+index 73338f4..28a6c7b 100644
+--- a/Makefile.in.in
++++ b/Makefile.in.in
+@@ -74,11 +74,10 @@ install: all xfce4-panel-profiles.1
+ 	install -d $(DESTDIR)/$(MANDIR)/man1
+ 	install xfce4-panel-profiles.1 $(DESTDIR)/$(MANDIR)/man1
+ 	
+-	install -d $(DESTDIR)/$(PREFIX)/share/icons/hicolor/{128x128,48x48,16x16,scalable}/apps
+-	install data/icons/128x128/org.xfce.PanelProfiles.png $(DESTDIR)/$(PREFIX)/share/icons/hicolor/128x128/apps
+-	install data/icons/48x48/org.xfce.PanelProfiles.png $(DESTDIR)/$(PREFIX)/share/icons/hicolor/48x48/apps
+-	install data/icons/16x16/org.xfce.PanelProfiles.png $(DESTDIR)/$(PREFIX)/share/icons/hicolor/16x16/apps
+-	install data/icons/scalable/org.xfce.PanelProfiles.svg $(DESTDIR)/$(PREFIX)/share/icons/hicolor/scalable/apps
++	install -D data/icons/128x128/org.xfce.PanelProfiles.png -t $(DESTDIR)/$(PREFIX)/share/icons/hicolor/128x128/apps
++	install -D data/icons/48x48/org.xfce.PanelProfiles.png -t $(DESTDIR)/$(PREFIX)/share/icons/hicolor/48x48/apps
++	install -D data/icons/16x16/org.xfce.PanelProfiles.png -t $(DESTDIR)/$(PREFIX)/share/icons/hicolor/16x16/apps
++	install -D data/icons/scalable/org.xfce.PanelProfiles.svg -t $(DESTDIR)/$(PREFIX)/share/icons/hicolor/scalable/apps
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)/$(PREFIX)/share/applications/org.xfce.PanelProfiles.desktop
+-- 
+2.25.1
+
