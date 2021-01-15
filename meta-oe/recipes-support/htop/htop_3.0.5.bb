@@ -9,7 +9,7 @@ DEPENDS = "ncurses"
 SRC_URI = "git://github.com/htop-dev/htop.git \
            file://0001-Use-pkg-config.patch \
            "
-SRCREV = "0b989ee38ce37eb4a50265faa11df2bd7ed8e5c3"
+SRCREV = "ce6d60e7def146c13d0b8bca4642e7401a0a8995"
 
 S = "${WORKDIR}/git"
 
