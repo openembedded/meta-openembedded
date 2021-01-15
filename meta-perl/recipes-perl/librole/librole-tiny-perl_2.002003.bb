@@ -6,11 +6,11 @@ SECTION = "libs"
 HOMEPAGE = "https://metacpan.org/pod/Role::Tiny"
 
 LICENSE = "Artistic-1.0 | GPL-1.0+"
-LIC_FILES_CHKSUM = "file://README;beginline=182;endline=219;md5=26df7e7c20551fb1906e2286624f0b71"
+LIC_FILES_CHKSUM = "file://README;beginline=197;endline=234;md5=26df7e7c20551fb1906e2286624f0b71"
 
 SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Role-Tiny-${PV}.tar.gz"
-SRC_URI[md5sum] = "98446826608b1e943e65c1f6e35942fe"
-SRC_URI[sha256sum] = "92ba5712850a74102c93c942eb6e7f62f7a4f8f483734ed289d08b324c281687"
+SRC_URI[md5sum] = "065e459cdc3c6e163c6e8359baf69f45"
+SRC_URI[sha256sum] = "6981e5f2d0beded157840199d678da462b22a9a3753333cab322ab6efb0fbb89"
 
 S = "${WORKDIR}/Role-Tiny-${PV}"
 
