@@ -3,19 +3,19 @@ HOMEPAGE = "https://www.dovecot.org/"
 DESCRIPTION = "Dovecot is an open source IMAP and POP3 email server for Linux/UNIX-like systems, written with security primarily in mind. Dovecot is an excellent choice for both small and large installations. It's fast, simple to set up, requires no special administration and it uses very little memory."
 SECTION = "mail"
 LICENSE = "LGPLv2.1 & MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a981379bd0f1c362f8d1d21515e5b30b"
+LIC_FILES_CHKSUM = "file://COPYING;md5=2956560272e5b31d9d64f03111732048"
 
-SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
+SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
            file://0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch \
            file://dovecot.service \
            file://dovecot.socket \
-           file://0001-doveadm-Fix-parallel-build.patch \
+           file://0001-not-check-pandoc.patch \
            "
 
-SRC_URI[md5sum] = "66c4d71858b214afee5b390ee602dee2"
-SRC_URI[sha256sum] = "777c61e264869e9b288b8d6603f4ed3ac3aac9ec573908067353f51269dce2fe"
+SRC_URI[md5sum] = "f512bf1a4dac9ac994fddfb6bc5068ff"
+SRC_URI[sha256sum] = "a3f875b80ec11a452480690108660030978c94fa8e796ad6d943a874b496f1c4"
 
-DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
+DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 LDFLAGS += "-ltirpc"
 
