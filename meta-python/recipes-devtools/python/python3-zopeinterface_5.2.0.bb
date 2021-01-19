@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423
 PYPI_PACKAGE = "zope.interface"
 
 inherit pypi setuptools3
-SRC_URI[sha256sum] = "40e4c42bd27ed3c11b2c983fecfb03356fae1209de10686d03c02c8696a1d90e"
+SRC_URI[sha256sum] = "8251f06a77985a2729a8bdbefbae79ee78567dddc3acbd499b87e705ca59fe24"
 
 PACKAGES =. "${PN}-test "
 
