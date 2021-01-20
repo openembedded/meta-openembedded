@@ -844,6 +844,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     pps-tools \
     raptor2 \
     rdfind \
+    re2 \
     sdparm \
     serial-forward \
     read-edid \
