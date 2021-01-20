@@ -1,14 +1,14 @@
 SUMMARY = "Serial Port Support for Python"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=520e45e59fc2cf94aa53850f46b86436"
 
-SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
-SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
+SRC_URI[sha256sum] = "3c77e014170dfffbd816e6ffc205e9842efb10be9f58ec16d3e8675b4925cddb"
 
 inherit pypi setuptools3 ptest
 
 do_install_append() {
-    rm -f ${D}${bindir}/miniterm.py
+    rm -f ${D}${bindir}/pyserial-miniterm
+    rm -f ${D}${bindir}/pyserial-ports
     rmdir ${D}${bindir}
 }
 
