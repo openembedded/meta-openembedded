@@ -24,10 +24,9 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
            file://0002-use-vorbisidec.patch \
            file://0003-fix-luaL-checkint.patch \
            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
-           file://0005-Fix-build-with-Qt-5.15.patch \
-           file://0001-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
+           file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
 "
-SRC_URI[sha256sum] = "189311d28aa814f106a7b3645211ac52c0b3e2b9f4b348de2f63bab3218086b8"
+SRC_URI[sha256sum] = "eff458f38a92126094f44f2263c2bf2c7cdef271b48192d0fe7b1726388cf879"
 
 inherit autotools features_check gettext pkgconfig mime-xdg
 
