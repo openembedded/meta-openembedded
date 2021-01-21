@@ -6,7 +6,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 --- a/meson.build
 +++ b/meson.build
 @@ -114,7 +114,7 @@ config_h.set10('HAVE_GETRANDOM', use_sys
- # FIXME secure_getenv check is not useful?
+                                                                                      #include <sys/wait.h>'''))
  config_h.set('HAVE_SECURE_GETENV', cc.has_function('secure_getenv'))
  config_h.set('HAVE___SECURE_GETENV', cc.has_function('__secure_getenv'))
 -config_h.set10('HAVE_DECL_REALLOCARRAY', cc.has_function('reallocarray', prefix: '#include <malloc.h>'))
