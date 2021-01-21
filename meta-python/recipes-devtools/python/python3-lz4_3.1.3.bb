@@ -8,7 +8,7 @@ DEPENDS += " \
     ${PYTHON_PN}-pkgconfig-native \
 "
 
-SRC_URI[sha256sum] = "1ac354804cb2d5fb3d213857a6bf8590a301ef051cc16fbb4938bd2d6e524bda"
+SRC_URI[sha256sum] = "081ef0a3b5941cb03127f314229a1c78bd70c9c220bb3f4dd80033e707feaa18"
 
 inherit pypi setuptools3
 
