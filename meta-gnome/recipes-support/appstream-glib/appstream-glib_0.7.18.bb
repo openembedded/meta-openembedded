@@ -20,8 +20,7 @@ DEPENDS = " \
 inherit meson gobject-introspection gettext bash-completion
 
 SRC_URI = "https://people.freedesktop.org/~hughsient/${BPN}/releases/${BP}.tar.xz"
-SRC_URI[md5sum] = "67d441fb0fb3e14551b47db656565fc4"
-SRC_URI[sha256sum] = "7ca7e91d4accefa1c0d2c6e310cb3fe2686c017810e23b3f82d9f5724345e549"
+SRC_URI[sha256sum] = "ca1ed22e3bde3912cb903aaa7de085d55771da454f1c0573fd9608e1de9c4002"
 
 EXTRA_OEMESON = " \
     -Drpm=false \
