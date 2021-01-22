@@ -417,6 +417,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-cvxopt \
     python3-jsonpath-rw \
     python3-hexdump \
+    python3-jstyleson \
 "
 
 RDEPENDS_packagegroup-meta-python3-extended = "\
