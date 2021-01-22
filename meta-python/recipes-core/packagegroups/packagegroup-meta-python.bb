@@ -416,6 +416,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-cerberus \
     python3-cvxopt \
     python3-jsonpath-rw \
+    python3-hexdump \
 "
 
 RDEPENDS_packagegroup-meta-python3-extended = "\
