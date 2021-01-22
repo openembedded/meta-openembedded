@@ -2,10 +2,10 @@ SUMMARY = "Easy communication with NetworkManager from Python"
 HOMEPAGE = "https://github.com/seveas/python-networkmanager"
 LICENSE = "Zlib"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=8d8bac174bf8422b151200e6cc78ebe4"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9f8a5b5844f027357ab19ef3e3c6a956"
 
-SRC_URI[md5sum] = "f638d854a3639fb37c0e06d1092a771e"
-SRC_URI[sha256sum] = "aef1e34d98d7bec7cc368e0ca0f2e97493f9b5ebe6d7103f8f6460cfca3dc6fc"
+SRC_URI[md5sum] = "7e05d3ca40a4fa50222ba93cda3d0d02"
+SRC_URI[sha256sum] = "de6eb921d94aba7549f428ed2b3aa482a5d543ecb6965cbaa0fbb555ab31b9d5"
 
 PYPI_PACKAGE = "python-networkmanager"
 inherit pypi setuptools3
