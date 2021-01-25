@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
            file://firewalld.init \
 "
-SRC_URI[sha256sum] = "f982c72d640b0677d510b73d9b05d377b4615c5ef36a3710c62350b39fb62efe"
+SRC_URI[sha256sum] = "5998894db976d77996ca0a6b700a2f4125b9f283465fb255da9bddfb1640cb27"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
-DEPENDS = "intltool-native glib-2.0-native"
+DEPENDS = "intltool-native glib-2.0-native nftables"
 
 inherit gettext autotools bash-completion python3native gsettings systemd update-rc.d
 
@@ -75,7 +75,7 @@ FILES_${PN} += "\
 FILES_${PN}-zsh-completion = "${datadir}/zsh/site-functions"
 
 RDEPENDS_${PN} = "\
-    nftables \
+    nftables-python \
     iptables \
     python3-core \
     python3-io \
@@ -87,5 +87,6 @@ RDEPENDS_${PN} = "\
     python3-slip-dbus \
     python3-decorator \
     python3-pygobject \
-    nftables-python \
+    python3-json \
+    python3-ctypes \
 "
