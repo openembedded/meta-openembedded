@@ -8,7 +8,7 @@ PYPI_PACKAGE = "PyYAML"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "3c49e39ac034fd64fd576d63bb4db53cda89b362768a67f07749d55f128ac18a"
+SRC_URI[sha256sum] = "607774cbba28732bfa802b54baa7484215f530991055bb562efbed5b2f20a45e"
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-datetime \
