@@ -3,9 +3,11 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
-SRC_URI[sha256sum] = "f0bbdd77358223ba75c9cc40f192c7a2a7a5838bdd08b28381f71d220151ea8a"
+SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
+SRCREV = "7b64c1c9a4fec8ed37c1522b31ab56f30b83f0e1"
+S = "${WORKDIR}/git"
 
-inherit pypi setuptools3
+inherit setuptools3
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-dateutil \
