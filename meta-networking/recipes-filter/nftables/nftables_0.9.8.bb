@@ -10,11 +10,11 @@ DEPENDS = "libmnl libnftnl bison-native \
 UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
 
 SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "fe6b8a8c326a2c09c02ca162b840d7d4aadb043ce7a367c166d6455b0e112cb0"
+SRC_URI[sha256sum] = "60fc004656dae4fefc4901c939c9d64120b4dedb49738e420a9a34989f108fe4"
 
 inherit autotools manpages pkgconfig
 
-PACKAGECONFIG ??= "python readline"
+PACKAGECONFIG ??= "python readline json"
 PACKAGECONFIG[json] = "--with-json, --without-json, jansson"
 PACKAGECONFIG[manpages] = "--enable-man-doc, --disable-man-doc, asciidoc-native"
 PACKAGECONFIG[mini-gmp] = "--with-mini-gmp, --without-mini-gmp"
@@ -28,4 +28,4 @@ RRECOMMENDS_${PN} += "kernel-module-nf-tables"
 
 PACKAGES =+ "${PN}-python"
 FILES_${PN}-python = "${nonarch_libdir}/${PYTHON_DIR}"
-RDEPENDS_${PN}-python = "python3-core python3-json"
+RDEPENDS_${PN}-python = "python3-core python3-json ${PN}"
