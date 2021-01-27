@@ -22,7 +22,6 @@ do_install_ptest() {
 	cp -f ${S}/README.md ${D}${PTEST_PATH}
 }
 
-SRC_URI[md5sum] = "8955317ff4e42590c90ba6247b1caaed"
-SRC_URI[sha256sum] = "0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5"
+SRC_URI[sha256sum] = "68a772dc2de6b2b2e83b457329ffa8f9286710994b8070db54348a05762515d2"
 
 BBCLASSEXTEND = "native"
