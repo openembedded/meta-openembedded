@@ -35,6 +35,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-asn1crypto \
     python3-astor \
     python3-astroid \
+    python3-asttokens \
     python3-async-timeout \
     python3-attr \
     python3-autobahn \
@@ -220,6 +221,8 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-msk \
     python3-msm \
     python3-multidict \
+    python3-mypy \
+    python3-mypy-extensions \
     python3-natsort \
     python3-ndg-httpsclient \
     python3-netaddr \
@@ -356,6 +359,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-scrypt \
     python3-sdnotify \
     python3-semver \
+    python3-send2trash \
     python3-sentry-sdk \
     python3-serpent \
     python3-sh \
@@ -400,6 +404,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-twofish \
     python3-txaio \
     python3-txws \
+    python3-typed-ast \
     python3-typeguard \
     python3-typing-extensions \
     python3-tzlocal \
