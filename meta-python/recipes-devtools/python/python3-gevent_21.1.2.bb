@@ -20,8 +20,7 @@ SRC_URI_append = " \
     file://libev-conf.patch;patch=1;pnum=1 \
 "
 
-SRC_URI[md5sum] = "9366ee7eebed48003f8a748568ef1f70"
-SRC_URI[sha256sum] = "5f6d48051d336561ec08995431ee4d265ac723a64bba99cc58c3eb1a4d4f5c8d"
+SRC_URI[sha256sum] = "520cc2a029a9eef436e4e56b007af7859315cafa21937d43c1d5269f12f2c981"
 
 # The python-gevent has no autoreconf ability
 # and the logic for detecting a cross compile is flawed
