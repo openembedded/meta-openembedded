@@ -4,16 +4,19 @@ DESCRIPTION = "Extract data from Excel spreadsheets (.xls and .xlsx,\
 Strong support for Excel dates. Unicode-aware."
 HOMEPAGE = "http://www.python-excel.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5f4244d51fcc1e7cc2d43e96891b2f80"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=00ea1e843a43c20d9b63a8112239b0d1"
 
-SRC_URI[md5sum] = "e5d5b96924d791b22898b622eb3e918e"
-SRC_URI[sha256sum] = "546eb36cee8db40c3eaa46c351e67ffee6eeb5fa2650b71bc4c758a29a1b29b2"
+SRC_URI[sha256sum] = "f72f148f54442c6b056bf931dbc34f986fd0c3b0b6b5a58d013c9aef274d0c88"
 
-SRC_URI += " \
-    file://run-ptest \
+
+SRC_URI = "git://github.com/python-excel/xlrd.git \
+           file://run-ptest \
 "
+SRCREV = "b8d573e11ec149da695d695c81a156232b89a949"
 
-inherit ptest pypi setuptools3
+S = "${WORKDIR}/git"
+
+inherit ptest setuptools3
 
 RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
 
@@ -24,8 +27,6 @@ RDEPENDS_${PN}-ptest += " \
 do_install_ptest() {
     install -d ${D}${PTEST_PATH}/tests
     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-    install -d ${D}${PTEST_PATH}/examples
-    cp -rf ${S}/examples/* ${D}${PTEST_PATH}/examples/
 }
 
 BBCLASSEXTEND = "native nativesdk"
