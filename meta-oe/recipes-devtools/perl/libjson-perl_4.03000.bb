@@ -11,7 +11,7 @@ DEPENDS += "perl"
 
 SRC_URI = "git://github.com/makamaka/JSON.git;protocol=https"
 
-SRCREV = "42a6324df654e92419512cee80c0b49155d9e56d"
+SRCREV = "ebbae181c5e311fa80ee4c6379b598c7a6400570"
 
 S = "${WORKDIR}/git"
 
