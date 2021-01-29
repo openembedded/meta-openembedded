@@ -25,6 +25,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
            file://net-snmp-fix-for-disable-des.patch \
            file://reproducibility-have-printcap.patch \
+           file://0001-ac_add_search_path.m4-keep-consistent-between-32bit.patch \
            "
 SRC_URI[sha256sum] = "04303a66f85d6d8b16d3cc53bde50428877c82ab524e17591dfceaeb94df6071"
 
@@ -128,9 +129,11 @@ do_install_append() {
         -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
         -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
-        -e 's@-L${STAGING_DIR_HOST}${libdir}@@g' \
-        -e 's@-I${STAGING_DIR_HOST}${includedir}@@g' \
+        -e 's@${STAGING_DIR_HOST}@@g' \
         -i ${D}${bindir}/net-snmp-config
+
+    sed -e 's@${STAGING_DIR_HOST}@@g' \
+        -i ${D}${libdir}/pkgconfig/{netsnmp-agent.pc,netsnmp.pc}
 
     if [ "${HAS_PERL}" = "1" ]; then
         sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
