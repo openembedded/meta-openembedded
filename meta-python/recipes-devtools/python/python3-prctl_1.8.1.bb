@@ -5,15 +5,15 @@ limitations in C and linux. This module provides a nice non-messy python(ic) \
 interface."
 SECTION = "devel/python"
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://COPYING;md5=23ff9f50449d4bd0e513df16e4d9755f"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
 
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "57cd0a7cad76e8f8792eea22ee5b5d17bae0a90f"
-PV = "1.7+git${SRCPV}"
+SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
+PV = "1.8.1+git${SRCPV}"
 
-SRC_URI = "git://github.com/seveas/python-prctl;branch=master \
+SRC_URI = "git://github.com/seveas/python-prctl;branch=main\
            file://0001-support-cross-complication.patch \
 "
 inherit setuptools3 python3native
