@@ -53,7 +53,6 @@ CPPFLAGS_append = "\
 
 TARGET_CXXFLAGS_append = " -fPIC"
 
-do_prepare_recipe_sysroot_gettext() {
-        install -m 755 ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${S}/
+do_configure_prepend() {
+    install -m 755 ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${S}/
 }
-addtask do_prepare_recipe_sysroot_gettext after do_prepare_recipe_sysroot before do_configure
