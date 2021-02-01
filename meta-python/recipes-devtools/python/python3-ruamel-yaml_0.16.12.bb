@@ -16,3 +16,5 @@ SRC_URI[sha256sum] = "076cc0bc34f1966d920a49f18b52b6ad559fbe656a0748e3535cf7b3f2
 do_install_prepend() {
     export RUAMEL_NO_PIP_INSTALL_CHECK=1
 }
+
+BBCLASSEXTEND = "native nativesdk"
