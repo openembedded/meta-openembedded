@@ -11,7 +11,7 @@ S = "${WORKDIR}/git"
 
 SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master \
 "
-SRCREV = "50c09e5c4c76757099d686c316b4bf42f72db71b"
+SRCREV = "11980776c5ad757401ea1d12fd1f331d96428105"
 
 FILES_${PN} += "${datadir}/*"
 
