@@ -3,13 +3,13 @@ DESCRIPTION = "cpuid dumps detailed information about the CPU(s) gathered \
 from the CPUID instruction, and also determines the exact model of CPU(s). \
 It supports Intel, AMD, and VIA CPUs, as well as older Transmeta, Cyrix, \
 UMC, NexGen, Rise, and SiS CPUs"
+HOMEPAGE="http://www.etallen.com/cpuid.html"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
            "
-SRC_URI[md5sum] = "daa93ee2fdaf461e515b4713e7337076"
-SRC_URI[sha256sum] = "c1a9463f1f2175086120e9079e318bbd383dc1e574fafb2f724879f1d11061d4"
+SRC_URI[sha256sum] = "13c53f16408341d11ed489b352f218ec4dbb5bedb796a9d059e924770a9c56a6"
 
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 
