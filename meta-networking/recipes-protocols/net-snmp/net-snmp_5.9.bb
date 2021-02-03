@@ -133,7 +133,7 @@ do_install_append() {
         -i ${D}${bindir}/net-snmp-config
 
     sed -e 's@${STAGING_DIR_HOST}@@g' \
-        -i ${D}${libdir}/pkgconfig/{netsnmp-agent.pc,netsnmp.pc}
+        -i ${D}${libdir}/pkgconfig/netsnmp*.pc
 
     if [ "${HAS_PERL}" = "1" ]; then
         sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
