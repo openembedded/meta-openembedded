@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 inherit autotools gobject-introspection
 
 SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch"
-SRCREV = "f5a4ba8bb298f8cbc435707d0b19b4b2ff836a8e"
+SRCREV = "c50869272b54bf4b4bc3825e8c3332a54678b43f"
 S = "${WORKDIR}/git"
 
 FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
@@ -37,4 +37,3 @@ PACKAGECONFIG[kbd] = "--with-kbd,--without-kbd,libbytesize"
 PACKAGECONFIG[mpath] = "--with-mpath,--without-mpath, multipath-tools, lvm2"
 
 export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
-
