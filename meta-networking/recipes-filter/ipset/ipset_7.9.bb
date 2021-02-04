@@ -16,6 +16,6 @@ inherit autotools pkgconfig module-base
 
 EXTRA_OECONF += "-with-kbuild=${KBUILD_OUTPUT} --with-ksource=${STAGING_KERNEL_DIR}"
 
-RRCOMMENDS_${PN} = "\
+RRECOMMENDS_${PN} = "\
     kernel-module-ip-set \
-" 
+"
