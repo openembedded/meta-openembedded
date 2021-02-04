@@ -29,11 +29,10 @@ DEPENDS = "curl \
            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
            nettle \
 "
-SRCREV = "e0e033af9fca3cca84a3417ea6531ae25be73a7a"
-BRANCH = "client_release/7/${PV}"
+SRCREV = "df0239e6f074207798a8ecf1358a74545dda9132"
+BRANCH = "client_release/7/7.16"
 SRC_URI = "git://github.com/BOINC/boinc;protocol=https;branch=${BRANCH} \
            file://boinc-AM_CONDITIONAL.patch \
-           file://opengl_m4_check.patch \
            file://gtk-configure.patch \
 "
 
