@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
 SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
-SRCREV = "7b64c1c9a4fec8ed37c1522b31ab56f30b83f0e1"
+SRCREV = "f675e2096182532bb5870e4f773476b2d8065986"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
