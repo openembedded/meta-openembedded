@@ -11,9 +11,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.keepalived.org/software/${BP}.tar.gz"
-SRC_URI[md5sum] = "27e1cfff5b8dd95062ad415957e663e5"
-SRC_URI[sha256sum] = "d94d7ccbc5c95ab39c95a0e5ae89a25a224f39b6811f2930d3a1885a69732259"
-
+SRC_URI[sha256sum] = "91186f20c83ffc48d7a15a9a6e2329ed4feeb2dcb51f4aa9672c8840190ea741"
 UPSTREAM_CHECK_URI = "https://github.com/acassen/keepalived/releases"
 
 DEPENDS = "libnfnetlink openssl"
