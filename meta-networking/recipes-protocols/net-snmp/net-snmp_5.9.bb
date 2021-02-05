@@ -58,7 +58,6 @@ EXTRA_OECONF = "--enable-shared \
                 --with-install-prefix=${D} \
                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
                 ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
-                --with-openssl=${STAGING_EXECPREFIXDIR} \
                 --with-mib-modules='${MIB_MODULES}' \
 "
 
