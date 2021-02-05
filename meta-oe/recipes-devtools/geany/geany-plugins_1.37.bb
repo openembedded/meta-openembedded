@@ -31,10 +31,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI = " \
     https://plugins.geany.org/${BPN}/${BP}.tar.bz2 \
     file://0001-Use-pkg-config-to-find-gpgme.patch \
-    file://0002-Make-libgit2-version-preprocessor-conditionals-compatible.patch \
 "
-SRC_URI[md5sum] = "91fb4634953702f914d9105da7048a33"
-SRC_URI[sha256sum] = "ebe18dd699292174622e8cb8745b020ada8a5be3b604ab980af36e8518df7ce6"
+SRC_URI[sha256sum] = "c98f9b1303f4ab9bed7587e749cd0b5594d9136a1bf8ba110900d46a17fa9cd8"
 
 do_configure_prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
