@@ -16,7 +16,7 @@ SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz
 # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
 MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
 
-SRC_URI[sha256sum] = "a26a2fb43c56719e5e94bbde7d2c492eb8306aa457a5a08034c6b942c4a3b0d4"
+SRC_URI[sha256sum] = "85ab8d4337d414482586089b6f64fc39af64ff4be5b51976b54b0e10dceb333b"
 
 S = "${WORKDIR}/live"
 
