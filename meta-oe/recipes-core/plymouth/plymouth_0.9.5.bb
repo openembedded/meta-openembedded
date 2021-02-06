@@ -21,8 +21,7 @@ SRC_URI = " \
     file://0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch \
         "
 
-SRC_URI[md5sum] = "4efa5551d230165981b105e7c6a50aa7"
-SRC_URI[sha256sum] = "4a197a4f1a05785d7453dd829b231352fb2d09171bd86c5ffaafbb2dd6791351"
+SRC_URI[md5sum] = "8a25d23f3ae732af300a56fa33cacff2"
 
 EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-documentation \
     --with-logo=${LOGO} \
@@ -41,7 +40,7 @@ PACKAGECONFIG[initrd] = ",,,"
 
 LOGO ??= "${datadir}/plymouth/bizcom.png"
 
-inherit autotools pkgconfig systemd
+inherit autotools pkgconfig systemd gettext
 
 do_install_append() {
     # Remove /var/run from package as plymouth will populate it on startup
