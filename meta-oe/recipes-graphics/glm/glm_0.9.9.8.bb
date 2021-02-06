@@ -6,17 +6,17 @@ HOMEPAGE = "https://glm.g-truc.net"
 BUGTRACKER = "https://github.com/g-truc/glm/issues"
 SECTION = "libs"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://copying.txt;md5=4a735e33f271f57404fda17e80085411"
+LIC_FILES_CHKSUM = "file://copying.txt;md5=462e4b97f73ef12f8171c3c546ce4e8d"
 
 SRC_URI = " \
     git://github.com/g-truc/glm;branch=master \
-    file://0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch \
+    file://0001-Silence-clang-warnings.patch \
     file://glmConfig.cmake.in \
     file://glmConfigVersion.cmake.in \
     file://glm.pc.in \
     file://glmTargets.cmake \
 "
-SRCREV = "4db8f89aace8f04c839b606e15b39fb8383ec732"
+SRCREV = "bf71a834948186f4097caa076cd2663c69a10e1e"
 
 S = "${WORKDIR}/git"
 
