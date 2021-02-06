@@ -4,7 +4,7 @@ DESCRIPTION = "A helper library and tools for Active Directory client operations
 HOMEPAGE = "http://cgit.freedesktop.org/realmd/adcli"
 SECTION = "net"
 
-SRCREV = "cc3ef52884a48863a81acbfc741735fe09cd85f7"
+SRCREV = "1b1528038e084a9f81ea108cffca9c2707623b9c"
 
 SRC_URI = "git://gitlab.freedesktop.org/realmd/adcli;branch=master \
            file://Fixed-build-error-on-musl.patch \
