@@ -9,16 +9,13 @@ inherit features_check autotools pkgconfig perlnative gettext mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "https://download.geany.org/${BP}.tar.bz2"
+SRC_URI = "https://download.geany.org/${BP}.tar.bz2 \
+           file://0001-configure-Upgrade-to-a-modern-Gettext.patch \
+          "
 SRC_URI[sha256sum] = "18c5756444c1d8bcd737c8ecfd4ef0b3607c924fc02560d4e8b78f6121531a18"
 
 FILES_${PN} += "${datadir}/icons"
 
 EXTRA_OECONF = "--disable-html-docs"
-
-do_configure_prepend() {
-        cd ${S}
-        intltoolize --copy --force --automake
-}
 
 RRECOMMENDS_${PN} += "source-code-pro-fonts"
