@@ -20,6 +20,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/libs/klibc/2.0/klibc-${PV}.tar.xz \
            file://0001-klibc-add-getrandom-syscall.patch \
            file://0001-klibc-Kbuild-Accept-EXTRA_KLIBCAFLAGS.patch \
            file://cross-clang.patch \
+           file://0001-workaround-for-overlapping-sections-in-binary.patch \
            "
 
 ARMPATCHES ?= ""
