@@ -12,6 +12,9 @@ SRC_URI = "git://github.com/cisco/libsrtp.git"
 inherit autotools pkgconfig
 
 EXTRA_OEMAKE += "shared_library"
-EXTRA_AUTORECONF += "--exclude=automake"
+
+do_configure_prepend() {
+    cp ${STAGING_DATADIR_NATIVE}/automake-*/ar-lib ${S}
+}
 
 ALLOW_EMPTY_${PN} = "1"
