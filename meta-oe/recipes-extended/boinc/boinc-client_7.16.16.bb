@@ -55,11 +55,12 @@ EXTRA_OECONF += "\
     --without-wxdir \
     --without-x \
     --with-boinc-platform=${TARGET_SYS} \
+    ac_cv_c_undeclared_builtin_options='none' \
 "
 export PKG_CONFIG = "${STAGING_BINDIR_NATIVE}/pkg-config"
 
 do_configure_prepend () {
-	if "${@bb.utils.contains('DEPENDS', 'gtk+', '1', '0', d)}" = "0"
+	if [ "${@bb.utils.contains('DEPENDS', 'gtk+', '1', '0', d)}" = "0" ]
 	then
 		export GTK2_CFLAGS=""
 		export GTK2_LIBS=""
