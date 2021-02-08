@@ -1,4 +1,5 @@
 SUMMARY = "multi-protocol instant messaging client"
+
 SECTION = "x11/network"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
@@ -10,12 +11,11 @@ SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
     file://purple-OE-branding-25.patch \
-    file://pidgin-cross-python-265.patch \
-    file://use_py3.patch \
+    file://0001-configure.ac-fix-build-with-autoconf-2.71.patch \
+    file://0002-configure.ac-disable-few-languages-not-compatible-wi.patch \
 "
 
-SRC_URI[md5sum] = "423403494fe1951e47cc75231f743bb0"
-SRC_URI[sha256sum] = "2747150c6f711146bddd333c496870bfd55058bab22ffb7e4eb784018ec46d8f"
+SRC_URI[sha256sum] = "f132e18d551117d9e46acce29ba4f40892a86746c366999166a3862b51060780"
 
 PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
@@ -34,13 +34,14 @@ PACKAGECONFIG[idn] = "--enable-idn,--disable-idn,libidn"
 PACKAGECONFIG[gtk] = "--enable-gtkui,--disable-gtkui,gtk+"
 PACKAGECONFIG[x11] = "--with-x=yes --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--with-x=no,virtual/libx11"
 PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
-PACKAGECONFIG[consoleui] = "--enable-consoleui --with-ncurses-headers=${STAGING_INCDIR},--disable-consoleui,ncurses"
+PACKAGECONFIG[consoleui] = "--enable-consoleui --with-ncurses-headers=${STAGING_INCDIR},--disable-consoleui,libgnt"
 PACKAGECONFIG[gnutls] = "--enable-gnutls --with-gnutls-includes=${STAGING_INCDIR} --with-gnutls-libs=${STAGING_LIBDIR},--disable-gnutls,gnutls,libpurple-plugin-ssl-gnutls"
 PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
 PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
 PACKAGECONFIG[nss] = "--enable-nss,--disable-nss,nss nspr,libpurple-plugin-ssl-nss"
 
 EXTRA_OECONF = " \
+    --with-python=python3 \
     --disable-perl \
     --disable-tcl \
     --disable-gevolution \
@@ -51,17 +52,12 @@ EXTRA_OECONF = " \
     --disable-screensaver \
 "
 
-do_configure_prepend() {
-    touch ${S}/po/Makefile
-    sed -i "s#PY_VERSION=`$PYTHON -c 'import sys ; print sys.version[0:3]'`#PY_VERSION=${PYTHON_BASEVERSION}#g" ${S}/configure.ac
-}
-
 OE_LT_RPATH_ALLOW=":${libdir}/purple-2:"
 OE_LT_RPATH_ALLOW[export]="1"
 
-PACKAGES =+ "libpurple-dev libpurple libgnt libgnt-dev finch finch-dev ${PN}-data"
+PACKAGES =+ "libpurple-dev libpurple finch finch-dev ${PN}-data"
 
-RPROVIDES_${PN}-dbg += "libpurple-dbg libgnt-dbg finch-dbg"
+RPROVIDES_${PN}-dbg += "libpurple-dbg finch-dbg"
 
 LEAD_SONAME = "libpurple.so.0"
 FILES_libpurple     = "${libdir}/libpurple*.so.* ${libdir}/purple-2 ${bindir}/purple-* ${sysconfdir}/gconf/schemas/purple* ${datadir}/purple/ca-certs"
@@ -72,8 +68,6 @@ FILES_libpurple-dev = "${libdir}/libpurple*.la \
                        ${libdir}/purple-2/liboscar.so \
                        ${libdir}/purple-2/libymsg.so \
                        ${datadir}/aclocal"
-FILES_libgnt         = "${libdir}/libgnt.so.* ${libdir}/gnt/*.so"
-FILES_libgnt-dev     = "${libdir}/gnt/*.la"
 FILES_finch          = "${bindir}/finch"
 FILES_finch-dev      = "${libdir}/finch/*.la"
 
