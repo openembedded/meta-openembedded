@@ -6,22 +6,21 @@ provides a lightweight method of carrying out messaging using a \
 publish/subscribe model. "
 HOMEPAGE = "http://mosquitto.org/"
 SECTION = "console/network"
-LICENSE = "EPL-1.0 | EDL-1.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=62ddc846179e908dc0c8efec4a42ef20 \
+LICENSE = "EPL-2.0 | EDL-1.0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ca9a8f366c6babf593e374d0d7d58749 \
                     file://edl-v10;md5=c09f121939f063aeb5235972be8c722c \
-                    file://epl-v10;md5=8d383c379e91d20ba18a52c3e7d3a979 \
-                    file://notice.html;md5=a00d6f9ab542be7babc2d8b80d5d2a4c \
+                    file://epl-v20;md5=d9fc0efef5228704e7f5b37f27192723 \
+                    file://notice.html;md5=541f8f37af492858dab8d2c1b69ede69 \
 "
-DEPENDS = "uthash"
+DEPENDS = "uthash cjson dlt-daemon"
 
 SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
            file://mosquitto.init \
            file://1571.patch \
-           file://install-protocol.patch \
 "
 
-SRC_URI[md5sum] = "beb8d76d6e45f1e66d711006082a631f"
-SRC_URI[sha256sum] = "548d73d19fb787dd0530334e398fd256ef3a581181678488a741a995c4f007fb"
+SRC_URI[md5sum] = "56de4e27533ab53697245809feea95bf"
+SRC_URI[sha256sum] = "a98054f0b8161588975ef24e1d467550d3935f4c16ccee63ecb623248a28356e"
 
 inherit systemd update-rc.d useradd cmake
 
@@ -29,6 +28,7 @@ PACKAGECONFIG ??= "ssl dlt websockets \
                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
                   "
 
+PACKAGECONFIG[manpages] = "-DDOCUMENTATION=ON,-DDOCUMENTATION=OFF,libxslt-native docbook-xsl-stylesheets-native"
 PACKAGECONFIG[dns-srv] = "-DWITH_SRV=ON,-DWITH_SRV=OFF,c-ares"
 PACKAGECONFIG[ssl] = "-DWITH_TLS=ON -DWITH_TLS_PSK=ON -DWITH_EC=ON,-DWITH_TLS=OFF -DWITH_TLS_PSK=OFF -DWITH_EC=OFF,openssl"
 PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
@@ -59,6 +59,8 @@ PACKAGE_BEFORE_PN = "${PN}-examples"
 
 FILES_${PN} = "${sbindir}/mosquitto \
                ${bindir}/mosquitto_passwd \
+               ${bindir}/mosquitto_ctrl \
+               ${libdir}/mosquitto_dynamic_security.so \
                ${sysconfdir}/mosquitto \
                ${sysconfdir}/init.d \
                ${systemd_unitdir}/system/mosquitto.service \
