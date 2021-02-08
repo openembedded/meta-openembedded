@@ -4,11 +4,13 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fea92e2e010ccb151792c29fadc2db7b"
 
-SRC_URI[md5sum] = "27cdd7e026438067a238fb04ed5766a3"
-SRC_URI[sha256sum] = "57baa82e6bc59b67747317d16ad0cf9626826e8d43233af13bce924660500bd6"
+SRC_URI[md5sum] = "0a5b866443edab0dab62cea56ed96f1e"
+SRC_URI[sha256sum] = "391e5bdfe2511aa7369002d4861df795dbb2889426b1b2cc1e6c9d85939da4dd"
 
 inherit pypi setuptools3
 
 PYPI_PACKAGE = "python-periphery"
 
-RDEPENDS_${PN} += "${PYTHON_PN}-mmap"
+RDEPENDS_${PN} += "${PYTHON_PN}-mmap \
+		${PYTHON_PN}-ctypes \
+		${PYTHON_PN}-fcntl"
