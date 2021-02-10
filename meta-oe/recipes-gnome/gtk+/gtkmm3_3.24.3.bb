@@ -6,18 +6,18 @@ LICENSE = "LGPLv2.1 & GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
                     file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
 
-DEPENDS = "atkmm pangomm glibmm gtk+3 cairomm"
+DEPENDS = "glib-2.0-native atkmm pangomm glibmm gtk+3 cairomm"
 
 BPN = "gtkmm"
+
+GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "e311db484ca9c53f1689d35f5f58a06b"
-SRC_URI[archive.sha256sum] = "6d71091bcd1863133460d4188d04102810e9123de19706fb656b7bb915b4adc3"
-SRC_URI += "file://0001-do-not-build-demos.patch"
+SRC_URI[archive.sha256sum] = "60497c4f7f354c3bd2557485f0254f8b7b4cf4bebc9fee0be26a77744eacd435"
 
-EXTRA_OECONF = " --disable-documentation "
+EXTRA_OEMESON = "-Dbuild-demos=false"
 
 FILES_${PN}-dev += "${libdir}/*/include ${libdir}/*/proc/m4"
