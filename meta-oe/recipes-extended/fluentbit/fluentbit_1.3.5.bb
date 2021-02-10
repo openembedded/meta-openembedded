@@ -22,6 +22,8 @@ SRC_URI[sha256sum] = "e037c76c89269c8dc4027a08e442fefd2751b0f1e0f9c38f9a4b12d781
 
 S = "${WORKDIR}/fluent-bit-${PV}"
 DEPENDS = "zlib bison-native flex-native"
+DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+
 DEPENDS_append_libc-musl = " fts "
 
 INSANE_SKIP_${PN}-dev += "dev-elf"
