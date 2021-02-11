@@ -2,12 +2,12 @@ DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solvi
 AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
 HOMEPAGE = "http://ceres-solver.org/"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=bb761279816b72be19d7ce646e4e2a14"
 
 DEPENDS = "libeigen glog"
 
 SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
-SRCREV = "facb199f3eda902360f9e1d5271372b7e54febe1"
+SRCREV = "399cda773035d99eaf1f4a129a666b3c4df9d1b1"
 
 S = "${WORKDIR}/git"
 
