@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 SRC_URI = "git://github.com/pixel/hexedit.git \
     "
 
-SRCREV = "800e4b2e6280531a84fd23ee0b48e16baeb90878"
+SRCREV = "baf45a289360a39a05253949fb9d1b50e4668d8a"
 
 S = "${WORKDIR}/git"
 
