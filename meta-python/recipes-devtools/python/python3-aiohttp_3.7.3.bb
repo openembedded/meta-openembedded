@@ -18,5 +18,6 @@ RDEPENDS_${PN} = "\
     ${PYTHON_PN}-misc \
     ${PYTHON_PN}-multidict \
     ${PYTHON_PN}-netserver \
+    ${PYTHON_PN}-typing-extensions \
     ${PYTHON_PN}-yarl \
 "
