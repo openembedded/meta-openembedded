@@ -9,10 +9,9 @@ DEPENDS += "${PYTHON_PN}-protobuf"
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
 SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
                                 file://riscv64_support.patch \
-                                file://0001-Fix-build-on-riscv32.patch \
+                                file://boring_ssl.patch \
 "
-SRC_URI[md5sum] = "ccaf4e7eb4f031d926fb80035d193b98"
-SRC_URI[sha256sum] = "a899725d34769a498ecd3be154021c4368dd22bdc69473f6ec46779696f626c4"
+SRC_URI[sha256sum] = "7bd0ebbb14dde78bf66a1162efd29d3393e4e943952e2f339757aa48a184645c"
 
 RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
@@ -24,9 +23,18 @@ inherit pypi
 
 export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
 
-do_compile_prepend_toolchain-clang() {
-    export GRPC_PYTHON_CFLAGS='-fvisibility=hidden -fno-wrapv -fno-exceptions'
-}
+BORING_SSL_PLATFORM_arm = "linux-arm"
+BORING_SSL_PLATFORM_x86-64 = "linux-x86_64"
+BORING_SSL_PLATFORM ?= "unsupported"
+export GRPC_BORING_SSL_PLATFORM = "${BORING_SSL_PLATFORM}"
+
+BORING_SSL_x86-64 = "1"
+BORING_SSL_arm = "1"
+BORING_SSL ?= "0"
+export GRPC_BUILD_WITH_BORING_SSL_ASM = "${BORING_SSL}"
+
+GRPC_CFLAGS_append_toolchain-clang = " -fvisibility=hidden -fno-wrapv -fno-exceptions"
+export GRPC_PYTHON_CFLAGS = "${GRPC_CFLAGS}"
 
 CLEANBROKEN = "1"
 
