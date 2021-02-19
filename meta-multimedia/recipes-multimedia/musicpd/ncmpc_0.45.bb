@@ -11,6 +11,8 @@ DEPENDS += " \
     libmpdclient \
 "
 
+RDEPENDS_${PN} += "python3-core"
+
 PACKAGECONFIG ??= "colors locale mouse nls regex help_screen library_screen search_screen song_screen key_screen lyrics_screen outputs_screen"
 
 PACKAGECONFIG[colors] = "-Dcolors=true,-Dcolors=false"
@@ -33,5 +35,5 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/ncmpc \
 "
-SRCREV = "2c71add42152072c5e0490de2870315dfb3b71e1"
+SRCREV = "6780ec072f1d314f44ed77efdc58d03c6fbcc96b"
 S = "${WORKDIR}/git"
