@@ -2,26 +2,33 @@ SUMMARY = "A sophisticated network protocol analyzer"
 HOMEPAGE = "http://www.tcpdump.org/"
 SECTION = "net"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=1d4b0366557951c84a94fabe3529f867"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5eb289217c160e2920d2e35bddc36453"
 
 DEPENDS = "libpcap"
 
 RDEPENDS_${PN}-ptest += " make perl \
 	perl-module-file-basename \
+	perl-module-file-spec \
+	perl-module-file-spec-unix \
+	perl-module-file-path \
+	perl-module-file-glob \
+	perl-module-data-dumper \
+	perl-module-bytes \
 	perl-module-posix \
-	perl-module-carp"
+	perl-module-carp \
+	perl-module-cwd \
+    perl-module-constant \
+"
 
 SRC_URI = " \
     http://www.tcpdump.org/release/${BP}.tar.gz \
-    file://unnecessary-to-check-libpcap.patch \
-    file://avoid-absolute-path-when-searching-for-libdlpi.patch \
     file://add-ptest.patch \
     file://run-ptest \
-    file://0001-PPP-When-un-escaping-don-t-allocate-a-too-large-buff.patch \
+    file://0001-aclocal.m4-Skip-checking-for-pcap-config.patch \
 "
 
-SRC_URI[md5sum] = "a4ead41d371f91aa0a2287f589958bae"
-SRC_URI[sha256sum] = "2cd47cb3d460b6ff75f4a9940f594317ad456cfbf2bd2c8e5151e16559db6410"
+SRC_URI[md5sum] = "b10aa2f497def7283bc060f626879ce5"
+SRC_URI[sha256sum] = "8cf2f17a9528774a7b41060323be8b73f76024f7778f59c34efa65d49d80b842"
 
 UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.(?!99)\d+)+)\.tar"
 
@@ -46,7 +53,7 @@ do_configure_prepend() {
 
 do_install_append() {
     # make install installs an unneeded extra copy of the tcpdump binary
-    rm -f ${D}${sbindir}/tcpdump.${PV}
+    rm ${D}${bindir}/tcpdump.${PV}
 }
 
 do_compile_ptest() {
