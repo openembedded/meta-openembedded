@@ -4,13 +4,13 @@
 SUMMARY = "Python library for arbitrary-precision floating-point arithmetic"
 HOMEPAGE = "https://pypi.org/project/mpmath/"
 LICENSE = "BSD"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=efe9feb00df0b763941f2b1bbac7c402"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=71970bd3749eebe1bfef9f1efff5b37a"
 
-SRC_URI[md5sum] = "acb1cdddf38e16084628065b174ddbfe"
-SRC_URI[sha256sum] = "fc17abe05fbab3382b61a123c398508183406fa132e0223874578e20946499f6"
+SRC_URI[sha256sum] = "79ffb45cf9f4b101a807595bcb3e72e0396202e0b1d25d689134b48c4216a81a"
 
 inherit pypi setuptools3
 
+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 RDEPENDS_${PN} += "python3-image"
 
 BBCLASSEXTEND = "native nativesdk"
