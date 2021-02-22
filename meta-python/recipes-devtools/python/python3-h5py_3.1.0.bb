@@ -4,12 +4,11 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
 
-SRC_URI[md5sum] = "504b595237409ab766fbbe568e60a080"
-SRC_URI[sha256sum] = "84412798925dc870ffd7107f045d7659e60f5d46d1c70c700375248bf6bf512d"
+SRC_URI[sha256sum] = "1e2516f190652beedcb8c7acfa1c6fa92d99b42331cbef5e5c7ec2d65b0fc3c2"
 
 SRC_URI_append = " \
-           file://0001-cross-compiling-support.patch \
            file://0001-setup_build.py-avoid-absolute-path.patch \
+           file://0001-setup.py-Fix-numpy-version.patch \
           "
 
 inherit pypi setuptools3
