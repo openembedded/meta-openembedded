@@ -8,13 +8,11 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=24b9569831c46d4818450b55282476b4"
 
 SRC_URI = "https://dl.cihar.com/enca/enca-${PV}.tar.gz \
-    file://configure-hack.patch \
     file://dont-run-tests.patch \
-    file://configure-remove-dumbness.patch \
     file://makefile-remove-tools.patch \
     file://libenca-003-iconv.patch "
 
-SRC_URI[sha256sum] = "75a38ed23bac37cc12166cc5edc8335c3af862adc202f84823d3aef3e2208e47"
+SRC_URI[sha256sum] = "4c305cc59f3e57f2cfc150a6ac511690f43633595760e1cb266bf23362d72f8a"
 
 inherit autotools
 
