@@ -17,8 +17,6 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
 
 S = "${WORKDIR}/git"
 
-DEPENDS_append_libc-musl = " libexecinfo "
-
 ASNEEDED_class-native = ""
 ASNEEDED_class-nativesdk = ""
 
@@ -33,4 +31,3 @@ ALLOW_EMPTY_${PN} = "1"
 
 FILES_${PN} = "${libdir}/libabsl_*.so ${libdir}/cmake"
 FILES_${PN}-dev = "${includedir}"
-
