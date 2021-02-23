@@ -52,6 +52,14 @@ do_configure_prepend_libc-musl () {
     sed -i -e '/-DHAVE_SYS_CDEFS_H/d' ${S}/nss/lib/dbm/config/config.mk
 }
 
+do_configure_prepend_powerpc64le_toolchain-clang () {
+    sed -i -e 's/\-std=c99/\-std=gnu99/g' ${S}/nss/coreconf/command.mk
+}
+
+do_configure_prepend_powerpc64_toolchain-clang () {
+    sed -i -e 's/\-std=c99/\-std=gnu99/g' ${S}/nss/coreconf/command.mk
+}
+
 do_compile_prepend_class-native() {
     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}/nspr
     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
@@ -93,7 +101,7 @@ do_compile() {
 
     if [ "${TARGET_ARCH}" = "powerpc" ]; then
         OS_TEST=ppc
-    elif [ "${TARGET_ARCH}" = "powerpc64" ]; then
+    elif [ "${TARGET_ARCH}" = "powerpc64" -o "${TARGET_ARCH}" = "powerpc64le" ]; then
         OS_TEST=ppc64
     elif [ "${TARGET_ARCH}" = "mips" -o "${TARGET_ARCH}" = "mipsel" -o "${TARGET_ARCH}" = "mips64" -o "${TARGET_ARCH}" = "mips64el" ]; then
         OS_TEST=mips
@@ -151,7 +159,7 @@ do_install() {
 
     if [ "${TARGET_ARCH}" = "powerpc" ]; then
         OS_TEST=ppc
-    elif [ "${TARGET_ARCH}" = "powerpc64" ]; then
+    elif [ "${TARGET_ARCH}" = "powerpc64" -o "${TARGET_ARCH}" = "powerpc64le" ]; then
         OS_TEST=ppc64
     elif [ "${TARGET_ARCH}" = "mips" -o "${TARGET_ARCH}" = "mipsel" -o "${TARGET_ARCH}" = "mips64" -o "${TARGET_ARCH}" = "mips64el" ]; then
         OS_TEST=mips
