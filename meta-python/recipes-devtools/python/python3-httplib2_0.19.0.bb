@@ -2,9 +2,8 @@ SUMMARY = "A comprehensive HTTP client library, httplib2 supports many features 
 HOMEPAGE = "https://github.com/httplib2/httplib2"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=7e04d1303d64a7b62421751ecb490dc2"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=56e5e931172b6164b62dc7c4aba6c8cf"
 
-SRC_URI[md5sum] = "0b331f96cdb2ae0e0342d4ea0f5f0502"
-SRC_URI[sha256sum] = "8af66c1c52c7ffe1aa5dc4bcd7c769885254b0756e6e69f953c7f0ab49a70ba3"
+SRC_URI[sha256sum] = "e0d428dad43c72dbce7d163b7753ffc7a39c097e6788ef10f4198db69b92f08e"
 
 inherit pypi setuptools3
