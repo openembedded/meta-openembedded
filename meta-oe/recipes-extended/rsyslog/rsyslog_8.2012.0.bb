@@ -78,6 +78,7 @@ PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
 PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
 PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
 PACKAGECONFIG[valgrind] = ",--without-valgrind-testbench,valgrind,"
+PACKAGECONFIG[imhttp] = "--enable-imhttp,--disable-imhttp,civetweb,"
 
 do_configure_prepend() {
     sed -i -e 's|python |python3 |g' ${S}/tests/*.sh
