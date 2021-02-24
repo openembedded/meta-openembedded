@@ -6,7 +6,7 @@ SECTION = "net"
 # a combined work based on stunnel. Thus, the terms and conditions of the GNU
 # General Public License cover the whole combination.
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING.md;md5=6bae28875b3b599f8f621f4335b17955"
+LIC_FILES_CHKSUM = "file://COPYING.md;md5=223b26c62f5e7c5c8656d6c133edd5ec"
 
 DEPENDS = "autoconf-archive libnsl2 openssl"
 
@@ -14,7 +14,7 @@ SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
            file://fix-openssl-no-des.patch \
 "
 
-SRC_URI[sha256sum] = "af5ab973dde11807c38735b87bdd87563a47d2fa1c72a07929fcfce80a600fe1"
+SRC_URI[sha256sum] = "d4c14cc096577edca3f6a2a59c2f51869e35350b3988018ddf808c88e5973b79"
 
 inherit autotools
 
