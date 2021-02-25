@@ -1,11 +1,11 @@
 SUMMARY = "Convex optimization package"
 HOMEPAGE = "http://cvxopt.org"
 LICENSE = "GPL-3.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=4905701d14049b3f8e4774c290aeee21"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ba1a8a73d8ebea5c47a1173aaf476ddd"
 
 SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https"
 
-SRCREV = "5b59d87007bf6fdea464e14875543b35255b84b2"
+SRCREV = "60fdb838e0bb2d8f32ba51129552c83b55acd2a7"
 
 S = "${WORKDIR}/git"
 
