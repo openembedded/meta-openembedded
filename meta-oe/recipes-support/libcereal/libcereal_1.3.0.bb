@@ -17,10 +17,19 @@ SRC_URI = "git://github.com/USCiLab/cereal.git"
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake pkgconfig
 
 EXTRA_OECMAKE = "-DJUST_INSTALL_CEREAL=ON"
 
 ALLOW_EMPTY_${PN} = "1"
+
+RDEPENDS_${PN}-dev = ""
+
+PROVIDES += "${PN}-dev"
+
+FILES_${PN}-dev = " \
+    ${includedir} \
+    ${libdir} \
+"
 
 BBCLASSEXTEND = "native nativesdk"
