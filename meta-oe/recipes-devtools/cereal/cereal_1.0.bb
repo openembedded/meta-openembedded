@@ -18,7 +18,7 @@ SRC_URI = " \
     file://0001-add-license-files-for-components-of-cereal.patch \
 "
 
-SRCREV = "02eace19a99ce3cd564ca4e379753d69af08c2c8"
+SRCREV = "48fda3f0a6b58f9a9278ec15c15e7b7c3dceeceb"
 
 EXTRA_OECMAKE += "\
     -DCEREAL_INSTALL=TRUE \
@@ -32,5 +32,5 @@ PROVIDES += "${PN}-dev"
 FILES_${PN}-dev = " \
     ${includedir} \
     ${libdir} \
-    ${datadir}/cmake \
 "
+
