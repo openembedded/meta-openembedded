@@ -10,14 +10,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "zlib"
 DEPENDS_append_class-target = " protobuf-native"
 
-SRCREV = "2514f0bd7da7e2af1bed4c5d1b84f031c4d12c10"
+SRCREV = "d7e943b8d2bc444a8c770644e73d090b486f8b37"
 
 SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
            file://run-ptest \
            file://0001-protobuf-fix-configure-error.patch \
            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
-           file://0001-fix-m4-pthread-update.patch \
 "
 S = "${WORKDIR}/git"
 
