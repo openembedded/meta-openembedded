@@ -6,9 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 DEPENDS = "ell"
 
 SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
-           file://0001-crypto-Update-l_pkcs5_pbkdf2-call-after-rename.patch \
           "
-SRCREV = "355c2df97e1adfdaee4a67c1705bd76202384687"
+SRCREV = "bde3e0f6e3364e9c884b6b93a944d8138345b8e5"
 S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig python3native systemd
