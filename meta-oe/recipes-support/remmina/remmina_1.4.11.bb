@@ -9,8 +9,8 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi libsodium libss
 DEPENDS_append_libc-musl = " libexecinfo"
 LDFLAGS_append_libc-musl = " -lexecinfo"
 
-SRCREV = "9d1dbdf2d648644e0de9590c6291d7e7b72a1473"
-SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https \
+SRCREV = "6a8737111adebf571c46f35599cc62e7f7b0bd65"
+SRC_URI = "git://gitlab.com/Remmina/Remmina;protocol=https;branch=rel/v1.4.11 \
 "
 
 PV .= "+git${SRCPV}"
