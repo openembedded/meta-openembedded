@@ -12,6 +12,9 @@ LIC_FILES_CHKSUM = "\
     file://include/cereal/external/rapidjson/msinttypes/LICENSE;md5=dffce65b98c773976de2e338bd130f46 \
 "
 
+PROVIDES += "${PN}-dev"
+
+PV .= "+git${SRCPV}"
 SRCREV = "64f50dbd5cecdaba785217e2b0aeea3a4f1cdfab"
 SRC_URI = "git://github.com/USCiLab/cereal.git"
 
@@ -24,12 +27,5 @@ EXTRA_OECMAKE = "-DJUST_INSTALL_CEREAL=ON"
 ALLOW_EMPTY_${PN} = "1"
 
 RDEPENDS_${PN}-dev = ""
-
-PROVIDES += "${PN}-dev"
-
-FILES_${PN}-dev = " \
-    ${includedir} \
-    ${libdir} \
-"
 
 BBCLASSEXTEND = "native nativesdk"
