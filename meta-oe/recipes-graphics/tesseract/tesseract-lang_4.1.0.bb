@@ -1,9 +1,9 @@
 SUMMARY = "tesseract-ocr language files"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=9648bd7af63bd3cc4f5ac046d12c49e4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "590567f20dc044f6948a8e2c61afc714c360ad0e"
+SRCREV = "4767ea922bcc460e70b87b1d303ebdfed0897da8"
 SRC_URI = "git://github.com/tesseract-ocr/tessdata.git"
 
 S = "${WORKDIR}/git"
