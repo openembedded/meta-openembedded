@@ -5,13 +5,11 @@ HOMEPAGE = "http://www.twistedmatrix.com"
 
 #twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=27ac6d9597237e7e76282edd7a40cd68"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e33c411c0b86b1f3ca299091ed51ca31"
 
-SRC_URI[sha256sum] = "d72c55b5d56e176563b91d11952d13b01af8725c623e498db5507b6614fc1e10"
-SRC_URI[md5sum] = "fc16d575730db7d0cddd09fc35af3eea"
+SRC_URI[sha256sum] = "77544a8945cf69b98d2946689bbe0c75de7d145cdf11f391dd487eae8fc95a12"
 
 PYPI_PACKAGE = "Twisted"
-PYPI_PACKAGE_EXT = "tar.bz2"
 
 inherit pypi setuptools3
 
@@ -201,6 +199,7 @@ ${libdir}/${PYTHON_DIR}/site-packages/Twisted*egg-info \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/logger/ \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/_threads/ \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/positioning/ \
+${libdir}/${PYTHON_DIR}/site-packages/twisted/py.typed \
 "
 
 FILES_${PN}-mail = " \
