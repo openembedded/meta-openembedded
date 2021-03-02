@@ -1,6 +1,5 @@
-diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
---- a/cmake/FindLibunwind.cmake	1970-01-01 01:00:00.000000000 +0100
-+++ b/cmake/FindLibunwind.cmake	2018-11-20 15:53:48.799078114 +0100
+--- /dev/null
++++ b/cmake/FindLibunwind.cmake
 @@ -0,0 +1,54 @@
 +# - Try to find libunwind
 +# Once done this will define
@@ -56,10 +55,9 @@ diff -uNr a/cmake/FindLibunwind.cmake b/cmake/FindLibunwind.cmake
 +else()
 +    message("Can't find libunwind library")
 +endif()
-diff -uNr a/CMakeLists.txt b/CMakeLists.txt
---- a/CMakeLists.txt	2018-11-20 15:49:07.576278417 +0100
-+++ b/CMakeLists.txt	2018-11-20 15:49:32.106819928 +0100
-@@ -58,7 +58,6 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -64,7 +64,6 @@ check_include_file (dlfcn.h HAVE_DLFCN_H
  check_include_file (execinfo.h HAVE_EXECINFO_H)
  check_include_file (glob.h HAVE_GLOB_H)
  check_include_file (inttypes.h HAVE_INTTYPES_H)
@@ -67,27 +65,28 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
  check_include_file (memory.h HAVE_MEMORY_H)
  check_include_file (pwd.h HAVE_PWD_H)
  check_include_file (stdint.h HAVE_STDINT_H)
-@@ -74,7 +73,6 @@
+@@ -80,7 +79,6 @@ check_include_file (syscall.h HAVE_SYSCA
  check_include_file (syslog.h HAVE_SYSLOG_H)
  check_include_file (ucontext.h HAVE_UCONTEXT_H)
  check_include_file (unistd.h HAVE_UNISTD_H)
 -check_include_file (unwind.h HAVE_UNWIND_H)
+ check_include_file (pwd.h HAVE_PWD_H)
  
  check_include_file_cxx ("ext/hash_map" HAVE_EXT_HASH_MAP)
- check_include_file_cxx ("ext/hash_set" HAVE_EXT_HASH_SET)
-@@ -109,10 +107,7 @@
+@@ -116,11 +114,9 @@ check_cxx_compiler_flag (-Wunnamed-type-
  # snprintf as an inline function
  check_symbol_exists (snprintf stdio.h HAVE_SNPRINTF)
  
 -check_library_exists (unwind get_static_proc_name "" HAVE_LIB_UNWIND)
--
+ check_library_exists (dbghelp UnDecorateSymbolName "" HAVE_DBGHELP)
+ 
 -find_library (UNWIND_LIBRARY NAMES unwind DOC "unwind library")
 -mark_as_advanced (UNWIND_LIBRARY)
 +find_package(Libunwind)
  
  check_c_source_compiles ("
  #include <stdlib.h>
-@@ -376,9 +371,9 @@
+@@ -471,9 +467,9 @@ add_library(glog::glog ALIAS glog)
  
  set_target_properties (glog PROPERTIES POSITION_INDEPENDENT_CODE ON)
  
@@ -98,20 +97,19 @@ diff -uNr a/CMakeLists.txt b/CMakeLists.txt
 +  target_link_libraries (glog PUBLIC unwind)
 +endif (Libunwind_FOUND)
  
- if (HAVE_PTHREAD)
-   target_link_libraries (glog PUBLIC ${CMAKE_THREAD_LIBS_INIT})
-@@ -571,6 +566,7 @@
+ if (HAVE_DBGHELP)
+    target_link_libraries (glog PUBLIC dbghelp)
+@@ -678,6 +674,7 @@ export (PACKAGE glog)
  install (FILES
    ${CMAKE_CURRENT_BINARY_DIR}/glog-config.cmake
    ${CMAKE_CURRENT_BINARY_DIR}/glog-config-version.cmake
 +  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindLibunwind.cmake
-   DESTINATION lib/cmake/glog)
+   DESTINATION ${_glog_CMake_INSTALLDIR})
  
- install (EXPORT glog-targets NAMESPACE glog:: DESTINATION lib/cmake/glog)
-diff -uNr a/glog-config.cmake.in b/glog-config.cmake.in
---- a/glog-config.cmake.in	2018-11-20 15:49:07.576278417 +0100
-+++ b/glog-config.cmake.in	2018-11-20 15:52:32.330418489 +0100
-@@ -4,4 +4,6 @@
+ install (EXPORT glog-targets NAMESPACE glog:: DESTINATION
+--- a/glog-config.cmake.in
++++ b/glog-config.cmake.in
+@@ -8,4 +8,6 @@ include (CMakeFindDependencyMacro)
  
  @gflags_DEPENDENCY@
  
