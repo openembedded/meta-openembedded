@@ -1,7 +1,6 @@
 require lvm2.inc
 
 SRC_URI += " \
-            file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
             file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
            "
 
