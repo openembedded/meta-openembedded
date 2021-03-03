@@ -37,7 +37,8 @@ RPROVIDES_${PN}-dbg += "libv4l-dbg"
 
 FILES_media-ctl = "${bindir}/media-ctl ${libdir}/libmediactl.so.*"
 
-FILES_ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules"
+FILES_ir-keytable = "${bindir}/ir-keytable ${base_libdir}/udev/rules.d/*-infrared.rules \
+                     ${systemd_system_unitdir}/systemd-udevd.service.d/50-rc_keymap.conf"
 RDEPENDS_ir-keytable += "${VIRTUAL-RUNTIME_ir-keytable-keymaps}"
 
 FILES_rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
