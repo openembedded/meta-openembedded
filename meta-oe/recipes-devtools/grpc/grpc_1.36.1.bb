@@ -11,8 +11,8 @@ DEPENDS_append_class-target = " googletest grpc-native "
 DEPENDS_append_class-nativesdk = " grpc-native "
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "627a22541a1836ce00cdc40a3977aa8928de98bc"
-BRANCH = "v1.35.x"
+SRCREV_grpc = "3b7f86e3516746c5f0db1947e0d65e94159bcb12"
+BRANCH = "v1.36.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
