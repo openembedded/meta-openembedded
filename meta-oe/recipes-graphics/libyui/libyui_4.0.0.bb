@@ -10,8 +10,8 @@ SRC_URI = "git://github.com/libyui/libyui.git \
            file://0001-Use-relative-install-paths-for-CMake.patch \
            "
 
-SRCREV = "de9134007d2d029fe5809ce48f57fe218e6ffe16"
-SRCREV_FORMAT = "default"
+SRCREV = "af06143017fc5f18c4b6488ba4aed26bcc43ff6e"
+
 S = "${WORKDIR}/git"
 
 inherit cmake gettext pkgconfig
@@ -21,12 +21,6 @@ DEPENDS += "boost"
 EXTRA_OECMAKE += "-DENABLE_WERROR=OFF"
 
 BBCLASSEXTEND = "native nativesdk"
-
-do_configure_prepend () {
-        (cd ${S} &&
-        ./bootstrap.sh &&
-        cd -)
-}
 
 do_install_append () {
         if [ "${libdir}" = "${base_prefix}/usr/lib" ] && [ -d ${D}/usr/lib64 ]; then

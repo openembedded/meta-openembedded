@@ -5,12 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
 SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
-           file://0003-Simplify-ncurses-finding-module.patch \
           "
 
 SRC_URI_append_class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
 
-SRCREV = "e89fcc53c27c3a3bf559d43190289c3ce4f335b1"
+SRCREV = "37d3a1e815a47f536b4f694f139f279cc93a3854"
 
 S = "${WORKDIR}/git"
 
@@ -25,16 +24,12 @@ EXTRA_OECMAKE_append_toolchain-clang = " -DENABLE_WERROR=OFF"
 
 do_configure_prepend () {
     cd ${S}
-    git checkout bootstrap.sh
-    sed -i "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#" bootstrap.sh
-    ./bootstrap.sh
     if [ -e ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib/libyui.so ]; then
         mkdir -p ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
         cp ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib/libyui.so* ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
     fi
     cd -
     sed -i -e "s#\${YPREFIX}#\${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#" ${S}/CMakeLists.txt
-    sed -i -e "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#" ${PKG_CONFIG_SYSROOT_DIR}${libdir}/cmake/libyui/LibyuiLibraryDepends-release.cmake
 }
 
 do_install_append () {
