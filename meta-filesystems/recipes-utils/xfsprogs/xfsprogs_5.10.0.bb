@@ -12,12 +12,12 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
            file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
            file://0001-support-usrmerge.patch \
            "
-SRC_URI[sha256sum] = "bc5c805596bc609a18dc1f1b4ed6a2821dba9f47408ec00e7799ceea1b2097f1"
+SRC_URI[sha256sum] = "e04017e46d43e4d54b9a560fd7cea922520f8f6ef882404969d20cd4e5c790e9"
 inherit autotools-brokensep
 
 PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
 
-DEPENDS += "util-linux"
+DEPENDS += "util-linux libinih"
 
 RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs ${PN}-repair"
 
