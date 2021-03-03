@@ -10,7 +10,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; 
     file://run-ptest \
 "
 
-SRCREV = "391abaac9bdff385934b18134789bcc98b0adeb7"
+SRCREV = "7b776a8c005b60572f49797e81287540f99fff1f"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README.md;md5=74bb47b9a68850cb398665cf78b31de6"
