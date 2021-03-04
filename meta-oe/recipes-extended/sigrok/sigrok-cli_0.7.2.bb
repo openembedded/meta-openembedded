@@ -13,7 +13,7 @@ PACKAGECONFIG ??= "decode"
 inherit autotools pkgconfig mime-xdg
 
 SRC_URI = "http://sigrok.org/download/source/sigrok-cli/sigrok-cli-${PV}.tar.gz"
-SRC_URI[md5sum] = "3f45ce664bad529d8b3f78a61b017d75"
-SRC_URI[sha256sum] = "f52413429f47d457c333db0fd068416ab7a3f9e35ca76de8624dc5ac6fb07797"
+SRC_URI[md5sum] = "856fd496cd99d1091aa128405c522a36"
+SRC_URI[sha256sum] = "71d0443f36897bf565732dec206830dbea0f2789b6601cf10536b286d1140ab8"
 
 FILES_${PN} += "${datadir}/icons/hicolor"
