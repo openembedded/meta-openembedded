@@ -10,6 +10,8 @@ SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
 SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
                                 file://riscv64_support.patch \
                                 file://boring_ssl.patch \
+                                file://mips_bigendian.patch \
+                                file://0001-absl-always-use-asm-sgidefs.h.patch \
 "
 SRC_URI[sha256sum] = "a66ea59b20f3669df0f0c6a3bd57b985e5b2d1dcf3e4c29819bb8dc232d0fd38"
 
