@@ -6,7 +6,7 @@ SECTION = "libs"
 LICENSE = "Apache-2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-DEPENDS = "gflags c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl libnsl2 abseil-cpp re2"
+DEPENDS = "c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl libnsl2 abseil-cpp re2"
 DEPENDS_append_class-target = " googletest grpc-native "
 DEPENDS_append_class-nativesdk = " grpc-native "
 
@@ -25,7 +25,6 @@ EXTRA_OECMAKE = " \
     -DgRPC_ZLIB_PROVIDER=package \
     -DgRPC_SSL_PROVIDER=package \
     -DgRPC_PROTOBUF_PROVIDER=package \
-    -DgRPC_GFLAGS_PROVIDER=package \
     -DgRPC_ABSL_PROVIDER=package \
     -DgRPC_RE2_PROVIDER=package \
     -DgRPC_INSTALL=ON \
