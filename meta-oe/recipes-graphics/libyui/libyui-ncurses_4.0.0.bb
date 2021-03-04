@@ -21,6 +21,8 @@ BBCLASSEXTEND = "nativesdk"
 
 EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=RELWITHDEBINFO -DWERROR=OFF"
 
+CXXFLAGS += "-DNCURSES_WIDECHAR"
+
 do_configure_prepend () {
     cd ${S}
     if [ -e ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib/libyui.so ]; then
