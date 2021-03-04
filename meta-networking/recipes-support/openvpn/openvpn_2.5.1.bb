@@ -14,8 +14,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
 
 UPSTREAM_CHECK_URI = "https://openvpn.net/community-downloads"
 
-SRC_URI[md5sum] = "2d42d3c2fff942bfe9eefa41cfd6f123"
-SRC_URI[sha256sum] = "87ef9f5d42c1193fec2ebd86757229b5ae4f295504968392375155adeda83b56"
+SRC_URI[md5sum] = "b1c279e89d97849d5fcde31d76812f04"
+SRC_URI[sha256sum] = "e9582b8e9457994bd8d50012be82c23b2f465da51460c9b2360a81da0f4e06e6"
 
 SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
 SYSTEMD_AUTO_ENABLE = "disable"
