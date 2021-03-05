@@ -21,6 +21,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-aiofiles \
     python3-aiohttp \
     python3-aiohttp-jinja2 \
+    python3-aiohue \
     python3-alembic \
     python3-ansi2html \
     python3-ansicolors \
@@ -167,6 +168,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-idna \
     python3-idna \
     python3-idna-ssl \
+    python3-ifaddr \
     python3-imageio \
     python3-incremental \
     python3-inflection \
@@ -320,6 +322,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pyscaffold \
     python3-pyserial \
     python3-pysocks \
+    python3-pysonos \
     python3-pystache \
     python3-pystemd \
     python3-pytest-asyncio \
