@@ -10,6 +10,11 @@ DEPENDS = "c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl 
 DEPENDS_append_class-target = " googletest grpc-native "
 DEPENDS_append_class-nativesdk = " grpc-native "
 
+PACKAGE_BEFORE_PN = "${PN}-compiler"
+
+RDEPENDS_${PN}-compiler = "${PN}"
+RDEPENDS_${PN}-dev += "${PN}-compiler"
+
 S = "${WORKDIR}/git"
 SRCREV_grpc = "3b7f86e3516746c5f0db1947e0d65e94159bcb12"
 BRANCH = "v1.36.x"
@@ -72,4 +77,4 @@ BBCLASSEXTEND = "native nativesdk"
 
 SYSROOT_DIRS_BLACKLIST_append_class-target = " ${baselib}/cmake/grpc"
 
-FILES_${PN}-dev += "${bindir}"
+FILES_${PN}-compiler += "${bindir}"
