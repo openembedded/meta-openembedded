@@ -11,9 +11,9 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
 
 inherit scons dos2unix siteinfo python3native systemd useradd
 
-PV = "4.4.1"
-#v4.4.1
-SRCREV = "ad91a93a5a31e175f5cbf8c69561e788bbc55ce1"
+PV = "4.4.4"
+#v4.4.4
+SRCREV = "8db30a63db1a9d84bdcad0c83369623f708e0397"
 SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
            file://0001-kms-message-bump-libmongocrypto-to-v1.0.4.patch \
            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
