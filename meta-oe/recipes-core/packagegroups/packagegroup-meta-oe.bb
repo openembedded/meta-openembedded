@@ -338,6 +338,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
      hiredis \
      hplip \
      hwloc \
+     libleak \
      libuio \
      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
      lprng \
@@ -422,8 +423,8 @@ RDEPENDS_packagegroup-meta-oe-extended_remove_mips = "sysdig"
 RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc = "upm mraa minifi-cpp"
 RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc64 = "upm mraa minifi-cpp"
 RDEPENDS_packagegroup-meta-oe-extended_remove_powerpc64le = "upm mraa"
-RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm mraa sysdig tiptop"
-RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm mraa sysdig tiptop"
+RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm libleak mraa sysdig tiptop"
+RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm libleak mraa sysdig tiptop"
 
 RDEPENDS_packagegroup-meta-oe-gnome ="\
     atkmm \
