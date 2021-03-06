@@ -6,10 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1fb9c10ed9fd6826757615455ca893a9"
 
 DEPENDS = "gmp nettle libidn zlib gnutls openssl"
 
-SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https \
+SRC_URI = "git://github.com/rsyslog/librelp.git;protocol=https;branch=stable \
 "
 
-SRCREV = "fe366f3770320cbe76bac7e84b26a48491d14531"
+SRCREV = "9e749453d51d602d8159717f8a7c27971dcb4c6c"
 
 S = "${WORKDIR}/git"
 
