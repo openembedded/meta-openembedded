@@ -9,18 +9,21 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9c42325015702feda4f4d2f19a55b767 \
 "
 
 SRC_URI = "http://nice.freedesktop.org/releases/libnice-${PV}.tar.gz"
-SRC_URI[md5sum] = "5ad936c43d3c6d33117b2c64982f2fd9"
-SRC_URI[sha256sum] = "06b678066f94dde595a4291588ed27acd085ee73775b8c4e8399e28c01eeefdf"
+SRC_URI[sha256sum] = "5eabd25ba2b54e817699832826269241abaa1cf78f9b240d1435f936569273f4"
 
 DEPENDS = "glib-2.0 gnutls"
 
-PACKAGECONFIG ??= "gstreamer1.0"
-PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
-PACKAGECONFIG[gstreamer1.0] = "--with-gstreamer,--without-gstreamer,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[gupnp] = "-Dgupnp=enabled,-Dgupnp=disabled,gupnp"
+PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,gstreamer1.0"
+PACKAGECONFIG[introspection] = "-Dintrospection=enabled,-Dintrospection=disabled,"
 
-inherit autotools pkgconfig gtk-doc gobject-introspection
+EXTRA_OEMESON = "-Dgstreamer=disabled"
 
-EXTRA_OECONF += "--without-gstreamer-0.10"
+GTKDOC_MESON_OPTION = "gtk_doc"
+GTKDOC_MESON_ENABLE_FLAG = "enabled"
+GTKDOC_MESON_DISABLE_FLAG = "disabled"
+
+inherit meson gtk-doc gobject-introspection
 
 FILES_${PN} += "${libdir}/gstreamer-1.0/*.so"
 FILES_${PN}-dev += "${libdir}/gstreamer-1.0/*.la"
