@@ -1,5 +1,10 @@
 SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
 HOMEPAGE = "https://github.com/gperftools/gperftools"
+DESCRIPTION = "The gperftools, previously called google-perftools, package contains some \
+utilities to improve and analyze the performance of C++ programs. \
+Included are an optimized thread-caching malloc() and cpu and heap profiling utilities. \
+"
+
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
@@ -44,7 +49,15 @@ FILES_libtcmalloc-minimal = "${libdir}/libtcmalloc_minimal*${SOLIBS} ${libdir}/l
 
 # pprof tool requires Getopt::long and POSIX perl5 modules.
 # Also runs `objdump` on each cpuprofile data file
-RDEPENDS_${PN} += "binutils perl-module-getopt-long perl-module-posix"
+RDEPENDS_${PN} += " \
+    binutils \
+    curl \
+    perl-module-carp \
+    perl-module-cwd \
+    perl-module-getopt-long \
+    perl-module-overloading \
+    perl-module-posix \
+"
 
 RDEPENDS_${PN} += "libtcmalloc-minimal (= ${EXTENDPKGV})"
 
