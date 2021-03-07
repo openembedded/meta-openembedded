@@ -23,14 +23,13 @@ DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/${PV}/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz \
     file://0001-Fix-configure.ac.patch \
     file://zabbix-agent.service \
-    file://CVE-2020-15803.patch \
 "
 
-SRC_URI[md5sum] = "e666539220be93b1af38e40f5fbb1f79"
-SRC_URI[sha256sum] = "22bb28e667424ad4688f47732853f4241df0e78a7607727b043d704ba726ae0e"
+SRC_URI[md5sum] = "e90822716c5c241890f6fed1588b5451"
+SRC_URI[sha256sum] = "ce0d9745a8b9154e87d6906edd0fce7b7ec298acd34a0543ea53d1a5f2f14bc5"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
@@ -58,7 +57,8 @@ EXTRA_OECONF = " \
     --with-zlib \
     --with-libpthread \
     --with-libevent \
-    --with-libpcre \
+    --with-libpcre=${STAGING_EXECPREFIXDIR} \
+    --with-iconv=${STAGING_EXECPREFIXDIR} \
 "
 CFLAGS_append = " -lldap -llber -pthread"
 
