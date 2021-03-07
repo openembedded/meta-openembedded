@@ -7,7 +7,7 @@ DEPENDS = "gtk+3 gtksourceview3 xfconf xfce4-dev-tools-native"
 
 inherit xfce-app gsettings mime-xdg
 
-SRC_URI[sha256sum] = "30adc5631a4e551df7b3e17ddc1d10e9980080f96518dedccc32170cb18efb8e"
+SRC_URI[sha256sum] = "e7208bb9e96a1525d3358a64f9cdd165005078e84e81984a953a2a03491fcaa8"
 
 FILES_${PN} += " \
     ${datadir}/glib-2.0/schemas \
