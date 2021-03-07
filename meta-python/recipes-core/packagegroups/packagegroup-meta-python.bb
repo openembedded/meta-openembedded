@@ -514,6 +514,7 @@ RDEPENDS_packagegroup-meta-python3-ptest = "\
     python3-uritemplate-ptest \
     python3-webcolors-ptest \
     python3-whoosh-ptest \
+    python3-wpa-supplicant \
     python3-xlrd-ptest \
     python3-xmltodict-ptest \
     python3-xxhash-ptest \
