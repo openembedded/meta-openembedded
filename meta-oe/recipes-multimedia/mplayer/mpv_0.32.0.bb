@@ -26,6 +26,8 @@ S = "${WORKDIR}/git"
 
 inherit waf pkgconfig mime-xdg
 
+LDFLAGS_append_riscv64 = " -latomic"
+
 LUA ?= "lua"
 LUA_mips64  = ""
 LUA_aarch64  = ""
