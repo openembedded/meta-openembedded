@@ -3,8 +3,7 @@ HOMEPAGE = "https://github.com/twisted/incremental"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ca9b07f08e2c72d48c74d363d1e0e15"
 
-SRC_URI[md5sum] = "602746e0d438e075a5a9e0678140bba2"
-SRC_URI[sha256sum] = "7b751696aaf36eebfab537e458929e194460051ccad279c72b755a167eebd4b3"
+SRC_URI[sha256sum] = "02f5de5aff48f6b9f665d99d48bfc7ec03b6e3943210de7cfc88856d755d6f57"
 
 inherit pypi setuptools3
 
