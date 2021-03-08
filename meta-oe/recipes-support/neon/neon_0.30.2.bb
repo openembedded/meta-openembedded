@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a 
 
 SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
            file://pkgconfig.patch \
+           file://fix-package-check-for-libxml2.patch \
           "
 
 SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"
