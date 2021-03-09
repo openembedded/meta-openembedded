@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.1.x \
            file://0001-support-cross-compiling.patch \
            file://0001-explicitly-set-compile-options.patch \
 "
-SRCREV ?= "fcc42e0d344146ee9d265d1f43c094ce5a0ec4cf"
+SRCREV ?= "88bd672dafad68b419ea29bef941dfa17f941038"
 
 inherit setuptools3
 
