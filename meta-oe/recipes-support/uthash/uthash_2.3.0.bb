@@ -8,8 +8,8 @@ DESCRIPTION = " uthash-dev provides a hash table implementation using C preproce
 HOMEPAGE = "https://troydhanson.github.io/uthash/"
 SECTION = "base"
 LICENSE = "BSD-1-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6891c324eb59289db33bac74d4cbb0d4"
-SRCREV = "66e2668795d0aaf4977523f828e548470a680c33"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=736712b5904dd42f8678df7172bc5f2b"
+SRCREV = "e493aa90a2833b4655927598f169c31cfcdf7861"
 
 SRC_URI = "\
     git://github.com/troydhanson/${BPN}.git \
