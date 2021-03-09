@@ -4,15 +4,15 @@ HOMEPAGE = "http://www.phpmyadmin.net"
 LICENSE = "GPLv2 & LGPLv3 & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
                     file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=dd6470bbcd3436ca317f82d34abaf688 \
-                    file://js/vendor/jquery/MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9 \
+                    file://js/vendor/jquery/MIT-LICENSE.txt;md5=75308107741f7dcdc39127209c7e3fc8 \
 "
 
 SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
            file://apache.conf \
 "
 
-SRC_URI[md5sum] = "38c6b9f38e4aeb68a2840d5903dd00c5"
-SRC_URI[sha256sum] = "1578c1a08e594da4f4f62e676ccbdbd17784c3de769b094ba42c35bf05c057db"
+SRC_URI[md5sum] = "4587343e706c5434adf91c396b418731"
+SRC_URI[sha256sum] = "aa8ccf357f672012384df34e1c2bc70147476761c8458a0dad6233497e142c68"
 
 UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
 UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
