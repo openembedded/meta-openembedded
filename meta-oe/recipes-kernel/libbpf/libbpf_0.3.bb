@@ -23,6 +23,8 @@ S = "${WORKDIR}/git/src"
 
 EXTRA_OEMAKE += "DESTDIR=${D} LIBDIR=${libdir}"
 
+inherit pkgconfig
+
 do_compile() {
 	if grep -q "CONFIG_BPF_SYSCALL=y" ${STAGING_KERNEL_BUILDDIR}/.config
 	then
@@ -40,5 +42,3 @@ do_install() {
 		bbnote "no files to install"
 	fi
 }
-
-BBCLASSEXTEND = "native"
