@@ -16,7 +16,7 @@ RDEPENDS_${PN}-compiler = "${PN}"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "3b7f86e3516746c5f0db1947e0d65e94159bcb12"
+SRCREV_grpc = "c3438a0c5d7bc499eb31fd4853ca72c771f758a5"
 BRANCH = "v1.36.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            "
