@@ -16,3 +16,7 @@ SRC_URI[sha256sum] = "9e2a41cba9c5a20ae299d0fdd377fe231434fa04cbfbfb3807293c6ec1
 RDEPENDS_${PN} = "${PYTHON_PN}-grpcio"
 
 BBCLASSEXTEND = "native nativesdk"
+
+# Needs python3-grpcio which does not build for ppc64le
+COMPATIBLE_HOST_powerpc64le = "null"
+
