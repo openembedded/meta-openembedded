@@ -74,6 +74,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
     ${@bb.utils.contains_any("TRANSLATED_TARGET_ARCH", "i586 x86-64", "x265", "", d)} \
 "
 RDEPENDS_packagegroup-meta-multimedia_remove_libc-musl = "projucer"
+RDEPENDS_packagegroup-meta-multimedia_remove_powerpc64le = "openh264"
 
 RDEPENDS_packagegroup-meta-multimedia-connectivity = "\
     gssdp \
