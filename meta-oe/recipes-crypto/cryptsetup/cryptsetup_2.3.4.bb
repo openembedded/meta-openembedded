@@ -13,7 +13,7 @@ DEPENDS = " \
     json-c \
     libdevmapper \
     popt \
-    util-linux \
+    util-linux-uuid \
 "
 
 RDEPENDS_${PN} = " \
