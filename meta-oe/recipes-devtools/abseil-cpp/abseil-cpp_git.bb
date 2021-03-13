@@ -13,6 +13,7 @@ BRANCH = "lts_2020_09_23"
 SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
            file://0001-absl-always-use-asm-sgidefs.h.patch             \
            file://0002-Remove-maes-option-from-cross-compilation.patch \
+           file://abseil-ppc-fixes.patch \
           "
 
 S = "${WORKDIR}/git"
