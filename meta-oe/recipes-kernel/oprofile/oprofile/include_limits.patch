@@ -1,0 +1,17 @@
+include linux/limits.h for MAX_INPUT
+
+Fixes
+op_pe_utils.cpp:533:19: error: 'MAX_INPUT' was not declared in this scope
+
+Upstream-Status: Pending
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+--- a/libpe_utils/op_pe_utils.cpp
++++ b/libpe_utils/op_pe_utils.cpp
+@@ -11,6 +11,7 @@
+  *
+  */
+ 
++#include <linux/limits.h>
+ #include <linux/perf_event.h>
+ #include <dirent.h>
+ #include <stdio.h>
