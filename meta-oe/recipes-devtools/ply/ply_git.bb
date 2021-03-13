@@ -14,4 +14,4 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
 
-COMPATIBLE_HOST = "(x86_64.*|aarch64.*|arm.*|powerpc.*)-linux"
+COMPATIBLE_HOST = "(x86_64.*|aarch64.*|arm.*|powerpc)-linux"
