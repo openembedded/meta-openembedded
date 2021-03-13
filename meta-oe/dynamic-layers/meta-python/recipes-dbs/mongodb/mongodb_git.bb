@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
            file://0001-Fix-compilation-with-fno-common.patch \
            file://0001-stacktrace-Define-ARCH_BITS-for-x86.patch \
            file://0001-include-needed-c-header.patch \
+           file://disable_runtime_check.patch \
            "
 SRC_URI_append_libc-musl ="\
            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
@@ -56,12 +57,15 @@ PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
 PACKAGECONFIG[shell] = ",--js-engine=none,,"
 PACKAGECONFIG[system-pcre] = "--use-system-pcre,,libpcre,"
 
+MONGO_ARCH ?= "${HOST_ARCH}"
+MONGO_ARCH_powerpc64le = "ppc64le"
+
 EXTRA_OESCONS = "PREFIX=${prefix} \
                  DESTDIR=${D} \
                  LIBPATH=${STAGING_LIBDIR} \
                  LINKFLAGS='${LDFLAGS}' \
                  CXXFLAGS='${CXXFLAGS}' \
-                 TARGET_ARCH=${TARGET_ARCH} \
+                 TARGET_ARCH=${MONGO_ARCH} \
                  MONGO_VERSION=${PV} \
                  OBJCOPY=${OBJCOPY} \
                  --ssl \
@@ -116,5 +120,3 @@ scons_do_install() {
 CONFFILES_${PN} = "${sysconfdir}/mongod.conf"
 
 SYSTEMD_SERVICE_${PN} = "mongod.service"
-
-
