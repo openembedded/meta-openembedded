@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.4 \
            file://0001-stacktrace-Define-ARCH_BITS-for-x86.patch \
            file://0001-include-needed-c-header.patch \
            file://disable_runtime_check.patch \
+           file://ppc64_ARCH_BITS.patch \
            "
 SRC_URI_append_libc-musl ="\
            file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
