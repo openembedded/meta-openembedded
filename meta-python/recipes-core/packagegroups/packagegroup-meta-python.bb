@@ -449,7 +449,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-zopeinterface \
     telepathy-python3 \
 "
-RDEPENDS_packagegroup-meta-python3_remove_powerpc64le = "python3-grpcio python3-grpcio-tools"
+RDEPENDS_packagegroup-meta-python3_remove_libc-musl_powerpc64le = "python3-grpcio python3-grpcio-tools"
 
 RDEPENDS_packagegroup-meta-python3-ptest = "\
     python3-cryptography-ptest \

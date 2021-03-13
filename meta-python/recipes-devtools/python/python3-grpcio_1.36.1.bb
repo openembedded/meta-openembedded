@@ -44,6 +44,6 @@ BBCLASSEXTEND = "native nativesdk"
 
 CCACHE_DISABLE = "1"
 
-# abseil-cpp/absl/base/internal/unscaledcycleclock.cc:100:2: error: #error Must implement UnscaledCycleClock::Frequency()
-COMPATIBLE_HOST_powerpc64le = "null"
+# needs vdso support
+COMPATIBLE_HOST_libc-musl_powerpc64le = "null"
 

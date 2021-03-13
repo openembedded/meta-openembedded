@@ -17,6 +17,6 @@ RDEPENDS_${PN} = "${PYTHON_PN}-grpcio"
 
 BBCLASSEXTEND = "native nativesdk"
 
-# Needs python3-grpcio which does not build for ppc64le
-COMPATIBLE_HOST_powerpc64le = "null"
+# Needs abseil-cpp which does not build for ppc64le/musl
+COMPATIBLE_HOST_libc-musl_powerpc64le = "null"
 
