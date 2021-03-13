@@ -8,15 +8,18 @@ Included are an optimized thread-caching malloc() and cpu and heap profiling uti
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
-SRCREV = "d8eb315fb18f6fb0d6efa923401f166343727bc6"
+DEPENDS_append_libc-musl = " libucontext"
+
+SRCREV = "f7c6fb6c8e99d6b1b725e5994373bcd19ffdf8fd"
 SRC_URI = "git://github.com/gperftools/gperftools \
            file://0001-Support-Atomic-ops-on-clang.patch \
            file://0001-fix-build-with-musl-libc.patch \
            file://0001-disbale-heap-checkers-and-debug-allocator-on-musl.patch \
            file://disable_libunwind_aarch64.patch \
            file://sgidef.patch \
-           file://0001-profile-handler-Specify-libc-specific-thread_id.patch \
            "
+
+SRC_URI_append_libc-musl = " file://ppc-musl.patch"
 
 inherit autotools
 
@@ -36,6 +39,7 @@ COMPATIBLE_HOST_riscv32 = "null"
 ARM_INSTRUCTION_SET_armv5 = "arm"
 ARM_INSTRUCTION_SET_toolchain-clang_arm = "arm"
 
+EXTRA_OECONF_append_libc-musl_powerpc64le = " --disable-cpu-profiler --disable-heap-profiler --disable-heap-checker"
 PACKAGECONFIG ?= "libunwind static"
 PACKAGECONFIG_remove_arm_libc-musl = "libunwind"
 PACKAGECONFIG_remove_riscv64 = "libunwind"
@@ -60,4 +64,3 @@ RDEPENDS_${PN} += " \
 "
 
 RDEPENDS_${PN} += "libtcmalloc-minimal (= ${EXTENDPKGV})"
-
