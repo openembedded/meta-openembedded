@@ -14,11 +14,9 @@ SRC_URI = "git://github.com/neutrinolabs/xrdp.git;branch=devel \
            file://xrdp.sysconfig \
            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
            file://0001-Fix-the-compile-error.patch \
-           file://0001-riscv-doesn-t-require-pointers-to-be-aligned.patch \
-           file://0001-correct-the-location-of-errno.h.patch \
-           file://0001-Fixed-compiler-warnings-about-snprintf-truncations.patch \
+           file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
            "
-SRCREV = "1469d659dbccd6d042ac44f0afc4e1309788dc9d"
+SRCREV = "f24b7b7988140b18202908654db3289659303772"
 
 S = "${WORKDIR}/git"
 
