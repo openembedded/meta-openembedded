@@ -6,7 +6,7 @@ SRC_URI = "\
     git://github.com/hughsie/libxmlb.git \
     file://run-ptest \
 "
-SRCREV = "ee4aafdd97844f1c73021a4978a43460f0835d5c"
+SRCREV = "8f2f28eda419dbe31cb1a9aa022f0ca9d30ecb6a"
 S = "${WORKDIR}/git"
 
 inherit gobject-introspection gtk-doc meson ptest-gnome
