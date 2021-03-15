@@ -11,6 +11,8 @@ SECTION = "libs"
 
 inherit autotools
 
+DEPENDS_append_libc-musl = " libucontext"
+
 BBCLASSEXTEND = "native"
 
 PE = "2"
@@ -37,7 +39,7 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main \
            file://0003-Dont-include-stab.h.patch \
            file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch \
            file://mcontext.patch \
-           file://0001-disable-calls-to-getcontext-with-musl.patch \
+           file://0001-Remove-HAVE_GETCONTEXT-check-to-add-local-implementa.patch \
            file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
            file://mips_asm_sgidefs.patch;patchdir=src/third_party/lss \
            file://0001-Do-not-add-stack-pointer-to-clobber-list.patch;patchdir=src/third_party/lss \
@@ -45,6 +47,7 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main \
 S = "${WORKDIR}/git"
 
 CXXFLAGS += "-D_GNU_SOURCE"
+LDFLAGS_append_libc-musl = " -lucontext"
 
 COMPATIBLE_HOST_powerpc = "null"
 COMPATIBLE_HOST_powerpc64 = "null"
