@@ -251,6 +251,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-parse-type \
     python3-parso \
     python3-passlib \
+    python3-pastedeploy \
     python3-pathtools3 \
     python3-pep8 \
     python3-periphery \
