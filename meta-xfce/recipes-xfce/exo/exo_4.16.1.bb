@@ -14,7 +14,7 @@ SRC_URI += " \
     file://configure.patch \
 "
 
-SRC_URI[sha256sum] = "1975b00eed9a8aa1f899eab2efaea593731c19138b83fdff2f13bdca5275bacc"
+SRC_URI[sha256sum] = "528dac256315ffc2a4a53b3b421979327962121989886e3cf920aeff9912b53b"
 
 # Note: python bindings did not work in oe-dev and are about to be moved to
 # pyxfce see http://comments.gmane.org/gmane.comp.desktop.xfce.devel.version4/19560
