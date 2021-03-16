@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.3/dovecot-${PV}.tar.gz \
            file://0001-not-check-pandoc.patch \
            "
 
-SRC_URI[md5sum] = "f512bf1a4dac9ac994fddfb6bc5068ff"
-SRC_URI[sha256sum] = "a3f875b80ec11a452480690108660030978c94fa8e796ad6d943a874b496f1c4"
+SRC_URI[md5sum] = "2f03532cec3280ae45a101a7a55ccef5"
+SRC_URI[sha256sum] = "c8b3d7f3af1e558a3ff0f970309d4013a4d3ce136f8c02a53a3b05f345b9a34a"
 
 DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc bison-native"
 CFLAGS += "-I${STAGING_INCDIR}/tirpc"
