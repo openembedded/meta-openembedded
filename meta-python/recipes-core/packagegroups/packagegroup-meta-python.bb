@@ -334,6 +334,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pytest-runner \
     python3-pytest-tempdir \
     python3-pytest-timeout \
+    python3-pythonping \
     python3-python-vlc \
     python3-pytoml \
     python3-pytun \
