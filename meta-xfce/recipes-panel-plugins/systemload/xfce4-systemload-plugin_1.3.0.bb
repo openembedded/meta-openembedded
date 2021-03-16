@@ -7,4 +7,4 @@ inherit xfce-panel-plugin
 
 DEPENDS += "upower"
 
-SRC_URI[sha256sum] = "0531b8df923cba3be8d064cb8b638b954df74915e5a447228999517847789835"
+SRC_URI[sha256sum] = "1148f8e90cc53cae9b3aa32e10df4bd9fdc2f06db09d8429f88fbdd874fc171d"
