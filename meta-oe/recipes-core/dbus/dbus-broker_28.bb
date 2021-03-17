@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
 
 SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
-SRC_URI[sha256sum] = "15787bb694f128fcbd437841877a2ee0f6c6fef9e428276a35b8524cf52da342"
+SRC_URI[sha256sum] = "abb8b54434faeeb6bf59a70ebf0732e851a50bd922995ba5928e8c28c18b05ea"
 
 UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
 
