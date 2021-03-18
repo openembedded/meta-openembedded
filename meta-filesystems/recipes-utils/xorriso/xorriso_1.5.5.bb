@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 SRC_URI = "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "d6b16763a2ca23eec718cfac1761b40f"
-SRC_URI[sha256sum] = "97a9c9831fa1b053f781f74a17b79327e7402c6163f5c7973453ba881616aeb4"
+SRC_URI[md5sum] = "a5e3dc4e0b92be6837f9ed6cbf7f9df5"
+SRC_URI[sha256sum] = "91663d61bee61ff790b3f6861fdf57c54af0e238ab14f297b55bae8ab5d17684"
 
 PACKAGECONFIG ??= "acl attr zlib bzip2 readline"
 PACKAGECONFIG[acl] = "--enable-libacl,--disable-libacl,acl,"
