@@ -11,28 +11,30 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
 SECTION = "devel"
 
 DEPENDS = "popt binutils"
-RDEPENDS_${PN} = "binutils-symlinks"
+DEPENDS_append_powerpc64 = " libpfm4"
+DEPENDS_append_powerpc64le = " libpfm4"
 
-FILES_${PN} = "${bindir} ${libdir}/${BPN}/lib*${SOLIBS} ${datadir}/${BPN}"
-FILES_${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV} ${libdir}/${BPN}/lib*.la"
-FILES_${PN}-staticdev += "${libdir}/${BPN}/lib*.a"
+COMPATIBLE_HOST_riscv64 = "null"
+COMPATIBLE_HOST_riscv32 = "null"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
            file://acinclude.m4 \
-           file://automake-foreign.patch \
-           file://oprofile-cross-compile-tests.patch \
            file://run-ptest \
-           file://root-home-dir.patch \
-           file://0001-Add-rmb-definition-for-NIOS2-architecture.patch \
-           file://0001-replace-sym_iterator-0-with-sym_iterator.patch \
-           file://0001-Use-new-bfd-APIs-from-2.34.patch \
-           file://include_limits.patch \
+           file://0001-Fix-build-with-musl.patch \
+           file://0002-Fix-configure-when-bin-sh-is-not-bash.patch \
+           file://0003-Define-the-C-preprocessor-variable-to-improve-reprod.patch \
+           file://0004-Use-BUILD_DATE-to-improve-reproducibility.patch \
+           file://0005-Add-rmb-definition-for-NIOS2-architecture.patch \
+           file://0006-replace-sym_iterator-0-with-sym_iterator.patch \
+           file://0007-oprofile-doesn-t-want-GNU-levels-of-automake-strictn.patch \
+           file://0008-include-linux-limits.h-for-MAX_INPUT.patch \
+           file://0009-Prevent-running-check-tests-on-host-if-cross-compili.patch \
+           file://0010-oprofile-Determine-the-root-home-directory-dynamical.patch \
 "
+SRC_URI[sha256sum] = "7ba06f99d7c188389d20d1d5e53ee690c7733f87aa9af62bd664fa0ca235a412"
+
 UPSTREAM_CHECK_REGEX = "oprofile-(?P<pver>\d+(\.\d+)+)/"
 UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/oprofile/files/oprofile/"
-
-SRC_URI_append_libc-musl = " file://musl.patch \
-"
 
 inherit autotools pkgconfig ptest
 
@@ -65,3 +67,9 @@ do_install_ptest() {
 	cp ${S}/libutil++/tests/file_manip_tests.cpp \
 		libutil++/tests/file_manip_tests.o ${D}${PTEST_PATH}/libutil++/tests
 }
+
+RDEPENDS_${PN} = "binutils-symlinks"
+
+FILES_${PN} = "${bindir} ${libdir}/${BPN}/lib*${SOLIBS} ${datadir}/${BPN}"
+FILES_${PN}-dev += "${libdir}/${BPN}/lib*${SOLIBSDEV} ${libdir}/${BPN}/lib*.la"
+FILES_${PN}-staticdev += "${libdir}/${BPN}/lib*.a"

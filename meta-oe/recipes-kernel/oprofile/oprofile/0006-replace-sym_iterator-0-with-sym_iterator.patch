@@ -1,7 +1,7 @@
-From b7c1a2e2b0f4657fe291324ca409224f3321c9ff Mon Sep 17 00:00:00 2001
+From b126134f68f4a5bd826141be68337ac15a7c2c04 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Tue, 12 Feb 2019 11:58:34 -0800
-Subject: [PATCH] replace (sym_iterator)0 with sym_iterator()
+Subject: [PATCH 06/10] replace (sym_iterator)0 with sym_iterator()
 
 clang/libc++ find this error
 
@@ -20,7 +20,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
  1 file changed, 13 insertions(+), 13 deletions(-)
 
 diff --git a/libpp/xml_utils.cpp b/libpp/xml_utils.cpp
-index 3de41e5..f45d3ae 100644
+index 3de41e58..f45d3ae2 100644
 --- a/libpp/xml_utils.cpp
 +++ b/libpp/xml_utils.cpp
 @@ -73,7 +73,7 @@ void dump_symbol(string const & prefix, sym_iterator it, bool want_nl = true)
@@ -127,5 +127,5 @@ index 3de41e5..f45d3ae 100644
  		string module = get_image_name((*it)->image_name,
  			image_name_storage::int_filename, extra_found_images);
 -- 
-2.20.1
+2.31.0
 
