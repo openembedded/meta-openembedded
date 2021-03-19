@@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
 "
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
-SRC_URI[md5sum] = "911272e73181fdc850bb4d25103a9f83"
-SRC_URI[sha256sum] = "9d16eebb96b53b514778e813019b8dd15fea9fec5aafde9fae5febf59df83773"
+SRC_URI[md5sum] = "408620e0df577ec04108ec0bc2b91dee"
+SRC_URI[sha256sum] = "ced9946f444d132536daf92fc8aca4277638a3c2d96e20540b2bae4d36fd70c1"
 
 inherit autotools gettext pkgconfig
 
