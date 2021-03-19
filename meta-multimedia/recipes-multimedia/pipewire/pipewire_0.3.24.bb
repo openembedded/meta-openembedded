@@ -11,7 +11,7 @@ SECTION = "multimedia"
 
 DEPENDS = "dbus"
 
-SRCREV = "22d563720a7f6ba7bdf59950f8c14488d80dfa95"
+SRCREV = "c81d44e8a9497899d01bcc3054b6aa845e7a066e"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
@@ -30,24 +30,30 @@ USERADD_PARAM_${PN} = "--system --home / --no-create-home \
 # For "EVL", look up https://evlproject.org/ . It involves
 # a specially prepared kernel, and is currently unavailable
 # in Yocto.
+#
 # FFmpeg and Vulkan aren't really supported - at the current
 # stage (version 0.3.22), these are just experiments, not
 # actual features.
+#
 # libcamera support currently does not build successfully.
+#
 # systemd user service files are disabled because per-user
 # PipeWire instances aren't really something that makes
 # much sense in an embedded environment. A system-wide
 # instance does.
+#
+# manpage generation requires xmltoman, which is not available.
 EXTRA_OEMESON += " \
-    -Daudiotestsrc=true \
-    -Devl=false \
-    -Dsystemd-user-service=false \
-    -Dtests=false \
+    -Daudiotestsrc=enabled \
+    -Devl=disabled \
+    -Dsystemd-user-service=disabled \
+    -Dtests=disabled \
     -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
-    -Dvideotestsrc=true \
-    -Dffmpeg=false \
-    -Dvulkan=false \
-    -Dlibcamera=false \
+    -Dvideotestsrc=enabled \
+    -Dffmpeg=disabled \
+    -Dvulkan=disabled \
+    -Dlibcamera=disabled \
+    -Dman=disabled \
 "
 
 PACKAGECONFIG ??= "\
@@ -62,18 +68,17 @@ PACKAGECONFIG ??= "\
 # is why these two are marked in their respective packageconfigs
 # as being in conflict.
 
-PACKAGECONFIG[alsa] = "-Dalsa=true,-Dalsa=false,alsa-lib udev"
-PACKAGECONFIG[bluez] = "-Dbluez5=true,-Dbluez5=false,bluez5 sbc"
-PACKAGECONFIG[docs] = "-Ddocs=true,-Ddocs=false,doxygen"
-PACKAGECONFIG[gstreamer] = "-Dgstreamer=true,-Dgstreamer=false,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
-PACKAGECONFIG[jack] = "-Djack=true,-Djack=false,jack,,,pipewire-jack"
-PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false,libxml-parser-perl-native"
+PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib udev"
+PACKAGECONFIG[bluez] = "-Dbluez5=enabled,-Dbluez5=disabled,bluez5 sbc"
+PACKAGECONFIG[docs] = "-Ddocs=enabled,-Ddocs=disabled,doxygen-native"
+PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
 PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
 PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
-PACKAGECONFIG[systemd] = "-Dsystemd=true -Dsystemd-system-service=true ,-Dsystemd=false -Dsystemd-system-service=false,systemd"
-PACKAGECONFIG[v4l2] = "-Dv4l2=true,-Dv4l2=false,udev"
-PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=true,-Dpipewire-alsa=false,alsa-lib"
-PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=true -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=false,jack,,,jack"
+PACKAGECONFIG[systemd] = "-Dsystemd=enabled -Dsystemd-system-service=enabled ,-Dsystemd=disabled -Dsystemd-system-service=disabled,systemd"
+PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
+PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
+PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
 
 PACKAGESPLITFUNCS_prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS_append = " set_dynamic_metapkg_rdepends "
