@@ -10,3 +10,5 @@ SRC_URI[sha256sum] = "3ad0f40a696763bb0f4d4dec5b51f6b53ccfeb7c16ebb5897349303045
 PYPI_PACKAGE = "wpa_supplicant"
 
 inherit pypi setuptools3
+
+RDEPENDS_${PN} += "python3-twisted python3-click python3-txdbus"
