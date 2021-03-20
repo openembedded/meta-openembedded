@@ -1,4 +1,4 @@
-DESCRIPTION = "Python interface to the wpa_supplicant D-Bus interface"
+SUMMARY = "Python interface to the wpa_supplicant D-Bus interface"
 HOMEPAGE = "https://pypi.org/project/wpa_supplicant/"
 SECTION = "devel/python"
 LICENSE = "MPL-2.0"
