@@ -880,7 +880,6 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     unixodbc \
     daemonize \
     upower \
-    xxhash \
     unicode-ucd \
     xdelta3 \
     uriparser \
