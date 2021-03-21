@@ -245,9 +245,11 @@ FILES_${PN}-jack = "\
 
 # Example session manager. Not intended for use in production.
 CONFFILES_${PN}-media-session = "${sysconfdir}/pipewire/media-session.d/*"
+SYSTEMD_SERVICE_${PN}-media-session = "pipewire-media-session.service"
 FILES_${PN}-media-session = " \
     ${bindir}/pipewire-media-session \
     ${sysconfdir}/pipewire/media-session.d/* \
+    ${systemd_system_unitdir}/pipewire-media-session.service \
 "
 RPROVIDES_${PN}-media-session = "virtual/pipewire-sessionmanager"
 
