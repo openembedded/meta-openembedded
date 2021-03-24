@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=b8ee59850b882cbf623188489ea748e2"
 
 PYPI_PACKAGE = "croniter"
 
-SRC_URI[sha256sum] = "c8b830d787c9993361b74eaad7d7396090d7f2d9db41ceb4a52cb75da461c3ed"
+SRC_URI[sha256sum] = "708532f70584207e23ef2989ca40f367e6238bfe050133a1aff43e1e0e6f6092"
 
 inherit pypi setuptools3
 
