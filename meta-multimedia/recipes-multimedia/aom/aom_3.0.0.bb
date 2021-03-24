@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
 
 SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https"
 
-SRCREV = "d1d1226af626a61f7ca664b270dd473b92228984"
+SRCREV = "307ce06ed82d93885ee8ed53e152c9268ac0d98d"
 
 S = "${WORKDIR}/git"
 
