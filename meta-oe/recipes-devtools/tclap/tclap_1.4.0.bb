@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5c64b2e8cc50917b2744a90950faa7cd"
 
 SRCREV = "799a8b1f99818e39fee19d0601030770af1221e1"
 SRC_URI = "git://git.code.sf.net/p/tclap/code;branch=1.4 \
+           file://0001-tclap-add-pkg-config-file.patch \
 "
 
 S = "${WORKDIR}/git"
