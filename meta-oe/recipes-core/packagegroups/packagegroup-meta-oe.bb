@@ -258,7 +258,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     mpich \
     msgpack-c \
     mercurial \
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "nodejs", "", d)} \
+    nodejs \
     openocd \
     pax-utils \
     ipc-run \
