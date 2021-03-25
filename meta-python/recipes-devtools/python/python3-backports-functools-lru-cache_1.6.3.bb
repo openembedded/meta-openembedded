@@ -2,12 +2,11 @@ SUMMARY = "Backport of functools.lru_cache from Python 3.3"
 HOMEPAGE = "https://github.com/jaraco/backports.functools_lru_cache"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a33f38bbf47d48c70fe0d40e5f77498e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=7a7126e068206290f3fe9f8d6c713ea6"
 
 PYPI_PACKAGE = "backports.functools_lru_cache"
 
-SRC_URI[md5sum] = "103000b21a8e683647e2ce41929f2a9d"
-SRC_URI[sha256sum] = "8fde5f188da2d593bd5bc0be98d9abc46c95bb8a9dde93429570192ee6cc2d4a"
+SRC_URI[sha256sum] = "d84e126e2a29e4fde8931ff8131240bbf30a0e7dbcc3897a8dbd8ea5ac11419c"
 
 DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 
