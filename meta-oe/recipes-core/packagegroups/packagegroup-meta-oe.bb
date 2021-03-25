@@ -220,7 +220,7 @@ RDEPENDS_packagegroup-meta-oe-dbs ="\
 "
 
 RDEPENDS_packagegroup-meta-oe-dbs-python2 ="\
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "mysql-python", "", d)} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'mysql-python', '', d), "", d)} \
 "
 
 RDEPENDS_packagegroup-meta-oe-devtools ="\
@@ -439,7 +439,7 @@ RDEPENDS_packagegroup-meta-oe-extended_remove_riscv64 = "upm libleak mraa sysdig
 RDEPENDS_packagegroup-meta-oe-extended_remove_riscv32 = "upm libleak mraa sysdig tiptop"
 
 RDEPENDS_packagegroup-meta-oe-extended-python2 ="\
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "openlmi-tools", "", d)} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'openlmi-tools', '', d), "", d)} \
 "
 
 RDEPENDS_packagegroup-meta-oe-gnome ="\
@@ -916,7 +916,7 @@ RDEPENDS_packagegroup-meta-oe-support_append_x86 = " mcelog mce-inject mce-test 
 RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
 
 RDEPENDS_packagegroup-meta-oe-support-python2 ="\
-    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", "lio-utils", "", d)} \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'lio-utils', '', d), "", d)} \
 "
 
 RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
