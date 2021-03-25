@@ -111,7 +111,6 @@ INITSCRIPT_NAME_${PN} = "vmtoolsd"
 INITSCRIPT_PARAMS_${PN} = "start 90 2 3 4 5 . stop 60 0 1 6 ."
 
 python() {
-    if 'networking-layer' not in d.getVar('BBFILE_COLLECTIONS').split() or \
-        'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
-        raise bb.parse.SkipRecipe('Requires meta-networking and meta-filesystems to be present.')
+    if 'filesystems-layer' not in d.getVar('BBFILE_COLLECTIONS').split():
+        raise bb.parse.SkipRecipe('Requires meta-filesystems to be present to provide fuse.')
 }
