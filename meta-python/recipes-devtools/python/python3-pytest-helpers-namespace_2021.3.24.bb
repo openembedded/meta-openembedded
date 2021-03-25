@@ -2,12 +2,16 @@ DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, howe
 HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
 SECTION = "devel/python"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=cc99508c43d9d14fd51c7fac622ffd23"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=440a4cdb311cd7ad181efb4cba06d562"
 
-SRC_URI[md5sum] = "04ec1d8750f9b154e782a47cf8b30736"
-SRC_URI[sha256sum] = "4eff23a19f92410c0166f6dffbfa8901d3e14a80e97d70cd08428b6d597771ce"
+SRC_URI[sha256sum] = "188df5a7c52390fa27d6cd2f18e74d64a2ef0b9fb6e12f15fdf5a95f4813d25f"
 
 inherit pypi setuptools3
+
+DEPENDS += "\
+    ${PYTHON_PN}-wheel-native \
+    ${PYTHON_PN}-pip-native \
+"
 
 RDEPENDS_${PN} += " \
     ${PYTHON_PN}-pytest \
