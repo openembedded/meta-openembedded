@@ -670,7 +670,6 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
     libvpx \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsp", "", d)} \
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "mpv", "", d)} \
-    pipewire \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} \
     libopusenc \
 "
