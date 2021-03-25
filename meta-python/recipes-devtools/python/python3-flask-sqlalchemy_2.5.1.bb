@@ -2,8 +2,7 @@ DESCRIPTION = "Adds SQLAlchemy support to your Flask application."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
 
-SRC_URI[md5sum] = "63a522cb82a75292dc8bc77b6d26187a"
-SRC_URI[sha256sum] = "bfc7150eaf809b1c283879302f04c42791136060c6eeb12c0c6674fb1291fae5"
+SRC_URI[sha256sum] = "2bda44b43e7cacb15d4e05ff3cc1f8bc97936cc464623424102bfc2c35e95912"
 
 PYPI_PACKAGE = "Flask-SQLAlchemy"
 
