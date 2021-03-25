@@ -912,8 +912,8 @@ RDEPENDS_packagegroup-meta-oe-support ="\
 RDEPENDS_packagegroup-meta-oe-support_append_armv7a = " ne10"
 RDEPENDS_packagegroup-meta-oe-support_append_armv7ve = " ne10"
 RDEPENDS_packagegroup-meta-oe-support_append_aarch64 = " ne10"
-RDEPENDS_packagegroup-meta-oe-support_append_x86 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
-RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = " mcelog mce-inject mce-test open-vm-tools vboxguestdrivers"
+RDEPENDS_packagegroup-meta-oe-support_append_x86 = " mcelog mce-inject mce-test vboxguestdrivers"
+RDEPENDS_packagegroup-meta-oe-support_append_x86-64 = " mcelog mce-inject mce-test vboxguestdrivers"
 
 RDEPENDS_packagegroup-meta-oe-support-python2 ="\
     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'lio-utils', '', d), "", d)} \
