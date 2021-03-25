@@ -7,7 +7,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 
 SRC_URI = "git://github.com/open-iscsi/configshell-fb.git;protocol=https;branch=master"
-SRCREV = "da8f0cef114e7343a7ae96ff1db7c8c574f819be"
+SRCREV = "d74a33b69f688ed9b8b28033835303604639d4eb"
 
 S = "${WORKDIR}/git"
 
