@@ -188,6 +188,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-jdatetime \
     python3-jdcal \
     python3-jedi \
+    python3-jmespath \
     python3-jsmin \
     python3-jsonpatch \
     python3-jsonpath-rw \
