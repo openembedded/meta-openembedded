@@ -104,6 +104,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-djangorestframework \
     python3-dnspython \
     python3-docopt \
+    python3-docutils \
     python3-dominate \
     python3-dt-schema \
     python3-dynamic-dispatch \
