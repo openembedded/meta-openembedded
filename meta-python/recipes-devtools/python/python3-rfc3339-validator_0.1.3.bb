@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3339-validator:"
 
-SRC_URI[md5sum] = "2c233007189d5ef21046cb2afac51a96"
-SRC_URI[sha256sum] = "c9659c3183488a1875c4d327c9873d9e92c54cdcd69dfbfae7546ad8b27baf9a"
+SRC_URI[sha256sum] = "7a578aa0740e9ee2b48356fe1f347139190c4c72e27f303b3617054efd15df32"
 
 PYPI_PACKAGE = "rfc3339_validator"
 
