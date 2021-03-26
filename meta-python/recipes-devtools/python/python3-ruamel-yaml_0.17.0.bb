@@ -10,7 +10,7 @@ inherit pypi setuptools3
 
 BBCLASSEXTEND = "native nativesdk"
 
-SRC_URI[sha256sum] = "bb48c514222702878759a05af96f4b7ecdba9b33cd4efcf25c86b882cef3a942"
+SRC_URI[sha256sum] = "3572505e63dd35b5dea62cd0386d03c4f2a53da29a3af09f428114cc85c564aa"
 
 do_install_prepend() {
     export RUAMEL_NO_PIP_INSTALL_CHECK=1
