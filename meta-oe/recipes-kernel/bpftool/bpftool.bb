@@ -15,6 +15,7 @@ SECURITY_CFLAGS = ""
 
 do_configure[depends] += "virtual/kernel:do_shared_workdir"
 
+COMPATIBLE_HOST = "(x86_64).*-linux"
 COMPATIBLE_HOST_libc-musl = 'null'
 
 do_compile() {
@@ -32,4 +33,3 @@ python do_package_prepend() {
 }
 
 B = "${WORKDIR}/${BPN}-${PV}"
-PNBLACKLIST[bpftool] ?= "Needs forward porting to kernel 5.2+"

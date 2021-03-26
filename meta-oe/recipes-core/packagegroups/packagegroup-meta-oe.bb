@@ -624,12 +624,12 @@ RDEPENDS_packagegroup-meta-oe-kernel ="\
     trace-cmd \
 "
 RDEPENDS_packagegroup-meta-oe-kernel_append_x86 = " intel-speed-select ipmiutil pm-graph turbostat"
-RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat"
+RDEPENDS_packagegroup-meta-oe-kernel_append_x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
 RDEPENDS_packagegroup-meta-oe-kernel_append_poerpc64 = " libpfm4"
 
 # Kernel-selftest does not build with 5.8 and its exluded from build too so until its fixed remove it
 RDEPENDS_packagegroup-meta-oe-kernel_remove = "kernel-selftest"
-RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash intel-speed-select kernel-selftest minicoredumper turbostat"
+RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash intel-speed-select kernel-selftest minicoredumper turbostat"
 
 RDEPENDS_packagegroup-meta-oe-kernel_remove_mipsarch = "makedumpfile"
 RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
