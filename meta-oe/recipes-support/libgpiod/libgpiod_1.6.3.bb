@@ -8,8 +8,8 @@ SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
            file://run-ptest \
 "
 
-SRC_URI[md5sum] = "4765470becb619fead3cdaeac61b9a77"
-SRC_URI[sha256sum] = "c601e71846f5ab140c83bc757fdd62a4fda24a9cee39cc5e99c96ec2bf1b06a9"
+SRC_URI[md5sum] = "28e79f6f70fee1da9079558d8b7b3736"
+SRC_URI[sha256sum] = "841be9d788f00bab08ef22c4be5c39866f0e46cb100a3ae49ed816ac9c5dddc7"
 
 inherit autotools pkgconfig python3native ptest
 

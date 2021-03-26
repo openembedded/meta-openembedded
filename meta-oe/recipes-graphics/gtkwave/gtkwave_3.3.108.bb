@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 
 SRC_URI = "http://gtkwave.sourceforge.net/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "23879689ecf7e2cdd2cd5a91c5c601da"
-SRC_URI[sha256sum] = "d20dd1a9307b908439c68122a9f81d3ff434a6bfa5439f0cb01398fec650894f"
+SRC_URI[md5sum] = "dd40f09f44d7aed937e63c29b63cd3af"
+SRC_URI[sha256sum] = "ece447340442e7ad029713789552e8392b75dd3808c882ac5193d42fce55eb3b"
 
 inherit pkgconfig autotools gettext texinfo mime mime-xdg
 DEPENDS += "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
