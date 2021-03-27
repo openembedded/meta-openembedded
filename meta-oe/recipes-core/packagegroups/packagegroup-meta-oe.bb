@@ -415,6 +415,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
      snappy \
      tipcutils \
      tiptop \
+     tmate \
      tmux \
      triggerhappy \
      upm \
