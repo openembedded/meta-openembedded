@@ -153,6 +153,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-grpcio-tools \
     python3-gsocketpool \
     python3-gunicorn \
+    python3-h11 \
     python3-h2 \
     python3-h5py \
     python3-haversine \
