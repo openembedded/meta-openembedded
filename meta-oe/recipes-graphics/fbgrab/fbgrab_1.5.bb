@@ -6,7 +6,7 @@ SECTION = "console/utils"
 DEPENDS = "libpng zlib"
 SRC_URI = "git://github.com/GunnarMonell/fbgrab.git;protocol=https"
 
-SRCREV = "74373aafc0b496e67642562d86eac6b858a31f24"
+SRCREV = "f43ce6d5ce48fb01360eaa7c4a92c2573a1d02f8"
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep
