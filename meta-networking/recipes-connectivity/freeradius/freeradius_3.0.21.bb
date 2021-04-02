@@ -26,7 +26,6 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
     file://freeradius-fix-quoting-for-BUILT_WITH.patch \
     file://freeradius-fix-error-for-expansion-of-macro.patch \
     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-    file://0001-rlm_python3-add-PY_INC_DIR-in-search-dir.patch \
     file://0001-raddb-certs-Makefile-fix-the-existed-certificate-err.patch \
     file://0001-raddb-certs-Makefile-fix-the-occasional-verification.patch \
     file://0001-workaround-error-with-autoconf-2.7.patch \
@@ -34,7 +33,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
     file://radiusd-volatiles.conf \
 "
 
-SRCREV = "d94c953ab9602a238433ba18533111b845fd8e9e"
+SRCREV = "af428abda249b2279ba0582180985a9f6f4a144a"
 
 PARALLEL_MAKE = ""
 
