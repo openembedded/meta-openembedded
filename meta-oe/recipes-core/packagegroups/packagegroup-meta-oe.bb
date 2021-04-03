@@ -146,7 +146,6 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
     obexftp \
     packagegroup-tools-bluetooth \
     paho-mqtt-c \
-    phonet-utils \
     rabbitmq-c \
     rfkill \
     rtorrent \
