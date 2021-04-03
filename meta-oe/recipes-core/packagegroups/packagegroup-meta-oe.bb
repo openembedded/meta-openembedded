@@ -192,7 +192,7 @@ RDEPENDS_packagegroup-meta-oe-core = "\
     usleep \
     dbus-cxx \
 "
-RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " glfw"
+RDEPENDS_packagegroup-meta-oe-core_append_libc-glibc = " ${@bb.utils.contains("DISTRO_FEATURES", "x11 opengl", "glfw", "", d)}"
 RDEPENDS_packagegroup-meta-oe-core_remove_riscv64 = "safec"
 RDEPENDS_packagegroup-meta-oe-core_remove_riscv32 = "safec"
 
@@ -355,7 +355,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
      libuio \
      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "libwmf", "", d)} \
      lprng \
-     icewm \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "icewm", "", d)} \
      md5deep \
      indent \
      jansson \
@@ -712,7 +712,6 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     ace-cloud-editor \
     frame \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis", "", d)} \
-    geis \
     grail \
     asio \
     augeas \
