@@ -760,7 +760,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     ccid \
     zchunk \
     libgpiod \
-    libgpiod \
+    libmanette \
     ckermit \
     libcereal \
     daemontools \
