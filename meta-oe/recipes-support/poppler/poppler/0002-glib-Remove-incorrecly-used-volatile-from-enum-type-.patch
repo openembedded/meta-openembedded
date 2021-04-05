@@ -1,0 +1,47 @@
+From 8b0890e2d1623e580d8a849e56c1f3a2984e782d Mon Sep 17 00:00:00 2001
+From: Christian Persch <chpe@src.gnome.org>
+Date: Fri, 26 Mar 2021 18:17:25 +0100
+Subject: [PATCH 2/2] glib: Remove incorrecly used volatile from enum type
+ registration code
+
+Upstream-Status: Backport [https://github.com/freedesktop/poppler/commit/bdd110b45a38e8a4f80f522892e4c4a9e432abd5]
+---
+ glib/poppler-enums.c.template | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/glib/poppler-enums.c.template b/glib/poppler-enums.c.template
+index 26a51b4..eefc769 100644
+--- a/glib/poppler-enums.c.template
++++ b/glib/poppler-enums.c.template
+@@ -15,9 +15,9 @@
+ GType
+ @enum_name@_get_type (void)
+ {
+-  static volatile gsize g_define_type_id__volatile = 0;
++  static volatile gsize g_define_type_id = 0;
+  
+-  if (g_once_init_enter (&g_define_type_id__volatile)) {
++  if (g_once_init_enter (&g_define_type_id)) {
+     static const G@Type@Value values[] = {
+ /*** END value-header ***/
+ 
+@@ -28,13 +28,13 @@ GType
+ /*** BEGIN value-tail ***/
+       { 0, NULL, NULL }
+     };
+-    GType g_define_type_id = 
++    GType type =
+        g_@type@_register_static (g_intern_static_string ("@EnumName@"), values);
+       
+-    g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
++    g_once_init_leave (&g_define_type_id, type);
+   }
+     
+-  return g_define_type_id__volatile;
++  return g_define_type_id;
+ }
+ 
+ /*** END value-tail ***/
+-- 
+2.31.1
+
