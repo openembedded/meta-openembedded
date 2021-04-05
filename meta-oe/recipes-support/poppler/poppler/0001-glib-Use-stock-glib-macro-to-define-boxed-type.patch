@@ -1,0 +1,228 @@
+From 17b25e3122685d8277fe70fb6d27ab1eaf15b3e7 Mon Sep 17 00:00:00 2001
+From: Christian Persch <chpe@src.gnome.org>
+Date: Fri, 26 Mar 2021 18:17:25 +0100
+Subject: [PATCH 1/2] glib: Use stock glib macro to define boxed type
+
+Upstream-Staus: Backport [https://github.com/freedesktop/poppler/commit/47de887d7658cfd68df44b3acf710971054f957b]
+Poppler already depends on a sufficiently new glib version, so we can
+simply use G_DEFINE_BOXED_TYPE instead of defining our own macro.
+---
+ glib/poppler-action.cc            |  4 ++--
+ glib/poppler-annot.cc             |  2 +-
+ glib/poppler-document.cc          |  6 +++---
+ glib/poppler-page.cc              | 20 ++++++++++----------
+ glib/poppler-private.h            | 15 ---------------
+ glib/poppler-structure-element.cc |  4 ++--
+ 6 files changed, 18 insertions(+), 33 deletions(-)
+
+diff --git a/glib/poppler-action.cc b/glib/poppler-action.cc
+index d395db7..b772a3c 100644
+--- a/glib/poppler-action.cc
++++ b/glib/poppler-action.cc
+@@ -25,7 +25,7 @@
+  * @title: PopplerAction
+  */
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerDest, poppler_dest, poppler_dest_copy, poppler_dest_free)
++G_DEFINE_BOXED_TYPE(PopplerDest, poppler_dest, poppler_dest_copy, poppler_dest_free)
+ 
+ /**
+  * poppler_dest_copy:
+@@ -88,7 +88,7 @@ static PopplerActionLayer *poppler_action_layer_copy(PopplerActionLayer *action_
+     return retval;
+ }
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerAction, poppler_action, poppler_action_copy, poppler_action_free)
++G_DEFINE_BOXED_TYPE(PopplerAction, poppler_action, poppler_action_copy, poppler_action_free)
+ 
+ /**
+  * poppler_action_free:
+diff --git a/glib/poppler-annot.cc b/glib/poppler-annot.cc
+index f4c5bb1..5320565 100644
+--- a/glib/poppler-annot.cc
++++ b/glib/poppler-annot.cc
+@@ -1693,7 +1693,7 @@ gchar *poppler_annot_file_attachment_get_name(PopplerAnnotFileAttachment *popple
+ }
+ 
+ /* PopplerAnnotCalloutLine */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerAnnotCalloutLine, poppler_annot_callout_line, poppler_annot_callout_line_copy, poppler_annot_callout_line_free)
++G_DEFINE_BOXED_TYPE(PopplerAnnotCalloutLine, poppler_annot_callout_line, poppler_annot_callout_line_copy, poppler_annot_callout_line_free)
+ 
+ /**
+  * poppler_annot_callout_line_new:
+diff --git a/glib/poppler-document.cc b/glib/poppler-document.cc
+index bd26bc7..9e62ff6 100644
+--- a/glib/poppler-document.cc
++++ b/glib/poppler-document.cc
+@@ -2360,7 +2360,7 @@ struct _PopplerIndexIter
+     int index;
+ };
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerIndexIter, poppler_index_iter, poppler_index_iter_copy, poppler_index_iter_free)
++G_DEFINE_BOXED_TYPE(PopplerIndexIter, poppler_index_iter, poppler_index_iter_copy, poppler_index_iter_free)
+ 
+ /**
+  * poppler_index_iter_copy:
+@@ -2579,7 +2579,7 @@ struct _PopplerFontsIter
+     int index;
+ };
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerFontsIter, poppler_fonts_iter, poppler_fonts_iter_copy, poppler_fonts_iter_free)
++G_DEFINE_BOXED_TYPE(PopplerFontsIter, poppler_fonts_iter, poppler_fonts_iter_copy, poppler_fonts_iter_free)
+ 
+ /**
+  * poppler_fonts_iter_get_full_name:
+@@ -3111,7 +3111,7 @@ struct _PopplerLayersIter
+     int index;
+ };
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerLayersIter, poppler_layers_iter, poppler_layers_iter_copy, poppler_layers_iter_free)
++G_DEFINE_BOXED_TYPE(PopplerLayersIter, poppler_layers_iter, poppler_layers_iter_copy, poppler_layers_iter_free)
+ 
+ /**
+  * poppler_layers_iter_copy:
+diff --git a/glib/poppler-page.cc b/glib/poppler-page.cc
+index 7e21c71..2e229bf 100644
+--- a/glib/poppler-page.cc
++++ b/glib/poppler-page.cc
+@@ -1566,7 +1566,7 @@ void poppler_page_remove_annot(PopplerPage *page, PopplerAnnot *annot)
+ 
+ /* PopplerRectangle type */
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerRectangle, poppler_rectangle, poppler_rectangle_copy, poppler_rectangle_free)
++G_DEFINE_BOXED_TYPE(PopplerRectangle, poppler_rectangle, poppler_rectangle_copy, poppler_rectangle_free)
+ 
+ /**
+  * poppler_rectangle_new:
+@@ -1608,7 +1608,7 @@ void poppler_rectangle_free(PopplerRectangle *rectangle)
+ 
+ /* PopplerPoint type */
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerPoint, poppler_point, poppler_point_copy, poppler_point_free)
++G_DEFINE_BOXED_TYPE(PopplerPoint, poppler_point, poppler_point_copy, poppler_point_free)
+ 
+ /**
+  * poppler_point_new:
+@@ -1657,7 +1657,7 @@ void poppler_point_free(PopplerPoint *point)
+ 
+ /* PopplerQuadrilateral type */
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerQuadrilateral, poppler_quadrilateral, poppler_quadrilateral_copy, poppler_quadrilateral_free)
++G_DEFINE_BOXED_TYPE(PopplerQuadrilateral, poppler_quadrilateral, poppler_quadrilateral_copy, poppler_quadrilateral_free)
+ 
+ /**
+  * poppler_quadrilateral_new:
+@@ -1705,7 +1705,7 @@ void poppler_quadrilateral_free(PopplerQuadrilateral *quad)
+ 
+ /* PopplerTextAttributes type */
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerTextAttributes, poppler_text_attributes, poppler_text_attributes_copy, poppler_text_attributes_free)
++G_DEFINE_BOXED_TYPE(PopplerTextAttributes, poppler_text_attributes, poppler_text_attributes_copy, poppler_text_attributes_free)
+ 
+ /**
+  * poppler_text_attributes_new:
+@@ -1804,7 +1804,7 @@ void poppler_text_attributes_free(PopplerTextAttributes *text_attrs)
+  */
+ 
+ /* PopplerColor type */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerColor, poppler_color, poppler_color_copy, poppler_color_free)
++G_DEFINE_BOXED_TYPE(PopplerColor, poppler_color, poppler_color_copy, poppler_color_free)
+ 
+ /**
+  * poppler_color_new:
+@@ -1848,7 +1848,7 @@ void poppler_color_free(PopplerColor *color)
+ }
+ 
+ /* PopplerLinkMapping type */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerLinkMapping, poppler_link_mapping, poppler_link_mapping_copy, poppler_link_mapping_free)
++G_DEFINE_BOXED_TYPE(PopplerLinkMapping, poppler_link_mapping, poppler_link_mapping_copy, poppler_link_mapping_free)
+ 
+ /**
+  * poppler_link_mapping_new:
+@@ -1900,7 +1900,7 @@ void poppler_link_mapping_free(PopplerLinkMapping *mapping)
+ }
+ 
+ /* Poppler Image mapping type */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerImageMapping, poppler_image_mapping, poppler_image_mapping_copy, poppler_image_mapping_free)
++G_DEFINE_BOXED_TYPE(PopplerImageMapping, poppler_image_mapping, poppler_image_mapping_copy, poppler_image_mapping_free)
+ 
+ /**
+  * poppler_image_mapping_new:
+@@ -1939,7 +1939,7 @@ void poppler_image_mapping_free(PopplerImageMapping *mapping)
+ }
+ 
+ /* Page Transition */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerPageTransition, poppler_page_transition, poppler_page_transition_copy, poppler_page_transition_free)
++G_DEFINE_BOXED_TYPE(PopplerPageTransition, poppler_page_transition, poppler_page_transition_copy, poppler_page_transition_free)
+ 
+ /**
+  * poppler_page_transition_new:
+@@ -1983,7 +1983,7 @@ void poppler_page_transition_free(PopplerPageTransition *transition)
+ }
+ 
+ /* Form Field Mapping Type */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerFormFieldMapping, poppler_form_field_mapping, poppler_form_field_mapping_copy, poppler_form_field_mapping_free)
++G_DEFINE_BOXED_TYPE(PopplerFormFieldMapping, poppler_form_field_mapping, poppler_form_field_mapping_copy, poppler_form_field_mapping_free)
+ 
+ /**
+  * poppler_form_field_mapping_new:
+@@ -2035,7 +2035,7 @@ void poppler_form_field_mapping_free(PopplerFormFieldMapping *mapping)
+ }
+ 
+ /* PopplerAnnot Mapping Type */
+-POPPLER_DEFINE_BOXED_TYPE(PopplerAnnotMapping, poppler_annot_mapping, poppler_annot_mapping_copy, poppler_annot_mapping_free)
++G_DEFINE_BOXED_TYPE(PopplerAnnotMapping, poppler_annot_mapping, poppler_annot_mapping_copy, poppler_annot_mapping_free)
+ 
+ /**
+  * poppler_annot_mapping_new:
+diff --git a/glib/poppler-private.h b/glib/poppler-private.h
+index d41b59c..1027271 100644
+--- a/glib/poppler-private.h
++++ b/glib/poppler-private.h
+@@ -143,21 +143,6 @@ gboolean _poppler_convert_pdf_date_to_gtime(const GooString *date, time_t *gdate
+ GDateTime *_poppler_convert_pdf_date_to_date_time(const GooString *date);
+ GooString *_poppler_convert_date_time_to_pdf_date(GDateTime *datetime);
+ 
+-/*
+- * A convenience macro for boxed type implementations, which defines a
+- * type_name_get_type() function registering the boxed type.
+- */
+-#define POPPLER_DEFINE_BOXED_TYPE(TypeName, type_name, copy_func, free_func)                                                                                                                                                                   \
+-    GType type_name##_get_type(void)                                                                                                                                                                                                           \
+-    {                                                                                                                                                                                                                                          \
+-        static volatile gsize g_define_type_id__volatile = 0;                                                                                                                                                                                  \
+-        if (g_once_init_enter(&g_define_type_id__volatile)) {                                                                                                                                                                                  \
+-            GType g_define_type_id = g_boxed_type_register_static(g_intern_static_string(#TypeName), (GBoxedCopyFunc)copy_func, (GBoxedFreeFunc)free_func);                                                                                    \
+-            g_once_init_leave(&g_define_type_id__volatile, g_define_type_id);                                                                                                                                                                  \
+-        }                                                                                                                                                                                                                                      \
+-        return g_define_type_id__volatile;                                                                                                                                                                                                     \
+-    }
+-
+ void _poppler_error_cb(ErrorCategory category, Goffset pos, const char *message);
+ 
+ #endif
+diff --git a/glib/poppler-structure-element.cc b/glib/poppler-structure-element.cc
+index aec7cd1..29d3e5c 100644
+--- a/glib/poppler-structure-element.cc
++++ b/glib/poppler-structure-element.cc
+@@ -581,7 +581,7 @@ struct _PopplerStructureElementIter
+     unsigned index;
+ };
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerStructureElementIter, poppler_structure_element_iter, poppler_structure_element_iter_copy, poppler_structure_element_iter_free)
++G_DEFINE_BOXED_TYPE(PopplerStructureElementIter, poppler_structure_element_iter, poppler_structure_element_iter_copy, poppler_structure_element_iter_free)
+ 
+ /**
+  * poppler_structure_element_iter_copy:
+@@ -763,7 +763,7 @@ struct _PopplerTextSpan
+     PopplerColor color;
+ };
+ 
+-POPPLER_DEFINE_BOXED_TYPE(PopplerTextSpan, poppler_text_span, poppler_text_span_copy, poppler_text_span_free)
++G_DEFINE_BOXED_TYPE(PopplerTextSpan, poppler_text_span, poppler_text_span_copy, poppler_text_span_free)
+ 
+ enum
+ {
+-- 
+2.31.1
+
