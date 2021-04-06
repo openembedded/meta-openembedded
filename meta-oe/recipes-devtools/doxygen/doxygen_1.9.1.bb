@@ -10,8 +10,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.src.tar.gz \
            file://0001-build-don-t-look-for-Iconv.patch \
 "
 SRC_URI_append_class-native = " file://doxygen-native-only-check-python3.patch"
-SRC_URI[md5sum] = "8729936a843232a66fe970ef65f3c3e4"
-SRC_URI[sha256sum] = "e0db6979286fd7ccd3a99af9f97397f2bae50532e4ecb312aa18862f8401ddec"
+SRC_URI[sha256sum] = "67aeae1be4e1565519898f46f1f7092f1973cce8a767e93101ee0111717091d1"
 
 inherit cmake python3native
 
