@@ -1,17 +1,16 @@
 SUMMARY = "Character Based User Interface for libyui"
 LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
-    file://COPYING.lgpl-2.1;md5=4fbd65380cdd255951079008b364516c \
+LIC_FILES_CHKSUM = "file://../COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+    file://../COPYING.lgpl-2.1;md5=4fbd65380cdd255951079008b364516c \
 "
 
-SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
-          "
+SRC_URI = "git://github.com/libyui/libyui.git"
 
 SRC_URI_append_class-target = " file://0001-Fix-the-error-of-can-t-find-header-file.patch"
 
-SRCREV = "37d3a1e815a47f536b4f694f139f279cc93a3854"
+SRCREV = "718ac672374a2b0f50cbc7d637d90e6471babc3d"
 
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/git/libyui-ncurses"
 
 inherit cmake gettext pkgconfig
 
