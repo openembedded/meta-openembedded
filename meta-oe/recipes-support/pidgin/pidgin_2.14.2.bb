@@ -11,11 +11,9 @@ SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
     file://sanitize-configure.ac.patch \
     file://purple-OE-branding-25.patch \
-    file://0001-configure.ac-fix-build-with-autoconf-2.71.patch \
-    file://0002-configure.ac-disable-few-languages-not-compatible-wi.patch \
 "
 
-SRC_URI[sha256sum] = "f132e18d551117d9e46acce29ba4f40892a86746c366999166a3862b51060780"
+SRC_URI[sha256sum] = "19654ad276b149646371fbdac21bc7620742f2975f7399fed0ffc1a18fbaf603"
 
 PACKAGECONFIG ??= "gnutls consoleui avahi dbus idn nss \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 gtk startup-notification', '', d)} \
@@ -39,9 +37,9 @@ PACKAGECONFIG[gnutls] = "--enable-gnutls --with-gnutls-includes=${STAGING_INCDIR
 PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus dbus-glib"
 PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
 PACKAGECONFIG[nss] = "--enable-nss,--disable-nss,nss nspr,libpurple-plugin-ssl-nss"
+PACKAGECONFIG[cyrus-sasl] = "--enable-cyrus-sasl,--disable-cyrus-sasl,cyrus-sasl"
 
 EXTRA_OECONF = " \
-    --with-python=python3 \
     --disable-perl \
     --disable-tcl \
     --disable-gevolution \
