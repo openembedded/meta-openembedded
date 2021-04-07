@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
            file://0001-Do-not-overwrite-all-our-build-flags.patch \
            file://basename-include.patch \
-           file://0001-glib-Use-stock-glib-macro-to-define-boxed-type.patch \
-           file://0002-glib-Remove-incorrecly-used-volatile-from-enum-type-.patch \
            "
-SRC_URI[sha256sum] = "fd51ead4aac1d2f4684fa6e7b0ec06f0233ed21667e720a4e817e4455dd63d27"
+SRC_URI[sha256sum] = "5e2219656c6bbd36154133fef2e12b7d0938464518827098b29a10b1697ea79c"
 
 DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
 
