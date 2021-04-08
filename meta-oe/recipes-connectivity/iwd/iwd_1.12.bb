@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = "ell"
 
-SRC_URI = "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar.xz \
-           file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch \
+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
           "
-SRC_URI[sha256sum] = "b005f7ed0f0a96a2c6181c44560fc868533a18e7034bd4cb43ea0d40c21b4e7a"
+SRCREV = "bde3e0f6e3364e9c884b6b93a944d8138345b8e5"
+S = "${WORKDIR}/git"
 
 inherit autotools manpages pkgconfig python3native systemd
 
