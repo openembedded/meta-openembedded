@@ -14,7 +14,7 @@ SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
            file://fix-openssl-no-des.patch \
 "
 
-SRC_URI[sha256sum] = "d4c14cc096577edca3f6a2a59c2f51869e35350b3988018ddf808c88e5973b79"
+SRC_URI[sha256sum] = "137776df6be8f1701f1cd590b7779932e123479fb91e5192171c16798815ce9f"
 
 inherit autotools
 
