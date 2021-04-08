@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
 LICENSE = "MIT"
 
 SRC_URI = "git://github.com/alanxz/rabbitmq-c.git"
-# v0.10.0-master
-SRCREV = "ffe918a5fcef72038a88054dca3c56762b1953d4"
+# v0.11.0-master
+SRCREV = "a64c08c68aff34d49a2ac152f04988cd921084f9"
 
 S = "${WORKDIR}/git"
 
