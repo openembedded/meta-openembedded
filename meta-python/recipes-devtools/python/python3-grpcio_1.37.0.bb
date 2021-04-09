@@ -13,7 +13,7 @@ SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
                                 file://mips_bigendian.patch \
                                 file://0001-absl-always-use-asm-sgidefs.h.patch \
 "
-SRC_URI[sha256sum] = "a66ea59b20f3669df0f0c6a3bd57b985e5b2d1dcf3e4c29819bb8dc232d0fd38"
+SRC_URI[sha256sum] = "b3ce16aa91569760fdabd77ca901b2288152eb16941d28edd9a3a75a0c4a8a85"
 
 RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
