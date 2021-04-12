@@ -1,21 +1,33 @@
-Define correct gregs for RISCV32
+From 6134b471c35df826ccb41aab9a47e5c89e15a0c4 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 26 Oct 2020 21:32:22 -0700
+Subject: [PATCH] Define correct gregs for RISCV32
 
 Upstream-Status: Pending
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Updated patch for 6.2.1
+Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+---
+ src/debug.c | 26 ++++++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/src/debug.c b/src/debug.c
+index e7fec29..5abb404 100644
 --- a/src/debug.c
 +++ b/src/debug.c
-@@ -942,7 +942,9 @@ static void *getMcontextEip(ucontext_t *
+@@ -1039,7 +1039,9 @@ static void *getMcontextEip(ucontext_t *uc) {
      #endif
  #elif defined(__linux__)
      /* Linux */
--    #if defined(__i386__) || defined(__ILP32__)
+-    #if defined(__i386__) || ((defined(__X86_64__) || defined(__x86_64__)) && defined(__ILP32__))
 +    #if defined(__riscv) && __riscv_xlen == 32
 +    return (void*) uc->uc_mcontext.__gregs[REG_PC];
-+    #elif defined(__i386__) || defined(__ILP32__)
++    #elif defined(__i386__) || ((defined(__X86_64__) || defined(__x86_64__)) && defined(__ILP32__))
      return (void*) uc->uc_mcontext.gregs[14]; /* Linux 32 */
      #elif defined(__X86_64__) || defined(__x86_64__)
      return (void*) uc->uc_mcontext.gregs[16]; /* Linux 64 */
-@@ -1102,8 +1104,28 @@ void logRegisters(ucontext_t *uc) {
+@@ -1206,8 +1208,28 @@ void logRegisters(ucontext_t *uc) {
      #endif
  /* Linux */
  #elif defined(__linux__)
@@ -40,8 +52,8 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +    );
 +    logStackContent((void**)uc->uc_mcontext.__gregs[REG_SP]);
      /* Linux x86 */
--    #if defined(__i386__) || defined(__ILP32__)
-+    #elif defined(__i386__) || defined(__ILP32__)
+-    #if defined(__i386__) || ((defined(__X86_64__) || defined(__x86_64__)) && defined(__ILP32__))
++    #elif defined(__i386__) || ((defined(__X86_64__) || defined(__x86_64__)) && defined(__ILP32__))
      serverLog(LL_WARNING,
      "\n"
      "EAX:%08lx EBX:%08lx ECX:%08lx EDX:%08lx\n"
