@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1238d5bccbb6bda30654e48dcc0a554b"
 
 SRC_URI = "git://github.com/OCL-dev/ocl-icd.git;protocol=https"
 
-PV = "2.2.14+git${SRCPV}"
-SRCREV = "109694ef2686fe25538c05f3c856912f8ef571a9"
+SRCREV = "59c098b6b1f97a339e3e5308499aee6538ecea40"
 
 S = "${WORKDIR}/git"
 
