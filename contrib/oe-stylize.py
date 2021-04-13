@@ -221,41 +221,59 @@ for v in OE_vars:
 # _Format guideline #0_: 
 #   No spaces are allowed at the beginning of lines that define a variable or 
 #   a do_ routine
+
+
 def respect_rule0(line): 
     return line.lstrip() == line
+
+
 def conformTo_rule0(line): 
     return line.lstrip()
 
 # _Format guideline #1_: 
 #   No spaces are allowed behind the line continuation symbol '\'
+
+
 def respect_rule1(line):
     if line.rstrip().endswith('\\'):
         return line.endswith('\\')
     else: 
         return True
+
+
 def conformTo_rule1(line):
     return line.rstrip()
 
 # _Format guideline #2_: 
 #   Tabs should not be used (use spaces instead).
+
+
 def respect_rule2(line):
     return line.count('\t') == 0
+
+
 def conformTo_rule2(line):
     return line.expandtabs()
 
 # _Format guideline #3_:
 #   Comments inside bb files are allowed using the '#' character at the 
 #   beginning of a line.
+
+
 def respect_rule3(line):
     if line.lstrip().startswith('#'):
         return line.startswith('#')
     else: 
         return True
+
+
 def conformTo_rule3(line):
     return line.lstrip()
 
 # _Format guideline #4_:
 #   Use quotes on the right hand side of assignments FOO = "BAR"
+
+
 def respect_rule4(line):
     r = re.search(varRegexp, line)
     if r is not None:
@@ -263,32 +281,47 @@ def respect_rule4(line):
         # do not test for None it because always match
         return r2.group(1) == '"' and r2.group(3) != ''
     return False
+
+
 def conformTo_rule4(line):
     r = re.search(varRegexp, line)
     return ''.join([r.group(1), ' ', r.group(3), ' "', r.group(5), r.group(5).endswith('"') and '' or '"'])
 
 # _Format guideline #5_:
 #   The correct spacing for a variable is FOO = "BAR".
+
+
 def respect_rule5(line):
     r = re.search(varRegexp, line)
     return r is not None and r.group(2) == " " and r.group(4) == " "
+
+
 def conformTo_rule5(line):
     r = re.search(varRegexp, line)
     return ''.join([r.group(1), ' ', r.group(3), ' ', r.group(5)])
 
 # _Format guideline #6_:
 #   Don't use spaces or tabs on empty lines
+
+
 def respect_rule6(line):
     return not line.isspace() or line == "\n"
+
+
 def conformTo_rule6(line):
     return ""
 
 # _Format guideline #7_:
 #   Indentation of multiline variables such as SRC_URI is desireable.
+
+
 def respect_rule7(line):
     return True
+
+
 def conformTo_rule7(line):
     return line
+
 
 rules = (
     (respect_rule0, conformTo_rule0, "No spaces are allowed at the beginning of lines that define a variable or a do_ routine"),
@@ -303,6 +336,8 @@ rules = (
 
 # Function to check that a line respects a rule. If not, it tries to conform
 # the line to the rule. Reminder or Disgression message are dump accordingly.
+
+
 def follow_rule(i, line):
     oldline = line
     # if the line does not respect the rule
