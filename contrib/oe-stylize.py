@@ -222,7 +222,7 @@ for v in OE_vars:
 #   No spaces are allowed at the beginning of lines that define a variable or 
 #   a do_ routine
 def respect_rule0(line): 
-    return line.lstrip()==line
+    return line.lstrip() == line
 def conformTo_rule0(line): 
     return line.lstrip()
 
@@ -239,7 +239,7 @@ def conformTo_rule1(line):
 # _Format guideline #2_: 
 #   Tabs should not be used (use spaces instead).
 def respect_rule2(line):
-    return line.count('\t')==0
+    return line.count('\t') == 0
 def conformTo_rule2(line):
     return line.expandtabs()
 
@@ -261,7 +261,7 @@ def respect_rule4(line):
     if r is not None:
         r2 = re.search(r'("?)([^"\\]*)(["\\]?)', r.group(5))
         # do not test for None it because always match
-        return r2.group(1)=='"' and r2.group(3)!=''
+        return r2.group(1) == '"' and r2.group(3) != ''
     return False
 def conformTo_rule4(line):
     r = re.search(varRegexp, line)
@@ -271,7 +271,7 @@ def conformTo_rule4(line):
 #   The correct spacing for a variable is FOO = "BAR".
 def respect_rule5(line):
     r = re.search(varRegexp, line)
-    return r is not None and r.group(2)==" " and r.group(4)==" "
+    return r is not None and r.group(2) == " " and r.group(4) == " "
 def conformTo_rule5(line):
     r = re.search(varRegexp, line)
     return ''.join([r.group(1), ' ', r.group(3), ' ', r.group(5)])
@@ -279,7 +279,7 @@ def conformTo_rule5(line):
 # _Format guideline #6_:
 #   Don't use spaces or tabs on empty lines
 def respect_rule6(line):
-    return not line.isspace() or line=="\n"
+    return not line.isspace() or line == "\n"
 def conformTo_rule6(line):
     return ""
 
@@ -359,7 +359,7 @@ if __name__ == "__main__":
             continue
 
         if line.startswith('}'): 
-            in_routine=False
+            in_routine = False
         keep = line.endswith('\\') or in_routine
 
         # handles commented lines
@@ -381,7 +381,7 @@ if __name__ == "__main__":
                     var = k
                     break
             if re.match(routineRegexp, line) is not None: 
-                in_routine=True
+                in_routine = True
                 line = follow_rule(0, line)
             elif re.match(varRegexp, line) is not None:
                 line = follow_rule(0, line)
@@ -406,14 +406,14 @@ if __name__ == "__main__":
     # write variables and routines
     previourVarPrefix = "unknown"
     for k in OE_vars:
-        if k=='SRC_URI':
+        if k == 'SRC_URI':
             addEmptyLine = True
         if seen_vars[k] != []: 
             if addEmptyLine and not k.startswith(previourVarPrefix):
                 olines.append("")
             for l in seen_vars[k]: 
                 olines.append(l)
-            previourVarPrefix = k.split('_')[0]=='' and "unknown" or k.split('_')[0]
+            previourVarPrefix = k.split('_')[0] == '' and "unknown" or k.split('_')[0]
     for line in olines:
         print(line)
 
