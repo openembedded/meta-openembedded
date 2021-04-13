@@ -312,10 +312,10 @@ def follow_rule(i, line):
         # if the line still does not respect the rule
         if not rules[i][0](line):
             # this is a rule disgression
-            print ("## Disgression: ", rules[i][2], " in: '", oldline, "'")
+            print("## Disgression: ", rules[i][2], " in: '", oldline, "'")
         else:
             # just remind user about his/her errors
-            print ("## Reminder: ", rules[i][2], " in : '", oldline, "'")
+            print("## Reminder: ", rules[i][2], " in : '", oldline, "'")
     return line
 
 
@@ -389,7 +389,7 @@ if __name__ == "__main__":
                 line = follow_rule(5, line)
             if var == "":
                 if not in_routine:
-                    print ("## Warning: unknown variable/routine \"%s\"" % originalLine.rstrip('\n'))
+                    print("## Warning: unknown variable/routine \"%s\"" % originalLine.rstrip('\n'))
                 var = 'others'
             for c in commentBloc:
                 seen_vars[var].append(c)
