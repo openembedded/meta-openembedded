@@ -2,12 +2,12 @@
 
 """\
 Sanitize a bitbake file following the OpenEmbedded style guidelines,
-see http://openembedded.org/wiki/StyleGuide 
+see http://openembedded.org/wiki/StyleGuide
 
 (C) 2006 Cyril Romain <cyril.romain@gmail.com>
 MIT license
 
-TODO: 
+TODO:
  - add the others OpenEmbedded variables commonly used:
  - parse command arguments and print usage on misuse
     . prevent giving more than one .bb file in arguments
@@ -19,7 +19,7 @@ TODO:
  - count rule breaks and displays them in the order frequence
 """
 
-from __future__ import print_function 
+from __future__ import print_function
 import fileinput
 import string
 import re
@@ -65,7 +65,7 @@ OE_vars = [
     'RSUGGESTS',
     'RPROVIDES',
     'RCONFLICTS',
-    'FILES',    
+    'FILES',
     'do_package',
     'do_stage',
     'addhandler',
@@ -215,36 +215,36 @@ routineRegexp = r'^([a-zA-Z0-9_ ${}-]+?)\('
 
 # Variables seen in the processed .bb
 seen_vars = {}
-for v in OE_vars: 
+for v in OE_vars:
     seen_vars[v] = []
 
-# _Format guideline #0_: 
-#   No spaces are allowed at the beginning of lines that define a variable or 
+# _Format guideline #0_:
+#   No spaces are allowed at the beginning of lines that define a variable or
 #   a do_ routine
 
 
-def respect_rule0(line): 
+def respect_rule0(line):
     return line.lstrip() == line
 
 
-def conformTo_rule0(line): 
+def conformTo_rule0(line):
     return line.lstrip()
 
-# _Format guideline #1_: 
+# _Format guideline #1_:
 #   No spaces are allowed behind the line continuation symbol '\'
 
 
 def respect_rule1(line):
     if line.rstrip().endswith('\\'):
         return line.endswith('\\')
-    else: 
+    else:
         return True
 
 
 def conformTo_rule1(line):
     return line.rstrip()
 
-# _Format guideline #2_: 
+# _Format guideline #2_:
 #   Tabs should not be used (use spaces instead).
 
 
@@ -256,14 +256,14 @@ def conformTo_rule2(line):
     return line.expandtabs()
 
 # _Format guideline #3_:
-#   Comments inside bb files are allowed using the '#' character at the 
+#   Comments inside bb files are allowed using the '#' character at the
 #   beginning of a line.
 
 
 def respect_rule3(line):
     if line.lstrip().startswith('#'):
         return line.startswith('#')
-    else: 
+    else:
         return True
 
 
@@ -364,8 +364,8 @@ if __name__ == "__main__":
         if True:
             lines.append(line)
         else:
-            # expandtabs on each line so that rule2 is always respected 
-            # rstrip each line so that rule1 is always respected 
+            # expandtabs on each line so that rule2 is always respected
+            # rstrip each line so that rule1 is always respected
             line = line.expandtabs().rstrip()
             # ignore empty lines (or line filled with spaces or tabs only)
             # so that rule6 is always respected
@@ -377,7 +377,7 @@ if __name__ == "__main__":
     in_routine = False
     commentBloc = []
     olines = []
-    for line in lines: 
+    for line in lines:
         originalLine = line
         # rstrip line to remove line breaks characters
         line = line.rstrip()
@@ -393,7 +393,7 @@ if __name__ == "__main__":
             commentBloc = []
             continue
 
-        if line.startswith('}'): 
+        if line.startswith('}'):
             in_routine = False
         keep = line.endswith('\\') or in_routine
 
@@ -415,7 +415,7 @@ if __name__ == "__main__":
                 if line.startswith(k):
                     var = k
                     break
-            if re.match(routineRegexp, line) is not None: 
+            if re.match(routineRegexp, line) is not None:
                 in_routine = True
                 line = follow_rule(0, line)
             elif re.match(varRegexp, line) is not None:
@@ -443,12 +443,11 @@ if __name__ == "__main__":
     for k in OE_vars:
         if k == 'SRC_URI':
             addEmptyLine = True
-        if seen_vars[k] != []: 
+        if seen_vars[k] != []:
             if addEmptyLine and not k.startswith(previourVarPrefix):
                 olines.append("")
-            for l in seen_vars[k]: 
+            for l in seen_vars[k]:
                 olines.append(l)
             previourVarPrefix = k.split('_')[0] == '' and "unknown" or k.split('_')[0]
     for line in olines:
         print(line)
-
