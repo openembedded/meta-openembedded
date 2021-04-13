@@ -353,7 +353,8 @@ if __name__ == "__main__":
         # ignore empty lines
         if line.isspace() or line is '':
             # flush comments into the olines
-            for c in commentBloc: olines.append(c)
+            for c in commentBloc:
+                olines.append(c)
             commentBloc = []
             continue
 
@@ -370,7 +371,8 @@ if __name__ == "__main__":
             continue
 
         if var in seen_vars:
-            for c in commentBloc: seen_vars[var].append(c)
+            for c in commentBloc:
+                seen_vars[var].append(c)
             commentBloc = []
             seen_vars[var].append(line)
         else:
@@ -389,24 +391,29 @@ if __name__ == "__main__":
                 if not in_routine:
                     print ("## Warning: unknown variable/routine \"%s\"" % originalLine.rstrip('\n'))
                 var = 'others'
-            for c in commentBloc: seen_vars[var].append(c)
+            for c in commentBloc:
+                seen_vars[var].append(c)
             commentBloc = []
             seen_vars[var].append(line)
-        if not keep and not in_routine: var = ""
+        if not keep and not in_routine:
+            var = ""
 
     # -- dump the sanitized .bb file --
     addEmptyLine = False
     # write comments that are not related to variables nor routines
-    for l in commentBloc: olines.append(l)
+    for l in commentBloc:
+        olines.append(l)
     # write variables and routines
     previourVarPrefix = "unknown"
     for k in OE_vars:
-        if k=='SRC_URI': addEmptyLine = True
+        if k=='SRC_URI':
+            addEmptyLine = True
         if seen_vars[k] != []: 
             if addEmptyLine and not k.startswith(previourVarPrefix):
                 olines.append("")
             for l in seen_vars[k]: 
                 olines.append(l)
             previourVarPrefix = k.split('_')[0]=='' and "unknown" or k.split('_')[0]
-    for line in olines: print(line)
+    for line in olines:
+        print(line)
 
