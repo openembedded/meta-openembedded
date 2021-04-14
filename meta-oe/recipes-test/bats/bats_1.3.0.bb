@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
 SRC_URI = "git://github.com/bats-core/bats-core.git \
           "
-# v1.1.0
-SRCREV = "c706d1470dd1376687776bbe985ac22d09780327"
+# v1.3.0
+SRCREV = "9086c47854652f2731861b40385689c85f12103f"
 
 S = "${WORKDIR}/git"
 
@@ -18,4 +18,8 @@ do_install() {
 	${S}/install.sh ${D}${prefix}
 }
 
-RDEPENDS_bats = "bash"
+RDEPENDS_${PN} = "bash"
+FILES_${PN} += "${libdir}/bats-core/*"
+
+PACKAGECONFIG ??= "pretty"
+PACKAGECONFIG[pretty] = ",,,ncurses"
