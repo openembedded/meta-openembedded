@@ -11,6 +11,10 @@
 
 SUMMARY = "Tools to enhance VMWare guest integration and performance"
 HOMEPAGE = "https://github.com/vmware/open-vm-tools"
+DESCRIPTION = "\
+open-vm-tools is a set of services and modules that enable several features in VMware products \
+for better management of and seamless user interactions with guests.\
+"
 SECTION = "vmware-tools"
 
 LICENSE = "LGPL-2.0 & GPL-2.0 & BSD & CDDL-1.0"
@@ -26,7 +30,6 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
     file://vmtoolsd.service \
     file://vmtoolsd.init \
     file://0001-configure.ac-don-t-use-dnet-config.patch;patchdir=.. \
-    file://0002-add-include-sys-sysmacros.h.patch;patchdir=.. \
     file://0003-Use-configure-test-for-struct-timespec.patch;patchdir=.. \
     file://0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch;patchdir=.. \
     file://0005-Use-configure-to-test-for-feature-instead-of-platfor.patch;patchdir=.. \
@@ -38,15 +41,15 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
-    file://0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch;patchdir=.. \
     file://0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch;patchdir=.. \
     file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
-    file://0001-utilBacktrace-Ignore-Warray-bounds.patch;patchdir=.. \
     file://0001-hgfsmounter-Makefile.am-support-usrmerge.patch;patchdir=.. \
-    file://0001-pollGtk-Drop-volatile-qualifier.patch;patchdir=.. \
 "
 
-SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
+SRC_URI_append_libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.patch;patchdir=.. \
+"
+
+SRCREV = "7ae57c3c7c1f68c74637ad009673dae94ee52570"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
