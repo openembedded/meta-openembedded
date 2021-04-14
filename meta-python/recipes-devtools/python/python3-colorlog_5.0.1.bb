@@ -1,10 +1,10 @@
 DESCRIPTION = "A colored formatter for the python logging module"
 HOMEPAGE = "https://github.com/borntyping/python-colorlog"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=85a1d478cd35d62763a1419e948bdde4"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5c3c6ebdec7792ae12df8d1c0a46b26a"
 
 inherit pypi setuptools3
 
 PYPI_PACKAGE = "colorlog"
 
-SRC_URI[sha256sum] = "59b53160c60902c405cdec28d38356e09d40686659048893e026ecbd589516b1"
+SRC_URI[sha256sum] = "f17c013a06962b02f4449ee07cfdbe6b287df29efc2c9a1515b4a376f4e588ea"
