@@ -22,7 +22,6 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://syslog-ng.conf.sysvinit \
            file://initscript \
            file://volatiles.03_syslog-ng \
-           file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
 "
 
 UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
@@ -42,11 +41,7 @@ EXTRA_OECONF = " \
     --disable-python \
     --disable-java --disable-java-modules \
     --with-pidfile-dir=${localstatedir}/run/${BPN} \
-    ${CONFIG_TLS} \
 "
-
-CONFIG_TLS = "--enable-thread-tls"
-CONFIG_TLS_arm = "${@oe.utils.conditional( "DEBUG_BUILD", "1", " --disable-thread-tls", " --enable-thread-tls", d )}"
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} \
