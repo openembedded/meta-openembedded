@@ -10,7 +10,6 @@ SRC_URI += "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.t
            file://syslog-ng-tmp.conf \
            file://syslog-ng.service-the-syslog-ng-service.patch \
            file://0002-scl-fix-wrong-ownership-during-installation.patch \
-           file://0004-configure.ac-add-libnet-enable-option.patch \
            file://0005-.py-s-python-python3-exclude-tests.patch \
            "
 SRC_URI[md5sum] = "69ef4dc5628d5e603e9e4a1b937592f8"
