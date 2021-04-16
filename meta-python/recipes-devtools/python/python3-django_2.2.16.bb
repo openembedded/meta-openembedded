@@ -7,3 +7,5 @@ SRC_URI[sha256sum] = "62cf45e5ee425c52e411c0742e641a6588b7e8af0d2c274a27940931b2
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-sqlparse \
 "
+SRC_URI += "file://CVE-2021-28658.patch \
+"
