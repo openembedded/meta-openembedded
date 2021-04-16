@@ -4,7 +4,7 @@ SECTION = "otherosfs"
 LICENSE = "GPLv3 & LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "73008e3292e4d46fde3eab5d5f618886210ec4a1"
+SRCREV = "464a60344a324311a6f5bb326fdf5f422a3c9005"
 SRC_URI = "git://git.samba.org/cifs-utils.git"
 
 S = "${WORKDIR}/git"
