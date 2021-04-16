@@ -1,0 +1,77 @@
+From 57b509adfb7c62bbf55ea1709aac3383cab660fa Mon Sep 17 00:00:00 2001
+From: Ming Liu <ming.liu@windriver.com>
+Date: Thu, 17 Jul 2014 05:37:08 -0400
+Subject: [PATCH] configure.ac: add libnet enable option
+
+This would avoid a implicit auto-detecting result
+
+Signed-off-by: Ming Liu <ming.liu@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+
+Update for 3.24.1.
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+
+Set it to default yes
+
+Upstream-Status: Submitted [https://github.com/syslog-ng/syslog-ng/pull/3650]
+
+Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+---
+ configure.ac | 35 ++++++++++++++++++++---------------
+ 1 file changed, 20 insertions(+), 15 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 7aad75f..d575cba 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -144,6 +144,9 @@ AC_CONFIG_HEADERS(config.h)
+ dnl ***************************************************************************
+ dnl Arguments
+ 
++AC_ARG_ENABLE(libnet,
++              [  --enable-libnet      Enable libnet support (default: yes)],, enable_libnet="yes")
++
+ AC_ARG_WITH(libnet,
+    [  --with-libnet=path      use path to libnet-config script],
+    ,
+@@ -1073,23 +1076,25 @@ dnl ***************************************************************************
+ dnl libnet headers/libraries
+ dnl ***************************************************************************
+ AC_MSG_CHECKING(for LIBNET)
+-if test "x$with_libnet" = "x"; then
+-        LIBNET_CONFIG="`which libnet-config`"
+-else
+-        LIBNET_CONFIG="$with_libnet/libnet-config"
+-fi
++if test "x$enable_libnet" = xyes; then
++    if test "x$with_libnet" = "x"; then
++            LIBNET_CONFIG="`which libnet-config`"
++    else
++            LIBNET_CONFIG="$with_libnet/libnet-config"
++    fi
+ 
+-if test -n "$LIBNET_CONFIG" -a -x "$LIBNET_CONFIG"; then
+-        LIBNET_CFLAGS="`$LIBNET_CONFIG --defines`"
+-        LIBNET_LIBS="`$LIBNET_CONFIG --libs`"
+-        AC_MSG_RESULT(yes)
+-dnl libnet-config does not provide the _DEFAULT_SOURCE define, that can cause warning during build
+-dnl as upstream libnet-config does uses _DEFAULT_SOURCE this is just a fix till
+-        LIBNET_CFLAGS="$LIBNET_CFLAGS -D_DEFAULT_SOURCE"
++    if test -n "$LIBNET_CONFIG" -a -x "$LIBNET_CONFIG"; then
++            LIBNET_CFLAGS="`$LIBNET_CONFIG --defines`"
++            LIBNET_LIBS="`$LIBNET_CONFIG --libs`"
++            AC_MSG_RESULT(yes)
++    dnl libnet-config does not provide the _DEFAULT_SOURCE define, that can cause warning during build
++    dnl as upstream libnet-config does uses _DEFAULT_SOURCE this is just a fix till
++            LIBNET_CFLAGS="$LIBNET_CFLAGS -D_DEFAULT_SOURCE"
+ 
+-else
+-        LIBNET_LIBS=
+-        AC_MSG_RESULT(no)
++    else
++            LIBNET_LIBS=
++            AC_MSG_RESULT(no)
++    fi
+ fi
+ 
+ 
