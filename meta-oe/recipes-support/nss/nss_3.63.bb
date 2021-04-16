@@ -121,8 +121,6 @@ do_compile() {
     fi
 
     export NSS_DISABLE_GTESTS=1
-    # see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=99420
-    export NSS_ENABLE_WERROR=0
     # We can modify CC in the environment, but if we set it via an
     # argument to make, nsinstall, a host program, will also build with it!
     #
