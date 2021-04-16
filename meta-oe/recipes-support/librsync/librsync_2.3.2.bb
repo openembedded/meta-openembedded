@@ -5,7 +5,7 @@ LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
 
 SRC_URI = "git://github.com/librsync/librsync.git"
-SRCREV = "27f738650c20fef1285f11d85a34e5094a71c06f"
+SRCREV = "42b636d2a65ab6914ea7cac50886da28192aaf9b"
 S = "${WORKDIR}/git"
 
 DEPENDS = "popt"
