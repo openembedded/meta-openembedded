@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 
 SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
 "
-SRC_URI[sha256sum] = "736e8d1ce65c09cb435fbbb500d53dc75f4d6e93bd325d22adc890951cf56337"
+SRC_URI[sha256sum] = "eb8373f208b05a39702f9f437f6e49caf4b1ace26a9acb68110b49912078560f"
 
 S = "${WORKDIR}/fuse-${PV}"
 
