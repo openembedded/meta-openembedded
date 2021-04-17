@@ -1,6 +1,6 @@
 require wireguard.inc
 
-SRCREV = "fe402261666821514377d06c2c68ed9bc19e7634"
+SRCREV = "122f06bfd8fc7b06a0899fa9adc4ce8e06900d98"
 
 SRC_URI = "git://git.zx2c4.com/wireguard-linux-compat"
 
@@ -31,3 +31,4 @@ module_do_install() {
 # OE-core post dunfell has moved to use kernel 5.8 which now means we cant build this module in world builds
 # for reference machines e.g. qemu
 EXCLUDE_FROM_WORLD = "1"
+
