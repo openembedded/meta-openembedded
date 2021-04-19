@@ -15,6 +15,10 @@ SRC_URI[sha256sum] = "5e5a8147ecdd6be0eea5ac4d6ed8192cc653e93f744dd3306c9b1cc51d
 
 S = "${WORKDIR}/debootstrap"
 
+DEPENDS = " \
+    virtual/fakeroot-native \
+"
+
 fakeroot do_install() {
     oe_runmake 'DESTDIR=${D}' install
     chown -R root:root ${D}${datadir}/debootstrap
