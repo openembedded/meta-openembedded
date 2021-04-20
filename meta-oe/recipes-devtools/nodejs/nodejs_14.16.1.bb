@@ -27,6 +27,9 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
 SRC_URI_append_class-target = " \
            file://0002-Using-native-binaries.patch \
            "
+SRC_URI_append_toolchain-clang_x86 = " \
+           file://libatomic.patch \
+           "
 SRC_URI[sha256sum] = "e44adbbed6756c2c1a01258383e9f00df30c147b36e438f6369b5ef1069abac3"
 
 S = "${WORKDIR}/node-v${PV}"
@@ -122,6 +125,8 @@ python do_create_v8_qemu_wrapper () {
 
 do_create_v8_qemu_wrapper[dirs] = "${B}"
 addtask create_v8_qemu_wrapper after do_configure before do_compile
+
+LDFLAGS_append_x86 = " -latomic"
 
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 do_configure () {
