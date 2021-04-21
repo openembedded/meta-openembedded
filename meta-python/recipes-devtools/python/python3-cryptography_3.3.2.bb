@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bf405a8056a6647e7d077b0e7bc36aba"
 
 LDSHARED += "-pthread"
 
-SRC_URI[sha256sum] = "7e177e4bea2de937a584b13645cab32f25e3d96fc0bc4a4cf99c27dc77682be6"
+SRC_URI[sha256sum] = "5a60d3780149e13b7a6ff7ad6526b38846354d11a15e21068e57073e29e19bed"
 
 SRC_URI += " \
     file://run-ptest \
