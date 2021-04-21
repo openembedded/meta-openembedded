@@ -2,22 +2,22 @@ DESCRIPTION = "TigerVNC remote display system"
 HOMEPAGE = "http://www.tigervnc.com/"
 LICENSE = "GPLv2+"
 SECTION = "x11/utils"
-DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk"
-RDEPENDS_${PN} = "coreutils hicolor-icon-theme perl"
+DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk libpam"
+RDEPENDS_${PN} = "coreutils hicolor-icon-theme perl bash"
 
 LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
 
 S = "${WORKDIR}/git"
 
 inherit features_check
-REQUIRED_DISTRO_FEATURES = "x11"
+REQUIRED_DISTRO_FEATURES = "x11 pam"
 
 inherit autotools cmake
 B = "${S}"
 
-SRCREV = "4739493b635372bd40a34640a719f79fa90e4dba"
+SRCREV = "540bfc3278e396321124d4b18a798ac2bc18b6ca"
 
-SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.10-branch \
+SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.11-branch \
            file://0002-do-not-build-tests-sub-directory.patch \
            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
@@ -83,6 +83,8 @@ EXTRA_OECONF = "--disable-xorg --disable-xnest --disable-xvfb --disable-dmx \
         --disable-xwayland \
 "
 
+EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DCMAKE_INSTALL_UNITDIR=/lib/systemd/system', '-DINSTALL_SYSTEMD_UNITS=OFF', d)}"
+
 do_configure_append () {
     olddir=`pwd`
     cd ${XSERVER_SOURCE_DIR}
@@ -125,6 +127,7 @@ do_install_append() {
 FILES_${PN} += " \
     ${libdir}/xorg/modules/extensions \
     ${datadir}/icons \
+    ${systemd_unitdir} \
 "
 
 FILES_${PN}-dbg += "${libdir}/xorg/modules/extensions/.debug"
