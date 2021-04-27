@@ -1,6 +1,6 @@
-From c54d36d0582a60fd281cd9287077cea205fd849d Mon Sep 17 00:00:00 2001
-From: Joe MacDonald <joe_macdonald@mentor.com>
-Date: Thu, 27 Nov 2014 15:20:34 -0500
+From 808577f8464f542076840d0d93fe168a5f79442c Mon Sep 17 00:00:00 2001
+From: Silcet <camorga1@gmail.com>
+Date: Tue, 27 Apr 2021 05:40:03 +0000
 Subject: [PATCH] setup: add an option to specify iptables location
 
 When cross-compiling it isn't certain that the location of iptables on the
@@ -13,15 +13,21 @@ version of iptables to be used.
 Upstream-Status: Pending
 
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+
+The patch was imported from the OpenEmbedded git server
+(git://git.openembedded.org/openembedded) as of commit id
+2cc1bd9dd060f5002c2fde7aacba86fe230c12af.
+
+Signed-off-by: Silcet <camorga1@gmail.com>
 ---
- setup.py | 69 ++++++++++++++++++++++++++++++++++++----------------------------
- 1 file changed, 39 insertions(+), 30 deletions(-)
+ setup.py | 65 ++++++++++++++++++++++++++++++++------------------------
+ 1 file changed, 37 insertions(+), 28 deletions(-)
 
 diff --git a/setup.py b/setup.py
-index 6fb3751..b13d11c 100644
+index 09204d3..2343bc9 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -225,41 +225,50 @@ shutil.copytree('src', 'staging')
+@@ -246,41 +246,50 @@ shutil.copytree('src', 'staging')
  os.unlink(os.path.join('staging', 'ufw-init'))
  os.unlink(os.path.join('staging', 'ufw-init-functions'))
  
@@ -43,14 +49,6 @@ index 6fb3751..b13d11c 100644
 -        if iptables_exe != "":
 -            break
 -
--
--if iptables_exe == '':
--    print("ERROR: could not find required binary 'iptables'", file=sys.stderr)
--    sys.exit(1)
--
--for e in ['ip6tables', 'iptables-restore', 'ip6tables-restore']:
--    if not os.path.exists(os.path.join(iptables_dir, e)):
--        print("ERROR: could not find required binary '%s'" % (e), file=sys.stderr)
 +if "--iptables-dir" in sys.argv:
 +    iptables_dir = sys.argv[sys.argv.index("--iptables-dir") + 1]
 +    iptables_exe = os.path.join(iptables_dir, "iptables")
@@ -70,10 +68,16 @@ index 6fb3751..b13d11c 100644
 +                    print("Found '%s'" % iptables_exe)
 +                else:
 +                    continue
-+
+ 
+-if iptables_exe == '':
+-    print("ERROR: could not find required binary 'iptables'", file=sys.stderr)
+-    sys.exit(1)
 +            if iptables_exe != "":
 +                break
-+
+ 
+-for e in ['ip6tables', 'iptables-restore', 'ip6tables-restore']:
+-    if not os.path.exists(os.path.join(iptables_dir, e)):
+-        print("ERROR: could not find required binary '%s'" % (e), file=sys.stderr)
 +    if iptables_exe == '':
 +        print("ERROR: could not find required binary 'iptables'", file=sys.stderr)
          sys.exit(1)
@@ -102,6 +106,3 @@ index 6fb3751..b13d11c 100644
  
  setup (name='ufw',
        version=ufw_version,
--- 
-1.9.1
-
