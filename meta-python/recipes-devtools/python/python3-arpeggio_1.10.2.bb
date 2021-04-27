@@ -3,7 +3,7 @@ HOMEPAGE = "https://pypi.org/project/Arpeggio/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=33b8d1ba459a2fa4d801acfd1d1b7ceb"
 
-SRC_URI[sha256sum] = "920d12cc762edb2eb56daae64a14c93e43dc181b481c88fc79314c0df6ee639e"
+SRC_URI[sha256sum] = "bfe349f252f82f82d84cb886f1d5081d1a31451e6045275e9f90b65d0daa06f1"
 
 PYPI_PACKAGE = "Arpeggio"
 inherit pypi setuptools3
