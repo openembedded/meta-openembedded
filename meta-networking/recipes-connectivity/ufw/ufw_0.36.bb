@@ -1,3 +1,4 @@
+
 SUMMARY = "Uncomplicated Firewall"
 DESCRIPTION = "UFW stands for Uncomplicated Firewall, and is program for \
 managing a netfilter firewall. It provides a command line interface and aims \
@@ -7,24 +8,18 @@ SECTION = "net"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
-SRC_URI = " \
-           https://launchpad.net/ufw/0.33/0.33/+download/ufw-0.33.tar.gz \
-           file://setup-add-an-option-to-specify-iptables-location.patch \
-           file://setup-only-make-one-reference-to-env.patch \
+SRC_URI = "https://launchpad.net/ufw/0.36/0.36/+download/ufw-0.36.tar.gz \
            file://0001-optimize-boot.patch \
-           file://0002-lp1044361.patch \
-           file://0003-fix-typeerror-on-error.patch \
-           file://0004-lp1039729.patch \
-           file://0005-lp1191197.patch \
-           file://fix-dynamic-update-of-python-shebang.patch \
-"
+           file://0002-add-an-option-to-specify-iptables-location.patch \
+           file://0003-only-make-one-reference-to-env.patch \
+           "
 
 UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
 
-SRC_URI[md5sum] = "3747b453d76709e5a99da209fc0bb5f5"
-SRC_URI[sha256sum] = "5f85a8084ad3539b547bec097286948233188c971f498890316dec170bdd1da8"
+SRC_URI[md5sum] = "6d8ab1506da21ae003f4628f93d05781"
+SRC_URI[sha256sum] = "754b22ae5edff0273460ac9f57509c3938187e0cf4fb9692c6a02833fff33cfc"
 
-inherit setuptools3 features_check
+inherit setuptools3 features_check systemd update-rc.d
 
 RDEPENDS_${PN} = " \
                   iptables \
@@ -43,6 +38,19 @@ RRECOMMENDS_${PN} = " \
                      kernel-module-nf-log \
                      kernel-module-nf-recent \
 "
+
+do_install_append() {
+    install -d ${D}${systemd_unitdir}/system/
+    install -m 0644 ${S}/doc/systemd.example ${D}${systemd_unitdir}/system/ufw.service
+
+    install -d ${D}${sysconfdir}/init.d/
+    install -m 0755 ${S}/doc/initscript.example ${D}${sysconfdir}/init.d/ufw
+}
+
+SYSTEMD_SERVICE_${PN} = "ufw.service"
+
+INITSCRIPT_NAME = "ufw"
+INITSCRIPT_PARAMS = "defaults"
 
 # Certain items are explicitly put under /lib, not base_libdir when installed.
 #
