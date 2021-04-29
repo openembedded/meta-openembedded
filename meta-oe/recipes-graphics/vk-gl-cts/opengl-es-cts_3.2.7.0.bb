@@ -1,15 +1,13 @@
 DESCRIPTION = "OpenGL CTS"
 
 require khronos-cts.inc
-# opengl-es-cts-3.2.6.1
-SRCREV_vk-gl-cts = "7e023f81b4fff54b558882fe739d7c959d0a02a8"
-SRCREV_amber = "d26ee22dd7faab1845a531d410f7ec1db407402a"
-SRCREV_glslang = "c538b5d796fb24dd418fdd650c7f76e56bcc3dd8"
-SRCREV_spirv-headers = "e4322e3be589e1ddd44afb20ea842a977c1319b8"
-SRCREV_spirv-tools = "1eb89172a82b436d8037e8a8c29c80f7e1f7df74"
+# opengl-es-cts-3.2.7.0
+SRCREV_vk-gl-cts = "7cba7113c40f2ff03573c8c2c90661b2249e04fa"
+SRCREV_amber = "4d0115cccfcb3b73d20b6513b1c40748e6403c50"
+SRCREV_glslang = "ffccefddfd9a02ec0c0b6dd04ef5e1042279c97f"
+SRCREV_spirv-headers = "104ecc356c1bea4476320faca64440cd1df655a3"
+SRCREV_spirv-tools = "cd590fa3341284cd6d1ee82366155786cfd44c96"
 SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
-
-SRC_URI += "file://0001-Do-not-error-on-uninitialized-warnings.patch"
 
 S = "${WORKDIR}/git"
 
