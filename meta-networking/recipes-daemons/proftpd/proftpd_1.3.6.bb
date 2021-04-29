@@ -109,6 +109,7 @@ do_install () {
 
     sed -e 's|--sysroot=${STAGING_DIR_HOST}||g' \
         -e 's|${STAGING_DIR_NATIVE}||g' \
+        -e 's|-ffile-prefix-map=[^ ]*||g' \
         -e 's|-fdebug-prefix-map=[^ ]*||g' \
         -e 's|-fmacro-prefix-map=[^ ]*||g' \
         -i ${D}/${bindir}/prxs
