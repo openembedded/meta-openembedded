@@ -10,8 +10,8 @@ SRC_URI  = "\
     file://0002-support-to-override-usr-bin-arch-test.patch \
 "
 
-SRC_URI[md5sum] = "b959c7ac01839e9b96a733d27b19e59e"
-SRC_URI[sha256sum] = "5e5a8147ecdd6be0eea5ac4d6ed8192cc653e93f744dd3306c9b1cc51d6ca328"
+SRC_URI[md5sum] = "8a5e97f60236c3a63f715c056a5f0e29"
+SRC_URI[sha256sum] = "7700e9864b29f166b26c54153ed8c275b46f4b9a60468bb607e019a64c16cd8f"
 
 S = "${WORKDIR}/debootstrap"
 
