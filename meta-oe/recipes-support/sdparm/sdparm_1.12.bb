@@ -17,8 +17,8 @@ UPSTREAM_CHECK_REGEX = "sdparm-(?P<pver>\d+(\.\d+)+)\.tgz"
 PACKAGES =+ "${PN}-scripts"
 RDEPENDS_${PN}-scripts += "bash ${PN}"
 
-SRC_URI[md5sum] = "cd998d1c12a4ec11652d0af580f06b4d"
-SRC_URI[sha256sum] = "432fdbfe90f0c51640291faf7602489b0ae56dfb96d0c02ed02308792adc7fb0"
+SRC_URI[md5sum] = "2902fd29e6834fd62c16bb5d1ac53c7e"
+SRC_URI[sha256sum] = "e7f84247069da9a0c293963948d8aba8e5897a13e35e5476c8258acb7ca3a124"
 
 inherit autotools
 
