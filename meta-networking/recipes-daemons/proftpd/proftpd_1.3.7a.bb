@@ -4,7 +4,10 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+SRCREV = "715eadc1aa4f6b07d69f9d09558e9cb471e51d87"
+BRANCH = "1.3.7"
+
+SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH} \
            file://basic.conf.patch \
            file://proftpd-basic.init \
            file://default \
@@ -13,13 +16,14 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
            file://build_fixup.patch \
            file://proftpd.service \
            "
-SRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
-SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
+
+S = "${WORKDIR}/git"
 
 inherit autotools-brokensep useradd update-rc.d systemd multilib_script
 
 PACKAGECONFIG ??= "shadow \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
+                   static \
                   "
 
 PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses, --disable-curses --disable-ncurses, ncurses"
@@ -28,6 +32,7 @@ PACKAGECONFIG[pam] = "--enable-auth-pam, --disable-auth-pam, libpam, libpam"
 PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6"
 PACKAGECONFIG[shadow] = "--enable-shadow, --disable-shadow"
 PACKAGECONFIG[pcre] = "--enable-pcre, --disable-pcre, libpcre "
+PACKAGECONFIG[static] = "--enable-static=yes, --enable-static=no"
 
 # enable POSIX.1e capabilities
 PACKAGECONFIG[cap] = "--enable-cap, --disable-cap, libcap, libcap"
@@ -58,14 +63,12 @@ PACKAGECONFIG[largefile] = "--enable-largefile, --disable-largefile"
 #omit mod_auth_file from core modules
 PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
 
-
 # proftpd uses libltdl which currently makes configuring using
 # autotools.bbclass a pain...
 do_configure () {
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
     oe_runconf
-    cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}/libtool
 }
 
 FTPUSER = "ftp"
