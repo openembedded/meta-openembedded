@@ -24,9 +24,9 @@ SHPV = "${@gnome_verdir("${PV}")}"
 
 SRC_URI = " \
     https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz \
-    file://0001-meson.build-Give-note-if-sdl2-was-found.patch \
+    file://0001-Fix-build-with-OpenEXR-3.patch \
 "
-SRC_URI[sha256sum] = "1d110d8577d54cca3b34239315bd37c57ccb27dd4355655074a2d2b3fd897900"
+SRC_URI[sha256sum] = "c112782cf4096969e23217ccdfabe42284e35d5435ff0c43d40e4c70faeca8dd"
 
 PACKAGECONFIG ??= "gexiv2 jpeg libpng librsvg sdl2"
 PACKAGECONFIG_class-native = "libpng librsvg"
