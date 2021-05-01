@@ -4,11 +4,9 @@ since it pokes at the system for getting architecture values
 Upstream-Status: Inappropriate
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Index: M2Crypto-0.30.1/setup.py
-===================================================================
---- M2Crypto-0.30.1.orig/setup.py
-+++ M2Crypto-0.30.1/setup.py
-@@ -160,22 +160,6 @@ class _M2CryptoBuildExt(build_ext.build_
+--- a/setup.py
++++ b/setup.py
+@@ -169,22 +169,6 @@ class _M2CryptoBuildExt(build_ext.build_
              log.debug('self.include_dirs = %s', self.include_dirs)
              log.debug('self.library_dirs = %s', self.library_dirs)
  
