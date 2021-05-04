@@ -10,12 +10,13 @@ LICENSE = "LGPLv2.1 | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
 
 SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-           file://0001-test-Fix-build-on-32bit-architectures-with-6bit-time.patch \
+           file://0001-examples-ucontext-cp.c-Do-not-use-SIGSTKSZ.patch \
+           file://0001-tests-fix-portability-issue-when-using-__NR_mmap-sys.patch \
            "
 SRC_URI_append_libc-musl_riscv64 = " file://0001-do-not-build-examples.patch "
 SRC_URI_append_libc-musl_riscv32 = " file://0001-do-not-build-examples.patch "
 
-SRCREV = "45f0735219a615ae848033c47c7e2d85d101d43e"
+SRCREV = "b013dfd5a5f65116373d5e0f0bdfb73db9d8816e"
 S = "${WORKDIR}/git"
 
 DEPENDS_append_libc-musl = " libucontext"
