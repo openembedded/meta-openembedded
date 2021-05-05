@@ -1,0 +1,59 @@
+From 1364722439a0a36e3f57119dd45de666d213888c Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 5 May 2021 21:34:35 +0000
+Subject: [PATCH] import gcc_macros.h
+
+* it was dropped as unnecessary in the upgrade to 0.37.1 but for
+  aarch64 it still seems to be needed at least in some setups
+  otherwise swig fails with:
+  http://errors.yoctoproject.org/Errors/Details/580206/
+  swig -python -py3 -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../lib/aarch64-oe-linux/gcc/aarch64-oe-linux/11.1.0/include-fixed -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/lib/aarch64-oe-linux/11.1.0/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include -ITOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/python3.9 -I/usr/include/openssl -includeall -modern -builtin -outdir TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/M2Crypto-0.37.1/M2Crypto -o SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
+  TOPDIR/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:23: Error: Unable to find 'openssl/opensslconf-32.h'
+
+* if I drop the -includeall from swig call I get a bit more reasonable error message:
+  Preprocessing...
+  /OE/build/oe-core/tmp-glibc/work/cortexa57-oe-linux/python3-m2crypto/0.37.1-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:29: Error: CPP #error ""Unknown __WORDSIZE detected"". Use the -cpperraswarn option to continue swig processing.
+
+* maybe we need newer swig, the regenerated m2crypto.py shows
+  that it was generated with 4.0.2 before while meta-oe has 3.0.12
+
+Upstream-Status: Pending
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ SWIG/_m2crypto.i  |  10 +-
+ 2 files changed, 737 insertions(+), 5 deletions(-)
+ create mode 100644 SWIG/gcc_macros.h
+
+diff --git a/SWIG/_m2crypto.i b/SWIG/_m2crypto.i
+index e300a10..3d51c22 100644
+--- a/SWIG/_m2crypto.i
++++ b/SWIG/_m2crypto.i
+@@ -8,6 +8,11 @@
+  *
+  */
+ 
++%import "gcc_macros.h"
++
++%ignore WCHAR_MAX;
++%ignore WCHAR_MIN;
++
+ %module(threads=1) m2crypto
+ /* We really don't need threadblock (PyGILState_Ensure() etc.) anywhere.
+    Disable threadallow as well, only enable it for operations likely to
+@@ -15,10 +20,6 @@
+ %nothreadblock;
+ %nothreadallow;
+ 
+-#if SWIG_VERSION >= 0x030000
+-#define __WCHAR_MAX__ __WCHAR_MAX
+-#define __WCHAR_MIN__ __WCHAR_MIN
+-#endif
+ /* https://gitlab.com/m2crypto/m2crypto/issues/246 */
+ %ignore WCHAR_MAX;
+ %ignore WCHAR_MIN;
+@@ -103,4 +104,3 @@ static PyObject *x509_store_verify_cb_func;
+ %constant int encrypt = 1;
+ %constant int decrypt = 0;
+ #endif
+-  
