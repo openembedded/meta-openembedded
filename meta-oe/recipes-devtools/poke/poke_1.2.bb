@@ -24,8 +24,9 @@ acpaths = "-I ./m4"
 
 EXTRA_OECONF = "--disable-gui \
                 --disable-libnbd \
-                --disable-mi \
                 --with-libreadline-prefix=${STAGING_INCDIR} \
                 "
+
+PACKAGECONFIG[mi] = "--enable-mi,--disable-mi,json-c"
 
 FILES_${PN} += "${datadir}/emacs/site-lisp"
