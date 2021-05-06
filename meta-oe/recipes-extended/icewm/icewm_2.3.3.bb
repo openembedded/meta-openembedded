@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4a26952467ef79a7efca4a9cf52d417b"
 SRC_URI = "https://github.com/ice-wm/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.lz \
            file://0001-configure.ac-skip-running-test-program-when-cross-co.patch \
            "
-SRC_URI[sha256sum] = "d41e6abf842ff3f8705a81d352be7c5b181c587549c183de0641c3820234a7b2"
+SRC_URI[sha256sum] = "4162565cf7566d78d786e4ecf4b0639451b8464bcb24e761b1f08ef43e95e513"
 
 UPSTREAM_CHECK_URI = "https://github.com/ice-wm/${BPN}/releases"
 
@@ -19,7 +19,7 @@ EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
                 --enable-xinerama \
                 --enable-shape"
 
-DEPENDS = "asciidoc-native fontconfig gdk-pixbuf libxft libxpm libxrandr \
+DEPENDS = "asciidoc-native fontconfig fribidi gdk-pixbuf imlib2	libxft libxpm libxrandr \
     libxinerama libice libsm libx11 libxext libxrender libxcomposite libxdamage \
     libxfixes"
 DEPENDS_append = " qemu-native"
