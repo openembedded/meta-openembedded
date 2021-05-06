@@ -300,6 +300,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     xmlrpc-c \
     yasm \
     json-schema-validator \
+    poke \
 "
 RDEPENDS_packagegroup-meta-oe-devtools_append_x86 = " cpuid msr-tools pmtools"
 RDEPENDS_packagegroup-meta-oe-devtools_append_x86-64 = " cpuid msr-tools pcimem pmtools"
