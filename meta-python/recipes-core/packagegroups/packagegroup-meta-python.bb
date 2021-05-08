@@ -215,7 +215,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-lxml \
     python3-lz4 \
     python3-m2crypto \
-    python3-markdown \
     python3-markupsafe \
     python3-matplotlib \
     python3-mccabe \
