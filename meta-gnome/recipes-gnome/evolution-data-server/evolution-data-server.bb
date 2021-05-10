@@ -16,6 +16,7 @@ SRC_URI += " \
     file://0003-contact-Replace-the-Novell-sample-contact-with-somet.patch \
     file://0004-call-native-helpers.patch \
     file://iconv-detect.h \
+    file://0005-PrintableOptions.cmake-Correct-variable-name-compari.patch \
 "
 
 LKSTRFTIME = "HAVE_LKSTRFTIME=ON"
