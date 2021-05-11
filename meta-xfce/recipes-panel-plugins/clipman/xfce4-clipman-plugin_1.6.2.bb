@@ -8,10 +8,9 @@ inherit xfce-panel-plugin
 
 DEPENDS += "xfconf xorgproto libxtst"
 
-SRC_URI[md5sum] = "c9306940c0ca7abd838a14c9d19b3a7e"
-SRC_URI[sha256sum] = "b3e8317796289196fa78c4526626fe061fd35d11e848cf300ca1ace47febceb4"
+SRC_URI[sha256sum] = "ab8a5fe6f68fb1789190e498243a1d1385de3f64e984f470cbd3d1eb779399b8"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
 
-FILES_${PN} += "${datadir}/appdata"
+FILES_${PN} += "${datadir}/metainfo"
