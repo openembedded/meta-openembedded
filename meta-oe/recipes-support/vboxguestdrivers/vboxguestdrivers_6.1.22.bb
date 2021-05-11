@@ -15,8 +15,8 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 
     file://Makefile.utils \
     file://add__divmoddi4.patch \
 "
-SRC_URI[md5sum] = "f2fe05e72c37d40afb36b9fb3aa38b78"
-SRC_URI[sha256sum] = "e690c91974a2e7a5aca2c0939ad514382f9a2136797a5e0b96aab778e42bc8a7"
+SRC_URI[md5sum] = "abb1a20021e5915fe38c666e8c11cf80"
+SRC_URI[sha256sum] = "99816d2a15205d49362a31e8ffeb8262d2fa0678c751dfd0a7c43b2faca8be49"
 
 S ?= "${WORKDIR}/vbox_module"
 S_task-patch = "${WORKDIR}/${VBOX_NAME}"
