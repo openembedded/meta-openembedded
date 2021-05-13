@@ -192,6 +192,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
     geoipupdate \
     fwknop \
     htpdate \
+    http-parser \
     iftop \
     ifmetric \
     ipvsadm \
