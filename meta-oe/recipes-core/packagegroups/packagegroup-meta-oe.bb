@@ -697,6 +697,7 @@ RDEPENDS_packagegroup-meta-oe-security ="\
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "passwdqc", "", d)} \
     softhsm \
     tomoyo-tools \
+    auditd \
 "
 
 RDEPENDS_packagegroup-meta-oe-shells ="\
