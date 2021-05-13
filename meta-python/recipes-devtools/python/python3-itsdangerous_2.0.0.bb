@@ -1,10 +1,9 @@
 SUMMARY = "Various helpers to pass trusted data to untrusted environments and back."
 HOMEPAGE = "http://github.com/mitsuhiko/itsdangerous"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=370799bf709a1e4a6a369fa089ac73a6"
+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=4cda9a0ebd516714f360b0e9418cfb37"
 
-SRC_URI[md5sum] = "9b7f5afa7f1e3acfb7786eeca3d99307"
-SRC_URI[sha256sum] = "321b033d07f2a4136d3ec762eac9f16a10ccd60f53c0c91af90217ace7ba1f19"
+SRC_URI[sha256sum] = "99b1053ccce68066dfc0b4465ef8779027e6d577377c8270e21a3d6289cac111"
 
 inherit pypi setuptools3
 
