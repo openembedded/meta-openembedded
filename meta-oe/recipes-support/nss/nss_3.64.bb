@@ -96,6 +96,7 @@ do_compile() {
     export NS_USE_GCC=1
     export NSS_USE_SYSTEM_SQLITE=1
     export NSS_ENABLE_ECC=1
+    export NSS_ENABLE_WERROR=0
 
     ${@bb.utils.contains("TUNE_FEATURES", "crypto", "export NSS_USE_ARM_HW_CRYPTO=1", "", d)}
 
