@@ -8,14 +8,13 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
 "
 
-SRCREV = "12c74404e09755561dee40cf194954f7ff5afd60"
+SRCREV = "05b50d379ff0037de4957bb2a1befcce88b70225"
 
 PV .= "+git${SRCPV}"
-LK_REL = "1.0.18"
+LK_REL = "1.0.19"
 
 SRC_URI = " \
     git://github.com/sctp/lksctp-tools.git \
-    file://0001-m4-sctp.m4-make-conpatible-to-autoconf-2.70.patch \
     file://run-ptest \
     file://v4test.sh \
     file://v6test.sh \
