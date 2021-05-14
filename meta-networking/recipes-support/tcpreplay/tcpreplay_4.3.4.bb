@@ -4,12 +4,12 @@ HOMEPAGE = "http://tcpreplay.synfin.net/"
 SECTION = "net"
 
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=890b830b22fd632e9ffd996df20338f8"
+LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=10f0474a2f0e5dccfca20f69d6598ad8"
 
 SRC_URI = "https://github.com/appneta/tcpreplay/releases/download/v${PV}/tcpreplay-${PV}.tar.gz"
 
-SRC_URI[md5sum] = "53b52bf64f0b6b9443428e657b37bc6b"
-SRC_URI[sha256sum] = "ed2402caa9434ff5c74b2e7b31178c73e7c7c5c4ea1e1d0e2e39a7dc46958fde"
+SRC_URI[md5sum] = "305a84d84265705bd28f148698142188"
+SRC_URI[sha256sum] = "ee065310806c22e2fd36f014e1ebb331b98a7ec4db958e91c3d9cbda0640d92c"
 
 UPSTREAM_CHECK_URI = "https://github.com/appneta/tcpreplay/releases"
 
