@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
 
 SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
-SRCREV = "357096f24c4f8d7dac87dfe0b9edad4f924f27a3"
+SRCREV = "c2e9663765e83f1a4aa70099546bec653ed770e7"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
@@ -15,6 +15,8 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-jsonschema \
     ${PYTHON_PN}-requests \
     ${PYTHON_PN}-six \
+    ${PYTHON_PN}-deprecated \
+    ${PYTHON_PN}-wrapt \
 "
 
 # Fixes: python3-pymisp requires /bin/bash, but no
