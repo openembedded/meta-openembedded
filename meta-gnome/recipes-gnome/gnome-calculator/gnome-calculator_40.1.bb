@@ -11,6 +11,7 @@ DEPENDS = " \
     libgee \
     libmpc \
     gtksourceview4 \
+    libhandy \
 "
 
 GIR_MESON_OPTION = 'disable-introspection'
@@ -21,10 +22,12 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext features_check upstream-version-is-even
 
+def gnome_verdir(v):
+    return oe.utils.trim_version(v, 1)
+
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "71854fb58671b4a88ac990e2f2439e4f"
-SRC_URI[archive.sha256sum] = "a2e830f9c9856fad65dad1d6c0ae6abad0f0b496c9984ac005315c5cc4220db3"
+SRC_URI[archive.sha256sum] = "7fe6c561f7b1f485ac106219772e45cc135c983bfa4278dd2d3fd83b57ff6af6"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
