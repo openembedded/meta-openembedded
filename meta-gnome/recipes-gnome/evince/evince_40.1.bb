@@ -13,6 +13,7 @@ DEPENDS = " \
     gstreamer1.0-plugins-base \
     orc \
     adwaita-icon-theme \
+    libhandy \
     ${@bb.utils.contains('DISTRO_FEATURES','x11','gnome-desktop3','',d)} \
 "
 
@@ -20,7 +21,10 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection upstream-version-is-even gettext mime-xdg gtk-doc
 
-SRC_URI[archive.sha256sum] = "26df897a417545b476d2606b14731122e84278ae994bd64ea535449c3cf01948"
+def gnome_verdir(v):
+    return oe.utils.trim_version(v, 1)
+
+SRC_URI[archive.sha256sum] = "7a666363c350af2e3bbba7f14b3c1befc5012f9ed3d9d073447f4c59f33dcf2d"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
