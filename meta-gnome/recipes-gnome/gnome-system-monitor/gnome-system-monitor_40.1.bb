@@ -10,6 +10,7 @@ DEPENDS = " \
     libgtop \
     librsvg \
     polkit \
+    libhandy \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
@@ -18,8 +19,10 @@ inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_check get
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit"
 
-SRC_URI[archive.md5sum] = "b1443ab12c3b7bcca940d28754e5b948"
-SRC_URI[archive.sha256sum] = "866b47ab0f4c75b0ec57d6300337a7373463aaad5df95eddfe5354c22be7bca1"
+def gnome_verdir(v):
+    return oe.utils.trim_version(v, 1)
+
+SRC_URI[archive.sha256sum] = "fdb30f4367907aab86d7c2bb76a7b773ba850b765c9666a39f42abfe22691d1a"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
