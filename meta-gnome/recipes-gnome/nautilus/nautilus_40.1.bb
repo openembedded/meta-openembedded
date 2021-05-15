@@ -13,15 +13,22 @@ DEPENDS = " \
     gsettings-desktop-schemas \
     gnome-autoar \
     tracker \
+    libhandy \
+    libportal \
 "
 
 inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check upstream-version-is-even mime-xdg
 
-SRC_URI += "file://0001-Drop-use-of-volatile.patch"
-SRC_URI[archive.md5sum] = "c3c8dbb90d8eeed6c127aa568e131395"
-SRC_URI[archive.sha256sum] = "b6cafc7ab1e70a64383de391b6097fcccbf36b208f8502d8c46423224fd30ef8"
+def gnome_verdir(v):
+    return oe.utils.trim_version(v, 1)
+
+SRC_URI[archive.sha256sum] = "8ecfb90174a0bd5815b1ceb9cbfcd91fec0fb5e34907a4f2df2d05e5d6c99d33"
 
 REQUIRED_DISTRO_FEATURES = "x11"
+
+EXTRA_OEMESON += " \
+    -Dtests=none \
+"
 
 PACKAGECONFIG = "extensions"
 PACKAGECONFIG[extensions] = "-Dextensions=true,-Dextensions=false, gexiv2 gstreamer1.0-plugins-base"
@@ -30,6 +37,7 @@ FILES_${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/metainfo \
     ${datadir}/gnome-shell \
+    ${datadir}/tracker3 \
 "
 
 # mandatory - not checked during configuration:
