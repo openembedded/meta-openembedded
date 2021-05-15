@@ -8,9 +8,7 @@ DEPENDS = "dconf gtk+3"
 
 inherit gnomebase vala gettext gsettings bash-completion
 
-SRC_URI += "file://0001-Don-t-alter-or-try-to-write-GtkChild-fields.patch"
-
-SRC_URI[archive.sha256sum] = "1253dad87e6213fbf313ff9ec9dc4358aa1b10261f28072c1dc0e0997b92f835"
+SRC_URI[archive.sha256sum] = "571af4c7dad4f049b53e6cd728b79addf08c27ddab6bc57b396d211866ee79e3"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
