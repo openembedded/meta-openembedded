@@ -18,16 +18,19 @@ DEPENDS = " \
     libgdata \
     gfbgraph \
     tracker \
+    libhandy \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gettext upstream-version-is-even gnome-help features_check
 
+def gnome_verdir(v):
+    return oe.utils.trim_version(v, 1)
+
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "1dd0d477eac4707e8cfe9f35e26d1f29"
-SRC_URI[archive.sha256sum] = "3c59c76ef28618ec055a1799d1040287b90a0b021feb0a02b1eac28e9c2eb41a"
+SRC_URI[archive.sha256sum] = "e02d73e138af8b2868b5cad7faa1bdd278aeade3b6c3c92836511a4e6f3af1af"
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
