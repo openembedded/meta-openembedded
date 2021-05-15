@@ -13,9 +13,9 @@ DEPENDS = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check
+inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
 
-SRC_URI[archive.sha256sum] = "9509d37fb29acd233058f4df5bd1234b692ac6f946bc2e5f7b8dbf51dfe5b9fa"
+SRC_URI[archive.sha256sum] = "c9be14871b1398e6e656a354a8f8f59e69e93169017f2b28308ef439324fd12b"
 SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch"
 
 # gobject-introspection is mandatory and cannot be configured
@@ -24,34 +24,33 @@ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 
 PACKAGECONFIG ??= " \
     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg", "", d)} \
-    flac \
     gexiv2 \
     gstreamer \
     icu \
     libexif \
     libgsf \
     jpeg \
+    pdf \
     png \
     tiff \
     xml \
-    pdf \
 "
 
+PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
 PACKAGECONFIG[ffmpeg]     = ",,ffmpeg"
-PACKAGECONFIG[flac]       = "-Dflac=enabled,-Dflac=disabled,flac"
 PACKAGECONFIG[gexiv2]     = ",,gexiv2"
 PACKAGECONFIG[gstreamer]  = ",,gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[gupnp]      = ",,gupnp-dlna"
+PACKAGECONFIG[gif]        = "-Dgif=enabled,-Dgif=disabled,giflib"
 PACKAGECONFIG[icu]        = ",,icu"
+PACKAGECONFIG[jpeg]       = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
 PACKAGECONFIG[libexif]    = "-Dexif=enabled,-Dexif=disabled,libexif"
 PACKAGECONFIG[libgsf]     = "-Dgsf=enabled,-Dgsf=disabled,libgsf"
-PACKAGECONFIG[jpeg]       = "-Djpeg=enabled,-Djpeg=disabled,jpeg"
+PACKAGECONFIG[pdf]        = "-Dpdf=enabled,-Dpdf=disabled,poppler"
 PACKAGECONFIG[png]        = "-Dpng=enabled,-Dpng=disabled,libpng"
 PACKAGECONFIG[tiff]       = "-Dtiff=enabled,-Dtiff=disabled,tiff"
 PACKAGECONFIG[xml]        = "-Dxml=enabled,-Dxml=disabled,libxml2"
-PACKAGECONFIG[vorbis]     = "-Dvorbis=enabled,-Dvorbis=disabled,libvorbis"
-PACKAGECONFIG[pdf]        = "-Dpdf=enabled,-Dpdf=disabled,poppler"
-PACKAGECONFIG[upower]     = ",,upower"
+PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=disabled,networkmanger"
 
 # For security reasons it is strongly recommended to set add meta-security in
 # your layers and 'libseccomp' to PACKAGECONFIG".
@@ -60,12 +59,14 @@ PACKAGECONFIG[libseccomp] = ",,libseccomp"
 PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
 
 EXTRA_OEMESON += " \
-    -Dsystemd_user_services=${systemd_user_unitdir} \
+    -Dman=false \
+    -Dsystemd_user_services=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)} \
+    -Dsystemd_user_services_dir=${systemd_user_unitdir} \
 "
 
 FILES_${PN} += " \
     ${datadir}/dbus-1 \
-    ${datadir}/tracker \
-    ${libdir}/tracker-miners-2.0 \
+    ${datadir}/tracker3-miners \
+    ${libdir}/tracker-miners-3.0 \
     ${systemd_user_unitdir} \
 "
