@@ -43,10 +43,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SHPV = "${@gnome_verdir("${PV}")}"
 
-SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
-           file://0001-configure.ac-fix-with-linux-input-handling-with-upco.patch \
-          "
-SRC_URI[sha256sum] = "2db84b57f3778d80b3466d7c21a21d22e315c7b062de2883cbaaeda9a0f618bb"
+SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2"
+SRC_URI[sha256sum] = "bd1bb762368c0dd3175cf05006812dd676949c3707e21f4e6857435cb435989e"
 
 EXTRA_OECONF = "--disable-python \
                 --without-webkit \
