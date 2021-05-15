@@ -37,3 +37,5 @@ FILES_${PN} += " \
     ${datadir}/metainfo \
     ${datadir}/gnome-shell \
 "
+
+RRECOMMENDS_${PN} = "grilo-plugins"
