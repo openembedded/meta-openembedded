@@ -43,5 +43,3 @@ FILES_${PN} += " \
 # mandatory - not checked during configuration:
 # | (org.gnome.Nautilus:863): GLib-GIO-ERROR **: 21:03:52.326: Settings schema 'org.freedesktop.Tracker.Miner.Files' is not installed
 RDEPENDS_${PN} += "tracker-miners"
-
-PNBLACKLIST[nautilus] ?= "Does not build with latest meson, perhaps needs upgrade"
