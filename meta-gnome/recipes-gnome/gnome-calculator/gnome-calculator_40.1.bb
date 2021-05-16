@@ -20,7 +20,7 @@ GIR_MESON_DISABLE_FLAG = 'true'
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext features_check upstream-version-is-even
+inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext features_check
 
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)

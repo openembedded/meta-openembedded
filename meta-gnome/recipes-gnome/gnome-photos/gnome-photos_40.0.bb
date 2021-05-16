@@ -23,7 +23,7 @@ DEPENDS = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gettext upstream-version-is-even gnome-help features_check
+inherit gnomebase gettext gnome-help features_check
 
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
