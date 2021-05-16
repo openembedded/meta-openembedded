@@ -17,7 +17,7 @@ DEPENDS = " \
     libportal \
 "
 
-inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check upstream-version-is-even mime-xdg
+inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check mime-xdg
 
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
