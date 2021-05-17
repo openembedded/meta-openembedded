@@ -289,6 +289,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pybind11-json \
     python3-pybluez \
     python3-pychromecast \
+    python3-pycocotools \
     python3-pycodestyle \
     python3-pyconnman \
     python3-pycparser \
