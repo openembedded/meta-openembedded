@@ -5,7 +5,7 @@ DESCRIPTION = "Cross-platform, efficient, customizable, and robust \
 AUTHOR = "Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>"
 HOMEPAGE = "https://stiffstream.com/en/products/restinio.html"
 SECTION = "libs"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=f399b62ce0a152525d1589a5a40c0ff6"
 DEPENDS = "asio fmt http-parser"
 
