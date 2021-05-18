@@ -10,7 +10,8 @@ SRC_URI[sha256sum] = "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994
 # Once patch is obsolete (project should be aware due to PRs), dos2unix can be removed either
 inherit dos2unix
 SRC_URI += "file://0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.patch \
-            file://CVE-2021-29457.patch"
+            file://CVE-2021-29457.patch \
+            file://CVE-2021-29458.patch"
 
 S = "${WORKDIR}/${BPN}-${PV}-Source"
 
