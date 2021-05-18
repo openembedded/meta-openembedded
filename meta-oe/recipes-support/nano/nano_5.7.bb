@@ -1,3 +1,4 @@
+SUMMARY = "Small and friendly console text editor"
 DESCRIPTION = "GNU nano (Nano's ANOther editor, or \
 Not ANOther editor) is an enhanced clone of the \
 Pico text editor."
@@ -12,7 +13,7 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
 PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
-SRC_URI[sha256sum] = "fce183e4a7034d07d219c79aa2f579005d1fd49f156db6e50f53543a87637a32"
+SRC_URI[sha256sum] = "d4b181cc2ec11def3711b4649e34f2be7a668e70ab506860514031d069cccafa"
 
 UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
 
