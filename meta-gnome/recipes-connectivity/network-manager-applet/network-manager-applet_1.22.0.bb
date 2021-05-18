@@ -9,7 +9,7 @@ inherit features_check gnomebase gsettings gtk-icon-cache gettext
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.sha256sum] = "ddbb400ace804b59cc513611ce9701f7ef3f00de151dbbfb96284c8c1ef2b18b"
+SRC_URI[archive.sha256sum] = "c70d80b48d40a9cb99ec967cc4389f67e7f0301528a69d481572041331a646be"
 
 # We don't not have ubuntu's appindicator (yet?)
 EXTRA_OEMESON = "-Dappindicator=no"
