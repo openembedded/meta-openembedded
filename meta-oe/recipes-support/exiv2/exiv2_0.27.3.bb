@@ -13,6 +13,7 @@ SRC_URI += "file://0001-Use-compiler-fcf-protection-only-if-compiler-arch-su.pat
             file://CVE-2021-29457.patch \
             file://CVE-2021-29458.patch \
             file://CVE-2021-29463.patch \
+            file://CVE-2021-29464.patch \
             file://CVE-2021-3482.patch"
 
 S = "${WORKDIR}/${BPN}-${PV}-Source"
