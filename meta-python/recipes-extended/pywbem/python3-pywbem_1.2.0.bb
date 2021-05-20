@@ -16,7 +16,7 @@ HOMEPAGE = "http://pywbem.github.io"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
 
-SRC_URI[sha256sum] = "2abb6443f4debae56af7abefadb9fa5b8af9b53fc9bcf67f6c01a78db1064300"
+SRC_URI[sha256sum] = "8ef48185e0adbaeb9bd5181c4c5de951f6d58d54e2e1d7e87a9834e10eabe957"
 
 inherit pypi setuptools3 update-alternatives
 
@@ -24,6 +24,7 @@ DEPENDS += " \
     ${PYTHON_PN}-ply-native \
     ${PYTHON_PN}-pyyaml-native \
     ${PYTHON_PN}-six-native \
+    ${PYTHON_PN}-wheel-native \
 "
 
 RDEPENDS_${PN}_class-target += "\
@@ -37,6 +38,9 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-unixadmin \
     ${PYTHON_PN}-xml \
+    ${PYTHON_PN}-nocasedict \
+    ${PYTHON_PN}-nocaselist \
+    ${PYTHON_PN}-yamlloader \
 "
 
 ALTERNATIVE_${PN} = "mof_compiler"
