@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 LICENSE = "GPLv2.0"
 
 SRCBRANCH ?= "master"
-SRCREV = "a8250642a4ff50a2559446f4e915a1f59ac7adf7"
+SRCREV = "a9ad811c15e769c8e6d8d915a05cebc32f2ea2f5"
 
 DEPENDS = "bzip2 zlib elfutils xz"
 RDEPENDS_${PN}-tools = "perl ${PN}"
