@@ -9,5 +9,13 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "python-engineio"
 
-SRC_URI[md5sum] = "822b5dba0308dde6b8cbfd022daae0e4"
-SRC_URI[sha256sum] = "2da5e1e5565e170a17169d1a76eb6a099cc96f0a25a5b1e0f9785f151485daea"
+RDEPENDS_${PN} += " \
+	python3-netclient \
+	python3-json \
+	python3-logging \
+	python3-compression \
+	python3-asyncio \
+"
+
+SRC_URI[md5sum] = "1fa937ec2a9f6feac27e9f65824c5781"
+SRC_URI[sha256sum] = "4e97c1189c23923858f5bb6dc47cfcd915005383c3c039ff01c89f2c00d62077"
