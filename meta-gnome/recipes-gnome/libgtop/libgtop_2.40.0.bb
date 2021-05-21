@@ -8,6 +8,8 @@ inherit gnomebase lib_package gtk-doc gobject-introspection gettext upstream-ver
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
+SRC_URI += "file://0001-fix-compile-error-for-cross-compile.patch"
+
 SRC_URI[archive.sha256sum] = "78f3274c0c79c434c03655c1b35edf7b95ec0421430897fb1345a98a265ed2d4"
 
 DEPENDS = "glib-2.0 libxau"
