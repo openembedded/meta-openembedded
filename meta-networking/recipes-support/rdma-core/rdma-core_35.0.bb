@@ -6,7 +6,7 @@ DEPENDS = "libnl"
 RDEPENDS_${PN} = "bash perl"
 
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git"
-SRCREV = "e66ca0832e58dafac7af7ad9e6799eaef438061a"
+SRCREV = "e29a698e99028e9a092bb00c03ee4bfa31ae0cf3"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
@@ -26,7 +26,7 @@ FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/*"
 INSANE_SKIP_${PN} += "dev-so"
 
-inherit cmake cpan-base systemd
+inherit cmake cpan-base python3native systemd
 
 SYSTEMD_SERVICE_${PN} = " \
     srp_daemon.service \
