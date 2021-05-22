@@ -7,8 +7,7 @@ DEPENDS = "libpcre zlib libjpeg-turbo"
 SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
 
 LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
-SRC_URI[md5sum] = "c8f4430823603ee3b430b3250015ede5"
-SRC_URI[sha256sum] = "43ef260f4e70672660e1882856d59b9319301c6f170673ab465430a71cffe44c"
+SRC_URI[sha256sum] = "062808c40ef8741ec8160ae00168638a712cfa1d4bf673e8e595ab5eba1da947"
 
 inherit autotools-brokensep gettext
 
