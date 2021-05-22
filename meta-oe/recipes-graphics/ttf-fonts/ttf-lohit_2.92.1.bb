@@ -7,7 +7,7 @@ HOMEPAGE = "https://fedorahosted.org/lohit"
 LICENSE = "OFL-1.1"
 LIC_FILES_CHKSUM = "file://OFL.txt;md5=7dfa0a236dc535ad2d2548e6170c4402"
 
-SRCREV = "d678f1b1807ea5602586279e90b5db6d62ed475e"
+SRCREV = "a403c9b7f509dad5e58dde85ef63b1c36fde3a21"
 SRC_URI = "git://github.com/pravins/lohit.git;branch=master"
 
 DEPENDS = "fontforge-native"
