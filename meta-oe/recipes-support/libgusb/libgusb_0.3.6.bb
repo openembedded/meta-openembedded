@@ -6,7 +6,6 @@ DEPENDS = "glib-2.0 libusb"
 
 inherit meson gobject-introspection gtk-doc gettext vala
 
-SRC_URI = "git://github.com/hughsie/libgusb.git \
-           "
-SRCREV = "1f712812327091c42c62b1ab1148d738d1a22b51"
+SRC_URI = "git://github.com/hughsie/libgusb.git"
+SRCREV = "b0464454048cac6779d4d51f12fe7f37ae4bbd57"
 S = "${WORKDIR}/git"
