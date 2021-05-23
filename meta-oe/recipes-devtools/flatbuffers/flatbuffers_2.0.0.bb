@@ -13,9 +13,9 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-SRCREV = "6df40a2471737b27271bdd9b900ab5f3aec746c7"
-
+SRCREV = "a9a295fecf3fbd5a4f571f53b01f63202a3e2113"
 SRC_URI = "git://github.com/google/flatbuffers.git"
+S = "${WORKDIR}/git"
 
 CVE_CHECK_WHITELIST += "CVE-2020-35864"
 
@@ -30,8 +30,6 @@ EXTRA_OECMAKE += "\
 "
 
 inherit cmake
-
-S = "${WORKDIR}/git"
 
 do_install_append() {
     install -d ${D}${PYTHON_SITEPACKAGES_DIR}
