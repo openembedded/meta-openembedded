@@ -3,7 +3,13 @@ DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features wi
 SECTION = "multimedia"
 HOMEPAGE = "http://www.mpv.io/"
 
-DEPENDS = "zlib ffmpeg jpeg libv4l"
+DEPENDS = " \
+    zlib \
+    ffmpeg \
+    jpeg \
+    libv4l \
+    libass \
+"
 
 DEPENDS += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' virtual/libx11 xsp libxv libxscrnsaver libxinerama', '', d)} \
@@ -12,9 +18,9 @@ DEPENDS += " \
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
 
-SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
+SRCREV_mpv = "b5d3e43198b9d57af5620b63537885aaa41fa8cd"
 SRC_URI = " \
-    git://github.com/mpv-player/mpv;name=mpv \
+    git://github.com/mpv-player/mpv;name=mpv;branch=release/0.33;protocol=https \
     https://waf.io/waf-2.0.20;name=waf;subdir=git \
 "
 SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
@@ -27,18 +33,16 @@ LDFLAGS_append_riscv64 = " -latomic"
 
 LUA ?= "lua"
 LUA_mips64  = ""
-LUA_aarch64  = ""
 LUA_powerpc64  = ""
 LUA_powerpc64le  = ""
 LUA_riscv64  = ""
 LUA_riscv32  = ""
 LUA_powerpc  = ""
 
-# Note: both lua and libass are required to get on-screen-display (controls)
+# Note: lua is required to get on-screen-display (controls)
 PACKAGECONFIG ??= " \
     ${LUA} \
-    libass \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland egl', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
 "
@@ -46,11 +50,10 @@ PACKAGECONFIG ??= " \
 PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11"
 PACKAGECONFIG[xv] = "--enable-xv,--disable-xv,libxv"
 PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
-PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,"
+PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,virtual/egl"
 PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
 PACKAGECONFIG[gbm] = "--enable-gbm,--disable-gbm,virtual/libgbm"
 PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
-PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
 PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
 PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
 PACKAGECONFIG[vaapi] = "--enable-vaapi,--disable-vaapi,libva"
@@ -90,7 +93,6 @@ EXTRA_OECONF = " \
     --confdir=${sysconfdir} \
     --datadir=${datadir} \
     --disable-manpage-build \
-    --disable-libsmbclient \
     --disable-libbluray \
     --disable-dvdnav \
     --disable-cdda \
