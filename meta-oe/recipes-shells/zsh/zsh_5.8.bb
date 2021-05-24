@@ -51,3 +51,8 @@ pkg_postinst_${PN} () {
     grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
     grep -q "bin/sh" $D${sysconfdir}/shells || echo /bin/sh >> $D${sysconfdir}/shells
 }
+
+# work around QA failures with usrmerge installing zsh in /usr/bin/zsh instead of /bin/zsh
+# ERROR: QA Issue: /usr/share/zsh/5.8/functions/zed contained in package zsh requires /bin/zsh, but no providers found in RDEPENDS_zsh? [file-rdeps]
+# like bash does since https://git.openembedded.org/openembedded-core/commit/?id=4759408677a4e60c5fa7131afcb5bc184cf2f90a
+RPROVIDES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', '/bin/zsh', '', d)}"
