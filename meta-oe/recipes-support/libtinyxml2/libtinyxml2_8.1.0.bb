@@ -13,3 +13,5 @@ S = "${WORKDIR}/git"
 inherit cmake
 
 BBCLASSEXTEND = "native"
+
+EXTRA_OECMAKE += "-Dtinyxml2_SHARED_LIBS=YES"
