@@ -13,12 +13,10 @@ SECTION = "console/network"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "swig-native python3"
-SRCREV = "d798814fb463115a835da597535a625b68a39cff"
+SRCREV = "fcefc746fea286aeaa40d2f62240216da81c85e5"
 
-SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.4 \
-           file://0001-use-poll.h-instead-of-sys-poll.h.patch \
-           file://0002-serial_port_linux-Add-missing-include-sys-time.h.patch \
-           file://0003-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
+SRC_URI = "git://github.com/mz-automation/${BPN}.git;branch=v1.5 \
+           file://0001-pyiec61850-don-t-break-CMAKE_INSTALL_PATH-by-trying-.patch \
 "
 
 S = "${WORKDIR}/git"
