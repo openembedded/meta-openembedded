@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3359ed561ac16aaa25b6c6eff84df595"
 
-SRC_URI[sha256sum] = "4ad4044eb86fbcbdff2106e44f479fbdac703d77860b3e19988c8a8786e73061"
+SRC_URI[sha256sum] = "0ff100c75cd175f35f4d24375a0b3d82461f5b1af5fc8d112ef0e5ceea8049e6"
 
 PYPI_PACKAGE = "SQLAlchemy"
 inherit pypi setuptools3
@@ -16,4 +16,6 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-netclient \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-threading \
+    ${PYTHON_PN}-compression \
+    ${PYTHON_PN}-profile \
 "
