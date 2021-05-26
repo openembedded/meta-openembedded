@@ -11,9 +11,8 @@ DEPENDS_append_libc-musl = " argp-standalone"
 inherit autotools
 
 PV .= "+git${SRCPV}"
-SRCREV = "d648bbffedef529220896283fb59e35531c13804"
+SRCREV = "a5e5a51d32bdfe59af8b453ca08d78cbdf0b3c61"
 SRC_URI = "git://github.com/namhyung/${BPN} \
-           file://0001-aarch64-Fix-a-plthook-crash-on-aarch64-with-binutils.patch \
            "
 S = "${WORKDIR}/git"
 
