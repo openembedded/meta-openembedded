@@ -482,6 +482,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     libforms \
     lxdm \
     numlockx \
+    nyancat \
     obconf \
     openbox \
     packagegroup-fonts-truetype \
