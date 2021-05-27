@@ -18,7 +18,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 # gtk-icon-cache bbclass will take care of this for us.
 EXTRA_OEMESON = "-Dicon_update=false"
 
-SRC_URI[archive.md5sum] = "09b6bab7ceaafb35da766a5476fbc466"
-SRC_URI[archive.sha256sum] = "3ec91076c2822cd1f9abdc8e27663c3bda4c9c8a7a9773f9e92bfbf2b745d386"
+SRC_URI[archive.md5sum] = "d83faa54abaf64bb40b5313bc233e74e"
+SRC_URI[archive.sha256sum] = "6c949e52c8becc2054daacd604901f66ce5cf709a5fa91c4bb7cacc939b53ea9"
 
 RDEPENDS_${PN} += "bluez5"
