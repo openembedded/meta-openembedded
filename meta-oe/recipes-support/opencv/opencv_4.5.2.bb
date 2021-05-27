@@ -230,5 +230,3 @@ do_install_append() {
             -i ${D}${libdir}/cmake/opencv4/OpenCVModules.cmake
     fi
 }
-
-TOOLCHAIN = "gcc"
