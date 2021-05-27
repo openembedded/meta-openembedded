@@ -12,6 +12,6 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "PyScaffold"
 
-SRC_URI[sha256sum] = "8fd7b2bdbfc7f7758a66d66cbf796af338e40d69fd4f7b4ddb9996c38add1dbe"
+SRC_URI[sha256sum] = "cfa719c2d97392ec3cd5f44d95ec0d40df2dd483d5ee05ea029896cfd7c04af8"
 
 BBCLASSEXTEND = "native nativesdk"
