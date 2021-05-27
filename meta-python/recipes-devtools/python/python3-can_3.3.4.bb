@@ -3,8 +3,8 @@ SECTION = "devel/python"
 LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e6a600fd5e1d9cbde2d983680233ad02"
 
-SRC_URI[md5sum] = "1310da316799e4b12944a6c1dcb017a9"
-SRC_URI[sha256sum] = "ecd69cf6b2f0235345ebe607a15325cf1384c85b24ffbe1d68c3754357f87488"
+SRC_URI[md5sum] = "305075968c56bd85130b19d86e9e505d"
+SRC_URI[sha256sum] = "2d3c223b7adc4dd46ce258d4a33b7e0dbb6c339e002faa40ee4a69d5fdce9449"
 
 PYPI_PACKAGE="python-can"
 
@@ -21,6 +21,7 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-sqlite3 \
     ${PYTHON_PN}-wrapt \
+    ${PYTHON_PN}-pkg-resources \
 "
 
 BBCLASSEXTEND = "native nativesdk"
