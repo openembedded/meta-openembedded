@@ -6,8 +6,7 @@ HOMEPAGE = "https://github.com/flask-restful/flask-restful"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=685bb55ed99a366bb431995f5eef2783"
 
-SRC_URI[md5sum] = "e8051ff104ab4b3b867ba18d28953fae"
-SRC_URI[sha256sum] = "5ea9a5991abf2cb69b4aac19793faac6c032300505b325687d7c305ffaa76915"
+SRC_URI[sha256sum] = "ccec650b835d48192138c85329ae03735e6ced58e9b2d9c2146d6c84c06fa53e"
 
 inherit pypi setuptools3
 
