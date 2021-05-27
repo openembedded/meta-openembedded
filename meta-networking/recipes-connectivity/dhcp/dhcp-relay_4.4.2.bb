@@ -43,6 +43,12 @@ EXTRA_OECONF = "--enable-paranoia \
 do_configure_prepend () {
     cp configure.ac+lt configure.ac
 }
+do_compile_prepend() {
+    rm -rf ${S}/bind/bind-9.11.14/
+    tar xf ${S}/bind/bind.tar.gz -C ${S}/bind
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/bind/bind-9.11.14/
+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/bind/bind-9.11.14/
+}
 
 do_install_append () {
     install -d ${D}${sysconfdir}/default
