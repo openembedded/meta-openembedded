@@ -14,4 +14,10 @@ inherit pypi setuptools3
 
 CLEANBROKEN = "1"
 
-RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
+RDEPENDS_${PN} = " \
+    ${PYTHON_PN}-werkzeug \
+    ${PYTHON_PN}-jinja2 \
+    ${PYTHON_PN}-itsdangerous \
+    ${PYTHON_PN}-click \
+    ${PYTHON_PN}-profile \
+"
