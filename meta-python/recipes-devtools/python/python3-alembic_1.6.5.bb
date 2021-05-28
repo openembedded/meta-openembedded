@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c4ece55266dcdd02ce165b1ee0e490bb"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "becb572c6701c90ca249f97fc1ae231468cc9516df367a350901eeb9310a8d43"
+SRC_URI[sha256sum] = "a21fedebb3fb8f6bbbba51a11114f08c78709377051384c9c5ead5705ee93a51"
 
 PYPI_PACKAGE = "alembic"
 
