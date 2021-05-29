@@ -16,8 +16,8 @@ RDEPENDS_${PN}-compiler = "${PN}"
 RDEPENDS_${PN}-dev += "${PN}-compiler"
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "8664c8334c05d322fbbdfb9e3b24601a23e9363c"
-BRANCH = "v1.37.x"
+SRCREV_grpc = "54dc182082db941aa67c7c3f93ad858c99a16d7d"
+BRANCH = "v1.38.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
