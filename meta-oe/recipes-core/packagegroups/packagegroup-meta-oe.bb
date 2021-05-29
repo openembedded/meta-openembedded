@@ -74,6 +74,7 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
     memtester \
     nbench-byte \
     phoronix-test-suite \
+    qperf \
     s-suite \
     stressapptest \
     sysbench \
