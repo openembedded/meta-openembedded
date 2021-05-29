@@ -8,12 +8,11 @@ DEPENDS += "${PYTHON_PN}-protobuf"
 
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
 SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
-                                file://riscv64_support.patch \
                                 file://boring_ssl.patch \
                                 file://mips_bigendian.patch \
                                 file://0001-absl-always-use-asm-sgidefs.h.patch \
 "
-SRC_URI[sha256sum] = "b3ce16aa91569760fdabd77ca901b2288152eb16941d28edd9a3a75a0c4a8a85"
+SRC_URI[sha256sum] = "abbf9c8c3df4d5233d5888c6cfa85c1bb68a6923749bd4dd1abc6e1e93986f17"
 
 RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
@@ -46,4 +45,3 @@ CCACHE_DISABLE = "1"
 
 # needs vdso support
 COMPATIBLE_HOST_libc-musl_powerpc64le = "null"
-
