@@ -367,7 +367,6 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-robotframework-seriallibrary \
     python3-rsa \
     python3-ruamel-yaml \
-    python3-scapy \
     python3-scrypt \
     python3-sdnotify \
     python3-semver \
