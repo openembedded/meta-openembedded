@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=bd4d7ab13df98988b1ca2a4e01c8c163"
 
 SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
-SRC_URI[sha256sum] = "8836939804ef6d492bcee7d54abafd6477d2beca247157d92688654d13779727"
+SRC_URI[sha256sum] = "5c19bea8b84e8d74cca5f047e82b147ff3fba096144270e3911ad623d6c587bf"
 
 RDEPENDS_${PN} += "bash perl libxml2"
 
@@ -30,6 +30,8 @@ PACKAGECONFIG += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
 "
 PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR},--without-x,virtual/libx11"
+
+LDFLAGS_append_x86-64 = " -lgcc"
 
 inherit autotools gettext pkgconfig
 
