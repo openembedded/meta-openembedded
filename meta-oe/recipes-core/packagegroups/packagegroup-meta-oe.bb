@@ -731,6 +731,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
     digitemp \
     dstat \
     espeak \
+    evemu-tools \
     exiv2 \
     libnice \
     c-periphery \
