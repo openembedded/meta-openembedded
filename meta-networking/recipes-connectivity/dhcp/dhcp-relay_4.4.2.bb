@@ -38,6 +38,7 @@ EXTRA_OECONF = "--enable-paranoia \
                 --enable-libtool \
                 --with-randomdev=/dev/random \
                "
+EXTRA_OEMAKE += "LIBTOOL='${S}/${HOST_SYS}-libtool'"
 
 # Enable shared libs per dhcp README
 do_configure_prepend () {
@@ -48,6 +49,9 @@ do_compile_prepend() {
     tar xf ${S}/bind/bind.tar.gz -C ${S}/bind
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/bind/bind-9.11.14/
     install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/bind/bind-9.11.14/
+    cp -fpR ${S}/m4/*.m4 ${S}/bind/bind-9.11.14/libtool.m4/
+    rm -rf ${S}/bind/bind-9.11.14/libtool
+    install -m 0755 ${S}/${HOST_SYS}-libtool ${S}/bind/bind-9.11.14/
 }
 
 do_install_append () {
