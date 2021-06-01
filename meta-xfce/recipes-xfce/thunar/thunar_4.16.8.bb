@@ -8,11 +8,7 @@ inherit xfce gobject-introspection features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += "file://CVE-2021-32563-1.patch \
-            file://CVE-2021-32563-2.patch \
-           "
-
-SRC_URI[sha256sum] = "cb531d3fe67196a43ca04979ef271ece7858bbc80c15b0ee4323c1252a1a02b7"
+SRC_URI[sha256sum] = "038ca228d220cd0ba1b7b76465d8a51f2433ad1f74648d1d291daa0a24cb3195"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre"
