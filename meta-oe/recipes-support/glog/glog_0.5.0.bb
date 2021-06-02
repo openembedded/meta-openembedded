@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
 
 SRC_URI = " \
     git://github.com/google/glog.git;nobranch=1 \
-    file://0001-Find-Libunwind-during-configure.patch \
     file://libexecinfo.patch \
 "
 
-SRCREV = "96a2f23dca4cc7180821ca5f32e526314395d26a"
+SRCREV = "8f9ccfe770add9e4c64e9b25c102658e3c763b73"
 
 S = "${WORKDIR}/git"
 
