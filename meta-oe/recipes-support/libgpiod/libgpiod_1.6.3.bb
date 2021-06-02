@@ -27,11 +27,9 @@ EXTRA_OECONF = "--enable-tools"
 
 DEPENDS += "autoconf-archive-native"
 
-PACKAGES =+ "${PN}-tools libgpiodcxx"
+PACKAGES =+ "${PN}-tools libgpiodcxx ${PN}-python"
 FILES_${PN}-tools = "${bindir}/*"
 FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
-
-PACKAGES =+ "${PN}-python"
 FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*.so"
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
 RRECOMMENDS_PYTHON = "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '',d)}"
