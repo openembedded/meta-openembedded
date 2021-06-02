@@ -4,8 +4,9 @@ AUTHOR = "Bartosz Golaszewski <bgolaszewski@baylibre.com>"
 LICENSE = "LGPLv2.1+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
 
-SRC_URI = "https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
-           file://run-ptest \
+SRC_URI = " \
+    https://www.kernel.org/pub/software/libs/${BPN}/${BP}.tar.xz \
+    file://run-ptest \
 "
 
 SRC_URI[md5sum] = "28e79f6f70fee1da9079558d8b7b3736"
@@ -39,6 +40,6 @@ RRECOMMENDS_${PN}-python += "${RRECOMMENDS_PYTHON}"
 PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'tests', '', d)}"
 
 do_install_ptest() {
-	install -d ${D}${PTEST_PATH}/tests
-	cp ${B}/tests/.libs/gpiod-test ${D}${PTEST_PATH}/tests/
+    install -d ${D}${PTEST_PATH}/tests
+    cp ${B}/tests/.libs/gpiod-test ${D}${PTEST_PATH}/tests/
 }
