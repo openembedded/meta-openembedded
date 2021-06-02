@@ -28,7 +28,21 @@ EXTRA_OECONF = "--enable-tools"
 DEPENDS += "autoconf-archive-native"
 
 PACKAGES =+ "${PN}-tools libgpiodcxx ${PN}-python"
-FILES_${PN}-tools = "${bindir}/*"
+FILES_${PN}-tools = " \
+    ${bindir}/gpiodetect \
+    ${bindir}/gpioinfo \
+    ${bindir}/gpioget \
+    ${bindir}/gpioset \
+    ${bindir}/gpiofind \
+    ${bindir}/gpiomon \
+"
+FILES_${PN}-ptest += " \
+    ${bindir}/gpiod-test \
+    ${bindir}/gpio-tools-test \
+    ${bindir}/gpio-tools-test.bats \
+    ${bindir}/gpiod-cxx-test \
+    ${libdir}/libgpiomockup.so.* \
+"
 FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
 FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*.so"
 FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
