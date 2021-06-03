@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 SRC_URI = "http://pyropus.ca/software/memtester/old-versions/${BP}.tar.gz \
            file://Makefile.patch \
            "
-SRC_URI[md5sum] = "674a8a88ff54bdb229ca4148218a41f1"
-SRC_URI[sha256sum] = "8ed52b0d06d4aeb61954994146e2a5b2d20448a8f3ce3ee995120e6dbde2ae37"
+SRC_URI[md5sum] = "1bc22c01e987d6a67fac39dc5656a4d3"
+SRC_URI[sha256sum] = "1c5fc2382576c084b314cfd334d127a66c20bd63892cac9f445bc1d8b4ca5a47"
 
 do_compile () {
     echo '${CC} ${CFLAGS} -DPOSIX -c' > conf-cc
