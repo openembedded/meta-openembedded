@@ -22,7 +22,7 @@ PACKAGECONFIG_NUMA_armeb = ""
 PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
 PACKAGECONFIG[numa] = ",--disable-numa,numactl"
 
-SRCREV = "267b164c372d57145880f365bab8d8a52bf8baa7"
+SRCREV = "0313e938c9c8bb37d71dade239f1f5326677b079"
 SRC_URI = "git://git.kernel.dk/fio.git \
 "
 
