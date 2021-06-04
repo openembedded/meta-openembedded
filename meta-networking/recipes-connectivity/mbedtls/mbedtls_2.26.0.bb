@@ -23,7 +23,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "1c54b5410fd48d6bcada97e30cac417c5c7eea67"
+SRCREV = "e483a77c85e1f9c1dd2eb1c5a8f552d2617fe400"
 SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development"
 SRC_URI += "file://0001-ssl_tls-Increase-size-of-padbuf-to-64.patch"
 
