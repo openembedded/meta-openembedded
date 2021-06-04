@@ -17,6 +17,13 @@ export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
 
 do_install() {
     oe_runmake install DESTDIR=${D} prefix=${prefix}
+
+    # Install example configs from source tree
+    install -d ${D}${docdir}/${PN}
+    cp -R --no-dereference --preserve=mode,links ${S}/configs ${D}${docdir}/${PN}
 }
 
+PACKAGES =+ "${PN}-configs"
+
+FILES_${PN}-configs = "${docdir}"
 FILES_${PN}-doc = "${mandir}"
