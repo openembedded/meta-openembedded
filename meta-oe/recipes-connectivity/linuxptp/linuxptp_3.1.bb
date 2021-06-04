@@ -10,14 +10,12 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.
 SRC_URI[md5sum] = "2264cb69c9af947028835c12c89a7572"
 SRC_URI[sha256sum] = "f58f5b11cf14dc7c4f7c9efdfb27190e43d02cf20c3525f6639edac10528ce7d"
 
-EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
+EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}' mandir=${mandir}"
 
 export KBUILD_OUTPUT="${RECIPE_SYSROOT}"
 
-do_install () {
-    install -d ${D}/${bindir}
-    install -p ${S}/ptp4l  ${D}/${bindir}
-    install -p ${S}/pmc  ${D}/${bindir}
-    install -p ${S}/phc2sys  ${D}/${bindir}
-    install -p ${S}/hwstamp_ctl  ${D}/${bindir}
+do_install() {
+    oe_runmake install DESTDIR=${D} prefix=${prefix}
 }
+
+FILES_${PN}-doc = "${mandir}"
