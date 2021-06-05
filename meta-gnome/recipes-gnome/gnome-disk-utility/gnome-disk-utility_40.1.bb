@@ -12,11 +12,12 @@ DEPENDS = " \
     libsecret \
     libpwquality \
     udisks2 \
+    libhandy \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
+inherit gnomebase gsettings gtk-icon-cache gettext features_check mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit"
 
@@ -25,7 +26,7 @@ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 # As soon as elogind is of interest this needs rework: meson option is combo
 PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
 
-SRC_URI[archive.sha256sum] = "dd033d3f36ab070bc72317cf3045e5b4927765543f1bce7612b2c7f96595167a"
+SRC_URI[archive.sha256sum] = "2a4b99ac11ca23394b28c5584b9e96284e8c5a4da65cf06207de54f42b1ff141"
 
 FILES_${PN} += " \
     ${datadir}/metainfo \
