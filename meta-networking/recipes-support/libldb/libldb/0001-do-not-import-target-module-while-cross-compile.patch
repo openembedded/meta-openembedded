@@ -1,4 +1,4 @@
-From cc0576405803bcae45ee353c4333c449cead9207 Mon Sep 17 00:00:00 2001
+From 00500909ebb0f51dd3b4e90c665f07158e7fe255 Mon Sep 17 00:00:00 2001
 From: Changqing Li <changqing.li@windriver.com>
 Date: Tue, 25 Jun 2019 14:25:08 +0800
 Subject: [PATCH] do not import target module while cross compile
@@ -10,12 +10,16 @@ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 
 update to version 4.10.5, and switch to python3
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+
+Upstream-Status: Inappropriate [embedded specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
  buildtools/wafsamba/samba_bundled.py | 27 +++++++++++++++++++--------
- 1 file changed, 18 insertions(+), 8 deletions(-)
+ 1 file changed, 19 insertions(+), 8 deletions(-)
 
 diff --git a/buildtools/wafsamba/samba_bundled.py b/buildtools/wafsamba/samba_bundled.py
-index 60ce7da..5468a36 100644
+index 5f080dd..cdc115e 100644
 --- a/buildtools/wafsamba/samba_bundled.py
 +++ b/buildtools/wafsamba/samba_bundled.py
 @@ -4,6 +4,7 @@ import sys
@@ -63,5 +67,5 @@ index 60ce7da..5468a36 100644
          Logs.error('ERROR: Python module %s of version %s not found, and bundling disabled' % (libname, minversion))
          sys.exit(1)
 -- 
-2.7.4
+2.17.1
 
