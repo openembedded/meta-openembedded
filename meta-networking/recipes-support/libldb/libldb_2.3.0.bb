@@ -7,11 +7,9 @@ DEPENDS += "libtdb libtalloc libtevent popt"
 RDEPENDS_pyldb += "python3"
 
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-           file://do-not-import-target-module-while-cross-compile.patch \
-           file://libldb-fix-musl-libc-unkown-type-error.patch \
+           file://0001-do-not-import-target-module-while-cross-compile.patch \
+           file://0002-ldb-Add-configure-options-for-packages.patch \
            file://libldb-fix-musl-libc-conflict-type-error.patch \
-           file://0001-waf-add-support-of-cross_compile.patch \
-           file://options-1.5.4.patch \ 
           "
 
 PACKAGECONFIG ??= "\
@@ -27,14 +25,14 @@ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
 PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
 
-SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://avoid-openldap-unless-wanted.patch', d)}"
+SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://0003-avoid-openldap-unless-wanted.patch', d)}"
 
 LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9adade \
                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
 
-SRC_URI[md5sum] = "d9b4bea8b48cd4c4d0c492e65881164b"
-SRC_URI[sha256sum] = "ddf7f770643e0a0dda60f2818913f883caeed37fa1e8d6eda0dfe9588c1e3a83"
+SRC_URI[md5sum] = "fe4b1f17f77e2ea52b4e1320d927844c"
+SRC_URI[sha256sum] = "a4d308b3d0922ef01f3661a69ebc373e772374defa76cf0979ad21b21f91922d"
 
 inherit waf-samba
 
