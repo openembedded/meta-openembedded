@@ -1,13 +1,15 @@
 SUMMARY = "Canonical libwebsockets.org websocket library"
 HOMEPAGE = "https://libwebsockets.org/"
-LICENSE = "MIT & Zlib & BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=8c47b078124308a4e1354e8d59f606b7"
+LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
 
 DEPENDS = "zlib"
 
 S = "${WORKDIR}/git"
-SRCREV = "1367c11e1ee44d9e19daa50e1d015365bae17354"
-SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable"
+SRCREV = "4b6a7982b6833c8ccac1f35caaf9e8ccc605ff9a"
+SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable \
+           file://0001-core-net-Remove-unused-variable.patch \
+          "
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
