@@ -14,40 +14,36 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
 
 SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://smb.conf \
-           file://16-do-not-check-xsltproc-manpages.patch \
-           file://20-do-not-import-target-module-while-cross-compile.patch \
-           file://21-add-config-option-without-valgrind.patch \
-           file://netdb_defines.patch \
-           file://glibc_only.patch \
-           file://iconv-4.7.0.patch \
-           file://dnsserver-4.7.0.patch \
-           file://smb_conf-4.7.0.patch \
            file://volatiles.03_samba \
-           file://0001-waf-add-support-of-cross_compile.patch \
-           file://0001-lib-replace-wscript-Avoid-generating-nested-main-fun.patch \
-           file://0002-util_sec.c-Move-__thread-variable-to-global-scope.patch \
-           file://0001-Add-options-to-configure-the-use-of-libbsd.patch \
-           file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
-           file://CVE-2020-14318.patch \
-           file://CVE-2020-14383.patch \
+           file://0001-Don-t-check-xsltproc-manpages.patch \
+           file://0002-do-not-import-target-module-while-cross-compile.patch \
+           file://0003-Add-config-option-without-valgrind.patch \
+           file://0004-Add-options-to-configure-the-use-of-libbsd.patch \
+           file://0005-samba-build-dnsserver_common-code.patch \
+           file://0006-samba-defeat-iconv-test.patch \
+           file://0007-wscript_configure_system_gnutls-disable-check-gnutls.patch \
+           file://0008-source3-wscript-disable-check-fcntl-F_OWNER_EX.patch \
            "
+
 SRC_URI_append_libc-musl = " \
+           file://netdb_defines.patch \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
            file://cmocka-uintptr_t.patch \
-           file://0001-samba-fix-musl-lib-without-innetgr.patch \
-          "
+           file://samba-fix-musl-lib-without-innetgr.patch \
+           file://source3-wscript-disable-check-fcntl-RW_HINTS.patch \
+           "
 
-SRC_URI[md5sum] = "f006a3d1876113e4a049015969d20fe6"
-SRC_URI[sha256sum] = "7dcfc2aaaac565b959068788e6a43fc79ce2a03e7d523f5843f7a9fddffc7c2c"
+SRC_URI[md5sum] = "171629ad42b4b303107e8b0fff942a1f"
+SRC_URI[sha256sum] = "89af092a0b00f5354ed287f0aa37b8c2cf9ba2ce67ea6464192e2c18528f89b9"
 
-UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
+UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.14(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d
 # remove default added RDEPENDS on perl
 RDEPENDS_${PN}_remove = "perl"
 
-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libaio libpam libtasn1 jansson"
+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libaio libpam libtasn1 jansson libparse-yapp-perl-native gnutls"
 
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
@@ -55,6 +51,8 @@ REQUIRED_DISTRO_FEATURES = "pam"
 DEPENDS_append_libc-musl = " libtirpc"
 CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
 LDFLAGS_append_libc-musl = " -ltirpc"
+
+COMPATIBLE_HOST_riscv32 = "null"
 
 INITSCRIPT_NAME = "samba"
 INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
@@ -76,7 +74,7 @@ export WAF_NO_PREFORK="yes"
 # Use krb5.  Build active domain controller.
 #
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd zeroconf', d)} \
-                   acl cups ad-dc gnutls ldap mitkrb5 \
+                   acl cups ad-dc ldap mitkrb5 \
 "
 
 RDEPENDS_${PN}-ctdb-tests += "bash util-linux-getopt"
@@ -96,19 +94,7 @@ PACKAGECONFIG[libunwind] = ", , libunwind"
 PACKAGECONFIG[gpgme] = ",--without-gpgme,,"
 PACKAGECONFIG[lmdb] = ",--without-ldb-lmdb,lmdb,"
 PACKAGECONFIG[libbsd] = "--with-libbsd, --without-libbsd, libbsd"
-
-# Building the AD (Active Directory) DC (Domain Controller) requires GnuTLS,
-# And ad-dc doesn't work with mitkrb5 for versions prior to 4.7.0 according to:
-# http://samba.2283325.n4.nabble.com/samba-4-6-6-Unknown-dependency-kdc-in-service-kdc-objlist-td4722096.html
-# So the working combination is:
-# 1) ad-dc: enable, gnutls: enable, mitkrb5: disable
-# 2) ad-dc: disable, gnutls: enable/disable, mitkrb5: enable
-#
-# We are now at 4.7.0, so take the above with a grain of salt. We do not need to know where
-# krb5kdc is unless ad-dc is enabled, but we tell configure anyhow.
-#
-PACKAGECONFIG[ad-dc] = "--with-experimental-mit-ad-dc,--without-ad-dc,,"
-PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
+PACKAGECONFIG[ad-dc] = "--with-experimental-mit-ad-dc,--without-ad-dc,python3-markdown python3-dnspython,"
 PACKAGECONFIG[mitkrb5] = "--with-system-mitkrb5 --with-system-mitkdc=/usr/sbin/krb5kdc,,krb5,"
 
 SAMBA4_IDMAP_MODULES="idmap_ad,idmap_rid,idmap_adex,idmap_hash,idmap_tdb2"
@@ -182,11 +168,11 @@ do_install_append() {
     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/default/samba
 
     # the items are from ctdb/tests/run_tests.sh
-    for d in onnode takeover tool eventscripts cunit simple complex; do
-        testdir=${D}${datadir}/ctdb-tests/$d
+    for d in cunit eventd eventscripts onnode shellcheck takeover takeover_helper tool; do
+        testdir=${D}${datadir}/ctdb-tests/UNIT/$d
         install -d $testdir
-        cp ${S}/ctdb/tests/$d/*.sh $testdir
-        cp -r ${S}/ctdb/tests/$d/scripts ${S}/ctdb/tests/$d/stubs $testdir || true
+        cp ${S}/ctdb/tests/UNIT/$d/*.sh $testdir
+        cp -r ${S}/ctdb/tests/UNIT/$d/scripts ${S}/ctdb/tests/UNIT/$d/stubs $testdir || true
     done
 
     # fix file-rdeps qa warning
@@ -197,7 +183,7 @@ do_install_append() {
     chmod 0750 ${D}${sysconfdir}/sudoers.d || true
     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
     
-    for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc samba_dnsupdate; do
+    for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc samba_dnsupdate samba_downgrade_db; do
         if [ -f "${D}${sbindir}/$f" ]; then
             sed -i -e 's,${PYTHON},/usr/bin/env python3,g' ${D}${sbindir}/$f
         fi
