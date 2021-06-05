@@ -245,6 +245,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     lemon \
     flatbuffers \
     heaptrack \
+    libparse-yapp-perl \
     libubox \
     ltrace \
     lua \
