@@ -11,13 +11,11 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 S = "${WORKDIR}/git"
-SRCREV = "e445b87b9dff439ec564c245d030b03d61eb0f24"
-PV = "0.101+git${SRCPV}"
+SRCREV = "62701436991e42606c4e9e8dbdcdc5067d64f69b"
+PV = "0.102+git${SRCPV}"
 
 SRC_URI = " \
         git://github.com/CanonicalLtd/netplan.git \
-        file://0001-dbus-Remove-unused-variabes.patch \
-        file://0002-Makefile-Exclude-.h-files-from-target-rule.patch \
 "
 SRC_URI_append_libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 
