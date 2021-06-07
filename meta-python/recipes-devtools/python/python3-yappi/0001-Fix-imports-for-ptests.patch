@@ -1,0 +1,96 @@
+From 0dedc1c573ddc4e87475eb03c64555cd54a72e92 Mon Sep 17 00:00:00 2001
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+Date: Mon, 7 Jun 2021 09:40:20 -0400
+Subject: [PATCH] Fix imports for tests
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ tests/test_asyncio.py              | 2 +-
+ tests/test_asyncio_context_vars.py | 2 +-
+ tests/test_functionality.py        | 2 +-
+ tests/test_gevent.py               | 2 +-
+ tests/test_hooks.py                | 2 +-
+ tests/test_tags.py                 | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/tests/test_asyncio.py b/tests/test_asyncio.py
+index 4ac4c5f..4de94cf 100644
+--- a/tests/test_asyncio.py
++++ b/tests/test_asyncio.py
+@@ -2,7 +2,7 @@ import unittest
+ import yappi
+ import asyncio
+ import threading
+-from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
++from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
+ 
+ 
+ @asyncio.coroutine
+diff --git a/tests/test_asyncio_context_vars.py b/tests/test_asyncio_context_vars.py
+index 5bd750c..9a253c0 100644
+--- a/tests/test_asyncio_context_vars.py
++++ b/tests/test_asyncio_context_vars.py
+@@ -5,7 +5,7 @@ import contextvars
+ import functools
+ import time
+ import os
+-import utils
++import tests.utils as utils
+ import yappi
+ 
+ async_context_id = contextvars.ContextVar('async_context_id')
+diff --git a/tests/test_functionality.py b/tests/test_functionality.py
+index a73cb63..2ab273f 100644
+--- a/tests/test_functionality.py
++++ b/tests/test_functionality.py
+@@ -5,7 +5,7 @@ import threading
+ import unittest
+ import yappi
+ import _yappi
+-import utils
++import tests.utils as utils
+ import multiprocessing  # added to fix http://bugs.python.org/issue15881 for > Py2.6
+ import subprocess
+ 
+diff --git a/tests/test_gevent.py b/tests/test_gevent.py
+index 8569712..fe15b29 100644
+--- a/tests/test_gevent.py
++++ b/tests/test_gevent.py
+@@ -4,7 +4,7 @@ import yappi
+ import gevent
+ from gevent.event import Event
+ import threading
+-from utils import (
++from .utils import (
+     YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io,
+     burn_io_gevent
+ )
+diff --git a/tests/test_hooks.py b/tests/test_hooks.py
+index a96a4f1..e4177ba 100644
+--- a/tests/test_hooks.py
++++ b/tests/test_hooks.py
+@@ -5,7 +5,7 @@ import unittest
+ import time
+ 
+ import yappi
+-import utils
++import tests.utils as utils
+ 
+ 
+ def a():
+diff --git a/tests/test_tags.py b/tests/test_tags.py
+index b0b531d..1928888 100644
+--- a/tests/test_tags.py
++++ b/tests/test_tags.py
+@@ -2,7 +2,7 @@ import unittest
+ import yappi
+ import threading
+ import time
+-from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
++from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
+ 
+ 
+ class MultiThreadTests(YappiUnitTestCase):
+-- 
+2.31.1
+
