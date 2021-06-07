@@ -41,6 +41,7 @@ FILES_${PN}-ptest += " \
     ${bindir}/gpio-tools-test \
     ${bindir}/gpio-tools-test.bats \
     ${bindir}/gpiod-cxx-test \
+    ${bindir}/gpiod_py_test.py \
     ${libdir}/libgpiomockup.so.* \
 "
 FILES_libgpiodcxx = "${libdir}/libgpiodcxx.so.*"
