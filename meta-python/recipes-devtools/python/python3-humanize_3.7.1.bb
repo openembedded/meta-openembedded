@@ -5,7 +5,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=4ecc42519e84f6f3e23529464df7bd1d"
 
-SRC_URI[sha256sum] = "a31704cf41f023e268032c4813c6482573320150a0d986f76b245e0451bb89e1"
+SRC_URI[sha256sum] = "b8e7878f3063174b212bb82b9e5bee3b24bc47931e44df0bd34bcb1d8e0acf2f"
 
 inherit pypi setuptools3
 
@@ -15,6 +15,7 @@ DEPENDS += "\
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-datetime \
+    ${PYTHON_PN}-setuptools \
 "
 
 BBCLASSEXTEND = "native nativesdk"
