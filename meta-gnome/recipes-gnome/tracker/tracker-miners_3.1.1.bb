@@ -15,7 +15,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection vala bash-completion features_check
 
-SRC_URI[archive.sha256sum] = "c9be14871b1398e6e656a354a8f8f59e69e93169017f2b28308ef439324fd12b"
+SRC_URI[archive.sha256sum] = "e4d361351b156f2862a524415fbebf0539c781cd87c6629662f0265b4803b8b8"
 SRC_URI += "file://0001-meson.build-Just-warn-if-we-build-without-libseccomp.patch"
 
 # gobject-introspection is mandatory and cannot be configured
@@ -34,6 +34,7 @@ PACKAGECONFIG ??= " \
     png \
     tiff \
     xml \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'seccomp', d)} \
 "
 
 PACKAGECONFIG[battery]     = "-Dbattery_detection=upower,-Dbattery_detection=none,upower"
@@ -54,7 +55,7 @@ PACKAGECONFIG[networkmanager] = "-Dnetwork_manager=enabled,-Dnetwork_manager=dis
 
 # For security reasons it is strongly recommended to set add meta-security in
 # your layers and 'libseccomp' to PACKAGECONFIG".
-PACKAGECONFIG[libseccomp] = ",,libseccomp"
+PACKAGECONFIG[seccomp] = "-Dseccomp=true,-Dseccomp=false,libseccomp"
 # not yet in meta-gnome
 PACKAGECONFIG[rss]        = "-Dminer_rss=true,-Dminer_rss=false,libgrss"
 
