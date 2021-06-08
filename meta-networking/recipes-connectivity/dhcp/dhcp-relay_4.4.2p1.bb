@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;beginline=4;md5=004a4db50a1e20972e924a8618747
 
 DEPENDS = "openssl libcap zlib"
 
-SRC_URI = "https://ftp.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \
+SRC_URI = "https://ftp.isc.org/isc/dhcp/4.4.2-P1/dhcp-4.4.2-P1.tar.gz \
            https://ftp.isc.org/isc/bind9/9.11.32/bind-9.11.32.tar.gz;name=bind;downloadfilename=bind.tar.gz;unpack=0 \
            file://default-relay \
            file://init-relay \
@@ -20,15 +20,15 @@ SRC_URI = "https://ftp.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \
            file://0003-bind-Makefile.in-disable-backtrace.patch \
            "
 
-SRC_URI[md5sum] = "2afdaf8498dc1edaf3012efdd589b3e1"
-SRC_URI[sha256sum] = "1a7ccd64a16e5e68f7b5e0f527fd07240a2892ea53fe245620f4f5f607004521"
+SRC_URI[md5sum] = "3089a1ebd20a802ec0870ae337d43907"
+SRC_URI[sha256sum] = "b05e04337539545a8faa0d6ac518defc61a07e5aec66a857f455e7f218c85a1a"
 SRC_URI[bind.md5sum] = "0d029dd06ca60c6739c3189c999ef757"
 SRC_URI[bind.sha256sum] = "cbf8cb4b74dd1452d97c3a2a8c625ea346df8516b4b3508ef07443121a591342"
 
 UPSTREAM_CHECK_URI = "http://ftp.isc.org/isc/dhcp/"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+\.\d+\.(\d+?))/"
 
-S = "${WORKDIR}/dhcp-${PV}"
+S = "${WORKDIR}/dhcp-4.4.2-P1"
 
 inherit autotools-brokensep systemd
 
