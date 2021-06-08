@@ -17,6 +17,7 @@ SRC_URI = "https://ftp.isc.org/isc/dhcp/${PV}/dhcp-${PV}.tar.gz \
            file://dhcrelay.service \
            file://0001-Makefile.am-only-build-dhcrelay.patch \
            file://0002-bind-version-update-to-latest-version.patch \
+           file://0003-bind-Makefile.in-disable-backtrace.patch \
            "
 
 SRC_URI[md5sum] = "2afdaf8498dc1edaf3012efdd589b3e1"
