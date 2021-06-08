@@ -16,6 +16,7 @@ PV = "0.102+git${SRCPV}"
 
 SRC_URI = " \
         git://github.com/CanonicalLtd/netplan.git \
+        file://0001-Handle-enum-element-override.patch \
 "
 SRC_URI_append_libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 
