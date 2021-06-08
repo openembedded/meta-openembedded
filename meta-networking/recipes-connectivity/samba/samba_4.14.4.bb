@@ -23,6 +23,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0006-samba-defeat-iconv-test.patch \
            file://0007-wscript_configure_system_gnutls-disable-check-gnutls.patch \
            file://0008-source3-wscript-disable-check-fcntl-F_OWNER_EX.patch \
+           file://0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch \
            "
 
 SRC_URI_append_libc-musl = " \
@@ -31,7 +32,6 @@ SRC_URI_append_libc-musl = " \
            file://samba-4.3.9-remove-getpwent_r.patch \
            file://cmocka-uintptr_t.patch \
            file://samba-fix-musl-lib-without-innetgr.patch \
-           file://source3-wscript-disable-check-fcntl-RW_HINTS.patch \
            "
 
 SRC_URI[md5sum] = "171629ad42b4b303107e8b0fff942a1f"
