@@ -13,11 +13,11 @@ DEPENDS = " \
 
 inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even mime-xdg
 
-SRC_URI[archive.sha256sum] = "94a0130e12d321aa119793a14d09716523e2e4a61f29570cee53fd88dd6abc57"
+SRC_URI[archive.sha256sum] = "4a2886a3966200fb0a9cbba4e2b79f8dad9d26556498aacdaed71775590b3c0d"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'packagekit', '', d)}"
 
-PACKAGECONFIG[nautilus] = "-Dnautilus-actions=true,-Dnautilus-actions=false,nautilus"
+PACKAGECONFIG[nautilus] = "-Dnautilus-actions=enabled,-Dnautilus-actions=disabled,nautilus"
 PACKAGECONFIG[packagekit] = "-Dpackagekit=true,-Dpackagekit=false,"
 
 FILES_${PN} += " \
