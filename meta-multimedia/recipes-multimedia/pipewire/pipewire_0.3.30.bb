@@ -11,7 +11,7 @@ SECTION = "multimedia"
 
 DEPENDS = "dbus"
 
-SRCREV = "1b484867eb20dbcf9ffea812834fc9142f89f652"
+SRCREV = "e857856be7b64d562cdcc01c43933218a68b225e"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
