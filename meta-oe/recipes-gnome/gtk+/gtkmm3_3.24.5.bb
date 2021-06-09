@@ -16,10 +16,7 @@ inherit gnomebase features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += "file://0001-meson.build-use-relative-path.patch \
-"
-
-SRC_URI[archive.sha256sum] = "60497c4f7f354c3bd2557485f0254f8b7b4cf4bebc9fee0be26a77744eacd435"
+SRC_URI[archive.sha256sum] = "856333de86689f6a81c123f2db15d85db9addc438bc3574c36f15736aeae22e6"
 
 EXTRA_OEMESON = "-Dbuild-demos=false"
 
