@@ -11,8 +11,7 @@ inherit features_check gnomebase autotools pkgconfig
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.md5sum] = "6194ac577f15567adfa3c923944c6651"
-SRC_URI[archive.sha256sum] = "4c4cfc917fd42d3879ce997b463428d6982affa0fb660cafcc0bc2d9afcedd3a"
+SRC_URI[archive.sha256sum] = "a0bb49765ceccc293ab2c6735ba100431807d384ffa14c2ebd30e07993fd2fa4"
 
 EXTRA_OECONF = " --disable-documentation "
 
