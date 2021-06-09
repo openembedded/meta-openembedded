@@ -54,13 +54,6 @@ RRECOMMENDS_${PN}-ptest += "kernel-module-gpio-mockup"
 PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'tests', '', d)}"
 
 do_install_ptest() {
-    if [ "${PREFERRED_PROVIDER_virtual/kernel}" = "linux-yocto" ] && \
-       ${@bb.utils.contains('KERNEL_FEATURES', 'features/gpio/mockup.scc', 'false', 'true',d)}; then
-        bbwarn "libgpiod test-suites need the gpio-mockup
-module and will not work without it. Consider adding
-'features/gpio/mockup.scc' to KERNEL_FEATURES"
-    fi
-
     install -d ${D}${PTEST_PATH}/tests
 
     # These are the core C library tests
