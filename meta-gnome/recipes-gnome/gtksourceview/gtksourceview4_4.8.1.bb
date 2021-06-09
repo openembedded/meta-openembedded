@@ -16,9 +16,8 @@ inherit gnomebase lib_package gettext features_check gtk-doc gobject-introspecti
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtksourceview/4.6/${PNAME}-${PV}.tar.xz"
-SRC_URI[md5sum] = "4d4cff3a57a371bff4793e97d50404ef"
-SRC_URI[sha256sum] = "63f487a7ab59612ffa9e7be1883dbd274ab1016afcede3239b93b0fc384df874"
+SRC_URI = "https://download.gnome.org/sources/gtksourceview/4.8/${PNAME}-${PV}.tar.xz"
+SRC_URI[sha256sum] = "d163d71b5fcafbc5b1eec6dd841edbdbcddd3a7511cd5fdcffd86b8bbfe69ac1"
 
 GIR_MESON_OPTION = 'gir'
 GTKDOC_MESON_OPTION = "gtk_doc"
