@@ -6,17 +6,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
 
 DEPENDS = "mm-common cairomm glibmm pango"
 
-SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+GNOMEBASEBUILDCLASS = "meson"
 
-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/pangomm/${SHRT_VER}/pangomm-${PV}.tar.xz"
-SRC_URI[md5sum] = "339c48dd92ebd3a9911b231708f7a819"
-SRC_URI[sha256sum] = "14bf04939930870d5cfa96860ed953ad2ce07c3fd8713add4a1bfe585589f40f"
+inherit gnomebase features_check
 
-inherit features_check autotools pkgconfig
+SRC_URI[archive.sha256sum] = "c885013fe61a4c5117fda395770d507563411c63e49f4a3aced4c9efe34d9975"
 
 REQUIRED_DISTRO_FEATURES = "x11"
-
-EXTRA_OECONF = " --disable-documentation "
 
 FILES_${PN} = "${libdir}/lib*.so.*"
 FILES_${PN}-dev += "${libdir}/*/include/ ${libdir}/pangomm-*/"
