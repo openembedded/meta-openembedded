@@ -11,8 +11,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 DEPENDS = "glib-2.0"
 
-SRC_URI[archive.md5sum] = "44a37e1f8d4cac1dca0c41b57b49c2d0"
-SRC_URI[archive.sha256sum] = "1c8f62990833ca41188dbb80c5e99d99b57a62608ca675bbcd37bc2244742f2e"
+SRC_URI[archive.sha256sum] = "585c4f979f6f543b77bfdb4fb01eb18ba25c2aec5b7866c676d929616fb2c3fa"
 
 # backend is required for gnome-control-center
 PACKAGECONFIG = "backend other"
