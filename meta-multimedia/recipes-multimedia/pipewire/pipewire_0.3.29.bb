@@ -192,7 +192,6 @@ SYSTEMD_SERVICE_${PN} = "pipewire.service"
 CONFFILES_${PN} += "${datadir}/pipewire/pipewire.conf"
 FILES_${PN} = " \
     ${datadir}/pipewire/pipewire.conf \
-    ${datadir}/pipewire/filter-chain \
     ${systemd_user_unitdir}/pipewire.* \
     ${bindir}/pipewire \
 "
@@ -270,6 +269,11 @@ CONFFILES_${PN}-modules-rtkit = "${datadir}/pipewire/client-rt.conf"
 FILES_${PN}-modules-rtkit += " \
     ${datadir}/pipewire/client-rt.conf \
     "
+
+CONFFILES_${PN}-modules-filter-chain = "${datadir}/pipewire/filter-chain/*"
+FILES_${PN}-modules-filter-chain += " \
+    ${datadir}/pipewire/filter-chain/* \
+"
 
 FILES_${PN}-alsa-card-profile = " \
     ${datadir}/alsa-card-profile/* \
