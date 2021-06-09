@@ -100,7 +100,6 @@ RDEPENDS_packagegroup-meta-multimedia-mkv = "\
 RDEPENDS_packagegroup-meta-multimedia-support = "\
     crossguid \
     libmediaart-2.0 \
-    libmediaart \
     gst-instruments \
     libsrtp \
     srt \
