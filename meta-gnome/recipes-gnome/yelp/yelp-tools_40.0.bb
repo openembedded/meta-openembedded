@@ -5,17 +5,19 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GPL;md5=eb723b61539feef013de476e68b5c50a \
 "
 
+GNOMEBASEBUILDCLASS = "meson"
+
 inherit gnomebase itstool
 
 DEPENDS += " \
     libxslt-native \
     libxml2-native \
+    python3-lxml-native \
     yelp-xsl \
 "
 
-SRC_URI[archive.md5sum] = "7856f9ad0492aaf9adf097f5058bfc2e"
-SRC_URI[archive.sha256sum] = "183856b5ed0b0bb2c05dd1204af023946ed436943e35e789afb0295e5e71e8f9"
+SRC_URI[archive.sha256sum] = "664bacf2f3dd65ef00a43f79487351ab64a6c4c629c56ac0ceb1723c2eb66aae"
 
-RDEPENDS_${PN} += "yelp-xsl"
+RDEPENDS_${PN} += "python3-core yelp-xsl"
 
 BBCLASSEXTEND = "native"
