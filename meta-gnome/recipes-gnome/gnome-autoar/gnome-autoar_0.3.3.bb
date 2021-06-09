@@ -9,8 +9,7 @@ DEPENDS = " \
 
 inherit gnomebase gobject-introspection gtk-doc vala
 
-SRC_URI[archive.md5sum] = "3c8da1a8489255f2aaa5fdb690308e5d"
-SRC_URI[archive.sha256sum] = "a48c4d5ce9a9ed05ba8bc8fdeb9af2d1a7bd8091c2911d6c37223c4f488f7c72"
+SRC_URI[archive.sha256sum] = "272400f73a375a7e88fdf1e12591bfb8f3f03edf01780cadcd74f70b613e5c04"
 
 do_compile_prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/gnome-autoar/.libs"
