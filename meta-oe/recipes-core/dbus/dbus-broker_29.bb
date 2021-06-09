@@ -14,8 +14,8 @@ UPSTREAM_CHECK_URI = "https://github.com/bus1/${BPN}/releases"
 inherit meson pkgconfig systemd features_check
 
 DEPENDS = "expat systemd"
-DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
-DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'audit', '', d)}"
+DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux (>= 3.2)', '', d)}"
+DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'audit (>= 3.0)', '', d)}"
 
 RDEPENDS_${PN} += "dbus-common"
 
