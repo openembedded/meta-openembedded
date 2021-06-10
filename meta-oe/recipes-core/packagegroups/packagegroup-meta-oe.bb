@@ -426,6 +426,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
     wxwidgets \
     zlog \
     zstd \
+    zsync-curl \
     redis-plus-plus \
 "
 RDEPENDS_packagegroup-meta-oe-extended_append_libc-musl = " libexecinfo"
