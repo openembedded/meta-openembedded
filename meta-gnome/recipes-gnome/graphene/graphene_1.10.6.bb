@@ -9,8 +9,10 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gobject-introspection gtk-doc
 
-SRC_URI[archive.md5sum] = "a2c26c4f44a02ca053e0e9afb63cc94c"
-SRC_URI[archive.sha256sum] = "e97de8208f1aac4f913d4fa71ab73a7034e807186feb2abe55876e51c425a7f6"
+SRC_URI[archive.md5sum] = "390139e704772b915ff2b7cac56c24ae"
+SRC_URI[archive.sha256sum] = "80ae57723e4608e6875626a88aaa6f56dd25df75024bd16e9d77e718c3560b25"
+
+PACKAGECONFIG[introspection] = "-Dintrospection=enabled,-Dintrospection=disabled,"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
