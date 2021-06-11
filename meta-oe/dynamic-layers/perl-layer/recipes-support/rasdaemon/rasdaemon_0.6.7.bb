@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/mchehab/rasdaemon.git;branch=master \
            file://rasdaemon.service \
            file://init"
 
-SRCREV = "32b978fcf73215c90ce7383580224e4295930ae7"
+SRCREV = "aa96737648d867a3d73e4151d05b54bbab494605"
 
 S = "${WORKDIR}/git"
 
