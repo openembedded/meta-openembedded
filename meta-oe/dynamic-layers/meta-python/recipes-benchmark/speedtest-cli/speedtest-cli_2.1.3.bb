@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 inherit setuptools3
 
 SRC_URI = "git://github.com/sivel/speedtest-cli.git"
-SRCREV = "c58ad3367bf27f4b4a4d5b1bca29ebd574731c5d"
+SRCREV = "42e96b13dda2afabbcec2622612d13495a415caa"
 
 S = "${WORKDIR}/git"
 
