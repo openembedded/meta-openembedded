@@ -9,7 +9,7 @@ inherit cml1 update-alternatives
 
 SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
            "
-SRC_URI[sha256sum] = "cb2a565a8d30015d08d73628795dca51a85b99b149aeabbbecd9e8dbdbd8fddc"
+SRC_URI[sha256sum] = "bfd230c187726347f7e31a1fc5841705871dfe4f3cbc6628f512b54e57360949"
 
 SECTION = "base"
 
