@@ -2,11 +2,11 @@ DESCRIPTION = "Human friendly output for text interfaces using Python"
 HOMEPAGE = "https://humanfriendly.readthedocs.io/"
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=764e737b117a38d773609885e8d04f0b"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5d178009f806c2bdd498a19be0013a7a"
 
 PYPI_PACKAGE = "humanfriendly"
 
-SRC_URI[sha256sum] = "066562956639ab21ff2676d1fda0b5987e985c534fc76700a19bd54bcb81121d"
+SRC_URI[sha256sum] = "f7dba53ac7935fd0b4a2fc9a29e316ddd9ea135fb3052d3d0279d10c18ff9c48"
 
 inherit pypi setuptools3
 
