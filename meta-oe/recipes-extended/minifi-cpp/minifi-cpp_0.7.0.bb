@@ -139,3 +139,5 @@ pkg_postinst_${PN}() {
         fi
     fi
 }
+
+CLEANBROKEN = "1"
