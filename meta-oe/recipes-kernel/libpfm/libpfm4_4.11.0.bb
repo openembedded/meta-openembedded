@@ -14,9 +14,9 @@ COMPATIBLE_HOST = "powerpc64"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/perfmon2/${BPN}/libpfm-${PV}.tar.gz \
            file://0001-Include-poll.h-instead-of-sys-poll.h.patch \
-          "
-SRC_URI[md5sum] = "d8f66cb9bfa7e1434434e0de6409db5b"
-SRC_URI[sha256sum] = "c61c575378b5c17ccfc5806761e4038828610de76e2e34fac9f7fa73ba844b49"
+           file://0002-perf_examples-Remove-unused-sum-variable.patch \
+           "
+SRC_URI[sha256sum] = "5da5f8872bde14b3634c9688d980f68bda28b510268723cc12973eedbab9fecc"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/perfmon2/files/libpfm4/"
 
