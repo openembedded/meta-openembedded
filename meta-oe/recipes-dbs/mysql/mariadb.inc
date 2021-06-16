@@ -23,6 +23,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz 
            file://sys_futex.patch \
            file://cross-compiling.patch \
            file://ssize_t.patch \
+           file://mm_malloc.patch \
           "
 SRC_URI_append_libc-musl = " file://ppc-remove-glibc-dep.patch"
 
