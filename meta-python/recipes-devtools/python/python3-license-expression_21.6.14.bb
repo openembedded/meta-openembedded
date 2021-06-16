@@ -2,16 +2,20 @@ SUMMARY = "Utility library to parse, compare, simplify and normalize license exp
 HOMEPAGE = "https://github.com/nexB/license-expression"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
+LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=9429839cdc4b292ff46e88b524c6e0c9"
 
-SRC_URI[md5sum] = "fd4cb295cc345be1071274cdbd81c969"
-SRC_URI[sha256sum] = "7960e1dfdf20d127e75ead931476f2b5c7556df05b117a73880b22ade17d1abc"
+SRC_URI[sha256sum] = "9de87a427c9a449eee7913472fb9ed03b63036295547369fdbf95f76a8b924b2"
 
 inherit pypi ptest setuptools3
 
+DEPENDS += "\
+    ${PYTHON_PN}-setuptools-scm-native \
+    ${PYTHON_PN}-wheel-native \
+"
+
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-booleanpy \
-    "
+"
 
 BBCLASSEXTEND = "native nativesdk"
 
