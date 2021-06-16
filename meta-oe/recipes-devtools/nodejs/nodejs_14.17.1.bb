@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=85bf260d8b6de1588f57abc5dc66587c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a1016f9b7979cfe6fc3466a9bba60b1e"
 
 DEPENDS = "openssl"
 DEPENDS_append_class-target = " qemu-native"
@@ -21,7 +21,6 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            file://big-endian.patch \
            file://mips-warnings.patch \
-           file://v8-call-new-ListFormatter-createInstance.patch \
            file://mips-less-memory.patch \
            "
 SRC_URI_append_class-target = " \
@@ -30,7 +29,10 @@ SRC_URI_append_class-target = " \
 SRC_URI_append_toolchain-clang_x86 = " \
            file://libatomic.patch \
            "
-SRC_URI[sha256sum] = "e44adbbed6756c2c1a01258383e9f00df30c147b36e438f6369b5ef1069abac3"
+SRC_URI_append_toolchain-clang_powerpc64le = " \
+           file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+           "
+SRC_URI[sha256sum] = "ddf1d2d56ddf35ecd98c5ea5ddcd690b245899f289559b4330c921255f5a247f"
 
 S = "${WORKDIR}/node-v${PV}"
 
