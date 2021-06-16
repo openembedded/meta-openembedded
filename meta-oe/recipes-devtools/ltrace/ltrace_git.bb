@@ -29,6 +29,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http 
            file://include_unistd_nr.patch \
            file://0001-Bug-fix-for-data-type-length-judgment.patch \
            file://0001-ensure-the-struct-pointers-are-null-initilized.patch \
+           file://0001-ppc-Remove-unused-host_powerpc64-function.patch \
            "
 SRC_URI_append_libc-musl = " file://add_ppc64le.patch"
 
