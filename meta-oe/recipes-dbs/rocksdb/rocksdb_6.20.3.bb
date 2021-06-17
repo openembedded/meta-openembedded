@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
            file://0001-folly-Use-SYS_futex-for-syscall.patch \
            file://0001-jemalloc_helper-Limit-the-mm_malloc.h-hack-to-glibc-.patch \
            file://0001-range_tree-Implement-toku_time_now-for-rv32-rv64-in-.patch \
+           file://ppc64.patch \
           "
 
 S = "${WORKDIR}/git"
