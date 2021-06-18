@@ -16,10 +16,6 @@ DEPENDS = " \
     util-linux-libuuid \
 "
 
-RDEPENDS_${PN} = " \
-    libdevmapper \
-"
-
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
 SRC_URI[md5sum] = "504d1ab22cbc4d1a59a8d8c7ee5ed3bf"
 SRC_URI[sha256sum] = "b296b7a21ea576c2b180611ccb19d06aec8dddaedf7c704b0c6a81210c25635f"
@@ -71,14 +67,6 @@ PACKAGECONFIG[kernel] = "--with-crypto_backend=kernel"
 PACKAGECONFIG[nettle] = "--with-crypto_backend=nettle,,nettle"
 PACKAGECONFIG[luks2] = "--with-default-luks-format=LUKS2,--with-default-luks-format=LUKS1"
 
-RRECOMMENDS_${PN} = "kernel-module-aes-generic \
-                     kernel-module-dm-crypt \
-                     kernel-module-md5 \
-                     kernel-module-cbc \
-                     kernel-module-sha256-generic \
-                     kernel-module-xts \
-"
-
 EXTRA_OECONF = "--enable-static"
 # Building without largefile is not supported by upstream
 EXTRA_OECONF += "--enable-largefile"
@@ -88,5 +76,18 @@ EXTRA_OECONF += "--disable-static-cryptsetup"
 EXTRA_OECONF += "--disable-libargon2"
 
 FILES_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','systemd','${exec_prefix}/lib/tmpfiles.d/cryptsetup.conf', '', d)}"
+
+RDEPENDS_${PN} = " \
+    libdevmapper \
+"
+
+RRECOMMENDS_${PN}_class-target = " \
+    kernel-module-aes-generic \
+    kernel-module-dm-crypt \
+    kernel-module-md5 \
+    kernel-module-cbc \
+    kernel-module-sha256-generic \
+    kernel-module-xts \
+"
 
 BBCLASSEXTEND = "native nativesdk"
