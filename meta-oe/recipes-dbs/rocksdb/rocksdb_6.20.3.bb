@@ -20,6 +20,10 @@ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
            file://arm.patch \
           "
 
+SRC_URI_append_riscv32 = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+SRC_URI_append_mips = " file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+SRC_URI_remove_toolchain-clang_riscv32 = "file://0001-replace-old-sync-with-new-atomic-builtin-equivalents.patch"
+
 S = "${WORKDIR}/git"
 
 inherit cmake
