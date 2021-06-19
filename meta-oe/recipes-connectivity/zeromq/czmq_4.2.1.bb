@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "5d720a204c2a58645d6f7643af15d563a712dad98c9d32c1ed913377da
 
 UPSTREAM_CHECK_URI = "https://github.com/zeromq/${BPN}/releases"
 
-inherit cmake
+inherit cmake pkgconfig
 
 PACKAGES = "lib${BPN} lib${BPN}-dev lib${BPN}-staticdev ${PN} ${PN}-dbg"
 
