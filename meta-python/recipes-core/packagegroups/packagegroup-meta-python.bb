@@ -34,6 +34,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-arpeggio \
     python3-asciitree \
     python3-asn1crypto \
+    python3-aspectlib \
     python3-astor \
     python3-astroid \
     python3-asttokens \
@@ -114,10 +115,13 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-engineio \
     python3-et-xmlfile \
     python3-evdev \
+    python3-execnet \
     python3-fann2 \
     python3-fasteners \
+    python3-fastjsonschema \
     python3-fastnumbers \
     python3-feedformatter \
+    python3-fields \
     python3-flask \
     python3-flask-babel \
     python3-flask-bootstrap \
@@ -280,6 +284,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-psutil \
     python3-ptyprocess \
     python3-pulsectl \
+    python3-py-cpuinfo \
     python3-py-ubjson \
     python3-pyalsaaudio \
     python3-pyasn1 \
@@ -332,6 +337,8 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pystache \
     python3-pystemd \
     python3-pytest-asyncio \
+    python3-pytest-benchmark \
+    python3-pytest-cache \
     python3-pytest-helpers-namespace \
     python3-pytest-html \
     python3-pytest-metadata \
