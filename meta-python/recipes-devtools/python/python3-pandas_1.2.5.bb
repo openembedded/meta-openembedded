@@ -6,7 +6,7 @@ HOMEPAGE = "http://pandas.pydata.org/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c2a8f987b2ce77c368c6b3e1b5b10774"
 
-SRC_URI[sha256sum] = "649ecab692fade3cbfcf967ff936496b0cfba0af00a55dfaacd82bdda5cb2279"
+SRC_URI[sha256sum] = "14abb8ea73fce8aebbb1fb44bec809163f1c55241bcc1db91c2c780e97265033"
 
 inherit pypi setuptools3
 
@@ -21,4 +21,5 @@ RDEPENDS_${PN} += " \
     ${PYTHON_PN}-numpy \
     ${PYTHON_PN}-dateutil \
     ${PYTHON_PN}-pytz \
+    ${PYTHON_PN}-profile \
 "
