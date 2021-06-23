@@ -278,6 +278,7 @@ RDEPENDS_packagegroup-meta-python3 = "\
     python3-pretend \
     python3-prettytable \
     python3-priority \
+    python3-process-tests \
     python3-progress \
     python3-prompt-toolkit \
     python3-protobuf \
