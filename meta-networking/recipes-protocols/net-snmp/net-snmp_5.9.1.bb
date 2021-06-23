@@ -5,7 +5,8 @@ LICENSE = "BSD & MIT"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9d100a395a38584f2ec18a8275261687"
 
-DEPENDS = "openssl pciutils"
+DEPENDS = "openssl"
+DEPENDS_append_class-target = " pciutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://init \
@@ -72,8 +73,10 @@ CACHED_CONFIGUREVARS = " \
     ac_cv_file__etc_printcap=no \
     NETSNMP_CONFIGURE_OPTIONS= \
 "
-export PERLPROG="${bindir}/env perl"
+PERLPROG = "${bindir}/env perl"
+PERLPROG_class-native = "${bindir_native}/env perl"
 PERLPROG_append = "${@bb.utils.contains('PACKAGECONFIG', 'perl', ' -I${WORKDIR}', '', d)}"
+export PERLPROG
 
 HAS_PERL = "${@bb.utils.contains('PACKAGECONFIG', 'perl', '1', '0', d)}"
 
@@ -127,11 +130,14 @@ do_install_append() {
         -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
         -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
-        -e 's@${STAGING_DIR_HOST}@@g' \
         -i ${D}${bindir}/net-snmp-config
 
-    sed -e 's@${STAGING_DIR_HOST}@@g' \
-        -i ${D}${libdir}/pkgconfig/netsnmp*.pc
+    # ${STAGING_DIR_HOST} is empty for native builds, and the sed command below
+    # will result in errors if run for native.
+    if [ "${STAGING_DIR_HOST}" ]; then
+        sed -e 's@${STAGING_DIR_HOST}@@g' \
+            -i ${D}${bindir}/net-snmp-config ${D}${libdir}/pkgconfig/netsnmp*.pc
+    fi
 
     sed -e "s@^NSC_INCLUDEDIR=.*@NSC_INCLUDEDIR=\$\{includedir\}@g" \
         -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
@@ -272,3 +278,5 @@ RCONFLICTS_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
 LEAD_SONAME = "libnetsnmp.so"
 
 MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/net-snmp-config"
+
+BBCLASSEXTEND = "native"
