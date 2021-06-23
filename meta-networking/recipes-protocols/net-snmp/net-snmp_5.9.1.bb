@@ -5,7 +5,7 @@ LICENSE = "BSD & MIT"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=9d100a395a38584f2ec18a8275261687"
 
-DEPENDS = "openssl libnl pciutils"
+DEPENDS = "openssl pciutils"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
            file://init \
@@ -41,24 +41,23 @@ CCACHE = ""
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} des smux"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} des smux"
+PACKAGECONFIG[des] = "--enable-des, --disable-des"
 PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
+PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6"
 PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
-
-PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
-
-PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
-                       perl,"
-PACKAGECONFIG[des] = "--enable-des,--disable-des"
+PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no, perl"
 PACKAGECONFIG[smux] = ""
+PACKAGECONFIG[systemd] = "--with-systemd, --without-systemd"
 
-EXTRA_OECONF = "--enable-shared \
-                --disable-manuals \
-                --with-defaults \
-                --with-install-prefix=${D} \
-                --with-persistent-directory=${localstatedir}/lib/net-snmp \
-                ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
-                --with-mib-modules='${MIB_MODULES}' \
+EXTRA_OECONF = " \
+    --enable-shared \
+    --disable-manuals \
+    --with-defaults \
+    --with-install-prefix=${D} \
+    --with-persistent-directory=${localstatedir}/lib/net-snmp \
+    --with-endianness=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+    --with-mib-modules='${MIB_MODULES}' \
 "
 
 MIB_MODULES = ""
@@ -117,7 +116,7 @@ do_install_append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/snmpd.service ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/snmptrapd.service ${D}${systemd_unitdir}/system
-    sed    -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
+    sed -e "s@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g" \
         -i ${D}${bindir}/net-snmp-create-v3-user
     sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
         -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
@@ -233,8 +232,6 @@ CONFFILES_${PN}-server-snmptrapd = "${sysconfdir}/snmp/snmptrapd.conf"
 INITSCRIPT_PACKAGES = "${PN}-server-snmpd"
 INITSCRIPT_NAME_${PN}-server-snmpd = "snmpd"
 INITSCRIPT_PARAMS_${PN}-server-snmpd = "start 90 2 3 4 5 . stop 60 0 1 6 ."
-
-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
 
 SYSTEMD_PACKAGES = "${PN}-server-snmpd \
                     ${PN}-server-snmptrapd"
