@@ -12,11 +12,11 @@ HOMEPAGE = "http://search.cpan.org/dist/Net-Telnet/"
 SECTION = "Development/Libraries"
 
 LICENSE = "Artistic-1.0|GPLv1+"
-LIC_FILES_CHKSUM = "file://README;beginline=4;endline=7;md5=3fd238bfb6ee1810cb15d5d95e07b0f5"
+LIC_FILES_CHKSUM = "file://README;beginline=4;endline=7;md5=e94ab3b72335e3cdadd6c1ff736dd714"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/J/JR/JROGERS/Net-Telnet-${PV}.tar.gz"
-SRC_URI[md5sum] = "d2514080116c1b0fa5f96295c84538e3"
-SRC_URI[sha256sum] = "e64d567a4e16295ecba949368e7a6b8b5ae2a16b3ad682121d9b007dc5d2a37a"
+SRC_URI[md5sum] = "c8573c57a2d9469f038c40ac284b1e5f"
+SRC_URI[sha256sum] = "677f68ba2cd2a824fae323fa82e183bf7e3d03c3c499c91d923bd6283796a743"
 
 S = "${WORKDIR}/Net-Telnet-${PV}"
 
