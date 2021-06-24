@@ -10,6 +10,7 @@ SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
             file://cross-compile-platform.patch \
             file://0001-Allow-verify_cb_-to-be-called-with-ok-True.patch \
             file://0001-Use-of-RSA_SSLV23_PADDING-has-been-deprecated.patch \
+            file://avoid-host-contamination.patch \
            "
 SRC_URI[sha256sum] = "e4e42f068b78ccbf113e5d0a72ae5f480f6c3ace4940b91e4fff5598cfff6fb3"
 
@@ -41,5 +42,7 @@ SWIG_FEATURES_append_riscv32 = " -D__SIZEOF_POINTER__=${SITEINFO_BITS}/8 -D__ris
 SWIG_FEATURES_append_mipsarch = " -D_MIPS_SZPTR=${SITEINFO_BITS}"
 SWIG_FEATURES_append_powerpc64le = " -D__powerpc64__"
 export SWIG_FEATURES
+
+export STAGING_DIR
 
 BBCLASSEXTEND = "native"
