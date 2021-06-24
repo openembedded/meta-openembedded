@@ -209,7 +209,7 @@ do_install_append() {
     fi
 
     oe_runmake -C ${S}/pidl DESTDIR=${D} install_vendor
-    rm -rf ${D}${libdir}/perl5/${PERLVERSION}/${BUILD_SYS}/perllocal.pod
+    find ${D}${libdir}/ -type f -name "perllocal.pod" | xargs rm -f
     rm -rf ${D}${libdir}/perl5/vendor_perl/${PERLVERSION}/${BUILD_SYS}/auto/Parse/Pidl/.packlist
     
 }
