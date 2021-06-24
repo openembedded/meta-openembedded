@@ -39,7 +39,7 @@ SRC_URI[sha256sum] = "bb6ef5d2f16b85288d823578abc453d9a80514c42e5a2ea2c4e3c60dc4
 
 UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.14(\.\d+)+).tar.gz"
 
-inherit systemd waf-samba cpan-base perlnative update-rc.d
+inherit systemd waf-samba cpan-base perlnative update-rc.d perl-version
 
 # CVE-2011-2411 is valnerble only on HP NonStop Servers.
 CVE_CHECK_WHITELIST += "CVE-2011-2411" 
@@ -130,6 +130,18 @@ EXTRA_OECONF += "--enable-fhs \
 
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
+do_configure_append () {
+    cd ${S}/pidl/
+    perl Makefile.PL PREFIX=${prefix}
+    sed -e 's,VENDORPREFIX)/lib/perl,VENDORPREFIX)/${baselib}/perl,g' \
+        -e 's,PERLPREFIX)/lib/perl,PERLPREFIX)/${baselib}/perl,g' -i Makefile
+
+}
+
+do_compile_append () {
+    oe_runmake -C ${S}/pidl
+}
+
 do_install_append() {
     for section in 1 5 7; do
         install -d ${D}${mandir}/man$section
@@ -195,6 +207,10 @@ do_install_append() {
     if [ -f "${D}${bindir}/samba-tool" ]; then
         sed -i -e 's,${PYTHON},/usr/bin/env python3,g' ${D}${bindir}/samba-tool
     fi
+
+    oe_runmake -C ${S}/pidl DESTDIR=${D} install_vendor
+    rm -rf ${D}${libdir}/perl5/${PERLVERSION}/${BUILD_SYS}/perllocal.pod
+    rm -rf ${D}${libdir}/perl5/vendor_perl/${PERLVERSION}/${BUILD_SYS}/auto/Parse/Pidl/.packlist
     
 }
 
@@ -301,7 +317,9 @@ FILES_smbclient = "${bindir}/cifsdd \
                    ${libdir}/samba/smbspool_krb5_wrapper"
 
 RDEPENDS_${PN}-pidl_append = " perl"
-FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
+FILES_${PN}-pidl = "${bindir}/pidl \
+                    ${libdir}/perl5 \
+                   "
 
 RDEPENDS_${PN}-client = "\
     smbclient \
