@@ -8,9 +8,11 @@ PYPI_PACKAGE = "ruamel.yaml"
 
 inherit pypi setuptools3
 
-BBCLASSEXTEND = "native nativesdk"
+SRC_URI[sha256sum] = "106bc8d6dc6a0ff7c9196a47570432036f41d556b779c6b4e618085f57e39e67"
 
-SRC_URI[sha256sum] = "374373b4743aee9f6d9f40bea600fe020a7ac7ae36b838b4a6a93f72b584a14c"
+RDEPENDS_${PN} += "\
+    ${PYTHON_PN}-shell \
+"
 
 do_install_prepend() {
     export RUAMEL_NO_PIP_INSTALL_CHECK=1
