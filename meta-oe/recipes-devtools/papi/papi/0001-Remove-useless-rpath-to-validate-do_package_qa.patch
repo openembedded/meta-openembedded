@@ -1,0 +1,39 @@
+From cf23b5c3ba9a4d1e9589e777e02195725feea402 Mon Sep 17 00:00:00 2001
+From: Olivier Georget <ogeorget@prophesee.ai>
+Date: Wed, 23 Jun 2021 14:00:50 +0200
+Subject: [PATCH] Remove useless rpath to validate do_package_qa
+
+---
+ src/components/Makefile_comp_tests.target.in | 2 +-
+ src/configure.in                             | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/components/Makefile_comp_tests.target.in b/src/components/Makefile_comp_tests.target.in
+index 76b14683e..e661b361c 100644
+--- a/src/components/Makefile_comp_tests.target.in
++++ b/src/components/Makefile_comp_tests.target.in
+@@ -5,7 +5,7 @@ datarootdir = @datarootdir@
+ datadir = ../../..
+ testlibdir = $(datadir)/testlib
+ validationlibdir = $(datadir)/validation_tests
+-INCLUDE = -I. -I@includedir@ -I$(datadir) -I$(testlibdir) -I$(validationlibdir)
++INCLUDE = -I. -I$(datadir) -I$(testlibdir) -I$(validationlibdir)
+ LIBDIR  = @libdir@
+ LIBRARY = @LIBRARY@
+ SHLIB   = @SHLIB@
+diff --git a/src/configure.in b/src/configure.in
+index e263d433f..7daab8dc3 100644
+--- a/src/configure.in
++++ b/src/configure.in
+@@ -1265,7 +1265,7 @@ SHLIB='libpapi.so.AC_PACKAGE_VERSION'
+ VLIB='libpapi.so.$(PAPIVER)'
+ OMPCFLGS=-fopenmp
+ CC_R='$(CC) -pthread'
+-CC_SHR='$(CC) -fPIC -DPIC -shared -Wl,-soname -Wl,$(VLIB) -Xlinker "-rpath" -Xlinker "$(LIBDIR)"'
++CC_SHR='$(CC) -fPIC -DPIC -shared -Wl,-soname -Wl,$(VLIB) '
+ if test "$CC_COMMON_NAME" = "gcc"; then
+ 	if test "$bitmode" = "32"; then
+ 		BITFLAGS=-m32
+-- 
+2.17.1
+

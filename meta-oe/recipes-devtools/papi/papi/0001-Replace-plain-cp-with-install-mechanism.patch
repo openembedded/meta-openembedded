@@ -1,0 +1,59 @@
+From 2ac707bd4897c715f7f9106a457aca50899f415f Mon Sep 17 00:00:00 2001
+From: Olivier Georget <ogeorget@prophesee.ai>
+Date: Wed, 23 Jun 2021 08:36:06 +0200
+Subject: [PATCH] Replace plain 'cp' with 'install' mechanism
+
+---
+ src/Makefile.inc | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/Makefile.inc b/src/Makefile.inc
+index 278acdd12..b4e8451e4 100644
+--- a/src/Makefile.inc
++++ b/src/Makefile.inc
+@@ -297,17 +297,17 @@ install-lib: native_install
+ 	@echo "Headers (INCDIR) being installed in: \"$(DESTDIR)$(INCDIR)\""; 
+ 	-mkdir -p $(DESTDIR)$(INCDIR)
+ 	-chmod go+rx $(DESTDIR)$(INCDIR)
+-	cp $(FHEADERS) papi.h papiStdEventDefs.h $(DESTDIR)$(INCDIR)
++	install $(FHEADERS) papi.h papiStdEventDefs.h $(DESTDIR)$(INCDIR)
+ 	cd $(DESTDIR)$(INCDIR) && chmod go+r $(FHEADERS) papi.h papiStdEventDefs.h
+ 	@echo "Libraries (LIBDIR) being installed in: \"$(DESTDIR)$(LIBDIR)\""; 
+ 	-mkdir -p $(DESTDIR)$(LIBDIR)
+ 	-chmod go+rx $(DESTDIR)$(LIBDIR)
+ 	@set -ex; if test -r $(LIBRARY) ; then \
+-		cp $(LIBRARY) $(DESTDIR)$(LIBDIR); \
++		install $(LIBRARY) $(DESTDIR)$(LIBDIR); \
+ 		chmod go+r $(DESTDIR)$(LIBDIR)/$(LIBRARY); \
+ 	fi
+ 	@set -ex; if test -r $(SHLIB) ; then \
+-		cp -p $(SHLIB) $(DESTDIR)$(LIBDIR)/libpapi.so.$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC); \
++		install $(SHLIB) $(DESTDIR)$(LIBDIR)/libpapi.so.$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC); \
+ 		chmod go+r $(DESTDIR)$(LIBDIR)/libpapi.so.$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC) ; \
+ 		cd $(DESTDIR)$(LIBDIR); \
+ 		ln -sf libpapi.so.$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC) libpapi.so.$(PAPIVER).$(PAPIREV).$(PAPIAGE); \
+@@ -326,9 +326,9 @@ install-tests:  install-comp_tests
+ 	$(SETPATH) $(MAKE) -C ctests install
+ 	$(SETPATH) $(MAKE) -C ftests install
+ 	$(SETPATH) $(MAKE) -C validation_tests install
+-	-cp run_tests.sh $(DESTDIR)$(DATADIR)
+-	-cp run_tests_exclude_cuda.txt $(DESTDIR)$(DATADIR)
+-	-cp run_tests_exclude.txt $(DESTDIR)$(DATADIR)
++	-install n_tests.sh $(DESTDIR)$(DATADIR)
++	-install run_tests_exclude_cuda.txt $(DESTDIR)$(DATADIR)
++	-install run_tests_exclude.txt $(DESTDIR)$(DATADIR)
+ 	-chmod go+rx $(DESTDIR)$(DATADIR)/run_tests.sh
+ 	-chmod go+r $(DESTDIR)$(DATADIR)/run_tests_exclude_cuda.txt $(DESTDIR)$(DATADIR)/run_tests_exclude.txt
+ 
+@@ -344,7 +344,7 @@ install-pkgconf:
+ 	@echo "pkcongfig being installed in: \"$(DESTDIR)$(LIBPC)\"";
+ 	-mkdir -p $(DESTDIR)$(LIBPC)
+ 	-chmod go+rx $(DESTDIR)$(LIBPC)
+-	cp papi.pc $(DESTDIR)$(LIBPC)/papi-$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC).pc
++	install papi.pc $(DESTDIR)$(LIBPC)/papi-$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC).pc
+ 	cd $(DESTDIR)$(LIBPC); ln -sf papi-$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC).pc papi-$(PAPIVER).$(PAPIREV).$(PAPIAGE).pc;
+ 	cd $(DESTDIR)$(LIBPC); ln -sf papi-$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC).pc papi-$(PAPIVER).pc;
+ 	cd $(DESTDIR)$(LIBPC); ln -sf papi-$(PAPIVER).$(PAPIREV).$(PAPIAGE).$(PAPIINC).pc papi.pc;
+-- 
+2.17.1
+
