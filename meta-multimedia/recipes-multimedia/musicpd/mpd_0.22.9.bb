@@ -19,9 +19,10 @@ DEPENDS += " \
 
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/MPD;branch=v0.22.x \
+    file://0001-include-utility-for-std-forward.patch \
     file://mpd.conf.in \
 "
-SRCREV = "938728820b11d4544a071994fe3c63c6ab710e8e"
+SRCREV = "18628bf89ebfa5a806971479a71cf9b5764e500e"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
