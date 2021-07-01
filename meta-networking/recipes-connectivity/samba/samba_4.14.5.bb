@@ -316,7 +316,7 @@ FILES_smbclient = "${bindir}/cifsdd \
                    ${bindir}/smbtree \
                    ${libdir}/samba/smbspool_krb5_wrapper"
 
-RDEPENDS_${PN}-pidl_append = " perl"
+RDEPENDS_${PN}-pidl_append = " perl libparse-yapp-perl"
 FILES_${PN}-pidl = "${bindir}/pidl \
                     ${libdir}/perl5 \
                    "
