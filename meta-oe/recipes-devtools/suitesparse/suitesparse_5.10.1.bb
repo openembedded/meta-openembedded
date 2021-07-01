@@ -5,11 +5,7 @@ SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https \
            file://0002-Preserve-links-when-installing-libmetis.patch \
            file://0003-Add-version-information-to-libmetis.patch \
            "
-
-SRC_URI[md5sum] = "c414679bbc9432a3def01b31ad921140"
-SRC_URI[sha256sum] = "06726e471fbaa55f792578f9b4ab282ea9d008cf39ddcc3b42b73400acddef40"
-
-SRCREV = "v${PV}"
+SRCREV = "538273cfd53720a10e34a3d80d3779b607e1ac26"
 
 S = "${WORKDIR}/git"
 
