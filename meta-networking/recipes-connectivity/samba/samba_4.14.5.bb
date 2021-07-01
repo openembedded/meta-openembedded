@@ -211,7 +211,7 @@ do_install_append() {
     oe_runmake -C ${S}/pidl DESTDIR=${D} install_vendor
     find ${D}${libdir}/ -type f -name "perllocal.pod" | xargs rm -f
     rm -rf ${D}${libdir}/perl5/vendor_perl/${PERLVERSION}/${BUILD_SYS}/auto/Parse/Pidl/.packlist
-    
+    sed -i -e '1s,#!.*perl,#!${bindir}/env perl,' ${D}${bindir}/pidl
 }
 
 PACKAGES =+ "${PN}-python3 ${PN}-pidl \
