@@ -12,13 +12,14 @@ SECTION = "console/utils"
 LICENSE = "MPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=8184208060df880fe3137b93eb88aeea"
 
-DEPENDS = "zlib gzip-native"
+DEPENDS = "zlib gzip-native json-c"
 
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
     file://0002-Don-t-execute-processes-as-a-specific-user.patch \
     file://0004-Modify-systemd-config-directory.patch \
+    file://317.patch \
 "
-SRCREV = "22715aeceaa81ace2c832312529bde3a42d0814f"
+SRCREV = "24d197214bfdcec7430d31b42e5c87df27287aaf"
 
 S = "${WORKDIR}/git"
 
@@ -40,7 +41,7 @@ PACKAGECONFIG[dlt-console] = "-DWITH_DLT_CONSOLE=ON,-DWITH_DLT_CONSOLE=OFF,,dlt-
 
 inherit autotools gettext cmake systemd
 
-EXTRA_OECMAKE += "-DSYSTEMD_UNITDIR=${systemd_system_unitdir}"
+EXTRA_OECMAKE += "-DWITH_EXTENDED_FILTERING=ON -DSYSTEMD_UNITDIR=${systemd_system_unitdir}"
 
 PACKAGES += "${PN}-systemd"
 SYSTEMD_PACKAGES = "${PN} ${PN}-systemd"
