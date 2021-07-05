@@ -1,10 +1,9 @@
 SUMMARY = "Persistent/Immutable/Functional data structures for Python"
 HOMEPAGE = "https://github.com/tobgu/pyrsistent"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENCE.mit;md5=ca574f2891cf528b3e7a2ee570337e7c"
+LIC_FILES_CHKSUM = "file://LICENSE.mit;md5=a4b94c2b800b582a8d3925a9939cbf44"
 
-SRC_URI[md5sum] = "cd38658ea772a7f9b12b6f9485a7018b"
-SRC_URI[sha256sum] = "2e636185d9eb976a18a8a8e96efce62f2905fea90041958d8cc2a189756ebf3e"
+SRC_URI[sha256sum] = "773c781216f8c2900b42a7b638d5b517bb134ae1acbebe4d1e8f1f41ea60eb4b"
 
 inherit pypi setuptools3
 
