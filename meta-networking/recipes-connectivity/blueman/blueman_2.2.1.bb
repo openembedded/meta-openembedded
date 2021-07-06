@@ -4,14 +4,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "bluez5 python3-pygobject python3-cython-native python3-setuptools-native intltool-native"
 
-inherit autotools systemd gsettings python3native gtk-icon-cache
+inherit autotools gettext systemd gsettings python3native gtk-icon-cache
 
 SRC_URI = " \
     https://github.com/blueman-project/blueman/releases/download/${PV}/blueman-${PV}.tar.xz \
     file://0001-Search-for-cython3.patch \
     file://0002-fix-fail-to-enable-bluetooth.patch \
 "
-SRC_URI[sha256sum] = "1d9c3d39a564d88851aa8de509f16bfa586b0b50f4307dc6c6347ba4833664da"
+SRC_URI[sha256sum] = "fcc10a2259bef2c5ac63f577010d76caed460d68810b7f70fecf056bf10a1a72"
 
 EXTRA_OECONF = " \
     --disable-appindicator \
@@ -48,12 +48,10 @@ FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/_blueman.a"
 do_install_append() {
     sed -i "1s/.*/#!\/usr\/bin\/env python3/" ${D}${prefix}/libexec/blueman-rfcomm-watcher \
                                               ${D}${prefix}/libexec/blueman-mechanism \
-                                              ${D}${bindir}/blueman-tray \
-                                              ${D}${bindir}/blueman-services \
-                                              ${D}${bindir}/blueman-sendto \
-                                              ${D}${bindir}/blueman-report \
-                                              ${D}${bindir}/blueman-manager \
-                                              ${D}${bindir}/blueman-assistant \
+                                              ${D}${bindir}/blueman-adapters \
                                               ${D}${bindir}/blueman-applet \
-                                              ${D}${bindir}/blueman-adapters
+                                              ${D}${bindir}/blueman-manager \
+                                              ${D}${bindir}/blueman-sendto \
+                                              ${D}${bindir}/blueman-services \
+                                              ${D}${bindir}/blueman-tray
 }
