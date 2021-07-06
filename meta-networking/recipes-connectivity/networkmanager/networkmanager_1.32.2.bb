@@ -27,11 +27,7 @@ SRC_URI = " \
     file://0002-Do-not-create-settings-settings-property-documentati.patch \
     file://0003-install-firewalld-to-var-libdir-rather-than-hardcod-.patch \
 "
-SRC_URI_append_libc-musl = " \
-    file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
-    file://musl/0002-Fix-build-with-musl-systemd-specific.patch \
-"
-SRC_URI[sha256sum] = "6050b724212ea3ce7386113359bea9afa1f679a54f60d999a5999892e672c190"
+SRC_URI[sha256sum] = "701d511067f757d0f92f412c98cdb49a74a6ba69448aabb1beadacbc171e3873"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
@@ -56,7 +52,7 @@ CFLAGS_append_libc-musl = " \
 "
 
 do_compile_prepend() {
-    export GIR_EXTRA_LIBS_PATH="${B}/libnm/.libs:${B}/libnm-glib/.libs:${B}/libnm-util/.libs"
+    export GIR_EXTRA_LIBS_PATH="${B}/src/libnm-client-impl/.libs"
 }
 
 PACKAGECONFIG ??= "nss ifupdown dnsmasq nmcli \
