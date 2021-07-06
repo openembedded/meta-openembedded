@@ -4,10 +4,8 @@ LICENSE = "BSD-2-Clause & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=81f9cae6293cc0345a9144b78152ab62"
 
 SRC_URI = "git://github.com/commonmark/cmark.git"
-SRCREV = "8daa6b1495124f0b67e6034130e12d7be83e38bd"
+SRCREV = "8800e66010214384e75f933830ca5585e1ae3060"
 S = "${WORKDIR}/git"
-
-PV = "0.29.0"
 
 inherit cmake lib_package
 
