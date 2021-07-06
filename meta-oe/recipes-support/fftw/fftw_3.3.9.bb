@@ -9,8 +9,7 @@ SRC_URI = " \
     file://install-bench.patch \
     file://run-ptest \
 "
-SRC_URI[md5sum] = "8aac833c943d8e90d51b697b27d4384d"
-SRC_URI[sha256sum] = "6113262f6e92c5bd474f2875fa1b01054c4ad5040f6b0da7c03c98821d9ae303"
+SRC_URI[sha256sum] = "bf2c7ce40b04ae811af714deb512510cc2c17b9ab9d6ddcf49fe4487eea7af3d"
 
 inherit autotools pkgconfig ptest
 
