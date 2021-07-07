@@ -1,5 +1,5 @@
 LICENSE = "GPLv2 & GPLv3 & BSD-3-Clause & LGPL-2.0 & Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f9f2b9d61cb769a67c4cd079e1166de7"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5fa987762101f748a6cdd951b64ffc6b"
 SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https \
            file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch \
            file://0002-Preserve-links-when-installing-libmetis.patch \
@@ -73,4 +73,3 @@ FILES_${PN}-staticdev += "${libdir}/libmongoose.a"
 FILES_${PN}-dev += "${includedir} ${libdir}/*.so"
 
 EXCLUDE_FROM_WORLD = "1"
-
