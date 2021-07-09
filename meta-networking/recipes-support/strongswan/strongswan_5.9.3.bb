@@ -12,8 +12,7 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
            file://0001-memory.h-Include-stdint.h-for-uintptr_t.patch \
            "
 
-SRC_URI[md5sum] = "8918e6675e1be3784817641f07eadeb8"
-SRC_URI[sha256sum] = "61c72f741edb2c1295a7b7ccce0317a104b3f9d39efd04c52cd05b01b55ab063"
+SRC_URI[sha256sum] = "9325ab56a0a4e97e379401e1d942ce3e0d8b6372291350ab2caae0755862c6f7"
 
 UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
 
