@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz \
            file://firewalld.init \
 "
-SRC_URI[sha256sum] = "5998894db976d77996ca0a6b700a2f4125b9f283465fb255da9bddfb1640cb27"
+SRC_URI[sha256sum] = "52c5e3d5b1e2efc0e86c22b2bc1f7fd80908cc2d8130157dc2a3517a59b0a760"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 DEPENDS = "intltool-native glib-2.0-native nftables"
