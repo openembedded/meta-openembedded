@@ -14,8 +14,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
 SRC_URI = "${DEBIAN_MIRROR}/main/l/${BPN}/${BPN}_${PV}.tar.xz \
            file://99_logcheck \
 "
-SRC_URI[md5sum] = "1c6e9a97f9cc485353c25147cb99fb25"
-SRC_URI[sha256sum] = "9fb6d02b933470d0b1d1efb54ea186e0d0d27336f9d146be592f65ce60dfb3e6"
+SRC_URI[sha256sum] = "a2188ba549fff4412c82074b271884ff66d25f3fdb2a41916e817ce676855b29"
 
 S = "${WORKDIR}/${BPN}"
 
