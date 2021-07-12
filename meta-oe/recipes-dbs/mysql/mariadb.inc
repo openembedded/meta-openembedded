@@ -36,15 +36,15 @@ BINCONFIG_GLOB = "mysql_config"
 inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script
 
 MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
-                    ${PN}-server:${bindir}/mariadb-install-db"
+                    ${PN}-setupdb:${bindir}/mariadb-install-db"
 
 INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
 INITSCRIPT_NAME_${PN}-server = "mysqld"
 INITSCRIPT_PARAMS_${PN}-server ?= "start 45 5 . stop 45 0 6 1 ."
 
-USERADD_PACKAGES = "${PN}-server"
-USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
-GROUPADD_PARAM_${PN}-server = "--system mysql"
+USERADD_PACKAGES = "${PN}-setupdb"
+USERADD_PARAM_${PN}-setupdb = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+GROUPADD_PARAM_${PN}-setupdb = "--system mysql"
 
 INITSCRIPT_NAME_${PN}-setupdb = "install_db"
 INITSCRIPT_PARAMS_${PN}-setupdb ?= "defaults 44 44"
@@ -56,14 +56,18 @@ SYSTEMD_AUTO_ENABLE_${PN}-server ?= "disable"
 SYSTEMD_SERVICE_${PN}-setupdb = "install_db.service"
 SYSTEMD_AUTO_ENABLE_${PN}-setupdb ?= "enable"
 ALLOW_EMPTY_${PN}-setupdb ?= "1"
-FILES_${PN}-setupdb = "${sysconfdir}/init.d/install_db"
+FILES_${PN}-setupdb = "${sysconfdir}/init.d/install_db \
+                       ${bindir}/mariadb-install-db \
+                       ${bindir}/my_print_defaults \
+                       ${bindir}/mysql_install_db \
+                       ${bindir}/mysql-systemd-start \
+                       "
 
-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} setupdb"
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
 PACKAGECONFIG_class-native = ""
 PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
 PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITH_VALGRIND=FALSE,valgrind"
 PACKAGECONFIG[krb5] = ", ,krb5"
-PACKAGECONFIG[setupdb] = ", ,,${PN}-setupdb"
 PACKAGECONFIG[zstd] = "-DWITH_ROCKSDB_ZSTD=ON,-DWITH_ROCKSDB_ZSTD=OFF,zstd"
 
 # MariaDB doesn't link properly with gold
@@ -185,10 +189,10 @@ do_install() {
     fi
 }
 
-PACKAGES = "${PN}-dbg ${PN} \
+PACKAGES = "${PN}-dbg ${PN}-setupdb ${PN} \
     libmysqlclient-r libmysqlclient-r-dev libmysqlclient-r-staticdev \
     libmysqlclient libmysqlclient-dev libmysqlclient-staticdev \
-    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-setupdb ${PN}-leftovers"
+    libmysqld libmysqld-dev ${PN}-client ${PN}-server ${PN}-leftovers"
 CONFFILES_${PN}-server += "${sysconfdir}/my.cnf ${sysconfdir}/my.cnf.d/server.cnf"
 CONFFILES_${PN}-client += "${sysconfdir}/my.cnf.d/mysql-clients.cnf"
 CONFFILES_libmysqlclient += "${sysconfdir}/my.cnf.d/client.cnf"
@@ -291,7 +295,6 @@ FILES_${PN}-server = "\
     ${bindir}/mysql_convert_table_format \
     ${bindir}/mariadb-convert-table-format \
     ${bindir}/mysql_install_db \
-    ${bindir}/mariadb-install-db \
     ${bindir}/mysql_secure_installation \
     ${bindir}/mariadb-secure-installation \
     ${bindir}/mysql_setpermission \
