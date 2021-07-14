@@ -13,4 +13,6 @@ SRC_URI[sha256sum] = "d68597d2cf7df766bdf816b1a337b72ab8233c19825e170ae18714f16b
 
 inherit pypi setuptools3
 
+RDEPENDS_${PN} += "libusb1"
+
 BBCLASSEXTEND = "native nativesdk"
