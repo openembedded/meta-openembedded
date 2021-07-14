@@ -4,8 +4,11 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b0b7ac63b60085b23fa9f7e1951daa1d"
 
 PYPI_PACKAGE = "python-gnupg"
-SRC_URI[sha256sum] = "3aa0884b3bd414652c2385b9df39e7b87272c2eca1b8fcc3089bc9e58652019a"
+SRC_URI[sha256sum] = "2061f56b1942c29b92727bf9aecbd3cea3893acc9cccbdc7eb4604285efe4ac7"
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} +=  "gnupg-gpg"
+RDEPENDS_${PN} +=  " \
+	gnupg-gpg \
+	python3-logging \
+"
