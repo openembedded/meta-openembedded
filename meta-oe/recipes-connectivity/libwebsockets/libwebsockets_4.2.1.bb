@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
 DEPENDS = "zlib"
 
 S = "${WORKDIR}/git"
-SRCREV = "4b6a7982b6833c8ccac1f35caaf9e8ccc605ff9a"
-SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable \
-           file://0001-core-net-Remove-unused-variable.patch \
-          "
+SRCREV = "8a580b59b23d204ca72028370e97a8f6aa0c9202"
+SRC_URI = "git://github.com/warmcat/libwebsockets.git;protocol=https;branch=v4.2-stable"
 
 UPSTREAM_CHECK_URI = "https://github.com/warmcat/${BPN}/releases"
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
