@@ -8,6 +8,9 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.
            file://Use-cross-cpp-in-incdefs.patch \
            "
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/linuxptp/files/"
+UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)/"
+
 SRC_URI[md5sum] = "2264cb69c9af947028835c12c89a7572"
 SRC_URI[sha256sum] = "f58f5b11cf14dc7c4f7c9efdfb27190e43d02cf20c3525f6639edac10528ce7d"
 
