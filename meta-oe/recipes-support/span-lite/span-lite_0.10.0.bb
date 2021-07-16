@@ -4,7 +4,7 @@ LICENSE = "BSL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
 SRC_URI += "git://github.com/martinmoene/span-lite"
-SRCREV = "126453198fe2236b31ddfa7353e95d3a06c478ab"
+SRCREV = "2987dd8d3b8fe7c861e3c3f879234cc1c412f03f"
 
 S = "${WORKDIR}/git"
 
