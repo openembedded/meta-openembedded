@@ -1,7 +1,7 @@
 SUMMARY = "Kernel based automounter for linux"
 SECTION = "utils"
 LICENSE = "GPL-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ee9324a6f564bb2376b63878ac396798"
 
 DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl libxml2 util-linux cyrus-sasl libnsl2"
 
@@ -10,7 +10,6 @@ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 inherit autotools-brokensep systemd update-rc.d pkgconfig
 
 SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
-           file://autofs-5.0.7-include-linux-nfs.h-directly-in-rpc_sub.patch \
            file://no-bash.patch \
            file://cross.patch \
            file://fix_disable_ldap.patch \
@@ -26,11 +25,9 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
            file://0001-Bug-fix-for-pid_t-not-found-on-musl.patch \
+           file://0001-Define-__SWORD_TYPE-if-undefined.patch \
            "
-
-
-SRC_URI[md5sum] = "e6800e0afd6009ecdff148088c564050"
-SRC_URI[sha256sum] = "82094cad44f4e5c4f93eff2789cd66b57d7ab3fa646b7722d97608571001e694"
+SRC_URI[sha256sum] = "a18619e5ad18960fe382354eef33f070e57e4e5711d484b010acde080a003312"
 
 UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
 
@@ -87,10 +84,14 @@ do_install_append () {
 }
 SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 
+# all the libraries are unversioned, so don't pack it on PN-dev
+SOLIBS = ".so"
+FILES_SOLIBSDEV = ""
+# Some symlinks are created in plugins dir e.g.
+# mount_nfs4.so -> mount_nfs.so
 INSANE_SKIP_${PN} = "dev-so"
 
 RPROVIDES_${PN} += "${PN}-systemd"
 RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "autofs.service"
-
