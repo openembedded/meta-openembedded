@@ -936,6 +936,7 @@ RDEPENDS_packagegroup-meta-oe-test ="\
     bats \
     cmocka \
     cppunit \
+    cpputest \
     cukinia \
     cunit \
     cxxtest \
