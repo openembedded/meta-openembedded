@@ -17,5 +17,9 @@ inherit setuptools3
 
 RDEPENDS_${PN} += "\
     ${PYTHON_PN}-click \
+    ${PYTHON_PN}-core \
+    ${PYTHON_PN}-io \
+    ${PYTHON_PN}-json \
+    ${PYTHON_PN}-logging \
     ${PYTHON_PN}-six \
 "
