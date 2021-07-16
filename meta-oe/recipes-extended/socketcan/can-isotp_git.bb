@@ -15,3 +15,5 @@ EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
 do_install_append() {
     install -Dm 644 ${S}/include/uapi/linux/can/isotp.h ${D}${includedir}/linux/can/isotp.h
 }
+
+EXCLUDE_FROM_WORLD = "1"
