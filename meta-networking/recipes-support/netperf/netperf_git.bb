@@ -2,8 +2,7 @@ SUMMARY = "A networking benchmarking tool"
 DESCRIPTION = "Network performance benchmark including tests for TCP, UDP, sockets, ATM and more."
 SECTION = "net"
 HOMEPAGE = "http://www.netperf.org/"
-LICENSE = "netperf"
-LICENSE_FLAGS = "non-commercial"
+LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
 
 PV = "2.7.0+git${SRCPV}"
@@ -16,7 +15,7 @@ SRC_URI = "git://github.com/HewlettPackard/netperf.git \
            file://0001-nettest_omni-Remove-duplicate-variable-definitions.patch \
            "
 
-SRCREV = "f482bab49fcedee46fc5b755da127f608325cd13"
+SRCREV = "3bc455b23f901dae377ca0a558e1e32aa56b31c4"
 
 S = "${WORKDIR}/git"
 
