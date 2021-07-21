@@ -3,7 +3,7 @@ DESCRIPTION = "Network performance benchmark including tests for TCP, UDP, socke
 SECTION = "net"
 HOMEPAGE = "http://www.netperf.org/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
+LIC_FILES_CHKSUM = "file://COPYING;md5=e661ab33a2a71ad6652c178dedf8aaa2"
 
 PV = "2.7.0+git${SRCPV}"
 
@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/HewlettPackard/netperf.git \
            file://cpu_set.patch \
            file://vfork.patch \
            file://init \
+           file://netserver.service \
            file://0001-netlib.c-Move-including-sched.h-out-og-function.patch \
            file://0001-nettest_omni-Remove-duplicate-variable-definitions.patch \
            "
@@ -19,7 +20,7 @@ SRCREV = "3bc455b23f901dae377ca0a558e1e32aa56b31c4"
 
 S = "${WORKDIR}/git"
 
-inherit update-rc.d autotools texinfo
+inherit update-rc.d autotools texinfo systemd
 
 # cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
 CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
@@ -42,8 +43,10 @@ do_configure_prepend() {
 
 do_install() {
     sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${WORKDIR}/init
-
-    install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
+    install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d ${D}${systemd_system_unitdir}
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        sed -e 's#/usr/sbin/#${sbindir}/#g' ${WORKDIR}/netserver.service > ${D}${systemd_system_unitdir}/netserver.service
+    fi
     install -m 4755 src/netperf ${D}${bindir}
     install -m 4755 src/netserver ${D}${sbindir}
     install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/netperf
@@ -68,3 +71,4 @@ RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-modu
 
 INITSCRIPT_NAME="netperf"
 INITSCRIPT_PARAMS="defaults"
+SYSTEMD_SERVICE_${PN} = "netserver.service"
