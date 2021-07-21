@@ -211,6 +211,7 @@ RDEPENDS_packagegroup-meta-oe-dbs ="\
     influxdb \
     leveldb \
     libdbi \
+    lmdb \
     mariadb \
     postgresql \
     psqlodbc \
