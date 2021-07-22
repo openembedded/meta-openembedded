@@ -24,7 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "0ff7ec79376a8a97ac4cd274d32e804c7e236ef2d2d5d3f646de6eb882a63c77"
+SRC_URI[archive.sha256sum] = "33420500e0e060f178a435063197d42dae7b67e39cc437a96510a33ddf7e95fb"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
