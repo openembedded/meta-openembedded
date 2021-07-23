@@ -71,6 +71,7 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
     libhugetlbfs \
     linpack \
     lmbench \
+    mbw \
     memtester \
     nbench-byte \
     phoronix-test-suite \
