@@ -141,6 +141,10 @@ do_install() {
     if echo ${TOOLS} | grep -q "adbd" ; then
         install -d ${D}${bindir}
         install -m0755 ${B}/adbd/adbd ${D}${bindir}
+        if [ "${USB_DEBUGGING_ENABLED}" = "1" ] ; then
+           mkdir ${D}${localstatedir}
+           touch ${D}${localstatedir}/usb-debugging-enabled
+        fi
     fi
 
     # Outside the if statement to avoid errors during do_package
@@ -166,6 +170,7 @@ RDEPENDS:${PN}-fstools = "bash"
 FILES:${PN}-adbd = "\
     ${bindir}/adbd \
     ${systemd_unitdir}/system/android-tools-adbd.service \
+    ${@bb.utils.contains('USB_DEBUGGING_ENABLED', '1', '${localstatedir}/usb-debugging-enabled', '',d)} \
 "
 
 FILES:${PN}-fstools = "\
