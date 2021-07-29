@@ -22,7 +22,7 @@ S ?= "${WORKDIR}/vbox_module"
 S_task-patch = "${WORKDIR}/${VBOX_NAME}"
 
 export BUILD_TARGET_ARCH="${ARCH}"
-export BUILD_TARGET_ARCH_x86-64="amd64"
+export BUILD_TARGET_ARCH:x86-64="amd64"
 
 EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1"
 
@@ -44,7 +44,7 @@ do_export_sources() {
 
 }
 
-do_configure_prepend() {
+do_configure:prepend() {
     # vboxguestdrivers/5.2.6-r0/vbox_module/vboxguest/Makefile.include.header:99: *** The variable KERN_DIR must be a kernel build folder and end with /build without a trailing slash, or KERN_VER must be set.  Stop.
     # vboxguestdrivers/5.2.6-r0/vbox_module/vboxguest/Makefile.include.header:108: *** The kernel build folder path must end in <version>/build, or the variable KERN_VER must be set.  Stop.
     mkdir -p ${WORKDIR}/${KERNEL_VERSION}
@@ -69,15 +69,15 @@ module_do_install() {
     install -m 644 vboxvideo.ko $MODULE_DIR
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${base_sbindir}
     install -m 755 ${S}/utils/mount.vboxsf ${D}${base_sbindir}
 }
 
 PACKAGES += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
-RRECOMMENDS_${PN} += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
+RRECOMMENDS:${PN} += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
 
-FILES_${PN} = "${base_sbindir}"
+FILES:${PN} = "${base_sbindir}"
 
 # autoload if installed
 KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"

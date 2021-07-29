@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "ec1be26cdccd60d180359a527d5980d959a26269a2c7b1b327a1eea0ca
 PYPI_PACKAGE = "SQLAlchemy"
 inherit pypi setuptools3
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${PYTHON_PN}-json \
     ${PYTHON_PN}-pickle \
     ${PYTHON_PN}-logging \

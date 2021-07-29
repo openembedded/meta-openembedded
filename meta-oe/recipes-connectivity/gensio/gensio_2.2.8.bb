@@ -21,4 +21,4 @@ PACKAGECONFIG[swig] = "--with-swig,--without-swig, swig"
 
 EXTRA_OECONF = "--without-python"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"

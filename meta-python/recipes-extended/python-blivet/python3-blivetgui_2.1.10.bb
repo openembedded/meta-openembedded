@@ -18,11 +18,11 @@ REQUIRED_DISTRO_FEATURES = "x11 systemd"
 
 inherit setuptools3 python3native
 
-RDEPENDS_${PN} = "python3-pygobject python3 \
+RDEPENDS:${PN} = "python3-pygobject python3 \
                   python3-blivet gtk+3  \
                   python3-pid libreport \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/* \
     "

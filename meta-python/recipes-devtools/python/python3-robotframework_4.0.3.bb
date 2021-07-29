@@ -15,7 +15,7 @@ PYPI_PACKAGE_EXT = "zip"
 
 SRC_URI[sha256sum] = "93c2107f789fd897f234f4b8f1ba8e7b9f4ef326d9bcbfceb71dda8cc197388c"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${PYTHON_PN}-shell \
     ${PYTHON_PN}-pprint \
     ${PYTHON_PN}-xml \

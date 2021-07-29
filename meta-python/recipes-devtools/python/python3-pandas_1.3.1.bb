@@ -14,9 +14,9 @@ DEPENDS += " \
     ${PYTHON_PN}-numpy-native ${PYTHON_PN}-cython-native \
 "
 
-CFLAGS_append_toolchain-clang = " -Wno-error=deprecated-declarations"
+CFLAGS:append:toolchain-clang = " -Wno-error=deprecated-declarations"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${PYTHON_PN}-json \
     ${PYTHON_PN}-numpy \
     ${PYTHON_PN}-dateutil \

@@ -8,7 +8,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "XlsxWriter"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	python3-crypt \
 	python3-datetime \
 	python3-compression \

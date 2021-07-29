@@ -63,7 +63,7 @@ do_install () {
         install -m 0755 $script ${D}${bindir}/${script_basename}
     done
 }
-RDEPENDS_${PN} +="bash"
+RDEPENDS:${PN} +="bash"
 
 # http://errors.yoctoproject.org/Errors/Details/186956/
-COMPATIBLE_HOST_libc-musl = 'null'
+COMPATIBLE_HOST:libc-musl = 'null'

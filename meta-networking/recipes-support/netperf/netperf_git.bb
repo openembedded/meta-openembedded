@@ -23,11 +23,11 @@ S = "${WORKDIR}/git"
 inherit update-rc.d autotools texinfo systemd
 
 # cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
-CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
+CFLAGS:append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
 
 # set the "_FILE_OFFSET_BITS" preprocessor symbol to 64 to support files
 # larger than 2GB
-CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', \
+CFLAGS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', \
     ' -D_FILE_OFFSET_BITS=64', '', d)}"
 
 PACKAGECONFIG ??= ""
@@ -37,7 +37,7 @@ PACKAGECONFIG[histogram] = "--enable-histogram,--disable-histogram,,"
 
 # autotools.bbclass attends to include m4 files with path depth <= 2 by
 # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
-do_configure_prepend() {
+do_configure:prepend() {
     test -d ${S}/m4/m4 && mv -f ${S}/m4/m4 ${S}/m4-files
 }
 
@@ -67,8 +67,8 @@ do_install() {
     install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
 }
 
-RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
+RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
 
 INITSCRIPT_NAME="netperf"
 INITSCRIPT_PARAMS="defaults"
-SYSTEMD_SERVICE_${PN} = "netserver.service"
+SYSTEMD_SERVICE:${PN} = "netserver.service"

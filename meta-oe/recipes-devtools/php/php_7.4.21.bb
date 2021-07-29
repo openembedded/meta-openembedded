@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
-DEPENDS_class-native = "zlib-native libxml2-native"
+DEPENDS:class-native = "zlib-native libxml2-native"
 
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
@@ -18,7 +18,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0001-php.m4-don-t-unset-cache-variables.patch \
           "
 
-SRC_URI_append_class-target = " \
+SRC_URI:append:class-target = " \
             file://iconv.patch \
             file://imap-fix-autofoo.patch \
             file://php_exec_native.patch \
@@ -66,12 +66,12 @@ EXTRA_OECONF = "--enable-mbstring \
                 ${COMMON_EXTRA_OECONF} \
 "
 
-EXTRA_OECONF_append_riscv64 = " --with-pcre-jit=no"
-EXTRA_OECONF_append_riscv32 = " --with-pcre-jit=no"
+EXTRA_OECONF:append:riscv64 = " --with-pcre-jit=no"
+EXTRA_OECONF:append:riscv32 = " --with-pcre-jit=no"
 
 CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
 
-EXTRA_OECONF_class-native = " \
+EXTRA_OECONF:class-native = " \
                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
                 --without-iconv \
                 ${COMMON_EXTRA_OECONF} \
@@ -80,7 +80,7 @@ EXTRA_OECONF_class-native = " \
 PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
 "
-PACKAGECONFIG_class-native = ""
+PACKAGECONFIG:class-native = ""
 
 PACKAGECONFIG[zip] = "--with-zip --with-zlib-dir=${STAGING_EXECPREFIXDIR},,libzip"
 
@@ -122,29 +122,29 @@ EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
 
 acpaths = ""
 
-do_configure_prepend () {
+do_configure:prepend () {
     rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
 }
 
-do_configure_append() {
+do_configure:append() {
     # No, libtool, we really don't want rpath set...
     sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${HOST_SYS}-libtool
     sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${HOST_SYS}-libtool
 }
 
-do_install_append_class-native() {
+do_install:append:class-native() {
     rm -rf ${D}/${PHP_LIBDIR}/php/.registry
     rm -rf ${D}/${PHP_LIBDIR}/php/.channels
     rm -rf ${D}/${PHP_LIBDIR}/php/.[a-z]*
 }
 
-do_install_prepend() {
+do_install:prepend() {
     cat ${ACLOCALDIR}/libtool.m4 ${ACLOCALDIR}/lt~obsolete.m4 ${ACLOCALDIR}/ltoptions.m4 \
         ${ACLOCALDIR}/ltsugar.m4 ${ACLOCALDIR}/ltversion.m4 > ${S}/build/libtool.m4
 }
 
-do_install_prepend_class-target() {
+do_install:prepend:class-target() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
         # Install dummy config file so apxs doesn't fail
         install -d ${D}${sysconfdir}/apache2
@@ -153,7 +153,7 @@ do_install_prepend_class-target() {
 }
 
 # fixme
-do_install_append_class-target() {
+do_install:append:class-target() {
     install -d ${D}${sysconfdir}/
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
@@ -205,32 +205,32 @@ MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp
 
 PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-phpdbg ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}-opcache ${PN}"
 
-RDEPENDS_${PN} += "libgcc"
-RDEPENDS_${PN}-pear = "${PN}"
-RDEPENDS_${PN}-phar = "${PN}-cli"
-RDEPENDS_${PN}-cli = "${PN}"
-RDEPENDS_${PN}-modphp = "${PN} apache2"
-RDEPENDS_${PN}-opcache = "${PN}"
+RDEPENDS:${PN} += "libgcc"
+RDEPENDS:${PN}-pear = "${PN}"
+RDEPENDS:${PN}-phar = "${PN}-cli"
+RDEPENDS:${PN}-cli = "${PN}"
+RDEPENDS:${PN}-modphp = "${PN} apache2"
+RDEPENDS:${PN}-opcache = "${PN}"
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 INITSCRIPT_PACKAGES = "${PN}-fpm"
 inherit update-rc.d
 
-FILES_${PN}-dbg =+ "${bindir}/.debug \
+FILES:${PN}-dbg =+ "${bindir}/.debug \
                     ${libexecdir}/apache2/modules/.debug"
-FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
-FILES_${PN}-cli = "${bindir}/php"
-FILES_${PN}-phpdbg = "${bindir}/phpdbg"
-FILES_${PN}-phar = "${bindir}/phar*"
-FILES_${PN}-cgi = "${bindir}/php-cgi"
-FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service ${sysconfdir}/php-fpm.d/www.conf.default"
-FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
-CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
-CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
-INITSCRIPT_NAME_${PN}-fpm = "php-fpm"
-INITSCRIPT_PARAMS_${PN}-fpm = "defaults 60"
-FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${PHP_LIBDIR}/php/PEAR \
+FILES:${PN}-doc += "${PHP_LIBDIR}/php/doc"
+FILES:${PN}-cli = "${bindir}/php"
+FILES:${PN}-phpdbg = "${bindir}/phpdbg"
+FILES:${PN}-phar = "${bindir}/phar*"
+FILES:${PN}-cgi = "${bindir}/php-cgi"
+FILES:${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service ${sysconfdir}/php-fpm.d/www.conf.default"
+FILES:${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+CONFFILES:${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+CONFFILES:${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+INITSCRIPT_NAME:${PN}-fpm = "php-fpm"
+INITSCRIPT_PARAMS:${PN}-fpm = "defaults 60"
+FILES:${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${PHP_LIBDIR}/php/PEAR \
                 ${PHP_LIBDIR}/php/PEAR*.php ${PHP_LIBDIR}/php/System.php \
                 ${PHP_LIBDIR}/php/peclcmd.php ${PHP_LIBDIR}/php/pearcmd.php \
                 ${PHP_LIBDIR}/php/.channels ${PHP_LIBDIR}/php/.channels/.alias \
@@ -238,24 +238,24 @@ FILES_${PN}-pear = "${bindir}/pear* ${bindir}/pecl ${PHP_LIBDIR}/php/PEAR \
                 ${PHP_LIBDIR}/php/Console/Getopt.php ${PHP_LIBDIR}/php/OS/Guess.php \
                 ${PHP_LIBDIR}/php/data/PEAR \
                 ${sysconfdir}/pear.conf"
-FILES_${PN}-dev = "${includedir}/php ${PHP_LIBDIR}/build ${bindir}/phpize \
+FILES:${PN}-dev = "${includedir}/php ${PHP_LIBDIR}/build ${bindir}/phpize \
                 ${bindir}/php-config ${PHP_LIBDIR}/php/.depdb \
                 ${PHP_LIBDIR}/php/.depdblock ${PHP_LIBDIR}/php/.filemap \
                 ${PHP_LIBDIR}/php/.lock ${PHP_LIBDIR}/php/test"
-FILES_${PN}-staticdev += "${PHP_LIBDIR}/extensions/*/*.a"
-FILES_${PN}-opcache = "${PHP_LIBDIR}/extensions/*/opcache${SOLIBSDEV}"
-FILES_${PN} = "${PHP_LIBDIR}/php"
-FILES_${PN} += "${bindir} ${libexecdir}/apache2"
+FILES:${PN}-staticdev += "${PHP_LIBDIR}/extensions/*/*.a"
+FILES:${PN}-opcache = "${PHP_LIBDIR}/extensions/*/opcache${SOLIBSDEV}"
+FILES:${PN} = "${PHP_LIBDIR}/php"
+FILES:${PN} += "${bindir} ${libexecdir}/apache2"
 
-SUMMARY_${PN}-modphp = "PHP module for the Apache HTTP server"
-FILES_${PN}-modphp = "${libdir}/apache2 ${sysconfdir}"
+SUMMARY:${PN}-modphp = "PHP module for the Apache HTTP server"
+FILES:${PN}-modphp = "${libdir}/apache2 ${sysconfdir}"
 
 MODPHP_OLDPACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'modphp', '', d)}"
-RPROVIDES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
-RREPLACES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
-RCONFLICTS_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
+RPROVIDES:${PN}-modphp = "${MODPHP_OLDPACKAGE}"
+RREPLACES:${PN}-modphp = "${MODPHP_OLDPACKAGE}"
+RCONFLICTS:${PN}-modphp = "${MODPHP_OLDPACKAGE}"
 
-do_install_append_class-native() {
+do_install:append:class-native() {
     create_wrapper ${D}${bindir}/php \
         PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
 }

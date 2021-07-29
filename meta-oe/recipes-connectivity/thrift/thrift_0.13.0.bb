@@ -42,7 +42,7 @@ PACKAGECONFIG ??= "libevent glib"
 PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent"
 PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0"
 
-do_install_append () {
+do_install:append () {
     ln -sf thrift ${D}/${bindir}/thrift-compiler
 }
 
@@ -50,14 +50,14 @@ LEAD_SONAME = "libthrift.so.${PV}"
 
 # thrift packages
 PACKAGE_BEFORE_PN = "${PN}-compiler lib${BPN} lib${BPN}z lib${BPN}nb lib${BPN}-c-glib"
-FILES_lib${BPN} = "${libdir}/libthrift.so.*"
-FILES_lib${BPN}z = "${libdir}/libthriftz.so.*"
-FILES_lib${BPN}nb = "${libdir}/libthriftnb.so.*"
-FILES_lib${BPN}-c-glib = "${libdir}/libthrift_c_glib.so.*"
-FILES_${PN}-compiler = "${bindir}/*"
+FILES:lib${BPN} = "${libdir}/libthrift.so.*"
+FILES:lib${BPN}z = "${libdir}/libthriftz.so.*"
+FILES:lib${BPN}nb = "${libdir}/libthriftnb.so.*"
+FILES:lib${BPN}-c-glib = "${libdir}/libthrift_c_glib.so.*"
+FILES:${PN}-compiler = "${bindir}/*"
 
 # The thrift packages just pulls in some default dependencies but is otherwise empty
-RRECOMMENDS_${PN} = "${PN}-compiler lib${BPN}"
-ALLOW_EMPTY_${PN} = "1"
-RRECOMMENDS_${PN}_class-native = ""
-RRECOMMENDS_${PN}_class-nativesdk = ""
+RRECOMMENDS:${PN} = "${PN}-compiler lib${BPN}"
+ALLOW_EMPTY:${PN} = "1"
+RRECOMMENDS:${PN}:class-native = ""
+RRECOMMENDS:${PN}:class-nativesdk = ""

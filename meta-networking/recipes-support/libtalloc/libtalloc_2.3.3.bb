@@ -43,11 +43,11 @@ EXTRA_OECONF += "--disable-rpath \
 
 PACKAGES += "pytalloc pytalloc-dev"
 
-RPROVIDES_${PN}-dbg += "pytalloc-dbg"
+RPROVIDES:${PN}-dbg += "pytalloc-dbg"
 
-FILES_pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
+FILES:pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
                   ${libdir}/libpytalloc-util.so.2 \
                   ${libdir}/libpytalloc-util.so.2.1.1 \
                  "
-FILES_pytalloc-dev = "${libdir}/libpytalloc-util.so"
-RDEPENDS_pytalloc = "python3"
+FILES:pytalloc-dev = "${libdir}/libpytalloc-util.so"
+RDEPENDS:pytalloc = "python3"

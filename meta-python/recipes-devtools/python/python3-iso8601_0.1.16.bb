@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "36532f77cc800594e8f16641edae7f1baf7932f05d8e508545b95fc53c
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     ${PYTHON_PN}-datetime \
     ${PYTHON_PN}-numbers \
 "

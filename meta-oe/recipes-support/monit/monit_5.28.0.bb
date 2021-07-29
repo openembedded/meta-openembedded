@@ -31,14 +31,14 @@ EXTRA_OECONF = "\
     --with-ssl-incl-dir=${STAGING_INCDIR} \
 "
 
-SYSTEMD_SERVICE_${PN} = "monit.service"
+SYSTEMD_SERVICE:${PN} = "monit.service"
 SYSTEMD_AUTO_ENABLE = "enable"
 
 INITSCRIPT_PACKAGES = "${PN}"
-INITSCRIPT_NAME_${PN} = "monit"
-INITSCRIPT_PARAMS_${PN} = "defaults 89"
+INITSCRIPT_NAME:${PN} = "monit"
+INITSCRIPT_PARAMS:${PN} = "defaults 89"
 
-do_install_append() {
+do_install:append() {
 
     # Configuration file
     install -Dm 0600 ${WORKDIR}/monitrc ${D}${sysconfdir}/monitrc

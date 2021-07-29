@@ -23,7 +23,7 @@ S = "${WORKDIR}/Encode-${PV}"
 
 inherit cpan ptest-perl
 
-do_install_prepend() {
+do_install:prepend() {
     # Requires "-T" (taint) option on command line
     rm -rf ${B}/t/taint.t
     # Circular dependency of perl-module-open on perl-module-encode
@@ -42,9 +42,9 @@ do_install_ptest() {
 #  file /usr/bin/enc2xs from install of perl-misc-5.24.1-r0.i586 conflicts with file from package libencode-perl-2.94-r0.i586
 #  file /usr/bin/encguess from install of perl-misc-5.24.1-r0.i586 conflicts with file from package libencode-perl-2.94-r0.i586
 #  file /usr/bin/piconv from install of perl-misc-5.24.1-r0.i586 conflicts with file from package libencode-perl-2.94-r0.i586
-RCONFLICTS_${PN} = "perl-misc perl-module-encode"
+RCONFLICTS:${PN} = "perl-misc perl-module-encode"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     perl-module-bytes \
     perl-module-constant \
     perl-module-parent \
@@ -52,7 +52,7 @@ RDEPENDS_${PN} += " \
     perl-module-xsloader \
     "
 
-RPROVIDES_${PN} += " \
+RPROVIDES:${PN} += " \
     libencode-alias-perl \
     libencode-byte-perl \
     libencode-cjkconstants-perl \
@@ -82,7 +82,7 @@ RPROVIDES_${PN} += " \
     libencode-utf_ebcdic-perl \
     "
 
-RDEPENDS_${PN}-ptest += " \
+RDEPENDS:${PN}-ptest += " \
     perl-module-blib \
     perl-module-charnames \
     perl-module-file-compare \

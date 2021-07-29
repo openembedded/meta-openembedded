@@ -32,7 +32,7 @@ EXTRA_OEMESON = " \
     -Dsystemduserunitdir=no \
 "
 
-do_compile_prepend() {
+do_compile:prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/libdocument/.libs"
 }
 
@@ -40,15 +40,15 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[nautilus] = "-Dnautilus=true,-Dnautilus=false,nautilus"
 PACKAGECONFIG[browser-plugin] = "-Dbrowser_plugin=true,-Dbrowser_plugin=false"
 
-RDEPENDS_${PN} += "glib-2.0-utils"
+RDEPENDS:${PN} += "glib-2.0-utils"
 RRECOMMMENDS_${PN} = "adwaita-icon-theme"
 
 PACKAGES =+ "${PN}-nautilus-extension"
 PACKAGES =+ "${PN}-browser-plugin"
 
-FILES_${PN} += "${datadir}/dbus-1 \
+FILES:${PN} += "${datadir}/dbus-1 \
                 ${datadir}/metainfo \
                 ${datadir}/thumbnailers \
 "
-FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
-FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
+FILES:${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
+FILES:${PN}-browser-plugin = "${libdir}/mozilla/*/*so"

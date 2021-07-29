@@ -14,9 +14,9 @@ inherit pypi setuptools3
 
 PACKAGES =+ "${PYTHON_PN}-bson"
 
-FILES_${PYTHON_PN}-bson = "${PYTHON_SITEPACKAGES_DIR}/bson/*"
+FILES:${PYTHON_PN}-bson = "${PYTHON_SITEPACKAGES_DIR}/bson/*"
 
-RDEPENDS_${PYTHON_PN}-bson += " \
+RDEPENDS:${PYTHON_PN}-bson += " \
      ${PYTHON_PN}-datetime \
      ${PYTHON_PN}-json \
      ${PYTHON_PN}-netclient \
@@ -24,7 +24,7 @@ RDEPENDS_${PYTHON_PN}-bson += " \
      ${PYTHON_PN}-threading \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${PYTHON_PN}-bson \
     ${PYTHON_PN}-pprint \
 "

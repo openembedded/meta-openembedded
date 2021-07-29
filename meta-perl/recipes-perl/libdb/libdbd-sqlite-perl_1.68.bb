@@ -24,14 +24,14 @@ DEPENDS += "libdbi-perl-native"
 
 inherit cpan ptest-perl
 
-RDEPENDS_${PN} += "libdbi-perl \
+RDEPENDS:${PN} += "libdbi-perl \
 		   sqlite3 \
 		   perl-module-constant \
 		   perl-module-locale \
 		   perl-module-tie-hash \
 "
 
-do_install_append() {
+do_install:append() {
     if [ ${PERL_DBM_TEST} = "1" ]; then
         install -m 755 -D ${WORKDIR}/sqlite-perl-test.pl ${D}/${bindir}/sqlite-perl-test.pl
     fi
@@ -42,7 +42,7 @@ do_install_ptest() {
 	chown -R root:root ${D}${PTEST_PATH}
 }
 
-RDEPENDS_${PN}-ptest += " \
+RDEPENDS:${PN}-ptest += " \
     libtest-nowarnings-perl \
     perl-module-lib \
     perl-module-encode \

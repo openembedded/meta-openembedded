@@ -30,17 +30,17 @@ REQUIRED_DISTRO_FEATURES = "systemd"
 
 inherit setuptools3 python3native
 
-RDEPENDS_${PN} += "python3-pykickstart python3-pyudev \
+RDEPENDS:${PN} += "python3-pykickstart python3-pyudev \
                   parted python3-pyparted multipath-tools \
                   lsof cryptsetup libblockdev \
                   libbytesize \
 "
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/dbus-1/system-services \
 "
 
 inherit systemd
 
 SYSTEMD_AUTO_ENABLE = "disable"
-SYSTEMD_SERVICE_${PN} = "blivet.service"
+SYSTEMD_SERVICE:${PN} = "blivet.service"

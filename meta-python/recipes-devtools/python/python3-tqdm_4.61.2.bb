@@ -11,7 +11,7 @@ inherit pypi setuptools3
 
 DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	python3-logging \
 	python3-numbers \
 "
