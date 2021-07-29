@@ -27,7 +27,7 @@ SRC_URI = " \
     file://0002-Do-not-create-settings-settings-property-documentati.patch \
     file://0003-install-firewalld-to-var-libdir-rather-than-hardcod-.patch \
 "
-SRC_URI[sha256sum] = "701d511067f757d0f92f412c98cdb49a74a6ba69448aabb1beadacbc171e3873"
+SRC_URI[sha256sum] = "29acbd41c78b7ef87ff88fec5360d1eaf8b5b6fcb90555d7391abc5e36923158"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
