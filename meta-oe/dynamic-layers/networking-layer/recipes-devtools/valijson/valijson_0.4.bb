@@ -15,7 +15,7 @@ EXTRA_OECMAKE = "-DINSTALL_HEADERS=1 -DBUILD_TESTS=0"
 DEPENDS = "curlpp"
 
 # valijson is a header only C++ library, so the main package will be empty.
-RDEPENDS_${PN}-dev = ""
+RDEPENDS:${PN}-dev = ""
 
 BBCLASSEXTEND = "native nativesdk"
 

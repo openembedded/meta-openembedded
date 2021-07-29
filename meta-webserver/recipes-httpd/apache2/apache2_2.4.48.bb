@@ -17,7 +17,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://0001-support-apxs.in-force-destdir-to-be-empty-string.patch \
           "
 
-SRC_URI_append_class-target = " \
+SRC_URI:append:class-target = " \
            file://0008-apache2-do-not-use-relative-path-for-gen_test_char.patch \
            file://init \
            file://apache2-volatile.conf \
@@ -44,9 +44,9 @@ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselin
 PACKAGECONFIG[openldap] = "--enable-ldap --enable-authnz-ldap,--disable-ldap --disable-authnz-ldap,openldap"
 PACKAGECONFIG[zlib] = "--enable-deflate,,zlib,zlib"
 
-CFLAGS_append = " -DPATH_MAX=4096"
+CFLAGS:append = " -DPATH_MAX=4096"
 
-EXTRA_OECONF_class-target = "\
+EXTRA_OECONF:class-target = "\
     --enable-layout=Debian \
     --prefix=${base_prefix} \
     --exec_prefix=${exec_prefix} \
@@ -68,7 +68,7 @@ EXTRA_OECONF_class-target = "\
     ac_cv_have_threadsafe_pollset=no \
     "
 
-EXTRA_OECONF_class-native = "\
+EXTRA_OECONF:class-native = "\
     --prefix=${prefix} \
     --includedir=${includedir}/${BPN} \
     --sysconfdir=${sysconfdir}/${BPN} \
@@ -78,11 +78,11 @@ EXTRA_OECONF_class-native = "\
     --localstatedir=${localstatedir} \
     "
 
-do_configure_prepend() {
+do_configure:prepend() {
     sed -i -e 's:$''{prefix}/usr/lib/cgi-bin:$''{libexecdir}/cgi-bin:g' ${S}/config.layout
 }
 
-do_install_append_class-target() {
+do_install:append:class-target() {
     install -d ${D}/${sysconfdir}/init.d
 
     cat ${WORKDIR}/init | \
@@ -144,12 +144,12 @@ do_install_append_class-target() {
     chown -R root:root ${D}
 }
 
-do_install_append_class-native() {
+do_install:append:class-native() {
     install -d ${D}${bindir} ${D}${libdir}
     install -m 755 server/gen_test_char ${D}${bindir}
 }
 
-SYSROOT_PREPROCESS_FUNCS_append_class-target = " apache_sysroot_preprocess"
+SYSROOT_PREPROCESS_FUNCS:append:class-target = " apache_sysroot_preprocess"
 
 apache_sysroot_preprocess() {
     install -d ${SYSROOT_DESTDIR}${bindir_crossscripts}
@@ -172,15 +172,15 @@ apache_sysroot_preprocess() {
 INITSCRIPT_NAME = "apache2"
 INITSCRIPT_PARAMS = "defaults 91 20"
 
-SYSTEMD_SERVICE_${PN} = "apache2.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "enable"
+SYSTEMD_SERVICE:${PN} = "apache2.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
-ALTERNATIVE_${PN}-doc = "htpasswd.1"
+ALTERNATIVE:${PN}-doc = "htpasswd.1"
 ALTERNATIVE_LINK_NAME[htpasswd.1] = "${mandir}/man1/htpasswd.1"
 
 PACKAGES = "${PN}-scripts ${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
 
-CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
+CONFFILES:${PN} = "${sysconfdir}/${BPN}/httpd.conf \
                    ${sysconfdir}/${BPN}/magic \
                    ${sysconfdir}/${BPN}/mime.types \
                    ${sysconfdir}/${BPN}/extra/*"
@@ -188,7 +188,7 @@ CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
 # We override here rather than append so that .so links are
 # included in the runtime package rather than here (-dev)
 # and to get build, icons, error into the -dev package
-FILES_${PN}-dev = "${datadir}/${BPN}/build \
+FILES:${PN}-dev = "${datadir}/${BPN}/build \
                    ${datadir}/${BPN}/icons \
                    ${datadir}/${BPN}/error \
                    ${includedir}/${BPN} \
@@ -196,26 +196,26 @@ FILES_${PN}-dev = "${datadir}/${BPN}/build \
                   "
 
 # Add the manual to -doc
-FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
+FILES:${PN}-doc += " ${datadir}/${BPN}/manual"
 
-FILES_${PN}-scripts += "${bindir}/dbmmanage"
+FILES:${PN}-scripts += "${bindir}/dbmmanage"
 
 # Override this too - here is the default, less datadir
-FILES_${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir} \
+FILES:${PN} =  "${bindir} ${sbindir} ${libexecdir} ${libdir} \
                 ${sysconfdir} ${libdir}/${BPN}"
 
 # We want htdocs and cgi-bin to go with the binary
-FILES_${PN} += "${datadir}/${BPN}/ ${libdir}/cgi-bin"
+FILES:${PN} += "${datadir}/${BPN}/ ${libdir}/cgi-bin"
 
-FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
+FILES:${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
 
-RDEPENDS_${PN} += "openssl libgcc"
-RDEPENDS_${PN}-scripts += "perl ${PN}"
-RDEPENDS_${PN}-dev = "perl"
+RDEPENDS:${PN} += "openssl libgcc"
+RDEPENDS:${PN}-scripts += "perl ${PN}"
+RDEPENDS:${PN}-dev = "perl"
 
 BBCLASSEXTEND = "native"
 
-pkg_postinst_${PN}() {
+pkg_postinst:${PN}() {
     if [ -z "$D" ]; then
         if type systemd-tmpfiles >/dev/null; then
             systemd-tmpfiles --create

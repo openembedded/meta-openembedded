@@ -19,7 +19,7 @@ EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}
 
 inherit cpan ptest-perl
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     libdigest-hmac-perl \
     perl-module-base \
     perl-module-constant \
@@ -37,11 +37,11 @@ RDEPENDS_${PN} = " \
     perl-module-time-local \
 "
 
-RRECOMMENDS_${PN} += " \
+RRECOMMENDS:${PN} += " \
     libnet-dns-sec-perl \
 "
 
-RDEPENDS_${PN}-ptest += " \
+RDEPENDS:${PN}-ptest += " \
     perl-module-encode \
     perl-module-encode-byte \
     perl-module-extutils-mm \

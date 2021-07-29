@@ -34,4 +34,4 @@ meson_do_compile() {
     ninja ${PARALLEL_MAKE}
 }
 
-FILES_${PN} += "${datadir}/gtksourceview-4"
+FILES:${PN} += "${datadir}/gtksourceview-4"

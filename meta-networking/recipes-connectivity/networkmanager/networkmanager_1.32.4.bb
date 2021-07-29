@@ -47,11 +47,11 @@ EXTRA_OECONF = " \
 # stolen from https://github.com/void-linux/void-packages/blob/master/srcpkgs/NetworkManager/template
 # avoids:
 # | ../NetworkManager-1.16.0/libnm-core/nm-json.c:106:50: error: 'RTLD_DEEPBIND' undeclared (first use in this function); did you mean 'RTLD_DEFAULT'?
-CFLAGS_append_libc-musl = " \
+CFLAGS:append:libc-musl = " \
     -DRTLD_DEEPBIND=0 \
 "
 
-do_compile_prepend() {
+do_compile:prepend() {
     export GIR_EXTRA_LIBS_PATH="${B}/src/libnm-client-impl/.libs"
 }
 
@@ -92,19 +92,19 @@ PACKAGES =+ " \
 
 SYSTEMD_PACKAGES = "${PN} ${PN}-cloud-setup"
 
-FILES_${PN}-adsl = "${libdir}/NetworkManager/${PV}/libnm-device-plugin-adsl.so"
+FILES:${PN}-adsl = "${libdir}/NetworkManager/${PV}/libnm-device-plugin-adsl.so"
 
-FILES_${PN}-cloud-setup = " \
+FILES:${PN}-cloud-setup = " \
     ${libexecdir}/nm-cloud-setup \
     ${systemd_system_unitdir}/nm-cloud-setup.service \
     ${systemd_system_unitdir}/nm-cloud-setup.timer \
     ${libdir}/NetworkManager/dispatcher.d/90-nm-cloud-setup.sh \
     ${libdir}/NetworkManager/dispatcher.d/no-wait.d/90-nm-cloud-setup.sh \
 "
-ALLOW_EMPTY_${PN}-cloud-setup = "1"
-SYSTEMD_SERVICE_${PN}-cloud-setup = "${@bb.utils.contains('PACKAGECONFIG', 'cloud-setup', 'nm-cloud-setup.service nm-cloud-setup.timer', '', d)}"
+ALLOW_EMPTY:${PN}-cloud-setup = "1"
+SYSTEMD_SERVICE:${PN}-cloud-setup = "${@bb.utils.contains('PACKAGECONFIG', 'cloud-setup', 'nm-cloud-setup.service nm-cloud-setup.timer', '', d)}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libexecdir} \
     ${libdir}/NetworkManager/${PV}/*.so \
     ${libdir}/NetworkManager \
@@ -123,46 +123,46 @@ FILES_${PN} += " \
     ${libdir}/pppd \
 "
 
-RRECOMMENDS_${PN} += "iptables \
+RRECOMMENDS:${PN} += "iptables \
     ${@bb.utils.filter('PACKAGECONFIG', 'dnsmasq', d)} \
 "
-RCONFLICTS_${PN} = "connman"
+RCONFLICTS:${PN} = "connman"
 
-FILES_${PN}-dev += " \
+FILES:${PN}-dev += " \
     ${datadir}/NetworkManager/gdb-cmd \
     ${libdir}/pppd/*/*.la \
     ${libdir}/NetworkManager/*.la \
     ${libdir}/NetworkManager/${PV}/*.la \
 "
 
-FILES_${PN}-nmcli = " \
+FILES:${PN}-nmcli = " \
     ${bindir}/nmcli \
 "
 
-FILES_${PN}-nmcli-doc = " \
+FILES:${PN}-nmcli-doc = " \
     ${mandir}/man1/nmcli* \
 "
 
-FILES_${PN}-nmtui = " \
+FILES:${PN}-nmtui = " \
     ${bindir}/nmtui \
     ${bindir}/nmtui-edit \
     ${bindir}/nmtui-connect \
     ${bindir}/nmtui-hostname \
 "
 
-FILES_${PN}-nmtui-doc = " \
+FILES:${PN}-nmtui-doc = " \
     ${mandir}/man1/nmtui* \
 "
 
 INITSCRIPT_NAME = "network-manager"
-SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
+SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
 
 ALTERNATIVE_PRIORITY = "100"
-ALTERNATIVE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
+ALTERNATIVE:${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
 ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv-conf.NetworkManager','',d)}"
 ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
 
-do_install_append() {
+do_install:append() {
     install -Dm 0755 ${WORKDIR}/${BPN}.initd ${D}${sysconfdir}/init.d/network-manager
 
     rm -rf ${D}/run ${D}${localstatedir}/run

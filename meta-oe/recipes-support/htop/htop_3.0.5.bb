@@ -30,6 +30,6 @@ PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
 PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
 PACKAGECONFIG[sensors] = "--with-sensors,--without-sensors,lmsensors,lmsensors-libsensors"
 
-FILES_${PN} += "${datadir}/icons/hicolor/scalable/apps/htop.svg"
+FILES:${PN} += "${datadir}/icons/hicolor/scalable/apps/htop.svg"
 
-RDEPENDS_${PN} += "ncurses-terminfo-base"
+RDEPENDS:${PN} += "ncurses-terminfo-base"

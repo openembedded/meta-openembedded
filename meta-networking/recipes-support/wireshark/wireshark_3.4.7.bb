@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
 
 DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bison-native c-ares"
 
-DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
+DEPENDS:append:class-target = " wireshark-native chrpath-replacement-native "
 
 SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
 
@@ -27,7 +27,7 @@ inherit cmake pkgconfig python3native perlnative upstream-version-is-even mime m
 
 PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
 
-PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
+PACKAGECONFIG:class-native = "libpcap gnutls ssl libssh"
 
 PACKAGECONFIG[libcap] = "-DENABLE_CAP=ON,-DENABLE_CAP=OFF -DENABLE_PCAP_NG_DEFAULT=ON, libcap"
 PACKAGECONFIG[libpcap] = "-DENABLE_PCAP=ON,-DENABLE_PCAP=OFF -DENABLE_PCAP_NG_DEFAULT=ON , libpcap"
@@ -60,9 +60,9 @@ EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
                   -DM_INCLUDE_DIR=${includedir} \
                   -DM_LIBRARY=${libdir} \
                  "
-CFLAGS_append = " -lm"
+CFLAGS:append = " -lm"
 
-do_install_append_class-native() {
+do_install:append:class-native() {
 	install -d ${D}${bindir}
 	for f in lemon
 	do
@@ -70,7 +70,7 @@ do_install_append_class-native() {
 	done
 }
 
-do_install_append_class-target() {
+do_install:append:class-target() {
 	for f in `find ${D}${libdir} ${D}${bindir} -type f -executable`
 	do
 		chrpath --delete $f
@@ -79,10 +79,10 @@ do_install_append_class-target() {
 
 PACKAGE_BEFORE_PN += "tshark"
 
-FILES_tshark = "${bindir}/tshark ${mandir}/man1/tshark.*"
+FILES:tshark = "${bindir}/tshark ${mandir}/man1/tshark.*"
 
-FILES_${PN} += "${datadir}*"
+FILES:${PN} += "${datadir}*"
 
-RDEPENDS_tshark = "wireshark"
+RDEPENDS:tshark = "wireshark"
 
 BBCLASSEXTEND = "native"

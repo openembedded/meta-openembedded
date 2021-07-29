@@ -14,7 +14,7 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 
 SRC_URI[archive.sha256sum] = "04dc3b37c2b7d98df972670ac2a5a33ec7dc278e6814c3d23d099ae6789dcae8"
 
@@ -32,6 +32,6 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 EXTRA_OEMESON = "-Ddesktop_docs=false"
 
 PACKAGES =+ "libgnome-desktop3"
-FILES_libgnome-desktop3 = "${libdir}/lib*${SOLIBS} ${datadir}/libgnome-desktop*/pnp.ids ${datadir}/gnome/*xml"
+FILES:libgnome-desktop3 = "${libdir}/lib*${SOLIBS} ${datadir}/libgnome-desktop*/pnp.ids ${datadir}/gnome/*xml"
 
-RRECOMMENDS_libgnome-desktop3 += "gsettings-desktop-schemas"
+RRECOMMENDS:libgnome-desktop3 += "gsettings-desktop-schemas"

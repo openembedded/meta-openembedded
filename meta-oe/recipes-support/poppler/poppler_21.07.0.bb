@@ -37,7 +37,7 @@ EXTRA_OECMAKE += " \
     ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_GOBJECT_INTROSPECTION=ON', '-DENABLE_GOBJECT_INTROSPECTION=OFF', d)} \
 "
 
-do_configure_append() {
+do_configure:append() {
     # poppler macro uses pkg-config to check for g-ir runtimes. Something
     # makes them point to /usr/bin. Align them to sysroot - that's where the
     # gir-wrappers are:
@@ -45,7 +45,7 @@ do_configure_append() {
 }
 
 PACKAGES =+ "libpoppler libpoppler-glib"
-FILES_libpoppler = "${libdir}/libpoppler.so.*"
-FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
+FILES:libpoppler = "${libdir}/libpoppler.so.*"
+FILES:libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
 
-RDEPENDS_libpoppler = "poppler-data"
+RDEPENDS:libpoppler = "poppler-data"

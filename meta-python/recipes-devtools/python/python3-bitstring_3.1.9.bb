@@ -10,7 +10,7 @@ PYPI_PACKAGE = "bitstring"
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${PYTHON_PN}-core \
     ${PYTHON_PN}-numbers \
     ${PYTHON_PN}-mmap \

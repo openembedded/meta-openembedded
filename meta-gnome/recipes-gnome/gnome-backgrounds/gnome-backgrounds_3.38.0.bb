@@ -10,7 +10,7 @@ inherit gnomebase allarch gettext upstream-version-is-even allarch
 
 SRC_URI[archive.sha256sum] = "f7712a873a80c9a9fcf3952611effeb2d9aed23a3e8abfcda8afb15c427d1ee3"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${datadir}/backgrounds \
     ${datadir}/gnome-background-properties \
 "

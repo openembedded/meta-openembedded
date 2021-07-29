@@ -56,7 +56,7 @@ do_install() {
 }
 
 PACKAGES =+ "live555-openrtsp live555-playsip live555-mediaserver live555-examples"
-FILES_live555-openrtsp = "${bindir}/openRTSP"
-FILES_live555-playsip = "${bindir}/playSIP"
-FILES_live555-mediaserver = "${bindir}/live555MediaServer"
-FILES_live555-examples = "${bindir}/*"
+FILES:live555-openrtsp = "${bindir}/openRTSP"
+FILES:live555-playsip = "${bindir}/playSIP"
+FILES:live555-mediaserver = "${bindir}/live555MediaServer"
+FILES:live555-examples = "${bindir}/*"

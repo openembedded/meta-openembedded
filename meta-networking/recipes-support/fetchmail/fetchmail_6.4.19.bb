@@ -19,4 +19,4 @@ inherit autotools gettext python3-dir python3native
 EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${prefix}"
 
 PACKAGES =+ "fetchmail-python"
-FILES_fetchmail-python = "${libdir}/${PYTHON_DIR}/*"
+FILES:fetchmail-python = "${libdir}/${PYTHON_DIR}/*"

@@ -44,7 +44,7 @@ inherit autotools gettext update-alternatives pkgconfig python3native perlnative
 # depends on virtual/libx11
 REQUIRED_DISTRO_FEATURES = "x11"
 
-ALTERNATIVE_${PN} = "x-window-manager"
+ALTERNATIVE:${PN} = "x-window-manager"
 ALTERNATIVE_TARGET[x-window-manager] = "${bindir}/fvwm"
 ALTERNATIVE_PRIORITY[x-window-manager] = "20"
 
@@ -76,7 +76,7 @@ EXTRA_OEMAKE = " \
     V=1 \
 "
 
-do_install_append() {
+do_install:append() {
     install -d -m 0755 ${D}/${sysconfdir}/xdg/fvwm
     # You can install the config file here
 
@@ -92,18 +92,18 @@ PACKAGES = " \
 "
 
 # minimal set of binaries
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${bindir}/fvwm \
     ${bindir}/fvwm-root \
     ${datadir}/fvwm/ConfigFvwmDefaults \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
     xuser-account \
 "
 
 # by default a lot of stuff is installed and it's not easy to control what to
 # install, so install everything, but skip the check
-INSANE_SKIP_${PN} = " \
+INSANE_SKIP:${PN} = " \
     installed-vs-shipped \
 "

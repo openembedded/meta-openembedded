@@ -6,7 +6,7 @@ SRC_URI[sha256sum] = "7ce4d757eb26f4dd43205ec340d8c097f29e5adfe45d6ea20238c731dc
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     ${PYTHON_PN}-isodate \
     ${PYTHON_PN}-pyparsing \
     ${PYTHON_PN}-logging \

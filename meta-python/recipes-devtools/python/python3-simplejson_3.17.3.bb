@@ -8,15 +8,15 @@ SRC_URI[sha256sum] = "da72a452bcf4349fc467a12b54ab0e63e654a571cacc44084826d52bde
 
 inherit pypi setuptools3
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     ${PYTHON_PN}-io \
     ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-numbers \
 "
 
 PACKAGES =+ "${PN}-tests"
-RDEPENDS_${PN}-tests = "${PN} ${PYTHON_PN}-unittest"
-FILES_${PN}-tests+= " \
+RDEPENDS:${PN}-tests = "${PN} ${PYTHON_PN}-unittest"
+FILES:${PN}-tests+= " \
     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tests \
     ${PYTHON_SITEPACKAGES_DIR}/simplejson/tool.py* \
 "

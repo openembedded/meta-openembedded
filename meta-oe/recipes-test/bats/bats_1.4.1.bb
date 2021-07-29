@@ -19,8 +19,8 @@ do_install() {
 	${S}/install.sh ${D}${prefix} ${baselib}
 }
 
-RDEPENDS_${PN} = "bash"
-FILES_${PN} += "${libdir}/bats-core/*"
+RDEPENDS:${PN} = "bash"
+FILES:${PN} += "${libdir}/bats-core/*"
 
 PACKAGECONFIG ??= "pretty"
 PACKAGECONFIG[pretty] = ",,,ncurses"
