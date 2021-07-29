@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 SRC_URI = "git://github.com/bats-core/bats-core.git \
            file://0001-install.sh-consider-multilib.patch \
           "
-# v1.3.0
-SRCREV = "9086c47854652f2731861b40385689c85f12103f"
+# v1.4.1
+SRCREV = "54e965fa9d269c2b3ff9036d81f32bac3df0edea"
 
 S = "${WORKDIR}/git"
 
