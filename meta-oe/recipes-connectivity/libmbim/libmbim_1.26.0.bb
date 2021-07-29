@@ -12,4 +12,4 @@ DEPENDS = "glib-2.0 glib-2.0-native libgudev"
 inherit autotools pkgconfig bash-completion gobject-introspection
 
 SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-SRC_URI[sha256sum] = "02590736163fff10e5732191fccc1b9920969616ddc59613a003052a116a3c25"
+SRC_URI[sha256sum] = "1e1f0926b22c77210442129eca689722ecf324ab9c9abf421a5c989f46e813cf"
