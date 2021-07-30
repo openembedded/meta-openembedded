@@ -112,7 +112,7 @@ do_configure:append() {
     sed -i -e "s:/libexec:/$libexecdir2:g" ${S}/scripts/mysqld_safe.sh
 }
 
-do_generate_toolchain_file_append_class-native () {
+do_generate_toolchain_file:append:class-native () {
     # If these are set cmake will assume we're cross-compiling, which will
     # result in certain things we want being disabled
     sed -i "/set( CMAKE_SYSTEM_NAME/d" ${WORKDIR}/toolchain.cmake
