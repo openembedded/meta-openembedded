@@ -14,6 +14,7 @@ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.
            file://gold-unversioned-symbol.patch \
            file://aarch64.patch \
            file://0001-fuse-fix-the-return-value-of-help-option.patch \
+           file://fuse2-0007-util-ulockmgr_server.c-conditionally-define-closefro.patch \
            file://fuse.conf \
 "
 SRC_URI[md5sum] = "8000410aadc9231fd48495f7642f3312"
