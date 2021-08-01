@@ -30,3 +30,6 @@ EXTRA_OECMAKE += "\
 "
 
 SECURITY_CFLAGS_toolchain-clang = ""
+
+# see https://github.com/apitrace/apitrace/issues/756
+PNBLACKLIST[apitrace] ?= "Needs porting to glibc 2.34+"
