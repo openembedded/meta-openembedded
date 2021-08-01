@@ -68,7 +68,6 @@ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
     iperf2 \
     iperf3 \
     libc-bench \
-    libhugetlbfs \
     linpack \
     lmbench \
     mbw \

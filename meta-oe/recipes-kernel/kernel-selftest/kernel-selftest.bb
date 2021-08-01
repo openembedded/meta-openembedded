@@ -18,7 +18,7 @@ SRC_URI += "file://run-ptest \
 # we will append other kernel selftest in the future
 # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
 # if you have older kernel than that you need to remove it from PACKAGECONFIG
-PACKAGECONFIG ??= "firmware vm"
+PACKAGECONFIG ??= "firmware"
 PACKAGECONFIG_remove_x86 = "bpf"
 PACKAGECONFIG_remove_arm = "bpf vm"
 # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
@@ -137,4 +137,3 @@ COMPATIBLE_HOST_libc-musl = 'null'
 # It has native clang/llvm dependency, poky distro is reluctant to include them as deps
 # this helps with world builds on AB
 EXCLUDE_FROM_WORLD = "1"
-
