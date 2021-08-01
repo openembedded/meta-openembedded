@@ -13,7 +13,6 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://add__divmoddi4.patch \
 "
 
 SRC_URI[md5sum] = "fce04bbef244b4df1a50e53d132d3e6f"
