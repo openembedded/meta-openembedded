@@ -133,7 +133,7 @@ do_install() {
         install -m0755 ${B}/ext4_utils/simg2simg ${D}${bindir}
     fi
 
-    if echo ${TOOLS} | grep -q "adb " ; then
+    if echo ${TOOLS} | grep -q "adb\>" ; then
         install -d ${D}${bindir}
         install -m0755 ${B}/adb/adb ${D}${bindir}
     fi
