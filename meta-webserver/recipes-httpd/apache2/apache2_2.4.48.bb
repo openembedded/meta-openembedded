@@ -15,11 +15,6 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://0007-apache2-allow-to-disable-selinux-support.patch \
            file://apache-configure_perlbin.patch \
            file://0001-support-apxs.in-force-destdir-to-be-empty-string.patch \
-           file://CVE-2020-13950.patch \
-           file://CVE-2020-35452.patch \
-           file://CVE-2021-26690.patch \
-           file://CVE-2021-26691.patch \
-           file://CVE-2021-30641.patch \
           "
 
 SRC_URI_append_class-target = " \
@@ -31,8 +26,8 @@ SRC_URI_append_class-target = " \
            "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-SRC_URI[md5sum] = "7d661ea5e736dac5e2761d9f49fe8361"
-SRC_URI[sha256sum] = "740eddf6e1c641992b22359cabc66e6325868c3c5e2e3f98faf349b61ecf41ea"
+SRC_URI[md5sum] = "a7088cec171b0d00bf43394ce64d3909"
+SRC_URI[sha256sum] = "1bc826e7b2e88108c7e4bf43c026636f77a41d849cfb667aa7b5c0b86dbf966c"
 
 S = "${WORKDIR}/httpd-${PV}"
 
