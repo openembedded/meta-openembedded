@@ -244,6 +244,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
     ${@bb.utils.contains("PACKAGE_CLASSES", "package_rpm", "dnf-plugin-tui", "", d)} \
     doxygen \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany-plugins geany", "", d)} \
+    jemalloc \
     lemon \
     flatbuffers \
     heaptrack \
