@@ -26,7 +26,7 @@ EXTRA_OECONF:append:class-native = " with_x=no"
 LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
 BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
 
-#do_configure_prepend() {
+#do_configure:prepend() {
 # uthash sources are expected in uthash/src
 #    mkdir -p ${S}/uthash/src
 #    cp ${STAGING_INCDIR}/ut*.h ${S}/uthash/src
