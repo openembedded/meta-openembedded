@@ -88,6 +88,8 @@ do_install_append() {
 # as well)
 PACKAGES = " \
     ${PN} \
+    ${PN}-extra \
+    ${PN}-doc \
     ${PN}-dbg \
 "
 
@@ -98,12 +100,16 @@ FILES_${PN} = " \
     ${datadir}/fvwm/ConfigFvwmDefaults \
 "
 
-RDEPENDS_${PN} = " \
-    xuser-account \
+FILES_${PN}-extra = " \
+    ${bindir} \
+    ${libexecdir} \
+    ${sysconfdir}/xdg/fvwm \
+"
+FILES_${PN}-doc = " \
+    ${mandir} \
+    ${datadir}/fvwm \
 "
 
-# by default a lot of stuff is installed and it's not easy to control what to
-# install, so install everything, but skip the check
-INSANE_SKIP_${PN} = " \
-    installed-vs-shipped \
+RDEPENDS_${PN} = " \
+    xuser-account \
 "
