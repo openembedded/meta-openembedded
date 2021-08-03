@@ -154,7 +154,7 @@ RDEPENDS:${PN}:class-target = " \
 # Note that to get ptest to pass you also need:
 #
 #   xattr in DISTRO_FEATURES
-#   static ostree-prepare-root (PACKAGECONFIG_append_pn-ostree = " static")
+#   static ostree-prepare-root (PACKAGECONFIG:append:pn-ostree = " static")
 #   meta-python in your layers
 #   overlayfs in your kernel (KERNEL_EXTRA_FEATURES += "features/overlayfs/overlayfs.scc")
 #   busybox built statically
