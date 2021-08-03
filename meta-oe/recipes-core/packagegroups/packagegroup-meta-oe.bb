@@ -632,7 +632,7 @@ RDEPENDS:packagegroup-meta-oe-kernel ="\
 "
 RDEPENDS:packagegroup-meta-oe-kernel:append:x86 = " intel-speed-select ipmiutil pm-graph turbostat"
 RDEPENDS:packagegroup-meta-oe-kernel:append:x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
-RDEPENDS:packagegroup-meta-oe-kernel:append_poerpc64 = " libpfm4"
+RDEPENDS:packagegroup-meta-oe-kernel:append:powerpc64 = " libpfm4"
 
 # Kernel-selftest does not build with 5.8 and its exluded from build too so until its fixed remove it
 RDEPENDS:packagegroup-meta-oe-kernel:remove = "kernel-selftest"
