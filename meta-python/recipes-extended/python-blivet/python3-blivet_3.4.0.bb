@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "9b5ad2d5b5df159963e1c6c24523e1dfe1f71435"
-SRC_URI = "git://github.com/rhinstaller/blivet;branch=3.1-release \
-           file://0001-comment-out-selinux.patch \
+SRCREV = "f7d9027e4fdad11187980e73726cd75a2dc962c2"
+SRC_URI = "git://github.com/storaged-project/blivet.git;branch=3.4-release \
            file://0002-run_program-support-timeout.patch \
            file://0003-support-infinit-timeout.patch \
            file://0004-fix-new.roots-object-is-not-iterable.patch \
