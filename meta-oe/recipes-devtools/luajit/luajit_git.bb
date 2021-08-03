@@ -30,8 +30,8 @@ BUILD_CC_ARCH:append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
 # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
 LUA_TARGET_OS = "Unknown"
 LUA_TARGET_OS:darwin = "Darwin"
-LUA_TARGET_OS_linux = "Linux"
-LUA_TARGET_OS_linux-gnueabi = "Linux"
+LUA_TARGET_OS:linux = "Linux"
+LUA_TARGET_OS:linux-gnueabi = "Linux"
 LUA_TARGET_OS:mingw32 = "Windows"
 
 # We don't want the lua buildsystem's compiler optimizations, or its
@@ -40,7 +40,7 @@ LUA_TARGET_OS:mingw32 = "Windows"
 EXTRA_OEMAKE = "\
     Q= E='@:' \
     \
-    CCOPT= CCOPT:x86= CFLAGS= LDFLAGS= TARGET_STRIP='@:' \
+    CCOPT= CCOPT_x86= CFLAGS= LDFLAGS= TARGET_STRIP='@:' \
     \
     'TARGET_SYS=${LUA_TARGET_OS}' \
     \
