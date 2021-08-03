@@ -30,9 +30,6 @@ inherit pkgconfig binconfig ptest
 PACKAGECONFIG ??= "readline"
 PACKAGECONFIG[readline] = ",,readline"
 
-UCLIBC_PATCHES += "file://uclibc-pthread.patch"
-SRC_URI:append_libc-uclibc = " ${UCLIBC_PATCHES}"
-
 TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
 EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -fPIC' MYLDFLAGS='${LDFLAGS}'"
 
