@@ -8,10 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 S = "${WORKDIR}/git"
 B = "${S}"
 
-SRCREV = "67ec0b7a0e065ba24ab87963409bfb21b2aac6dd"
-SRC_URI = "git://github.com/rhinstaller/blivet-gui;branch=master \
-           file://0001-Fix-return-type-of-BlivetUtils.get_disks-1658893.patch \
-"
+SRCREV = "adb6bd69fb3cfa709265db66ddcee04c0b5e070f"
+SRC_URI = "git://github.com/storaged-project/blivet-gui.git"
 
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "x11 systemd"
