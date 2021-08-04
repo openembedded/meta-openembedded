@@ -181,7 +181,7 @@ do_install:append() {
     rm -rf ${D}${libdir}/firewalld
 
     if ! ${@bb.utils.contains('PACKAGECONFIG', 'storaged', 'true', 'false', d)}; then
-        for filename in ${FILES_${PN}-storaged}
+        for filename in ${FILES:${PN}-storaged}
         do
             rm -rf ${D}$filename
         done

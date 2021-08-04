@@ -63,7 +63,7 @@ do_install_ptest() {
     # we're not selecting libgpiod-tools.
     install -m 0755 ${S}/tools/gpio-tools-test ${D}${PTEST_PATH}/tests/
     install -m 0755 ${S}/tools/gpio-tools-test.bats ${D}${PTEST_PATH}/tests/
-    for tool in ${FILES_${PN}-tools}; do
+    for tool in ${FILES:${PN}-tools}; do
         install ${B}/tools/.libs/$(basename $tool) ${D}${PTEST_PATH}/tests/
     done
 
