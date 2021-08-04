@@ -205,7 +205,7 @@ RDEPENDS:packagegroup-meta-oe-crypto ="\
     libsodium \
     pkcs11-helper \
 "
-RDEPENDS_packagegroup-meta-oe-crypto:remove:riscv32 = "botan"
+RDEPENDS:packagegroup-meta-oe-crypto:remove:riscv32 = "botan"
 
 RDEPENDS:packagegroup-meta-oe-dbs ="\
     influxdb \
@@ -948,12 +948,12 @@ RDEPENDS:packagegroup-meta-oe-test ="\
     pm-qa \
     testfloat \
 "
-RDEPENDS_packagegroup-meta-oe-test:remove:libc-musl = "pm-qa"
-RDEPENDS_packagegroup-meta-oe-test:remove:arm = "fwts"
-RDEPENDS_packagegroup-meta-oe-test:remove:mipsarch = "fwts"
-RDEPENDS_packagegroup-meta-oe-test:remove:powerpc = "fwts"
-RDEPENDS_packagegroup-meta-oe-test:remove:riscv64 = "fwts"
-RDEPENDS_packagegroup-meta-oe-test:remove:riscv32 = "fwts"
+RDEPENDS:packagegroup-meta-oe-test:remove:libc-musl = "pm-qa"
+RDEPENDS:packagegroup-meta-oe-test:remove:arm = "fwts"
+RDEPENDS:packagegroup-meta-oe-test:remove:mipsarch = "fwts"
+RDEPENDS:packagegroup-meta-oe-test:remove:powerpc = "fwts"
+RDEPENDS:packagegroup-meta-oe-test:remove:riscv64 = "fwts"
+RDEPENDS:packagegroup-meta-oe-test:remove:riscv32 = "fwts"
 
 RDEPENDS:packagegroup-meta-oe-ptest-packages = "\
     zeromq-ptest \
