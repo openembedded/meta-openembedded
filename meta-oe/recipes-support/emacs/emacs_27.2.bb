@@ -253,7 +253,7 @@ FILES:${PN}-base = " \
 "
 
 # Restore FILES for the full package to catch everything left
-FILES:${PN}-full = "${FILES_${PN}}"
+FILES:${PN}-full = "${FILES:${PN}}"
 FILES:${PN}-full:append = " ${datadir}/icons"
 
 
