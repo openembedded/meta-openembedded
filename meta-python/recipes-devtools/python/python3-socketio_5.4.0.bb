@@ -9,7 +9,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "python-socketio"
 
-SRC_URI[sha256sum] = "3dcc9785aaeef3a9eeb36c3818095662342744bdcdabd050fe697cdb826a1c2b"
+SRC_URI[sha256sum] = "ca807c9e1f168e96dea412d64dd834fb47c470d27fd83da0504aa4b248ba2544"
 
 PACKAGECONFIG ?= "asyncio_client client"
 PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
