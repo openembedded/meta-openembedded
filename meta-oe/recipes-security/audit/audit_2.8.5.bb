@@ -8,8 +8,9 @@ LICENSE = "GPLv2+ & LGPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=2.8_maintenance \
-           file://Add-substitue-functions-for-strndupa-rawmemchr.patch \
-           file://Fixed-swig-host-contamination-issue.patch \
+           file://0001-Add-substitue-functions-for-strndupa-rawmemchr.patch \
+           file://0002-Fixed-swig-host-contamination-issue.patch \
+           file://0003-Header-definitions-need-to-be-external-when-building.patch \
            file://auditd \
            file://auditd.service \
            file://audit-volatile.conf \
@@ -27,9 +28,9 @@ INITSCRIPT_PARAMS = "defaults"
 SYSTEMD_PACKAGES = "auditd"
 SYSTEMD_SERVICE:auditd = "auditd.service"
 
-DEPENDS += "python3 tcp-wrappers libcap-ng linux-libc-headers swig-native"
+DEPENDS = "python3 tcp-wrappers libcap-ng linux-libc-headers swig-native"
 
-EXTRA_OECONF += "--without-prelude \
+EXTRA_OECONF = "--without-prelude \
         --with-libwrap \
         --enable-gssapi-krb5=no \
         --with-libcap-ng=yes \
@@ -39,11 +40,11 @@ EXTRA_OECONF += "--without-prelude \
         --without-python \
         --without-golang \
         --disable-zos-remote \
+        --with-arm=yes \
+        --with-aarch64=yes \
         "
-EXTRA_OECONF:append:arm = " --with-arm=yes"
-EXTRA_OECONF:append:aarch64 = " --with-aarch64=yes"
 
-EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' \
+EXTRA_OEMAKE = "PYLIBVER='python${PYTHON_BASEVERSION}' \
 	PYINC='${STAGING_INCDIR}/$(PYLIBVER)' \
 	pyexecdir=${libdir}/python${PYTHON_BASEVERSION}/site-packages \
 	STDINC='${STAGING_INCDIR}' \
@@ -60,16 +61,16 @@ PACKAGES =+ "audispd-plugins"
 PACKAGES += "auditd ${PN}-python"
 
 FILES:${PN} = "${sysconfdir}/libaudit.conf ${base_libdir}/libaudit.so.1* ${base_libdir}/libauparse.so.*"
-FILES:auditd += "${bindir}/* ${base_sbindir}/* ${sysconfdir}/*"
-FILES:audispd-plugins += "${sysconfdir}/audisp/audisp-remote.conf \
+FILES:auditd = "${bindir}/* ${base_sbindir}/* ${sysconfdir}/*"
+FILES:audispd-plugins = "${sysconfdir}/audisp/audisp-remote.conf \
 	${sysconfdir}/audisp/plugins.d/au-remote.conf \
-	${sbindir}/audisp-remote ${localstatedir}/spool/audit \
+	${base_sbindir}/audisp-remote ${localstatedir}/spool/audit \
 	"
 FILES:${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/*/.debug"
 FILES:${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
 
-CONFFILES:auditd += "${sysconfdir}/audit/audit.rules"
-RDEPENDS:auditd += "bash"
+CONFFILES:auditd = "${sysconfdir}/audit/audit.rules"
+RDEPENDS:auditd = "bash"
 
 do_install:append() {
 	rm -f ${D}/${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.a
@@ -85,13 +86,13 @@ do_install:append() {
 	rm -rf ${D}/etc/rc.d
 
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+		# install systemd unit files
+		install -d ${D}${systemd_unitdir}/system
+		install -m 0644 ${WORKDIR}/auditd.service ${D}${systemd_unitdir}/system
+
 		install -d ${D}${sysconfdir}/tmpfiles.d/
 		install -m 0644 ${WORKDIR}/audit-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
 	fi
-
-	# install systemd unit files
-	install -d ${D}${systemd_unitdir}/system
-	install -m 0644 ${WORKDIR}/auditd.service ${D}${systemd_unitdir}/system
 
 	# audit-2.5 doesn't install any rules by default, so we do that here
 	mkdir -p ${D}/etc/audit ${D}/etc/audit/rules.d
@@ -102,4 +103,7 @@ do_install:append() {
 
 	# Based on the audit.spec "Copy default rules into place on new installation"
 	cp ${D}/etc/audit/rules.d/audit.rules ${D}/etc/audit/audit.rules
+
+	# Create /var/spool/audit directory for audisp-remote
+	install -m 0700 -d ${D}${localstatedir}/spool/audit
 }
