@@ -1,4 +1,4 @@
-From bdcdc3dff4469aac88e718bd15958d5ed4b9392a Mon Sep 17 00:00:00 2001
+From d5a4b800a696b8b8d2c0f0bad098b1a8ff94333f Mon Sep 17 00:00:00 2001
 From: Steve Grubb <sgrubb@redhat.com>
 Date: Tue, 26 Feb 2019 18:33:33 -0500
 Subject: [PATCH] Add substitue functions for strndupa & rawmemchr
@@ -68,7 +68,7 @@ index 51c4a5e..67b7b77 100644
  				break;
  			*ptr = ' ';
 diff --git a/configure.ac b/configure.ac
-index 54bdbf1..aef07fb 100644
+index 6e345f1..6f3007e 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1,7 +1,7 @@
@@ -129,5 +129,5 @@ index 5d17a72..758c33e 100644
   * This function will look at the line and pick out pieces of it.
   */
 -- 
-2.7.4
+2.17.1
 
