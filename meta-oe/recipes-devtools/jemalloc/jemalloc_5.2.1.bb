@@ -22,3 +22,5 @@ S = "${WORKDIR}/git"
 inherit autotools
 
 EXTRA_AUTORECONF += "--exclude=autoheader"
+
+EXTRA_OECONF:append:libc-musl = " --with-jemalloc-prefix=je_"
