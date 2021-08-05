@@ -82,6 +82,9 @@ do_install:append() {
 
     install -d -m 0755 ${D}/${datadir}/fvwm
     touch ${D}/${datadir}/fvwm/ConfigFvwmDefaults
+    sed -i -e 's:${STAGING_BINDIR_NATIVE}/perl-native/perl:${USRBINPATH}/env perl:g' ${D}${bindir}/fvwm-*
+    sed -i -e 's:${STAGING_BINDIR_NATIVE}/perl-native/perl:${USRBINPATH}/env perl:g' ${D}${libexecdir}/fvwm/*/Fvwm*
+    sed -i -e 's:${STAGING_BINDIR_NATIVE}/python3-native/python3:${USRBINPATH}/env python3:g' ${D}${bindir}/fvwm-menu-desktop
 }
 
 # the only needed packages (note: locale packages are automatically generated
@@ -111,4 +114,8 @@ FILES:${PN}-doc = " \
 "
 RDEPENDS:${PN} = " \
     xuser-account \
+"
+RDEPENDS:${PN}-extra += "\
+    perl \
+    python3-core \
 "
