@@ -11,13 +11,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "libogg libvorbis"
 
 SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
-           file://0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch \
-           file://0004-Fix-format-error-blocking-compilation-with-hardening.patch \
            file://gettext.patch \
           "
 
-SRC_URI[md5sum] = "567e0fb8d321b2cd7124f8208b8b90e6"
-SRC_URI[sha256sum] = "a389395baa43f8e5a796c99daf62397e435a7e73531c9f44d9084055a05d22bc"
+SRC_URI[md5sum] = "998fca293bd4e4bdc2b96fb70f952f4e"
+SRC_URI[sha256sum] = "db7774ec2bf2c939b139452183669be84fda5774d6400fc57fde37f77624f0b0"
 
 inherit autotools pkgconfig gettext
 
