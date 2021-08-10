@@ -9,11 +9,10 @@ HOMEPAGE = "http://pycurl.io/"
 
 LICENSE = "LGPLv2 | MIT"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-                    file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
+                    file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
                     "
 
-SRC_URI[md5sum] = "3e121d895101022c30619e1bbf97eb97"
-SRC_URI[sha256sum] = "8301518689daefa53726b59ded6b48f33751c383cf987b0ccfbbc4ed40281325"
+SRC_URI[sha256sum] = "2ce9905626d8ceafcbadee666e2f45397e29c7618ddcdc63fc22d85e5046c6d6"
 
 inherit pypi setuptools3
 
