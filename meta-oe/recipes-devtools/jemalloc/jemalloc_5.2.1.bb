@@ -13,7 +13,9 @@ SECTION = "libs"
 
 LIC_FILES_CHKSUM = "file://README;md5=6900e4a158982e4c4715bf16aa54fa10"
 
-SRC_URI = "git://github.com/jemalloc/jemalloc.git"
+SRC_URI = "git://github.com/jemalloc/jemalloc.git \
+           file://0001-Makefile.in-make-sure-doc-generated-before-install.patch \
+"
 
 SRCREV = "ea6b3e973b477b8061e0076bb257dbd7f3faa756"
 
