@@ -9,13 +9,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master \
            file://Fixed-swig-host-contamination-issue.patch \
+           file://0001-flush-uid-gid-caches-when-user-group-added-deleted-m.patch \
            file://auditd \
            file://auditd.service \
            file://audit-volatile.conf \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "17c100abcfef4cbd94a0a5be9b830c8386c3add6"
+SRCREV = "86a975cd96c3838e56be9d27262f8a36bb822634"
 
 inherit autotools python3native update-rc.d systemd
 
