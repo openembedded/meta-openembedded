@@ -668,7 +668,6 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
     live555-examples \
     live555-mediaserver \
     libmikmod \
-    opus-tools \
     libmodplug \
     sound-theme-freedesktop \
     yavta \
