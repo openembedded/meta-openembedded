@@ -525,6 +525,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     ttf-gentium \
     ttf-hunky-sans \
     ttf-hunky-serif \
+    ttf-ipa \
     ttf-lohit \
     ttf-inconsolata \
     ttf-liberation-sans-narrow \
