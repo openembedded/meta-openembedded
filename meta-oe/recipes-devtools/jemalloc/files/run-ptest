@@ -5,13 +5,15 @@ for dir in tests/* ; do
 	cd $dir
 	for atest in * ; do
 		if [ \( -x $atest \) -a \( -f $atest \) ] ; then
-			./$atest > ${atest}.stdout 2> ${atest}.stderr
-			if [ $? = 0 ] ; then
-				echo "PASS: $dir $atest"
-				rm ${atest}.stdout ${atest}.stderr
-			else
-				echo "FAIL: ${dir}/${atest}"
-			fi
+			rm -rf tests.log
+			./$atest > tests.log 2>&1
+			sed -e '/: pass/ s/^/PASS: /g' \
+			    -e '/: skip/ s/^/SKIP: /g' \
+			    -e '/: fail/ s/^/FAIL: /g' \
+			    -e 's/: pass//g' \
+			    -e 's/: skip//g' \
+			    -e 's/: fail//g' \
+			    -e '/^--- pass:/d' tests.log
 		fi
 	done
 	cd $saved_dir
