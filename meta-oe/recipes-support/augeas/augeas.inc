@@ -28,6 +28,6 @@ do_install:append() {
 }
 
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[libselinux] = "--with-selinux,--without-selinux,libselinux"
+PACKAGECONFIG[selinux] = "--with-selinux,--without-selinux,libselinux"
 
 EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
