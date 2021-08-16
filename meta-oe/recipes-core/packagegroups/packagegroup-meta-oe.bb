@@ -493,7 +493,6 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     packagegroup-fonts-truetype \
     qrencode \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "st", "", d)} \
-    takao-fonts \
     leptonica \
     libvncserver \
     libmng \
@@ -537,6 +536,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     ttf-noto-emoji-regular \
     ttf-sazanami-gothic \
     ttf-sazanami-mincho \
+    ttf-takao-pgothic ttf-takao-gothic ttf-takao-pmincho ttf-takao-mincho \
     ttf-tlwg \
     ttf-roboto \
     ttf-wqy-zenhei \
