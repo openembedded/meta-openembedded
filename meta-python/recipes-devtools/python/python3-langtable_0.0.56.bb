@@ -6,8 +6,7 @@ SECTION = "devel/python"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRC_URI[md5sum] = "bf2db4302dbed534ff322612f5f5a16e"
-SRC_URI[sha256sum] = "2a6298267586fcade84ce977736fc35102ef95d68975bc90ceaa06117d42d5a6"
+SRC_URI[sha256sum] = "318af0fd616711ce5cd2a7b11a6761183ba9c1ff76a762919e08d85645fc854b"
 
 inherit pypi setuptools3 python3native
 
