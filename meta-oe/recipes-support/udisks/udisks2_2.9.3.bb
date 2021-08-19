@@ -17,8 +17,8 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
 RDEPENDS:${PN} = "acl"
 
-SRC_URI = "git://github.com/storaged-project/udisks.git;branch=master"
-SRCREV = "da6d9480fefeb0ffdf8a84626b5096827d8d7030"
+SRC_URI = "git://github.com/storaged-project/udisks.git;branch=2.9.x-branch"
+SRCREV = "c430dd9a27e158693cc783e9ee91bf6e5b2a8819"
 S = "${WORKDIR}/git"
 
 CVE_PRODUCT = "udisks"
