@@ -3,8 +3,7 @@ HOMEPAGE = "http://github.com/matiasb/python-unidiff"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
 
-SRC_URI[md5sum] = "ae9524079753df7b1239f0378ed326b7"
-SRC_URI[sha256sum] = "90c5214e9a357ff4b2fee19d91e77706638e3e00592a732d9405ea4e93da981f"
+SRC_URI[sha256sum] = "91bb13b4969514a400679d9ae5e29a6ffad85346087677f8b5e2e036af817447"
 
 inherit pypi setuptools3 ptest
 
