@@ -1,18 +1,15 @@
 SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
 SECTION = "console/network"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
+LIC_FILES_CHKSUM = "file://COPYING;md5=7a5d174db44ec45f9638b2c747806821"
 DEPENDS = "dbus ncurses python3 pps-tools"
 PROVIDES = "virtual/gpsd"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-    file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-    file://0001-Revert-SConstruct-Add-test-for-sizeof-time_t-result-.patch \
-    file://0001-gpsd-dbusexport.c-Fix-broken-d-bus-message-time.patch \
     file://gpsd.init \
 "
-SRC_URI[md5sum] = "cf7fdec7ce7221d20bee1a7246362b05"
-SRC_URI[sha256sum] = "172a7805068eacb815a3c5225436fcb0be46e7e49a5001a94034eac43df85e50"
+SRC_URI[md5sum] = "b4f96cb01cbc06542b1cb66b3296078d"
+SRC_URI[sha256sum] = "522c2362a7eb2d7ac37eaa1504f12aded1c373479a87ba06cc6795974b567bbc"
 
 inherit scons update-rc.d python3-dir python3native systemd update-alternatives
 
@@ -74,7 +71,7 @@ do_install:append() {
 
     #support for udev
     install -d ${D}/${sysconfdir}/udev/rules.d
-    install -m 0644 ${S}/gpsd.rules ${D}/${sysconfdir}/udev/rules.d/
+    install -m 0644 ${S}/gpsd.rules.in ${D}/${sysconfdir}/udev/rules.d/
     install -d ${D}${base_libdir}/udev/
     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
 
@@ -84,11 +81,11 @@ do_install:append() {
 
     #support for systemd
     install -d ${D}${systemd_unitdir}/system/
-    install -m 0644 ${S}/systemd/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
-    sed -i -e 's,/usr/local,/usr,g' ${D}${systemd_unitdir}/system/${BPN}.service
-    install -m 0644 ${S}/systemd/${BPN}ctl@.service ${D}${systemd_unitdir}/system/${BPN}ctl@.service
-    sed -i -e 's,/usr/local,/usr,g' ${D}${systemd_unitdir}/system/${BPN}ctl@.service
-    install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/system/${BPN}.socket
+    install -m 0644 ${S}/systemd/${BPN}.service.in ${D}${systemd_unitdir}/system/${BPN}.service
+    sed -i -e 's,@SBINDIR@,/usr/sbin,g' ${D}${systemd_unitdir}/system/${BPN}.service
+    install -m 0644 ${S}/systemd/${BPN}ctl@.service.in ${D}${systemd_unitdir}/system/${BPN}ctl@.service
+    sed -i -e 's,@SBINDIR@,/usr/sbin,g' ${D}${systemd_unitdir}/system/${BPN}ctl@.service
+    install -m 0644 ${S}/systemd/${BPN}.socket.in ${D}${systemd_unitdir}/system/${BPN}.socket
 }
 
 PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
