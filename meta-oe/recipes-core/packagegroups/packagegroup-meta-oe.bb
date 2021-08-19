@@ -227,7 +227,6 @@ RDEPENDS:packagegroup-meta-oe-dbs-python2 ="\
 RDEPENDS:packagegroup-meta-oe-devtools ="\
     abseil-cpp \
     breakpad \
-    bootchart \
     android-tools-conf \
     android-tools \
     concurrencykit \
