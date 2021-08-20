@@ -11,13 +11,12 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 S = "${WORKDIR}/git"
-SRCREV = "62701436991e42606c4e9e8dbdcdc5067d64f69b"
-PV = "0.102+git${SRCPV}"
+SRCREV = "51c872d856db80281ea810ebc02e05c09d5310fa"
+PV = "0.103"
 
-SRC_URI = " \
-        git://github.com/CanonicalLtd/netplan.git \
-        file://0001-Handle-enum-element-override.patch \
-"
+SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main \
+           file://0001-parse-nm-fix-32bit-format-string.patch"
+
 SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
 
 DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
