@@ -29,3 +29,5 @@ do_install:append() {
 }
 
 CPPFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
+
+BBCLASSEXTEND = "native"
