@@ -8,11 +8,14 @@ DEPENDS = "zeromq"
 FILESEXTRAPATHS:prepend := "${THISDIR}/python-pyzmq:"
 
 SRC_URI += "file://club-rpath-out.patch"
-SRC_URI[sha256sum] = "7040d6dd85ea65703904d023d7f57fab793d7ffee9ba9e14f3b897f34ff2415d"
+SRC_URI[sha256sum] = "6d18c76676771fd891ca8e0e68da0bbfb88e30129835c0ade748016adb3b6242"
 
 inherit pypi pkgconfig setuptools3
 
-RDEPENDS:${PN} += "${PYTHON_PN}-multiprocessing"
+RDEPENDS:${PN} += " \
+	${PYTHON_PN}-multiprocessing \
+	${PYTHON_PN}-json \
+"
 
 FILES:${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
 
