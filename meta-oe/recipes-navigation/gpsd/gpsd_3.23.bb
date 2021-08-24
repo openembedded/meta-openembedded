@@ -35,11 +35,13 @@ EXTRA_OESCONS = " \
     nostrip='true' \
     systemd='${SYSTEMD_OESCONS}' \
     libdir='${libdir}' \
+    udevdir='${nonarch_base_libdir}/udev' \
+    unitdir='${systemd_system_unitdir}' \
     manbuild='false' \
     LINK='${CC}' \
     ${PACKAGECONFIG_CONFARGS} \
 "
-# this cannot be used, because then chrpath is not found and only static lib is built
+# This cannot be used, because then chrpath is not found and only static lib is built
 # target=${HOST_SYS}
 
 do_compile:prepend() {
@@ -58,34 +60,24 @@ do_install() {
     export LINKFLAGS="${LDFLAGS}"
 
     export DESTDIR="${D}"
-    # prefix is used for RPATH and DESTDIR/prefix for instalation
-    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix} python_libdir=${libdir} install ${EXTRA_OESCONS} || \
+    # prefix is used for RPATH and DESTDIR/prefix for installation
+    ${STAGING_BINDIR_NATIVE}/scons prefix=${prefix} python_libdir=${libdir} udev-install ${EXTRA_OESCONS} || \
       bbfatal "scons install execution failed."
 }
 
 do_install:append() {
-    install -d ${D}/${sysconfdir}/init.d
-    install -m 0755 ${WORKDIR}/gpsd.init ${D}/${sysconfdir}/init.d/gpsd
-    install -d ${D}/${sysconfdir}/default
-    install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}/${sysconfdir}/default/gpsd.default
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${WORKDIR}/gpsd.init ${D}${sysconfdir}/init.d/gpsd
+    install -d ${D}${sysconfdir}/default
+    install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}${sysconfdir}/default/gpsd.default
 
-    #support for udev
-    install -d ${D}/${sysconfdir}/udev/rules.d
-    install -m 0644 ${S}/gpsd.rules.in ${D}/${sysconfdir}/udev/rules.d/
-    install -d ${D}${base_libdir}/udev/
-    install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
+    # Support for udev
+    install -d ${D}${nonarch_base_libdir}/udev
+    install -m 0755 ${S}/gpsd.hotplug ${D}${nonarch_base_libdir}/udev
 
-    #support for python
-    install -d ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-    install -m 755 ${S}/gps/*.py ${D}/${PYTHON_SITEPACKAGES_DIR}/gps
-
-    #support for systemd
-    install -d ${D}${systemd_unitdir}/system/
-    install -m 0644 ${S}/systemd/${BPN}.service.in ${D}${systemd_unitdir}/system/${BPN}.service
-    sed -i -e 's,@SBINDIR@,/usr/sbin,g' ${D}${systemd_unitdir}/system/${BPN}.service
-    install -m 0644 ${S}/systemd/${BPN}ctl@.service.in ${D}${systemd_unitdir}/system/${BPN}ctl@.service
-    sed -i -e 's,@SBINDIR@,/usr/sbin,g' ${D}${systemd_unitdir}/system/${BPN}ctl@.service
-    install -m 0644 ${S}/systemd/${BPN}.socket.in ${D}${systemd_unitdir}/system/${BPN}.socket
+    # Support for python
+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/gps
+    install -m 755 ${S}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
 }
 
 PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
@@ -99,7 +91,7 @@ RDEPENDS:${PN} = "gpsd-gpsctl"
 RRECOMMENDS:${PN} = "gpsd-conf gpsd-udev gpsd-machine-conf"
 
 SUMMARY:gpsd-udev = "udev relevant files to use gpsd hotplugging"
-FILES:gpsd-udev = "${base_libdir}/udev ${sysconfdir}/udev/*"
+FILES:gpsd-udev = "${nonarch_base_libdir}/udev"
 RDEPENDS:gpsd-udev += "udev gpsd-conf"
 
 SUMMARY:libgpsd = "C service library used for communicating with gpsd"
@@ -134,7 +126,6 @@ RPROVIDES:${PN} += "${PN}-systemd"
 RREPLACES:${PN} += "${PN}-systemd"
 RCONFLICTS:${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE:${PN} = "${BPN}.socket ${BPN}ctl@.service"
-
 
 ALTERNATIVE:${PN} = "gpsd-defaults"
 ALTERNATIVE_LINK_NAME[gpsd-defaults] = "${sysconfdir}/default/gpsd"
