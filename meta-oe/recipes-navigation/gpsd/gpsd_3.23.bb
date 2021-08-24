@@ -87,6 +87,8 @@ RPROVIDES:${PN}-dbg += "python-pygps-dbg"
 FILES:${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc \
                     ${libdir}/libQgpsmm.prl"
 
+FILES:${PN}-doc += "${datadir}/${BPN}/doc"
+
 RDEPENDS:${PN} = "gpsd-gpsctl"
 RRECOMMENDS:${PN} = "gpsd-conf gpsd-udev gpsd-machine-conf"
 
