@@ -17,7 +17,7 @@ PACKAGECONFIG[drill] = "--with-drill,--without-drill"
 EXTRA_OECONF = "--with-ssl=${STAGING_EXECPREFIXDIR} \
                 libtool=${TARGET_PREFIX}libtool"
 
-do_install:append() {
+do_install_append() {
     sed -e 's@[^ ]*-ffile-prefix-map=[^ "]*@@g' \
         -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
         -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
