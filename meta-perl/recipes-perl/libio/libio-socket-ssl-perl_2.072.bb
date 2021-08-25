@@ -22,7 +22,7 @@ RDEPENDS:${PN} += "\
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SU/SULLR/IO-Socket-SSL-${PV}.tar.gz \
            file://run-ptest \
           "
-SRC_URI[sha256sum] = "40da40948ecc9c787ed39c95715872679eebfd54243721174993a2003e32ab0a"
+SRC_URI[sha256sum] = "b5bee81db3905a9069340a450a48e1e1b32dec4ede0064f5703bafb9a707b89d"
 
 S = "${WORKDIR}/IO-Socket-SSL-${PV}"
 
