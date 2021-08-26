@@ -6,24 +6,21 @@ LICENSE = "LGPLv2.1+"
 
 # There is a typo in the filename, LPGL should really be LGPL.
 # Keep this until the correct name is set upstream.
-LIC_FILES_CHKSUM = "file://../LICENSE.LPGL-2.1;md5=b370887980db5dd40659b50909238dbd"
+LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
 
 DEPENDS = "zlib elfutils"
 
 do_compile[depends] += "virtual/kernel:do_shared_workdir"
 
 SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https"
-SRCREV = "051a4009f94d5633a8f734ca4235f0a78ee90469"
-
-# Backported from version 0.4
-SRC_URI += "file://0001-install-don-t-preserve-file-owner.patch"
+SRCREV = "db9614b6bd69746809d506c2786f914b0f812c37"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64).*-linux"
 
 S = "${WORKDIR}/git/src"
 
-EXTRA_OEMAKE += "DESTDIR=${D} LIBDIR=${libdir}"
+EXTRA_OEMAKE += "DESTDIR=${D} LIBDIR=${libdir} INCLUDEDIR=${includedir}"
 
 inherit pkgconfig
 
