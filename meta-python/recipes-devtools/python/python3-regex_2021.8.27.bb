@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=f0a3e4a2554ebb89c0
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "8935937dad2c9b369c3d932b0edbc52a62647c2afb2fafc0c280f14a8bf56a6a"
+SRC_URI[sha256sum] = "e9700c52749cb3e90c98efd72b730c97b7e4962992fca5fbcaf1363be8e3b849"
 
 RDEPENDS:${PN} += " \
 	python3-stringold \
