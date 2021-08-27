@@ -1,10 +1,10 @@
 SUMMARY = "PyEphem astronomical calculations"
 HOMEPAGE = "http://rhodesmill.org/pyephem/"
 
-LICENSE = "LGPL-3.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=f288303760f6e5ceaafe3aaa32186ab1"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9c930b395b435b00bb13ec83b0c99f40"
 
-SRC_URI[sha256sum] = "36b51a8dc7cfdeb456dd6b8ab811accab8341b2d562ee3c6f4c86f6d3dbb984e"
+SRC_URI[sha256sum] = "d03de73ebf6a91681d597eb5b5d43bcf6f0c67e292bba2f9a974734b4f15757e"
 
 PYPI_PACKAGE = "ephem"
 
