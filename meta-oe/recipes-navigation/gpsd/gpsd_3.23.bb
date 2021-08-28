@@ -72,10 +72,6 @@ do_install:append() {
     install -d ${D}${sysconfdir}/default
     install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}${sysconfdir}/default/gpsd.default
 
-    # Support for udev
-    install -d ${D}${nonarch_base_libdir}/udev
-    install -m 0755 ${S}/gpsd.hotplug ${D}${nonarch_base_libdir}/udev
-
     # Support for python
     install -d ${D}${PYTHON_SITEPACKAGES_DIR}/gps
     install -m 755 ${S}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
