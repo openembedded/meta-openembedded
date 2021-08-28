@@ -6,6 +6,7 @@ DEPENDS = "dbus ncurses python3 pps-tools"
 PROVIDES = "virtual/gpsd"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+    file://0001-SConscript-Correct-the-installation-of-gpsd.hotplug.patch \
     file://gpsd.init \
 "
 SRC_URI[md5sum] = "b4f96cb01cbc06542b1cb66b3296078d"
