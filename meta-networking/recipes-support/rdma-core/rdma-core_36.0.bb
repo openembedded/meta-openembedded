@@ -6,7 +6,7 @@ DEPENDS = "libnl"
 RDEPENDS:${PN} = "bash perl"
 
 SRC_URI = "git://github.com/linux-rdma/rdma-core.git"
-SRCREV = "e29a698e99028e9a092bb00c03ee4bfa31ae0cf3"
+SRCREV = "d7a9dde2b164a1563c7a51e4ade8ea3b6cdea9ef"
 S = "${WORKDIR}/git"
 
 #Default Dual License https://github.com/linux-rdma/rdma-core/blob/master/COPYING.md
