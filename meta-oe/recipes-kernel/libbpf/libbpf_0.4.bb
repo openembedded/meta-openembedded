@@ -4,8 +4,6 @@ HOMEPAGE = "https://github.com/libbpf/libbpf"
 SECTION = "libs"
 LICENSE = "LGPLv2.1+"
 
-# There is a typo in the filename, LPGL should really be LGPL.
-# Keep this until the correct name is set upstream.
 LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
 
 DEPENDS = "zlib elfutils"
