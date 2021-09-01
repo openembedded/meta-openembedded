@@ -251,7 +251,7 @@ FILES:${PN}-media-session = " \
     ${datadir}/pipewire/media-session.d/* \
     ${systemd_system_unitdir}/pipewire-media-session.service \
 "
-RPROVIDES:${PN}-media-session = "virtual/pipewire-sessionmanager"
+RPROVIDES:${PN}-media-session = "virtual-pipewire-sessionmanager"
 
 # Dynamic packages (see set_dynamic_metapkg_rdepends).
 FILES:${PN}-spa-plugins = ""
