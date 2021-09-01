@@ -60,11 +60,11 @@ IPv4 world."
 DESCRIPTION:${PN}-rdisc6    = "ICMPv6 Router Discovery tool. \
 Queries IPv6 routers on the network for advertised prefixes. Can be used \
 to detect rogue IPv6 routers, monitor legitimate IPv6 routers."
-DESCRITPION_${PN}-tcpspray6    = "Performs bandwidth measurements of TCP \
+DESCRIPTION:${PN}-tcpspray6    = "Performs bandwidth measurements of TCP \
 sessions between the local system and a remote echo server in either IPv6 \
 or IPv4."
 
-DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
+DESCRIPTION:${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
 servers through slateless IPv6 autoconfiguration."
 
 # The tcptraceroute6 and tracert6 commands depend on rltraceroute6 to
