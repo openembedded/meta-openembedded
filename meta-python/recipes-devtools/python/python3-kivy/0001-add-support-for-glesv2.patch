@@ -1,0 +1,24 @@
+diff --git a/setup.py b/setup.py
+index 9a507c6c4..3f5b70866 100644
+--- a/setup.py
++++ b/setup.py
+@@ -680,7 +680,18 @@ def determine_gl_flags():
+         c_options['use_x11'] = True
+         c_options['use_egl'] = True
+     else:
+-        flags['libraries'] = ['GL']
++        if cross_sysroot:
++            flags['include_dirs'] = [cross_sysroot + '/usr/include']
++            flags['library_dirs'] = [cross_sysroot + '/usr/lib']
++
++        if c_options['use_opengl_es2']:
++            print("using GLESv2 libraries")
++            flags['libraries'] = ['GLESv2']
++        else:
++            flags['libraries'] = ['GL']
++
++
++    print("cross_sysroot: " + str(cross_sysroot))
+     return flags, base_flags
+ 
+ 
