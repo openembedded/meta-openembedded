@@ -348,6 +348,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-html \
     python3-pytest-metadata \
     python3-pytest-runner \
+    python3-pytest-subtests \
     python3-pytest-tempdir \
     python3-pytest-timeout \
     python3-pythonping \
