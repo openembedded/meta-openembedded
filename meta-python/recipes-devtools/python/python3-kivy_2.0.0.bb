@@ -4,7 +4,7 @@ HOMEPAGE = "https://kivy.org/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f0c851d60495c7e27225a819e179208a"
 
-inherit setuptools3
+inherit setuptools3 pkgconfig features_check
 
 SRC_URI = "\
     git://github.com/kivy/kivy.git;protocol=git;\
@@ -41,6 +41,8 @@ export KIVY_GRAPHICS
 
 KIVY_CROSS_SYSROOT="${RECIPE_SYSROOT}"
 export KIVY_CROSS_SYSROOT
+
+REQUIRED_DISTRO_FEATURES += "x11 opengl"
 
 DEPENDS += " \
     gstreamer1.0 \
