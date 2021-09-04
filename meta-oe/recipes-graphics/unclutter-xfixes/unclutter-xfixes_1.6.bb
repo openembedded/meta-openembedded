@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b25d2c4cca175f44120d1b8e67cb358d"
 
 SRC_URI = "git://github.com/Airblader/unclutter-xfixes.git \
            file://0001-build-use-autotools.patch"
-SRCREV = "10fd337bb77e4e93c3380f630a0555372778a948"
+SRCREV = "160ae3760a51126eb225ce77d83e4706eccd4ed9"
 
 inherit autotools pkgconfig features_check
 
