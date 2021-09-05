@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6d502b41f76179fc84e536236f359cae"
 
 DEPENDS = "jansson zlib xz"
 
-BRANCH = "branch-1.9"
-SRCREV = "bf20128ca6138a830b2ea13e0490f3df6b035639"
+BRANCH = "branch-1.10"
+SRCREV = "8111cdc35430ff68dcb644306362859de40999d9"
 SRC_URI = "git://github.com/apache/avro;branch=${BRANCH} \
-           file://0001-cmake-Use-GNUInstallDirs-instead-of-hard-coded-paths.patch;patchdir=../../ \
           "
 
 S = "${WORKDIR}/git/lang/c"
