@@ -6,7 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
 
 SRC_URI = "git://github.com/DaveGamble/cJSON.git"
-SRCREV = "d2735278ed1c2e4556f53a7a782063b31331dbf7"
+SRCREV = "d348621ca93571343a56862df7de4ff3bc9b5667"
 
 S = "${WORKDIR}/git"
 
