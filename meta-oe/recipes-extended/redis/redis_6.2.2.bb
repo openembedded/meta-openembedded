@@ -19,6 +19,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://fix-CVE-2021-29477.patch \
            file://fix-CVE-2021-29478.patch \
            file://fix-CVE-2021-32625.patch \
+           file://CVE-2021-32761.patch \
            "
 SRC_URI[sha256sum] = "7a260bb74860f1b88c3d5942bf8ba60ca59f121c6dce42d3017bed6add0b9535"
 
