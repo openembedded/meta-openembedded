@@ -4,8 +4,8 @@ HOMEPAGE = "https://fmt.dev"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
 
-SRC_URI += "git://github.com/fmtlib/fmt"
-SRCREV = "7bdf0628b1276379886c7f6dda2cef2b3b374f0b"
+SRC_URI = "git://github.com/fmtlib/fmt"
+SRCREV = "d141cdbeb0fb422a3fb7173b285fd38e0d1772dc"
 
 S = "${WORKDIR}/git"
 
