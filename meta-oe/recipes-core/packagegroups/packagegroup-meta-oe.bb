@@ -278,6 +278,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     capnproto-compiler \
     mpich \
     msgpack-c \
+    msgpack-cpp \
     mercurial \
     nodejs \
     openocd \
