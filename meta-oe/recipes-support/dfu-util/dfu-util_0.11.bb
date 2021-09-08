@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 DEPENDS = "libusb1"
 
 SRC_URI = "http://dfu-util.sourceforge.net/releases/${BP}.tar.gz"
-SRC_URI[md5sum] = "8cf55663703cdc6b40f377f999eb8d3d"
-SRC_URI[sha256sum] = "a03dc58dfc79c056819c0544b2a5970537566460102b3d82cfb038c60e619b42"
+SRC_URI[sha256sum] = "b4b53ba21a82ef7e3d4c47df2952adf5fa494f499b6b0b57c58c5d04ae8ff19e"
 
 inherit autotools pkgconfig
