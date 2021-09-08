@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRCREV = "de0dbfa3596a18cd70a4619b6a9766847a941276"
+SRCREV = "eb3220622e73a4889eee355ffa37972b3cac3df5"
 SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x; \
            file://0001-Enable-use-of-external-fmt-library.patch"
 
