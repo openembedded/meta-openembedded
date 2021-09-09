@@ -25,10 +25,8 @@ SRC_URI = "git://github.com/crash-utility/${BPN}.git \
            file://remove-unrecognized-gcc-option-m32-for-mips.patch \
            file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
            file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
-           file://0001-printk-add-support-for-lockless-ringbuffer.patch \
-           file://0002-printk-use-committed-finalized-state-values.patch \
            "
-SRCREV = "a25aa4b649d339dd25c20d5413d81b851a77e0b2"
+SRCREV = "2a3e546942ab560f050ab77e8c7828b06513b3f0"
 
 SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
 SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
