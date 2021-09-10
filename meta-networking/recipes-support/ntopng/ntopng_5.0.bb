@@ -11,8 +11,8 @@ RDEPENDS:${PN} = "bash redis"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
-SRCREV = "5e649a2d1130b4a3ab0c5bb673d615172cc0bdbb"
-SRC_URI = "git://github.com/ntop/ntopng.git;protocol=git;branch=4.2-stable \
+SRCREV = "85867090d92df4365c0af8d47f54ab3106117e59"
+SRC_URI = "git://github.com/ntop/ntopng.git;protocol=git;branch=5.0-stable \
            file://0001-configure.seed-fix-configure-error.patch \
            file://0001-configure.seed-fix-host-contamination.patch \
            file://0001-Makefile.in-don-t-use-the-internal-lua.patch \
