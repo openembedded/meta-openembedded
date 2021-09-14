@@ -2,11 +2,11 @@ DESCRIPTION = "A file format designed for highly efficient deltas while maintain
 AUTHOR = "Jonathan Dieter"
 
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=cd6e590282010ce90a94ef25dd31410f"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
 
-SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https"
+SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main"
 
-SRCREV = "fe3e3af49fd30b68c21a9fcaac340ad8e7f91055"
+SRCREV = "ff34ee911f7d78d66b97894a773276babd63144c"
 S = "${WORKDIR}/git"
 
 DEPENDS = "\
