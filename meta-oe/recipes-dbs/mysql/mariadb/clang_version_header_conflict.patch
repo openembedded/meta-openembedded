@@ -15,7 +15,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
    set(MRN_SOURCE_DIR ${CMAKE_SOURCE_DIR})
  endif()
  
--file(READ ${MRN_SOURCE_DIR}/version        MRN_VERSION)
+-file(READ ${MRN_SOURCE_DIR}/version_full   MRN_VERSION)
 +file(READ ${MRN_SOURCE_DIR}/ver            MRN_VERSION)
  file(READ ${MRN_SOURCE_DIR}/version_major  MRN_VERSION_MAJOR)
  file(READ ${MRN_SOURCE_DIR}/version_minor  MRN_VERSION_MINOR)
@@ -25,7 +25,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 @@ -0,0 +1 @@
 +7.07
 \ No newline at end of file
---- a/storage/mroonga/version
+--- a/storage/mroonga/version_full
 +++ /dev/null
 @@ -1 +0,0 @@
 -7.07
