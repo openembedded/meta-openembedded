@@ -9,10 +9,10 @@ LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238
 DEPENDS = "zlib elfutils"
 
 SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https"
-SRCREV = "db9614b6bd69746809d506c2786f914b0f812c37"
+SRCREV = "5579664205e42194e1921d69d0839f660c801a4d"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64).*-linux"
+COMPATIBLE_HOST = "(x86_64|i.86|aarch64).*-linux"
 
 S = "${WORKDIR}/git/src"
 
