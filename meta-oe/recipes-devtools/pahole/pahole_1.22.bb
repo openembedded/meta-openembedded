@@ -25,6 +25,6 @@ FILES:${PN} =  "${bindir}/pahole \
 
 PACKAGES += "${PN}-extra"
 FILES:${PN}-extra = "${datadir} ${bindir} ${libdir}/libdwarves_emit.so*"
-RDEPENDS:${PN}-extra += "bash"
+RDEPENDS:${PN}-extra += "bash python3-core"
 
 BBCLASSEXTEND = "native nativesdk"
