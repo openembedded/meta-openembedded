@@ -11,6 +11,8 @@ SRC_URI = "\
     git://github.com/c-ares/c-ares.git \
     file://cmake-install-libcares.pc.patch \
     file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch \
+    file://ares_expand_name-should-escape-more-characters.patch \
+    file://ares_expand_name-fix-formatting-and-handling-of-root.patch \
 "
 SRCREV = "74a1426ba60e2cd7977e53a22ef839c87415066e"
 
