@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 DEPENDS = "libpcre zlib"
 
 SRC_URI = " \
-    git://github.com/pocoproject/poco.git;branch=poco-${PV} \
-    file://0001-Add-support-of-arch-riscv32.patch \
+    git://github.com/pocoproject/poco.git;branch=master \
+    file://0001-fix-missing-expat-definition.patch \
     file://run-ptest \
    "
-SRCREV = "a3d827d80eb7f3329c58e73eb2906cb7ba829019"
+SRCREV = "f81a38057f1d240fe7b7a069612776f788bc88ea"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
