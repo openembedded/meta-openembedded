@@ -9,16 +9,14 @@ HOMEPAGE = "http://libgd.github.io/"
 
 SECTION = "libs"
 LICENSE = "GD"
-LIC_FILES_CHKSUM = "file://COPYING;md5=8e5bc8627b9494741c905d65238c66b7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ace63adfdac78400fc30fa22ee9c1bb1"
 
 DEPENDS = "freetype libpng jpeg zlib tiff"
 
-SRC_URI = "git://github.com/libgd/libgd.git;branch=master \
-           file://0001-replace-uint32-with-uint32_t-and-uint16-with-uint16_.patch \
-           file://0001-fix-read-out-of-bands-in-reading-tga-header-file.patch \
+SRC_URI = "git://github.com/libgd/libgd.git;nobranch=1 \
            "
 
-SRCREV = "2e40f55bfb460fc9d8cbcd290a0c9eb908d5af7e"
+SRCREV = "b5319a41286107b53daa0e08e402aa1819764bdc"
 
 S = "${WORKDIR}/git"
 
