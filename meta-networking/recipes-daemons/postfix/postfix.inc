@@ -20,7 +20,7 @@ CLEANBROKEN = "1"
 
 BBCLASSEXTEND = "native"
 
-inherit update-rc.d useradd update-alternatives systemd lib_package
+inherit pkgconfig update-rc.d useradd update-alternatives systemd lib_package
 
 INITSCRIPT_NAME = "postfix"
 INITSCRIPT_PARAMS = "start 58 3 4 5 . stop 13 0 1 6 ."
