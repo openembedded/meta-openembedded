@@ -14,7 +14,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/devel/pahole/pahole.git \
 
 S = "${WORKDIR}/git"
 
-inherit cmake
+inherit cmake pkgconfig
 
 PACKAGECONFIG[python3] = ",,python3-core,python3-core"
 
