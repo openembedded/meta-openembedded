@@ -10,14 +10,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "zlib"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "909a0f36a10075c4b4bc70fdee2c7e32dd612a72"
+SRCREV = "89b14b1d16eba4d44af43256fc45b24a6a348557"
 
-SRC_URI = "git://github.com/protocolbuffers/protobuf.git \
+SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=3.18.x \
            file://run-ptest \
            file://0001-protobuf-fix-configure-error.patch \
            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
-"
+           "
 S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig ptest
