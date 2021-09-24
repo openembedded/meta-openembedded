@@ -25,6 +25,7 @@ DEPENDS += "libpng zlib virtual/libgles2"
 SRC_URI += "file://0001-Workaround-for-GCC-11-uninit-variable-warnings-946.patch;patchdir=external/amber/src \
             file://0001-Include-limits-header-for-numeric_limits.patch;patchdir=external/vulkancts \
             file://0001-vulkancts.patch \
+            file://0001-use-library-sonames-for-linking.patch \
 "
 
 SRC_URI:append:libc-musl = "\
