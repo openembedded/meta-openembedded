@@ -8,8 +8,7 @@ SRC_URI += "file://0001-sqlparse-change-shebang-to-python3.patch \
             file://run-ptest \
 	    "
 
-SRC_URI[md5sum] = "eebbc6b5f1033054873033e54b0c1266"
-SRC_URI[sha256sum] = "0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8"
+SRC_URI[sha256sum] = "0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae"
 
 export BUILD_SYS
 export HOST_SYS
