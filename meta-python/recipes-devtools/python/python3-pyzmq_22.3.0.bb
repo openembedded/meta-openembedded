@@ -8,7 +8,7 @@ DEPENDS = "zeromq"
 FILESEXTRAPATHS:prepend := "${THISDIR}/python-pyzmq:"
 
 SRC_URI += "file://club-rpath-out.patch"
-SRC_URI[sha256sum] = "6d18c76676771fd891ca8e0e68da0bbfb88e30129835c0ade748016adb3b6242"
+SRC_URI[sha256sum] = "8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f9c671c"
 
 inherit pypi pkgconfig setuptools3
 
