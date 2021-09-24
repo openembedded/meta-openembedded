@@ -2,8 +2,7 @@ SUMMARY = "Python Remote Objects"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cd13dafd4eeb0802bb6efea6b4a4bdbc"
 
-SRC_URI[md5sum] = "e31fc077e06de9fc0bb061e357401954"
-SRC_URI[sha256sum] = "46847ca703de3f483fbd0b2d22622f36eff03e6ef7ec7704d4ecaa3964cb2220"
+SRC_URI[sha256sum] = "e130da06478b813173b959f7013d134865e07fbf58cc5f1a2598f99479cdac5f"
 
 PYPI_PACKAGE = "Pyro4"
 
