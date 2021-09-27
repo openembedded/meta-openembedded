@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRAN
            git://github.com/protocolbuffers/upb;name=upb;destsuffix=git/third_party/upb \
            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
            "
+SRCREV_FORMAT = "grpc_upb"
 SRC_URI_append_class-target = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch \
                                "
 SRC_URI_append_class-nativesdk = " file://0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch"
