@@ -21,6 +21,7 @@ SRCREV_spirv-headers = "af64a9e826bf5bb5fcd2434dd71be1e41e922563"
 SRCREV_effcee = "cd25ec17e9382f99a895b9ef53ff3c277464d07d"
 SRCREV_re2 = "5bd613749fd530b576b890283bfb6bc6ea6246cb"
 SRCREV_googletest = "f2fb48c3b3d79a75a88a99fba6576b25d42ec528"
+SRCREV_FORMAT = "spirv-ttols_spirv-headers_effcee_re2_googletest"
 
 inherit cmake python3native
 
