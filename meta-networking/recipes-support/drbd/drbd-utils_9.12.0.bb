@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
 # v9.12.0
 SRCREV_drbd-utils = "91629a4cce49ca0d4f917fe0bffa25cfe8db3052"
 SRCREV_drbd-headers = "233006b4d26cf319638be0ef6d16ec7dee287b66"
+SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
 S = "${WORKDIR}/git"
 
