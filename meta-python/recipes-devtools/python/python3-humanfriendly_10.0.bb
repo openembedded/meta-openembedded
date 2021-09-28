@@ -21,4 +21,4 @@ RDEPENDS:${PN}:class-target += " \
     ${PYTHON_PN}-stringold \
 "
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
