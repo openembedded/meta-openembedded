@@ -10,7 +10,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
            "
 SRC_URI[sha256sum] = "0b991ce9a46538c4ea450f7a8ee428ff44fb4f8d665fddf2ffe40fe0ae9a6c09"
 
-inherit scons update-rc.d python3-dir python3native systemd update-alternatives
+inherit scons update-rc.d python3-dir python3native systemd update-alternatives pkgconfig
 
 INITSCRIPT_PACKAGES = "gpsd-conf"
 INITSCRIPT_NAME = "gpsd"
