@@ -6,11 +6,9 @@ DEPENDS = "dbus ncurses python3 pps-tools"
 PROVIDES = "virtual/gpsd"
 
 SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-    file://0001-SConscript-Correct-the-installation-of-gpsd.hotplug.patch \
-    file://gpsd.init \
-"
-SRC_URI[md5sum] = "b4f96cb01cbc06542b1cb66b3296078d"
-SRC_URI[sha256sum] = "522c2362a7eb2d7ac37eaa1504f12aded1c373479a87ba06cc6795974b567bbc"
+           file://gpsd.init \
+           "
+SRC_URI[sha256sum] = "0b991ce9a46538c4ea450f7a8ee428ff44fb4f8d665fddf2ffe40fe0ae9a6c09"
 
 inherit scons update-rc.d python3-dir python3native systemd update-alternatives
 
