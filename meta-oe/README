@@ -14,7 +14,7 @@ e.g. on archlinux based distributions install prerequisites like below
 pacman -S lib32-gcc-libs lib32-glibc
 
 Ubuntu
-sudo apt-get install gcc-multilib
+sudo apt-get install gcc-multilib linux-libc-dev:i386
 
 Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
 
