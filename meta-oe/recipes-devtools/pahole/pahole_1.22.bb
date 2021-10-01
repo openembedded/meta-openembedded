@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
 DEPENDS = "elfutils zlib libbpf"
 
+# Depends on MACHINE_ARCH libbpf
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_HOST = "(x86_64|i.86|aarch64).*-linux"
 
 SRCREV = "f02af2553ea58ae1186226af0d0ec835a248358f"
