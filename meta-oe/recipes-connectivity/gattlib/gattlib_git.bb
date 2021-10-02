@@ -29,4 +29,4 @@ EXTRA_OECMAKE += "-DGATTLIB_BUILD_DOCS=OFF"
 inherit pkgconfig cmake
 
 FILES:${PN} = "${libdir}/*"
-FILES:${PN}-dev = "${includedir}/*"
+FILES:${PN}-dev = "${includedir}/* ${libdir}/pkgconfig"
