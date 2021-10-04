@@ -23,6 +23,7 @@ S = "${WORKDIR}/git"
 SRCREV_grpc = "96b73272eadc01afb5fb45b92b408c47e4387274"
 BRANCH = "v1.38.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
+           file://0002-cmake-fix-cross-compilation-with-gRPC_BUILD_GRPC_CPP.patch \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
 CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
