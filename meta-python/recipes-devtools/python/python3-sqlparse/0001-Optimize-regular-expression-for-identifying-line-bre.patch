@@ -1,0 +1,64 @@
+From 8238a9e450ed1524e40cb3a8b0b3c00606903aeb Mon Sep 17 00:00:00 2001
+From: Andi Albrecht <albrecht.andi@gmail.com>
+Date: Tue, 7 Sep 2021 12:27:28 +0200
+Subject: [PATCH] Optimize regular expression for identifying line breaks in
+ comments.
+
+CVE: CVE-2021-32839
+
+Upstream-Status: Backport
+(https://github.com/andialbrecht/sqlparse/commit/8238a9e450ed1524e40cb3a8b0b3c00606903aeb)
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ sqlparse/filters/others.py |  5 ++++-
+ tests/test_format.py       | 17 +++++++++++++++++
+ 2 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/sqlparse/filters/others.py b/sqlparse/filters/others.py
+index e0e1ca1..6905f2d 100644
+--- a/sqlparse/filters/others.py
++++ b/sqlparse/filters/others.py
+@@ -22,7 +22,10 @@ class StripCommentsFilter:
+         def _get_insert_token(token):
+             """Returns either a whitespace or the line breaks from token."""
+             # See issue484 why line breaks should be preserved.
+-            m = re.search(r'((\r\n|\r|\n)+) *$', token.value)
++            # Note: The actual value for a line break is replaced by \n
++            # in SerializerUnicode which will be executed in the
++            # postprocessing state.
++            m = re.search(r'((\r|\n)+) *$', token.value)
+             if m is not None:
+                 return sql.Token(T.Whitespace.Newline, m.groups()[0])
+             else:
+diff --git a/tests/test_format.py b/tests/test_format.py
+index 7117d9d..70bb805 100644
+--- a/tests/test_format.py
++++ b/tests/test_format.py
+@@ -84,6 +84,23 @@ class TestFormat:
+         res = sqlparse.format(sql, strip_comments=True)
+         assert res == 'select (select 2)'
+ 
++    def test_strip_comments_preserves_linebreak(self):
++        sql = 'select * -- a comment\r\nfrom foo'
++        res = sqlparse.format(sql, strip_comments=True)
++        assert res == 'select *\nfrom foo'
++        sql = 'select * -- a comment\nfrom foo'
++        res = sqlparse.format(sql, strip_comments=True)
++        assert res == 'select *\nfrom foo'
++        sql = 'select * -- a comment\rfrom foo'
++        res = sqlparse.format(sql, strip_comments=True)
++        assert res == 'select *\nfrom foo'
++        sql = 'select * -- a comment\r\n\r\nfrom foo'
++        res = sqlparse.format(sql, strip_comments=True)
++        assert res == 'select *\n\nfrom foo'
++        sql = 'select * -- a comment\n\nfrom foo'
++        res = sqlparse.format(sql, strip_comments=True)
++        assert res == 'select *\n\nfrom foo'
++
+     def test_strip_ws(self):
+         f = lambda sql: sqlparse.format(sql, strip_whitespace=True)
+         s = 'select\n* from      foo\n\twhere  ( 1 = 2 )\n'
+-- 
+2.31.1
+

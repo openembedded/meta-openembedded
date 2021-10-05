@@ -5,6 +5,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2b136f573f5386001ea3b7b9016222fc"
 
 SRC_URI += "file://0001-sqlparse-change-shebang-to-python3.patch \
+            file://0001-Optimize-regular-expression-for-identifying-line-bre.patch \
             file://run-ptest \
 	    "
 
