@@ -191,6 +191,7 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
     fbgrab fbida fontforge fvwm glm gphoto2 libgphoto2 \
     gtkperf jasper leptonica libmng libsdl2-image libsdl2-mixer libsdl2-net \
     libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "lv-drivers lvgl", "", d)} \
     libvncserver libyui libyui-ncurses lxdm numlockx openbox openjpeg \
     packagegroup-fonts-truetype pangomm qrencode takao-fonts terminus-font \
     tesseract tesseract-lang tigervnc tslib source-han-sans-cn-fonts \
