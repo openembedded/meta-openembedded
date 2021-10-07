@@ -27,6 +27,8 @@ USERADD_PARAM:${PN} = "--system --home / --no-create-home \
                        --gid pipewire --groups audio,video \
                        pipewire"
 
+SYSTEMD_PACKAGES = "${PN} ${PN}-media-session"
+
 # For "EVL", look up https://evlproject.org/ . It involves
 # a specially prepared kernel, and is currently unavailable
 # in Yocto.
