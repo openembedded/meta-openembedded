@@ -1,14 +1,14 @@
 SUMMARY = "Unicode Character Database"
 HOMEPAGE = "https://unicode.org/ucd/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://../license.html;beginline=42;endline=85;md5=ddcaebcc17ab633995f12c383599f377"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/license.html;beginline=43;endline=83;md5=cf6c4777b109bcee78b6083a21be6192"
 
 SRC_URI = " \
     https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd \
-    file://license.html \
+    https://www.unicode.org/license.html;name=license \
 "
-SRC_URI[ucd.md5sum] = "430cbdac2615451571dd69a976dd08f6"
-SRC_URI[ucd.sha256sum] = "25ba51a0d4c6fa41047b7a5e5733068d4a734588f055f61e85f450097834a0a6"
+SRC_URI[ucd.sha256sum] = "033a5276b5d7af8844589f8e3482f3977a8385e71d107d375055465178c23600"
+SRC_URI[license.sha256sum] = "e415e1f2188ef2b1a5f7e6ee8c60cefe8a49dacd8b96c9025cad5013985129e4"
 
 inherit allarch
 
