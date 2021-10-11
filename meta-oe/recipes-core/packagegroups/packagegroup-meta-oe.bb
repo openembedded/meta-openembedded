@@ -269,7 +269,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     yajl \
     yajl \
     kconfig-frontends \
-    ldns \
     libgee \
     libsombok3 \
     lshw \
