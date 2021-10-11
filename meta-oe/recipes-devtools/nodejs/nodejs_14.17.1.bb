@@ -128,6 +128,9 @@ python do_create_v8_qemu_wrapper () {
 do_create_v8_qemu_wrapper[dirs] = "${B}"
 addtask create_v8_qemu_wrapper after do_configure before do_compile
 
+# Keep until openssl 3.x compatibility is fixed
+CXXFLAGS += "-fpermissive"
+
 LDFLAGS:append:x86 = " -latomic"
 
 # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
