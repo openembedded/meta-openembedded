@@ -22,6 +22,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://big-endian.patch \
            file://mips-warnings.patch \
            file://mips-less-memory.patch \
+           file://0001-jinja-tests.py-add-py-3.10-fix.patch \
            "
 SRC_URI:append:class-target = " \
            file://0002-Using-native-binaries.patch \
