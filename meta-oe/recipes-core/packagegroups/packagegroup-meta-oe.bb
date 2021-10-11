@@ -326,7 +326,6 @@ RDEPENDS:packagegroup-meta-oe-devtools:remove:x86 = "ply"
 
 RDEPENDS:packagegroup-meta-oe-extended ="\
     bitwise \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
     brotli \
     byacc \
     cmpi-bindings \
