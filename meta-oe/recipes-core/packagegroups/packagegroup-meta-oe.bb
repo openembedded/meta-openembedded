@@ -331,8 +331,6 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
     byacc \
     cmpi-bindings \
     collectd \
-    cfengine-masterfiles \
-    cfengine \
     ddrescue \
     dialog \
     enscript \
