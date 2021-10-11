@@ -1,0 +1,32 @@
+From 9e37248870b2b955293754933c789ca00bca06ef Mon Sep 17 00:00:00 2001
+From: Alexander Kanavin <alex@linutronix.de>
+Date: Fri, 1 Oct 2021 13:00:24 +0200
+Subject: [PATCH] Cargo.toml: do not abort on panic
+
+OE's rust is configured to unwind, and this setting clashes with it/
+
+Upstream-Status: Inappropriate [oe-core specific]
+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+---
+ Cargo.toml | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Cargo.toml b/Cargo.toml
+index 09f3e7292f..0fff412569 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -57,7 +57,6 @@ panic = "abort"
+ opt-level = 2
+ rpath = false
+ debug-assertions = false
+-panic = "abort"
+ 
+ # Optimize build dependencies, because bindgen and proc macros / style
+ # compilation take more to run than to build otherwise.
+@@ -105,4 +104,4 @@ path = "third_party/rust/mio"
+ 
+ # Patch failure 0.1.8 to disable the backtrace feature by default. See bug 1608157.
+ [patch.crates-io.failure]
+-path = "third_party/rust/failure"
+\ No newline at end of file
++path = "third_party/rust/failure"
