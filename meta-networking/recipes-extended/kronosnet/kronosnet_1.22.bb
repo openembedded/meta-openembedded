@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa88
 SECTION = "libs"
 DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
 
-SRCREV = "b8d18c8360fd39cb04748e8bc1ee26de4afa4cbd"
+SRCREV = "0123ecebce0ad6aba3cdb320027192e15fd71e23"
 SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
 
 UPSTREAM_CHECK_URI = "https://github.com/kronosnet/kronosnet/releases"
