@@ -249,7 +249,6 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     libparse-yapp-perl \
     libubox \
     ltrace \
-    lua \
     luajit \
     mcpp \
     memstat \
@@ -963,7 +962,6 @@ RDEPENDS:packagegroup-meta-oe-ptest-packages = "\
     zeromq-ptest \
     leveldb-ptest \
     psqlodbc-ptest \
-    lua-ptest \
     protobuf-ptest \
     rsyslog-ptest \
     oprofile-ptest \
