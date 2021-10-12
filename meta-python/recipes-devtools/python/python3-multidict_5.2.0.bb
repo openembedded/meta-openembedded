@@ -2,9 +2,9 @@ SUMMARY = "Multidicts are useful for working with HTTP headers, URL query args e
 HOMEPAGE = "https://github.com/aio-libs/multidict/"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=84c63e2bcd84e619d249af5181e2147f"
 
-SRC_URI[sha256sum] = "25b4e5f22d3a37ddf3effc0710ba692cfc792c2b9edfb9c05aefe823256e84d5"
+SRC_URI[sha256sum] = "0dd1c93edb444b33ba2274b66f63def8a327d607c6c790772f448a53b6ea59ce"
 
 inherit pypi setuptools3 ptest
 
