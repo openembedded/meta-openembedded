@@ -12,6 +12,11 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "PyScaffold"
 
-SRC_URI[sha256sum] = "cfa719c2d97392ec3cd5f44d95ec0d40df2dd483d5ee05ea029896cfd7c04af8"
+SRC_URI[sha256sum] = "ff83ea4e585b29a746857c49a4dcba80795af130f62ff3f722d9f39aa4ff2a75"
 
 BBCLASSEXTEND = "native nativesdk"
+
+RDEPENDS:${PN} += " \
+	python3-email \
+	python3-compression \
+"
