@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release \
 "
 SRCREV = "8e4902ed81c922ed8f76a7ed85be1eaa3fd7e66d"
 S = "${WORKDIR}/git"
-LUA_VERSION = "5.3"
+LUA_VERSION = "5.4"
 
 inherit autotools pkgconfig
 
