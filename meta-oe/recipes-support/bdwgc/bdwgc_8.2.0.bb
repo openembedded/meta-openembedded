@@ -19,12 +19,12 @@ DESCRIPTION = "The Boehm-Demers-Weiser conservative garbage collector can be\
 HOMEPAGE = "http://www.hboehm.info/gc/"
 SECTION = "devel"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README.QUICK;md5=e3d68fff6b0c661d949d8df559fdc78f"
+LIC_FILES_CHKSUM = "file://README.QUICK;md5=7912d9213b3547f8a81aadd08893fe84"
 
 DEPENDS = "libatomic-ops"
 
-SRCREV = "3e1477b72ef4329a196d67b74da4cbe274d04eff"
-SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_0"
+SRCREV = "47e9106c17b72e9ee5501308f69ea94531e798b3"
+SRC_URI = "git://github.com/ivmai/bdwgc.git"
 
 S = "${WORKDIR}/git"
 
