@@ -502,7 +502,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     libsdl2-net \
     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "libsdl2-ttf", "", d)} \
     libsdl \
-    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "lv-drivers lvgl", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "lv-drivers lvgl lv-lib-png", "", d)} \
     ttf-arphic-uming \
     ttf-droid-sans ttf-droid-sans-mono ttf-droid-sans-fallback ttf-droid-sans-japanese ttf-droid-serif \
     ttf-abyssinica \
