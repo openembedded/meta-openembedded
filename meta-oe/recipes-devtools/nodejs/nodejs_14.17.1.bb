@@ -131,6 +131,7 @@ addtask create_v8_qemu_wrapper after do_configure before do_compile
 
 # Keep until openssl 3.x compatibility is fixed
 CXXFLAGS += "-fpermissive"
+BUILD_CXXFLAGS += "-fpermissive"
 
 LDFLAGS:append:x86 = " -latomic"
 
