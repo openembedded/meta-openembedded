@@ -11,9 +11,8 @@ DEPENDS:append:libc-musl = " fts"
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/pmem/pmdk.git"
-
-SRCREV = "1926ffb8f3f5f0617b3b3ed32029d437c272f187"
+SRC_URI = "git://github.com/pmem/pmdk.git;branch=stable-1.11"
+SRCREV = "5b21904a257eff47f2e87fcbf2de46111f03ddd8"
 
 inherit autotools-brokensep pkgconfig
 
