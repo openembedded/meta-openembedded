@@ -1,11 +1,10 @@
 DESCRIPTION="header-only library for creating parsers according to Parsing Expression Grammar"
 HOMEPAGE="https://github.com/taocpp/PEGTL"
 LICENSE="MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6a5195f720a8d436a4148e0cb8660400"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=5b6701671289d12b7ffa69138832c006"
 
-SRCREV = "47e878ad4fd72c91253c9d47b6f17e001ca2dfcf"
-SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=2.x \
-          "
+SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=main"
+SRCREV = "6d03c8decc22b4ddd51115e2170e0e82413c7104"
 
 inherit cmake
 
