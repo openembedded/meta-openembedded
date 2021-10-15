@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/neutrinolabs/xrdp.git;branch=devel \
            file://0001-Fix-the-compile-error.patch \
            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
            "
-SRCREV = "a4c7ee077c049202d73f82f518b2de958d722890"
+SRCREV = "58088324956d94fd2eb5e7694a318cccec6990f1"
 
 S = "${WORKDIR}/git"
 
