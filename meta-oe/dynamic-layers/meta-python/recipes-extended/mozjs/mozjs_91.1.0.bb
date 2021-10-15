@@ -31,6 +31,10 @@ export AS = "${CC}"
 
 export RUSTFLAGS
 
+JIT ?= ""
+
+JIT:mipsarch = "--disable-jit"
+
 do_configure() {
     cd ${B}
     python3 ${S}/configure.py \
@@ -39,7 +43,8 @@ do_configure() {
         --host=${BUILD_SYS} \
         --prefix=${prefix} \
         --libdir=${libdir} \
-        --disable-jemalloc
+        --disable-jemalloc \
+        ${JIT}
 
 }
 
