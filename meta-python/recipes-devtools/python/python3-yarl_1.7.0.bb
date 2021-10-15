@@ -1,14 +1,11 @@
 SUMMARY = "The module provides handy URL class for url parsing and changing"
 HOMEPAGE = "https://github.com/aio-libs/yarl/"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b334fc90d45983db318f54fd5bf6c90b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=e581798a7b985311f29fa3e163ea27ae"
 
-SRC_URI[sha256sum] = "8a9066529240171b68893d60dca86a763eae2139dd42f42106b03cf4b426bf10"
+SRC_URI[sha256sum] = "8e7ebaf62e19c2feb097ffb7c94deb0f0c9fab52590784c8cd679d30ab009162"
 
-SRC_URI += " \
-    file://run-ptest \
-    file://0001-Drop-tests-for-semicolon-as-a-separator.patch \
-"
+SRC_URI += "file://run-ptest"
 
 PYPI_PACKAGE = "yarl"
 
