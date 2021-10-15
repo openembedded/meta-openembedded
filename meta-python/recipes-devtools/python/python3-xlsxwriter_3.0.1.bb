@@ -16,6 +16,6 @@ RDEPENDS:${PN} += " \
 	python3-io \
 "
 
-SRC_URI[sha256sum] = "0956747859567ec01907e561a7d8413de18a7aae36860f979f9da52b9d58bc19"
+SRC_URI[sha256sum] = "3f39bf581c55f3ad1438bc170d7f4c4649cee8b6b7a80d21f79508118eeea52a"
 
 BBCLASSEXTEND = "native nativesdk"
