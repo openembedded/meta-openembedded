@@ -6,8 +6,7 @@ AUTHOR = "Ian Cordasco"
 LICENSE = "Apache-2.0 | BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0f6d769bdcfacac3c1a1ffa568937fe0"
 
-SRC_URI[md5sum] = "869fb44fbd56713490db7272eb36c8ae"
-SRC_URI[sha256sum] = "5af8ad10cec94f215e3f48112de2022e1d5a37ed427fbd88652fa908f2ab7cae"
+SRC_URI[sha256sum] = "4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0"
 
 inherit pypi setuptools3 ptest
 
