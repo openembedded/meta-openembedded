@@ -11,7 +11,7 @@ DEPENDS += "${PYTHON_PN}-grpcio"
 
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
 
-SRC_URI[sha256sum] = "d440f2bc089ff628618c536904d5bc39d0b44f7afdda4c4c1ecd15fcf385bfba"
+SRC_URI[sha256sum] = "3891b1df82369acbc8451d4952cd20755f49a82398dce62437511ad17b47290e"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
 
