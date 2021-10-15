@@ -3,7 +3,7 @@ LICENSE = "MIT"
 HOMEPAGE = "https://github.com/luaposix/luaposix"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=f81069e00c0cad249f20efe958276db1"
 
-DEPENDS += "lua-native lua"
+DEPENDS += "lua-native lua libxcrypt-native"
 
 SRC_URI = "git://github.com/luaposix/luaposix.git;branch=release-v${PV} \
 "
