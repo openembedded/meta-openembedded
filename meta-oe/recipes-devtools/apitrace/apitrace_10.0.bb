@@ -16,9 +16,11 @@ DEPENDS += "zlib libpng python3-native"
 
 inherit cmake
 
+PACKAGECONFIG ??= " ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11', '', d)} "
+PACKAGECONFIG[x11] = "-DENABLE_X11=ON,-DENABLE_X11=OFF,libx11"
+
 EXTRA_OECMAKE += "\
     -DENABLE_GUI=OFF \
-    -DENABLE_X11=OFF \
     -DENABLE_STATIC_LIBGCC=OFF \
     -DENABLE_STATIC_LIBSTDCXX=OFF \
     -DPython3_ROOT_DIR=/usr/bin/python3-native \
