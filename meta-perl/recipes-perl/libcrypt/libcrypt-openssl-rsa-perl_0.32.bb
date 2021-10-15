@@ -5,8 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a67ceecc5d9a91a5a0d003ba50c26346"
 
 SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-RSA-${PV}.tar.gz "
 
-SRC_URI[md5sum] = "d33681e19d2094df7c26bc7a4509265e"
-SRC_URI[sha256sum] = "4173403ad4cf76732192099f833fbfbf3cd8104e0246b3844187ae384d2c5436"
+SRC_URI[sha256sum] = "adc74f0ae125c77f65d5dd32abb9c3429300a79543bf263494f333f9c0b62a61"
 
 DEPENDS += "libcrypt-openssl-guess-perl-native openssl"
 
