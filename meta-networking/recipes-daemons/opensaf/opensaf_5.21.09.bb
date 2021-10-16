@@ -29,8 +29,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
            file://0001-Fix-build-with-fno-common.patch \
            file://0001-Use-correct-printf-format-for-__fsblkcnt_t.patch \
            "
-SRC_URI[md5sum] = "a60775787ba520a0b1031fcd42e0d65b"
-SRC_URI[sha256sum] = "d29d124506e4b084285d27c8742c7bca66de80be6a0ba9de8e37835ccaa8ee57"
+SRC_URI[sha256sum] = "227ae1dafb6d51ce6561c9fcaec60087a0183839a8a4da11517e09f2a662b53d"
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
 
