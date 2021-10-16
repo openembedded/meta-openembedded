@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
                     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
 DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
 
-SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=mainline"
-SRCREV = "cc99d68db66174f4499b9b325bc788393b972edd"
+SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
+SRCREV = "6d5f47ee8e8a36140b52bf52fe954a131a0aa5dd"
+
 S = "${WORKDIR}/git" 
 
 # Same restriction as gtk+
