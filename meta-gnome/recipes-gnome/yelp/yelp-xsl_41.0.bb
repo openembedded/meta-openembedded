@@ -10,7 +10,7 @@ inherit gnomebase gettext itstool
 
 DEPENDS += "libxml2"
 
-SRC_URI[archive.sha256sum] = "919c552f846aaec741fe51d5af416b469bcdb25c77effc3b5a15a4b4b7ff814e"
+SRC_URI[archive.sha256sum] = "c8cd64c093bbd8c5d5e47fd38864e90831b5f9cf7403530870206fa96636a4a5"
 
 RDEPENDS:${PN}:append:class-target = " libxml2 itstool"
 
