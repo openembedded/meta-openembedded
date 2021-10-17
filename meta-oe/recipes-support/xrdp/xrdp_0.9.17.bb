@@ -92,3 +92,4 @@ pkg_postinst:${PN}() {
 		fi
         fi
 }
+PNBLACKLIST[xrdp] ?= "Needs porting to openssl 3.x"
