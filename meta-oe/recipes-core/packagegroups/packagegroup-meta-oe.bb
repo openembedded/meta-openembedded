@@ -908,7 +908,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     nano \
     xdg-user-dirs \
     xmlsec1 \
-    ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xorgxrdp", "", d)} \
     usb-modeswitch-data \
     usb-modeswitch \
     liburing \
