@@ -62,5 +62,6 @@ do_install:append() {
            -i ${D}${bindir}/js91-config
 }
 
-PACKAGES =+ "lib${BPN}"
+PACKAGES =+ "lib${BPN}-staticdev lib${BPN}"
+FILES:lib${BPN}-staticdev += "${libdir}/libjs_static.ajs"
 FILES:lib${BPN} += "${libdir}/lib*"
