@@ -18,12 +18,11 @@ DEPENDS = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even
+inherit gnomebase gsettings gtk-icon-cache gettext features_check upstream-version-is-even mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI += "file://8be361b6ce8f0f8053e1609decbdbdc164ec8448.patch"
-SRC_URI[archive.sha256sum] = "7280880a082d631624d02a102dd547ceb59498da368311f3e49a06cff897f512"
+SRC_URI[archive.sha256sum] = "73ac923c6618bd0957d6b7c012a00a47bff67ee934249358817433772ceb193f"
 
 FILES:${PN} += " \
     ${datadir}/gnome-shell \
