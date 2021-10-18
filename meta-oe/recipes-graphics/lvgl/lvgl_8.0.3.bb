@@ -21,9 +21,12 @@ S = "${WORKDIR}/${PN}-${PV}"
 
 EXTRA_OECMAKE += "-Dinstall:BOOL=ON"
 
+LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
+
 do_configure:prepend() {
     [ -r "${S}/lv_conf.h" ] \
-        || sed -e "s|#if 0 /*Set it to \"1\" to enable the content*/|#if 1 // Enabled by ${PN}|g" \
+        || sed -e 's|#if 0 .*Set it to "1" to enable .*|#if 1 // Enabled|g' \
+	    -e "s|\(#define LV_MEM_CUSTOM .*\)0|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|g" \
             < "${S}/lv_conf_template.h" > "${S}/lv_conf.h"
 }
 
