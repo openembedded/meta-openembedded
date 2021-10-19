@@ -24,6 +24,7 @@ SRCREV_grpc = "fc662b7964384b701af5bd3ce6994d2180080eb4"
 BRANCH = "v1.41.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            file://0001-cmake-revert-db88fb0ee826e73323e06ac6166ac038ee71f6a.patch \
+           file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
 CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
