@@ -23,6 +23,9 @@ EXTRA_OECMAKE += "-Dinstall:BOOL=ON"
 
 LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
 
+# Upstream does not support a default configuration
+# but propose a default "disabled" template, which is used as reference
+# More configuration can be done using external configuration variables
 do_configure:prepend() {
     [ -r "${S}/lv_conf.h" ] \
         || sed -e 's|#if 0 .*Set it to "1" to enable .*|#if 1 // Enabled|g' \

@@ -26,6 +26,9 @@ EXTRA_OECMAKE += "-Dinstall:BOOL=ON"
 TARGET_CFLAGS += "-DLV_CONF_INCLUDE_SIMPLE=1"
 TARGET_CFLAGS += "-I${RECIPE_SYSROOT}/${includedir}/lvgl"
 
+# Upstream does not support a default configuration
+# but propose a default "disabled" template, which is used as reference
+# More configuration can be done using external configuration variables
 do_configure:append() {
     [ -r "${S}/lv_drv_conf.h" ] \
         || sed -e "s|#if 0 .*Set it to \"1\" to enable the content.*|#if 1 // Enabled by ${PN}|g" \
