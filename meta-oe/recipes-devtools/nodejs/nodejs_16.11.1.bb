@@ -1,7 +1,7 @@
 DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
 HOMEPAGE = "http://nodejs.org"
 LICENSE = "MIT & BSD & Artistic-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6768abdfc4dae4fde59d6b4df96930f3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=12f6b053282af96a218353ae7aff7cd8"
 
 DEPENDS = "openssl"
 DEPENDS:append:class-target = " qemu-native"
@@ -18,12 +18,12 @@ COMPATIBLE_HOST:riscv32 = "null"
 
 SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
-           file://0003-Install-both-binaries-and-use-libdir.patch \
+           file://0002-Install-both-binaries-and-use-libdir.patch \
            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
            file://big-endian.patch \
-           file://mips-warnings.patch \
            file://mips-less-memory.patch \
-           file://0001-jinja-tests.py-add-py-3.10-fix.patch \
+           file://system-c-ares.patch \
+           file://0001-liftoff-Correct-function-signatures.patch \
            "
 SRC_URI:append:class-target = " \
            file://0002-Using-native-binaries.patch \
@@ -34,7 +34,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "3fa1d71adddfab2f5e3e41874b4eddbdf92b65cade4a43922fb1e437afcf89ed"
+SRC_URI[sha256sum] = "67587f4de25e30a9cc0b51a6033eca3bc82d7b4e0d79bb84a265e88f76ab6278"
 
 S = "${WORKDIR}/node-v${PV}"
 
@@ -56,10 +56,11 @@ ARCHFLAGS:arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
                     bb.utils.contains('TUNE_FEATURES', 'vfpv3d16', '--with-arm-fpu=vfpv3-d16', \
                     bb.utils.contains('TUNE_FEATURES', 'vfpv3', '--with-arm-fpu=vfpv3', \
                     '--with-arm-fpu=vfp', d), d), d)}"
-GYP_DEFINES:append:mipsel = " mips_arch_variant='r1' "
+ARCHFLAGS:append:mips = " --v8-lite-mode"
+ARCHFLAGS:append:mipsel = " --v8-lite-mode"
 ARCHFLAGS ?= ""
 
-PACKAGECONFIG ??= "brotli icu zlib"
+PACKAGECONFIG ??= "ares brotli icu zlib"
 
 PACKAGECONFIG[ares] = "--shared-cares,,c-ares"
 PACKAGECONFIG[brotli] = "--shared-brotli,,brotli"
@@ -87,7 +88,7 @@ python do_unpack() {
     import shutil
 
     bb.build.exec_func('base_do_unpack', d)
-
+    shutil.rmtree(d.getVar('S') + '/deps/openssl', True)
     if 'ares' in d.getVar('PACKAGECONFIG'):
         shutil.rmtree(d.getVar('S') + '/deps/cares', True)
     if 'brotli' in d.getVar('PACKAGECONFIG'):
@@ -137,6 +138,7 @@ do_configure () {
     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
     # $TARGET_ARCH settings don't match --dest-cpu settings
     python3 configure.py --prefix=${prefix} --cross-compiling \
+               --shared-openssl \
                --without-dtrace \
                --without-etw \
                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
