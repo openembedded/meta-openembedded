@@ -12,9 +12,13 @@ HOMEPAGE = "https://docs.lvgl.io"
 SUMMARY = "PNG decoder for LVGL"
 DESCRIPTION = "Allow the use of PNG images in LVGL. This implementation uses lodepng"
 
+# because of lvgl dependency
+REQUIRED_DISTRO_FEATURES = "wayland"
+
 DEPENDS += "lvgl"
 
 inherit cmake
+inherit features_check
 
 TARGET_CFLAGS += "-DLV_CONF_INCLUDE_SIMPLE=1"
 TARGET_CFLAGS += "-I${RECIPE_SYSROOT}/${includedir}/lvgl"
