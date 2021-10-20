@@ -8,6 +8,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0002-moz.configure-do-not-look-for-llvm-objdump.patch \
            file://0003-rust.configure-do-not-try-to-find-a-suitable-upstrea.patch \
            file://0004-use-asm-sgidefs.h.patch \
+           file://fix-musl-build.patch \
            file://0001-build-do-not-use-autoconf-s-config.sub-to-canonicali.patch \
            "
 SRC_URI[sha256sum] = "3b913d6a52c95a8986123c98543f1273812a2d59f2891b4b1c604e35f4580766"
