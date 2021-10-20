@@ -21,6 +21,9 @@ inherit features_check
 
 S = "${WORKDIR}/${PN}-${PV}"
 
+LVGL_CONFIG_WAYLAND_HOR_RES ?= "480"
+LVGL_CONFIG_WAYLAND_VER_RES ?= "320"
+
 EXTRA_OECMAKE += "-Dinstall:BOOL=ON"
 
 TARGET_CFLAGS += "-DLV_CONF_INCLUDE_SIMPLE=1"
@@ -33,6 +36,8 @@ do_configure:append() {
     [ -r "${S}/lv_drv_conf.h" ] \
         || sed -e "s|#if 0 .*Set it to \"1\" to enable the content.*|#if 1 // Enabled by ${PN}|g" \
                -e "s|#  define USE_WAYLAND       0|#  define USE_WAYLAND       1|g" \
+	       -e "s|\(^ *# *define *WAYLAND_HOR_RES *\).*|\1${LVGL_CONFIG_WAYLAND_HOR_RES}|g" \
+ 	       -e "s|\(^ *# *define *WAYLAND_VER_RES *\).*|\1${LVGL_CONFIG_WAYLAND_VER_RES}|g" \
           < "${S}/lv_drv_conf_template.h" > "${S}/lv_drv_conf.h"
 }
 
