@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
 
 PYPI_PACKAGE = "Werkzeug"
 
-SRC_URI[sha256sum] = "1de1db30d010ff1af14a009224ec49ab2329ad2cde454c8a708130642d579c42"
+SRC_URI[sha256sum] = "aa2bb6fc8dee8d6c504c0ac1e7f5f7dc5810a9903e793b6f715a9f015bdadb9a"
 
 inherit pypi setuptools3
 
@@ -35,4 +35,5 @@ RDEPENDS:${PN} += " \
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-unixadmin \
     ${PYTHON_PN}-misc \
+    ${PYTHON_PN}-profile \
 "
