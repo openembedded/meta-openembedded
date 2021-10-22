@@ -764,6 +764,8 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     libestr \
     libfann \
     libftdi \
+    libjs-jquery-globalize \
+    libjs-jquery-cookie \
     ccid \
     zchunk \
     libgpiod \
