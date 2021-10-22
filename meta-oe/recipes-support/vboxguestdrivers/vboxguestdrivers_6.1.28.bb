@@ -13,12 +13,10 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
-    file://r89690-5.14-fixes.patch \
-    file://r90497-regops-5.14-fix.patch \
 "
 
-SRC_URI[md5sum] = "fce04bbef244b4df1a50e53d132d3e6f"
-SRC_URI[sha256sum] = "0212602eea878d6c9fd7f4a3e0182da3e4505f31d25f5539fb8f7b1fbe366195"
+SRC_URI[md5sum] = "c6efae8dc115b90c6124e13126794c4f"
+SRC_URI[sha256sum] = "8d34993d8e9c0cf35e7bd44dd26c8c757f17a3b7d5a64052f945d00fd798ebfe"
 
 S ?= "${WORKDIR}/vbox_module"
 S:task-patch = "${WORKDIR}/${VBOX_NAME}"
