@@ -3,6 +3,6 @@ HOMEPAGE = "https://pypi.org/project/tzlocal/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
 
-SRC_URI[sha256sum] = "f4e6e36db50499e0d92f79b67361041f048e2609d166e93456b50746dc4aef12"
+SRC_URI[sha256sum] = "8560aabba61b5d2a5e1697bb781f682e6eaa3ce386cee85a09a458cc0003f836"
 
 inherit pypi setuptools3
