@@ -6,7 +6,7 @@ Upstream-Status: Pending
 
 --- a/build/top.mk
 +++ b/build/top.mk
-@@ -121,7 +121,7 @@ LTCOMPILE_MOD = $(LIBTOOL) $(LTONLY_MOD)
+@@ -125,7 +125,7 @@ LTCOMPILE_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=compile \
  LTLINK_MOD = $(LIBTOOL) $(LTONLY_MOD) --mode=link \
  	$(CC) $(LT_CFLAGS) $(LDFLAGS) $(LTFLAGS_MOD)
  
