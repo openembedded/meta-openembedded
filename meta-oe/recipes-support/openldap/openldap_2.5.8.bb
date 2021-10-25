@@ -7,7 +7,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
 # basically BSD.  opensource.org does not record this license
 # at present (so it is apparently not OSI certified).
 LICENSE = "OpenLDAP"
-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=b6dea6c170362fc46381fe3690c722cb \
+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=5cc6ef74da4ad25d707c4f5903d64975 \
                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
                     "
 SECTION = "libs"
@@ -15,18 +15,15 @@ SECTION = "libs"
 LDAP_VER = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
 SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/${BP}.tgz \
-    file://openldap-m4-pthread.patch \
     file://openldap-2.4.28-gnutls-gcrypt.patch \
     file://use-urandom.patch \
     file://initscript \
     file://slapd.service \
-    file://thread_stub.patch \
-    file://openldap-CVE-2015-3276.patch \
     file://remove-user-host-pwd-from-version.patch \
 "
 
-SRC_URI[md5sum] = "c203d735ba69976e5b28dc39006f29b5"
-SRC_URI[sha256sum] = "57b59254be15d0bf6a9ab3d514c1c05777b02123291533134a87c94468f8f47b"
+SRC_URI[md5sum] = "86e3ffce4adfc57cbb76ac0ff48b2614"
+SRC_URI[sha256sum] = "366ea1c3b24202de4481978b632128c0cfe4148d4ae13cabf93a1f38c56472dc"
 
 DEPENDS = "util-linux groff-native"
 
@@ -35,7 +32,7 @@ DEPENDS = "util-linux groff-native"
 # environments
 SRC_URI += "file://install-strip.patch"
 
-inherit autotools-brokensep update-rc.d systemd
+inherit autotools-brokensep update-rc.d systemd pkgconfig
 
 # CV SETTINGS
 # Required to work round AC_FUNC_MEMCMP which gets the wrong answer
@@ -50,8 +47,8 @@ EXTRA_OECONF += "--with-yielding-select=yes"
 # Shared libraries are nice...
 EXTRA_OECONF += "--enable-dynamic"
 
-PACKAGECONFIG ??= "gnutls modules \
-                   mdb ldap meta monitor null passwd shell proxycache dnssrv \
+PACKAGECONFIG ??= "asyncmeta gnutls modules \
+                   mdb ldap meta null passwd proxycache dnssrv \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
 "
 #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
@@ -72,24 +69,19 @@ EXTRA_OECONF += "--enable-crypt"
 # The backend must be set by the configuration.  This controls the
 # required database.
 #
-# Backends="bdb dnssrv hdb ldap mdb meta monitor ndb null passwd perl relay shell sock sql"
+# Backends="asyncmeta dnssrv ldap mdb meta ndb null passwd perl relay sock sql wt"
 #
 # Note that multiple backends can be built.  The ldbm backend requires a
-# build-time choice of database API.  The bdb backend forces this to be
-# DB4.  To use the gdbm (or other) API the Berkely database module must
-# be removed from the build.
+# build-time choice of database API. To use the gdbm (or other) API the 
+# Berkely database module must be removed from the build.
 md = "${libexecdir}/openldap"
 #
-#--enable-bdb          enable Berkeley DB backend no|yes|mod yes
-# The Berkely DB is the standard choice.  This version of OpenLDAP requires
-# the version 4 implementation or better.
-PACKAGECONFIG[bdb] = "--enable-bdb=yes,--enable-bdb=no,db"
+
+#--enable-asyncmeta    enable asyncmeta backend no|yes|mod no
+PACKAGECONFIG[asyncmeta] = "--enable-asyncmeta=mod,--enable-asyncmeta=no"
 
 #--enable-dnssrv       enable dnssrv backend no|yes|mod no
 PACKAGECONFIG[dnssrv] = "--enable-dnssrv=mod,--enable-dnssrv=no"
-
-#--enable-hdb          enable Hierarchical DB backend no|yes|mod no
-PACKAGECONFIG[hdb] = "--enable-hdb=yes,--enable-hdb=no,db"
 
 #--enable-ldap         enable ldap backend no|yes|mod no
 PACKAGECONFIG[ldap] = "--enable-ldap=mod,--enable-ldap=no,"
@@ -99,9 +91,6 @@ PACKAGECONFIG[mdb] = "--enable-mdb=yes,--enable-mdb=no,"
 
 #--enable-meta         enable metadirectory backend no|yes|mod no
 PACKAGECONFIG[meta] = "--enable-meta=mod,--enable-meta=no,"
-
-#--enable-monitor      enable monitor backend no|yes|mod yes
-PACKAGECONFIG[monitor] = "--enable-monitor=mod,--enable-monitor=no,"
 
 #--enable-ndb          enable MySQL NDB Cluster backend no|yes|mod [no]
 PACKAGECONFIG[ndb] = "--enable-ndb=mod,--enable-ndb=no,"
@@ -121,10 +110,6 @@ PACKAGECONFIG[perl] = "--enable-perl=mod,--enable-perl=no,perl"
 #--enable-relay        enable relay backend no|yes|mod [yes]
 PACKAGECONFIG[relay] = "--enable-relay=mod,--enable-relay=no,"
 
-#--enable-shell        enable shell backend no|yes|mod no
-# configure: WARNING: Use of --without-threads is recommended with back-shell
-PACKAGECONFIG[shell] = "--enable-shell=mod --without-threads,--enable-shell=no,"
-
 #--enable-sock         enable sock backend no|yes|mod [no]
 PACKAGECONFIG[sock] = "--enable-sock=mod,--enable-sock=no,"
 
@@ -132,6 +117,10 @@ PACKAGECONFIG[sock] = "--enable-sock=mod,--enable-sock=no,"
 # sql requires some sql backend which provides sql.h, sqlite* provides
 # sqlite.h (which may be compatible but hasn't been tried.)
 PACKAGECONFIG[sql] = "--enable-sql=mod,--enable-sql=no,sqlite3"
+
+#--enable-wt           enable wt backend no|yes|mod no
+# back-wt is marked currently as experimental
+PACKAGECONFIG[wt] = "--enable-wt=mod,--enable-wt=no"
 
 #--enable-dyngroup     Dynamic Group overlay no|yes|mod no
 #  This is a demo, Proxy Cache defines init_module which conflicts with the
@@ -176,7 +165,7 @@ FILES:${PN}-slapd = "${sysconfdir}/init.d ${libexecdir}/slapd ${sbindir} ${local
     ${sysconfdir}/openldap/DB_CONFIG.example ${systemd_unitdir}/system/*"
 FILES:${PN}-slurpd = "${libexecdir}/slurpd ${localstatedir}/openldap-slurp"
 FILES:${PN}-bin = "${bindir}"
-FILES:${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so"
+FILES:${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so ${libdir}/pkgconfig/*.pc"
 FILES:${PN}-dbg += "${libexecdir}/openldap/.debug"
 
 do_install:append() {
@@ -210,8 +199,6 @@ do_install:append() {
         -i ${D}${sysconfdir}/openldap/slapd.conf
 
     mkdir -p ${D}${localstatedir}/${BPN}/data
-
-
 }
 
 INITSCRIPT_PACKAGES = "${PN}-slapd"
@@ -220,19 +207,16 @@ INITSCRIPT_PARAMS:${PN}-slapd = "defaults"
 SYSTEMD_SERVICE:${PN}-slapd = "hostapd.service"
 SYSTEMD_AUTO_ENABLE:${PN}-slapd ?= "disable"
 
-
 PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
 
 # The modules require their .so to be dynamicaly loaded
-INSANE_SKIP:${PN}-backend-dnssrv  += "dev-so"
-INSANE_SKIP:${PN}-backend-ldap    += "dev-so"
-INSANE_SKIP:${PN}-backend-meta    += "dev-so"
-INSANE_SKIP:${PN}-backend-mdb     += "dev-so"
-INSANE_SKIP:${PN}-backend-monitor += "dev-so"
-INSANE_SKIP:${PN}-backend-null    += "dev-so"
-INSANE_SKIP:${PN}-backend-passwd  += "dev-so"
-INSANE_SKIP:${PN}-backend-shell   += "dev-so"
-
+INSANE_SKIP:${PN}-backend-asyncmeta  += "dev-so"
+INSANE_SKIP:${PN}-backend-dnssrv     += "dev-so"
+INSANE_SKIP:${PN}-backend-ldap       += "dev-so"
+INSANE_SKIP:${PN}-backend-meta       += "dev-so"
+INSANE_SKIP:${PN}-backend-mdb        += "dev-so"
+INSANE_SKIP:${PN}-backend-null       += "dev-so"
+INSANE_SKIP:${PN}-backend-passwd     += "dev-so"
 
 python populate_packages:prepend () {
     backend_dir    = d.expand('${libexecdir}/openldap')
