@@ -14,11 +14,14 @@ DEPENDS = " \
     libdevmapper \
     popt \
     util-linux-libuuid \
+    libssh \
 "
 
+DEPENDS:append:libc-musl = " argp-standalone"
+LDFLAGS:append:libc-musl = " -largp"
+
 SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
-SRC_URI[md5sum] = "504d1ab22cbc4d1a59a8d8c7ee5ed3bf"
-SRC_URI[sha256sum] = "b296b7a21ea576c2b180611ccb19d06aec8dddaedf7c704b0c6a81210c25635f"
+SRC_URI[sha256sum] = "a356a727a83a464ade566e95239622a22dbe4e0f482b198fdb04ab0d3a5a9c5f"
 
 inherit autotools gettext pkgconfig
 
