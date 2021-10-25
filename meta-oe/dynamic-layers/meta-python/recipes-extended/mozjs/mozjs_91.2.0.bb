@@ -12,7 +12,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0001-build-do-not-use-autoconf-s-config.sub-to-canonicali.patch \
            file://riscv32.patch \
            "
-SRC_URI[sha256sum] = "3b913d6a52c95a8986123c98543f1273812a2d59f2891b4b1c604e35f4580766"
+SRC_URI[sha256sum] = "3ef3cfd321d0c2c80ee1b41b8baf7a1ea4daf93c29e1377274933440ff5e42c3"
 
 S = "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
 
@@ -37,7 +37,6 @@ export RUSTFLAGS
 JIT ?= ""
 
 JIT:mipsarch = "--disable-jit"
-JIT:riscv32 = "--disable-jit"
 
 do_configure() {
     cd ${B}
