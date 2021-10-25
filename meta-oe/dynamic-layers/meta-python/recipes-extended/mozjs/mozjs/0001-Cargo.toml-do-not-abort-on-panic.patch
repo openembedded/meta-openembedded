@@ -11,11 +11,15 @@ Signed-off-by: Alexander Kanavin <alex@linutronix.de>
  Cargo.toml | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/Cargo.toml b/Cargo.toml
-index 09f3e7292f..0fff412569 100644
 --- a/Cargo.toml
 +++ b/Cargo.toml
-@@ -57,7 +57,6 @@ panic = "abort"
+@@ -51,13 +51,11 @@ opt-level = 1
+ rpath = false
+ lto = false
+ debug-assertions = true
+-panic = "abort"
+ 
+ [profile.release]
  opt-level = 2
  rpath = false
  debug-assertions = false
@@ -23,10 +27,3 @@ index 09f3e7292f..0fff412569 100644
  
  # Optimize build dependencies, because bindgen and proc macros / style
  # compilation take more to run than to build otherwise.
-@@ -105,4 +104,4 @@ path = "third_party/rust/mio"
- 
- # Patch failure 0.1.8 to disable the backtrace feature by default. See bug 1608157.
- [patch.crates-io.failure]
--path = "third_party/rust/failure"
-\ No newline at end of file
-+path = "third_party/rust/failure"
