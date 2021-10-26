@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ba1a8a73d8ebea5c47a1173aaf476ddd"
 
 SRC_URI = "git://github.com/cvxopt/cvxopt;protocol=https"
 
-SRCREV = "60fdb838e0bb2d8f32ba51129552c83b55acd2a7"
+SRCREV = "d5a21cf1da62e4269176384b1ff62edac5579f94"
 
 S = "${WORKDIR}/git"
 
