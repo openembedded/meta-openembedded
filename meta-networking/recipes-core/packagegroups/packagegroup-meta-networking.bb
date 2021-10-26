@@ -207,6 +207,7 @@ RDEPENDS:packagegroup-meta-networking-support = "\
     libtevent \
     linux-atm \
     lksctp-tools \
+    mctp \
     memcached \
     ifenslave \
     netcat \
