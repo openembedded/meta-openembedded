@@ -40,6 +40,7 @@ do_install() {
 	install -m 644 ${S}/netplan/cli/commands/*.py ${D}${datadir}/netplan/netplan/cli/commands
 	install -m 755 ${S}/src/netplan.script ${D}${datadir}/netplan/
 	ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
+	sed -i -e "s#/lib/netplan/generate#${base_libdir}/netplan/generate#" ${D}${datadir}/netplan/netplan/cli/utils.py
 
 	install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
 	ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
@@ -49,6 +50,7 @@ do_install() {
 		install -m 755 ${S}/netplan-dbus ${D}${base_libdir}/netplan
 		install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
 		install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
+		sed -i -e "s#^Exec=/lib/#Exec=${base_libdir}/#" ${D}${datadir}/dbus-1/system-services/io.netplan.Netplan.service
 	fi
 
 	install -m 755 ${S}/libnetplan.so.0.0 ${D}${libdir}
