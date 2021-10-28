@@ -24,6 +24,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://mips-less-memory.patch \
            file://system-c-ares.patch \
            file://0001-liftoff-Correct-function-signatures.patch \
+           file://0001-crypto-fix-build-without-scrypt.patch \
            "
 SRC_URI:append:class-target = " \
            file://0002-Using-native-binaries.patch \
