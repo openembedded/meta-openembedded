@@ -1,8 +1,6 @@
 name: Lint
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - master
@@ -18,9 +16,19 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v11.3
 
       - name: Install linters
         run: pip3 install oelint-adv
 
-      - name: Run linters
-        run: oelint_adv */*/*.bb
+      - name: Linting all modified files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "linting $file"
+            oelint-adv $file --quiet
+          done
