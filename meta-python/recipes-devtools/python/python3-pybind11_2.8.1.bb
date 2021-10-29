@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/pybind/pybind11.git \
            file://0001-Do-not-strip-binaries.patch \
            file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
 "
-SRCREV = "65e95ea8675ea34bdd566d6461330f25c651e5a8"
+SRCREV = "f7b499615e14d70ab098a20deb0cdb3889998a1a"
 
 S = "${WORKDIR}/git"
 
