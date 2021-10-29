@@ -30,5 +30,5 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "linting $file"
-            oelint-adv --rulefile=oelint-rulefile.json --quiet $file
+            oelint-adv --quiet --color --rulefile=oelint-rulefile.json $file
           done
