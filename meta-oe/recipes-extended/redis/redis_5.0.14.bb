@@ -17,8 +17,7 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://GNU_SOURCE.patch \
            "
 
-SRC_URI[md5sum] = "c94523c9f4ee662027ddf90575d0e058"
-SRC_URI[sha256sum] = "53d0ae164cd33536c3d4b720ae9a128ea6166ebf04ff1add3b85f1242090cb85"
+SRC_URI[sha256sum] = "3ea5024766d983249e80d4aa9457c897a9f079957d0fb1f35682df233f997f32"
 
 inherit autotools-brokensep update-rc.d systemd useradd
 
