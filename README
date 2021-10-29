@@ -13,3 +13,6 @@ as a linter to ensure consistent quality. You can lint your recipes
 with the same linting rules with:
 
     oelint-adv --rulefile=oelint-rulefile.json --quiet <recipe>
+
+This is using a sub-set of rules (no info-level rules). If you
+want an even stricter linting omit the `--rulefile` argument.
