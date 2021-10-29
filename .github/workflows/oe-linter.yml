@@ -24,11 +24,18 @@ jobs:
         uses: tj-actions/changed-files@v11.3
 
       - name: Install linters
-        run: pip3 install oelint-adv
+        run: pip3 install oelint-adv codespell
 
       - name: Linting all modified files
         run: |
           for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "linting $file"
-            oelint-adv --quiet --color --rulefile=oelint-rulefile.json $file
+            oelint-adv --quiet --color --relpaths --rulefile=oelint-rulefile.json $file
+          done
+
+      - name: Codespell
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "spell checking $file"
+            codespell $file
           done
