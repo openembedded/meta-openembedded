@@ -1,0 +1,27 @@
+From 53237c103b06f58ad9c2ce3914fcc7fe73629f11 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 30 Oct 2021 01:11:33 -0700
+Subject: [PATCH] Fix -Werror=format-security errors with mvwprintw()
+
+Here a non-constant is used as a format string which
+compiler complains about. Fix by using "%s" as format.
+
+Upstream-Status: Submitted [https://github.com/mellowcandle/bitwise/pull/49]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/interactive.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/interactive.c b/src/interactive.c
+index cce418a..2c0b152 100644
+--- a/src/interactive.c
++++ b/src/interactive.c
+@@ -114,7 +114,7 @@ void update_history_win(void)
+ 				break;
+ 			}
+ 
+-		mvwprintw(history_win, j, 2, history[history_pos - i].line);
++		mvwprintw(history_win, j, 2, "%s", history[history_pos - i].line);
+ 	}
+ 
+ 	if (g_has_color)
