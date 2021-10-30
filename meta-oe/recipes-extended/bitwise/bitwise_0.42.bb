@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SRC_URI = "https://github.com/mellowcandle/bitwise/releases/download/v${PV}/bitwise-v${PV}.tar.gz \
            file://0001-makefile.am-Fix-build-when-build-dir-is-not-same-as-.patch \
+           file://0001-Fix-Werror-format-security-errors-with-mvwprintw.patch \
            "
 SRC_URI[sha256sum] = "d3d43cef47bf8f49e85f7ed381c3eaf1df921ca51805e0962f1a97a517e1d1d2"
 
