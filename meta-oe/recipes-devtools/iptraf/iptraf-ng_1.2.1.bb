@@ -24,17 +24,29 @@ LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e2b3850593b899b1a17594ed4cc4c731"
 DEPENDS = "ncurses"
 
-SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/iptraf-ng/iptraf-ng-1.1.4.tar.gz/e0f8df3b7baf2b5106709abc4f8c029a/${BP}.tar.gz \
+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/iptraf-ng/v${PV}.tar.gz/sha512/44d36fc92cdbf379f62cb63638663c3ee610225b9c28d60ee55e62e358f398a6b0db281129327b3472e45fb553ee3dd605af09c129f2233f8839ae3dbd799384/v${PV}.tar.gz \
+           file://iptraf-ng-tmpfiles.conf \
            file://ncurses-config.patch \
-           file://0001-Fix-printd-formatting-strings.patch \
+           file://0001-make-Make-CC-weak-assignment.patch \
            "
-SRC_URI[md5sum] = "e0f8df3b7baf2b5106709abc4f8c029a"
-SRC_URI[sha256sum] = "16b9b05bf5d3725d86409b901696639ad46944d02de6def87b1ceae5310dd35c"
+SRC_URI[sha256sum] = "9f5cef584065420dea1ba32c86126aede1fa9bd25b0f8362b0f9fd9754f00870"
 
-inherit autotools-brokensep pkgconfig
+inherit pkgconfig
 
 CFLAGS += "-D_GNU_SOURCE"
 
+do_compile() {
+    oe_runmake
+}
+
+do_install() {
+    oe_runmake DESTDIR=${D} install
+    install -d -m 0755 ${D}${localstatedir}/{log,lib}/iptraf-ng
+    install -D -m 0644 -p ${S}/iptraf-ng-logrotate.conf ${D}${sysconfdir}/logrotate.d/iptraf-ng
+    install -Dm 0644 ${WORKDIR}/iptraf-ng-tmpfiles.conf ${D}${libdir}/tmpfiles.d/iptraf-ng-tmpfiles.conf
+}
+
+FILES:${PN} += "${libdir}/tmpfiles.d"
 PROVIDES = "iptraf"
 RPROVIDES:${PN} += "iptraf"
 RREPLACES:${PN} += "iptraf"
