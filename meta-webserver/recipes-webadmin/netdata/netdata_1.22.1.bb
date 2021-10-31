@@ -5,8 +5,8 @@ DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troublesho
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
-SRC_URI = "git://github.com/netdata/netdata.git;protocol=https"
-SRCREV = "1be9200ba8e11dc81a2101d85a2725137d43f766"
+SRC_URI = "https://github.com/netdata/netdata/releases/download/v${PV}/netdata-v${PV}.tar.gz"
+SRC_URI[sha256sum] = "f169c8615a6823448c2f1923c87c286d798132ea29d26f366e96d26e0aec3697"
 
 # default netdata.conf for netdata configuration
 SRC_URI += "file://netdata.conf"
@@ -14,7 +14,9 @@ SRC_URI += "file://netdata.conf"
 # file for providing systemd service support
 SRC_URI += "file://netdata.service"
 
-S = "${WORKDIR}/git"
+UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
+
+S = "${WORKDIR}/netdata-v${PV}"
 
 DEPENDS += "zlib util-linux libuv"
 
