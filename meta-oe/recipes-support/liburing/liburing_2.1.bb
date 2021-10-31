@@ -9,7 +9,9 @@ SECTION = "libs"
 LICENSE = "LGPLv2.1 | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
 
-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
+           file://0001-test-Use-syscall-wrappers-instead-of-using-syscall-2.patch \
+           "
 SRC_URI:append:libc-musl:riscv64 = " file://0001-do-not-build-examples.patch "
 SRC_URI:append:libc-musl:riscv32 = " file://0001-do-not-build-examples.patch "
 SRCREV = "41a61c97c2e3df4475c93fdf5026d575ce3f1377"
