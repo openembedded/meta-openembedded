@@ -33,3 +33,5 @@ do_configure:prepend () {
 }
 
 TOOLCHAIN = "gcc"
+
+BBCLASSEXTEND = "native nativesdk"
