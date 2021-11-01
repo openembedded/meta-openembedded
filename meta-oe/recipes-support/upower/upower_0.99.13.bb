@@ -4,13 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
 
 DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib"
 
-SRC_URI = " \
-    http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz \
-"
-SRC_URI[md5sum] = "abe6acb617f11f2e8dbd9846fcf86e24"
-SRC_URI[sha256sum] = "64b5ffbfccd5bdb15d925777979a4dbee1a957f9eaeb158dc76175267eddbdef"
+SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https"
+SRCREV = "0f6cc0a10be22d7ddd684e1cd851e4364a440494"
+S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig gettext gobject-introspection systemd
+inherit autotools pkgconfig gtk-doc gettext gobject-introspection systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[idevice] = "--with-idevice,--without-idevice,libimobiledevice libplist"
@@ -24,6 +22,9 @@ SYSTEMD_SERVICE:${PN} = "upower.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
 do_configure:prepend() {
+    touch ${S}/ABOUT-NLS
+    mkdir -p ${S}/build-aux
+    touch ${S}/build-aux/config.rpath
     sed -i -e s:-nonet:\:g ${S}/doc/man/Makefile.am
     sed -i -e 's: doc : :g' ${S}/Makefile.am
 }
