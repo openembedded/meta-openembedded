@@ -21,3 +21,5 @@ GTKDOC_MESON_OPTION = "gtk_doc"
 EXTRA_OEMESON = "-Dinstalled_tests=false"
 
 FILES:${PN} += "${libdir}/graphene-1.0"
+
+BBCLASSEXTEND = "native nativesdk"
