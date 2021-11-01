@@ -9,7 +9,7 @@ DEPENDS = "libhandy"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gtk-icon-cache gobject-introspection features_check upstream-version-is-even
+inherit gnomebase gtk-icon-cache gobject-introspection features_check
 
 # same as gnome-shell
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
@@ -18,8 +18,7 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 
-SRC_URI[archive.md5sum] = "a625d8b167c5549c68e1c6ac7a87d369"
-SRC_URI[archive.sha256sum] = "003326fab46e6faad9485924bca503f0c583e3b4553d6f673406eda396205250"
+SRC_URI[archive.sha256sum] = "f95f3fe031b0b01c02f79a1659f889152d3772ae3e44df8403d1460ba5eec36a"
 SRC_URI += "file://0001-Make-python-path-configurable.patch"
 
 EXTRA_OEMESON = "-Dpython_site_dir=${PYTHON_SITEPACKAGES_DIR}"
