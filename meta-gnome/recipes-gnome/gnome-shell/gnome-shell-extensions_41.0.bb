@@ -4,12 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4cb3a392cbf81a9e685ec13b88c4c101"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gettext gsettings features_check upstream-version-is-even
+inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.md5sum] = "d3a69cde0c3e3dc0b0c243af026c4b7a"
-SRC_URI[archive.sha256sum] = "a1e16e75a06ea511435a6f7478de92aff21d02d4e1d59ec8ce7fb6396819b4b8"
+SRC_URI[archive.sha256sum] = "d84faac1448b38f975d9c19490c5928afc5c5a2c49dd7e7f81af690f9466fc68"
 
 DEPENDS += " \
     sassc-native \
