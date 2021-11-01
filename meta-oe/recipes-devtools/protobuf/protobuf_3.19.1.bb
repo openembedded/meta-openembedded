@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=37b5762e07f0af8c74ce80a8bda4266b"
 DEPENDS = "zlib"
 DEPENDS:append:class-target = " protobuf-native"
 
-SRCREV = "17b30e96476be70b8773b2b807bab857fd3ceb39"
+SRCREV = "7c40b2df1fdf6f414c1c18c789715a9c948a0725"
 
 SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=3.19.x \
            file://run-ptest \
