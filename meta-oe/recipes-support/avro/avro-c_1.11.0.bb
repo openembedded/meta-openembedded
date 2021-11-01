@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=6d502b41f76179fc84e536236f359cae"
 
 DEPENDS = "jansson zlib xz"
 
-BRANCH = "branch-1.10"
-SRCREV = "8111cdc35430ff68dcb644306362859de40999d9"
+BRANCH = "branch-1.11"
+SRCREV = "4e1fefca493029ace961b7ef8889a3722458565a"
 SRC_URI = "git://github.com/apache/avro;branch=${BRANCH} \
           "
 
