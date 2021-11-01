@@ -61,11 +61,11 @@ inherit multilib_script multilib_header
 MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js91-config"
 
 do_install:append() {
-       oe_multilib_header mozjs-91/js-config.h
-       sed -e 's@${STAGING_DIR_HOST}@@g' \
-           -i ${D}${bindir}/js91-config
+    oe_multilib_header mozjs-91/js-config.h
+    sed -e 's@${STAGING_DIR_HOST}@@g' \
+        -i ${D}${bindir}/js91-config
+    rm -f ${D}${libdir}/libjs_static.ajs
 }
 
-PACKAGES =+ "lib${BPN}-staticdev lib${BPN}"
-FILES:lib${BPN}-staticdev += "${libdir}/libjs_static.ajs"
+PACKAGES =+ "lib${BPN}"
 FILES:lib${BPN} += "${libdir}/lib*"
