@@ -11,7 +11,7 @@ SRC_URI = " \
     ${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
     file://0001-Install-polkit-action-unconditionally-executable-pke.patch \
 "
-SRC_URI[sha256sum] = "8dc180245dd9ea45e6e2f4bc69512f187e08be7f799c98a825a0b04c161cbd2a"
+SRC_URI[sha256sum] = "5eee2e6d74b15ef96b13b3a2310c868ed2298e03341021e7d12a5a98a1d1e109"
 
 DEPENDS += " \
     glib-2.0-native \
