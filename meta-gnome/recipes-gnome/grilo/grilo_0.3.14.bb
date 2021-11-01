@@ -11,7 +11,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gobject-introspection gtk-doc gettext vala
 
-SRC_URI[archive.sha256sum] = "d14837f22341943ed8a189d9f0827a17016b802d18d0ed080e1413de0fdc927b"
+SRC_URI[archive.sha256sum] = "0369d0b00bb0f59ba5f7aea8cfc665f38df14a5b4182d28c7c1e2cd15b518743"
 
 GIR_MESON_OPTION = "enable-introspection"
 GTKDOC_MESON_OPTION = "enable-gtk-doc"
