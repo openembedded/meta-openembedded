@@ -12,15 +12,20 @@ DEPENDS = " \
 
 REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit"
 
-inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
+GNOMEBASEBUILDCLASS = "meson"
 
-SRC_URI[archive.sha256sum] = "3bfbb620cbc0d1cbd70b4c4376cf4b705db4dc36a37124e5be386ccc25fa7e81"
-SRC_URI += "file://0001-Ensure-pam-file-installation.patch"
+inherit gnomebase gsettings gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-EXTRA_OECONF = " \
-    --without-plymouth \
-    --with-default-pam-config=openembedded \
-    --with-pam-mod-dir=${base_libdir}/security \
+SRC_URI[archive.sha256sum] = "5738c4293a9f5a80d4a6e9e06f4d0df3e9f313ca7b61bfb4d8afaba983e200dc"
+
+# gobject-introspection is mandatory and cannot be configured
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
+
+EXTRA_OEMESON = " \
+    -Dplymouth=disabled \
+    -Ddefault-pam-config=openembedded \
+    -Dpam-mod-dir=${base_libdir}/security \
 "
 
 do_install:append() {
@@ -48,7 +53,7 @@ FILES:${PN} += " \
     ${datadir}/dconf \
     ${base_libdir}/security/pam_gdm.so \
     ${localstatedir} \
-    ${systemd_unitdir} \
+    ${systemd_unitdir} ${systemd_user_unitdir} \
 "
 
 RDEPENDS:${PN} += "${PN}-base"
