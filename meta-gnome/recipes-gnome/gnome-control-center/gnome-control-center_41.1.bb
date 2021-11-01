@@ -18,7 +18,7 @@ DEPENDS = " \
     samba \
     gsettings-desktop-schemas \
     gnome-settings-daemon \
-    gnome-desktop3 \
+    gnome-desktop \
     gnome-online-accounts \
     libnma \
     gnome-bluetooth \
@@ -30,8 +30,7 @@ DEPENDS = " \
 
 REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
 
-SRC_URI[archive.md5sum] = "16c228d7de4e9d2d57550791fbca3390"
-SRC_URI[archive.sha256sum] = "ac02346bcf3391aa5c86ed857d76689fdb6e43c2b4b20d3ec6eab0ea9fecf754"
+SRC_URI[archive.sha256sum] = "ea0c71484c65ce2cc11376f9b01e6211fa4a7ffd334f4307fc52c93f0fddd4c7"
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
