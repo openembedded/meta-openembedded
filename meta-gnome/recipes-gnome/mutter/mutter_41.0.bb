@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = " \
     xserver-xorg-cvt-native \
+    wayland-native \
     virtual/libx11 \
+    graphene \
     gtk+3 \
     gdk-pixbuf \
     cairo \
@@ -16,18 +18,17 @@ DEPENDS = " \
     libxtst \
     libxkbfile \
     xinerama \
+    xwayland \
 "
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-even features_check
+inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.md5sum] = "20913c458406e6efa3df005a3ce48c8e"
-SRC_URI[archive.sha256sum] = "23bde87d33b8981358831cec8915bb5ff1eaf9c1de74c90cd1660b1b95883526"
-SRC_URI += "file://0001-EGL-Include-EGL-eglmesaext.h.patch"
+SRC_URI[archive.sha256sum] = "fa80a1a744044d88ebfd677ff03203d67705ed2cd624ea06cbb8b58948cdf89e"
 
 # x11 is still manadatory - see meson.build
-REQUIRED_DISTRO_FEATURES = "x11 polkit"
+REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
 
 # systemd can be replaced by libelogind (not available atow - make systemd
 # mandatory distro feature)
@@ -40,10 +41,11 @@ PACKAGECONFIG ??= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl glx', '', d)} \
     sm \
     startup-notification \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl wayland', 'wayland', '', d)} \
 "
 
 EXTRA_OEMESON += " \
+    -Dtests=false \
+    -Dnative_tests=false \
     -Dxwayland_path=${bindir}/Xwayland \
 "
 
@@ -53,15 +55,12 @@ PACKAGECONFIG[opengl] = "-Dopengl=true, -Dopengl=true, virtual/libgl"
 PACKAGECONFIG[glx] = "-Dglx=true, -Dglx=false"
 PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
 # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
-PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire-0.2"
+PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
 PACKAGECONFIG[sm] = "-Dsm=true, -Dsm=false, libsm"
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
-PACKAGECONFIG[wayland] = "-Dwayland=true,-Dwayland=false,wayland wayland-native, xwayland"
-PACKAGECONFIG[wayland-eglstream] = "-Dwayland_eglstream=true,-Dwayland_eglstream=false"
 
-# yes they changed from mutter-4 -> mutter-5 recently so be perpared
-MUTTER_API_NAME = "mutter-5"
+MUTTER_API_NAME = "mutter-9"
 
 do_install:append() {
     # Add gir links in standard paths. That makes dependents life much easier
