@@ -24,8 +24,7 @@ DEPENDS = " \
 # all these are mandatory
 REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
 
-SRC_URI[archive.md5sum] = "102dc488a6a726e4050cf5ab7e967e8d"
-SRC_URI[archive.sha256sum] = "3e33dbd319b562a5ab602dcab6de3ca81b85f8346672e90ec632b36bbf15ee4b"
+SRC_URI[archive.sha256sum] = "e6ca6361fbd1deab2de1a1e390d4f14167cf47b1c547dbb8b65a5d89e9663884"
 
 UNKNOWN_CONFIGURE_WHITELIST = "introspection"
 
@@ -44,5 +43,5 @@ PACKAGECONFIG[wayland] = "-Dwayland=true,-Dwayland=false,wayland"
 
 FILES:${PN} += " \
     ${systemd_user_unitdir} \
-    ${libdir}/gnome-settings-daemon-3.0/libgsd.so \
+    ${libdir}/gnome-settings-daemon-41/libgsd.so \
 "
