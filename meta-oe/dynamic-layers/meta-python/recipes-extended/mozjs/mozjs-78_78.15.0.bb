@@ -106,7 +106,7 @@ do_configure() {
     # inspired by what fedora [1] does: for big endian rebuild icu dat
     # this avoids gjs qemu crash on mips at gir creation
     # [1] https://src.fedoraproject.org/rpms/mozjs78/blob/rawhide/f/mozjs78.spec
-    if [ ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} = "big" ]; then
+    if [ ${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} = "big" -a ! -e ${S}/config/external/icu/data/icudt67b.dat ]; then
         echo "Do big endian icu dat-convert..."
         icupkg -tb ${S}/config/external/icu/data/icudt67l.dat ${S}/config/external/icu/data/icudt67b.dat
         rm -f ${S}/config/external/icu/data/icudt*l.dat
