@@ -20,7 +20,7 @@ RDEPENDS:${PN}-dev:class_native += "${PN}-compiler"
 # RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "fc662b7964384b701af5bd3ce6994d2180080eb4"
+SRCREV_grpc = "635693ce624f3b3a89e5a764f0664958ef08b2b9"
 BRANCH = "v1.41.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            file://0001-cmake-revert-db88fb0ee826e73323e06ac6166ac038ee71f6a.patch \
