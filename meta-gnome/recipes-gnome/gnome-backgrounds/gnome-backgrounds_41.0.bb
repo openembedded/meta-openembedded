@@ -6,9 +6,9 @@ SECTION = "x11/gnome"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase allarch gettext upstream-version-is-even allarch
+inherit gnomebase gettext allarch
 
-SRC_URI[archive.sha256sum] = "f7712a873a80c9a9fcf3952611effeb2d9aed23a3e8abfcda8afb15c427d1ee3"
+SRC_URI[archive.sha256sum] = "1da1ac0d261bedf0fcd2c85b480bc65505e23cf51f1143126c0d37717e693145"
 
 FILES:${PN} += " \
     ${datadir}/backgrounds \
