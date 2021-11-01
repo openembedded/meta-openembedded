@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GFDL;md5=a22d0be1ce2284b67950a4d1673dd1b0 \
 "
 
+GNOMEBASEBUILDCLASS = "meson"
+
 inherit gnomebase gsettings gnome-help gettext itstool upstream-version-is-even
 
 DEPENDS = " \
@@ -20,12 +22,12 @@ DEPENDS = " \
     libpcre2 \
 "
 
-SRC_URI[archive.sha256sum] = "4c79af8ffe8bd3a5daca1911ea2c0acd6872860a1dd5d7eea219f4ab4ae556ac"
+SRC_URI[archive.sha256sum] = "b50e9e5664230e6ca290bcf38812a5b65e0baac66a486ee210894cf675f72e0b"
 SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
 
-EXTRA_OECONF += " \
-    --disable-search-provider \
-    --without-nautilus-extension \
+EXTRA_OEMESON += " \
+    -Dsearch_provider=false \
+    -Dnautilus_extension=false \
 "
 
 FILES:${PN} += " \
