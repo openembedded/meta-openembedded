@@ -10,7 +10,7 @@ DEPENDS = " \
     libpam \
 "
 
-REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit"
+REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit gobject-introspection-data"
 
 GNOMEBASEBUILDCLASS = "meson"
 
@@ -18,8 +18,6 @@ inherit gnomebase gsettings gobject-introspection gettext systemd useradd itstoo
 
 SRC_URI[archive.sha256sum] = "5738c4293a9f5a80d4a6e9e06f4d0df3e9f313ca7b61bfb4d8afaba983e200dc"
 
-# gobject-introspection is mandatory and cannot be configured
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 
 EXTRA_OEMESON = " \
