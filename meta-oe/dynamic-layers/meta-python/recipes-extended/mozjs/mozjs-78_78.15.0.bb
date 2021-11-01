@@ -41,13 +41,14 @@ EXTRA_OECONF = " \
     --host=${BUILD_SYS} \
     --prefix=${prefix} \
     --libdir=${libdir} \
+    --x-includes=${STAGING_INCDIR} \
+    --x-libraries=${STAGING_LIBDIR} \
     --without-system-icu \
     --disable-tests --disable-strip --disable-optimize \
     --disable-jemalloc \
     ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "--enable-gold", '--disable-gold', d)} \
     ${JIT} \
 "
-
 # Note: Python with mozilla build is a mess: E.g: python-six: to get an error
 # free configure we need:
 # * python3-six-native in DEPENDS
