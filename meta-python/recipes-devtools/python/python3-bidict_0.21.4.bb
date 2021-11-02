@@ -4,7 +4,7 @@ HOMEPAGE = "https://bidict.readthedocs.io/"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
 
-SRC_URI[sha256sum] = "4fa46f7ff96dc244abfc437383d987404ae861df797e2fd5b190e233c302be09"
+SRC_URI[sha256sum] = "42c84ffbe6f8de898af6073b4be9ea7ccedcd78d3474aa844c54e49d5a079f6f"
 
 inherit pypi setuptools3
 
