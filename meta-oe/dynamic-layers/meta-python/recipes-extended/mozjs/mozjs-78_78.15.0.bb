@@ -91,6 +91,9 @@ export HOST_CXXFLAGS = "${BUILD_CXXFLAGS}"
 # otherwise we are asked for yasm...
 export AS = "${CC}"
 
+CPPFLAGS:append:mips:toolchain-clang = " -fpie"
+CPPFLAGS:append:mipsel:toolchain-clang = " -fpie"
+
 do_configure() {
     prepare_python_and_rust
 
@@ -102,7 +105,7 @@ do_configure() {
     # * with mozjs-78 we get without:
     # | Path specified in LOCAL_INCLUDES (..) resolves to the topsrcdir or topobjdir (<tmpdir>/oe-core-glibc/work/cortexa72-mortsgna-linux/mozjs-78/78.15.0-r0/firefox-78.15.0/js/src), which is not allowed
     mkdir -p "${B}/lcl_tmp"
-    TMPDIR="${B}/lcl_tmp"  ${S}/js/src/configure ${EXTRA_OECONF}
+    TMPDIR="${B}/lcl_tmp"  CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" ${S}/js/src/configure ${EXTRA_OECONF}
 
     # inspired by what fedora [1] does: for big endian rebuild icu dat
     # this avoids gjs qemu crash on mips at gir creation
