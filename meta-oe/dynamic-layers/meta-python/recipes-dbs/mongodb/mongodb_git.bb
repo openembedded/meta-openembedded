@@ -113,11 +113,19 @@ scons_do_install() {
     install -m 755 -d ${D}${localstatedir}/lib/${BPN}
     chown ${PN}:${PN} ${D}${localstatedir}/lib/${BPN}
 
-    # Log files
-    install -m 755 -d ${D}${localstatedir}/log/${BPN}
-    chown ${PN}:${PN} ${D}${localstatedir}/log/${BPN}
+    # Create /var/log/mongodb in runtime.
+    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
+        install -d ${D}${nonarch_libdir}/tmpfiles.d
+        echo "d ${localstatedir}/log/${BPN} 0755 ${BPN} ${BPN} -" > ${D}${nonarch_libdir}/tmpfiles.d/${BPN}.conf
+    fi
+    if [ "${@bb.utils.filter('DISTRO_FEATURES', 'sysvinit', d)}" ]; then
+        install -d ${D}${sysconfdir}/default/volatiles
+        echo "d ${BPN} ${BPN} 0755 ${localstatedir}/log/${BPN} none" > ${D}${sysconfdir}/default/volatiles/99_${BPN}
+    fi
 }
 
 CONFFILES:${PN} = "${sysconfdir}/mongod.conf"
 
 SYSTEMD_SERVICE:${PN} = "mongod.service"
+
+FILES:${PN} += "${nonarch_libdir}/tmpfiles.d"
