@@ -9,7 +9,7 @@ DEPENDS = "jansson zlib xz"
 
 BRANCH = "branch-1.11"
 SRCREV = "4e1fefca493029ace961b7ef8889a3722458565a"
-SRC_URI = "git://github.com/apache/avro;branch=${BRANCH} \
+SRC_URI = "git://github.com/apache/avro;branch=${BRANCH};protocol=https \
           "
 
 S = "${WORKDIR}/git/lang/c"
