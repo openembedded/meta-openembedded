@@ -45,7 +45,8 @@ do_install:append() {
     install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
     install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
 
-    rm -rf "${D}${localstatedir}/run"
+    rmdir ${D}${localstatedir}/log/cluster ${D}${localstatedir}/log
+    rmdir --ignore-fail-on-non-empty ${D}${localstatedir}
 
     install -d ${D}${sysconfdir}/default/volatiles
     echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
