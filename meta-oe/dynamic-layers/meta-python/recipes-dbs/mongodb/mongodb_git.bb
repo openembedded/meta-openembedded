@@ -43,7 +43,6 @@ SRC_URI:append:toolchain-clang = "\
            file://0001-asio-Dont-use-experimental-with-clang.patch \
            "
 
-
 S = "${WORKDIR}/git"
 
 COMPATIBLE_HOST ?= '(x86_64|i.86|powerpc64|arm|aarch64).*-linux'
@@ -83,44 +82,40 @@ EXTRA_OESCONS = "PREFIX=${prefix} \
                  --separate-debug \
                  ${PACKAGECONFIG_CONFARGS}"
 
-
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir /var/run/${BPN} --shell /bin/false --user-group ${BPN}"
 
-
 scons_do_compile() {
-        ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} install-core || \
+    ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} install-core ||
         die "scons build execution failed."
 }
 
 scons_do_install() {
-        # install binaries
-        install -d ${D}${bindir}
-        for i in mongod mongos mongo
-        do
-            if [ -f ${B}/build/opt/mongo/${i} ]
-            then
-                install -m 0755 ${B}/build/opt/mongo/${i} ${D}${bindir}/${i}
-            else
-                bbnote "${i} does not exist"
-            fi
-        done
+    # install binaries
+    install -d ${D}${bindir}
+    for i in mongod mongos mongo; do
+        if [ -f ${B}/build/opt/mongo/$i ]; then
+            install -m 0755 ${B}/build/opt/mongo/$i ${D}${bindir}
+        else
+            bbnote "$i does not exist"
+        fi
+    done
 
-        # install config
-        install -d ${D}${sysconfdir}
-        install -m 0644 ${S}/debian/mongod.conf ${D}${sysconfdir}/
+    # install config
+    install -d ${D}${sysconfdir}
+    install -m 0644 ${S}/debian/mongod.conf ${D}${sysconfdir}
 
-        # install systemd service
-        install -d ${D}${systemd_system_unitdir}
-        install -m 0644 ${S}/debian/mongod.service ${D}${systemd_system_unitdir}
+    # install systemd service
+    install -d ${D}${systemd_system_unitdir}
+    install -m 0644 ${S}/debian/mongod.service ${D}${systemd_system_unitdir}
 
-        # install mongo data folder
-        install -m 755 -d ${D}${localstatedir}/lib/${BPN}
-        chown ${PN}:${PN} ${D}${localstatedir}/lib/${BPN}
+    # install mongo data folder
+    install -m 755 -d ${D}${localstatedir}/lib/${BPN}
+    chown ${PN}:${PN} ${D}${localstatedir}/lib/${BPN}
 
-        # Log files
-        install -m 755 -d ${D}${localstatedir}/log/${BPN}
-        chown ${PN}:${PN} ${D}${localstatedir}/log/${BPN}
+    # Log files
+    install -m 755 -d ${D}${localstatedir}/log/${BPN}
+    chown ${PN}:${PN} ${D}${localstatedir}/log/${BPN}
 }
 
 CONFFILES:${PN} = "${sysconfdir}/mongod.conf"
