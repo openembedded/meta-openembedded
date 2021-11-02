@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 SRCREV = "51c872d856db80281ea810ebc02e05c09d5310fa"
 PV = "0.103"
 
-SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main \
+SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
            file://0001-parse-nm-fix-32bit-format-string.patch \
            file://0001-Makefile-do-not-use-Werror.patch \
            "

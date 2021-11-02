@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4cc91856b08b094b4f406a29dc61db21"
 
 SRCREV = "a8658290b7914f67146a982671b09f2270ba1654"
 
-SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main"
+SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https"
 
 S = "${WORKDIR}/git"
 

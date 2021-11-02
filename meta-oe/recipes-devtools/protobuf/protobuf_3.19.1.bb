@@ -12,7 +12,7 @@ DEPENDS:append:class-target = " protobuf-native"
 
 SRCREV = "7c40b2df1fdf6f414c1c18c789715a9c948a0725"
 
-SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=3.19.x \
+SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=3.19.x;protocol=https \
            file://run-ptest \
            file://0001-protobuf-fix-configure-error.patch \
            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
 
 DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib"
 
-SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https"
+SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https;branch=master"
 SRCREV = "0f6cc0a10be22d7ddd684e1cd851e4364a440494"
 S = "${WORKDIR}/git"
 
