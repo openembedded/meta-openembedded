@@ -217,6 +217,7 @@ RDEPENDS:packagegroup-meta-networking-support = "\
     yp-tools \
     mtr \
     ntp ntpdate sntp ntpdc ntpq ntp-tickadj ntp-utils \
+    ntpsec \
     nbd-client \
     nbd-server \
     nbd-trdump \
