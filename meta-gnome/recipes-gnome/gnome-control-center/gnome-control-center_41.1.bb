@@ -26,6 +26,7 @@ DEPENDS = " \
     libgtop \
     gsound \
     libpwquality \
+    libhandy \
 "
 
 REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
