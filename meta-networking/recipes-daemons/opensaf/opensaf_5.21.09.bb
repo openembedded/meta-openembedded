@@ -60,10 +60,14 @@ do_install:append() {
     rmdir "${D}${localstatedir}/log"
     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
     rmdir --ignore-fail-on-non-empty "${D}${datadir}/java"
-    if [ ! -d "${D}${sysconfdir}/init.d" ]; then
-        install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${B}/osaf/services/infrastructure/nid/scripts/opensafd ${D}${sysconfdir}/init.d/
-    fi
+
+    # Rename /etc/init.d/opensafd to /usr/lib/opensaf/opensafd-init as it is
+    # needed by opensafd.service, but /etc/init.d is removed by systemd.bbclass
+    # if sysvinit is not in DISTRO_FEATURES.
+    mv ${D}${sysconfdir}/init.d/opensafd ${D}${libdir}/${BPN}/opensafd-init
+    ln -srf ${D}${libdir}/${BPN}/opensafd-init ${D}${sysconfdir}/init.d/opensafd
+    [ ! -f ${D}${systemd_system_unitdir}/opensafd.service ] ||
+        sed -ri -e "s|/etc/init.d/opensafd|${libdir}/${BPN}/opensafd-init|" ${D}${systemd_system_unitdir}/opensafd.service
 
     # Create /var/log/opensaf/saflog in runtime.
     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}" ]; then
