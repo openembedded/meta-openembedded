@@ -172,8 +172,6 @@ RDEPENDS:packagegroup-meta-networking-protocols = "\
     xl2tpd \
 "
 
-RDEPENDS:packagegroup-meta-networking-protocols:remove:libc-musl = "mdns"
-
 RDEPENDS:packagegroup-meta-networking-support = "\
     aoetools \
     arptables \
