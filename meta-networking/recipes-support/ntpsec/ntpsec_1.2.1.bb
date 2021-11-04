@@ -26,6 +26,9 @@ PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'seccomp systemd', d)} \
                  mssntp \
                  nts \
                  refclocks"
+
+PACKAGECONFIG:remove:riscv32:libc-musl = "seccomp"
+
 PACKAGECONFIG[cap] = ",,libcap"
 PACKAGECONFIG[leap-smear] = "--enable-leap-smear"
 PACKAGECONFIG[mdns] = ",,mdns"
