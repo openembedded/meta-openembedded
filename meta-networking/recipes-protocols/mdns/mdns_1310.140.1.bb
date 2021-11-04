@@ -4,7 +4,7 @@ HOMEPAGE = "http://developer.apple.com/networking/bonjour/"
 LICENSE = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
 
-COMPATIBLE_HOST:libc-musl = 'null'
+DEPENDS:append:libc-musl = " musl-nscd"
 
 RPROVIDES:${PN} += "libdns_sd.so"
 
@@ -21,9 +21,9 @@ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${P
            file://0009-Fix-possible-NULL-dereference.patch;patchdir=.. \
            file://0010-Handle-errors-from-socket-calls.patch;patchdir=.. \
            file://0011-Change-a-dynamic-allocation-to-file-scope-variable.patch;patchdir=.. \
+           file://0001-dns-sd-Include-missing-headers.patch;patchdir=.. \
            "
-SRC_URI[md5sum] = "dfcfd4d7f29a56ec99e7df1d21db5e7b"
-SRC_URI[sha256sum] = "bea29e1616cd56ccb8f88c0fad2bcdc4031f4deb2d899c793e2f27a8384f0b34"
+SRC_URI[sha256sum] = "040f6495c18b9f0557bcf9e00cbcfc82b03405f5ba6963dc147730ca0ca90d6f"
 
 CVE_PRODUCT = "apple:mdnsresponder"
 
