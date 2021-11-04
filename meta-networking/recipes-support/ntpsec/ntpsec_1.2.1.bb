@@ -30,6 +30,7 @@ PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'seccomp systemd', d)} \
 PACKAGECONFIG:remove:riscv32:libc-musl = "seccomp"
 
 PACKAGECONFIG[cap] = ",,libcap"
+PACKAGECONFIG[docs] = "--enable-doc --enable-manpage,--disable-doc --disable-manpage,"
 PACKAGECONFIG[leap-smear] = "--enable-leap-smear"
 PACKAGECONFIG[mdns] = ",,mdns"
 PACKAGECONFIG[mssntp] = "--enable-mssntp"
