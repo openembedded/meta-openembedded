@@ -13,6 +13,7 @@ VBOX_NAME = "VirtualBox-${PV}"
 
 SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
     file://Makefile.utils \
+    file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
 "
 
 SRC_URI[md5sum] = "c6efae8dc115b90c6124e13126794c4f"
