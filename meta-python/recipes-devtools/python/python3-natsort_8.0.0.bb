@@ -1,10 +1,10 @@
 SUMMARY = "Simple yet flexible natural sorting in Python."
 SECTION = "devel/python"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=6a96e5ad780a0eea866ecccec4463517"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=58db8ac9e152dd9b700f4d39ff40a31a"
 
 PYPI_PACKAGE = "natsort"
-SRC_URI[sha256sum] = "00c603a42365830c4722a2eb7663a25919551217ec09a243d3399fa8dd4ac403"
+SRC_URI[sha256sum] = "a0a4fd71aee20a6d648da61e01180a63f7268e69983d0440bd3ad80ef1ba6981"
 
 inherit pypi setuptools3
 
