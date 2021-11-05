@@ -15,6 +15,7 @@ SRCBRANCH = "v243-stable"
 SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
            file://static-libsystemd-pkgconfig.patch \
            file://7c5fd25119a495009ea62f79e5daec34cc464628.patch \
+           file://0001-basic-linux-Sync-if_arp.h-with-Linux-5.14.patch \
            "
 
 # patches needed by musl
