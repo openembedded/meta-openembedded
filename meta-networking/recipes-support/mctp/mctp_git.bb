@@ -5,9 +5,13 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4cc91856b08b094b4f406a29dc61db21"
 
-SRCREV = "a8658290b7914f67146a982671b09f2270ba1654"
+PV = "0.1+git${SRCPV}"
 
-SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https"
+SRCREV = "072bafe725c50329f99cf9d3b2624e8799e8163a"
+
+SRC_URI = "git://github.com/CodeConstruct/mctp;branch=main;protocol=https \
+           file://0001-build-Adjust-for-kernel-mctp.h.patch \
+          "
 
 S = "${WORKDIR}/git"
 
