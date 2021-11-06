@@ -24,7 +24,7 @@ LIC_FILES_CHKSUM = "file://README.QUICK;md5=e3d68fff6b0c661d949d8df559fdc78f"
 DEPENDS = "libatomic-ops"
 
 SRCREV = "3e1477b72ef4329a196d67b74da4cbe274d04eff"
-SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_0"
+SRC_URI = "git://github.com/ivmai/bdwgc.git;branch=release-8_0;protocol=https"
 
 S = "${WORKDIR}/git"
 
