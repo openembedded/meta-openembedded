@@ -217,7 +217,7 @@ RDEPENDS:packagegroup-meta-networking-support = "\
     yp-tools \
     mtr \
     ntp ntpdate sntp ntpdc ntpq ntp-tickadj ntp-utils \
-    ntpsec \
+    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "ntpsec", "", d)} \
     nbd-client \
     nbd-server \
     nbd-trdump \
