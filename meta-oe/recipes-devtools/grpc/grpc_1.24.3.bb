@@ -15,7 +15,7 @@ SRCREV_grpc = "2de2e8dd8921e1f7d043e01faf7fe8a291fbb072"
 SRCREV_upb = "9effcbcb27f0a665f9f345030188c0b291e32482"
 BRANCH = "v1.24.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
-           git://github.com/protocolbuffers/upb;name=upb;destsuffix=git/third_party/upb \
+           git://github.com/protocolbuffers/upb;name=upb;destsuffix=git/third_party/upb;branch=master;protocol=https \
            file://0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch \
            "
 SRCREV_FORMAT = "grpc_upb"

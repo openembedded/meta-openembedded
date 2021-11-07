@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fb997454c8d62aa6a47f07a8cd48b006"
 PV = "1.16.0+gitr${SRCPV}"
 
 SRC_URI = "\
-    git://github.com/c-ares/c-ares.git \
+    git://github.com/c-ares/c-ares.git;branch=master;protocol=https \
     file://cmake-install-libcares.pc.patch \
     file://0001-fix-configure-error-mv-libcares.pc.cmakein-to-libcar.patch \
     file://ares_expand_name-should-escape-more-characters.patch \
