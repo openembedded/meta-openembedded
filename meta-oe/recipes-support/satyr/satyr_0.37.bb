@@ -7,7 +7,7 @@ LICENSE = "GPLv2"
 
 inherit autotools-brokensep python3native pkgconfig
 
-SRC_URI = "git://github.com/abrt/satyr.git \
+SRC_URI = "git://github.com/abrt/satyr.git;branch=master;protocol=https \
            file://0002-fix-compile-failure-against-musl-C-library.patch \
 "
 SRCREV = "4a7d0a31cdeee23bb13739f57926188a795bdf25"

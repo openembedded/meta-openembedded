@@ -12,7 +12,7 @@ DEPENDS = "zlib elfutils"
 
 do_compile[depends] += "virtual/kernel:do_shared_workdir"
 
-SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https"
+SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
 SRCREV = "051a4009f94d5633a8f734ca4235f0a78ee90469"
 
 # Backported from version 0.4

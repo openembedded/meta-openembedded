@@ -16,7 +16,7 @@ PROVIDES += "${PN}-dev"
 
 PV .= "+git${SRCPV}"
 SRCREV = "64f50dbd5cecdaba785217e2b0aeea3a4f1cdfab"
-SRC_URI = "git://github.com/USCiLab/cereal.git"
+SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 

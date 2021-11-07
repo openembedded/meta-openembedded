@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = "ell"
 
-SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git;branch=master \
           "
 SRCREV = "bde3e0f6e3364e9c884b6b93a944d8138345b8e5"
 S = "${WORKDIR}/git"

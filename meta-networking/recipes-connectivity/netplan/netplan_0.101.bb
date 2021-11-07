@@ -15,7 +15,7 @@ SRCREV = "e445b87b9dff439ec564c245d030b03d61eb0f24"
 PV = "0.101+git${SRCPV}"
 
 SRC_URI = " \
-        git://github.com/CanonicalLtd/netplan.git \
+        git://github.com/CanonicalLtd/netplan.git;branch=master;protocol=https \
         file://0001-dbus-Remove-unused-variabes.patch \
         file://0002-Makefile-Exclude-.h-files-from-target-rule.patch \
 "

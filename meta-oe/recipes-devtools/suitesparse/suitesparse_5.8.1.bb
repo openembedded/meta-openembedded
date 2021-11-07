@@ -1,6 +1,6 @@
 LICENSE = "GPLv2 & GPLv3 & BSD-3-Clause & LGPL-2.0 & Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f9f2b9d61cb769a67c4cd079e1166de7"
-SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https \
+SRC_URI = "git://github.com/DrTimothyAldenDavis/SuiteSparse;protocol=https;branch=master \
            file://0001-Preserve-CXXFLAGS-from-environment-in-Mongoose.patch \
            file://0002-Preserve-links-when-installing-libmetis.patch \
            file://0003-Add-version-information-to-libmetis.patch \

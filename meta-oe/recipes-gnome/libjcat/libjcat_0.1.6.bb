@@ -8,7 +8,7 @@ DEPENDS = "\
 "
 
 SRC_URI = "\
-    git://github.com/hughsie/libjcat.git \
+    git://github.com/hughsie/libjcat.git;branch=master;protocol=https \
     file://run-ptest \
 "
 SRCREV = "c4f032468c56a5750e1e15b01fa31539b5c7ae51"

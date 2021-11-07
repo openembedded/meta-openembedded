@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/bats-core/bats-core"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
-SRC_URI = "git://github.com/bats-core/bats-core.git \
+SRC_URI = "git://github.com/bats-core/bats-core.git;branch=master;protocol=https \
           "
 # v1.3.0
 SRCREV = "9086c47854652f2731861b40385689c85f12103f"
