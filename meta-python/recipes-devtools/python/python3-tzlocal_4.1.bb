@@ -3,6 +3,10 @@ HOMEPAGE = "https://pypi.org/project/tzlocal/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
 
-SRC_URI[sha256sum] = "8560aabba61b5d2a5e1697bb781f682e6eaa3ce386cee85a09a458cc0003f836"
+SRC_URI[sha256sum] = "0f28015ac68a5c067210400a9197fc5d36ba9bc3f8eaf1da3cbd59acdfed9e09"
 
 inherit pypi setuptools3
+
+RDEPENDS:${PN} += "\
+	${PYTHON_PN}-pytz-deprecation-shim \
+"
