@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.msweet.org/mxml/"
 BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
 
 SRC_URI = "git://github.com/michaelrsweet/mxml.git;nobranch=1;protocol=https"
-SRCREV = "38b044ed8ca2a611ed9ed3e26c4b46416335194e"
+SRCREV = "0237559fdbcecae34157b547aa2b99e12de305a2"
 S = "${WORKDIR}/git"
 
 inherit autotools
