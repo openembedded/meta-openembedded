@@ -1,0 +1,36 @@
+Upstream-Status: Submitted [https://github.com/fwupd/fwupd/pull/3970]
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+
+From c3711712d0603f14beef64b0ef0b2fd03c0442e0 Mon Sep 17 00:00:00 2001
+From: Ross Burton <ross.burton@arm.com>
+Date: Tue, 9 Nov 2021 16:26:45 +0000
+Subject: [PATCH] build: check that outb is present in io.h
+
+The flashrom plugin can use inb/outb to do a CMOS reset. The build gates
+this on whether io.h exists (since bc43ad) as with glibc if io.h exists,
+inb/outb are defined. However on musl, io.h always exists but it may not
+define inb/outb.
+
+Thus, fwupd builds with musl on non-x86 platforms will fail to link. Fix
+this by checking for both io.h and that outb() is defined.
+
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index dabfc1ce..4c548cf9 100644
+--- a/meson.build
++++ b/meson.build
+@@ -308,7 +308,7 @@ endif
+ if cc.has_header('sys/socket.h')
+   conf.set('HAVE_SOCKET_H', '1')
+ endif
+-if cc.has_header('sys/io.h')
++if cc.has_header('sys/io.h') and cc.has_function('outb', prefix: '#include <sys/io.h>')
+   conf.set('HAVE_IO_H', '1')
+ endif
+ if cc.has_header('linux/ethtool.h')
+--
+2.25.1
