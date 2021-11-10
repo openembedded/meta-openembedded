@@ -1,15 +1,19 @@
-Subject: [PATCH] From c084c8349d1780980e232cb28b60a109e3d89438 Mon Sep 17
- 00:00:00 2001 From: Koen Kooi <koen@dominion.thruhere.net> Date: Wed, 2 Nov
- 2011 16:54:57 +0100 Subject: [PATCH] Upstream-Status: Pending
+From c3c20db4415e0f6c4a601d6f9da1f3746a96b301 Mon Sep 17 00:00:00 2001
+From: Claude Bing <cbing@cybernetics.com>
+Date: Tue, 9 Nov 2021 13:08:58 -0500
+Subject: [PATCH 08/11] ext/imap/config.m4: fix include paths
 
-update patch to version 7.4.4
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Upstream-Status: Pending
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+update patch to version 8.0.12
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
 ---
  ext/imap/config.m4 | 10 ++--------
  1 file changed, 2 insertions(+), 8 deletions(-)
 
 diff --git a/ext/imap/config.m4 b/ext/imap/config.m4
-index 5086a31..0e938bd 100644
+index 5086a312d0..0e938bd544 100644
 --- a/ext/imap/config.m4
 +++ b/ext/imap/config.m4
 @@ -110,7 +110,7 @@ if test "$PHP_IMAP" != "no"; then
@@ -37,5 +41,5 @@ index 5086a31..0e938bd 100644
        IMAP_LIB_CHK($PHP_LIBDIR)
        IMAP_LIB_CHK(c-client)
 -- 
-2.7.4
+2.25.1
 

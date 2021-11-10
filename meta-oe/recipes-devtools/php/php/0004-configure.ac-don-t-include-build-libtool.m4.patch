@@ -1,7 +1,7 @@
-From f5a34e771532b8433f307b679500c26af328ba35 Mon Sep 17 00:00:00 2001
-From: Changqing Li <changqing.li@windriver.com>
-Date: Fri, 17 Apr 2020 15:01:57 +0800
-Subject: [PATCH] configure.ac: don't include build/libtool.m4
+From 41ef1121682c245b10df7de4b78c45baf9114c04 Mon Sep 17 00:00:00 2001
+From: Claude Bing <cbing@cybernetics.com>
+Date: Tue, 9 Nov 2021 13:03:46 -0500
+Subject: [PATCH 04/11] configure.ac: don't include build/libtool.m4
 
 we delete build/libtool.m4 before do_configure,
 we will use libtool.m4 under ACLOCALDIR
@@ -9,12 +9,15 @@ we will use libtool.m4 under ACLOCALDIR
 Upstream-Status: Inappropriate [oe-specific]
 
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+
+update patch to 8.0.12
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
 ---
  configure.ac | 1 -
  1 file changed, 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 06c6a27..f85144e 100644
+index 90c94323aa..161e7c3f53 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -6,7 +6,6 @@ dnl ----------------------------------------------------------------------------
@@ -26,5 +29,5 @@ index 06c6a27..f85144e 100644
  m4_include([build/php.m4])
  m4_include([build/pkg.m4])
 -- 
-2.7.4
+2.25.1
 
