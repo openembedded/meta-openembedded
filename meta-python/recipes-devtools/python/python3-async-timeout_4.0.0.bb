@@ -6,10 +6,9 @@ is not suitable. Also it's much faster than asyncio.wait_for() because \
 timeout doesn't create a new task."
 HOMEPAGE = "https://github.com/aio-libs/async-timeout"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4fa41f15bb5f23b6d3560c5845eb8d57"
 
-SRC_URI[md5sum] = "305c4fa529f2485c403d0dbe14390175"
-SRC_URI[sha256sum] = "0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b25f4c5f"
+SRC_URI[sha256sum] = "7d87a4e8adba8ededb52e579ce6bc8276985888913620c935094c2276fd83382"
 
 PYPI_PACKAGE = "async-timeout"
 inherit pypi setuptools3
