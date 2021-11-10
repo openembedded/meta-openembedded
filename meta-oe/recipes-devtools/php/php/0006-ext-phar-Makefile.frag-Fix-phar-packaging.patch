@@ -1,6 +1,7 @@
-Subject: [PATCH] From 08962a56f69963e01892d98ca5b75de8354bd3f5 Mon Sep 17
- 00:00:00 2001 From: Koen Kooi <koen@dominion.thruhere.net> Date: Wed, 2 Nov
- 2011 16:54:57 +0100 Subject: [PATCH] Fix phar packaging
+From eab5babdadea487bbbef025068c553f5ba741774 Mon Sep 17 00:00:00 2001
+From: Claude Bing <cbing@cybernetics.com>
+Date: Tue, 9 Nov 2021 13:07:25 -0500
+Subject: [PATCH 06/11] ext/phar/Makefile.frag: Fix phar packaging
 
 Inherited from OE-Classic, with some additions to fix host paths leaking
 into the target package.
@@ -9,12 +10,16 @@ Upstream-Status: Inappropriate [config]
 
 update patch to version 7.4.4
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+update patch to version 8.0.12
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
 ---
  ext/phar/Makefile.frag | 17 +++--------------
  1 file changed, 3 insertions(+), 14 deletions(-)
 
 diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
-index 6442f33..6145412 100644
+index 58789cae25..c02af1b186 100644
 --- a/ext/phar/Makefile.frag
 +++ b/ext/phar/Makefile.frag
 @@ -10,20 +10,9 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
@@ -42,5 +47,5 @@ index 6442f33..6145412 100644
  $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
  	-@test -d $(builddir)/phar || mkdir $(builddir)/phar
 -- 
-2.7.4
+2.25.1
 

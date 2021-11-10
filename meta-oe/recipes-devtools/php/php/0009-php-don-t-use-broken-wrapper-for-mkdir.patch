@@ -1,21 +1,21 @@
-From ebc101e0728b9db6c687cff525e5dfc8eb0edbf3 Mon Sep 17 00:00:00 2001
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 3 Nov 2011 14:27:15 +0100
-Subject: [PATCH 2/8] php: don't use broken wrapper for mkdir
+From 8707720c0aea405f0e06d67354f239232cc823cc Mon Sep 17 00:00:00 2001
+From: Claude Bing <cbing@cybernetics.com>
+Date: Tue, 9 Nov 2021 13:10:02 -0500
+Subject: [PATCH 09/11] php: don't use broken wrapper for mkdir
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 
 update patch to version 7.4.4
 Signed-off-by: Changqing Li <changqing.li@windriver.com>
+
+update patch to version 8.0.12
+Signed-off-by: Claude Bing <cbing@cybernetics.com>
 ---
-
-Upstream-Status: Inappropriate
-
  build/Makefile.global | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/build/Makefile.global b/build/Makefile.global
-index ff858c2..ae554b4 100644
+index 6566d052de..eb39421f2a 100644
 --- a/build/Makefile.global
 +++ b/build/Makefile.global
 @@ -1,4 +1,4 @@
@@ -25,5 +25,5 @@ index ff858c2..ae554b4 100644
  INSTALL_DATA = $(INSTALL) -m 644
  
 -- 
-1.9.3
+2.25.1
 

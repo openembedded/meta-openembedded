@@ -12,28 +12,28 @@ DEPENDS:class-native = "zlib-native libxml2-native"
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
 
 SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-           file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
-           file://debian-php-fixheader.patch \
-           file://0001-configure.ac-don-t-include-build-libtool.m4.patch \
-           file://0001-php.m4-don-t-unset-cache-variables.patch \
+           file://0002-build-php.m4-don-t-unset-cache-variables.patch \
+           file://0003-php-remove-host-specific-info-from-header-file.patch \
+           file://0004-configure.ac-don-t-include-build-libtool.m4.patch \
+           file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
+           file://0010-iconv-fix-detection.patch \
           "
 
 SRC_URI:append:class-target = " \
-            file://iconv.patch \
-            file://imap-fix-autofoo.patch \
-            file://php_exec_native.patch \
+            file://0001-ext-opcache-config.m4-enable-opcache.patch \
+            file://0005-pear-fix-Makefile.frag-for-Yocto.patch \
+            file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
+            file://0007-sapi-cli-config.m4-fix-build-directory.patch \
+            file://0008-ext-imap-config.m4-fix-include-paths.patch \
+            file://0011-opcache-jit-use-minilua-in-sysroot.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
             file://php-fpm.service \
-            file://pear-makefile.patch \
-            file://phar-makefile.patch \
-            file://0001-opcache-config.m4-enable-opcache.patch \
-            file://xfail_two_bug_tests.patch \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "36ec6102e757e2c2b7742057a700bbff77c76fa0ccbe9c860398c3d24e32822a"
+SRC_URI[sha256sum] = "b4886db1df322dc8fb128d8b34ae7e94f6fc682ecb29ff4f5a591d4de9feadbf"
 
 
 inherit autotools pkgconfig python3native gettext
@@ -258,6 +258,10 @@ RCONFLICTS:${PN}-modphp = "${MODPHP_OLDPACKAGE}"
 do_install:append:class-native() {
     create_wrapper ${D}${bindir}/php \
         PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
+
+    if [ "$MACHINE_ARCH" == "x86" || "$MACHINE_ARCH" == "x86-64" ]; then
+        install -m 0755 ${WORKDIR}/build/ext/opcache/minilua ${D}${bindir}/
+    fi
 }
 
 
