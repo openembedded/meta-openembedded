@@ -5,7 +5,7 @@ LICENSE = "MIT"
 
 LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=10;endline=10;md5=23f9ad5cad3d8cc0336e2a5d8a87e1fa"
 
-SRC_URI[sha256sum] = "85d5de102cfe6d14a5172676f09d19c465ce63d6019cf0a4ef13385fc535e828"
+SRC_URI[sha256sum] = "202b9679a809b703720afa2eacaad4c6c2d63196070e5d9edc953c0489dfd536"
 
 DEPENDS += "${PYTHON_PN}-setuptools-scm-native ${PYTHON_PN}-toml-native"
 inherit pypi setuptools3
