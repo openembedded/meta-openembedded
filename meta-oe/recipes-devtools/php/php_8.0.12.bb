@@ -25,7 +25,7 @@ SRC_URI:append:class-target = " \
             file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
             file://0007-sapi-cli-config.m4-fix-build-directory.patch \
             file://0008-ext-imap-config.m4-fix-include-paths.patch \
-            file://0011-opcache-jit-use-minilua-in-sysroot.patch \
+            file://1010-Fix-opcache-jit-minilua-compiling.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
@@ -108,6 +108,7 @@ PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valg
 PACKAGECONFIG[mbregex] = "--enable-mbregex, --disable-mbregex, oniguruma"
 PACKAGECONFIG[mbstring] = "--enable-mbstring,,"
 
+export HOSTCC = "${BUILD_CC}"
 export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
 export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
 CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
@@ -258,12 +259,7 @@ RCONFLICTS:${PN}-modphp = "${MODPHP_OLDPACKAGE}"
 do_install:append:class-native() {
     create_wrapper ${D}${bindir}/php \
         PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
-
-    if [ "$MACHINE_ARCH" == "x86" || "$MACHINE_ARCH" == "x86-64" ]; then
-        install -m 0755 ${WORKDIR}/build/ext/opcache/minilua ${D}${bindir}/
-    fi
 }
-
 
 # Fails to build with thumb-1 (qemuarm)
 # | {standard input}: Assembler messages:
