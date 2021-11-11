@@ -47,7 +47,10 @@ PACKAGECONFIG[systemd-charon] = "--enable-systemd,--disable-systemd,systemd,"
 
 inherit autotools systemd pkgconfig
 
-RRECOMMENDS:${PN} = "kernel-module-ipsec"
+RRECOMMENDS:${PN} = "kernel-module-ah4 \
+                     kernel-module-esp4 \
+                     kernel-module-xfrm-user \
+                    "
 
 FILES:${PN} += "${libdir}/ipsec/lib*${SOLIBS}"
 FILES:${PN}-dbg += "${bindir}/.debug ${sbindir}/.debug ${libdir}/ipsec/.debug ${libexecdir}/ipsec/.debug"
