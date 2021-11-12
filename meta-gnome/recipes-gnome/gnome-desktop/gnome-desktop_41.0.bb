@@ -13,7 +13,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
 REQUIRED_DISTRO_FEATURES = "x11"
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
+
+GIR_MESON_OPTION = ""
 
 SRC_URI[archive.sha256sum] = "69cb1d3d9a10700eb66348ef1c0e66a855fc5a97ae62902df97a499da11562d2"
 SRC_URI += " \
