@@ -26,31 +26,31 @@ LICENSE:modules/linux = "GPL-2.0"
 LICENSE:modules/solaris = "CDDL-1.0"
 
 SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=master \
-    file://tools.conf \
-    file://vmtoolsd.service \
-    file://vmtoolsd.init \
-    file://0001-configure.ac-don-t-use-dnet-config.patch;patchdir=.. \
-    file://0003-Use-configure-test-for-struct-timespec.patch;patchdir=.. \
-    file://0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch;patchdir=.. \
-    file://0005-Use-configure-to-test-for-feature-instead-of-platfor.patch;patchdir=.. \
-    file://0006-Use-configure-test-for-sys-stat.h-include.patch;patchdir=.. \
-    file://0007-Fix-subdir-objects-configure-error.patch;patchdir=.. \
-    file://0008-include-poll.h-instead-of-sys-poll.h.patch;patchdir=.. \
-    file://0009-Rename-poll.h-to-vm_poll.h.patch;patchdir=.. \
-    file://0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch;patchdir=.. \
-    file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
-    file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
-    file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
-    file://0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch;patchdir=.. \
-    file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
-    file://0001-hgfsmounter-Makefile.am-support-usrmerge.patch;patchdir=.. \
-    file://0001-pollGtk-Fix-volatile-qualifier-exposed-incorrectly.patch;patchdir=.. \
-"
+           file://tools.conf \
+           file://vmtoolsd.service \
+           file://vmtoolsd.init \
+           file://0001-configure.ac-don-t-use-dnet-config.patch;patchdir=.. \
+           file://0003-Use-configure-test-for-struct-timespec.patch;patchdir=.. \
+           file://0004-Fix-definition-of-ALLPERMS-and-ACCESSPERMS.patch;patchdir=.. \
+           file://0005-Use-configure-to-test-for-feature-instead-of-platfor.patch;patchdir=.. \
+           file://0006-Use-configure-test-for-sys-stat.h-include.patch;patchdir=.. \
+           file://0007-Fix-subdir-objects-configure-error.patch;patchdir=.. \
+           file://0008-include-poll.h-instead-of-sys-poll.h.patch;patchdir=.. \
+           file://0009-Rename-poll.h-to-vm_poll.h.patch;patchdir=.. \
+           file://0010-use-posix-strerror_r-unless-on-gnu-libc-system.patch;patchdir=.. \
+           file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
+           file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
+           file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
+           file://0001-Make-HgfsConvertFromNtTimeNsec-aware-of-64-bit-time_.patch;patchdir=.. \
+           file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
+           "
+
+UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
 
 SRC_URI:append:libc-musl = " file://0001-Add-resolv_compat.h-for-musl-builds.patch;patchdir=.. \
 "
 
-SRCREV = "7ae57c3c7c1f68c74637ad009673dae94ee52570"
+SRCREV = "87abba1ce2356fc860eb9d0777d8e9de47427358"
 
 S = "${WORKDIR}/git/open-vm-tools"
 
