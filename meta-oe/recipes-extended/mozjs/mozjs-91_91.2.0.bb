@@ -13,6 +13,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://riscv32.patch \
            file://0005-nojit-32bit-arch-fix.patch \
            file://0006-Fix-build-on-powerpc.patch \
+           file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
            "
 SRC_URI[sha256sum] = "3ef3cfd321d0c2c80ee1b41b8baf7a1ea4daf93c29e1377274933440ff5e42c3"
 
