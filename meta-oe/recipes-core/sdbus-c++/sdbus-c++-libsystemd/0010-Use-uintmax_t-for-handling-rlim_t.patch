@@ -1,7 +1,7 @@
-From e3f847bd0338d27aff3335b42661d8a4b66b965e Mon Sep 17 00:00:00 2001
+From cceb2bba69b371868e89d435c5406b67cdd84d57 Mon Sep 17 00:00:00 2001
 From: Chen Qi <Qi.Chen@windriver.com>
 Date: Mon, 25 Feb 2019 15:12:41 +0800
-Subject: [PATCH 11/24] Use uintmax_t for handling rlim_t
+Subject: [PATCH] Use uintmax_t for handling rlim_t
 
 PRIu{32,64} is not right format to represent rlim_t type
 therefore use %ju and typecast the rlim_t variables to
@@ -20,17 +20,18 @@ Upstream-Status: Denied [https://github.com/systemd/systemd/pull/7199]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 [Rebased for v241]
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+
 ---
  src/basic/format-util.h |  8 +-------
- src/basic/rlimit-util.c | 10 +++++-----
+ src/basic/rlimit-util.c | 12 ++++++------
  src/core/execute.c      |  4 ++--
- 3 files changed, 8 insertions(+), 14 deletions(-)
+ 3 files changed, 9 insertions(+), 15 deletions(-)
 
 diff --git a/src/basic/format-util.h b/src/basic/format-util.h
-index dece5d3..dbb87bc 100644
+index b7e18768e3..3195ab205d 100644
 --- a/src/basic/format-util.h
 +++ b/src/basic/format-util.h
-@@ -42,13 +42,7 @@
+@@ -32,13 +32,7 @@ assert_cc(sizeof(gid_t) == sizeof(uint32_t));
  #  define PRI_TIMEX "li"
  #endif
  
@@ -46,10 +47,19 @@ index dece5d3..dbb87bc 100644
  #if SIZEOF_DEV_T == 8
  #  define DEV_FMT "%" PRIu64
 diff --git a/src/basic/rlimit-util.c b/src/basic/rlimit-util.c
-index 74b3a02..b02c03c 100644
+index 23d108d5df..3e6fb438d7 100644
 --- a/src/basic/rlimit-util.c
 +++ b/src/basic/rlimit-util.c
-@@ -307,13 +307,13 @@ int rlimit_format(const struct rlimit *rl, char **ret) {
+@@ -43,7 +43,7 @@ int setrlimit_closest(int resource, const struct rlimit *rlim) {
+             fixed.rlim_max == highest.rlim_max)
+                 return 0;
+ 
+-        log_debug("Failed at setting rlimit " RLIM_FMT " for resource RLIMIT_%s. Will attempt setting value " RLIM_FMT " instead.", rlim->rlim_max, rlimit_to_string(resource), fixed.rlim_max);
++        log_debug("Failed at setting rlimit " RLIM_FMT " for resource RLIMIT_%s. Will attempt setting value " RLIM_FMT " instead.", (uintmax_t)rlim->rlim_max, rlimit_to_string(resource), (uintmax_t)fixed.rlim_max);
+ 
+         if (setrlimit(resource, &fixed) < 0)
+                 return -errno;
+@@ -308,13 +308,13 @@ int rlimit_format(const struct rlimit *rl, char **ret) {
          if (rl->rlim_cur >= RLIM_INFINITY && rl->rlim_max >= RLIM_INFINITY)
                  s = strdup("infinity");
          else if (rl->rlim_cur >= RLIM_INFINITY)
@@ -67,7 +77,7 @@ index 74b3a02..b02c03c 100644
  
          if (!s)
                  return -ENOMEM;
-@@ -404,7 +404,7 @@ int rlimit_nofile_safe(void) {
+@@ -405,7 +405,7 @@ int rlimit_nofile_safe(void) {
  
          rl.rlim_cur = FD_SETSIZE;
          if (setrlimit(RLIMIT_NOFILE, &rl) < 0)
@@ -77,11 +87,11 @@ index 74b3a02..b02c03c 100644
          return 1;
  }
 diff --git a/src/core/execute.c b/src/core/execute.c
-index a708231..e2b8748 100644
+index 2a64675c5f..dca1e0e3b6 100644
 --- a/src/core/execute.c
 +++ b/src/core/execute.c
-@@ -4220,9 +4220,9 @@ void exec_context_dump(const ExecContext *c, FILE* f, const char *prefix) {
-         for (i = 0; i < RLIM_NLIMITS; i++)
+@@ -5391,9 +5391,9 @@ void exec_context_dump(const ExecContext *c, FILE* f, const char *prefix) {
+         for (unsigned i = 0; i < RLIM_NLIMITS; i++)
                  if (c->rlimit[i]) {
                          fprintf(f, "%sLimit%s: " RLIM_FMT "\n",
 -                                prefix, rlimit_to_string(i), c->rlimit[i]->rlim_max);
@@ -92,6 +102,3 @@ index a708231..e2b8748 100644
                  }
  
          if (c->ioprio_set) {
--- 
-2.7.4
-
