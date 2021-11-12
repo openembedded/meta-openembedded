@@ -16,7 +16,7 @@ SRC_URI += " \
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
+GIR_MESON_OPTION = ""
 
 EXTRA_OEMESON = " \
     -Dinstalled_tests=false \
