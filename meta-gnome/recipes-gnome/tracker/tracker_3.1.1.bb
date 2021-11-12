@@ -25,7 +25,7 @@ SRC_URI[archive.sha256sum] = "4376e2e98454066f44f7a242e45b99b3bfe4c03b67fab19abb
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
+GIR_MESON_OPTION = ""
 
 # text search is not an option anymore and requires sqlite3 build with
 # PACKAGECONFIG[fts5] set (default)
