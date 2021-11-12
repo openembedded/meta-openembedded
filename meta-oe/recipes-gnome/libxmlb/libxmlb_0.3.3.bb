@@ -8,7 +8,7 @@ SRC_URI = "git://github.com/hughsie/libxmlb.git;branch=main;protocol=https \
 SRCREV = "5108556a17bb1c2863c2ca5df088143ea65474a3"
 S = "${WORKDIR}/git"
 
-inherit gobject-introspection gtk-doc meson ptest-gnome
+inherit gobject-introspection gtk-doc meson ptest-gnome lib_package
 
 PACKAGECONFIG ??= "\
     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
@@ -16,3 +16,5 @@ PACKAGECONFIG ??= "\
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false"
 
 GTKDOC_MESON_OPTION = "gtkdoc"
+
+FILES:${PN}-bin += "${libexecdir}/*"
