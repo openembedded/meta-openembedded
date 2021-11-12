@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = " \
     dbus-native \
+    python3-pygobject-native \
     glib-2.0 \
     sqlite3 \
     libarchive \
@@ -19,9 +20,9 @@ DEPENDS = " \
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check
+inherit gnomebase gsettings gobject-introspection vala gtk-doc manpages bash-completion features_check python3native
 
-SRC_URI[archive.sha256sum] = "4376e2e98454066f44f7a242e45b99b3bfe4c03b67fab19abb0ed586ca748ae7"
+SRC_URI[archive.sha256sum] = "1847e08b39e6e61d848735aa1f97f7d96c038201653fa0d7cb9e81b37eb9c03a"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
