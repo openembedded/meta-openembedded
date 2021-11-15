@@ -12,5 +12,3 @@ PACKAGECONFIG[vapi] = "-Dvapi=true,-Dvapi=false"
 SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
 SRCREV = "db9edbd8b45662d551194a0985173732f8f557a5"
 S = "${WORKDIR}/git"
-
-PACKAGECONFIG[vala]  = "-Dvapi=true,-Dvapi=false"
