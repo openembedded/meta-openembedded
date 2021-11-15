@@ -113,6 +113,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-dynamic-dispatch \
     python3-ecdsa \
     python3-editor \
+    python3-email-validator \
     python3-engineio \
     python3-et-xmlfile \
     python3-evdev \
