@@ -7,4 +7,4 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "colorlog"
 
-SRC_URI[sha256sum] = "cf62a8e389d5660d0d22be17937b25b9abef9497ddc940197d1773aa1f604339"
+SRC_URI[sha256sum] = "344f73204009e4c83c5b6beb00b3c45dc70fcdae3c80db919e0a4171d006fde8"
