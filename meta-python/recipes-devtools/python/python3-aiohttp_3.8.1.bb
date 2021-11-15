@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8074d6c6e217873b2a018a4522243ea3"
 
-SRC_URI[sha256sum] = "d3b19d8d183bcfd68b25beebab8dc3308282fe2ca3d6ea3cb4cd101b3c279f8d"
+SRC_URI[sha256sum] = "fc5471e1a54de15ef71c1bc6ebe80d4dc681ea600e68bfd1cbce40427f0b7578"
 
 PYPI_PACKAGE = "aiohttp"
 inherit setuptools3 pypi
@@ -20,4 +20,7 @@ RDEPENDS:${PN} = "\
     ${PYTHON_PN}-netserver \
     ${PYTHON_PN}-typing-extensions \
     ${PYTHON_PN}-yarl \
+    ${PYTHON_PN}-cchardet \
+    ${PYTHON_PN}-charset-normalizer \
+    ${PYTHON_PN}-aiosignal \
 "
