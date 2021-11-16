@@ -102,7 +102,7 @@ FILES:gpsd-gpsctl = "${bindir}/gpsctl"
 
 SUMMARY:gps-utils = "Utils used for simulating, monitoring,... a GPS"
 # Python files are required for gps/fake, required for gpsfake.
-FILES:gps-utils = "${bindir}/* ${libdir}/gps/*.py ${libdir}/gps/*.so"
+FILES:gps-utils = "${bindir}/*"
 RDEPENDS:gps-utils = "python3-pygps"
 
 SUMMARY:python3-pygps = "Python bindings to gpsd"
