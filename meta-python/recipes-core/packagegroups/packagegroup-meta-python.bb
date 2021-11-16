@@ -22,6 +22,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-aiohttp \
     python3-aiohttp-jinja2 \
     python3-aiohue \
+    python3-aiosignal \
     python3-alembic \
     python3-ansi2html \
     python3-ansicolors \
@@ -65,10 +66,12 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-cantools \
     python3-cassandra-driver \
     python3-cbor2 \
+    python3-cchardet \
     python3-cerberus \
     python3-certifi \
     python3-cffi \
     python3-chardet \
+    python3-charset-normalizer \
     python3-cheetah \
     python3-click \
     python3-click-repl \
@@ -145,6 +148,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-flask-wtf \
     python3-flask-xstatic \
     python3-future \
+    python3-frozenlist \
     python3-gast \
     python3-geojson \
     python3-geomet \
