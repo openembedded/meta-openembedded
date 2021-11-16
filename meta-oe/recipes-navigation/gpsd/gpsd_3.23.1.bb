@@ -75,7 +75,7 @@ do_install:append() {
     install -m 755 ${D}${libdir}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
 }
 
-PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
+PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
 
 RPROVIDES:${PN}-dbg += "python-pygps-dbg"
 
@@ -89,9 +89,6 @@ RRECOMMENDS:${PN} = "gpsd-conf gpsd-udev gpsd-machine-conf"
 SUMMARY:gpsd-udev = "udev relevant files to use gpsd hotplugging"
 FILES:gpsd-udev = "${nonarch_base_libdir}/udev"
 RDEPENDS:gpsd-udev += "udev gpsd-conf"
-
-SUMMARY:libgpsd = "C service library used for communicating with gpsd"
-FILES:libgpsd = "${libdir}/libgpsd.so.*"
 
 SUMMARY:libgps = "C service library used for communicating with gpsd"
 FILES:libgps = "${libdir}/libgps.so.*"
