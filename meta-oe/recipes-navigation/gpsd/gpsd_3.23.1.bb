@@ -34,6 +34,7 @@ EXTRA_OESCONS = " \
     nostrip='true' \
     systemd='${SYSTEMD_OESCONS}' \
     libdir='${libdir}' \
+    sbindir='${sbindir}' \
     udevdir='${nonarch_base_libdir}/udev' \
     unitdir='${systemd_system_unitdir}' \
     manbuild='false' \
@@ -102,7 +103,32 @@ FILES:gpsd-gpsctl = "${bindir}/gpsctl"
 
 SUMMARY:gps-utils = "Utils used for simulating, monitoring,... a GPS"
 # Python files are required for gps/fake, required for gpsfake.
-FILES:gps-utils = "${bindir}/*"
+FILES:gps-utils = "\
+    ${bindir}/cgps         \
+    ${bindir}/gegps        \
+    ${bindir}/gps2udp      \
+    ${bindir}/gpscat       \
+    ${bindir}/gpscsv       \
+    ${bindir}/gpsctl       \
+    ${bindir}/gpsdebuginfo \
+    ${bindir}/gpsdecode    \
+    ${bindir}/gpsfake      \
+    ${bindir}/gpsmon       \
+    ${bindir}/gpspipe      \
+    ${bindir}/gpsplot      \
+    ${bindir}/gpsprof      \
+    ${bindir}/gpsrinex     \
+    ${bindir}/gpssnmp      \
+    ${bindir}/gpssubframe  \
+    ${bindir}/gpxlogger    \
+    ${bindir}/lcdgps       \
+    ${bindir}/ntpshmmon    \
+    ${bindir}/ppscheck     \
+    ${bindir}/ubxtool      \
+    ${bindir}/xgps         \
+    ${bindir}/xgpsspeed    \
+    ${bindir}/zerk         \
+"
 RDEPENDS:gps-utils = "python3-pygps"
 
 SUMMARY:python3-pygps = "Python bindings to gpsd"
