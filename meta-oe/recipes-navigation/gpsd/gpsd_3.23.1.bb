@@ -79,8 +79,7 @@ PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-ut
 
 RPROVIDES:${PN}-dbg += "python-pygps-dbg"
 
-FILES:${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc \
-                    ${libdir}/libQgpsmm.prl"
+FILES:${PN}-dev += "${libdir}/libQgpsmm.prl"
 
 FILES:${PN}-doc += "${datadir}/${BPN}/doc"
 
