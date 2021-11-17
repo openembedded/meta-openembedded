@@ -4,8 +4,13 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=56472ad6de4caf50e05332a34b66e778"
 
-SRC_URI[sha256sum] = "2f0bb8ed0dc0ab21d683975d5d8ab3c054d588ce61def9faf7a465ee363e839b"
+SRC_URI[sha256sum] = "80144f489c1bb273a51b6f96ff9785a382d2866b9bab1f5bd748385019f4141f"
 
 inherit pypi setuptools3
 
-RDEPENDS:${PN} += "${PYTHON_PN}-dnspython"
+RDEPENDS:${PN} += " \
+	${PYTHON_PN}-dnspython \
+	${PYTHON_PN}-six \
+	${PYTHON_PN}-distutils \
+	${PYTHON_PN}-greenlet \
+"
