@@ -1,7 +1,7 @@
 DESCRIPTION = "POSIX IPC primitives (semaphores, shared memory and message queues) for Python"
 HOMEPAGE = "http://semanchuk.com/philip/posix_ipc/"
 SECTION = "devel/python"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=dc089fb2f37e90799a54c19a20c9880f"
 
 PYPI_PACKAGE = "posix_ipc"
