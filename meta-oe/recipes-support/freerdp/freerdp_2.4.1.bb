@@ -13,11 +13,9 @@ inherit pkgconfig cmake gitpkgv
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV = "14c7f7aed7dd4e2454ee0cd81028b9f790885021"
+SRCREV = "d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5"
 SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=stable-2.0;protocol=https \
     file://winpr-makecert-Build-with-install-RPATH.patch \
-    file://0001-Fix-FIPS-mode-support-and-build-with-OpenSSL-3.0.patch \
-    file://0002-winpr-avoid-calling-FIPS_mode-with-OpenSSL-3.0.patch \
 "
 
 S = "${WORKDIR}/git"
