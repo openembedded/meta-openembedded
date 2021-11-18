@@ -11,13 +11,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 LICENSE = "GPLv2.0"
 
 SRCBRANCH ?= "master"
-SRCREV = "a9ad811c15e769c8e6d8d915a05cebc32f2ea2f5"
+SRCREV = "06ef8e2b814feb08a668b7a3783c86674e49a7b1"
 
 DEPENDS = "bzip2 zlib elfutils xz"
 RDEPENDS:${PN}-tools = "perl ${PN}"
 
-# arm and aarch64 would compile but has never been tested upstream.  mips would not compile.
-#
+# mips would not compile.
 COMPATIBLE_HOST = "(x86_64|i.86|powerpc|arm|aarch64).*-linux"
 
 PACKAGES =+ "${PN}-tools"
@@ -26,7 +25,6 @@ FILES:${PN}-tools = "${bindir}/*.pl"
 SRC_URI = "\
     git://github.com/makedumpfile/makedumpfile;branch=${SRCBRANCH};protocol=https \
     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
-    file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -47,6 +45,7 @@ EXTRA_OEMAKE = "\
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[lzo] = "USELZO=on,USELZO=off,lzo"
 PACKAGECONFIG[snappy] = "USESNAPPY=on,USESNAPPY=off,snappy"
+PACKAGECONFIG[zstd] = "USEZSTD=on,USEZSTD=off,zstd"
 
 do_install () {
     mkdir -p ${D}/usr/bin
