@@ -35,8 +35,7 @@ PACKAGECONFIG[cplusplus] = "--enable-cplusplus,--disable-cplusplus"
 PACKAGECONFIG[curl] = "--enable-curl-client,--disable-curl-client,curl"
 
 do_configure() {
-        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
-        install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
+        gnu-configize --verbose --force ${S}
         autoconf
         oe_runconf
         # license is incompatible with lib/util/getoptx.*
