@@ -25,10 +25,10 @@ DEPENDS = " \
 "
 
 GTKDOC_MESON_OPTION = "gtk_doc"
+GIR_MESON_OPTION = ""
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 
 SRC_URI[archive.sha256sum] = "52f971e85140e5de74b9369ef6656e49ce95af1f232fc1e0df1f046129ab4f65"
 SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
