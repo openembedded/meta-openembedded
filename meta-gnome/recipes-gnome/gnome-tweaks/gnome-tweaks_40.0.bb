@@ -16,7 +16,7 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
+GIR_MESON_OPTION = ""
 
 SRC_URI[archive.sha256sum] = "f95f3fe031b0b01c02f79a1659f889152d3772ae3e44df8403d1460ba5eec36a"
 SRC_URI += "file://0001-Make-python-path-configurable.patch"
