@@ -9,3 +9,9 @@ PYPI_PACKAGE = "parso"
 SRC_URI[sha256sum] = "12b83492c6239ce32ff5eed6d3639d6a536170723c6f3f1506869f1ace413398"
 
 inherit setuptools3 pypi
+
+RDEPENDS:${PN} = " \
+	${PYTHON_PN}-crypt \
+	${PYTHON_PN}-difflib \
+	${PYTHON_PN}-logging \
+"
