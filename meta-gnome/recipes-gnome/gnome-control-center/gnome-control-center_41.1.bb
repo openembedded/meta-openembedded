@@ -44,6 +44,14 @@ EXTRA_OEMESON = " \
     -Dcheese=false \
 "
 
+do_install:append() {
+	# If polkit is setup fixup permissions and ownership
+    if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
+        chmod 700 ${D}${datadir}/polkit-1/rules.d
+        chown polkitd:root ${D}${datadir}/polkit-1/rules.d
+    fi
+}
+
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
     ${datadir}/gnome-shell \
