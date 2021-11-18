@@ -16,8 +16,6 @@ SRCREV = "86405c7e1bd4f70287204a28d242a1054daab520"
 
 S = "${WORKDIR}/git/stable"
 
-DEPENDS = "libxml2"
-
 inherit autotools-brokensep binconfig pkgconfig
 
 TARGET_CFLAGS += "-Wno-narrowing"
