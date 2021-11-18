@@ -11,14 +11,13 @@ DEPENDS = " \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit gobject-introspection-data"
+GIR_MESON_OPTION = ""
 
 GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
 SRC_URI[archive.sha256sum] = "5738c4293a9f5a80d4a6e9e06f4d0df3e9f313ca7b61bfb4d8afaba983e200dc"
-
-UNKNOWN_CONFIGURE_WHITELIST:append = " introspection"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
