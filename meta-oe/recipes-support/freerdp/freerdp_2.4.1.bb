@@ -3,7 +3,7 @@
 
 DESCRIPTION = "FreeRDP RDP client & server library"
 HOMEPAGE = "http://www.freerdp.com"
-DEPENDS = "openssl alsa-lib pcsc-lite"
+DEPENDS = "openssl alsa-lib pcsc-lite libusb1"
 SECTION = "net"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
