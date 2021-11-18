@@ -13,13 +13,3 @@ SRC_URI[md5sum] = "8c9443859492ecf3aae9182aa6b5c78c"
 SRC_URI[sha256sum] = "6cddb1ce2cf4aae383f2a0079c26c69bee257fe2720f372201ef047f8ceb8b97"
 
 inherit setuptools3 pypi
-
-# DEPENDS_default: python-pip
-
-DEPENDS += " \
-        ${PYTHON_PN}-pip \
-        "
-
-# RDEPENDS:default:
-RDEPENDS:${PN} += " \
-        "
