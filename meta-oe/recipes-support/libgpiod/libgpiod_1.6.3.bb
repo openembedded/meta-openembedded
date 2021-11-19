@@ -51,6 +51,7 @@ FILES:${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*.a"
 RRECOMMENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'python3', '${PN}-python', '', d)}"
 RRECOMMENDS:${PN}-ptest += " \
     kernel-module-gpio-mockup \
+    coreutils \
     ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3-unittest', '', d)} \
 "
 
