@@ -18,6 +18,7 @@ SRC_URI = " \
     file://0011-replace-include-by-code-to-fix-arm-build.patch \
     file://0012-Add-SharedArrayRawBufferRefs-to-public-API.patch \
     file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
+    file://0001-rewrite-cargo-host-linker-in-python3.patch \
 "
 
 SRC_URI[sha256sum] = "a4438d84d95171a6d4fea9c9f02c2edbf0475a9c614d968ebe2eedc25a672151"
