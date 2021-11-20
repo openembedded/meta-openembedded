@@ -7,7 +7,7 @@ inherit xfce-app distutils3 gtk-icon-cache mime-xdg
 
 DEPENDS += "python3-distutils-extra-native"
 
-SRC_URI[sha256sum] = "1f6facee57a659af560f06024ca6f98aa4d638bf57a8bcfb613b4dc70fcc3b47"
+SRC_URI[sha256sum] = "e9a99a62d10981391508dd43f3cbfa2d50a69bd6b7d1eeef7d30ba4c673dcfda"
 
 FILES:${PN} += "${datadir}/metainfo"
 
