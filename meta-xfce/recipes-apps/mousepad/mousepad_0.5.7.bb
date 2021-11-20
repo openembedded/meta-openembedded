@@ -7,9 +7,7 @@ DEPENDS = "gtk+3 gtksourceview4 xfconf xfce4-dev-tools-native"
 
 inherit xfce-app gsettings mime-xdg
 
-SRC_URI += "file://0001-Plugin-support-Properly-handle-plugin-settings.patch"
-
-SRC_URI[sha256sum] = "40c35f00e0e10df50a59bd0dbba9007d2fb5574ed8a2aa73b0fc5ef40e64abe1"
+SRC_URI[sha256sum] = "105315743042e09e794037ab0594a1c47cbbf0b6b834dffed157192f4f03bde8"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[spell] = "--enable-plugin-gspell,--disable-plugin-gspell,gspell"
