@@ -19,8 +19,9 @@ SRC_URI[md5sum] = "7608579722c491e42f5f63b3f88a95fb"
 SRC_URI[sha256sum] = "4711cacf013e298754abd70058ccc995758177fb425f1c2d30e71adfc1d00aa5"
 
 do_configure:prepend() {
-    sed -i -e 's:^library_dirs =.*::' ${S}/setup.cfg
-    sed -i -e 's:^include_dirs =.*:include_dirs = =/usr/include/sasl/:' ${S}/setup.cfg
+    sed -i -e 's:^library_dirs =.*::' \
+        -e 's:^include_dirs =.*:include_dirs = =/usr/include/sasl/:' \
+        -e 's/= ldap_r/= ldap/g' ${S}/setup.cfg
 }
 
 RDEPENDS:${PN} = " \
