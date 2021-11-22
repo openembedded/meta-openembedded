@@ -17,7 +17,7 @@ DEPENDS += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
 RDEPENDS_${PN} = "acl"
 
-SRC_URI = "git://github.com/storaged-project/udisks.git;branch=master"
+SRC_URI = "git://github.com/storaged-project/udisks.git;branch=master;protocol=https"
 SRCREV = "da6d9480fefeb0ffdf8a84626b5096827d8d7030"
 S = "${WORKDIR}/git"
 

@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = " \
-        git://linuxtv.org/libcamera.git;protocol=git \
+        git://linuxtv.org/libcamera.git;protocol=git;branch=master \
         file://0001-uvcvideo-Use-auto-variable-to-avoid-range-loop-warni.patch \
 "
 

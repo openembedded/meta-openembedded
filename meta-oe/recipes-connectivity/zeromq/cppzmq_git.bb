@@ -7,7 +7,7 @@ DEPENDS = "zeromq"
 SRCREV = "76bf169fd67b8e99c1b0e6490029d9cd5ef97666"
 PV = "4.7.1"
 
-SRC_URI = "git://github.com/zeromq/cppzmq.git;branch=bugfix-4-7-1"
+SRC_URI = "git://github.com/zeromq/cppzmq.git;branch=bugfix-4-7-1;protocol=https"
 
 S = "${WORKDIR}/git"
 

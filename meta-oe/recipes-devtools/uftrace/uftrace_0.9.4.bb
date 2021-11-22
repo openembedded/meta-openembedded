@@ -12,7 +12,7 @@ inherit autotools
 
 PV .= "+git${SRCPV}"
 SRCREV = "d648bbffedef529220896283fb59e35531c13804"
-SRC_URI = "git://github.com/namhyung/${BPN} \
+SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
            file://0001-aarch64-Fix-a-plthook-crash-on-aarch64-with-binutils.patch \
            "
 S = "${WORKDIR}/git"

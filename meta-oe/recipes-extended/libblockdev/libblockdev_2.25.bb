@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
 
 inherit autotools gobject-introspection
 
-SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch"
+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=2.x-branch;protocol=https"
 SRCREV = "c50869272b54bf4b4bc3825e8c3332a54678b43f"
 S = "${WORKDIR}/git"
 

@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
 DEPENDS = "libpcre zlib"
 
 SRC_URI = " \
-    git://github.com/pocoproject/poco.git;branch=poco-${PV} \
+    git://github.com/pocoproject/poco.git;branch=poco-${PV};protocol=https \
     file://0001-Add-support-of-arch-riscv32.patch \
     file://run-ptest \
    "

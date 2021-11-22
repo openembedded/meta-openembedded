@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
 
 #v0.21.0
 SRCREV = "30180986a08cf71fe4af4b50251a8bb5b1ab95af"
-SRC_URI = "git://github.com/OpenSC/OpenSC \
+SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
           "
 DEPENDS = "virtual/libiconv openssl"
 

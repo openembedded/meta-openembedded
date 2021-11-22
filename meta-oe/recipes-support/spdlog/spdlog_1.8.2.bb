@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRCREV = "de0dbfa3596a18cd70a4619b6a9766847a941276"
-SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x; \
+SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x; \
            file://0001-Enable-use-of-external-fmt-library.patch"
 
 DEPENDS += "fmt"
