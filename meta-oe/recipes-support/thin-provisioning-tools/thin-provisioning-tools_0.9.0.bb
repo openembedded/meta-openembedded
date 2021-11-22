@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/jthornber/thin-provisioning-tools;branch=main;protoc
            file://use-sh-on-path.patch \
 "
 
-SRCREV = "5e5409f48b5403d2c6dffd9919b35ad77d6fb7b4"
+SRCREV = "d6d93c3157631b242a13a81d30f75453e576c55a"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
 
