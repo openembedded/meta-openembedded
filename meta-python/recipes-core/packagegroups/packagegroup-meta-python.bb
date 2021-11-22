@@ -150,6 +150,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-future \
     python3-frozenlist \
     python3-gast \
+    python3-gcovr \
     python3-geojson \
     python3-geomet \
     python3-gevent \
