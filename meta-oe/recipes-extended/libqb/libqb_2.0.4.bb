@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
 
 inherit autotools pkgconfig
 
-SRCREV = "404adbcd998ec83643e47d92b3ea8d9c3970e68b"
+SRCREV = "a2691b96188033b5ad5c08871982048ae1f4f4e8"
 SRC_URI = "git://github.com/ClusterLabs/${BPN}.git;branch=master;protocol=https \
           "
 S = "${WORKDIR}/git"
