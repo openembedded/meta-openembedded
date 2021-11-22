@@ -7,6 +7,8 @@ SRC_URI[sha256sum] = "78ed67db6c7b7ced4f98e495e572106d5c432a93e1ddd1bf475e1dc05f
 
 inherit pypi setuptools3
 
+BBCLASSEXTEND = "native nativesdk"
+
 RDEPENDS:${PN} = "\
 	${PYTHON_PN}-frozenlist \
 "
