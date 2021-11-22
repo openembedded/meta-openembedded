@@ -14,6 +14,9 @@ RDEPENDS:${PN}:class-target += "\
     ${PYTHON_PN}-netclient \
     ${PYTHON_PN}-ply \
     ${PYTHON_PN}-pprint \
+    "
+
+RSUGGESTS:${PN}:class-target += "\
     cpp \
     cpp-symlinks \
     "

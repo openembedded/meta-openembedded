@@ -1,0 +1,68 @@
+From 628b4b3a16c5e3416aac3eea041ff03375fb495b Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 30 Oct 2021 11:00:59 -0700
+Subject: [PATCH] Fix a lot of -Werror=format-security errors in
+ printw/mvprintw
+
+In all these places a non-constant is used as a format string which
+compiler complains about. Fix by using "%s" as format.
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ui/curses.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/ui/curses.c b/ui/curses.c
+index 34bf30d..c24cf28 100644
+--- a/ui/curses.c
++++ b/ui/curses.c
+@@ -432,7 +432,7 @@ static void mtr_curses_hosts(
+                 attron(A_BOLD);
+ #ifdef HAVE_IPINFO
+             if (is_printii(ctl))
+-                printw(fmt_ipinfo(ctl, addr));
++                printw("%s", fmt_ipinfo(ctl, addr));
+ #endif
+             if (name != NULL) {
+                 if (ctl->show_ips)
+@@ -485,7 +485,7 @@ static void mtr_curses_hosts(
+                 printw("\n    ");
+ #ifdef HAVE_IPINFO
+                 if (is_printii(ctl))
+-                    printw(fmt_ipinfo(ctl, addrs));
++                    printw("%s", fmt_ipinfo(ctl, addrs));
+ #endif
+                 if (name != NULL) {
+                     if (ctl->show_ips)
+@@ -650,7 +650,7 @@ static void mtr_curses_graph(
+ 
+ #ifdef HAVE_IPINFO
+             if (is_printii(ctl))
+-                printw(fmt_ipinfo(ctl, addr));
++                printw("%s", fmt_ipinfo(ctl, addr));
+ #endif
+             name = dns_lookup(ctl, addr);
+             printw("%s", name ? name : strlongip(ctl, addr));
+@@ -700,7 +700,7 @@ void mtr_curses_redraw(
+ 
+     mvprintw(1, 0, "%s (%s) -> %s", ctl->LocalHostname, net_localaddr(), ctl->Hostname);
+     t = time(NULL);
+-    mvprintw(1, maxx - 25, iso_time(&t));
++    mvprintw(1, maxx - 25, "%s", iso_time(&t));
+     printw("\n");
+ 
+     printw("Keys:  ");
+@@ -760,7 +760,7 @@ void mtr_curses_redraw(
+         startstat = padding - 2;
+ 
+         snprintf(msg, sizeof(msg), " Last %3d pings", max_cols);
+-        mvprintw(rowstat - 1, startstat, msg);
++        mvprintw(rowstat - 1, startstat, "%s", msg);
+ 
+         attroff(A_BOLD);
+         move(rowstat, 0);
+-- 
+2.33.1
+

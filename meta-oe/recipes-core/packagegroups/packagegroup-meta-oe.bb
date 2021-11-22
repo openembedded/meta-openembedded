@@ -98,6 +98,8 @@ RDEPENDS:packagegroup-meta-oe-bsp ="\
     edac-utils \
     firmwared \
     flashrom \
+    fwupd \
+    fwupd-efi \
     irda-utils \
     lmsensors-config-cgi \
     lmsensors-config-fancontrol \
@@ -112,12 +114,12 @@ RDEPENDS:packagegroup-meta-oe-bsp:append:x86 = " ledmon"
 RDEPENDS:packagegroup-meta-oe-bsp:append:x86-64 = " ledmon"
 
 RDEPENDS:packagegroup-meta-oe-bsp:remove:libc-musl = "ledmon"
-RDEPENDS:packagegroup-meta-oe-bsp:remove:mipsarch = "efivar efibootmgr"
-RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc = "efivar efibootmgr"
-RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc64 = "efivar efibootmgr"
-RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc64le = "efivar efibootmgr"
-RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv64 = "efivar efibootmgr"
-RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv32 = "efivar efibootmgr"
+RDEPENDS:packagegroup-meta-oe-bsp:remove:mipsarch = "efivar efibootmgr fwupd fwupd-efi"
+RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc = "efivar efibootmgr fwupd fwupd-efi"
+RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc64 = "efivar efibootmgr fwupd fwupd-efi"
+RDEPENDS:packagegroup-meta-oe-bsp:remove:powerpc64le = "efivar efibootmgr fwupd fwupd-efi"
+RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv64 = "efivar efibootmgr fwupd fwupd-efi"
+RDEPENDS:packagegroup-meta-oe-bsp:remove:riscv32 = "efivar efibootmgr fwupd fwupd-efi"
 
 RDEPENDS:packagegroup-meta-oe-connectivity ="\
     gammu \
@@ -147,6 +149,7 @@ RDEPENDS:packagegroup-meta-oe-connectivity ="\
     obexftp \
     packagegroup-tools-bluetooth \
     paho-mqtt-c \
+    paho-mqtt-cpp \
     rabbitmq-c \
     rfkill \
     rtorrent \

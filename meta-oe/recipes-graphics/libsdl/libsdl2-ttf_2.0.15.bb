@@ -16,7 +16,7 @@ S = "${WORKDIR}/SDL2_ttf-${PV}"
 inherit autotools pkgconfig features_check
 
 # links to libGL.so
-REQUIRED_DISTRO_FEATURES += "x11 opengl"
+REQUIRED_DISTRO_FEATURES += "opengl"
 
 do_configure:prepend() {
     # Removing these files fixes a libtool version mismatch.

@@ -1,0 +1,11 @@
+--- a/ext/opcache/jit/Makefile.frag	2021-10-19 06:34:32.000000000 -0400
++++ b/ext/opcache/jit/Makefile.frag	2021-11-15 15:10:41.437289836 -0500
+@@ -3,7 +3,7 @@ $(builddir)/minilua: $(srcdir)/jit/dynas
+ 	$(CC) $(srcdir)/jit/dynasm/minilua.c -lm -o $@
+ 
+ $(builddir)/jit/zend_jit_x86.c: $(srcdir)/jit/zend_jit_x86.dasc $(srcdir)/jit/dynasm/*.lua $(builddir)/minilua
+-	$(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_x86.dasc
++	$(top_srcdir)/qemuwrapper $(builddir)/minilua $(srcdir)/jit/dynasm/dynasm.lua  $(DASM_FLAGS) -o $@ $(srcdir)/jit/zend_jit_x86.dasc
+ 
+ $(builddir)/jit/zend_jit.lo: \
+ 	$(builddir)/jit/zend_jit_x86.c \
