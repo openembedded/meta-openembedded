@@ -22,7 +22,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
     file://ensure-search-path-non-host.patch \
     "
 
-SRC_URI[sha256sum] = "e383702853236004e5b08e424b8afe9b53fe9f31aaa7a5382f39d9533eb7c043"
+SRC_URI[sha256sum] = "26041d35a20a245ed5a2fb9ee075f10825664d274220cb5190340fa87a4d0931"
 
 inherit autotools-brokensep ptest pkgconfig
 
