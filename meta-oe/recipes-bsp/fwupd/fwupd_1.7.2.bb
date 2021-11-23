@@ -4,11 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 DEPENDS = "glib-2.0 libxmlb json-glib sqlite3 libjcat gcab vala-native"
 
-SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/1.7.1/${BP}.tar.xz \
-           file://run-ptest \
-           file://no-bash.patch \
-           file://io.patch"
-SRC_URI[sha256sum] = "ae56ceb44b786f21f54d133ac70bc5d9cb8cd4bda0167339c669a228da67fa3c"
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz \
+           file://run-ptest"
+SRC_URI[sha256sum] = "8632df69c3bafc59387cdcb517c3ce31a597a09026e44f5907d8384671b9f834"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 
@@ -21,11 +19,11 @@ GIDOCGEN_MESON_OPTION = 'docs'
 GIDOCGEN_MESON_ENABLE_FLAG = 'docgen'
 GIDOCGEN_MESON_DISABLE_FLAG = 'none'
 
-PACKAGECONFIG ??= "curl gnutls gudev gusb lzma \
-                   ${@bb.utils.filter('DISTRO_FEATURES', 'polkit systemd', d)} \
+PACKAGECONFIG ??= "curl gnutls gudev gusb \
+                   ${@bb.utils.filter('DISTRO_FEATURES', 'bluetooth polkit', d)} \
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd offline', '', d)} \
                    ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'plugin_uefi_capsule plugin_uefi_pk', '', d)} \
                    ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests plugin_dummy', '', d)} \
-                   plugin_altos \
                    plugin_amt \
                    plugin_emmc \
                    plugin_fastboot \
@@ -43,29 +41,31 @@ PACKAGECONFIG ??= "curl gnutls gudev gusb lzma \
                    plugin_synaptics_rmi \
                    plugin_thunderbolt"
 
-PACKAGECONFIG[bluez] = "-Dbluez=true,-Dbluez=false"
+PACKAGECONFIG[bluetooth] = "-Dbluez=true,-Dbluez=false"
+PACKAGECONFIG[compat-cli] = "-Dcompat_cli=true,-Dcompat_cli=false"
 PACKAGECONFIG[consolekit] = "-Dconsolekit=true,-Dconsolekit=false,consolekit"
 PACKAGECONFIG[curl] = "-Dcurl=true,-Dcurl=false,curl"
 PACKAGECONFIG[firmware-packager] = "-Dfirmware-packager=true,-Dfirmware-packager=false"
+PACKAGECONFIG[fish-completion] = "-Dfish_completion=true,-Dfish_completion=false"
 PACKAGECONFIG[gnutls] = "-Dgnutls=true,-Dgnutls=false,gnutls"
 PACKAGECONFIG[gudev] = "-Dgudev=true,-Dgudev=false,libgudev"
 PACKAGECONFIG[gusb] = "-Dgusb=true,-Dgusb=false,libgusb"
 PACKAGECONFIG[libarchive] = "-Dlibarchive=true,-Dlibarchive=false,libarchive"
-PACKAGECONFIG[lzma] = "-Dlzma=true,-Dlzma=false,xz"
 PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false"
+PACKAGECONFIG[metainfo] = "-Dmetainfo=true,-Dmetainfo=false"
+PACKAGECONFIG[offline] = "-Doffline=true,-Doffline=false"
 PACKAGECONFIG[polkit] = "-Dpolkit=true,-Dpolkit=false,polkit"
 PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
 PACKAGECONFIG[tests] = "-Dtests=true,-Dtests=false,gcab-native"
 
 # TODO plugins-all meta-option that expands to all plugin_*?
-PACKAGECONFIG[plugin_altos] = "-Dplugin_altos=true,-Dplugin_altos=false,elfutils"
 PACKAGECONFIG[plugin_amt] = "-Dplugin_amt=true,-Dplugin_amt=false"
 PACKAGECONFIG[plugin_dell] = "-Dplugin_dell=true,-Dplugin_dell=false,libsmbios"
 PACKAGECONFIG[plugin_dummy] = "-Dplugin_dummy=true,-Dplugin_dummy=false"
 PACKAGECONFIG[plugin_emmc] = "-Dplugin_emmc=true,-Dplugin_emmc=false"
 PACKAGECONFIG[plugin_fastboot] = "-Dplugin_fastboot=true,-Dplugin_fastboot=false"
 PACKAGECONFIG[plugin_flashrom] = "-Dplugin_flashrom=true,-Dplugin_flashrom=false,flashrom"
-PACKAGECONFIG[plugin_intel_spi] = "-Dplugin_intel_spi=true,-Dplugin_intel_spi=false"
+PACKAGECONFIG[plugin_intel_spi] = "-Dplugin_intel_spi=true -Dlzma=true,-Dplugin_intel_spi=false -Dlzma=false,lzma"
 PACKAGECONFIG[plugin_logitech_bulkcontroller] = "-Dplugin_logitech_bulkcontroller=true,-Dplugin_logitech_bulkcontroller=false,protobuf-c-native protobuf-c"
 PACKAGECONFIG[plugin_modem_manager] = "-Dplugin_modem_manager=true,-Dplugin_modem_manager=false,libqmi modemmanager"
 PACKAGECONFIG[plugin_msr] = "-Dplugin_msr=true,-Dplugin_msr=false,cpuid"
@@ -82,8 +82,8 @@ PACKAGECONFIG[plugin_tpm] = "-Dplugin_tpm=true,-Dplugin_tpm=false,tpm2-tss"
 PACKAGECONFIG[plugin_uefi_capsule] = "-Dplugin_uefi_capsule=true -Dplugin_uefi_capsule_splash=false,-Dplugin_uefi_capsule=false,efivar fwupd-efi"
 PACKAGECONFIG[plugin_uefi_pk] = "-Dplugin_uefi_pk=true,-Dplugin_uefi_pk=false"
 
-# Always disable these plugins on non-x86 platforms as they don't compile
-DISABLE_NON_X86 = "plugin_msr plugin_intel_spi"
+# Always disable these plugins on non-x86 platforms as they don't compile or are useless
+DISABLE_NON_X86 = "plugin_amt plugin_intel_spi plugin_msr plugin_thunderbolt"
 DISABLE_NON_X86:x86 = ""
 DISABLE_NON_X86:x86-64 = ""
 PACKAGECONFIG:remove = "${DISABLE_NON_X86}"
