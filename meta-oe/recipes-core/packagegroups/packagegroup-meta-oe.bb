@@ -187,6 +187,7 @@ RDEPENDS:packagegroup-meta-oe-core = "\
     mm-common \
     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "ndctl", "", d)} \
     opencl-icd-loader \
+    pim435 \
     proxy-libintl \
     safec \
     sdbus-c++-tools \
