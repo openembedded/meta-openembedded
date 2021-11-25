@@ -20,10 +20,6 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0003-Add-config-option-without-valgrind.patch \
            file://0004-Add-options-to-configure-the-use-of-libbsd.patch \
            file://0005-samba-build-dnsserver_common-code.patch \
-           file://0006-samba-defeat-iconv-test.patch \
-           file://0007-wscript_configure_system_gnutls-disable-check-gnutls.patch \
-           file://0008-source3-wscript-disable-check-fcntl-F_OWNER_EX.patch \
-           file://0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch \
            file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
            "
 
