@@ -9,6 +9,7 @@ RDEPENDS:pyldb += "python3"
 SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
            file://0001-do-not-import-target-module-while-cross-compile.patch \
            file://0002-ldb-Add-configure-options-for-packages.patch \
+           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
            file://libldb-fix-musl-libc-conflict-type-error.patch \
           "
 
