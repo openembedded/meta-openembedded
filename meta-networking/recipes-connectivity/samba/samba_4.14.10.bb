@@ -24,6 +24,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0007-wscript_configure_system_gnutls-disable-check-gnutls.patch \
            file://0008-source3-wscript-disable-check-fcntl-F_OWNER_EX.patch \
            file://0009-source3-wscript-disable-check-fcntl-RW_HINTS.patch \
+           file://0001-Fix-pyext_PATTERN-for-cross-compilation.patch \
            "
 
 SRC_URI:append:libc-musl = " \
