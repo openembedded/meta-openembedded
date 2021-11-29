@@ -3,7 +3,7 @@ DESCRIPTION = "Pure-FTPd is a free (BSD license), secure, production-quality and
 HOMEPAGE = "http://www.pureftpd.org/project/pure-ftpd"
 SECTION = "net"
 LICENSE = "BSD-0-Clause"
-LIC_FILES_CHKSUM = "file://COPYING;md5=e25e28bc568d70eb26c3a91387c86ccb"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a4496a14dea009df36c612707d455d02"
 
 DEPENDS = "libcap virtual/crypt"
 
@@ -11,8 +11,7 @@ SRC_URI = "http://download.pureftpd.org/pub/pure-ftpd/releases/pure-ftpd-${PV}.t
            file://0001-Remove-hardcoded-usr-local-includes-from-configure.a.patch \
            file://nostrip.patch \
 "
-SRC_URI[md5sum] = "451879495ba61c1d7dcfca8dd231119f"
-SRC_URI[sha256sum] = "767bf458c70b24f80c0bb7a1bbc89823399e75a0a7da141d30051a2b8cc892a5"
+SRC_URI[sha256sum] = "abe2f94eb40b330d4dc22b159991f44e5e515212f8e887049dccdef266d0ea23"
 
 inherit autotools
 
