@@ -25,7 +25,7 @@ SRC_URI = " \
     gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
     file://run-ptest \
 "
-SRCREV = "63bf5e606b24c7343bfe622bf6af2110ee6beabc"
+SRCREV = "f1155c8d283c3c85d74d5e1050b0dcf8198f750a"
 
 UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
 
