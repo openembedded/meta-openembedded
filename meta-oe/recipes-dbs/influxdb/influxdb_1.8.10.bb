@@ -2,9 +2,7 @@ DESCRIPTION = "InfluxDB is a time series database designed to handle high write 
 HOMEPAGE = "https://www.influxdata.com/products/influxdb-overview/"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=ba8146ad9cc2a128209983265136e06a"
-
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=f39a8d10930fb37bd59adabb3b9d0bd6"
 
 RDEPENDS:${PN} = "bash"
 RDEPENDS:${PN}-dev = "bash"
@@ -17,16 +15,16 @@ GO_INSTALL = "\
 "
 
 SRC_URI = "\
-    git://${GO_IMPORT};protocol=https;branch=1.7;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
+    git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
     file://influxdb \
     file://influxdb.conf \
 "
 
 SRC_URI:append:mipsarch = " file://0001-patch-term-module-for-mips-ispeed-ospeed-termios-abs.patch;patchdir=src/${GO_IMPORT}"
 
-SRCREV = "c958f436b2e538a88a7815aad721c7774a0b8f63"
+SRCREV = "688e697c51fd5353725da078555adbeff0363d01"
 
-inherit go-mod systemd update-rc.d useradd
+inherit go-mod pkgconfig systemd update-rc.d useradd
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
@@ -35,6 +33,7 @@ do_install:prepend() {
     rm ${B}/src/${GO_IMPORT}/build.py
     rm ${B}/src/${GO_IMPORT}/build.sh
     rm ${B}/src/${GO_IMPORT}/Dockerfile*
+    sed -i -e "s#usr/bin/sh#bin/sh#g" ${B}/src/${GO_IMPORT}/scripts/ci/run_perftest.sh
 }
 
 do_install:append() {
