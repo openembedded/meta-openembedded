@@ -16,6 +16,7 @@ GO_INSTALL = "\
 
 SRC_URI = "\
     git://${GO_IMPORT};protocol=https;branch=1.8;destsuffix=${BPN}-${PV}/src/${GO_IMPORT} \
+    file://0001-Use-v2.1.2-xxhash-to-fix-build-with-go-1.17.patch;patchdir=src/${GO_IMPORT} \
     file://influxdb \
     file://influxdb.conf \
 "
