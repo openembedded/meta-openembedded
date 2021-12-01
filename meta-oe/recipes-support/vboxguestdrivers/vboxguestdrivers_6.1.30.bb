@@ -16,7 +16,6 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 
     file://0001-utils-fix-build-against-5.15-libc-headers-headers.patch \
 "
 
-SRC_URI[md5sum] = "2e408e56e92cf778eb8722dbbcb5c357"
 SRC_URI[sha256sum] = "3c60a29375549ffc148aaebe859be91b27c19d6fa2deefde1373c4f6da8f18ef"
 
 S ?= "${WORKDIR}/vbox_module"
