@@ -52,6 +52,13 @@ PACKAGECONFIG:class-native ??= " \
     soup \
 "
 
+PACKAGECONFIG:class-nativesdk ??= " \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+    builtin-grub2-mkconfig \
+    gpgme \
+    soup \
+"
+
 PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
 PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
 PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
@@ -89,6 +96,11 @@ EXTRA_OECONF:class-native = " \
     --disable-otmpfile \
 "
 
+EXTRA_OECONF:class-nativesdk = " \
+    --enable-wrpseudo-compat \
+    --disable-otmpfile \
+"
+
 # Path to ${prefix}/lib/ostree/ostree-grub-generator is hardcoded on the
 # do_configure stage so we do depend on it
 SYSROOT_DIR = "${STAGING_DIR_TARGET}"
@@ -104,6 +116,10 @@ do_configure:prepend() {
 
 do_install:append:class-native() {
     create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="${STAGING_LIBDIR_NATIVE}/ostree/ostree-grub-generator"
+}
+
+do_install:append:class-nativesdk() {
+    create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="\$OECORE_NATIVE_SYSROOT/usr/lib/ostree/ostree-grub-generator"
 }
 
 PACKAGE_BEFORE_PN = " \
@@ -186,4 +202,4 @@ RRECOMMENDS:${PN} += "kernel-module-overlay"
 SYSTEMD_SERVICE:${PN} = "ostree-remount.service ostree-finalize-staged.path"
 SYSTEMD_SERVICE:${PN}-switchroot = "ostree-prepare-root.service"
 
-BBCLASSEXTEND = "native"
+BBCLASSEXTEND = "native nativesdk"
