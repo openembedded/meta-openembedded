@@ -48,6 +48,7 @@ do_compile:prepend() {
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
     export PKG_CONFIG="PKG_CONFIG_SYSROOT_DIR=\"${PKG_CONFIG_SYSROOT_DIR}\" pkg-config"
     export STAGING_PREFIX="${STAGING_DIR_HOST}/${prefix}"
+    export CC="${CC}"
     export LD="${CC}"
     export LINKFLAGS="${LDFLAGS}"
 }
