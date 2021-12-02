@@ -17,10 +17,6 @@ DEPENDS = " \
     bison-native \
 "
 
-# The Yocto mirror has an old export of ostree:
-# http://downloads.yoctoproject.org/mirror/sources/git2_github.com.ostreedev.ostree.tar.gz
-PREMIRRORS = ""
-
 SRC_URI = " \
     gitsm://github.com/ostreedev/ostree;branch=main;protocol=https \
     file://run-ptest \
