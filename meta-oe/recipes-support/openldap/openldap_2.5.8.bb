@@ -20,6 +20,7 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://initscript \
     file://slapd.service \
     file://remove-user-host-pwd-from-version.patch \
+    file://0001-ldif-filter-fix-parallel-build-failure.patch \
 "
 
 SRC_URI[md5sum] = "86e3ffce4adfc57cbb76ac0ff48b2614"
