@@ -26,6 +26,7 @@ EXTRA_OEMESON = " \
 LDFLAGS:append:mipsarch = " -latomic"
 LDFLAGS:append:powerpc = " -latomic"
 LDFLAGS:append:powerpc64 = " -latomic"
+LDFLAGS:append:riscv32 = " -latomic"
 
 FILES:${PN} += "${datadir}/gjs-1.0/lsan"
 
