@@ -29,6 +29,14 @@ S = "${WORKDIR}/git"
 
 inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
 
+# Workaround compile failure:
+# |../git/src/libotutil/zbase32.c:37:1: error: function returns an aggregate [-Werror=aggregate-return]
+# so remove -Og and use -O2 as workaround
+DEBUG_OPTIMIZATION:remove = "-Og"
+DEBUG_OPTIMIZATION:append = " -O2"
+BUILD_OPTIMIZATION:remove = "-Og"
+BUILD_OPTIMIZATION:append = " -O2"
+
 # Package configuration - match ostree defaults, but without rofiles-fuse
 # otherwise we introduce a dependendency on meta-filesystems
 PACKAGECONFIG ??= " \
