@@ -30,7 +30,7 @@ PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'seccomp systemd', d)} \
                  nts \
                  refclocks"
 
-PACKAGECONFIG:remove:riscv32:libc-musl = "seccomp"
+PACKAGECONFIG:remove:riscv32 = "seccomp"
 
 PACKAGECONFIG[cap] = ",,libcap"
 PACKAGECONFIG[docs] = "--enable-doc --enable-manpage,--disable-doc --disable-manpage,"
