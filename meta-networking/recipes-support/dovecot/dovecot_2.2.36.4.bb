@@ -24,6 +24,7 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
            file://0012-lib-mail-Fix-handling-trailing-in-MIME-boundaries.patch \
            file://0013-lib-mail-Fix-parse_too_many_nested_mime_parts.patch \
            file://buffer_free_fix.patch \
+           file://0002-lib-ntlm-Check-buffer-length-on-responses.patch \
            "
 
 SRC_URI[md5sum] = "66c4d71858b214afee5b390ee602dee2"
