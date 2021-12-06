@@ -12,7 +12,7 @@ SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
 "
 
-SRCREV = "f47c9c36ed161c9afefe7d4910840fd41f38ae3d"
+SRCREV = "f8d2f17a3db5ac490d7b505253a98d6795c2b630"
 
 PV = "202105+git${SRCPV}"
 
