@@ -10,10 +10,9 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = " \
         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-        file://0001-backtrace-Include-cxxabi.h-without-HAVE_DW.patch \
 "
 
-SRCREV = "f47c9c36ed161c9afefe7d4910840fd41f38ae3d"
+SRCREV = "acf8d028edda0a59b10e15962c2606137a4940af"
 
 PV = "202105+git${SRCPV}"
 
