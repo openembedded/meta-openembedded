@@ -12,14 +12,13 @@ DEPENDS:append:libc-musl = " libucontext"
 PE = "1"
 
 BRANCH = "onetbb_2021"
-SRCREV = "2dba2072869a189b9fdab3ffa431d3ea49059a19"
+SRCREV = "4e021eafc03519cb1081ed775c9502cae72f8d8d"
 SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
             file://0001-mallinfo-is-glibc-specific-API-mark-it-so.patch \
-            file://GLIBC-PREREQ-is-not-defined-on-musl.patch \
             file://0001-CMakeLists.txt-exclude-riscv64-riscv32.patch \
             file://0001-Disable-use-of-_tpause-instruction.patch \
-            file://0001-set_my_tls_end_of_input-Use-an-arbitrary-but-valid-p.patch \
-            file://0001-arena-Remove-dead-code.patch \
+            file://0001-Musl-linux-can-not-use-RTLD_DEEPBIND.patch \
+            file://0001-Disable-LTO-on-clang-riscv32.patch \
 "
 
 S = "${WORKDIR}/git"
