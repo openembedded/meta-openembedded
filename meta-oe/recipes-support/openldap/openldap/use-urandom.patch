@@ -4,7 +4,7 @@ When we are cross-compiling, we want to assume
 that /dev/urandom exists.  We could change the source
 code to look for it, but this is the easy way out.
 
-Upstream-Status: pending
+Upstream-Status: Inappropriate [embedded specific]
 
 Signed-off-by: Joe Slater <jslater@windriver.com>
 
