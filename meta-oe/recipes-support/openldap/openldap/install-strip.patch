@@ -2,7 +2,7 @@
 # programs and libraries (LTINSTALL) work in a cross build
 # environment.
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [embedded specific]
 
 --- a/build/top.mk
 +++ b/build/top.mk
