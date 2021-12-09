@@ -332,6 +332,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pykwalify \
     python3-pylint \
     python3-pylyrics \
+    python3-pymetno \
     python3-pymisp \
     python3-pymongo \
     python3-pymysql \
