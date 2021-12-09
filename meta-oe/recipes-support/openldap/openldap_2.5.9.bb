@@ -21,17 +21,13 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://slapd.service \
     file://remove-user-host-pwd-from-version.patch \
     file://0001-ldif-filter-fix-parallel-build-failure.patch \
+    file://0001-build-top.mk-unset-STRIP_OPTS.patch \
 "
 
 SRC_URI[md5sum] = "237fc2d881c27f8dd5d9f396e2865c11"
 SRC_URI[sha256sum] = "c08e12f4ca5803d5d9f9948c70ad3491282cda3c17ec8b655dcbcb2364e6fb9e"
 
 DEPENDS = "util-linux groff-native"
-
-# The original top.mk used INSTALL, not INSTALL_STRIP_PROGRAM when
-# installing .so and executables, this fails in cross compilation
-# environments
-SRC_URI += "file://install-strip.patch"
 
 inherit autotools-brokensep update-rc.d systemd pkgconfig
 
