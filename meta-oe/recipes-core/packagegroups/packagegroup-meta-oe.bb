@@ -301,6 +301,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     sip3 \
     squashfs-tools-ng \
     uftrace \
+    unifex \
     libxerces-c \
     xerces-c-samples \
     xmlrpc-c \
