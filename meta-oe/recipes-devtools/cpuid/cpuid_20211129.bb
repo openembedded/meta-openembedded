@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
            "
-SRC_URI[sha256sum] = "13c53f16408341d11ed489b352f218ec4dbb5bedb796a9d059e924770a9c56a6"
+SRC_URI[sha256sum] = "230772bb88c44732e68a42d2eff43bcff46d893bf4ea6e04151d4cb6e8c88e2f"
 
 COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
 
