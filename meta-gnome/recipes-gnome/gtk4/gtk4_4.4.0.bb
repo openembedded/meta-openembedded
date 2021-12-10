@@ -28,6 +28,8 @@ LIC_FILES_CHKSUM = " \
 
 MAJ_VER = "${@oe.utils.trim_version("${PV}", 2)}"
 
+UPSTREAM_CHECK_REGEX = "gtk-(?P<pver>\d+\.(\d*[02468])+(\.\d+)+)\.tar.xz"
+
 SRC_URI = "http://ftp.gnome.org/pub/gnome/sources/gtk/${MAJ_VER}/gtk-${PV}.tar.xz"
 SRC_URI[sha256sum] = "e0a1508f441686c3a20dfec48af533b19a4b2e017c18eaee31dccdb7d292505b"
 
