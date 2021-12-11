@@ -1,6 +1,3 @@
-# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
-# Released under the MIT license (see COPYING.MIT for the terms)
-
 DESCRIPTION = "The C++ Database Access Library"
 HOMEPAGE = "http://soci.sourceforge.net"
 LICENSE = "BSL-1.0"
@@ -8,12 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 SECTION = "libs"
 DEPENDS = "boost"
 
-
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
-           file://soci_libdir.patch \
-          "
-SRC_URI[md5sum] = "acfbccf176cd20e06833a8037a2d3699"
-SRC_URI[sha256sum] = "2c659db0f4f7b424bbcffe195c03c293a1dbf676189a27b077fb2aab4d53a610"
+           file://0001-Fix-build-when-SIGSTKSZ-is-no-longer-a-constant.patch"
+SRC_URI[sha256sum] = "34da2d2320539463da8a5131253246fa2671e0438ab5fd1e5119edb428f558a5"
 
 TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
               -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \
@@ -29,6 +23,7 @@ PACKAGECONFIG[postgresql] = "-DSOCI_POSTGRESQL=ON,-DSOCI_POSTGRESQL=OFF,postgres
 PACKAGECONFIG[odbc] = "-DSOCI_ODBC=ON,-DSOCI_ODBC=OFF,,"
 PACKAGECONFIG[empty] = "-DSOCI_EMPTY=ON,-DSOCI_EMPTY=OFF,,"
 PACKAGECONFIG[oracle] = "-DWITH_ORACLE=ON --with-oracle-include=${OINCDIR} --with-oracle-lib=${OLIBDIR},-DWITH_ORACLE=OFF,,"
+PACKAGECONFIG[firebird] = "-DWITH_FIREBIRD=ON,-DWITH_FIREBIRD=OFF,,"
 PACKAGECONFIG[ptest] = "${TESTCONFIG},,,"
 
 # enable your backend by default we enable 'empty'
