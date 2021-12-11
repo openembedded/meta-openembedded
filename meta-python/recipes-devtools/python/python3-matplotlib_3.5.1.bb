@@ -7,19 +7,21 @@ HOMEPAGE = "https://github.com/matplotlib/matplotlib"
 SECTION = "devel/python"
 LICENSE = "PSF"
 LIC_FILES_CHKSUM = "\
-    file://setup.py;beginline=282;endline=282;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
+    file://setup.py;beginline=296;endline=296;md5=20e7ab4d2b2b1395a0e4ab800181eb96 \
     file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
 "
+
 DEPENDS = "\
     freetype \
     libpng \
-    python3-numpy-native \
-    python3-dateutil-native \
-    python3-pytz-native \
-    python3-certifi-native \
+    ${PYTHON_PN}-numpy-native \
+    ${PYTHON_PN}-pip-native \
+    ${PYTHON_PN}-dateutil-native \
+    ${PYTHON_PN}-pytz-native \
+    ${PYTHON_PN}-certifi-native \
 "
 
-SRC_URI[sha256sum] = "84d4c4f650f356678a5d658a43ca21a41fca13f9b8b00169c0b76e6a6a948908"
+SRC_URI[sha256sum] = "b2e9810e09c3a47b73ce9cab5a72243a1258f61e7900969097a817232246ce1c"
 
 inherit pypi setuptools3 pkgconfig
 
@@ -30,12 +32,12 @@ LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
 RDEPENDS:${PN} = "\
     freetype \
     libpng \
-    python3-numpy \
-    python3-pyparsing \
-    python3-cycler \
-    python3-dateutil \
-    python3-kiwisolver \
-    python3-pytz \
+    ${PYTHON_PN}-numpy \
+    ${PYTHON_PN}-pyparsing \
+    ${PYTHON_PN}-cycler \
+    ${PYTHON_PN}-dateutil \
+    ${PYTHON_PN}-kiwisolver \
+    ${PYTHON_PN}-pytz \
 "
 
 ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/setup.cfg"
