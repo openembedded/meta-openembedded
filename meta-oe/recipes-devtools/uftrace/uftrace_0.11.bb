@@ -10,8 +10,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
 
 inherit autotools
 
-PV .= "+git${SRCPV}"
-SRCREV = "a5e5a51d32bdfe59af8b453ca08d78cbdf0b3c61"
+SRCREV = "304a492652dc0fd220f601167c4ebb30e2ae4a39"
 SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
            "
 S = "${WORKDIR}/git"
