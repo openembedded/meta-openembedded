@@ -6,7 +6,7 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
 SRC_URI = "https://github.com/netdata/netdata/releases/download/v${PV}/netdata-v${PV}.tar.gz"
-SRC_URI[sha256sum] = "f169c8615a6823448c2f1923c87c286d798132ea29d26f366e96d26e0aec3697"
+SRC_URI[sha256sum] = "5e066d322f88013cea78eb9bb42bca64599278b9db8d46593777e4258743fefd"
 
 # default netdata.conf for netdata configuration
 SRC_URI += "file://netdata.conf"
@@ -18,7 +18,7 @@ UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
 
 S = "${WORKDIR}/netdata-v${PV}"
 
-DEPENDS += "zlib util-linux libuv"
+DEPENDS += "libuv openssl util-linux zlib "
 
 inherit pkgconfig autotools-brokensep useradd systemd
 
@@ -35,6 +35,9 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 #User specific
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
+
+# ebpf doesn't compile (or detect) the cross compilation well
+EXTRA_OECONF += "--disable-ebpf"
 
 do_install:append() {
     #set S UID for plugins
