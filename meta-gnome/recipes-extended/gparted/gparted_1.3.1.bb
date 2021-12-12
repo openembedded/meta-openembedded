@@ -13,6 +13,9 @@ SRC_URI = " \
 "
 SRC_URI[sha256sum] = "5eee2e6d74b15ef96b13b3a2310c868ed2298e03341021e7d12a5a98a1d1e109"
 
+UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/gparted/files/gparted/"
+UPSTREAM_CHECK_REGEX = "gparted-(?P<pver>\d+\.(\d+)+(\.\d+)+)"
+
 DEPENDS += " \
     glib-2.0-native \
     yelp-tools-native \
