@@ -13,11 +13,12 @@ SRC_URI[sha256sum] = "49a4418733c508c03ad79a29e95acec9a2fbc4c7306131d2a8f5ef3201
 
 UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/srecord/files/releases"
 
-DEPENDS = "libtool-native boost groff-native"
+DEPENDS = "boost groff-native"
 
 inherit autotools-brokensep
 
-EXTRA_OECONF = "--without-gcrypt"
+PACKAGECONFIG ??= "gcrypt"
+PACKAGECONFIG[gcrypt] = "--with-gcrypt,--without-gcrypt,libgcrypt"
 
 # Set variable WITHOUT_DOC=0 to enable documentation generation
 EXTRA_OEMAKE = "WITHOUT_DOC=1"
