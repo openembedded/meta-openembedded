@@ -17,7 +17,7 @@ DEPENDS = "libtool-native boost groff-native"
 
 inherit autotools-brokensep
 
-EXTRA_OECONF = "--without-gcrypt LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
+EXTRA_OECONF = "--without-gcrypt"
 
 # Set variable WITHOUT_DOC=0 to enable documentation generation
 EXTRA_OEMAKE = "WITHOUT_DOC=1"
