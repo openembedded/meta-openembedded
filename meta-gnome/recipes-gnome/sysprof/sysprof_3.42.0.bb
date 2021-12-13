@@ -14,12 +14,7 @@ DEPENDS += " \
     glib-2.0 \
 "
 
-SRC_URI[archive.md5sum] = "3956e82b8744715006dde59e0ce8910b"
-SRC_URI[archive.sha256sum] = "8670db4dacf7b219d30c575c465b17c8ed6724dbade347f2cde9548bff039108"
-SRC_URI += " \
-    file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
-    file://0002-tests-use-G_GSIZE_FORMAT-instead-of-G_GUINT64_FORMAT.patch \
-"
+SRC_URI[archive.sha256sum] = "3c16e03efdfe5d3e71c4d239c67741ad37f72ce8971e2f7faf168dbd5e93e886"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd', '', d)} \
                   ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'libsysprof', '', d)} \
