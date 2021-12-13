@@ -1,11 +1,11 @@
 DESCRIPTION = "Bindings for the scrypt key derivation function library"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=2ddf47d0ff1849bce3257ccbc1fd275c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=05b5ac2824a7ae7489193b0f6a6f2cd1"
 HOMEPAGE="https://github.com/holgern/py-scrypt"
 
 SRC_URI += "file://0001-py-scrypt-remove-the-hard-coded-include-paths.patch"
 
-SRC_URI[sha256sum] = "bcf04257af12e6d52974d177a7b08e314b66f350a73f9b6f7b232d69a6a1e041"
+SRC_URI[sha256sum] = "ad143035ae0cf5e97c4b399f4e4686adf442c5f0f06f9f198a0cc6c091335fb7"
 
 inherit pypi ptest setuptools3 dos2unix
 
