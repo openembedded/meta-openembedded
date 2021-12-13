@@ -21,6 +21,10 @@ DEPENDS += " \
     webkitgtk \
     yelp-xsl \
 "
+PACKAGECONFIG ?= ""
+
+# Enable if soup3 is enabled in webkit recipe
+PACKAGECONFIG[soup3] = ",--with-webkit2gtk-4-0,"
 
 do_configure:prepend() {
     export ITSTOOL=${STAGING_BINDIR_NATIVE}/itstool
