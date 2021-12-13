@@ -18,8 +18,11 @@ DEPENDS = " \
 
 inherit meson pkgconfig gobject-introspection vala gtk-doc
 
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'sniffer', '', d)}"
-PACKAGECONFIG[sniffer] = "-Dsniffer=true,-Dsniffer=false,gtk+4,"
+SNIFFER = "${@bb.utils.contains("BBFILE_COLLECTIONS", "gnome-layer", "sniffer", "", d)}"
+
+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', "${SNIFFER}", "", d)}"
+
+PACKAGECONFIG[sniffer] = "-Dsniffer=true,-Dsniffer=false,gtk4,"
 
 PACKAGES =+ "gssdp-tools"
 
