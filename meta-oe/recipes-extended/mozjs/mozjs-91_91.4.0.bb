@@ -16,7 +16,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/fire
            file://0001-util.configure-fix-one-occasionally-reproduced-confi.patch \
            file://0001-rewrite-cargo-host-linker-in-python3.patch  \
            "
-SRC_URI[sha256sum] = "3ef3cfd321d0c2c80ee1b41b8baf7a1ea4daf93c29e1377274933440ff5e42c3"
+SRC_URI[sha256sum] = "e722829db490f9332712a81c35996541737bbfb05232d47190fee779c4fcb327"
 
 S = "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
 
