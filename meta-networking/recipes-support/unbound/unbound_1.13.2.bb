@@ -22,9 +22,7 @@ RDEPENDS:${PN} = "bash openssl-bin daemonize"
 S = "${WORKDIR}/git"
 
 EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
-		--with-ssl=${STAGING_EXECPREFIXDIR} \
-		libtool=${HOST_SYS}-libtool \
-"
+		--with-ssl=${STAGING_EXECPREFIXDIR}"
 		
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'largefile systemd', d)}"
