@@ -40,12 +40,12 @@ RDEPENDS:${PN} = "\
     ${PYTHON_PN}-pytz \
 "
 
-ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/setup.cfg"
-ENABLELTO:toolchain-clang:riscv32 = "echo enable_lto = False >> ${S}/setup.cfg"
-ENABLELTO:toolchain-clang:mips = "echo enable_lto = False >> ${S}/setup.cfg"
+ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
+ENABLELTO:toolchain-clang:riscv32 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
+ENABLELTO:toolchain-clang:mips = "echo enable_lto = False >> ${S}/mplsetup.cfg"
 do_compile:prepend() {
-    echo [libs] > ${S}/setup.cfg
-    echo system_freetype = true >> ${S}/setup.cfg
+    echo [libs] > ${S}/mplsetup.cfg
+    echo system_freetype = True >> ${S}/mplsetup.cfg
     ${ENABLELTO}
 }
 
