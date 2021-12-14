@@ -482,6 +482,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
     gphoto2 \
     imlib2 \
     libgphoto2 \
+    graphene \
     graphviz \
     gtkwave \
     jasper \
