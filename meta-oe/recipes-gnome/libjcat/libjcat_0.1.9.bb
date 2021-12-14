@@ -8,13 +8,13 @@ DEPENDS = "\
 "
 
 SRC_URI = "\
-    git://github.com/hughsie/libjcat.git;branch=master;protocol=https \
+    git://github.com/hughsie/libjcat.git;branch=main;protocol=https \
     file://run-ptest \
 "
-SRCREV = "356cd2faf2d2197156b0dae7984482cf781d64db"
+SRCREV = "d4833949f8f1997b83f35a03127b9e12c104a7c8"
 S = "${WORKDIR}/git"
 
-inherit gobject-introspection gtk-doc meson ptest-gnome vala
+inherit gobject-introspection gtk-doc meson ptest-gnome vala lib_package
 
 PACKAGECONFIG ??= "\
     gpg \
