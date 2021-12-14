@@ -25,6 +25,7 @@ inherit pkgconfig autotools-brokensep useradd systemd
 LIBS:toolchain-clang:x86 = "-latomic"
 LIBS:riscv64 = "-latomic"
 LIBS:riscv32 = "-latomic"
+LIBS:mips = "-latomic"
 export LIBS
 
 #systemd
