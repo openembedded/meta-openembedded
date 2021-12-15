@@ -1,13 +1,11 @@
 SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
 HOMEPAGE = "http://www.chronox.de/libkcapi.html"
 LICENSE = "BSD-3-Clause | GPL-2.0"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c78be93ed8d1637f2a3f4a83ff9d5f54"
+LIC_FILES_CHKSUM = "file://COPYING;md5=80c467906eb826339c7f09e61808ed23"
 
 S = "${WORKDIR}/git"
-SRCREV = "d41284525ec8960e9a828979cfe269012b7df8db"
-SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
-           file://0001-Disable-use-of-__NR_io_getevents-when-not-defined.patch \
-           "
+SRCREV = "2936ecd060c299157ac880650ba2c9fd94d27bb1"
+SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https"
 
 inherit autotools
 
