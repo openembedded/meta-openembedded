@@ -15,6 +15,10 @@ inherit autotools
 
 EXTRA_OECONF = "--disable-doxygen"
 
+# workaround until glibc 2.35 is fixed for this [1]
+# [1] https://sourceware.org/pipermail/libc-alpha/2021-December/134215.html
+CFLAGS += "-Wno-error"
+
 PACKAGES =+ "libinotifytools"
 
 FILES:libinotifytools = "${libdir}/lib*.so.*"
