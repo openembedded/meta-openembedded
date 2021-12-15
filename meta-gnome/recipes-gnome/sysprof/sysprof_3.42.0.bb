@@ -12,6 +12,7 @@ DEPENDS += " \
     yelp-tools-native \
     libxml2-native \
     glib-2.0 \
+    json-glib \
 "
 
 SRC_URI[archive.sha256sum] = "3c16e03efdfe5d3e71c4d239c67741ad37f72ce8971e2f7faf168dbd5e93e886"
