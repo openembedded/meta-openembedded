@@ -11,7 +11,7 @@ LICENSE = "BSD-2-Clause"
 
 SECTION = "libs"
 
-LIC_FILES_CHKSUM = "file://README;md5=6900e4a158982e4c4715bf16aa54fa10"
+LIC_FILES_CHKSUM = "file://COPYING;md5=ea061f8731d5e6a5761dfad951ef5f5f"
 
 SRC_URI = "git://github.com/jemalloc/jemalloc.git;branch=master;protocol=https \
            file://0001-Makefile.in-make-sure-doc-generated-before-install.patch \
