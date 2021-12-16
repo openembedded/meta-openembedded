@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=80c467906eb826339c7f09e61808ed23"
 
 S = "${WORKDIR}/git"
 SRCREV = "2936ecd060c299157ac880650ba2c9fd94d27bb1"
-SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
+           file://0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch \
+          "
 
 inherit autotools
 
