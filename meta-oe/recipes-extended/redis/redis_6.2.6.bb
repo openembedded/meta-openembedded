@@ -13,7 +13,11 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
            file://hiredis-use-default-CC-if-it-is-set.patch \
            file://lua-update-Makefile-to-use-environment-build-setting.patch \
            file://oe-use-libc-malloc.patch \
+           file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+           file://GNU_SOURCE.patch \
+           file://0006-Define-correct-gregs-for-RISCV32.patch \
            "
+
 SRC_URI[sha256sum] = "5b2b8b7a50111ef395bf1c1d5be11e6e167ac018125055daa8b5c2317ae131ab"
 
 inherit autotools-brokensep update-rc.d systemd useradd
