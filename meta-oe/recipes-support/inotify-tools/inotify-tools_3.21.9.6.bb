@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
 
 SRCREV = "8f8fcdffb7e80928bea6c1fccd3527a9f5d8fe77"
 
-SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https"
+SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
+           file://0001-libinotifytools-Include-limit.h-for-PATH_MAX.patch \
+           file://0002-libinotifytools-Bridge-differences-between-musl-glib.patch \
+          "
 
 S = "${WORKDIR}/git"
 
