@@ -29,5 +29,13 @@ do_install:append () {
         install -d ${D}${systemd_system_unitdir}
         install -m 0644 ${S}/conf/mctpd.service \
                 ${D}${systemd_system_unitdir}/mctpd.service
+        install -d ${D}${datadir}/dbus-1/system.d
+        install -m 0644 ${S}/conf/mctpd-dbus.conf \
+                ${D}${datadir}/dbus-1/system.d/mctpd.conf
     fi
 }
+
+FILES:${PN} += " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', \
+            '${datadir}/dbus-1/system.d/mctpd.conf', '', d)} \
+"
