@@ -210,8 +210,8 @@ OE_vars = [
     'others'
 ]
 
-varRegexp = r'^([a-zA-Z_0-9${}-]*)([ \t]*)([+.:]?=[+.]?)([ \t]*)([^\t]+)'
-routineRegexp = r'^([a-zA-Z0-9_ ${}-]+?)\('
+varRegexp = r'^([a-zA-Z_0-9${}:-]*)([ \t]*)([+.:]?=[+.]?)([ \t]*)([^\t]+)'
+routineRegexp = r'^([a-zA-Z0-9_ ${}:-]+?)\('
 
 # Variables seen in the processed .bb
 seen_vars = {}
