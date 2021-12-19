@@ -20,6 +20,10 @@ UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
 
 S = "${WORKDIR}/${BPN}-v${PV}"
 
+PACKAGECONFIG ??= "\
+    anonymous \
+"
+
 inherit pkgconfig autotools-brokensep useradd systemd
 
 LIBS:toolchain-clang:x86 = "-latomic"
@@ -57,6 +61,11 @@ do_install:append() {
     sed -i -e 's,@@sysconfdir,${sysconfdir},g' ${D}${sysconfdir}/netdata/netdata.conf
     sed -i -e 's,@@libdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
+
+    # Stop sending anonymous statistics to Google Analytics
+    if ${@bb.utils.contains('PACKAGECONFIG', 'anonymous', 'true', 'false', d)}; then
+        touch ${D}${sysconfdir}/netdata/.opt-out-from-anonymous-statistics
+    fi
 
     install --group netdata --owner netdata --directory ${D}${localstatedir}/cache/netdata
     install --group netdata --owner netdata --directory ${D}${localstatedir}/lib/netdata
