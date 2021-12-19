@@ -5,7 +5,9 @@ DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troublesho
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
-SRC_URI = "https://github.com/${PN}/${PN}/releases/download/${PV}/${PN}-v${PV}.tar.gz"
+DEPENDS += "libuv openssl util-linux zlib "
+
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BPN}-v${PV}.tar.gz"
 SRC_URI[sha256sum] = "ac406513e86ad24976a66146702aeac960e43908abc51d70e4a073905275d13e"
 
 # default netdata.conf for netdata configuration
@@ -16,9 +18,7 @@ SRC_URI += "file://netdata.service"
 
 UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
 
-S = "${WORKDIR}/netdata-v${PV}"
-
-DEPENDS += "libuv openssl util-linux zlib "
+S = "${WORKDIR}/${BPN}-v${PV}"
 
 inherit pkgconfig autotools-brokensep useradd systemd
 
