@@ -6,7 +6,7 @@ LICENSE = "PHP-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
 
 BBCLASSEXTEND = "native"
-DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native qemu-native"
+DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
 DEPENDS:class-native = "zlib-native libxml2-native"
 
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
@@ -25,7 +25,6 @@ SRC_URI:append:class-target = " \
             file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
             file://0007-sapi-cli-config.m4-fix-build-directory.patch \
             file://0008-ext-imap-config.m4-fix-include-paths.patch \
-            file://0011-use-qemuwrapper-for-minilua.patch \
             file://php-fpm.conf \
             file://php-fpm-apache.conf \
             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
@@ -33,10 +32,10 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "b4886db1df322dc8fb128d8b34ae7e94f6fc682ecb29ff4f5a591d4de9feadbf"
+SRC_URI[sha256sum] = "0725ed2baea125496a898455d501a77460218b2a0cfad773fa9322f491b82b61"
 
 
-inherit autotools pkgconfig python3native gettext qemu
+inherit autotools pkgconfig python3native gettext
 
 # phpize is not scanned for absolute paths by default (but php-config is).
 #
@@ -77,7 +76,7 @@ EXTRA_OECONF:class-native = " \
                 ${COMMON_EXTRA_OECONF} \
 "
 
-PACKAGECONFIG ??= "mysql sqlite3 imap opcache \
+PACKAGECONFIG ??= "mysql sqlite3 imap opcache openssl \
                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
 "
 PACKAGECONFIG:class-native = ""
@@ -126,17 +125,6 @@ acpaths = ""
 do_configure:prepend () {
     rm -f ${S}/build/libtool.m4 ${S}/ltmain.sh ${S}/aclocal.m4
     find ${S} -name config.m4 | xargs -n1 sed -i 's!APXS_HTTPD=.*!APXS_HTTPD=${STAGING_SBINDIR_NATIVE}/httpd!'
-}
-
-do_configure:prepend:class-target () {
-    # Write out a qemu wrapper that will be used by the makefile
-    # so that it can run minilua through that.
-    qemu_binary="${@qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST'), [d.expand('${STAGING_DIR_HOST}${libdir}'),d.expand('${STAGING_DIR_HOST}${base_libdir}')])}"
-    cat > ${S}/qemuwrapper << EOF
-#!/bin/sh
-$qemu_binary "\$@"
-EOF
-    chmod +x ${S}/qemuwrapper
 }
 
 do_configure:append() {
