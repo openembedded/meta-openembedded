@@ -1,6 +1,6 @@
-From 8cabcf1043953a0fe48107204a2212609b8e6516 Mon Sep 17 00:00:00 2001
-From: Claude Bing <cbing@cybernetics.com>
-Date: Tue, 9 Nov 2021 12:59:15 -0500
+From ca9b419f2c146061f73ee045cb0a069c18b40cd0 Mon Sep 17 00:00:00 2001
+From: Mingli Yu <mingli.yu@windriver.com>
+Date: Wed, 15 Dec 2021 14:00:08 +0800
 Subject: [PATCH 01/11] ext/opcache/config.m4: enable opcache
 
 We can't use AC_TRY_RUN to run programs in a cross compile
@@ -17,15 +17,18 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
 update patch to version 8.0.12
 fix issue linking with librt
 Signed-off-by: Claude Bing <cbing@cybernetics.com>
+
+update patch to version 8.1.0
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ext/opcache/config.m4 | 197 ++----------------------------------------
- 1 file changed, 8 insertions(+), 189 deletions(-)
+ ext/opcache/config.m4 | 204 ++----------------------------------------
+ 1 file changed, 8 insertions(+), 196 deletions(-)
 
 diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
-index 5492fd920c..95158ccfd9 100644
+index 2a83fa2..9471b5d 100644
 --- a/ext/opcache/config.m4
 +++ b/ext/opcache/config.m4
-@@ -101,202 +101,21 @@ if test "$PHP_OPCACHE" != "no"; then
+@@ -108,209 +108,21 @@ if test "$PHP_OPCACHE" != "no"; then
    AC_CHECK_FUNCS([mprotect])
  
    AC_MSG_CHECKING(for sysvipc shared memory support)
@@ -93,9 +96,10 @@ index 5492fd920c..95158ccfd9 100644
 -  }
 -  return 0;
 -}
--]])],[dnl
+-]])],[have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
+-  if test "$have_shm_ipc" = "yes"; then
 -    AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
--    have_shm_ipc=yes],[have_shm_ipc=no],[have_shm_ipc=no])
+-  fi
 +  AC_DEFINE(HAVE_SHM_IPC, 1, [Define if you have SysV IPC SHM support])
 +  have_shm_ipc=yes
    AC_MSG_RESULT([$have_shm_ipc])
@@ -147,9 +151,19 @@ index 5492fd920c..95158ccfd9 100644
 -  }
 -  return 0;
 -}
--]])],[dnl
+-]])],[have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[
+-  case $host_alias in
+-    *linux*)
+-      have_shm_mmap_anon=yes
+-      ;;
+-    *)
+-      have_shm_mmap_anon=no
+-      ;;
+-  esac
+-])
+-  if test "$have_shm_mmap_anon" = "yes"; then
 -    AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
--    have_shm_mmap_anon=yes],[have_shm_mmap_anon=no],[have_shm_mmap_anon=no])
+-  fi
 +  AC_DEFINE(HAVE_SHM_MMAP_ANON, 1, [Define if you have mmap(MAP_ANON) SHM support])
 +  have_shm_mmap_anon=yes
    AC_MSG_RESULT([$have_shm_mmap_anon])
@@ -219,16 +233,12 @@ index 5492fd920c..95158ccfd9 100644
 -  }
 -  return 0;
 -}
--]])],[dnl
+-]])],[have_shm_mmap_posix=yes],[have_shm_mmap_posix=no],[have_shm_mmap_posix=no])
+-  if test "$have_shm_mmap_posix" = "yes"; then
 -    AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
--    AC_MSG_RESULT([yes])
--    have_shm_mmap_posix=yes
 -    PHP_CHECK_LIBRARY(rt, shm_unlink, [PHP_ADD_LIBRARY(rt,1,OPCACHE_SHARED_LIBADD)])
--  ],[
--    AC_MSG_RESULT([no])
--  ],[
--    AC_MSG_RESULT([no])
--  ])
+-  fi
+-  AC_MSG_RESULT([$have_shm_mmap_posix])
 +  AC_DEFINE(HAVE_SHM_MMAP_POSIX, 1, [Define if you have POSIX mmap() SHM support])
 +  AC_MSG_RESULT([yes])
 +  have_shm_mmap_posix=yes
@@ -237,5 +247,5 @@ index 5492fd920c..95158ccfd9 100644
    PHP_NEW_EXTENSION(opcache,
  	ZendAccelerator.c \
 -- 
-2.25.1
+2.17.1
 
