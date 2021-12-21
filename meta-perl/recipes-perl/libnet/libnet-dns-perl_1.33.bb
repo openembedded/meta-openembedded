@@ -3,13 +3,13 @@ HOMEPAGE = "http://www.net-dns.org/"
 SECTION = "libs"
 LICENSE = "MIT"
 
-LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=27db37b42cd1a5173a53922d67072bcb"
+LIC_FILES_CHKSUM = "file://README;beginline=252;endline=269;md5=de95b6a896d5f861d724ea854d316a0b"
 
 DEPENDS += "perl"
 
 SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
 
-SRC_URI[sha256sum] = "b890a7b44d573f27cc713caadf1e12eaaa4478a6504d1157194df614316b5b50"
+SRC_URI[sha256sum] = "5a40e7cf524e4bd2c33cf03b82b47d5308b712083aa5ee180b0b5af54c71fbd2"
 
 UPSTREAM_CHECK_REGEX = "Net\-DNS\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
 
