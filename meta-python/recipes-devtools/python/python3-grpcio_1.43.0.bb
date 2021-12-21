@@ -1,8 +1,8 @@
 DESCRIPTION = "Google gRPC"
 HOMEPAGE = "http://www.grpc.io/"
 SECTION = "devel/python"
-LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LICENSE = "Apache-2.0 & BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6e4cf218112648d22420a84281b68b88"
 
 DEPENDS += "${PYTHON_PN}-protobuf"
 
@@ -12,7 +12,7 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
                                 file://mips_bigendian.patch \
                                 file://0001-absl-always-use-asm-sgidefs.h.patch \
 "
-SRC_URI[sha256sum] = "9b751271b029432a526a4970dc9b70d93eb6f0963b6a841b574f780b72651969"
+SRC_URI[sha256sum] = "735d9a437c262ab039d02defddcb9f8f545d7009ae61c0114e19dda3843febe5"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
