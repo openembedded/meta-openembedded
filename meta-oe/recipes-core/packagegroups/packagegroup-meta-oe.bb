@@ -297,6 +297,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     protobuf \
     pugixml \
     python3-distutils-extra \
+    python3-pycups \
     rapidjson \
     sip3 \
     squashfs-tools-ng \
@@ -633,6 +634,7 @@ RDEPENDS:packagegroup-meta-oe-kernel ="\
     oprofile \
     spidev-test \
     trace-cmd \
+    usbip-tools \
 "
 RDEPENDS:packagegroup-meta-oe-kernel:append:x86 = " intel-speed-select ipmiutil pm-graph turbostat"
 RDEPENDS:packagegroup-meta-oe-kernel:append:x86-64 = " intel-speed-select ipmiutil kpatch pm-graph turbostat bpftool"
@@ -697,6 +699,7 @@ RDEPENDS:packagegroup-meta-oe-navigation ="\
 
 RDEPENDS:packagegroup-meta-oe-printing ="\
     cups-filters \
+    gutenprint \
     qpdf \
 "
 
