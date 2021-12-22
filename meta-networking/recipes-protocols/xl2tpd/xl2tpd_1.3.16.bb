@@ -9,7 +9,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/xelerance/xl2tpd.git;branch=master;protocol=https"
-SRCREV = "ba619c79c4790c78c033df0abde4a9a5de744a08"
+SRCREV = "1ef2a025981223c1e16fc833bef226c86ff8c295"
+
+UPSTREAM_CHECK_URI = "https://github.com/xelerance/xl2tpd/releases"
 
 S = "${WORKDIR}/git"
 
