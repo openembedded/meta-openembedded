@@ -20,9 +20,8 @@ UPSTREAM_CHECK_URI = "https://github.com/netdata/netdata/releases"
 
 S = "${WORKDIR}/${BPN}-v${PV}"
 
-PACKAGECONFIG ??= "\
-    anonymous \
-"
+# Stop sending anonymous statistics to Google Analytics
+NETDATA_ANONYMOUS ??= "enabled"
 
 inherit pkgconfig autotools-brokensep useradd systemd
 
@@ -62,8 +61,7 @@ do_install:append() {
     sed -i -e 's,@@libdir,${libexecdir},g' ${D}${sysconfdir}/netdata/netdata.conf
     sed -i -e 's,@@datadir,${datadir},g' ${D}${sysconfdir}/netdata/netdata.conf
 
-    # Stop sending anonymous statistics to Google Analytics
-    if ${@bb.utils.contains('PACKAGECONFIG', 'anonymous', 'true', 'false', d)}; then
+    if [ "${NETDATA_ANONYMOUS}" = "enabled" ]; then
         touch ${D}${sysconfdir}/netdata/.opt-out-from-anonymous-statistics
     fi
 
