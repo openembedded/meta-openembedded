@@ -23,6 +23,7 @@ EXTRA_OECONF += "--arch=${TARGET_ARCH} \
                  --disable-ffmpeg_static \
                  --disable-libav \
                  --python=python3 \
+                 --disable-dvbscan \
                  "
 
 CLEANBROKEN = "1"
