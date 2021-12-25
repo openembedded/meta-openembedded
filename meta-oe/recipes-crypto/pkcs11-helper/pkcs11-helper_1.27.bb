@@ -17,6 +17,7 @@ LIC_FILES_CHKSUM = " \
 "
 SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https \
            file://0001-build-openssl-remove-RSA_SSLV23_PADDING-constant-usa.patch \
+           file://0001-nss-use-nss-pkcs11-h.patch \
            "
 
 S = "${WORKDIR}/git"
