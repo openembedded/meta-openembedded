@@ -27,7 +27,10 @@ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-syst
 PACKAGECONFIG ?= "curl gmp openssl sqlite3 swanctl curve25519\
         ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-charon', 'charon', d)} \
         ${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', 'tpm2', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'ima', 'tnc-imc imc-hcd imc-os imc-scanner imc-attestation', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'ima', 'tnc-imv imv-hcd imv-os imv-scanner imv-attestation', '', d)} \
 "
+
 PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
 PACKAGECONFIG[bfd] = "--enable-bfd-backtraces,--disable-bfd-backtraces,binutils"
 PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
@@ -51,6 +54,33 @@ PACKAGECONFIG[systemd-charon] = "--enable-systemd,--disable-systemd,systemd,"
 # tpm needs meta-tpm layer
 PACKAGECONFIG[tpm2] = "--enable-tpm,--disable-tpm,,${PN}-plugin-tpm"
 
+
+# integraty configuration needs meta-integraty
+#imc 
+PACKAGECONFIG[tnc-imc] = "--enable-tnc-imc,--disable-tnc-imc,,  ${PN}-plugin-tnc-imc ${PN}-plugin-tnc-tnccs"
+PACKAGECONFIG[imc-test] = "--enable-imc-test,--disable-imc-test,,"
+PACKAGECONFIG[imc-scanner] = "--enable-imc-scanner,--disable-imc-scanner,,"
+PACKAGECONFIG[imc-os] = "--enable-imc-os,--disable-imc-os,,"
+PACKAGECONFIG[imc-attestation] = "--enable-imc-attestation,--disable-imc-attestation,,"
+PACKAGECONFIG[imc-swima] = "--enable-imc-swima, --disable-imc-swima, json-c,"
+PACKAGECONFIG[imc-hcd] = "--enable-imc-hcd, --disable-imc-hcd,,"
+
+#imv set
+PACKAGECONFIG[tnc-imv] = "--enable-tnc-imv,--disable-tnc-imv,, ${PN}-plugin-tnc-imv ${PN}-plugin-tnc-tnccs"
+PACKAGECONFIG[imv-test] = "--enable-imv-test,--disable-imv-test,,"
+PACKAGECONFIG[imv-scanner] = "--enable-imv-scanner,--disable-imv-scanner,,"
+PACKAGECONFIG[imv-os] = "--enable-imv-os,--disable-imv-os,,"
+PACKAGECONFIG[imv-attestation] = "--enable-imv-attestation,--disable-imv-attestation,,"
+PACKAGECONFIG[imv-swima] = "--enable-imv-swima, --disable-imv-swima, json-c,"
+PACKAGECONFIG[imv-hcd] = "--enable-imv-hcd, --disable-imv-hcd,,"
+
+PACKAGECONFIG[tnc-ifmap] = "--enable-tnc-ifmap,--disable-tnc-ifmap, libxml2, ${PN}-plugin-tnc-ifmap"
+PACKAGECONFIG[tnc-pdp] = "--enable-tnc-pdp,--disable-tnc-pdp,, ${PN}-plugin-tnc-pdp"
+
+PACKAGECONFIG[tnccs-11] = "--enable-tnccs-11,--disable-tnccs-11,libxml2, ${PN}-plugin-tnccs-11"
+PACKAGECONFIG[tnccs-20] = "--enable-tnccs-20,--disable-tnccs-20,, ${PN}-plugin-tnccs-20"
+PACKAGECONFIG[tnccs-dynamic] = "--enable-tnccs-dynamic,--disable-tnccs-dynamic,,${PN}-plugin-tnccs-dynamic"
+
 inherit autotools systemd pkgconfig
 
 RRECOMMENDS:${PN} = "kernel-module-ah4 \
@@ -67,6 +97,12 @@ CONFFILES:${PN} = "${sysconfdir}/*.conf ${sysconfdir}/ipsec.d/*.conf ${sysconfdi
 
 PACKAGES += "${PN}-plugins"
 ALLOW_EMPTY:${PN}-plugins = "1"
+
+PACKAGE_BEFORE_PN = "${PN}-imcvs ${PN}-imcvs-dbg"
+ALLOW_EMPTY:${PN}-imcvs = "1"
+
+FILES:${PN}-imcvs = "${libdir}/ipsec/imcvs/*.so"
+FILES:${PN}-imcvs-dbg += "${libdir}/ipsec/imcvs/.debug"
 
 PACKAGES_DYNAMIC += "^${PN}-plugin-.*$"
 NOAUTOPACKAGEDEBUG = "1"
