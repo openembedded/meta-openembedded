@@ -14,10 +14,12 @@ CVE: CVE-2020-12100
 Upstream-Status: Backport [http://archive.ubuntu.com/ubuntu/pool/main/d/dovecot/dovecot_2.2.33.2-1ubuntu4.7.debian.tar.xz]
 Comment: No change in any hunk
 
---- a/src/lib-mail/message-parser.c
-+++ b/src/lib-mail/message-parser.c
+Index: dovecot-2.2.36.4/src/lib-mail/message-parser.c
+===================================================================
+--- dovecot-2.2.36.4.orig/src/lib-mail/message-parser.c
++++ dovecot-2.2.36.4/src/lib-mail/message-parser.c
 @@ -1,7 +1,7 @@
- /* Copyright (c) 2002-2017 Dovecot authors, see the included COPYING file */
+ /* Copyright (c) 2002-2018 Dovecot authors, see the included COPYING file */
  
  #include "lib.h"
 -#include "buffer.h"
