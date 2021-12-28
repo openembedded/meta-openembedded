@@ -4,7 +4,7 @@ BUGTRACKER = "19e7bb9b608b0c0dce2ee6f56fac75901bc69529"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 
-DEPENDS = "fuse libmtp"
+DEPENDS = "fuse libmtp autoconf-archive"
 
 inherit autotools pkgconfig
 
