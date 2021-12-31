@@ -8,6 +8,8 @@ SRC_URI = "git://gitlab.freedesktop.org/upower/upower.git;protocol=https;branch=
 SRCREV = "0f6cc0a10be22d7ddd684e1cd851e4364a440494"
 S = "${WORKDIR}/git"
 
+UPSTREAM_CHECK_GITTAGREGEX = "UPOWER_(?P<pver>\d+(\_\d+)+)"
+
 inherit autotools pkgconfig gtk-doc gettext gobject-introspection systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
