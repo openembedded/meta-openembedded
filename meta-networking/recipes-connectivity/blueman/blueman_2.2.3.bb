@@ -11,7 +11,7 @@ SRC_URI = " \
     file://0001-Search-for-cython3.patch \
     file://0002-fix-fail-to-enable-bluetooth.patch \
 "
-SRC_URI[sha256sum] = "fcc10a2259bef2c5ac63f577010d76caed460d68810b7f70fecf056bf10a1a72"
+SRC_URI[sha256sum] = "6edd791da6afd8f610ffb08d5138cfcf50e6257ad30efad686287f3a2be106e9"
 
 EXTRA_OECONF = " \
     --disable-appindicator \
