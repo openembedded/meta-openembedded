@@ -23,7 +23,7 @@ SRC_URI:append:class-target = " \
     file://0004-Add-configure-option-to-find-qt5-native-tools.patch \
 "
 
-SRC_URI[archive.sha256sum] = "6b690485567eaeb938c26936e5e0681cf70c856d273cc2c45fabf64d8bc6590e"
+SRC_URI[archive.sha256sum] = "e57c75e1318133951d32a83bcdc4aff17fed28722c4e71f2305cfc2ae1cae7ba"
 SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
 
 # for building docs (they deserve it) we need *doc2* tools native
