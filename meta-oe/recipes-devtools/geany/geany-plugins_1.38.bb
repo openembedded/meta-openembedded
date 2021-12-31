@@ -32,7 +32,7 @@ SRC_URI = " \
     https://plugins.geany.org/${BPN}/${BP}.tar.bz2 \
     file://0001-Use-pkg-config-to-find-gpgme.patch \
 "
-SRC_URI[sha256sum] = "c98f9b1303f4ab9bed7587e749cd0b5594d9136a1bf8ba110900d46a17fa9cd8"
+SRC_URI[sha256sum] = "1c578a7ebb390aa8882f195acd3d8da3ceb73925d291b28dec90cd3e5fd20586"
 
 do_configure:prepend() {
     rm -f ${S}/build/cache/glib-gettext.m4
