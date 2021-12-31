@@ -10,7 +10,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit features_check gnomebase gettext upstream-version-is-even pkgconfig
 
-SRC_URI[archive.sha256sum] = "368ca95a39e39dc2406c849e8c4205e3f574acdd874c30741873455e3d21a5e2"
+SRC_URI[archive.sha256sum] = "4adb7dec926428f74263d5796673cf142e4720b6e768f5468a8d0933f98c9597"
 
 DEPENDS += "glib-2.0 glib-2.0-native gtk+3 libhandy xext"
 
