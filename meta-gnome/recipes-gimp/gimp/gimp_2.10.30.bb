@@ -44,7 +44,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SHPV = "${@gnome_verdir("${PV}")}"
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "bd1bb762368c0dd3175cf05006812dd676949c3707e21f4e6857435cb435989e"
+SRC_URI[sha256sum] = "88815daa76ed7d4277eeb353358bafa116cd2fcd2c861d95b95135c1d52b67dc"
 
 EXTRA_OECONF = "--disable-python \
                 --without-webkit \
