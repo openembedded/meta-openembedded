@@ -9,8 +9,7 @@ DEPENDS= "libxml2 bzip2 glib-2.0 zlib gnome-common-native"
 
 inherit gnomebase gobject-introspection gettext gtk-doc
 
-SRC_URI[archive.md5sum] = "20bf9933128210d7a9f920a34198d22f"
-SRC_URI[archive.sha256sum] = "d188ebd3787b5375a8fd38ee6f761a2007de5e98fa0cf5623f271daa67ba774d"
+SRC_URI[archive.sha256sum] = "ff86d7f1d46dd0ebefb7bd830a74a41db64362b987bf8853fff6ab4c1132b837"
 SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
 
 PACKAGECONFIG ??= ""
