@@ -6,7 +6,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 
 SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
-SRC_URI[sha256sum] = "35461eccd9b8b4470caa78ab9a8f14ecacbcc9eff63033d8dce58093e786deb7"
+SRC_URI[sha256sum] = "b4e1c2f718fb3c4b4f412a220876b9da599fe11745fb6f7eb4aed107b1106233"
 S = "${WORKDIR}/${BPN}-gtk3-${PV}"
 
 DEPENDS = " \
