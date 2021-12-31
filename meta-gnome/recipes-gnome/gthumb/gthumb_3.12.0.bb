@@ -26,6 +26,6 @@ DEPENDS = " \
 
 inherit features_check gnomebase gnome-help gsettings itstool mime-xdg
 
-SRC_URI[archive.sha256sum] = "dab73f77cc2963ebe90112972c301441d228af3003cfef3f8b7300a6d5d3c212"
+SRC_URI[archive.sha256sum] = "3deffc030384e64b57361c437c79b481ae1489ef44c87ae856e81bb10d8e383f"
 
 FILES:${PN} += "${datadir}/metainfo"
