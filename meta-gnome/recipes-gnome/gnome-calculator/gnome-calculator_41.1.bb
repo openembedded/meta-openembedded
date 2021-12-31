@@ -27,7 +27,7 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.sha256sum] = "7fe6c561f7b1f485ac106219772e45cc135c983bfa4278dd2d3fd83b57ff6af6"
+SRC_URI[archive.sha256sum] = "0267614afdb25d38b78411b42ebab7bc50c1b6340cc49bb68c0e432d7ddf8a34"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
