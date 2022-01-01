@@ -16,7 +16,7 @@ RDEPENDS:${PN} = " \
     gnome-desktop \
     gnome-flashback \
     gnome-keyring \
-    gnome-menus3 \
+    gnome-menus \
     gnome-session \
     gnome-settings-daemon \
     gnome-shell \
