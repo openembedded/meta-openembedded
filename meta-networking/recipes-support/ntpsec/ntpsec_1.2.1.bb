@@ -13,6 +13,9 @@ DEPENDS += "bison-native \
 
 SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
            file://0001-Update-to-OpenSSL-3.0.0-alpha15.patch \
+           file://0001-ntpd-ntp_sandbox.c-allow-clone3-for-glibc-2.34-in-se.patch \
+           file://0001-ntpd-ntp_sandbox.c-allow-newfstatat-on-all-archs-for.patch \
+           file://0002-ntpd-ntp_sandbox.c-match-riscv-to-aarch-in-seccomp-f.patch \
            file://volatiles.ntpsec"
 
 SRC_URI[sha256sum] = "f2684835116c80b8f21782a5959a805ba3c44e3a681dd6c17c7cb00cc242c27a"
