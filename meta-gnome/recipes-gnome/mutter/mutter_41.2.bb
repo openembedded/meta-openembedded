@@ -13,7 +13,7 @@ DEPENDS = " \
     pango \
     gsettings-desktop-schemas \
     json-glib \
-    gnome-desktop3 \
+    gnome-desktop \
     gnome-settings-daemon \
     libxtst \
     libxkbfile \

@@ -10,7 +10,7 @@ DEPENDS = " \
     colord \
     geocode-glib \
     gcr \
-    gnome-desktop3 \
+    gnome-desktop \
     libgweather \
     lcms \
     libcanberra \

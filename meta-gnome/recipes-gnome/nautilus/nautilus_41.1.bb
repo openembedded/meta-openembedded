@@ -9,7 +9,7 @@ GNOMEBASEBUILDCLASS = "meson"
 DEPENDS = " \
     fontconfig \
     gtk+3 \
-    gnome-desktop3 \
+    gnome-desktop \
     gsettings-desktop-schemas \
     gnome-autoar \
     tracker \

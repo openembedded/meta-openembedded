@@ -6,7 +6,7 @@ SECTION = "x11/gnome"
 
 DEPENDS = " \
     gtk+3 \
-    gnome-desktop3 \
+    gnome-desktop \
     libhandy \
 "
 

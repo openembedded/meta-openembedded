@@ -13,7 +13,7 @@ DEPENDS += " \
     polkit \
     metacity \
     gdm \
-    gnome-desktop3 \
+    gnome-desktop \
     gnome-bluetooth \
     gnome-panel \
 "

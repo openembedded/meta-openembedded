@@ -36,7 +36,3 @@ FILES:libgnome-desktop = " \
 "
 
 RRECOMMENDS:libgnome-desktop += "gsettings-desktop-schemas"
-
-PROVIDES += "gnome-desktop3"
-RPROVIDES:${PN} += "gnome-desktop3"
-RPROVIDES:libgnome-desktop += "gnome-desktop3"
