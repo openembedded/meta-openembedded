@@ -62,7 +62,7 @@ FILES:${PN} += " \
     ${systemd_user_unitdir} \
 "
 
-RDEPENDS:${PN} += "gsettings-desktop-schemas gdm-base librsvg-gtk ${PN}-gsettings"
+RDEPENDS:${PN} += "gnome-desktop gsettings-desktop-schemas gdm-base librsvg-gtk ${PN}-gsettings"
 
 PACKAGES =+ "${PN}-tools ${PN}-gsettings"
 FILES:${PN}-tools = "${bindir}/*-tool"
