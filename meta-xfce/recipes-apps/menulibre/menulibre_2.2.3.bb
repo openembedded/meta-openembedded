@@ -34,7 +34,7 @@ RDEPENDS:${PN} += " \
     gtk+3 \
     gtksourceview3 \
     python3-pygobject \
-    gnome-menus3 \
+    gnome-menus \
     python3-unixadmin \
     python3-psutil \
 "

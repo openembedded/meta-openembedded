@@ -12,7 +12,7 @@ DEPENDS += " \
     polkit \
     dconf \
     libgweather \
-    gnome-menus3 \
+    gnome-menus \
     gnome-desktop \
     gdm \
 "
