@@ -13,7 +13,7 @@ RDEPENDS:${PN} = " \
     gnome-backgrounds \
     gnome-bluetooth \
     gnome-control-center \
-    gnome-desktop3 \
+    gnome-desktop \
     gnome-flashback \
     gnome-keyring \
     gnome-menus3 \

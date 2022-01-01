@@ -13,7 +13,7 @@ DEPENDS += " \
     dconf \
     libgweather \
     gnome-menus3 \
-    gnome-desktop3 \
+    gnome-desktop \
     gdm \
 "
 
