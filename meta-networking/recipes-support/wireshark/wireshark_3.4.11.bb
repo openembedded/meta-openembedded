@@ -19,7 +19,7 @@ SRC_URI += " \
 
 UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
 
-SRC_URI[sha256sum] = "58a7fa8dfe2010a8c8b7dcf66438c653e6493d47eb936ba48ef49d4aa4dbd725"
+SRC_URI[sha256sum] = "a0e227bce2cc3a51ef3301891a0243231990b52a39b68a84a6e32f69c4e75279"
 
 PE = "1"
 
