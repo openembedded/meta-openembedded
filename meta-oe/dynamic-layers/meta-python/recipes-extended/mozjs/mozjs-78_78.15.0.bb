@@ -127,15 +127,10 @@ do_install:prepend() {
     prepare_python_and_rust
 }
 
-MAJOR_VERSION = "${@oe.utils.trim_version("${PV}", 1)}"
 do_install:append() {
     # tidy up installation
     chmod -x ${D}${libdir}/pkgconfig/*.pc
     sed -i 's:\x24{includedir}/mozjs-78/js/RequiredDefines.h:js/RequiredDefines.h:g' ${D}${libdir}/pkgconfig/*.pc
-
-    mv ${D}${libdir}/libmozjs-${MAJOR_VERSION}.so ${D}${libdir}/libmozjs-${MAJOR_VERSION}.so.${PV}
-    ln -s libmozjs-${MAJOR_VERSION}.so.${PV} ${D}${libdir}/libmozjs-${MAJOR_VERSION}.so.${MAJOR_VERSION}
-    ln -s libmozjs-${MAJOR_VERSION}.so.${PV} ${D}${libdir}/libmozjs-${MAJOR_VERSION}.so
 
     rm -f ${D}${libdir}/libjs_static.ajs
 }
@@ -144,3 +139,6 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 ARM_INSTRUCTION_SET:armv4 = "arm"
 
 DISABLE_STATIC = ""
+
+PACKAGES =+ "lib${BPN}"
+FILES:lib${BPN} += "${libdir}/lib*"
