@@ -13,4 +13,8 @@ SRCREV = "90d05bf8980d16e4ac3f16c19b77e296c4bc207b"
 
 S = "${WORKDIR}/git"
 
+PACKAGECONFIG ?= ""
+PACKAGECONFIG[nss] = "-Dcrypto-library=nss,, nss,,, openssl"
+PACKAGECONFIG[openssl] = "-Dcrypto-library=openssl,, openssl,,, nss"
+
 inherit meson pkgconfig
