@@ -15,14 +15,11 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GPL;md5=8a71d0475d08eee76d8b6d0c6dbec543 \
     file://COPYING.BSD;md5=66b7a37c3c10483c1fd86007726104d7 \
 "
-SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https \
-           file://0001-build-openssl-remove-RSA_SSLV23_PADDING-constant-usa.patch \
-           file://0001-nss-use-nss-pkcs11-h.patch \
-           "
+SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 # v1.27
-SRCREV = "564a582d600c7eec7b8e303a22b575fd52622174"
+SRCREV = "a4b46d545c33459610d4b4ae85a43a76e03a8c5e"
 
 UPSTREAM_CHECK_GITTAGREGEX = "pkcs11-helper-(?P<pver>\d+(\.\d+)+)"
 
