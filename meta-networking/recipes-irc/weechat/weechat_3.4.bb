@@ -2,7 +2,7 @@ SUMMARY = "Full-featured IRC plugin: multi-servers, proxy support, IPv6, SASL au
 HOMEPAE = "https://weechat.org/"
 SECTION = "net"
 LICENSE = "GPLv3"
-LIC_FILES_CHKSUM = "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"
+LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 DEPENDS = "openssl zlib icu libgcrypt gnutls curl aspell"
 
@@ -10,7 +10,7 @@ SRC_URI = "https://weechat.org/files/src/weechat-${PV}.tar.xz \
            file://0001-use-pkg-config-for-gcrypt-instead.patch \
            "
 
-SRC_URI[sha256sum] = "6cb7d25a363b66b835f1b9f29f3580d6f09ac7d38505b46a62c178b618d9f1fb"
+SRC_URI[sha256sum] = "7cd3dcc7029e888de49e13ebbcc3749586ff59c9d97f89f5eeb611067c7bb94c"
 
 inherit cmake pkgconfig
 
