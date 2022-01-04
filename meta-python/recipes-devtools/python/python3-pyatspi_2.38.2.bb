@@ -8,12 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
 DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
 
 SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=master"
-SRCREV = "6d5f47ee8e8a36140b52bf52fe954a131a0aa5dd"
+SRCREV = "141a53029b3e16bfa5f100ae54a77234a9bf3426"
 
 S = "${WORKDIR}/git" 
 
 # Same restriction as gtk+
-inherit features_check
+inherit features_check setuptools3
 ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
 
 inherit pkgconfig autotools python3native
