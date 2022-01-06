@@ -9,9 +9,8 @@ inherit setuptools3
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master \
-"
-SRCREV = "11980776c5ad757401ea1d12fd1f331d96428105"
+SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=rhel9-branch"
+SRCREV = "c321ce22950aff76611a3c6beffa02b5ea3adbed"
 
 FILES:${PN} += "${datadir}/*"
 
