@@ -334,6 +334,7 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
     bitwise \
     brotli \
     byacc \
+    cmatrix \
     cmpi-bindings \
     collectd \
     ddrescue \
