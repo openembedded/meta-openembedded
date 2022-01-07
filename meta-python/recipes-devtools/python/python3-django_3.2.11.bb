@@ -1,7 +1,7 @@
 require python-django.inc
 inherit setuptools3
 
-SRC_URI[sha256sum] = "074e8818b4b40acdc2369e67dcd6555d558329785408dcd25340ee98f1f1d5c4"
+SRC_URI[sha256sum] = "69c94abe5d6b1b088bf475e09b7b74403f943e34da107e798465d2045da27e75"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-sqlparse \
