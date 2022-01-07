@@ -50,3 +50,5 @@ LDFLAGS:append:libc-musl = " -lucontext"
 
 # The latest version of oneTBB does not support PPC
 COMPATIBLE_MACHINE:powerpc = "(!.*ppc).*"
+
+BBCLASSEXTEND = "native nativesdk"
