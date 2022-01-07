@@ -6,11 +6,9 @@ HOMEPAGE = "https://github.com/bats-core/bats-core"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
-SRC_URI = "git://github.com/bats-core/bats-core.git;branch=master;protocol=https \
-           file://0001-install.sh-consider-multilib.patch \
-          "
+SRC_URI = "git://github.com/bats-core/bats-core.git;branch=master;protocol=https"
 # v1.4.1
-SRCREV = "54e965fa9d269c2b3ff9036d81f32bac3df0edea"
+SRCREV = "99d64eb017abcd6a766dd0d354e625526da69cb3"
 
 S = "${WORKDIR}/git"
 
