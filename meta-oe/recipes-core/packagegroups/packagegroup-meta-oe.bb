@@ -741,7 +741,7 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     dfu-util \
     dhex \
     digitemp \
-    dstat \
+    dool \
     espeak \
     evemu-tools \
     exiv2 \
@@ -891,6 +891,7 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     system-config-keyboard \
     tbb \
     satyr \
+    pcp \
     pcsc-lite \
     pcsc-tools \
     sharutils \
@@ -943,6 +944,7 @@ RDEPENDS:packagegroup-meta-oe-support:remove:riscv64 = "gperftools uim"
 RDEPENDS:packagegroup-meta-oe-support:remove:riscv32 = "gperftools uim"
 RDEPENDS:packagegroup-meta-oe-support:remove:powerpc = "ssiapi tbb"
 RDEPENDS:packagegroup-meta-oe-support:remove:powerpc64le = "ssiapi"
+RDEPENDS:packagegroup-meta-oe-support:remove:libc-musl = "pcp"
 
 RDEPENDS:packagegroup-meta-oe-test ="\
     bats \
