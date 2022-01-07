@@ -2,7 +2,7 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
 
-SRC_URI[sha256sum] = "0c9ccb99ab76025f2f0bbecf341d4656e9c1351db8cc8a03ccd62e318ab4b5c6"
+SRC_URI[sha256sum] = "869842dbd66bb80c3217158e629d6fceaecc3a3166d3d1faee515b05dd26ca25"
 
 inherit pypi setuptools3
 
@@ -19,6 +19,8 @@ RDEPENDS:${PN} += " \
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-xml \
     ${PYTHON_PN}-netclient \
+    ${PYTHON_PN}-ctypes \
+    ${PYTHON_PN}-resource \
 "
 
 BBCLASSEXTEND = "native nativesdk"
