@@ -5,7 +5,7 @@ UPSTREAM_CHECK_REGEX = "/${PYPI_PACKAGE}/(?P<pver>(2\.2\.\d*)+)/"
 
 inherit setuptools3
 
-SRC_URI[sha256sum] = "b1e65eaf371347d4b13eb7e061b09786c973061de95390c327c85c1e2aa2349c"
+SRC_URI[sha256sum] = "dfa537267d52c6243a62b32855a744ca83c37c70600aacffbfd98bc5d6d8518f"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-sqlparse \
