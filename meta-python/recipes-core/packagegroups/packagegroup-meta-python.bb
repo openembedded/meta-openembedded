@@ -80,6 +80,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-colorama \
     python3-coloredlogs \
     python3-colorlog \
+    python3-colorzero \
     python3-configargparse \
     python3-configobj \
     python3-configparser \
