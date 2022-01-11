@@ -29,4 +29,6 @@ EXTRA_OECONF:append = " --with-dstat-symlink=yes --with-infiniband=no \
                 --with-docdir=${docdir} \
                 "
 
+PACKAGECONFIG[qt5] = "--with-qt=yes --with-qt3d=yes,--with-qt=no --with-qt3d=no,qtbase qt3d"
 
+PACKAGECONFIG ?= ""
