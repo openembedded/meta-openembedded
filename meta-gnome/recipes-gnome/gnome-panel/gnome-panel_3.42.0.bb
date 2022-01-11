@@ -17,7 +17,7 @@ DEPENDS += " \
     gdm \
 "
 
-SRC_URI[archive.sha256sum] = "1a8b15aef0a02a6caa9b9209c8d3fb43e7b987a380076691c23f0314ec302f15"
+SRC_URI[archive.sha256sum] = "aea8c0efc2edba20e97ad4695179cd0a2538e64c2904702cc8c594e8e0898703"
 
 PACKAGECONFIG[eds] = "--enable-eds,--disable-eds,evolution-data-server"
 
