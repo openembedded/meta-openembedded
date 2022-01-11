@@ -15,7 +15,7 @@ DEPENDS += " \
     json-glib \
 "
 
-SRC_URI[archive.sha256sum] = "3c16e03efdfe5d3e71c4d239c67741ad37f72ce8971e2f7faf168dbd5e93e886"
+SRC_URI[archive.sha256sum] = "1796b81404ee75fd1ebacf54464ad7affebf62f2851eef524d9f8eac0c4a2001"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd', '', d)} \
                   ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'libsysprof', '', d)} \
