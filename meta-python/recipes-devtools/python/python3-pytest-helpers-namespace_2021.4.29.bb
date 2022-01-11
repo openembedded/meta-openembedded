@@ -8,6 +8,8 @@ SRC_URI[sha256sum] = "183524e3db4e2a1fea92e0ca3662a624ba44c9f3568da15679d7535ba6
 
 inherit pypi setuptools3
 
+do_compile[network] = "1"
+
 DEPENDS += "\
     ${PYTHON_PN}-wheel-native \
     ${PYTHON_PN}-pip-native \
