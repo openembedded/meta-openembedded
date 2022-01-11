@@ -11,11 +11,12 @@ DEPENDS += "perl-native bison-native flex-native python3-native python3-setuptoo
 
 
 SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
+            file://pass-options-to-AR.patch \
            "
 
 export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
 #export PCP_RUN_DIR="${RECIPE_SYSROOT_NATIVE}"
-EXTRA_OEMAKE = "CC="${CC}" LD="${LD}" AR="${AR}""
+EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
 inherit useradd systemd 
 
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
