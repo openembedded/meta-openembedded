@@ -4,9 +4,19 @@ Upstream-Status: Inappropriate [disable feature]
 
 Signed-off-by: Mark Hatle <mark.hatle@xilinx.com>
 
---- a/setupext.py.orig 2021-12-14 09:44:33.499041044 -0800
-+++ a/setupext.py      2021-12-14 09:45:00.447041706 -0800
-@@ -64,40 +64,7 @@
+--- a/setup.py
++++ b/setup.py
+@@ -317,7 +317,6 @@ setup(  # Finally, pass this all along t
+         "certifi>=2020.06.20",
+         "numpy>=1.17",
+         "setuptools_scm>=4",
+-        "setuptools_scm_git_archive",
+     ],
+     install_requires=[
+         "cycler>=0.10",
+--- a/setupext.py
++++ b/setupext.py
+@@ -64,40 +64,7 @@ def get_from_cache_or_download(url, sha)
      BytesIO
          The file loaded into memory.
      """
@@ -45,6 +55,6 @@ Signed-off-by: Mark Hatle <mark.hatle@xilinx.com>
 -
 -    return BytesIO(data)
 +    raise IOError(f"Automatic downloading is disabled.")
-
-
+ 
+ 
  def get_and_extract_tarball(urls, sha, dirname):
