@@ -19,10 +19,17 @@ EXTRA_OEMESON += " \
     -Dclassic_mode=true \
 "
 
+do_install:append() {
+    # enable gnome-classic session for wayland
+    install -d ${D}${datadir}/wayland-sessions
+    install -m644 ${D}${datadir}/xsessions/gnome-classic.desktop ${D}${datadir}/wayland-sessions/
+}
+
 RDEPENDS:${PN} += "gnome-shell"
 
 FILES:${PN} += " \
     ${datadir}/gnome-shell \
     ${datadir}/gnome-session \
+    ${datadir}/wayland-sessions \
     ${datadir}/xsessions \
 "
