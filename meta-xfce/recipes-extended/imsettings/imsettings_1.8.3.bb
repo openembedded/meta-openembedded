@@ -19,7 +19,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
            file://imsettings-gcc10.patch \
           "
-SRC_URI[sha256sum] = "412abf3165dbee3cbe03db0c296bab103569a49029429d038569c586ebe9efa9"
+SRC_URI[sha256sum] = "45986b9ca1b87b760a5dbaecd9a2b77d080adc47868a0512826077175d5b3ee3"
 
 EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
                 --disable-static \
