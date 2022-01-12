@@ -17,6 +17,7 @@ SRC_URI = "git://github.com/protocolbuffers/protobuf.git;branch=master;protocol=
            file://0001-protobuf-fix-configure-error.patch \
            file://0001-Makefile.am-include-descriptor.cc-when-building-libp.patch \
            file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+           file://0001-Lower-init-prio-for-extension-attributes.patch \
 "
 S = "${WORKDIR}/git"
 
