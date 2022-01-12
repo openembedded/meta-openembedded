@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
 # CMakeLists.txt checks the architecture, only x86 and ARM supported for now
 COMPATIBLE_HOST = "(x86_64.*|i.86.*|aarch64.*|arm.*)-linux"
 
-inherit cmake distutils3-base
+inherit cmake setuptools3-base
 
 DEPENDS += "json-c"
 

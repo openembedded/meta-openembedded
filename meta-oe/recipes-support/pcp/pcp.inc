@@ -13,7 +13,7 @@ SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/pc
 
 SRC_URI[sha256sum] = "589a610f753a49af6d2015cede87e9d469bd07880ebef26fe1607b6ded375e97"
 
-inherit distutils3-base pkgconfig autotools
+inherit setuptools3-base pkgconfig autotools
 
 B = "${S}"
 
