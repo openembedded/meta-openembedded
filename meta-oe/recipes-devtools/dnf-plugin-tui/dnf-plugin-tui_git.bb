@@ -9,7 +9,7 @@ PV = "1.3"
 
 SRC_URI:append:class-target = " file://oe-remote.repo.sample"
 
-inherit distutils3-base
+inherit setuptools3-base
 
 S = "${WORKDIR}/git"
 
