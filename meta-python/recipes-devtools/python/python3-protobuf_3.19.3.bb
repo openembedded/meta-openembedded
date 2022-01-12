@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=19e8f490f9526b1de8
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "6a1dc6584d24ef86f5b104bcad64fa0fe06ed36e5687f426e0445d363a041d18"
+SRC_URI[sha256sum] = "d975a6314fbf5c524d4981e24294739216b5fb81ef3c14b86fb4b045d6690907"
 
 # http://errors.yoctoproject.org/Errors/Details/184715/
 # Can't find required file: ../src/google/protobuf/descriptor.proto
