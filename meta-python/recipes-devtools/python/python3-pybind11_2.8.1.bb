@@ -24,12 +24,12 @@ do_configure() {
 }
 
 do_compile() {
-	distutils3_do_compile
+	setuptools3_do_compile
 	cmake_do_compile
 }
 
 do_install() {
-	distutils3_do_install
+	setuptools3_do_install
 	cmake_do_install
 }
 
