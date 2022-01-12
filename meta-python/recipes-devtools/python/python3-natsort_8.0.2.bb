@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=58db8ac9e152dd9b700f4d39ff40a31a"
 
 PYPI_PACKAGE = "natsort"
-SRC_URI[sha256sum] = "a0a4fd71aee20a6d648da61e01180a63f7268e69983d0440bd3ad80ef1ba6981"
+SRC_URI[sha256sum] = "feb87e0ce1dc1f8f3f21e18a85216c790e746d76a5ff6889563394605f504a2b"
 
 inherit pypi setuptools3
 
