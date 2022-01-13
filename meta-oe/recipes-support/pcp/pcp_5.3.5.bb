@@ -12,6 +12,7 @@ DEPENDS += "perl-native bison-native flex-native python3-native python3-setuptoo
 
 SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
             file://pass-options-to-AR.patch \
+            file://fix_parallel_make.patch \
            "
 
 export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
