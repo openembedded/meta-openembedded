@@ -24,6 +24,7 @@ DEPENDS = "libnsl2 zlib readline tzcode-native"
 ARM_INSTRUCTION_SET = "arm"
 
 SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+    file://pg-config \
     file://postgresql.init \
     file://postgresql-profile \
     file://postgresql.pam \
@@ -210,6 +211,15 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/postgresql.service ${D}${systemd_unitdir}/system
     sed -i -e 's,@BINDIR@,${bindir},g' \
         ${D}${systemd_unitdir}/system/postgresql.service
+}
+
+sysroot_stage_all:append() {
+  install -d ${SYSROOT_DESTDIR}${bindir}/crossscripts
+  install -m 0755 ${WORKDIR}/pg-config ${SYSROOT_DESTDIR}${bindir}/crossscripts/pg_config
+  sed -i -e "s|@SYSROOT@|${SYSROOT_DESTDIR}|g" -e "s|@POSTGRESQL_VERSION@|${PV}|g" \ 
+      -e "s|@POSTGRESQL_CONF_OPTIONS@|${PACKAGECONFIG_CONFARGS}|g" \
+      -e "s|@TARGET_CFLAGS@|${CFLAGS}|g" -e "s|@TARGET_CC@|${CC}|g" \
+      ${SYSROOT_DESTDIR}${bindir}/crossscripts/pg_config
 }
 
 SSTATE_SCAN_FILES += "Makefile.global"
