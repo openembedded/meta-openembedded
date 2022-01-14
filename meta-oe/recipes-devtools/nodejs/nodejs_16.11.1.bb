@@ -151,7 +151,7 @@ do_configure () {
 
 do_compile () {
     export LD="${CXX}"
-    install -Dm 0755 ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
+    install -D ${B}/v8-qemu-wrapper.sh ${B}/out/Release/v8-qemu-wrapper.sh
     oe_runmake BUILDTYPE=Release
 }
 
@@ -159,20 +159,22 @@ do_install () {
     oe_runmake install DESTDIR=${D}
 }
 
+BINARIES = " \
+    bytecode_builtins_list_generator \
+    ${@bb.utils.contains('PACKAGECONFIG', 'icu', 'gen-regexp-special-case', '', d)} \
+    mkcodecache \
+    node_mksnapshot \
+    torque \
+"
+
 do_install:append:class-native() {
     # Install the native binaries to provide it within sysroot for the target compilation
     install -d ${D}${bindir}
-    install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
-    install -m 0755 ${S}/out/Release/bytecode_builtins_list_generator ${D}${bindir}/bytecode_builtins_list_generator
-    if ${@bb.utils.contains('PACKAGECONFIG','icu','true','false',d)}; then
-        install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${bindir}/gen-regexp-special-case
-    fi
-    install -m 0755 ${S}/out/Release/mkcodecache ${D}${bindir}/mkcodecache
-    install -m 0755 ${S}/out/Release/node_mksnapshot ${D}${bindir}/node_mksnapshot
+    (cd ${S}/out/Release && install ${BINARIES} ${D}${bindir})
 }
 
 PACKAGES =+ "${PN}-npm"
-FILES:${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm ${bindir}/npx"
+FILES:${PN}-npm = "${nonarch_libdir}/node_modules ${bindir}/npm ${bindir}/npx"
 RDEPENDS:${PN}-npm = "bash python3-core python3-shell python3-datetime \
     python3-misc python3-multiprocessing"
 
