@@ -171,7 +171,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-h2 \
     python3-h5py \
     python3-haversine \
-    python3-hexdump \
     python3-hpack \
     python3-html2text \
     python3-html5lib \
