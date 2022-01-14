@@ -15,7 +15,6 @@ LICENSE = "BSD-4-Clause"
 DEPENDS = "ncurses"
 
 SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/tnftp/${BPN}-${PV}.tar.gz \
-    file://tnftp-autotools.patch \
 "
 
 inherit autotools update-alternatives pkgconfig
@@ -28,9 +27,9 @@ ALTERNATIVE_TARGET_${PN}  = "${bindir}/tnftp"
 
 FILES:${PN} = "${bindir}/tnftp"
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=6d6796cb166a9bb050958241dad9479e"
-SRC_URI[md5sum] = "a49fbe752318d5a7893f900046ea00d5"
-SRC_URI[sha256sum] = "c94a8a49d3f4aec1965feea831d4d5bf6f90c65fd8381ee0863d11a5029a43a0"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b4248c6fb8ecff27f256ba97b25f1a21"
+SRC_URI[md5sum] = "fdb6dd1b53dca79148c395b77c6dba5a"
+SRC_URI[sha256sum] = "101901e90b656c223ec8106370dd0d783fb63d26aa6f0b2a75f40e86a9f06ea2"
 
 PACKAGECONFIG ?= "openssl \
     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
