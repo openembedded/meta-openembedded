@@ -315,7 +315,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pycodestyle \
     python3-pyconnman \
     python3-pycparser \
-    python3-pycrypto \
     python3-pycurl \
     python3-pydbus \
     python3-pydbus-manager \
