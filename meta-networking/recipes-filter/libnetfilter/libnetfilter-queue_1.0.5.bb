@@ -6,10 +6,9 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 DEPENDS = "libnfnetlink libmnl"
 
-SRCREV = "601abd1c71ccdf90753cf294c120ad43fb25dc54"
+SRCREV = "2ff321690b8dafeca99ee8e9cafac71e36f292b9"
 
 SRC_URI = "git://git.netfilter.org/libnetfilter_queue;branch=master \
-           file://0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch \
            "
 
 S = "${WORKDIR}/git"
