@@ -5,13 +5,14 @@ LICENSE = "GPLv2"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=f9d20a453221a1b7e32ae84694da2c37"
 
-SRCREV = "ab8a2cc330253321be7bc69dea88bfaa3d48415e"
+SRCREV = "75d949b9fae9718201422f0bd3d1103e67dd597c"
 
 SRC_URI = "\
-    git://git.kernel.org/pub/scm/linux/kernel/git/shemminger/bridge-utils.git;branch=main \
-    file://kernel-headers.patch \
-    file://0005-build-don-t-ignore-CFLAGS-from-environment.patch \
-    file://0006-libbridge-Modifying-the-AR-to-cross-toolchain.patch \
+    git://git.kernel.org/pub/scm/network/bridge/bridge-utils.git;branch=main \
+    file://0001-include-missing-kernel-header.patch \
+    file://0002-build-don-t-ignore-CFLAGS-from-environment.patch \
+    file://0003-libbridge-Modifying-the-AR-to-cross-toolchain.patch \
+    file://0004-cleanup-includes.patch \
 "
 
 S = "${WORKDIR}/git"

@@ -1,4 +1,4 @@
-From 824f838cc9c7b8a44174358446993d61be7bbb3f Mon Sep 17 00:00:00 2001
+From 203801ae47399569868aa468988e711ba3ddfa92 Mon Sep 17 00:00:00 2001
 From: Joe MacDonald <joe_macdonald@mentor.com>
 Date: Mon, 30 Oct 2017 13:18:20 -0400
 Subject: [PATCH] include missing kernel header
@@ -17,7 +17,7 @@ Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/libbridge/libbridge.h b/libbridge/libbridge.h
-index c038b92..fd09306 100644
+index 962f316..422ec33 100644
 --- a/libbridge/libbridge.h
 +++ b/libbridge/libbridge.h
 @@ -24,6 +24,7 @@
@@ -29,5 +29,5 @@ index c038b92..fd09306 100644
  #include <linux/if_bridge.h>
  
 -- 
-2.7.4
+2.17.1
 
