@@ -18,6 +18,9 @@ SRC_URI = "git://github.com/jemalloc/jemalloc.git;branch=master;protocol=https \
            file://run-ptest \
 "
 
+# Workaround for https://github.com/llvm/llvm-project/issues/52765
+SRC_URI:append:libc-glibc:toolchain-clang = " file://0001-test-Disable-optimization-with-clang-for-aligned_all.patch "
+
 SRCREV = "ea6b3e973b477b8061e0076bb257dbd7f3faa756"
 
 S = "${WORKDIR}/git"
