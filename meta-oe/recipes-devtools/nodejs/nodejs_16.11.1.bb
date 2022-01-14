@@ -157,10 +157,6 @@ do_compile () {
 
 do_install () {
     oe_runmake install DESTDIR=${D}
-
-    # wasn't updated since 2009 and is the only thing requiring python2 in runtime
-    # ERROR: nodejs-12.14.1-r0 do_package_qa: QA Issue: /usr/lib/node_modules/npm/node_modules/node-gyp/gyp/samples/samples contained in package nodejs-npm requires /usr/bin/python, but no providers found in RDEPENDS:nodejs-npm? [file-rdeps]
-    rm -f ${D}${exec_prefix}/lib/node_modules/npm/node_modules/node-gyp/gyp/samples/samples
 }
 
 do_install:append:class-native() {
