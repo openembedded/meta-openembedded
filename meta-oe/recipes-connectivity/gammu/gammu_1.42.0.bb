@@ -1,19 +1,21 @@
 SUMMARY = "GNU All Mobile Managment Utilities"
 SECTION = "console/network"
-DEPENDS = "cmake-native virtual/libiconv libdbi mysql5 glib-2.0 udev libgudev unixodbc"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
-HOMEPAGE = "http://www.gammu.org/"
+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+HOMEPAGE = "https://wammu.eu/"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}/${PV}/${BP}.tar.bz2 \
+SRC_URI = "https://dl.cihar.com/${BPN}/releases/${BP}.tar.xz \
     file://gammurc \
     file://gammu-smsdrc \
 "
 
-SRC_URI[md5sum] = "8ea16c6b3cc48097a8e62311fe0e25b9"
-SRC_URI[sha256sum] = "de67caa102aa4c8fbed5300e5a0262e40411c4cc79f4379a8d34eed797968fc3"
+SRC_URI[sha256sum] = "d8f152314d7e4d3d643610d742845e0a016ce97c234ad4b1151574e1b09651ee"
 
-inherit distutils3 cmake gettext
+UPSTREAM_CHECK_URI = "https://dl.cihar.com/${BPN}/releases"
+
+DEPENDS = "cmake-native virtual/libiconv libdbi mysql5 glib-2.0 udev libgudev unixodbc"
+
+inherit cmake gettext
 
 do_install:append() {
     # these files seem to only be used by symbian and trigger QA warnings
@@ -35,12 +37,11 @@ EXTRA_OECMAKE = " \
     -DWITH_BLUETOOTH=OFF \
     -DWITH_NOKIA_SUPPORT=OFF \
     -DWITH_IRDA=OFF \
-    -DWITH_PYTHON=OFF \
     -DWITH_MySQL=ON \
     -DWITH_Postgres=OFF \
 "
 
-PACKAGES =+ "${PN}-smsd libgammu libgsmsd python-${PN}"
+PACKAGES =+ "${PN}-smsd libgammu libgsmsd"
 
 FILES:${PN} = "${bindir}/gammu ${bindir}/jadmaker ${sysconfdir}/bash_completion.d/gammu \
     ${bindir}/gammu-detect ${sysconfdir}/gammurc"
@@ -48,10 +49,9 @@ CONFFILES:${PN} = "${sysconfdir}/gammurc"
 FILES:${PN}-smsd = "${bindir}/gammu-smsd* ${sysconfdir}/gammu-smsdrc"
 CONFFILES:${PN}-smsd = "${sysconfdir}/gammu-smsdrc"
 FILES:${PN}-dev += "${bindir}/gammu-config ${libdir}/*.so"
-FILES:${PN}-dbg += "${bindir}/.debug ${libdir}/.debug ${PYTHON_SITEPACKAGES_DIR}/gammu/.debug"
+FILES:${PN}-dbg += "${bindir}/.debug ${libdir}/.debug"
 FILES:libgammu = "${libdir}/libGammu.so.*"
 FILES:libgsmsd = "${libdir}/libgsmsd.so.*"
-FILES:python-${PN} = "${PYTHON_SITEPACKAGES_DIR}/gammu/*.??"
 
 RDEPENDS:${PN} += "bash"
 RDEPENDS:${PN}-dev += "bash"
