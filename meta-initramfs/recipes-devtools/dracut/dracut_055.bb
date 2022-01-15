@@ -6,9 +6,8 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
-PV = "051"
 
-SRCREV = "e473057ae1de303340dec297c786c4a701cc61bd"
+SRCREV = "86bf2533d77762e823ad7a3e06a574522c1a90e3"
 SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http;branch=master \
            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
            "
