@@ -6,9 +6,7 @@ SRC_URI += "\
    file://not-check-libperl.patch \
    file://0001-Add-support-for-RISC-V.patch \
    file://0001-Improve-reproducibility.patch \
-   file://0001-configure.in-bypass-autoconf-2.69-version-check.patch \
-   file://CVE-2021-23214.patch \
-   file://CVE-2021-23222.patch \
+   file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
 "
 
-SRC_URI[sha256sum] = "ea93e10390245f1ce461a54eb5f99a48d8cabd3a08ce4d652ec2169a357bc0cd"
+SRC_URI[sha256sum] = "4d3c101ea7ae38982f06bdc73758b53727fb6402ecd9382006fa5ecc7c2ca41f"
