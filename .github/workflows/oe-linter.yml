@@ -37,5 +37,5 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "spell checking $file"
-            codespell $file
+            codespell $file --skip=oelint-rulefile.json
           done
