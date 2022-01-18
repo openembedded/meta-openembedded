@@ -12,6 +12,10 @@ inherit pkgconfig
 
 EXTRA_OEMAKE = "V=1 STRIP=true"
 
+# Workaround BFD linker crash with clang on arm
+# revisit when upgrading binutils and see if its fixed
+LDFLAGS:append:toolchain-clang:arm = " -fuse-ld=lld"
+
 do_install() {
     oe_runmake install DESTDIR=${D}
 }
