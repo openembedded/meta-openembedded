@@ -217,6 +217,11 @@ ALLOW_EMPTY:${PN} = "1"
 INITSCRIPT_PACKAGES = "${PN}-fpm"
 inherit update-rc.d
 
+# WARNING: lib32-php-8.0.12-r0 do_package_qa: QA Issue: lib32-php: ELF binary /usr/libexec/apache2/modules/libphp.so has relocations in .text [textrel]
+#WARNING: lib32-php-8.0.12-r0 do_package_qa: QA Issue: lib32-php-opcache: ELF binary /usr/lib/php8/extensions/no-debug-zts-20200930/opcache.so has relocations in .text [textrel]
+INSANE_SKIP:${PN}:append:x86 = " textrel"
+INSANE_SKIP:${PN}-opcache:append:x86 = " textrel"
+
 FILES:${PN}-dbg =+ "${bindir}/.debug \
                     ${libexecdir}/apache2/modules/.debug"
 FILES:${PN}-doc += "${PHP_LIBDIR}/php/doc"
