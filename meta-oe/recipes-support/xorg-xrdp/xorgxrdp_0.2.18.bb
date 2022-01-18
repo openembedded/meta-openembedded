@@ -10,16 +10,14 @@ DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
-SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git;branch=devel;protocol=https"
 
-SRCREV = "c122544f184d4031bbae1ad80fbab554c34a9427"
+SRCREV = "752b7659773a11ca6d4600645547c06fdb8a23d9"
 
-PV = "0.2.5"
+PV = "0.2.18"
 
 S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/xorg/modules/*"
 
 INSANE_SKIP:${PN} += "xorg-driver-abi"
-
-PNBLACKLIST[xorgxrdp] ?= "Depends on xrdp which needs porting to openssl 3.x"
