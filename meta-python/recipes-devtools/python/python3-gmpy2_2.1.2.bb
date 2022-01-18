@@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
 DEPENDS += "gmp mpfr libmpc"
 
 PYPI_PACKAGE = "gmpy2"
-SRC_URI[sha256sum] = "346f442063c8212c347e330519905591626ea6fa31aa6ccd299ecd5654e1086f"
+SRC_URI[sha256sum] = "da75140bca128ece795895477e53b43773e3748aa90ba6170eae7ca2c74b82d1"
 
 inherit pypi setuptools3 python3native
+
 BBCLASSEXTEND = "native nativesdk"
