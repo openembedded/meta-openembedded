@@ -339,6 +339,7 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
     collectd \
     ddrescue \
     dialog \
+    duktape \
     enscript \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gnuplot", "", d)} \
     dlt-daemon \
