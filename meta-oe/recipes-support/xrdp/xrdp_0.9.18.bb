@@ -6,19 +6,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
 
 inherit features_check autotools pkgconfig useradd systemd
 
-DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native"
+DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native imlib2 pixman libsm"
 
 REQUIRED_DISTRO_FEATURES = "x11 pam"
 
-SRC_URI = "git://github.com/neutrinolabs/xrdp.git;branch=devel;protocol=https \
+SRC_URI = "https://github.com/neutrinolabs/${BPN}/releases/download/v${PV}/${BPN}-${PV}.tar.gz \
            file://xrdp.sysconfig \
            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
            file://0001-Fix-the-compile-error.patch \
            file://0001-arch-Define-NO_NEED_ALIGN-on-ppc64.patch \
            "
-SRCREV = "58088324956d94fd2eb5e7694a318cccec6990f1"
 
-S = "${WORKDIR}/git"
+SRC_URI[sha256sum] = "c5eea0af055fac90c632e44fb667f1a25c55de2e34b37127e4cb0aabaef90a0f"
+
+CFLAGS += " -Wno-deprecated-declarations"
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[fuse] = " --enable-fuse, --disable-fuse, fuse"
@@ -36,7 +37,9 @@ FILES:${PN}-dev += "${libdir}/xrdp/libcommon.so \
                     ${libdir}/xrdp/libscp.so \
                     ${libdir}/xrdp/libxrdpapi.so "
 
-EXTRA_OECONF = "--enable-pam-config=suse"
+EXTRA_OECONF = "--enable-pam-config=suse --enable-fuse \
+                --enable-pixman --enable-painter --enable-vsock \
+                --enable-ipv6 --with-imlib2 --with-socketdir=${localstatedir}/run/${PN}"
 
 do_configure:prepend() {
     cd ${S}
@@ -48,12 +51,7 @@ do_compile:prepend() {
     sed -i 's/(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am/(MAKE) $(AM_MAKEFLAGS) install-exec-am/g' ${S}/keygen/Makefile.in
 }
 
-
 do_install:append() {
-	install -d ${D}${sysconfdir}
-	install -d ${D}${sysconfdir}/xrdp
-	install -d ${D}${sysconfdir}/xrdp/pam.d
-	install -d ${D}${sysconfdir}/sysconfig/xrdp
 
 	# deal with systemd unit files
 	install -d ${D}${systemd_unitdir}/system
@@ -63,11 +61,8 @@ do_install:append() {
 	sed -i -e 's,@sysconfdir@,${sysconfdir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
 
+	install -d ${D}${sysconfdir}/sysconfig/xrdp
 	install -m 0644 ${S}/instfiles/*.ini ${D}${sysconfdir}/xrdp/
-	install -m 0644 ${S}/sesman/sesman.ini.in ${D}${sysconfdir}/xrdp/
-	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
-	install -m 0644 ${S}/xrdp/xrdp.ini.in ${D}${sysconfdir}/xrdp/
-	install -m 0644 ${S}/xrdp/xrdp_keyboard.ini ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${S}/keygen/openssl.conf ${D}${sysconfdir}/xrdp/
 	install -m 0644 ${WORKDIR}/xrdp.sysconfig ${D}${sysconfdir}/sysconfig/xrdp/
 	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
@@ -92,4 +87,3 @@ pkg_postinst:${PN}() {
 		fi
         fi
 }
-PNBLACKLIST[xrdp] ?= "Needs porting to openssl 3.x"
