@@ -14,6 +14,14 @@ S = "${WORKDIR}/pyruvate-${PV}"
 
 inherit pypi setuptools3_rust
 
+# crossbeam-* -> std::sync::atomic AtomicI64, AtomicU64
+# not supported on mips/powerpc with 32-bit pointers
+# https://doc.rust-lang.org/std/sync/atomic/#portability
+RUSTFLAGS:append:mips = " --cfg crossbeam_no_atomic_64"
+RUSTFLAGS:append:mipsel = " --cfg crossbeam_no_atomic_64"
+RUSTFLAGS:append:powerpc = " --cfg crossbeam_no_atomic_64"
+RUSTFLAGS:append:riscv32 = " --cfg crossbeam_no_atomic_64"
+
 SRC_URI += " \
     crate://crates.io/aho-corasick/0.7.18 \
     crate://crates.io/atty/0.2.14 \
