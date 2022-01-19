@@ -3,9 +3,7 @@ HOMEPAGE = "http://www.dnspython.org/"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
 
-SRC_URI[sha256sum] = "e4a87f0b573201a0f3727fa18a516b055fd1107e0e5477cded4a2de497df1dd4"
-
-PYPI_PACKAGE_EXT = "zip"
+SRC_URI[sha256sum] = "e79351e032d0b606b98d38a4b0e6e2275b31a5b85c873e587cc11b73aca026d6"
 
 inherit pypi setuptools3 ptest
 
@@ -21,6 +19,11 @@ do_install_ptest() {
 	install -d ${D}${PTEST_PATH}/tests
 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 }
+
+DEPENDS += "\
+    ${PYTHON_PN}-wheel-native \
+    ${PYTHON_PN}-setuptools-scm-native \
+"
 
 RDEPENDS:${PN} += " \
     ${PYTHON_PN}-crypt \
