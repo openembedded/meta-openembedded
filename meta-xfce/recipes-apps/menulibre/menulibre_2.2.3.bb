@@ -9,7 +9,7 @@ DEPENDS = " \
     intltool-native \
 "
 
-inherit distutils3 gtk-icon-cache features_check
+inherit setuptools3 gtk-icon-cache features_check
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
