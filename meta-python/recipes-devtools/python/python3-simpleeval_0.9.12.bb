@@ -3,8 +3,7 @@ HOMEPAGE = "https://pypi.org/project/simpleeval/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=dc9277482effe59b734b004cbcc1fee7"
 
-SRC_URI[md5sum] = "f175fc12d408487ca26fa3905e0a6691"
-SRC_URI[sha256sum] = "692055488c2864637f6c2edb5fa48175978a2a07318009e7cf03c9790ca17bea"
+SRC_URI[sha256sum] = "3e0be507486d4e21cf9d08847c7e57dd61a1603950399985f7c5a0be7fd33e36"
 
 inherit pypi setuptools3 ptest
 
@@ -14,12 +13,18 @@ SRC_URI += " \
 	file://run-ptest \
 "
 
+RDEPENDS:${PN} += " \
+	${PYTHON_PN}-math \
+"
+
 RDEPENDS:${PN}-ptest += " \
 	${PYTHON_PN}-pytest \
 "
+
 do_configure:prepend() {
 	sed -i -e "/use_2to3=True,/d" ${S}/setup.py
 }
+
 do_install_ptest() {
 	cp -f ${S}/test_simpleeval.py ${D}${PTEST_PATH}/
 }
