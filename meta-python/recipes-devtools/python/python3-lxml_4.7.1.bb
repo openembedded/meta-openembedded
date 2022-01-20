@@ -20,6 +20,9 @@ DEPENDS += "libxml2 libxslt"
 
 SRC_URI[sha256sum] = "a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24"
 
+SRC_URI += " \
+           file://0001-setupinfo.py-check-the-return-value.patch \
+"
 inherit pkgconfig pypi setuptools3
 
 # {standard input}: Assembler messages:
