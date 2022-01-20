@@ -17,4 +17,4 @@ RDEPENDS:${PN} += " \
 	python3-asyncio \
 "
 
-SRC_URI[sha256sum] = "fed35eeacfa21f53f1fc05ef0cadd65a50780364da3a2be7650eb92f928fdb11"
+SRC_URI[sha256sum] = "6e1d26977ffefe3b7da1b5df7a8750aedc7686da8201cd90daf36693db122489"
