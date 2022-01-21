@@ -26,6 +26,7 @@ DEPENDS = " \
 
 inherit features_check gnomebase gnome-help gsettings itstool mime-xdg
 
+SRC_URI += " file://0001-LINGUAS-removed-duplicated-entry.patch"
 SRC_URI[archive.sha256sum] = "3deffc030384e64b57361c437c79b481ae1489ef44c87ae856e81bb10d8e383f"
 
 FILES:${PN} += "${datadir}/metainfo"
