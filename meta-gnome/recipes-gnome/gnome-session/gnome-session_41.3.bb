@@ -21,11 +21,8 @@ GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gettext gsettings upstream-version-is-even features_check
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
-# This can go when they come back to a one-dot version
-def gnome_verdir(v):
-    return '40'
 
-SRC_URI[archive.sha256sum] = "9c787829ee32e13e1508b9aee2b1d9ba42a02c48e6c8094e34f3e7f92af4df82"
+SRC_URI[archive.sha256sum] = "ee4a229053f522624054889609335b885287cf67bbde0dc9fd882b01ec9b5b39"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'consolekit',d)}"
 
