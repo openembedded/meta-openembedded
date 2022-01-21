@@ -8,7 +8,7 @@ inherit cmake
 
 DEPENDS += "expat"
 
-SRCREV = "65782bbf435d91e5eb6af9ddab110df406a824a9"
+SRCREV = "bca8e81037766a0454740c40307eea32831c101f"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master;subpath=tools"
 
 S = "${WORKDIR}/tools"
