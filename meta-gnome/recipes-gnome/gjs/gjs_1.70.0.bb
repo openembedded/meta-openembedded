@@ -12,7 +12,6 @@ SRC_URI[archive.sha256sum] = "4b0629341a318a02374e113ab97f9a9f3325423269fc1e0b04
 SRC_URI += " \
     file://0001-Support-cross-builds-a-bit-better.patch \
     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
-    file://0001-build-disable-gir-install-via-list-to-pacify-meson-0.patch \
 "
 
 # gobject-introspection is mandatory and cannot be configured
