@@ -32,6 +32,7 @@ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
 SRC_URI[archive.sha256sum] = "384651eb051393dbabe006d1ad057bf29d5cd73ebb87bc779ff5e1c31e80a827"
 SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
+SRC_URI += "  file://0001-build-Drop-incorrect-positional-arg.patch"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
