@@ -24,6 +24,7 @@ DEPENDS = " \
 
 SRC_URI[archive.sha256sum] = "8a9c8e5ef7a3a73b246a947e1190bb08ec98935af860cf0b3aa2fbf4606817a0"
 SRC_URI += "file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch"
+SRC_URI += "  file://0001-build-Fix-for-newer-meson.patch"
 
 EXTRA_OEMESON += " \
     -Dsearch_provider=false \
