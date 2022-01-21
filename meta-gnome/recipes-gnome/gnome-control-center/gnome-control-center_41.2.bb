@@ -33,6 +33,7 @@ REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
 
 SRC_URI[archive.sha256sum] = "8271fc6b33ec2418a578304dd3e57d665f0d7cc706a99a97be419848618fe248"
 SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
+SRC_URI += "  file://0001-meson-drop-unused-argument-for-i18n.merge_file.patch"
 
 PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
 PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
