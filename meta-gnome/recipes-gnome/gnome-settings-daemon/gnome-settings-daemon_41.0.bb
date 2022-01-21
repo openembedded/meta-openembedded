@@ -25,6 +25,7 @@ DEPENDS = " \
 REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
+SRC_URI += " file://0001-build-remove-positional-i18n.merge_file-arguments.patch"
 SRC_URI[archive.sha256sum] = "e6ca6361fbd1deab2de1a1e390d4f14167cf47b1c547dbb8b65a5d89e9663884"
 
 PACKAGECONFIG ??= " \
