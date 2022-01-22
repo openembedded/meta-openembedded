@@ -18,12 +18,12 @@ SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${S
 
 # patches needed by musl
 SRC_URI:append:libc-musl = " ${SRC_URI_MUSL}"
+
 SRC_URI_MUSL = "\
                file://0002-don-t-use-glibc-specific-qsort_r.patch \
                file://0003-missing_type.h-add-__compare_fn_t-and-comparison_fn_.patch \
                file://0004-add-fallback-parse_printf_format-implementation.patch \
                file://0005-src-basic-missing.h-check-for-missing-strndupa.patch \
-               file://0006-Include-netinet-if_ether.h.patch \
                file://0007-don-t-fail-if-GLOB_BRACE-and-GLOB_ALTDIRFUNC-is-not-.patch \
                file://0008-add-missing-FTW_-macros-for-musl.patch \
                file://0009-fix-missing-of-__register_atfork-for-non-glibc-build.patch \
@@ -43,6 +43,9 @@ SRC_URI_MUSL = "\
                file://0025-Handle-__cpu_mask-usage.patch \
                file://0026-Handle-missing-gshadow.patch \
                file://0028-missing_syscall.h-Define-MIPS-ABI-defines-for-musl.patch \
+               file://0001-pass-correct-parameters-to-getdents64.patch \
+               file://0002-Add-sys-stat.h-for-S_IFDIR.patch \
+               file://0001-Adjust-for-musl-headers.patch \
                "
 
 PACKAGECONFIG ??= "gshadow idn"
