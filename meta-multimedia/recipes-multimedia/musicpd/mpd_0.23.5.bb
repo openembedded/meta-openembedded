@@ -15,14 +15,13 @@ DEPENDS += " \
     icu \
     dbus \
     expat \
+    fmt \
 "
 
-SRC_URI = " \
-    git://github.com/MusicPlayerDaemon/MPD;branch=v0.22.x;protocol=https \
-    file://0001-include-utility-for-std-forward.patch \
-    file://mpd.conf.in \
-"
-SRCREV = "18628bf89ebfa5a806971479a71cf9b5764e500e"
+SRC_URI = "git://github.com/MusicPlayerDaemon/MPD;branch=v0.23.x;protocol=https \
+           file://mpd.conf.in \
+           "
+SRCREV = "df4b6b92f2c4bba1b55fe0a5559b19808abb28ff"
 S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
@@ -63,7 +62,7 @@ PACKAGECONFIG[oss] = "-Doss=enabled,-Doss=disabled,"
 PACKAGECONFIG[recorder] = "-Drecorder=true,-Drecorder=false"
 PACKAGECONFIG[smb] = "-Dsmbclient=enabled,-Dsmbclient=disabled,samba"
 PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
-PACKAGECONFIG[upnp] = "-Dupnp=enabled,-Dupnp=disabled,libupnp"
+PACKAGECONFIG[upnp] = "-Dupnp=pupnp,-Dupnp=disabled,libupnp"
 PACKAGECONFIG[vorbis] = "-Dvorbis=enabled,-Dvorbis=disabled,libvorbis libogg"
 PACKAGECONFIG[wavpack] = "-Dwavpack=enabled,-Dwavpack=disabled,wavpack"
 PACKAGECONFIG[zlib] = "-Dzlib=enabled,-Dzlib=disabled,zlib"
