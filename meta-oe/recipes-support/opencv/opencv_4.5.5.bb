@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
 
 DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
 
-SRCREV_opencv = "69357b1e88680658a07cffde7678a4d697469f03"
+SRCREV_opencv = "dad26339a975b49cfb6c7dbe4bd5276c9dcb36e2"
 SRCREV_contrib = "f5d7f6712d4ff229ba4f45cf79dfd11c557d56fd"
 SRCREV_ipp = "a56b6ac6f030c312b2dce17430eef13aed9af274"
 SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
@@ -51,8 +51,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
            file://0001-Dont-use-isystem.patch \
            file://download.patch \
            file://0001-Make-ts-module-external.patch \
-           file://0001-sfm-link-with-Glog_LIBS.patch;patchdir=../contrib \
-           file://0001-Use-the-one-argument-version-of-SetTotalBytesLimit.patch \
            "
 SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=../contrib"
 
@@ -105,7 +103,7 @@ EXTRA_OECMAKE:append:x86 = " -DX86=ON"
 
 PACKAGECONFIG ??= "gapi python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb gphoto2 \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
+    "
 
 # TBB does not build for powerpc so disable that package config
 PACKAGECONFIG:remove:powerpc = "tbb"
