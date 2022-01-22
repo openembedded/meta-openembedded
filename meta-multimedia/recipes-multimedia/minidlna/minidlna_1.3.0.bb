@@ -1,4 +1,4 @@
 require ${BPN}.inc
 
-SRCREV = "c760a338e07ebd11d62fef701e3de824a91f8625"
+SRCREV = "109d63cb11ac207c18a784556834eb054b34b00b"
 LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
