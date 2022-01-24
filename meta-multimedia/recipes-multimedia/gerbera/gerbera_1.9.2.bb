@@ -4,10 +4,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
 
 SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https;branch=master \
-           file://0001-include-optional-header.patch \
           "
 
-SRCREV = "7bc33b98994411e1748d3b3fa9a8424c49e236d6"
+SRCREV = "3b93d362ec33f738868a4e896a2c9ee8e9d7a92a"
 
 S = "${WORKDIR}/git"
 
