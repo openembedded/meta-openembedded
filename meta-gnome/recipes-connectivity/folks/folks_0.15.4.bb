@@ -20,6 +20,8 @@ PACKAGECONFIG[eds] = "-Deds_backend=true,-Deds_backend=false,evolution-data-serv
 PACKAGECONFIG[bluez] = "-Dbluez_backend=true,-Dbluez_backend=false"
 PACKAGECONFIG[ofono] = "-Dofono_backend=true,-Dofono_backend=false"
 PACKAGECONFIG[telepathy] = "-Dtelepathy_backend=true,-Dtelepathy_backend=false,telepathy-glib"
+PACKAGECONFIG[import_tool] = "-Dimport_tool=true,-Dimport_tool=false"
+PACKAGECONFIG[inspect_tool] = "-Dinspect_tool=true,-Dinspect_tool=false"
 
 PACKAGECONFIG ??= ""
 
