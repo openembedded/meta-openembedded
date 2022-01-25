@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/Gregwar/fatcat.git;branch=master;protocol=https \
            file://0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch \
            "
 
-SRCREV = "b923172d97c578297964c062e3a92799e2a9eca4"
+SRCREV = "99cb99fc86eb1601ac7ae27f5bba23add04d2543"
 
 S = "${WORKDIR}/git"
 
