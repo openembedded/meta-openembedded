@@ -4,28 +4,28 @@ LICENSE = "LGPL-2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2a2244d5a13871ad950c55877546a6a2"
 
 DEPENDS = " \
-	appstream-glib \
-	cairo \
-	enchant2 \
-	evolution-data-server \
-	folks \
-	gcr \
-	gmime \
-	gnome-online-accounts \
-	gsound \
-	gspell \
-	gtk+3 \
-	icu \
-	iso-codes \
-	json-glib \
-	libhandy \
-	libical \
-	libpeas \
-	libsecret \
-	libstemmer \
-	libxml2 \
-	sqlite3 \
-	webkitgtk \
+    appstream-glib \
+    cairo \
+    enchant2 \
+    evolution-data-server \
+    folks \
+    gcr \
+    gmime \
+    gnome-online-accounts \
+    gsound \
+    gspell \
+    gtk+3 \
+    icu \
+    iso-codes \
+    json-glib \
+    libhandy \
+    libical \
+    libpeas \
+    libsecret \
+    libstemmer \
+    libxml2 \
+    sqlite3 \
+    webkitgtk \
 "
 
 RDEPENDS:${PN} = "gnome-keyring"
@@ -37,7 +37,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "gnome-${PV}"
+SRCREV = "e561775c1580a9f60a726355b2b897bfc9cb3382"
 
 REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
 
