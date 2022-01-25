@@ -9,11 +9,8 @@ DEPENDS = "flex-native readline ncurses"
 
 inherit autotools texinfo
 
-SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
-           file://0001-Avoid-use-of-mips-which-is-reserved-on-mips.patch \
-"
-SRC_URI[md5sum] = "a104862ffd3145b076303992e9a3af26"
-SRC_URI[sha256sum] = "bb723be58ec68cb59a598b8e24a31d10ef31e0e9c277a4de07b2f457fe7de198"
+SRC_URI = "http://cgdb.me/files/${BP}.tar.gz"
+SRC_URI[sha256sum] = "0d38b524d377257b106bad6d856d8ae3304140e1ee24085343e6ddf1b65811f1"
 
 CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2 ac_cv_file__proc_self_status=yes"
 EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR} \
