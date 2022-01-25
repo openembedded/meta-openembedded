@@ -15,11 +15,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8184208060df880fe3137b93eb88aeea"
 DEPENDS = "zlib gzip-native json-c"
 
 SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https;branch=master \
-    file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-    file://0004-Modify-systemd-config-directory.patch \
-    file://317.patch \
-"
-SRCREV = "24d197214bfdcec7430d31b42e5c87df27287aaf"
+           file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+           file://0004-Modify-systemd-config-directory.patch \
+           "
+SRCREV = "1438fcf8c88cd47b20b2984180a8457c3eb9193d"
 
 S = "${WORKDIR}/git"
 
@@ -31,7 +30,7 @@ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd s
 PACKAGECONFIG[dlt-examples] = "-DWITH_DLT_EXAMPLES=ON,-DWITH_DLT_EXAMPLES=OFF,,dlt-daemon-systemd"
 
 # Linux options
-PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF -DWITH_DLT_SYSTEM=OFF,systemd"
 PACKAGECONFIG[systemd-watchdog] = "-DWITH_SYSTEMD_WATCHDOG=ON,-DWITH_SYSTEMD_WATCHDOG=OFF,systemd,libsystemd"
 PACKAGECONFIG[systemd-journal] = "-DWITH_SYSTEMD_JOURNAL=ON,-DWITH_SYSTEMD_JOURNAL=OFF,systemd,libsystemd"
 PACKAGECONFIG[dlt-dbus] = "-DWITH_DLT_DBUS=ON,-DWITH_DLT_DBUS=OFF,dbus,dbus-lib"
