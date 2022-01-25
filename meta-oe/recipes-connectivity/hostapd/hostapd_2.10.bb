@@ -2,7 +2,7 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
 HOMEPAGE = "http://w1.fi/hostapd/"
 SECTION = "kernel/userland"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://hostapd/README;md5=1ec986bec88070e2a59c68c95d763f89"
+LIC_FILES_CHKSUM = "file://hostapd/README;md5=c905478466c90f1cefc0df987c40e172"
 
 DEPENDS = "libnl openssl"
 
@@ -11,16 +11,10 @@ SRC_URI = " \
     file://defconfig \
     file://init \
     file://hostapd.service \
-    file://0001-Prepare-for-CVE-2021-30004.patch.patch \
-    file://CVE-2019-16275.patch \
-    file://CVE-2019-5061.patch \
-    file://CVE-2021-0326.patch \
-    file://CVE-2021-27803.patch \
-    file://CVE-2021-30004.patch \
 "
 
-SRC_URI[md5sum] = "f188fc53a495fe7af3b6d77d3c31dee8"
-SRC_URI[sha256sum] = "881d7d6a90b2428479288d64233151448f8990ab4958e0ecaca7eeb3c9db2bd7"
+
+SRC_URI[sha256sum] = "206e7c799b678572c2e3d12030238784bc4a9f82323b0156b4c9466f1498915d"
 
 S = "${WORKDIR}/hostapd-${PV}"
 B = "${WORKDIR}/hostapd-${PV}/hostapd"
