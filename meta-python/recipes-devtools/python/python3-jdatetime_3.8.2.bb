@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/slashmili/python-jalali"
 LICENSE = "Python-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c80be45b33471b4a23cf53d06a8172be"
 
-SRC_URI[sha256sum] = "db57ee517356b1bfc1603ef412f5da61eae92241ba0bcaf0851028cae424780c"
+SRC_URI[sha256sum] = "c685687e3f39e1b9a3ba9c00ed9d8e88603bc8994413e84623e6c5d43214e6f8"
 
 PYPI_PACKAGE = "jdatetime"
 
