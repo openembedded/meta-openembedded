@@ -32,8 +32,7 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "0725ed2baea125496a898455d501a77460218b2a0cfad773fa9322f491b82b61"
-
+SRC_URI[sha256sum] = "913dc7dd4388427fa33ea4ac89834e856ff5394f4218eace260a3a279f5b53a9"
 
 inherit autotools pkgconfig python3native gettext
 
@@ -273,3 +272,8 @@ do_install:append:class-native() {
 # | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
 # | make: *** [ext/standard/math.lo] Error 1
 ARM_INSTRUCTION_SET = "arm"
+
+# Needs fibers assembly implemented for rv32
+# for example rv64 implementation is below
+# see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
+COMPATIBLE_HOST:libc-musl:riscv32 = "null"
