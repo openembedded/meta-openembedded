@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8048cd156eda3df2e7f111b0ae9ceff"
 
 PYPI_PACKAGE = "pytest-timeout"
 
-SRC_URI[sha256sum] = "e6f98b54dafde8d70e4088467ff621260b641eb64895c4195b6e5c8f45638112"
+SRC_URI[sha256sum] = "c07ca07404c612f8abbe22294b23c368e2e5104b521c1790195561f37e1ac3d9"
 
 inherit pypi setuptools3
 
