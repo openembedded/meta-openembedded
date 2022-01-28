@@ -11,6 +11,9 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=8.2.x;protocol=https
            file://0001-Limit-sprintf-modes-to-10-characters.patch \
            file://0001-Use-snprintf-instead-of-sprintf.patch \
            file://0001-Raise-ValueError-if-color-specifier-is-too-long.patch \
+           file://0001-Initialize-coordinates-to-zero.patch \
+           file://0001-Handle-case-where-path-count-is-zero.patch \
+           file://0001-Restrict-builtins-for-ImageMath.eval.patch \
 "
 SRCREV ?= "e0e353c0ef7516979a9aedce3792596649ce4433"
 
