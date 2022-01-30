@@ -1,0 +1,26 @@
+From 85e59be1c656b946a1fcd19404cb0df6095e7dfb Mon Sep 17 00:00:00 2001
+From: odynik <odynik.ee@gmail.com>
+Date: Fri, 28 Jan 2022 12:15:41 +0200
+Subject: [PATCH 1/4] [Stream Compression] - Bug fix #12043 - lz4.h compilation
+ error - compile from source (#12049)
+
+---
+ streaming/compression.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/streaming/compression.c b/streaming/compression.c
+index 917f05bd6..93810aaed 100644
+--- a/streaming/compression.c
++++ b/streaming/compression.c
+@@ -1,7 +1,7 @@
+ #include "rrdpush.h"
+-#include "lz4.h"
+ 
+ #ifdef ENABLE_COMPRESSION
++#include "lz4.h"
+ 
+ #define LZ4_MAX_MSG_SIZE 0x4000
+ #define LZ4_STREAM_BUFFER_SIZE (0x10000 + LZ4_MAX_MSG_SIZE)
+-- 
+2.25.1
+
