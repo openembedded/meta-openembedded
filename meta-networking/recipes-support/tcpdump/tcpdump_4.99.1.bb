@@ -24,15 +24,14 @@ SRC_URI = " \
     http://www.tcpdump.org/release/${BP}.tar.gz \
     file://add-ptest.patch \
     file://run-ptest \
-    file://0001-aclocal.m4-Skip-checking-for-pcap-config.patch \
 "
 
-SRC_URI[md5sum] = "b10aa2f497def7283bc060f626879ce5"
-SRC_URI[sha256sum] = "8cf2f17a9528774a7b41060323be8b73f76024f7778f59c34efa65d49d80b842"
+SRC_URI[md5sum] = "929a255c71a9933608bd7c31927760f7"
+SRC_URI[sha256sum] = "79b36985fb2703146618d87c4acde3e068b91c553fb93f021a337f175fd10ebe"
 
-UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.(?!99)\d+)+)\.tar"
+UPSTREAM_CHECK_REGEX = "tcpdump-(?P<pver>\d+(\.\d+)+)\.tar"
 
-inherit autotools-brokensep ptest
+inherit autotools-brokensep pkgconfig ptest
 
 PACKAGECONFIG ?= "openssl"
 
@@ -42,14 +41,7 @@ PACKAGECONFIG[smi] = "--with-smi,--without-smi,libsmi"
 # Note: CVE-2018-10103 (SMB - partially fixed, but SMB printing disabled)
 PACKAGECONFIG[smb] = "--enable-smb,--disable-smb"
 
-EXTRA_AUTORECONF += "-I m4"
-
-do_configure:prepend() {
-    mkdir -p ${S}/m4
-    if [ -f aclocal.m4 ]; then
-        mv aclocal.m4 ${S}/m4
-    fi
-}
+EXTRA_AUTORECONF += "--exclude=aclocal"
 
 do_install:append() {
     # make install installs an unneeded extra copy of the tcpdump binary
