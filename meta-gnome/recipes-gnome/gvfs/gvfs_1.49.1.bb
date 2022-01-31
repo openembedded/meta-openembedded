@@ -10,8 +10,12 @@ DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native \
 
 RDEPENDS:${PN} += "gsettings-desktop-schemas"
 
-SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
-SRC_URI[archive.sha256sum] = "b2ea4f271aad2711f16b43c03151e2ec5a9874ff1a21142ef6d6406486a19dc2"
+SRC_URI = " \
+    https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive \
+    file://Remove-incorrect-i18n.merge_file-argument.patch \
+"
+
+SRC_URI[archive.sha256sum] = "b0d1dda4e475066207305b0776b0daefeae790f6c0107ffd2687994c8e71915a"
 
 # depends on gsettings-desktop-schemas->gcr->gtk+3-> x11
 REQUIRED_DISTRO_FEATURES = "x11"
