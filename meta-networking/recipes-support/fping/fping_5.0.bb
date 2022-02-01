@@ -8,7 +8,9 @@ replies, fping will send out a ping packet and move on to the next target \
 in a round-robin fashion."
 HOMEPAGE = "http://www.fping.org/"
 SECTION = "net"
-LICENSE = "BSD"
+
+LICENSE = "fping"
+NO_GENERIC_LICENSE[fping] = "COPYING"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c6170fbadddfcd74f011515291d96901"
 
 SRC_URI = "http://www.fping.org/dist/fping-${PV}.tar.gz"
