@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/concurrencykit/ck.git;branch=master;protocol=https \
 
 S = "${WORKDIR}/git"
 
-COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64).*-linux*"
+COMPATIBLE_HOST = "(arm|aarch64|i.86|x86_64|powerpc|powerpc64).*-linux*"
 
 inherit autotools-brokensep
 
