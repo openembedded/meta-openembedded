@@ -823,7 +823,6 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     libusbgx \
     lockdev \
     logwarn \
-    libjs-jquery \
     libjs-sizzle \
     liblinebreak \
     mailcap \
