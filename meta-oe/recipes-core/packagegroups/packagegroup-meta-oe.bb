@@ -421,6 +421,7 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
     sedutil \
     libsigrok \
     libsigrokdecode \
+    s-nail \
     sigrok-cli \
     snappy \
     tipcutils \
