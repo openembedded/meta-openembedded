@@ -409,7 +409,6 @@ RDEPENDS:packagegroup-meta-oe-extended ="\
     libstatgrab \
     lockfile-progs \
     logwatch \
-    mailx \
     mraa \
     ostree \
     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam-plugin-ccreds pam-plugin-ldapdb pam-ssh-agent-auth", "", d)} \
