@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main \
            file://cc.patch"
-SRCREV = "fee1b8f6473cb403b8ae7a56961ba0557e3f3efa"
+SRCREV = "8de5918507dcc797e612aac688d6b60b90053f54"
 S = "${WORKDIR}/git"
 
 DEPENDS = "gnu-efi"
@@ -20,7 +20,6 @@ SBAT_DISTRO_URL ?= ""
 
 EXTRA_OEMESON += "-Defi-cc="${@meson_array('CC', d)}" \
                   -Defi-ld='${HOST_PREFIX}ld' \
-                  -Defi-objcopy='${OBJCOPY}' \
                   -Defi-includedir=${STAGING_INCDIR}/efi \
                   -Defi-libdir=${STAGING_LIBDIR} \
                   -Defi_sbat_distro_id='${SBAT_DISTRO_ID}' \
