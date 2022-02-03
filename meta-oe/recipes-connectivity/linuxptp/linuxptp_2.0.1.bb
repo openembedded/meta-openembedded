@@ -2,14 +2,13 @@ DESCRIPTION = "Precision Time Protocol (PTP) according to IEEE standard 1588 for
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
+SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v2.0/linuxptp-${PV}.tgz \
            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
            file://Use-cross-cpp-in-incdefs.patch \
            file://time_t_maybe_long_long.patch \
            "
 
-SRC_URI[md5sum] = "d8bb7374943bb747db7786ac26f17f11"
-SRC_URI[sha256sum] = "0a24d9401e87d4af023d201e234d91127d82c350daad93432106284aa9459c7d"
+SRC_URI[sha256sum] = "6f4669db1733747427217a9e74c8b5ca25c4245947463e9cdb860ec8f5ec797a"
 
 EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} EXTRA_CFLAGS='${CFLAGS}'"
 
