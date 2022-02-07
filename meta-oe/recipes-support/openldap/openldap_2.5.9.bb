@@ -237,3 +237,6 @@ python populate_packages:prepend () {
 }
 
 BBCLASSEXTEND = "native"
+
+# CVE-2015-3276 has no target code.
+CVE_CHECK_WHITELIST += "CVE-2015-3276"
