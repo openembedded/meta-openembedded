@@ -53,6 +53,7 @@ EXTRA_OECONF = "--disable-python \
 
 EXTRA_OECONF:append:toolchain-clang:riscv32 = " --disable-vector-icons"
 EXTRA_OECONF:append:toolchain-clang:mips = " --disable-vector-icons"
+EXTRA_OECONF:append:toolchain-clang:x86 = " --disable-vector-icons"
 
 do_configure:append() {
     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
