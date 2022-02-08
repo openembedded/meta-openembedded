@@ -23,6 +23,7 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
     file://0001-ldif-filter-fix-parallel-build-failure.patch \
     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
     file://0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch \
+    file://0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch \
 "
 
 SRC_URI[md5sum] = "237fc2d881c27f8dd5d9f396e2865c11"
