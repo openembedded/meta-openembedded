@@ -1,17 +1,19 @@
-SUMMARY = "Multimedia processing server for Linux"
+SUMMARY     = "Multimedia processing server for Linux"
 DESCRIPTION = "Linux server for handling and routing audio and video streams between applications and multimedia I/O devices"
-HOMEPAGE = "https://pipewire.org/"
+HOMEPAGE    = "https://pipewire.org/"
 BUGTRACKER  = "https://gitlab.freedesktop.org/pipewire/pipewire/issues"
+AUTHOR      = "Wim Taymans <wtaymans@redhat.com>"
+SECTION     = "multimedia"
+
 LICENSE = "MIT & LGPL-2.1-or-later & GPL-2.0-only"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=2158739e172e58dc9ab1bdd2d6ec9c72 \
     file://COPYING;md5=97be96ca4fab23e9657ffa590b931c1a \
 "
-SECTION = "multimedia"
 
-DEPENDS = "dbus"
+DEPENDS = "dbus ncurses"
 
-SRCREV = "1924c2c29824955b5e763f1def6967f68e403c7c"
+SRCREV = "bdd407fe66cc9e46d4bc4dcc989d50679000482b"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
@@ -27,36 +29,47 @@ USERADD_PARAM:${PN} = "--system --home / --no-create-home \
                        --gid pipewire --groups audio,video \
                        pipewire"
 
-SYSTEMD_PACKAGES = "${PN} ${PN}-media-session"
+SYSTEMD_PACKAGES = "${PN}"
 
 # For "EVL", look up https://evlproject.org/ . It involves
 # a specially prepared kernel, and is currently unavailable
 # in Yocto.
 #
-# FFmpeg and Vulkan aren't really supported - at the current
-# stage (version 0.3.22), these are just experiments, not
-# actual features.
-#
-# libcamera support currently does not build successfully.
+# Vulkan support is currently (as of version 0.3.44) not functional.
 #
 # manpage generation requires xmltoman, which is not available.
+#
+# The session-managers list specifies which session managers Meson
+# shall download (via git clone) and build as subprojects. In OE,
+# this is not how a session manager should be built. Instead, they
+# should be integrated as separate OE recipes. To prevent PipeWire
+# from using this Meson feature, set an empty list.
+# This does not disable support or the need for session managers,
+# it just prevents this subproject feature.
+#
+# AptX and LDAC are not available in OE. Currently, neither
+# are lv2 and ROC.
 EXTRA_OEMESON += " \
-    -Daudiotestsrc=enabled \
     -Devl=disabled \
     -Dtests=disabled \
     -Dudevrulesdir=${nonarch_base_libdir}/udev/rules.d/ \
-    -Dvideotestsrc=enabled \
-    -Dffmpeg=disabled \
+    -Dsystemd-system-unit-dir=${systemd_system_unitdir} \
+    -Dsystemd-user-unit-dir=${systemd_user_unitdir} \
     -Dvulkan=disabled \
-    -Dlibcamera=disabled \
     -Dman=disabled \
+    -Dsession-managers='[]' \
+    -Dlv2=disabled \
+    -Droc=disabled \
+    -Dbluez5-codec-aptx=disabled \
+    -Dbluez5-codec-ldac=disabled \
 "
 
 PACKAGECONFIG ??= "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'alsa', d)} \
-    gstreamer jack sndfile pw-cat v4l2 \
+    gstreamer jack libusb pw-cat raop sndfile v4l2 \
 "
 
 # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
@@ -65,23 +78,31 @@ PACKAGECONFIG ??= "\
 # is why these two are marked in their respective packageconfigs
 # as being in conflict.
 PACKAGECONFIG[alsa] = "-Dalsa=enabled,-Dalsa=disabled,alsa-lib udev"
+PACKAGECONFIG[avahi] = "-Davahi=enabled,-Davahi=disabled,avahi"
 PACKAGECONFIG[bluez] = "-Dbluez5=enabled,-Dbluez5=disabled,bluez5 sbc"
-PACKAGECONFIG[docs] = "-Ddocs=enabled,-Ddocs=disabled,doxygen-native"
+PACKAGECONFIG[bluez-aac] = "-Dbluez5-codec-aac=enabled,-Dbluez5-codec-aac=disabled,fdk-aac"
+PACKAGECONFIG[docs] = "-Ddocs=enabled,-Ddocs=disabled,doxygen-native graphviz-native"
+PACKAGECONFIG[ffmpeg] = "-Dffmpeg=enabled,-Dffmpeg=disabled,ffmpeg"
 PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
 PACKAGECONFIG[jack] = "-Djack=enabled,-Djack=disabled,jack,,,pipewire-jack"
+PACKAGECONFIG[libcamera] = "-Dlibcamera=enabled,-Dlibcamera=disabled,libcamera"
+PACKAGECONFIG[libcanberra] = "-Dlibcanberra=enabled,-Dlibcanberra=disabled,libcanberra"
+PACKAGECONFIG[libusb] = "-Dlibusb=enabled,-Dlibusb=disabled,libusb"
+PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
+PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
+PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
+PACKAGECONFIG[raop] = "-Draop=enabled,-Draop=disabled,openssl"
 PACKAGECONFIG[sdl2] = "-Dsdl2=enabled,-Dsdl2=disabled,virtual/libsdl2"
 PACKAGECONFIG[sndfile] = "-Dsndfile=enabled,-Dsndfile=disabled,libsndfile1"
 PACKAGECONFIG[systemd] = "-Dsystemd=enabled,-Dsystemd=disabled,systemd"
 PACKAGECONFIG[systemd-system-service] = "-Dsystemd-system-service=enabled,-Dsystemd-system-service=disabled,systemd"
-# "systemd-user-service" packageconfig  will only install service
+# "systemd-user-service" packageconfig will only install service
 # files to rootfs but not enable them as systemd.bbclass
 # currently lacks the feature of enabling user services.
 PACKAGECONFIG[systemd-user-service] = "-Dsystemd-user-service=enabled,-Dsystemd-user-service=disabled,systemd"
 # pw-cat needs sndfile packageconfig to be enabled
-PACKAGECONFIG[pw-cat] = "-Dpw-cat=enabled,-Dpw-cat=disabled"
 PACKAGECONFIG[v4l2] = "-Dv4l2=enabled,-Dv4l2=disabled,udev"
-PACKAGECONFIG[pipewire-alsa] = "-Dpipewire-alsa=enabled,-Dpipewire-alsa=disabled,alsa-lib"
-PACKAGECONFIG[pipewire-jack] = "-Dpipewire-jack=enabled -Dlibjack-path=${libdir}/${PW_MODULE_SUBDIR}/jack,-Dpipewire-jack=disabled,jack,,,jack"
+PACKAGECONFIG[webrtc-echo-cancelling] = "-Decho-cancel-webrtc=enabled,-Decho-cancel-webrtc=disabled,webrtc-audio-processing"
 
 PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
@@ -93,8 +114,11 @@ remove_unused_installed_files() {
     # jack.conf is used by pipewire-jack (not the JACK SPA plugin).
     # Remove it if pipewire-jack is not built to avoid creating the
     # pipewire-jack package.
+    # minimal.conf is an example of how to minimally configure the
+    # daemon and is not meant to be used for production.
     if ${@bb.utils.contains('PACKAGECONFIG', 'pipewire-jack', 'false', 'true', d)}; then
         rm -f "${D}${datadir}/pipewire/jack.conf"
+        rm -f "${D}${datadir}/pipewire/minimal.conf"
     fi
 }
 
@@ -179,13 +203,13 @@ PACKAGES =+ "\
     ${PN}-pulse \
     ${PN}-alsa \
     ${PN}-jack \
-    ${PN}-media-session \
     ${PN}-spa-plugins \
     ${PN}-spa-plugins-meta \
     ${PN}-spa-tools \
     ${PN}-modules \
     ${PN}-modules-meta \
     ${PN}-alsa-card-profile \
+    ${PN}-v4l2 \
     gstreamer1.0-pipewire \
 "
 
@@ -195,6 +219,7 @@ SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd-system-s
 CONFFILES:${PN} += "${datadir}/pipewire/pipewire.conf"
 FILES:${PN} = " \
     ${datadir}/pipewire/pipewire.conf \
+    ${systemd_system_unitdir}/pipewire.* \
     ${systemd_user_unitdir}/pipewire.* \
     ${bindir}/pipewire \
 "
@@ -217,7 +242,23 @@ RDEPENDS:libpipewire += " \
 "
 
 FILES:${PN}-tools = " \
-    ${bindir}/pw-* \
+    ${bindir}/pw-cat \
+    ${bindir}/pw-cli \
+    ${bindir}/pw-dot \
+    ${bindir}/pw-dsdplay \
+    ${bindir}/pw-dump \
+    ${bindir}/pw-link \
+    ${bindir}/pw-loopback \
+    ${bindir}/pw-metadata \
+    ${bindir}/pw-mididump \
+    ${bindir}/pw-midiplay \
+    ${bindir}/pw-midirecord \
+    ${bindir}/pw-mon \
+    ${bindir}/pw-play \
+    ${bindir}/pw-profiler \
+    ${bindir}/pw-record \
+    ${bindir}/pw-reserve \
+    ${bindir}/pw-top \
 "
 
 # This is a shim daemon that is intended to be used as a
@@ -226,6 +267,7 @@ FILES:${PN}-tools = " \
 CONFFILES:${PN}-pulse += "${datadir}/pipewire/pipewire-pulse.conf"
 FILES:${PN}-pulse = " \
     ${datadir}/pipewire/pipewire-pulse.conf \
+    ${systemd_system_unitdir}/pipewire-pulse.* \
     ${systemd_user_unitdir}/pipewire-pulse.* \
     ${bindir}/pipewire-pulse \
 "
@@ -233,39 +275,32 @@ RDEPENDS:${PN}-pulse += " \
     ${PN}-modules-protocol-pulse \
 "
 
-# alsa plugin to redirect audio to pipewire
+# ALSA plugin to redirect audio to pipewire.
 FILES:${PN}-alsa = "\
     ${libdir}/alsa-lib/* \
     ${datadir}/alsa/alsa.conf.d/* \
 "
 
-# jack drop-in libraries to redirect audio to pipewire
+# JACK drop-in libraries to redirect audio to pipewire.
 CONFFILES:${PN}-jack = "${datadir}/pipewire/jack.conf"
 FILES:${PN}-jack = "\
     ${datadir}/pipewire/jack.conf \
     ${libdir}/${PW_MODULE_SUBDIR}/jack/libjack*.so.* \
 "
 
-# Example session manager. Not intended for use in production.
-CONFFILES:${PN}-media-session = "${datadir}/pipewire/media-session.d/*"
-SYSTEMD_SERVICE:${PN}-media-session = "${@bb.utils.contains('PACKAGECONFIG', 'systemd-system-service', 'pipewire-media-session.service', '', d)}"
-FILES:${PN}-media-session = " \
-    ${bindir}/pipewire-media-session \
-    ${datadir}/pipewire/media-session.d/* \
-    ${systemd_system_unitdir}/pipewire-media-session.service \
-    ${systemd_user_unitdir}/pipewire-media-session.service \
-"
-RPROVIDES:${PN}-media-session = "virtual-pipewire-sessionmanager"
-
-# Dynamic packages (see set_dynamic_metapkg_rdepends).
+# Dynamic SPA plugin packages (see set_dynamic_metapkg_rdepends).
 FILES:${PN}-spa-plugins = ""
 RRECOMMENDS:${PN}-spa-plugins += "${PN}-spa-plugins-meta"
+
+FILES:${PN}-spa-plugins-bluez5 += " \
+    ${datadir}/${SPA_SUBDIR}/bluez5/* \
+"
 
 FILES:${PN}-spa-tools = " \
     ${bindir}/spa-* \
 "
 
-# Dynamic packages (see set_dynamic_metapkg_rdepends).
+# Dynamic PipeWire module packages (see set_dynamic_metapkg_rdepends).
 FILES:${PN}-modules = ""
 RRECOMMENDS:${PN}-modules += "${PN}-modules-meta"
 
@@ -282,6 +317,12 @@ FILES:${PN}-modules-filter-chain += " \
 FILES:${PN}-alsa-card-profile = " \
     ${datadir}/alsa-card-profile/* \
     ${nonarch_base_libdir}/udev/rules.d/90-pipewire-alsa.rules \
+"
+
+# V4L2 interface emulator for sending/receiving data between PipeWire and V4L2 applications.
+FILES:${PN}-v4l2 += " \
+    ${bindir}/pw-v4l2 \
+    ${libdir}/${PW_MODULE_SUBDIR}/v4l2/libpw-v4l2.so \
 "
 
 FILES:gstreamer1.0-pipewire = " \
