@@ -6,9 +6,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
 
 SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https \
-           file://0001-mutex-Fix-build-on-32-bit-architectures-using-64-bit.patch;patchdir=../ \
            "
-SRCREV = "57a4ca5af5a7f55b768a9d9d6655250bffb1257f"
+SRCREV = "b49431c48d40490ef979247d308af63345376cee"
 
 S = "${WORKDIR}/git/c++"
 
