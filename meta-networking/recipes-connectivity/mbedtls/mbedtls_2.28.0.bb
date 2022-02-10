@@ -23,9 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 SECTION = "libs"
 
 S = "${WORKDIR}/git"
-SRCREV = "e483a77c85e1f9c1dd2eb1c5a8f552d2617fe400"
-SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=development"
-SRC_URI += "file://0001-ssl_tls-Increase-size-of-padbuf-to-64.patch"
+SRCREV = "8b3f26a5ac38d4fdccbc5c5366229f3e01dafcc0"
+SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=mbedtls-2.28"
 
 inherit cmake
 
