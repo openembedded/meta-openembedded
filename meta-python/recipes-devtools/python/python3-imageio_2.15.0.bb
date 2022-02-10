@@ -5,7 +5,7 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
 
-SRC_URI[sha256sum] = "709c18f800981e4286abe4bd86b6c9b5bb6e285b6b933b5ba0962ef8e7994058"
+SRC_URI[sha256sum] = "d0d7abb4e5c4044c06fc573233489c4a25582698f93ca94f7bd70b6f4ab172ec"
 
 inherit pypi setuptools3
 
