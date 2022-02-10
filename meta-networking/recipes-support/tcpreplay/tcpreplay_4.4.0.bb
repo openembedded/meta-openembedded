@@ -1,6 +1,7 @@
 SUMMARY = "Use previously captured traffic to test network devices"
 
-HOMEPAGE = "http://tcpreplay.synfin.net/"
+HOMEPAGE = "https://tcpreplay.appneta.com/"
+
 SECTION = "net"
 
 LICENSE = "GPLv3"
