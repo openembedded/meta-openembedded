@@ -51,6 +51,7 @@ EXTRA_OECONF = "--disable-python \
                 --disable-check-update \
                 --without-wmf"
 
+EXTRA_OECONF:append:toolchain-clang:arm = " --disable-vector-icons"
 EXTRA_OECONF:append:toolchain-clang:riscv32 = " --disable-vector-icons"
 EXTRA_OECONF:append:toolchain-clang:mips = " --disable-vector-icons"
 EXTRA_OECONF:append:toolchain-clang:x86 = " --disable-vector-icons"
