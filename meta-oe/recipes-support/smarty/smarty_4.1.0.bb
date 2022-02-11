@@ -5,11 +5,11 @@ HOMEPAGE = "https://www.smarty.net/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2c0f216b2120ffc367e20f2b56df51b3"
 
-DEPENDS = "php"
+DEPENDS += "php"
 
-SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;tag=v${PV};branch=master"
+SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master"
 
-FILES:${PN} = "${datadir}/php/smarty3/"
+SRCREV = "9e0536de18b53ba193364291ef0303b0ab9903e1"
 
 S = "${WORKDIR}/git"
 
@@ -23,3 +23,4 @@ do_install() {
         install -d ${D}${datadir}/php/smarty3/libs/sysplugins
         install -m 0644 ${S}/libs/sysplugins/*.php ${D}${datadir}/php/smarty3/libs/sysplugins/
 }
+FILES:${PN} = "${datadir}/php/smarty3/"
