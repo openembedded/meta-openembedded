@@ -114,12 +114,13 @@ remove_unused_installed_files() {
     # jack.conf is used by pipewire-jack (not the JACK SPA plugin).
     # Remove it if pipewire-jack is not built to avoid creating the
     # pipewire-jack package.
-    # minimal.conf is an example of how to minimally configure the
-    # daemon and is not meant to be used for production.
     if ${@bb.utils.contains('PACKAGECONFIG', 'pipewire-jack', 'false', 'true', d)}; then
         rm -f "${D}${datadir}/pipewire/jack.conf"
-        rm -f "${D}${datadir}/pipewire/minimal.conf"
     fi
+
+    # minimal.conf is an example of how to minimally configure the
+    # daemon and is not meant to be used for production.
+    rm -f "${D}${datadir}/pipewire/minimal.conf"
 }
 
 do_install[postfuncs] += "remove_unused_installed_files"
@@ -284,6 +285,7 @@ FILES:${PN}-alsa = "\
 # JACK drop-in libraries to redirect audio to pipewire.
 CONFFILES:${PN}-jack = "${datadir}/pipewire/jack.conf"
 FILES:${PN}-jack = "\
+    ${bindir}/pw-jack \
     ${datadir}/pipewire/jack.conf \
     ${libdir}/${PW_MODULE_SUBDIR}/jack/libjack*.so.* \
 "
