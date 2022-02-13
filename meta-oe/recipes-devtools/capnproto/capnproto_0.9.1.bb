@@ -13,6 +13,8 @@ S = "${WORKDIR}/git/c++"
 
 inherit cmake
 
+CXXFLAGS:append:mips = " -latomic"
+
 EXTRA_OECMAKE += "\
     -DBUILD_TESTING=OFF \
 "
