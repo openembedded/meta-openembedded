@@ -765,6 +765,7 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     hwdata \
     iksemel \
     gengetopt \
+    googlebenchmark \
     imagemagick \
     iniparser \
     inotify-tools \
