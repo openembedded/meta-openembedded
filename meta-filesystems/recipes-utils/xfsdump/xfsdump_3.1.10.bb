@@ -14,8 +14,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsdump/${BP}.tar.xz \
            file://remove-install-as-user.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-xfsdump-support-usrmerge.patch','',d)} \
            "
-SRC_URI[md5sum] = "086f7582875b14c17522867ffe3e202b"
-SRC_URI[sha256sum] = "55aeede6232ddce6c9e79e2af88d6f808534df1552eb2bfaf7fb85b92add6dd1"
+SRC_URI[sha256sum] = "9aab7a53aa05cd46edc97269ebf1456aab2b60ab8c1fffaaf8aa492f0b5f6517"
 
 inherit autotools-brokensep
 
