@@ -354,6 +354,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-asyncio \
     python3-pytest-benchmark \
     python3-pytest-cache \
+    python3-pytest-forked \
     python3-pytest-helpers-namespace \
     python3-pytest-html \
     python3-pytest-metadata \
@@ -361,6 +362,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-subtests \
     python3-pytest-tempdir \
     python3-pytest-timeout \
+    python3-pytest-xdist \
     python3-pythonping \
     python3-python-vlc \
     python3-pytoml \
