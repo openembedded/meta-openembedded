@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
 
 PYPI_PACKAGE = "Werkzeug"
 
-SRC_URI[sha256sum] = "aa2bb6fc8dee8d6c504c0ac1e7f5f7dc5810a9903e793b6f715a9f015bdadb9a"
+SRC_URI[sha256sum] = "b863f8ff057c522164b6067c9e28b041161b4be5ba4d0daceeaa50a163822d3c"
 
 inherit pypi setuptools3
 
