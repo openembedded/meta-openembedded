@@ -6,7 +6,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase
 
-SRC_URI[archive.sha256sum] = "e81596625899aacf1d0bf27ccc2fcc7f373405ec48735ca1c7273c0fbcdc1ef5"
+SRC_URI[archive.sha256sum] = "e954c09b4309a7ef93e13b69260acdc5738c907477eb381b78bb1e414ee6dbd8"
 SRC_URI += "file://0001-meson.build-do-not-ask-for-python-installation-versi.patch"
 
 BBCLASSEXTEND = "native"
