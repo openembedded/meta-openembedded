@@ -13,7 +13,8 @@ DEPENDS = "glib-2.0 glib-2.0-native lua pipewire \
 
 SRCREV = "e14bb72dcc85e2130d0ea96768e5ae3b375a041e"
 SRC_URI = "git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=master;protocol=https \
-           "
+           file://90-OE-disable-session-dbus-dependent-features.lua \
+          "
 
 S = "${WORKDIR}/git"
 
@@ -49,6 +50,12 @@ PACKAGESPLITFUNCS:prepend = " split_dynamic_packages "
 PACKAGESPLITFUNCS:append = " set_dynamic_metapkg_rdepends "
 
 WP_MODULE_SUBDIR = "wireplumber-0.4"
+
+add_custom_lua_config_scripts() {
+    install -m 0644 ${WORKDIR}/90-OE-disable-session-dbus-dependent-features.lua ${D}${datadir}/wireplumber/main.lua.d
+}
+
+do_install[postfuncs] += "add_custom_lua_config_scripts"
 
 python split_dynamic_packages () {
     # Create packages for each WirePlumber module.
@@ -117,12 +124,8 @@ PACKAGES_DYNAMIC = "^${PN}-modules.*"
 
 SYSTEMD_SERVICE:${PN} = "wireplumber.service"
 CONFFILES:${PN} += " \
-    ${sysconfdir}/wireplumber/config.lua \
-    ${sysconfdir}/wireplumber/config.lua.d/* \
-"
-FILES:${PN} += " \
-    ${sysconfdir}/wireplumber/config.lua \
-    ${sysconfdir}/wireplumber/config.lua.d/* \
+    ${datadir}/wireplumber/wireplumber.conf \
+    ${datadir}/wireplumber/*.lua.d/* \
 "
 # Add pipewire to RRECOMMENDS, since WirePlumber expects a PipeWire daemon to
 # be present. While in theory any application that uses libpipewire can configure
