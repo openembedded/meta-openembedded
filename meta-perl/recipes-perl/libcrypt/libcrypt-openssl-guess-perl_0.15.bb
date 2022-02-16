@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ea914cc2718e8d53bd7744d96e66c03c"
 
 SRC_URI = "http://www.cpan.org/modules/by-module/Crypt/Crypt-OpenSSL-Guess-${PV}.tar.gz "
 
-SRC_URI[sha256sum] = "e4331977e1512a3ba51d7fa2d642d3e79d479dc23483246ebfaaef80ea8573df"
+SRC_URI[sha256sum] = "1c5033381819fdb4c9087dd291b90ec70e7810d31d57eade9b388eccfd70386d"
 
 DEPENDS += "openssl"
 
