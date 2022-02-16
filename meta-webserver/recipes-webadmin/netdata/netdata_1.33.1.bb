@@ -5,13 +5,10 @@ DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troublesho
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
-DEPENDS += "libuv openssl util-linux zlib"
+DEPENDS += "libuv util-linux zlib"
 
-SRC_URI = "\
-           https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
-           file://0001-Stream-Compression-Bug-fix-12043-lz4.h-compilation-e.patch \
-"
-SRC_URI[sha256sum] = "d167d4b2d8529119fa4047ae40d22833dac9d360a6ed07c314ba313807c027eb"
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz"
+SRC_URI[sha256sum] = "20ba8695d87187787b27128ac3aab9b09aa29ca6b508c48542e0f7d50ec9322b"
 
 # default netdata.conf for netdata configuration
 SRC_URI += "file://netdata.conf"
@@ -43,8 +40,9 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "https"
 PACKAGECONFIG[compression] = "--enable-compression, --disable-compression, lz4"
+PACKAGECONFIG[https] = "--enable-https, --disable-https, openssl"
 
 # ebpf doesn't compile (or detect) the cross compilation well
 EXTRA_OECONF += "--disable-ebpf"
