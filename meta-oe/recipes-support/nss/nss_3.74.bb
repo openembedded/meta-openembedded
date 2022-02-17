@@ -281,4 +281,4 @@ RDEPENDS:${PN}-smime = "perl"
 BBCLASSEXTEND = "native nativesdk"
 
 # CVE-2006-5201 affects only Sun Solaris
-CVE_CHECK_WHITELIST += "CVE-2006-5201"
+CVE_CHECK_IGNORE += "CVE-2006-5201"
