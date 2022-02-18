@@ -3,12 +3,13 @@ SUMMARY = "C++ bindings for Cairo graphics library"
 LICENSE = "LGPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
 
+GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase
 
-DEPENDS = "cairo libsigc++-2.0"
+DEPENDS += "boost cairo libsigc++-2.0"
 
-SRC_URI[archive.md5sum] = "c62b476b61bd0abf7e9851f417d73291"
-SRC_URI[archive.sha256sum] = "a54ada8394a86182525c0762e6f50db6b9212a2109280d13ec6a0b29bfd1afe6"
+SRC_URI = "https://www.cairographics.org/releases/${P}.tar.xz"
+SRC_URI[sha256sum] = "0d37e067c5c4ca7808b7ceddabfe1932c5bd2a750ad64fb321e1213536297e78"
 
 FILES:${PN}-doc += "${datadir}/devhelp"
 FILES:${PN}-dev += "${libdir}/cairomm-*/"
