@@ -224,16 +224,16 @@ python samba_populate_packages() {
     mlprefix = d.getVar('MLPREFIX') or ''
     pam_libdir = d.expand('${base_libdir}/security')
     pam_pkgname = mlprefix + 'pam-plugin%s'
-    do_split_packages(d, pam_libdir, '^pam_(.*)\.so$', pam_pkgname, 'PAM plugin for %s', extra_depends='', prepend=True)
+    do_split_packages(d, pam_libdir, r'^pam_(.*)\.so$', pam_pkgname, 'PAM plugin for %s', extra_depends='', prepend=True)
 
     libdir = d.getVar('libdir')
-    do_split_packages(d, libdir, '^lib(.*)\.so\..*$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True, allow_links=True)
+    do_split_packages(d, libdir, r'^lib(.*)\.so\..*$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True, allow_links=True)
     pkglibdir = '%s/samba' % libdir
-    do_split_packages(d, pkglibdir, '^lib(.*)\.so$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True)
+    do_split_packages(d, pkglibdir, r'^lib(.*)\.so$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True)
     moduledir = '%s/samba/auth' % libdir
-    do_split_packages(d, moduledir, '^(.*)\.so$', 'samba-auth-%s', 'Samba %s authentication backend', hook=module_hook, extra_depends='', prepend=True)
+    do_split_packages(d, moduledir, r'^(.*)\.so$', 'samba-auth-%s', 'Samba %s authentication backend', hook=module_hook, extra_depends='', prepend=True)
     moduledir = '%s/samba/pdb' % libdir
-    do_split_packages(d, moduledir, '^(.*)\.so$', 'samba-pdb-%s', 'Samba %s password backend', hook=module_hook, extra_depends='', prepend=True)
+    do_split_packages(d, moduledir, r'^(.*)\.so$', 'samba-pdb-%s', 'Samba %s password backend', hook=module_hook, extra_depends='', prepend=True)
 }
 
 PACKAGESPLITFUNCS:prepend = "samba_populate_packages "

@@ -219,8 +219,8 @@ INSANE_SKIP:${PN}-backend-passwd     += "dev-so"
 
 python populate_packages:prepend () {
     backend_dir    = d.expand('${libexecdir}/openldap')
-    do_split_packages(d, backend_dir, 'back_([a-z]*)\.so$', 'openldap-backend-%s', 'OpenLDAP %s backend', prepend=True, extra_depends='', allow_links=True)
-    do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
+    do_split_packages(d, backend_dir, r'back_([a-z]*)\.so$', 'openldap-backend-%s', 'OpenLDAP %s backend', prepend=True, extra_depends='', allow_links=True)
+    do_split_packages(d, backend_dir, r'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 
     metapkg = "${PN}-backends"
     d.setVar('ALLOW_EMPTY:' + metapkg, "1")
