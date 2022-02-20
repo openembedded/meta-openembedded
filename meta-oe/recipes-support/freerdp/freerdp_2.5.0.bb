@@ -63,22 +63,22 @@ do_install:append () {
 python populate_packages:prepend () {
     freerdp_root = d.expand('${libdir}/freerdp')
 
-    do_split_packages(d, freerdp_root, '^(audin_.*)\.so$',
+    do_split_packages(d, freerdp_root, r'^(audin_.*)\.so$',
         output_pattern='libfreerdp-plugin-%s',
         description='FreeRDP plugin %s',
         prepend=True, extra_depends='libfreerdp-plugin-audin')
 
-    do_split_packages(d, freerdp_root, '^(rdpsnd_.*)\.so$',
+    do_split_packages(d, freerdp_root, r'^(rdpsnd_.*)\.so$',
         output_pattern='libfreerdp-plugin-%s',
         description='FreeRDP plugin %s',
         prepend=True, extra_depends='libfreerdp-plugin-rdpsnd')
 
-    do_split_packages(d, freerdp_root, '^(tsmf_.*)\.so$',
+    do_split_packages(d, freerdp_root, r'^(tsmf_.*)\.so$',
         output_pattern='libfreerdp-plugin-%s',
         description='FreeRDP plugin %s',
         prepend=True, extra_depends='libfreerdp-plugin-tsmf')
 
-    do_split_packages(d, freerdp_root, '^([^-]*)\.so$',
+    do_split_packages(d, freerdp_root, r'^([^-]*)\.so$',
         output_pattern='libfreerdp-plugin-%s',
         description='FreeRDP plugin %s',
         prepend=True, extra_depends='')
