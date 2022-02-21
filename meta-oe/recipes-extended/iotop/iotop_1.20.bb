@@ -13,6 +13,7 @@ inherit pkgconfig
 EXTRA_OEMAKE = "V=1 STRIP=true"
 # Fixes llvm-bc70b5.o: can't link soft-float modules with double-float modules
 EXTRA_OEMAKE:append:toolchain-clang:riscv64 = " NO_FLTO=1"
+EXTRA_OEMAKE:append:toolchain-clang:riscv32 = " NO_FLTO=1"
 
 # Workaround BFD linker crash with clang on arm
 # revisit when upgrading binutils and see if its fixed
