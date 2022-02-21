@@ -20,7 +20,7 @@ inherit gnomebase gobject-introspection gtk-doc gettext features_check
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "30cb79a839f90cd66f3e202f3f98cb5166fa0cd9b92eb571ad9c470a43021d83"
+SRC_URI[archive.sha256sum] = "03134fa114ef3fbe34075aa83678f58aa2debe9fcef4ea23c0779e28601d6611"
 
 # libxres means x11 only
 REQUIRED_DISTRO_FEATURES = "x11"
