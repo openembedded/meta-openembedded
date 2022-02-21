@@ -9,7 +9,6 @@ DEPENDS = " \
     groff-native \
     libtool \
     gdk-pixbuf \
-    librsvg \
     cairo \
     pango \
     expat \
@@ -33,6 +32,10 @@ SRC_URI:append:class-nativesdk = "\
            file://graphviz-setup.sh \
 "
 SRC_URI[sha256sum] = "8e1b34763254935243ccdb83c6ce108f531876d7a5dfd443f255e6418b8ea313"
+
+PACKAGECONFIG ??= "librsvg"
+PACKAGECONFIG:class-nativesdk ??= ""
+PACKAGECONFIG[librsvg] = "--with-librsvg,--without-librsvg,librsvg"
 
 EXTRA_OECONF:append = " PS2PDF=/bin/echo"
 
