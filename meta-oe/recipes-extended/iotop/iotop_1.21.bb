@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=48e7be78bd2671d08c9c3bad71f1cfaa"
 
 DEPENDS = "ncurses"
 
-SRC_URI = "https://github.com/Tomas-M/iotop/releases/download/v1.20/iotop-1.20.tar.xz"
-SRC_URI[sha256sum] = "e0227dd4b71ce3ffe50225b85cf9abb38a99c1d2dff69e3f1db7d059d7490d51"
+SRC_URI = "https://github.com/Tomas-M/iotop/releases/download/v1.21/iotop-1.21.tar.xz"
+SRC_URI[sha256sum] = "7b4862ebc93909a3f800193140ca2464e926291a9c873b50dc31fa77e6d9383e"
 UPSTREAM_CHECK_URI = "https://github.com/Tomas-M/iotop/releases"
 
 inherit pkgconfig
