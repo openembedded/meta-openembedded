@@ -11,12 +11,17 @@ SRC_URI = "${GNOME_MIRROR}/${BPN}/${SHRT_VER}/${BP}.tar.xz \
     file://libxml++_ptest.patch \
     file://run-ptest \
 "
-SRC_URI[md5sum] = "377a87bea899f2b4ff62df2418c3d8a6"
-SRC_URI[sha256sum] = "4ad4abdd3258874f61c2e2a41d08e9930677976d303653cd1670d3e9f35463e9"
+SRC_URI[sha256sum] = "9b59059abe5545d28ceb388a55e341095f197bd219c73e6623aeb6d801e00be8"
 
-DEPENDS = "libxml2 glibmm"
+DEPENDS = "libxml2 glibmm mm-common-native"
 
 inherit autotools pkgconfig ptest
+
+EXTRA_OECONF = "--disable-documentation"
+
+do_configure:prepend() {
+    mm-common-prepare --copy --force ${S}
+}
 
 do_compile_ptest() {
   oe_runmake -C examples buildtest
