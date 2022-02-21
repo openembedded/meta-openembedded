@@ -10,5 +10,5 @@ PACKAGECONFIG ??= "${@bb.utils.contains('GI_DATA_ENABLED', 'True', 'vapi', '', d
 PACKAGECONFIG[vapi] = "-Dvapi=true,-Dvapi=false"
 
 SRC_URI = "git://github.com/hughsie/libgusb.git;branch=main;protocol=https"
-SRCREV = "582f33178a986e74543de8ced087865009f8fef0"
+SRCREV = "332d5b987ffecb824426e88518e05547faf2b520"
 S = "${WORKDIR}/git"
