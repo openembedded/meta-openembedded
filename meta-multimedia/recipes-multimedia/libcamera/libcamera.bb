@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "\
 "
 
 SRC_URI = " \
-        git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
+    git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
+    file://libcamera.pc \
+    file://libcamera-base.pc \
 "
 
 SRCREV = "acf8d028edda0a59b10e15962c2606137a4940af"
@@ -47,6 +49,8 @@ do_configure:prepend() {
 do_install:append() {
     chrpath -d ${D}${libdir}/libcamera.so.0.0.0
     chrpath -d ${D}${libdir}/libcamera-base.so.0.0.0
+    install -D -m 0644 ${WORKDIR}/libcamera.pc ${D}${libdir}/pkgconfig/libcamera.pc
+    install -D -m 0644 ${WORKDIR}/libcamera-base.pc ${D}${libdir}/pkgconfig/libcamera-base.pc
 }
 
 addtask do_recalculate_ipa_signatures_package after do_package before do_packagedata

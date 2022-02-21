@@ -1,0 +1,9 @@
+prefix=/usr
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: libcamera-base
+Description: Camera support base utility library
+Version: 0.0.0
+Libs: -L${libdir} -lcamera-base
+Cflags: -I${includedir}/libcamera
