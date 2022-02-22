@@ -18,11 +18,10 @@ DEPENDS += " \
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-SRCREV_mpv = "9ca9066d052acecb5b05369141a76993a753ee1e"
-SRC_URI = " \
-    git://github.com/mpv-player/mpv;name=mpv;branch=master;protocol=https \
-    https://waf.io/waf-2.0.20;name=waf;subdir=git \
-"
+SRCREV_mpv = "349e437466163cb52f7d0aa227d4606edd9db501"
+SRC_URI = "git://github.com/mpv-player/mpv;name=mpv;branch=release/0.34;protocol=https \
+           https://waf.io/waf-2.0.20;name=waf;subdir=git \
+           "
 SRC_URI[waf.sha256sum] = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
 
 S = "${WORKDIR}/git"
