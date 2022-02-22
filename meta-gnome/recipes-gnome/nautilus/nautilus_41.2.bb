@@ -23,7 +23,7 @@ def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
 SRC_URI += "file://liportal-0.5-fix.patch"
-SRC_URI[archive.sha256sum] = "3e633098853711a3e96b12fe9228b3201816e554b2823f161e7d901a8880582f"
+SRC_URI[archive.sha256sum] = "872285b1c40a6ee418ce295ed115f5427da70907d822d95bcf51675d5498822b"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
