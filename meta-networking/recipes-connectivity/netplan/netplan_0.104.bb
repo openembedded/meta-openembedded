@@ -11,11 +11,10 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 S = "${WORKDIR}/git"
-SRCREV = "51c872d856db80281ea810ebc02e05c09d5310fa"
-PV = "0.103"
+SRCREV = "3e522b7255310bdecca6c781137741dfc4abc021"
+PV = "0.104"
 
 SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
-           file://0001-parse-nm-fix-32bit-format-string.patch \
            file://0001-Makefile-do-not-use-Werror.patch \
            "
 
