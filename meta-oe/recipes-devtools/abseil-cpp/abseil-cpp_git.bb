@@ -26,7 +26,7 @@ inherit cmake
 
 EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
                  -DBUILD_TESTING=OFF    \
-                 -DCMAKE_CXX_STANDARD=14 \
+                 -DCMAKE_CXX_STANDARD=17 \
                 "
 
 BBCLASSEXTEND = "native nativesdk"
