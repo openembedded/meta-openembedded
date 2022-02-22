@@ -462,7 +462,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-websockets \
     python3-werkzeug \
     python3-werkzeug \
-    python3-wheel \
     python3-whoosh \
     python3-wrapt \
     python3-wtforms \
