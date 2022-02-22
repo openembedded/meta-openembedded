@@ -8,7 +8,7 @@ HOMEPAGE = "http://click.pocoo.org/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=1fa98232fd645608937a0fdc82e999b8"
 
-SRC_URI[sha256sum] = "410e932b050f5eed773c4cda94de75971c89cdb3155a72a0831139a79e5ecb5b"
+SRC_URI[sha256sum] = "8458d7b1287c5fb128c90e23381cf99dcde74beaf6c7ff6384ce84d6fe090adb"
 
 inherit pypi setuptools3 ptest
 
