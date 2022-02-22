@@ -424,7 +424,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-tabulate \
     python3-term \
     python3-termcolor \
-    python3-test-generator \
     python3-textparser \
     python3-texttable \
     python3-thrift \
@@ -535,7 +534,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-smpplib-ptest \
     python3-soupsieve-ptest \
     python3-sqlparse-ptest \
-    python3-test-generator-ptest \
     python3-typeguard-ptest \
     python3-ujson-ptest \
     python3-u-msgpack-python-ptest \
