@@ -1,10 +1,10 @@
 DESCRIPTION = "A database migration tool for SQLAlchemy"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c4ece55266dcdd02ce165b1ee0e490bb"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=f5a8522010db1a393833988dbe2c7f0b"
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "7c328694a2e68f03ee971e63c3bd885846470373a5b532cf2c9f1601c413b153"
+SRC_URI[sha256sum] = "6c0c05e9768a896d804387e20b299880fe01bc56484246b0dffe8075d6d3d847"
 
 PYPI_PACKAGE = "alembic"
 
