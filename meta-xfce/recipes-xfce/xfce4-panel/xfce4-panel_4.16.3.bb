@@ -14,6 +14,8 @@ SRC_URI += " \
     file://0002-use-lxdm-to-replace-dm-tool.patch \
 "
 
+EXTRA_OECONF += "--disable-vala"
+
 python populate_packages:prepend() {
     plugin_dir = d.expand('${libdir}/xfce4/panel/plugins/')
     plugin_name = d.expand('${PN}-plugin-%s')
