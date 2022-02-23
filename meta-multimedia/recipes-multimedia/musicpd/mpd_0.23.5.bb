@@ -26,9 +26,9 @@ S = "${WORKDIR}/git"
 
 EXTRA_OEMESON += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-Dsystemd=enabled -Dsystemd_system_unit_dir=${systemd_system_unitdir} -Dsystemd_user_unit_dir=${systemd_system_unitdir}', '-Dsystemd=disabled', d)}"
 
-PACKAGECONFIG ??= "${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "aac", "", d)} \
+PACKAGECONFIG ??= "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "aac", "", d)} \
                    alsa ao bzip2 daemon \
-                   ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg aac", "", d)} \
+                   ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "ffmpeg aac", "", d)} \
                    fifo flac fluidsynth iso9660 \
                    jack libsamplerate httpd \
                    mms mpg123 modplug sndfile \

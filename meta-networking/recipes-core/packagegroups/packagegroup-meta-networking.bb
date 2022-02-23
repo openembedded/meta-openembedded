@@ -211,7 +211,7 @@ RDEPENDS:packagegroup-meta-networking-support = "\
     netcat \
     netcat-openbsd \
     libtdb \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "non-commercial", "netperf", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "non-commercial", "netperf", "", d)} \
     yp-tools \
     ypbind-mt \
     yp-tools \
