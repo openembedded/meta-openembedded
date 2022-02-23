@@ -657,7 +657,7 @@ RDEPENDS:packagegroup-meta-oe-kernel:remove:riscv32 = "crash makedumpfile oprofi
 
 RDEPENDS:packagegroup-meta-oe-multimedia ="\
     alsa-oss \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "faad2", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "faad2", "", d)} \
     dirsplit \
     genisoimage \
     icedax \
@@ -671,7 +671,7 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
     libburn \
     libcdio-paranoia \
     libcdio \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "libmad", "", d)} \
     libmms \
     libdvdread \
     libopus \
@@ -685,7 +685,7 @@ RDEPENDS:packagegroup-meta-oe-multimedia ="\
     wavpack \
     libvpx \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xsp", "", d)} \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "mpv", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "mpv", "", d)} \
     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "pavucontrol", "", d)} \
     libopusenc \
 "
