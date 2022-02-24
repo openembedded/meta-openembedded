@@ -14,7 +14,7 @@ inherit pypi setuptools3
 #
 # Uncomment this line to enable all the optional features.
 #PACKAGECONFIG ?= "test signedtoken signals rsa"
-PACKAGECONFIG[test] = ",,,${PYTHON_PN}-blinker ${PYTHON_PN}-cryptography ${PYTHON_PN}-nose ${PYTHON_PN}-pyjwt"
+PACKAGECONFIG[test] = ",,,${PYTHON_PN}-blinker ${PYTHON_PN}-cryptography ${PYTHON_PN}-pytest ${PYTHON_PN}-pyjwt"
 PACKAGECONFIG[signedtoken] = ",,,${PYTHON_PN}-cryptography ${PYTHON_PN}-pyjwt"
 PACKAGECONFIG[signals] = ",,,${PYTHON_PN}-blinker"
 PACKAGECONFIG[rsa] = ",,,${PYTHON_PN}-cryptography"
