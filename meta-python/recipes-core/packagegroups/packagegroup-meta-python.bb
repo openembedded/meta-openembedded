@@ -26,7 +26,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-alembic \
     python3-ansi2html \
     python3-ansicolors \
-    python3-anyjson \
     python3-appdirs \
     python3-apply-defaults \
     python3-argcomplete \
@@ -485,7 +484,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-jinja2-ptest \
     python3-markupsafe-ptest \
     python3-ansicolors-ptest \
-    python3-anyjson-ptest \
     python3-appdirs-ptest \
     python3-backports-functools-lru-cache-ptest \
     python3-bcrypt-ptest \
