@@ -1,7 +1,7 @@
-HOMEPAGE = "https://github.com/netdata/netdata/"
 SUMMARY = "Real-time performance monitoring"
 DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troubleshooting. \
                Open-source, free, preconfigured, opinionated, and always real-time."
+HOMEPAGE = "https://github.com/netdata/netdata/"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
@@ -41,6 +41,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "--system --no-create-home --home-dir ${localstatedir}/run/netdata --user-group netdata"
 
 PACKAGECONFIG ??= "https"
+PACKAGECONFIG[cloud] = "--enable-cloud, --disable-cloud, json-c"
 PACKAGECONFIG[compression] = "--enable-compression, --disable-compression, lz4"
 PACKAGECONFIG[https] = "--enable-https, --disable-https, openssl"
 
