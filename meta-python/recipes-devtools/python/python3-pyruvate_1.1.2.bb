@@ -14,6 +14,8 @@ S = "${WORKDIR}/pyruvate-${PV}"
 
 inherit pypi setuptools3_rust
 
+PIP_INSTALL_DIST_PATH = "${S}/dist"
+
 # crossbeam-* -> std::sync::atomic AtomicI64, AtomicU64
 # not supported on mips/powerpc with 32-bit pointers
 # https://doc.rust-lang.org/std/sync/atomic/#portability
