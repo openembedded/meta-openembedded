@@ -23,3 +23,5 @@ SRCREV = "bfd836cfdd8439d984595aca015811ed5c6be733"
 UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
 
 inherit setuptools3
+PIP_INSTALL_PACKAGE = "pykickstart"
+PIP_INSTALL_DIST_PATH = "${S}/dist"
