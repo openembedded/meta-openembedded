@@ -80,8 +80,7 @@ RDEPENDS:${PN}-flow += "${PN}-core"
 RDEPENDS:${PN}-pair += "${PN}-core"
 RDEPENDS:${PN}-dbg = "${PN}"
 
-ALLOW_EMPTY:${PN} = "1"
-FILES:${PN} = ""
+FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
 
 FILES:${PN}-test = " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
