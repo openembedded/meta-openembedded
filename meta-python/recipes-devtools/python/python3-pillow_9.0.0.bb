@@ -13,6 +13,9 @@ SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
 
 inherit setuptools3
 
+PIP_INSTALL_PACKAGE = "Pillow"
+PIP_INSTALL_DIST_PATH = "${S}/dist"
+
 DEPENDS += " \
     zlib \
     jpeg \
