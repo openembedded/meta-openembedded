@@ -15,6 +15,9 @@ SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895
 # allow for common patches for python- and python3-systemd
 FILESEXTRAPATHS:prepend := "${THISDIR}/python-systemd:"
 
-SRC_URI += "file://endian.patch"
+SRC_URI += " \
+    file://endian.patch \
+    file://0002-setup.py-switch-from-distutils-to-setuptools.patch \
+"
 
 SRC_URI:append:libc-musl = " file://0001-Provide-implementation-of-strndupa-for-musl.patch"
