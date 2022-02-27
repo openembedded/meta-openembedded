@@ -13,13 +13,14 @@ SRCREV = "c6db6fad26a2b83ba301b52ff5dee98cef7558ca"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools3
+inherit setuptools_build_meta
+PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.1-*.whl"
 
 DEPENDS += "apt intltool-native python3-distutils-extra-native"
 RDEPENDS:${PN} += "apt lsb-release python3-apt python3-core python3-datetime python3-email python3-fcntl python3-io python3-logging python3-stringold python3-syslog"
 
-do_install:prepend () {
-	cp -v ${S}/data/50unattended-upgrades.Debian ${S}/data/50unattended-upgrades
+do_configure:prepend () {
+	install -Dm 0644 ${S}/data/50unattended-upgrades.Debian ${S}/data/50unattended-upgrades
 }
 
 do_install:append () {
