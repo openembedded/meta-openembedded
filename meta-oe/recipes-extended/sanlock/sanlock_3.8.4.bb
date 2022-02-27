@@ -26,6 +26,9 @@ DEPENDS = "libaio util-linux"
 inherit setuptools3 useradd
 
 SETUPTOOLS_SETUP_PATH = "${S}/python"
+PIP_INSTALL_DIST_PATH = "${B}/python/dist"
+PIP_INSTALL_PACKAGE = "sanlock_python"
+PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-3.8.4-*.whl"
 
 do_compile:prepend () {
     oe_runmake -C ${S}/wdmd CMD_LDFLAGS="${LDFLAGS}" LIB_LDFLAGS="${LDFLAGS}"
