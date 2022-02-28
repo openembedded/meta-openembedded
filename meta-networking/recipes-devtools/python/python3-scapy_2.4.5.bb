@@ -25,6 +25,8 @@ S = "${WORKDIR}/git"
 UPSTREAM_CHECK_COMMITS = "1"
 
 inherit setuptools3 ptest
+PIP_INSTALL_PACKAGE = "scapy"
+PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-*-*.whl"
 
 do_install:append() {
         mv ${D}${bindir}/scapy ${D}${bindir}/scapy3
