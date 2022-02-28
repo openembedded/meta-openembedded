@@ -5,17 +5,13 @@ DEPENDS = "openssl db groff-native"
 LICENSE = "BSD-4-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
 
-SRCREV = "e41cfb986c1b1935770de554872247453fdbb079"
+SRCREV = "7a6b45b177070198fed0682bea5fa87c18abb084"
 
-SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=master \
+SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sasl-2.1 \
            file://avoid-to-call-AC_TRY_RUN.patch \
-           file://Fix-hardcoded-libdir.patch \
            file://debian_patches_0014_avoid_pic_overwrite.diff \
            file://saslauthd.service \
            file://saslauthd.conf \
-           file://0004-configure.ac-fix-condition-for-suppliment-snprintf-i.patch \
-           file://0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch \
-           file://0001-makeinit.sh-fix-parallel-build-issue.patch \
            file://CVE-2019-19906.patch \
            "
 
