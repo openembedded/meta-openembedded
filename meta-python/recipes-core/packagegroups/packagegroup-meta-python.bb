@@ -436,6 +436,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-twine \
     python3-twisted \
     python3-twitter \
+    python3-twofish \
     python3-txaio \
     python3-txdbus \
     python3-txws \
