@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
 SRC_URI = "git://github.com/bats-core/bats-core.git;branch=master;protocol=https"
 # v1.4.1
-SRCREV = "99d64eb017abcd6a766dd0d354e625526da69cb3"
+SRCREV = "210acf3a8ed318ddedad3137c15451739beba7d4"
 
 S = "${WORKDIR}/git"
 
