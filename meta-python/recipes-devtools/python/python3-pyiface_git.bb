@@ -5,7 +5,14 @@ LICENSE = "GPLv3+"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
 
-SRC_URI[md5sum] = "b066aa984656742738127c9c75436ab4"
-SRC_URI[sha256sum] = "e231e5735d329c5b2d4fc8854f069fdaa5436d3ef91ed64ee49e41e3f5e8a3f5"
+DEPENDS += "python3-setuptools-scm-native"
 
-inherit pypi setuptools3
+inherit setuptools3
+
+SRC_URI = "git://github.com/bat-serjo/PyIface.git;protocol=https;branch=master"
+SRCREV = "4557dbda96d2e4b1142c60603d4a27d007a9ffe6"
+PV = "0.1.dev33+g4557dbd"
+
+PIP_INSTALL_PACKAGE = "pyiface"
+
+S = "${WORKDIR}/git"
