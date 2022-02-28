@@ -9,8 +9,17 @@ inherit setuptools3
 
 S = "${WORKDIR}/git"
 
-SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=rhel9-branch"
+SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=rhel9-branch \
+           file://0001-setup.py-switch-from-distutils-to-setuptools.patch \
+          "
 SRCREV = "c321ce22950aff76611a3c6beffa02b5ea3adbed"
+
+PIP_INSTALL_PACKAGE = "python_meh"
+
+do_install:append () {
+    install -d ${D}/${datadir}/python-meh
+    mv ${D}${PYTHON_SITEPACKAGES_DIR}${datadir}/python-meh/* ${D}/${datadir}/python-meh/
+}
 
 FILES:${PN} += "${datadir}/*"
 
