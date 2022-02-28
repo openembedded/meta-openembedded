@@ -8,18 +8,16 @@ SECTION = "net"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
-SRC_URI = "https://launchpad.net/ufw/0.36/0.36/+download/ufw-0.36.tar.gz \
+SRC_URI = "https://launchpad.net/ufw/0.36/0.36.1/+download/ufw-0.36.1.tar.gz \
            file://0001-optimize-boot.patch \
            file://0002-add-an-option-to-specify-iptables-location.patch \
            file://0003-only-make-one-reference-to-env.patch \
            "
+SRC_URI[sha256sum] = "1c57e78fbf2970f0cc9c56ea87a231e6d83d825e55b9e31e2c88b91b0ea03c8c"
 
 UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
 
-SRC_URI[md5sum] = "6d8ab1506da21ae003f4628f93d05781"
-SRC_URI[sha256sum] = "754b22ae5edff0273460ac9f57509c3938187e0cf4fb9692c6a02833fff33cfc"
-
-inherit setuptools3 features_check systemd update-rc.d
+inherit distutils3 features_check systemd update-rc.d
 
 RDEPENDS:${PN} = " \
                   iptables \
