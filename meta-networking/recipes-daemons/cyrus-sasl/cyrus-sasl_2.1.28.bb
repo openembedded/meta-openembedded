@@ -10,6 +10,7 @@ SRCREV = "7a6b45b177070198fed0682bea5fa87c18abb084"
 SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https;branch=cyrus-sasl-2.1 \
            file://avoid-to-call-AC_TRY_RUN.patch \
            file://debian_patches_0014_avoid_pic_overwrite.diff \
+           file://0001-sample-Rename-dprintf-to-cyrus_dprintf.patch \
            file://saslauthd.service \
            file://saslauthd.conf \
            file://CVE-2019-19906.patch \
