@@ -124,7 +124,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-fasteners \
     python3-fastjsonschema \
     python3-fastnumbers \
-    python3-feedformatter \
     python3-fields \
     python3-flask \
     python3-flask-babel \
