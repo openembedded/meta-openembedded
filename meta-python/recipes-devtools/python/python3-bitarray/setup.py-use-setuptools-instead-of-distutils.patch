@@ -1,0 +1,29 @@
+From 947d364841954d60bab7a4cf1497a272b1bf73ca Mon Sep 17 00:00:00 2001
+From: Konrad Weihmann <kweihmann@outlook.com>
+Date: Sun, 27 Feb 2022 11:57:09 +0100
+Subject: [PATCH] setup.py: use setuptools instead of distutils
+
+as distutils will be deprecated in python 3.12 and already produces
+a warning when run with python 3.10.x, it might be a good time to
+switch to setuptools.
+It offers the same interface, so results will be the same
+
+Signed-off-by: Konrad Weihmann <kweihmann@outlook.com>
+
+Upstream-Status: Backport [https://github.com/ilanschnell/bitarray/commit/947d364841954d60bab7a4cf1497a272b1bf73ca]
+
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 4dbdf859..c7787dad 100644
+--- a/setup.py
++++ b/setup.py
+@@ -1,5 +1,5 @@
+ import re
+-from distutils.core import setup, Extension
++from setuptools import setup, Extension
+ 
+ 
+ kwds = {}

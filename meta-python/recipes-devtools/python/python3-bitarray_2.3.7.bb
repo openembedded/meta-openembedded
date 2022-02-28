@@ -7,4 +7,7 @@ SRC_URI[sha256sum] = "4da790ab193e993107f3ff0aebc4f8d6ad5196a19071fbafad16b02898
 
 inherit setuptools3 pypi
 
+# Backported from 2.3.8
+SRC_URI += "file://setup.py-use-setuptools-instead-of-distutils.patch"
+
 BBCLASSEXTEND = "native nativesdk"
