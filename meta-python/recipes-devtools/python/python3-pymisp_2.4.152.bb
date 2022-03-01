@@ -7,7 +7,9 @@ SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
 SRCREV = "d991e53f9a9641f454e116e83d2913edf405a53f"
 S = "${WORKDIR}/git"
 
-inherit setuptools3
+inherit poetry_core
+
+PIP_INSTALL_PACKAGE = "pymisp"
 
 RDEPENDS:${PN} += " \
     ${PYTHON_PN}-dateutil \
