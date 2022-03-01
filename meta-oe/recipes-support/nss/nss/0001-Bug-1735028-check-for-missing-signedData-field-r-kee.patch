@@ -1,0 +1,55 @@
+From 074e29e6724d443d3161ee2982ba7f017d3075dd Mon Sep 17 00:00:00 2001
+From: "John M. Schanck" <jschanck@mozilla.com>
+Date: Mon, 11 Oct 2021 22:09:25 +0000
+Subject: [PATCH] Bug 1735028 - check for missing signedData field r=keeler
+
+Differential Revision: https://phabricator.services.mozilla.com/D128112
+
+Upstream-Status: Backport [074e29e6724d443d3161ee2982ba7f017d3075dd]
+CVE: CVE-2022-22747
+Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
+---
+ gtests/certdb_gtest/decode_certs_unittest.cc | 13 +++++++++++++
+ lib/pkcs7/certread.c                         |  5 +++++
+ 2 files changed, 18 insertions(+)
+
+diff --git a/nss/gtests/certdb_gtest/decode_certs_unittest.cc b/nss/gtests/certdb_gtest/decode_certs_unittest.cc
+index 405194edc..3317ae8ee 100644
+--- a/nss/gtests/certdb_gtest/decode_certs_unittest.cc
++++ b/nss/gtests/certdb_gtest/decode_certs_unittest.cc
+@@ -26,3 +26,16 @@ TEST_F(DecodeCertsTest, EmptyCertPackage) {
+                          sizeof(emptyCertPackage)));
+   EXPECT_EQ(SEC_ERROR_BAD_DER, PR_GetError());
+ }
++
++TEST_F(DecodeCertsTest, EmptySignedData) {
++  // This represents a PKCS#7 ContentInfo of contentType
++  // 1.2.840.113549.1.7.2 (signedData) with missing content.
++  unsigned char emptySignedData[] = {0x30, 0x80, 0x06, 0x09, 0x2a, 0x86,
++                                     0x48, 0x86, 0xf7, 0x0d, 0x01, 0x07,
++                                     0x02, 0x00, 0x00, 0x05, 0x00};
++
++  EXPECT_EQ(nullptr,
++            CERT_DecodeCertFromPackage(reinterpret_cast<char*>(emptySignedData),
++                                       sizeof(emptySignedData)));
++  EXPECT_EQ(SEC_ERROR_BAD_DER, PR_GetError());
++}
+diff --git a/nss/lib/pkcs7/certread.c b/nss/lib/pkcs7/certread.c
+index 3091f9947..15094f2d7 100644
+--- a/nss/lib/pkcs7/certread.c
++++ b/nss/lib/pkcs7/certread.c
+@@ -139,6 +139,11 @@ SEC_ReadPKCS7Certs(SECItem *pkcs7Item, CERTImportCertificateFunc f, void *arg)
+         goto done;
+     }
+ 
++    if (contentInfo.content.signedData == NULL) {
++        PORT_SetError(SEC_ERROR_BAD_DER);
++        goto done;
++    }
++
+     rv = SECSuccess;
+ 
+     certs = contentInfo.content.signedData->certificates;
+-- 
+2.25.1
+
