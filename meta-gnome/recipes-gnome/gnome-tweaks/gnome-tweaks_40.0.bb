@@ -19,7 +19,10 @@ REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 GIR_MESON_OPTION = ""
 
 SRC_URI[archive.sha256sum] = "f95f3fe031b0b01c02f79a1659f889152d3772ae3e44df8403d1460ba5eec36a"
-SRC_URI += "file://0001-Make-python-path-configurable.patch"
+SRC_URI += " \
+    file://0001-Make-python-path-configurable.patch \
+    file://0002-meson-fix-invalid-positional-argument.patch \
+"
 
 EXTRA_OEMESON = "-Dpython_site_dir=${PYTHON_SITEPACKAGES_DIR}"
 
