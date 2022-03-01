@@ -10,7 +10,7 @@ RDEPENDS:${PN} = "pkgconfig \
                  ${PYTHON_PN}-shell \
                  "
 
-inherit pypi setuptools3
+inherit pypi poetry_core
 
 BBCLASSEXTEND = "native"
 
