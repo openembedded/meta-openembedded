@@ -11,12 +11,11 @@ S = "${WORKDIR}/git"
 B = "${S}"
 
 SRCREV = "5e12e398eb5c4e30d7b29b02458c76d2cc780700"
-PV = "1.8.1+git${SRCPV}"
-
 SRC_URI = "git://github.com/seveas/python-prctl;protocol=https;branch=main \
            file://0001-support-cross-complication.patch \
 "
 inherit setuptools3 python3native
+PIP_INSTALL_PACKAGE = "python_prctl"
 
 DEPENDS += "libcap"
 
