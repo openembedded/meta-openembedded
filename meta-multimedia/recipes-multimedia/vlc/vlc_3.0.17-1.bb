@@ -5,7 +5,7 @@ SECTION = "multimedia"
 LICENSE = "GPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
+DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native bison-native \
    dbus libxml2 gnutls \
    tremor faad2 ffmpeg flac alsa-lib \
    lua-native lua libidn \
@@ -16,17 +16,17 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
 LDFLAGS:append:riscv64 = " -latomic"
 LDFLAGS:append:riscv32 = " -latomic"
 
-SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+SRC_URI = "git://github.com/videolan/vlc.git;protocol=https;branch=3.0.x \
            file://0001-make-opencv-configurable.patch \
            file://0002-use-vorbisidec.patch \
            file://0003-fix-luaL-checkint.patch \
            file://0004-Use-packageconfig-to-detect-mmal-support.patch \
            file://0005-linux-thread-Use-SYS_futex-instead-of-__NR_futex.patch \
-           file://0001-include-limits-header.patch \
 "
-SRC_URI[sha256sum] = "eff458f38a92126094f44f2263c2bf2c7cdef271b48192d0fe7b1726388cf879"
+SRCREV = "aa76328c572d93f1d99c867a94ecad1dc3259733"
+S = "${WORKDIR}/git"
 
-inherit autotools features_check gettext pkgconfig mime-xdg
+inherit autotools-brokensep features_check gettext pkgconfig mime-xdg
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
