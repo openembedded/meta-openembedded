@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
 DEPENDS = " \
+    coreutils-native \
     intltool-native \
     libxslt-native \
     libnl \
@@ -16,32 +17,37 @@ DEPENDS = " \
     libndp \
     libnewt \
     curl \
+    dbus \
 "
 
-inherit gnomebase gettext update-rc.d systemd vala gobject-introspection gtk-doc update-alternatives upstream-version-is-even
+GNOMEBASEBUILDCLASS = "meson"
+inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-doc update-alternatives upstream-version-is-even
 
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://${BPN}.initd \
-    file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
-    file://0002-Do-not-create-settings-settings-property-documentati.patch \
-    file://0003-install-firewalld-to-var-libdir-rather-than-hardcod-.patch \
+    file://0001-do-not-ask-host-for-ifcfg-defaults.patch \
 "
 SRC_URI[sha256sum] = "faa389c9e9ca78243cfab4a8bed6db132f82e5b5e66bb9d44af93379d1348398"
 
 S = "${WORKDIR}/NetworkManager-${PV}"
 
-EXTRA_OECONF = " \
-    --disable-ifcfg-rh \
-    --disable-more-warnings \
-    --with-iptables=${sbindir}/iptables \
-    --with-tests \
-    --with-nmtui=yes \
-    --with-udev-dir=${nonarch_base_libdir}/udev \
-    --with-dhclient=no \
-    --with-dhcpcd=no \
-    --with-dhcpcanon=no \
-    --with-netconfig=no \
+# ['auto', 'symlink', 'file', 'netconfig', 'resolvconf']
+NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT ??= "auto"
+
+# ['dhcpcanon', 'dhclient', 'dhcpcd', 'internal', 'nettools']
+NETWORKMANAGER_DHCP_DEFAULT ??= "internal"
+
+EXTRA_OEMESON = "\
+    -Difcfg_rh=false \
+    -Dtests=yes \
+    -Dnmtui=true \
+    -Dudev_dir=${nonarch_base_libdir}/udev \
+    -Dlibpsl=false \
+    -Dqt=false \
+    -Dconfig_dns_rc_manager_default=${NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT} \
+    -Dconfig_dhcp_default=${NETWORKMANAGER_DHCP_DEFAULT} \
+    -Ddhcpcanon=false \
 "
 
 # stolen from https://github.com/void-linux/void-packages/blob/master/srcpkgs/NetworkManager/template
@@ -52,7 +58,7 @@ CFLAGS:append:libc-musl = " \
 "
 
 do_compile:prepend() {
-    export GIR_EXTRA_LIBS_PATH="${B}/src/libnm-client-impl/.libs"
+    export GI_TYPELIB_PATH="${B}}/src/libnm-client-impl${GI_TYPELIB_PATH:+:$GI_TYPELIB_PATH}"
 }
 
 PACKAGECONFIG ??= "nss ifupdown dnsmasq nmcli \
@@ -64,33 +70,32 @@ PACKAGECONFIG ??= "nss ifupdown dnsmasq nmcli \
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'nmcli', 'bash-completion', '', d)}
 
-PACKAGECONFIG[systemd] = " \
-    --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd, \
-    --without-systemdsystemunitdir, \
+PACKAGECONFIG[systemd] = "\
+    -Dsystemdsystemunitdir=${systemd_unitdir}/system -Dsession_tracking=systemd,\
+    -Dsystemdsystemunitdir=no -Dsystemd_journal=false -Dsession_tracking=no\
 "
-PACKAGECONFIG[polkit] = "--enable-polkit,--disable-polkit,polkit"
-PACKAGECONFIG[bluez5] = "--enable-bluez5-dun,--disable-bluez5-dun,bluez5"
+PACKAGECONFIG[polkit] = "-Dpolkit=true,-Dpolkit=false,polkit"
+PACKAGECONFIG[bluez5] = "-Dbluez5_dun=true,-Dbluez5_dun=false,bluez5"
 # consolekit is not picked by shlibs, so add it to RDEPENDS too
-PACKAGECONFIG[consolekit] = "--with-session-tracking=consolekit,,consolekit,consolekit"
-PACKAGECONFIG[modemmanager] = "--with-modem-manager-1=yes,--with-modem-manager-1=no,modemmanager"
-PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp,ppp"
-PACKAGECONFIG[dnsmasq] = "--with-dnsmasq=${bindir}/dnsmasq"
-PACKAGECONFIG[nss] = "--with-crypto=nss,,nss"
-PACKAGECONFIG[resolvconf] = "--with-resolvconf=${base_sbindir}/resolvconf,,,resolvconf"
-PACKAGECONFIG[gnutls] = "--with-crypto=gnutls,,gnutls"
-PACKAGECONFIG[wifi] = "--with-wext=yes --enable-wifi=yes,--with-wext=no --enable-wifi=no,,wpa-supplicant"
-PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
-PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
-PACKAGECONFIG[cloud-setup] = "--with-nm-cloud-setup=yes,--with-nm-cloud-setup=no"
-PACKAGECONFIG[nmcli] = "--with-nmcli=yes,--with-nmcli=no,readline"
-PACKAGECONFIG[ovs] = "--enable-ovs,--disable-ovs,jansson"
-PACKAGECONFIG[audit] = "--with-libaudit,--without-libaudit,audit"
-PACKAGECONFIG[selinux] = "--with-selinux,--without-selinux,libselinux"
+PACKAGECONFIG[consolekit] = "-Dsession_tracking_consolekit=true,-Dsession_tracking_consolekit=false,consolekit,consolekit"
+PACKAGECONFIG[modemmanager] = "-Dmodem_manager=true,-Dmodem_manager=false,modemmanager mobile-broadband-provider-info"
+PACKAGECONFIG[ppp] = "-Dppp=true,-Dppp=false,ppp,ppp"
+PACKAGECONFIG[dnsmasq] = "-Ddnsmasq=${bindir}/dnsmasq"
+PACKAGECONFIG[nss] = "-Dcrypto=nss,,nss"
+PACKAGECONFIG[resolvconf] = "-Dresolvconf=${base_sbindir}/resolvconf,-Dresolvconf=no,,resolvconf"
+PACKAGECONFIG[gnutls] = "-Dcrypto=gnutls,,gnutls"
+PACKAGECONFIG[wifi] = "-Dwext=true -Dwifi=true,-Dwext=false -Dwifi=false"
+PACKAGECONFIG[ifupdown] = "-Difupdown=true,-Difupdown=false"
+PACKAGECONFIG[cloud-setup] = "-Dnm_cloud_setup=true,-Dnm_cloud_setup=false"
+PACKAGECONFIG[nmcli] = "-Dnmcli=true,-Dnmcli=false"
+PACKAGECONFIG[ovs] = "-Dovs=true,-Dovs=false,jansson"
+PACKAGECONFIG[audit] = "-Dlibaudit=yes,-Dlibaudit=no"
+PACKAGECONFIG[selinux] = "-Dselinux=true,-Dselinux=false,libselinux"
 
 PACKAGES =+ " \
-  ${PN}-nmcli ${PN}-nmcli-doc \
-  ${PN}-nmtui ${PN}-nmtui-doc \
-  ${PN}-adsl ${PN}-cloud-setup \
+    ${PN}-nmcli ${PN}-nmcli-doc \
+    ${PN}-nmtui ${PN}-nmtui-doc \
+    ${PN}-adsl ${PN}-cloud-setup \
 "
 
 SYSTEMD_PACKAGES = "${PN} ${PN}-cloud-setup"
