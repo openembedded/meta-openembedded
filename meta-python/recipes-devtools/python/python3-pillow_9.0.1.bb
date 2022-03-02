@@ -38,3 +38,5 @@ S = "${WORKDIR}/git"
 RPROVIDES:${PN} += "python3-imaging"
 
 BBCLASSEXTEND = "native"
+
+SRCREV = "6deac9e3a23caffbfdd75c00d3f0a1cd36cdbd5d"
