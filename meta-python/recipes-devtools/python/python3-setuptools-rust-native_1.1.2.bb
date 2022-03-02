@@ -19,7 +19,7 @@ inherit cargo pypi setuptools3 native
 
 # For some reason the wheel is built in ${S} not ${B}
 PIP_INSTALL_DIST_PATH = "${S}/dist"
-
+PIP_INSTALL_PACKAGE = "setuptools_rust"
 
 DEPENDS += "python3-setuptools-scm-native python3-wheel-native"
 
