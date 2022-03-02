@@ -26,6 +26,8 @@ inherit gnomebase gettext update-rc.d systemd gobject-introspection gtk-doc upda
 SRC_URI = " \
     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
     file://${BPN}.initd \
+    file://enable-dhcpcd.conf \
+    file://enable-iwd.conf \
     file://0001-do-not-ask-host-for-ifcfg-defaults.patch \
 "
 SRC_URI[sha256sum] = "faa389c9e9ca78243cfab4a8bed6db132f82e5b5e66bb9d44af93379d1348398"
@@ -61,7 +63,7 @@ do_compile:prepend() {
     export GI_TYPELIB_PATH="${B}}/src/libnm-client-impl${GI_TYPELIB_PATH:+:$GI_TYPELIB_PATH}"
 }
 
-PACKAGECONFIG ??= "nss ifupdown dnsmasq nmcli \
+PACKAGECONFIG ??= "readline nss ifupdown dnsmasq nmcli vala \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez5', '', d)} \
     ${@bb.utils.filter('DISTRO_FEATURES', 'wifi polkit', d)} \
@@ -69,6 +71,7 @@ PACKAGECONFIG ??= "nss ifupdown dnsmasq nmcli \
 "
 
 inherit ${@bb.utils.contains('PACKAGECONFIG', 'nmcli', 'bash-completion', '', d)}
+inherit ${@bb.utils.contains('PACKAGECONFIG', 'vala', 'vala', '', d)}
 
 PACKAGECONFIG[systemd] = "\
     -Dsystemdsystemunitdir=${systemd_unitdir}/system -Dsession_tracking=systemd,\
@@ -85,22 +88,40 @@ PACKAGECONFIG[nss] = "-Dcrypto=nss,,nss"
 PACKAGECONFIG[resolvconf] = "-Dresolvconf=${base_sbindir}/resolvconf,-Dresolvconf=no,,resolvconf"
 PACKAGECONFIG[gnutls] = "-Dcrypto=gnutls,,gnutls"
 PACKAGECONFIG[wifi] = "-Dwext=true -Dwifi=true,-Dwext=false -Dwifi=false"
+PACKAGECONFIG[iwd] = "-Diwd=true,-Diwd=false"
 PACKAGECONFIG[ifupdown] = "-Difupdown=true,-Difupdown=false"
 PACKAGECONFIG[cloud-setup] = "-Dnm_cloud_setup=true,-Dnm_cloud_setup=false"
 PACKAGECONFIG[nmcli] = "-Dnmcli=true,-Dnmcli=false"
+PACKAGECONFIG[readline] = "-Dreadline=libreadline,,readline"
+PACKAGECONFIG[libedit] = "-Dreadline=libedit,,libedit"
 PACKAGECONFIG[ovs] = "-Dovs=true,-Dovs=false,jansson"
 PACKAGECONFIG[audit] = "-Dlibaudit=yes,-Dlibaudit=no"
 PACKAGECONFIG[selinux] = "-Dselinux=true,-Dselinux=false,libselinux"
+PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
+PACKAGECONFIG[dhcpcd] = "-Ddhcpcd=yes,-Ddhcpcd=no,,dhcpcd"
+PACKAGECONFIG[dhclient] = "-Ddhclient=yes,-Ddhclient=no,,dhcp"
+PACKAGECONFIG[concheck] = "-Dconcheck=true,-Dconcheck=false"
+
 
 PACKAGES =+ " \
+    ${PN}-adsl \
+    ${PN}-bluetooth \
+    ${PN}-cloud-setup \
     ${PN}-nmcli ${PN}-nmcli-doc \
     ${PN}-nmtui ${PN}-nmtui-doc \
-    ${PN}-adsl ${PN}-cloud-setup \
+    ${PN}-wifi \
+    ${PN}-wwan \
+    ${PN}-ovs ${PN}-ovs-doc \
+    ${PN}-ppp \
 "
 
 SYSTEMD_PACKAGES = "${PN} ${PN}-cloud-setup"
 
-FILES:${PN}-adsl = "${libdir}/NetworkManager/${PV}/libnm-device-plugin-adsl.so"
+NETWORKMANAGER_PLUGINDIR = "${libdir}/NetworkManager/${PV}"
+
+FILES:${PN}-adsl = "${NETWORKMANAGER_PLUGINDIR}/libnm-device-plugin-adsl.so"
+
+FILES:${PN}-bluetooth = "${NETWORKMANAGER_PLUGINDIR}/libnm-device-plugin-bluetooth.so"
 
 FILES:${PN}-cloud-setup = " \
     ${libexecdir}/nm-cloud-setup \
@@ -111,37 +132,6 @@ FILES:${PN}-cloud-setup = " \
 "
 ALLOW_EMPTY:${PN}-cloud-setup = "1"
 SYSTEMD_SERVICE:${PN}-cloud-setup = "${@bb.utils.contains('PACKAGECONFIG', 'cloud-setup', 'nm-cloud-setup.service nm-cloud-setup.timer', '', d)}"
-
-FILES:${PN} += " \
-    ${libexecdir} \
-    ${libdir}/NetworkManager/${PV}/*.so \
-    ${libdir}/NetworkManager \
-    ${libdir}/firewalld/zones \
-    ${nonarch_libdir}/NetworkManager/conf.d \
-    ${nonarch_libdir}/NetworkManager/dispatcher.d \
-    ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-down.d \
-    ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-up.d \
-    ${nonarch_libdir}/NetworkManager/dispatcher.d/no-wait.d \
-    ${nonarch_libdir}/NetworkManager/VPN \
-    ${nonarch_libdir}/NetworkManager/system-connections \
-    ${datadir}/polkit-1 \
-    ${datadir}/dbus-1 \
-    ${nonarch_base_libdir}/udev/* \
-    ${systemd_system_unitdir} \
-    ${libdir}/pppd \
-"
-
-RRECOMMENDS:${PN} += "iptables \
-    ${@bb.utils.filter('PACKAGECONFIG', 'dnsmasq', d)} \
-"
-RCONFLICTS:${PN} = "connman"
-
-FILES:${PN}-dev += " \
-    ${datadir}/NetworkManager/gdb-cmd \
-    ${libdir}/pppd/*/*.la \
-    ${libdir}/NetworkManager/*.la \
-    ${libdir}/NetworkManager/${PV}/*.la \
-"
 
 FILES:${PN}-nmcli = " \
     ${bindir}/nmcli \
@@ -162,8 +152,71 @@ FILES:${PN}-nmtui-doc = " \
     ${mandir}/man1/nmtui* \
 "
 
+FILES:${PN}-wifi = "${NETWORKMANAGER_PLUGINDIR}/libnm-device-plugin-wifi.so"
+
+FILES:${PN}-wwan = "\
+    ${NETWORKMANAGER_PLUGINDIR}/libnm-device-plugin-wwan.so \
+    ${NETWORKMANAGER_PLUGINDIR}/libnm-wwan.so \
+"
+
+FILES:${PN}-ovs = "\
+    ${NETWORKMANAGER_PLUGINDIR}/libnm-device-plugin-ovs.so \
+    ${systemd_system_unitdir}/NetworkManager.service.d/NetworkManager-ovs.conf \
+"
+
+FILES:${PN}-ovs-doc = "\
+    ${mandir}/man7/nm-openvswitch.7* \
+"
+
+FILES:${PN}-ppp = "\
+    ${NETWORKMANAGER_PLUGINDIR}/libnm-ppp-plugin.so \
+    ${libdir}/pppd/*/nm-pppd-plugin.so \
+"
+
+FILES:${PN}-dev += " \
+    ${libdir}/pppd/*/*.la \
+    ${libdir}/NetworkManager/*.la \
+    ${NETWORKMANAGER_PLUGINDIR}/*.la \
+"
+
+FILES:${PN} += " \
+    ${libexecdir} \
+    ${libdir}/NetworkManager \
+    ${libdir}/firewalld/zones \
+    ${nonarch_libdir}/NetworkManager/conf.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-down.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-up.d \
+    ${nonarch_libdir}/NetworkManager/dispatcher.d/no-wait.d \
+    ${nonarch_libdir}/NetworkManager/VPN \
+    ${nonarch_libdir}/NetworkManager/system-connections \
+    ${datadir}/polkit-1 \
+    ${datadir}/dbus-1 \
+    ${nonarch_base_libdir}/udev/* \
+    ${systemd_system_unitdir} \
+"
+
+RRECOMMENDS:${PN} += "\
+    iptables \
+    ${@bb.utils.filter('PACKAGECONFIG', 'dnsmasq', d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','adsl','${PN}-adsl','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','bluez5','${PN}-bluetooth','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','cloud-setup','${PN}-cloud-setup','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','nmcli','${PN}-nmcli','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','nmtui','${PN}-nmtui','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','wifi','${PN}-wifi','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','wwan','${PN}-wwan','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','ovs','${PN}-ovs','',d)} \
+    ${@bb.utils.contains('PACKAGECONFIG','ppp','${PN}-ppp','',d)} \
+"
+RCONFLICTS:${PN} = "connman"
+
+
 INITSCRIPT_NAME = "network-manager"
-SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
+SYSTEMD_SERVICE:${PN} = "\
+    NetworkManager.service \
+    NetworkManager-dispatcher.service \
+"
 
 ALTERNATIVE_PRIORITY = "100"
 ALTERNATIVE:${PN} = "${@bb.utils.contains('DISTRO_FEATURES','systemd','resolv-conf','',d)}"
@@ -181,5 +234,15 @@ do_install:append() {
 
         # systemd v210 and newer do not need this rule file
         rm ${D}/${nonarch_base_libdir}/udev/rules.d/84-nm-drivers.rules
+    fi
+
+    # Enable iwd if compiled
+    if ${@bb.utils.contains('PACKAGECONFIG','iwd','true','false',d)}; then
+        install -Dm 0644 ${WORKDIR}/enable-iwd.conf ${D}${libdir}/NetworkManager/conf.d/enable-iwd.conf
+    fi
+
+    # Enable dhcpd if compiled
+    if ${@bb.utils.contains('PACKAGECONFIG','dhcpcd','true','false',d)}; then
+        install -Dm 0644 ${WORKDIR}/enable-dhcpcd.conf ${D}${libdir}/NetworkManager/conf.d/enable-dhcpcd.conf
     fi
 }
