@@ -6,10 +6,14 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.txt;md5=9ac49901b833e769c7d6f21e8dbd7b30 \
     file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9 \
 "
+SRCREV = "90d7b05749e2da7a13193024c720e3c8d9bf1157"
+SRC_URI = "git://github.com/aws/aws-iot-device-sdk-python;branch=master;protocol=https \
+           file://0001-setup.py-Use-setuptools-instead-of-distutils.patch \
+           "
 
-SRC_URI[sha256sum] = "84b440c5929f33da1cd204f3ad0ea891e208637dd63de9fb039ed7d49d78c303"
+S = "${WORKDIR}/git"
 
-inherit pypi setuptools3
+inherit setuptools3
 
 PYPI_PACKAGE = "AWSIoTPythonSDK"
 
