@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8dcea832f6acf45d856abfeb2d51ec48"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-DEPENDS = "mozjs-78 gtk4"
+DEPENDS = "mozjs-91"
 
 inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even pkgconfig
 
-SRC_URI[archive.sha256sum] = "bbdc0eec7cf25fbc534769f6a1fb2c7a18e17b871efdb0ca58e9abf08b28003f"
+SRC_URI[archive.sha256sum] = "f15ad0d45a7d31a1ac4e07479038c0536713cca3c5492ca2f2731c04a3a5f1e9"
 SRC_URI += " \
     file://0001-Support-cross-builds-a-bit-better.patch \
     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
@@ -21,6 +21,7 @@ GIR_MESON_OPTION = ""
 EXTRA_OEMESON = " \
     -Dinstalled_tests=false \
     -Dskip_dbus_tests=true \
+    -Dskip_gtk_tests=true \
 "
 
 LDFLAGS:append:mipsarch = " -latomic"
