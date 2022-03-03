@@ -759,6 +759,7 @@ RDEPENDS:packagegroup-meta-oe-support ="\
     gpm \
     gsoap \
     hdf5 \
+    hstr \
     htop \
     hunspell-dictionaries \
     hunspell \
