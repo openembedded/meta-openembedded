@@ -23,6 +23,12 @@ inherit pypi features_check systemd setuptools3
 
 REQUIRED_DISTRO_FEATURES = "systemd"
 
+do_install:append() {
+    mv ${D}${PYTHON_SITEPACKAGES_DIR}${exec_prefix}/* ${D}${exec_prefix}
+    mv ${D}${PYTHON_SITEPACKAGES_DIR}${sysconfdir} ${D}
+    mv ${D}${PYTHON_SITEPACKAGES_DIR}${base_libdir} ${D}
+}
+
 RDEPENDS:${PN} += "python3-pykickstart python3-pyudev \
                   parted python3-pyparted multipath-tools \
                   lsof cryptsetup libblockdev \
