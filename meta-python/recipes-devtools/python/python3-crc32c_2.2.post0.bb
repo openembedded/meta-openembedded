@@ -13,4 +13,10 @@ SRC_URI[sha256sum] = "3d058e7a5e37e4985d1a7ad4cb702bca56b490daa658d4851377d13ead
 
 inherit pypi setuptools3
 
+do_compile:prepend() {
+    if ! grep 'platform =' setup.cfg; then
+        printf "[build_ext]\nplatform = ${TARGET_ARCH}" >> setup.cfg
+    fi
+}
+
 RDEPENDS:${PN} += "python3-core"
