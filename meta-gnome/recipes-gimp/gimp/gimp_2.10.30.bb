@@ -1,7 +1,7 @@
 SUMMARY = "The GIMP is the GNU Image Manipulation Program"
 HOMEPAGE = "http://www.gimp.org"
 SECTION = "x11/graphics"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c678957b0c8e964aa6c70fd77641a71e"
 
 DEPENDS = " \

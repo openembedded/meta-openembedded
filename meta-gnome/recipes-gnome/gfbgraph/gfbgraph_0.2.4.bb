@@ -1,6 +1,6 @@
 SUMMARY = "A GObject library for Facebook Graph API"
 SECTION = "x11/gnome"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5804fe91d3294da4ac47c02b454bbc8a"
 
 DEPENDS = " \

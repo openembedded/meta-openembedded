@@ -1,5 +1,5 @@
 SUMMARY = "Evince is a document viewer for document formats like pdf, ps, djvu"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
 SECTION = "x11/office"
 DEPENDS = " \

@@ -1,6 +1,6 @@
 SUMMARY = "Access, organize and share your photos on GNOME"
 SECTION = "x11/gnome"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 DEPENDS = " \
