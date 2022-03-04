@@ -1,6 +1,6 @@
 SUMMARY = "Geary is an email application built around conversations, for the GNOME 3 desktop."
 SECTION = "network"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2a2244d5a13871ad950c55877546a6a2"
 
 DEPENDS = " \

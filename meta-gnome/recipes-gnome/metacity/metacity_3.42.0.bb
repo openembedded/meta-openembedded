@@ -1,6 +1,6 @@
 SECTION = "x11/wm"
 SUMMARY = "Metacity is the boring window manager for the adult in you"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b4cce53560b8e619ffa7c830fb8761aa \
                     file://src/include/main.h;endline=24;md5=72148ede07a6dadd01de6a882d20a9ad"
 

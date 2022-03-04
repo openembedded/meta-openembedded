@@ -1,5 +1,5 @@
 SUMMARY = "GEGL (Generic Graphics Library) is a graph based image processing framework"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f1a8bfcbc85304df454b65d378b299c7"
 
 DEPENDS = " \
