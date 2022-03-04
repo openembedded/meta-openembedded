@@ -19,15 +19,9 @@ SRC_URI += "\
 "
 SRC_URI[sha256sum] = "1b05b77f3ee35d82c7a577a168c9ba0204d3e9a87eb1975e5f9af47700eeff48"
 
-inherit pypi features_check systemd setuptools3
+inherit pypi features_check systemd setuptools3_legacy
 
 REQUIRED_DISTRO_FEATURES = "systemd"
-
-do_install:append() {
-    mv ${D}${PYTHON_SITEPACKAGES_DIR}${exec_prefix}/* ${D}${exec_prefix}
-    mv ${D}${PYTHON_SITEPACKAGES_DIR}${sysconfdir} ${D}
-    mv ${D}${PYTHON_SITEPACKAGES_DIR}${base_libdir} ${D}
-}
 
 RDEPENDS:${PN} += "python3-pykickstart python3-pyudev \
                   parted python3-pyparted multipath-tools \
