@@ -1,7 +1,7 @@
 SUMMARY = "This script upgrades packages automatically and unattended."
 DESCRIPTION = "The purpose of unattended-upgrades is to keep the computer current with the latest security (and other) updates automatically."
 HOMEPAGE = "https://wiki.debian.org/UnattendedUpgrades"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
                     file://debian/copyright;md5=62b5f2ac0ede901fb245eefbe54c181f"
 

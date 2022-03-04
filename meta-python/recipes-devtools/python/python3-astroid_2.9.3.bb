@@ -1,7 +1,7 @@
 SUMMARY = "An abstract syntax tree for Python with inference support."
 HOMEPAGE = "https://pypi.python.org/pypi/astroid"
 SECTION = "devel/python"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
 
 SRC_URI[sha256sum] = "1efdf4e867d4d8ba4a9f6cf9ce07cd182c4c41de77f23814feb27ca93ca9d877"

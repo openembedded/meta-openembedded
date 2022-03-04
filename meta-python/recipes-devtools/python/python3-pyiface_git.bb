@@ -1,7 +1,7 @@
 SUMMARY = "Pyiface is a package that exposes the network interfaces of the operating system in a easy to use and transparent way"
 SECTION = "devel/python"
 HOMEPAGE = "https://pypi.python.org/pypi/pyiface/"
-LICENSE = "GPLv3+"
+LICENSE = "GPL-3.0-or-later"
 
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fe869ee987a340198fb0d54c55c47f1"
 

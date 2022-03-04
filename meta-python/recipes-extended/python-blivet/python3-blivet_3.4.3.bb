@@ -1,6 +1,6 @@
 DESCRIPTION = "A python module for system storage configuration"
 HOMEPAGE = "http://fedoraproject.org/wiki/blivet"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPL-2.0-or-later"
 SECTION = "devel/python"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"

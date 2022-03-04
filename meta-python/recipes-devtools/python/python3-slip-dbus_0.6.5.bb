@@ -10,7 +10,7 @@ there are no clients anymore on the message bus, as well as convenience \
 functions and decorators for integrating a dbus service with PolicyKit."
 
 SECTION = "devel/python"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 SRCNAME = "python-slip"
 
