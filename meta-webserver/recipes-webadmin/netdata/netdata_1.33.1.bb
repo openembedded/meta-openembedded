@@ -2,7 +2,7 @@ SUMMARY = "Real-time performance monitoring"
 DESCRIPTION = "Netdata is high-fidelity infrastructure monitoring and troubleshooting. \
                Open-source, free, preconfigured, opinionated, and always real-time."
 HOMEPAGE = "https://github.com/netdata/netdata/"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
 
 DEPENDS += "libuv util-linux zlib"
