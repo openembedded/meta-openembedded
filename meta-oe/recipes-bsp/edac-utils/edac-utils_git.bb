@@ -1,7 +1,7 @@
 SUMMARY = "Userspace helper for Linux kernel EDAC drivers"
 HOMEPAGE = "https://github.com/grondo/edac-utils"
 SECTION = "Applications/System"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
 DEPENDS = " sysfsutils"

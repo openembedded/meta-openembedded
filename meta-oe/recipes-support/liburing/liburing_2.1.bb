@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/axboe/liburing"
 BUGTRACKER = "https://github.com/axboe/liburing/issues"
 SECTION = "libs"
 
-LICENSE = "LGPLv2.1 | MIT"
+LICENSE = "LGPL-2.1-only | MIT"
 LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
 
 SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \

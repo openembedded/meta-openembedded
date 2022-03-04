@@ -2,7 +2,7 @@ SUMMARY = "Library for BPF handling"
 DESCRIPTION = "Library for BPF handling"
 HOMEPAGE = "https://github.com/libbpf/libbpf"
 SECTION = "libs"
-LICENSE = "LGPLv2.1+"
+LICENSE = "LGPL-2.1-or-later"
 
 LIC_FILES_CHKSUM = "file://../LICENSE.LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
 

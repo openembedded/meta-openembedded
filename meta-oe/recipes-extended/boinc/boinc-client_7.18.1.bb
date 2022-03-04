@@ -16,7 +16,7 @@ global warming, discover sources of gravitational waves, and many other types \
 of scientific and mathematical research."
 
 HOMEPAGE = "http://boinc.berkeley.edu/"
-LICENSE = "LGPLv2+ & GPLv3"
+LICENSE = "LGPL-2.0-or-later & GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
                     file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6"
 SECTION = "applications"

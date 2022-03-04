@@ -1,6 +1,6 @@
 DESCRIPTION = "A multilingual user input method library"
 HOMEPAGE = "http://uim.freedesktop.org/"
-LICENSE = "BSD-3-Clause & LGPLv2+"
+LICENSE = "BSD-3-Clause & LGPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ab2826b41ca0ff4030d38cc39791d1c8"
 SECTION = "inputmethods"
 

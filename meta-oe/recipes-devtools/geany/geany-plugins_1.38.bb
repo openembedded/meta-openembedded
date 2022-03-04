@@ -1,8 +1,8 @@
 DESCRIPTION = "A fast and lightweight IDE"
 HOMEPAGE = "http://plugins.geany.org/"
 
-LICENSE_DEFAULT = "GPLv2"
-LICENSE = "${LICENSE_DEFAULT} & BSD-2-Clause & GPLv3"
+LICENSE_DEFAULT = "GPL-2.0-only"
+LICENSE = "${LICENSE_DEFAULT} & BSD-2-Clause & GPL-3.0-only"
 
 python () {
     for plugin in d.getVar('PLUGINS').split():
@@ -60,7 +60,7 @@ FILES:${PN}-codenav = "${libdir}/geany/codenav.so"
 
 PLUGINS += "${PN}-commander"
 LIC_FILES_CHKSUM += "file://commander/COPYING;md5=d32239bcb673463ab874e80d47fae504"
-LICENSE:${PN}-commander = "GPLv3"
+LICENSE:${PN}-commander = "GPL-3.0-only"
 FILES:${PN}-commander = "${libdir}/geany/commander.so"
 
 # | checking whether the GTK version in use is compatible with plugin Debugger... no
@@ -86,7 +86,7 @@ FILES:${PN}-geanyctags = "${libdir}/geany/geanyctags.so"
 
 PLUGINS += "${PN}-geanydoc"
 LIC_FILES_CHKSUM += "file://geanydoc/COPYING;md5=d32239bcb673463ab874e80d47fae504"
-LICENSE:${PN}-geanydoc = "GPLv3"
+LICENSE:${PN}-geanydoc = "GPL-3.0-only"
 FILES:${PN}-geanydoc = "${libdir}/geany/geanydoc.so"
 
 PLUGINS += "${PN}-geanyextrasel"
@@ -121,7 +121,7 @@ FILES:${PN}-geanypg = "${libdir}/geany/geanypg.so"
 
 PLUGINS += "${PN}-geanyprj"
 LIC_FILES_CHKSUM += "file://geanyprj/COPYING;md5=d32239bcb673463ab874e80d47fae504"
-LICENSE:${PN}-geanyprj = "GPLv3"
+LICENSE:${PN}-geanyprj = "GPL-3.0-only"
 FILES:${PN}-geanyprj = "${libdir}/geany/geanyprj.so"
 
 #PLUGINS += "${PN}-geanypy"
@@ -138,7 +138,7 @@ FILES:${PN}-geniuspaste = "${libdir}/geany/geniuspaste.so ${datadir}/${PN}/geniu
 
 PLUGINS += "${PN}-git-changebar"
 LIC_FILES_CHKSUM += "file://git-changebar/COPYING;md5=d32239bcb673463ab874e80d47fae504"
-LICENSE:${PN}-git-changebar = "GPLv3"
+LICENSE:${PN}-git-changebar = "GPL-3.0-only"
 FILES:${PN}-git-changebar = "${datadir}/${BPN}/git-changebar ${libdir}/geany/git-changebar.so"
 
 PLUGINS += "${PN}-keyrecord"
@@ -179,7 +179,7 @@ LIC_FILES_CHKSUM += "file://pairtaghighlighter/COPYING;md5=d6d927525a612b3a8dbeb
 FILES:${PN}-pairtaghighlighter = "${libdir}/geany/pairtaghighlighter.so"
 
 PLUGINS += "${PN}-pohelper"
-LICENSE:${PN}-pohelper = "GPLv3"
+LICENSE:${PN}-pohelper = "GPL-3.0-only"
 LIC_FILES_CHKSUM += "file://pohelper/COPYING;md5=d32239bcb673463ab874e80d47fae504"
 FILES:${PN}-pohelper = "${datadir}/${BPN}/pohelper ${libdir}/geany/pohelper.so"
 

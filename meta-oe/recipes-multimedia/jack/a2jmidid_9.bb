@@ -1,7 +1,7 @@
 SUMMARY = "a2jmidid is daemon for exposing ALSA sequencer applications as JACK MIDI"
 SECTION = "libs/multimedia"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=751419260aa954499f7abaabaa882bbe \
 "

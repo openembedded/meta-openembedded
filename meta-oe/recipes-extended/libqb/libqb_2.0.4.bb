@@ -4,7 +4,7 @@ It provides high performance logging, tracing, ipc, and poll."
 
 HOMEPAGE = "https://github.com/clusterlabs/libqb/wiki"
 SECTION = "libs"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
 
 inherit autotools pkgconfig
