@@ -4,7 +4,7 @@ process' behaviour. Usage of the function is fairly messy though, due to \
 limitations in C and linux. This module provides a nice non-messy python(ic) \
 interface."
 SECTION = "devel/python"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1475481f9ec754d758859bd2c75f6f6f"
 
 S = "${WORKDIR}/git"

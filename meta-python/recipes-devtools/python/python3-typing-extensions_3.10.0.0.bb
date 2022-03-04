@@ -1,5 +1,5 @@
 HOMEPAGE = "https://github.com/python/typing"
-LICENSE = "PSF"
+LICENSE = "PSF-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
 
 # The name on PyPi is slightly different.

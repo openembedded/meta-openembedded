@@ -1,6 +1,6 @@
 DESCRIPTION = "GUI tool for storage configuration using blivet library"
 HOMEPAGE = "https://github.com/rhinstaller/blivet-gui"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 SECTION = "devel/python"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"

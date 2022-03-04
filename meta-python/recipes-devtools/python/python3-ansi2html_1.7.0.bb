@@ -1,7 +1,7 @@
 DESCRPTION = "ansi2html - Convert text with ANSI color codes to HTML or to LaTeX"
 HOMEPAGE = "https://github.com/ralphbean/ansi2html"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3000208d539ec061b899bce1d9ce9404"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 
 PYPI_PACKAGE = "ansi2html"
 
