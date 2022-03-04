@@ -9,7 +9,7 @@ DEPENDS = " \
     intltool-native \
 "
 
-inherit distutils3 gtk-icon-cache features_check
+inherit setuptools3_legacy gtk-icon-cache features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI = "git://github.com/bluesabre/menulibre.git;protocol=https;branch=master"
