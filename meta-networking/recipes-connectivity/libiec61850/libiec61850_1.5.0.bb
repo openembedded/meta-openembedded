@@ -10,7 +10,7 @@ library for the IEC 61850/MMS, IEC 61850/GOOSE and IEC \
 written in C. It is available under the GPLv3 license."
 HOMEPAGE = "http://libiec61850.com"
 SECTION = "console/network"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 DEPENDS = "swig-native python3"
 SRCREV = "fcefc746fea286aeaa40d2f62240216da81c85e5"

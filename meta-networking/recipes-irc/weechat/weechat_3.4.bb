@@ -1,7 +1,7 @@
 SUMMARY = "Full-featured IRC plugin: multi-servers, proxy support, IPv6, SASL authentication, nicklist, DCC, and many other features"
 HOMEPAE = "https://weechat.org/"
 SECTION = "net"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 DEPENDS = "openssl zlib icu libgcrypt gnutls curl aspell"

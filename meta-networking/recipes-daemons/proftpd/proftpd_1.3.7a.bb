@@ -1,7 +1,7 @@
 SUMMARY = "Secure and configurable FTP server"
 SECTION = "net"
 HOMEPAGE = "http://www.proftpd.org"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
 SRCREV = "715eadc1aa4f6b07d69f9d09558e9cb471e51d87"

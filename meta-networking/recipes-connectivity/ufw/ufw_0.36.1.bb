@@ -5,7 +5,7 @@ managing a netfilter firewall. It provides a command line interface and aims \
 to be uncomplicated and easy to use."
 HOMEPAGE = "https://launchpad.net/ufw"
 SECTION = "net"
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
 
 SRC_URI = "https://launchpad.net/ufw/0.36/0.36.1/+download/ufw-0.36.1.tar.gz \
