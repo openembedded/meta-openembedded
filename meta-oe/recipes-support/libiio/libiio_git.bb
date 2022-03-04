@@ -1,7 +1,7 @@
 SUMMARY = "Library for interfacing with IIO devices"
 HOMEPAGE = "https://wiki.analog.com/resources/tools-software/linux-software/libiio"
 SECTION = "libs"
-LICENSE = "LGPLv2.1+"
+LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
 
 SRCREV = "565bf68eccfdbbf22cf5cb6d792e23de564665c7"

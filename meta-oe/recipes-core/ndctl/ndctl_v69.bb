@@ -5,7 +5,7 @@ The LIBNVDIMM subsystem provides support for three types of \
 NVDIMMs, namely,PMEM, BLK, and NVDIMM devices that can \
 simultaneously support both PMEM and BLK mode access."
 HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/nvdimm/nvdimm.git/tree/Documentation/nvdimm/nvdimm.txt?h=libnvdimm-for-next"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e66651809cac5da60c8b80e9e4e79e08"
 
 inherit autotools-brokensep pkgconfig bash-completion systemd

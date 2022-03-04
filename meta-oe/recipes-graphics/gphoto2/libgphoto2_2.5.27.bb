@@ -1,6 +1,6 @@
 SUMMARY = "libgphoto2 allows you to access digital cameras"
 SECTION = "libs"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1"
 
 DEPENDS = "libtool jpeg virtual/libusb0 libexif zlib libxml2"

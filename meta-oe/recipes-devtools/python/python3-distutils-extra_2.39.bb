@@ -2,7 +2,7 @@ SUMMARY = "python-distutils extension"
 DESCRIPTION = "python-distutils extension integrating gettext support, themed icons and scrollkeeper based documentation"
 HOMEPAGE = "https://launchpad.net/python-distutils-extra"
 SECTION = "devel/python"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4325afd396febcb659c36b49533135d4"
 
 SRC_URI = "https://launchpad.net/python-distutils-extra/trunk/${PV}/+download/python-distutils-extra-${PV}.tar.gz"

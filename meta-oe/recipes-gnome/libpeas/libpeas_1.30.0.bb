@@ -1,6 +1,6 @@
 SUMMARY = "libpeas is a gobject-based plugins engine"
 HOMEPAGE = "https://wiki.gnome.org/Projects/Libpeas"
-LICENSE = "LGPLv2.1+"
+LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
 
 DEPENDS = "gtk+3"

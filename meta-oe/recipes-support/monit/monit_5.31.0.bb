@@ -5,7 +5,7 @@ causal actions in error situations."
 
 HOMEPAGE = "http://mmonit.com/monit/"
 
-LICENSE = "AGPL-3.0"
+LICENSE = "AGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ea116a7defaf0e93b3bb73b2a34a3f51 \
                     file://libmonit/COPYING;md5=2405f1c59ed1bf3714cebdb40162ce92"
 

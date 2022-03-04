@@ -3,7 +3,7 @@ DESCRIPTION = "High-level C++ D-Bus library designed to provide easy-to-use yet 
 
 SECTION = "libs"
 
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1803fa9c2c3ce8cb06b4861d75310742"
 
 inherit cmake pkgconfig systemd ptest

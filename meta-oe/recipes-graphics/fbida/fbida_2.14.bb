@@ -5,7 +5,7 @@ HOMEPAGE = "http://linux.bytesex.org/fbida/"
 AUTHOR = "Gerd Hoffmann"
 SECTION = "utils"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e8feb78a32950a909621bbb51f634b39"
 
 DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif libdrm pixman poppler libepoxy cairo"

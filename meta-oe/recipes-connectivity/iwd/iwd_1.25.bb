@@ -1,6 +1,6 @@
 SUMMARY = "Wireless daemon for Linux"
 HOMEPAGE = "https://iwd.wiki.kernel.org/"
-LICENSE = "LGPL-2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
 
 DEPENDS = "ell"

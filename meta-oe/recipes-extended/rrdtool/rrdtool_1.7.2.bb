@@ -1,7 +1,7 @@
 SUMMARY = "High performance data logging and graphing system for time series data"
 HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39df84cfd8a5e18bf988f277f7946676"
 
 DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python3-setuptools-native"
