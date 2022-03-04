@@ -2,7 +2,7 @@ DESCRIPTION = "This module is not intended for direct use in application code. I
 purpose is to be sub-classed by IO::Compress modules."
 
 SECTION = "libs"
-LICENSE = "Artisticv1 | GPLv1+"
+LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 
 MAINTAINER=	"Poky <poky@yoctoproject.org>"
 HOMEPAGE=	"https://metacpan.org/release/IO-Compress"
