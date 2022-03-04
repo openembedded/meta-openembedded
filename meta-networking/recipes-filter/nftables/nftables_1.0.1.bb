@@ -1,6 +1,6 @@
 SUMMARY = "Netfilter Tables userspace utillites"
 SECTION = "net"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
 
 DEPENDS = "libmnl libnftnl bison-native \

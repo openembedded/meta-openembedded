@@ -8,7 +8,7 @@ SECTION = "net"
 
 DEPENDS = "libesmtp"
 
-LICENSE = "GPL-2.0"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2 \

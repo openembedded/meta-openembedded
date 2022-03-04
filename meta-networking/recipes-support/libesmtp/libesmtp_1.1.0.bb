@@ -3,7 +3,7 @@ DESCRIPTION = "LibESMTP is a library to manage posting \
 (or submission of) electronic mail using SMTP to a \
 preconfigured Mail Transport Agent (MTA) such as Exim or PostFix."
 HOMEPAGE = "https://libesmtp.github.io/"
-LICENSE = "LGPLv2+"
+LICENSE = "LGPL-2.0-or-later"
 SECTION = "libs"
 
 DEPENDS = "openssl"

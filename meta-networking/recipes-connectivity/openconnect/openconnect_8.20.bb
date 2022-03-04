@@ -1,5 +1,5 @@
 SUMMARY = "Open client for Cisco AnyConnect VPN"
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=8c2e1ec1540fb3e0beb68361344cba7e"
 
 SRC_URI = " \

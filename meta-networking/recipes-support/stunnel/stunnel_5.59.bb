@@ -5,7 +5,7 @@ SECTION = "net"
 # Note: Linking stunnel statically or dynamically with other modules is making
 # a combined work based on stunnel. Thus, the terms and conditions of the GNU
 # General Public License cover the whole combination.
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.md;md5=223b26c62f5e7c5c8656d6c133edd5ec"
 
 DEPENDS = "autoconf-archive libnsl2 openssl"
