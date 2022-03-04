@@ -13,7 +13,8 @@ SRCREV = "c6db6fad26a2b83ba301b52ff5dee98cef7558ca"
 
 S = "${WORKDIR}/git"
 
-inherit setuptools_build_meta
+inherit setuptools3_legacy
+
 PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.1-*.whl"
 
 DEPENDS += "apt intltool-native python3-distutils-extra-native"
