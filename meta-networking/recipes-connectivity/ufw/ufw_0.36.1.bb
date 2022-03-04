@@ -12,12 +12,13 @@ SRC_URI = "https://launchpad.net/ufw/0.36/0.36.1/+download/ufw-0.36.1.tar.gz \
            file://0001-optimize-boot.patch \
            file://0002-add-an-option-to-specify-iptables-location.patch \
            file://0003-only-make-one-reference-to-env.patch \
+           file://setuptools.patch \
            "
 SRC_URI[sha256sum] = "1c57e78fbf2970f0cc9c56ea87a231e6d83d825e55b9e31e2c88b91b0ea03c8c"
 
 UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
 
-inherit distutils3 features_check systemd update-rc.d
+inherit setuptools3_legacy features_check systemd update-rc.d
 
 RDEPENDS:${PN} = " \
                   iptables \
