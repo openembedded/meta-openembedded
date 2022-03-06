@@ -1,0 +1,29 @@
+From 8c1251b57827c7e757079d6e9304570643e8e80a Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 5 Mar 2022 22:18:49 -0800
+Subject: [PATCH] riscv32: Define O_LARGEFILE
+
+Some applications (e.g. nix) use this define and expect it to come from libc
+
+Upstream-Status: Submitted [https://github.com/rust-lang/libc/pull/2710]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/unix/linux_like/linux/gnu/b32/riscv32/mod.rs | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/unix/linux_like/linux/gnu/b32/riscv32/mod.rs b/src/unix/linux_like/linux/gnu/b32/riscv32/mod.rs
+index 4d551eb..feaa00a 100644
+--- a/src/unix/linux_like/linux/gnu/b32/riscv32/mod.rs
++++ b/src/unix/linux_like/linux/gnu/b32/riscv32/mod.rs
+@@ -490,6 +490,8 @@ pub const FIONREAD: ::c_ulong = 21531;
+ pub const __SIZEOF_PTHREAD_MUTEX_T: usize = 40;
+ pub const __SIZEOF_PTHREAD_RWLOCK_T: usize = 56;
+ 
++pub const O_LARGEFILE: ::c_int = 0;
++
+ pub const SYS_read: ::c_long = 63;
+ pub const SYS_write: ::c_long = 64;
+ pub const SYS_close: ::c_long = 57;
+-- 
+2.35.1
+

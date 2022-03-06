@@ -1,21 +1,21 @@
-From c711fb215de54f960a35cdc48cd506b6b5db4918 Mon Sep 17 00:00:00 2001
+From a6f5bb3e7fe51733144497a3b5962b300f922a2d Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 Jan 2022 11:50:58 -0800
+Date: Mon, 7 Mar 2022 11:02:46 -0800
 Subject: [PATCH] riscv64/mod.rs: Add missing error codes
 
 These are flagged by apps e.g. python3-pyruvate
 
-Upstream-Status: Submitted [https://github.com/rust-lang/libc/pull/2656]
+Upstream-Status: Backport [https://github.com/rust-lang/libc/commit/c711fb215de54f960a35cdc48cd506b6b5db4918]
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
  src/unix/linux_like/linux/musl/b64/riscv64/mod.rs | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs b/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
-index b075b4a05..6b17621c7 100644
+index 48fee4e..7c88abe 100644
 --- a/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
 +++ b/src/unix/linux_like/linux/musl/b64/riscv64/mod.rs
-@@ -548,6 +548,11 @@ pub const EHOSTUNREACH: ::c_int = 113;
+@@ -551,6 +551,11 @@ pub const EHOSTUNREACH: ::c_int = 113;
  pub const EALREADY: ::c_int = 114;
  pub const EINPROGRESS: ::c_int = 115;
  pub const ESTALE: ::c_int = 116;
@@ -28,5 +28,5 @@ index b075b4a05..6b17621c7 100644
  pub const ENOMEDIUM: ::c_int = 123;
  pub const EMEDIUMTYPE: ::c_int = 124;
 -- 
-2.35.0
+2.35.1
 
