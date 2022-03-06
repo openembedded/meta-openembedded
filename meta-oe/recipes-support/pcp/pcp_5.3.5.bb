@@ -18,7 +18,10 @@ SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
 export PCP_DIR="${RECIPE_SYSROOT_NATIVE}"
 #export PCP_RUN_DIR="${RECIPE_SYSROOT_NATIVE}"
 EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
-inherit useradd systemd 
+inherit useradd systemd features_check
+
+# Needs libx11
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 SYSTEMD_SERVICE:${PN} = "pmcd.service pmcd.service pmie_check.service pmie_farm_check.service \
