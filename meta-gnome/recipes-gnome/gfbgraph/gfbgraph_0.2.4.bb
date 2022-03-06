@@ -10,7 +10,10 @@ DEPENDS = " \
     gnome-online-accounts \
 "
 
-inherit gnomebase gtk-doc gobject-introspection pkgconfig
+inherit gnomebase gtk-doc gobject-introspection pkgconfig features_check
+
+# for gnome-online-accounts
+REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += " file://0001-Update-rest-requirement-to-rest-1.0.patch"
 SRC_URI[archive.md5sum] = "c38af63e49f8fe8baad99537956b69ba"
