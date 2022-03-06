@@ -29,6 +29,8 @@ PACKAGECONFIG[systemd] = "-Dlogind=libsystemd,-Dlogind=none,systemd"
 SRC_URI += " file://0001-build-fix-arguments-of-i18n.merge_file.patch"
 SRC_URI[archive.sha256sum] = "8743c98fd656062ef862933efe30c5be4c6b322ec02eee154ec70d08ed0895df"
 
+EXTRA_OEMESON = "-Dman=false"
+
 FILES:${PN} += " \
     ${datadir}/metainfo \
     ${datadir}/dbus-1 \
