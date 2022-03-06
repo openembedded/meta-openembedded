@@ -30,7 +30,7 @@ DEPENDS = " \
 
 RDEPENDS:${PN} = "gnome-keyring"
 
-inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala
+inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala features_check
 
 SRC_URI = " \
 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
@@ -39,7 +39,8 @@ SRC_URI = " \
 S = "${WORKDIR}/git"
 SRCREV = "e561775c1580a9f60a726355b2b897bfc9cb3382"
 
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+# for gnome-online-accounts
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
 
 GIR_MESON_OPTION = ""
 EXTRA_OEMESON = "-Dprofile=release"
