@@ -16,7 +16,9 @@ SRC_URI = "git://github.com/storaged-project/blivet-gui.git;branch=master;protoc
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "x11 systemd"
 
-inherit setuptools3 python3native
+inherit setuptools3_legacy python3native
+
+PIP_INSTALL_PACKAGE = "blivet_gui"
 
 RDEPENDS:${PN} = "python3-pygobject python3 \
                   python3-blivet gtk+3  \
