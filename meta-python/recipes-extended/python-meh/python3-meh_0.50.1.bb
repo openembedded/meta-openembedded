@@ -5,7 +5,7 @@ HOMEPAGE = "https://github.com/rhinstaller/python-meh"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-inherit setuptools3
+inherit setuptools3_legacy
 
 S = "${WORKDIR}/git"
 
@@ -14,12 +14,4 @@ SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=rhe
           "
 SRCREV = "c321ce22950aff76611a3c6beffa02b5ea3adbed"
 
-PIP_INSTALL_PACKAGE = "python_meh"
-
-do_install:append () {
-    install -d ${D}/${datadir}/python-meh
-    mv ${D}${PYTHON_SITEPACKAGES_DIR}${datadir}/python-meh/* ${D}/${datadir}/python-meh/
-}
-
-FILES:${PN} += "${datadir}/*"
-
+FILES:${PN} += "${datadir}/python-meh"
