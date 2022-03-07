@@ -15,8 +15,6 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3_legacy
 
-PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.1-*.whl"
-
 DEPENDS += "apt intltool-native python3-distutils-extra-native"
 RDEPENDS:${PN} += "apt lsb-release python3-apt python3-core python3-datetime python3-email python3-fcntl python3-io python3-logging python3-stringold python3-syslog"
 
