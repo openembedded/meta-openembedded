@@ -18,11 +18,9 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
 
 DEPENDS += "libxml2 libxslt"
 
-SRC_URI[sha256sum] = "a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24"
+SRC_URI[sha256sum] = "f63f62fc60e6228a4ca9abae28228f35e1bd3ce675013d1dfb828688d50c6e23"
 
-SRC_URI += " \
-           file://0001-setupinfo.py-check-the-return-value.patch \
-"
+SRC_URI += "${PYPI_SRC_URI}"
 inherit pkgconfig pypi setuptools3
 
 # {standard input}: Assembler messages:
