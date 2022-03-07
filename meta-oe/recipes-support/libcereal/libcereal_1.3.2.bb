@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = "\
 PROVIDES += "${PN}-dev"
 
 PV .= "+git${SRCPV}"
-SRCREV = "1de8fe89471d69ea392ea260ce74e079d5f4b415"
+SRCREV = "ebef1e929807629befafbb2918ea1a08c7194554"
 SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
