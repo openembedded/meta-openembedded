@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
 
-SRCREV = "715eadc1aa4f6b07d69f9d09558e9cb471e51d87"
+SRCREV = "75aa739805a6e05eeb31189934a3d324e7862962"
 BRANCH = "1.3.7"
 
 SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https \
