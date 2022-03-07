@@ -9,8 +9,7 @@ In Python 3.10 'distutils' is deprecated with removal slated for Python
 This also allows for a 'wheel' binary archive format to be built with
 'setup.py bdist_wheel'.
 
-Upstream-Status: Submitted
-[https://github.com/rhinstaller/python-meh/pull/37]
+Upstream-Status: Backport [cf9eafdd165347f86bb4a2534c41fd805db52322]
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 
