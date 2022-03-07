@@ -10,10 +10,9 @@ DEPENDS = "libpcre zlib"
 
 SRC_URI = " \
     git://github.com/pocoproject/poco.git;branch=master;protocol=https \
-    file://0001-fix-missing-expat-definition.patch \
     file://run-ptest \
    "
-SRCREV = "f81a38057f1d240fe7b7a069612776f788bc88ea"
+SRCREV = "de61f0049175a941cc83c2615c3bdc5e947b89f9"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
