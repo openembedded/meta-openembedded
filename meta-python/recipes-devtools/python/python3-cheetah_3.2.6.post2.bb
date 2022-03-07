@@ -11,4 +11,4 @@ RDEPENDS:${PN}:class-native = ""
 
 BBCLASSEXTEND = "native nativesdk"
 
-SRC_URI[sha256sum] = "58b5d84e5fbff6cf8e117414b3ea49ef51654c02ee887d155113c5b91d761967"
+SRC_URI[sha256sum] = "63157d7a00a273b59676b5be5aa817c75c37efc88478231f1a160f4cfb7f7878"
