@@ -9,7 +9,7 @@ LICENSE = "0BSD & MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=14a49c74a1d91829908ac756c07e6b91"
 DEPENDS += "python3-setuptools-scm-native"
 
-SRC_URI[sha256sum] = "46a2bbdf255ba2efc6c56ae1428249b61d56c4a3e54ef3db0d05fa97792011a5"
+SRC_URI[sha256sum] = "55f6532fd6d62b3b698d604257f7a7eda6a87557bbec22760f8c0d9549454802"
 
 inherit pypi setuptools3
 PYPI_PACKAGE = "PyScaffold"
