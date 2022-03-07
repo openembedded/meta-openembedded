@@ -24,7 +24,7 @@ DEPENDS = "curl \
            jpeg \
            openssl \
            sqlite3 \
-           virtual/libgl \
+           virtual/egl \
            ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'libnotify', '', d)} \
            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk+ libnotify xcb-util libxscrnsaver', '', d)} \
            nettle \
