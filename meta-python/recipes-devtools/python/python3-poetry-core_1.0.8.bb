@@ -21,7 +21,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=104d5c3c653aeededf4076773aa4c236 \
 
 SRC_URI[sha256sum] = "951fc7c1f8d710a94cb49019ee3742125039fc659675912ea614ac2aa405b118"
 
-inherit pip_install_wheel python3native python3-dir pypi setuptools3-base
+inherit poetry_core pypi
+
 PIP_INSTALL_PACKAGE = "poetry_core"
 
 RDEPENDS:${PN}:append:class-target = "\
@@ -41,17 +42,5 @@ RDEPENDS:${PN} += "\
     python3-pip \
     python3-six \
 "
-
-do_configure () {
-    mkdir -p ${B}/dist
-    cat > ${B}/build-it.py << EOF
-from poetry.core.masonry import api
-api.build_wheel('${B}/dist')
-EOF 
-}
-
-do_compile () {
-    ${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} ${B}/build-it.py
-}
 
 BBCLASSEXTEND = "native nativesdk"
