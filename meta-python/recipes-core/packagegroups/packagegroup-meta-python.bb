@@ -189,6 +189,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-intelhex \
     python3-intervals \
     python3-ipaddress \
+    python3-ipy \
     python3-ipython \
     python3-ipython-genutils \
     python3-iso3166 \
@@ -498,6 +499,7 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-html2text-ptest \
     python3-inflection-ptest \
     python3-intervals-ptest \
+    python3-ipy-ptest \
     python3-iso3166-ptest \
     python3-jdcal-ptest \
     python3-jinja2-ptest \
