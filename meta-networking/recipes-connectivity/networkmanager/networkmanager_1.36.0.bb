@@ -182,7 +182,7 @@ FILES:${PN}-dev += " \
 FILES:${PN} += " \
     ${libexecdir} \
     ${libdir}/NetworkManager \
-    ${libdir}/firewalld/zones \
+    ${nonarch_libdir}/firewalld/zones \
     ${nonarch_libdir}/NetworkManager/conf.d \
     ${nonarch_libdir}/NetworkManager/dispatcher.d \
     ${nonarch_libdir}/NetworkManager/dispatcher.d/pre-down.d \
