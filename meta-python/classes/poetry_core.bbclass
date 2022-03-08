@@ -1,15 +1,15 @@
-inherit pip_install_wheel python3native python3-dir setuptools3-base
+inherit pip_install_wheel python3native setuptools3-base
 
-DEPENDS += "python3 python3-poetry-core-native python3-pip-native"
+DEPENDS += "python3-poetry-core-native"
 
-do_configure () {
-    mkdir -p ${S}/dist
-    cat > ${S}/build-it.py << EOF
-from poetry.core.masonry import api
-api.build_wheel('${S}/dist')
-EOF
+poetry_core_do_configure () {
+    :
 }
 
-do_compile () {
-    ${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} ${S}/build-it.py
+# TODO: ideally this uses pypa/build
+poetry_core_do_compile () {
+    nativepython3 -c "from poetry.core.masonry import api; api.build_wheel('${PIP_INSTALL_DIST_PATH}')"
 }
+do_compile[cleandirs] += "${PIP_INSTALL_DIST_PATH}"
+
+EXPORT_FUNCTIONS do_configure do_compile
