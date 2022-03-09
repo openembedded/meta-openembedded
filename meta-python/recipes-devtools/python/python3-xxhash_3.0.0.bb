@@ -3,7 +3,7 @@ SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3a9dab7f159514231249aa3e108ab26b"
 
-SRC_URI[sha256sum] = "b7bead8cf6210eadf9cecf356e17af794f57c0939a3d420a00d87ea652f87b49"
+SRC_URI[sha256sum] = "30b2d97aaf11fb122023f6b44ebb97c6955e9e00d7461a96415ca030b5ceb9c7"
 
 SRC_URI += " \
     file://run-ptest \
