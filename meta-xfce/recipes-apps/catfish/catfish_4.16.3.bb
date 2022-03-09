@@ -4,7 +4,6 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 
 inherit xfce-app setuptools_build_meta gtk-icon-cache mime-xdg
-PYPA_WHEEL = "${B}/dist/UNKNOWN-*-*.whl"
 
 DEPENDS += "python3-distutils-extra-native"
 
