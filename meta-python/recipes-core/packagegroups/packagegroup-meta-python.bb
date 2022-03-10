@@ -278,6 +278,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pkcs11 \
     python3-pkgconfig \
     python3-ply \
+    python3-poetry-core \
     python3-pocketsphinx \
     python3-polyline \
     python3-portalocker \
@@ -472,6 +473,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-yarl \
     python3-zopeinterface \
     telepathy-python3 \
+    unattended-upgrades \
 "
 RDEPENDS:packagegroup-meta-python3:remove:libc-musl:powerpc64le = "python3-grpcio python3-grpcio-tools"
 
