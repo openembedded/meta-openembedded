@@ -11,7 +11,7 @@ DEPENDS += "python3-setuptools-scm-native"
 
 SRC_URI[sha256sum] = "55f6532fd6d62b3b698d604257f7a7eda6a87557bbec22760f8c0d9549454802"
 
-inherit pypi setuptools3
+inherit pypi setuptools_build_meta
 PYPI_PACKAGE = "PyScaffold"
 
 RDEPENDS:${PN} += " \
