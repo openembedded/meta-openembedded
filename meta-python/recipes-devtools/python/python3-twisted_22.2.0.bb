@@ -78,7 +78,6 @@ RDEPENDS:${PN}-web += "${PN}-core ${PN}-protocols"
 RDEPENDS:${PN}-words += "${PN}-core"
 RDEPENDS:${PN}-flow += "${PN}-core"
 RDEPENDS:${PN}-pair += "${PN}-core"
-RDEPENDS:${PN}-dbg = "${PN}"
 
 FILES:${PN} = "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
 
@@ -243,20 +242,8 @@ ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_pair.py* \
 ${libdir}/${PYTHON_DIR}/site-packages/twisted/pair \
 "
 
-FILES:${PN}-dbg += " \
-${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
-${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
-"
-
 FILES:${PN}-doc += " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_pydoctortemplates/ \
-"
-
-RDEPENDS:${PN}-src = "${PN}"
-FILES:${PN}-src = " \
-    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py \
-    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*.py \
-    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
 "
 
 FILES:${PN}-core:append = " \
