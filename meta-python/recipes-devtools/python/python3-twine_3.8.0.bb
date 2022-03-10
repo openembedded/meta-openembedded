@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3d1106b253a8d50dd82a4202a045b4c"
 
 SRC_URI[sha256sum] = "8efa52658e0ae770686a13b675569328f1fba9837e5de1867bfe5f46a9aefe19"
 
-inherit pypi setuptools3
+inherit pypi setuptools_build_meta
 
 DEPENDS += "\
 	${PYTHON_PN}-setuptools-scm-native \
@@ -14,10 +14,5 @@ DEPENDS += "\
 RDEPENDS:${PN} += " \
 	${PYTHON_PN}-importlib-metadata \
 "
-
-do_compile:prepend() {
-	echo "from setuptools import setup" > ${S}/setup.py
-	echo "setup()" >> ${S}/setup.py
-}
 
 BBCLASSEXTEND = "native"

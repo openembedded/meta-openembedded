@@ -8,7 +8,7 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=439a07e400525964c3c82684146e46eb"
 
-inherit pypi setuptools3 ptest
+inherit pypi setuptools_build_meta ptest
 
 SRC_URI += " \
 	file://run-ptest \

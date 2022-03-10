@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb48
 
 PYPI_PACKAGE = "python-dateutil"
 PIP_INSTALL_PACKAGE = "python_dateutil"
-inherit pypi setuptools3
+inherit pypi setuptools_build_meta
 
 PACKAGES =+ "${PN}-zoneinfo"
 FILES:${PN}-zoneinfo = "${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"

@@ -8,7 +8,7 @@ DEPENDS = "zeromq"
 SRC_URI += "file://club-rpath-out.patch"
 SRC_URI[sha256sum] = "8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f9c671c"
 
-inherit pypi pkgconfig setuptools3
+inherit pypi pkgconfig setuptools_build_meta
 
 RDEPENDS:${PN} += " \
 	${PYTHON_PN}-multiprocessing \
