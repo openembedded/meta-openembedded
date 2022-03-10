@@ -160,7 +160,7 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 # preferred path upstream.
 EXTRA_OECONF += "--includedir=${includedir}/nspr"
 
-EXTRA_OEMAKE:append:class-native = " EXTRA_LIBS='-lpthread -lrt'"
+EXTRA_OEMAKE:append:class-native = " EXTRA_LIBS='-lpthread -lrt -ldl'"
 
 do_compile:prepend() {
 	oe_runmake CROSS_COMPILE=1 CFLAGS="-DXP_UNIX ${BUILD_CFLAGS}" LDFLAGS="" CC="${BUILD_CC}" -C config export
