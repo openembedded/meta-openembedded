@@ -46,7 +46,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-aws-iot-device-sdk-python \
     python3-babel \
     python3-backcall \
-    python3-backports-functools-lru-cache \
     python3-bandit \
     python3-bcrypt \
     python3-beautifulsoup4 \
@@ -482,7 +481,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-markupsafe-ptest \
     python3-ansicolors-ptest \
     python3-appdirs-ptest \
-    python3-backports-functools-lru-cache-ptest \
     python3-bcrypt-ptest \
     python3-betamax-ptest \
     python3-blinker-ptest \
