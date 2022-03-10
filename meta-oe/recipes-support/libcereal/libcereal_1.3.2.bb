@@ -12,17 +12,29 @@ LIC_FILES_CHKSUM = "\
     file://include/cereal/external/rapidjson/msinttypes/LICENSE;md5=dffce65b98c773976de2e338bd130f46 \
 "
 
+DEPENDS = " ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'boost', '', d)} "
+
 PROVIDES += "${PN}-dev"
 
 PV .= "+git${SRCPV}"
 SRCREV = "ebef1e929807629befafbb2918ea1a08c7194554"
-SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/USCiLab/cereal.git;branch=master;protocol=https \
+           file://run-ptest \
+"
 
 S = "${WORKDIR}/git"
 
-inherit cmake pkgconfig
+inherit cmake pkgconfig ptest
 
-EXTRA_OECMAKE = "-DJUST_INSTALL_CEREAL=ON"
+PACKAGECONFIG ??= "${@bb.utils.contains('PTEST_ENABLED', '1', 'with-tests', '', d)}"
+PACKAGECONFIG[with-tests] = "-DBUILD_TESTS=ON -DSKIP_PORTABILITY_TEST=ON,,"
+
+EXTRA_OECMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '', '-DJUST_INSTALL_CEREAL=ON', d)}"
+
+do_install_ptest() {
+    install -d ${D}${PTEST_PATH}/tests
+    cp ${B}/unittests/test_*  ${D}${PTEST_PATH}/tests
+}
 
 ALLOW_EMPTY:${PN} = "1"
 
