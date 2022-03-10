@@ -14,9 +14,6 @@ LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
 
 SRC_URI[sha256sum] = "5bcef4d988b74b99653602101e17d8401338d596b9234d263c728a0c3df003e8"
 
-inherit pypi setuptools3
+DEPENDS = "curl"
 
-DEPENDS = "\
-    curl \
-    ${PYTHON_PN}\
-"
+inherit pypi setuptools3
