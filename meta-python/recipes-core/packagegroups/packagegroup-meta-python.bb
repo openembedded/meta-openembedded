@@ -346,7 +346,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pyserial \
     python3-pysocks \
     python3-pysonos \
-    python3-pystache \
     python3-pystemd \
     python3-pytest-asyncio \
     python3-pytest-benchmark \
