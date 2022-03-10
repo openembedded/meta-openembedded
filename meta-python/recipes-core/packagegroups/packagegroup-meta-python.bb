@@ -82,7 +82,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-colorzero \
     python3-configargparse \
     python3-configobj \
-    python3-configparser \
     python3-configshell-fb \
     python3-constantly \
     python3-contextlib2 \
