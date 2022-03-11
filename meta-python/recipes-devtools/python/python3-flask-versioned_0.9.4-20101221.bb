@@ -7,10 +7,3 @@ PYPI_PACKAGE = "Flask-Versioned"
 SRC_URI[sha256sum] = "516694dc860a1bc4f22ab60b324a85083c0150522be109282a3bed681057fd34"
 
 inherit pypi setuptools3
-
-def get_pypa_wheel_name(d):
-    return (d.getVar('PIP_INSTALL_DIST_PATH') + '/' + \
-           d.getVar('PIP_INSTALL_PACKAGE') + '-'  + \
-           d.getVar('PV').replace('-', '.post') + '-*.whl')
-
-PYPA_WHEEL = "${@get_pypa_wheel_name(d)}"

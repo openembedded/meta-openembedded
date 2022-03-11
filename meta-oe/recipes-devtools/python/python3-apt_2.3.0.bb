@@ -10,8 +10,6 @@ SRCREV = "6145b6484d220685edfd922d364afbf065127efe"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
-PIP_INSTALL_PACKAGE = "python_apt"
-PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-0.0.0-*.whl"
 
 DEPENDS += "apt"
 RDEPENDS:${PN} += "apt python3-core"
