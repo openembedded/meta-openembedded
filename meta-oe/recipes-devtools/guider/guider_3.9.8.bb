@@ -14,7 +14,6 @@ SRCREV = "a502cd93b13235b7539557a91328de00b7c51bc3"
 S = "${WORKDIR}/git"
 
 inherit setuptools3
-PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-3.9.8-*.whl"
 
 RDEPENDS:${PN} = "python3 python3-core \
         python3-ctypes python3-shell python3-json"

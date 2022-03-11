@@ -15,8 +15,6 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3 pkgconfig
 
-PYPA_WHEEL = "${PIP_INSTALL_DIST_PATH}/${PIP_INSTALL_PACKAGE}-*-*.whl"
-
 RDEPENDS:${PN} = "bluez5"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
