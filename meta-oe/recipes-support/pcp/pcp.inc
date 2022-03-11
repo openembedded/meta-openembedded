@@ -8,7 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=37ab75b580d5aad4ada04260efa3702f \
 COMPATIBLE_HOST:libc-musl = "null"
 
 SRC_URI = "https://performancecopilot.jfrog.io/artifactory/pcp-source-release/${BP}.src.tar.gz \
-	   file://config.linux \
+           file://0001-configure-Limit-the-header-search-to-sysroot.patch \
+           file://config.linux \
 	   "
 SRC_URI[sha256sum] = "6ef33b7aa14c09860ba7cd8873e76d38ccd24eab0c94a50e235f813e77fe3610"
 
