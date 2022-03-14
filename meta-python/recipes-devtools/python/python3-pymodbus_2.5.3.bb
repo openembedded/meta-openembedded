@@ -11,6 +11,7 @@ inherit pypi setuptools3
 
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[repl] = ",,,python3-aiohttp python3-click python3-prompt-toolkit python3-pygments python3-pyserial-asyncio"
+PACKAGECONFIG[asyncio] = ",,,python3-pyserial-asyncio"
 PACKAGECONFIG[tornado] = ",,,python3-tornado"
 PACKAGECONFIG[twisted] = ",,,python3-twisted-conch"
 PACKAGECONFIG[redis] = ",,,python3-redis"
