@@ -1,13 +1,14 @@
-From 480c04ac6a9d11bfef9d4aca073052fdcee4fdea Mon Sep 17 00:00:00 2001
+From 320b8378ee30eb5e0fe83a8b397f822f2f88a4c1 Mon Sep 17 00:00:00 2001
 From: Khem Raj <raj.khem@gmail.com>
 Date: Sun, 1 Mar 2015 22:25:07 +0000
+Subject: [PATCH] %% original patch: mediactl-pkgconfig.patch
 
 ---
  utils/media-ctl/Makefile.am | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/utils/media-ctl/Makefile.am b/utils/media-ctl/Makefile.am
-index d11fa2e..7c520a2 100644
+index e255e16..ff7b417 100644
 --- a/utils/media-ctl/Makefile.am
 +++ b/utils/media-ctl/Makefile.am
 @@ -20,6 +20,7 @@ libv4l2subdev_la_LIBADD = libmediactl.la
