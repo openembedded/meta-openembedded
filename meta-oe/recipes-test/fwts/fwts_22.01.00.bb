@@ -7,13 +7,12 @@ LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd
 
 SRC_URI = "http://fwts.ubuntu.com/release/fwts-V${PV}.tar.gz;subdir=${BP} \
            file://0001-Add-correct-printf-qualifier-for-off_t.patch \
-           file://0002-Include-poll.h-instead-of-deprecated-sys-poll.h.patch \
            file://0003-Remove-Werror-from-build.patch \
            file://0004-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
            file://0005-Undefine-PAGE_SIZE.patch \
            file://0006-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
            "
-SRC_URI[sha256sum] = "ca43439707976f6664fe3f6eb7f356a51ac7d7f8a4e246ef4d1b16305e066909"
+SRC_URI[sha256sum] = "45045a095d9933d9ff39712372ab1f3078ca8e29c007b3f97b810cdb8c27b5c3"
 
 COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
 
