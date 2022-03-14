@@ -21,7 +21,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=104d5c3c653aeededf4076773aa4c236 \
 
 SRC_URI[sha256sum] = "951fc7c1f8d710a94cb49019ee3742125039fc659675912ea614ac2aa405b118"
 
-inherit poetry_core pypi
+inherit python_poetry_core pypi
 
 RDEPENDS:${PN}:append:class-target = "\
     python3-compression \

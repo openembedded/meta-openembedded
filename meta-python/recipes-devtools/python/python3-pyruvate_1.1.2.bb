@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "10befedd97e73fc18b902d02aa3b24e8978aa162242c1b664849c886c0
 
 S = "${WORKDIR}/pyruvate-${PV}"
 
-inherit pypi setuptools3_rust
+inherit pypi python_setuptools3_rust
 
 PIP_INSTALL_DIST_PATH = "${S}/dist"
 

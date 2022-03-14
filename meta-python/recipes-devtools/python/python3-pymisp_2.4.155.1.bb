@@ -7,7 +7,7 @@ SRC_URI = "git://github.com/MISP/PyMISP.git;protocol=https;branch=main"
 SRCREV = "03dc22f9598e6caae81b0e40ce27bf3f17799f4e"
 S = "${WORKDIR}/git"
 
-inherit poetry_core
+inherit python_poetry_core
 
 PIP_INSTALL_PACKAGE = "pymisp"
 
