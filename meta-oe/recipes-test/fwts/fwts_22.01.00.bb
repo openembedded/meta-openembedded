@@ -23,6 +23,10 @@ inherit autotools bash-completion pkgconfig
 
 LDFLAGS:append:libc-musl = " -lexecinfo"
 
+# We end up linker barfing with undefined symbols on ppc64 but not on other arches
+# surprisingly
+ASNEEDED:powerpc64le = ""
+
 FILES:${PN} += "${libdir}/fwts/lib*${SOLIBS}"
 FILES:${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
 FILES:${PN}-staticdev += "${libdir}/fwts/lib*a"
