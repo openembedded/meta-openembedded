@@ -33,7 +33,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-argh \
     python3-arpeggio \
     python3-asciitree \
-    python3-asn1crypto \
     python3-aspectlib \
     python3-astor \
     python3-astroid \
@@ -47,7 +46,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-babel \
     python3-backcall \
     python3-bandit \
-    python3-bcrypt \
     python3-beautifulsoup4 \
     python3-behave \
     python3-betamax \
@@ -67,7 +65,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-cchardet \
     python3-cerberus \
     python3-certifi \
-    python3-cffi \
     python3-chardet \
     python3-charset-normalizer \
     python3-cheetah \
@@ -88,8 +85,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-cppy \
     python3-crcmod \
     python3-croniter \
-    python3-cryptography \
-    python3-cryptography-vectors \
     python3-cson \
     python3-custom-inherit \
     python3-cvxopt \
@@ -191,7 +186,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-ipython \
     python3-ipython-genutils \
     python3-iso3166 \
-    python3-iso8601 \
     python3-isodate \
     python3-isort \
     python3-itsdangerous \
@@ -277,22 +271,18 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pint \
     python3-pkcs11 \
     python3-pkgconfig \
-    python3-ply \
-    python3-poetry-core \
     python3-pocketsphinx \
     python3-polyline \
     python3-portalocker \
     python3-posix-ipc \
     python3-prctl \
     python3-precise-runner \
-    python3-pretend \
     python3-prettytable \
     python3-priority \
     python3-process-tests \
     python3-progress \
     python3-prompt-toolkit \
     python3-protobuf \
-    python3-psutil \
     python3-ptyprocess \
     python3-pulsectl \
     python3-py-cpuinfo \
@@ -309,7 +299,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pycocotools \
     python3-pycodestyle \
     python3-pyconnman \
-    python3-pycparser \
     python3-pycurl \
     python3-pydbus \
     python3-pydbus-manager \
@@ -354,7 +343,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-html \
     python3-pytest-metadata \
     python3-pytest-runner \
-    python3-pytest-subtests \
     python3-pytest-tempdir \
     python3-pytest-timeout \
     python3-pytest-xdist \
@@ -362,7 +350,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-python-vlc \
     python3-pytoml \
     python3-pytun \
-    python3-pytz \
     python3-pytz-deprecation-shim \
     python3-pyudev \
     python3-pyusb \
@@ -391,7 +378,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-scrypt \
     python3-sdnotify \
     python3-semver \
-    python3-semantic-version \
     python3-send2trash \
     python3-sentry-sdk \
     python3-serpent \
@@ -439,7 +425,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-txws \
     python3-typed-ast \
     python3-typeguard \
-    python3-typing-extensions \
     python3-tzlocal \
     python3-u-msgpack-python \
     python3-ujson \
@@ -477,18 +462,15 @@ RDEPENDS:packagegroup-meta-python3 = "\
 "
 
 RDEPENDS:packagegroup-meta-python3-ptest = "\
-    python3-cryptography-ptest \
     python3-jinja2-ptest \
     python3-markupsafe-ptest \
     python3-ansicolors-ptest \
     python3-appdirs-ptest \
-    python3-bcrypt-ptest \
     python3-betamax-ptest \
     python3-blinker-ptest \
     python3-cachetools-ptest \
     python3-cbor2-ptest \
     python3-click-ptest \
-    python3-cryptography-ptest \
     python3-dnspython-ptest \
     python3-dominate-ptest \
     python3-geojson-ptest \
@@ -518,7 +500,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-pyroute2-ptest \
     python3-pyserial-ptest \
     python3-pytoml-ptest \
-    python3-pytz-ptest \
     python3-requests-file-ptest \
     python3-requests-toolbelt-ptest \
     python3-scrypt-ptest \
