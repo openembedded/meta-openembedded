@@ -475,7 +475,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     telepathy-python3 \
     unattended-upgrades \
 "
-RDEPENDS:packagegroup-meta-python3:remove:libc-musl:powerpc64le = "python3-grpcio python3-grpcio-tools"
 
 RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-cryptography-ptest \
