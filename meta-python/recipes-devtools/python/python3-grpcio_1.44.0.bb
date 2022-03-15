@@ -11,8 +11,9 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
                                 file://boring_ssl.patch \
                                 file://mips_bigendian.patch \
                                 file://0001-absl-always-use-asm-sgidefs.h.patch \
+                                file://abseil-ppc-fixes.patch;patchdir=third_party/abseil-cpp \
 "
-SRC_URI[sha256sum] = "735d9a437c262ab039d02defddcb9f8f545d7009ae61c0114e19dda3843febe5"
+SRC_URI[sha256sum] = "4bae1c99896045d3062ab95478411c8d5a52cb84b91a1517312629fa6cfeb50e"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
@@ -43,6 +44,3 @@ CLEANBROKEN = "1"
 BBCLASSEXTEND = "native nativesdk"
 
 CCACHE_DISABLE = "1"
-
-# needs vdso support
-COMPATIBLE_HOST:libc-musl:powerpc64le = "null"
