@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.dnspython.org/"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5af50906b5929837f667dfe31052bd34"
 
-SRC_URI[sha256sum] = "e79351e032d0b606b98d38a4b0e6e2275b31a5b85c873e587cc11b73aca026d6"
+SRC_URI[sha256sum] = "0f7569a4a6ff151958b64304071d370daa3243d15941a7beedf0c9fe5105603e"
 
 inherit pypi python_poetry_core ptest
 
