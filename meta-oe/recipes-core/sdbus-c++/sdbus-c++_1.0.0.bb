@@ -21,7 +21,7 @@ SRCREV = "65782bbf435d91e5eb6af9ddab110df406a824a9"
 SRC_URI = "git://github.com/Kistler-Group/sdbus-cpp.git;protocol=https;branch=master"
 SRC_URI += "file://run-ptest"
 
-EXTRA_OECMAKE = "-DBUILD_CODE_GEN=ON \
+EXTRA_OECMAKE = "-DBUILD_CODE_GEN=OFF \
                  -DBUILD_DOC=ON \
                  -DBUILD_DOXYGEN_DOC=OFF"
 
