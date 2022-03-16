@@ -25,7 +25,7 @@ def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
 SRC_URI += " file://0001-Remove-incorrect-args-for-i18n.merge_file.patch"
-SRC_URI[archive.sha256sum] = "3346b01f9bdc8f2d5ffea92f110a090c64a3624942b5b543aad4592a9de33bb0"
+SRC_URI[archive.sha256sum] = "ff245240f230922bec32a4d7b0a1d91b247a83d13484f99b74035d51eb232130"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
