@@ -21,3 +21,5 @@ do_install:append() {
 FILES:${PN}-dbg += "${libdir}/vdpau/.debug"
 FILES:${PN}-dev += "${libdir}/vdpau/lib*${SOLIBSDEV}"
 FILES:${PN} += "${libdir}/vdpau/lib*${SOLIBS}"
+
+BBCLASSEXTEND = "native nativesdk"
