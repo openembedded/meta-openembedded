@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=99532e0f6620bc9bca34f12fadaee33c"
 
 BBCLASSEXTEND = "native"
 DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
+DEPENDS:append:libc-musl = " libucontext"
 DEPENDS:class-native = "zlib-native libxml2-native"
 
 PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
@@ -66,6 +67,10 @@ EXTRA_OECONF = "--enable-mbstring \
 
 EXTRA_OECONF:append:riscv64 = " --with-pcre-jit=no"
 EXTRA_OECONF:append:riscv32 = " --with-pcre-jit=no"
+# Needs fibers assembly implemented for rv32
+# for example rv64 implementation is below
+# see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
+EXTRA_OECONF:append:riscv32:libc-musl = " --disable-fiber-asm"
 
 CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
 
@@ -116,6 +121,7 @@ CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_IN
 # See https://bugs.php.net/bug.php?id=60109
 CFLAGS += " -DHAVE_LIBDL "
 LDFLAGS += " -ldl "
+LDFLAGS:append:libc-musl = " -lucontext "
 
 EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
 
@@ -272,8 +278,3 @@ do_install:append:class-native() {
 # | {standard input}:3797: Error: unshifted register required -- `sub r2,r2,r0,asr#31'
 # | make: *** [ext/standard/math.lo] Error 1
 ARM_INSTRUCTION_SET = "arm"
-
-# Needs fibers assembly implemented for rv32
-# for example rv64 implementation is below
-# see https://github.com/php/php-src/commit/70b02d75f2abe3a292d49c4a4e9e4f850c2fee68
-COMPATIBLE_HOST:libc-musl:riscv32 = "null"
