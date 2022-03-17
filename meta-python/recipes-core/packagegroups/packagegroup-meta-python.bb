@@ -62,7 +62,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-cantools \
     python3-cassandra-driver \
     python3-cbor2 \
-    python3-cchardet \
     python3-cerberus \
     python3-certifi \
     python3-chardet \
