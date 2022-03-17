@@ -63,7 +63,7 @@ SRC_URI += " \
     crate://crates.io/humantime/2.1.0 \
     crate://crates.io/instant/0.1.12 \
     crate://crates.io/lazy_static/1.4.0 \
-    crate://crates.io/libc/0.2.112 \
+    crate://crates.io/libc/0.2.120 \
     crate://crates.io/libsystemd/0.4.1 \
     crate://crates.io/log/0.4.14 \
     crate://crates.io/memchr/2.4.1 \
@@ -115,10 +115,8 @@ SRC_URI += " \
     crate://crates.io/winapi-x86_64-pc-windows-gnu/0.4.0 \
     crate://crates.io/winapi/0.3.9 \
 "
-SRC_URI += "file://0001-riscv64-mod.rs-Add-missing-error-codes.patch;patchdir=../cargo_home/bitbake/libc-0.2.112/ \
-            file://0001-riscv32-Define-O_LARGEFILE.patch;patchdir=../cargo_home/bitbake/libc-0.2.112/ \
+SRC_URI += "\
             file://0001-linux.rs-Define-consts-for-rv32-architecture.patch;patchdir=../cargo_home/bitbake/nix-0.23.1/ \
-            file://0001-statfs-Exclude-riscv32.patch;patchdir=../cargo_home/bitbake/nix-0.23.1/ \
             "
 SRC_URI:append:mips = " file://0001-check-for-mips-targets-for-stat.st_dev-definitions.patch;patchdir=../cargo_home/bitbake/libsystemd-0.4.1/"
 
