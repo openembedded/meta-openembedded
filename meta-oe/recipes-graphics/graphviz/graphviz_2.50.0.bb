@@ -19,19 +19,17 @@ DEPENDS:append:class-nativesdk = " ${BPN}-native"
 
 inherit autotools-brokensep pkgconfig gettext
 
-SRC_URI = "https://www2.graphviz.org/Packages/stable/portable_source/${BP}.tar.gz \
-           file://0001-plugin-pango-Include-freetype-headers-explicitly.patch \
-"
+SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
+           "
 # Use native mkdefs
 SRC_URI:append:class-target = "\
-           file://0001-Use-native-mkdefs.patch \
            file://0001-Set-use_tcl-to-be-empty-string-if-tcl-is-disabled.patch \
 "
 SRC_URI:append:class-nativesdk = "\
-           file://0001-Use-native-mkdefs.patch \
            file://graphviz-setup.sh \
 "
-SRC_URI[sha256sum] = "8e1b34763254935243ccdb83c6ce108f531876d7a5dfd443f255e6418b8ea313"
+
+SRC_URI[sha256sum] = "6b16bf990df114195be669773a1dae975dbbffada45e1de2849ddeb5851bb9a8"
 
 PACKAGECONFIG ??= "librsvg"
 PACKAGECONFIG:class-nativesdk ??= ""
@@ -65,11 +63,6 @@ do_configure:prepend() {
     ./autogen.sh NOCONFIG || true
 }
 
-do_install:append:class-native() {
-    # install mkdefs for target build
-    install -m755 ${B}/lib/gvpr/mkdefs ${D}${bindir}
-}
-
 do_install:append:class-nativesdk() {
     # graphviz-setup.sh must be executed at SDK installation
     install -d ${D}${SDKPATHNATIVE}/post-relocate-setup.d
@@ -97,6 +90,8 @@ FILES:${PN}-demo += "${datadir}/graphviz/demo/"
 RDEPENDS:${PN}-perl += "perl"
 RDEPENDS:${PN}-python += "python3"
 RDEPENDS:${PN}-demo += "python3 perl"
+
+RRECOMMENDS:${PN} = "liberation-fonts"
 
 INSANE_SKIP:${PN}-perl = "dev-so"
 INSANE_SKIP:${PN}-python = "dev-so"
