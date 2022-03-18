@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "3ee1cf319c913d19fe53aeb0bc400e7b0bc2dbeb477553733db1dad12e
 
 PYPI_PACKAGE = "pytest-html"
 
-inherit pypi setuptools_build_meta
+inherit pypi python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
     ${PYTHON_PN}-pytest \

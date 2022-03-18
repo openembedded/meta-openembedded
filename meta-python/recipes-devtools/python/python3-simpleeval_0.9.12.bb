@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=dc9277482effe59b734b004cbcc1fee7"
 
 SRC_URI[sha256sum] = "3e0be507486d4e21cf9d08847c7e57dd61a1603950399985f7c5a0be7fd33e36"
 
-inherit pypi setuptools_build_meta ptest
+inherit pypi python_setuptools_build_meta ptest
 
 BBCLASSEXTEND = "native nativesdk"
 

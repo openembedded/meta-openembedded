@@ -6,6 +6,6 @@ SRC_URI[sha256sum] = "31f5abdc7faf16a1a6e9bf2eb31565d004359b821b09944436a3436192
 
 PYPI_PACKAGE = "antlr4-python3-runtime"
 
-inherit pypi setuptools_build_meta
+inherit pypi python_setuptools_build_meta
 
 BBCLASSEXTEND = "nativesdk native"

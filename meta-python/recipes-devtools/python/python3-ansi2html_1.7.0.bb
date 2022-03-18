@@ -7,7 +7,7 @@ PYPI_PACKAGE = "ansi2html"
 
 SRC_URI[sha256sum] = "69316be8c68ac91c5582d397c2890e69c993cc7cda52062ac7e45fcb660d8edc"
 
-inherit pypi setuptools_build_meta
+inherit pypi python_setuptools_build_meta
 
 DEPENDS += " \
 	${PYTHON_PN}-setuptools-scm-native \
