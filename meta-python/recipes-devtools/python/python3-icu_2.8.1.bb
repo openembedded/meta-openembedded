@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "f0b9549a87f87ba7c413f13679d137271e0b37f1f39b0109ace38257d4
 
 SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
 
-inherit pkgconfig pypi setuptools_build_meta
+inherit pkgconfig pypi python_setuptools_build_meta
