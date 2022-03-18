@@ -1,41 +1,33 @@
 SUMMARY = "C and C++ cross-platform library for decoding tracked music files (modules)"
 DESCRIPTION = "libopenmpt is a cross-platform C++ and C library to decode tracked \
 music files (modules) into a raw PCM audio stream. It also comes with openmpt123, a \
-cross-platform command-line or terminal based module file player, and libopenmpt_modplug, \
-a wrapper around libopenmpt that provides an interface that is ABI compatile with \
-libmodplug. libopenmpt is based on the player code of the OpenMPT project."
+cross-platform command-line or terminal based module file player. libopenmpt is based \
+on the player code of the OpenMPT project."
 HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
 SECTION = "libs"
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=e804150573f149befef6c07e173f20c3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ae09d6164bdecb499183479fd32b66fb"
 
 DEPENDS = "virtual/libiconv"
 
 SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
            file://run-ptest \
           "
-SRC_URI[md5sum] = "66bbc6fbb5f27a554cb145d805e9ef9d"
-SRC_URI[sha256sum] = "14a137b8d1a20e1b6a5e67cbc9467ab7e5e4e67d5aa38a247afc825685c53939"
+SRC_URI[md5sum] = "d21fb799695cbe10a1e9aeaea23ed708"
+SRC_URI[sha256sum] = "50c0d62ff2d9afefa36cce9f29042cb1fb8d4f0b386b81a0fc7734f35e21e6b6"
 
 S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
 
 inherit autotools pkgconfig ptest
 
 PACKAGECONFIG ??= " \
-    libopenmpt-modplug openmpt123 \
+    openmpt123 \
     ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)} \
     flac mpg123 ogg sndfile vorbis vorbisfile zlib \
     ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)} \
 "
 
-# libopenmpt_modplug is a library that wraps libopenmpt calls into
-# functions that are ABI compatible with libmodplug. This allows for
-# using modplug headers and linking against libopenmpt_modplug
-# instead of against the original libmodplug library.
-# NOTE: The wrapper is compatible to the ABI from libmodplug version
-# 0.8.8 and newer.
-PACKAGECONFIG[libopenmpt-modplug] = "--enable-libopenmpt_modplug,--disable-libopenmpt_modplug"
 PACKAGECONFIG[openmpt123]         = "--enable-openmpt123,--disable-openmpt123"
 PACKAGECONFIG[tests]              = "--enable-tests,--disable-tests"
 
@@ -45,22 +37,15 @@ PACKAGECONFIG[mpg123]             = "--with-mpg123,--without-mpg123,mpg123"
 PACKAGECONFIG[ogg]                = "--with-ogg,--without-ogg,libogg"
 PACKAGECONFIG[portaudio]          = "--with-portaudio,--without-portaudio,portaudio-v19"
 PACKAGECONFIG[pulseaudio]         = "--with-pulseaudio,--without-pulseaudio,pulseaudio"
-PACKAGECONFIG[sdl]                = "--with-sdl,--without-sdl,virtual/libsdl"
 PACKAGECONFIG[sdl2]               = "--with-sdl2,--without-sdl2,virtual/libsdl2"
 PACKAGECONFIG[sndfile]            = "--with-sndfile,--without-sndfile,libsndfile1"
 PACKAGECONFIG[vorbis]             = "--with-vorbis,--without-vorbis,libvorbis"
 PACKAGECONFIG[vorbisfile]         = "--with-vorbisfile,--without-vorbisfile,libvorbis"
 PACKAGECONFIG[zlib]               = "--with-zlib,--without-zlib,zlib"
 
-# --disable-libmodplug is necessary, since otherwise we'd
-# have a collision with the libmodplug package, because of the
-# libmodplug.so file. (libmodplug.so from libopenmpt isintended
-# to be used as a drop-in replacement, and according to the
-# documentation, is not complete.)
 EXTRA_OECONF += " \
     --disable-doxygen-doc \
     --disable-examples \
-    --disable-libmodplug \
     --without-portaudiocpp \
 "
 
@@ -85,8 +70,7 @@ python __anonymous() {
         bb.error("sdl and sdl2 packageconfigs cannot be both enabled")
 }
 
-PACKAGES =+ "${PN}-modplug ${PN}-openmpt123 ${PN}-openmpt123-doc"
-FILES:${PN}-modplug = "${libdir}/libopenmpt_modplug.so.*"
+PACKAGES =+ "${PN}-openmpt123 ${PN}-openmpt123-doc"
 FILES:${PN}-openmpt123 = "${bindir}/openmpt123"
 FILES:${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
 
@@ -94,7 +78,6 @@ FILES:${PN}-openmpt123-doc = "${mandir}/man1/openmpt123*"
 # The SemVer versioning scheme is incompatible with Debian/Ubuntu
 # package version names.
 DEBIAN_NOAUTONAME:${PN} = "1"
-DEBIAN_NOAUTONAME:${PN}-modplug = "1"
 
 RDEPENDS:${PN}:libc-glibc = " \
     glibc-gconv-cp1252 \
