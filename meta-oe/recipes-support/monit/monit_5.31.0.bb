@@ -38,6 +38,10 @@ INITSCRIPT_PACKAGES = "${PN}"
 INITSCRIPT_NAME:${PN} = "monit"
 INITSCRIPT_PARAMS:${PN} = "defaults 89"
 
+do_configure:prepend() {
+    rm -rf ${S}/m4/*
+}
+
 do_install:append() {
 
     # Configuration file
