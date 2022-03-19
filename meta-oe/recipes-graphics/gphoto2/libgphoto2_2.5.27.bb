@@ -25,6 +25,11 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[gd] = ",--without-gdlib,gd"
 PACKAGECONFIG[serial] = "--enable-serial,--disable-serial,lockdev"
 
+do_configure:prepend() {
+    rm -rf ${S}/libgphoto2_port/auto-m4/*
+    rm -rf ${S}/auto-m4/*
+}
+
 do_configure:append() {
     cp ${STAGING_DATADIR_NATIVE}/gettext/po/Makefile.in.in ${S}/libgphoto2_port/po/
     cd ${S}/libgphoto2_port/
