@@ -51,6 +51,9 @@ PARALLEL_MAKE = ""
 
 #Because m4 file's find maxdepth=2, so copy the m4 files of the deep depth.
 do_configure:prepend () {
+    rm -rf ${S}/m4.generated/lt*.m4 ${S}/m4.generated/libtool.m4
+    rm -rf ${S}/sigscheme/libgcroots/m4/lt*.m4 ${S}/sigscheme/libgcroots/m4/libtool.m4
+    rm -rf ${S}/sigscheme/m4/lt*.m4 ${S}/sigscheme/m4/libtool.m4
     cp ${S}/sigscheme/m4/* ${S}/m4/
 }
 
