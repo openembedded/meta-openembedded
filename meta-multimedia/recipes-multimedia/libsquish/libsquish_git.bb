@@ -10,7 +10,8 @@ SRC_URI = "git://github.com/OpenELEC/libsquish.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix}"
+EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix} LIBDIR=${base_libdir} \
+                ${@bb.utils.contains('TUNE_FEATURES', 'altivec', 'USE_ALTIVEC=1', '', d)}"
 
 do_install() {
 	install -d ${D}${includedir}
