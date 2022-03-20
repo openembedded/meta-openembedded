@@ -19,6 +19,6 @@ RDEPENDS:${PN} += "compress-raw-zlib-perl"
 
 S = "${WORKDIR}/IO-Compress-${PV}"
 
-inherit cpan allarch
+inherit cpan
 
 BBCLASSEXTEND = "native"
