@@ -15,7 +15,7 @@ SRC_URI = "https://cpan.metacpan.org/authors/id/P/PM/PMQS/IO-Compress-Lzma-2.096
 SRC_URI[md5sum] = "6c1b70740605b8073e4fbb5ba1e7bbdb"
 SRC_URI[sha256sum] = "2f29125f19bb41d29c4b5a2467e3560b7bce5d428176a046b7c8a51609dce6e8"
 RDEPENDS:${PN} += "compress-raw-lzma-perl"
-RDEPENDS:${PN} += "io-compress-perl"
+RDEPENDS:${PN} += "libio-compress-perl"
 
 S = "${WORKDIR}/IO-Compress-Lzma-${PV}"
 
