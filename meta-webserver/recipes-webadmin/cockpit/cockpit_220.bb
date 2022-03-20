@@ -166,6 +166,8 @@ FILES:${PN} += " \
     ${datadir}/cockpit \
     ${datadir}/metainfo/cockpit.appdata.xml \
     ${datadir}/pixmaps/cockpit.png \
+    ${nonarch_libdir}/tmpfiles.d \
+    ${nonarch_libdir}/firewalld \
 "
 RDEPENDS:${PN} += "${PN}-bridge"
 
