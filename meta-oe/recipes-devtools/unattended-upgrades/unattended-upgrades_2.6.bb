@@ -28,4 +28,4 @@ do_install:append () {
 	rm -r ${D}/usr/usr
 }
 
-FILES:${PN} = "${bindir} ${exec_prefix}/etc ${libdir} ${datadir}"
+FILES:${PN} = "${bindir} ${exec_prefix}/etc ${libdir} ${datadir} ${nonarch_libdir}"
