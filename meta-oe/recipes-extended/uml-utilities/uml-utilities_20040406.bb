@@ -22,7 +22,7 @@ do_compile() {
 }
 
 do_install() {
-    oe_runmake install DESTDIR=${D}
+    oe_runmake install DESTDIR=${D} LIB_DIR=${libdir}/uml
 }
 
 FILES:${PN} += "${libdir}/uml"
