@@ -7,15 +7,12 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
                     file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
                    "
 
-PV .= "+git${SRCPV}"
+SRC_URI = "https://github.com/msgpack/msgpack-c/releases/download/cpp-${PV}/msgpack-cxx-${PV}.tar.gz"
+SRC_URI[sha256sum] = "8115c5edcf20bc1408c798a6bdaec16c1e52b1c34859d4982a0fb03300438f0b"
 
-SRC_URI = "git://github.com/msgpack/msgpack-c;branch=cpp_master;protocol=https \
-           "
-SRCREV = "3bdbf0d2ee75d46d71afa691a594777d89a22cf7"
+S = "${WORKDIR}/msgpack-cxx-${PV}"
 
 DEPENDS += "boost"
-
-S = "${WORKDIR}/git"
 
 inherit cmake pkgconfig
 
