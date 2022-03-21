@@ -421,7 +421,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-ujson \
     python3-unidiff \
     python3-uritemplate \
-    python3-urllib3 \
     python3-vcversioner \
     python3-versiontools \
     python3-visitor \
