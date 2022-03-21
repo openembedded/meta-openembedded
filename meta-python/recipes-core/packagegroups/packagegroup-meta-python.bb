@@ -43,7 +43,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-autobahn \
     python3-automat \
     python3-aws-iot-device-sdk-python \
-    python3-babel \
     python3-backcall \
     python3-bandit \
     python3-beautifulsoup4 \
