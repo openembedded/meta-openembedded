@@ -317,7 +317,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pymysql \
     python3-pynacl \
     python3-pynetlinux \
-    python3-pyopenssl \
     python3-pyparted \
     python3-pyperclip \
     python3-pyperf \
