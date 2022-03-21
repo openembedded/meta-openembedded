@@ -326,7 +326,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pyrsistent \
     python3-pyscaffold \
     python3-pyserial \
-    python3-pysocks \
     python3-pysonos \
     python3-pystemd \
     python3-pytest-asyncio \
