@@ -232,7 +232,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-mypy \
     python3-mypy-extensions \
     python3-natsort \
-    python3-ndg-httpsclient \
     python3-netaddr \
     python3-netifaces \
     python3-networkx \
