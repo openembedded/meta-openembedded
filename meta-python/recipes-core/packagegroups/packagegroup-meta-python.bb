@@ -354,7 +354,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-rdflib \
     python3-redis \
     python3-regex \
-    python3-requests \
     python3-requests-file \
     python3-requests-ftp \
     python3-requests-futures \
