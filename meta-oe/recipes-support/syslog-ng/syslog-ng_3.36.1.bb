@@ -22,12 +22,9 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
            file://volatiles.03_syslog-ng \
            file://syslog-ng-tmp.conf \
            file://syslog-ng.service-the-syslog-ng-service.patch \
-           file://0002-scl-fix-wrong-ownership-during-installation.patch \
-           file://0005-.py-s-python-python3-exclude-tests.patch \
 "
 
-SRC_URI[md5sum] = "69ef4dc5628d5e603e9e4a1b937592f8"
-SRC_URI[sha256sum] = "2eeb8e0dbbcb556fdd4e50bc9f29bc8c66c9b153026f87caa7567bd3139c186a"
+SRC_URI[sha256sum] = "90a25c9767fe749db50f118ddfc92ec71399763d2ecd5ad4f11ff5eea049e60b"
 
 UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
 
