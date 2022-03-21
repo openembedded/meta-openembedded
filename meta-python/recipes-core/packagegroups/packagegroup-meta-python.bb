@@ -284,7 +284,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-py-cpuinfo \
     python3-py-ubjson \
     python3-pyalsaaudio \
-    python3-pyasn1 \
     python3-pyasn1-modules \
     python3-pyatspi \
     python3-pyaudio \
