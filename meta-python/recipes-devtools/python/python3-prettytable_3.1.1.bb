@@ -35,6 +35,7 @@ RDEPENDS:${PN} += " \
 
 RDEPENDS:${PN}-ptest += " \
     ${PYTHON_PN}-pytest \
+    ${PYTHON_PN}-pytest-lazy-fixture \
     ${PYTHON_PN}-sqlite3 \
 "
 
