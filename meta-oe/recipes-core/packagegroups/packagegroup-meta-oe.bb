@@ -303,6 +303,7 @@ RDEPENDS:packagegroup-meta-oe-devtools ="\
     squashfs-tools-ng \
     uftrace \
     unifex \
+    valijson \
     libxerces-c \
     xerces-c-samples \
     xmlrpc-c \
