@@ -1,10 +1,10 @@
-From 705c0a7e9d9c1e64ee09fc0b54f6b5a4e27de1ca Mon Sep 17 00:00:00 2001
+From 43a4ad04e0d8771267a73f98b5918bcd10b167ec Mon Sep 17 00:00:00 2001
 From: Trevor Gamblin <trevor.gamblin@windriver.com>
 Date: Fri, 17 Apr 2020 06:31:35 -0700
 Subject: [PATCH] support/apxs.in: force destdir to be empty string
 
-If destdir is assigned to anything other than the empty string, the 
-search path for apache2 config files is appended to itself, and 
+If destdir is assigned to anything other than the empty string, the
+search path for apache2 config files is appended to itself, and
 related packages like apache-websocket will be unable to locate them:
 
 | cannot open
@@ -24,7 +24,7 @@ Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
  1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/support/apxs.in b/support/apxs.in
-index 65e1288527..9d96e33728 100644
+index b2705fa..781f2ab 100644
 --- a/support/apxs.in
 +++ b/support/apxs.in
 @@ -28,10 +28,12 @@ package apxs;
@@ -45,5 +45,5 @@ index 65e1288527..9d96e33728 100644
  my %config_vars = ();
  
 -- 
-2.17.1
+2.25.1
 
