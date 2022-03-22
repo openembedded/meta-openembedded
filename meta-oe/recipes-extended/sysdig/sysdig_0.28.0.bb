@@ -18,27 +18,31 @@ JIT:powerpc = ""
 JIT:powerpc64le = ""
 JIT:powerpc64 = ""
 
-DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
+DEPENDS += "libb64 lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp \
+            tbb jq openssl elfutils protobuf protobuf-native jq-native valijson"
 RDEPENDS:${PN} = "bash"
 
-SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https \
-           file://0001-fix-build-with-LuaJIT-2.1-betas.patch \
-           file://aarch64.patch \
-           file://0001-libsinsp-Fix-a-lot-of-Werror-format-security-errors-.patch \
+SRC_URI = "git://github.com/draios/sysdig.git;branch=dev;protocol=https;name=sysdig \
+           git://github.com/falcosecurity/libs;protocol=https;branch=master;name=falco;subdir=git/falcosecurity-libs \
+           file://0001-cmake-Pass-PROBE_NAME-via-CFLAGS.patch \
           "
-SRCREV = "67833b2aca06bd9d11cff7cb29f04fbf4ef96cad"
-PV = "0.27.1"
+SRCREV_sysdig = "4fb6288275f567f63515df0ff0a6518043ecfa9b"
+SRCREV_falco= "caa0e4d0044fdaaebab086592a97f0c7f32aeaa9"
 
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = "\
                 -DBUILD_DRIVER=OFF \
+                -DMINIMAL_BUILD=ON \
                 -DUSE_BUNDLED_DEPS=OFF \
                 -DCREATE_TEST_TARGETS=OFF \
                 -DDIR_ETC=${sysconfdir} \
                 -DLUA_INCLUDE_DIR=${STAGING_INCDIR}/luajit-2.1 \
-                -DLUA_LIBRARY=libluajit-5.1.so \
+                -DFALCOSECURITY_LIBS_SOURCE_DIR=${S}/falcosecurity-libs \
+                -DVALIJSON_INCLUDE=${STAGING_INCDIR}/valijson \
 "
+
+#CMAKE_VERBOSE = "VERBOSE=1"
 
 FILES:${PN} += " \
     ${DIR_ETC}/* \
@@ -54,3 +58,4 @@ COMPATIBLE_HOST:mips = "null"
 COMPATIBLE_HOST:riscv64 = "null"
 COMPATIBLE_HOST:riscv32 = "null"
 COMPATIBLE_HOST:powerpc = "null"
+COMPATIBLE_HOST:powerpc64le = "null"

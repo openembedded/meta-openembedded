@@ -446,7 +446,7 @@ RDEPENDS:packagegroup-meta-oe-extended:remove:mipsarch = "upm mraa minifi-cpp ti
 RDEPENDS:packagegroup-meta-oe-extended:remove:mips = "sysdig"
 RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc = "upm mraa minifi-cpp"
 RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64 = "upm mraa minifi-cpp"
-RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64le = "upm mraa"
+RDEPENDS:packagegroup-meta-oe-extended:remove:powerpc64le = "upm mraa sysdig"
 RDEPENDS:packagegroup-meta-oe-extended:remove:riscv64 = "upm libleak libyang mraa sysdig tiptop"
 RDEPENDS:packagegroup-meta-oe-extended:remove:riscv32 = "upm libleak libyang mraa sysdig tiptop"
 
