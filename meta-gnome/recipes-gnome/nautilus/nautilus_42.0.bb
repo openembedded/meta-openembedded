@@ -22,8 +22,7 @@ inherit gnomebase gsettings gobject-introspection gtk-doc gettext features_check
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI += "file://liportal-0.5-fix.patch"
-SRC_URI[archive.sha256sum] = "872285b1c40a6ee418ce295ed115f5427da70907d822d95bcf51675d5498822b"
+SRC_URI[archive.sha256sum] = "3c904f33ba2d2a078892bee2af71484cd608923cd78ec7e8a1517bc2155113d5"
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
