@@ -22,7 +22,7 @@ REQUIRED_DISTRO_FEATURES = "x11 polkit"
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "c7fc44c61949b794b0289968ebbbcc0c15f8cfc3d9e45bfaa81ed45c12139e5f"
+SRC_URI[archive.sha256sum] = "13239d22032201a22bd29833c575b684816700d2de168a1530223577c5c075dc"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
