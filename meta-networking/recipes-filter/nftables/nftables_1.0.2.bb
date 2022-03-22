@@ -9,8 +9,11 @@ DEPENDS = "libmnl libnftnl bison-native \
 # Ensure we reject the 0.099 version by matching at least two dots
 UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
 
-SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "3ceeba625818e81a0be293e9dd486c3ef799ebd92165270f1e57e9a201efa423"
+SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
+           file://0001-examples-compile-with-make-check-and-add-AM_CPPFLAGS.patch \
+          "
+
+SRC_URI[sha256sum] = "0b28a36ffcf4567b841de7bd3f37918b1fed27859eb48bdec51e1f7a83954c02"
 
 inherit autotools manpages pkgconfig
 
