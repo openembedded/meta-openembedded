@@ -13,8 +13,8 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
            file://0005-replace-lynx-to-curl-in-apachectl-script.patch \
            file://0006-apache2-fix-the-race-issue-of-parallel-installation.patch \
            file://0007-apache2-allow-to-disable-selinux-support.patch \
-           file://apache-configure_perlbin.patch \
-           file://0001-support-apxs.in-force-destdir-to-be-empty-string.patch \
+           file://0008-Fix-perl-install-directory-to-usr-bin.patch \
+           file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
           "
 
 SRC_URI_append_class-target = " \
@@ -26,7 +26,7 @@ SRC_URI_append_class-target = " \
            "
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
-SRC_URI[sha256sum] = "0127f7dc497e9983e9c51474bed75e45607f2f870a7675a86dc90af6d572f5c9"
+SRC_URI[sha256sum] = "d0bbd1121a57b5f2a6ff92d7b96f8050c5a45d3f14db118f64979d525858db63"
 
 S = "${WORKDIR}/httpd-${PV}"
 
