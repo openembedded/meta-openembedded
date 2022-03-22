@@ -13,7 +13,7 @@ DEPENDS:append:class-nativesdk = " grpc-native "
 PACKAGE_BEFORE_PN = "${PN}-compiler"
 
 RDEPENDS:${PN}-compiler = "${PN}"
-RDEPENDS:${PN}-dev:class_native += "${PN}-compiler"
+RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
 # Configuration above allows to cross-compile gRPC applications
 # In order to compile applications on the target, use the dependency below
 # Both dependencies are mutually exclusive
@@ -45,7 +45,6 @@ EXTRA_OECMAKE = " \
     "
 
 PACKAGECONFIG ??= "cpp shared"
-PACKAGECONFIG_class-target ?= "shared"
 PACKAGECONFIG[cpp] = "-DgRPC_BUILD_GRPC_CPP_PLUGIN=ON,-DgRPC_BUILD_GRPC_CPP_PLUGIN=OFF"
 PACKAGECONFIG[csharp] = "-DgRPC_BUILD_GRPC_CSHARP_PLUGIN=ON,-DgRPC_BUILD_GRPC_CSHARP_PLUGIN=OFF"
 PACKAGECONFIG[node] = "-DgRPC_BUILD_GRPC_NODE_PLUGIN=ON,-DgRPC_BUILD_GRPC_NODE_PLUGIN=OFF"
