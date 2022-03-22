@@ -1,4 +1,4 @@
-From bc9c5d64ad4829c7830ef70fcaff94470974247c Mon Sep 17 00:00:00 2001
+From 6c6bbfe6b33e5c7e46a4260d656593dbe610fd8a Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Tue, 8 Jun 2021 10:13:57 +0800
 Subject: [PATCH] bind/Makefile.in: disable backtrace
@@ -14,7 +14,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/bind/Makefile.in b/bind/Makefile.in
-index 8fe8883..1058160 100644
+index 2e60091..533d55c 100644
 --- a/bind/Makefile.in
 +++ b/bind/Makefile.in
 @@ -22,7 +22,7 @@ prefix = @prefix@
@@ -27,5 +27,5 @@ index 8fe8883..1058160 100644
  	@BINDLT@ @BINDIOMUX@ @BINDCONFIG@ --enable-full-report
  
 -- 
-2.17.1
+2.25.1
 
