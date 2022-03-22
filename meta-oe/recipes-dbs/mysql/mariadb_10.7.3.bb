@@ -3,7 +3,7 @@ require mariadb.inc
 inherit qemu
 
 DEPENDS += "qemu-native bison-native boost libpcre2 curl openssl ncurses \
-            zlib libaio libedit libevent libxml2 gnutls fmt"
+            zlib libaio libedit libevent libxml2 gnutls fmt lzo"
 
 PROVIDES += "mysql5 libmysqlclient"
 
