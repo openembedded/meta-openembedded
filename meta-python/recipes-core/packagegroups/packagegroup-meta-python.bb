@@ -334,6 +334,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-forked \
     python3-pytest-helpers-namespace \
     python3-pytest-html \
+    python3-pytest-lazy-fixture \
     python3-pytest-metadata \
     python3-pytest-tempdir \
     python3-pytest-timeout \
@@ -452,8 +453,6 @@ RDEPENDS:packagegroup-meta-python3 = "\
 "
 
 RDEPENDS:packagegroup-meta-python3-ptest = "\
-    python3-jinja2-ptest \
-    python3-markupsafe-ptest \
     python3-ansicolors-ptest \
     python3-appdirs-ptest \
     python3-betamax-ptest \
@@ -489,6 +488,7 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-pyasn1-modules-ptest \
     python3-pyroute2-ptest \
     python3-pyserial-ptest \
+    python3-pytest-lazy-fixture-ptest \
     python3-pytoml-ptest \
     python3-requests-file-ptest \
     python3-requests-toolbelt-ptest \
