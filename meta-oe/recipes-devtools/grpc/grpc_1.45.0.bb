@@ -4,7 +4,7 @@ Provides gRPC libraries for multiple languages written on top of shared C core l
 HOMEPAGE = "https://github.com/grpc/grpc"
 SECTION = "libs"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=6e4cf218112648d22420a84281b68b88"
 
 DEPENDS = "c-ares protobuf protobuf-native protobuf-c protobuf-c-native openssl libnsl2 abseil-cpp re2"
 DEPENDS:append:class-target = " googletest grpc-native "
@@ -20,10 +20,9 @@ RDEPENDS:${PN}-dev:append:class-native = " ${PN}-compiler"
 # RDEPENDS:${PN}-dev += "${PN}-compiler"
 
 S = "${WORKDIR}/git"
-SRCREV_grpc = "635693ce624f3b3a89e5a764f0664958ef08b2b9"
-BRANCH = "v1.41.x"
+SRCREV_grpc = "494b08ada4009ead0d0b70e44d354be72f9c283a"
+BRANCH = "v1.45.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
-           file://0001-cmake-revert-db88fb0ee826e73323e06ac6166ac038ee71f6a.patch \
            file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
