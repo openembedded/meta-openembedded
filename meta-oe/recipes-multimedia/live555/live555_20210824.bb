@@ -55,6 +55,7 @@ do_install() {
     install -m 0755 ${S}/mediaServer/live555MediaServer ${D}${bindir}/
 }
 
+RDEPENDS:${PN}-dev = ""
 PACKAGES =+ "live555-openrtsp live555-playsip live555-mediaserver live555-examples"
 FILES:live555-openrtsp = "${bindir}/openRTSP"
 FILES:live555-playsip = "${bindir}/playSIP"
