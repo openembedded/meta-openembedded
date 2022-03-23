@@ -6,8 +6,8 @@ HOMEPAGE = "https://www.musicpd.org/clients/ncmpc/"
 inherit meson pkgconfig
 
 DEPENDS += " \
-    boost \
     ncurses \
+    libpcre2 \
     libmpdclient \
 "
 
@@ -35,5 +35,5 @@ PACKAGECONFIG[chat_screen] = "-Dchat_screen=true,-Dchat_screen=false"
 SRC_URI = " \
     git://github.com/MusicPlayerDaemon/ncmpc;branch=master;protocol=https \
 "
-SRCREV = "6780ec072f1d314f44ed77efdc58d03c6fbcc96b"
+SRCREV = "b9b5e11e10d8f66cd672ffb51728aa447f78ecd4"
 S = "${WORKDIR}/git"
