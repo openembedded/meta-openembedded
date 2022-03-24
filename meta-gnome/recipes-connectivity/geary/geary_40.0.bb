@@ -34,6 +34,8 @@ inherit meson pkgconfig mime-xdg gtk-icon-cache gobject-introspection vala featu
 
 SRC_URI = " \
 	git://github.com/GNOME/geary.git;nobranch=1;protocol=https \
+        file://0001-Util.Cache.Lru-Workaround-missing-generic-type-argum.patch \
+        file://0002-Fix-accessibility-issues-with-initializer-of-constan.patch \
 "
 
 S = "${WORKDIR}/git"
