@@ -76,6 +76,6 @@ do_install:append() {
     chown -R netdata:netdata ${D}${datadir}/netdata/web
 }
 
-FILES_${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
+FILES:${PN} += "${localstatedir}/cache/netdata/ ${localstatedir}/lib/netdata/"
 
 RDEPENDS:${PN} = "bash zlib"
