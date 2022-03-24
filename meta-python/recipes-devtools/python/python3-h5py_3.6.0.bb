@@ -4,11 +4,10 @@ SECTION = "devel/python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=113251d71fb0384712c719b567261c5c"
 
-SRC_URI[sha256sum] = "77c7be4001ac7d3ed80477de5b6942501d782de1bbe4886597bdfec2a7ab821f"
+SRC_URI[sha256sum] = "8752d2814a92aba4e2b2a5922d2782d0029102d99caaf3c201a566bc0b40db29"
 
 SRC_URI:append = " \
            file://0001-setup_build.py-avoid-absolute-path.patch \
-           file://0001-setup.py-Fix-numpy-version.patch \
           "
 
 inherit pkgconfig pypi setuptools3
