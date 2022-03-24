@@ -35,6 +35,10 @@ EXTRA_OECONF = "--with-os-type=moblin \
                 --disable-libelogind \
                "
 
+do_configure:prepend () {
+    rm -f ${S}/buildutil/lt*.m4 ${S}/buildutil/libtool.m4
+}
+
 do_compile:prepend () {
     export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
 }
