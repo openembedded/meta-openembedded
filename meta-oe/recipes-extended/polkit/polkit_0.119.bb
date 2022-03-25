@@ -27,6 +27,8 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
            file://0003-make-netgroup-support-optional.patch \
            file://0002-jsauthority-port-to-mozjs-91.patch \
            file://0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch \
+           file://0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch \
+           file://0002-CVE-2021-4115-GHSL-2021-077-fix.patch \
            "
 SRC_URI[sha256sum] = "c8579fdb86e94295404211285fee0722ad04893f0213e571bd75c00972fd1f5c"
 
