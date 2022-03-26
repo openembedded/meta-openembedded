@@ -2,21 +2,18 @@ SUMMARY = "Program for providing universal TLS/SSL tunneling service"
 DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
 HOMEPAGE = "https://www.stunnel.org/"
 SECTION = "net"
-# Note: Linking stunnel statically or dynamically with other modules is making
-# a combined work based on stunnel. Thus, the terms and conditions of the GNU
-# General Public License cover the whole combination.
-LICENSE = "GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING.md;md5=223b26c62f5e7c5c8656d6c133edd5ec"
+LICENSE = "GPL-2.0-or-later"
+LIC_FILES_CHKSUM = "file://COPYING.md;md5=d8a2866ad5ebf3a2d2ce27279472875a"
 
 DEPENDS = "autoconf-archive libnsl2 openssl"
 
-SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz \
+SRC_URI = "https://stunnel.org/archive/5.x/${BP}.tar.gz \
            file://fix-openssl-no-des.patch \
 "
 
-SRC_URI[sha256sum] = "137776df6be8f1701f1cd590b7779932e123479fb91e5192171c16798815ce9f"
+SRC_URI[sha256sum] = "c74c4e15144a3ae34b8b890bb31c909207301490bd1e51bfaaa5ffeb0a994617"
 
-inherit autotools
+inherit autotools bash-completion pkgconfig
 
 PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 systemd', d)} libwrap"
 
