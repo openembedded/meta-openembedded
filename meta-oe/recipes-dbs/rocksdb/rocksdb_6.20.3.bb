@@ -52,3 +52,7 @@ do_install:append() {
 }
 
 LDFLAGS:append:riscv64 = " -pthread"
+
+# Need toku_time_now() implemented for ppc/musl
+# see utilities/transactions/lock/range/range_tree/lib/portability/toku_time.h
+COMPATIBLE_HOST:libc-musl:powerpc = "null"

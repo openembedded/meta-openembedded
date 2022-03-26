@@ -223,6 +223,7 @@ RDEPENDS:packagegroup-meta-oe-dbs ="\
     soci \
     sqlite \
 "
+RDEPENDS:packagegroup-meta-oe-dbs:remove:libc-musl:powerpc = "rocksdb"
 
 RDEPENDS:packagegroup-meta-oe-dbs-python2 ="\
     ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-python2", bb.utils.contains('I_SWEAR_TO_MIGRATE_TO_PYTHON3', 'yes', 'mysql-python', '', d), "", d)} \
