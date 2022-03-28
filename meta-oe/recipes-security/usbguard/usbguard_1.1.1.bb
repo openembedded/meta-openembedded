@@ -44,19 +44,12 @@ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 
 SYSTEMD_PACKAGES = "${PN}"
 
-SYSTEMD_SERVICE:${PN} = "usbguard.service"
-
-SYSTEMD_PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'dbus', '${PN}-dbus', '', d)}"
-
-SYSTEMD_SERVICE:${PN}-dbus = "usbguard-dbus.service"
-
-PACKAGES =+ "${PN}-dbus"
+SYSTEMD_SERVICE:${PN} = "usbguard.service ${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'usbguard-dbus.service', '', d)}"
 
 FILES:${PN} += "\
     ${systemd_unitdir}/system/usbguard.service \
     ${systemd_unitdir}/system/usbguard-dbus.service \
     ${datadir}/polkit-1 \
-    ${datadir}/polkit-1/actions \
     ${datadir}/dbus-1 \
     ${nonarch_libdir}/tmpfiles.d \
 "
