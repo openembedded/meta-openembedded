@@ -32,7 +32,6 @@ SRC_URI:append:class-nativesdk = "\
 SRC_URI[sha256sum] = "6b16bf990df114195be669773a1dae975dbbffada45e1de2849ddeb5851bb9a8"
 
 PACKAGECONFIG ??= "librsvg"
-PACKAGECONFIG:class-nativesdk ??= ""
 PACKAGECONFIG[librsvg] = "--with-librsvg,--without-librsvg,librsvg"
 
 EXTRA_OECONF:append = " PS2PDF=/bin/echo"
