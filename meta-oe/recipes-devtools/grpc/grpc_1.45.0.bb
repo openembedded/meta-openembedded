@@ -82,4 +82,7 @@ BBCLASSEXTEND = "native nativesdk"
 
 SYSROOT_DIRS_IGNORE:append:class-target = " ${baselib}/cmake/grpc"
 
-FILES:${PN}-compiler += "${bindir}"
+FILES:${PN}-compiler += " \
+    ${bindir} \
+    ${libdir}/libgrpc_plugin_support${SOLIBS} \
+    "
