@@ -20,6 +20,7 @@ RDEPENDS:${PN} = " \
     gnome-photos \
     gnome-screenshot \
     gnome-terminal \
+    gnome-text-editor \
     gthumb \
     libwnck3 \
     nautilus \
