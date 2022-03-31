@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gvalkov/python-evdev"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=18debddbb3f52c661a129724a883a8e2"
 
-SRC_URI[sha256sum] = "8782740eb1a86b187334c07feb5127d3faa0b236e113206dfe3ae8f77fb1aaf1"
+SRC_URI[sha256sum] = "5b33b174f7c84576e7dd6071e438bf5ad227da95efd4356a39fe4c8355412fe6"
 
 inherit pypi setuptools3
 
