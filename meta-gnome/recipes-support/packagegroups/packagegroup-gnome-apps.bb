@@ -15,6 +15,7 @@ RDEPENDS:${PN} = " \
     ghex \
     gnome-calculator \
     gnome-calendar \
+    gnome-commander \
     gnome-font-viewer \
     gnome-photos \
     gnome-screenshot \
