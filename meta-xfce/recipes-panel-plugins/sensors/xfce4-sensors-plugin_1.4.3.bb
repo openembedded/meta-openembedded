@@ -17,6 +17,7 @@ do_configure:prepend() {
     sed -i 's:LIBSENSORS_CFLAGS=.*:LIBSENSORS_CFLAGS=-I${STAGING_INCDIR}:g' ${S}/configure.ac
 }
 
+PACKAGECONFIG ??= "libnotify"
 PACKAGECONFIG[libsensors] = "--enable-libsensors,--disable-libsensors, lmsensors"
 PACKAGECONFIG[hddtemp]    = "--enable-hddtemp,--disable-hddtemp, hddtemp"
 PACKAGECONFIG[netcat]     = "--enable-netcat,--disable-netcat, netcat"
