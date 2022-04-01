@@ -8,7 +8,7 @@ inherit xfce-app mime-xdg
 
 SRC_URI[sha256sum] = "26111a3b6a2007c82f1e0a1e0591b774a0b132f3a7f1cde53d9be661b2f11700"
 
-PACKAGECONFIG ??= ""
+PACKAGECONFIG ??= "notify"
 PACKAGECONFIG[notify] = "--enable-libnotify,--disable-libnotify,libnotify"
 
 PACKAGES =+ "xfce4-orageclock-plugin"
