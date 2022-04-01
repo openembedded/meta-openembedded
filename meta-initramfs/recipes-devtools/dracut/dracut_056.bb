@@ -7,9 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 PE = "1"
 
-SRCREV = "86bf2533d77762e823ad7a3e06a574522c1a90e3"
+SRCREV = "631d5f72a223288aa1f48bb8e8d0313e75947400"
 SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http;branch=master \
            file://0001-util.h-include-sys-reg.h-when-libc-glibc.patch \
+           file://0001-Guard-against-__GLIBC_PREREQ-for-musl-libc.patch \
            "
 
 DEPENDS += "kmod"
@@ -36,6 +37,7 @@ PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/
 
 EXTRA_OEMAKE += 'libdir=${prefix}/lib LDLIBS="${LDLIBS}"'
 
+CFLAGS:append = " -fPIC"
 LDLIBS:append:libc-musl = " -lfts"
 
 do_configure() {
