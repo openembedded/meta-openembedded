@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b94789bed9aec03b9656a9cc5398c706"
 
 inherit xfce-panel-plugin
 
-SRC_URI[sha256sum] = "da90f12e6ae995bcd1c81be35479a7a9d32308c65ecd64e568ba8c9592d39fcb"
+SRC_URI[sha256sum] = "171c0235f70c65f0ffee587e960d9da79b284855df22130239eac26272ec06c9"
 SRC_URI += "file://0001-Do-not-check-for-sys-class-power_supply-we-are-cross.patch"
 
 EXTRA_OECONF = " \
