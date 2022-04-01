@@ -2,7 +2,7 @@ It appends system name to library names for cross compile. For example, the
 library name is libwx_baseu-3.1-Linux.so rather than libwx_baseu-3.1.so. It is
 not appropriate for oe.
 
-Upsteam-Status: Pending [oe specific]
+Upstream-Status: Pending [oe specific]
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
