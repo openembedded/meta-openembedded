@@ -5,9 +5,11 @@ DEPENDS = "glib-2.0 gtk+3 vte libxfce4ui gtk-doc-native"
 
 inherit xfce-app
 
-FILES:${PN} += "${datadir}/xfce4 \
-                ${datadir}/gnome-control-center"
+FILES:${PN} += " \
+    ${datadir}/xfce4 \
+    ${datadir}/gnome-control-center \
+"
 
-SRC_URI[sha256sum] = "7a3337c198e01262a0412384823185753ac8a0345be1d6776a7e9bbbcbf33dc7"
+SRC_URI[sha256sum] = "593b6a7bd9b18851e51854e075990109b7896a22713b5dd8b913b23f21db6576"
 
 RRECOMMENDS:${PN} += "vte-prompt"
