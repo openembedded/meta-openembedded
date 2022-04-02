@@ -3,8 +3,7 @@ SUMMARY = "Ultimate transformation library that supports validation, contexts an
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=21ecc7aa8f699874e706fc1354903437"
 
-SRC_URI[sha256sum] = "72c342ede27fb34cd219b62855119380ae1c87006b6106be163c01159eb955ff"
-SRC_URI[md5sum] = "228675376012fb27dd7f70ab685e7766"
+SRC_URI[sha256sum] = "d9d00800318fbd343fdfb3353e947b2ebb5557159c844696c5ac24846f76d41c"
 
 inherit pypi setuptools3
 
