@@ -19,7 +19,7 @@ DEPENDS += " \
 "
 
 SRC_URI = " \
-    git://github.com/wxWidgets/wxWidgets.git;branch=master;protocol=https \
+    gitsm://github.com/wxWidgets/wxWidgets.git;branch=master;protocol=https \
     file://0001-wx-config.in-Disable-cross-magic-it-does-not-work-fo.patch \
     file://fix-libdir-for-multilib.patch \
     file://respect-DESTDIR-when-create-link.patch \
