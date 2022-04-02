@@ -14,7 +14,7 @@ DEPENDS = " \
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.sha256sum] = "19b676c3510e22badfcc3204062d432ba537402f5e0ae26128c0d90c954037e1"
+SRC_URI[archive.sha256sum] = "c24c7fe6bb43163ced8adf232d583b2e013d3ba6c28deb5fcf807985e3deb5ef"
 SRC_URI += "file://0001-Harcode-shebang-to-avoid-pointing-to-build-system-s-.patch"
 
 PACKAGECONFIG[libnotify] = "-Dlibnotify=true,-Dlibnotify=false,libnotify"
