@@ -21,7 +21,7 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc val
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI[archive.sha256sum] = "7a9b18b158808d1892989165f3706c4f1a282979079ab7458a79d3c24ad4deb5"
+SRC_URI[archive.sha256sum] = "a87991f42961eb4f6abcdbaabb784760c23aeaeefae6363d3e21a61e9c458437"
 
 # gobject-introspection is mandatory and cannot be configured
 # x11 is needed for tepl and gtksourceview4
