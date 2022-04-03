@@ -8,24 +8,21 @@ DEPENDS = " \
     polkit \
 "
 
-inherit meson gobject-introspection gtk-doc features_check systemd
+inherit meson gobject-introspection gtk-doc features_check systemd vala
 
 REQUIRED_DISTRO_FEATURES = "polkit"
 
-SRC_URI = "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-           file://0001-Fix-build-with-meson-0.60.patch \
-           "
+SRC_URI = "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
 SRC_URI:append:libc-musl = " \
     file://0001-musl-Hack-to-fix-build.patch \
     file://0002-musl-add-missing-fgetspent_r.patch \
 "
-SRC_URI[md5sum] = "6e4c6fbd490260cfe17de2e76f5d803a"
-SRC_URI[sha256sum] = "ff2b2419a7e06bd9cb335ffe391c7409b49a0f0130b890bd54692a3986699c9b"
+SRC_URI[sha256sum] = "909997a76919fe7dc138a9a01cea70bd622d5a932dbc9fb13010113023a7a391"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false -Dsystemdsystemunitdir='no', systemd"
+PACKAGECONFIG[systemd] = ", -Dsystemdsystemunitdir='no', systemd"
 
 SYSTEMD_SERVICE:${PN} = "accounts-daemon.service"
 
