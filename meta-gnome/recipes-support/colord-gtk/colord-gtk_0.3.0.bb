@@ -6,13 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02"
 inherit meson gobject-introspection gettext gtk-doc features_check
 
 DEPENDS = " \
-    gtk+3 \
     colord \
 "
 
 SRC_URI = "http://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
-SRC_URI[md5sum] = "66d048803c8b89e5e63da4b461484933"
-SRC_URI[sha256sum] = "2a4cfae08bc69f000f40374934cd26f4ae86d286ce7de89f1622abc59644c717"
+SRC_URI[sha256sum] = "b9466656d66d9a6ffbc2dd04fa91c8f6af516bf9efaacb69744eec0f56f3c1d0"
+
+PACKAGECONFIG ??= "gtk3 gtk4"
+PACKAGECONFIG[gtk3] = "-Dgtk3=true, -Dgtk3=false, gtk+3"
+PACKAGECONFIG[gtk4] = "-Dgtk4=true, -Dgtk4=false, gtk4"
 
 EXTRA_OEMESON = "-Dman=false"
 GIR_MESON_OPTION = ""
