@@ -8,6 +8,7 @@ DEPENDS = " \
     accountsservice \
     libcanberra \
     libpam \
+    libgudev \
 "
 
 REQUIRED_DISTRO_FEATURES = "x11 systemd pam polkit gobject-introspection-data"
@@ -17,7 +18,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext systemd useradd itstool gnome-help features_check
 
-SRC_URI[archive.sha256sum] = "5738c4293a9f5a80d4a6e9e06f4d0df3e9f313ca7b61bfb4d8afaba983e200dc"
+SRC_URI[archive.sha256sum] = "a328ac976937bec179971ff07829a1246b98ce724181c128ae32a0ba47ad3855"
 
 EXTRA_OEMESON = " \
     -Dplymouth=disabled \
