@@ -16,8 +16,7 @@ inherit gnomebase gtk-doc gobject-introspection pkgconfig features_check
 REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI += " file://0001-Update-rest-requirement-to-rest-1.0.patch"
-SRC_URI[archive.md5sum] = "c38af63e49f8fe8baad99537956b69ba"
-SRC_URI[archive.sha256sum] = "6065391f35e7335588cc6b0cc4c1abbce7341488573a654551264cb9793b9379"
+SRC_URI[archive.sha256sum] = "9cb381b3f78ba1136df97af3f06e3b11dcc2ab339ac08f74eda0f8057d6603e3"
 
 do_install:append() {
     # they install all the autotools files (NEWS AUTHORS..) to /usr/doc which
