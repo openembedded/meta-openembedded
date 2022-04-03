@@ -16,7 +16,7 @@ DEPENDS += " \
     yelp-xsl \
 "
 
-SRC_URI[archive.sha256sum] = "37f1acc02bcbe68a31b86e07c129a839bd3276e656dc89eb7fc0a92746eff272"
+SRC_URI[archive.sha256sum] = "2cd43063ffa7262df15dd8d379aa3ea3999d42661f07563f4802daa1149f7df4"
 
 RDEPENDS:${PN} += "python3-core yelp-xsl"
 
