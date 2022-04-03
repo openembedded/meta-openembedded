@@ -2,7 +2,7 @@ SUMMARY = "NetworkManager GUI library"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "glib-2.0 gtk+3 networkmanager"
+DEPENDS = "glib-2.0 gtk+3 gtk4 networkmanager"
 
 GNOMEBASEBUILDCLASS = "meson"
 inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
@@ -10,12 +10,15 @@ inherit gnomebase gobject-introspection gtk-doc gettext vala features_check
 REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG','gcr','x11','',d)}"
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "f5e2e738e0fca7f2a549079290b2d8017511d485a83220c36df380a3b4753304"
+SRC_URI[archive.sha256sum] = "d99415f4cdff642230019ec5cdd2b1fbf1ec550a8ae865219f75482a642b7b7a"
 
 PACKAGECONFIG ?= "gcr iso_codes mobile_broadband_provider_info"
 PACKAGECONFIG[gcr] = "-Dgcr=true,-Dgcr=false,gcr"
 PACKAGECONFIG[iso_codes] = "-Diso_codes=true,-Diso_codes=false,iso-codes,iso-codes"
 PACKAGECONFIG[mobile_broadband_provider_info] = "-Dmobile_broadband_provider_info=true,-Dmobile_broadband_provider_info=false,mobile-broadband-provider-info,mobile-broadband-provider-info"
+
+# for gnome-control-center >= 42
+EXTRA_OEMESON = "-Dlibnma_gtk4=true"
 
 # go introspection is not supported for mipsn32/riscv32, but vapi needs it
 #
