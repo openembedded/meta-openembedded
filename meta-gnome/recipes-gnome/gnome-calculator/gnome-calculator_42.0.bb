@@ -6,12 +6,12 @@ SECTION = "x11/gnome"
 
 DEPENDS = " \
     yelp-tools-native \
-    gtk+3 \
+    gtk4 \
     libsoup-2.4 \
     libgee \
     libmpc \
-    gtksourceview4 \
-    libhandy \
+    gtksourceview5 \
+    libadwaita \
 "
 
 GIR_MESON_OPTION = 'disable-introspection'
@@ -19,6 +19,7 @@ GIR_MESON_ENABLE_FLAG = 'false'
 GIR_MESON_DISABLE_FLAG = 'true'
 
 GNOMEBASEBUILDCLASS = "meson"
+GTKIC_VERSION = '4'
 
 inherit gnomebase gobject-introspection gnome-help vala gtk-icon-cache gettext features_check
 
@@ -27,7 +28,7 @@ def gnome_verdir(v):
 
 REQUIRED_DISTRO_FEATURES = "x11"
 
-SRC_URI[archive.sha256sum] = "0267614afdb25d38b78411b42ebab7bc50c1b6340cc49bb68c0e432d7ddf8a34"
+SRC_URI[archive.sha256sum] = "a535a14ebea58e691a4b5a085256aed060a2c3f07384ac3a3d01832332a27e4a"
 
 FILES:${PN} += " \
     ${datadir}/dbus-1 \
