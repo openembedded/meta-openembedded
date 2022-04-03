@@ -24,8 +24,7 @@ inherit gnomebase itstool gnome-help pkgconfig gsettings gobject-introspection g
 def gnome_verdir(v):
     return oe.utils.trim_version(v, 1)
 
-SRC_URI += " file://0001-Remove-incorrect-args-for-i18n.merge_file.patch"
-SRC_URI[archive.sha256sum] = "ff245240f230922bec32a4d7b0a1d91b247a83d13484f99b74035d51eb232130"
+SRC_URI[archive.sha256sum] = "b24767bb3d5103b4e35b0e15cf033dbe2488f88700cdd882d22a43adeec2e80a"
 
 GTKDOC_MESON_OPTION = "gtk_doc"
 
