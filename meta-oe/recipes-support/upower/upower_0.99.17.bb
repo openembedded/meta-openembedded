@@ -25,7 +25,7 @@ inherit meson pkgconfig gtk-doc gettext gobject-introspection systemd
 
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[idevice] = "-Didevice=enabled,-Didevice=disabled,libimobiledevice libplist"
-PACKAGECONFIG[systemd] = "-Dsystemdsystemunitdir=${systemd_system_unitdir},-Dsystemdsystemunitdir=no,systemd"
+PACKAGECONFIG[systemd] = "-Dsystemdsystemunitdir=${systemd_system_unitdir},-Dsystemdsystemunitdir=no -Dudevrulesdir=${base_libdir}/udev/rules.d,systemd"
 
 EXTRA_OEMESON = " \
     -Dos_backend=linux \
