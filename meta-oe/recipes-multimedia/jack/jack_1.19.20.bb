@@ -14,10 +14,8 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "libsamplerate0 libsndfile1 readline"
 
-SRC_URI = "git://github.com/jackaudio/jack2.git;branch=master;protocol=https \
-           file://0001-example-clients-Use-c-compiler-for-jack_simdtests.patch \
-          "
-SRCREV = "3e6ca6b734b69e2f5dfb85935068e15006fb5acf"
+SRC_URI = "git://github.com/jackaudio/jack2.git;branch=master;protocol=https"
+SRCREV = "a2fe7ec2fdbd315f112c8035282d94a429451178"
 
 S = "${WORKDIR}/git"
 
