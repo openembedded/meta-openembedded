@@ -10,11 +10,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
 
 SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=${PV};protocol=https \
            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers;branch=master;protocol=https \
-           file://0001-v84-Make-setup_options-definitions-as-extern.patch \
            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+           file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
           "
-SRCREV_drbd-utils = "b24b0f7e42d500d3538d7eeffa017ec78d08f918"
-SRCREV_drbd-headers = "c757cf357edef67751b8f45a6ea894d287180087"
+SRCREV_drbd-utils = "087ee6b4961ca154d76e4211223b03149373bed8"
+SRCREV_drbd-headers = "f1529aa84e9d2f66c96ad283a1bbb708aabf03f7"
 
 SRCREV_FORMAT = "drbd-utils_drbd-headers"
 
@@ -56,7 +56,10 @@ RDEPENDS:${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module
 FILES:${PN} += "/run"
 FILES:${PN} += "${nonarch_base_libdir}/drbd \
                 ${nonarch_libdir}/drbd \
-                ${nonarch_libdir}/tmpfiles.d"
+                ${nonarch_libdir}/tmpfiles.d \
+                ${nonarch_libdir}/drbdscripts/* \
+                ${systemd_unitdir}/system/* \
+"
 FILES:${PN}-dbg += "${nonarch_base_libdir}/drbd/.debug"
 
 CLEANBROKEN = "1"
