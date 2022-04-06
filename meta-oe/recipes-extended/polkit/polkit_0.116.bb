@@ -27,7 +27,6 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
            file://0003-make-netgroup-support-optional.patch \
            file://CVE-2021-3560.patch \
            file://CVE-2021-4034.patch \
-           file://0001-GHSL-2021-074-authentication-bypass-vulnerability-in.patch \
            file://CVE-2021-4115.patch \
            "
 SRC_URI[md5sum] = "4b37258583393e83069a0e2e89c0162a"
