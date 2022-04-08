@@ -45,9 +45,9 @@ EXTRA_OECMAKE:append:libc-musl = " \
 "
 EXTRA_OECMAKE:append:class-target = ' -DEGREP="/bin/grep -E"'
 
-# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', 'no_gui', d)} \
-    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+# OpenGL support currently seems tied to using libglu, which requires x11
+PACKAGECONFIG ?= "${@bb.utils.contains_any('DISTRO_FEATURES', 'x11 wayland', 'gtk', 'no_gui', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'opengl', '', d)} \
 "
 
 PACKAGECONFIG:remove:class-native = "opengl"
