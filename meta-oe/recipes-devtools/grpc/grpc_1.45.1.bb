@@ -24,6 +24,7 @@ SRCREV_grpc = "1c159689ceda2c408f7f9d97d96a264c9521b806"
 BRANCH = "v1.45.x"
 SRC_URI = "git://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BRANCH} \
            file://0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch \
+           file://0001-cmake-add-separate-export-for-plugin-targets.patch \
            "
 # Fixes build with older compilers 4.8 especially on ubuntu 14.04
 CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
@@ -79,8 +80,6 @@ do_configure:prepend:toolchain-clang:x86() {
 }
 
 BBCLASSEXTEND = "native nativesdk"
-
-SYSROOT_DIRS_IGNORE:append:class-target = " ${baselib}/cmake/grpc"
 
 FILES:${PN}-compiler += " \
     ${bindir} \
