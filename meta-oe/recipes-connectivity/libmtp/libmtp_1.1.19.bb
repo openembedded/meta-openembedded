@@ -7,11 +7,10 @@ compliant operating systems"
 SUMMARY = "libmtp is an Initiator implementation of the Media Transfer Protocol (MTP)"
 HOMEPAGE = "http://libmtp.sourceforge.net/"
 LICENSE = "LGPL-2.1-or-later"
-LIC_FILES_CHKSUM = "\
-    file://COPYING;md5=0448d3676bc0de00406af227d341a4d1 \
-    file://src/ptp.c;beginline=3;endline=22;md5=303cc4422fd549ef8689aded20434a9a \
-    file://examples/albums.c;beginline=5;endline=21;md5=84f4e55dfec49e898b7f68a828c15620 \
-"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0448d3676bc0de00406af227d341a4d1 \
+                    file://src/ptp.c;beginline=3;endline=22;md5=80fd2d5904c4c1f5455d8f4bf515292f \
+                    file://examples/albums.c;beginline=5;endline=21;md5=84f4e55dfec49e898b7f68a828c15620 \
+                    "
 
 BBCLASSEXTEND = "native"
 
@@ -21,8 +20,7 @@ DEPENDS:append:class-target = " ${BPN}-native"
 SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
 SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch"
 
-SRC_URI[md5sum] = "7915496daa3f4ea3e095f0161f83d4d4"
-SRC_URI[sha256sum] = "7280fe50c044c818a06667f45eabca884deab3193caa8682e0b581e847a281f0"
+SRC_URI[sha256sum] = "deb4af6f63f5e71215cfa7fb961795262920b4ec6cb4b627f55b30b18aa33228"
 
 inherit autotools pkgconfig lib_package
 
