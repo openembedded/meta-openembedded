@@ -8,12 +8,11 @@ the package on many systems.\
 SECTION = "devel"
 HOMEPAGE = "http://www.logwatch.org/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=ad199c8aca74e70f296f731ad9a1521c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=ba882fa9b4b6b217a51780be3f4db9c8"
 RDEPENDS:${PN} = "perl"
 
 SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
-SRC_URI[md5sum] = "8bcf3edc5a4687c8aad1b9c01e2be54b"
-SRC_URI[sha256sum] = "1b2b96879dec01cd02754fe00f8989b11ff16158c3dc7c4aff0faa4b1d34974b"
+SRC_URI[sha256sum] = "689f3c68b99ef7af7d3c7007c3ff0a55d5674bdbf9c01f69a9f187726d6d4baf"
 
 do_install() {
     install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
