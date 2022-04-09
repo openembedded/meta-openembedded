@@ -44,3 +44,7 @@ ALLOW_EMPTY:${PN} = "1"
 RDEPENDS:${PN}-dev = ""
 
 BBCLASSEXTEND = "native nativesdk"
+
+#it needs to work with CXXFLAGS += " -mlong-double-64" but ppc64 only supports 128bit long double
+COMPATIBLE_HOST:powerpc64le = "null"
+COMPATIBLE_HOST:powerpc = "null"
