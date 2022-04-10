@@ -1,9 +1,9 @@
 SUMMARY = "Screen-scraping library"
 HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=15a76c7c51ecfc5c094d04f3ccd41a09"
 
-SRC_URI[sha256sum] = "c23ad23c521d818955a4151a67d81580319d4bf548d3d49f4223ae041ff98891"
+SRC_URI[sha256sum] = "ad9aa55b65ef2808eb405f46cf74df7fcb7044d5cbc26487f96eb2ef2e436693"
 
 inherit pypi setuptools3
 
