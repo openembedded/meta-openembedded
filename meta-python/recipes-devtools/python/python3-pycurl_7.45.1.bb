@@ -9,10 +9,10 @@ HOMEPAGE = "http://pycurl.io/"
 
 LICENSE = "LGPL-2.0-only | MIT"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-                    file://COPYING-MIT;md5=75f131c591546fd1277ca49c9a81ab1b \
+                    file://COPYING-MIT;md5=be42e1b1e58c8d59c2901fd747bfc55d \
                     "
 
-SRC_URI[sha256sum] = "5bcef4d988b74b99653602101e17d8401338d596b9234d263c728a0c3df003e8"
+SRC_URI[sha256sum] = "a863ad18ff478f5545924057887cdae422e1b2746e41674615f687498ea5b88a"
 
 DEPENDS = "curl"
 
