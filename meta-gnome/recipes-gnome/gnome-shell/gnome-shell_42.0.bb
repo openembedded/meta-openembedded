@@ -4,10 +4,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 GNOMEBASEBUILDCLASS = "meson"
 
-inherit gnomebase gsettings gettext gobject-introspection features_check bash-completion
-
-REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
-
 DEPENDS = " \
     libxml2-native \
     sassc-native \
@@ -24,15 +20,19 @@ DEPENDS = " \
     gsettings-desktop-schemas \
 "
 
+inherit gnomebase gsettings gettext gobject-introspection gtk-icon-cache features_check bash-completion
+
+REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
+
+GTKIC_VERSION = "4"
 GTKDOC_MESON_OPTION = "gtk_doc"
 GIR_MESON_OPTION = ""
 
 # gobject-introspection is mandatory and cannot be configured
 REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "384651eb051393dbabe006d1ad057bf29d5cd73ebb87bc779ff5e1c31e80a827"
+SRC_URI[archive.sha256sum] = "33d404fb3c93b9de42984f0110a2969d6a4a7247c27fe7f5e24c67ecfec75094"
 SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
-SRC_URI += "  file://0001-build-Drop-incorrect-positional-arg.patch"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
