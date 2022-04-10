@@ -10,7 +10,7 @@ inherit pypi setuptools3
 DEPENDS += "${PYTHON_PN}-grpcio"
 
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
-SRC_URI[sha256sum] = "be37f458ea510c9a8f1caabbc2b258d12e55d189a567f5edcace90f27dc0efbf"
+SRC_URI[sha256sum] = "a016cfc21e0d91b3b036d3d4f968d1fdea865dfa03524cb1fbeca84719fd45a2"
 
 RDEPENDS:${PN} = "${PYTHON_PN}-grpcio"
 
