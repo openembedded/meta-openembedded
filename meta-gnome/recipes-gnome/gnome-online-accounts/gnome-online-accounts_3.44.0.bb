@@ -12,7 +12,7 @@ REQUIRED_DISTRO_FEATURES = "x11"
 DEPENDS = "glib-2.0"
 
 SRC_URI += "file://0001-Update-to-rest-1.0.patch"
-SRC_URI[archive.sha256sum] = "3bcb3663a12efd4482d9fdda3e171676267fc739eb6440a2b7109a0e87afb7e8"
+SRC_URI[archive.sha256sum] = "381d5d4106f435b6f87786aa049be784774e15996adcc02789807afc87ea7342"
 
 # backend is required for gnome-control-center
 PACKAGECONFIG = "backend other"
