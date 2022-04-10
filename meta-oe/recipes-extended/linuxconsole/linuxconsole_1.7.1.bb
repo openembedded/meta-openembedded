@@ -18,7 +18,7 @@ SRC_URI = "\
     file://inputattach.service \
 "
 
-SRC_URI[sha256sum] = "95d112f06393806116341d593bda002c8bc44119c1538407623268fed90d8c34"
+SRC_URI[sha256sum] = "bd4d4b7e37da02fc67e47ddf20b6f1243c0a7af7b02b918d5e72138ea8727547"
 
 S = "${WORKDIR}/linuxconsoletools-${PV}"
 
