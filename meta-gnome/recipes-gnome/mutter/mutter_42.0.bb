@@ -25,7 +25,7 @@ GNOMEBASEBUILDCLASS = "meson"
 
 inherit gnomebase gsettings gobject-introspection gettext features_check
 
-SRC_URI[archive.sha256sum] = "00dfa812f1c486d74a2b73f42045ae1182f9246c7794d67d74b5e543ea700617"
+SRC_URI[archive.sha256sum] = "d1e240446b7f8cd8a3ff9daae336c1c9016193ba7e0769c79a5e6c03849022e5"
 
 # x11 is still manadatory - see meson.build
 REQUIRED_DISTRO_FEATURES = "wayland x11 polkit"
@@ -60,7 +60,7 @@ PACKAGECONFIG[sm] = "-Dsm=true, -Dsm=false, libsm"
 PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
 PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
 
-MUTTER_API_NAME = "mutter-9"
+MUTTER_API_NAME = "mutter-10"
 
 do_install:append() {
     # Add gir links in standard paths. That makes dependents life much easier
