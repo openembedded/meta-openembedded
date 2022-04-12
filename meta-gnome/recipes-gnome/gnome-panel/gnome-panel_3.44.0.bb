@@ -11,13 +11,13 @@ DEPENDS += " \
     libwnck3 \
     polkit \
     dconf \
-    libgweather \
+    libgweather4 \
     gnome-menus \
     gnome-desktop \
     gdm \
 "
 
-SRC_URI[archive.sha256sum] = "aea8c0efc2edba20e97ad4695179cd0a2538e64c2904702cc8c594e8e0898703"
+SRC_URI[archive.sha256sum] = "99655f75d031876c130ed23c4da22c099e7bcc4048b0255a3c3a3bbc787b31aa"
 
 PACKAGECONFIG[eds] = "--enable-eds,--disable-eds,evolution-data-server"
 
