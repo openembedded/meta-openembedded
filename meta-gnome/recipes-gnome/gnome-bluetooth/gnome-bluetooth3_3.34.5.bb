@@ -8,6 +8,9 @@ SECTION = "x11/gnome"
 
 DEPENDS = "udev gtk+3 libnotify libcanberra bluez5"
 
+GNOMEBN = "gnome-bluetooth"
+S = "${WORKDIR}/${GNOMEBN}-${PV}"
+
 GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION = "gtk_doc"
 
@@ -22,13 +25,16 @@ SRC_URI += " file://0001-build-Fix-build-for-newer-versions-of-meson.patch"
 SRC_URI[archive.md5sum] = "d83faa54abaf64bb40b5313bc233e74e"
 SRC_URI[archive.sha256sum] = "6c949e52c8becc2054daacd604901f66ce5cf709a5fa91c4bb7cacc939b53ea9"
 
-# avoid clashes with gnome-bluetooth4
+# avoid clashes with gnome-bluetooth
 do_install:append() {
     # just bluetooth-sendto / bluetooth-sendto.desktop only
     rm -rf ${D}${bindir}
     rm -rf ${D}${datadir}/applications
 }
+
+FILES:${PN} += "${datadir}/gnome-bluetooth"
+
 # offer alternate bluetooth-sendto
-RRECOMMENS:${PN} += "gnome-bluetooth4"
+RRECOMMENS:${PN} += "gnome-bluetooth"
 
 RDEPENDS:${PN} += "bluez5"
