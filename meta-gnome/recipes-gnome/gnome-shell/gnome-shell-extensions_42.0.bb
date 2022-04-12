@@ -8,8 +8,7 @@ inherit gnomebase gettext gsettings features_check
 
 REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
 
-SRC_URI[archive.sha256sum] = "d0e6f2273f08d52d925fc2bb66b47b28e5ef50d1b8a14020877c662423d507d3"
-SRC_URI += "file://0001-meson-Drop-unused-argument-for-i18n.merge_file.patch"
+SRC_URI[archive.sha256sum] = "3ee65b75b1afd8bcca0a2a03da9b2884787ed40e257a881d9aa6ef7c8727602f"
 
 DEPENDS += " \
     sassc-native \
