@@ -18,7 +18,7 @@ DEPENDS += " \
     gnome-panel \
 "
 
-SRC_URI[archive.sha256sum] = "c8029220acf268c520dbb0750834b2ef4df868324d0e0fb6a80354c80ba8844e"
+SRC_URI[archive.sha256sum] = "1df0838127c6246eecd89d1c50ff88fc82abf6de3b3068e52dde495a42bd550a"
 
 do_install:append() {
     # no oe-layer has compiz -> remove dead session
@@ -27,6 +27,7 @@ do_install:append() {
 
 FILES:${PN} += " \
     ${datadir}/desktop-directories \
+    ${datadir}/gnome-control-center \
     ${datadir}/gnome-panel \
     ${datadir}/gnome-session \
     ${datadir}/xsessions \
