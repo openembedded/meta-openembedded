@@ -35,7 +35,7 @@ SRC_URI[archive.sha256sum] = "33d404fb3c93b9de42984f0110a2969d6a4a7247c27fe7f5e2
 SRC_URI += "file://0001-Introduce-options-gjs_path-to-optionally-set-path-to.patch"
 
 PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
+PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth4"
 PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false, networkmanager"
 PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
 
