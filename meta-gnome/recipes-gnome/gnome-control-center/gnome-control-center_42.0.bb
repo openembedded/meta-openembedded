@@ -21,7 +21,7 @@ DEPENDS = " \
     gnome-desktop \
     gnome-online-accounts \
     libnma \
-    gnome-bluetooth4 \
+    gnome-bluetooth \
     grilo \
     libgtop \
     gsound \

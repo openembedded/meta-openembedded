@@ -14,7 +14,7 @@ DEPENDS += " \
     metacity \
     gdm \
     gnome-desktop \
-    gnome-bluetooth \
+    gnome-bluetooth3 \
     gnome-panel \
 "
 

@@ -14,7 +14,7 @@ RDEPENDS:${PN} = " \
     adwaita-icon-theme-cursors \
     evolution-data-server \
     gnome-backgrounds \
-    gnome-bluetooth4 \
+    gnome-bluetooth \
     gnome-control-center \
     gnome-desktop \
     gnome-flashback \

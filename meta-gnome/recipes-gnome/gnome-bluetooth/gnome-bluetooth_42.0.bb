@@ -18,9 +18,6 @@ DEPENDS = " \
     libadwaita \
 "
 
-GNOMEBN = "gnome-bluetooth"
-S = "${WORKDIR}/${GNOMEBN}-${PV}"
-
 GNOMEBASEBUILDCLASS = "meson"
 GTKDOC_MESON_OPTION = "gtk_doc"
 GTKIC_VERSION = "4"
@@ -31,6 +28,6 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI[archive.sha256sum] = "3d1e2720673bc9a242619dc5d231fd6e776c18a49da29f43cdc433055adb0170"
 
-RDEPENDS:${PN} += "bluez5"
-
 FILES:${PN} += "${datadir}/gnome-bluetooth-3.0"
+
+RDEPENDS:${PN} += "bluez5"
