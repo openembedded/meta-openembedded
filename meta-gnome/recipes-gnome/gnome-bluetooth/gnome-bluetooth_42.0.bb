@@ -28,6 +28,17 @@ REQUIRED_DISTRO_FEATURES = "x11"
 
 SRC_URI[archive.sha256sum] = "3d1e2720673bc9a242619dc5d231fd6e776c18a49da29f43cdc433055adb0170"
 
+BT_PULSE_PACKS = " \
+    pulseaudio-lib-bluez5-util \
+    pulseaudio-module-bluetooth-discover \
+    pulseaudio-module-bluetooth-policy \
+    pulseaudio-module-bluez5-device \
+    pulseaudio-module-bluez5-discover \
+"
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
+PACKAGECONFIG[pulseaudio] = ",,,${BT_PULSE_PACKS}"
+
 FILES:${PN} += "${datadir}/gnome-bluetooth-3.0"
 
 RDEPENDS:${PN} += "bluez5"
