@@ -1,8 +1,4 @@
-# Copyright (C) 2018 Khem Raj <raj.khem@gmail.com>
-# Released under the MIT license (see COPYING.MIT for the terms)
-
 SUMMARY = "HTTP based time synchronization tool"
-
 DESCRIPTION = "The  HTTP Time Protocol (HTP) is used to synchronize a computer's time with\
  web servers as reference time source. This program can be used instead\
  ntpdate or similar, in networks that has a firewall blocking the NTP port.\
@@ -12,18 +8,15 @@ DESCRIPTION = "The  HTTP Time Protocol (HTP) is used to synchronize a computer's
  Htpdate works through proxy servers. Accuracy of htpdate will be usually\
  within 0.5 seconds (better with multiple servers).\
 "
-
-HOMEPAGE = "http://www.vervest.org/htp/"
-
+HOMEPAGE = "https://github.com/twekkel/htpdate"
+BUGTRACKER = "https://github.com/twekkel/htpdate/issues"
 LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://htpdate.c;beginline=26;endline=30;md5=d7018a4d2c5a6eab392709a05e5e168a"
+LIC_FILES_CHKSUM = "file://htpdate.c;beginline=26;endline=30;md5=2b6cdb94bd5349646d7e33f9f501eef7"
 
-SRC_URI = "http://www.vervest.org/htp/archive/c/htpdate-${PV}.tar.xz \
-           file://0001-Make-environment-variables-assignments-to-be-weak.patch \
-           file://0001-Replace-ntp_adjtime-with-adjtimex.patch \
-           "
-SRC_URI[md5sum] = "aad8c33933648532ac8716c809b15be1"
-SRC_URI[sha256sum] = "5f1f959877852abb3153fa407e8532161a7abe916aa635796ef93f8e4119f955"
+SRC_URI = "http://www.vervest.org/htp/archive/c/htpdate-${PV}.tar.gz"
+SRC_URI[sha256sum] = "74f34b013eba6f99369819fa4b3d48e9ab5e531ad04f6af59cc04e8777c76ed7"
+
+TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_configure () {
 	:
@@ -36,4 +29,3 @@ do_compile () {
 do_install () {
 	oe_runmake install 'INSTALL=install' 'STRIP=echo' 'DESTDIR=${D}'
 }
-
