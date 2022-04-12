@@ -1,12 +1,11 @@
 SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
 HOMEPAGE = "http://www.chronox.de/libkcapi.html"
 LICENSE = "BSD-3-Clause | GPL-2.0-only"
-LIC_FILES_CHKSUM = "file://COPYING;md5=80c467906eb826339c7f09e61808ed23"
+LIC_FILES_CHKSUM = "file://COPYING;md5=a2562899bc38f1735868f0bf0c1dd1a5"
 
 S = "${WORKDIR}/git"
-SRCREV = "2936ecd060c299157ac880650ba2c9fd94d27bb1"
+SRCREV = "1429ab42d48123cc8f73b96c69a87fb9c6d8a7c9"
 SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
-           file://0001-kcapi-kernel-if-Adjust-for-musl-msghdr-struct-compat.patch \
           "
 
 inherit autotools
@@ -27,5 +26,7 @@ do_install:append() {
 }
 
 CPPFLAGS:append:libc-musl:toolchain-clang = " -Wno-error=sign-compare"
+CPPFLAGS:remove:libc-musl:toolchain-clang = "-Wno-error=sign-conversion"
+CPPFLAGS:append:libc-musl = " -Wno-error=sign-conversion"
 
 BBCLASSEXTEND = "native"
