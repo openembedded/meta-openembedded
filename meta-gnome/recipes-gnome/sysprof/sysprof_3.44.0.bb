@@ -13,12 +13,12 @@ DEPENDS += " \
     libxml2-native \
     glib-2.0 \
     json-glib \
+    libunwind \
 "
 
-SRC_URI[archive.sha256sum] = "1796b81404ee75fd1ebacf54464ad7affebf62f2851eef524d9f8eac0c4a2001"
+SRC_URI[archive.sha256sum] = "ab5d9f5b71973b3088d58a1bfdf1dc23c39a02f5fce4e5e9c73e034b178b005b"
 
-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd', '', d)} \
-                  ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'libsysprof', '', d)} \
+PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd libsysprof', '', d)} \
                   ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
 PACKAGECONFIG[gtk] = "-Denable_gtk=true,-Denable_gtk=false,gtk+3 libdazzle"
 PACKAGECONFIG[sysprofd] = "-Dwith_sysprofd=bundled,-Dwith_sysprofd=none,polkit"
