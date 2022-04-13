@@ -40,8 +40,8 @@ inherit autotools gettext pkgconfig
 do_configure() {
     for d in confdb test/mpi test/mpi/confdb src/pm/hydra/confdb \
         src/pm/hydra/tools/topo/hwloc/hwloc/config src/pm/hydra/mpl/confdb \
-        modules/yaksa/m4 modules/json-c modules/ucx test/mpi/dtpools/confdb \
-        src/mpl/confdb src/mpi/romio/confdb;  do
+        modules/yaksa/m4 modules/json-c modules/ucx modules/hwloc/config \
+        test/mpi/dtpools/confdb src/mpl/confdb src/mpi/romio/confdb;  do
         install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/$d
         install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/$d
     done
