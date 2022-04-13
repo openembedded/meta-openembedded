@@ -95,7 +95,7 @@ do_install:append:class-target () {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
         install -d ${D}${sysconfdir}/init.d
-        install -m 0755 ${B}/tools/frr ${D}${sysconfdir}/init.d
+        install -m 0755 ${B}/tools/frrinit.sh ${D}${sysconfdir}/init.d/frr
 
         install -d ${D}${sysconfdir}/default/volatiles
         echo "d frr frr 0755 ${localstatedir}/run/frr none" \
