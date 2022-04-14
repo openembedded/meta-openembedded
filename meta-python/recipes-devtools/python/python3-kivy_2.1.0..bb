@@ -2,7 +2,7 @@ SUMMARY = "Open source Python library for rapid development of applications \
     that make use of innovative user interfaces, such as multi-touch apps."
 HOMEPAGE = "https://kivy.org/"
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=f0c851d60495c7e27225a819e179208a"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=22e7b4dd8140eec57fd7edfd9fa23dfc"
 
 inherit setuptools3 pkgconfig features_check
 PIP_INSTALL_PACKAGE = "Kivy"
@@ -18,7 +18,7 @@ SRC_URI = "\
 SRC_URI += " \
     file://0001-add-support-for-glesv2.patch \
 "
-SRCREV = "dedcb6bcabe3d8d6758dcee607e8c33b174d782b"
+SRCREV = "960b95dc666753f59eff1b449124490fbec10184"
 
 S = "${WORKDIR}/git"
 
