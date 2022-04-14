@@ -3,8 +3,8 @@ HOMEPAGE="https://github.com/taocpp/PEGTL"
 LICENSE="MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=5b6701671289d12b7ffa69138832c006"
 
-SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=main"
-SRCREV = "6d03c8decc22b4ddd51115e2170e0e82413c7104"
+SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=3.x"
+SRCREV = "eeba7fa1180655bd683be620cc31be35607442ca"
 
 inherit cmake
 
