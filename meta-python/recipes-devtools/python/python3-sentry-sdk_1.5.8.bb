@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
 
 RDEPENDS:${PN} += "python3-urllib3"
 
-SRC_URI[sha256sum] = "aa52da941c56b5a76fd838f8e9e92a850bf893a9eb1e33ffce6c21431d07ee30"
+SRC_URI[sha256sum] = "38fd16a92b5ef94203db3ece10e03bdaa291481dd7e00e77a148aa0302267d47"
 
 PYPI_PACKAGE = "sentry-sdk"
 
