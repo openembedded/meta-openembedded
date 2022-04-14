@@ -5,7 +5,7 @@ SECTION = "libs"
 DEPENDS = "libpcre zlib libjpeg-turbo"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
-SRC_URI[sha256sum] = "88257d36a44fd5c50b2879488324dd9cafc11686ae49d8c4922a4872203ce006"
+SRC_URI[sha256sum] = "e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13c86d31fa33493811"
 
 LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
 
