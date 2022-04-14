@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=87266591c81260f10221f1f38872d023"
 
 SRC_URI = "https://ftp.sdaoden.eu/${BP}.tar.xz \
            file://make-errors.patch"
-SRC_URI[sha256sum] = "2c717b22f4cd8719b82b6618640da6031382d2bf8eb51283bca2c6266957bca8"
+SRC_URI[sha256sum] = "2714d6b8fb2af3b363fc7c79b76d058753716345d1b6ebcd8870ecd0e4f7ef8c"
 
 DEPENDS = "coreutils-native"
 
