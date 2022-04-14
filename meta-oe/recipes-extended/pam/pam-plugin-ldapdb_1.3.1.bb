@@ -10,10 +10,8 @@ DEPENDS = "libpam openldap"
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-SRCREV = "84d7b260f1ae6857ae36e014c9a5968e8aa1cbe8"
-SRC_URI = "git://github.com/rmbreak/pam_ldapdb;branch=master;protocol=https \
-           file://0001-include-stdexcept-for-std-invalid_argument.patch \
-"
+SRCREV = "3e026863cad1fd45c760ee1bc93ef4f0606cc852"
+SRC_URI = "git://github.com/rmbreak/pam_ldapdb;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 
