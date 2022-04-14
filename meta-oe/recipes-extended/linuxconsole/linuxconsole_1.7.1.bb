@@ -12,6 +12,7 @@ DEPENDS = "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 
 SRC_URI = "\
     ${SOURCEFORGE_MIRROR}/linuxconsole/linuxconsoletools-${PV}.tar.bz2 \
+    file://0001-utils-Use-name-of-the-first-prerequisite-in-rule.patch \
     file://51-these-are-not-joysticks-rm.rules \
     file://60-joystick.rules \
     file://inputattachctl \
