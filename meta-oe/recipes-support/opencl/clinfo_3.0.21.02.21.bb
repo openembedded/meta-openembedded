@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd8857f774dfb0eefe1e80c8f9240a7e"
 
 SRC_URI = "git://github.com/Oblomov/clinfo.git;protocol=https;branch=master"
 
-SRCREV = "59d0daf898e48d76ccbb788acbba258fa0a8ba7c"
+SRCREV = "d34bc1a3bdc148e2e1fe64998398e1a0552ab04c"
 
 S = "${WORKDIR}/git"
 
