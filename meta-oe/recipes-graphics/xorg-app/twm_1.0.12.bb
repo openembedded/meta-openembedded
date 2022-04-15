@@ -6,8 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
 
 SRC_URI = "${XORG_MIRROR}/individual/app/${BPN}-${PV}.tar.gz"
-SRC_URI[md5sum] = "48e83210b39a7bfb492604ba0bcfb19e"
-SRC_URI[sha256sum] = "410ecabac54e6db7afd5c20a78d89c0134f3c74b149bee71b1fec775e6e060cc"
+SRC_URI[sha256sum] = "4150c9ec595520167ab8c4efcb5cf82641a4c4db78ce0a1cb4834e6aeb7c87fb"
 
 FILES:${PN} += "${datadir}/X11/twm/system.twmrc"
 ALTERNATIVE_NAME = "x-window-manager"
