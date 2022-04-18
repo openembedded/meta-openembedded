@@ -15,7 +15,7 @@ SRC_URI = "git://github.com/linux-audit/${BPN}-userspace.git;branch=master;proto
 "
 
 S = "${WORKDIR}/git"
-SRCREV = "b1b2728ccd83eeb0dffe29c01a5c97e14e6a0d8a"
+SRCREV = "f60b2d8f55c74be798a7f5bcbd6c587987f2578a"
 
 inherit autotools python3native update-rc.d systemd
 
@@ -70,7 +70,6 @@ FILES:${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/*/.debug"
 FILES:${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
 
 CONFFILES:auditd = "${sysconfdir}/audit/audit.rules"
-RDEPENDS:auditd = "bash"
 
 do_install:append() {
 	rm -f ${D}/${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.a
