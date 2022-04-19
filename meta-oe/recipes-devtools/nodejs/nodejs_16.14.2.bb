@@ -26,6 +26,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
            file://mips-less-memory.patch \
            file://system-c-ares.patch \
            file://0001-liftoff-Correct-function-signatures.patch \
+           file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
            "
 SRC_URI:append:class-target = " \
            file://0002-Using-native-binaries.patch \
@@ -36,7 +37,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
 SRC_URI:append:toolchain-clang:powerpc64le = " \
            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
            "
-SRC_URI[sha256sum] = "05eb64193e391fa8a2c159c0f60c171824715165f80c67fcab9dbc944e30c623"
+SRC_URI[sha256sum] = "e922e215cc68eb5f94d33e8a0b61e2c863b7731cc8600ab955d3822da90ff8d1"
 
 S = "${WORKDIR}/node-v${PV}"
 
