@@ -16,6 +16,7 @@ PV = "0.3.0+git${SRCPV}"
 
 SRC_URI = "gitsm://github.com/openthread/ot-br-posix.git;protocol=https;branch=main \
            file://0001-otbr-agent.service.in-remove-pre-exec-hook-for-mdns-.patch \
+           file://0001-cmake-Disable-nonnull-compare-warning-on-gcc.patch \
            "
 
 S = "${WORKDIR}/git"
