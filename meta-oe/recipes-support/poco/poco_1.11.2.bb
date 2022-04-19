@@ -12,7 +12,7 @@ SRC_URI = " \
     git://github.com/pocoproject/poco.git;branch=master;protocol=https \
     file://run-ptest \
    "
-SRCREV = "de61f0049175a941cc83c2615c3bdc5e947b89f9"
+SRCREV = "9d1c428c861f2e5ccf09149bbe8d2149720c5896"
 
 UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
 
