@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "\
 
 SRC_URI = "git://github.com/marshmallow-code/marshmallow.git;protocol=https;branch=dev"
 
-SRCREV = "41afdefd93afd1b95f48f45fd284ff8add3e91b7"
+SRCREV = "f251dfb08d79c755c2e95371f2c5580bf5937e60"
 
 S = "${WORKDIR}/git"
 
@@ -17,4 +17,12 @@ inherit setuptools3
 
 PIP_INSTALL_PACKAGE = "marshmallow"
 
-RDEPENDS:${PN} += "python3-core"
+RDEPENDS:${PN} += " \
+	python3-core \
+	python3-datetime \
+	python3-netclient \
+	python3-numbers \
+	python3-json \
+	python3-pprint \
+	python3-packaging \
+"
