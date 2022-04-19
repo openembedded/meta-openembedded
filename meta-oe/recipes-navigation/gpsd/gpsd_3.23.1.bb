@@ -73,8 +73,10 @@ do_install:append() {
     install -m 0644 ${S}/packaging/deb/etc_default_gpsd ${D}${sysconfdir}/default/gpsd.default
 
     # Support for python
-    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/gps
-    install -m 755 ${D}${libdir}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
+    if [ -d ${D}${libdir}/gps ]; then
+        install -d ${D}${PYTHON_SITEPACKAGES_DIR}/gps
+        install -m 755 ${D}${libdir}/gps/*.py ${D}${PYTHON_SITEPACKAGES_DIR}/gps
+    fi
 }
 
 PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
