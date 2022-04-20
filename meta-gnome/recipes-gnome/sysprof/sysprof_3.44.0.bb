@@ -13,16 +13,21 @@ DEPENDS += " \
     libxml2-native \
     glib-2.0 \
     json-glib \
-    libunwind \
 "
+
 SRC_URI += "file://0001-meson-Check-for-libunwind-instead-of-libunwind-gener.patch"
 SRC_URI[archive.sha256sum] = "ab5d9f5b71973b3088d58a1bfdf1dc23c39a02f5fce4e5e9c73e034b178b005b"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'sysprofd libsysprof', '', d)} \
-                  ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
+                  ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)} \
+                  libunwind"
+# nongnu libunwind needs porting to RV32
+PACKAGECONFIG:remove:riscv32 = "libunwind"
+
 PACKAGECONFIG[gtk] = "-Denable_gtk=true,-Denable_gtk=false,gtk+3 libdazzle"
 PACKAGECONFIG[sysprofd] = "-Dwith_sysprofd=bundled,-Dwith_sysprofd=none,polkit"
 PACKAGECONFIG[libsysprof] = "-Dlibsysprof=true,-Dlibsysprof=false,polkit"
+PACKAGECONFIG[libunwind] = "-Dlibunwind=true,-Dlibunwind=false,libunwind"
 
 EXTRA_OEMESON += "-Dsystemdunitdir=${systemd_unitdir}/system"
 
