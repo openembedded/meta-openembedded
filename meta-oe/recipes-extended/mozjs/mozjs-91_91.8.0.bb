@@ -22,7 +22,8 @@ S = "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
 
 inherit pkgconfig perlnative python3native rust
 
-DEPENDS += "zlib cargo-native python3"
+DEPENDS += "zlib cargo-native python3 icu"
+DEPENDS:remove:mipsarch = "icu"
 
 B = "${WORKDIR}/build"
 
@@ -39,8 +40,9 @@ export AS = "${CC}"
 export RUSTFLAGS
 
 JIT ?= ""
-
 JIT:mipsarch = "--disable-jit"
+ICU ?= "--with-system-icu"
+ICU:mipsarch = ""
 
 do_configure() {
     cd ${B}
@@ -52,8 +54,8 @@ do_configure() {
         --libdir=${libdir} \
         --disable-jemalloc \
         --disable-strip \
-        ${JIT}
-
+        ${JIT} \
+        ${ICU}
 }
 
 do_install() {
