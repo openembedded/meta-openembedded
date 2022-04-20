@@ -51,6 +51,7 @@ do_configure() {
         --prefix=${prefix} \
         --libdir=${libdir} \
         --disable-jemalloc \
+        --disable-strip \
         ${JIT}
 
 }
