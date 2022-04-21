@@ -3,9 +3,9 @@ write a wide range of image data, including animated images, video, \
 volumetric data, and scientific formats."
 SECTION = "devel/python"
 LICENSE = "BSD-2-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7b9bbbb543b6af3e6b53f9b7fb68f71d"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=24cb9a367a9e641b459a01c4d15256ba"
 
-SRC_URI[sha256sum] = "7f123cb23a77ac5abe8ed4e7ad6a60831a82de2c5d123463dcf1d4278c4779d2"
+SRC_URI[sha256sum] = "b21f009e52eb22b02b839f3bf2ae5374aaf0886317313c1358c6014e5383b539"
 
 inherit pypi setuptools3
 
