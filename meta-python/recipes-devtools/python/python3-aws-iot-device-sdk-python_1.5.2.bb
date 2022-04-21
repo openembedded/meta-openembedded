@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "\
     file://LICENSE.txt;md5=9ac49901b833e769c7d6f21e8dbd7b30 \
     file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9 \
 "
-SRCREV = "6ca6c73775c953114f83240a850a0d1ab49b68ac"
+SRCREV = "0ea1a2d013529839fc1e7448d19dadff25d581b4"
 SRC_URI = "git://github.com/aws/aws-iot-device-sdk-python;branch=master;protocol=https \
            file://0001-setup.py-Use-setuptools-instead-of-distutils.patch \
            "
