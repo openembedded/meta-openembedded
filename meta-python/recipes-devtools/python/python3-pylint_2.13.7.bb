@@ -3,7 +3,7 @@ HOMEPAGE= "http://www.pylint.org/"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
 
-SRC_URI[sha256sum] = "dab221658368c7a05242e673c275c488670144123f4bd262b2777249c1c0de9b"
+SRC_URI[sha256sum] = "911d3a97c808f7554643bcc5416028cfdc42eae34ed129b150741888c688d5d5"
 
 inherit pypi setuptools3
 
