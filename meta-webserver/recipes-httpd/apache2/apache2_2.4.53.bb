@@ -18,7 +18,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
           "
 
 SRC_URI_append_class-target = " \
-           file://0008-apache2-do-not-use-relative-path-for-gen_test_char.patch \
+           file://0010-apache2-do-not-use-relative-path-for-gen_test_char.patch \
            file://init \
            file://apache2-volatile.conf \
            file://apache2.service \
