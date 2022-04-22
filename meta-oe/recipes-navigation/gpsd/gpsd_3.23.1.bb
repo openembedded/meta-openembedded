@@ -79,7 +79,7 @@ do_install:append() {
     fi
 }
 
-PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
+PACKAGES =+ "libgps python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils gps-utils-python"
 
 RPROVIDES:${PN}-dbg += "python-pygps-dbg"
 
@@ -105,7 +105,6 @@ SUMMARY:gpsd-gpsctl = "Tool for tweaking GPS modes"
 FILES:gpsd-gpsctl = "${bindir}/gpsctl"
 
 SUMMARY:gps-utils = "Utils used for simulating, monitoring,... a GPS"
-# Python files are required for gps/fake, required for gpsfake.
 FILES:gps-utils = "\
     ${bindir}/cgps         \
     ${bindir}/gps2udp      \
