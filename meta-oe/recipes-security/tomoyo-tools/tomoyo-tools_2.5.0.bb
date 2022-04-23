@@ -26,5 +26,5 @@ do_compile () {
 }
 
 do_install() {
-    oe_runmake install INSTALLDIR=${D}
+    oe_runmake install SBINDIR=${base_sbindir} INSTALLDIR=${D}
 }
