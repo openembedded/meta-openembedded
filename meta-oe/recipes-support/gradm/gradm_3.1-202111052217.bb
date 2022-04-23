@@ -14,9 +14,9 @@ DEPENDS = "flex-native bison-native ${@bb.utils.contains('DISTRO_FEATURES', 'pam
 SRC_URI = "http://grsecurity.net/stable/${BP}.tar.gz \
            file://0001-Makefile-remove-strip.patch \
            file://0001-Makefile-Append-instead-of-overriding-LDFLAGS.patch \
+           file://0001-make-Define-SBINDIR-flag.patch \
            "
-SRC_URI[md5sum] = "5099c715433981d5a3eed8ded7c5bbc0"
-SRC_URI[sha256sum] = "d3a0b6383ff97a2054941d71133c737efae66afdd8eef59346c031ae15c75ff3"
+SRC_URI[sha256sum] = "2459290f367a47c8a1ce4ea2ec08359799ea33dc15ed4436439596ce88284fb9"
 
 S = "${WORKDIR}/gradm"
 
@@ -35,6 +35,7 @@ do_compile() {
 do_install() {
     oe_runmake 'CC=${CC}'                               \
                'DESTDIR=${D}'                           \
+               'SBINDIR=${base_sbindir}'                \
                'LIBS='                                  \
                'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
                'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
