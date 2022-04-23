@@ -76,7 +76,8 @@ do_compile:prepend () {
 }
 
 do_install:append() {
-	if [ -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service ]; then
+	if ! ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)} -a \
+            -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service; then
 		install -d ${D}${systemd_system_unitdir}
 		mv \
 		${D}${nonarch_libdir}/systemd/system/boinc-client.service \
