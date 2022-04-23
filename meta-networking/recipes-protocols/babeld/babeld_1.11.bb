@@ -12,8 +12,8 @@ SECTION = "net"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=411a48ac3c2e9e0911b8dd9aed26f754"
 
-SRC_URI = "git://github.com/jech/babeld.git;protocol=https;branch=master"
-SRCREV = "dbb8799d1b5b3bfaf4387386c92369c847704480"
+SRC_URI = "gitsm://github.com/jech/babeld.git;protocol=https;branch=master"
+SRCREV = "f82a10e97a02849cd82087863055c9af08ca3454"
 
 UPSTREAM_CHECK_GITTAGREGEX = "babeld-(?P<pver>\d+(\.\d+)+)"
 
@@ -24,6 +24,6 @@ do_compile () {
 }
 
 do_install () {
-	oe_runmake install.minimal PREFIX=${D}
+	oe_runmake install.minimal TARGET=${D} PREFIX=${root_prefix}
 }
 
