@@ -1,4 +1,4 @@
-From af97e2ad643334b4c7c3d66f971ce9ebb2b596af Mon Sep 17 00:00:00 2001
+From 1053cf25be28b266ba264705e11179cf4f04aa91 Mon Sep 17 00:00:00 2001
 From: Mingli Yu <mingli.yu@windriver.com>
 Date: Thu, 21 Jul 2016 18:06:21 +0800
 Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
@@ -13,14 +13,15 @@ Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
 Upstream-Status: Inappropriate[oe specific]
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+
 ---
  Makefile | 45 +++++++++++++++++++++++----------------------
  1 file changed, 23 insertions(+), 22 deletions(-)
 
-Index: git/Makefile
-===================================================================
---- git.orig/Makefile
-+++ git/Makefile
+diff --git a/Makefile b/Makefile
+index 6fa00bc..7aa7ae2 100644
+--- a/Makefile
++++ b/Makefile
 @@ -8,12 +8,6 @@ ifeq ($(strip $CC),)
  CC	= gcc
  endif
@@ -79,7 +80,7 @@ Index: git/Makefile
 +              -DRELEASE_DATE='"$(DATE)"'
 +
  SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
- SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c
+ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c tools.c printk.c
  OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
 @@ -52,12 +53,12 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
  
@@ -104,7 +105,7 @@ Index: git/Makefile
 +CFLAGS_COMMON += -DUSESNAPPY
  endif
  
- LIBS := -lpthread $(LIBS)
+ LIBS := $(LIBS) -lpthread
 @@ -90,14 +91,14 @@ LIBS := $(LIBS) $(call try-run,\
  all: makedumpfile
  
@@ -122,7 +123,7 @@ Index: git/Makefile
  	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
  	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
  	mv temp.8 makedumpfile.8
-@@ -108,7 +109,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(
+@@ -108,7 +109,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
  	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
  
  eppic_makedumpfile.so: extension_eppic.c
