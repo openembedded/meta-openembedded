@@ -24,5 +24,5 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +        install(FILES ${FLB_SYSTEMD_SCRIPT} DESTINATION /lib/systemd/system)
 +    endif()
      install(DIRECTORY DESTINATION ${FLB_INSTALL_CONFDIR})
-   elseif(IS_DIRECTORY /usr/share/upstart OR FLB_UPSTART)
+   elseif(FLB_UPSTART)
      set(FLB_UPSTART_SCRIPT "${PROJECT_SOURCE_DIR}/init/${FLB_OUT_NAME}.conf")
