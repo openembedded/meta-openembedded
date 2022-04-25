@@ -68,12 +68,14 @@ do_install:append() {
 
     install -m 0755 -d ${D}${sysconfdir}
     install -m 0755 -d ${D}${sysconfdir}/lirc
-    install -m 0755 -d ${D}${systemd_unitdir}/system
     install -m 0755 -d ${D}${libdir}/tmpfiles.d
     install -m 0644 ${WORKDIR}/lircd.conf ${D}${sysconfdir}/lirc/
     install -m 0644 ${WORKDIR}/lirc_options.conf ${D}${sysconfdir}/lirc/
-    install -m 0644 ${WORKDIR}/lircd.service ${D}${systemd_unitdir}/system/
-    install -m 0755 ${WORKDIR}/lircexec.init ${D}${systemd_unitdir}/system/
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -m 0755 -d ${D}${systemd_unitdir}/system
+        install -m 0644 ${WORKDIR}/lircd.service ${D}${systemd_unitdir}/system/
+        install -m 0755 ${WORKDIR}/lircexec.init ${D}${systemd_unitdir}/system/
+    fi
     install -m 0644 ${WORKDIR}/lirc.tmpfiles ${D}${libdir}/tmpfiles.d/lirc.conf
     rm -rf ${D}${libdir}/lirc/plugins/*.la
     rmdir ${D}/var/run/lirc ${D}/var/run
