@@ -1,7 +1,7 @@
 SUMMARY = "Linear Algebra PACKage"
 URL = "http://www.netlib.org/lapack"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=39902829ba0c2cbac1b0debfb75a416b"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=a32c99f24d097c72d1857e533b55642b"
 
 # Recipe needs FORTRAN support (copied from conf/local.conf.sample.extended)
 # Enabling FORTRAN
@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=39902829ba0c2cbac1b0debfb75a416b"
 
 DEPENDS = "libgfortran"
 
-SRCREV = "aa631b4b4bd13f6ae2dbab9ae9da209e1e05b0fc"
+SRCREV = "32b062a33352e05771dcc01b981ebe961bf2e42f"
 SRC_URI = "git://github.com/Reference-LAPACK/lapack.git;protocol=https;branch=master"
 S = "${WORKDIR}/git"
 
