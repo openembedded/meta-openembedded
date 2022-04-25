@@ -36,6 +36,7 @@ RDEPENDS:${PN}:class-target = "iproute2 python3-core bash"
 PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
 PACKAGECONFIG:class-native = ""
 
+PACKAGECONFIG[fpm] = "--enable-fpm,--disable-fpm"
 PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam"
 PACKAGECONFIG[grpc] = "--enable-grpc,--disable-grpc,grpc-native grpc"
 PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
@@ -52,7 +53,6 @@ EXTRA_OECONF:class-target = "--sbindir=${libdir}/frr \
                              --sysconfdir=${sysconfdir}/frr \
                              --localstatedir=${localstatedir}/run/frr \
                              --enable-vtysh \
-                             --enable-fpm \
                              --enable-multipath=64 \
                              --enable-user=frr \
                              --enable-group=frr \
