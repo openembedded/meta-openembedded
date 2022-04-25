@@ -1,5 +1,5 @@
 #
-# The PAM configuration file for the quagga `vtysh' service
+# The PAM configuration file for the frr `vtysh' service
 #
 
 # This allows root to change user infomation without being
