@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=587b3fd7fd291e418ff4d2b8f3904755"
 SECTION = "libs/networking"
 
 SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master"
-SRCREV = "1749fd7b039165a91b8d556b4df18e3e632ad830"
+SRCREV = "a081f1720f576d3e72ddce14e159ba90384e5b92"
 
 S = "${WORKDIR}/git"
 
