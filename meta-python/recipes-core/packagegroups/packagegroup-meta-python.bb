@@ -300,6 +300,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pydicti \
     python3-pyephem \
     python3-pyexpect \
+    python3-pyfanotify \
     python3-pyfirmata \
     python3-pyflakes \
     python3-pyhamcrest \
