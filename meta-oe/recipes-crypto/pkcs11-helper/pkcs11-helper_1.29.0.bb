@@ -19,7 +19,7 @@ SRC_URI = "git://github.com/OpenSC/${BPN}.git;branch=master;protocol=https"
 
 S = "${WORKDIR}/git"
 # v1.27
-SRCREV = "a4b46d545c33459610d4b4ae85a43a76e03a8c5e"
+SRCREV = "2306f896c2f3c147792300155316fd65825aabad"
 
 UPSTREAM_CHECK_GITTAGREGEX = "pkcs11-helper-(?P<pver>\d+(\.\d+)+)"
 
