@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f9dcc2d8acdde215fa4bd6ac12bb14f0"
 SRC_URI = "git://github.com/libguestfs/nbdkit.git;protocol=https;branch=master \
 "
 
-SRCREV = "ff4bc950c336477de1765ab1f0826c199f013ffd"
+SRCREV = "4a5e55f798beb922dd4bbfd7c40837e35a9754b6"
 
 S = "${WORKDIR}/git"
 
