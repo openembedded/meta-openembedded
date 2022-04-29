@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
 SRC_URI = "git://github.com/fwupd/fwupd-efi;protocol=https;branch=main \
            file://cc.patch"
-SRCREV = "8de5918507dcc797e612aac688d6b60b90053f54"
+SRCREV = "36ce593f58e391cca43fd388824496ff98d83480"
 S = "${WORKDIR}/git"
 
 DEPENDS = "gnu-efi"
