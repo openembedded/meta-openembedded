@@ -18,7 +18,7 @@ S = "${WORKDIR}/wxPython-${PV}"
 
 inherit pypi setuptools3 pkgconfig features_check
 
-ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+REQUIRED_DISTRO_FEATURES = "x11"
 
 export WX_CONFIG = "'${RECIPE_SYSROOT_NATIVE}${bindir}/wx-config --prefix=${STAGING_EXECPREFIXDIR} --baselib=${baselib}'"
 
