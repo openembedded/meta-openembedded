@@ -209,6 +209,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-lazy-object-proxy \
     python3-libconf \
     python3-license-expression \
+    python3-ldap \
     python3-lockfile \
     python3-lorem \
     python3-lrparsing \
