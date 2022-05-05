@@ -5,7 +5,9 @@ PR = "r7"
 
 SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
            file://devmem2-fixups-2.patch;apply=yes;striplevel=0 \
-           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch"
+           file://0001-devmem.c-ensure-word-is-32-bit-and-add-support-for-6.patch \
+           file://0001-devmem2-support-different-page-sizes-at-run-time.patch \
+"
 
 S = "${WORKDIR}"
 
