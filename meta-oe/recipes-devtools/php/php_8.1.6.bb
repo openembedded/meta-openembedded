@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
           "
 
 S = "${WORKDIR}/php-${PV}"
-SRC_URI[sha256sum] = "827de56771c3ab8313a069812f15f6ec49989d510aebd0dce180839c6d8d6ff3"
+SRC_URI[sha256sum] = "7b353304b7407554f70d3e101a226a1fc22decae5c4c42ed270c4e389bfa1b66"
 
 inherit autotools pkgconfig python3native gettext
 
