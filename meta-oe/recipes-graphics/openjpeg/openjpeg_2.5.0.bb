@@ -5,14 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
 
 DEPENDS = "libpng tiff lcms zlib"
 
-SRC_URI = " \
-    git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
-    file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-    file://0001-This-patch-fixed-include-dir-to-usr-include-.-Obviou.patch \
-    file://CVE-2021-29338.patch \
-    file://CVE-2022-1122.patch \
-"
-SRCREV = "37ac30ceff6640bbab502388c5e0fa0bff23f505"
+SRC_URI = "git://github.com/uclouvain/openjpeg.git;branch=master;protocol=https \
+           file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
+           "
+SRCREV = "a5891555eb49ed7cc26b2901ea680acda136d811"
 S = "${WORKDIR}/git"
 
 inherit cmake
