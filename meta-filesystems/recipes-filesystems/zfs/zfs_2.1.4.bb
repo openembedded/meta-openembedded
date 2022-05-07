@@ -54,3 +54,5 @@ FILES:${PN}-dev += "\
     ${prefix}/src/zfs-${PV}/* \
     ${prefix}/src/spl-${PV}/* \
     "
+# Not yet ported to rv32
+COMPATIBLE_HOST:riscv32 = "null"
