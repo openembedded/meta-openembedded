@@ -56,3 +56,5 @@ FILES:${PN}-dev += "\
     "
 # Not yet ported to rv32
 COMPATIBLE_HOST:riscv32 = "null"
+# conflicting definition of ABS macro from asm/asm.h from kernel
+COMPATIBLE_HOST:mips = "null"
