@@ -1,4 +1,3 @@
-
 SUMMARY = "OpenZFS on Linux and FreeBSD"
 DESCRIPTION = "OpenZFS on Linux and FreeBSD"
 LICENSE = "CDDL-1.0"
@@ -17,15 +16,17 @@ inherit module-base pkgconfig autotools
 
 DEPENDS = "virtual/kernel zlib util-linux libtirpc openssl curl"
 
+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd sysvinit', d)}"
+
 PACKAGECONFIG[pam] = "--enable-pam --with-pamconfigsdir=${datadir}/pam-configs --with-pammoduledir=${libdir}/security, --disable-pam"
+PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,"
+PACKAGECONFIG[sysvinit] = "--enable-sysvinit,--disable-sysvinit,"
 
 EXTRA_OECONF:append = " \
     --disable-pyzfs \
     --with-linux=${STAGING_KERNEL_DIR} --with-linux-obj=${STAGING_KERNEL_BUILDDIR} \
     --with-mounthelperdir=${base_sbin} \
     --with-udevdir=${base_libdir}/udev \
-    --enable-systemd \
-    --disable-sysvinit \
     --without-dracutdir \
     "
 
