@@ -19,7 +19,7 @@ inherit gnomebase gtk-icon-cache itstool gnome-help mime-xdg features_check
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 REQUIRED_DISTRO_FEATURES = "opengl"
 
-SRC_URI[archive.sha256sum] = "0e32140ee1c13428563bcd5f784e61ee22ffd1ad27d8c02283b4358a81dfab50"
+SRC_URI[archive.sha256sum] = "a3c8508033bfb63a8b48a062ac1e67b2c333ba0153879b38c661968a103ad15c"
 
 FILES:${PN} += " \
     ${datadir}/metainfo \
