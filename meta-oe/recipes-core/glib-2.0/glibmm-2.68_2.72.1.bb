@@ -13,7 +13,7 @@ inherit gnomebase
 
 SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
 
-SRC_URI[archive.sha256sum] = "8008fd8aeddcc867a3f97f113de625f6e96ef98cf7860379813a9c0feffdb520"
+SRC_URI[archive.sha256sum] = "2a7649a28ab5dc53ac4dabb76c9f61599fbc628923ab6a7dd74bf675d9155cd8"
 
 S = "${WORKDIR}/${GNOMEBN}-${PV}"
 
