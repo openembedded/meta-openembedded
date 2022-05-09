@@ -1,0 +1,150 @@
+From aa628ccdc4dec1c129c1bd98b53ef94d8c2e119a Mon Sep 17 00:00:00 2001
+From: Richard Neill <richard.neill@arm.com>
+Date: Mon, 9 May 2022 12:20:48 +0100
+Subject: [PATCH] Fix status in teardown* overriding exit code
+
+Patch fixes regression which produces false-negatives in v1.6.0, where the
+teardown function can cause BATS to report success even if test cases fail.
+Fixes: https://github.com/bats-core/bats-core/issues/575
+
+Upstream-Status: Backport [Adapted from https://github.com/bats-core/bats-core/commit/5f372058b05f817e4e3a8dab27f83c30fd467504]
+Signed-off-by: Richard Neill <richard.neill@arm.com>
+---
+ libexec/bats-core/bats-exec-file  | 18 ++++++++----------
+ libexec/bats-core/bats-exec-suite | 12 ++++++------
+ libexec/bats-core/bats-exec-test  |  8 ++++----
+ 3 files changed, 18 insertions(+), 20 deletions(-)
+
+diff --git a/libexec/bats-core/bats-exec-file b/libexec/bats-core/bats-exec-file
+index 298441b..63452c7 100755
+--- a/libexec/bats-core/bats-exec-file
++++ b/libexec/bats-core/bats-exec-file
+@@ -118,7 +118,6 @@ bats_run_teardown_file() {
+
+ bats_file_teardown_trap() {
+   bats_run_teardown_file
+-  local status=0
+   bats_file_exit_trap
+ }
+
+@@ -144,9 +143,9 @@ bats_file_exit_trap() {
+     bats_print_failed_command "${stack_trace[@]}" >&3
+     bats_prefix_lines_for_tap_output < "$BATS_OUT" | bats_replace_filename >&3
+     rm -rf "$BATS_OUT"
+-    status=1
++    bats_exec_file_status=1
+   fi
+-  exit $status
++  exit $bats_exec_file_status
+ }
+
+ function setup_file() {
+@@ -250,15 +249,15 @@ bats_read_tests_list_file() {
+ }
+
+ bats_run_tests() {
+-  status=0
++  bats_exec_file_status=0
+
+   if [[ "$num_jobs" != 1 && "${BATS_NO_PARALLELIZE_WITHIN_FILE-False}" == False ]]; then
+     export BATS_SEMAPHORE_NUMBER_OF_SLOTS="$num_jobs"
+-    bats_run_tests_in_parallel "$BATS_RUN_TMPDIR/parallel_output" || status=1
++    bats_run_tests_in_parallel "$BATS_RUN_TMPDIR/parallel_output" || bats_exec_file_status=1
+   else
+     for test_name in "${tests_to_run[@]}"; do
+       if [[ "${BATS_INTERRUPTED-NOTSET}" != NOTSET ]]; then
+-        status=130 # bash's code for SIGINT exits
++        bats_exec_file_status=130 # bash's code for SIGINT exits
+         break
+       fi
+       # Only handle non-empty lines
+@@ -267,14 +266,13 @@ bats_run_tests() {
+         ((++test_number_in_file))
+         # deal with empty flags to avoid spurious "unbound variable" errors on Bash 4.3 and lower
+         if [[ "${#flags[@]}" -gt 0 ]]; then
+-          "$BATS_LIBEXEC/bats-exec-test" "${flags[@]}" "$filename" "$test_name" "$test_number_in_suite" "$test_number_in_file" || status=1
++          "$BATS_LIBEXEC/bats-exec-test" "${flags[@]}" "$filename" "$test_name" "$test_number_in_suite" "$test_number_in_file" || bats_exec_file_status=1
+         else
+-          "$BATS_LIBEXEC/bats-exec-test" "$filename" "$test_name" "$test_number_in_suite" "$test_number_in_file" || status=1
++          "$BATS_LIBEXEC/bats-exec-test" "$filename" "$test_name" "$test_number_in_suite" "$test_number_in_file" || bats_exec_file_status=1
+         fi
+       fi
+     done
+   fi
+-  export status
+ }
+
+ bats_create_file_tempdirs() {
+@@ -322,4 +320,4 @@ bats_run_tests
+ trap bats_interrupt_trap INT
+ bats_run_teardown_file
+
+-exit $status
++exit $bats_exec_file_status
+diff --git a/libexec/bats-core/bats-exec-suite b/libexec/bats-core/bats-exec-suite
+index 05c66f4..4d440ae 100755
+--- a/libexec/bats-core/bats-exec-suite
++++ b/libexec/bats-core/bats-exec-suite
+@@ -135,10 +135,10 @@ bats_exit_trap() {
+   if [[ ${BATS_INTERRUPTED-NOTSET} != NOTSET ]]; then
+     printf "\n# Received SIGINT, aborting ...\n\n"
+   fi
+-  exit "$status"
++  exit "$bats_exec_suite_status"
+ }
+
+-status=0
++bats_exec_suite_status=0
+ printf '1..%d\n' "${test_count}"
+
+ # No point on continuing if there's no tests.
+@@ -163,15 +163,15 @@ if [[ "$num_jobs" -gt 1 ]] && [[ -z "$bats_no_parallelize_across_files" ]]; then
+   # shellcheck disable=SC2086,SC2068
+   # we need to handle the quoting of ${flags[@]} ourselves,
+   # because parallel can only quote it as one
+-  parallel --keep-order --jobs "$num_jobs" bats-exec-file "$(printf "%q " "${flags[@]}")" "{}" "$TESTS_LIST_FILE"  ::: "${BATS_UNIQUE_TEST_FILENAMES[@]}" 2>&1 || status=1
++  parallel --keep-order --jobs "$num_jobs" bats-exec-file "$(printf "%q " "${flags[@]}")" "{}" "$TESTS_LIST_FILE"  ::: "${BATS_UNIQUE_TEST_FILENAMES[@]}" 2>&1 || bats_exec_suite_status=1
+ else
+   for filename in "${BATS_UNIQUE_TEST_FILENAMES[@]}"; do
+     if [[ "${BATS_INTERRUPTED-NOTSET}" != NOTSET ]]; then
+-      status=130 # bash's code for SIGINT exits
++      bats_exec_suite_status=130 # bash's code for SIGINT exits
+       break
+     fi
+-    bats-exec-file "${flags[@]}" "$filename" "${TESTS_LIST_FILE}" || status=1
++    bats-exec-file "${flags[@]}" "$filename" "${TESTS_LIST_FILE}" || bats_exec_suite_status=1
+   done
+ fi
+
+-exit "$status"
++exit "$bats_exec_suite_status"
+diff --git a/libexec/bats-core/bats-exec-test b/libexec/bats-core/bats-exec-test
+index aae4572..57bdf18 100755
+--- a/libexec/bats-core/bats-exec-test
++++ b/libexec/bats-core/bats-exec-test
+@@ -94,18 +94,18 @@ source "$BATS_ROOT/lib/bats-core/tracing.bash"
+
+ bats_teardown_trap() {
+   bats_check_status_from_trap
+-  local status=0
++  local bats_teardown_trap_status=0
+   # mark the start of this function to distinguish where skip is called
+   # parameter 1 will signify the reason why this function was called
+   # this is used to identify when this is called as exit trap function
+   BATS_TEARDOWN_STARTED=${1:-1}
+-  teardown >>"$BATS_OUT" 2>&1 || status="$?"
++  teardown >>"$BATS_OUT" 2>&1 || bats_teardown_trap_status="$?"
+
+-  if [[ $status -eq 0 ]]; then
++  if [[ $bats_teardown_trap_status -eq 0 ]]; then
+     BATS_TEARDOWN_COMPLETED=1
+   elif [[ -n "$BATS_TEST_COMPLETED" ]]; then
+     BATS_DEBUG_LAST_STACK_TRACE_IS_VALID=1
+-    BATS_ERROR_STATUS="$status"
++    BATS_ERROR_STATUS="$bats_teardown_trap_status"
+   fi
+
+   bats_exit_trap
+--
+2.25.1
+
