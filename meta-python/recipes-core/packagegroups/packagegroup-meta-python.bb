@@ -92,6 +92,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-dbus-next \
     python3-dbussy \
     python3-decorator \
+    python3-decouple \
     python3-defusedxml \
     python3-dill \
     python3-diskcache \
