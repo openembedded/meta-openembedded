@@ -474,6 +474,7 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-dominate-ptest \
     python3-geojson-ptest \
     python3-gunicorn-ptest \
+    python3-hexbytes \
     python3-html2text-ptest \
     python3-inflection-ptest \
     python3-intervals-ptest \
