@@ -405,6 +405,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-thrift \
     python3-tinyrecord \
     python3-tornado \
+    python3-toolz \
     python3-tqdm \
     python3-trafaret \
     python3-trafaret-config \
