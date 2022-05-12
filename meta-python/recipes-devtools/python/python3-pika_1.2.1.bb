@@ -6,9 +6,9 @@ including RabbitMQ’s extensions. \
 SECTION = "devel/python"
 HOMEPAGE = "https://pika.readthedocs.io"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=278bdfee5b51616941c1f6b2f1cfcb99"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=678ec81495ba50edf81e84e4f1aa69f3"
 
-SRC_URI[sha256sum] = "f023d6ac581086b124190cb3dc81dd581a149d216fa4540ac34f9be1e3970b89"
+SRC_URI[sha256sum] = "e5fbf3a0a3599f4e114f6e4a7af096f9413a8f24f975c2657ba2fac3c931434f"
 
 inherit pypi setuptools3
 
