@@ -223,6 +223,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-lockfile \
     python3-lorem \
     python3-lrparsing \
+    python3-lru-dict \
     python3-luma-core \
     python3-luma-oled \
     python3-lxml \
