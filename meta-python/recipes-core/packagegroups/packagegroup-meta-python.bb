@@ -443,6 +443,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-visitor \
     python3-waitress \
     python3-watchdog \
+    python3-web3 \
     python3-webcolors \
     python3-webencodings \
     python3-websocket-client \
