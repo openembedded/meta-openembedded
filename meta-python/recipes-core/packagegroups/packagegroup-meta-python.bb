@@ -372,6 +372,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-rfc3339-validator \
     python3-rfc3986-validator \
     python3-rfc3987 \
+    python3-rlp \
     python3-robotframework \
     python3-robotframework-seriallibrary \
     python3-rsa \
