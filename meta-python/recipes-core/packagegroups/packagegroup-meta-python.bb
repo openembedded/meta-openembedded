@@ -261,6 +261,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-paramiko \
     python3-parse \
     python3-parse-type \
+    python3-parsimonious \
     python3-parso \
     python3-passlib \
     python3-pastedeploy \
