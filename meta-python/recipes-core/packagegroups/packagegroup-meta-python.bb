@@ -111,6 +111,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-engineio \
     python3-et-xmlfile \
     python3-eth-hash \
+    python3-eth-keyfile \
     python3-eth-keys \
     python3-eth-typing \
     python3-eth-utils \
