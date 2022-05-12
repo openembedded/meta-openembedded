@@ -86,6 +86,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-custom-inherit \
     ${@bb.utils.contains_any('FORTRAN', [',fortran',',f77'], 'python3-cvxopt', '', d)} \
     python3-cycler \
+    python3-cytoolz \
     python3-dateparser \
     python3-dateutil \
     python3-dbus-next \
