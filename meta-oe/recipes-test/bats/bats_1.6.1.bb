@@ -7,12 +7,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
 SRC_URI = "\
-  git://github.com/bats-core/bats-core.git;branch=master;protocol=https \
-  file://0001-Fix-status-in-teardown-overriding-exit-code.patch \
+  git://github.com/bats-core/bats-core.git;branch=version/1.6.x;protocol=https \
   "
 
-# v1.6.0
-SRCREV = "210acf3a8ed318ddedad3137c15451739beba7d4"
+# v1.6.1
+SRCREV = "1977254c2a7faa2e0af17355856f91dc471d1daa"
 
 S = "${WORKDIR}/git"
 
