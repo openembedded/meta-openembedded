@@ -186,6 +186,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-imgtool \
     python3-incremental \
     python3-inflection \
+    python3-inotify \
     python3-intelhex \
     python3-intervals \
     python3-ipaddress \
