@@ -9,7 +9,7 @@ DEPENDS += "php"
 
 SRC_URI = "git://github.com/smarty-php/smarty.git;protocol=https;branch=master"
 
-SRCREV = "9e0536de18b53ba193364291ef0303b0ab9903e1"
+SRCREV = "71036be8be02bf93735c47b0b745f722efbc729f"
 
 S = "${WORKDIR}/git"
 
