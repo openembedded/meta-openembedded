@@ -436,6 +436,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-typeguard \
     python3-tzlocal \
     python3-u-msgpack-python \
+    python3-uinput \
     python3-ujson \
     python3-unidiff \
     python3-uritemplate \
