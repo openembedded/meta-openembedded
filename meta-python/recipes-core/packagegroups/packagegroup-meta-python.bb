@@ -167,6 +167,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-h11 \
     python3-h2 \
     python3-h5py \
+    python3-hatchling \
     python3-haversine \
     python3-hpack \
     python3-html2text \
