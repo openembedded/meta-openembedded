@@ -389,6 +389,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-send2trash \
     python3-sentry-sdk \
     python3-serpent \
+    python3-setuptools-scm-git-archive \
     python3-sh \
     python3-sijax \
     python3-simpleeval \
