@@ -77,6 +77,8 @@ LDFLAGS += " -pthread"
 BUILD_CFLAGS += "-fuse-ld=bfd"
 BUILD_CXXFLAGS += "-fuse-ld=bfd"
 
+LDFLAGS:x86:toolchain-clang = "-latomic"
+
 EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
                  -DWITH_JEMALLOC=no \
                  -DWITHOUT_TOKUDB=TRUE \
