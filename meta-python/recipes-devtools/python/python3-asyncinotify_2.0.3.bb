@@ -3,7 +3,7 @@ HOMEPAGE = "https://gitlab.com/Taywee/asyncinotify"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=6ec941a1cd6616454970d03cb9c9e8f8"
 
-SRC_URI[sha256sum] = "867cc056d88fc07aa8b3d1dc5b9c3c911cdd6130a4df5f67beb1fdecfd37b164"
+SRC_URI[sha256sum] = "a14baf680a3d3e1cf54e082ab56f56c475d59d3644cfc25c00c460e56d9bbdf7"
 
 inherit pypi setuptools3
 
