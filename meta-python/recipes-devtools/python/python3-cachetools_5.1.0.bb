@@ -6,7 +6,7 @@ Python 3 Standard Library @lru_cache function decorator."
 SECTION = "devel/python"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=439a07e400525964c3c82684146e46eb"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1ec55353c80c662e4255f8889a0ca558"
 
 inherit pypi python_setuptools_build_meta ptest
 
@@ -27,6 +27,6 @@ do_install_ptest() {
 	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 }
 
-SRC_URI[sha256sum] = "486471dfa8799eb7ec503a8059e263db000cdda20075ce5e48903087f79d5fd6"
+SRC_URI[sha256sum] = "8b3b8fa53f564762e5b221e9896798951e7f915513abf2ba072ce0f07f3f5a98"
 
 BBCLASSEXTEND = "native nativesdk"
