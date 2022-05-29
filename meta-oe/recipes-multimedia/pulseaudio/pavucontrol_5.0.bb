@@ -8,16 +8,19 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
 # AM_GLIB_GNU_GETTEXT macro in configure.ac. That macro is deprecated, so the
 # glib-2.0-native dependency may go away at some point (something to keep in
 # mind when doing version upgrades).
-DEPENDS = "libxml-parser-perl-native intltool-native glib-2.0-native gtkmm3 libcanberra pulseaudio"
+DEPENDS = "libxml-parser-perl-native intltool-native glib-2.0-native gtkmm3 pulseaudio json-glib"
 
 inherit autotools features_check perlnative pkgconfig
 
-REQUIRED_DISTRO_FEATURES = "x11"
+ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz \
-          "
-SRC_URI[md5sum] = "9dcc2c76292e7e5e075d51b8dcb20202"
-SRC_URI[sha256sum] = "8fc45bac9722aefa6f022999cbb76242d143c31b314e2dbb38f034f4069d14e2"
+SRC_URI = "http://freedesktop.org/software/pulseaudio/${BPN}/${BP}.tar.xz"
+SRC_URI:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'file://0001-pavucontrol-remove-canberra-gtk-support.patch', '', d)}"
+
+SRC_URI[sha256sum] = "ce2b72c3b5f1a70ad0df19dd81750f9455bd20870d1d3a36d20536af2e8f4e7a"
+
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
+PACKAGECONFIG[x11] = ",,libcanberra"
 
 EXTRA_OECONF = "--disable-lynx "
 
