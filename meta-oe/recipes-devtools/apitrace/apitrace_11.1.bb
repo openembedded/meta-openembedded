@@ -5,8 +5,8 @@ LICENSE = "MIT & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=aeb969185a143c3c25130bc2c3ef9a50 \
                     file://thirdparty/snappy/COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
 
-SRCREV = "c54d99563414cd178abec7cf7d9663eb949a0f51"
-PV .= "+10.0.1+git${SRCPV}"
+SRCREV = "9352fc02bba106fbbeef9e8452ef34643c0d0764"
+PV .= "+11.1+git${SRCPV}"
 SRC_URI = "gitsm://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
           "
 
