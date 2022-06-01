@@ -36,6 +36,7 @@ RDEPENDS:${PN} = "\
     python3-dateutil \
     python3-kiwisolver \
     python3-pytz \
+    python3-pillow \
 "
 
 ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/setup.cfg"
