@@ -24,8 +24,9 @@ def gnome_verdir(v):
 SRC_URI[archive.sha256sum] = "7f1fd43df5110d4c37de6541993f41f0fbc3efc790900e92053479ba069920e9"
 
 # gobject-introspection is mandatory and cannot be configured
-# x11 is needed for tepl and gtksourceview4
-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data x11"
+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+
 GIR_MESON_OPTION = ""
 
 GTKDOC_MESON_OPTION = "gtk_doc"
