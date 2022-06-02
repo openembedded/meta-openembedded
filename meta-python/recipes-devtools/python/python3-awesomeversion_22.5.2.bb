@@ -4,6 +4,8 @@ SECTION = "devel/python"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENCE.md;md5=92622b5a8e216099be741d78328bae5d"
 
-SRC_URI[sha256sum] = "84bcd85ab1bb9a287cfd1b2e5145f888b6e02ef3e3a63a07453f10f2f6e50fe3"
+SRC_URI[sha256sum] = "051f89efd8ba0b157fb516bda5e1dad4d63f87e8f9c0c148930023d984fce62f"
+
+RDEPENDS:${PN} += "python3-profile python3-logging"
 
 inherit pypi setuptools3
