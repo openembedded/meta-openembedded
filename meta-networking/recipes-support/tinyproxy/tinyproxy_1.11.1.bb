@@ -9,8 +9,7 @@ SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
            file://tinyproxy.conf \
            "
 
-SRC_URI[md5sum] = "658db5558ffb849414341b756a546a99"
-SRC_URI[sha256sum] = "20f74769e40144e4d251d2977cc4c40d2d428a2bec8c1b8709cd07315454baef"
+SRC_URI[sha256sum] = "1574acf7ba83c703a89e98bb2758a4ed9fda456f092624b33cfcf0ce2d3b2047"
 
 UPSTREAM_CHECK_URI = "https://github.com/tinyproxy/tinyproxy/releases"
 
