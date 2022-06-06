@@ -42,6 +42,10 @@ NETWORKMANAGER_DNS_RC_MANAGER_DEFAULT ??= "auto"
 # ['dhcpcanon', 'dhclient', 'dhcpcd', 'internal', 'nettools']
 NETWORKMANAGER_DHCP_DEFAULT ??= "internal"
 
+# The default gets detected based on whether /usr/sbin/nft or /usr/sbin/iptables is installed, with nftables preferred.
+# ['', 'iptables', 'nftables']
+NETWORKMANAGER_FIREWALL_DEFAULT ??= "nftables"
+
 EXTRA_OEMESON = "\
     -Difcfg_rh=false \
     -Dtests=yes \
@@ -238,7 +242,7 @@ FILES:${PN}-daemon += " \
     ${systemd_system_unitdir} \
 "
 RRECOMMENDS:${PN}-daemon += "\
-    iptables \
+    ${NETWORKMANAGER_FIREWALL_DEFAULT} \
     ${@bb.utils.filter('PACKAGECONFIG', 'dnsmasq', d)} \
 "
 INITSCRIPT_NAME:${PN}-daemon = "network-manager"
