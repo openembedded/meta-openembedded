@@ -12,13 +12,12 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
 
 DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
 
-SRCREV ?= "a7bcf2036b34d5043dbc33fee7d98bae5859c4d3"
+SRCREV ?= "0d8b5e93fc62eb0f41e18a2d9d845331d7af36ec"
 
-# Patches 0001, 0002 will be in ModemManager > 1.18.6
+# Patch 0001 will be in ModemManager > 1.19
 SRC_URI = " \
     git://gitlab.freedesktop.org/mobile-broadband/ModemManager.git;protocol=https;branch=mm-1-18 \
     file://0001-core-switch-bash-shell-scripts-to-use-bin-sh-for-use.patch \
-    file://0002-fcc-unlock-Make-scripts-POSIX-shell-compatible.patch \
 "
 
 S = "${WORKDIR}/git"
