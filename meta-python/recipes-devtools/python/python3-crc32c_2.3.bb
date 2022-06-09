@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
     file://crc32c_adler.c;startline=9;endline=24;md5=c60e6e55d0e5d95effa6fad27db0711a \
 "
 
-SRC_URI[sha256sum] = "3d058e7a5e37e4985d1a7ad4cb702bca56b490daa658d4851377d13ead8b435e"
+SRC_URI[sha256sum] = "17ce6c596ad0d53df52dcd72defb66984aeabd98fbefea7ba848a6b6bdece36a"
 
 inherit pypi setuptools3
 
