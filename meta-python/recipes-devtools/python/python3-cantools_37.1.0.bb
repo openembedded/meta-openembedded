@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/cantools"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
 
-SRC_URI[sha256sum] = "e603a7e1e40f5b4963c4c64cf4b013264afa009e232a878c73d31c29942e4466"
+SRC_URI[sha256sum] = "9f2449e94a7698bd44bb50d9b464788053a0bf070faa09a132535c3aa07e7e6a"
 
 PYPI_PACKAGE = "cantools"
 
@@ -16,6 +16,7 @@ RDEPENDS:${PN} += "\
 	${PYTHON_PN}-textparser \
 	${PYTHON_PN}-typing-extensions \
 	${PYTHON_PN}-diskcache \
+        ${PYTHON_PN}-asyncio \
 "
 
 CLEANBROKEN = "1"
