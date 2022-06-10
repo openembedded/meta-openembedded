@@ -176,12 +176,24 @@ SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 ALTERNATIVE:${PN}-doc = "htpasswd.1"
 ALTERNATIVE_LINK_NAME[htpasswd.1] = "${mandir}/man1/htpasswd.1"
 
-PACKAGES = "${PN}-scripts ${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
+PACKAGES = "${PN}-utils ${PN}-scripts ${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
 
 CONFFILES:${PN} = "${sysconfdir}/${BPN}/httpd.conf \
                    ${sysconfdir}/${BPN}/magic \
                    ${sysconfdir}/${BPN}/mime.types \
                    ${sysconfdir}/${BPN}/extra/*"
+
+FILES:${PN}-utils = "${bindir}/ab \
+                     ${bindir}/htdbm \
+                     ${bindir}/htdigest \
+                     ${bindir}/htpasswd \
+                     ${bindir}/logresolve \
+                     ${bindir}/httxt2dbm \
+                     ${sbindir}/htcacheclean \
+                     ${sbindir}/fcgistarter \
+                     ${sbindir}/checkgid \
+                     ${sbindir}/rotatelogs \
+                    "
 
 # We override here rather than append so that .so links are
 # included in the runtime package rather than here (-dev)
@@ -207,7 +219,7 @@ FILES:${PN} += "${datadir}/${BPN}/ ${libdir}/cgi-bin"
 
 FILES:${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
 
-RDEPENDS:${PN} += "openssl libgcc"
+RDEPENDS:${PN} += "openssl libgcc ${PN}-utils"
 RDEPENDS:${PN}-scripts += "perl ${PN}"
 RDEPENDS:${PN}-dev = "perl"
 
