@@ -8,6 +8,7 @@ DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '
 inherit autotools systemd update-rc.d
 
 SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+           file://0001-configure.ac-eliminate-build-path-from-openvpn-versi.patch \
            file://openvpn \
            file://openvpn@.service \
            file://openvpn-volatile.conf"
