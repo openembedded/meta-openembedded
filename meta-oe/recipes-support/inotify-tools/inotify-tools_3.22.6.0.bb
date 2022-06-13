@@ -5,7 +5,7 @@ SECTION = "console/devel"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
 
-SRCREV = "4b72dcd15299e1d0cb096397d9aab513ffed1657"
+SRCREV = "c8bdbc0a2ed822fc7c67c5c3e102d89fe27fb2d0"
 
 SRC_URI = "git://github.com/${BPN}/${BPN};branch=master;protocol=https \
            file://0002-libinotifytools-Bridge-differences-between-musl-glib.patch \
