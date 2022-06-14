@@ -40,7 +40,7 @@ PACKAGECONFIG ??= ""
 PACKAGECONFIG[nautilus] = "-Dnautilus=true,-Dnautilus=false,nautilus"
 
 RDEPENDS:${PN} += "glib-2.0-utils"
-RRECOMMMENDS_${PN} = "adwaita-icon-theme"
+RRECOMMENDS:${PN} = "adwaita-icon-theme"
 
 PACKAGES =+ "${PN}-nautilus-extension"
 
