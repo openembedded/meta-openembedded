@@ -50,3 +50,5 @@ do_install:append() {
 
 # Satisfy the -dev runtime dependency
 ALLOW_EMPTY:${PN} = "1"
+
+CVE_PRODUCT = "tuxera:ntfs-3g"
