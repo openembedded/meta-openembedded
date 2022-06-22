@@ -3,12 +3,11 @@ HOMEPAGE = "http://trac.osgeo.org/proj/"
 SECTION = "libs"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
+LIC_FILES_CHKSUM = "file://COPYING;md5=f27445198ba1500f508fce2b183ce0ff"
 
 SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
 
-SRC_URI[md5sum] = "5ba7536b579a6c9e0ad822dbdd455985"
-SRC_URI[sha256sum] = "a7026d39c9c80d51565cfc4b33d22631c11e491004e19020b3ff5a0791e1779f"
+SRC_URI[sha256sum] = "76ed3d0c3a348a6693dfae535e5658bbfd47f71cb7ff7eb96d9f12f7e068b1cf"
 
 DEPENDS = "sqlite3 sqlite3-native tiff"
 
@@ -19,3 +18,5 @@ PACKAGECONFIG ?= "curl"
 PACKAGECONFIG[curl] = ",--without-curl,curl"
 
 FILES:${PN} += "${datadir}/proj"
+
+BBCLASSEXTEND = "native"
