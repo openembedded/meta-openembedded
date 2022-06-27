@@ -10,7 +10,7 @@ DEPENDS = " \
 inherit gnomebase itstool gettext gnome-help features_check
 ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "1378efd24f8af18a09031d83d918f9662a3f5eba5a6f9df9fc55870f2e6f0ee9"
+SRC_URI[archive.sha256sum] = "78d8dce70fb922b2909cf767783053b0811213a4d6a49b3875510cf3a84efd7b"
 
 PACKAGECONFIG ??= "exiv2 taglib libgsf poppler"
 PACKAGECONFIG[exiv2] = "--with-exiv2,--without-exiv2,exiv2"
