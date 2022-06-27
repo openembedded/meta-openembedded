@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
 
 DEPENDS:append:libc-musl = " libucontext"
 
-SRCREV = "f7c6fb6c8e99d6b1b725e5994373bcd19ffdf8fd"
+SRCREV = "bf8b714bf5075d0a6f2f28504b43095e2b1e11c5"
 SRC_URI = "git://github.com/gperftools/gperftools;branch=master;protocol=https \
            file://0001-Support-Atomic-ops-on-clang.patch \
            file://0001-fix-build-with-musl-libc.patch \
