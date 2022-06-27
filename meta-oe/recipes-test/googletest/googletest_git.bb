@@ -4,12 +4,12 @@ SECTION = "libs"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
 
-PV = "1.11.0+git${SRCPV}"
+PV = "1.12.0"
 
 PROVIDES += "gmock gtest"
 
 S = "${WORKDIR}/git"
-SRCREV = "9e712372214d75bb30ec2847a44bf124d48096f3"
+SRCREV = "15460959cbbfa20e66ef0b5ab497367e47fc0a04"
 SRC_URI = "git://github.com/google/googletest.git;branch=main;protocol=https"
 
 inherit cmake
