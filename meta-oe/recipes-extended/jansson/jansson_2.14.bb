@@ -4,10 +4,11 @@ BUGTRACKER = "https://github.com/akheron/jansson/issues"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=afd92c4cfc08f4896003251b878cc0bf"
 
-SRC_URI = "http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
+SRC_URI = "https://github.com/akheron/${BPN}/releases/download/v${PV}/${BP}.tar.bz2"
+SRC_URI[sha256sum] = "fba956f27c6ae56ce6dfd52fbf9d20254aad42821f74fa52f83957625294afb9"
 
-SRC_URI[md5sum] = "570af45b8203e95876d71fecd56cee20"
-SRC_URI[sha256sum] = "f4f377da17b10201a60c1108613e78ee15df6b12016b116b6de42209f47a474f"
+UPSTREAM_CHECK_URI = "https://github.com/akheron/${BPN}/releases"
+UPSTREAM_CHECK_REGEX = "${BPN}-(?P<pver>\d+(\.\d+)+)\.tar"
 
 inherit autotools pkgconfig
 
