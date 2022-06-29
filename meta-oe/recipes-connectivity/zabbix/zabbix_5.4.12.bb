@@ -23,13 +23,13 @@ DEPENDS  = "libevent libpcre openldap virtual/libiconv zlib"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.2/${BPN}-${PV}.tar.gz \
+SRC_URI = "https://cdn.zabbix.com/zabbix/sources/stable/5.4/${BPN}-${PV}.tar.gz \
     file://0001-Fix-configure.ac.patch \
     file://zabbix-agent.service \
 "
 
-SRC_URI[md5sum] = "31dab3535a1fa212f5724902727f6d4d"
-SRC_URI[sha256sum] = "76cb704f2a04fbc87bb3eff44fa71339c355d467f7bbd8fb53f8927c760e1680"
+SRC_URI[md5sum] = "f295fd2df86143d72f6ff26e47d9e39e"
+SRC_URI[sha256sum] = "d60d5515807c30c05d0900b83a7e6ef6479929aef7d6f248fba481c4816bacf4"
 
 inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
 
