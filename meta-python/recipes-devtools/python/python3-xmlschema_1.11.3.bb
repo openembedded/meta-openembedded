@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/sissaschool/xmlschema"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=47489cb18c469474afeb259ed1d4832f"
 
-SRC_URI[sha256sum] = "0706c84de20686c940fa07e2b88425cff1471c89544a49e9365b9636236ccd2f"
+SRC_URI[sha256sum] = "28a135028f7ab1e0c934fc0c6717a66b2dc5f166d123dfe6ce61afc671ad113f"
 
 PYPI_PACKAGE = "xmlschema"
 inherit pypi setuptools3
