@@ -16,6 +16,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
            file://0002-build-php.m4-don-t-unset-cache-variables.patch \
            file://0003-php-remove-host-specific-info-from-header-file.patch \
            file://0004-configure.ac-don-t-include-build-libtool.m4.patch \
+           file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
            file://0009-php-don-t-use-broken-wrapper-for-mkdir.patch \
            file://0010-iconv-fix-detection.patch \
           "
@@ -23,7 +24,6 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
 SRC_URI:append:class-target = " \
             file://0001-ext-opcache-config.m4-enable-opcache.patch \
             file://0005-pear-fix-Makefile.frag-for-Yocto.patch \
-            file://0006-ext-phar-Makefile.frag-Fix-phar-packaging.patch \
             file://0007-sapi-cli-config.m4-fix-build-directory.patch \
             file://0008-ext-imap-config.m4-fix-include-paths.patch \
             file://php-fpm.conf \
