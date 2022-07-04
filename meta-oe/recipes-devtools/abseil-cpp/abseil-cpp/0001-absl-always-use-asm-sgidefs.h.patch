@@ -10,29 +10,30 @@ that makes it portable.
 Upstream-Status: Pending
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
 ---
  absl/base/internal/direct_mmap.h | 6 +-----
  1 file changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/absl/base/internal/direct_mmap.h b/absl/base/internal/direct_mmap.h
-index a01d61220376..c8a4fbabbb3a 100644
+index e492bb0..c8a4fba 100644
 --- a/absl/base/internal/direct_mmap.h
 +++ b/absl/base/internal/direct_mmap.h
 @@ -41,13 +41,9 @@
  
  #ifdef __mips__
  // Include definitions of the ABI currently in use.
--#ifdef __BIONIC__
+-#if defined(__BIONIC__) || !defined(__GLIBC__)
 -// Android doesn't have sgidefs.h, but does have asm/sgidefs.h, which has the
 +// bionic/musl C libs don't have sgidefs.h, but do have asm/sgidefs.h, which has the
  // definitions we need.
  #include <asm/sgidefs.h>
 -#else
 -#include <sgidefs.h>
--#endif  // __BIONIC__
+-#endif  // __BIONIC__ || !__GLIBC__
  #endif  // __mips__
  
  // SYS_mmap and SYS_munmap are not defined in Android.
 -- 
-2.36.1
+2.25.1
 
