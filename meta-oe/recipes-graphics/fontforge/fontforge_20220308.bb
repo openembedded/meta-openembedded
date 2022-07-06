@@ -6,25 +6,26 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE;md5=d042f3d2a8fd7208b704a499168e3c89 \
 "
 
-DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native"
+DEPENDS = "python3 glib-2.0 pango giflib tiff libxml2 jpeg libtool uthash gettext-native libspiro"
 DEPENDS:append:class-target = " libxi"
 
-inherit autotools pkgconfig python3native features_check gettext gtk-icon-cache mime mime-xdg
+inherit cmake pkgconfig python3native features_check gettext gtk-icon-cache mime mime-xdg
 
 REQUIRED_DISTRO_FEATURES:append:class-target = " x11"
 
-# tag 20190801
-SRCREV = "ac635b818e38ddb8e7e2e1057330a32b4e25476e"
+# tag 20220308
+SRCREV = "582bd41a9bf04326300fc02a677fe3610d6d3ccd"
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-include-sys-select-on-non-glibc-platforms.patch \
+           file://0001-fontforgeexe-Use-env-to-find-fontforge.patch \
 "
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF += "--without-libuninameslist  --enable-python-scripting --enable-python-extension"
-EXTRA_OECONF:append:class-native = " with_x=no"
+EXTRA_OECMAKE = "-DENABLE_GUI=OFF -DENABLE_DOCS=OFF"
 
-LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
-BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+CFLAGS += "-fno-strict-aliasing"
+LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI} -lm"
+BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI} -lm"
 
 #do_configure:prepend() {
 # uthash sources are expected in uthash/src
