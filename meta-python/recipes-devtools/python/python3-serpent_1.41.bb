@@ -2,7 +2,7 @@ SUMMARY = "Serialization based on ast.literal_eval"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d7c28f460fafe7be454fcdcac0b60263"
 
-SRC_URI[sha256sum] = "10b34e7f8e3207ee6fb70dcdc9bce473851ee3daf0b47c58aec1b48032ac11ce"
+SRC_URI[sha256sum] = "0407035fe3c6644387d48cff1467d5aa9feff814d07372b78677ed0ee3ed7095"
 
 inherit pypi ptest setuptools3
 
