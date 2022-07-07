@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=8c2e1ec1540fb3e0beb68361344cba7e"
 SRC_URI = " \
     git://git.infradead.org/users/dwmw2/openconnect.git;branch=master \
 "
-SRCREV = "03a3b9c76a9b6d0a65073b6bebbc1192e3445507"
+SRCREV = "5695cd6b0c7d42ca293ce0f00abcbe3d1ec4e609"
 
 DEPENDS = "vpnc libxml2 krb5 gettext-native"
 RDEPENDS:${PN} = "bash python3-core vpnc-script"
