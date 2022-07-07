@@ -10,7 +10,7 @@ SRC_URI = "\
     file://firewalld.init \
     file://run-ptest \
 "
-SRC_URI[sha256sum] = "1dcd314ff836b2ce69f15f60fc7d50bd77ed359d784f9b3c07f2d394ea570e4c"
+SRC_URI[sha256sum] = "28fd90e88bda0dfd460f370f353474811b2e295d7eb27f0d7d18ffa3d786eeb7"
 
 # glib-2.0-native is needed for GSETTINGS_RULES autoconf macro from gsettings.m4
 DEPENDS = "intltool-native glib-2.0-native nftables"
@@ -23,6 +23,9 @@ PACKAGECONFIG[docs] = "--with-xml-catalog=${STAGING_ETCDIR_NATIVE}/xml/catalog,-
 PACKAGECONFIG[ipset] = "--with-ipset=${sbindir}/ipset,--without-ipset,,ipset"
 PACKAGECONFIG[ebtables] = "--with-ebtables=${base_sbindir}/ebtables --with-ebtables-restore=${sbindir}/ebtables-legacy-restore,--without-ebtables --without-ebtables-restore,,ebtables"
 
+# Default logging configuration: mixed syslog file console
+FIREWALLD_DEFAULT_LOG_TARGET ??= "syslog"
+
 # The UIs are not yet tested and the dependencies are probably not quite correct yet.
 # Splitting into separate packages is beneficial so that no dead code is transferred
 # to the target device.
@@ -31,7 +34,7 @@ PACKAGECONFIG[ebtables] = "--with-ebtables=${base_sbindir}/ebtables --with-ebtab
 PACKAGECONFIG[qt5] = ""
 PACKAGECONFIG[gtk] = ""
 
-PACKAGES =+ "python3-firewall ${PN}-applet ${PN}-config ${PN}-offline-cmd ${PN}-zsh-completion"
+PACKAGES =+ "python3-firewall ${PN}-applet ${PN}-config ${PN}-offline-cmd ${PN}-zsh-completion ${PN}-log-rotate"
 
 # iptables, ip6tables, ebtables, and ipset *should* be unnecessary
 # when the nftables backend is available, because nftables supersedes all of them.
@@ -131,6 +134,10 @@ FIREWALLD_KERNEL_MODULES ?= "\
     x_tables \
     sch_fq_codel \
 "
+
+do_configure:prepend() {
+    export DEFAULT_LOG_TARGET=${FIREWALLD_DEFAULT_LOG_TARGET}
+}
 
 do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'false', 'true', d)}; then
@@ -237,6 +244,9 @@ FILES:${PN}-offline-cmd += " \
 "
 RDEPENDS:${PN}-offline-cmd += "python3-core"
 
+SUMMARY:${PN}-log-rotate = "${SUMMARY} (log-rotate configuration)"
+FILES:${PN}-log-rotate += "${sysconfdir}/logrotate.d"
+
 # To get allmost all tests passing
 # - Enable PACKAGECONFIG ipset, ebtable
 # - Enough RAM QB_MEM = "-m 8192" (used für fancy ipset tests)
@@ -273,6 +283,9 @@ RDEPENDS:${PN} += "\
     python3-ctypes \
     python3-pprint \
 "
+# If firewalld writes a log file rotation is needed
+RRECOMMENDS:${PN} += "${@bb.utils.contains_any('FIREWALLD_DEFAULT_LOG_TARGET', [ 'mixed', 'file' ], '${PN}-log-rotate', '', d)}"
+
 # Add required kernel modules. With Yocto kernel 5.15 this currently means:
 # - features/nf_tables/nf_tables.scc
 # - features/netfilter/netfilter.scc
