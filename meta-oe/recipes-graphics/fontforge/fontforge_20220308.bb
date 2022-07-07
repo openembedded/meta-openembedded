@@ -18,14 +18,15 @@ SRCREV = "582bd41a9bf04326300fc02a677fe3610d6d3ccd"
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
            file://0001-include-sys-select-on-non-glibc-platforms.patch \
            file://0001-fontforgeexe-Use-env-to-find-fontforge.patch \
+           file://0001-cmake-Use-alternate-way-to-detect-libm.patch \
 "
 S = "${WORKDIR}/git"
 
-EXTRA_OECMAKE = "-DENABLE_GUI=OFF -DENABLE_DOCS=OFF"
+EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
 
 CFLAGS += "-fno-strict-aliasing"
-LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI} -lm"
-BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI} -lm"
+LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
+BUILD_LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
 
 #do_configure:prepend() {
 # uthash sources are expected in uthash/src
