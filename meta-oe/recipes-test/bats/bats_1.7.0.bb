@@ -7,11 +7,11 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=2970203aedf9e829edb96a137a4fe81b"
 
 SRC_URI = "\
-  git://github.com/bats-core/bats-core.git;branch=version/1.6.x;protocol=https \
+  git://github.com/bats-core/bats-core.git;branch=master;protocol=https \
   "
 
-# v1.6.1
-SRCREV = "1977254c2a7faa2e0af17355856f91dc471d1daa"
+# v1.7.0
+SRCREV = "410dd229a5ed005c68167cc90ed0712ad2a1c909"
 
 S = "${WORKDIR}/git"
 
