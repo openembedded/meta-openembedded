@@ -9,7 +9,7 @@ DEPENDS += "libuv util-linux zlib"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BPN}-v${PV}.tar.gz \
 "
-SRC_URI[sha256sum] = "7981103c4ddd452de3a4565fb6c304454dc4c9adcc1954d716102f14df8ad4bb"
+SRC_URI[sha256sum] = "587f6cce421015f8e0a527e3964a4de8cc17085c354498150bc3ade21606bbf9"
 
 # default netdata.conf for netdata configuration
 SRC_URI += "file://netdata.conf"
