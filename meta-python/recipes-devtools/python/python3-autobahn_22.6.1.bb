@@ -3,7 +3,7 @@ HOMEPAGE = "http://crossbar.io/autobahn"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
 
-SRC_URI[sha256sum] = "34aa5569b0b4419f8c277792c600dc2518c4930928c74e2279ef8b88d8b8a3ea"
+SRC_URI[sha256sum] = "fb63e946d5c2dd0df680851e84e65624a494ce87c999f2a4944e4f2d81bf4498"
 
 inherit pypi setuptools3
 
