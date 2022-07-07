@@ -12,7 +12,7 @@ DEPENDS = "glib-2.0 glib-2.0-native"
 
 inherit meson pkgconfig bash-completion gobject-introspection
 
-SRCREV ?= "f6c2feaf199e0f129a0bde8c5e6cba5f2117b564"
+SRCREV ?= "95108b6eebfefa6621a1c34565f562eeca9308b9"
 # patch 0001 is on main branch upstream
 SRC_URI = "\
     git://gitlab.freedesktop.org/mobile-broadband/libqmi.git;protocol=https;branch=qmi-1-30 \
