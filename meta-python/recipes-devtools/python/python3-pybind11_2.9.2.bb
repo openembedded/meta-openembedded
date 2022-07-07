@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=774f65abd8a7fe3124be2cdf766cd06f"
 
 DEPENDS = "boost"
 
-SRC_URI = "git://github.com/pybind/pybind11.git;branch=master;protocol=https \
+SRC_URI = "git://github.com/pybind/pybind11.git;branch=stable;protocol=https \
            file://0001-Do-not-strip-binaries.patch \
            file://0001-Do-not-check-pointer-size-when-cross-compiling.patch \
 "
-SRCREV = "f7b499615e14d70ab098a20deb0cdb3889998a1a"
+SRCREV = "914c06fb252b6cc3727d0eedab6736e88a3fcb01"
 
 S = "${WORKDIR}/git"
 
