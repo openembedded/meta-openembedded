@@ -54,8 +54,12 @@ do_install:append() {
     install -d ${D}/${sysconfdir}/openvpn/sample
     install -m 644 ${S}/sample/sample-config-files/loopback-server  ${D}${sysconfdir}/openvpn/sample/loopback-server.conf
     install -m 644 ${S}/sample/sample-config-files/loopback-client  ${D}${sysconfdir}/openvpn/sample/loopback-client.conf
+    install -dm 755 ${D}${sysconfdir}/openvpn/sample/sample-config-files
     install -dm 755 ${D}${sysconfdir}/openvpn/sample/sample-keys
+    install -dm 755 ${D}${sysconfdir}/openvpn/sample/sample-scripts
+    install -m 644 ${S}/sample/sample-config-files/* ${D}${sysconfdir}/openvpn/sample/sample-config-files
     install -m 644 ${S}/sample/sample-keys/* ${D}${sysconfdir}/openvpn/sample/sample-keys
+    install -m 644 ${S}/sample/sample-scripts/* ${D}${sysconfdir}/openvpn/sample/sample-scripts
 
     install -d -m 710 ${D}/${localstatedir}/lib/openvpn
 }
