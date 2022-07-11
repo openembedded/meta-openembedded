@@ -7,14 +7,12 @@ BUGTRACKER = "https://github.com/axboe/liburing/issues"
 SECTION = "libs"
 
 LICENSE = "LGPL-2.1-only | MIT"
-LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=d51b5805e2a675685e6a66ca50904cf9"
+LIC_FILES_CHKSUM = "file://README;beginline=41;endline=44;md5=2b0e9926530c269f5ae95560370195af"
 
-SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https \
-           file://0001-test-Use-syscall-wrappers-instead-of-using-syscall-2.patch \
-           "
+SRC_URI = "git://github.com/axboe/liburing.git;branch=master;protocol=https"
 SRC_URI:append:libc-musl:riscv64 = " file://0001-do-not-build-examples.patch "
 SRC_URI:append:libc-musl:riscv32 = " file://0001-do-not-build-examples.patch "
-SRCREV = "41a61c97c2e3df4475c93fdf5026d575ce3f1377"
+SRCREV = "dda4848a9911120a903bef6284fb88286f4464c9"
 
 S = "${WORKDIR}/git"
 
