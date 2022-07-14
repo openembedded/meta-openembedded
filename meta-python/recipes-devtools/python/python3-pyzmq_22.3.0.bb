@@ -10,6 +10,8 @@ SRC_URI[sha256sum] = "8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f
 
 inherit pypi pkgconfig python_setuptools_build_meta
 
+DEPENDS += "python3-packaging-native"
+
 RDEPENDS:${PN} += " \
 	${PYTHON_PN}-multiprocessing \
 	${PYTHON_PN}-json \
