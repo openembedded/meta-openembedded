@@ -16,4 +16,4 @@ DEPENDS += "cups"
 # See https://pypi.org/project/pycups/ for data
 SRC_URI[sha256sum] = "57434ce5f62548eb12949ca8217f066f4eeb21a5d6ab8b13471dce350e380c90"
 
-inherit pypi python_setuptools_build_meta
+inherit pypi setuptools3
