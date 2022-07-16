@@ -1,3 +1,14 @@
+From f2c592352360e52a7c817a1adcc8b09fd92cd941 Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 16 Jul 2022 09:58:24 -0700
+Subject: [PATCH 1/2] Tweak app defaults
+
+Upstream-Status: Inappropriate [OE-Specific]
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ driver/XScreenSaver.ad.in | 259 +-------------------------------------
+ 1 file changed, 6 insertions(+), 253 deletions(-)
+
 --- a/driver/XScreenSaver.ad.in
 +++ b/driver/XScreenSaver.ad.in
 @@ -29,7 +29,7 @@
@@ -32,7 +43,7 @@
  *splashDuration:	0:00:05
  *visualID:		default
  *installColormap:	True
-@@ -324,250 +324,8 @@ XScreenSaver.bourneShell:		/bin/sh
+@@ -324,256 +324,8 @@ XScreenSaver.bourneShell:		/bin/sh
  !=============================================================================
  
  *programs:								      \
@@ -74,7 +85,7 @@
 -				munch -root				    \n\
 -				penrose -root				    \n\
 -@GL_KLUDGE@ GL: 				pipes -root				    \n\
--				rd-bomb -root				    \n\
+-				rdbomb -root				    \n\
 -@GL_KLUDGE@ GL: 				rubik -root				    \n\
 --				sierpinski -root			    \n\
 -				slip -root				    \n\
@@ -277,7 +288,13 @@
 -@GL_KLUDGE@ GL: 				etruscanvenus -root			    \n\
 -@GL_KLUDGE@ GL: 				gibson -root				    \n\
 -@GL_KLUDGE@ GL: 				headroom -root				    \n\
--@GL_KLUDGE@ GL: 				sphereeversion -root			    \n
+-@GL_KLUDGE@ GL: 				sphereeversion -root			    \n\
+-				binaryhorizon -root			    \n\
+-				marbling -root				    \n\
+-@GL_KLUDGE@ GL: 				chompytower -root			    \n\
+-@GL_KLUDGE@ GL: 				mapscroller -root			    \n\
+-@GL_KLUDGE@ GL: 				nakagin -root				    \n\
+-@GL_KLUDGE@ GL: 				squirtorus -root			    \n
 -
 -
 +-				fontglide -root -program "date +'%F %H:%M %z'"
