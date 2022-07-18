@@ -35,6 +35,12 @@ SRC_URI:append:class-target = " \
 S = "${WORKDIR}/php-${PV}"
 SRC_URI[sha256sum] = "b816753eb005511e695d90945c27093c3236cc73db1262656d9fadd73ead7e9d"
 
+CVE_CHECK_IGNORE += "\
+    CVE-2007-2728 \
+    CVE-2007-3205 \
+    CVE-2007-4596 \
+"
+
 inherit autotools pkgconfig python3native gettext
 
 # phpize is not scanned for absolute paths by default (but php-config is).
