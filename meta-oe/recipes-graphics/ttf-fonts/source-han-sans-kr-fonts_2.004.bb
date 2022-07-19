@@ -3,7 +3,7 @@ require ttf.inc
 SUMMARY = "Adobe OpenType Pan-CJK font family for Korean"
 HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
 LICENSE = "OFL-1.1"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=55719faa0112708e946b820b24b14097"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
 
 inherit allarch fontcache
 
@@ -11,7 +11,7 @@ inherit allarch fontcache
 #EXCLUDE_FROM_WORLD = "1"
 
 SRC_URI = " \
-    https://github.com/adobe-fonts/source-han-sans/raw/release/SubsetOTF/SourceHanSansKR.zip \
+    svn://github.com/adobe-fonts/source-han-sans;module=branches/release/SubsetOTF/TW;protocol=http;rev=82 \
     file://44-source-han-sans-kr.conf \
 "
 SRC_URI[md5sum] = "f8d1bd6c87d8575afdb25e2f46bd81d4"
