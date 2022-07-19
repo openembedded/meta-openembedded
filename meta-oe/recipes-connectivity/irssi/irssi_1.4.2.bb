@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=55fdc1113306167d6ea2561404ce02f8"
 DEPENDS = "glib-2.0 ncurses openssl"
 
 SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "6a7692741bba16f3ba6f97cf7246421ac57055dcedcca9a4d21663f8efe47501"
+SRC_URI[sha256sum] = "79a4765d2dfe153c440a1775b074d5d0682b96814c7cf92325b5e15ce50e26a8"
 
 UPSTREAM_CHECK_URI = "https://github.com/${BPN}/${BPN}/releases"
 
