@@ -12,7 +12,7 @@ inherit gnomebase gettext systemd gobject-introspection bash-completion
 
 DEPENDS = "glib-2.0 libgudev libxslt-native dbus"
 
-SRCREV ?= "0d8b5e93fc62eb0f41e18a2d9d845331d7af36ec"
+SRCREV ?= "1338749739e0c01bdbc6ddf92388a781806ec3ac"
 
 # Patch 0001 will be in ModemManager > 1.19
 SRC_URI = " \
