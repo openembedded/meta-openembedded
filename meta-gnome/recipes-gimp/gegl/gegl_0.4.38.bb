@@ -22,7 +22,7 @@ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 SHPV = "${@gnome_verdir("${PV}")}"
 
 SRC_URI = "https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz"
-SRC_URI[sha256sum] = "6fd58a0cdcc7702258adaeffb573a389228ae8f0eff47578efda2309b61b2ca6"
+SRC_URI[sha256sum] = "e4a33c8430a5042fba8439b595348e71870f0d95fbf885ff553f9020c1bed750"
 
 PACKAGECONFIG ??= "gexiv2 jpeg libpng libraw librsvg pango poppler sdl2"
 PACKAGECONFIG:class-native = "libpng librsvg"
