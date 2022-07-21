@@ -17,10 +17,9 @@ BBCLASSEXTEND = "native"
 DEPENDS = "libusb1 gettext-native"
 DEPENDS:append:class-target = " ${BPN}-native"
 
-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
 SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch"
-
-SRC_URI[sha256sum] = "deb4af6f63f5e71215cfa7fb961795262920b4ec6cb4b627f55b30b18aa33228"
+SRC_URI[sha256sum] = "c9191dac2f5744cf402e08641610b271f73ac21a3c802734ec2cedb2c6bc56d0"
 
 inherit autotools pkgconfig lib_package
 
