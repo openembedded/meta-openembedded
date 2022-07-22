@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 inherit pypi setuptools3
 
-SRC_URI[sha256sum] = "6f1369b58ed6cf3a4b7054a44ebe8d03b29c309257583a2bbdc064cd1e4a1442"
+SRC_URI[sha256sum] = "c25873c47279387cfdcbdafa36149887901d36202cb645a0e4f29686bf6e4417"
 
 RDEPENDS:${PN} += "\
     ${PYTHON_PN}-grpcio \
