@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/seznam/python-fastjsonschema"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=18950e8362b69c0c617b42b8bd8e7532"
 
-SRCREV = "d03f3835da4899bdeb597a9d3f30a709e7c3254f"
+SRCREV = "98399bb4029b2d7020d8abd9770661a5b2c4f9f8"
 PYPI_SRC_URI = "git://github.com/horejsek/python-fastjsonschema;protocol=https;branch=master"
 
 SRC_URI += "file://run-ptest"
@@ -33,6 +33,7 @@ RDEPENDS:${PN} += "\
     python3-urllib3 \
     python3-numbers \
     python3-pickle \
+    python3-json \
     "
 
 BBCLASSEXTEND = "native nativesdk"
