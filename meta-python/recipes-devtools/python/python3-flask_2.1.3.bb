@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
 
-SRC_URI[sha256sum] = "315ded2ddf8a6281567edb27393010fe3406188bafbfe65a3339d5787d89e477"
+SRC_URI[sha256sum] = "15972e5017df0575c3d6c090ba168b6db90259e620ac8d7ea813a396bad5b6cb"
 
 PYPI_PACKAGE = "Flask"
 
