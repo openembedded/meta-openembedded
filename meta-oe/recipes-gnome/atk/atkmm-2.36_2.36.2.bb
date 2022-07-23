@@ -14,7 +14,7 @@ inherit gnomebase features_check
 
 ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
 
-SRC_URI[archive.sha256sum] = "e11324bfed1b6e330a02db25cecc145dca03fb0dff47f0710c85e317687da458"
+SRC_URI[archive.sha256sum] = "6f62dd99f746985e573605937577ccfc944368f606a71ca46342d70e1cdae079"
 
 S = "${WORKDIR}/${GNOMEBN}-${PV}"
 
