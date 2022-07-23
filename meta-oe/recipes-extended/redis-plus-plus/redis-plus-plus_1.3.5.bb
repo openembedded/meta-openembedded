@@ -4,10 +4,8 @@ SECTION = "libs"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
-           file://0001-cmake-Use-CMAKE_INSTALL_LIBDIR-from-GNUInstallDirs.patch \
-          "
-SRCREV = "389ffdf9e72035ea2096b03cda7f4a6809ae6363"
+SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https"
+SRCREV = "58084931ed1a056d91fe96da7b9ea81fa023560a"
 
 S = "${WORKDIR}/git"
 
