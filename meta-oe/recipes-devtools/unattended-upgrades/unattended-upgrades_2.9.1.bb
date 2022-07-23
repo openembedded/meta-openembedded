@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/mvo5/unattended-upgrades.git;protocol=https;branch=m
            file://0001-setup.py-Disable-autodection-of-modules.patch \
            "
 
-SRCREV = "c6db6fad26a2b83ba301b52ff5dee98cef7558ca"
+SRCREV = "5aff8fa2b5b60b7c11bbfb39c884477e72d11d02"
 
 S = "${WORKDIR}/git"
 
