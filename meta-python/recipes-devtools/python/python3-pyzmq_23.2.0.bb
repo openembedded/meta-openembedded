@@ -1,4 +1,5 @@
-SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
+SUMMARY = "PyZMQ: Python bindings for ZMQ"
+DESCRIPTION = "This package contains Python bindings for ZeroMQ. ZMQ is a lightweight and fast messaging implementation."
 HOMEPAGE = "http://zeromq.org/bindings:python"
 LICENSE = "BSD-3-Clause & LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
@@ -8,7 +9,11 @@ DEPENDS = "zeromq python3-packaging-native"
 SRC_URI += "file://club-rpath-out.patch"
 SRC_URI[sha256sum] = "a51f12a8719aad9dcfb55d456022f16b90abc8dde7d3ca93ce3120b40e3fa169"
 
-inherit pypi pkgconfig python_setuptools_build_meta
+inherit pypi pkgconfig python_setuptools_build_meta ptest
+
+SRC_URI += " \
+	file://run-ptest \
+"
 
 DEPENDS += "python3-packaging-native"
 
@@ -24,4 +29,20 @@ do_compile:prepend() {
     echo skip_check_zmq = True >> ${S}/setup.cfg
     echo libzmq_extension = False >> ${S}/setup.cfg
     echo no_libzmq_extension = True >> ${S}/setup.cfg
+}
+
+RDEPENDS:${PN}-ptest += " \
+	${PN}-test \
+"
+
+PACKAGES =+ "\
+    ${PN}-test \
+"
+
+FILES:${PN}-test = " \
+    ${libdir}/${PYTHON_DIR}/site-packages/*/tests \
+"
+do_install_ptest() {
+	install -d ${D}${PTEST_PATH}/tests
+	cp -rf ${S}/zmq/tests/* ${D}${PTEST_PATH}/tests/
 }
