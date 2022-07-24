@@ -2,24 +2,36 @@ SUMMARY = "PyZMQ: Python bindings for ZMQ"
 DESCRIPTION = "This package contains Python bindings for ZeroMQ. ZMQ is a lightweight and fast messaging implementation."
 HOMEPAGE = "http://zeromq.org/bindings:python"
 LICENSE = "BSD-3-Clause & LGPL-3.0-only"
-LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
-                    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
-DEPENDS = "zeromq python3-packaging-native"
+LIC_FILES_CHKSUM = "\
+    file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
+    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e \
+"
 
-SRC_URI += "file://club-rpath-out.patch"
+DEPENDS = "python3-packaging-native zeromq"
+
+SRC_URI:append = " \
+    file://club-rpath-out.patch \
+    file://run-ptest \
+"
 SRC_URI[sha256sum] = "a51f12a8719aad9dcfb55d456022f16b90abc8dde7d3ca93ce3120b40e3fa169"
 
 inherit pypi pkgconfig python_setuptools_build_meta ptest
 
-SRC_URI += " \
-	file://run-ptest \
+PACKAGES =+ "\
+    ${PN}-test \
 "
 
-DEPENDS += "python3-packaging-native"
+FILES:${PN}-test += "\
+    ${libdir}/${PYTHON_DIR}/site-packages/*/tests \
+"
 
-RDEPENDS:${PN} += " \
-	${PYTHON_PN}-multiprocessing \
-	${PYTHON_PN}-json \
+RDEPENDS:${PN} += "\
+        ${PYTHON_PN}-json \
+        ${PYTHON_PN}-multiprocessing \
+"
+
+RDEPENDS:${PN}-ptest += "\
+        ${PN}-test \
 "
 
 do_compile:prepend() {
@@ -31,18 +43,7 @@ do_compile:prepend() {
     echo no_libzmq_extension = True >> ${S}/setup.cfg
 }
 
-RDEPENDS:${PN}-ptest += " \
-	${PN}-test \
-"
-
-PACKAGES =+ "\
-    ${PN}-test \
-"
-
-FILES:${PN}-test = " \
-    ${libdir}/${PYTHON_DIR}/site-packages/*/tests \
-"
 do_install_ptest() {
-	install -d ${D}${PTEST_PATH}/tests
-	cp -rf ${S}/zmq/tests/* ${D}${PTEST_PATH}/tests/
+        install -d ${D}${PTEST_PATH}/tests
+        cp -rf ${S}/zmq/tests/* ${D}${PTEST_PATH}/tests/
 }
