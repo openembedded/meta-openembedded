@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/amoffat/sh"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=5317094292296f03405f59ae5f6544b6"
 
-SRC_URI[sha256sum] = "9d7bd0334d494b2a4609fe521b2107438cdb21c0e469ffeeb191489883d6fe0d"
+SRC_URI[sha256sum] = "e4045b6c732d9ce75d571c79f5ac2234edd9ae4f5fa9d59b09705082bdca18c7"
 
 PYPI_PACKAGE = "sh"
 
@@ -19,4 +19,5 @@ RDEPENDS:${PN} += " \
     ${PYTHON_PN}-terminal \
     ${PYTHON_PN}-threading \
     ${PYTHON_PN}-unixadmin \
+    ${PYTHON_PN}-fcntl \
 "
