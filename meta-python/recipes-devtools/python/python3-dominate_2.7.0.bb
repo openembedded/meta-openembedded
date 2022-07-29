@@ -2,8 +2,7 @@ SUMMARY = "Dominate is a Python library for creating and manipulating HTML docum
 LICENSE = "LGPL-3.0-only"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
 
-SRC_URI[md5sum] = "9f714324ca99eee98bb3c3cdbe838de6"
-SRC_URI[sha256sum] = "76ec2cde23700a6fc4fee098168b9dee43b99c2f1dd0ca6a711f683e8eb7e1e4"
+SRC_URI[sha256sum] = "520101360892ebf9d0553f67d37e359ff92403d8a1e33814030503088a05da49"
 
 inherit pypi setuptools3 ptest
 
