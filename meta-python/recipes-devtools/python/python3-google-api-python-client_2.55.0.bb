@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRC_URI[sha256sum] = "90ebbae53025545b45962c0bc9874640511f35e929df773d034f40d9464c86af"
+SRC_URI[sha256sum] = "1766c700eee14809ca1f7f52868c937755153289ea77ecdfd73dea6910e9a34d"
 
 inherit pypi setuptools3
 
