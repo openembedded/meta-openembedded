@@ -20,6 +20,8 @@ SRC_URI = "https://ftp.ntpsec.org/pub/releases/ntpsec-${PV}.tar.gz \
 
 SRC_URI[sha256sum] = "f2684835116c80b8f21782a5959a805ba3c44e3a681dd6c17c7cb00cc242c27a"
 
+UPSTREAM_CHECK_URI = "ftp://ftp.ntpsec.org/pub/releases/"
+
 inherit pkgconfig python3-dir python3targetconfig systemd update-alternatives update-rc.d useradd waf features_check
 
 # RDEPENDS on gnuplot with this restriction
