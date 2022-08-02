@@ -6,5 +6,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73c7f696a728de728d7446cbca814cc5"
 
 DEPENDS += "libxaw"
 
-SRC_URI[md5sum] = "e50ffae17eeb3943079620cb78f5ce0b"
-SRC_URI[sha256sum] = "373dfb81e7a6f06d3d22485a12fcde6e255d58c6dee1bbaeb00c7d0caa9b2029"
+SRC_URI[sha256sum] = "d2eac545f137156b960877e052fcc8e29795ed735c02f7690fd7b439e6846a12"
+SRC_URI_EXT = "xz"
