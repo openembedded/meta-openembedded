@@ -8,7 +8,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
 
 SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
-SRCREV = "b88053851ef81694b9e3927e0857f0f02ff9a8a8"
+SRCREV = "9fd28747534ef776ffecc245721a4faa43bdd89b"
 
 DEPENDS = " \
     libxml2-native \
