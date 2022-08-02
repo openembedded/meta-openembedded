@@ -1,0 +1,44 @@
+From 4220c6a02bc03ff8c6cc4b3bee168a1351a3ce39 Mon Sep 17 00:00:00 2001
+From: Sam Van Den Berge <sam.van.den.berge@gmail.com>
+Date: Fri, 29 Jul 2022 15:53:37 +0200
+Subject: [PATCH] Use importlib.resources instead of pkg_resources
+
+From the setuptools website [1]:
+
+Use of pkg_resources is discouraged in favor of importlib.resources,
+importlib.metadata, and their backports (importlib_resources,
+importlib_metadata). Please consider using those libraries instead of
+pkg_resources.
+
+[1]: https://setuptools.pypa.io/en/latest/pkg_resources.html
+
+Signed-off-by: Sam Van Den Berge <sam.van.den.berge@gmail.com>
+---
+ jsonrpcserver/main.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/jsonrpcserver/main.py b/jsonrpcserver/main.py
+index 0397a58..ac1855f 100644
+--- a/jsonrpcserver/main.py
++++ b/jsonrpcserver/main.py
+@@ -13,7 +13,7 @@ from typing import Any, Callable, Dict, List, Optional, Union, cast
+ import json
+ 
+ from jsonschema.validators import validator_for  # type: ignore
+-from pkg_resources import resource_string
++import importlib.resources
+ 
+ from .dispatcher import dispatch_to_response_pure, Deserialized
+ from .methods import Methods, global_methods
+@@ -26,7 +26,7 @@ default_deserializer = json.loads
+ 
+ # Prepare the jsonschema validator. This is global so it loads only once, not every
+ # time dispatch is called.
+-schema = json.loads(resource_string(__name__, "request-schema.json"))
++schema = json.loads(importlib.resources.read_text(__package__, "request-schema.json"))
+ klass = validator_for(schema)
+ klass.check_schema(schema)
+ default_validator = klass(schema).validate
+-- 
+2.34.1
+
