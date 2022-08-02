@@ -5,23 +5,20 @@ SECTION = "libs/multimedia"
 LICENSE = "ISC"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a42532a0684420bdb15556c3cdd49a75"
 
-DEPENDS = "enca fontconfig freetype libpng fribidi"
+DEPENDS = "fontconfig freetype fribidi harfbuzz"
 
-SRC_URI = "git://github.com/libass/libass.git;branch=master;protocol=https"
-SRCREV = "73284b676b12b47e17af2ef1b430527299e10c17"
+SRC_URI = "git://github.com/libass/libass.git;protocol=https;branch=master"
+SRCREV = "1af6240c5d1e499326146e0b88c987e626b13c23"
 S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
+PACKAGECONFIG[asm] = "--enable-asm,--disable-asm,nasm-native"
+# use larger tiles in the rasterizer (better performance, slightly worse quality)
+PACKAGECONFIG[largetiles] = "--enable-large-tiles,--disable-large-tiles"
+
 PACKAGECONFIG ??= ""
-PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
-
-EXTRA_OECONF = " \
-    --enable-fontconfig \
-"
-
-# Disable compiling with ASM for x86 to avoid textrel
-EXTRA_OECONF:append:x86 = " --disable-asm"
+PACKAGECONFIG:append:x86-64 = " asm"
 
 PACKAGES =+ "${PN}-tests"
 
