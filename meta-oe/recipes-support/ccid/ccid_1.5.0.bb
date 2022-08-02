@@ -3,15 +3,15 @@ HOMEPAGE = "https://ccid.apdu.fr/"
 LICENSE = "LGPL-2.1-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
 
-DEPENDS = "virtual/libusb0 pcsc-lite"
+DEPENDS = "autoconf-archive-native virtual/libusb0 pcsc-lite"
 RDEPENDS:${PN} = "pcsc-lite"
 
 SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
     file://0001-Add-build-rule-for-README.patch \
 "
 
-SRC_URI[md5sum] = "b11907894ce2d345439635e2b967e7e5"
-SRC_URI[sha256sum] = "5256da939711deb42b74d05d2bd6bd0c73c4d564feb0c1a50212609eb680e424"
+SRC_URI[md5sum] = "f246d6601856775310c86b841b616de5"
+SRC_URI[sha256sum] = "81549b3422469d503996d03a3aed2ef1375b359167f10d66be9e3844e729322e"
 
 inherit autotools pkgconfig
 
