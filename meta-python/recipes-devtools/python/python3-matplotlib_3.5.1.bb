@@ -14,11 +14,11 @@ LIC_FILES_CHKSUM = "\
 DEPENDS = "\
     freetype \
     libpng \
-    ${PYTHON_PN}-numpy-native \
-    ${PYTHON_PN}-pip-native \
-    ${PYTHON_PN}-dateutil-native \
-    ${PYTHON_PN}-pytz-native \
-    ${PYTHON_PN}-certifi-native \
+    python3-numpy-native \
+    python3-pip-native \
+    python3-dateutil-native \
+    python3-pytz-native \
+    python3-certifi-native \
 "
 
 SRC_URI[sha256sum] = "b2e9810e09c3a47b73ce9cab5a72243a1258f61e7900969097a817232246ce1c"
@@ -44,13 +44,13 @@ LDFLAGS:remove:toolchain-clang:mips = "-fuse-ld=lld"
 RDEPENDS:${PN} = "\
     freetype \
     libpng \
-    ${PYTHON_PN}-numpy \
-    ${PYTHON_PN}-pyparsing \
-    ${PYTHON_PN}-cycler \
-    ${PYTHON_PN}-dateutil \
-    ${PYTHON_PN}-kiwisolver \
-    ${PYTHON_PN}-pytz \
-    ${PYTHON_PN}-pillow \
+    python3-numpy \
+    python3-pyparsing \
+    python3-cycler \
+    python3-dateutil \
+    python3-kiwisolver \
+    python3-pytz \
+    python3-pillow \
 "
 
 ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
