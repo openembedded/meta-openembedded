@@ -51,6 +51,7 @@ RDEPENDS:${PN} = "\
     python3-kiwisolver \
     python3-pytz \
     python3-pillow \
+    python3-packaging \
 "
 
 ENABLELTO:toolchain-clang:riscv64 = "echo enable_lto = False >> ${S}/mplsetup.cfg"
