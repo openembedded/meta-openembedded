@@ -21,7 +21,7 @@ DEPENDS = "\
     python3-certifi-native \
 "
 
-SRC_URI[sha256sum] = "b2e9810e09c3a47b73ce9cab5a72243a1258f61e7900969097a817232246ce1c"
+SRC_URI[sha256sum] = "48cf850ce14fa18067f2d9e0d646763681948487a8080ec0af2686468b4607a2"
 
 inherit pypi setuptools3 pkgconfig
 
